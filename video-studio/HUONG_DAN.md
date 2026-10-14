@@ -1,13 +1,13 @@
-# Video Studio VN 0.2.0 — không cần API key
+# Video Studio VN 0.2.1 — không cần API key
 
 Ứng dụng web tiếng Việt chạy trên máy Windows. Dịch phụ đề, nhận dạng lời nói và tạo giọng đọc bằng model CPU trên máy của bạn. Không cần tài khoản, API key hay dịch vụ AI bên ngoài để xử lý nội dung.
 
 ## Cài đặt và chạy
 
-1. Giải nén bản ZIP **0.2.0** vào một thư mục mới. Bản 0.1.0 chưa có cơ chế tự cập nhật nên cần tải bản mới lần này.
-2. Cài Python 64-bit, khuyến nghị Python 3.11 hoặc 3.12 trên Windows 10/11. Các engine yêu cầu máy 64-bit và CPU tương thích. Nên có ít nhất 8 GB RAM khi dùng model nhẹ.
+1. Giải nén bản ZIP **0.2.1** vào một thư mục mới. Nếu bản cũ bị lỗi cài với Python 3.15, tải ZIP 0.2.1 và chạy bộ khởi động mới.
+2. Cài Python 3.11 hoặc 3.12 bản Windows 64-bit trên Windows 10/11. Các engine yêu cầu máy 64-bit và CPU tương thích. Nên có ít nhất 8 GB RAM khi dùng model nhẹ.
 3. Đặt `ffmpeg.exe` và `ffprobe.exe` cạnh `khoi_dong.bat` hoặc thêm FFmpeg vào PATH. Có thể dùng các file FFmpeg bạn đã cung cấp; không cần `ffplay.exe`.
-4. Chạy `khoi_dong.bat`. Nếu chưa có môi trường Python riêng, tool tự gọi trình cài đặt. Cửa sổ sẽ báo tiến trình cài thư viện, sau đó mở trình duyệt. Giữ cửa sổ này trong lúc sử dụng.
+4. Chạy `khoi_dong.bat`. Tool tự chọn Python 3.11/3.12 Windows x64, kiểm tra hoặc tạo môi trường riêng, rồi cài các engine còn thiếu. Khi môi trường cũ dùng Python 3.15/32-bit, nó được đổi tên thành `.venv-backup-...` trước khi tạo lại; thư viện và model trong `data/` được giữ nguyên. Cửa sổ sẽ báo tiến trình cài thư viện, sau đó mở trình duyệt. Giữ cửa sổ này trong lúc sử dụng.
 5. Nhập video/audio/SRT → tạo hoặc dịch phụ đề → tạo giọng đọc → **Xuất video**.
 
 Lần đầu cài thư viện và tải model cần Internet, vài phút và vài trăm MB đến vài GB tùy model. Các lần sau model được dùng lại. Cắt/render video, sửa SRT, dịch, tạo voice và nhận dạng có thể chạy offline khi các model cần dùng đã tải đủ. Tải video Internet và kiểm tra bản cập nhật vẫn cần mạng.
@@ -71,3 +71,9 @@ FFmpeg/FFprobe cần có trong PATH. `VIDEO_STUDIO_AUTO_UPDATE=0` tắt tự tha
 ## Xác minh
 
 Bản này được kiểm tra trên Linux: model thật dịch Anh → Việt và Trung → Việt, Piper tạo giọng Việt/Anh, Whisper Tiny nhận dạng lời nói, và luồng trình duyệt tạo phụ đề → dịch → tạo voice → render. Các kiểm thử còn kiểm tra cập nhật, checksum, sao lưu/rollback và giữ dữ liệu. Xem `KIEM_TRA_VIDEO_STUDIO.md` trong ZIP để biết kết quả cụ thể. Các file BAT và môi trường Windows cần kiểm tra trên máy Windows.
+
+## Lỗi không tìm thấy CTranslate2 trên Python 3.15
+
+Trình cài cũ dùng `py -3`, chọn Python mới nhất trên máy. Nếu có cả Python 3.11 và 3.15, nó chọn 3.15 trong khi các engine chưa có wheel phù hợp. Bản 0.2.1 chọn 3.12/3.11 x64 từ Python Launcher, registry hoặc PATH, kiểm tra môi trường và chuyển môi trường không phù hợp sang thư mục sao lưu. Không cần sửa requirements hoặc cài CTranslate2 bằng Python 3.15.
+
+Nếu không tìm thấy Python 3.11/3.12 x64, cửa sổ báo cụ thể phiên bản đã thấy và hướng dẫn cài bản 64-bit từ python.org. Python 3.11/3.12 32-bit, ARM64 native và PyPy không được chọn. Nếu cài xong nhưng DLL engine không nạp được, xem hướng dẫn Visual C++ Redistributable x64 trong cửa sổ lỗi.

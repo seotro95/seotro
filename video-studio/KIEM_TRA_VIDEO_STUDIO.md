@@ -1,3 +1,11 @@
+# Xác minh bản sửa cài đặt Windows 0.2.1
+
+- Người dùng có Python 3.11 và 3.15; script cũ chọn bản mới nhất bằng py -3, dẫn đến không có wheel CTranslate2 tương thích Python 3.15.
+- 22 kiểm thử đạt trên Linux: các kiểm thử media/model/update hiện có và bảy kiểm thử mới cho bộ chọn Python, từ chối phiên bản/ABI không hỗ trợ, giữ môi trường cũ, giữ data/model, tái dùng môi trường đúng và thông báo thiếu DLL.
+- Pip dry-run giải quyết đầy đủ 42 gói cho Windows win_amd64 / CPython 3.11 và 3.12. langdetect dùng wheel Python thuần được dựng từ sdist chính thức; trên máy người dùng pip có thể dựng wheel này khi cài.
+- Đã tải các wheel Windows CTranslate2, SentencePiece, Piper, PyAV, Pydantic Core và ONNX Runtime, kiểm tra native library là PE Windows x64. Không đổi pin CTranslate2 vì phiên bản đó có wheel cho 3.11/3.12; lỗi là bộ chọn interpreter.
+- Đã kiểm thử bảo toàn thư mục .venv lỗi bằng mô phỏng filesystem; chưa thực thi BAT hoặc nạp DLL trên Windows thật. Việc xác nhận cuối cùng trên máy người dùng cần chạy khoi_dong.bat của bản 0.2.1.
+
 # Xác minh Video Studio VN 0.2.0
 
 Môi trường: Linux, Python 3.12, FFmpeg 7.1.5, CPU.

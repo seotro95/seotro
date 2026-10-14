@@ -2,6 +2,7 @@
 from pathlib import Path
 import os
 import socket
+import subprocess
 import sys
 import threading
 import time
@@ -57,4 +58,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except (ValueError, OSError, subprocess.SubprocessError) as exc:
+        print('Không khởi động được: ' + str(exc), file=sys.stderr, flush=True)
+        raise SystemExit(1)

@@ -14,7 +14,7 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 import engine
 from subtitles import parse_srt, to_srt
 
-app = FastAPI(title='Video Studio VN', version='0.2.0')
+app = FastAPI(title='Video Studio VN', version='0.2.1')
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=['127.0.0.1', 'localhost', 'testserver'])
 app.mount('/static', StaticFiles(directory=engine.RESOURCE_ROOT / 'static'), name='static')
 
