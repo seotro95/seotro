@@ -8,13 +8,13 @@ from urllib.parse import urlsplit
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, ConfigDict
 from starlette.concurrency import run_in_threadpool
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 import engine
 from subtitles import parse_srt, to_srt
 
-app = FastAPI(title='Video Studio VN', version='0.1.0')
+app = FastAPI(title='Video Studio VN', version='0.2.0')
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=['127.0.0.1', 'localhost', 'testserver'])
 app.mount('/static', StaticFiles(directory=engine.RESOURCE_ROOT / 'static'), name='static')
 
@@ -46,11 +46,11 @@ def health():
             return True
         except ValueError:
             return False
-    import importlib.util
-    return {'version': '0.1.0', 'ffmpeg': available('ffmpeg'), 'ffprobe': available('ffprobe'),
-            'local_whisper': importlib.util.find_spec('faster_whisper') is not None,
-            'edge_tts': importlib.util.find_spec('edge_tts') is not None,
-            'windows_tts': os.name == 'nt', 'workers': 2}
+    from offline_models import status
+    from updater import local_version
+    return {'version':local_version(), 'ffmpeg':available('ffmpeg'), 'ffprobe':available('ffprobe'),
+            'workers':2, **status()}
+
 
 
 @app.get('/api/assets')
@@ -144,16 +144,8 @@ def download(req: DownloadRequest):
 
 class STTRequest(BaseModel):
     asset_ids: list[str] = Field(min_length=1, max_length=30)
-    engine: str = 'api'
     language: str = Field(default='', max_length=10, pattern=r'^[a-z-]*$')
-    model: str = 'base'
-
-    @field_validator('engine')
-    @classmethod
-    def engine_choice(cls, value):
-        if value not in ('api', 'local'):
-            raise ValueError('Chọn API hoặc Whisper cục bộ.')
-        return value
+    model: str = 'tiny'
 
     @field_validator('model')
     @classmethod
@@ -172,40 +164,45 @@ def batch_assets(action, ids, payload, kinds):
 
 @app.post('/api/stt', status_code=202)
 def stt(req: STTRequest):
-    if req.engine == 'api':
-        engine.ai_config()
     return batch_assets('stt', req.asset_ids, req.model_dump(exclude={'asset_ids'}), ('video', 'audio'))
 
 
 class TranslateRequest(BaseModel):
     asset_ids: list[str] = Field(min_length=1, max_length=30)
-    language: str = Field(default='Tiếng Việt', min_length=2, max_length=100)
+    source_language: str = 'auto'
+    language: str = 'vi'
+
+    @field_validator('source_language', 'language')
+    @classmethod
+    def language_choice(cls, value, info):
+        from offline_models import LANGUAGES
+        if value not in LANGUAGES and not (info.field_name == 'source_language' and value == 'auto'):
+            raise ValueError('Ngôn ngữ chưa được hỗ trợ.')
+        return value
 
 
 @app.post('/api/translate', status_code=202)
 def translate(req: TranslateRequest):
-    engine.ai_config()
-    return batch_assets('translate', req.asset_ids, {'language': req.language}, ('subtitle',))
+    return batch_assets('translate', req.asset_ids, req.model_dump(exclude={'asset_ids'}), ('subtitle',))
 
 
 class TTSRequest(BaseModel):
     text: str = Field(min_length=1, max_length=4000)
-    engine: str = 'api'
-    voice: str = Field(default='alloy', max_length=100, pattern=r'^[A-Za-z0-9-]+$')
+    voice: str = 'vi_VN-vais1000-medium'
+    speed: float = Field(default=1, ge=.6, le=1.5, allow_inf_nan=False)
 
-    @field_validator('engine')
+    @field_validator('voice')
     @classmethod
-    def engine_choice(cls, value):
-        if value not in ('api', 'edge', 'windows'):
-            raise ValueError('Engine giọng đọc không hợp lệ.')
+    def voice_choice(cls, value):
+        from offline_models import VOICES
+        if value not in VOICES:
+            raise ValueError('Giọng đọc chưa được hỗ trợ.')
         return value
 
 
 @app.post('/api/tts', status_code=202)
 def tts(req: TTSRequest):
-    if req.engine == 'api':
-        engine.ai_config()
-    return {'job_ids': [engine.enqueue('tts', 'Tạo giọng đọc', req.model_dump())]}
+    return {'job_ids':[engine.enqueue('tts', 'Tạo giọng đọc cục bộ', req.model_dump())]}
 
 
 class RenderRequest(BaseModel):
@@ -241,46 +238,54 @@ def render(req: RenderRequest):
 
 class AIRequest(BaseModel):
     prompt: str = Field(min_length=1, max_length=20000)
+    task: str = 'tidy'
+
+    @field_validator('task')
+    @classmethod
+    def task_choice(cls, value):
+        if value not in ('tidy', 'titles', 'outline'):
+            raise ValueError('Tác vụ biên tập không hợp lệ.')
+        return value
 
 
 @app.post('/api/ai', status_code=202)
 def ai(req: AIRequest):
-    engine.ai_config()
-    return {'job_ids': [engine.enqueue('ai', 'Biên tập AI', req.model_dump())]}
+    return {'job_ids':[engine.enqueue('ai', 'Biên tập cục bộ', req.model_dump())]}
 
 
-class AIConfig(BaseModel):
-    base_url: str = Field(default='https://api.openai.com/v1', max_length=500)
-    api_key: str | None = Field(default=None, max_length=500)
-    clear_key: bool = False
-    chat_model: str = Field(default='gpt-4o-mini', min_length=1, max_length=100)
-    stt_model: str = Field(default='whisper-1', min_length=1, max_length=100)
-    tts_model: str = Field(default='tts-1', min_length=1, max_length=100)
-    voice: str = Field(default='alloy', min_length=1, max_length=100)
-
-    @field_validator('base_url')
-    @classmethod
-    def secure_endpoint(cls, value):
-        parts = urlsplit(value)
-        if parts.scheme != 'https' or not parts.hostname or parts.username or parts.password or parts.query or parts.fragment:
-            raise ValueError('API cần địa chỉ HTTPS, không kèm key trong URL.')
-        return value.rstrip('/')
+class LocalSettings(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    auto_update: bool = True
 
 
 @app.get('/api/config')
 def config():
-    with engine.LOCK:
-        return {**{k: v for k, v in engine.CONFIG.items() if k != 'api_key'},
-                'key_is_set': bool(engine.CONFIG['api_key'])}
+    from updater import settings, local_version
+    return {'auto_update':settings()['auto_update'], 'version':local_version(), 'local_only':True}
 
 
 @app.post('/api/config')
-def save_config(req: AIConfig):
+def save_config(req: LocalSettings):
+    from updater import save_settings
     with engine.LOCK:
-        old_base_url = engine.CONFIG['base_url']
-        engine.CONFIG.update(req.model_dump(exclude={'api_key', 'clear_key'}))
-        if req.clear_key or req.base_url != old_base_url:
-            engine.CONFIG['api_key'] = ''
-        if req.api_key:
-            engine.CONFIG['api_key'] = req.api_key.strip()
+        save_settings(req.model_dump())
     return config()
+
+
+@app.post('/api/models/prepare', status_code=202)
+def prepare_models():
+    return {'job_ids':[engine.enqueue('prepare', 'Chuẩn bị model Việt / Anh', {})]}
+
+
+@app.get('/api/updates/check')
+def updates():
+    from updater import check_update
+    return check_update()
+
+
+@app.post('/api/updates/request')
+def request_update():
+    from updater import save_settings
+    with engine.LOCK:
+        save_settings({'update_requested':True})
+    return {'message':'Đã hẹn cập nhật. Đóng cửa sổ khởi động rồi mở lại khoi_dong.bat để áp dụng.'}

@@ -1,73 +1,73 @@
-# Video Studio VN — 0.1.0
+# Video Studio VN 0.2.0 — không cần API key
 
-Tool riêng với giao diện web tiếng Việt chạy trên máy Windows. Phát triển từ mô tả chức năng trong tài liệu bạn cung cấp. Mã nguồn, giao diện và bộ xử lý của tool này được xây dựng riêng.
+Ứng dụng web tiếng Việt chạy trên máy Windows. Dịch phụ đề, nhận dạng lời nói và tạo giọng đọc bằng model CPU trên máy của bạn. Không cần tài khoản, API key hay dịch vụ AI bên ngoài để xử lý nội dung.
 
-## Cài và chạy trên Windows
+## Cài đặt và chạy
 
-1. Giải nén thư mục `video-studio` vào một thư mục mới.
-2. Cài **Python 3.10 trở lên, bản 64-bit** từ python.org; bật tùy chọn thêm Python vào PATH.
-3. Đặt `ffmpeg.exe` và `ffprobe.exe` cạnh `khoi_dong.bat`. Có thể dùng hai tệp FFmpeg bạn đã cung cấp. `ffplay.exe` không cần thiết. Nếu FFmpeg đã có trong PATH, không cần chép lại.
-4. Chạy `cai_dat.bat` để cài thư viện, rồi chạy `khoi_dong.bat`. Tool mở trình duyệt tự động. Giữ cửa sổ khởi động trong lúc sử dụng; đóng cửa sổ để dừng server.
-5. Nhập video/âm thanh/SRT → chọn tệp → tạo hoặc sửa phụ đề → tạo giọng đọc nếu cần → **Xuất video**.
+1. Giải nén bản ZIP **0.2.0** vào một thư mục mới. Bản 0.1.0 chưa có cơ chế tự cập nhật nên cần tải bản mới lần này.
+2. Cài Python 64-bit, khuyến nghị Python 3.11 hoặc 3.12 trên Windows 10/11. Các engine yêu cầu máy 64-bit và CPU tương thích. Nên có ít nhất 8 GB RAM khi dùng model nhẹ.
+3. Đặt `ffmpeg.exe` và `ffprobe.exe` cạnh `khoi_dong.bat` hoặc thêm FFmpeg vào PATH. Có thể dùng các file FFmpeg bạn đã cung cấp; không cần `ffplay.exe`.
+4. Chạy `khoi_dong.bat`. Nếu chưa có môi trường Python riêng, tool tự gọi trình cài đặt. Cửa sổ sẽ báo tiến trình cài thư viện, sau đó mở trình duyệt. Giữ cửa sổ này trong lúc sử dụng.
+5. Nhập video/audio/SRT → tạo hoặc dịch phụ đề → tạo giọng đọc → **Xuất video**.
 
-Tool dùng cổng 8766 trên máy. Để đổi cổng, đặt biến `VIDEO_STUDIO_PORT` trước khi chạy. Giao diện phục vụ trên loopback; đây là tool cá nhân, chưa phải dịch vụ công cộng nhiều tài khoản.
+Lần đầu cài thư viện và tải model cần Internet, vài phút và vài trăm MB đến vài GB tùy model. Các lần sau model được dùng lại. Cắt/render video, sửa SRT, dịch, tạo voice và nhận dạng có thể chạy offline khi các model cần dùng đã tải đủ. Tải video Internet và kiểm tra bản cập nhật vẫn cần mạng.
 
-## Chức năng
+## Tự tải model
 
-| Chức năng | Sử dụng |
-| --- | --- |
-| Thư viện | Nhập nhiều video, audio, SRT, TXT; kéo thả; xem/nghe; tải tệp về |
-| Tải video | Dán một link HTTPS mỗi dòng; YouTube, TikTok, Douyin, Bilibili; hàng đợi hai tác vụ |
-| Phụ đề | Tạo SRT bằng API hoặc Whisper CPU; sửa và lưu bản mới |
-| Dịch SRT | API chat dịch theo nhóm; giữ nguyên mốc thời gian; kiểm tra đủ đoạn |
-| Giọng đọc | Windows Speech có sẵn; Edge TTS trực tuyến; hoặc API audio/speech |
-| Xuất video | Cắt đoạn, đổi tốc độ 0.5–2×, chỉnh chiều cao, chèn SRT, tiêu đề và thay âm thanh |
-| Hàng loạt | Chọn nhiều tệp để tạo phụ đề hoặc render; tải nhiều liên kết |
-| Trợ lý AI | Viết kịch bản, tiêu đề, biên tập lời thoại; lưu kết quả TXT |
-| Hàng đợi | Lưu lịch sử vào SQLite; dừng tác vụ; nhận diện tác vụ bị gián đoạn khi khởi động lại |
+- **Phụ đề → Tạo phụ đề**: chọn ngôn ngữ và Whisper Tiny/Base/Small/Medium. Tool tự tải model nhận dạng còn thiếu. Tiny nhẹ và nhanh; các model lớn hơn thường chính xác hơn nhưng cần nhiều RAM/thời gian. Giữ tiếng gốc khi nhận dạng.
+- **Phụ đề → Dịch phụ đề**: chọn SRT, ngôn ngữ nguồn hoặc tự nhận dạng, rồi ngôn ngữ đích. Tool tự tải model dịch cần dùng. Một số cặp dịch qua tiếng Anh. Mốc thời gian và số đoạn được giữ nguyên; kết quả là SRT mới.
+- **Giọng đọc**: chọn giọng Việt VAIS hoặc Anh Lessac, nhập nội dung và tốc độ. Piper tự tải model một lần, sau đó tạo WAV trên CPU. Bản này có một giọng Việt và một giọng Anh; không có clone giọng hoặc voice CapCut/NgocHuyen.
+- **Cài đặt → Model & cập nhật → Chuẩn bị model**: tải trước giọng Việt, Whisper Tiny và dịch Anh → Việt. Các cặp ngôn ngữ khác được bổ sung khi bạn dịch lần đầu.
 
-Video gốc được giữ nguyên. Phụ đề và tiêu đề hiển thị trên tệp render, chưa được áp dụng trực tiếp trong phần xem trước. Khi cắt hoặc tăng tốc, tool dịch chuyển mốc SRT theo video xuất. Âm thanh lồng tiếng thay thế âm thanh gốc, được đệm im lặng nếu ngắn và cắt nếu dài. Chưa có căn giọng đọc theo từng câu SRT, clone giọng, dựng timeline nhiều track hay hiệu ứng CapCut.
+Tool dùng model dịch Argos/OPUS-MT với CTranslate2 và SentencePiece, Piper cho TTS, faster-whisper cho STT. Các model được lưu trong `data/models/`. Không gửi video, âm thanh hoặc văn bản tới một nhà cung cấp AI khi thực hiện những chức năng này.
 
-## AI miễn phí / cục bộ
+Dịch máy và nhận dạng có thể sai thuật ngữ, tên riêng hoặc lời nói khó nghe. Kiểm tra và chỉnh SRT trong trình biên tập trước khi render. Nếu nhận dạng sai ngôn ngữ nguồn, hãy chọn ngôn ngữ đó thay vì Tự nhận dạng.
 
-Chạy `cai_ai_cuc_bo.bat`, sau đó khởi động lại tool:
+## Tự cập nhật tool và engine
 
-- **Whisper cục bộ**: tạo phụ đề trên CPU. Model Tiny/Base/Small/Medium tải từ Hugging Face lần đầu; cần Internet và dung lượng lưu model. Sau khi model tải đầy đủ có thể nhận dạng cục bộ. Chất lượng tùy ngôn ngữ, tiếng nền và model; Base/Tiny phù hợp máy yếu.
-- **Edge TTS**: có Hoài My/Nam Minh tiếng Việt; cần Internet, không cần API key. Dịch vụ có thể thay đổi hoặc từ chối kết nối.
-- **Windows Speech**: dùng các giọng đã cài trên Windows; hỗ trợ tiếng Việt phụ thuộc gói giọng trên máy. Không cần cài phần AI để dùng giọng Windows.
+Từ bản 0.2.0, tool mặc định kiểm tra phiên bản mới trên nhánh GitHub `seotro95/seotro`, `video-studio-vn`, tối đa một lần mỗi ngày khi mở. Khi có bản phát hành mới:
 
-## API AI
+1. Tải ZIP qua HTTPS và kiểm tra SHA256 theo manifest phát hành.
+2. Kiểm tra nội dung gói, sao lưu mã nguồn hiện tại vào `data/update-backups/`, rồi thay các tệp chương trình.
+3. Giữ nguyên video, thư viện SQLite, model đã tải, FFmpeg và `.venv`.
+4. Tự cài các phiên bản thư viện được yêu cầu cho bản mới rồi mở ứng dụng.
 
-Mở **Cài đặt → Cài đặt AI**, nhập endpoint HTTPS, key và tên model. Các endpoint theo định dạng OpenAI: `chat/completions`, `audio/transcriptions` (trả SRT), `audio/speech`. Nhà cung cấp chỉ hỗ trợ chat sẽ không tự động hỗ trợ STT/TTS. Các model mặc định là ví dụ của OpenAI; hãy kiểm tra tài khoản và tài liệu nhà cung cấp.
+Nếu cập nhật mã nguồn thất bại, tool phục hồi các tệp đã thay và tiếp tục dùng bản cũ. Nếu cài thư viện thất bại, cửa sổ sẽ báo lỗi; kiểm tra mạng rồi mở lại. Không cập nhật thư viện trong lúc có tác vụ đang chạy.
 
-Key chỉ giữ trong RAM, không lưu trong thư viện hoặc trình duyệt. Đổi endpoint sẽ xóa key cũ; nhập key cho nhà cung cấp mới. Đóng tool sẽ mất cấu hình phiên. Có thể cấu hình khi khởi động bằng `VIDEO_AI_BASE_URL` và `VIDEO_AI_KEY` trên máy của bạn. Không gửi key/cookie trong chat hoặc đưa vào Git.
+Bạn có thể bật/tắt cập nhật trong **Model & cập nhật**, kiểm tra bản mới hoặc hẹn áp dụng khi mở lại. `cap_nhat.bat` kiểm tra cập nhật ngay; đóng tool đang chạy trước. Chức năng mới được nhận khi người duy trì phát hành bản mới; tool không tự tạo ra chức năng chưa được phát triển.
 
-STT API gửi audio tới nhà cung cấp; dịch và biên tập gửi văn bản; TTS API gửi lời thoại. Render và sửa SRT không cần API. STT API giới hạn audio đã chuyển đổi dưới 24 MB; dùng Whisper cục bộ hoặc cắt đoạn cho video dài. API có thể tính phí theo tài khoản.
+Model còn thiếu được tải tự động; model đã cài được dùng lại để bảo đảm chạy offline. Danh mục model dịch được làm mới khi cần tải cặp mới, tối đa sau mỗi 7 ngày. Giọng Piper dùng phiên bản model đã xác minh đi kèm bản tool; model giọng mới có thể được bổ sung qua các bản phát hành tiếp theo.
 
-## Cookie và tải video
+## Các chức năng khác
 
-Nguồn có thể yêu cầu cookie hoặc giới hạn theo khu vực/tài khoản. Dùng tệp cookie định dạng Netscape của tài khoản của bạn, đặt biến `YTDLP_COOKIES_FILE` trỏ tới tệp trước khi khởi động. Tool không kèm tài khoản, cookie hoặc API của phần mềm mẫu. Không cần cookie để nhập/xử lý video có sẵn.
+- **Thư viện**: kéo thả và nhập nhiều tệp video, audio, SRT, TXT; xem/nghe và lưu kết quả.
+- **Tải video**: YouTube, TikTok, Douyin, Bilibili; mỗi dòng một link HTTPS, tối đa 30 video/lượt.
+- **Xuất video**: cắt đoạn, đổi tốc độ 0.5–2×, chỉnh chiều cao, chèn SRT/tiêu đề, thay âm thanh, xuất MP4 H.264/AAC.
+- **Hàng loạt**: chọn nhiều tệp để nhận dạng hoặc render; xử lý tối đa hai tác vụ đồng thời.
+- **Biên tập**: chuẩn hóa khoảng trắng/dấu câu, tạo tiêu đề theo mẫu và khung kịch bản 60 giây. Đây là công cụ quy tắc/mẫu cục bộ, không phải chatbot sinh văn bản.
+- **Dừng**: kết thúc tiến trình thực cho render, tải video và model/inference cục bộ; tệp nguồn được giữ nguyên. Tác vụ bị gián đoạn khi đóng tool được đánh dấu trong lịch sử.
 
-## Tệp và giới hạn
+Phần xem trước hiển thị video nguồn; các tùy chỉnh được áp dụng vào tệp xuất. Khi cắt hoặc tăng tốc, mốc SRT được dịch chuyển theo video mới. Giọng đọc thay âm thanh gốc, được đệm im lặng nếu ngắn và cắt nếu dài; chưa căn giọng theo từng câu phụ đề.
 
-- Media tối đa 2 GB mỗi tệp; SRT/TXT tối đa 2 MB. SRT là UTF-8.
-- Dữ liệu dự án nằm trong `data/` cạnh mã nguồn, hoặc đường dẫn `VIDEO_STUDIO_DATA` nếu được cấu hình. Sao lưu thư mục này để giữ thư viện và lịch sử.
-- Đóng tool có thể làm tác vụ đang chạy bị gián đoạn; tạo tác vụ mới khi mở lại. Dừng FFmpeg/yt-dlp kết thúc tiến trình con. Tác vụ API và tải model chỉ nhận yêu cầu dừng sau khi thao tác hiện tại kết thúc hoặc hết timeout.
-- FFmpeg cần hỗ trợ `libx264`, `aac`, `subtitles`, `drawtext`; font hệ thống cần có ký tự của ngôn ngữ phụ đề. Trên Windows, cài font tiếng Việt nếu thấy ô vuông.
-- Tool tạo MP4 H.264/AAC. Nếu nguồn không có audio và không chọn lồng tiếng, kết quả không có audio.
+## Dữ liệu và cookie
+
+Media tối đa 2 GB/tệp; SRT/TXT UTF-8 tối đa 2 MB. Dữ liệu nằm trong `data/` cạnh mã nguồn hoặc `VIDEO_STUDIO_DATA` nếu được cấu hình. Sao lưu toàn bộ thư mục dữ liệu để giữ thư viện, lịch sử và model.
+
+Nguồn tải có thể yêu cầu cookie của tài khoản hoặc giới hạn theo khu vực. Có thể đặt `YTDLP_COOKIES_FILE` trỏ tới tệp Netscape trước khi mở tool. Không gửi cookie trong chat hay đưa vào Git. Xử lý video có sẵn không cần cookie.
+
+Tool nghe trên cổng loopback 8766, dùng trình duyệt của máy. Đặt `VIDEO_STUDIO_PORT` nếu cần đổi cổng. Không chạy hai instance cùng một database. Đây là ứng dụng cá nhân cục bộ, chưa phải dịch vụ nhiều tài khoản trên Internet.
 
 ## Phát triển trên Linux
 
 ```bash
-cd video-studio
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
-# FFmpeg/FFprobe cần có trong PATH.
-.venv/bin/python launcher.py --no-browser
+VIDEO_STUDIO_AUTO_UPDATE=0 .venv/bin/python launcher.py --no-browser
+.venv/bin/python -m unittest discover -s tests -v
 ```
 
-Chạy kiểm thử bằng `python -m unittest discover -s tests -v` sau khi cài thư viện. Dùng `VIDEO_STUDIO_DATA` riêng khi chạy kiểm thử/instance phát triển. Không chạy hai instance dùng chung database.
+FFmpeg/FFprobe cần có trong PATH. `VIDEO_STUDIO_AUTO_UPDATE=0` tắt tự thay mã nguồn trong checkout phát triển. Cache Hugging Face/Xet được đặt trong dữ liệu model nếu chưa có cấu hình riêng. PyAV được ghim ở phiên bản tương thích với faster-whisper.
 
-## Mức độ xác minh
+## Xác minh
 
-Kiểm thử phát triển xác minh bằng video mẫu cục bộ: upload, lưu SRT, render kèm phụ đề/tiêu đề, cắt/tốc độ, ghép audio, hàng loạt, dừng tiến trình và lưu lịch sử. Các adapter API được kiểm tra bằng máy chủ giả lập; kết quả đó không xác minh tài khoản AI thực. Việc tải từ nguồn thật, model Whisper, dịch vụ Edge TTS và Windows Speech cần kết nối/cấu hình tương ứng để kiểm tra trên máy của bạn. Các file BAT được cung cấp cho Windows; môi trường phát triển hiện tại là Linux.
+Bản này được kiểm tra trên Linux: model thật dịch Anh → Việt và Trung → Việt, Piper tạo giọng Việt/Anh, Whisper Tiny nhận dạng lời nói, và luồng trình duyệt tạo phụ đề → dịch → tạo voice → render. Các kiểm thử còn kiểm tra cập nhật, checksum, sao lưu/rollback và giữ dữ liệu. Xem `KIEM_TRA_VIDEO_STUDIO.md` trong ZIP để biết kết quả cụ thể. Các file BAT và môi trường Windows cần kiểm tra trên máy Windows.

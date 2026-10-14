@@ -18,12 +18,28 @@ def main():
         from download_worker import main as worker
         worker(sys.argv[2], sys.argv[3])
         return
-    import uvicorn
+    if len(sys.argv) > 1 and sys.argv[1] == '--offline-worker':
+        from offline_worker import main as worker
+        worker(sys.argv[2])
+        return
     port = int(os.environ.get('VIDEO_STUDIO_PORT', '8766'))
     with socket.socket() as connection:
         if connection.connect_ex(('127.0.0.1', port)) == 0:
             print(f'Cổng {port} đang được sử dụng. Đóng tool cũ hoặc đặt VIDEO_STUDIO_PORT.')
             raise SystemExit(1)
+    if not getattr(sys, 'frozen', False):
+        from updater import startup_update, local_version
+        before = local_version()
+        print(startup_update(force='--update-only' in sys.argv), flush=True)
+        if local_version() != before:
+            os.execv(sys.executable, [sys.executable, *sys.argv])
+        from bootstrap import ensure_runtime
+        if ensure_runtime():
+            # Re-read the updated sources and dependency modules in a new process.
+            os.execv(sys.executable, [sys.executable, *sys.argv])
+    import uvicorn
+    if '--update-only' in sys.argv:
+        return
     import app
     def open_browser():
         import urllib.request

@@ -12,5 +12,5 @@ if errorlevel 1 (
     pause
     exit /b 1
 )
-echo Da cai Whisper CPU va Edge TTS. Khoi dong lai tool.
+echo Da cai engine dich, Whisper CPU va Piper TTS. Khoi dong lai tool.
 pause

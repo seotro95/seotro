@@ -1,7 +1,7 @@
 'use strict';
 const $ = id => document.getElementById(id);
 const state = {assets: [], jobs: [], selected: new Set(), filter: 'all', batch: [], config: {}, health: {}};
-const labels = {library: ['Thư viện', 'Mọi ý tưởng bắt đầu<br>từ một video.', 'Nhập nội dung và biến ý tưởng thành video hoàn chỉnh.'], subtitle: ['Phụ đề', 'Mỗi câu nói.<br>Một dòng phụ đề.', 'Tạo, dịch và hoàn thiện phụ đề theo nhịp video của bạn.'], voice: ['Giọng đọc', 'Kể câu chuyện<br>bằng giọng của bạn.', 'Biến kịch bản thành âm thanh và chuẩn bị phần lồng tiếng.'], render: ['Xuất video', 'Hoàn thiện.<br>Và sẵn sàng chia sẻ.', 'Ghép các thành phần, chọn chất lượng và xuất video mới.'], ai: ['Trợ lý AI', 'Ý tưởng mới.<br>Góc nhìn mới.', 'Một người cộng tác cho kịch bản và nội dung của bạn.']};
+const labels = {library: ['Thư viện', 'Mọi ý tưởng bắt đầu<br>từ một video.', 'Nhập nội dung và biến ý tưởng thành video hoàn chỉnh.'], subtitle: ['Phụ đề', 'Mỗi câu nói.<br>Một dòng phụ đề.', 'Tạo, dịch và hoàn thiện phụ đề theo nhịp video của bạn.'], voice: ['Giọng đọc', 'Kể câu chuyện<br>bằng giọng của bạn.', 'Biến kịch bản thành âm thanh và chuẩn bị phần lồng tiếng.'], render: ['Xuất video', 'Hoàn thiện.<br>Và sẵn sàng chia sẻ.', 'Ghép các thành phần, chọn chất lượng và xuất video mới.'], ai: ['Biên tập', 'Hoàn thiện lời thoại.<br>Chuẩn bị câu chuyện.', 'Biên tập văn bản và gợi ý theo mẫu, ngay trên máy của bạn.']};
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 const fileUrl = id => '/api/assets/' + encodeURIComponent(id) + '/file';
 let toastTimer;
@@ -82,8 +82,8 @@ function populateForms() {
 function renderJobs() {
   $('jobs-count').textContent = state.jobs.length + ' tác vụ';
   const statuses = {queued: 'Đang chờ', running: 'Đang xử lý', done: 'Hoàn tất', error: 'Có lỗi', cancelling: 'Đang yêu cầu dừng', cancelled: 'Đã dừng', interrupted: 'Bị gián đoạn'};
-  const actions = {render: 'Xuất video', download: 'Tải video', stt: 'Tạo phụ đề', translate: 'Dịch phụ đề', tts: 'Giọng đọc', ai: 'Biên tập AI'};
-  $('jobs-list').innerHTML = state.jobs.length ? state.jobs.map(j => `<div class="job-row"><span class="job-icon">${j.status === 'done' ? '✓' : '↗'}</span><div class="job-info"><strong>${esc(j.name)}</strong><small>${esc(j.error || actions[j.action] || j.action)}</small></div><div class="job-results">${(j.result?.asset_ids || []).map(id => `<a href="${fileUrl(id)}" download>↓ Tải kết quả</a>`).join('')}</div><span class="job-state ${esc(j.status)}">${esc(statuses[j.status] || j.status)}</span>${['running','queued'].includes(j.status) ? `<button class="button small secondary" data-cancel="${esc(j.id)}">Dừng</button>` : ''}</div>`).join('') : '<p class="muted">Các tác vụ của bạn sẽ xuất hiện tại đây.</p>';
+  const actions = {render: 'Xuất video', download: 'Tải video', stt: 'Tạo phụ đề', translate: 'Dịch phụ đề', tts: 'Giọng đọc', ai: 'Biên tập cục bộ', prepare: 'Chuẩn bị model'};
+  $('jobs-list').innerHTML = state.jobs.length ? state.jobs.map(j => `<div class="job-row"><span class="job-icon">${j.status === 'done' ? '✓' : '↗'}</span><div class="job-info"><strong>${esc(j.name)}</strong><small>${esc(j.error || actions[j.action] || j.action)}</small></div><div class="job-results">${(j.result?.asset_ids || []).map(id => `<a href="${fileUrl(id)}" download>↓ Tải kết quả</a>`).join('')}</div><span class="job-state ${esc(j.status)}">${esc((j.status === 'running' ? 'Đang xử lý · ' + j.progress + '%' : statuses[j.status]) || j.status)}</span>${['running','queued'].includes(j.status) ? `<button class="button small secondary" data-cancel="${esc(j.id)}">Dừng</button>` : ''}</div>`).join('') : '<p class="muted">Các tác vụ của bạn sẽ xuất hiện tại đây.</p>';
 }
 let refreshing = false;
 async function refresh() {
@@ -135,18 +135,14 @@ $('library-grid').addEventListener('click', e => {
     $('preview-dialog').showModal();
   });
 });
-$('stt-engine').addEventListener('change', () => {
-  const local = $('stt-engine').value === 'local'; $('whisper-model-label').hidden = !local;
-  $('stt-help').textContent = local ? 'Cần cài AI cục bộ. Model tải về trong lần chạy đầu; sau đó nhận dạng trên CPU của máy.' : 'Cấu hình API trong Cài đặt AI. Tệp âm thanh sẽ được gửi tới nhà cung cấp bạn chọn.';
-});
-function sttBody(ids) {return {asset_ids: ids, engine: $('stt-engine').value, language: $('stt-language').value, model: $('whisper-model').value};}
+function sttBody(ids) {return {asset_ids: ids, language: $('stt-language').value, model: $('whisper-model').value};}
 $('stt-form').addEventListener('submit', e => {e.preventDefault(); work(e.submitter, () => queue('/api/stt', sttBody([$('stt-source').value])));});
 $('batch-stt').addEventListener('click', e => work(e.target, async () => {
   const ids = state.assets.filter(a => state.selected.has(a.id) && ['video', 'audio'].includes(a.kind)).map(a => a.id);
   if (!ids.length) throw new Error('Chọn ít nhất một video hoặc âm thanh trong thư viện.');
   await queue('/api/stt', sttBody(ids));
 }));
-$('translate-form').addEventListener('submit', e => {e.preventDefault(); work(e.submitter, () => queue('/api/translate', {asset_ids: [$('translate-source').value], language: $('translate-language').value}));});
+$('translate-form').addEventListener('submit', e => {e.preventDefault(); work(e.submitter, () => queue('/api/translate', {asset_ids: [$('translate-source').value], language: $('translate-language').value, source_language: $('translate-source-language').value}));});
 $('load-subtitle').addEventListener('click', e => work(e.target, async () => {
   const id = $('editor-source').value; if (!id) {$('srt-editor').value = ''; return;}
   const result = await api('/api/assets/' + encodeURIComponent(id) + '/text'); $('srt-editor').value = result.text;
@@ -157,14 +153,10 @@ $('save-subtitle').addEventListener('click', e => work(e.target, async () => {
   await refresh(); $('editor-source').value = result.asset_id; toast('Đã lưu phụ đề mới: ' + result.cues + ' đoạn.');
 }));
 function voiceOptions() {
-  const engine = $('tts-engine').value;
-  const voices = engine === 'edge' ? [['vi-VN-HoaiMyNeural','Hoài My — tiếng Việt'],['vi-VN-NamMinhNeural','Nam Minh — tiếng Việt'],['en-US-AriaNeural','Aria — tiếng Anh'],['zh-CN-XiaoxiaoNeural','Xiaoxiao — tiếng Trung']] : engine === 'windows' ? [['default','Giọng mặc định Windows']] : [['alloy','Alloy'],['nova','Nova'],['shimmer','Shimmer'],['echo','Echo'],['onyx','Onyx']];
-  if (engine === 'api' && state.config.voice && !voices.some(v => v[0] === state.config.voice)) voices.unshift([state.config.voice, state.config.voice]);
-  $('tts-voice').innerHTML = voices.map(([value,label]) => `<option value="${esc(value)}">${esc(label)}</option>`).join('');
-  $('tts-help').textContent = engine === 'edge' ? 'Cần cài edge-tts và kết nối Internet. Giọng tiếng Việt không cần API key.' : engine === 'windows' ? 'Dùng giọng đã cài trên Windows. Ngôn ngữ phụ thuộc các gói giọng nói trên máy.' : 'API sử dụng key trong Cài đặt AI.';
+  const voices = state.health.voices || [];
+  if (voices.length) $('tts-voice').innerHTML = voices.map(v => `<option value="${esc(v.id)}">${esc(v.name)}${v.installed ? ' · đã tải' : ''}</option>`).join('');
 }
-$('tts-engine').addEventListener('change', voiceOptions);
-$('tts-form').addEventListener('submit', e => {e.preventDefault(); work(e.submitter, () => queue('/api/tts', {text: $('tts-text').value, engine: $('tts-engine').value, voice: $('tts-voice').value}));});
+$('tts-form').addEventListener('submit', e => {e.preventDefault(); work(e.submitter, () => queue('/api/tts', {text:$('tts-text').value, voice:$('tts-voice').value, speed:Number($('tts-speed').value)}));});
 function previewRender() {
   const id = $('render-source').value;
   $('render-preview').innerHTML = id ? `<video src="${fileUrl(id)}" controls></video>` : 'Chọn video để xem trước';
@@ -181,31 +173,38 @@ $('render-form').addEventListener('submit', e => {e.preventDefault(); work(e.sub
   speed: Number($('render-speed').value), height: Number($('render-height').value), title: $('render-title').value,
   font_size: Number($('render-font-size').value), subtitle_color: $('render-color').value, crf: Number($('render-crf').value)
 }));});
-document.querySelectorAll('[data-prompt]').forEach(b => b.addEventListener('click', () => {$('ai-prompt').value = b.dataset.prompt; $('ai-prompt').focus();}));
-$('ai-form').addEventListener('submit', e => {e.preventDefault(); work(e.submitter, () => queue('/api/ai', {prompt: $('ai-prompt').value}));});
+document.querySelectorAll('[data-task]').forEach(b => b.addEventListener('click', () => {$('ai-task').value = b.dataset.task; $('ai-prompt').focus();}));
+$('ai-form').addEventListener('submit', e => {e.preventDefault(); work(e.submitter, () => queue('/api/ai', {prompt:$('ai-prompt').value, task:$('ai-task').value}));});
 $('load-ai-result').addEventListener('click', e => work(e.target, async () => {
   if (!$('ai-result-source').value) throw new Error('Chọn một bản biên tập trong thư viện.');
   const result = await api('/api/assets/' + encodeURIComponent($('ai-result-source').value) + '/text'); $('ai-result').textContent = result.text;
 }));
 async function loadConfig() {
   state.config = await api('/api/config');
-  const fields = {'api-base':'base_url', 'chat-model':'chat_model', 'stt-model':'stt_model', 'tts-model':'tts_model', 'config-voice':'voice'};
-  Object.entries(fields).forEach(([id,key]) => {$(id).value = state.config[key];});
-  $('api-key').value = ''; $('api-key-state').textContent = state.config.key_is_set ? 'Đã có key cho phiên này. Để trống để giữ key hiện tại.' : 'Key chỉ lưu trong bộ nhớ của phiên chạy này. Nhập lại khi mở tool lần sau.';
+  state.health = await api('/api/health');
+  $('auto-update').checked = state.config.auto_update;
+  const health = state.health;
+  const viVoice = (health.voices || []).find(v => v.language === 'vi');
+  $('model-status').innerHTML = '<div><strong>Phiên bản ' + esc(health.version) + '</strong><p class="muted">Giọng Việt: ' + (viVoice?.installed ? 'đã tải' : 'tự tải khi tạo voice') + '<br>Whisper: ' + (health.whisper_downloaded ? 'đã tải model' : 'tự tải khi tạo phụ đề') + '<br>Model dịch: ' + (health.installed_pairs || []).length + ' cặp ngôn ngữ đã cài</p></div>';
   voiceOptions();
 }
 document.querySelectorAll('[data-open-settings]').forEach(b => b.addEventListener('click', () => work(b, async () => {await loadConfig(); $('settings-dialog').showModal();})));
-function configBody() {return {base_url: $('api-base').value.trim(), api_key: $('api-key').value.trim() || null, chat_model: $('chat-model').value, stt_model: $('stt-model').value, tts_model: $('tts-model').value, voice: $('config-voice').value};}
 $('settings-form').addEventListener('submit', e => {e.preventDefault(); work(e.submitter, async () => {
-  await post('/api/config', configBody()); await loadConfig(); $('settings-dialog').close(); toast('Đã áp dụng cấu hình AI cho phiên này.');
+  await post('/api/config', {auto_update:$('auto-update').checked}); await loadConfig(); toast('Đã lưu cài đặt.');
 });});
-$('clear-api-key').addEventListener('click', e => work(e.target, async () => {await post('/api/config', {...configBody(), api_key: null, clear_key: true}); await loadConfig(); toast('Đã xóa key khỏi phiên chạy.');}));
+$('prepare-models').addEventListener('click', e => work(e.target, async () => {await queue('/api/models/prepare', {}); $('settings-dialog').close();}));
+$('check-update').addEventListener('click', e => work(e.target, async () => {
+  const result = await api('/api/updates/check');
+  $('update-status').textContent = result.message + (result.latest ? ' Bản trên GitHub: ' + result.latest : '');
+  $('request-update').hidden = !result.available;
+}));
+$('request-update').addEventListener('click', e => work(e.target, async () => {
+  const result = await post('/api/updates/request', {}); $('update-status').textContent = result.message; toast(result.message);
+}));
 async function initialize() {
   state.health = await api('/api/health'); await loadConfig();
   if (!state.health.ffmpeg || !state.health.ffprobe) {$('setup-note').hidden = false; $('setup-note').textContent = 'Cần FFmpeg và FFprobe để xử lý video. Xem HUONG_DAN.md đi kèm tool.';}
-  if (state.health.local_whisper) {$('stt-engine').value = 'local'; $('stt-engine').dispatchEvent(new Event('change'));}
-  if (state.health.edge_tts) {$('tts-engine').value = 'edge'; voiceOptions();}
-  else if (state.health.windows_tts) {$('tts-engine').value = 'windows'; voiceOptions();}
+  voiceOptions();
   await refresh(); renderLibrary(); populateForms();
   setInterval(() => refresh().catch(() => {}), 2000);
 }

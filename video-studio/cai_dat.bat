@@ -13,9 +13,9 @@ if errorlevel 1 goto fail
 echo.
 echo Da cai xong. Dat ffmpeg.exe va ffprobe.exe canh khoi_dong.bat.
 echo Chay khoi_dong.bat de mo Video Studio VN.
-pause
+if /I not "%~1"=="--automatic" pause
 exit /b 0
 :fail
 echo Cai dat that bai. Can Python 3.10+ va ket noi Internet.
-pause
+if /I not "%~1"=="--automatic" pause
 exit /b 1

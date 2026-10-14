@@ -1,3 +1,2 @@
 -r requirements.txt
-faster-whisper>=1.2,<2
-edge-tts>=7.2,<8
+# All local engines are included in requirements.txt from version 0.2.0.

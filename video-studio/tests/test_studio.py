@@ -58,7 +58,6 @@ class StudioTests(unittest.TestCase):
         response = cls.client.post('/api/subtitles', json={'name': 'tieng_viet.srt', 'text': SRT})
         assert response.status_code == 201, response.text
         cls.subtitle_id = response.json()['asset_id']
-        engine.CONFIG['api_key'] = ''
 
     @classmethod
     def tearDownClass(cls):
@@ -134,76 +133,34 @@ class StudioTests(unittest.TestCase):
             self.assertIsNotNone(process.poll())
             self.assertEqual(self.video.read_bytes(), before)
 
-    def test_reject_invalid_config_and_cross_origin_and_missing_key(self):
-        engine.CONFIG['api_key'] = ''
-        response = self.client.post('/api/stt', json={'asset_ids': [self.source_id], 'engine': 'api'})
-        self.assertEqual(response.status_code, 422)
-        for url in ('http://example.com/v1', 'https://key@example.com/v1', 'https://example.com/v1?key=secret'):
-            self.assertEqual(self.client.post('/api/config', json={'base_url': url}).status_code, 422)
-        self.assertEqual(self.client.post('/api/subtitles', headers={'Origin':'https://example.com'}, json={'text': SRT}).status_code, 403)
-        self.assertEqual(self.client.post('/api/render', json={'asset_ids': [self.source_id], 'speed': 0}).status_code, 422)
-        self.assertEqual(self.client.post('/api/download', json={'urls': ['https://127.0.0.1/video.mp4']}).status_code, 422)
+    def test_no_key_required_and_invalid_inputs_and_cross_origin(self):
+        response = self.client.get('/api/config')
+        self.assertTrue(response.json()['local_only'])
+        self.assertNotIn('api_key', response.json())
+        self.assertEqual(self.client.post('/api/config', json={'api_key':'unused'}).status_code, 422)
+        self.assertEqual(self.client.post('/api/tts', json={'text':'xin chào', 'voice':'invalid'}).status_code, 422)
+        self.assertEqual(self.client.post('/api/translate', json={'asset_ids':[self.subtitle_id], 'language':'invalid'}).status_code, 422)
+        self.assertEqual(self.client.post('/api/subtitles', headers={'Origin':'https://example.com'}, json={'text':SRT}).status_code, 403)
+        self.assertEqual(self.client.post('/api/render', json={'asset_ids':[self.source_id], 'speed':0}).status_code, 422)
+        self.assertEqual(self.client.post('/api/download', json={'urls':['https://127.0.0.1/video.mp4']}).status_code, 422)
 
-    def test_config_key_redacted_and_endpoint_change_clears_key(self):
-        response = self.client.post('/api/config', json={'base_url': 'https://api.example.com/v1', 'api_key': 'TEST_KEY_ONLY'})
-        self.assertTrue(response.json()['key_is_set'])
-        self.assertNotIn('TEST_KEY_ONLY', response.text)
-        response = self.client.post('/api/config', json={'base_url': 'https://another.example.com/v1'})
-        self.assertFalse(response.json()['key_is_set'])
-        self.assertEqual(engine.CONFIG['api_key'], '')
+    def test_settings_persist_without_credentials(self):
+        response = self.client.post('/api/config', json={'auto_update':False})
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.json()['auto_update'])
+        script = 'import updater,json;print(json.dumps(updater.settings()))'
+        result = json.loads(subprocess.check_output([sys.executable,'-c',script], cwd=str(Path(__file__).resolve().parents[1])))
+        self.assertFalse(result['auto_update'])
+        self.assertNotIn('api_key', result)
 
-    def test_api_stt_tts_translation_and_editor_adapters_with_mock_server(self):
-        audio = engine.DATA / 'fixture.mp3'
-        subprocess.run([engine.executable('ffmpeg'), '-nostdin', '-v', 'error', '-f', 'lavfi', '-i',
-                        'sine=frequency=440', '-t', '0.4', str(audio)], check=True)
-        calls = []
-        def server(request):
-            calls.append(request)
-            self.assertEqual(request.headers['authorization'], 'Bearer TEST_KEY_ONLY')
-            if request.url.path.endswith('/audio/transcriptions'):
-                self.assertIn(b'speech.wav', request.content)
-                self.assertIn(b'whisper-1', request.content)
-                return httpx.Response(200, text=SRT)
-            if request.url.path.endswith('/audio/speech'):
-                data = json.loads(request.content)
-                self.assertEqual(data['input'], 'Xin chào')
-                return httpx.Response(200, content=audio.read_bytes())
-            data = json.loads(request.content)
-            if 'Dịch từng mục' in data['messages'][-1]['content']:
-                content = json.dumps(['Hello Vietnam!', 'A new story.'])
-            else:
-                content = 'Kịch bản thử nghiệm có nội dung.'
-            return httpx.Response(200, json={'choices':[{'message':{'content':content}}]})
-        real_client = httpx.Client
-        def client(**kwargs):
-            return real_client(transport=httpx.MockTransport(server), **kwargs)
-        with patch.dict(engine.CONFIG, {'base_url': 'https://api.example.com/v1', 'api_key': 'TEST_KEY_ONLY'}), patch.object(engine.httpx, 'Client', client):
-            scenarios = [('/api/stt', {'asset_ids':[self.source_id], 'engine':'api'}),
-                         ('/api/tts', {'text':'Xin chào', 'engine':'api', 'voice':'alloy'}),
-                         ('/api/translate', {'asset_ids':[self.subtitle_id], 'language':'English'}),
-                         ('/api/ai', {'prompt':'Viết kịch bản thử nghiệm'})]
-            results = []
-            for route, payload in scenarios:
-                response = self.client.post(route, json=payload)
-                self.assertEqual(response.status_code, 202, response.text)
-                job = wait_job(response.json()['job_ids'][0])
-                self.assertEqual(job['status'], 'done', job)
-                results.append(engine.asset(job['result']['asset_ids'][0]))
-            translated = parse_srt(Path(results[2]['path']).read_text())
-            original = parse_srt(SRT)
-            self.assertEqual([(c['start'], c['end']) for c in translated], [(c['start'], c['end']) for c in original])
-            self.assertEqual(translated[0]['text'], 'Hello Vietnam!')
-            self.assertEqual(len(calls), 4)
-
-    def test_malformed_translation_is_error_and_does_not_replace_original(self):
-        source_path = Path(engine.asset(self.subtitle_id)['path'])
-        original = source_path.read_bytes()
-        with patch.dict(engine.CONFIG, {'api_key':'TEST_KEY_ONLY'}), patch.object(engine, 'chat', return_value='["only one cue"]'):
-            response = self.client.post('/api/translate', json={'asset_ids':[self.subtitle_id], 'language':'English'})
+    def test_editor_runs_without_any_http_provider(self):
+        with patch('httpx.Client', side_effect=AssertionError('No network allowed')):
+            response = self.client.post('/api/ai', json={'prompt':'  Xin   chào  , Việt Nam !  ', 'task':'tidy'})
+            self.assertEqual(response.status_code, 202)
             job = wait_job(response.json()['job_ids'][0])
-            self.assertEqual(job['status'], 'error')
-            self.assertIn('thiếu đoạn', job['error'])
-        self.assertEqual(source_path.read_bytes(), original)
+            self.assertEqual(job['status'], 'done', job)
+            output = engine.asset(job['result']['asset_ids'][0])
+            self.assertEqual(Path(output['path']).read_text(), 'Xin chào, Việt Nam!')
 
     def test_completed_jobs_and_assets_survive_new_process(self):
         script = 'import json,engine;print(json.dumps({"assets":engine.list_assets(),"jobs":engine.jobs()}))'

@@ -4,3 +4,9 @@ python-multipart==0.0.32
 pydantic==2.14.1
 httpx==0.28.1
 yt-dlp==2026.8.19
+ctranslate2==4.8.3
+sentencepiece==0.2.2
+piper-tts==1.8.0
+faster-whisper==1.2.1
+av==16.1.0
+langdetect==1.0.9
