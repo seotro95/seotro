@@ -46,6 +46,20 @@ def split_script(text, limit=240):
     return segments
 
 
+def plan_segments(job):
+    if job.get('segment_plan') != 'nano-packed-v1':
+        return split_script(job['text'])
+    # Packing is opt-in with zero added sentence gap; explicit pauses/emphasis stay barriers.
+    source = split_script(job['text'], limit=130)
+    packed = []
+    for segment in source:
+        if segment.text and packed and packed[-1].text and not segment.emphasis and not packed[-1].emphasis and len(packed[-1].text) + 1 + len(segment.text) <= 130:
+            packed[-1].text += ' ' + segment.text
+        else:
+            packed.append(segment)
+    return packed
+
+
 class PCMWriter:
     """Write small blocks, never allocate a multi-hour waveform in RAM."""
     def __init__(self, path, rate=24000, max_seconds=MAX_SECONDS):

@@ -21,9 +21,10 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from starlette.concurrency import run_in_threadpool
 
-from narration import MAX_CHARACTERS, PROFILES, split_script
+from narration import MAX_CHARACTERS, PROFILES, plan_segments
 import writing
-from hardware import supports_int8
+from hardware import supports_int8, system_info
+from performance import speed_report
 
 BASE = Path(__file__).resolve().parent
 DATA = Path(os.environ.get('VOICE_STUDIO_DATA_DIR', str(BASE / '.data'))).resolve()
@@ -87,7 +88,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='2.2.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='2.3.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -153,7 +154,7 @@ def index():
 
 @app.get('/api/config')
 def config():
-    return {'mode': 'local', 'languages': LANGUAGES, 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
+    return {'mode': 'local', 'languages': LANGUAGES, 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'cpu_cores': os.cpu_count() or 1, 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
 
 
 @app.get('/api/voices')
@@ -223,6 +224,9 @@ class Speech(BaseModel):
     language: str = 'vi'
     speed: float = Field(default=1, ge=0.7, le=1.4)
     format: str = 'wav'
+    nano_threads: int = Field(default=2, ge=1, le=8)
+    nano_parallel: int = Field(default=1, ge=1, le=2)
+    nano_steps: int = Field(default=8, ge=4, le=16)
     max_minutes: int = Field(default=180, ge=1, le=180)
     delivery: str = 'natural'
     paragraph_pause: float = Field(default=0.3, ge=0, le=3)
@@ -297,6 +301,9 @@ def run_job(ident):
         if job['status'] != 'queued' or (work / 'cancel.flag').exists():
             return
         job['status'] = 'running'
+        job['started_at'] = now()
+        processing_started = time.monotonic()
+        reused_parts = any(work.glob("[0-9]*.wav"))
         write_json(path, job)
     try:
         env = dict(os.environ, VOICE_STUDIO_DATA_DIR=str(DATA), HF_HOME=str(DATA / 'models' / 'cache'), HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1', OMP_NUM_THREADS=os.environ.get('VOICE_STUDIO_THREADS', '4'), PYTHONUTF8='1')
@@ -311,7 +318,8 @@ def run_job(ident):
                 raise RuntimeError('Mô hình không tạo ra âm thanh hợp lệ.')
             result = read_json(work / 'result.json')
             job.update(result)
-            job.update(status='done', url=f'/api/audio/{ident}', finished_at=now())
+            elapsed = time.monotonic() - processing_started
+            job.update(status='done', url=f'/api/audio/{ident}', finished_at=now(), wall_processing_seconds=round(elapsed, 3), speed_report=None if reused_parts else speed_report(result.get('audio_seconds', 0), elapsed))
     except Exception as exc:
         job.update(status='error', error=str(exc))
     with lock:
@@ -329,7 +337,8 @@ def speech(body: Speech):
     if not (DATA / 'models' / f'{engine}.ready').exists():
         raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Chạy lệnh tải mô hình trong hướng dẫn cài đặt.')
     try:
-        segments = split_script(body.text)
+        segment_plan = 'nano-packed-v1' if engine == 'vieneu_nano' and body.paragraph_pause == 0 else 'classic-v1'
+        segments = plan_segments({**body.model_dump(), 'segment_plan': segment_plan})
         if not any(segment.text for segment in segments):
             raise ValueError('Nhập nội dung đọc, không chỉ ký hiệu nghỉ.')
     except ValueError as exc:
@@ -343,7 +352,7 @@ def speech(body: Speech):
         if sum(j['status'] in {'queued', 'running', 'cancelling'} for j in records('jobs')) >= 4:
             raise HTTPException(429, 'Hàng đợi đã có 4 tác vụ. Hãy đợi trước khi tạo thêm.')
         ident = uuid.uuid4().hex
-        job = {**body.model_dump(), 'text': body.text.strip(), 'id': ident, 'voice_name': voice['name'], 'engine': engine, 'speaker': voice.get('speaker'), 'status': 'queued', 'total': len(segments), 'completed': 0, 'progress': 0, 'created_at': now()}
+        job = {**body.model_dump(), 'text': body.text.strip(), 'id': ident, 'voice_name': voice['name'], 'engine': engine, 'speaker': voice.get('speaker'), 'status': 'queued', 'segment_plan': segment_plan, 'total': len(segments), 'completed': 0, 'progress': 0, 'created_at': now()}
         write_json(DATA / 'jobs' / f'{ident}.json', job)
         executor.submit(run_job, ident)
     return job
@@ -455,3 +464,8 @@ async def write_script(body: writing.WritingRequest):
     if body.language not in LANGUAGES:
         raise HTTPException(422, 'Ngôn ngữ chưa được hỗ trợ.')
     return await writing.generate(body)
+
+
+@app.get('/api/system-info')
+def machine_info():
+    return system_info()

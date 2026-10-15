@@ -1,3 +1,15 @@
+## Voice Studio 2.3 — tốc độ đo được và giới hạn
+
+- Linux AMD EPYC, 5 CPU logic, RAM 33,3 GB, không GPU NVIDIA. VieNeu Nano Minh Quân, **4 bước bản nháp**, hai tiến trình, hai ONNX threads mỗi tiến trình, WAV PCM 24 kHz, nhịp tự nhiên 1×, không thêm nghỉ câu. Không kéo giãn âm thanh hoặc chèn im lặng để đạt hệ số tốc độ.
+- Mẫu ~40,8 giây: lượt đầu 2,215 giây xử lý (18,47×); hai lượt giữ mô hình trong RAM đạt 31,24× và 31,32×. Một lượt đọc dài **618,284 giây âm thanh / 18,867 giây xử lý = 32,77×**. Số liệu API tính từ lúc bắt đầu tác vụ đến khi xuất xong, không tính chờ hàng đợi. Đã giải mã tệp và kiểm tra tín hiệu khác 0; không thay thế đánh giá nghe.
+- Kiểm tra dài hoàn chỉnh sau khi nạp sẵn mô hình: **3.711,250 giây âm thanh (1 giờ 1 phút 51 giây) / 111,224 giây xử lý = 33,37×**; 811 đoạn, tệp WAV giải mã được và có tín hiệu. Đây là bản đọc tiếng Việt lặp lại văn bản mẫu, không phải đánh giá nội dung đa dạng hoặc độ rõ từng từ. Lượt này thực sự tạo hơn 1 giờ âm thanh, không chỉ ngoại suy từ mẫu ngắn.
+- **31 kiểm thử đạt**, không bỏ qua; một cảnh báo Starlette/AnyIO deprecation. Kiểm tra bổ sung xác minh ghép đúng thứ tự khi đoạn sau hoàn tất trước, dùng lại checkpoint, bảo toàn nhấn/nghỉ, phép tính tốc độ, giới hạn cấu hình và chẩn đoán máy.
+- Chromium thật với server/mô hình thật: chọn cấu hình 4 bước/hai tiến trình, chạy mẫu đo và hiện kết quả, giữ nguyên văn bản người dùng, nút đọc cấu hình máy, màn hình 390 px không tràn ngang và không lỗi JavaScript.
+- Dừng tác vụ Nano song song: toàn bộ bốn tiến trình con đã dừng trong 0,317 giây trên Linux; tác vụ mới sau Dừng tạo được WAV. Windows `taskkill /T /F` chưa được thực thi trên máy Windows.
+- Tốc độ trên máy người dùng, GPU/CUDA, chất lượng cảm nhận của chế độ 4 bước và tốc độ nhân bản/giọng quốc tế chưa được chứng minh bằng các số liệu trên. Không cam kết 30× cho mọi máy hoặc mô hình. Lượt tiếp tục có checkpoint không hiện ước tính tốc độ để tránh coi âm thanh đã có là vừa tạo mới.
+
+---
+
 # Voice Studio 2.2 — tốc độ và dừng trực tiếp
 
 - **26 kiểm thử đạt**: bổ sung tái sử dụng cấu hình/mô hình, hai tác vụ cùng tiến trình worker sống, giải phóng worker, xử lý PCM/resample không gọi FFmpeg ở nhịp 1×, fallback Tự động và giọng Nano chỉ được chọn rõ ràng. Các kiểm thử cũ về 3 giờ, checkpoint, dừng tiến trình, kết nối cloud/local vẫn đạt.

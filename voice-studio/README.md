@@ -1,4 +1,4 @@
-# Voice Studio 2.2 — tăng tốc, dừng trực tiếp và kết nối AI
+# Voice Studio 2.3 — chạy song song và đo tốc độ thực tế
 
 Giao diện tiếng Việt cho chuyển văn bản thành lời nói, hồ sơ nhân bản giọng từ mẫu, thư viện giọng, hàng đợi, nghe lại và tải WAV/MP3. Tạo giọng cục bộ không cần API key. AI viết kịch bản mặc định dùng Ollama trên máy, không cần tài khoản hoặc API key. OpenAI/Gemini là tùy chọn nâng cao và vẫn yêu cầu khóa riêng.
 
@@ -10,7 +10,7 @@ Giao diện tiếng Việt cho chuyển văn bản thành lời nói, hồ sơ n
 - Nhập mẫu âm thanh 3–30 giây, tối đa 20 MB. VieNeu thực tế dùng tối đa khoảng 8 giây tham chiếu. Đoạn sạch, một người nói, không nhạc cho kết quả tốt hơn.
 - Lưu mẫu là đăng ký hồ sơ tham chiếu, không huấn luyện lại mô hình. Nhân bản thực sự được thực hiện khi tạo lời đọc mới. Chỉ dùng mẫu của chính bạn hoặc đã được chủ giọng cho phép.
 - Điều chỉnh tốc độ 0.7–1.4×, xuất WAV hoặc MP3 192 kbps. Lịch sử lưu cục bộ; xóa mẫu và bản thu riêng.
-- Tối đa 4 tác vụ chờ/chạy; chạy tuần tự để giảm RAM. Nhận tối đa **200.000 ký tự**, chia câu/đoạn tối đa 240 ký tự, nạp mô hình một lần và giữ trong RAM để tái sử dụng giữa các tác vụ cùng giọng/ngôn ngữ/chế độ. Đổi cấu hình sẽ thay mô hình cũ; Dừng hoặc tắt ứng dụng sẽ giải phóng tiến trình. PCM được ghi theo khối trên đĩa, không giữ bản thu nhiều giờ trong RAM.
+- Tối đa 4 tác vụ chờ/chạy; chạy tuần tự các tác vụ; mỗi tác vụ Nano có thể chọn tối đa hai luồng tạo đoạn. Nhận tối đa **200.000 ký tự**, chia câu/đoạn tối đa 240 ký tự, nạp mô hình một lần và giữ trong RAM để tái sử dụng giữa các tác vụ cùng giọng/ngôn ngữ/chế độ. Đổi cấu hình sẽ thay mô hình cũ; Dừng hoặc tắt ứng dụng sẽ giải phóng tiến trình. PCM được ghi theo khối trên đĩa, không giữ bản thu nhiều giờ trong RAM.
 - Bản thu tối đa **180 phút (3 giờ)**, tính cả khoảng nghỉ và tốc độ đã chỉnh. Nếu đạt giới hạn trước khi hết lời, giao diện báo rõ còn nội dung chưa đọc. Không kéo giãn/chèn im lặng cho đủ 3 giờ.
 - Dừng/tiếp tục trong Lịch sử: lưu từng đoạn, tiếp tục dùng lại các đoạn đã hoàn tất. Khởi động lại máy đánh dấu tác vụ gián đoạn; có thể tiếp tục. Giới hạn xử lý một lượt là 7 ngày, tách biệt với thời lượng âm thanh 3 giờ.
 - Nhập kịch bản `.txt`, đánh dấu **từ cần nhấn** và `[pause=1.5]`; nhịp đọc Tự nhiên/Kể chuyện/Tin tức/Thư giãn/Sôi nổi điều chỉnh tốc độ và khoảng nghỉ. Nhấn từ dùng tốc độ chậm hơn và tăng âm lượng nhẹ có limiter. Đây là điều khiển nhịp/âm lượng; mô hình hiện tại không hỗ trợ đầy đủ mô tả cảm xúc tự do.
@@ -40,6 +40,15 @@ Linux/macOS: cài Ollama theo hướng dẫn chính thức, chạy dịch vụ t
 ### Dịch vụ đám mây (không bắt buộc)
 
 OpenAI và Gemini vẫn có trong danh sách cho người muốn dùng tài khoản API riêng. Khi chọn chúng, giao diện mới hiện ô API key. Khóa chỉ giữ trong RAM máy chủ đến khi tắt ứng dụng; không ghi ra Git, dữ liệu hay localStorage. Có thể dùng biến môi trường `OPENAI_API_KEY`, `GEMINI_API_KEY` hoặc `GOOGLE_API_KEY`. Các lựa chọn này vẫn gửi chủ đề/nội dung tới nhà cung cấp khi bấm Viết, cần Internet và có thể tính phí; gói web không tự cấp hạn mức API. Chọn Ollama nếu muốn hoàn toàn không cần khóa. Model cloud mặc định `gpt-4.1-mini` / `gemini-2.5-flash` có thể đổi theo danh mục tài khoản.
+
+## Tối ưu mục tiêu 1 giờ voice trong 2 phút (bản 2.3)
+
+- Chạy `download_turbo_model.bat` nếu chưa tải Nano. Trong giao diện bấm **Cấu hình ưu tiên tốc độ 30×**, rồi **Đo tốc độ máy bằng mẫu đọc**. Nút cấu hình chọn Minh Quân Nano tiếng Việt, 4 bước, WAV, nhịp tự nhiên 1×, không thêm nghỉ giữa câu; chọn hai luồng tạo đoạn trên máy từ 4 CPU logic. Không đổi nội dung trình soạn thảo khi đo mẫu.
+- Mỗi luồng dùng một mô hình riêng, giữ trong RAM cho các lượt sau. Có thể đổi về một luồng nếu thiếu RAM hoặc máy chậm hơn khi chạy song song. Hai ONNX threads cho mỗi luồng là mặc định; nhiều threads hơn không mặc nhiên nhanh hơn. Mô hình chỉ tạo trước tối đa hai đoạn, ghép theo đúng thứ tự và giữ checkpoint để tiếp tục.
+- **4 bước là chế độ bản nháp thử nghiệm**, có thể giảm độ rõ và tự nhiên. Chọn 8 hoặc 16 bước khi cần chất lượng cao hơn. Cấu hình này không áp dụng cho nhân bản hoặc giọng Qwen các ngôn ngữ khác; giọng Nano khác với Turbo.
+- Bấm **Xem cấu hình máy** để xem CPU, RAM, NVIDIA và trạng thái PyTorch CUDA, không cần tự tìm trong Windows. Nano chạy CPU; thông tin NVIDIA không có nghĩa Nano tự chuyển sang GPU.
+- Sau mỗi bản thu mới, ứng dụng hiện thời gian xử lý, thời lượng âm thanh, hệ số tốc độ và ước tính tạo 1 giờ. Phép đo tính cả nạp mô hình/xuất tệp, không tính chờ hàng đợi; lượt tiếp tục dùng cache không được dùng để ước tính tốc độ. Đo lần đầu và lần sau vì nạp mô hình làm kết quả khác nhau.
+- Mục tiêu 30× phụ thuộc CPU, RAM, mô hình, văn bản, tải nền và định dạng. Không cam kết máy Windows của bạn đạt cùng kết quả máy thử. Xem kết quả và giới hạn trong `VALIDATION.md`. Nút Dừng vẫn tắt cả cây tiến trình, giữ các đoạn đã tạo.
 
 ## Tăng tốc bản 2.2 và nút Dừng
 
