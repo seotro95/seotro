@@ -29,7 +29,7 @@ def download_verified_ffmpeg(target, downloads):
         for entry in bundle.infolist():
             # Drop upstream root directory, retain binaries, licenses and docs.
             parts = Path(entry.filename).parts[1:]
-            if not parts or entry.is_dir():
+            if not parts or entry.is_dir() or parts[-1].lower() == 'ffplay.exe':
                 continue
             if '..' in parts or Path(*parts).is_absolute():
                 raise ValueError('Unsafe FFmpeg archive path')
@@ -38,6 +38,24 @@ def download_verified_ffmpeg(target, downloads):
             with bundle.open(entry) as source, destination.open('wb') as output:
                 shutil.copyfileobj(source, output)
     (target/'UPSTREAM-SHA256.txt').write_text(expected+'  '+FFMPEG_ASSET+'\n'+FFMPEG_BASE, encoding='utf-8')
+
+
+def materialize_model_cache(hub):
+    # HF normally links snapshots to blobs. ZIP would duplicate both, and some
+    # Windows extractors cannot restore symlinks. Keep real snapshot files only.
+    for repo in hub.glob('models--*'):
+        snapshots = repo/'snapshots'
+        if not snapshots.exists():
+            continue
+        for link in snapshots.rglob('*'):
+            if link.is_symlink():
+                if not link.is_file():
+                    raise ValueError('Unexpected model-cache directory symlink')
+                temporary = link.with_name(link.name+'.portable')
+                shutil.copyfile(link.resolve(strict=True), temporary)
+                link.unlink()
+                temporary.replace(link)
+        shutil.rmtree(repo/'blobs', ignore_errors=True)
 
 
 def copy_runtime(source, destination):
@@ -91,6 +109,7 @@ def main():
     from huggingface_hub import hf_hub_download
     for repo in ('pnnbao-ump/VieNeu-TTS-v3-Nano', 'pnnbao-ump/VieNeu-TTS-v3-Turbo', 'OpenMOSS-Team/MOSS-Audio-Tokenizer-Nano-ONNX'):
         hf_hub_download(repo, 'README.md', cache_dir=str(data/'models/cache/hub'))
+    materialize_model_cache(data/'models/cache/hub')
     # New build directory contains only calibration clips and downloaded models.
     # Copying the installed base interpreter keeps site-packages relocatable.
     copy_runtime(Path(sys.base_prefix), root/'runtime')
