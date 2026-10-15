@@ -34,7 +34,7 @@ jobs:
           Add-Content -Path $env:GITHUB_PATH -Value "${{ runner.temp }}/tools/ffmpeg/bin"
       - name: Run regression checks
         working-directory: voice-studio
-        run: python -m pytest -q
+        run: python packaging/ci_checks.py
       - name: Build and test relocated offline Windows bundle
         run: python voice-studio/packaging/build_windows.py --output "${{ runner.temp }}/portable/Voice-Studio"
       - name: Upload checked build

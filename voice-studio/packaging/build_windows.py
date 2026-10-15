@@ -96,10 +96,17 @@ def main():
         shutil.copy2(SOURCE/'packaging'/name, root/name)
     notices = '''Voice Studio Windows x64 Portable\n\nExtract ALL files to a writable folder, then double-click MO_VOICE_STUDIO.bat.\nNo Python, FFmpeg, venv installation, model download or API key is needed for bundled Vietnamese voices.\nNano and Turbo are included. International Qwen models are optional: THEM_GIONG_QUOC_TE.bat needs Internet and several GB.\nYour projects are saved in voice-studio/.data. Back up that folder before deleting this portable folder.\nOllama writing is optional and requires a separate Ollama installation/model.\n\nTHIRD-PARTY NOTICES\nPython: runtime/LICENSE.txt; https://www.python.org/\nPython packages: licenses in runtime/Lib/site-packages/*.dist-info\nFFmpeg GPL build: ffmpeg/LICENSE*, docs and https://github.com/BtbN/FFmpeg-Builds\nMSVC app-local redistributable: https://learn.microsoft.com/cpp/windows/redistributing-visual-cpp-files\nModels: license/model cards in voice-studio/.data/models/cache/hub.\nNo personal recordings, keys, history or developer environment files are packaged.\n'''
     (root/'READ-ME-FIRST.txt').write_text(notices, encoding='utf-8')
+    from importlib.metadata import distribution
+    license_path = next(f for f in distribution('vieneu').files if str(f).endswith('dist-info/licenses/LICENSE'))
+    shutil.copy2(distribution('vieneu').locate_file(license_path), root/'MODEL-APACHE-2.0-LICENSE.txt')
     freeze = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'], text=True)
     (root/'BUILD-DEPENDENCIES.txt').write_text(freeze, encoding='utf-8')
     (root/'BUILD.json').write_text(json.dumps({'commit': os.environ.get('GITHUB_SHA'), 'python': sys.version, 'engines': ['vieneu_nano','vieneu'], 'windows_x64': True}, indent=2), encoding='utf-8')
-    verify_offline(root)
+    try:
+        verify_offline(root)
+    except Exception as exc:
+        print('::error title=Portable offline validation failed::'+str(exc).replace('%','%25').replace('\n','%0A'), flush=True)
+        raise
     archive = shutil.make_archive(str(root.parent/'Voice-Studio-Windows-x64'), 'zip', root.parent, root.name)
     size = Path(archive).stat().st_size
     if size >= 2*1024**3:
