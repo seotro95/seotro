@@ -23,12 +23,13 @@ from starlette.concurrency import run_in_threadpool
 
 from narration import MAX_CHARACTERS, PROFILES, plan_segments
 import writing
+from dubbing import inspect_video
 from hardware import supports_int8, system_info
 from performance import speed_report
 
 BASE = Path(__file__).resolve().parent
 DATA = Path(os.environ.get('VOICE_STUDIO_DATA_DIR', str(BASE / '.data'))).resolve()
-for folder in ('voices', 'audio', 'jobs', 'models', 'parts'):
+for folder in ('voices', 'audio', 'jobs', 'models', 'parts', 'videos'):
     (DATA / folder).mkdir(parents=True, exist_ok=True)
 LANGUAGES = {'vi': 'Tiếng Việt', 'en-US': 'English · US', 'en-GB': 'English · UK', 'ja': '日本語 · Nhật', 'ko': '한국어 · Hàn', 'zh': '中文 · Trung', 'fr': 'Français · Pháp', 'de': 'Deutsch · Đức', 'es': 'Español · Tây Ban Nha', 'it': 'Italiano · Ý', 'pt': 'Português · Bồ Đào Nha', 'ru': 'Русский · Nga'}
 PRESETS = [
@@ -88,7 +89,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='2.3.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='2.4.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -224,6 +225,9 @@ class Speech(BaseModel):
     language: str = 'vi'
     speed: float = Field(default=1, ge=0.7, le=1.4)
     format: str = 'wav'
+    video_id: str | None = None
+    video_offset: float = Field(default=0, ge=0, le=10800)
+    video_mix: bool = False
     nano_threads: int = Field(default=2, ge=1, le=8)
     nano_parallel: int = Field(default=1, ge=1, le=2)
     nano_steps: int = Field(default=8, ge=4, le=16)
@@ -311,6 +315,11 @@ def run_job(ident):
         if code == -2 or (work / 'cancel.flag').exists():
             job.update(status='cancelled', error='Đã dừng. Bạn có thể tiếp tục từ các đoạn đã tạo.')
         elif code:
+            marker = work / 'worker-done.json'
+            if marker.exists():
+                detail = read_json(marker).get('user_error')
+                if detail:
+                    raise RuntimeError(detail)
             raise RuntimeError('Không tạo được âm thanh. Kiểm tra nhật ký tác vụ; có thể bấm Tiếp tục để giữ các đoạn đã tạo.')
         else:
             output = DATA / 'audio' / f"{ident}.{job['format']}"
@@ -318,6 +327,8 @@ def run_job(ident):
                 raise RuntimeError('Mô hình không tạo ra âm thanh hợp lệ.')
             result = read_json(work / 'result.json')
             job.update(result)
+            if job.get('video_id'):
+                job['video_url'] = f'/api/dubbed/{ident}'
             elapsed = time.monotonic() - processing_started
             job.update(status='done', url=f'/api/audio/{ident}', finished_at=now(), wall_processing_seconds=round(elapsed, 3), speed_report=None if reused_parts else speed_report(result.get('audio_seconds', 0), elapsed))
     except Exception as exc:
@@ -330,6 +341,10 @@ def run_job(ident):
 def speech(body: Speech):
     if not body.text.strip() or body.language not in LANGUAGES or body.format not in {'wav', 'mp3'} or body.delivery not in PROFILES:
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
+    if body.video_id:
+        meta = read_json(DATA / 'videos' / f'{valid_id(body.video_id)}.json')
+        if body.video_offset >= meta['duration']:
+            raise HTTPException(422, 'Thời điểm bắt đầu phải nhỏ hơn thời lượng video.')
     voice = next((v for v in PRESETS + records('voices') if v['id'] == body.voice_id), None)
     if not voice or body.language not in voice['languages']:
         raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
@@ -386,7 +401,7 @@ def delete_record(ident: str):
         if job['status'] in {'queued', 'running', 'cancelling'}:
             raise HTTPException(409, 'Đợi tác vụ hoàn tất trước khi xóa.')
         shutil.rmtree(DATA / 'parts' / ident, ignore_errors=True)
-        for path in [DATA / 'audio' / f'{ident}.wav', DATA / 'audio' / f'{ident}.mp3', DATA / 'jobs' / f'{ident}.json', DATA / 'jobs' / f'{ident}.log']:
+        for path in [DATA / 'audio' / f'{ident}.wav', DATA / 'audio' / f'{ident}.mp3', DATA / 'audio' / f'{ident}.mp4', DATA / 'jobs' / f'{ident}.json', DATA / 'jobs' / f'{ident}.log']:
             path.unlink(missing_ok=True)
 
 
@@ -469,3 +484,57 @@ async def write_script(body: writing.WritingRequest):
 @app.get('/api/system-info')
 def machine_info():
     return system_info()
+
+
+@app.post('/api/videos', status_code=201)
+async def upload_video(file: UploadFile = File(...)):
+    folder = DATA / 'videos'
+    folder.mkdir(exist_ok=True)
+    ident = uuid.uuid4().hex
+    source = folder / (ident + '.source')
+    saved = False
+    try:
+        count = 0
+        with source.open('wb') as target:
+            while chunk := await file.read(1024 * 1024):
+                count += len(chunk)
+                if count > 2 * 1024**3:
+                    raise HTTPException(413, 'Video tối đa 2 GB.')
+                await run_in_threadpool(target.write, chunk)
+        info = await run_in_threadpool(inspect_video, source)
+        record = {**info, 'id': ident, 'name': Path(file.filename or 'video').name[:200], 'size': count}
+        write_json(folder / (ident + '.json'), record)
+        saved = True
+        return record
+    except (ValueError, subprocess.CalledProcessError):
+        raise HTTPException(422, 'Video hỏng, codec chưa hỗ trợ hoặc dài quá 3 giờ. Dùng video H.264/MP4 hợp lệ.') from None
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        raise HTTPException(503, 'Không kiểm tra được video. Cần FFmpeg và FFprobe hoạt động.') from None
+    finally:
+        await file.close()
+        if not saved:
+            source.unlink(missing_ok=True)
+
+
+@app.delete('/api/videos/{ident}', status_code=204)
+def delete_video(ident: str):
+    ident = valid_id(ident)
+    with lock:
+        if any(j.get('video_id') == ident for j in records('jobs')):
+            raise HTTPException(409, 'Xóa các tác vụ dùng video này trong Lịch sử trước khi xóa video gốc.')
+        for suffix in ('.source', '.json'):
+            (DATA / 'videos' / (ident + suffix)).unlink(missing_ok=True)
+
+
+@app.get('/api/dubbed/{ident}')
+def dubbed_video(ident: str):
+    job = get_job(ident)
+    path = DATA / 'audio' / (ident + '.mp4')
+    if job['status'] != 'done' or not job.get('video_id') or not path.exists():
+        raise HTTPException(404, 'Video lồng tiếng chưa sẵn sàng.')
+    return FileResponse(path, media_type='video/mp4', filename=f'voice-studio-{ident[:8]}.mp4')
+
+
+@app.get('/api/videos')
+def list_videos():
+    return {'items': records('videos')}

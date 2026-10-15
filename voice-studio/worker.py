@@ -217,6 +217,12 @@ def render(job, synthesize=None):
         subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(assembly), '-codec:a', 'libmp3lame', '-b:a', '192k', '-y', str(pending)], check=True, timeout=3600)
     pending.replace(destination)
     assembly.unlink(missing_ok=True)
+    if job.get('video_id'):
+        if clipped:
+            raise ValueError('Lời đọc đạt giới hạn thời lượng; hãy chia nhỏ kịch bản trước khi lồng tiếng để không mất lời.')
+        write_state(work / 'progress.json', {'completed': completed, 'total': len(segments), 'progress': 99, 'phase': 'Đang ghép giọng vào video, giữ nguyên hình ảnh'})
+        from dubbing import mux_video
+        mux_video(job, destination, work, DATA, writer.frames / writer.rate)
     write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3)})
 
 
@@ -230,14 +236,16 @@ def serve():
         work = DATA / 'parts' / job['id']
         work.mkdir(parents=True, exist_ok=True)
         code = 0
+        user_error = None
         with (DATA / 'jobs' / (job['id'] + '.log')).open('a', encoding='utf-8') as errors:
             try:
                 with contextlib.redirect_stderr(errors):
                     render(job)
-            except Exception:
+            except Exception as exc:
+                user_error = str(exc) if isinstance(exc, ValueError) else None
                 code = 1
                 traceback.print_exc(file=errors)
-        write_state(work / 'worker-done.json', {'code': code})
+        write_state(work / 'worker-done.json', {'code': code, 'user_error': user_error})
 
 
 if __name__ == '__main__':

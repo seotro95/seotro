@@ -1,4 +1,4 @@
-# Voice Studio 2.3 — chạy song song và đo tốc độ thực tế
+# Voice Studio 2.4 — lồng tiếng video và tạo giọng nhanh
 
 Giao diện tiếng Việt cho chuyển văn bản thành lời nói, hồ sơ nhân bản giọng từ mẫu, thư viện giọng, hàng đợi, nghe lại và tải WAV/MP3. Tạo giọng cục bộ không cần API key. AI viết kịch bản mặc định dùng Ollama trên máy, không cần tài khoản hoặc API key. OpenAI/Gemini là tùy chọn nâng cao và vẫn yêu cầu khóa riêng.
 
@@ -40,6 +40,16 @@ Linux/macOS: cài Ollama theo hướng dẫn chính thức, chạy dịch vụ t
 ### Dịch vụ đám mây (không bắt buộc)
 
 OpenAI và Gemini vẫn có trong danh sách cho người muốn dùng tài khoản API riêng. Khi chọn chúng, giao diện mới hiện ô API key. Khóa chỉ giữ trong RAM máy chủ đến khi tắt ứng dụng; không ghi ra Git, dữ liệu hay localStorage. Có thể dùng biến môi trường `OPENAI_API_KEY`, `GEMINI_API_KEY` hoặc `GOOGLE_API_KEY`. Các lựa chọn này vẫn gửi chủ đề/nội dung tới nhà cung cấp khi bấm Viết, cần Internet và có thể tính phí; gói web không tự cấp hạn mức API. Chọn Ollama nếu muốn hoàn toàn không cần khóa. Model cloud mặc định `gpt-4.1-mini` / `gemini-2.5-flash` có thể đổi theo danh mục tài khoản.
+
+## Lồng tiếng video (bản 2.4)
+
+1. Mở **Lồng tiếng video**, tải video MP4/MOV/MKV/WebM tối đa 2 GB / 3 giờ. Codec xuất nhanh được hỗ trợ: H.264, HEVC, AV1, MPEG-4, VP9; các codec khác cần chuyển sang H.264 trước. Video đã tải được giữ trên máy, có thể chọn lại sau khi mở ứng dụng.
+2. Dán lời lồng tiếng tối đa **200.000 ký tự**, nhập TXT hoặc lấy nội dung từ mục Tạo giọng. Kiểm tra chính tả, tên riêng và cách viết số để mô hình phát âm đúng hơn.
+3. Chọn giọng, ngôn ngữ và nhịp đọc ở mục **Tạo giọng**, quay lại mục video. Nano **8 bước** là lựa chọn cân bằng tốc độ/độ rõ; 16 bước ưu tiên chất lượng, 4 bước là bản nháp. Tăng tốc bằng hai tiến trình trên máy đủ CPU/RAM. Hỗ trợ cả giọng cá nhân và giọng quốc tế theo mô hình đã tải; không cam kết cùng tốc độ giữa các giọng.
+4. Chọn thời điểm bắt đầu đọc (giây), tùy chọn giữ âm thanh gốc ở 15%, rồi bấm **Tạo giọng và lồng tiếng video**. Mặc định thay âm thanh gốc bằng giọng mới. Giữ âm thanh gốc không tách bỏ tiếng người nói cũ.
+5. Xem trước và tải **MP4**, hoặc tải lại ở **Lịch sử**. Hình ảnh được sao chép nguyên codec, không mã hóa lại, để giảm thời gian và giữ chất lượng. Giọng mới được mã hóa AAC. Dừng sẽ dừng cả tạo giọng/ghép video; tiếp tục dùng lại đoạn đã tạo. Muốn xóa video gốc, xóa các tác vụ đang tham chiếu trong Lịch sử rồi bấm Xóa video gốc đã tải.
+
+Đây là lồng tiếng theo kịch bản người dùng cung cấp: đọc liên tục từ thời điểm đã chọn, chưa tự nhận dạng lời gốc, dịch, nhập SRT, đồng bộ từng câu hoặc khớp khẩu hình. Nếu lời dài hơn khoảng video còn lại, ứng dụng báo rõ và không xuất video bị cắt lời; cần rút ngắn kịch bản hoặc chỉnh tốc độ và tạo tác vụ mới. Nhịp đọc giữ theo thiết lập, không tự ép giọng đọc nhanh đến méo tiếng. Hãy nghe kiểm tra trước khi dùng; không bảo đảm mô hình phát âm đúng mọi từ. Tệp gốc và sản phẩm lưu cục bộ, cần đủ dung lượng đĩa. FFmpeg và FFprobe phải có trong PATH (cài cùng gói FFmpeg).
 
 ## Tối ưu mục tiêu 1 giờ voice trong 2 phút (bản 2.3)
 

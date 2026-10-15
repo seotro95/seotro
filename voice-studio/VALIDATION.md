@@ -1,3 +1,12 @@
+## Voice Studio 2.4 — lồng tiếng video
+
+- **33 kiểm thử đạt** trên Linux CPU, không bỏ qua; một cảnh báo Starlette/AnyIO. Kiểm thử mới dùng FFmpeg thật để tạo video H.264 có âm thanh, tải qua API, ghép giọng với thời điểm bắt đầu và cả hai lựa chọn giữ/thay tiếng gốc. Hash luồng video trước/sau giống hệt, thời lượng giữ 4 giây; từ chối lời dài vượt video, video hỏng, ID không hợp lệ, xóa nguồn còn được tham chiếu và tải sản phẩm chưa hoàn tất.
+- Chromium + mô hình thật: tải video H.264 30 giây, tạo lời Việt bằng Nano **8 bước / hai tiến trình**, bắt đầu đọc ở giây 1, trộn tiếng gốc 15%, xem và tải MP4 thành công. FFprobe xác minh có cả hình và tiếng, video vẫn dài 30 giây. Tải lại trang và chọn lại video đã lưu; màn hình 390 px không tràn ngang, không lỗi JavaScript.
+- Giữ nguyên đường tạo giọng/cancel/resume hiện có; FFmpeg ghép video nằm trong cây tiến trình worker để nút Dừng có thể dừng cả ghép. Chưa thử dừng đúng lúc FFmpeg đang ghép một video dài trên Windows. Không cần thư viện Python/mô hình mới; FFprobe là yêu cầu thêm bên cạnh FFmpeg.
+- Chưa đo video dài đủ 3 giờ, codec HEVC/AV1/VP9 hoặc tác vụ nhân bản video riêng. Không đánh giá nghe thủ công độ chính xác từng từ; không cam kết phát âm chuẩn 100%. Chưa có nhận dạng, dịch, SRT, căn câu hay khớp khẩu hình. Tốc độ 30× bản trước là số liệu Nano 4 bước, không áp dụng mặc nhiên cho lồng tiếng 8 bước hoặc mọi phần cứng.
+
+---
+
 ## Voice Studio 2.3 — tốc độ đo được và giới hạn
 
 - Linux AMD EPYC, 5 CPU logic, RAM 33,3 GB, không GPU NVIDIA. VieNeu Nano Minh Quân, **4 bước bản nháp**, hai tiến trình, hai ONNX threads mỗi tiến trình, WAV PCM 24 kHz, nhịp tự nhiên 1×, không thêm nghỉ câu. Không kéo giãn âm thanh hoặc chèn im lặng để đạt hệ số tốc độ.

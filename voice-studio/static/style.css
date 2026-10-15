@@ -5,3 +5,5 @@
 .stop-button{border:1px solid #e3b7bf;background:#fff1f3;color:#a74055;border-radius:8px;padding:10px 15px;font-size:12px;font-weight:600}.stop-button:hover{background:#ffe5eb}
 
 .nano-button{width:100%;justify-content:center;margin-bottom:17px;font-size:10px}.settings-body>.nano-button{grid-column:1/-1}
+
+#panel-dub .writing-card{min-width:0}#panel-dub input,#panel-dub select,#panel-dub textarea,#dub-preview{min-width:0;max-width:100%}#dub-preview{display:block;width:100%;height:auto}#dub-source,#dub-settings,#dub-status{overflow-wrap:anywhere}@media(max-width:540px){#panel-dub .writing-card{padding:20px 16px}}
