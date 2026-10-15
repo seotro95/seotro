@@ -10,6 +10,8 @@ import tempfile
 def child(report):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     import pytest
+    import faulthandler
+    stack = report.with_suffix('.stack').open('w', encoding='utf-8')
     state = {'current': None, 'passed': 0, 'failed': [], 'skipped': 0}
     def save():
         report.write_text(json.dumps(state, ensure_ascii=False), encoding='utf-8')
@@ -17,7 +19,10 @@ def child(report):
         def pytest_runtest_logstart(self, nodeid, location):
             state['current'] = nodeid
             save()
+            faulthandler.dump_traceback_later(90, file=stack)
         def pytest_runtest_logreport(self, report):
+            if report.when == 'teardown':
+                faulthandler.cancel_dump_traceback_later()
             if report.failed:
                 state['failed'].append({'test': report.nodeid, 'detail': str(report.longrepr)[-10000:]})
             elif report.when == 'call' and report.passed:
@@ -25,7 +30,7 @@ def child(report):
             elif report.skipped:
                 state['skipped'] += 1
             save()
-    return pytest.main(['-q', '-o', 'faulthandler_timeout=60'], plugins=[Reporter()])
+    return pytest.main(['-q'], plugins=[Reporter()])
 
 
 def main():
@@ -44,6 +49,8 @@ def main():
             process.wait()
             code = 124
         state = json.loads(report.read_text(encoding='utf-8')) if report.exists() else {}
+        stack_file = report.with_suffix('.stack')
+        stalled_stack = stack_file.read_text(encoding='utf-8', errors='replace')[-14000:] if stack_file.exists() else ''
     summary = f'Regression: {state.get("passed",0)} passed, {len(state.get("failed",[]))} failed, {state.get("skipped",0)} skipped. Last test: {state.get("current")}. Exit: {code}.'
     print(summary, flush=True)
     if code:
@@ -51,6 +58,8 @@ def main():
             safe = message.replace('%','%25').replace('\r','%0D').replace('\n','%0A')
             print('::error title=Windows regression::'+safe, flush=True)
         annotate(summary)
+        if stalled_stack:
+            annotate(stalled_stack)
         for failure in state.get('failed',[]):
             annotate(failure['test']+'\n'+failure['detail'])
     if os.environ.get('GITHUB_STEP_SUMMARY'):
