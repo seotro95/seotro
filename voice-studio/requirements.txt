@@ -1,0 +1,7 @@
+fastapi==0.143.1
+uvicorn==0.54.0
+httpx==0.28.1
+python-multipart==0.0.32
+pydantic==2.11.10
+vieneu==3.8.3
+gradio==5.49.1
