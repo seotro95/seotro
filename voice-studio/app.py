@@ -38,6 +38,8 @@ PRESETS = [
     {'id': 'qw-ono', 'name': 'Ono Anna', 'engine': 'qwen', 'speaker': 'Ono_Anna', 'languages': list(LANGUAGES)[1:], 'description': 'Giọng nữ · tiếng Nhật bản ngữ'},
     {'id': 'qw-sohee', 'name': 'Sohee', 'engine': 'qwen', 'speaker': 'Sohee', 'languages': list(LANGUAGES)[1:], 'description': 'Giọng nữ · tiếng Hàn bản ngữ'},
     {'id': 'qw-vivian', 'name': 'Vivian', 'engine': 'qwen', 'speaker': 'Vivian', 'languages': list(LANGUAGES)[1:], 'description': 'Giọng nữ · tiếng Trung bản ngữ'},
+    {'id': 'nano-minhquan', 'name': 'Minh Quân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Minh Quân', 'languages': ['vi'], 'description': 'Nano 8 bước · nhanh hơn, giảm độ tự nhiên'},
+    {'id': 'nano-aihan', 'name': 'Ái Hân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Ái Hân', 'languages': ['vi'], 'description': 'Nano 8 bước · nhanh hơn, giảm độ tự nhiên'},
 ]
 @contextmanager
 def studio_lock():
@@ -76,6 +78,7 @@ async def lifespan(application):
         finally:
             shutdown_event.set()
             await run_in_threadpool(executor.shutdown, wait=True, cancel_futures=True)
+            await run_in_threadpool(close_warm_worker)
             for pending in records('jobs'):
                 if pending.get('status') == 'queued':
                     pending.update(status='error', error='Ứng dụng đã tắt. Có thể tiếp tục từ Lịch sử.')
@@ -84,7 +87,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='2.1.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='2.2.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -95,6 +98,7 @@ async def invalid_request(request, error):
 executor = ThreadPoolExecutor(max_workers=1)
 lock = threading.RLock()
 shutdown_event = threading.Event()
+warm_worker = None
 
 
 def now():
@@ -149,7 +153,7 @@ def index():
 
 @app.get('/api/config')
 def config():
-    return {'mode': 'local', 'languages': LANGUAGES, 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg'))}
+    return {'mode': 'local', 'languages': LANGUAGES, 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
 
 
 @app.get('/api/voices')
@@ -222,7 +226,7 @@ class Speech(BaseModel):
     max_minutes: int = Field(default=180, ge=1, le=180)
     delivery: str = 'natural'
     paragraph_pause: float = Field(default=0.3, ge=0, le=3)
-    quality: str = Field(default='standard', pattern='^(standard|fast)$')
+    quality: str = Field(default='auto', pattern='^(auto|standard|fast)$')
 
 
 def stop_worker(process, force=False):
@@ -243,30 +247,45 @@ def stop_worker(process, force=False):
             pass
 
 
+def close_warm_worker():
+    global warm_worker
+    process, warm_worker = warm_worker, None
+    if process is not None:
+        stop_worker(process, force=True)
+        process.wait()
+        if process.stdin:
+            process.stdin.close()
+
+
 def execute_worker(path, env, work):
-    # No 30-minute cut-off: three hours of audio may take days on a slow CPU.
-    log = DATA / 'jobs' / (path.stem + '.log')
-    with log.open('w', encoding='utf-8') as errors:
-        process = subprocess.Popen([sys.executable, str(BASE / 'worker.py'), str(path)], env=env, stdout=subprocess.DEVNULL, stderr=errors, **({'creationflags': subprocess.CREATE_NEW_PROCESS_GROUP} if os.name == 'nt' else {'start_new_session': True}))
+    global warm_worker
+    # Keep one model process resident for consecutive jobs; cancellation kills it.
+    done = work / 'worker-done.json'
+    done.unlink(missing_ok=True)
+    if warm_worker is None or warm_worker.poll() is not None:
+        close_warm_worker()
+        with (DATA / 'worker-startup.log').open('a', encoding='utf-8') as errors:
+            warm_worker = subprocess.Popen([sys.executable, str(BASE / 'worker.py'), '--serve'], env=env, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=errors, text=True, encoding='utf-8', **({'creationflags': subprocess.CREATE_NEW_PROCESS_GROUP} if os.name == 'nt' else {'start_new_session': True}))
+    process = warm_worker
+    try:
+        process.stdin.write(str(path.resolve()) + '\n')
+        process.stdin.flush()
         started = time.monotonic()
-        try:
-            while process.poll() is None:
-                if (work / 'cancel.flag').exists() or shutdown_event.is_set():
-                    stop_worker(process)
-                    try:
-                        process.wait(timeout=10)
-                    except subprocess.TimeoutExpired:
-                        stop_worker(process, force=True)
-                        process.wait()
-                    return -2
-                if time.monotonic() - started > 7 * 86400:
-                    raise TimeoutError('Tác vụ vượt giới hạn xử lý 7 ngày. Các đoạn đã tạo được giữ để tiếp tục.')
-                time.sleep(0.3)
-            return process.returncode
-        finally:
-            if process.poll() is None:
-                stop_worker(process, force=True)
-                process.wait()
+        while True:
+            if (work / 'cancel.flag').exists() or shutdown_event.is_set():
+                close_warm_worker()
+                return -2
+            if done.exists():
+                return read_json(done)['code']
+            if process.poll() is not None:
+                close_warm_worker()
+                return 1
+            if time.monotonic() - started > 7 * 86400:
+                raise TimeoutError('Tác vụ vượt giới hạn xử lý 7 ngày. Có thể tiếp tục từ các đoạn đã tạo.')
+            time.sleep(0.1)
+    except BaseException:
+        close_warm_worker()
+        raise
 
 
 def run_job(ident):
@@ -280,7 +299,7 @@ def run_job(ident):
         job['status'] = 'running'
         write_json(path, job)
     try:
-        env = dict(os.environ, VOICE_STUDIO_DATA_DIR=str(DATA), HF_HOME=str(DATA / 'models' / 'cache'), HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1', OMP_NUM_THREADS=os.environ.get('VOICE_STUDIO_THREADS', '4'))
+        env = dict(os.environ, VOICE_STUDIO_DATA_DIR=str(DATA), HF_HOME=str(DATA / 'models' / 'cache'), HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1', OMP_NUM_THREADS=os.environ.get('VOICE_STUDIO_THREADS', '4'), PYTHONUTF8='1')
         code = execute_worker(path, env, work)
         if code == -2 or (work / 'cancel.flag').exists():
             job.update(status='cancelled', error='Đã dừng. Bạn có thể tiếp tục từ các đoạn đã tạo.')
@@ -315,6 +334,8 @@ def speech(body: Speech):
             raise ValueError('Nhập nội dung đọc, không chỉ ký hiệu nghỉ.')
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from None
+    if body.quality == 'auto':
+        body.quality = 'fast' if engine != 'vieneu' or (supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists()) else 'standard'
     if body.quality == 'fast' and engine == 'vieneu':
         if not supports_int8() or not (DATA / 'models' / 'vieneu_fast.ready').exists():
             raise HTTPException(503, 'Chế độ nhanh tiếng Việt cần tải vieneu_fast trên CPU có VNNI. Dùng chế độ Tiêu chuẩn hoặc chạy prepare_models.py vieneu_fast.')

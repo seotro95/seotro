@@ -1,3 +1,12 @@
+# Voice Studio 2.2 — tốc độ và dừng trực tiếp
+
+- **26 kiểm thử đạt**: bổ sung tái sử dụng cấu hình/mô hình, hai tác vụ cùng tiến trình worker sống, giải phóng worker, xử lý PCM/resample không gọi FFmpeg ở nhịp 1×, fallback Tự động và giọng Nano chỉ được chọn rõ ràng. Các kiểm thử cũ về 3 giờ, checkpoint, dừng tiến trình, kết nối cloud/local vẫn đạt.
+- Đo thực tế trên CPU cloud 5 vCPU, cùng nội dung 3 câu tiếng Việt, WAV, nhịp 1×: bản cũ FP32 tiến trình mới 4,915 / 4,744 giây; bản mới FP32 lạnh/nóng 4,689 / 1,760 giây; INT8 đổi mô hình/nóng 2,855 / 1,344 giây; Nano đổi mô hình/nóng 1,051 / 0,741 giây. Âm thanh dài khoảng 6 giây, giải mã được và có tín hiệu. Turbo có sampling nên độ dài khác nhẹ; Nano khác giọng/chất lượng. Không coi số đo này là bảo đảm tốc độ Windows hoặc dự án dài.
+- Chromium thật: tạo tác vụ dài rồi bấm **Dừng tạo giọng** trên màn hình chính; backend báo cancelled và worker bị kết thúc trong khoảng 0,142 giây ở Linux. Kiểm tra nút ChatGPT/Gemini chọn đúng nhà cung cấp và hiện trường key; Ollama ẩn key; mobile không tràn ngang, không lỗi JavaScript.
+- Chưa kiểm tra CUDA, Windows taskkill hoặc chất lượng nghe Nano; Nano chỉ giọng có sẵn tiếng Việt. API cloud vẫn mới được kiểm tra hợp đồng mô phỏng, chưa có tài khoản thật.
+
+---
+
 # Voice Studio 2.1 — viết cục bộ không cần khóa
 
 - **22 kiểm thử đạt**, gồm viết bằng Ollama với toàn bộ API key unset, xác nhận không có header xác thực và mọi yêu cầu local chỉ tới loopback, xử lý Ollama chưa mở/model chưa tải, từ chối model cloud/URL ngoài, phản hồi rỗng và giới hạn token. Kiểm thử hợp đồng dùng MockTransport. Ngoài ra đã chạy Ollama 0.40.4 thật và viết qua endpoint Voice Studio khi không có khóa, dùng GGUF chính thức Qwen3 0.6B Q8_0 nhập cục bộ dưới tên studio-local-test. Archive Ollama được kiểm tra SHA256 với sha256sum chính thức; GGUF được kiểm tra SHA256 với LFS oid chính thức. Chưa đánh giá mô hình mặc định Qwen3 4B hoặc chất lượng kịch bản dài; mô hình thử nhỏ có thể lặp lời và ký hiệu được làm sạch trước khi chuyển đọc.

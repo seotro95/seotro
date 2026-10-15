@@ -1,4 +1,4 @@
-# Voice Studio 2.1 — AI viết cục bộ không cần API key
+# Voice Studio 2.2 — tăng tốc, dừng trực tiếp và kết nối AI
 
 Giao diện tiếng Việt cho chuyển văn bản thành lời nói, hồ sơ nhân bản giọng từ mẫu, thư viện giọng, hàng đợi, nghe lại và tải WAV/MP3. Tạo giọng cục bộ không cần API key. AI viết kịch bản mặc định dùng Ollama trên máy, không cần tài khoản hoặc API key. OpenAI/Gemini là tùy chọn nâng cao và vẫn yêu cầu khóa riêng.
 
@@ -10,7 +10,7 @@ Giao diện tiếng Việt cho chuyển văn bản thành lời nói, hồ sơ n
 - Nhập mẫu âm thanh 3–30 giây, tối đa 20 MB. VieNeu thực tế dùng tối đa khoảng 8 giây tham chiếu. Đoạn sạch, một người nói, không nhạc cho kết quả tốt hơn.
 - Lưu mẫu là đăng ký hồ sơ tham chiếu, không huấn luyện lại mô hình. Nhân bản thực sự được thực hiện khi tạo lời đọc mới. Chỉ dùng mẫu của chính bạn hoặc đã được chủ giọng cho phép.
 - Điều chỉnh tốc độ 0.7–1.4×, xuất WAV hoặc MP3 192 kbps. Lịch sử lưu cục bộ; xóa mẫu và bản thu riêng.
-- Tối đa 4 tác vụ chờ/chạy; chạy tuần tự để giảm RAM. Nhận tối đa **200.000 ký tự**, chia câu/đoạn tối đa 240 ký tự, nạp mô hình một lần cho mỗi tác vụ. PCM được ghi theo khối trên đĩa, không giữ bản thu nhiều giờ trong RAM.
+- Tối đa 4 tác vụ chờ/chạy; chạy tuần tự để giảm RAM. Nhận tối đa **200.000 ký tự**, chia câu/đoạn tối đa 240 ký tự, nạp mô hình một lần và giữ trong RAM để tái sử dụng giữa các tác vụ cùng giọng/ngôn ngữ/chế độ. Đổi cấu hình sẽ thay mô hình cũ; Dừng hoặc tắt ứng dụng sẽ giải phóng tiến trình. PCM được ghi theo khối trên đĩa, không giữ bản thu nhiều giờ trong RAM.
 - Bản thu tối đa **180 phút (3 giờ)**, tính cả khoảng nghỉ và tốc độ đã chỉnh. Nếu đạt giới hạn trước khi hết lời, giao diện báo rõ còn nội dung chưa đọc. Không kéo giãn/chèn im lặng cho đủ 3 giờ.
 - Dừng/tiếp tục trong Lịch sử: lưu từng đoạn, tiếp tục dùng lại các đoạn đã hoàn tất. Khởi động lại máy đánh dấu tác vụ gián đoạn; có thể tiếp tục. Giới hạn xử lý một lượt là 7 ngày, tách biệt với thời lượng âm thanh 3 giờ.
 - Nhập kịch bản `.txt`, đánh dấu **từ cần nhấn** và `[pause=1.5]`; nhịp đọc Tự nhiên/Kể chuyện/Tin tức/Thư giãn/Sôi nổi điều chỉnh tốc độ và khoảng nghỉ. Nhấn từ dùng tốc độ chậm hơn và tăng âm lượng nhẹ có limiter. Đây là điều khiển nhịp/âm lượng; mô hình hiện tại không hỗ trợ đầy đủ mô tả cảm xúc tự do.
@@ -40,6 +40,17 @@ Linux/macOS: cài Ollama theo hướng dẫn chính thức, chạy dịch vụ t
 ### Dịch vụ đám mây (không bắt buộc)
 
 OpenAI và Gemini vẫn có trong danh sách cho người muốn dùng tài khoản API riêng. Khi chọn chúng, giao diện mới hiện ô API key. Khóa chỉ giữ trong RAM máy chủ đến khi tắt ứng dụng; không ghi ra Git, dữ liệu hay localStorage. Có thể dùng biến môi trường `OPENAI_API_KEY`, `GEMINI_API_KEY` hoặc `GOOGLE_API_KEY`. Các lựa chọn này vẫn gửi chủ đề/nội dung tới nhà cung cấp khi bấm Viết, cần Internet và có thể tính phí; gói web không tự cấp hạn mức API. Chọn Ollama nếu muốn hoàn toàn không cần khóa. Model cloud mặc định `gpt-4.1-mini` / `gemini-2.5-flash` có thể đổi theo danh mục tài khoản.
+
+## Tăng tốc bản 2.2 và nút Dừng
+
+- **Tự động** là mặc định: dùng INT8 nếu giọng Turbo tiếng Việt có model và CPU VNNI phù hợp; nếu thiếu thì dùng FP32, giữ đúng giọng đã chọn. Qwen tự dùng CUDA khi bản PyTorch hỗ trợ; cài PyTorch CPU sẽ không tự có CUDA chỉ vì máy có NVIDIA.
+- **Siêu nhanh Nano**: chạy `download_turbo_model.bat` một lần, sau đó bấm **Chọn giọng tiếng Việt siêu nhanh** hoặc chọn **Minh Quân · Siêu nhanh / Ái Hân · Siêu nhanh**. Nano chạy ONNX CPU 8 bước, chỉ giới thiệu cho tiếng Việt; chất lượng/âm sắc thấp hơn hoặc khác Turbo. Nano ở bản này dùng giọng có sẵn, không tự thay mô hình cho giọng nhân bản.
+- **Giữ mô hình nóng**: cùng giọng và chế độ sẽ dùng lại tiến trình/mô hình, tránh nạp lại mỗi lần. Vì vậy lượt đầu/đổi giọng vẫn có thể chậm hơn. Đóng ứng dụng hoặc Dừng sẽ giải phóng bộ nhớ mô hình.
+- Nhịp tự nhiên 1× dùng xử lý âm thanh trực tiếp thay cho mở FFmpeg ở từng câu. Nhấn/nghỉ vẫn giữ nguyên; đổi tốc độ/nhịp có thể cần FFmpeg. Chọn WAV để bỏ qua bước nén MP3 cuối.
+- **Dừng tạo giọng** có ngay màn hình chính cạnh bản thu; không cần mở Lịch sử. Nút dừng tác vụ đang chọn, kết thúc cây tiến trình xử lý, giữ đoạn đã hoàn tất. Có thể Tiếp tục trong Lịch sử. Tác vụ khác trong hàng đợi vẫn được xử lý.
+- Trong **AI viết · ChatGPT / Gemini**, có nút **Kết nối ChatGPT**, **Kết nối Gemini** và **AI cục bộ không cần key**. Cloud cần key hợp lệ/quyền API như trước; Ollama vẫn không cần key. Không tích hợp đăng nhập tài khoản web thay API.
+
+Đo một mẫu khoảng 6 giây tiếng Việt trên CPU cloud 5 vCPU: bản trước khoảng 4,74–4,92 giây/lượt; bản mới Turbo FP32 lượt đầu 4,69 giây, lượt nóng 1,76 giây; Turbo INT8 2,85/1,34 giây; Nano giọng khác 1,05/0,74 giây. Số đo là mẫu ngắn, không phải cam kết cho Windows, phần cứng khác hoặc bản thu 3 giờ; Nano không phải so sánh ngang chất lượng. Chưa đo CUDA.
 
 ## Tạo nhanh và dự án 3 giờ
 
