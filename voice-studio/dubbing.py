@@ -96,12 +96,12 @@ def run_ffmpeg(command, work, duration, start, end, phase, timeout=21600):
 def mux_video(job, audio, work, data, audio_seconds):
     meta = json.loads((data / 'videos' / (job['video_id'] + '.json')).read_text(encoding='utf-8'))
     offset = job.get('video_offset', 0)
-    if audio_seconds + offset > meta['duration'] + .05:
+    if audio_seconds + offset > meta['duration'] + .001:
         raise ValueError(f'Lời đọc dài {audio_seconds:.1f}s, vượt khoảng còn lại của video ({meta["duration"]-offset:.1f}s). Rút ngắn lời hoặc tăng tốc độ đọc; ứng dụng không tự cắt mất lời.')
     source = data / 'videos' / (job['video_id'] + '.source')
     temporary = work / 'dubbed.mp4'
     delay = round(offset * 1000)
-    filters = f'[1:a]adelay={delay}:all=1,apad[dub]'
+    filters = f'[1:a]adelay={delay}:all=1,apad=whole_dur={meta["duration"]}[dub]'
     if job.get('video_mix') and meta['has_audio']:
         filters += ';[0:a:0]volume=0.15[background];[dub][background]amix=inputs=2:duration=first:normalize=0[out]'
     else:
