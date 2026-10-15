@@ -4,6 +4,17 @@ The downloadable runtime package is built by [Build Windows Portable](https://gi
 
 The **source-code ZIP is not the portable runtime package**. Only a successful native Windows build publishes `Voice-Studio-Windows-x64.zip` under GitHub Releases.
 
+## Published and verified Windows build
+
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-9/Voice-Studio-Windows-x64.zip)
+
+- Release: `windows-portable-9`; source application/build commit: `6a96ca6`.
+- File size: **1,076,004,328 bytes** (about 1.00 GiB).
+- SHA256: `5c646cc9d94ec9cd9a9e3573deb00a61664d810c1cb0ff91044ad16cea87537e`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38777016365): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
+- Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
+
 ## Use the packaged download
 
 1. Download `Voice-Studio-Windows-x64.zip` from a successful release, rather than GitHub's automatically generated Source code ZIP.
