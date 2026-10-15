@@ -1,0 +1,69 @@
+name: Diagnose Windows voice packaging
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/portable-diagnostic.yml']
+permissions:
+  contents: read
+env:
+  PYTHONUTF8: '1'
+  HF_HUB_DISABLE_XET: '1'
+jobs:
+  model-readiness:
+    runs-on: windows-2022
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - run: python -m pip install -r voice-studio/requirements.txt
+      - name: Report Windows model stages and CRT paths
+        shell: pwsh
+        env:
+          VOICE_STUDIO_DATA_DIR: ${{ runner.temp }}/voice-diagnostic
+          HF_HOME: ${{ runner.temp }}/voice-diagnostic/models/cache
+        run: |
+          @'
+          import os,sys,time,threading,traceback
+          from pathlib import Path
+          sys.path.insert(0,str(Path('voice-studio').resolve()))
+          root=Path(os.environ['VOICE_STUDIO_DATA_DIR']);root.mkdir(parents=True,exist_ok=True)
+          def note(text,kind='notice'):
+              safe=text.replace('%','%25').replace('\r','%0D').replace('\n','%0A')
+              print('::'+kind+' title=Windows portable diagnostic::'+safe,flush=True)
+          def run(name,fn):
+              note('Begin '+name);started=time.monotonic()
+              def expired():
+                  frame=sys._current_frames().get(threading.main_thread().ident)
+                  note('Timeout '+name+'\n'+''.join(traceback.format_stack(frame)),'error')
+                  os._exit(124)
+              timer=threading.Timer(240,expired);timer.daemon=True;timer.start()
+              try:result=fn()
+              except Exception as exc:
+                  note(name+': '+type(exc).__name__+': '+str(exc).split('https://')[0],'error');raise
+              finally:timer.cancel()
+              note('Passed '+name+' in '+str(round(time.monotonic()-started,1))+' seconds')
+              return result
+          def crt():
+              root=Path(os.environ['ProgramFiles'])/'Microsoft Visual Studio'
+              found=list(root.glob('*/*/VC/Redist/MSVC/*/x64/Microsoft.VC143.CRT/msvcp140.dll'))
+              note('CRT candidates: '+str([str(p.parent) for p in found]))
+              assert found
+          run('CRT targeted discovery',crt)
+          from vieneu.v3nano import V3NanoVieNeuTTS
+          nano=run('Nano constructor/download',lambda:V3NanoVieNeuTTS(steps=8,threads=2))
+          audio=run('Nano inference',lambda:nano.infer('Xin chào, đây là kiểm tra giọng nói.',voice='Minh Quân',steps=8,sway=-1))
+          nano.save(audio,str(root/'nano.wav'));del nano
+          import gc;gc.collect()
+          from local_vieneu import LocalVieneu
+          turbo=run('Turbo constructor/download',lambda:LocalVieneu(backend='onnx',device='cpu',precision='fp32',threads=2))
+          audio=run('Turbo inference',lambda:turbo.infer('Xin chào, đây là kiểm tra giọng nói.',voice='Mai Anh'))
+          turbo.save(audio,str(root/'turbo.wav'))
+          audio=run('Turbo cloning',lambda:turbo.infer('Kiểm tra mẫu giọng.',ref_audio=str(root/'turbo.wav'),denoise=False))
+          note('All model stages completed')
+          '@ | Set-Content -Encoding utf8 "${{ runner.temp }}/voice-diagnostic.py"
+          python "${{ runner.temp }}/voice-diagnostic.py"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
