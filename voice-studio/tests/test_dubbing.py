@@ -9,7 +9,7 @@ from test_app import studio  # noqa: F401
 @pytest.fixture
 def movie(tmp_path):
     path = tmp_path / 'source.mp4'
-    subprocess.run(['ffmpeg', '-v', 'error', '-f', 'lavfi', '-i', 'color=c=blue:s=128x96:r=10:d=4', '-f', 'lavfi', '-i', 'sine=frequency=440:duration=4', '-c:v', 'libx264', '-c:a', 'aac', '-shortest', '-y', str(path)], check=True)
+    subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-f', 'lavfi', '-i', 'color=c=blue:s=128x96:r=10:d=4', '-f', 'lavfi', '-i', 'sine=frequency=440:duration=4', '-c:v', 'libx264', '-c:a', 'aac', '-shortest', '-y', str(path)], check=True)
     return path
 
 
@@ -21,7 +21,7 @@ def test_real_upload_mux_preserves_video_and_rejects_lost_words(studio, movie):
     assert video['has_audio'] and 3.9 <= video['duration'] <= 4.1
     assert client.get('/api/videos').json()['items'][0]['id'] == video['id']
     audio = root / 'audio' / 'test.wav'
-    subprocess.run(['ffmpeg', '-v', 'error', '-f', 'lavfi', '-i', 'sine=frequency=880:duration=1', '-y', str(audio)], check=True)
+    subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-f', 'lavfi', '-i', 'sine=frequency=880:duration=1', '-y', str(audio)], check=True)
     work = root / 'parts' / 'test'
     work.mkdir()
     for mix in (False, True):
@@ -30,7 +30,7 @@ def test_real_upload_mux_preserves_video_and_rejects_lost_words(studio, movie):
         output = root / 'audio' / 'test.mp4'
         assert abs(inspect_video(output)['duration'] - 4) < .1
         def video_hash(path):
-            return subprocess.check_output(['ffmpeg', '-v', 'error', '-i', str(path), '-map', '0:v:0', '-c', 'copy', '-f', 'hash', '-'])
+            return subprocess.check_output(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(path), '-map', '0:v:0', '-c', 'copy', '-f', 'hash', '-'])
         assert video_hash(movie) == video_hash(output)
     with pytest.raises(ValueError, match='không tự cắt'):
         mux_video(job, audio, work, root, 4)

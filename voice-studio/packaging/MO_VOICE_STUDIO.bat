@@ -2,6 +2,8 @@
 setlocal
 cd /d "%~dp0"
 set "PATH=%~dp0runtime;%~dp0ffmpeg\bin;%PATH%"
+set "PYTHONHOME="
+set "PYTHONPATH="
 set "PYTHONNOUSERSITE=1"
 set "PYTHONUTF8=1"
 set "VOICE_STUDIO_DATA_DIR=%~dp0voice-studio\.data"

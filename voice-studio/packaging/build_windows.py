@@ -65,6 +65,8 @@ def verify_offline(root):
     runtime = root/'runtime/python.exe'
     app = root/'voice-studio'
     env = dict(os.environ, PATH=str(root/'ffmpeg/bin')+os.pathsep+os.environ['PATH'], PYTHONNOUSERSITE='1', PYTHONUTF8='1', VOICE_STUDIO_DATA_DIR=str(app/'.data'), HF_HOME=str(app/'.data/models/cache'), HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1', VOICE_STUDIO_PORTABLE='1')
+    env.pop('PYTHONHOME', None)
+    env.pop('PYTHONPATH', None)
     subprocess.run([str(runtime), str(SOURCE/'packaging/smoke_portable.py'), str(app)], check=True, env=env, cwd=app, timeout=600)
 
 

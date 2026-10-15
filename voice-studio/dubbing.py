@@ -2,7 +2,7 @@
 import json
 import math
 import subprocess
-import threading
+import time
 from pathlib import Path
 
 
@@ -19,7 +19,7 @@ def inspect_video(path):
 
 
 def run_ffmpeg(command, work, duration, start, end, phase, timeout=21600):
-    """Use FFmpeg's processed timestamp, never a simulated percentage."""
+    """Poll real FFmpeg timestamps without blocking on Windows pipe EOF."""
     progress = work / 'progress.json'
     def update(value):
         try:
@@ -40,25 +40,44 @@ def run_ffmpeg(command, work, duration, start, end, phase, timeout=21600):
         except FileNotFoundError:
             pass
     update(start)
-    with subprocess.Popen(command[:-1]+['-progress', 'pipe:1', '-nostats', command[-1]], stdout=subprocess.PIPE, text=True, encoding='utf-8', errors='replace') as process:
-        timer = threading.Timer(timeout, process.kill)
-        timer.daemon = True
-        timer.start()
+    status_file = work / 'ffmpeg-status.txt'
+    status_file.unlink(missing_ok=True)
+    # Windows can keep a progress pipe open after FFmpeg finishes. A sidecar
+    # file avoids waiting for pipe EOF and still reports real output timestamps.
+    args = command[:-1]+['-progress', str(status_file), '-nostats', command[-1]]
+    with subprocess.Popen(args, stdout=subprocess.DEVNULL) as process:
+        started = time.monotonic()
+        last = start
+        def read_status():
+            nonlocal last
+            try:
+                with status_file.open('rb') as source:
+                    source.seek(0, 2)
+                    source.seek(max(0, source.tell()-8192))
+                    lines = source.read().decode('utf-8', errors='replace').splitlines()
+                for line in reversed(lines):
+                    if line.startswith('out_time_us='):
+                        seconds = int(line.split('=', 1)[1])/1000000
+                        value = max(last, min(end, start+int((end-start)*seconds/max(duration,.001))))
+                        if value != last:
+                            update(value)
+                            last = value
+                        break
+            except (OSError, ValueError):
+                pass
         try:
-            for line in process.stdout:
-                if line.startswith('out_time_us='):
-                    try:
-                        seconds = int(line.strip().split('=', 1)[1])/1000000
-                        update(min(end, start+int((end-start)*seconds/max(duration, .001))))
-                    except ValueError:
-                        pass
-            if process.wait():
+            while process.poll() is None:
+                read_status()
+                if time.monotonic()-started > timeout:
+                    raise subprocess.TimeoutExpired(args, timeout)
+                time.sleep(.15)
+            read_status()
+            if process.returncode:
                 raise subprocess.CalledProcessError(process.returncode, command)
         finally:
-            timer.cancel()
             if process.poll() is None:
                 process.kill()
-                process.wait()
+                process.wait(timeout=10)
     update(end)
 
 
