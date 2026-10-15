@@ -8,6 +8,7 @@ import tempfile
 
 
 def child(report):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     import pytest
     state = {'current': None, 'passed': 0, 'failed': [], 'skipped': 0}
     def save():
