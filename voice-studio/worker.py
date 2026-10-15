@@ -1,47 +1,131 @@
-"""One inference per process: models are released when the process exits."""
+"""One loaded model per long job, reusable chunk checkpoints, bounded PCM output."""
 import json
 import os
 import subprocess
 import sys
+import time
+import wave
 from pathlib import Path
+
+from narration import PCMWriter, PROFILES, split_script
 
 DATA = Path(os.environ['VOICE_STUDIO_DATA_DIR'])
 LANGUAGES = {'en-US': 'English', 'en-GB': 'English', 'ja': 'Japanese', 'ko': 'Korean', 'zh': 'Chinese', 'fr': 'French', 'de': 'German', 'es': 'Spanish', 'it': 'Italian', 'pt': 'Portuguese', 'ru': 'Russian'}
 
 
-def render(job):
+def write_state(path, data):
+    temporary = path.with_suffix('.tmp')
+    temporary.write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
+    for attempt in range(10):
+        try:
+            temporary.replace(path)
+            return
+        except PermissionError:
+            if attempt == 9:
+                raise
+            time.sleep(0.05)
+
+
+def load_synthesizer(job):
     import soundfile as sf
-    output = DATA / 'audio' / (job['id'] + '.raw.wav')
     if job['engine'] == 'vieneu':
         from local_vieneu import LocalVieneu
-        model = LocalVieneu(backend='onnx', threads=int(os.environ.get('OMP_NUM_THREADS', '4')))
-        if job.get('speaker'):
-            samples = model.infer(job['text'], voice=job['speaker'])
+        precision = 'int8' if job.get('quality') == 'fast' else 'fp32'
+        if precision == 'int8':
+            from hardware import supports_int8
+            if not supports_int8():
+                raise RuntimeError('CPU không hỗ trợ VNNI cho chế độ nhanh.')
+        model = LocalVieneu(backend='onnx', precision=precision, threads=int(os.environ.get('OMP_NUM_THREADS', '4')))
+        # VieNeu caches reference encoding once for subsequent chunks.
+        options = {'voice': job['speaker']} if job.get('speaker') else {'ref_audio': str(DATA / 'voices' / (job['voice_id'] + '.wav')), 'denoise': False}
+        def synthesize(text, output):
+            model.save(model.infer(text, **options), str(output))
+        return synthesize
+    import torch
+    from qwen_tts import Qwen3TTSModel
+    from huggingface_hub import snapshot_download
+    torch.set_num_threads(int(os.environ.get('OMP_NUM_THREADS', '4')))
+    gpu = torch.cuda.is_available()
+    suffix = 'Base' if job['engine'] == 'qwen_clone' else 'CustomVoice'
+    model_path = snapshot_download(f'Qwen/Qwen3-TTS-12Hz-0.6B-{suffix}', local_files_only=True)
+    model = Qwen3TTSModel.from_pretrained(model_path, device_map='cuda:0' if gpu else 'cpu', dtype=torch.bfloat16 if gpu else torch.float32, attn_implementation='sdpa')
+    prompt = None
+    if job['engine'] == 'qwen_clone':
+        voice = json.loads((DATA / 'voices' / (job['voice_id'] + '.json')).read_text(encoding='utf-8'))
+        reference_text = voice.get('transcript', '').strip()
+        prompt = model.create_voice_clone_prompt(ref_audio=str(DATA / 'voices' / (job['voice_id'] + '.wav')), ref_text=reference_text or None, x_vector_only_mode=not bool(reference_text))
+    def synthesize(text, output):
+        options = {'text': text, 'language': LANGUAGES[job['language']], 'max_new_tokens': 2048}
+        if job.get('quality') == 'fast':
+            options.update(do_sample=False, subtalker_dosample=False)
+        if prompt is not None:
+            samples, rate = model.generate_voice_clone(**options, voice_clone_prompt=prompt)
         else:
-            samples = model.infer(job['text'], ref_audio=str(DATA / 'voices' / (job['voice_id'] + '.wav')), denoise=False)
-        model.save(samples, str(output))
-    else:
-        import torch
-        from qwen_tts import Qwen3TTSModel
-        from huggingface_hub import snapshot_download
-        torch.set_num_threads(int(os.environ.get('OMP_NUM_THREADS', '4')))
-        gpu = torch.cuda.is_available()
-        suffix = 'Base' if job['engine'] == 'qwen_clone' else 'CustomVoice'
-        model_path = snapshot_download(f'Qwen/Qwen3-TTS-12Hz-0.6B-{suffix}', local_files_only=True)
-        model = Qwen3TTSModel.from_pretrained(model_path, device_map='cuda:0' if gpu else 'cpu', dtype=torch.bfloat16 if gpu else torch.float32, attn_implementation='sdpa')
-        if job['engine'] == 'qwen_clone':
-            voice = json.loads((DATA / 'voices' / (job['voice_id'] + '.json')).read_text(encoding='utf-8'))
-            reference_text = voice.get('transcript', '').strip()
-            samples, rate = model.generate_voice_clone(text=job['text'], language=LANGUAGES[job['language']], ref_audio=str(DATA / 'voices' / (job['voice_id'] + '.wav')), ref_text=reference_text or None, x_vector_only_mode=not bool(reference_text), max_new_tokens=2048)
-        else:
-            samples, rate = model.generate_custom_voice(text=job['text'], language=LANGUAGES[job['language']], speaker=job['speaker'], max_new_tokens=2048)
+            samples, rate = model.generate_custom_voice(**options, speaker=job['speaker'])
         sf.write(str(output), samples[0], rate)
+    return synthesize
+
+
+def render(job, synthesize=None):
+    work = DATA / 'parts' / job['id']
+    work.mkdir(parents=True, exist_ok=True)
+    segments = split_script(job['text'])
+    if not any(s.text for s in segments):
+        raise ValueError('Không có nội dung đọc sau khi xử lý ký hiệu nhấn/nghỉ.')
+    maximum = job.get('max_minutes', 180) * 60
+    assembly = work / 'assembled.wav'
+    writer = PCMWriter(assembly, max_seconds=maximum)
+    started = time.monotonic()
+    completed = 0
+    clipped = False
+    profile_speed, default_pause = PROFILES[job.get('delivery', 'natural')]
+    gap = job.get('paragraph_pause', default_pause)
+    try:
+        for index, segment in enumerate(segments):
+            if (work / 'cancel.flag').exists():
+                raise InterruptedError('Tác vụ đã dừng; các đoạn đã tạo được giữ để tiếp tục.')
+            if segment.text:
+                part = work / f'{index:06d}.wav'
+                if not part.exists():
+                    if synthesize is None:
+                        synthesize = load_synthesizer(job)
+                    raw = work / 'raw.wav'
+                    synthesize(segment.text, raw)
+                    temporary = work / 'normalized.wav'
+                    tempo = job['speed'] * profile_speed * (0.94 if segment.emphasis else 1)
+                    gain = 1.12 if segment.emphasis else 1
+                    subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(raw), '-vn', '-ac', '1', '-ar', '24000', '-af', f'atempo={tempo},volume={gain},alimiter=limit=0.95', '-codec:a', 'pcm_s16le', '-y', str(temporary)], check=True, timeout=120)
+                    with wave.open(str(temporary)) as audio:
+                        if audio.getnframes() == 0:
+                            raise ValueError('Mô hình trả đoạn âm thanh rỗng.')
+                    temporary.replace(part)
+                    raw.unlink(missing_ok=True)
+                clipped = writer.append(part)
+                completed = index + 1
+                if not clipped:
+                    writer.silence(gap)
+            else:
+                writer.silence(segment.pause)
+                completed = index + 1
+            duration = writer.frames / writer.rate
+            elapsed = time.monotonic() - started
+            write_state(work / 'progress.json', {'completed': completed, 'total': len(segments), 'audio_seconds': duration, 'elapsed_seconds': round(elapsed, 1), 'progress': min(99, round(100 * completed / len(segments))), 'phase': f'Đã xử lý {completed}/{len(segments)} đoạn'})
+            if writer.frames >= writer.limit:
+                clipped = completed < len(segments) or clipped
+                break
+    finally:
+        writer.close()
+    if (work / 'cancel.flag').exists():
+        raise InterruptedError('Tác vụ đã dừng.')
     destination = DATA / 'audio' / f"{job['id']}.{job['format']}"
-    command = ['ffmpeg', '-nostdin', '-v', 'error', '-i', str(output), '-af', f"atempo={job['speed']}", '-y']
-    if job['format'] == 'mp3':
-        command += ['-codec:a', 'libmp3lame', '-b:a', '192k']
-    subprocess.run(command + [str(destination)], check=True, timeout=120)
-    output.unlink(missing_ok=True)
+    pending = work / ('finished.' + job['format'])
+    if job['format'] == 'wav':
+        assembly.replace(pending)
+    else:
+        subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(assembly), '-codec:a', 'libmp3lame', '-b:a', '192k', '-y', str(pending)], check=True, timeout=3600)
+    pending.replace(destination)
+    assembly.unlink(missing_ok=True)
+    write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100})
 
 
 if __name__ == '__main__':

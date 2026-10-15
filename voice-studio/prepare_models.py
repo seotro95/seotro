@@ -12,16 +12,20 @@ os.environ.setdefault('OMP_NUM_THREADS', '4')
 
 def main():
     parser = argparse.ArgumentParser(description='Download local Voice Studio models')
-    parser.add_argument('engine', choices=['vieneu', 'qwen', 'qwen_clone', 'all'])
+    parser.add_argument('engine', choices=['vieneu', 'qwen', 'qwen_clone', 'vieneu_fast', 'all'])
     args = parser.parse_args()
     engines = ['vieneu', 'qwen', 'qwen_clone'] if args.engine == 'all' else [args.engine]
     (DATA / 'models').mkdir(parents=True, exist_ok=True)
     for engine in engines:
         marker = DATA / 'models' / (engine + '.ready')
         marker.unlink(missing_ok=True)
-        if engine == 'vieneu':
+        if engine in {'vieneu', 'vieneu_fast'}:
+            if engine == 'vieneu_fast':
+                from hardware import supports_int8
+                if not supports_int8():
+                    raise RuntimeError('CPU chưa được xác nhận có VNNI. Dùng vieneu tiêu chuẩn để tránh âm thanh lỗi.')
             from local_vieneu import LocalVieneu
-            model = LocalVieneu(backend='onnx', threads=int(os.environ.get('OMP_NUM_THREADS', '4')))
+            model = LocalVieneu(backend='onnx', precision='int8' if engine == 'vieneu_fast' else 'fp32', threads=int(os.environ.get('OMP_NUM_THREADS', '4')))
             # Exercise preset inference AND cloning graph downloads before declaring ready.
             samples = model.infer('Xin chào, chào mừng bạn đến với phòng thu giọng nói.', voice='Mai Anh')
             sample = DATA / 'models' / 'vieneu-check.wav'

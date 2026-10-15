@@ -1,4 +1,16 @@
-# Kết quả xác minh
+# Voice Studio 2 — xác minh bản nâng cấp
+
+- **18 kiểm thử đạt** trên Linux CPU, bao gồm ranh giới thời lượng PCM đúng 10.800 giây (dùng sample rate thấp cho fixture 3 giờ), giới hạn đầu ra thật qua FFmpeg ở mức 60 giây, kịch bản dài hơn 2.000 ký tự, chia tiếng Việt/Nhật/Hàn, nhấn/nghỉ, dừng/tiếp tục, cache đoạn, chống chạy hai server cùng thư mục dữ liệu, tắt tiến trình khi đóng ứng dụng, hợp đồng HTTP OpenAI Responses và Gemini generateContent, khóa chỉ giữ trong bộ nhớ, từ chối khóa sai. Có một cảnh báo deprecation Starlette/AnyIO.
+- **Âm thanh AI thật**: VieNeu FP32 với nhiều đoạn, nhấn/nghỉ và xuất MP3; VieNeu INT8 trên CPU VNNI, dừng tiến trình rồi tiếp tục, xác minh mtime các đoạn đã có không đổi; Qwen 0.6B chế độ nhanh nhiều đoạn tiếng Anh. Các bản thu giải mã được và có tín hiệu khác 0. Thời lượng lần lượt khoảng 8,07 / 7,63 / 5,82 giây; không dùng các lượt khác nhịp/format này để kết luận tỷ lệ tăng tốc.
+- **Chromium thật**: editor 200.000 ký tự, chọn nhà cung cấp/model, chuyển/nối/viết tiếp kết quả kịch bản, nhịp đọc và giới hạn 180 phút, desktop/mobile không tràn ngang, không có lỗi JavaScript.
+- Chưa chạy AI tạo liên tục đủ 3 giờ. Kiểm thử fixture xác minh bộ ghép, chặn thời lượng và cơ chế tiếp tục, không chứng minh chất lượng giọng hay độ ổn định mô hình suốt một dự án thực tế 3 giờ.
+- API viết được kiểm tra bằng MockTransport, không dùng tài khoản thật vì chưa có API key. Các yêu cầu không xác thực tới OpenAI/Gemini bị proxy cloud từ chối (CONNECT 403). Đã lưu các miền cần truy cập vào cấu hình nháp; chưa xác nhận áp dụng mạng hay thanh toán/model của người dùng. Máy Windows chạy độc lập cần mạng và API key riêng.
+- Windows BAT và dừng cây tiến trình bằng taskkill, macOS, CUDA chưa được chạy trong môi trường Linux này. Chất lượng cảm nhận, âm sắc và độ giống giọng người thật vẫn cần đánh giá bằng nghe.
+
+---
+
+## Kết quả lịch sử bản 1
+
 
 Đã chạy trên Linux x86_64, Python 3.12.14, CPU AMD EPYC (5 vCPU), không có GPU NVIDIA.
 

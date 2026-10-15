@@ -3,24 +3,31 @@ from __future__ import annotations
 import json
 import os
 import shutil
+import signal
 import subprocess
 import sys
 import threading
+import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
-from contextlib import asynccontextmanager
+from contextlib import asynccontextmanager, contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
 
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse, JSONResponse
+from fastapi.exceptions import RequestValidationError
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from starlette.concurrency import run_in_threadpool
 
+from narration import MAX_CHARACTERS, PROFILES, split_script
+import writing
+from hardware import supports_int8
+
 BASE = Path(__file__).resolve().parent
 DATA = Path(os.environ.get('VOICE_STUDIO_DATA_DIR', str(BASE / '.data'))).resolve()
-for folder in ('voices', 'audio', 'jobs', 'models'):
+for folder in ('voices', 'audio', 'jobs', 'models', 'parts'):
     (DATA / folder).mkdir(parents=True, exist_ok=True)
 LANGUAGES = {'vi': 'Tiếng Việt', 'en-US': 'English · US', 'en-GB': 'English · UK', 'ja': '日本語 · Nhật', 'ko': '한국어 · Hàn', 'zh': '中文 · Trung', 'fr': 'Français · Pháp', 'de': 'Deutsch · Đức', 'es': 'Español · Tây Ban Nha', 'it': 'Italiano · Ý', 'pt': 'Português · Bồ Đào Nha', 'ru': 'Русский · Nga'}
 PRESETS = [
@@ -32,20 +39,62 @@ PRESETS = [
     {'id': 'qw-sohee', 'name': 'Sohee', 'engine': 'qwen', 'speaker': 'Sohee', 'languages': list(LANGUAGES)[1:], 'description': 'Giọng nữ · tiếng Hàn bản ngữ'},
     {'id': 'qw-vivian', 'name': 'Vivian', 'engine': 'qwen', 'speaker': 'Vivian', 'languages': list(LANGUAGES)[1:], 'description': 'Giọng nữ · tiếng Trung bản ngữ'},
 ]
+@contextmanager
+def studio_lock():
+    # Prevent a second server from marking a still-running long job interrupted.
+    handle = (DATA / 'server.lock').open('a+b')
+    try:
+        handle.write(b'0')
+        handle.flush()
+        handle.seek(0)
+        try:
+            if os.name == 'nt':
+                import msvcrt
+                msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+            else:
+                import fcntl
+                fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError:
+            raise RuntimeError('Voice Studio đã chạy với thư mục dữ liệu này. Hãy dùng cửa sổ đang mở.') from None
+        yield
+    finally:
+        handle.close()
+
+
 @asynccontextmanager
 async def lifespan(application):
-    # A previous process cannot finish jobs after this local server restarts.
-    for interrupted in records('jobs'):
-        if interrupted.get('status') in {'queued', 'running'}:
-            interrupted.update(status='error', error='Ứng dụng đã khởi động lại trước khi hoàn tất. Bạn có thể tạo lại bản thu.')
-            write_json(DATA / 'jobs' / f"{interrupted['id']}.json", interrupted)
-    yield
+    global executor
+    with studio_lock():
+        shutdown_event.clear()
+        executor = ThreadPoolExecutor(max_workers=1)
+        for interrupted in records('jobs'):
+            if interrupted.get('status') in {'queued', 'running', 'cancelling'}:
+                interrupted.update(status='error', error='Ứng dụng đã khởi động lại trước khi hoàn tất. Bạn có thể tiếp tục từ các đoạn đã tạo.')
+                write_json(DATA / 'jobs' / f"{interrupted['id']}.json", interrupted)
+        try:
+            yield
+        finally:
+            shutdown_event.set()
+            await run_in_threadpool(executor.shutdown, wait=True, cancel_futures=True)
+            for pending in records('jobs'):
+                if pending.get('status') == 'queued':
+                    pending.update(status='error', error='Ứng dụng đã tắt. Có thể tiếp tục từ Lịch sử.')
+                    write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
+            with writing.KEY_LOCK:
+                writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='1.0.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='2.0.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
+@app.exception_handler(RequestValidationError)
+async def invalid_request(request, error):
+    # Pydantic's default details can echo an invalid API key; return no raw input.
+    return JSONResponse({'detail': 'Dữ liệu không hợp lệ. Kiểm tra giới hạn ký tự, thời lượng và các trường đã nhập.'}, status_code=422)
+
+
 executor = ThreadPoolExecutor(max_workers=1)
 lock = threading.RLock()
+shutdown_event = threading.Event()
 
 
 def now():
@@ -100,7 +149,7 @@ def index():
 
 @app.get('/api/config')
 def config():
-    return {'mode': 'local', 'languages': LANGUAGES, 'max_characters': 2000, 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg'))}
+    return {'mode': 'local', 'languages': LANGUAGES, 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg'))}
 
 
 @app.get('/api/voices')
@@ -158,39 +207,92 @@ def voice_sample(ident: str):
 def delete_voice(ident: str):
     valid_id(ident)
     with lock:
-        if any(j['status'] in {'queued', 'running'} and j.get('voice_id') == ident for j in records('jobs')):
+        if any(j['status'] in {'queued', 'running', 'cancelling'} and j.get('voice_id') == ident for j in records('jobs')):
             raise HTTPException(409, 'Giọng đang được dùng trong hàng đợi. Đợi tác vụ hoàn tất trước khi xóa.')
         for suffix in ('.json', '.wav'):
             (DATA / 'voices' / f'{ident}{suffix}').unlink(missing_ok=True)
 
 
 class Speech(BaseModel):
-    text: str = Field(min_length=1, max_length=2000)
+    text: str = Field(min_length=1, max_length=MAX_CHARACTERS)
     voice_id: str = Field(min_length=1, max_length=128)
     language: str = 'vi'
     speed: float = Field(default=1, ge=0.7, le=1.4)
     format: str = 'wav'
+    max_minutes: int = Field(default=180, ge=1, le=180)
+    delivery: str = 'natural'
+    paragraph_pause: float = Field(default=0.3, ge=0, le=3)
+    quality: str = Field(default='standard', pattern='^(standard|fast)$')
+
+
+def stop_worker(process, force=False):
+    if process.poll() is not None:
+        return
+    if os.name == 'nt':
+        # Kill FFmpeg descendants too; keep chunk checkpoints on disk.
+        try:
+            stopped = subprocess.run(['taskkill', '/PID', str(process.pid), '/T', '/F'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=15, check=False)
+            if stopped.returncode and process.poll() is None:
+                process.kill()
+        except (OSError, subprocess.TimeoutExpired):
+            process.kill()
+    else:
+        try:
+            os.killpg(process.pid, signal.SIGKILL if force else signal.SIGTERM)
+        except ProcessLookupError:
+            pass
+
+
+def execute_worker(path, env, work):
+    # No 30-minute cut-off: three hours of audio may take days on a slow CPU.
+    log = DATA / 'jobs' / (path.stem + '.log')
+    with log.open('w', encoding='utf-8') as errors:
+        process = subprocess.Popen([sys.executable, str(BASE / 'worker.py'), str(path)], env=env, stdout=subprocess.DEVNULL, stderr=errors, **({'creationflags': subprocess.CREATE_NEW_PROCESS_GROUP} if os.name == 'nt' else {'start_new_session': True}))
+        started = time.monotonic()
+        try:
+            while process.poll() is None:
+                if (work / 'cancel.flag').exists() or shutdown_event.is_set():
+                    stop_worker(process)
+                    try:
+                        process.wait(timeout=10)
+                    except subprocess.TimeoutExpired:
+                        stop_worker(process, force=True)
+                        process.wait()
+                    return -2
+                if time.monotonic() - started > 7 * 86400:
+                    raise TimeoutError('Tác vụ vượt giới hạn xử lý 7 ngày. Các đoạn đã tạo được giữ để tiếp tục.')
+                time.sleep(0.3)
+            return process.returncode
+        finally:
+            if process.poll() is None:
+                stop_worker(process, force=True)
+                process.wait()
 
 
 def run_job(ident):
     path = DATA / 'jobs' / f'{ident}.json'
+    work = DATA / 'parts' / ident
+    work.mkdir(parents=True, exist_ok=True)
     with lock:
         job = read_json(path)
+        if job['status'] != 'queued' or (work / 'cancel.flag').exists():
+            return
         job['status'] = 'running'
         write_json(path, job)
     try:
         env = dict(os.environ, VOICE_STUDIO_DATA_DIR=str(DATA), HF_HOME=str(DATA / 'models' / 'cache'), HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1', OMP_NUM_THREADS=os.environ.get('VOICE_STUDIO_THREADS', '4'))
-        completed = subprocess.run([sys.executable, str(BASE / 'worker.py'), str(path)], env=env, capture_output=True, timeout=1800, text=True, check=False)
-        if completed.returncode:
-            # Keep diagnostics local. Client gets a short actionable error, not a traceback.
-            (DATA / 'jobs' / f'{ident}.log').write_text(completed.stderr[-20000:], encoding='utf-8')
-            raise RuntimeError('Không tạo được âm thanh. Kiểm tra mô hình đã tải đầy đủ và nhật ký tác vụ trên máy chủ.')
-        output = DATA / 'audio' / f"{ident}.{job['format']}"
-        if not output.exists() or output.stat().st_size < 100:
-            raise RuntimeError('Mô hình không tạo ra âm thanh hợp lệ.')
-        job.update(status='done', url=f'/api/audio/{ident}', finished_at=now())
-    except subprocess.TimeoutExpired:
-        job.update(status='error', error='Tác vụ vượt 30 phút trên máy này. Rút ngắn văn bản hoặc dùng GPU.')
+        code = execute_worker(path, env, work)
+        if code == -2 or (work / 'cancel.flag').exists():
+            job.update(status='cancelled', error='Đã dừng. Bạn có thể tiếp tục từ các đoạn đã tạo.')
+        elif code:
+            raise RuntimeError('Không tạo được âm thanh. Kiểm tra nhật ký tác vụ; có thể bấm Tiếp tục để giữ các đoạn đã tạo.')
+        else:
+            output = DATA / 'audio' / f"{ident}.{job['format']}"
+            if not output.exists() or output.stat().st_size < 100:
+                raise RuntimeError('Mô hình không tạo ra âm thanh hợp lệ.')
+            result = read_json(work / 'result.json')
+            job.update(result)
+            job.update(status='done', url=f'/api/audio/{ident}', finished_at=now())
     except Exception as exc:
         job.update(status='error', error=str(exc))
     with lock:
@@ -199,7 +301,7 @@ def run_job(ident):
 
 @app.post('/api/speech', status_code=202)
 def speech(body: Speech):
-    if not body.text.strip() or body.language not in LANGUAGES or body.format not in {'wav', 'mp3'}:
+    if not body.text.strip() or body.language not in LANGUAGES or body.format not in {'wav', 'mp3'} or body.delivery not in PROFILES:
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
     voice = next((v for v in PRESETS + records('voices') if v['id'] == body.voice_id), None)
     if not voice or body.language not in voice['languages']:
@@ -207,11 +309,20 @@ def speech(body: Speech):
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
     if not (DATA / 'models' / f'{engine}.ready').exists():
         raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Chạy lệnh tải mô hình trong hướng dẫn cài đặt.')
+    try:
+        segments = split_script(body.text)
+        if not any(segment.text for segment in segments):
+            raise ValueError('Nhập nội dung đọc, không chỉ ký hiệu nghỉ.')
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
+    if body.quality == 'fast' and engine == 'vieneu':
+        if not supports_int8() or not (DATA / 'models' / 'vieneu_fast.ready').exists():
+            raise HTTPException(503, 'Chế độ nhanh tiếng Việt cần tải vieneu_fast trên CPU có VNNI. Dùng chế độ Tiêu chuẩn hoặc chạy prepare_models.py vieneu_fast.')
     with lock:
-        if sum(j['status'] in {'queued', 'running'} for j in records('jobs')) >= 4:
+        if sum(j['status'] in {'queued', 'running', 'cancelling'} for j in records('jobs')) >= 4:
             raise HTTPException(429, 'Hàng đợi đã có 4 tác vụ. Hãy đợi trước khi tạo thêm.')
         ident = uuid.uuid4().hex
-        job = {**body.model_dump(), 'text': body.text.strip(), 'id': ident, 'voice_name': voice['name'], 'engine': engine, 'speaker': voice.get('speaker'), 'status': 'queued', 'created_at': now()}
+        job = {**body.model_dump(), 'text': body.text.strip(), 'id': ident, 'voice_name': voice['name'], 'engine': engine, 'speaker': voice.get('speaker'), 'status': 'queued', 'total': len(segments), 'completed': 0, 'progress': 0, 'created_at': now()}
         write_json(DATA / 'jobs' / f'{ident}.json', job)
         executor.submit(run_job, ident)
     return job
@@ -219,12 +330,12 @@ def speech(body: Speech):
 
 @app.get('/api/history')
 def history():
-    return {'items': sorted(records('jobs'), key=lambda x: x['created_at'], reverse=True)[:100]}
+    return {'items': [job_status(j) for j in sorted(records('jobs'), key=lambda x: x['created_at'], reverse=True)[:100]]}
 
 
 @app.get('/api/jobs/{ident}')
 def get_job(ident: str):
-    return read_json(DATA / 'jobs' / f'{valid_id(ident)}.json')
+    return job_status(read_json(DATA / 'jobs' / f'{valid_id(ident)}.json'))
 
 
 @app.get('/api/audio/{ident}')
@@ -242,7 +353,78 @@ def audio(ident: str):
 def delete_record(ident: str):
     with lock:
         job = get_job(ident)
-        if job['status'] in {'queued', 'running'}:
+        if job['status'] in {'queued', 'running', 'cancelling'}:
             raise HTTPException(409, 'Đợi tác vụ hoàn tất trước khi xóa.')
+        shutil.rmtree(DATA / 'parts' / ident, ignore_errors=True)
         for path in [DATA / 'audio' / f'{ident}.wav', DATA / 'audio' / f'{ident}.mp3', DATA / 'jobs' / f'{ident}.json', DATA / 'jobs' / f'{ident}.log']:
             path.unlink(missing_ok=True)
+
+
+def job_status(job):
+    if job.get('status') in {'running', 'cancelling', 'cancelled', 'error'}:
+        path = DATA / 'parts' / job['id'] / 'progress.json'
+        if path.exists():
+            try:
+                job.update(json.loads(path.read_text(encoding='utf-8')))
+            except (OSError, ValueError):
+                pass
+    return job
+
+
+@app.post('/api/jobs/{ident}/cancel', status_code=202)
+def cancel_job(ident: str):
+    with lock:
+        job = get_job(ident)
+        if job['status'] not in {'queued', 'running', 'cancelling'}:
+            raise HTTPException(409, 'Tác vụ không đang chạy.')
+        work = DATA / 'parts' / ident
+        work.mkdir(parents=True, exist_ok=True)
+        (work / 'cancel.flag').touch()
+        job['status'] = 'cancelled' if job['status'] == 'queued' else 'cancelling'
+        write_json(DATA / 'jobs' / f'{ident}.json', job)
+        return job
+
+
+@app.post('/api/jobs/{ident}/resume', status_code=202)
+def resume_job(ident: str):
+    with lock:
+        job = get_job(ident)
+        if job['status'] not in {'cancelled', 'error'}:
+            raise HTTPException(409, 'Chỉ tiếp tục tác vụ đã dừng hoặc có lỗi.')
+        if sum(j['status'] in {'queued', 'running', 'cancelling'} for j in records('jobs')) >= 4:
+            raise HTTPException(429, 'Hàng đợi đã đầy.')
+        if not job.get('speaker') and not (DATA / 'voices' / f"{job['voice_id']}.json").exists():
+            raise HTTPException(409, 'Mẫu giọng đã bị xóa; không thể tiếp tục tác vụ này.')
+        (DATA / 'parts' / ident / 'cancel.flag').unlink(missing_ok=True)
+        job.update(status='queued')
+        job.pop('error', None)
+        write_json(DATA / 'jobs' / f'{ident}.json', job)
+        executor.submit(run_job, ident)
+        return job
+
+
+@app.get('/api/writing/connections')
+def writing_connections():
+    return {'providers': {provider: bool(writing.get_key(provider)) for provider in writing.ENV_KEYS}, 'defaults': writing.DEFAULT_MODELS}
+
+
+@app.post('/api/writing/connect')
+async def connect_writing(body: writing.Connection):
+    return await writing.verify_connection(body)
+
+
+@app.delete('/api/writing/connections/{provider}', status_code=204)
+def disconnect_writing(provider: str):
+    if provider not in writing.ENV_KEYS:
+        raise HTTPException(422, 'Nhà cung cấp không hợp lệ.')
+    with writing.KEY_LOCK:
+        writing.KEYS.pop(provider, None)
+    if any(os.environ.get(key) for key in writing.ENV_KEYS[provider]):
+        raise HTTPException(409, 'Khóa từ biến môi trường vẫn được cấu hình. Xóa biến môi trường rồi khởi động lại để ngắt hoàn toàn.')
+
+
+@app.post('/api/writing/generate')
+async def write_script(body: writing.WritingRequest):
+    if body.language not in LANGUAGES:
+        raise HTTPException(422, 'Ngôn ngữ chưa được hỗ trợ.')
+    return await writing.generate(body)

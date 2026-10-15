@@ -10,7 +10,7 @@ import app
 
 @pytest.fixture
 def studio(tmp_path, monkeypatch):
-    for folder in ('voices', 'audio', 'jobs', 'models'):
+    for folder in ('voices', 'audio', 'jobs', 'models', 'parts'):
         (tmp_path / folder).mkdir()
     monkeypatch.setattr(app, 'DATA', tmp_path)
     with TestClient(app.app) as client:
@@ -122,11 +122,9 @@ def test_worker_failure_is_persisted(studio):
     _, root = studio
     ident = 'b' * 32
     app.write_json(root / 'jobs' / (ident + '.json'), {'id': ident, 'status': 'queued', 'format': 'wav'})
-    with patch('app.subprocess.run') as run:
-        run.return_value.returncode = 1
-        run.return_value.stderr = 'model unavailable'
+    with patch('app.execute_worker', return_value=1):
         app.run_job(ident)
     result = app.read_json(root / 'jobs' / (ident + '.json'))
     assert result['status'] == 'error'
     assert 'error' in result
-    assert (root / 'jobs' / (ident + '.log')).read_text() == 'model unavailable'
+    assert 'nhật ký' in result['error']
