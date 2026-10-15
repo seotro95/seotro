@@ -84,7 +84,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='2.0.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='2.1.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -404,8 +404,14 @@ def resume_job(ident: str):
 
 
 @app.get('/api/writing/connections')
-def writing_connections():
-    return {'providers': {provider: bool(writing.get_key(provider)) for provider in writing.ENV_KEYS}, 'defaults': writing.DEFAULT_MODELS}
+async def writing_connections():
+    providers = {provider: bool(writing.get_key(provider)) for provider in writing.ENV_KEYS}
+    try:
+        local = await writing.local_status()
+    except HTTPException as error:
+        local = {'connected': False, 'models': [], 'requires_key': False, 'message': error.detail}
+    providers['ollama'] = local['connected']
+    return {'providers': providers, 'local': local, 'defaults': writing.DEFAULT_MODELS}
 
 
 @app.post('/api/writing/connect')

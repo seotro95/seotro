@@ -1,6 +1,6 @@
-# Voice Studio 2 — bản đọc dài, nhấn/nghỉ và AI viết kịch bản
+# Voice Studio 2.1 — AI viết cục bộ không cần API key
 
-Giao diện tiếng Việt cho chuyển văn bản thành lời nói, hồ sơ nhân bản giọng từ mẫu, thư viện giọng, hàng đợi, nghe lại và tải WAV/MP3. Tạo giọng cục bộ không cần API key. Tính năng AI viết kịch bản là tùy chọn, dùng OpenAI/Gemini API qua Internet.
+Giao diện tiếng Việt cho chuyển văn bản thành lời nói, hồ sơ nhân bản giọng từ mẫu, thư viện giọng, hàng đợi, nghe lại và tải WAV/MP3. Tạo giọng cục bộ không cần API key. AI viết kịch bản mặc định dùng Ollama trên máy, không cần tài khoản hoặc API key. OpenAI/Gemini là tùy chọn nâng cao và vẫn yêu cầu khóa riêng.
 
 ## Chức năng
 
@@ -23,15 +23,23 @@ Giao diện tiếng Việt cho chuyển văn bản thành lời nói, hồ sơ n
 3. Bản 2 dùng các thư viện đã có ở bản trước; chạy `start.bat`. Nếu thư viện thiếu, chạy lại `install.bat` và chụp lỗi cuối khi thất bại.
 4. Muốn bật chế độ nhanh tiếng Việt, chạy thêm `download_fast_model.bat`. Chỉ khả dụng trên CPU được xác nhận có AVX-VNNI/AVX-512 VNNI. Nếu máy không hỗ trợ, dùng Tiêu chuẩn.
 
-## Viết lời/kịch bản bằng ChatGPT hoặc Gemini
+## Viết kịch bản không cần API key (mặc định)
 
-Mở **AI viết kịch bản**, chọn OpenAI hoặc Gemini, nhập API key và bấm **Kiểm tra & kết nối**. Key chỉ được giữ trong RAM phía máy chủ, không ghi vào `.data`, Git hoặc localStorage. Tắt/khởi động lại ứng dụng thì cần kết nối lại. Có thể cấu hình `OPENAI_API_KEY`, `GEMINI_API_KEY` hoặc `GOOGLE_API_KEY` trong môi trường thay cho nhập qua giao diện; việc ngắt một key từ môi trường yêu cầu xóa biến đó và khởi động lại.
+1. Tải và cài **Ollama** từ https://ollama.com/download/windows. Mở Ollama sau khi cài.
+2. Trong thư mục Voice Studio, chạy **`setup_local_writer.bat`**. Tệp này tải `qwen3:4b` về máy (vài GB), không đăng nhập và không cần API key. Cần Internet ở bước tải. Máy ít RAM có thể chạy `setup_local_writer.bat qwen3:1.7b` rồi chọn đúng tên model đó trong giao diện.
+3. Chạy `start.bat`, mở **AI viết kịch bản**. Giữ lựa chọn mặc định **AI cục bộ · Ollama · Không cần key**.
+4. Bấm **Kiểm tra AI**, chọn tên mô hình đã tải, nhập yêu cầu và bấm **Viết kịch bản**. Chọn **Đưa sang tạo giọng** hoặc **Thêm vào cuối kịch bản** sau khi sửa nội dung nếu cần.
 
-- Model mặc định: `gpt-4.1-mini` / `gemini-2.5-flash`; có ô đổi tên model nếu tài khoản hoặc dịch vụ thay đổi danh mục.
-- Viết lời, viết lại/thêm nhịp đọc, lập dàn ý; chọn ngôn ngữ và mục tiêu 1–180 phút. **Đưa sang tạo giọng** thay thế nội dung trình đọc; **Thêm vào cuối** nối tiếp nội dung đã có.
-- Một phản hồi API có giới hạn token. Với kịch bản dài, dùng dàn ý/chương và **Viết tiếp**, rồi thêm từng phần; không coi một phản hồi ngắn là đủ kịch bản 3 giờ. Thời lượng mục tiêu khi viết chỉ là ước tính.
-- Khi bấm Viết, chủ đề và nội dung trong ô yêu cầu được gửi đến nhà cung cấp đã chọn. Không gửi mẫu giọng. Tính năng này cần Internet, quyền dùng model và hạn mức API; gói ChatGPT Plus/Gemini trên web không tự cấp hạn mức API.
-- Mô hình tạo giọng vẫn chạy cục bộ với cờ offline; API viết kịch bản là tính năng kết nối mạng riêng. Các miền API: `api.openai.com`, `generativelanguage.googleapis.com`.
+Linux/macOS: cài Ollama theo hướng dẫn chính thức, chạy dịch vụ trên máy rồi chạy `ollama pull qwen3:4b`. API local cố định ở `127.0.0.1:11434`; Voice Studio không cho đổi sang máy chủ bên ngoài. Không dùng `:cloud` trong chế độ cục bộ. Mô hình local được gỡ khỏi RAM sau mỗi phản hồi để dành bộ nhớ cho tạo giọng. Mô hình 4B cần RAM trống và có thể mất vài phút trên CPU; bản 1.7B nhẹ hơn nhưng chất lượng thường thấp hơn. Không hứa chất lượng ngang ChatGPT/Gemini.
+
+Đây là **Qwen qua Ollama**, không phải truy cập ChatGPT/Gemini miễn phí. Sau khi tải đầy đủ mô hình, phần viết có thể chạy không có Internet. Ứng dụng vẫn cần dịch vụ Ollama chạy nền. Nếu chưa cài/mở Ollama hoặc thiếu model, giao diện báo cách xử lý; không yêu cầu bạn nhập khóa cho chế độ này. Tạo giọng vẫn hoạt động nếu không dùng phần viết.
+
+- Viết lời, viết lại/thêm nhịp đọc, lập dàn ý; chọn ngôn ngữ và thời lượng mục tiêu 1–180 phút. **Đưa sang tạo giọng** thay nội dung trình đọc; **Thêm vào cuối** nối tiếp nội dung đã có.
+- Kịch bản dài cần viết tiếp từng chương bằng **Viết tiếp**; một phản hồi có giới hạn token, không được coi một đoạn ngắn là kịch bản đủ 3 giờ.
+
+### Dịch vụ đám mây (không bắt buộc)
+
+OpenAI và Gemini vẫn có trong danh sách cho người muốn dùng tài khoản API riêng. Khi chọn chúng, giao diện mới hiện ô API key. Khóa chỉ giữ trong RAM máy chủ đến khi tắt ứng dụng; không ghi ra Git, dữ liệu hay localStorage. Có thể dùng biến môi trường `OPENAI_API_KEY`, `GEMINI_API_KEY` hoặc `GOOGLE_API_KEY`. Các lựa chọn này vẫn gửi chủ đề/nội dung tới nhà cung cấp khi bấm Viết, cần Internet và có thể tính phí; gói web không tự cấp hạn mức API. Chọn Ollama nếu muốn hoàn toàn không cần khóa. Model cloud mặc định `gpt-4.1-mini` / `gemini-2.5-flash` có thể đổi theo danh mục tài khoản.
 
 ## Tạo nhanh và dự án 3 giờ
 

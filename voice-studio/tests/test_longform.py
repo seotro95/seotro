@@ -112,6 +112,8 @@ def test_writing_api_contract_and_in_memory_key(studio, monkeypatch, provider):
         monkeypatch.delenv(key, raising=False)
     seen = []
     def respond(request):
+        if request.url.host == '127.0.0.1':
+            return httpx.Response(200, json={'models': []})
         seen.append(request)
         if request.method == 'GET':
             return httpx.Response(200, json={'data': [], 'models': []})

@@ -1,3 +1,11 @@
+# Voice Studio 2.1 — viết cục bộ không cần khóa
+
+- **22 kiểm thử đạt**, gồm viết bằng Ollama với toàn bộ API key unset, xác nhận không có header xác thực và mọi yêu cầu local chỉ tới loopback, xử lý Ollama chưa mở/model chưa tải, từ chối model cloud/URL ngoài, phản hồi rỗng và giới hạn token. Kiểm thử hợp đồng dùng MockTransport. Ngoài ra đã chạy Ollama 0.40.4 thật và viết qua endpoint Voice Studio khi không có khóa, dùng GGUF chính thức Qwen3 0.6B Q8_0 nhập cục bộ dưới tên studio-local-test. Archive Ollama được kiểm tra SHA256 với sha256sum chính thức; GGUF được kiểm tra SHA256 với LFS oid chính thức. Chưa đánh giá mô hình mặc định Qwen3 4B hoặc chất lượng kịch bản dài; mô hình thử nhỏ có thể lặp lời và ký hiệu được làm sạch trước khi chuyển đọc.
+- Chromium: mặc định chọn Ollama, ẩn trường API key, kiểm tra kết nối không gửi khóa, viết và chuyển nội dung sang đọc, đổi qua cloud hiện trường khóa rồi quay lại local ẩn khóa; desktop/mobile không lỗi JavaScript. Ngoài kiểm thử UI mô phỏng, đã chạy trình duyệt thật với Ollama thật: tự chọn model local có sẵn, ô key ẩn, viết 306 ký tự và chuyển đúng nội dung sang trình đọc mà không nhập khóa.
+- Windows BAT và việc cài Ollama trên Windows chưa được thực thi trên máy Linux này. Người dùng cần cài/mở Ollama và tải mô hình một lần; phần viết không tự chạy khi chưa có runtime/model.
+
+---
+
 # Voice Studio 2 — xác minh bản nâng cấp
 
 - **18 kiểm thử đạt** trên Linux CPU, bao gồm ranh giới thời lượng PCM đúng 10.800 giây (dùng sample rate thấp cho fixture 3 giờ), giới hạn đầu ra thật qua FFmpeg ở mức 60 giây, kịch bản dài hơn 2.000 ký tự, chia tiếng Việt/Nhật/Hàn, nhấn/nghỉ, dừng/tiếp tục, cache đoạn, chống chạy hai server cùng thư mục dữ liệu, tắt tiến trình khi đóng ứng dụng, hợp đồng HTTP OpenAI Responses và Gemini generateContent, khóa chỉ giữ trong bộ nhớ, từ chối khóa sai. Có một cảnh báo deprecation Starlette/AnyIO.
