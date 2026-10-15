@@ -12,7 +12,7 @@ import zipfile
 
 SOURCE = Path(__file__).resolve().parents[1]
 FFMPEG_BASE = 'https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/'
-FFMPEG_ASSET = 'ffmpeg-master-latest-win64-gpl.zip'
+FFMPEG_ASSET = 'ffmpeg-n8.1-latest-win64-gpl-8.1.zip'
 
 
 def download_verified_ffmpeg(target, downloads):

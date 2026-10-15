@@ -1,6 +1,7 @@
 """Local video inspection and fast narration muxing; video frames are copied."""
 import json
 import math
+import os
 import subprocess
 import time
 from pathlib import Path
@@ -45,7 +46,10 @@ def run_ffmpeg(command, work, duration, start, end, phase, timeout=21600):
     # Windows can keep a progress pipe open after FFmpeg finishes. A sidecar
     # file avoids waiting for pipe EOF and still reports real output timestamps.
     args = command[:-1]+['-progress', str(status_file), '-nostats', command[-1]]
-    with subprocess.Popen(args, stdout=subprocess.DEVNULL) as process:
+    if os.environ.get('CI') == 'true' and '-v' in args:
+        args[args.index('-v')+1] = 'info'
+    error_log = work / 'ffmpeg-errors.log'
+    with error_log.open('ab') as errors, subprocess.Popen(args, stdout=subprocess.DEVNULL, stderr=errors) as process:
         started = time.monotonic()
         last = start
         def read_status():
@@ -74,6 +78,14 @@ def run_ffmpeg(command, work, duration, start, end, phase, timeout=21600):
             read_status()
             if process.returncode:
                 raise subprocess.CalledProcessError(process.returncode, command)
+        except subprocess.SubprocessError as exc:
+            diagnostic = error_log.read_bytes()[-5000:].decode('utf-8', errors='replace')
+            try:
+                diagnostic += '\nProgress: '+status_file.read_bytes()[-1200:].decode('utf-8', errors='replace')
+            except OSError:
+                pass
+            exc.add_note(diagnostic)
+            raise
         finally:
             if process.poll() is None:
                 process.kill()
@@ -94,6 +106,6 @@ def mux_video(job, audio, work, data, audio_seconds):
         filters += ';[0:a:0]volume=0.15[background];[dub][background]amix=inputs=2:duration=first:normalize=0[out]'
     else:
         filters += ';[dub]anull[out]'
-    run_ffmpeg(['ffmpeg', '-nostdin', '-v', 'error', '-protocol_whitelist', 'file,pipe', '-format_whitelist', 'mov,matroska,webm', '-i', str(source), '-i', str(audio), '-filter_complex', filters, '-map', '0:v:0', '-map', '[out]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-t', str(meta['duration']), '-movflags', '+faststart', '-y', str(temporary)], work, meta['duration'], 86, 99, 'Đang xuất video MP4')
+    run_ffmpeg(['ffmpeg', '-nostdin', '-v', 'error', '-protocol_whitelist', 'file,pipe', '-format_whitelist', 'mov,matroska,webm', '-i', str(source), '-i', str(audio), '-filter_complex', filters, '-map', '0:v:0', '-map', '[out]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-t', str(meta['duration']), '-movflags', '+faststart', '-y', str(temporary)], work, meta['duration'], 86, 99, 'Đang xuất video MP4', timeout=max(60,meta['duration']*2))
     destination = data / 'audio' / (job['id'] + '.mp4')
     temporary.replace(destination)
