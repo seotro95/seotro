@@ -1,25 +1,29 @@
-# Video Studio VN 0.2.1 — không cần API key
+# Video Studio VN 0.3.0
 
-Ứng dụng web tiếng Việt chạy trên máy Windows. Dịch phụ đề, nhận dạng lời nói và tạo giọng đọc bằng model CPU trên máy của bạn. Không cần tài khoản, API key hay dịch vụ AI bên ngoài để xử lý nội dung.
+Ứng dụng web tiếng Việt chạy trên máy Windows. Dịch phụ đề, nhận dạng lời nói và tạo giọng đọc bằng model CPU trên máy của bạn. Các chức năng cục bộ không cần tài khoản hay API key. Giọng Edge online không cần key; kết nối GPT/Gemini trực tiếp dùng API key tùy chọn.
 
 ## Cài đặt và chạy
 
-1. Giải nén bản ZIP **0.2.1** vào một thư mục mới. Nếu bản cũ bị lỗi cài với Python 3.15, tải ZIP 0.2.1 và chạy bộ khởi động mới.
+1. Giải nén bản ZIP **0.3.0** vào một thư mục mới. Nếu bản cũ bị lỗi cài với Python 3.15, tải ZIP 0.3.0 và chạy bộ khởi động mới.
 2. Cài Python 3.11 hoặc 3.12 bản Windows 64-bit trên Windows 10/11. Các engine yêu cầu máy 64-bit và CPU tương thích. Nên có ít nhất 8 GB RAM khi dùng model nhẹ.
 3. Đặt `ffmpeg.exe` và `ffprobe.exe` cạnh `khoi_dong.bat` hoặc thêm FFmpeg vào PATH. Có thể dùng các file FFmpeg bạn đã cung cấp; không cần `ffplay.exe`.
 4. Chạy `khoi_dong.bat`. Tool tự chọn Python 3.11/3.12 Windows x64, kiểm tra hoặc tạo môi trường riêng, rồi cài các engine còn thiếu. Khi môi trường cũ dùng Python 3.15/32-bit, nó được đổi tên thành `.venv-backup-...` trước khi tạo lại; thư viện và model trong `data/` được giữ nguyên. Cửa sổ sẽ báo tiến trình cài thư viện, sau đó mở trình duyệt. Giữ cửa sổ này trong lúc sử dụng.
 5. Nhập video/audio/SRT → tạo hoặc dịch phụ đề → tạo giọng đọc → **Xuất video**.
 
-Lần đầu cài thư viện và tải model cần Internet, vài phút và vài trăm MB đến vài GB tùy model. Các lần sau model được dùng lại. Cắt/render video, sửa SRT, dịch, tạo voice và nhận dạng có thể chạy offline khi các model cần dùng đã tải đủ. Tải video Internet và kiểm tra bản cập nhật vẫn cần mạng.
+Lần đầu cài thư viện và tải model cần Internet, vài phút và vài trăm MB đến vài GB tùy model. Các lần sau model được dùng lại. Cắt/render video, sửa SRT, dịch, tạo voice Piper và nhận dạng có thể chạy offline khi các model cần dùng đã tải đủ. Tải video Internet và kiểm tra bản cập nhật vẫn cần mạng.
 
 ## Tự tải model
 
 - **Phụ đề → Tạo phụ đề**: chọn ngôn ngữ và Whisper Tiny/Base/Small/Medium. Tool tự tải model nhận dạng còn thiếu. Tiny nhẹ và nhanh; các model lớn hơn thường chính xác hơn nhưng cần nhiều RAM/thời gian. Giữ tiếng gốc khi nhận dạng.
 - **Phụ đề → Dịch phụ đề**: chọn SRT, ngôn ngữ nguồn hoặc tự nhận dạng, rồi ngôn ngữ đích. Tool tự tải model dịch cần dùng. Một số cặp dịch qua tiếng Anh. Mốc thời gian và số đoạn được giữ nguyên; kết quả là SRT mới.
-- **Giọng đọc**: chọn giọng Việt VAIS hoặc Anh Lessac, nhập nội dung và tốc độ. Piper tự tải model một lần, sau đó tạo WAV trên CPU. Bản này có một giọng Việt và một giọng Anh; không có clone giọng hoặc voice CapCut/NgocHuyen.
+- **Giọng đọc → Piper**: chọn giọng Việt VAIS hoặc Anh Lessac, nhập nội dung và tốc độ. Piper tự tải model một lần, sau đó tạo WAV trên CPU.
+- **Giọng đọc → Microsoft Edge**: kho giọng online nhiều ngôn ngữ, không cần API key, xuất MP3. Có thể lọc ngôn ngữ, tìm tên giọng và đổi tốc độ. Nội dung được gửi tới dịch vụ Microsoft; cần Internet, dịch vụ có thể thay đổi giọng hoặc giới hạn truy cập.
+- **Cập nhật danh sách giọng miễn phí**: lấy danh mục hiện có từ dịch vụ Edge, tự kiểm tra tối đa mỗi ngày khi mở giao diện, hoặc bấm cập nhật ngay. Khi mất mạng, giữ danh mục cũ. Không tải tất cả model giọng về máy.
 - **Cài đặt → Model & cập nhật → Chuẩn bị model**: tải trước giọng Việt, Whisper Tiny và dịch Anh → Việt. Các cặp ngôn ngữ khác được bổ sung khi bạn dịch lần đầu.
 
-Tool dùng model dịch Argos/OPUS-MT với CTranslate2 và SentencePiece, Piper cho TTS, faster-whisper cho STT. Các model được lưu trong `data/models/`. Không gửi video, âm thanh hoặc văn bản tới một nhà cung cấp AI khi thực hiện những chức năng này.
+Tool dùng model dịch Argos/OPUS-MT với CTranslate2 và SentencePiece, Piper cho TTS, faster-whisper cho STT. Các model được lưu trong `data/models/`. Những engine cục bộ này không gửi nội dung tới nhà cung cấp AI. Edge và GPT/Gemini là lựa chọn online, được ghi riêng trên giao diện.
+
+Phụ đề có 26 lựa chọn ngôn ngữ: Việt, Anh, Trung, Nhật, Hàn, Thái, Pháp, Đức, Tây Ban Nha, Nga, Ý, Bồ Đào Nha, Indonesia, Ả Rập, Hindi, Hà Lan, Ba Lan, Ukraina, Thổ Nhĩ Kỳ, Séc, Phần Lan, Thụy Điển, Ba Tư, Do Thái, Hungary và Romania. Cặp dịch được tìm theo danh mục Argos, có thể qua tiếng Anh; nếu chưa có model phù hợp, tool báo rõ thay vì tạo bản dịch giả.
 
 Dịch máy và nhận dạng có thể sai thuật ngữ, tên riêng hoặc lời nói khó nghe. Kiểm tra và chỉnh SRT trong trình biên tập trước khi render. Nếu nhận dạng sai ngôn ngữ nguồn, hãy chọn ngôn ngữ đó thay vì Tự nhận dạng.
 
@@ -36,7 +40,20 @@ Nếu cập nhật mã nguồn thất bại, tool phục hồi các tệp đã t
 
 Bạn có thể bật/tắt cập nhật trong **Model & cập nhật**, kiểm tra bản mới hoặc hẹn áp dụng khi mở lại. `cap_nhat.bat` kiểm tra cập nhật ngay; đóng tool đang chạy trước. Chức năng mới được nhận khi người duy trì phát hành bản mới; tool không tự tạo ra chức năng chưa được phát triển.
 
-Model còn thiếu được tải tự động; model đã cài được dùng lại để bảo đảm chạy offline. Danh mục model dịch được làm mới khi cần tải cặp mới, tối đa sau mỗi 7 ngày. Giọng Piper dùng phiên bản model đã xác minh đi kèm bản tool; model giọng mới có thể được bổ sung qua các bản phát hành tiếp theo.
+Model còn thiếu được tải tự động; model đã cài được dùng lại để bảo đảm chạy offline. Danh mục model dịch được làm mới khi cần tải cặp mới, tối đa sau mỗi 7 ngày. Giọng Piper dùng phiên bản model đã xác minh đi kèm bản tool. Danh mục giọng Edge được làm mới độc lập, lưu ở `data/edge-voices.json`; khi cập nhật thất bại, Piper và các model cục bộ vẫn dùng được.
+
+## CapCut và kết nối GPT/Gemini
+
+Chưa có kết nối tự động với danh mục giọng CapCut được xác minh trong bản này. Các giọng Edge/Piper không được gắn nhãn CapCut. Bạn có thể mở CapCut từ tab Giọng đọc, tạo giọng bằng tài khoản của mình, xuất MP3/WAV rồi Nhập tệp để ghép vào video. Giọng miễn phí/Pro trong CapCut phụ thuộc tài khoản và khu vực. Tool không lấy cookie, phiên đăng nhập, giọng Pro hay clone giọng.
+
+Tab **GPT / Gemini** có hai cách dùng:
+
+- **Không dùng API key**: nhập yêu cầu, bấm Sao chép yêu cầu rồi mở ChatGPT/Gemini và tự dán/gửi trên trang của nhà cung cấp. Đây là thao tác chuyển văn bản, chưa phải hội thoại tự động trong tool.
+- **Chat trực tiếp trong tool**: chọn OpenAI hoặc Google, nhập API key vào ô mật khẩu của ứng dụng đang chạy trên máy và tên model mà tài khoản hỗ trợ. Mặc định là `gpt-4.1-mini` hoặc `gemini-2.5-flash`; có thể sửa tên nếu model không khả dụng. API có hạn mức/chi phí riêng; gói ChatGPT hoặc Gemini không thay thế API key. Không gửi key trong chat hỗ trợ hoặc commit lên GitHub.
+
+Khi bấm Gửi, nội dung hội thoại được gửi tới API HTTPS chính thức của nhà cung cấp đã chọn. Tool giữ key/hội thoại trong tab đang mở, không lưu key vào cài đặt, hàng đợi, tệp payload hay thư viện. Key được truyền qua backend cục bộ để gọi API. **Xóa hội thoại & key** hoặc tải lại trang để xóa khỏi giao diện. Chuyển nhà cung cấp cũng xóa ngữ cảnh và key. Hội thoại dài dùng tối đa 10 tin nhắn trước làm ngữ cảnh (tổng yêu cầu tối đa 60.000 ký tự); model có hạn mức riêng.
+
+Có thể đưa câu trả lời tối đa 4.000 ký tự vào Giọng đọc, hoặc lưu TXT. Văn bản dài hơn cần chọn một đoạn để đọc. Chat được kiểm thử giao thức bằng phản hồi mô phỏng; chưa xác minh tài khoản API thật vì môi trường không có key người dùng.
 
 ## Các chức năng khác
 
@@ -70,10 +87,10 @@ FFmpeg/FFprobe cần có trong PATH. `VIDEO_STUDIO_AUTO_UPDATE=0` tắt tự tha
 
 ## Xác minh
 
-Bản này được kiểm tra trên Linux: model thật dịch Anh → Việt và Trung → Việt, Piper tạo giọng Việt/Anh, Whisper Tiny nhận dạng lời nói, và luồng trình duyệt tạo phụ đề → dịch → tạo voice → render. Các kiểm thử còn kiểm tra cập nhật, checksum, sao lưu/rollback và giữ dữ liệu. Xem `KIEM_TRA_VIDEO_STUDIO.md` trong ZIP để biết kết quả cụ thể. Các file BAT và môi trường Windows cần kiểm tra trên máy Windows.
+Bản này được kiểm tra trên Linux: model thật dịch Anh → Việt và Trung → Việt, Piper tạo giọng Việt/Anh, Whisper Tiny nhận dạng lời nói, và luồng trình duyệt tạo phụ đề → dịch → tạo voice → render. Các kiểm thử còn kiểm tra cập nhật, checksum, sao lưu/rollback và giữ dữ liệu. Xem `KIEM_TRA_VIDEO_STUDIO.md` trong ZIP để biết kết quả cụ thể. Đã lấy danh mục 322 giọng Edge và tạo audio tiếng Việt thật; số giọng thực tế có thể thay đổi. Các file BAT và môi trường Windows cần kiểm tra trên máy Windows.
 
 ## Lỗi không tìm thấy CTranslate2 trên Python 3.15
 
-Trình cài cũ dùng `py -3`, chọn Python mới nhất trên máy. Nếu có cả Python 3.11 và 3.15, nó chọn 3.15 trong khi các engine chưa có wheel phù hợp. Bản 0.2.1 chọn 3.12/3.11 x64 từ Python Launcher, registry hoặc PATH, kiểm tra môi trường và chuyển môi trường không phù hợp sang thư mục sao lưu. Không cần sửa requirements hoặc cài CTranslate2 bằng Python 3.15.
+Trình cài trước bản 0.2.1 dùng `py -3`, chọn Python mới nhất trên máy. Nếu có cả Python 3.11 và 3.15, nó chọn 3.15 trong khi các engine chưa có wheel phù hợp. Bản 0.3.0 chọn 3.12/3.11 x64 từ Python Launcher, registry hoặc PATH, kiểm tra môi trường và chuyển môi trường không phù hợp sang thư mục sao lưu. Không cần sửa requirements hoặc cài CTranslate2 bằng Python 3.15.
 
 Nếu không tìm thấy Python 3.11/3.12 x64, cửa sổ báo cụ thể phiên bản đã thấy và hướng dẫn cài bản 64-bit từ python.org. Python 3.11/3.12 32-bit, ARM64 native và PyPy không được chọn. Nếu cài xong nhưng DLL engine không nạp được, xem hướng dẫn Visual C++ Redistributable x64 trong cửa sổ lỗi.

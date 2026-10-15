@@ -6,6 +6,7 @@ import uuid
 from urllib.parse import urlsplit
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator, ConfigDict
@@ -14,7 +15,7 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 import engine
 from subtitles import parse_srt, to_srt
 
-app = FastAPI(title='Video Studio VN', version='0.2.1')
+app = FastAPI(title='Video Studio VN', version='0.3.0')
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=['127.0.0.1', 'localhost', 'testserver'])
 app.mount('/static', StaticFiles(directory=engine.RESOURCE_ROOT / 'static'), name='static')
 
@@ -25,12 +26,21 @@ async def local_requests(request, call_next):
         origin = request.headers.get('origin')
         if origin and origin != str(request.base_url).rstrip('/'):
             return JSONResponse({'detail': 'Yêu cầu cần xuất phát từ giao diện của tool.'}, status_code=403)
-    return await call_next(request)
+    response = await call_next(request)
+    if request.url.path.startswith('/api/'):
+        response.headers['Cache-Control'] = 'no-store'
+    return response
 
 
 @app.exception_handler(ValueError)
 async def invalid_input(request, exc):
     return JSONResponse({'detail': str(exc)}, status_code=422)
+
+
+@app.exception_handler(RequestValidationError)
+async def invalid_request(request, exc):
+    # Pydantic's default response echoes invalid input, which may contain a key.
+    return JSONResponse({'detail':[{k:e[k] for k in ('loc','msg','type')} for e in exc.errors()]}, status_code=422)
 
 
 @app.get('/')
@@ -190,19 +200,61 @@ class TTSRequest(BaseModel):
     text: str = Field(min_length=1, max_length=4000)
     voice: str = 'vi_VN-vais1000-medium'
     speed: float = Field(default=1, ge=.6, le=1.5, allow_inf_nan=False)
+    provider: str = 'piper'
 
-    @field_validator('voice')
+    @field_validator('provider')
     @classmethod
-    def voice_choice(cls, value):
-        from offline_models import VOICES
-        if value not in VOICES:
-            raise ValueError('Giọng đọc chưa được hỗ trợ.')
+    def provider_choice(cls, value):
+        if value not in ('piper', 'edge'):
+            raise ValueError('Nguồn giọng đọc chưa được hỗ trợ.')
         return value
 
 
 @app.post('/api/tts', status_code=202)
 def tts(req: TTSRequest):
-    return {'job_ids':[engine.enqueue('tts', 'Tạo giọng đọc cục bộ', req.model_dump())]}
+    from offline_models import VOICES
+    from online_services import voice_catalog
+    voices = VOICES if req.provider == 'piper' else {v['id'] for v in voice_catalog()['voices']}
+    if req.voice not in voices:
+        raise ValueError('Giọng đọc chưa có trong danh mục của nguồn đã chọn.')
+    return {'job_ids':[engine.enqueue('tts', 'Giọng đọc ' + req.provider, req.model_dump())]}
+
+
+@app.get('/api/voices')
+def voices():
+    from online_services import voice_catalog
+    return voice_catalog()
+
+
+class VoiceSync(BaseModel):
+    force: bool = False
+
+
+@app.post('/api/voices/sync')
+def sync_voices(req: VoiceSync):
+    from online_services import sync_voices as sync
+    return sync(req.force)
+
+
+class ChatMessage(BaseModel):
+    role: str = Field(pattern=r'^(user|assistant)$')
+    content: str = Field(min_length=1, max_length=20000)
+
+
+class ChatRequest(BaseModel):
+    provider: str = Field(pattern=r'^(openai|gemini)$')
+    api_key: str = Field(min_length=1, max_length=512, pattern=r'^[\x21-\x7e]+$', repr=False)
+    model: str = Field(min_length=1, max_length=100, pattern=r'^[A-Za-z0-9._-]+$')
+    messages: list[ChatMessage] = Field(min_length=1, max_length=12)
+
+
+@app.post('/api/chat')
+def chat(req: ChatRequest):
+    from online_services import chat as respond
+    messages = [message.model_dump() for message in req.messages]
+    if messages[0]['role'] != 'user' or messages[-1]['role'] != 'user' or sum(len(m['content']) for m in messages) > 60000:
+        raise ValueError('Hội thoại cần bắt đầu/kết thúc bằng lời bạn gửi và không quá 60.000 ký tự.')
+    return {'text':respond(req.provider, req.api_key, req.model, messages)}
 
 
 class RenderRequest(BaseModel):
@@ -261,7 +313,8 @@ class LocalSettings(BaseModel):
 @app.get('/api/config')
 def config():
     from updater import settings, local_version
-    return {'auto_update':settings()['auto_update'], 'version':local_version(), 'local_only':True}
+    return {'auto_update':settings()['auto_update'], 'version':local_version(), 'local_only':False,
+            'default_mode':'local', 'optional_online':['edge','openai','gemini']}
 
 
 @app.post('/api/config')

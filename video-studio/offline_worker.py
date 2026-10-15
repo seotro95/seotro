@@ -18,7 +18,11 @@ def run(payload, folder):
         translated = translate_cues(cues, payload['source_language'], payload['language'], progress)
         (folder / 'phu_de_dich.srt').write_text(to_srt(translated), encoding='utf-8')
     elif action == 'tts':
-        speak(payload['text'], payload['voice'], folder / 'giong_doc.wav', payload['speed'], progress)
+        if payload.get('provider', 'piper') == 'edge':
+            from online_services import speak_edge
+            speak_edge(payload['text'], payload['voice'], folder / 'giong_doc.mp3', payload['speed'])
+        else:
+            speak(payload['text'], payload['voice'], folder / 'giong_doc.wav', payload['speed'], progress)
     elif action == 'stt':
         model = whisper_model(payload['model'])
         progress(45)

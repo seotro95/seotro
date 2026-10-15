@@ -18,7 +18,11 @@ DATA = Path(os.environ.get('VIDEO_STUDIO_DATA', str(ROOT / 'data'))).expanduser(
 MODELS = DATA / 'models'
 MODELS.mkdir(parents=True, exist_ok=True)
 LANGUAGES = {'vi':'Tiếng Việt','en':'Tiếng Anh','zh':'Tiếng Trung','ja':'Tiếng Nhật',
-             'ko':'Tiếng Hàn','th':'Tiếng Thái','fr':'Tiếng Pháp','de':'Tiếng Đức','es':'Tiếng Tây Ban Nha','ru':'Tiếng Nga'}
+             'ko':'Tiếng Hàn','th':'Tiếng Thái','fr':'Tiếng Pháp','de':'Tiếng Đức','es':'Tiếng Tây Ban Nha','ru':'Tiếng Nga',
+             'it':'Tiếng Ý','pt':'Tiếng Bồ Đào Nha','id':'Tiếng Indonesia','ar':'Tiếng Ả Rập',
+             'hi':'Tiếng Hindi','nl':'Tiếng Hà Lan','pl':'Tiếng Ba Lan','uk':'Tiếng Ukraina',
+             'tr':'Tiếng Thổ Nhĩ Kỳ','cs':'Tiếng Séc','fi':'Tiếng Phần Lan','sv':'Tiếng Thụy Điển',
+             'fa':'Tiếng Ba Tư','he':'Tiếng Do Thái','hu':'Tiếng Hungary','ro':'Tiếng Romania'}
 VOICES = {
     'vi_VN-vais1000-medium': {'name':'Tiếng Việt — VAIS', 'language':'vi', 'path':'vi/vi_VN/vais1000/medium'},
     'en_US-lessac-medium': {'name':'Tiếng Anh — Lessac', 'language':'en', 'path':'en/en_US/lessac/medium'},

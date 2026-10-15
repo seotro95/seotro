@@ -7,3 +7,6 @@
 - **FFmpeg/FFprobe**: người dùng cung cấp bản binary phù hợp và giấy phép đi kèm; ZIP của tool không chứa FFmpeg hoặc các tệp EXE của VideoToolsPro.
 
 Gói tool không chứa model/binary của VideoToolsPro, cookie, khóa kích hoạt hoặc tài khoản AI. Mã nguồn ứng dụng này được xây dựng riêng theo mô tả chức năng; model công khai được tải từ nguồn upstream ghi ở trên.
+
+- **edge-tts 7.3.1** (LGPL-3.0): thư viện mã nguồn mở https://github.com/rany2/edge-tts, truy cập giọng online Microsoft Edge. Danh mục/âm thanh thuộc dịch vụ Microsoft và chịu điều kiện sử dụng của nhà cung cấp. Không phải thư viện CapCut và không phải sản phẩm Microsoft chính thức.
+- **OpenAI Responses API / Google Gemini generateContent API**: kết nối HTTPS tùy chọn; người dùng cung cấp API key và chịu hạn mức tài khoản. Tool không phân phối tài khoản hoặc key.

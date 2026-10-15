@@ -1,7 +1,8 @@
 'use strict';
 const $ = id => document.getElementById(id);
-const state = {assets: [], jobs: [], selected: new Set(), filter: 'all', batch: [], config: {}, health: {}};
+const state = {assets: [], jobs: [], selected: new Set(), filter: 'all', batch: [], config: {}, health: {}, catalog: {voices: []}, chat: [], chatAnswer: ''};
 const labels = {library: ['Thư viện', 'Mọi ý tưởng bắt đầu<br>từ một video.', 'Nhập nội dung và biến ý tưởng thành video hoàn chỉnh.'], subtitle: ['Phụ đề', 'Mỗi câu nói.<br>Một dòng phụ đề.', 'Tạo, dịch và hoàn thiện phụ đề theo nhịp video của bạn.'], voice: ['Giọng đọc', 'Kể câu chuyện<br>bằng giọng của bạn.', 'Biến kịch bản thành âm thanh và chuẩn bị phần lồng tiếng.'], render: ['Xuất video', 'Hoàn thiện.<br>Và sẵn sàng chia sẻ.', 'Ghép các thành phần, chọn chất lượng và xuất video mới.'], ai: ['Biên tập', 'Hoàn thiện lời thoại.<br>Chuẩn bị câu chuyện.', 'Biên tập văn bản và gợi ý theo mẫu, ngay trên máy của bạn.']};
+labels.chat = ['GPT / Gemini', 'Một ý tưởng.<br>Thêm nhiều cách kể.', 'Kết nối chat để viết kịch bản, biên tập và chuẩn bị lời thoại.'];
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 const fileUrl = id => '/api/assets/' + encodeURIComponent(id) + '/file';
 let toastTimer;
@@ -10,7 +11,7 @@ function toast(message, error = false) {
   clearTimeout(toastTimer); toastTimer = setTimeout(() => {$('toast').hidden = true;}, error ? 10000 : 5000);
 }
 async function api(path, options = {}) {
-  const response = await fetch(path, options);
+  const response = await fetch(path, {cache:'no-store', ...options});
   const result = await response.json();
   if (!response.ok) {
     const detail = result.detail;
@@ -153,10 +154,43 @@ $('save-subtitle').addEventListener('click', e => work(e.target, async () => {
   await refresh(); $('editor-source').value = result.asset_id; toast('Đã lưu phụ đề mới: ' + result.cues + ' đoạn.');
 }));
 function voiceOptions() {
-  const voices = state.health.voices || [];
-  if (voices.length) $('tts-voice').innerHTML = voices.map(v => `<option value="${esc(v.id)}">${esc(v.name)}${v.installed ? ' · đã tải' : ''}</option>`).join('');
+  const before = $('tts-voice').value;
+  const provider = $('tts-provider').value;
+  const language = $('voice-language').value;
+  const query = $('voice-search').value.trim().toLocaleLowerCase();
+  const voices = (provider === 'piper' ? state.health.voices || [] : state.catalog.voices || [])
+    .filter(v => (language === 'all' || v.language === language) && (v.name + ' ' + v.id).toLocaleLowerCase().includes(query));
+  $('tts-voice').innerHTML = voices.map(v => `<option value="${esc(v.id)}">${esc(v.name)}${v.installed ? ' · đã tải' : ''}</option>`).join('');
+  if (voices.some(v => v.id === before)) $('tts-voice').value = before;
+  $('tts-voice').required = true;
+  $('voice-help').textContent = provider === 'piper' ? 'Piper chạy trên máy. Model tải một lần rồi dùng offline.' : 'Microsoft Edge cần Internet, gửi lời thoại tới Microsoft. Không cần API key; khả năng truy cập tùy dịch vụ.';
 }
-$('tts-form').addEventListener('submit', e => {e.preventDefault(); work(e.submitter, () => queue('/api/tts', {text:$('tts-text').value, voice:$('tts-voice').value, speed:Number($('tts-speed').value)}));});
+function voiceLanguages() {
+  const before = $('voice-language').value;
+  const voices = [...(state.health.voices || []), ...(state.catalog.voices || [])];
+  const languages = [...new Set(voices.map(v => v.language))].sort();
+  $('voice-language').innerHTML = '<option value="all">Tất cả ngôn ngữ</option>' + languages.map(code => `<option value="${esc(code)}">${esc(state.health.languages?.[code] || code)}</option>`).join('');
+  $('voice-language').value = languages.includes(before) ? before : 'all';
+  voiceOptions();
+}
+for (const id of ['tts-provider', 'voice-language']) $(id).addEventListener('change', voiceOptions);
+$('voice-search').addEventListener('input', voiceOptions);
+async function syncVoices(force) {
+  state.catalog = await post('/api/voices/sync', {force});
+  $('voice-catalog-status').textContent = state.catalog.message;
+  voiceLanguages();
+}
+$('sync-voices').addEventListener('click', e => work(e.target, () => syncVoices(true)));
+$('tts-form').addEventListener('submit', e => {e.preventDefault(); work(e.submitter, () => queue('/api/tts', {text:$('tts-text').value, voice:$('tts-voice').value, provider:$('tts-provider').value, speed:Number($('tts-speed').value)}));});
+function languageOptions() {
+  const languages = state.health.languages || {};
+  for (const id of ['translate-source-language', 'translate-language', 'stt-language']) {
+    const before = $(id).value;
+    const first = id === 'translate-source-language' ? '<option value="auto">Tự nhận dạng</option>' : id === 'stt-language' ? '<option value="">Tự nhận dạng</option>' : '';
+    $(id).innerHTML = first + Object.entries(languages).map(([code, name]) => `<option value="${esc(code)}">${esc(name)}</option>`).join('');
+    if ([...$(id).options].some(o => o.value === before)) $(id).value = before;
+  }
+}
 function previewRender() {
   const id = $('render-source').value;
   $('render-preview').innerHTML = id ? `<video src="${fileUrl(id)}" controls></video>` : 'Chọn video để xem trước';
@@ -186,7 +220,7 @@ async function loadConfig() {
   const health = state.health;
   const viVoice = (health.voices || []).find(v => v.language === 'vi');
   $('model-status').innerHTML = '<div><strong>Phiên bản ' + esc(health.version) + '</strong><p class="muted">Giọng Việt: ' + (viVoice?.installed ? 'đã tải' : 'tự tải khi tạo voice') + '<br>Whisper: ' + (health.whisper_downloaded ? 'đã tải model' : 'tự tải khi tạo phụ đề') + '<br>Model dịch: ' + (health.installed_pairs || []).length + ' cặp ngôn ngữ đã cài</p></div>';
-  voiceOptions();
+  voiceLanguages(); languageOptions();
 }
 document.querySelectorAll('[data-open-settings]').forEach(b => b.addEventListener('click', () => work(b, async () => {await loadConfig(); $('settings-dialog').showModal();})));
 $('settings-form').addEventListener('submit', e => {e.preventDefault(); work(e.submitter, async () => {
@@ -201,10 +235,52 @@ $('check-update').addEventListener('click', e => work(e.target, async () => {
 $('request-update').addEventListener('click', e => work(e.target, async () => {
   const result = await post('/api/updates/request', {}); $('update-status').textContent = result.message; toast(result.message);
 }));
+function renderChat() {
+  $('chat-history').innerHTML = state.chat.length ? state.chat.map(m => `<article class="chat-message ${esc(m.role)}"><strong>${m.role === 'user' ? 'Bạn' : $('chat-provider').value === 'openai' ? 'GPT' : 'Gemini'}</strong><pre>${esc(m.content)}</pre></article>`).join('') : '<p class="muted">Hội thoại chỉ giữ trong tab hiện tại.</p>';
+  $('chat-to-voice').disabled = !state.chatAnswer;
+  $('chat-save').disabled = !state.chatAnswer;
+  $('chat-history').scrollTop = $('chat-history').scrollHeight;
+}
+function resetChat() {
+  state.chat = []; state.chatAnswer = ''; $('chat-key').value = ''; $('chat-prompt').value = '';
+  $('chat-status').textContent = 'Đã xóa hội thoại và key khỏi tab.'; renderChat();
+}
+let chatBusy = false;
+$('chat-reset').addEventListener('click', resetChat);
+$('chat-provider').addEventListener('change', () => {resetChat(); $('chat-model').value = $('chat-provider').value === 'openai' ? 'gpt-4.1-mini' : 'gemini-2.5-flash';});
+$('chat-form').addEventListener('submit', e => {
+  e.preventDefault(); if (chatBusy) return;
+  work(e.submitter, async () => {
+    chatBusy = true; $('chat-provider').disabled = true; $('chat-reset').disabled = true;
+    $('chat-status').textContent = 'Đang gửi tới ' + ($('chat-provider').value === 'openai' ? 'OpenAI' : 'Google') + '…';
+    try {
+      const prompt = $('chat-prompt').value;
+      const messages = [...state.chat.slice(-10), {role:'user', content:prompt}];
+      const result = await post('/api/chat', {provider:$('chat-provider').value, api_key:$('chat-key').value.trim(), model:$('chat-model').value.trim(), messages});
+      state.chat = [...messages, {role:'assistant', content:result.text}]; state.chatAnswer = result.text;
+      $('chat-prompt').value = ''; $('chat-status').textContent = 'Đã kết nối và nhận trả lời từ ' + $('chat-model').value + '.'; renderChat();
+    } catch (error) {$('chat-status').textContent = error.message; throw error;}
+    finally {chatBusy = false; $('chat-provider').disabled = false; $('chat-reset').disabled = false;}
+  });
+});
+$('chat-copy-prompt').addEventListener('click', e => work(e.target, async () => {
+  const text = $('chat-prompt').value; if (!text.trim()) throw new Error('Nhập yêu cầu trước khi sao chép.');
+  await navigator.clipboard.writeText(text); toast('Đã sao chép. Mở trang chat rồi dán yêu cầu.');
+}));
+$('chat-to-voice').addEventListener('click', () => {
+  if (state.chatAnswer.length > 4000) {toast('Trả lời dài hơn 4.000 ký tự. Hãy chọn một đoạn để đưa vào giọng đọc.', true); return;}
+  $('tts-text').value = state.chatAnswer; showTab('voice'); $('tts-text').focus();
+});
+$('chat-save').addEventListener('click', () => {
+  const url = URL.createObjectURL(new Blob([state.chatAnswer], {type:'text/plain;charset=utf-8'}));
+  const a = document.createElement('a'); a.href = url; a.download = 'tra_loi_chat.txt'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
 async function initialize() {
   state.health = await api('/api/health'); await loadConfig();
   if (!state.health.ffmpeg || !state.health.ffprobe) {$('setup-note').hidden = false; $('setup-note').textContent = 'Cần FFmpeg và FFprobe để xử lý video. Xem HUONG_DAN.md đi kèm tool.';}
-  voiceOptions();
+  state.catalog = await api('/api/voices'); voiceLanguages();
+  $('voice-catalog-status').textContent = state.catalog.message;
+  syncVoices(false).catch(() => {$('voice-catalog-status').textContent = 'Chưa làm mới được danh sách. Có thể dùng Piper offline.';});
   await refresh(); renderLibrary(); populateForms();
   setInterval(() => refresh().catch(() => {}), 2000);
 }

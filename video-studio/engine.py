@@ -246,6 +246,8 @@ def run_local(job, action, payload, folder):
     worker = [sys.executable, '--offline-worker'] if getattr(sys, 'frozen', False) else [sys.executable, str(RESOURCE_ROOT / 'offline_worker.py')]
     command(job, [*worker, str(configuration)], timeout=7200)
     name = {'tts':'giong_doc.wav', 'stt':'phu_de.srt', 'translate':'phu_de_dich.srt', 'prepare':'model_san_sang.txt'}[action]
+    if action == 'tts' and payload.get('provider') == 'edge':
+        name = 'giong_doc.mp3'
     return [(folder / name, name)]
 
 

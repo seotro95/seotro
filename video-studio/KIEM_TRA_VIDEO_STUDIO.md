@@ -1,3 +1,14 @@
+# Xác minh Video Studio VN 0.3.0
+
+- 26 kiểm thử đạt trên Linux/Python 3.12, không bỏ qua. Bao gồm media, render, hàng đợi, cập nhật/rollback, chọn Python Windows và các kiểm thử mới cho kho giọng/connector.
+- Đã lấy danh mục thật 322 giọng Microsoft Edge; có hai giọng vi-VN. Số lượng phụ thuộc dịch vụ tại thời điểm cập nhật.
+- Đã tổng hợp MP3 tiếng Việt thật bằng vi-VN-HoaiMyNeural qua cả engine trực tiếp và tác vụ từ Chromium. Tệp kết quả được nhận dạng audio, lưu vào thư viện và tải được qua API.
+- Chromium: lọc giọng, cập nhật danh mục, gửi TTS Edge thật; 26 lựa chọn dịch; chat GPT/Gemini với phản hồi mô phỏng; ngữ cảnh nhiều lượt; chuyển nhà cung cấp/xóa key; không lưu key vào localStorage/sessionStorage; chống thực thi HTML trong câu trả lời; bố cục 390 px và không có lỗi JavaScript.
+- Kiểm thử adapter xác minh hostname/endpoint, Authorization OpenAI, x-goog-api-key Gemini, chuyển vai hội thoại, không đưa key vào URL, không trả chi tiết lỗi nhạy cảm. Kiểm thử API xác minh không ghi key vào jobs/config/tệp, không phản chiếu key trong lỗi validation, và từ chối Origin ngoài ứng dụng.
+- Chưa gọi GPT/Gemini bằng tài khoản API thật vì chưa có key người dùng. Chưa xác minh kết nối tự động danh mục CapCut; chỉ có liên kết mở trang chính thức và nhập audio do người dùng xuất.
+- Pip dry-run giải quyết đầy đủ 52 gói cho Windows win_amd64 CPython 3.11 và 3.12, gồm edge-tts/aiohttp. Giữ nguyên bản sửa tránh Python 3.15. Chưa thực thi BAT/DLL trên Windows thật.
+- `pip check`, kiểm tra cú pháp JavaScript và `git diff --check` đều đạt. Danh mục hỏng/mất mạng được kiểm tra giữ cache; giọng không hợp lệ bị từ chối.
+
 # Xác minh bản sửa cài đặt Windows 0.2.1
 
 - Người dùng có Python 3.11 và 3.15; script cũ chọn bản mới nhất bằng py -3, dẫn đến không có wheel CTranslate2 tương thích Python 3.15.

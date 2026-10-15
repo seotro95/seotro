@@ -135,7 +135,7 @@ class StudioTests(unittest.TestCase):
 
     def test_no_key_required_and_invalid_inputs_and_cross_origin(self):
         response = self.client.get('/api/config')
-        self.assertTrue(response.json()['local_only'])
+        self.assertEqual(response.json()['default_mode'], 'local')
         self.assertNotIn('api_key', response.json())
         self.assertEqual(self.client.post('/api/config', json={'api_key':'unused'}).status_code, 422)
         self.assertEqual(self.client.post('/api/tts', json={'text':'xin chào', 'voice':'invalid'}).status_code, 422)
