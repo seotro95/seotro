@@ -33,6 +33,9 @@ def write_state(path, data):
 
 def load_synthesizer(job):
     import soundfile as sf
+    if job['engine'] == 'system':
+        from system_voices import speak
+        return lambda text, output: speak(text, job['speaker'], output)
     if job['engine'] == 'vieneu_nano':
         from vieneu.v3nano import V3NanoVieNeuTTS
         steps = job.get('nano_steps', 8)
@@ -170,6 +173,12 @@ def render(job, synthesize=None):
     payload = {key: value for key, value in job.items() if key != 'text'}
     profile_speed, default_pause = PROFILES[job.get('delivery', 'natural')]
     gap = job.get('paragraph_pause', default_pause)
+    from subtitles import parse_srt, export_srt
+    cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
+    timed = []
+    cue_writer = None
+    cue_path = work / 'cue.wav'
+    progress_limit = 85 if job.get('video_id') else 90
     try:
         for index, segment in enumerate(segments):
             if (work / 'cancel.flag').exists():
@@ -181,6 +190,10 @@ def render(job, synthesize=None):
                         if _nano_pool is None:
                             _nano_pool = ProcessPoolExecutor(max_workers=2, mp_context=multiprocessing.get_context('spawn'))
                         futures[ahead] = _nano_pool.submit(prepare_chunk, payload, candidate, ahead, str(work))
+            segment_start = writer.frames / writer.rate
+            if cues and (index == 0 or segment.cue != segments[index-1].cue):
+                cue_writer = PCMWriter(cue_path, max_seconds=10800)
+            target_writer = cue_writer if cues else writer
             if segment.text:
                 part = work / f'{index:06d}.wav'
                 if index in futures:
@@ -189,20 +202,56 @@ def render(job, synthesize=None):
                     if synthesize is None:
                         synthesize = get_synthesizer(job)
                     prepare_chunk(job, segment, index, work, synthesize)
-                clipped = writer.append(part)
+                clipped = target_writer.append(part)
+                spoken_end = writer.frames/writer.rate
                 completed = index + 1
                 if not clipped:
-                    writer.silence(gap)
+                    if not cues:
+                        writer.silence(gap)
             else:
-                writer.silence(segment.pause)
+                target_writer.silence(segment.pause)
                 completed = index + 1
+            if cues and (index+1 == len(segments) or segments[index+1].cue != segment.cue):
+                cue_writer.close()
+                cue_writer = None
+                cue = cues[segment.cue]
+                available = cue['end'] - cue['start']
+                with wave.open(str(cue_path)) as cue_audio:
+                    actual = cue_audio.getnframes()/cue_audio.getframerate()
+                if actual > available:
+                    ratio = actual/available
+                    if ratio > 1.5:
+                        raise ValueError(f'Câu SRT {segment.cue+1} đọc quá dài ({actual:.2f}s cho ô {available:.2f}s). Nới mốc, rút ngắn lời hoặc chọn nhịp nhanh hơn; không cắt mất lời.')
+                    fitted = work / 'cue-fit.wav'
+                    tempo = min(1.5, ratio*1.002)
+                    for attempt in range(5):
+                        if (work / 'cancel.flag').exists():
+                            raise InterruptedError('Tác vụ đã dừng.')
+                        normalize_audio(cue_path, fitted, tempo, 1)
+                        with wave.open(str(fitted)) as fitted_audio:
+                            fitted_seconds = fitted_audio.getnframes()/fitted_audio.getframerate()
+                        if fitted_seconds <= available+.00001:
+                            fitted.replace(cue_path)
+                            break
+                        if tempo >= 1.5 or attempt == 4:
+                            raise ValueError(f'Câu SRT {segment.cue+1} vẫn vượt ô ở mức căn nhịp tối đa; hãy nới mốc thời gian.')
+                        # atempo has small frame/window rounding differences. Refit the
+                        # original cue, never cut words or compound tempo transforms.
+                        tempo = min(1.5, tempo*fitted_seconds/available*1.005)
+                writer.silence(max(0, cue['start']-writer.frames/writer.rate))
+                clipped = writer.append(cue_path) or clipped
+                writer.silence(max(0, cue['end']-writer.frames/writer.rate))
+            elif not cues and segment.text:
+                timed.append({'start': segment_start, 'end': spoken_end, 'text': segment.text})
             duration = writer.frames / writer.rate
             elapsed = time.monotonic() - started
-            write_state(work / 'progress.json', {'completed': completed, 'total': len(segments), 'audio_seconds': duration, 'elapsed_seconds': round(elapsed, 1), 'progress': min(99, round(100 * completed / len(segments))), 'phase': f'Đã xử lý {completed}/{len(segments)} đoạn'})
+            write_state(work / 'progress.json', {'completed': completed, 'total': len(segments), 'audio_seconds': duration, 'elapsed_seconds': round(elapsed, 1), 'progress': min(progress_limit, round(progress_limit * completed / len(segments))), 'phase': f'Đã xử lý {completed}/{len(segments)} đoạn'})
             if writer.frames >= writer.limit:
                 clipped = completed < len(segments) or clipped
                 break
     finally:
+        if cue_writer is not None:
+            cue_writer.close()
         writer.close()
         for future in futures.values():
             if not future.cancel():
@@ -211,16 +260,20 @@ def render(job, synthesize=None):
         raise InterruptedError('Tác vụ đã dừng.')
     destination = DATA / 'audio' / f"{job['id']}.{job['format']}"
     pending = work / ('finished.' + job['format'])
+    write_state(work / 'progress.json', {'completed': completed, 'total': len(segments), 'progress': progress_limit, 'phase': 'Đang xuất âm thanh'})
     if job['format'] == 'wav':
         assembly.replace(pending)
     else:
-        subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(assembly), '-codec:a', 'libmp3lame', '-b:a', '192k', '-y', str(pending)], check=True, timeout=3600)
+        from dubbing import run_ffmpeg
+        run_ffmpeg(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(assembly), '-codec:a', 'libmp3lame', '-b:a', '192k', '-y', str(pending)], work, writer.frames/writer.rate, progress_limit, 85 if job.get('video_id') else 99, 'Đang xuất MP3', timeout=3600)
     pending.replace(destination)
     assembly.unlink(missing_ok=True)
+    subtitle_text = export_srt(cues if cues else timed, job.get('video_offset', 0) if job.get('video_id') else 0)
+    (DATA / 'audio' / (job['id'] + '.srt')).write_text(subtitle_text, encoding='utf-8')
     if job.get('video_id'):
         if clipped:
             raise ValueError('Lời đọc đạt giới hạn thời lượng; hãy chia nhỏ kịch bản trước khi lồng tiếng để không mất lời.')
-        write_state(work / 'progress.json', {'completed': completed, 'total': len(segments), 'progress': 99, 'phase': 'Đang ghép giọng vào video, giữ nguyên hình ảnh'})
+        write_state(work / 'progress.json', {'completed': completed, 'total': len(segments), 'progress': 86, 'phase': 'Đang ghép giọng vào video, giữ nguyên hình ảnh'})
         from dubbing import mux_video
         mux_video(job, destination, work, DATA, writer.frames / writer.rate)
     write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3)})

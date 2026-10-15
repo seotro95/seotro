@@ -1,3 +1,12 @@
+## Voice Studio 2.5 — TXT/SRT và giọng hệ thống
+
+- **38 kiểm thử đạt**, không bỏ qua, một cảnh báo Starlette/AnyIO deprecation. Kiểm thử mới: SRT BOM/CRLF, bỏ thẻ HTML, roundtrip millisecond, từ chối mốc lỗi/chồng/vượt 3 giờ, WAV có im lặng đúng mốc 1 và 3 giây, tổng 4 giây, căn ô ngắn bằng FFmpeg mà không dịch câu sau, từ chối ô quá ngắn, xuất mốc từ TXT, API nhập/xuất, giọng system không đòi marker AI và hợp đồng gọi Windows dùng JSON (không đưa nội dung người dùng vào mã PowerShell).
+- Chromium + Nano 8 bước thật: nhập SRT hai câu, chọn nguồn/giọng ngay ở video, tạo WAV 16 giây theo mốc, lồng tiếng vào video 30 giây, xuất SRT đã cộng offset 1 giây. Tạo voice riêng từ SRT không cần video, thanh % đạt 100%, tải video/WAV, 390 px không tràn ngang và không lỗi JavaScript.
+- Trình duyệt thật: nhập SRT ở mục Tạo giọng, xuất MP3 thật, tải SRT đúng mốc; tạo TXT dài với Nano chạy song song rồi bấm Dừng trong mục Lồng tiếng, trạng thái Đã dừng và % chưa tới 100, không lỗi JavaScript. Luồng FFmpeg xuất video dùng `-progress pipe:1`, đọc `out_time_us`; không dùng timer giả để tăng %.
+- Windows SAPI / PowerShell chỉ kiểm thử hợp đồng bằng mô phỏng trên Linux; **chưa chạy giọng hệ thống trên máy Windows thật**. Danh sách Windows trống trên Linux là hành vi dự kiến. Chưa kiểm tra nghe độ rõ/phát âm từng từ, căn từ, video 3 giờ hoặc dừng lúc FFmpeg đang ghép trên Windows. SRT là căn từng ô/đoạn, không phải khớp khẩu hình. Không có phụ thuộc Python hay trọng số mới.
+
+---
+
 ## Voice Studio 2.4 — lồng tiếng video
 
 - **33 kiểm thử đạt** trên Linux CPU, không bỏ qua; một cảnh báo Starlette/AnyIO. Kiểm thử mới dùng FFmpeg thật để tạo video H.264 có âm thanh, tải qua API, ghép giọng với thời điểm bắt đầu và cả hai lựa chọn giữ/thay tiếng gốc. Hash luồng video trước/sau giống hệt, thời lượng giữ 4 giây; từ chối lời dài vượt video, video hỏng, ID không hợp lệ, xóa nguồn còn được tham chiếu và tải sản phẩm chưa hoàn tất.

@@ -13,6 +13,7 @@ class Segment:
     text: str = ''
     pause: float = 0
     emphasis: bool = False
+    cue: int | None = None
 
 
 def split_script(text, limit=240):
@@ -47,6 +48,17 @@ def split_script(text, limit=240):
 
 
 def plan_segments(job):
+    if job.get('input_format') == 'srt':
+        from subtitles import parse_srt
+        output = []
+        for index, cue in enumerate(parse_srt(job['text'])):
+            segments = split_script(cue['text'], limit=130 if job.get('engine') == 'vieneu_nano' else 240)
+            if not any(s.text for s in segments):
+                raise ValueError('Mỗi câu SRT cần có lời đọc.')
+            for segment in segments:
+                segment.cue = index
+                output.append(segment)
+        return output
     if job.get('segment_plan') != 'nano-packed-v1':
         return split_script(job['text'])
     # Packing is opt-in with zero added sentence gap; explicit pauses/emphasis stay barriers.

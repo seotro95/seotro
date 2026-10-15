@@ -24,6 +24,8 @@ from starlette.concurrency import run_in_threadpool
 from narration import MAX_CHARACTERS, PROFILES, plan_segments
 import writing
 from dubbing import inspect_video
+from subtitles import parse_srt, export_srt
+from system_voices import installed_voices
 from hardware import supports_int8, system_info
 from performance import speed_report
 
@@ -89,7 +91,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='2.4.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='2.5.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -160,7 +162,7 @@ def config():
 
 @app.get('/api/voices')
 def voices():
-    return {'voices': PRESETS + records('voices')}
+    return {'voices': PRESETS + installed_voices() + records('voices')}
 
 
 @app.post('/api/voices/clone', status_code=201)
@@ -225,6 +227,7 @@ class Speech(BaseModel):
     language: str = 'vi'
     speed: float = Field(default=1, ge=0.7, le=1.4)
     format: str = 'wav'
+    input_format: str = Field(default='txt', pattern='^(txt|srt)$')
     video_id: str | None = None
     video_offset: float = Field(default=0, ge=0, le=10800)
     video_mix: bool = False
@@ -345,15 +348,21 @@ def speech(body: Speech):
         meta = read_json(DATA / 'videos' / f'{valid_id(body.video_id)}.json')
         if body.video_offset >= meta['duration']:
             raise HTTPException(422, 'Thời điểm bắt đầu phải nhỏ hơn thời lượng video.')
-    voice = next((v for v in PRESETS + records('voices') if v['id'] == body.voice_id), None)
+    voice = next((v for v in PRESETS + installed_voices() + records('voices') if v['id'] == body.voice_id), None)
     if not voice or body.language not in voice['languages']:
         raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
-    if not (DATA / 'models' / f'{engine}.ready').exists():
+    if engine != 'system' and not (DATA / 'models' / f'{engine}.ready').exists():
         raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Chạy lệnh tải mô hình trong hướng dẫn cài đặt.')
     try:
         segment_plan = 'nano-packed-v1' if engine == 'vieneu_nano' and body.paragraph_pause == 0 else 'classic-v1'
-        segments = plan_segments({**body.model_dump(), 'segment_plan': segment_plan})
+        segments = plan_segments({**body.model_dump(), 'engine': engine, 'segment_plan': segment_plan})
+        if body.input_format == 'srt':
+            cues = parse_srt(body.text)
+            if cues[-1]['end'] > body.max_minutes*60:
+                raise ValueError('SRT vượt giới hạn thời lượng đã chọn.')
+            if body.video_id and cues[-1]['end'] + body.video_offset > meta['duration'] + .001:
+                raise ValueError('Mốc SRT cộng thời điểm bắt đầu vượt thời lượng video.')
         if not any(segment.text for segment in segments):
             raise ValueError('Nhập nội dung đọc, không chỉ ký hiệu nghỉ.')
     except ValueError as exc:
@@ -401,7 +410,7 @@ def delete_record(ident: str):
         if job['status'] in {'queued', 'running', 'cancelling'}:
             raise HTTPException(409, 'Đợi tác vụ hoàn tất trước khi xóa.')
         shutil.rmtree(DATA / 'parts' / ident, ignore_errors=True)
-        for path in [DATA / 'audio' / f'{ident}.wav', DATA / 'audio' / f'{ident}.mp3', DATA / 'audio' / f'{ident}.mp4', DATA / 'jobs' / f'{ident}.json', DATA / 'jobs' / f'{ident}.log']:
+        for path in [DATA / 'audio' / f'{ident}.wav', DATA / 'audio' / f'{ident}.mp3', DATA / 'audio' / f'{ident}.mp4', DATA / 'audio' / f'{ident}.srt', DATA / 'jobs' / f'{ident}.json', DATA / 'jobs' / f'{ident}.log']:
             path.unlink(missing_ok=True)
 
 
@@ -538,3 +547,39 @@ def dubbed_video(ident: str):
 @app.get('/api/videos')
 def list_videos():
     return {'items': records('videos')}
+
+
+@app.get('/api/jobs/{ident}/script.{extension}')
+def download_script(ident: str, extension: str):
+    from fastapi.responses import Response
+    job = get_job(ident)
+    if extension not in ('txt', 'srt'):
+        raise HTTPException(404, 'Chỉ hỗ trợ TXT và SRT.')
+    if extension == 'txt':
+        text = '\n'.join(c['text'] for c in parse_srt(job['text'])) if job.get('input_format') == 'srt' else job['text']
+    elif job.get('input_format') == 'srt':
+        text = export_srt(parse_srt(job['text']), job.get('video_offset', 0) if job.get('video_id') else 0)
+    else:
+        path = DATA / 'audio' / (ident + '.srt')
+        if job['status'] != 'done' or not path.exists():
+            raise HTTPException(409, 'SRT từ TXT cần tạo giọng hoàn tất để lấy mốc thời gian thật.')
+        text = path.read_text(encoding='utf-8')
+    return Response(text, media_type='text/plain; charset=utf-8', headers={'Content-Disposition': f'attachment; filename="voice-studio-{ident[:8]}.{extension}"'})
+
+
+class ScriptConversion(BaseModel):
+    text: str = Field(min_length=1, max_length=MAX_CHARACTERS)
+    input_format: str = Field(pattern='^(txt|srt)$')
+    output_format: str = Field(pattern='^(txt|srt)$')
+
+
+@app.post('/api/scripts/convert')
+def convert_script(body: ScriptConversion):
+    try:
+        cues = parse_srt(body.text) if body.input_format == 'srt' else None
+        if body.output_format == 'srt' and cues is None:
+            raise ValueError('Tạo voice hoàn tất rồi xuất SRT để có mốc thời gian thật.')
+        text = (export_srt(cues) if body.output_format == 'srt' else '\n'.join(c['text'] for c in cues)) if cues else body.text
+        return {'text': text}
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
