@@ -162,7 +162,10 @@ def config():
 
 @app.get('/api/voices')
 def voices():
-    return {'voices': PRESETS + installed_voices() + records('voices')}
+    presets = PRESETS
+    if os.environ.get('VOICE_STUDIO_PORTABLE') == '1':
+        presets = [v for v in PRESETS if (DATA / 'models' / (v['engine'] + '.ready')).exists()]
+    return {'voices': presets + installed_voices() + records('voices')}
 
 
 @app.post('/api/voices/clone', status_code=201)
