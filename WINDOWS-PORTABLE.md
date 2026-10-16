@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-28/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-29/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-28`; source application/build commit: `657f311`.
-- File size: **1,262,108,334 bytes** (about 1.18 GiB).
-- SHA256: `6a09fe5c9fd8c183b8caa5c1ad15f8b2a1b76fefc8c798c813ab347dfa7ffe0a`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38920051863): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-29`; source application/build commit: `7e44d1a`.
+- File size: **1,262,119,947 bytes** (about 1.18 GiB).
+- SHA256: `b66813941c479cfb4abddf9a19dd41e9396cfc7dc436a7621b2b6e9c98f635ac`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38926134861): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -146,3 +146,9 @@ Validation: 101 Linux tests passed with one native-only skip; native Windows reg
 The former download warning combined an empty filtered list and a selected Windows voice. Download controls now distinguish empty lists, ready AI models, unloaded AI models and installed Windows voices. Ready AI/Windows choices disable unnecessary model downloads. The main video page exposes Choose matching AI voice; the action clears the country filter, switches to AI, preserves language and prefers ready/native speakers. It never starts a download. Unsupported AI languages open Windows voice help without changing language. Equivalent recovery applies to text voice creation.
 
 Validation: 101 Linux tests passed with one Windows-only skip. Chromium exercised empty Windows-source/country-filter recovery, ready Nano, native Japanese selection with unloaded-model fixtures, installed SAPI control state using a catalogue fixture, unsupported-language help preserving language, both video/text actions, no download requests, mobile and no JS errors. The real Vietnamese Nano/English Turbo strict subtitle speech/listening/preview flow passed again. Native Windows regression checks and relocated offline package smoke succeeded. Full release ZIP downloaded, SHA256 verified and inspected for 3.4.3 and the recovery implementation.
+
+## Bounded provider-overload recovery in 3.4.4
+
+Cloud HTTP 503 requests retry at most three times with short async waits; Retry-After is capped at five seconds. When a model remains busy, preflight and subtitle translation can try at most three other models listed by the same provider. They never change provider/keys automatically or retry authentication/permission/quota failures. Persistent overload is reported as an outage, with original cues preserved. Stop during a pending preflight prevents video enqueue when the response returns. This cannot guarantee recovery from a Google service outage.
+
+Validation: 108 Linux tests passed with one Windows-only skip. HTTP fixtures verify busy→success, attempt limits, bounded Retry-After, provider error preservation, no retries on 401/403/429, preflight/runtime model recovery and persistent-busy diagnostics. Chromium verifies Stop-before-enqueue, original-cue recovery/retry and actual Nano speech. These simulate cloud overload; no live user key was used. Native Windows regression checks and relocated offline smoke succeeded. Complete ZIP downloaded, SHA256 verified and inspected for 3.4.4 and overload retry/recovery code.
