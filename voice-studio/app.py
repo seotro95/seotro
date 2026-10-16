@@ -171,7 +171,7 @@ def config():
 
 
 def _config_values():
-    return {'subtitle_ready':(DATA/'models'/'whisper-base'/'model.bin').is_file(),'version':'2.9.0','mode': 'local', 'languages': LANGUAGES, 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'cpu_cores': os.cpu_count() or 1, 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
+    return {'subtitle_ready':(DATA/'models'/'whisper-base'/'model.bin').is_file(),'version':app.version,'mode': 'local', 'languages': LANGUAGES, 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'cpu_cores': os.cpu_count() or 1, 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
 
 
 @app.get('/api/voices')
