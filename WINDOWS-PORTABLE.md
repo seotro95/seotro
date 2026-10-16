@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-24/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-25/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-24`; source application/build commit: `60866b8`.
-- File size: **1,262,112,619 bytes** (about 1.18 GiB).
-- SHA256: `43ea3f1d41e5c8b3e19d2447740f8c30b2724da2afef00d56003aa417908bac4`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38906317368): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-25`; source application/build commit: `0510131`.
+- File size: **1,262,125,917 bytes** (about 1.18 GiB).
+- SHA256: `f3d91a6fc88b1bb52807e29b8fe658581e0d1d4ef4cb4ce000dbd6635d42c5bc`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38908293904): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -118,3 +118,11 @@ Validation: 81 Linux checks passed plus one Win32-only skip; all 82 native Windo
 Video voice creation defaults to preserving original SRT starts and ends. Select a maximum fitting tempo from 1.25× to 2×; sentences that still exceed their window fail with the exact cue number instead of dropping words. The alignment panel shows actual speech boundaries and links to each cue. Short preview reuses the completed full voice at the selected video timestamp, including when spoken language differs from subtitle language. Optional gap extension remains available explicitly. Model/library/memory errors now provide actionable messages.
 
 Validation: 90 Linux tests passed with one Windows-only skip; all 91 native Windows regression checks passed. Real Vietnamese Nano and English Turbo browser flows preserved original cue times and produced matching per-cue reports, synchronized playback and reused-voice preview. A deliberately oversized sentence displayed its failed-cue report and released the busy state. Six-language synthetic PCM tests verify timeline behavior, not foreign-model speech quality. The relocated offline Windows runtime also synthesized a strict two-cue SRT and verified its report before publication. The complete release ZIP was downloaded in four validated ranges, SHA256 checked, and inspected for application version 3.3.0 and the new worker field.
+
+## Voice download formats and translation-model preflight in 3.4
+
+The video workspace exports the ready voice as MP3 (192 kbps) or WAV without synthesizing it again; TXT/SRT contain the spoken script and generated timing, independent from the editable subtitle language. Existing editor TXT/SRT buttons export the current edited script. Stale voice is rejected until regenerated.
+
+Before workspace translation starts, a preflight checks the selected local/cloud model. Ollama can select an installed model when the absent name is the default; explicitly entered missing names fail with instructions. Cloud model access is checked using the connected key. Error messages distinguish translation models from speech/Whisper. This does not install optional models or establish the cause of an unreported error on another machine.
+
+Validation: 93 Linux checks passed plus one Windows-only skip; native Windows regression checks and relocated offline package smoke completed. MP3 codec, WAV bytes, Unicode TXT, SRT timing, pending-job rejection and missing-model recovery/error contracts were tested. Chromium downloaded all four formats following real Vietnamese/English synthesis and rejected a missing Ollama model before recognition. Cloud requests used fixtures; no live cloud credentials were exercised. The full 1,262,125,917-byte ZIP was downloaded, SHA256 verified and inspected for version 3.4.0 and export/preflight implementation.
