@@ -50,6 +50,14 @@ path=work/'job.json'
 path.write_text(json.dumps({'video_id':'portable','action':'render','cues':[{'start':0,'end':5,'text':'Phụ đề đã sửa trực tiếp'}],'logo':{'x':10,'y':10,'w':30,'h':20}}),encoding='utf-8')
 run(path)
 assert inspect_video(work/'output.mp4')['duration'] > 19
+# Verify actual UHD output with the relocated interpreter and bundled FFmpeg.
+short=videos/'portable-4k.source'
+subprocess.run(['ffmpeg','-nostdin','-v','error','-f','lavfi','-i','color=c=blue:s=160x90:r=5:d=0.4','-c:v','libx264','-f','mp4','-y',str(short)],check=True)
+(videos/'portable-4k.json').write_text(json.dumps(inspect_video(short)),encoding='utf-8')
+path.write_text(json.dumps({'video_id':'portable-4k','action':'export','export_resolution':'2160p'}),encoding='utf-8')
+run(path)
+meta=inspect_video(work/'output.mp4')
+assert (meta['width'],meta['height'])==(3840,2160)
 # Remove QA projects; retain model weights and ready markers only.
 import shutil
 for name in ('audio','parts','jobs','voices','videos','video_tasks'):

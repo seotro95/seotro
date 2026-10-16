@@ -51,16 +51,23 @@ def run(path):
         temp = work/'state.tmp'
         temp.write_text(json.dumps({'progress':progress,'phase':phase},ensure_ascii=False),encoding='utf-8')
         temp.replace(work/'progress.json')
-    if job['action'] in {'logo','render'}:
+    if job['action'] in {'logo','render','export'}:
+        from video_export import scale_filter
         vf = validate_logo(job.get('logo'), meta)
+        filters = [vf] if vf else []
+        scale,size = scale_filter(meta,job.get('export_resolution','original'))
+        if scale:
+            filters.append(scale)
         if job['action']=='render':
             from video_editor import validate_cues, write_ass
             cues = validate_cues(job['cues'],meta['duration'])
-            write_ass(work/'captions.ass',cues,meta['width'],meta['height'])
-            vf = (vf+',' if vf else '')+'ass=filename=captions.ass'
-        if not vf:
+            write_ass(work/'captions.ass',cues,*size)
+            filters.append('ass=filename=captions.ass')
+        if job['action']=='logo' and not vf:
             raise ValueError('Hãy chọn vùng logo trước.')
-        run_ffmpeg(['ffmpeg','-nostdin','-v','error','-protocol_whitelist','file,pipe','-i',str(source),'-map','0:v:0','-map','0:a?','-vf',vf,'-c:v','libx264','-preset','veryfast','-crf','20','-c:a','aac','-movflags','+faststart','-y',str(work/'output.mp4')],work,meta['duration'],1,99,'Đang xuất video có phụ đề / xử lý logo',cwd=work)
+        options = ['-vf',','.join(filters),'-c:v','libx264','-threads','4','-preset','veryfast','-crf','20','-pix_fmt','yuv420p'] if filters else ['-c:v','copy']
+        run_ffmpeg(['ffmpeg','-nostdin','-v','error','-protocol_whitelist','file,pipe','-i',str(source),'-map','0:v:0','-map','0:a?',*options,'-c:a','aac','-b:a','192k','-movflags','+faststart','-y',str(work/'output.mp4')],work,meta['duration'],1,99,f'Đang xuất MP4 {size[0]} × {size[1]}',cwd=work)
+        (work/'result.json').write_text(json.dumps({'width':size[0],'height':size[1]}),encoding='utf-8')
         update(100,'Video đã sẵn sàng')
         return
     if job.get('srt'):

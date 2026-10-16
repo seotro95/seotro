@@ -1,4 +1,4 @@
-# Voice Studio 2.7 — Sửa phụ đề trực tiếp trên video và xử lý logo
+# Voice Studio 2.8 — Xuất video đến 4K, TXT/SRT và sửa phụ đề trực tiếp
 
 Giao diện tiếng Việt cho chuyển văn bản thành lời nói, hồ sơ nhân bản giọng từ mẫu, thư viện giọng, hàng đợi, nghe lại và tải WAV/MP3. Tạo giọng cục bộ không cần API key. AI viết kịch bản mặc định dùng Ollama trên máy, không cần tài khoản hoặc API key. OpenAI/Gemini là tùy chọn nâng cao và vẫn yêu cầu khóa riêng.
 
@@ -174,3 +174,9 @@ Dịch dùng model Ollama cục bộ (mặc định `qwen3:4b`); cần cài Olla
 Chọn hoặc tải video trong **Lồng tiếng video**. Khung xem và danh sách câu nằm ngay trong tool; nhấn **Tự tạo phụ đề từ lời nói trong video**, sửa lời và mốc từng câu, thêm/xóa câu nếu cần. **Lưu phụ đề đã sửa** giữ dự án trong `.data/editor`. **Xuất video có phụ đề đã sửa** gắn chữ trực tiếp vào hình và giữ âm thanh gốc; không cần voice hoặc nhập TXT/SRT. Có thể chọn dịch các câu đang sửa hoặc lồng tiếng bằng giọng đã chọn. TXT/SRT chỉ là tùy chọn nâng cao.
 
 Dừng video ở mốc cần xem, nhấn **Khoanh vùng logo tại thời điểm đang xem**, kéo chọn vùng rồi bật áp dụng khi xuất. Có thể xuất phụ đề và xử lý vùng logo trong một lần. Video phát trong trình duyệt nếu codec hỗ trợ; trường hợp khác dùng ô giây và nút xem khung hình. Đây là phụ đề mới từ âm thanh hoặc các câu tự nhập; chữ cũ dính trong hình chưa được OCR để sửa tự động. Có thể khoanh vùng chữ cũ để xử lý và gắn chữ mới, nhưng chi tiết bị che không khôi phục được.
+
+### Chế độ xuất 2.8
+
+Trong trình sửa video, chọn độ phân giải **Gốc / 720p / 1080p / UHD 4K**. Xuất MP4 không cần có phụ đề; nút xuất video có phụ đề dùng các câu vừa sửa. Có nút xuất TXT và SRT ngay trong trình sửa, tự lưu câu đã sửa trước khi tải; không cần mở phần nhập tệp nâng cao. Chế độ độ phân giải cũng áp dụng khi xử lý logo hoặc lồng tiếng.
+
+Xuất giữ tỷ lệ hình, không cắt hoặc kéo méo. UHD 4K tối đa 3840×2160 ngang, 2160×3840 dọc; video tỷ lệ khác nằm trong khung giới hạn tương ứng. Chế độ Gốc không nâng kích thước, nhưng hạ video trên 4K về giới hạn 4K. Các chế độ kích thước cố định có thể nâng video nhỏ lên; đây không phải phục hồi chi tiết bằng AI. Giữ FPS nguồn. Xử lý logo trước khi đổi kích thước; gắn phụ đề sau khi đổi kích thước để chữ rõ ở độ phân giải đầu ra. 4K cần nhiều CPU/RAM và thời gian hơn.

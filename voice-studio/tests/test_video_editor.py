@@ -47,6 +47,11 @@ def test_project_api_and_timed_frame(tmp_path,monkeypatch):
         project={'cues':[{'start':0,'end':1,'text':'Đã sửa trực tiếp'}]}
         assert client.put(f'/api/videos/{ident}/editor',json=project).status_code==200
         assert client.get(f'/api/videos/{ident}/editor').json()==project
+        assert client.get(f'/api/videos/{ident}/editor/export.txt').text=='Đã sửa trực tiếp'
+        exported=client.get(f'/api/videos/{ident}/editor/export.srt').text
+        assert '00:00:00,000 --> 00:00:01,000' in exported and 'Đã sửa trực tiếp' in exported
+        assert client.get(f'/api/videos/{ident}/editor/export.exe').status_code==404
+        assert client.post('/api/video-tasks',json={'video_id':ident,'action':'export','export_resolution':'8k'}).status_code==422
         assert client.get(f'/api/videos/{ident}/source',headers={'Range':'bytes=0-9'}).status_code==206
         assert client.get(f'/api/videos/{ident}/frame?at=1').content[:2]==b'\xff\xd8'
         assert client.get(f'/api/videos/{ident}/frame?at=-1').status_code==422

@@ -111,10 +111,12 @@ def mux_video(job, audio, work, data, audio_seconds):
     else:
         filters += ';[dub]anull[out]'
     from video_tasks import validate_logo
-    if job.get('logo'):
-        meta.update(inspect_video(source))
+    from video_export import scale_filter
+    meta.update(inspect_video(source))
     logo = validate_logo(job.get('logo'), meta)
-    video_options = ['-vf', logo, '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20'] if logo else ['-c:v', 'copy']
-    run_ffmpeg(['ffmpeg', '-nostdin', '-v', 'error', '-protocol_whitelist', 'file,pipe', '-format_whitelist', 'mov,matroska,webm', '-i', str(source), '-i', str(audio), '-filter_complex', filters, '-map', '0:v:0', '-map', '[out]', *video_options, '-c:a', 'aac', '-b:a', '192k', '-t', str(meta['duration']), '-movflags', '+faststart', '-y', str(temporary)], work, meta['duration'], 86, 99, 'Đang xuất video MP4', timeout=max(60,meta['duration']*2))
+    scale,size = scale_filter(meta,job.get('export_resolution','original'))
+    video_filters = [f for f in (logo,scale) if f]
+    video_options = ['-vf', ','.join(video_filters), '-c:v', 'libx264', '-threads','4','-preset', 'veryfast', '-crf', '20','-pix_fmt','yuv420p'] if video_filters else ['-c:v', 'copy']
+    run_ffmpeg(['ffmpeg', '-nostdin', '-v', 'error', '-protocol_whitelist', 'file,pipe', '-format_whitelist', 'mov,matroska,webm', '-i', str(source), '-i', str(audio), '-filter_complex', filters, '-map', '0:v:0', '-map', '[out]', *video_options, '-c:a', 'aac', '-b:a', '192k', '-t', str(meta['duration']), '-movflags', '+faststart', '-y', str(temporary)], work, meta['duration'], 86, 99, 'Đang xuất video MP4', timeout=max(600,meta['duration']*8) if video_filters else max(60,meta['duration']*2))
     destination = data / 'audio' / (job['id'] + '.mp4')
     temporary.replace(destination)

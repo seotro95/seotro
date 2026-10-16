@@ -96,7 +96,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='2.7.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='2.8.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -239,6 +239,7 @@ class Speech(BaseModel):
     video_id: str | None = None
     video_offset: float = Field(default=0, ge=0, le=10800)
     video_mix: bool = False
+    export_resolution: str = Field(default='original',pattern='^(original|720p|1080p|2160p)$')
     logo: dict[str, int] | None = None
     nano_threads: int = Field(default=2, ge=1, le=8)
     nano_parallel: int = Field(default=1, ge=1, le=2)
@@ -616,8 +617,9 @@ class EditorProject(BaseModel):
 
 
 class VideoTask(BaseModel):
+    export_resolution: str = Field(default='original',pattern='^(original|720p|1080p|2160p)$')
     video_id: str
-    action: str = Field(pattern='^(subtitles|logo|render)$')
+    action: str = Field(pattern='^(subtitles|logo|render|export)$')
     cues: list[EditorCue] = Field(default_factory=list,max_length=10000)
     accurate: bool = True
     source_language: str = Field(default='', pattern='^(|vi|en|ja|ko|zh|fr|de|es|it|pt|ru)$')
@@ -704,6 +706,8 @@ def video_task_status(ident:str):
             result['cues']=parse_srt(result['srt'])
         else:
             result['video_url']=f'/api/video-tasks/{ident}/output.mp4'
+            if (work/'result.json').exists():
+                result.update(read_json(work/'result.json'))
     if job['status']=='error' and (work/'original.srt').exists():
         result['original_srt']=(work/'original.srt').read_text(encoding='utf-8')
     return result
@@ -768,3 +772,20 @@ def save_editor(ident:str,body:EditorProject):
     with lock:
         write_json(folder/f'{ident}.json',{'cues':cues})
     return {'cues':cues}
+
+
+@app.get('/api/videos/{ident}/editor/export.{extension}')
+def export_editor(ident:str,extension:str):
+    from fastapi.responses import Response
+    from video_editor import validate_cues
+    if extension not in {'txt','srt'}:
+        raise HTTPException(404,'Chỉ hỗ trợ TXT và SRT.')
+    ident=valid_id(ident)
+    meta=read_json(DATA/'videos'/f'{ident}.json')
+    project=read_json(DATA/'editor'/f'{ident}.json')
+    try:
+        cues=validate_cues(project['cues'],meta['duration'])
+    except ValueError as exc:
+        raise HTTPException(422,str(exc)) from None
+    text=export_srt(cues) if extension=='srt' else '\n'.join(c['text'] for c in cues)
+    return Response(text,media_type='text/plain; charset=utf-8',headers={'Content-Disposition':f'attachment; filename="subtitles-{ident[:8]}.{extension}"'})
