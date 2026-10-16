@@ -160,3 +160,11 @@ Kiểm thử ứng dụng dùng FFmpeg thật cho nhập/kiểm tra mẫu; phầ
 - VieNeu: https://github.com/pnnbao97/VieNeu-TTS
 - Qwen3-TTS: https://github.com/QwenLM/Qwen3-TTS
 - Các trọng số được tải từ kho chính thức tương ứng. Giấy phép mã nguồn và từng mô hình là riêng biệt; xem model card và LICENSE của phiên bản tải về trước khi phân phối hoặc sử dụng thương mại. Không đóng gói lại trọng số trong Git.
+
+### Tự tạo phụ đề, dịch và xử lý logo (2.6)
+
+Trong mục Lồng tiếng video, chọn video, ngôn ngữ gốc (hoặc tự nhận dạng), ngôn ngữ lời đọc và giọng. **Tự nhận dạng → tạo / dịch SRT** dùng Whisper base đa ngôn ngữ, chạy CPU int8 trên máy. Bản Portable kèm model; bản mã nguồn chạy `download_subtitle_model.bat` một lần khi có Internet. Phụ đề được đưa vào ô SRT để sửa và xuất TXT/SRT. Nút tự lồng tiếng chạy nối tiếp nhận dạng, dịch nếu bật, rồi giọng đã chọn. SRT giữ nguyên mốc; câu dịch dài quá ô sẽ yêu cầu chỉnh thay vì cắt lời.
+
+Dịch dùng model Ollama cục bộ (mặc định `qwen3:4b`); cần cài Ollama và chạy `setup_local_writer.bat` trước. Không cần API key. Chưa có Ollama vẫn tạo được phụ đề nguyên ngữ. Nhận dạng/dịch có thể sai; kiểm tra tên riêng, tiếng ồn và các mốc câu trước khi dùng. Thời gian nhận dạng phụ thuộc CPU và độ dài video.
+
+**Hiện khung hình** rồi kéo chọn vùng logo cố định. Có thể xuất video chỉ xử lý logo hoặc bật áp dụng khi lồng tiếng. Nội suy không phục hồi chi tiết bị che, không theo dõi logo chuyển động. Xử lý logo mã hóa lại H.264/CRF20 nên chậm hơn ghép giọng nguyên hình. Nút **Dừng** hủy cả nhận dạng, dịch hoặc xử lý logo; thanh phần trăm dựa trên mốc âm thanh/hình ảnh đang xử lý. Dữ liệu tác vụ nằm trong `.data/video_tasks`; phụ đề gốc được giữ nếu dịch thất bại.

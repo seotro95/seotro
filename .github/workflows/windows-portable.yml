@@ -54,9 +54,9 @@ jobs:
           $tag = "windows-portable-${{ github.run_number }}"
           $body = @"
           Extract all files, then double-click MO_VOICE_STUDIO.bat.
-          Includes Windows Python 3.12, FFmpeg, Nano and Turbo Vietnamese voices.
+          Includes Windows Python 3.12, FFmpeg, Nano and Turbo Vietnamese voices, and offline Whisper subtitle recognition.
           No Python installation, venv setup, API key or first-run model download is required for bundled voices.
-          Qwen international voices and Ollama writing are optional downloads.
+          Qwen international voices and Ollama writing/translation are optional downloads.
           Native Windows smoke tests, relocated-interpreter inference and MP4 export passed before publication.
           Source commit: ${{ github.sha }}
           "@

@@ -72,6 +72,11 @@ async def lifespan(application):
     global executor
     with studio_lock():
         shutdown_event.clear()
+        for path in (DATA/'video_tasks').glob('*/job.json'):
+            task = read_json(path)
+            if task.get('status') in {'queued','running'}:
+                task.update(status='error',error='Ứng dụng đã tắt trước khi xử lý xong. Hãy chạy lại tác vụ.')
+                write_json(path,task)
         executor = ThreadPoolExecutor(max_workers=1)
         for interrupted in records('jobs'):
             if interrupted.get('status') in {'queued', 'running', 'cancelling'}:
@@ -91,7 +96,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='2.5.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='2.6.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -234,6 +239,7 @@ class Speech(BaseModel):
     video_id: str | None = None
     video_offset: float = Field(default=0, ge=0, le=10800)
     video_mix: bool = False
+    logo: dict[str, int] | None = None
     nano_threads: int = Field(default=2, ge=1, le=8)
     nano_parallel: int = Field(default=1, ge=1, le=2)
     nano_steps: int = Field(default=8, ge=4, le=16)
@@ -349,6 +355,13 @@ def speech(body: Speech):
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
     if body.video_id:
         meta = read_json(DATA / 'videos' / f'{valid_id(body.video_id)}.json')
+        if body.logo:
+            from video_tasks import validate_logo
+            meta.update(inspect_video(DATA/'videos'/f'{body.video_id}.source'))
+            try:
+                validate_logo(body.logo,meta)
+            except (ValueError,KeyError) as exc:
+                raise HTTPException(422,str(exc)) from None
         if body.video_offset >= meta['duration']:
             raise HTTPException(422, 'Thời điểm bắt đầu phải nhỏ hơn thời lượng video.')
     voice = next((v for v in PRESETS + installed_voices() + records('voices') if v['id'] == body.voice_id), None)
@@ -532,6 +545,9 @@ async def upload_video(file: UploadFile = File(...)):
 def delete_video(ident: str):
     ident = valid_id(ident)
     with lock:
+        active_tasks = [read_json(p) for p in (DATA/'video_tasks').glob('*/job.json')]
+        if any(j.get('video_id') == ident and j.get('status') in {'queued','running'} for j in active_tasks):
+            raise HTTPException(409,'Dừng tác vụ video trước khi xóa nguồn.')
         if any(j.get('video_id') == ident for j in records('jobs')):
             raise HTTPException(409, 'Xóa các tác vụ dùng video này trong Lịch sử trước khi xóa video gốc.')
         for suffix in ('.source', '.json'):
@@ -586,3 +602,120 @@ def convert_script(body: ScriptConversion):
         return {'text': text}
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from None
+
+# Video tools share the speech queue so CPU-heavy models never compete.
+class VideoTask(BaseModel):
+    video_id: str
+    action: str = Field(pattern='^(subtitles|logo)$')
+    source_language: str = Field(default='', pattern='^(|vi|en|ja|ko|zh|fr|de|es|it|pt|ru)$')
+    target_language: str = Field(default='', max_length=16)
+    model: str = Field(default='qwen3:4b', max_length=100)
+    srt: str = Field(default='', max_length=200000)
+    logo: dict[str, int] | None = None
+
+
+def video_task_work(ident):
+    return DATA / 'video_tasks' / valid_id(ident)
+
+
+def run_video_task(ident):
+    work = video_task_work(ident)
+    path = work/'job.json'
+    job = read_json(path)
+    process = None
+    try:
+        if (work/'cancel.flag').exists():
+            job['status'] = 'cancelled'
+            return
+        close_warm_worker()
+        job['status'] = 'running'
+        write_json(path,job)
+        with (work/'worker.log').open('wb') as log:
+            process = subprocess.Popen([sys.executable,str(BASE/'video_tasks.py'),str(path)],stdout=log,stderr=log,
+                **({'creationflags':subprocess.CREATE_NEW_PROCESS_GROUP} if os.name=='nt' else {'start_new_session':True}))
+            while process.poll() is None:
+                if shutdown_event.is_set() or (work/'cancel.flag').exists():
+                    stop_worker(process, force=True)
+                    job['status']='cancelled'
+                    return
+                time.sleep(.15)
+        if process.returncode:
+            raise ValueError((work/'error.txt').read_text(encoding='utf-8') if (work/'error.txt').exists() else 'Không xử lý được video. Kiểm tra model phụ đề và FFmpeg.')
+        job['status']='done'
+    except Exception as exc:
+        job.update(status='error',error=str(exc))
+    finally:
+        if process and process.poll() is None:
+            stop_worker(process,force=True)
+        write_json(path,job)
+
+
+@app.post('/api/video-tasks',status_code=202)
+def create_video_task(body:VideoTask):
+    meta = read_json(DATA/'videos'/f'{valid_id(body.video_id)}.json')
+    try:
+        if body.action=='logo':
+            from video_tasks import validate_logo
+            meta.update(inspect_video(DATA/'videos'/f'{body.video_id}.source'))
+            if not validate_logo(body.logo,meta):
+                raise ValueError('Chọn vùng logo trước.')
+        if body.srt:
+            cues=parse_srt(body.srt)
+            if cues[-1]['end']>meta['duration']:
+                raise ValueError('SRT dài hơn video.')
+        if body.target_language and body.target_language not in LANGUAGES:
+            raise ValueError('Ngôn ngữ dịch không hợp lệ.')
+    except (ValueError,KeyError) as exc:
+        raise HTTPException(422,str(exc)) from None
+    ident=uuid.uuid4().hex
+    work=video_task_work(ident)
+    work.mkdir(parents=True)
+    job={**body.model_dump(),'id':ident,'status':'queued'}
+    write_json(work/'job.json',job)
+    executor.submit(run_video_task,ident)
+    return {'id':ident,'status':'queued'}
+
+
+@app.get('/api/video-tasks/{ident}')
+def video_task_status(ident:str):
+    work=video_task_work(ident)
+    job=read_json(work/'job.json')
+    state=read_json(work/'progress.json') if (work/'progress.json').exists() else {'progress':0,'phase':'Đang chờ'}
+    result={'id':ident,'status':job['status'],'error':job.get('error'),**state}
+    if job['status']=='done':
+        if job['action']=='subtitles':
+            result['srt']=(work/'output.srt').read_text(encoding='utf-8')
+        else:
+            result['video_url']=f'/api/video-tasks/{ident}/output.mp4'
+    if job['status']=='error' and (work/'original.srt').exists():
+        result['original_srt']=(work/'original.srt').read_text(encoding='utf-8')
+    return result
+
+
+@app.post('/api/video-tasks/{ident}/cancel')
+def stop_video_task(ident:str):
+    work=video_task_work(ident)
+    read_json(work/'job.json')
+    (work/'cancel.flag').touch()
+    return {'status':'cancelling'}
+
+
+@app.get('/api/video-tasks/{ident}/{filename}')
+def video_task_download(ident:str,filename:str):
+    if filename not in {'output.mp4','output.srt','output.txt','original.srt'}:
+        raise HTTPException(404,'Không tìm thấy tệp.')
+    work=video_task_work(ident)
+    if not (work/filename).is_file():
+        raise HTTPException(404,'Tệp chưa sẵn sàng.')
+    return FileResponse(work/filename,filename=filename)
+
+
+@app.get('/api/videos/{ident}/frame')
+def video_frame(ident:str):
+    valid_id(ident)
+    source=DATA/'videos'/f'{ident}.source'
+    read_json(DATA/'videos'/f'{ident}.json')
+    output=DATA/'videos'/f'{ident}.jpg'
+    if not output.exists():
+        subprocess.run(['ffmpeg','-nostdin','-v','error','-i',str(source),'-frames:v','1','-y',str(output)],check=True,timeout=30)
+    return FileResponse(output,media_type='image/jpeg')

@@ -64,7 +64,7 @@ def copy_runtime(source, destination):
     shutil.copytree(source, destination, ignore=shutil.ignore_patterns('__pycache__', '*.pyc', '*.pdb', 'pip-cache'))
     # Include app-local MSVC libraries so no admin redistributable install is needed.
     roots = [Path(os.environ.get('ProgramFiles', 'C:/Program Files'))/'Microsoft Visual Studio']
-    candidates = [p for root in roots if root.exists() for p in root.glob('**/x64/Microsoft.VC143.CRT/msvcp140.dll') if 'onecore' not in str(p).lower()]
+    candidates = [p for root in roots if root.exists() for p in root.glob('*/*/VC/Redist/MSVC/*/x64/Microsoft.VC143.CRT/msvcp140.dll') if 'onecore' not in str(p).lower()]
     if not candidates:
         raise RuntimeError('Cannot locate redistributable MSVC CRT; do not publish an incomplete runtime.')
     for file in sorted(candidates)[-1].parent.glob('*.dll'):
@@ -105,6 +105,7 @@ def main():
     env = dict(os.environ, VOICE_STUDIO_DATA_DIR=str(data), HF_HOME=str(data/'models/cache'), HF_HUB_DISABLE_XET='1')
     for engine in ('vieneu_nano', 'vieneu'):
         subprocess.run([sys.executable, str(SOURCE/'prepare_models.py'), engine], env=env, check=True, timeout=1800)
+    subprocess.run([sys.executable,str(SOURCE/'prepare_subtitles.py')],env=env,check=True,timeout=1800)
     # Retain model cards/licenses alongside redistributed weights.
     from huggingface_hub import hf_hub_download
     for repo in ('pnnbao-ump/VieNeu-TTS-v3-Nano', 'pnnbao-ump/VieNeu-TTS-v3-Turbo', 'OpenMOSS-Team/MOSS-Audio-Tokenizer-Nano-ONNX'):

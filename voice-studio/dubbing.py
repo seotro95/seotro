@@ -16,7 +16,11 @@ def inspect_video(path):
         raise ValueError('Video phải có hình ảnh và dài tối đa 3 giờ.')
     if video['codec_name'] not in {'h264', 'hevc', 'av1', 'mpeg4', 'vp9'}:
         raise ValueError('Codec chưa hỗ trợ xuất MP4 nhanh. Hãy chuyển video sang H.264 trước.')
-    return {'duration': duration, 'codec': video['codec_name'], 'has_audio': any(s['codec_type'] == 'audio' for s in info['streams'])}
+    rotation = next((abs(int(s.get('rotation', 0))) % 180 for s in video.get('side_data_list', []) if 'rotation' in s), 0)
+    width, height = video['width'], video['height']
+    if rotation == 90:
+        width, height = height, width
+    return {'width': width, 'height': height, 'duration': duration, 'codec': video['codec_name'], 'has_audio': any(s['codec_type'] == 'audio' for s in info['streams'])}
 
 
 def run_ffmpeg(command, work, duration, start, end, phase, timeout=21600):
@@ -106,6 +110,11 @@ def mux_video(job, audio, work, data, audio_seconds):
         filters += ';[0:a:0]volume=0.15[background];[dub][background]amix=inputs=2:duration=first:normalize=0[out]'
     else:
         filters += ';[dub]anull[out]'
-    run_ffmpeg(['ffmpeg', '-nostdin', '-v', 'error', '-protocol_whitelist', 'file,pipe', '-format_whitelist', 'mov,matroska,webm', '-i', str(source), '-i', str(audio), '-filter_complex', filters, '-map', '0:v:0', '-map', '[out]', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-t', str(meta['duration']), '-movflags', '+faststart', '-y', str(temporary)], work, meta['duration'], 86, 99, 'Đang xuất video MP4', timeout=max(60,meta['duration']*2))
+    from video_tasks import validate_logo
+    if job.get('logo'):
+        meta.update(inspect_video(source))
+    logo = validate_logo(job.get('logo'), meta)
+    video_options = ['-vf', logo, '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20'] if logo else ['-c:v', 'copy']
+    run_ffmpeg(['ffmpeg', '-nostdin', '-v', 'error', '-protocol_whitelist', 'file,pipe', '-format_whitelist', 'mov,matroska,webm', '-i', str(source), '-i', str(audio), '-filter_complex', filters, '-map', '0:v:0', '-map', '[out]', *video_options, '-c:a', 'aac', '-b:a', '192k', '-t', str(meta['duration']), '-movflags', '+faststart', '-y', str(temporary)], work, meta['duration'], 86, 99, 'Đang xuất video MP4', timeout=max(60,meta['duration']*2))
     destination = data / 'audio' / (job['id'] + '.mp4')
     temporary.replace(destination)

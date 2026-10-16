@@ -38,9 +38,21 @@ subprocess.run(['ffmpeg','-nostdin','-v','error','-f','lavfi','-i','color=c=blue
 job = {'id': 'portable-check-vieneu_nano', 'video_id': 'portable'}
 mux_video(job, app/'.data/audio'/(job['id']+'.wav'), app/'.data/parts'/job['id'], app/'.data', sf.info(app/'.data/audio'/(job['id']+'.wav')).duration)
 assert inspect_video(app/'.data/audio'/(job['id']+'.mp4'))['has_audio']
+# Exercise bundled speech recognition offline and a real logo filter.
+from faster_whisper import WhisperModel
+recognizer = WhisperModel(str(app/'.data/models/whisper-base'),device='cpu',compute_type='int8',cpu_threads=2)
+segments, info = recognizer.transcribe(str(app/'.data/audio/portable-check-vieneu.wav'),language='vi',beam_size=1,vad_filter=True)
+assert any(segment.text.strip() for segment in segments), 'Offline subtitle recognition returned no text'
+from video_tasks import run
+work=app/'.data/video_tasks/portable'
+work.mkdir(parents=True)
+path=work/'job.json'
+path.write_text(json.dumps({'video_id':'portable','action':'logo','logo':{'x':10,'y':10,'w':30,'h':20}}),encoding='utf-8')
+run(path)
+assert inspect_video(work/'output.mp4')['duration'] > 19
 # Remove QA projects; retain model weights and ready markers only.
 import shutil
-for name in ('audio','parts','jobs','voices','videos'):
+for name in ('audio','parts','jobs','voices','videos','video_tasks'):
     shutil.rmtree(app/'.data'/name)
     (app/'.data'/name).mkdir()
 print('PASS: packaged Windows Python, dependencies, offline Nano+Turbo, web API/static assets, FFmpeg and MP4 export.')
