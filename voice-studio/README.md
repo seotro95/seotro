@@ -230,3 +230,6 @@ Bấm “Thử dịch một câu / kiểm tra model” trong Kết nối dịch 
 
 ### 3.4.3 · Chọn lại giọng khi bộ lọc trống
 Nút Chọn giọng AI phù hợp nằm ngay cạnh phần chọn giọng của màn hình video. Nút giữ ngôn ngữ, chuyển nguồn sang AI và bỏ bộ lọc quốc gia; ưu tiên giọng đã sẵn sàng và giọng bản ngữ nếu có. Chọn giọng không tự tải mô hình. Nút tải thể hiện rõ giọng Windows không cần model AI, giọng AI đã sẵn sàng hoặc giọng cần tải. Nếu ngôn ngữ không có AI hỗ trợ, tool mở hướng dẫn thêm giọng Windows và giữ nguyên ngôn ngữ.
+
+### 3.4.4 · Tự chờ và thử lại khi Gemini quá tải
+Lỗi HTTP 503 được thử lại tối đa ba lần cho mỗi yêu cầu, chờ ngắn 1/2 giây hoặc theo Retry-After nhưng tối đa 5 giây. Nếu model vẫn quá tải, phần dịch thử/dịch phụ đề có thể thử tối đa ba model khác được cùng dịch vụ liệt kê; không tự chuyển sang dịch vụ hay API key khác. HTTP 401/403/429 không được thử lặp hoặc đổi model để né lỗi. Nếu tất cả đều lỗi, tool giữ phụ đề và báo dịch vụ vẫn quá tải. Dừng trong lúc dịch thử sẽ chặn việc đưa video vào hàng đợi khi phản hồi trở về. Quá tải phía Google không thể được bảo đảm hết bằng cập nhật phần mềm.

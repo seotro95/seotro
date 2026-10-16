@@ -1,5 +1,6 @@
 """Local Ollama writing by default, optional keyed cloud providers."""
 import os
+import asyncio
 import re
 import threading
 
@@ -37,13 +38,18 @@ class WritingRequest(BaseModel):
 async def request_api(method, url, **kwargs):
     try:
         async with httpx.AsyncClient(timeout=httpx.Timeout(180, connect=15)) as client:
-            response = await client.request(method, url, **kwargs)
+            for attempt in range(3):
+                response = await client.request(method, url, **kwargs)
+                if response.status_code!=503 or attempt==2:break
+                try:delay=min(5,max(1,float(response.headers.get('Retry-After',2**attempt))))
+                except ValueError:delay=2**attempt
+                await asyncio.sleep(delay)
     except httpx.TimeoutException:
         raise HTTPException(504, 'AI viết phản hồi quá lâu. Hãy thử yêu cầu ngắn hơn.') from None
     except httpx.RequestError:
         raise HTTPException(502, 'Không kết nối được dịch vụ AI. Kiểm tra mạng.') from None
     if response.is_error:
-        descriptions = {401: 'API key không hợp lệ.', 403: 'API key hoặc khu vực chưa có quyền truy cập.', 404: 'Không tìm thấy model. Hãy kiểm tra tên model.', 429: 'Đã hết hạn mức hoặc vượt giới hạn yêu cầu. Kiểm tra thanh toán API.'}
+        descriptions = {401: 'API key không hợp lệ.', 403: 'API key hoặc khu vực chưa có quyền truy cập.', 404: 'Không tìm thấy model. Hãy kiểm tra tên model.', 429: 'Đã hết hạn mức hoặc vượt giới hạn yêu cầu. Kiểm tra thanh toán API.', 503: 'Dịch vụ AI đang quá tải; đã tự thử lại.'}
         detail=''
         try:
             error=response.json().get('error',{})
@@ -152,16 +158,17 @@ async def check_translation_model(provider,model):
         except ValueError as exc:raise HTTPException(503,f'Model {provider} / {name} không trả được bản dịch thử: {exc}') from None
     try:await probe(selected)
     except HTTPException as exc:
-        if 'Không tìm thấy model' not in str(exc.detail):raise
+        if not model_temporarily_unavailable(exc):raise
         try:available=await translation_models(provider)
         except HTTPException:available=[]
-        if selected==DEFAULT_MODELS[provider] or selected in available:
+        if selected==DEFAULT_MODELS[provider] or selected in available or '[HTTP 503]' in str(exc.detail):
             for candidate in [name for name in available if name!=selected][:3]:
                 try:await probe(candidate)
                 except HTTPException as retry:
-                    if 'Không tìm thấy model' in str(retry.detail):continue
+                    if model_temporarily_unavailable(retry):continue
                     raise
                 return {'provider':provider,'model':candidate,'ready':True,'verified_generation':True,'replaced_model':selected,'models_tried':tried}
+        if '[HTTP 503]' in str(exc.detail):raise HTTPException(503,f'{provider} vẫn quá tải sau khi tự chờ và thử các model: {", ".join(tried)}. Chờ vài phút rồi thử lại hoặc chọn dịch vụ dịch khác. Phụ đề gốc được giữ nguyên.') from None
         raise HTTPException(503,f'{provider} không chạy được lệnh dịch thử. Model đã thử: {", ".join(tried)}. {exc.detail} Kiểm tra model, API key Google AI Studio và quyền truy cập dự án. Phụ đề gốc được giữ lại; đây không phải model giọng đọc.') from None
     return {'provider':provider,'model':selected,'ready':True,'verified_generation':True,'models_tried':tried}
 
@@ -181,3 +188,8 @@ async def translation_models(provider):
         return sorted(set(n for n in names if re.fullmatch(r'[a-zA-Z0-9._-]{1,100}',n)),key=lambda n:('flash' not in n,'preview' in n,tuple(-int(x) for x in re.findall(r'\d+',n)[:2]),n),reverse=False)
     data=await request_api('GET','https://api.openai.com/v1/models',headers={'Authorization':f'Bearer {key}'})
     return sorted({m['id'] for m in data.get('data',[]) if re.fullmatch(r'gpt-[a-zA-Z0-9._-]+',m.get('id','')) and not any(x in m['id'] for x in ('audio','realtime','transcribe','tts','image','instruct','search'))},key=lambda n:('mini' not in n,n))
+
+
+def model_temporarily_unavailable(exc):
+    detail=str(getattr(exc,'detail',exc))
+    return 'Không tìm thấy model' in detail or '[HTTP 503]' in detail
