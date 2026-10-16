@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-11/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-13/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-11`; source application/build commit: `b6da775`.
-- File size: **1,262,056,836 bytes** (about 1.18 GiB).
-- SHA256: `711b83da3715df5e3b399836859a81e0415e0851d247533c63a8829290828c55`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38841665300): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-13`; source application/build commit: `0054c4c`.
+- File size: **1,262,060,877 bytes** (about 1.18 GiB).
+- SHA256: `00e680f7d96ad23a0e5364f98e19da72f51c91be75f3f5423ec6bbfc3cfcd79b`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38846259041): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -44,3 +44,11 @@ Choose a video in Lồng tiếng video, its original language (or automatic dete
 Show the video frame and drag a rectangle over a fixed logo. Export only the region treatment or apply it while dubbing. FFmpeg interpolates the selected region; it cannot recover covered detail or track moving logos. Filtering re-encodes H.264 and takes longer than the normal video-copy mux. Stop and percentage progress are available for recognition, translation, voice creation and video processing.
 
 Validation: 42 Linux regression tests passed; the same native Windows regression suite and relocated offline smoke completed successfully. Chromium exercised real recognition → SRT → Nano dubbing → MP4, pointer-based logo selection/export, mobile layout, and stopping a running recognition worker. Translation schema/timestamps were checked with mocked Ollama responses; a live translated result was not measured in the cloud environment. Missing Ollama reports setup instructions and preserves the original SRT.
+
+## Direct video subtitle editor in 2.7
+
+Select/upload a video, then use **Tự tạo phụ đề từ lời nói trong video**. Edit sentence text and start/end times in the built-in cue list; preview against the video, add a sentence at the current position, or delete a sentence. **Lưu phụ đề đã sửa** stores the project in `.data/editor` and restores it when that video is selected again. TXT/SRT entry is optional and collapsed under advanced settings.
+
+**Xuất video có phụ đề đã sửa** burns captions into MP4 while retaining original audio. Seek to a frame, choose **Khoanh vùng logo tại thời điểm đang xem**, drag the fixed region, and enable its use during export to combine captions and logo treatment. Local translation and dubbing can use edited sentences directly. Recognition does not OCR text already baked into video frames; covering an old caption/logo region does not restore the obscured scene.
+
+Validation: 45 regression checks passed on Linux and Windows. Decoded output pixels verify that burned text appears within the cue and disappears afterward. Chromium exercised video-only recognition, direct editing of words/timing, cue addition, project save/reload, synchronization with dubbing controls, selected-frame logo region, real caption+logo MP4 output, progress and mobile layout.
