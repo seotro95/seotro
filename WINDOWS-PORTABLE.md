@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-27/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-28/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-27`; source application/build commit: `4a1cfe0`.
-- File size: **1,262,098,516 bytes** (about 1.18 GiB).
-- SHA256: `1b778baec8d592a40f00f83cd5999028b6915bb5fcd7b2f711c35ecac9eb0174`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38918267387): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-28`; source application/build commit: `657f311`.
+- File size: **1,262,108,334 bytes** (about 1.18 GiB).
+- SHA256: `6a09fe5c9fd8c183b8caa5c1ad15f8b2a1b76fefc8c798c813ab347dfa7ffe0a`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38920051863): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -140,3 +140,9 @@ Validation: 97 Linux tests passed, one Win32-only skip; native Windows regressio
 Model metadata/catalogue membership no longer establishes readiness. Preflight sends the same JSON translation request used during subtitle processing, with one short test text. A default or catalogued model that returns 404 can be replaced by up to three other discovered candidates, excluding the failed name. Gemini catalogue ordering prefers newer version numbers. Quota/auth/network failures stop immediately instead of hopping models. Runtime translation has the same bounded 404 recovery. Google HTTP status and reason are preserved with API key redaction. The user can test a model independently before submitting video. Failed preflight keeps progress at zero and never enqueues ASR.
 
 Validation: 101 Linux tests passed with one native-only skip; native Windows regression checks and relocated portable smoke completed successfully. Fixtures cover two dead listed models followed by working generation, runtime fallback, quota stop, source immutability, provider reason/key redaction, and a separate all-unavailable check confirms four generation attempts maximum. Chromium verifies probe rejection blocks ASR at 0%, standalone test feedback, and the preserved-cue retry through actual Nano synthesis. The user's key is from Google AI Studio but was not supplied to cloud tests; live account access is tested by the app on their machine. The complete published ZIP was downloaded, SHA256 checked and inspected for 3.4.2, generation verification and the model-test button.
+
+## Voice source/filter recovery in 3.4.3
+
+The former download warning combined an empty filtered list and a selected Windows voice. Download controls now distinguish empty lists, ready AI models, unloaded AI models and installed Windows voices. Ready AI/Windows choices disable unnecessary model downloads. The main video page exposes Choose matching AI voice; the action clears the country filter, switches to AI, preserves language and prefers ready/native speakers. It never starts a download. Unsupported AI languages open Windows voice help without changing language. Equivalent recovery applies to text voice creation.
+
+Validation: 101 Linux tests passed with one Windows-only skip. Chromium exercised empty Windows-source/country-filter recovery, ready Nano, native Japanese selection with unloaded-model fixtures, installed SAPI control state using a catalogue fixture, unsupported-language help preserving language, both video/text actions, no download requests, mobile and no JS errors. The real Vietnamese Nano/English Turbo strict subtitle speech/listening/preview flow passed again. Native Windows regression checks and relocated offline package smoke succeeded. Full release ZIP downloaded, SHA256 verified and inspected for 3.4.3 and the recovery implementation.
