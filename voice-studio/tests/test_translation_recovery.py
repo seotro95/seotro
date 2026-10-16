@@ -54,3 +54,50 @@ def test_failed_task_exposes_original_cues(studio):
     response=client.get(f'/api/video-tasks/{ident}')
     assert response.status_code==200
     assert response.json()['original_cues']==[{'start':1,'end':3,'text':'Original words'}]
+
+
+def test_probe_skips_two_listed_but_dead_models_and_uses_generation(monkeypatch):
+    calls=[]
+    async def request(method,url,**kwargs):
+        assert method=='POST' and ':generateContent' in url
+        calls.append(url)
+        if 'gemini-working-flash' not in url:raise HTTPException(502,'Không tìm thấy model. [HTTP 404]')
+        assert kwargs['json']['contents']
+        return {'candidates':[{'content':{'parts':[{'text':'{"texts":["OK"]}'}]}}]}
+    monkeypatch.setattr(writing,'request_api',request);monkeypatch.setattr(writing,'get_key',lambda _: 'fixture')
+    monkeypatch.setattr(writing,'translation_models',AsyncMock(return_value=['gemini-dead-flash','gemini-working-flash']))
+    result=asyncio.run(writing.check_translation_model('gemini',''))
+    assert result['verified_generation'] and result['model']=='gemini-working-flash' and len(calls)==3
+
+
+def test_probe_quota_error_does_not_try_other_models(monkeypatch):
+    monkeypatch.setattr(writing,'get_key',lambda _: 'fixture')
+    request=AsyncMock(side_effect=HTTPException(502,'Đã hết hạn mức. [HTTP 429]'))
+    models=AsyncMock(return_value=['another-model'])
+    monkeypatch.setattr(writing,'request_api',request);monkeypatch.setattr(writing,'translation_models',models)
+    with pytest.raises(HTTPException,match='429'):asyncio.run(writing.check_translation_model('gemini',''))
+    assert request.await_count==1 and models.await_count==0
+
+
+def test_runtime_skips_two_dead_models_without_mutating_cues(monkeypatch):
+    async def request(method,url,**kwargs):
+        if 'gemini-working-flash' not in url:raise HTTPException(502,'Không tìm thấy model.')
+        return {'candidates':[{'content':{'parts':[{'text':'{"texts":["Xin chào"]}'}]}}]}
+    monkeypatch.setattr(writing,'get_key',lambda _: 'fixture');monkeypatch.setattr(writing,'request_api',request)
+    monkeypatch.setattr(writing,'translation_models',AsyncMock(return_value=['gemini-2.5-flash-lite','gemini-working-flash']))
+    cues=[{'start':1,'end':4,'text':'Hello'}]
+    assert translate_cues(cues,'vi','',lambda *a:None,'gemini')[0]['text']=='Xin chào'
+    assert cues[0]['text']=='Hello'
+
+
+def test_cloud_error_keeps_google_reason_but_redacts_api_key(monkeypatch):
+    import httpx
+    secret='AIzaFixtureSecret0123456789'
+    class Client:
+        def __init__(self,**kwargs):pass
+        async def __aenter__(self):return self
+        async def __aexit__(self,*args):pass
+        async def request(self,*args,**kwargs):return httpx.Response(404,json={'error':{'message':'models/test is not found for API version v1beta; key='+secret}})
+    monkeypatch.setattr(writing.httpx,'AsyncClient',Client)
+    with pytest.raises(HTTPException) as exc:asyncio.run(writing.request_api('POST','https://generativelanguage.googleapis.com/v1beta/models/test:generateContent',headers={'x-goog-api-key':secret}))
+    assert 'v1beta' in exc.value.detail and '[HTTP 404]' in exc.value.detail and secret not in exc.value.detail

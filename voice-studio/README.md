@@ -224,3 +224,6 @@ Trước khi dịch phụ đề/lời đọc, studio kiểm tra model dịch. Ol
 
 ### 3.4.1 · Khôi phục khi dịch báo không tìm thấy model
 Thông báo “Không tìm thấy model. Hãy kiểm tra tên model.” từ dịch vụ cloud thuộc phần dịch, không phải Whisper hay giọng đọc. Trong Kết nối dịch, bấm Cập nhật model dịch để lấy danh sách từ tài khoản đang dùng. Model mặc định đã ngừng hoạt động được thay bằng model dịch đang có; model tự nhập không bị đổi ngầm. Nếu dịch thất bại sau khi nhận dạng, phụ đề gốc hiện ngay trong khung sửa. Chọn model rồi bấm Dịch lại phụ đề đã nhận dạng để dùng lại SRT, không nhận dạng lại video.
+
+### 3.4.2 · Kiểm tra bằng lệnh dịch thật
+Bấm “Thử dịch một câu / kiểm tra model” trong Kết nối dịch để gửi câu thử qua đúng API tạo nội dung, không chỉ kiểm tra metadata. Trước khi dịch video, tool cũng tự kiểm tra như vậy. Model mặc định/model có trong danh sách nhưng trả 404 được bỏ qua; tối đa bốn model được thử, không chuyển tiếp khi hết hạn mức hoặc thiếu quyền. Danh sách Gemini ưu tiên phiên bản mới hơn. Lỗi giữ mã HTTP và lý do Google, che API key. Nếu tất cả đều lỗi, dừng trước nhận dạng; kiểm tra quyền truy cập dự án/key Google AI Studio. Không có model nào được bảo đảm hoạt động chỉ vì xuất hiện trong danh sách.

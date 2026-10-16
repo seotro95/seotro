@@ -65,15 +65,22 @@ def translate_cues(cues,language,model,update,provider='ollama',source_language=
             if 'Không tìm thấy model' not in str(exc.detail) or provider=='ollama':raise
             try:available=asyncio.run(writing.translation_models(provider))
             except writing.HTTPException:available=[]
-            replacements=[name for name in available if name!=model]
-            if model==original_model==writing.DEFAULT_MODELS[provider] and replacements:
-                model=replacements[0]
-                update(60+int(38*done/max(1,len(cues))),f'Model mặc định không còn hoạt động; chuyển sang {provider} / {model}')
-                try:texts=asyncio.run(translate_batch([c['text'] for c in batch],language,provider,model,source_language))
-                except writing.HTTPException as retry:
-                    raise ValueError(f'Dịch bằng {provider} / {model} chưa thành công: {retry.detail} Phụ đề gốc được giữ lại; chọn model khác rồi dịch lại.') from None
+            replacements=[name for name in available if name!=model][:3]
+            tried=[model]
+            if model==original_model==writing.DEFAULT_MODELS[provider] or model in available:
+                recovered=False
+                for candidate in replacements:
+                    tried.append(candidate)
+                    update(60+int(38*done/max(1,len(cues))),f'Thử model dịch khác: {provider} / {candidate}')
+                    try:texts=asyncio.run(translate_batch([c['text'] for c in batch],language,provider,candidate,source_language))
+                    except writing.HTTPException as retry:
+                        if 'Không tìm thấy model' in str(retry.detail):continue
+                        raise
+                    model=candidate;recovered=True;break
+                if not recovered:raise ValueError(f'Dịch {provider} không thành công sau các model: {", ".join(tried)}. {exc.detail} Phụ đề gốc được giữ lại; kiểm tra model và quyền truy cập Google AI Studio.') from None
             else:
-                raise ValueError(f'Model dịch {provider} “{model}” không nhận yêu cầu dịch. Bấm Cập nhật model dịch và chọn model khác. Phụ đề gốc được giữ lại.') from None
+                raise ValueError(f'Model dịch {provider} “{model}” không nhận yêu cầu dịch. {exc.detail} Phụ đề gốc được giữ lại. Chọn model khác trong Kết nối dịch.') from None
+
         for cue,text in zip(batch,texts):cue['text']=text
         done+=len(batch);update(60+int(38*done/max(1,len(cues))),f'Đang dịch bằng {provider} · {done}/{len(cues)} câu')
     return cues

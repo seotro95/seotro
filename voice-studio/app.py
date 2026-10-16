@@ -102,7 +102,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.4.1', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.4.2', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
