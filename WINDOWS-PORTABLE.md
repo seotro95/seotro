@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-23/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-24/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-23`; source application/build commit: `f3de92a`.
-- File size: **1,262,102,858 bytes** (about 1.18 GiB).
-- SHA256: `f513180c90dffbe095fbe67529731e888b84e773fe62368aad023a9ae12b73fe`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38903891387): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-24`; source application/build commit: `60866b8`.
+- File size: **1,262,112,619 bytes** (about 1.18 GiB).
+- SHA256: `43ea3f1d41e5c8b3e19d2447740f8c30b2724da2afef00d56003aa417908bac4`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38906317368): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -112,3 +112,9 @@ Serena, Uncle Fu, Dylan and Eric bring the optional Qwen library to nine speaker
 Fast mode selects Nano 4 steps and draft ASR; balanced uses 8 steps. Fast text mode also uses the Nano preset when appropriate while preserving personal/system voice choices. Faster settings trade naturalness/recognition accuracy and do not guarantee a fixed runtime.
 
 Validation: 81 Linux checks passed plus one Win32-only skip; all 82 native Windows checks passed. Tests cover catalogue size, expanded source/translation validation, actual engine-language limits, nine Qwen presets and simulated Windows Thai/Hindi/French culture enumeration. Chromium checked both language selectors, country filters, add/clone restrictions, Windows help, speed controls, mobile and no JavaScript errors. A mocked English→Vietnamese translation response fed real Nano 4-step speech while the saved English captions remained English. Relocated Windows smoke verified the expanded catalogue, voices API, existing synthesis/recognition/MP4 and UHD workflows. The complete published ZIP was downloaded, SHA256 checked, and inspected for version 3.2.0, language_catalog.py and new voice/UI entries.
+
+## Strict per-cue voice alignment in 3.3
+
+Video voice creation defaults to preserving original SRT starts and ends. Select a maximum fitting tempo from 1.25× to 2×; sentences that still exceed their window fail with the exact cue number instead of dropping words. The alignment panel shows actual speech boundaries and links to each cue. Short preview reuses the completed full voice at the selected video timestamp, including when spoken language differs from subtitle language. Optional gap extension remains available explicitly. Model/library/memory errors now provide actionable messages.
+
+Validation: 90 Linux tests passed with one Windows-only skip; all 91 native Windows regression checks passed. Real Vietnamese Nano and English Turbo browser flows preserved original cue times and produced matching per-cue reports, synchronized playback and reused-voice preview. A deliberately oversized sentence displayed its failed-cue report and released the busy state. Six-language synthetic PCM tests verify timeline behavior, not foreign-model speech quality. The relocated offline Windows runtime also synthesized a strict two-cue SRT and verified its report before publication. The complete release ZIP was downloaded in four validated ranges, SHA256 checked, and inspected for application version 3.3.0 and the new worker field.
