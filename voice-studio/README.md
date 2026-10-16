@@ -217,3 +217,7 @@ Khi voice khác ngôn ngữ phụ đề, nội dung đọc được dịch qua d
 
 ### 3.3 · Đọc khớp phụ đề
 Trong màn hình video, chọn ngôn ngữ phụ đề, ngôn ngữ đọc và giọng hỗ trợ ngôn ngữ đó. Chọn “Giữ nguyên mốc phụ đề” để voice bắt đầu đúng từng câu và giữ nguyên thời gian SRT. Giới hạn tăng tốc có thể chọn từ 1,25× đến 2×. Nếu câu vẫn quá dài, sửa câu hoặc thời gian; tool báo câu cần sửa, không cắt mất lời. Bảng “Kiểm tra voice khớp từng câu” cho phép bấm đến từng mốc. Nút xem thử dùng đúng voice đã tạo, kể cả khi ngôn ngữ đọc khác phụ đề.
+
+### 3.4 · Xuất riêng MP3 / WAV / TXT / SRT
+Sau khi tạo voice, chọn định dạng trong “Xuất riêng voice / lời đọc” rồi bấm “Xuất tệp đã chọn”. MP3 dùng 192 kbps, WAV giữ bản thu; TXT/SRT chứa lời đã đọc và mốc voice đã tạo, kể cả khi khác ngôn ngữ phụ đề. Các nút TXT/SRT cạnh kịch bản vẫn xuất bản đang chỉnh sửa. Thay đổi lời cần tạo lại voice để xuất đúng bản mới.
+Trước khi dịch phụ đề/lời đọc, studio kiểm tra model dịch. Ollama dùng model cục bộ đã cài khi model mặc định chưa có; tên model tự nhập sai được báo để sửa. OpenAI/Gemini kiểm tra quyền truy cập model bằng API key đã kết nối. Đây là model dịch, độc lập với Whisper và giọng Nano/Turbo.

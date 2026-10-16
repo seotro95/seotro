@@ -119,3 +119,26 @@ async def local_status():
     data = await request_local('/api/tags')
     models = [m['name'] for m in data.get('models', []) if isinstance(m.get('name'), str) and 'cloud' not in m['name'].lower() and not m.get('remote_host')]
     return {'connected': True, 'models': models, 'default_model': DEFAULT_MODELS['ollama'], 'requires_key': False}
+
+
+async def check_translation_model(provider,model):
+    if provider not in DEFAULT_MODELS:raise HTTPException(422,'Chọn Ollama, OpenAI hoặc Gemini.')
+    selected=model.strip() or DEFAULT_MODELS[provider]
+    if provider=='ollama':
+        status=await local_status()
+        available=status['models']
+        if selected+':latest' in available:selected+=':latest'
+        if selected not in available:
+            if selected==DEFAULT_MODELS[provider] and available:selected=available[0]
+            else:raise HTTPException(503,f'Model dịch Ollama “{selected}” chưa được tải. Chọn model đã cài trong Kết nối dịch hoặc chạy setup_local_writer.bat. Giọng đọc và Whisper không thay thế model dịch.')
+        return {'provider':provider,'model':selected,'ready':True}
+    key=get_key(provider)
+    if not key:raise HTTPException(503,f'Chưa kết nối {provider}. Mở Kết nối dịch và nhập API key.')
+    if not re.fullmatch(r'[a-zA-Z0-9._-]{1,100}',selected):raise HTTPException(422,'Tên model dịch không hợp lệ.')
+    url=('https://api.openai.com/v1/models/'+selected if provider=='openai' else 'https://generativelanguage.googleapis.com/v1beta/models/'+selected)
+    headers={'Authorization':f'Bearer {key}'} if provider=='openai' else {'x-goog-api-key':key}
+    try:await request_api('GET',url,headers=headers)
+    except HTTPException as exc:
+        if 'Không tìm thấy model' in str(exc.detail):raise HTTPException(503,f'Model dịch {provider} “{selected}” không khả dụng. Sửa tên model trong Kết nối dịch trước khi chạy; đây là model dịch, không phải model giọng đọc.') from None
+        raise
+    return {'provider':provider,'model':selected,'ready':True}

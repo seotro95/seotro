@@ -42,6 +42,17 @@ render(aligned)
 report=json.loads((app/'.data/parts/portable-check-aligned/alignment.json').read_text(encoding='utf-8'))
 assert report['sync_ok'] and len(report['cues'])==2
 assert [row['start'] for row in report['cues']]==[1,8]
+# Download formats must work with bundled FFmpeg and interpreter.
+import uuid
+export_id=uuid.uuid4().hex
+for suffix in ('wav','srt'):
+    import shutil
+    shutil.copy2(app/'.data/audio'/('portable-check-aligned.'+suffix),app/'.data/audio'/(export_id+'.'+suffix))
+(app/'.data/jobs'/(export_id+'.json')).write_text(json.dumps({'id':export_id,'status':'done','format':'wav'}),encoding='utf-8')
+with TestClient(studio.app) as client:
+    for extension in ('mp3','wav','txt','srt'):
+        response=client.get(f'/api/jobs/{export_id}/export.{extension}')
+        assert response.status_code==200 and len(response.content)>10
 # Also exercise MP4 muxing from the bundled FFmpeg, preserving video.
 from dubbing import inspect_video, mux_video
 videos = app/'.data/videos'

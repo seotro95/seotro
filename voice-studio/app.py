@@ -102,7 +102,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.3.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.4.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -450,6 +450,43 @@ def audio(ident: str):
     if not path.exists():
         raise HTTPException(404, 'Không tìm thấy bản thu.')
     return FileResponse(path, media_type='audio/wav' if job['format'] == 'wav' else 'audio/mpeg', filename=f"voice-studio-{ident[:8]}.{job['format']}", content_disposition_type='inline')
+
+
+@app.get('/api/jobs/{ident}/export.{extension}')
+def export_voice(ident:str,extension:str):
+    if extension not in {'wav','mp3','txt','srt'}:raise HTTPException(422,'Chọn WAV, MP3, TXT hoặc SRT.')
+    ident=valid_id(ident)
+    job=get_job(ident)
+    if job['status']!='done':raise HTTPException(409,'Đợi voice hoàn tất trước khi xuất.')
+    if extension in {'txt','srt'}:
+        from fastapi.responses import Response
+        timing=DATA/'audio'/f'{ident}.srt'
+        if not timing.is_file():raise HTTPException(404,'Chưa có mốc lời đọc.')
+        text=timing.read_text(encoding='utf-8')
+        if extension=='txt':text='\n\n'.join(c['text'] for c in parse_srt(text))+'\n'
+        return Response(text,media_type='text/plain; charset=utf-8',headers={'Content-Disposition':f'attachment; filename="voice-studio.{extension}"'})
+    source=DATA/'audio'/f'{ident}.wav'
+    if not source.is_file():source=DATA/'audio'/f"{ident}.{job['format']}"
+    if not source.is_file():raise HTTPException(404,'Không tìm thấy bản thu. Tạo lại voice trước khi xuất.')
+    target=DATA/'audio'/f'{ident}.{extension}'
+    if not target.is_file():
+        temporary=DATA/'audio'/f'{ident}-{uuid.uuid4().hex}.{extension}'
+        try:
+            subprocess.run(['ffmpeg','-nostdin','-v','error','-i',str(source),'-vn','-codec:a','libmp3lame' if extension=='mp3' else 'pcm_s16le',*(['-b:a','192k'] if extension=='mp3' else []),'-y',str(temporary)],check=True,timeout=600,capture_output=True)
+            temporary.replace(target)
+        except (OSError,subprocess.SubprocessError):raise HTTPException(500,'Chưa chuyển được âm thanh. Kiểm tra FFmpeg và dung lượng trống.') from None
+        finally:temporary.unlink(missing_ok=True)
+    return FileResponse(target,media_type='audio/mpeg' if extension=='mp3' else 'audio/wav',filename=f'voice-studio.{extension}')
+
+
+class TranslationCheck(BaseModel):
+    provider:str='ollama'
+    model:str=Field(default='',max_length=100)
+
+
+@app.post('/api/translation/check')
+async def check_translation(body:TranslationCheck):
+    return await writing.check_translation_model(body.provider,body.model)
 
 
 @app.delete('/api/history/{ident}', status_code=204)
