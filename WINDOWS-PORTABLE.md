@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-25/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-26/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-25`; source application/build commit: `0510131`.
-- File size: **1,262,125,917 bytes** (about 1.18 GiB).
-- SHA256: `f3d91a6fc88b1bb52807e29b8fe658581e0d1d4ef4cb4ce000dbd6635d42c5bc`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38908293904): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-26`; source application/build commit: `01c3d40`.
+- File size: **1,262,112,416 bytes** (about 1.18 GiB).
+- SHA256: `3b2e8645e1e2a12bed97986941b596507ea49b1b4c9006e2439534bfef197c4f`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38912546062): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -125,4 +125,12 @@ The video workspace exports the ready voice as MP3 (192 kbps) or WAV without syn
 
 Before workspace translation starts, a preflight checks the selected local/cloud model. Ollama can select an installed model when the absent name is the default; explicitly entered missing names fail with instructions. Cloud model access is checked using the connected key. Error messages distinguish translation models from speech/Whisper. This does not install optional models or establish the cause of an unreported error on another machine.
 
-Validation: 93 Linux checks passed plus one Windows-only skip; native Windows regression checks and relocated offline package smoke completed. MP3 codec, WAV bytes, Unicode TXT, SRT timing, pending-job rejection and missing-model recovery/error contracts were tested. Chromium downloaded all four formats following real Vietnamese/English synthesis and rejected a missing Ollama model before recognition. Cloud requests used fixtures; no live cloud credentials were exercised. The full 1,262,125,917-byte ZIP was downloaded, SHA256 verified and inspected for version 3.4.0 and export/preflight implementation.
+Validation: 93 Linux checks passed plus one Windows-only skip; native Windows regression checks and relocated offline package smoke completed. MP3 codec, WAV bytes, Unicode TXT, SRT timing, pending-job rejection and missing-model recovery/error contracts were tested. Chromium downloaded all four formats following real Vietnamese/English synthesis and rejected a missing Ollama model before recognition. Cloud requests used fixtures; no live cloud credentials were exercised. The full 1,262,112,416-byte ZIP was downloaded, SHA256 verified and inspected for version 3.4.0 and export/preflight implementation.
+
+## Cloud model recovery and recognized-cue preservation in 3.4.1
+
+The screenshot message “Không tìm thấy model. Hãy kiểm tra tên model.” comes from the cloud translation HTTP 404 mapping, not local Whisper or voice synthesis. Provider catalog discovery lists current model identifiers; Gemini entries require generateContent capability and handle pagination. Default cloud names can recover from metadata/generation 404 using a listed alternative. Explicit custom names are not silently replaced. A second failure names the provider/model and keeps source subtitles.
+
+Failed subtitle tasks expose original parsed cues; the workspace restores them only when the video and script are unchanged. The visible retry action sends existing SRT instead of repeating ASR. Translation copies cue records so a later failed batch cannot partially mutate the original script.
+
+Validation: 97 Linux tests passed, one Win32-only skip; native Windows regression and relocated package smoke succeeded. Fixture tests cover cloud generation 404 replacement, catalog capability/pagination, source-cue immutability and original-cue API recovery. Chromium reproduced a 58% translation failure, restored the original editor cues, selected a discovered model, retried from SRT, and generated actual Nano speech. Cloud models were tested with response fixtures, not live cloud credentials. The full release ZIP was downloaded, SHA256 verified and inspected for version 3.4.1 and the recovery/model selectors.
