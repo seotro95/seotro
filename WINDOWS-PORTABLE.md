@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-17/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-19/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-17`; source application/build commit: `163d6b1`.
-- File size: **1,262,085,189 bytes** (about 1.18 GiB).
-- SHA256: `5cf10ec1fbef16574951fe1ffe3733e00649693bd8c9b5455e2c58354ac53917`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38865806622): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-19`; source application/build commit: `2874ea6`.
+- File size: **1,262,063,789 bytes** (about 1.18 GiB).
+- SHA256: `0ac6c82e2d0fb7563aa43df5e14c8052ef6c30a44e7154a1b8e562305ca2a9d3`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38873288983): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -76,3 +76,11 @@ Validation: 61 regression checks passed on Linux and native Windows. Relocated o
 Subtitle language/provider and narration language/voice controls now appear directly below the video preview. TXT/SRT exports sit beside the cue editor. Full-script rewriting keeps each paragraph attached to its existing cue time; an incorrect paragraph count or concurrently changed cues is rejected before saving. Saved rewritten text is used by exports and dubbing.
 
 Validation: 61 Linux/native Windows checks and relocated offline Windows smoke passed. Chromium verified inline controls, full-script editing with preserved timestamps, actual TXT/SRT downloads, wrong-paragraph-count protection, mobile layout and no JavaScript errors. The published ZIP was downloaded fully, SHA256 checked, and inspected for version 2.9.1 and new editor controls.
+
+## Subtitle designer and short proofs in 3.0
+
+The direct editor now previews font, size, text/outline/background colors, bold/italic, vertical position and margin. Styling is saved with the project and passed to caption exports and narrated video. Browser font rendering is approximate; missing fonts are substituted.
+
+At the current video position, create a 10-second encoded proof using actual FFmpeg subtitle and selected logo filters, or generate the selected voice for those timed cues and hear it in the proof video. The proof uses 720p and fast encoding; complete exports retain the chosen output profile. Input seeking avoids decoding from the beginning of long videos. Stop/progress controls are available. Review voice timing manually; this does not perform lip synchronization or restore hidden logo detail. Translate the script before generating a proof in another language.
+
+Validation: 68 Linux/native Windows regression checks passed. Actual decoded pixels verify styled captions and logo coverage; output duration and audio spectrum verify a short clip with the selected voice rather than original audio. Chromium exercised instant style changes, save/reload, a real 10-second logo/caption proof, Nano speech plus video proof, mobile layout, no JavaScript errors and stop UI recovery (queued response fixture). Existing inline rewrite and TXT/SRT downloads passed. Relocated offline Windows smoke includes a styled proof with bundled voice, plus normal synthesis, recognition, mux and UHD export. The complete published ZIP was downloaded, SHA256 verified, and inspected for version 3.0.0 and video-preview.js.
