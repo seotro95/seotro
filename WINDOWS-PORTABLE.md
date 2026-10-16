@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-19/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-20/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-19`; source application/build commit: `2874ea6`.
-- File size: **1,262,063,789 bytes** (about 1.18 GiB).
-- SHA256: `0ac6c82e2d0fb7563aa43df5e14c8052ef6c30a44e7154a1b8e562305ca2a9d3`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38873288983): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-20`; source application/build commit: `398d0ca`.
+- File size: **1,262,082,968 bytes** (about 1.18 GiB).
+- SHA256: `031d76cc1920010a7f639f8ae20302c25283577236ce119c7c83927c1b5040bc`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38878680991): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -84,3 +84,11 @@ The direct editor now previews font, size, text/outline/background colors, bold/
 At the current video position, create a 10-second encoded proof using actual FFmpeg subtitle and selected logo filters, or generate the selected voice for those timed cues and hear it in the proof video. The proof uses 720p and fast encoding; complete exports retain the chosen output profile. Input seeking avoids decoding from the beginning of long videos. Stop/progress controls are available. Review voice timing manually; this does not perform lip synchronization or restore hidden logo detail. Translate the script before generating a proof in another language.
 
 Validation: 68 Linux/native Windows regression checks passed. Actual decoded pixels verify styled captions and logo coverage; output duration and audio spectrum verify a short clip with the selected voice rather than original audio. Chromium exercised instant style changes, save/reload, a real 10-second logo/caption proof, Nano speech plus video proof, mobile layout, no JavaScript errors and stop UI recovery (queued response fixture). Existing inline rewrite and TXT/SRT downloads passed. Relocated offline Windows smoke includes a styled proof with bundled voice, plus normal synthesis, recognition, mux and UHD export. The complete published ZIP was downloaded, SHA256 verified, and inspected for version 3.0.0 and video-preview.js.
+
+## Windows progress-file lock fix in 3.0.1
+
+Fixes WinError5/32 when replacing state.tmp → progress.json during subtitles, translation, model preparation, speech and video export. JSON writes now use unique temporary files with bounded sharing-lock retries. Progress is advisory: a locked snapshot keeps the old percentage without aborting media processing. Real job/project/result write failures are still reported. A completed video task returns 100% even when its last progress snapshot is stale or unreadable.
+
+Validation: 74 Linux checks passed and one Win32-only case was skipped there. All 75 native Windows regression checks passed, including a real CreateFileW handle that denies delete-sharing until released. Additional regressions inject WinError5/32, preserve the previous snapshot under persistent locks, verify concurrent complete JSON writes, and complete a real FFmpeg caption export while every progress replacement is denied. Relocated offline synthesis, recognition, preview/mux/UHD smoke passed. Chromium exercised actual styled logo/caption and Nano voice proofs after the fix. The full published ZIP was downloaded, SHA256 verified, and inspected for version 3.0.1, state_io.py and its use in video_tasks.py.
+
+To update a portable installation, close the app and its console first, then extract the new complete archive over the existing Voice-Studio folder and replace program files. Keep the existing .data folder and its personal files; the release contains no personal projects or recordings. Reopen MO_VOICE_STUDIO.bat and restart the failed operation.
