@@ -23,7 +23,7 @@ def inspect_video(path):
     return {'width': width, 'height': height, 'duration': duration, 'codec': video['codec_name'], 'has_audio': any(s['codec_type'] == 'audio' for s in info['streams'])}
 
 
-def run_ffmpeg(command, work, duration, start, end, phase, timeout=21600):
+def run_ffmpeg(command, work, duration, start, end, phase, timeout=21600, cwd=None):
     """Poll real FFmpeg timestamps without blocking on Windows pipe EOF."""
     progress = work / 'progress.json'
     def update(value):
@@ -53,7 +53,7 @@ def run_ffmpeg(command, work, duration, start, end, phase, timeout=21600):
     if os.environ.get('CI') == 'true' and '-v' in args:
         args[args.index('-v')+1] = 'info'
     error_log = work / 'ffmpeg-errors.log'
-    with error_log.open('ab') as errors, subprocess.Popen(args, stdout=subprocess.DEVNULL, stderr=errors) as process:
+    with error_log.open('ab') as errors, subprocess.Popen(args, cwd=cwd, stdout=subprocess.DEVNULL, stderr=errors) as process:
         started = time.monotonic()
         last = start
         def read_status():

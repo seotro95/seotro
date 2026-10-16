@@ -14,7 +14,7 @@ from contextlib import asynccontextmanager, contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
 
-from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile, Query
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.staticfiles import StaticFiles
@@ -96,7 +96,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='2.6.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='2.7.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -550,7 +550,8 @@ def delete_video(ident: str):
             raise HTTPException(409,'Dừng tác vụ video trước khi xóa nguồn.')
         if any(j.get('video_id') == ident for j in records('jobs')):
             raise HTTPException(409, 'Xóa các tác vụ dùng video này trong Lịch sử trước khi xóa video gốc.')
-        for suffix in ('.source', '.json'):
+        (DATA/'editor'/f'{ident}.json').unlink(missing_ok=True)
+        for suffix in ('.source', '.json', '.jpg'):
             (DATA / 'videos' / (ident + suffix)).unlink(missing_ok=True)
 
 
@@ -604,9 +605,20 @@ def convert_script(body: ScriptConversion):
         raise HTTPException(422, str(exc)) from None
 
 # Video tools share the speech queue so CPU-heavy models never compete.
+class EditorCue(BaseModel):
+    start: float = Field(ge=0,le=10800)
+    end: float = Field(gt=0,le=10800)
+    text: str = Field(min_length=1,max_length=4000)
+
+
+class EditorProject(BaseModel):
+    cues: list[EditorCue] = Field(default_factory=list,max_length=10000)
+
+
 class VideoTask(BaseModel):
     video_id: str
-    action: str = Field(pattern='^(subtitles|logo)$')
+    action: str = Field(pattern='^(subtitles|logo|render)$')
+    cues: list[EditorCue] = Field(default_factory=list,max_length=10000)
     accurate: bool = True
     source_language: str = Field(default='', pattern='^(|vi|en|ja|ko|zh|fr|de|es|it|pt|ru)$')
     target_language: str = Field(default='', max_length=16)
@@ -655,7 +667,10 @@ def run_video_task(ident):
 def create_video_task(body:VideoTask):
     meta = read_json(DATA/'videos'/f'{valid_id(body.video_id)}.json')
     try:
-        if body.action=='logo':
+        if body.action=='render':
+            from video_editor import validate_cues
+            validate_cues([c.model_dump() for c in body.cues],meta['duration'])
+        if body.logo or body.action=='logo':
             from video_tasks import validate_logo
             meta.update(inspect_video(DATA/'videos'/f'{body.video_id}.source'))
             if not validate_logo(body.logo,meta):
@@ -682,10 +697,11 @@ def video_task_status(ident:str):
     work=video_task_work(ident)
     job=read_json(work/'job.json')
     state=read_json(work/'progress.json') if (work/'progress.json').exists() else {'progress':0,'phase':'Đang chờ'}
-    result={'id':ident,'status':job['status'],'error':job.get('error'),**state}
+    result={'video_id':job['video_id'],'id':ident,'status':job['status'],'error':job.get('error'),**state}
     if job['status']=='done':
         if job['action']=='subtitles':
             result['srt']=(work/'output.srt').read_text(encoding='utf-8')
+            result['cues']=parse_srt(result['srt'])
         else:
             result['video_url']=f'/api/video-tasks/{ident}/output.mp4'
     if job['status']=='error' and (work/'original.srt').exists():
@@ -712,11 +728,42 @@ def video_task_download(ident:str,filename:str):
 
 
 @app.get('/api/videos/{ident}/frame')
-def video_frame(ident:str):
-    valid_id(ident)
+def video_frame(ident:str,at:float=Query(default=0,ge=0,le=10800)):
+    from fastapi.responses import Response
+    import tempfile
+    ident=valid_id(ident)
+    meta=read_json(DATA/'videos'/f'{ident}.json')
     source=DATA/'videos'/f'{ident}.source'
+    with tempfile.TemporaryDirectory(dir=DATA/'parts') as folder:
+        output=Path(folder)/'frame.jpg'
+        subprocess.run(['ffmpeg','-nostdin','-v','error','-ss',str(min(at,max(0,meta['duration']-.1))),'-protocol_whitelist','file,pipe','-i',str(source),'-frames:v','1','-y',str(output)],check=True,timeout=30)
+        return Response(output.read_bytes(),media_type='image/jpeg')
+
+
+@app.get('/api/videos/{ident}/source')
+def editor_source(ident:str):
+    ident=valid_id(ident)
+    meta=read_json(DATA/'videos'/f'{ident}.json')
+    return FileResponse(DATA/'videos'/f'{ident}.source',media_type='video/mp4' if meta['codec']!='vp9' else 'video/webm')
+
+
+@app.get('/api/videos/{ident}/editor')
+def get_editor(ident:str):
+    ident=valid_id(ident)
     read_json(DATA/'videos'/f'{ident}.json')
-    output=DATA/'videos'/f'{ident}.jpg'
-    if not output.exists():
-        subprocess.run(['ffmpeg','-nostdin','-v','error','-i',str(source),'-frames:v','1','-y',str(output)],check=True,timeout=30)
-    return FileResponse(output,media_type='image/jpeg')
+    path=DATA/'editor'/f'{ident}.json'
+    return read_json(path) if path.exists() else {'cues':[]}
+
+
+@app.put('/api/videos/{ident}/editor')
+def save_editor(ident:str,body:EditorProject):
+    from video_editor import validate_cues
+    ident=valid_id(ident)
+    meta=read_json(DATA/'videos'/f'{ident}.json')
+    try:
+        cues=validate_cues([c.model_dump() for c in body.cues],meta['duration']) if body.cues else []
+    except ValueError as exc:
+        raise HTTPException(422,str(exc)) from None
+    folder=DATA/'editor';folder.mkdir(exist_ok=True)
+    write_json(folder/f'{ident}.json',{'cues':cues})
+    return {'cues':cues}

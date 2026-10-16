@@ -168,3 +168,9 @@ Trong mục Lồng tiếng video, chọn video, ngôn ngữ gốc (hoặc tự n
 Dịch dùng model Ollama cục bộ (mặc định `qwen3:4b`); cần cài Ollama và chạy `setup_local_writer.bat` trước. Không cần API key. Chưa có Ollama vẫn tạo được phụ đề nguyên ngữ. Nhận dạng/dịch có thể sai; kiểm tra tên riêng, tiếng ồn và các mốc câu trước khi dùng. Thời gian nhận dạng phụ thuộc CPU và độ dài video.
 
 **Hiện khung hình** rồi kéo chọn vùng logo cố định. Có thể xuất video chỉ xử lý logo hoặc bật áp dụng khi lồng tiếng. Nội suy không phục hồi chi tiết bị che, không theo dõi logo chuyển động. Xử lý logo mã hóa lại H.264/CRF20 nên chậm hơn ghép giọng nguyên hình. Nút **Dừng** hủy cả nhận dạng, dịch hoặc xử lý logo; thanh phần trăm dựa trên mốc âm thanh/hình ảnh đang xử lý. Dữ liệu tác vụ nằm trong `.data/video_tasks`; phụ đề gốc được giữ nếu dịch thất bại.
+
+### Sửa trực tiếp trên video (2.7)
+
+Chọn hoặc tải video trong **Lồng tiếng video**. Khung xem và danh sách câu nằm ngay trong tool; nhấn **Tự tạo phụ đề từ lời nói trong video**, sửa lời và mốc từng câu, thêm/xóa câu nếu cần. **Lưu phụ đề đã sửa** giữ dự án trong `.data/editor`. **Xuất video có phụ đề đã sửa** gắn chữ trực tiếp vào hình và giữ âm thanh gốc; không cần voice hoặc nhập TXT/SRT. Có thể chọn dịch các câu đang sửa hoặc lồng tiếng bằng giọng đã chọn. TXT/SRT chỉ là tùy chọn nâng cao.
+
+Dừng video ở mốc cần xem, nhấn **Khoanh vùng logo tại thời điểm đang xem**, kéo chọn vùng rồi bật áp dụng khi xuất. Có thể xuất phụ đề và xử lý vùng logo trong một lần. Video phát trong trình duyệt nếu codec hỗ trợ; trường hợp khác dùng ô giây và nút xem khung hình. Đây là phụ đề mới từ âm thanh hoặc các câu tự nhập; chữ cũ dính trong hình chưa được OCR để sửa tự động. Có thể khoanh vùng chữ cũ để xử lý và gắn chữ mới, nhưng chi tiết bị che không khôi phục được.

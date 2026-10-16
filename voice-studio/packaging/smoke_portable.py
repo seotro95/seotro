@@ -47,7 +47,7 @@ from video_tasks import run
 work=app/'.data/video_tasks/portable'
 work.mkdir(parents=True)
 path=work/'job.json'
-path.write_text(json.dumps({'video_id':'portable','action':'logo','logo':{'x':10,'y':10,'w':30,'h':20}}),encoding='utf-8')
+path.write_text(json.dumps({'video_id':'portable','action':'render','cues':[{'start':0,'end':5,'text':'Phụ đề đã sửa trực tiếp'}],'logo':{'x':10,'y':10,'w':30,'h':20}}),encoding='utf-8')
 run(path)
 assert inspect_video(work/'output.mp4')['duration'] > 19
 # Remove QA projects; retain model weights and ready markers only.

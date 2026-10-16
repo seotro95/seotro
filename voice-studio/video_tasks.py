@@ -51,11 +51,16 @@ def run(path):
         temp = work/'state.tmp'
         temp.write_text(json.dumps({'progress':progress,'phase':phase},ensure_ascii=False),encoding='utf-8')
         temp.replace(work/'progress.json')
-    if job['action'] == 'logo':
-        vf = validate_logo(job['logo'], meta)
+    if job['action'] in {'logo','render'}:
+        vf = validate_logo(job.get('logo'), meta)
+        if job['action']=='render':
+            from video_editor import validate_cues, write_ass
+            cues = validate_cues(job['cues'],meta['duration'])
+            write_ass(work/'captions.ass',cues,meta['width'],meta['height'])
+            vf = (vf+',' if vf else '')+'ass=filename=captions.ass'
         if not vf:
             raise ValueError('Hãy chọn vùng logo trước.')
-        run_ffmpeg(['ffmpeg','-nostdin','-v','error','-i',str(source),'-map','0:v:0','-map','0:a?','-vf',vf,'-c:v','libx264','-preset','veryfast','-crf','20','-c:a','aac','-movflags','+faststart','-y',str(work/'output.mp4')],work,meta['duration'],1,99,'Đang xử lý vùng logo')
+        run_ffmpeg(['ffmpeg','-nostdin','-v','error','-i',str(source),'-map','0:v:0','-map','0:a?','-vf',vf,'-c:v','libx264','-preset','veryfast','-crf','20','-c:a','aac','-movflags','+faststart','-y',str(work/'output.mp4')],work,meta['duration'],1,99,'Đang xuất video có phụ đề / xử lý logo',cwd=work)
         update(100,'Video đã sẵn sàng')
         return
     if job.get('srt'):
