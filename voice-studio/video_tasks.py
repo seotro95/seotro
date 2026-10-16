@@ -80,22 +80,35 @@ def run(path):
         temp = work/'state.tmp'
         temp.write_text(json.dumps({'progress':progress,'phase':phase},ensure_ascii=False),encoding='utf-8')
         temp.replace(work/'progress.json')
-    if job['action'] in {'logo','render','export'}:
+    if job['action'] in {'logo','render','export','preview'}:
         from video_export import scale_filter,encoder_options
+        preview=job['action']=='preview'
+        start=job.get('preview_start',0) if preview else 0
+        seconds=min(job.get('preview_seconds',10),meta['duration']-start) if preview else meta['duration']
         vf = logo_filters(job, meta)
         filters = [vf] if vf else []
         scale,size = scale_filter(meta,job.get('export_resolution','original'))
         if scale:
             filters.append(scale)
-        if job['action']=='render':
+        if job['action']=='render' or (job['action']=='preview' and job.get('cues')):
             from video_editor import validate_cues, write_ass
             cues = validate_cues(job['cues'],meta['duration'])
-            write_ass(work/'captions.ass',cues,*size)
+            if preview:cues=[{**c,'start':max(0,c['start']-start),'end':min(seconds,c['end']-start)} for c in cues if c['end']>start and c['start']<start+seconds]
+            write_ass(work/'captions.ass',cues,*size,job.get('caption_style'))
             filters.append('ass=filename=captions.ass')
         if job['action']=='logo' and not vf:
             raise ValueError('Hãy chọn vùng logo trước.')
         options = ['-vf',','.join(filters),*encoder_options(job)] if filters else ['-c:v','copy']
-        run_ffmpeg(['ffmpeg','-nostdin','-v','error','-protocol_whitelist','file,pipe','-i',str(source),'-map','0:v:0','-map','0:a?',*options,'-c:a','aac','-b:a','192k','-movflags','+faststart','-y',str(work/'output.mp4')],work,meta['duration'],1,99,f'Đang xuất MP4 {size[0]} × {size[1]}',cwd=work)
+        if preview and not filters:options=encoder_options(job)
+        # Input seek avoids decoding the whole video before a short proof.
+        inputs=(["-ss",str(start)] if preview else [])+['-i',str(source)]
+        voice_id=job.get('preview_voice_id') if preview else None
+        if voice_id:inputs+=['-i',str(data/'audio'/f'{voice_id}.wav')]
+        if voice_id:
+            options=['-filter_complex',f"[0:v]{','.join(filters) if filters else 'null'}[v];[1:a]apad=whole_dur={seconds}[a]",'-map','[v]','-map','[a]',*encoder_options(job)]
+            mapping=[]
+        else:mapping=['-map','0:v:0','-map','0:a?']
+        run_ffmpeg(['ffmpeg','-nostdin','-v','error','-protocol_whitelist','file,pipe',*inputs,*mapping,*options,*(['-t',str(seconds)] if preview else []),'-c:a','aac','-b:a','192k','-movflags','+faststart','-y',str(work/'output.mp4')],work,seconds,1,99,f'Đang tạo bản xem thử' if preview else f'Đang xuất MP4 {size[0]} × {size[1]}',cwd=work)
         (work/'result.json').write_text(json.dumps({'width':size[0],'height':size[1]}),encoding='utf-8')
         update(100,'Video đã sẵn sàng')
         return

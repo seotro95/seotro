@@ -119,7 +119,7 @@ def mux_video(job, audio, work, data, audio_seconds):
     if job.get('caption_cues'):
         from video_editor import validate_cues,write_ass
         cues=validate_cues(job['caption_cues'],meta['duration'])
-        write_ass(work/'captions.ass',cues,*size)
+        write_ass(work/'captions.ass',cues,*size,job.get('caption_style'))
         video_filters.append('ass=filename=captions.ass')
     video_options = ['-vf', ','.join(video_filters), *encoder_options(job)] if video_filters else ['-c:v', 'copy']
     run_ffmpeg(['ffmpeg', '-nostdin', '-v', 'error', '-protocol_whitelist', 'file,pipe', '-format_whitelist', 'mov,matroska,webm', '-i', str(source), '-i', str(audio), '-filter_complex', filters, '-map', '0:v:0', '-map', '[out]', *video_options, '-c:a', 'aac', '-b:a', '192k', '-t', str(meta['duration']), '-movflags', '+faststart', '-y', str(temporary)], work, meta['duration'], 86, 99, 'Đang xuất video MP4', timeout=max(600,meta['duration']*8) if video_filters else max(60,meta['duration']*2),cwd=work)

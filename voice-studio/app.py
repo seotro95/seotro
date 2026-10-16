@@ -96,7 +96,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='2.9.1', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.0.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -239,6 +239,7 @@ def delete_voice(ident: str):
 
 
 class Speech(BaseModel):
+    caption_style: dict = Field(default_factory=dict)
     text: str = Field(min_length=1, max_length=MAX_CHARACTERS)
     voice_id: str = Field(min_length=1, max_length=128)
     language: str = 'vi'
@@ -375,6 +376,9 @@ def speech(body: Speech):
                 logo_filters(body.model_dump(),meta)
             except (ValueError,KeyError,TypeError) as exc:
                 raise HTTPException(422,str(exc)) from None
+        from video_editor import validate_style
+        try:validate_style(body.caption_style)
+        except (ValueError,TypeError) as exc:raise HTTPException(422,str(exc)) from None
         if body.caption_cues:
             from video_editor import validate_cues
             try:
@@ -632,15 +636,20 @@ class EditorCue(BaseModel):
 
 
 class EditorProject(BaseModel):
+    caption_style: dict = Field(default_factory=dict)
     cues: list[EditorCue] = Field(default_factory=list,max_length=10000)
 
 
 class VideoTask(BaseModel):
+    caption_style: dict = Field(default_factory=dict)
     export_resolution: str = Field(default='original',pattern='^(original|720p|1080p|2160p)$')
     export_quality: str = Field(default='balanced',pattern='^(best|balanced|fast)$')
     logos: list[dict] = Field(default_factory=list,max_length=20)
     video_id: str | None = None
-    action: str = Field(pattern='^(subtitles|logo|render|export|translate_text|prepare_voice)$')
+    action: str = Field(pattern='^(subtitles|logo|render|export|preview|translate_text|prepare_voice)$')
+    preview_start: float = Field(default=0,ge=0,le=10800)
+    preview_seconds: float = Field(default=10,ge=1,le=15)
+    preview_voice_id: str | None = None
     engine: str = Field(default='qwen',pattern='^(qwen|qwen_clone|vieneu|vieneu_nano)$')
     text: str = Field(default='',max_length=200000)
     input_format: str = Field(default='txt',pattern='^(txt|srt)$')
@@ -722,7 +731,14 @@ def create_video_task(body:VideoTask):
             raise HTTPException(503,'Model nhận dạng chưa sẵn sàng. Dùng bản Portable có sẵn Whisper hoặc chạy download_subtitle_model.bat.')
         if body.target_language and body.provider!='ollama' and not writing.get_key(body.provider):
             raise HTTPException(503,'Chưa kết nối API key. Mở phần kết nối dịch và chọn OpenAI hoặc Gemini.')
-        if body.action=='render':
+        from video_editor import validate_style
+        validate_style(body.caption_style)
+        if body.action=='preview':
+            if body.preview_start>=meta['duration']:raise ValueError('Mốc xem thử cần nằm trong video.')
+            if body.preview_voice_id:
+                voice=read_json(DATA/'jobs'/f'{valid_id(body.preview_voice_id)}.json')
+                if voice['status']!='done' or voice['format']!='wav':raise ValueError('Voice xem thử chưa hoàn tất.')
+        if body.action=='render' or (body.action=='preview' and body.cues):
             from video_editor import validate_cues
             validate_cues([c.model_dump() for c in body.cues],meta['duration'])
         if body.action in {'translate_text','prepare_voice'} and (body.logo or body.logos):raise ValueError('Tác vụ này không dùng vùng logo.')
@@ -825,13 +841,15 @@ def save_editor(ident:str,body:EditorProject):
     ident=valid_id(ident)
     meta=read_json(DATA/'videos'/f'{ident}.json')
     try:
+        from video_editor import validate_style
+        style=validate_style(body.caption_style)
         cues=validate_cues([c.model_dump() for c in body.cues],meta['duration']) if body.cues else []
     except ValueError as exc:
         raise HTTPException(422,str(exc)) from None
     folder=DATA/'editor';folder.mkdir(exist_ok=True)
     with lock:
-        write_json(folder/f'{ident}.json',{'cues':cues})
-    return {'cues':cues}
+        write_json(folder/f'{ident}.json',{'cues':cues,'caption_style':style})
+    return {'cues':cues,'caption_style':style}
 
 
 @app.get('/api/videos/{ident}/editor/export.{extension}')

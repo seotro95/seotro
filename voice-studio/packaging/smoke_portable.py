@@ -23,6 +23,7 @@ with TestClient(studio.app) as client:
     assert client.get('/api/config').json()['nano_ready']
     assert client.get('/static/app.js').status_code == 200
     assert client.get('/static/studio-tools.js').status_code==200
+    assert client.get('/static/video-preview.js').status_code==200
     assert any('ko' in v['languages'] for v in client.get('/api/voices').json()['voices'])
 for engine, speaker in [('vieneu_nano','Minh Quân'), ('vieneu','Mai Anh')]:
     job = {'id': 'portable-check-'+engine, 'text': 'Xin chào, đây là kiểm tra gói phòng thu giọng nói.', 'engine': engine, 'speaker': speaker, 'voice_id': 'check', 'language': 'vi', 'quality': 'standard', 'format': 'wav', 'speed': 1, 'nano_steps': 8, 'nano_threads': 2, 'paragraph_pause': 0}
@@ -52,6 +53,11 @@ path=work/'job.json'
 path.write_text(json.dumps({'video_id':'portable','action':'render','cues':[{'start':0,'end':5,'text':'Phụ đề đã sửa trực tiếp'}],'logo':{'x':10,'y':10,'w':30,'h':20}}),encoding='utf-8')
 run(path)
 assert inspect_video(work/'output.mp4')['duration'] > 19
+# A short proof must use the same styled captions, logo treatment and bundled voice audio.
+path.write_text(json.dumps({'video_id':'portable','action':'preview','preview_start':1,'preview_seconds':2,'preview_voice_id':'portable-check-vieneu_nano','cues':[{'start':1,'end':3,'text':'Xem thử trước khi xuất'}],'caption_style':{'color':'#ffff00','bold':True,'position':'top'},'logos':[{'x':10,'y':10,'w':20,'h':12,'mode':'color','color':'#ff0000'}]}),encoding='utf-8')
+run(path)
+proof=inspect_video(work/'output.mp4')
+assert proof['has_audio'] and abs(proof['duration']-2)<.2
 # Verify actual UHD output with the relocated interpreter and bundled FFmpeg.
 short=videos/'portable-4k.source'
 subprocess.run(['ffmpeg','-nostdin','-v','error','-f','lavfi','-i','color=c=blue:s=160x90:r=5:d=0.4','-c:v','libx264','-f','mp4','-y',str(short)],check=True)

@@ -46,7 +46,9 @@ def test_project_api_and_timed_frame(tmp_path,monkeypatch):
     with TestClient(app.app) as client:
         project={'cues':[{'start':0,'end':1,'text':'Đã sửa trực tiếp'}]}
         assert client.put(f'/api/videos/{ident}/editor',json=project).status_code==200
-        assert client.get(f'/api/videos/{ident}/editor').json()==project
+        saved=client.get(f'/api/videos/{ident}/editor').json()
+        assert saved['cues']==project['cues']
+        assert saved['caption_style']['font']=='Arial'
         assert client.get(f'/api/videos/{ident}/editor/export.txt').text=='Đã sửa trực tiếp'
         exported=client.get(f'/api/videos/{ident}/editor/export.srt').text
         assert '00:00:00,000 --> 00:00:01,000' in exported and 'Đã sửa trực tiếp' in exported
