@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-22/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-23/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-22`; source application/build commit: `d0bbce2`.
-- File size: **1,262,087,928 bytes** (about 1.18 GiB).
-- SHA256: `2c7b1e7120e4516f7c5fc8dfabc086b918eb1923b1267553464831a074fd6699`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38896807111): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-23`; source application/build commit: `f3de92a`.
+- File size: **1,262,102,858 bytes** (about 1.18 GiB).
+- SHA256: `f513180c90dffbe095fbe67529731e888b84e773fe62368aad023a9ae12b73fe`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38903891387): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -102,3 +102,13 @@ Speech creation has its own safe settings, independent of another tab's unloaded
 Validation: 78 Linux tests passed with one Win32-only skip; all 79 native Windows checks passed. New coverage verifies gap timing, strict compatibility, timeline limits, completed timing retrieval, unfinished/oversized voice rejection, and actual composed-video audio using a known tone. Chromium exercised one-click real Whisper → Nano → synchronized listening → MP4 from a video without cues; short-cue fitting, seeking past/into audio, script edits and stale-voice protection; immediate missing-video feedback and queued Stop recovery; mobile layout and no JavaScript errors. Relocated offline Windows smoke verifies the workspace asset and composition using an existing bundled voice. The full ZIP was downloaded in four verified ranges, SHA256 checked, and inspected for version 3.1.0, workspace.js and the timing fix.
 
 For a separate ready-to-use installation, extract the complete archive once into a new folder, then open MO_VOICE_STUDIO.bat. Keep the old folder if it contains personal projects. Bundled Vietnamese voices need no separate Python installation or API key. Translation requires an Ollama local model or the selected cloud provider's credentials.
+
+## Independent subtitle and voice languages in 3.2
+
+The video workspace now has independent subtitle target and spoken language selectors. The catalogue includes 52 country/language choices for recognition and translation. Voice selection offers only speakers supported by the chosen engine; languages outside the AI engines require an installed Windows SAPI voice. Expanded Windows enumeration preserves Thai, Hindi and other supported language cultures. Native-language/country filters appear in both video and text voice creation, with add/clone and Windows voice instructions. A country label does not transform a speaker's accent.
+
+Serena, Uncle Fu, Dylan and Eric bring the optional Qwen library to nine speakers; their identifiers and dialect flags were checked against Qwen's official CustomVoice config. Qwen remains an explicit model download and was not newly downloaded/inferenced in this change. Bundled Nano/Turbo Vietnamese and Turbo English remain ready to use. AI cloning is restricted to engine-supported languages. Independent spoken translation keeps subtitle words in their original target language and updates only fitted times. Local/provider translation prerequisites still apply.
+
+Fast mode selects Nano 4 steps and draft ASR; balanced uses 8 steps. Fast text mode also uses the Nano preset when appropriate while preserving personal/system voice choices. Faster settings trade naturalness/recognition accuracy and do not guarantee a fixed runtime.
+
+Validation: 81 Linux checks passed plus one Win32-only skip; all 82 native Windows checks passed. Tests cover catalogue size, expanded source/translation validation, actual engine-language limits, nine Qwen presets and simulated Windows Thai/Hindi/French culture enumeration. Chromium checked both language selectors, country filters, add/clone restrictions, Windows help, speed controls, mobile and no JavaScript errors. A mocked English→Vietnamese translation response fed real Nano 4-step speech while the saved English captions remained English. Relocated Windows smoke verified the expanded catalogue, voices API, existing synthesis/recognition/MP4 and UHD workflows. The complete published ZIP was downloaded, SHA256 checked, and inspected for version 3.2.0, language_catalog.py and new voice/UI entries.
