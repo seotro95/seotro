@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-14/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-15/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-14`; source application/build commit: `e054bab`.
-- File size: **1,262,052,765 bytes** (about 1.18 GiB).
-- SHA256: `112fa1b6c1b3361aec05a041a155615de226d835a51d427a187ecf1e8a189506`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38847633159): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-15`; source application/build commit: `e088643`.
+- File size: **1,262,078,447 bytes** (about 1.18 GiB).
+- SHA256: `544df07932a7e0296a9727396bf2dd08a47529bcd661e2919182a1de852decc8`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38853362092): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -60,3 +60,13 @@ The direct editor has **Xuất video MP4**, **Xuất video có phụ đề đã 
 Choose **Gốc / HD720p / FullHD1080p / UHD4K** before exporting video, treating a logo region or dubbing. Original mode avoids upscaling and caps larger input at UHD4K. Fixed-size modes may upscale small input. Output retains the image proportions and fits within 3840×2160 for landscape or 2160×3840 for portrait; other aspect ratios use smaller dimensions inside those limits. Logo treatment precedes resizing and captions are rendered afterward. Resizing is not AI detail restoration, and 4K requires more processing time and RAM.
 
 Validation: 50 Linux and native Windows regression checks passed. Actual files were probed at UHD resolution for plain export, captions, portrait video and narration mux. Chromium exercised no-cue MP4 export, 3840×2160 output, progress100, downloads of currently edited TXT/SRT, auto-save, mobile layout with no JavaScript errors. The relocated Windows bundle also checks a real UHD export using its packaged FFmpeg before publication.
+
+## Voice selection, translation and export in 2.9
+
+Unloaded international voices stay visible with their readiness status. Refresh voices rescans Windows SAPI; switch to a bundled AI voice if the system has none, or explicitly download the selected optional model in the tool. Windows OneCore voices are not assumed to be SAPI voices.
+
+Subtitle target language and narration language are independent. Optional OpenAI/ChatGPT and Gemini translation use your own provider credentials; Ollama remains the local option without an API key. Cloud credentials are kept out of job files. Direct TXT/SRT exports remain available alongside original/720p/1080p/4K video export and fast/balanced/highest-quality encoding. Up to 20 fixed logo regions can be interpolated or covered with independently chosen colors. This cannot restore hidden image details.
+
+The fast preset selects available Nano settings and bounded CPU parallelism. Recognition results are cached for repeat edits. Actual performance depends on hardware, model and output settings; an hour of speech in two minutes is not guaranteed.
+
+Validation: 61 regression checks passed on Linux and native Windows. Relocated offline Windows smoke passed actual Nano/Turbo voice, Whisper recognition, narration with captions and multiple colored regions, and highest-quality UHD export. The published 1.26 GB ZIP was downloaded in full, SHA256 verified, and checked for version 2.9.0, the new modules, bundled models and absence of personal job/history/key files. OpenAI/Gemini contracts used mocked responses; live provider translation requires the user's own credentials.
