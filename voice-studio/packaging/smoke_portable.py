@@ -32,6 +32,8 @@ with TestClient(studio.app) as client:
     assert 'workspace-retry-translation' in client.get('/').text
     assert 'workspace-model-options' in client.get('/').text
     assert 'workspace-model-test' in client.get('/').text
+    assert 'workspace-free-generate' in client.get('/').text
+    assert 'workspace-translate-captions' in client.get('/').text
     assert any('ko' in v['languages'] for v in client.get('/api/voices').json()['voices'])
 for engine, speaker in [('vieneu_nano','Minh Quân'), ('vieneu','Mai Anh')]:
     job = {'id': 'portable-check-'+engine, 'text': 'Xin chào, đây là kiểm tra gói phòng thu giọng nói.', 'engine': engine, 'speaker': speaker, 'voice_id': 'check', 'language': 'vi', 'quality': 'standard', 'format': 'wav', 'speed': 1, 'nano_steps': 8, 'nano_threads': 2, 'paragraph_pause': 0}
@@ -63,6 +65,14 @@ videos.mkdir(exist_ok=True)
 source = videos/'portable.source'
 subprocess.run(['ffmpeg','-nostdin','-v','error','-f','lavfi','-i','color=c=blue:s=160x90:r=10:d=20','-c:v','libx264','-y','-f','mp4',str(source)], check=True)
 (videos/'portable.json').write_text(json.dumps(inspect_video(source)), encoding='utf-8')
+shutil.copy2(source,videos/(export_id+'.source'))
+(videos/(export_id+'.json')).write_text(json.dumps(inspect_video(source)),encoding='utf-8')
+with TestClient(studio.app) as client:
+    saved=client.put(f'/api/videos/{export_id}/editor',json={'language':'vi','cues':[{'start':1.5,'end':4,'text':'Lời đã sửa'}]})
+    assert saved.status_code==200 and saved.json()['language']=='vi'
+    exported=client.get(f'/api/videos/{export_id}/editor/export.timed-txt')
+    assert exported.status_code==200 and '00:01.500 --> 00:04.000' in exported.text
+
 job = {'id': 'portable-check-vieneu_nano', 'video_id': 'portable','caption_cues':[{'start':0,'end':5,'text':'Video có phụ đề và voice'}],'logos':[{'x':10,'y':10,'w':20,'h':12,'mode':'color','color':'#ff0000'},{'x':80,'y':10,'w':20,'h':12,'mode':'color','color':'#00ff00'}]}
 mux_video(job, app/'.data/audio'/(job['id']+'.wav'), app/'.data/parts'/job['id'], app/'.data', sf.info(app/'.data/audio'/(job['id']+'.wav')).duration)
 assert inspect_video(app/'.data/audio'/(job['id']+'.mp4'))['has_audio']

@@ -233,3 +233,10 @@ Nút Chọn giọng AI phù hợp nằm ngay cạnh phần chọn giọng của 
 
 ### 3.4.4 · Tự chờ và thử lại khi Gemini quá tải
 Lỗi HTTP 503 được thử lại tối đa ba lần cho mỗi yêu cầu, chờ ngắn 1/2 giây hoặc theo Retry-After nhưng tối đa 5 giây. Nếu model vẫn quá tải, phần dịch thử/dịch phụ đề có thể thử tối đa ba model khác được cùng dịch vụ liệt kê; không tự chuyển sang dịch vụ hay API key khác. HTTP 401/403/429 không được thử lặp hoặc đổi model để né lỗi. Nếu tất cả đều lỗi, tool giữ phụ đề và báo dịch vụ vẫn quá tải. Dừng trong lúc dịch thử sẽ chặn việc đưa video vào hàng đợi khi phản hồi trở về. Quá tải phía Google không thể được bảo đảm hết bằng cập nhật phần mềm.
+
+### 3.5 · Sửa phút–giây, dịch phụ đề và tạo voice riêng
+- Chọn Ngôn ngữ phụ đề đích rồi bấm Tạo / dịch phụ đề sang ngôn ngữ đã chọn. Nếu đã có lời, tool dịch lại từ SRT đang sửa, không nhận dạng lại video. Dịch cần Ollama/model cục bộ hoặc dịch vụ AI đã kết nối.
+- Sửa từng câu trong Sửa phút–giây và lời ngay trên video. Mốc dùng MM:SS.mmm; HH:MM:SS.mmm và số giây cũng được chấp nhận. Chọn đúng Ngôn ngữ của lời đang sửa sau khi tự viết lại lời sang ngôn ngữ khác. Xuất TXT lời thường, TXT có phút + lời hoặc SRT giữ mốc.
+- Bấm Tạo voice riêng từ văn bản để mở khung lời độc lập. Đưa lời phụ đề vào khung hoặc tự viết, chọn giọng/ngôn ngữ ở mục 2 rồi Tạo voice riêng. Đây là lời đọc liên tục, không cần Gemini, không bị chặn bởi ô SRT và không thay voice khớp video đã tạo.
+- Dịch lời trong khung là thao tác riêng, cần kết nối AI. Voice riêng có nghe thử, phần trăm, Dừng và tải MP3/WAV/TXT/SRT theo voice đã tạo. Giọng Việt/Anh đi kèm chạy ngay; giọng quốc tế tùy chọn vẫn cần tải model hoặc cài giọng Windows hỗ trợ.
+- Whisper trả ngôn ngữ thực tế của phụ đề; ngôn ngữ này được lưu với dự án và trong bộ đệm nhận dạng. Không gán phụ đề gốc theo lựa chọn ngôn ngữ đích.

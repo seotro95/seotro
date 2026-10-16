@@ -102,7 +102,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.4.4', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.5.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -706,6 +706,7 @@ class EditorCue(BaseModel):
 
 
 class EditorProject(BaseModel):
+    language:str=Field(default='',max_length=16)
     caption_style: dict = Field(default_factory=dict)
     cues: list[EditorCue] = Field(default_factory=list,max_length=10000)
 
@@ -795,7 +796,7 @@ def create_video_task(body:VideoTask):
     if body.action not in {'translate_text','prepare_voice'} and not body.video_id:raise HTTPException(422,'Chọn video trước.')
     meta = read_json(DATA/'videos'/f'{valid_id(body.video_id)}.json') if body.action not in {'translate_text','prepare_voice'} else {'duration':10800}
     try:
-        if body.source_language and body.source_language.split('-')[0] not in RECOGNITION_CODES:raise ValueError('Ngôn ngữ gốc chưa được hỗ trợ.')
+        if body.source_language and body.source_language!='auto' and body.source_language.split('-')[0] not in RECOGNITION_CODES:raise ValueError('Ngôn ngữ gốc chưa được hỗ trợ.')
         if body.action=='translate_text':
             if not body.text.strip() or body.target_language not in LANGUAGES:raise ValueError('Nhập văn bản và chọn ngôn ngữ dịch.')
             if body.input_format=='srt':parse_srt(body.text)
@@ -858,6 +859,7 @@ def video_task_status(ident:str):
         elif job['action']=='subtitles':
             result['srt']=(work/'output.srt').read_text(encoding='utf-8')
             result['cues']=parse_srt(result['srt'])
+            if (work/'result.json').exists():result.update(read_json(work/'result.json'))
         else:
             result['video_url']=f'/api/video-tasks/{ident}/output.mp4'
             if (work/'result.json').exists():
@@ -865,6 +867,7 @@ def video_task_status(ident:str):
     if job['status']=='error' and (work/'original.srt').exists():
         result['original_srt']=(work/'original.srt').read_text(encoding='utf-8')
         result['original_cues']=parse_srt(result['original_srt'])
+        result['original_language']=read_json(work/'recognition.json').get('language','') if (work/'recognition.json').exists() else job.get('source_language','')
     return result
 
 
@@ -921,21 +924,22 @@ def save_editor(ident:str,body:EditorProject):
     meta=read_json(DATA/'videos'/f'{ident}.json')
     try:
         from video_editor import validate_style
+        if body.language and body.language!='auto' and body.language.split('-')[0] not in RECOGNITION_CODES:raise ValueError('Ngôn ngữ phụ đề không hợp lệ.')
         style=validate_style(body.caption_style)
         cues=validate_cues([c.model_dump() for c in body.cues],meta['duration']) if body.cues else []
     except ValueError as exc:
         raise HTTPException(422,str(exc)) from None
     folder=DATA/'editor';folder.mkdir(exist_ok=True)
     with lock:
-        write_json(folder/f'{ident}.json',{'cues':cues,'caption_style':style})
-    return {'cues':cues,'caption_style':style}
+        write_json(folder/f'{ident}.json',{'cues':cues,'caption_style':style,'language':body.language})
+    return {'cues':cues,'caption_style':style,'language':body.language}
 
 
 @app.get('/api/videos/{ident}/editor/export.{extension}')
 def export_editor(ident:str,extension:str):
     from fastapi.responses import Response
     from video_editor import validate_cues
-    if extension not in {'txt','srt'}:
+    if extension not in {'txt','srt','timed-txt'}:
         raise HTTPException(404,'Chỉ hỗ trợ TXT và SRT.')
     ident=valid_id(ident)
     meta=read_json(DATA/'videos'/f'{ident}.json')
@@ -945,6 +949,10 @@ def export_editor(ident:str,extension:str):
     except ValueError as exc:
         raise HTTPException(422,str(exc)) from None
     text=export_srt(cues) if extension=='srt' else '\n'.join(c['text'] for c in cues)
+    if extension=='timed-txt':
+        from subtitles import minute_timestamp
+        text='\n\n'.join(f"{minute_timestamp(c['start'])} --> {minute_timestamp(c['end'])}\n{c['text']}" for c in cues)
+        extension='timed.txt'
     return Response(text,media_type='text/plain; charset=utf-8',headers={'Content-Disposition':f'attachment; filename="subtitles-{ident[:8]}.{extension}"'})
 
 

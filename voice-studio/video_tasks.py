@@ -119,8 +119,12 @@ def run(path):
         from recognition import recognize
         cues=recognize(source,data/'models'/'whisper-base',job,work,meta,update)
     (work/'original.srt').write_text(export_srt(cues),encoding='utf-8')
-    if job.get('target_language'):
-        cues = translate_cues(cues,job['target_language'],job.get('model',''),update,job.get('provider','ollama'),job.get('source_language','auto'))
+    source_language=job.get('source_language','')
+    if (work/'recognition.json').exists():source_language=json.loads((work/'recognition.json').read_text(encoding='utf-8')).get('language',source_language)
+    target_language=job.get('target_language','')
+    if target_language and source_language.split('-')[0]!=target_language.split('-')[0]:
+        cues = translate_cues(cues,target_language,job.get('model',''),update,job.get('provider','ollama'),source_language or 'auto')
+    (work/'result.json').write_text(json.dumps({'source_language':source_language,'caption_language':target_language or source_language}),encoding='utf-8')
     output = export_srt(cues)
     if len(output) > 200000 or len(cues) > 10000:
         raise ValueError('Phụ đề vượt 200.000 ký tự / 10.000 câu. Chia video thành các phần ngắn hơn.')

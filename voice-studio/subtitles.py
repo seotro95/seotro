@@ -35,3 +35,8 @@ def timestamp(seconds):
 
 def export_srt(cues, offset=0):
     return '\n\n'.join(f'{i}\n{timestamp(c["start"]+offset)} --> {timestamp(c["end"]+offset)}\n{c["text"]}' for i, c in enumerate(cues, 1)) + '\n'
+
+
+def minute_timestamp(seconds):
+    ms=round(seconds*1000)
+    return f'{ms//60000:02d}:{ms//1000%60:02d}.{ms%1000:03d}'
