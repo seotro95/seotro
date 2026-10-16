@@ -88,6 +88,13 @@ def verify_offline(root):
     subprocess.run([str(runtime), str(SOURCE/'packaging/smoke_portable.py'), str(app)], check=True, env=env, cwd=app, timeout=600)
 
 
+def run_preparation(command, **kwargs):
+    result=subprocess.run(command,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,encoding='utf-8',errors='replace',**kwargs)
+    print(result.stdout,flush=True)
+    if result.returncode:
+        raise RuntimeError(f'Model preparation exited {result.returncode}: '+result.stdout[-3500:])
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--output', required=True, type=Path)
@@ -104,8 +111,8 @@ def main():
     data = root/'voice-studio/.data'
     env = dict(os.environ, VOICE_STUDIO_DATA_DIR=str(data), HF_HOME=str(data/'models/cache'), HF_HUB_DISABLE_XET='1')
     for engine in ('vieneu_nano', 'vieneu'):
-        subprocess.run([sys.executable, str(SOURCE/'prepare_models.py'), engine], env=env, check=True, timeout=1800)
-    subprocess.run([sys.executable,str(SOURCE/'prepare_subtitles.py')],env=env,check=True,timeout=1800)
+        run_preparation([sys.executable, str(SOURCE/'prepare_models.py'), engine], env=env, timeout=1800)
+    run_preparation([sys.executable,str(SOURCE/'prepare_subtitles.py')],env=env,timeout=1800)
     # Retain model cards/licenses alongside redistributed weights.
     from huggingface_hub import hf_hub_download
     for repo in ('pnnbao-ump/VieNeu-TTS-v3-Nano', 'pnnbao-ump/VieNeu-TTS-v3-Turbo', 'OpenMOSS-Team/MOSS-Audio-Tokenizer-Nano-ONNX'):
@@ -139,4 +146,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:main()
+    except Exception as exc:
+        message=(type(exc).__name__+': '+str(exc)).replace('%','%25').replace('\r','%0D').replace('\n','%0A')
+        print('::error title=Windows portable build failed::'+message,flush=True)
+        raise
