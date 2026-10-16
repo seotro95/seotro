@@ -107,7 +107,11 @@ meta=inspect_video(work/'output.mp4')
 assert (meta['width'],meta['height'])==(3840,2160)
 # Remove QA projects; retain model weights and ready markers only.
 import shutil
-for name in ('audio','parts','jobs','voices','videos','video_tasks'):
-    shutil.rmtree(app/'.data'/name)
+for path in (app/'.data').iterdir():
+    if path.name=='models':continue
+    if path.is_dir():shutil.rmtree(path)
+    else:path.unlink()
+for name in ('audio','parts','jobs','voices','videos','video_tasks','editor'):
     (app/'.data'/name).mkdir()
+assert not any(path.is_file() for path in (app/'.data').rglob('*') if (app/'.data/models') not in path.parents), 'QA files remain outside model storage'
 print('PASS: packaged Windows Python, dependencies, offline Nano+Turbo, web API/static assets, FFmpeg and MP4 export.')
