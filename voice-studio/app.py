@@ -607,6 +607,7 @@ def convert_script(body: ScriptConversion):
 class VideoTask(BaseModel):
     video_id: str
     action: str = Field(pattern='^(subtitles|logo)$')
+    accurate: bool = True
     source_language: str = Field(default='', pattern='^(|vi|en|ja|ko|zh|fr|de|es|it|pt|ru)$')
     target_language: str = Field(default='', max_length=16)
     model: str = Field(default='qwen3:4b', max_length=100)

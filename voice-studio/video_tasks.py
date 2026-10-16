@@ -70,7 +70,7 @@ def run(path):
         if not (model_path/'model.bin').exists():
             raise ValueError('Chưa tải model phụ đề. Chạy download_subtitle_model.bat một lần khi có Internet.')
         model = WhisperModel(str(model_path), device='cpu', compute_type='int8', cpu_threads=min(4,os.cpu_count() or 2))
-        segments, _ = model.transcribe(str(work/'speech.wav'), language=job.get('source_language') or None, beam_size=1, vad_filter=True, condition_on_previous_text=False)
+        segments, _ = model.transcribe(str(work/'speech.wav'), language=job.get('source_language') or None, beam_size=5 if job.get('accurate',True) else 1, vad_filter=True, condition_on_previous_text=False)
         cues = []
         for s in segments:
             start = max(cues[-1]['end'] if cues else 0, round(s.start,3))
