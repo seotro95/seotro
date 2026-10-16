@@ -29,6 +29,8 @@ with TestClient(studio.app) as client:
     assert client.get('/static/video-preview.js').status_code==200
     assert client.get('/static/workspace.js').status_code==200
     assert 'workspace-all' in client.get('/').text
+    assert 'workspace-retry-translation' in client.get('/').text
+    assert 'workspace-model-options' in client.get('/').text
     assert any('ko' in v['languages'] for v in client.get('/api/voices').json()['voices'])
 for engine, speaker in [('vieneu_nano','Minh Quân'), ('vieneu','Mai Anh')]:
     job = {'id': 'portable-check-'+engine, 'text': 'Xin chào, đây là kiểm tra gói phòng thu giọng nói.', 'engine': engine, 'speaker': speaker, 'voice_id': 'check', 'language': 'vi', 'quality': 'standard', 'format': 'wav', 'speed': 1, 'nano_steps': 8, 'nano_threads': 2, 'paragraph_pause': 0}

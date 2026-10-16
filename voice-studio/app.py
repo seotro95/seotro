@@ -102,7 +102,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.4.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.4.1', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -484,6 +484,11 @@ class TranslationCheck(BaseModel):
     model:str=Field(default='',max_length=100)
 
 
+@app.get('/api/translation/models')
+async def available_translation_models(provider:str='ollama'):
+    return {'provider':provider,'models':await writing.translation_models(provider)}
+
+
 @app.post('/api/translation/check')
 async def check_translation(body:TranslationCheck):
     return await writing.check_translation_model(body.provider,body.model)
@@ -859,6 +864,7 @@ def video_task_status(ident:str):
                 result.update(read_json(work/'result.json'))
     if job['status']=='error' and (work/'original.srt').exists():
         result['original_srt']=(work/'original.srt').read_text(encoding='utf-8')
+        result['original_cues']=parse_srt(result['original_srt'])
     return result
 
 

@@ -42,6 +42,8 @@ async def translate_batch(texts,language,provider,model,source_language='auto'):
 
 def translate_cues(cues,language,model,update,provider='ollama',source_language='auto'):
     model=model.strip() or writing.DEFAULT_MODELS.get(provider,'')
+    original_model=model
+    cues=[dict(c) for c in cues]
     pattern=r'(?:[a-zA-Z0-9._-]+/)*[a-zA-Z0-9._-]+(?::[a-zA-Z0-9._-]+)?' if provider=='ollama' else r'[a-zA-Z0-9._-]{1,100}'
     if provider not in writing.DEFAULT_MODELS or not re.fullmatch(pattern,model):raise ValueError('Tên model dịch không hợp lệ.')
     if provider=='ollama':
@@ -57,7 +59,21 @@ def translate_cues(cues,language,model,update,provider='ollama',source_language=
     if batch:batches.append(batch)
     done=0
     for batch in batches:
-        texts=asyncio.run(translate_batch([c['text'] for c in batch],language,provider,model,source_language))
+        try:
+            texts=asyncio.run(translate_batch([c['text'] for c in batch],language,provider,model,source_language))
+        except writing.HTTPException as exc:
+            if 'Không tìm thấy model' not in str(exc.detail) or provider=='ollama':raise
+            try:available=asyncio.run(writing.translation_models(provider))
+            except writing.HTTPException:available=[]
+            replacements=[name for name in available if name!=model]
+            if model==original_model==writing.DEFAULT_MODELS[provider] and replacements:
+                model=replacements[0]
+                update(60+int(38*done/max(1,len(cues))),f'Model mặc định không còn hoạt động; chuyển sang {provider} / {model}')
+                try:texts=asyncio.run(translate_batch([c['text'] for c in batch],language,provider,model,source_language))
+                except writing.HTTPException as retry:
+                    raise ValueError(f'Dịch bằng {provider} / {model} chưa thành công: {retry.detail} Phụ đề gốc được giữ lại; chọn model khác rồi dịch lại.') from None
+            else:
+                raise ValueError(f'Model dịch {provider} “{model}” không nhận yêu cầu dịch. Bấm Cập nhật model dịch và chọn model khác. Phụ đề gốc được giữ lại.') from None
         for cue,text in zip(batch,texts):cue['text']=text
         done+=len(batch);update(60+int(38*done/max(1,len(cues))),f'Đang dịch bằng {provider} · {done}/{len(cues)} câu')
     return cues

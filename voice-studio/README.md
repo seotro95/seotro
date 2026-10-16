@@ -221,3 +221,6 @@ Trong màn hình video, chọn ngôn ngữ phụ đề, ngôn ngữ đọc và g
 ### 3.4 · Xuất riêng MP3 / WAV / TXT / SRT
 Sau khi tạo voice, chọn định dạng trong “Xuất riêng voice / lời đọc” rồi bấm “Xuất tệp đã chọn”. MP3 dùng 192 kbps, WAV giữ bản thu; TXT/SRT chứa lời đã đọc và mốc voice đã tạo, kể cả khi khác ngôn ngữ phụ đề. Các nút TXT/SRT cạnh kịch bản vẫn xuất bản đang chỉnh sửa. Thay đổi lời cần tạo lại voice để xuất đúng bản mới.
 Trước khi dịch phụ đề/lời đọc, studio kiểm tra model dịch. Ollama dùng model cục bộ đã cài khi model mặc định chưa có; tên model tự nhập sai được báo để sửa. OpenAI/Gemini kiểm tra quyền truy cập model bằng API key đã kết nối. Đây là model dịch, độc lập với Whisper và giọng Nano/Turbo.
+
+### 3.4.1 · Khôi phục khi dịch báo không tìm thấy model
+Thông báo “Không tìm thấy model. Hãy kiểm tra tên model.” từ dịch vụ cloud thuộc phần dịch, không phải Whisper hay giọng đọc. Trong Kết nối dịch, bấm Cập nhật model dịch để lấy danh sách từ tài khoản đang dùng. Model mặc định đã ngừng hoạt động được thay bằng model dịch đang có; model tự nhập không bị đổi ngầm. Nếu dịch thất bại sau khi nhận dạng, phụ đề gốc hiện ngay trong khung sửa. Chọn model rồi bấm Dịch lại phụ đề đã nhận dạng để dùng lại SRT, không nhận dạng lại video.

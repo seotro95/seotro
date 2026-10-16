@@ -139,6 +139,28 @@ async def check_translation_model(provider,model):
     headers={'Authorization':f'Bearer {key}'} if provider=='openai' else {'x-goog-api-key':key}
     try:await request_api('GET',url,headers=headers)
     except HTTPException as exc:
-        if 'Không tìm thấy model' in str(exc.detail):raise HTTPException(503,f'Model dịch {provider} “{selected}” không khả dụng. Sửa tên model trong Kết nối dịch trước khi chạy; đây là model dịch, không phải model giọng đọc.') from None
+        if 'Không tìm thấy model' in str(exc.detail):
+            try:available=await translation_models(provider)
+            except HTTPException:available=[]
+            if selected==DEFAULT_MODELS[provider] and available:
+                return {'provider':provider,'model':available[0],'ready':True,'replaced_model':selected}
+            raise HTTPException(503,f'Model dịch {provider} “{selected}” không khả dụng. Bấm Cập nhật model dịch rồi chọn model trong danh sách; đây không phải model giọng đọc.') from None
         raise
     return {'provider':provider,'model':selected,'ready':True}
+
+
+async def translation_models(provider):
+    if provider=='ollama':return (await local_status())['models']
+    if provider not in ENV_KEYS:raise HTTPException(422,'Chọn dịch vụ dịch hợp lệ.')
+    key=get_key(provider)
+    if not key:raise HTTPException(503,f'Chưa kết nối {provider}. Nhập API key trong Kết nối dịch.')
+    if provider=='gemini':
+        names=[];token=''
+        for _ in range(20):
+            data=await request_api('GET','https://generativelanguage.googleapis.com/v1beta/models',headers={'x-goog-api-key':key},params={'pageSize':100,**({'pageToken':token} if token else {})})
+            names.extend(m.get('name','').removeprefix('models/') for m in data.get('models',[]) if 'generateContent' in m.get('supportedGenerationMethods',[]) and not any(x in m.get('name','').lower() for x in ('image','tts','audio','robotics','computer-use')))
+            token=data.get('nextPageToken','')
+            if not token:break
+        return sorted(set(n for n in names if re.fullmatch(r'[a-zA-Z0-9._-]{1,100}',n)),key=lambda n:('flash' not in n,'preview' in n,n),reverse=False)
+    data=await request_api('GET','https://api.openai.com/v1/models',headers={'Authorization':f'Bearer {key}'})
+    return sorted({m['id'] for m in data.get('data',[]) if re.fullmatch(r'gpt-[a-zA-Z0-9._-]+',m.get('id','')) and not any(x in m['id'] for x in ('audio','realtime','transcribe','tts','image','instruct','search'))},key=lambda n:('mini' not in n,n))
