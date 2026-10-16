@@ -4,6 +4,7 @@ import json
 import os
 import sys
 from pathlib import Path
+from state_io import write_progress
 
 
 def validate_logo(rect, meta):
@@ -46,7 +47,7 @@ def run(path):
         engine=job['engine']
         if engine not in {'qwen','qwen_clone','vieneu','vieneu_nano'}:raise ValueError('Model giọng không hợp lệ.')
         def prepare_update(value,phase):
-            temp=work/'state.tmp';temp.write_text(json.dumps({'progress':value,'phase':phase},ensure_ascii=False),encoding='utf-8');temp.replace(work/'progress.json')
+            write_progress(work/'progress.json',{'progress':value,'phase':phase})
         env=dict(os.environ,VOICE_STUDIO_DATA_DIR=str(data),HF_HOME=str(data/'models'/'cache'),HF_HUB_DISABLE_XET='1')
         if engine.startswith('qwen'):
             if importlib.util.find_spec('torch') is None:
@@ -68,7 +69,7 @@ def run(path):
             parts.append(text[:end]);text=text[end:].lstrip()
         cues=parse_srt(job['text']) if job.get('input_format')=='srt' else [{'text':part} for part in parts]
         def text_update(value,phase):
-            tmp=work/'state.tmp';tmp.write_text(json.dumps({'progress':value,'phase':phase},ensure_ascii=False),encoding='utf-8');tmp.replace(work/'progress.json')
+            write_progress(work/'progress.json',{'progress':value,'phase':phase})
         cues=translate_cues(cues,job['target_language'],job.get('model',''),text_update,job.get('provider','ollama'),job.get('source_language','auto'))
         output=export_srt(cues) if job.get('input_format')=='srt' else '\n'.join(c['text'] for c in cues)
         if len(output)>200000:raise ValueError('Bản dịch vượt 200.000 ký tự. Chia văn bản thành các phần ngắn hơn.')
@@ -77,9 +78,7 @@ def run(path):
     source = data/'videos'/f"{job['video_id']}.source"
     meta.update(inspect_video(source))
     def update(progress, phase):
-        temp = work/'state.tmp'
-        temp.write_text(json.dumps({'progress':progress,'phase':phase},ensure_ascii=False),encoding='utf-8')
-        temp.replace(work/'progress.json')
+        write_progress(work/'progress.json',{'progress':progress,'phase':phase})
     if job['action'] in {'logo','render','export','preview'}:
         from video_export import scale_filter,encoder_options
         preview=job['action']=='preview'

@@ -5,6 +5,7 @@ import os
 import subprocess
 import time
 from pathlib import Path
+from state_io import read_progress,write_progress
 
 
 def inspect_video(path):
@@ -27,23 +28,9 @@ def run_ffmpeg(command, work, duration, start, end, phase, timeout=21600, cwd=No
     """Poll real FFmpeg timestamps without blocking on Windows pipe EOF."""
     progress = work / 'progress.json'
     def update(value):
-        try:
-            current = json.loads(progress.read_text(encoding='utf-8')) if progress.exists() else {}
-            current.update(progress=value, phase=phase)
-            temporary = work / 'ffmpeg-progress.tmp'
-            temporary.write_text(json.dumps(current, ensure_ascii=False), encoding='utf-8')
-            # Readers may briefly hold progress.json on Windows.
-            import time
-            for attempt in range(10):
-                try:
-                    temporary.replace(progress)
-                    break
-                except PermissionError:
-                    if attempt == 9:
-                        raise
-                    time.sleep(.05)
-        except FileNotFoundError:
-            pass
+        current=read_progress(progress)
+        current.update(progress=value,phase=phase)
+        write_progress(progress,current)
     update(start)
     status_file = work / 'ffmpeg-status.txt'
     status_file.unlink(missing_ok=True)

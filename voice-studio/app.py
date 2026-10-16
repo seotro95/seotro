@@ -28,6 +28,7 @@ from subtitles import parse_srt, export_srt
 from system_voices import installed_voices
 from hardware import supports_int8, system_info
 from performance import speed_report
+from state_io import write_json_atomic,read_progress
 
 BASE = Path(__file__).resolve().parent
 DATA = Path(os.environ.get('VOICE_STUDIO_DATA_DIR', str(BASE / '.data'))).resolve()
@@ -96,7 +97,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.0.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.0.1', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -115,9 +116,7 @@ def now():
 
 
 def write_json(path, data):
-    temp = path.with_suffix('.tmp')
-    temp.write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
-    temp.replace(path)
+    write_json_atomic(path,data)
 
 
 def valid_id(value):
@@ -768,7 +767,8 @@ def create_video_task(body:VideoTask):
 def video_task_status(ident:str):
     work=video_task_work(ident)
     job=read_json(work/'job.json')
-    state=read_json(work/'progress.json') if (work/'progress.json').exists() else {'progress':0,'phase':'Đang chờ'}
+    state={'progress':0,'phase':'Đang chờ',**read_progress(work/'progress.json')}
+    if job['status']=='done':state.update(progress=100,phase='Hoàn tất')
     result={'video_id':job['video_id'],'id':ident,'status':job['status'],'error':job.get('error'),**state}
     if job['status']=='done':
         if job['action']=='prepare_voice':

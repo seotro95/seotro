@@ -12,6 +12,7 @@ import time
 import wave
 from pathlib import Path
 
+from state_io import write_json_atomic,write_progress
 from narration import PCMWriter, PROFILES, plan_segments
 
 DATA = Path(os.environ['VOICE_STUDIO_DATA_DIR'])
@@ -19,16 +20,9 @@ LANGUAGES = {'en-US': 'English', 'en-GB': 'English', 'ja': 'Japanese', 'ko': 'Ko
 
 
 def write_state(path, data):
-    temporary = path.with_suffix('.tmp')
-    temporary.write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
-    for attempt in range(10):
-        try:
-            temporary.replace(path)
-            return
-        except PermissionError:
-            if attempt == 9:
-                raise
-            time.sleep(0.05)
+    if path.name=='progress.json':
+        return write_progress(path,data)
+    return write_json_atomic(path,data)
 
 
 def load_synthesizer(job):
