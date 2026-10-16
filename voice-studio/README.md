@@ -1,4 +1,4 @@
-# Voice Studio 2.8 — Xuất video đến 4K, TXT/SRT và sửa phụ đề trực tiếp
+# Voice Studio 2.9 — Giọng sẵn sàng, dịch đa dịch vụ và nhiều vùng logo
 
 Giao diện tiếng Việt cho chuyển văn bản thành lời nói, hồ sơ nhân bản giọng từ mẫu, thư viện giọng, hàng đợi, nghe lại và tải WAV/MP3. Tạo giọng cục bộ không cần API key. AI viết kịch bản mặc định dùng Ollama trên máy, không cần tài khoản hoặc API key. OpenAI/Gemini là tùy chọn nâng cao và vẫn yêu cầu khóa riêng.
 
@@ -180,3 +180,15 @@ Dừng video ở mốc cần xem, nhấn **Khoanh vùng logo tại thời điể
 Trong trình sửa video, chọn độ phân giải **Gốc / 720p / 1080p / UHD 4K**. Xuất MP4 không cần có phụ đề; nút xuất video có phụ đề dùng các câu vừa sửa. Có nút xuất TXT và SRT ngay trong trình sửa, tự lưu câu đã sửa trước khi tải; không cần mở phần nhập tệp nâng cao. Chế độ độ phân giải cũng áp dụng khi xử lý logo hoặc lồng tiếng.
 
 Xuất giữ tỷ lệ hình, không cắt hoặc kéo méo. UHD 4K tối đa 3840×2160 ngang, 2160×3840 dọc; video tỷ lệ khác nằm trong khung giới hạn tương ứng. Chế độ Gốc không nâng kích thước, nhưng hạ video trên 4K về giới hạn 4K. Các chế độ kích thước cố định có thể nâng video nhỏ lên; đây không phải phục hồi chi tiết bằng AI. Giữ FPS nguồn. Xử lý logo trước khi đổi kích thước; gắn phụ đề sau khi đổi kích thước để chữ rõ ở độ phân giải đầu ra. 4K cần nhiều CPU/RAM và thời gian hơn.
+
+### Giọng trống, dịch và nhiều vùng logo (2.9)
+
+Danh mục giọng AI hiện cả giọng chưa tải, có nhãn Sẵn sàng / Chưa tải model. Bấm **Chuyển sang giọng AI** nếu Windows chưa có giọng SAPI cho ngôn ngữ đang chọn. **Cập nhật danh sách giọng** xóa bộ nhớ đệm và quét lại giọng Windows, không cần khởi động lại server. Giọng OneCore vẫn có thể không được Windows cung cấp qua SAPI. **Tải model** là thao tác tải trực tiếp trong tool, cần Internet, vài GB dung lượng và có thể mất thời gian; Qwen cài PyTorch CPU khi thiếu. Không tự tải chỉ vì chọn ngôn ngữ.
+
+Chọn riêng ngôn ngữ gốc / phụ đề đích / ngôn ngữ giọng đọc. Dịch phụ đề hoặc văn bản voice qua Ollama, OpenAI hay Gemini, model có thể thay đổi. Kết nối dịch dùng chung phần key trong RAM; khóa không được ghi vào job, dự án, localStorage hoặc dòng lệnh. Job cần cloud nhận key qua môi trường tiến trình con. Cloud cần API key và có thể tính phí, gửi nội dung văn bản/lời thoại tới nhà cung cấp khi bấm dịch. Ollama chỉ gửi đến localhost và cần model cục bộ phù hợp. Chất lượng bản dịch phụ thuộc model; nghe và đọc kiểm tra trước khi dùng.
+
+Trong mục lồng tiếng có tùy chọn **Dịch lời lồng tiếng riêng** và **Gắn cả phụ đề đã sửa**: có thể giữ phụ đề một ngôn ngữ, dịch lời đọc sang ngôn ngữ khác, rồi xuất chung một MP4. SRT giữ mốc câu; lời dịch dài quá ô có thể cần rút gọn hoặc chỉnh lại thời gian, ứng dụng không cắt mất lời. Voice văn bản có nút Dịch và Dịch → tạo voice riêng, có thể dừng dịch.
+
+Kéo tạo nhiều ô logo (tối đa 20), chọn ô trong danh sách để đổi chế độ/màu, xóa một ô hoặc bỏ tất cả. Nội suy nền dùng cho logo cố định; phủ màu che bằng #RRGGBB đã chọn riêng từng ô. Không theo dõi logo chuyển động hoặc phục hồi được cảnh đã bị che. Tất cả ô được xử lý cùng một lượt trước khi đổi kích thước và gắn chữ.
+
+Chọn độ phân giải đến 4K và chất lượng Cao nhất / Cân bằng / Nhanh. Nút chọn cao nhất đặt 4K + CRF16; nút Ưu tiên tốc độ đặt nhận dạng beam1, Nano4 bước (bản nháp), tiến trình phù hợp CPU/RAM và x264 ultrafast. Tốc độ thực tế tùy phần cứng; chế độ nhanh có thể giảm độ tự nhiên/chất lượng hoặc làm tệp lớn hơn. Nhận dạng được cache theo video, ngôn ngữ và chất lượng; dịch lại không cần chạy Whisper từ đầu. Ollama giữ model giữa các lô dịch rồi giải phóng trước job kế tiếp; giữ TTS ấm khi bộ nhớ cho phép. Cache nhận dạng bị xóa cùng video nguồn.

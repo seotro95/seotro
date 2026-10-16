@@ -17,3 +17,12 @@ def output_size(width,height,resolution='original'):
 def scale_filter(meta,resolution):
     size=output_size(meta['width'],meta['height'],resolution)
     return (f'scale={size[0]}:{size[1]}:flags=lanczos,setsar=1' if size!=(meta['width'],meta['height']) else None),size
+
+
+def encoder_options(job):
+    # Best preserves detail; fast trades bitrate/size for shorter CPU encoding.
+    quality=job.get('export_quality','balanced')
+    choices={'best':('medium','16'),'balanced':('veryfast','20'),'fast':('ultrafast','23')}
+    if quality not in choices:raise ValueError('Chế độ chất lượng xuất không hợp lệ.')
+    preset,crf=choices[quality]
+    return ['-c:v','libx264','-threads','4','-preset',preset,'-crf',crf,'-pix_fmt','yuv420p']

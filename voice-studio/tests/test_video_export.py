@@ -32,7 +32,7 @@ def test_real_4k_export(tmp_path,action,source_size,expected):
         audio=work/'speech.wav'
         with wave.open(str(audio),'wb') as target:
             target.setnchannels(1);target.setsampwidth(2);target.setframerate(24000);target.writeframes(b'\x00\x00'*4800)
-        mux_video({'id':'b','video_id':'a','export_resolution':'2160p'},audio,work,tmp_path,.2)
+        mux_video({'id':'b','video_id':'a','export_resolution':'2160p','caption_cues':[{'start':0,'end':.4,'text':'Caption kept'}],'logos':[{'x':10,'y':10,'w':20,'h':10,'mode':'color','color':'#ff0000'}]},audio,work,tmp_path,.2)
         output=tmp_path/'audio'/'b.mp4'
     else:
         run(path)

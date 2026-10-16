@@ -96,7 +96,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='2.8.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='2.9.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -162,15 +162,24 @@ def index():
 
 @app.get('/api/config')
 def config():
-    return {'mode': 'local', 'languages': LANGUAGES, 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'cpu_cores': os.cpu_count() or 1, 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
+    try:
+        import psutil
+        available=round(psutil.virtual_memory().available/1024**3,1)
+    except ImportError:
+        available=0
+    return {'available_ram_gb':available,**_config_values()}
+
+
+def _config_values():
+    return {'subtitle_ready':(DATA/'models'/'whisper-base'/'model.bin').is_file(),'version':'2.9.0','mode': 'local', 'languages': LANGUAGES, 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'cpu_cores': os.cpu_count() or 1, 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
 
 
 @app.get('/api/voices')
 def voices():
-    presets = PRESETS
-    if os.environ.get('VOICE_STUDIO_PORTABLE') == '1':
-        presets = [v for v in PRESETS if (DATA / 'models' / (v['engine'] + '.ready')).exists()]
-    return {'voices': presets + installed_voices() + records('voices')}
+    entries=PRESETS+installed_voices()+records('voices')
+    entries=[{**voice,'engine':voice.get('engine','vieneu' if voice.get('languages',['vi'])[0]=='vi' else 'qwen_clone')} for voice in entries]
+    return {'voices':[{**voice,'ready':voice.get('engine')=='system' or (DATA/'models'/f"{voice.get('engine','vieneu')}.ready").exists()} for voice in entries]}
+
 
 
 @app.post('/api/voices/clone', status_code=201)
@@ -239,7 +248,10 @@ class Speech(BaseModel):
     video_id: str | None = None
     video_offset: float = Field(default=0, ge=0, le=10800)
     video_mix: bool = False
+    caption_cues: list[dict] = Field(default_factory=list,max_length=10000)
     export_resolution: str = Field(default='original',pattern='^(original|720p|1080p|2160p)$')
+    export_quality: str = Field(default='balanced',pattern='^(best|balanced|fast)$')
+    logos: list[dict] = Field(default_factory=list,max_length=20)
     logo: dict[str, int] | None = None
     nano_threads: int = Field(default=2, ge=1, le=8)
     nano_parallel: int = Field(default=1, ge=1, le=2)
@@ -356,12 +368,18 @@ def speech(body: Speech):
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
     if body.video_id:
         meta = read_json(DATA / 'videos' / f'{valid_id(body.video_id)}.json')
-        if body.logo:
-            from video_tasks import validate_logo
+        if body.logo or body.logos:
+            from video_tasks import logo_filters
             meta.update(inspect_video(DATA/'videos'/f'{body.video_id}.source'))
             try:
-                validate_logo(body.logo,meta)
-            except (ValueError,KeyError) as exc:
+                logo_filters(body.model_dump(),meta)
+            except (ValueError,KeyError,TypeError) as exc:
+                raise HTTPException(422,str(exc)) from None
+        if body.caption_cues:
+            from video_editor import validate_cues
+            try:
+                validate_cues(body.caption_cues,meta['duration'])
+            except (ValueError,TypeError,KeyError) as exc:
                 raise HTTPException(422,str(exc)) from None
         if body.video_offset >= meta['duration']:
             raise HTTPException(422, 'Thời điểm bắt đầu phải nhỏ hơn thời lượng video.')
@@ -552,6 +570,7 @@ def delete_video(ident: str):
         if any(j.get('video_id') == ident for j in records('jobs')):
             raise HTTPException(409, 'Xóa các tác vụ dùng video này trong Lịch sử trước khi xóa video gốc.')
         (DATA/'editor'/f'{ident}.json').unlink(missing_ok=True)
+        shutil.rmtree(DATA/'asr_cache'/ident,ignore_errors=True)
         for suffix in ('.source', '.json', '.jpg'):
             (DATA / 'videos' / (ident + suffix)).unlink(missing_ok=True)
 
@@ -618,11 +637,17 @@ class EditorProject(BaseModel):
 
 class VideoTask(BaseModel):
     export_resolution: str = Field(default='original',pattern='^(original|720p|1080p|2160p)$')
-    video_id: str
-    action: str = Field(pattern='^(subtitles|logo|render|export)$')
+    export_quality: str = Field(default='balanced',pattern='^(best|balanced|fast)$')
+    logos: list[dict] = Field(default_factory=list,max_length=20)
+    video_id: str | None = None
+    action: str = Field(pattern='^(subtitles|logo|render|export|translate_text|prepare_voice)$')
+    engine: str = Field(default='qwen',pattern='^(qwen|qwen_clone|vieneu|vieneu_nano)$')
+    text: str = Field(default='',max_length=200000)
+    input_format: str = Field(default='txt',pattern='^(txt|srt)$')
+    provider: str = Field(default='ollama',pattern='^(ollama|openai|gemini)$')
     cues: list[EditorCue] = Field(default_factory=list,max_length=10000)
     accurate: bool = True
-    source_language: str = Field(default='', pattern='^(|vi|en|ja|ko|zh|fr|de|es|it|pt|ru)$')
+    source_language: str = Field(default='', pattern='^(|vi|en|en-US|en-GB|ja|ko|zh|fr|de|es|it|pt|ru)$')
     target_language: str = Field(default='', max_length=16)
     model: str = Field(default='qwen3:4b', max_length=100)
     srt: str = Field(default='', max_length=200000)
@@ -642,11 +667,25 @@ def run_video_task(ident):
         if (work/'cancel.flag').exists():
             job['status'] = 'cancelled'
             return
-        close_warm_worker()
+        # Keep TTS warm for cloud translation and export when memory permits.
+        available=0
+        try:
+            import psutil
+            available=psutil.virtual_memory().available/1024**3
+        except ImportError:
+            pass
+        asr=job['action']=='subtitles' and not job.get('srt')
+        if job['action']=='prepare_voice' or (job.get('target_language') and job.get('provider','ollama')=='ollama') or available<(4 if asr else 2):
+            close_warm_worker()
         job['status'] = 'running'
         write_json(path,job)
+        worker_env=dict(os.environ)
+        if job.get('target_language') and job.get('provider','ollama')!='ollama':
+            provider=job['provider'];key=writing.get_key(provider)
+            if not key:raise ValueError('Chưa kết nối API key cho dịch vụ dịch đã chọn.')
+            worker_env[writing.ENV_KEYS[provider][0]]=key
         with (work/'worker.log').open('wb') as log:
-            process = subprocess.Popen([sys.executable,str(BASE/'video_tasks.py'),str(path)],stdout=log,stderr=log,
+            process = subprocess.Popen([sys.executable,str(BASE/'video_tasks.py'),str(path)],stdout=log,stderr=log,env=worker_env,
                 **({'creationflags':subprocess.CREATE_NEW_PROCESS_GROUP} if os.name=='nt' else {'start_new_session':True}))
             while process.poll() is None:
                 if shutdown_event.is_set() or (work/'cancel.flag').exists():
@@ -662,20 +701,35 @@ def run_video_task(ident):
     finally:
         if process and process.poll() is None:
             stop_worker(process,force=True)
+        if job.get('target_language') and job.get('provider','ollama')=='ollama':
+            try:
+                import httpx
+                httpx.post('http://127.0.0.1:11434/api/generate',json={'model':job.get('model') or writing.DEFAULT_MODELS['ollama'],'keep_alive':0},timeout=2,trust_env=False)
+            except Exception:
+                pass
         write_json(path,job)
 
 
 @app.post('/api/video-tasks',status_code=202)
 def create_video_task(body:VideoTask):
-    meta = read_json(DATA/'videos'/f'{valid_id(body.video_id)}.json')
+    if body.action not in {'translate_text','prepare_voice'} and not body.video_id:raise HTTPException(422,'Chọn video trước.')
+    meta = read_json(DATA/'videos'/f'{valid_id(body.video_id)}.json') if body.action not in {'translate_text','prepare_voice'} else {'duration':10800}
     try:
+        if body.action=='translate_text':
+            if not body.text.strip() or body.target_language not in LANGUAGES:raise ValueError('Nhập văn bản và chọn ngôn ngữ dịch.')
+            if body.input_format=='srt':parse_srt(body.text)
+        if body.action=='subtitles' and not body.srt and not (DATA/'models'/'whisper-base'/'model.bin').is_file():
+            raise HTTPException(503,'Model nhận dạng chưa sẵn sàng. Dùng bản Portable có sẵn Whisper hoặc chạy download_subtitle_model.bat.')
+        if body.target_language and body.provider!='ollama' and not writing.get_key(body.provider):
+            raise HTTPException(503,'Chưa kết nối API key. Mở phần kết nối dịch và chọn OpenAI hoặc Gemini.')
         if body.action=='render':
             from video_editor import validate_cues
             validate_cues([c.model_dump() for c in body.cues],meta['duration'])
-        if body.logo or body.action=='logo':
-            from video_tasks import validate_logo
+        if body.action in {'translate_text','prepare_voice'} and (body.logo or body.logos):raise ValueError('Tác vụ này không dùng vùng logo.')
+        if body.logo or body.logos or body.action=='logo':
+            from video_tasks import logo_filters
             meta.update(inspect_video(DATA/'videos'/f'{body.video_id}.source'))
-            if not validate_logo(body.logo,meta):
+            if not logo_filters(body.model_dump(),meta):
                 raise ValueError('Chọn vùng logo trước.')
         if body.srt:
             cues=parse_srt(body.srt)
@@ -683,7 +737,7 @@ def create_video_task(body:VideoTask):
                 raise ValueError('SRT dài hơn video.')
         if body.target_language and body.target_language not in LANGUAGES:
             raise ValueError('Ngôn ngữ dịch không hợp lệ.')
-    except (ValueError,KeyError) as exc:
+    except (ValueError,KeyError,TypeError) as exc:
         raise HTTPException(422,str(exc)) from None
     ident=uuid.uuid4().hex
     work=video_task_work(ident)
@@ -701,7 +755,13 @@ def video_task_status(ident:str):
     state=read_json(work/'progress.json') if (work/'progress.json').exists() else {'progress':0,'phase':'Đang chờ'}
     result={'video_id':job['video_id'],'id':ident,'status':job['status'],'error':job.get('error'),**state}
     if job['status']=='done':
-        if job['action']=='subtitles':
+        if job['action']=='prepare_voice':
+            result['prepared_engine']=job['engine']
+        elif job['action']=='translate_text':
+            result['text']=(work/'translated.txt').read_text(encoding='utf-8')
+            result['input_format']=job.get('input_format','txt')
+            result['target_language']=job['target_language']
+        elif job['action']=='subtitles':
             result['srt']=(work/'output.srt').read_text(encoding='utf-8')
             result['cues']=parse_srt(result['srt'])
         else:
@@ -789,3 +849,10 @@ def export_editor(ident:str,extension:str):
         raise HTTPException(422,str(exc)) from None
     text=export_srt(cues) if extension=='srt' else '\n'.join(c['text'] for c in cues)
     return Response(text,media_type='text/plain; charset=utf-8',headers={'Content-Disposition':f'attachment; filename="subtitles-{ident[:8]}.{extension}"'})
+
+
+@app.post('/api/voices/refresh')
+def refresh_installed_voices():
+    clear=getattr(installed_voices,'cache_clear',None)
+    if clear:clear()
+    return voices()

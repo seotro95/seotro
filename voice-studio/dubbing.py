@@ -110,13 +110,18 @@ def mux_video(job, audio, work, data, audio_seconds):
         filters += ';[0:a:0]volume=0.15[background];[dub][background]amix=inputs=2:duration=first:normalize=0[out]'
     else:
         filters += ';[dub]anull[out]'
-    from video_tasks import validate_logo
-    from video_export import scale_filter
+    from video_tasks import logo_filters
+    from video_export import scale_filter,encoder_options
     meta.update(inspect_video(source))
-    logo = validate_logo(job.get('logo'), meta)
+    logo = logo_filters(job, meta)
     scale,size = scale_filter(meta,job.get('export_resolution','original'))
     video_filters = [f for f in (logo,scale) if f]
-    video_options = ['-vf', ','.join(video_filters), '-c:v', 'libx264', '-threads','4','-preset', 'veryfast', '-crf', '20','-pix_fmt','yuv420p'] if video_filters else ['-c:v', 'copy']
-    run_ffmpeg(['ffmpeg', '-nostdin', '-v', 'error', '-protocol_whitelist', 'file,pipe', '-format_whitelist', 'mov,matroska,webm', '-i', str(source), '-i', str(audio), '-filter_complex', filters, '-map', '0:v:0', '-map', '[out]', *video_options, '-c:a', 'aac', '-b:a', '192k', '-t', str(meta['duration']), '-movflags', '+faststart', '-y', str(temporary)], work, meta['duration'], 86, 99, 'Đang xuất video MP4', timeout=max(600,meta['duration']*8) if video_filters else max(60,meta['duration']*2))
+    if job.get('caption_cues'):
+        from video_editor import validate_cues,write_ass
+        cues=validate_cues(job['caption_cues'],meta['duration'])
+        write_ass(work/'captions.ass',cues,*size)
+        video_filters.append('ass=filename=captions.ass')
+    video_options = ['-vf', ','.join(video_filters), *encoder_options(job)] if video_filters else ['-c:v', 'copy']
+    run_ffmpeg(['ffmpeg', '-nostdin', '-v', 'error', '-protocol_whitelist', 'file,pipe', '-format_whitelist', 'mov,matroska,webm', '-i', str(source), '-i', str(audio), '-filter_complex', filters, '-map', '0:v:0', '-map', '[out]', *video_options, '-c:a', 'aac', '-b:a', '192k', '-t', str(meta['duration']), '-movflags', '+faststart', '-y', str(temporary)], work, meta['duration'], 86, 99, 'Đang xuất video MP4', timeout=max(600,meta['duration']*8) if video_filters else max(60,meta['duration']*2),cwd=work)
     destination = data / 'audio' / (job['id'] + '.mp4')
     temporary.replace(destination)
