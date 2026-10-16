@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-26/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-27/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-26`; source application/build commit: `01c3d40`.
-- File size: **1,262,112,416 bytes** (about 1.18 GiB).
-- SHA256: `3b2e8645e1e2a12bed97986941b596507ea49b1b4c9006e2439534bfef197c4f`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38912546062): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-27`; source application/build commit: `4a1cfe0`.
+- File size: **1,262,098,516 bytes** (about 1.18 GiB).
+- SHA256: `1b778baec8d592a40f00f83cd5999028b6915bb5fcd7b2f711c35ecac9eb0174`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38918267387): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -134,3 +134,9 @@ The screenshot message “Không tìm thấy model. Hãy kiểm tra tên model.�
 Failed subtitle tasks expose original parsed cues; the workspace restores them only when the video and script are unchanged. The visible retry action sends existing SRT instead of repeating ASR. Translation copies cue records so a later failed batch cannot partially mutate the original script.
 
 Validation: 97 Linux tests passed, one Win32-only skip; native Windows regression and relocated package smoke succeeded. Fixture tests cover cloud generation 404 replacement, catalog capability/pagination, source-cue immutability and original-cue API recovery. Chromium reproduced a 58% translation failure, restored the original editor cues, selected a discovered model, retried from SRT, and generated actual Nano speech. Cloud models were tested with response fixtures, not live cloud credentials. The full release ZIP was downloaded, SHA256 verified and inspected for version 3.4.1 and the recovery/model selectors.
+
+## Actual cloud generation preflight in 3.4.2
+
+Model metadata/catalogue membership no longer establishes readiness. Preflight sends the same JSON translation request used during subtitle processing, with one short test text. A default or catalogued model that returns 404 can be replaced by up to three other discovered candidates, excluding the failed name. Gemini catalogue ordering prefers newer version numbers. Quota/auth/network failures stop immediately instead of hopping models. Runtime translation has the same bounded 404 recovery. Google HTTP status and reason are preserved with API key redaction. The user can test a model independently before submitting video. Failed preflight keeps progress at zero and never enqueues ASR.
+
+Validation: 101 Linux tests passed with one native-only skip; native Windows regression checks and relocated portable smoke completed successfully. Fixtures cover two dead listed models followed by working generation, runtime fallback, quota stop, source immutability, provider reason/key redaction, and a separate all-unavailable check confirms four generation attempts maximum. Chromium verifies probe rejection blocks ASR at 0%, standalone test feedback, and the preserved-cue retry through actual Nano synthesis. The user's key is from Google AI Studio but was not supplied to cloud tests; live account access is tested by the app on their machine. The complete published ZIP was downloaded, SHA256 checked and inspected for 3.4.2, generation verification and the model-test button.
