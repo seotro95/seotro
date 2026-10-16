@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-29/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-31/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-29`; source application/build commit: `7e44d1a`.
-- File size: **1,262,119,947 bytes** (about 1.18 GiB).
-- SHA256: `b66813941c479cfb4abddf9a19dd41e9396cfc7dc436a7621b2b6e9c98f635ac`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38926134861): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-31`; source application/build commit: `a80a22c`.
+- File size: **1,262,110,563 bytes** (about 1.18 GiB).
+- SHA256: `0b4b8abcf3b904be4c68e6f3737dfa5b8876e6bd9687d8e62cf2085cc927b8cb`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38934359997): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -152,3 +152,11 @@ Validation: 101 Linux tests passed with one Windows-only skip. Chromium exercise
 Cloud HTTP 503 requests retry at most three times with short async waits; Retry-After is capped at five seconds. When a model remains busy, preflight and subtitle translation can try at most three other models listed by the same provider. They never change provider/keys automatically or retry authentication/permission/quota failures. Persistent overload is reported as an outage, with original cues preserved. Stop during a pending preflight prevents video enqueue when the response returns. This cannot guarantee recovery from a Google service outage.
 
 Validation: 108 Linux tests passed with one Windows-only skip. HTTP fixtures verify busy→success, attempt limits, bounded Retry-After, provider error preservation, no retries on 401/403/429, preflight/runtime model recovery and persistent-busy diagnostics. Chromium verifies Stop-before-enqueue, original-cue recovery/retry and actual Nano speech. These simulate cloud overload; no live user key was used. Native Windows regression checks and relocated offline smoke succeeded. Complete ZIP downloaded, SHA256 verified and inspected for 3.4.4 and overload retry/recovery code.
+
+## Direct script voice and minute subtitle editing in 3.5
+
+The visible target-caption action creates/translates subtitles into the selected language, reusing edited SRT when available. Cue start/end fields accept minute:second or hour:minute:second input; exports offer plain TXT, minute-stamped TXT and SRT. Detected caption language survives ASR cache reuse and project save/reload, and can be corrected after rewriting; source captions are no longer labelled with the unrequested target language.
+
+A separate script box accepts manual words or copies edited captions. Standalone voice reads this text directly with the selected ready speaker, without implicit translation or SRT fitting limits. It works without a video, displays its own progress/Stop/player, and exports MP3/WAV/spoken TXT/SRT. Translating the script is an explicit separate action and never changes video captions. Timed video voice remains a separate mode. Bundled Vietnamese/English work offline; other voices require supported models/system voices, and subtitle/script translation still requires the selected AI service or local Ollama model.
+
+Validation: 114 Linux tests passed with one native-only skip. New tests cover detected-language cache retention, persisted caption language, timed Unicode TXT and four target-language fixtures preserving cue times. Actual Whisper automatically detected Vietnamese in a new narrated upload and returned metadata through the API. Chromium created actual Vietnamese Nano and English Turbo standalone voice without video or cloud calls, downloaded four formats, edited/saved minute times, exported plain/timed TXT/SRT, translated script with a fixture while preserving captions, and exercised explicit caption translation for vi/en-US/ja/ko using fixtures. Mobile/no JS errors verified. No live cloud translation-quality claim is made. Native Windows regression and relocated offline smoke passed, including standalone/translation controls and minute TXT export. Packaging removes all non-model QA data and asserts no project files remain. Full ZIP downloaded, SHA256 verified and inspected for version 3.5.0 and new controls/metadata.
