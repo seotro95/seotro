@@ -102,7 +102,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.2.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.3.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -244,6 +244,7 @@ def delete_voice(ident: str):
 
 
 class Speech(BaseModel):
+    max_cue_tempo: float = Field(default=1.5,ge=1,le=2)
     cue_fit: str = Field(default='strict',pattern='^(strict|gap)$')
     timeline_seconds: float = Field(default=10800,gt=0,le=10800)
     caption_style: dict = Field(default_factory=dict)
@@ -471,6 +472,14 @@ def job_status(job):
             except (OSError, ValueError):
                 pass
     return job
+
+
+@app.get('/api/jobs/{ident}/alignment')
+def voice_alignment(ident:str):
+    ident=valid_id(ident)
+    read_json(DATA/'jobs'/f'{ident}.json')
+    path=DATA/'parts'/ident/'alignment.json'
+    return read_json(path) if path.is_file() else {'cues':[],'sync_ok':False,'pending':True}
 
 
 @app.get('/api/jobs/{ident}/timing')
@@ -755,7 +764,7 @@ def create_video_task(body:VideoTask):
         from video_editor import validate_style
         validate_style(body.caption_style)
         if body.voice_job_id:
-            if body.action not in {'render','export'}:raise ValueError('Voice đã tạo chỉ dùng khi xuất video.')
+            if body.action not in {'render','export','preview'}:raise ValueError('Voice đã tạo chỉ dùng khi xuất video.')
             voice=read_json(DATA/'jobs'/f'{valid_id(body.voice_job_id)}.json')
             if voice['status']!='done' or voice['format']!='wav' or voice.get('duration_limited'):raise ValueError('Voice chưa hoàn tất hoặc đã chạm giới hạn.')
             if voice.get('audio_seconds',0)>meta['duration']+.05:raise ValueError('Voice dài hơn video. Sửa lời hoặc mốc câu trước khi xuất.')

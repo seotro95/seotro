@@ -36,6 +36,12 @@ for engine, speaker in [('vieneu_nano','Minh Quân'), ('vieneu','Mai Anh')]:
     audio = app/'.data/audio'/(job['id']+'.wav')
     samples, rate = sf.read(audio)
     assert len(samples)>rate and np.max(np.abs(samples))>.001
+# Verify real speech fits the original subtitle windows in the relocated runtime.
+aligned = dict(job, id='portable-check-aligned', engine='vieneu_nano', speaker='Minh Quân', input_format='srt', cue_fit='strict', max_cue_tempo=2, text='1\n00:00:01,000 --> 00:00:06,000\nXin chào.\n\n2\n00:00:08,000 --> 00:00:14,000\nCảm ơn.\n')
+render(aligned)
+report=json.loads((app/'.data/parts/portable-check-aligned/alignment.json').read_text(encoding='utf-8'))
+assert report['sync_ok'] and len(report['cues'])==2
+assert [row['start'] for row in report['cues']]==[1,8]
 # Also exercise MP4 muxing from the bundled FFmpeg, preserving video.
 from dubbing import inspect_video, mux_video
 videos = app/'.data/videos'

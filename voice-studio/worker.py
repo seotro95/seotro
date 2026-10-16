@@ -170,6 +170,10 @@ def render(job, synthesize=None):
     from subtitles import parse_srt, export_srt
     cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
     timed = []
+    alignment=[]
+    def save_alignment(sync_ok=False,failed=None):
+        write_state(work/'alignment.json',{'cues':alignment,'sync_ok':sync_ok,'failed_cue':failed,'mode':job.get('cue_fit','strict'),'max_tempo':job.get('max_cue_tempo',1.5)})
+    if cues:save_alignment()
     cue_writer = None
     cue_path = work / 'cue.wav'
     progress_limit = 85 if job.get('video_id') else 90
@@ -214,12 +218,16 @@ def render(job, synthesize=None):
                 available=(max(original_end,boundary) if job.get('cue_fit')=='gap' else original_end)-cue['start']
                 with wave.open(str(cue_path)) as cue_audio:
                     actual = cue_audio.getnframes()/cue_audio.getframerate()
+                maximum_tempo=job.get('max_cue_tempo',1.5)
+                applied_tempo=1.0
                 if actual > available:
                     ratio = actual/available
-                    if ratio > 1.5:
+                    if ratio > maximum_tempo:
+                        alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':original_end,'available':round(available,3),'raw_seconds':round(actual,3),'status':'too_long','required_tempo':round(ratio,3)})
+                        save_alignment(failed=segment.cue+1)
                         raise ValueError(f'Câu SRT {segment.cue+1} đọc quá dài ({actual:.2f}s cho ô {available:.2f}s). Nới mốc, rút ngắn lời hoặc chọn nhịp nhanh hơn; không cắt mất lời.')
                     fitted = work / 'cue-fit.wav'
-                    tempo = min(1.5, ratio*1.002)
+                    tempo = min(maximum_tempo, ratio*1.002)
                     for attempt in range(5):
                         if (work / 'cancel.flag').exists():
                             raise InterruptedError('Tác vụ đã dừng.')
@@ -228,17 +236,24 @@ def render(job, synthesize=None):
                             fitted_seconds = fitted_audio.getnframes()/fitted_audio.getframerate()
                         if fitted_seconds <= available+.00001:
                             fitted.replace(cue_path)
+                            applied_tempo=tempo
                             break
-                        if tempo >= 1.5 or attempt == 4:
+                        if tempo >= maximum_tempo or attempt == 4:
+                            alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':original_end,'available':round(available,3),'raw_seconds':round(actual,3),'status':'too_long','required_tempo':round(ratio,3)})
+                            save_alignment(failed=segment.cue+1)
                             raise ValueError(f'Câu SRT {segment.cue+1} vẫn vượt ô ở mức căn nhịp tối đa; hãy nới mốc thời gian.')
                         # atempo has small frame/window rounding differences. Refit the
                         # original cue, never cut words or compound tempo transforms.
-                        tempo = min(1.5, tempo*fitted_seconds/available*1.005)
+                        tempo = min(maximum_tempo, tempo*fitted_seconds/available*1.005)
                 if job.get('cue_fit')=='gap':
                     with wave.open(str(cue_path)) as fitted_audio:spoken_seconds=fitted_audio.getnframes()/fitted_audio.getframerate()
                     cue['end']=round(min(boundary,max(original_end,cue['start']+spoken_seconds)),3)
                 writer.silence(max(0, cue['start']-writer.frames/writer.rate))
+                actual_start=writer.frames/writer.rate
                 clipped = writer.append(cue_path) or clipped
+                actual_end=writer.frames/writer.rate
+                alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':cue['end'],'raw_seconds':round(actual,3),'spoken_start':round(actual_start,5),'spoken_end':round(actual_end,5),'tempo':round(applied_tempo,4),'status':'matched' if abs(actual_start-cue['start'])<=.001 and actual_end<=cue['end']+.001 and not clipped else 'overflow'})
+                if len(alignment)%16==0 or len(alignment)==len(cues):save_alignment(sync_ok=all(c['status']=='matched' for c in alignment) and len(alignment)==len(cues))
                 writer.silence(max(0, cue['end']-writer.frames/writer.rate))
             elif not cues and segment.text:
                 timed.append({'start': segment_start, 'end': spoken_end, 'text': segment.text})
@@ -278,6 +293,14 @@ def render(job, synthesize=None):
     write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3)})
 
 
+def voice_error(exc):
+    if isinstance(exc,ValueError):return str(exc)
+    if isinstance(exc,ModuleNotFoundError):return f'Thiếu thư viện giọng {exc.name}. Dùng gói Portable đầy đủ hoặc tải lại model trong tool.'
+    if isinstance(exc,MemoryError) or 'out of memory' in str(exc).lower():return 'Không đủ RAM/VRAM để nạp giọng. Chọn Nano Việt hoặc giọng Windows; đóng bớt ứng dụng rồi tạo lại.'
+    if isinstance(exc,FileNotFoundError):return 'Thiếu tệp mô hình hoặc công cụ âm thanh. Tải model giọng đã chọn hoặc giải nén đầy đủ gói Portable.'
+    return f'Không tạo được voice ({type(exc).__name__}). Giữ cửa sổ tool mở và kiểm tra model giọng đã chọn.'
+
+
 def serve():
     # Only the application's serialized queue writes this private pipe.
     for line in sys.stdin:
@@ -294,7 +317,7 @@ def serve():
                 with contextlib.redirect_stderr(errors):
                     render(job)
             except Exception as exc:
-                user_error = str(exc) if isinstance(exc, ValueError) else None
+                user_error = voice_error(exc)
                 code = 1
                 traceback.print_exc(file=errors)
         write_state(work / 'worker-done.json', {'code': code, 'user_error': user_error})
