@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-13/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-14/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-13`; source application/build commit: `0054c4c`.
-- File size: **1,262,060,877 bytes** (about 1.18 GiB).
-- SHA256: `00e680f7d96ad23a0e5364f98e19da72f51c91be75f3f5423ec6bbfc3cfcd79b`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38846259041): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-14`; source application/build commit: `e054bab`.
+- File size: **1,262,052,765 bytes** (about 1.18 GiB).
+- SHA256: `112fa1b6c1b3361aec05a041a155615de226d835a51d427a187ecf1e8a189506`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38847633159): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -52,3 +52,11 @@ Select/upload a video, then use **Tự tạo phụ đề từ lời nói trong v
 **Xuất video có phụ đề đã sửa** burns captions into MP4 while retaining original audio. Seek to a frame, choose **Khoanh vùng logo tại thời điểm đang xem**, drag the fixed region, and enable its use during export to combine captions and logo treatment. Local translation and dubbing can use edited sentences directly. Recognition does not OCR text already baked into video frames; covering an old caption/logo region does not restore the obscured scene.
 
 Validation: 45 regression checks passed on Linux and Windows. Decoded output pixels verify that burned text appears within the cue and disappears afterward. Chromium exercised video-only recognition, direct editing of words/timing, cue addition, project save/reload, synchronization with dubbing controls, selected-frame logo region, real caption+logo MP4 output, progress and mobile layout.
+
+## Export modes in 2.8
+
+The direct editor has **Xuất video MP4**, **Xuất video có phụ đề đã sửa**, **Xuất lời TXT đã sửa** and **Xuất phụ đề SRT đã sửa**. Plain MP4 export works without creating subtitles. Text exports save current edits first; TXT contains words and SRT includes cue times.
+
+Choose **Gốc / HD720p / FullHD1080p / UHD4K** before exporting video, treating a logo region or dubbing. Original mode avoids upscaling and caps larger input at UHD4K. Fixed-size modes may upscale small input. Output retains the image proportions and fits within 3840×2160 for landscape or 2160×3840 for portrait; other aspect ratios use smaller dimensions inside those limits. Logo treatment precedes resizing and captions are rendered afterward. Resizing is not AI detail restoration, and 4K requires more processing time and RAM.
+
+Validation: 50 Linux and native Windows regression checks passed. Actual files were probed at UHD resolution for plain export, captions, portrait video and narration mux. Chromium exercised no-cue MP4 export, 3840×2160 output, progress100, downloads of currently edited TXT/SRT, auto-save, mobile layout with no JavaScript errors. The relocated Windows bundle also checks a real UHD export using its packaged FFmpeg before publication.
