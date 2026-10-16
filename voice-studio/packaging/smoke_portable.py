@@ -47,6 +47,23 @@ render(aligned)
 report=json.loads((app/'.data/parts/portable-check-aligned/alignment.json').read_text(encoding='utf-8'))
 assert report['sync_ok'] and len(report['cues'])==2
 assert [row['start'] for row in report['cues']]==[1,8]
+# Inject two empty outputs, then recover with actual bundled Nano at 16 steps.
+import worker
+from unittest.mock import patch
+original_synth=worker.get_synthesizer
+attempt_steps=[]
+def recovery_synth(settings):
+    attempt_steps.append(settings['nano_steps'])
+    if len(attempt_steps)<3:
+        return lambda text,path:sf.write(str(path),np.array([],dtype=np.float32),24000)
+    return original_synth(settings)
+with patch.object(worker,'get_synthesizer',recovery_synth):
+    render(dict(aligned,id='portable-empty-recovery',input_format='txt',text='Xin chào, đây là kiểm tra thử lại giọng nói.',nano_steps=4))
+assert attempt_steps==[4,4,16]
+assert sf.info(str(app/'.data/audio/portable-empty-recovery.wav')).frames>24000
+with TestClient(studio.app) as client:
+    rejected=client.post('/api/speech',json={'text':'你好','language':'vi','voice_id':'nano-minhquan'})
+    assert rejected.status_code==422 and 'Dịch lời' in rejected.json()['detail']
 # Download formats must work with bundled FFmpeg and interpreter.
 import uuid
 export_id=uuid.uuid4().hex

@@ -12,7 +12,7 @@ def test_strict_subtitle_timing_and_pcm_boundaries(tmp_path,monkeypatch,language
     def synth(text,path):
         with wave.open(str(path),'wb') as f:
             f.setnchannels(1);f.setsampwidth(2);f.setframerate(24000);f.writeframes(b'\x00\x20'*18000)
-    worker.render({'id':'aligned','text':srt,'input_format':'srt','engine':'vieneu','language':language,'format':'wav','speed':1,'cue_fit':'strict','max_cue_tempo':2},synth)
+    worker.render({'id':'aligned','text':srt,'input_format':'srt','engine':'vieneu' if language in {'vi','en-US','en-GB'} else 'qwen','language':language,'format':'wav','speed':1,'cue_fit':'strict','max_cue_tempo':2},synth)
     assert parse_srt((tmp_path/'audio/aligned.srt').read_text())==parse_srt(srt)
     report=json.loads((tmp_path/'parts/aligned/alignment.json').read_text());assert report['sync_ok'] and len(report['cues'])==2
     with wave.open(str(tmp_path/'audio/aligned.wav')) as f:samples=np.frombuffer(f.readframes(f.getnframes()),np.int16)

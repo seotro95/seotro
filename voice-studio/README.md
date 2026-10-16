@@ -240,3 +240,8 @@ Lỗi HTTP 503 được thử lại tối đa ba lần cho mỗi yêu cầu, ch�
 - Bấm Tạo voice riêng từ văn bản để mở khung lời độc lập. Đưa lời phụ đề vào khung hoặc tự viết, chọn giọng/ngôn ngữ ở mục 2 rồi Tạo voice riêng. Đây là lời đọc liên tục, không cần Gemini, không bị chặn bởi ô SRT và không thay voice khớp video đã tạo.
 - Dịch lời trong khung là thao tác riêng, cần kết nối AI. Voice riêng có nghe thử, phần trăm, Dừng và tải MP3/WAV/TXT/SRT theo voice đã tạo. Giọng Việt/Anh đi kèm chạy ngay; giọng quốc tế tùy chọn vẫn cần tải model hoặc cài giọng Windows hỗ trợ.
 - Whisper trả ngôn ngữ thực tế của phụ đề; ngôn ngữ này được lưu với dự án và trong bộ đệm nhận dạng. Không gán phụ đề gốc theo lựa chọn ngôn ngữ đích.
+
+### 3.5.1 · Lỗi âm thanh rỗng
+VieNeu Việt/Anh không hỗ trợ đọc nguyên chữ Trung/Nhật/Hàn hoặc các hệ chữ khác ngoài Latin. Tool kiểm tra trước khi đưa tác vụ vào hàng đợi, ghi rõ câu/đoạn và yêu cầu dịch lời hoặc chọn giọng hỗ trợ; không bỏ mất chữ. Dấu câu/emoji đi kèm câu được ghép lại với lời, tránh tạo đoạn chỉ có ký hiệu. Câu chỉ có ký hiệu được báo để sửa.
+Nếu lời hợp lệ nhưng model tạo WAV rỗng hoặc chỉ có im lặng, tool thử lại tối đa ba lần với cùng lời/giọng; Nano thử 16 bước ở lần cuối. Nếu vẫn thất bại, tool ghi rõ câu và trích lời, không ghi nhận đoạn rỗng là hoàn tất. Checkpoint WAV rỗng/hỏng được tạo lại. Có thể dừng giữa các lần thử.
+Đóng cửa sổ tool cũ trước khi mở bản cập nhật và kiểm tra dòng Voice Studio 3.5.1 gần các nút tạo giọng. Launcher mở URL theo phiên bản, HTML không lưu cache và tệp giao diện có mã phiên bản để tránh dùng giao diện cũ.

@@ -102,7 +102,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.5.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.5.1', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -161,7 +161,11 @@ async def local_browser_guard(request: Request, call_next):
 
 @app.get('/')
 def index():
-    return FileResponse(BASE / 'static' / 'index.html')
+    import re
+    from fastapi.responses import HTMLResponse
+    html=(BASE/'static'/'index.html').read_text(encoding='utf-8')
+    html=re.sub(r'((?:src|href)="/static/[^"?]+)"',lambda m:m[1]+'?v='+app.version+'"',html)
+    return HTMLResponse(html,headers={'Cache-Control':'no-store'})
 
 
 @app.get('/api/config')
@@ -404,6 +408,9 @@ def speech(body: Speech):
     try:
         segment_plan = 'nano-packed-v1' if engine == 'vieneu_nano' and body.paragraph_pause == 0 else 'classic-v1'
         segments = plan_segments({**body.model_dump(), 'engine': engine, 'segment_plan': segment_plan})
+        from narration import validate_voice_text
+        for index,segment in enumerate(segments):
+            if segment.text:validate_voice_text(segment.text,engine,f'Câu SRT {segment.cue+1}' if body.input_format=='srt' else f'Đoạn {index+1}')
         if body.input_format == 'srt':
             cues = parse_srt(body.text)
             if body.cue_fit=='gap' and cues[-1]['end']>body.timeline_seconds+.001:

@@ -120,26 +120,51 @@ def close_nano_pool():
         _nano_pool = None
 
 
+class EmptyVoiceError(ValueError):
+    pass
+
+
 def prepare_chunk(job, segment, index, work, synthesize=None):
+    from narration import validate_voice_text
+    import soundfile as sf
+    import numpy as np
+    label=f'Câu SRT {segment.cue+1}' if job.get('input_format')=='srt' else f'Đoạn {index+1}'
+    validate_voice_text(segment.text,job.get('engine'),label)
     work = Path(work)
     part = work / f'{index:06d}.wav'
     if part.exists():
-        return
-    if (work / 'cancel.flag').exists():
-        raise InterruptedError('Tác vụ đã dừng.')
-    synthesize = synthesize or get_synthesizer(job)
+        try:
+            with wave.open(str(part)) as audio:
+                if audio.getnframes()>0 and any(audio.readframes(audio.getnframes())):return
+        except (OSError,wave.Error,EOFError):pass
+        part.unlink()
+    custom=synthesize is not None
     raw = work / f'raw-{index:06d}.wav'
     temporary = work / f'normalized-{index:06d}.wav'
-    synthesize(segment.text, raw)
     profile_speed = PROFILES[job.get('delivery', 'natural')][0]
     tempo = job['speed'] * profile_speed * (0.94 if segment.emphasis else 1)
     gain = 1.12 if segment.emphasis else 1
-    normalize_audio(raw, temporary, tempo, gain)
-    with wave.open(str(temporary)) as audio:
-        if audio.getnframes() == 0:
-            raise ValueError('Mô hình trả đoạn âm thanh rỗng.')
-    temporary.replace(part)
-    raw.unlink(missing_ok=True)
+    for attempt in range(3):
+        if (work / 'cancel.flag').exists():raise InterruptedError('Tác vụ đã dừng.')
+        raw.unlink(missing_ok=True);temporary.unlink(missing_ok=True)
+        if not custom:
+            settings={**job,'nano_steps':max(16,job.get('nano_steps',8))} if attempt==2 and job.get('engine')=='vieneu_nano' else job
+            synthesize=get_synthesizer(settings)
+        try:
+            synthesize(segment.text,raw)
+            if not raw.is_file() or sf.info(str(raw)).frames==0:raise EmptyVoiceError('Model không tạo mẫu âm thanh.')
+            normalize_audio(raw, temporary, tempo, gain)
+            with wave.open(str(temporary)) as audio:
+                samples=np.frombuffer(audio.readframes(audio.getnframes()),dtype='<i2')
+            if not len(samples) or not np.any(samples):raise EmptyVoiceError('Âm thanh rỗng hoặc chỉ có im lặng.')
+        except EmptyVoiceError:
+            if attempt<2:continue
+            excerpt=segment.text[:100].replace('\n',' ')
+            raise ValueError(f'{label}: giọng {job.get("speaker") or job.get("engine")} vẫn không tạo được âm thanh sau 3 lần thử. Lời: “{excerpt}”. Kiểm tra ngôn ngữ, sửa câu hoặc chọn giọng khác. Không bỏ qua câu này.') from None
+        finally:
+            raw.unlink(missing_ok=True)
+        temporary.replace(part)
+        return
 
 
 def render(job, synthesize=None):
@@ -184,7 +209,7 @@ def render(job, synthesize=None):
             if parallel:
                 for ahead in range(index, min(index+2, len(segments))):
                     candidate = segments[ahead]
-                    if candidate.text and ahead not in futures and not (work / f'{ahead:06d}.wav').exists():
+                    if candidate.text and ahead not in futures:
                         if _nano_pool is None:
                             _nano_pool = ProcessPoolExecutor(max_workers=2, mp_context=multiprocessing.get_context('spawn'))
                         futures[ahead] = _nano_pool.submit(prepare_chunk, payload, candidate, ahead, str(work))
@@ -196,9 +221,7 @@ def render(job, synthesize=None):
                 part = work / f'{index:06d}.wav'
                 if index in futures:
                     futures.pop(index).result()
-                elif not part.exists():
-                    if synthesize is None:
-                        synthesize = get_synthesizer(job)
+                else:
                     prepare_chunk(job, segment, index, work, synthesize)
                 clipped = target_writer.append(part)
                 spoken_end = writer.frames/writer.rate

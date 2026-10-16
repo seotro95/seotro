@@ -44,7 +44,21 @@ def split_script(text, limit=240):
                 piece, sentence = sentence[:end].strip(), sentence[end:].strip()
                 if piece:
                     segments.append(Segment(text=piece, emphasis=emphasis))
-    return segments
+    joined=[]
+    pending=[]
+    for segment in segments:
+        if segment.text and not any(c.isalnum() for c in segment.text):
+            if joined and joined[-1].text and len(joined[-1].text)+len(segment.text)<=limit:
+                joined[-1].text+=segment.text
+            else:pending.append(segment)
+        else:
+            prefix=''.join(s.text for s in pending)
+            if segment.text and len(prefix)+len(segment.text)<=limit:segment.text=prefix+segment.text
+            else:joined.extend(pending)
+            pending=[]
+            joined.append(segment)
+    joined.extend(pending)
+    return joined
 
 
 def plan_segments(job):
@@ -106,3 +120,14 @@ class PCMWriter:
 
     def close(self):
         self.file.close()
+
+
+def validate_voice_text(text,engine,label='Nội dung'):
+    import unicodedata
+    if not any(c.isalnum() for c in text):
+        raise ValueError(f'{label} chỉ có dấu hoặc ký hiệu, chưa có chữ/số để đọc. Sửa lời hoặc bỏ câu này trước khi tạo voice.')
+    if engine in {'vieneu','vieneu_nano'}:
+        unsupported=[c for c in text if c.isalpha() and 'LATIN' not in unicodedata.name(c,'')]
+        if unsupported:
+            sample=''.join(dict.fromkeys(unsupported))[:16]
+            raise ValueError(f'{label} có chữ “{sample}” mà giọng VieNeu Việt/Anh không đọc được. Dịch lời sang ngôn ngữ giọng đọc, tự sửa lời hoặc chọn giọng quốc tế hỗ trợ ngôn ngữ gốc. Lời gốc được giữ nguyên.')

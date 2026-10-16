@@ -34,14 +34,16 @@ def main():
                 raise RuntimeError('Khong mo duoc studio. Xem thong bao loi ben tren.')
             try:
                 with opener.open(url+'/api/config', timeout=1) as response:
-                    if json.load(response).get('mode') == 'local':
+                    studio_config=json.load(response)
+                    if studio_config.get('mode') == 'local':
+                        studio_version=studio_config.get('version','')
                         break
             except (OSError, ValueError):
                 time.sleep(.25)
         else:
             raise RuntimeError('Studio chua san sang sau 60 giay.')
         print(f'Studio: {url}\nGiu cua so nay mo. Bam Ctrl+C de tat.', flush=True)
-        webbrowser.open(url)
+        webbrowser.open(url+'/?v='+studio_version)
         process.wait()
     except KeyboardInterrupt:
         pass
