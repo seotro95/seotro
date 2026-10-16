@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-20/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-22/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-20`; source application/build commit: `398d0ca`.
-- File size: **1,262,082,968 bytes** (about 1.18 GiB).
-- SHA256: `031d76cc1920010a7f639f8ae20302c25283577236ce119c7c83927c1b5040bc`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38878680991): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-22`; source application/build commit: `d0bbce2`.
+- File size: **1,262,087,928 bytes** (about 1.18 GiB).
+- SHA256: `2c7b1e7120e4516f7c5fc8dfabc086b918eb1923b1267553464831a074fd6699`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38896807111): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -92,3 +92,13 @@ Fixes WinError5/32 when replacing state.tmp → progress.json during subtitles, 
 Validation: 74 Linux checks passed and one Win32-only case was skipped there. All 75 native Windows regression checks passed, including a real CreateFileW handle that denies delete-sharing until released. Additional regressions inject WinError5/32, preserve the previous snapshot under persistent locks, verify concurrent complete JSON writes, and complete a real FFmpeg caption export while every progress replacement is denied. Relocated offline synthesis, recognition, preview/mux/UHD smoke passed. Chromium exercised actual styled logo/caption and Nano voice proofs after the fix. The full published ZIP was downloaded, SHA256 verified, and inspected for version 3.0.1, state_io.py and its use in video_tasks.py.
 
 To update a portable installation, close the app and its console first, then extract the new complete archive over the existing Voice-Studio folder and replace program files. Keep the existing .data folder and its personal files; the release contains no personal projects or recordings. Reopen MO_VOICE_STUDIO.bat and restart the failed operation.
+
+## Simple video workspace in 3.1
+
+The app opens on the video workspace: choose/upload a video, select source/target language and a ready voice, then create subtitles or subtitles + voice. Optional translation uses the selected Ollama/OpenAI/Gemini connection. The player and editable cue list share one screen; font/logo tools and legacy controls are collapsed. Every main action provides immediate inline feedback, progress and Stop.
+
+Speech creation has its own safe settings, independent of another tab's unloaded fast model. Short cues may extend into the free interval before the next cue; fitted end times are saved without dropping words or overlapping cues. A cue that still cannot fit reports the sentence to edit. Playback, pause and seeking synchronize the ready WAV with video, including seeking beyond the spoken portion and back again. Editing text/times or changing voice invalidates stale audio for export. Full video composition reuses the completed WAV instead of synthesizing it again. Current edited TXT/SRT exports remain beside the script.
+
+Validation: 78 Linux tests passed with one Win32-only skip; all 79 native Windows checks passed. New coverage verifies gap timing, strict compatibility, timeline limits, completed timing retrieval, unfinished/oversized voice rejection, and actual composed-video audio using a known tone. Chromium exercised one-click real Whisper → Nano → synchronized listening → MP4 from a video without cues; short-cue fitting, seeking past/into audio, script edits and stale-voice protection; immediate missing-video feedback and queued Stop recovery; mobile layout and no JavaScript errors. Relocated offline Windows smoke verifies the workspace asset and composition using an existing bundled voice. The full ZIP was downloaded in four verified ranges, SHA256 checked, and inspected for version 3.1.0, workspace.js and the timing fix.
+
+For a separate ready-to-use installation, extract the complete archive once into a new folder, then open MO_VOICE_STUDIO.bat. Keep the old folder if it contains personal projects. Bundled Vietnamese voices need no separate Python installation or API key. Translation requires an Ollama local model or the selected cloud provider's credentials.
