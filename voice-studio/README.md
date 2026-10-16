@@ -1,4 +1,4 @@
-# Voice Studio 2.5 — TXT/SRT, giọng Windows và tiến độ xuất
+# Voice Studio 2.7 — Sửa phụ đề trực tiếp trên video và xử lý logo
 
 Giao diện tiếng Việt cho chuyển văn bản thành lời nói, hồ sơ nhân bản giọng từ mẫu, thư viện giọng, hàng đợi, nghe lại và tải WAV/MP3. Tạo giọng cục bộ không cần API key. AI viết kịch bản mặc định dùng Ollama trên máy, không cần tài khoản hoặc API key. OpenAI/Gemini là tùy chọn nâng cao và vẫn yêu cầu khóa riêng.
 

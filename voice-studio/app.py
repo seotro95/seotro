@@ -765,5 +765,6 @@ def save_editor(ident:str,body:EditorProject):
     except ValueError as exc:
         raise HTTPException(422,str(exc)) from None
     folder=DATA/'editor';folder.mkdir(exist_ok=True)
-    write_json(folder/f'{ident}.json',{'cues':cues})
+    with lock:
+        write_json(folder/f'{ident}.json',{'cues':cues})
     return {'cues':cues}

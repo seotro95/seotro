@@ -60,7 +60,7 @@ def run(path):
             vf = (vf+',' if vf else '')+'ass=filename=captions.ass'
         if not vf:
             raise ValueError('Hãy chọn vùng logo trước.')
-        run_ffmpeg(['ffmpeg','-nostdin','-v','error','-i',str(source),'-map','0:v:0','-map','0:a?','-vf',vf,'-c:v','libx264','-preset','veryfast','-crf','20','-c:a','aac','-movflags','+faststart','-y',str(work/'output.mp4')],work,meta['duration'],1,99,'Đang xuất video có phụ đề / xử lý logo',cwd=work)
+        run_ffmpeg(['ffmpeg','-nostdin','-v','error','-protocol_whitelist','file,pipe','-i',str(source),'-map','0:v:0','-map','0:a?','-vf',vf,'-c:v','libx264','-preset','veryfast','-crf','20','-c:a','aac','-movflags','+faststart','-y',str(work/'output.mp4')],work,meta['duration'],1,99,'Đang xuất video có phụ đề / xử lý logo',cwd=work)
         update(100,'Video đã sẵn sàng')
         return
     if job.get('srt'):
@@ -68,7 +68,7 @@ def run(path):
     else:
         if not meta['has_audio']:
             raise ValueError('Video không có âm thanh để nhận dạng.')
-        run_ffmpeg(['ffmpeg','-nostdin','-v','error','-i',str(source),'-vn','-ac','1','-ar','16000','-y',str(work/'speech.wav')],work,meta['duration'],1,5,'Đang tách âm thanh')
+        run_ffmpeg(['ffmpeg','-nostdin','-v','error','-protocol_whitelist','file,pipe','-i',str(source),'-vn','-ac','1','-ar','16000','-y',str(work/'speech.wav')],work,meta['duration'],1,5,'Đang tách âm thanh')
         update(5,'Đang nạp mô hình nhận dạng Whisper')
         from faster_whisper import WhisperModel
         model_path = data/'models'/'whisper-base'
