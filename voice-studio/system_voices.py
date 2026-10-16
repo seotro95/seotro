@@ -6,6 +6,7 @@ import shutil
 import subprocess
 from functools import lru_cache
 from pathlib import Path
+from language_catalog import LANGUAGES,system_language
 
 SCRIPT = Path(__file__).with_name('system_speech.ps1')
 
@@ -29,12 +30,9 @@ def installed_voices():
         voices = []
         for entry in entries:
             culture = entry['culture']
-            language = culture if culture in ('en-US', 'en-GB') else culture.split('-')[0]
-            if language == 'en':
-                language = 'en-US'
-            if language not in ('vi','en-US','en-GB','ja','ko','zh','fr','de','es','it','pt','ru'):
-                continue
-            voices.append({'id': 'sys-'+hashlib.sha256(entry['name'].encode()).hexdigest()[:24], 'name': entry['name']+' · Windows', 'engine': 'system', 'speaker': entry['name'], 'languages': [language], 'category': 'system', 'description': 'Giọng có sẵn trên Windows · không cần mô hình AI'})
+            language=system_language(culture)
+            if language not in LANGUAGES:continue
+            voices.append({'id': 'sys-'+hashlib.sha256(entry['name'].encode()).hexdigest()[:24], 'name': entry['name']+' · Windows', 'engine': 'system', 'speaker': entry['name'], 'languages': [language], 'category': 'system','culture':culture, 'description': 'Giọng có sẵn trên Windows · không cần mô hình AI'})
         return voices
     except (OSError, ValueError, KeyError, subprocess.SubprocessError):
         return []

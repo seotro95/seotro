@@ -206,3 +206,11 @@ Trong phần Sửa phụ đề trực tiếp trên video, chọn ngôn ngữ d�
 
 ### Xem thử trước khi xuất (3.0)
 Trong phần sửa trực tiếp video, chọn phông, cỡ, màu chữ/viền/nền, đậm/nghiêng và vị trí phụ đề. Kiểu được lưu trong dự án và áp dụng cho xuất có phụ đề/lồng tiếng. Chọn mốc video rồi bấm Xem thử phụ đề + xóa logo để tạo đoạn 10 giây; Tạo voice và xem khớp video tạo giọng đã chọn cho đoạn này rồi ghép. Có tiến trình và nút dừng. Khoanh các vùng logo ở khung hình tại mốc đang xem trước khi tạo bản xem thử. Bản xem thử 720p dùng cùng bộ lọc FFmpeg, giọng mới được tạo từ lời phụ đề hiện tại; dịch lời trước nếu cần. Cắt giữa một câu có thể đọc không vừa mốc, nên chọn lại mốc hoặc sửa lời. Nghe kiểm tra nhịp/câu, chưa tự khớp khẩu hình. Phông chưa cài sẽ được thay thế; bản xem thử mã hóa phản ánh kết quả trên máy. Nội suy logo không khôi phục được chi tiết bị che.
+
+## Ngôn ngữ và giọng nhiều quốc gia (3.2)
+
+Chọn riêng Ngôn ngữ phụ đề / dịch phụ đề và Ngôn ngữ tạo voice. Danh mục có 52 lựa chọn ngôn ngữ/quốc gia, gồm Việt/Mỹ/Anh/Nhật/Hàn/Trung, Thái, Indonesia, Malaysia, Philippines, Hindi, Ả Rập và các nước châu Âu. Nhận dạng Whisper và dịch hỗ trợ danh mục này; chất lượng phụ thuộc tiếng nói/model dịch. Voice AI chỉ cung cấp ngôn ngữ mà mô hình thực sự hỗ trợ, các tiếng khác cần giọng Windows SAPI đã cài. Không tự coi giọng OneCore là SAPI.
+
+Thư viện thêm Serena, Uncle Fu, Dylan và Eric, nâng danh mục Qwen lên 9 giọng. Có bộ lọc giọng gốc/quốc gia, giọng Windows và giọng cá nhân ở video và mục tạo voice văn bản. Chọn quốc gia/ngôn ngữ không tự biến đổi âm sắc hoặc giọng vùng; giọng gốc quyết định cách phát âm. Giọng Việt Nano/Turbo và Turbo Anh đi kèm; Qwen cần tải model một lần. Ngoài ngôn ngữ AI được hỗ trợ, nút Thêm giọng mở hướng dẫn Windows; với ngôn ngữ AI, mở phần nhập mẫu giọng cá nhân.
+
+Khi voice khác ngôn ngữ phụ đề, nội dung đọc được dịch qua dịch vụ AI đã chọn; phụ đề gốc được giữ, chỉ cập nhật mốc vừa đọc khi cần. Chế độ Nhanh dùng Nano 4 bước, nhận dạng beam1 và xuất nhanh; giảm độ tự nhiên/độ chính xác. Cân bằng dùng Nano 8 bước. Nút nhanh ở mục văn bản cũng chọn Nano 4 bước cho giọng Việt có sẵn, không thay giọng cá nhân/Windows. Không cam kết thời gian xử lý trên mọi máy.

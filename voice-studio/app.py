@@ -34,15 +34,20 @@ BASE = Path(__file__).resolve().parent
 DATA = Path(os.environ.get('VOICE_STUDIO_DATA_DIR', str(BASE / '.data'))).resolve()
 for folder in ('voices', 'audio', 'jobs', 'models', 'parts', 'videos'):
     (DATA / folder).mkdir(parents=True, exist_ok=True)
-LANGUAGES = {'vi': 'Tiếng Việt', 'en-US': 'English · US', 'en-GB': 'English · UK', 'ja': '日本語 · Nhật', 'ko': '한국어 · Hàn', 'zh': '中文 · Trung', 'fr': 'Français · Pháp', 'de': 'Deutsch · Đức', 'es': 'Español · Tây Ban Nha', 'it': 'Italiano · Ý', 'pt': 'Português · Bồ Đào Nha', 'ru': 'Русский · Nga'}
+from language_catalog import LANGUAGES,CORE_LANGUAGES,QWEN_LANGUAGES,SUBTITLE_LANGUAGES,RECOGNITION_CODES,native_language
+
 PRESETS = [
     {'id': 'vi-maianh', 'name': 'Mai Anh', 'engine': 'vieneu', 'speaker': 'Mai Anh', 'languages': ['vi', 'en-US', 'en-GB'], 'description': 'Giọng có sẵn · VieNeu'},
     {'id': 'vi-haidang', 'name': 'Hải Đăng', 'engine': 'vieneu', 'speaker': 'Hải Đăng', 'languages': ['vi', 'en-US', 'en-GB'], 'description': 'Giọng có sẵn · VieNeu'},
-    {'id': 'qw-ryan', 'name': 'Ryan', 'engine': 'qwen', 'speaker': 'Ryan', 'languages': list(LANGUAGES)[1:], 'description': 'Giọng nam · tiếng Anh bản ngữ'},
-    {'id': 'qw-aiden', 'name': 'Aiden', 'engine': 'qwen', 'speaker': 'Aiden', 'languages': list(LANGUAGES)[1:], 'description': 'Giọng nam · tiếng Anh bản ngữ'},
-    {'id': 'qw-ono', 'name': 'Ono Anna', 'engine': 'qwen', 'speaker': 'Ono_Anna', 'languages': list(LANGUAGES)[1:], 'description': 'Giọng nữ · tiếng Nhật bản ngữ'},
-    {'id': 'qw-sohee', 'name': 'Sohee', 'engine': 'qwen', 'speaker': 'Sohee', 'languages': list(LANGUAGES)[1:], 'description': 'Giọng nữ · tiếng Hàn bản ngữ'},
-    {'id': 'qw-vivian', 'name': 'Vivian', 'engine': 'qwen', 'speaker': 'Vivian', 'languages': list(LANGUAGES)[1:], 'description': 'Giọng nữ · tiếng Trung bản ngữ'},
+    {'id': 'qw-ryan', 'name': 'Ryan', 'engine': 'qwen', 'speaker': 'Ryan', 'languages': list(QWEN_LANGUAGES), 'description': 'Giọng nam · tiếng Anh bản ngữ'},
+    {'id': 'qw-aiden', 'name': 'Aiden', 'engine': 'qwen', 'speaker': 'Aiden', 'languages': list(QWEN_LANGUAGES), 'description': 'Giọng nam · tiếng Anh bản ngữ'},
+    {'id': 'qw-ono', 'name': 'Ono Anna', 'engine': 'qwen', 'speaker': 'Ono_Anna', 'languages': list(QWEN_LANGUAGES), 'description': 'Giọng nữ · tiếng Nhật bản ngữ'},
+    {'id': 'qw-sohee', 'name': 'Sohee', 'engine': 'qwen', 'speaker': 'Sohee', 'languages': list(QWEN_LANGUAGES), 'description': 'Giọng nữ · tiếng Hàn bản ngữ'},
+    {'id': 'qw-vivian', 'name': 'Vivian', 'engine': 'qwen', 'speaker': 'Vivian', 'languages': list(QWEN_LANGUAGES), 'description': 'Giọng nữ · tiếng Trung bản ngữ'},
+    {'id': 'qw-serena', 'name': 'Serena', 'engine': 'qwen', 'speaker': 'Serena', 'languages': ['en-US', 'en-GB', 'ja', 'ko', 'zh', 'fr', 'de', 'es', 'it', 'pt', 'ru'], 'description': 'Giọng nữ · tiếng Trung bản ngữ'},
+    {'id': 'qw-unclefu', 'name': 'Uncle Fu', 'engine': 'qwen', 'speaker': 'Uncle_Fu', 'languages': ['en-US', 'en-GB', 'ja', 'ko', 'zh', 'fr', 'de', 'es', 'it', 'pt', 'ru'], 'description': 'Giọng nam trầm · tiếng Trung bản ngữ'},
+    {'id': 'qw-dylan', 'name': 'Dylan', 'engine': 'qwen', 'speaker': 'Dylan', 'languages': ['en-US', 'en-GB', 'ja', 'ko', 'zh', 'fr', 'de', 'es', 'it', 'pt', 'ru'], 'description': 'Giọng nam · tiếng Trung Bắc Kinh'},
+    {'id': 'qw-eric', 'name': 'Eric', 'engine': 'qwen', 'speaker': 'Eric', 'languages': ['en-US', 'en-GB', 'ja', 'ko', 'zh', 'fr', 'de', 'es', 'it', 'pt', 'ru'], 'description': 'Giọng nam · tiếng Trung Tứ Xuyên'},
     {'id': 'nano-minhquan', 'name': 'Minh Quân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Minh Quân', 'languages': ['vi'], 'description': 'Nano 8 bước · nhanh hơn, giảm độ tự nhiên'},
     {'id': 'nano-aihan', 'name': 'Ái Hân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Ái Hân', 'languages': ['vi'], 'description': 'Nano 8 bước · nhanh hơn, giảm độ tự nhiên'},
 ]
@@ -97,7 +102,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.1.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.2.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -170,14 +175,14 @@ def config():
 
 
 def _config_values():
-    return {'subtitle_ready':(DATA/'models'/'whisper-base'/'model.bin').is_file(),'version':app.version,'mode': 'local', 'languages': LANGUAGES, 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'cpu_cores': os.cpu_count() or 1, 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
+    return {'subtitle_ready':(DATA/'models'/'whisper-base'/'model.bin').is_file(),'version':app.version,'mode': 'local', 'languages': LANGUAGES,'subtitle_languages':SUBTITLE_LANGUAGES,'ai_voice_languages':list(CORE_LANGUAGES), 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'cpu_cores': os.cpu_count() or 1, 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
 
 
 @app.get('/api/voices')
 def voices():
     entries=PRESETS+installed_voices()+records('voices')
     entries=[{**voice,'engine':voice.get('engine','vieneu' if voice.get('languages',['vi'])[0]=='vi' else 'qwen_clone')} for voice in entries]
-    return {'voices':[{**voice,'ready':voice.get('engine')=='system' or (DATA/'models'/f"{voice.get('engine','vieneu')}.ready").exists()} for voice in entries]}
+    return {'voices':[{**voice,'native_language':native_language(voice),'ready':voice.get('engine')=='system' or (DATA/'models'/f"{voice.get('engine','vieneu')}.ready").exists()} for voice in entries]}
 
 
 
@@ -189,6 +194,7 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
     try:
         if not consent:
             raise HTTPException(422, 'Cần xác nhận quyền sử dụng mẫu giọng.')
+        if language not in CORE_LANGUAGES:raise HTTPException(422,'Nhân bản AI chưa hỗ trợ ngôn ngữ này. Chọn giọng hệ thống Windows đã cài cho ngôn ngữ đó.')
         if not name.strip() or language not in LANGUAGES:
             raise HTTPException(422, 'Tên hoặc ngôn ngữ không hợp lệ.')
         if Path(file.filename or '').suffix.lower() not in {'.mp3', '.wav', '.m4a', '.flac', '.ogg', '.webm'}:
@@ -670,7 +676,7 @@ class VideoTask(BaseModel):
     provider: str = Field(default='ollama',pattern='^(ollama|openai|gemini)$')
     cues: list[EditorCue] = Field(default_factory=list,max_length=10000)
     accurate: bool = True
-    source_language: str = Field(default='', pattern='^(|vi|en|en-US|en-GB|ja|ko|zh|fr|de|es|it|pt|ru)$')
+    source_language: str = Field(default='',max_length=16)
     target_language: str = Field(default='', max_length=16)
     model: str = Field(default='qwen3:4b', max_length=100)
     srt: str = Field(default='', max_length=200000)
@@ -738,6 +744,7 @@ def create_video_task(body:VideoTask):
     if body.action not in {'translate_text','prepare_voice'} and not body.video_id:raise HTTPException(422,'Chọn video trước.')
     meta = read_json(DATA/'videos'/f'{valid_id(body.video_id)}.json') if body.action not in {'translate_text','prepare_voice'} else {'duration':10800}
     try:
+        if body.source_language and body.source_language.split('-')[0] not in RECOGNITION_CODES:raise ValueError('Ngôn ngữ gốc chưa được hỗ trợ.')
         if body.action=='translate_text':
             if not body.text.strip() or body.target_language not in LANGUAGES:raise ValueError('Nhập văn bản và chọn ngôn ngữ dịch.')
             if body.input_format=='srt':parse_srt(body.text)

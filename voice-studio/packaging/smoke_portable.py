@@ -20,7 +20,10 @@ for module in (np, sf, httpx):
 subprocess.run(['ffmpeg','-version'], check=True, stdout=subprocess.DEVNULL)
 subprocess.run(['ffprobe','-version'], check=True, stdout=subprocess.DEVNULL)
 with TestClient(studio.app) as client:
-    assert client.get('/api/config').json()['nano_ready']
+    config=client.get('/api/config').json()
+    assert config['nano_ready'] and len(config['subtitle_languages'])==52
+    assert 'hi' in config['subtitle_languages']
+    assert len([v for v in client.get('/api/voices').json()['voices'] if v['engine']=='qwen'])==9
     assert client.get('/static/app.js').status_code == 200
     assert client.get('/static/studio-tools.js').status_code==200
     assert client.get('/static/video-preview.js').status_code==200

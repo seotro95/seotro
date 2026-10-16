@@ -20,3 +20,5 @@
 .editor-cue.is-speaking{background:#f0edff;border-left:3px solid var(--accent,#7856ff);padding-left:8px}
 
 .workspace-script .editor-cue>button:first-child{grid-column:1/-1;text-align:left}.workspace-script .editor-cue>button:last-child{grid-column:2}#workspace-inline-status{overflow-wrap:anywhere;font-size:13px}
+
+.workspace-settings{grid-template-columns:repeat(4,minmax(0,1fr))}.workspace-voice-tools{margin:12px 0}.workspace-voice-tools select{max-width:100%}@media(max-width:1000px){.workspace-settings{grid-template-columns:1fr}}
