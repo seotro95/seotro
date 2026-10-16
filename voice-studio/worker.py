@@ -209,7 +209,9 @@ def render(job, synthesize=None):
                 cue_writer.close()
                 cue_writer = None
                 cue = cues[segment.cue]
-                available = cue['end'] - cue['start']
+                original_end=cue['end']
+                boundary=(cues[segment.cue+1]['start'] if segment.cue+1<len(cues) else job.get('timeline_seconds',original_end))
+                available=(max(original_end,boundary) if job.get('cue_fit')=='gap' else original_end)-cue['start']
                 with wave.open(str(cue_path)) as cue_audio:
                     actual = cue_audio.getnframes()/cue_audio.getframerate()
                 if actual > available:
@@ -232,6 +234,9 @@ def render(job, synthesize=None):
                         # atempo has small frame/window rounding differences. Refit the
                         # original cue, never cut words or compound tempo transforms.
                         tempo = min(1.5, tempo*fitted_seconds/available*1.005)
+                if job.get('cue_fit')=='gap':
+                    with wave.open(str(cue_path)) as fitted_audio:spoken_seconds=fitted_audio.getnframes()/fitted_audio.getframerate()
+                    cue['end']=round(min(boundary,max(original_end,cue['start']+spoken_seconds)),3)
                 writer.silence(max(0, cue['start']-writer.frames/writer.rate))
                 clipped = writer.append(cue_path) or clipped
                 writer.silence(max(0, cue['end']-writer.frames/writer.rate))

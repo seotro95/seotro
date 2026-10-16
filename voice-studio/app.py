@@ -97,7 +97,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.0.1', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.1.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -238,6 +238,8 @@ def delete_voice(ident: str):
 
 
 class Speech(BaseModel):
+    cue_fit: str = Field(default='strict',pattern='^(strict|gap)$')
+    timeline_seconds: float = Field(default=10800,gt=0,le=10800)
     caption_style: dict = Field(default_factory=dict)
     text: str = Field(min_length=1, max_length=MAX_CHARACTERS)
     voice_id: str = Field(min_length=1, max_length=128)
@@ -397,6 +399,8 @@ def speech(body: Speech):
         segments = plan_segments({**body.model_dump(), 'engine': engine, 'segment_plan': segment_plan})
         if body.input_format == 'srt':
             cues = parse_srt(body.text)
+            if body.cue_fit=='gap' and cues[-1]['end']>body.timeline_seconds+.001:
+                raise ValueError('Phụ đề vượt thời lượng video đã chọn.')
             if cues[-1]['end'] > body.max_minutes*60:
                 raise ValueError('SRT vượt giới hạn thời lượng đã chọn.')
             if body.video_id and cues[-1]['end'] + body.video_offset > meta['duration'] + .001:
@@ -461,6 +465,16 @@ def job_status(job):
             except (OSError, ValueError):
                 pass
     return job
+
+
+@app.get('/api/jobs/{ident}/timing')
+def voice_timing(ident:str):
+    ident=valid_id(ident)
+    job=read_json(DATA/'jobs'/f'{ident}.json')
+    if job['status']!='done':raise HTTPException(409,'Voice chưa hoàn tất.')
+    path=DATA/'audio'/f'{ident}.srt'
+    if not path.is_file():raise HTTPException(404,'Chưa có mốc lời đọc.')
+    return {'cues':parse_srt(path.read_text(encoding='utf-8'))}
 
 
 @app.post('/api/jobs/{ident}/cancel', status_code=202)
@@ -640,6 +654,7 @@ class EditorProject(BaseModel):
 
 
 class VideoTask(BaseModel):
+    voice_job_id: str | None = None
     caption_style: dict = Field(default_factory=dict)
     export_resolution: str = Field(default='original',pattern='^(original|720p|1080p|2160p)$')
     export_quality: str = Field(default='balanced',pattern='^(best|balanced|fast)$')
@@ -732,6 +747,11 @@ def create_video_task(body:VideoTask):
             raise HTTPException(503,'Chưa kết nối API key. Mở phần kết nối dịch và chọn OpenAI hoặc Gemini.')
         from video_editor import validate_style
         validate_style(body.caption_style)
+        if body.voice_job_id:
+            if body.action not in {'render','export'}:raise ValueError('Voice đã tạo chỉ dùng khi xuất video.')
+            voice=read_json(DATA/'jobs'/f'{valid_id(body.voice_job_id)}.json')
+            if voice['status']!='done' or voice['format']!='wav' or voice.get('duration_limited'):raise ValueError('Voice chưa hoàn tất hoặc đã chạm giới hạn.')
+            if voice.get('audio_seconds',0)>meta['duration']+.05:raise ValueError('Voice dài hơn video. Sửa lời hoặc mốc câu trước khi xuất.')
         if body.action=='preview':
             if body.preview_start>=meta['duration']:raise ValueError('Mốc xem thử cần nằm trong video.')
             if body.preview_voice_id:

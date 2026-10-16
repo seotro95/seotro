@@ -101,13 +101,13 @@ def run(path):
         if preview and not filters:options=encoder_options(job)
         # Input seek avoids decoding the whole video before a short proof.
         inputs=(["-ss",str(start)] if preview else [])+['-i',str(source)]
-        voice_id=job.get('preview_voice_id') if preview else None
+        voice_id=job.get('preview_voice_id') if preview else job.get('voice_job_id')
         if voice_id:inputs+=['-i',str(data/'audio'/f'{voice_id}.wav')]
         if voice_id:
             options=['-filter_complex',f"[0:v]{','.join(filters) if filters else 'null'}[v];[1:a]apad=whole_dur={seconds}[a]",'-map','[v]','-map','[a]',*encoder_options(job)]
             mapping=[]
         else:mapping=['-map','0:v:0','-map','0:a?']
-        run_ffmpeg(['ffmpeg','-nostdin','-v','error','-protocol_whitelist','file,pipe',*inputs,*mapping,*options,*(['-t',str(seconds)] if preview else []),'-c:a','aac','-b:a','192k','-movflags','+faststart','-y',str(work/'output.mp4')],work,seconds,1,99,f'Đang tạo bản xem thử' if preview else f'Đang xuất MP4 {size[0]} × {size[1]}',cwd=work)
+        run_ffmpeg(['ffmpeg','-nostdin','-v','error','-protocol_whitelist','file,pipe',*inputs,*mapping,*options,*(['-t',str(seconds)] if preview or voice_id else []),'-c:a','aac','-b:a','192k','-movflags','+faststart','-y',str(work/'output.mp4')],work,seconds,1,99,f'Đang tạo bản xem thử' if preview else f'Đang xuất MP4 {size[0]} × {size[1]}',cwd=work)
         (work/'result.json').write_text(json.dumps({'width':size[0],'height':size[1]}),encoding='utf-8')
         update(100,'Video đã sẵn sàng')
         return

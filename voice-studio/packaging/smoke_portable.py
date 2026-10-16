@@ -24,6 +24,8 @@ with TestClient(studio.app) as client:
     assert client.get('/static/app.js').status_code == 200
     assert client.get('/static/studio-tools.js').status_code==200
     assert client.get('/static/video-preview.js').status_code==200
+    assert client.get('/static/workspace.js').status_code==200
+    assert 'workspace-all' in client.get('/').text
     assert any('ko' in v['languages'] for v in client.get('/api/voices').json()['voices'])
 for engine, speaker in [('vieneu_nano','Minh Quân'), ('vieneu','Mai Anh')]:
     job = {'id': 'portable-check-'+engine, 'text': 'Xin chào, đây là kiểm tra gói phòng thu giọng nói.', 'engine': engine, 'speaker': speaker, 'voice_id': 'check', 'language': 'vi', 'quality': 'standard', 'format': 'wav', 'speed': 1, 'nano_steps': 8, 'nano_threads': 2, 'paragraph_pause': 0}
@@ -58,6 +60,10 @@ path.write_text(json.dumps({'video_id':'portable','action':'preview','preview_st
 run(path)
 proof=inspect_video(work/'output.mp4')
 assert proof['has_audio'] and abs(proof['duration']-2)<.2
+# Compose a complete video with the ready WAV without synthesizing it again.
+path.write_text(json.dumps({'video_id':'portable','action':'render','voice_job_id':'portable-check-vieneu_nano','cues':[{'start':0,'end':5,'text':'Workspace đã tạo voice'}]}),encoding='utf-8')
+run(path)
+assert inspect_video(work/'output.mp4')['has_audio']
 # Verify actual UHD output with the relocated interpreter and bundled FFmpeg.
 short=videos/'portable-4k.source'
 subprocess.run(['ffmpeg','-nostdin','-v','error','-f','lavfi','-i','color=c=blue:s=160x90:r=5:d=0.4','-c:v','libx264','-f','mp4','-y',str(short)],check=True)

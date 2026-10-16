@@ -1,3 +1,12 @@
+
+## Màn hình Video đơn giản (3.1)
+
+Mở tool sẽ vào video. Chọn/tải video → chọn ngôn ngữ gốc, ngôn ngữ dịch/giọng và giọng sẵn sàng → Tạo phụ đề + voice. Bật Dịch lời nếu cần và kết nối Ollama hoặc API của nhà cung cấp. Ollama không cần API key nhưng cần model riêng; OpenAI/Gemini cần key. Có thể bấm Tạo phụ đề riêng để kiểm tra lời trước.
+
+Video và danh sách câu đặt cạnh nhau. Sau khi tạo voice, phát/dừng/tua video để nghe voice cùng mốc. Sửa chữ/mốc hoặc đổi giọng sẽ vô hiệu voice cũ cho xuất; bấm Tạo lại voice sau khi sửa. Xuất TXT/SRT nằm ngay cạnh lời. Màu/phông/logo thu gọn trong các mục riêng, các thiết lập cũ chuyển vào nâng cao.
+
+Voice ở màn hình video dùng thiết lập độc lập: quality auto, Nano 8 bước, một tiến trình, không dùng chế độ nhanh chưa tải ở tab khác. Tận dụng khoảng trống đến câu sau để nới kết thúc câu quá ngắn, không cắt lời hoặc chồng câu; nếu vẫn quá dài thì báo câu cần sửa. Các mốc đã căn được lưu để xem và xuất. Voice chưa hoàn tất hoặc khác bản lời hiện tại không được dùng khi xuất video. Nghe kiểm tra trước; chưa khớp khẩu hình.
+
 # Voice Studio 2.9 — Giọng sẵn sàng, dịch đa dịch vụ và nhiều vùng logo
 
 Giao diện tiếng Việt cho chuyển văn bản thành lời nói, hồ sơ nhân bản giọng từ mẫu, thư viện giọng, hàng đợi, nghe lại và tải WAV/MP3. Tạo giọng cục bộ không cần API key. AI viết kịch bản mặc định dùng Ollama trên máy, không cần tài khoản hoặc API key. OpenAI/Gemini là tùy chọn nâng cao và vẫn yêu cầu khóa riêng.
