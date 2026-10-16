@@ -227,3 +227,6 @@ Thông báo “Không tìm thấy model. Hãy kiểm tra tên model.” từ d�
 
 ### 3.4.2 · Kiểm tra bằng lệnh dịch thật
 Bấm “Thử dịch một câu / kiểm tra model” trong Kết nối dịch để gửi câu thử qua đúng API tạo nội dung, không chỉ kiểm tra metadata. Trước khi dịch video, tool cũng tự kiểm tra như vậy. Model mặc định/model có trong danh sách nhưng trả 404 được bỏ qua; tối đa bốn model được thử, không chuyển tiếp khi hết hạn mức hoặc thiếu quyền. Danh sách Gemini ưu tiên phiên bản mới hơn. Lỗi giữ mã HTTP và lý do Google, che API key. Nếu tất cả đều lỗi, dừng trước nhận dạng; kiểm tra quyền truy cập dự án/key Google AI Studio. Không có model nào được bảo đảm hoạt động chỉ vì xuất hiện trong danh sách.
+
+### 3.4.3 · Chọn lại giọng khi bộ lọc trống
+Nút Chọn giọng AI phù hợp nằm ngay cạnh phần chọn giọng của màn hình video. Nút giữ ngôn ngữ, chuyển nguồn sang AI và bỏ bộ lọc quốc gia; ưu tiên giọng đã sẵn sàng và giọng bản ngữ nếu có. Chọn giọng không tự tải mô hình. Nút tải thể hiện rõ giọng Windows không cần model AI, giọng AI đã sẵn sàng hoặc giọng cần tải. Nếu ngôn ngữ không có AI hỗ trợ, tool mở hướng dẫn thêm giọng Windows và giữ nguyên ngôn ngữ.
