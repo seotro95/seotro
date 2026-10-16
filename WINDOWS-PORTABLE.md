@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-15/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-17/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-15`; source application/build commit: `e088643`.
-- File size: **1,262,078,447 bytes** (about 1.18 GiB).
-- SHA256: `544df07932a7e0296a9727396bf2dd08a47529bcd661e2919182a1de852decc8`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38853362092): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-17`; source application/build commit: `163d6b1`.
+- File size: **1,262,085,189 bytes** (about 1.18 GiB).
+- SHA256: `5cf10ec1fbef16574951fe1ffe3733e00649693bd8c9b5455e2c58354ac53917`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38865806622): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -70,3 +70,9 @@ Subtitle target language and narration language are independent. Optional OpenAI
 The fast preset selects available Nano settings and bounded CPU parallelism. Recognition results are cached for repeat edits. Actual performance depends on hardware, model and output settings; an hour of speech in two minutes is not guaranteed.
 
 Validation: 61 regression checks passed on Linux and native Windows. Relocated offline Windows smoke passed actual Nano/Turbo voice, Whisper recognition, narration with captions and multiple colored regions, and highest-quality UHD export. The published 1.26 GB ZIP was downloaded in full, SHA256 verified, and checked for version 2.9.0, the new modules, bundled models and absence of personal job/history/key files. OpenAI/Gemini contracts used mocked responses; live provider translation requires the user's own credentials.
+
+## Inline video editor in 2.9.1
+
+Subtitle language/provider and narration language/voice controls now appear directly below the video preview. TXT/SRT exports sit beside the cue editor. Full-script rewriting keeps each paragraph attached to its existing cue time; an incorrect paragraph count or concurrently changed cues is rejected before saving. Saved rewritten text is used by exports and dubbing.
+
+Validation: 61 Linux/native Windows checks and relocated offline Windows smoke passed. Chromium verified inline controls, full-script editing with preserved timestamps, actual TXT/SRT downloads, wrong-paragraph-count protection, mobile layout and no JavaScript errors. The published ZIP was downloaded fully, SHA256 checked, and inspected for version 2.9.1 and new editor controls.
