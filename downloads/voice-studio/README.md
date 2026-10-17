@@ -1,3 +1,20 @@
+# Bản đầy đủ Portable 1.1.1 — Giải nén rồi mở tool
+
+**[Tải ZIP Portable Windows 10/11 x64, khoảng 1,17 GB](https://github.com/seotro95/seotro/releases/download/voice-standalone-portable-38999293928/Voice-Studio-Rieng-1.1.1-Portable-Windows-x64.zip)**
+
+1. Giải nén **toàn bộ ZIP**.
+2. Mở **MO_TOOL.bat**.
+
+Có sẵn Python, toàn bộ thư viện chạy giọng, FFmpeg, Nano/Nano nhân bản và Turbo tiếng Việt. Không cần cài đặt, API key hoặc tải thêm mô hình tiếng Việt. Chọn mẫu giọng của bạn rồi bấm **Ưu tiên tốc độ** nếu cần nhân bản nhanh trên CPU. Gói này không kèm Qwen quốc tế.
+
+Đã vượt qua [kiểm tra trực tiếp Windows](https://github.com/seotro95/seotro/actions/runs/38999293928): chạy bằng Python đi kèm tại đường dẫn có khoảng trắng, chặn kết nối tải bên ngoài, tạo giọng và nhân bản Nano/Turbo thật, xuất WAV/MP3/TXT/SRT và mở launcher. Dữ liệu kiểm thử đã được dọn khỏi gói; mẫu và bản thu của bạn lưu ở `app/.data`. Sao lưu thư mục này khi cập nhật.
+
+07abd12010ae348356c6295bd57f87ca73aa21dd5270f423ef80d0fc1a6ef3b5256: `07abd12010ae348356c6295bd57f87ca73aa21dd5270f423ef80d0fc1a6ef3b5`
+
+---
+
+## Gói mã nguồn/bộ cài cũ
+
 # Voice Studio Riêng 1.1 · Nhân bản tiếng Việt trên CPU
 
 **[Tải bản cập nhật 1.1 cho Windows 10/11 x64](./Voice-Studio-Rieng-1.1.0-Windows-10-11.zip?raw=true)**

@@ -1,0 +1,21 @@
+{
+  "url": "https://github.com/seotro95/seotro/releases/download/voice-standalone-portable-38999293928/Voice-Studio-Rieng-1.1.1-Portable-Windows-x64.zip",
+  "sha256": "07abd12010ae348356c6295bd57f87ca73aa21dd5270f423ef80d0fc1a6ef3b5",
+  "bytes": 1169483024,
+  "version": "1.1.1",
+  "type": "Windows 10/11 x64 portable",
+  "native_windows_validation": "passed",
+  "workflow_run": "https://github.com/seotro95/seotro/actions/runs/38999293928",
+  "bundled": [
+    "Windows Python 3.12",
+    "Python dependencies",
+    "FFmpeg",
+    "Vietnamese Nano presets",
+    "Vietnamese Nano cloning",
+    "Vietnamese Turbo presets and cloning"
+  ],
+  "user_steps": [
+    "Extract all ZIP files",
+    "Open MO_TOOL.bat"
+  ]
+}
