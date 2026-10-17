@@ -245,3 +245,11 @@ Lỗi HTTP 503 được thử lại tối đa ba lần cho mỗi yêu cầu, ch�
 VieNeu Việt/Anh không hỗ trợ đọc nguyên chữ Trung/Nhật/Hàn hoặc các hệ chữ khác ngoài Latin. Tool kiểm tra trước khi đưa tác vụ vào hàng đợi, ghi rõ câu/đoạn và yêu cầu dịch lời hoặc chọn giọng hỗ trợ; không bỏ mất chữ. Dấu câu/emoji đi kèm câu được ghép lại với lời, tránh tạo đoạn chỉ có ký hiệu. Câu chỉ có ký hiệu được báo để sửa.
 Nếu lời hợp lệ nhưng model tạo WAV rỗng hoặc chỉ có im lặng, tool thử lại tối đa ba lần với cùng lời/giọng; Nano thử 16 bước ở lần cuối. Nếu vẫn thất bại, tool ghi rõ câu và trích lời, không ghi nhận đoạn rỗng là hoàn tất. Checkpoint WAV rỗng/hỏng được tạo lại. Có thể dừng giữa các lần thử.
 Đóng cửa sổ tool cũ trước khi mở bản cập nhật và kiểm tra dòng Voice Studio 3.5.1 gần các nút tạo giọng. Launcher mở URL theo phiên bản, HTML không lưu cache và tệp giao diện có mã phiên bản để tránh dùng giao diện cũ.
+
+### 3.6.0 · Thao tác ngay trên video và voice nhanh
+
+Chọn ngôn ngữ gốc / ngôn ngữ phụ đề đích, bấm **Tạo phụ đề riêng**; chọn ngôn ngữ và giọng rồi **Tạo voice riêng theo phụ đề**. Màu, phông, viền, nền và ba kiểu chữ nhanh hiện ngay dưới video. **Khoanh / che logo ngay trên video** cho phép kéo tối đa 20 ô trên khung đang xem; bấm **Xong** để phát tiếp. Phủ màu xem trực tiếp; nội suy nền phải tạo bản xem thử FFmpeg để xem kết quả thật trước khi xuất.
+
+Voice văn bản mặc định Nano 4 bước, không thêm khoảng nghỉ và ghép câu ngắn để giảm lượt chạy mô hình; chọn 2 tiến trình khi có ít nhất 4 CPU logic và 3 GB RAM trống. Nút ưu tiên tốc độ giữ giọng cá nhân / Windows đã chọn. Chọn 8 hoặc 16 bước nếu muốn chất lượng cao hơn. Tốc độ thực tế tùy máy, ngôn ngữ và giọng; không bảo đảm 1 giờ audio trong 2 phút.
+
+TXT mặc định bỏ mốc đầu dòng như `[01:30]`, `01:30 lời` và dòng thời gian/chỉ số SRT; vẫn đọc số tiền, số lượng, giờ hẹn trong câu. Có thể bỏ chọn **Không đọc mốc phút–giây** nếu cần đọc nguyên văn. SRT nhập ở chế độ SRT vẫn giữ nguyên mốc để đồng bộ video. Đóng tool cũ và kiểm tra **3.6.0** khi mở bản mới.

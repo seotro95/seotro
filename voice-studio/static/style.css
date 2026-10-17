@@ -26,3 +26,4 @@
 .alignment-row{display:flex;gap:10px;align-items:center;border-top:1px solid var(--line);padding:6px 0;font-size:12px}#workspace-alignment-rows{max-height:320px;overflow:auto}
 
 #workspace-free-script{width:100%;min-height:220px}#workspace-free-audio{width:100%;margin:12px 0}.editor-cue input:invalid{border-color:#c44}#workspace-free-status{overflow-wrap:anywhere}
+#video-logo-overlay{position:absolute;pointer-events:none;touch-action:none;z-index:2}#editor-caption{z-index:3}

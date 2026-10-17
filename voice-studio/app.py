@@ -102,7 +102,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.5.1', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.6.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -258,6 +258,7 @@ class Speech(BaseModel):
     speed: float = Field(default=1, ge=0.7, le=1.4)
     format: str = 'wav'
     input_format: str = Field(default='txt', pattern='^(txt|srt)$')
+    skip_timestamps: bool = True
     video_id: str | None = None
     video_offset: float = Field(default=0, ge=0, le=10800)
     video_mix: bool = False

@@ -16,6 +16,22 @@ class Segment:
     cue: int | None = None
 
 
+def spoken_text(text):
+    """Remove line-leading caption clocks, never numbers inside spoken prose."""
+    clock = r'(?:\d{1,3}:)?\d{1,2}:[0-5]\d(?:[.,]\d{1,3})?'
+    timing = re.compile(r'^\s*' + clock + r'\s*-->\s*' + clock + r'(?:\s+.*)?$')
+    leading = re.compile(r'^\s*(?:\[' + clock + r'\]|\(' + clock + r'\)|' + clock + r')(?=\s|$)\s*(?:[-–—|]\s*)?')
+    lines = text.replace('\r\n', '\n').split('\n')
+    output = []
+    for index, line in enumerate(lines):
+        if timing.fullmatch(line):
+            continue
+        if line.strip().isdigit() and index + 1 < len(lines) and timing.fullmatch(lines[index + 1]):
+            continue  # SRT cue index immediately before its timing line.
+        output.append(leading.sub('', line))
+    return '\n'.join(output)
+
+
 def split_script(text, limit=240):
     # Explicit pauses and emphasis never reach the language model as spoken words.
     segments = []
@@ -73,10 +89,11 @@ def plan_segments(job):
                 segment.cue = index
                 output.append(segment)
         return output
+    text = spoken_text(job['text']) if job.get('skip_timestamps', True) else job['text']
     if job.get('segment_plan') != 'nano-packed-v1':
-        return split_script(job['text'])
+        return split_script(text)
     # Packing is opt-in with zero added sentence gap; explicit pauses/emphasis stay barriers.
-    source = split_script(job['text'], limit=130)
+    source = split_script(text, limit=130)
     packed = []
     for segment in source:
         if segment.text and packed and packed[-1].text and not segment.emphasis and not packed[-1].emphasis and len(packed[-1].text) + 1 + len(segment.text) <= 130:

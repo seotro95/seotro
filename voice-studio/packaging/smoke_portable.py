@@ -28,6 +28,9 @@ with TestClient(studio.app) as client:
     assert client.get('/static/studio-tools.js').status_code==200
     assert client.get('/static/video-preview.js').status_code==200
     assert client.get('/static/workspace.js').status_code==200
+    assert client.get('/static/direct-video.js').status_code==200
+    from narration import spoken_text
+    assert spoken_text('1\n00:00:01,000 --> 00:00:03,000\nXin chào 200 nghìn.').strip()=='Xin chào 200 nghìn.'
     assert 'workspace-all' in client.get('/').text
     assert 'workspace-retry-translation' in client.get('/').text
     assert 'workspace-model-options' in client.get('/').text
