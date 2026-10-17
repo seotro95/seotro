@@ -19,14 +19,16 @@ class Segment:
 def spoken_text(text):
     """Remove line-leading caption clocks, never numbers inside spoken prose."""
     clock = r'(?:\d{1,3}:)?\d{1,2}:[0-5]\d(?:[.,]\d{1,3})?'
-    timing = re.compile(r'^\s*' + clock + r'\s*-->\s*' + clock + r'(?:\s+.*)?$')
+    timing = re.compile(r'^\s*' + clock + r'\s*-->\s*' + clock + r'(?=\s|$)\s*')
     leading = re.compile(r'^\s*(?:\[' + clock + r'\]|\(' + clock + r'\)|' + clock + r')(?=\s|$)\s*(?:[-–—|]\s*)?')
     lines = text.replace('\r\n', '\n').split('\n')
     output = []
     for index, line in enumerate(lines):
-        if timing.fullmatch(line):
+        span = timing.match(line)
+        if span:
+            output.append(line[span.end():])
             continue
-        if line.strip().isdigit() and index + 1 < len(lines) and timing.fullmatch(lines[index + 1]):
+        if line.strip().isdigit() and index + 1 < len(lines) and timing.match(lines[index + 1]):
             continue  # SRT cue index immediately before its timing line.
         output.append(leading.sub('', line))
     return '\n'.join(output)

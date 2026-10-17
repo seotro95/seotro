@@ -4,6 +4,7 @@ from narration import spoken_text, plan_segments
 def test_clock_labels_removed_but_spoken_numbers_preserved():
     text='1\n00:00:01,500 --> 00:00:04,000\nGiá 200.000 đồng, 5 phút và 12:30 là giờ hẹn.\n\n[01:30] Xin chào.\n02:40.500 Lời tiếp.\n(03:50) Cảm ơn.'
     assert spoken_text(text).strip()=='Giá 200.000 đồng, 5 phút và 12:30 là giờ hẹn.\n\nXin chào.\nLời tiếp.\nCảm ơn.'
+    assert spoken_text('00:01 --> 00:04 Lời cùng dòng.').strip()=='Lời cùng dòng.'
     parts=plan_segments({'text':text,'input_format':'txt'})
     assert not any('-->' in s.text or '[01:30]' in s.text for s in parts)
     assert '200.000' in ' '.join(s.text for s in parts)
