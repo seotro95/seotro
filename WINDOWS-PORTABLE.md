@@ -6,12 +6,12 @@ The **source-code ZIP is not the portable runtime package**. Only a successful n
 
 ## Published and verified Windows build
 
-[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-31/Voice-Studio-Windows-x64.zip)
+[Download Voice-Studio-Windows-x64.zip](https://github.com/seotro95/seotro/releases/download/windows-portable-35/Voice-Studio-Windows-x64.zip)
 
-- Release: `windows-portable-31`; source application/build commit: `a80a22c`.
-- File size: **1,262,110,563 bytes** (about 1.18 GiB).
-- SHA256: `0b4b8abcf3b904be4c68e6f3737dfa5b8876e6bd9687d8e62cf2085cc927b8cb`.
-- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38934359997): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
+- Release: `windows-portable-35`; source application/build commit: `8101f53`.
+- File size: **1,262,341,673 bytes** (about 1.18 GiB).
+- SHA256: `0d5e46f3500dca1c070fce31071c0c18ff04ec0fe50b70672aad20d85a342750`.
+- [Successful native Windows build](https://github.com/seotro95/seotro/actions/runs/38987868385): regression checks, relocated bundled Python, offline Nano/Turbo synthesis, Whisper subtitle recognition, logo-region processing, API/static assets, FFmpeg/FFprobe and MP4 output all completed before publication.
 - Includes the Windows FFmpeg 8.1 build verified against upstream checksums. Padding now stops at the video duration; progress uses a sidecar timestamp file and a bounded wait, fixing the native Windows video export hang found during packaging.
 - Personal recordings/history are not copied into the package. Model snapshot links are converted to regular files and duplicate blob storage is omitted for reliable Windows ZIP extraction.
 
@@ -160,3 +160,19 @@ The visible target-caption action creates/translates subtitles into the selected
 A separate script box accepts manual words or copies edited captions. Standalone voice reads this text directly with the selected ready speaker, without implicit translation or SRT fitting limits. It works without a video, displays its own progress/Stop/player, and exports MP3/WAV/spoken TXT/SRT. Translating the script is an explicit separate action and never changes video captions. Timed video voice remains a separate mode. Bundled Vietnamese/English work offline; other voices require supported models/system voices, and subtitle/script translation still requires the selected AI service or local Ollama model.
 
 Validation: 114 Linux tests passed with one native-only skip. New tests cover detected-language cache retention, persisted caption language, timed Unicode TXT and four target-language fixtures preserving cue times. Actual Whisper automatically detected Vietnamese in a new narrated upload and returned metadata through the API. Chromium created actual Vietnamese Nano and English Turbo standalone voice without video or cloud calls, downloaded four formats, edited/saved minute times, exported plain/timed TXT/SRT, translated script with a fixture while preserving captions, and exercised explicit caption translation for vi/en-US/ja/ko using fixtures. Mobile/no JS errors verified. No live cloud translation-quality claim is made. Native Windows regression and relocated offline smoke passed, including standalone/translation controls and minute TXT export. Packaging removes all non-model QA data and asserts no project files remain. Full ZIP downloaded, SHA256 verified and inspected for version 3.5.0 and new controls/metadata.
+
+## Empty speech recovery and fresh interface assets in 3.5.1
+
+VieNeu API/worker preflight rejects non-Latin scripts with exact cue/segment guidance to translate or select a compatible speaker; punctuation/emoji remain attached to spoken text. Valid text returning empty/silent PCM retries at most three times with the same text and selected speaker. Nano uses at least 16 steps on the final attempt. Empty/corrupt/silent checkpoints regenerate; cancellation is checked between attempts; failures name the exact cue and never mark empty speech complete.
+
+The visible version label, versioned launcher URL, no-store HTML and versioned script/style requests reduce old-interface reuse when installing an update. Close older tool windows and confirm version 3.6.0 before testing.
+
+Validation: 124 Linux tests passed with one native-only skip. SDK preprocessing produced zero chunks for Chinese/Japanese with the VieNeu frontend; the user's exact original speaker/text was not supplied, so this is a confirmed failure class rather than a diagnosis of every empty result. Tests cover unsupported script preflight, punctuation retention, empty/silent retries, checkpoint repair, cancellation, 4/4/16-step recovery, compatible six-language timeline fixtures, and fresh assets. Two injected empty results recovered to actual Nano audio with unchanged text/speaker. Chromium verified the visible version, wrong-script rejection, actual Vietnamese/English standalone voice and existing edit/export flows. Native Windows regression and relocated offline smoke passed, including actual Nano recovery after injected empty results. Full ZIP downloaded, SHA256 verified, inspected for version 3.5.1/recovery/launcher code and checked for absent non-model project data.
+
+## Direct video editing and fast text speech in 3.6.0
+
+The subtitle target language selector enables translation when changed, while separate subtitle and voice buttons keep generation independent. Font/color/outline/background controls are visible under the player with three presets. Up to 20 logo rectangles can be drawn directly over the paused video, in source-pixel coordinates shared with FFmpeg; color fills update live, while delogo requires the real short proof. Finishing drawing restores video controls.
+
+Text speech defaults to Nano four steps, packed short sentences, zero automatic gaps and two workers only with sufficient CPU/RAM. Line-leading caption clocks and SRT ranges/indices are removed from narrated TXT, including inline ranges without losing their spoken words. Monetary values and numbers inside prose remain. Users can disable clock stripping; explicit SRT synchronization remains independent. No universal speed or 30× claim is made.
+
+Validation: 127 Linux tests passed, one native-only skip. Real Chromium generated timed-TXT Nano speech with clocks absent from spoken export and numeric words retained; selected two colored logo rectangles over the video, changed presets/font/color, and checked editor styling save and pointer release. Existing standalone voice, four export formats, minute editing and fixture-only translation checks passed. Native Windows regression and relocated offline smoke passed before publication. The complete release ZIP was downloaded and its SHA256, 3.6.0 assets, empty-speech fixes and absence of non-model user data checked.
