@@ -84,7 +84,7 @@ def verify_app():
     # Generate a 3–30 second reference through the actual bundled preset API.
     with TestClient(app.app) as client:
         conf = client.get('/api/config').json()
-        assert conf['version'] == '1.1.1' and conf['max_characters'] == 200000
+        assert conf['version'] == '1.2.0' and conf['max_characters'] == 200000
         assert conf['nano_ready'] and conf['nano_clone_ready'] and conf['models']['vieneu']
         assert client.get('/').status_code == 200
         for asset in ('app.js', 'style.css'):
@@ -106,13 +106,14 @@ def verify_app():
         assert registered['ready_engines']['vieneu_nano']
         assert registered['ready_engines']['vieneu']
         payload = {'text': 'Xin chào, đây là giọng nhân bản trong bản portable. Cảm ơn bạn đã lắng nghe câu chuyện.',
-                   'voice_id': reference['id'], 'language': 'vi', 'clone_engine': 'nano', 'nano_steps': 4,
+                   'voice_id': reference['id'], 'language': 'vi',
                    'nano_parallel': 2, 'nano_threads': 1, 'paragraph_pause': 0, 'format': 'wav'}
         response = client.post('/api/speech', json=payload)
         assert response.status_code == 202, response.text
         job = wait_job(client, response.json()['id'])
         assert job['voice_id'] == reference['id'] and job['speaker'] is None
         assert job['engine'] == 'vieneu_nano' and job['reused_chunks'] == 0
+        assert job['nano_steps'] == 4
         samples, rate = sf.read(DATA / 'audio' / (job['id'] + '.wav'))
         assert rate == 24000 and len(samples) > rate and np.max(np.abs(samples)) > .001
         for extension in ('wav', 'mp3', 'txt', 'srt'):
@@ -131,6 +132,25 @@ def verify_app():
         samples, rate = sf.read(DATA / 'audio' / (job['id'] + '.wav'))
         assert len(samples) > rate and np.max(np.abs(samples)) > .001
 
+    # Each bundled country voice must synthesize through the public API with
+    # external networking denied, using only the relocated Windows runtime.
+    from piper_catalog import DEMO_TEXTS
+    with TestClient(app.app) as client:
+        all_voices = client.get('/api/voices').json()['voices']
+        international = [v for v in all_voices if v['engine'] == 'piper']
+        assert len(international) == 16 and all(v['ready'] for v in international)
+        for voice in international:
+            language = voice['languages'][0]
+            response = client.post('/api/speech', json={'text': DEMO_TEXTS[language],
+                                   'voice_id': voice['id'], 'language': language})
+            assert response.status_code == 202, response.text
+            job = wait_job(client, response.json()['id'])
+            assert job['engine'] == 'piper' and job['voice_id'] == voice['id']
+            samples, rate = sf.read(DATA / 'audio' / (job['id'] + '.wav'))
+            assert rate == 24000 and len(samples) > rate // 2 and np.max(np.abs(samples)) > .001
+            assert client.get(f'/api/jobs/{job["id"]}/export.srt').status_code == 200
+            print('OFFLINE COUNTRY VOICE:', language, voice['id'], flush=True)
+
 
 def verify_launcher():
     import httpx
@@ -148,7 +168,7 @@ def verify_launcher():
                     for port in range(8770, 8790):
                         try:
                             probe = client.get(f'http://127.0.0.1:{port}/api/config')
-                            if probe.status_code == 200 and probe.json().get('version') == '1.1.1':
+                            if probe.status_code == 200 and probe.json().get('version') == '1.2.0':
                                 url = f'http://127.0.0.1:{port}'
                                 break
                         except httpx.RequestError:

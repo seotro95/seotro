@@ -1,0 +1,52 @@
+{
+  "job_id": "b66ad4e2fc3c44318c7a3cc0b6b58257",
+  "engine": "vieneu_nano",
+  "cloned_voice": true,
+  "reference": "generated technical test sample, not a human subject",
+  "text_characters": 80053,
+  "segments": 844,
+  "audio_seconds": 3895.546,
+  "synthesized_audio_seconds": 3895.546,
+  "wall_processing_seconds": 82.787,
+  "client_wall_seconds": 82.903,
+  "realtime_multiplier_end_to_end": 46.989,
+  "nano_parallel": 4,
+  "nano_threads": 1,
+  "nano_steps": 4,
+  "speed_report": {
+    "realtime_multiplier": 47.06,
+    "estimated_hour_seconds": 76.5,
+    "target_30x_met_on_sample": true,
+    "measurement_audio_seconds": 3895.55,
+    "measurement_elapsed_seconds": 82.787,
+    "hour_target_verified": true,
+    "sample_is_short": false,
+    "complete_text": true,
+    "estimate_only": false,
+    "scope": "current_machine",
+    "excludes_added_silence": true
+  },
+  "fresh_inference_every_chunk": true,
+  "all_script_exported_in_order": true,
+  "wav": "passed",
+  "txt": "passed",
+  "srt": "passed",
+  "cold_worker": true,
+  "resources": {
+    "cpu_budget": 4,
+    "available_memory_bytes": 29396848640,
+    "max_workers": 4,
+    "recommended_workers": 4,
+    "recommended_threads": 1,
+    "workers": 4,
+    "threads": 1
+  },
+  "version": "1.2.0",
+  "configuration": "Speech API defaults: clone_engine auto, Nano4, parallel auto, threads auto, natural1x, WAV, zero added pause",
+  "platform": "Linux AMD EPYC 9V45, 4 CPU quota, 32 GiB RAM, no NVIDIA",
+  "limitations": [
+    "Synthetic reference, not human voice fidelity evaluation",
+    "Windows full-hour performance not measured",
+    "Other country models have individual benchmark measurements"
+  ]
+}

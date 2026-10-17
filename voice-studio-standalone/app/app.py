@@ -30,6 +30,8 @@ from performance import speed_report
 from nano_resources import resource_policy, resolve_nano_settings
 from state_io import write_json_atomic, read_progress
 from language_catalog import LANGUAGES, CORE_LANGUAGES, QWEN_LANGUAGES, native_language
+from piper_catalog import presets as piper_presets
+from piper_voice import model_ready as piper_model_ready
 
 BASE = Path(__file__).resolve().parent
 DATA = Path(os.environ.get('VOICE_STUDIO_DATA_DIR', str(BASE / '.data'))).resolve()
@@ -48,9 +50,9 @@ PRESETS = [
     {'id': 'qw-unclefu', 'name': 'Uncle Fu', 'engine': 'qwen', 'speaker': 'Uncle_Fu', 'languages': ['en-US', 'en-GB', 'ja', 'ko', 'zh', 'fr', 'de', 'es', 'it', 'pt', 'ru'], 'description': 'Giọng nam trầm · tiếng Trung bản ngữ'},
     {'id': 'qw-dylan', 'name': 'Dylan', 'engine': 'qwen', 'speaker': 'Dylan', 'languages': ['en-US', 'en-GB', 'ja', 'ko', 'zh', 'fr', 'de', 'es', 'it', 'pt', 'ru'], 'description': 'Giọng nam · tiếng Trung Bắc Kinh'},
     {'id': 'qw-eric', 'name': 'Eric', 'engine': 'qwen', 'speaker': 'Eric', 'languages': ['en-US', 'en-GB', 'ja', 'ko', 'zh', 'fr', 'de', 'es', 'it', 'pt', 'ru'], 'description': 'Giọng nam · tiếng Trung Tứ Xuyên'},
-    {'id': 'nano-minhquan', 'name': 'Minh Quân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Minh Quân', 'languages': ['vi'], 'description': 'Nano 8 bước · nhanh hơn, giảm độ tự nhiên'},
-    {'id': 'nano-aihan', 'name': 'Ái Hân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Ái Hân', 'languages': ['vi'], 'description': 'Nano 8 bước · nhanh hơn, giảm độ tự nhiên'},
-]
+    {'id': 'nano-minhquan', 'name': 'Minh Quân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Minh Quân', 'languages': ['vi'], 'description': 'Nano 4 bước · ưu tiên tốc độ, giảm độ tự nhiên'},
+    {'id': 'nano-aihan', 'name': 'Ái Hân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Ái Hân', 'languages': ['vi'], 'description': 'Nano 4 bước · ưu tiên tốc độ, giảm độ tự nhiên'},
+] + piper_presets()
 
 
 @contextmanager
@@ -97,7 +99,7 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
 
 
-app = FastAPI(title='Voice Studio Riêng', version='1.1.1', lifespan=lifespan)
+app = FastAPI(title='Voice Studio Riêng', version='1.2.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 @app.exception_handler(RequestValidationError)
@@ -180,11 +182,15 @@ def _config_values():
         'mode': 'local',
         'edition': 'standalone-voice',
         'languages': LANGUAGES,
-        'ai_voice_languages': ['vi', 'en-US', 'en-GB'] if portable else list(CORE_LANGUAGES),
+        'ai_voice_languages': list(dict.fromkeys((['vi', 'en-US', 'en-GB'] if portable else list(CORE_LANGUAGES)) + [lang for voice in piper_presets() for lang in voice['languages']])),
         'ai_clone_languages': ['vi'] if portable else list(CORE_LANGUAGES),
         'portable': portable,
+        'piper_voices_ready': sum(piper_model_ready(DATA, voice['speaker']) for voice in piper_presets()),
         'max_characters': MAX_CHARACTERS,
         'max_audio_minutes': 180,
+        'default_clone_engine': 'auto',
+        'default_nano_steps': 4,
+        'default_paragraph_pause': 0,
         'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(),
         'int8_cpu': supports_int8(),
         'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')},
@@ -213,9 +219,19 @@ def voices():
             'qwen_clone': (DATA / 'models' / 'qwen_clone.ready').exists(),
         } if cloned else {}
         result.append({**voice, 'native_language': native_language(voice),
-                       'ready': voice.get('engine') == 'system' or (DATA / 'models' / f"{voice.get('engine', 'vieneu')}.ready").exists(),
+                       'default_engine': automatic_engine(voice, voice.get('languages', ['vi'])[0]),
+                       'ready': piper_model_ready(DATA, voice['speaker']) if voice.get('engine') == 'piper' else voice.get('engine') == 'system' or (DATA / 'models' / f"{voice.get('engine', 'vieneu')}.ready").exists(),
                        'ready_engines': ready_engines})
     return {'voices': result}
+
+
+def automatic_engine(voice, language):
+    """Prefer the prepared fast clone while retaining the user's reference."""
+    engine = voice.get('engine', 'vieneu' if language == 'vi' else 'qwen_clone')
+    if (voice.get('category') == 'cloned' and language == 'vi'
+            and (DATA / 'models' / 'vieneu_nano_clone.ready').exists()):
+        return 'vieneu_nano'
+    return engine
 
 
 @app.post('/api/voices/clone', status_code=201)
@@ -286,11 +302,11 @@ class Speech(BaseModel):
     skip_timestamps: bool = True
     nano_threads: int = Field(default=0, ge=0, le=8)
     nano_parallel: int = Field(default=0, ge=0, le=8)
-    nano_steps: int = Field(default=8, ge=4, le=16)
+    nano_steps: int = Field(default=4, ge=4, le=16)
     clone_engine: str = Field(default='auto', pattern='^(auto|standard|nano)$')
     max_minutes: int = Field(default=180, ge=1, le=180)
     delivery: str = 'natural'
-    paragraph_pause: float = Field(default=0.3, ge=0, le=3)
+    paragraph_pause: float = Field(default=0, ge=0, le=3)
     quality: str = Field(default='auto', pattern='^(auto|standard|fast)$')
     max_cue_tempo: float = Field(default=1.5, ge=1, le=2)
     cue_fit: str = Field(default='strict', pattern='^(strict|gap)$')
@@ -411,7 +427,7 @@ def queue_speech(body: Speech, *, benchmark=False):
     voice = next((v for v in PRESETS + installed_voices() + records('voices') if v['id'] == body.voice_id), None)
     if not voice or body.language not in voice['languages']:
         raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
-    engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
+    engine = automatic_engine(voice, body.language)
     cloned = voice.get('category') == 'cloned'
     if body.clone_engine == 'nano':
         if not cloned or body.language != 'vi':
@@ -420,7 +436,10 @@ def queue_speech(body: Speech, *, benchmark=False):
     elif cloned and body.clone_engine == 'standard':
         engine = 'vieneu' if body.language == 'vi' else 'qwen_clone'
     marker = 'vieneu_nano_clone' if cloned and engine == 'vieneu_nano' else engine
-    if engine != 'system' and not (DATA / 'models' / f'{marker}.ready').exists():
+    ready = piper_model_ready(DATA, voice['speaker']) if engine == 'piper' else engine == 'system' or (DATA / 'models' / f'{marker}.ready').exists()
+    if not ready:
+        if engine == 'piper':
+            raise HTTPException(503, 'Giọng quốc tế chưa sẵn sàng. Bản portable có sẵn mô hình; bản mã nguồn chạy TAI_GIONG_QUOC_TE_NHANH.bat.')
         if marker == 'vieneu_nano_clone':
             raise HTTPException(503, 'Chưa có mô hình nhân bản Nano. Chạy TAI_GIONG_NHAN_BAN_NHANH.bat rồi kiểm tra lại giọng.')
         raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Chạy lệnh tải mô hình trong hướng dẫn cài đặt.')

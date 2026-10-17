@@ -162,7 +162,7 @@ def main():
     action.add_argument('--install', action='store_true')
     action.add_argument('--check', action='store_true')
     action.add_argument('--start', action='store_true')
-    action.add_argument('--models', choices=['vieneu_nano', 'vieneu_nano_clone', 'vieneu', 'qwen', 'qwen_clone', 'international'])
+    action.add_argument('--models', choices=['piper', 'vieneu_nano', 'vieneu_nano_clone', 'vieneu', 'qwen', 'qwen_clone', 'international'])
     args = parser.parse_args()
     if args.install:
         install()

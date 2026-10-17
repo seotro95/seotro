@@ -29,3 +29,7 @@ SAMPLE_TEXTS = {
     'pt': 'Uma voz clara começa com um texto bem escrito. Antes de gravar uma história longa, verifique os nomes, os números e as transições. Uma amostra curta ajuda a escolher a voz e um ritmo confortável. O programa cria áudio real e mede o tempo de processamento neste computador. Todas as frases devem ser mantidas. O resultado descreve esta amostra e não garante a mesma velocidade para qualquer gravação longa.',
     'ru': 'Понятная речь начинается с хорошо подготовленного текста. Перед записью длинного рассказа проверьте имена, числа и переходы между мыслями. Короткий образец помогает выбрать голос и удобный темп. Программа создаёт настоящий звук и измеряет время обработки на этом компьютере. Все предложения должны сохраняться. Этот результат относится к образцу и не гарантирует такую же скорость для любой длинной записи.',
 }
+
+from piper_catalog import DEMO_TEXTS
+for language, text in DEMO_TEXTS.items():
+    SAMPLE_TEXTS.setdefault(language, ' '.join([text] * 4))

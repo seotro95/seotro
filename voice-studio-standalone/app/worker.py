@@ -33,6 +33,10 @@ def load_synthesizer(job):
     if job['engine'] == 'system':
         from system_voices import speak
         return lambda text, output: speak(text, job['speaker'], output)
+    if job['engine'] == 'piper':
+        from piper_voice import create_synthesizer
+        from nano_resources import cpu_budget
+        return create_synthesizer(DATA, job['speaker'], threads=min(4, max(1, cpu_budget())))
     if job['engine'] == 'vieneu_nano':
         from vieneu.v3nano import V3NanoVieNeuTTS
         steps = job.get('nano_steps', 8)

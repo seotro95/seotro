@@ -12,8 +12,12 @@ os.environ.setdefault('OMP_NUM_THREADS', '4')
 
 def main():
     parser = argparse.ArgumentParser(description='Download local Voice Studio models')
-    parser.add_argument('engine', choices=['vieneu', 'qwen', 'qwen_clone', 'vieneu_fast', 'vieneu_nano', 'vieneu_nano_clone', 'all'])
+    parser.add_argument('engine', choices=['piper', 'vieneu', 'qwen', 'qwen_clone', 'vieneu_fast', 'vieneu_nano', 'vieneu_nano_clone', 'all'])
     args = parser.parse_args()
+    if args.engine == 'piper':
+        from piper_voice import prepare_all
+        prepare_all(DATA)
+        return
     engines = ['vieneu', 'qwen', 'qwen_clone'] if args.engine == 'all' else [args.engine]
     (DATA / 'models').mkdir(parents=True, exist_ok=True)
     for engine in engines:

@@ -21,6 +21,7 @@ let polling = false;
 let pollTimer;
 let outputSignature = '';
 let connectionFailed = false;
+let defaultsApplied = false;
 const historyNodes = new Map();
 
 function node(tag, text, className) {
@@ -119,8 +120,17 @@ function modelInstruction(voice, engine = voice?.engine) {
 }
 
 function languageName(language) { return config?.languages?.[language] || language || 'Chưa rõ ngôn ngữ'; }
+function searchText(value) {
+  return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLocaleLowerCase('vi');
+}
+function genderName(voice) {
+  return {male: 'Nam', female: 'Nữ'}[voice?.gender] || '';
+}
+function voiceSearchText(voice) {
+  return searchText([voice.name, voice.country, voice.description, engineName(voice), genderName(voice), ...(voice.languages || []).flatMap((language) => [language, languageName(language)])].join(' '));
+}
 function engineName(voice) {
-  return {vieneu_nano: 'Nano', vieneu: 'VieNeu', qwen: 'Qwen', qwen_clone: 'Qwen · Nhân bản', system: 'Hệ thống Windows'}[voice?.engine] || voice?.engine || 'AI';
+  return {vieneu_nano: 'Nano', vieneu: 'VieNeu', piper: 'Piper · CPU nhanh', qwen: 'Qwen', qwen_clone: 'Qwen · Nhân bản', system: 'Hệ thống Windows'}[voice?.engine] || voice?.engine || 'AI';
 }
 
 function cloneEngine() {
@@ -129,8 +139,11 @@ function cloneEngine() {
 }
 
 function selectedEngine(voice) {
-  return voice?.category === 'cloned' && $('language').value === 'vi'
-    ? cloneEngine() === 'nano' ? 'vieneu_nano' : 'vieneu' : voice?.engine;
+  if (voice?.category !== 'cloned' || $('language').value !== 'vi') return voice?.engine;
+  if (cloneEngine() === 'nano') return 'vieneu_nano';
+  if (cloneEngine() === 'standard') return 'vieneu';
+  return ['vieneu_nano', 'vieneu'].includes(voice.default_engine) ? voice.default_engine
+    : cloneReadyEngines(voice).vieneu_nano ? 'vieneu_nano' : 'vieneu';
 }
 
 function selectedVoiceReady(voice) {
@@ -144,14 +157,19 @@ function selectedVoiceReady(voice) {
 function populateLanguages() {
   const previous = $('language').value;
   const available = new Set(config.ai_voice_languages || []);
-  for (const voice of voices) if (voice.engine === 'system') for (const language of voice.languages || []) available.add(language);
-  const options = Object.entries(config.languages || {}).filter(([key]) => available.has(key));
+  for (const voice of voices) if (libraryVoiceReady(voice)) for (const language of voice.languages || []) available.add(language);
+  const query = searchText($('language-search').value.trim());
+  const options = [...available].map((key) => [key, languageName(key)]).filter(([key, label]) => !query || searchText(`${key} ${label}`).includes(query));
   $('language').replaceChildren(...options.map(([key, label]) => {
     const option = node('option', label); option.value = key; return option;
   }));
-  if (available.has(previous)) $('language').value = previous;
-  else if (available.has('vi')) $('language').value = 'vi';
+  if (options.some(([key]) => key === previous)) $('language').value = previous;
+  else if (options.some(([key]) => key === 'vi')) $('language').value = 'vi';
+  if (!options.length) {
+    const option = node('option', 'Không tìm thấy quốc gia / ngôn ngữ'); option.value = ''; $('language').append(option);
+  }
   $('language').disabled = !options.length;
+  $('language-count').textContent = `${available.size} lựa chọn ngôn ngữ / quốc gia · ${voices.filter((voice) => voice.engine === 'piper' && voiceReady(voice)).length} giọng Piper có sẵn`;
   const cloneLanguage = $('clone-language').value;
   const cloneLanguages = config.ai_clone_languages || config.ai_voice_languages || [];
   $('clone-language').replaceChildren(...Object.entries(config.languages || {}).filter(([key]) => cloneLanguages.includes(key)).map(([key, label]) => {
@@ -161,6 +179,19 @@ function populateLanguages() {
   else if (cloneLanguages.includes('vi')) $('clone-language').value = 'vi';
   $('clone-language').disabled = !$('clone-language').options.length;
   $('clone-submit').disabled = !$('clone-language').options.length;
+}
+
+function populateLibraryFilters() {
+  const previous = $('library-language').value;
+  const languages = new Set(voices.flatMap((voice) => voice.languages || []));
+  const all = node('option', 'Tất cả quốc gia / ngôn ngữ'); all.value = 'all';
+  $('library-language').replaceChildren(all, ...[...languages].map((language) => {
+    const option = node('option', languageName(language)); option.value = language; return option;
+  }));
+  if (languages.has(previous)) $('library-language').value = previous;
+  const hasGender = voices.some((voice) => genderName(voice));
+  $('library-gender').hidden = !hasGender;
+  if (!hasGender) $('library-gender').value = 'all';
 }
 
 function populateVoices() {
@@ -173,7 +204,8 @@ function populateVoices() {
   }));
   if (choices.some((voice) => voice.id === previous)) $('voice').value = previous;
   else {
-    const preferred = choices.find((voice) => voice.engine === 'vieneu_nano' && voiceReady(voice)) || choices.find(voiceReady);
+    const preferredEngine = $('language').value === 'vi' ? 'vieneu_nano' : 'piper';
+    const preferred = choices.find((voice) => voice.engine === preferredEngine && voiceReady(voice)) || choices.find(voiceReady);
     if (preferred) $('voice').value = preferred.id;
   }
   if (!choices.length) {
@@ -191,7 +223,7 @@ function updateVoice() {
   const engineLabel = voice?.category === 'cloned' && $('language').value === 'vi' ? `${selectedEngine(voice) === 'vieneu_nano' ? 'Nano' : 'VieNeu'} · Nhân bản` : engineName(voice);
   $('voice-status-title').textContent = !voice ? 'Chưa có giọng phù hợp' : ready ? `${engineLabel} · Sẵn sàng sử dụng` : `${engineLabel} · Cần tải mô hình`;
   const nanoAlternative = !ready && voice?.category === 'cloned' && $('language').value === 'vi' && cloneReadyEngines(voice).vieneu_nano && selectedEngine(voice) !== 'vieneu_nano';
-  $('voice-status-detail').textContent = !voice ? 'Chọn ngôn ngữ khác hoặc thêm mẫu giọng cá nhân được hỗ trợ.' : ready ? (voice.description || 'Giọng đã có trên máy.') : nanoAlternative ? 'Nhân bản Nano đã sẵn sàng. Bấm Ưu tiên tốc độ hoặc chọn Nhân bản Nano để dùng nguyên mẫu giọng này.' : `Trong thư mục tool, chạy ${modelInstruction(voice, selectedEngine(voice))}, rồi bấm Kiểm tra lại ở Thư viện giọng.`;
+  $('voice-status-detail').textContent = !voice ? 'Chọn ngôn ngữ khác hoặc xóa từ khóa tìm kiếm.' : ready ? (voice.description || 'Giọng đã có trên máy.') : nanoAlternative ? 'Nhân bản Nano đã sẵn sàng. Bấm Ưu tiên tốc độ hoặc chọn Nhân bản Nano để dùng nguyên mẫu giọng này.' : config.portable || voice.engine === 'piper' ? 'Giọng này chưa sẵn sàng trong gói hiện tại. Chọn một giọng có sẵn hoặc bấm Kiểm tra lại trong Thư viện giọng.' : `Trong thư mục tool, chạy ${modelInstruction(voice, selectedEngine(voice))}, rồi bấm Kiểm tra lại ở Thư viện giọng.`;
   $('generate').disabled = !ready || submitting;
   $('generate-note').textContent = !voice ? 'Cần chọn giọng hỗ trợ ngôn ngữ lời đọc.' : !ready ? 'Tải mô hình trước khi tạo giọng. Mở Hướng dẫn để xem chi tiết.' : 'Tạo trên máy · Có thể dừng và tiếp tục trong Bản thu';
   updateAcceleration();
@@ -206,10 +238,8 @@ function accelerationSettings() {
 
 function speedPresetVoice() {
   const current = voices.find((voice) => voice.id === $('voice').value);
-  if ($('language').value !== 'vi' || !current || current.engine === 'system') return null;
-  if (current.category === 'cloned') return current;
-  return (current.engine === 'vieneu_nano' && voiceReady(current) ? current : null)
-    || voices.find((voice) => voice.engine === 'vieneu_nano' && voice.category !== 'cloned' && voiceReady(voice) && (voice.languages || []).includes('vi'));
+  if (!current) return null;
+  return selectedVoiceReady(current) || (current.category === 'cloned' && $('language').value === 'vi' && cloneReadyEngines(current).vieneu_nano) ? current : null;
 }
 
 function updateAcceleration() {
@@ -225,22 +255,24 @@ function updateAcceleration() {
   const settings = accelerationSettings();
   $('acceleration-note').textContent = !config ? 'Đang kiểm tra cấu hình xử lý…'
     : nano ? `Nano · ${settings.nano_parallel || config.acceleration?.recommended_workers || 1} đoạn song song · ${settings.nano_threads || config.acceleration?.recommended_threads || 2} luồng CPU / đoạn. Số đoạn thực tế được giới hạn theo CPU và RAM.`
+    : voice?.engine === 'piper' ? 'Piper chạy ngoại tuyến trên CPU, dùng giọng và phát âm theo quốc gia đã chọn. Không cần NVIDIA. Nút Ưu tiên tốc độ giữ nguyên giọng và ngôn ngữ.'
+    : voice?.engine === 'system' ? 'Giọng Windows dùng bộ đọc đã cài trên máy. Ưu tiên tốc độ giữ nguyên giọng và chọn nhịp đọc tự nhiên.'
     : voice?.category === 'cloned' && $('language').value === 'vi' ? 'Ưu tiên tốc độ dùng nhân bản Nano và giữ mẫu giọng của bạn. Cần tải mô hình nhân bản Nano trước khi tạo.'
-    : 'Ưu tiên tốc độ dùng Nano tiếng Việt. Giọng hệ thống và ngôn ngữ đang chọn được giữ nguyên.';
+    : 'Ưu tiên tốc độ giữ nguyên giọng và ngôn ngữ, dùng WAV và giảm xử lý bổ sung. Mô hình quốc tế Qwen có thể chậm trên CPU; chọn Piper có sẵn nếu ưu tiên tốc độ.';
 }
 
 function applySpeedPreset() {
   const voice = speedPresetVoice();
   if (!voice) return;
-  $('voice').value = voice.id;
-  if (voice.category === 'cloned') $('clone-engine').value = 'nano';
+  if (voice.category === 'cloned' && $('language').value === 'vi' && cloneReadyEngines(voice).vieneu_nano) $('clone-engine').value = 'nano';
   $('nano-steps').value = '4'; $('nano-parallel').value = 'auto'; $('nano-threads').value = 'auto';
-  $('paragraph-pause').value = '0'; $('delivery').value = 'natural'; $('quality').value = 'auto';
+  $('paragraph-pause').value = '0'; $('delivery').value = 'natural'; $('quality').value = ['qwen', 'qwen_clone'].includes(selectedEngine(voice)) ? 'fast' : 'auto';
   $('speed').value = '1'; $('format').value = 'wav';
   $('speed-value').textContent = '1,00×'; $('delivery-note').textContent = deliveryNotes.natural;
   updateVoice();
   const ready = selectedVoiceReady(voice);
-  notify(`Đã ${voice.category === 'cloned' ? 'giữ mẫu giọng' : 'chọn giọng'} ${voice.name}, Nano 4 bước, đọc tự nhiên và WAV. ${ready ? 'Ít bước có thể giảm độ tự nhiên; bấm Đo tốc độ thực để kiểm tra máy của bạn.' : `Chạy ${modelInstruction(voice, selectedEngine(voice))} trong thư mục tool, rồi Kiểm tra lại ở Thư viện giọng.`}`, !ready);
+  const nano = selectedEngine(voice) === 'vieneu_nano';
+  notify(`Đã giữ ${voice.category === 'cloned' ? 'mẫu giọng' : 'giọng'} ${voice.name} và ${languageName($('language').value)}; ${nano ? 'Nano 4 bước, ' : ''}đọc tự nhiên, không thêm khoảng nghỉ, xuất WAV. ${nano ? 'Ít bước có thể giảm độ tự nhiên. ' : ''}Bấm Đo tốc độ thực để kiểm tra trên máy của bạn.`, !ready);
 }
 
 function generationSettings(voice) {
@@ -439,10 +471,15 @@ async function exportScript(extension) {
 }
 
 function renderLibrary() {
-  const query = $('voice-search').value.trim().toLocaleLowerCase('vi');
+  const query = searchText($('voice-search').value.trim());
   const filter = $('library-filter').value;
-  const entries = voices.filter((voice) => (voice.name || '').toLocaleLowerCase('vi').includes(query))
+  const language = $('library-language').value;
+  const gender = $('library-gender').value;
+  const entries = voices.filter((voice) => !query || voiceSearchText(voice).includes(query))
+    .filter((voice) => language === 'all' || (voice.languages || []).includes(language))
+    .filter((voice) => gender === 'all' || voice.gender === gender)
     .filter((voice) => filter === 'all' || (filter === 'ready' && libraryVoiceReady(voice)) || (filter === 'cloned' && voice.category === 'cloned') || (filter === 'system' && voice.engine === 'system'));
+  $('library-count').textContent = `${entries.length} / ${voices.length} giọng · Tìm theo tên, quốc gia hoặc ngôn ngữ`;
   const library = $('voice-library'); library.replaceChildren();
   if (!entries.length) { library.append(node('div', 'Chưa có giọng phù hợp. Thử đổi bộ lọc hoặc thêm mẫu giọng bên dưới.', 'empty-state')); return; }
   for (const voice of entries) {
@@ -453,11 +490,12 @@ function renderLibrary() {
     heading.append(icon, title); card.append(heading, node('p', voice.description || 'Giọng đọc được cài trên máy.'));
     const tags = node('div', null, 'tags');
     tags.append(node('span', voice.category === 'cloned' ? 'GIỌNG CÁ NHÂN' : voice.engine === 'system' ? 'GIỌNG HỆ THỐNG' : 'GIỌNG CÓ SẴN', 'small-tag'));
+    if (genderName(voice)) tags.append(node('span', genderName(voice), 'small-tag'));
     for (const language of (voice.languages || []).slice(0, 2)) tags.append(node('span', languageName(language), 'small-tag'));
     if ((voice.languages || []).length > 2) tags.append(node('span', `+${voice.languages.length - 2} ngôn ngữ`, 'small-tag'));
     card.append(tags);
     const ready = libraryVoiceReady(voice);
-    const readinessLabel = voice.category === 'cloned' ? `${ready ? '●' : '○'} ${cloneReadinessLabel(voice)}` : ready ? '● Sẵn sàng sử dụng' : `○ Chưa tải · ${modelInstruction(voice)}`;
+    const readinessLabel = voice.category === 'cloned' ? `${ready ? '●' : '○'} ${cloneReadinessLabel(voice)}` : ready ? '● Sẵn sàng sử dụng' : voice.engine === 'piper' ? '○ Mô hình Piper chưa sẵn sàng' : `○ Chưa tải · ${modelInstruction(voice)}`;
     card.append(node('p', readinessLabel, `readiness ${ready ? 'ready' : 'missing'}`));
     if (voice.category === 'cloned') {
       const audio = node('audio'); audio.controls = true; audio.preload = 'none'; audio.src = `/api/voices/${encodeURIComponent(voice.id)}/sample`;
@@ -465,6 +503,7 @@ function renderLibrary() {
     }
     const controls = node('div', null, 'button-row');
     controls.append(makeButton('Chọn giọng →', async () => {
+      $('language-search').value = ''; populateLanguages();
       const language = (voice.languages || []).find((value) => [...$('language').options].some((option) => option.value === value));
       if (!language) throw new Error('Chưa có ngôn ngữ phù hợp cho giọng này.');
       $('language').value = language; populateVoices(); $('voice').value = voice.id; updateVoice();
@@ -474,6 +513,14 @@ function renderLibrary() {
       } else if (!selectedVoiceReady(voice)) {
         notify(`Giọng này cần mô hình đang chọn. Chạy ${modelInstruction(voice, selectedEngine(voice))} trong thư mục tool rồi kiểm tra lại.`, true);
       } else notify('');
+    }));
+    if (ready && voice.category !== 'cloned') controls.append(makeButton('Tạo mẫu nghe thử', async () => {
+      $('language-search').value = ''; populateLanguages();
+      const language = (voice.languages || []).find((value) => [...$('language').options].some((option) => option.value === value));
+      if (!language) throw new Error('Chưa có ngôn ngữ phù hợp cho giọng này.');
+      $('language').value = language; populateVoices(); $('voice').value = voice.id; updateVoice();
+      showView('create'); await benchmark();
+      $('output-heading').scrollIntoView({block: 'center', behavior: 'auto'});
     }));
     if (voice.category === 'cloned') controls.append(makeButton('Xóa mẫu', async () => {
       if (!window.confirm(`Xóa mẫu và hồ sơ giọng “${voice.name}” khỏi máy?`)) return;
@@ -558,7 +605,10 @@ function renderModelStatus() {
   const target = $('model-status'); target.replaceChildren();
   target.append(node('p', `${config.hardware} · ${config.cpu_cores} luồng CPU · ${config.available_ram_gb ?? '?'} GB RAM trống`));
   target.append(node('p', `FFmpeg: ${config.ffmpeg ? 'Đã cài' : 'Chưa tìm thấy · chạy lại CAI_DAT.bat'}`));
-  for (const [key, ready] of [['vieneu_nano', config.nano_ready], ...Object.entries(config.models || {})]) target.append(node('p', `${ready ? '●' : '○'} ${key}: ${ready ? 'Đã tải' : 'Chưa tải'}`));
+  const modelEntries = Object.entries(config.models || {}).filter(([key]) => !config.portable || !['qwen', 'qwen_clone'].includes(key));
+  for (const [key, ready] of [['vieneu_nano', config.nano_ready], ...modelEntries]) target.append(node('p', `${ready ? '●' : '○'} ${key}: ${ready ? 'Đã tải' : 'Chưa tải'}`));
+  const piperVoices = voices.filter((voice) => voice.engine === 'piper' && voiceReady(voice));
+  if (piperVoices.length) target.append(node('p', `● Piper: ${piperVoices.length} giọng có sẵn · ${new Set(piperVoices.flatMap((voice) => voice.languages || [])).size} lựa chọn ngôn ngữ / quốc gia · CPU ngoại tuyến.`));
   target.append(node('p', `${config.nano_clone_ready ? '●' : '○'} Nhân bản Nano: ${config.nano_clone_ready ? 'Đã tải' : 'Chưa tải · TAI_GIONG_NHAN_BAN_NHANH.bat'}`));
   if (config.acceleration) target.append(node('p', `Nano tự động: ${config.acceleration.recommended_workers || 1} đoạn cùng lúc · ${config.acceleration.recommended_threads || 2} luồng CPU mỗi đoạn.`));
   target.append(node('p', 'Giọng hệ thống Windows có thể dùng ngay khi đã được cài trong hệ điều hành.'));
@@ -567,7 +617,13 @@ function renderModelStatus() {
 async function refreshVoices() {
   const results = await Promise.all([api('/api/config'), api('/api/voices')]);
   config = results[0]; voices = results[1].voices || [];
-  populateLanguages(); populateVoices(); renderLibrary(); renderModelStatus();
+  if (!defaultsApplied) {
+    $('clone-engine').value = config.default_clone_engine || 'auto';
+    $('nano-steps').value = String(config.default_nano_steps || 4);
+    $('paragraph-pause').value = String(config.default_paragraph_pause ?? 0);
+    defaultsApplied = true;
+  }
+  populateLanguages(); populateVoices(); populateLibraryFilters(); renderLibrary(); renderModelStatus();
   $('version').textContent = config.version ? `· ${config.version}` : '';
   setConnection(true);
 }
@@ -606,6 +662,7 @@ async function poll() {
 
 for (const button of document.querySelectorAll('[data-view]')) button.addEventListener('click', () => showView(button.dataset.view));
 $('language').addEventListener('change', populateVoices);
+$('language-search').addEventListener('input', () => { populateLanguages(); populateVoices(); });
 $('voice').addEventListener('change', updateVoice);
 $('clone-engine').addEventListener('change', updateVoice);
 $('script').addEventListener('input', updateCharacterCount);
@@ -626,6 +683,8 @@ for (const extension of ['txt', 'srt']) $(`export-${extension}`).addEventListene
 });
 $('voice-search').addEventListener('input', renderLibrary);
 $('library-filter').addEventListener('change', renderLibrary);
+$('library-language').addEventListener('change', renderLibrary);
+$('library-gender').addEventListener('change', renderLibrary);
 $('refresh-voices').addEventListener('click', async () => {
   $('refresh-voices').disabled = true;
   try { await refreshVoices(); notify('Đã cập nhật giọng và tình trạng mô hình.'); } catch (error) { notify(error.message, true); }
@@ -651,14 +710,13 @@ async function init() {
       const steps = document.querySelector('.help-steps');
       steps.replaceChildren();
       for (const message of [
-        'Giải nén toàn bộ ZIP, mở MO_TOOL.bat. Python, FFmpeg và các mô hình tiếng Việt đã có sẵn; không cần cài đặt hoặc tải thêm.',
-        'Thêm hoặc chọn mẫu giọng cá nhân tiếng Việt, rồi bấm Ưu tiên tốc độ để dùng nhân bản Nano 4 bước. Nghe thử để kiểm tra độ giống giọng.',
+        'Giải nén toàn bộ ZIP, mở MO_TOOL.bat. Python, FFmpeg, mô hình tiếng Việt và các giọng Piper quốc tế trong thư viện đã có sẵn; không cần cài đặt hoặc tải thêm.',
+        'Chọn quốc gia / ngôn ngữ rồi chọn giọng sẵn sàng. Với mẫu giọng cá nhân tiếng Việt, chế độ Tự động ưu tiên Nano 4 bước khi đã sẵn sàng; nghe thử để kiểm tra độ giống giọng.',
         'Nhập tối đa 200.000 ký tự hoặc TXT/SRT, tạo giọng rồi tải WAV/MP3/TXT/SRT. Giữ cửa sổ tool mở khi sử dụng.',
-        'Sao lưu app/.data trước khi cập nhật hoặc xóa tool. Gói Portable này chuẩn bị sẵn giọng Việt/Anh tiêu chuẩn và nhân bản tiếng Việt trên CPU.'
+        'Sao lưu app/.data trước khi cập nhật hoặc xóa tool. Giọng có sẵn đa ngôn ngữ và nhân bản tiếng Việt là các chức năng riêng; công cụ không tự dịch văn bản.'
       ]) steps.append(node('li', message));
-      for (const code of document.querySelectorAll('#help-dialog code')) {
-        if ((code.textContent || '').startsWith('TAI_GIONG_')) code.parentElement.textContent = 'Mô hình nhân bản Nano đã có sẵn trong bản Portable. Chọn mẫu giọng tiếng Việt rồi bấm Ưu tiên tốc độ. Nano 4 bước có thể giảm độ tự nhiên; cần nghe thử.';
-      }
+      $('help-speed').textContent = 'Ưu tiên tốc độ: giữ nguyên giọng và ngôn ngữ đã chọn, dùng WAV, đọc tự nhiên và không thêm khoảng nghỉ. Giọng nhân bản tiếng Việt dùng Nano 4 bước khi mô hình đã sẵn sàng. Giọng Piper quốc tế chạy nhanh trên CPU; không cần NVIDIA. Nano 4 bước có thể giảm độ tự nhiên; cần nghe thử.';
+      $('privacy-note').textContent = 'Nội dung và bản thu được lưu trên máy. Các giọng có sẵn trong gói Portable hoạt động ngoại tuyến.';
     }
     if (history[0]) setOutput(history[0]);
     if (!voices.some(libraryVoiceReady)) notify('Phòng thu đã mở. Chưa có giọng sẵn sàng; xem Hướng dẫn để tải mô hình trước khi tạo âm thanh.');

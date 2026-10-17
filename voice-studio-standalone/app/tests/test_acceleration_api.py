@@ -67,13 +67,65 @@ def test_benchmark_uses_new_text_with_selected_reference_and_same_queue(studio):
     assert client.post('/api/benchmark', json={**payload, 'text': 'Do not replace editor'}).status_code == 422
 
 
-def test_existing_clone_default_stays_standard(studio):
+def test_auto_clone_falls_back_to_standard_when_nano_clone_is_not_prepared(studio):
     client, data, ident = studio
     (data / 'models' / 'vieneu.ready').touch()
+    # A ready preset is not proof that reference cloning works on this machine.
+    (data / 'models' / 'vieneu_nano.ready').touch()
     with patch.object(app.executor, 'submit'):
         response = client.post('/api/speech', json={'text': 'Lời đọc.', 'voice_id': ident})
     assert response.status_code == 202
     assert response.json()['engine'] == 'vieneu'
+
+
+def test_auto_clone_defaults_to_prepared_nano_without_changing_reference_or_playback(studio):
+    client, data, ident = studio
+    (data / 'models' / 'vieneu_nano_clone.ready').touch()
+    text = 'Tạo giọng từ đúng bản thu của tôi, ở tốc độ đọc tự nhiên.'
+    with patch.object(app.executor, 'submit'):
+        response = client.post('/api/speech', json={'text': text, 'voice_id': ident})
+    assert response.status_code == 202, response.text
+    job = response.json()
+    assert (job['engine'], job['voice_id'], job['speaker']) == ('vieneu_nano', ident, None)
+    assert job['nano_steps'] == 4
+    assert job['nano_requested_parallel'] == job['nano_requested_threads'] == 0
+    assert job['speed'] == 1 and job['text'] == text
+    assert job['paragraph_pause'] == 0 and job['segment_plan'] == 'nano-packed-v1'
+    config = client.get('/api/config').json()
+    assert config['default_clone_engine'] == 'auto' and config['default_nano_steps'] == 4
+    entry = next(v for v in client.get('/api/voices').json()['voices'] if v['id'] == ident)
+    assert entry['default_engine'] == job['engine']
+
+
+def test_explicit_clone_quality_and_pause_choices_are_retained(studio):
+    client, data, ident = studio
+    for model in ('vieneu', 'vieneu_nano_clone'):
+        (data / 'models' / f'{model}.ready').touch()
+    payload = {'text': 'Lời kể tự nhiên.', 'voice_id': ident, 'clone_engine': 'standard',
+               'nano_steps': 16, 'paragraph_pause': .6}
+    with patch.object(app.executor, 'submit'):
+        standard = client.post('/api/speech', json=payload)
+        nano = client.post('/api/speech', json={**payload, 'clone_engine': 'nano'})
+    assert standard.status_code == nano.status_code == 202
+    assert standard.json()['engine'] == 'vieneu'
+    assert nano.json()['engine'] == 'vieneu_nano' and nano.json()['nano_steps'] == 16
+    assert nano.json()['paragraph_pause'] == .6 and nano.json()['segment_plan'] == 'classic-v1'
+
+
+def test_auto_fast_clone_is_limited_to_vietnamese_and_does_not_replace_presets(studio):
+    client, data, ident = studio
+    for model in ('vieneu', 'vieneu_nano_clone', 'qwen_clone'):
+        (data / 'models' / f'{model}.ready').touch()
+    other = 'b' * 32
+    app.write_json(data / 'voices' / f'{other}.json', {
+        'id': other, 'name': 'English reference', 'languages': ['en-US'], 'category': 'cloned',
+    })
+    with patch.object(app.executor, 'submit'):
+        english = client.post('/api/speech', json={'text': 'Hello.', 'voice_id': other, 'language': 'en-US'})
+        preset = client.post('/api/speech', json={'text': 'Xin chào.', 'voice_id': 'vi-maianh'})
+    assert english.status_code == preset.status_code == 202
+    assert (english.json()['engine'], english.json()['voice_id']) == ('qwen_clone', other)
+    assert (preset.json()['engine'], preset.json()['voice_id']) == ('vieneu', 'vi-maianh')
 
 
 def test_short_samples_and_partial_output_cannot_verify_an_hour():

@@ -55,10 +55,10 @@ jobs:
       - name: Upload verified ZIP
         uses: actions/upload-artifact@v4
         with:
-          name: Voice-Studio-Rieng-1.1.1-Portable-Windows-x64
+          name: Voice-Studio-Rieng-1.2.0-Portable-Windows-x64
           path: |
-            ${{ runner.temp }}/portable/Voice-Studio-Rieng-1.1.1-Portable-Windows-x64.zip
-            ${{ runner.temp }}/portable/Voice-Studio-Rieng-1.1.1-Portable-Windows-x64.zip.sha256
+            ${{ runner.temp }}/portable/Voice-Studio-Rieng-1.2.0-Portable-Windows-x64.zip
+            ${{ runner.temp }}/portable/Voice-Studio-Rieng-1.2.0-Portable-Windows-x64.zip.sha256
           compression-level: 0
           retention-days: 14
       - name: Publish tested portable download
@@ -68,13 +68,13 @@ jobs:
         run: |
           $tag = "voice-standalone-portable-${{ github.run_id }}"
           @"
-          Voice Studio Rieng Portable 1.1.1 - Windows 10/11 x64.
+          Voice Studio Rieng Portable 1.2.0 - Windows 10/11 x64.
 
-          Extract ALL files and open MO_TOOL.bat. No Python, FFmpeg, dependency installation or Vietnamese model download is required.
-          Includes Windows Python 3.12, FFmpeg, Nano Vietnamese presets and cloning, and Turbo standard Vietnamese voices/cloning.
+          Extract ALL files and open MO_TOOL.bat. No Python, FFmpeg, dependency installation or model download is required.
+          Includes Windows Python 3.12, FFmpeg, Nano Vietnamese presets and cloning, Turbo Vietnamese voices/cloning, and 16 Piper country voices.
           The package passed native Windows relocated-interpreter, offline real synthesis, cloning, export and launcher checks before publication.
-          International Qwen models are not bundled. Speed and clone fidelity depend on hardware, settings and reference audio.
+          Piper international preset voices run offline on CPU. Vietnamese clones default to Nano 4 steps. International Qwen cloning models are not bundled. Speed and clone fidelity depend on hardware, settings and reference audio.
           Source commit: ${{ github.sha }}
           "@ | Set-Content -Encoding utf8 "${{ runner.temp }}/portable-release-notes.txt"
-          gh release create $tag "${{ runner.temp }}/portable/Voice-Studio-Rieng-1.1.1-Portable-Windows-x64.zip" "${{ runner.temp }}/portable/Voice-Studio-Rieng-1.1.1-Portable-Windows-x64.zip.sha256" --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Voice Studio Rieng Portable 1.1.1 - Extract and run" --notes-file "${{ runner.temp }}/portable-release-notes.txt" --latest=false
+          gh release create $tag "${{ runner.temp }}/portable/Voice-Studio-Rieng-1.2.0-Portable-Windows-x64.zip" "${{ runner.temp }}/portable/Voice-Studio-Rieng-1.2.0-Portable-Windows-x64.zip.sha256" --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Voice Studio Rieng Portable 1.2.0 - Extract and run" --notes-file "${{ runner.temp }}/portable-release-notes.txt" --latest=false
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

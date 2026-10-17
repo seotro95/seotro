@@ -14,7 +14,7 @@ import urllib.request
 import zipfile
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.1.1'
+VERSION = '1.2.0'
 ARCHIVE_NAME = f'Voice-Studio-Rieng-{VERSION}-Portable-Windows-x64.zip'
 FFMPEG_BASE = 'https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/'
 FFMPEG_ASSET = 'ffmpeg-n8.1-latest-win64-gpl-8.1.zip'
@@ -100,13 +100,16 @@ def write_launchers(root):
         if args:
             content = content.replace('exit /b %VOICE_EXIT%', 'pause\nexit /b %VOICE_EXIT%')
         (root / name).write_bytes(content.replace('\n', '\r\n').encode('ascii'))
-    notices = '''VOICE STUDIO RIENG PORTABLE 1.1.1 - WINDOWS 10/11 X64
+    notices = '''VOICE STUDIO RIENG PORTABLE 1.2.0 - WINDOWS 10/11 X64
 
 Giai nen TOAN BO ZIP vao thu muc duoc phep ghi, sau do mo MO_TOOL.bat.
-Khong can cai Python, FFmpeg, thu vien, API key hoac tai mo hinh tieng Viet.
+Khong can cai Python, FFmpeg, thu vien, API key hoac tai mo hinh.
 Giong Viet Nano, nhan ban Nano va Turbo tieu chuan da duoc kiem tra offline.
+Kem 16 giong quoc te Piper theo quoc gia, chay tren CPU va khong can Internet.
+Loc ngon ngu/quoc gia va chon giong co san de doc van ban dung ngon ngu.
 
-De nhan ban nhanh: them/chon mau giong cua ban, bam Uu tien toc do.
+Nhan ban tieng Viet tu dong dung Nano 4 buoc; co the chon Tieu chuan/8/16 buoc.
+Them/chon mau giong cua ban, bam Uu tien toc do de ap dung cau hinh nhanh.
 Giu cua so tool mo khi dung. Ctrl+C de tat. KIEM_TRA.bat xem trang thai.
 
 Du lieu, mau giong va ban thu duoc luu trong app/.data.
@@ -114,7 +117,7 @@ Sao luu thu muc nay truoc khi cap nhat/xoa tool.
 Goi moi khong chua giong ca nhan, lich su hay khoa API cua nguoi tao.
 Chi nhan ban mau cua ban hoac duoc chu giong cho phep.
 
-Goi nay chuan bi day du quy trinh tao va nhan ban TIENG VIET tren CPU.
+Nhan ban trong goi ho tro TIENG VIET; Piper quoc te la giong co san.
 Qwen quoc te khong nam trong goi. Toc do/chuan giong tuy CPU, RAM va mau.
 Nano 4 buoc co the giam do tu nhien/do giong giong; nghe thu truoc khi dung.
 Khong can Internet de tao voice voi cac mo hinh da dong goi.
@@ -144,10 +147,37 @@ def retain_model_notices(data, destination):
     if not license_files:
         raise RuntimeError('Missing installed VieNeu package license')
     shutil.copy2(package.locate_file(license_files[0]), destination / 'VIENEU-APACHE-2.0-LICENSE.txt')
+    # Keep corresponding source beside the GPL Piper binary, including the
+    # exact eSpeak NG revision used by its published wheel build.
+    sys.path.insert(0, str(SOURCE / 'app'))
+    from piper_catalog import PIPER_MODELS, PIPER_SOURCE_ARCHIVES
+    source_archives = [(a['name'], a['url'], a['sha256']) for a in PIPER_SOURCE_ARCHIVES]
+    sources = destination / 'PIPER-SOURCES'
+    sources.mkdir()
+    for name, url, checksum in source_archives:
+        target = sources / name
+        with urllib.request.urlopen(url, timeout=90) as response, target.open('wb') as output:
+            shutil.copyfileobj(response, output)
+        if digest(target) != checksum:
+            raise RuntimeError('Piper corresponding source checksum failed: ' + name)
+    (sources / 'README.txt').write_text(
+        'Corresponding source for bundled piper-tts 1.8.0 and embedded eSpeak NG.\n'
+        'Extract piper_tts-1.8.0.tar.gz; see CMakeLists.txt, setup.py and README.md.\n'
+        'CMake uses eSpeak NG revision 724808c, provided in the second archive.\n'
+        'Piper/eSpeak NG are GPL-3.0 licensed; COPYING is included with Piper.\n'
+        'These upstream sources are unmodified. See BUILD-DEPENDENCIES.txt for Python dependencies.\n'
+        + '\n'.join(url + '\nSHA256 ' + checksum for _, url, checksum in source_archives), encoding='utf-8')
+    piper_package = distribution('piper-tts')
+    piper_license = next(f for f in piper_package.files if str(f).endswith('dist-info/licenses/COPYING'))
+    shutil.copy2(piper_package.locate_file(piper_license), destination / 'PIPER-GPL-3.0-COPYING.txt')
+    for key in PIPER_MODELS:
+        shutil.copy2(data / 'models/piper' / key / 'MODEL_CARD', destination / (key + '-MODEL_CARD.txt'))
     (destination / 'MODEL-NOTICES.txt').write_text(
         'Model licensing and attribution are documented in the included upstream model cards.\n'
         'VieNeu v3 Nano/Turbo: Apache-2.0 (see cards).\n'
         'MOSS Audio Tokenizer Nano ONNX: see its included upstream README/model license.\n'
+        'Piper runtime/eSpeak NG: GPL-3.0, corresponding sources in PIPER-SOURCES.\n'
+        'Piper voice models: individual licenses/attribution in the 16 included MODEL_CARD files.\n'
         'No personal voice samples are distributed.\n', encoding='utf-8')
 
 
@@ -197,7 +227,7 @@ def main():
                HF_HUB_DISABLE_XET='1', PATH=str(root / 'tools/ffmpeg/bin') + os.pathsep + os.environ['PATH'])
     env.pop('HF_HUB_OFFLINE', None)
     env.pop('TRANSFORMERS_OFFLINE', None)
-    for engine in ('vieneu_nano_clone', 'vieneu'):
+    for engine in ('vieneu_nano_clone', 'vieneu', 'piper'):
         run([sys.executable, app / 'prepare_models.py', engine], cwd=app, env=env)
     retain_model_notices(data, root / 'MODEL-LICENSES')
     materialize_cache(data / 'models/cache/hub')
@@ -206,7 +236,7 @@ def main():
     freeze = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'], text=True)
     (root / 'BUILD-DEPENDENCIES.txt').write_text(freeze, encoding='utf-8')
     info = {'version': VERSION, 'source_commit': os.environ.get('GITHUB_SHA'), 'python': sys.version,
-            'target': 'Windows 10/11 x64', 'bundled_models': ['vieneu_nano', 'vieneu_nano_clone', 'vieneu'],
+            'target': 'Windows 10/11 x64', 'bundled_models': ['vieneu_nano', 'vieneu_nano_clone', 'vieneu', 'piper'],
             'native_windows_offline_validation': False, 'qwen_bundled': False}
     (root / 'BUILD.json').write_text(json.dumps(info, indent=2), encoding='utf-8')
     # Move the assembled directory before testing to exercise interpreter relocation.

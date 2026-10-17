@@ -1,3 +1,16 @@
+# Kiểm tra bản 1.2 · Mặc định ưu tiên tốc độ
+
+Đo lại bằng API với giọng nhân bản tiếng Việt, **không truyền `clone_engine` hoặc `nano_steps`**: mặc định tự chọn Nano 4 bước, 4 tiến trình × 1 luồng. Máy thử Linux AMD EPYC, hạn mức 4 lõi CPU / 32 GiB RAM, không NVIDIA.
+
+- 80.053 ký tự / 844 đoạn, giữ đủ nội dung và đúng thứ tự.
+- **64 phút 55,5 giây WAV trong 82,9 giây** đầu cuối, gồm nạp mô hình/mã hóa mẫu từ worker lạnh, khoảng 47× thời gian thực.
+- Không dùng lại đoạn WAV và không chèn khoảng lặng để tăng số đo. WAV/TXT/SRT đã kiểm tra.
+- Mẫu giọng là âm thanh tổng hợp kỹ thuật; phép đo không đánh giá độ giống người thật hoặc phát âm từng từ. Đây là kết quả trên máy thử Linux, không cam kết 30× trên mọi CPU Windows, mọi ngôn ngữ hoặc mọi mô hình.
+
+Dữ liệu đầy đủ: [BENCHMARK_1_2_RESULT.json](BENCHMARK_1_2_RESULT.json). Giọng quốc tế Piper có nút Đo tốc độ thực theo đúng quốc gia. Số đo ngắn chỉ ước tính tốc độ bản dài; tool chỉ xác nhận mục tiêu một giờ khi thực sự tạo đủ ít nhất một giờ âm thanh trong 120 giây.
+
+---
+
 # Đo hiệu năng nhân bản tiếng Việt · 1.1.0
 
 ## Kết quả trọn tác vụ

@@ -1,3 +1,17 @@
+# Bản Portable 1.2 · Mở ngay sau khi giải nén
+
+Giải nén toàn bộ ZIP, mở `MO_TOOL.bat`. Không cần cài Python, FFmpeg, thư viện hay tải mô hình.
+
+Thêm 16 giọng quốc tế theo quốc gia chạy offline trên CPU, cùng Nano/Turbo tiếng Việt. Tìm tên quốc gia/ngôn ngữ, chọn giọng và nghe thử. Nhân bản tiếng Việt tự ưu tiên Nano 4 bước; chuyển 8/16 bước hoặc Tiêu chuẩn nếu cần chất lượng cao hơn. Nano 4 bước có thể giảm độ tự nhiên và độ giống mẫu.
+
+Giới hạn 200.000 ký tự; nhập TXT/SRT, xuất WAV/MP3/TXT/SRT. **Đo tốc độ thực** kiểm tra trên chính máy đang dùng. Giọng quốc tế Piper là giọng có sẵn, không nhân bản mẫu cá nhân. Qwen quốc tế là thành phần tùy chọn của bản mã nguồn, không nằm trong Portable.
+
+Khi cập nhật, tắt tool, sao lưu `app/.data`; giải nén bản mới sang thư mục mới. Chuyển các thư mục con `voices`, `jobs`, `audio`, `parts` nếu muốn giữ mẫu và lịch sử; dùng các mô hình đi kèm bản mới.
+
+Phần dưới dành cho gói mã nguồn/bộ cài cũ, không cần thực hiện khi dùng Portable.
+
+---
+
 # Voice Studio Riêng 1.1 · Windows 10/11 x64
 
 Công cụ tạo giọng từ văn bản, tách riêng khỏi video và dịch phụ đề. Mở giao diện bằng trình duyệt trên chính máy của bạn; giữ cửa sổ lệnh chạy nền khi sử dụng.

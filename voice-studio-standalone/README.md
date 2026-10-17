@@ -1,16 +1,15 @@
-# Voice Studio Riêng 1.1 · Nhân bản tiếng Việt trên CPU
+# Voice Studio Riêng 1.2 · Đa quốc gia, ưu tiên tốc độ trên CPU
 
-Windows 10/11 x64, Python 3.12. Gói mã nguồn kèm bộ cài, tải mô hình ở lần đầu.
+Bản Portable Windows 10/11 x64 đóng gói sẵn Python, FFmpeg và các mô hình. Giải nén toàn bộ ZIP rồi mở `MO_TOOL.bat`. Liên kết bản đã kiểm tra nằm trong [trang tải](../downloads/voice-studio/README.md).
 
-Nếu mới dùng: giải nén toàn bộ ZIP rồi chạy `CAI_DAT.bat`.
+- Nhân bản tiếng Việt mặc định Nano 4 bước, tự chọn số đoạn xử lý song song theo CPU/RAM, giữ mẫu giọng đã chọn. Có thể đổi sang 8/16 bước hoặc Tiêu chuẩn để nghe và so sánh chất lượng.
+- Thêm 16 giọng Piper theo quốc gia: Mỹ, Anh, Pháp, Đức, Tây Ban Nha, Ý, Brazil, Nga, Hà Lan, Bỉ, Ba Lan, Thụy Điển, Ukraine, Séc, Đan Mạch và Romania. Các giọng này chạy offline trên CPU và có sẵn trong Portable.
+- Tìm ngôn ngữ/quốc gia, lọc giọng; tạo lời đọc, kể chuyện, bản tin, review từ kịch bản của bạn. Piper là giọng có sẵn; nhân bản trong Portable hỗ trợ tiếng Việt.
+- Nhập tối đa **200.000 ký tự**, TXT/SRT; xuất WAV/MP3/TXT/SRT; dừng/tiếp tục, lưu lịch sử và ghép các đoạn thành bản thu hoàn chỉnh.
+- **Ưu tiên tốc độ** giữ giọng và ngôn ngữ quốc tế đã chọn. **Đo tốc độ thực** dùng đoạn mẫu đúng ngôn ngữ, không thay nội dung đang soạn.
 
-**Giọng nhân bản nhanh:**
+Nano 4 bước có thể giảm độ tự nhiên hoặc độ giống mẫu; hãy nghe thử. Tốc độ phụ thuộc máy và mô hình. Kết quả đo bản 1.2 trên Linux 4 lõi: 64 phút 55,5 giây WAV nhân bản trong 82,9 giây; chưa phải kết quả trên máy Windows của bạn. Xem [HIEU_NANG.md](HIEU_NANG.md).
 
-1. Chạy `TAI_GIONG_NHAN_BAN_NHANH.bat` một lần.
-2. Chạy `MO_TOOL.bat`, chọn mẫu giọng cá nhân tiếng Việt.
-3. Bấm **Ưu tiên tốc độ**, rồi **Tạo giọng nói**. Mẫu giọng đang chọn được giữ nguyên.
-4. Dùng **Đo tốc độ thực** để đo trên máy của bạn; chọn 8/16 bước hoặc nhân bản tiêu chuẩn nếu cần chất lượng cao hơn.
+Khi cập nhật: tắt tool, sao lưu `app/.data`, giải nén bản mới sang thư mục mới. Chuyển các thư mục con `voices`, `jobs`, `audio`, `parts` từ bản cũ vào `app/.data` mới nếu cần giữ mẫu/lịch sử; giữ các mô hình đi kèm bản mới.
 
-Máy thử 4 lõi CPU / 32 GiB RAM tạo **64 phút 56,6 giây WAV trong 80,5 giây**, tổng tạo WAV + xuất MP3 **92,1 giây**. Đây là kết quả với Nano 4 bước trên máy thử Linux, không phải cam kết trên mọi máy Windows. Chưa đánh giá độ giống người nói thật hoặc phát âm từng từ.
-
-Cập nhật từ bản cũ: tắt tool và sao lưu `app/.data`; chép tệp mới vào thư mục tool, giữ `.venv` và `app/.data`, rồi chạy bộ tải nhân bản nhanh. Xem [DOC_TRUOC.md](DOC_TRUOC.md) để biết hướng dẫn đầy đủ và [HIEU_NANG.md](HIEU_NANG.md) để biết cách đo.
+Nếu chạy **mã nguồn** thay vì Portable: cài Python 3.12 x64, chạy `CAI_DAT.bat`, `TAI_GIONG_NHAN_BAN_NHANH.bat` và `TAI_GIONG_QUOC_TE_NHANH.bat` trước khi mở tool. Qwen quốc tế/nhân bản quốc tế là thành phần tùy chọn riêng, không kèm trong Portable CPU.
