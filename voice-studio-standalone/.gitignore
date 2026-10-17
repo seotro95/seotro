@@ -1,0 +1,6 @@
+.venv/
+.cache/
+app/.data/
+__pycache__/
+.pytest_cache/
+tools/ffmpeg/

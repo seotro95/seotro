@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#152923">
+  <title>Voice Studio Riêng · Văn bản thành giọng nói</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Đến nội dung</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="Voice Studio Riêng, trang chủ"><span class="brand-mark" aria-hidden="true">v<span>·</span></span><span>Voice Studio <strong>Riêng</strong><small>PHÒNG THU CỦA BẠN</small></span></a>
+      <nav aria-label="Chức năng chính" class="tabs">
+        <button type="button" class="tab active" data-view="create" aria-current="page">Tạo giọng</button>
+        <button type="button" class="tab" data-view="voices">Thư viện giọng</button>
+        <button type="button" class="tab" data-view="history">Bản thu <span id="history-count" class="tab-count">0</span></button>
+      </nav>
+      <button type="button" id="help-open" class="help-button">Hướng dẫn <span aria-hidden="true">↗</span></button>
+    </div>
+  </header>
+  <main id="main" class="main-shell">
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+    <div id="connection" class="connection" role="status">Đang kết nối phòng thu…</div>
+    <section id="view-create" class="view" aria-labelledby="create-heading">
+      <div class="page-heading"><div><span class="eyebrow">TỪ CÂU CHỮ ĐẾN ÂM THANH</span><h1 id="create-heading">Để câu chuyện cất tiếng.</h1><p>Nhập lời đọc, chọn giọng và tạo bản thu ngay trên máy của bạn.</p></div><span class="capacity-pill">200.000 ký tự / bản thu</span></div>
+      <div class="studio-grid">
+        <section class="card editor-card" aria-labelledby="editor-title">
+          <div class="card-heading"><div><span class="step-number">01</span><h2 id="editor-title">Nội dung lời đọc</h2></div><span id="char-count" class="char-count">0 / 200.000</span></div>
+          <div class="editor-toolbar"><div class="toolbar-group"><label class="sr-only" for="script-format">Định dạng văn bản</label><select id="script-format"><option value="txt">Văn bản TXT</option><option value="srt">Phụ đề SRT</option></select><button type="button" id="import-script" class="text-button">↑ Nhập TXT / SRT</button><input id="script-file" type="file" accept=".txt,.srt,text/plain,application/x-subrip" hidden></div><div class="toolbar-group"><button type="button" id="export-txt" class="text-button">↓ TXT</button><button type="button" id="export-srt" class="text-button">↓ SRT</button></div></div>
+          <label class="sr-only" for="script">Nội dung cần chuyển thành giọng nói, tối đa 200.000 ký tự</label>
+          <textarea id="script" maxlength="200000" placeholder="Viết hoặc dán nội dung của bạn tại đây…&#10;&#10;Một lời giới thiệu, câu chuyện, bản tin hay kịch bản review phim. Hãy dùng dấu câu và xuống đoạn để lời đọc rõ ràng hơn." spellcheck="false"></textarea>
+          <div class="editor-footer"><label class="check-label"><input id="skip-timestamps" type="checkbox" checked> Bỏ mốc thời gian khi đọc TXT</label><span id="format-note">TXT · Văn bản thuần</span></div>
+          <p class="editor-tip">Mẹo: dùng <code>[pause=1]</code> để nghỉ 1 giây, <code>**từ cần nhấn**</code> để điều chỉnh nhịp nhấn. Hiệu quả phụ thuộc giọng và mô hình.</p>
+        </section>
+        <section class="card settings-card" aria-labelledby="settings-title">
+          <div class="card-heading"><div><span class="step-number">02</span><h2 id="settings-title">Giọng &amp; cách đọc</h2></div></div>
+          <label for="language">Ngôn ngữ</label><select id="language" disabled><option>Đang tải ngôn ngữ…</option></select>
+          <label for="voice">Giọng đọc</label><select id="voice" disabled><option>Đang tải giọng…</option></select>
+          <div id="clone-engine-field" hidden><label for="clone-engine">Mô hình nhân bản tiếng Việt</label><select id="clone-engine"><option value="standard">Nhân bản tiêu chuẩn</option><option value="nano">Nhân bản Nano · nhanh hơn, cần nghe thử</option></select><p class="field-note">Nano giữ mẫu giọng đã chọn. Hãy nghe thử để kiểm tra độ giống giọng và cách phát âm.</p></div>
+          <div id="voice-status" class="voice-status"><span class="status-dot" aria-hidden="true"></span><div><strong id="voice-status-title">Đang kiểm tra</strong><p id="voice-status-detail">Giọng AI cần mô hình đã tải trên máy.</p></div></div>
+          <div class="field-row"><div><label for="delivery">Phong cách</label><select id="delivery"><option value="natural">Đọc tự nhiên</option><option value="story">Kể chuyện</option><option value="news">Bản tin / review phim</option><option value="calm">Chậm rãi</option><option value="energetic">Năng động</option></select></div><div><label for="format">Định dạng âm thanh</label><select id="format"><option value="wav">WAV · Chất lượng gốc</option><option value="mp3">MP3 · Dễ chia sẻ</option></select></div></div>
+          <p id="delivery-note" class="field-note">Giữ nhịp đọc mặc định, nghỉ nhẹ giữa câu.</p>
+          <div class="range-heading"><label for="speed">Tốc độ đọc</label><output id="speed-value" for="speed">1,00×</output></div><input id="speed" type="range" min="0.7" max="1.4" step="0.05" value="1"><div class="range-labels"><span>0,7× · Chậm</span><span>1,4× · Nhanh</span></div>
+          <div class="acceleration-panel"><div class="button-row"><button id="fast-preset" type="button" class="secondary-button" disabled>ϟ Ưu tiên tốc độ</button><button id="benchmark" type="button" class="secondary-button" disabled>◷ Đo tốc độ thực</button></div><p id="acceleration-note" class="field-note">Đang kiểm tra cấu hình xử lý…</p><p class="field-note">Mục tiêu 1 giờ âm thanh trong 2 phút cần tốc độ 30×. Nút đo sẽ tạo một mẫu âm thanh thật; giữ nguyên nội dung bạn đang nhập.</p></div>
+          <details class="advanced"><summary>Điều chỉnh nâng cao</summary><div class="advanced-content">
+            <div class="field-row"><div><label for="max-minutes">Giới hạn thời lượng (phút)</label><input id="max-minutes" type="number" value="180" min="1" max="180" step="1" required></div><div><label for="paragraph-pause">Nghỉ thêm giữa câu (giây)</label><input id="paragraph-pause" type="number" value="0.3" min="0" max="3" step="0.1" required></div></div>
+            <label for="quality">Chế độ mô hình</label><select id="quality"><option value="auto">Tự động theo mô hình</option><option value="standard">Tiêu chuẩn</option><option value="fast">Nhanh (cần mô hình phù hợp)</option></select>
+            <label for="nano-steps">Nano · Số bước tạo giọng</label><select id="nano-steps"><option value="4">4 bước · Ưu tiên tốc độ</option><option value="8" selected>8 bước · Cân bằng</option><option value="16">16 bước · Ưu tiên chất lượng</option></select><p class="field-note">Chỉ áp dụng cho giọng Nano. Ít bước có thể giảm độ tự nhiên. Tốc độ tạo phụ thuộc CPU/GPU, độ dài nội dung và mô hình.</p>
+            <div class="field-row nano-resources"><div><label for="nano-parallel">Nano · Số đoạn xử lý cùng lúc</label><select id="nano-parallel"><option value="auto">Tự động theo máy</option><option value="1">1 đoạn</option><option value="2">2 đoạn</option><option value="4">4 đoạn</option><option value="8">8 đoạn</option></select></div><div><label for="nano-threads">Nano · Luồng CPU mỗi đoạn</label><select id="nano-threads"><option value="auto">Tự động theo máy</option><option value="1">1 luồng</option><option value="2">2 luồng</option><option value="4">4 luồng</option><option value="8">8 luồng</option></select></div></div><p class="field-note">Xử lý song song cần thêm RAM. Tăng số đoạn hoặc luồng quá mức có thể làm chậm máy; chế độ tự động dùng giới hạn CPU hiện có.</p>
+          </div></details>
+          <button id="generate" type="button" class="primary-button generate-button" disabled><span aria-hidden="true">▷</span> Tạo giọng nói <span aria-hidden="true">→</span></button>
+          <p id="generate-note" class="generate-note">Đang kiểm tra mô hình và giọng đọc.</p>
+        </section>
+      </div>
+      <section class="card output-card" aria-labelledby="output-heading">
+        <div class="output-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="output-content"><div class="output-heading"><div><span class="eyebrow">BẢN THU</span><h2 id="output-heading">Âm thanh của bạn sẽ xuất hiện ở đây</h2></div><span id="output-status" class="status-badge" hidden></span></div><p id="output-detail" class="field-note">Tạo bản thu đầu tiên hoặc mở một bản thu trong lịch sử.</p><progress id="output-progress" value="0" max="100" aria-label="Tiến độ tạo giọng" hidden></progress><p id="output-warning" class="output-warning" hidden></p><audio id="output-audio" controls preload="none" hidden></audio><div id="output-actions" class="button-row"></div><p id="speed-report" class="field-note" hidden></p></div>
+      </section>
+      <p class="privacy-note"><span aria-hidden="true">◉</span> Nội dung và bản thu được lưu trên máy. Internet cần cho lần tải mô hình đầu tiên.</p>
+    </section>
+    <section id="view-voices" class="view" aria-labelledby="voices-heading" hidden>
+      <div class="page-heading"><div><span class="eyebrow">TÌM CHẤT GIỌNG CỦA BẠN</span><h1 id="voices-heading">Thư viện giọng nói</h1><p>Giọng có sẵn, giọng hệ thống và mẫu giọng cá nhân trong một nơi.</p></div><button type="button" id="refresh-voices" class="secondary-button">↻ Kiểm tra lại</button></div>
+      <div class="library-filter"><label class="sr-only" for="voice-search">Tìm tên giọng</label><input id="voice-search" type="search" placeholder="Tìm tên giọng…"><label class="sr-only" for="library-filter">Loại giọng</label><select id="library-filter"><option value="all">Tất cả giọng</option><option value="ready">Sẵn sàng sử dụng</option><option value="cloned">Giọng cá nhân</option><option value="system">Giọng hệ thống</option></select></div>
+      <div id="voice-library" class="voice-library"><div class="empty-state">Đang tải thư viện giọng…</div></div>
+      <section class="card clone-card" aria-labelledby="clone-heading"><div class="clone-intro"><span class="eyebrow">GIỌNG CÁ NHÂN</span><h2 id="clone-heading">Thêm mẫu giọng của bạn</h2><p>Tải bản thu một người nói, dài 3–30 giây, rõ tiếng và không nhạc nền. Mẫu được lưu trên máy; cần mô hình hỗ trợ nhân bản để tạo lời đọc.</p><span class="small-tag">WAV · MP3 · M4A · FLAC · OGG · WEBM</span><p class="field-note">Tối đa 20 MB. Chỉ dùng giọng của bạn hoặc giọng đã được chủ sở hữu cho phép.</p></div>
+        <form id="clone-form"><div class="field-row"><div><label for="clone-name">Tên giọng</label><input id="clone-name" name="name" type="text" maxlength="80" placeholder="Ví dụ: Giọng của tôi" required></div><div><label for="clone-language">Ngôn ngữ mẫu</label><select id="clone-language" name="language" required disabled></select></div></div><label for="clone-file">Tệp âm thanh mẫu</label><input id="clone-file" name="file" type="file" accept=".wav,.mp3,.m4a,.flac,.ogg,.webm" required><label for="clone-transcript">Lời nói trong mẫu <span class="optional">(nên nhập để khớp tốt hơn)</span></label><textarea id="clone-transcript" name="transcript" maxlength="2000" rows="3" placeholder="Gõ đúng nội dung người nói trong mẫu âm thanh…"></textarea><label class="check-label consent"><input id="clone-consent" name="consent" type="checkbox" value="true" required> Tôi có quyền sử dụng mẫu và được phép nhân bản giọng này.</label><button id="clone-submit" type="submit" class="primary-button" disabled>Lưu mẫu giọng →</button></form>
+      </section>
+    </section>
+    <section id="view-history" class="view" aria-labelledby="history-heading" hidden>
+      <div class="page-heading"><div><span class="eyebrow">GÓC LƯU TRỮ CỦA BẠN</span><h1 id="history-heading">Những bản thu đã tạo</h1><p>Nghe lại, tải tệp, dừng hoặc tiếp tục các tác vụ chưa hoàn tất.</p></div><button id="refresh-history" type="button" class="secondary-button">↻ Làm mới</button></div><div id="history-list" class="history-list"><div class="empty-state">Đang tải bản thu…</div></div>
+    </section>
+    <footer class="site-footer"><span>Voice Studio Riêng <span id="version"></span></span><span>Văn bản của bạn. Giọng nói của bạn.</span></footer>
+  </main>
+  <dialog id="help-dialog" aria-labelledby="help-heading"><div class="dialog-heading"><h2 id="help-heading">Bắt đầu cùng Voice Studio</h2><button type="button" id="help-close" class="icon-button" aria-label="Đóng hướng dẫn">×</button></div><div class="dialog-body"><ol class="help-steps"><li><strong>Cài đặt lần đầu.</strong> Giải nén toàn bộ gói, chạy <code>CAI_DAT.bat</code>, sau đó dùng tệp mở tool trong thư mục gốc.</li><li><strong>Tải ít nhất một mô hình.</strong> Chạy <code>TAI_GIONG_VIET.bat</code> cho Nano tiếng Việt; <code>TAI_GIONG_TIEU_CHUAN.bat</code> cho giọng Việt tiêu chuẩn và nhân bản; <code>TAI_GIONG_QUOC_TE.bat</code> cho giọng quốc tế. Cần mạng và dung lượng trống. Khi tải xong, bấm Kiểm tra lại trong Thư viện giọng.</li><li><strong>Nhập và tạo giọng.</strong> Dán tối đa 200.000 ký tự hoặc nhập TXT/SRT. Chọn ngôn ngữ, giọng sẵn sàng và bấm Tạo giọng nói.</li><li><strong>Nghe và xuất.</strong> Bản thu xong có thể tải WAV, MP3, TXT hoặc SRT. SRT xuất từ TXT dùng mốc lời đọc thực sau khi tạo xong.</li></ol><p>Phong cách điều chỉnh nhịp và khoảng nghỉ; độ tự nhiên, phát âm và khả năng nhân bản phụ thuộc mô hình, ngôn ngữ và mẫu thu. Công cụ không tự dịch nội dung.</p><p>Tối đa 180 phút mỗi bản thu. Khi đạt giới hạn, phần còn lại chưa được đọc. Công cụ chưa có chức năng chia tệp theo 2 phút hoặc ghép các bản thu tùy chọn.</p><p><strong>Ưu tiên tốc độ:</strong> với giọng có sẵn tiếng Việt, chọn Nano đã tải, 4 bước, đọc tự nhiên, WAV và CPU tự động. Ít bước có thể giảm chất lượng. Với mẫu giọng cá nhân tiếng Việt, chọn nhân bản Nano và giữ nguyên mẫu. Chạy <code>TAI_GIONG_NHAN_BAN_NHANH.bat</code> nếu chưa tải mô hình. Giọng hệ thống và ngôn ngữ khác được giữ nguyên.</p><p><strong>Đo tốc độ thực:</strong> tạo mẫu bằng giọng, mô hình và số bước đang chọn ở nhịp tự nhiên, không thêm khoảng nghỉ, xuất WAV, sau đó hiển thị thời gian xử lý và ước tính cho 1 giờ âm thanh. Mục tiêu 2 phút / 1 giờ tương đương 30×; kết quả mẫu không bảo đảm tốc độ trên nội dung dài. Lần đầu có thể cần thêm thời gian nạp mô hình.</p><h3>Tình trạng máy &amp; mô hình</h3><div id="model-status" class="model-status">Đang kiểm tra…</div></div></dialog>
+</body>
+</html>

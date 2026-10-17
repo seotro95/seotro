@@ -1,19 +1,28 @@
-# Voice Studio Riêng · Windows 10/11 x64
+# Voice Studio Riêng 1.1 · Nhân bản tiếng Việt trên CPU
 
-[Tải gói ZIP](./Voice-Studio-Rieng-Windows-10-11.zip?raw=true)
+**[Tải bản cập nhật 1.1 cho Windows 10/11 x64](./Voice-Studio-Rieng-1.1.0-Windows-10-11.zip?raw=true)**
 
-Giải nén toàn bộ ZIP. Đây là gói mã nguồn kèm bộ cài, cần Python 3.12 64-bit và Internet cho lần cài/tải mô hình đầu tiên.
+Giải nén toàn bộ ZIP. Gói cần Python 3.12 64-bit và Internet để cài thư viện/tải mô hình lần đầu. Mã nguồn có thể xem trong [voice-studio-standalone](../../voice-studio-standalone).
 
-1. Chạy `CAI_DAT.bat` để cài thư viện và FFmpeg.
-2. Chạy `TAI_GIONG_VIET.bat` để tải giọng Việt Nano.
-3. Chạy `MO_TOOL.bat` để mở studio.
+## Dùng giọng nhân bản nhanh
 
-Giới hạn 200.000 ký tự mỗi tác vụ. Hỗ trợ TXT/SRT, mẫu giọng cá nhân, lịch sử và xuất WAV/MP3/TXT/SRT. Giọng tiêu chuẩn và quốc tế có bộ tải riêng trong ZIP. Xem `DOC_TRUOC.md` trong gói để biết chi tiết và giới hạn.
+1. Nếu cài mới, chạy `CAI_DAT.bat`.
+2. Chạy `TAI_GIONG_NHAN_BAN_NHANH.bat` một lần để chuẩn bị mô hình nhân bản Nano.
+3. Chạy `MO_TOOL.bat`, chọn mẫu giọng tiếng Việt của bạn rồi bấm **Ưu tiên tốc độ**. Tool giữ nguyên mẫu, dùng Nano 4 bước và CPU tự động.
+4. Bấm **Đo tốc độ thực** để đo trên máy hoặc **Tạo giọng nói** để xử lý văn bản.
 
-Đã kiểm tra bộ cài trên Linux, giao diện Chromium, tạo giọng Nano thật và xuất đủ bốn định dạng. Chưa chạy trực tiếp trên Windows. Mẫu Nano 148 ký tự tạo 8,23 giây âm thanh trong khoảng 1,11 giây xử lý; không bảo đảm tốc độ này với kịch bản dài và chưa đạt mục tiêu 60×.
+Giới hạn 200.000 ký tự mỗi tác vụ, nhập TXT/SRT và xuất WAV/MP3/TXT/SRT. Giọng tiêu chuẩn, quốc tế và Windows vẫn có lựa chọn riêng. Nano 4 bước có thể giảm độ tự nhiên/độ giống giọng; nghe thử rồi chọn 8/16 bước hoặc nhân bản tiêu chuẩn khi cần.
 
-Gói không chứa môi trường Python đã cài, trọng số mô hình, dữ liệu giọng cá nhân hay API key. Bản xuất theo tệp đúng 2 phút và ghép tệp tùy chọn chưa được triển khai.
+## Kết quả kiểm chứng
 
-SHA256: `ee5c95db7ceb8fbafc92399106049ac15d742c42117b6511a0cc5572e4b5dd7d`
+Máy thử Linux AMD EPYC có hạn mức **4 lõi CPU / 32 GiB RAM**, không dùng NVIDIA, đã tạo **64 phút 56,6 giây âm thanh nhân bản trong 80,5 giây**, gồm nạp mô hình và mã hóa mẫu từ worker lạnh. Tạo WAV rồi xuất thêm MP3 tổng **92,1 giây**. Đủ 844 đoạn từ 80.053 ký tự, không dùng lại WAV, không chèn khoảng lặng để tăng số đo. Mẫu giọng kiểm tra là âm thanh tổng hợp do tool tạo; chưa đánh giá mức độ giống người thật hay phát âm từng từ.
 
-Thư mục này chỉ cung cấp gói tải xuống; các tệp ứng dụng hiện có trong repository được giữ nguyên.
+Đây là kết quả trên máy thử, **chưa kiểm chứng trực tiếp máy Windows của bạn**. Xem [HIEU_NANG.md](../../voice-studio-standalone/HIEU_NANG.md) và [BENCHMARK_RESULT.json](../../voice-studio-standalone/BENCHMARK_RESULT.json) để biết cách đo.
+
+## Cập nhật an toàn
+
+Tắt tool, sao lưu `app/.data`, rồi chép tệp mới vào thư mục cũ; giữ nguyên `.venv` và `app/.data`. Chạy bộ tải nhân bản nhanh và mở lại tool, kiểm tra phiên bản 1.1.0. Hướng dẫn đầy đủ trong [DOC_TRUOC.md](../../voice-studio-standalone/DOC_TRUOC.md).
+
+Gói không chứa môi trường Python đã cài, trọng số mô hình, dữ liệu giọng cá nhân hoặc API key. Tên ZIP không có số phiên bản được cập nhật thành cùng bản 1.1 để liên kết tải cũ tiếp tục dùng được.
+
+SHA256: `4b6917e46c16beee0fe8ef6eb470a01cbe6b303f8dc5ee4b274f6e855af2a158`
