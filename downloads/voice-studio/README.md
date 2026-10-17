@@ -9,7 +9,7 @@ Có sẵn Python, toàn bộ thư viện chạy giọng, FFmpeg, Nano/Nano nhân
 
 Đã vượt qua [kiểm tra trực tiếp Windows](https://github.com/seotro95/seotro/actions/runs/38999293928): chạy bằng Python đi kèm tại đường dẫn có khoảng trắng, chặn kết nối tải bên ngoài, tạo giọng và nhân bản Nano/Turbo thật, xuất WAV/MP3/TXT/SRT và mở launcher. Dữ liệu kiểm thử đã được dọn khỏi gói; mẫu và bản thu của bạn lưu ở `app/.data`. Sao lưu thư mục này khi cập nhật.
 
-07abd12010ae348356c6295bd57f87ca73aa21dd5270f423ef80d0fc1a6ef3b5256: `07abd12010ae348356c6295bd57f87ca73aa21dd5270f423ef80d0fc1a6ef3b5`
+SHA256: `07abd12010ae348356c6295bd57f87ca73aa21dd5270f423ef80d0fc1a6ef3b5`
 
 ---
 
