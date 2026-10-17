@@ -1,0 +1,28 @@
+{
+  "version": "1.2.0",
+  "target": "Windows10/11 x64",
+  "download_url": "https://github.com/seotro95/seotro/releases/download/voice-standalone-portable-39002758326/Voice-Studio-Rieng-1.2.0-Portable-Windows-x64.zip",
+  "release_page": "https://github.com/seotro95/seotro/releases/tag/voice-standalone-portable-39002758326",
+  "bytes": 2022397542,
+  "sha256": "1ef741296c4f50413fcdc9cdb24a7278dddcb9e51ab9a1de4d9041947441362a",
+  "source_commit": "a479f3d54ecf7a8e4d6f2a1239f5a641ccee3f78",
+  "workflow": "https://github.com/seotro95/seotro/actions/runs/39002758326",
+  "native_windows_offline_validation": "passed",
+  "bundled_runtime": true,
+  "bundled_ffmpeg": true,
+  "bundled_models": [
+    "vieneu_nano",
+    "vieneu_nano_clone",
+    "vieneu",
+    "piper16countryvoices"
+  ],
+  "international_preset_voices": 16,
+  "portable_clone_languages": [
+    "vi"
+  ],
+  "max_characters": 200000,
+  "public_download_http_status": 200,
+  "public_zip_signature_verified": true,
+  "checksum_source": "SHA256 computed/ZIP CRC verified during native build; published SHA256 sidecar fetched and matched asset filename",
+  "full_public_asset_rehashed_locally": false
+}

@@ -1,3 +1,37 @@
+# Voice Studio Riêng Portable 1.2 · Đa quốc gia, ưu tiên tốc độ
+
+**[Tải ZIP Windows 10/11 x64, 2,02 GB](https://github.com/seotro95/seotro/releases/download/voice-standalone-portable-39002758326/Voice-Studio-Rieng-1.2.0-Portable-Windows-x64.zip)**
+
+1. Giải nén **toàn bộ ZIP** sang thư mục mới.
+2. Mở **MO_TOOL.bat**. Không cần cài Python, FFmpeg, thư viện, API key hoặc tải mô hình.
+
+Bổ sung **16 giọng có sẵn theo quốc gia**: Mỹ, Anh, Pháp, Đức, Tây Ban Nha, Ý, Brazil, Nga, Hà Lan, Bỉ, Ba Lan, Thụy Điển, Ukraine, Séc, Đan Mạch và Romania. Tìm quốc gia/ngôn ngữ, chọn giọng và tạo mẫu nghe thử. Các giọng quốc tế Piper chạy offline trên CPU.
+
+**Nhân bản tiếng Việt** mặc định tự chọn Nano 4 bước, CPU/RAM tự động, giữ đúng mẫu giọng của bạn. Có thể chọn 8/16 bước hoặc Tiêu chuẩn nếu cần chất lượng cao hơn; ít bước có thể giảm độ tự nhiên/độ giống mẫu. Nút Ưu tiên tốc độ giữ nguyên giọng và ngôn ngữ đang chọn. Quốc tế Piper là giọng có sẵn; gói không kèm mô hình nhân bản quốc tế Qwen.
+
+Tối đa **200.000 ký tự**; nhập TXT/SRT, xuất WAV/MP3/TXT/SRT; có lời đọc, kể chuyện, bản tin/review theo kịch bản, lịch sử, dừng/tiếp tục và ghép các đoạn thành bản thu hoàn chỉnh.
+
+**Đã kiểm tra trực tiếp [Windows](https://github.com/seotro95/seotro/actions/runs/39002758326)**: toàn bộ kiểm tra ứng dụng, thư viện, Python đi kèm sau khi chuyển thư mục có khoảng trắng, chặn mạng bên ngoài, tạo giọng/nhân bản Nano và Turbo, tạo âm thanh thật với đủ 16 giọng Piper, xuất tệp và mở launcher. Gói đã qua CRC và SHA256 trước khi tải lên. Dữ liệu kiểm thử được dọn trước đóng gói.
+
+Hai phép đo bản dài trên máy thử **Linux AMD EPYC, hạn mức 4 lõi CPU / 32 GiB RAM, không NVIDIA**:
+
+| Giọng | Âm thanh WAV | Thời gian đầu cuối |
+| --- | --- | --- |
+| Nhân bản Việt Nano, mặc định 4 bước | 64 phút 55,5 giây | 82,9 giây |
+| Mỹ Joe, Piper | 69 phút 55,3 giây | 78,7 giây |
+
+Đều tạo mới tất cả các đoạn, giữ đủ lời và đúng thứ tự, không tăng số đo bằng khoảng lặng. Mẫu nhân bản là âm thanh tổng hợp kỹ thuật; chưa đánh giá độ giống người thật. **Tốc độ thực tế phụ thuộc máy, giọng và ngôn ngữ**; toàn bộ một giờ chưa được đo trên máy Windows của bạn. Dùng Đo tốc độ thực trong tool. [Báo cáo kiểm tra](validation-1.2.0.json).
+
+Khi cập nhật: tắt tool, sao lưu `app/.data`, giải nén bản mới sang thư mục mới. Nếu giữ dữ liệu cũ, chuyển các thư mục con `voices`, `jobs`, `audio`, `parts` vào `app/.data` mới; dùng mô hình đi kèm bản mới.
+
+SHA256: `1ef741296c4f50413fcdc9cdb24a7278dddcb9e51ab9a1de4d9041947441362a`
+
+[Thông tin tệp](portable-1.2.0.json) · [Mã nguồn](../../voice-studio-standalone) · [Trang tải dự phòng](https://github.com/seotro95/seotro/releases/tag/voice-standalone-portable-39002758326)
+
+---
+
+## Các bản cũ
+
 # Bản đầy đủ Portable 1.1.1 — Giải nén rồi mở tool
 
 **[Tải ZIP Portable Windows 10/11 x64, khoảng 1,17 GB](https://github.com/seotro95/seotro/releases/download/voice-standalone-portable-38999293928/Voice-Studio-Rieng-1.1.1-Portable-Windows-x64.zip)**
