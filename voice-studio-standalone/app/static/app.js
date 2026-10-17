@@ -153,11 +153,12 @@ function populateLanguages() {
   else if (available.has('vi')) $('language').value = 'vi';
   $('language').disabled = !options.length;
   const cloneLanguage = $('clone-language').value;
-  $('clone-language').replaceChildren(...Object.entries(config.languages || {}).filter(([key]) => (config.ai_voice_languages || []).includes(key)).map(([key, label]) => {
+  const cloneLanguages = config.ai_clone_languages || config.ai_voice_languages || [];
+  $('clone-language').replaceChildren(...Object.entries(config.languages || {}).filter(([key]) => cloneLanguages.includes(key)).map(([key, label]) => {
     const option = node('option', label); option.value = key; return option;
   }));
-  if (cloneLanguage && (config.ai_voice_languages || []).includes(cloneLanguage)) $('clone-language').value = cloneLanguage;
-  else if ((config.ai_voice_languages || []).includes('vi')) $('clone-language').value = 'vi';
+  if (cloneLanguage && cloneLanguages.includes(cloneLanguage)) $('clone-language').value = cloneLanguage;
+  else if (cloneLanguages.includes('vi')) $('clone-language').value = 'vi';
   $('clone-language').disabled = !$('clone-language').options.length;
   $('clone-submit').disabled = !$('clone-language').options.length;
 }
@@ -646,6 +647,19 @@ window.addEventListener('pagehide', () => clearTimeout(pollTimer));
 async function init() {
   try {
     await refreshVoices(); await refreshHistory();
+    if (config.portable) {
+      const steps = document.querySelector('.help-steps');
+      steps.replaceChildren();
+      for (const message of [
+        'Giải nén toàn bộ ZIP, mở MO_TOOL.bat. Python, FFmpeg và các mô hình tiếng Việt đã có sẵn; không cần cài đặt hoặc tải thêm.',
+        'Thêm hoặc chọn mẫu giọng cá nhân tiếng Việt, rồi bấm Ưu tiên tốc độ để dùng nhân bản Nano 4 bước. Nghe thử để kiểm tra độ giống giọng.',
+        'Nhập tối đa 200.000 ký tự hoặc TXT/SRT, tạo giọng rồi tải WAV/MP3/TXT/SRT. Giữ cửa sổ tool mở khi sử dụng.',
+        'Sao lưu app/.data trước khi cập nhật hoặc xóa tool. Gói Portable này chuẩn bị sẵn giọng Việt/Anh tiêu chuẩn và nhân bản tiếng Việt trên CPU.'
+      ]) steps.append(node('li', message));
+      for (const code of document.querySelectorAll('#help-dialog code')) {
+        if ((code.textContent || '').startsWith('TAI_GIONG_')) code.parentElement.textContent = 'Mô hình nhân bản Nano đã có sẵn trong bản Portable. Chọn mẫu giọng tiếng Việt rồi bấm Ưu tiên tốc độ. Nano 4 bước có thể giảm độ tự nhiên; cần nghe thử.';
+      }
+    }
     if (history[0]) setOutput(history[0]);
     if (!voices.some(libraryVoiceReady)) notify('Phòng thu đã mở. Chưa có giọng sẵn sàng; xem Hướng dẫn để tải mô hình trước khi tạo âm thanh.');
   } catch (error) { notify(error.message, true); setConnection(false); connectionFailed = true; }

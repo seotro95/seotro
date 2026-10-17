@@ -97,7 +97,7 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
 
 
-app = FastAPI(title='Voice Studio Riêng', version='1.1.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio Riêng', version='1.1.1', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 @app.exception_handler(RequestValidationError)
@@ -174,12 +174,15 @@ def config():
 
 
 def _config_values():
+    portable = os.environ.get('VOICE_STUDIO_PORTABLE') == '1'
     return {
         'version': app.version,
         'mode': 'local',
         'edition': 'standalone-voice',
         'languages': LANGUAGES,
-        'ai_voice_languages': list(CORE_LANGUAGES),
+        'ai_voice_languages': ['vi', 'en-US', 'en-GB'] if portable else list(CORE_LANGUAGES),
+        'ai_clone_languages': ['vi'] if portable else list(CORE_LANGUAGES),
+        'portable': portable,
         'max_characters': MAX_CHARACTERS,
         'max_audio_minutes': 180,
         'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(),
@@ -198,6 +201,8 @@ def _config_values():
 @app.get('/api/voices')
 def voices():
     entries=PRESETS+installed_voices()+records('voices')
+    if os.environ.get('VOICE_STUDIO_PORTABLE') == '1':
+        entries = [voice for voice in entries if voice.get('engine') not in {'qwen', 'qwen_clone'}]
     entries=[{**voice,'engine':voice.get('engine','vieneu' if voice.get('languages',['vi'])[0]=='vi' else 'qwen_clone')} for voice in entries]
     result = []
     for voice in entries:
