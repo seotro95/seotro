@@ -125,7 +125,11 @@ def test_timed_txt_roundtrip_preserves_literal_formatting_symbols(studio):
     assert parse_srt(imported.json()['text']) == parse_srt(original)
 
 
-@pytest.mark.parametrize('filename,data,expected', [('bad.zip', b'hello', 422), ('empty.txt', b'', 422), ('big.txt', b'a' * (2*1024*1024+1), 413)])
+@pytest.mark.parametrize('filename,data,expected', [
+    ('bad.zip', b'hello', 422),
+    ('empty.txt', b'', 422),
+    ('big.txt', b'a' * (2*1024*1024+1), 413),
+], ids=['unsupported-extension', 'empty-file', 'over-two-mib'])
 def test_bad_upload_does_not_overwrite_or_queue(studio, filename, data, expected):
     client, root, submit = studio
     result = client.post('/api/scripts/import', files={'file': (filename, data, 'text/plain')})
