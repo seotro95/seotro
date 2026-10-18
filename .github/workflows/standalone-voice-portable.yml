@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: standalone-voice-portable-${{ github.ref }}
+  group: standalone-voice-portable-v1.3-${{ github.ref }}
   cancel-in-progress: true
 
 env:
@@ -47,26 +47,7 @@ jobs:
       - name: Run application and CPU worker regression checks
         working-directory: voice-studio-standalone/app
         shell: pwsh
-        run: |
-          $voiceOut = "${{ runner.temp }}/voice-regression.log"
-          $voiceErr = "${{ runner.temp }}/voice-regression-errors.log"
-          $voicePython = (Get-Command python).Source
-          $voiceProcess = Start-Process -FilePath $voicePython -ArgumentList @('-m', 'pytest', '-vv', '-o', 'faulthandler_timeout=90', '-o', 'faulthandler_exit_on_timeout=true', 'tests') -NoNewWindow -PassThru -RedirectStandardOutput $voiceOut -RedirectStandardError $voiceErr
-          if (-not $voiceProcess.WaitForExit(300000)) {
-            taskkill /PID $voiceProcess.Id /T /F
-            $voiceExit = 1
-          } else {
-            $voiceProcess.WaitForExit()
-            $voiceExit = $voiceProcess.ExitCode
-          }
-          Get-Content $voiceOut
-          Get-Content $voiceErr
-          if ($voiceExit -ne 0) {
-            $details = ((Get-Content $voiceOut -Tail 15) + (Get-Content $voiceErr -Tail 100)) -join "`n"
-            $details = $details.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
-            Write-Output "::error title=Voice regression diagnostics::$details"
-          }
-          exit $voiceExit
+        run: python ../packaging/run_regressions.py tests
       - name: Run installer trust checks
         working-directory: voice-studio-standalone
         run: python -m pytest -q tests packaging/tests
