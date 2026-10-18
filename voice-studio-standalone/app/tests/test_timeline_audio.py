@@ -99,11 +99,12 @@ def test_full_render_matches_every_cue_and_explicit_video_duration(worker, conta
     else:
         # MP3 packet durations include encoder priming. Its seekable LAME/Xing
         # metadata must restore the exact timeline when an editor decodes it.
-        decoded = subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(source),
-                                  '-f', 's16le', '-acodec', 'pcm_s16le', '-'],
-                                 check=True, capture_output=True).stdout
-        assert len(decoded) // 2 == round(3.141 * RATE)
-        samples = np.frombuffer(decoded, dtype='<i2')
+        decoded = worker.DATA / 'decoded.wav'
+        subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(source),
+                        '-codec:a', 'pcm_s16le', '-y', str(decoded)],
+                       check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, timeout=30)
+        assert pcm_frames(decoded) == round(3.141 * RATE)
+        samples, rate = sf.read(decoded, dtype='int16')
     # Lossy MP3 has low-level pre-echo around a transition. Its decoded sample
     # count is exact; only WAV can guarantee bit-zero silence up to a boundary.
     margin = .05 if container == 'mp3' else 0

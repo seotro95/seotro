@@ -189,9 +189,13 @@ def verify_timeline(client, reference_id, sf, np):
     assert roundtrip.status_code == 200 and parse_srt(roundtrip.json()['text']) == cues
     mp3 = client.get(f'/api/jobs/{job["id"]}/export.mp3')
     assert mp3.status_code == 200
-    decoded = subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(DATA / 'audio' / (job['id'] + '.mp3')),
-                              '-ac', '1', '-ar', '24000', '-f', 's16le', 'pipe:1'], capture_output=True, check=True)
-    assert len(decoded.stdout) == round(22.5 * 24000) * 2
+    decoded = DATA / 'audio' / 'timeline-decoded.wav'
+    subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(DATA / 'audio' / (job['id'] + '.mp3')),
+                    '-ac', '1', '-ar', '24000', '-codec:a', 'pcm_s16le', '-y', str(decoded)],
+                   stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, check=True, timeout=30)
+    with wave.open(str(decoded)) as audio:
+        assert audio.getnframes() == round(22.5 * 24000)
+    decoded.unlink()
     pending = client.post('/api/scripts/import', files={'file': ('starts.txt', b'[00:01] Hello.\n[00:05] Goodbye.', 'text/plain')})
     assert pending.status_code == 200 and pending.json()['requires_total_duration']
     assert client.post('/api/speech', json={'text': script, 'input_format': 'srt', 'voice_id': reference_id,
