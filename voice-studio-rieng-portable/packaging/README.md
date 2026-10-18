@@ -1,0 +1,44 @@
+# Native Windows portable build
+
+Run in a clean **Windows x64** CI checkout. The regular Linux setup/source ZIP is
+not a portable Windows release. Never copy a developer's `.data`, `.venv`, keys,
+uploads or recordings into this build.
+
+The fastest supported build reuses only the runtime, FFmpeg and prepared model
+storage from the checksum-pinned, native-Windows-tested `windows-portable-36`
+release. It overlays the standalone app and reruns its own relocated offline
+tests; old app code and project history are excluded.
+
+```powershell
+python packaging/build_windows.py --output "$env:RUNNER_TEMP/Voice-Studio-Rieng-1.3.0-Portable" --base-archive "$env:RUNNER_TEMP/Voice-Studio-Windows-x64.zip"
+```
+
+Pinned base URL:
+`https://github.com/seotro95/seotro/releases/download/windows-portable-36/Voice-Studio-Windows-x64.zip`
+
+Pinned SHA256:
+`5998b2f9e5198cf8ef4ab82a4796539bed0754f2b5eeaeb4da72d4fec27d1501`
+
+For a fresh build, use base Python 3.12 x64 (not a venv) on `windows-2022`, install
+`requirements-runtime.txt`, then omit `--base-archive`. Nano is required; pass
+`--include-turbo` to additionally prepare Turbo. MSVC app-local runtime libraries
+are copied from the installed Visual Studio redistributable directory. FFmpeg is
+downloaded with verified upstream SHA256, preserving its license and docs.
+TLS, checksums and package verification must remain enabled.
+
+Both modes require successful offline real model inference, the exact
+1.410s-into-0.900s regression, pitch/tail preservation and actual launcher HTTP.
+The entire folder is moved to a path with spaces and non-ASCII text before those
+checks, using its bundled `runtime/python.exe`. Synthetic regression tones do not
+establish speech intelligibility; compressed cues still require listening.
+
+Only after those Windows checks pass does the builder write `BUILD_INFO.json`,
+the complete file SHA256 manifest, ZIP and ZIP checksum. A successful build may be
+published as a GitHub release; a Linux source archive must not be described as a
+tested ready-to-use Windows binary.
+
+Expect roughly 1.2 GB compressed for the prepared base variant, 3–5 GB unpacked,
+about 8–12 GB temporary disk and 4–8 GB RAM during single-process Nano/Turbo
+validation. Actual size/time depends on model revisions and runner throughput.
+Base download, extraction, tests and compression commonly need 5–15 minutes;
+fresh preparation may need substantially longer.

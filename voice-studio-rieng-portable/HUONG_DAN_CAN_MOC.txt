@@ -1,0 +1,49 @@
+BẢN SỬA TXT / SRT – 1.3.0
+Giải nén sang thư mục mới. Giữ bản cũ và dữ liệu .data của bạn.
+Chạy CAI_DAT.bat rồi MO_TOOL.bat theo DOC_TRUOC.md.
+
+Nhập tệp hỗ trợ UTF-8 và Unicode UTF-16 của Windows.
+SRT: giữ nguyên mốc bắt đầu/kết thúc, không chồng câu.
+TXT có mốc: tự chuyển sang SRT để căn voice, ví dụ:
+[00:00] Xin chào các bạn.
+[00:05] Cảm ơn đã lắng nghe.
+[00:10]
+Dòng cuối trống lời xác định độ dài toàn bộ: ví dụ này 10 giây.
+Hoặc ghi khoảng riêng cho từng câu:
+00:00 --> 00:05 Xin chào các bạn.
+00:06 --> 00:10 Cảm ơn đã lắng nghe.
+Không có mốc cuối thì không thể suy ra chính xác độ dài câu cuối.
+TXT không có mốc vẫn đọc liên tục, xuất SRT theo thời gian voice thực.
+
+Chọn WAV để dựng video: đúng số mẫu đến mốc cuối, giữ cả khoảng lặng đầu/cuối.
+MP3 có thể có độ trễ/padding của codec tùy phần mềm dựng.
+Mặc định tự tăng tốc riêng từng câu để khớp mốc gốc, kể cả khi cần trên 1,5× hoặc 2×. Câu rất nhanh được cảnh báo. Có thể chọn chế độ giới hạn để dừng ở mức 1,5×/2×.
+Mặc định Nano 16 bước để ưu tiên chất lượng. Chọn Kể chuyện hoặc Chậm rãi để đổi nhịp.
+Đây là điều chỉnh chất lượng/nhịp, không phải mô hình cảm xúc mới; không bảo đảm giống người thật.
+Đã kiểm tra API và xử lý âm thanh trên Linux với âm thanh kiểm thử; chưa chạy Windows hay đánh giá giọng AI thật trong lượt sửa này.
+
+BỔ SUNG 1.2.0
+- Nhận tối đa 1.000.000 ký tự / tác vụ, tệp tối đa 8 MB, 100.000 câu SRT.
+- Tối đa 24 giờ âm thanh / tác vụ. 24 giờ WAV mono 24 kHz cần khoảng 4,15 GB cho tệp cuối; các đoạn, cache và tệp tạm cần thêm dung lượng. Chia kịch bản nếu vượt 24 giờ hoặc đĩa không đủ.
+- Nếu vượt thời lượng, báo lỗi và giữ đoạn đã tạo để tiếp tục; không xuất bản thu hoàn tất bị thiếu lời.
+- Có tùy chọn Nano 2 tiến trình: dùng hai mô hình trong RAM. Chọn 1 nếu thiếu RAM hoặc chạy chậm hơn.
+- 8 bước để cân bằng tốc độ, 16 bước để ưu tiên chất lượng. Tốc độ tạo và tốc độ lời đọc là hai việc khác nhau; tăng tốc tạo không đổi mốc SRT.
+- Với 00:27:20,519 --> 00:27:23,671: ô lời dài 3,152 giây. WAV timeline bắt đầu từ 0, giữ im lặng trước 27:20,519 và kết thúc đúng 27:23,671 nếu đây là câu cuối.
+- Giữ lời ngắn ở nhịp tự nhiên và chèn im lặng cho đủ ô; không kéo một câu ngắn lê thê. Lời dài tăng tốc có giới hạn; vượt mức báo câu cần sửa. Không bảo đảm mọi văn bản bất kỳ vừa mọi ô thời gian.
+- Kể chuyện/Chậm rãi điều chỉnh nhịp, **từ nhấn** tạo nhấn nhẹ, dấu câu giúp ngắt. Không có mô hình cảm xúc mới; phát âm, sắc thái vẫn cần nghe kiểm tra.
+- Kiểm thử nhận/chia đủ 1.000.000 ký tự và xử lý timeline bằng âm thanh giả lập. Chưa tổng hợp thực tế trọn 1.000.000 ký tự, chưa đo tốc độ AI hoặc chạy trên Windows cho bản này.
+
+BỔ SUNG 1.3.0 — TỰ ĐỘNG KHỚP SRT
+1. Mở Điều chỉnh nâng cao > Căn lời theo mốc > Tự động khớp từng câu (mặc định).
+2. Nhập SRT hoặc TXT có mốc và tạo giọng. Không cần tự tăng tốc độ chung của toàn bộ bản thu.
+3. Câu dài được tăng tốc riêng bằng FFmpeg giữ cao độ; câu ngắn giữ nhịp và thêm im lặng.
+4. Mốc bắt đầu/kết thúc và toàn bộ chữ SRT giữ nguyên. Chỉ bỏ mẫu im lặng số 0 ở đầu/cuối nếu cần; không cắt waveform lời để ép vừa mốc.
+5. Ô thời gian rất ngắn có thể khiến lời khó nghe khi tăng tốc cao. Xem cảnh báo số câu trên 2× và nghe lại. Không bảo đảm tự nhiên hoặc phát âm đúng tuyệt đối.
+6. Với bản thu cũ đang lỗi “Câu SRT ... đọc quá dài”: bấm Tự căn và tiếp tục. Các đoạn đã tạo được dùng lại; phần ghép/căn mốc được chạy lại từ đầu, không cần tổng hợp lại toàn bộ.
+7. Chọn WAV khi dựng video để khớp số mẫu; MP3 có thể có độ trễ theo bộ giải mã.
+
+CẬP NHẬT BẢN CŨ, GIỮ GIỌNG VÀ MODEL
+Tắt tool cũ và cửa sổ chạy bằng Ctrl+C. Sao lưu thư mục cũ trước.
+Giải nén bản 1.3.0 sang thư mục mới. Chép các tệp/thư mục trong app của bản mới đè vào app cũ; GIỮ NGUYÊN app/.data, .venv và tools của bản cũ.
+Không cần xóa dữ liệu hay tải lại model cho thay đổi căn mốc này. Mở MO_TOOL.bat, kiểm tra phiên bản 1.3.0 trong Hướng dẫn / kiểm tra API.
+Nếu chỉ mở thư mục mới, các giọng cá nhân/model trong thư mục cũ không tự chuyển sang; hãy dùng cách cập nhật phía trên.

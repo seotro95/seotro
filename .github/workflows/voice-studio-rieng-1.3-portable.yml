@@ -1,0 +1,79 @@
+name: Voice Studio Rieng 1.3 Portable
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [voice-studio-portable-v1.3.0]
+    paths:
+      - '.github/workflows/voice-studio-rieng-1.3-portable.yml'
+      - 'voice-studio-rieng-portable/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-studio-rieng-1.3-portable
+  cancel-in-progress: true
+
+env:
+  PYTHONUTF8: '1'
+  HF_HUB_DISABLE_XET: '1'
+  PIP_DISABLE_PIP_VERSION_CHECK: '1'
+
+jobs:
+  package:
+    runs-on: windows-2022
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Download previously verified Windows runtime and models
+        shell: python
+        run: |
+          from pathlib import Path
+          import hashlib, os, shutil, urllib.request
+          asset = Path(os.environ['RUNNER_TEMP']) / 'Voice-Studio-base36.zip'
+          url = 'https://github.com/seotro95/seotro/releases/download/windows-portable-36/Voice-Studio-Windows-x64.zip'
+          expected = '5998b2f9e5198cf8ef4ab82a4796539bed0754f2b5eeaeb4da72d4fec27d1501'
+          with urllib.request.urlopen(url, timeout=120) as source, asset.open('wb') as target:
+              shutil.copyfileobj(source, target)
+          with asset.open('rb') as source:
+              actual = hashlib.file_digest(source, 'sha256').hexdigest()
+          if actual != expected:
+              raise RuntimeError('Base archive SHA256 mismatch; do not extract or execute it.')
+          print('Verified trusted base36:', asset.stat().st_size, 'bytes')
+      - name: Build and verify relocated offline Windows package
+        shell: pwsh
+        run: |
+          python voice-studio-rieng-portable/packaging/build_windows.py --base-archive "${{ runner.temp }}/Voice-Studio-base36.zip" --output "${{ runner.temp }}/portable/Voice-Studio-Rieng-1.3.0-Portable"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Upload checked archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: Voice-Studio-Rieng-1.3.0-Portable-Windows-x64
+          path: |
+            ${{ runner.temp }}/portable/Voice-Studio-Rieng-1.3.0-Portable-Windows-x64.zip
+            ${{ runner.temp }}/portable/Voice-Studio-Rieng-1.3.0-Portable-Windows-x64.zip.sha256
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+      - name: Publish verified Windows download
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = "voice-studio-rieng-1.3-portable-${{ github.run_id }}"
+          @"
+          Voice Studio Rieng 1.3.0 Portable for Windows 10/11 x64.
+
+          Extract ALL files and open MO_TOOL.bat. Includes Windows Python, FFmpeg and Vietnamese voice models; no installation or model download is required for bundled voices.
+          Automatic SRT cue fitting and one-million-character text support are included. Long cues are adjusted individually; very short timings may require fast speech and should be reviewed.
+          Built from the checksum-verified Windows portable base36 runtime/models and the standalone 1.3.0 source. Native Windows validation, relocated-interpreter offline synthesis, audio exports and the 1.410-to-0.900-second cue regression must pass before this release step runs.
+          Qwen international models are optional and are not bundled. No personal voice samples, jobs, scripts or credentials are packaged.
+          Source: ${{ github.sha }}
+          "@ | Set-Content -Encoding utf8 "${{ runner.temp }}/portable-release-notes.txt"
+          gh release create $tag "${{ runner.temp }}/portable/Voice-Studio-Rieng-1.3.0-Portable-Windows-x64.zip" "${{ runner.temp }}/portable/Voice-Studio-Rieng-1.3.0-Portable-Windows-x64.zip.sha256" --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Voice Studio Rieng 1.3.0 - Windows Portable" --notes-file "${{ runner.temp }}/portable-release-notes.txt" --latest=false
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
