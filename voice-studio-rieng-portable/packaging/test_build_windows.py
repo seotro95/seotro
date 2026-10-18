@@ -25,6 +25,7 @@ class BaseArchiveTests(unittest.TestCase):
         content = archive([
             ('Voice-Studio/runtime/python.exe', b'python'),
             ('Voice-Studio/runtime/LICENSE.txt', b'python license'),
+            ('Voice-Studio/runtime/Lib/site-packages/fastapi/.agents/instructions.md', b'upstream developer metadata'),
             ('Voice-Studio/ffmpeg/bin/ffmpeg.exe', b'ffmpeg'),
             ('Voice-Studio/ffmpeg/UPSTREAM-SHA256.txt', b'upstream checksum'),
             ('Voice-Studio/MODEL-APACHE-2.0-LICENSE.txt', b'model license'),
@@ -47,6 +48,7 @@ class BaseArchiveTests(unittest.TestCase):
             self.assertTrue(list((destination/'app/.data/models/cache/hub').rglob('README.md')))
             for name in ('token', '.agent_harnesses.json', 'private.wav', 'private.json', 'app.py'):
                 self.assertFalse(list(destination.rglob(name)), name)
+            self.assertFalse(list(destination.rglob('.agents')))
 
     def test_bad_checksum_is_rejected_before_extraction(self):
         with tempfile.TemporaryDirectory() as temporary:

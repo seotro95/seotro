@@ -67,6 +67,8 @@ def extract_verified_base(archive, root, expected=BASE_SHA256):
             relative = parts[len(prefix):]
             destination = None
             if relative and relative[0] in {'runtime', 'ffmpeg'}:
+                if any(part in {'.agents', '.codex', '.git', '.aws'} for part in relative):
+                    continue  # upstream wheel development metadata is not runtime code
                 destination = root.joinpath(*relative)
             elif relative[:3] == ('voice-studio', '.data', 'models'):
                 model = relative[3:]
@@ -141,7 +143,7 @@ def copy_runtime(destination):
     source = Path(sys.base_prefix)
     if Path(sys.prefix).resolve() != source.resolve() or (source/'pyvenv.cfg').exists():
         raise ValueError('Fresh builds require base Windows Python, not a virtualenv')
-    shutil.copytree(source, destination, ignore=shutil.ignore_patterns('__pycache__', '*.pyc', '*.pdb', 'pip-cache'))
+    shutil.copytree(source, destination, ignore=shutil.ignore_patterns('__pycache__', '*.pyc', '*.pdb', 'pip-cache', '.agents', '.codex', '.git', '.aws'))
     vs_root = Path(os.environ.get('ProgramFiles', 'C:/Program Files'))/'Microsoft Visual Studio'
     candidates = [p for p in vs_root.glob('*/*/VC/Redist/MSVC/*/x64/Microsoft.VC143.CRT/msvcp140.dll')
                   if 'onecore' not in str(p).lower()]
