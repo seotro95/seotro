@@ -253,3 +253,29 @@ Chọn ngôn ngữ gốc / ngôn ngữ phụ đề đích, bấm **Tạo phụ �
 Voice văn bản mặc định Nano 4 bước, không thêm khoảng nghỉ và ghép câu ngắn để giảm lượt chạy mô hình; chọn 2 tiến trình khi có ít nhất 4 CPU logic và 3 GB RAM trống. Nút ưu tiên tốc độ giữ giọng cá nhân / Windows đã chọn. Chọn 8 hoặc 16 bước nếu muốn chất lượng cao hơn. Tốc độ thực tế tùy máy, ngôn ngữ và giọng; không bảo đảm 1 giờ audio trong 2 phút.
 
 TXT mặc định bỏ mốc đầu dòng như `[01:30]`, `01:30 lời` và dòng thời gian/chỉ số SRT; vẫn đọc số tiền, số lượng, giờ hẹn trong câu. Có thể bỏ chọn **Không đọc mốc phút–giây** nếu cần đọc nguyên văn. SRT nhập ở chế độ SRT vẫn giữ nguyên mốc để đồng bộ video. Đóng tool cũ và kiểm tra **3.6.0** khi mở bản mới.
+
+
+## Nhập TXT/SRT và tạo voice theo mốc có sẵn
+
+Trong khung voice riêng, dùng **Nhập tệp TXT / SRT**. Để sửa cùng video, chọn video rồi dùng **Nhập TXT / SRT vào phụ đề video**; các câu sẽ được lưu vào dự án. Tệp hỗ trợ UTF-8 và UTF-16 có BOM, tối đa 2 MB / 200.000 ký tự. Nhập lỗi giữ nguyên lời đang sửa.
+
+SRT giữ thời gian từng câu. Có thể dùng khoảng phút:giây trong TXT:
+
+```text
+00:01 --> 00:04 Xin chào.
+00:05 --> 00:08 Cảm ơn.
+```
+
+Hoặc mốc bắt đầu, với dòng cuối chỉ ghi mốc kết thúc:
+
+```text
+[00:01] Xin chào.
+[00:04] Cảm ơn.
+[00:08]
+```
+
+Dạng chỉ ghi mốc bắt đầu lấy mốc kế tiếp làm kết thúc câu trước; muốn có khoảng im lặng riêng, dùng khoảng bắt đầu/kết thúc. Không thể biết độ dài cuối nếu file không ghi mốc kết thúc, nên ứng dụng yêu cầu bổ sung thay vì đoán. TXT không có mốc vẫn đọc liên tục.
+
+Voice có mốc dùng chế độ căn nghiêm ngặt: giữ khoảng trống và tổng thời lượng WAV bằng mốc kết thúc cuối. Câu quá dài tự điều chỉnh nhịp trong giới hạn an toàn, vượt giới hạn sẽ báo số câu để sửa, không cắt lời hay đẩy lệch câu sau. Tổng thời lượng bằng nhau không bảo đảm khớp khẩu hình. MP3 có thể có sai số khung nén; ưu tiên WAV khi dựng video.
+
+Khung voice riêng có nhịp Tự nhiên/Kể chuyện/Thư giãn/Sôi nổi/Tin tức và mặc định Nano 16 bước để ưu tiên chất lượng. Đây là điều chỉnh nhịp và nghỉ theo khả năng mô hình, không phải mô hình cảm xúc mới; cần nghe đánh giá giọng thực tế. Mốc thời gian vẫn được ưu tiên khi chọn nhịp.

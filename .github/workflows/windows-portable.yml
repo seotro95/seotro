@@ -2,7 +2,7 @@ name: Build Windows Portable
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, 'codex/voice-studio-3.6.1-srt']
     paths:
       - '.github/workflows/windows-portable.yml'
       - 'voice-studio/**'
@@ -12,7 +12,7 @@ env:
 permissions:
   contents: write
 concurrency:
-  group: windows-portable
+  group: windows-portable-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   build:
@@ -58,8 +58,9 @@ jobs:
           No Python installation, venv setup, API key or first-run model download is required for bundled voices.
           Qwen international voices and Ollama writing/translation are optional downloads.
           Native Windows smoke tests, relocated-interpreter inference and MP4 export passed before publication.
+          Version 3.6.1 includes timed TXT/SRT import and strict speech alignment fixes.
           Source commit: ${{ github.sha }}
           "@
           $body | Set-Content -Encoding utf8 "${{ runner.temp }}/release-notes.txt"
-          gh release create $tag "${{ runner.temp }}/portable/Voice-Studio-Windows-x64.zip" "${{ runner.temp }}/portable/Voice-Studio-Windows-x64.zip.sha256" --target "${{ github.sha }}" --title "Voice Studio Windows - ready to use" --notes-file "${{ runner.temp }}/release-notes.txt" --latest
+          gh release create $tag "${{ runner.temp }}/portable/Voice-Studio-Windows-x64.zip" "${{ runner.temp }}/portable/Voice-Studio-Windows-x64.zip.sha256" --target "${{ github.sha }}" --title "Voice Studio 3.6.1 Windows - TXT/SRT timing fix" --notes-file "${{ runner.temp }}/release-notes.txt" --latest
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

@@ -24,7 +24,7 @@ from starlette.concurrency import run_in_threadpool
 from narration import MAX_CHARACTERS, PROFILES, plan_segments
 import writing
 from dubbing import inspect_video
-from subtitles import parse_srt, export_srt
+from subtitles import parse_srt, export_srt, normalize_script
 from system_voices import installed_voices
 from hardware import supports_int8, system_info
 from performance import speed_report
@@ -102,7 +102,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.6.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.6.1', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -378,6 +378,11 @@ def run_job(ident):
 
 @app.post('/api/speech', status_code=202)
 def speech(body: Speech):
+    try:
+        if body.input_format == 'srt' or body.skip_timestamps:
+            body.text, body.input_format = normalize_script(body.text, body.input_format)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
     if not body.text.strip() or body.language not in LANGUAGES or body.format not in {'wav', 'mp3'} or body.delivery not in PROFILES:
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
     if body.video_id:
@@ -698,13 +703,37 @@ class ScriptConversion(BaseModel):
 @app.post('/api/scripts/convert')
 def convert_script(body: ScriptConversion):
     try:
-        cues = parse_srt(body.text) if body.input_format == 'srt' else None
+        normalized, kind = normalize_script(body.text, body.input_format)
+        cues = parse_srt(normalized) if kind == 'srt' else None
         if body.output_format == 'srt' and cues is None:
             raise ValueError('Tạo voice hoàn tất rồi xuất SRT để có mốc thời gian thật.')
         text = (export_srt(cues) if body.output_format == 'srt' else '\n'.join(c['text'] for c in cues)) if cues else body.text
-        return {'text': text}
+        return {'text': text, 'input_format': kind}
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from None
+
+@app.post('/api/scripts/import')
+async def import_script(file: UploadFile = File(...)):
+    name = (file.filename or '').lower()
+    if not name.endswith(('.txt', '.srt')):
+        raise HTTPException(422, 'Chọn tệp TXT hoặc SRT.')
+    data = await file.read(2 * 1024 * 1024 + 1)
+    if len(data) > 2 * 1024 * 1024:
+        raise HTTPException(422, 'Tệp tối đa 2 MB.')
+    try:
+        encoding = 'utf-16' if data.startswith((b'\xff\xfe', b'\xfe\xff')) else 'utf-8-sig'
+        text = data.decode(encoding)
+        if not text.strip() or len(text) > MAX_CHARACTERS or '\x00' in text:
+            raise ValueError('Tệp cần lời đọc và tối đa 200.000 ký tự.')
+        text, kind = normalize_script(text, 'srt' if name.endswith('.srt') else 'txt')
+        if len(text) > MAX_CHARACTERS:
+            raise ValueError('Nội dung sau chuyển đổi vượt 200.000 ký tự.')
+        return {'text': text, 'input_format': kind, 'cues': parse_srt(text) if kind == 'srt' else []}
+    except UnicodeError:
+        raise HTTPException(422, 'Lưu tệp ở UTF-8 hoặc UTF-16 có BOM rồi nhập lại.') from None
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
+
 
 # Video tools share the speech queue so CPU-heavy models never compete.
 class EditorCue(BaseModel):
@@ -807,7 +836,7 @@ def create_video_task(body:VideoTask):
         if body.source_language and body.source_language!='auto' and body.source_language.split('-')[0] not in RECOGNITION_CODES:raise ValueError('Ngôn ngữ gốc chưa được hỗ trợ.')
         if body.action=='translate_text':
             if not body.text.strip() or body.target_language not in LANGUAGES:raise ValueError('Nhập văn bản và chọn ngôn ngữ dịch.')
-            if body.input_format=='srt':parse_srt(body.text)
+            body.text, body.input_format = normalize_script(body.text, body.input_format)
         if body.action=='subtitles' and not body.srt and not (DATA/'models'/'whisper-base'/'model.bin').is_file():
             raise HTTPException(503,'Model nhận dạng chưa sẵn sàng. Dùng bản Portable có sẵn Whisper hoặc chạy download_subtitle_model.bat.')
         if body.target_language and body.provider!='ollama' and not writing.get_key(body.provider):
