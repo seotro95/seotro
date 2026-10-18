@@ -130,7 +130,10 @@ class PCMWriter:
         return truncated
 
     def silence(self, seconds):
-        remaining = min(round(seconds * self.rate), self.limit - self.frames)
+        self.silence_frames(round(seconds * self.rate))
+
+    def silence_frames(self, frames):
+        remaining = max(0, min(frames, self.limit - self.frames))
         while remaining > 0:
             count = min(65536, remaining)
             self.file.writeframesraw(b'\0\0' * count)

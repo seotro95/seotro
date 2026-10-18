@@ -1,15 +1,27 @@
-# Voice Studio Riêng 1.2 · Đa quốc gia, ưu tiên tốc độ trên CPU
+# Voice Studio Riêng 1.3 · Nhập TXT/SRT và khớp timeline video
 
-Bản Portable Windows 10/11 x64 đóng gói sẵn Python, FFmpeg và các mô hình. Giải nén toàn bộ ZIP rồi mở `MO_TOOL.bat`. Liên kết bản đã kiểm tra nằm trong [trang tải](../downloads/voice-studio/README.md).
+Bản Portable Windows 10/11 x64 có sẵn Python, FFmpeg và mô hình. Giải nén toàn bộ ZIP rồi mở `MO_TOOL.bat`. Liên kết tải đã kiểm tra nằm trong [trang tải](../downloads/voice-studio/README.md).
 
-- Nhân bản tiếng Việt mặc định Nano 4 bước, tự chọn số đoạn xử lý song song theo CPU/RAM, giữ mẫu giọng đã chọn. Có thể đổi sang 8/16 bước hoặc Tiêu chuẩn để nghe và so sánh chất lượng.
-- Thêm 16 giọng Piper theo quốc gia: Mỹ, Anh, Pháp, Đức, Tây Ban Nha, Ý, Brazil, Nga, Hà Lan, Bỉ, Ba Lan, Thụy Điển, Ukraine, Séc, Đan Mạch và Romania. Các giọng này chạy offline trên CPU và có sẵn trong Portable.
-- Tìm ngôn ngữ/quốc gia, lọc giọng; tạo lời đọc, kể chuyện, bản tin, review từ kịch bản của bạn. Piper là giọng có sẵn; nhân bản trong Portable hỗ trợ tiếng Việt.
-- Nhập tối đa **200.000 ký tự**, TXT/SRT; xuất WAV/MP3/TXT/SRT; dừng/tiếp tục, lưu lịch sử và ghép các đoạn thành bản thu hoàn chỉnh.
-- **Ưu tiên tốc độ** giữ giọng và ngôn ngữ quốc tế đã chọn. **Đo tốc độ thực** dùng đoạn mẫu đúng ngôn ngữ, không thay nội dung đang soạn.
+1. Bấm **Nhập TXT / SRT** hoặc kéo tệp vào ô văn bản. Hỗ trợ UTF-8, UTF-16 và Windows-1258; giữ dấu tiếng Việt và mốc thời gian.
+2. Bật **Tự động khớp timeline**. Xem trước các câu/mốc. Nếu TXT chỉ có mốc bắt đầu, nhập **Tổng thời lượng video** để xác định mốc cuối; tool không tự đoán.
+3. Chọn **WAV** khi dựng video. Giọng được căn theo từng ô lời thoại; giữ khoảng trống đầu/giữa/cuối và đúng tổng thời lượng. Xuất kèm SRT hoặc TXT có mốc để đưa vào phần mềm dựng.
+4. Xem **báo cáo đồng bộ**: số câu khớp, thời lượng đích/thực tế và độ lệch. Câu quá dài để đọc vừa ô sẽ báo rõ; tool không cắt mất lời hoặc âm thầm xuất thiếu nội dung.
 
-Nano 4 bước có thể giảm độ tự nhiên hoặc độ giống mẫu; hãy nghe thử. Tốc độ phụ thuộc máy và mô hình. Kết quả đo bản 1.2 trên Linux 4 lõi: 64 phút 55,5 giây WAV nhân bản trong 82,9 giây; chưa phải kết quả trên máy Windows của bạn. Xem [HIEU_NANG.md](HIEU_NANG.md).
+Ví dụ TXT:
 
-Khi cập nhật: tắt tool, sao lưu `app/.data`, giải nén bản mới sang thư mục mới. Chuyển các thư mục con `voices`, `jobs`, `audio`, `parts` từ bản cũ vào `app/.data` mới nếu cần giữ mẫu/lịch sử; giữ các mô hình đi kèm bản mới.
+```text
+[00:01.125 - 00:04.875] Xin chào.
+[00:06 - 00:08.250] Cảm ơn bạn đã lắng nghe.
+```
 
-Nếu chạy **mã nguồn** thay vì Portable: cài Python 3.12 x64, chạy `CAI_DAT.bat`, `TAI_GIONG_NHAN_BAN_NHANH.bat` và `TAI_GIONG_QUOC_TE_NHANH.bat` trước khi mở tool. Qwen quốc tế/nhân bản quốc tế là thành phần tùy chọn riêng, không kèm trong Portable CPU.
+Hoặc `[00:01] Lời thứ nhất` rồi `[00:05] Lời thứ hai`; cần nhập độ dài video cho mốc kết thúc câu cuối. TXT không có mốc có thể nhập tổng thời lượng để căn cả bài, hoặc tắt căn timeline để đọc tự nhiên.
+
+**Giọng tự nhiên hơn:** chọn Cân bằng 8 bước hoặc Ưu tiên chất lượng 16 bước cho Nano; số bước cao xử lý lâu hơn. Mẫu giọng cần chứa cách nhấn nhá mong muốn, nhất là 5 giây đầu. Nano hỗ trợ chèn thủ công `[cười]`, `[thở dài]`, `[hắng giọng]`. Các lựa chọn Kể chuyện/Bản tin điều chỉnh nhịp đọc, không bảo đảm điều khiển cảm xúc như người thật.
+
+WAV khớp timeline đến từng mẫu âm thanh. MP3 có thông tin đệm mã hóa nên một số phần mềm có thể hiển thị thời lượng gói dài hơn; ưu tiên WAV để dựng chính xác. Khớp timeline không có nghĩa là tự khớp khẩu hình video khi tệp gốc ghi sai mốc.
+
+Giữ 16 giọng quốc tế offline trên CPU, nhân bản tiếng Việt, giới hạn 200.000 ký tự, xuất WAV/MP3/TXT/SRT và dừng/tiếp tục. Chế độ Nhanh 4 bước vẫn có sẵn. Số đo tốc độ cũ trong [HIEU_NANG.md](HIEU_NANG.md) áp dụng cho cấu hình đã đo, không áp dụng tự động cho căn timeline hoặc Nano16.
+
+Khi cập nhật: tắt tool, sao lưu `app/.data`, giải nén bản mới sang thư mục mới. Chuyển các thư mục con `voices`, `jobs`, `audio`, `parts` nếu cần giữ mẫu/lịch sử; giữ các mô hình đi kèm bản mới.
+
+Nếu dùng mã nguồn: cài Python 3.12 x64, chạy `CAI_DAT.bat`, `TAI_GIONG_NHAN_BAN_NHANH.bat` và `TAI_GIONG_QUOC_TE_NHANH.bat` trước khi mở tool.

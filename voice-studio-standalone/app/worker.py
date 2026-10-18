@@ -296,6 +296,13 @@ def render(job, synthesize=None):
         raise ValueError('Không có nội dung đọc sau khi xử lý ký hiệu nhấn/nghỉ.')
     prepare_checkpoints(job, segments, work)
     maximum = job.get('max_minutes', 180) * 60
+    from subtitles import parse_srt, export_srt
+    cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
+    exact_timing = bool(cues) and job.get('timing_mode') == 'exact'
+    target_frames = None
+    if exact_timing:
+        from timeline_audio import timeline_frames
+        target_frames = timeline_frames(cues, job.get('timeline_seconds'), maximum)
     assembly = work / 'assembled.wav'
     writer = PCMWriter(assembly, max_seconds=maximum)
     write_state(work / 'progress.json', {**runtime_fields, 'completed': 0, 'total': len(segments), 'progress': 0, 'phase': 'Chuẩn bị mô hình; lần đầu có thể chậm hơn'})
@@ -310,12 +317,36 @@ def render(job, synthesize=None):
     payload = {key: value for key, value in job.items() if key != 'text'}
     profile_speed, default_pause = PROFILES[job.get('delivery', 'natural')]
     gap = job.get('paragraph_pause', default_pause)
-    from subtitles import parse_srt, export_srt
-    cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
     timed = []
     alignment=[]
+    def sync_report():
+        if not exact_timing:
+            return None
+        requested = job.get('timeline_seconds')
+        if requested is None:
+            requested = cues[-1]['end']
+        actual_seconds = writer.frames / writer.rate
+        errors = [abs(actual_seconds - requested) * 1000]
+        for entry in alignment:
+            if entry['status'] == 'matched':
+                errors.extend((abs(entry['start_frame'] / writer.rate - entry['start']) * 1000,
+                               abs(entry['end_frame'] / writer.rate - entry['end']) * 1000))
+        matched = sum(entry['status'] == 'matched' for entry in alignment)
+        speech_seconds = sum(entry['spoken_end'] - entry['spoken_start'] for entry in alignment if entry['status'] == 'matched')
+        return {'mode': 'exact', 'target_seconds': requested, 'actual_seconds': actual_seconds,
+                'max_error_ms': round(max(errors), 6), 'matched_cues': matched,
+                'total_cues': len(cues), 'complete': completed == len(segments) and matched == len(cues) and not clipped and writer.frames == target_frames,
+                'fitted_audio_seconds': round(speech_seconds, 6),
+                'padding_seconds': round(max(0, actual_seconds - speech_seconds), 6),
+                'sample_rate': writer.rate, 'format': job['format'],
+                'precision': 'PCM sample' if job['format'] == 'wav' else 'gapless decoded PCM; MP3 packet duration may include encoder padding'}
     def save_alignment(sync_ok=False,failed=None):
-        write_state(work/'alignment.json',{'cues':alignment,'sync_ok':sync_ok,'failed_cue':failed,'mode':job.get('cue_fit','strict'),'max_tempo':job.get('max_cue_tempo',1.5)})
+        write_state(work/'alignment.json',{'cues':alignment,'sync_ok':sync_ok,'failed_cue':failed,
+                    'mode':'exact' if exact_timing else job.get('cue_fit','strict'),
+                    'max_tempo':job.get('max_cue_tempo',2.0 if exact_timing else 1.5),
+                    'min_tempo':job.get('min_cue_tempo',.65) if exact_timing else None,
+                    'target_audio_seconds':target_frames / writer.rate if target_frames is not None else None,
+                    'actual_audio_seconds':writer.frames / writer.rate, 'sync_report':sync_report()})
     if cues:save_alignment()
     cue_writer = None
     cue_path = work / 'cue.wav'
@@ -361,6 +392,8 @@ def render(job, synthesize=None):
                     reused_chunks += 1
                     reused_seconds += part_seconds
                 clipped = target_writer.append(part)
+                if exact_timing and clipped:
+                    raise ValueError(f'Câu {segment.cue + 1}: lời đọc vượt giới hạn xử lý; tool không cắt mất lời.')
                 spoken_end = writer.frames/writer.rate
                 completed = index + 1
                 if not clipped:
@@ -373,48 +406,81 @@ def render(job, synthesize=None):
                 cue_writer.close()
                 cue_writer = None
                 cue = cues[segment.cue]
-                original_end=cue['end']
-                boundary=(cues[segment.cue+1]['start'] if segment.cue+1<len(cues) else job.get('timeline_seconds',original_end))
-                available=(max(original_end,boundary) if job.get('cue_fit')=='gap' else original_end)-cue['start']
-                with wave.open(str(cue_path)) as cue_audio:
-                    actual = cue_audio.getnframes()/cue_audio.getframerate()
-                maximum_tempo=job.get('max_cue_tempo',1.5)
-                applied_tempo=1.0
-                if actual > available:
-                    ratio = actual/available
-                    if ratio > maximum_tempo:
-                        alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':original_end,'available':round(available,3),'raw_seconds':round(actual,3),'status':'too_long','required_tempo':round(ratio,3)})
-                        save_alignment(failed=segment.cue+1)
-                        raise ValueError(f'Câu SRT {segment.cue+1} đọc quá dài ({actual:.2f}s cho ô {available:.2f}s). Nới mốc, rút ngắn lời hoặc chọn nhịp nhanh hơn; không cắt mất lời.')
+                if exact_timing:
+                    from timeline_audio import fit_cue, fill_to_frame
+                    start_frame = round(cue['start'] * writer.rate)
+                    end_frame = round(cue['end'] * writer.rate)
                     fitted = work / 'cue-fit.wav'
-                    tempo = min(maximum_tempo, ratio*1.002)
-                    for attempt in range(5):
-                        if (work / 'cancel.flag').exists():
-                            raise InterruptedError('Tác vụ đã dừng.')
-                        normalize_audio(cue_path, fitted, tempo, 1)
-                        with wave.open(str(fitted)) as fitted_audio:
-                            fitted_seconds = fitted_audio.getnframes()/fitted_audio.getframerate()
-                        if fitted_seconds <= available+.00001:
-                            fitted.replace(cue_path)
-                            applied_tempo=tempo
-                            break
-                        if tempo >= maximum_tempo or attempt == 4:
+                    with wave.open(str(cue_path)) as cue_audio:
+                        actual = cue_audio.getnframes() / cue_audio.getframerate()
+                    try:
+                        fit = fit_cue(cue_path, fitted, end_frame - start_frame,
+                                      min_tempo=job.get('min_cue_tempo', .65),
+                                      max_tempo=job.get('max_cue_tempo', 2.0),
+                                      cancel_flag=work / 'cancel.flag', cue_number=segment.cue + 1)
+                    except ValueError:
+                        alignment.append({'cue': segment.cue + 1, 'start': cue['start'], 'end': cue['end'],
+                                          'raw_seconds': round(actual, 5), 'status': 'too_long'})
+                        save_alignment(failed=segment.cue + 1)
+                        raise
+                    fill_to_frame(writer, start_frame)
+                    if writer.append(fitted):
+                        raise ValueError(f'Câu {segment.cue + 1}: âm thanh vượt giới hạn xuất; tool không cắt lời.')
+                    spoken_end_frame = writer.frames
+                    fill_to_frame(writer, end_frame)
+                    alignment.append({'cue': segment.cue + 1, 'start': cue['start'], 'end': cue['end'],
+                                      'start_frame': start_frame, 'end_frame': end_frame,
+                                      'raw_seconds': round(actual, 5),
+                                      'spoken_start': start_frame / writer.rate,
+                                      'spoken_end': spoken_end_frame / writer.rate,
+                                      'tempo': round(fit['tempo'], 6),
+                                      'padding_seconds': fit['padding_frames'] / writer.rate,
+                                      'status': 'matched'})
+                    if len(alignment) % 16 == 0 or len(alignment) == len(cues):
+                        save_alignment()
+                else:
+                    original_end=cue['end']
+                    boundary=(cues[segment.cue+1]['start'] if segment.cue+1<len(cues) else (job.get('timeline_seconds') or original_end))
+                    available=(max(original_end,boundary) if job.get('cue_fit')=='gap' else original_end)-cue['start']
+                    with wave.open(str(cue_path)) as cue_audio:
+                        actual = cue_audio.getnframes()/cue_audio.getframerate()
+                    maximum_tempo=job.get('max_cue_tempo',1.5)
+                    applied_tempo=1.0
+                    if actual > available:
+                        ratio = actual/available
+                        if ratio > maximum_tempo:
                             alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':original_end,'available':round(available,3),'raw_seconds':round(actual,3),'status':'too_long','required_tempo':round(ratio,3)})
                             save_alignment(failed=segment.cue+1)
-                            raise ValueError(f'Câu SRT {segment.cue+1} vẫn vượt ô ở mức căn nhịp tối đa; hãy nới mốc thời gian.')
-                        # atempo has small frame/window rounding differences. Refit the
-                        # original cue, never cut words or compound tempo transforms.
-                        tempo = min(maximum_tempo, tempo*fitted_seconds/available*1.005)
-                if job.get('cue_fit')=='gap':
-                    with wave.open(str(cue_path)) as fitted_audio:spoken_seconds=fitted_audio.getnframes()/fitted_audio.getframerate()
-                    cue['end']=round(min(boundary,max(original_end,cue['start']+spoken_seconds)),3)
-                writer.silence(max(0, cue['start']-writer.frames/writer.rate))
-                actual_start=writer.frames/writer.rate
-                clipped = writer.append(cue_path) or clipped
-                actual_end=writer.frames/writer.rate
-                alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':cue['end'],'raw_seconds':round(actual,3),'spoken_start':round(actual_start,5),'spoken_end':round(actual_end,5),'tempo':round(applied_tempo,4),'status':'matched' if abs(actual_start-cue['start'])<=.001 and actual_end<=cue['end']+.001 and not clipped else 'overflow'})
-                if len(alignment)%16==0 or len(alignment)==len(cues):save_alignment(sync_ok=all(c['status']=='matched' for c in alignment) and len(alignment)==len(cues))
-                writer.silence(max(0, cue['end']-writer.frames/writer.rate))
+                            raise ValueError(f'Câu SRT {segment.cue+1} đọc quá dài ({actual:.2f}s cho ô {available:.2f}s). Nới mốc, rút ngắn lời hoặc chọn nhịp nhanh hơn; không cắt mất lời.')
+                        fitted = work / 'cue-fit.wav'
+                        tempo = min(maximum_tempo, ratio*1.002)
+                        for attempt in range(5):
+                            if (work / 'cancel.flag').exists():
+                                raise InterruptedError('Tác vụ đã dừng.')
+                            normalize_audio(cue_path, fitted, tempo, 1)
+                            with wave.open(str(fitted)) as fitted_audio:
+                                fitted_seconds = fitted_audio.getnframes()/fitted_audio.getframerate()
+                            if fitted_seconds <= available+.00001:
+                                fitted.replace(cue_path)
+                                applied_tempo=tempo
+                                break
+                            if tempo >= maximum_tempo or attempt == 4:
+                                alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':original_end,'available':round(available,3),'raw_seconds':round(actual,3),'status':'too_long','required_tempo':round(ratio,3)})
+                                save_alignment(failed=segment.cue+1)
+                                raise ValueError(f'Câu SRT {segment.cue+1} vẫn vượt ô ở mức căn nhịp tối đa; hãy nới mốc thời gian.')
+                            # atempo has small frame/window rounding differences. Refit the
+                            # original cue, never cut words or compound tempo transforms.
+                            tempo = min(maximum_tempo, tempo*fitted_seconds/available*1.005)
+                    if job.get('cue_fit')=='gap':
+                        with wave.open(str(cue_path)) as fitted_audio:spoken_seconds=fitted_audio.getnframes()/fitted_audio.getframerate()
+                        cue['end']=round(min(boundary,max(original_end,cue['start']+spoken_seconds)),3)
+                    writer.silence(max(0, cue['start']-writer.frames/writer.rate))
+                    actual_start=writer.frames/writer.rate
+                    clipped = writer.append(cue_path) or clipped
+                    actual_end=writer.frames/writer.rate
+                    alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':cue['end'],'raw_seconds':round(actual,3),'spoken_start':round(actual_start,5),'spoken_end':round(actual_end,5),'tempo':round(applied_tempo,4),'status':'matched' if abs(actual_start-cue['start'])<=.001 and actual_end<=cue['end']+.001 and not clipped else 'overflow'})
+                    if len(alignment)%16==0 or len(alignment)==len(cues):save_alignment(sync_ok=all(c['status']=='matched' for c in alignment) and len(alignment)==len(cues))
+                    writer.silence(max(0, cue['end']-writer.frames/writer.rate))
             elif not cues and segment.text:
                 timed.append({'start': segment_start, 'end': spoken_end, 'text': segment.text})
             duration = writer.frames / writer.rate
@@ -423,6 +489,12 @@ def render(job, synthesize=None):
             if writer.frames >= writer.limit:
                 clipped = completed < len(segments) or clipped
                 break
+        if exact_timing:
+            from timeline_audio import fill_to_frame
+            if completed != len(segments):
+                raise ValueError('Chưa đọc hết lời thoại; tool không xuất bản căn thời gian thiếu câu.')
+            fill_to_frame(writer, target_frames)
+            save_alignment(sync_ok=len(alignment) == len(cues) and all(c['status'] == 'matched' for c in alignment))
     finally:
         failure = sys.exc_info()[1]
         failed = failure is not None
@@ -456,7 +528,7 @@ def render(job, synthesize=None):
     assembly.unlink(missing_ok=True)
     subtitle_text = export_srt(cues if cues else timed)
     (DATA / 'audio' / (job['id'] + '.srt')).write_text(subtitle_text, encoding='utf-8')
-    write_state(work / 'result.json', {**runtime_fields, 'audio_seconds': writer.frames / writer.rate, 'synthesized_audio_seconds': round(synthesized_seconds, 5), 'reused_chunks': reused_chunks, 'reused_audio_seconds': round(reused_seconds, 5), 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3)})
+    write_state(work / 'result.json', {**runtime_fields, 'audio_seconds': writer.frames / writer.rate, 'synthesized_audio_seconds': round(synthesized_seconds, 5), 'reused_chunks': reused_chunks, 'reused_audio_seconds': round(reused_seconds, 5), 'duration_limited': clipped, 'timing_mode': 'exact' if exact_timing else job.get('timing_mode', 'legacy'), 'target_audio_seconds': target_frames / writer.rate if target_frames is not None else None, 'sync_ok': exact_timing and not clipped and writer.frames == target_frames, 'sync_report': sync_report(), 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3)})
 
 
 def voice_error(exc):

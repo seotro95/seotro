@@ -1,0 +1,42 @@
+{
+  "version": "1.3.0",
+  "reference": "synthetic technical reference, not human fidelity assessment",
+  "jobs": [
+    {
+      "id": "ac0d6b3efd0d4b049cfd540a608cc0f2",
+      "status": "done",
+      "nano_steps": 16,
+      "timing_mode": "natural",
+      "audio_seconds": 2.49,
+      "sync_report": null
+    },
+    {
+      "id": "2dc67260f4cb4d8e9e9bd34e3155c263",
+      "status": "done",
+      "nano_steps": 8,
+      "timing_mode": "exact",
+      "audio_seconds": 22.5,
+      "sync_report": {
+        "mode": "exact",
+        "target_seconds": 22.5,
+        "actual_seconds": 22.5,
+        "max_error_ms": 0.0,
+        "matched_cues": 2,
+        "total_cues": 2,
+        "complete": true,
+        "fitted_audio_seconds": 8.051667,
+        "padding_seconds": 14.448333,
+        "sample_rate": 24000,
+        "format": "wav",
+        "precision": "PCM sample"
+      }
+    }
+  ],
+  "scope": "Linux real synthesis and FFmpeg validation. Native Windows portable validation is performed separately by release CI.",
+  "regression": {
+    "tests_passed": 155,
+    "subtests_passed": 8,
+    "browser": "real import API + mocked speech: file chooser,UTF16,TXTmissingend,drag/drop,exports,exact/natural,quality,referenceidentity,retry,entities,mobile passed",
+    "javascript_errors": 0
+  }
+}

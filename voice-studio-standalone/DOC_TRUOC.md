@@ -1,3 +1,13 @@
+# Bản Portable 1.3 · Sửa nhập tệp và căn đúng timeline
+
+Giải nén toàn bộ ZIP rồi mở `MO_TOOL.bat`. Nhập TXT/SRT bằng nút hoặc kéo thả; bật Tự động khớp timeline và chọn WAV để dựng video. TXT chỉ có giờ bắt đầu cần nhập tổng độ dài video cho mốc cuối. Xem bảng thời gian trước khi tạo và báo cáo đồng bộ sau khi xong. Xuất SRT/TXT giữ đúng mốc cùng WAV.
+
+Mô hình tự căn nhịp đọc trong giới hạn để giữ cao độ. Nếu lời quá dài cho ô, tool báo đúng câu cần rút lời/nới mốc, không cắt mất từ. Đọc cảm xúc chủ yếu theo mẫu giọng; chọn Nano8/16 để ưu tiên độ mượt hoặc thêm thủ công [cười]/[thở dài]/[hắng giọng]. Số bước cao chậm hơn; Nhanh4 vẫn có sẵn.
+
+Hướng dẫn mới đầy đủ trong README.md. Phần dưới là lịch sử các bản trước.
+
+---
+
 # Bản Portable 1.2 · Mở ngay sau khi giải nén
 
 Giải nén toàn bộ ZIP, mở `MO_TOOL.bat`. Không cần cài Python, FFmpeg, thư viện hay tải mô hình.

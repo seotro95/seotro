@@ -14,7 +14,7 @@ import urllib.request
 import zipfile
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.2.0'
+VERSION = '1.3.0'
 ARCHIVE_NAME = f'Voice-Studio-Rieng-{VERSION}-Portable-Windows-x64.zip'
 FFMPEG_BASE = 'https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/'
 FFMPEG_ASSET = 'ffmpeg-n8.1-latest-win64-gpl-8.1.zip'
@@ -100,7 +100,7 @@ def write_launchers(root):
         if args:
             content = content.replace('exit /b %VOICE_EXIT%', 'pause\nexit /b %VOICE_EXIT%')
         (root / name).write_bytes(content.replace('\n', '\r\n').encode('ascii'))
-    notices = '''VOICE STUDIO RIENG PORTABLE 1.2.0 - WINDOWS 10/11 X64
+    notices = '''VOICE STUDIO RIENG PORTABLE 1.3.0 - WINDOWS 10/11 X64
 
 Giai nen TOAN BO ZIP vao thu muc duoc phep ghi, sau do mo MO_TOOL.bat.
 Khong can cai Python, FFmpeg, thu vien, API key hoac tai mo hinh.
@@ -108,7 +108,11 @@ Giong Viet Nano, nhan ban Nano va Turbo tieu chuan da duoc kiem tra offline.
 Kem 16 giong quoc te Piper theo quoc gia, chay tren CPU va khong can Internet.
 Loc ngon ngu/quoc gia va chon giong co san de doc van ban dung ngon ngu.
 
-Nhan ban tieng Viet tu dong dung Nano 4 buoc; co the chon Tieu chuan/8/16 buoc.
+Nhap TXT/SRT giu cac moc thoi gian, ho tro UTF-8/UTF-16/Windows-1258.
+Bat Tu dong khop timeline, nhap tong do dai video neu TXT chi co moc bat dau.
+Chon WAV de dung video voi moc va tong do dai chinh xac.
+Cau qua dai se duoc bao loi, khong cat mat loi de ep khop.
+Nano co 4/8/16 buoc; 8/16 muot hon, cham hon. Cam xuc theo mau giong.
 Them/chon mau giong cua ban, bam Uu tien toc do de ap dung cau hinh nhanh.
 Giu cua so tool mo khi dung. Ctrl+C de tat. KIEM_TRA.bat xem trang thai.
 

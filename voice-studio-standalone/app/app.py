@@ -14,6 +14,7 @@ from concurrent.futures import ThreadPoolExecutor
 from contextlib import asynccontextmanager, contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
+from html import escape
 
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse, JSONResponse
@@ -23,7 +24,8 @@ from pydantic import BaseModel, ConfigDict, Field
 from starlette.concurrency import run_in_threadpool
 
 from narration import MAX_CHARACTERS, PROFILES, plan_segments
-from subtitles import parse_srt, export_srt
+from subtitles import parse_srt, export_srt, timestamp
+from script_import import import_script_bytes, parse_script_text
 from system_voices import installed_voices
 from hardware import supports_int8, system_info
 from performance import speed_report
@@ -99,7 +101,7 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
 
 
-app = FastAPI(title='Voice Studio Riêng', version='1.2.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio Riêng', version='1.3.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 @app.exception_handler(RequestValidationError)
@@ -181,6 +183,9 @@ def _config_values():
         'version': app.version,
         'mode': 'local',
         'edition': 'standalone-voice',
+        'timeline_sync': True,
+        'script_import_encodings': ['UTF-8', 'UTF-16', 'Windows-1258'],
+        'default_narration_quality': 'balanced',
         'languages': LANGUAGES,
         'ai_voice_languages': list(dict.fromkeys((['vi', 'en-US', 'en-GB'] if portable else list(CORE_LANGUAGES)) + [lang for voice in piper_presets() for lang in voice['languages']])),
         'ai_clone_languages': ['vi'] if portable else list(CORE_LANGUAGES),
@@ -308,9 +313,12 @@ class Speech(BaseModel):
     delivery: str = 'natural'
     paragraph_pause: float = Field(default=0, ge=0, le=3)
     quality: str = Field(default='auto', pattern='^(auto|standard|fast)$')
-    max_cue_tempo: float = Field(default=1.5, ge=1, le=2)
+    narration_quality: str = Field(default='custom', pattern='^(custom|fast|balanced|expressive)$')
+    timing_mode: str = Field(default='auto', pattern='^(auto|exact|natural)$')
+    min_cue_tempo: float = Field(default=0.65, ge=0.5, le=1)
+    max_cue_tempo: float = Field(default=2.0, ge=1, le=2)
     cue_fit: str = Field(default='strict', pattern='^(strict|gap)$')
-    timeline_seconds: float = Field(default=10800, gt=0, le=10800)
+    timeline_seconds: float | None = Field(default=None, gt=0, le=10800)
 
 
 def stop_worker(process, force=False):
@@ -424,6 +432,36 @@ def speech(body: Speech):
 def queue_speech(body: Speech, *, benchmark=False):
     if not body.text.strip() or body.language not in LANGUAGES or body.format not in {'wav', 'mp3'} or body.delivery not in PROFILES:
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
+    source_input_format = body.input_format
+    try:
+        imported = parse_script_text(body.text, body.input_format, total_seconds=body.timeline_seconds)
+        if body.timing_mode == 'natural':
+            if imported['has_timeline']:
+                body.text = '\n\n'.join(c['text'] for c in imported['cues'])
+            body.input_format = 'txt'
+        else:
+            if imported.get('requires_total_duration'):
+                raise ValueError('TXT chỉ có mốc bắt đầu: nhập thời lượng video để xác định điểm kết thúc câu cuối.')
+            if imported['has_timeline']:
+                body.text = imported['text']
+                body.input_format = 'srt'
+                body.timing_mode = 'exact'
+                if body.timeline_seconds is None:
+                    body.timeline_seconds = imported['timeline_seconds']
+            elif body.timeline_seconds is not None:
+                body.text = export_srt([{'start': 0, 'end': body.timeline_seconds, 'text': body.text}])
+                body.input_format = 'srt'
+                body.timing_mode = 'exact'
+            elif body.timing_mode == 'exact':
+                raise ValueError('Văn bản chưa có timeline. Nhập mốc thời gian hoặc thời lượng video trước khi căn khớp.')
+            else:
+                body.timing_mode = 'natural'
+        if body.narration_quality != 'custom':
+            body.nano_steps = {'fast': 4, 'balanced': 8, 'expressive': 16}[body.narration_quality]
+        if body.narration_quality == 'expressive':
+            body.quality = 'standard'
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
     voice = next((v for v in PRESETS + installed_voices() + records('voices') if v['id'] == body.voice_id), None)
     if not voice or body.language not in voice['languages']:
         raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
@@ -451,10 +489,12 @@ def queue_speech(body: Speech, *, benchmark=False):
             if segment.text:validate_voice_text(segment.text,engine,f'Câu SRT {segment.cue+1}' if body.input_format=='srt' else f'Đoạn {index+1}')
         if body.input_format == 'srt':
             cues = parse_srt(body.text)
-            if body.cue_fit=='gap' and cues[-1]['end']>body.timeline_seconds+.001:
+            if body.timeline_seconds is None:
+                body.timeline_seconds = cues[-1]['end']
+            if cues[-1]['end'] > body.timeline_seconds + .00001:
                 raise ValueError('Phụ đề vượt thời lượng đã chọn.')
-            if cues[-1]['end'] > body.max_minutes*60:
-                raise ValueError('SRT vượt giới hạn thời lượng đã chọn.')
+            if max(cues[-1]['end'], body.timeline_seconds) > body.max_minutes*60:
+                raise ValueError('Timeline vượt giới hạn thời lượng đã chọn. Tăng giới hạn phút để giữ đủ lời và khoảng trống cuối.')
         if not any(segment.text for segment in segments):
             raise ValueError('Nhập nội dung đọc, không chỉ ký hiệu nghỉ.')
     except ValueError as exc:
@@ -468,7 +508,7 @@ def queue_speech(body: Speech, *, benchmark=False):
         if sum(j['status'] in {'queued', 'running', 'cancelling'} for j in records('jobs')) >= 4:
             raise HTTPException(429, 'Hàng đợi đã có 4 tác vụ. Hãy đợi trước khi tạo thêm.')
         ident = uuid.uuid4().hex
-        job = {**body.model_dump(), 'text': body.text.strip(), 'id': ident, 'voice_name': voice['name'], 'engine': engine, 'speaker': voice.get('speaker'), 'status': 'queued', 'segment_plan': segment_plan, 'total': len(segments), 'completed': 0, 'progress': 0, 'created_at': now()}
+        job = {**body.model_dump(), 'source_input_format': source_input_format, 'text': body.text.strip(), 'id': ident, 'voice_name': voice['name'], 'engine': engine, 'speaker': voice.get('speaker'), 'status': 'queued', 'segment_plan': segment_plan, 'total': len(segments), 'completed': 0, 'progress': 0, 'created_at': now()}
         if engine == 'vieneu_nano':
             job = resolve_nano_settings(job)
         if benchmark:
@@ -532,7 +572,9 @@ def export_voice(ident:str,extension:str):
         timing=DATA/'audio'/f'{ident}.srt'
         if not timing.is_file():raise HTTPException(404,'Chưa có mốc lời đọc.')
         text=timing.read_text(encoding='utf-8')
-        if extension=='txt':text='\n\n'.join(c['text'] for c in parse_srt(text))+'\n'
+        if extension=='txt':
+            cues = parse_srt(text)
+            text = timed_txt(cues) if job.get('timing_mode') == 'exact' else '\n\n'.join(c['text'] for c in cues)+'\n'
         return Response(text,media_type='text/plain; charset=utf-8',headers={'Content-Disposition':f'attachment; filename="voice-studio.{extension}"'})
     source=DATA/'audio'/f'{ident}.wav'
     if not source.is_file():source=DATA/'audio'/f"{ident}.{job['format']}"
@@ -632,7 +674,7 @@ def download_script(ident: str, extension: str):
     if extension not in ('txt', 'srt'):
         raise HTTPException(404, 'Chỉ hỗ trợ TXT và SRT.')
     if extension == 'txt':
-        text = '\n'.join(c['text'] for c in parse_srt(job['text'])) if job.get('input_format') == 'srt' else job['text']
+        text = (timed_txt(parse_srt(job['text'])) if job.get('timing_mode') == 'exact' else '\n'.join(c['text'] for c in parse_srt(job['text']))) if job.get('input_format') == 'srt' else job['text']
     elif job.get('input_format') == 'srt':
         text = export_srt(parse_srt(job['text']))
     else:
@@ -643,19 +685,40 @@ def download_script(ident: str, extension: str):
     return Response(text, media_type='text/plain; charset=utf-8', headers={'Content-Disposition': f'attachment; filename="voice-studio-{ident[:8]}.{extension}"'})
 
 
+def timed_txt(cues):
+    return '\n\n'.join(f'[{timestamp(c["start"])} --> {timestamp(c["end"])}] {escape(c["text"], quote=False)}' for c in cues) + '\n'
+
+
+@app.post('/api/scripts/import')
+async def import_script(file: UploadFile = File(...), timeline_seconds: float | None = Form(None, gt=0, le=10800)):
+    try:
+        payload = await file.read(2 * 1024 * 1024 + 1)
+        if len(payload) > 2 * 1024 * 1024:
+            raise HTTPException(413, 'Tệp văn bản tối đa 2 MB và 200.000 ký tự.')
+        return await run_in_threadpool(import_script_bytes, payload, file.filename or '', total_seconds=timeline_seconds)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
+    finally:
+        await file.close()
+
+
 class ScriptConversion(BaseModel):
     text: str = Field(min_length=1, max_length=MAX_CHARACTERS)
     input_format: str = Field(pattern='^(txt|srt)$')
     output_format: str = Field(pattern='^(txt|srt)$')
+    preserve_timing: bool = False
 
 
 @app.post('/api/scripts/convert')
 def convert_script(body: ScriptConversion):
     try:
-        cues = parse_srt(body.text) if body.input_format == 'srt' else None
+        imported = parse_script_text(body.text, body.input_format)
+        if imported.get('requires_total_duration'):
+            raise ValueError('Nhập thời lượng video để hoàn thiện mốc kết thúc câu cuối trước khi xuất.')
+        cues = imported['cues'] if imported['has_timeline'] else None
         if body.output_format == 'srt' and cues is None:
             raise ValueError('Tạo voice hoàn tất rồi xuất SRT để có mốc thời gian thật.')
-        text = (export_srt(cues) if body.output_format == 'srt' else '\n'.join(c['text'] for c in cues)) if cues else body.text
+        text = (export_srt(cues) if body.output_format == 'srt' else timed_txt(cues) if body.preserve_timing else '\n'.join(c['text'] for c in cues)) if cues else body.text
         return {'text': text}
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from None

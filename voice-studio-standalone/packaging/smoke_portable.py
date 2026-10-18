@@ -84,7 +84,7 @@ def verify_app():
     # Generate a 3–30 second reference through the actual bundled preset API.
     with TestClient(app.app) as client:
         conf = client.get('/api/config').json()
-        assert conf['version'] == '1.2.0' and conf['max_characters'] == 200000
+        assert conf['version'] == '1.3.0' and conf['max_characters'] == 200000
         assert conf['nano_ready'] and conf['nano_clone_ready'] and conf['models']['vieneu']
         assert client.get('/').status_code == 200
         for asset in ('app.js', 'style.css'):
@@ -121,6 +121,7 @@ def verify_app():
             assert result.status_code == 200 and len(result.content) > 10, result.text[:100]
         too_long = client.post('/api/speech', json={**payload, 'text': 'a' * 200001})
         assert too_long.status_code == 422
+        verify_timeline(client, reference['id'], sf, np)
     # Exiting the lifespan kills the Nano worker tree before loading Turbo.
     with TestClient(app.app) as client:
         response = client.post('/api/speech', json={'text': 'Xin chào, đây là kiểm tra nhân bản giọng tiêu chuẩn.',
@@ -152,6 +153,57 @@ def verify_app():
             print('OFFLINE COUNTRY VOICE:', language, voice['id'], flush=True)
 
 
+def verify_timeline(client, reference_id, sf, np):
+    """Real Windows clone synthesis, file decoding and exact WAV/SRT boundaries."""
+    import wave
+    from subtitles import export_srt, parse_srt
+    cues = [{'start': 1.125, 'end': 9.875, 'text': 'Xin chào, hôm nay chúng ta cùng lắng nghe một câu chuyện.'},
+            {'start': 11.250, 'end': 20.125, 'text': 'Cảm ơn bạn đã theo dõi, hẹn gặp lại trong phần tiếp theo.'}]
+    script = export_srt(cues)
+    uploaded = client.post('/api/scripts/import',
+                           files={'file': ('Loi-Thoai.SRT', script.replace('\n', '\r\n').encode('utf-16'), 'text/plain')})
+    assert uploaded.status_code == 200, uploaded.text
+    imported = uploaded.json()
+    assert imported['has_timeline'] and parse_srt(imported['text']) == cues
+    response = client.post('/api/speech', json={'text': imported['text'], 'input_format': imported['input_format'],
+                          'voice_id': reference_id, 'language': 'vi', 'timeline_seconds': 22.5,
+                          'narration_quality': 'balanced', 'nano_parallel': 2, 'nano_threads': 1})
+    assert response.status_code == 202, response.text
+    job = wait_job(client, response.json()['id'])
+    assert job['voice_id'] == reference_id and job['nano_steps'] == 8
+    assert job['timing_mode'] == 'exact' and job['sync_ok'] and job['speed_report'] is None
+    report = job['sync_report']
+    assert report['complete'] and report['matched_cues'] == 2
+    assert report['max_error_ms'] <= 1000 / 24000 and report['actual_seconds'] == 22.5
+    path = DATA / 'audio' / (job['id'] + '.wav')
+    with wave.open(str(path)) as audio:
+        assert audio.getnframes() == round(22.5 * 24000)
+    samples, rate = sf.read(path)
+    assert not np.any(samples[:round(1.125 * rate)])
+    assert not np.any(samples[round(9.875 * rate):round(11.250 * rate)])
+    assert np.any(samples[round(1.125 * rate):round(9.875 * rate)])
+    timed_srt = client.get(f'/api/jobs/{job["id"]}/export.srt')
+    assert timed_srt.status_code == 200 and parse_srt(timed_srt.text) == cues
+    timed_txt = client.get(f'/api/jobs/{job["id"]}/export.txt')
+    roundtrip = client.post('/api/scripts/import', files={'file': ('timeline.txt', timed_txt.content, 'text/plain')})
+    assert roundtrip.status_code == 200 and parse_srt(roundtrip.json()['text']) == cues
+    mp3 = client.get(f'/api/jobs/{job["id"]}/export.mp3')
+    assert mp3.status_code == 200
+    decoded = subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(DATA / 'audio' / (job['id'] + '.mp3')),
+                              '-ac', '1', '-ar', '24000', '-f', 's16le', 'pipe:1'], capture_output=True, check=True)
+    assert len(decoded.stdout) == round(22.5 * 24000) * 2
+    pending = client.post('/api/scripts/import', files={'file': ('starts.txt', b'[00:01] Hello.\n[00:05] Goodbye.', 'text/plain')})
+    assert pending.status_code == 200 and pending.json()['requires_total_duration']
+    assert client.post('/api/speech', json={'text': script, 'input_format': 'srt', 'voice_id': reference_id,
+                        'timeline_seconds': 7}).status_code == 422
+    expressive = client.post('/api/speech', json={'text': '[thở dài] Xin chào, cảm ơn bạn đã lắng nghe câu chuyện.',
+                         'voice_id': reference_id, 'narration_quality': 'expressive', 'nano_parallel': 1, 'nano_threads': 1})
+    assert expressive.status_code == 202, expressive.text
+    expressive_job = wait_job(client, expressive.json()['id'])
+    assert expressive_job['nano_steps'] == 16 and expressive_job['voice_id'] == reference_id
+    print('PASS: UTF-16 SRT import, exact cue/video length, timed TXT/SRT roundtrip, gapless MP3 and Nano16 cue', flush=True)
+
+
 def verify_launcher():
     import httpx
     logfile = ROOT / 'portable-smoke-launcher.log'
@@ -168,7 +220,7 @@ def verify_launcher():
                     for port in range(8770, 8790):
                         try:
                             probe = client.get(f'http://127.0.0.1:{port}/api/config')
-                            if probe.status_code == 200 and probe.json().get('version') == '1.2.0':
+                            if probe.status_code == 200 and probe.json().get('version') == '1.3.0':
                                 url = f'http://127.0.0.1:{port}'
                                 break
                         except httpx.RequestError:

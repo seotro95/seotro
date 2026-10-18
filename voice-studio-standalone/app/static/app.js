@@ -22,6 +22,12 @@ let pollTimer;
 let outputSignature = '';
 let connectionFailed = false;
 let defaultsApplied = false;
+let importing = false;
+let scriptPreview = null;
+let scriptPreviewKey = '';
+let scriptPreviewPromise = null;
+let scriptPreviewRequest = 0;
+let previewTimer;
 const historyNodes = new Map();
 
 function node(tag, text, className) {
@@ -224,9 +230,10 @@ function updateVoice() {
   $('voice-status-title').textContent = !voice ? 'Chưa có giọng phù hợp' : ready ? `${engineLabel} · Sẵn sàng sử dụng` : `${engineLabel} · Cần tải mô hình`;
   const nanoAlternative = !ready && voice?.category === 'cloned' && $('language').value === 'vi' && cloneReadyEngines(voice).vieneu_nano && selectedEngine(voice) !== 'vieneu_nano';
   $('voice-status-detail').textContent = !voice ? 'Chọn ngôn ngữ khác hoặc xóa từ khóa tìm kiếm.' : ready ? (voice.description || 'Giọng đã có trên máy.') : nanoAlternative ? 'Nhân bản Nano đã sẵn sàng. Bấm Ưu tiên tốc độ hoặc chọn Nhân bản Nano để dùng nguyên mẫu giọng này.' : config.portable || voice.engine === 'piper' ? 'Giọng này chưa sẵn sàng trong gói hiện tại. Chọn một giọng có sẵn hoặc bấm Kiểm tra lại trong Thư viện giọng.' : `Trong thư mục tool, chạy ${modelInstruction(voice, selectedEngine(voice))}, rồi bấm Kiểm tra lại ở Thư viện giọng.`;
-  $('generate').disabled = !ready || submitting;
+  $('generate').disabled = !ready || submitting || importing;
   $('generate-note').textContent = !voice ? 'Cần chọn giọng hỗ trợ ngôn ngữ lời đọc.' : !ready ? 'Tải mô hình trước khi tạo giọng. Mở Hướng dẫn để xem chi tiết.' : 'Tạo trên máy · Có thể dừng và tiếp tục trong Bản thu';
   updateAcceleration();
+  updateNarrationQuality();
 }
 
 function accelerationSettings() {
@@ -266,6 +273,7 @@ function applySpeedPreset() {
   if (!voice) return;
   if (voice.category === 'cloned' && $('language').value === 'vi' && cloneReadyEngines(voice).vieneu_nano) $('clone-engine').value = 'nano';
   $('nano-steps').value = '4'; $('nano-parallel').value = 'auto'; $('nano-threads').value = 'auto';
+  $('narration-quality').value = 'fast';
   $('paragraph-pause').value = '0'; $('delivery').value = 'natural'; $('quality').value = ['qwen', 'qwen_clone'].includes(selectedEngine(voice)) ? 'fast' : 'auto';
   $('speed').value = '1'; $('format').value = 'wav';
   $('speed-value').textContent = '1,00×'; $('delivery-note').textContent = deliveryNotes.natural;
@@ -281,6 +289,7 @@ function generationSettings(voice) {
     speed: Number($('speed').value), format: $('format').value,
     delivery: $('delivery').value, paragraph_pause: Number($('paragraph-pause').value),
     quality: $('quality').value, nano_steps: Number($('nano-steps').value),
+    narration_quality: $('narration-quality').value,
     ...accelerationSettings()
   };
 }
@@ -311,8 +320,130 @@ function updateCharacterCount() {
 
 function updateFormat() {
   const srt = $('script-format').value === 'srt';
-  $('skip-timestamps').disabled = srt;
-  $('format-note').textContent = srt ? 'SRT · Giữ mốc thời gian' : 'TXT · Văn bản thuần';
+  const timed = srt || scriptPreview?.has_timeline || hasTimeMarkers($('script').value);
+  $('skip-timestamps').disabled = srt || (timed && $('auto-sync').checked);
+  $('format-note').textContent = timed && $('auto-sync').checked ? `${srt ? 'SRT' : 'TXT'} · Tự căn theo mốc` : srt ? 'SRT · Đọc theo nhịp tự nhiên' : 'TXT · Văn bản thuần';
+  $('timeline-panel').classList.toggle('sync-disabled', !$('auto-sync').checked);
+}
+
+function hasTimeMarkers(text) {
+  return /(?:\d{1,3}:\d{2}(?::\d{2})?|\d+\s*phút\b)/i.test(text);
+}
+
+function timelineDuration() {
+  const value = $('timeline-duration').value.trim();
+  if (!value) return null;
+  const cleaned = value.replace(/\s*(?:giây|seconds?|s)\s*$/i, '').replace(',', '.').trim();
+  let seconds;
+  if (/^\d+(?:\.\d+)?$/.test(cleaned)) seconds = Number(cleaned);
+  else if (/^\d+:\d{2}(?::\d{2})?(?:\.\d{1,3})?$/.test(cleaned)) {
+    const parts = cleaned.split(':').map(Number);
+    if (parts.slice(1).some((part) => part >= 60)) throw new Error('Thời lượng video: phần giây/phút sau dấu : phải nhỏ hơn 60.');
+    seconds = parts.reduce((total, part) => total * 60 + part, 0);
+  }
+  if (!(seconds > 0 && seconds <= 10800)) throw new Error('Nhập thời lượng video bằng giây hoặc dạng phút:giây / giờ:phút:giây, tối đa 3 giờ.');
+  return seconds;
+}
+
+function cueTime(seconds) {
+  if (seconds === null || seconds === undefined || !Number.isFinite(Number(seconds))) return 'Cần mốc kết thúc';
+  const millis = Math.round(Math.max(0, Number(seconds)) * 1000);
+  return `${duration(Math.floor(millis / 1000))},${String(millis % 1000).padStart(3, '0')}`;
+}
+
+function renderTimeline(result, error = '') {
+  scriptPreview = result;
+  const target = $('timeline-summary');
+  target.classList.toggle('timeline-error', Boolean(error));
+  $('timeline-cues').replaceChildren();
+  const cues = Array.isArray(result?.cues) ? result.cues : [];
+  $('timeline-preview').hidden = !cues.length;
+  for (const cue of cues.slice(0, 8)) {
+    const row = node('tr');
+    row.append(node('td', `${cueTime(cue.start)} → ${cueTime(cue.end)}`), node('td', cue.text || ''));
+    $('timeline-cues').append(row);
+  }
+  $('timeline-preview-note').textContent = cues.length > 8 ? `Đang xem 8 / ${cues.length} câu. Tất cả câu sẽ được xử lý theo mốc trong tệp.` : `${cues.length} câu có mốc thời gian.`;
+  if (error) target.textContent = error;
+  else if (result?.requires_total_duration) target.textContent = 'TXT chỉ có mốc bắt đầu. Nhập thời lượng video bên dưới để xác định điểm kết thúc câu cuối.';
+  else if (result?.has_timeline) {
+    let targetSeconds = result.timeline_seconds;
+    try { targetSeconds = timelineDuration() ?? targetSeconds; } catch { /* The import error is shown after validation. */ }
+    target.textContent = `${cues.length} câu · Thời lượng đích ${cueTime(targetSeconds)}${result.encoding ? ` · ${result.encoding}` : ''}. ${$('auto-sync').checked ? 'Sẽ căn từng câu theo mốc khi tạo.' : 'Đã tắt tự căn: lời đọc dùng nhịp tự nhiên.'}`;
+  }
+  else target.textContent = 'Văn bản chưa có mốc thời gian. Lời đọc dùng nhịp tự nhiên; SRT xuất sau khi tạo sẽ theo thời lượng đọc thực.';
+  if (!error && Array.isArray(result?.warnings) && result.warnings.length) target.textContent += ` ${result.warnings.join(' ')}`;
+  updateFormat();
+}
+
+function editorKey() { return `${$('script-format').value}\n${$('timeline-duration').value}\n${$('script').value}`; }
+
+async function uploadScript(file) {
+  const form = new FormData(); form.append('file', file);
+  const target = timelineDuration();
+  if (target !== null) form.append('timeline_seconds', String(target));
+  return api('/api/scripts/import', {method: 'POST', body: form});
+}
+
+async function analyzeScript() {
+  const key = editorKey();
+  if (key === scriptPreviewKey && scriptPreview) return scriptPreview;
+  if (scriptPreviewPromise?.key === key) return scriptPreviewPromise.promise;
+  const text = $('script').value;
+  if (!text.trim()) { scriptPreviewKey = key; renderTimeline(null); return null; }
+  const request = ++scriptPreviewRequest;
+  const promise = uploadScript(new File([text], `loi-doc.${$('script-format').value}`, {type: 'text/plain;charset=utf-8'}));
+  scriptPreviewPromise = {key, promise};
+  try {
+    const result = await promise;
+    if (request === scriptPreviewRequest && editorKey() === key) { scriptPreviewKey = key; renderTimeline(result); }
+    return result;
+  } catch (error) {
+    if (request === scriptPreviewRequest && editorKey() === key) renderTimeline(null, error.message);
+    throw error;
+  } finally { if (scriptPreviewPromise?.promise === promise) scriptPreviewPromise = null; }
+}
+
+function scheduleScriptAnalysis() {
+  clearTimeout(previewTimer);
+  scriptPreviewKey = ''; scriptPreviewRequest += 1;
+  if (!$('script').value.trim() || ($('script-format').value !== 'srt' && !hasTimeMarkers($('script').value))) { renderTimeline(null); return; }
+  $('timeline-summary').textContent = 'Đang kiểm tra mốc thời gian…';
+  previewTimer = setTimeout(() => analyzeScript().catch(() => {}), 700);
+}
+
+function updateNarrationQuality() {
+  const voice = voices.find((item) => item.id === $('voice').value);
+  const nano = selectedEngine(voice) === 'vieneu_nano' && $('language').value === 'vi';
+  $('narration-quality-note').textContent = nano ? `Nano ${$('nano-steps').value} bước · Tăng số bước để ưu tiên độ mượt, nhưng xử lý lâu hơn. Cảm xúc và độ giống giọng chủ yếu phụ thuộc mẫu thu; không bảo đảm cảm xúc như người thật.` : 'Phong cách điều chỉnh nhịp đọc và khoảng nghỉ. Sắc thái cảm xúc phụ thuộc mô hình và mẫu thu; lựa chọn này tăng số bước khi dùng Nano.';
+  for (const id of ['insert-laugh', 'insert-sigh', 'insert-throat']) $(id).disabled = !nano;
+  $('emotion-cues-note').textContent = nano ? 'Thêm tín hiệu phi ngôn ngữ khi cần. Cảm xúc chủ yếu theo mẫu giọng 3–30 giây; Nano 16 bước mượt hơn nhưng chậm hơn. Hãy nghe thử từng câu.' : 'Các tín hiệu [cười], [thở dài], [hắng giọng] chỉ dùng với Nano tiếng Việt. Chọn Nano để thêm.';
+}
+
+function applyNarrationQuality() {
+  const preset = $('narration-quality').value;
+  if (preset !== 'custom') $('nano-steps').value = {fast: '4', balanced: '8', expressive: '16'}[preset];
+  if (preset === 'expressive') $('quality').value = 'standard';
+  else if (preset !== 'custom') $('quality').value = 'auto';
+  updateNarrationQuality();
+}
+
+function insertEmotionCue(value) {
+  const editor = $('script');
+  const lineStart = editor.value.lastIndexOf('\n', Math.max(0, editor.selectionStart - 1)) + 1;
+  const lineEnd = editor.value.indexOf('\n', editor.selectionStart);
+  const line = editor.value.slice(lineStart, lineEnd === -1 ? undefined : lineEnd);
+  const timestampPrefix = line.match(/^\s*[\[(][^\])]*\d{1,3}:\d{2}[^\])]*[\])]\s*/)
+    || line.match(/^\s*\d{1,3}:\d{2}(?::\d{2})?(?:[,.]\d{1,3})?(?:\s*(?:-->|[-–—→])\s*\d{1,3}:\d{2}(?::\d{2})?(?:[,.]\d{1,3})?)?\s*/);
+  if (($('script-format').value === 'srt' && (!line.trim() || /^\s*\d+\s*$/.test(line) || /-->|→/.test(line)))
+      || (timestampPrefix && editor.selectionStart < lineStart + timestampPrefix[0].length)) {
+    notify('Đặt con trỏ vào phần lời thoại, sau mốc thời gian, rồi thêm sắc thái để giữ nguyên mốc trong tệp.', true);
+    editor.focus(); return;
+  }
+  const addition = `${value} `;
+  if (editor.value.length - (editor.selectionEnd - editor.selectionStart) + addition.length > 200000) { notify('Nội dung đã đạt giới hạn 200.000 ký tự.', true); return; }
+  editor.setRangeText(addition, editor.selectionStart, editor.selectionEnd, 'end');
+  editor.focus(); updateCharacterCount(); scheduleScriptAnalysis();
 }
 
 function duration(seconds) {
@@ -384,7 +515,7 @@ function addJobControls(container, job) {
 
 function setOutput(job) {
   selectedJob = job;
-  const signature = JSON.stringify([job.id, job.status, job.progress, job.phase, job.error, job.audio_seconds, job.duration_limited, job.speed_report, job.benchmark]);
+  const signature = JSON.stringify([job.id, job.status, job.progress, job.phase, job.error, job.audio_seconds, job.duration_limited, job.speed_report, job.benchmark, job.sync_report]);
   if (outputSignature === signature) return;
   outputSignature = signature;
   const progress = Math.max(0, Math.min(100, Number(job.progress) || 0));
@@ -411,6 +542,13 @@ function setOutput(job) {
     $('output-audio').pause(); $('output-audio').removeAttribute('src'); $('output-audio').load();
   }
   $('output-actions').replaceChildren(); addJobControls($('output-actions'), job);
+  const sync = job.sync_report;
+  $('sync-report').hidden = !sync;
+  if (sync) {
+    const complete = done && sync.complete === true && Number(sync.matched_cues) === Number(sync.total_cues);
+    $('sync-report').classList.toggle('incomplete', !complete);
+    $('sync-report').textContent = `${complete ? 'Đã căn khớp mốc thời gian' : activeStatuses.has(job.status) ? 'Đang kiểm tra đồng bộ' : 'Chưa căn khớp toàn bộ'} · ${Number(sync.matched_cues) || 0}/${Number(sync.total_cues) || 0} câu · Đích ${cueTime(sync.target_seconds)} · Bản thu ${cueTime(sync.actual_seconds)} · Sai lệch lớn nhất ${Number(sync.max_error_ms || 0).toLocaleString('vi-VN', {maximumFractionDigits: 3})} ms. ${job.format === 'mp3' ? 'MP3 có thể hiển thị thêm đệm nén ở một số phần mềm. Dùng WAV để ghép video theo mẫu âm thanh chính xác.' : 'Tải WAV cùng SRT để đặt vào video theo mốc gốc.'}`;
+  }
   const report = job.speed_report;
   $('speed-report').hidden = !done || !report?.realtime_multiplier;
   if (!report?.realtime_multiplier) $('speed-report').textContent = '';
@@ -430,9 +568,22 @@ async function generate() {
   if (!selectedVoiceReady(voice)) { notify('Chọn một giọng và mô hình đã sẵn sàng hoặc tải mô hình trước.', true); return; }
   submitting = true; updateVoice(); notify('');
   try {
+    clearTimeout(previewTimer);
+    const sync = $('auto-sync').checked;
+    const target = timelineDuration();
+    let text = $('script').value;
+    let inputFormat = $('script-format').value;
+    let parsed = null;
+    if (sync && (inputFormat === 'srt' || hasTimeMarkers(text))) {
+      parsed = await analyzeScript();
+      if (parsed?.requires_total_duration) throw new Error('Nhập thời lượng video để căn điểm kết thúc câu cuối trong TXT, rồi tạo lại.');
+      if (parsed?.has_timeline && parsed.text.length <= 200000) { text = parsed.text; inputFormat = parsed.input_format || 'srt'; }
+    }
     const job = await post('/api/speech', {
-      ...generationSettings(voice), text: $('script').value,
-      input_format: $('script-format').value, skip_timestamps: $('skip-timestamps').checked,
+      ...generationSettings(voice), text,
+      input_format: inputFormat, skip_timestamps: $('skip-timestamps').checked,
+      timing_mode: sync ? (inputFormat === 'srt' ? 'exact' : 'auto') : 'natural',
+      timeline_seconds: target ?? (parsed?.has_timeline ? parsed.timeline_seconds : null),
       max_minutes: Number($('max-minutes').value)
     });
     setOutput(job); notify('Đã nhận nội dung. Bạn có thể theo dõi bản thu ở bên dưới.');
@@ -445,28 +596,46 @@ async function importScript(file) {
   if (!file) return;
   if (!/\.(txt|srt)$/i.test(file.name)) throw new Error('Chọn tệp có đuôi .txt hoặc .srt.');
   if (file.size > 2 * 1024 * 1024) throw new Error('Tệp văn bản không được vượt quá 2 MB.');
-  const text = (await file.text()).replace(/^\uFEFF/, '');
-  if (text.length > 200000) throw new Error('Tệp vượt quá 200.000 ký tự. Hãy chia nội dung thành các phần trước khi nhập.');
-  if (!text.trim()) throw new Error('Tệp chưa có nội dung để đọc.');
-  if (text.includes('\uFFFD')) throw new Error('Tệp có ký tự không đọc được. Hãy lưu TXT/SRT bằng UTF-8 rồi nhập lại.');
-  const format = /\.srt$/i.test(file.name) ? 'srt' : 'txt';
-  if (format === 'srt') await post('/api/scripts/convert', {text, input_format: 'srt', output_format: 'srt'});
+  if (importing) return;
   if ($('script').value.trim() && !window.confirm('Thay nội dung đang nhập bằng nội dung trong tệp?')) return;
-  $('script').value = text; $('script-format').value = format;
-  updateCharacterCount(); updateFormat();
-  notify(`Đã nhập ${text.length.toLocaleString('vi-VN')} ký tự từ ${file.name}${format === 'srt' ? ' và giữ mốc thời gian' : ''}.`);
+  clearTimeout(previewTimer); scriptPreviewRequest += 1;
+  importing = true; $('import-script').disabled = true; $('import-script').textContent = 'Đang nhập tệp…'; updateVoice();
+  notify(`Đang nhập ${file.name} và kiểm tra mã hóa, mốc thời gian…`);
+  try {
+    const result = await uploadScript(file);
+    const expanded = typeof result.text === 'string' && result.text.length > 200000;
+    const text = expanded ? result.source_text : result.text;
+    if (typeof text !== 'string' || !text.trim()) throw new Error('Tệp chưa có nội dung để đọc.');
+    if (text.length > 200000) throw new Error('Tệp vượt quá 200.000 ký tự. Hãy chia nội dung thành các phần trước khi nhập.');
+    $('script').value = text; $('script-format').value = (expanded ? result.source_input_format : result.input_format) || (/\.srt$/i.test(file.name) ? 'srt' : 'txt');
+    $('auto-sync').checked = true;
+    scriptPreviewKey = editorKey(); renderTimeline(result); updateCharacterCount();
+    notify(`Đã nhập ${text.length.toLocaleString('vi-VN')} ký tự từ ${file.name}${result.has_timeline ? ' và giữ mốc thời gian' : ''}.${result.requires_total_duration ? ' Nhập thời lượng video để căn câu cuối.' : ''}${result.warnings?.length ? ` ${result.warnings.join(' ')}` : ''}`);
+  } finally {
+    importing = false; $('import-script').disabled = false; $('import-script').textContent = '↑ Nhập TXT / SRT'; updateVoice();
+  }
 }
 
 async function exportScript(extension) {
-  const text = $('script').value;
-  const format = $('script-format').value;
+  let text = $('script').value;
+  let format = $('script-format').value;
   if (!text.trim()) throw new Error('Chưa có nội dung để xuất.');
+  if (format === 'srt' || hasTimeMarkers(text)) {
+    const parsed = await analyzeScript();
+    if (parsed?.requires_total_duration) throw new Error('Nhập thời lượng video để xác định mốc kết thúc câu cuối trước khi xuất.');
+    if (parsed?.has_timeline) {
+      const clock = (seconds) => cueTime(seconds).replace(/^(\d):/, '0$1:');
+      const escapeText = (value) => String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      const output = extension === 'srt' ? parsed.text : `${parsed.cues.map((cue) => `[${clock(cue.start)} --> ${clock(cue.end)}] ${escapeText(cue.text)}`).join('\n\n')}\n`;
+      downloadBlob(new Blob([output], {type: 'text/plain;charset=utf-8'}), `loi-doc.${extension}`); return;
+    }
+  }
   if (extension === 'srt' && format === 'txt') {
     const job = history.find((item) => item.status === 'done' && item.input_format !== 'srt' && item.text.trim() === text.trim());
     if (!job) throw new Error('Tạo giọng hoàn tất với nội dung này trước khi xuất SRT để có mốc thời gian lời đọc thực.');
     await downloadExport(job, extension); return;
   }
-  const result = await post('/api/scripts/convert', {text, input_format: format, output_format: extension});
+  const result = await post('/api/scripts/convert', {text, input_format: format, output_format: extension, preserve_timing: true});
   downloadBlob(new Blob([result.text], {type: 'text/plain;charset=utf-8'}), `loi-doc.${extension}`);
 }
 
@@ -542,6 +711,7 @@ function historyCard(job) {
   }
   if (job.error) card.append(node('p', job.error, 'history-error'));
   if (job.duration_limited) card.append(node('p', 'Đã đạt giới hạn thời lượng; còn nội dung chưa đọc.', 'history-error'));
+  if (job.sync_report) card.append(node('p', `${job.sync_report.complete ? 'Đã căn mốc' : 'Chưa căn xong'} · ${Number(job.sync_report.matched_cues) || 0}/${Number(job.sync_report.total_cues) || 0} câu · ${cueTime(job.sync_report.actual_seconds)} / ${cueTime(job.sync_report.target_seconds)}`, 'field-note'));
   if (job.status === 'done') {
     const audio = node('audio'); audio.controls = true; audio.preload = 'none'; audio.src = `/api/audio/${encodeURIComponent(job.id)}`;
     audio.setAttribute('aria-label', `Nghe bản thu ${job.voice_name || ''}`); card.append(audio);
@@ -563,7 +733,7 @@ function resetOutput() {
   selectedJob = null; outputSignature = '';
   $('output-heading').textContent = 'Âm thanh của bạn sẽ xuất hiện ở đây';
   $('output-detail').textContent = 'Tạo bản thu đầu tiên hoặc mở một bản thu trong lịch sử.';
-  for (const id of ['output-status', 'output-progress', 'output-warning', 'output-audio', 'speed-report']) $(id).hidden = true;
+  for (const id of ['output-status', 'output-progress', 'output-warning', 'output-audio', 'speed-report', 'sync-report']) $(id).hidden = true;
   $('output-audio').pause(); $('output-audio').removeAttribute('src'); $('output-audio').load();
   $('output-actions').replaceChildren();
 }
@@ -580,7 +750,7 @@ function renderHistory() {
   const ids = new Set(history.map((job) => job.id));
   for (const [id, entry] of historyNodes) if (!ids.has(id)) { entry.element.remove(); historyNodes.delete(id); }
   history.forEach((job, index) => {
-    const signature = JSON.stringify([job.status, job.progress, job.phase, job.completed, job.audio_seconds, job.error, job.duration_limited]);
+    const signature = JSON.stringify([job.status, job.progress, job.phase, job.completed, job.audio_seconds, job.error, job.duration_limited, job.sync_report]);
     let entry = historyNodes.get(job.id);
     if (!entry || entry.signature !== signature) {
       const element = historyCard(job);
@@ -620,7 +790,9 @@ async function refreshVoices() {
   if (!defaultsApplied) {
     $('clone-engine').value = config.default_clone_engine || 'auto';
     $('nano-steps').value = String(config.default_nano_steps || 4);
+    $('narration-quality').value = config.default_narration_quality || 'balanced';
     $('paragraph-pause').value = String(config.default_paragraph_pause ?? 0);
+    applyNarrationQuality();
     defaultsApplied = true;
   }
   populateLanguages(); populateVoices(); populateLibraryFilters(); renderLibrary(); renderModelStatus();
@@ -665,8 +837,13 @@ $('language').addEventListener('change', populateVoices);
 $('language-search').addEventListener('input', () => { populateLanguages(); populateVoices(); });
 $('voice').addEventListener('change', updateVoice);
 $('clone-engine').addEventListener('change', updateVoice);
-$('script').addEventListener('input', updateCharacterCount);
-$('script-format').addEventListener('change', updateFormat);
+$('script').addEventListener('input', () => { updateCharacterCount(); scheduleScriptAnalysis(); });
+$('script-format').addEventListener('change', () => { updateFormat(); scheduleScriptAnalysis(); });
+$('auto-sync').addEventListener('change', () => renderTimeline(scriptPreview));
+$('timeline-duration').addEventListener('input', scheduleScriptAnalysis);
+$('narration-quality').addEventListener('change', applyNarrationQuality);
+for (const id of ['nano-steps', 'quality']) $(id).addEventListener('change', () => { $('narration-quality').value = 'custom'; updateNarrationQuality(); });
+for (const [id, value] of [['insert-laugh', '[cười]'], ['insert-sigh', '[thở dài]'], ['insert-throat', '[hắng giọng]']]) $(id).addEventListener('click', () => insertEmotionCue(value));
 $('speed').addEventListener('input', () => { $('speed-value').textContent = `${Number($('speed').value).toLocaleString('vi-VN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}×`; });
 $('delivery').addEventListener('change', () => { $('delivery-note').textContent = deliveryNotes[$('delivery').value]; });
 $('generate').addEventListener('click', generate);
@@ -676,6 +853,21 @@ for (const id of ['nano-parallel', 'nano-threads']) $(id).addEventListener('chan
 $('import-script').addEventListener('click', () => $('script-file').click());
 $('script-file').addEventListener('change', async () => {
   try { await importScript($('script-file').files[0]); } catch (error) { notify(error.message, true); }
+  finally { $('script-file').value = ''; }
+});
+const editorCard = document.querySelector('.editor-card');
+editorCard.addEventListener('dragover', (event) => {
+  if (!event.dataTransfer?.types.includes('Files')) return;
+  event.preventDefault(); event.dataTransfer.dropEffect = 'copy'; editorCard.classList.add('drag-over');
+});
+editorCard.addEventListener('dragleave', (event) => { if (!editorCard.contains(event.relatedTarget)) editorCard.classList.remove('drag-over'); });
+editorCard.addEventListener('drop', async (event) => {
+  if (!event.dataTransfer?.files.length) return;
+  event.preventDefault(); editorCard.classList.remove('drag-over');
+  try {
+    if (event.dataTransfer.files.length !== 1) throw new Error('Mỗi lần hãy kéo thả một tệp TXT hoặc SRT.');
+    await importScript(event.dataTransfer.files[0]);
+  } catch (error) { notify(error.message, true); }
   finally { $('script-file').value = ''; }
 });
 for (const extension of ['txt', 'srt']) $(`export-${extension}`).addEventListener('click', async () => {
@@ -712,7 +904,9 @@ async function init() {
       for (const message of [
         'Giải nén toàn bộ ZIP, mở MO_TOOL.bat. Python, FFmpeg, mô hình tiếng Việt và các giọng Piper quốc tế trong thư viện đã có sẵn; không cần cài đặt hoặc tải thêm.',
         'Chọn quốc gia / ngôn ngữ rồi chọn giọng sẵn sàng. Với mẫu giọng cá nhân tiếng Việt, chế độ Tự động ưu tiên Nano 4 bước khi đã sẵn sàng; nghe thử để kiểm tra độ giống giọng.',
-        'Nhập tối đa 200.000 ký tự hoặc TXT/SRT, tạo giọng rồi tải WAV/MP3/TXT/SRT. Giữ cửa sổ tool mở khi sử dụng.',
+        'Nhập hoặc kéo thả TXT/SRT, tối đa 200.000 ký tự. Giữ nguyên mốc thời gian và bật Tự căn lời đọc để khớp video. TXT chỉ có mốc bắt đầu cần nhập thời lượng video cho câu cuối.',
+        'Chọn Cân bằng hoặc Ưu tiên tự nhiên để tăng số bước Nano; tín hiệu [cười], [thở dài], [hắng giọng] chỉ dùng với Nano tiếng Việt. Nghe thử để kiểm tra sắc thái của mẫu giọng.',
+        'Tạo xong, kiểm tra báo cáo căn mốc rồi tải WAV cùng SRT để ghép video. MP3 có thể hiển thị thêm đệm nén trong một số trình biên tập. Giữ cửa sổ tool mở khi sử dụng.',
         'Sao lưu app/.data trước khi cập nhật hoặc xóa tool. Giọng có sẵn đa ngôn ngữ và nhân bản tiếng Việt là các chức năng riêng; công cụ không tự dịch văn bản.'
       ]) steps.append(node('li', message));
       $('help-speed').textContent = 'Ưu tiên tốc độ: giữ nguyên giọng và ngôn ngữ đã chọn, dùng WAV, đọc tự nhiên và không thêm khoảng nghỉ. Giọng nhân bản tiếng Việt dùng Nano 4 bước khi mô hình đã sẵn sàng. Giọng Piper quốc tế chạy nhanh trên CPU; không cần NVIDIA. Nano 4 bước có thể giảm độ tự nhiên; cần nghe thử.';
