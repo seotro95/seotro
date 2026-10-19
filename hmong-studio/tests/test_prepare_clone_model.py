@@ -265,3 +265,81 @@ def test_prepare_rejects_unpinned_manifest_before_model_writes(tmp_path, monkeyp
     with pytest.raises(RuntimeError, match='phien ban'):
         model.prepare(root)
     assert not root.exists()
+
+
+def test_empty_git_file_downloads_from_cold_cache(tmp_path, monkeypatch):
+    entry = artifact(b'', 'CosyVoice/cosyvoice/__init__.py', lfs=False)
+    target = tmp_path / entry['rfilename']
+    assert not target.parent.exists()
+    block_network(monkeypatch)
+
+    result = model.download(tmp_path, entry)
+
+    assert target.is_file()
+    assert target.read_bytes() == b''
+    assert result == {
+        'path': entry['rfilename'], 'size': 0,
+        'sha256': hashlib.sha256(b'').hexdigest(),
+    }
+    assert not target.with_name(target.name + '.part').exists()
+
+
+@pytest.mark.parametrize('lfs', [True, False], ids=['lfs-sha256', 'git-blob-sha1'])
+def test_empty_artifact_with_wrong_checksum_is_never_promoted(tmp_path, monkeypatch, lfs):
+    entry = artifact(b'', '__init__.py', lfs=lfs)
+    if lfs:
+        entry['lfs']['sha256'] = '0' * 64
+    else:
+        entry['blobId'] = '0' * 40
+    target = tmp_path / '__init__.py'
+    original = b'previous file must survive a malformed manifest'
+    target.write_bytes(original)
+    monkeypatch.setattr(model.urllib.request, 'urlopen', lambda *args, **kwargs: Response(b''))
+
+    with pytest.raises(RuntimeError, match='checksum'):
+        model.download(tmp_path, entry)
+
+    assert target.read_bytes() == original
+    assert model.verified(target, entry) is None
+
+
+def test_corrupt_partial_for_empty_file_is_repaired(tmp_path, monkeypatch):
+    entry = artifact(b'', 'cosyvoice/__init__.py', lfs=False)
+    target = tmp_path / entry['rfilename']
+    target.parent.mkdir()
+    target.write_bytes(b'old incorrect file')
+    partial = target.with_name(target.name + '.part')
+    partial.write_bytes(b'incomplete incorrect data')
+    monkeypatch.setattr(model.urllib.request, 'urlopen', lambda *args, **kwargs: Response(b''))
+
+    result = model.download(tmp_path, entry)
+
+    assert target.read_bytes() == b''
+    assert result == model.verified(target, entry)
+    assert not partial.exists()
+
+
+def test_prepare_ready_marker_includes_verified_empty_git_file(tmp_path, monkeypatch):
+    source = tmp_path / 'source'
+    source.mkdir()
+    empty = artifact(b'', 'CosyVoice/cosyvoice/__init__.py', lfs=False)
+    weights = artifact(b'model bytes', 'weights.bin')
+    entries = [weights, empty]
+    manifest = {'repository': model.REPOSITORY, 'revision': model.REVISION, 'entries': entries}
+    (source / 'clone_model_manifest.json').write_text(json.dumps(manifest), encoding='utf-8')
+    monkeypatch.setattr(model, 'BASE', source)
+
+    def serve(request, timeout):
+        return Response(b'model bytes' if '/weights.bin?' in request.full_url else b'')
+
+    monkeypatch.setattr(model.urllib.request, 'urlopen', serve)
+    root = tmp_path / 'models'
+    model.prepare(root)
+
+    payload = json.loads((root / '.hmong-model-ready.json').read_text(encoding='utf-8'))
+    assert payload['files'] == [
+        {'path': empty['rfilename'], 'size': 0, 'sha256': hashlib.sha256(b'').hexdigest()},
+        {'path': weights['rfilename'], 'size': weights['size'],
+         'sha256': hashlib.sha256(b'model bytes').hexdigest()},
+    ]
+    assert all(model.verified(root / entry['rfilename'], entry) for entry in entries)

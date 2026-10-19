@@ -1,6 +1,6 @@
 # Verified local cloning implementation
 
-Version0.4.1 uses CosyVoice3 Hmong instruct2 with each supplied male/female audio reference, without a reference transcript. The user-provided poem is not used as reference text. No API key or paid runtime service is needed.
+Version0.4.2 uses CosyVoice3 Hmong instruct2 with each supplied male/female audio reference, without a reference transcript. The user-provided poem is not used as reference text. No API key or paid runtime service is needed.
 
 Model source: https://huggingface.co/Xuajpaj2026/hmong-tts-weights , pinned revision5663e0df2589c2ca2403cd327a52702c3ff96e8f. The bundled manifest selects118 files (~5.43GB), avoiding optional duplicate ONNX and training artifacts. Downloader validates LFS SHA256 or Git blob SHA1, supports Range resume and rejects traversal/symlink escapes. Model code hashes are checked again before loading. Tensor checkpoints use weights_only=True; primitive epoch/step training metadata is removed only in memory. Inference YAML is selected and its constructors allowlisted before construction; training objects are not evaluated. No source/checkpoint files are rewritten.
 
@@ -12,8 +12,10 @@ Validation on Linux CPU:
 - Male Review, same expected text: PCM16 mono24kHz,2.51seconds,120524bytes. Real browser/API job completed in93.617seconds.
 - Real browser stopped a worker, then completed a new job. No microphone request was made while selecting supplied references or creating voice. Mobile390px had no overflow or JS errors.
 - Both outputs decode and contain nonzero finite samples. No native pronunciation or similarity rating has been performed.
-- 75 Python tests and8 Chromium microphone checks passed; dependencies pass pip check. Windows dependency resolution and wheel availability checked for CPython3.12x64; native Windows BAT/model inference unrun.
+- 80 Python tests passed for0.4.2, including five empty-artifact regressions. Prior0.4.1 passed8 Chromium microphone checks and dependencies pass pip check. Windows dependency resolution and wheel availability checked for CPython3.12x64; native Windows BAT/model inference unrun.
 
 The cloud download restriction was resolved after network publication. Model bytes and sources are now verified under /workspace/models/hmong-cosy on the current cloud machine; set HMONG_COSY_DIR to that root there. Windows default is the extracted app's .data/models/hmong-cosy. Binary model weights are downloaded by install_clone_ai.bat, not included in the small source ZIP or Git repository.
 
 Windows installer0.4.1 uses a fresh versioned clone environment and atomically selects it only after checks pass. Existing .venv and selected runtimes are never upgraded in place. Failed/interrupted attempts preserve the previous selection; rerunning a valid installation is read-only. Installer locking blocks concurrent installs. Full fresh install, read-only reuse and selected-runtime server startup were verified on Linux; native Windows remains unrun.
+
+Downloader0.4.2 fixes missing .part errors for cold-cache zero-byte source files. Empty artifacts are materialized locally, verified against their pinned Git blob SHA1 or LFS SHA256, then atomically promoted. Bad checksums cannot replace existing targets. A real snapshot test omitted all12 empty files, reused5.43GB of hard-linked nonempty files, disabled HTTP entirely and completed the118-file ready marker; large weight sizes, modification times and inodes were unchanged. Updating code in the same app folder preserves .data and avoids downloading already verified weights again.

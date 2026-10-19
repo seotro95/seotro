@@ -1,13 +1,15 @@
-# Hmong Studio 0.4.1 — nhân bản giọng cục bộ
+# Hmong Studio 0.4.2 — nhân bản giọng cục bộ
 
 Bản này có **bộ máy CosyVoice Hmong thực sự** để tạo lời đọc mới theo mẫu nam/nữ, chạy trên máy và không cần dịch vụ trả phí hoặc API key. Cần Internet một lần để tải thư viện và khoảng **5,4 GB** mô hình. Mẫu âm thanh dùng để lấy âm sắc; không phải huấn luyện lại mô hình.
 
-Bản 0.4.1 sửa WinError 32 khi pip cài đè tệp SymPy/Torch đang bị giữ. Hãy đóng các cửa sổ Studio/bộ cài của tool, giải nén bản mới vào thư mục mới rồi chạy bộ cài. Nếu vẫn bị tiến trình giữ tệp, khởi động lại Windows trước khi thử lại; không cần chạy quản trị hoặc cài Visual C++ Build Tools.
+Bản 0.4.2 sửa WinError 2 với tệp `__init__.py.part` sau khi đã tải trọng số. Tệp nguồn rỗng được tạo và kiểm tra checksum trước khi dùng; các trọng số đã tải đúng được xác minh và dùng lại. Nếu đang cài dở bản 0.4.1, **đóng Studio và bộ cài, giải nén đè mã mới vào đúng thư mục đang dùng, giữ nguyên `.data`**, rồi chạy lại `install_clone_ai.bat`. Không cần tải lại các tệp mô hình đã đúng.
+
+Bộ cài vẫn tạo môi trường riêng để tránh WinError 32 khi pip cài đè tệp SymPy/Torch đang bị giữ. Nếu vẫn bị tiến trình giữ tệp, khởi động lại Windows trước khi thử lại; không cần chạy quản trị hoặc cài Visual C++ Build Tools.
 
 ## Cài trên Windows
 
 1. Cài **Python 3.12.10 Windows 64-bit** từ https://www.python.org/downloads/release/python-31210/ , bật Python Launcher. Không cần gỡ Python 3.15 đang có.
-2. Giải nén ZIP mới vào một thư mục có quyền ghi. Đóng cửa sổ Studio bản cũ. Không sao chép `.venv` hoặc các thư mục `.venv-clone-*` từ bản cũ.
+2. Lần đầu: giải nén ZIP vào thư mục có quyền ghi. Cập nhật từ 0.4.1: đóng Studio/bộ cài rồi giải nén đè vào đúng thư mục cũ, giữ `.data` để tiếp tục dùng mô hình và mẫu giọng. Không sao chép `.venv` hoặc các thư mục `.venv-clone-*` sang thư mục khác.
 3. Chạy **`install_clone_ai.bat`**. Chờ cài thư viện, công cụ âm thanh và tải/xác minh mô hình hoàn tất; bước tải lớn có thể mất nhiều phút tùy mạng. Nếu bị ngắt, chạy lại để tiếp tục; không đổi checksum hoặc tắt TLS.
 4. Khi bộ cài báo thành công, chạy **`start.bat`** và mở địa chỉ hiện trong cửa sổ lệnh. Nếu trình duyệt đang mở bản cũ, nhấn Ctrl+F5. Có thể tạo voice cục bộ khi không có Internet sau khi cài xong.
 
@@ -37,7 +39,7 @@ Linux, CPU 4 threads, không GPU:
 - Giọng nữ tạo thật câu **“Nyob zoo, kuv hais lus Hmoob.”**: WAV PCM16 mono 24 kHz, 2,71 giây; lượt lạnh khoảng64,7 giây, RAM đỉnh khoảng7,84 GiB.
 - Giọng nam, cách đọc Review, cùng câu trên: tạo thật qua giao diện/API, WAV 2,51 giây; lượt này khoảng93,6 giây. Đây là số đo máy kiểm thử, không bảo đảm tốc độ trên máy khác.
 - Nút Dừng đã kết thúc worker thật, sau đó tạo lại thành công. Chọn mẫu/generate không yêu cầu micro. Desktop/mobile 390 px không tràn ngang hoặc lỗi JavaScript.
-- 75 kiểm thử Python đạt trên cả môi trường kiểm thử và môi trường mới do bộ cài tạo; 8 kiểm tra micro trong Chromium đạt. Đã giải mã WAV và xác minh tín hiệu khác 0; kết quả này không thay thế việc nghe chất lượng/phát âm.
+- 80 kiểm thử Python đạt, gồm lỗi tệp rỗng mới sửa. Đã thử thiếu toàn bộ 12 tệp rỗng trên snapshot thật: xác minh đủ 118 tệp mà không gọi mạng hay sửa trọng số lớn. Bản 0.4.1 đã qua kiểm tra môi trường do bộ cài tạo và 8 kiểm tra micro trong Chromium. Đã giải mã WAV và xác minh tín hiệu khác 0; kết quả này không thay thế việc nghe chất lượng/phát âm.
 
 ## Nguồn và kỹ thuật
 

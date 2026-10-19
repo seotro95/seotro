@@ -51,6 +51,15 @@ def download(root, entry):
     if result:
         partial.replace(target)
         return result
+    if entry['size'] == 0:
+        # Empty source files have no bytes to fetch, but still need their pinned
+        # checksum checked before promotion. There may be no .part file yet.
+        partial.write_bytes(b'')
+        result = verified(partial, entry)
+        if not result:
+            raise RuntimeError('Xac minh checksum that bai: ' + str(name))
+        partial.replace(target)
+        return result
     offset = partial.stat().st_size if partial.exists() else 0
     if offset >= entry['size']:
         partial.unlink()  # Only an invalid partial created by this downloader.
