@@ -1,4 +1,4 @@
-HMONG STUDIO 0.5.0 - REVIEW / SRT / 1 TRIEU KY TU
+HMONG STUDIO 0.5.1 - REVIEW / SRT / 1 TRIEU KY TU
 
 1. Cai Python 3.12 64-bit; lan dau giai nen vao thu muc co quyen ghi.
 2. Bam dup CHAY-STUDIO.bat. Tu cai thu vien/mo hinh con thieu, roi mo trinh duyet.
@@ -24,6 +24,7 @@ Giu cua so lenh mo khi dung. Ctrl+C de dong Studio.
 Da tao WAV that bang ca hai mau tren Linux CPU; chua thu Windows that.
 Nghe kiem tra phat am va do giong giong truoc khi su dung.
 Xem README.md de biet chi tiet va ket qua kiem thu.
+Xem TOC-DO.md de biet so do toc do that; chay KIEM-TRA-GPU.bat de xem ten card.
 
 TANG TOC: giu lai mo hinh va mau giua cac luot hoan tat, khong nap lai moi luot.
 Co GPU NVIDIA: dong Studio, chay CAI-NVIDIA.bat de cai cau hinh CUDA rieng.
@@ -33,7 +34,7 @@ Do CPU dam may: lan dau 66.8 giay cho 2.51 giay am thanh;
 lan dung lai 46.9 giay cho 2.15 giay. Khong phai so do tren may Xeon cua ban.
 
 SUA WINERROR2 __init__.py.part SAU KHI TAI MO HINH:
-Dong Studio/bo cai, cap nhat ban 0.5.0 vao DUNG thu muc cu.
+Dong Studio/bo cai, cap nhat ban 0.5.1 vao DUNG thu muc cu.
 Vi du: thu muc cu E:\voi hmong\Hmong-Studio-Trang,
 thi giai nen ZIP vao E:\voi hmong\ va chon thay the tep.
 KHONG long them Hmong-Studio-Trang vao ben trong thu muc cu.

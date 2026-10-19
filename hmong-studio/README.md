@@ -1,10 +1,12 @@
-# Hmong Studio 0.5.0 — review, SRT và kịch bản dài
+# Hmong Studio 0.5.1 — review, SRT và kịch bản dài
 
 Bản này gom toàn bộ ứng dụng, hai mẫu nam/nữ và các bản sửa lỗi vào một ZIP. **Chỉ chạy `CHAY-STUDIO.bat`**: file này tự cài thư viện/công cụ/mô hình còn thiếu, kiểm tra rồi mở Studio trong trình duyệt. Những lần sau cũng dùng chính file đó; bộ máy đã hợp lệ được kiểm tra và dùng lại, không cài đè thư viện.
 
 Mới: **1.000.000 ký tự/lượt**, Review mặc định, nhập TXT/SRT, hiển thị % trên nút Tạo và thanh tiến độ. Bộ máy và đặc trưng mẫu giọng được giữ trong tiến trình để dùng tiếp giữa các lượt. WAV được ghi từng đoạn ra đĩa; bản lớn được phát/tải trực tiếp, không giải mã toàn bộ trong trình duyệt.
 
-**Chưa đạt mục tiêu tạo 1 giờ voice trong 2 phút.** Đo CPU đám mây 4 luồng với câu “Nyob zoo, kuv hais lus Hmoob.”, Review: lượt đầu 66,817 giây cho WAV 2,510 giây; lượt dùng lại cache 46,929 giây cho WAV 2,150 giây. Lượt sau bắt đầu suy luận sau 0,012 giây, loại được khoảng 24 giây nạp mô hình/mẫu; suy luận CPU vẫn chậm. Đây không phải phép đo trên máy Xeon Windows của bạn và chưa đo GPU. RAM 128 GB giúp xử lý kịch bản dài, không tự bảo đảm tốc độ 30 lần thời gian thực.
+**Bản 0.5.1 bỏ thêm phép tính từ vựng ngôn ngữ không dùng trong bộ giải mã giọng.** Phép đo cặp cùng seed tạo WAV giống hệt từng byte: trước sửa 31,426 giây, sau sửa 30,760 giây, cùng WAV 2,110 giây. Phần sinh phổ âm vẫn chiếm khoảng 26 giây. Đây là tối ưu có số đo, **chưa đạt mục tiêu 1 giờ voice trong 2 phút**. Xem `TOC-DO.md` để biết phạm vi đo và phần cứng cần xác định. Chạy `KIEM-TRA-GPU.bat` để xem tên GPU/VRAM; ảnh thẻ System trong dxdiag chỉ cho biết CPU/RAM.
+
+Phép đo CPU đám mây 4 luồng ở bản 0.5.0, Review cùng câu “Nyob zoo, kuv hais lus Hmoob.”: lượt đầu 66,817 giây cho WAV 2,510 giây; lượt dùng lại cache 46,929 giây cho WAV 2,150 giây. Lượt sau bắt đầu suy luận sau 0,012 giây, loại được khoảng 24 giây nạp mô hình/mẫu. Các số đo này không phải trên máy Xeon Windows của bạn và chưa đo GPU. RAM 128 GB giúp xử lý kịch bản dài, không tự bảo đảm tốc độ 30 lần thời gian thực.
 
 CosyVoice Hmong tạo lời đọc mới theo mẫu nam/nữ, chạy trên máy và không cần dịch vụ trả phí hoặc API key. **Mô hình chưa nằm sẵn trong ZIP**: cần Internet lần đầu để tải thư viện và khoảng **5,4 GB** mô hình; tệp đã tải đúng được dùng tiếp. Mẫu âm thanh dùng để lấy âm sắc; không phải huấn luyện lại mô hình.
 
@@ -64,7 +66,7 @@ Linux, CPU 4 threads, không GPU:
 - Giọng nữ tạo thật câu **“Nyob zoo, kuv hais lus Hmoob.”**: WAV PCM16 mono 24 kHz, 2,71 giây; lượt lạnh khoảng64,7 giây, RAM đỉnh khoảng7,84 GiB.
 - Giọng nam, cách đọc Review, cùng câu trên: tạo thật qua giao diện/API, WAV 2,51 giây; lượt này khoảng93,6 giây. Đây là số đo máy kiểm thử, không bảo đảm tốc độ trên máy khác.
 - Nút Dừng đã kết thúc worker thật, sau đó tạo lại thành công. Chọn mẫu/generate không yêu cầu micro. Desktop/mobile 390 px không tràn ngang hoặc lỗi JavaScript.
-- 144 kiểm thử Python đạt, gồm cache mẫu, ghi WAV ra đĩa, giao thức worker dùng lại, giới hạn 1 triệu ký tự, SRT, tiến độ, cài GPU an toàn và tải Range. Kiểm thử SRT dùng FFmpeg thật để kiểm tra thời lượng/cao độ. Kết quả 1 giờ WAV trong kiểm thử streaming là dữ liệu thử, không phải đã tạo 1 giờ lời Hmong thật; cũng chưa tạo đủ 1 triệu ký tự bằng mô hình thật.
+- 152 kiểm thử Python đạt, gồm kiểm tra Qwen thật cỡ nhỏ: trạng thái ẩn và bộ nhớ KV khớp chính xác qua bước đầu và hai bước có cache, trọng số không đổi, phép tính từ vựng không chạy. Giữ các kiểm tra cache mẫu, ghi WAV ra đĩa, worker dùng lại, giới hạn 1 triệu ký tự, SRT, tiến độ, cài GPU và tải Range. Kết quả 1 giờ WAV trong kiểm thử streaming là dữ liệu thử, không phải đã tạo 1 giờ lời Hmong thật; cũng chưa tạo đủ 1 triệu ký tự bằng mô hình thật.
 - 7 nhóm kiểm tra Chromium mới và 8 kiểm tra micro đạt: Review mặc định, tiến độ không tự nhảy, Dừng giữ bản thu trước, nhập 1 triệu ký tự, kết quả nhiều GB dùng URL trực tiếp, dự án cũ và giao diện mobile. Giữ nguyên kiểm chứng mở trình duyệt sau khi máy chủ sẵn sàng từ bản trước.
 - Đã thử thiếu toàn bộ 12 tệp rỗng trên snapshot thật: xác minh đủ 118 tệp mà không gọi mạng hay sửa trọng số lớn. Bản 0.4.1 đã qua kiểm tra môi trường do bộ cài tạo và 8 kiểm tra micro trong Chromium. Đã giải mã WAV và xác minh tín hiệu khác 0; kết quả này không thay thế việc nghe chất lượng/phát âm.
 

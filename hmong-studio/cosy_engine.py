@@ -311,6 +311,8 @@ def _load_engine(root):
     backend.hift.load_state_dict(hift, strict=True)
     for module in (backend.llm, backend.flow, backend.hift):
         module.float().to(backend.device).eval()
+    from inference_acceleration import optimize_qwen_decode
+    optimize_qwen_decode(backend)
     rate = int(configs['sample_rate'])
     if rate != 24000:
         raise EngineError('Tần số mô hình khác cấu hình Hmong đã kiểm tra.')

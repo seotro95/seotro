@@ -23,7 +23,7 @@ async def lifespan(app):
     yield
     await voice_jobs.shutdown()
 
-app = FastAPI(title='Hmong Studio', version='0.5.0', lifespan=lifespan)
+app = FastAPI(title='Hmong Studio', version='0.5.1', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 
