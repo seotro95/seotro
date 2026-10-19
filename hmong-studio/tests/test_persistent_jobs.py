@@ -50,6 +50,9 @@ async def generate_speech(payload, progress=None, output_path=None):
         scratch = output_path.parent / 'hmong-timeline-failed'
         scratch.mkdir()
         (scratch / 'timeline.part').write_bytes(b'failed partial timeline')
+        cleanup = output_path.parent / '.audio-clean-failed'
+        cleanup.mkdir()
+        (cleanup / 'finished.wav').write_bytes(b'failed cleanup output')
     elif payload['text'] == 'one-hour':
         size = 24000 * 2 * 3600
         header = struct.pack('<4sI4s4sIHHIIHH4sI', b'RIFF', 36 + size, b'WAVE',
@@ -183,6 +186,7 @@ def test_invalid_progress_or_audio_never_reports_false_completion(monkeypatch, t
             folder = Path(voice_jobs.get(bad)['temp'].name)
             assert not (folder / 'audio.bin').exists()
             assert not (folder / 'hmong-timeline-failed').exists()
+            assert not (folder / '.audio-clean-failed').exists()
         finally:
             await voice_jobs.shutdown()
 

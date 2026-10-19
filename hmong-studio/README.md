@@ -1,8 +1,12 @@
-# Hmong Studio 0.5.1 — review, SRT và kịch bản dài
+# Hmong Studio 0.6.0 — chế độ nhanh và lọc ồn
 
 Bản này gom toàn bộ ứng dụng, hai mẫu nam/nữ và các bản sửa lỗi vào một ZIP. **Chỉ chạy `CHAY-STUDIO.bat`**: file này tự cài thư viện/công cụ/mô hình còn thiếu, kiểm tra rồi mở Studio trong trình duyệt. Những lần sau cũng dùng chính file đó; bộ máy đã hợp lệ được kiểm tra và dùng lại, không cài đè thư viện.
 
-Mới: **1.000.000 ký tự/lượt**, Review mặc định, nhập TXT/SRT, hiển thị % trên nút Tạo và thanh tiến độ. Bộ máy và đặc trưng mẫu giọng được giữ trong tiến trình để dùng tiếp giữa các lượt. WAV được ghi từng đoạn ra đĩa; bản lớn được phát/tải trực tiếp, không giải mã toàn bộ trong trình duyệt.
+Mới: lựa chọn **Chuẩn / Nhanh CPU** và **Lọc ồn Tắt / Nhẹ / Mạnh**. Mặc định Chuẩn + Nhẹ. Mẫu được giảm ù/ồn nền và cân mức trước khi lấy âm sắc; bản đọc cuối được giảm ồn và giới hạn đỉnh âm thanh một lần sau khi ghép. Giữ **1.000.000 ký tự/lượt**, Review, TXT/SRT, tiến độ %, worker/mẫu dùng lại và WAV ghi trực tiếp ra đĩa.
+
+Chọn **Nhanh CPU + Lọc ồn Nhẹ** để thử tốc độ. Chế độ nhanh dùng bản sao INT8 của riêng bộ sinh phổ; bộ chọn token giọng và mô hình gốc không thay đổi. Sau mỗi lượt, bộ máy trả lại bản Chuẩn; bản nhanh được giữ trong bộ nhớ để dùng tiếp. Chế độ nhanh có thể đổi âm sắc, cần nghe kiểm tra; chọn Chuẩn nếu kết quả không phù hợp. GPU vẫn dùng CUDA AMP đã có. **Chưa đạt mục tiêu tạo 1 giờ voice trong 2 phút**; không có cấu hình nào được gắn nhãn đã đạt mốc đó.
+
+Đo thực tế bản này, mẫu nữ Review và Lọc ồn Nhẹ trên CPU kiểm thử: Chuẩn **34,254 giây**, Nhanh CPU **26,052 giây**, cùng WAV **2,110 giây**. Mô hình đã được nạp riêng; lượt nhanh dùng lại mẫu nữ và có tạo bản INT8 lần đầu. Không ngoại suy thành tốc độ cho mọi máy hoặc một giờ lời đọc. Ba WAV mới trong `examples` cho phép nghe so sánh; xem `TOC-DO.md` để biết đầy đủ điều kiện đo.
 
 **Bản 0.5.1 bỏ thêm phép tính từ vựng ngôn ngữ không dùng trong bộ giải mã giọng.** Phép đo cặp cùng seed tạo WAV giống hệt từng byte: trước sửa 31,426 giây, sau sửa 30,760 giây, cùng WAV 2,110 giây. Phần sinh phổ âm vẫn chiếm khoảng 26 giây. Đây là tối ưu có số đo, **chưa đạt mục tiêu 1 giờ voice trong 2 phút**. Xem `TOC-DO.md` để biết phạm vi đo và phần cứng cần xác định. Chạy `KIEM-TRA-GPU.bat` để xem tên GPU/VRAM; ảnh thẻ System trong dxdiag chỉ cho biết CPU/RAM.
 
@@ -10,7 +14,7 @@ Phép đo CPU đám mây 4 luồng ở bản 0.5.0, Review cùng câu “Nyob zo
 
 CosyVoice Hmong tạo lời đọc mới theo mẫu nam/nữ, chạy trên máy và không cần dịch vụ trả phí hoặc API key. **Mô hình chưa nằm sẵn trong ZIP**: cần Internet lần đầu để tải thư viện và khoảng **5,4 GB** mô hình; tệp đã tải đúng được dùng tiếp. Mẫu âm thanh dùng để lấy âm sắc; không phải huấn luyện lại mô hình.
 
-Gói này giữ bản sửa WinError 2 với tệp `__init__.py.part` sau khi đã tải trọng số. Tệp nguồn rỗng được tạo và kiểm tra checksum trước khi dùng. Nếu đang dùng bản 0.4.x, **đóng Studio và bộ cài, giải nén đè mã mới vào đúng thư mục đang dùng, giữ nguyên `.data`**, rồi chạy `CHAY-STUDIO.bat`.
+Gói này giữ bản sửa WinError 2 với tệp `__init__.py.part` sau khi đã tải trọng số. Tệp nguồn rỗng được tạo và kiểm tra checksum trước khi dùng. Nếu đang dùng bản 0.4.x/0.5.x, **đóng Studio và bộ cài, giải nén đè mã mới vào đúng thư mục đang dùng, giữ nguyên `.data`**, rồi chạy `CHAY-STUDIO.bat`. Không thay tệp phụ thuộc hoặc tải lại mô hình đã hợp lệ.
 
 Bộ cài vẫn tạo môi trường riêng để tránh WinError 32 khi pip cài đè tệp SymPy/Torch đang bị giữ. Nếu vẫn bị tiến trình giữ tệp, khởi động lại Windows trước khi thử lại; không cần chạy quản trị hoặc cài Visual C++ Build Tools.
 
@@ -34,6 +38,7 @@ Khuyến nghị **RAM 16 GB trở lên**, chừa ít nhất khoảng 15 GB đĩa
 - Chọn **Hmong Trắng**, rồi **Giọng nữ** hoặc **Giọng nam**. Hai mẫu chính xác người dùng cung cấp đã đi kèm; không cần thu lại bằng micro.
 - Nhập lời Hmong RPA, tối đa **1.000.000 ký tự/lượt** khi dùng mẫu giọng với CosyVoice cục bộ. Có thể nhập TXT/SRT hoặc dự án JSON tối đa 8 MB; đoạn lời mới không cần trùng với lời trong mẫu. Tệp SRT tính cả mốc thời gian vào giới hạn ký tự.
 - Review được chọn sẵn; có thể đổi sang Tự nhiên, Kể chuyện, Quảng cáo, Tin tức, Thư giãn, Ấm áp, Vui vẻ hoặc Buồn. Thanh tốc độ điều chỉnh nhịp đọc, không phải tốc độ tính toán.
+- Chọn **Chế độ tạo** và **Lọc ồn**. Nhẹ giảm ồn nền đều, Mạnh giảm nhiều hơn nhưng có thể mất chi tiết giọng. Tắt giữ âm thanh gốc của bộ máy, không lọc hoặc cân mức mẫu. Bộ lọc không tách riêng được nhạc nền/người nói khác và không bảo đảm phát âm Hmong chuẩn. Tệp mẫu MP3/WAV gốc vẫn giữ nguyên.
 - Bấm **Tạo voice**. Nút và thanh tiến độ hiện % theo các đoạn đã xử lý, kèm số đoạn, thời gian đã chạy và thời lượng âm thanh. Đây là tiến độ công việc, không phải dự đoán thời gian còn lại; đoạn dài có thể giữ cùng % trong lúc mô hình suy luận. Chỉ đạt 100% sau khi WAV đã hoàn tất và được kiểm tra.
 - **Dừng** kết thúc tiến trình suy luận và dọn tệp tạm của lượt đó; lượt sau cần nạp lại mô hình. Hoàn tất bình thường thì giữ mô hình/mẫu trong bộ nhớ cho lượt kế tiếp. Bản thu trước được giữ khi tác vụ thất bại/hủy.
 - Khi hoàn tất, nghe và bấm **Tải toàn bộ WAV**. Bản trên 25 MB dùng phát/tải trực tiếp để tiết kiệm RAM; công cụ cắt chỉ dùng cho bản ngắn. WAV tối đa 24 giờ/lượt (khoảng 4,15 GB mono 24 kHz PCM16), cần chừa dung lượng tương ứng và giữ Studio mở. Tải trước khi tắt máy chủ; chỉ giữ tối đa 10 kết quả tạm. Kịch bản tạo ra hơn 24 giờ cần chia nhỏ.
@@ -52,7 +57,7 @@ Nyob zoo.
 Hnub no peb saib qhov no ua ke.
 ```
 
-Tool chỉ đọc lời, không đọc số thứ tự hoặc mốc giờ. WAV bắt đầu từ 0; giữ khoảng lặng trước, giữa và sau lời trong từng mốc. Lời vượt khoảng thời gian được tăng tốc giữ cao độ tối đa 2 lần; nếu vẫn quá dài thì báo rõ đoạn cần nới thời gian hoặc rút ngắn lời, không cắt mất câu. Mốc chồng lấn, sai thứ tự, thiếu lời hoặc quá 24 giờ sẽ bị từ chối trước khi tạo. SRT cần bộ máy CosyVoice cục bộ và mẫu nam/nữ hoặc mẫu riêng.
+Tool chỉ đọc lời, không đọc số thứ tự hoặc mốc giờ. WAV bắt đầu từ 0; giữ khoảng lặng trước, giữa và sau lời trong từng mốc. Lời vượt khoảng thời gian được tăng tốc giữ cao độ tối đa 2 lần; nếu vẫn quá dài thì báo rõ đoạn cần nới thời gian hoặc rút ngắn lời, không cắt mất câu. Mốc chồng lấn, sai thứ tự, thiếu lời hoặc quá 24 giờ sẽ bị từ chối trước khi tạo. SRT cần bộ máy CosyVoice cục bộ và mẫu nam/nữ hoặc mẫu riêng. Lọc ồn bù 25 ms độ trễ của bộ lọc và kiểm tra đúng số mẫu, giữ mốc giờ và phần âm ở cuối câu; tiến độ chuyển sang “Đang lọc ồn” trước khi hoàn tất.
 
 CosyVoice dùng tối đa 10 giây đầu mẫu, không yêu cầu bản chép mẫu trong chế độ instruct2. Có thể tải thêm mẫu riêng dài 3–60 giây / 20 MB, nhập tên và xác nhận quyền sử dụng. Ô bản chép là tùy chọn; chỉ dịch vụ ngoài theo hợp đồng cũ có thể yêu cầu nó.
 
@@ -66,8 +71,9 @@ Linux, CPU 4 threads, không GPU:
 - Giọng nữ tạo thật câu **“Nyob zoo, kuv hais lus Hmoob.”**: WAV PCM16 mono 24 kHz, 2,71 giây; lượt lạnh khoảng64,7 giây, RAM đỉnh khoảng7,84 GiB.
 - Giọng nam, cách đọc Review, cùng câu trên: tạo thật qua giao diện/API, WAV 2,51 giây; lượt này khoảng93,6 giây. Đây là số đo máy kiểm thử, không bảo đảm tốc độ trên máy khác.
 - Nút Dừng đã kết thúc worker thật, sau đó tạo lại thành công. Chọn mẫu/generate không yêu cầu micro. Desktop/mobile 390 px không tràn ngang hoặc lỗi JavaScript.
-- 152 kiểm thử Python đạt, gồm kiểm tra Qwen thật cỡ nhỏ: trạng thái ẩn và bộ nhớ KV khớp chính xác qua bước đầu và hai bước có cache, trọng số không đổi, phép tính từ vựng không chạy. Giữ các kiểm tra cache mẫu, ghi WAV ra đĩa, worker dùng lại, giới hạn 1 triệu ký tự, SRT, tiến độ, cài GPU và tải Range. Kết quả 1 giờ WAV trong kiểm thử streaming là dữ liệu thử, không phải đã tạo 1 giờ lời Hmong thật; cũng chưa tạo đủ 1 triệu ký tự bằng mô hình thật.
-- 7 nhóm kiểm tra Chromium mới và 8 kiểm tra micro đạt: Review mặc định, tiến độ không tự nhảy, Dừng giữ bản thu trước, nhập 1 triệu ký tự, kết quả nhiều GB dùng URL trực tiếp, dự án cũ và giao diện mobile. Giữ nguyên kiểm chứng mở trình duyệt sau khi máy chủ sẵn sàng từ bản trước.
+- 199 kiểm thử Python đạt, gồm CPU INT8 dùng lại/khôi phục Chuẩn, lọc ồn FFmpeg thật, đúng số mẫu và đuôi âm, SRT, Qwen/KV, worker, giới hạn 1 triệu ký tự, WAV 24 giờ có metadata và tải Range. Kết quả 1 giờ WAV trong kiểm thử streaming là dữ liệu thử, không phải đã tạo 1 giờ lời Hmong thật; cũng chưa tạo đủ 1 triệu ký tự bằng mô hình thật.
+- 9 nhóm kiểm tra Chromium và 8 kiểm tra micro đạt: lựa chọn chế độ/lọc ồn, dự án/API, tiến độ lọc ồn, CPU/GPU thực, Dừng, 1 triệu ký tự, tải WAV lớn và mobile.
+- Tín hiệu thử cho thấy lọc Nhẹ giảm ù 50 Hz khoảng 3,9 dB và nhiễu cao tần khoảng 2,2 dB, giữ biên độ các thành phần 500/1.500 Hz gần mức gốc. Đây là kiểm tra tín hiệu tổng hợp; cảm nhận giọng trong hơn và phát âm Hmong vẫn cần bạn nghe đánh giá. Đã kiểm tra giữ âm thanh ở 5 ms cuối và vị trí bắt đầu SRT tới độ chính xác 1 ms.
 - Đã thử thiếu toàn bộ 12 tệp rỗng trên snapshot thật: xác minh đủ 118 tệp mà không gọi mạng hay sửa trọng số lớn. Bản 0.4.1 đã qua kiểm tra môi trường do bộ cài tạo và 8 kiểm tra micro trong Chromium. Đã giải mã WAV và xác minh tín hiệu khác 0; kết quả này không thay thế việc nghe chất lượng/phát âm.
 
 ## Nguồn và kỹ thuật

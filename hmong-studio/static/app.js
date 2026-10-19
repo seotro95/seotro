@@ -6,11 +6,11 @@ let projects = [];
 let generationBusy = false, transcriptionBusy = false, stoppingGeneration = false, generationState = null;
 const MAX_SCRIPT_CHARACTERS = 1000000;
 try { projects = JSON.parse(localStorage.getItem('hmong-projects') || '[]'); if (!Array.isArray(projects)) projects = []; } catch { notify('Không đọc được dữ liệu cũ. Bạn có thể nhập lại dự án JSON.'); }
-function snapshot() { return { version: 1, title: $('title').value, text: $('text').value, input_format: $('inputFormat').value, dialect: $('dialect').value, voice: $('voice').value, emotion: $('emotion').value, speed: Number($('speed').value), reference_text: $('presetTranscript').value }; }
+function snapshot() { return { version: 1, title: $('title').value, text: $('text').value, input_format: $('inputFormat').value, dialect: $('dialect').value, voice: $('voice').value, emotion: $('emotion').value, speed: Number($('speed').value), compute_mode: $('computeMode').value, cleanup: $('cleanup').value, reference_text: $('presetTranscript').value }; }
 function applyProject(p) {
-  if (!p || p.version !== 1 || typeof p.text !== 'string' || p.text.length > MAX_SCRIPT_CHARACTERS || typeof p.title !== 'string' || p.title.length > 120 || !['mww','vi','en'].includes(p.dialect) || (p.input_format !== undefined && !['auto','text','srt'].includes(p.input_format)) || (p.voice !== undefined && !['model-default','hmong-white-female','hmong-white-male'].includes(p.voice) && !/^custom-[a-f0-9]{32}$/.test(p.voice)) || (p.emotion !== undefined && !['neutral','storytelling','warm','cheerful','sad','review','advertising','news','meditation'].includes(p.emotion)) || (p.reference_text !== undefined && (typeof p.reference_text !== 'string' || p.reference_text.length>2000)) || !Number.isFinite(p.speed) || p.speed < .5 || p.speed > 2) throw Error('Dự án không hợp lệ.');
+  if (!p || p.version !== 1 || typeof p.text !== 'string' || p.text.length > MAX_SCRIPT_CHARACTERS || typeof p.title !== 'string' || p.title.length > 120 || !['mww','vi','en'].includes(p.dialect) || (p.input_format !== undefined && !['auto','text','srt'].includes(p.input_format)) || (p.compute_mode !== undefined && !['standard','fast'].includes(p.compute_mode)) || (p.cleanup !== undefined && !['off','light','strong'].includes(p.cleanup)) || (p.voice !== undefined && !['model-default','hmong-white-female','hmong-white-male'].includes(p.voice) && !/^custom-[a-f0-9]{32}$/.test(p.voice)) || (p.emotion !== undefined && !['neutral','storytelling','warm','cheerful','sad','review','advertising','news','meditation'].includes(p.emotion)) || (p.reference_text !== undefined && (typeof p.reference_text !== 'string' || p.reference_text.length>2000)) || !Number.isFinite(p.speed) || p.speed < .5 || p.speed > 2) throw Error('Dự án không hợp lệ.');
   if(p.voice?.startsWith('custom-') && ![...$('voice').options].some(o=>o.value===p.voice))throw Error('Mẫu giọng trong dự án không còn trên máy này. Thêm lại mẫu hoặc chọn giọng khác.');
-  $('title').value = p.title; $('text').value = p.text; $('inputFormat').value = p.input_format || 'auto'; $('dialect').value = p.dialect; $('voice').value = p.voice || 'model-default'; $('emotion').value = p.emotion || 'review'; syncPreset(); if(p.reference_text!==undefined)$('presetTranscript').value=p.reference_text; updateCapabilities(); $('speed').value = p.speed; update();
+  $('title').value = p.title; $('text').value = p.text; $('inputFormat').value = p.input_format || 'auto'; $('dialect').value = p.dialect; $('voice').value = p.voice || 'model-default'; $('emotion').value = p.emotion || 'review'; $('computeMode').value=p.compute_mode||'standard'; $('cleanup').value=p.cleanup||'light'; updateProcessingOptions(); syncPreset(); if(p.reference_text!==undefined)$('presetTranscript').value=p.reference_text; updateCapabilities(); $('speed').value = p.speed; update();
   buffer = null; sourceBlob = null; sourceURL = null; sourceDuration = null; generationState = null; renderGeneration(); $('transcribe').disabled = true; $('transcript').value = ''; $('useTranscript').disabled = true; $('exportTranscript').disabled = true; $('download').disabled = true; $('fullDownload').disabled = true; $('player').removeAttribute('src');
   if (audioURL) URL.revokeObjectURL(audioURL); audioURL = null;
   $('wave').getContext('2d').clearRect(0,0,$('wave').width,$('wave').height); $('wave').hidden=false; $('audioInfo').textContent = 'Chưa có bản thu'; $('audioEditNote').textContent='Xuất WAV PCM 16-bit theo khoảng đã chọn và âm lượng. Bản thu gốc không bị ghi đè.';
@@ -41,6 +41,27 @@ function update() {
 }
 $('text').addEventListener('input', update); $('speed').addEventListener('input', update);
 $('inputFormat').addEventListener('change',update);
+function updateProcessingOptions(){
+  const gpu=String(serviceStatus?.cosy?.device||'').toLowerCase().includes('cuda');
+  $('computeHelp').textContent=$('computeMode').value==='fast'
+    ? (gpu?'Máy đang dùng GPU. Chế độ Nhanh (CPU) dành cho máy chạy bằng CPU; Studio tiếp tục dùng GPU hiện có.':'Nhanh (CPU) là chế độ thử nghiệm, âm sắc có thể thay đổi. Hãy nghe kiểm tra; chọn Chuẩn khi cần giọng ổn định. Tốc độ thực tế tùy máy.')
+    : 'Chuẩn ưu tiên giọng ổn định. Có thể thử Nhanh (CPU) để giảm thời gian tạo trên máy dùng CPU rồi nghe đối chiếu.';
+  const cleanupHints={off:'Tắt lọc ồn, giữ nguyên tiếng nền trong mẫu và bản đọc.',light:'Giảm nhẹ tiếng nền trong mẫu giọng và bản đọc. Nên dùng khi cần lời rõ và giữ âm sắc.',strong:'Lọc nhiều hơn trong mẫu giọng và bản đọc, có thể làm mất một số âm nhỏ. Nếu giọng bị mỏng hoặc mất âm, hãy chọn Nhẹ.'};
+  $('cleanupHelp').textContent=cleanupHints[$('cleanup').value]+' Lọc ồn không tách được nhạc nền hoặc giọng người khác.';
+}
+function renderComputeStatus(){
+  const runtime=serviceStatus?.cosy, device=String(runtime?.device||'').toLowerCase(), precision=runtime?.precision;
+  if(device.includes('cuda')){
+    $('computeStatus').textContent='Bộ xử lý: GPU NVIDIA · mô hình được giữ sẵn giữa các lượt tạo.';
+  }else if(device.includes('cpu')){
+    const actualMode=precision==='float32_int8_flow'?' · chế độ Nhanh':precision==='float32'?' · chế độ Chuẩn':'';
+    $('computeStatus').textContent='Bộ xử lý: CPU'+actualMode+' · tốc độ tùy máy và độ dài lời đọc.';
+  }else{
+    $('computeStatus').textContent='Tốc độ tạo phụ thuộc CPU/GPU và độ dài lời đọc. Lần đầu cần nạp mô hình.';
+  }
+}
+$('computeMode').addEventListener('change',updateProcessingOptions);
+$('cleanup').addEventListener('change',updateProcessingOptions);
 function download(blob, ext) {
   const a = document.createElement('a'), url = URL.createObjectURL(blob);
   a.href = url; a.download = ($('title').value.trim() || 'hmong-studio').replace(/[\\/:*?"<>|]/g,'_') + ext; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
@@ -187,10 +208,11 @@ function renderGeneration(state=generationState){
   generationState=state;
   $('generationPanel').hidden=!state;
   if(!state){$('generate').textContent='▶ Tạo voice';return;}
+  if(state.runtime && typeof state.runtime==='object' && serviceStatus){serviceStatus.cosy={...serviceStatus.cosy,...state.runtime};renderComputeStatus();updateProcessingOptions();}
   const completed=state.status==='completed';
   const progress=completed?100:Math.min(99,Math.max(0,Number.isFinite(state.progress)?Math.floor(state.progress):0));
   $('generationProgress').value=progress;$('generationPercent').textContent=progress+'%';
-  const phases={queued:'Đang chờ',starting:'Đang khởi động',loading:'Đang nạp mô hình',loading_model:'Đang nạp mô hình',preparing_reference:'Đang chuẩn bị giọng mẫu',synthesizing:'Đang tạo lời đọc',assembling:'Đang ghép âm thanh',completed:'Đã tạo xong',cancelled:'Đã dừng',failed:'Tạo voice chưa thành công'};
+  const phases={queued:'Đang chờ',starting:'Đang khởi động',loading:'Đang nạp mô hình',loading_model:'Đang nạp mô hình',preparing_reference:'Đang chuẩn bị giọng mẫu',synthesizing:'Đang tạo lời đọc',assembling:'Đang ghép âm thanh',cleanup:'Đang lọc ồn / hoàn thiện âm thanh',completed:'Đã tạo xong',cancelled:'Đã dừng',failed:'Tạo voice chưa thành công'};
   const details=[state.message||phases[state.phase]||phases[state.status]||'Đang tạo voice'];
   if(Number.isFinite(state.total_units) && state.total_units>0)details.push(`${Math.max(0,Number(state.completed_units)||0).toLocaleString('vi')}/${state.total_units.toLocaleString('vi')} đoạn`);
   if(Number.isFinite(state.generated_seconds))details.push('Đã tạo '+formatDuration(state.generated_seconds)+' âm thanh');
@@ -203,7 +225,7 @@ function busyControls(){
   $('generate').disabled=generationBusy;
   $('stopGenerate').disabled=!activeJob || !generationBusy || stoppingGeneration;
   renderGeneration();
-  for(const id of ['text','inputFormat','dialect','voice','emotion','speed','loadExample','loadSrtExample','projectFile','textFile','referenceVoice','presetTranscript','title','cloneFile','cloneName','cloneTranscript','cloneConsent','save','record','skipMicrophone','audioFile'])$(id).disabled=generationBusy;
+  for(const id of ['text','inputFormat','dialect','voice','emotion','speed','computeMode','cleanup','loadExample','loadSrtExample','projectFile','textFile','referenceVoice','presetTranscript','title','cloneFile','cloneName','cloneTranscript','cloneConsent','save','record','skipMicrophone','audioFile'])$(id).disabled=generationBusy;
   $('useTranscript').disabled=generationBusy||!$('transcript').value.trim();
 }
 async function requestJSON(url,options){
@@ -225,7 +247,7 @@ $('generate').onclick=async()=>{
   if(serviceStatus && custom && !serviceStatus.custom_cloning){notify('Mẫu giọng đã được lưu, nhưng chưa có bộ máy nhân bản Hmong Trắng. Không thể tạo lời mới từ mẫu khi chưa có mô hình/dịch vụ phù hợp.');return;}
   generationBusy=true;stoppingGeneration=false;generationState={status:'running',phase:'starting',progress:0,message:'Đang gửi kịch bản…'};busyControls();notify('Đang khởi động tạo voice…');
   try{
-    const job=await requestJSON('/api/speech/jobs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:p.text,input_format:p.input_format,dialect:p.dialect,voice:p.voice,emotion:p.emotion,speed:p.speed,reference_text:p.reference_text})});
+    const job=await requestJSON('/api/speech/jobs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:p.text,input_format:p.input_format,dialect:p.dialect,voice:p.voice,emotion:p.emotion,speed:p.speed,compute_mode:p.compute_mode,cleanup:p.cleanup,reference_text:p.reference_text})});
     activeJob=job.id;busyControls();
     let state=job;
     while(['queued','starting','running'].includes(state.status)){
@@ -267,9 +289,8 @@ function updateCapabilities() {
     ? (s.local_cloning?'Đang dùng CosyVoice Hmong trên máy. Dùng âm sắc mẫu đã chọn, không cần micro hoặc bản chép mẫu. Nghe kiểm tra phát âm và độ giống giọng.':s.custom_cloning?'Đã chọn mẫu giọng riêng. Mẫu và bản chép được dùng khi tạo voice qua bộ máy nhân bản.':'Đã chọn mẫu giọng riêng. '+(s.cosy?.reason||'Chưa có bộ máy nhân bản.'))
     : (['hmong-white-female','hmong-white-male'].includes($('voice').value) && !s.remote_tts?'Đã chọn mẫu nam/nữ của bạn, không cần micro. Chưa có bộ máy nhân bản Hmong Trắng để đọc lời mới.':s.remote_tts?'Đang dùng dịch vụ đọc đã cấu hình.':'Đang dùng giọng gốc cục bộ. '+(!s.local.dependencies?'Chưa cài thư viện AI. ':'')+(!$('dialect').value||!s.local.tts_models[$('dialect').value]?'Chưa có mô hình cho ngôn ngữ đã chọn.':''));
   $('cloneState').textContent=s.local_cloning?'CosyVoice Hmong cục bộ · đã tải mô hình':s.custom_cloning?'Dịch vụ nhân bản đã cấu hình':s.cosy?.reason||'Chạy install_clone_ai.bat để cài bộ máy nhân bản.';
-  const device=s.cosy?.device;
-  $('computeStatus').textContent=device && device!=='auto'?(String(device).toLowerCase().includes('cuda')?'Bộ xử lý: GPU NVIDIA · mô hình được giữ sẵn giữa các lượt tạo.':String(device).toLowerCase().includes('cpu')?'Bộ xử lý: CPU · mô hình được giữ sẵn giữa các lượt hoàn tất, tốc độ tùy máy và độ dài lời đọc.':'Bộ xử lý: '+device):'Tốc độ tạo phụ thuộc CPU/GPU và độ dài lời đọc. Lần đầu cần nạp mô hình.';
-  update();busyControls();
+  renderComputeStatus();
+  updateProcessingOptions();update();busyControls();
 }
 $('dialect').addEventListener('change',updateCapabilities);
 $('transcribe').onclick = async () => {
@@ -327,3 +348,4 @@ refreshClones().catch(e=>notify(e.message));
 $('emotion').addEventListener('change',updateCapabilities);
 
 syncPreset();
+updateProcessingOptions();

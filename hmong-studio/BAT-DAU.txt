@@ -1,4 +1,4 @@
-HMONG STUDIO 0.5.1 - REVIEW / SRT / 1 TRIEU KY TU
+HMONG STUDIO 0.6.0 - NHANH CPU / LOC ON / REVIEW SRT
 
 1. Cai Python 3.12 64-bit; lan dau giai nen vao thu muc co quyen ghi.
 2. Bam dup CHAY-STUDIO.bat. Tu cai thu vien/mo hinh con thieu, roi mo trinh duyet.
@@ -6,6 +6,13 @@ HMONG STUDIO 0.5.1 - REVIEW / SRT / 1 TRIEU KY TU
 4. Chon NAM/NU, nhap toi da 1.000.000 ky tu hoac TXT/SRT; Review duoc chon san.
 5. Bam TAO VOICE: nut hien % va so doan da tao. DUNG se dung tien trinh.
 6. Hoan tat thi nghe va bam TAI TOAN BO WAV. Ban dai duoc ghi va tai truc tiep.
+
+CHE DO MOI:
+- Chon Nhanh CPU de thu tang toc. Co the doi am sac; chon Chuan neu khong hop.
+- Loc on Nhe la mac dinh: giam u/on nen, can muc mau, gioi han dinh dau ra.
+- Loc on Manh co the mat chi tiet giong. Tat de dung am thanh khong loc.
+- Mau goc duoc giu nguyen. Khong tach duoc nhac nen hoac nguoi noi khac.
+- Loc on giu nguyen do dai va moc SRT, nut Tao chi 100% khi xong ca loc on.
 
 SRT: chi doc loi, khong doc moc gio. Vi du:
 1
@@ -34,7 +41,7 @@ Do CPU dam may: lan dau 66.8 giay cho 2.51 giay am thanh;
 lan dung lai 46.9 giay cho 2.15 giay. Khong phai so do tren may Xeon cua ban.
 
 SUA WINERROR2 __init__.py.part SAU KHI TAI MO HINH:
-Dong Studio/bo cai, cap nhat ban 0.5.1 vao DUNG thu muc cu.
+Dong Studio/bo cai, cap nhat ban 0.6.0 vao DUNG thu muc cu.
 Vi du: thu muc cu E:\voi hmong\Hmong-Studio-Trang,
 thi giai nen ZIP vao E:\voi hmong\ va chon thay the tep.
 KHONG long them Hmong-Studio-Trang vao ben trong thu muc cu.

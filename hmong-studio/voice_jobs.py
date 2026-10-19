@@ -20,8 +20,8 @@ JOBS = {}
 _WORKER_STATE = None
 _WORKER_LOCK = None
 _AUDIO_TYPES = {'audio/wav', 'audio/x-wav', 'audio/mpeg', 'audio/ogg'}
-# 24 hours of 24 kHz mono PCM16 plus the canonical WAV header.
-MAX_WAV_BYTES = 4_147_200_044
+# 24 hours of 24 kHz mono PCM16, allowing FFmpeg's small WAV metadata chunks.
+MAX_WAV_BYTES = 24 * 60 * 60 * 24000 * 2 + 64 * 1024
 
 
 def _lock():
@@ -90,13 +90,17 @@ def _validated_runtime(info):
                                     ('device', 'precision', 'reference_cache_entries'))
     if (not isinstance(device, str) or not re.fullmatch(r'(?:auto|cpu|mps|cuda(?::[0-9]{1,3})?)', device)
             or not isinstance(precision, str)
-            or precision not in {'auto', 'float32', 'float16', 'float16_autocast',
+            or precision not in {'auto', 'float32', 'float32_int8_flow', 'float16', 'float16_autocast',
                                  'bfloat16', 'bfloat16_autocast'}
             or isinstance(references, bool) or not isinstance(references, int)
             or not 0 <= references <= 1000000):
         return {}
-    return {'loaded': info['loaded'], 'device': device, 'precision': precision,
-            'reference_cache_entries': references}
+    runtime = {'loaded': info['loaded'], 'device': device, 'precision': precision,
+               'reference_cache_entries': references}
+    mode = info.get('compute_mode')
+    if isinstance(mode, str) and mode in {'standard', 'fast'}:
+        runtime['compute_mode'] = mode
+    return runtime
 
 
 def worker_runtime():
@@ -196,7 +200,8 @@ def _discard_partial_audio(job):
             path.unlink(missing_ok=True)
         except OSError:
             pass
-    for path in folder.glob('hmong-timeline-*'):
+    scratch = [*folder.glob('hmong-timeline-*'), *folder.glob('.audio-clean-*')]
+    for path in scratch:
         try:
             if path.is_symlink():
                 path.unlink()

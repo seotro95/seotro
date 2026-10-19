@@ -78,6 +78,9 @@ _engine = None
 _verified = None
 _reference_cache = OrderedDict()
 _REFERENCE_CACHE_LIMIT = 4
+_flow_variant = None
+COMPUTE_MODES = ('standard', 'fast')
+REFERENCE_CLEANUP_LEVELS = ('off', 'light', 'strong')
 MAX_SCRIPT_CHARACTERS = 1_000_000
 MAX_OUTPUT_SECONDS = 24 * 60 * 60
 
@@ -146,7 +149,9 @@ def availability():
             'model_dir': str(root), 'repository': REPOSITORY, 'revision': REVISION,
             'loaded': loaded,
             'device': str(getattr(backend, 'device', 'auto')),
-            'precision': ('float16_autocast' if getattr(backend, 'fp16', False) else 'float32') if backend is not None else 'auto',
+            'precision': getattr(backend, '_hmong_precision',
+                                 'float16_autocast' if getattr(backend, 'fp16', False) else 'float32') if backend is not None else 'auto',
+            'compute_mode': getattr(backend, '_hmong_compute_mode', 'standard') if backend is not None else 'standard',
             'reference_cache_entries': len(_reference_cache) if loaded else 0,
             'styles': list(STYLES), 'reason': reason,
             'quality_verified': False, 'reference_transcript_required': False}
@@ -260,8 +265,51 @@ def _device_options(torch):
     return {'device': 'cuda' if cuda else 'cpu', 'fp16': cuda}
 
 
+def _select_compute(backend, root, compute_mode, torch):
+    """Select a request's estimator under the engine lock; return restore data.
+
+    Fast CPU mode changes only the flow estimator's Linear operations to dynamic
+    INT8. Its separately cached copy leaves the verified original model, Qwen
+    and speech-token head untouched. CUDA continues using upstream autocast.
+    """
+    global _flow_variant
+    if compute_mode not in COMPUTE_MODES:
+        raise EngineError('Chế độ xử lý phải là standard hoặc fast.')
+    precision = 'float16_autocast' if getattr(backend, 'fp16', False) else 'float32'
+    if compute_mode == 'standard' or str(getattr(backend, 'device', 'cpu')).split(':')[0] != 'cpu':
+        backend._hmong_compute_mode = compute_mode
+        backend._hmong_precision = precision
+        return None
+    try:
+        decoder = backend.flow.decoder
+        original = decoder.estimator
+        if (not isinstance(original, torch.nn.Module)
+                or not any(isinstance(module, torch.nn.Linear) for module in original.modules())):
+            raise ValueError('unsupported flow estimator')
+        cached = _flow_variant
+        if (cached is not None and cached[0] == root and cached[1] is backend
+                and cached[2] is original):
+            variant = cached[3]
+        else:
+            from torch.ao.quantization import quantize_dynamic
+            variant = quantize_dynamic(original, {torch.nn.Linear}, dtype=torch.qint8, inplace=False)
+            if variant is original:
+                raise ValueError('quantization changed original estimator')
+            variant.eval()
+            if not any(isinstance(module, torch.ao.nn.quantized.dynamic.Linear) for module in variant.modules()):
+                raise ValueError('no supported INT8 operations')
+            _flow_variant = (root, backend, original, variant)
+        decoder.estimator = variant
+    except (AttributeError, ImportError, RuntimeError, ValueError, TypeError, NotImplementedError) as exc:
+        raise EngineError('Chế độ Nhanh INT8 chưa dùng được với bộ máy CPU này. '
+                          'Chọn chế độ Chuẩn để tạo giọng; mô hình gốc không thay đổi.') from exc
+    backend._hmong_compute_mode = 'fast'
+    backend._hmong_precision = 'float32_int8_flow'
+    return decoder, original
+
+
 def _load_engine(root):
-    global _engine
+    global _engine, _flow_variant
     if _engine is not None and _engine[0] == root:
         return _engine[1:]
     _verify_snapshot(root)
@@ -317,19 +365,31 @@ def _load_engine(root):
     if rate != 24000:
         raise EngineError('Tần số mô hình khác cấu hình Hmong đã kiểm tra.')
     _reference_cache.clear()
+    _flow_variant = None
     _engine = (root, frontend, backend, rate)
     return frontend, backend, rate
 
 
-def _decode_reference(reference_path, output_path):
+def _decode_reference(reference_path, output_path, *, cleanup='off'):
     import numpy as np
+    if cleanup not in REFERENCE_CLEANUP_LEVELS:
+        raise EngineError('Mức làm sạch mẫu giọng phải là off, light hoặc strong.')
     reference = Path(reference_path).expanduser().resolve()
     if not reference.is_file() or reference.stat().st_size > 200 * 1024 * 1024:
         raise EngineError('Không tìm thấy mẫu giọng cục bộ hợp lệ (tối đa 200 MB).')
     try:
-        result = subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-protocol_whitelist',
-            'file,pipe', '-i', str(reference), '-t', '10', '-vn', '-ac', '1', '-ar', '24000',
-            '-f', 'f32le', 'pipe:1'], capture_output=True, timeout=45, check=True)
+        with tempfile.TemporaryDirectory(prefix='hmong-clean-reference-') as folder:
+            if cleanup != 'off':
+                from audio_clean import clean_reference
+                cleaned = Path(folder) / 'cleaned.wav'
+                try:
+                    clean_reference(reference, cleaned, level=cleanup, max_seconds=10)
+                except (ValueError, RuntimeError) as exc:
+                    raise EngineError(str(exc)) from exc
+                reference = cleaned
+            result = subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-protocol_whitelist',
+                'file,pipe', '-i', str(reference), '-t', '10', '-vn', '-ac', '1', '-ar', '24000',
+                '-f', 'f32le', 'pipe:1'], capture_output=True, timeout=45, check=True)
     except (OSError, subprocess.SubprocessError) as exc:
         raise EngineError('Không giải mã được mẫu giọng. Hãy chọn MP3/WAV có lời nói rõ.') from exc
     samples = np.frombuffer(result.stdout, dtype='<f4').copy()
@@ -342,7 +402,7 @@ def _decode_reference(reference_path, output_path):
     Path(output_path).write_bytes(_wav(samples, 24000))
 
 
-def _conditioned_inputs(frontend, text, instruction, reference_path, rate, *, root=None):
+def _conditioned_inputs(frontend, text, instruction, reference_path, rate, *, root=None, cleanup='off'):
     """Reuse verified reference features, while tokenizing each new text/style.
 
     The pinned instruct2 frontend extracts the same speaker embedding, acoustic
@@ -350,6 +410,8 @@ def _conditioned_inputs(frontend, text, instruction, reference_path, rate, *, ro
     change. Keep those expensive acoustic tensors in a small process-local LRU;
     invalidate when the source file, loaded frontend, device or model changes.
     """
+    if cleanup not in REFERENCE_CLEANUP_LEVELS:
+        raise EngineError('Mức làm sạch mẫu giọng phải là off, light hoặc strong.')
     token_fields = {'text', 'text_len', 'prompt_text', 'prompt_text_len'}
     can_cache = callable(getattr(frontend, '_extract_text_token', None))
     key = None
@@ -363,7 +425,7 @@ def _conditioned_inputs(frontend, text, instruction, reference_path, rate, *, ro
             raise EngineError('Không tìm thấy mẫu giọng cục bộ hợp lệ (tối đa 200 MB).')
         key = (str(root), id(frontend), str(getattr(frontend, 'device', 'cpu')),
                int(rate), str(reference), stat.st_dev, stat.st_ino, stat.st_size,
-               stat.st_mtime_ns, stat.st_ctime_ns)
+               stat.st_mtime_ns, stat.st_ctime_ns, cleanup)
         cached = _reference_cache.get(key)
         if cached is not None:
             _reference_cache.move_to_end(key)
@@ -374,7 +436,10 @@ def _conditioned_inputs(frontend, text, instruction, reference_path, rate, *, ro
             return result
     with tempfile.TemporaryDirectory(prefix='hmong-reference-') as folder:
         prepared = Path(folder) / 'reference.wav'
-        _decode_reference(reference_path, prepared)
+        if cleanup == 'off':
+            _decode_reference(reference_path, prepared)
+        else:
+            _decode_reference(reference_path, prepared, cleanup=cleanup)
         result = frontend.frontend_instruct2(text, instruction, str(prepared), rate, '')
     if key is not None:
         # Hold the frontend with the entry so an object id cannot be reused for
@@ -437,7 +502,8 @@ def _sentences(text):
         yield ' '.join(pending)
 
 
-def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=None, output_path=None):
+def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=None, output_path=None,
+               compute_mode='standard', cleanup='off'):
     """Stream PCM WAV locally; return its Path, or bytes for small legacy calls.
 
     A caller-supplied output path avoids retaining a long script's audio in RAM.
@@ -450,12 +516,17 @@ def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=N
         raise EngineError('Cách đọc đã chọn chưa được bộ máy Hmong hỗ trợ.')
     if not isinstance(speed, (int, float)) or not math.isfinite(speed) or not .5 <= speed <= 2:
         raise EngineError('Tốc độ đọc phải nằm trong khoảng 0,5 đến 2,0.')
+    if compute_mode not in COMPUTE_MODES:
+        raise EngineError('Chế độ xử lý phải là standard hoặc fast.')
+    if cleanup not in REFERENCE_CLEANUP_LEVELS:
+        raise EngineError('Mức làm sạch mẫu giọng phải là off, light hoặc strong.')
     status = availability()
     if not status['ready']:
         raise EngineError(status['reason'])
     if not _lock.acquire(blocking=False):
         raise EngineError('Bộ máy nhân bản đang tạo voice khác. Chờ hoàn tất hoặc bấm Dừng.')
     partial = None
+    restore_compute = None
     try:
         import numpy as np
         import torch
@@ -474,6 +545,7 @@ def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=N
 
         report(1, 'loading', 'Đang nạp mô hình; các lượt sau dùng lại mô hình trong bộ nhớ.')
         frontend, backend, rate = _load_engine(root)
+        restore_compute = _select_compute(backend, root, compute_mode, torch)
         report(5, 'reference', 'Đang chuẩn bị mẫu giọng; dùng lại đặc trưng nếu mẫu không thay đổi.')
         instruct = ('You are a helpful assistant. Please speak Hmong (White Hmong RPA). '
                     + STYLES[emotion] + '<|endofprompt|>')
@@ -493,7 +565,8 @@ def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=N
             for sentence in sentences:
                 # Same instruct2 tensors as upstream, with acoustic reference
                 # extraction performed once per unchanged reference, not chunk.
-                inputs = _conditioned_inputs(frontend, sentence, instruct, reference_path, rate, root=root)
+                inputs = _conditioned_inputs(frontend, sentence, instruct, reference_path, rate, root=root,
+                                             cleanup=cleanup)
                 report(8 + 88 * completed_text / text_units, 'synthesis',
                        f'Đang tạo đoạn {completed_units + 1}/{total_units}.')
                 emitted = False
@@ -535,6 +608,9 @@ def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=N
                           + '). Kiểm tra nhật ký cục bộ, RAM và bộ cài AI; chưa có voice hoàn tất.') from exc
     finally:
         try:
+            if restore_compute is not None:
+                decoder, original = restore_compute
+                decoder.estimator = original
             if partial is not None:
                 partial.unlink(missing_ok=True)
         except OSError:

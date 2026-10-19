@@ -186,3 +186,186 @@ def test_windows_temporary_file_cleanup_failure_does_not_lock_next_job(tmp_path,
     second = engine.synthesize('Zoo siab.', tmp_path / 'source.mp3', output_path=tmp_path / 'second.wav')
     assert first.is_file() and second.is_file()
     assert not engine._lock.locked()
+
+
+@pytest.fixture
+def compute_runtime(tmp_path, monkeypatch):
+    np = pytest.importorskip('numpy')
+    torch = pytest.importorskip('torch')
+    monkeypatch.setattr(engine, '_flow_variant', None)
+    original = torch.nn.Sequential(torch.nn.Linear(4, 8), torch.nn.ReLU(), torch.nn.Linear(8, 2)).eval()
+    seen = []
+
+    class Backend:
+        device = 'cpu'
+        fp16 = False
+        fail = False
+
+        def __init__(self):
+            self.flow = SimpleNamespace(decoder=SimpleNamespace(estimator=original))
+
+        def tts(self, **kwargs):
+            estimator = self.flow.decoder.estimator
+            seen.append(estimator)
+            assert torch.isfinite(estimator(torch.ones(1, 4))).all()
+            if self.fail:
+                raise RuntimeError('forced inference failure')
+            yield {'tts_speech': torch.from_numpy(np.sin(np.arange(2400) * .1).astype('float32'))}
+    backend = Backend()
+    monkeypatch.setattr(engine, 'availability', lambda: {'ready': True})
+    monkeypatch.setattr(engine, '_load_engine', lambda root: (Frontend(), backend, 24000))
+    monkeypatch.setattr(engine, '_conditioned_inputs', lambda *args, **kwargs: {})
+    return torch, backend, original, seen
+
+
+def test_fast_cpu_quantizes_only_copied_flow_and_standard_restores_exact_original(tmp_path, compute_runtime):
+    torch, backend, original, seen = compute_runtime
+    weights = {name: value.clone() for name, value in original.state_dict().items()}
+    engine.synthesize('Nyob zoo.', tmp_path / 'source.wav', compute_mode='fast', output_path=tmp_path / 'fast.wav')
+    assert seen[-1] is not original
+    assert any(isinstance(module, torch.ao.nn.quantized.dynamic.Linear) for module in seen[-1].modules())
+    assert backend.flow.decoder.estimator is original
+    assert backend._hmong_precision == 'float32_int8_flow'
+    for name, value in original.state_dict().items():
+        assert torch.equal(value, weights[name])
+    engine.synthesize('Zoo siab.', tmp_path / 'source.wav', output_path=tmp_path / 'standard.wav')
+    assert seen[-1] is original
+    assert backend.flow.decoder.estimator is original
+    assert backend._hmong_compute_mode == 'standard'
+    assert backend._hmong_precision == 'float32'
+
+
+def test_cached_int8_variant_is_reused_and_replaced_for_another_model(tmp_path, monkeypatch, compute_runtime):
+    torch, backend, original, seen = compute_runtime
+    quantize = torch.ao.quantization.quantize_dynamic
+    calls = []
+
+    def counted(*args, **kwargs):
+        calls.append(kwargs)
+        assert args[0] is original
+        assert args[1] == {torch.nn.Linear}
+        assert kwargs == {'dtype': torch.qint8, 'inplace': False}
+        return quantize(*args, **kwargs)
+    monkeypatch.setattr(torch.ao.quantization, 'quantize_dynamic', counted)
+    for index in range(2):
+        engine.synthesize('Nyob zoo.', tmp_path / 'source.wav', compute_mode='fast', output_path=tmp_path / f'{index}.wav')
+    assert len(calls) == 1 and seen[0] is seen[1]
+    monkeypatch.setattr(engine, 'model_dir', lambda: tmp_path / 'another-model')
+    engine.synthesize('Nyob zoo.', tmp_path / 'source.wav', compute_mode='fast', output_path=tmp_path / 'another.wav')
+    assert len(calls) == 2 and seen[-1] is not seen[0]
+    assert engine._flow_variant[0] == tmp_path / 'another-model'
+    assert engine._flow_variant[1] is backend
+    assert backend.flow.decoder.estimator is original
+
+
+def test_fast_cpu_restores_original_on_inference_failure(tmp_path, compute_runtime):
+    _, backend, original, _ = compute_runtime
+    backend.fail = True
+    target = tmp_path / 'voice.wav'
+    target.write_bytes(b'previous-complete-audio')
+    with pytest.raises(engine.EngineError, match='RuntimeError'):
+        engine.synthesize('Nyob zoo.', tmp_path / 'source.wav', compute_mode='fast', output_path=target)
+    assert backend.flow.decoder.estimator is original
+    assert not engine._lock.locked()
+    assert target.read_bytes() == b'previous-complete-audio'
+    backend.fail = False
+    engine.synthesize('Nyob zoo.', tmp_path / 'source.wav', output_path=target)
+    assert backend.flow.decoder.estimator is original
+
+
+def test_cuda_fast_uses_existing_autocast_without_cpu_quantization(tmp_path, monkeypatch, compute_runtime):
+    torch, backend, original, seen = compute_runtime
+    backend.device = 'cuda:0'
+    backend.fp16 = True
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError('CUDA must never select dynamic CPU INT8')
+    monkeypatch.setattr(torch.ao.quantization, 'quantize_dynamic', forbidden)
+    engine.synthesize('Nyob zoo.', tmp_path / 'source.wav', compute_mode='fast', output_path=tmp_path / 'cuda-path.wav')
+    assert seen[-1] is original and engine._flow_variant is None
+    assert backend._hmong_precision == 'float16_autocast'
+    assert backend._hmong_compute_mode == 'fast'
+
+
+def test_failed_cpu_quantization_preserves_original_and_allows_standard(tmp_path, monkeypatch, compute_runtime):
+    torch, backend, original, _ = compute_runtime
+
+    def unsupported(*args, **kwargs):
+        raise RuntimeError('quantized CPU kernel unavailable')
+    monkeypatch.setattr(torch.ao.quantization, 'quantize_dynamic', unsupported)
+    with pytest.raises(engine.EngineError, match='Chọn chế độ Chuẩn'):
+        engine.synthesize('Nyob zoo.', tmp_path / 'source.wav', compute_mode='fast', output_path=tmp_path / 'fast.wav')
+    assert backend.flow.decoder.estimator is original and engine._flow_variant is None
+    assert not engine._lock.locked()
+    engine.synthesize('Nyob zoo.', tmp_path / 'source.wav', output_path=tmp_path / 'standard.wav')
+    assert backend._hmong_precision == 'float32'
+
+
+def test_cleanup_level_is_part_of_reference_cache_key(tmp_path, monkeypatch):
+    source = tmp_path / 'reference.mp3'
+    source.write_bytes(b'original-reference')
+    calls = []
+
+    def decode(source, target, *, cleanup='off'):
+        calls.append(cleanup)
+        target.write_bytes(b'decoded')
+    monkeypatch.setattr(engine, '_decode_reference', decode)
+    frontend = Frontend()
+    for cleanup in ('off', 'light', 'strong', 'light', 'off'):
+        engine._conditioned_inputs(frontend, 'Nyob zoo.', 'review', source, 24000, cleanup=cleanup)
+    assert calls == ['off', 'light', 'strong']
+    assert len(frontend.calls) == 3
+    assert source.read_bytes() == b'original-reference'
+
+
+def test_decode_uses_cleaned_copy_without_modifying_original(tmp_path, monkeypatch):
+    import sys
+    np = pytest.importorskip('numpy')
+    source = tmp_path / 'original.mp3'
+    source.write_bytes(b'original-private-recording')
+    clean_calls = []
+    ffmpeg_calls = []
+
+    def clean_reference(source_path, destination, *, level, max_seconds):
+        clean_calls.append((source_path, destination, level, max_seconds))
+        destination.write_bytes(b'cleaned-copy')
+
+    def ffmpeg(arguments, **kwargs):
+        reference = Path(arguments[arguments.index('-i') + 1])
+        ffmpeg_calls.append(reference)
+        assert reference.read_bytes() == b'cleaned-copy'
+        samples = np.sin(np.arange(24000) * .05).astype('<f4') * .3
+        return SimpleNamespace(stdout=samples.tobytes())
+    monkeypatch.setitem(sys.modules, 'audio_clean', SimpleNamespace(clean_reference=clean_reference))
+    monkeypatch.setattr(engine.subprocess, 'run', ffmpeg)
+    result = tmp_path / 'prepared.wav'
+    engine._decode_reference(source, result, cleanup='light')
+    assert clean_calls[0][0] == source
+    assert clean_calls[0][2:] == ('light', 10)
+    assert ffmpeg_calls[0] != source and not ffmpeg_calls[0].exists()
+    assert source.read_bytes() == b'original-private-recording'
+    with wave.open(str(result)) as sound:
+        assert sound.getnframes() == 24000 and sound.getframerate() == 24000
+
+
+@pytest.mark.parametrize('options', [{'compute_mode': 'pretend-fast'}, {'cleanup': 'unsafe'}])
+def test_invalid_compute_or_cleanup_is_rejected_before_loading(tmp_path, monkeypatch, options):
+    def forbidden():
+        raise AssertionError('Invalid options must be rejected before model loading')
+    monkeypatch.setattr(engine, 'availability', forbidden)
+    with pytest.raises(engine.EngineError):
+        engine.synthesize('Nyob zoo.', tmp_path / 'reference.mp3', **options)
+
+
+@pytest.mark.parametrize('failure', [ValueError('Mẫu giọng quá nhỏ.'), RuntimeError('Không làm sạch được mẫu giọng.')])
+def test_cleanup_failure_keeps_readable_error_and_original(tmp_path, monkeypatch, failure):
+    import sys
+    source = tmp_path / 'original.mp3'
+    source.write_bytes(b'original-private-recording')
+
+    def fail(*args, **kwargs):
+        raise failure
+    monkeypatch.setitem(sys.modules, 'audio_clean', SimpleNamespace(clean_reference=fail))
+    with pytest.raises(engine.EngineError, match=str(failure)):
+        engine._decode_reference(source, tmp_path / 'prepared.wav', cleanup='strong')
+    assert source.read_bytes() == b'original-private-recording'

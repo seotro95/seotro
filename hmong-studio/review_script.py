@@ -177,7 +177,8 @@ def _copy_audio(source, writer, frames):
             frames -= count
 
 
-def render_timeline(script, reference_path, emotion='review', speed=1.0, *, progress=None, output_path=None):
+def render_timeline(script, reference_path, emotion='review', speed=1.0, *, progress=None, output_path=None,
+                    compute_mode='standard', cleanup='off'):
     """Generate each cue and stream a pitch-preserving, exactly placed WAV.
 
     Short speech is followed by silence. Speech longer than its slot is sped up
@@ -185,6 +186,8 @@ def render_timeline(script, reference_path, emotion='review', speed=1.0, *, prog
     Only a completely validated result replaces a caller's existing output.
     """
     total_text = _validate_timeline(script)
+    if compute_mode not in {'standard', 'fast'} or cleanup not in {'off', 'light', 'strong'}:
+        raise ScriptError('Chế độ tạo hoặc mức lọc ồn không hợp lệ.')
     if emotion not in cosy_engine.STYLES:
         raise ScriptError('Cách đọc đã chọn chưa được bộ máy Hmong hỗ trợ.')
     if (isinstance(speed, bool) or not isinstance(speed, (int, float))
@@ -236,8 +239,12 @@ def render_timeline(script, reference_path, emotion='review', speed=1.0, *, prog
                            f'Đoạn {index}/{total_units}: {update.get("message", "Đang tạo voice.")}',
                            cue.start + min(cue.end - cue.start, max(0, float(update.get('generated_seconds', 0)))))
 
-                cosy_engine.synthesize(cue.text, reference_path, emotion, speed,
-                                       progress=cue_progress, output_path=source)
+                options = {'progress': cue_progress, 'output_path': source}
+                if compute_mode != 'standard':
+                    options['compute_mode'] = compute_mode
+                if cleanup != 'off':
+                    options['cleanup'] = cleanup
+                cosy_engine.synthesize(cue.text, reference_path, emotion, speed, **options)
                 frames = _audio_frames(source)
                 if frames > slot:
                     report(1 + 94 * (completed_text + len(cue.text) * .99) / total_text,

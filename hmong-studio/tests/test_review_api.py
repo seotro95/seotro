@@ -51,7 +51,7 @@ def test_srt_uses_timed_renderer_and_never_speaks_timestamps(monkeypatch):
     monkeypatch.setattr(app.review_script, 'render_timeline', render)
     monkeypatch.setattr(app.cosy_engine, 'synthesize', plain)
     text = '1\n00:00:00,200 --> 00:00:02,700\nNyob zoo.\n'
-    response = TestClient(app.app).post('/api/speech', json=payload(text))
+    response = TestClient(app.app).post('/api/speech', json=payload(text, cleanup='off'))
     assert response.status_code == 200
     script, reference, emotion, speed = render.call_args.args
     assert script.timed and script.cues[0].text == 'Nyob zoo.'
@@ -77,16 +77,18 @@ def test_local_job_writes_to_file_instead_of_materializing_response(monkeypatch,
 
     def synthesize(text, reference, emotion, speed, **options):
         assert len(text) == 10001
-        assert options == {'progress': progress, 'output_path': path}
+        assert options['output_path'] == path
+        options['progress']({'progress': 50, 'phase': 'synthesis'})
         path.write_bytes(b'file-backed-result')
         return path
 
     monkeypatch.setattr(app.cosy_engine, 'synthesize', synthesize)
-    response = asyncio.run(app.generate_speech(app.Speech(**payload('x' * 10001)),
+    response = asyncio.run(app.generate_speech(app.Speech(**payload('x' * 10001, cleanup='off')),
                                              progress=progress, output_path=path))
     assert isinstance(response, FileResponse)
     assert Path(response.path) == path
     assert not hasattr(response, 'body')
+    progress.assert_called_once_with({'progress': 50, 'phase': 'synthesis'})
     direct = TestClient(app.app).post('/api/speech', json=payload('x' * 10001))
     assert direct.status_code == 413
 

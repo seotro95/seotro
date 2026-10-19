@@ -1,6 +1,7 @@
 """Hmong Studio: local audio workspace with an explicit TTS adapter contract."""
 import os
 from pathlib import Path
+import tempfile
 
 import httpx
 from fastapi import FastAPI, HTTPException, Request, Query, Form, UploadFile, File
@@ -13,6 +14,7 @@ import clone_store
 import cosy_engine
 import voice_jobs
 import review_script
+import audio_clean
 from contextlib import asynccontextmanager
 from starlette.concurrency import run_in_threadpool
 import local_engine
@@ -23,7 +25,7 @@ async def lifespan(app):
     yield
     await voice_jobs.shutdown()
 
-app = FastAPI(title='Hmong Studio', version='0.5.1', lifespan=lifespan)
+app = FastAPI(title='Hmong Studio', version='0.6.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 
@@ -35,6 +37,8 @@ class Speech(BaseModel):
     speed: float = Field(default=1, ge=0.5, le=2)
     reference_text: str = Field(default='', max_length=2000)
     input_format: Literal['auto', 'text', 'srt'] = 'auto'
+    compute_mode: Literal['standard', 'fast'] = 'standard'
+    cleanup: Literal['off', 'light', 'strong'] = 'light'
 
 
 @app.get('/')
@@ -102,16 +106,41 @@ async def generate_speech(payload: Speech, *, progress=None, output_path=None):
             reference = BASE / 'static' / 'voices' / (payload.voice + '.mp3')
         try:
             options = {}
+            latest = {}
+
+            def measured_progress(info):
+                latest.update(info)
+                progress(info)
+
             if progress is not None:
-                options['progress'] = progress
+                options['progress'] = measured_progress
             if output_path is not None:
                 options['output_path'] = output_path
+            if payload.compute_mode != 'standard':
+                options['compute_mode'] = payload.compute_mode
+            if payload.cleanup != 'off':
+                options['cleanup'] = payload.cleanup
             if script.timed:
                 data = await run_in_threadpool(review_script.render_timeline, script, reference,
                                                payload.emotion, payload.speed, **options)
             else:
                 data = await run_in_threadpool(cosy_engine.synthesize, payload.text, reference,
                                                payload.emotion, payload.speed, **options)
+            if payload.cleanup != 'off':
+                if progress is not None:
+                    progress({**latest, 'progress': 99, 'phase': 'cleanup',
+                              'message': 'Đang lọc ồn và hoàn thiện âm thanh; giữ nguyên độ dài bản đọc.'})
+                if output_path is not None:
+                    data = await run_in_threadpool(audio_clean.polish_audio, data, data,
+                                                   level=payload.cleanup)
+                else:
+                    with tempfile.TemporaryDirectory(prefix='hmong-polish-') as folder:
+                        source = Path(folder) / 'source.wav'
+                        target = Path(folder) / 'cleaned.wav'
+                        source.write_bytes(data)
+                        await run_in_threadpool(audio_clean.polish_audio, source, target,
+                                                level=payload.cleanup)
+                        data = target.read_bytes()
             if output_path is not None:
                 return FileResponse(data, media_type='audio/wav', headers={'Cache-Control': 'no-store'})
             return Response(data, media_type='audio/wav', headers={'Cache-Control': 'no-store'})
@@ -119,6 +148,8 @@ async def generate_speech(payload: Speech, *, progress=None, output_path=None):
             raise HTTPException(422, str(exc)) from None
         except cosy_engine.EngineError as exc:
             raise HTTPException(503, str(exc)) from None
+        except (ValueError, RuntimeError, OSError) as exc:
+            raise HTTPException(503, 'Không hoàn thiện được âm thanh: ' + str(exc)) from None
     if script.timed:
         raise HTTPException(422, 'Đọc SRT theo mốc giờ cần bộ máy CosyVoice Hmong cục bộ và một mẫu giọng Nam/Nữ hoặc giọng riêng.')
     if len(payload.text) > 10000:
