@@ -1,0 +1,137 @@
+"""Pitch, timeline, native duration control and bounded worker reuse checks."""
+import importlib
+import json
+import shutil
+import wave
+
+import numpy as np
+import pytest
+
+from cue_audio import fit_cue_audio, wsola_samples
+from delivery import segment_delivery
+from narration import Segment
+
+
+RATE = 24000
+
+
+def tones(frequencies, seconds=.4):
+    clock=np.arange(round(seconds*RATE))/RATE
+    return np.concatenate([.2*np.sin(2*np.pi*frequency*clock) for frequency in frequencies]).astype(np.float32)
+
+
+def write_pcm(path, samples):
+    with wave.open(str(path),'wb') as output:
+        output.setparams((1,2,RATE,0,'NONE','not compressed'))
+        output.writeframes((samples*32767).astype('<i2').tobytes())
+
+
+def peak(samples):
+    spectrum=np.abs(np.fft.rfft(samples*np.hanning(len(samples))))
+    return np.fft.rfftfreq(len(samples),1/RATE)[np.argmax(spectrum)]
+
+
+@pytest.mark.parametrize('tempo',[.7,1.57,3.75])
+def test_fast_stretch_keeps_order_pitch_and_exact_length(tempo):
+    source=tones([220,440,660])
+    output=wsola_samples(source,tempo)
+    assert len(output)==round(len(source)/tempo)
+    for index,frequency in enumerate([220,440,660]):
+        start=round(len(output)*(index/3+.09))
+        end=round(len(output)*((index+1)/3-.09))
+        assert peak(output[start:end])==pytest.approx(frequency,abs=20)
+    # Boundary anchors preserve both ends rather than shortening the waveform.
+    assert output[0]==source[0]
+    assert output[-1]==source[-1]
+
+
+def test_fast_fit_cancels_without_replacing_original(tmp_path):
+    path=tmp_path/'cue.wav'
+    write_pcm(path,tones([220,440]))
+    original=path.read_bytes()
+    cancel=tmp_path/'cancel.flag'
+    cancel.touch()
+    with pytest.raises(InterruptedError):
+        fit_cue_audio(path,RATE//2,cancel,backend='wsola')
+    assert path.read_bytes()==original
+
+
+@pytest.fixture
+def worker(tmp_path,monkeypatch):
+    monkeypatch.setenv('VOICE_STUDIO_DATA_DIR',str(tmp_path))
+    module=importlib.import_module('worker')
+    monkeypatch.setattr(module,'DATA',tmp_path)
+    monkeypatch.setattr(module,'_nano_pool',None)
+    monkeypatch.setattr(module,'_nano_pool_key',None)
+    (tmp_path/'audio').mkdir()
+    return module
+
+
+def test_native_nano_uses_model_tempo_and_normalizes_once(worker,tmp_path,monkeypatch):
+    observed={}
+    def native(text,path,speed=1):
+        observed['native_speed']=speed
+        write_pcm(path,tones([220],.1))
+    def normalize(source,destination,tempo,gain,*args):
+        observed['normalization_tempo']=tempo
+        shutil.copyfile(source,destination)
+    monkeypatch.setattr(worker,'get_synthesizer',lambda job:native)
+    monkeypatch.setattr(worker,'normalize_audio',normalize)
+    job={'engine':'vieneu_nano','speed':1.2,'delivery':'story'}
+    worker.prepare_chunk(job,Segment(text='Một lời kể.',emphasis=True),0,tmp_path)
+    assert observed['native_speed']==segment_delivery(job,True)['tempo']
+    assert observed['normalization_tempo']==1
+    assert (tmp_path/'000000.wav').is_file()
+
+
+def test_pcm_normalization_retains_matching_audio_without_ffmpeg(worker,tmp_path,monkeypatch):
+    source,destination=tmp_path/'source.wav',tmp_path/'normalized.wav'
+    write_pcm(source,tones([220],.1))
+    def unexpected(*args,**kwargs):
+        pytest.fail('Matching PCM normalization must not launch FFmpeg.')
+    monkeypatch.setattr(worker.subprocess,'run',unexpected)
+    worker.normalize_audio(source,destination,1,1)
+    assert source.read_bytes()==destination.read_bytes()
+
+
+@pytest.mark.parametrize('parallel_workers',[4,8])
+def test_nano_pool_prefetch_is_bounded_and_model_settings_recreate_it(worker,tmp_path,monkeypatch,parallel_workers):
+    executors=[]
+    class Future:
+        def __init__(self,pool):
+            self.pool=pool
+        def result(self):
+            self.pool.pending-=1
+        def cancel(self):
+            return True
+    class Executor:
+        def __init__(self,max_workers,**kwargs):
+            self.workers=max_workers
+            self.pending=self.peak=0
+            self.closed=False
+            executors.append(self)
+        def submit(self,fn,*args):
+            fn(*args)
+            self.pending+=1
+            self.peak=max(self.peak,self.pending)
+            return Future(self)
+        def shutdown(self,**kwargs):
+            self.closed=True
+    def native(text,path,speed=1):
+        write_pcm(path,tones([220],.04))
+    monkeypatch.setattr(worker,'ProcessPoolExecutor',Executor)
+    monkeypatch.setattr(worker,'get_synthesizer',lambda job:native)
+    text='\n\n'.join(f'{index+1}\n00:00:{index:02d},000 --> 00:00:{index:02d},500\nXin chào.' for index in range(10))
+    base={'text':text,'input_format':'srt','engine':'vieneu_nano','format':'wav','speed':1,
+          'nano_parallel':parallel_workers,'nano_steps':4,'cue_fit':'auto','audio_fit_backend':'wsola'}
+    worker.render({**base,'id':'first'})
+    worker.render({**base,'id':'reuse'})
+    assert len(executors)==1
+    assert executors[0].workers==parallel_workers and executors[0].peak<=2*parallel_workers
+    worker.render({**base,'id':'changed','nano_steps':8,'nano_parallel':2})
+    assert len(executors)==2 and executors[0].closed
+    assert executors[1].workers==2 and executors[1].peak<=4
+    result=json.loads((tmp_path/'parts/changed/result.json').read_text())
+    assert result['completed']==10 and result['audio_seconds']==9.5
+    assert result['spoken_audio_seconds']==pytest.approx(.4)
+    worker.close_nano_pool()

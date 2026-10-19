@@ -25,7 +25,8 @@ from starlette.concurrency import run_in_threadpool
 from narration import MAX_CHARACTERS, PROFILES, plan_segments
 from subtitles import parse_srt, export_srt
 from system_voices import installed_voices
-from hardware import supports_int8, system_info
+from hardware import supports_int8, system_info, rendering_presets
+from delivery import get_profile, profile_catalog, supported_preset_voices
 from performance import speed_report
 from state_io import write_json_atomic, read_progress
 from language_catalog import LANGUAGES, CORE_LANGUAGES, QWEN_LANGUAGES, native_language
@@ -50,6 +51,17 @@ PRESETS = [
     {'id': 'nano-minhquan', 'name': 'Minh Quân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Minh Quân', 'languages': ['vi'], 'description': 'Nano 8 bước · nhanh hơn, giảm độ tự nhiên'},
     {'id': 'nano-aihan', 'name': 'Ái Hân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Ái Hân', 'languages': ['vi'], 'description': 'Nano 8 bước · nhanh hơn, giảm độ tự nhiên'},
 ]
+
+
+# Preserve existing public voice IDs while exposing real bundled reference voices.
+import unicodedata
+for _preset in supported_preset_voices():
+    _existing=next((v for v in PRESETS if v.get('engine') == _preset['engine'] and v.get('speaker') == _preset['speaker']),None)
+    if _existing is not None:
+        _existing.update(gender=_preset['gender'],description=_preset['description'],category='preset')
+        continue
+    _slug=''.join(c for c in unicodedata.normalize('NFD',_preset['speaker'].lower().replace('đ','d')) if c.isascii() and (c.isalnum() or c==' ')).strip().replace(' ','-')
+    PRESETS.append({**_preset,'id':f"preset-{_preset['engine']}-{_slug}",'category':'preset'})
 
 
 @contextmanager
@@ -96,7 +108,7 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
 
 
-app = FastAPI(title='Voice Studio Riêng', version='1.3.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio Riêng', version='1.4.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 @app.exception_handler(RequestValidationError)
@@ -175,6 +187,8 @@ def config():
 def _config_values():
     return {
         'version': app.version,
+        'rendering_presets': rendering_presets(),
+        'delivery_profiles': profile_catalog(),
         'mode': 'local',
         'edition': 'standalone-voice',
         'languages': LANGUAGES,
@@ -184,7 +198,7 @@ def _config_values():
         'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(),
         'int8_cpu': supports_int8(),
         'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')},
-        'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU',
+        'hardware': 'CPU · Nano/Turbo',
         'ffmpeg': bool(shutil.which('ffmpeg')),
         'cpu_cores': os.cpu_count() or 1,
         'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(),
@@ -266,11 +280,13 @@ class Speech(BaseModel):
     input_format: str = Field(default='txt', pattern='^(txt|srt)$')
     skip_timestamps: bool = True
     nano_threads: int = Field(default=2, ge=1, le=8)
-    nano_parallel: int = Field(default=1, ge=1, le=2)
-    nano_steps: int = Field(default=16, ge=4, le=16)
+    nano_parallel: int = Field(default=1, ge=1, le=8)
+    nano_steps: int = Field(default=8, ge=4, le=16)
+    render_mode: str = Field(default='balanced', pattern='^(fast|balanced|quality)$')
+    audio_fit_backend: str = Field(default='ffmpeg', pattern='^(wsola|ffmpeg)$')
     max_minutes: int = Field(default=1440, ge=1, le=1440)
     delivery: str = 'natural'
-    paragraph_pause: float = Field(default=0.3, ge=0, le=3)
+    paragraph_pause: float | None = Field(default=None, ge=0, le=3)
     quality: str = Field(default='auto', pattern='^(auto|standard|fast)$')
     max_cue_tempo: float = Field(default=1.5, ge=1, le=2)
     cue_fit: str = Field(default='auto', pattern='^(auto|strict|gap)$')
@@ -368,7 +384,7 @@ def run_job(ident):
             result = read_json(work / 'result.json')
             job.update(result)
             elapsed = time.monotonic() - processing_started
-            job.update(status='done', url=f'/api/audio/{ident}', finished_at=now(), wall_processing_seconds=round(elapsed, 3), speed_report=None if reused_parts else speed_report(result.get('audio_seconds', 0), elapsed))
+            job.update(status='done', url=f'/api/audio/{ident}', finished_at=now(), wall_processing_seconds=round(elapsed, 3), speed_report=None if reused_parts else speed_report(result.get('audio_seconds', 0), elapsed, result.get('spoken_audio_seconds')))
     except Exception as exc:
         job.update(status='error', error=str(exc))
     with lock:
@@ -379,6 +395,11 @@ def run_job(ident):
 def speech(body: Speech):
     if not body.text.strip() or body.language not in LANGUAGES or body.format not in {'wav', 'mp3'} or body.delivery not in PROFILES:
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
+    preset=rendering_presets()[body.render_mode]
+    for field,value in preset.items():
+        if field not in body.model_fields_set:setattr(body,field,value)
+    if body.nano_steps not in {4,8,16}:raise HTTPException(422,'Chọn Nano 4, 8 hoặc 16 bước.')
+    if body.paragraph_pause is None:body.paragraph_pause=get_profile(body.delivery).pause
     from subtitles import normalize_script
     try:
         body.text, body.input_format = normalize_script(body.text, body.input_format)
@@ -545,7 +566,7 @@ def resume_job(ident: str, auto_fit: bool = True):
 
 @app.get('/api/system-info')
 def machine_info():
-    return system_info()
+    return {**system_info(), 'rendering_presets': rendering_presets()}
 
 
 @app.get('/api/jobs/{ident}/script.{extension}')
@@ -611,3 +632,32 @@ async def import_script(file: UploadFile = File(...)):
         raise HTTPException(422,'Không đọc được mã hóa. Lưu tệp bằng UTF-8 hoặc Unicode UTF-16 rồi nhập lại.') from None
     except ValueError as exc:
         raise HTTPException(422,str(exc)) from None
+
+
+class BenchmarkRequest(BaseModel):
+    voice_id: str = Field(min_length=1,max_length=128)
+    language: str = 'vi'
+    render_mode: str = Field(default='balanced',pattern='^(fast|balanced|quality)$')
+    delivery: str = 'natural'
+    nano_steps: int | None = Field(default=None, ge=4, le=16)
+    nano_parallel: int | None = Field(default=None, ge=1, le=8)
+    nano_threads: int | None = Field(default=None, ge=1, le=8)
+    audio_fit_backend: str | None = Field(default=None, pattern='^(wsola|ffmpeg)$')
+    quality: str = Field(default='auto', pattern='^(auto|standard|fast)$')
+
+
+@app.post('/api/benchmark',status_code=202)
+def benchmark(body: BenchmarkRequest):
+    if body.language != 'vi':raise HTTPException(422,'Mẫu đo hiện dùng lời tiếng Việt; chọn giọng tiếng Việt để đo.')
+    text=(
+        'Buổi sáng, ánh nắng nhẹ chiếu qua khung cửa. Cô mở cuốn sổ cũ và đọc lại lời hẹn của những ngày xa. '
+        'Tin tức hôm nay ghi nhận nhiều thay đổi trong đời sống. Người dân chuẩn bị cho một tuần mới với niềm hy vọng và những kế hoạch rõ ràng. '
+        'Trên con đường nhỏ, tiếng bước chân dần vang lên. Anh dừng lại, lắng nghe rồi mỉm cười: chúng ta hãy bắt đầu câu chuyện này cùng nhau. '
+        'Một sản phẩm tốt cần được giới thiệu bằng thông tin chính xác, giọng đọc rõ ràng và nhịp điệu phù hợp. '
+        'Khi đêm xuống, thành phố chậm lại. Những ngọn đèn vẫn sáng, còn câu chuyện tiếp tục trong sự bình yên. '
+        'Kết quả đo trên đoạn lời này chỉ giúp ước tính tốc độ máy, không thay thế kiểm tra trên toàn bộ kịch bản và giọng bạn chọn.'
+    )
+    settings=body.model_dump(exclude_none=True)
+    payload=Speech(text=text,**settings,paragraph_pause=0,format='wav')
+    job=speech(payload)
+    return job

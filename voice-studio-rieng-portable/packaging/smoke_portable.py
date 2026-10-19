@@ -28,7 +28,9 @@ def main():
     import httpx
     from fastapi.testclient import TestClient
     import app as studio
-    from worker import render
+    from worker import render, close_nano_pool
+    from narration import plan_segments
+    from performance import speed_report
     from subtitles import parse_srt
     for module in (np, onnxruntime, sf, httpx):
         assert root/'runtime' in Path(module.__file__).resolve().parents, 'Dependency escaped bundled runtime'
@@ -39,12 +41,20 @@ def main():
     data = app/'.data'
     with TestClient(studio.app) as client:
         config = client.get('/api/config').json()
-        assert config['edition'] == 'standalone-voice' and config['version'] == '1.3.0'
+        assert config['edition'] == 'standalone-voice' and config['version'] == '1.4.0'
         assert config['nano_ready'] and config['max_characters'] == 1000000
+        assert len(config['delivery_profiles']) == 10
+        assert set(config['rendering_presets']) == {'fast', 'balanced', 'quality'}
+        hardware_response = client.get('/api/system-info')
+        assert hardware_response.status_code == 200
+        hardware = hardware_response.json()
+        assert hardware['logical_cores'] >= 1 and hardware['cpu']
         assert client.get('/').status_code == 200
         assert client.get('/static/app.js').status_code == 200
         voices = client.get('/api/voices').json()['voices']
         assert any(item['engine'] == 'vieneu_nano' and item['ready'] for item in voices)
+        assert len([item for item in voices if item['engine'] == 'vieneu_nano']) >= 11
+        assert len([item for item in voices if item['engine'] == 'vieneu']) >= 25
     engines = [('vieneu_nano', 'Minh Quân')]
     if (data/'models/vieneu.ready').exists():
         engines.append(('vieneu', 'Mai Anh'))
@@ -89,6 +99,70 @@ def main():
     report = json.loads((data/'parts/portable-reported-1410-900/alignment.json').read_text(encoding='utf-8'))
     assert report['sync_ok'] and report['cues'][0]['tempo'] > 1.5
     assert parse_srt((data/'audio/portable-reported-1410-900.srt').read_text(encoding='utf-8')) == parse_srt(regression['text'])
+    # The opt-in fast fitter must preserve the same clock, pitch and full tail.
+    wsola_job = dict(regression, id='portable-wsola-1410-900', audio_fit_backend='wsola')
+    render(wsola_job, synthesize)
+    fast_samples, fast_rate = sf.read(data/'audio/portable-wsola-1410-900.wav')
+    assert fast_rate == rate and len(fast_samples) == round(1.15*rate)
+    assert not np.any(fast_samples[:round(.25*rate)])
+    fast_cue = fast_samples[round(.25*rate):]
+    assert abs(pitch(fast_cue[round(.08*rate):round(.25*rate)])-220) < 15
+    assert abs(pitch(fast_cue[round(.58*rate):round(.75*rate)])-440) < 15
+    fast_report = json.loads((data/'parts/portable-wsola-1410-900/alignment.json').read_text(encoding='utf-8'))
+    assert fast_report['sync_ok'] and fast_report['cues'][0]['spoken_end'] <= 1.15
+    assert parse_srt((data/'audio/portable-wsola-1410-900.srt').read_text(encoding='utf-8')) == parse_srt(regression['text'])
+    # Native Nano duration control (news=1.04) plus the actual fast SRT backend.
+    paced = dict(real, id='portable-native-news-wsola', delivery='news', audio_fit_backend='wsola', nano_steps=4)
+    render(paced)
+    assert sf.info(data/'audio/portable-native-news-wsola.wav').frames == round(1.15*24000)
+    paced_report = json.loads((data/'parts/portable-native-news-wsola/alignment.json').read_text(encoding='utf-8'))
+    assert paced_report['sync_ok']
+    # Two fresh jobs distinguish cold process/model setup from reusable warm
+    # workers. Distinct sentences cannot reuse chunk checkpoints. No artificial
+    # paragraph gaps or subtitle silence inflate speech throughput.
+    benchmark_text = '\n'.join([
+        'Bản tin sáng nay ghi nhận nhiều thay đổi tích cực trong đời sống của người dân thành phố.',
+        'Trên con đường nhỏ, các bạn học sinh cùng bước đến trường trong không khí vui tươi.',
+        'Những người làm vườn chăm sóc từng luống rau để chuẩn bị cho phiên chợ cuối tuần.',
+        'Một cuốn sách hay có thể mở ra nhiều cách nhìn mới về thế giới rộng lớn quanh ta.',
+        'Cô hướng dẫn viên kể lại câu chuyện lịch sử bằng giọng nói rõ ràng và những chi tiết sinh động.',
+        'Trong căn phòng yên tĩnh, người nghệ sĩ đang hoàn thiện bức tranh về quê hương của mình.',
+        'Đội tình nguyện đã dành buổi chiều để trồng thêm cây xanh dọc hai bên đường làng.',
+        'Khi chuẩn bị một hành trình mới, chúng ta cần kiểm tra hành lý và ghi nhớ những lời dặn.',
+        'Tiếng sóng biển hòa cùng làn gió nhẹ khiến mọi người cảm thấy thư thái sau ngày làm việc.',
+        'Những thông tin vừa đọc chỉ là đoạn thử công khai để đo tốc độ tạo giọng trên máy này.',
+    ])
+    fast_job = dict(real, id='portable-fast-cold', text=benchmark_text, input_format='txt',
+                    speaker='Ái Hân', delivery='news', speed=1, nano_steps=4, nano_parallel=2,
+                    nano_threads=2, paragraph_pause=0, render_mode='fast', audio_fit_backend='wsola',
+                    segment_plan='nano-packed-v1')
+    segment_count = len(plan_segments(fast_job))
+    assert 8 <= segment_count <= 12
+    measurements = []
+    close_nano_pool()
+    try:
+        for phase in ('cold', 'warm'):
+            measured_job = dict(fast_job, id='portable-fast-'+phase)
+            started = time.perf_counter()
+            render(measured_job)
+            wall_seconds = time.perf_counter()-started
+            result = json.loads((data/'parts'/measured_job['id']/'result.json').read_text(encoding='utf-8'))
+            assert result['completed'] == segment_count and not result['duration_limited']
+            info = sf.info(data/'audio'/(measured_job['id']+'.wav'))
+            assert info.frames > 24000 and result['spoken_audio_seconds'] > 1
+            measurements.append({'phase': phase, 'includes_process_model_setup': phase == 'cold',
+                                 **speed_report(info.duration, wall_seconds, result['spoken_audio_seconds'])})
+    finally:
+        close_nano_pool()
+    qa = {'platform': 'native-windows-x64', 'estimate_only': True,
+          'runner_hardware': {key: hardware.get(key) for key in ('cpu', 'logical_cores', 'ram_gb')},
+          'fast_sample': {'engine': 'vieneu_nano', 'speaker': 'Ái Hân', 'steps': 4, 'parallel': 2,
+                          'threads_per_worker': 2, 'genre': 'news', 'native_speed': 1.04,
+                          'segments': segment_count, 'paragraph_pause': 0, 'measurements': measurements},
+          'target_30x_guaranteed': False,
+          'checks': ['offline Nano and Turbo', 'real native news pacing', 'FFmpeg and WSOLA clock/pitch/tail', 'WAV MP3 TXT SRT exports', 'launcher HTTP']}
+    (root/'PORTABLE-QA.json').write_text(json.dumps(qa, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+    print('PORTABLE_BENCHMARK '+json.dumps(qa['fast_sample'], ensure_ascii=False), flush=True)
     # Exercise user download endpoints, including conversion with bundled FFmpeg.
     export_id = uuid.uuid4().hex
     for suffix in ('wav', 'srt'):
@@ -131,4 +205,9 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    finally:
+        worker = sys.modules.get('worker')
+        if worker is not None:
+            worker.close_nano_pool()

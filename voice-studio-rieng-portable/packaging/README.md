@@ -10,7 +10,7 @@ release. It overlays the standalone app and reruns its own relocated offline
 tests; old app code and project history are excluded.
 
 ```powershell
-python packaging/build_windows.py --output "$env:RUNNER_TEMP/Voice-Studio-Rieng-1.3.0-Portable" --base-archive "$env:RUNNER_TEMP/Voice-Studio-Windows-x64.zip"
+python packaging/build_windows.py --output "$env:RUNNER_TEMP/Voice-Studio-Rieng-1.4.0-Portable" --base-archive "$env:RUNNER_TEMP/Voice-Studio-Windows-x64.zip"
 ```
 
 Pinned base URL:
@@ -42,3 +42,5 @@ about 8–12 GB temporary disk and 4–8 GB RAM during single-process Nano/Turbo
 validation. Actual size/time depends on model revisions and runner throughput.
 Base download, extraction, tests and compression commonly need 5–15 minutes;
 fresh preparation may need substantially longer.
+
+Version 1.4 tests real Nano news pacing at native speed 1.04 and the fast WSOLA fitter. Two fresh ten-sentence, four-step, two-process jobs measure cold and warm throughput; no artificial paragraph gaps or subtitle silence count as speech. PORTABLE-QA.json and BUILD_INFO.json record measured estimates, without promising 30x realtime or a result on another PC. Worker pools close before relocation moves back.

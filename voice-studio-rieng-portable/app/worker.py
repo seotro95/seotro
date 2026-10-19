@@ -13,8 +13,9 @@ import wave
 from pathlib import Path
 
 from state_io import write_json_atomic,write_progress
-from narration import PCMWriter, PROFILES, plan_segments
-from cue_audio import atempo_filter, fit_cue_audio
+from narration import PCMWriter, plan_segments
+from cue_audio import atempo_filter, fit_cue_audio, wsola_samples
+from delivery import segment_delivery
 
 DATA = Path(os.environ['VOICE_STUDIO_DATA_DIR'])
 LANGUAGES = {'en-US': 'English', 'en-GB': 'English', 'ja': 'Japanese', 'ko': 'Korean', 'zh': 'Chinese', 'fr': 'French', 'de': 'German', 'es': 'Spanish', 'it': 'Italian', 'pt': 'Portuguese', 'ru': 'Russian'}
@@ -35,8 +36,10 @@ def load_synthesizer(job):
         from vieneu.v3nano import V3NanoVieNeuTTS
         steps = job.get('nano_steps', 8)
         model = V3NanoVieNeuTTS(steps=steps, threads=job.get('nano_threads', 2))
-        def synthesize(text, output):
-            model.save(model.infer(text, voice=job['speaker'], steps=steps, sway=-1), str(output))
+        def synthesize(text, output, speed=1):
+            # Nano controls duration in its decoder, avoiding a second audio
+            # transform and an FFmpeg startup for every paced sentence.
+            model.save(model.infer(text, voice=job['speaker'], steps=steps, sway=-1, speed=speed), str(output))
         return synthesize
     if job['engine'] == 'vieneu':
         from local_vieneu import LocalVieneu
@@ -94,17 +97,21 @@ def get_synthesizer(job):
     return _cached_synth
 
 
-def normalize_audio(raw, temporary, tempo, gain):
+def normalize_audio(raw, temporary, tempo, gain, backend='ffmpeg', cancel_path=None):
     # Avoid spawning FFmpeg for each natural-speed chunk, especially on Windows.
-    if abs(tempo - 1) < 1e-6:
+    import soundfile as sf
+    info=sf.info(str(raw))
+    fast_stretch=backend=='wsola' and 512<=round(info.duration*24000)<=24000*60 and 512<=round(info.duration*24000/tempo)<=24000*120
+    if abs(tempo - 1) < 1e-6 or fast_stretch:
         import numpy as np
-        import soundfile as sf
-        import soxr
         samples, rate = sf.read(str(raw), dtype='float32', always_2d=False)
         if samples.ndim > 1:
             samples = samples.mean(axis=1)
         if rate != 24000:
+            import soxr
             samples = soxr.resample(samples, rate, 24000)
+        if abs(tempo-1)>=1e-6:
+            samples=wsola_samples(samples,tempo,cancel_path)
         samples = np.clip(samples * gain, -0.95, 0.95)
         sf.write(str(temporary), samples, 24000, subtype='PCM_16')
     else:
@@ -112,13 +119,15 @@ def normalize_audio(raw, temporary, tempo, gain):
 
 
 _nano_pool = None
+_nano_pool_key = None
 
 
 def close_nano_pool():
-    global _nano_pool
+    global _nano_pool, _nano_pool_key
     if _nano_pool is not None:
         _nano_pool.shutdown(wait=True, cancel_futures=True)
         _nano_pool = None
+    _nano_pool_key = None
 
 
 class EmptyVoiceError(ValueError):
@@ -142,9 +151,9 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
     custom=synthesize is not None
     raw = work / f'raw-{index:06d}.wav'
     temporary = work / f'normalized-{index:06d}.wav'
-    profile_speed = PROFILES[job.get('delivery', 'natural')][0]
-    tempo = job['speed'] * profile_speed * (0.94 if segment.emphasis else 1)
-    gain = 1.12 if segment.emphasis else 1
+    controls=segment_delivery(job,segment.emphasis)
+    tempo,gain=controls['tempo'],controls['gain']
+    native_speed=not custom and job.get('engine')=='vieneu_nano'
     for attempt in range(3):
         if (work / 'cancel.flag').exists():raise InterruptedError('Tác vụ đã dừng.')
         raw.unlink(missing_ok=True);temporary.unlink(missing_ok=True)
@@ -152,9 +161,12 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
             settings={**job,'nano_steps':max(16,job.get('nano_steps',8))} if attempt==2 and job.get('engine')=='vieneu_nano' else job
             synthesize=get_synthesizer(settings)
         try:
-            synthesize(segment.text,raw)
+            if native_speed:
+                synthesize(segment.text,raw,speed=tempo)
+            else:
+                synthesize(segment.text,raw)
             if not raw.is_file() or sf.info(str(raw)).frames==0:raise EmptyVoiceError('Model không tạo mẫu âm thanh.')
-            normalize_audio(raw, temporary, tempo, gain)
+            normalize_audio(raw, temporary, 1 if native_speed else tempo, gain,job.get('audio_fit_backend','ffmpeg'),work/'cancel.flag')
             with wave.open(str(temporary)) as audio:
                 samples=np.frombuffer(audio.readframes(audio.getnframes()),dtype='<i2')
             if not len(samples) or not np.any(samples):raise EmptyVoiceError('Âm thanh rỗng hoặc chỉ có im lặng.')
@@ -169,10 +181,14 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
 
 
 def render(job, synthesize=None):
-    global _nano_pool, _cached_synth, _cached_key
+    global _nano_pool, _nano_pool_key, _cached_synth, _cached_key
     if job.get('video_id'):
         raise ValueError('Gói này chỉ tạo âm thanh; không xử lý video.')
-    parallel = job.get('engine') == 'vieneu_nano' and job.get('nano_parallel', 1) == 2 and synthesize is None
+    parallel_workers=min(8,max(1,int(job.get('nano_parallel',1)))) if job.get('engine')=='vieneu_nano' and synthesize is None else 1
+    parallel=parallel_workers>1
+    pool_key=(parallel_workers,)+tuple(job.get(k) for k in ('engine','voice_id','speaker','language','quality','nano_steps','nano_threads'))
+    if _nano_pool is not None and _nano_pool_key!=pool_key:
+        close_nano_pool()
     if not parallel:
         close_nano_pool()
     elif _cached_synth is not None:
@@ -190,11 +206,11 @@ def render(job, synthesize=None):
     started = time.monotonic()
     write_state(work / 'progress.json', {'completed': 0, 'total': len(segments), 'progress': 0, 'phase': 'Chuẩn bị mô hình; lần đầu có thể chậm hơn'})
     completed = 0
+    spoken_audio_frames = 0
     clipped = False
     futures = {}
     payload = {key: value for key, value in job.items() if key != 'text'}
-    profile_speed, default_pause = PROFILES[job.get('delivery', 'natural')]
-    gap = job.get('paragraph_pause', default_pause)
+    gap = segment_delivery(job)['pause']
     from subtitles import parse_srt, export_srt
     cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
     timed = []
@@ -210,11 +226,12 @@ def render(job, synthesize=None):
             if (work / 'cancel.flag').exists():
                 raise InterruptedError('Tác vụ đã dừng; các đoạn đã tạo được giữ để tiếp tục.')
             if parallel:
-                for ahead in range(index, min(index+2, len(segments))):
+                for ahead in range(index, min(index+2*parallel_workers, len(segments))):
                     candidate = segments[ahead]
                     if candidate.text and ahead not in futures:
                         if _nano_pool is None:
-                            _nano_pool = ProcessPoolExecutor(max_workers=2, mp_context=multiprocessing.get_context('spawn'))
+                            _nano_pool = ProcessPoolExecutor(max_workers=parallel_workers, mp_context=multiprocessing.get_context('spawn'))
+                            _nano_pool_key=pool_key
                         futures[ahead] = _nano_pool.submit(prepare_chunk, payload, candidate, ahead, str(work))
             segment_start = writer.frames / writer.rate
             if cues and (index == 0 or segment.cue != segments[index-1].cue):
@@ -230,6 +247,8 @@ def render(job, synthesize=None):
                 if cues and clipped:
                     raise ValueError(f'Câu SRT {segment.cue+1} có lời đọc vượt giới hạn WAV tạm; chia câu trước khi tạo lại. Không xuất câu bị cắt lời.')
                 spoken_end = writer.frames/writer.rate
+                if not cues:
+                    spoken_audio_frames += writer.frames-round(segment_start*writer.rate)
                 completed = index + 1
                 if not clipped:
                     if not cues:
@@ -252,7 +271,7 @@ def render(job, synthesize=None):
                 if job.get('cue_fit') == 'auto':
                     target_frames=round(cue['end']*writer.rate)-round(cue['start']*writer.rate)
                     try:
-                        fit_details=fit_cue_audio(cue_path,target_frames,work/'cancel.flag')
+                        fit_details=fit_cue_audio(cue_path,target_frames,work/'cancel.flag',backend=job.get('audio_fit_backend','ffmpeg'))
                     except ValueError as exc:
                         alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':original_end,'available':round(available,3),'raw_seconds':round(actual,3),'status':'fit_failed','error':str(exc)})
                         save_alignment(failed=segment.cue+1)
@@ -288,7 +307,9 @@ def render(job, synthesize=None):
                     cue['end']=round(min(boundary,max(original_end,cue['start']+spoken_seconds)),3)
                 writer.silence(max(0, cue['start']-writer.frames/writer.rate))
                 actual_start=writer.frames/writer.rate
+                cue_start_frame=writer.frames
                 clipped = writer.append(cue_path) or clipped
+                spoken_audio_frames += writer.frames-cue_start_frame
                 actual_end=writer.frames/writer.rate
                 matched={'cue':segment.cue+1,'start':cue['start'],'end':cue['end'],'raw_seconds':round(actual,3),'spoken_start':round(actual_start,5),'spoken_end':round(actual_end,5),'tempo':round(applied_tempo,4),'status':'matched' if abs(actual_start-cue['start'])<=.001 and actual_end<=cue['end']+.001 and not clipped else 'overflow'}
                 if fit_details is not None:
@@ -332,7 +353,7 @@ def render(job, synthesize=None):
     subtitle_text = export_srt(cues if cues else timed)
     (DATA / 'audio' / (job['id'] + '.srt')).write_text(subtitle_text, encoding='utf-8')
     fit_warning_cues=[c['cue'] for c in alignment if c.get('warning')=='fast_tempo']
-    write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), 'auto_fitted_cues':sum(bool(c.get('auto_fitted')) for c in alignment), 'fit_warning_count':len(fit_warning_cues), 'fit_warning_cues':fit_warning_cues})
+    write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'spoken_audio_seconds': spoken_audio_frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), 'auto_fitted_cues':sum(bool(c.get('auto_fitted')) for c in alignment), 'fit_warning_count':len(fit_warning_cues), 'fit_warning_cues':fit_warning_cues})
 
 
 def voice_error(exc):

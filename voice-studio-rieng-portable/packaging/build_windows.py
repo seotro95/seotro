@@ -1,4 +1,4 @@
-"""Build the standalone 1.3 Windows bundle; publish only after native validation.
+"""Build the standalone 1.4 Windows bundle; publish only after native validation.
 
 A checksum-pinned, previously tested portable release can supply the runtime and
 models. Only its runtime, FFmpeg and model storage are reused; application source,
@@ -221,13 +221,17 @@ def verify_relocated(root):
 
 
 def write_notices(root):
-    (root/'DOC_TRUOC_PORTABLE.txt').write_text('''VOICE STUDIO RIENG 1.3.0 - WINDOWS 10/11 X64 PORTABLE
+    (root/'DOC_TRUOC_PORTABLE.txt').write_text('''VOICE STUDIO RIENG 1.4.0 - WINDOWS 10/11 X64 PORTABLE
 
 Giai nen TOAN BO ZIP vao thu muc moi, vi du D:\\VoiceStudio.
 Mo MO_TOOL.bat. Khong can cai Python, FFmpeg hay tai lai giong Nano da kem theo.
 Giu cua so tool mo trong khi tao voice. Du lieu cua ban nam trong app/.data.
 Ban nay giu nguyen moc SRT, tu can nhip tung cau va them khoang lang.
 Chon WAV de dung video; cau bi ep qua nhanh van can nghe kiem tra.
+Co che do Nhanh/Can bang/Chat luong va kiem tra cau hinh may, do toc do mau.
+Nhanh dung Nano 4 buoc va WSOLA; can nghe lai, khong bao dam dat 30x tren moi may.
+10 phong cach dieu chinh nhip; goi y giong ke chuyen/tin tuc tu mau giong that.
+Chi chen [cuoi], [tho dai], [hang giong] khi ban chu dong muon them am thanh do.
 TXT khong co moc thoi gian khong the xac dinh thoi luong video.
 Qwen quoc te khong duoc dong goi. Giong Windows phu thuoc may dang su dung.
 Khong ghi de app/.data khi cap nhat; sao luu du lieu truoc khi thay goi.
@@ -285,10 +289,11 @@ def main():
     write_notices(root)
     verify_relocated(root)
     check_bundle_hygiene(root)
-    metadata = {'product': 'Voice Studio Rieng', 'version': '1.3.0', 'package_type': 'windows-x64-portable',
+    metadata = {'product': 'Voice Studio Rieng', 'version': '1.4.0', 'package_type': 'windows-x64-portable',
                 'source_commit': os.environ.get('GITHUB_SHA'), 'max_characters': 1000000,
                 'bundled_runtime': True, 'bundled_model_weights': True, 'native_windows_offline_smoke': 'passed',
                 'verified_base_sha256': args.base_sha256 if args.base_archive else None}
+    metadata['native_qa'] = json.loads((root/'PORTABLE-QA.json').read_text(encoding='utf-8'))
     (root/'BUILD_INFO.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     manifest = [sha256(file)+'  '+file.relative_to(root).as_posix() for file in sorted(root.rglob('*')) if file.is_file()]
     (root/'MANIFEST.sha256').write_text('\n'.join(manifest)+'\n', encoding='utf-8')
@@ -304,4 +309,9 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception as exc:
+        message = (type(exc).__name__+': '+str(exc)).replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+        print('::error title=Standalone portable build failed::'+message, flush=True)
+        raise
