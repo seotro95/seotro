@@ -153,6 +153,18 @@ def copy_runtime(destination):
         shutil.copy2(file, destination/file.name)
 
 
+def install_runtime_additions(root):
+    # The verified older base predates CPU/RAM detection. Install the pinned
+    # native wheel into bundled Python, never into the CI host interpreter.
+    manifest=SOURCE/'packaging/runtime-additions.txt'
+    subprocess.run([str(root/'runtime/python.exe'), '-m', 'pip', '--isolated', 'install',
+                    '--no-cache-dir', '--no-user', '--no-deps', '--require-hashes',
+                    '--only-binary=:all:', '--index-url', 'https://pypi.org/simple',
+                    '-r', str(manifest)], env=runtime_environment(root,offline=True),
+                   cwd=root,check=True,timeout=180)
+    shutil.copy2(manifest,root/'RUNTIME-ADDITIONS.txt')
+
+
 def materialize_models(hub):
     for repo in hub.glob('models--*'):
         for link in (repo/'snapshots').rglob('*'):
@@ -285,6 +297,7 @@ def main():
     if not args.base_archive:
         prepare_models(root, args.include_turbo)
         copy_runtime(root/'runtime')
+    install_runtime_additions(root)
     if not all((root/'ffmpeg/bin'/name).is_file() for name in ('ffmpeg.exe', 'ffprobe.exe')):
         raise ValueError('Both FFmpeg and FFprobe are required')
     clean_data(root)

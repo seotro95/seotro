@@ -26,13 +26,14 @@ def main():
     import onnxruntime
     import soundfile as sf
     import httpx
+    import psutil
     from fastapi.testclient import TestClient
     import app as studio
     from worker import render, close_nano_pool
     from narration import plan_segments
     from performance import speed_report
     from subtitles import parse_srt
-    for module in (np, onnxruntime, sf, httpx):
+    for module in (np, onnxruntime, sf, httpx, psutil):
         assert root/'runtime' in Path(module.__file__).resolve().parents, 'Dependency escaped bundled runtime'
     for binary in ('ffmpeg', 'ffprobe'):
         assert Path(shutil.which(binary)).resolve().parent == root/'ffmpeg/bin'
@@ -49,6 +50,7 @@ def main():
         assert hardware_response.status_code == 200
         hardware = hardware_response.json()
         assert hardware['logical_cores'] >= 1 and hardware['cpu']
+        assert hardware['physical_cores'] >= 1 and hardware['ram_gb'] > 1, 'CPU/RAM detection is required for automatic parallelism'
         assert client.get('/').status_code == 200
         assert client.get('/static/app.js').status_code == 200
         voices = client.get('/api/voices').json()['voices']
@@ -155,7 +157,8 @@ def main():
     finally:
         close_nano_pool()
     qa = {'platform': 'native-windows-x64', 'estimate_only': True,
-          'runner_hardware': {key: hardware.get(key) for key in ('cpu', 'logical_cores', 'ram_gb')},
+          'runner_hardware': {key: hardware.get(key) for key in ('cpu', 'physical_cores', 'logical_cores', 'ram_gb')},
+          'runtime_psutil_version': psutil.__version__,
           'fast_sample': {'engine': 'vieneu_nano', 'speaker': 'Ái Hân', 'steps': 4, 'parallel': 2,
                           'threads_per_worker': 2, 'genre': 'news', 'native_speed': 1.04,
                           'segments': segment_count, 'paragraph_pause': 0, 'measurements': measurements},

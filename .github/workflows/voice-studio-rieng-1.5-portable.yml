@@ -83,3 +83,6 @@ jobs:
           "@ | Set-Content -Encoding utf8 "${{ runner.temp }}/portable-release-notes.txt"
           gh release create $tag "${{ runner.temp }}/portable/Voice-Studio-Rieng-1.5.0-Portable-Windows-x64.zip" "${{ runner.temp }}/portable/Voice-Studio-Rieng-1.5.0-Portable-Windows-x64.zip.sha256" "${{ runner.temp }}/portable/Voice-Studio-Rieng-1.5.0-Portable-Windows-x64.qa.json" --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Voice Studio Rieng 1.5.0 - Windows Portable" --notes-file "${{ runner.temp }}/portable-release-notes.txt" --latest=false
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          # Retire only our superseded 1.5 attempt, which lacked the RAM detector.
+          gh release edit voice-studio-rieng-1.5-portable-39199714768 --repo "${{ github.repository }}" --draft=true
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

@@ -9,6 +9,11 @@ storage from the checksum-pinned, native-Windows-tested `windows-portable-36`
 release. It overlays the standalone app and reruns its own relocated offline
 tests; old app code and project history are excluded.
 
+The older base lacks psutil. The builder adds its pinned, hash-verified Windows
+wheel with bundled Python before offline QA. Physical-core/RAM detection must
+succeed in the native smoke; missing detection cannot silently pass as a
+one-worker hardware budget. RUNTIME-ADDITIONS.txt records the added dependency.
+
 ```powershell
 python packaging/build_windows.py --output "$env:RUNNER_TEMP/Voice-Studio-Rieng-1.5.0-Portable" --base-archive "$env:RUNNER_TEMP/Voice-Studio-Windows-x64.zip"
 ```
