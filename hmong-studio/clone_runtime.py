@@ -209,18 +209,25 @@ def install(root=BASE):
                 raise
 
 
-def serve(root=BASE):
+def serve(root=BASE, *, open_browser=False):
     root = Path(root).resolve()
     executable = selected_python(root)
     print('Hmong Studio dang dung bo may nhan ban: ' + executable.parent.parent.name, flush=True)
     print('Mo trinh duyet: http://127.0.0.1:8090', flush=True)
     try:
+        if open_browser:
+            return _run([executable, '-X', 'utf8', 'open_studio.py'], root)
         return _run([executable, '-m', 'uvicorn', 'app:app', '--host', '127.0.0.1', '--port', '8090', '--no-access-log'], root)
     except KeyboardInterrupt:
         return 0
     except subprocess.CalledProcessError:
-        print('Khong mo duoc Studio. Dong cua so Studio cu dang dung cong8090 roi chay lai start.bat.', file=sys.stderr)
+        print('Khong mo duoc Studio. Dong cua so Studio cu dang dung cong8090 roi chay lai CHAY-STUDIO.bat.', file=sys.stderr)
         raise
+
+
+def launch(root=BASE):
+    install(root)
+    return serve(root, open_browser=True)
 
 
 if __name__ == '__main__':
@@ -229,8 +236,10 @@ if __name__ == '__main__':
             install()
         elif sys.argv[1:] == ['serve']:
             sys.exit(serve())
+        elif sys.argv[1:] == ['launch']:
+            sys.exit(launch())
         else:
-            raise RuntimeError('Lenh ho tro: install hoac serve.')
+            raise RuntimeError('Lenh ho tro: install, serve hoac launch.')
     except (Exception, KeyboardInterrupt) as exc:
         print('Khong hoan tat: ' + (str(exc) or 'Da dung theo yeu cau.'), file=sys.stderr)
         sys.exit(1)

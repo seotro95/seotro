@@ -238,3 +238,37 @@ def test_serve_launches_full_app_under_exact_selected_interpreter_without_pip(st
     assert commands == [[str(selected), '-m', 'uvicorn', 'app:app', '--host',
                          '127.0.0.1', '--port', '8090', '--no-access-log']]
     assert pointer_path(root).read_bytes() == pointer
+
+
+def test_one_click_launch_installs_then_reuses_runtime_and_stops_on_install_failure(studio, monkeypatch):
+    root, created, commands = studio
+
+    assert runtime.launch(root) == 0
+
+    selected = runtime.selected_python(root)
+    pointer = pointer_path(root).read_bytes()
+    assert len(created) == 1
+    assert any(command[1:4] == ['-m', 'pip', 'install'] for command in commands)
+    assert commands[-1] == [str(selected), '-X', 'utf8', 'open_studio.py']
+    assert all(command[0] == str(selected) for command in commands)
+    commands.clear()
+
+    assert runtime.launch(root) == 0
+
+    assert len(created) == 1
+    assert pointer_path(root).read_bytes() == pointer
+    assert commands[-1] == [str(selected), '-X', 'utf8', 'open_studio.py']
+    assert len(commands) == 4  # Validate three times, then serve; no pip mutation.
+    assert all(command[1:4] != ['-m', 'pip', 'install'] for command in commands)
+    assert not any('prepare_clone_model.py' in command for command in commands)
+    commands.clear()
+
+    def failed_install(root):
+        raise RuntimeError('Installation did not finish')
+
+    monkeypatch.setattr(runtime, 'install', failed_install)
+    with pytest.raises(RuntimeError, match='Installation did not finish'):
+        runtime.launch(root)
+
+    assert commands == []  # No server/browser subprocess after installation failure.
+    assert pointer_path(root).read_bytes() == pointer

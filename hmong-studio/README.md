@@ -1,19 +1,21 @@
-# Hmong Studio 0.4.2 — nhân bản giọng cục bộ
+# Hmong Studio 0.4.3 — gói đầy đủ, một file chạy
 
-Bản này có **bộ máy CosyVoice Hmong thực sự** để tạo lời đọc mới theo mẫu nam/nữ, chạy trên máy và không cần dịch vụ trả phí hoặc API key. Cần Internet một lần để tải thư viện và khoảng **5,4 GB** mô hình. Mẫu âm thanh dùng để lấy âm sắc; không phải huấn luyện lại mô hình.
+Bản này gom toàn bộ ứng dụng, hai mẫu nam/nữ và các bản sửa lỗi vào một ZIP. **Chỉ chạy `CHAY-STUDIO.bat`**: file này tự cài thư viện/công cụ/mô hình còn thiếu, kiểm tra rồi mở Studio trong trình duyệt. Những lần sau cũng dùng chính file đó; bộ máy đã hợp lệ được kiểm tra và dùng lại, không cài đè thư viện.
 
-Bản 0.4.2 sửa WinError 2 với tệp `__init__.py.part` sau khi đã tải trọng số. Tệp nguồn rỗng được tạo và kiểm tra checksum trước khi dùng; các trọng số đã tải đúng được xác minh và dùng lại. Nếu đang cài dở bản 0.4.1, **đóng Studio và bộ cài, giải nén đè mã mới vào đúng thư mục đang dùng, giữ nguyên `.data`**, rồi chạy lại `install_clone_ai.bat`. Không cần tải lại các tệp mô hình đã đúng.
+CosyVoice Hmong tạo lời đọc mới theo mẫu nam/nữ, chạy trên máy và không cần dịch vụ trả phí hoặc API key. **Mô hình chưa nằm sẵn trong ZIP**: cần Internet lần đầu để tải thư viện và khoảng **5,4 GB** mô hình; tệp đã tải đúng được dùng tiếp. Mẫu âm thanh dùng để lấy âm sắc; không phải huấn luyện lại mô hình.
+
+Gói này giữ bản sửa WinError 2 với tệp `__init__.py.part` sau khi đã tải trọng số. Tệp nguồn rỗng được tạo và kiểm tra checksum trước khi dùng. Nếu đang cài dở bản 0.4.1/0.4.2, **đóng Studio và bộ cài, giải nén đè mã mới vào đúng thư mục đang dùng, giữ nguyên `.data`**, rồi chạy `CHAY-STUDIO.bat`.
 
 Bộ cài vẫn tạo môi trường riêng để tránh WinError 32 khi pip cài đè tệp SymPy/Torch đang bị giữ. Nếu vẫn bị tiến trình giữ tệp, khởi động lại Windows trước khi thử lại; không cần chạy quản trị hoặc cài Visual C++ Build Tools.
 
 ## Cài trên Windows
 
 1. Cài **Python 3.12.10 Windows 64-bit** từ https://www.python.org/downloads/release/python-31210/ , bật Python Launcher. Không cần gỡ Python 3.15 đang có.
-2. Lần đầu: giải nén ZIP vào thư mục có quyền ghi. Cập nhật từ 0.4.1: đóng Studio/bộ cài rồi giải nén đè vào đúng thư mục cũ, giữ `.data` để tiếp tục dùng mô hình và mẫu giọng. Không sao chép `.venv` hoặc các thư mục `.venv-clone-*` sang thư mục khác.
-3. Chạy **`install_clone_ai.bat`**. Chờ cài thư viện, công cụ âm thanh và tải/xác minh mô hình hoàn tất; bước tải lớn có thể mất nhiều phút tùy mạng. Nếu bị ngắt, chạy lại để tiếp tục; không đổi checksum hoặc tắt TLS.
-4. Khi bộ cài báo thành công, chạy **`start.bat`** và mở địa chỉ hiện trong cửa sổ lệnh. Nếu trình duyệt đang mở bản cũ, nhấn Ctrl+F5. Có thể tạo voice cục bộ khi không có Internet sau khi cài xong.
+2. Lần đầu: giải nén ZIP vào thư mục có quyền ghi. Đang dùng `E:\voi hmong\Hmong-Studio-Trang`: đóng Studio/bộ cài, giải nén ZIP vào **`E:\voi hmong\`** và chọn thay thế tệp để cập nhật đúng thư mục `Hmong-Studio-Trang` hiện có. Giữ `.data`; tránh lồng thêm một thư mục `Hmong-Studio-Trang` bên trong thư mục cũ. Không di chuyển `.venv` hoặc các thư mục `.venv-clone-*` sang nơi khác.
+3. Bấm đúp **`CHAY-STUDIO.bat`**. Chờ quá trình cài/kiểm tra hoàn tất; Studio sẽ tự mở trong trình duyệt sau khi máy chủ sẵn sàng. Nếu bị ngắt, chạy lại chính file này để tiếp tục; không đổi checksum hoặc tắt TLS. Nếu trình duyệt không tự mở, dùng địa chỉ hiện trong cửa sổ lệnh.
+4. Giữ cửa sổ lệnh mở khi dùng Studio. Nhấn Ctrl+C để đóng. Những lần sau chỉ bấm đúp **`CHAY-STUDIO.bat`**; có thể tạo voice cục bộ khi không có Internet sau khi cài xong. Nếu trình duyệt còn giao diện cũ, nhấn Ctrl+F5.
 
-**Ở bản 0.4.1, `install_local_ai.bat` đã chuyển sang gọi bộ cài nhân bản mới**. Bộ cài MMS/ASR riêng được đổi tên thành `install_mms_asr.bat`; không cần chạy file đó để nhân bản. Bộ cài tạo môi trường riêng có tên `.venv-clone-<mã>` và chỉ chọn nó cho `start.bat` sau khi mọi kiểm tra đạt. `.venv` cũ không bị cài đè. Nếu cài lỗi, môi trường đang dùng và mô hình/giọng đã lưu được giữ nguyên; lần thử lại tạo môi trường mới. Nếu bộ máy đã cài hợp lệ thì chỉ kiểm tra đọc, không nâng cấp đè thư viện. Hai bộ cài không được chạy cùng lúc.
+`install_clone_ai.bat` và `start.bat` vẫn có cho việc cài/mở riêng; dùng `CHAY-STUDIO.bat` thì không cần chạy hai file đó. `install_local_ai.bat` gọi bộ cài nhân bản; `install_mms_asr.bat` chỉ dành cho MMS/ASR riêng. Bộ cài tạo môi trường có tên `.venv-clone-<mã>` và chỉ chọn nó sau khi mọi kiểm tra đạt. `.venv` cũ không bị cài đè. Nếu cài lỗi, môi trường đang dùng và mô hình/giọng đã lưu được giữ nguyên; lần thử lại tạo môi trường mới. Hai bộ cài không được chạy cùng lúc.
 
 Bộ cài mới chọn CPython 3.10–3.12 x64, ưu tiên 3.12; giữ bản sao môi trường không tương thích thay vì xóa. Dữ liệu `.data` được giữ riêng. Nếu muốn chuyển mẫu cá nhân từ bản cũ, sao chép `.data/clones` khi cả hai bản đã tắt.
 
@@ -39,7 +41,8 @@ Linux, CPU 4 threads, không GPU:
 - Giọng nữ tạo thật câu **“Nyob zoo, kuv hais lus Hmoob.”**: WAV PCM16 mono 24 kHz, 2,71 giây; lượt lạnh khoảng64,7 giây, RAM đỉnh khoảng7,84 GiB.
 - Giọng nam, cách đọc Review, cùng câu trên: tạo thật qua giao diện/API, WAV 2,51 giây; lượt này khoảng93,6 giây. Đây là số đo máy kiểm thử, không bảo đảm tốc độ trên máy khác.
 - Nút Dừng đã kết thúc worker thật, sau đó tạo lại thành công. Chọn mẫu/generate không yêu cầu micro. Desktop/mobile 390 px không tràn ngang hoặc lỗi JavaScript.
-- 80 kiểm thử Python đạt, gồm lỗi tệp rỗng mới sửa. Đã thử thiếu toàn bộ 12 tệp rỗng trên snapshot thật: xác minh đủ 118 tệp mà không gọi mạng hay sửa trọng số lớn. Bản 0.4.1 đã qua kiểm tra môi trường do bộ cài tạo và 8 kiểm tra micro trong Chromium. Đã giải mã WAV và xác minh tín hiệu khác 0; kết quả này không thay thế việc nghe chất lượng/phát âm.
+- 83 kiểm thử Python đạt, gồm lỗi tệp rỗng và luồng một file chạy. Đã chạy thật lệnh cài-và-mở: dùng lại môi trường đã cài, mô hình sẵn sàng, phục vụ ứng dụng 0.4.3 rồi đóng đúng tiến trình. Trình duyệt chỉ được mở sau khi máy chủ sẵn sàng; kiểm thử HTTP thật xác nhận điều này, và lỗi khởi động không mở trình duyệt.
+- Đã thử thiếu toàn bộ 12 tệp rỗng trên snapshot thật: xác minh đủ 118 tệp mà không gọi mạng hay sửa trọng số lớn. Bản 0.4.1 đã qua kiểm tra môi trường do bộ cài tạo và 8 kiểm tra micro trong Chromium. Đã giải mã WAV và xác minh tín hiệu khác 0; kết quả này không thay thế việc nghe chất lượng/phát âm.
 
 ## Nguồn và kỹ thuật
 

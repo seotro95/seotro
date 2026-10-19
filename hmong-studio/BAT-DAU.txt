@@ -1,21 +1,26 @@
-HMONG STUDIO 0.4.2 - NHAN BAN GIONG CUC BO
+HMONG STUDIO 0.4.3 - GOI DAY DU, MOT FILE CHAY
 
 1. Cai Python 3.12 64-bit; lan dau giai nen vao thu muc co quyen ghi.
-2. Chay install_clone_ai.bat MOT LAN, cho tai thu vien va khoang 5.4 GB mo hinh.
-3. Bo cai thanh cong thi chay start.bat; Ctrl+F5 neu dang mo trang cu.
+2. Bam dup CHAY-STUDIO.bat. Tu cai thu vien/mo hinh con thieu, roi mo trinh duyet.
+3. Nhung lan sau cung chi chay CHAY-STUDIO.bat; Ctrl+F5 neu dang mo trang cu.
 4. Chon mau NAM hoac NU, nhap chu Hmong, chon cach doc, bam TAO VOICE.
 5. Nut DUNG se dung tien trinh; nghe va tai WAV khi hoan tat.
 
 Khong can micro, API key, dich vu tra phi hoac ban chep mau.
+ZIP gom ung dung, hai mau giong va tat ca ban sua loi.
+Mo hinh 5.4 GB KHONG nam san trong ZIP; tu tai lan dau, dung lai tep da dung.
 Can RAM khoang 16 GB va cho trong it nhat 15 GB. CPU co the cham.
-install_local_ai.bat nay cung mo bo cai nhan ban. MMS rieng: install_mms_asr.bat.
+Giu cua so lenh mo khi dung. Ctrl+C de dong Studio.
 Da tao WAV that bang ca hai mau tren Linux CPU; chua thu Windows that.
 Nghe kiem tra phat am va do giong giong truoc khi su dung.
 Xem README.md de biet chi tiet va ket qua kiem thu.
 
 SUA WINERROR2 __init__.py.part SAU KHI TAI MO HINH:
-Dong Studio/bo cai, giai nen DE ban 0.4.2 vao DUNG thu muc 0.4.1 dang dung.
-GIU NGUYEN .data, sau do chay lai install_clone_ai.bat.
+Dong Studio/bo cai, cap nhat ban 0.4.3 vao DUNG thu muc cu.
+Vi du: thu muc cu E:\voi hmong\Hmong-Studio-Trang,
+thi giai nen ZIP vao E:\voi hmong\ va chon thay the tep.
+KHONG long them Hmong-Studio-Trang vao ben trong thu muc cu.
+GIU NGUYEN .data, sau do chay CHAY-STUDIO.bat.
 Cac tep mo hinh da dung duoc kiem tra va dung lai, khong tai lai.
 
 SUA WINERROR32: dong Studio va cac bo cai cua tool.

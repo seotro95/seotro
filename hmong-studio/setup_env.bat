@@ -36,13 +36,14 @@ echo Bo cai chi ho tro CPython 3.10-3.12 64-bit.
 echo Tai Python 3.12.10 Windows installer 64-bit tu trang chinh thuc:
 echo https://www.python.org/downloads/release/python-31210/
 echo Khi cai, chon Python Launcher va Add python.exe to PATH.
-echo Khong can go Python cu. Cai xong hay chay lai start.bat.
+echo Khong can go Python cu. Cai xong hay chay lai CHAY-STUDIO.bat.
 exit /b 1
 rem A versioned clone runtime can also bootstrap the launcher without PATH setup.
 rem This loop is a fallback; py/python and legacy .venv are preferred above.
 :selected
 if "%~1"=="--clone-install" goto clone_install
 if "%~1"=="--clone-start" goto clone_start
+if "%~1"=="--clone-launch" goto clone_launch
 %HMONG_SETUP_PYTHON% -X utf8 setup_venv.py
 exit /b %errorlevel%
 
@@ -51,4 +52,7 @@ exit /b %errorlevel%
 exit /b %errorlevel%
 :clone_start
 %HMONG_SETUP_PYTHON% -X utf8 clone_runtime.py serve
+exit /b %errorlevel%
+:clone_launch
+%HMONG_SETUP_PYTHON% -X utf8 clone_runtime.py launch
 exit /b %errorlevel%
