@@ -44,6 +44,7 @@ rem This loop is a fallback; py/python and legacy .venv are preferred above.
 if "%~1"=="--clone-install" goto clone_install
 if "%~1"=="--clone-start" goto clone_start
 if "%~1"=="--clone-launch" goto clone_launch
+if "%~1"=="--clone-launch-gpu" goto clone_launch_gpu
 %HMONG_SETUP_PYTHON% -X utf8 setup_venv.py
 exit /b %errorlevel%
 
@@ -55,4 +56,7 @@ exit /b %errorlevel%
 exit /b %errorlevel%
 :clone_launch
 %HMONG_SETUP_PYTHON% -X utf8 clone_runtime.py launch
+exit /b %errorlevel%
+:clone_launch_gpu
+%HMONG_SETUP_PYTHON% -X utf8 clone_runtime.py launch-gpu
 exit /b %errorlevel%

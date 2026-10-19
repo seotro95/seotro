@@ -29,7 +29,7 @@ def test_missing_engine_is_explicit():
 
 
 def test_reject_invalid_dialect_speed_and_empty_script():
-    for payload in ({'text':'hello','dialect':'unknown'}, {'text':'x','dialect':'hnj','speed':4}, {'text':' ','dialect':'mww'}, {'text':'x'*10001,'dialect':'mww'}):
+    for payload in ({'text':'hello','dialect':'unknown'}, {'text':'x','dialect':'hnj','speed':4}, {'text':' ','dialect':'mww'}):
         assert request('POST', '/api/speech', json=payload).status_code == 422
 
 

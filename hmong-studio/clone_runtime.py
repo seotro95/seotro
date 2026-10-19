@@ -19,10 +19,24 @@ BASE = Path(__file__).resolve().parent
 SCHEMA = 1
 TORCH = ['torch==2.6.0', 'torchaudio==2.6.0']
 ENVIRONMENT = re.compile(r'\.venv-clone-[0-9a-f]{12}')
+PROFILES = {
+    'cpu': ('CPU', 'https://download.pytorch.org/whl/cpu'),
+    'cu124': ('NVIDIA CUDA 12.4', 'https://download.pytorch.org/whl/cu124'),
+}
+CUDA_CHECK = (
+    'import torch; '
+    'assert torch.cuda.is_available(), '
+    '"Khong nhan duoc GPU NVIDIA CUDA. Kiem tra GPU va cap nhat driver NVIDIA; bo may cu van duoc giu nguyen."; '
+    'torch.ones(1, device="cuda").add_(1); torch.cuda.synchronize(); '
+    'print("GPU NVIDIA da kiem tra: " + torch.cuda.get_device_name(0))'
+)
 
 
-def dependency_fingerprint(root):
-    digest = hashlib.sha256(b'hmong-clone-cpu-runtime-v1\0')
+def dependency_fingerprint(root, profile='cpu'):
+    if profile not in PROFILES:
+        raise ValueError('Cau hinh bo may khong duoc ho tro: ' + str(profile))
+    # Keep this prefix byte-for-byte compatible with existing CPU installs.
+    digest = hashlib.sha256(('hmong-clone-' + profile + '-runtime-v1\0').encode())
     for name in ('requirements.txt', 'requirements-cosy.txt'):
         digest.update(name.encode() + b'\0' + (Path(root) / name).read_bytes())
     digest.update(json.dumps(TORCH).encode())
@@ -76,7 +90,27 @@ def installer_lock(root):
                 fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
 
 
-def selected_python(root):
+def _record_profile(record):
+    profile = record.get('profile', 'cpu')
+    if profile not in PROFILES:
+        raise ValueError('unsupported runtime profile')
+    return profile
+
+
+def _preferred_profile(root):
+    """Retain a user's GPU selection when dependency updates need a new venv."""
+    _, pointer = _paths(root)
+    try:
+        record = json.loads(pointer.read_text(encoding='utf-8'))
+        if (not isinstance(record, dict) or record.get('schema') != SCHEMA
+                or not ENVIRONMENT.fullmatch(record.get('environment', ''))):
+            return 'cpu'
+        return _record_profile(record)
+    except (OSError, ValueError, TypeError):
+        return 'cpu'
+
+
+def selected_python(root, profile=None):
     root = Path(root).resolve()
     _, pointer = _paths(root)
     try:
@@ -84,8 +118,10 @@ def selected_python(root):
         if not isinstance(record, dict):
             raise ValueError('invalid runtime record')
         name = record['environment']
+        selected_profile = _record_profile(record)
         if (record.get('schema') != SCHEMA or not ENVIRONMENT.fullmatch(name)
-                or record.get('fingerprint') != dependency_fingerprint(root)):
+                or (profile is not None and profile != selected_profile)
+                or record.get('fingerprint') != dependency_fingerprint(root, selected_profile)):
             raise ValueError('unverified or incompatible runtime')
         environment = root / name
         executable = environment / ('Scripts/python.exe' if os.name == 'nt' else 'bin/python')
@@ -145,33 +181,36 @@ def _run(command, root, log=None):
     return code
 
 
-def _validate(executable, root, log):
+def _validate(executable, root, log, profile='cpu'):
     _run([executable, '-m', 'pip', 'check'], root, log)
     _run([executable, '-c', 'import torch,torchaudio,onnxruntime,whisper,transformers,soundfile,fastapi,uvicorn; from hyperpyyaml import load_hyperpyyaml; print("Thu vien nhan ban da kiem tra xong.")'], root, log)
+    if profile == 'cu124':
+        _run([executable, '-c', CUDA_CHECK], root, log)
     _run([executable, '-c', 'import cosy_engine,sys; s=cosy_engine.availability(); print(s["reason"] or "Mo hinh cuc bo da san sang."); sys.exit(0 if s["ready"] else 1)'], root, log)
 
 
-def install(root=BASE):
+def install(root=BASE, profile=None):
     import struct
     if sys.implementation.name != 'cpython' or not supported(sys.version_info, struct.calcsize('P') * 8):
         raise RuntimeError('Can CPython 3.10-3.12 64-bit; khuyen dung Python 3.12.')
     root = Path(root).resolve()
     with installer_lock(root):
-        expected_fingerprint = dependency_fingerprint(root)
+        profile = _preferred_profile(root) if profile is None else profile
+        expected_fingerprint = dependency_fingerprint(root, profile)
         folder, pointer = _paths(root)
         logfile = folder / ('install-' + datetime.now().strftime('%Y%m%d-%H%M%S') + '-' + uuid.uuid4().hex[:6] + '.log')
         with logfile.open('w', encoding='utf-8') as log:
             try:
                 existing = None
                 try:
-                    existing = selected_python(root)
+                    existing = selected_python(root, profile)
                 except RuntimeError:
                     pass
                 if existing:
                     print('Kiem tra bo may da cai. Khong cai de thu vien dang dung.', flush=True)
                     try:
-                        _validate(existing, root, log)
-                        if dependency_fingerprint(root) != expected_fingerprint:
+                        _validate(existing, root, log, profile)
+                        if dependency_fingerprint(root, profile) != expected_fingerprint:
                             raise RuntimeError('Tep cai dat da thay doi trong luc cai. Hay chay lai bo cai.')
                         return existing
                     except (subprocess.CalledProcessError, OSError):
@@ -186,20 +225,25 @@ def install(root=BASE):
                 executable = target / ('Scripts/python.exe' if os.name == 'nt' else 'bin/python')
                 print('[1/5] Kiem tra FFmpeg...', flush=True)
                 _run([executable, '-X', 'utf8', 'prepare_media_tools.py'], root, log)
-                print('[2/5] Cai PyTorch CPU trong moi truong rieng...', flush=True)
+                description, index_url = PROFILES[profile]
+                print('[2/5] Cai PyTorch ' + description + ' trong moi truong rieng...', flush=True)
                 _run([executable, '-m', 'pip', 'install', '--no-input', '--only-binary=:all:', *TORCH,
-                      '--index-url', 'https://download.pytorch.org/whl/cpu'], root, log)
+                      '--index-url', index_url], root, log)
+                if profile == 'cu124':
+                    # Fail before downloading models if this machine cannot run CUDA.
+                    _run([executable, '-c', CUDA_CHECK], root, log)
                 print('[3/5] Cai thu vien nhan ban...', flush=True)
                 _run([executable, '-m', 'pip', 'install', '--no-input', '--only-binary=:all:',
                       '--no-binary=antlr4-python3-runtime,openai-whisper', '-r', 'requirements-cosy.txt'], root, log)
                 print('[4/5] Tai/xac minh mo hinh; cac tep da dung duoc tai su dung...', flush=True)
                 _run([executable, '-X', 'utf8', 'prepare_clone_model.py'], root, log)
                 print('[5/5] Kiem tra truoc khi kich hoat...', flush=True)
-                _validate(executable, root, log)
-                if dependency_fingerprint(root) != expected_fingerprint:
+                _validate(executable, root, log, profile)
+                if dependency_fingerprint(root, profile) != expected_fingerprint:
                     raise RuntimeError('Tep cai dat da thay doi trong luc cai. Chua kich hoat; hay chay lai bo cai.')
                 _atomic_json(pointer, {'schema': SCHEMA, 'environment': name,
-                    'fingerprint': expected_fingerprint, 'created_at': datetime.now(timezone.utc).isoformat()})
+                    'fingerprint': expected_fingerprint, 'profile': profile,
+                    'created_at': datetime.now(timezone.utc).isoformat()})
                 print('Da cai xong va kich hoat bo may nhan ban. Chay start.bat.', flush=True)
                 return executable
             except BaseException:
@@ -225,8 +269,11 @@ def serve(root=BASE, *, open_browser=False):
         raise
 
 
-def launch(root=BASE):
-    install(root)
+def launch(root=BASE, profile=None):
+    if profile is None:
+        install(root)
+    else:
+        install(root, profile=profile)
     return serve(root, open_browser=True)
 
 
@@ -234,12 +281,16 @@ if __name__ == '__main__':
     try:
         if sys.argv[1:] == ['install']:
             install()
+        elif sys.argv[1:] == ['install-gpu']:
+            install(profile='cu124')
         elif sys.argv[1:] == ['serve']:
             sys.exit(serve())
         elif sys.argv[1:] == ['launch']:
             sys.exit(launch())
+        elif sys.argv[1:] == ['launch-gpu']:
+            sys.exit(launch(profile='cu124'))
         else:
-            raise RuntimeError('Lenh ho tro: install, serve hoac launch.')
+            raise RuntimeError('Lenh ho tro: install, install-gpu, serve, launch hoac launch-gpu.')
     except (Exception, KeyboardInterrupt) as exc:
         print('Khong hoan tat: ' + (str(exc) or 'Da dung theo yeu cau.'), file=sys.stderr)
         sys.exit(1)

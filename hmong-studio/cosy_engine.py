@@ -7,6 +7,7 @@ needs a native listener.  Run this module inside the cancellable voice worker.
 from __future__ import annotations
 
 import hashlib
+from collections import OrderedDict
 import importlib.util
 import io
 import json
@@ -75,6 +76,10 @@ _REQUIRED_FILES = (
 _lock = threading.Lock()
 _engine = None
 _verified = None
+_reference_cache = OrderedDict()
+_REFERENCE_CACHE_LIMIT = 4
+MAX_SCRIPT_CHARACTERS = 1_000_000
+MAX_OUTPUT_SECONDS = 24 * 60 * 60
 
 
 class EngineError(Exception):
@@ -134,10 +139,15 @@ def availability():
         reason = 'Thiếu thư viện nhân bản cục bộ. Chạy install_clone_ai.bat rồi mở lại tool.'
     elif not ffmpeg:
         reason = 'Chưa có FFmpeg trong PATH. Chạy bộ cài AI rồi mở lại tool.'
+    loaded = _engine is not None and _engine[0] == root
+    backend = _engine[2] if loaded else None
     return {'dependencies': not missing, 'missing_dependencies': missing, 'ffmpeg': ffmpeg,
             'model_ready': prepared, 'ready': not missing and ffmpeg and prepared,
             'model_dir': str(root), 'repository': REPOSITORY, 'revision': REVISION,
-            'loaded': _engine is not None and _engine[0] == root,
+            'loaded': loaded,
+            'device': str(getattr(backend, 'device', 'auto')),
+            'precision': ('float16_autocast' if getattr(backend, 'fp16', False) else 'float32') if backend is not None else 'auto',
+            'reference_cache_entries': len(_reference_cache) if loaded else 0,
             'styles': list(STYLES), 'reason': reason,
             'quality_verified': False, 'reference_transcript_required': False}
 
@@ -235,6 +245,21 @@ def _weights(path, torch):
     return state
 
 
+def _device_options(torch):
+    """Use upstream CUDA autocast when supported; keep CPU inference float32.
+
+    Merely having an NVIDIA card is insufficient: the installed Torch build and
+    driver must actually expose CUDA. This does not download or replace Torch.
+    """
+    cuda = bool(torch.cuda.is_available())
+    if cuda:
+        # TF32 accelerates operations that remain float32 under autocast on
+        # Ampere and newer cards. Older CUDA devices safely ignore this setting.
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
+    return {'device': 'cuda' if cuda else 'cpu', 'fp16': cuda}
+
+
 def _load_engine(root):
     global _engine
     if _engine is not None and _engine[0] == root:
@@ -252,6 +277,7 @@ def _load_engine(root):
     import torchaudio
     import soundfile as sf
     from hyperpyyaml import load_hyperpyyaml
+    device = _device_options(torch)
 
     # Avoid torchcodec and preserve offline WAV support on Windows.
     def load_audio(uri, *args, **kwargs):
@@ -277,7 +303,7 @@ def _load_engine(root):
     frontend = CosyVoiceFrontEnd(configs['get_tokenizer'], configs['feat_extractor'],
         str(weights_dir / 'campplus.onnx'), str(weights_dir / 'speech_tokenizer_v3.onnx'),
         '', configs['allowed_special'])
-    backend = CosyVoice3Model(configs['llm'], configs['flow'], configs['hift'], fp16=False)
+    backend = CosyVoice3Model(configs['llm'], configs['flow'], configs['hift'], fp16=device['fp16'])
     backend.llm.load_state_dict(_weights(weights_dir / 'llm.pt', torch), strict=True)
     backend.flow.load_state_dict(_weights(weights_dir / 'flow.pt', torch), strict=True)
     hift = {key.removeprefix('generator.'): value
@@ -288,6 +314,7 @@ def _load_engine(root):
     rate = int(configs['sample_rate'])
     if rate != 24000:
         raise EngineError('Tần số mô hình khác cấu hình Hmong đã kiểm tra.')
+    _reference_cache.clear()
     _engine = (root, frontend, backend, rate)
     return frontend, backend, rate
 
@@ -313,6 +340,50 @@ def _decode_reference(reference_path, output_path):
     Path(output_path).write_bytes(_wav(samples, 24000))
 
 
+def _conditioned_inputs(frontend, text, instruction, reference_path, rate, *, root=None):
+    """Reuse verified reference features, while tokenizing each new text/style.
+
+    The pinned instruct2 frontend extracts the same speaker embedding, acoustic
+    tokens and mel features for every sentence. Only the text and instruction
+    change. Keep those expensive acoustic tensors in a small process-local LRU;
+    invalidate when the source file, loaded frontend, device or model changes.
+    """
+    token_fields = {'text', 'text_len', 'prompt_text', 'prompt_text_len'}
+    can_cache = callable(getattr(frontend, '_extract_text_token', None))
+    key = None
+    if can_cache:
+        reference = Path(reference_path).expanduser().resolve()
+        try:
+            stat = reference.stat()
+        except OSError as exc:
+            raise EngineError('Không tìm thấy mẫu giọng cục bộ hợp lệ (tối đa 200 MB).') from exc
+        if not reference.is_file() or stat.st_size > 200 * 1024 * 1024:
+            raise EngineError('Không tìm thấy mẫu giọng cục bộ hợp lệ (tối đa 200 MB).')
+        key = (str(root), id(frontend), str(getattr(frontend, 'device', 'cpu')),
+               int(rate), str(reference), stat.st_dev, stat.st_ino, stat.st_size,
+               stat.st_mtime_ns, stat.st_ctime_ns)
+        cached = _reference_cache.get(key)
+        if cached is not None:
+            _reference_cache.move_to_end(key)
+            _, acoustic = cached
+            result = dict(acoustic)
+            result['text'], result['text_len'] = frontend._extract_text_token(text)
+            result['prompt_text'], result['prompt_text_len'] = frontend._extract_text_token(instruction)
+            return result
+    with tempfile.TemporaryDirectory(prefix='hmong-reference-') as folder:
+        prepared = Path(folder) / 'reference.wav'
+        _decode_reference(reference_path, prepared)
+        result = frontend.frontend_instruct2(text, instruction, str(prepared), rate, '')
+    if key is not None:
+        # Hold the frontend with the entry so an object id cannot be reused for
+        # an unrelated frontend while old tensors are still cached.
+        acoustic = {name: value for name, value in result.items() if name not in token_fields}
+        _reference_cache[key] = (frontend, acoustic)
+        while len(_reference_cache) > _REFERENCE_CACHE_LIMIT:
+            _reference_cache.popitem(last=False)
+    return result
+
+
 def _wav(samples, rate):
     import numpy as np
     samples = np.asarray(samples, dtype=np.float32).reshape(-1)
@@ -331,21 +402,48 @@ def _wav(samples, rate):
     return buffer.getvalue()
 
 
+def _pcm16(samples):
+    """Validate and convert one generated chunk without retaining old chunks."""
+    import numpy as np
+    samples = np.asarray(samples, dtype=np.float32).reshape(-1)
+    if (not samples.size or not np.isfinite(samples).all()
+            or float(np.max(np.abs(samples))) < 1e-6):
+        raise EngineError('Mô hình tạo đoạn voice rỗng, im lặng hoặc không hợp lệ.')
+    peak = float(np.max(np.abs(samples)))
+    if peak > .99:
+        samples = samples * (.99 / peak)
+    return (samples * 32767).astype('<i2').tobytes()
+
+
 def _sentences(text):
-    for sentence in re.split(r'(?<=[.!?;])\s+|\n+', text.strip()):
-        words = sentence.split()
-        while words:
-            chunk = []
-            while words and (not chunk or len(' '.join(chunk + words[:1])) <= 220):
-                chunk.append(words.pop(0))
-            yield ' '.join(chunk)
+    # Keep chunks bounded even for a million-character script. Packing nearby
+    # short sentences amortizes the reference/prompt cost of each model call.
+    # Never pop(0) from the complete script's word list (quadratic for long text).
+    pending = []
+    length = 0
+    for word in text.split():
+        for index in range(0, len(word), 220):
+            piece = word[index:index + 220]
+            extra = len(piece) + (1 if pending else 0)
+            if pending and length + extra > 220:
+                yield ' '.join(pending)
+                pending = []
+                length = 0
+            pending.append(piece)
+            length += len(piece) + (1 if len(pending) > 1 else 0)
+    if pending:
+        yield ' '.join(pending)
 
 
-def synthesize(text, reference_path, emotion='neutral', speed=1.0):
-    """Return real PCM WAV bytes; no service calls, transcript or training."""
+def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=None, output_path=None):
+    """Stream PCM WAV locally; return its Path, or bytes for small legacy calls.
+
+    A caller-supplied output path avoids retaining a long script's audio in RAM.
+    The final path is promoted atomically only after all chunks finish correctly.
+    """
     text = str(text).strip()
-    if not text or len(text) > 2000:
-        raise EngineError('Nhập từ 1 đến 2.000 ký tự mỗi lượt tạo voice cục bộ.')
+    if not text or len(text) > MAX_SCRIPT_CHARACTERS:
+        raise EngineError('Nhập từ 1 đến 1.000.000 ký tự mỗi lượt tạo voice cục bộ.')
     if emotion not in STYLES:
         raise EngineError('Cách đọc đã chọn chưa được bộ máy Hmong hỗ trợ.')
     if not isinstance(speed, (int, float)) or not math.isfinite(speed) or not .5 <= speed <= 2:
@@ -355,33 +453,75 @@ def synthesize(text, reference_path, emotion='neutral', speed=1.0):
         raise EngineError(status['reason'])
     if not _lock.acquire(blocking=False):
         raise EngineError('Bộ máy nhân bản đang tạo voice khác. Chờ hoàn tất hoặc bấm Dừng.')
+    partial = None
     try:
         import numpy as np
         import torch
         root = model_dir()
-        with tempfile.TemporaryDirectory(prefix='hmong-reference-') as folder:
-            prepared = Path(folder) / 'reference.wav'
-            _decode_reference(reference_path, prepared)
-            frontend, backend, rate = _load_engine(root)
-            instruct = ('You are a helpful assistant. Please speak Hmong (White Hmong RPA). '
-                        + STYLES[emotion] + '<|endofprompt|>')
-            sounds = []
-            total = 0
-            with torch.inference_mode():
-                for sentence in _sentences(text):
-                    # Same instruct2 data flow as upstream inference_instruct2,
-                    # without logging the user's script. No reference transcript.
-                    inputs = frontend.frontend_instruct2(sentence, instruct, str(prepared), rate, '')
-                    for output in backend.tts(**inputs, stream=False, speed=float(speed)):
-                        sound = output['tts_speech'].detach().cpu().float().numpy().reshape(-1)
-                        if not sound.size or not np.isfinite(sound).all():
-                            raise EngineError('Mô hình tạo đoạn voice không hợp lệ. Thử lời đọc ngắn hơn.')
-                        total += sound.size
-                        if total > rate * 15 * 60:
-                            raise EngineError('Bản đọc vượt giới hạn 15 phút mỗi lượt; hãy chia kịch bản nhỏ hơn.')
-                        sounds.append(sound)
-                    sounds.append(np.zeros(int(rate * .15), dtype=np.float32))
-            return _wav(np.concatenate(sounds) if sounds else [], rate)
+        sentences = list(_sentences(text))
+        total_units = len(sentences)
+        completed_units = 0
+        total = 0
+        rate = 24000
+
+        def report(percent, phase, message):
+            if progress is not None:
+                progress({'progress': min(99, round(float(percent), 2)), 'phase': phase, 'message': message,
+                          'completed_units': completed_units, 'total_units': total_units,
+                          'generated_seconds': round(total / rate, 3)})
+
+        report(1, 'loading', 'Đang nạp mô hình; các lượt sau dùng lại mô hình trong bộ nhớ.')
+        frontend, backend, rate = _load_engine(root)
+        report(5, 'reference', 'Đang chuẩn bị mẫu giọng; dùng lại đặc trưng nếu mẫu không thay đổi.')
+        instruct = ('You are a helpful assistant. Please speak Hmong (White Hmong RPA). '
+                    + STYLES[emotion] + '<|endofprompt|>')
+        text_units = sum(len(sentence) for sentence in sentences)
+        completed_text = 0
+        target = Path(output_path).expanduser().resolve() if output_path is not None else None
+        if target is not None:
+            target.parent.mkdir(parents=True, exist_ok=True)
+        descriptor, name = tempfile.mkstemp(prefix='.hmong-voice-', suffix='.part',
+                                          dir=target.parent if target is not None else None)
+        os.close(descriptor)
+        partial = Path(name)
+        with wave.open(str(partial), 'wb') as writer, torch.inference_mode():
+            writer.setnchannels(1)
+            writer.setsampwidth(2)
+            writer.setframerate(rate)
+            for sentence in sentences:
+                # Same instruct2 tensors as upstream, with acoustic reference
+                # extraction performed once per unchanged reference, not chunk.
+                inputs = _conditioned_inputs(frontend, sentence, instruct, reference_path, rate, root=root)
+                report(8 + 88 * completed_text / text_units, 'synthesis',
+                       f'Đang tạo đoạn {completed_units + 1}/{total_units}.')
+                emitted = False
+                for output in backend.tts(**inputs, stream=False, speed=float(speed)):
+                    sound = output['tts_speech'].detach().cpu().float().numpy().reshape(-1)
+                    pcm = _pcm16(sound)
+                    if total + sound.size > rate * MAX_OUTPUT_SECONDS:
+                        raise EngineError('Bản đọc vượt giới hạn 24 giờ mỗi lượt; hãy chia kịch bản nhỏ hơn.')
+                    writer.writeframesraw(pcm)
+                    total += sound.size
+                    emitted = True
+                if not emitted:
+                    raise EngineError('Mô hình không trả âm thanh cho đoạn đọc; chưa tạo voice hoàn tất.')
+                pause_frames = int(rate * .15)
+                if total + pause_frames > rate * MAX_OUTPUT_SECONDS:
+                    raise EngineError('Bản đọc vượt giới hạn 24 giờ mỗi lượt; hãy chia kịch bản nhỏ hơn.')
+                writer.writeframesraw(b'\0\0' * pause_frames)
+                total += pause_frames
+                completed_units += 1
+                completed_text += len(sentence)
+                report(8 + 88 * completed_text / text_units, 'synthesis',
+                       f'Đã tạo {completed_units}/{total_units} đoạn.')
+        report(98, 'finalizing', 'Đang hoàn tất tệp âm thanh.')
+        if target is None:
+            result = partial.read_bytes()
+        else:
+            os.replace(partial, target)
+            result = target
+        report(99, 'complete', 'Đã tạo xong âm thanh.')
+        return result
     except EngineError:
         raise
     except (ImportError, ModuleNotFoundError) as exc:
@@ -392,4 +532,12 @@ def synthesize(text, reference_path, emotion='neutral', speed=1.0):
         raise EngineError('Không nạp/chạy được mô hình nhân bản Hmong (' + type(exc).__name__
                           + '). Kiểm tra nhật ký cục bộ, RAM và bộ cài AI; chưa có voice hoàn tất.') from exc
     finally:
-        _lock.release()
+        try:
+            if partial is not None:
+                partial.unlink(missing_ok=True)
+        except OSError:
+            # Antivirus may briefly hold an owned temporary file on Windows.
+            # Cleanup failure must not hide the result or lock out future jobs.
+            logging.warning('Chưa dọn được tệp âm thanh tạm; bộ máy vẫn được giải phóng.')
+        finally:
+            _lock.release()

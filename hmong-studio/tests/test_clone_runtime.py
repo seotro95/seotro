@@ -1,5 +1,6 @@
 """Exercise runtime isolation and promotion without downloading AI dependencies."""
 import json
+import hashlib
 import os
 from pathlib import Path
 import subprocess
@@ -272,3 +273,163 @@ def test_one_click_launch_installs_then_reuses_runtime_and_stops_on_install_fail
 
     assert commands == []  # No server/browser subprocess after installation failure.
     assert pointer_path(root).read_bytes() == pointer
+
+
+def test_legacy_cpu_fingerprint_and_pointer_remain_compatible(studio):
+    root, created, commands = studio
+    digest = hashlib.sha256(b'hmong-clone-cpu-runtime-v1\0')
+    for name in ('requirements.txt', 'requirements-cosy.txt'):
+        digest.update(name.encode() + b'\0' + (root / name).read_bytes())
+    digest.update(json.dumps(runtime.TORCH).encode())
+    assert runtime.dependency_fingerprint(root) == digest.hexdigest()
+
+    selected = runtime.install(root)
+    record = json.loads(pointer_path(root).read_text(encoding='utf-8'))
+    record.pop('profile')  # Runtime records shipped before GPU support.
+    pointer_path(root).write_text(json.dumps(record), encoding='utf-8')
+    previous = pointer_path(root).read_bytes()
+    commands.clear()
+
+    assert runtime.selected_python(root) == selected
+    assert runtime.launch(root) == 0
+    assert len(created) == 1
+    assert pointer_path(root).read_bytes() == previous
+    assert all(command[1:4] != ['-m', 'pip', 'install'] for command in commands)
+
+
+def test_gpu_profile_is_isolated_validated_and_reused_by_normal_launcher(studio):
+    root, created, commands = studio
+    cpu = runtime.install(root)
+    previous = snapshot(created[0])
+    commands.clear()
+
+    assert runtime.launch(root, profile='cu124') == 0
+
+    gpu = runtime.selected_python(root)
+    assert gpu != cpu
+    assert snapshot(created[0]) == previous
+    assert len(created) == 2
+    record = json.loads(pointer_path(root).read_text(encoding='utf-8'))
+    assert record['profile'] == 'cu124'
+    assert record['fingerprint'] == runtime.dependency_fingerprint(root, 'cu124')
+    assert record['fingerprint'] != runtime.dependency_fingerprint(root)
+    torch_install = next(command for command in commands if '--index-url' in command)
+    assert torch_install[-1] == 'https://download.pytorch.org/whl/cu124'
+    assert all(command[0] == str(gpu) for command in commands)
+    cuda_checks = [index for index, command in enumerate(commands) if runtime.CUDA_CHECK in command]
+    model_download = next(index for index, command in enumerate(commands) if 'prepare_clone_model.py' in command)
+    assert len(cuda_checks) == 2
+    assert cuda_checks[0] < model_download < cuda_checks[1]
+    assert 'torch.cuda.is_available()' in runtime.CUDA_CHECK
+    assert 'torch.cuda.synchronize()' in runtime.CUDA_CHECK
+    assert commands[-1] == [str(gpu), '-X', 'utf8', 'open_studio.py']
+
+    pointer = pointer_path(root).read_bytes()
+    commands.clear()
+    assert runtime.launch(root) == 0
+    assert runtime.selected_python(root) == gpu
+    assert pointer_path(root).read_bytes() == pointer
+    assert len(created) == 2
+    assert any(runtime.CUDA_CHECK in command for command in commands)
+    assert all(command[1:4] != ['-m', 'pip', 'install'] for command in commands)
+    assert all(command[0] == str(gpu) for command in commands)
+
+
+def test_missing_cuda_driver_keeps_cpu_runtime_selected_and_skips_model_download(studio, monkeypatch):
+    root, created, commands = studio
+    cpu = runtime.install(root)
+    previous_pointer = pointer_path(root).read_bytes()
+    previous_files = snapshot(created[0])
+    original_run = runtime._run
+    commands.clear()
+
+    def no_cuda(command, command_root, log=None):
+        if runtime.CUDA_CHECK in command:
+            raise subprocess.CalledProcessError(1, command)
+        return original_run(command, command_root, log)
+
+    monkeypatch.setattr(runtime, '_run', no_cuda)
+    with pytest.raises(subprocess.CalledProcessError):
+        runtime.launch(root, profile='cu124')
+
+    assert len(created) == 2
+    assert pointer_path(root).read_bytes() == previous_pointer
+    assert runtime.selected_python(root) == cpu
+    assert snapshot(created[0]) == previous_files
+    assert not any('prepare_clone_model.py' in command for command in commands)
+    assert not any('open_studio.py' in command for command in commands)
+
+
+def test_gpu_failure_at_final_validation_does_not_promote_runtime(studio, monkeypatch):
+    root, created, commands = studio
+    cpu = runtime.install(root)
+    previous_pointer = pointer_path(root).read_bytes()
+    original_run = runtime._run
+    cuda_checks = 0
+
+    def late_cuda_failure(command, command_root, log=None):
+        nonlocal cuda_checks
+        if runtime.CUDA_CHECK in command:
+            cuda_checks += 1
+            if cuda_checks == 2:
+                raise subprocess.CalledProcessError(1, command)
+        return original_run(command, command_root, log)
+
+    monkeypatch.setattr(runtime, '_run', late_cuda_failure)
+    with pytest.raises(subprocess.CalledProcessError):
+        runtime.install(root, profile='cu124')
+
+    assert cuda_checks == 2
+    assert pointer_path(root).read_bytes() == previous_pointer
+    assert runtime.selected_python(root) == cpu
+
+
+def test_changed_dependencies_retain_gpu_profile_without_mutating_old_environment(studio):
+    root, created, commands = studio
+    gpu = runtime.install(root, profile='cu124')
+    previous_files = snapshot(created[0])
+    (root / 'requirements.txt').write_text('fastapi==0.116.0\n', encoding='utf-8')
+    commands.clear()
+
+    replacement = runtime.install(root)
+
+    assert replacement != gpu
+    assert snapshot(created[0]) == previous_files
+    assert len(created) == 2
+    assert runtime.selected_python(root) == replacement
+    assert json.loads(pointer_path(root).read_text(encoding='utf-8'))['profile'] == 'cu124'
+    assert next(command for command in commands if '--index-url' in command)[-1] == 'https://download.pytorch.org/whl/cu124'
+
+
+@pytest.mark.parametrize('profile', ['cuda', 'cu128', None, [], {}])
+def test_runtime_pointer_with_unknown_profile_is_not_selected(studio, profile):
+    root, _, _ = studio
+    runtime.install(root)
+    record = json.loads(pointer_path(root).read_text(encoding='utf-8'))
+    record['profile'] = profile
+    pointer_path(root).write_text(json.dumps(record), encoding='utf-8')
+
+    with pytest.raises(RuntimeError, match='install_clone_ai'):
+        runtime.selected_python(root)
+
+
+def test_runtime_profile_cannot_be_changed_without_matching_fingerprint(studio):
+    root, created, commands = studio
+    runtime.install(root)
+    record = json.loads(pointer_path(root).read_text(encoding='utf-8'))
+    record['profile'] = 'cu124'
+    pointer_path(root).write_text(json.dumps(record), encoding='utf-8')
+
+    with pytest.raises(RuntimeError, match='install_clone_ai'):
+        runtime.selected_python(root)
+
+
+def test_invalid_requested_profile_is_rejected_before_creating_an_environment(studio):
+    root, created, commands = studio
+
+    with pytest.raises(ValueError, match='khong duoc ho tro'):
+        runtime.install(root, profile='cu128')
+
+    assert created == []
+    assert commands == []
+    assert not pointer_path(root).exists()

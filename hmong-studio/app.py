@@ -12,6 +12,7 @@ import json
 import clone_store
 import cosy_engine
 import voice_jobs
+import review_script
 from contextlib import asynccontextmanager
 from starlette.concurrency import run_in_threadpool
 import local_engine
@@ -22,17 +23,18 @@ async def lifespan(app):
     yield
     await voice_jobs.shutdown()
 
-app = FastAPI(title='Hmong Studio', version='0.4.3', lifespan=lifespan)
+app = FastAPI(title='Hmong Studio', version='0.5.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 
 class Speech(BaseModel):
-    text: str = Field(min_length=1, max_length=10000)
+    text: str = Field(min_length=1, max_length=1_000_000)
     dialect: Literal['mww', 'vi', 'en']
     voice: str = Field(default='model-default', max_length=80)
     emotion: Literal['neutral', 'storytelling', 'warm', 'cheerful', 'sad', 'review', 'advertising', 'news', 'meditation'] = 'neutral'
     speed: float = Field(default=1, ge=0.5, le=2)
     reference_text: str = Field(default='', max_length=2000)
+    input_format: Literal['auto', 'text', 'srt'] = 'auto'
 
 
 @app.get('/')
@@ -45,6 +47,7 @@ def status():
     remote = bool(os.getenv('HMONG_TTS_URL'))
     local = local_engine.availability()
     cosy = cosy_engine.availability()
+    cosy.update(voice_jobs.worker_runtime())
     return {'tts_configured': cosy['ready'] or remote or (local['dependencies'] and local['tts_models']['mww']),
             'dialects': list(local_engine.LANGUAGES), 'languages': local_engine.LANGUAGES,
             'remote_tts': remote, 'remote_asr': bool(os.getenv('HMONG_ASR_URL')),
@@ -70,8 +73,24 @@ def voices():
 
 @app.post('/api/speech')
 async def speech(payload: Speech):
+    if len(payload.text) > 10000:
+        raise HTTPException(413, 'Kịch bản dài cần tạo bằng nút Tạo voice để chia đoạn, theo dõi tiến độ và ghi WAV ra đĩa.')
+    try:
+        script = review_script.parse_script(payload.text, payload.input_format)
+    except review_script.ScriptError as exc:
+        raise HTTPException(422, str(exc)) from None
+    if script.timed and script.duration > 15 * 60:
+        raise HTTPException(413, 'SRT trên 15 phút cần tạo bằng nút Tạo voice để ghi WAV ra đĩa và tải trực tiếp.')
+    return await generate_speech(payload)
+
+
+async def generate_speech(payload: Speech, *, progress=None, output_path=None):
     if not payload.text.strip():
         raise HTTPException(422, 'Nhập lời đọc trước khi tạo giọng.')
+    try:
+        script = review_script.parse_script(payload.text, payload.input_format)
+    except review_script.ScriptError as exc:
+        raise HTTPException(422, str(exc)) from None
     reference_voice = payload.voice.startswith('custom-') or payload.voice in {'hmong-white-female', 'hmong-white-male'}
     use_local_clone = reference_voice and (cosy_engine.availability()['ready'] or (not os.getenv('HMONG_CLONE_URL') and not os.getenv('HMONG_TTS_URL')))
     if use_local_clone:
@@ -82,10 +101,28 @@ async def speech(payload: Speech):
         else:
             reference = BASE / 'static' / 'voices' / (payload.voice + '.mp3')
         try:
-            data = await run_in_threadpool(cosy_engine.synthesize, payload.text, reference, payload.emotion, payload.speed)
+            options = {}
+            if progress is not None:
+                options['progress'] = progress
+            if output_path is not None:
+                options['output_path'] = output_path
+            if script.timed:
+                data = await run_in_threadpool(review_script.render_timeline, script, reference,
+                                               payload.emotion, payload.speed, **options)
+            else:
+                data = await run_in_threadpool(cosy_engine.synthesize, payload.text, reference,
+                                               payload.emotion, payload.speed, **options)
+            if output_path is not None:
+                return FileResponse(data, media_type='audio/wav', headers={'Cache-Control': 'no-store'})
             return Response(data, media_type='audio/wav', headers={'Cache-Control': 'no-store'})
+        except review_script.ScriptError as exc:
+            raise HTTPException(422, str(exc)) from None
         except cosy_engine.EngineError as exc:
             raise HTTPException(503, str(exc)) from None
+    if script.timed:
+        raise HTTPException(422, 'Đọc SRT theo mốc giờ cần bộ máy CosyVoice Hmong cục bộ và một mẫu giọng Nam/Nữ hoặc giọng riêng.')
+    if len(payload.text) > 10000:
+        raise HTTPException(413, 'Kịch bản trên 10.000 ký tự cần chọn mẫu giọng và bộ máy CosyVoice Hmong cục bộ.')
     if payload.voice.startswith('custom-') or (payload.voice in {'hmong-white-female', 'hmong-white-male'} and os.getenv('HMONG_CLONE_URL')):
         return await clone_speech(payload)
     if payload.voice not in {'model-default', 'hmong-white-female', 'hmong-white-male'}:
@@ -248,6 +285,10 @@ async def clone_speech(payload):
 async def create_speech_job(payload: Speech):
     if not payload.text.strip():
         raise HTTPException(422, 'Nhập lời đọc trước khi tạo voice.')
+    try:
+        review_script.parse_script(payload.text, payload.input_format)
+    except review_script.ScriptError as exc:
+        raise HTTPException(422, str(exc)) from None
     return voice_jobs.create(payload.model_dump())
 
 
@@ -262,8 +303,12 @@ async def stop_speech_job(job_id: str):
 
 
 @app.get('/api/speech/jobs/{job_id}/audio')
+@app.head('/api/speech/jobs/{job_id}/audio')
 async def speech_job_audio(job_id: str):
     job = voice_jobs.get(job_id)
     if job['status'] != 'completed':
         raise HTTPException(409, 'Chưa có voice hoàn tất để tải.')
-    return FileResponse(Path(job['temp'].name) / 'audio.bin', media_type=job['media_type'], headers={'Cache-Control': 'no-store'})
+    extension = {'audio/mpeg': 'mp3', 'audio/ogg': 'ogg'}.get(job['media_type'], 'wav')
+    return FileResponse(Path(job['temp'].name) / 'audio.bin', media_type=job['media_type'],
+                        headers={'Cache-Control': 'no-store'}, filename='hmong-review.' + extension,
+                        content_disposition_type='inline')

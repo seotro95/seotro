@@ -9,7 +9,7 @@ import voice_jobs
 
 def test_worker_success_download_and_server_rejects_empty(monkeypatch,tmp_path):
     worker=tmp_path/'worker.py'
-    worker.write_text("import sys,json\nfrom pathlib import Path\np=Path(sys.argv[1]);d=json.load(sys.stdin)\nassert d['emotion']=='review'\nassert d['voice']=='hmong-white-female'\n(p/'audio.bin').write_bytes(b'RIFF-test-audio')\n(p/'result.json').write_text(json.dumps({'media_type':'audio/wav'}))\n")
+    worker.write_text("import sys,json,wave\nfrom pathlib import Path\nfor line in sys.stdin:\n r=json.loads(line);p=Path(r['folder']);d=r['payload']\n assert d['emotion']=='review'\n assert d['voice']=='hmong-white-female'\n with wave.open(str(p/'audio.bin'),'wb') as w:\n  w.setnchannels(1);w.setsampwidth(2);w.setframerate(24000);w.writeframes(b'\\0\\0'*10)\n (p/'result.json').write_text(json.dumps({'media_type':'audio/wav'}))\n")
     monkeypatch.setattr(voice_jobs,'WORKER',worker)
     with TestClient(app.app) as client:
         assert client.post('/api/speech/jobs',json={'text':'  ','dialect':'mww'}).status_code==422
@@ -22,13 +22,13 @@ def test_worker_success_download_and_server_rejects_empty(monkeypatch,tmp_path):
             if state['status']!='running':break
             time.sleep(.02)
         assert state['status']=='completed',state
-        assert client.get('/api/speech/jobs/'+job+'/audio').content==b'RIFF-test-audio'
+        assert client.get('/api/speech/jobs/'+job+'/audio').content.startswith(b'RIFF')
         assert client.post('/api/speech/jobs/'+job+'/stop').json()['status']=='completed'
 
 
 def test_stop_terminates_real_worker_and_can_restart(monkeypatch,tmp_path):
     worker=tmp_path/'worker.py'
-    worker.write_text('import sys,time\nsys.stdin.read()\ntime.sleep(60)\n')
+    worker.write_text('import sys,time\nfor line in sys.stdin:\n time.sleep(60)\n')
     monkeypatch.setattr(voice_jobs,'WORKER',worker)
     async def scenario():
         job=voice_jobs.create({'text':'test'})
