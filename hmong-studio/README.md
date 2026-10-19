@@ -1,50 +1,76 @@
-# Hmong Studio
+# Hmong Studio 0.2 — bản phát triển
 
-Studio riêng, giao diện tiếng Việt, chỉ dùng Hmong Trắng (`mww`), với mẫu giọng nam và nữ do người dùng cung cấp.
+**Chưa hoàn thành AI Hmong Trắng.** Bản này bổ sung luồng tạo giọng và nhận dạng dùng mô hình cục bộ hoặc dịch vụ HTTPS, lựa chọn Hmong Trắng / Việt / Anh, và quản lý hai mẫu nam/nữ. Chưa có mô hình Hmong Trắng được xác minh, chưa tải được trọng số trong môi trường kiểm tra (Hugging Face bị chặn 403). Không hứa nhận dạng đúng Hmong, nhân bản hai giọng hoặc cảm xúc giống người thật.
 
-## Chạy
+## Windows
+
+1. Cài Python 3.10–3.12, chọn Add Python to PATH.
+2. Giải nén ZIP, chạy `start.bat`, giữ cửa sổ lệnh mở.
+3. Mở địa chỉ hiện trong cửa sổ lệnh bằng trình duyệt trên cùng máy.
+4. Muốn dùng AI cục bộ, chạy `install_local_ai.bat`. Cần Internet và vài trăm MB cho thư viện, thêm vài GB cho mô hình ASR. Nên có ít nhất 8 GB RAM trống. Cài FFmpeg từ https://ffmpeg.org/download.html và thêm vào PATH để nhận dạng audio.
+5. Khởi động lại tool sau khi thay đổi biến môi trường. Không công khai máy chủ trực tiếp lên Internet: bản này không có đăng nhập.
+
+Chạy Linux/macOS trong thư mục `hmong-studio`:
 
 ```sh
-cd /workspace/seotro/hmong-studio
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt
 .venv/bin/python -m uvicorn app:app --host 127.0.0.1 --port 8090
 ```
 
-Windows: dùng `.venv\Scripts\python` và `.venv\Scripts\pip` thay đường dẫn trên. Mở địa chỉ máy chủ trong trình duyệt. Micro cần localhost hoặc HTTPS.
+AI cục bộ: cài PyTorch phù hợp từ https://pytorch.org/get-started/locally/, rồi `pip install -r requirements-local.txt`. Không tắt xác minh TLS/chữ ký để tải mô hình. Launcher Windows chưa được thử trên Windows.
 
-Hoặc trên Windows có Python 3.10+, chạy `start.bat` để tạo môi trường, cài thư viện và mở máy chủ (launcher Windows chưa được thử trong môi trường Linux này).
+## Tính năng
 
-## Đã triển khai
+- Kịch bản TXT, dự án JSON, lưu/mở/xóa trên trình duyệt; tối đa 10.000 ký tự. AI cục bộ nhận tối đa 2.000 ký tự/lượt.
+- Hai mẫu Hmong Trắng nam/nữ do người dùng cung cấp; nghe nguyên bản, không biến mẫu thành giọng AI tự động. Không có Hmong Hoa.
+- Thu micro tối đa 10 phút, nhập audio tối đa 50 MB, nghe/dạng sóng, cắt, chỉnh âm lượng và xuất WAV PCM 16-bit. Micro cần localhost hoặc HTTPS.
+- Giọng nói → văn bản từ audio hiện tại, sửa kết quả, chuyển vào kịch bản hoặc tải TXT. Dùng **bản gốc**, không dùng khoảng cắt trên màn hình. ASR cục bộ chia khối 20 giây; từ ở ranh giới khối có thể sai.
+- Chọn ngôn ngữ cho cả hai chiều; chọn nam/nữ và cảm xúc chỉ được mở nếu dịch vụ đã được cấu hình hỗ trợ. MMS gốc chỉ có giọng mô hình, không giả lập giới tính bằng đổi cao độ.
+- Nút Lời Hmong mẫu nạp đoạn “Kuv twb hais qhia rau koj…” do người dùng gửi. Đoạn này **không khớp** hai MP3, không phải bản chép/nhãn huấn luyện.
 
-- Soạn/nhập/xuất TXT (10.000 ký tự), tốc độ và chọn mẫu nam/nữ.
-- Lưu nhiều dự án trên trình duyệt, mở/xóa, nhập/xuất JSON. JSON chỉ chứa lời và thiết lập, không chứa âm thanh.
-- Thu micro tối đa 10 phút, nhập audio tối đa 50 MB, nghe lại, dạng sóng, cắt theo giây, chỉnh âm lượng và xuất WAV PCM 16-bit.
-- Bộ chuyển tiếp TTS với giới hạn đầu vào/đầu ra và thông báo lỗi. Không có giọng Hmong cài sẵn, dịch, nhận dạng hay nhân bản giọng. Tốc độ AI chỉ áp dụng nếu dịch vụ thực thi đúng hợp đồng.
+Âm thanh không được lưu trong JSON/localStorage; tải WAV riêng trước khi đóng hoặc đổi dự án. Dự án 0.1 Hmong Trắng vẫn mở được; lựa chọn mẫu cũ chuyển về giọng gốc nếu bộ xử lý không hỗ trợ nhân bản.
 
-## Kết nối mô hình Hmong
+## AI cục bộ
 
-Chưa xác minh mô hình hỗ trợ Hmong Trắng. Cần dịch vụ hoặc adapter thực sự đọc đúng Hmong; không dùng VieNeu/Qwen hiện có của Voice Studio để giả lập hỗ trợ Hmong.
+TTS dùng `AutoTokenizer` + `VitsModel`, ASR dùng `AutoProcessor` + `Wav2Vec2ForCTC`. Chỉ hỗ trợ mô hình tương thích hai kiến trúc đó; không chạy mã tùy ý từ Hub (`trust_remote_code=False`).
 
-Thiết lập `HMONG_TTS_URL` phía máy chủ tới endpoint **HTTPS** tin cậy và tùy chọn `HMONG_TTS_TOKEN` qua biến môi trường (không ghi khóa vào Git). Khởi động lại máy chủ. Endpoint nhận POST JSON:
+| Biến môi trường | Mặc định / ý nghĩa |
+|---|---|
+| `HMONG_LOCAL_TTS_MODEL` | Chưa đặt. Phải là model ID hoặc thư mục VITS đã xác minh đọc **Hmong Trắng**. Không tự đoán ID mô hình. |
+| `STUDIO_TTS_MODEL_VI` | `facebook/mms-tts-vie` |
+| `STUDIO_TTS_MODEL_EN` | `facebook/mms-tts-eng` |
+| `HMONG_LOCAL_ASR_MODEL` | `facebook/mms-1b-all` hoặc thư mục mô hình tương thích |
+| `HMONG_ASR_CODE` | `hmn` là mã **ứng viên**, chưa xác minh có adapter và đúng Hmong Trắng. Nếu không có trong vocab thì báo lỗi, không dùng tiếng Anh thay thế. |
+
+Mã ASR Việt/Anh là `vie`/`eng`. Lần đầu thư viện có thể tải mô hình. Cần mở mạng tới Hugging Face và các CDN mà Hub chỉ định; có thể dùng thư mục đã tải sẵn để chạy offline. Kiểm tra `processor.tokenizer.vocab.keys()` theo tài liệu MMS để xác nhận mã ngôn ngữ. Cần cặp âm thanh và bản chép khớp để đo độ chính xác Hmong Trắng; chưa có cặp đó trong dự án này.
+
+MMS công bố giấy phép **CC-BY-NC 4.0**; đọc giấy phép từng mô hình trước khi dùng thương mại. Tài liệu chính thức: https://github.com/facebookresearch/fairseq/tree/main/examples/mms và https://huggingface.co/docs/transformers/model_doc/mms .
+
+## Dịch vụ có nhân bản giọng / cảm xúc
+
+Chỉ cấu hình sau khi có dịch vụ hoặc adapter thực sự hỗ trợ Hmong Trắng. Khóa chỉ đặt trong biến môi trường máy chủ, không ghi vào Git.
+
+TTS: `HMONG_TTS_URL` (HTTPS), tùy chọn `HMONG_TTS_TOKEN`. POST JSON:
 
 ```json
-{"text":"Lời Hmong", "dialect":"mww", "voice":"hmong-white-female", "speed":1.0}
+{"text":"Nyob zoo", "dialect":"mww", "voice":"hmong-white-female", "emotion":"neutral", "speed":1.0}
 ```
 
-`dialect` chỉ là `mww`; `voice` là `hmong-white-female` hoặc `hmong-white-male`, tốc độ 0.5–2. Endpoint phải trả trực tiếp bytes WAV/MP3/OGG với Content-Type tương ứng; tối đa 50 MB, thời hạn 120 giây, không chuyển hướng. Đây là hợp đồng adapter của studio, không phải API mặc định của một nhà cung cấp. Cần viết adapter nếu API của nhà cung cấp khác hợp đồng. Xác nhận cách phát âm với người bản ngữ trước khi dùng chính thức.
+`dialect`: `mww`/`vi`/`en`; `voice`: `model-default`/`hmong-white-female`/`hmong-white-male`; `emotion`: `neutral`/`storytelling`/`warm`/`cheerful`/`sad`; tốc độ 0.5–2. Trả bytes WAV/MP3/OGG và Content-Type tương ứng, tối đa 50 MB, 120 giây, không redirect. Adapter phải tự ánh xạ ID mẫu tới hai MP3 trong `static/voices` và sử dụng mô hình nhân bản; tool không tự gửi mẫu cho dịch vụ. Chỉ đặt `HMONG_TTS_CLONING=1` và/hoặc `HMONG_TTS_EMOTIONS=1` sau khi adapter hỗ trợ thật. Các cờ chỉ khai báo cấu hình, không tự tạo năng lực cho mô hình.
 
-Ứng dụng không có đăng nhập; chỉ chạy trên localhost. Không công khai trực tiếp khi chưa bổ sung xác thực và giới hạn lưu lượng. Nội dung gửi tới dịch vụ TTS khi bấm tạo giọng; bản thu được biên tập tại trình duyệt. Không tự động lưu âm thanh, hãy tải WAV trước khi đóng/mở dự án khác.
+ASR: `HMONG_ASR_URL` (HTTPS), tùy chọn `HMONG_ASR_TOKEN`. Nhận POST bytes audio `application/octet-stream`, query `language=mww|vi|en`. Trả JSON `{"text":"..."}`, tối đa 1 MB/50.000 ký tự, 180 giây. Nội dung được gửi tới dịch vụ tương ứng khi bấm xử lý. Không tự dịch lời.
 
-## Kiểm tra
+Đây là hợp đồng adapter của studio, không phải API mặc định của nhà cung cấp. Chưa có nhà cung cấp nào được tích hợp hoặc xác minh trong bản này.
+
+## Kết quả kiểm tra
+
+- API/validation và luồng chuyển tiếp được kiểm tra bằng pytest; inference trong test dùng mock, **không chứng minh** chất lượng mô hình.
+- Đã thử Chromium: nhập MP3, chọn ngôn ngữ, lưu dự án, xuất WAV stereo đúng 1 giây; hiển thị và chuyển kết quả ASR giả lập vào kịch bản. Không có lỗi JavaScript trong lượt thử.
+- Đã cài PyTorch CPU/Transformers và import được lớp mô hình. Chưa inference với trọng số thật vì bị chặn tải từ Hugging Face (403).
+- Chưa xác minh giọng Hmong Trắng, nam/nữ nhân bản, cảm xúc, nhận dạng Hmong hoặc launcher Windows. Không coi bản này là tool Hmong hoàn chỉnh.
 
 ```sh
 python -m pytest tests -q
 node --check static/app.js
 ```
-
-Kiểm tra API không chứng minh chất lượng phát âm. Thu micro và luồng tải WAV cần kiểm tra trên trình duyệt thật.
-
-## Mẫu giọng Hmong Trắng
-
-Hai MP3 gốc nằm trong `static/voices/`, nghe thử bằng trình phát mẫu. Dự án lưu lựa chọn nam/nữ; dự án Hmong Trắng cũ chưa có lựa chọn sẽ dùng nữ. Dự án phương ngữ khác không được nhập hoặc hiển thị, dữ liệu cũ trong localStorage không tự bị ghi lại khi mở trang. Bộ chuyển tiếp chỉ gửi ID `voice`, không gửi mẫu âm thanh. Adapter TTS phải tự ánh xạ hai ID đến mẫu tương ứng và triển khai nhân bản giọng; hai MP3 không tự biến thành mô hình TTS.

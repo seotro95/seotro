@@ -1,20 +1,21 @@
 'use strict';
 const $ = id => document.getElementById(id);
 const notify = message => { $('notice').textContent = message; };
-let buffer = null, audioURL = null, recorder = null, stream = null, context = null;
+let buffer = null, audioURL = null, recorder = null, stream = null, context = null, sourceBlob = null, serviceStatus = null;
 let projects = [];
+let generationBusy = false, transcriptionBusy = false;
 try { projects = JSON.parse(localStorage.getItem('hmong-projects') || '[]'); if (!Array.isArray(projects)) projects = []; } catch { notify('Không đọc được dữ liệu cũ. Bạn có thể nhập lại dự án JSON.'); }
-function snapshot() { return { version: 1, title: $('title').value, text: $('text').value, dialect: $('dialect').value, voice: $('voice').value, speed: Number($('speed').value) }; }
+function snapshot() { return { version: 1, title: $('title').value, text: $('text').value, dialect: $('dialect').value, voice: $('voice').value, emotion: $('emotion').value, speed: Number($('speed').value) }; }
 function applyProject(p) {
-  if (!p || p.version !== 1 || typeof p.text !== 'string' || p.text.length > 10000 || typeof p.title !== 'string' || p.title.length > 120 || p.dialect !== 'mww' || (p.voice !== undefined && !['hmong-white-female','hmong-white-male'].includes(p.voice)) || !Number.isFinite(p.speed) || p.speed < .5 || p.speed > 2) throw Error('Dự án không hợp lệ.');
-  $('title').value = p.title; $('text').value = p.text; $('dialect').value = p.dialect; $('voice').value = p.voice || 'hmong-white-female'; updateReference(); $('speed').value = p.speed; update();
-  buffer = null; $('download').disabled = true; $('player').removeAttribute('src');
+  if (!p || p.version !== 1 || typeof p.text !== 'string' || p.text.length > 10000 || typeof p.title !== 'string' || p.title.length > 120 || !['mww','vi','en'].includes(p.dialect) || (p.voice !== undefined && !['model-default','hmong-white-female','hmong-white-male'].includes(p.voice)) || (p.emotion !== undefined && !['neutral','storytelling','warm','cheerful','sad'].includes(p.emotion)) || !Number.isFinite(p.speed) || p.speed < .5 || p.speed > 2) throw Error('Dự án không hợp lệ.');
+  $('title').value = p.title; $('text').value = p.text; $('dialect').value = p.dialect; $('voice').value = p.voice || 'model-default'; $('emotion').value = p.emotion || 'neutral'; updateCapabilities(); $('speed').value = p.speed; update();
+  buffer = null; sourceBlob = null; $('transcribe').disabled = true; $('transcript').value = ''; $('useTranscript').disabled = true; $('exportTranscript').disabled = true; $('download').disabled = true; $('player').removeAttribute('src');
   if (audioURL) URL.revokeObjectURL(audioURL); audioURL = null;
   $('wave').getContext('2d').clearRect(0,0,$('wave').width,$('wave').height); $('audioInfo').textContent = 'Chưa có bản thu';
   notify('Đã mở kịch bản. Âm thanh không được lưu trong dự án; hãy nhập bản thu riêng.');
 }
-function updateReference() { $('referencePlayer').src = '/static/voices/' + $('voice').value + '.mp3'; }
-$('voice').addEventListener('change', updateReference);
+function updateReference() { $('referencePlayer').src = '/static/voices/' + $('referenceVoice').value + '.mp3'; }
+$('referenceVoice').addEventListener('change', updateReference);
 function update() { $('count').textContent = `${$('text').value.length.toLocaleString('vi')} / 10.000 ký tự`; $('speedValue').value = `${Number($('speed').value).toFixed(1)}×`; }
 $('text').addEventListener('input', update); $('speed').addEventListener('input', update);
 function download(blob, ext) {
@@ -25,12 +26,12 @@ $('exportText').onclick = () => download(new Blob([$ ('text').value], {type:'tex
 $('exportProject').onclick = () => download(new Blob([JSON.stringify(snapshot(),null,2)],{type:'application/json'}), '.json');
 function persist() { localStorage.setItem('hmong-projects', JSON.stringify(projects)); }
 function renderProjects() {
-  projects = projects.filter(p => p && typeof p.title === 'string' && typeof p.text === 'string' && p.dialect === 'mww');
+  projects = projects.filter(p => p && typeof p.title === 'string' && typeof p.text === 'string' && ['mww','vi','en'].includes(p.dialect));
   $('projectList').replaceChildren();
   if (!projects.length) { $('projectList').textContent = 'Chưa có dự án. Lưu bản đọc đầu tiên của bạn ở phía trên.'; return; }
   projects.forEach((p,i) => {
     const row = document.createElement('div'); row.className = 'project';
-    const title = document.createElement('span'); title.textContent = `${p.title || 'Chưa đặt tên'} · Hmong Trắng · ${p.voice === 'hmong-white-male' ? 'Nam' : 'Nữ'}`;
+    const title = document.createElement('span'); title.textContent = `${p.title || 'Chưa đặt tên'} · ${{mww:'Hmong Trắng',vi:'Tiếng Việt',en:'English'}[p.dialect]} · ${p.voice === 'hmong-white-male' ? 'Nam' : p.voice === 'hmong-white-female' ? 'Nữ' : 'Giọng gốc'}`;
     const open = document.createElement('button'); open.textContent = 'Mở'; open.onclick = () => { if (confirm('Mở dự án này? Nội dung đang sửa và âm thanh hiện tại sẽ được thay thế.')) { try { applyProject(p); } catch(e) { notify(e.message); } } };
     const del = document.createElement('button'); del.textContent = 'Xóa'; del.onclick = () => { if (confirm('Xóa dự án đã lưu này?')) { const old = [...projects]; projects.splice(i,1); try { persist(); renderProjects(); } catch { projects = old; notify('Không thể lưu thay đổi.'); } } };
     row.append(title,open,del); $('projectList').append(row);
@@ -48,7 +49,7 @@ async function loadAudio(blob) {
   context ||= new AudioContext();
   const decoded = await context.decodeAudioData(await blob.arrayBuffer());
   if(audioURL) URL.revokeObjectURL(audioURL);
-  buffer = decoded; audioURL = URL.createObjectURL(blob); $('player').src = audioURL;
+  buffer = decoded; sourceBlob = blob; $('transcribe').disabled = transcriptionBusy; $('transcript').value=''; $('useTranscript').disabled=true; $('exportTranscript').disabled=true; audioURL = URL.createObjectURL(blob); $('player').src = audioURL;
   $('trimStart').value = 0; $('trimEnd').value = buffer.duration.toFixed(3); $('download').disabled = false;
   $('audioInfo').textContent = `${buffer.duration.toFixed(1)} giây · ${buffer.sampleRate} Hz · ${buffer.numberOfChannels} kênh`;
   const canvas = $('wave'); canvas.width = Math.max(300,canvas.clientWidth*2); const ctx = canvas.getContext('2d'), data = buffer.getChannelData(0);
@@ -86,9 +87,34 @@ $('download').onclick = () => {
 };
 $('generate').onclick = async () => {
   if(!$('text').value.trim()) { notify('Nhập kịch bản Hmong trước.'); return; }
-  $('generate').disabled=true; notify('Đang tạo giọng Hmong…');
-  try { const p=snapshot(), r=await fetch('/api/speech',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:p.text,dialect:p.dialect,voice:p.voice,speed:p.speed})}); if(!r.ok) { let message='Tạo giọng thất bại.'; try {const e=await r.json();if(typeof e.detail==='string')message=e.detail;}catch{} throw Error(message); } await loadAudio(await r.blob()); } catch(e) { notify(e.message); } finally { $('generate').disabled=false; }
+  generationBusy=true; $('generate').disabled=true; notify('Đang tạo giọng… Lần đầu có thể cần tải mô hình.');
+  try { const p=snapshot(), r=await fetch('/api/speech',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:p.text,dialect:p.dialect,voice:p.voice,emotion:p.emotion,speed:p.speed})}); if(!r.ok) { let message='Tạo giọng thất bại.'; try {const e=await r.json();if(typeof e.detail==='string')message=e.detail;}catch{} throw Error(message); } if(JSON.stringify(p)!==JSON.stringify(snapshot()))throw Error('Lời hoặc thiết lập đã thay đổi trong lúc tạo giọng. Hãy tạo lại với bản hiện tại.'); await loadAudio(await r.blob()); } catch(e) { notify(e.message); } finally { generationBusy=false; $('generate').disabled=false; }
 };
 window.addEventListener('beforeunload',()=>stream?.getTracks().forEach(t=>t.stop()));
 renderProjects();update();
-fetch('/api/status').then(r=>{if(!r.ok)throw Error();return r.json();}).then(s=>{notify(s.message);$('generate').disabled=!s.tts_configured;}).catch(()=>notify('Không kết nối được máy chủ. Thu âm và nhập tệp vẫn dùng được.'));
+function updateCapabilities() {
+  if(!serviceStatus) return;
+  const s=serviceStatus;
+  for(const option of $('voice').options) option.disabled=option.value!=='model-default' && !s.cloning;
+  if($('voice').selectedOptions[0]?.disabled) $('voice').value='model-default';
+  for(const option of $('emotion').options) option.disabled=option.value!=='neutral' && !s.emotions;
+  if($('emotion').selectedOptions[0]?.disabled) $('emotion').value='neutral';
+  $('capability').textContent = (s.remote_tts ? 'Dịch vụ TTS từ xa đã cấu hình; chất lượng cần kiểm chứng.' : 'MMS cục bộ: giọng gốc, không nhân bản giọng hoặc điều khiển cảm xúc.') + ' ' + (!s.local.dependencies ? 'Chạy install_local_ai.bat để cài AI cục bộ. ' : '') + ($('dialect').value==='mww' && !s.local.tts_models.mww && !s.remote_tts ? 'Chưa có mô hình TTS Hmong Trắng được xác minh.' : '');
+  $('generate').disabled=generationBusy;
+}
+$('dialect').addEventListener('change',updateCapabilities);
+$('transcribe').onclick = async () => {
+  if(!sourceBlob) { notify('Thu hoặc nhập âm thanh trước.'); return; }
+  transcriptionBusy=true; $('transcribe').disabled=true; const capturedAudio=sourceBlob, capturedLanguage=$('dialect').value; notify('Đang nhận dạng… Lần đầu có thể cần tải mô hình lớn.');
+  try {
+    const r=await fetch('/api/transcribe?language='+encodeURIComponent($('dialect').value),{method:'POST',headers:{'Content-Type':'application/octet-stream'},body:sourceBlob});
+    const data=await r.json(); if(!r.ok)throw Error(typeof data.detail==='string'?data.detail:'Nhận dạng thất bại.');
+    if(capturedAudio!==sourceBlob || capturedLanguage!==$('dialect').value)throw Error('Âm thanh hoặc ngôn ngữ đã thay đổi. Nhận dạng lại bản hiện tại.');
+    $('transcript').value=data.text; $('useTranscript').disabled=false; $('exportTranscript').disabled=false; notify(data.warning);
+  } catch(e) { notify(e.message); } finally { transcriptionBusy=false; $('transcribe').disabled=!sourceBlob; }
+};
+$('useTranscript').onclick = () => { const text=$('transcript').value; if(text.length>10000){notify('Kết quả vượt 10.000 ký tự. Chọn đoạn ngắn hơn hoặc xuất TXT.');return;} if($('text').value && !confirm('Thay kịch bản hiện tại bằng kết quả nhận dạng?'))return; $('text').value=text;update();notify('Đã đưa lời nhận dạng vào kịch bản. Kiểm tra từ và dấu trước khi tạo giọng.'); };
+$('exportTranscript').onclick = () => download(new Blob([$('transcript').value],{type:'text/plain;charset=utf-8'}),'-nhan-dang.txt');
+fetch('/api/status').then(r=>{if(!r.ok)throw Error();return r.json();}).then(s=>{serviceStatus=s;notify(s.message);updateCapabilities();}).catch(()=>notify('Không kết nối được máy chủ. Thu âm và nhập tệp vẫn dùng được.'));
+
+$('loadExample').onclick = async () => { try { if($('text').value && !confirm('Thay lời đang sửa bằng kịch bản Hmong mẫu?'))return; const r=await fetch('/static/example-hmong.txt');if(!r.ok)throw Error('Không tải được kịch bản mẫu.');$('text').value=await r.text();$('dialect').value='mww';update();updateCapabilities();notify('Đã nạp lời Hmong do bạn cung cấp. Lời này không phải bản chép của hai mẫu giọng.'); }catch(e){notify(e.message);} };
