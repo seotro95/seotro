@@ -1,3 +1,13 @@
+# Bản 0.3.2 — hai mẫu nam/nữ người dùng cung cấp
+
+Đã đối chiếu SHA-256: `hmong nữ.MP3` và `hmong nam.MP3` trùng khớp chính xác với hai tệp đi kèm tại `static/voices`. Nữ dài 15,543 giây; nam dài 14,916 giây. Không chỉnh cao độ hoặc thay giọng.
+
+Chọn giọng nữ/nam ở Thiết lập giọng sẽ tự chọn đúng mẫu nghe; chọn mẫu nghe cũng cập nhật giọng đọc. Giọng nữ là mặc định. Mỗi giọng có ô bản chép riêng, lưu trên trình duyệt và trong dự án JSON. Người dùng cần nhập đúng lời nói trong mẫu; ứng dụng không tự đoán tiếng Hmong.
+
+Khi có `HMONG_CLONE_URL`, hai giọng có sẵn đi qua cùng luồng nhân bản như mẫu riêng, gửi **chính tệp MP3 đã chọn** và bản chép cho adapter (multipart `reference_audio`, MIME `audio/mpeg`). Adapter cần nhận MP3 hoặc chuyển đổi trước suy luận. Mẫu riêng vẫn gửi WAV. Kiểm thử đối chiếu từng byte mẫu được gửi, giọng nam/nữ và bản chép riêng.
+
+Chưa có mô hình/dịch vụ nhân bản Hmong Trắng được cấu hình hoặc kiểm chứng. Thêm mẫu không tự tạo khả năng đọc lời mới. Cách đọc/cảm xúc vẫn phụ thuộc bộ máy. Chưa xác nhận phát âm đúng bằng người bản ngữ.
+
 # Bản sửa 0.3.1 — chọn giọng, cách đọc, Tạo / Dừng voice
 
 - Cho phép chọn giọng và cách đọc, giữ nguyên lựa chọn; không tự chuyển về Tự nhiên. Hiện giải thích khi bộ máy chưa hỗ trợ cách đọc đã chọn. Lựa chọn giao diện không tự bổ sung khả năng cảm xúc cho mô hình.

@@ -21,7 +21,7 @@ async def lifespan(app):
     yield
     await voice_jobs.shutdown()
 
-app = FastAPI(title='Hmong Studio', version='0.3.1', lifespan=lifespan)
+app = FastAPI(title='Hmong Studio', version='0.3.2', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 
@@ -31,6 +31,7 @@ class Speech(BaseModel):
     voice: str = Field(default='model-default', max_length=80)
     emotion: Literal['neutral', 'storytelling', 'warm', 'cheerful', 'sad', 'review', 'advertising', 'news', 'meditation'] = 'neutral'
     speed: float = Field(default=1, ge=0.5, le=2)
+    reference_text: str = Field(default='', max_length=2000)
 
 
 @app.get('/')
@@ -68,7 +69,7 @@ def voices():
 async def speech(payload: Speech):
     if not payload.text.strip():
         raise HTTPException(422, 'Nhập lời đọc trước khi tạo giọng.')
-    if payload.voice.startswith('custom-'):
+    if payload.voice.startswith('custom-') or (payload.voice in {'hmong-white-female', 'hmong-white-male'} and os.getenv('HMONG_CLONE_URL')):
         return await clone_speech(payload)
     if payload.voice not in {'model-default', 'hmong-white-female', 'hmong-white-male'}:
         raise HTTPException(422, 'Giọng không hợp lệ.')
@@ -179,7 +180,14 @@ def remove_clone(voice_id: str):
 
 
 async def clone_speech(payload):
-    metadata, path = clone_store.get(payload.voice)
+    builtin = payload.voice in {'hmong-white-female', 'hmong-white-male'}
+    if builtin:
+        path = BASE / 'static' / 'voices' / (payload.voice + '.mp3')
+        metadata = {'transcript': payload.reference_text.strip()}
+        if not metadata['transcript']:
+            raise HTTPException(422, 'Nhập bản chép đúng lời trong mẫu nam/nữ đã chọn. Không dùng kịch bản mới làm bản chép mẫu.')
+    else:
+        metadata, path = clone_store.get(payload.voice)
     url = os.getenv('HMONG_CLONE_URL', '')
     if not url:
         raise HTTPException(503, 'Đã lưu mẫu giọng. Chưa có bộ máy nhân bản Hmong Trắng; mẫu âm thanh không tự trở thành mô hình AI.')
@@ -199,7 +207,7 @@ async def clone_speech(payload):
             with path.open('rb') as sample:
                 async with client.stream('POST', url, headers=headers,
                     data={'payload': json.dumps({**payload.model_dump(), 'reference_text': metadata['transcript']}, ensure_ascii=False)},
-                    files={'reference_audio': ('reference.wav', sample, 'audio/wav')}) as result:
+                    files={'reference_audio': (path.name, sample, 'audio/mpeg' if builtin else 'audio/wav')}) as result:
                     if result.status_code != 200:
                         raise HTTPException(502, f'Dịch vụ nhân bản trả mã {result.status_code}.')
                     content_type = result.headers.get('content-type', '').split(';')[0]

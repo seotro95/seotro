@@ -1,4 +1,4 @@
-HMONG STUDIO 0.3.1
+HMONG STUDIO 0.3.2
 
 Giai nen, cai Python 3.10-3.12 va FFmpeg trong PATH, chay start.bat.
 Them mau giong 3-60 giay va ban chep dung loi trong muc Giong cua toi.
@@ -9,3 +9,6 @@ Xem README.md de ket noi adapter nhan ban thuc su.
 
 Ban 0.3.1: chon giong/cach doc, nut Tao voice va Dung.
 Giai nen vao thu muc moi, chay start.bat va Ctrl+F5 trong trinh duyet.
+
+Hai mau nam/nu cua ban da co san. Chon giong de nghe dung mau.
+Can bo may nhan ban va ban chep dung loi trong mau de doc loi moi.

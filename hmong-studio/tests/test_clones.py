@@ -84,3 +84,25 @@ def test_remote_failure_is_not_success(client,monkeypatch):
     real_client=httpx.AsyncClient
     monkeypatch.setattr(app.httpx,'AsyncClient',lambda **kw:real_client(transport=httpx.MockTransport(lambda r:httpx.Response(200,json={'error':'not audio'})),**kw))
     assert client.post('/api/speech',json={'text':'Nyob zoo','dialect':'mww','voice':voice['id']}).status_code==502
+
+
+@pytest.mark.parametrize('voice',['hmong-white-female','hmong-white-male'])
+def test_builtin_sends_exact_uploaded_mp3(client,monkeypatch,voice):
+    monkeypatch.setenv('HMONG_CLONE_URL','https://clone.example/speech')
+    monkeypatch.setenv('HMONG_CLONE_LANGUAGES','mww')
+    real_client=httpx.AsyncClient
+    original=(app.BASE/'static'/'voices'/(voice+'.mp3')).read_bytes()
+    transcript='Kuv hais lus Hmoob.'
+    def handler(request):
+        body=request.read()
+        assert original in body
+        assert b'audio/mpeg' in body
+        assert voice.encode() in body
+        assert transcript.encode() in body
+        return httpx.Response(200,content=sample(),headers={'Content-Type':'audio/wav'})
+    monkeypatch.setattr(app.httpx,'AsyncClient',lambda **kw:real_client(transport=httpx.MockTransport(handler),**kw))
+    payload={'text':'Nyob zoo','dialect':'mww','voice':voice}
+    assert client.post('/api/speech',json=payload).status_code==422
+    response=client.post('/api/speech',json={**payload,'reference_text':transcript})
+    assert response.status_code==200,response.text
+    assert response.content[:4]==b'RIFF'

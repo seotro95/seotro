@@ -5,17 +5,27 @@ let buffer = null, audioURL = null, recorder = null, stream = null, context = nu
 let projects = [];
 let generationBusy = false, transcriptionBusy = false;
 try { projects = JSON.parse(localStorage.getItem('hmong-projects') || '[]'); if (!Array.isArray(projects)) projects = []; } catch { notify('Không đọc được dữ liệu cũ. Bạn có thể nhập lại dự án JSON.'); }
-function snapshot() { return { version: 1, title: $('title').value, text: $('text').value, dialect: $('dialect').value, voice: $('voice').value, emotion: $('emotion').value, speed: Number($('speed').value) }; }
+function snapshot() { return { version: 1, title: $('title').value, text: $('text').value, dialect: $('dialect').value, voice: $('voice').value, emotion: $('emotion').value, speed: Number($('speed').value), reference_text: $('presetTranscript').value }; }
 function applyProject(p) {
-  if (!p || p.version !== 1 || typeof p.text !== 'string' || p.text.length > 10000 || typeof p.title !== 'string' || p.title.length > 120 || !['mww','vi','en'].includes(p.dialect) || (p.voice !== undefined && !['model-default','hmong-white-female','hmong-white-male'].includes(p.voice) && !/^custom-[a-f0-9]{32}$/.test(p.voice)) || (p.emotion !== undefined && !['neutral','storytelling','warm','cheerful','sad','review','advertising','news','meditation'].includes(p.emotion)) || !Number.isFinite(p.speed) || p.speed < .5 || p.speed > 2) throw Error('Dự án không hợp lệ.');
+  if (!p || p.version !== 1 || typeof p.text !== 'string' || p.text.length > 10000 || typeof p.title !== 'string' || p.title.length > 120 || !['mww','vi','en'].includes(p.dialect) || (p.voice !== undefined && !['model-default','hmong-white-female','hmong-white-male'].includes(p.voice) && !/^custom-[a-f0-9]{32}$/.test(p.voice)) || (p.emotion !== undefined && !['neutral','storytelling','warm','cheerful','sad','review','advertising','news','meditation'].includes(p.emotion)) || (p.reference_text !== undefined && (typeof p.reference_text !== 'string' || p.reference_text.length>2000)) || !Number.isFinite(p.speed) || p.speed < .5 || p.speed > 2) throw Error('Dự án không hợp lệ.');
   if(p.voice?.startsWith('custom-') && ![...$('voice').options].some(o=>o.value===p.voice))throw Error('Mẫu giọng trong dự án không còn trên máy này. Thêm lại mẫu hoặc chọn giọng khác.');
-  $('title').value = p.title; $('text').value = p.text; $('dialect').value = p.dialect; $('voice').value = p.voice || 'model-default'; $('emotion').value = p.emotion || 'neutral'; updateCapabilities(); $('speed').value = p.speed; update();
+  $('title').value = p.title; $('text').value = p.text; $('dialect').value = p.dialect; $('voice').value = p.voice || 'model-default'; $('emotion').value = p.emotion || 'neutral'; syncPreset(); if(p.reference_text!==undefined)$('presetTranscript').value=p.reference_text; updateCapabilities(); $('speed').value = p.speed; update();
   buffer = null; sourceBlob = null; $('transcribe').disabled = true; $('transcript').value = ''; $('useTranscript').disabled = true; $('exportTranscript').disabled = true; $('download').disabled = true; $('player').removeAttribute('src');
   if (audioURL) URL.revokeObjectURL(audioURL); audioURL = null;
   $('wave').getContext('2d').clearRect(0,0,$('wave').width,$('wave').height); $('audioInfo').textContent = 'Chưa có bản thu';
   notify('Đã mở kịch bản. Âm thanh không được lưu trong dự án; hãy nhập bản thu riêng.');
 }
-function updateReference() { $('referencePlayer').src = '/static/voices/' + $('referenceVoice').value + '.mp3'; }
+function syncPreset(){
+  const builtin=['hmong-white-female','hmong-white-male'].includes($('voice').value);
+  $('presetTranscriptPanel').hidden=!builtin;
+  if(builtin){
+    $('referenceVoice').value=$('voice').value;
+    $('referencePlayer').src='/static/voices/'+$('voice').value+'.mp3';
+    try{$('presetTranscript').value=localStorage.getItem('hmong-reference-'+$('voice').value)||'';}catch{$('presetTranscript').value='';}
+  }
+}
+function updateReference() { $('voice').value=$('referenceVoice').value;syncPreset();updateCapabilities(); }
+$('presetTranscript').addEventListener('input',()=>{try{localStorage.setItem('hmong-reference-'+$('voice').value,$('presetTranscript').value);}catch{notify('Không lưu được bản chép trên trình duyệt. Hãy xuất dự án JSON.');}});
 $('referenceVoice').addEventListener('change', updateReference);
 function update() { $('count').textContent = `${$('text').value.length.toLocaleString('vi')} / 10.000 ký tự`; $('speedValue').value = `${Number($('speed').value).toFixed(1)}×`; }
 $('text').addEventListener('input', update); $('speed').addEventListener('input', update);
@@ -93,7 +103,7 @@ function busyControls(){
   $('generate').disabled=generationBusy;
   $('stopGenerate').disabled=!activeJob || !generationBusy;
   $('generate').textContent=generationBusy?'Đang tạo voice…':'▶ Tạo voice';
-  for(const id of ['text','dialect','voice','emotion','speed','loadExample','projectFile','textFile'])$(id).disabled=generationBusy;
+  for(const id of ['text','dialect','voice','emotion','speed','loadExample','projectFile','textFile','referenceVoice','presetTranscript'])$(id).disabled=generationBusy;
 }
 async function requestJSON(url,options){
   const r=await fetch(url,options);let data;
@@ -106,11 +116,13 @@ $('generate').onclick=async()=>{
   const p=snapshot();
   if(!p.text.trim()){notify('Nhập lời đọc trước khi tạo voice.');$('text').focus();return;}
   if(!p.voice){notify('Chọn một giọng trước khi tạo voice.');return;}
-  const custom=p.voice.startsWith('custom-');
+  const builtin=['hmong-white-female','hmong-white-male'].includes(p.voice);
+  const custom=p.voice.startsWith('custom-') || (builtin && serviceStatus?.custom_cloning);
+  if(builtin && serviceStatus?.custom_cloning && !p.reference_text.trim()){notify('Nhập bản chép đúng lời trong mẫu nam/nữ đã chọn trước khi nhân bản.');$('presetTranscript').focus();return;}
   if(serviceStatus && custom && !serviceStatus.custom_cloning){notify('Mẫu giọng đã được lưu, nhưng chưa có bộ máy nhân bản Hmong Trắng. Không thể tạo lời mới từ mẫu khi chưa có mô hình/dịch vụ phù hợp.');return;}
   generationBusy=true;busyControls();notify('Đang khởi động tạo voice…');
   try{
-    const job=await requestJSON('/api/speech/jobs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:p.text,dialect:p.dialect,voice:p.voice,emotion:p.emotion,speed:p.speed})});
+    const job=await requestJSON('/api/speech/jobs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:p.text,dialect:p.dialect,voice:p.voice,emotion:p.emotion,speed:p.speed,reference_text:p.reference_text})});
     activeJob=job.id;busyControls();
     let state=job;
     while(state.status==='running'){
@@ -133,7 +145,8 @@ window.addEventListener('beforeunload',()=>stream?.getTracks().forEach(t=>t.stop
 renderProjects();update();
 function updateCapabilities() {
   if(!serviceStatus)return;
-  const s=serviceStatus, custom=$('voice').value.startsWith('custom-');
+  const s=serviceStatus, custom=$('voice').value.startsWith('custom-') || (s.custom_cloning && ['hmong-white-female','hmong-white-male'].includes($('voice').value));
+  $('presetTranscriptPanel').hidden=!['hmong-white-female','hmong-white-male'].includes($('voice').value);
   // Preserve the user's selections. Unsupported styles are explained, never silently reset.
   for(const option of $('voice').options)option.disabled=false;
   for(const option of $('emotion').options)option.disabled=false;
@@ -162,7 +175,7 @@ fetch('/api/status').then(r=>{if(!r.ok)throw Error();return r.json();}).then(s=>
 
 $('loadExample').onclick = async () => { try { if($('text').value && !confirm('Thay lời đang sửa bằng kịch bản Hmong mẫu?'))return; const r=await fetch('/static/example-hmong.txt');if(!r.ok)throw Error('Không tải được kịch bản mẫu.');$('text').value=await r.text();$('dialect').value='mww';update();updateCapabilities();notify('Đã nạp lời Hmong do bạn cung cấp. Lời này không phải bản chép của hai mẫu giọng.'); }catch(e){notify(e.message);} };
 
-$('voice').addEventListener('change', updateCapabilities);
+$('voice').addEventListener('change',()=>{syncPreset();updateCapabilities();});
 let clonePreviewURL=null;
 $('cloneFile').onchange=()=>{if(clonePreviewURL)URL.revokeObjectURL(clonePreviewURL);const file=$('cloneFile').files[0];$('clonePreview').hidden=!file;if(file){clonePreviewURL=URL.createObjectURL(file);$('clonePreview').src=clonePreviewURL;}};
 async function refreshClones(){
@@ -198,3 +211,5 @@ $('addClone').onclick=async()=>{
 refreshClones().catch(e=>notify(e.message));
 
 $('emotion').addEventListener('change',updateCapabilities);
+
+syncPreset();
