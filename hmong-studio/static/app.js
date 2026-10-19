@@ -69,20 +69,66 @@ async function loadAudio(blob) {
   notify('Âm thanh đã sẵn sàng. Nghe kiểm tra, chọn khoảng cắt rồi xuất WAV.');
 }
 $('audioFile').onchange = () => readFile($('audioFile'),50*1024*1024, loadAudio);
-$('record').onclick = async () => {
-  if(recorder?.state === 'recording') { recorder.stop(); return; }
-  if(!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) { notify('Trình duyệt không hỗ trợ thu micro. Dùng HTTPS/localhost hoặc nhập tệp âm thanh.'); return; }
-  $('record').disabled = true;
-  try {
-    stream = await navigator.mediaDevices.getUserMedia({audio:true}); const chunks=[]; let bytes=0;
-    recorder = new MediaRecorder(stream);
-    recorder.ondataavailable = e => { if(e.data.size) { chunks.push(e.data); bytes+=e.data.size; if(bytes >= 45*1024*1024 && recorder.state==='recording') recorder.stop(); } };
-    const timer = setTimeout(() => { if(recorder.state==='recording') recorder.stop(); }, 10*60*1000);
-    const cleanup = () => { clearTimeout(timer); stream?.getTracks().forEach(t=>t.stop()); $('record').textContent='● Bắt đầu thu'; $('record').disabled=false; };
-    recorder.onstop = async () => { cleanup(); try { await loadAudio(new Blob(chunks,{type:recorder.mimeType})); } catch { notify('Không giải mã được bản thu. Thử nhập tệp WAV.'); } };
-    recorder.onerror = () => { cleanup(); notify('Thu âm gặp lỗi. Kiểm tra micro và thử lại.'); };
-    recorder.start(1000); $('record').textContent='■ Dừng thu'; notify('Đang thu micro… Tự dừng sau 10 phút hoặc khi gần 50 MB.');
-  } catch { stream?.getTracks().forEach(t=>t.stop()); notify('Không mở được micro. Kiểm tra quyền truy cập micro của trình duyệt.'); } finally { $('record').disabled=false; }
+let microphoneAttempt=0;
+function microphoneMessage(message){$('microphoneStatus').textContent=message;}
+function microphoneError(error){
+  if(!window.isSecureContext)return 'Trình duyệt chặn micro trên kết nối HTTP này. Trên máy chạy Studio, mở http://127.0.0.1:8090; truy cập từ máy khác cần HTTPS. Bạn vẫn có thể dùng hai mẫu nam/nữ hoặc nhập tệp.';
+  const messages={
+    NotAllowedError:'Micro chưa được cấp quyền. Trong Chrome/Edge: mở quyền trang ở bên trái thanh địa chỉ, cho phép Micro rồi thử lại. Trong Windows: Cài đặt → Quyền riêng tư và bảo mật → Micro, cho phép ứng dụng máy tính truy cập.',
+    PermissionDeniedError:'Quyền micro đã bị từ chối. Cho phép Micro trong quyền trang của trình duyệt và cài đặt quyền riêng tư Windows rồi thử lại.',
+    NotFoundError:'Không tìm thấy micro. Cắm micro hoặc chọn đúng thiết bị đầu vào trong Cài đặt âm thanh Windows. Hai mẫu nam/nữ có sẵn vẫn dùng được.',
+    DevicesNotFoundError:'Không tìm thấy thiết bị micro. Kiểm tra kết nối micro hoặc dùng tệp âm thanh có sẵn.',
+    NotReadableError:'Không đọc được micro. Micro có thể đang được ứng dụng khác sử dụng hoặc bị Windows chặn. Đóng ứng dụng đang thu âm, kiểm tra thiết bị và thử lại.',
+    TrackStartError:'Không khởi động được micro. Đóng ứng dụng đang dùng micro và kiểm tra thiết bị trong Windows.',
+    SecurityError:'Trình duyệt hoặc chính sách máy đang chặn micro. Kiểm tra quyền truy cập của trang; có thể dùng mẫu nam/nữ mà không cần micro.',
+    AbortError:'Việc mở micro bị gián đoạn. Kiểm tra thiết bị và thử lại.',
+    NotSupportedError:'Trình duyệt không hỗ trợ định dạng thu âm này. Thử Chrome/Edge mới hoặc nhập tệp WAV/MP3.'
+  };
+  return messages[error?.name] || 'Không khởi động được bộ thu âm ('+(error?.name||'lỗi không xác định')+'). Thử Chrome/Edge mới hoặc dùng Nhập âm thanh. Hai mẫu nam/nữ không cần micro.';
+}
+$('skipMicrophone').onclick=()=>{
+  microphoneAttempt++;
+  if(recorder?.state==='recording')recorder.stop();
+  stream?.getTracks().forEach(track=>track.stop());stream=null;recorder=null;
+  $('record').disabled=false;$('record').textContent='● Thu mẫu mới (tùy chọn)';$('audioFile').disabled=false;
+  microphoneMessage('Đã bỏ qua micro. Chọn giọng nam/nữ có sẵn hoặc nhập tệp âm thanh. Không cần thu lại mẫu.');
+};
+$('record').onclick=async()=>{
+  if(recorder?.state==='recording'){
+    $('record').disabled=true;$('record').textContent='Đang hoàn tất bản thu…';recorder.stop();return;
+  }
+  if(!window.isSecureContext){microphoneMessage(microphoneError());return;}
+  if(!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder){microphoneMessage('Trình duyệt chưa hỗ trợ thu micro. Dùng Chrome/Edge mới hoặc nhập tệp âm thanh; hai mẫu nam/nữ không cần micro.');return;}
+  const attempt=++microphoneAttempt;
+  let capture=null, localRecorder=null, timer=null, promptTimer=null, failed=false;
+  const release=()=>{clearTimeout(timer);clearTimeout(promptTimer);capture?.getTracks().forEach(track=>track.stop());if(stream===capture)stream=null;if(recorder===localRecorder)recorder=null;};
+  const ready=()=>{if(attempt===microphoneAttempt){$('record').disabled=false;$('record').textContent='● Thu mẫu mới (tùy chọn)';$('audioFile').disabled=false;}};
+  $('record').disabled=true;$('audioFile').disabled=true;$('record').textContent='Đang chờ quyền micro…';
+  microphoneMessage('Chọn Cho phép trong hộp thoại micro của trình duyệt. Nếu chỉ dùng mẫu nam/nữ, bấm Không dùng micro.');
+  promptTimer=setTimeout(()=>{if(attempt===microphoneAttempt)microphoneMessage('Trình duyệt chưa trả lời yêu cầu micro. Kiểm tra hộp thoại quyền ở thanh địa chỉ hoặc bấm Không dùng micro để tiếp tục với mẫu có sẵn.');},15000);
+  try{
+    capture=await navigator.mediaDevices.getUserMedia({audio:true});clearTimeout(promptTimer);
+    if(attempt!==microphoneAttempt){release();return;}
+    stream=capture;const chunks=[];let bytes=0;
+    const mime=['audio/webm;codecs=opus','audio/webm','audio/mp4'].find(type=>MediaRecorder.isTypeSupported?.(type));
+    localRecorder=mime?new MediaRecorder(capture,{mimeType:mime}):new MediaRecorder(capture);recorder=localRecorder;
+    localRecorder.ondataavailable=e=>{if(e.data.size){chunks.push(e.data);bytes+=e.data.size;if(bytes>=45*1024*1024 && localRecorder.state==='recording')localRecorder.stop();}};
+    localRecorder.onstop=async()=>{
+      release();if(attempt!==microphoneAttempt || failed)return;
+      $('record').disabled=true;microphoneMessage('Đang giải mã bản thu…');
+      try{
+        if(!bytes)throw Error('empty');
+        await loadAudio(new Blob(chunks,{type:localRecorder.mimeType}));
+        if(attempt===microphoneAttempt){$('audio').open=true;microphoneMessage('Đã thu xong. Nghe kiểm tra và tải WAV trong Biên tập âm thanh.');}
+      }catch{if(attempt===microphoneAttempt)microphoneMessage('Không giải mã được bản thu. Thử thu lại bằng Chrome/Edge hoặc nhập tệp WAV.');}
+      finally{ready();}
+    };
+    localRecorder.onerror=e=>{failed=true;release();ready();if(attempt===microphoneAttempt)microphoneMessage(microphoneError(e.error));};
+    localRecorder.start(1000);
+    timer=setTimeout(()=>{if(localRecorder.state==='recording')localRecorder.stop();},10*60*1000);
+    $('record').disabled=false;$('record').textContent='■ Dừng thu micro';
+    microphoneMessage('Đang thu micro… Bấm Dừng thu micro để hoàn tất. Tự dừng sau 10 phút hoặc khi gần 50 MB.');
+  }catch(error){release();ready();if(attempt===microphoneAttempt)microphoneMessage(microphoneError(error));}
 };
 $('download').onclick = () => {
   if(!buffer) return;
@@ -154,7 +200,7 @@ function updateCapabilities() {
   $('styleDescription').textContent=(readingStyles[$('emotion').value]||'')+(!supported?' Bộ máy hiện tại chưa hỗ trợ kiểu này; cần bộ máy hỗ trợ để tạo đúng cách đọc.':'');
   $('capability').textContent=custom
     ? (s.custom_cloning?'Đã chọn mẫu giọng riêng. Mẫu và bản chép được dùng khi tạo voice qua bộ máy nhân bản.':'Đã chọn mẫu giọng riêng. Chưa có bộ máy nhân bản Hmong Trắng nên chưa thể tạo lời đọc mới.')
-    : (s.remote_tts?'Đang dùng dịch vụ đọc đã cấu hình.':'Đang dùng giọng gốc cục bộ. '+(!s.local.dependencies?'Chưa cài thư viện AI. ':'')+(!$('dialect').value||!s.local.tts_models[$('dialect').value]?'Chưa có mô hình cho ngôn ngữ đã chọn.':''));
+    : (['hmong-white-female','hmong-white-male'].includes($('voice').value) && !s.remote_tts?'Đã chọn mẫu nam/nữ của bạn, không cần micro. Chưa có bộ máy nhân bản Hmong Trắng để đọc lời mới.':s.remote_tts?'Đang dùng dịch vụ đọc đã cấu hình.':'Đang dùng giọng gốc cục bộ. '+(!s.local.dependencies?'Chưa cài thư viện AI. ':'')+(!$('dialect').value||!s.local.tts_models[$('dialect').value]?'Chưa có mô hình cho ngôn ngữ đã chọn.':''));
   $('cloneState').textContent=s.custom_cloning?'Adapter đã cấu hình · cần kiểm chứng phát âm thực tế':'Chưa có bộ máy nhân bản Hmong Trắng';
   busyControls();
 }
