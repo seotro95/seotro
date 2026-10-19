@@ -389,6 +389,7 @@ def serve():
         if path.parent != (DATA / 'jobs').resolve() or path.suffix != '.json':
             continue
         job = json.loads(path.read_text(encoding='utf-8'))
+        (DATA/'warm-model.json').unlink(missing_ok=True)
         work = DATA / 'parts' / job['id']
         work.mkdir(parents=True, exist_ok=True)
         code = 0
@@ -401,6 +402,8 @@ def serve():
                         calibrate(job,render,reset_nano_models,DATA)
                     else:
                         render(job)
+                    result=json.loads((work/'result.json').read_text(encoding='utf-8'))
+                    write_state(DATA/'warm-model.json',{'pid':os.getpid(),**result['execution_settings']})
             except Exception as exc:
                 user_error = voice_error(exc)
                 code = 1

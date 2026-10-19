@@ -32,6 +32,22 @@ def test_nano_calibration_never_overrides_turbo_memory_budget(tmp_path):
     assert turbo['fast']['nano_parallel']==2
 
 
+def test_resident_turbo_team_is_not_memory_budgeted_twice(tmp_path):
+    import os
+    saved={'logical_cores':os.cpu_count(),'profiles':{'vieneu:fast':{
+        'nano_steps':4,'precision':'fp32','selected':{'settings':{'nano_parallel':28,'nano_threads':1}}}}}
+    (tmp_path/'calibration.json').write_text(json.dumps(saved))
+    # Models consume RAM after calibration, so the free-RAM-only budget falls.
+    defaults=resource_presets(56,28,60,'vieneu')
+    assert defaults['fast']['nano_parallel']<28
+    assert calibration.read_saved_presets(tmp_path,defaults,'vieneu')['fast']['nano_parallel']<28
+    resident={'engine':'vieneu','workers':28,'threads':1,'precision':'fp32'}
+    warm=calibration.read_saved_presets(tmp_path,resource_presets(56,28,60,'vieneu'),'vieneu',resident)
+    assert warm['fast']['nano_parallel']==28
+    cold=calibration.read_saved_presets(tmp_path,resource_presets(56,28,60,'vieneu'),'vieneu',{**resident,'precision':'int8'})
+    assert cold['fast']['nano_parallel']<28
+
+
 @pytest.mark.parametrize('engine',['vieneu_nano','vieneu'])
 def test_calibration_measures_selects_saves_and_preserves_user_files(tmp_path,monkeypatch,engine):
     for folder in ('audio','parts'): (tmp_path/folder).mkdir()

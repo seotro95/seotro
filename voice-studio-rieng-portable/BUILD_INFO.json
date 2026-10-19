@@ -10,13 +10,13 @@
   "bundled_runtime": false,
   "bundled_model_weights": false,
   "validation": {
-    "backend_and_bootstrap_tests": "82 passed; 8 subtests on Linux",
+    "backend_and_bootstrap_tests": "83 passed; 8 subtests on Linux",
     "javascript_syntax": "passed; v1.6 mocked Playwright Turbo/Nano budgets, comparison, calibration, personal voice/script preservation, actual execution metadata and mobile390px passed",
-    "actual_server_smoke": "v1.6 Turbo FP32 HTTP calibration first real trial passed; full integration report measured separately before release validation",
+    "actual_server_smoke": "v1.6 full real Turbo FP32 HTTP calibration/selected4x1/warm next job/exports/temp cleanup passed on Linux; native build checks gate release",
     "uploaded_srt_full_timeline": "2919 cues / 3118 segments; all cue starts sample-exact, original text and timing preserved; 129242400 final WAV frames at24kHz =5385.100s; deterministic synthetic audio only",
     "reported_failure_regression": "1.410s into0.900s auto passes, strict rejects; >2x preserves two test tone pitches and tail",
     "actual_windows_execution": "pending native1.6build; see portable BUILD_INFO after build",
-    "actual_ai_synthesis": "Turbo Mai Anh FP32 Linux4CPU inference: baseline4ORT/4BLAS warm1.994x;4ORT/1BLAS2.270x;2workersx1ORT/1BLAS aggregate2.844x. Not an end-to-end or user-PC/30x claim."
+    "actual_ai_synthesis": "Turbo Mai Anh FP32 Linux4CPU full pipeline after tuning:74.16s speech/17.081s processing=4.34x; inference-only baseline4ORT/4BLAS1.994x vs2workersx1ORT/BLAS1 2.844x; not a user-PC/30x claim"
   },
   "max_audio_minutes": 1440,
   "max_import_bytes": 8388608,

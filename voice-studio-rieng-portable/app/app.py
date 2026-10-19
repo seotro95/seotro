@@ -186,7 +186,13 @@ def config():
 
 def effective_rendering_presets(engine='vieneu_nano'):
     from calibration import read_saved_presets
-    return read_saved_presets(DATA,rendering_presets(engine),engine)
+    resident=None
+    if warm_worker is not None and warm_worker.poll() is None:
+        try:
+            state=read_json(DATA/'warm-model.json')
+            if state.get('pid')==warm_worker.pid:resident=state
+        except (OSError,ValueError):pass
+    return read_saved_presets(DATA,rendering_presets(engine),engine,resident)
 
 
 def _config_values():

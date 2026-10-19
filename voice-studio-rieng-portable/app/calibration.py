@@ -31,7 +31,7 @@ def sample_text(workers):
     return '\n'.join(SAMPLES[i%len(SAMPLES)]+f' Đây là đoạn đo số {i+1}.' for i in range(count))
 
 
-def read_saved_presets(data,defaults,engine='vieneu_nano'):
+def read_saved_presets(data,defaults,engine='vieneu_nano',resident=None):
     try:
         saved=json.loads((Path(data)/'calibration.json').read_text(encoding='utf-8'))
         if saved.get('logical_cores') != os.cpu_count():return defaults
@@ -46,7 +46,13 @@ def read_saved_presets(data,defaults,engine='vieneu_nano'):
             chosen=record['selected']['settings']
             if record['nano_steps'] != defaults[mode]['nano_steps']:continue
             workers,threads=chosen['nano_parallel'],chosen['nano_threads']
-            if isinstance(workers,int) and isinstance(threads,int) and 1<=workers<=defaults[mode]['nano_parallel'] and 1<=threads<=8:
+            # Available RAM already excludes resident models. Reuse a verified
+            # loaded team instead of budgeting its memory for a second time.
+            loaded=bool(resident and resident.get('engine')==engine and resident.get('workers',0)>=workers
+                        and resident.get('threads')==threads and
+                        (resident.get('precision')==record.get('precision') if engine=='vieneu'
+                         else resident.get('nano_steps')==record['nano_steps']))
+            if isinstance(workers,int) and isinstance(threads,int) and 1<=workers<=32 and (workers<=defaults[mode]['nano_parallel'] or loaded) and 1<=threads<=8:
                 defaults[mode].update(nano_parallel=workers,nano_threads=threads)
     except (OSError,ValueError,KeyError,TypeError):
         pass
@@ -110,6 +116,7 @@ def calibrate(job,render,close_pool,data=None):
         for extension in ('wav','srt'):
             shutil.copyfile(data/'audio'/f'{best["id"]}.{extension}',data/'audio'/f'{job["id"]}.{extension}')
         report={'selected':selected,'candidates':records,'nano_steps':job['nano_steps'],'engine':engine,
+                'precision':('int8' if job.get('quality')=='fast' else 'fp32') if engine=='vieneu' else None,
                 'logical_cores':os.cpu_count(),'estimate_only':True,'target_30x_met_on_sample':selected['warm']['target_30x_met_on_sample'],
                 'total_calibration_seconds':round(time.perf_counter()-started,3)}
         saved={'logical_cores':os.cpu_count(),'profiles':{}}
