@@ -1,3 +1,54 @@
+# Bản sửa 0.3.1 — chọn giọng, cách đọc, Tạo / Dừng voice
+
+- Cho phép chọn giọng và cách đọc, giữ nguyên lựa chọn; không tự chuyển về Tự nhiên. Hiện giải thích khi bộ máy chưa hỗ trợ cách đọc đã chọn. Lựa chọn giao diện không tự bổ sung khả năng cảm xúc cho mô hình.
+- Nút **Tạo voice** gửi đúng giọng, cách đọc, tốc độ và kịch bản. Hiển thị trạng thái đang tạo; mở trình nghe và tải WAV khi hoàn tất.
+- Nút **Dừng** chấm dứt worker tạo giọng riêng, kể cả suy luận cục bộ hoặc chờ dịch vụ HTTPS. Dừng phía studio đóng kết nối; một nhà cung cấp từ xa có thể vẫn tiếp tục xử lý/tính phí nếu họ không hỗ trợ hủy phía máy chủ.
+- Một tác vụ chạy mỗi lần; có thể tạo lại sau khi dừng. Bản thu trước không bị xóa khi hủy/thất bại. Tác vụ tạm mất khi tắt máy chủ; tải âm thanh trước khi đóng. Giữ tối đa 10 kết quả tạm gần nhất.
+- Vẫn chưa kèm mô hình nhân bản Hmong Trắng. Mẫu đã lưu không phải mô hình. Không cam kết đọc chuẩn hoặc có cảm xúc khi chưa có bộ máy phù hợp và kiểm chứng bằng người bản ngữ.
+
+Kiểm tra: 21 bài Python đạt trên Linux; có worker thật để kiểm tra tạo kết quả, dừng tiến trình, tạo lại và báo thiếu mô hình. Chromium kiểm tra chọn giọng/cách đọc, Tạo/Dừng/tạo lại, phát audio và mobile (API tạo giọng mô phỏng). Chưa thử suy luận Hmong hoặc Windows thật.
+
+Giải nén vào thư mục mới; nếu giữ mẫu giọng cũ, sao chép thư mục `.data` từ bản cũ khi cả hai bản đã tắt. Chạy `start.bat`, mở lại trang và nhấn Ctrl+F5 để tải JavaScript mới.
+
+# Hmong Studio 0.3 — mẫu giọng riêng & giao diện gọn
+
+Bản nâng cấp từ ZIP người dùng cung cấp. Giữ Hmong Trắng (Hmoob Dawb) làm mặc định. Đây chưa phải bộ máy nhân bản Hmong hoàn chỉnh: không kèm mô hình TTS/clone Hmong đã kiểm chứng. Không thay bằng giọng Việt, không giả lập nhân bản bằng đổi cao độ.
+
+## Chạy ứng dụng
+
+Windows: cài Python 3.10–3.12, FFmpeg (gồm ffprobe) trong PATH, giải nén rồi chạy `start.bat`. Linux/macOS: tạo môi trường Python, `python -m pip install -r requirements.txt`, chạy `python -m uvicorn app:app --host 127.0.0.1 --port 8090 --no-access-log`. Chỉ mở trên máy của bạn; chưa có đăng nhập.
+
+## Có gì mới
+
+- Thư viện mẫu giọng riêng: thêm, nghe lại, chọn và xóa. Mẫu 3–60 giây / tối đa 20 MB, tên và bản chép chính xác, có xác nhận quyền sử dụng. FFmpeg giải mã và chuẩn hóa WAV mono 24 kHz; từ chối mẫu lỗi, quá ngắn/dài hoặc gần im lặng.
+- Kết nối nhân bản bằng mẫu thực: gửi reference WAV cùng bản chép, lời mới, tiếng Hmong Trắng, tốc độ và cách đọc tới adapter HTTPS đã cấu hình. Lưu mẫu không huấn luyện mô hình.
+- Thêm lựa chọn review, quảng cáo, tin tức, thư giãn, bên cạnh kể chuyện, ấm áp, vui vẻ, buồn, tự nhiên. Chỉ bật lựa chọn dịch vụ xác nhận hỗ trợ; chưa kiểm chứng chất lượng từng kiểu trên mô hình thật.
+- Giao diện tím nhạt, hai cột, tương thích điện thoại. Thu gọn mẫu có sẵn, thu âm, biên tập, nhận dạng và quản lý dự án để tập trung soạn lời.
+- Nút tạo giọng không bật khi thiếu bộ máy; không báo hoàn tất nếu dịch vụ trả lỗi hoặc không trả audio.
+
+## Kết nối bộ máy nhân bản
+
+Chưa có nhà cung cấp hoặc mô hình Hmong Trắng được xác minh trong bản này. Không chỉ đặt các biến dưới đây để coi là AI đã hoạt động; cần triển khai adapter có suy luận thật và kiểm chứng tiếng Hmong Trắng.
+
+- `HMONG_CLONE_URL`: URL HTTPS của adapter (không phải đường dẫn tùy ý của một nhà cung cấp).
+- `HMONG_CLONE_LANGUAGES=mww`: chỉ đặt sau khi xác nhận đúng Hmong Trắng.
+- `HMONG_CLONE_STYLES`: danh sách kiểu thực sự được hỗ trợ, ngăn bằng dấu phẩy, ví dụ `neutral,storytelling,review`. Các mã khác: `warm,cheerful,sad,advertising,news,meditation`.
+- `HMONG_CLONE_TOKEN`: tùy chọn, đặt an toàn trong môi trường máy chủ; không ghi khóa vào source hoặc gửi trong chat.
+
+Adapter nhận POST multipart: `reference_audio` là WAV; trường `payload` là JSON gồm `text`, `dialect=mww`, `voice`, `emotion`, `speed`, `reference_text`. Adapter phải thực sự dùng mẫu và bản chép để nhân bản, ánh xạ đúng cách đọc. Trả bytes audio với Content-Type `audio/wav`, `audio/x-wav`, `audio/mpeg` hoặc `audio/ogg`, tối đa 50 MB. Không theo chuyển hướng. Mẫu chỉ được gửi khi bấm tạo giọng; nội dung không có trong URL.
+
+Tham chiếu lưu tại `.data/clones` (hoặc `HMONG_STUDIO_DATA_DIR/clones`). Xóa qua giao diện xóa mẫu WAV và bản chép trên máy chủ. Dự án JSON chỉ giữ ID mẫu, không mang mẫu sang máy khác. Không đóng gói `.data` khi chia sẻ ứng dụng.
+
+## Kiểm chứng bản nâng cấp
+
+Linux Python 3.12: 18 kiểm thử đạt. Có giải mã FFmpeg thật, lưu/nghe/xóa mẫu, từ chối im lặng/độ dài sai, thiếu quyền sử dụng, thiếu bộ máy, kiểm tra hợp đồng gửi mẫu/bản chép/review bằng dịch vụ mô phỏng và từ chối phản hồi không phải audio. Chromium: desktop 1440 px, mobile 390 px, thêm/xóa mẫu qua giao diện, không tràn ngang và không lỗi JavaScript. Chưa kiểm thử Windows, chưa tạo giọng Hmong bằng mô hình thật, chưa đánh giá phát âm bằng người bản ngữ.
+
+Để đọc chuẩn Hmong Trắng cần có bộ máy đúng phương ngữ, bản mẫu/bản chép khớp và đánh giá bởi người nói bản ngữ. Giữ đúng các ký tự RPA và dấu thanh cuối âm tiết; giao diện không tự sửa chúng.
+
+---
+
+## Tài liệu bộ máy cũ (tham khảo)
+
 # Hmong Studio 0.2 — bản phát triển
 
 **Chưa hoàn thành AI Hmong Trắng.** Bản này bổ sung luồng tạo giọng và nhận dạng dùng mô hình cục bộ hoặc dịch vụ HTTPS, lựa chọn Hmong Trắng / Việt / Anh, và quản lý hai mẫu nam/nữ. Chưa có mô hình Hmong Trắng được xác minh, chưa tải được trọng số trong môi trường kiểm tra (Hugging Face bị chặn 403). Không hứa nhận dạng đúng Hmong, nhân bản hai giọng hoặc cảm xúc giống người thật.

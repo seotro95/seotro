@@ -7,7 +7,8 @@ let generationBusy = false, transcriptionBusy = false;
 try { projects = JSON.parse(localStorage.getItem('hmong-projects') || '[]'); if (!Array.isArray(projects)) projects = []; } catch { notify('Không đọc được dữ liệu cũ. Bạn có thể nhập lại dự án JSON.'); }
 function snapshot() { return { version: 1, title: $('title').value, text: $('text').value, dialect: $('dialect').value, voice: $('voice').value, emotion: $('emotion').value, speed: Number($('speed').value) }; }
 function applyProject(p) {
-  if (!p || p.version !== 1 || typeof p.text !== 'string' || p.text.length > 10000 || typeof p.title !== 'string' || p.title.length > 120 || !['mww','vi','en'].includes(p.dialect) || (p.voice !== undefined && !['model-default','hmong-white-female','hmong-white-male'].includes(p.voice)) || (p.emotion !== undefined && !['neutral','storytelling','warm','cheerful','sad'].includes(p.emotion)) || !Number.isFinite(p.speed) || p.speed < .5 || p.speed > 2) throw Error('Dự án không hợp lệ.');
+  if (!p || p.version !== 1 || typeof p.text !== 'string' || p.text.length > 10000 || typeof p.title !== 'string' || p.title.length > 120 || !['mww','vi','en'].includes(p.dialect) || (p.voice !== undefined && !['model-default','hmong-white-female','hmong-white-male'].includes(p.voice) && !/^custom-[a-f0-9]{32}$/.test(p.voice)) || (p.emotion !== undefined && !['neutral','storytelling','warm','cheerful','sad','review','advertising','news','meditation'].includes(p.emotion)) || !Number.isFinite(p.speed) || p.speed < .5 || p.speed > 2) throw Error('Dự án không hợp lệ.');
+  if(p.voice?.startsWith('custom-') && ![...$('voice').options].some(o=>o.value===p.voice))throw Error('Mẫu giọng trong dự án không còn trên máy này. Thêm lại mẫu hoặc chọn giọng khác.');
   $('title').value = p.title; $('text').value = p.text; $('dialect').value = p.dialect; $('voice').value = p.voice || 'model-default'; $('emotion').value = p.emotion || 'neutral'; updateCapabilities(); $('speed').value = p.speed; update();
   buffer = null; sourceBlob = null; $('transcribe').disabled = true; $('transcript').value = ''; $('useTranscript').disabled = true; $('exportTranscript').disabled = true; $('download').disabled = true; $('player').removeAttribute('src');
   if (audioURL) URL.revokeObjectURL(audioURL); audioURL = null;
@@ -85,22 +86,64 @@ $('download').onclick = () => {
   for(let i=a;i<b;i++)for(let c=0;c<channels;c++){const s=Math.max(-1,Math.min(1,data[c][i]*gain));view.setInt16(offset,s<0?s*32768:s*32767,true);offset+=2;}
   download(new Blob([out],{type:'audio/wav'}),'.wav'); notify('Đã xuất WAV theo khoảng cắt. Âm lượng vượt đỉnh được giới hạn để tránh tràn mẫu.');
 };
-$('generate').onclick = async () => {
-  if(!$('text').value.trim()) { notify('Nhập kịch bản Hmong trước.'); return; }
-  generationBusy=true; $('generate').disabled=true; notify('Đang tạo giọng… Lần đầu có thể cần tải mô hình.');
-  try { const p=snapshot(), r=await fetch('/api/speech',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:p.text,dialect:p.dialect,voice:p.voice,emotion:p.emotion,speed:p.speed})}); if(!r.ok) { let message='Tạo giọng thất bại.'; try {const e=await r.json();if(typeof e.detail==='string')message=e.detail;}catch{} throw Error(message); } if(JSON.stringify(p)!==JSON.stringify(snapshot()))throw Error('Lời hoặc thiết lập đã thay đổi trong lúc tạo giọng. Hãy tạo lại với bản hiện tại.'); await loadAudio(await r.blob()); } catch(e) { notify(e.message); } finally { generationBusy=false; $('generate').disabled=false; }
+let activeJob=null;
+const readingStyles={neutral:'Tự nhiên: nhịp đọc thông thường.',review:'Review: gần gũi, nhấn ý chính và tên sản phẩm.',storytelling:'Kể chuyện: ngắt nhịp theo diễn biến, biểu cảm theo nội dung.',advertising:'Quảng cáo: rõ thông điệp, năng lượng và nhấn lời kêu gọi.',news:'Tin tức: mạch lạc, phát âm rõ, nhịp ổn định.',meditation:'Thư giãn: chậm và nhẹ, nhiều khoảng nghỉ.',warm:'Ấm áp: nhẹ nhàng, gần gũi.',cheerful:'Vui vẻ: tươi sáng, nhiều năng lượng.',sad:'Buồn: trầm và chậm.'};
+function busyControls(){
+  for(const button of document.querySelectorAll('#cloneList button,#projectList button,#addClone'))button.disabled=generationBusy;
+  $('generate').disabled=generationBusy;
+  $('stopGenerate').disabled=!activeJob || !generationBusy;
+  $('generate').textContent=generationBusy?'Đang tạo voice…':'▶ Tạo voice';
+  for(const id of ['text','dialect','voice','emotion','speed','loadExample','projectFile','textFile'])$(id).disabled=generationBusy;
+}
+async function requestJSON(url,options){
+  const r=await fetch(url,options);let data;
+  try{data=await r.json();}catch{throw Error('Máy chủ trả phản hồi không hợp lệ.');}
+  if(!r.ok)throw Error(typeof data.detail==='string'?data.detail:'Không thực hiện được yêu cầu.');
+  return data;
+}
+$('generate').onclick=async()=>{
+  if(generationBusy)return;
+  const p=snapshot();
+  if(!p.text.trim()){notify('Nhập lời đọc trước khi tạo voice.');$('text').focus();return;}
+  if(!p.voice){notify('Chọn một giọng trước khi tạo voice.');return;}
+  const custom=p.voice.startsWith('custom-');
+  if(serviceStatus && custom && !serviceStatus.custom_cloning){notify('Mẫu giọng đã được lưu, nhưng chưa có bộ máy nhân bản Hmong Trắng. Không thể tạo lời mới từ mẫu khi chưa có mô hình/dịch vụ phù hợp.');return;}
+  generationBusy=true;busyControls();notify('Đang khởi động tạo voice…');
+  try{
+    const job=await requestJSON('/api/speech/jobs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:p.text,dialect:p.dialect,voice:p.voice,emotion:p.emotion,speed:p.speed})});
+    activeJob=job.id;busyControls();
+    let state=job;
+    while(state.status==='running'){
+      notify('Đang tạo voice · '+$('voice').selectedOptions[0].textContent+' · '+$('emotion').selectedOptions[0].textContent+'. Bạn có thể bấm Dừng.');
+      await new Promise(resolve=>setTimeout(resolve,400));
+      state=await requestJSON('/api/speech/jobs/'+activeJob);
+    }
+    if(state.status==='cancelled'){notify('Đã dừng tạo voice. Bản thu trước được giữ nguyên.');return;}
+    if(state.status!=='completed')throw Error(state.message);
+    const audio=await fetch('/api/speech/jobs/'+activeJob+'/audio');if(!audio.ok)throw Error('Không tải được voice vừa tạo.');
+    await loadAudio(await audio.blob());$('audio').open=true;$('audio').scrollIntoView({behavior:'smooth',block:'start'});notify('Đã tạo voice. Nghe kiểm tra hoặc tải WAV ở bên dưới.');
+  }catch(e){notify(e.message);}finally{activeJob=null;generationBusy=false;busyControls();updateCapabilities();}
+};
+$('stopGenerate').onclick=async()=>{
+  if(!activeJob)return;
+  $('stopGenerate').disabled=true;notify('Đang dừng bộ máy tạo voice…');
+  try{const state=await requestJSON('/api/speech/jobs/'+activeJob+'/stop',{method:'POST'});notify(state.message);}catch(e){notify(e.message);$('stopGenerate').disabled=false;}
 };
 window.addEventListener('beforeunload',()=>stream?.getTracks().forEach(t=>t.stop()));
 renderProjects();update();
 function updateCapabilities() {
-  if(!serviceStatus) return;
-  const s=serviceStatus;
-  for(const option of $('voice').options) option.disabled=option.value!=='model-default' && !s.cloning;
-  if($('voice').selectedOptions[0]?.disabled) $('voice').value='model-default';
-  for(const option of $('emotion').options) option.disabled=option.value!=='neutral' && !s.emotions;
-  if($('emotion').selectedOptions[0]?.disabled) $('emotion').value='neutral';
-  $('capability').textContent = (s.remote_tts ? 'Dịch vụ TTS từ xa đã cấu hình; chất lượng cần kiểm chứng.' : 'MMS cục bộ: giọng gốc, không nhân bản giọng hoặc điều khiển cảm xúc.') + ' ' + (!s.local.dependencies ? 'Chạy install_local_ai.bat để cài AI cục bộ. ' : '') + ($('dialect').value==='mww' && !s.local.tts_models.mww && !s.remote_tts ? 'Chưa có mô hình TTS Hmong Trắng được xác minh.' : '');
-  $('generate').disabled=generationBusy;
+  if(!serviceStatus)return;
+  const s=serviceStatus, custom=$('voice').value.startsWith('custom-');
+  // Preserve the user's selections. Unsupported styles are explained, never silently reset.
+  for(const option of $('voice').options)option.disabled=false;
+  for(const option of $('emotion').options)option.disabled=false;
+  const supported=custom?s.clone_styles.includes($('emotion').value):$('emotion').value==='neutral'||s.emotions;
+  $('styleDescription').textContent=(readingStyles[$('emotion').value]||'')+(!supported?' Bộ máy hiện tại chưa hỗ trợ kiểu này; cần bộ máy hỗ trợ để tạo đúng cách đọc.':'');
+  $('capability').textContent=custom
+    ? (s.custom_cloning?'Đã chọn mẫu giọng riêng. Mẫu và bản chép được dùng khi tạo voice qua bộ máy nhân bản.':'Đã chọn mẫu giọng riêng. Chưa có bộ máy nhân bản Hmong Trắng nên chưa thể tạo lời đọc mới.')
+    : (s.remote_tts?'Đang dùng dịch vụ đọc đã cấu hình.':'Đang dùng giọng gốc cục bộ. '+(!s.local.dependencies?'Chưa cài thư viện AI. ':'')+(!$('dialect').value||!s.local.tts_models[$('dialect').value]?'Chưa có mô hình cho ngôn ngữ đã chọn.':''));
+  $('cloneState').textContent=s.custom_cloning?'Adapter đã cấu hình · cần kiểm chứng phát âm thực tế':'Chưa có bộ máy nhân bản Hmong Trắng';
+  busyControls();
 }
 $('dialect').addEventListener('change',updateCapabilities);
 $('transcribe').onclick = async () => {
@@ -118,3 +161,40 @@ $('exportTranscript').onclick = () => download(new Blob([$('transcript').value],
 fetch('/api/status').then(r=>{if(!r.ok)throw Error();return r.json();}).then(s=>{serviceStatus=s;notify(s.message);updateCapabilities();}).catch(()=>notify('Không kết nối được máy chủ. Thu âm và nhập tệp vẫn dùng được.'));
 
 $('loadExample').onclick = async () => { try { if($('text').value && !confirm('Thay lời đang sửa bằng kịch bản Hmong mẫu?'))return; const r=await fetch('/static/example-hmong.txt');if(!r.ok)throw Error('Không tải được kịch bản mẫu.');$('text').value=await r.text();$('dialect').value='mww';update();updateCapabilities();notify('Đã nạp lời Hmong do bạn cung cấp. Lời này không phải bản chép của hai mẫu giọng.'); }catch(e){notify(e.message);} };
+
+$('voice').addEventListener('change', updateCapabilities);
+let clonePreviewURL=null;
+$('cloneFile').onchange=()=>{if(clonePreviewURL)URL.revokeObjectURL(clonePreviewURL);const file=$('cloneFile').files[0];$('clonePreview').hidden=!file;if(file){clonePreviewURL=URL.createObjectURL(file);$('clonePreview').src=clonePreviewURL;}};
+async function refreshClones(){
+  const r=await fetch('/api/clones'); if(!r.ok)throw Error('Không đọc được thư viện mẫu giọng.');
+  const data=await r.json(), selected=$('voice').value;
+  for(const o of [...$('voice').options])if(o.value.startsWith('custom-'))o.remove();
+  $('cloneList').replaceChildren();
+  for(const v of data.voices){
+    const option=new Option(v.name+' · Mẫu riêng',v.id);$('voice').append(option);
+    const row=document.createElement('div');row.className='project';
+    const label=document.createElement('span');label.textContent=v.name+' · '+v.duration+' giây';
+    const audio=document.createElement('audio');audio.controls=true;audio.preload='none';audio.src=v.reference;
+    const use=document.createElement('button');use.textContent='Chọn giọng';use.onclick=()=>{$('voice').value=v.id;updateCapabilities();notify('Đã chọn '+v.name+'. '+$('cloneState').textContent);};
+    const del=document.createElement('button');del.textContent='Xóa';del.onclick=async()=>{if(!confirm('Xóa vĩnh viễn mẫu giọng '+v.name+'?'))return;try{const r=await fetch('/api/clones/'+encodeURIComponent(v.id),{method:'DELETE'});if(!r.ok)throw Error('Không xóa được mẫu giọng.');await refreshClones();}catch(e){notify(e.message);}};
+    row.append(label,audio,use,del);$('cloneList').append(row);
+  }
+  if([...$('voice').options].some(o=>o.value===selected))$('voice').value=selected;
+  updateCapabilities();
+}
+$('addClone').onclick=async()=>{
+  const file=$('cloneFile').files[0], name=$('cloneName').value.trim(), transcript=$('cloneTranscript').value.trim();
+  if(!file||!name||!transcript||!$('cloneConsent').checked){notify('Chọn mẫu, nhập tên, bản chép và xác nhận quyền sử dụng.');return;}
+  if(file.size>20*1024*1024){notify('Mẫu tối đa 20 MB.');return;}
+  $('addClone').disabled=true;notify('Đang kiểm tra và lưu mẫu giọng…');
+  try{
+    const form=new FormData();form.append('name',name);form.append('transcript',transcript);form.append('consent','true');form.append('file',file);
+    const r=await fetch('/api/clones',{method:'POST',body:form});
+    const data=await r.json();if(!r.ok)throw Error(typeof data.detail==='string'?data.detail:'Không lưu được mẫu giọng.');
+    await refreshClones();$('voice').value=data.id;updateCapabilities();
+    $('cloneConsent').checked=false;notify('Đã lưu mẫu '+data.name+'. '+$('cloneState').textContent);
+  }catch(e){notify(e.message);}finally{$('addClone').disabled=false;}
+};
+refreshClones().catch(e=>notify(e.message));
+
+$('emotion').addEventListener('change',updateCapabilities);
