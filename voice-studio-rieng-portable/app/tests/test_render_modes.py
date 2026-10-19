@@ -76,3 +76,14 @@ def test_turbo_uses_its_own_resource_budget_without_changing_mai_anh(studio,monk
     job=response.json()
     assert job['engine']=='vieneu' and job['speaker']=='Mai Anh'
     assert job['nano_parallel']==6 and job['nano_threads']==2 and job['quality']=='standard'
+
+
+def test_missing_warm_model_snapshot_during_render_does_not_break_config(studio,monkeypatch):
+    from types import SimpleNamespace
+    client,data=studio
+    with monkeypatch.context() as scoped:
+        scoped.setattr(app,'warm_worker',SimpleNamespace(pid=999999,poll=lambda:None))
+        scoped.setattr(app,'system_info',lambda:{'cpu':'test'})
+        assert not (data/'warm-model.json').exists()
+        assert client.get('/api/config').status_code==200
+        assert client.get('/api/system-info').status_code==200

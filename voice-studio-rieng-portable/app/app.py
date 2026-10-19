@@ -189,7 +189,7 @@ def effective_rendering_presets(engine='vieneu_nano'):
     resident=None
     if warm_worker is not None and warm_worker.poll() is None:
         try:
-            state=read_json(DATA/'warm-model.json')
+            state=json.loads((DATA/'warm-model.json').read_text(encoding='utf-8'))
             if state.get('pid')==warm_worker.pid:resident=state
         except (OSError,ValueError):pass
     return read_saved_presets(DATA,rendering_presets(engine),engine,resident)
