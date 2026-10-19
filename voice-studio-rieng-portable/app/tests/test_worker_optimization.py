@@ -109,6 +109,24 @@ def test_turbo_constructor_uses_budgeted_threads_and_keeps_fp32(worker,monkeypat
     assert observed['voice']=='Mai Anh'
 
 
+@pytest.mark.parametrize('reused',[False,True])
+def test_resumed_checkpoints_do_not_claim_loaded_model_memory(worker,tmp_path,monkeypatch,reused):
+    import io
+    ident='f'*32
+    jobs=tmp_path/'jobs';jobs.mkdir()
+    work=tmp_path/'parts'/ident;work.mkdir(parents=True)
+    if reused:(work/'000000.wav').write_bytes(b'cached checkpoint')
+    path=jobs/(ident+'.json');path.write_text(json.dumps({'id':ident,'engine':'vieneu'}))
+    def render(job):
+        (work/'result.json').write_text(json.dumps({'execution_settings':{
+            'engine':'vieneu','workers':28,'threads':1,'precision':'fp32'}}))
+    monkeypatch.setattr(worker,'render',render)
+    monkeypatch.setattr(worker.sys,'stdin',io.StringIO(str(path)+'\n'))
+    worker.serve()
+    assert json.loads((work/'worker-done.json').read_text())['code']==0
+    assert (tmp_path/'warm-model.json').exists() is (not reused)
+
+
 @pytest.mark.parametrize('parallel_workers',[4,8,28,32])
 @pytest.mark.parametrize('engine',['vieneu_nano','vieneu'])
 def test_nano_and_turbo_pool_prefetch_is_bounded_and_model_settings_recreate_it(worker,tmp_path,monkeypatch,parallel_workers,engine):

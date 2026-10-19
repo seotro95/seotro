@@ -392,6 +392,7 @@ def serve():
         (DATA/'warm-model.json').unlink(missing_ok=True)
         work = DATA / 'parts' / job['id']
         work.mkdir(parents=True, exist_ok=True)
+        reused_checkpoints=any(work.glob('[0-9]*.wav'))
         code = 0
         user_error = None
         with (DATA / 'jobs' / (job['id'] + '.log')).open('a', encoding='utf-8') as errors:
@@ -403,7 +404,8 @@ def serve():
                     else:
                         render(job)
                     result=json.loads((work/'result.json').read_text(encoding='utf-8'))
-                    write_state(DATA/'warm-model.json',{'pid':os.getpid(),**result['execution_settings']})
+                    if not reused_checkpoints:
+                        write_state(DATA/'warm-model.json',{'pid':os.getpid(),**result['execution_settings']})
             except Exception as exc:
                 user_error = voice_error(exc)
                 code = 1
