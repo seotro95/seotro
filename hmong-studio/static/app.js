@@ -17,7 +17,7 @@ function applyProject(p) {
 }
 function syncPreset(){
   const builtin=['hmong-white-female','hmong-white-male'].includes($('voice').value);
-  $('presetTranscriptPanel').hidden=!builtin;
+  $('presetTranscriptPanel').hidden=!builtin || Boolean(serviceStatus?.local_cloning);
   if(builtin){
     $('referenceVoice').value=$('voice').value;
     $('referencePlayer').src='/static/voices/'+$('voice').value+'.mp3';
@@ -27,7 +27,7 @@ function syncPreset(){
 function updateReference() { $('voice').value=$('referenceVoice').value;syncPreset();updateCapabilities(); }
 $('presetTranscript').addEventListener('input',()=>{try{localStorage.setItem('hmong-reference-'+$('voice').value,$('presetTranscript').value);}catch{notify('Không lưu được bản chép trên trình duyệt. Hãy xuất dự án JSON.');}});
 $('referenceVoice').addEventListener('change', updateReference);
-function update() { $('count').textContent = `${$('text').value.length.toLocaleString('vi')} / 10.000 ký tự`; $('speedValue').value = `${Number($('speed').value).toFixed(1)}×`; }
+function update() { const limit=serviceStatus?.local_cloning?2000:10000; $('text').maxLength=limit; $('count').textContent = `${$('text').value.length.toLocaleString('vi')} / ${limit.toLocaleString('vi')} ký tự`; $('speedValue').value = `${Number($('speed').value).toFixed(1)}×`; }
 $('text').addEventListener('input', update); $('speed').addEventListener('input', update);
 function download(blob, ext) {
   const a = document.createElement('a'), url = URL.createObjectURL(blob);
@@ -161,10 +161,11 @@ $('generate').onclick=async()=>{
   if(generationBusy)return;
   const p=snapshot();
   if(!p.text.trim()){notify('Nhập lời đọc trước khi tạo voice.');$('text').focus();return;}
+  if(serviceStatus?.local_cloning && p.text.length>2000){notify('Chế độ cục bộ nhận tối đa 2.000 ký tự mỗi lượt. Hãy chia kịch bản thành các phần ngắn.');return;}
   if(!p.voice){notify('Chọn một giọng trước khi tạo voice.');return;}
   const builtin=['hmong-white-female','hmong-white-male'].includes(p.voice);
   const custom=p.voice.startsWith('custom-') || (builtin && serviceStatus?.custom_cloning);
-  if(builtin && serviceStatus?.custom_cloning && !p.reference_text.trim()){notify('Nhập bản chép đúng lời trong mẫu nam/nữ đã chọn trước khi nhân bản.');$('presetTranscript').focus();return;}
+  if(builtin && serviceStatus?.custom_cloning && !serviceStatus.local_cloning && !p.reference_text.trim()){notify('Nhập bản chép đúng lời trong mẫu nam/nữ đã chọn trước khi nhân bản.');$('presetTranscript').focus();return;}
   if(serviceStatus && custom && !serviceStatus.custom_cloning){notify('Mẫu giọng đã được lưu, nhưng chưa có bộ máy nhân bản Hmong Trắng. Không thể tạo lời mới từ mẫu khi chưa có mô hình/dịch vụ phù hợp.');return;}
   generationBusy=true;busyControls();notify('Đang khởi động tạo voice…');
   try{
@@ -192,17 +193,17 @@ renderProjects();update();
 function updateCapabilities() {
   if(!serviceStatus)return;
   const s=serviceStatus, custom=$('voice').value.startsWith('custom-') || (s.custom_cloning && ['hmong-white-female','hmong-white-male'].includes($('voice').value));
-  $('presetTranscriptPanel').hidden=!['hmong-white-female','hmong-white-male'].includes($('voice').value);
+  $('presetTranscriptPanel').hidden=!['hmong-white-female','hmong-white-male'].includes($('voice').value) || Boolean(s.local_cloning);
   // Preserve the user's selections. Unsupported styles are explained, never silently reset.
   for(const option of $('voice').options)option.disabled=false;
   for(const option of $('emotion').options)option.disabled=false;
   const supported=custom?s.clone_styles.includes($('emotion').value):$('emotion').value==='neutral'||s.emotions;
   $('styleDescription').textContent=(readingStyles[$('emotion').value]||'')+(!supported?' Bộ máy hiện tại chưa hỗ trợ kiểu này; cần bộ máy hỗ trợ để tạo đúng cách đọc.':'');
   $('capability').textContent=custom
-    ? (s.custom_cloning?'Đã chọn mẫu giọng riêng. Mẫu và bản chép được dùng khi tạo voice qua bộ máy nhân bản.':'Đã chọn mẫu giọng riêng. Chưa có bộ máy nhân bản Hmong Trắng nên chưa thể tạo lời đọc mới.')
+    ? (s.local_cloning?'Đang dùng CosyVoice Hmong trên máy. Dùng âm sắc mẫu đã chọn, không cần micro hoặc bản chép mẫu. Nghe kiểm tra phát âm và độ giống giọng.':s.custom_cloning?'Đã chọn mẫu giọng riêng. Mẫu và bản chép được dùng khi tạo voice qua bộ máy nhân bản.':'Đã chọn mẫu giọng riêng. '+(s.cosy?.reason||'Chưa có bộ máy nhân bản.'))
     : (['hmong-white-female','hmong-white-male'].includes($('voice').value) && !s.remote_tts?'Đã chọn mẫu nam/nữ của bạn, không cần micro. Chưa có bộ máy nhân bản Hmong Trắng để đọc lời mới.':s.remote_tts?'Đang dùng dịch vụ đọc đã cấu hình.':'Đang dùng giọng gốc cục bộ. '+(!s.local.dependencies?'Chưa cài thư viện AI. ':'')+(!$('dialect').value||!s.local.tts_models[$('dialect').value]?'Chưa có mô hình cho ngôn ngữ đã chọn.':''));
-  $('cloneState').textContent=s.custom_cloning?'Adapter đã cấu hình · cần kiểm chứng phát âm thực tế':'Chưa có bộ máy nhân bản Hmong Trắng';
-  busyControls();
+  $('cloneState').textContent=s.local_cloning?'CosyVoice Hmong cục bộ · đã tải mô hình':s.custom_cloning?'Dịch vụ nhân bản đã cấu hình':s.cosy?.reason||'Chạy install_clone_ai.bat để cài bộ máy nhân bản.';
+  update();busyControls();
 }
 $('dialect').addEventListener('change',updateCapabilities);
 $('transcribe').onclick = async () => {
@@ -243,7 +244,7 @@ async function refreshClones(){
 }
 $('addClone').onclick=async()=>{
   const file=$('cloneFile').files[0], name=$('cloneName').value.trim(), transcript=$('cloneTranscript').value.trim();
-  if(!file||!name||!transcript||!$('cloneConsent').checked){notify('Chọn mẫu, nhập tên, bản chép và xác nhận quyền sử dụng.');return;}
+  if(!file||!name||!$('cloneConsent').checked){notify('Chọn mẫu, nhập tên và xác nhận quyền sử dụng.');return;}
   if(file.size>20*1024*1024){notify('Mẫu tối đa 20 MB.');return;}
   $('addClone').disabled=true;notify('Đang kiểm tra và lưu mẫu giọng…');
   try{

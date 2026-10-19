@@ -1,149 +1,44 @@
-# Bản 0.3.3 — sửa bộ cài Windows chọn nhầm Python 3.15
+# Hmong Studio 0.4 — nhân bản giọng cục bộ
 
-Ảnh lỗi cho thấy `.venv` dùng Python 3.15. PyYAML chưa có wheel phù hợp trong lần cài đó nên pip thử biên dịch C++ rồi báo thiếu Visual C++.
+Bản này có **bộ máy CosyVoice Hmong thực sự** để tạo lời đọc mới theo mẫu nam/nữ, chạy trên máy và không cần dịch vụ trả phí hoặc API key. Cần Internet một lần để tải thư viện và khoảng **5,4 GB** mô hình. Mẫu âm thanh dùng để lấy âm sắc; không phải huấn luyện lại mô hình.
 
-Bộ cài mới kiểm tra CPython 64-bit phiên bản 3.10–3.12. Ưu tiên dùng lại `.venv` hợp lệ; nếu cần tạo mới thì ưu tiên `py -3.12`. Môi trường sai/hỏng được đổi tên thành `.venv-backup-<ngày>-<mã>` trước khi tạo mới, không xóa dữ liệu `.data` hoặc hai mẫu MP3. Môi trường hợp lệ thiếu pip được sửa bằng `ensurepip`. Cài thư viện dùng wheel có sẵn (`--only-binary=:all:`), vẫn giữ xác minh TLS.
+## Cài trên Windows
 
-**Cách xử lý máy trong ảnh:** cài thêm **Python 3.12.10 Windows installer (64-bit)** từ https://www.python.org/downloads/release/python-31210/ ; bật Python Launcher khi cài. Không cần gỡ Python 3.15. Giải nén bản 0.3.3 vào thư mục mới, chạy `start.bat`; chỉ chạy `install_local_ai.bat` khi muốn cài thư viện AI cục bộ. Nếu giữ mẫu giọng riêng, sao chép `.data` từ bản cũ khi ứng dụng đã tắt. Không sao chép `.venv` cũ sang bản mới.
+1. Cài **Python 3.12.10 Windows 64-bit** từ https://www.python.org/downloads/release/python-31210/ , bật Python Launcher. Không cần gỡ Python 3.15 đang có.
+2. Giải nén ZIP mới vào một thư mục có quyền ghi. Đóng cửa sổ Studio bản cũ. Không sao chép `.venv` từ bản cũ.
+3. Chạy **`install_clone_ai.bat`**. Chờ cài thư viện, công cụ âm thanh và tải/xác minh mô hình hoàn tất; bước tải lớn có thể mất nhiều phút tùy mạng. Nếu bị ngắt, chạy lại để tiếp tục; không đổi checksum hoặc tắt TLS.
+4. Khi bộ cài báo thành công, chạy **`start.bat`** và mở địa chỉ hiện trong cửa sổ lệnh. Nếu trình duyệt đang mở bản cũ, nhấn Ctrl+F5. Có thể tạo voice cục bộ khi không có Internet sau khi cài xong.
 
-Đã tải thành công toàn bộ wheel cho `requirements-local.txt` với mục tiêu CPython3.12/win_amd64, gồm `pyyaml-6.0.3-cp312-cp312-win_amd64.whl`; chỉ mục PyTorch CPU chính thức có wheel cho mục tiêu này. Kiểm thử Linux xác minh sao lưu môi trường cũ, tạo lại trong đường dẫn có dấu/khoảng trắng, giữ nguyên mẫu âm thanh, tái sử dụng môi trường và từ chối Python3.15 trước khi sửa tệp. Chưa thực thi BAT trên Windows thật.
+**Không dùng `install_local_ai.bat` để cài chức năng nhân bản**: file cũ đó dành cho thư viện MMS/nhận dạng, không cài mô hình clone. Bộ cài mới chọn CPython 3.10–3.12 x64, ưu tiên 3.12; giữ bản sao môi trường không tương thích thay vì xóa. Dữ liệu `.data` được giữ riêng. Nếu muốn chuyển mẫu cá nhân từ bản cũ, sao chép `.data/clones` khi cả hai bản đã tắt.
 
-Việc cài thư viện thành công chưa bổ sung mô hình nhân bản Hmong Trắng; giới hạn mô hình của các bản trước vẫn còn.
+Khuyến nghị **RAM 16 GB trở lên**, chừa ít nhất khoảng 10 GB đĩa trống cho mô hình/thư viện và dung lượng cho sản phẩm. Lượt đầu phải nạp mô hình; CPU có thể chậm. Nếu xuất hiện lỗi DLL của Torch/ONNXRuntime, kiểm tra Microsoft Visual C++2015–2022 x64 Redistributable chính thức; không cần bộ biên dịch Build Tools cho quy trình cài này. Windows launcher chưa được chạy trên Windows thật trong phiên kiểm thử này.
 
-# Bản 0.3.2 — hai mẫu nam/nữ người dùng cung cấp
+## Tạo voice
 
-Đã đối chiếu SHA-256: `hmong nữ.MP3` và `hmong nam.MP3` trùng khớp chính xác với hai tệp đi kèm tại `static/voices`. Nữ dài 15,543 giây; nam dài 14,916 giây. Không chỉnh cao độ hoặc thay giọng.
+- Chọn **Hmong Trắng**, rồi **Giọng nữ** hoặc **Giọng nam**. Hai mẫu chính xác người dùng cung cấp đã đi kèm; không cần thu lại bằng micro.
+- Nhập lời Hmong RPA muốn đọc, tối đa **2.000 ký tự/lượt** ở chế độ cục bộ. Đoạn lời mới không cần trùng với lời trong mẫu.
+- Chọn cách đọc: Tự nhiên, Review, Kể chuyện, Quảng cáo, Tin tức, Thư giãn, Ấm áp, Vui vẻ hoặc Buồn; điều chỉnh tốc độ nếu cần.
+- Bấm **Tạo voice**. Có trạng thái đang chạy; **Dừng** kết thúc worker suy luận. Có thể tạo lại sau khi dừng. Bản thu trước được giữ khi tác vụ thất bại/hủy.
+- Khi hoàn tất, nghe và xuất WAV trong **Biên tập âm thanh**. Tải âm thanh trước khi tắt máy chủ; giữ tối đa 10 kết quả tác vụ tạm gần nhất.
 
-Chọn giọng nữ/nam ở Thiết lập giọng sẽ tự chọn đúng mẫu nghe; chọn mẫu nghe cũng cập nhật giọng đọc. Giọng nữ là mặc định. Mỗi giọng có ô bản chép riêng, lưu trên trình duyệt và trong dự án JSON. Người dùng cần nhập đúng lời nói trong mẫu; ứng dụng không tự đoán tiếng Hmong.
+CosyVoice dùng tối đa 10 giây đầu mẫu, không yêu cầu bản chép mẫu trong chế độ instruct2. Có thể tải thêm mẫu riêng dài 3–60 giây / 20 MB, nhập tên và xác nhận quyền sử dụng. Ô bản chép là tùy chọn; chỉ dịch vụ ngoài theo hợp đồng cũ có thể yêu cầu nó.
 
-Khi có `HMONG_CLONE_URL`, hai giọng có sẵn đi qua cùng luồng nhân bản như mẫu riêng, gửi **chính tệp MP3 đã chọn** và bản chép cho adapter (multipart `reference_audio`, MIME `audio/mpeg`). Adapter cần nhận MP3 hoặc chuyển đổi trước suy luận. Mẫu riêng vẫn gửi WAV. Kiểm thử đối chiếu từng byte mẫu được gửi, giọng nam/nữ và bản chép riêng.
+Các cách đọc được gửi thành chỉ dẫn suy luận thực tế, không giả lập nhân bản bằng đổi cao độ. Mức độ biểu cảm, độ giống mẫu và cách phát âm cần nghe kiểm tra; chưa được đánh giá bởi người bản ngữ và không cam kết phát âm chuẩn mọi từ. Micro chỉ dùng khi muốn thu mẫu mới. Lỗi quyền micro không chặn chọn mẫu nam/nữ hoặc tạo voice.
 
-Chưa có mô hình/dịch vụ nhân bản Hmong Trắng được cấu hình hoặc kiểm chứng. Thêm mẫu không tự tạo khả năng đọc lời mới. Cách đọc/cảm xúc vẫn phụ thuộc bộ máy. Chưa xác nhận phát âm đúng bằng người bản ngữ.
+## Đã xác minh
 
-# Bản sửa 0.3.1 — chọn giọng, cách đọc, Tạo / Dừng voice
+Linux, CPU 4 threads, không GPU:
 
-- Cho phép chọn giọng và cách đọc, giữ nguyên lựa chọn; không tự chuyển về Tự nhiên. Hiện giải thích khi bộ máy chưa hỗ trợ cách đọc đã chọn. Lựa chọn giao diện không tự bổ sung khả năng cảm xúc cho mô hình.
-- Nút **Tạo voice** gửi đúng giọng, cách đọc, tốc độ và kịch bản. Hiển thị trạng thái đang tạo; mở trình nghe và tải WAV khi hoàn tất.
-- Nút **Dừng** chấm dứt worker tạo giọng riêng, kể cả suy luận cục bộ hoặc chờ dịch vụ HTTPS. Dừng phía studio đóng kết nối; một nhà cung cấp từ xa có thể vẫn tiếp tục xử lý/tính phí nếu họ không hỗ trợ hủy phía máy chủ.
-- Một tác vụ chạy mỗi lần; có thể tạo lại sau khi dừng. Bản thu trước không bị xóa khi hủy/thất bại. Tác vụ tạm mất khi tắt máy chủ; tải âm thanh trước khi đóng. Giữ tối đa 10 kết quả tạm gần nhất.
-- Vẫn chưa kèm mô hình nhân bản Hmong Trắng. Mẫu đã lưu không phải mô hình. Không cam kết đọc chuẩn hoặc có cảm xúc khi chưa có bộ máy phù hợp và kiểm chứng bằng người bản ngữ.
+- Toàn bộ118 tệp mô hình/mã nguồn được đối chiếu SHA256 hoặc Git blob SHA1 theo snapshot được ghim; trọng số chỉ nạp bằng `weights_only=True`.
+- Giọng nữ tạo thật câu **“Nyob zoo, kuv hais lus Hmoob.”**: WAV PCM16 mono 24 kHz, 2,71 giây; lượt lạnh khoảng64,7 giây, RAM đỉnh khoảng7,84 GiB.
+- Giọng nam, cách đọc Review, cùng câu trên: tạo thật qua giao diện/API, WAV 2,51 giây; lượt này khoảng93,6 giây. Đây là số đo máy kiểm thử, không bảo đảm tốc độ trên máy khác.
+- Nút Dừng đã kết thúc worker thật, sau đó tạo lại thành công. Chọn mẫu/generate không yêu cầu micro. Desktop/mobile 390 px không tràn ngang hoặc lỗi JavaScript.
+- 63 kiểm thử Python đạt; 8 kiểm tra micro trong Chromium đạt. Đã giải mã WAV và xác minh tín hiệu khác 0; kết quả này không thay thế việc nghe chất lượng/phát âm.
 
-Kiểm tra: 21 bài Python đạt trên Linux; có worker thật để kiểm tra tạo kết quả, dừng tiến trình, tạo lại và báo thiếu mô hình. Chromium kiểm tra chọn giọng/cách đọc, Tạo/Dừng/tạo lại, phát audio và mobile (API tạo giọng mô phỏng). Chưa thử suy luận Hmong hoặc Windows thật.
+## Nguồn và kỹ thuật
 
-Giải nén vào thư mục mới; nếu giữ mẫu giọng cũ, sao chép thư mục `.data` từ bản cũ khi cả hai bản đã tắt. Chạy `start.bat`, mở lại trang và nhấn Ctrl+F5 để tải JavaScript mới.
+Mô hình: https://huggingface.co/Xuajpaj2026/hmong-tts-weights , revision `5663e0df2589c2ca2403cd327a52702c3ff96e8f`. Tác giả có cấu hình chỉ dẫn White Hmong RPA. Source/license CosyVoice và Matcha được giữ trong snapshot; không chạy wrapper sửa checkpoint của tác giả. App chỉ nạp cấu hình suy luận đã kiểm tra; không cài thành phần huấn luyện CUDA/pyworld.
 
-# Hmong Studio 0.3 — mẫu giọng riêng & giao diện gọn
+Mặc định snapshot nằm trong `.data/models/hmong-cosy`; có thể đặt `HMONG_COSY_DIR` trỏ tới snapshot đã xác minh. Chạy Linux: cài Torch/Torchaudio 2.6 CPU khớp nhau, `pip install -r requirements-cosy.txt`, `python prepare_clone_model.py`, rồi `python -m uvicorn app:app --host 127.0.0.1 --port 8090 --no-access-log`. FFmpeg/ffprobe cần có trong PATH. Không công khai trực tiếp dịch vụ lên Internet; app chưa có đăng nhập.
 
-Bản nâng cấp từ ZIP người dùng cung cấp. Giữ Hmong Trắng (Hmoob Dawb) làm mặc định. Đây chưa phải bộ máy nhân bản Hmong hoàn chỉnh: không kèm mô hình TTS/clone Hmong đã kiểm chứng. Không thay bằng giọng Việt, không giả lập nhân bản bằng đổi cao độ.
-
-## Chạy ứng dụng
-
-Windows: cài Python 3.10–3.12, FFmpeg (gồm ffprobe) trong PATH, giải nén rồi chạy `start.bat`. Linux/macOS: tạo môi trường Python, `python -m pip install -r requirements.txt`, chạy `python -m uvicorn app:app --host 127.0.0.1 --port 8090 --no-access-log`. Chỉ mở trên máy của bạn; chưa có đăng nhập.
-
-## Có gì mới
-
-- Thư viện mẫu giọng riêng: thêm, nghe lại, chọn và xóa. Mẫu 3–60 giây / tối đa 20 MB, tên và bản chép chính xác, có xác nhận quyền sử dụng. FFmpeg giải mã và chuẩn hóa WAV mono 24 kHz; từ chối mẫu lỗi, quá ngắn/dài hoặc gần im lặng.
-- Kết nối nhân bản bằng mẫu thực: gửi reference WAV cùng bản chép, lời mới, tiếng Hmong Trắng, tốc độ và cách đọc tới adapter HTTPS đã cấu hình. Lưu mẫu không huấn luyện mô hình.
-- Thêm lựa chọn review, quảng cáo, tin tức, thư giãn, bên cạnh kể chuyện, ấm áp, vui vẻ, buồn, tự nhiên. Chỉ bật lựa chọn dịch vụ xác nhận hỗ trợ; chưa kiểm chứng chất lượng từng kiểu trên mô hình thật.
-- Giao diện tím nhạt, hai cột, tương thích điện thoại. Thu gọn mẫu có sẵn, thu âm, biên tập, nhận dạng và quản lý dự án để tập trung soạn lời.
-- Nút tạo giọng không bật khi thiếu bộ máy; không báo hoàn tất nếu dịch vụ trả lỗi hoặc không trả audio.
-
-## Kết nối bộ máy nhân bản
-
-Chưa có nhà cung cấp hoặc mô hình Hmong Trắng được xác minh trong bản này. Không chỉ đặt các biến dưới đây để coi là AI đã hoạt động; cần triển khai adapter có suy luận thật và kiểm chứng tiếng Hmong Trắng.
-
-- `HMONG_CLONE_URL`: URL HTTPS của adapter (không phải đường dẫn tùy ý của một nhà cung cấp).
-- `HMONG_CLONE_LANGUAGES=mww`: chỉ đặt sau khi xác nhận đúng Hmong Trắng.
-- `HMONG_CLONE_STYLES`: danh sách kiểu thực sự được hỗ trợ, ngăn bằng dấu phẩy, ví dụ `neutral,storytelling,review`. Các mã khác: `warm,cheerful,sad,advertising,news,meditation`.
-- `HMONG_CLONE_TOKEN`: tùy chọn, đặt an toàn trong môi trường máy chủ; không ghi khóa vào source hoặc gửi trong chat.
-
-Adapter nhận POST multipart: `reference_audio` là WAV; trường `payload` là JSON gồm `text`, `dialect=mww`, `voice`, `emotion`, `speed`, `reference_text`. Adapter phải thực sự dùng mẫu và bản chép để nhân bản, ánh xạ đúng cách đọc. Trả bytes audio với Content-Type `audio/wav`, `audio/x-wav`, `audio/mpeg` hoặc `audio/ogg`, tối đa 50 MB. Không theo chuyển hướng. Mẫu chỉ được gửi khi bấm tạo giọng; nội dung không có trong URL.
-
-Tham chiếu lưu tại `.data/clones` (hoặc `HMONG_STUDIO_DATA_DIR/clones`). Xóa qua giao diện xóa mẫu WAV và bản chép trên máy chủ. Dự án JSON chỉ giữ ID mẫu, không mang mẫu sang máy khác. Không đóng gói `.data` khi chia sẻ ứng dụng.
-
-## Kiểm chứng bản nâng cấp
-
-Linux Python 3.12: 18 kiểm thử đạt. Có giải mã FFmpeg thật, lưu/nghe/xóa mẫu, từ chối im lặng/độ dài sai, thiếu quyền sử dụng, thiếu bộ máy, kiểm tra hợp đồng gửi mẫu/bản chép/review bằng dịch vụ mô phỏng và từ chối phản hồi không phải audio. Chromium: desktop 1440 px, mobile 390 px, thêm/xóa mẫu qua giao diện, không tràn ngang và không lỗi JavaScript. Chưa kiểm thử Windows, chưa tạo giọng Hmong bằng mô hình thật, chưa đánh giá phát âm bằng người bản ngữ.
-
-Để đọc chuẩn Hmong Trắng cần có bộ máy đúng phương ngữ, bản mẫu/bản chép khớp và đánh giá bởi người nói bản ngữ. Giữ đúng các ký tự RPA và dấu thanh cuối âm tiết; giao diện không tự sửa chúng.
-
----
-
-## Tài liệu bộ máy cũ (tham khảo)
-
-# Hmong Studio 0.2 — bản phát triển
-
-**Chưa hoàn thành AI Hmong Trắng.** Bản này bổ sung luồng tạo giọng và nhận dạng dùng mô hình cục bộ hoặc dịch vụ HTTPS, lựa chọn Hmong Trắng / Việt / Anh, và quản lý hai mẫu nam/nữ. Chưa có mô hình Hmong Trắng được xác minh, chưa tải được trọng số trong môi trường kiểm tra (Hugging Face bị chặn 403). Không hứa nhận dạng đúng Hmong, nhân bản hai giọng hoặc cảm xúc giống người thật.
-
-## Windows
-
-1. Cài Python 3.10–3.12, chọn Add Python to PATH.
-2. Giải nén ZIP, chạy `start.bat`, giữ cửa sổ lệnh mở.
-3. Mở địa chỉ hiện trong cửa sổ lệnh bằng trình duyệt trên cùng máy.
-4. Muốn dùng AI cục bộ, chạy `install_local_ai.bat`. Cần Internet và vài trăm MB cho thư viện, thêm vài GB cho mô hình ASR. Nên có ít nhất 8 GB RAM trống. Cài FFmpeg từ https://ffmpeg.org/download.html và thêm vào PATH để nhận dạng audio.
-5. Khởi động lại tool sau khi thay đổi biến môi trường. Không công khai máy chủ trực tiếp lên Internet: bản này không có đăng nhập.
-
-Chạy Linux/macOS trong thư mục `hmong-studio`:
-
-```sh
-python -m venv .venv
-.venv/bin/pip install -r requirements.txt
-.venv/bin/python -m uvicorn app:app --host 127.0.0.1 --port 8090
-```
-
-AI cục bộ: cài PyTorch phù hợp từ https://pytorch.org/get-started/locally/, rồi `pip install -r requirements-local.txt`. Không tắt xác minh TLS/chữ ký để tải mô hình. Launcher Windows chưa được thử trên Windows.
-
-## Tính năng
-
-- Kịch bản TXT, dự án JSON, lưu/mở/xóa trên trình duyệt; tối đa 10.000 ký tự. AI cục bộ nhận tối đa 2.000 ký tự/lượt.
-- Hai mẫu Hmong Trắng nam/nữ do người dùng cung cấp; nghe nguyên bản, không biến mẫu thành giọng AI tự động. Không có Hmong Hoa.
-- Thu micro tối đa 10 phút, nhập audio tối đa 50 MB, nghe/dạng sóng, cắt, chỉnh âm lượng và xuất WAV PCM 16-bit. Micro cần localhost hoặc HTTPS.
-- Giọng nói → văn bản từ audio hiện tại, sửa kết quả, chuyển vào kịch bản hoặc tải TXT. Dùng **bản gốc**, không dùng khoảng cắt trên màn hình. ASR cục bộ chia khối 20 giây; từ ở ranh giới khối có thể sai.
-- Chọn ngôn ngữ cho cả hai chiều; chọn nam/nữ và cảm xúc chỉ được mở nếu dịch vụ đã được cấu hình hỗ trợ. MMS gốc chỉ có giọng mô hình, không giả lập giới tính bằng đổi cao độ.
-- Nút Lời Hmong mẫu nạp đoạn “Kuv twb hais qhia rau koj…” do người dùng gửi. Đoạn này **không khớp** hai MP3, không phải bản chép/nhãn huấn luyện.
-
-Âm thanh không được lưu trong JSON/localStorage; tải WAV riêng trước khi đóng hoặc đổi dự án. Dự án 0.1 Hmong Trắng vẫn mở được; lựa chọn mẫu cũ chuyển về giọng gốc nếu bộ xử lý không hỗ trợ nhân bản.
-
-## AI cục bộ
-
-TTS dùng `AutoTokenizer` + `VitsModel`, ASR dùng `AutoProcessor` + `Wav2Vec2ForCTC`. Chỉ hỗ trợ mô hình tương thích hai kiến trúc đó; không chạy mã tùy ý từ Hub (`trust_remote_code=False`).
-
-| Biến môi trường | Mặc định / ý nghĩa |
-|---|---|
-| `HMONG_LOCAL_TTS_MODEL` | Chưa đặt. Phải là model ID hoặc thư mục VITS đã xác minh đọc **Hmong Trắng**. Không tự đoán ID mô hình. |
-| `STUDIO_TTS_MODEL_VI` | `facebook/mms-tts-vie` |
-| `STUDIO_TTS_MODEL_EN` | `facebook/mms-tts-eng` |
-| `HMONG_LOCAL_ASR_MODEL` | `facebook/mms-1b-all` hoặc thư mục mô hình tương thích |
-| `HMONG_ASR_CODE` | `hmn` là mã **ứng viên**, chưa xác minh có adapter và đúng Hmong Trắng. Nếu không có trong vocab thì báo lỗi, không dùng tiếng Anh thay thế. |
-
-Mã ASR Việt/Anh là `vie`/`eng`. Lần đầu thư viện có thể tải mô hình. Cần mở mạng tới Hugging Face và các CDN mà Hub chỉ định; có thể dùng thư mục đã tải sẵn để chạy offline. Kiểm tra `processor.tokenizer.vocab.keys()` theo tài liệu MMS để xác nhận mã ngôn ngữ. Cần cặp âm thanh và bản chép khớp để đo độ chính xác Hmong Trắng; chưa có cặp đó trong dự án này.
-
-MMS công bố giấy phép **CC-BY-NC 4.0**; đọc giấy phép từng mô hình trước khi dùng thương mại. Tài liệu chính thức: https://github.com/facebookresearch/fairseq/tree/main/examples/mms và https://huggingface.co/docs/transformers/model_doc/mms .
-
-## Dịch vụ có nhân bản giọng / cảm xúc
-
-Chỉ cấu hình sau khi có dịch vụ hoặc adapter thực sự hỗ trợ Hmong Trắng. Khóa chỉ đặt trong biến môi trường máy chủ, không ghi vào Git.
-
-TTS: `HMONG_TTS_URL` (HTTPS), tùy chọn `HMONG_TTS_TOKEN`. POST JSON:
-
-```json
-{"text":"Nyob zoo", "dialect":"mww", "voice":"hmong-white-female", "emotion":"neutral", "speed":1.0}
-```
-
-`dialect`: `mww`/`vi`/`en`; `voice`: `model-default`/`hmong-white-female`/`hmong-white-male`; `emotion`: `neutral`/`storytelling`/`warm`/`cheerful`/`sad`; tốc độ 0.5–2. Trả bytes WAV/MP3/OGG và Content-Type tương ứng, tối đa 50 MB, 120 giây, không redirect. Adapter phải tự ánh xạ ID mẫu tới hai MP3 trong `static/voices` và sử dụng mô hình nhân bản; tool không tự gửi mẫu cho dịch vụ. Chỉ đặt `HMONG_TTS_CLONING=1` và/hoặc `HMONG_TTS_EMOTIONS=1` sau khi adapter hỗ trợ thật. Các cờ chỉ khai báo cấu hình, không tự tạo năng lực cho mô hình.
-
-ASR: `HMONG_ASR_URL` (HTTPS), tùy chọn `HMONG_ASR_TOKEN`. Nhận POST bytes audio `application/octet-stream`, query `language=mww|vi|en`. Trả JSON `{"text":"..."}`, tối đa 1 MB/50.000 ký tự, 180 giây. Nội dung được gửi tới dịch vụ tương ứng khi bấm xử lý. Không tự dịch lời.
-
-Đây là hợp đồng adapter của studio, không phải API mặc định của nhà cung cấp. Chưa có nhà cung cấp nào được tích hợp hoặc xác minh trong bản này.
-
-## Kết quả kiểm tra
-
-- API/validation và luồng chuyển tiếp được kiểm tra bằng pytest; inference trong test dùng mock, **không chứng minh** chất lượng mô hình.
-- Đã thử Chromium: nhập MP3, chọn ngôn ngữ, lưu dự án, xuất WAV stereo đúng 1 giây; hiển thị và chuyển kết quả ASR giả lập vào kịch bản. Không có lỗi JavaScript trong lượt thử.
-- Đã cài PyTorch CPU/Transformers và import được lớp mô hình. Chưa inference với trọng số thật vì bị chặn tải từ Hugging Face (403).
-- Chưa xác minh giọng Hmong Trắng, nam/nữ nhân bản, cảm xúc, nhận dạng Hmong hoặc launcher Windows. Không coi bản này là tool Hmong hoàn chỉnh.
-
-```sh
-python -m pytest tests -q
-node --check static/app.js
-```
+Bộ tải có thể tiếp tục tệp `.part` và chỉ ghi marker ready sau khi toàn bộ checksum đạt. Mã suy luận đặt chế độ offline trước khi nạp thư viện Hub. Nếu chủ động cấu hình `HMONG_CLONE_URL`/`HMONG_TTS_URL`, mẫu/lời có thể gửi tới dịch vụ đó khi dùng luồng từ xa; khi CosyVoice cục bộ sẵn sàng thì mẫu nam/nữ và mẫu riêng ưu tiên xử lý cục bộ.

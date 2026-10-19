@@ -43,8 +43,8 @@ def list_voices():
 
 def create(raw, name, transcript):
     name, transcript = name.strip(), transcript.strip()
-    if not name or not transcript:
-        raise HTTPException(422, 'Nhập tên giọng và bản chép đúng lời trong mẫu.')
+    if not name:
+        raise HTTPException(422, 'Nhập tên giọng trước khi lưu mẫu.')
     if not raw:
         raise HTTPException(422, 'Chọn tệp âm thanh trước.')
     try:

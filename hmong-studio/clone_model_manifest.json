@@ -1,0 +1,631 @@
+{
+  "repository": "Xuajpaj2026/hmong-tts-weights",
+  "revision": "5663e0df2589c2ca2403cd327a52702c3ff96e8f",
+  "entries": [
+    {
+      "rfilename": "CosyVoice/LICENSE",
+      "blobId": "29f81d812f3e768fa89638d1f72920dbfd1413a8",
+      "size": 11558
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/__init__.py",
+      "blobId": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/bin/average_model.py",
+      "blobId": "7d368e5be164e0b4a0d0e0d567d4eb4f46de4ec9",
+      "size": 3295
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/bin/export_jit.py",
+      "blobId": "7af95f4fb35ee192f0dc28dd8b09a248cec5d114",
+      "size": 3938
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/bin/export_onnx.py",
+      "blobId": "99c3e74166a17e47d94a06f488e217de42b01f86",
+      "size": 4600
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/bin/train.py",
+      "blobId": "91f94cbafc35bcb26b84862ea07ff97852c18964",
+      "size": 8348
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/cli/__init__.py",
+      "blobId": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/cli/cosyvoice.py",
+      "blobId": "efb56896ddc8d9c798cf24071780a4f73719bd3a",
+      "size": 14594
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/cli/frontend.py",
+      "blobId": "5ffcd0d680861a59b704f1484e40b94499c314f0",
+      "size": 12777
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/cli/model.py",
+      "blobId": "d822a5a436d0f548654d63db83ada05815dbd45d",
+      "size": 28588
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/dataset/__init__.py",
+      "blobId": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/dataset/dataset.py",
+      "blobId": "bfd2b170cc265d39444d80a5cc0f610f726d4b01",
+      "size": 5218
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/dataset/processor.py",
+      "blobId": "58ebb8967271eaa275a5761f25848a213832d395",
+      "size": 17180
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/flow/DiT/dit.py",
+      "blobId": "65e4ff063db18cebc1ea0f6d2c45bb2eb38397f3",
+      "size": 5864
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/flow/DiT/modules.py",
+      "blobId": "2b5dfa09f43ad5b3f6ee6162e4be554b2d5e9edc",
+      "size": 21167
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/flow/decoder.py",
+      "blobId": "079116839bb34139cfb4f7f710c71fdc7e42f0ef",
+      "size": 20360
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/flow/flow.py",
+      "blobId": "e1791cc1e196a7f74e7d84b5423c3941dcd97acd",
+      "size": 20179
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/flow/flow_matching.py",
+      "blobId": "7e14c2e6eac8386fe41255eba17b72763c47e947",
+      "size": 10779
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/flow/length_regulator.py",
+      "blobId": "5f33cc724346942f412f30df93f2bc89fea2d422",
+      "size": 3207
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/hifigan/discriminator.py",
+      "blobId": "445209a0136e298679db23155d67f9de7a946989",
+      "size": 8847
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/hifigan/f0_predictor.py",
+      "blobId": "287e80abaf6f27a153f1d10d79fb2346b7296af6",
+      "size": 3860
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/hifigan/generator.py",
+      "blobId": "7e655d59c7d73d06a425c09f8d6c033159c1f664",
+      "size": 31233
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/hifigan/hifigan.py",
+      "blobId": "1244e531f7b84f0e8edb20fee445e135beeff2e7",
+      "size": 3307
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/llm/llm.py",
+      "blobId": "28116d7e746245b54e0a9980cbc231a848060f3c",
+      "size": 36676
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/tokenizer/assets/multilingual_zh_ja_yue_char_del.tiktoken",
+      "blobId": "17a496a8f678957dbfc7e37d934095ac1c2c4109",
+      "size": 966231
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/tokenizer/tokenizer.py",
+      "blobId": "b63080b9fa6e83e932880c7971602b10c49384ee",
+      "size": 11580
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/transformer/__init__.py",
+      "blobId": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/transformer/activation.py",
+      "blobId": "4604ce7e164c5f224767a6e144b3fbfce63a80ec",
+      "size": 3173
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/transformer/attention.py",
+      "blobId": "8c913a9f1736872c53d936d652802ec59be8a19b",
+      "size": 14719
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/transformer/convolution.py",
+      "blobId": "f0b5cba4fee38faa0039260107a01b9415252616",
+      "size": 10030
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/transformer/decoder.py",
+      "blobId": "a39260d6777e5005e4238b659ff28982a1f0ae9e",
+      "size": 16976
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/transformer/decoder_layer.py",
+      "blobId": "9e5516ee6b25ef31d03565ce3fdf6f734651a46a",
+      "size": 4939
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/transformer/embedding.py",
+      "blobId": "c5b46be0b60e9b6e0fe969fdba599280f085ca3f",
+      "size": 12079
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/transformer/encoder.py",
+      "blobId": "ee1be9533eac5be853d6b66da5b59c623b806d06",
+      "size": 21908
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/transformer/encoder_layer.py",
+      "blobId": "2577e78ffefcbda4ee33a5db97db6cb2ee3070c0",
+      "size": 9838
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/transformer/label_smoothing_loss.py",
+      "blobId": "f3917040ca60414e5973ad398f0c2200197337c2",
+      "size": 3555
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/transformer/positionwise_feed_forward.py",
+      "blobId": "70693a844d9f576833150b59bc67521b8639e3df",
+      "size": 4334
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/transformer/subsampling.py",
+      "blobId": "e6e1a98f9731433b673f3e09183d6245cdbd6073",
+      "size": 13049
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/transformer/upsample_encoder.py",
+      "blobId": "fe5e5715bdfd83e5bf13d3af675f73a9c164ab4b",
+      "size": 14550
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/utils/__init__.py",
+      "blobId": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/utils/class_utils.py",
+      "blobId": "75413435722d84581013e0857efe14403a57a30e",
+      "size": 3673
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/utils/common.py",
+      "blobId": "1d9cae4e0f1741b909504d946a67ebbf92aa3cfe",
+      "size": 9537
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/utils/executor.py",
+      "blobId": "9f2cb94078fa819be4e284a9f0e1d60cb52d325a",
+      "size": 9018
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/utils/file_utils.py",
+      "blobId": "981e133f05e7b8fe4a8989fbcaded015060ae0cd",
+      "size": 5005
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/utils/frontend_utils.py",
+      "blobId": "12cdceefc09f86f1140f4fa3e468505f71742219",
+      "size": 4409
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/utils/losses.py",
+      "blobId": "96f9889f5782ddf2bac1630a07e86c28a66145c2",
+      "size": 2178
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/utils/mask.py",
+      "blobId": "fffa22cd1e902a217f8375b6c7632b1597dd8975",
+      "size": 9993
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/utils/onnx.py",
+      "blobId": "b28099b00ed6b861739a1f964e85dd9c0b4a732e",
+      "size": 2920
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/utils/scheduler.py",
+      "blobId": "2b040c707ed4bf50c62184d44f19c30788ec520c",
+      "size": 25658
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/utils/train_utils.py",
+      "blobId": "f01a25f7b1ee399ecb083645a1821eb08080aeaf",
+      "size": 16993
+    },
+    {
+      "rfilename": "CosyVoice/cosyvoice/vllm/cosyvoice2.py",
+      "blobId": "d6b931ab27dd7b379bdb0b8b2dc050eebe98ee7d",
+      "size": 4657
+    },
+    {
+      "rfilename": "CosyVoice/example.py",
+      "blobId": "5c5ffe6302f2048d07a7ca408104979ee7b4885a",
+      "size": 9228
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/LICENSE",
+      "blobId": "f0e3c29c9a3ed0280b7c903a7b076f22c5a97ec4",
+      "size": 1090
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/configs/__init__.py",
+      "blobId": "3d3602a030a6ad96964fc76f1b38934ff36640cb",
+      "size": 82
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/__init__.py",
+      "blobId": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/app.py",
+      "blobId": "947d8d1489c61f322062eca77dc78686840867ed",
+      "size": 14349
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/cli.py",
+      "blobId": "a841507a67f61b7cf83d2c2082937d9935c3da0c",
+      "size": 15937
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/data/__init__.py",
+      "blobId": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/data/components/__init__.py",
+      "blobId": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/data/text_mel_datamodule.py",
+      "blobId": "be41adb461bf129644997c1af4e5c2cfc19ed1bf",
+      "size": 7786
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/hifigan/__init__.py",
+      "blobId": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/hifigan/config.py",
+      "blobId": "85890cd63f2fac278a29863903c4d198bc5abad1",
+      "size": 807
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/hifigan/denoiser.py",
+      "blobId": "7916451595068a2fb3404dd992c2e6d107657e63",
+      "size": 2708
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/hifigan/env.py",
+      "blobId": "d036fd510c860ea88d14ee8b26aee10035074cbe",
+      "size": 446
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/hifigan/meldataset.py",
+      "blobId": "4c6fc617355971a032e91a34860825d8403e3247",
+      "size": 7003
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/hifigan/models.py",
+      "blobId": "86fb5e7d4e07e33bce45571c56d5553107d6a014",
+      "size": 12036
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/hifigan/xutils.py",
+      "blobId": "31dbe81a92da3514a31e8ba761fb3de53a227328",
+      "size": 1456
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/models/__init__.py",
+      "blobId": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/models/baselightningmodule.py",
+      "blobId": "0eb110fbad0a5041f9e4a8b18efc42eaa5ce1bc2",
+      "size": 7212
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/models/components/__init__.py",
+      "blobId": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/models/components/decoder.py",
+      "blobId": "3f414bd5c789ed42badd2dbecbafa6394dd3555b",
+      "size": 14902
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/models/components/flow_matching.py",
+      "blobId": "d439a05f707a9dfe161f2fdeed5001dbca595863",
+      "size": 4789
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/models/components/text_encoder.py",
+      "blobId": "96fd8b4458bc339da02ef542ebe8961a7a575f96",
+      "size": 15255
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/models/components/transformer.py",
+      "blobId": "4f6762b7b8dbb61c8063516f44a5109887f38760",
+      "size": 13553
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/models/matcha_tts.py",
+      "blobId": "b96619aa9f2f631a7648c513dc0e3aa39c72cfc3",
+      "size": 10298
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/onnx/__init__.py",
+      "blobId": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/onnx/export.py",
+      "blobId": "0be02665da0c333c880c3a80c74ec8c18212908c",
+      "size": 5567
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/onnx/infer.py",
+      "blobId": "f09520b167625f08181aad306b2a0a65fd85a3a1",
+      "size": 6461
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/text/__init__.py",
+      "blobId": "d56fb1cc347549e6b9dc1a1ac910f61909b266f4",
+      "size": 1749
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/text/cleaners.py",
+      "blobId": "355c47ba88c9e2a3b0b6dc66def8de683e16a615",
+      "size": 3676
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/text/numbers.py",
+      "blobId": "4cd547220051fdc2d3504987f8ff9e064c0d9ccc",
+      "size": 2320
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/text/symbols.py",
+      "blobId": "d9fa6b6d5ff5f759f2ddf4ef6e9d35cb7972b56c",
+      "size": 652
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/train.py",
+      "blobId": "2cc44cb7da4706eb79099a8a4c2434a434953f4a",
+      "size": 4735
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/utils/__init__.py",
+      "blobId": "3b5f96a030b78e76cc99313b7e954b57330b86cc",
+      "size": 331
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/utils/audio.py",
+      "blobId": "30313f433724911d92b33a5db5a825c9525275c0",
+      "size": 2364
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/utils/generate_data_statistics.py",
+      "blobId": "c979263b4148eb0372e0d594b40fc0ad78c8c0f5",
+      "size": 3380
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/utils/instantiators.py",
+      "blobId": "ec491be48c20d277627e196989ffbf28a3abb9bb",
+      "size": 1884
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/utils/logging_utils.py",
+      "blobId": "344ea7a631eef2100dee143811aaa66abe67ba5a",
+      "size": 1764
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/utils/model.py",
+      "blobId": "2205fba1042930a54ffd08f3ab77a89d6afee146",
+      "size": 3025
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/utils/monotonic_align/__init__.py",
+      "blobId": "3f532acd92a04f2e363b63e05f767e3fdb15c529",
+      "size": 668
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/utils/monotonic_align/setup.py",
+      "blobId": "dac1e06454d59f53787ab1e053c9c4ba13aaddea",
+      "size": 214
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/utils/pylogger.py",
+      "blobId": "730dabc9ddbed008675475362d45d8c98e0f3eed",
+      "size": 741
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/utils/rich_utils.py",
+      "blobId": "a93d11e40502ff8e663aa6e939782c5b176cbbeb",
+      "size": 3380
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/matcha/utils/utils.py",
+      "blobId": "abf513ad9c187a273a78de3908d0a4c8ab785704",
+      "size": 7378
+    },
+    {
+      "rfilename": "CosyVoice/third_party/Matcha-TTS/setup.py",
+      "blobId": "3bef62399a7a9002773b7c53893db5fbc700fe1d",
+      "size": 1575
+    },
+    {
+      "rfilename": "CosyVoice/tools/extract_embedding.py",
+      "blobId": "f317779111d7a4019c705b7d14f7160d55609c00",
+      "size": 3075
+    },
+    {
+      "rfilename": "CosyVoice/tools/extract_speech_token.py",
+      "blobId": "a822f56792e8da6a782ecc1ab1af94b828c88008",
+      "size": 2869
+    },
+    {
+      "rfilename": "CosyVoice/tools/make_parquet_list.py",
+      "blobId": "bc6f17cfd6cf1fff1c9e82dca2f38bf2e1d0be35",
+      "size": 5872
+    },
+    {
+      "rfilename": "CosyVoice/vllm_example.py",
+      "blobId": "ab9d5346bdc75be75ea6789dc332f62750715223",
+      "size": 1763
+    },
+    {
+      "rfilename": "CosyVoice/webui.py",
+      "blobId": "36e411e7f39e8f24ecaef1fab1dbe17b19d8c444",
+      "size": 9852
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/.gitattributes",
+      "blobId": "cb90d04a72c0b51e3a115db0a9342dd88af903a4",
+      "size": 1574
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/CosyVoice-BlankEN/config.json",
+      "blobId": "463b055262b6c66c4629a74a4b300bfe2ed31d3c",
+      "size": 659
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/CosyVoice-BlankEN/generation_config.json",
+      "blobId": "dfc11073787daf1b0f9c0f1499487ab5f4c93738",
+      "size": 242
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/CosyVoice-BlankEN/merges.txt",
+      "blobId": "90d3d82d027eadcc6a5e77c38eb82d43fc51b53b",
+      "size": 1402109
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/CosyVoice-BlankEN/model.safetensors",
+      "blobId": "3dff8ababe3dbf3bd7a556f5f143503ab2ef3c98",
+      "size": 988097824,
+      "lfs": {
+        "sha256": "130282af0dfa9fe5840737cc49a0d339d06075f83c5a315c3372c9a0740d0b96",
+        "size": 988097824,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/CosyVoice-BlankEN/tokenizer_config.json",
+      "blobId": "ff55d7b9eb1384e5d4d7e75dc0f564c1a8833d6e",
+      "size": 1287
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/CosyVoice-BlankEN/vocab.json",
+      "blobId": "4783fe10ac3adce15ac8f358ef5462739852c569",
+      "size": 2776833
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/README.md",
+      "blobId": "d816a921470cff1b6926d31c89e4ec7dea185f32",
+      "size": 11982
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/asset/dingding.png",
+      "blobId": "e407a9d3c0fc5a7fcac46aef09181a0bef330d37",
+      "size": 122824,
+      "lfs": {
+        "sha256": "7f04815e2e676d31b089af6fa270135f3214f2193d5e0ad98b491d007d48f1c6",
+        "size": 122824,
+        "pointerSize": 131
+      }
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/campplus.onnx",
+      "blobId": "7b08523b2e28e437cfb1a0312723a5ab0bac287e",
+      "size": 28303423,
+      "lfs": {
+        "sha256": "a6ac6a63997761ae2997373e2ee1c47040854b4b759ea41ec48e4e42df0f4d73",
+        "size": 28303423,
+        "pointerSize": 133
+      }
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/config.json",
+      "blobId": "9e26dfeeb6e641a33dae4961196235bdb965b21b",
+      "size": 2
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/configuration.json",
+      "blobId": "5e812fae901c12933ac69ebf3eb79d0eb49bbab4",
+      "size": 47
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/cosyvoice3.yaml",
+      "blobId": "2eda7e5007d99f6b17fbe7bd751cf54e3cde29ea",
+      "size": 6934
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/flow.pt",
+      "blobId": "074b96e9cfbf3e511067528bde8e76a308f94904",
+      "size": 1329116148,
+      "lfs": {
+        "sha256": "a6fab32a7825e5b0bc855ddd948f8db9370b0a786fbc249caa4595e95b608e4b",
+        "size": 1329116148,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/hift.pt",
+      "blobId": "c5088ac4f7db1314a4efe06ca60e9f47ea2a1900",
+      "size": 83202622,
+      "lfs": {
+        "sha256": "b279d7641eb97ae55b3b540cfba4f953c26492a2df758328a89a4d007ab87a65",
+        "size": 83202622,
+        "pointerSize": 133
+      }
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/llm.pt",
+      "blobId": "0fbed1fc8de4d7b6b8e0cc4ebc7e6de0044602dc",
+      "size": 2024669583,
+      "lfs": {
+        "sha256": "83386b9edd883b35ced9690b53c8d6d5ad7a5ddcd94275119892f13202b1bbfc",
+        "size": 2024669583,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "Fun-CosyVoice3-0.5B-hmong/speech_tokenizer_v3.onnx",
+      "blobId": "91daac1b6f0bbcb54b8885dc7a1cbf054de22f94",
+      "size": 969451503,
+      "lfs": {
+        "sha256": "23236a74175dbdda47afc66dbadd5bcb41303c467a57c261cb8539ad9db9208d",
+        "size": 969451503,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "tts_core.py",
+      "blobId": "e01b2404156e9f588990c389c34a1cf5c75abfd6",
+      "size": 14198
+    }
+  ]
+}

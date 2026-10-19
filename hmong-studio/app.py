@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 from typing import Literal
 import json
 import clone_store
+import cosy_engine
 import voice_jobs
 from contextlib import asynccontextmanager
 from starlette.concurrency import run_in_threadpool
@@ -21,7 +22,7 @@ async def lifespan(app):
     yield
     await voice_jobs.shutdown()
 
-app = FastAPI(title='Hmong Studio', version='0.3.4', lifespan=lifespan)
+app = FastAPI(title='Hmong Studio', version='0.4.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 
@@ -43,15 +44,17 @@ def index():
 def status():
     remote = bool(os.getenv('HMONG_TTS_URL'))
     local = local_engine.availability()
-    return {'tts_configured': remote or (local['dependencies'] and local['tts_models']['mww']),
+    cosy = cosy_engine.availability()
+    return {'tts_configured': cosy['ready'] or remote or (local['dependencies'] and local['tts_models']['mww']),
             'dialects': list(local_engine.LANGUAGES), 'languages': local_engine.LANGUAGES,
             'remote_tts': remote, 'remote_asr': bool(os.getenv('HMONG_ASR_URL')),
-            'cloning': remote and os.getenv('HMONG_TTS_CLONING') == '1',
-            'emotions': remote and os.getenv('HMONG_TTS_EMOTIONS') == '1',
+            'cloning': cosy['ready'] or (remote and os.getenv('HMONG_TTS_CLONING') == '1'),
+            'emotions': cosy['ready'] or (remote and os.getenv('HMONG_TTS_EMOTIONS') == '1'),
             'local': local,
-            'custom_cloning': bool(os.getenv('HMONG_CLONE_URL')),
-            'clone_styles': [x.strip() for x in os.getenv('HMONG_CLONE_STYLES', 'neutral').split(',')],
-            'message': 'Soạn lời Hmong Trắng và thêm mẫu giọng của bạn. Chưa thể tạo lời đọc Hmong khi chưa kết nối bộ máy hỗ trợ đúng phương ngữ.'}
+            'custom_cloning': cosy['ready'] or bool(os.getenv('HMONG_CLONE_URL')),
+            'local_cloning': cosy['ready'], 'cosy': cosy,
+            'clone_styles': cosy['styles'] if cosy['ready'] else [x.strip() for x in os.getenv('HMONG_CLONE_STYLES', 'neutral').split(',')],
+            'message': 'Bộ máy nhân bản Hmong cục bộ đã sẵn sàng. Chọn mẫu Nam/Nữ, nhập lời rồi bấm Tạo voice. Không cần micro hay bản chép mẫu.' if cosy['ready'] else cosy['reason']}
 
 
 @app.get('/api/voices')
@@ -69,6 +72,20 @@ def voices():
 async def speech(payload: Speech):
     if not payload.text.strip():
         raise HTTPException(422, 'Nhập lời đọc trước khi tạo giọng.')
+    reference_voice = payload.voice.startswith('custom-') or payload.voice in {'hmong-white-female', 'hmong-white-male'}
+    use_local_clone = reference_voice and (cosy_engine.availability()['ready'] or (not os.getenv('HMONG_CLONE_URL') and not os.getenv('HMONG_TTS_URL')))
+    if use_local_clone:
+        if payload.dialect != 'mww':
+            raise HTTPException(422, 'Bộ máy nhân bản này dành cho Hmong Trắng. Chọn Hmong Trắng trước khi tạo voice.')
+        if payload.voice.startswith('custom-'):
+            _, reference = clone_store.get(payload.voice)
+        else:
+            reference = BASE / 'static' / 'voices' / (payload.voice + '.mp3')
+        try:
+            data = await run_in_threadpool(cosy_engine.synthesize, payload.text, reference, payload.emotion, payload.speed)
+            return Response(data, media_type='audio/wav', headers={'Cache-Control': 'no-store'})
+        except cosy_engine.EngineError as exc:
+            raise HTTPException(503, str(exc)) from None
     if payload.voice.startswith('custom-') or (payload.voice in {'hmong-white-female', 'hmong-white-male'} and os.getenv('HMONG_CLONE_URL')):
         return await clone_speech(payload)
     if payload.voice not in {'model-default', 'hmong-white-female', 'hmong-white-male'}:
@@ -156,7 +173,7 @@ def list_clones():
 
 @app.post('/api/clones', status_code=201)
 async def add_clone(file: UploadFile = File(...), name: str = Form(min_length=1, max_length=80),
-                    transcript: str = Form(min_length=1, max_length=2000), consent: bool = Form(False)):
+                    transcript: str = Form(default='', max_length=2000), consent: bool = Form(False)):
     if not consent:
         raise HTTPException(422, 'Cần xác nhận bạn có quyền nhân bản mẫu giọng này.')
     raw = bytearray()
@@ -191,6 +208,8 @@ async def clone_speech(payload):
     url = os.getenv('HMONG_CLONE_URL', '')
     if not url:
         raise HTTPException(503, 'Đã lưu mẫu giọng. Chưa có bộ máy nhân bản Hmong Trắng; mẫu âm thanh không tự trở thành mô hình AI.')
+    if not metadata.get('transcript', '').strip():
+        raise HTTPException(422, 'Dịch vụ ngoài cần bản chép mẫu chính xác; CosyVoice cục bộ không yêu cầu bản chép.')
     if payload.dialect != 'mww':
         raise HTTPException(422, 'Mẫu giọng này dành cho Hmong Trắng.')
     if not url.startswith('https://'):

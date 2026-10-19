@@ -1,17 +1,14 @@
-HMONG STUDIO 0.3.3
+HMONG STUDIO 0.4 - NHAN BAN GIONG CUC BO
 
-Giai nen, cai Python 3.10-3.12 va FFmpeg trong PATH, chay start.bat.
-Them mau giong 3-60 giay va ban chep dung loi trong muc Giong cua toi.
-Co cac lua chon review, ke chuyen, quang cao, tin tuc va thu gian.
-CHUA KEM MO HINH NHAN BAN / TTS HMONG TRANG DUOC XAC MINH.
-Chua co bo may thi chi luu/nghe mau, khong tao loi doc moi.
-Xem README.md de ket noi adapter nhan ban thuc su.
+1. Cai Python 3.12 64-bit; giai nen vao thu muc moi.
+2. Chay install_clone_ai.bat MOT LAN, cho tai thu vien va khoang 5.4 GB mo hinh.
+3. Bo cai thanh cong thi chay start.bat; Ctrl+F5 neu dang mo trang cu.
+4. Chon mau NAM hoac NU, nhap chu Hmong, chon cach doc, bam TAO VOICE.
+5. Nut DUNG se dung tien trinh; nghe va tai WAV khi hoan tat.
 
-Ban 0.3.1: chon giong/cach doc, nut Tao voice va Dung.
-Giai nen vao thu muc moi, chay start.bat va Ctrl+F5 trong trinh duyet.
-
-Hai mau nam/nu cua ban da co san. Chon giong de nghe dung mau.
-Can bo may nhan ban va ban chep dung loi trong mau de doc loi moi.
-
-Sua loi Python 3.15 / PyYAML: cai Python 3.12.10 64-bit tu python.org.
-Khong can go Python cu. Chay start.bat ban moi; khong copy .venv cu.
+Khong can micro, API key, dich vu tra phi hoac ban chep mau.
+Can RAM khoang 16 GB va cho trong it nhat 10 GB. CPU co the cham.
+install_local_ai.bat la bo cai MMS cu, KHONG CAI chuc nang nhan ban nay.
+Da tao WAV that bang ca hai mau tren Linux CPU; chua thu Windows that.
+Nghe kiem tra phat am va do giong giong truoc khi su dung.
+Xem README.md de biet chi tiet va ket qua kiem thu.

@@ -3,10 +3,15 @@ setlocal DisableDelayedExpansion
 cd /d "%~dp0"
 if errorlevel 1 exit /b 1
 set "PYTHONUTF8=1"
+set "PIP_DISABLE_PIP_VERSION_CHECK=1"
+set "PATH=%~dp0.data\tools\ffmpeg\bin;%PATH%"
 call setup_env.bat
 if errorlevel 1 goto fail
-.venv\Scripts\python.exe -m pip install --no-input --only-binary=:all: -r requirements.txt
-if errorlevel 1 goto fail
+.venv\Scripts\python.exe -c "import fastapi,uvicorn,httpx,multipart" >nul 2>nul
+if errorlevel 1 (
+  .venv\Scripts\python.exe -m pip install --no-input --only-binary=:all: -r requirements.txt
+  if errorlevel 1 goto fail
+)
 echo Hmong Studio: http://127.0.0.1:8090
 .venv\Scripts\python.exe -m uvicorn app:app --host 127.0.0.1 --port 8090 --no-access-log
 if errorlevel 1 goto fail
