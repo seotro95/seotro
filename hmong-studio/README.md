@@ -1,17 +1,21 @@
-# Hmong Studio 0.4 — nhân bản giọng cục bộ
+# Hmong Studio 0.4.1 — nhân bản giọng cục bộ
 
 Bản này có **bộ máy CosyVoice Hmong thực sự** để tạo lời đọc mới theo mẫu nam/nữ, chạy trên máy và không cần dịch vụ trả phí hoặc API key. Cần Internet một lần để tải thư viện và khoảng **5,4 GB** mô hình. Mẫu âm thanh dùng để lấy âm sắc; không phải huấn luyện lại mô hình.
+
+Bản 0.4.1 sửa WinError 32 khi pip cài đè tệp SymPy/Torch đang bị giữ. Hãy đóng các cửa sổ Studio/bộ cài của tool, giải nén bản mới vào thư mục mới rồi chạy bộ cài. Nếu vẫn bị tiến trình giữ tệp, khởi động lại Windows trước khi thử lại; không cần chạy quản trị hoặc cài Visual C++ Build Tools.
 
 ## Cài trên Windows
 
 1. Cài **Python 3.12.10 Windows 64-bit** từ https://www.python.org/downloads/release/python-31210/ , bật Python Launcher. Không cần gỡ Python 3.15 đang có.
-2. Giải nén ZIP mới vào một thư mục có quyền ghi. Đóng cửa sổ Studio bản cũ. Không sao chép `.venv` từ bản cũ.
+2. Giải nén ZIP mới vào một thư mục có quyền ghi. Đóng cửa sổ Studio bản cũ. Không sao chép `.venv` hoặc các thư mục `.venv-clone-*` từ bản cũ.
 3. Chạy **`install_clone_ai.bat`**. Chờ cài thư viện, công cụ âm thanh và tải/xác minh mô hình hoàn tất; bước tải lớn có thể mất nhiều phút tùy mạng. Nếu bị ngắt, chạy lại để tiếp tục; không đổi checksum hoặc tắt TLS.
 4. Khi bộ cài báo thành công, chạy **`start.bat`** và mở địa chỉ hiện trong cửa sổ lệnh. Nếu trình duyệt đang mở bản cũ, nhấn Ctrl+F5. Có thể tạo voice cục bộ khi không có Internet sau khi cài xong.
 
-**Không dùng `install_local_ai.bat` để cài chức năng nhân bản**: file cũ đó dành cho thư viện MMS/nhận dạng, không cài mô hình clone. Bộ cài mới chọn CPython 3.10–3.12 x64, ưu tiên 3.12; giữ bản sao môi trường không tương thích thay vì xóa. Dữ liệu `.data` được giữ riêng. Nếu muốn chuyển mẫu cá nhân từ bản cũ, sao chép `.data/clones` khi cả hai bản đã tắt.
+**Ở bản 0.4.1, `install_local_ai.bat` đã chuyển sang gọi bộ cài nhân bản mới**. Bộ cài MMS/ASR riêng được đổi tên thành `install_mms_asr.bat`; không cần chạy file đó để nhân bản. Bộ cài tạo môi trường riêng có tên `.venv-clone-<mã>` và chỉ chọn nó cho `start.bat` sau khi mọi kiểm tra đạt. `.venv` cũ không bị cài đè. Nếu cài lỗi, môi trường đang dùng và mô hình/giọng đã lưu được giữ nguyên; lần thử lại tạo môi trường mới. Nếu bộ máy đã cài hợp lệ thì chỉ kiểm tra đọc, không nâng cấp đè thư viện. Hai bộ cài không được chạy cùng lúc.
 
-Khuyến nghị **RAM 16 GB trở lên**, chừa ít nhất khoảng 10 GB đĩa trống cho mô hình/thư viện và dung lượng cho sản phẩm. Lượt đầu phải nạp mô hình; CPU có thể chậm. Nếu xuất hiện lỗi DLL của Torch/ONNXRuntime, kiểm tra Microsoft Visual C++2015–2022 x64 Redistributable chính thức; không cần bộ biên dịch Build Tools cho quy trình cài này. Windows launcher chưa được chạy trên Windows thật trong phiên kiểm thử này.
+Bộ cài mới chọn CPython 3.10–3.12 x64, ưu tiên 3.12; giữ bản sao môi trường không tương thích thay vì xóa. Dữ liệu `.data` được giữ riêng. Nếu muốn chuyển mẫu cá nhân từ bản cũ, sao chép `.data/clones` khi cả hai bản đã tắt.
+
+Khuyến nghị **RAM 16 GB trở lên**, chừa ít nhất khoảng 15 GB đĩa trống cho mô hình/thư viện và dung lượng cho sản phẩm. Lượt đầu phải nạp mô hình; CPU có thể chậm. Nếu xuất hiện lỗi DLL của Torch/ONNXRuntime, kiểm tra Microsoft Visual C++2015–2022 x64 Redistributable chính thức; không cần bộ biên dịch Build Tools cho quy trình cài này. Windows launcher chưa được chạy trên Windows thật trong phiên kiểm thử này.
 
 ## Tạo voice
 
@@ -33,7 +37,7 @@ Linux, CPU 4 threads, không GPU:
 - Giọng nữ tạo thật câu **“Nyob zoo, kuv hais lus Hmoob.”**: WAV PCM16 mono 24 kHz, 2,71 giây; lượt lạnh khoảng64,7 giây, RAM đỉnh khoảng7,84 GiB.
 - Giọng nam, cách đọc Review, cùng câu trên: tạo thật qua giao diện/API, WAV 2,51 giây; lượt này khoảng93,6 giây. Đây là số đo máy kiểm thử, không bảo đảm tốc độ trên máy khác.
 - Nút Dừng đã kết thúc worker thật, sau đó tạo lại thành công. Chọn mẫu/generate không yêu cầu micro. Desktop/mobile 390 px không tràn ngang hoặc lỗi JavaScript.
-- 63 kiểm thử Python đạt; 8 kiểm tra micro trong Chromium đạt. Đã giải mã WAV và xác minh tín hiệu khác 0; kết quả này không thay thế việc nghe chất lượng/phát âm.
+- 75 kiểm thử Python đạt trên cả môi trường kiểm thử và môi trường mới do bộ cài tạo; 8 kiểm tra micro trong Chromium đạt. Đã giải mã WAV và xác minh tín hiệu khác 0; kết quả này không thay thế việc nghe chất lượng/phát âm.
 
 ## Nguồn và kỹ thuật
 
