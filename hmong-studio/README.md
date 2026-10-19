@@ -1,3 +1,15 @@
+# Bản 0.3.3 — sửa bộ cài Windows chọn nhầm Python 3.15
+
+Ảnh lỗi cho thấy `.venv` dùng Python 3.15. PyYAML chưa có wheel phù hợp trong lần cài đó nên pip thử biên dịch C++ rồi báo thiếu Visual C++.
+
+Bộ cài mới kiểm tra CPython 64-bit phiên bản 3.10–3.12. Ưu tiên dùng lại `.venv` hợp lệ; nếu cần tạo mới thì ưu tiên `py -3.12`. Môi trường sai/hỏng được đổi tên thành `.venv-backup-<ngày>-<mã>` trước khi tạo mới, không xóa dữ liệu `.data` hoặc hai mẫu MP3. Môi trường hợp lệ thiếu pip được sửa bằng `ensurepip`. Cài thư viện dùng wheel có sẵn (`--only-binary=:all:`), vẫn giữ xác minh TLS.
+
+**Cách xử lý máy trong ảnh:** cài thêm **Python 3.12.10 Windows installer (64-bit)** từ https://www.python.org/downloads/release/python-31210/ ; bật Python Launcher khi cài. Không cần gỡ Python 3.15. Giải nén bản 0.3.3 vào thư mục mới, chạy `start.bat`; chỉ chạy `install_local_ai.bat` khi muốn cài thư viện AI cục bộ. Nếu giữ mẫu giọng riêng, sao chép `.data` từ bản cũ khi ứng dụng đã tắt. Không sao chép `.venv` cũ sang bản mới.
+
+Đã tải thành công toàn bộ wheel cho `requirements-local.txt` với mục tiêu CPython3.12/win_amd64, gồm `pyyaml-6.0.3-cp312-cp312-win_amd64.whl`; chỉ mục PyTorch CPU chính thức có wheel cho mục tiêu này. Kiểm thử Linux xác minh sao lưu môi trường cũ, tạo lại trong đường dẫn có dấu/khoảng trắng, giữ nguyên mẫu âm thanh, tái sử dụng môi trường và từ chối Python3.15 trước khi sửa tệp. Chưa thực thi BAT trên Windows thật.
+
+Việc cài thư viện thành công chưa bổ sung mô hình nhân bản Hmong Trắng; giới hạn mô hình của các bản trước vẫn còn.
+
 # Bản 0.3.2 — hai mẫu nam/nữ người dùng cung cấp
 
 Đã đối chiếu SHA-256: `hmong nữ.MP3` và `hmong nam.MP3` trùng khớp chính xác với hai tệp đi kèm tại `static/voices`. Nữ dài 15,543 giây; nam dài 14,916 giây. Không chỉnh cao độ hoặc thay giọng.

@@ -1,4 +1,4 @@
-HMONG STUDIO 0.3.2
+HMONG STUDIO 0.3.3
 
 Giai nen, cai Python 3.10-3.12 va FFmpeg trong PATH, chay start.bat.
 Them mau giong 3-60 giay va ban chep dung loi trong muc Giong cua toi.
@@ -12,3 +12,6 @@ Giai nen vao thu muc moi, chay start.bat va Ctrl+F5 trong trinh duyet.
 
 Hai mau nam/nu cua ban da co san. Chon giong de nghe dung mau.
 Can bo may nhan ban va ban chep dung loi trong mau de doc loi moi.
+
+Sua loi Python 3.15 / PyYAML: cai Python 3.12.10 64-bit tu python.org.
+Khong can go Python cu. Chay start.bat ban moi; khong copy .venv cu.
