@@ -108,7 +108,7 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
 
 
-app = FastAPI(title='Voice Studio Riêng', version='1.5.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio Riêng', version='1.6.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 @app.exception_handler(RequestValidationError)
@@ -184,15 +184,16 @@ def config():
     return {'available_ram_gb':available,**_config_values()}
 
 
-def effective_rendering_presets():
+def effective_rendering_presets(engine='vieneu_nano'):
     from calibration import read_saved_presets
-    return read_saved_presets(DATA,rendering_presets())
+    return read_saved_presets(DATA,rendering_presets(engine),engine)
 
 
 def _config_values():
     return {
         'version': app.version,
         'rendering_presets': effective_rendering_presets(),
+        'turbo_rendering_presets': effective_rendering_presets('vieneu'),
         'delivery_profiles': profile_catalog(),
         'mode': 'local',
         'edition': 'standalone-voice',
@@ -371,7 +372,7 @@ def run_job(ident):
         reused_parts = any(work.glob("[0-9]*.wav"))
         write_json(path, job)
     try:
-        env = dict(os.environ, VOICE_STUDIO_DATA_DIR=str(DATA), HF_HOME=str(DATA / 'models' / 'cache'), HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1', OMP_NUM_THREADS=os.environ.get('VOICE_STUDIO_THREADS', '4'), PYTHONUTF8='1')
+        env = dict(os.environ, VOICE_STUDIO_DATA_DIR=str(DATA), HF_HOME=str(DATA / 'models' / 'cache'), HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1', OMP_NUM_THREADS=str(job.get('nano_threads',2)), OPENBLAS_NUM_THREADS='1', MKL_NUM_THREADS='1', NUMEXPR_NUM_THREADS='1', PYTHONUTF8='1')
         code = execute_worker(path, env, work)
         if code == -2 or (work / 'cancel.flag').exists():
             if job.get('calibration'):
@@ -407,7 +408,11 @@ def speech(body: Speech):
 def _submit_speech(body: Speech,calibration=False):
     if not body.text.strip() or body.language not in LANGUAGES or body.format not in {'wav', 'mp3'} or body.delivery not in PROFILES:
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
-    preset=effective_rendering_presets()[body.render_mode]
+    voice = next((v for v in PRESETS + installed_voices() + records('voices') if v['id'] == body.voice_id), None)
+    if not voice or body.language not in voice['languages']:
+        raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
+    engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
+    preset=effective_rendering_presets(engine)[body.render_mode]
     for field,value in preset.items():
         if field not in body.model_fields_set:setattr(body,field,value)
     if body.nano_steps not in {4,8,16}:raise HTTPException(422,'Chọn Nano 4, 8 hoặc 16 bước.')
@@ -417,13 +422,9 @@ def _submit_speech(body: Speech,calibration=False):
         body.text, body.input_format = normalize_script(body.text, body.input_format)
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from None
-    voice = next((v for v in PRESETS + installed_voices() + records('voices') if v['id'] == body.voice_id), None)
-    if not voice or body.language not in voice['languages']:
-        raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
-    engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
     if engine != 'system' and not (DATA / 'models' / f'{engine}.ready').exists():
         raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Chạy lệnh tải mô hình trong hướng dẫn cài đặt.')
-    if calibration and engine!='vieneu_nano':raise HTTPException(422,'Chọn giọng Nano để đo và tối ưu nhiều tiến trình.')
+    if calibration and engine not in {'vieneu_nano','vieneu'}:raise HTTPException(422,'Chọn giọng Nano hoặc Turbo để đo và tối ưu CPU.')
     try:
         segment_plan = 'nano-packed-v1' if engine == 'vieneu_nano' and body.paragraph_pause == 0 else 'classic-v1'
         segments = plan_segments({**body.model_dump(), 'engine': engine, 'segment_plan': segment_plan})
@@ -579,7 +580,7 @@ def resume_job(ident: str, auto_fit: bool = True):
 
 @app.get('/api/system-info')
 def machine_info():
-    return {**system_info(), 'rendering_presets': effective_rendering_presets()}
+    return {**system_info(), 'rendering_presets': effective_rendering_presets(), 'turbo_rendering_presets':effective_rendering_presets('vieneu')}
 
 
 @app.get('/api/jobs/{ident}/script.{extension}')
@@ -664,7 +665,8 @@ def benchmark(body: BenchmarkRequest):
     if body.language != 'vi':raise HTTPException(422,'Mẫu đo hiện dùng lời tiếng Việt; chọn giọng tiếng Việt để đo.')
     from calibration import sample_text
     voice=next((v for v in PRESETS+installed_voices()+records('voices') if v['id']==body.voice_id),None)
-    workers=(body.nano_parallel or effective_rendering_presets()[body.render_mode]['nano_parallel']) if voice and voice.get('engine')=='vieneu_nano' else 1
+    engine=voice.get('engine') if voice else None
+    workers=(body.nano_parallel or effective_rendering_presets(engine)[body.render_mode]['nano_parallel']) if engine in {'vieneu_nano','vieneu'} else 1
     text=sample_text(workers)
     settings=body.model_dump(exclude_none=True)
     payload=Speech(text=text,**settings,paragraph_pause=0,format='wav')
@@ -675,8 +677,10 @@ def benchmark(body: BenchmarkRequest):
 @app.post('/api/calibrate',status_code=202)
 def calibrate_machine(body: BenchmarkRequest):
     from calibration import sample_text
-    if body.language!='vi':raise HTTPException(422,'Mẫu tối ưu hiện dùng giọng tiếng Việt Nano.')
-    preset=rendering_presets()[body.render_mode]
+    if body.language!='vi':raise HTTPException(422,'Mẫu tối ưu hiện dùng giọng tiếng Việt Nano hoặc Turbo.')
+    voice=next((v for v in PRESETS+installed_voices()+records('voices') if v['id']==body.voice_id),None)
+    if not voice or voice.get('engine') not in {'vieneu_nano','vieneu'}:raise HTTPException(422,'Chọn giọng Nano hoặc Turbo để tự đo CPU.')
+    preset=rendering_presets(voice['engine'])[body.render_mode]
     payload=Speech(text=sample_text(preset['nano_parallel']),voice_id=body.voice_id,language=body.language,
                    render_mode=body.render_mode,delivery=body.delivery,paragraph_pause=0,format='wav',**preset)
     return _submit_speech(payload,calibration=True)

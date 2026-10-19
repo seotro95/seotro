@@ -15,7 +15,7 @@ succeed in the native smoke; missing detection cannot silently pass as a
 one-worker hardware budget. RUNTIME-ADDITIONS.txt records the added dependency.
 
 ```powershell
-python packaging/build_windows.py --output "$env:RUNNER_TEMP/Voice-Studio-Rieng-1.5.0-Portable" --base-archive "$env:RUNNER_TEMP/Voice-Studio-Windows-x64.zip"
+python packaging/build_windows.py --output "$env:RUNNER_TEMP/Voice-Studio-Rieng-1.6.0-Portable" --base-archive "$env:RUNNER_TEMP/Voice-Studio-Windows-x64.zip"
 ```
 
 Pinned base URL:
@@ -48,6 +48,8 @@ validation. Actual size/time depends on model revisions and runner throughput.
 Base download, extraction, tests and compression commonly need 5–15 minutes;
 fresh preparation may need substantially longer.
 
-Version 1.5 tests real Nano news pacing at native speed 1.04 and the fast WSOLA fitter. Two fresh ten-sentence, four-step, two-process jobs measure cold and warm throughput; no artificial paragraph gaps or subtitle silence count as speech. PORTABLE-QA.json and BUILD_INFO.json record measured estimates, without promising 30x realtime or a result on another PC. Worker pools close before relocation moves back.
+Version 1.6 tests real Nano news pacing at native speed 1.04 and the fast WSOLA fitter. Two fresh ten-sentence, four-step, two-process jobs measure cold and warm throughput; no artificial paragraph gaps or subtitle silence count as speech. PORTABLE-QA.json and BUILD_INFO.json record measured estimates, without promising 30x realtime or a result on another PC. Worker pools close before relocation moves back.
 
-Version 1.5 expands bounded Nano pools to32, budgets physical CPU cores and available RAM, and calibrates candidate worker/thread teams with fresh real speech. Steps stay unchanged within the selected mode. The native smoke also measures and persists a real on-runner calibration, including warm model reuse and temporary-output cleanup. The runner calibration is removed before packaging so each user calibrates their own hardware.
+Version 1.6 expands bounded Nano pools to32, budgets physical CPU cores and available RAM, and calibrates candidate worker/thread teams with fresh real speech. Steps stay unchanged within the selected mode. The native smoke also measures and persists a real on-runner calibration, including warm model reuse and temporary-output cleanup. The runner calibration is removed before packaging so each user calibrates their own hardware.
+
+Version 1.6 enables the same bounded ordered process pool for Turbo/Mai Anh, honors per-worker ORT threads, limits nested BLAS teams, and budgets 3GiB per Turbo worker. Calibration records are separated by engine. Native QA additionally requires real Mai Anh FP32 two-worker SRT alignment and cold/warm HTTP benchmarks. An explicit UI Nano comparison changes the selected voice and starts measurement without replacing the editor text.

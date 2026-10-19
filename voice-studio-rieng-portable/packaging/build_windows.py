@@ -1,4 +1,4 @@
-"""Build the standalone 1.5 Windows bundle; publish only after native validation.
+"""Build the standalone 1.6 Windows bundle; publish only after native validation.
 
 A checksum-pinned, previously tested portable release can supply the runtime and
 models. Only its runtime, FFmpeg and model storage are reused; application source,
@@ -233,7 +233,7 @@ def verify_relocated(root):
 
 
 def write_notices(root):
-    (root/'DOC_TRUOC_PORTABLE.txt').write_text('''VOICE STUDIO RIENG 1.5.0 - WINDOWS 10/11 X64 PORTABLE
+    (root/'DOC_TRUOC_PORTABLE.txt').write_text('''VOICE STUDIO RIENG 1.6.0 - WINDOWS 10/11 X64 PORTABLE
 
 Giai nen TOAN BO ZIP vao thu muc moi, vi du D:\\VoiceStudio.
 Mo MO_TOOL.bat. Khong can cai Python, FFmpeg hay tai lai giong Nano da kem theo.
@@ -241,8 +241,10 @@ Giu cua so tool mo trong khi tao voice. Du lieu cua ban nam trong app/.data.
 Ban nay giu nguyen moc SRT, tu can nhip tung cau va them khoang lang.
 Chon WAV de dung video; cau bi ep qua nhanh van can nghe kiem tra.
 Co che do Nhanh/Can bang/Chat luong va kiem tra cau hinh may, do toc do mau.
-Ho tro toi da 32 tac vu Nano, tu do va luu cau hinh CPU nhanh nhat do duoc.
-Chon giong Nano > Uu tien toc do > Tu do va toi uu may nhieu loi.
+Ho tro toi da 32 tac vu Nano/Turbo, tu do va luu cau hinh rieng cho moi bo giong.
+Ban1.6 sua loi Mai Anh/Turbo chi chay mot tac vu, giu FP32 tren CPU thieu VNNI.
+Giu giong dang chon > Uu tien toc do > Tu do va toi uu CPU.
+Nut Chuyen sang Nano va do toc do doi giong va tao mau do, giu kich ban.
 Nhanh dung Nano 4 buoc va WSOLA; can nghe lai, khong bao dam dat 30x tren moi may.
 10 phong cach dieu chinh nhip; goi y giong ke chuyen/tin tuc tu mau giong that.
 Chi chen [cuoi], [tho dai], [hang giong] khi ban chu dong muon them am thanh do.
@@ -304,7 +306,7 @@ def main():
     write_notices(root)
     verify_relocated(root)
     check_bundle_hygiene(root)
-    metadata = {'product': 'Voice Studio Rieng', 'version': '1.5.0', 'package_type': 'windows-x64-portable',
+    metadata = {'product': 'Voice Studio Rieng', 'version': '1.6.0', 'package_type': 'windows-x64-portable',
                 'source_commit': os.environ.get('GITHUB_SHA'), 'max_characters': 1000000,
                 'bundled_runtime': True, 'bundled_model_weights': True, 'native_windows_offline_smoke': 'passed',
                 'verified_base_sha256': args.base_sha256 if args.base_archive else None}

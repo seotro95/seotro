@@ -1,4 +1,4 @@
-# Voice Studio Riêng 1.5.0 · Windows 10/11 x64 Portable
+# Voice Studio Riêng 1.6.0 · Windows 10/11 x64 Portable
 
 Giải nén **toàn bộ ZIP** vào thư mục có quyền ghi, ví dụ `D:/VoiceStudio`, rồi mở **MO_TOOL.bat**. Giữ cửa sổ lệnh mở trong khi sử dụng; dùng Ctrl+C để tắt. Bản Portable đã có Python, FFmpeg, Nano và Turbo, dùng cục bộ với các giọng đi kèm.
 
@@ -12,10 +12,14 @@ Ví dụ `00:27:20,519 --> 00:27:23,671` có ô lời dài **3,152 giây**. Nế
 
 ## Chọn tốc độ và giọng
 
+Bản 1.6 sửa lỗi giọng Mai Anh/Turbo chỉ chạy một tác vụ. Chọn **Ưu tiên tốc độ → Tự đo và tối ưu CPU** để tối ưu giọng đang chọn. Nano và Turbo có cấu hình RAM/CPU và kết quả đo riêng. CPU Xeon E5 v4 dùng Turbo FP32; không ép INT8 trên CPU thiếu VNNI.
+
+Bấm **Chuyển sang Nano và đo tốc độ** khi muốn so sánh bộ giọng nhanh. Chỉ nút đổi giọng chủ động mới chọn Nano; kịch bản giữ nguyên. Bản thu hiện rõ bộ giọng, số tác vụ/luồng và FP32 hoặc số bước Nano thực dùng.
+
 - **Nhanh:** Nano 4 bước, nhiều tiến trình theo tài nguyên máy, bộ căn WSOLA. Cần nghe lại chất lượng.
 - **Cân bằng:** Nano 8 bước. **Chất lượng:** Nano 16 bước; ưu tiên chất lượng thay vì số đo tốc độ.
-- Nano hỗ trợ tối đa **32 tác vụ**. Máy 56 luồng / 28 lõi vật lý, đủ RAM bắt đầu ở 28 tác vụ × 1 luồng; tool không coi luồng ảo là lõi vật lý.
-- Chọn **giọng Nano → Ưu tiên tốc độ → Tự đo và tối ưu máy nhiều lõi**. Tool thử nhiều cấu hình bằng lời thật và lưu cấu hình nhanh nhất đo được; số bước tạo giọng giữ theo chế độ đã chọn. Thử nhiều cấu hình lần đầu có thể mất vài phút.
+- Nano và Turbo hỗ trợ tối đa **32 tác vụ CPU**. Máy 56 luồng / 28 lõi vật lý, đủ RAM bắt đầu ở 28 tác vụ × 1 luồng; tool không coi luồng ảo là lõi vật lý.
+- Chọn **giọng Nano → Ưu tiên tốc độ → Tự đo và tối ưu CPU**. Tool thử nhiều cấu hình bằng lời thật và lưu cấu hình nhanh nhất đo được; số bước tạo giọng giữ theo chế độ đã chọn. Thử nhiều cấu hình lần đầu có thể mất vài phút.
 - Bấm **Sao chép kết quả đo** để gửi số liệu, không kèm kịch bản riêng. Có thể dừng quá trình đo bằng nút Dừng tạo.
 - Số đo dùng thời lượng lời đã tạo, loại khoảng lặng SRT. Kết quả phân biệt lượt nạp model và lượt model đã sẵn sàng; hãy kiểm tra cả kịch bản dài để xác nhận mốc 2 phút/1 giờ.
 - Có 10 nhịp/thể loại: Tự nhiên, Tin tức, Review, Kể chuyện, Kinh dị nhịp chậm, Cổ tích, Thuyết minh, Quảng cáo, Chậm rãi, Sôi nổi.

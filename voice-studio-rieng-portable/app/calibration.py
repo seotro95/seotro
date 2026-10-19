@@ -31,11 +31,17 @@ def sample_text(workers):
     return '\n'.join(SAMPLES[i%len(SAMPLES)]+f' Đây là đoạn đo số {i+1}.' for i in range(count))
 
 
-def read_saved_presets(data,defaults):
+def read_saved_presets(data,defaults,engine='vieneu_nano'):
     try:
         saved=json.loads((Path(data)/'calibration.json').read_text(encoding='utf-8'))
         if saved.get('logical_cores') != os.cpu_count():return defaults
-        for mode,record in saved.get('profiles',{}).items():
+        for key,record in saved.get('profiles',{}).items():
+            if ':' in key:
+                saved_engine,mode=key.split(':',1)
+                if saved_engine!=engine:continue
+            else:
+                if engine!='vieneu_nano':continue
+                mode=key
             if mode not in defaults:continue
             chosen=record['selected']['settings']
             if record['nano_steps'] != defaults[mode]['nano_steps']:continue
@@ -62,7 +68,8 @@ def calibrate(job,render,close_pool,data=None):
     data=Path(data or os.environ['VOICE_STUDIO_DATA_DIR'])
     work=data/'parts'/job['id'];work.mkdir(parents=True,exist_ok=True)
     cleanup_measurements(data,job['id'])
-    presets=rendering_presets()
+    engine=job.get('engine','vieneu_nano')
+    presets=rendering_presets(engine)
     mode=job.get('render_mode','fast')
     base=presets[mode]
     candidates=calibration_candidates(base)
@@ -102,7 +109,7 @@ def calibrate(job,render,close_pool,data=None):
         cancelled()
         for extension in ('wav','srt'):
             shutil.copyfile(data/'audio'/f'{best["id"]}.{extension}',data/'audio'/f'{job["id"]}.{extension}')
-        report={'selected':selected,'candidates':records,'nano_steps':job['nano_steps'],
+        report={'selected':selected,'candidates':records,'nano_steps':job['nano_steps'],'engine':engine,
                 'logical_cores':os.cpu_count(),'estimate_only':True,'target_30x_met_on_sample':selected['warm']['target_30x_met_on_sample'],
                 'total_calibration_seconds':round(time.perf_counter()-started,3)}
         saved={'logical_cores':os.cpu_count(),'profiles':{}}
@@ -110,9 +117,9 @@ def calibrate(job,render,close_pool,data=None):
             previous=json.loads((data/'calibration.json').read_text(encoding='utf-8'))
             if previous.get('logical_cores')==os.cpu_count():saved=previous
         except (OSError,ValueError):pass
-        saved.setdefault('profiles',{})[mode]=report
+        saved.setdefault('profiles',{})[engine+':'+mode]=report
         write_json_atomic(data/'calibration.json',saved)
-        final={**best['result'],'processing_seconds':report['total_calibration_seconds'],'calibration_report':report,'progress':100}
+        final={**best['result'],**selected['settings'],'processing_seconds':report['total_calibration_seconds'],'calibration_report':report,'progress':100}
         write_json_atomic(work/'result.json',final)
         write_progress(work/'progress.json',{'progress':100,'phase':'Đã đo và lưu cấu hình phù hợp máy này'})
         success=True

@@ -16,13 +16,28 @@ def test_dual_xeon_56_threads_128gb_is_not_capped_to_eight_models():
     assert (modes['quality']['nano_parallel'],modes['quality']['nano_threads'])==(7,4)
     assert resource_presets(128,64,120)['fast']['nano_parallel']==32
     assert resource_presets(56,28,2)['fast']['nano_parallel']==1
+    assert resource_presets(56,28,120,'vieneu')['fast']['nano_parallel']==28
+    assert resource_presets(56,28,12,'vieneu')['fast']['nano_parallel']==3
 
 
-def test_calibration_measures_selects_saves_and_preserves_user_files(tmp_path,monkeypatch):
+def test_nano_calibration_never_overrides_turbo_memory_budget(tmp_path):
+    import os
+    record={'nano_steps':4,'selected':{'settings':{'nano_parallel':8,'nano_threads':1}}}
+    saved={'logical_cores':os.cpu_count(),'profiles':{'fast':record,'vieneu:fast':{
+        'nano_steps':4,'selected':{'settings':{'nano_parallel':2,'nano_threads':2}}}}}
+    (tmp_path/'calibration.json').write_text(json.dumps(saved))
+    nano=calibration.read_saved_presets(tmp_path,resource_presets(56,28,12))
+    turbo=calibration.read_saved_presets(tmp_path,resource_presets(56,28,12,'vieneu'),'vieneu')
+    assert nano['fast']['nano_parallel']==8
+    assert turbo['fast']['nano_parallel']==2
+
+
+@pytest.mark.parametrize('engine',['vieneu_nano','vieneu'])
+def test_calibration_measures_selects_saves_and_preserves_user_files(tmp_path,monkeypatch,engine):
     for folder in ('audio','parts'): (tmp_path/folder).mkdir()
     unrelated=tmp_path/'audio/user-recording.wav';unrelated.write_bytes(b'user data')
     modes=resource_presets(4,4,16)
-    monkeypatch.setattr(calibration,'rendering_presets',lambda:modes)
+    monkeypatch.setattr(calibration,'rendering_presets',lambda selected_engine:modes)
     clock=[0.]
     monkeypatch.setattr(calibration.time,'perf_counter',lambda:clock[0])
     calls={};settings_seen=[]
@@ -36,7 +51,7 @@ def test_calibration_measures_selects_saves_and_preserves_user_files(tmp_path,mo
         (tmp_path/'audio'/f"{job['id']}.srt").write_text('1\n00:00:00,000 --> 00:00:00,400\nMẫu đo.')
         (path/'result.json').write_text(json.dumps({'completed':2,'total':2,'audio_seconds':.4,'spoken_audio_seconds':.4,'duration_limited':False}))
     close=Mock()
-    job={'id':'a'*32,'text':calibration.sample_text(4),'nano_steps':4,'render_mode':'fast'}
+    job={'id':'a'*32,'text':calibration.sample_text(4),'nano_steps':4,'render_mode':'fast','engine':engine}
     calibration.calibrate(job,render,close,tmp_path)
     result=json.loads((tmp_path/'parts'/job['id']/'result.json').read_text())
     report=result['calibration_report']
@@ -48,7 +63,7 @@ def test_calibration_measures_selects_saves_and_preserves_user_files(tmp_path,mo
     assert not list((tmp_path/'parts').glob('*-measure-*'))
     assert not list((tmp_path/'audio').glob('*-measure-*'))
     assert close.call_count==1
-    saved=calibration.read_saved_presets(tmp_path,resource_presets(4,4,16))
+    saved=calibration.read_saved_presets(tmp_path,resource_presets(4,4,16),engine)
     assert saved['fast']['nano_parallel']==2
 
 
@@ -76,7 +91,7 @@ def test_forced_stop_cleanup_only_removes_own_calibration_trials(tmp_path):
     assert (tmp_path/'audio'/(ident+'-measure-my-recording.wav')).exists()
 
 
-def test_calibration_endpoint_accepts_nano_and_rejects_other_models(studio,monkeypatch):
+def test_calibration_endpoint_accepts_nano_and_turbo_and_rejects_other_models(studio,monkeypatch):
     client,data=studio
     monkeypatch.setattr(app.executor,'submit',Mock())
     (data/'models/vieneu_nano.ready').touch();(data/'models/vieneu.ready').touch()
@@ -85,4 +100,8 @@ def test_calibration_endpoint_accepts_nano_and_rejects_other_models(studio,monke
     job=response.json()
     assert job['calibration'] is True and job['nano_steps']==4
     assert len(job['text'])>1000 and job['paragraph_pause']==0
-    assert client.post('/api/calibrate',json={'voice_id':'vi-maianh'}).status_code==422
+    turbo=client.post('/api/calibrate',json={'voice_id':'vi-maianh','render_mode':'fast'})
+    assert turbo.status_code==202,turbo.text
+    assert turbo.json()['engine']=='vieneu' and turbo.json()['speaker']=='Mai Anh'
+    assert turbo.json()['calibration'] is True and turbo.json()['quality']=='standard'
+    assert client.post('/api/calibrate',json={'voice_id':'qw-ryan'}).status_code==422

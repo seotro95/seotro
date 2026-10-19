@@ -24,6 +24,7 @@ def available_port():
 
 
 def main():
+    os.environ.update(OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='1',NUMEXPR_NUM_THREADS='1')
     parser = argparse.ArgumentParser()
     parser.add_argument('--no-browser', action='store_true', help='Start without automatically opening a browser')
     args = parser.parse_args()

@@ -1,4 +1,4 @@
-VOICE STUDIO RIÊNG 1.5.0 — PORTABLE WINDOWS 10/11 X64
+VOICE STUDIO RIÊNG 1.6.0 — PORTABLE WINDOWS 10/11 X64
 
 Giải nén TOÀN BỘ ZIP vào thư mục mới rồi mở MO_TOOL.bat.
 Gói Portable có Python, FFmpeg và giọng Việt Nano/Turbo. Không cần chạy bộ cài hoặc tải lại các giọng đi kèm.
@@ -20,10 +20,15 @@ CĂN MỐC TXT / SRT
 - WAV giữ mốc theo mẫu âm thanh; MP3 có thể có độ trễ/padding tùy bộ giải mã.
 
 TỐC ĐỘ TẠO VÀ CẤU HÌNH MÁY
+- Bản 1.6 sửa lỗi Turbo/Mai Anh luôn chạy một tác vụ dù đã chọn nhiều tác vụ. Nano và Turbo đều dùng pool CPU có giới hạn và lưu cấu hình đo riêng.
+- Giữ giọng đang chọn: bấm Ưu tiên tốc độ rồi Tự đo và tối ưu CPU.
+- So sánh bộ giọng nhanh: bấm Chuyển sang Nano và đo tốc độ. Nút này đổi giọng và tạo mẫu đo; kịch bản đang nhập giữ nguyên.
+- CPU E5-2680 v4 không hỗ trợ VNNI: Turbo giữ FP32, không tự ép INT8.
+- Cấu hình CPU chỉ thay đổi mức xử lý song song, không tăng tốc phát để làm đẹp số đo. Kết quả ghi bộ giọng, số tác vụ và số luồng thật.
 - Nhanh: Nano 4 bước, xử lý nhiều đoạn song song theo tài nguyên máy và bộ căn WSOLA. Ưu tiên tốc độ; nghe lại phát âm và sắc thái.
 - Cân bằng: Nano 8 bước; Chất lượng: 16 bước. FFmpeg là bộ căn mặc định cho đường chất lượng.
-- Tối đa 32 tác vụ Nano. Máy 56 luồng, 28 lõi vật lý, đủ RAM dùng cấu hình nhanh ban đầu 28 tác vụ × 1 luồng. Không coi 56 luồng là 56 lõi vật lý.
-- Chọn giọng Nano, chọn Ưu tiên tốc độ, rồi bấm Tự đo và tối ưu máy nhiều lõi. Tool so sánh nhiều cấu hình bằng lời thật, giữ nguyên số bước tạo giọng và lưu cấu hình nhanh nhất đo được.
+- Tối đa 32 tác vụ CPU cho Nano và Turbo. Máy 56 luồng, 28 lõi vật lý, đủ RAM dùng cấu hình nhanh ban đầu 28 tác vụ × 1 luồng. Không coi 56 luồng là 56 lõi vật lý.
+- Giữ Mai Anh/Turbo hoặc chọn Nano, chọn Ưu tiên tốc độ, rồi bấm Tự đo và tối ưu CPU. Tool so sánh nhiều cấu hình bằng lời thật, giữ nguyên số bước tạo giọng và lưu cấu hình nhanh nhất đo được.
 - Đo lần đầu có thể mất vài phút; đây là thời gian thử nhiều cấu hình, không phải thời gian tạo một kịch bản. Model được giữ ấm cho lượt tiếp theo.
 - Bấm Sao chép kết quả đo để gửi số liệu, không kèm kịch bản riêng. Có thể bấm Dừng tạo khi đang đo.
 - Tốc độ tạo khác tốc độ lời đọc; hãy kiểm tra toàn bộ kịch bản để xác nhận mốc 2 phút/1 giờ.

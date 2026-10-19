@@ -42,7 +42,7 @@ def main():
     data = app/'.data'
     with TestClient(studio.app) as client:
         config = client.get('/api/config').json()
-        assert config['edition'] == 'standalone-voice' and config['version'] == '1.5.0'
+        assert config['edition'] == 'standalone-voice' and config['version'] == '1.6.0'
         assert config['nano_ready'] and config['max_characters'] == 1000000
         assert len(config['delivery_profiles']) == 10
         assert set(config['rendering_presets']) == {'fast', 'balanced', 'quality'}
@@ -119,6 +119,18 @@ def main():
     assert sf.info(data/'audio/portable-native-news-wsola.wav').frames == round(1.15*24000)
     paced_report = json.loads((data/'parts/portable-native-news-wsola/alignment.json').read_text(encoding='utf-8'))
     assert paced_report['sync_ok']
+    # Mai Anh/Turbo must use the same bounded process path, keep its reference
+    # voice/FP32 and preserve two original subtitle clocks in ordered assembly.
+    if (data/'models/vieneu.ready').exists():
+        turbo_srt='1\n00:00:00,250 --> 00:00:01,150\nXin chào.\n\n2\n00:00:01,500 --> 00:00:02,750\nCảm ơn.'
+        turbo_job=dict(real,id='portable-turbo-parallel-srt',engine='vieneu',speaker='Mai Anh',quality='standard',
+                       text=turbo_srt,nano_parallel=2,nano_threads=1,audio_fit_backend='wsola')
+        render(turbo_job)
+        turbo_result=json.loads((data/'parts'/turbo_job['id']/'result.json').read_text(encoding='utf-8'))
+        assert turbo_result['execution_settings']['engine']=='vieneu'
+        assert turbo_result['execution_settings']['workers']==2 and turbo_result['execution_settings']['precision']=='fp32'
+        assert sf.info(data/'audio'/(turbo_job['id']+'.wav')).frames==round(2.75*24000)
+        assert parse_srt((data/'audio'/(turbo_job['id']+'.srt')).read_text(encoding='utf-8'))==parse_srt(turbo_srt)
     # Two fresh jobs distinguish cold process/model setup from reusable warm
     # workers. Distinct sentences cannot reuse chunk checkpoints. No artificial
     # paragraph gaps or subtitle silence inflate speech throughput.
@@ -213,6 +225,26 @@ def main():
         qa['machine_calibration'] = calibration
         qa['post_calibration_benchmark'] = follow['speed_report']
         qa['checks'].append('real HTTP calibration, saved presets, warm next job and temporary-output cleanup')
+        if (data/'models/vieneu.ready').exists():
+            turbo_measurements=[]
+            for phase in ('cold','warm'):
+                response=client.post('/api/benchmark',json={'voice_id':'vi-maianh','render_mode':'fast',
+                                  'nano_parallel':2,'nano_threads':1,'quality':'standard'})
+                assert response.status_code==202,response.text
+                turbo_id=response.json()['id']
+                deadline=time.monotonic()+180
+                while time.monotonic()<deadline:
+                    turbo=client.get('/api/jobs/'+turbo_id).json()
+                    if turbo['status'] in {'done','error','cancelled'}:break
+                    time.sleep(.25)
+                assert turbo['status']=='done',turbo
+                assert turbo['speaker']=='Mai Anh' and turbo['engine']=='vieneu'
+                assert turbo['execution_settings']['workers']==2 and turbo['execution_settings']['threads']==1
+                assert turbo['execution_settings']['precision']=='fp32' and turbo['speed_report']['measurement_audio_seconds']>10
+                turbo_measurements.append({'phase':phase,**turbo['speed_report']})
+            qa['turbo_sample']={'engine':'vieneu','speaker':'Mai Anh','precision':'fp32',
+                               'parallel':2,'threads_per_worker':1,'blas_threads':1,'measurements':turbo_measurements}
+            qa['checks'].append('real Mai Anh FP32 parallel SRT and cold/warm HTTP benchmark')
     (root/'PORTABLE-QA.json').write_text(json.dumps(qa, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     # Invoke the real bundled launcher and make an actual loopback HTTP request.
     log = root/'portable-launch-check.log'

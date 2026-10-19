@@ -6,6 +6,11 @@ import traceback
 import multiprocessing
 from concurrent.futures import ProcessPoolExecutor
 import os
+# Each ORT worker has its own explicit thread budget. Unbounded NumPy BLAS
+# teams otherwise multiply across processes and compete for the same cores.
+os.environ['OPENBLAS_NUM_THREADS']='1'
+os.environ['MKL_NUM_THREADS']='1'
+os.environ['NUMEXPR_NUM_THREADS']='1'
 import subprocess
 import sys
 import time
@@ -48,7 +53,7 @@ def load_synthesizer(job):
             from hardware import supports_int8
             if not supports_int8():
                 raise RuntimeError('CPU không hỗ trợ VNNI cho chế độ nhanh.')
-        model = LocalVieneu(backend='onnx', device='cpu', precision=precision, threads=int(os.environ.get('OMP_NUM_THREADS', '4')))
+        model = LocalVieneu(backend='onnx', device='cpu', precision=precision, threads=job.get('nano_threads',2))
         # VieNeu caches reference encoding once for subsequent chunks.
         options = {'voice': job['speaker']} if job.get('speaker') else {'ref_audio': str(DATA / 'voices' / (job['voice_id'] + '.wav')), 'denoise': False}
         def synthesize(text, output):
@@ -193,7 +198,7 @@ def render(job, synthesize=None):
     global _nano_pool, _nano_pool_key, _cached_synth, _cached_key
     if job.get('video_id'):
         raise ValueError('Gói này chỉ tạo âm thanh; không xử lý video.')
-    parallel_workers=min(32,max(1,int(job.get('nano_parallel',1)))) if job.get('engine')=='vieneu_nano' and synthesize is None else 1
+    parallel_workers=min(32,max(1,int(job.get('nano_parallel',1)))) if job.get('engine') in {'vieneu_nano','vieneu'} and synthesize is None else 1
     parallel=parallel_workers>1
     pool_key=(parallel_workers,)+tuple(job.get(k) for k in ('engine','voice_id','speaker','language','quality','nano_steps','nano_threads'))
     if _nano_pool is not None and _nano_pool_key!=pool_key:
@@ -362,7 +367,11 @@ def render(job, synthesize=None):
     subtitle_text = export_srt(cues if cues else timed)
     (DATA / 'audio' / (job['id'] + '.srt')).write_text(subtitle_text, encoding='utf-8')
     fit_warning_cues=[c['cue'] for c in alignment if c.get('warning')=='fast_tempo']
-    write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'spoken_audio_seconds': spoken_audio_frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), 'auto_fitted_cues':sum(bool(c.get('auto_fitted')) for c in alignment), 'fit_warning_count':len(fit_warning_cues), 'fit_warning_cues':fit_warning_cues})
+    execution={'engine':job.get('engine'),'workers':min(parallel_workers,sum(bool(s.text) for s in segments)),
+               'worker_budget':parallel_workers,'threads':job.get('nano_threads',2),'blas_threads':1}
+    if job.get('engine')=='vieneu':execution['precision']='int8' if job.get('quality')=='fast' else 'fp32'
+    if job.get('engine')=='vieneu_nano':execution['nano_steps']=job.get('nano_steps',8)
+    write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'spoken_audio_seconds': spoken_audio_frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), 'auto_fitted_cues':sum(bool(c.get('auto_fitted')) for c in alignment), 'fit_warning_count':len(fit_warning_cues), 'fit_warning_cues':fit_warning_cues,'execution_settings':execution})
 
 
 def voice_error(exc):

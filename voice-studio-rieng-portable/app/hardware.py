@@ -52,7 +52,7 @@ def system_info():
     return {'cpu': cpu, 'logical_cores': os.cpu_count(), 'physical_cores': physical, 'ram_gb': ram, 'nvidia_gpus': gpus, 'pytorch_cuda_available': cuda, 'int8_vnni': supports_int8(), 'note': 'Các giọng Nano/Turbo trong gói này chạy CPU; có card NVIDIA không tự làm Nano dùng GPU. Đo mẫu để biết tốc độ thực tế trên máy đang chạy tool.'}
 
 
-def rendering_presets():
+def rendering_presets(engine='vieneu_nano'):
     """Conservative CPU/RAM budgets; GPU presence is not a Nano accelerator."""
     import os
     from pathlib import Path
@@ -83,13 +83,14 @@ def rendering_presets():
         physical=min(cores,psutil.cpu_count(logical=False) or cores)
     except ImportError:
         physical=cores
-    return resource_presets(cores,physical,ram_gb)
+    return resource_presets(cores,physical,ram_gb,engine)
 
 
-def resource_presets(logical,physical,available_gb):
+def resource_presets(logical,physical,available_gb,engine='vieneu_nano'):
     """Use physical CPU capacity; Hyper-Threading is not another model budget."""
     physical=max(1,min(logical,physical))
-    memory_workers=max(1,int(max(0,available_gb-1.5)/1.25)) if available_gb else 1
+    per_worker_gb=3 if engine=='vieneu' else 1.25
+    memory_workers=max(1,int(max(0,available_gb-1.5)/per_worker_gb)) if available_gb else 1
     fast=max(1,min(32,physical,memory_workers))
     balanced=max(1,min(16,max(1,physical//2),memory_workers))
     quality=max(1,min(8,max(1,physical//4),memory_workers))

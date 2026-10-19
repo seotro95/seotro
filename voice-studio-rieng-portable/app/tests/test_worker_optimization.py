@@ -94,8 +94,24 @@ def test_pcm_normalization_retains_matching_audio_without_ffmpeg(worker,tmp_path
     assert source.read_bytes()==destination.read_bytes()
 
 
+def test_turbo_constructor_uses_budgeted_threads_and_keeps_fp32(worker,monkeypatch):
+    import sys
+    from types import SimpleNamespace
+    observed={}
+    class Turbo:
+        def __init__(self,**kwargs):observed.update(kwargs)
+        def infer(self,text,**kwargs):observed.update(kwargs);return 'audio'
+        def save(self,audio,path):pass
+    monkeypatch.setitem(sys.modules,'local_vieneu',SimpleNamespace(LocalVieneu=Turbo))
+    synth=worker.load_synthesizer({'engine':'vieneu','quality':'standard','nano_threads':1,'speaker':'Mai Anh'})
+    synth('Xin chào.','unused.wav')
+    assert observed['threads']==1 and observed['precision']=='fp32'
+    assert observed['voice']=='Mai Anh'
+
+
 @pytest.mark.parametrize('parallel_workers',[4,8,28,32])
-def test_nano_pool_prefetch_is_bounded_and_model_settings_recreate_it(worker,tmp_path,monkeypatch,parallel_workers):
+@pytest.mark.parametrize('engine',['vieneu_nano','vieneu'])
+def test_nano_and_turbo_pool_prefetch_is_bounded_and_model_settings_recreate_it(worker,tmp_path,monkeypatch,parallel_workers,engine):
     executors=[]
     class Future:
         def __init__(self,pool):
@@ -122,7 +138,7 @@ def test_nano_pool_prefetch_is_bounded_and_model_settings_recreate_it(worker,tmp
     monkeypatch.setattr(worker,'ProcessPoolExecutor',Executor)
     monkeypatch.setattr(worker,'get_synthesizer',lambda job:native)
     text='\n\n'.join(f'{index+1}\n00:00:{index:02d},000 --> 00:00:{index:02d},500\nXin chào.' for index in range(10))
-    base={'text':text,'input_format':'srt','engine':'vieneu_nano','format':'wav','speed':1,
+    base={'text':text,'input_format':'srt','engine':engine,'format':'wav','speed':1,
           'nano_parallel':parallel_workers,'nano_steps':4,'cue_fit':'auto','audio_fit_backend':'wsola'}
     worker.render({**base,'id':'first'})
     worker.render({**base,'id':'reuse'})
@@ -133,5 +149,8 @@ def test_nano_pool_prefetch_is_bounded_and_model_settings_recreate_it(worker,tmp
     assert executors[1].workers==2 and executors[1].peak<=4
     result=json.loads((tmp_path/'parts/changed/result.json').read_text())
     assert result['completed']==10 and result['audio_seconds']==9.5
+    assert result['execution_settings']['engine']==engine
+    assert result['execution_settings']['workers']==2
+    if engine=='vieneu':assert result['execution_settings']['precision']=='fp32'
     assert result['spoken_audio_seconds']==pytest.approx(.4)
     worker.close_nano_pool()

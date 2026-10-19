@@ -24,6 +24,7 @@ let renderSettingsInitialized = false;
 let deliveryProfiles = new Map();
 let paragraphPauseEdited = false;
 let appliedCalibrationId = '';
+let appliedRenderEngine = null;
 let speedSummary = null;
 const historyNodes = new Map();
 
@@ -92,7 +93,13 @@ function modelInstruction(voice) {
 
 function languageName(language) { return config?.languages?.[language] || language || 'Chưa rõ ngôn ngữ'; }
 function engineName(voice) {
-  return {vieneu_nano: 'Nano', vieneu: 'VieNeu', qwen: 'Qwen', qwen_clone: 'Qwen · Nhân bản', system: 'Hệ thống Windows'}[voice?.engine] || voice?.engine || 'AI';
+  return {vieneu_nano: 'Nano', vieneu: 'Turbo', qwen: 'Qwen', qwen_clone: 'Qwen · Nhân bản', system: 'Hệ thống Windows'}[voice?.engine] || voice?.engine || 'AI';
+}
+
+function cpuVoice(voice) { return ['vieneu_nano', 'vieneu'].includes(voice?.engine); }
+
+function renderingPresets(voice) {
+  return voice?.engine === 'vieneu' ? config?.turbo_rendering_presets : config?.rendering_presets;
 }
 
 function populateDeliveryProfiles() {
@@ -160,18 +167,23 @@ function updateRenderNote() {
     quality: 'Ưu tiên độ tự nhiên. Thời gian tạo có thể dài hơn; nghe mẫu để kiểm tra sắc thái và phát âm.',
     fast: 'Ưu tiên hoàn thành nhanh. Nghe mẫu để kiểm tra phát âm và độ tự nhiên trước khi tạo bản dài.'
   }[$('render-mode').value] || '';
-  if ($('render-mode').value === 'fast' && current && current.engine !== 'vieneu_nano') {
-    note = `Đang dùng ${current.name} · ${engineName(current)}. Tốc độ tạo phụ thuộc mô hình của giọng này. Chọn một giọng Nano để dùng cấu hình Nano ưu tiên tốc độ.`;
+  if (cpuVoice(current)) {
+    note += ` Đang giữ giọng ${current.name} · ${engineName(current)}: ${$('nano-parallel').value} tác vụ × ${$('nano-threads').value} luồng CPU.`;
+    if (current.engine === 'vieneu' && config?.int8_cpu === false) note += ' CPU này không hỗ trợ VNNI; Turbo dùng FP32. Có thể chuyển sang Nano để đo so sánh.';
+  } else if ($('render-mode').value === 'fast' && current) {
+    note += ` Đang giữ giọng ${current.name} · ${engineName(current)}. Cấu hình nhiều tác vụ CPU chỉ áp dụng cho Nano và Turbo.`;
   }
   $('render-note').textContent = note;
   const nano = fastNanoVoice();
   $('choose-nano').disabled = !nano || submitting;
-  $('choose-nano').title = nano ? `Chọn ${nano.name} và áp dụng ưu tiên tốc độ.` : 'Cần chọn tiếng Việt và tải giọng Nano trước khi sử dụng.';
+  $('choose-nano').title = nano ? `Chuyển sang ${nano.name}, áp dụng ưu tiên tốc độ và tạo mẫu đo. Kịch bản đang nhập được giữ nguyên.` : 'Cần chọn tiếng Việt và tải giọng Nano trước khi sử dụng.';
 }
 
 function applyRenderMode(mode) {
   $('render-mode').value = mode;
-  const preset = config?.rendering_presets?.[mode] || {};
+  const voice = voices.find((item) => item.id === $('voice').value);
+  const preset = renderingPresets(voice)?.[mode] || {};
+  appliedRenderEngine = voice?.engine || null;
   $('nano-steps').value = String(preset.nano_steps || {fast: 4, balanced: 8, quality: 16}[mode] || 8);
   $('nano-parallel').value = String(Math.max(1, Math.min(32, Number(preset.nano_parallel) || 1)));
   $('nano-threads').value = String(Math.max(1, Math.min(8, Number(preset.nano_threads) || 2)));
@@ -185,6 +197,7 @@ async function inspectMachine() {
   try {
     const info = await api('/api/system-info');
     if (info.rendering_presets && config) config.rendering_presets = info.rendering_presets;
+    if (info.turbo_rendering_presets && config) config.turbo_rendering_presets = info.turbo_rendering_presets;
     const gpuNames = Array.isArray(info.nvidia_gpus) ? info.nvidia_gpus : [];
     const rows = [
       ['Bộ xử lý', info.cpu || 'Chưa xác định'],
@@ -251,14 +264,22 @@ function populateVoices() {
 
 function updateVoice() {
   const voice = voices.find((item) => item.id === $('voice').value);
+  if (voice?.engine !== appliedRenderEngine) applyRenderMode($('render-mode').value);
   const ready = voiceReady(voice);
   $('voice-status').className = `voice-status ${ready ? 'ready' : 'missing'}`;
   $('voice-status-title').textContent = !voice ? 'Chưa có giọng phù hợp' : ready ? `${engineName(voice)} · Sẵn sàng sử dụng` : `${engineName(voice)} · Cần tải mô hình`;
   $('voice-status-detail').textContent = !voice ? 'Chọn ngôn ngữ khác hoặc thêm mẫu giọng cá nhân được hỗ trợ.' : ready ? (voice.description || 'Giọng đã có trên máy.') : `Trong thư mục tool, chạy ${modelInstruction(voice)}, rồi bấm Kiểm tra lại ở Thư viện giọng.`;
   $('generate').disabled = !ready || submitting;
   $('benchmark').disabled = !ready || submitting || $('language').value !== 'vi';
-  $('calibrate-machine').disabled = !ready || submitting || $('language').value !== 'vi' || voice?.engine !== 'vieneu_nano';
+  $('calibrate-machine').disabled = !ready || submitting || $('language').value !== 'vi' || !cpuVoice(voice);
+  $('calibrate-machine').title = cpuVoice(voice) ? `Đo cấu hình nhiều tác vụ cho giọng ${voice.name} · ${engineName(voice)}.` : 'Chọn giọng tiếng Việt Nano hoặc Turbo để đo nhiều tác vụ CPU.';
   $('benchmark').title = $('language').value === 'vi' ? 'Đo bằng giọng và chế độ ưu tiên đang chọn.' : 'Mẫu đo hiện hỗ trợ tiếng Việt.';
+  $('nano-parallel').disabled = !cpuVoice(voice) || submitting;
+  $('nano-threads').disabled = !cpuVoice(voice) || submitting;
+  $('nano-steps').disabled = voice?.engine !== 'vieneu_nano' || submitting;
+  $('resource-note').textContent = cpuVoice(voice)
+    ? `Các tác vụ CPU áp dụng cho giọng ${engineName(voice)} đang chọn. Nhiều tác vụ dùng thêm RAM; bấm tự đo để tìm cấu hình phù hợp. Số bước tạo giọng chỉ áp dụng cho Nano.`
+    : 'Chọn Nano hoặc Turbo để dùng nhiều tác vụ CPU. Giọng hiện tại dùng cơ chế xử lý riêng của mô hình.';
   updateSuggestion();
   updateRenderNote();
   $('generate-note').textContent = !voice ? 'Cần chọn giọng hỗ trợ ngôn ngữ lời đọc.' : !ready ? 'Tải mô hình trước khi tạo giọng. Mở Hướng dẫn để xem chi tiết.' : 'Tạo trên máy · Có thể dừng và tiếp tục trong Bản thu';
@@ -346,7 +367,7 @@ function addJobControls(container, job) {
 
 function setOutput(job) {
   selectedJob = job;
-  const signature = JSON.stringify([job.id, job.status, job.progress, job.phase, job.error, job.audio_seconds, job.duration_limited, job.speed_report, job.auto_fitted_cues, job.fit_warning_count, job.benchmark_note, job.calibration_report]);
+  const signature = JSON.stringify([job.id, job.status, job.progress, job.phase, job.error, job.audio_seconds, job.duration_limited, job.speed_report, job.auto_fitted_cues, job.fit_warning_count, job.benchmark_note, job.calibration_report, job.execution_settings]);
   if (outputSignature === signature) return;
   outputSignature = signature;
   const progress = Math.max(0, Math.min(100, Number(job.progress) || 0));
@@ -357,7 +378,7 @@ function setOutput(job) {
   $('output-status').hidden = false;
   $('output-status').className = `status-badge ${job.status}`;
   $('output-status').textContent = `${statusNames[job.status] || job.status}${activeStatuses.has(job.status) ? ` · ${progress}%` : ''}`;
-  $('output-detail').textContent = `${job.voice_name || 'Giọng đọc'} · ${languageName(job.language)} · ${duration(job.audio_seconds)}${job.phase ? ` · ${job.phase}` : ''}`;
+  $('output-detail').textContent = `${job.voice_name || 'Giọng đọc'} · ${formatExecutionSettings(job)} · ${languageName(job.language)} · ${duration(job.audio_seconds)}${job.phase ? ` · ${job.phase}` : ''}`;
   $('output-progress').hidden = !activeStatuses.has(job.status);
   $('output-progress').value = progress;
   const fitWarning = job.fit_warning_count ? `Đã tự căn ${job.auto_fitted_cues || 0} câu. ${job.fit_warning_count} câu cần tăng tốc trên 2×${job.fit_warning_cues?.length ? ' (câu ' + job.fit_warning_cues.slice(0, 10).join(', ') + (job.fit_warning_cues.length > 10 ? ', …' : '') + ')' : ''}; nghe kiểm tra trước khi dựng video.` : '';
@@ -375,19 +396,36 @@ function setOutput(job) {
   }
   $('output-actions').replaceChildren(); addJobControls($('output-actions'), job);
   const report = job.speed_report;
+  if (done && job.engine === 'vieneu' && report && Number(report.spoken_realtime_multiplier ?? report.realtime_multiplier) < 30 && fastNanoVoice()) {
+    $('output-actions').append(makeButton('Chuyển sang Nano và đo', chooseNanoAndBenchmark));
+  }
   $('speed-report').hidden = !done || !report;
   $('speed-report').textContent = report ? formatSpeedReport(report) : '';
-  speedSummary = done ? {version: config?.version, voice: job.voice_name, render_mode: job.render_mode, speed_report:report, calibration_report:job.calibration_report} : null;
+  speedSummary = done ? {version: config?.version, voice: job.voice_name, engine:job.engine, execution_settings:job.execution_settings, render_mode: job.render_mode, speed_report:report, calibration_report:job.calibration_report} : null;
   $('copy-speed-report').hidden = !done || (!report && !job.calibration_report);
   if (done && job.calibration_report) {
     const selected=job.calibration_report.selected;
     $('speed-report').hidden=false;
-    $('speed-report').textContent=`Đã lưu cấu hình đo được: ${selected.settings.nano_parallel} tác vụ × ${selected.settings.nano_threads} luồng. Kết quả khi model đã nạp: ${formatSpeedReport(selected.warm)} Tổng thời gian thử các cấu hình: ${duration(job.calibration_report.total_calibration_seconds)}.`;
+    $('speed-report').textContent=`Đã lưu cấu hình ${engineName({engine:job.calibration_report.engine || job.engine})} đo được: ${selected.settings.nano_parallel} tác vụ × ${selected.settings.nano_threads} luồng. Kết quả khi model đã nạp: ${formatSpeedReport(selected.warm)} Tổng thời gian thử các cấu hình: ${duration(job.calibration_report.total_calibration_seconds)}.`;
     if (appliedCalibrationId !== job.id) {
       appliedCalibrationId=job.id;
       api('/api/config').then(fresh => { config=fresh; if ($('voice').value===job.voice_id && $('render-mode').value===job.render_mode) applyRenderMode(job.render_mode); }).catch(error => notify(error.message,true));
     }
   }
+}
+
+function formatExecutionSettings(job) {
+  const actual=job.execution_settings;
+  const engine=actual?.engine || job.engine;
+  const parts=[engineName({engine})];
+  if (actual) {
+    if (cpuVoice({engine}) && Number(actual.workers)>0 && Number(actual.threads)>0) parts.push(`${actual.workers} tác vụ × ${actual.threads} luồng CPU`);
+    if (actual.precision) parts.push(String(actual.precision).toUpperCase());
+    if (engine==='vieneu_nano' && actual.nano_steps) parts.push(`${actual.nano_steps} bước`);
+  } else if (activeStatuses.has(job.status) && cpuVoice({engine})) {
+    parts.push(`yêu cầu ${job.nano_parallel || 1} tác vụ × ${job.nano_threads || 2} luồng CPU`);
+  }
+  return parts.join(' · ');
 }
 
 function formatSpeedReport(report) {
@@ -455,6 +493,16 @@ async function benchmark() {
     $('output-heading').scrollIntoView({block: 'center', behavior: 'auto'});
   } catch (error) { notify(error.message, true); }
   finally { submitting = false; updateVoice(); }
+}
+
+async function chooseNanoAndBenchmark() {
+  if (submitting) return;
+  const voice=fastNanoVoice();
+  if (!voice) { notify('Chọn tiếng Việt và tải giọng Nano trước khi đo so sánh.', true); return; }
+  $('voice').value=voice.id;
+  applyRenderMode('fast');
+  updateVoice();
+  await benchmark();
 }
 
 async function importScript(file) {
@@ -647,7 +695,7 @@ async function poll() {
 
 for (const button of document.querySelectorAll('[data-view]')) button.addEventListener('click', () => showView(button.dataset.view));
 $('language').addEventListener('change', populateVoices);
-$('voice').addEventListener('change', updateVoice);
+$('voice').addEventListener('change', () => { applyRenderMode($('render-mode').value); updateVoice(); });
 $('script').addEventListener('input', updateCharacterCount);
 $('script-format').addEventListener('change', updateFormat);
 $('speed').addEventListener('input', () => { $('speed-value').textContent = `${Number($('speed').value).toLocaleString('vi-VN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}×`; });
@@ -656,14 +704,12 @@ $('paragraph-pause').addEventListener('input', () => { paragraphPauseEdited = tr
 $('render-mode').addEventListener('change', () => applyRenderMode($('render-mode').value));
 $('optimize-speed').addEventListener('click', () => {
   applyRenderMode('fast');
-  notify('Đã áp dụng ưu tiên tốc độ theo tài nguyên máy. Bấm Đo tốc độ bằng mẫu ngắn để ước tính trước khi tạo bản dài.');
+  const voice=voices.find((item)=>item.id===$('voice').value);
+  notify(`Đã giữ giọng ${voice?.name || 'đang chọn'} và áp dụng cấu hình ${engineName(voice)} ưu tiên tốc độ. Bấm Đo giọng đang chọn để kiểm tra trước khi tạo bản dài.`);
 });
-$('choose-nano').addEventListener('click', () => {
-  const voice = fastNanoVoice();
-  if (!voice) { notify('Chọn tiếng Việt và tải giọng Nano trước khi sử dụng.', true); return; }
-  $('voice').value = voice.id; applyRenderMode('fast'); updateVoice();
-  notify(`Đã chọn ${voice.name} và áp dụng ưu tiên tốc độ. Đo mẫu, rồi nghe kiểm tra trước khi tạo bản dài.`);
-});
+$('choose-nano').addEventListener('click', chooseNanoAndBenchmark);
+$('nano-parallel').addEventListener('change', updateRenderNote);
+$('nano-threads').addEventListener('input', updateRenderNote);
 $('suggest-voice').addEventListener('click', () => {
   const suggested = suggestedVoice();
   if (!suggested) { notify('Chưa có giọng gợi ý sẵn sàng. Chọn giọng khác hoặc tải thêm giọng trong Thư viện giọng.', true); return; }
@@ -717,7 +763,7 @@ $('cue-fit').addEventListener('change', updateFormat);
 
 $('calibrate-machine').addEventListener('click', async () => {
   const voice=voices.find(item=>item.id===$('voice').value);
-  if (submitting || !voiceReady(voice) || voice.engine!=='vieneu_nano')return;
+  if (submitting || !voiceReady(voice) || !cpuVoice(voice))return;
   submitting=true;updateVoice();
   try {
     const job=await post('/api/calibrate',{voice_id:voice.id,language:$('language').value,render_mode:$('render-mode').value,delivery:$('delivery').value});
