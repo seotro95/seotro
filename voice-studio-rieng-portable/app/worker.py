@@ -130,6 +130,15 @@ def close_nano_pool():
     _nano_pool_key = None
 
 
+def reset_nano_models():
+    """Start calibration cold, including when a one-process model was cached."""
+    global _cached_synth, _cached_key
+    close_nano_pool()
+    _cached_synth = None
+    _cached_key = None
+    gc.collect()
+
+
 class EmptyVoiceError(ValueError):
     pass
 
@@ -184,7 +193,7 @@ def render(job, synthesize=None):
     global _nano_pool, _nano_pool_key, _cached_synth, _cached_key
     if job.get('video_id'):
         raise ValueError('Gói này chỉ tạo âm thanh; không xử lý video.')
-    parallel_workers=min(8,max(1,int(job.get('nano_parallel',1)))) if job.get('engine')=='vieneu_nano' and synthesize is None else 1
+    parallel_workers=min(32,max(1,int(job.get('nano_parallel',1)))) if job.get('engine')=='vieneu_nano' and synthesize is None else 1
     parallel=parallel_workers>1
     pool_key=(parallel_workers,)+tuple(job.get(k) for k in ('engine','voice_id','speaker','language','quality','nano_steps','nano_threads'))
     if _nano_pool is not None and _nano_pool_key!=pool_key:
@@ -378,7 +387,11 @@ def serve():
         with (DATA / 'jobs' / (job['id'] + '.log')).open('a', encoding='utf-8') as errors:
             try:
                 with contextlib.redirect_stderr(errors):
-                    render(job)
+                    if job.get('calibration'):
+                        from calibration import calibrate
+                        calibrate(job,render,reset_nano_models,DATA)
+                    else:
+                        render(job)
             except Exception as exc:
                 user_error = voice_error(exc)
                 code = 1

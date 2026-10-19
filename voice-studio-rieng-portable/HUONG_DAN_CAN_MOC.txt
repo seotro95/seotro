@@ -1,4 +1,4 @@
-VOICE STUDIO RIÊNG 1.4.0 — PORTABLE WINDOWS 10/11 X64
+VOICE STUDIO RIÊNG 1.5.0 — PORTABLE WINDOWS 10/11 X64
 
 Giải nén TOÀN BỘ ZIP vào thư mục mới rồi mở MO_TOOL.bat.
 Gói Portable có Python, FFmpeg và giọng Việt Nano/Turbo. Không cần chạy bộ cài hoặc tải lại các giọng đi kèm.
@@ -22,7 +22,11 @@ CĂN MỐC TXT / SRT
 TỐC ĐỘ TẠO VÀ CẤU HÌNH MÁY
 - Nhanh: Nano 4 bước, xử lý nhiều đoạn song song theo tài nguyên máy và bộ căn WSOLA. Ưu tiên tốc độ; nghe lại phát âm và sắc thái.
 - Cân bằng: Nano 8 bước; Chất lượng: 16 bước. FFmpeg là bộ căn mặc định cho đường chất lượng.
-- Dùng kiểm tra cấu hình và đo tốc độ mẫu để chọn cấu hình trên chính máy của bạn. Tốc độ tạo khác tốc độ lời đọc.
+- Tối đa 32 tác vụ Nano. Máy 56 luồng, 28 lõi vật lý, đủ RAM dùng cấu hình nhanh ban đầu 28 tác vụ × 1 luồng. Không coi 56 luồng là 56 lõi vật lý.
+- Chọn giọng Nano, chọn Ưu tiên tốc độ, rồi bấm Tự đo và tối ưu máy nhiều lõi. Tool so sánh nhiều cấu hình bằng lời thật, giữ nguyên số bước tạo giọng và lưu cấu hình nhanh nhất đo được.
+- Đo lần đầu có thể mất vài phút; đây là thời gian thử nhiều cấu hình, không phải thời gian tạo một kịch bản. Model được giữ ấm cho lượt tiếp theo.
+- Bấm Sao chép kết quả đo để gửi số liệu, không kèm kịch bản riêng. Có thể bấm Dừng tạo khi đang đo.
+- Tốc độ tạo khác tốc độ lời đọc; hãy kiểm tra toàn bộ kịch bản để xác nhận mốc 2 phút/1 giờ.
 - Không bảo đảm đạt 30× thời gian thực hoặc tạo 1 giờ trong 2 phút. Đoạn ngắn, khởi động model, RAM, CPU và độ dài kịch bản đều ảnh hưởng kết quả.
 - Số đo dùng thời lượng lời đã tạo; khoảng lặng SRT không được tính để làm đẹp tốc độ. Lượt đầu gồm nạp model; lượt ấm vẫn chỉ là ước tính.
 

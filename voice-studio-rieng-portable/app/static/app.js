@@ -23,6 +23,8 @@ let connectionFailed = false;
 let renderSettingsInitialized = false;
 let deliveryProfiles = new Map();
 let paragraphPauseEdited = false;
+let appliedCalibrationId = '';
+let speedSummary = null;
 const historyNodes = new Map();
 
 function node(tag, text, className) {
@@ -171,7 +173,7 @@ function applyRenderMode(mode) {
   $('render-mode').value = mode;
   const preset = config?.rendering_presets?.[mode] || {};
   $('nano-steps').value = String(preset.nano_steps || {fast: 4, balanced: 8, quality: 16}[mode] || 8);
-  $('nano-parallel').value = String(Math.max(1, Math.min(8, Number(preset.nano_parallel) || 1)));
+  $('nano-parallel').value = String(Math.max(1, Math.min(32, Number(preset.nano_parallel) || 1)));
   $('nano-threads').value = String(Math.max(1, Math.min(8, Number(preset.nano_threads) || 2)));
   $('audio-fit-backend').value = mode === 'fast' ? 'wsola' : (preset.audio_fit_backend === 'wsola' ? 'wsola' : 'ffmpeg');
   updateRenderNote();
@@ -186,6 +188,7 @@ async function inspectMachine() {
     const gpuNames = Array.isArray(info.nvidia_gpus) ? info.nvidia_gpus : [];
     const rows = [
       ['Bộ xử lý', info.cpu || 'Chưa xác định'],
+      ['Lõi CPU vật lý', info.physical_cores || 'Chưa xác định'],
       ['Luồng CPU', info.logical_cores || 'Chưa xác định'],
       ['RAM', info.ram_gb == null ? 'Chưa xác định' : `${info.ram_gb} GB`],
       ['GPU NVIDIA', gpuNames.length ? gpuNames.join('; ') : 'Chưa tìm thấy'],
@@ -254,6 +257,7 @@ function updateVoice() {
   $('voice-status-detail').textContent = !voice ? 'Chọn ngôn ngữ khác hoặc thêm mẫu giọng cá nhân được hỗ trợ.' : ready ? (voice.description || 'Giọng đã có trên máy.') : `Trong thư mục tool, chạy ${modelInstruction(voice)}, rồi bấm Kiểm tra lại ở Thư viện giọng.`;
   $('generate').disabled = !ready || submitting;
   $('benchmark').disabled = !ready || submitting || $('language').value !== 'vi';
+  $('calibrate-machine').disabled = !ready || submitting || $('language').value !== 'vi' || voice?.engine !== 'vieneu_nano';
   $('benchmark').title = $('language').value === 'vi' ? 'Đo bằng giọng và chế độ ưu tiên đang chọn.' : 'Mẫu đo hiện hỗ trợ tiếng Việt.';
   updateSuggestion();
   updateRenderNote();
@@ -342,7 +346,7 @@ function addJobControls(container, job) {
 
 function setOutput(job) {
   selectedJob = job;
-  const signature = JSON.stringify([job.id, job.status, job.progress, job.phase, job.error, job.audio_seconds, job.duration_limited, job.speed_report, job.auto_fitted_cues, job.fit_warning_count, job.benchmark_note]);
+  const signature = JSON.stringify([job.id, job.status, job.progress, job.phase, job.error, job.audio_seconds, job.duration_limited, job.speed_report, job.auto_fitted_cues, job.fit_warning_count, job.benchmark_note, job.calibration_report]);
   if (outputSignature === signature) return;
   outputSignature = signature;
   const progress = Math.max(0, Math.min(100, Number(job.progress) || 0));
@@ -373,6 +377,17 @@ function setOutput(job) {
   const report = job.speed_report;
   $('speed-report').hidden = !done || !report;
   $('speed-report').textContent = report ? formatSpeedReport(report) : '';
+  speedSummary = done ? {version: config?.version, voice: job.voice_name, render_mode: job.render_mode, speed_report:report, calibration_report:job.calibration_report} : null;
+  $('copy-speed-report').hidden = !done || (!report && !job.calibration_report);
+  if (done && job.calibration_report) {
+    const selected=job.calibration_report.selected;
+    $('speed-report').hidden=false;
+    $('speed-report').textContent=`Đã lưu cấu hình đo được: ${selected.settings.nano_parallel} tác vụ × ${selected.settings.nano_threads} luồng. Kết quả khi model đã nạp: ${formatSpeedReport(selected.warm)} Tổng thời gian thử các cấu hình: ${duration(job.calibration_report.total_calibration_seconds)}.`;
+    if (appliedCalibrationId !== job.id) {
+      appliedCalibrationId=job.id;
+      api('/api/config').then(fresh => { config=fresh; if ($('voice').value===job.voice_id && $('render-mode').value===job.render_mode) applyRenderMode(job.render_mode); }).catch(error => notify(error.message,true));
+    }
+  }
 }
 
 function formatSpeedReport(report) {
@@ -542,7 +557,7 @@ function resetOutput() {
   selectedJob = null; outputSignature = '';
   $('output-heading').textContent = 'Âm thanh của bạn sẽ xuất hiện ở đây';
   $('output-detail').textContent = 'Tạo bản thu đầu tiên hoặc mở một bản thu trong lịch sử.';
-  for (const id of ['output-status', 'output-progress', 'output-warning', 'output-audio', 'speed-report', 'benchmark-note']) $(id).hidden = true;
+  for (const id of ['output-status', 'output-progress', 'output-warning', 'output-audio', 'speed-report', 'benchmark-note', 'copy-speed-report']) $(id).hidden = true;
   $('output-audio').pause(); $('output-audio').removeAttribute('src'); $('output-audio').load();
   $('output-actions').replaceChildren();
 }
@@ -698,3 +713,21 @@ async function init() {
 init();
 
 $('cue-fit').addEventListener('change', updateFormat);
+
+
+$('calibrate-machine').addEventListener('click', async () => {
+  const voice=voices.find(item=>item.id===$('voice').value);
+  if (submitting || !voiceReady(voice) || voice.engine!=='vieneu_nano')return;
+  submitting=true;updateVoice();
+  try {
+    const job=await post('/api/calibrate',{voice_id:voice.id,language:$('language').value,render_mode:$('render-mode').value,delivery:$('delivery').value});
+    setOutput(job);await refreshHistory();
+    notify('Đang thử nhiều cấu hình CPU bằng lời đọc thật. Có thể mất vài phút và dùng nhiều CPU/RAM; cấu hình tốt nhất sẽ được lưu. Có thể bấm Dừng tạo.');
+    $('output-heading').scrollIntoView({block:'center',behavior:'auto'});
+  } catch(error) {notify(error.message,true);}
+  finally {submitting=false;updateVoice();}
+});
+$('copy-speed-report').addEventListener('click', async () => {
+  try {await navigator.clipboard.writeText(JSON.stringify(speedSummary,null,2));notify('Đã sao chép kết quả đo. Bạn có thể dán vào cuộc trò chuyện.');}
+  catch {notify('Chưa sao chép được. Hãy chọn và sao chép nội dung kết quả đo đang hiện.',true);}
+});

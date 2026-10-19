@@ -41,7 +41,7 @@ def main():
     data = app/'.data'
     with TestClient(studio.app) as client:
         config = client.get('/api/config').json()
-        assert config['edition'] == 'standalone-voice' and config['version'] == '1.4.0'
+        assert config['edition'] == 'standalone-voice' and config['version'] == '1.5.0'
         assert config['nano_ready'] and config['max_characters'] == 1000000
         assert len(config['delivery_profiles']) == 10
         assert set(config['rendering_presets']) == {'fast', 'balanced', 'quality'}
@@ -161,7 +161,6 @@ def main():
                           'segments': segment_count, 'paragraph_pause': 0, 'measurements': measurements},
           'target_30x_guaranteed': False,
           'checks': ['offline Nano and Turbo', 'real native news pacing', 'FFmpeg and WSOLA clock/pitch/tail', 'WAV MP3 TXT SRT exports', 'launcher HTTP']}
-    (root/'PORTABLE-QA.json').write_text(json.dumps(qa, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     print('PORTABLE_BENCHMARK '+json.dumps(qa['fast_sample'], ensure_ascii=False), flush=True)
     # Exercise user download endpoints, including conversion with bundled FFmpeg.
     export_id = uuid.uuid4().hex
@@ -172,6 +171,46 @@ def main():
         for suffix in ('wav', 'mp3', 'txt', 'srt'):
             response = client.get(f'/api/jobs/{export_id}/export.{suffix}')
             assert response.status_code == 200 and len(response.content) > 10, 'Export failed: '+suffix
+        # Exercise the actual HTTP queue and persistent worker's calibration
+        # dispatch. Every candidate uses real bundled Nano inference offline.
+        response = client.post('/api/calibrate', json={'voice_id': 'nano-minhquan', 'render_mode': 'fast'})
+        assert response.status_code == 202, response.text
+        ident = response.json()['id']
+        deadline = time.monotonic()+600
+        while time.monotonic() < deadline:
+            measured = client.get('/api/jobs/'+ident).json()
+            if measured['status'] in {'done', 'error', 'cancelled'}:
+                break
+            time.sleep(.25)
+        assert measured['status'] == 'done', measured
+        calibration = measured['calibration_report']
+        assert measured.get('speed_report') is None, 'Total calibration time is not synthesis throughput'
+        assert calibration['nano_steps'] == 4 and calibration['estimate_only']
+        selected = calibration['selected']
+        assert selected['warm']['measurement_audio_seconds'] > 10
+        assert len(calibration['candidates']) >= 1
+        assert not list((data/'parts').glob(ident+'-measure-*'))
+        assert not list((data/'audio').glob(ident+'-measure-*'))
+        saved = client.get('/api/config').json()['rendering_presets']['fast']
+        assert all(saved[key] == value for key, value in selected['settings'].items())
+        assert client.get('/api/audio/'+ident).status_code == 200
+        # The next new job must render with the saved team without checkpoint
+        # reuse. It exercises persistent warm workers after calibration.
+        response = client.post('/api/benchmark', json={'voice_id': 'nano-minhquan', 'render_mode': 'fast'})
+        assert response.status_code == 202, response.text
+        follow_id = response.json()['id']
+        deadline = time.monotonic()+180
+        while time.monotonic() < deadline:
+            follow = client.get('/api/jobs/'+follow_id).json()
+            if follow['status'] in {'done', 'error', 'cancelled'}:
+                break
+            time.sleep(.25)
+        assert follow['status'] == 'done' and follow['speed_report']['measurement_audio_seconds'] > 10, follow
+        assert follow['nano_parallel'] == selected['settings']['nano_parallel']
+        qa['machine_calibration'] = calibration
+        qa['post_calibration_benchmark'] = follow['speed_report']
+        qa['checks'].append('real HTTP calibration, saved presets, warm next job and temporary-output cleanup')
+    (root/'PORTABLE-QA.json').write_text(json.dumps(qa, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     # Invoke the real bundled launcher and make an actual loopback HTTP request.
     log = root/'portable-launch-check.log'
     with log.open('wb') as output:

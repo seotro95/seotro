@@ -108,7 +108,7 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
 
 
-app = FastAPI(title='Voice Studio Riêng', version='1.4.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio Riêng', version='1.5.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 @app.exception_handler(RequestValidationError)
@@ -184,10 +184,15 @@ def config():
     return {'available_ram_gb':available,**_config_values()}
 
 
+def effective_rendering_presets():
+    from calibration import read_saved_presets
+    return read_saved_presets(DATA,rendering_presets())
+
+
 def _config_values():
     return {
         'version': app.version,
-        'rendering_presets': rendering_presets(),
+        'rendering_presets': effective_rendering_presets(),
         'delivery_profiles': profile_catalog(),
         'mode': 'local',
         'edition': 'standalone-voice',
@@ -280,7 +285,7 @@ class Speech(BaseModel):
     input_format: str = Field(default='txt', pattern='^(txt|srt)$')
     skip_timestamps: bool = True
     nano_threads: int = Field(default=2, ge=1, le=8)
-    nano_parallel: int = Field(default=1, ge=1, le=8)
+    nano_parallel: int = Field(default=1, ge=1, le=32)
     nano_steps: int = Field(default=8, ge=4, le=16)
     render_mode: str = Field(default='balanced', pattern='^(fast|balanced|quality)$')
     audio_fit_backend: str = Field(default='ffmpeg', pattern='^(wsola|ffmpeg)$')
@@ -369,6 +374,9 @@ def run_job(ident):
         env = dict(os.environ, VOICE_STUDIO_DATA_DIR=str(DATA), HF_HOME=str(DATA / 'models' / 'cache'), HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1', OMP_NUM_THREADS=os.environ.get('VOICE_STUDIO_THREADS', '4'), PYTHONUTF8='1')
         code = execute_worker(path, env, work)
         if code == -2 or (work / 'cancel.flag').exists():
+            if job.get('calibration'):
+                from calibration import cleanup_measurements
+                cleanup_measurements(DATA,ident)
             job.update(status='cancelled', error='Đã dừng. Bạn có thể tiếp tục từ các đoạn đã tạo.')
         elif code:
             marker = work / 'worker-done.json'
@@ -384,7 +392,7 @@ def run_job(ident):
             result = read_json(work / 'result.json')
             job.update(result)
             elapsed = time.monotonic() - processing_started
-            job.update(status='done', url=f'/api/audio/{ident}', finished_at=now(), wall_processing_seconds=round(elapsed, 3), speed_report=None if reused_parts else speed_report(result.get('audio_seconds', 0), elapsed, result.get('spoken_audio_seconds')))
+            job.update(status='done', url=f'/api/audio/{ident}', finished_at=now(), wall_processing_seconds=round(elapsed, 3), speed_report=None if reused_parts or job.get('calibration') else speed_report(result.get('audio_seconds', 0), elapsed, result.get('spoken_audio_seconds')))
     except Exception as exc:
         job.update(status='error', error=str(exc))
     with lock:
@@ -393,9 +401,13 @@ def run_job(ident):
 
 @app.post('/api/speech', status_code=202)
 def speech(body: Speech):
+    return _submit_speech(body)
+
+
+def _submit_speech(body: Speech,calibration=False):
     if not body.text.strip() or body.language not in LANGUAGES or body.format not in {'wav', 'mp3'} or body.delivery not in PROFILES:
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
-    preset=rendering_presets()[body.render_mode]
+    preset=effective_rendering_presets()[body.render_mode]
     for field,value in preset.items():
         if field not in body.model_fields_set:setattr(body,field,value)
     if body.nano_steps not in {4,8,16}:raise HTTPException(422,'Chọn Nano 4, 8 hoặc 16 bước.')
@@ -411,6 +423,7 @@ def speech(body: Speech):
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
     if engine != 'system' and not (DATA / 'models' / f'{engine}.ready').exists():
         raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Chạy lệnh tải mô hình trong hướng dẫn cài đặt.')
+    if calibration and engine!='vieneu_nano':raise HTTPException(422,'Chọn giọng Nano để đo và tối ưu nhiều tiến trình.')
     try:
         segment_plan = 'nano-packed-v1' if engine == 'vieneu_nano' and body.paragraph_pause == 0 else 'classic-v1'
         segments = plan_segments({**body.model_dump(), 'engine': engine, 'segment_plan': segment_plan})
@@ -436,7 +449,7 @@ def speech(body: Speech):
         if sum(j['status'] in {'queued', 'running', 'cancelling'} for j in records('jobs')) >= 4:
             raise HTTPException(429, 'Hàng đợi đã có 4 tác vụ. Hãy đợi trước khi tạo thêm.')
         ident = uuid.uuid4().hex
-        job = {**body.model_dump(), 'text': body.text.strip(), 'id': ident, 'voice_name': voice['name'], 'engine': engine, 'speaker': voice.get('speaker'), 'status': 'queued', 'segment_plan': segment_plan, 'total': len(segments), 'completed': 0, 'progress': 0, 'created_at': now()}
+        job = {**body.model_dump(), 'calibration':calibration, 'text': body.text.strip(), 'id': ident, 'voice_name': voice['name'], 'engine': engine, 'speaker': voice.get('speaker'), 'status': 'queued', 'segment_plan': segment_plan, 'total': len(segments), 'completed': 0, 'progress': 0, 'created_at': now()}
         write_json(DATA / 'jobs' / f'{ident}.json', job)
         executor.submit(run_job, ident)
     return job
@@ -566,7 +579,7 @@ def resume_job(ident: str, auto_fit: bool = True):
 
 @app.get('/api/system-info')
 def machine_info():
-    return {**system_info(), 'rendering_presets': rendering_presets()}
+    return {**system_info(), 'rendering_presets': effective_rendering_presets()}
 
 
 @app.get('/api/jobs/{ident}/script.{extension}')
@@ -640,7 +653,7 @@ class BenchmarkRequest(BaseModel):
     render_mode: str = Field(default='balanced',pattern='^(fast|balanced|quality)$')
     delivery: str = 'natural'
     nano_steps: int | None = Field(default=None, ge=4, le=16)
-    nano_parallel: int | None = Field(default=None, ge=1, le=8)
+    nano_parallel: int | None = Field(default=None, ge=1, le=32)
     nano_threads: int | None = Field(default=None, ge=1, le=8)
     audio_fit_backend: str | None = Field(default=None, pattern='^(wsola|ffmpeg)$')
     quality: str = Field(default='auto', pattern='^(auto|standard|fast)$')
@@ -649,15 +662,21 @@ class BenchmarkRequest(BaseModel):
 @app.post('/api/benchmark',status_code=202)
 def benchmark(body: BenchmarkRequest):
     if body.language != 'vi':raise HTTPException(422,'Mẫu đo hiện dùng lời tiếng Việt; chọn giọng tiếng Việt để đo.')
-    text=(
-        'Buổi sáng, ánh nắng nhẹ chiếu qua khung cửa. Cô mở cuốn sổ cũ và đọc lại lời hẹn của những ngày xa. '
-        'Tin tức hôm nay ghi nhận nhiều thay đổi trong đời sống. Người dân chuẩn bị cho một tuần mới với niềm hy vọng và những kế hoạch rõ ràng. '
-        'Trên con đường nhỏ, tiếng bước chân dần vang lên. Anh dừng lại, lắng nghe rồi mỉm cười: chúng ta hãy bắt đầu câu chuyện này cùng nhau. '
-        'Một sản phẩm tốt cần được giới thiệu bằng thông tin chính xác, giọng đọc rõ ràng và nhịp điệu phù hợp. '
-        'Khi đêm xuống, thành phố chậm lại. Những ngọn đèn vẫn sáng, còn câu chuyện tiếp tục trong sự bình yên. '
-        'Kết quả đo trên đoạn lời này chỉ giúp ước tính tốc độ máy, không thay thế kiểm tra trên toàn bộ kịch bản và giọng bạn chọn.'
-    )
+    from calibration import sample_text
+    voice=next((v for v in PRESETS+installed_voices()+records('voices') if v['id']==body.voice_id),None)
+    workers=(body.nano_parallel or effective_rendering_presets()[body.render_mode]['nano_parallel']) if voice and voice.get('engine')=='vieneu_nano' else 1
+    text=sample_text(workers)
     settings=body.model_dump(exclude_none=True)
     payload=Speech(text=text,**settings,paragraph_pause=0,format='wav')
     job=speech(payload)
     return job
+
+
+@app.post('/api/calibrate',status_code=202)
+def calibrate_machine(body: BenchmarkRequest):
+    from calibration import sample_text
+    if body.language!='vi':raise HTTPException(422,'Mẫu tối ưu hiện dùng giọng tiếng Việt Nano.')
+    preset=rendering_presets()[body.render_mode]
+    payload=Speech(text=sample_text(preset['nano_parallel']),voice_id=body.voice_id,language=body.language,
+                   render_mode=body.render_mode,delivery=body.delivery,paragraph_pause=0,format='wav',**preset)
+    return _submit_speech(payload,calibration=True)

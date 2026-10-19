@@ -1,30 +1,31 @@
 {
   "product": "Voice Studio Rieng",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "target": "Windows 10/11 x64",
   "package_type": "source-with-first-run-installer",
   "source_repository": "seotro95/seotro",
-  "source_commit": "c5584665fb1730caedc0fc5928ca638bf3da2018",
+  "source_commit": null,
   "python": "3.12 x64",
   "max_characters": 1000000,
   "bundled_runtime": false,
   "bundled_model_weights": false,
   "validation": {
-    "backend_and_bootstrap_tests": "67 passed; 8 subtests on Linux",
-    "javascript_syntax": "passed",
-    "actual_server_smoke": "v1.3.0 API readiness and HTML auto-fit control passed",
+    "backend_and_bootstrap_tests": "74 passed; 8 subtests on Linux",
+    "javascript_syntax": "passed, mocked browser calibration/preset/personal voice and mobile390px checks passed",
+    "actual_server_smoke": "v1.5 real HTTP calibration, actual bundled Nano inference, saved presets and trial cleanup passed on Linux",
     "uploaded_srt_full_timeline": "2919 cues / 3118 segments; all cue starts sample-exact, original text and timing preserved; 129242400 final WAV frames at24kHz =5385.100s; deterministic synthetic audio only",
     "reported_failure_regression": "1.410s into0.900s auto passes, strict rejects; >2x preserves two test tone pitches and tail",
-    "actual_windows_execution": "pending native1.4build; see portable BUILD_INFO after build",
-    "actual_ai_synthesis": "Linux4-core actualsame-text40segments: newfastwarm50.61s/4.181s=12.11x; old16stepwarm53.874s/33.4s; estimatesonly, no30x guarantee"
+    "actual_windows_execution": "pending native1.5build; see portable BUILD_INFO after build",
+    "actual_ai_synthesis": "Linux quota4-core calibration: 2workersx2threads11.81x, 3x1=16.56x, 4x1=20.06x; selected4x1 warm66.52s/3.316s, estimate179.5s/hour; sample only, not30x or user-PC validation"
   },
   "max_audio_minutes": 1440,
   "max_import_bytes": 8388608,
   "features": {
     "automatic_cue_fit": "default; pitch-preserving atempo stages <=2; original cue boundaries retained; fast-tempo warnings",
     "resume": "old SRT jobs upgraded to automatic fitting; existing audio checkpoints retained",
-    "render_modes": "fast 4-step adaptive1-8worker / balanced8 / quality16; sample benchmark with actual speech only",
+    "render_modes": "fast4 / balanced8 / quality16; physicalCPU/RAM budgets up to32workers",
     "genres": "10 pacing profiles and36actualbundledreferencepresets",
-    "hardware": "localCPU/RAM/GPUinspection; Nano/Turbo areCPU engines"
+    "hardware": "localCPU/RAM/GPUinspection; Nano/Turbo areCPU engines",
+    "calibration": "fresh real speech, compare worker/thread teams without lowering mode steps; save locally; exclude artificial gaps; warm sample is an estimate"
   }
 }

@@ -30,8 +30,10 @@ def system_info():
     try:
         import psutil
         ram = round(psutil.virtual_memory().total / 1024**3, 1)
+        physical = psutil.cpu_count(logical=False)
     except ImportError:
         ram = None
+        physical = None
     gpus = []
     if shutil.which('nvidia-smi'):
         try:
@@ -47,7 +49,7 @@ def system_info():
             cuda = json.loads(result.stdout.strip().splitlines()[-1])['cuda']
     except (OSError, ValueError, IndexError, subprocess.TimeoutExpired):
         pass
-    return {'cpu': cpu, 'logical_cores': os.cpu_count(), 'ram_gb': ram, 'nvidia_gpus': gpus, 'pytorch_cuda_available': cuda, 'int8_vnni': supports_int8(), 'note': 'Các giọng Nano/Turbo trong gói này chạy CPU; có card NVIDIA không tự làm Nano dùng GPU. Đo mẫu để biết tốc độ thực tế trên máy đang chạy tool.'}
+    return {'cpu': cpu, 'logical_cores': os.cpu_count(), 'physical_cores': physical, 'ram_gb': ram, 'nvidia_gpus': gpus, 'pytorch_cuda_available': cuda, 'int8_vnni': supports_int8(), 'note': 'Các giọng Nano/Turbo trong gói này chạy CPU; có card NVIDIA không tự làm Nano dùng GPU. Đo mẫu để biết tốc độ thực tế trên máy đang chạy tool.'}
 
 
 def rendering_presets():
@@ -76,12 +78,36 @@ def rendering_presets():
         ram_gb=available/1024**3
     except (ImportError,OSError,ValueError):
         ram_gb=0
-    # Model sessions plus Python/audio libraries need headroom, especially on Windows.
-    memory_workers=max(1,int(max(0,ram_gb-1.5)/1.25)) if ram_gb else 1
-    fast_workers=max(1,min(8,cores,memory_workers))
-    balanced_workers=max(1,min(2,max(1,cores//2),memory_workers))
+    try:
+        import psutil
+        physical=min(cores,psutil.cpu_count(logical=False) or cores)
+    except ImportError:
+        physical=cores
+    return resource_presets(cores,physical,ram_gb)
+
+
+def resource_presets(logical,physical,available_gb):
+    """Use physical CPU capacity; Hyper-Threading is not another model budget."""
+    physical=max(1,min(logical,physical))
+    memory_workers=max(1,int(max(0,available_gb-1.5)/1.25)) if available_gb else 1
+    fast=max(1,min(32,physical,memory_workers))
+    balanced=max(1,min(16,max(1,physical//2),memory_workers))
+    quality=max(1,min(8,max(1,physical//4),memory_workers))
     return {
-        'fast':{'nano_steps':4,'nano_parallel':fast_workers,'nano_threads':max(1,min(2,cores//fast_workers)), 'audio_fit_backend':'wsola'},
-        'balanced':{'nano_steps':8,'nano_parallel':balanced_workers,'nano_threads':max(1,min(2,cores//balanced_workers)), 'audio_fit_backend':'ffmpeg'},
-        'quality':{'nano_steps':16,'nano_parallel':1,'nano_threads':max(1,min(4,cores)), 'audio_fit_backend':'ffmpeg'},
+        'fast':{'nano_steps':4,'nano_parallel':fast,'nano_threads':max(1,min(2,physical//fast)),'audio_fit_backend':'wsola'},
+        'balanced':{'nano_steps':8,'nano_parallel':balanced,'nano_threads':max(1,min(2,physical//balanced)),'audio_fit_backend':'ffmpeg'},
+        'quality':{'nano_steps':16,'nano_parallel':quality,'nano_threads':max(1,min(4,physical//quality)),'audio_fit_backend':'ffmpeg'},
     }
+
+
+def calibration_candidates(preset):
+    """Compare fewer/larger ORT teams with more single-thread model workers."""
+    maximum=preset['nano_parallel']
+    cores=max(1,maximum*preset['nano_threads'])
+    candidates=[{'nano_parallel':max(1,maximum//2),'nano_threads':min(2,max(1,cores//max(1,maximum//2)))},
+                {'nano_parallel':max(1,maximum*3//4),'nano_threads':1},
+                {'nano_parallel':maximum,'nano_threads':preset['nano_threads']}]
+    result=[]
+    for candidate in candidates:
+        if candidate not in result:result.append(candidate)
+    return result

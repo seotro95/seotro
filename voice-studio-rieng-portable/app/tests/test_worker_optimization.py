@@ -94,7 +94,7 @@ def test_pcm_normalization_retains_matching_audio_without_ffmpeg(worker,tmp_path
     assert source.read_bytes()==destination.read_bytes()
 
 
-@pytest.mark.parametrize('parallel_workers',[4,8])
+@pytest.mark.parametrize('parallel_workers',[4,8,28,32])
 def test_nano_pool_prefetch_is_bounded_and_model_settings_recreate_it(worker,tmp_path,monkeypatch,parallel_workers):
     executors=[]
     class Future:

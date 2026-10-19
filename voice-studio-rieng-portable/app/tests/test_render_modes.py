@@ -18,7 +18,7 @@ def test_hardware_presets_are_bounded_and_explicit():
     modes=rendering_presets()
     assert set(modes)=={'fast','balanced','quality'}
     assert [modes[n]['nano_steps'] for n in ('fast','balanced','quality')]==[4,8,16]
-    assert all(1<=m['nano_parallel']<=8 and 1<=m['nano_threads']<=4 for m in modes.values())
+    assert all(1<=m['nano_parallel']<=32 and 1<=m['nano_threads']<=4 for m in modes.values())
     assert modes['fast']['audio_fit_backend']=='wsola'
     assert modes['balanced']['audio_fit_backend']=='ffmpeg'
 
@@ -57,7 +57,7 @@ def test_real_benchmark_uses_text_and_normal_queue(studio,monkeypatch):
 def test_genres_expose_real_bundled_speakers(studio):
     client,data=studio
     config=client.get('/api/config').json()
-    assert config['version']=='1.4.0'
+    assert config['version']=='1.5.0'
     assert {'review','horror','fairytale','documentary','ad'}<={p['id'] for p in config['delivery_profiles']}
     voices=client.get('/api/voices').json()['voices']
     assert len({v['speaker'] for v in voices if v.get('engine')=='vieneu_nano'})==11
