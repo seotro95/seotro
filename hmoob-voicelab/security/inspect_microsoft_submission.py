@@ -103,11 +103,25 @@ def main():
     except Exception as exc:
         report['access_error'] = str(exc)
     (directory / 'requirements.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
-    message = json.dumps(report, ensure_ascii=False, separators=(',', ':'))
-    if len(message) > 18000:
-        message = message[:18000] + ' [report truncated in annotation; full JSON in artifact]'
-    escaped = message.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
-    print('::notice title=Microsoft submission prerequisites::' + escaped)
+    def annotation(title, value):
+        message = json.dumps(value, ensure_ascii=False, separators=(',', ':'))
+        escaped = message.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+        print('::notice title=' + title + '::' + escaped)
+    annotation('Microsoft portal access', {key: value for key, value in report.items()
+                                           if key not in ('server_page', 'browser_page')})
+    for key in ('server_page', 'browser_page'):
+        page = report.get(key)
+        if not page:
+            continue
+        annotation(key + ' authentication indicators', {name: page[name] for name in
+            ('title', 'captcha_markup_present', 'relevant_links_without_queries')})
+        excerpts = page['visible_excerpts']
+        for offset in range(0, len(excerpts), 4):
+            annotation(key + ' visible text ' + str(offset // 4 + 1), excerpts[offset:offset + 4])
+        fields = [field for field in page['non_secret_fields'] if not
+                  re.search(r'^(?:uhf|pf|c-shell|close-epb|cli_shell|search|cancel-search)', field.get('id', ''))]
+        for offset in range(0, len(fields), 12):
+            annotation(key + ' submission fields ' + str(offset // 12 + 1), fields[offset:offset + 12])
 
 
 if __name__ == '__main__':
