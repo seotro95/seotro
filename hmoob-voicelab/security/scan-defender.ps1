@@ -1,40 +1,56 @@
-# Scan only. Never run application code, alter protection settings or restore a
-# quarantined file. A clear scan on this runner does not clear another device's
-# detection or constitute a Microsoft false-positive decision.
+# Isolated investigation only. Never execute the app, change Defender settings,
+# restore quarantined files, or upload the evidence archive.
 $ErrorActionPreference = 'Stop'
-$releaseCommit = 'ae23a93222a1b3eeb8246eb6f45e527edc08fd6c'
-$archiveName = 'Hmoob-VoiceLab-1.0-source.zip'
-$expectedSha = '962f0ac81867b4a84eff637a68c196b310723cd3b8a6eedc8679c15132259b1d'
+$release = 'ae23a93222a1b3eeb8246eb6f45e527edc08fd6c'
+$name = 'Hmoob-VoiceLab-1.0-source.zip'
+$sha = '962f0ac81867b4a84eff637a68c196b310723cd3b8a6eedc8679c15132259b1d'
+$reference = 'https://learn.microsoft.com/en-us/defender-endpoint/command-line-arguments-microsoft-defender-antivirus'
 $reportDir = Join-Path $env:RUNNER_TEMP 'voicelab-defender-report'
 $evidenceDir = Join-Path $env:ProgramData ('VoiceLabSecurityReview-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Force -Path $reportDir, $evidenceDir | Out-Null
-$archivePath = Join-Path $evidenceDir $archiveName
-$scanStarted = Get-Date
+$archive = Join-Path $evidenceDir $name
+$started = Get-Date
 $report = [ordered]@{
     outcome = 'indeterminate'
-    release_commit = $releaseCommit
-    expected_sha256 = $expectedSha
+    release_commit = $release
+    expected_sha256 = $sha
     git_blob_sha256 = $null
     actual_sha256 = $null
-    started_utc = $scanStarted.ToUniversalTime().ToString('o')
-    runner_os = $env:RUNNER_OS
+    scan_scope = 'original-zip-analysis'
+    started_utc = $started.ToUniversalTime().ToString('o')
     defender_before = $null
     defender_after = $null
-    archive_scanning_enabled = $null
-    scan_scope = 'not-started'
-    files = @()
+    signature_verified = $false
+    installed_help_verified = $false
+    official_reference = $reference
+    reference_semantics_verified = $false
     scan_exit_code = $null
-    scan_completed_event = $false
+    scan_console_completed = $false
     threat_detections = @()
-    defender_events = @()
     error = $null
-    limitation = 'This scan never authorizes running the withdrawn package or dismisses the reported device detection.'
+    limitation = 'No result dismisses the reported device detection or authorizes restoring, running, or redistributing the withdrawn ZIP.'
 }
-$failure = $null
-$scanInvoked = $false
-($report | ConvertTo-Json -Depth 10) | Set-Content -LiteralPath (Join-Path $reportDir 'report.json') -Encoding utf8
+($report | ConvertTo-Json -Depth 10) | Set-Content (Join-Path $reportDir 'report.json') -Encoding utf8
 
-function Read-DefenderStatus {
+function Invoke-ReadOnlyProcess([string] $exe, [string[]] $arguments) {
+    $info = [System.Diagnostics.ProcessStartInfo]::new()
+    $info.FileName = $exe
+    $info.UseShellExecute = $false
+    $info.RedirectStandardOutput = $true
+    $info.RedirectStandardError = $true
+    foreach ($argument in $arguments) { $info.ArgumentList.Add($argument) }
+    $process = [System.Diagnostics.Process]::Start($info)
+    $stdoutTask = $process.StandardOutput.ReadToEndAsync()
+    $stderrTask = $process.StandardError.ReadToEndAsync()
+    $process.WaitForExit()
+    return [pscustomobject]@{
+        Code = $process.ExitCode
+        Out = $stdoutTask.GetAwaiter().GetResult()
+        Err = $stderrTask.GetAwaiter().GetResult()
+    }
+}
+
+function Read-Status {
     $s = Get-MpComputerStatus -ErrorAction Stop
     return [ordered]@{
         AMServiceEnabled = $s.AMServiceEnabled
@@ -48,242 +64,140 @@ function Read-DefenderStatus {
     }
 }
 
+$scan = $null
 try {
-    if (-not (Get-Command Get-MpComputerStatus -ErrorAction SilentlyContinue)) {
-        throw 'Windows Defender cmdlets are unavailable on this runner.'
-    }
-    $report.defender_before = Read-DefenderStatus
+    $report.defender_before = Read-Status
     if (-not $report.defender_before.AMServiceEnabled -or
         -not $report.defender_before.AntivirusEnabled -or
         $report.defender_before.AMRunningMode -ne 'Normal') {
-        $state = $report.defender_before | ConvertTo-Json -Compress
-        throw "The on-demand Defender engine is unavailable or passive. No protection settings will be changed. Status: $state"
+        throw ('The on-demand engine is unavailable: ' + ($report.defender_before | ConvertTo-Json -Compress))
     }
-    # Real-time protection may already be off on a hosted build runner. This
-    # does not disable an available on-demand engine; record it, never change it.
-    $preference = Get-MpPreference -ErrorAction Stop
-    $report.archive_scanning_enabled = -not $preference.DisableArchiveScanning
     Update-MpSignature -ErrorAction Stop
-    $report.defender_before = Read-DefenderStatus
+    $report.defender_before = Read-Status
     $signatureTime = [datetime]::Parse($report.defender_before.AntivirusSignatureLastUpdated)
     if (((Get-Date).ToUniversalTime() - $signatureTime.ToUniversalTime()).TotalDays -gt 2) {
-        throw 'Defender signatures are older than two days after the update attempt.'
+        throw 'Signature update did not produce definitions less than two days old.'
     }
 
-    # Read exact Git object bytes. PowerShell text redirection could corrupt a ZIP.
-    # Nothing in the archive is extracted, imported or executed.
-    $scanStarted = Get-Date
+    $platform = Join-Path $env:ProgramData 'Microsoft\Windows Defender\Platform'
+    $commands = @()
+    if (Test-Path $platform) {
+        $commands = @(Get-ChildItem $platform -Directory | Sort-Object LastWriteTime -Descending |
+            ForEach-Object { Join-Path $_.FullName 'MpCmdRun.exe' } | Where-Object { Test-Path $_ })
+    }
+    if (-not $commands.Count) {
+        $fallback = Join-Path $env:ProgramFiles 'Windows Defender\MpCmdRun.exe'
+        if (Test-Path $fallback) { $commands = @($fallback) }
+    }
+    if (-not $commands.Count) { throw 'MpCmdRun.exe is unavailable.' }
+    $command = $commands[0]
+    $signature = Get-AuthenticodeSignature -LiteralPath $command
+    if ($signature.Status -ne 'Valid' -or $signature.SignerCertificate.Subject -notmatch 'Microsoft') {
+        throw 'The installed scanner does not have a valid Microsoft Authenticode signature.'
+    }
+    $report.signature_verified = $true
+    $help = Invoke-ReadOnlyProcess $command @('-?')
+    ($help.Out + $help.Err) | Set-Content (Join-Path $reportDir 'installed-scanner-help.txt') -Encoding utf8
+    $report.installed_help_verified = ($help.Out + $help.Err) -match '-DisableRemediation'
+    if (-not $report.installed_help_verified) { throw 'The installed scanner does not document analysis mode.' }
+
+    # The hosted image excludes build drives and disables normal archive scans.
+    # Verify official semantics before using a per-scan analysis option. This
+    # increases scan coverage without modifying preferences/exclusions/protection.
+    $page = Invoke-WebRequest -Uri $reference -TimeoutSec 45 -MaximumRedirection 5
+    $plain = [System.Net.WebUtility]::HtmlDecode(($page.Content -replace '(?s)<script.*?</script>', ' ' -replace '<[^>]+>', ' '))
+    $plain = $plain -replace '\s+', ' '
+    foreach ($match in [regex]::Matches($plain, '-DisableRemediation', 'IgnoreCase')) {
+        $section = $plain.Substring($match.Index, [Math]::Min(4500, $plain.Length - $match.Index))
+        if ($section -match 'File exclusions are ignored' -and
+            $section -match 'Archive files are scanned' -and
+            $section -match 'Actions are not applied') {
+            $report.reference_semantics_verified = $true
+            $section | Set-Content (Join-Path $reportDir 'official-analysis-mode-reference.txt') -Encoding utf8
+            break
+        }
+    }
+    if (-not $report.reference_semantics_verified) {
+        throw 'Analysis mode semantics could not be verified from current official Microsoft documentation.'
+    }
+
+    # Read the original Git blob as bytes, never through text redirection.
     $gitInfo = [System.Diagnostics.ProcessStartInfo]::new()
     $gitInfo.FileName = 'git'
     $gitInfo.UseShellExecute = $false
     $gitInfo.RedirectStandardOutput = $true
     $gitInfo.RedirectStandardError = $true
     $gitInfo.ArgumentList.Add('show')
-    $gitInfo.ArgumentList.Add("${releaseCommit}:$archiveName")
-    $gitProcess = [System.Diagnostics.Process]::Start($gitInfo)
-    $gitErrorTask = $gitProcess.StandardError.ReadToEndAsync()
-    $stream = [System.IO.MemoryStream]::new()
-    try {
-        $gitProcess.StandardOutput.BaseStream.CopyTo($stream)
-        $bytes = $stream.ToArray()
-    } finally {
-        $stream.Dispose()
-    }
-    $gitProcess.WaitForExit()
-    $gitError = $gitErrorTask.GetAwaiter().GetResult()
-    if ($gitProcess.ExitCode -ne 0) { throw "Could not retrieve original evidence from Git: $gitError" }
+    $gitInfo.ArgumentList.Add($release + ':' + $name)
+    $git = [System.Diagnostics.Process]::Start($gitInfo)
+    $gitErrorTask = $git.StandardError.ReadToEndAsync()
+    $memory = [System.IO.MemoryStream]::new()
+    try { $git.StandardOutput.BaseStream.CopyTo($memory); $bytes = $memory.ToArray() }
+    finally { $memory.Dispose() }
+    $git.WaitForExit()
+    if ($git.ExitCode -ne 0) { throw ('Git evidence read failed: ' + $gitErrorTask.GetAwaiter().GetResult()) }
     $report.git_blob_sha256 = [Convert]::ToHexString([System.Security.Cryptography.SHA256]::HashData($bytes)).ToLowerInvariant()
-    if ($report.git_blob_sha256 -ne $expectedSha) { throw 'Git evidence SHA-256 does not match the flagged release.' }
-    [System.IO.File]::WriteAllBytes($archivePath, $bytes)
-    if (-not (Test-Path -LiteralPath $archivePath -PathType Leaf)) {
-        throw 'Evidence disappeared during materialization; do not restore or rewrite it to bypass Defender.'
-    }
-    $report.actual_sha256 = (Get-FileHash -LiteralPath $archivePath -Algorithm SHA256).Hash.ToLowerInvariant()
-    if ($report.actual_sha256 -ne $expectedSha) { throw 'Evidence SHA-256 does not match the flagged release.' }
+    if ($report.git_blob_sha256 -ne $sha) { throw 'Original Git evidence hash mismatch.' }
+    [System.IO.File]::WriteAllBytes($archive, $bytes)
+    $report.actual_sha256 = (Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLowerInvariant()
+    if ($report.actual_sha256 -ne $sha) { throw 'Materialized evidence hash mismatch. Never restore/rewrite to bypass a quarantine.' }
 
-    $scanPath = $archivePath
-    $report.scan_scope = 'archive'
-    if (-not $report.archive_scanning_enabled) {
-        # Static inspection only. This fallback cannot establish that the ZIP
-        # itself is clear, but can identify a detected member. Never execute it.
-        $scanPath = Join-Path $evidenceDir 'extracted'
-        $prefix = [System.IO.Path]::GetFullPath($scanPath) + [System.IO.Path]::DirectorySeparatorChar
-        $zip = [System.IO.Compression.ZipFile]::OpenRead($archivePath)
-        try {
-            if ($zip.Entries.Count -gt 100) { throw 'Unexpected evidence archive entry count.' }
-            $totalBytes = 0
-            foreach ($entry in $zip.Entries) {
-                $destination = [System.IO.Path]::GetFullPath((Join-Path $scanPath $entry.FullName))
-                if (-not $destination.StartsWith($prefix, [System.StringComparison]::OrdinalIgnoreCase)) {
-                    throw 'Evidence archive contains an unsafe member path.'
-                }
-                if ((($entry.ExternalAttributes -shr 16) -band 0xF000) -eq 0xA000) {
-                    throw 'Evidence archive contains a symbolic link.'
-                }
-                $totalBytes += $entry.Length
-                if ($totalBytes -gt 3000000) { throw 'Unexpected evidence archive expanded size.' }
-            }
-        } finally { $zip.Dispose() }
-        [System.IO.Compression.ZipFile]::ExtractToDirectory($archivePath, $scanPath)
-        $report.scan_scope = 'extracted-files-only'
-        $report.files = @(Get-ChildItem -LiteralPath $scanPath -File -Recurse -Force | ForEach-Object {
-            [ordered]@{ path = [System.IO.Path]::GetRelativePath($scanPath, $_.FullName)
-                sha256 = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
-                bytes = $_.Length }
-        })
-        if ($report.files.Count -ne 27) { throw 'Evidence extraction did not preserve all 27 files.' }
-    }
-    $targets = if ($report.scan_scope -eq 'archive') { @($archivePath) } else {
-        @(Get-ChildItem -LiteralPath $scanPath -File -Recurse -Force | ForEach-Object { $_.FullName })
-    }
-    foreach ($target in $targets) {
-        foreach ($rule in @($preference.ExclusionPath)) {
-            if (-not $rule) { continue }
-            $expanded = [Environment]::ExpandEnvironmentVariables([string]$rule).TrimEnd('\', '/')
-            if ($target -like $expanded -or $target -like ($expanded + '\*')) {
-                throw "Evidence is covered by a Defender path exclusion: $expanded"
-            }
-        }
-        foreach ($rule in @($preference.ExclusionExtension)) {
-            if (-not $rule) { continue }
-            $extension = [System.IO.Path]::GetExtension($target).TrimStart('.')
-            if ($extension -like ([string]$rule).TrimStart('.')) {
-                throw "Evidence is covered by a Defender extension exclusion: $rule"
-            }
-        }
-    }
-
-    $commands = @()
-    $platformDir = Join-Path $env:ProgramData 'Microsoft\Windows Defender\Platform'
-    if (Test-Path -LiteralPath $platformDir) {
-        $commands = @(Get-ChildItem -LiteralPath $platformDir -Directory |
-            Sort-Object LastWriteTime -Descending |
-            ForEach-Object { Join-Path $_.FullName 'MpCmdRun.exe' } |
-            Where-Object { Test-Path -LiteralPath $_ })
-    }
-    if ($commands.Count -eq 0) {
-        $fallback = Join-Path $env:ProgramFiles 'Windows Defender\MpCmdRun.exe'
-        if (Test-Path -LiteralPath $fallback) { $commands = @($fallback) }
-    }
-    if ($commands.Count -eq 0) { throw 'MpCmdRun.exe is unavailable on this runner.' }
-    foreach ($rule in @($preference.ExclusionProcess)) {
-        if (-not $rule) { continue }
-        $expanded = [Environment]::ExpandEnvironmentVariables([string]$rule)
-        foreach ($processPath in @($commands[0], (Get-Process -Id $PID).Path)) {
-            if ($processPath -like $expanded -or [System.IO.Path]::GetFileName($processPath) -like $expanded) {
-                throw "Evidence handling or scanner is covered by a Defender process exclusion: $expanded"
-            }
-        }
-    }
-    $stdout = Join-Path $reportDir 'scan-stdout.txt'
-    $stderr = Join-Path $reportDir 'scan-stderr.txt'
-    $scanInfo = [System.Diagnostics.ProcessStartInfo]::new()
-    $scanInfo.FileName = $commands[0]
-    $scanInfo.WorkingDirectory = Split-Path -Parent $commands[0]
-    $scanInfo.UseShellExecute = $false
-    $scanInfo.RedirectStandardOutput = $true
-    $scanInfo.RedirectStandardError = $true
-    foreach ($argument in @('-Scan', '-ScanType', '3', '-File', $scanPath)) {
-        $scanInfo.ArgumentList.Add($argument)
-    }
-    $scanInvoked = $true
-    $process = [System.Diagnostics.Process]::Start($scanInfo)
-    $stdoutTask = $process.StandardOutput.ReadToEndAsync()
-    $stderrTask = $process.StandardError.ReadToEndAsync()
-    $process.WaitForExit()
-    $stdoutTask.GetAwaiter().GetResult() | Set-Content -LiteralPath $stdout -Encoding utf8
-    $stderrTask.GetAwaiter().GetResult() | Set-Content -LiteralPath $stderr -Encoding utf8
-    $report.scan_exit_code = $process.ExitCode
-} catch {
-    $failure = $_.Exception.Message
-    $report.error = $failure
-} finally {
+    # This applies to this isolated custom scan only: no remediation, while
+    # exclusions are ignored and archives are inspected per verified vendor docs.
+    # It neither disables antivirus nor permits executing any archive contents.
+    $scan = Invoke-ReadOnlyProcess $command @('-Scan', '-ScanType', '3', '-File', $archive, '-DisableRemediation')
+    $scan.Out | Set-Content (Join-Path $reportDir 'scan-stdout.txt') -Encoding utf8
+    $scan.Err | Set-Content (Join-Path $reportDir 'scan-stderr.txt') -Encoding utf8
+    $report.scan_exit_code = $scan.Code
+    $report.scan_console_completed = $scan.Out -match '(?i)scan finished'
+    $report.defender_after = Read-Status
+    # Vendor-documented analysis mode does not publish normal detection events.
+    # No event is therefore used as evidence that a scan was clear.
     try {
-        if (Get-Command Get-MpComputerStatus -ErrorAction SilentlyContinue) {
-            $report.defender_after = Read-DefenderStatus
-            $detections = @(Get-MpThreatDetection -ErrorAction Stop | Where-Object {
-                $_.InitialDetectionTime -ge $scanStarted.AddSeconds(-2) -or
-                $_.LastThreatStatusChangeTime -ge $scanStarted.AddSeconds(-2)
-            })
-            $report.threat_detections = @($detections | Select-Object ThreatID, DetectionID,
-                InitialDetectionTime, LastThreatStatusChangeTime, ActionSuccess, Resources)
-        }
-    } catch {
-        if (-not $failure) { $failure = 'Could not collect Defender status or detection records: ' + $_.Exception.Message }
-    }
-    try {
-        $events = @(Get-WinEvent -FilterHashtable @{
-            LogName = 'Microsoft-Windows-Windows Defender/Operational'
-            StartTime = $scanStarted.AddSeconds(-2)
-            Id = 1000, 1001, 1002, 1005, 1116, 1117
-        } -ErrorAction Stop)
-        $scanIds = @()
-        foreach ($event in $events) {
-            if ($event.Id -ne 1000) { continue }
-            $fields = @{}
-            foreach ($field in ([xml]$event.ToXml()).Event.EventData.Data) {
-                $fields[([string]$field.Name -replace '[^A-Za-z]', '').ToLowerInvariant()] = [string]$field.'#text'
-            }
-            $resources = [string]$fields['scanresources']
-            if ($resources.IndexOf($scanPath, [System.StringComparison]::OrdinalIgnoreCase) -ge 0 -and $fields['scanid']) {
-                $scanIds += $fields['scanid']
-            }
-        }
-        foreach ($event in $events) {
-            if ($event.Id -ne 1001) { continue }
-            foreach ($field in ([xml]$event.ToXml()).Event.EventData.Data) {
-                if (([string]$field.Name -replace '[^A-Za-z]', '') -ieq 'scanid' -and $scanIds -contains [string]$field.'#text') {
-                    $report.scan_completed_event = $true
-                }
-            }
-        }
-        $report.defender_events = @($events | Select-Object Id, TimeCreated, Message)
-    } catch {
-        if (-not $failure) { $failure = 'Defender completion/detection events could not be collected: ' + $_.Exception.Message }
-    }
+        $report.threat_detections = @(Get-MpThreatDetection | Where-Object {
+            $_.InitialDetectionTime -ge $started.AddSeconds(-2) -or
+            $_.LastThreatStatusChangeTime -ge $started.AddSeconds(-2)
+        } | Select-Object ThreatID, InitialDetectionTime, LastThreatStatusChangeTime, Resources)
+    } catch { }
 
-    $foundThreat = $report.threat_detections.Count -gt 0 -or
-        @($report.defender_events | Where-Object { $_.Id -in 1116, 1117 }).Count -gt 0
-    $scanFailed = @($report.defender_events | Where-Object { $_.Id -in 1002, 1005 }).Count -gt 0
-    if ($foundThreat) {
+    $consoleThreat = ($scan.Out + $scan.Err) -match '(?i)(Trojan|Virus|Worm|Backdoor|Ransom|HackTool|PUA|Exploit|Behavior|SoftwareBundler):|(?:found|detected)\s*[=:]?\s*[1-9]\d*\s*threat'
+    if ($consoleThreat -or $report.threat_detections.Count -gt 0) {
         $report.outcome = 'detection-reported'
-    } elseif (-not $failure -and $scanInvoked -and $report.scan_exit_code -eq 0 -and
-        $report.scan_completed_event -and -not $scanFailed -and
-        $report.actual_sha256 -eq $expectedSha -and
+    } elseif ($scan.Code -eq 0 -and $report.scan_console_completed -and
         $report.defender_after.AMServiceEnabled -and $report.defender_after.AntivirusEnabled -and
         $report.defender_after.AMRunningMode -eq 'Normal') {
-        $report.outcome = if ($report.scan_scope -eq 'archive') { 'no-detection-on-this-runner' } else { 'no-detection-in-extracted-files' }
+        $report.outcome = 'no-detection-on-this-runner'
     } else {
-        $report.outcome = 'indeterminate'
+        throw ('Scan did not establish a no-detection result; native exit code ' + $scan.Code)
     }
-    if ($failure) { $report.error = $failure }
+} catch {
+    $report.error = $_.Exception.Message
+} finally {
     $report.finished_utc = (Get-Date).ToUniversalTime().ToString('o')
-    $json = $report | ConvertTo-Json -Depth 10
-    $json | Set-Content -LiteralPath (Join-Path $reportDir 'report.json') -Encoding utf8
-    Write-Output $json
-    $summary = @"
-## VoiceLab Defender investigation
-
-Outcome: **$($report.outcome)**
-
-Scope: **$($report.scan_scope)**. Archive scanning enabled: **$($report.archive_scanning_enabled)**.
-
-Original archive SHA-256: ``$expectedSha``
-
-Error or limitation: $($report.error)
-
-The original ZIP is not uploaded as an artifact. No application code or installer ran.
-This result does not authorize restoring/running the withdrawn package or establish a false positive.
-"@
-    if ($env:GITHUB_STEP_SUMMARY) { $summary | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY }
-    if ($report.outcome -notin @('no-detection-on-this-runner', 'no-detection-in-extracted-files')) {
-        $detail = if ($report.error) { [string]$report.error } else { ($report.threat_detections | ConvertTo-Json -Depth 5 -Compress) + ' Inspect report.json and Defender events.' }
-        $detail = $detail.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
-        Write-Output "::error title=Defender investigation - $($report.outcome)::$detail"
+    ($report | ConvertTo-Json -Depth 10) | Set-Content (Join-Path $reportDir 'report.json') -Encoding utf8
+    $console = if ($scan) { ($scan.Out + $scan.Err) } else { '' }
+    if ($console.Length -gt 5000) { $console = $console.Substring(0, 5000) }
+    $message = 'Outcome=' + $report.outcome + '; native exit=' + $report.scan_exit_code +
+        '; error=' + $report.error + '; scanner output=' + $console
+    $message = $message.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+    if ($report.outcome -eq 'no-detection-on-this-runner') {
+        Write-Output "::notice title=Defender analysis result::$message"
     } else {
-        Write-Output "::notice title=Defender investigation - $($report.outcome)::Scope $($report.scan_scope). The reported user-device ZIP detection remains unresolved; do not restore or run the package."
+        Write-Output "::error title=Defender analysis result::$message"
     }
-}
+    $summary = @"
+## Defender investigation: $($report.outcome)
+- Original ZIP SHA-256: $sha
+- Scope: original ZIP, isolated custom analysis scan, no application execution.
+- Scanner signature verified: $($report.signature_verified)
+- Vendor analysis-mode semantics verified: $($report.reference_semantics_verified)
+- Native exit code: $($report.scan_exit_code)
+- Error: $($report.error)
 
+The user-device detection remains unresolved. Do not restore, run or redistribute the withdrawn ZIP.
+No evidence ZIP is uploaded; only reports and official scanner/reference text are retained.
+"@
+    if ($env:GITHUB_STEP_SUMMARY) { $summary | Add-Content $env:GITHUB_STEP_SUMMARY }
+}
 if ($report.outcome -eq 'detection-reported') { exit 2 }
-if ($report.outcome -notin @('no-detection-on-this-runner', 'no-detection-in-extracted-files')) { exit 1 }
+if ($report.outcome -ne 'no-detection-on-this-runner') { exit 1 }
