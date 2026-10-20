@@ -1,12 +1,18 @@
-# Hmong Studio 0.6.0 — chế độ nhanh và lọc ồn
+# Hmong Studio 0.7.0 — tự dùng NVIDIA và đo cấu hình nhanh
 
-Bản này gom toàn bộ ứng dụng, hai mẫu nam/nữ và các bản sửa lỗi vào một ZIP. **Chỉ chạy `CHAY-STUDIO.bat`**: file này tự cài thư viện/công cụ/mô hình còn thiếu, kiểm tra rồi mở Studio trong trình duyệt. Những lần sau cũng dùng chính file đó; bộ máy đã hợp lệ được kiểm tra và dùng lại, không cài đè thư viện.
+Bản này gom toàn bộ ứng dụng, hai mẫu nam/nữ và các bản sửa lỗi vào một ZIP. **Chỉ chạy `CHAY-STUDIO.bat`**: tự phát hiện NVIDIA, thử cài CUDA riêng, kiểm tra GPU bằng phép tính thật rồi mở Studio trong trình duyệt. Nếu chưa cài được GPU, chương trình báo rõ và dùng lại CPU đã kiểm tra; không lặp tải bộ GPU thất bại ở mỗi lần mở. Những lần sau dùng lại bộ máy hợp lệ, không cài đè thư viện.
 
-Mới: lựa chọn **Chuẩn / Nhanh CPU** và **Lọc ồn Tắt / Nhẹ / Mạnh**. Mặc định Chuẩn + Nhẹ. Mẫu được giảm ù/ồn nền và cân mức trước khi lấy âm sắc; bản đọc cuối được giảm ồn và giới hạn đỉnh âm thanh một lần sau khi ghép. Giữ **1.000.000 ký tự/lượt**, Review, TXT/SRT, tiến độ %, worker/mẫu dùng lại và WAV ghi trực tiếp ra đĩa.
+**Dành cho GTX 1060 6 GB:** phần tra chữ Qwen dùng chung với đầu ra ngôn ngữ không sử dụng được chuyển về RAM, giảm nhu cầu giữ khoảng **0,507 GiB trọng số trên VRAM** khi mô hình phù hợp. Bộ transformer, chọn token giọng, sinh phổ và vocoder vẫn chạy trên GPU. Không lượng tử hóa thêm hoặc sửa trọng số tải về; giá trị embedding và phép tính Qwen được kiểm tra bằng mô hình nhỏ. Chưa đo chuyển bộ nhớ/tốc độ trên GPU thật trong phiên này.
 
-Chọn **Nhanh CPU + Lọc ồn Nhẹ** để thử tốc độ. Chế độ nhanh dùng bản sao INT8 của riêng bộ sinh phổ; bộ chọn token giọng và mô hình gốc không thay đổi. Sau mỗi lượt, bộ máy trả lại bản Chuẩn; bản nhanh được giữ trong bộ nhớ để dùng tiếp. Chế độ nhanh có thể đổi âm sắc, cần nghe kiểm tra; chọn Chuẩn nếu kết quả không phù hợp. GPU vẫn dùng CUDA AMP đã có. **Chưa đạt mục tiêu tạo 1 giờ voice trong 2 phút**; không có cấu hình nào được gắn nhãn đã đạt mốc đó.
+**Chọn cấu hình nhanh bằng số đo tại máy:** mở Studio một lần để cài GPU, đóng cửa sổ Studio bằng Ctrl+C, rồi chạy **`DO-TOC-DO.bat`**. Công cụ tạo bốn mẫu ngắn (làm ấm và đo riêng cho FP32/FP16), Review + Lọc ồn Nhẹ, lưu WAV để nghe và chọn chế độ có thời gian tạo trên mỗi giây lời đọc thấp nhất. Nó không tính 0,15 giây khoảng lặng tool thêm cuối câu vào lời đã tạo. Kết quả lưu riêng cho GPU/thư viện/mô hình hiện có; mở lại `CHAY-STUDIO.bat` để áp dụng. Nếu phép đo lỗi bất thường hoặc bị dừng, cấu hình trước vẫn giữ nguyên. Nếu một chế độ hết VRAM, chỉ chế độ đã tạo WAV hợp lệ được xét. Một mẫu ngắn nhanh không chứng minh đã tạo một giờ trong hai phút.
 
-Đo thực tế bản này, mẫu nữ Review và Lọc ồn Nhẹ trên CPU kiểm thử: Chuẩn **34,254 giây**, Nhanh CPU **26,052 giây**, cùng WAV **2,110 giây**. Mô hình đã được nạp riêng; lượt nhanh dùng lại mẫu nữ và có tạo bản INT8 lần đầu. Không ngoại suy thành tốc độ cho mọi máy hoặc một giờ lời đọc. Ba WAV mới trong `examples` cho phép nghe so sánh; xem `TOC-DO.md` để biết đầy đủ điều kiện đo.
+**Chưa đạt hoặc xác nhận mục tiêu 2 phút tạo 1 giờ voice trên GTX 1060.** Card này không có Tensor Cores/TF32; FP16 không mặc nhiên nhanh hơn FP32. Bản này giúp app tự vào đường CUDA và chọn theo phép đo thật, không gắn nhãn đã đạt 30 lần thời gian thực. Đây là app cục bộ mở trong trình duyệt, không phải EXE độc lập chứa sẵn Python/mô hình.
+
+Giữ lựa chọn **Chuẩn / Nhanh CPU** và **Lọc ồn Tắt / Nhẹ / Mạnh** từ 0.6.0. Mặc định Chuẩn + Nhẹ. Mẫu được giảm ù/ồn nền và cân mức trước khi lấy âm sắc; bản đọc cuối được giảm ồn và giới hạn đỉnh âm thanh một lần sau khi ghép. Giữ **1.000.000 ký tự/lượt**, Review, TXT/SRT, tiến độ %, worker/mẫu dùng lại và WAV ghi trực tiếp ra đĩa.
+
+Trên máy chạy CPU, chọn **Nhanh CPU + Lọc ồn Nhẹ** để thử tốc độ. Chế độ nhanh dùng bản sao INT8 của riêng bộ sinh phổ; bộ chọn token giọng và mô hình gốc không thay đổi. Sau mỗi lượt, bộ máy trả lại bản Chuẩn; bản nhanh được giữ trong bộ nhớ để dùng tiếp. Chế độ nhanh có thể đổi âm sắc, cần nghe kiểm tra; chọn Chuẩn nếu kết quả không phù hợp. Trên NVIDIA, dùng **Chuẩn + Nhẹ** và cấu hình FP32/FP16 đã đo; Nhanh CPU không tăng thêm tốc độ GPU.
+
+Đo thực tế bản 0.6.0, mẫu nữ Review và Lọc ồn Nhẹ trên CPU kiểm thử: Chuẩn **34,254 giây**, Nhanh CPU **26,052 giây**, cùng WAV **2,110 giây**. Mô hình đã được nạp riêng; lượt nhanh dùng lại mẫu nữ và có tạo bản INT8 lần đầu. Không ngoại suy thành tốc độ cho mọi máy hoặc một giờ lời đọc. Các WAV trong `examples` cho phép nghe so sánh; xem `TOC-DO.md` để biết đầy đủ điều kiện đo.
 
 **Bản 0.5.1 bỏ thêm phép tính từ vựng ngôn ngữ không dùng trong bộ giải mã giọng.** Phép đo cặp cùng seed tạo WAV giống hệt từng byte: trước sửa 31,426 giây, sau sửa 30,760 giây, cùng WAV 2,110 giây. Phần sinh phổ âm vẫn chiếm khoảng 26 giây. Đây là tối ưu có số đo, **chưa đạt mục tiêu 1 giờ voice trong 2 phút**. Xem `TOC-DO.md` để biết phạm vi đo và phần cứng cần xác định. Chạy `KIEM-TRA-GPU.bat` để xem tên GPU/VRAM; ảnh thẻ System trong dxdiag chỉ cho biết CPU/RAM.
 
@@ -14,7 +20,7 @@ Phép đo CPU đám mây 4 luồng ở bản 0.5.0, Review cùng câu “Nyob zo
 
 CosyVoice Hmong tạo lời đọc mới theo mẫu nam/nữ, chạy trên máy và không cần dịch vụ trả phí hoặc API key. **Mô hình chưa nằm sẵn trong ZIP**: cần Internet lần đầu để tải thư viện và khoảng **5,4 GB** mô hình; tệp đã tải đúng được dùng tiếp. Mẫu âm thanh dùng để lấy âm sắc; không phải huấn luyện lại mô hình.
 
-Gói này giữ bản sửa WinError 2 với tệp `__init__.py.part` sau khi đã tải trọng số. Tệp nguồn rỗng được tạo và kiểm tra checksum trước khi dùng. Nếu đang dùng bản 0.4.x/0.5.x, **đóng Studio và bộ cài, giải nén đè mã mới vào đúng thư mục đang dùng, giữ nguyên `.data`**, rồi chạy `CHAY-STUDIO.bat`. Không thay tệp phụ thuộc hoặc tải lại mô hình đã hợp lệ.
+Gói này giữ bản sửa WinError 2 với tệp `__init__.py.part` sau khi đã tải trọng số. Tệp nguồn rỗng được tạo và kiểm tra checksum trước khi dùng. Nếu đang dùng bản 0.4.x/0.5.x/0.6.x, **đóng Studio và bộ cài, giải nén đè mã mới vào đúng thư mục đang dùng, giữ nguyên `.data`**, rồi chạy `CHAY-STUDIO.bat`. Không thay tệp phụ thuộc hoặc tải lại mô hình đã hợp lệ; chuyển từ bộ CPU sang CUDA cần tải thư viện GPU riêng.
 
 Bộ cài vẫn tạo môi trường riêng để tránh WinError 32 khi pip cài đè tệp SymPy/Torch đang bị giữ. Nếu vẫn bị tiến trình giữ tệp, khởi động lại Windows trước khi thử lại; không cần chạy quản trị hoặc cài Visual C++ Build Tools.
 
@@ -31,7 +37,7 @@ Bộ cài mới chọn CPython 3.10–3.12 x64, ưu tiên 3.12; giữ bản sao 
 
 Khuyến nghị **RAM 16 GB trở lên**, chừa ít nhất khoảng 15 GB đĩa trống cho mô hình/thư viện và dung lượng cho sản phẩm. Lượt đầu phải nạp mô hình; CPU có thể chậm. Nếu xuất hiện lỗi DLL của Torch/ONNXRuntime, kiểm tra Microsoft Visual C++2015–2022 x64 Redistributable chính thức; không cần bộ biên dịch Build Tools cho quy trình cài này. Windows launcher chưa được chạy trên Windows thật trong phiên kiểm thử này.
 
-**Nếu có GPU NVIDIA:** đóng Studio rồi chạy `CAI-NVIDIA.bat`. File này cài PyTorch/Torchaudio 2.6 CUDA 12.4 vào môi trường riêng, kiểm tra GPU bằng phép tính thật rồi mới chọn nó. Máy cần driver tương thích; không dùng file này cho AMD/Intel hoặc máy chỉ có CPU. Cài GPU lỗi sẽ giữ môi trường cũ. Sau khi cài GPU thành công, các lần sau chạy `CHAY-STUDIO.bat` sẽ tiếp tục dùng cấu hình GPU đó. Chưa thử GPU thực tế trong phiên này, không cam kết tốc độ hoặc VRAM cho mọi card.
+**Nếu có GPU NVIDIA:** `CHAY-STUDIO.bat` tự thử PyTorch/Torchaudio 2.6 CUDA 12.4 trong môi trường riêng, kiểm tra GPU rồi mới kích hoạt. `CAI-NVIDIA.bat` vẫn có để chủ động thử lại nếu lần tự động thất bại. Máy GTX 1060 6 GB với driver 560.94 đã được xác định qua ảnh người dùng; chưa được chạy kiểm thử từ xa. Driver tương thích không tự bảo đảm mô hình vừa VRAM hoặc đạt tốc độ yêu cầu. Sau khi đo bằng `DO-TOC-DO.bat`, lần mở tiếp dùng lựa chọn FP32/FP16 đã đo. Có thể đặt `HMONG_COSY_PRECISION=auto|float32|float16` để chủ động ghi đè; mặc định `auto`. Thay mô hình/GPU/bản Torch sẽ bỏ qua lựa chọn cũ.
 
 ## Tạo voice
 
@@ -71,8 +77,9 @@ Linux, CPU 4 threads, không GPU:
 - Giọng nữ tạo thật câu **“Nyob zoo, kuv hais lus Hmoob.”**: WAV PCM16 mono 24 kHz, 2,71 giây; lượt lạnh khoảng64,7 giây, RAM đỉnh khoảng7,84 GiB.
 - Giọng nam, cách đọc Review, cùng câu trên: tạo thật qua giao diện/API, WAV 2,51 giây; lượt này khoảng93,6 giây. Đây là số đo máy kiểm thử, không bảo đảm tốc độ trên máy khác.
 - Nút Dừng đã kết thúc worker thật, sau đó tạo lại thành công. Chọn mẫu/generate không yêu cầu micro. Desktop/mobile 390 px không tràn ngang hoặc lỗi JavaScript.
-- 199 kiểm thử Python đạt, gồm CPU INT8 dùng lại/khôi phục Chuẩn, lọc ồn FFmpeg thật, đúng số mẫu và đuôi âm, SRT, Qwen/KV, worker, giới hạn 1 triệu ký tự, WAV 24 giờ có metadata và tải Range. Kết quả 1 giờ WAV trong kiểm thử streaming là dữ liệu thử, không phải đã tạo 1 giờ lời Hmong thật; cũng chưa tạo đủ 1 triệu ký tự bằng mô hình thật.
-- 9 nhóm kiểm tra Chromium và 8 kiểm tra micro đạt: lựa chọn chế độ/lọc ồn, dự án/API, tiến độ lọc ồn, CPU/GPU thực, Dừng, 1 triệu ký tự, tải WAV lớn và mobile.
+- 257 kiểm thử Python đạt, 1 kiểm tra CUDA thật bỏ qua do không có GPU. Bao gồm tự chọn CUDA/CPU, phép đo và cấu hình gắn phần cứng, Qwen offload/rollback, CPU INT8, FFmpeg thật, SRT, worker, giới hạn 1 triệu ký tự, WAV 24 giờ và tải Range. Kết quả 1 giờ WAV trong kiểm thử streaming là dữ liệu thử, không phải đã tạo 1 giờ lời Hmong thật; cũng chưa tạo đủ 1 triệu ký tự bằng mô hình thật.
+- 9 nhóm kiểm tra Chromium chạy lại đạt: lựa chọn chế độ/lọc ồn, dự án/API, tiến độ lọc ồn, hiển thị chế độ xử lý, Dừng, 1 triệu ký tự, tải WAV lớn và mobile. 8 kiểm tra micro đã đạt ở 0.6.0; phần micro không thay đổi ở 0.7.0.
+- Mô hình Hmong đầy đủ với wrapper tra chữ mới được chạy cưỡng bức trên CPU để kiểm tra phép tính: WAV nữ Review + Nhẹ 2,110 giây giống từng byte với WAV Chuẩn 0.6.0, SHA256 `49f40eacdae0bfcc86c372672cfccc6716fad571a3fe76eaf51954fa8f256a17`. Đây là kiểm tra giữ kết quả, không phải phép đo tăng tốc CUDA.
 - Tín hiệu thử cho thấy lọc Nhẹ giảm ù 50 Hz khoảng 3,9 dB và nhiễu cao tần khoảng 2,2 dB, giữ biên độ các thành phần 500/1.500 Hz gần mức gốc. Đây là kiểm tra tín hiệu tổng hợp; cảm nhận giọng trong hơn và phát âm Hmong vẫn cần bạn nghe đánh giá. Đã kiểm tra giữ âm thanh ở 5 ms cuối và vị trí bắt đầu SRT tới độ chính xác 1 ms.
 - Đã thử thiếu toàn bộ 12 tệp rỗng trên snapshot thật: xác minh đủ 118 tệp mà không gọi mạng hay sửa trọng số lớn. Bản 0.4.1 đã qua kiểm tra môi trường do bộ cài tạo và 8 kiểm tra micro trong Chromium. Đã giải mã WAV và xác minh tín hiệu khác 0; kết quả này không thay thế việc nghe chất lượng/phát âm.
 

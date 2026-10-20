@@ -1,11 +1,13 @@
 """Install clone dependencies without mutating an environment used by Studio."""
 from contextlib import contextmanager
+import csv
 from datetime import datetime, timezone
 import hashlib
 import json
 import os
 from pathlib import Path
 import re
+import shutil
 import signal
 import subprocess
 import sys
@@ -30,6 +32,64 @@ CUDA_CHECK = (
     'torch.ones(1, device="cuda").add_(1); torch.cuda.synchronize(); '
     'print("GPU NVIDIA da kiem tra: " + torch.cuda.get_device_name(0))'
 )
+AUTO_GPU_STATE = 'auto-gpu.json'
+
+
+def detect_nvidia():
+    """Read driver-provided adapter details without importing or installing Torch."""
+    command = shutil.which('nvidia-smi')
+    if not command:
+        return []
+    try:
+        result = subprocess.run(
+            [command, '--query-gpu=name,driver_version', '--format=csv,noheader'],
+            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, check=True,
+            text=True, encoding='utf-8', errors='replace', timeout=5,
+        )
+        if not result.stdout or len(result.stdout) > 65536:
+            return []
+        adapters = []
+        for row in csv.reader(result.stdout.splitlines()):
+            if len(row) != 2:
+                return []
+            name, driver = (value.strip() for value in row)
+            if (not name or len(name) > 200 or any(ord(char) < 32 for char in name)
+                    or not re.fullmatch(r'[0-9]+(?:\.[0-9]+){1,3}', driver)):
+                return []
+            adapters.append({'name': name, 'driver': driver})
+        return sorted(adapters, key=lambda adapter: (adapter['name'], adapter['driver']))
+    except (OSError, subprocess.SubprocessError, csv.Error):
+        return []
+
+
+def _automatic_gpu_key(root, adapters):
+    digest = hashlib.sha256(dependency_fingerprint(root, 'cu124').encode())
+    digest.update(json.dumps(adapters, sort_keys=True, ensure_ascii=True).encode())
+    return digest.hexdigest()
+
+
+def _automatic_gpu_failed(root, key):
+    folder, _ = _paths(root)
+    path = folder / AUTO_GPU_STATE
+    try:
+        if path.stat().st_size > 4096:
+            return False
+        record = json.loads(path.read_text(encoding='utf-8'))
+        return (isinstance(record, dict) and set(record) == {'schema', 'key', 'status'}
+                and type(record['schema']) is int and record['schema'] == 1
+                and record['status'] == 'failed' and isinstance(record['key'], str)
+                and bool(re.fullmatch(r'[0-9a-f]{64}', record['key']))
+                and record['key'] == key)
+    except (OSError, ValueError, TypeError):
+        return False
+
+
+def _remember_automatic_gpu_failure(root, key):
+    folder, _ = _paths(root)
+    try:
+        _atomic_json(folder / AUTO_GPU_STATE, {'schema': 1, 'key': key, 'status': 'failed'})
+    except OSError:
+        print('Khong luu duoc ket qua thu GPU. Bo may CPU van duoc giu nguyen.', file=sys.stderr)
 
 
 def dependency_fingerprint(root, profile='cpu'):
@@ -277,6 +337,46 @@ def launch(root=BASE, profile=None):
     return serve(root, open_browser=True)
 
 
+def launch_auto(root=BASE):
+    """Try a detected NVIDIA GPU once, retaining a working CPU installation.
+
+    Detection only chooses an installer: activation still requires the real
+    CUDA check in install(). A manually selected GPU profile always stays in
+    control, including when its validation fails and needs user attention.
+    """
+    root = Path(root).resolve()
+    if _preferred_profile(root) == 'cu124':
+        return launch(root)
+    adapters = detect_nvidia()
+    if not adapters:
+        return launch(root)
+    key = _automatic_gpu_key(root, adapters)
+    if _automatic_gpu_failed(root, key):
+        print('Lan thu GPU tu dong truoc chua thanh cong; tiep tuc dung CPU. '
+              'Chay CAI-NVIDIA.bat neu muon thu lai GPU.', flush=True)
+        return launch(root)
+    print('Phat hien GPU NVIDIA: ' + ', '.join(adapter['name'] for adapter in adapters), flush=True)
+    print('Dang chuan bi CUDA. Chi kich hoat sau khi kiem tra GPU that thanh cong.', flush=True)
+    try:
+        install(root, profile='cu124')
+    except (OSError, RuntimeError, subprocess.CalledProcessError) as exc:
+        # Another installer may have explicitly selected a GPU meanwhile. Do
+        # not replace that choice with a CPU profile after our failed attempt.
+        if _preferred_profile(root) == 'cu124':
+            raise
+        print('Chua kich hoat duoc GPU tu dong: ' + str(exc)[:1500], file=sys.stderr)
+        print('Dang kiem tra/dung lai bo may CPU. Chay CAI-NVIDIA.bat de thu lai GPU.', flush=True)
+        _remember_automatic_gpu_failure(root, key)
+        return launch(root)
+    folder, _ = _paths(root)
+    try:
+        (folder / AUTO_GPU_STATE).unlink(missing_ok=True)
+    except OSError:
+        # A stale failed-attempt memo cannot override the selected GPU profile.
+        pass
+    return serve(root, open_browser=True)
+
+
 if __name__ == '__main__':
     try:
         if sys.argv[1:] == ['install']:
@@ -287,10 +387,12 @@ if __name__ == '__main__':
             sys.exit(serve())
         elif sys.argv[1:] == ['launch']:
             sys.exit(launch())
+        elif sys.argv[1:] == ['launch-auto']:
+            sys.exit(launch_auto())
         elif sys.argv[1:] == ['launch-gpu']:
             sys.exit(launch(profile='cu124'))
         else:
-            raise RuntimeError('Lenh ho tro: install, install-gpu, serve, launch hoac launch-gpu.')
+            raise RuntimeError('Lenh ho tro: install, install-gpu, serve, launch, launch-auto hoac launch-gpu.')
     except (Exception, KeyboardInterrupt) as exc:
         print('Khong hoan tat: ' + (str(exc) or 'Da dung theo yeu cau.'), file=sys.stderr)
         sys.exit(1)

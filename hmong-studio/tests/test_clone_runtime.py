@@ -433,3 +433,206 @@ def test_invalid_requested_profile_is_rejected_before_creating_an_environment(st
     assert created == []
     assert commands == []
     assert not pointer_path(root).exists()
+
+
+NVIDIA = [{'name': 'NVIDIA GeForce GTX 1060 6GB', 'driver': '560.94'}]
+
+
+def test_nvidia_probe_uses_arguments_and_a_five_second_timeout(monkeypatch):
+    command = '/drivers with spaces/nvidia-smi.exe'
+    monkeypatch.setattr(runtime.shutil, 'which', lambda name: command if name == 'nvidia-smi' else None)
+
+    def probe(arguments, **options):
+        assert arguments == [command, '--query-gpu=name,driver_version', '--format=csv,noheader']
+        assert options['timeout'] == 5 and options['check'] is True
+        assert options['stdout'] == subprocess.PIPE and options['stderr'] == subprocess.DEVNULL
+        assert not options.get('shell', False)
+        return subprocess.CompletedProcess(arguments, 0, 'NVIDIA GeForce GTX 1060 6GB, 560.94\n')
+
+    monkeypatch.setattr(runtime.subprocess, 'run', probe)
+    assert runtime.detect_nvidia() == NVIDIA
+
+
+@pytest.mark.parametrize('failure', [
+    OSError('driver executable unavailable'),
+    subprocess.CalledProcessError(1, 'nvidia-smi'),
+    subprocess.TimeoutExpired('nvidia-smi', 5),
+])
+def test_unusable_nvidia_probe_does_not_select_gpu(monkeypatch, failure):
+    monkeypatch.setattr(runtime.shutil, 'which', lambda name: 'nvidia-smi')
+
+    def unavailable(*args, **kwargs):
+        raise failure
+
+    monkeypatch.setattr(runtime.subprocess, 'run', unavailable)
+    assert runtime.detect_nvidia() == []
+
+
+@pytest.mark.parametrize('output', ['', 'unrecognized output', 'GPU, N/A', 'x' * 201 + ', 560.94'])
+def test_malformed_nvidia_details_do_not_select_gpu(monkeypatch, output):
+    monkeypatch.setattr(runtime.shutil, 'which', lambda name: 'nvidia-smi')
+    monkeypatch.setattr(runtime.subprocess, 'run', lambda *args, **kwargs:
+                        subprocess.CompletedProcess(args[0], 0, output))
+    assert runtime.detect_nvidia() == []
+
+
+def test_automatic_launcher_reuses_cpu_when_nvidia_is_absent(studio, monkeypatch):
+    root, created, commands = studio
+    cpu = runtime.install(root)
+    monkeypatch.setattr(runtime, 'detect_nvidia', lambda: [])
+    commands.clear()
+
+    assert runtime.launch_auto(root) == 0
+
+    assert len(created) == 1
+    assert runtime.selected_python(root) == cpu
+    assert not any(command[1:4] == ['-m', 'pip', 'install'] for command in commands)
+    assert commands[-1] == [str(cpu), '-X', 'utf8', 'open_studio.py']
+
+
+def test_automatic_launcher_activates_validated_gpu_and_reuses_it_without_probing(studio, monkeypatch):
+    root, created, commands = studio
+    cpu = runtime.install(root)
+    original_cpu = snapshot(created[0])
+    models = snapshot(root / '.data' / 'models')
+    samples = snapshot(root / '.data' / 'clones')
+    monkeypatch.setattr(runtime, 'detect_nvidia', lambda: NVIDIA)
+    commands.clear()
+
+    assert runtime.launch_auto(root) == 0
+
+    gpu = runtime.selected_python(root, 'cu124')
+    assert gpu != cpu and len(created) == 2
+    checks = [index for index, command in enumerate(commands) if runtime.CUDA_CHECK in command]
+    model = next(index for index, command in enumerate(commands) if 'prepare_clone_model.py' in command)
+    assert len(checks) == 2 and checks[0] < model < checks[1]
+    assert commands[-1] == [str(gpu), '-X', 'utf8', 'open_studio.py']
+    assert snapshot(created[0]) == original_cpu
+    assert snapshot(root / '.data' / 'models') == models
+    assert snapshot(root / '.data' / 'clones') == samples
+
+    def unnecessary_probe():
+        raise AssertionError('An explicitly selected GPU must not be overridden by a fresh probe')
+
+    monkeypatch.setattr(runtime, 'detect_nvidia', unnecessary_probe)
+    commands.clear()
+    assert runtime.launch_auto(root) == 0
+    assert len(created) == 2 and runtime.selected_python(root, 'cu124') == gpu
+    assert not any(command[1:4] == ['-m', 'pip', 'install'] for command in commands)
+
+
+def test_failed_auto_gpu_reuses_cpu_without_repeated_download_and_allows_manual_retry(studio, monkeypatch, capsys):
+    root, created, commands = studio
+    cpu = runtime.install(root)
+    original_cpu = snapshot(created[0])
+    previous_pointer = pointer_path(root).read_bytes()
+    models = snapshot(root / '.data' / 'models')
+    samples = snapshot(root / '.data' / 'clones')
+    monkeypatch.setattr(runtime, 'detect_nvidia', lambda: NVIDIA)
+    original_run = runtime._run
+
+    def no_cuda(command, command_root, log=None):
+        if runtime.CUDA_CHECK in command:
+            raise subprocess.CalledProcessError(1, command)
+        return original_run(command, command_root, log)
+
+    monkeypatch.setattr(runtime, '_run', no_cuda)
+    commands.clear()
+    assert runtime.launch_auto(root) == 0
+    assert runtime.selected_python(root) == cpu and len(created) == 2
+    assert pointer_path(root).read_bytes() == previous_pointer
+    assert commands[-1] == [str(cpu), '-X', 'utf8', 'open_studio.py']
+    assert not any('prepare_clone_model.py' in command for command in commands)
+    assert snapshot(created[0]) == original_cpu
+    assert snapshot(root / '.data' / 'models') == models
+    assert snapshot(root / '.data' / 'clones') == samples
+
+    commands.clear()
+    assert runtime.launch_auto(root) == 0
+    assert len(created) == 2 and runtime.selected_python(root) == cpu
+    assert not any(command[1:4] == ['-m', 'pip', 'install'] for command in commands)
+    assert 'CAI-NVIDIA.bat' in capsys.readouterr().out
+
+    # Explicit retry bypasses the memo without removing existing CPU files.
+    monkeypatch.setattr(runtime, '_run', original_run)
+    assert runtime.launch(root, profile='cu124') == 0
+    assert runtime.selected_python(root, 'cu124') != cpu and len(created) == 3
+    assert snapshot(created[0]) == original_cpu
+
+
+@pytest.mark.parametrize('change', ['driver', 'dependencies'])
+def test_changed_driver_or_dependencies_allow_another_automatic_gpu_attempt(studio, monkeypatch, change):
+    root, created, commands = studio
+    runtime.install(root)
+    monkeypatch.setattr(runtime, 'detect_nvidia', lambda: NVIDIA)
+    key = runtime._automatic_gpu_key(root, NVIDIA)
+    runtime._remember_automatic_gpu_failure(root, key)
+    if change == 'driver':
+        monkeypatch.setattr(runtime, 'detect_nvidia', lambda: [{**NVIDIA[0], 'driver': '561.09'}])
+    else:
+        (root / 'requirements.txt').write_text('fastapi==0.116.0\n', encoding='utf-8')
+
+    assert runtime.launch_auto(root) == 0
+    assert runtime.selected_python(root, 'cu124').is_file() and len(created) == 2
+    assert not (root / '.data' / 'runtime' / runtime.AUTO_GPU_STATE).exists()
+
+
+@pytest.mark.parametrize('failure', [KeyboardInterrupt(), SystemExit(7)])
+def test_cancelled_automatic_gpu_install_does_not_fall_back_or_suppress_retry(studio, monkeypatch, failure):
+    root, created, commands = studio
+    cpu = runtime.install(root)
+    previous_pointer = pointer_path(root).read_bytes()
+    monkeypatch.setattr(runtime, 'detect_nvidia', lambda: NVIDIA)
+    original_run = runtime._run
+
+    def cancelled(command, command_root, log=None):
+        if runtime.CUDA_CHECK in command:
+            raise failure
+        return original_run(command, command_root, log)
+
+    monkeypatch.setattr(runtime, '_run', cancelled)
+    commands.clear()
+    with pytest.raises(type(failure)):
+        runtime.launch_auto(root)
+    assert pointer_path(root).read_bytes() == previous_pointer
+    assert runtime.selected_python(root) == cpu
+    assert not (root / '.data' / 'runtime' / runtime.AUTO_GPU_STATE).exists()
+    assert not any('open_studio.py' in command for command in commands)
+
+
+def test_automatic_launcher_never_resets_a_previously_selected_gpu_after_failure(studio, monkeypatch):
+    root, created, commands = studio
+    gpu = runtime.install(root, profile='cu124')
+    previous_pointer = pointer_path(root).read_bytes()
+    original_run = runtime._run
+
+    def no_cuda(command, command_root, log=None):
+        if runtime.CUDA_CHECK in command:
+            raise subprocess.CalledProcessError(1, command)
+        return original_run(command, command_root, log)
+
+    monkeypatch.setattr(runtime, '_run', no_cuda)
+    monkeypatch.setattr(runtime, 'detect_nvidia', lambda: [])
+    commands.clear()
+    with pytest.raises(subprocess.CalledProcessError):
+        runtime.launch_auto(root)
+    assert pointer_path(root).read_bytes() == previous_pointer
+    assert runtime.selected_python(root, 'cu124') == gpu
+    assert not any('https://download.pytorch.org/whl/cpu' in command for command in commands)
+    assert not any('open_studio.py' in command for command in commands)
+
+
+@pytest.mark.parametrize('record', [
+    {'schema': True, 'status': 'failed'},
+    {'schema': 1, 'status': 'success'},
+    {'schema': 1, 'status': 'failed', 'extra': 'unknown'},
+])
+def test_invalid_automatic_gpu_memo_cannot_disable_a_new_attempt(studio, monkeypatch, record):
+    root, created, commands = studio
+    runtime.install(root)
+    monkeypatch.setattr(runtime, 'detect_nvidia', lambda: NVIDIA)
+    record['key'] = runtime._automatic_gpu_key(root, NVIDIA)
+    path = root / '.data' / 'runtime' / runtime.AUTO_GPU_STATE
+    path.write_text(json.dumps(record), encoding='utf-8')
+    assert runtime.launch_auto(root) == 0
+    assert runtime.selected_python(root, 'cu124').is_file() and len(created) == 2

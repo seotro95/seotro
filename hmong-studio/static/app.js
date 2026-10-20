@@ -52,7 +52,8 @@ function updateProcessingOptions(){
 function renderComputeStatus(){
   const runtime=serviceStatus?.cosy, device=String(runtime?.device||'').toLowerCase(), precision=runtime?.precision;
   if(device.includes('cuda')){
-    $('computeStatus').textContent='Bộ xử lý: GPU NVIDIA · mô hình được giữ sẵn giữa các lượt tạo.';
+    const mode=precision==='float32'?' · FP32':precision==='float16_autocast'?' · FP16':'';
+    $('computeStatus').textContent='Bộ xử lý: GPU NVIDIA'+mode+' · mô hình được giữ sẵn giữa các lượt tạo.';
   }else if(device.includes('cpu')){
     const actualMode=precision==='float32_int8_flow'?' · chế độ Nhanh':precision==='float32'?' · chế độ Chuẩn':'';
     $('computeStatus').textContent='Bộ xử lý: CPU'+actualMode+' · tốc độ tùy máy và độ dài lời đọc.';

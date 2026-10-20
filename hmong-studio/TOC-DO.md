@@ -2,6 +2,16 @@
 
 Mục tiêu tương đương tạo âm thanh nhanh ít nhất 30 lần thời gian thực: 3.600 giây lời đọc mới trong 120 giây. Bản này **chưa đạt** mục tiêu đó. Không tính phát lại mẫu, thêm khoảng lặng, cắt lời hay tăng tốc giọng thành kết quả tăng tốc tính toán.
 
+## Bản 0.7.0 và GTX 1060 6 GB
+
+Người dùng đã xác định NVIDIA GeForce GTX 1060 6 GB, driver 560.94. `CHAY-STUDIO.bat` giờ tự thử bộ máy CUDA 12.4 riêng, chỉ kích hoạt khi phép tính CUDA thật thành công. Nếu cài GPU thất bại, báo rõ rồi dùng CPU; không lặp lại bộ tải thất bại cho cùng GPU/driver và bộ phụ thuộc. `CAI-NVIDIA.bat` cho phép thử lại chủ động. Mô hình/giọng và môi trường cũ không bị ghi đè.
+
+GPU tối đa 8 GiB dùng RAM cho bảng tra chữ Qwen và đầu ngôn ngữ dùng chung không được gọi. Với cấu hình ghim, bảng có 151.936 × 896 phần tử FP32, khoảng 0,507 GiB; đây là lượng trọng số không còn phải giữ trên VRAM, không phải số đo tổng VRAM hoặc tốc độ thực tế. Phép tra trả đúng embedding về GPU; các phần tạo giọng vẫn trên GPU. CPU mặc định không đổi. Kiểm thử mô hình Qwen nhỏ so khớp từng bit embedding, hidden states và KV cache, giữ tên/giá trị/tham chiếu trọng số.
+
+GTX 1060 không có Tensor Cores/TF32; không mặc định coi AMP nhanh hơn FP32. Đóng Studio rồi chạy `DO-TOC-DO.bat`: nạp mô hình một lần, làm ấm từng chế độ, đo tạo mẫu nữ Review + Nhẹ cho FP32 và FP16. Chỉ xét WAV hợp lệ và thời gian đồng bộ CUDA; trừ 0,15 giây khoảng lặng được tool thêm cuối mẫu khỏi mẫu số thời lượng lời. Chọn chế độ có RTF thấp nhất, lưu gắn với GPU/thư viện/revision. WAV và `report.json` nằm trong `.data/runtime/speed-test`. Mẫu ngắn không xác nhận tạo đủ một giờ. Nếu lỗi bất thường/bị dừng thì không thay lựa chọn trước; nếu một chế độ hết VRAM thì có thể chọn chế độ còn lại đã tạo WAV hợp lệ.
+
+Chưa có GPU thật/Windows trong môi trường kiểm thử để chạy phép đo đó. Không có số đo mới xác nhận 2 phút/giờ. Giảm VRAM và tự chọn CUDA giúp dùng tài nguyên hiện có; không thay mô hình lớn thành mô hình tốc độ 30×.
+
 Từ bản 0.6.0 có lựa chọn **Nhanh CPU**: dùng INT8 cho riêng bộ sinh phổ, giữ bộ chọn token giọng và bản Chuẩn gốc. Bản nhanh được giữ trong RAM cho lượt kế tiếp, và bản Chuẩn được trả lại sau mỗi lượt. Đây là lựa chọn có thể đổi âm sắc, vì vậy mặc định vẫn là Chuẩn; trên GPU vẫn dùng AMP đã có. Lọc ồn Nhẹ là mặc định, có thể chuyển Mạnh/Tắt. Bộ lọc xử lý mẫu trước khi lấy đặc trưng và WAV cuối sau khi ghép, bù độ trễ và kiểm tra số mẫu để giữ SRT/đuôi câu. Không cài thêm dịch vụ trả phí hoặc sửa trọng số tải về.
 
 Đo chạy thật bản 0.6.0 trên CPU đám mây 4 luồng, mô hình đã nạp, Review và Lọc ồn Nhẹ:
@@ -29,6 +39,6 @@ Hai WAV có SHA256 giống hệt nhau. Đây là phép đo mẫu ngắn, không 
 
 Mô hình hiện dùng 22 lớp DiT, 10 bước sinh phổ, cùng bộ giải mã token tuần tự. Xeon E5-2680 v4 và RAM 128 GB không đủ để bảo đảm 30 lần thời gian thực với cấu hình này. Bản Chuẩn giữ thiết lập hiện có; chỉ lựa chọn Nhanh CPU mới bật INT8. Không giảm số bước, cắt lời hoặc thêm khoảng lặng để tính thành tốc độ tạo lời mới.
 
-Để xác định hướng GPU, chạy **`KIEM-TRA-GPU.bat`** và xem tên card cùng VRAM. Trong `dxdiag`, thông tin này nằm ở thẻ **Display/Hiển thị**, không nằm trong ảnh thẻ System bạn đã gửi. Nếu có NVIDIA tương thích, `CAI-NVIDIA.bat` có cấu hình CUDA riêng; chưa có GPU thực tế để đo trong phiên này, vì vậy chưa thể cam kết tốc độ.
+Để kiểm tra lại GPU, chạy **`KIEM-TRA-GPU.bat`** và xem tên card cùng VRAM. Trong `dxdiag`, thông tin này nằm ở thẻ **Display/Hiển thị**. `CAI-NVIDIA.bat` có cấu hình CUDA riêng; chưa có GPU thực tế để đo trong phiên này, vì vậy chưa thể cam kết tốc độ.
 
 Ngay cả số đo GPU công khai cũng phải đọc đúng phạm vi: [CosyVoice3 TensorRT-LLM chính thức](https://github.com/FunAudioLLM/CosyVoice/blob/main/runtime/triton_trtllm/README.Cosyvoice3.md) báo RTF 0,0501 ở batch 16 trên NVIDIA L20, tương đương khoảng 3 phút tạo mỗi giờ âm thanh. Mô hình cơ sở và môi trường Linux đó khác bản Hmong này; không dùng số đó làm cam kết cho Windows hoặc mọi card NVIDIA.

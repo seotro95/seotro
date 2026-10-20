@@ -152,6 +152,7 @@ def availability():
             'precision': getattr(backend, '_hmong_precision',
                                  'float16_autocast' if getattr(backend, 'fp16', False) else 'float32') if backend is not None else 'auto',
             'compute_mode': getattr(backend, '_hmong_compute_mode', 'standard') if backend is not None else 'standard',
+            'text_embedding_offloaded': bool(getattr(backend, '_hmong_text_embedding_offloaded', False)),
             'reference_cache_entries': len(_reference_cache) if loaded else 0,
             'styles': list(STYLES), 'reason': reason,
             'quality_verified': False, 'reference_transcript_required': False}
@@ -256,13 +257,23 @@ def _device_options(torch):
     Merely having an NVIDIA card is insufficient: the installed Torch build and
     driver must actually expose CUDA. This does not download or replace Torch.
     """
+    requested = os.getenv('HMONG_COSY_PRECISION', 'auto').strip().lower()
+    if requested not in {'auto', 'float32', 'float16'}:
+        raise EngineError('HMONG_COSY_PRECISION phải là auto, float32 hoặc float16.')
     cuda = bool(torch.cuda.is_available())
+    fp16 = cuda
     if cuda:
         # TF32 accelerates operations that remain float32 under autocast on
         # Ampere and newer cards. Older CUDA devices safely ignore this setting.
         torch.backends.cuda.matmul.allow_tf32 = True
         torch.backends.cudnn.allow_tf32 = True
-    return {'device': 'cuda' if cuda else 'cpu', 'fp16': cuda}
+        if requested == 'auto':
+            from gpu_tuning import load_choice, settings_path
+            requested = load_choice(settings_path(), torch) or 'float16'
+        fp16 = requested == 'float16'
+    elif requested == 'float16':
+        raise EngineError('FP16 cần bộ máy NVIDIA CUDA. Chọn auto hoặc float32 khi chạy CPU.')
+    return {'device': 'cuda' if cuda else 'cpu', 'fp16': fp16}
 
 
 def _select_compute(backend, root, compute_mode, torch):
@@ -359,8 +370,9 @@ def _load_engine(root):
     backend.hift.load_state_dict(hift, strict=True)
     for module in (backend.llm, backend.flow, backend.hift):
         module.float().to(backend.device).eval()
-    from inference_acceleration import optimize_qwen_decode
+    from inference_acceleration import optimize_qwen_decode, offload_qwen_text_embedding
     optimize_qwen_decode(backend)
+    offload_qwen_text_embedding(backend)
     rate = int(configs['sample_rate'])
     if rate != 24000:
         raise EngineError('Tần số mô hình khác cấu hình Hmong đã kiểm tra.')
@@ -604,6 +616,10 @@ def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=N
                           + str(getattr(exc, 'name', '') or type(exc).__name__)
                           + '. Chạy lại install_clone_ai.bat rồi khởi động lại tool.') from exc
     except Exception as exc:
+        if type(exc).__name__ == 'OutOfMemoryError':
+            raise EngineError('GPU không đủ VRAM cho đoạn đọc này. Đóng ứng dụng đang dùng GPU, '
+                              'thử đoạn ngắn hoặc chạy DO-TOC-DO.bat để đo FP32/FP16. '
+                              'Chưa tạo voice hoàn tất; mẫu giọng và mô hình được giữ nguyên.') from exc
         raise EngineError('Không nạp/chạy được mô hình nhân bản Hmong (' + type(exc).__name__
                           + '). Kiểm tra nhật ký cục bộ, RAM và bộ cài AI; chưa có voice hoàn tất.') from exc
     finally:

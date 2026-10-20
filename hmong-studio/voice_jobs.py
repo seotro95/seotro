@@ -100,6 +100,9 @@ def _validated_runtime(info):
     mode = info.get('compute_mode')
     if isinstance(mode, str) and mode in {'standard', 'fast'}:
         runtime['compute_mode'] = mode
+    offloaded = info.get('text_embedding_offloaded')
+    if isinstance(offloaded, bool):
+        runtime['text_embedding_offloaded'] = offloaded
     return runtime
 
 

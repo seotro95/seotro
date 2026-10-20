@@ -68,7 +68,8 @@ async def main():
                 engine = getattr(app, 'cosy_engine', None)
                 details = engine.availability() if engine is not None else {}
                 result['runtime'] = {key: details[key] for key in (
-                    'loaded', 'device', 'precision', 'reference_cache_entries', 'compute_mode') if key in details}
+                    'loaded', 'device', 'precision', 'reference_cache_entries', 'compute_mode',
+                    'text_embedding_offloaded') if key in details}
             except Exception:
                 # Status metadata is optional and must not discard valid audio.
                 result['runtime'] = {}

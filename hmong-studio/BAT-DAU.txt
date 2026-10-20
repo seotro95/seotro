@@ -1,13 +1,25 @@
-HMONG STUDIO 0.6.0 - NHANH CPU / LOC ON / REVIEW SRT
+HMONG STUDIO 0.7.0 - TU DUNG NVIDIA / DO TOC DO / LOC ON NHE
 
 1. Cai Python 3.12 64-bit; lan dau giai nen vao thu muc co quyen ghi.
-2. Bam dup CHAY-STUDIO.bat. Tu cai thu vien/mo hinh con thieu, roi mo trinh duyet.
+2. Bam dup CHAY-STUDIO.bat. Tu thu NVIDIA/CUDA, cai phan thieu, roi mo Studio.
+   Cai GPU loi thi bao ro va dung CPU. Giu nguyen mo hinh/mau/moi truong cu.
 3. Nhung lan sau cung chi chay CHAY-STUDIO.bat; Ctrl+F5 neu dang mo trang cu.
 4. Chon NAM/NU, nhap toi da 1.000.000 ky tu hoac TXT/SRT; Review duoc chon san.
 5. Bam TAO VOICE: nut hien % va so doan da tao. DUNG se dung tien trinh.
 6. Hoan tat thi nghe va bam TAI TOAN BO WAV. Ban dai duoc ghi va tai truc tiep.
 
-CHE DO MOI:
+DANH CHO GTX 1060 6 GB:
+- Lan dau chay CHAY-STUDIO.bat de cai/kiem tra bo may GPU.
+- Dong Studio bang Ctrl+C, chay DO-TOC-DO.bat de do FP32 va FP16.
+- Cong cu lam am/do mau ngan, Review + Loc on Nhe, luu WAV de nghe so sanh.
+- Chon theo thoi gian tao moi giay loi doc; khong tinh khoang lang tool them.
+- Mo lai CHAY-STUDIO.bat de dung che do nhanh nhat trong phep do.
+- GPU chon Chuan + Loc on Nhe; Nhanh CPU khong tang toc them tren GPU.
+- Giam bang chu Qwen giu tren GPU khoang 0.507 GiB; cac phan tao giong van CUDA.
+- Chua co so do Windows/GPU thuc, CHUA DAT 2 phut tao 1 gio voice.
+- Loi do/cancel se giu cau hinh truoc. Mau ngan khong phai tao du 1 gio.
+
+CAC CHE DO:
 - Chon Nhanh CPU de thu tang toc. Co the doi am sac; chon Chuan neu khong hop.
 - Loc on Nhe la mac dinh: giam u/on nen, can muc mau, gioi han dinh dau ra.
 - Loc on Manh co the mat chi tiet giong. Tat de dung am thanh khong loc.
@@ -34,14 +46,15 @@ Xem README.md de biet chi tiet va ket qua kiem thu.
 Xem TOC-DO.md de biet so do toc do that; chay KIEM-TRA-GPU.bat de xem ten card.
 
 TANG TOC: giu lai mo hinh va mau giua cac luot hoan tat, khong nap lai moi luot.
-Co GPU NVIDIA: dong Studio, chay CAI-NVIDIA.bat de cai cau hinh CUDA rieng.
+CHAY-STUDIO.bat tu phat hien NVIDIA va thu CUDA rieng.
+CAI-NVIDIA.bat cho phep thu lai GPU neu lan tu dong truoc chua thanh cong.
 Khong co NVIDIA thi tiep tuc dung CHAY-STUDIO.bat, khong can cai GPU.
 CHUA DAT muc tieu tao 1 gio voice trong 2 phut. CPU van cham.
 Do CPU dam may: lan dau 66.8 giay cho 2.51 giay am thanh;
 lan dung lai 46.9 giay cho 2.15 giay. Khong phai so do tren may Xeon cua ban.
 
 SUA WINERROR2 __init__.py.part SAU KHI TAI MO HINH:
-Dong Studio/bo cai, cap nhat ban 0.6.0 vao DUNG thu muc cu.
+Dong Studio/bo cai, cap nhat ban 0.7.0 vao DUNG thu muc cu.
 Vi du: thu muc cu E:\voi hmong\Hmong-Studio-Trang,
 thi giai nen ZIP vao E:\voi hmong\ va chon thay the tep.
 KHONG long them Hmong-Studio-Trang vao ben trong thu muc cu.
