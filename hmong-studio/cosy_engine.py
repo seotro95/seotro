@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 from collections import OrderedDict
+from contextlib import nullcontext
 import importlib.util
 import io
 import json
@@ -79,7 +80,7 @@ _verified = None
 _reference_cache = OrderedDict()
 _REFERENCE_CACHE_LIMIT = 4
 _flow_variant = None
-COMPUTE_MODES = ('standard', 'fast')
+COMPUTE_MODES = ('standard', 'fast', 'ultra')
 REFERENCE_CLEANUP_LEVELS = ('off', 'light', 'strong')
 MAX_SCRIPT_CHARACTERS = 1_000_000
 MAX_OUTPUT_SECONDS = 24 * 60 * 60
@@ -281,13 +282,15 @@ def _select_compute(backend, root, compute_mode, torch):
 
     Fast CPU mode changes only the flow estimator's Linear operations to dynamic
     INT8. Its separately cached copy leaves the verified original model, Qwen
-    and speech-token head untouched. CUDA continues using upstream autocast.
+    and speech-token head untouched. ULTRA retains the Standard estimator; its
+    speed-up for repeated inputs comes from validated audio reuse. CUDA uses the
+    existing locally measured precision policy.
     """
     global _flow_variant
     if compute_mode not in COMPUTE_MODES:
-        raise EngineError('Chế độ xử lý phải là standard hoặc fast.')
+        raise EngineError('Chế độ xử lý phải là standard, fast hoặc ultra.')
     precision = 'float16_autocast' if getattr(backend, 'fp16', False) else 'float32'
-    if compute_mode == 'standard' or str(getattr(backend, 'device', 'cpu')).split(':')[0] != 'cpu':
+    if compute_mode in {'standard', 'ultra'} or str(getattr(backend, 'device', 'cpu')).split(':')[0] != 'cpu':
         backend._hmong_compute_mode = compute_mode
         backend._hmong_precision = precision
         return None
@@ -520,6 +523,9 @@ def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=N
 
     A caller-supplied output path avoids retaining a long script's audio in RAM.
     The final path is promoted atomically only after all chunks finish correctly.
+    ULTRA misses run the same inference as Standard, and hits reuse validated
+    prior PCM for the exact input/settings. Reuse is reported separately from
+    synthesized speech so it cannot be presented as new-voice generation speed.
     """
     text = str(text).strip()
     if not text or len(text) > MAX_SCRIPT_CHARACTERS:
@@ -529,7 +535,7 @@ def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=N
     if not isinstance(speed, (int, float)) or not math.isfinite(speed) or not .5 <= speed <= 2:
         raise EngineError('Tốc độ đọc phải nằm trong khoảng 0,5 đến 2,0.')
     if compute_mode not in COMPUTE_MODES:
-        raise EngineError('Chế độ xử lý phải là standard hoặc fast.')
+        raise EngineError('Chế độ xử lý phải là standard, fast hoặc ultra.')
     if cleanup not in REFERENCE_CLEANUP_LEVELS:
         raise EngineError('Mức làm sạch mẫu giọng phải là off, light hoặc strong.')
     status = availability()
@@ -538,6 +544,7 @@ def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=N
     if not _lock.acquire(blocking=False):
         raise EngineError('Bộ máy nhân bản đang tạo voice khác. Chờ hoàn tất hoặc bấm Dừng.')
     partial = None
+    cache_part = None
     restore_compute = None
     try:
         import numpy as np
@@ -547,13 +554,21 @@ def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=N
         total_units = len(sentences)
         completed_units = 0
         total = 0
+        synthesized_frames = 0
+        reused_frames = 0
+        cache_hits = 0
+        active_workers = 0
         rate = 24000
 
         def report(percent, phase, message):
             if progress is not None:
                 progress({'progress': min(99, round(float(percent), 2)), 'phase': phase, 'message': message,
                           'completed_units': completed_units, 'total_units': total_units,
-                          'generated_seconds': round(total / rate, 3)})
+                          'generated_seconds': round(total / rate, 3),
+                          'synthesized_seconds': round(synthesized_frames / rate, 3),
+                          'reused_seconds': round(reused_frames / rate, 3),
+                          'cache_hits': cache_hits, 'active_workers': active_workers,
+                          'batch_size': 1})
 
         report(1, 'loading', 'Đang nạp mô hình; các lượt sau dùng lại mô hình trong bộ nhớ.')
         frontend, backend, rate = _load_engine(root)
@@ -561,6 +576,23 @@ def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=N
         report(5, 'reference', 'Đang chuẩn bị mẫu giọng; dùng lại đặc trưng nếu mẫu không thay đổi.')
         instruct = ('You are a helpful assistant. Please speak Hmong (White Hmong RPA). '
                     + STYLES[emotion] + '<|endofprompt|>')
+        cache = None
+        cache_identity = None
+        if compute_mode == 'ultra':
+            from audio_cache import AudioCache, reference_digest, CACHE_VERSION
+            cache = AudioCache()
+            if cache.enabled:
+                try:
+                    reference_hash = reference_digest(reference_path)
+                except (OSError, ValueError) as exc:
+                    raise EngineError('Không đọc được mẫu giọng cục bộ hợp lệ để tạo voice.') from exc
+                cache_identity = {'reference': reference_hash, 'instruction': instruct,
+                                  'speed': float(speed), 'cleanup': cleanup,
+                                  'revision': REVISION, 'model_root': str(root),
+                                  'precision': backend._hmong_precision,
+                                  'device': str(getattr(backend, 'device', 'cpu')),
+                                  'torch': str(torch.__version__), 'algorithm': CACHE_VERSION,
+                                  'text_embedding_offloaded': bool(getattr(backend, '_hmong_text_embedding_offloaded', False))}
         text_units = sum(len(sentence) for sentence in sentences)
         completed_text = 0
         target = Path(output_path).expanduser().resolve() if output_path is not None else None
@@ -575,23 +607,70 @@ def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=N
             writer.setsampwidth(2)
             writer.setframerate(rate)
             for sentence in sentences:
-                # Same instruct2 tensors as upstream, with acoustic reference
-                # extraction performed once per unchanged reference, not chunk.
-                inputs = _conditioned_inputs(frontend, sentence, instruct, reference_path, rate, root=root,
-                                             cleanup=cleanup)
-                report(8 + 88 * completed_text / text_units, 'synthesis',
-                       f'Đang tạo đoạn {completed_units + 1}/{total_units}.')
-                emitted = False
-                for output in backend.tts(**inputs, stream=False, speed=float(speed)):
-                    sound = output['tts_speech'].detach().cpu().float().numpy().reshape(-1)
-                    pcm = _pcm16(sound)
-                    if total + sound.size > rate * MAX_OUTPUT_SECONDS:
-                        raise EngineError('Bản đọc vượt giới hạn 24 giờ mỗi lượt; hãy chia kịch bản nhỏ hơn.')
-                    writer.writeframesraw(pcm)
-                    total += sound.size
-                    emitted = True
-                if not emitted:
-                    raise EngineError('Mô hình không trả âm thanh cho đoạn đọc; chưa tạo voice hoàn tất.')
+                key = cache.key(text=sentence, **cache_identity) if cache_identity is not None else None
+                cached = cache.read(key) if key is not None else None
+                if cached is not None:
+                    active_workers = 0
+                    report(8 + 88 * completed_text / text_units, 'cache',
+                           f'Đang dùng lại âm thanh đã tạo cho đoạn {completed_units + 1}/{total_units}.')
+                    with wave.open(str(cached), 'rb') as reader:
+                        frames = reader.getnframes()
+                        if total + frames > rate * MAX_OUTPUT_SECONDS:
+                            raise EngineError('Bản đọc vượt giới hạn 24 giờ mỗi lượt; hãy chia kịch bản nhỏ hơn.')
+                        remaining = frames
+                        while remaining:
+                            count = min(remaining, 32768)
+                            block = reader.readframes(count)
+                            if len(block) != count * 2:
+                                raise EngineError('Tệp cache âm thanh bị thiếu dữ liệu; hãy tạo lại lượt đọc.')
+                            writer.writeframesraw(block)
+                            remaining -= count
+                        total += frames
+                        reused_frames += frames
+                        cache_hits += 1
+                else:
+                    # Preserve the same model, text, flow steps and inference
+                    # arguments as Standard. ULTRA does not enable CPU INT8.
+                    active_workers = 1
+                    inputs = _conditioned_inputs(frontend, sentence, instruct, reference_path, rate, root=root,
+                                                 cleanup=cleanup)
+                    report(8 + 88 * completed_text / text_units, 'synthesis',
+                           f'Đang tạo đoạn {completed_units + 1}/{total_units}.')
+                    if key is not None:
+                        descriptor, name = tempfile.mkstemp(prefix='.hmong-voice-cache-', suffix='.part',
+                                                          dir=target.parent if target is not None else None)
+                        os.close(descriptor)
+                        cache_part = Path(name)
+                    emitted = False
+                    with (wave.open(str(cache_part), 'wb') if cache_part is not None else nullcontext(None)) as cache_writer:
+                        if cache_writer is not None:
+                            cache_writer.setnchannels(1)
+                            cache_writer.setsampwidth(2)
+                            cache_writer.setframerate(rate)
+                        for output in backend.tts(**inputs, stream=False, speed=float(speed)):
+                            sound = output['tts_speech'].detach().cpu().float().numpy().reshape(-1)
+                            pcm = _pcm16(sound)
+                            if total + sound.size > rate * MAX_OUTPUT_SECONDS:
+                                raise EngineError('Bản đọc vượt giới hạn 24 giờ mỗi lượt; hãy chia kịch bản nhỏ hơn.')
+                            writer.writeframesraw(pcm)
+                            if cache_writer is not None:
+                                cache_writer.writeframesraw(pcm)
+                            total += sound.size
+                            synthesized_frames += sound.size
+                            emitted = True
+                    if not emitted:
+                        raise EngineError('Mô hình không trả âm thanh cho đoạn đọc; chưa tạo voice hoàn tất.')
+                    if cache_part is not None:
+                        cache.store(key, cache_part)
+                        try:
+                            cache_part.unlink(missing_ok=True)
+                        except OSError:
+                            # Cache is optional. A Windows scanner can briefly
+                            # hold this owned file after the valid audio copy;
+                            # job-folder cleanup may remove it later.
+                            logging.warning('Chưa dọn được tệp cache tạm; tiếp tục hoàn tất voice.')
+                        cache_part = None
+                    active_workers = 0
                 pause_frames = int(rate * .15)
                 if total + pause_frames > rate * MAX_OUTPUT_SECONDS:
                     raise EngineError('Bản đọc vượt giới hạn 24 giờ mỗi lượt; hãy chia kịch bản nhỏ hơn.')
@@ -629,6 +708,8 @@ def synthesize(text, reference_path, emotion='neutral', speed=1.0, *, progress=N
                 decoder.estimator = original
             if partial is not None:
                 partial.unlink(missing_ok=True)
+            if cache_part is not None:
+                cache_part.unlink(missing_ok=True)
         except OSError:
             # Antivirus may briefly hold an owned temporary file on Windows.
             # Cleanup failure must not hide the result or lock out future jobs.

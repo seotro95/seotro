@@ -321,7 +321,8 @@ def serve(root=BASE, *, open_browser=False):
     try:
         if open_browser:
             return _run([executable, '-X', 'utf8', 'open_studio.py'], root)
-        return _run([executable, '-m', 'uvicorn', 'app:app', '--host', '127.0.0.1', '--port', '8090', '--no-access-log'], root)
+        return _run([executable, '-m', 'uvicorn', 'app:app', '--host', '127.0.0.1', '--port', '8090', '--no-access-log',
+                     '--timeout-graceful-shutdown', '10'], root)
     except KeyboardInterrupt:
         return 0
     except subprocess.CalledProcessError:

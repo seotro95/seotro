@@ -237,7 +237,8 @@ def test_serve_launches_full_app_under_exact_selected_interpreter_without_pip(st
     assert runtime.serve(root) == 0
 
     assert commands == [[str(selected), '-m', 'uvicorn', 'app:app', '--host',
-                         '127.0.0.1', '--port', '8090', '--no-access-log']]
+                         '127.0.0.1', '--port', '8090', '--no-access-log',
+                         '--timeout-graceful-shutdown', '10']]
     assert pointer_path(root).read_bytes() == pointer
 
 

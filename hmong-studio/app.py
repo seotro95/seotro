@@ -1,4 +1,5 @@
 """Hmong Studio: local audio workspace with an explicit TTS adapter contract."""
+import asyncio
 import os
 from pathlib import Path
 import tempfile
@@ -15,17 +16,44 @@ import cosy_engine
 import voice_jobs
 import review_script
 import audio_clean
+import audio_export
 from contextlib import asynccontextmanager
 from starlette.concurrency import run_in_threadpool
 import local_engine
 
 BASE = Path(__file__).resolve().parent
+
+
+class DownloadResponse(FileResponse):
+    """Keep a result available until sending finishes, including cancellation."""
+    def __init__(self, *args, job, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.job = job
+        self.released = False
+        job['_downloads_active'] = job.get('_downloads_active', 0) + 1
+
+    async def __call__(self, scope, receive, send):
+        try:
+            return await super().__call__(scope, receive, send)
+        finally:
+            if not self.released:
+                self.job['_downloads_active'] = max(0, self.job.get('_downloads_active', 1) - 1)
+                self.released = True
+
+
 @asynccontextmanager
 async def lifespan(app):
-    yield
-    await voice_jobs.shutdown()
+    preload = asyncio.create_task(voice_jobs.preload()) if os.getenv('HMONG_PRELOAD') == '1' else None
+    try:
+        yield
+    finally:
+        await audio_export.shutdown()
+        if preload is not None:
+            preload.cancel()
+            await asyncio.gather(preload, return_exceptions=True)
+        await voice_jobs.shutdown()
 
-app = FastAPI(title='Hmong Studio', version='0.7.0', lifespan=lifespan)
+app = FastAPI(title='Hmong Studio', version='0.8.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 
@@ -37,7 +65,7 @@ class Speech(BaseModel):
     speed: float = Field(default=1, ge=0.5, le=2)
     reference_text: str = Field(default='', max_length=2000)
     input_format: Literal['auto', 'text', 'srt'] = 'auto'
-    compute_mode: Literal['standard', 'fast'] = 'standard'
+    compute_mode: Literal['standard', 'fast', 'ultra'] = 'standard'
     cleanup: Literal['off', 'light', 'strong'] = 'light'
 
 
@@ -152,6 +180,8 @@ async def generate_speech(payload: Speech, *, progress=None, output_path=None):
             raise HTTPException(503, 'Không hoàn thiện được âm thanh: ' + str(exc)) from None
     if script.timed:
         raise HTTPException(422, 'Đọc SRT theo mốc giờ cần bộ máy CosyVoice Hmong cục bộ và một mẫu giọng Nam/Nữ hoặc giọng riêng.')
+    if payload.compute_mode == 'ultra':
+        raise HTTPException(422, 'ULTRA FAST cần bộ máy CosyVoice Hmong cục bộ và một mẫu giọng Nam/Nữ hoặc giọng riêng.')
     if len(payload.text) > 10000:
         raise HTTPException(413, 'Kịch bản trên 10.000 ký tự cần chọn mẫu giọng và bộ máy CosyVoice Hmong cục bộ.')
     if payload.voice.startswith('custom-') or (payload.voice in {'hmong-white-female', 'hmong-white-male'} and os.getenv('HMONG_CLONE_URL')):
@@ -317,10 +347,10 @@ async def create_speech_job(payload: Speech):
     if not payload.text.strip():
         raise HTTPException(422, 'Nhập lời đọc trước khi tạo voice.')
     try:
-        review_script.parse_script(payload.text, payload.input_format)
+        script = review_script.parse_script(payload.text, payload.input_format)
     except review_script.ScriptError as exc:
         raise HTTPException(422, str(exc)) from None
-    return voice_jobs.create(payload.model_dump())
+    return voice_jobs.create(payload.model_dump(), estimated_total_seconds=script.duration if script.timed else None)
 
 
 @app.get('/api/speech/jobs/{job_id}')
@@ -333,13 +363,34 @@ async def stop_speech_job(job_id: str):
     return await voice_jobs.cancel(job_id)
 
 
+@app.post('/api/speech/jobs/{job_id}/pause')
+async def pause_speech_job(job_id: str):
+    return await voice_jobs.pause(job_id)
+
+
+@app.post('/api/speech/jobs/{job_id}/resume')
+async def resume_speech_job(job_id: str):
+    return await voice_jobs.resume(job_id)
+
+
 @app.get('/api/speech/jobs/{job_id}/audio')
 @app.head('/api/speech/jobs/{job_id}/audio')
-async def speech_job_audio(job_id: str):
+async def speech_job_audio(job_id: str, format: Literal['original', 'wav', 'mp3'] = Query('original')):
     job = voice_jobs.get(job_id)
     if job['status'] != 'completed':
         raise HTTPException(409, 'Chưa có voice hoàn tất để tải.')
+    if format == 'mp3':
+        try:
+            path = await audio_export.ensure_mp3(job)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from None
+        except (RuntimeError, OSError) as exc:
+            raise HTTPException(503, str(exc)) from None
+        return DownloadResponse(path, job=job, media_type='audio/mpeg', filename='hmong-review.mp3',
+                            headers={'Cache-Control': 'no-store'})
+    if format == 'wav' and job['media_type'] not in {'audio/wav', 'audio/x-wav'}:
+        raise HTTPException(422, 'Bản này không phải WAV. Hãy tải định dạng gốc hoặc dùng bộ máy Hmong cục bộ.')
     extension = {'audio/mpeg': 'mp3', 'audio/ogg': 'ogg'}.get(job['media_type'], 'wav')
-    return FileResponse(Path(job['temp'].name) / 'audio.bin', media_type=job['media_type'],
+    return DownloadResponse(Path(job['temp'].name) / 'audio.bin', job=job, media_type=job['media_type'],
                         headers={'Cache-Control': 'no-store'}, filename='hmong-review.' + extension,
                         content_disposition_type='inline')

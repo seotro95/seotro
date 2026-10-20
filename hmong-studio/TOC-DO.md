@@ -2,6 +2,10 @@
 
 Mục tiêu tương đương tạo âm thanh nhanh ít nhất 30 lần thời gian thực: 3.600 giây lời đọc mới trong 120 giây. Bản này **chưa đạt** mục tiêu đó. Không tính phát lại mẫu, thêm khoảng lặng, cắt lời hay tăng tốc giọng thành kết quả tăng tốc tính toán.
 
+## ULTRA FAST 0.8.0
+
+Giữ model và số bước/precision của Chuẩn, thêm cache PCM có checksum, preload, pause/resume và số đo tách lời mới/tái dùng. Cold tắt cache read kể cả đoạn lặp. Không có bằng chứng đạt 30× trên GTX 1060 6 GB. Xem `PERFORMANCE_REPORT.md` và `benchmark-results` cho kết quả thật; `BENCHMARK-ULTRA.bat` đo 1/5/15/30/60 phút và giữ rõ incomplete/unrun. Một worker/batch 1 theo giới hạn backend, không tạo nhiều model trên 6 GB VRAM.
+
 ## Bản 0.7.0 và GTX 1060 6 GB
 
 Người dùng đã xác định NVIDIA GeForce GTX 1060 6 GB, driver 560.94. `CHAY-STUDIO.bat` giờ tự thử bộ máy CUDA 12.4 riêng, chỉ kích hoạt khi phép tính CUDA thật thành công. Nếu cài GPU thất bại, báo rõ rồi dùng CPU; không lặp lại bộ tải thất bại cho cùng GPU/driver và bộ phụ thuộc. `CAI-NVIDIA.bat` cho phép thử lại chủ động. Mô hình/giọng và môi trường cũ không bị ghi đè.

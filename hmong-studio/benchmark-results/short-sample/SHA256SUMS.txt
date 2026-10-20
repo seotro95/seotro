@@ -1,0 +1,3 @@
+49f40eacdae0bfcc86c372672cfccc6716fad571a3fe76eaf51954fa8f256a17  standard.wav
+49f40eacdae0bfcc86c372672cfccc6716fad571a3fe76eaf51954fa8f256a17  ultra_cold.wav
+49f40eacdae0bfcc86c372672cfccc6716fad571a3fe76eaf51954fa8f256a17  ultra_warm.wav

@@ -318,6 +318,137 @@ def test_cleanup_level_is_part_of_reference_cache_key(tmp_path, monkeypatch):
     assert source.read_bytes() == b'original-reference'
 
 
+@pytest.fixture
+def ultra_runtime(tmp_path, monkeypatch):
+    np = pytest.importorskip('numpy')
+    torch = pytest.importorskip('torch')
+    reference = tmp_path / 'reference.mp3'
+    reference.write_bytes(b'original sample')
+    calls = []
+    original = torch.nn.Linear(4, 4).eval()
+    class Backend:
+        device = 'cpu'
+        fp16 = False
+        flow = SimpleNamespace(decoder=SimpleNamespace(estimator=original))
+
+        def tts(self, **options):
+            calls.append(options.copy())
+            amplitude = .3 if 'Hmoob' in options['sentence'] else .5
+            yield {'tts_speech': torch.from_numpy(
+                np.sin(np.arange(2400) * .1).astype('float32') * amplitude)}
+    backend = Backend()
+    monkeypatch.setattr(engine, '_flow_variant', None)
+    monkeypatch.setattr(engine, 'availability', lambda: {'ready': True})
+    monkeypatch.setattr(engine, 'model_dir', lambda: tmp_path / 'verified-model')
+    monkeypatch.setattr(engine, '_load_engine', lambda root: (Frontend(), backend, 24000))
+    monkeypatch.setattr(engine, '_sentences', lambda text: iter(text.split('|')))
+    monkeypatch.setattr(engine, '_conditioned_inputs', lambda frontend, sentence, *args, **options: {'sentence': sentence})
+    monkeypatch.setenv('HMONG_AUDIO_CACHE_DIR', str(tmp_path / 'cache'))
+    monkeypatch.delenv('HMONG_AUDIO_CACHE', raising=False)
+    monkeypatch.delenv('HMONG_AUDIO_CACHE_DISABLED', raising=False)
+    monkeypatch.delenv('HMONG_AUDIO_CACHE_READS', raising=False)
+    return reference, backend, original, calls
+
+
+def test_ultra_cold_matches_standard_and_warm_reuses_real_audio_in_order(tmp_path, ultra_runtime, monkeypatch):
+    torch = pytest.importorskip('torch')
+    reference, backend, original, calls = ultra_runtime
+    def forbidden(*args, **kwargs):
+        raise AssertionError('ULTRA must preserve the Standard estimator and quality')
+    monkeypatch.setattr(torch.ao.quantization, 'quantize_dynamic', forbidden)
+    script = 'Kuv hais lus Hmoob.|Kuv hais lus Hmoov.'
+    standard = engine.synthesize(script, reference)
+    cold_events, warm_events = [], []
+    cold = engine.synthesize(script, reference, compute_mode='ultra', progress=cold_events.append)
+    assert len(calls) == 4
+    warm = engine.synthesize(script, reference, compute_mode='ultra', progress=warm_events.append)
+    assert len(calls) == 4 and warm == cold == standard
+    assert backend.flow.decoder.estimator is original and engine._flow_variant is None
+    assert backend._hmong_compute_mode == 'ultra' and backend._hmong_precision == 'float32'
+    assert cold_events[-1]['cache_hits'] == 0
+    assert cold_events[-1]['synthesized_seconds'] == pytest.approx(.2)
+    assert cold_events[-1]['reused_seconds'] == 0
+    assert warm_events[-1]['cache_hits'] == 2
+    assert warm_events[-1]['synthesized_seconds'] == 0
+    assert warm_events[-1]['reused_seconds'] == pytest.approx(.2)
+    assert warm_events[-1]['generated_seconds'] == pytest.approx(.5)
+    assert warm_events[-1]['active_workers'] == 0 and warm_events[-1]['batch_size'] == 1
+    assert all(event['active_workers'] in {0, 1} for event in cold_events)
+    assert not list(tmp_path.glob('.hmong-voice-*.part'))
+    # Standard remains fresh inference even after ULTRA has populated the cache.
+    assert engine.synthesize(script, reference) == standard
+    assert len(calls) == 6
+
+
+def test_ultra_key_keeps_tones_style_speed_cleanup_reference_and_precision_separate(tmp_path, ultra_runtime):
+    reference, backend, original, calls = ultra_runtime
+    engine.synthesize('Kuv hais lus Hmoob.', reference, compute_mode='ultra')
+    engine.synthesize('Kuv hais lus Hmoov.', reference, compute_mode='ultra')
+    engine.synthesize('Kuv hais lus Hmoob.', reference, emotion='warm', compute_mode='ultra')
+    engine.synthesize('Kuv hais lus Hmoob.', reference, speed=1.1, compute_mode='ultra')
+    engine.synthesize('Kuv hais lus Hmoob.', reference, cleanup='light', compute_mode='ultra')
+    reference.write_bytes(b'another sample')
+    engine.synthesize('Kuv hais lus Hmoob.', reference, compute_mode='ultra')
+    backend.fp16 = True
+    engine.synthesize('Kuv hais lus Hmoob.', reference, compute_mode='ultra')
+    assert len(calls) == 7
+    assert backend.flow.decoder.estimator is original
+
+
+def test_ultra_corrupt_audio_is_recomputed_not_returned(tmp_path, ultra_runtime):
+    reference, _, _, calls = ultra_runtime
+    expected = engine.synthesize('Hmoob.', reference, compute_mode='ultra')
+    cached = next((tmp_path / 'cache').glob('*.wav'))
+    with cached.open('r+b') as stream:
+        stream.seek(46)
+        stream.write(b'\xff\xff')
+    assert engine.synthesize('Hmoob.', reference, compute_mode='ultra') == expected
+    assert len(calls) == 2
+
+
+def test_ultra_cold_benchmark_bypasses_all_hits_even_for_repeated_chunks(tmp_path, ultra_runtime, monkeypatch):
+    reference, _, _, calls = ultra_runtime
+    events = []
+    monkeypatch.setenv('HMONG_AUDIO_CACHE_READS', '0')
+    cold = engine.synthesize('Hmoob.|Hmoob.', reference, compute_mode='ultra', progress=events.append)
+    assert len(calls) == 2 and events[-1]['cache_hits'] == 0
+    monkeypatch.setenv('HMONG_AUDIO_CACHE_READS', '1')
+    warm = engine.synthesize('Hmoob.|Hmoob.', reference, compute_mode='ultra')
+    assert cold == warm and len(calls) == 2
+
+
+def test_ultra_unwritable_cache_does_not_fail_voice_creation(tmp_path, ultra_runtime, monkeypatch):
+    reference, _, _, calls = ultra_runtime
+    blocked = tmp_path / 'blocked-cache'
+    blocked.write_bytes(b'not a directory')
+    monkeypatch.setenv('HMONG_AUDIO_CACHE_DIR', str(blocked))
+    result = engine.synthesize('Hmoob.', reference, compute_mode='ultra')
+    assert result.startswith(b'RIFF') and len(calls) == 1
+    assert blocked.read_bytes() == b'not a directory'
+    assert not list(tmp_path.glob('.hmong-voice-*.part'))
+
+
+def test_ultra_windows_locked_cache_temporary_does_not_abort_valid_voice(tmp_path, ultra_runtime, monkeypatch):
+    reference, _, _, calls = ultra_runtime
+    original_unlink = Path.unlink
+    def windows_locked(path, *args, **kwargs):
+        if path.name.startswith('.hmong-voice-cache-'):
+            raise PermissionError('Windows antivirus temporarily holds optional cache file')
+        return original_unlink(path, *args, **kwargs)
+    monkeypatch.setattr(Path, 'unlink', windows_locked)
+    target = tmp_path / 'result.wav'
+    assert engine.synthesize('Hmoob.', reference, compute_mode='ultra', output_path=target) == target
+    assert len(calls) == 1 and target.is_file()
+    with wave.open(str(target), 'rb') as reader:
+        assert reader.getnframes() == 6000
+    # The successful cache entry remains reusable; the retained optional
+    # temporary cannot cause the next job to infer again or lock the engine.
+    assert engine.synthesize('Hmoob.', reference, compute_mode='ultra', output_path=target) == target
+    assert len(calls) == 1 and not engine._lock.locked()
+    for path in tmp_path.glob('.hmong-voice-cache-*.part'):
+        original_unlink(path)
+
+
 def test_decode_uses_cleaned_copy_without_modifying_original(tmp_path, monkeypatch):
     import sys
     np = pytest.importorskip('numpy')

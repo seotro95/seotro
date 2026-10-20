@@ -10,6 +10,19 @@ import uvicorn
 import open_studio
 
 
+def test_main_bounds_shutdown_so_mp3_request_cancellation_can_finish(monkeypatch):
+    observed = {}
+    class Server:
+        started = True
+        def __init__(self, config):
+            observed['timeout'] = config.timeout_graceful_shutdown
+        def run(self):
+            pass
+    monkeypatch.setattr(open_studio, 'StudioServer', Server)
+    assert open_studio.main() == 0
+    assert observed['timeout'] == 10
+
+
 async def ready_app(scope, receive, send):
     if scope['type'] == 'lifespan':
         while True:

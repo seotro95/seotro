@@ -3,15 +3,15 @@ const $ = id => document.getElementById(id);
 const notify = message => { $('notice').textContent = message; };
 let buffer = null, audioURL = null, recorder = null, stream = null, context = null, sourceBlob = null, sourceURL = null, sourceDuration = null, sourceExtension = '.wav', serviceStatus = null;
 let projects = [];
-let generationBusy = false, transcriptionBusy = false, stoppingGeneration = false, generationState = null;
+let generationBusy = false, transcriptionBusy = false, stoppingGeneration = false, generationState = null, controllingGeneration = false, completedAudioJob = null;
 const MAX_SCRIPT_CHARACTERS = 1000000;
 try { projects = JSON.parse(localStorage.getItem('hmong-projects') || '[]'); if (!Array.isArray(projects)) projects = []; } catch { notify('Không đọc được dữ liệu cũ. Bạn có thể nhập lại dự án JSON.'); }
 function snapshot() { return { version: 1, title: $('title').value, text: $('text').value, input_format: $('inputFormat').value, dialect: $('dialect').value, voice: $('voice').value, emotion: $('emotion').value, speed: Number($('speed').value), compute_mode: $('computeMode').value, cleanup: $('cleanup').value, reference_text: $('presetTranscript').value }; }
 function applyProject(p) {
-  if (!p || p.version !== 1 || typeof p.text !== 'string' || p.text.length > MAX_SCRIPT_CHARACTERS || typeof p.title !== 'string' || p.title.length > 120 || !['mww','vi','en'].includes(p.dialect) || (p.input_format !== undefined && !['auto','text','srt'].includes(p.input_format)) || (p.compute_mode !== undefined && !['standard','fast'].includes(p.compute_mode)) || (p.cleanup !== undefined && !['off','light','strong'].includes(p.cleanup)) || (p.voice !== undefined && !['model-default','hmong-white-female','hmong-white-male'].includes(p.voice) && !/^custom-[a-f0-9]{32}$/.test(p.voice)) || (p.emotion !== undefined && !['neutral','storytelling','warm','cheerful','sad','review','advertising','news','meditation'].includes(p.emotion)) || (p.reference_text !== undefined && (typeof p.reference_text !== 'string' || p.reference_text.length>2000)) || !Number.isFinite(p.speed) || p.speed < .5 || p.speed > 2) throw Error('Dự án không hợp lệ.');
+  if (!p || p.version !== 1 || typeof p.text !== 'string' || p.text.length > MAX_SCRIPT_CHARACTERS || typeof p.title !== 'string' || p.title.length > 120 || !['mww','vi','en'].includes(p.dialect) || (p.input_format !== undefined && !['auto','text','srt'].includes(p.input_format)) || (p.compute_mode !== undefined && !['standard','fast','ultra'].includes(p.compute_mode)) || (p.cleanup !== undefined && !['off','light','strong'].includes(p.cleanup)) || (p.voice !== undefined && !['model-default','hmong-white-female','hmong-white-male'].includes(p.voice) && !/^custom-[a-f0-9]{32}$/.test(p.voice)) || (p.emotion !== undefined && !['neutral','storytelling','warm','cheerful','sad','review','advertising','news','meditation'].includes(p.emotion)) || (p.reference_text !== undefined && (typeof p.reference_text !== 'string' || p.reference_text.length>2000)) || !Number.isFinite(p.speed) || p.speed < .5 || p.speed > 2) throw Error('Dự án không hợp lệ.');
   if(p.voice?.startsWith('custom-') && ![...$('voice').options].some(o=>o.value===p.voice))throw Error('Mẫu giọng trong dự án không còn trên máy này. Thêm lại mẫu hoặc chọn giọng khác.');
   $('title').value = p.title; $('text').value = p.text; $('inputFormat').value = p.input_format || 'auto'; $('dialect').value = p.dialect; $('voice').value = p.voice || 'model-default'; $('emotion').value = p.emotion || 'review'; $('computeMode').value=p.compute_mode||'standard'; $('cleanup').value=p.cleanup||'light'; updateProcessingOptions(); syncPreset(); if(p.reference_text!==undefined)$('presetTranscript').value=p.reference_text; updateCapabilities(); $('speed').value = p.speed; update();
-  buffer = null; sourceBlob = null; sourceURL = null; sourceDuration = null; generationState = null; renderGeneration(); $('transcribe').disabled = true; $('transcript').value = ''; $('useTranscript').disabled = true; $('exportTranscript').disabled = true; $('download').disabled = true; $('fullDownload').disabled = true; $('player').removeAttribute('src');
+  buffer = null; sourceBlob = null; sourceURL = null; sourceDuration = null; generationState = null; completedAudioJob=null; $('mp3Download').disabled=true; renderGeneration(); $('transcribe').disabled = true; $('transcript').value = ''; $('useTranscript').disabled = true; $('exportTranscript').disabled = true; $('download').disabled = true; $('fullDownload').disabled = true; $('player').removeAttribute('src');
   if (audioURL) URL.revokeObjectURL(audioURL); audioURL = null;
   $('wave').getContext('2d').clearRect(0,0,$('wave').width,$('wave').height); $('wave').hidden=false; $('audioInfo').textContent = 'Chưa có bản thu'; $('audioEditNote').textContent='Xuất WAV PCM 16-bit theo khoảng đã chọn và âm lượng. Bản thu gốc không bị ghi đè.';
   for(const id of ['trimStart','trimEnd','gain'])$(id).disabled=true;
@@ -43,7 +43,9 @@ $('text').addEventListener('input', update); $('speed').addEventListener('input'
 $('inputFormat').addEventListener('change',update);
 function updateProcessingOptions(){
   const gpu=String(serviceStatus?.cosy?.device||'').toLowerCase().includes('cuda');
-  $('computeHelp').textContent=$('computeMode').value==='fast'
+  $('computeHelp').textContent=$('computeMode').value==='ultra'
+    ? 'ULTRA FAST giữ cách tạo giọng Chuẩn, dùng lại các đoạn đã tạo đúng lời và thiết lập. Lượt đầu vẫn cần tạo; tốc độ thực tế tùy máy.'
+    : $('computeMode').value==='fast'
     ? (gpu?'Máy đang dùng GPU. Chế độ Nhanh (CPU) dành cho máy chạy bằng CPU; Studio tiếp tục dùng GPU hiện có.':'Nhanh (CPU) là chế độ thử nghiệm, âm sắc có thể thay đổi. Hãy nghe kiểm tra; chọn Chuẩn khi cần giọng ổn định. Tốc độ thực tế tùy máy.')
     : 'Chuẩn ưu tiên giọng ổn định. Có thể thử Nhanh (CPU) để giảm thời gian tạo trên máy dùng CPU rồi nghe đối chiếu.';
   const cleanupHints={off:'Tắt lọc ồn, giữ nguyên tiếng nền trong mẫu và bản đọc.',light:'Giảm nhẹ tiếng nền trong mẫu giọng và bản đọc. Nên dùng khi cần lời rõ và giữ âm sắc.',strong:'Lọc nhiều hơn trong mẫu giọng và bản đọc, có thể làm mất một số âm nhỏ. Nếu giọng bị mỏng hoặc mất âm, hãy chọn Nhẹ.'};
@@ -96,6 +98,7 @@ async function loadAudio(blob, options={}) {
   let decoded=null;
   if(!large){context ||= new AudioContext();decoded=await context.decodeAudioData(await blob.arrayBuffer());}
   const header=new Uint8Array(await blob.slice(0,12).arrayBuffer());
+  if(!options.generated){completedAudioJob=null;$('mp3Download').disabled=true;}
   const wav=String.fromCharCode(...header.slice(0,4))==='RIFF' && String.fromCharCode(...header.slice(8,12))==='WAVE';
   const extension=wav?'.wav':({'audio/mpeg':'.mp3','audio/mp4':'.m4a','audio/ogg':'.ogg','audio/webm':'.webm'}[blob.type.split(';')[0]]||'.audio');
   if(audioURL) URL.revokeObjectURL(audioURL);
@@ -127,6 +130,13 @@ function loadAudioURL(url, bytes) {
 $('fullDownload').onclick=()=>{
   if(sourceBlob){download(sourceBlob,sourceExtension);return;}
   if(sourceURL){const link=document.createElement('a');link.href=sourceURL;link.download=($('title').value.trim()||'hmong-studio').replace(/[\\/:*?"<>|]/g,'_')+'.wav';link.click();}
+};
+$('mp3Download').onclick=()=>{
+  if(!completedAudioJob)return;
+  const link=document.createElement('a');
+  link.href='/api/speech/jobs/'+encodeURIComponent(completedAudioJob)+'/audio?format=mp3';
+  link.download=($('title').value.trim()||'hmong-studio').replace(/[\\/:*?"<>|]/g,'_')+'.mp3';
+  link.click();notify('Đang chuẩn bị tải MP3. Bản WAV gốc vẫn được giữ nguyên.');
 };
 $('audioFile').onchange = () => readFile($('audioFile'),50*1024*1024, loadAudio);
 let microphoneAttempt=0;
@@ -205,21 +215,45 @@ $('download').onclick = () => {
 let activeJob=null;
 const readingStyles={neutral:'Tự nhiên: nhịp đọc thông thường.',review:'Review: gần gũi, nhấn ý chính và tên sản phẩm.',storytelling:'Kể chuyện: ngắt nhịp theo diễn biến, biểu cảm theo nội dung.',advertising:'Quảng cáo: rõ thông điệp, năng lượng và nhấn lời kêu gọi.',news:'Tin tức: mạch lạc, phát âm rõ, nhịp ổn định.',meditation:'Thư giãn: chậm và nhẹ, nhiều khoảng nghỉ.',warm:'Ấm áp: nhẹ nhàng, gần gũi.',cheerful:'Vui vẻ: tươi sáng, nhiều năng lượng.',sad:'Buồn: trầm và chậm.'};
 function formatDuration(seconds){const total=Math.max(0,Math.floor(Number(seconds)||0)),hours=Math.floor(total/3600),minutes=Math.floor(total%3600/60),rest=total%60;return hours?`${hours}:${String(minutes).padStart(2,'0')}:${String(rest).padStart(2,'0')}`:`${minutes}:${String(rest).padStart(2,'0')}`;}
+function updateGenerationActions(){
+  const state=generationState, paused=state?.status==='paused', pending=state?.pause_requested===true;
+  const active=Boolean(activeJob&&generationBusy&&['queued','starting','running','paused'].includes(state?.status));
+  $('ultraGenerate').disabled=$('generate').disabled;
+  $('pauseGenerate').disabled=!active||paused||pending||controllingGeneration||stoppingGeneration;
+  $('resumeGenerate').disabled=!active||(!paused&&!pending)||controllingGeneration||stoppingGeneration;
+  $('stopGenerate').disabled=!active||stoppingGeneration;
+}
+function renderGenerationMetrics(state){
+  const known=value=>Number.isFinite(value)&&value>=0;
+  $('metricDuration').textContent=known(state.estimated_total_seconds)?formatDuration(state.estimated_total_seconds):'Chưa đủ dữ liệu';
+  $('metricSegments').textContent=`${Math.max(0,Number(state.completed_units)||0).toLocaleString('vi')} / ${Math.max(0,Number(state.total_units)||0).toLocaleString('vi')}`;
+  $('metricCurrent').textContent=state.status==='paused'?'Đã tạm dừng':known(state.active_workers)&&state.active_workers>0&&known(state.total_units)&&state.total_units>Number(state.completed_units||0)?`${Number(state.completed_units||0)+1} / ${state.total_units}`:'—';
+  $('metricSpeed').textContent=known(state.speed_multiplier)?state.speed_multiplier.toLocaleString('vi',{maximumFractionDigits:2})+'× thời gian thực':state.status==='completed'&&state.cache_hits>0&&state.synthesized_seconds===0?'Dùng lại audio đã tạo':'Đang đo';
+  $('metricElapsed').textContent=known(state.elapsed_seconds)?formatDuration(state.elapsed_seconds):'0:00';
+  $('metricETA').textContent=known(state.eta_seconds)?formatDuration(state.eta_seconds):'Chưa đủ dữ liệu';
+  const runtime=state.runtime||serviceStatus?.cosy, device=String(runtime?.device||'').toLowerCase();
+  $('metricRuntime').textContent=device.includes('cuda')?'GPU NVIDIA':device.includes('cpu')?'CPU':serviceStatus?.remote_tts&&!serviceStatus?.local_cloning?'API đã cấu hình':'Đang kiểm tra';
+  $('metricWorkers').textContent=known(state.active_workers)?String(state.active_workers):'0';
+  $('metricBatch').textContent=known(state.batch_size)&&state.batch_size>0?String(state.batch_size):'1';
+  $('metricCache').textContent=known(state.cache_hits)?state.cache_hits.toLocaleString('vi'):'0';
+}
 function renderGeneration(state=generationState){
   generationState=state;
   $('generationPanel').hidden=!state;
-  if(!state){$('generate').textContent='▶ Tạo voice';return;}
+  if(!state){$('generate').textContent='▶ Tạo voice';updateGenerationActions();return;}
   if(state.runtime && typeof state.runtime==='object' && serviceStatus){serviceStatus.cosy={...serviceStatus.cosy,...state.runtime};renderComputeStatus();updateProcessingOptions();}
   const completed=state.status==='completed';
   const progress=completed?100:Math.min(99,Math.max(0,Number.isFinite(state.progress)?Math.floor(state.progress):0));
   $('generationProgress').value=progress;$('generationPercent').textContent=progress+'%';
-  const phases={queued:'Đang chờ',starting:'Đang khởi động',loading:'Đang nạp mô hình',loading_model:'Đang nạp mô hình',preparing_reference:'Đang chuẩn bị giọng mẫu',synthesizing:'Đang tạo lời đọc',assembling:'Đang ghép âm thanh',cleanup:'Đang lọc ồn / hoàn thiện âm thanh',completed:'Đã tạo xong',cancelled:'Đã dừng',failed:'Tạo voice chưa thành công'};
-  const details=[state.message||phases[state.phase]||phases[state.status]||'Đang tạo voice'];
+  const phases={queued:'Đang chờ',starting:'Đang khởi động',loading:'Đang nạp mô hình',loading_model:'Đang nạp mô hình',preparing_reference:'Đang chuẩn bị giọng mẫu',synthesizing:'Đang tạo lời đọc',assembling:'Đang ghép âm thanh',cleanup:'Đang lọc ồn / hoàn thiện âm thanh',paused:'Đã tạm dừng',completed:'Đã tạo xong',cancelled:'Đã dừng',failed:'Tạo voice chưa thành công'};
+  const paused=state.status==='paused', pending=state.pause_requested===true&&!paused;
+  const details=[paused?'Đã tạm dừng':pending?'Đang chờ hết đoạn để tạm dừng':state.message||phases[state.phase]||phases[state.status]||'Đang tạo voice'];
   if(Number.isFinite(state.total_units) && state.total_units>0)details.push(`${Math.max(0,Number(state.completed_units)||0).toLocaleString('vi')}/${state.total_units.toLocaleString('vi')} đoạn`);
   if(Number.isFinite(state.generated_seconds))details.push('Đã tạo '+formatDuration(state.generated_seconds)+' âm thanh');
   if(Number.isFinite(state.elapsed_seconds))details.push('Đã chạy '+formatDuration(state.elapsed_seconds));
   $('generationDetail').textContent=details.join(' · ');
-  $('generate').textContent=generationBusy?`Đang tạo ${progress}%`:completed?'✓ Đã tạo 100%':'▶ Tạo voice';
+  $('generate').textContent=generationBusy?(paused?`Tạm dừng ${progress}%`:`Đang tạo ${progress}%`):completed?'✓ Đã tạo 100%':'▶ Tạo voice';
+  renderGenerationMetrics(state);updateGenerationActions();
 }
 function busyControls(){
   for(const button of document.querySelectorAll('#cloneList button,#projectList button,#addClone'))button.disabled=generationBusy;
@@ -251,9 +285,9 @@ $('generate').onclick=async()=>{
     const job=await requestJSON('/api/speech/jobs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:p.text,input_format:p.input_format,dialect:p.dialect,voice:p.voice,emotion:p.emotion,speed:p.speed,compute_mode:p.compute_mode,cleanup:p.cleanup,reference_text:p.reference_text})});
     activeJob=job.id;busyControls();
     let state=job;
-    while(['queued','starting','running'].includes(state.status)){
+    while(['queued','starting','running','paused'].includes(state.status)){
       renderGeneration(state);
-      notify(stoppingGeneration?'Đang dừng bộ máy tạo voice…':$('generationDetail').textContent+'. Bạn có thể bấm Dừng.');
+      notify(stoppingGeneration?'Đang dừng bộ máy tạo voice…':$('generationDetail').textContent+(state.status==='paused'?'. Bấm Tiếp tục hoặc Dừng.':'. Bạn có thể bấm Tạm dừng hoặc Dừng.'));
       await new Promise(resolve=>setTimeout(resolve,400));
       state=await requestJSON('/api/speech/jobs/'+activeJob);
     }
@@ -266,13 +300,30 @@ $('generate').onclick=async()=>{
       const audio=await fetch(url);if(!audio.ok)throw Error('Không tải được voice vừa tạo.');
       await loadAudio(await audio.blob(),{generated:true});
     }else{loadAudioURL(url,state.audio_bytes);}
-    $('audio').open=true;$('audio').scrollIntoView({behavior:'smooth',block:'start'});notify('Đã tạo voice. Nghe kiểm tra hoặc tải WAV ở bên dưới.');
+    completedAudioJob=activeJob;$('mp3Download').disabled=false;
+    $('audio').open=true;$('audio').scrollIntoView({behavior:'smooth',block:'start'});notify('Đã tạo voice. Nghe kiểm tra hoặc tải MP3/WAV ở bên dưới.');
   }catch(e){if(generationState?.status!=='completed')renderGeneration({...generationState,status:'failed',phase:'failed',message:e.message});notify(e.message);}finally{activeJob=null;generationBusy=false;stoppingGeneration=false;busyControls();updateCapabilities();}
 };
+$('ultraGenerate').onclick=()=>{
+  if(generationBusy||$('generate').disabled)return;
+  $('computeMode').value='ultra';updateProcessingOptions();$('generate').click();
+};
+async function controlGeneration(action){
+  if(!activeJob||!generationBusy||controllingGeneration||stoppingGeneration)return;
+  const controlledJob=activeJob;controllingGeneration=true;updateGenerationActions();
+  try{
+    const state=await requestJSON('/api/speech/jobs/'+encodeURIComponent(controlledJob)+'/'+action,{method:'POST'});
+    if(activeJob!==controlledJob)return;
+    renderGeneration(state);notify($('generationDetail').textContent);
+  }catch(e){if(activeJob===controlledJob)notify(e.message);}
+  finally{controllingGeneration=false;updateGenerationActions();}
+}
+$('pauseGenerate').onclick=()=>controlGeneration('pause');
+$('resumeGenerate').onclick=()=>controlGeneration('resume');
 $('stopGenerate').onclick=async()=>{
   if(!activeJob)return;
   const stoppedJob=activeJob;
-  stoppingGeneration=true;$('stopGenerate').disabled=true;notify('Đang dừng bộ máy tạo voice…');
+  stoppingGeneration=true;updateGenerationActions();notify('Đang dừng bộ máy tạo voice…');
   try{const state=await requestJSON('/api/speech/jobs/'+stoppedJob+'/stop',{method:'POST'});if(activeJob!==stoppedJob)return;renderGeneration(state);notify(state.message||'Đang dừng tạo voice…');}catch(e){if(activeJob!==stoppedJob)return;stoppingGeneration=false;notify(e.message);busyControls();}
 };
 window.addEventListener('beforeunload',()=>stream?.getTracks().forEach(t=>t.stop()));

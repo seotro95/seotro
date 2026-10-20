@@ -1,66 +1,34 @@
-HMONG STUDIO 0.7.0 - TU DUNG NVIDIA / DO TOC DO / LOC ON NHE
+HMONG VOICE STUDIO 0.8.0 - ULTRA FAST
+MUC TIEU 2 PHUT TAO 1 GIO CHUA DUOC XAC NHAN DAT.
 
-1. Cai Python 3.12 64-bit; lan dau giai nen vao thu muc co quyen ghi.
-2. Bam dup CHAY-STUDIO.bat. Tu thu NVIDIA/CUDA, cai phan thieu, roi mo Studio.
-   Cai GPU loi thi bao ro va dung CPU. Giu nguyen mo hinh/mau/moi truong cu.
-3. Nhung lan sau cung chi chay CHAY-STUDIO.bat; Ctrl+F5 neu dang mo trang cu.
-4. Chon NAM/NU, nhap toi da 1.000.000 ky tu hoac TXT/SRT; Review duoc chon san.
-5. Bam TAO VOICE: nut hien % va so doan da tao. DUNG se dung tien trinh.
-6. Hoan tat thi nghe va bam TAI TOAN BO WAV. Ban dai duoc ghi va tai truc tiep.
+1. Cai Python 3.12 64-bit neu chua co.
+2. Dong Studio/cuaso bo cai. Giai nen DE vao DUNG thu muc cu.
+   GIU NGUYEN .data va cac .venv-clone-*. Khong long them thu muc.
+3. Bam CHAY-STUDIO.bat. Tu thu NVIDIA/CUDA, kiem tra roi mo app.
+   Nap mo hinh truoc o nen; lan tao dau cho cung worker neu chua xong.
+4. Chon Hmong Trang, mau NAM/NU, Review va Loc on Nhe.
+5. Nhap TXT/SRT <=1.000.000 ky tu, bam TAO VOICE SIEU NHANH.
+6. TAM DUNG cho checkpoint an toan, TIEP TUC de doc tiep, DUNG de huy.
+7. Nghe va TAI WAV hoac TAI MP3. MP3 duoc nen luc tai dau, WAV giu nguyen.
+8. Ctrl+C de dong Studio; lan sau van chay CHAY-STUDIO.bat.
 
-DANH CHO GTX 1060 6 GB:
-- Lan dau chay CHAY-STUDIO.bat de cai/kiem tra bo may GPU.
-- Dong Studio bang Ctrl+C, chay DO-TOC-DO.bat de do FP32 va FP16.
-- Cong cu lam am/do mau ngan, Review + Loc on Nhe, luu WAV de nghe so sanh.
-- Chon theo thoi gian tao moi giay loi doc; khong tinh khoang lang tool them.
-- Mo lai CHAY-STUDIO.bat de dung che do nhanh nhat trong phep do.
-- GPU chon Chuan + Loc on Nhe; Nhanh CPU khong tang toc them tren GPU.
-- Giam bang chu Qwen giu tren GPU khoang 0.507 GiB; cac phan tao giong van CUDA.
-- Chua co so do Windows/GPU thuc, CHUA DAT 2 phut tao 1 gio voice.
-- Loi do/cancel se giu cau hinh truoc. Mau ngan khong phai tao du 1 gio.
+ULTRA khong doi model/giong, khong giam buoc, khong tu bat INT8.
+ULTRA dung lai doan audio da tao DUNG noi dung/cau hinh. Bao cache rieng.
+Toc do tao loi MOI khong tinh cache, khoang lang them, thoi gian tam dung.
+Mau/chu/thanh dieu khong bi tu dich/sua; chat luong model van can nghe kiem tra.
+GTX 1060 6GB: 1 worker/batch1, khong nhan ban model lam het VRAM.
+Dong Studio, chay DO-TOC-DO.bat de do FP32/FP16 tren may ban.
+Chay lai CHAY-STUDIO.bat de dung cau hinh da do.
 
-CAC CHE DO:
-- Chon Nhanh CPU de thu tang toc. Co the doi am sac; chon Chuan neu khong hop.
-- Loc on Nhe la mac dinh: giam u/on nen, can muc mau, gioi han dinh dau ra.
-- Loc on Manh co the mat chi tiet giong. Tat de dung am thanh khong loc.
-- Mau goc duoc giu nguyen. Khong tach duoc nhac nen hoac nguoi noi khac.
-- Loc on giu nguyen do dai va moc SRT, nut Tao chi 100% khi xong ca loc on.
+BENCHMARK-ULTRA.bat khong tham so chi ghi 1/5/15/30/60 phut CHUA CHAY.
+Chay that: BENCHMARK-ULTRA.bat --target-minutes 1 --include-warm
+Tat ca: BENCHMARK-ULTRA.bat --all --max-seconds 86400
+CPU co the mat nhieu gio. Bao cao phan biet cold/warm/incomplete/unrun.
+Khong dung WAV gia, lap audio hay khoang lang de chung minh 30x.
 
-SRT: chi doc loi, khong doc moc gio. Vi du:
-1
-00:00:00,200 --> 00:00:02,700
-Nyob zoo.
-
-Co mau examples/review-hmong.srt va nut Mau review SRT.
-Giu khoang lang, khop thoi gian. Loi qua dai se bao doan can sua.
-WAV toi da 24 gio/luot; can cho trong cho file WAV, toi da khoang 4.15 GB.
-
-Khong can micro, API key, dich vu tra phi hoac ban chep mau.
-ZIP gom ung dung, hai mau giong va tat ca ban sua loi.
-Mo hinh 5.4 GB KHONG nam san trong ZIP; tu tai lan dau, dung lai tep da dung.
-Can RAM khoang 16 GB va cho trong it nhat 15 GB. CPU co the cham.
-Giu cua so lenh mo khi dung. Ctrl+C de dong Studio.
-Da tao WAV that bang ca hai mau tren Linux CPU; chua thu Windows that.
-Nghe kiem tra phat am va do giong giong truoc khi su dung.
-Xem README.md de biet chi tiet va ket qua kiem thu.
-Xem TOC-DO.md de biet so do toc do that; chay KIEM-TRA-GPU.bat de xem ten card.
-
-TANG TOC: giu lai mo hinh va mau giua cac luot hoan tat, khong nap lai moi luot.
-CHAY-STUDIO.bat tu phat hien NVIDIA va thu CUDA rieng.
-CAI-NVIDIA.bat cho phep thu lai GPU neu lan tu dong truoc chua thanh cong.
-Khong co NVIDIA thi tiep tuc dung CHAY-STUDIO.bat, khong can cai GPU.
-CHUA DAT muc tieu tao 1 gio voice trong 2 phut. CPU van cham.
-Do CPU dam may: lan dau 66.8 giay cho 2.51 giay am thanh;
-lan dung lai 46.9 giay cho 2.15 giay. Khong phai so do tren may Xeon cua ban.
-
-SUA WINERROR2 __init__.py.part SAU KHI TAI MO HINH:
-Dong Studio/bo cai, cap nhat ban 0.7.0 vao DUNG thu muc cu.
-Vi du: thu muc cu E:\voi hmong\Hmong-Studio-Trang,
-thi giai nen ZIP vao E:\voi hmong\ va chon thay the tep.
-KHONG long them Hmong-Studio-Trang vao ben trong thu muc cu.
-GIU NGUYEN .data, sau do chay CHAY-STUDIO.bat.
-Cac tep mo hinh da dung duoc kiem tra va dung lai, khong tai lai.
-
-SUA WINERROR32: dong Studio va cac bo cai cua tool.
-Bo cai tao moi truong rieng, khong ghi de .venv cu.
-Neu van bi giu tep, khoi dong lai Windows roi cai lai.
+ZIP gom app, hai mau, ma nguon, kiem thu va backup nguon 0.7.0.
+Mo hinh ~5.4GB KHONG nam san trong ZIP; tu tai tep thieu lan dau.
+Dung lai mo hinh da dung, khong tai lai chi de cap nhat app.
+Khong can API key/dich vu tra phi/micro/ban chep mau de nhan ban cuc bo.
+Day la app mo trong trinh duyet; khong phai EXE chua san Python/model.
+Xem README.md va PERFORMANCE_REPORT.md de biet gioi han/kiem chung.

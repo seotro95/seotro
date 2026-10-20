@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "created_at": "2026-10-20T05:20:54.173648+00:00",
+  "status": "incomplete",
+  "targets": [
+    {
+      "target_minutes": 1,
+      "status": "incomplete",
+      "runs": [
+        {
+          "label": "standard",
+          "status": "budget_exceeded",
+          "seed": 1986,
+          "target_2min_per_hour_verified": false,
+          "elapsed_seconds": 309.03807781900105,
+          "error_type": "HTTPException",
+          "synthesized_new_seconds": 33.2,
+          "reused_seconds": 0.0,
+          "cache_hits": 0,
+          "audio_path": null
+        },
+        {
+          "label": "ultra_cold",
+          "status": "budget_exceeded",
+          "seed": 1986,
+          "target_2min_per_hour_verified": false,
+          "elapsed_seconds": 419.20126782399893,
+          "error_type": "HTTPException",
+          "synthesized_new_seconds": 53.16,
+          "reused_seconds": 0.0,
+          "cache_hits": 0,
+          "audio_path": null
+        },
+        {
+          "label": "ultra_warm",
+          "status": "unrun",
+          "reason": "cold_run_incomplete"
+        }
+      ],
+      "target_duration_verified": false,
+      "target_2min_per_hour_verified": false,
+      "text_source": "builtin_text_repeated_to_estimate_180_words_per_minute",
+      "text_characters": 895,
+      "text_sha256": "54b2d1e42ff95e40e1ac3d3d75657d167a3947a7fa58e86e56aa5e82ad9ab0f5",
+      "pcm_identical_before_after": null
+    }
+  ],
+  "hardware": {
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "python": "3.12.14",
+    "cpu_count_reported_by_os": 5,
+    "torch": "2.6.0+cpu",
+    "torch_threads": 4,
+    "cuda_available": false,
+    "cuda_runtime": "None",
+    "gpu": null,
+    "vram_bytes": null
+  },
+  "notes": [
+    "Nominal duration is a text estimate; never pad or loop audio.",
+    "Only newly synthesized seconds qualify for cold speed and duration coverage.",
+    "Warm-cache reuse is separate and cannot verify30x generation of new speech.",
+    "max_seconds is per mode and checked at model checkpoints, not inside GPU kernels.",
+    "White Hmong tone/word accuracy and voice similarity require listening."
+  ],
+  "target_2min_per_hour_verified": false,
+  "model_revision": "5663e0df2589c2ca2403cd327a52702c3ff96e8f",
+  "style": "review",
+  "cleanup": "light",
+  "voice": "hmong-white-female",
+  "seed": 1986,
+  "model_load_seconds": 21.98374041999341
+}

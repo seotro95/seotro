@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "created_at": "2026-10-20T05:34:44.328685+00:00",
+  "status": "incomplete",
+  "targets": [
+    {
+      "target_minutes": 1,
+      "status": "incomplete",
+      "runs": [
+        {
+          "label": "standard",
+          "status": "completed",
+          "seed": 1986,
+          "target_2min_per_hour_verified": false,
+          "frames": 50640,
+          "audio_seconds": 2.11,
+          "inserted_pause_seconds": 0.15,
+          "speech_seconds": 1.96,
+          "pcm_sha256": "91096692168123dfbd1e4ac5dad1c491236598a9b67fa74189ea0f7c79211c04",
+          "elapsed_seconds": 37.13136719499016,
+          "cache_hits": 0,
+          "reused_seconds": 0.0,
+          "synthesized_new_seconds": 1.96,
+          "new_voice_speed_multiplier": 0.052785559705015306,
+          "real_time_factor": 18.944575099484776,
+          "cached_playback_throughput": null,
+          "audio_path": "/workspace/research/ultra-short-actual/1-minute/standard.wav"
+        },
+        {
+          "label": "ultra_cold",
+          "status": "completed",
+          "seed": 1986,
+          "target_2min_per_hour_verified": false,
+          "frames": 50640,
+          "audio_seconds": 2.11,
+          "inserted_pause_seconds": 0.15,
+          "speech_seconds": 1.96,
+          "pcm_sha256": "91096692168123dfbd1e4ac5dad1c491236598a9b67fa74189ea0f7c79211c04",
+          "elapsed_seconds": 37.3964578120067,
+          "cache_hits": 0,
+          "reused_seconds": 0.0,
+          "synthesized_new_seconds": 1.96,
+          "new_voice_speed_multiplier": 0.05241138104183526,
+          "real_time_factor": 19.079825414289132,
+          "cached_playback_throughput": null,
+          "audio_path": "/workspace/research/ultra-short-actual/1-minute/ultra_cold.wav"
+        },
+        {
+          "label": "ultra_warm",
+          "status": "completed",
+          "seed": 1986,
+          "target_2min_per_hour_verified": false,
+          "frames": 50640,
+          "audio_seconds": 2.11,
+          "inserted_pause_seconds": 0.15,
+          "speech_seconds": 1.96,
+          "pcm_sha256": "91096692168123dfbd1e4ac5dad1c491236598a9b67fa74189ea0f7c79211c04",
+          "elapsed_seconds": 0.13594217400532216,
+          "cache_hits": 1,
+          "reused_seconds": 1.96,
+          "synthesized_new_seconds": 0.0,
+          "new_voice_speed_multiplier": 0.0,
+          "real_time_factor": null,
+          "cached_playback_throughput": 14.417895067083933,
+          "audio_path": "/workspace/research/ultra-short-actual/1-minute/ultra_warm.wav"
+        }
+      ],
+      "target_duration_verified": false,
+      "target_2min_per_hour_verified": false,
+      "text_source": "user_text_used_without_word_changes",
+      "text_characters": 29,
+      "text_sha256": "87a5943b39055e1594a0d4f7e79ba539d215258ed0f28f82d2dc28f9f1454c84",
+      "pcm_identical_before_after": true,
+      "cold_new_voice_speedup_before_after": 0.9929113442147608
+    }
+  ],
+  "hardware": {
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "python": "3.12.14",
+    "cpu_count_reported_by_os": 5,
+    "torch": "2.6.0+cpu",
+    "torch_threads": 4,
+    "cuda_available": false,
+    "cuda_runtime": "None",
+    "gpu": null,
+    "vram_bytes": null
+  },
+  "notes": [
+    "Nominal duration is a text estimate; never pad or loop audio.",
+    "Only newly synthesized seconds qualify for cold speed and duration coverage.",
+    "Warm-cache reuse is separate and cannot verify30x generation of new speech.",
+    "max_seconds is per mode and checked at model checkpoints, not inside GPU kernels.",
+    "White Hmong tone/word accuracy and voice similarity require listening."
+  ],
+  "target_2min_per_hour_verified": false,
+  "model_revision": "5663e0df2589c2ca2403cd327a52702c3ff96e8f",
+  "style": "review",
+  "cleanup": "light",
+  "voice": "hmong-white-female",
+  "seed": 1986,
+  "model_load_seconds": 39.58929003799858
+}

@@ -3,6 +3,7 @@ setlocal DisableDelayedExpansion
 cd /d "%~dp0"
 if errorlevel 1 goto fail
 set "PYTHONUTF8=1"
+set "HMONG_PRELOAD=1"
 set "PIP_DISABLE_PIP_VERSION_CHECK=1"
 echo HMONG STUDIO - CAI VA MO BANG MOT FILE
 echo Lan dau: tu cai thu vien va tai phan mo hinh con thieu.

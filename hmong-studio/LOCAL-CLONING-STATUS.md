@@ -1,6 +1,6 @@
 # Verified local cloning implementation
 
-Version0.7.0 uses CosyVoice3 Hmong instruct2 with each supplied male/female audio reference, without a reference transcript. The user-provided poem is not used as reference text. No API key or paid runtime service is needed.
+Version0.8.0 uses CosyVoice3 Hmong instruct2 with each supplied male/female audio reference, without a reference transcript. The user-provided poem is not used as reference text. No API key or paid runtime service is needed.
 
 Version0.7.0 auto-detects NVIDIA through a bounded nvidia-smi call, attempts the existing isolated cu124 installer and activates only after real CUDA validation. A failed automatic attempt retains CPU and is memoized by hardware/driver/dependency fingerprint; explicit CAI-NVIDIA retries remain possible. Existing selected GPU profiles stay selected. The user reported GTX1060 6GB, driver560.94; no native GPU or Windows execution is available here.
 
@@ -53,3 +53,8 @@ Cleanup is local FFmpeg: highpass55Hz, afftdn6dB(light)/12dB(strong), reference-
 Validation0.6.0:199 Python tests, including29 real-FFmpeg tests;9 Chromium groups plus8 microphone tests. Long-file processing streams from disk; validation scans65,536-frame NumPy blocks and validates a one-hour172.8MB file in0.072s in an isolated check. WAV byte caps allow64KiB of metadata while still enforcing24hours by actual frame count. Cancellation removes owned filter intermediates; failed filters never produce a completed audio job. Native Windows/GPU execution remains unrun.
 
 Actual0.6.0 synthesis through app.generate_speech with file output and light reference/final cleanup, CPU4threads: female Review Standard34.254s and Fast26.052s, both2.110s WAV; male Fast SRT24.858s for exactly2.700s WAV. Models loaded separately in30.312s. Female runs used matching text/seed; Fast reused female conditioning and included first quantized-copy creation. PeakRSS~8.33GiB. Tests verified original estimator identity restored after each run, original MP3hashes unchanged, precision metadata accurate, output file valid and0.2s SRT leading gap retained. This remains far from2min/hour and does not establish long-script or Windows/GPU throughput. Three real output WAVs are packaged for listening comparisons.
+
+
+Version0.8.0 ULTRA retains Standard estimator/steps/precision without enabling CPUINT8. Checksummed PCM cache is keyed by exactchunk text, referenceSHA256, instruction/style/speed/cleanup, pinnedrevision, device/precision/Torch and algorithm; cache hits report reused_seconds separately from synthesized_seconds. A fresh-cache cold benchmark disables reads even within one request. Cache is bounded512MiB/512entries; original audio/model and user scripts are unchanged.
+
+Background preloading and pause/resume share one persistent worker. Pause waits for a revisioned checkpoint acknowledgement, retains exactchunkorder and excludes only acknowledgedpausedtime fromactive clock. Stop/shutdown terminate ownedprocesses. MP3 exports are file-backed, ffprobe-validated, deduplicated and atomic; WAV is kept. Streaming downloads are pinned until completion/cancellation. Native Windows/GPU transfer/performance and Hmongword/tone quality remain unverified. See PERFORMANCE_REPORT.md for current test counts and actual benchmark states.

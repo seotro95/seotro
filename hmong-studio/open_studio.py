@@ -25,7 +25,7 @@ class StudioServer(uvicorn.Server):
 
 def main():
     server = StudioServer(uvicorn.Config('app:app', host='127.0.0.1', port=8090,
-                                       access_log=False))
+                                       access_log=False, timeout_graceful_shutdown=10))
     server.run()
     return 0 if server.started else 1
 

@@ -186,7 +186,7 @@ def render_timeline(script, reference_path, emotion='review', speed=1.0, *, prog
     Only a completely validated result replaces a caller's existing output.
     """
     total_text = _validate_timeline(script)
-    if compute_mode not in {'standard', 'fast'} or cleanup not in {'off', 'light', 'strong'}:
+    if compute_mode not in {'standard', 'fast', 'ultra'} or cleanup not in {'off', 'light', 'strong'}:
         raise ScriptError('Chế độ tạo hoặc mức lọc ồn không hợp lệ.')
     if emotion not in cosy_engine.STYLES:
         raise ScriptError('Cách đọc đã chọn chưa được bộ máy Hmong hỗ trợ.')
@@ -201,6 +201,9 @@ def render_timeline(script, reference_path, emotion='review', speed=1.0, *, prog
     completed_text = 0
     generated_seconds = 0.0
     last_progress = 0.0
+    synthesized = reused = 0.0
+    cache_hits = 0
+    current = {'synthesized_seconds': 0.0, 'reused_seconds': 0.0, 'cache_hits': 0, 'active_workers': 0}
 
     def report(percent, phase, message, seconds=None):
         nonlocal last_progress, generated_seconds
@@ -210,7 +213,11 @@ def render_timeline(script, reference_path, emotion='review', speed=1.0, *, prog
         if progress is not None:
             progress({'progress': round(last_progress, 2), 'phase': phase, 'message': message,
                       'completed_units': completed_units, 'total_units': total_units,
-                      'generated_seconds': round(generated_seconds, 3)})
+                      'generated_seconds': round(generated_seconds, 3),
+                      'synthesized_seconds': round(synthesized + current['synthesized_seconds'], 3),
+                      'reused_seconds': round(reused + current['reused_seconds'], 3),
+                      'cache_hits': cache_hits + current['cache_hits'],
+                      'active_workers': current['active_workers'], 'batch_size': 1})
 
     report(1, 'loading', f'Đang chuẩn bị kịch bản review gồm {total_units} đoạn theo mốc thời gian.')
     with tempfile.TemporaryDirectory(prefix='hmong-timeline-', dir=target.parent if target else None) as folder:
@@ -224,6 +231,7 @@ def render_timeline(script, reference_path, emotion='review', speed=1.0, *, prog
             writer.setframerate(SAMPLE_RATE)
             writer.setnframes(total_frames)
             for index, cue in enumerate(script.cues, 1):
+                current.update(synthesized_seconds=0.0, reused_seconds=0.0, cache_hits=0, active_workers=0)
                 source = folder / 'cue.wav'
                 fitted = folder / 'fitted.wav'
                 start = round(cue.start * SAMPLE_RATE)
@@ -233,6 +241,14 @@ def render_timeline(script, reference_path, emotion='review', speed=1.0, *, prog
                     raise ScriptError(f'Đoạn {index} ngắn hơn độ phân giải âm thanh 24 kHz.')
 
                 def cue_progress(update):
+                    for name in ('synthesized_seconds', 'reused_seconds'):
+                        value = update.get(name, 0)
+                        if isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value) and value >= 0:
+                            current[name] = max(current[name], float(value))
+                    hits = update.get('cache_hits', 0)
+                    if isinstance(hits, int) and not isinstance(hits, bool) and hits >= 0:
+                        current['cache_hits'] = max(current['cache_hits'], hits)
+                    current['active_workers'] = 1 if update.get('active_workers') == 1 else 0
                     fraction = max(0.0, min(1.0, float(update.get('progress', 0)) / 100))
                     report(1 + 94 * (completed_text + len(cue.text) * fraction) / total_text,
                            update.get('phase', 'synthesis'),
@@ -245,6 +261,10 @@ def render_timeline(script, reference_path, emotion='review', speed=1.0, *, prog
                 if cleanup != 'off':
                     options['cleanup'] = cleanup
                 cosy_engine.synthesize(cue.text, reference_path, emotion, speed, **options)
+                synthesized += current['synthesized_seconds']
+                reused += current['reused_seconds']
+                cache_hits += current['cache_hits']
+                current.update(synthesized_seconds=0.0, reused_seconds=0.0, cache_hits=0, active_workers=0)
                 frames = _audio_frames(source)
                 if frames > slot:
                     report(1 + 94 * (completed_text + len(cue.text) * .99) / total_text,
