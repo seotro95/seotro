@@ -1,5 +1,6 @@
 """Inspect public submission requirements only; no upload, login or token use."""
 from html.parser import HTMLParser
+import asyncio
 import json
 import os
 from pathlib import Path
@@ -76,6 +77,47 @@ def inspect(markup):
             'captcha_markup_present': page.captcha_markup, 'visible_excerpts': excerpts}
 
 
+async def inspect_visible_flow(browser):
+    from playwright.async_api import async_playwright
+    async with async_playwright() as automation:
+        instance = await automation.chromium.launch(executable_path=browser, headless=True,
+                                                    chromium_sandbox=True)
+        try:
+            context = await instance.new_context()
+            page = await context.new_page()
+            await page.goto(PORTAL, wait_until='domcontentloaded', timeout=45000)
+            await page.wait_for_timeout(2000)
+            before = await page.locator('body').inner_text()
+            # This selects the truthful reporter role only. It never supplies
+            # identity, solves a challenge or clicks a file-submission button.
+            developer = page.locator('#SelectSoftwareDeveloper')
+            if await developer.count() and await developer.is_visible():
+                await developer.click()
+                await page.wait_for_timeout(2500)
+            continuation = page.locator('#btnTypeSelectedContinue')
+            if await continuation.count() and await continuation.is_visible() and await continuation.is_enabled():
+                await continuation.click()
+                await page.wait_for_timeout(3500)
+            if len(context.pages) > 1:
+                page = context.pages[-1]
+            text = await page.locator('body').inner_text(timeout=15000)
+            fields = []
+            for field in await page.locator('input,select,textarea').all():
+                if not await field.is_visible():
+                    continue
+                fields.append({key: await field.get_attribute(key) for key in ('name', 'id', 'type')})
+            host = urlsplit(page.url).hostname or ''
+            return {'initial_visible_text': before[:7000], 'final_visible_text': text[:9000],
+                    'final_url_without_query': public_url(page.url), 'title': await page.title(),
+                    'visible_input_names_only': fields,
+                    'interactive_sign_in_required': host in ('login.live.com', 'login.microsoftonline.com') or
+                        bool(await page.locator('input[name="loginfmt"],input[type="password"]').count()),
+                    'visible_file_picker': await page.locator('input[type="file"]').count() > 0 and
+                        await page.locator('input[type="file"]').first.is_visible()}
+        finally:
+            await instance.close()
+
+
 def main():
     directory = Path(os.environ['RUNNER_TEMP']) / 'microsoft-submission-prerequisites'
     directory.mkdir(parents=True, exist_ok=True)
@@ -94,12 +136,7 @@ def main():
         # security, solve a CAPTCHA or load an existing authenticated profile.
         browser = shutil.which('google-chrome') or shutil.which('google-chrome-stable')
         if browser:
-            with tempfile.TemporaryDirectory(prefix='ms-public-browser-') as profile:
-                rendered = subprocess.run([browser, '--headless', '--dump-dom',
-                    '--timeout=30000', '--virtual-time-budget=12000', '--user-data-dir=' + profile,
-                    PORTAL], capture_output=True, timeout=60, check=False)
-                report['browser_exit_code'] = rendered.returncode
-                report['browser_page'] = inspect(rendered.stdout.decode('utf-8', 'replace'))
+            report['visible_flow'] = asyncio.run(inspect_visible_flow(browser))
     except Exception as exc:
         report['access_error'] = str(exc)
     (directory / 'requirements.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -108,8 +145,15 @@ def main():
         escaped = message.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
         print('::notice title=' + title + '::' + escaped)
     annotation('Microsoft portal access', {key: value for key, value in report.items()
-                                           if key not in ('server_page', 'browser_page')})
-    for key in ('server_page', 'browser_page'):
+                                           if key not in ('server_page', 'visible_flow')})
+    flow = report.get('visible_flow')
+    if flow:
+        annotation('Visible Microsoft submission flow', {key: value for key, value in flow.items()
+            if key not in ('initial_visible_text', 'final_visible_text')})
+        text = flow['final_visible_text']
+        for offset in range(0, len(text), 2500):
+            annotation('Visible Microsoft portal text ' + str(offset // 2500 + 1), text[offset:offset + 2500])
+    for key in ('server_page',):
         page = report.get(key)
         if not page:
             continue

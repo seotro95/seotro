@@ -20,7 +20,10 @@ jobs:
         with:
           persist-credentials: false
       - name: Inspect public portal without signing in or uploading files
-        run: python3 hmoob-voicelab/security/inspect_microsoft_submission.py
+        run: |
+          python3 -m venv "$RUNNER_TEMP/ms-portal-tools"
+          "$RUNNER_TEMP/ms-portal-tools/bin/python" -m pip install --disable-pip-version-check playwright==1.55.0
+          "$RUNNER_TEMP/ms-portal-tools/bin/python" hmoob-voicelab/security/inspect_microsoft_submission.py
       - name: Preserve public requirement report only
         if: always()
         uses: actions/upload-artifact@v4
