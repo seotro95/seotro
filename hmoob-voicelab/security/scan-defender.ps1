@@ -107,18 +107,21 @@ try {
     $page = Invoke-WebRequest -Uri $reference -TimeoutSec 45 -MaximumRedirection 5
     $plain = [System.Net.WebUtility]::HtmlDecode(($page.Content -replace '(?s)<script.*?</script>', ' ' -replace '<[^>]+>', ' '))
     $plain = $plain -replace '\s+', ' '
+    $plain | Set-Content (Join-Path $reportDir 'official-reference-text.txt') -Encoding utf8
+    $referenceSnippet = 'The analysis option was not found in the returned document.'
     foreach ($match in [regex]::Matches($plain, '-DisableRemediation', 'IgnoreCase')) {
         $section = $plain.Substring($match.Index, [Math]::Min(4500, $plain.Length - $match.Index))
-        if ($section -match 'File exclusions are ignored' -and
+        $referenceSnippet = $section
+        if ($section -match 'File(?: and folder)? exclusions are ignored' -and
             $section -match 'Archive files are scanned' -and
-            $section -match 'Actions are not applied') {
+            $section -match "Actions (?:are not|aren['’]t) applied") {
             $report.reference_semantics_verified = $true
             $section | Set-Content (Join-Path $reportDir 'official-analysis-mode-reference.txt') -Encoding utf8
             break
         }
     }
     if (-not $report.reference_semantics_verified) {
-        throw 'Analysis mode semantics could not be verified from current official Microsoft documentation.'
+        throw ('Analysis mode semantics could not be verified from current official Microsoft documentation. Official excerpt: ' + $referenceSnippet)
     }
 
     # Read the original Git blob as bytes, never through text redirection.
