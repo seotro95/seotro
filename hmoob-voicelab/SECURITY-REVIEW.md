@@ -31,6 +31,22 @@ ZIP được gỡ khỏi nhánh `main` để dừng cung cấp bản tải hiệ
 
 ## Kiểm tra Windows trên GitHub
 
-Workflow [Investigate VoiceLab Defender detection](https://github.com/seotro95/seotro/actions/workflows/voicelab-defender.yml) kiểm tra khả năng quét bằng Defender trên Windows Server 2022. Nó chỉ đọc bản ZIP gốc từ commit phát hành, đối chiếu SHA-256 rồi yêu cầu quét; không chạy tool hoặc bộ cài, không thay đổi cấu hình Defender và không tải lại ZIP làm artifact.
+Workflow [Investigate VoiceLab Defender detection](https://github.com/seotro95/seotro/actions/workflows/voicelab-defender.yml) quét bằng Defender trên Windows Server 2022. Nó chỉ đọc bản ZIP gốc từ commit phát hành, đối chiếu SHA-256 rồi yêu cầu quét; không chạy tool hoặc bộ cài, không thay đổi cấu hình Defender và không tải lại ZIP làm artifact.
 
-Kết quả trong `voicelab-defender-report/report.json`: `detection-reported` (có phát hiện), `no-detection-on-this-runner` (lượt quét trên runner này không báo phát hiện), hoặc `indeterminate` (không đủ điều kiện/bằng chứng quét). Runner thiếu Defender, chữ ký cũ, có exclusion, tắt quét archive, thiếu log hoàn tất đúng scan hoặc lỗi quét đều không được coi là kết quả sạch. Một lượt quét không phát hiện cũng không xác nhận cảnh báo trên máy người dùng là nhầm; gói vẫn tạm ngừng phát hành.
+Máy GitHub có sẵn các exclusion và tắt quét archive thông thường. Vì vậy workflow xác minh chữ ký Microsoft của `MpCmdRun.exe`, trợ giúp của đúng phiên bản đã cài và nội dung [tài liệu chính thức](https://learn.microsoft.com/en-us/defender-endpoint/command-line-arguments-microsoft-defender-antivirus) trước khi dùng `-DisableRemediation` cho lượt custom scan trong môi trường kiểm tra. Theo tài liệu đã xác minh trên runner, chế độ phân tích này bỏ qua file exclusions, quét archive và không thực hiện remediation. Không có preference, exclusion hoặc bảo vệ thời gian thực nào bị thay đổi. Không dùng việc thiếu sự kiện phát hiện làm bằng chứng an toàn, vì chế độ này không ghi các sự kiện thông thường.
+
+Kết quả trong `voicelab-defender-report/report.json`: `detection-reported` (có phát hiện), `no-detection-on-this-runner` (lượt quét trên runner này không báo phát hiện), hoặc `indeterminate` (không đủ điều kiện/bằng chứng quét). Không có chữ ký scanner hợp lệ, thiếu bằng chứng semantics từ nhà cung cấp, sai hash, engine không hoạt động, chữ ký dữ liệu cũ hoặc lỗi quét đều không được coi là kết quả không phát hiện.
+
+### Kết quả đã chạy
+
+[Lượt quét Windows số 39454696183](https://github.com/seotro95/seotro/actions/runs/39454696183) hoàn tất trên chính ZIP có SHA-256 nêu trên. Scanner trả mã 0 và ghi:
+
+```text
+Scan starting...
+Scan finished.
+Scanning ...\Hmoob-VoiceLab-1.0-source.zip found no threats.
+```
+
+Đây là kết quả **không phát hiện trong lượt quét này**, không phải quyết định của Microsoft rằng cảnh báo trên máy người dùng là nhầm. Ngữ cảnh tải về, chính sách cloud và phiên bản Windows/Defender có thể khác. Cảnh báo `Trojan:Script/Ulthar.A!ml` trên máy người dùng chưa được giải quyết; ZIP vẫn không được phát hành lại.
+
+Bước tiếp theo là cập nhật security intelligence trên máy người dùng và yêu cầu Microsoft thẩm định mẫu/cảnh báo trước khi xem xét phát hành lại. Giữ nguyên trạng thái Removed; không khôi phục, cho phép hoặc tắt bảo vệ để thử. [Hồ sơ thẩm định đã chuẩn bị](MICROSOFT-REVIEW.md) chứa thông tin nhận dạng mẫu và bằng chứng quét. Chưa gửi mẫu cho Microsoft hoặc dịch vụ quét bên ngoài.
