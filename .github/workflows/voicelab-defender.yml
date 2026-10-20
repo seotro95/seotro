@@ -1,0 +1,41 @@
+name: Investigate VoiceLab Defender detection
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/voicelab-defender.yml'
+      - 'hmoob-voicelab/security/scan-defender.ps1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: voicelab-defender-investigation
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: windows-2022
+    timeout-minutes: 15
+    steps:
+      - name: Check out source and original evidence history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Scan the original ZIP with Windows Defender
+        shell: pwsh
+        timeout-minutes: 12
+        run: ./hmoob-voicelab/security/scan-defender.ps1
+
+      - name: Retain scan reports, never the flagged archive
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: voicelab-defender-report
+          path: ${{ runner.temp }}/voicelab-defender-report/
+          if-no-files-found: error
+          retention-days: 14

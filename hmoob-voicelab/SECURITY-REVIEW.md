@@ -28,3 +28,9 @@ Máy Linux hiện không có antivirus/signature database cài sẵn. Truy cập
 Cần đánh giá bởi Microsoft hoặc một môi trường Windows có Defender cập nhật để xác định tệp/quy tắc gây phát hiện và hướng xử lý phù hợp. Trang gửi tệp chính thức của Microsoft: https://www.microsoft.com/en-us/wdsi/filesubmission . Chưa có tệp được gửi và chưa có kết luận từ Microsoft.
 
 ZIP được gỡ khỏi nhánh `main` để dừng cung cấp bản tải hiện tại. Lịch sử Git và bộ nhớ đệm bên ngoài có thể còn giữ bản cũ. Không tạo gói khác để né phát hiện; chỉ phát hành lại sau khi giải quyết được cảnh báo và có bằng chứng kiểm tra phù hợp.
+
+## Kiểm tra Windows trên GitHub
+
+Workflow [Investigate VoiceLab Defender detection](https://github.com/seotro95/seotro/actions/workflows/voicelab-defender.yml) kiểm tra khả năng quét bằng Defender trên Windows Server 2022. Nó chỉ đọc bản ZIP gốc từ commit phát hành, đối chiếu SHA-256 rồi yêu cầu quét; không chạy tool hoặc bộ cài, không thay đổi cấu hình Defender và không tải lại ZIP làm artifact.
+
+Kết quả trong `voicelab-defender-report/report.json`: `detection-reported` (có phát hiện), `no-detection-on-this-runner` (lượt quét trên runner này không báo phát hiện), hoặc `indeterminate` (không đủ điều kiện/bằng chứng quét). Runner thiếu Defender, chữ ký cũ, có exclusion, tắt quét archive, thiếu log hoàn tất đúng scan hoặc lỗi quét đều không được coi là kết quả sạch. Một lượt quét không phát hiện cũng không xác nhận cảnh báo trên máy người dùng là nhầm; gói vẫn tạm ngừng phát hành.
