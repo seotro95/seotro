@@ -49,7 +49,7 @@ def test_adapter_forwards_dialect_and_returns_audio():
         return httpx.Response(200, content=b'RIFFtest', headers={'content-type':'audio/wav'})
     def client(**kwargs):
         return original_client(transport=httpx.MockTransport(handler), **kwargs)
-    with patch.dict(os.environ, {'HMONG_TTS_URL':'https://tts.example/speech','HMONG_TTS_TOKEN':'test-token','HMONG_TTS_CLONING':'1'}), patch.object(module.httpx, 'AsyncClient', client):
+    with patch.dict(os.environ, {'HMONG_ENGINE':'remote','HMONG_TTS_URL':'https://tts.example/speech','HMONG_TTS_TOKEN':'test-token','HMONG_TTS_CLONING':'1'}), patch.object(module.httpx, 'AsyncClient', client):
         response = asyncio.run(module.speech(module.Speech(text='Nyob zoo',dialect='mww',voice='hmong-white-male')))
         assert response.body == b'RIFFtest'
         assert response.media_type == 'audio/wav'
@@ -128,7 +128,7 @@ def test_remote_asr_sends_audio_and_receives_text():
     async def receive():
         return {'type':'http.request', 'body':b'audio-test', 'more_body':False}
     req = Request({'type':'http', 'method':'POST', 'path':'/api/transcribe', 'headers':[]}, receive)
-    with patch.dict(os.environ, {'HMONG_ASR_URL':'https://asr.example/transcribe', 'HMONG_ASR_TOKEN':'test-token'}), patch.object(module.httpx,'AsyncClient',client):
+    with patch.dict(os.environ, {'HMONG_ENGINE':'remote','HMONG_ASR_URL':'https://asr.example/transcribe', 'HMONG_ASR_TOKEN':'test-token'}), patch.object(module.httpx,'AsyncClient',client):
         result = asyncio.run(module.transcribe(req,'mww'))
         assert result['text'] == 'Nyob zoo'
 

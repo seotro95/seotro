@@ -1,4 +1,58 @@
-# Hmong Studio 0.2 — bản phát triển
+# Hmong Studio 0.3 — hai mẫu mặc định và thư viện giọng cục bộ
+
+Chạy trên máy, không cần API key. Hai tệp người dùng gửi được đặt làm mẫu mặc định **Hmong Trắng · Nam** (18,94 giây) và **Hmong Trắng · Nữ** (22,39 giây); bản nữ được chọn khi mở tool. Bản gốc được giữ nguyên để nghe đối chiếu.
+
+Đã có soạn/nhập/xuất TXT, dự án JSON, thu micro, nhập âm thanh, dạng sóng, cắt và chỉnh âm lượng, xuất WAV/MP3, thư viện giọng cá nhân (thêm/nghe/chọn/xóa), chọn đoạn tham chiếu và lưu lời mẫu cho hai giọng mặc định.
+
+**Chưa có bản đọc Hmong mới được kiểm chứng.** Giao diện và xử lý âm thanh hoạt động độc lập với mô hình. Mô hình F5-Hmong cộng đồng là lựa chọn thử nghiệm; chưa xác minh đúng Hmong Trắng, độ giống giọng hoặc giấy phép trọng số. Máy cloud hiện bị từ chối tải Hugging Face (proxy CONNECT 403), nên chưa cài trọng số hoặc chạy inference thật. Các kiểm thử mô phỏng engine không chứng minh chất lượng giọng.
+
+## Khởi động
+
+- Windows: cài Python 3.10–3.12 và FFmpeg/ffprobe, chạy `start.bat`.
+- Linux/macOS: cài Python 3.10–3.12 và FFmpeg/ffprobe, chạy `bash start.sh`.
+- Cloud đã chuẩn bị: trong thư mục này chạy `/workspace/.venvs/seotro-hmong/bin/python -m uvicorn app:app --host 127.0.0.1 --port 8090`.
+
+Giữ dịch vụ trên loopback; tool chưa có đăng nhập. Lần đầu cài thư viện cần Internet, mẫu giọng và dữ liệu của tool lưu trên máy. `.data/profiles` lưu giọng cá nhân, `.data/references` lưu đoạn/lời của hai giọng mặc định. Có thể đổi thư mục dữ liệu bằng `HMONG_STUDIO_DATA`. Dự án trình duyệt chỉ chứa kịch bản/thiết lập, cần tải âm thanh riêng.
+
+## Chuẩn bị hai giọng mặc định
+
+1. Chọn mẫu Nam hoặc Nữ, nghe bản gốc.
+2. Chọn một đoạn rõ lời dài **3–8 giây**, bấm nghe đoạn đã chọn.
+3. Chép đúng lời Hmong của đoạn đó và bấm **Lưu đoạn / lời mẫu**. Người dùng có thể bổ sung sau; tool không đoán bản chép.
+4. Sau khi mô hình cục bộ đã cài, chọn giọng tương ứng ở phần đọc và tạo một câu ngắn để nghe kiểm tra.
+
+Giọng cá nhân nhận mẫu 3–30 giây để lưu thư viện; F5 yêu cầu **3–8 giây** với lời khớp đoạn. Có thể nhập mẫu vào bàn biên tập, cắt, rồi bấm dùng âm thanh đang mở. Lưu mẫu là hồ sơ tham chiếu, không tự huấn luyện mô hình.
+
+## Nhân bản cục bộ F5-Hmong (thử nghiệm, chưa inference thật)
+
+Nguồn cộng đồng: https://github.com/YangNobody12/F5-TTS-Hmong ; checkpoint được tác giả dẫn tới https://huggingface.co/Pakorn2112/F5TTS-Hmong . Kiến trúc dùng **F5TTS_Base**, không phải F5TTS_v1_Base. Cần xác nhận vocabulary khớp checkpoint và giấy phép trọng số trước khi sử dụng. Không tự tải mô hình trong lúc bấm tạo giọng.
+
+Cài bộ `f5-tts`/PyTorch phù hợp theo tài liệu upstream https://github.com/SWivid/F5-TTS . Phần tích hợp được đối chiếu API `f5-tts==1.1.22`; chưa cài bộ suy luận này trên máy cloud do chưa lấy được mô hình. Chuẩn bị đầy đủ các tệp cục bộ rồi đặt:
+
+| Biến | Nội dung |
+|---|---|
+| `HMONG_F5_CHECKPOINT` | Đường dẫn checkpoint Hmong `.safetensors` (tác giả nêu `model_159952.safetensors`) |
+| `HMONG_F5_VOCAB` | Tệp vocabulary khớp checkpoint |
+| `HMONG_F5_VOCODER` | Thư mục Vocos `charactr/vocos-mel-24khz` chứa `config.yaml` và `pytorch_model.bin` |
+| `HMONG_F5_DEVICE` | `cpu` (mặc định), `cuda` hoặc `mps` |
+
+Studio dùng tệp cục bộ, không gọi API và không tự nhận dạng lời mẫu bằng Whisper. Giới hạn F5: 2.000 ký tự/lượt, 10 phút đầu ra và một lượt tạo đồng thời. Cảm xúc riêng chưa được hỗ trợ. Trạng thái sẵn sàng chỉ kiểm tra điều kiện cài đặt; cần tạo và nghe bản đọc thật để đánh giá phát âm/phương ngữ.
+
+Chế độ mặc định `HMONG_ENGINE=local` bỏ qua các URL dịch vụ từ xa cũ. Hợp đồng adapter HTTPS ở tài liệu lịch sử bên dưới chỉ được bật khi người vận hành chủ động đặt `HMONG_ENGINE=remote`.
+
+## Kiểm thử phát triển
+
+```sh
+python -m pip install -r requirements.txt pytest
+python -m pytest tests -q
+node --check static/app.js
+```
+
+Các test FFmpeg kiểm tra tệp âm thanh thật, lưu/xóa mẫu và xuất MP3/WAV. Test tích hợp engine dùng mô phỏng, không thay cho inference thật. Chưa thử launcher trên Windows thật.
+
+---
+
+# Tài liệu 0.2 — AI và adapter tùy chọn
 
 **Chưa hoàn thành AI Hmong Trắng.** Bản này bổ sung luồng tạo giọng và nhận dạng dùng mô hình cục bộ hoặc dịch vụ HTTPS, lựa chọn Hmong Trắng / Việt / Anh, và quản lý hai mẫu nam/nữ. Chưa có mô hình Hmong Trắng được xác minh, chưa tải được trọng số trong môi trường kiểm tra (Hugging Face bị chặn 403). Không hứa nhận dạng đúng Hmong, nhân bản hai giọng hoặc cảm xúc giống người thật.
 
