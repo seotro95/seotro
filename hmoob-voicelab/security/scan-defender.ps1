@@ -6,7 +6,7 @@ $releaseCommit = 'ae23a93222a1b3eeb8246eb6f45e527edc08fd6c'
 $archiveName = 'Hmoob-VoiceLab-1.0-source.zip'
 $expectedSha = '962f0ac81867b4a84eff637a68c196b310723cd3b8a6eedc8679c15132259b1d'
 $reportDir = Join-Path $env:RUNNER_TEMP 'voicelab-defender-report'
-$evidenceDir = Join-Path $env:RUNNER_TEMP 'voicelab-defender-evidence'
+$evidenceDir = Join-Path $env:ProgramData ('VoiceLabSecurityReview-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Force -Path $reportDir, $evidenceDir | Out-Null
 $archivePath = Join-Path $evidenceDir $archiveName
 $scanStarted = Get-Date
@@ -21,6 +21,8 @@ $report = [ordered]@{
     defender_before = $null
     defender_after = $null
     archive_scanning_enabled = $null
+    scan_scope = 'not-started'
+    files = @()
     scan_exit_code = $null
     scan_completed_event = $false
     threat_detections = @()
@@ -61,18 +63,6 @@ try {
     # does not disable an available on-demand engine; record it, never change it.
     $preference = Get-MpPreference -ErrorAction Stop
     $report.archive_scanning_enabled = -not $preference.DisableArchiveScanning
-    if (-not $report.archive_scanning_enabled) {
-        throw 'Defender archive scanning is disabled. No preferences will be changed.'
-    }
-    # Do not claim a clear scan if this .zip or its process/temp location is
-    # excluded. Conservatively stop on exclusions rather than overriding them.
-    $exclusions = @($preference.ExclusionPath) + @($preference.ExclusionExtension) + @($preference.ExclusionProcess)
-    if (@($exclusions | Where-Object { $_ }).Count -gt 0) {
-        $paths = @($preference.ExclusionPath) | ConvertTo-Json -Compress
-        $extensions = @($preference.ExclusionExtension) | ConvertTo-Json -Compress
-        $processes = @($preference.ExclusionProcess) | ConvertTo-Json -Compress
-        throw "This runner has Defender exclusions; coverage is indeterminate. Paths=$paths Extensions=$extensions Processes=$processes"
-    }
     Update-MpSignature -ErrorAction Stop
     $report.defender_before = Read-DefenderStatus
     $signatureTime = [datetime]::Parse($report.defender_before.AntivirusSignatureLastUpdated)
@@ -111,6 +101,58 @@ try {
     $report.actual_sha256 = (Get-FileHash -LiteralPath $archivePath -Algorithm SHA256).Hash.ToLowerInvariant()
     if ($report.actual_sha256 -ne $expectedSha) { throw 'Evidence SHA-256 does not match the flagged release.' }
 
+    $scanPath = $archivePath
+    $report.scan_scope = 'archive'
+    if (-not $report.archive_scanning_enabled) {
+        # Static inspection only. This fallback cannot establish that the ZIP
+        # itself is clear, but can identify a detected member. Never execute it.
+        $scanPath = Join-Path $evidenceDir 'extracted'
+        $prefix = [System.IO.Path]::GetFullPath($scanPath) + [System.IO.Path]::DirectorySeparatorChar
+        $zip = [System.IO.Compression.ZipFile]::OpenRead($archivePath)
+        try {
+            if ($zip.Entries.Count -gt 100) { throw 'Unexpected evidence archive entry count.' }
+            $totalBytes = 0
+            foreach ($entry in $zip.Entries) {
+                $destination = [System.IO.Path]::GetFullPath((Join-Path $scanPath $entry.FullName))
+                if (-not $destination.StartsWith($prefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+                    throw 'Evidence archive contains an unsafe member path.'
+                }
+                if ((($entry.ExternalAttributes -shr 16) -band 0xF000) -eq 0xA000) {
+                    throw 'Evidence archive contains a symbolic link.'
+                }
+                $totalBytes += $entry.Length
+                if ($totalBytes -gt 3000000) { throw 'Unexpected evidence archive expanded size.' }
+            }
+        } finally { $zip.Dispose() }
+        [System.IO.Compression.ZipFile]::ExtractToDirectory($archivePath, $scanPath)
+        $report.scan_scope = 'extracted-files-only'
+        $report.files = @(Get-ChildItem -LiteralPath $scanPath -File -Recurse -Force | ForEach-Object {
+            [ordered]@{ path = [System.IO.Path]::GetRelativePath($scanPath, $_.FullName)
+                sha256 = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+                bytes = $_.Length }
+        })
+        if ($report.files.Count -ne 27) { throw 'Evidence extraction did not preserve all 27 files.' }
+    }
+    $targets = if ($report.scan_scope -eq 'archive') { @($archivePath) } else {
+        @(Get-ChildItem -LiteralPath $scanPath -File -Recurse -Force | ForEach-Object { $_.FullName })
+    }
+    foreach ($target in $targets) {
+        foreach ($rule in @($preference.ExclusionPath)) {
+            if (-not $rule) { continue }
+            $expanded = [Environment]::ExpandEnvironmentVariables([string]$rule).TrimEnd('\', '/')
+            if ($target -like $expanded -or $target -like ($expanded + '\*')) {
+                throw "Evidence is covered by a Defender path exclusion: $expanded"
+            }
+        }
+        foreach ($rule in @($preference.ExclusionExtension)) {
+            if (-not $rule) { continue }
+            $extension = [System.IO.Path]::GetExtension($target).TrimStart('.')
+            if ($extension -like ([string]$rule).TrimStart('.')) {
+                throw "Evidence is covered by a Defender extension exclusion: $rule"
+            }
+        }
+    }
+
     $commands = @()
     $platformDir = Join-Path $env:ProgramData 'Microsoft\Windows Defender\Platform'
     if (Test-Path -LiteralPath $platformDir) {
@@ -124,6 +166,15 @@ try {
         if (Test-Path -LiteralPath $fallback) { $commands = @($fallback) }
     }
     if ($commands.Count -eq 0) { throw 'MpCmdRun.exe is unavailable on this runner.' }
+    foreach ($rule in @($preference.ExclusionProcess)) {
+        if (-not $rule) { continue }
+        $expanded = [Environment]::ExpandEnvironmentVariables([string]$rule)
+        foreach ($processPath in @($commands[0], (Get-Process -Id $PID).Path)) {
+            if ($processPath -like $expanded -or [System.IO.Path]::GetFileName($processPath) -like $expanded) {
+                throw "Evidence handling or scanner is covered by a Defender process exclusion: $expanded"
+            }
+        }
+    }
     $stdout = Join-Path $reportDir 'scan-stdout.txt'
     $stderr = Join-Path $reportDir 'scan-stderr.txt'
     $scanInfo = [System.Diagnostics.ProcessStartInfo]::new()
@@ -132,7 +183,7 @@ try {
     $scanInfo.UseShellExecute = $false
     $scanInfo.RedirectStandardOutput = $true
     $scanInfo.RedirectStandardError = $true
-    foreach ($argument in @('-Scan', '-ScanType', '3', '-File', $archivePath)) {
+    foreach ($argument in @('-Scan', '-ScanType', '3', '-File', $scanPath)) {
         $scanInfo.ArgumentList.Add($argument)
     }
     $scanInvoked = $true
@@ -174,7 +225,7 @@ try {
                 $fields[([string]$field.Name -replace '[^A-Za-z]', '').ToLowerInvariant()] = [string]$field.'#text'
             }
             $resources = [string]$fields['scanresources']
-            if ($resources.IndexOf($archivePath, [System.StringComparison]::OrdinalIgnoreCase) -ge 0 -and $fields['scanid']) {
+            if ($resources.IndexOf($scanPath, [System.StringComparison]::OrdinalIgnoreCase) -ge 0 -and $fields['scanid']) {
                 $scanIds += $fields['scanid']
             }
         }
@@ -201,7 +252,7 @@ try {
         $report.actual_sha256 -eq $expectedSha -and
         $report.defender_after.AMServiceEnabled -and $report.defender_after.AntivirusEnabled -and
         $report.defender_after.AMRunningMode -eq 'Normal') {
-        $report.outcome = 'no-detection-on-this-runner'
+        $report.outcome = if ($report.scan_scope -eq 'archive') { 'no-detection-on-this-runner' } else { 'no-detection-in-extracted-files' }
     } else {
         $report.outcome = 'indeterminate'
     }
@@ -215,6 +266,8 @@ try {
 
 Outcome: **$($report.outcome)**
 
+Scope: **$($report.scan_scope)**. Archive scanning enabled: **$($report.archive_scanning_enabled)**.
+
 Original archive SHA-256: ``$expectedSha``
 
 Error or limitation: $($report.error)
@@ -223,12 +276,14 @@ The original ZIP is not uploaded as an artifact. No application code or installe
 This result does not authorize restoring/running the withdrawn package or establish a false positive.
 "@
     if ($env:GITHUB_STEP_SUMMARY) { $summary | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY }
-    if ($report.outcome -ne 'no-detection-on-this-runner') {
-        $detail = if ($report.error) { [string]$report.error } else { 'Threat detections or insufficient scan-completion evidence; inspect report.json.' }
+    if ($report.outcome -notin @('no-detection-on-this-runner', 'no-detection-in-extracted-files')) {
+        $detail = if ($report.error) { [string]$report.error } else { ($report.threat_detections | ConvertTo-Json -Depth 5 -Compress) + ' Inspect report.json and Defender events.' }
         $detail = $detail.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
         Write-Output "::error title=Defender investigation - $($report.outcome)::$detail"
+    } else {
+        Write-Output "::notice title=Defender investigation - $($report.outcome)::Scope $($report.scan_scope). The reported user-device ZIP detection remains unresolved; do not restore or run the package."
     }
 }
 
 if ($report.outcome -eq 'detection-reported') { exit 2 }
-if ($report.outcome -ne 'no-detection-on-this-runner') { exit 1 }
+if ($report.outcome -notin @('no-detection-on-this-runner', 'no-detection-in-extracted-files')) { exit 1 }
