@@ -1,4 +1,4 @@
-# Hmong Studio 0.3 — hai mẫu mặc định và thư viện giọng cục bộ
+# Hmong Studio 0.3.1 — hai mẫu mặc định và thư viện giọng cục bộ
 
 Chạy trên máy, không cần API key. Hai tệp người dùng gửi được đặt làm mẫu mặc định **Hmong Trắng · Nam** (18,94 giây) và **Hmong Trắng · Nữ** (22,39 giây); bản nữ được chọn khi mở tool. Bản gốc được giữ nguyên để nghe đối chiếu.
 
@@ -8,11 +8,21 @@ Chạy trên máy, không cần API key. Hai tệp người dùng gửi được
 
 ## Khởi động
 
-- Windows: cài Python 3.10–3.12 và FFmpeg/ffprobe, chạy `start.bat`.
+- Windows: ưu tiên Python 3.12 64-bit, cài FFmpeg/ffprobe, chạy `start.bat`. Launcher tự tìm Python 3.12, 3.11 hoặc 3.10; không chọn Python 3.15.
 - Linux/macOS: cài Python 3.10–3.12 và FFmpeg/ffprobe, chạy `bash start.sh`.
 - Cloud đã chuẩn bị: trong thư mục này chạy `/workspace/.venvs/seotro-hmong/bin/python -m uvicorn app:app --host 127.0.0.1 --port 8090`.
 
 Giữ dịch vụ trên loopback; tool chưa có đăng nhập. Lần đầu cài thư viện cần Internet, mẫu giọng và dữ liệu của tool lưu trên máy. `.data/profiles` lưu giọng cá nhân, `.data/references` lưu đoạn/lời của hai giọng mặc định. Có thể đổi thư mục dữ liệu bằng `HMONG_STUDIO_DATA`. Dự án trình duyệt chỉ chứa kịch bản/thiết lập, cần tải âm thanh riêng.
+
+## Sửa lỗi PyYAML / Visual C++ khi máy có Python 3.15
+
+Nếu log có `Python315`, `cpython-315`, `Failed building wheel for pyyaml` và `Microsoft Visual C++ 14.0 or greater is required`, bộ cài cũ đã dùng Python quá mới so với các thư viện AI. Dùng Python 3.12 64-bit để nhận các gói đã biên dịch.
+
+1. Cài [Python 3.12.10 Windows 64-bit từ python.org](https://www.python.org/ftp/python/3.12.10/python-3.12.10-amd64.exe), bật Python Launcher. Có thể giữ Python 3.15 trên máy.
+2. Dùng bản 0.3.1, giải nén toàn bộ vào thư mục mới hoặc sao lưu thư mục tool trước khi cập nhật. Không chỉ chép riêng tệp BAT: cần cả `prepare_env.bat` và `bootstrap.py`.
+3. Chạy `start.bat` để mở tool hoặc `install_local_ai.bat` để cài thư viện AI tùy chọn. Bộ chuẩn bị chọn Python 3.10–3.12 64-bit và kiểm tra `.venv` trước khi cài.
+
+Nếu `.venv` cũ dùng Python không hỗ trợ, nó được **đổi tên để giữ lại**, rồi tạo môi trường mới. Không xóa `.data` hoặc các mẫu giọng. Nếu chưa tìm thấy Python phù hợp, bộ cài dừng và chỉ rõ cần cài Python 3.12. Các lệnh cài PyYAML chỉ chấp nhận wheel, tránh chuyển sang biên dịch C++ âm thầm. Bản sửa launcher này không kèm thêm trọng số AI.
 
 ## Chuẩn bị hai giọng mặc định
 

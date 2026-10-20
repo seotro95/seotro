@@ -1,13 +1,12 @@
 @echo off
+setlocal
 cd /d "%~dp0"
-if not exist .venv\Scripts\python.exe (
-  python -m venv .venv
-  if errorlevel 1 goto fail
-)
-echo Cai PyTorch CPU tu nguon chinh thuc. Co the can vai tram MB.
-.venv\Scripts\python.exe -m pip install "torch>=2.4,<3" --index-url https://download.pytorch.org/whl/cpu
+call "%~dp0prepare_env.bat"
 if errorlevel 1 goto fail
-.venv\Scripts\python.exe -m pip install -r requirements-local.txt
+echo Cai PyTorch CPU tu nguon chinh thuc. Co the can vai tram MB.
+.venv\Scripts\python.exe -m pip install --only-binary=:all: "torch>=2.4,<3" --index-url https://download.pytorch.org/whl/cpu
+if errorlevel 1 goto fail
+.venv\Scripts\python.exe -m pip install --only-binary=PyYAML -r requirements-local.txt
 if errorlevel 1 goto fail
 where ffmpeg >nul 2>nul
 if errorlevel 1 echo Can cai FFmpeg trong PATH de nhan dang audio. Xem README.md.
