@@ -1,0 +1,31 @@
+name: Inspect official Microsoft submission requirements
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/microsoft-submission-prerequisites.yml'
+      - 'hmoob-voicelab/security/inspect_microsoft_submission.py'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Inspect public portal without signing in or uploading files
+        run: python3 hmoob-voicelab/security/inspect_microsoft_submission.py
+      - name: Preserve public requirement report only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: microsoft-submission-prerequisites
+          path: ${{ runner.temp }}/microsoft-submission-prerequisites/
+          retention-days: 14
+          if-no-files-found: error
