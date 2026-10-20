@@ -1,23 +1,69 @@
 {
-  "checked_at_utc": "2026-10-20T08:23:31.693070+00:00",
-  "scanner": "ClamAV",
-  "version": "1.4.3",
-  "artifact": "HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+  "published_artifact": "HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+  "publication": "Restored unchanged at user request to test download; no repacking or renaming.",
   "sha256": "c2ccad88df5d51cc06457c3f7f49f64a20b55d011a73d0cd0cb4556fbc612aa8",
   "bytes": 1636745,
-  "signature_database_available": false,
-  "signature_version": null,
-  "signature_date": null,
-  "command": [
-    "/workspace/security-scan/root/usr/bin/clamscan",
-    "--database=/workspace/security-scan/db",
-    "--infected",
-    "--recursive",
-    "/workspace/seotro/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip"
+  "defender_status": "UNRESOLVED_REPORTED_BLOCKED",
+  "scan_result": {
+    "artifact": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "sha256": "c2ccad88df5d51cc06457c3f7f49f64a20b55d011a73d0cd0cb4556fbc612aa8",
+    "bytes": 1636745,
+    "zip_inventory": {
+      "members": 102,
+      "regular_files": 102,
+      "uncompressed_bytes": 2267278,
+      "encrypted_members": 0,
+      "largest_member_bytes": 373078,
+      "nested_archive_members": []
+    },
+    "scan_started_utc": "2026-10-20T08:40:42.314975+00:00",
+    "elapsed_seconds": 14.086680406006053,
+    "scanner": "ClamAV 1.4.3",
+    "command": [
+      "/workspace/security-scan/root/usr/bin/clamscan",
+      "--database=/workspace/security-scan/db",
+      "--official-db-only=yes",
+      "--scan-archive=yes",
+      "--archive-verbose",
+      "--allmatch=yes",
+      "--detect-pua=yes",
+      "--alert-encrypted=yes",
+      "--alert-exceeds-max=yes",
+      "--max-recursion=64",
+      "--max-files=100000",
+      "--max-filesize=128M",
+      "--max-scansize=512M",
+      "--max-scantime=0",
+      "--tempdir=/workspace/security-scan/tmp",
+      "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip"
+    ],
+    "exit_code": 0,
+    "stdout": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip: OK\n\n----------- SCAN SUMMARY -----------\nKnown viruses: 3642850\nEngine version: 1.4.3\nScanned directories: 0\nScanned files: 1\nInfected files: 0\nData scanned: 3.06 MB\nData read: 1.56 MB (ratio 1.96:1)\nTime: 14.077 sec (0 m 14 s)\nStart Date: 2026:10:20 08:40:42\nEnd Date:   2026:10:20 08:40:56\n",
+    "stderr": "",
+    "result": "NO_DETECTIONS",
+    "log": "/workspace/security-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1-clamav.log"
+  },
+  "database_verification": [
+    {
+      "database": "bytecode.cvd",
+      "exit_code": 0,
+      "stdout": "File: /workspace/security-scan/db/bytecode.cvd\nBuild time: 11 Sep 2025 08:29 -0400\nVersion: 339\nSignatures: 80\nFunctionality level: 90\nBuilder: nrandolp\nMD5: 8bdb03f60b90cfc4c8d500543233de96\nDigital signature: ow+EI2l1J6dXNMseMugc4ZK0cdbnUyDZY7x/Or+pIuzjIaYmWBt6MflLRusmT+y2dQamP0RjLrSAHjeU8DwyuWmTIkoTo1wrY1B3ZEUDC/Ta5vpv0cxYy4MPgMkeNovlXmEKCWX4m3orZS+3VJ/9J9grZ2rxcJubE9RAU5CXmEg\nVerification OK.\n",
+      "stderr": ""
+    },
+    {
+      "database": "daily.cvd",
+      "exit_code": 0,
+      "stdout": "File: /workspace/security-scan/db/daily.cvd\nBuild time: 18 Oct 2026 06:24 +0000\nVersion: 28157\nSignatures: 355765\nFunctionality level: 90\nBuilder: svc.clamav-publisher\nMD5: 0b8b78f9de50bda563753ba2d6d5ca34\nDigital signature: D2rxYlpn4WyxaNIWN2+9UqRC8wGLInHtJ6M9mDvkm5UEaCTudy8q0Hy7QF3H6uYKDKHsdMYWbQym6ACIIRbGxGSkZ3gidVp4fDx57qkPke4TQRhdKKKySOmZM6eZ/l/wTiCfDl1NDjXKyyZFoiKHjZCl5mkeHEI8H1z3FYcPQvd\nVerification OK.\n",
+      "stderr": ""
+    },
+    {
+      "database": "main.cvd",
+      "exit_code": 0,
+      "stdout": "File: /workspace/security-scan/db/main.cvd\nBuild time: 16 Dec 2025 23:18 +0000\nVersion: 63\nSignatures: 3287027\nFunctionality level: 90\nBuilder: tomjudge\nMD5: 9c353a6b32555186a45a61c6441f38c0\nDigital signature: gI9w3cezaElJbedEoiykyQeX1f6j9Xbs3a+cf9U/kH5QScGMe2mRz1K2JlYOrqfBuOUMbiKmvkVvAquOsMeDp/ejLVDx5WulC6klZVhLOfBHda29OjaLZwEGR9GPIHDr0mXriv7pivuMH60/loxpASIJHLOszyj95pxVK+EaTCh\nVerification OK.\n",
+      "stderr": ""
+    }
   ],
-  "exit_code": 2,
-  "stdout": "\n----------- SCAN SUMMARY -----------\nKnown viruses: 0\nEngine version: 1.4.3\nScanned directories: 0\nScanned files: 0\nInfected files: 0\nData scanned: 0.00 MB\nData read: 0.00 MB (ratio 0.00:1)\nTime: 0.002 sec (0 m 0 s)\nStart Date: 2026:10:20 08:23:31\nEnd Date:   2026:10:20 08:23:31\n",
-  "stderr": "LibClamAV Error: cli_loaddbdir: No supported database files found in /workspace/security-scan/db\nERROR: Can't open file or directory\n",
-  "result": "NOT_SCANNED_DATABASE_UNAVAILABLE",
-  "limitation": "Official ClamAV database downloads blocked by proxy403; no successful antivirus scan. No clean verdict; warning cause unknown. Microsoft Defender unavailable in Linux."
+  "database_limit": "Official offline daily 28157 dated 2026-10-18; not verified latest. ClamAV negative does not clear Defender.",
+  "full_report": "https://github.com/seotro95/seotro/blob/hmong-studio-0.3-download/HMONG_VOICE_STUDIO_SECURITY_NOTICE.md",
+  "prior_failed_attempt": "https://github.com/seotro95/seotro/blob/0d4408e/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip.scan.json"
 }

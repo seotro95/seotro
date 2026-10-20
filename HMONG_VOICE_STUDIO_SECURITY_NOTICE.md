@@ -2,6 +2,12 @@
 
 Cập nhật ngày **20/10/2026**, múi giờ **UTC+7**.
 
+## Trạng thái tải hiện tại
+
+Theo yêu cầu người dùng, **mở lại đúng ZIP 0.8.1 đã quét để kiểm tra tải xuống**, giữ nguyên tên, nội dung và SHA256 `c2ccad88df5d51cc06457c3f7f49f64a20b55d011a73d0cd0cb4556fbc612aa8` (1.636.745 byte). [Tải ZIP 0.8.1](https://github.com/seotro95/seotro/raw/refs/heads/hmong-studio-0.3-download/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip). Bản không có số phiên bản tiếp tục được rút khỏi nhánh tải.
+
+ClamAV không phát hiện mã độc với dữ liệu chính thức nêu dưới đây. **Cảnh báo Defender chưa được giải quyết; mở lại link không xác nhận an toàn hoặc bảo đảm tải được.** Không đổi tên, đóng gói lại, đặt mật khẩu hoặc yêu cầu thêm ngoại lệ để tránh kiểm tra. Nếu phần mềm bảo vệ tiếp tục chặn, giữ trạng thái chặn/cách ly. Báo cáo bên trong ZIP là ghi chép cũ; báo cáo hiện tại ở trang này và sidecar `.zip.scan.json`/`.zip.scan.txt` bên cạnh ZIP. Việc giữ nguyên byte bảo toàn danh tính gói đã quét.
+
 ## Phát hiện do người dùng cung cấp
 
 Ảnh Windows Security → Protection history ghi nhận:
@@ -14,7 +20,7 @@ Cập nhật ngày **20/10/2026**, múi giờ **UTC+7**.
 
 Ảnh ghi tên ZIP và nguồn tải, không chỉ rõ tệp con trong ZIP. Không suy ra báo nhầm từ tên phát hiện hoặc hậu tố `!ml`. Không suy ra máy đã an toàn hoặc đã bị xâm nhập chỉ từ trạng thái Removed.
 
-Cả gói không có số phiên bản và gói 0.8.1 đã được rút khỏi HEAD của nhánh tải để ngừng phân phối trong khi chưa xác minh. Người dùng xác nhận 0.8.1 cũng bị chặn; hiện chưa có ảnh chi tiết riêng hoặc hash bản tải về 0.8.1. Bản cũ vẫn có trong lịch sử Git để điều tra; không viết lại lịch sử và không đóng gói đổi tên để vượt cảnh báo. Bản sao nguồn ban đầu được giữ nguyên.
+Cả gói không có số phiên bản và gói 0.8.1 từng được rút khỏi HEAD của nhánh tải để điều tra. Sau khi quét, người dùng yêu cầu mở lại ZIP để kiểm tra tải xuống; chỉ 0.8.1 được khôi phục nguyên bản. Người dùng trước đó xác nhận 0.8.1 cũng bị chặn; hiện chưa có ảnh chi tiết riêng hoặc hash bản tải về 0.8.1. Bản cũ vẫn có trong lịch sử Git để điều tra; không viết lại lịch sử và không đóng gói đổi tên để vượt cảnh báo. Bản sao nguồn ban đầu được giữ nguyên.
 
 ## Đối chiếu và điều tra
 
@@ -31,11 +37,11 @@ Tên và URL trong ảnh khớp đường dẫn của gói này. Không có hash
 
 ## Trạng thái bản 0.8.1
 
-`HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip` là gói đã công bố trước khi nhận ảnh chi tiết; nay cũng được người dùng báo bị chặn và đã rút khỏi nhánh tải. Hash gói lưu trong lịch sử: `c2ccad88df5d51cc06457c3f7f49f64a20b55d011a73d0cd0cb4556fbc612aa8` (1.636.745 byte, 102 tệp).
+`HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip` là gói đã công bố trước khi nhận ảnh chi tiết, được người dùng báo bị chặn, từng rút và nay khôi phục nguyên bản theo yêu cầu thử tải. Hash gói: `c2ccad88df5d51cc06457c3f7f49f64a20b55d011a73d0cd0cb4556fbc612aa8` (1.636.745 byte, 102 tệp).
 
 Các gia cố HTTPS và chẩn đoán GPU trong 0.8.1 không phải bằng chứng đã khắc phục phát hiện Sabsik. **Bản này chưa được xác nhận qua Windows Defender; không coi việc đổi phiên bản hoặc hash là bằng chứng an toàn.** 363 kiểm thử phần mềm đạt, một kiểm thử CUDA bỏ qua; các kiểm thử đó không phải quét antivirus.
 
-Ban đầu ClamAV chưa có dữ liệu vì proxy chặn HTTPS `database.clamav.net` với 403 Forbidden. Những lần thử đó trả exit 2 và quét 0 tệp; log cũ trong `hmong-studio/security-scan/` và sidecar `.scan.json`/`.scan.txt` là bằng chứng thất bại lịch sử, không phải kết quả hiện tại. **Sau đó đã lấy được dữ liệu có chữ ký xác thực từ nguồn phân phối container chính thức và quét thành công như dưới đây.** Các báo cáo nằm bên trong ZIP 0.8.1 phản ánh thời điểm trước khi nhận ảnh và trước lần quét thành công này.
+Ban đầu ClamAV chưa có dữ liệu vì proxy chặn HTTPS `database.clamav.net` với 403 Forbidden. Những lần thử đó trả exit 2 và quét 0 tệp; log cũ trong `hmong-studio/security-scan/` và sidecar ở commit `0d4408e` là bằng chứng thất bại lịch sử, không phải kết quả hiện tại. **Sau đó đã lấy được dữ liệu có chữ ký xác thực từ nguồn phân phối container chính thức và quét thành công như dưới đây.** Sidecar hiện tại của ZIP trỏ đến lần quét thành công; các báo cáo nằm bên trong ZIP 0.8.1 phản ánh thời điểm trước khi nhận ảnh và trước lần quét này.
 
 Môi trường điều tra là Linux, không có Windows Defender để tái hiện. Chưa gửi mã nguồn hoặc các mẫu giọng lên dịch vụ quét công khai. Không phát hành thêm ZIP chỉ để thử tránh phát hiện. Cảnh báo Defender vẫn chưa được định vị/giải quyết dù kết quả ClamAV bên dưới không phát hiện mã độc; chưa có thay đổi mã nào được xác nhận xử lý đúng cảnh báo.
 
@@ -43,7 +49,7 @@ Môi trường điều tra là Linux, không có Windows Defender để tái hi�
 
 ## Kết quả quét thực tế — 20/10/2026 (UTC+7)
 
-**ClamAV 1.4.3 không phát hiện mã độc trong hai ZIP đã lưu và toàn bộ 260 tệp sau giải nén, bao gồm bản sao nguồn lồng nhau. Đây không phải xác nhận Windows Defender đã chấp nhận tệp hoặc chứng minh báo nhầm. Hai ZIP tiếp tục được giữ khỏi nhánh tải.**
+**ClamAV 1.4.3 không phát hiện mã độc trong hai ZIP đã lưu và toàn bộ 260 tệp sau giải nén, bao gồm bản sao nguồn lồng nhau. Đây không phải xác nhận Windows Defender đã chấp nhận tệp hoặc chứng minh báo nhầm. Chỉ ZIP 0.8.1 được mở lại nguyên bản theo yêu cầu thử tải; bản không có số phiên bản tiếp tục được rút.**
 
 | Đối tượng | Bắt đầu (UTC+7) | Thời gian | Mã thoát | Kết quả |
 | --- | --- | ---: | ---: | --- |
@@ -61,7 +67,7 @@ Nguồn dữ liệu: image **`clamav/clamav:1.4`** do Cisco Talos công bố ch�
 
 Đây là **snapshot ngoại tuyến khoảng hai ngày tuổi**, chưa xác minh là dữ liệu mới nhất. Không suy rộng kết quả sang thư viện, FFmpeg hoặc trọng số tải khi cài đặt vốn không có trong hai ZIP. Một lượt quét ClamAV không thay thế việc tái hiện bằng đúng Defender đang báo trên Windows.
 
-[Báo cáo đầy đủ](hmong-studio/security-scan/2026-10-20/ACTUAL_SCAN_REPORT.md), [kết quả hai ZIP](hmong-studio/security-scan/2026-10-20/held-release-scan-results.json), [kết quả 260 tệp](hmong-studio/security-scan/2026-10-20/extracted-combined-scan-summary.json), [log từng tệp](hmong-studio/security-scan/2026-10-20/extracted-combined-clamav.log), [nguồn/chữ ký dữ liệu](hmong-studio/security-scan/2026-10-20/official-container/PROVENANCE.json). Báo cáo/log gốc dùng UTC; bảng trên đã đổi sang UTC+7. Chỉ công bố log/metadata, không đưa scanner, database, bản ZIP đang giữ hay cây tệp giải nén vào bản phát hành mới.
+[Báo cáo đầy đủ](hmong-studio/security-scan/2026-10-20/ACTUAL_SCAN_REPORT.md), [kết quả hai ZIP](hmong-studio/security-scan/2026-10-20/held-release-scan-results.json), [kết quả 260 tệp](hmong-studio/security-scan/2026-10-20/extracted-combined-scan-summary.json), [log từng tệp](hmong-studio/security-scan/2026-10-20/extracted-combined-clamav.log), [nguồn/chữ ký dữ liệu](hmong-studio/security-scan/2026-10-20/official-container/PROVENANCE.json). Báo cáo/log gốc dùng UTC; bảng trên đã đổi sang UTC+7. Thư mục bằng chứng chỉ chứa log/metadata. ZIP 0.8.1 được khôi phục riêng nguyên bản; không đóng gói scanner, database hoặc cây tệp giải nén vào app.
 
 ## Xử lý trên máy người dùng
 
