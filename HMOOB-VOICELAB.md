@@ -1,8 +1,6 @@
 # Hmoob VoiceLab — tool mới cho văn bản dài
 
-[Tải Hmoob VoiceLab 1.0 — gói ZIP](https://github.com/seotro95/seotro/raw/refs/heads/main/Hmoob-VoiceLab-1.0-source.zip)
-
-Giải nén toàn bộ. Cài Python 3.12 64-bit và Python Launcher, rồi chạy `start.bat` để mở giao diện. Để tạo giọng, cài FFmpeg/ffprobe, chạy `install_voice.bat` và nhập lời khớp đoạn mẫu 3–8 giây. Gói mã nguồn không kèm Python, FFmpeg hoặc mô hình AI; bộ cài cần Internet để tải mô hình.
+**Tạm ngừng phát hành ZIP 1.0:** Windows Defender trên máy người dùng đã chặn gói `Hmoob-VoiceLab-1.0-source.zip` với tên `Trojan:Script/Ulthar.A!ml`. Chưa xác minh được nguyên nhân hoặc kết luận cảnh báo nhầm. Không khôi phục/cho phép tệp bị chặn hoặc tắt bảo vệ để chạy. Xem [kết quả điều tra](hmoob-voicelab/SECURITY-REVIEW.md).
 
 Mã nguồn độc lập tại [hmoob-voicelab](hmoob-voicelab/README.md). Nhập tối đa **1.000.000 ký tự**, hàng đợi có thể dừng/tiếp tục, đầu ra thành nhiều chương WAV và ZIP. Windows dùng Python 3.12 64-bit, chạy `start.bat`; cài bộ tạo giọng bằng `install_voice.bat`.
 

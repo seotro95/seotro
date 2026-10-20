@@ -1,5 +1,7 @@
 # Hmoob VoiceLab 1.0
 
+**Cảnh báo phát hành:** gói ZIP 1.0 đã bị Windows Defender trên máy người dùng chặn với tên `Trojan:Script/Ulthar.A!ml`. Tạm ngừng cung cấp gói này; chưa có kết luận cảnh báo nhầm hoặc an toàn. Không khôi phục/cho phép tệp bị chặn hoặc tắt bảo vệ. Xem [SECURITY-REVIEW.md](SECURITY-REVIEW.md).
+
 Tool mới, viết độc lập cho quy trình đọc Hmong Trắng cục bộ, không cần API key. Nhận tối đa **1.000.000 ký tự Unicode** qua trình soạn thảo hoặc TXT UTF-8 tối đa 4 MB.
 
 **Trạng thái hiện tại:** giao diện, hàng đợi, chia đoạn, lưu/tiếp tục và xuất WAV/ZIP đã được kiểm thử. F5-TTS/PyTorch đã cài và import được trên máy cloud. **Chưa có bản đọc Hmong thực tế được kiểm chứng**, vì proxy của máy cloud từ chối tải mô hình Hugging Face (CONNECT 403). Chưa đo được tốc độ tạo giọng, chất lượng Hmong Trắng hoặc độ giống mẫu. Không coi tốc độ chia văn bản là tốc độ tạo voice.
