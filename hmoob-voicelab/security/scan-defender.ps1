@@ -218,6 +218,11 @@ The original ZIP is not uploaded as an artifact. No application code or installe
 This result does not authorize restoring/running the withdrawn package or establish a false positive.
 "@
     if ($env:GITHUB_STEP_SUMMARY) { $summary | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY }
+    if ($report.outcome -ne 'no-detection-on-this-runner') {
+        $detail = if ($report.error) { [string]$report.error } else { 'Threat detections or insufficient scan-completion evidence; inspect report.json.' }
+        $detail = $detail.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+        Write-Output "::error title=Defender investigation - $($report.outcome)::$detail"
+    }
 }
 
 if ($report.outcome -eq 'detection-reported') { exit 2 }
