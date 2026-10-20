@@ -1,0 +1,34 @@
+Tue Oct 20 08:16:11 2026 -> --------------------------------------
+Tue Oct 20 08:16:11 2026 -> ClamAV update process started at Tue Oct 20 08:16:11 2026
+Tue Oct 20 08:16:11 2026 -> WARNING: Can't query current.cvd.clamav.net
+Tue Oct 20 08:16:11 2026 -> WARNING: Invalid DNS reply. Falling back to HTTP mode.
+Tue Oct 20 08:16:11 2026 -> Trying to retrieve CVD header from https://database.clamav.net/daily.cvd
+Tue Oct 20 08:16:11 2026 -> WARNING: remote_cvdhead: Download failed (56) Tue Oct 20 08:16:11 2026 -> WARNING:  Message: Failure when receiving data from the peer
+Tue Oct 20 08:16:11 2026 -> WARNING: Failed to get daily database version information from server: https://database.clamav.net
+Tue Oct 20 08:16:11 2026 -> ERROR: check_for_new_database_version: Failed to find daily database using server https://database.clamav.net.
+Tue Oct 20 08:16:11 2026 -> Trying again in 5 secs...
+Tue Oct 20 08:16:16 2026 -> Trying to retrieve CVD header from https://database.clamav.net/daily.cvd
+Tue Oct 20 08:16:16 2026 -> ERROR: remote_cvdhead: Download failed (56) Tue Oct 20 08:16:16 2026 -> ERROR:  Message: Failure when receiving data from the peer
+Tue Oct 20 08:16:16 2026 -> WARNING: Failed to get daily database version information from server: https://database.clamav.net
+Tue Oct 20 08:16:16 2026 -> ERROR: check_for_new_database_version: Failed to find daily database using server https://database.clamav.net.
+Tue Oct 20 08:16:16 2026 -> Giving up on https://database.clamav.net...
+Tue Oct 20 08:16:16 2026 -> ERROR: Update failed for database: daily
+Tue Oct 20 08:16:16 2026 -> ERROR: Database update process failed: HTTP GET failed
+Tue Oct 20 08:16:16 2026 -> ERROR: Update failed.
+Tue Oct 20 08:18:02 2026 -> --------------------------------------
+Tue Oct 20 08:18:02 2026 -> ClamAV update process started at Tue Oct 20 08:18:02 2026
+Tue Oct 20 08:18:02 2026 -> WARNING: Can't query current.cvd.clamav.net
+Tue Oct 20 08:18:02 2026 -> WARNING: Invalid DNS reply. Falling back to HTTP mode.
+Tue Oct 20 08:18:02 2026 -> Trying to retrieve CVD header from https://database.clamav.net/daily.cvd
+Tue Oct 20 08:18:02 2026 -> WARNING: remote_cvdhead: Download failed (56) Tue Oct 20 08:18:02 2026 -> WARNING:  Message: Failure when receiving data from the peer
+Tue Oct 20 08:18:02 2026 -> WARNING: Failed to get daily database version information from server: https://database.clamav.net
+Tue Oct 20 08:18:02 2026 -> ERROR: check_for_new_database_version: Failed to find daily database using server https://database.clamav.net.
+Tue Oct 20 08:18:02 2026 -> Trying again in 5 secs...
+Tue Oct 20 08:18:07 2026 -> Trying to retrieve CVD header from https://database.clamav.net/daily.cvd
+Tue Oct 20 08:18:07 2026 -> ERROR: remote_cvdhead: Download failed (56) Tue Oct 20 08:18:07 2026 -> ERROR:  Message: Failure when receiving data from the peer
+Tue Oct 20 08:18:07 2026 -> WARNING: Failed to get daily database version information from server: https://database.clamav.net
+Tue Oct 20 08:18:07 2026 -> ERROR: check_for_new_database_version: Failed to find daily database using server https://database.clamav.net.
+Tue Oct 20 08:18:07 2026 -> Giving up on https://database.clamav.net...
+Tue Oct 20 08:18:07 2026 -> ERROR: Update failed for database: daily
+Tue Oct 20 08:18:07 2026 -> ERROR: Database update process failed: HTTP GET failed
+Tue Oct 20 08:18:07 2026 -> ERROR: Update failed.

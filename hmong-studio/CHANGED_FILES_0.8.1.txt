@@ -1,0 +1,26 @@
+HMONG VOICE STUDIO 0.8.1
+Compared with source commit 8f4b6ad (0.8.0).
+Historical backups remain in repository, outside this ZIP.
+
+hmong-studio/BAT-DAU.txt
+hmong-studio/CHANGED_FILES_0.8.1.txt
+hmong-studio/FILE_SHA256SUMS.txt
+hmong-studio/KIEM-TRA-GPU.bat
+hmong-studio/README.md
+hmong-studio/SECURITY_SCAN_REPORT.md
+hmong-studio/app.py
+hmong-studio/gpu_info.py
+hmong-studio/prepare_clone_model.py
+hmong-studio/security-scan/ANTIVIRUS_STATUS.md
+hmong-studio/security-scan/baseline-scan-attempt.json
+hmong-studio/security-scan/baseline-scan-attempt.log
+hmong-studio/security-scan/baseline-static-archive-review.json
+hmong-studio/security-scan/freshclam.log
+hmong-studio/security-scan/official-database-network.json
+hmong-studio/security-scan/package-provenance.txt
+hmong-studio/security-scan/regression-tests.txt
+hmong-studio/security-scan/scanner-packages.json
+hmong-studio/setup_env.bat
+hmong-studio/static/index.html
+hmong-studio/tests/test_gpu_info.py
+hmong-studio/tests/test_prepare_clone_model.py

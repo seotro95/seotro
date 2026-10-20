@@ -1,6 +1,7 @@
 import hashlib
 import io
 import json
+from email.message import Message
 import pytest
 
 import prepare_clone_model as model
@@ -27,7 +28,70 @@ class Response(io.BytesIO):
 def block_network(monkeypatch):
     def unexpected(*args, **kwargs):
         pytest.fail('A verified model must not be requested from the network')
-    monkeypatch.setattr(model.urllib.request, 'urlopen', unexpected)
+    monkeypatch.setattr(model, '_open', unexpected)
+
+
+def redirect_transport(monkeypatch, destination):
+    """Exercise urllib redirects with an in-memory HTTPS transport only."""
+    requests = []
+    original_build_opener = model.urllib.request.build_opener
+
+    class Transport(model.urllib.request.HTTPSHandler, model.urllib.request.HTTPHandler):
+        def https_open(self, request):
+            requests.append(request)
+            headers = Message()
+            if len(requests) == 1:
+                headers['Location'] = destination
+                status, message, data = 302, 'Found', b'redirect response'
+            else:
+                status, message, data = 200, 'OK', b'model bytes'
+            response = model.urllib.response.addinfourl(
+                io.BytesIO(data), headers, request.full_url, status)
+            response.msg = message
+            return response
+
+        def http_open(self, request):
+            pytest.fail('An HTTPS model download must never make an HTTP request')
+
+    monkeypatch.setattr(model.urllib.request, 'build_opener',
+                        lambda *handlers: original_build_opener(*handlers, Transport()))
+    return requests
+
+
+@pytest.mark.parametrize('url', [
+    'http://huggingface.co/model', 'ftp://example.com/model',
+    'file:///tmp/model', 'data:application/octet-stream,model',
+])
+def test_initial_download_requires_https_before_opening_transport(monkeypatch, url):
+    def unexpected(*args, **kwargs):
+        pytest.fail('A non-HTTPS model URL must be rejected before opening transport')
+    monkeypatch.setattr(model.urllib.request, 'build_opener', unexpected)
+    with pytest.raises(ValueError, match='HTTPS'):
+        model._open(model.urllib.request.Request(url))
+
+
+@pytest.mark.parametrize('destination', [
+    'http://cdn.example.com/model', 'ftp://cdn.example.com/model',
+    'file:///tmp/model', 'data:application/octet-stream,model',
+    'javascript:alert(1)',
+])
+def test_redirect_rejects_non_https_destination_before_request(monkeypatch, destination):
+    requests = redirect_transport(monkeypatch, destination)
+    original = 'https://huggingface.co/model'
+    with pytest.raises((RuntimeError, model.urllib.error.HTTPError)):
+        model._open(model.urllib.request.Request(original))
+    assert [request.full_url for request in requests] == [original]
+
+
+def test_https_redirect_is_followed_and_preserves_resume_header(monkeypatch):
+    destination = 'https://cdn.example.com/model?signature=pinned-download'
+    requests = redirect_transport(monkeypatch, destination)
+    original = 'https://huggingface.co/model'
+    request = model.urllib.request.Request(original, headers={'Range': 'bytes=5-'})
+    with model._open(request) as response:
+        assert response.read() == b'model bytes'
+    assert [request.full_url for request in requests] == [original, destination]
+    assert all(request.get_header('Range') == 'bytes=5-' for request in requests)
 
 
 @pytest.mark.parametrize('lfs', [True, False], ids=['lfs-sha256', 'git-blob-sha1'])
@@ -85,7 +149,7 @@ def test_corrupt_target_is_replaced_only_after_verified_download(tmp_path, monke
         assert target.read_bytes() == b'X' * len(data)
         return Response(data)
 
-    monkeypatch.setattr(model.urllib.request, 'urlopen', serve)
+    monkeypatch.setattr(model, '_open', serve)
     model.download(tmp_path, entry)
     assert len(requests) == 1
     assert target.read_bytes() == data
@@ -103,7 +167,7 @@ def test_complete_corrupt_partial_is_discarded_before_fresh_download(tmp_path, m
         assert not partial.exists()
         return Response(data)
 
-    monkeypatch.setattr(model.urllib.request, 'urlopen', serve)
+    monkeypatch.setattr(model, '_open', serve)
     model.download(tmp_path, entry)
     assert (tmp_path / 'model.bin').read_bytes() == data
     assert not partial.exists()
@@ -132,7 +196,7 @@ def test_interrupted_transfer_resumes_exact_partial_using_range(tmp_path, monkey
         assert partial.read_bytes() == data[:5]
         return Response(data[5:], 206, f'bytes 5-{len(data) - 1}/{len(data)}')
 
-    monkeypatch.setattr(model.urllib.request, 'urlopen', serve)
+    monkeypatch.setattr(model, '_open', serve)
     with pytest.raises(OSError, match='disconnect'):
         model.download(tmp_path, entry)
     assert partial.read_bytes() == data[:5]
@@ -153,7 +217,7 @@ def test_server_ignoring_range_restarts_instead_of_appending(tmp_path, monkeypat
         assert request.get_header('Range') == 'bytes=4-'
         return Response(data, 200)
 
-    monkeypatch.setattr(model.urllib.request, 'urlopen', serve)
+    monkeypatch.setattr(model, '_open', serve)
     model.download(tmp_path, entry)
     assert (tmp_path / 'model.bin').read_bytes() == data
     assert not partial.exists()
@@ -171,7 +235,7 @@ def test_wrong_range_does_not_modify_existing_partial(tmp_path, monkeypatch, con
         assert request.get_header('Range') == 'bytes=5-'
         return Response(b'wrong response', 206, content_range)
 
-    monkeypatch.setattr(model.urllib.request, 'urlopen', serve)
+    monkeypatch.setattr(model, '_open', serve)
     with pytest.raises(RuntimeError, match='khoang du lieu'):
         model.download(tmp_path, entry)
     assert partial.read_bytes() == original
@@ -185,7 +249,7 @@ def test_checksum_failure_keeps_target_and_never_promotes_partial(tmp_path, monk
     original = b'old target must survive'
     target.write_bytes(original)
     bad_download = b'X' * len(data)
-    monkeypatch.setattr(model.urllib.request, 'urlopen', lambda *args, **kwargs: Response(bad_download))
+    monkeypatch.setattr(model, '_open', lambda *args, **kwargs: Response(bad_download))
     with pytest.raises(RuntimeError, match='checksum'):
         model.download(tmp_path, entry)
     assert target.read_bytes() == original
@@ -239,7 +303,7 @@ def test_prepare_writes_ready_marker_only_for_verified_snapshot(tmp_path, monkey
     def serve(request, timeout):
         return Response(first if '/first.bin?' in request.full_url else second)
 
-    monkeypatch.setattr(model.urllib.request, 'urlopen', serve)
+    monkeypatch.setattr(model, '_open', serve)
     root = tmp_path / 'models'
     assert model.prepare(root) == root.resolve()
     marker = root / '.hmong-model-ready.json'
@@ -251,7 +315,7 @@ def test_prepare_writes_ready_marker_only_for_verified_snapshot(tmp_path, monkey
     assert not marker.with_suffix('.tmp').exists()
 
     (root / 'first.bin').write_bytes(b'bad')
-    monkeypatch.setattr(model.urllib.request, 'urlopen', lambda *args, **kwargs: Response(b'broken'))
+    monkeypatch.setattr(model, '_open', lambda *args, **kwargs: Response(b'broken'))
     with pytest.raises(RuntimeError):
         model.prepare(root)
     assert not marker.exists()
@@ -294,7 +358,7 @@ def test_empty_artifact_with_wrong_checksum_is_never_promoted(tmp_path, monkeypa
     target = tmp_path / '__init__.py'
     original = b'previous file must survive a malformed manifest'
     target.write_bytes(original)
-    monkeypatch.setattr(model.urllib.request, 'urlopen', lambda *args, **kwargs: Response(b''))
+    monkeypatch.setattr(model, '_open', lambda *args, **kwargs: Response(b''))
 
     with pytest.raises(RuntimeError, match='checksum'):
         model.download(tmp_path, entry)
@@ -310,7 +374,7 @@ def test_corrupt_partial_for_empty_file_is_repaired(tmp_path, monkeypatch):
     target.write_bytes(b'old incorrect file')
     partial = target.with_name(target.name + '.part')
     partial.write_bytes(b'incomplete incorrect data')
-    monkeypatch.setattr(model.urllib.request, 'urlopen', lambda *args, **kwargs: Response(b''))
+    monkeypatch.setattr(model, '_open', lambda *args, **kwargs: Response(b''))
 
     result = model.download(tmp_path, entry)
 
@@ -332,7 +396,7 @@ def test_prepare_ready_marker_includes_verified_empty_git_file(tmp_path, monkeyp
     def serve(request, timeout):
         return Response(b'model bytes' if '/weights.bin?' in request.full_url else b'')
 
-    monkeypatch.setattr(model.urllib.request, 'urlopen', serve)
+    monkeypatch.setattr(model, '_open', serve)
     root = tmp_path / 'models'
     model.prepare(root)
 

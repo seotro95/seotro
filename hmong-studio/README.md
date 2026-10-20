@@ -1,4 +1,4 @@
-# Hmong Voice Studio 0.8.0 — ULTRA FAST
+# Hmong Voice Studio 0.8.1 — ULTRA FAST
 
 Ứng dụng đọc Hmong Trắng bằng **đúng mô hình CosyVoice Hmong và hai mẫu nam/nữ hiện có**, chạy trên máy, không cần API trả phí. **Mục tiêu 60 phút voice trong 120 giây chưa được xác nhận đạt.** ULTRA FAST giữ cấu hình suy luận Chuẩn; không giảm bước sinh phổ, không tự dùng INT8, đổi giọng hoặc đọc nhanh hơn để làm đẹp số đo.
 
@@ -9,7 +9,13 @@
 3. Bấm **CHAY-STUDIO.bat**. Tự thử NVIDIA/CUDA khi phát hiện card, kiểm tra phép tính CUDA thật trước khi chọn môi trường GPU. Nếu lần cài tự động thất bại, báo rõ và dùng CPU hợp lệ; **CAI-NVIDIA.bat** cho phép thử lại chủ động. Không thay driver.
 4. Trình duyệt mở sau khi máy chủ sẵn sàng. Mô hình được nạp trước ở nền; lượt tạo đầu chờ cùng worker nếu chưa nạp xong. Giữ cửa sổ lệnh mở, Ctrl+C để đóng. Các lần sau dùng lại thư viện/mô hình đã hợp lệ.
 
-Đây là app cục bộ mở trong trình duyệt, không phải EXE độc lập chứa sẵn Python/trọng số. ZIP gồm mã nguồn, hai mẫu, các bộ cài và bản sao nguồn 0.7.0 trong `backups`. **Mô hình khoảng 5,4 GB không nằm trong ZIP**; chỉ tải tệp thiếu/sai ở lần cài có Internet. Sau khi cài xong có thể tạo giọng cục bộ không cần Internet. Nên có RAM 16 GB trở lên, khoảng 15 GB đĩa cho mô hình/thư viện và thêm chỗ cho WAV/cache. Cài thêm môi trường CUDA cần thêm đĩa.
+Đây là app cục bộ mở trong trình duyệt, không phải EXE độc lập chứa sẵn Python/trọng số. ZIP gồm mã nguồn hiện tại, hai mẫu, các bộ cài, kiểm thử và báo cáo. Bản sao nguồn lịch sử được giữ riêng trong repository để tránh lồng ZIP cũ trong bản phát hành mới. **Mô hình khoảng 5,4 GB không nằm trong ZIP**; chỉ tải tệp thiếu/sai ở lần cài có Internet. Sau khi cài xong có thể tạo giọng cục bộ không cần Internet. Nên có RAM 16 GB trở lên, khoảng 15 GB đĩa cho mô hình/thư viện và thêm chỗ cho WAV/cache. Cài thêm môi trường CUDA cần thêm đĩa.
+
+## Cảnh báo khi tải và tình trạng kiểm tra 0.8.1
+
+Chưa xác định tên mối đe dọa hoặc tệp con bị phần mềm bảo vệ chặn, nên chưa thể kết luận nguyên nhân hay xác nhận cảnh báo đã hết. Đã kiểm tra mã/gói, chuyển kiểm tra GPU sang Python chỉ đọc và buộc trình tải mô hình giữ HTTPS cả khi chuyển hướng; đây là cải thiện minh bạch mã/cách tải, không phải bằng chứng đã xử lý đúng cảnh báo.
+
+**Chưa quét antivirus thành công:** ClamAV 1.4.3 chạy được nhưng tải cơ sở dữ liệu chính thức bị proxy chặn (403); lần thử quét báo lỗi, không quét tệp nào. Không coi “0 infected” trong log lỗi là kết quả sạch. Xem `SECURITY_SCAN_REPORT.md` và `security-scan/` để kiểm tra bằng chứng/phạm vi. Chưa kiểm chứng bằng Windows Defender trên Windows thật. Nếu cảnh báo còn xuất hiện, giữ bảo vệ bật và ghi lại tên mối đe dọa/tệp trong Windows Security → Virus & threat protection → Protection history để xác định đúng phần bị chặn.
 
 ## Tạo voice và ULTRA FAST
 
@@ -74,4 +80,4 @@ Mô hình: https://huggingface.co/Xuajpaj2026/hmong-tts-weights , revision `5663
 
 Môi trường kiểm thử là Linux CPU 4 luồng, giới hạn RAM 32 GiB, không CUDA. Kiểm thử phần mềm/sóng tổng hợp là kiểm thử chức năng, **không phải audio chứng minh tốc độ**. Các WAV benchmark được ghi nhãn thật riêng. Chưa kiểm chứng Windows/GTX 1060 thật hoặc tự động đánh giá phát âm/thanh điệu bằng người bản ngữ.
 
-Bản sao nguồn gốc 0.7.0 tại `backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip`, commit `e4c9e2a`. Không chứa `.data`, trọng số tải về, mẫu cá nhân hoặc bí mật. Danh sách tệp thay đổi có trong PERFORMANCE_REPORT.md.
+Bản sao nguồn gốc 0.7.0, commit `e4c9e2a`, được giữ [riêng trong repository](https://github.com/seotro95/seotro/blob/hmong-studio-0.3-download/hmong-studio/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip). Không chứa `.data`, trọng số tải về, mẫu cá nhân hoặc bí mật; không lồng bản sao này vào ZIP 0.8.1. `PERFORMANCE_REPORT.md` giữ kết quả đo của 0.8.0; danh sách thay đổi 0.8.1 ở `CHANGED_FILES_0.8.1.txt`. `FILE_SHA256SUMS.txt` liệt kê hash các tệp đóng gói (trừ chính danh sách này); hash kiểm tra toàn vẹn, không thay thế quét virus.

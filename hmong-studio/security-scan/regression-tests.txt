@@ -1,0 +1,8 @@
+Captured result: 2026-10-20T08:22:10.027106+00:00
+Command: /workspace/venvs/hmong-cosy/bin/python -m pytest -q
+Working directory: /workspace/seotro/hmong-studio
+Exit code: 0
+363 passed, 1 skipped, 1 warning in 27.22s
+Skipped: native CUDA test (GPU unavailable).
+Warning: existing Starlette/httpx deprecation.
+This is a software regression test, not an antivirus or TTS performance result.

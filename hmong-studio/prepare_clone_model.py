@@ -15,6 +15,19 @@ REPOSITORY = 'Xuajpaj2026/hmong-tts-weights'
 REVISION = '5663e0df2589c2ca2403cd327a52702c3ff96e8f'
 
 
+class _HTTPSRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        if urllib.parse.urlsplit(newurl).scheme != 'https':
+            raise RuntimeError('Tu choi chuyen huong tai mo hinh khong dung HTTPS.')
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+def _open(request, *, timeout=90):
+    if urllib.parse.urlsplit(request.full_url).scheme != 'https':
+        raise ValueError('Model downloads require HTTPS.')
+    return urllib.request.build_opener(_HTTPSRedirect()).open(request, timeout=timeout)
+
+
 def verified(path, entry):
     if not path.is_file() or path.stat().st_size != entry['size']:
         return None
@@ -67,7 +80,7 @@ def download(root, entry):
     url = ('https://huggingface.co/' + REPOSITORY + '/resolve/' + REVISION + '/'
            + urllib.parse.quote(str(name), safe='/') + '?download=true')
     headers = {'Range': f'bytes={offset}-'} if offset else {}
-    with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=90) as response:
+    with _open(urllib.request.Request(url, headers=headers), timeout=90) as response:
         if offset and response.status == 206:
             if not response.headers.get('Content-Range', '').startswith(f'bytes {offset}-'):
                 raise RuntimeError('May chu tra sai khoang du lieu: ' + str(name))

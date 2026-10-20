@@ -1,0 +1,23 @@
+{
+  "checked_at_utc": "2026-10-20T08:18:22.081174+00:00",
+  "scanner": "ClamAV",
+  "version": "ClamAV 1.4.3",
+  "artifact": "/workspace/seotro/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+  "sha256": "6344d78c6696490fe0b831731bcc5f253f8d4322ac844f3041897ab5f723c3cc",
+  "bytes": 2940062,
+  "signature_database_available": false,
+  "signature_version": null,
+  "signature_date": null,
+  "command": [
+    "/workspace/security-scan/root/usr/bin/clamscan",
+    "--database=/workspace/security-scan/db",
+    "--infected",
+    "--recursive",
+    "/workspace/seotro/HMONG_VOICE_STUDIO_ULTRA_FAST.zip"
+  ],
+  "exit_code": 2,
+  "stdout": "\n----------- SCAN SUMMARY -----------\nKnown viruses: 0\nEngine version: 1.4.3\nScanned directories: 0\nScanned files: 0\nInfected files: 0\nData scanned: 0.00 MB\nData read: 0.00 MB (ratio 0.00:1)\nTime: 0.003 sec (0 m 0 s)\nStart Date: 2026:10:20 08:18:22\nEnd Date:   2026:10:20 08:18:22\n",
+  "stderr": "LibClamAV Error: cli_loaddbdir: No supported database files found in /workspace/security-scan/db\nERROR: Can't open file or directory\n",
+  "result": "NOT_SCANNED_DATABASE_UNAVAILABLE",
+  "limitation": "Official ClamAV database HTTPS downloads are blocked by network proxy CONNECT 403 Forbidden. No clean verdict can be given. This is not Microsoft Defender."
+}

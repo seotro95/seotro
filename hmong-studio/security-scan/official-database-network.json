@@ -1,0 +1,23 @@
+[
+  {
+    "url": "https://database.clamav.net/daily.cvd",
+    "method": "HEAD",
+    "time_utc": "2026-10-20T08:19:06.130188+00:00",
+    "exception": "URLError",
+    "message": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://database.clamav.net/main.cvd",
+    "method": "HEAD",
+    "time_utc": "2026-10-20T08:19:06.147500+00:00",
+    "exception": "URLError",
+    "message": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://database.clamav.net/bytecode.cvd",
+    "method": "HEAD",
+    "time_utc": "2026-10-20T08:19:06.151671+00:00",
+    "exception": "URLError",
+    "message": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  }
+]

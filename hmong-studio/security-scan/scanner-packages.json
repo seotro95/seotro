@@ -1,0 +1,22 @@
+[
+  {
+    "name": "clamav-freshclam_1.4.3+dfsg-1_amd64.deb",
+    "bytes": 160528,
+    "sha256": "1693185fcfc3d87ccd72ee542b83c12162759cdd8b83492a0ea6946427205863"
+  },
+  {
+    "name": "clamav_1.4.3+dfsg-1_amd64.deb",
+    "bytes": 6940524,
+    "sha256": "b547efa63e2fe99a98ee07dcbd51e99345230836704a3c9ae6d38061e1f16fd9"
+  },
+  {
+    "name": "libclamav12_1.4.3+dfsg-1_amd64.deb",
+    "bytes": 7795952,
+    "sha256": "1f5ef9b53f377e64b75810aec724d6257832ee22dc7508f86f31f7ea96c84efe"
+  },
+  {
+    "name": "libmspack0t64_0.11-1.1+b1_amd64.deb",
+    "bytes": 53004,
+    "sha256": "b6039006e2758fa91a0e02ea1cbeded53ae0a5955298e1b0dddbe5a91784b510"
+  }
+]

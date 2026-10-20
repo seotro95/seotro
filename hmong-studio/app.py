@@ -53,7 +53,7 @@ async def lifespan(app):
             await asyncio.gather(preload, return_exceptions=True)
         await voice_jobs.shutdown()
 
-app = FastAPI(title='Hmong Studio', version='0.8.0', lifespan=lifespan)
+app = FastAPI(title='Hmong Studio', version='0.8.1', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 

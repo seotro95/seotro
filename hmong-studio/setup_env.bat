@@ -41,6 +41,7 @@ exit /b 1
 rem A versioned clone runtime can also bootstrap the launcher without PATH setup.
 rem This loop is a fallback; py/python and legacy .venv are preferred above.
 :selected
+if "%~1"=="--gpu-info" goto gpu_info
 if "%~1"=="--clone-install" goto clone_install
 if "%~1"=="--clone-start" goto clone_start
 if "%~1"=="--clone-launch" goto clone_launch
@@ -48,6 +49,10 @@ if "%~1"=="--clone-launch-auto" goto clone_launch_auto
 if "%~1"=="--clone-benchmark" goto clone_benchmark
 if "%~1"=="--clone-launch-gpu" goto clone_launch_gpu
 %HMONG_SETUP_PYTHON% -X utf8 setup_venv.py
+exit /b %errorlevel%
+
+:gpu_info
+%HMONG_SETUP_PYTHON% -X utf8 gpu_info.py
 exit /b %errorlevel%
 
 :clone_install

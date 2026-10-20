@@ -1,0 +1,31 @@
+{
+  "checked_at_utc": "2026-10-20T08:22:10.027106+00:00",
+  "artifact": "HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+  "sha256": "6344d78c6696490fe0b831731bcc5f253f8d4322ac844f3041897ab5f723c3cc",
+  "kind": "static_archive_structure_review_not_antivirus",
+  "archives": [
+    {
+      "name": "HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+      "entry_count": 90,
+      "crc_failure": null,
+      "unsafe_paths": [],
+      "symlinks": [],
+      "encrypted": [],
+      "executable_headers": [],
+      "nested_zip_files": [
+        "Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip"
+      ]
+    },
+    {
+      "name": "HMONG_VOICE_STUDIO_ULTRA_FAST.zip!Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+      "entry_count": 74,
+      "crc_failure": null,
+      "unsafe_paths": [],
+      "symlinks": [],
+      "encrypted": [],
+      "executable_headers": [],
+      "nested_zip_files": []
+    }
+  ],
+  "limitation": "No antivirus signatures or behavioral analysis. Absence of these structural indicators does not prove safety."
+}

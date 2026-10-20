@@ -1,4 +1,4 @@
-HMONG VOICE STUDIO 0.8.0 - ULTRA FAST
+HMONG VOICE STUDIO 0.8.1 - ULTRA FAST
 MUC TIEU 2 PHUT TAO 1 GIO CHUA DUOC XAC NHAN DAT.
 
 1. Cai Python 3.12 64-bit neu chua co.
@@ -26,9 +26,16 @@ Tat ca: BENCHMARK-ULTRA.bat --all --max-seconds 86400
 CPU co the mat nhieu gio. Bao cao phan biet cold/warm/incomplete/unrun.
 Khong dung WAV gia, lap audio hay khoang lang de chung minh 30x.
 
-ZIP gom app, hai mau, ma nguon, kiem thu va backup nguon 0.7.0.
+ZIP gom app, hai mau, ma nguon, kiem thu va bao cao kiem tra.
+Backup nguon 0.7.0 giu rieng trong repository, khong long ZIP cu.
 Mo hinh ~5.4GB KHONG nam san trong ZIP; tu tai tep thieu lan dau.
 Dung lai mo hinh da dung, khong tai lai chi de cap nhat app.
 Khong can API key/dich vu tra phi/micro/ban chep mau de nhan ban cuc bo.
 Day la app mo trong trinh duyet; khong phai EXE chua san Python/model.
 Xem README.md va PERFORMANCE_REPORT.md de biet gioi han/kiem chung.
+
+CANH BAO TAI TEP: chua xac dinh ten moi de doa/tep bi chan.
+Chua quet antivirus thanh cong: ClamAV thieu du lieu nhan dien,
+may chu du lieu bi proxy chan (403). Khong xac nhan tep sach virus.
+Xem SECURITY_SCAN_REPORT.md va thu muc security-scan de biet chi tiet.
+Giu bao ve Windows bat; xem Protection history neu van bi canh bao.
