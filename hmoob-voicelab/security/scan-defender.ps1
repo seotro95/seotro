@@ -53,10 +53,12 @@ try {
     $report.defender_before = Read-DefenderStatus
     if (-not $report.defender_before.AMServiceEnabled -or
         -not $report.defender_before.AntivirusEnabled -or
-        -not $report.defender_before.RealTimeProtectionEnabled -or
         $report.defender_before.AMRunningMode -ne 'Normal') {
-        throw 'Defender is disabled, passive or not protecting this runner. No protection settings will be changed.'
+        $state = $report.defender_before | ConvertTo-Json -Compress
+        throw "The on-demand Defender engine is unavailable or passive. No protection settings will be changed. Status: $state"
     }
+    # Real-time protection may already be off on a hosted build runner. This
+    # does not disable an available on-demand engine; record it, never change it.
     $preference = Get-MpPreference -ErrorAction Stop
     $report.archive_scanning_enabled = -not $preference.DisableArchiveScanning
     if (-not $report.archive_scanning_enabled) {
@@ -66,7 +68,10 @@ try {
     # excluded. Conservatively stop on exclusions rather than overriding them.
     $exclusions = @($preference.ExclusionPath) + @($preference.ExclusionExtension) + @($preference.ExclusionProcess)
     if (@($exclusions | Where-Object { $_ }).Count -gt 0) {
-        throw 'This runner has Defender exclusions; scan coverage cannot be established without changing protection settings.'
+        $paths = @($preference.ExclusionPath) | ConvertTo-Json -Compress
+        $extensions = @($preference.ExclusionExtension) | ConvertTo-Json -Compress
+        $processes = @($preference.ExclusionProcess) | ConvertTo-Json -Compress
+        throw "This runner has Defender exclusions; coverage is indeterminate. Paths=$paths Extensions=$extensions Processes=$processes"
     }
     Update-MpSignature -ErrorAction Stop
     $report.defender_before = Read-DefenderStatus
@@ -195,7 +200,7 @@ try {
         $report.scan_completed_event -and -not $scanFailed -and
         $report.actual_sha256 -eq $expectedSha -and
         $report.defender_after.AMServiceEnabled -and $report.defender_after.AntivirusEnabled -and
-        $report.defender_after.RealTimeProtectionEnabled -and $report.defender_after.AMRunningMode -eq 'Normal') {
+        $report.defender_after.AMRunningMode -eq 'Normal') {
         $report.outcome = 'no-detection-on-this-runner'
     } else {
         $report.outcome = 'indeterminate'
