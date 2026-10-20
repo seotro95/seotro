@@ -1,0 +1,82 @@
+[
+  {
+    "artifact": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "sha256": "6344d78c6696490fe0b831731bcc5f253f8d4322ac844f3041897ab5f723c3cc",
+    "bytes": 2940062,
+    "zip_inventory": {
+      "members": 90,
+      "regular_files": 90,
+      "uncompressed_bytes": 3557814,
+      "encrypted_members": 0,
+      "largest_member_bytes": 1333875,
+      "nested_archive_members": [
+        "Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip"
+      ]
+    },
+    "scan_started_utc": "2026-10-20T08:40:23.678685+00:00",
+    "elapsed_seconds": 18.62949625100009,
+    "scanner": "ClamAV 1.4.3",
+    "command": [
+      "/workspace/security-scan/root/usr/bin/clamscan",
+      "--database=/workspace/security-scan/db",
+      "--official-db-only=yes",
+      "--scan-archive=yes",
+      "--archive-verbose",
+      "--allmatch=yes",
+      "--detect-pua=yes",
+      "--alert-encrypted=yes",
+      "--alert-exceeds-max=yes",
+      "--max-recursion=64",
+      "--max-files=100000",
+      "--max-filesize=128M",
+      "--max-scansize=512M",
+      "--max-scantime=0",
+      "--tempdir=/workspace/security-scan/tmp",
+      "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip"
+    ],
+    "exit_code": 0,
+    "stdout": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip: OK\n\n----------- SCAN SUMMARY -----------\nKnown viruses: 3642850\nEngine version: 1.4.3\nScanned directories: 0\nScanned files: 1\nInfected files: 0\nData scanned: 6.05 MB\nData read: 2.80 MB (ratio 2.16:1)\nTime: 18.622 sec (0 m 18 s)\nStart Date: 2026:10:20 08:40:23\nEnd Date:   2026:10:20 08:40:42\n",
+    "stderr": "",
+    "result": "NO_DETECTIONS",
+    "log": "/workspace/security-scan/HMONG_VOICE_STUDIO_ULTRA_FAST-clamav.log"
+  },
+  {
+    "artifact": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "sha256": "c2ccad88df5d51cc06457c3f7f49f64a20b55d011a73d0cd0cb4556fbc612aa8",
+    "bytes": 1636745,
+    "zip_inventory": {
+      "members": 102,
+      "regular_files": 102,
+      "uncompressed_bytes": 2267278,
+      "encrypted_members": 0,
+      "largest_member_bytes": 373078,
+      "nested_archive_members": []
+    },
+    "scan_started_utc": "2026-10-20T08:40:42.314975+00:00",
+    "elapsed_seconds": 14.086680406006053,
+    "scanner": "ClamAV 1.4.3",
+    "command": [
+      "/workspace/security-scan/root/usr/bin/clamscan",
+      "--database=/workspace/security-scan/db",
+      "--official-db-only=yes",
+      "--scan-archive=yes",
+      "--archive-verbose",
+      "--allmatch=yes",
+      "--detect-pua=yes",
+      "--alert-encrypted=yes",
+      "--alert-exceeds-max=yes",
+      "--max-recursion=64",
+      "--max-files=100000",
+      "--max-filesize=128M",
+      "--max-scansize=512M",
+      "--max-scantime=0",
+      "--tempdir=/workspace/security-scan/tmp",
+      "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip"
+    ],
+    "exit_code": 0,
+    "stdout": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip: OK\n\n----------- SCAN SUMMARY -----------\nKnown viruses: 3642850\nEngine version: 1.4.3\nScanned directories: 0\nScanned files: 1\nInfected files: 0\nData scanned: 3.06 MB\nData read: 1.56 MB (ratio 1.96:1)\nTime: 14.077 sec (0 m 14 s)\nStart Date: 2026:10:20 08:40:42\nEnd Date:   2026:10:20 08:40:56\n",
+    "stderr": "",
+    "result": "NO_DETECTIONS",
+    "log": "/workspace/security-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1-clamav.log"
+  }
+]

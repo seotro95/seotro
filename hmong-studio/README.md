@@ -1,5 +1,7 @@
 # Hmong Voice Studio 0.8.1 — ULTRA FAST
 
+**Tạm dừng phát hành ZIP:** người dùng đã cung cấp ảnh Defender phát hiện `Trojan:Script/Sabsik.FL.A!ml` với gói không có số phiên bản và xác nhận bản 0.8.1 cũng bị chặn. Cả hai ZIP đã được rút khỏi nhánh tải; chưa xác định nguyên nhân, chưa xác nhận báo nhầm hoặc gói an toàn. Xem [thông báo điều tra mới nhất](../HMONG_VOICE_STUDIO_SECURITY_NOTICE.md). Không khôi phục/cho phép tệp đang bị cách ly. Các hướng dẫn dưới đây mô tả chức năng và bản phát hành trước khi rút; không phải đề nghị bỏ qua cảnh báo. `FILE_SHA256SUMS.txt` giữ manifest của ZIP 0.8.1 đã rút, không phải manifest của mọi thay đổi nguồn sau đó.
+
 Ứng dụng đọc Hmong Trắng bằng **đúng mô hình CosyVoice Hmong và hai mẫu nam/nữ hiện có**, chạy trên máy, không cần API trả phí. **Mục tiêu 60 phút voice trong 120 giây chưa được xác nhận đạt.** ULTRA FAST giữ cấu hình suy luận Chuẩn; không giảm bước sinh phổ, không tự dùng INT8, đổi giọng hoặc đọc nhanh hơn để làm đẹp số đo.
 
 ## Cài và mở app
@@ -15,7 +17,7 @@
 
 Chưa xác định tên mối đe dọa hoặc tệp con bị phần mềm bảo vệ chặn, nên chưa thể kết luận nguyên nhân hay xác nhận cảnh báo đã hết. Đã kiểm tra mã/gói, chuyển kiểm tra GPU sang Python chỉ đọc và buộc trình tải mô hình giữ HTTPS cả khi chuyển hướng; đây là cải thiện minh bạch mã/cách tải, không phải bằng chứng đã xử lý đúng cảnh báo.
 
-**Chưa quét antivirus thành công:** ClamAV 1.4.3 chạy được nhưng tải cơ sở dữ liệu chính thức bị proxy chặn (403); lần thử quét báo lỗi, không quét tệp nào. Không coi “0 infected” trong log lỗi là kết quả sạch. Xem `SECURITY_SCAN_REPORT.md` và `security-scan/` để kiểm tra bằng chứng/phạm vi. Chưa kiểm chứng bằng Windows Defender trên Windows thật. Nếu cảnh báo còn xuất hiện, giữ bảo vệ bật và ghi lại tên mối đe dọa/tệp trong Windows Security → Virus & threat protection → Protection history để xác định đúng phần bị chặn.
+**Cập nhật quét sau khi rút ZIP:** ClamAV 1.4.3 đã dùng dữ liệu chính thức có chữ ký xác thực từ container Cisco Talos, quét hai ZIP và toàn bộ **260 tệp sau giải nén: 0 phát hiện, exit 0**. Snapshot daily 28157 tạo ngày 18/10/2026, chưa xác minh là mới nhất. Các lần thử cũ không có database đã thất bại; không coi “0 infected” của lần lỗi là kết quả sạch. Xem [thông báo hiện tại](../HMONG_VOICE_STUDIO_SECURITY_NOTICE.md) và `security-scan/2026-10-20/` để kiểm tra kết quả thực. **Chưa giải quyết được cảnh báo Defender**, chưa xác nhận báo nhầm; ZIP tiếp tục được giữ khỏi link tải.
 
 ## Tạo voice và ULTRA FAST
 

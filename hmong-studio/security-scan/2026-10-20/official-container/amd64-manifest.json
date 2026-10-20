@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.oci.image.manifest.v1+json",
+  "config": {
+    "mediaType": "application/vnd.oci.image.config.v1+json",
+    "digest": "sha256:6c33fb72758a6b4470cc86e2119c2bc4e5765896ecd26fd489abac04c117c519",
+    "size": 3744
+  },
+  "layers": [
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:e2de96513ba9eb53b431787ec8a65cdde380ac4772a3e4c4b714dcfde2a102b5",
+      "size": 3849738
+    },
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:b0ccd7c2b8bd1f7b3d7c0c3d303f17e68c8569e765f69184208aeba6bdc6a494",
+      "size": 7387228
+    },
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:afe362e07e779eb4a81f52301dad4bd0fe71c933fee6af5b545489eedbb6f03f",
+      "size": 30984102
+    },
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:80d3f0473a3919c330adeccc48a03132164c03fca9cbe2bd4e98dbff09c36fed",
+      "size": 342
+    },
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:0ebce1b8a29c47ad1e7b449999166c6bfc0b8f75ece1d204e2fe4e249fab7f1c",
+      "size": 1562
+    },
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:48c4c2f1cb766ee3a25c5919b4711ad28b79c1072b2935d816c65310408f04c3",
+      "size": 1226
+    },
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:8e3b9766e584d08b33198c57beb76900221b55e3268db143d6a6fcb0c2e01eb8",
+      "size": 112825214
+    }
+  ],
+  "annotations": {
+    "org.cisco.clamav.image.build-number": "118",
+    "org.opencontainers.image.base.name": "alpine:latest",
+    "org.opencontainers.image.created": "2026-10-19T01:24:55+00:00",
+    "org.opencontainers.image.ref.name": "rel/1.4",
+    "org.opencontainers.image.source": "https://github.com/Cisco-Talos/clamav.git",
+    "org.opencontainers.image.url": "https://github.com/Cisco-Talos/clamav.git",
+    "org.opencontainers.image.version": "1.4.6"
+  }
+}

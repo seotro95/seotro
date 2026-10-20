@@ -1,0 +1,2082 @@
+[
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/.gitignore",
+    "sha256": "46853483fbef332453e1296ec11ebc9afa3226246f4b932a70302236128c40f9",
+    "bytes": 80,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/.gitignore",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/BAT-DAU.txt",
+    "sha256": "c1b7d0b61845b577a782c61efeaed976df78f9164532bfed57ed7aed061b9935",
+    "bytes": 1920,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/BAT-DAU.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/BENCHMARK-ULTRA.bat",
+    "sha256": "6043caa36c2fb2d82827b9fbe44ecf643f6418d22c796d203fc506d02a1147dd",
+    "bytes": 1451,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/BENCHMARK-ULTRA.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/CAI-NVIDIA.bat",
+    "sha256": "9850cb4d0ebd1c5001d4e7051e1c95371d384fb3a00a94b90d7b3139fda40a87",
+    "bytes": 801,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/CAI-NVIDIA.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/CHANGED_FILES.txt",
+    "sha256": "4edeb06957cd6d2c7dfe3ce6083670bd52518f47a5abf7ddb9f483a7b42f7f1d",
+    "bytes": 1643,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/CHANGED_FILES.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/CHAY-STUDIO.bat",
+    "sha256": "9717c00603f775636c2880bbd8a0d1430b693efe36114d9d250e888773c68bc7",
+    "bytes": 693,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/CHAY-STUDIO.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/DO-TOC-DO.bat",
+    "sha256": "d9f61f065cf43bf910b201b2a86565532e2cba4e00ab974f7334987818431f5d",
+    "bytes": 630,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/DO-TOC-DO.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/KIEM-TRA-GPU.bat",
+    "sha256": "9184237fe1b2de93be63825f2f88f3143287dedc56380ab6ab2dc1859be02a20",
+    "bytes": 846,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/KIEM-TRA-GPU.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/LOCAL-CLONING-STATUS.md",
+    "sha256": "3847874c06f0114d18eb7f252dcd88520fa0d24157d261f9083d8b58028dca23",
+    "bytes": 14615,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/LOCAL-CLONING-STATUS.md",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/PERFORMANCE_REPORT.md",
+    "sha256": "d08154f7e5ba954b4a1964911bd69e66e0c9d778a7dff79c94ee7a0eda2bad35",
+    "bytes": 12897,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/PERFORMANCE_REPORT.md",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/README.md",
+    "sha256": "9c7a239ddffd0cd4b7e56213757ab3a5a4e02b0b3fc0c326ffc965ad54df2600",
+    "bytes": 10439,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/README.md",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/TOC-DO.md",
+    "sha256": "7051184be9943865a965b6d0b904a22111c543b08ef8d6676d660704f5956406",
+    "bytes": 7527,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/TOC-DO.md",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/app.py",
+    "sha256": "2ccbd89ada23251b1a922061ae76567008d22095270b2d3869c94bbbd5847ff0",
+    "bytes": 21152,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/app.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/audio_cache.py",
+    "sha256": "4845ecc572f7c2e2bac8561268201fb31aa9b93fcb97155683ca513050c3e866",
+    "bytes": 8148,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/audio_cache.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/audio_clean.py",
+    "sha256": "ca4d3ac78b9f8fc1342232c6bfc80eb06c9b01bca272f53e26515f5c6fc89a64",
+    "bytes": 10090,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/audio_clean.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/audio_export.py",
+    "sha256": "244b727b31f4bcd2ac4de25233f54c3b55d297252512b83ca509f7b307f1052b",
+    "bytes": 10611,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/audio_export.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "sha256": "9c903c8763628d4c9658f83e955bb80ba9848d349c3cbb4a7a5abd1492a1adec",
+    "bytes": 1333875,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip.sha256",
+    "sha256": "2449d02a960afa44f196754be1a2389050e8c34c9da1c04a063e98f86533fc6c",
+    "bytes": 104,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip.sha256",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/benchmark-results/duration-targets.json",
+    "sha256": "4125bdca090392f1df5455caad048fdf0f4643fc993aeee752f4634244af0963",
+    "bytes": 3227,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/duration-targets.json",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/benchmark-results/one-minute-attempt.json",
+    "sha256": "38864100fa5a95e13a73167b72eb929b33babcaa81a45591f55a61e5850292fb",
+    "bytes": 2380,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/one-minute-attempt.json",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/benchmark-results/short-sample/SHA256SUMS.txt",
+    "sha256": "d07c34182fda8582d6639034a00826f23041115503e44cff389621d69b2a1720",
+    "bytes": 241,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/short-sample/SHA256SUMS.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/benchmark-results/short-sample/standard.wav",
+    "sha256": "49f40eacdae0bfcc86c372672cfccc6716fad571a3fe76eaf51954fa8f256a17",
+    "bytes": 101358,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/short-sample/standard.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/benchmark-results/short-sample/ultra_cold.wav",
+    "sha256": "49f40eacdae0bfcc86c372672cfccc6716fad571a3fe76eaf51954fa8f256a17",
+    "bytes": 101358,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/short-sample/ultra_cold.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/benchmark-results/short-sample/ultra_warm.wav",
+    "sha256": "49f40eacdae0bfcc86c372672cfccc6716fad571a3fe76eaf51954fa8f256a17",
+    "bytes": 101358,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/short-sample/ultra_warm.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/benchmark-results/short-sample-report.json",
+    "sha256": "9aa068132854537ae042c7cf5aa48576ca6f23c1893d8b8147f2311fc1f4ad53",
+    "bytes": 3863,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/short-sample-report.json",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/benchmark-results/short-script.txt",
+    "sha256": "87a5943b39055e1594a0d4f7e79ba539d215258ed0f28f82d2dc28f9f1454c84",
+    "bytes": 29,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/short-script.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/benchmark_ultra.py",
+    "sha256": "d236a6ddc52bc401b7dd56e8a0b8bd227f3b8d790e9a29eabf21aad9c289e988",
+    "bytes": 16671,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/benchmark_ultra.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/benchmark_voice.py",
+    "sha256": "a339c7af4ddaf9e00b8ab7e848740cb94548f694b20a9ca25eedda33dc018344",
+    "bytes": 9809,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/benchmark_voice.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/clone_model_manifest.json",
+    "sha256": "acce13a2ea577ff626106b2af1798aa421d1e8455a84fee882f8bc3bedff64d4",
+    "bytes": 20402,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/clone_model_manifest.json",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/clone_runtime.py",
+    "sha256": "c2a24b5727212d2f361bf0dfe779adab3a5c9eaa1aeeab87ab25abe0bec1fa9f",
+    "bytes": 17639,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/clone_runtime.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/clone_store.py",
+    "sha256": "97b890efeeafaf4961bb945916a49b5f00421b60c024ae6bec332a9f73f8e158",
+    "bytes": 3673,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/clone_store.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/cosy_engine.py",
+    "sha256": "d6a71112f666e0a6474dc4fac49f9fcfe4ccc3d7d9782c23df556a6d803d4a7c",
+    "bytes": 37111,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/cosy_engine.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/examples/README.txt",
+    "sha256": "48b1c49bda13e1805b23473ab8333c7ee6e12d27a4e9d33f56ed4cb8810a0e9d",
+    "bytes": 947,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/examples/README.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/examples/hmong-female-clean-fast.wav",
+    "sha256": "47de2f02367f3cd91a810aaf7710e3923ce436bb80cef5d235a788e26d443f91",
+    "bytes": 101358,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/examples/hmong-female-clean-fast.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/examples/hmong-female-clean-standard.wav",
+    "sha256": "49f40eacdae0bfcc86c372672cfccc6716fad571a3fe76eaf51954fa8f256a17",
+    "bytes": 101358,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/examples/hmong-female-clean-standard.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/examples/hmong-female-test.wav",
+    "sha256": "a5256e8099a79467f87e0bd9a98524df655d3fced307e402a0077b148f36de71",
+    "bytes": 130124,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/examples/hmong-female-test.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/examples/hmong-male-clean-fast-srt.wav",
+    "sha256": "e95fdd778384eb3ceb25aa35ed23613bc430f17831aa1aeb07406a1885bad373",
+    "bytes": 129678,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/examples/hmong-male-clean-fast-srt.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/examples/hmong-male-review-test.wav",
+    "sha256": "d6d93bb331176434ae1fb5f890b59a29ca0d0337e41059e2f819c7222eec0ae2",
+    "bytes": 120524,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/examples/hmong-male-review-test.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/examples/review-hmong-short.srt",
+    "sha256": "8d7b56f83b2365588c4ac970c54c27d95edfc47eff7d28d0bdd2ce9b96e8956e",
+    "bytes": 42,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/examples/review-hmong-short.srt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/examples/review-hmong.srt",
+    "sha256": "b99f877f7a6d4702de1b30673669d50a7cb0bf39dec6459208e3203ee5fb166e",
+    "bytes": 107,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/examples/review-hmong.srt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/gpu_tuning.py",
+    "sha256": "93d3f70eefbfefb04f2e7f467e3492596934d6e5514cb801d7db400c2a8f3583",
+    "bytes": 4505,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/gpu_tuning.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/inference_acceleration.py",
+    "sha256": "5bb414442b3733843e71c330e6c1cec2bacc029d290de096a0ed2fa65f1a12e6",
+    "bytes": 8208,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/inference_acceleration.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/install_clone_ai.bat",
+    "sha256": "6bf58c3b514aff17a17e24a98318a6fb6b73033a0eec46b64aca2d14befb5c84",
+    "bytes": 622,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/install_clone_ai.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/install_local_ai.bat",
+    "sha256": "3d8d5cd90c4ec33de246fb20e10c820824bf160341ebeb9d691a38a5d88962a7",
+    "bytes": 174,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/install_local_ai.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/install_mms_asr.bat",
+    "sha256": "a8b6026c97ffc4e4f0d35d03c8c0810f70bd4db688dc11974c8ad520011ac1af",
+    "bytes": 1074,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/install_mms_asr.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/local_engine.py",
+    "sha256": "5e1d389b2ae17bb5dd4b2138f6b2dcb72ac0a97abbf92983eb4ddf22ada59ee9",
+    "bytes": 7656,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/local_engine.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/open_studio.py",
+    "sha256": "012e9cfaa02f05a94d48de5e23e4a1f187c8e281eef83b9bb190362b1b75a7f5",
+    "bytes": 851,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/open_studio.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/prepare_clone_model.py",
+    "sha256": "a5ab024b60d435e96071936eb4838f19769e432ba9314a468a29f89f15c00796",
+    "bytes": 5990,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/prepare_clone_model.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/prepare_media_tools.py",
+    "sha256": "fe8dcfb1e4088f1e1046e7f26243741a0bd8d37d05c7ce08f92b92e21b4c9754",
+    "bytes": 9261,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/prepare_media_tools.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/requirements-cosy.txt",
+    "sha256": "048555131ee7175551d7dea26496cc2968ad221823c3ed789fb8125258a5a834",
+    "bytes": 563,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/requirements-cosy.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/requirements-local.txt",
+    "sha256": "bde03680e939dba79b68f9512456b7c1e3ffb11cbbded1f75a240f139635004a",
+    "bytes": 72,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/requirements-local.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/requirements.txt",
+    "sha256": "238654ac043719239b76df853a5c0653f05a36ca0e418bb17015750d205b73f8",
+    "bytes": 78,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/requirements.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/review_script.py",
+    "sha256": "99571de7d7514d9d7cf6c641bc17551e62225cdc822d43b681d3ef09b2cac180",
+    "bytes": 15189,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/review_script.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/setup_env.bat",
+    "sha256": "b187b96236032ffd24c80e9ff4c5b7af9dc526ed66b132c1290b476bb31c5923",
+    "bytes": 2874,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/setup_env.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/setup_venv.py",
+    "sha256": "73cc877954b04618c6500470bd952780f4b66efbcf5678974ab59300b3ff5224",
+    "bytes": 2639,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/setup_venv.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/start.bat",
+    "sha256": "243cdc819cdecbd1b774e397aa940b4bd5241e2a0ac80d55d966c7b798a978e6",
+    "bytes": 415,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/start.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/static/app.js",
+    "sha256": "4803c69688dd2653f7d248cb00bdadb6e657af62dcb1f169b5d5f1bf81435ae4",
+    "bytes": 44331,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/static/app.js",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/static/example-hmong.txt",
+    "sha256": "54c5097d1846127d6418f2dbc21547f5c06bb2d20609e60c2f6c803817bd8657",
+    "bytes": 210,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/static/example-hmong.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/static/index.html",
+    "sha256": "1a11c69e0f999da14c57eb046306d7be6cb6fe2039511e37ecd4f443b22f0152",
+    "bytes": 13037,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/static/index.html",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/static/style.css",
+    "sha256": "14cc441f9e05d1a7a779618da3f96c18896e392272e180c148024495cebafaf8",
+    "bytes": 9450,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/static/style.css",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/static/voices/hmong-white-female.mp3",
+    "sha256": "7b06d1398f3599020f2a9e80a8883b4f82cd20998cd8e3fe8ed29c203a8415c5",
+    "bytes": 373078,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/static/voices/hmong-white-female.mp3",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/static/voices/hmong-white-male.mp3",
+    "sha256": "c5939f29cfd9c032618b99e409981e9d237dfaca08340dc3ab9d67df8a05c86e",
+    "bytes": 358032,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/static/voices/hmong-white-male.mp3",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/browser_microphone.cjs",
+    "sha256": "2ee145991d38b381a39d17057be54d37dacb42b62a758ac6806c8cbb42bcf56d",
+    "bytes": 9094,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/browser_microphone.cjs",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/browser_ultra.cjs",
+    "sha256": "5c06a61eaa2da0d3efd6415c5ac6a73498af6bd0b7d65c5c3cf543b69b4aadd3",
+    "bytes": 10744,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/browser_ultra.cjs",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/conftest.py",
+    "sha256": "20c05a48b3b18a5255efbdc1084e30e2ba2087b5dd9a3892be0a04c102f51f78",
+    "bytes": 883,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/conftest.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_app.py",
+    "sha256": "7eb3d0785413a05ef66dbd3f06dc340af062fbec00d1be2671b64a5f43e963e1",
+    "bytes": 6495,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_app.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_audio_cache.py",
+    "sha256": "e3ae89ea7a5f664d4d67c6c665171297696f55c976355ef4f2e5280bad82e55f",
+    "bytes": 7074,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_audio_cache.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_audio_clean.py",
+    "sha256": "68e061aae465c64cec5b95b511be2cc8c0979d97f7262fbe82d9728e17e7cd9f",
+    "bytes": 10426,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_audio_clean.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_audio_export.py",
+    "sha256": "28a604b27a08128cd21b22a8dcb92ee85138be063ba0d7a13f4ba6504b6a159a",
+    "bytes": 9036,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_audio_export.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_audio_quality_api.py",
+    "sha256": "50461bc728341cf5c74f3199cd514a1e7ec338cafd1071678182dea677dcd46f",
+    "bytes": 5855,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_audio_quality_api.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_benchmark_ultra.py",
+    "sha256": "975fa6b6e75c9dc500fbf0345c9e23236422383f05912b32c2f097d5f5b69624",
+    "bytes": 9290,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_benchmark_ultra.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_benchmark_voice.py",
+    "sha256": "46feb57b3e255675146a6cc7b7afc8496c59a8ec01fe304856d9e797959e69ce",
+    "bytes": 9334,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_benchmark_voice.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_clone_runtime.py",
+    "sha256": "162310fc949748013eee3b2ab06eff4297733bd414eb89d7468a2b5d2eda852f",
+    "bytes": 26557,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_clone_runtime.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_clones.py",
+    "sha256": "68930dc2fab93986f56090e6986a92c1ce989be38591dc8b9d64c2c44b155bd8",
+    "bytes": 5172,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_clones.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_cosy_engine.py",
+    "sha256": "8a9593869574b12973279bb96aa877f081c35dce284a2c9357047dfb3d1fb7c8",
+    "bytes": 6219,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_cosy_engine.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_cosy_performance.py",
+    "sha256": "9da5d6d6d0130501d0b143b4657cdca5bcc8284b45ec4b71295075b1d88e1ea3",
+    "bytes": 24608,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_cosy_performance.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_gpu_tuning.py",
+    "sha256": "c13da027357ca8071eb12debb3cbff289ae7bdd7a859c5fb93b7a230720548fe",
+    "bytes": 5175,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_gpu_tuning.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_inference_acceleration.py",
+    "sha256": "e3a0c409bef82a3a4d8812b66233103322bae327cbde28152a93fc7cc16d744b",
+    "bytes": 14853,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_inference_acceleration.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_local_cloning_api.py",
+    "sha256": "d9a496391cfb7a9eca1cf2b073929fe9f78fe6731fcdf06b19768586dab8fb19",
+    "bytes": 3003,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_local_cloning_api.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_open_studio.py",
+    "sha256": "9b2380fc939e52768149c456144449642969a5ede3dc4547ef188fe43aeadf6c",
+    "bytes": 3846,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_open_studio.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_pause_resume_jobs.py",
+    "sha256": "a56badd512b05b9c21e3f1d8ae1b5b52a67f96c2e4e170e9b99f4ec37b6b8228",
+    "bytes": 13076,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_pause_resume_jobs.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_persistent_jobs.py",
+    "sha256": "ef5808b113fa15eb998fd25dad9a681987d8e5949dac44da6d6c88558f76ba31",
+    "bytes": 11196,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_persistent_jobs.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_prepare_clone_model.py",
+    "sha256": "03a84f3987e029ecfd4e23115cc429ac6c5db2ef390f0f51b7b6b5275ef6236a",
+    "bytes": 13592,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_prepare_clone_model.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_review_api.py",
+    "sha256": "1ec2505a3bbd1dc5385beb37cc65290a455977b08a6fd5df737512739f58fdeb",
+    "bytes": 5257,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_review_api.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_review_script.py",
+    "sha256": "c209ee297c45bc521b8a7b509a4af1b737dd24dbb41b6d566c4d2c679bff0815",
+    "bytes": 10248,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_review_script.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_setup_venv.py",
+    "sha256": "ef9faf1c01bd3cfcb6d17367bd82098b1851088348d2cb5c02c712879fc771e3",
+    "bytes": 1383,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_setup_venv.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_ultra_api.py",
+    "sha256": "1b7e4dfc85158a5f912b2dbc9635a19fac1c74def38572e683471874d6298656",
+    "bytes": 4515,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_ultra_api.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/tests/test_voice_jobs.py",
+    "sha256": "9ab9d4fd27821ee0456b2fccea29d62546925ec3df38c1b7153a1745d03a55ed",
+    "bytes": 3244,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/tests/test_voice_jobs.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/voice_jobs.py",
+    "sha256": "f09ccf2930d4581112ad67aefde4715b2d6fc5907322933cc883c7ef31a717d3",
+    "bytes": 21773,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/voice_jobs.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/voice_worker.py",
+    "sha256": "857aa394ce2e2718d62c424405128131bd52a74ef5339d508cf854896c722bd3",
+    "bytes": 6778,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST.zip",
+    "member": "Hmong-Studio-Trang/voice_worker.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/.gitignore",
+    "sha256": "46853483fbef332453e1296ec11ebc9afa3226246f4b932a70302236128c40f9",
+    "bytes": 80,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/.gitignore",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/BAT-DAU.txt",
+    "sha256": "a923437caabbb85b8c32efa1c856a680152548403916e7607be44d8ace87f095",
+    "bytes": 3546,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/BAT-DAU.txt",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/CAI-NVIDIA.bat",
+    "sha256": "9850cb4d0ebd1c5001d4e7051e1c95371d384fb3a00a94b90d7b3139fda40a87",
+    "bytes": 801,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/CAI-NVIDIA.bat",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/CHAY-STUDIO.bat",
+    "sha256": "97fb3ad56b646a379996b1840890c9212588d18fbcf449a71e3d8cd6ffb1a574",
+    "bytes": 671,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/CHAY-STUDIO.bat",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/DO-TOC-DO.bat",
+    "sha256": "d9f61f065cf43bf910b201b2a86565532e2cba4e00ab974f7334987818431f5d",
+    "bytes": 630,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/DO-TOC-DO.bat",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/KIEM-TRA-GPU.bat",
+    "sha256": "9184237fe1b2de93be63825f2f88f3143287dedc56380ab6ab2dc1859be02a20",
+    "bytes": 846,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/KIEM-TRA-GPU.bat",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/LOCAL-CLONING-STATUS.md",
+    "sha256": "bd9d9e2e7d4de75a2a963181d38c24c1224777b7bb8e5497c46e58bc86f60410",
+    "bytes": 13581,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/LOCAL-CLONING-STATUS.md",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/README.md",
+    "sha256": "6f91a264bd8e87e3a6dd23b7871255b96f1fba30d5dbd4184150ba823b4d2978",
+    "bytes": 18077,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/README.md",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/TOC-DO.md",
+    "sha256": "875158e548924d6a7ebab0d92270a6815d9ad9dc1174aa3af621b81e5c0ac3fa",
+    "bytes": 7005,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/TOC-DO.md",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/app.py",
+    "sha256": "f5d3098d201ff94bff47118148a4ec01aec07ed3e4c30881f60b6c24f701b798",
+    "bytes": 18883,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/app.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/audio_clean.py",
+    "sha256": "ca4d3ac78b9f8fc1342232c6bfc80eb06c9b01bca272f53e26515f5c6fc89a64",
+    "bytes": 10090,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/audio_clean.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/benchmark_voice.py",
+    "sha256": "a339c7af4ddaf9e00b8ab7e848740cb94548f694b20a9ca25eedda33dc018344",
+    "bytes": 9809,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/benchmark_voice.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/clone_model_manifest.json",
+    "sha256": "acce13a2ea577ff626106b2af1798aa421d1e8455a84fee882f8bc3bedff64d4",
+    "bytes": 20402,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/clone_model_manifest.json",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/clone_runtime.py",
+    "sha256": "8051574d6ca3742e9b2b6a44c585ba93d41691534fa73b9944742dbf35280b26",
+    "bytes": 17581,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/clone_runtime.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/clone_store.py",
+    "sha256": "97b890efeeafaf4961bb945916a49b5f00421b60c024ae6bec332a9f73f8e158",
+    "bytes": 3673,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/clone_store.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/cosy_engine.py",
+    "sha256": "3203a03b430215fa4aa1e44804260adb7a9385657b042d2699362eefc24b2729",
+    "bytes": 31941,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/cosy_engine.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/examples/README.txt",
+    "sha256": "48b1c49bda13e1805b23473ab8333c7ee6e12d27a4e9d33f56ed4cb8810a0e9d",
+    "bytes": 947,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/examples/README.txt",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/examples/hmong-female-clean-fast.wav",
+    "sha256": "47de2f02367f3cd91a810aaf7710e3923ce436bb80cef5d235a788e26d443f91",
+    "bytes": 101358,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/examples/hmong-female-clean-fast.wav",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/examples/hmong-female-clean-standard.wav",
+    "sha256": "49f40eacdae0bfcc86c372672cfccc6716fad571a3fe76eaf51954fa8f256a17",
+    "bytes": 101358,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/examples/hmong-female-clean-standard.wav",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/examples/hmong-female-test.wav",
+    "sha256": "a5256e8099a79467f87e0bd9a98524df655d3fced307e402a0077b148f36de71",
+    "bytes": 130124,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/examples/hmong-female-test.wav",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/examples/hmong-male-clean-fast-srt.wav",
+    "sha256": "e95fdd778384eb3ceb25aa35ed23613bc430f17831aa1aeb07406a1885bad373",
+    "bytes": 129678,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/examples/hmong-male-clean-fast-srt.wav",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/examples/hmong-male-review-test.wav",
+    "sha256": "d6d93bb331176434ae1fb5f890b59a29ca0d0337e41059e2f819c7222eec0ae2",
+    "bytes": 120524,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/examples/hmong-male-review-test.wav",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/examples/review-hmong-short.srt",
+    "sha256": "8d7b56f83b2365588c4ac970c54c27d95edfc47eff7d28d0bdd2ce9b96e8956e",
+    "bytes": 42,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/examples/review-hmong-short.srt",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/examples/review-hmong.srt",
+    "sha256": "b99f877f7a6d4702de1b30673669d50a7cb0bf39dec6459208e3203ee5fb166e",
+    "bytes": 107,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/examples/review-hmong.srt",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/gpu_tuning.py",
+    "sha256": "93d3f70eefbfefb04f2e7f467e3492596934d6e5514cb801d7db400c2a8f3583",
+    "bytes": 4505,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/gpu_tuning.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/inference_acceleration.py",
+    "sha256": "5bb414442b3733843e71c330e6c1cec2bacc029d290de096a0ed2fa65f1a12e6",
+    "bytes": 8208,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/inference_acceleration.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/install_clone_ai.bat",
+    "sha256": "6bf58c3b514aff17a17e24a98318a6fb6b73033a0eec46b64aca2d14befb5c84",
+    "bytes": 622,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/install_clone_ai.bat",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/install_local_ai.bat",
+    "sha256": "3d8d5cd90c4ec33de246fb20e10c820824bf160341ebeb9d691a38a5d88962a7",
+    "bytes": 174,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/install_local_ai.bat",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/install_mms_asr.bat",
+    "sha256": "a8b6026c97ffc4e4f0d35d03c8c0810f70bd4db688dc11974c8ad520011ac1af",
+    "bytes": 1074,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/install_mms_asr.bat",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/local_engine.py",
+    "sha256": "5e1d389b2ae17bb5dd4b2138f6b2dcb72ac0a97abbf92983eb4ddf22ada59ee9",
+    "bytes": 7656,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/local_engine.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/open_studio.py",
+    "sha256": "1099ae8d782b43a36beffd4dd44b49f9d0d7f71fadb276d1329c1ad39693752b",
+    "bytes": 821,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/open_studio.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/prepare_clone_model.py",
+    "sha256": "a5ab024b60d435e96071936eb4838f19769e432ba9314a468a29f89f15c00796",
+    "bytes": 5990,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/prepare_clone_model.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/prepare_media_tools.py",
+    "sha256": "fe8dcfb1e4088f1e1046e7f26243741a0bd8d37d05c7ce08f92b92e21b4c9754",
+    "bytes": 9261,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/prepare_media_tools.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/requirements-cosy.txt",
+    "sha256": "048555131ee7175551d7dea26496cc2968ad221823c3ed789fb8125258a5a834",
+    "bytes": 563,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/requirements-cosy.txt",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/requirements-local.txt",
+    "sha256": "bde03680e939dba79b68f9512456b7c1e3ffb11cbbded1f75a240f139635004a",
+    "bytes": 72,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/requirements-local.txt",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/requirements.txt",
+    "sha256": "238654ac043719239b76df853a5c0653f05a36ca0e418bb17015750d205b73f8",
+    "bytes": 78,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/requirements.txt",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/review_script.py",
+    "sha256": "2c7db6eb0abd9402580aca5f86e6b42494b772cc380a515b99a2e2a5210d090e",
+    "bytes": 13644,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/review_script.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/setup_env.bat",
+    "sha256": "b187b96236032ffd24c80e9ff4c5b7af9dc526ed66b132c1290b476bb31c5923",
+    "bytes": 2874,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/setup_env.bat",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/setup_venv.py",
+    "sha256": "73cc877954b04618c6500470bd952780f4b66efbcf5678974ab59300b3ff5224",
+    "bytes": 2639,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/setup_venv.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/start.bat",
+    "sha256": "243cdc819cdecbd1b774e397aa940b4bd5241e2a0ac80d55d966c7b798a978e6",
+    "bytes": 415,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/start.bat",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/static/app.js",
+    "sha256": "2425396d987739c60da4375e1b75c9e69fd31207c20f76ed664959898527a4a0",
+    "bytes": 39797,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/static/app.js",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/static/example-hmong.txt",
+    "sha256": "54c5097d1846127d6418f2dbc21547f5c06bb2d20609e60c2f6c803817bd8657",
+    "bytes": 210,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/static/example-hmong.txt",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/static/index.html",
+    "sha256": "42a2663f138cdc721a9c395977d45df9cd322253fddb050ae47284300590c837",
+    "bytes": 11617,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/static/index.html",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/static/style.css",
+    "sha256": "41c7adf421221300899a8933d53d51ba1c65e2ca3ee88b013dd6276d52b15a8a",
+    "bytes": 8820,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/static/style.css",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/static/voices/hmong-white-female.mp3",
+    "sha256": "7b06d1398f3599020f2a9e80a8883b4f82cd20998cd8e3fe8ed29c203a8415c5",
+    "bytes": 373078,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/static/voices/hmong-white-female.mp3",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/static/voices/hmong-white-male.mp3",
+    "sha256": "c5939f29cfd9c032618b99e409981e9d237dfaca08340dc3ab9d67df8a05c86e",
+    "bytes": 358032,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/static/voices/hmong-white-male.mp3",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/browser_microphone.cjs",
+    "sha256": "2ee145991d38b381a39d17057be54d37dacb42b62a758ac6806c8cbb42bcf56d",
+    "bytes": 9094,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/browser_microphone.cjs",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/conftest.py",
+    "sha256": "20c05a48b3b18a5255efbdc1084e30e2ba2087b5dd9a3892be0a04c102f51f78",
+    "bytes": 883,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/conftest.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_app.py",
+    "sha256": "7eb3d0785413a05ef66dbd3f06dc340af062fbec00d1be2671b64a5f43e963e1",
+    "bytes": 6495,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_app.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_audio_clean.py",
+    "sha256": "68e061aae465c64cec5b95b511be2cc8c0979d97f7262fbe82d9728e17e7cd9f",
+    "bytes": 10426,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_audio_clean.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_audio_quality_api.py",
+    "sha256": "50461bc728341cf5c74f3199cd514a1e7ec338cafd1071678182dea677dcd46f",
+    "bytes": 5855,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_audio_quality_api.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_benchmark_voice.py",
+    "sha256": "46feb57b3e255675146a6cc7b7afc8496c59a8ec01fe304856d9e797959e69ce",
+    "bytes": 9334,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_benchmark_voice.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_clone_runtime.py",
+    "sha256": "f3adce5338360bac612ef58b561abf0b83926fc4f6340de4426eb40c8e16df4a",
+    "bytes": 26495,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_clone_runtime.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_clones.py",
+    "sha256": "68930dc2fab93986f56090e6986a92c1ce989be38591dc8b9d64c2c44b155bd8",
+    "bytes": 5172,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_clones.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_cosy_engine.py",
+    "sha256": "8a9593869574b12973279bb96aa877f081c35dce284a2c9357047dfb3d1fb7c8",
+    "bytes": 6219,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_cosy_engine.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_cosy_performance.py",
+    "sha256": "5d0aa24d5c4288590bb1fe4cd30912f0e8996a0a89ddb75e0aa45b3c418984e7",
+    "bytes": 17602,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_cosy_performance.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_gpu_tuning.py",
+    "sha256": "c13da027357ca8071eb12debb3cbff289ae7bdd7a859c5fb93b7a230720548fe",
+    "bytes": 5175,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_gpu_tuning.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_inference_acceleration.py",
+    "sha256": "e3a0c409bef82a3a4d8812b66233103322bae327cbde28152a93fc7cc16d744b",
+    "bytes": 14853,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_inference_acceleration.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_local_cloning_api.py",
+    "sha256": "d9a496391cfb7a9eca1cf2b073929fe9f78fe6731fcdf06b19768586dab8fb19",
+    "bytes": 3003,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_local_cloning_api.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_open_studio.py",
+    "sha256": "447460b4f82fa0d6da08a259b3bf150ccdd3fde766961795dbc9e02191138bda",
+    "bytes": 3426,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_open_studio.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_persistent_jobs.py",
+    "sha256": "ef5808b113fa15eb998fd25dad9a681987d8e5949dac44da6d6c88558f76ba31",
+    "bytes": 11196,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_persistent_jobs.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_prepare_clone_model.py",
+    "sha256": "03a84f3987e029ecfd4e23115cc429ac6c5db2ef390f0f51b7b6b5275ef6236a",
+    "bytes": 13592,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_prepare_clone_model.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_review_api.py",
+    "sha256": "1ec2505a3bbd1dc5385beb37cc65290a455977b08a6fd5df737512739f58fdeb",
+    "bytes": 5257,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_review_api.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_review_script.py",
+    "sha256": "c209ee297c45bc521b8a7b509a4af1b737dd24dbb41b6d566c4d2c679bff0815",
+    "bytes": 10248,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_review_script.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_setup_venv.py",
+    "sha256": "ef9faf1c01bd3cfcb6d17367bd82098b1851088348d2cb5c02c712879fc771e3",
+    "bytes": 1383,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_setup_venv.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/tests/test_voice_jobs.py",
+    "sha256": "9ab9d4fd27821ee0456b2fccea29d62546925ec3df38c1b7153a1745d03a55ed",
+    "bytes": 3244,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/tests/test_voice_jobs.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/voice_jobs.py",
+    "sha256": "efd0d8c4c3fe7e2a1cb76f44b606976c1a38742607a284e35ade34c3499d0ea8",
+    "bytes": 12903,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/voice_jobs.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/__nested_archive_1_unpacked/Hmong-Studio-Trang-Original/hmong-studio/voice_worker.py",
+    "sha256": "0cf20e92e50939ea7e63d33be07164e6f61ef56fab252aa024aab43a94826c85",
+    "bytes": 3355,
+    "source_archive": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST/Hmong-Studio-Trang/backups/HMONG_VOICE_STUDIO_ORIGINAL_0.7.0.zip",
+    "member": "Hmong-Studio-Trang-Original/hmong-studio/voice_worker.py",
+    "depth": 1
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/.gitignore",
+    "sha256": "46853483fbef332453e1296ec11ebc9afa3226246f4b932a70302236128c40f9",
+    "bytes": 80,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/.gitignore",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/BAT-DAU.txt",
+    "sha256": "e5a93a02fe259ce1802a0715073450b8ec615e905cd921a79fefcc517a21804d",
+    "bytes": 2316,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/BAT-DAU.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/BENCHMARK-ULTRA.bat",
+    "sha256": "6043caa36c2fb2d82827b9fbe44ecf643f6418d22c796d203fc506d02a1147dd",
+    "bytes": 1451,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/BENCHMARK-ULTRA.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/CAI-NVIDIA.bat",
+    "sha256": "9850cb4d0ebd1c5001d4e7051e1c95371d384fb3a00a94b90d7b3139fda40a87",
+    "bytes": 801,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/CAI-NVIDIA.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/CHANGED_FILES.txt",
+    "sha256": "4edeb06957cd6d2c7dfe3ce6083670bd52518f47a5abf7ddb9f483a7b42f7f1d",
+    "bytes": 1643,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/CHANGED_FILES.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/CHANGED_FILES_0.8.1.txt",
+    "sha256": "b8c3b6c04a53340a42fe2f4f4e1648b6752fce11dda43a3c0b8f44402f7ea0cf",
+    "bytes": 1000,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/CHANGED_FILES_0.8.1.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/CHAY-STUDIO.bat",
+    "sha256": "9717c00603f775636c2880bbd8a0d1430b693efe36114d9d250e888773c68bc7",
+    "bytes": 693,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/CHAY-STUDIO.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/DO-TOC-DO.bat",
+    "sha256": "d9f61f065cf43bf910b201b2a86565532e2cba4e00ab974f7334987818431f5d",
+    "bytes": 630,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/DO-TOC-DO.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/FILE_SHA256SUMS.txt",
+    "sha256": "feae5ff7a702748796f72fa758c48d14cc66c01f2f0608717fd702f8daa9878e",
+    "bytes": 9233,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/FILE_SHA256SUMS.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/KIEM-TRA-GPU.bat",
+    "sha256": "6fe1c8c9f4e5986527045972e4b5ef751a98f36a5789d519d7f911f2d8e5fbae",
+    "bytes": 199,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/KIEM-TRA-GPU.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/LOCAL-CLONING-STATUS.md",
+    "sha256": "3847874c06f0114d18eb7f252dcd88520fa0d24157d261f9083d8b58028dca23",
+    "bytes": 14615,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/LOCAL-CLONING-STATUS.md",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/PERFORMANCE_REPORT.md",
+    "sha256": "d08154f7e5ba954b4a1964911bd69e66e0c9d778a7dff79c94ee7a0eda2bad35",
+    "bytes": 12897,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/PERFORMANCE_REPORT.md",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/README.md",
+    "sha256": "441290cc444f262adfb36774486f3802b5ae0da87fec1b1a435064678859abc3",
+    "bytes": 12089,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/README.md",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/SECURITY_SCAN_REPORT.md",
+    "sha256": "ddb8bc0387b40d9a77f2b8cd1c5696671bb65eeb5b5eecccea65709685ff7837",
+    "bytes": 5462,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/SECURITY_SCAN_REPORT.md",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/TOC-DO.md",
+    "sha256": "7051184be9943865a965b6d0b904a22111c543b08ef8d6676d660704f5956406",
+    "bytes": 7527,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/TOC-DO.md",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/app.py",
+    "sha256": "f49938d34e51cd7ceb0c07d2576725617bad1cc779dbdb17a3b596383541e64e",
+    "bytes": 21152,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/app.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/audio_cache.py",
+    "sha256": "4845ecc572f7c2e2bac8561268201fb31aa9b93fcb97155683ca513050c3e866",
+    "bytes": 8148,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/audio_cache.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/audio_clean.py",
+    "sha256": "ca4d3ac78b9f8fc1342232c6bfc80eb06c9b01bca272f53e26515f5c6fc89a64",
+    "bytes": 10090,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/audio_clean.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/audio_export.py",
+    "sha256": "244b727b31f4bcd2ac4de25233f54c3b55d297252512b83ca509f7b307f1052b",
+    "bytes": 10611,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/audio_export.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/benchmark-results/duration-targets.json",
+    "sha256": "4125bdca090392f1df5455caad048fdf0f4643fc993aeee752f4634244af0963",
+    "bytes": 3227,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/duration-targets.json",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/benchmark-results/one-minute-attempt.json",
+    "sha256": "38864100fa5a95e13a73167b72eb929b33babcaa81a45591f55a61e5850292fb",
+    "bytes": 2380,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/one-minute-attempt.json",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/benchmark-results/short-sample-report.json",
+    "sha256": "9aa068132854537ae042c7cf5aa48576ca6f23c1893d8b8147f2311fc1f4ad53",
+    "bytes": 3863,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/short-sample-report.json",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/benchmark-results/short-sample/SHA256SUMS.txt",
+    "sha256": "d07c34182fda8582d6639034a00826f23041115503e44cff389621d69b2a1720",
+    "bytes": 241,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/short-sample/SHA256SUMS.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/benchmark-results/short-sample/standard.wav",
+    "sha256": "49f40eacdae0bfcc86c372672cfccc6716fad571a3fe76eaf51954fa8f256a17",
+    "bytes": 101358,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/short-sample/standard.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/benchmark-results/short-sample/ultra_cold.wav",
+    "sha256": "49f40eacdae0bfcc86c372672cfccc6716fad571a3fe76eaf51954fa8f256a17",
+    "bytes": 101358,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/short-sample/ultra_cold.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/benchmark-results/short-sample/ultra_warm.wav",
+    "sha256": "49f40eacdae0bfcc86c372672cfccc6716fad571a3fe76eaf51954fa8f256a17",
+    "bytes": 101358,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/short-sample/ultra_warm.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/benchmark-results/short-script.txt",
+    "sha256": "87a5943b39055e1594a0d4f7e79ba539d215258ed0f28f82d2dc28f9f1454c84",
+    "bytes": 29,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/benchmark-results/short-script.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/benchmark_ultra.py",
+    "sha256": "d236a6ddc52bc401b7dd56e8a0b8bd227f3b8d790e9a29eabf21aad9c289e988",
+    "bytes": 16671,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/benchmark_ultra.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/benchmark_voice.py",
+    "sha256": "a339c7af4ddaf9e00b8ab7e848740cb94548f694b20a9ca25eedda33dc018344",
+    "bytes": 9809,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/benchmark_voice.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/clone_model_manifest.json",
+    "sha256": "acce13a2ea577ff626106b2af1798aa421d1e8455a84fee882f8bc3bedff64d4",
+    "bytes": 20402,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/clone_model_manifest.json",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/clone_runtime.py",
+    "sha256": "c2a24b5727212d2f361bf0dfe779adab3a5c9eaa1aeeab87ab25abe0bec1fa9f",
+    "bytes": 17639,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/clone_runtime.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/clone_store.py",
+    "sha256": "97b890efeeafaf4961bb945916a49b5f00421b60c024ae6bec332a9f73f8e158",
+    "bytes": 3673,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/clone_store.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/cosy_engine.py",
+    "sha256": "d6a71112f666e0a6474dc4fac49f9fcfe4ccc3d7d9782c23df556a6d803d4a7c",
+    "bytes": 37111,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/cosy_engine.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/examples/README.txt",
+    "sha256": "48b1c49bda13e1805b23473ab8333c7ee6e12d27a4e9d33f56ed4cb8810a0e9d",
+    "bytes": 947,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/examples/README.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/examples/hmong-female-clean-fast.wav",
+    "sha256": "47de2f02367f3cd91a810aaf7710e3923ce436bb80cef5d235a788e26d443f91",
+    "bytes": 101358,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/examples/hmong-female-clean-fast.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/examples/hmong-female-clean-standard.wav",
+    "sha256": "49f40eacdae0bfcc86c372672cfccc6716fad571a3fe76eaf51954fa8f256a17",
+    "bytes": 101358,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/examples/hmong-female-clean-standard.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/examples/hmong-female-test.wav",
+    "sha256": "a5256e8099a79467f87e0bd9a98524df655d3fced307e402a0077b148f36de71",
+    "bytes": 130124,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/examples/hmong-female-test.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/examples/hmong-male-clean-fast-srt.wav",
+    "sha256": "e95fdd778384eb3ceb25aa35ed23613bc430f17831aa1aeb07406a1885bad373",
+    "bytes": 129678,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/examples/hmong-male-clean-fast-srt.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/examples/hmong-male-review-test.wav",
+    "sha256": "d6d93bb331176434ae1fb5f890b59a29ca0d0337e41059e2f819c7222eec0ae2",
+    "bytes": 120524,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/examples/hmong-male-review-test.wav",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/examples/review-hmong-short.srt",
+    "sha256": "8d7b56f83b2365588c4ac970c54c27d95edfc47eff7d28d0bdd2ce9b96e8956e",
+    "bytes": 42,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/examples/review-hmong-short.srt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/examples/review-hmong.srt",
+    "sha256": "b99f877f7a6d4702de1b30673669d50a7cb0bf39dec6459208e3203ee5fb166e",
+    "bytes": 107,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/examples/review-hmong.srt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/gpu_info.py",
+    "sha256": "1e0f2cab1a5587d02998320bd55df915076786be689fb377e3e02a3423e18898",
+    "bytes": 6364,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/gpu_info.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/gpu_tuning.py",
+    "sha256": "93d3f70eefbfefb04f2e7f467e3492596934d6e5514cb801d7db400c2a8f3583",
+    "bytes": 4505,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/gpu_tuning.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/inference_acceleration.py",
+    "sha256": "5bb414442b3733843e71c330e6c1cec2bacc029d290de096a0ed2fa65f1a12e6",
+    "bytes": 8208,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/inference_acceleration.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/install_clone_ai.bat",
+    "sha256": "6bf58c3b514aff17a17e24a98318a6fb6b73033a0eec46b64aca2d14befb5c84",
+    "bytes": 622,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/install_clone_ai.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/install_local_ai.bat",
+    "sha256": "3d8d5cd90c4ec33de246fb20e10c820824bf160341ebeb9d691a38a5d88962a7",
+    "bytes": 174,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/install_local_ai.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/install_mms_asr.bat",
+    "sha256": "a8b6026c97ffc4e4f0d35d03c8c0810f70bd4db688dc11974c8ad520011ac1af",
+    "bytes": 1074,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/install_mms_asr.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/local_engine.py",
+    "sha256": "5e1d389b2ae17bb5dd4b2138f6b2dcb72ac0a97abbf92983eb4ddf22ada59ee9",
+    "bytes": 7656,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/local_engine.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/open_studio.py",
+    "sha256": "012e9cfaa02f05a94d48de5e23e4a1f187c8e281eef83b9bb190362b1b75a7f5",
+    "bytes": 851,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/open_studio.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/prepare_clone_model.py",
+    "sha256": "4f711c31e67b9db5a7d32e825384c3657f990dfe89303e476094642b6743e604",
+    "bytes": 6574,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/prepare_clone_model.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/prepare_media_tools.py",
+    "sha256": "fe8dcfb1e4088f1e1046e7f26243741a0bd8d37d05c7ce08f92b92e21b4c9754",
+    "bytes": 9261,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/prepare_media_tools.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/requirements-cosy.txt",
+    "sha256": "048555131ee7175551d7dea26496cc2968ad221823c3ed789fb8125258a5a834",
+    "bytes": 563,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/requirements-cosy.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/requirements-local.txt",
+    "sha256": "bde03680e939dba79b68f9512456b7c1e3ffb11cbbded1f75a240f139635004a",
+    "bytes": 72,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/requirements-local.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/requirements.txt",
+    "sha256": "238654ac043719239b76df853a5c0653f05a36ca0e418bb17015750d205b73f8",
+    "bytes": 78,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/requirements.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/review_script.py",
+    "sha256": "99571de7d7514d9d7cf6c641bc17551e62225cdc822d43b681d3ef09b2cac180",
+    "bytes": 15189,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/review_script.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/security-scan/ANTIVIRUS_STATUS.md",
+    "sha256": "8150cb9f564f302a9aa44907639b94797f46277b90d96212934397666ce1fdf5",
+    "bytes": 1972,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/security-scan/ANTIVIRUS_STATUS.md",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/security-scan/baseline-scan-attempt.json",
+    "sha256": "f79d9fa722494123b9c37f2eaf5072b9971cf0f4585dff6ab6a5385e0a3e1c75",
+    "bytes": 1292,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/security-scan/baseline-scan-attempt.json",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/security-scan/baseline-scan-attempt.log",
+    "sha256": "480b40ac45c30c20dc01d816bc67260ba18710429de2f22c638bdeb2f81f7fc1",
+    "bytes": 414,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/security-scan/baseline-scan-attempt.log",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/security-scan/baseline-static-archive-review.json",
+    "sha256": "b2da95f86c2afb9b13dfa6264687039232ace0a67a2a3205e71a68e62980064b",
+    "bytes": 1041,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/security-scan/baseline-static-archive-review.json",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/security-scan/freshclam.log",
+    "sha256": "42a4418bb6d9391cdd22ad4e8c397040e3e9e5ce502fcef9d65740117d4ac042",
+    "bytes": 3384,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/security-scan/freshclam.log",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/security-scan/official-database-network.json",
+    "sha256": "2bfddbd8a217982f1503fe4d015e6c71210a362120b9d13b285a058e736d7e77",
+    "bytes": 716,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/security-scan/official-database-network.json",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/security-scan/package-provenance.txt",
+    "sha256": "62873575a4743227bcb4de2e9a32000b70881a26b293495bfbfa72d403a3331c",
+    "bytes": 668,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/security-scan/package-provenance.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/security-scan/regression-tests.txt",
+    "sha256": "5d04d225687e71958169c3ee712da99a0d81f68d58bc4b7600a3a77898b1abb0",
+    "bytes": 389,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/security-scan/regression-tests.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/security-scan/scanner-packages.json",
+    "sha256": "dab506bf3c1906105f61a018e9e607613bc8204799067b7757bea9ce64e3af74",
+    "bytes": 649,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/security-scan/scanner-packages.json",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/setup_env.bat",
+    "sha256": "a47313a17ab42b723ee793a4e047144c900942e9ce6fa1722fdb0d2fd58b3cd4",
+    "bytes": 2984,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/setup_env.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/setup_venv.py",
+    "sha256": "73cc877954b04618c6500470bd952780f4b66efbcf5678974ab59300b3ff5224",
+    "bytes": 2639,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/setup_venv.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/start.bat",
+    "sha256": "243cdc819cdecbd1b774e397aa940b4bd5241e2a0ac80d55d966c7b798a978e6",
+    "bytes": 415,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/start.bat",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/static/app.js",
+    "sha256": "4803c69688dd2653f7d248cb00bdadb6e657af62dcb1f169b5d5f1bf81435ae4",
+    "bytes": 44331,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/static/app.js",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/static/example-hmong.txt",
+    "sha256": "54c5097d1846127d6418f2dbc21547f5c06bb2d20609e60c2f6c803817bd8657",
+    "bytes": 210,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/static/example-hmong.txt",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/static/index.html",
+    "sha256": "57914f2556ba869c5754aa232d4c447a5608d35e7778545e6ad4c76ca92d41c2",
+    "bytes": 13037,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/static/index.html",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/static/style.css",
+    "sha256": "14cc441f9e05d1a7a779618da3f96c18896e392272e180c148024495cebafaf8",
+    "bytes": 9450,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/static/style.css",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/static/voices/hmong-white-female.mp3",
+    "sha256": "7b06d1398f3599020f2a9e80a8883b4f82cd20998cd8e3fe8ed29c203a8415c5",
+    "bytes": 373078,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/static/voices/hmong-white-female.mp3",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/static/voices/hmong-white-male.mp3",
+    "sha256": "c5939f29cfd9c032618b99e409981e9d237dfaca08340dc3ab9d67df8a05c86e",
+    "bytes": 358032,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/static/voices/hmong-white-male.mp3",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/browser_microphone.cjs",
+    "sha256": "2ee145991d38b381a39d17057be54d37dacb42b62a758ac6806c8cbb42bcf56d",
+    "bytes": 9094,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/browser_microphone.cjs",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/browser_ultra.cjs",
+    "sha256": "5c06a61eaa2da0d3efd6415c5ac6a73498af6bd0b7d65c5c3cf543b69b4aadd3",
+    "bytes": 10744,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/browser_ultra.cjs",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/conftest.py",
+    "sha256": "20c05a48b3b18a5255efbdc1084e30e2ba2087b5dd9a3892be0a04c102f51f78",
+    "bytes": 883,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/conftest.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_app.py",
+    "sha256": "7eb3d0785413a05ef66dbd3f06dc340af062fbec00d1be2671b64a5f43e963e1",
+    "bytes": 6495,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_app.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_audio_cache.py",
+    "sha256": "e3ae89ea7a5f664d4d67c6c665171297696f55c976355ef4f2e5280bad82e55f",
+    "bytes": 7074,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_audio_cache.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_audio_clean.py",
+    "sha256": "68e061aae465c64cec5b95b511be2cc8c0979d97f7262fbe82d9728e17e7cd9f",
+    "bytes": 10426,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_audio_clean.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_audio_export.py",
+    "sha256": "28a604b27a08128cd21b22a8dcb92ee85138be063ba0d7a13f4ba6504b6a159a",
+    "bytes": 9036,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_audio_export.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_audio_quality_api.py",
+    "sha256": "50461bc728341cf5c74f3199cd514a1e7ec338cafd1071678182dea677dcd46f",
+    "bytes": 5855,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_audio_quality_api.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_benchmark_ultra.py",
+    "sha256": "975fa6b6e75c9dc500fbf0345c9e23236422383f05912b32c2f097d5f5b69624",
+    "bytes": 9290,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_benchmark_ultra.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_benchmark_voice.py",
+    "sha256": "46feb57b3e255675146a6cc7b7afc8496c59a8ec01fe304856d9e797959e69ce",
+    "bytes": 9334,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_benchmark_voice.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_clone_runtime.py",
+    "sha256": "162310fc949748013eee3b2ab06eff4297733bd414eb89d7468a2b5d2eda852f",
+    "bytes": 26557,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_clone_runtime.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_clones.py",
+    "sha256": "68930dc2fab93986f56090e6986a92c1ce989be38591dc8b9d64c2c44b155bd8",
+    "bytes": 5172,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_clones.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_cosy_engine.py",
+    "sha256": "8a9593869574b12973279bb96aa877f081c35dce284a2c9357047dfb3d1fb7c8",
+    "bytes": 6219,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_cosy_engine.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_cosy_performance.py",
+    "sha256": "9da5d6d6d0130501d0b143b4657cdca5bcc8284b45ec4b71295075b1d88e1ea3",
+    "bytes": 24608,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_cosy_performance.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_gpu_info.py",
+    "sha256": "1d90bd8c88a8f0f46a1039ce0d5cee486ffd904c5b98f0582f7bfbd3b79a7684",
+    "bytes": 6048,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_gpu_info.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_gpu_tuning.py",
+    "sha256": "c13da027357ca8071eb12debb3cbff289ae7bdd7a859c5fb93b7a230720548fe",
+    "bytes": 5175,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_gpu_tuning.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_inference_acceleration.py",
+    "sha256": "e3a0c409bef82a3a4d8812b66233103322bae327cbde28152a93fc7cc16d744b",
+    "bytes": 14853,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_inference_acceleration.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_local_cloning_api.py",
+    "sha256": "d9a496391cfb7a9eca1cf2b073929fe9f78fe6731fcdf06b19768586dab8fb19",
+    "bytes": 3003,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_local_cloning_api.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_open_studio.py",
+    "sha256": "9b2380fc939e52768149c456144449642969a5ede3dc4547ef188fe43aeadf6c",
+    "bytes": 3846,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_open_studio.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_pause_resume_jobs.py",
+    "sha256": "a56badd512b05b9c21e3f1d8ae1b5b52a67f96c2e4e170e9b99f4ec37b6b8228",
+    "bytes": 13076,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_pause_resume_jobs.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_persistent_jobs.py",
+    "sha256": "ef5808b113fa15eb998fd25dad9a681987d8e5949dac44da6d6c88558f76ba31",
+    "bytes": 11196,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_persistent_jobs.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_prepare_clone_model.py",
+    "sha256": "b1d05b9b48550a1a36e414e6ca479530a3e951224bfbc28513fc490dee109ac0",
+    "bytes": 16310,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_prepare_clone_model.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_review_api.py",
+    "sha256": "1ec2505a3bbd1dc5385beb37cc65290a455977b08a6fd5df737512739f58fdeb",
+    "bytes": 5257,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_review_api.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_review_script.py",
+    "sha256": "c209ee297c45bc521b8a7b509a4af1b737dd24dbb41b6d566c4d2c679bff0815",
+    "bytes": 10248,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_review_script.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_setup_venv.py",
+    "sha256": "ef9faf1c01bd3cfcb6d17367bd82098b1851088348d2cb5c02c712879fc771e3",
+    "bytes": 1383,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_setup_venv.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_ultra_api.py",
+    "sha256": "1b7e4dfc85158a5f912b2dbc9635a19fac1c74def38572e683471874d6298656",
+    "bytes": 4515,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_ultra_api.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/tests/test_voice_jobs.py",
+    "sha256": "9ab9d4fd27821ee0456b2fccea29d62546925ec3df38c1b7153a1745d03a55ed",
+    "bytes": 3244,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/tests/test_voice_jobs.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/voice_jobs.py",
+    "sha256": "f09ccf2930d4581112ad67aefde4715b2d6fc5907322933cc883c7ef31a717d3",
+    "bytes": 21773,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/voice_jobs.py",
+    "depth": 0
+  },
+  {
+    "file": "/workspace/security-scan/extracted-for-scan/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1/Hmong-Studio-Trang/voice_worker.py",
+    "sha256": "857aa394ce2e2718d62c424405128131bd52a74ef5339d508cf854896c722bd3",
+    "bytes": 6778,
+    "source_archive": "/workspace/security-scan/held-releases/HMONG_VOICE_STUDIO_ULTRA_FAST_0.8.1.zip",
+    "member": "Hmong-Studio-Trang/voice_worker.py",
+    "depth": 0
+  }
+]

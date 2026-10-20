@@ -1,0 +1,52 @@
+{
+  "fetched_at_utc": "2026-10-20T08:40:45.976829+00:00",
+  "official_documentation": [
+    {
+      "url": "https://raw.githubusercontent.com/Cisco-Talos/clamav-docker/main/README.md",
+      "saved_path": "/workspace/security-scan/official-container/official-repo-readme.response",
+      "sha256": "4df446f00039e2444f2e22ef1fd640f4a95743e54d42ba081846cab2239224f1"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Cisco-Talos/clamav-docker/main/clamav/README-alpine.md",
+      "saved_path": "/workspace/security-scan/official-container/README-alpine.md",
+      "sha256": "475f94bc66d21c6e9fc02a0edef32156c88c8f426e4d744bdd22da53113ad55a"
+    }
+  ],
+  "ownership_evidence": "Cisco-Talos/clamav-docker README identifies clamav/clamav as the official ClamAV Docker image. clamav/README-alpine.md lines 7-19 says version tags are preloaded with signature databases and _base tags exclude them.",
+  "image": "clamav/clamav:1.4",
+  "index_digest": "sha256:3bba6dd5ac6663d55b80f86a3126e146612d93b593cc2617188d13f637d91260",
+  "amd64_manifest_digest": "sha256:a1a529c81aa510e3c93c6e303b63c49485fb17599b5657445cd7b8dfbe93f463",
+  "config_digest": "sha256:6c33fb72758a6b4470cc86e2119c2bc4e5765896ecd26fd489abac04c117c519",
+  "image_version": "1.4.6",
+  "image_created_utc": "2026-10-19T01:24:55+00:00",
+  "database_layer": {
+    "status": "verified",
+    "digest": "sha256:8e3b9766e584d08b33198c57beb76900221b55e3268db143d6a6fcb0c2e01eb8",
+    "bytes": 112825214,
+    "seconds": 17.69387150100374,
+    "source_registry": "https://registry-1.docker.io/v2/clamav/clamav",
+    "manifest_digest": "sha256:a1a529c81aa510e3c93c6e303b63c49485fb17599b5657445cd7b8dfbe93f463"
+  },
+  "extracted_databases": [
+    {
+      "path": "/workspace/security-scan/db/bytecode.cvd",
+      "bytes": 281702,
+      "sha256": "6d4aa01f219e988060fc419f495d07f27e0cdf1a2cccc065971da922c76f7ffb",
+      "container_member": "var/lib/clamav/bytecode.cvd"
+    },
+    {
+      "path": "/workspace/security-scan/db/daily.cvd",
+      "bytes": 23442605,
+      "sha256": "489f60837cccf02d98187d32149458ecc39d2fc9a93f1be86be4c2dcac9cf18d",
+      "container_member": "var/lib/clamav/daily.cvd"
+    },
+    {
+      "path": "/workspace/security-scan/db/main.cvd",
+      "bytes": 89072577,
+      "sha256": "0b2182d229f46981ec8f535382222f7c9dfdd656b250ad47988b910a8d302365",
+      "container_member": "var/lib/clamav/main.cvd"
+    }
+  ],
+  "method": "HTTPS registry API, SHA256-verified index, manifest, config and database layer. Only whitelisted regular CVD members extracted, no container execution. Each database passed ClamAV sigtool digital signature verification.",
+  "limits": "An offline snapshot from the official image, not proof of the latest daily signatures. Direct freshclam updates remain blocked by network proxy. Scanner binary is Debian ClamAV 1.4.3, not image version 1.4.6; no image executables were run."
+}

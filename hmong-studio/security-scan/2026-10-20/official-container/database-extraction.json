@@ -1,0 +1,20 @@
+[
+  {
+    "path": "/workspace/security-scan/db/bytecode.cvd",
+    "bytes": 281702,
+    "sha256": "6d4aa01f219e988060fc419f495d07f27e0cdf1a2cccc065971da922c76f7ffb",
+    "container_member": "var/lib/clamav/bytecode.cvd"
+  },
+  {
+    "path": "/workspace/security-scan/db/daily.cvd",
+    "bytes": 23442605,
+    "sha256": "489f60837cccf02d98187d32149458ecc39d2fc9a93f1be86be4c2dcac9cf18d",
+    "container_member": "var/lib/clamav/daily.cvd"
+  },
+  {
+    "path": "/workspace/security-scan/db/main.cvd",
+    "bytes": 89072577,
+    "sha256": "0b2182d229f46981ec8f535382222f7c9dfdd656b250ad47988b910a8d302365",
+    "container_member": "var/lib/clamav/main.cvd"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "database": "bytecode.cvd",
+    "exit_code": 0,
+    "stdout": "File: /workspace/security-scan/db/bytecode.cvd\nBuild time: 11 Sep 2025 08:29 -0400\nVersion: 339\nSignatures: 80\nFunctionality level: 90\nBuilder: nrandolp\nMD5: 8bdb03f60b90cfc4c8d500543233de96\nDigital signature: ow+EI2l1J6dXNMseMugc4ZK0cdbnUyDZY7x/Or+pIuzjIaYmWBt6MflLRusmT+y2dQamP0RjLrSAHjeU8DwyuWmTIkoTo1wrY1B3ZEUDC/Ta5vpv0cxYy4MPgMkeNovlXmEKCWX4m3orZS+3VJ/9J9grZ2rxcJubE9RAU5CXmEg\nVerification OK.\n",
+    "stderr": ""
+  },
+  {
+    "database": "daily.cvd",
+    "exit_code": 0,
+    "stdout": "File: /workspace/security-scan/db/daily.cvd\nBuild time: 18 Oct 2026 06:24 +0000\nVersion: 28157\nSignatures: 355765\nFunctionality level: 90\nBuilder: svc.clamav-publisher\nMD5: 0b8b78f9de50bda563753ba2d6d5ca34\nDigital signature: D2rxYlpn4WyxaNIWN2+9UqRC8wGLInHtJ6M9mDvkm5UEaCTudy8q0Hy7QF3H6uYKDKHsdMYWbQym6ACIIRbGxGSkZ3gidVp4fDx57qkPke4TQRhdKKKySOmZM6eZ/l/wTiCfDl1NDjXKyyZFoiKHjZCl5mkeHEI8H1z3FYcPQvd\nVerification OK.\n",
+    "stderr": ""
+  },
+  {
+    "database": "main.cvd",
+    "exit_code": 0,
+    "stdout": "File: /workspace/security-scan/db/main.cvd\nBuild time: 16 Dec 2025 23:18 +0000\nVersion: 63\nSignatures: 3287027\nFunctionality level: 90\nBuilder: tomjudge\nMD5: 9c353a6b32555186a45a61c6441f38c0\nDigital signature: gI9w3cezaElJbedEoiykyQeX1f6j9Xbs3a+cf9U/kH5QScGMe2mRz1K2JlYOrqfBuOUMbiKmvkVvAquOsMeDp/ejLVDx5WulC6klZVhLOfBHda29OjaLZwEGR9GPIHDr0mXriv7pivuMH60/loxpASIJHLOszyj95pxVK+EaTCh\nVerification OK.\n",
+    "stderr": ""
+  }
+]
