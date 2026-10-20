@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#17182a">
+  <title>Hmoob VoiceLab · Xưởng giọng Hmong Trắng</title>
+  <link rel="stylesheet" href="/web/style.css">
+  <script src="/web/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="Hmoob VoiceLab"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span>Hmoob<span class="brand-light">VoiceLab</span></span></a>
+    <div class="sidebar-caption">XƯỞNG GIỌNG HMONG TRẮNG</div>
+    <nav aria-label="Điều hướng chính">
+      <button class="nav-button active" id="nav-create" aria-current="page"><span aria-hidden="true">✦</span> Soạn & tạo giọng</button>
+      <button class="nav-button" id="nav-history"><span aria-hidden="true">☷</span> Bản thu của tôi <span id="history-count" class="nav-count">0</span></button>
+    </nav>
+    <div class="sidebar-note"><div class="local-dot"></div><strong>Chạy trên máy của bạn</strong><p>Không cần API key. Văn bản và bản thu được lưu cục bộ.</p></div>
+    <div class="sidebar-bottom"><span>Hmoob VoiceLab</span><span class="version">1.0</span></div>
+  </aside>
+  <main>
+    <header class="page-header"><div><div class="eyebrow">KHÔNG GIAN SÁNG TẠO</div><h1>Từ chữ viết,<br class="mobile-break"> thành lời kể<span>.</span></h1><p>Giọng Hmong Trắng. Kịch bản dài. Một không gian riêng.</p></div><div class="header-badge"><span aria-hidden="true">◉</span> Cục bộ · Không API key</div></header>
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+    <section class="engine-banner" aria-label="Trạng thái bộ tạo giọng"><span id="engine-light" class="engine-light"></span><div><strong id="engine-title">Đang kiểm tra bộ tạo giọng…</strong><p id="engine-description">Kiểm tra mô hình và thiết bị trên máy.</p></div><button id="refresh-status" class="text-button">Kiểm tra lại ↻</button></section>
+
+    <section id="create-view" aria-label="Soạn và tạo giọng">
+      <div class="workspace-grid">
+        <section class="card script-card">
+          <div class="card-heading"><div><span class="step-label">01 / KỊCH BẢN</span><h2>Bạn muốn kể điều gì?</h2></div><label class="button button-light file-button" for="text-file"><span aria-hidden="true">↑</span> Nhập TXT<input id="text-file" type="file" accept=".txt,text/plain" hidden></label></div>
+          <div class="editor-tools"><span>Văn bản thuần · UTF-8</span><button class="text-button" id="example">Thử một câu mẫu</button></div>
+          <label class="sr-only" for="script">Kịch bản cần tạo giọng</label>
+          <textarea id="script" placeholder="Dán kịch bản hoặc nhập tệp TXT tại đây…&#10;&#10;Từ một lời chào ngắn đến cả một cuốn sách, tool tự chia đoạn và đọc theo đúng thứ tự." spellcheck="false"></textarea>
+          <div class="editor-footer"><div><span id="character-count">0</span><span class="muted"> / 1.000.000 ký tự</span></div><button class="text-button muted" id="clear-text">Xóa văn bản</button></div>
+          <div class="capacity-track" aria-hidden="true"><span id="capacity-fill"></span></div>
+          <div class="script-note"><span aria-hidden="true">›</span><span>Bản đọc dài được chia thành nhiều tệp âm thanh. Dừng và tiếp tục từ tiến độ đã lưu.</span></div>
+        </section>
+
+        <section class="card settings-card">
+          <div class="card-heading"><div><span class="step-label">02 / CHẤT GIỌNG</span><h2>Chọn người kể</h2></div><span class="language-pill">Hmong Trắng</span></div>
+          <fieldset class="voice-picker"><legend class="sr-only">Giọng mẫu</legend><label class="voice-option"><input type="radio" name="voice" value="female" checked><span class="voice-avatar female" aria-hidden="true">N</span><span><strong>Giọng nữ</strong><small>Mẫu tham chiếu</small></span><span class="radio-mark"></span></label><label class="voice-option"><input type="radio" name="voice" value="male"><span class="voice-avatar male" aria-hidden="true">N</span><span><strong>Giọng nam</strong><small>Mẫu tham chiếu</small></span><span class="radio-mark"></span></label></fieldset>
+          <details class="reference-panel" id="reference-panel"><summary><span>Đoạn mẫu & lời tham chiếu</span><span id="reference-badge" class="small-badge">Cần nhập lời</span></summary><div class="reference-content"><p>Chọn một đoạn rõ lời dài <strong>3–8 giây</strong> và nhập chính xác lời Hmong trong đoạn đó. Mẫu nghe thử chưa phải giọng đã được huấn luyện.</p><audio id="reference-audio" controls preload="metadata" aria-label="Nghe bản âm thanh mẫu"></audio><div class="two-columns"><label>Bắt đầu (giây)<input id="reference-start" type="number" min="0" step="0.1" value="0"></label><label>Kết thúc (giây)<input id="reference-end" type="number" min="3" step="0.1" value="8"></label></div><button id="preview-reference" class="button button-light full-width">▶ Nghe đoạn đã chọn</button><label>Lời khớp đúng đoạn mẫu<textarea id="reference-text" rows="3" maxlength="2000" placeholder="Nhập lời Hmong của đoạn mẫu…"></textarea></label><button id="save-reference" class="button button-dark full-width">Lưu đoạn & lời mẫu</button><span id="reference-info" class="muted small"></span></div></details>
+          <div class="setting-group"><label class="field-title" for="quality">Chế độ xử lý</label><select id="quality"><option value="fast">Nhanh · 16 bước</option><option value="standard">Chất lượng · 32 bước</option><option value="draft">Bản nháp · 8 bước, thử nghiệm</option></select><p id="quality-note" class="field-note">Ít bước suy luận hơn để giảm thời gian xử lý. Nghe thử trước khi tạo bản dài.</p></div>
+          <div class="setting-group"><div class="inline-between"><label class="field-title" for="speed">Nhịp đọc</label><output id="speed-value" for="speed">1,00×</output></div><input id="speed" type="range" min="0.5" max="2" step="0.05" value="1"><div class="range-labels"><span>Chậm · 0,5×</span><span>Nhanh · 2×</span></div><p class="field-note">Điều chỉnh cách đọc, khác với tốc độ xử lý của máy.</p></div>
+          <button id="generate" class="button button-primary full-width"><span aria-hidden="true">✦</span> Tạo giọng nói <span aria-hidden="true">→</span></button><p class="generate-note">Tốc độ thực tế phụ thuộc CPU/GPU và độ dài văn bản.</p>
+        </section>
+      </div>
+      <section id="current-job" class="card current-job" hidden aria-label="Tác vụ đang theo dõi" aria-live="polite"><div class="job-top"><div><span class="step-label">BẢN THU CỦA BẠN</span><h2 id="current-title">Đang tạo giọng nói</h2><p id="current-caption" class="muted"></p></div><span id="current-percent" class="progress-number">0%</span></div><progress id="current-progress" max="100" value="0" aria-label="Tiến độ tạo giọng"></progress><div id="current-metrics" class="metrics"></div><p id="current-error" class="error-text" hidden></p><div id="current-actions" class="job-actions"></div><div id="current-parts" class="parts-list"></div><p id="parts-note" class="field-note" hidden>Mỗi tệp là một chương liên tiếp. Các tệp đã hoàn tất có thể nghe và tải trong khi tool đọc phần còn lại.</p></section>
+      <div class="workflow-notes"><span><b>01</b> Nhập tối đa một triệu ký tự</span><span><b>02</b> Chọn mẫu có lời tham chiếu</span><span><b>03</b> Tạo, nghe & tải từng chương</span></div>
+    </section>
+
+    <section id="history-view" hidden aria-label="Lịch sử bản thu"><div class="section-heading"><div><span class="step-label">THƯ VIỆN CỤC BỘ</span><h2>Bản thu của tôi</h2><p class="muted">Tiến độ và âm thanh vẫn được giữ khi bạn đóng trình duyệt.</p></div><button id="refresh-history" class="button button-light">Làm mới ↻</button></div><div id="history-list" class="history-list"></div><div id="empty-history" class="card empty-state" hidden><span aria-hidden="true">♫</span><h3>Câu chuyện đầu tiên đang chờ bạn</h3><p>Bản thu sẽ xuất hiện ở đây sau khi bạn tạo giọng.</p><button id="back-to-create" class="button button-dark">Bắt đầu soạn</button></div></section>
+    <footer class="page-footer"><span>Đọc theo từng đoạn · Lưu tiến độ trên đĩa · Giữ mô hình để tái sử dụng</span><span>Hmoob VoiceLab</span></footer>
+  </main>
+</body>
+</html>

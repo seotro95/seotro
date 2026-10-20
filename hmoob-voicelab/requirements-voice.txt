@@ -1,0 +1,5 @@
+# Optional voice engine. The web application itself uses Python's standard library.
+# Use Python 3.10–3.12; install matching torch/torchaudio for your CPU or GPU first.
+f5-tts==1.1.22
+torch>=2.6,<2.9
+torchaudio>=2.6,<2.9
