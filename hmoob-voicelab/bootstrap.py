@@ -22,6 +22,12 @@ class SetupError(RuntimeError):
     pass
 
 
+def progress(message):
+    # stderr keeps --check stdout machine-readable while remaining visible in
+    # the console and the portable launcher's combined diagnostic log.
+    print(message, file=sys.stderr, flush=True)
+
+
 def python_candidates(base=BASE):
     """Prefer the supplied portable runtime, then a saved local environment."""
     base = Path(base)
@@ -38,10 +44,14 @@ def select_python(base=BASE):
     return sys.executable, 'system'
 
 
-def _json_probe(python, code, environment, timeout=60):
-    result = subprocess.run([str(python), '-c', code], env=environment,
-                            capture_output=True, text=True, encoding='utf-8', errors='replace',
-                            timeout=timeout)
+def _json_probe(python, code, environment, timeout=60, label='Python'):
+    try:
+        result = subprocess.run([str(python), '-c', code], env=environment,
+                                capture_output=True, text=True, encoding='utf-8', errors='replace',
+                                timeout=timeout)
+    except subprocess.TimeoutExpired as exc:
+        raise SetupError(f'Kiểm tra {label} quá {timeout} giây. Bước đang dừng đã hiện trong '
+                         'cửa sổ khởi động; xem nhật ký để xác định thư viện chưa nạp được.') from exc
     for line in reversed(result.stdout.splitlines()):
         if line.startswith(PROBE_PREFIX):
             return json.loads(line[len(PROBE_PREFIX):])
@@ -117,13 +127,17 @@ except Exception as exc:
     result['error'] = type(exc).__name__ + ': ' + str(exc)[:300]
 print('HMOOB_PROBE:' + json.dumps(result))
 """
-    return _json_probe(python, code, environment, timeout=120)
+    return _json_probe(python, code, environment, timeout=120, label='thư viện AI')
 
 
 def models_ready(python, base, environment):
-    result = subprocess.run([str(python), str(Path(base) / 'setup_voice.py'), '--verify-only'],
-                            env=environment, cwd=base, capture_output=True, text=True,
-                            encoding='utf-8', errors='replace', timeout=180)
+    try:
+        result = subprocess.run([str(python), str(Path(base) / 'setup_voice.py'), '--verify-only'],
+                                env=environment, cwd=base, capture_output=True, text=True,
+                                encoding='utf-8', errors='replace', timeout=180)
+    except subprocess.TimeoutExpired as exc:
+        raise SetupError('Kiểm tra SHA-256 mô hình quá 180 giây. Mô hình và dữ liệu vẫn được giữ '
+                         'nguyên; xem nhật ký khởi động để kiểm tra tốc độ đọc tệp.') from exc
     return result.returncode == 0
 
 
@@ -152,7 +166,7 @@ def prepare_runtime(python, kind, base, environment, state):
     if not state['ready']:
         pip = subprocess.run([python, '-m', 'pip', '--version'], env=environment,
                              cwd=base, capture_output=True, text=True,
-                             encoding='utf-8', errors='replace')
+                             encoding='utf-8', errors='replace', timeout=45)
         if pip.returncode:
             run_step([python, '-m', 'ensurepip', '--upgrade'], environment, base,
                      'Chuẩn bị pip trong môi trường tạo giọng…')
@@ -191,10 +205,17 @@ def main(argv=None, *, base=BASE):
     data = args.data_dir or Path(os.getenv('HMOOB_DATA_DIR', str(base / '.data')))
     environment = configure_environment(base, data)
     try:
+        progress('Hmoob VoiceLab — đang khởi động. Giữ cửa sổ này mở.')
         python, kind = select_python(base)
+        progress('[1/4] Kiểm tra Python đi kèm…')
         check_python(python, environment)
+        progress('[2/4] Kiểm tra FFmpeg và FFprobe…')
         check_ffmpeg(environment)
+        progress('[3/4] Nạp và kiểm tra thư viện AI; lần đầu trên máy có thể lâu hơn (tối đa 120 giây)…')
         state = dependency_state(python, environment)
+        if not state['ready'] and state.get('error'):
+            progress('Thư viện AI chưa sẵn sàng: ' + state['error'])
+        progress('[4/4] Kiểm tra mô hình và SHA-256; chưa có mô hình sẽ tải ở bước kế tiếp…')
         verified = models_ready(python, base, environment)
         if args.check:
             print(json.dumps({'ready': bool(state['ready'] and verified),
@@ -211,6 +232,7 @@ def main(argv=None, *, base=BASE):
             return 0
         command = [str(python), str(base / 'launch.py'), '--data-dir', str(data.resolve()),
                    *launch_arguments]
+        progress('Đã sẵn sàng. Đang mở giao diện trên trình duyệt…')
         return subprocess.run(command, cwd=base, env=environment).returncode
     except KeyboardInterrupt:
         print('\nĐã dừng. Tiến độ đã lưu sẽ được dùng lại khi mở tool.', flush=True)

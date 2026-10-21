@@ -27,6 +27,12 @@ CPU van dung duoc nhung toc do phu thuoc may va do dai van ban.
 
 NEU GAP LOI
 
+- Cua so hien ngay cac buoc khoi dong; lan dau nap thu vien AI co the lau
+  hon. Buoc nay gioi han 120 giay va se bao ro neu het thoi gian.
+- Neu chua mo giao dien, xem buoc dang chay va nhat ky tai
+  hmoob-voicelab/.data/.logs/launch.log. CHAN_DOAN_HMOOB.bat chi kiem tra
+  dieu kien chay va ghi ket qua vao nhat ky. Mo URL trong cua so lenh
+  khi may chu da khoi dong.
 - Chay lai MO_HMOOB_VOICELAB.bat; tool dung lai cac tep da tai dung.
 - Kiem tra Internet o lan chuan bi dau, dung luong dia va quyen ghi.
 - Neu Windows Security chan tep, giu nguyen bao ve; khong them ngoai le

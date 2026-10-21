@@ -20,7 +20,7 @@ import zipfile
 
 SOURCE = Path(__file__).resolve().parents[1]
 APP_FILES = (
-    'audio_io.py', 'bootstrap.py', 'engine.py', 'jobs.py', 'launch.py',
+    'audio_io.py', 'bootstrap.py', 'engine.py', 'jobs.py', 'launch.py', 'launch_logged.py',
     'longform.py', 'runtime_lock.py', 'server.py', 'setup_voice.py', 'voices.py', 'version.py',
     'requirements-voice.txt', 'start.bat', 'install_voice.bat', 'start.sh',
     'README.md', 'VALIDATION.md', 'SECURITY-REVIEW.md', 'BAT-DAU.txt',
@@ -143,13 +143,36 @@ def build_environment(root, reports):
 
 
 def write_launcher(root):
-    content = ('@echo off\r\nsetlocal\r\nset "PYTHONHOME="\r\nset "PYTHONPATH="\r\n'
-               'set "PYTHONNOUSERSITE=1"\r\nset "PYTHONUTF8=1"\r\ncd /d "%~dp0"\r\n'
-               '"%~dp0runtime\\python.exe" "%~dp0hmoob-voicelab\\bootstrap.py" %*\r\n'
-               'if errorlevel 1 (\r\n'
-               '  echo Khong mo duoc tool. Xem thong bao phia tren.\r\n'
-               '  pause\r\n  exit /b 1\r\n)\r\nexit /b 0\r\n')
-    (root / 'MO_HMOOB_VOICELAB.bat').write_bytes(content.encode('ascii'))
+    root = Path(root)
+    app = root / 'hmoob-voicelab'
+    app.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(SOURCE / 'launch_logged.py', app / 'launch_logged.py')
+    prefix = ('@echo off\r\nsetlocal\r\ntitle Hmoob VoiceLab\r\n'
+              'echo HMOOB VOICELAB - DANG KHOI DONG...\r\n'
+              'set "PYTHONHOME="\r\nset "PYTHONPATH="\r\n'
+              'set "PYTHONNOUSERSITE=1"\r\nset "PYTHONUTF8=1"\r\n'
+              'set "PYTHONUNBUFFERED=1"\r\ncd /d "%~dp0"\r\n'
+              'if not exist "%~dp0runtime\\python.exe" (\r\n'
+              '  echo Thieu runtime\\python.exe. Hay giai nen toan bo goi tool.\r\n'
+              '  pause\r\n  exit /b 1\r\n)\r\n'
+              'if not exist "%~dp0hmoob-voicelab\\launch_logged.py" (\r\n'
+              '  echo Thieu tep launch_logged.py. Hay giai nen day du ban cap nhat.\r\n'
+              '  pause\r\n  exit /b 1\r\n)\r\n'
+              'set "HMOOB_LOG_DIR=%~dp0hmoob-voicelab\\.data\\.logs"\r\n'
+              'if defined HMOOB_DATA_DIR set "HMOOB_LOG_DIR=%HMOOB_DATA_DIR%\\.logs"\r\n'
+              'if not exist "%HMOOB_LOG_DIR%" mkdir "%HMOOB_LOG_DIR%"\r\n')
+    ending = ('if errorlevel 1 (\r\n'
+              '  echo Khong mo duoc tool. Xem thong bao va tep log phia tren.\r\n'
+              '  pause\r\n  exit /b 1\r\n)\r\nexit /b 0\r\n')
+    for filename, mode, log_name in (
+        ('MO_HMOOB_VOICELAB.bat', '', 'launch.log'),
+        ('CHAN_DOAN_HMOOB.bat', '--diagnose ', 'diagnostic.log'),
+    ):
+        content = (prefix + 'echo Log: "%HMOOB_LOG_DIR%\\' + log_name + '"\r\n'
+                   'echo Dang mo Python. Lan dau Windows co the kiem tra cac thu vien...\r\n'
+                   'echo Starting embedded Python>>"%HMOOB_LOG_DIR%\\' + log_name + '"\r\n'
+                   '"%~dp0runtime\\python.exe" -u "%~dp0hmoob-voicelab\\launch_logged.py" ' + mode + '%*\r\n' + ending)
+        (root / filename).write_bytes(content.encode('ascii'))
 
 
 def write_notices(root, model_manifest):

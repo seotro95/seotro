@@ -1,5 +1,7 @@
 @echo off
 setlocal
+title Hmoob VoiceLab
+echo Hmoob VoiceLab - dang khoi dong. Giu cua so nay mo. 1>&2
 cd /d "%~dp0"
 set "PYTHONHOME="
 set "PYTHONPATH="

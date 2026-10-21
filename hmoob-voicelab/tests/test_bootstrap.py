@@ -59,6 +59,35 @@ class BootstrapTests(unittest.TestCase):
         self.assertEqual(environment['PYTHONNOUSERSITE'], '1')
         self.assertEqual(self.saved.read_bytes(), b'original user data')
 
+    def test_progress_is_visible_before_native_probe_can_block(self):
+        self.portable()
+        output = io.StringIO()
+
+        def python_probe(*args):
+            self.assertIn('đang khởi động', output.getvalue())
+            self.assertIn('[1/4]', output.getvalue())
+
+        def native_probe(*args):
+            # This assertion runs at entry to the potentially slow native
+            # import, not after it returns. No blank window during that wait.
+            self.assertIn('[3/4]', output.getvalue())
+            self.assertIn('120 giây', output.getvalue())
+            return READY
+
+        with patch('bootstrap.check_python', side_effect=python_probe), \
+                patch('bootstrap.check_ffmpeg'), \
+                patch('bootstrap.dependency_state', side_effect=native_probe), \
+                patch('bootstrap.models_ready', return_value=True), \
+                patch('bootstrap.subprocess.run', return_value=SimpleNamespace(returncode=0)), \
+                redirect_stderr(output):
+            self.assertEqual(bootstrap.main(['--data-dir', str(self.data)], base=self.base), 0)
+
+    def test_hung_native_probe_is_bounded_and_identifies_its_stage(self):
+        environment = bootstrap.configure_environment(self.base, self.data)
+        with self.assertRaisesRegex(bootstrap.SetupError, 'thư viện AI'):
+            bootstrap._json_probe(sys.executable, 'import time; time.sleep(10)', environment,
+                                  timeout=.1, label='thư viện AI')
+
     def test_portable_missing_only_models_downloads_models_without_pip_or_venv(self):
         python = self.portable()
         calls = []

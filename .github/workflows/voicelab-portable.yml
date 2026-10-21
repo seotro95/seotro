@@ -21,6 +21,72 @@ env:
   HF_HUB_DISABLE_XET: '1'
 
 jobs:
+  startup-hotfix:
+    name: Verify small startup update on the shipped Windows package
+    runs-on: windows-2022
+    timeout-minutes: 35
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Run focused startup regressions
+        working-directory: hmoob-voicelab
+        run: |
+          python -m unittest discover -s tests -p test_bootstrap.py -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s packaging -p test_*.py -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Download the exact previously shipped Windows package
+        uses: actions/download-artifact@v4
+        with:
+          name: Hmoob-VoiceLab-Windows-x64
+          run-id: 39574258782
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/shipped-voicelab
+      - name: Check the shipped archive and extract it with Windows
+        shell: pwsh
+        run: |
+          $archive = Join-Path '${{ runner.temp }}/shipped-voicelab' 'Hmoob-VoiceLab-Windows-x64.zip'
+          $expected = '0f8117f64879bba0df286901881ab51e523dfbd5f905f43413879ce2e80f1c25'
+          if ((Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLowerInvariant() -ne $expected) { throw 'Previously shipped ZIP does not match the verified build.' }
+          Expand-Archive -LiteralPath $archive -DestinationPath '${{ runner.temp }}/startup-verify' -ErrorAction Stop
+      - name: Apply the update and verify full first-launch startup
+        shell: pwsh
+        run: |
+          $root = '${{ runner.temp }}/startup-verify/Hmoob VoiceLab'
+          Copy-Item -LiteralPath 'hmoob-voicelab/bootstrap.py' -Destination (Join-Path $root 'hmoob-voicelab/bootstrap.py')
+          python -c "import sys;from pathlib import Path;sys.path.insert(0,'hmoob-voicelab/packaging');from build_windows import write_launcher;write_launcher(Path(r'$root'))"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python hmoob-voicelab/packaging/check_startup.py "$root" --reports '${{ runner.temp }}/startup-reports' --model-dir '${{ runner.temp }}/startup-models' --timeout 1200
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Create the small update without runtime, models or user data
+        run: python hmoob-voicelab/packaging/build_hotfix.py --output '${{ runner.temp }}/startup-update' --archive '${{ runner.temp }}/Hmoob-VoiceLab-startup-update.zip'
+      - name: Scan the actual update files and ZIP with Defender
+        shell: pwsh
+        timeout-minutes: 10
+        run: ./hmoob-voicelab/packaging/scan_portable.ps1 -PackageRoot '${{ runner.temp }}/startup-update' -Archive '${{ runner.temp }}/Hmoob-VoiceLab-startup-update.zip' -ReportDirectory '${{ runner.temp }}/startup-reports/defender'
+      - name: Upload the tested small update
+        uses: actions/upload-artifact@v4
+        with:
+          name: Hmoob-VoiceLab-startup-update
+          path: ${{ runner.temp }}/startup-update/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Keep full first-launch and update scan reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Hmoob-VoiceLab-startup-validation
+          path: ${{ runner.temp }}/startup-reports/
+          if-no-files-found: warn
+          retention-days: 30
   windows:
     runs-on: windows-2022
     timeout-minutes: 60
