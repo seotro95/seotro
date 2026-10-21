@@ -144,7 +144,7 @@ def build_environment(root, reports):
 
 def write_launcher(root):
     content = ('@echo off\r\nsetlocal\r\nset "PYTHONHOME="\r\nset "PYTHONPATH="\r\n'
-               'set "PYTHONNOUSERSITE=1"\r\ncd /d "%~dp0"\r\n'
+               'set "PYTHONNOUSERSITE=1"\r\nset "PYTHONUTF8=1"\r\ncd /d "%~dp0"\r\n'
                '"%~dp0runtime\\python.exe" "%~dp0hmoob-voicelab\\bootstrap.py" %*\r\n'
                'if errorlevel 1 (\r\n'
                '  echo Khong mo duoc tool. Xem thong bao phia tren.\r\n'

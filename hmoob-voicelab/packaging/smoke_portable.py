@@ -118,6 +118,25 @@ def main():
     if check.returncode:
         raise RuntimeError('Relocated bootstrap failed: ' + check.stdout + check.stderr)
     assert json.loads(check.stdout.strip().splitlines()[-1])['ready']
+    launcher = root / 'MO_HMOOB_VOICELAB.bat'
+    comspec = os.environ.get('COMSPEC', r'C:\Windows\System32\cmd.exe')
+    # CMD /s /c needs an outer quote pair around a quoted batch path and its
+    # arguments. Pass this exact native command line without an extra shell.
+    command = subprocess.list2cmdline([comspec, '/d', '/s', '/c']) + ' ""' + str(launcher) + '" --check"'
+    launched = subprocess.run(command, shell=False, stdin=subprocess.DEVNULL,
+                              capture_output=True, text=True, encoding='utf-8',
+                              errors='replace', timeout=180, cwd=root)
+    launch_status = None
+    for line in reversed(launched.stdout.splitlines()):
+        try:
+            value = json.loads(line)
+        except ValueError:
+            continue
+        if isinstance(value, dict) and 'ready' in value:
+            launch_status = value
+            break
+    if launched.returncode or not launch_status or not launch_status['ready']:
+        raise RuntimeError('One-click BAT failed after relocation: ' + launched.stdout + launched.stderr)
     text = 'Nyob zoo. Kuv yog Hmoob.'
     results = []
     process, port, log = start_app(root, reports)
@@ -158,6 +177,7 @@ def main():
         stop_app(process)
     report = {'relocated_runtime': str(runtime), 'text': text, 'voices': results,
               'external_network_blocked': True, 'bootstrap_ready': True,
+              'one_click_bat_ready': True,
               'http_audio_and_zip_verified': True, 'history_survives_restart': True,
               'speech_quality_assessed': False}
     (reports / 'native-smoke.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

@@ -40,7 +40,8 @@ def select_python(base=BASE):
 
 def _json_probe(python, code, environment, timeout=60):
     result = subprocess.run([str(python), '-c', code], env=environment,
-                            capture_output=True, text=True, timeout=timeout)
+                            capture_output=True, text=True, encoding='utf-8', errors='replace',
+                            timeout=timeout)
     for line in reversed(result.stdout.splitlines()):
         if line.startswith(PROBE_PREFIX):
             return json.loads(line[len(PROBE_PREFIX):])
@@ -121,7 +122,8 @@ print('HMOOB_PROBE:' + json.dumps(result))
 
 def models_ready(python, base, environment):
     result = subprocess.run([str(python), str(Path(base) / 'setup_voice.py'), '--verify-only'],
-                            env=environment, cwd=base, capture_output=True, text=True, timeout=180)
+                            env=environment, cwd=base, capture_output=True, text=True,
+                            encoding='utf-8', errors='replace', timeout=180)
     return result.returncode == 0
 
 
@@ -149,7 +151,8 @@ def prepare_runtime(python, kind, base, environment, state):
         state = {'ready': False, 'torch_pair_ready': False}
     if not state['ready']:
         pip = subprocess.run([python, '-m', 'pip', '--version'], env=environment,
-                             cwd=base, capture_output=True, text=True)
+                             cwd=base, capture_output=True, text=True,
+                             encoding='utf-8', errors='replace')
         if pip.returncode:
             run_step([python, '-m', 'ensurepip', '--upgrade'], environment, base,
                      'Chuẩn bị pip trong môi trường tạo giọng…')

@@ -180,6 +180,24 @@ class BootstrapTests(unittest.TestCase):
         environment = bootstrap.configure_environment(self.base, self.data)
         bootstrap.check_python(sys.executable, environment)
 
+    def test_utf8_probe_survives_legacy_parent_codepage(self):
+        environment = bootstrap.configure_environment(self.base, self.data)
+        code = ("import json; print('HMOOB_PROBE:' + json.dumps("
+                "{'reason': 'Không bỏ kiểm tra mô hình'}, ensure_ascii=False))")
+        # Simulate a Windows cp1252 parent while the child explicitly writes
+        # UTF-8. Default decoding would fail on the 0x8f byte in 'bỏ'.
+        with patch('subprocess._text_encoding', return_value='cp1252'):
+            report = bootstrap._json_probe(sys.executable, code, environment)
+        self.assertEqual(report['reason'], 'Không bỏ kiểm tra mô hình')
+
+    def test_missing_models_vietnamese_stderr_survives_legacy_parent_codepage(self):
+        script = self.base / 'setup_voice.py'
+        script.write_text("import sys\nprint('Không bỏ kiểm tra mô hình', file=sys.stderr)\n"
+                          "raise SystemExit(1)\n", encoding='utf-8')
+        environment = bootstrap.configure_environment(self.base, self.data)
+        with patch('subprocess._text_encoding', return_value='cp1252'):
+            self.assertFalse(bootstrap.models_ready(sys.executable, self.base, environment))
+
 
 if __name__ == '__main__':
     unittest.main()
