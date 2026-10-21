@@ -244,6 +244,11 @@ def main(argv=None):
         checked_run([relocated / 'runtime' / 'python.exe', SOURCE / 'packaging' / 'smoke_portable.py',
                      relocated, reports], environment=build_environment(relocated, reports),
                     cwd=relocated / 'hmoob-voicelab', timeout=1800)
+        checked_run([relocated / 'runtime' / 'python.exe', SOURCE / 'packaging' / 'check_startup.py',
+                     relocated, '--reports', reports / 'normal-startup',
+                     '--model-dir', relocated / 'hmoob-voicelab' / '.data' / 'models',
+                     '--timeout', '600'], environment=build_environment(relocated, reports),
+                    cwd=relocated, timeout=660)
     finally:
         relocated.rename(root)
 
