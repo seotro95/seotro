@@ -148,7 +148,7 @@ def write_launcher(root):
                '"%~dp0runtime\\python.exe" "%~dp0hmoob-voicelab\\bootstrap.py" %*\r\n'
                'if errorlevel 1 (\r\n'
                '  echo Khong mo duoc tool. Xem thong bao phia tren.\r\n'
-               '  pause\r\n)\r\n')
+               '  pause\r\n  exit /b 1\r\n)\r\nexit /b 0\r\n')
     (root / 'MO_HMOOB_VOICELAB.bat').write_bytes(content.encode('ascii'))
 
 
