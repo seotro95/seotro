@@ -15,16 +15,16 @@ import zipfile
 
 
 REPOSITORY = 'seotro95/seotro'
-SOURCE_RUN = 39603829839
-SOURCE_COMMIT = '15d3065de1a537f3a6df4c61f45388ca2daa26ff'
-ARTIFACT_ID = 12349436488
+SOURCE_RUN = 39635826843
+SOURCE_COMMIT = 'e24188a8077a515ab820ef752b2a8b91d7593d9d'
+ARTIFACT_ID = 12364897379
 ARTIFACT_NAME = 'Hmoob-VoiceLab-Windows-x64'
-ARCHIVE_NAME = ARTIFACT_NAME + '.zip'
-EXPECTED_SIZE = 792612638
-EXPECTED_SHA256 = 'aa4dfbec87d4958eb915dd134a132cb69feada0443acfbad3ed0639952baeccc'
+ARCHIVE_NAME = 'Hmoob-VoiceLab-1.1.1-Windows-x64.zip'
+EXPECTED_SIZE = 782350627
+EXPECTED_SHA256 = 'ebc65ec4cc4a08bcd2a66a318e143fc5009aac2e7f553ba329ad28f5dfa4a74b'
 EXPECTED_DIGEST = 'sha256:' + EXPECTED_SHA256
-RELEASE_TAG = 'hmoob-voicelab-1.1.0-windows-39603829839'
-RELEASE_TITLE = 'Hmoob VoiceLab 1.1.0 - Windows x64'
+RELEASE_TAG = 'hmoob-voicelab-1.1.1-windows-39635826843'
+RELEASE_TITLE = 'Hmoob VoiceLab 1.1.1 - Windows x64'
 REQUIRED_FILES = {
     'MO_HMOOB_VOICELAB.bat', 'CHAN_DOAN_HMOOB.bat', 'BAT-DAU.txt', 'BUILD.json',
     'runtime/python.exe', 'runtime/python312.dll',
@@ -32,6 +32,7 @@ REQUIRED_FILES = {
     'runtime/Lib/site-packages/torchaudio/__init__.py',
     'ffmpeg/bin/ffmpeg.exe', 'ffmpeg/bin/ffprobe.exe',
     'hmoob-voicelab/bootstrap.py', 'hmoob-voicelab/launch_logged.py',
+    'hmoob-voicelab/hmong_f5.py', 'hmoob-voicelab/version.py',
     'hmoob-voicelab/server.py', 'hmoob-voicelab/web/index.html',
     'hmoob-voicelab/assets/voices.json',
     'hmoob-voicelab/assets/default-female.mp3',
@@ -39,11 +40,13 @@ REQUIRED_FILES = {
 }
 RELEASE_BODY = f'''Bản Windows x64 đầy đủ, gồm Python, thư viện AI và FFmpeg.
 
-Tải **{ARCHIVE_NAME}**, giải nén toàn bộ một lần vào thư mục mới như `C:\\HmoobMoi`, rồi mở **MO_HMOOB_VOICELAB.bat**. Cửa sổ sẽ hiện tiến trình khởi động và lưu log.
+Bản 1.1.1 bỏ bước nạp AI trước khi mở giao diện để xử lý lỗi khởi động dừng quá 120 giây. Khi tạo giọng, giao diện và nhật ký hiển thị từng bước nạp mô hình cùng thời gian đã xử lý.
+
+Tải **{ARCHIVE_NAME}**, giải nén toàn bộ một lần vào thư mục mới như `C:\\Hmoob-1.1.1`, rồi mở **MO_HMOOB_VOICELAB.bat**. Không cần ghép với bản cũ. Giữ cửa sổ lệnh mở trong lúc dùng.
 
 Lần đầu cần Internet để tự tải khoảng **1,4 GB mô hình** có kiểm tra SHA-256. Sau đó có thể tạo giọng nam/nữ bằng CPU trên máy.
 
-Đã kiểm tra giọng nam/nữ thật, chạy BAT sau khi đổi thư mục, mở ứng dụng và lưu dữ liệu trên Windows. Windows Defender trên máy kiểm thử không phát hiện mối đe dọa trong các tệp đã đóng gói và ZIP kiểm thử; kết quả này không phải bảo đảm cho mọi máy.
+Đã kiểm tra giọng nam/nữ thật, chạy BAT sau khi đổi thư mục, mở giao diện không nạp AI trước, xuất WAV/ZIP và lưu lịch sử trên Windows. Windows Defender trên máy kiểm thử không phát hiện mối đe dọa trong các tệp đã đóng gói và ZIP kiểm thử; kết quả này không phải bảo đảm cho mọi máy.
 
 ZIP tải tại đây giữ nguyên từng byte từ artifact đã kiểm thử: https://github.com/{REPOSITORY}/actions/runs/{SOURCE_RUN}
 
