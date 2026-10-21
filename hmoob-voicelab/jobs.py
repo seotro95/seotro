@@ -10,6 +10,7 @@ import shutil
 import threading
 import time
 import uuid
+import wave
 
 from audio_io import PART_SECONDS, assemble, inspect_wav, write_samples
 from longform import CHUNK_CHARACTERS, PLANNER_VERSION, plan, validate_text
@@ -221,9 +222,17 @@ class JobManager:
                 segment = text[span['start']:span['end']].strip()
                 if segment:
                     path = folder / 'chunks' / f'{index:07d}.wav'
+                    cached = False
                     if path.exists():
-                        frames, rate = inspect_wav(path)
-                    else:
+                        try:
+                            frames, rate = inspect_wav(path)
+                            cached = True
+                        except (ValueError, EOFError, wave.Error):
+                            # Interrupted/corrupt PCM is not a completed segment.
+                            # Replace it atomically only after fresh synthesis;
+                            # later valid checkpoints remain reusable.
+                            pass
+                    if not cached:
                         if shutil.disk_usage(folder).free < self.minimum_free:
                             raise ValueError('Đĩa gần đầy. Các đoạn đã xong được giữ lại; giải phóng chỗ rồi Tiếp tục.')
                         tick = time.monotonic()

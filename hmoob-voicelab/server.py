@@ -14,6 +14,7 @@ from jobs import JobManager
 from longform import MAX_CHARACTERS, MAX_JSON_BYTES
 from runtime_lock import DataLock
 from voices import Voices
+from version import APP_VERSION
 
 BASE = Path(__file__).resolve().parent
 
@@ -33,7 +34,7 @@ def make_server(data, host='127.0.0.1', port=8123, engine=None, engine_status=No
         raise
 
     class Handler(BaseHTTPRequestHandler):
-        server_version = 'HmoobVoiceLab/1.0'
+        server_version = 'HmoobVoiceLab/' + APP_VERSION
 
         def setup(self):
             super().setup()
@@ -156,7 +157,7 @@ def make_server(data, host='127.0.0.1', port=8123, engine=None, engine_status=No
                     return self._file(BASE / 'web' / parts[1], mime + '; charset=utf-8')
                 if parts == ['api', 'status']:
                     return self._json({'max_characters': MAX_CHARACTERS, 'engine': engine_status(),
-                                       'ffmpeg': bool(shutil.which('ffmpeg')), 'version': '1.0.0'})
+                                       'ffmpeg': bool(shutil.which('ffmpeg')), 'version': APP_VERSION})
                 if parts == ['api', 'voices']:
                     return self._json({'voices': voices.all()})
                 if len(parts) == 4 and parts[:2] == ['api', 'voices'] and parts[3] == 'sample':

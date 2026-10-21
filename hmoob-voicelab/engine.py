@@ -231,7 +231,7 @@ class SpeechEngine:
             try:
                 model = self._load()
                 reference, normalized_text = self._prepare_reference(reference_path, reference_text, reference_key)
-                from f5_tts.infer.utils_infer import infer_batch_process
+                from f5_tts.infer.utils_infer import infer_batch_process, hop_length, target_sample_rate
                 # One bounded batch: no whole-book array or unbounded inference
                 # fan-out, and no duplicate copy of a large model per process.
                 import numpy as np
@@ -247,11 +247,23 @@ class SpeechEngine:
                 frames = 0
                 expected_rate = None
                 for batch in _bounded_batches(text.strip(), min(400, budget)):
+                    fix_duration = None
+                    if len(batch.encode("utf-8")) < 10:
+                        # F5-TTS 1.1.22 replaces speed with 0.3 for short text.
+                        # Its supported duration override keeps the selected
+                        # pacing, including when the final sub-batch is short.
+                        ref_frames = reference[0].shape[-1] // hop_length
+                        padded_text = normalized_text + (" " if len(normalized_text[-1].encode("utf-8")) == 1 else "")
+                        new_frames = max(1, int(ref_frames / len(padded_text.encode("utf-8"))
+                                                * len(batch.encode("utf-8")) / speed))
+                        # Half a frame prevents float rounding from dropping
+                        # a frame when upstream converts seconds back to int.
+                        fix_duration = (ref_frames + new_frames + 0.5) * hop_length / target_sample_rate
                     result = next(infer_batch_process(
                         reference, normalized_text, [batch], model.ema_model, model.vocoder,
                         mel_spec_type=model.mel_spec_type, progress=None,
                         nfe_step=QUALITY_STEPS[quality], speed=float(speed), device=self.device,
-                        cross_fade_duration=0,
+                        cross_fade_duration=0, fix_duration=fix_duration,
                     ))
                     samples, rate = np.asarray(result[0]), result[1]
                     if (isinstance(rate, bool) or not isinstance(rate, int) or not 8000 <= rate <= 96000

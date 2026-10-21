@@ -1,6 +1,7 @@
 """Offline integrity and bounded-engine contracts; these are not voice quality tests."""
 from array import array
 import hashlib
+import importlib.util
 import json
 import math
 import os
@@ -92,7 +93,7 @@ class EngineValidationTests(unittest.TestCase):
             calls.append((batches, settings))
             yield np.ones(2400, dtype="float32") * .1, 24000, None
 
-        fake_module = SimpleNamespace(infer_batch_process=infer)
+        fake_module = SimpleNamespace(infer_batch_process=infer, hop_length=256, target_sample_rate=24000)
         fake_model = SimpleNamespace(ema_model=object(), vocoder=object(), mel_spec_type="vocos")
         reference = (np.ones((1, 72000), dtype="float32"), 24000)
         text = "Nyob zoo. " * 30
@@ -116,12 +117,75 @@ class EngineValidationTests(unittest.TestCase):
                 yield output, 24000, None
             with patch.object(speech, "_load", return_value=fake_model), \
                     patch.object(speech, "_prepare_reference", return_value=(reference, "Nyob zoo. ")), \
-                    patch.dict(sys.modules, {"f5_tts.infer.utils_infer": SimpleNamespace(infer_batch_process=infer)}):
+                    patch.dict(sys.modules, {"f5_tts.infer.utils_infer": SimpleNamespace(
+                        infer_batch_process=infer, hop_length=256, target_sample_rate=24000)}):
                 with self.assertRaises(engine.EngineError):
                     speech.synthesize("Kuv yog Hmoob.", self.reference, "Nyob zoo.")
 
+    @unittest.skipUnless(importlib.util.find_spec("f5_tts"), "Optional F5-TTS dependency is not installed")
+    def test_real_f5_short_utterances_follow_selected_speed(self):
+        # Exercise upstream's actual batching/duration and waveform slicing;
+        # only the costly neural model and vocoder are controlled fixtures.
+        # No model download or claim about generated speech quality is made.
+        with patch.dict(os.environ, {
+            "MPLCONFIGDIR": str(self.root / "matplotlib"),
+            "NUMBA_CACHE_DIR": str(self.root / "numba"),
+            "XDG_CACHE_HOME": str(self.root / "cache"),
+            "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1",
+        }), patch("urllib.request.urlopen", side_effect=AssertionError("network forbidden")):
+            import torch
+            from f5_tts.infer import utils_infer
+
+            requested_steps = []
+
+            class Model:
+                def sample(self, *, duration, steps, **kwargs):
+                    requested_steps.append(steps)
+                    return torch.zeros((1, duration, 100)), None
+
+            class Vocoder:
+                def decode(self, mel):
+                    return torch.ones((1, mel.shape[-1] * utils_infer.hop_length)) * .1
+
+            speech = engine.SpeechEngine()
+            speech.device = "cpu"
+            model = SimpleNamespace(ema_model=Model(), vocoder=Vocoder(), mel_spec_type="vocos")
+            for utterance in ("Nyob zoo.", "Zoo!"):
+                lengths = []
+                for speed in (.5, 1, 2):
+                    with patch.object(speech, "_load", return_value=model):
+                        samples, rate = speech.synthesize(
+                            utterance, self.reference, "Kuv yog ib tug Hmoob.", speed=speed, quality="fast")
+                    lengths.append(len(samples))
+                    self.assertEqual(rate, 24000)
+                with self.subTest(utterance=utterance):
+                    self.assertGreater(lengths[0], lengths[1])
+                    self.assertGreater(lengths[1], lengths[2])
+                    self.assertAlmostEqual(lengths[0], 2 * lengths[1], delta=512)
+                    self.assertAlmostEqual(lengths[1], 2 * lengths[2], delta=512)
+            self.assertEqual(requested_steps, [16] * 6)
+
 
 class InstallerIntegrityTests(unittest.TestCase):
+    def test_installer_rejects_metadata_for_an_unvalidated_model_revision(self):
+        import io
+        for repository, _ in setup_voice.SOURCES:
+            with self.subTest(repository=repository):
+                body = json.dumps({'sha': '1' * 40}).encode()
+                with patch('urllib.request.urlopen', return_value=io.BytesIO(body)):
+                    with self.assertRaisesRegex(setup_voice.SetupError, 'khác bản'):
+                        setup_voice._get_metadata(repository)
+
+    def test_installer_uses_the_validated_revision_even_if_main_has_changed(self):
+        import io
+        for repository, _ in setup_voice.SOURCES:
+            expected = setup_voice.MODEL_REVISIONS[repository]
+            body = json.dumps({'sha': expected, 'siblings': []}).encode()
+            with self.subTest(repository=repository):
+                with patch('urllib.request.urlopen', return_value=io.BytesIO(body)) as request:
+                    self.assertEqual(setup_voice._get_metadata(repository)['sha'], expected)
+                self.assertIn('/revision/' + expected + '?blobs=true', request.call_args.args[0].full_url)
+
     def test_metadata_requires_authoritative_identity_and_size(self):
         with self.assertRaises(setup_voice.SetupError):
             setup_voice._entry({"siblings": [{"rfilename": "vocab.txt", "size": 5}]}, "vocab.txt")

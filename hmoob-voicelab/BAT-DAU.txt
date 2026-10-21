@@ -1,0 +1,38 @@
+HMOOB VOICELAB 1.1 - TAO GIONG HMONG NAM / NU
+
+BAN WINDOWS PORTABLE
+
+1. Giai nen TOAN BO goi tai ve vao mot thu muc ban co quyen ghi.
+   Khong chay truc tiep trong cua so xem ZIP.
+2. Mo MO_HMOOB_VOICELAB.bat o thu muc ngoai cung.
+3. Lan dau can Internet de tool tu tai va kiem tra mo hinh (~1,4 GB).
+   Giu cua so lenh mo va cho trinh duyet tu mo. Khong can cai Python,
+   FFmpeg, thu vien AI hay nhap API key. Cac lan sau dung ngoai tuyen.
+
+TAO BAN DOC
+
+- Chon Giong nu hoac Giong nam. Hai giong da co loi va doan mau dung.
+- Dan loi HMONG hoac nhap tep TXT UTF-8, toi da 1.000.000 ky tu.
+- Chon Nhanh (16 buoc), Chat luong (32 buoc) hoac Ban nhap (8 buoc).
+- Bam Tao giong. Theo doi tien do; nghe va tai cac chuong WAV/ZIP.
+- Bam Dung de giu tien do. Trong Lich su, bam Tiep tuc de doc phan con lai.
+
+GIU DU LIEU
+
+Giu cua so lenh trong luc dung tool. Dong trinh duyet khong dung may chu;
+nhan Ctrl+C trong cua so lenh de thoat. Du lieu nam o hmoob-voicelab/.data.
+Sao luu thu muc .data truoc khi xoa/chuyen/cap nhat ban Portable.
+Can it nhat khoang 8 GB o dia trong, khuyen nghi RAM 16 GB va Windows x64.
+CPU van dung duoc nhung toc do phu thuoc may va do dai van ban.
+
+NEU GAP LOI
+
+- Chay lai MO_HMOOB_VOICELAB.bat; tool dung lai cac tep da tai dung.
+- Kiem tra Internet o lan chuan bi dau, dung luong dia va quyen ghi.
+- Neu Windows Security chan tep, giu nguyen bao ve; khong them ngoai le
+  hoac khoi phuc tep bi chan. Giu lai ten phat hien va thong tin ban tai.
+- Ban ma nguon (khong co runtime/ffmpeg) dung start.bat va can Python
+  3.10-3.12 64-bit, FFmpeg/ffprobe; start se tu chuan bi thu vien/mo hinh.
+
+Nghe thu mot doan ngan truoc khi tao tai lieu dai. Mo hinh Hmong la ban
+thu nghiem; khong cam ket moi tu duoc doc dung hoac giong mau tuyet doi.
