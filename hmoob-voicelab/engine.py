@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+from functools import lru_cache
 import json
 import math
 import os
@@ -46,17 +47,55 @@ def _sha256(path):
     return digest.hexdigest()
 
 
+@lru_cache(maxsize=1)
+def _windows_file_information():
+    import ctypes
+    from ctypes import wintypes
+
+    class FileBasicInfo(ctypes.Structure):
+        _fields_ = [(name, ctypes.c_longlong) for name in
+                    ("CreationTime", "LastAccessTime", "LastWriteTime", "ChangeTime")]
+        _fields_.append(("FileAttributes", wintypes.DWORD))
+
+    query = ctypes.WinDLL("kernel32", use_last_error=True).GetFileInformationByHandleEx
+    query.argtypes = (wintypes.HANDLE, ctypes.c_int, wintypes.LPVOID, wintypes.DWORD)
+    query.restype = wintypes.BOOL
+    return query, FileBasicInfo
+
+
+def _file_fingerprint(path, stat):
+    change_time = stat.st_ctime_ns
+    if os.name == "nt":
+        # Windows st_ctime is creation time, so it cannot invalidate a cache
+        # after an overwrite whose last-write time has been restored.
+        change_time = None
+        try:
+            import ctypes
+            import msvcrt
+            query, info_type = _windows_file_information()
+            info = info_type()
+            with path.open("rb") as handle:
+                if (query(msvcrt.get_osfhandle(handle.fileno()), 0, ctypes.byref(info), ctypes.sizeof(info))
+                        and info.ChangeTime > 0):
+                    change_time = info.ChangeTime
+        except (AttributeError, ImportError, OSError, ValueError):
+            pass
+    return stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, change_time
+
+
 def verify_models(root=None):
     """Verify all files once per filesystem identity; never trust size alone."""
     root = Path(root) if root is not None else model_directory()
     try:
         manifest_path = root / "verified-models.json"
-        if manifest_path.stat().st_size > 100_000:
+        manifest_stat = manifest_path.stat()
+        if manifest_stat.st_size > 100_000:
             raise ValueError("manifest too large")
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         records = manifest["files"]
-        fingerprint = [(str(root.resolve()), manifest_path.stat().st_mtime_ns,
-                        manifest_path.stat().st_ctime_ns, manifest_path.stat().st_size)]
+        manifest_identity = _file_fingerprint(manifest_path, manifest_stat)
+        fingerprint = [(str(root.resolve()), *manifest_identity)]
+        cacheable = manifest_identity[-1] is not None
         for relative in MODEL_FILES:
             path = root / relative
             record = records[relative]
@@ -67,16 +106,19 @@ def verify_models(root=None):
             stat = path.stat()
             if not path.is_file() or stat.st_size != record["size"] or stat.st_size <= 0:
                 raise ValueError("file size")
-            fingerprint.append((relative, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns, expected))
+            identity = _file_fingerprint(path, stat)
+            cacheable = cacheable and identity[-1] is not None
+            fingerprint.append((relative, *identity, expected))
         key = tuple(fingerprint)
         with _integrity_lock:
-            if key in _integrity_cache:
+            if cacheable and key in _integrity_cache:
                 return key
             for relative in MODEL_FILES:
                 if _sha256(root / relative) != records[relative]["sha256"]:
                     raise ValueError("checksum mismatch")
             _integrity_cache.clear()
-            _integrity_cache[key] = True
+            if cacheable:
+                _integrity_cache[key] = True
         return key
     except (OSError, ValueError, KeyError, TypeError):
         raise EngineError("Thiếu mô hình hoặc kiểm tra SHA-256 không đạt. Chạy install_voice.bat "

@@ -20,7 +20,7 @@ READY = {'ready': True, 'torch_pair_ready': True, 'versions': {'f5-tts': '1.1.22
 class BootstrapTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory(prefix='hmoob bootstrap ')
-        self.folder = Path(self.temporary.name)
+        self.folder = Path(self.temporary.name).resolve()
         self.base = self.folder / 'hmoob-voicelab'
         self.base.mkdir()
         self.data = self.base / '.data'

@@ -32,6 +32,8 @@ jobs:
         with:
           python-version: '3.12.10'
           architecture: x64
+          cache: pip
+          cache-dependency-path: hmoob-voicelab/requirements-voice.txt
       - name: Validate Defender gate PowerShell syntax
         shell: pwsh
         run: |

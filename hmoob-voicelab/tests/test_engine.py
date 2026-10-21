@@ -21,7 +21,7 @@ import setup_voice
 class EngineValidationTests(unittest.TestCase):
     def setUp(self):
         self.folder = tempfile.TemporaryDirectory()
-        self.root = Path(self.folder.name)
+        self.root = Path(self.folder.name).resolve()
         self.reference = self.root / "reference.wav"
         pcm = array("h", (int(1000 * math.sin(i * .1)) for i in range(72000)))
         if sys.byteorder != "little":
@@ -54,6 +54,20 @@ class EngineValidationTests(unittest.TestCase):
         os.utime(path, ns=(stat.st_atime_ns, stat.st_mtime_ns))
         with self.assertRaises(engine.EngineError):
             engine.verify_models(self.root)
+
+    def test_missing_change_clock_disables_cache_and_still_detects_corruption(self):
+        self._manifest()
+        # Simulate a filesystem without a reliable change clock, even when
+        # every available identity/timestamp value stays unchanged.
+        with patch.object(engine, "_file_fingerprint", return_value=(1, 2, 3, 4, None)), \
+                patch.object(engine, "_sha256", wraps=engine._sha256) as checksum:
+            engine.verify_models(self.root)
+            engine.verify_models(self.root)
+            self.assertEqual(checksum.call_count, len(engine.MODEL_FILES) * 2)
+            path = self.root / engine.MODEL_FILES[0]
+            path.write_bytes(b"x" * path.stat().st_size)
+            with self.assertRaises(engine.EngineError):
+                engine.verify_models(self.root)
 
     def test_missing_manifest_is_not_ready_and_does_not_access_network(self):
         with patch.dict(os.environ, {"HMOOB_MODEL_DIR": str(self.root)}), \
