@@ -28,6 +28,8 @@ def main(arguments=None, *, base=BASE):
     arguments = [argument for argument in arguments if argument != '--diagnose']
     if diagnose and '--check' not in arguments:
         arguments.append('--check')
+    if diagnose and '--deep-check' not in arguments:
+        arguments.append('--deep-check')
     base = Path(base).resolve()
     print('Hmoob VoiceLab: Python da khoi dong. Dang kiem tra tool...', flush=True)
     try:

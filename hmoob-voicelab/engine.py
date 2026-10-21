@@ -197,14 +197,27 @@ class SpeechEngine:
         self._model_key = None
         self._reference = None
         self._reference_key = None
+        self._progress_callback = None
         self.device = None
+
+    def set_progress_callback(self, callback_or_none):
+        if callback_or_none is not None and not callable(callback_or_none):
+            raise TypeError("Progress callback must be callable or None")
+        self._progress_callback = callback_or_none
+
+    def _notify(self, message):
+        if self._progress_callback is not None:
+            self._progress_callback(message)
 
     def _load(self):
         root = model_directory()
+        self._notify("Đang kiểm tra mô hình…")
         integrity = verify_models(root)
         requested = os.getenv("HMOOB_DEVICE", "auto").lower()
         if requested not in ("auto", "cpu", "cuda", "mps"):
             raise EngineError("HMOOB_DEVICE chỉ nhận auto, cpu, cuda hoặc mps.")
+        if self._model is None:
+            self._notify("Đang nạp PyTorch…")
         import torch
         if requested == "auto":
             device = ("cuda" if torch.cuda.is_available() else "mps"
@@ -225,15 +238,9 @@ class SpeechEngine:
                     target = cache / folder
                     target.mkdir(parents=True, exist_ok=True)
                     os.environ[name] = str(target)
-            from f5_tts.api import F5TTS
+            from hmong_f5 import load_local_model
             torch.set_num_threads(max(1, min(4, os.cpu_count() or 1)))
-            candidate = F5TTS(
-                model="F5TTS_Base",
-                ckpt_file=str(root / MODEL_FILES[0]),
-                vocab_file=str(root / MODEL_FILES[1]),
-                vocoder_local_path=str(root / "vocos"),
-                device=device,
-            )
+            candidate = load_local_model(root, device, progress=self._notify)
             self._model = candidate
             self._model_key = key
             self._reference = self._reference_key = None
@@ -272,8 +279,9 @@ class SpeechEngine:
         with self._lock:
             try:
                 model = self._load()
+                self._notify("Đang chuẩn bị đoạn giọng mẫu…")
                 reference, normalized_text = self._prepare_reference(reference_path, reference_text, reference_key)
-                from f5_tts.infer.utils_infer import infer_batch_process, hop_length, target_sample_rate
+                from hmong_f5 import infer_batch
                 # One bounded batch: no whole-book array or unbounded inference
                 # fan-out, and no duplicate copy of a large model per process.
                 import numpy as np
@@ -288,25 +296,10 @@ class SpeechEngine:
                 pieces = []
                 frames = 0
                 expected_rate = None
+                self._notify("Đang tạo âm thanh…")
                 for batch in _bounded_batches(text.strip(), min(400, budget)):
-                    fix_duration = None
-                    if len(batch.encode("utf-8")) < 10:
-                        # F5-TTS 1.1.22 replaces speed with 0.3 for short text.
-                        # Its supported duration override keeps the selected
-                        # pacing, including when the final sub-batch is short.
-                        ref_frames = reference[0].shape[-1] // hop_length
-                        padded_text = normalized_text + (" " if len(normalized_text[-1].encode("utf-8")) == 1 else "")
-                        new_frames = max(1, int(ref_frames / len(padded_text.encode("utf-8"))
-                                                * len(batch.encode("utf-8")) / speed))
-                        # Half a frame prevents float rounding from dropping
-                        # a frame when upstream converts seconds back to int.
-                        fix_duration = (ref_frames + new_frames + 0.5) * hop_length / target_sample_rate
-                    result = next(infer_batch_process(
-                        reference, normalized_text, [batch], model.ema_model, model.vocoder,
-                        mel_spec_type=model.mel_spec_type, progress=None,
-                        nfe_step=QUALITY_STEPS[quality], speed=float(speed), device=self.device,
-                        cross_fade_duration=0, fix_duration=fix_duration,
-                    ))
+                    result = infer_batch(reference, normalized_text, batch, model,
+                                         steps=QUALITY_STEPS[quality], speed=float(speed), device=self.device)
                     samples, rate = np.asarray(result[0]), result[1]
                     if (isinstance(rate, bool) or not isinstance(rate, int) or not 8000 <= rate <= 96000
                             or samples.ndim != 1 or not 0 < len(samples) <= rate * 120

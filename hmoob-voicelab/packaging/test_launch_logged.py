@@ -34,7 +34,7 @@ class LoggedLauncherTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             (root / 'bootstrap.py').write_text(
-                "import json,sys\nassert '--check' in sys.argv\nprint(json.dumps({'ready': True}))\n", encoding='utf-8')
+                "import json,sys\nassert '--check' in sys.argv\nassert '--deep-check' in sys.argv\nprint(json.dumps({'ready': True}))\n", encoding='utf-8')
             output = io.StringIO()
             with patch('sys.stdout', output):
                 code = logged.main(['--diagnose', '--data-dir', str(root / '.data')], base=root)

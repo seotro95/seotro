@@ -7,6 +7,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import time
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
@@ -59,7 +60,7 @@ class BootstrapTests(unittest.TestCase):
         self.assertEqual(environment['PYTHONNOUSERSITE'], '1')
         self.assertEqual(self.saved.read_bytes(), b'original user data')
 
-    def test_progress_is_visible_before_native_probe_can_block(self):
+    def test_progress_is_visible_before_dependency_inventory(self):
         self.portable()
         output = io.StringIO()
 
@@ -67,20 +68,91 @@ class BootstrapTests(unittest.TestCase):
             self.assertIn('đang khởi động', output.getvalue())
             self.assertIn('[1/4]', output.getvalue())
 
-        def native_probe(*args):
-            # This assertion runs at entry to the potentially slow native
-            # import, not after it returns. No blank window during that wait.
+        def inventory_probe(*args):
             self.assertIn('[3/4]', output.getvalue())
-            self.assertIn('120 giây', output.getvalue())
+            self.assertIn('không nạp AI', output.getvalue())
             return READY
 
         with patch('bootstrap.check_python', side_effect=python_probe), \
                 patch('bootstrap.check_ffmpeg'), \
-                patch('bootstrap.dependency_state', side_effect=native_probe), \
+                patch('bootstrap.dependency_state', side_effect=inventory_probe), \
                 patch('bootstrap.models_ready', return_value=True), \
                 patch('bootstrap.subprocess.run', return_value=SimpleNamespace(returncode=0)), \
                 redirect_stderr(output):
             self.assertEqual(bootstrap.main(['--data-dir', str(self.data)], base=self.base), 0)
+
+    def guarded_dependency_environment(self):
+        """Expose valid package metadata with a deliberately blocked native import."""
+        packages = self.folder / 'import guards'
+        packages.mkdir()
+        sentinel = self.folder / 'native-import-attempted'
+        for name in ('torch', 'torchaudio', 'numpy', 'soundfile', 'f5_tts', 'vocos', 'safetensors'):
+            folder = packages / name
+            folder.mkdir()
+            code = ''
+            if name == 'torch':
+                code = ("from pathlib import Path\nimport time\n"
+                        f"Path({str(sentinel)!r}).write_text('imported')\n"
+                        'time.sleep(121)\n')
+            (folder / '__init__.py').write_text(code, encoding='utf-8')
+        for name, version in (('torch', '2.6.0'), ('torchaudio', '2.6.0'), ('f5_tts', '1.1.22')):
+            metadata = packages / f'{name}-{version}.dist-info'
+            metadata.mkdir()
+            (metadata / 'METADATA').write_text(f'Name: {name}\nVersion: {version}\n', encoding='utf-8')
+        environment = bootstrap.configure_environment(self.base, self.data)
+        # Test wrappers also insert this path into the child code so the
+        # regression works with isolated Windows runtimes that ignore env paths.
+        environment['PYTHONPATH'] = str(packages)
+        return environment, sentinel
+
+    def test_cold_normal_start_does_not_enter_native_import_blocked_past_old_budget(self):
+        environment, sentinel = self.guarded_dependency_environment()
+        (self.base / 'launch.py').write_text("print('UI launcher reached', flush=True)\n", encoding='utf-8')
+        real_probe = bootstrap._json_probe
+
+        def bounded_probe(python, code, environment, **kwargs):
+            kwargs['timeout'] = min(kwargs.get('timeout', 3), 3)
+            code = f"import sys; sys.path.insert(0, {environment['PYTHONPATH']!r})\n" + code
+            return real_probe(python, code, environment, **kwargs)
+
+        with patch('bootstrap.configure_environment', return_value=environment), \
+                patch('bootstrap.check_ffmpeg'), patch('bootstrap.models_ready', return_value=True), \
+                patch('bootstrap._json_probe', side_effect=bounded_probe), \
+                patch('bootstrap.prepare_runtime', side_effect=AssertionError('must not reinstall')):
+            self.assertEqual(bootstrap.main(['--data-dir', str(self.data)], base=self.base), 0)
+        # A fresh subprocess ran the real dependency inventory. Importing the
+        # guarded torch would write this file and then block for 121 seconds.
+        self.assertFalse(sentinel.exists())
+        with patch('bootstrap._json_probe', side_effect=bounded_probe):
+            report = bootstrap.dependency_state(sys.executable, environment)
+        self.assertTrue(report['ready'])
+        self.assertFalse(report['native_checked'])
+
+    def test_explicit_deep_check_names_the_real_blocked_module(self):
+        environment, sentinel = self.guarded_dependency_environment()
+        real_probe = bootstrap._streamed_json_probe
+
+        def bounded_probe(python, code, environment, **kwargs):
+            code = f"import sys; sys.path.insert(0, {environment['PYTHONPATH']!r})\n" + code
+            return real_probe(python, code, environment, **kwargs, stage_timeout=1, total_timeout=3)
+
+        output = io.StringIO()
+        with patch('bootstrap._streamed_json_probe', side_effect=bounded_probe), redirect_stderr(output):
+            with self.assertRaisesRegex(bootstrap.SetupError, 'torch'):
+                bootstrap.dependency_state(sys.executable, environment, deep=True)
+        self.assertTrue(sentinel.exists())
+        self.assertIn('đang nạp torch', output.getvalue())
+
+    def test_deep_probe_streams_module_status_before_import_finishes(self):
+        environment = bootstrap.configure_environment(self.base, self.data)
+        code = ("import json,time\nprint('HMOOB_NATIVE_START:slow_module',flush=True)\n"
+                "time.sleep(.25)\nprint('HMOOB_NATIVE_DONE:slow_module',flush=True)\n"
+                "print('HMOOB_PROBE:' + json.dumps({'ready':True}),flush=True)\n")
+        messages = []
+        with patch('bootstrap.progress', side_effect=lambda text: messages.append((time.monotonic(), text))):
+            report = bootstrap._streamed_json_probe(sys.executable, code, environment, stage_timeout=2)
+        self.assertTrue(report['ready'])
+        self.assertGreaterEqual(messages[1][0] - messages[0][0], .15)
 
     def test_hung_native_probe_is_bounded_and_identifies_its_stage(self):
         environment = bootstrap.configure_environment(self.base, self.data)

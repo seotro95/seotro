@@ -7,6 +7,7 @@ the app's integrity-checking model installer. No developer .data is copied.
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 import hashlib
 import json
 import os
@@ -20,13 +21,46 @@ import zipfile
 
 SOURCE = Path(__file__).resolve().parents[1]
 APP_FILES = (
-    'audio_io.py', 'bootstrap.py', 'engine.py', 'jobs.py', 'launch.py', 'launch_logged.py',
+    'audio_io.py', 'bootstrap.py', 'engine.py', 'hmong_f5.py', 'jobs.py', 'launch.py', 'launch_logged.py',
     'longform.py', 'runtime_lock.py', 'server.py', 'setup_voice.py', 'voices.py', 'version.py',
     'requirements-voice.txt', 'start.bat', 'install_voice.bat', 'start.sh',
     'README.md', 'VALIDATION.md', 'SECURITY-REVIEW.md', 'BAT-DAU.txt',
 )
 FFMPEG_BASE = 'https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/'
 FFMPEG_ASSET = 'ffmpeg-n8.1-latest-win64-gpl-8.1.zip'
+STARTUP_GUARD_NAME = '_hmoob_ci_startup_guard_20261021'
+STARTUP_GUARD_CODE = r'''
+import json
+import os
+import sys
+
+LOG = __GUARD_LOG_PATH__
+FORBIDDEN = {'torch', 'torchaudio', 'numpy', 'soundfile', 'f5_tts', 'hmong_f5',
+             'transformers', 'matplotlib', 'vocos', 'safetensors'}
+
+def record(event, **details):
+    with open(LOG, 'a', encoding='utf-8') as target:
+        target.write(json.dumps(dict(event=event, pid=os.getpid(), **details)) + '\n')
+
+def audit(event, arguments):
+    name = ''
+    if event == 'import' and arguments:
+        candidate = str(arguments[0])
+        if candidate.split('.')[0] in FORBIDDEN:
+            name = candidate
+    elif event == 'exec' and arguments:
+        filename = str(getattr(arguments[0], 'co_filename', '')).replace('\\', '/').lower()
+        for candidate in FORBIDDEN:
+            if '/' + candidate + '/' in filename or filename.rsplit('/', 1)[-1] == candidate + '.py':
+                name = candidate
+                break
+    if name:
+        record('blocked', module=name, source=event)
+        raise ImportError('CI startup guard blocked native AI import: ' + name)
+
+sys.addaudithook(audit)
+record('active', script=sys.argv[0])
+'''
 
 
 def sha256(path):
@@ -142,6 +176,42 @@ def build_environment(root, reports):
     return environment
 
 
+@contextmanager
+def startup_import_guard(root, reports):
+    """Guard every copied-runtime child while proving normal UI startup."""
+    site = Path(root) / 'runtime' / 'Lib' / 'site-packages'
+    reports = Path(reports)
+    reports.mkdir(parents=True, exist_ok=True)
+    log = reports / 'native-import-guard.jsonl'
+    helper = site / (STARTUP_GUARD_NAME + '.py')
+    trigger = site / (STARTUP_GUARD_NAME + '.pth')
+    cached = site / '__pycache__'
+    if helper.exists() or trigger.exists() or log.exists() or list(cached.glob(STARTUP_GUARD_NAME + '.*.pyc')):
+        raise RuntimeError('Startup import guard paths already exist; existing files were preserved')
+    helper.write_text(STARTUP_GUARD_CODE.replace('__GUARD_LOG_PATH__', repr(str(log.resolve()))), encoding='utf-8')
+    try:
+        trigger.write_text('import ' + STARTUP_GUARD_NAME + '\n', encoding='ascii')
+        yield log
+    finally:
+        trigger.unlink(missing_ok=True)
+        helper.unlink(missing_ok=True)
+        for path in cached.glob(STARTUP_GUARD_NAME + '.*.pyc'):
+            path.unlink()
+
+
+def verify_startup_import_guard(log):
+    events = [json.loads(line) for line in Path(log).read_text(encoding='utf-8').splitlines() if line]
+    if any(event.get('event') == 'blocked' for event in events):
+        raise RuntimeError('Normal UI startup attempted a native AI import; see import guard report')
+    if not any(event.get('event') == 'active' and
+               str(event.get('script', '')).replace('\\', '/').endswith('/launch.py') for event in events):
+        raise RuntimeError('The UI server did not activate the native import guard')
+    result = {'normal_ui_started_without_native_ai_imports': True,
+              'guarded_python_processes': len({event['pid'] for event in events})}
+    Path(log).with_name('native-import-guard.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
+    print(json.dumps(result), flush=True)
+
+
 def write_launcher(root):
     root = Path(root)
     app = root / 'hmoob-voicelab'
@@ -241,14 +311,16 @@ def main(argv=None):
         raise ValueError('Relocation destination already exists')
     root.rename(relocated)
     try:
+        with startup_import_guard(relocated, reports / 'normal-startup') as guard_log:
+            checked_run([relocated / 'runtime' / 'python.exe', SOURCE / 'packaging' / 'check_startup.py',
+                         relocated, '--reports', reports / 'normal-startup',
+                         '--model-dir', relocated / 'hmoob-voicelab' / '.data' / 'models',
+                         '--timeout', '600'], environment=build_environment(relocated, reports),
+                        cwd=relocated, timeout=660)
+            verify_startup_import_guard(guard_log)
         checked_run([relocated / 'runtime' / 'python.exe', SOURCE / 'packaging' / 'smoke_portable.py',
                      relocated, reports], environment=build_environment(relocated, reports),
                     cwd=relocated / 'hmoob-voicelab', timeout=1800)
-        checked_run([relocated / 'runtime' / 'python.exe', SOURCE / 'packaging' / 'check_startup.py',
-                     relocated, '--reports', reports / 'normal-startup',
-                     '--model-dir', relocated / 'hmoob-voicelab' / '.data' / 'models',
-                     '--timeout', '600'], environment=build_environment(relocated, reports),
-                    cwd=relocated, timeout=660)
     finally:
         relocated.rename(root)
 
@@ -263,7 +335,8 @@ def main(argv=None):
     build = {'commit': os.environ.get('GITHUB_SHA'), 'python': sys.version,
              'platform': 'windows-x64', 'models_included': False,
              'first_run_model_download_required': True,
-             'validated_offline_voices': ['female', 'male'], 'relocated_runtime_tested': True}
+             'validated_offline_voices': ['female', 'male'], 'relocated_runtime_tested': True,
+             'ui_startup_without_native_imports_tested': True}
     (root / 'BUILD.json').write_text(json.dumps(build, indent=2) + '\n', encoding='utf-8')
     archive = root.parent / 'Hmoob-VoiceLab-Windows-x64.zip'
     checksum = archive_package(root, archive)

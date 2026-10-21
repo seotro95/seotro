@@ -1,4 +1,4 @@
-# Hmoob VoiceLab 1.1
+# Hmoob VoiceLab 1.1.1
 
 Gói ZIP 1.0 cũ vẫn được thu hồi do cảnh báo Defender trên máy người dùng; xem [SECURITY-REVIEW.md](SECURITY-REVIEW.md). Bản 1.1 bổ sung bộ khởi chạy tự chuẩn bị, hai giọng có sẵn lời tham chiếu và quy trình kiểm thử/quét riêng cho gói Windows mới.
 
@@ -12,7 +12,9 @@ Tool mới, viết độc lập cho quy trình đọc Hmong Trắng cục bộ, 
 
 Khuyến nghị Windows 10/11 x64, RAM 16 GB và ít nhất khoảng 8 GB đĩa trống cho ứng dụng/mô hình, cộng dung lượng bản thu dài. Giữ cửa sổ lệnh trong lúc dùng; Ctrl+C để dừng. Chỉ cho phép máy chủ trên 127.0.0.1. Sao lưu `hmoob-voicelab/.data` khi chuyển hoặc cập nhật bản Portable.
 
-Bộ khởi chạy hiện thông báo ngay trước khi nạp Python/thư viện AI, rồi báo từng bước kiểm tra và tải mô hình. Lần đầu nạp thư viện trên máy có thể lâu hơn; bước này có giới hạn 120 giây và báo rõ nếu hết thời gian. Nếu trình duyệt chưa mở, xem bước đang chạy trong cửa sổ hoặc nhật ký `hmoob-voicelab/.data/.logs/launch.log`. Tệp `CHAN_DOAN_HMOOB.bat` kiểm tra điều kiện chạy và ghi kết quả vào nhật ký; chỉ mở địa chỉ giao diện khi cửa sổ đã in URL của máy chủ.
+Bản 1.1.1 mở giao diện bằng kiểm tra gói cài đặt và SHA-256 mô hình, không nạp thư viện AI trong bước mở ứng dụng. Lần đầu chưa có mô hình, tool tự tải và báo tiến trình. Khi bấm Tạo giọng, giao diện và nhật ký hiện bước nạp PyTorch, lõi F5, Vocos, checkpoint và tạo âm thanh; thời gian xử lý vẫn tăng khi mô hình đang nạp. Bộ đọc dùng trực tiếp lõi F5/Vocos, không gọi phần nhận dạng giọng nói hoặc vẽ biểu đồ của F5 API.
+
+Nhật ký nằm tại `hmoob-voicelab/.data/.logs/launch.log`. Khi cần kiểm tra thư viện thật, chạy `CHAN_DOAN_HMOOB.bat`: từng thư viện được kiểm tra riêng, có thời gian và dấu vết ngăn xếp nếu chậm, kết quả ở `.data/.logs/diagnostic.log`. Bản mã nguồn có thể chạy `start.bat --deep-check` để xem kết quả trực tiếp trong cửa sổ lệnh. Kiểm tra gói đã cài không được ghi nhận là kiểm tra nạp thư viện native thành công.
 
 **Bản mã nguồn:** Windows cần Python 3.10–3.12 64-bit và FFmpeg/ffprobe, chạy `start.bat`. Linux/macOS chạy `bash start.sh`. Bộ khởi chạy tự tạo môi trường riêng và tải phần còn thiếu ở lần đầu, giữ nguyên dữ liệu và mô hình đã có. `install_voice.bat` hoặc `start.bat --setup` chỉ chuẩn bị rồi thoát; `start.bat --check` kiểm tra mà không tải/cài. Với Linux/macOS dùng các tham số tương tự sau `bash start.sh`.
 

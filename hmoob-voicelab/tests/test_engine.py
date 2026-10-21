@@ -103,23 +103,22 @@ class EngineValidationTests(unittest.TestCase):
         speech = engine.SpeechEngine()
         calls = []
 
-        def infer(reference, transcript, batches, model, vocoder, **settings):
-            calls.append((batches, settings))
-            yield np.ones(2400, dtype="float32") * .1, 24000, None
+        def infer(reference, transcript, batch, model, **settings):
+            calls.append((batch, settings))
+            return np.ones(2400, dtype="float32") * .1, 24000
 
-        fake_module = SimpleNamespace(infer_batch_process=infer, hop_length=256, target_sample_rate=24000)
         fake_model = SimpleNamespace(ema_model=object(), vocoder=object(), mel_spec_type="vocos")
         reference = (np.ones((1, 72000), dtype="float32"), 24000)
         text = "Nyob zoo. " * 30
         with patch.object(speech, "_load", return_value=fake_model), \
                 patch.object(speech, "_prepare_reference", return_value=(reference, "Nyob zoo. ")), \
-                patch.dict(sys.modules, {"f5_tts.infer.utils_infer": fake_module}):
+                patch("hmong_f5.infer_batch", side_effect=infer):
             samples, rate = speech.synthesize(text, self.reference, "Nyob zoo.", quality="draft")
         self.assertGreater(len(calls), 1)
         self.assertEqual(rate, 24000)
         self.assertEqual(len(samples), len(calls) * 2400)
-        self.assertTrue(all(len(batch) == 1 and settings["nfe_step"] == 8 for batch, settings in calls))
-        self.assertEqual("".join("".join(batch[0] for batch, _ in calls).split()), "".join(text.split()))
+        self.assertTrue(all(settings["steps"] == 8 for _, settings in calls))
+        self.assertEqual("".join("".join(batch for batch, _ in calls).split()), "".join(text.split()))
 
     def test_silent_or_nonfinite_model_output_never_marks_a_chunk_complete(self):
         import numpy as np
@@ -128,17 +127,16 @@ class EngineValidationTests(unittest.TestCase):
         reference = (np.ones((1, 72000), dtype="float32"), 24000)
         for output in (np.zeros(2400), np.array([float("nan")])):
             def infer(*args, **kwargs):
-                yield output, 24000, None
+                return output, 24000
             with patch.object(speech, "_load", return_value=fake_model), \
                     patch.object(speech, "_prepare_reference", return_value=(reference, "Nyob zoo. ")), \
-                    patch.dict(sys.modules, {"f5_tts.infer.utils_infer": SimpleNamespace(
-                        infer_batch_process=infer, hop_length=256, target_sample_rate=24000)}):
+                    patch("hmong_f5.infer_batch", side_effect=infer):
                 with self.assertRaises(engine.EngineError):
                     speech.synthesize("Kuv yog Hmoob.", self.reference, "Nyob zoo.")
 
     @unittest.skipUnless(importlib.util.find_spec("f5_tts"), "Optional F5-TTS dependency is not installed")
     def test_real_f5_short_utterances_follow_selected_speed(self):
-        # Exercise upstream's actual batching/duration and waveform slicing;
+        # Exercise the adapter's actual batching/duration and waveform slicing;
         # only the costly neural model and vocoder are controlled fixtures.
         # No model download or claim about generated speech quality is made.
         with patch.dict(os.environ, {
@@ -148,7 +146,7 @@ class EngineValidationTests(unittest.TestCase):
             "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1",
         }), patch("urllib.request.urlopen", side_effect=AssertionError("network forbidden")):
             import torch
-            from f5_tts.infer import utils_infer
+            from hmong_f5 import HOP_LENGTH
 
             requested_steps = []
 
@@ -159,7 +157,7 @@ class EngineValidationTests(unittest.TestCase):
 
             class Vocoder:
                 def decode(self, mel):
-                    return torch.ones((1, mel.shape[-1] * utils_infer.hop_length)) * .1
+                    return torch.ones((1, mel.shape[-1] * HOP_LENGTH)) * .1
 
             speech = engine.SpeechEngine()
             speech.device = "cpu"
@@ -178,6 +176,22 @@ class EngineValidationTests(unittest.TestCase):
                     self.assertAlmostEqual(lengths[0], 2 * lengths[1], delta=512)
                     self.assertAlmostEqual(lengths[1], 2 * lengths[2], delta=512)
             self.assertEqual(requested_steps, [16] * 6)
+
+    def test_progress_callback_reports_work_and_can_be_cleared(self):
+        import numpy as np
+        speech = engine.SpeechEngine()
+        messages = []
+        speech.set_progress_callback(messages.append)
+        reference = (np.ones((1, 72000), dtype="float32"), 24000)
+        with patch.object(speech, "_load", return_value=object()), \
+                patch.object(speech, "_prepare_reference", return_value=(reference, "Nyob zoo. ")), \
+                patch("hmong_f5.infer_batch", return_value=(np.ones(2400) * .1, 24000)):
+            speech.synthesize("Kuv yog Hmoob.", self.reference, "Nyob zoo.")
+            self.assertEqual(messages, ["Đang chuẩn bị đoạn giọng mẫu…", "Đang tạo âm thanh…"])
+            speech.set_progress_callback(None)
+            messages.clear()
+            speech.synthesize("Kuv yog Hmoob.", self.reference, "Nyob zoo.")
+            self.assertEqual(messages, [])
 
 
 class InstallerIntegrityTests(unittest.TestCase):

@@ -51,10 +51,32 @@ def wav_info(raw):
 def start_app(root, reports):
     app, runtime = root / 'hmoob-voicelab', root / 'runtime' / 'python.exe'
     # Run the real application in-process after installing a Python socket
-    # guard. Only loopback HTTP connections are permitted during synthesis.
-    program = '''
+    # guard. Only loopback HTTP connections are permitted during synthesis;
+    # unused plotting/ASR entry points must never load in the real renderer.
+    program = r'''
 import runpy, socket, sys
 from pathlib import Path
+unused = ('f5_tts.api', 'f5_tts.infer.utils_infer', 'matplotlib', 'transformers')
+def guard_unused(event, arguments):
+    blocked = ''
+    if event == 'import' and arguments:
+        name = str(arguments[0])
+        if any(name == module or name.startswith(module + '.') for module in unused):
+            blocked = name
+    elif event == 'exec' and arguments:
+        filename = str(getattr(arguments[0], 'co_filename', '')).replace('\\', '/').lower()
+        for module in unused:
+            fragment = module.replace('.', '/')
+            module_file = ('/' + fragment + '.py' if '.' in module else
+                           '/site-packages/' + fragment + '.py')
+            if '/' + fragment + '/' in filename or filename.endswith(module_file):
+                blocked = module
+                break
+    if blocked:
+        print('HMOOB_UNUSED_IMPORT_BLOCKED:' + blocked, flush=True)
+        raise RuntimeError('Real synthesis attempted an unused plotting/ASR module: ' + blocked)
+sys.addaudithook(guard_unused)
+print('HMOOB_UNUSED_IMPORT_GUARD:active', flush=True)
 app = Path(sys.argv[1])
 data = sys.argv[2]
 original = socket.socket.connect
@@ -165,6 +187,8 @@ def main():
                 assert wav_info(archive.read(job['parts'][0]['name'])) == audio
             results.append({'voice': voice, 'job_id': job['id'], 'audio': audio,
                             'synthesis_seconds': job['synthesis_seconds']})
+        assert any('HMOOB_UNUSED_IMPORT_GUARD:active' in line for line in log)
+        assert not any('HMOOB_UNUSED_IMPORT_BLOCKED:' in line for line in log), ''.join(log)
     finally:
         stop_app(process)
         (reports / 'native-app.log').write_text(''.join(log), encoding='utf-8')
@@ -178,6 +202,9 @@ def main():
     report = {'relocated_runtime': str(runtime), 'text': text, 'voices': results,
               'external_network_blocked': True, 'bootstrap_ready': True,
               'one_click_bat_ready': True,
+              'unused_inference_modules_blocked': ['f5_tts.api', 'f5_tts.infer.utils_infer',
+                                                   'matplotlib', 'transformers'],
+              'unused_inference_modules_attempted': False,
               'http_audio_and_zip_verified': True, 'history_survives_restart': True,
               'speech_quality_assessed': False}
     (reports / 'native-smoke.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

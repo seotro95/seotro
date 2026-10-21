@@ -1,6 +1,9 @@
 """Packaging boundaries tested without downloading or executing Windows code."""
 import importlib.util
+import json
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
 import unittest
 import zipfile
@@ -28,6 +31,33 @@ class PackageTests(unittest.TestCase):
             self.assertFalse((target / '.env').exists())
             self.assertFalse((target / 'security').exists())
             self.assertTrue((target / 'web/private.txt').is_file())
+            self.assertTrue((target / 'hmong_f5.py').is_file())
+
+    def test_startup_guard_allows_inventory_but_blocks_real_import_and_is_removed(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            site = root / 'runtime/Lib/site-packages'
+            site.mkdir(parents=True)
+            fake = site / 'torch'
+            fake.mkdir()
+            side_effect = root / 'native-module-executed'
+            (fake / '__init__.py').write_text(
+                'from pathlib import Path\nPath(' + repr(str(side_effect)) + ').touch()\n', encoding='utf-8')
+            with build.startup_import_guard(root, root / 'reports') as log:
+                code = ('import sys,site,importlib.util,importlib;sys.path.insert(0,' + repr(str(site)) + ');'
+                        'site.addsitedir(' + repr(str(site)) + ');'
+                        'assert importlib.util.find_spec("torch") is not None;'
+                        'importlib.import_module("torch")')
+                result = subprocess.run([sys.executable, '-c', code], capture_output=True, text=True, timeout=15)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn('CI startup guard blocked native AI import: torch', result.stderr)
+                self.assertFalse(side_effect.exists())
+                events = [json.loads(line) for line in log.read_text().splitlines()]
+                self.assertTrue(any(event.get('event') == 'active' for event in events))
+                self.assertTrue(any(event.get('event') == 'blocked' and event.get('module') == 'torch' for event in events))
+            self.assertFalse((site / (build.STARTUP_GUARD_NAME + '.py')).exists())
+            self.assertFalse((site / (build.STARTUP_GUARD_NAME + '.pth')).exists())
+            self.assertFalse(list((site / '__pycache__').glob(build.STARTUP_GUARD_NAME + '.*.pyc')))
 
     def test_ffmpeg_archive_paths_reject_traversal_and_symlinks(self):
         for name in ('../escape', '/absolute', 'root/../../escape', 'root/C:/escape', 'root\\..\\escape'):

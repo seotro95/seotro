@@ -45,6 +45,7 @@ class JobManager:
         self.lock = threading.RLock()
         self.pending = queue.Queue()
         self.cancellations = {}
+        self.active_clocks = {}
         self.closed = threading.Event()
         self.thread = None
         # Processes do not survive a published filesystem snapshot or restart.
@@ -94,6 +95,9 @@ class JobManager:
         # Estimate only after enough work; it is a measurement, never a guarantee.
         result['estimated_remaining_seconds'] = (round(measured / completed * (job['total_segments'] - completed))
                                                   if completed >= 3 and measured > 0 else None)
+        clock = self.active_clocks.get(job['id'])
+        if clock and job['status'] in ('running', 'cancelling'):
+            result['processing_seconds'] = round(clock[1] + time.monotonic() - clock[0], 3)
         return result
 
     def get(self, ident):
@@ -157,7 +161,7 @@ class JobManager:
                 raise ValueError('Chỉ tiếp tục tác vụ đã dừng hoặc có lỗi.')
             self._ensure_capacity()
             self.cancellations[ident] = threading.Event()
-            job.update(status='queued', error='')
+            job.update(status='queued', error='', phase='')
             self._save(job)
             self.pending.put(ident)
             return self._summary(job)
@@ -172,7 +176,7 @@ class JobManager:
                 if job['status'] != 'queued':
                     continue
                 event = self.cancellations[ident]
-                job.update(status='running', error='')
+                job.update(status='running', error='', phase='Đang chuẩn bị tác vụ…')
                 self._save(job)
             self._run(job, event)
 
@@ -180,6 +184,8 @@ class JobManager:
         folder = self.folder(job['id'])
         started = time.monotonic()
         old_processing = job.get('processing_seconds', 0)
+        with self.lock:
+            self.active_clocks[job['id']] = (started, old_processing)
         chapter, chapter_seconds, part_number = [], 0.0, 1
         parts = []
         audio_seconds = 0.0
@@ -194,7 +200,14 @@ class JobManager:
                            processing_seconds=round(old_processing + time.monotonic() - started, 3),
                            progress=100 if status == 'done' else min(99, int(100 * completed / job['total_segments'])),
                            parts=list(parts), error=error)
+                if status in ('done', 'cancelled', 'error'):
+                    job['phase'] = ''
                 self._save(job)
+
+        def report_phase(message):
+            job['phase'] = str(message).strip()[:240]
+            print('Hmoob VoiceLab: ' + job['phase'], flush=True)
+            checkpoint()
 
         def publish_chapter():
             nonlocal chapter, chapter_seconds, part_number
@@ -208,6 +221,9 @@ class JobManager:
             chapter, chapter_seconds = [], 0.0
 
         try:
+            progress_hook = getattr(self.engine, 'set_progress_callback', None)
+            if callable(progress_hook):
+                progress_hook(report_phase)
             # Path.read_text normalizes CRLF. Use open(newline='') for saved offsets.
             with (folder / 'text.txt').open(encoding='utf-8', newline='') as source:
                 text = source.read()
@@ -236,6 +252,7 @@ class JobManager:
                         if shutil.disk_usage(folder).free < self.minimum_free:
                             raise ValueError('Đĩa gần đầy. Các đoạn đã xong được giữ lại; giải phóng chỗ rồi Tiếp tục.')
                         tick = time.monotonic()
+                        report_phase(f'Đang tạo giọng đoạn {index + 1}/{len(spans)}…')
                         samples, rate = self.engine.synthesize(segment, folder / 'reference.wav',
                                                                 job['reference']['text'], speed=job['speed'],
                                                                 quality=job['quality'])
@@ -267,3 +284,9 @@ class JobManager:
                 pass
         except Exception as exc:
             checkpoint('error', str(exc)[:1200] or 'Không tạo được giọng. Các đoạn đã xong vẫn được giữ lại.')
+        finally:
+            progress_hook = getattr(self.engine, 'set_progress_callback', None)
+            if callable(progress_hook):
+                progress_hook(None)
+            with self.lock:
+                self.active_clocks.pop(job['id'], None)

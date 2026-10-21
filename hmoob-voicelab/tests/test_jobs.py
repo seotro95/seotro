@@ -228,6 +228,38 @@ class JobTests(unittest.TestCase):
         self.assertEqual(engine.generated, self.expected_speech(text))
         self.assert_chapters(manager, done, 3)
 
+    def test_native_loading_phase_and_elapsed_time_remain_visible_before_first_audio(self):
+        class LoadingEngine(FakeEngine):
+            progress_callback = None
+            callback_removed = threading.Event()
+
+            def set_progress_callback(self, callback):
+                self.progress_callback = callback
+                if callback is None:
+                    self.callback_removed.set()
+
+            def synthesize(self, *args, **kwargs):
+                self.progress_callback('Đang nạp mô hình giọng đọc…')
+                return super().synthesize(*args, **kwargs)
+
+        manager, engine = self.manager(LoadingEngine(block_call=1))
+        job = manager.create({'text': 'Nyob zoo.'})
+        manager.start()
+        self.assertTrue(engine.entered.wait(2))
+        before = manager.get(job['id'])
+        self.assertEqual(before['phase'], 'Đang nạp mô hình giọng đọc…')
+        self.assertEqual(before['completed_segments'], 0)
+        self.assertEqual(before['progress'], 0)
+        threading.Event().wait(.05)
+        after = manager.get(job['id'])
+        self.assertGreater(after['processing_seconds'], before['processing_seconds'])
+        self.assertEqual(manager.list()[0]['phase'], before['phase'])
+        engine.release.set()
+        done = self.wait_for(manager, job['id'])
+        self.assertEqual(done['phase'], '')
+        self.assertTrue(engine.callback_removed.wait(2))
+        self.assertIsNone(engine.progress_callback)
+
     def test_resume_repairs_broken_checkpoints_and_preserves_later_valid_audio(self):
         manager, engine = self.manager(FakeEngine(block_call=4))
         text = ''.join(character * 300 for character in 'abcdef')
