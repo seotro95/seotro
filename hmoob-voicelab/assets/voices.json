@@ -4,13 +4,23 @@
     "name": "Hmong Trắng · Nữ",
     "duration": 22.386917,
     "sha256": "2c3467e7b5f0e49a3277397c00762810f657fd1bbd36f738a7e17d0f067f6222",
-    "source": "Bản ghi mẫu đã có trong repository; không phải tệp TXT mới gửi."
+    "source": "Mẫu MP3 do người dùng cung cấp. Lời và đoạn đầu 0–5,30 giây được người dùng xác nhận ngày 21/10/2026.",
+    "reference": {
+      "start": 0,
+      "end": 5.3,
+      "text": "tsis pom muaj neeg lawm ces, nws thiaj li los ze ze ntawm lawv lub tsev."
+    }
   },
   "male": {
     "file": "default-male.mp3",
     "name": "Hmong Trắng · Nam",
     "duration": 18.93875,
     "sha256": "29285370b91db8465222b2056b204110c6dded1a60c9004c7fb8747fe4978c9c",
-    "source": "Bản ghi mẫu đã có trong repository; không phải tệp TXT mới gửi."
+    "source": "Mẫu MP3 do người dùng cung cấp. Lời và đoạn đầu 0–4,50 giây được người dùng xác nhận ngày 21/10/2026.",
+    "reference": {
+      "start": 0,
+      "end": 4.5,
+      "text": "hais tias ces Nraug Xyooj thiaj li tawm tau mus hauv kev mus lawm."
+    }
   }
 }

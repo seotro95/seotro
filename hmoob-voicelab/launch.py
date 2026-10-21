@@ -6,6 +6,8 @@ import sys
 import threading
 import webbrowser
 
+from version import APP_VERSION
+
 BASE = Path(__file__).resolve().parent
 
 
@@ -24,7 +26,7 @@ def main():
     except (ValueError, OSError) as exc:
         raise SystemExit('Không khởi động được: ' + str(exc)) from None
     url = f'http://127.0.0.1:{server.server_port}'
-    print('Hmoob VoiceLab 1.0 · ' + url, flush=True)
+    print(f'Hmoob VoiceLab {APP_VERSION} · ' + url, flush=True)
     print('Dừng bằng Ctrl+C. Tác vụ chưa xong có thể tiếp tục ở lần mở sau.', flush=True)
     if not args.no_browser:
         threading.Timer(.5, lambda: webbrowser.open(url)).start()

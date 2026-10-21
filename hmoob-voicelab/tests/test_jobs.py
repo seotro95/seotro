@@ -228,6 +228,112 @@ class JobTests(unittest.TestCase):
         self.assertEqual(engine.generated, self.expected_speech(text))
         self.assert_chapters(manager, done, 3)
 
+    def test_native_loading_phase_and_elapsed_time_remain_visible_before_first_audio(self):
+        class LoadingEngine(FakeEngine):
+            progress_callback = None
+            callback_removed = threading.Event()
+
+            def set_progress_callback(self, callback):
+                self.progress_callback = callback
+                if callback is None:
+                    self.callback_removed.set()
+
+            def synthesize(self, *args, **kwargs):
+                self.progress_callback('Đang nạp mô hình giọng đọc…')
+                return super().synthesize(*args, **kwargs)
+
+        manager, engine = self.manager(LoadingEngine(block_call=1))
+        job = manager.create({'text': 'Nyob zoo.'})
+        manager.start()
+        self.assertTrue(engine.entered.wait(2))
+        before = manager.get(job['id'])
+        self.assertEqual(before['phase'], 'Đang nạp mô hình giọng đọc…')
+        self.assertEqual(before['completed_segments'], 0)
+        self.assertEqual(before['progress'], 0)
+        threading.Event().wait(.05)
+        after = manager.get(job['id'])
+        self.assertGreater(after['processing_seconds'], before['processing_seconds'])
+        self.assertEqual(manager.list()[0]['phase'], before['phase'])
+        engine.release.set()
+        done = self.wait_for(manager, job['id'])
+        self.assertEqual(done['phase'], '')
+        self.assertTrue(engine.callback_removed.wait(2))
+        self.assertIsNone(engine.progress_callback)
+
+    def test_resume_repairs_broken_checkpoints_and_preserves_later_valid_audio(self):
+        manager, engine = self.manager(FakeEngine(block_call=4))
+        text = ''.join(character * 300 for character in 'abcdef')
+        job = manager.create({'text': text, 'voice': 'male', 'quality': 'standard', 'speed': 1.2})
+        folder = manager.folder(job['id'])
+        chunks = folder / 'chunks'
+        frozen_reference = (folder / 'reference.wav').read_bytes()
+        valid = {}
+        for index, value in ((0, 500), (2, 900)):
+            path = chunks / f'{index:07d}.wav'
+            write_reference(path, value)
+            valid[index] = (path.read_bytes(), path.stat().st_mtime_ns)
+        (chunks / '0000001.wav').write_bytes(b'not a WAV checkpoint')
+        truncated = chunks / '0000003.wav'
+        write_reference(truncated)
+        truncated.write_bytes(truncated.read_bytes()[:-20])
+        with wave.open(str(chunks / '0000004.wav'), 'wb') as output:
+            output.setnchannels(1)
+            output.setsampwidth(2)
+            output.setframerate(RATE)
+            output.writeframes(b'')
+        saved = json.loads((folder / 'job.json').read_text(encoding='utf-8'))
+        saved.update(status='cancelled', completed_segments=5, completed_characters=1500,
+                     audio_seconds=5, synthesis_seconds=2, new_audio_seconds=5)
+        atomic_json(folder / 'job.json', saved)
+        self.voices.text = 'Đã thay lời mẫu sau khi tác vụ được lưu'
+        self.voices.value = 1000
+
+        manager.resume(job['id'])
+        manager.start()
+        self.assertTrue(engine.entered.wait(2))
+        # The final missing segment is blocked so checkpoints have not been
+        # cleaned up yet. Every earlier broken file has been repaired in place.
+        for index, identity in valid.items():
+            path = chunks / f'{index:07d}.wav'
+            self.assertEqual((path.read_bytes(), path.stat().st_mtime_ns), identity)
+        for index in (1, 3, 4):
+            with wave.open(str(chunks / f'{index:07d}.wav'), 'rb') as source:
+                self.assertEqual(source.getnframes(), RATE)
+                self.assertEqual(len(source.readframes(RATE)), RATE * 2)
+        repairing = manager.get(job['id'])
+        self.assertEqual(repairing['completed_segments'], 5)
+        self.assertEqual(repairing['audio_seconds'], 5)
+        self.assertEqual(repairing['new_audio_seconds'], 8)
+        engine.release.set()
+        done = self.wait_for(manager, job['id'])
+        self.assertEqual(engine.generated, [character * 300 for character in 'bdef'])
+        self.assertEqual(done['completed_segments'], 6)
+        self.assertEqual(done['completed_characters'], len(text))
+        self.assertEqual(done['progress'], 100)
+        self.assertEqual(done['new_audio_seconds'], 9)
+        self.assertGreater(done['synthesis_seconds'], 2)
+        self.assert_chapters(manager, done, 6)
+        self.assertTrue(all(reference == ('Lời mẫu ban đầu', frozen_reference, 1.2, 'standard')
+                            for reference in engine.references))
+
+    def test_failed_checkpoint_repair_can_be_resumed_again(self):
+        manager, engine = self.manager(FakeEngine(fail_call=1))
+        text = 'a' * 300 + 'b' * 300
+        job = manager.create({'text': text})
+        folder = manager.folder(job['id'])
+        (folder / 'chunks' / '0000000.wav').write_bytes(b'RIFF')
+        write_reference(folder / 'chunks' / '0000001.wav', 900)
+        manager.start()
+        failed = self.wait_for(manager, job['id'], ('error',))
+        self.assertIn('Controlled model failure', failed['error'])
+        self.assertEqual(failed['completed_segments'], 0)
+        self.assertEqual(failed['new_audio_seconds'], 0)
+        manager.resume(job['id'])
+        done = self.wait_for(manager, job['id'])
+        self.assertEqual(engine.generated, ['a' * 300])
+        self.assertEqual(done['new_audio_seconds'], 1)
+        self.assert_chapters(manager, done, 2)
+
     def test_whitespace_only_spans_advance_without_empty_inference(self):
         manager, engine = self.manager()
         text = 'Pib.\r\n' + ' \t\r\n' * 200 + 'Xaus.'

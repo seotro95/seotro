@@ -1,0 +1,95 @@
+name: Build usable Hmoob VoiceLab for Windows
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['codex/voicelab-ready-*']
+    paths: ['hmoob-voicelab/**', '.github/workflows/voicelab-portable.yml']
+  pull_request:
+    paths: ['hmoob-voicelab/**', '.github/workflows/voicelab-portable.yml']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: voicelab-portable-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONUTF8: '1'
+  PYTHONUNBUFFERED: '1'
+  HF_HUB_DISABLE_XET: '1'
+
+jobs:
+  windows:
+    runs-on: windows-2022
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+          cache: pip
+          cache-dependency-path: hmoob-voicelab/requirements-voice.txt
+      - name: Validate Defender gate PowerShell syntax
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $parseErrors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile((Join-Path $PWD 'hmoob-voicelab/packaging/scan_portable.ps1'), [ref]$tokens, [ref]$parseErrors) | Out-Null
+          if ($parseErrors.Count) { $parseErrors | Format-List; exit 1 }
+      - name: Install tested CPU inference dependencies
+        run: |
+          python -m pip uninstall -y pipx
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m pip install -r hmoob-voicelab/requirements-voice.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m pip check
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Prepare verified FFmpeg for native regressions
+        run: |
+          python -c "import sys;from pathlib import Path;sys.path.insert(0,'hmoob-voicelab/packaging');from build_windows import download_verified_ffmpeg;download_verified_ffmpeg(Path(r'${{ runner.temp }}/regression-ffmpeg'),Path(r'${{ runner.temp }}/ffmpeg-downloads'))"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Add-Content -Path $env:GITHUB_PATH -Value '${{ runner.temp }}/regression-ffmpeg/bin'
+      - name: Run native application and packaging regression checks
+        working-directory: hmoob-voicelab
+        run: |
+          python -m unittest discover -s tests -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s packaging -p test_*.py -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node --check web/app.js
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Build portable runtime and verify real voices and normal BAT startup
+        run: python hmoob-voicelab/packaging/build_windows.py --output '${{ runner.temp }}/voicelab-portable/Hmoob VoiceLab' --reports '${{ runner.temp }}/voicelab-reports'
+      - name: Scan actual extracted package and ZIP with Windows Defender
+        shell: pwsh
+        timeout-minutes: 30
+        run: ./hmoob-voicelab/packaging/scan_portable.ps1 -PackageRoot '${{ runner.temp }}/voicelab-portable/Hmoob VoiceLab' -Archive '${{ runner.temp }}/voicelab-portable/Hmoob-VoiceLab-Windows-x64.zip' -ReportDirectory '${{ runner.temp }}/voicelab-reports/defender'
+      - name: Upload tested Windows tool
+        uses: actions/upload-artifact@v4
+        with:
+          name: Hmoob-VoiceLab-Windows-x64
+          # The download is one ZIP with the app at its root: extract once.
+          path: ${{ runner.temp }}/voicelab-portable/Hmoob VoiceLab/
+          if-no-files-found: error
+          include-hidden-files: true
+          compression-level: 6
+          retention-days: 30
+      - name: Keep build, real inference and Defender reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Hmoob-VoiceLab-validation-reports
+          path: |
+            ${{ runner.temp }}/voicelab-reports/*.json
+            ${{ runner.temp }}/voicelab-reports/*.log
+            ${{ runner.temp }}/voicelab-reports/normal-startup/
+            ${{ runner.temp }}/voicelab-reports/defender/
+          if-no-files-found: warn
+          retention-days: 30
