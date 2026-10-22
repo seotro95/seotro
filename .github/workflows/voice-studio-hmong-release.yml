@@ -56,16 +56,29 @@ jobs:
           }
       - name: Install CPU runtime and Hmong dependencies
         run: |
+          $installLog = Join-Path $env:RUNNER_TEMP 'hmong-dependency-install.log'
+          Start-Transcript -Path $installLog | Out-Null
+          function Assert-HmongInstall {
+            if ($LASTEXITCODE -ne 0) {
+              $failedExit = $LASTEXITCODE
+              Stop-Transcript | Out-Null
+              $tail = (Get-Content $installLog -Tail 30) -join "`n"
+              $detail = $tail.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+              Write-Host "::error title=Hmong dependency installation::$detail"
+              exit $failedExit
+            }
+          }
           python -m pip install --upgrade pip
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Assert-HmongInstall
           python -m pip install torch==2.8.0+cpu torchaudio==2.8.0+cpu --index-url https://download.pytorch.org/whl/cpu
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Assert-HmongInstall
           python -m pip install -r voice-studio/requirements-hmong.txt
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Assert-HmongInstall
           python -m pip install pytest
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Assert-HmongInstall
           python -m pip check
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Assert-HmongInstall
+          Stop-Transcript | Out-Null
       - name: Prepare verified FFmpeg for regression checks
         run: |
           python -c "import sys; from pathlib import Path; sys.path.insert(0, 'voice-studio/packaging'); from build_windows import download_verified_ffmpeg; download_verified_ffmpeg(Path(r'${{ runner.temp }}/hmong-tools/ffmpeg'), Path(r'${{ runner.temp }}/hmong-portable/downloads'))"
