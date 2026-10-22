@@ -21,6 +21,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from starlette.concurrency import run_in_threadpool
 
+from studio_variant import IS_HMONG, APP_NAME, APP_VERSION, DEFAULT_LANGUAGE, DEFAULT_DATA_FOLDER
 from narration import MAX_CHARACTERS, PROFILES, plan_segments
 import writing
 from dubbing import inspect_video
@@ -31,7 +32,7 @@ from performance import speed_report
 from state_io import write_json_atomic,read_progress
 
 BASE = Path(__file__).resolve().parent
-DATA = Path(os.environ.get('VOICE_STUDIO_DATA_DIR', str(BASE / '.data'))).resolve()
+DATA = Path(os.environ.get('VOICE_STUDIO_DATA_DIR', str(BASE / DEFAULT_DATA_FOLDER))).resolve()
 for folder in ('voices', 'audio', 'jobs', 'models', 'parts', 'videos'):
     (DATA / folder).mkdir(parents=True, exist_ok=True)
 from language_catalog import LANGUAGES,CORE_LANGUAGES,QWEN_LANGUAGES,SUBTITLE_LANGUAGES,RECOGNITION_CODES,native_language
@@ -51,6 +52,18 @@ PRESETS = [
     {'id': 'nano-minhquan', 'name': 'Minh Quân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Minh Quân', 'languages': ['vi'], 'description': 'Nano 8 bước · nhanh hơn, giảm độ tự nhiên'},
     {'id': 'nano-aihan', 'name': 'Ái Hân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Ái Hân', 'languages': ['vi'], 'description': 'Nano 8 bước · nhanh hơn, giảm độ tự nhiên'},
 ]
+if IS_HMONG:
+    from hmong_assets import presets as hmong_presets
+    PRESETS = hmong_presets()
+
+
+def model_ready(engine):
+    if engine == 'f5_hmong':
+        from hmong_engine import availability
+        return availability()['ready']
+    return engine == 'system' or (DATA / 'models' / f'{engine}.ready').is_file()
+
+
 @contextmanager
 def studio_lock():
     # Prevent a second server from marking a still-running long job interrupted.
@@ -102,7 +115,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.6.2', lifespan=lifespan)
+app = FastAPI(title=APP_NAME + ' · Local AI', version=APP_VERSION, lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -164,6 +177,8 @@ def index():
     import re
     from fastapi.responses import HTMLResponse
     html=(BASE/'static'/'index.html').read_text(encoding='utf-8')
+    if IS_HMONG:
+        html=html.replace('Voice Studio', APP_NAME).replace('3.6.2', APP_VERSION)
     html=re.sub(r'((?:src|href)="/static/[^"?]+)"',lambda m:m[1]+'?v='+app.version+'"',html)
     return HTMLResponse(html,headers={'Cache-Control':'no-store'})
 
@@ -179,19 +194,28 @@ def config():
 
 
 def _config_values():
-    return {'subtitle_ready':(DATA/'models'/'whisper-base'/'model.bin').is_file(),'version':app.version,'mode': 'local', 'languages': LANGUAGES,'subtitle_languages':SUBTITLE_LANGUAGES,'ai_voice_languages':list(CORE_LANGUAGES), 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'cpu_cores': os.cpu_count() or 1, 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
+    if IS_HMONG:
+        return {'variant':'hmong','app_name':APP_NAME,'default_language':'mww','version':app.version,'mode':'local',
+                'languages':{'mww':LANGUAGES['mww']},'subtitle_languages':SUBTITLE_LANGUAGES,
+                'recognition_languages':{k:v for k,v in SUBTITLE_LANGUAGES.items() if k.split('-')[0] in RECOGNITION_CODES},
+                'ai_voice_languages':['mww'],'max_characters':MAX_CHARACTERS,'max_audio_minutes':180,
+                'fast_vieneu':False,'int8_cpu':False,'models':{'f5_hmong':model_ready('f5_hmong')},
+                'hmong_ready':model_ready('f5_hmong'),'hmong_steps':16,'subtitle_ready':False,
+                'hardware':'GPU' if shutil.which('nvidia-smi') else 'CPU','ffmpeg':bool(shutil.which('ffmpeg')),
+                'cpu_cores':os.cpu_count() or 1,'nano_ready':False,'worker_warm':warm_worker is not None and warm_worker.poll() is None}
+    return {'variant':'standard','app_name':APP_NAME,'default_language':'vi','subtitle_ready':(DATA/'models'/'whisper-base'/'model.bin').is_file(),'version':app.version,'mode': 'local', 'languages': LANGUAGES,'subtitle_languages':SUBTITLE_LANGUAGES,'ai_voice_languages':list(CORE_LANGUAGES), 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'cpu_cores': os.cpu_count() or 1, 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
 
 
 @app.get('/api/voices')
 def voices():
-    entries=PRESETS+installed_voices()+records('voices')
+    entries=PRESETS+(installed_voices() if not IS_HMONG else [])+records('voices')
     entries=[{**voice,'engine':voice.get('engine','vieneu' if voice.get('languages',['vi'])[0]=='vi' else 'qwen_clone')} for voice in entries]
-    return {'voices':[{**voice,'native_language':native_language(voice),'ready':voice.get('engine')=='system' or (DATA/'models'/f"{voice.get('engine','vieneu')}.ready").exists()} for voice in entries]}
+    return {'voices':[{**voice,'native_language':native_language(voice),'ready':model_ready(voice.get('engine','vieneu'))} for voice in entries]}
 
 
 
 @app.post('/api/voices/clone', status_code=201)
-async def clone(name: str = Form(min_length=1, max_length=80), language: str = Form('vi'), transcript: str = Form('', max_length=2000), consent: bool = Form(False), file: UploadFile = File(...)):
+async def clone(name: str = Form(min_length=1, max_length=80), language: str = Form(DEFAULT_LANGUAGE), transcript: str = Form('', max_length=2000), consent: bool = Form(False), file: UploadFile = File(...)):
     ident = uuid.uuid4().hex
     target = DATA / 'voices' / f'{ident}.wav'
     source = DATA / 'voices' / f'{ident}.upload'
@@ -199,6 +223,8 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
         if not consent:
             raise HTTPException(422, 'Cần xác nhận quyền sử dụng mẫu giọng.')
         if language not in CORE_LANGUAGES:raise HTTPException(422,'Nhân bản AI chưa hỗ trợ ngôn ngữ này. Chọn giọng hệ thống Windows đã cài cho ngôn ngữ đó.')
+        if IS_HMONG and not transcript.strip():
+            raise HTTPException(422, 'Nhập đúng lời Hmong của đoạn mẫu 3–8 giây; tool không tự đoán lời mẫu.')
         if not name.strip() or language not in LANGUAGES:
             raise HTTPException(422, 'Tên hoặc ngôn ngữ không hợp lệ.')
         if Path(file.filename or '').suffix.lower() not in {'.mp3', '.wav', '.m4a', '.flac', '.ogg', '.webm'}:
@@ -214,6 +240,8 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
         import wave
         with wave.open(str(target)) as audio:
             duration = audio.getnframes() / audio.getframerate()
+        if IS_HMONG and not 3 <= duration <= 8.001:
+            raise HTTPException(422, 'Nhân bản F5-Hmong cần đoạn mẫu dài 3–8 giây và lời khớp đoạn đó.')
         if not 3 <= duration <= 30:
             raise HTTPException(422, 'Dùng mẫu dài từ 3 đến 30 giây. Nên thu một người nói, ít tạp âm, không nhạc nền.')
         import numpy as np
@@ -222,6 +250,7 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
         if not np.all(np.isfinite(samples)) or not np.any(np.abs(samples) > 0.0001):
             raise HTTPException(422, 'Mẫu giọng chỉ có im lặng hoặc âm thanh không hợp lệ. Hãy thu lại lời nói rõ tiếng.')
         record = {'id': ident, 'name': name.strip(), 'category': 'cloned', 'languages': [language], 'language': language, 'transcript': transcript.strip(), 'description': f'Mẫu giọng cá nhân · {duration:.1f}s', 'duration': duration, 'consent_at': now(), 'created_at': now()}
+        if IS_HMONG:record['engine']='f5_hmong'
         write_json(DATA / 'voices' / f'{ident}.json', record)
         return record
     except (subprocess.TimeoutExpired, FileNotFoundError):
@@ -259,7 +288,7 @@ class Speech(BaseModel):
     caption_style: dict = Field(default_factory=dict)
     text: str = Field(min_length=1, max_length=MAX_CHARACTERS)
     voice_id: str = Field(min_length=1, max_length=128)
-    language: str = 'vi'
+    language: str = DEFAULT_LANGUAGE
     speed: float = Field(default=1, ge=0.7, le=1.4)
     format: str = 'wav'
     input_format: str = Field(default='txt', pattern='^(txt|srt)$')
@@ -272,6 +301,7 @@ class Speech(BaseModel):
     export_quality: str = Field(default='balanced',pattern='^(best|balanced|fast)$')
     logos: list[dict] = Field(default_factory=list,max_length=20)
     logo: dict[str, int] | None = None
+    hmong_steps: int = Field(default=16, ge=8, le=32)
     nano_threads: int = Field(default=2, ge=1, le=8)
     nano_parallel: int = Field(default=1, ge=1, le=4)
     nano_steps: int = Field(default=8, ge=4, le=16)
@@ -383,6 +413,8 @@ def run_job(ident):
 
 @app.post('/api/speech', status_code=202)
 def speech(body: Speech):
+    if IS_HMONG and (body.language != 'mww' or body.hmong_steps not in {8,16,32}):
+        raise HTTPException(422, 'Bản Hmong chỉ đọc Hmong Trắng; chọn F5 8, 16 hoặc 32 bước.')
     if not body.text.strip() or body.language not in LANGUAGES or body.format not in {'wav', 'mp3'} or body.delivery not in PROFILES:
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
     if body.video_id:
@@ -409,7 +441,7 @@ def speech(body: Speech):
     if not voice or body.language not in voice['languages']:
         raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
-    if engine != 'system' and not (DATA / 'models' / f'{engine}.ready').exists():
+    if not model_ready(engine):
         raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Bấm Tải model cho giọng đang chọn, chờ kiểm tra hoàn tất rồi tạo lại. Cần Internet ở bước tải.')
     try:
         segment_plan = 'nano-packed-v1' if engine == 'vieneu_nano' and body.paragraph_pause == 0 else 'classic-v1'
@@ -735,7 +767,7 @@ class VideoTask(BaseModel):
     preview_start: float = Field(default=0,ge=0,le=10800)
     preview_seconds: float = Field(default=10,ge=1,le=15)
     preview_voice_id: str | None = None
-    engine: str = Field(default='qwen',pattern='^(qwen|qwen_clone|vieneu|vieneu_nano)$')
+    engine: str = Field(default='qwen',pattern='^(qwen|qwen_clone|vieneu|vieneu_nano|f5_hmong)$')
     text: str = Field(default='',max_length=200000)
     input_format: str = Field(default='txt',pattern='^(txt|srt)$')
     provider: str = Field(default='ollama',pattern='^(ollama|openai|gemini)$')
@@ -809,7 +841,10 @@ def create_video_task(body:VideoTask):
     if body.action not in {'translate_text','prepare_voice'} and not body.video_id:raise HTTPException(422,'Chọn video trước.')
     meta = read_json(DATA/'videos'/f'{valid_id(body.video_id)}.json') if body.action not in {'translate_text','prepare_voice'} else {'duration':10800}
     try:
-        if body.source_language and body.source_language!='auto' and body.source_language.split('-')[0] not in RECOGNITION_CODES:raise ValueError('Ngôn ngữ gốc chưa được hỗ trợ.')
+        if body.source_language and body.source_language!='auto' and body.source_language not in LANGUAGES and body.source_language.split('-')[0] not in RECOGNITION_CODES:
+            raise ValueError('Ngôn ngữ gốc chưa được hỗ trợ.')
+        if body.action=='subtitles' and not body.srt and (IS_HMONG or body.source_language=='mww'):
+            raise ValueError('Chưa có nhận dạng lời nói Hmong trong bản này. Nhập TXT/SRT hoặc sửa lời Hmong thủ công để tạo giọng.')
         if body.action=='translate_text':
             if not body.text.strip() or body.target_language not in LANGUAGES:raise ValueError('Nhập văn bản và chọn ngôn ngữ dịch.')
             if body.input_format=='srt':parse_srt(body.text)
@@ -937,7 +972,7 @@ def save_editor(ident:str,body:EditorProject):
     meta=read_json(DATA/'videos'/f'{ident}.json')
     try:
         from video_editor import validate_style
-        if body.language and body.language!='auto' and body.language.split('-')[0] not in RECOGNITION_CODES:raise ValueError('Ngôn ngữ phụ đề không hợp lệ.')
+        if body.language and body.language!='auto' and body.language not in LANGUAGES and body.language.split('-')[0] not in RECOGNITION_CODES:raise ValueError('Ngôn ngữ phụ đề không hợp lệ.')
         style=validate_style(body.caption_style)
         cues=validate_cues([c.model_dump() for c in body.cues],meta['duration']) if body.cues else []
     except ValueError as exc:
@@ -974,3 +1009,13 @@ def refresh_installed_voices():
     clear=getattr(installed_voices,'cache_clear',None)
     if clear:clear()
     return voices()
+
+
+@app.get('/api/hmong/presets/{ident}/sample')
+def hmong_preset_sample(ident: str):
+    if not IS_HMONG:
+        raise HTTPException(404)
+    from hmong_assets import reference
+    try:path,_=reference(ident)
+    except (ValueError,OSError):raise HTTPException(404,'Không tìm thấy mẫu Hmong.') from None
+    return FileResponse(path,media_type='audio/wav')

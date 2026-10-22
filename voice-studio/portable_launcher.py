@@ -21,7 +21,7 @@ def available_port():
     raise RuntimeError('Cong 8770-8789 dang ban. Dong studio cu roi mo lai.')
 
 
-def main():
+def main(open_browser=True):
     root = Path(__file__).resolve().parent
     port = available_port()
     url = f'http://127.0.0.1:{port}'
@@ -46,7 +46,8 @@ def main():
             raise RuntimeError('Studio chua san sang sau 60 giay.')
         print(f'Studio: {url}\nGiu cua so nay mo. Bam Ctrl+C de tat.', flush=True)
         try:
-            webbrowser.open(url+'/?v='+studio_version)
+            if open_browser:
+                webbrowser.open(url+'/?v='+studio_version)
         except webbrowser.Error:
             print('Khong tu mo duoc trinh duyet. Mo dia chi Studio ben tren.', flush=True)
         process.wait()
