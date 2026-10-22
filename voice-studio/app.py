@@ -195,12 +195,12 @@ def config():
 
 def _config_values():
     if IS_HMONG:
-        return {'variant':'hmong','app_name':APP_NAME,'default_language':'mww','version':app.version,'mode':'local',
+        return {'variant':'hmong','app_name':APP_NAME,'default_language':'mww','default_voice_id':'hmong-male','version':app.version,'mode':'local',
                 'languages':{'mww':LANGUAGES['mww']},'subtitle_languages':SUBTITLE_LANGUAGES,
                 'recognition_languages':{k:v for k,v in SUBTITLE_LANGUAGES.items() if k.split('-')[0] in RECOGNITION_CODES},
                 'ai_voice_languages':['mww'],'max_characters':MAX_CHARACTERS,'max_audio_minutes':180,
                 'fast_vieneu':False,'int8_cpu':False,'models':{'f5_hmong':model_ready('f5_hmong')},
-                'hmong_ready':model_ready('f5_hmong'),'hmong_steps':16,'subtitle_ready':False,
+                'hmong_ready':model_ready('f5_hmong'),'hmong_steps':4,'subtitle_ready':False,
                 'hardware':'GPU' if shutil.which('nvidia-smi') else 'CPU','ffmpeg':bool(shutil.which('ffmpeg')),
                 'cpu_cores':os.cpu_count() or 1,'nano_ready':False,'worker_warm':warm_worker is not None and warm_worker.poll() is None}
     return {'variant':'standard','app_name':APP_NAME,'default_language':'vi','subtitle_ready':(DATA/'models'/'whisper-base'/'model.bin').is_file(),'version':app.version,'mode': 'local', 'languages': LANGUAGES,'subtitle_languages':SUBTITLE_LANGUAGES,'ai_voice_languages':list(CORE_LANGUAGES), 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'cpu_cores': os.cpu_count() or 1, 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
@@ -215,16 +215,15 @@ def voices():
 
 
 @app.post('/api/voices/clone', status_code=201)
-async def clone(name: str = Form(min_length=1, max_length=80), language: str = Form(DEFAULT_LANGUAGE), transcript: str = Form('', max_length=2000), consent: bool = Form(False), file: UploadFile = File(...)):
+async def clone(name: str = Form(min_length=1, max_length=80), language: str = Form(DEFAULT_LANGUAGE), transcript: str = Form('', max_length=2000), consent: bool = Form(False), reference_start: float | None = Form(None), reference_end: float | None = Form(None), file: UploadFile = File(...)):
     ident = uuid.uuid4().hex
     target = DATA / 'voices' / f'{ident}.wav'
     source = DATA / 'voices' / f'{ident}.upload'
+    decoded = DATA / 'voices' / f'{ident}.decoded.wav'
     try:
         if not consent:
             raise HTTPException(422, 'Cần xác nhận quyền sử dụng mẫu giọng.')
         if language not in CORE_LANGUAGES:raise HTTPException(422,'Nhân bản AI chưa hỗ trợ ngôn ngữ này. Chọn giọng hệ thống Windows đã cài cho ngôn ngữ đó.')
-        if IS_HMONG and not transcript.strip():
-            raise HTTPException(422, 'Nhập đúng lời Hmong của đoạn mẫu 3–8 giây; tool không tự đoán lời mẫu.')
         if not name.strip() or language not in LANGUAGES:
             raise HTTPException(422, 'Tên hoặc ngôn ngữ không hợp lệ.')
         if Path(file.filename or '').suffix.lower() not in {'.mp3', '.wav', '.m4a', '.flac', '.ogg', '.webm'}:
@@ -233,15 +232,25 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
         if not content or len(content) > 20 * 1024 * 1024:
             raise HTTPException(413, 'Mẫu phải có dữ liệu và không vượt quá 20 MB.')
         source.write_bytes(content)
-        # Decode only local audio; prohibit FFmpeg from following network playlists.
-        result = await run_in_threadpool(subprocess.run, ['ffmpeg', '-nostdin', '-v', 'error', '-protocol_whitelist', 'file,pipe', '-i', str(source), '-t', '31', '-vn', '-ac', '1', '-ar', '24000', '-y', str(target)], capture_output=True, timeout=45, check=False)
-        if result.returncode or not target.exists():
-            raise HTTPException(422, 'Không đọc được âm thanh. Hãy dùng bản thu WAV/MP3 rõ tiếng.')
-        import wave
-        with wave.open(str(target)) as audio:
-            duration = audio.getnframes() / audio.getframerate()
-        if IS_HMONG and not 3 <= duration <= 8.001:
-            raise HTTPException(422, 'Nhân bản F5-Hmong cần đoạn mẫu dài 3–8 giây và lời khớp đoạn đó.')
+        selection = None
+        if IS_HMONG:
+            from hmong_reference import decode_upload, select_reference, crop_reference, ReferenceError
+            try:
+                source_duration = await run_in_threadpool(decode_upload, source, decoded)
+                selection = select_reference(content, source_duration, transcript, reference_start, reference_end)
+                duration = await run_in_threadpool(crop_reference, decoded, target,
+                                                   selection['reference_start'], selection['reference_end'])
+                transcript = selection['transcript']
+            except ReferenceError as exc:
+                raise HTTPException(422, str(exc)) from None
+        else:
+            # Decode only local audio; prohibit FFmpeg from following network playlists.
+            result = await run_in_threadpool(subprocess.run, ['ffmpeg', '-nostdin', '-v', 'error', '-protocol_whitelist', 'file,pipe', '-i', str(source), '-t', '31', '-vn', '-ac', '1', '-ar', '24000', '-y', str(target)], capture_output=True, timeout=45, check=False)
+            if result.returncode or not target.exists():
+                raise HTTPException(422, 'Không đọc được âm thanh. Hãy dùng bản thu WAV/MP3 rõ tiếng.')
+            import wave
+            with wave.open(str(target)) as audio:
+                duration = audio.getnframes() / audio.getframerate()
         if not 3 <= duration <= 30:
             raise HTTPException(422, 'Dùng mẫu dài từ 3 đến 30 giây. Nên thu một người nói, ít tạp âm, không nhạc nền.')
         import numpy as np
@@ -250,15 +259,42 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
         if not np.all(np.isfinite(samples)) or not np.any(np.abs(samples) > 0.0001):
             raise HTTPException(422, 'Mẫu giọng chỉ có im lặng hoặc âm thanh không hợp lệ. Hãy thu lại lời nói rõ tiếng.')
         record = {'id': ident, 'name': name.strip(), 'category': 'cloned', 'languages': [language], 'language': language, 'transcript': transcript.strip(), 'description': f'Mẫu giọng cá nhân · {duration:.1f}s', 'duration': duration, 'consent_at': now(), 'created_at': now()}
-        if IS_HMONG:record['engine']='f5_hmong'
+        if IS_HMONG:
+            record.update(engine='f5_hmong', **selection)
         write_json(DATA / 'voices' / f'{ident}.json', record)
         return record
     except (subprocess.TimeoutExpired, FileNotFoundError):
         raise HTTPException(503, 'Cần FFmpeg hoạt động để nhập mẫu âm thanh.') from None
     finally:
         source.unlink(missing_ok=True)
+        decoded.unlink(missing_ok=True)
         if not (DATA / 'voices' / f'{ident}.json').exists():
             target.unlink(missing_ok=True)
+        await file.close()
+
+
+@app.post('/api/hmong/reference-info')
+async def hmong_reference_info(file: UploadFile = File(...)):
+    if not IS_HMONG:
+        await file.close()
+        raise HTTPException(404, 'Chức năng chọn đoạn mẫu chỉ có trong bản Hmong.')
+    import tempfile
+    from hmong_reference import MAX_UPLOAD_BYTES, validate_upload, decode_upload, describe_reference, ReferenceError
+    try:
+        content = await file.read(MAX_UPLOAD_BYTES + 1)
+        if len(content) > MAX_UPLOAD_BYTES:
+            raise HTTPException(413, 'Mẫu không được vượt quá 20 MB.')
+        validate_upload(file.filename, content)
+        with tempfile.TemporaryDirectory(prefix='reference-info-', dir=DATA / 'parts') as folder:
+            source, decoded = Path(folder) / 'source.upload', Path(folder) / 'decoded.wav'
+            source.write_bytes(content)
+            duration = await run_in_threadpool(decode_upload, source, decoded)
+            return describe_reference(content, duration)
+    except ReferenceError as exc:
+        raise HTTPException(422, str(exc)) from None
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        raise HTTPException(503, 'Cần FFmpeg hoạt động để kiểm tra mẫu âm thanh.') from None
+    finally:
         await file.close()
 
 
@@ -301,7 +337,7 @@ class Speech(BaseModel):
     export_quality: str = Field(default='balanced',pattern='^(best|balanced|fast)$')
     logos: list[dict] = Field(default_factory=list,max_length=20)
     logo: dict[str, int] | None = None
-    hmong_steps: int = Field(default=16, ge=8, le=32)
+    hmong_steps: int = Field(default=4, ge=4, le=32)
     nano_threads: int = Field(default=2, ge=1, le=8)
     nano_parallel: int = Field(default=1, ge=1, le=4)
     nano_steps: int = Field(default=8, ge=4, le=16)
@@ -413,8 +449,8 @@ def run_job(ident):
 
 @app.post('/api/speech', status_code=202)
 def speech(body: Speech):
-    if IS_HMONG and (body.language != 'mww' or body.hmong_steps not in {8,16,32}):
-        raise HTTPException(422, 'Bản Hmong chỉ đọc Hmong Trắng; chọn F5 8, 16 hoặc 32 bước.')
+    if IS_HMONG and (body.language != 'mww' or body.hmong_steps not in {4,8,16,32}):
+        raise HTTPException(422, 'Bản Hmong chỉ đọc Hmong Trắng; chọn F5 4, 8, 16 hoặc 32 bước.')
     if not body.text.strip() or body.language not in LANGUAGES or body.format not in {'wav', 'mp3'} or body.delivery not in PROFILES:
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
     if body.video_id:
@@ -1015,7 +1051,7 @@ def refresh_installed_voices():
 def hmong_preset_sample(ident: str):
     if not IS_HMONG:
         raise HTTPException(404)
-    from hmong_assets import reference
-    try:path,_=reference(ident)
+    from hmong_assets import source
+    try:path=source(ident)
     except (ValueError,OSError):raise HTTPException(404,'Không tìm thấy mẫu Hmong.') from None
-    return FileResponse(path,media_type='audio/wav')
+    return FileResponse(path,media_type='audio/mpeg')

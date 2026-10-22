@@ -38,9 +38,9 @@ def load_synthesizer(job):
         else:
             record = json.loads((DATA/'voices'/(job['voice_id']+'.json')).read_text(encoding='utf-8'))
             ref_path, ref_text = DATA/'voices'/(job['voice_id']+'.wav'), record.get('transcript','')
-        steps = job.get('hmong_steps',16)
-        quality = {8:'draft',16:'fast',32:'standard'}.get(steps)
-        if quality is None:raise ValueError('F5-Hmong chỉ nhận 8, 16 hoặc 32 bước.')
+        steps = job.get('hmong_steps',4)
+        quality = {4:'turbo',8:'draft',16:'fast',32:'standard'}.get(steps)
+        if quality is None:raise ValueError('F5-Hmong chỉ nhận 4, 8, 16 hoặc 32 bước.')
         def synthesize(text, output):
             progress_path = Path(output).parent/'progress.json'
             def report_phase(phase):
@@ -372,7 +372,10 @@ def render(job, synthesize=None):
         write_state(work / 'progress.json', {'completed': completed, 'total': len(segments), 'progress': 86, 'phase': 'Đang ghép giọng vào video, giữ nguyên hình ảnh'})
         from dubbing import mux_video
         mux_video(job, destination, work, DATA, writer.frames / writer.rate)
-    write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3)})
+    inference = {}
+    if job['engine']=='f5_hmong' and _hmong_model_instance is not None and _hmong_model_instance._model is not None:
+        inference = {'hmong_precision': _hmong_model_instance._model.precision, 'hmong_steps': job.get('hmong_steps',4)}
+    write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), **inference})
 
 
 def voice_error(exc):

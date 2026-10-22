@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from importlib import metadata
 from importlib.resources import files
+import os
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -43,7 +44,7 @@ def _load_ema_checkpoint(model, checkpoint_path, device):
     return model.to(device)
 
 
-def load_local_model(root, device, progress=None):
+def load_local_model(root, device, progress=None, precision=None):
     """Load the verified local F5TTS_Base/Vocos files; never download weights."""
     if metadata.version("f5-tts") != "1.1.22":
         raise RuntimeError("Bộ tạo giọng cần đúng phiên bản f5-tts 1.1.22.")
@@ -72,14 +73,44 @@ def load_local_model(root, device, progress=None):
 
     _progress(progress, "Đang nạp trọng số F5-Hmong…")
     vocabulary, vocabulary_size = get_tokenizer(str(root / "f5-hmong/vocab.txt"), "custom")
-    network = CFM(
-        transformer=DiT(**config["arch"], text_num_embeds=vocabulary_size, mel_dim=100),
-        mel_spec_kwargs=dict(config["mel_spec"]),
-        odeint_kwargs={"method": "euler"},
-        vocab_char_map=vocabulary,
-    ).to(device)
-    network = _load_ema_checkpoint(network, root / "f5-hmong/model_159952.safetensors", device)
-    return SimpleNamespace(ema_model=network, vocoder=vocoder, mel_spec_type="vocos")
+    def original_network():
+        candidate = CFM(
+            transformer=DiT(**config["arch"], text_num_embeds=vocabulary_size, mel_dim=100),
+            mel_spec_kwargs=dict(config["mel_spec"]),
+            odeint_kwargs={"method": "euler"},
+            vocab_char_map=vocabulary,
+        ).to(device)
+        return _load_ema_checkpoint(candidate, root / "f5-hmong/model_159952.safetensors", device).eval()
+
+    requested = precision or os.getenv('HMOOB_PRECISION', 'auto')
+    if requested not in {'auto', 'fp32', 'int8'}:
+        raise ValueError('HMOOB_PRECISION chỉ nhận auto, fp32 hoặc int8.')
+    network = original_network()
+    actual = 'fp16' if 'cuda' in device and next(network.parameters()).dtype == torch.float16 else 'fp32'
+    if device == 'cpu' and requested != 'fp32':
+        engines = torch.backends.quantized.supported_engines
+        backend = next((name for name in ('x86', 'fbgemm', 'onednn') if name in engines), None)
+        if backend is None and requested == 'int8':
+            raise RuntimeError('Bản PyTorch này không hỗ trợ tăng tốc INT8 trên CPU.')
+        if backend:
+            _progress(progress, 'Đang tối ưu bộ tạo giọng cho máy…')
+            try:
+                torch.backends.quantized.engine = backend
+                # In-place conversion bounds RAM rather than duplicating the
+                # complete 1.3 GB model. Rebuild verified FP32 on auto failure.
+                network = torch.ao.quantization.quantize_dynamic(
+                    network, {torch.nn.Linear}, dtype=torch.qint8, inplace=True)
+                actual = 'int8'
+            except (RuntimeError, NotImplementedError):
+                if requested == 'int8':
+                    raise
+                del network
+                import gc
+                gc.collect()
+                _progress(progress, 'Đang nạp bộ tạo giọng tương thích…')
+                network = original_network()
+                actual = 'fp32'
+    return SimpleNamespace(ema_model=network, vocoder=vocoder, mel_spec_type="vocos", precision=actual)
 
 
 def infer_batch(reference, reference_text, text, model, *, steps, speed, device):

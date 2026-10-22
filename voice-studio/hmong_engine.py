@@ -19,7 +19,7 @@ import wave
 
 
 BASE = Path(__file__).resolve().parent
-QUALITY_STEPS = {"draft": 8, "fast": 16, "standard": 32}
+QUALITY_STEPS = {"turbo": 4, "draft": 8, "fast": 16, "standard": 32}
 MODEL_FILES = (
     "f5-hmong/model_159952.safetensors",
     "f5-hmong/vocab.txt",
@@ -229,7 +229,10 @@ class SpeechEngine:
             raise EngineError("Đã chọn CUDA nhưng PyTorch chưa nhận GPU. Cài bản PyTorch CUDA phù hợp hoặc chọn auto/cpu.")
         if device == "mps" and not (getattr(torch.backends, "mps", None) and torch.backends.mps.is_available()):
             raise EngineError("Đã chọn MPS nhưng máy này không có MPS khả dụng. Chọn auto/cpu.")
-        key = (integrity, device)
+        requested_precision = os.getenv('HMOOB_PRECISION', 'auto')
+        if requested_precision not in {'auto', 'fp32', 'int8'}:
+            raise EngineError('HMOOB_PRECISION chỉ nhận auto, fp32 hoặc int8.')
+        key = (integrity, device, requested_precision)
         if self._model is None or self._model_key != key:
             cache = root.parent / "cache"
             for name, folder in (("MPLCONFIGDIR", "matplotlib"), ("NUMBA_CACHE_DIR", "numba"),
@@ -274,7 +277,7 @@ class SpeechEngine:
                 or not math.isfinite(speed) or not 0.5 <= speed <= 2):
             raise EngineError("Tốc độ đọc cần từ 0,5 đến 2 lần.")
         if quality not in QUALITY_STEPS:
-            raise EngineError("Chọn fast (16 bước), standard (32 bước) hoặc draft (8 bước thử nghiệm).")
+            raise EngineError("Chọn turbo (4 bước), draft (8 bước), fast (16 bước) hoặc standard (32 bước).")
         reference_key = _reference_identity(reference_path, reference_text)
         with self._lock:
             try:

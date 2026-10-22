@@ -18,10 +18,11 @@ spec.loader.exec_module(packaging)
 
 def source_fixture(root):
     root.mkdir()
-    for name in ('app.py', 'worker.py', 'hmong_engine.py', 'hmong_f5.py',
+    for name in ('app.py', 'worker.py', 'hmong_engine.py', 'hmong_f5.py', 'hmong_reference.py', 'hmong_assets.py',
                  'prepare_hmong.py', 'hmong_launcher.py', 'studio_variant.py'):
         (root / name).write_text('# app\n', encoding='utf-8')
     for name in ('static/app.js', 'assets/hmong/female.wav', 'assets/hmong/male.wav',
+                 'assets/hmong/source-female.mp3', 'assets/hmong/source-male.mp3',
                  'assets/hmong/voices.json', '.data/voices/personal.wav',
                  '.data/models/private.bin', '.venv/Lib/private.py', 'assets/private.wav', '.env'):
         path = root / name
@@ -37,6 +38,8 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
     assert (output / 'static/app.js').read_bytes() == b'fixture'
     assert (output / 'assets/hmong/female.wav').is_file()
     assert (output / 'assets/hmong/male.wav').is_file()
+    assert (output / 'assets/hmong/source-female.mp3').is_file()
+    assert (output / 'assets/hmong/source-male.mp3').is_file()
     assert not (output / '.data').exists()
     assert not (output / '.venv').exists()
     assert not (output / '.env').exists()
@@ -44,7 +47,7 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
 
 
 def test_archive_has_valid_crc_and_matching_sha256(tmp_path):
-    root = tmp_path / 'Voice-Studio-Hmong-1.0.0'
+    root = tmp_path / 'Voice-Studio-Hmong-1.1.0'
     root.mkdir()
     (root / 'hello.txt').write_bytes(b'relocatable')
     archive = tmp_path / 'bundle.zip'

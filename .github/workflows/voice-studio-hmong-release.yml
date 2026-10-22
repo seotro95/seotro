@@ -1,8 +1,8 @@
-name: Build and publish Voice Studio Hmong 1.0.0
+name: Build and publish Voice Studio Hmong 1.1.0
 
 on:
   push:
-    branches: [release/voice-studio-hmong-1.0.0]
+    branches: [release/voice-studio-hmong-1.1.0]
     paths:
       - .github/workflows/voice-studio-hmong-release.yml
       - voice-studio/**
@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: voice-studio-hmong-1.0.0-release
+  group: voice-studio-hmong-1.1.0-release
   cancel-in-progress: false
 
 env:
@@ -20,7 +20,7 @@ env:
   PYTHONUNBUFFERED: '1'
   HF_HUB_DISABLE_XET: '1'
   GH_REPO: ${{ github.repository }}
-  RELEASE_TAG: voice-studio-hmong-1.0.0
+  RELEASE_TAG: voice-studio-hmong-1.1.0
 
 jobs:
   native-windows-release:
@@ -51,7 +51,7 @@ jobs:
           if (-not $release) {
             $notes = Join-Path $env:RUNNER_TEMP 'hmong-draft-notes.txt'
             'Building and validating a clean native Windows Hmong package. Download links appear after all checks pass.' | Set-Content -Encoding utf8 $notes
-            gh release create $env:RELEASE_TAG --repo $env:GH_REPO --target $env:GITHUB_SHA --draft --prerelease --title 'Voice Studio Hmong 1.0.0 — Windows x64' --notes-file $notes
+            gh release create $env:RELEASE_TAG --repo $env:GH_REPO --target $env:GITHUB_SHA --draft --prerelease --title 'Voice Studio Hmong 1.1.0 — Windows x64' --notes-file $notes
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
       - name: Install CPU runtime and Hmong dependencies
@@ -76,7 +76,7 @@ jobs:
       - name: Check Hmong routing and portable packaging
         working-directory: voice-studio
         run: |
-          python packaging/ci_checked.py python -m pytest tests/test_hmong_variant.py tests/test_hmong_packaging.py -q
+          python packaging/ci_checked.py python -m pytest tests/test_hmong_variant.py tests/test_hmong_reference.py tests/test_hmong_packaging.py -q
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node --check static/app.js
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
@@ -84,7 +84,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Build and synthesize with the relocated Windows runtime
         run: |
-          python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --output '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.0.0' --reports '${{ runner.temp }}/hmong-reports'
+          python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --output '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.1.0' --reports '${{ runner.temp }}/hmong-reports'
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Scan the fresh package with Windows Defender when available
         timeout-minutes: 25
@@ -92,9 +92,9 @@ jobs:
           $scanner = Join-Path $env:ProgramFiles 'Windows Defender/MpCmdRun.exe'
           $report = @{ available = (Test-Path $scanner); scan_passed = $false }
           if ($report.available) {
-            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.0.0'
+            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.1.0'
             if ($LASTEXITCODE -ne 0) { throw 'Windows Defender did not accept the fresh Hmong directory; do not publish.' }
-            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.0.0-Windows-x64.zip'
+            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.1.0-Windows-x64.zip'
             if ($LASTEXITCODE -ne 0) { throw 'Windows Defender did not accept the Hmong archive; do not publish.' }
             $report.scan_passed = $true
           } else { Write-Warning 'Windows Defender command-line scanner is unavailable on this runner; no antivirus result is claimed.' }
@@ -103,12 +103,12 @@ jobs:
         uses: actions/upload-artifact@v4
         continue-on-error: true
         with:
-          name: Voice-Studio-Hmong-1.0.0-native-windows
+          name: Voice-Studio-Hmong-1.1.0-native-windows
           compression-level: 0
           retention-days: 7
           path: |
-            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.0.0-Windows-x64.zip
-            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.0.0-Windows-x64.zip.sha256
+            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.1.0-Windows-x64.zip
+            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.1.0-Windows-x64.zip.sha256
             ${{ runner.temp }}/hmong-reports/*.json
       - name: Upload checked assets and publish the Hmong prerelease
         env:
@@ -118,7 +118,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           $release = $releases | Where-Object { $_.tag_name -eq $env:RELEASE_TAG }
           if (-not $release -or -not $release.draft) { throw 'The separate Hmong draft release is missing or was published elsewhere.' }
-          $zip = '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.0.0-Windows-x64.zip'
+          $zip = '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.1.0-Windows-x64.zip'
           $size = (Get-Item $zip).Length
           if ($size -ge 2GB) { throw 'The package exceeds the GitHub per-asset size limit.' }
           $digest = (Get-FileHash -Algorithm SHA256 $zip).Hash.ToLowerInvariant()
@@ -130,9 +130,11 @@ jobs:
 
           **Lần đầu cần Internet để tự tải và kiểm tra khoảng 1,4 GB model.** Model Hmong không có giấy phép phân phối lại rõ ràng nên không kèm weights trong ZIP; tool tải trực tiếp các tệp được cố định revision/SHA256 từ nguồn model. Những lần sau dùng ngoại tuyến khi model đã sẵn sàng. Dữ liệu nằm trong voice-studio-hmong/.data; sao lưu thư mục này khi cập nhật.
 
-          Nhân bản cần mẫu 3–8 giây và lời Hmong khớp đoạn mẫu, với quyền sử dụng giọng. Kể chuyện/review thay đổi nhịp, tốc độ và khoảng nghỉ. Chưa hỗ trợ nhận dạng giọng nói Hmong; dùng TXT/SRT hoặc sửa phụ đề thủ công. Không bảo đảm tạo một giờ voice trong hai phút; thời gian tùy CPU/GPU và mức chất lượng. Cần người nghe đánh giá phát âm và độ giống giọng.
+          Hai MP3 gốc được giữ nguyên để nghe thử. Khi nhập đúng một trong hai MP3 đã xác minh, tool tự chọn đoạn 3–8 giây và lời tham chiếu đã xác nhận. Với tệp khác, chọn đoạn 3–8 giây, nhập lời Hmong khớp đoạn mẫu và xác nhận quyền sử dụng giọng. Kể chuyện/review thay đổi nhịp, tốc độ và khoảng nghỉ. Chưa hỗ trợ nhận dạng giọng nói Hmong; dùng TXT/SRT hoặc sửa phụ đề thủ công. Không bảo đảm tạo một giờ voice trong hai phút; thời gian tùy CPU/GPU và mức chất lượng. Cần người nghe đánh giá phát âm và độ giống giọng.
 
-          Đã kiểm tra bằng Python Windows x64 được đóng gói, sau khi chuyển thư mục: tạo tiếng thật ngoại tuyến cho cả hai giọng, giọng nhân bản tham chiếu, TXT/SRT/MP3 và launcher bình thường. Kiểm tra ngắn này không chứng minh chất lượng phát âm hoặc độ giống giọng.
+          Mặc định chọn chế độ nhanh 4 bước và tự tối ưu INT8 khi CPU hỗ trợ, với dự phòng tương thích. Có thể chọn 8/16/32 bước để nghe so sánh chất lượng; 4 bước là bản nháp. Nút Lưu và tạo thử vừa nhập mẫu vừa tạo lời đọc mới. Báo cáo native-smoke.json có phép đo cùng máy giữa FP32 8 bước và chế độ nhanh 4 bước, không tính nạp model. Đây là phép đo ngắn, không bảo đảm tốc độ giống nhau trên mọi cấu hình.
+
+          Đã kiểm tra bằng Python Windows x64 được đóng gói, sau khi chuyển thư mục: checksum đầy đủ hai MP3 nghe thử, tạo tiếng thật ngoại tuyến cho cả hai giọng, nhập và nhân bản từ từng MP3 gốc khi để trống lời, chọn đoạn thủ công từ tệp dài khác, TXT/SRT/MP3 và launcher bình thường. Kiểm tra ngắn này không chứng minh chất lượng phát âm hoặc độ giống giọng.
 
           ZIP: $size bytes
           SHA256: $digest
@@ -146,6 +148,6 @@ jobs:
           $asset = $uploaded | Where-Object { $_.name -eq (Split-Path -Leaf $zip) }
           if (-not $asset -or $asset.size -ne $size) { throw 'The uploaded ZIP size does not match the validated archive.' }
           if ($asset.digest -and $asset.digest -ne "sha256:$digest") { throw 'The uploaded ZIP digest does not match the validated archive.' }
-          gh release edit $env:RELEASE_TAG --repo $env:GH_REPO --draft=false --prerelease=true --latest=false --target $env:GITHUB_SHA --title 'Voice Studio Hmong 1.0.0 — Windows x64' --notes-file $notes
+          gh release edit $env:RELEASE_TAG --repo $env:GH_REPO --draft=false --prerelease=true --latest=false --target $env:GITHUB_SHA --title 'Voice Studio Hmong 1.1.0 — Windows x64' --notes-file $notes
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           "Published checked Hmong ZIP ($size bytes), SHA256: $digest" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append

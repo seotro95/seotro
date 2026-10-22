@@ -20,7 +20,7 @@ import zipfile
 from build_windows import copy_runtime, download_verified_ffmpeg
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.0.0'
+VERSION = '1.1.0'
 ARCHIVE_NAME = f'Voice-Studio-Hmong-{VERSION}-Windows-x64.zip'
 
 
@@ -43,7 +43,7 @@ def copy_source(destination, source=SOURCE):
         if folder.is_symlink() or any(path.is_symlink() for path in folder.rglob('*')):
             raise ValueError('Linked application assets cannot be bundled')
         shutil.copytree(folder, destination / relative)
-    required = ('app.py', 'worker.py', 'hmong_engine.py', 'hmong_f5.py',
+    required = ('app.py', 'worker.py', 'hmong_engine.py', 'hmong_f5.py', 'hmong_reference.py', 'hmong_assets.py',
                 'prepare_hmong.py', 'hmong_launcher.py', 'studio_variant.py')
     for name in required:
         if not (destination / name).is_file():
@@ -105,16 +105,20 @@ def checked_run(command, *, environment, cwd, timeout=2400):
 
 
 def write_notices(root, model_manifest, qa_report):
-    notice = '''VOICE STUDIO HMONG 1.0.0 — WINDOWS X64
+    notice = '''VOICE STUDIO HMONG 1.1.0 — WINDOWS X64
 
 Giai nen TOAN BO ZIP, mo MO_VOICE_STUDIO_HMONG.bat.
-Da kem Python, thu vien CPU, FFmpeg va hai doan giong Hmong co loi tham chieu.
+Da kem Python, thu vien CPU, FFmpeg, hai MP3 goc va doan Hmong co loi tham chieu.
 LAN DAU CAN INTERNET: tool tu tai va kiem tra khoang 1,4 GB model tu nguon
 chinh thuc. Khong can API key. Sau khi chuan bi xong co the dung ngoai tuyen.
 KIEM_TRA_HMONG.bat kiem tra tep va thu vien da cai, khong tu tai model.
 
 Du lieu ca nhan o voice-studio-hmong/.data. Sao luu thu muc nay khi cap nhat.
-Nhan ban can mau 3-8 giay va loi Hmong khop doan mau. Kieu ke chuyen/review
+Mac dinh nhanh 4 buoc va tu toi uu cho CPU, khong can chinh cau hinh.
+Ban nhanh la ban nhap; co the chon 8/16/32 buoc de so sanh chat luong.
+Hai MP3 goc da xac minh duoc tu chon doan tham chieu va loi khop mau.
+Voi tep khac, chon doan 3-8 giay va nhap loi Hmong khop doan mau.
+Kieu ke chuyen/review
 la dieu chinh nhip/toc do/khoang nghi; khong phai model cam xuc moi.
 Chua co nhan dang loi noi Hmong: nhap TXT/SRT hoac sua phu de thu cong.
 Mo hinh Hmong cong dong can nguoi nghe danh gia phat am va do giong giong.
@@ -129,7 +133,7 @@ Hmong integration: https://github.com/YangNobody12/F5-TTS-Hmong
 Weights KHONG DUOC PHAN PHOI LAI trong goi nay. Tool tai truc tiep tu
 Pakorn2112/F5TTS-Hmong va charactr/vocos-mel-24khz, voi revision/checksum
 co dinh. Xem dieu khoan cua nha phat hanh mo hinh cho muc dich su dung.
-Hai doan tham chieu la mau da duoc phep su dung trong du an. Goi khong kem
+Hai MP3 goc va doan tham chieu da duoc phep su dung trong du an. Goi khong kem
 ho so giong, lich su, credential hoac ban thu khac cua nguoi dung.
 '''
     (root / 'BAT-DAU.txt').write_text(notice, encoding='utf-8')
