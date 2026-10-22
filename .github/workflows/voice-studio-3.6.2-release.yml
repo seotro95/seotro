@@ -1,0 +1,139 @@
+name: Build and publish Voice Studio 3.6.2 prerelease
+
+on:
+  push:
+    branches: [release/voice-studio-3.6.2-cpu]
+    paths:
+      - .github/workflows/voice-studio-3.6.2-release.yml
+      - voice-studio/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-studio-3.6.2-prerelease
+  cancel-in-progress: false
+
+env:
+  PYTHONUTF8: "1"
+  HF_HUB_DISABLE_XET: "1"
+  GH_REPO: ${{ github.repository }}
+  RELEASE_TAG: voice-studio-3.6.2-cpu
+  RELEASE_ID: "420348145"
+
+jobs:
+  native-windows-package:
+    if: github.repository == 'seotro95/seotro'
+    runs-on: windows-2022
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.10"
+          architecture: x64
+          cache: pip
+          cache-dependency-path: |
+            voice-studio/requirements.txt
+            voice-studio/requirements-dev.txt
+      - name: Confirm the authorized draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $release = gh api "repos/$env:GH_REPO/releases/$env:RELEASE_ID" | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if ($release.tag_name -ne $env:RELEASE_TAG -or -not $release.draft) {
+            throw 'The expected release must still be a draft with the authorized tag.'
+          }
+      - name: Install the CPU development dependencies
+        run: |
+          python -m pip install -r voice-studio/requirements-dev.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m pip check
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Prepare checksum-verified FFmpeg for regression tests
+        run: |
+          python -c "import sys;sys.path.insert(0,'voice-studio/packaging');from build_windows import download_verified_ffmpeg;from pathlib import Path;download_verified_ffmpeg(Path(r'${{ runner.temp }}/tools/ffmpeg'),Path(r'${{ runner.temp }}/portable/downloads'))"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Add-Content -Path $env:GITHUB_PATH -Value "${{ runner.temp }}/tools/ffmpeg/bin"
+      - name: Run the native Windows regression suite
+        working-directory: voice-studio
+        run: |
+          python packaging/ci_checks.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Build models and verify the relocated offline Windows runtime
+        run: |
+          python voice-studio/packaging/build_windows.py --output "${{ runner.temp }}/portable/Voice-Studio-3.6.2"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Prepare the final filename, checksum and release notes
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $folder = '${{ runner.temp }}/portable'
+          $zip = Join-Path $folder 'Voice-Studio-3.6.2-Windows-x64.zip'
+          Copy-Item (Join-Path $folder 'Voice-Studio-Windows-x64.zip') $zip
+          $size = (Get-Item $zip).Length
+          if ($size -ge 2GB) { throw 'ZIP exceeds the GitHub per-asset limit.' }
+          $sha = (Get-FileHash -Algorithm SHA256 $zip).Hash.ToLowerInvariant()
+          "$sha  Voice-Studio-3.6.2-Windows-x64.zip" | Set-Content -Encoding ascii "$zip.sha256"
+          $notes = @'
+          Gói Windows 10/11 x64 đã kèm Python 3.12, FFmpeg và mô hình Nano/Turbo/Whisper. Giải nén toàn bộ ZIP vào thư mục có quyền ghi rồi mở `MO_VOICE_STUDIO.bat`; các giọng Việt đi kèm không cần API key hoặc tải mô hình lần đầu. `KIEM_TRA_TOOL.bat` kiểm tra inference offline bằng tệp tạm, không xóa mẫu giọng/lịch sử.
+
+          Bổ sung kiểu đọc Review/Thuyết minh; sửa xử lý âm thanh rỗng/hỏng, mẫu nhân bản im lặng, checkpoint bị cắt cụt và thay đổi số tiến trình khi tiếp tục. Các kiểu đọc điều chỉnh nhịp, tốc độ và khoảng nghỉ.
+
+          **Gói này đã được dựng trên Windows thật, vượt qua regression và smoke test bằng Python đóng gói sau khi di chuyển.** Các bước kiểm tra bao gồm Nano/Turbo offline, nhận dạng Whisper, API/static assets, FFmpeg, xuất MP3/WAV/TXT/SRT, ghép voice/phụ đề và xuất MP4/4K. Nhân bản giọng Việt dùng mô hình đi kèm; nhân bản tiếng Anh/quốc tế dùng Qwen tùy chọn cần tải thêm. Chưa đo độ giống giọng của người thật.
+
+          Đo trước đó trên CPU cloud Linux: WAV đúng 60 phút từ văn bản thử lặp lại được tạo trong **205,299 giây (3 phút 25,3 giây), 17,54×**. **Chưa đạt mục tiêu 1 giờ voice trong 2 phút**; tốc độ trên máy khác có thể thay đổi. Khi đạt giới hạn 60 phút, tool báo phần văn bản còn lại chưa đọc. Đây không phải phép đo tốc độ trên Windows.
+
+          Qwen quốc tế, Ollama và các dịch vụ dịch/viết là tùy chọn cần cài/tải/cấu hình riêng. Sao lưu `voice-studio/.data` trước khi cập nhật.
+
+          ZIP: __SIZE__ byte. SHA256: `__SHA__`.
+          Source/build commit: `__COMMIT__`.
+          Native Windows build and validation: __RUN__.
+          '@
+          $notes = $notes.Replace('__SIZE__', [string]$size).Replace('__SHA__', $sha).Replace('__COMMIT__', $env:GITHUB_SHA).Replace('__RUN__', '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}')
+          $notes | Set-Content -Encoding utf8 (Join-Path $folder 'release-notes.md')
+          "ZIP bytes: $size`nSHA256: $sha" | Add-Content -Path $env:GITHUB_STEP_SUMMARY
+      - name: Retain the checked package as an Actions artifact
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: Voice-Studio-3.6.2-Windows-x64
+          path: |
+            ${{ runner.temp }}/portable/Voice-Studio-3.6.2-Windows-x64.zip
+            ${{ runner.temp }}/portable/Voice-Studio-3.6.2-Windows-x64.zip.sha256
+          compression-level: 0
+          retention-days: 7
+          if-no-files-found: error
+      - name: Upload assets and publish the authorized prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $release = gh api "repos/$env:GH_REPO/releases/$env:RELEASE_ID" | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if ($release.tag_name -ne $env:RELEASE_TAG -or -not $release.draft) {
+            throw 'Refuse to replace assets on a published or different release.'
+          }
+          $folder = '${{ runner.temp }}/portable'
+          $zip = Join-Path $folder 'Voice-Studio-3.6.2-Windows-x64.zip'
+          gh release upload $env:RELEASE_TAG $zip "$zip.sha256" --repo $env:GH_REPO --clobber
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $updated = gh api "repos/$env:GH_REPO/releases/$env:RELEASE_ID" | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $asset = $updated.assets | Where-Object { $_.name -eq 'Voice-Studio-3.6.2-Windows-x64.zip' }
+          if (-not $asset -or $asset.size -ne (Get-Item $zip).Length) {
+            throw 'Uploaded asset size does not match the verified local ZIP.'
+          }
+          $expected = (Get-FileHash -Algorithm SHA256 $zip).Hash.ToLowerInvariant()
+          if ($asset.digest -and $asset.digest -ne "sha256:$expected") {
+            throw 'GitHub asset digest does not match the verified local ZIP.'
+          }
+          gh release edit $env:RELEASE_TAG --repo $env:GH_REPO --draft=false --prerelease=true --latest=false --target $env:GITHUB_SHA --title 'Voice Studio 3.6.2 - Windows x64 CPU' --notes-file (Join-Path $folder 'release-notes.md')
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

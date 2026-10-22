@@ -123,6 +123,8 @@ def main():
     copy_runtime(Path(sys.base_prefix), root/'runtime')
     for name in ('MO_VOICE_STUDIO.bat', 'THEM_GIONG_QUOC_TE.bat'):
         shutil.copy2(SOURCE/'packaging'/name, root/name)
+    shutil.copy2(SOURCE/'packaging/check_cross_bundle.py', root/'voice-studio/check_bundle.py')
+    (root/'KIEM_TRA_TOOL.bat').write_text('@echo off\nsetlocal\ncd /d "%~dp0"\nset "PATH=%~dp0runtime;%~dp0ffmpeg\\bin;%PATH%"\nset "PYTHONHOME="\nset "PYTHONPATH="\nset "PYTHONNOUSERSITE=1"\nset "PYTHONUTF8=1"\n"runtime\\python.exe" "voice-studio\\check_bundle.py"\npause\n', encoding='utf-8')
     notices = '''Voice Studio Windows x64 Portable\n\nExtract ALL files to a writable folder, then double-click MO_VOICE_STUDIO.bat.\nNo Python, FFmpeg, venv installation, model download or API key is needed for bundled Vietnamese voices.\nNano, Turbo and Whisper base subtitle recognition are included. International Qwen models are optional: THEM_GIONG_QUOC_TE.bat needs Internet and several GB.\nYour projects are saved in voice-studio/.data. Back up that folder before deleting this portable folder.\nOllama writing/translation is optional and requires a separate Ollama installation/model.\n\nTHIRD-PARTY NOTICES\nPython: runtime/LICENSE.txt; https://www.python.org/\nPython packages: licenses in runtime/Lib/site-packages/*.dist-info\nFFmpeg GPL build: ffmpeg/LICENSE*, docs and https://github.com/BtbN/FFmpeg-Builds\nMSVC app-local redistributable: https://learn.microsoft.com/cpp/windows/redistributing-visual-cpp-files\nModels: license/model cards in voice-studio/.data/models/cache/hub.\nNo personal recordings, keys, history or developer environment files are packaged.\n'''
     (root/'READ-ME-FIRST.txt').write_text(notices, encoding='utf-8')
     from importlib.metadata import distribution
@@ -136,6 +138,15 @@ def main():
     except Exception as exc:
         print('::error title=Portable offline validation failed::'+str(exc).replace('%','%25').replace('\n','%0A'), flush=True)
         raise
+    # Record native readiness only after the relocated interpreter's functional smoke succeeds.
+    manifest = json.loads((root/'BUILD.json').read_text(encoding='utf-8'))
+    manifest.update(native_windows_validation=True, validation_workflow_run=os.environ.get('GITHUB_RUN_ID'))
+    (root/'BUILD.json').write_text(json.dumps(manifest, indent=2), encoding='utf-8')
+    native_note = '# Kiểm chứng Windows của gói này\n\nGói đã vượt qua kiểm tra offline bằng Python đóng gói trên máy Windows x64, sau khi di chuyển runtime. Các ghi chú Linux bên dưới là hồ sơ kiểm chứng trước đó.\n\n'
+    for doc_name in ('README.md', 'VALIDATION-3.6.2.md'):
+        doc = root/'voice-studio'/doc_name
+        if doc.is_file():
+            doc.write_text(native_note + doc.read_text(encoding='utf-8'), encoding='utf-8')
     archive = shutil.make_archive(str(root.parent/'Voice-Studio-Windows-x64'), 'zip', root.parent, root.name)
     size = Path(archive).stat().st_size
     if size >= 2*1024**3:
