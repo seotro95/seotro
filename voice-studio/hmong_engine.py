@@ -13,9 +13,10 @@ import json
 import math
 import os
 from pathlib import Path
-import re
 import threading
 import wave
+
+from hmong_text import HmongTextError, iter_batches, normalize_text
 
 
 BASE = Path(__file__).resolve().parent
@@ -168,26 +169,6 @@ def _reference_identity(path, reference_text):
         raise EngineError("Không đọc được đoạn WAV mẫu. Kiểm tra FFmpeg và chọn lại đoạn mẫu.") from None
 
 
-def _bounded_batches(text, max_bytes):
-    """Split at spaces where possible, without dropping or repeating a word."""
-    pending = ""
-    for token in re.findall(r"\S+\s*", text):
-        if pending and len((pending + token).encode("utf-8")) > max_bytes:
-            yield pending.strip()
-            pending = ""
-        if len(token.encode("utf-8")) <= max_bytes:
-            pending += token
-        else:
-            for character in token:
-                if pending and len((pending + character).encode("utf-8")) > max_bytes:
-                    if pending.strip():
-                        yield pending.strip()
-                    pending = ""
-                pending += character
-    if pending.strip():
-        yield pending.strip()
-
-
 class SpeechEngine:
     """One loaded model and one cached reference tensor, reused across chunks."""
 
@@ -209,7 +190,7 @@ class SpeechEngine:
         if self._progress_callback is not None:
             self._progress_callback(message)
 
-    def _load(self):
+    def _load(self, quality='fast'):
         root = model_directory()
         self._notify("Đang kiểm tra mô hình…")
         integrity = verify_models(root)
@@ -232,8 +213,17 @@ class SpeechEngine:
         requested_precision = os.getenv('HMOOB_PRECISION', 'auto')
         if requested_precision not in {'auto', 'fp32', 'int8'}:
             raise EngineError('HMOOB_PRECISION chỉ nhận auto, fp32 hoặc int8.')
-        key = (integrity, device, requested_precision)
+        draft_int8 = device == 'cpu' and requested_precision == 'auto' and quality == 'turbo'
+        key = (integrity, device, 'draft-int8' if draft_int8 else requested_precision)
         if self._model is None or self._model_key != key:
+            # A quality switch must not hold both full networks in RAM while
+            # loading the next one. Reuse one network for all 8/16/32-step jobs.
+            self._model = self._model_key = None
+            self._reference = self._reference_key = None
+            import gc
+            gc.collect()
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
             cache = root.parent / "cache"
             for name, folder in (("MPLCONFIGDIR", "matplotlib"), ("NUMBA_CACHE_DIR", "numba"),
                                  ("XDG_CACHE_HOME", "xdg")):
@@ -243,7 +233,18 @@ class SpeechEngine:
                     os.environ[name] = str(target)
             from hmong_f5 import load_local_model
             torch.set_num_threads(max(1, min(4, os.cpu_count() or 1)))
-            candidate = load_local_model(root, device, progress=self._notify)
+            candidate = None
+            if draft_int8:
+                try:
+                    candidate = load_local_model(root, device, progress=self._notify, precision='int8')
+                except (RuntimeError, NotImplementedError):
+                    self._notify('Máy này chưa dùng được INT8; đang nạp chế độ tương thích…')
+                if candidate is None:
+                    import gc
+                    gc.collect()
+            if candidate is None:
+                candidate = load_local_model(root, device, progress=self._notify,
+                                             precision='fp32' if draft_int8 else requested_precision)
             self._model = candidate
             self._model_key = key
             self._reference = self._reference_key = None
@@ -260,10 +261,9 @@ class SpeechEngine:
             tensor = torch.from_numpy(audio.T.copy())
             if not torch.isfinite(tensor).all() or float(tensor.square().mean()) < 1e-12:
                 raise EngineError("Đoạn mẫu chỉ có im lặng hoặc dữ liệu không hợp lệ. Chọn đoạn có tiếng nói.")
-            normalized_text = text.strip()
-            if not normalized_text.endswith((".", "!", "?", "。")):
+            normalized_text = normalize_text(text)
+            if not normalized_text.endswith((".", "!", "?")):
                 normalized_text += "."
-            normalized_text += " "
             self._reference = ((tensor, rate), normalized_text)
             self._reference_key = key
         return self._reference
@@ -278,10 +278,15 @@ class SpeechEngine:
             raise EngineError("Tốc độ đọc cần từ 0,5 đến 2 lần.")
         if quality not in QUALITY_STEPS:
             raise EngineError("Chọn turbo (4 bước), draft (8 bước), fast (16 bước) hoặc standard (32 bước).")
+        try:
+            text = normalize_text(text)
+            reference_text = normalize_text(reference_text)
+        except HmongTextError as exc:
+            raise EngineError(str(exc)) from None
         reference_key = _reference_identity(reference_path, reference_text)
         with self._lock:
             try:
-                model = self._load()
+                model = self._load(quality)
                 self._notify("Đang chuẩn bị đoạn giọng mẫu…")
                 reference, normalized_text = self._prepare_reference(reference_path, reference_text, reference_key)
                 from hmong_f5 import infer_batch
@@ -289,18 +294,12 @@ class SpeechEngine:
                 # fan-out, and no duplicate copy of a large model per process.
                 import numpy as np
                 reference_seconds = reference[0].shape[-1] / reference[1]
-                # Match upstream's approximately 22-second context budget,
-                # while running its sub-batches sequentially, never a large
-                # ThreadPool of simultaneous GPU/CPU model calls.
-                budget = int(len(normalized_text.encode("utf-8")) / reference_seconds
-                             * (22 - reference_seconds) * speed)
-                if budget < 8:
-                    raise EngineError("Lời mẫu quá ngắn so với đoạn âm thanh. Nhập đủ lời khớp đoạn 3–8 giây.")
                 pieces = []
                 frames = 0
                 expected_rate = None
                 self._notify("Đang tạo âm thanh…")
-                for batch in _bounded_batches(text.strip(), min(400, budget)):
+                for batch in iter_batches(text, normalized_text, reference_seconds, speed,
+                                          max_chars=240, max_new_seconds=min(16, 22 - reference_seconds)):
                     result = infer_batch(reference, normalized_text, batch, model,
                                          steps=QUALITY_STEPS[quality], speed=float(speed), device=self.device)
                     samples, rate = np.asarray(result[0]), result[1]
@@ -319,6 +318,8 @@ class SpeechEngine:
                 return np.concatenate(pieces) if len(pieces) > 1 else pieces[0], expected_rate
             except EngineError:
                 raise
+            except HmongTextError as exc:
+                raise EngineError(str(exc)) from None
             except ImportError:
                 raise EngineError("Thiếu thư viện tạo giọng. Chạy MO_VOICE_STUDIO_HMONG.bat bằng Python 3.10–3.12.") from None
             except Exception as exc:

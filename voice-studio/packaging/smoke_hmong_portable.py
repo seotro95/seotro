@@ -19,7 +19,33 @@ import time
 import urllib.request
 
 
+def check_batch_entrypoints(root):
+    """Exercise the files users double-click through the real Windows shell."""
+    root = Path(root)
+    entries = [('MO_VOICE_STUDIO_HMONG.bat', '--check')]
+    for prefix in ('', 'voice-studio-hmong/'):
+        entries.extend((prefix + name, '--check') for name in ('start.bat', 'start_hmong.bat'))
+        entries.extend((prefix + name, '--setup-only') for name in ('install.bat', 'install_hmong.bat'))
+    results = {}
+    shell = os.environ.get('COMSPEC', 'cmd.exe')
+    for relative, flag in entries:
+        batch = root / relative
+        print('Native cmd.exe entrypoint:', relative, flag, flush=True)
+        # The working directory itself contains spaces after relocation. The
+        # ASCII basename avoids cmd's special handling of a quoted /c command.
+        completed = subprocess.run([shell, '/d', '/c', batch.name, flag], cwd=batch.parent,
+            stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+            text=True, encoding='utf-8', errors='replace', timeout=180)
+        print(completed.stdout, end='', flush=True)
+        if completed.returncode or 'PASS:' not in completed.stdout:
+            raise RuntimeError(f'Batch entrypoint failed: {relative} {flag}, exit {completed.returncode}')
+        results[relative] = {'argument': flag, 'exit_code': completed.returncode,
+                             'model_download_required': False}
+    return results
+
+
 def main():
+    assert os.name == 'nt', 'This validation must run on native Windows'
     root = Path(sys.argv[1]).resolve()
     reports = Path(sys.argv[2]).resolve()
     app_root = root / 'voice-studio-hmong'
@@ -39,7 +65,7 @@ def main():
         subprocess.run([binary, '-version'], check=True, stdout=subprocess.DEVNULL)
     results = {'success': False, 'platform': sys.platform, 'voices': {}, 'clone': False,
                'full_source_previews': {}, 'source_clones': {}, 'manual_crop': False,
-               'txt_srt': False, 'mp3': False, 'normal_launcher': False,
+               'txt_srt': False, 'mp3': False, 'normal_launcher': False, 'batch_entrypoints': {},
                'native_windows_validation': os.name == 'nt'}
     text = 'Nyob zoo, kuv yog ib tug Hmoob. Hnub no peb sib tham ua ke.'
 
@@ -66,7 +92,7 @@ def main():
     with TestClient(studio.app) as client:
         config = client.get('/api/config').json()
         assert config['variant'] == 'hmong' and config['default_language'] == 'mww'
-        assert config['hmong_steps'] == 4 and config['default_voice_id'] == 'hmong-male'
+        assert config['hmong_steps'] == 16 and config['default_voice_id'] == 'hmong-male'
         assert config['models']['f5_hmong'] and not config['nano_ready']
         assert config['subtitle_ready'] is False, 'Do not claim Hmong Whisper recognition'
         for asset in ('app.js', 'workspace.js', 'style.css'):
@@ -93,7 +119,7 @@ def main():
             results['voices'][ident] = {'audio_seconds': job['audio_seconds'],
                                       'wall_seconds': round(time.monotonic() - started, 3),
                                       'steps': job['hmong_steps'], 'precision': job['hmong_precision']}
-            assert job['hmong_steps'] == 4
+            assert job['hmong_steps'] == 16 and job['hmong_precision'] == 'fp32'
             txt = client.get('/api/jobs/' + job['id'] + '/script.txt')
             srt = client.get('/api/jobs/' + job['id'] + '/script.srt')
             assert txt.status_code == srt.status_code == 200
@@ -123,13 +149,15 @@ def main():
             assert 3 <= personal['duration'] <= 8.001
             started = time.monotonic()
             clone = render(client, {'text': 'Kuv zoo siab tau ntsib nej hnub no.', 'language': 'mww',
-                                   'voice_id': personal['id'], 'hmong_steps': 4,
+                                   'voice_id': personal['id'],
                                    'format': 'wav', 'paragraph_pause': 0})
             assert clone['engine'] == 'f5_hmong'
+            assert clone['hmong_steps'] == 16 and clone['hmong_precision'] == 'fp32'
             results['source_clones'][gender] = {
                 'source_sha256': personal['source_sha256'], 'source_seconds': personal['source_duration'],
                 'reference_seconds': personal['duration'], 'automatic_reference': True,
                 'audio_seconds': clone['audio_seconds'],
+                'steps': clone['hmong_steps'], 'precision': clone['hmong_precision'],
                 'wall_seconds': round(time.monotonic() - started, 3)}
         results['clone'] = True
 
@@ -169,8 +197,13 @@ def main():
         assert saved.status_code == 200 and '00:00:12,000' in saved.text
         results['srt_timeline'] = True
 
-    from benchmark_hmong import compare
-    results['speed_benchmark'] = compare(studio.DATA / 'models')
+    # Both presets above use the same default natural 16-step FP32 setting.
+    # Both source clones also use the natural default; manual crop and SRT
+    # jobs explicitly exercise the optional draft path.
+    results['default_synthesis'] = {'steps': 16, 'precision': 'fp32', 'presets_tested': 2,
+                                   'source_clones_tested': 2}
+    results['pronunciation_evaluated'] = False
+    results['batch_entrypoints'] = check_batch_entrypoints(root)
     subprocess.run([sys.executable, str(app_root / 'hmong_launcher.py'), '--check'],
                    check=True, cwd=app_root, timeout=180)
     print('Checking the normal Hmong launcher after relocation...', flush=True)
@@ -199,7 +232,7 @@ def main():
                 continue
             with opener.open(match[1] + '/api/config', timeout=5) as response:
                 live = json.load(response)
-            assert live['variant'] == 'hmong' and live['models']['f5_hmong']
+            assert live['variant'] == 'hmong' and live['models']['f5_hmong'] and live['hmong_steps'] == 16
             results['normal_launcher'] = True
             break
         assert results['normal_launcher'], 'Normal launcher readiness timed out'
@@ -215,7 +248,7 @@ def main():
     results['success'] = True
     reports.mkdir(parents=True, exist_ok=True)
     (reports / 'native-smoke.json').write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding='utf-8')
-    print('PASS: complete MP3 previews, real offline female/male Hmong, both source-MP3 clones, manual excerpt, TXT/SRT/MP3 and normal startup.', flush=True)
+    print('PASS: complete MP3 previews, two default 16-step FP32 offline voices, source-MP3 clones, manual excerpt, TXT/SRT/MP3, native BAT aliases and normal startup.', flush=True)
 
 
 if __name__ == '__main__':

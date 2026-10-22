@@ -34,7 +34,7 @@ def spoken_text(text):
     return '\n'.join(output)
 
 
-def split_script(text, limit=240):
+def split_script(text, limit=240, *, normalizer=None):
     # Explicit pauses and emphasis never reach the language model as spoken words.
     segments = []
     for part in re.split(r'(\[pause=\d+(?:\.\d+)?\]|\*\*[^*]+\*\*)', text):
@@ -50,14 +50,21 @@ def split_script(text, limit=240):
         emphasis = part.startswith('**') and part.endswith('**')
         if emphasis:
             part = part[2:-2]
+        if normalizer is not None:
+            # Parse pause/emphasis controls first. Keep paragraph boundaries
+            # until sentence splitting, then normalize only spoken content.
+            part = '\n'.join(normalizer(line) for line in part.splitlines())
         # Include newlines in splitting to retain paragraph breathing space.
         for sentence in re.split(r'(?<=[!?。！？;；])\s*|(?<=\.)(?!\d)\s+|\n+', part):
             sentence = sentence.strip()
             while sentence:
                 end = min(limit, len(sentence))
                 if end < len(sentence):
-                    boundary = sentence.rfind(' ', 0, end)
-                    if boundary > end // 2:
+                    boundary = sentence.rfind(' ', 0, end + (normalizer is not None))
+                    if normalizer is not None and boundary <= 0:
+                        raise ValueError('Một từ Hmong quá dài và không có dấu cách. '
+                                         'Thêm dấu cách đúng giữa các âm tiết RPA; không tự cắt chữ ghi thanh điệu.')
+                    if boundary > end // 2 or normalizer is not None:
                         end = boundary
                 piece, sentence = sentence[:end].strip(), sentence[end:].strip()
                 if piece:
@@ -79,12 +86,34 @@ def split_script(text, limit=240):
     return joined
 
 
+def _pack_segments(source, limit):
+    packed = []
+    for segment in source:
+        if (segment.text and packed and packed[-1].text and not segment.emphasis
+                and not packed[-1].emphasis
+                and len(packed[-1].text) + 1 + len(segment.text) <= limit):
+            packed[-1].text += ' ' + segment.text
+        else:
+            packed.append(segment)
+    return packed
+
+
 def plan_segments(job):
+    hmong = job.get('engine') == 'f5_hmong'
+    normalizer = None
+    if hmong:
+        from hmong_text import normalize_text
+        normalizer = normalize_text
+    hmong_packed = (hmong and job.get('segment_plan') == 'hmong-packed-v1'
+                    and job.get('paragraph_pause') == 0)
+    limit = 160 if hmong_packed else 130 if job.get('engine') == 'vieneu_nano' else 240
     if job.get('input_format') == 'srt':
         from subtitles import parse_srt
         output = []
         for index, cue in enumerate(parse_srt(job['text'])):
-            segments = split_script(cue['text'], limit=130 if job.get('engine') == 'vieneu_nano' else 240)
+            segments = split_script(cue['text'], limit=limit, normalizer=normalizer)
+            if hmong_packed:
+                segments = _pack_segments(segments, limit)
             if not any(s.text for s in segments):
                 raise ValueError('Mỗi câu SRT cần có lời đọc.')
             for segment in segments:
@@ -92,17 +121,14 @@ def plan_segments(job):
                 output.append(segment)
         return output
     text = spoken_text(job['text']) if job.get('skip_timestamps', True) else job['text']
+    if hmong:
+        source = split_script(text, limit=limit, normalizer=normalizer)
+        return _pack_segments(source, limit) if hmong_packed else source
     if job.get('segment_plan') != 'nano-packed-v1':
         return split_script(text)
     # Packing is opt-in with zero added sentence gap; explicit pauses/emphasis stay barriers.
     source = split_script(text, limit=130)
-    packed = []
-    for segment in source:
-        if segment.text and packed and packed[-1].text and not segment.emphasis and not packed[-1].emphasis and len(packed[-1].text) + 1 + len(segment.text) <= 130:
-            packed[-1].text += ' ' + segment.text
-        else:
-            packed.append(segment)
-    return packed
+    return _pack_segments(source, 130)
 
 
 class PCMWriter:
@@ -143,6 +169,12 @@ class PCMWriter:
 
 def validate_voice_text(text,engine,label='Nội dung'):
     import unicodedata
+    if engine == 'f5_hmong':
+        from hmong_text import normalize_text
+        try:
+            text = normalize_text(text)
+        except ValueError as exc:
+            raise ValueError(f'{label}: {exc}') from None
     if not any(c.isalnum() for c in text):
         raise ValueError(f'{label} chỉ có dấu hoặc ký hiệu, chưa có chữ/số để đọc. Sửa lời hoặc bỏ câu này trước khi tạo voice.')
     if engine in {'vieneu','vieneu_nano'}:

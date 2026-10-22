@@ -18,6 +18,8 @@ import app
 with TestClient(app.app) as c, patch.object(app,'model_ready',lambda engine:engine=='f5_hmong'), patch.object(app.executor,'submit'):
     cfg=c.get('/api/config').json()
     assert cfg['variant']=='hmong' and cfg['default_language']=='mww'
+    assert cfg['hmong_steps']==16 and cfg['paragraph_pause']==0
+    assert cfg['hardware']=='unknown' and 'CHƯA KIỂM TRA' in cfg['hardware_label']
     assert cfg['languages']=={'mww':'Hmong Trắng · Hmoob Daw'}
     assert 'mww' not in cfg['recognition_languages']
     voices=c.get('/api/voices').json()['voices']
@@ -29,6 +31,28 @@ with TestClient(app.app) as c, patch.object(app,'model_ready',lambda engine:engi
     assert c.post('/api/speech',json={'text':'Xin chào.','voice_id':'hmong-female','language':'vi'}).status_code==422
     assert c.post('/api/speech',json={'text':'Nyob zoo.','voice_id':'hmong-female','hmong_steps':12}).status_code==422
     assert c.get('/api/hmong/presets/hmong-female/sample').status_code==200
+''')
+
+
+def test_hmong_job_defaults_pack_and_validate_rpa_before_queue(tmp_path):
+    run_case(tmp_path, '''
+from unittest.mock import patch
+from fastapi.testclient import TestClient
+import app
+with TestClient(app.app) as c, patch.object(app,'model_ready',return_value=False), patch.object(app.executor,'submit') as submit:
+    response=c.post('/api/speech',json={'text':'你好','voice_id':'hmong-male'})
+    assert response.status_code==422 and 'RPA' in response.text,response.text
+    submit.assert_not_called()
+with TestClient(app.app) as c, patch.object(app,'model_ready',return_value=True), patch.object(app.executor,'submit'):
+    response=c.post('/api/speech',json={'text':'Nyob zoo. Ua tsaug.','voice_id':'hmong-male'})
+    assert response.status_code==202,response.text
+    job=response.json()
+    assert job['hmong_steps']==16 and job['delivery']=='natural' and job['paragraph_pause']==0
+    assert job['segment_plan']=='hmong-packed-v1' and job['total']==1 and job['quality']=='standard'
+    response=c.post('/api/speech',json={'text':'Nyob zoo. Ua tsaug.','voice_id':'hmong-male','paragraph_pause':.3,'hmong_steps':4})
+    assert response.status_code==202,response.text
+    assert response.json()['segment_plan']=='classic-v1' and response.json()['total']==2
+    assert response.json()['hmong_steps']==4
 ''')
 
 def test_hmong_clone_requires_words_and_bounded_reference(tmp_path):
@@ -48,6 +72,32 @@ with TestClient(app.app) as c:
     with wave.open(buf,'wb') as audio:
         audio.setnchannels(1);audio.setsampwidth(2);audio.setframerate(24000);audio.writeframes(b'\\x00\\x20'*24000*9)
     assert c.post('/api/voices/clone',data=data,files={'file':('long.wav',buf.getvalue())}).status_code==422
+''')
+
+
+def test_hmong_clone_rejects_unsupported_transcript_and_cleans_temporary_files(tmp_path):
+    run_case(tmp_path, '''
+from fastapi.testclient import TestClient
+from hmong_assets import reference
+import app
+ref,_=reference('hmong-male')
+with TestClient(app.app) as c:
+    response=c.post('/api/voices/clone',data={'name':'Kuv lub suab','language':'mww','consent':'true','transcript':'Tiếng Việt'},files={'file':('sample.wav',ref.read_bytes())})
+    assert response.status_code==422 and 'RPA' in response.text,response.text
+    assert not list((app.DATA/'voices').iterdir())
+''')
+
+
+def test_missing_hmong_preset_is_actionable_and_never_queues_job(tmp_path):
+    run_case(tmp_path, '''
+from unittest.mock import patch
+from fastapi.testclient import TestClient
+import app
+with TestClient(app.app) as c, patch('hmong_assets.reference',side_effect=FileNotFoundError('male.wav')), patch.object(app.executor,'submit') as submit:
+    response=c.post('/api/speech',json={'text':'Nyob zoo.','voice_id':'hmong-male'})
+    assert response.status_code==422 and 'ZIP' in response.text and 'assets/hmong' in response.text,response.text
+    submit.assert_not_called()
+    assert not list((app.DATA/'jobs').iterdir())
 ''')
 
 def test_manual_hmong_captions_are_independent_from_asr(tmp_path):

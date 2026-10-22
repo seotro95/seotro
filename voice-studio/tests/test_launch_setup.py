@@ -5,6 +5,8 @@ import socket
 import subprocess
 import urllib.request
 
+import pytest
+
 import portable_launcher
 
 
@@ -51,6 +53,9 @@ def test_launcher_serves_before_browser_is_opened(tmp_path, monkeypatch):
         children[0].terminate()
         return True
     monkeypatch.setattr(portable_launcher.webbrowser, 'open', open_browser)
-    portable_launcher.main()
+    # The browser callback deliberately terminates the real server after its
+    # readiness check; the launcher now propagates that abnormal exit.
+    with pytest.raises(RuntimeError, match='ma loi'):
+        portable_launcher.main()
     assert len(opened) == 1
     assert children[0].poll() is not None

@@ -20,7 +20,7 @@ import zipfile
 from build_windows import copy_runtime, download_verified_ffmpeg
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.1.0'
+VERSION = '1.2.0'
 ARCHIVE_NAME = f'Voice-Studio-Hmong-{VERSION}-Windows-x64.zip'
 
 
@@ -30,11 +30,12 @@ def sha256(path):
 
 
 def copy_source(destination, source=SOURCE):
-    """Copy explicit application types, static files and approved references only."""
+    """Copy the application without unrelated installers or personal data."""
     source, destination = Path(source), Path(destination)
     destination.mkdir(parents=True, exist_ok=False)
     for entry in source.iterdir():
-        if entry.is_file() and entry.suffix in {'.py', '.ps1', '.txt', '.md', '.bat'}:
+        if entry.is_file() and (entry.suffix in {'.py', '.ps1'} or entry.name in {
+                'HMONG-README.md', 'VALIDATION-HMONG.md', 'requirements-hmong.txt'}):
             if entry.is_symlink():
                 raise ValueError('Linked application files cannot be bundled')
             shutil.copy2(entry, destination / entry.name)
@@ -43,11 +44,16 @@ def copy_source(destination, source=SOURCE):
         if folder.is_symlink() or any(path.is_symlink() for path in folder.rglob('*')):
             raise ValueError('Linked application assets cannot be bundled')
         shutil.copytree(folder, destination / relative)
-    required = ('app.py', 'worker.py', 'hmong_engine.py', 'hmong_f5.py', 'hmong_reference.py', 'hmong_assets.py',
-                'prepare_hmong.py', 'hmong_launcher.py', 'studio_variant.py')
+    required = ('app.py', 'worker.py', 'bundle_check.py', 'hmong_engine.py', 'hmong_f5.py',
+                'hmong_reference.py', 'hmong_text.py', 'hmong_assets.py', 'prepare_hmong.py',
+                'hmong_launcher.py', 'studio_variant.py', 'HMONG-README.md', 'requirements-hmong.txt')
     for name in required:
         if not (destination / name).is_file():
             raise ValueError('Required Hmong application file is missing: ' + name)
+    # A portable Hmong download must never direct users to the Vietnamese
+    # installer, its incompatible environment, or its model downloads.
+    shutil.copy2(destination / 'HMONG-README.md', destination / 'README.md')
+    shutil.copy2(destination / 'requirements-hmong.txt', destination / 'requirements.txt')
 
 
 def build_environment(root, *, offline):
@@ -70,6 +76,9 @@ def build_environment(root, *, offline):
 
 
 def write_launcher(root):
+    root = Path(root)
+    app = root / 'voice-studio-hmong'
+    app.mkdir(parents=True, exist_ok=True)
     content = '''@echo off
 setlocal
 cd /d "%~dp0"
@@ -86,7 +95,7 @@ set "VOICE_EXIT=%ERRORLEVEL%"
 if not "%VOICE_EXIT%"=="0" pause
 exit /b %VOICE_EXIT%
 '''
-    (Path(root) / 'MO_VOICE_STUDIO_HMONG.bat').write_bytes(content.replace('\n', '\r\n').encode('ascii'))
+    (root / 'MO_VOICE_STUDIO_HMONG.bat').write_bytes(content.replace('\n', '\r\n').encode('ascii'))
     check = '''@echo off
 setlocal
 cd /d "%~dp0"
@@ -95,7 +104,17 @@ set "VOICE_EXIT=%ERRORLEVEL%"
 pause
 exit /b %VOICE_EXIT%
 '''
-    (Path(root) / 'KIEM_TRA_HMONG.bat').write_bytes(check.replace('\n', '\r\n').encode('ascii'))
+    (root / 'KIEM_TRA_HMONG.bat').write_bytes(check.replace('\n', '\r\n').encode('ascii'))
+    for folder, target in ((root, '%~dp0MO_VOICE_STUDIO_HMONG.bat'),
+                           (app, '%~dp0..\\MO_VOICE_STUDIO_HMONG.bat')):
+        start = '@echo off\nsetlocal\ncall "' + target + '" %*\nexit /b %ERRORLEVEL%\n'
+        install = ('@echo off\nsetlocal\nif "%~1"=="" goto setup\ncall "' + target
+                   + '" %*\nexit /b %ERRORLEVEL%\n:setup\ncall "' + target
+                   + '" --setup-only\nexit /b %ERRORLEVEL%\n')
+        for name in ('start.bat', 'start_hmong.bat'):
+            (folder / name).write_bytes(start.replace('\n', '\r\n').encode('ascii'))
+        for name in ('install.bat', 'install_hmong.bat'):
+            (folder / name).write_bytes(install.replace('\n', '\r\n').encode('ascii'))
 
 
 def checked_run(command, *, environment, cwd, timeout=2400):
@@ -105,17 +124,22 @@ def checked_run(command, *, environment, cwd, timeout=2400):
 
 
 def write_notices(root, model_manifest, qa_report):
-    notice = '''VOICE STUDIO HMONG 1.1.0 — WINDOWS X64
+    notice = '''VOICE STUDIO HMONG 1.2.0 — WINDOWS X64
 
 Giai nen TOAN BO ZIP, mo MO_VOICE_STUDIO_HMONG.bat.
 Da kem Python, thu vien CPU, FFmpeg, hai MP3 goc va doan Hmong co loi tham chieu.
 LAN DAU CAN INTERNET: tool tu tai va kiem tra khoang 1,4 GB model tu nguon
 chinh thuc. Khong can API key. Sau khi chuan bi xong co the dung ngoai tuyen.
 KIEM_TRA_HMONG.bat kiem tra tep va thu vien da cai, khong tu tai model.
+start.bat/start_hmong.bat o ca thu muc goc va thu muc ung dung deu mo Hmong.
+install.bat/install_hmong.bat chuan bi Hmong bang Python da dong goi.
+Khong can cai lai Python hoac tao moi truong tieng Viet.
 
 Du lieu ca nhan o voice-studio-hmong/.data. Sao luu thu muc nay khi cap nhat.
-Mac dinh nhanh 4 buoc va tu toi uu cho CPU, khong can chinh cau hinh.
-Ban nhanh la ban nhap; co the chon 8/16/32 buoc de so sanh chat luong.
+Mac dinh tu nhien 16 buoc, FP32 de giu chat luong mo hinh goc.
+4 buoc chi la ban nhap nhanh, co the giam do ro va tu nhien.
+Co the chon 8/16/32 buoc FP32 de so sanh chat luong.
+Chi ban nhap 4 buoc thu INT8 tren CPU, du phong FP32 neu khong tuong thich.
 Hai MP3 goc da xac minh duoc tu chon doan tham chieu va loi khop mau.
 Voi tep khac, chon doan 3-8 giay va nhap loi Hmong khop doan mau.
 Kieu ke chuyen/review
@@ -216,6 +240,7 @@ def main():
              'native_windows_validation': True, 'relocated_runtime_tested': True,
              'models_included': False, 'first_run_model_download_required': True,
              'model_download_approx_gb': 1.4, 'api_key_required': False,
+             'default_steps': 16, 'default_precision': 'fp32', 'draft_steps': 4,
              'validated_presets': ['hmong-female', 'hmong-male'],
              'validation_workflow_run': os.environ.get('GITHUB_RUN_ID')}
     (root / 'BUILD.json').write_text(json.dumps(build, ensure_ascii=False, indent=2), encoding='utf-8')

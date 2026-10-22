@@ -47,10 +47,13 @@ def main(open_browser=True):
         print(f'Studio: {url}\nGiu cua so nay mo. Bam Ctrl+C de tat.', flush=True)
         try:
             if open_browser:
-                webbrowser.open(url+'/?v='+studio_version)
+                if not webbrowser.open(url+'/?v='+studio_version):
+                    print('Khong tu mo duoc trinh duyet. Mo dia chi Studio ben tren.', flush=True)
         except webbrowser.Error:
             print('Khong tu mo duoc trinh duyet. Mo dia chi Studio ben tren.', flush=True)
-        process.wait()
+        returncode = process.wait()
+        if returncode != 0:
+            raise RuntimeError(f'Studio da dung voi ma loi {returncode}. Xem thong bao loi ben tren.')
     except KeyboardInterrupt:
         pass
     finally:

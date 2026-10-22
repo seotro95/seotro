@@ -200,8 +200,8 @@ def _config_values():
                 'recognition_languages':{k:v for k,v in SUBTITLE_LANGUAGES.items() if k.split('-')[0] in RECOGNITION_CODES},
                 'ai_voice_languages':['mww'],'max_characters':MAX_CHARACTERS,'max_audio_minutes':180,
                 'fast_vieneu':False,'int8_cpu':False,'models':{'f5_hmong':model_ready('f5_hmong')},
-                'hmong_ready':model_ready('f5_hmong'),'hmong_steps':4,'subtitle_ready':False,
-                'hardware':'GPU' if shutil.which('nvidia-smi') else 'CPU','ffmpeg':bool(shutil.which('ffmpeg')),
+                'hmong_ready':model_ready('f5_hmong'),'hmong_steps':16,'paragraph_pause':0,'subtitle_ready':False,
+                'hardware':'unknown','hardware_label':'CỤC BỘ · CHƯA KIỂM TRA CPU/GPU','ffmpeg':bool(shutil.which('ffmpeg')),
                 'cpu_cores':os.cpu_count() or 1,'nano_ready':False,'worker_warm':warm_worker is not None and warm_worker.poll() is None}
     return {'variant':'standard','app_name':APP_NAME,'default_language':'vi','subtitle_ready':(DATA/'models'/'whisper-base'/'model.bin').is_file(),'version':app.version,'mode': 'local', 'languages': LANGUAGES,'subtitle_languages':SUBTITLE_LANGUAGES,'ai_voice_languages':list(CORE_LANGUAGES), 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'cpu_cores': os.cpu_count() or 1, 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
 
@@ -235,13 +235,16 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
         selection = None
         if IS_HMONG:
             from hmong_reference import decode_upload, select_reference, crop_reference, ReferenceError
+            from hmong_text import normalize_text, HmongTextError
             try:
+                transcript = normalize_text(transcript)
                 source_duration = await run_in_threadpool(decode_upload, source, decoded)
                 selection = select_reference(content, source_duration, transcript, reference_start, reference_end)
+                selection['transcript'] = normalize_text(selection['transcript'])
                 duration = await run_in_threadpool(crop_reference, decoded, target,
                                                    selection['reference_start'], selection['reference_end'])
                 transcript = selection['transcript']
-            except ReferenceError as exc:
+            except (ReferenceError, HmongTextError) as exc:
                 raise HTTPException(422, str(exc)) from None
         else:
             # Decode only local audio; prohibit FFmpeg from following network playlists.
@@ -337,13 +340,13 @@ class Speech(BaseModel):
     export_quality: str = Field(default='balanced',pattern='^(best|balanced|fast)$')
     logos: list[dict] = Field(default_factory=list,max_length=20)
     logo: dict[str, int] | None = None
-    hmong_steps: int = Field(default=4, ge=4, le=32)
+    hmong_steps: int = Field(default=16, ge=4, le=32)
     nano_threads: int = Field(default=2, ge=1, le=8)
     nano_parallel: int = Field(default=1, ge=1, le=4)
     nano_steps: int = Field(default=8, ge=4, le=16)
     max_minutes: int = Field(default=180, ge=1, le=180)
     delivery: str = 'natural'
-    paragraph_pause: float = Field(default=0.3, ge=0, le=3)
+    paragraph_pause: float = Field(default=0 if IS_HMONG else 0.3, ge=0, le=3)
     quality: str = Field(default='auto', pattern='^(auto|standard|fast)$')
 
 
@@ -477,10 +480,9 @@ def speech(body: Speech):
     if not voice or body.language not in voice['languages']:
         raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
-    if not model_ready(engine):
-        raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Bấm Tải model cho giọng đang chọn, chờ kiểm tra hoàn tất rồi tạo lại. Cần Internet ở bước tải.')
     try:
-        segment_plan = 'nano-packed-v1' if engine == 'vieneu_nano' and body.paragraph_pause == 0 else 'classic-v1'
+        segment_plan = ({'vieneu_nano':'nano-packed-v1','f5_hmong':'hmong-packed-v1'}.get(engine,'classic-v1')
+                        if body.paragraph_pause == 0 else 'classic-v1')
         segments = plan_segments({**body.model_dump(), 'engine': engine, 'segment_plan': segment_plan})
         from narration import validate_voice_text
         for index,segment in enumerate(segments):
@@ -495,10 +497,23 @@ def speech(body: Speech):
                 raise ValueError('Mốc SRT cộng thời điểm bắt đầu vượt thời lượng video.')
         if not any(segment.text for segment in segments):
             raise ValueError('Nhập nội dung đọc, không chỉ ký hiệu nghỉ.')
+        if engine == 'f5_hmong':
+            if voice.get('speaker') in {'hmong-male','hmong-female'}:
+                from hmong_assets import reference
+                _, reference_text = reference(voice['speaker'])
+            else:
+                reference_text = voice.get('transcript','')
+            validate_voice_text(reference_text,engine,'Lời mẫu tham chiếu')
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from None
+    except OSError:
+        raise HTTPException(422, 'Không đọc được mẫu giọng Hmong mặc định. '
+                                  'Giải nén lại toàn bộ bản ZIP để khôi phục thư mục assets/hmong rồi tạo lại.') from None
+    if not model_ready(engine):
+        raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Bấm Tải model cho giọng đang chọn, chờ kiểm tra hoàn tất rồi tạo lại. Cần Internet ở bước tải.')
     if body.quality == 'auto':
-        body.quality = 'fast' if engine != 'vieneu' or (supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists()) else 'standard'
+        body.quality = ('standard' if engine == 'f5_hmong' else
+                        'fast' if engine != 'vieneu' or (supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists()) else 'standard')
     if body.quality == 'fast' and engine == 'vieneu':
         if not supports_int8() or not (DATA / 'models' / 'vieneu_fast.ready').exists():
             raise HTTPException(503, 'Chế độ nhanh tiếng Việt cần tải vieneu_fast trên CPU có VNNI. Dùng chế độ Tiêu chuẩn hoặc chạy prepare_models.py vieneu_fast.')

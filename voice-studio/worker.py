@@ -38,7 +38,7 @@ def load_synthesizer(job):
         else:
             record = json.loads((DATA/'voices'/(job['voice_id']+'.json')).read_text(encoding='utf-8'))
             ref_path, ref_text = DATA/'voices'/(job['voice_id']+'.wav'), record.get('transcript','')
-        steps = job.get('hmong_steps',4)
+        steps = job.get('hmong_steps',16)
         quality = {4:'turbo',8:'draft',16:'fast',32:'standard'}.get(steps)
         if quality is None:raise ValueError('F5-Hmong chỉ nhận 4, 8, 16 hoặc 32 bước.')
         def synthesize(text, output):
@@ -46,7 +46,7 @@ def load_synthesizer(job):
             def report_phase(phase):
                 write_state(progress_path,{**read_progress(progress_path),'phase':phase})
             _hmong_model_instance.set_progress_callback(report_phase)
-            samples, rate = _hmong_model_instance.synthesize(text,ref_path,ref_text,speed=1.0,quality=quality)
+            samples, rate = _hmong_model_instance.synthesize(text,ref_path,ref_text,speed=0.9,quality=quality)
             sf.write(str(output),samples,rate,subtype='PCM_16')
         return synthesize
     if job['engine'] == 'system':
@@ -374,7 +374,8 @@ def render(job, synthesize=None):
         mux_video(job, destination, work, DATA, writer.frames / writer.rate)
     inference = {}
     if job['engine']=='f5_hmong' and _hmong_model_instance is not None and _hmong_model_instance._model is not None:
-        inference = {'hmong_precision': _hmong_model_instance._model.precision, 'hmong_steps': job.get('hmong_steps',4)}
+        inference = {'hmong_precision': _hmong_model_instance._model.precision,
+                     'hmong_steps': job.get('hmong_steps',16), 'hmong_device': _hmong_model_instance.device}
     write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), **inference})
 
 

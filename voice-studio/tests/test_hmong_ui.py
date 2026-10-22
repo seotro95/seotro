@@ -36,7 +36,7 @@ def static_site():
 
 
 @contextlib.contextmanager
-def studio_page(site, *, hmong=True, ready=True, missing_reference_first=False):
+def studio_page(site, *, hmong=True, ready=True, missing_reference_first=False, hmong_steps=16):
     language = 'mww' if hmong else 'vi'
     engine = 'f5_hmong' if hmong else 'vieneu'
     ident = 'hmong-female' if hmong else 'vi-maianh'
@@ -49,7 +49,9 @@ def studio_page(site, *, hmong=True, ready=True, missing_reference_first=False):
                 'subtitle_languages': {'vi': 'Tiếng Việt', 'mww': 'Hmong Trắng'} if hmong else {'vi': 'Tiếng Việt'},
                 'ai_voice_languages': [language], 'models': {engine: state['ready']}, 'nano_ready': False,
                 'int8_cpu': False, 'fast_vieneu': False, 'subtitle_ready': False, 'hmong_ready': state['ready'],
-                'hmong_steps': 16, 'hmong_reference_note': 'Mẫu Hmong đã ghép lời tham chiếu.'}
+                **({'hmong_steps': hmong_steps} if hmong_steps is not None else {}),
+                **({'hardware_label': 'CỤC BỘ · CHƯA KIỂM TRA CPU/GPU'} if hmong else {}),
+                'hmong_reference_note': 'Mẫu Hmong đã ghép lời tham chiếu.'}
     def voices():
         entries = [{'id': ident, 'engine': engine, 'name': 'Hmong Nữ' if hmong else 'Mai Anh',
                     'languages': [language], 'native_language': language, 'ready': state['ready'],
@@ -111,6 +113,11 @@ def test_hmong_branding_steps_and_all_speech_entrypoints(static_site):
         playwright.expect(page.locator('#language')).to_have_value('mww')
         playwright.expect(page.locator('#nano-steps')).to_be_hidden()
         playwright.expect(page.locator('#target-preset')).to_be_hidden()
+        playwright.expect(page.locator('#hmong-steps')).to_have_value('16')
+        playwright.expect(page.locator('#dub-hmong-steps')).to_have_value('16')
+        playwright.expect(page.locator('#paragraph-pause')).to_have_value('0')
+        playwright.expect(page.locator('#delivery')).to_have_value('natural')
+        playwright.expect(page.locator('#hardware')).to_have_text('CỤC BỘ · CHƯA KIỂM TRA CPU/GPU')
         page.click('#sample-button')
         playwright.expect(page.locator('#script')).to_have_value('Nyob zoo, kuv zoo siab tau ntsib koj. Hnub no peb yuav mloog ib zaj dab neeg. Ua tsaug rau koj mloog.')
         page.select_option('#hmong-steps', '32')
@@ -120,6 +127,8 @@ def test_hmong_branding_steps_and_all_speech_entrypoints(static_site):
         assert state['speech'][-1]['language'] == 'mww'
         assert state['speech'][-1]['hmong_steps'] == 32
         assert state['speech'][-1]['delivery'] == 'review'
+        assert state['speech'][-1]['paragraph_pause'] == 0
+        playwright.expect(page.locator('#dub-hmong-steps')).to_have_value('32')
         page.locator('.nav-item[data-tab="dub"]').click()
         playwright.expect(page.locator('#editor-recognize')).to_be_hidden()
         playwright.expect(page.locator('#asr-language')).to_be_hidden()
@@ -132,6 +141,23 @@ def test_hmong_branding_steps_and_all_speech_entrypoints(static_site):
         page.locator('.nav-item[data-tab="clone"]').click()
         assert page.locator('#transcript').get_attribute('required') is not None
         playwright.expect(page.locator('label[for="transcript"]')).to_contain_text('3–8 giây')
+        assert state['errors'] == []
+
+
+@pytest.mark.parametrize('configured_steps', [None, 12])
+def test_hmong_missing_or_invalid_steps_fall_back_to_16_and_allow_explicit_draft(static_site, configured_steps):
+    with studio_page(static_site, hmong_steps=configured_steps) as (page, state):
+        playwright.expect(page.locator('#hmong-steps')).to_have_value('16')
+        page.fill('#script', 'Nyob zoo. Ua tsaug.')
+        page.click('#generate')
+        playwright.expect(page.locator('#output-title')).to_contain_text('đã sẵn sàng')
+        assert state['speech'][-1]['hmong_steps'] == 16
+        assert state['speech'][-1]['paragraph_pause'] == 0
+        page.select_option('#hmong-steps', '4')
+        playwright.expect(page.locator('#dub-hmong-steps')).to_have_value('4')
+        page.click('#generate')
+        playwright.expect(page.locator('#generate')).to_be_enabled()
+        assert state['speech'][-1]['hmong_steps'] == 4
         assert state['errors'] == []
 
 
@@ -149,9 +175,13 @@ def test_standard_mode_keeps_original_default_and_optional_transcript(static_sit
         page.locator('.nav-item[data-tab="create"]').click()
         playwright.expect(page.locator('#hmong-settings')).to_be_hidden()
         playwright.expect(page.locator('#nano-steps')).to_be_visible()
+        # Existing standard UI's fast-start initializer selects zero pause.
+        playwright.expect(page.locator('#paragraph-pause')).to_have_value('0')
+        playwright.expect(page.locator('#delivery')).to_have_value('natural')
         assert page.locator('#transcript').get_attribute('required') is None
         page.fill('#script', 'Xin chào.')
         page.click('#generate')
         playwright.expect(page.locator('#output-title')).to_contain_text('đã sẵn sàng')
         assert 'hmong_steps' not in state['speech'][-1]
+        assert state['speech'][-1]['paragraph_pause'] == 0
         assert state['errors'] == []
