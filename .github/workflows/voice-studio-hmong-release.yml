@@ -56,29 +56,18 @@ jobs:
           }
       - name: Install CPU runtime and Hmong dependencies
         run: |
-          $installLog = Join-Path $env:RUNNER_TEMP 'hmong-dependency-install.log'
-          Start-Transcript -Path $installLog | Out-Null
-          function Assert-HmongInstall {
-            if ($LASTEXITCODE -ne 0) {
-              $failedExit = $LASTEXITCODE
-              Stop-Transcript | Out-Null
-              $tail = (Get-Content $installLog -Tail 30) -join "`n"
-              $detail = $tail.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
-              Write-Host "::error title=Hmong dependency installation::$detail"
-              exit $failedExit
-            }
-          }
-          python -m pip install --upgrade pip
-          Assert-HmongInstall
-          python -m pip install torch==2.8.0+cpu torchaudio==2.8.0+cpu --index-url https://download.pytorch.org/whl/cpu
-          Assert-HmongInstall
-          python -m pip install -r voice-studio/requirements-hmong.txt
-          Assert-HmongInstall
-          python -m pip install pytest
-          Assert-HmongInstall
-          python -m pip check
-          Assert-HmongInstall
-          Stop-Transcript | Out-Null
+          python voice-studio/packaging/ci_checked.py python -m pip uninstall -y pipx
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python voice-studio/packaging/ci_checked.py python -m pip install --upgrade pip
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python voice-studio/packaging/ci_checked.py python -m pip install torch==2.8.0+cpu torchaudio==2.8.0+cpu --index-url https://download.pytorch.org/whl/cpu
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python voice-studio/packaging/ci_checked.py python -m pip install -r voice-studio/requirements-hmong.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python voice-studio/packaging/ci_checked.py python -m pip install pytest
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python voice-studio/packaging/ci_checked.py python -m pip check
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Prepare verified FFmpeg for regression checks
         run: |
           python -c "import sys; from pathlib import Path; sys.path.insert(0, 'voice-studio/packaging'); from build_windows import download_verified_ffmpeg; download_verified_ffmpeg(Path(r'${{ runner.temp }}/hmong-tools/ffmpeg'), Path(r'${{ runner.temp }}/hmong-portable/downloads'))"
@@ -87,7 +76,7 @@ jobs:
       - name: Check Hmong routing and portable packaging
         working-directory: voice-studio
         run: |
-          python -m pytest tests/test_hmong_variant.py tests/test_hmong_packaging.py -q
+          python packaging/ci_checked.py python -m pytest tests/test_hmong_variant.py tests/test_hmong_packaging.py -q
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node --check static/app.js
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
@@ -95,7 +84,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Build and synthesize with the relocated Windows runtime
         run: |
-          python voice-studio/packaging/build_hmong_windows.py --output '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.0.0' --reports '${{ runner.temp }}/hmong-reports'
+          python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --output '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.0.0' --reports '${{ runner.temp }}/hmong-reports'
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Scan the fresh package with Windows Defender when available
         timeout-minutes: 25
