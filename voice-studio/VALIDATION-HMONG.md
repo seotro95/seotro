@@ -55,6 +55,8 @@ Local 1.2.0 checks completed with Python 3.12:
 - Shared regression suite: 214 passed, 5 skipped. Four skips require Torch in the separate Hmong environment; the remaining optional check is unrelated to Hmong. The five Chromium contract checks passed within this run.
 - Focused checks in the actual pinned Hmong environment: 59 passed, including all five adapter/precision regressions. Both environments passed `pip check`.
 - Actual offline checkpoint inference produced finite, non-silent PCM for both approved references at 16 steps FP32 and for the short female greeting `Nyob zoo.` at 32 steps FP32. The short greeting now lasts about 2.20 seconds. This checks execution and timing bounds, not word correctness or voice similarity.
+- Same-host sentence-packing measurement, after warm-up and excluding model load: two sequential calls took 125.178 seconds for 4.939 seconds of audio; one joined call took 78.211 seconds for 4.960 seconds. Both used 16 steps, FP32, the same reference and four CPU threads. Wall time fell about 37.5% on this short sample; this is not a universal speed claim or a pronunciation score.
+- Real Chromium check uploaded both original MP3s, received automatic excerpt/words and used Save and create test. The male clone completed with the default 16-step FP32 path; the female clone completed after explicitly selecting the 4-step INT8 draft. Both new WAVs downloaded successfully and there were no JavaScript errors. This is separate from mocked browser contract checks.
 
 The following **1.2.0 release checks must be completed and recorded by the release run**; this document does not assert that a pending run has passed:
 

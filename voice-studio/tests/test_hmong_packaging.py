@@ -173,7 +173,7 @@ def test_optional_benchmark_keeps_settings_equal_even_when_joining_is_slower(tmp
         assert precision == 'fp32'
         return model
     monkeypatch.setitem(sys.modules, 'torch', SimpleNamespace(set_num_threads=lambda _: None,
-        manual_seed=lambda _: None, from_numpy=lambda x: x))
+        get_num_threads=lambda: 4, manual_seed=lambda _: None, from_numpy=lambda x: x))
     monkeypatch.setitem(sys.modules, 'soundfile', SimpleNamespace(
         read=lambda *args, **kwargs: (np.zeros((24000, 1)), 24000)))
     monkeypatch.setitem(sys.modules, 'hmong_assets', SimpleNamespace(
