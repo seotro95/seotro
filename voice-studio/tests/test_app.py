@@ -17,13 +17,15 @@ def studio(tmp_path, monkeypatch):
         yield client, tmp_path
 
 
-def sample(seconds=5):
+def sample(seconds=5, silent=False):
+    import math
+    import struct
     file = io.BytesIO()
     with wave.open(file, 'wb') as audio:
         audio.setnchannels(1)
         audio.setsampwidth(2)
         audio.setframerate(24000)
-        audio.writeframes(b'\x00\x00' * (24000 * seconds))
+        audio.writeframes(b'\x00\x00' * (24000 * seconds) if silent else b''.join(struct.pack('<h', int(8000 * math.sin(i * 2 * math.pi * 220 / 24000))) for i in range(24000 * seconds)))
     return file.getvalue()
 
 

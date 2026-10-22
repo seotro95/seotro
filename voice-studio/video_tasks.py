@@ -45,7 +45,7 @@ def run(path):
     if job['action']=='prepare_voice':
         import subprocess,importlib.util
         engine=job['engine']
-        if engine not in {'qwen','qwen_clone','vieneu','vieneu_nano'}:raise ValueError('Model giọng không hợp lệ.')
+        if engine not in {'qwen','qwen_clone','vieneu','vieneu_nano','vieneu_nano_clone'}:raise ValueError('Model giọng không hợp lệ.')
         def prepare_update(value,phase):
             write_progress(work/'progress.json',{'progress':value,'phase':phase})
         env=dict(os.environ,VOICE_STUDIO_DATA_DIR=str(data),HF_HOME=str(data/'models'/'cache'),HF_HUB_DISABLE_XET='1')

@@ -1,0 +1,7 @@
+1
+00:00:00,500 --> 00:00:05,000
+Một buổi sáng, ngôi làng nhỏ thức dậy trong tiếng chim.
+
+2
+00:00:06,000 --> 00:00:11,000
+Trên con đường quen thuộc, một cuộc phiêu lưu mới bắt đầu.

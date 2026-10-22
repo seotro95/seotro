@@ -110,7 +110,7 @@ def main():
     os.environ['PATH'] = str(root/'ffmpeg/bin')+os.pathsep+os.environ['PATH']
     data = root/'voice-studio/.data'
     env = dict(os.environ, VOICE_STUDIO_DATA_DIR=str(data), HF_HOME=str(data/'models/cache'), HF_HUB_DISABLE_XET='1')
-    for engine in ('vieneu_nano', 'vieneu'):
+    for engine in ('vieneu_nano_clone', 'vieneu'):
         run_preparation([sys.executable, str(SOURCE/'prepare_models.py'), engine], env=env, timeout=1800)
     run_preparation([sys.executable,str(SOURCE/'prepare_subtitles.py')],env=env,timeout=1800)
     # Retain model cards/licenses alongside redistributed weights.
@@ -130,7 +130,7 @@ def main():
     shutil.copy2(distribution('vieneu').locate_file(license_path), root/'MODEL-APACHE-2.0-LICENSE.txt')
     freeze = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'], text=True)
     (root/'BUILD-DEPENDENCIES.txt').write_text(freeze, encoding='utf-8')
-    (root/'BUILD.json').write_text(json.dumps({'commit': os.environ.get('GITHUB_SHA'), 'python': sys.version, 'engines': ['vieneu_nano','vieneu'], 'windows_x64': True}, indent=2), encoding='utf-8')
+    (root/'BUILD.json').write_text(json.dumps({'commit': os.environ.get('GITHUB_SHA'), 'python': sys.version, 'engines': ['vieneu_nano','vieneu_nano_clone','vieneu'], 'windows_x64': True}, indent=2), encoding='utf-8')
     try:
         verify_offline(root)
     except Exception as exc:

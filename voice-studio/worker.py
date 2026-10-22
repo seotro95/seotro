@@ -31,11 +31,19 @@ def load_synthesizer(job):
         from system_voices import speak
         return lambda text, output: speak(text, job['speaker'], output)
     if job['engine'] == 'vieneu_nano':
-        from vieneu.v3nano import V3NanoVieNeuTTS
+        from local_vieneu import LocalNano
         steps = job.get('nano_steps', 8)
-        model = V3NanoVieNeuTTS(steps=steps, threads=job.get('nano_threads', 2))
+        model = LocalNano(steps=steps, threads=job.get('nano_threads', 2))
+        if job.get('speaker'):
+            voice = job['speaker']
+        else:
+            # Nano.infer(ref_audio=...) enrolls again on every call. Encode the
+            # immutable reference once per loaded voice and reuse both tensors.
+            reference = DATA / 'voices' / (job['voice_id'] + '.wav')
+            speaker_emb, style = model.encode_reference(str(reference), denoise=False)
+            voice = {'speaker_emb': speaker_emb, 'style': style}
         def synthesize(text, output):
-            model.save(model.infer(text, voice=job['speaker'], steps=steps, sway=-1), str(output))
+            model.save(model.infer(text, voice=voice, steps=steps, sway=-1), str(output))
         return synthesize
     if job['engine'] == 'vieneu':
         from local_vieneu import LocalVieneu
@@ -152,7 +160,17 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
             synthesize=get_synthesizer(settings)
         try:
             synthesize(segment.text,raw)
-            if not raw.is_file() or sf.info(str(raw)).frames==0:raise EmptyVoiceError('Model không tạo mẫu âm thanh.')
+            if not raw.is_file():
+                raise EmptyVoiceError('Model không tạo tệp âm thanh.')
+            try:
+                with sf.SoundFile(str(raw)) as source:
+                    if source.frames == 0:
+                        raise EmptyVoiceError('Model không tạo mẫu âm thanh.')
+                    for block in source.blocks(blocksize=65536, dtype='float32'):
+                        if not np.isfinite(block).all():
+                            raise EmptyVoiceError('Model tạo mẫu âm thanh không hợp lệ (NaN/Infinity).')
+            except sf.LibsndfileError as exc:
+                raise EmptyVoiceError('Tệp âm thanh do model tạo bị hỏng.') from exc
             normalize_audio(raw, temporary, tempo, gain)
             with wave.open(str(temporary)) as audio:
                 samples=np.frombuffer(audio.readframes(audio.getnframes()),dtype='<i2')

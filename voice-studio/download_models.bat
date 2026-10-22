@@ -5,8 +5,8 @@ if not exist ".venv\Scripts\python.exe" (
  pause
  exit /b 1
 )
-echo Dang tai mo hinh AI. Can ket noi Internet va vai GB dung luong trong.
-".venv\Scripts\python.exe" prepare_models.py all
+echo Dang tai model tieng Viet: Nano nhanh, nhan ban va Turbo. Can Internet.
+".venv\Scripts\python.exe" prepare_models.py vi
 if errorlevel 1 (
  echo Tai mo hinh chua hoan tat. Kiem tra loi ben tren va ket noi mang.
  pause

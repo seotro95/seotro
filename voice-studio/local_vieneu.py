@@ -4,6 +4,7 @@ import tempfile
 from pathlib import Path
 
 from vieneu.v3turbo import V3TurboVieNeuTTS
+from vieneu.v3nano import V3NanoVieNeuTTS
 
 
 class LocalVieneu(V3TurboVieNeuTTS):
@@ -20,3 +21,15 @@ class LocalVieneu(V3TurboVieNeuTTS):
         except Exception:
             Path(path).unlink(missing_ok=True)
             raise
+
+
+class LocalNano(V3NanoVieNeuTTS):
+    """Enroll once with Nano's ONNX graphs, keeping cleaned references local."""
+
+    def encode_reference(self, ref_audio, denoise=True):
+        clean_ref = LocalVieneu._preclean_reference_audio(ref_audio)
+        try:
+            return self.engine.prepare_reference(str(clean_ref), denoise=denoise)
+        finally:
+            if Path(clean_ref).resolve() != Path(ref_audio).resolve():
+                Path(clean_ref).unlink(missing_ok=True)

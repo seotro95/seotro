@@ -1,0 +1,41 @@
+name: Publish Voice Studio 3.7 full Windows download
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['codex/voice-studio-3-7-download-20261022']
+    paths:
+      - '.github/workflows/voice-studio-37-download.yml'
+      - '.github/scripts/publish_voice_studio_37.py'
+      - 'voice-studio/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: voice-studio-37-full-download
+  cancel-in-progress: false
+
+jobs:
+  build-and-publish:
+    if: github.repository == 'seotro95/seotro' && github.ref == 'refs/heads/codex/voice-studio-3-7-download-20261022'
+    runs-on: windows-2022
+    timeout-minutes: 75
+    permissions:
+      contents: write
+    env:
+      PYTHONUTF8: '1'
+      HF_HUB_DISABLE_XET: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Assemble, test offline, and publish full portable ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_HOST: github.com
+        run: python .github/scripts/publish_voice_studio_37.py --work-dir "${{ runner.temp }}/voice-studio-37-public-download"

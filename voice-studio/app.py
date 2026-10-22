@@ -48,8 +48,8 @@ PRESETS = [
     {'id': 'qw-unclefu', 'name': 'Uncle Fu', 'engine': 'qwen', 'speaker': 'Uncle_Fu', 'languages': ['en-US', 'en-GB', 'ja', 'ko', 'zh', 'fr', 'de', 'es', 'it', 'pt', 'ru'], 'description': 'Giọng nam trầm · tiếng Trung bản ngữ'},
     {'id': 'qw-dylan', 'name': 'Dylan', 'engine': 'qwen', 'speaker': 'Dylan', 'languages': ['en-US', 'en-GB', 'ja', 'ko', 'zh', 'fr', 'de', 'es', 'it', 'pt', 'ru'], 'description': 'Giọng nam · tiếng Trung Bắc Kinh'},
     {'id': 'qw-eric', 'name': 'Eric', 'engine': 'qwen', 'speaker': 'Eric', 'languages': ['en-US', 'en-GB', 'ja', 'ko', 'zh', 'fr', 'de', 'es', 'it', 'pt', 'ru'], 'description': 'Giọng nam · tiếng Trung Tứ Xuyên'},
-    {'id': 'nano-minhquan', 'name': 'Minh Quân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Minh Quân', 'languages': ['vi'], 'description': 'Nano 8 bước · nhanh hơn, giảm độ tự nhiên'},
-    {'id': 'nano-aihan', 'name': 'Ái Hân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Ái Hân', 'languages': ['vi'], 'description': 'Nano 8 bước · nhanh hơn, giảm độ tự nhiên'},
+    {'id': 'nano-minhquan', 'name': 'Minh Quân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Minh Quân', 'languages': ['vi'], 'description': 'Nano · 4/8/16 bước theo lựa chọn · ưu tiên tốc độ'},
+    {'id': 'nano-aihan', 'name': 'Ái Hân · Siêu nhanh', 'engine': 'vieneu_nano', 'speaker': 'Ái Hân', 'languages': ['vi'], 'description': 'Nano · 4/8/16 bước theo lựa chọn · ưu tiên tốc độ'},
 ]
 @contextmanager
 def studio_lock():
@@ -102,7 +102,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.6.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.7.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -186,12 +186,23 @@ def _config_values():
 def voices():
     entries=PRESETS+installed_voices()+records('voices')
     entries=[{**voice,'engine':voice.get('engine','vieneu' if voice.get('languages',['vi'])[0]=='vi' else 'qwen_clone')} for voice in entries]
-    return {'voices':[{**voice,'native_language':native_language(voice),'ready':voice.get('engine')=='system' or (DATA/'models'/f"{voice.get('engine','vieneu')}.ready").exists()} for voice in entries]}
+    return {'voices':[{**voice,'native_language':native_language(voice),'ready':voice_ready(voice)} for voice in entries]}
+
+
+def preparation_engine(voice):
+    engine = voice.get('engine', 'vieneu' if voice.get('languages', ['vi'])[0] == 'vi' else 'qwen_clone')
+    # Nano's preset model does not contain the graphs needed for voice cloning.
+    return 'vieneu_nano_clone' if engine == 'vieneu_nano' and voice.get('category') == 'cloned' else engine
+
+
+def voice_ready(voice):
+    engine = preparation_engine(voice)
+    return engine == 'system' or (DATA / 'models' / f'{engine}.ready').exists()
 
 
 
 @app.post('/api/voices/clone', status_code=201)
-async def clone(name: str = Form(min_length=1, max_length=80), language: str = Form('vi'), transcript: str = Form('', max_length=2000), consent: bool = Form(False), file: UploadFile = File(...)):
+async def clone(name: str = Form(min_length=1, max_length=80), language: str = Form('vi'), transcript: str = Form('', max_length=2000), consent: bool = Form(False), engine: str = Form('auto'), file: UploadFile = File(...)):
     ident = uuid.uuid4().hex
     target = DATA / 'voices' / f'{ident}.wav'
     source = DATA / 'voices' / f'{ident}.upload'
@@ -201,6 +212,11 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
         if language not in CORE_LANGUAGES:raise HTTPException(422,'Nhân bản AI chưa hỗ trợ ngôn ngữ này. Chọn giọng hệ thống Windows đã cài cho ngôn ngữ đó.')
         if not name.strip() or language not in LANGUAGES:
             raise HTTPException(422, 'Tên hoặc ngôn ngữ không hợp lệ.')
+        choices = {'auto', 'vieneu', 'vieneu_nano'} if language == 'vi' else {'auto', 'qwen_clone'}
+        if engine not in choices:
+            raise HTTPException(422, 'Chọn engine nhân bản hỗ trợ ngôn ngữ mẫu giọng.')
+        if engine == 'auto':
+            engine = ('vieneu_nano' if (DATA / 'models' / 'vieneu_nano_clone.ready').exists() else 'vieneu') if language == 'vi' else 'qwen_clone'
         if Path(file.filename or '').suffix.lower() not in {'.mp3', '.wav', '.m4a', '.flac', '.ogg', '.webm'}:
             raise HTTPException(422, 'Chọn tệp MP3, WAV, M4A, FLAC, OGG hoặc WEBM.')
         content = await file.read(20 * 1024 * 1024 + 1)
@@ -216,7 +232,12 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
             duration = audio.getnframes() / audio.getframerate()
         if not 3 <= duration <= 30:
             raise HTTPException(422, 'Dùng mẫu dài từ 3 đến 30 giây. Nên thu một người nói, ít tạp âm, không nhạc nền.')
-        record = {'id': ident, 'name': name.strip(), 'category': 'cloned', 'languages': [language], 'language': language, 'transcript': transcript.strip(), 'description': f'Mẫu giọng cá nhân · {duration:.1f}s', 'duration': duration, 'consent_at': now(), 'created_at': now()}
+        import numpy as np
+        import soundfile as sf
+        reference, _ = sf.read(str(target), dtype='float32')
+        if not np.isfinite(reference).all() or np.max(np.abs(reference)) < 0.0001 or np.sqrt(np.mean(reference ** 2)) < 0.00001:
+            raise HTTPException(422, 'Mẫu giọng chỉ có im lặng hoặc âm lượng quá nhỏ. Thu lại giọng nói rõ trước khi nhân bản.')
+        record = {'id': ident, 'name': name.strip(), 'category': 'cloned', 'engine': engine, 'preparation_engine': 'vieneu_nano_clone' if engine == 'vieneu_nano' else engine, 'languages': [language], 'language': language, 'transcript': transcript.strip(), 'description': f'Mẫu giọng cá nhân · {duration:.1f}s · {"Nano nhanh" if engine == "vieneu_nano" else "Turbo" if engine == "vieneu" else "Qwen"}', 'duration': duration, 'consent_at': now(), 'created_at': now()}
         write_json(DATA / 'voices' / f'{ident}.json', record)
         return record
     except (subprocess.TimeoutExpired, FileNotFoundError):
@@ -404,8 +425,8 @@ def speech(body: Speech):
     if not voice or body.language not in voice['languages']:
         raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
-    if engine != 'system' and not (DATA / 'models' / f'{engine}.ready').exists():
-        raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Chạy lệnh tải mô hình trong hướng dẫn cài đặt.')
+    if not voice_ready(voice):
+        raise HTTPException(503, f'Mô hình {preparation_engine(voice)} chưa sẵn sàng. Bấm Tải model cho giọng đang chọn rồi chờ hoàn tất; hoặc chạy MO_TOOL.bat để cài giọng Việt.')
     try:
         segment_plan = 'nano-packed-v1' if engine == 'vieneu_nano' and body.paragraph_pause == 0 else 'classic-v1'
         segments = plan_segments({**body.model_dump(), 'engine': engine, 'segment_plan': segment_plan})
@@ -730,7 +751,7 @@ class VideoTask(BaseModel):
     preview_start: float = Field(default=0,ge=0,le=10800)
     preview_seconds: float = Field(default=10,ge=1,le=15)
     preview_voice_id: str | None = None
-    engine: str = Field(default='qwen',pattern='^(qwen|qwen_clone|vieneu|vieneu_nano)$')
+    engine: str = Field(default='qwen',pattern='^(qwen|qwen_clone|vieneu|vieneu_nano|vieneu_nano_clone)$')
     text: str = Field(default='',max_length=200000)
     input_format: str = Field(default='txt',pattern='^(txt|srt)$')
     provider: str = Field(default='ollama',pattern='^(ollama|openai|gemini)$')

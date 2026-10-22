@@ -1,0 +1,34 @@
+VOICE STUDIO 3.7.0
+
+CÀI MỚI WINDOWS
+1. Giải nén cả ZIP. Cài Python 3.12 64-bit (bật Add to PATH).
+2. Cài FFmpeg có cả ffmpeg và ffprobe.
+   Có thể chạy: winget install --id Gyan.FFmpeg -e
+   Sau khi cài, đóng/mở lại cửa sổ.
+3. Mở thư mục voice-studio, bấm MO_TOOL.bat.
+   Lần đầu cần Internet, tự tải thư viện và mô hình Việt rồi tạo audio kiểm tra.
+4. Giữ cửa sổ chạy. Trình duyệt tự mở khi sẵn sàng.
+
+CẬP NHẬT
+Tắt tool cũ, sao lưu .data. Chép tệp mới đè vào thư mục voice-studio cũ.
+GIỮ .data, .venv, runtime và ffmpeg cũ. Không xóa cả thư mục tool.
+Bấm MO_TOOL.bat trong voice-studio. Kiểm tra v3.7.0 trên giao diện.
+
+DÙNG TOOL
+- Tạo giọng: nhập/dán TXT hoặc SRT -> chọn giọng -> kiểu đọc -> Tạo giọng.
+- Nhân bản: chọn mẫu giọng được phép dùng 3–30 giây -> chọn Nano/Turbo
+  -> lưu -> Sử dụng giọng -> nhập lời mới -> tạo voice.
+- Review, Kể chuyện, Quảng cáo, Hướng dẫn... điều chỉnh nhịp và khoảng nghỉ.
+- Tải WAV/MP3/TXT/SRT ở Lịch sử. TXT xuất SRT cần tạo voice xong trước.
+- Có lỗi: bấm Kiểm tra / sửa model. Đừng đóng cửa sổ tool khi đang tạo.
+
+Gói này là mã ứng dụng kèm trình cài/chạy; chưa kèm Python/FFmpeg/model.
+Không phải EXE Portable đã kèm runtime. Lần đầu cần Internet và vài GB trống.
+Tạo giọng Việt sau khi chuẩn bị model không cần API key.
+
+TỐC ĐỘ
+Mẫu đo thực tế: Nano4 tạo 89,84 giây voice trong 12,152 giây xử lý (7,39x).
+Ngoại suy khoảng 8,1 phút/giờ trên CPU thử nghiệm; chưa đo đủ một giờ.
+CHƯA ĐẠT mục tiêu 2 phút/giờ. Máy khác, kiểu đọc và giọng nhân bản có tốc độ khác.
+
+Chi tiết: README.md. Kết quả kiểm tra: VALIDATION.md.

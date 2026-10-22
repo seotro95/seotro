@@ -5,7 +5,18 @@ from dataclasses import dataclass
 
 MAX_SECONDS = 3 * 60 * 60
 MAX_CHARACTERS = 200_000
-PROFILES = {'natural': (1.0, 0.22), 'story': (0.94, 0.5), 'news': (1.04, 0.25), 'calm': (0.88, 0.65), 'energetic': (1.12, 0.16)}
+# Presets control delivery through playback tempo and sentence spacing. They do
+# not claim emotion/style conditioning that the local model does not support.
+PROFILES = {
+    'natural': (1.0, 0.22),
+    'story': (0.94, 0.5),
+    'review': (1.03, 0.28),
+    'advertising': (1.10, 0.16),
+    'tutorial': (0.96, 0.4),
+    'news': (1.04, 0.25),
+    'calm': (0.88, 0.65),
+    'energetic': (1.12, 0.16),
+}
 
 
 @dataclass
