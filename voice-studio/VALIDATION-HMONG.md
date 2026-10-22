@@ -10,7 +10,7 @@ The previous inner `start_hmong.bat` required a source `.venv-hmong` even inside
 
 The 1.2.0 package routes root and inner `start.bat`/`start_hmong.bat` aliases to `MO_VOICE_STUDIO_HMONG.bat`; install aliases prepare the same Hmong runtime. Source `install_hmong.bat` creates and validates isolated Python 3.12 x64 `.venv-hmong`, checks the complete application, prepares FFmpeg with upstream SHA256 verification when needed, installs `requirements-hmong.txt`, runs `pip check`, and prepares models. It preserves personal data and the Vietnamese environment.
 
-The stdlib-only bundle check requires application modules, browser files and all approved voice assets before library/model checks. It checks all four audio SHA256 values against `voices.json`. `--check` additionally checks FFmpeg/ffprobe, dependencies and local model integrity, without downloading or synthesizing audio. Missing resources give full-ZIP recovery guidance instead of a misleading success.
+The stdlib-only bundle check requires application modules, browser files and all supplied default voice assets before library/model checks. It checks all four audio SHA256 values against `voices.json`. `--check` additionally checks FFmpeg/ffprobe, dependencies and local model integrity, without downloading or synthesizing audio. Missing resources give full-ZIP recovery guidance instead of a misleading success.
 
 ## Default voices and cloning
 
@@ -19,7 +19,9 @@ The stdlib-only bundle check requires application modules, browser files and all
 | `hmong nam1.MP3` | `29285370b91db8465222b2056b204110c6dded1a60c9004c7fb8747fe4978c9c` | 0–4.5 seconds |
 | `hmong nữ.MP3` | `2c3467e7b5f0e49a3277397c00762810f657fd1bbd36f738a7e17d0f067f6222` | 0–5.3 seconds |
 
-Full originals remain available for preview. Their byte-identical uploads automatically select the approved excerpt and confirmed reference text. Other local 3–30 second uploads require a selected 3–8 second interval and its exact words. There is no guessed Hmong transcript. Saving a profile and generating new speech are distinct operations; Save and create test explicitly queues new synthesis.
+Full originals remain available for preview. Their byte-identical uploads automatically select the stored excerpt and pre-fill inherited candidate words, which remain editable. Audio identity and the user's request to use these recordings as defaults are supported; word correctness is not established by a matching audio hash. Other local 3–30 second uploads require a selected 3–8 second interval and its exact words. The application performs no automatic Hmong transcription. Saving a profile and generating new speech are distinct operations; Save and create test explicitly queues new synthesis.
+
+The earliest available source of the exact candidate words is commit `a6faa2c` (21 October 2026), in `hmoob-voicelab/assets/voices.json`. Its metadata and validation document claim the user confirmed the words and intervals, but no original confirmation message or independent transcript evidence is available in the present history/artifacts. Commit `454ab25` copied those words into Voice Studio; `84f67d2` retained them while changing the source wording. Their actual derivation cannot be established as user-provided, ASR-derived or otherwise from this evidence. They must therefore be described as inherited candidates, not confirmed transcripts. No replacement words are guessed here. A person who knows Hmong must check the excerpt/words before pronunciation or similarity claims are made.
 
 The historical 1.1.0 clone fix addressed rejection of the full 19/22 second recordings by adding automatic known-reference selection and manual interval controls. Its earlier browser/inference and regression results are not treated as a successful 1.2.0 run.
 
@@ -33,18 +35,20 @@ The historical 1.1.0 clone fix addressed rejection of the full 19/22 second reco
 
 The pinned [Hmong integration README](https://github.com/YangNobody12/F5-TTS-Hmong/blob/ec21db33d2dea156840bd6ff03a2087e950b067e/README.md) warns that long text and some words may be inaccurate. It recommends reference audio no longer than eight seconds, smaller chunks, and speed 0.8–0.9 for missed words, while warning that slowing too far can introduce reference speech. Its [inference constants](https://github.com/YangNobody12/F5-TTS-Hmong/blob/ec21db33d2dea156840bd6ff03a2087e950b067e/src/f5_tts/infer/utils_infer.py#L60) use `nfe_step = 32  # 16, 32`; this supports offering 16/32 rather than describing four steps as a validated quality default. The restored ten-byte guard comes from the installed upstream [F5-TTS 1.1.22 implementation](https://github.com/SWivid/F5-TTS/blob/9c614e9657089213efc6a7421b30630be138a3f5/src/f5_tts/infer/utils_infer.py#L491). The Hmong fork has a different, fifteen-character guard; it is not the source of the ten-byte threshold.
 
-## Pronunciation diagnostic: ASR calibration failed
+## Pronunciation diagnostic: disagreement with inherited candidate words
 
 A QA-only local experiment evaluated `Pakorn2112/whisper-model-large-hmong/SingleSpeech` at revision `ad820dd7f90495cac4f74673f25e54956636de64`. The safetensor shards were downloaded over verified HTTPS and checked against upstream SHA256; small files were checked against Git blob identities. Inference used local files only, safetensors and `trust_remote_code=False`, following the author's English decoder-language prompt for this Hmong fine-tune. Neither user's audio was uploaded to a service. This ASR model is not shipped and adds no product feature.
 
-The scorer was calibrated on the two real reference recordings before evaluating generated speech:
+The experiment compared recognition of the two real reference recordings against the stored candidate words before attempting to score generated speech. The words' confirmation could not subsequently be established, so these numbers are edit ratios against candidate text, not ground-truth ASR word error rates or a valid pronunciation calibration:
 
-| Real reference | Word edits / reference words | Word error rate |
+| Real reference | Word edits / candidate words | Edit ratio against candidate text |
 | --- | --- | --- |
-| Male approved WAV | 13 / 14 | 92.86% |
-| Female approved WAV | 21 / 16 | 131.25% |
+| Male supplied excerpt | 13 / 14 | 92.86% |
+| Female supplied excerpt | 21 / 16 | 131.25% |
 
-Both exceeded the preselected 35% calibration threshold. WER can exceed 100% when insertions occur. These are **ASR errors on real recordings**, not scores for generated speech; they may reflect scorer, prompt, dialect or short-context limitations and do not establish that the confirmed reference words are wrong. Consequently no generated 4/16/32-step samples were scored with this ASR, and no automatic pronunciation improvement claim is supported by it. Native-listener assessment of intelligibility, tones and speaker similarity remains necessary.
+An edit ratio can exceed 100% when insertions occur. This disagreement establishes neither ASR accuracy nor candidate-word accuracy; scorer, prompt, dialect, short-context limitations or inaccurate candidate words may contribute. Consequently no generated 4/16/32-step samples were scored with this ASR, no replacement transcript was adopted, and no automatic pronunciation improvement claim is supported. Native-listener assessment of the reference words, intelligibility, tones and speaker similarity remains necessary.
+
+A follow-up method review found no concrete resampling, prompt or token-limit error: mono 24 kHz clips became exactly 72,000/84,800 samples at 16 kHz, corresponding to 4.5/5.3 seconds; the processor produced 80-mel features and attention masks covering 450/530 frames. The English/transcribe/no-timestamps decoder tokens matched the author's configuration. Recognized text used 28/39 tokens, below the 128-token generation cap. The QA environment used Transformers 5.20.2 while the model configuration records 4.57.1; this remains a reproducibility limitation, not evidence of a specific bug. No heavier inference rerun was justified by that review.
 
 The smaller `kengher2004/hmong-whisper-small` candidate was rejected before downloading weights because its own pinned model card reported WER 100% and lacked processor files. Stock Whisper does not expose a Hmong language token; forcing `language='hmong'` is not a supported replacement.
 
@@ -52,9 +56,9 @@ The smaller `kengher2004/hmong-whisper-small` candidate was rejected before down
 
 Local 1.2.0 checks completed with Python 3.12:
 
-- Shared regression suite: 214 passed, 5 skipped. Four skips require Torch in the separate Hmong environment; the remaining optional check is unrelated to Hmong. The five Chromium contract checks passed within this run.
-- Focused checks in the actual pinned Hmong environment: 59 passed, including all five adapter/precision regressions. Both environments passed `pip check`.
-- Actual offline checkpoint inference produced finite, non-silent PCM for both approved references at 16 steps FP32 and for the short female greeting `Nyob zoo.` at 32 steps FP32. The short greeting now lasts about 2.20 seconds. This checks execution and timing bounds, not word correctness or voice similarity.
+- Shared regression suite: 217 passed, 5 skipped. Four skips require Torch in the separate Hmong environment; the remaining optional check is unrelated to Hmong. The six Chromium contract checks passed within this run.
+- Focused checks in the actual pinned Hmong environment: 61 passed, including all five adapter/precision regressions. Both environments passed `pip check`.
+- Actual offline checkpoint inference produced finite, non-silent PCM for both supplied reference clips with inherited candidate words at 16 steps FP32 and for the short female greeting `Nyob zoo.` at 32 steps FP32. The short greeting now lasts about 2.20 seconds. This checks execution and timing bounds, not word correctness or voice similarity.
 - Same-host sentence-packing measurement, after warm-up and excluding model load: two sequential calls took 125.178 seconds for 4.939 seconds of audio; one joined call took 78.211 seconds for 4.960 seconds. Both used 16 steps, FP32, the same reference and four CPU threads. Wall time fell about 37.5% on this short sample; this is not a universal speed claim or a pronunciation score.
 - Real Chromium check uploaded both original MP3s, received automatic excerpt/words and used Save and create test. The male clone completed with the default 16-step FP32 path; the female clone completed after explicitly selecting the 4-step INT8 draft. Both new WAVs downloaded successfully and there were no JavaScript errors. This is separate from mocked browser contract checks.
 
@@ -72,6 +76,6 @@ Consult the successful release Actions run and packaged `NATIVE-VALIDATION.json`
 
 First normal launch downloads approximately 1.4 GB of revision-pinned, checksum-verified F5-Hmong/Vocos files. Hmong weights are not redistributed because explicit redistribution terms are unclear. Prepared inference works offline without an API key. TLS/checksums remain enforced; a network policy blocking GitHub/Hugging Face can still prevent download.
 
-The two explicitly supplied default MP3s and their approved references are included. No other personal profiles, jobs or credentials belong in the package. The QA-only ASR model/cache is excluded.
+The two explicitly supplied default MP3s and their stored excerpts are included. Their inherited candidate words are not presented as confirmed transcripts. No other personal profiles, jobs or credentials belong in the package. The QA-only ASR model/cache is excluded.
 
 Story/review settings control tempo and pauses; they are not separately trained emotional voices. There is no bundled Hmong ASR or cloud GPU service. Runtime and memory depend on hardware, text, quality settings and reference pace. No one-hour-in-two-minutes promise, universal pronunciation guarantee or native speaker-similarity validation is made.

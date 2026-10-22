@@ -140,7 +140,9 @@ Mac dinh tu nhien 16 buoc, FP32 de giu chat luong mo hinh goc.
 4 buoc chi la ban nhap nhanh, co the giam do ro va tu nhien.
 Co the chon 8/16/32 buoc FP32 de so sanh chat luong.
 Chi ban nhap 4 buoc thu INT8 tren CPU, du phong FP32 neu khong tuong thich.
-Hai MP3 goc da xac minh duoc tu chon doan tham chieu va loi khop mau.
+Hai MP3 goc duoc nhan dien bang SHA256, tu chon doan va dien loi du an.
+Loi mau chua duoc xac minh doc lap; nghe doi chieu va sua neu can.
+Tool giu loi ban sua, khong ghi de bang loi dien san.
 Voi tep khac, chon doan 3-8 giay va nhap loi Hmong khop doan mau.
 Kieu ke chuyen/review
 la dieu chinh nhip/toc do/khoang nghi; khong phai model cam xuc moi.
@@ -241,6 +243,7 @@ def main():
              'models_included': False, 'first_run_model_download_required': True,
              'model_download_approx_gb': 1.4, 'api_key_required': False,
              'default_steps': 16, 'default_precision': 'fp32', 'draft_steps': 4,
+             'reference_text_verified': False,
              'validated_presets': ['hmong-female', 'hmong-male'],
              'validation_workflow_run': os.environ.get('GITHUB_RUN_ID')}
     (root / 'BUILD.json').write_text(json.dumps(build, ensure_ascii=False, indent=2), encoding='utf-8')

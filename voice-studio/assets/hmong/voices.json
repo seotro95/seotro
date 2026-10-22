@@ -4,7 +4,7 @@
     "name": "Hmong nữ · Nữ mặc định",
     "duration": 22.386917,
     "sha256": "2c3467e7b5f0e49a3277397c00762810f657fd1bbd36f738a7e17d0f067f6222",
-    "source": "Tệp MP3 người dùng gửi trực tiếp trong cuộc trò chuyện; SHA256 khớp mẫu nguồn và lời tham chiếu đã xác nhận trong dự án.",
+    "source": "Tệp MP3 người dùng gửi trực tiếp trong cuộc trò chuyện; SHA256 dùng đối chiếu danh tính tệp. Lời tham chiếu kế thừa từ dự án, chưa xác minh khớp âm thanh.",
     "reference": {
       "start": 0,
       "end": 5.3,
@@ -12,14 +12,16 @@
     },
     "reference_file": "female.wav",
     "reference_sha256": "e32e9ab119e5a9e0e60f75e0b02c3b1bacea55e18d74174ded6098a4049e04f3",
-    "user_filename": "hmong nữ.MP3"
+    "user_filename": "hmong nữ.MP3",
+    "reference_text_verified": false,
+    "reference_text_source": "inherited_project_metadata"
   },
   "male": {
     "file": "source-male.mp3",
     "name": "Hmong nam1 · Nam mặc định",
     "duration": 18.93875,
     "sha256": "29285370b91db8465222b2056b204110c6dded1a60c9004c7fb8747fe4978c9c",
-    "source": "Tệp MP3 người dùng gửi trực tiếp trong cuộc trò chuyện; SHA256 khớp mẫu nguồn và lời tham chiếu đã xác nhận trong dự án.",
+    "source": "Tệp MP3 người dùng gửi trực tiếp trong cuộc trò chuyện; SHA256 dùng đối chiếu danh tính tệp. Lời tham chiếu kế thừa từ dự án, chưa xác minh khớp âm thanh.",
     "reference": {
       "start": 0,
       "end": 4.5,
@@ -27,6 +29,8 @@
     },
     "reference_file": "male.wav",
     "reference_sha256": "da022f0b4511e266bfd7083734c0d3ba4253546f5cd8f8b4b0cabb502e2cab57",
-    "user_filename": "hmong nam1.MP3"
+    "user_filename": "hmong nam1.MP3",
+    "reference_text_verified": false,
+    "reference_text_source": "inherited_project_metadata"
   }
 }

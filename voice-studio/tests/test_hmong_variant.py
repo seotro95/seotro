@@ -20,11 +20,13 @@ with TestClient(app.app) as c, patch.object(app,'model_ready',lambda engine:engi
     assert cfg['variant']=='hmong' and cfg['default_language']=='mww'
     assert cfg['hmong_steps']==16 and cfg['paragraph_pause']==0
     assert cfg['hardware']=='unknown' and 'CHƯA KIỂM TRA' in cfg['hardware_label']
+    assert 'chưa được xác minh' in cfg['hmong_reference_note']
     assert cfg['languages']=={'mww':'Hmong Trắng · Hmoob Daw'}
     assert 'mww' not in cfg['recognition_languages']
     voices=c.get('/api/voices').json()['voices']
     assert {v['id'] for v in voices}=={'hmong-female','hmong-male'}
     assert all(v['engine']=='f5_hmong' and v['native_language']=='mww' for v in voices)
+    assert all(v['reference_text_verified'] is False and 'cần nghe kiểm tra' in v['description'] for v in voices)
     response=c.post('/api/speech',json={'text':'Nyob zoo.','voice_id':'hmong-female','hmong_steps':8,'delivery':'review'})
     assert response.status_code==202,response.text
     assert response.json()['engine']=='f5_hmong' and response.json()['language']=='mww'

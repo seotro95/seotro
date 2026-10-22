@@ -2,7 +2,7 @@
 from test_hmong_variant import run_case
 
 
-def test_known_long_originals_get_the_exact_approved_excerpt_without_manual_transcription(tmp_path):
+def test_known_long_originals_get_the_project_excerpt_and_editable_prefill(tmp_path):
     run_case(tmp_path, '''
 import hashlib,io,wave
 from fastapi.testclient import TestClient
@@ -19,6 +19,7 @@ with TestClient(app.app) as client:
         assert info['duration']>8 and info['automatic'] and not info['requires_selection']
         assert not info['requires_transcript'] and info['known_preset']=='hmong-'+gender
         assert info['transcript']==item['reference']['text']
+        assert info['transcript_verified'] is False and info['transcript_source']=='project_prefill'
         response=client.post('/api/voices/clone',data={'name':'Known '+gender,'language':'mww','consent':'true'},files=upload)
         assert response.status_code==201,response.text
         record=response.json()
@@ -45,6 +46,46 @@ with TestClient(app.app) as client:
 ''')
 
 
+def test_known_crop_preserves_custom_words_and_marks_only_inherited_words_automatic(tmp_path):
+    run_case(tmp_path, '''
+from hmong_assets import ROOT,references
+from hmong_reference import select_reference
+custom='Kuv sau cov lus no rau kuv tus kheej.'
+for gender,item in references().items():
+    content=(ROOT/item['file']).read_bytes()
+    saved=item['reference']
+    for bounds in [(None,None),(saved['start'],saved['end'])]:
+        for words,automatic in [('',True),(saved['text'],True),(custom,False)]:
+            selected=select_reference(content,item['duration'],words,*bounds)
+            assert selected['reference_start']==saved['start']
+            assert selected['reference_end']==saved['end']
+            assert selected['transcript']==(saved['text'] if automatic else custom)
+            assert selected['automatic_reference'] is automatic
+            assert selected['known_preset']=='hmong-'+gender
+''')
+
+
+def test_known_mp3_clone_keeps_custom_words_when_crop_bounds_are_omitted(tmp_path):
+    run_case(tmp_path, '''
+from fastapi.testclient import TestClient
+from hmong_assets import ROOT,references
+import app
+custom='Kuv sau cov lus no rau kuv tus kheej.'
+with TestClient(app.app) as client:
+    for gender,item in references().items():
+        upload={'file':(item['user_filename'],(ROOT/item['file']).read_bytes(),'audio/mpeg')}
+        response=client.post('/api/voices/clone',data={'name':'Custom '+gender,
+            'language':'mww','consent':'true','transcript':custom},files=upload)
+        assert response.status_code==201,response.text
+        record=response.json()
+        assert record['transcript']==custom
+        assert record['automatic_reference'] is False
+        assert record['known_preset']=='hmong-'+gender
+        assert record['reference_start']==item['reference']['start']
+        assert record['reference_end']==item['reference']['end']
+''')
+
+
 def test_unknown_long_recording_needs_an_explicit_crop_and_matching_words(tmp_path):
     run_case(tmp_path, '''
 import io,wave
@@ -60,6 +101,7 @@ with TestClient(app.app) as client:
     info=client.post('/api/hmong/reference-info',files=upload).json()
     assert info['duration']==12 and info['requires_selection'] and info['requires_transcript']
     assert info['known_preset'] is None and info['transcript']==''
+    assert info['transcript_verified'] is False and info['transcript_source']=='manual'
     data={'name':'My selected voice','language':'mww','consent':'true','transcript':'Nyob zoo.'}
     assert client.post('/api/voices/clone',data=data,files=upload).status_code==422
     data.update(reference_start='4',reference_end='9')

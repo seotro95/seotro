@@ -1,6 +1,7 @@
 """Decode local uploads and pair bounded Hmong references with their exact words.
 
-Only byte-identical, project-approved originals receive automatic text/cropping.
+Only byte-identical project originals receive automatic cropping/text prefill.
+The stored words are editable project metadata, not a verified transcription.
 Other recordings need the user's transcript of the selected interval; no ASR or
 text guessing is performed here.
 """
@@ -71,6 +72,8 @@ def describe_reference(content, duration):
         'reference_start': selected['start'],
         'reference_end': selected['end'],
         'transcript': selected['text'],
+        'transcript_verified': False,
+        'transcript_source': 'project_prefill' if item else 'manual',
         'automatic': item is not None,
         'requires_transcript': item is None,
         'requires_selection': item is None and duration > 8.001,
@@ -78,16 +81,19 @@ def describe_reference(content, duration):
 
 
 def select_reference(content, duration, transcript, start=None, end=None):
-    """Resolve an explicit crop or an approved original, never infer its words."""
+    """Resolve a crop and editable project prefill without replacing user words."""
     info = describe_reference(content, duration)
     exact_known_interval = (info['automatic'] and not isinstance(start, bool) and not isinstance(end, bool)
-                            and start == info['reference_start'] and end == info['reference_end']
-                            and isinstance(transcript, str) and transcript.strip() in {'', info['transcript']})
-    automatic = info['automatic'] and ((start is None and end is None) or exact_known_interval)
+                            and start == info['reference_start'] and end == info['reference_end'])
+    known_interval = info['automatic'] and ((start is None and end is None) or exact_known_interval)
+    automatic = (known_interval and isinstance(transcript, str)
+                 and transcript.strip() in {'', info['transcript']})
     if (start is None) != (end is None):
         raise ReferenceError('Chọn đủ mốc bắt đầu và kết thúc của đoạn giọng mẫu.')
-    if automatic:
-        start, end, transcript = info['reference_start'], info['reference_end'], info['transcript']
+    if known_interval:
+        start, end = info['reference_start'], info['reference_end']
+        if automatic:
+            transcript = info['transcript']
     elif start is None:
         if duration > 8.001:
             raise ReferenceError('Mẫu dài hơn 8 giây. Chọn đoạn 3–8 giây, nghe lại và nhập đúng lời của đoạn đã chọn.')

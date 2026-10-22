@@ -13,6 +13,7 @@ playwright = pytest.importorskip('playwright.sync_api', reason='Optional Chromiu
 CHROMIUM = shutil.which('chromium') or shutil.which('chromium-browser')
 pytestmark = pytest.mark.skipif(not CHROMIUM, reason='Optional UI checks need system Chromium')
 ROOT = Path(__file__).resolve().parents[1]
+PROJECT_REFERENCES = json.loads((ROOT / 'assets/hmong/voices.json').read_text(encoding='utf-8'))
 
 
 @pytest.fixture(scope='module')
@@ -51,7 +52,7 @@ def studio_page(site, *, hmong=True, ready=True, missing_reference_first=False, 
                 'int8_cpu': False, 'fast_vieneu': False, 'subtitle_ready': False, 'hmong_ready': state['ready'],
                 **({'hmong_steps': hmong_steps} if hmong_steps is not None else {}),
                 **({'hardware_label': 'CỤC BỘ · CHƯA KIỂM TRA CPU/GPU'} if hmong else {}),
-                'hmong_reference_note': 'Mẫu Hmong đã ghép lời tham chiếu.'}
+                'hmong_reference_note': 'Lời tham chiếu có sẵn trong dự án chưa được xác minh khớp bản thu.'}
     def voices():
         entries = [{'id': ident, 'engine': engine, 'name': 'Hmong Nữ' if hmong else 'Mai Anh',
                     'languages': [language], 'native_language': language, 'ready': state['ready'],
@@ -79,6 +80,11 @@ def studio_page(site, *, hmong=True, ready=True, missing_reference_first=False, 
         elif path == '/api/speech':
             state['speech'].append(request.post_data_json)
             response = job(request.post_data_json)
+        elif path == '/api/hmong/reference-info':
+            reference = PROJECT_REFERENCES['female']
+            response = {'duration': reference['duration'], 'automatic': True, 'known_preset': 'hmong-female',
+                        'reference_start': reference['reference']['start'], 'reference_end': reference['reference']['end'],
+                        'transcript': reference['reference']['text'], 'reference_text_verified': False}
         elif path.startswith('/api/jobs/') and path.endswith('/alignment'):
             response = {'pending': True, 'cues': [], 'sync_ok': False}
         elif path.startswith('/api/jobs/'):
@@ -166,6 +172,22 @@ def test_hmong_model_button_requests_the_hmong_engine(static_site):
         page.click('#voice-load-model')
         playwright.expect(page.locator('#voice-load-model')).to_contain_text('sẵn sàng', timeout=10000)
         assert state['tasks'] == [{'action': 'prepare_voice', 'engine': 'f5_hmong'}]
+        assert state['errors'] == []
+
+
+def test_known_source_prefills_unverified_project_words_and_keeps_them_editable(static_site):
+    with studio_page(static_site) as (page, state):
+        playwright.expect(page.locator('#hmong-reference-note')).to_contain_text('chưa được xác minh')
+        page.locator('.nav-item[data-tab="clone"]').click()
+        playwright.expect(page.locator('#panel-clone .page-heading p')).to_contain_text('Lời chưa được xác minh')
+        page.locator('#clone-file').set_input_files(ROOT / 'assets/hmong/source-female.mp3')
+        playwright.expect(page.locator('#transcript')).to_have_value(PROJECT_REFERENCES['female']['reference']['text'])
+        playwright.expect(page.locator('#transcript')).to_be_editable()
+        playwright.expect(page.locator('#clone-reference-info')).to_contain_text('Lời chưa được xác minh khớp âm thanh')
+        playwright.expect(page.locator('#clone-status')).to_contain_text('lời chưa được xác minh')
+        playwright.expect(page.locator('#clone-submit')).to_be_enabled()
+        page.fill('#transcript', 'Kuv sau cov lus no rau kuv tus kheej.')
+        playwright.expect(page.locator('#transcript')).to_have_value('Kuv sau cov lus no rau kuv tus kheej.')
         assert state['errors'] == []
 
 

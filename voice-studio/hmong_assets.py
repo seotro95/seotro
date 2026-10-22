@@ -1,4 +1,4 @@
-"""The two project-approved, transcribed Hmong reference clips."""
+"""Source-identified Hmong clips with inherited project reference text."""
 import hashlib
 import json
 from pathlib import Path
@@ -34,8 +34,9 @@ def presets():
     return [
         {'id': 'hmong-' + gender, 'name': item['name'], 'engine': 'f5_hmong',
          'speaker': 'hmong-' + gender, 'languages': ['mww'],
-         'description': 'Mẫu của bạn · ' + item['user_filename'] + ' · đã ghép đúng lời tham chiếu',
+         'description': 'Mẫu của bạn · ' + item['user_filename'] + ' · lời dự án điền sẵn, cần nghe kiểm tra',
          'source_filename': item['user_filename'], 'source_sha256': item['sha256'],
+         'reference_text_verified': False,
          'sample_url': '/api/hmong/presets/hmong-' + gender + '/sample'}
         for gender in ('male', 'female')
         for item in [references()[gender]]

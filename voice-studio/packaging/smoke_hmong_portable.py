@@ -105,7 +105,7 @@ def main():
             preset = next(v for v in voices if v['id'] == ident)
             metadata = voice_metadata[ident.removeprefix('hmong-')]
             source = app_root / 'assets/hmong' / metadata['file']
-            assert source.suffix == '.mp3', 'Preset preview must retain the complete approved MP3'
+            assert source.suffix == '.mp3', 'Preset preview must retain the complete supplied MP3'
             assert hashlib.sha256(source.read_bytes()).hexdigest() == metadata['sha256']
             preview = client.get(preset['sample_url'])
             assert preview.status_code == 200
@@ -162,8 +162,8 @@ def main():
         results['clone'] = True
 
         # A different long file needs an explicit excerpt and matching words.
-        # Prefix approved speech with one second of silence so the chosen
-        # 1.0..6.3s interval contains exactly the approved female reference.
+        # Prefix supplied speech with one second of silence so the chosen
+        # 1.0..6.3s interval contains exactly the stored female reference.
         female = voice_metadata['female']
         source = app_root / 'assets/hmong' / female['file']
         altered = subprocess.check_output(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(source),
@@ -203,6 +203,7 @@ def main():
     results['default_synthesis'] = {'steps': 16, 'precision': 'fp32', 'presets_tested': 2,
                                    'source_clones_tested': 2}
     results['pronunciation_evaluated'] = False
+    results['reference_text_verified'] = False
     results['batch_entrypoints'] = check_batch_entrypoints(root)
     subprocess.run([sys.executable, str(app_root / 'hmong_launcher.py'), '--check'],
                    check=True, cwd=app_root, timeout=180)
