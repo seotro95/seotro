@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 MAX_SECONDS = 3 * 60 * 60
 MAX_CHARACTERS = 200_000
-PROFILES = {'natural': (1.0, 0.22), 'story': (0.94, 0.5), 'news': (1.04, 0.25), 'calm': (0.88, 0.65), 'energetic': (1.12, 0.16)}
+PROFILES = {'natural': (1.0, 0.22), 'story': (0.94, 0.5), 'news': (1.04, 0.25), 'calm': (0.88, 0.65), 'energetic': (1.12, 0.16), 'review': (1.04, 0.18), 'documentary': (0.97, 0.35)}
 
 
 @dataclass

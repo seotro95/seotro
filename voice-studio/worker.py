@@ -111,17 +111,41 @@ def normalize_audio(raw, temporary, tempo, gain):
 
 
 _nano_pool = None
+_nano_pool_workers = None
 
 
 def close_nano_pool():
-    global _nano_pool
+    global _nano_pool, _nano_pool_workers
     if _nano_pool is not None:
         _nano_pool.shutdown(wait=True, cancel_futures=True)
         _nano_pool = None
+    _nano_pool_workers = None
 
 
 class EmptyVoiceError(ValueError):
     pass
+
+
+def valid_checkpoint(path):
+    """Reuse only complete, non-silent PCM matching the assembly format."""
+    try:
+        with wave.open(str(path), 'rb') as audio:
+            if (audio.getnchannels(), audio.getsampwidth(), audio.getframerate()) != (1, 2, 24000):
+                return False
+            remaining = audio.getnframes()
+            if remaining <= 0:
+                return False
+            audible = False
+            while remaining:
+                expected = min(65536, remaining)
+                block = audio.readframes(expected)
+                if len(block) != expected * 2:
+                    return False
+                audible = audible or any(block)
+                remaining -= expected
+            return audible
+    except (OSError, wave.Error, EOFError):
+        return False
 
 
 def prepare_chunk(job, segment, index, work, synthesize=None):
@@ -133,10 +157,8 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
     work = Path(work)
     part = work / f'{index:06d}.wav'
     if part.exists():
-        try:
-            with wave.open(str(part)) as audio:
-                if audio.getnframes()>0 and any(audio.readframes(audio.getnframes())):return
-        except (OSError,wave.Error,EOFError):pass
+        if valid_checkpoint(part):
+            return
         part.unlink()
     custom=synthesize is not None
     raw = work / f'raw-{index:06d}.wav'
@@ -152,12 +174,24 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
             synthesize=get_synthesizer(settings)
         try:
             synthesize(segment.text,raw)
-            if not raw.is_file() or sf.info(str(raw)).frames==0:raise EmptyVoiceError('Model không tạo mẫu âm thanh.')
+            if not raw.is_file():
+                raise EmptyVoiceError('Model không tạo mẫu âm thanh.')
+            try:
+                info = sf.info(str(raw))
+                raw_samples, _ = sf.read(str(raw), dtype='float32')
+            except sf.LibsndfileError as exc:
+                raise EmptyVoiceError('Model tạo tệp âm thanh hỏng.') from exc
+            if info.frames == 0 or raw_samples.shape[0] != info.frames:
+                raise EmptyVoiceError('Model tạo mẫu âm thanh rỗng hoặc chưa đầy đủ.')
+            if not np.all(np.isfinite(raw_samples)):
+                raise EmptyVoiceError('Model tạo mẫu âm thanh không hợp lệ.')
+            del raw_samples
             normalize_audio(raw, temporary, tempo, gain)
             with wave.open(str(temporary)) as audio:
                 samples=np.frombuffer(audio.readframes(audio.getnframes()),dtype='<i2')
             if not len(samples) or not np.any(samples):raise EmptyVoiceError('Âm thanh rỗng hoặc chỉ có im lặng.')
         except EmptyVoiceError:
+            temporary.unlink(missing_ok=True)
             if attempt<2:continue
             excerpt=segment.text[:100].replace('\n',' ')
             raise ValueError(f'{label}: giọng {job.get("speaker") or job.get("engine")} vẫn không tạo được âm thanh sau 3 lần thử. Lời: “{excerpt}”. Kiểm tra ngôn ngữ, sửa câu hoặc chọn giọng khác. Không bỏ qua câu này.') from None
@@ -168,11 +202,12 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
 
 
 def render(job, synthesize=None):
-    global _nano_pool, _cached_synth, _cached_key
-    parallel = job.get('engine') == 'vieneu_nano' and job.get('nano_parallel', 1) == 2 and synthesize is None
-    if not parallel:
+    global _nano_pool, _nano_pool_workers, _cached_synth, _cached_key
+    workers = min(4, max(1, job.get('nano_parallel', 1)))
+    parallel = job.get('engine') == 'vieneu_nano' and workers > 1 and synthesize is None
+    if not parallel or (_nano_pool is not None and _nano_pool_workers not in (None, workers)):
         close_nano_pool()
-    elif _cached_synth is not None:
+    if parallel and _cached_synth is not None:
         _cached_synth = None
         _cached_key = None
         gc.collect()
@@ -207,11 +242,12 @@ def render(job, synthesize=None):
             if (work / 'cancel.flag').exists():
                 raise InterruptedError('Tác vụ đã dừng; các đoạn đã tạo được giữ để tiếp tục.')
             if parallel:
-                for ahead in range(index, min(index+2, len(segments))):
+                for ahead in range(index, min(index+workers, len(segments))):
                     candidate = segments[ahead]
                     if candidate.text and ahead not in futures:
                         if _nano_pool is None:
-                            _nano_pool = ProcessPoolExecutor(max_workers=2, mp_context=multiprocessing.get_context('spawn'))
+                            _nano_pool = ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context('spawn'))
+                            _nano_pool_workers = workers
                         futures[ahead] = _nano_pool.submit(prepare_chunk, payload, candidate, ahead, str(work))
             segment_start = writer.frames / writer.rate
             if cues and (index == 0 or segment.cue != segments[index-1].cue):

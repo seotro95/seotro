@@ -1,4 +1,4 @@
-"""Open the bundled Windows app without system Python, pip or FFmpeg setup."""
+"""Launch the local app on a free loopback port and open the browser when ready."""
 import json
 import os
 from pathlib import Path
@@ -25,11 +25,13 @@ def main():
     root = Path(__file__).resolve().parent
     port = available_port()
     url = f'http://127.0.0.1:{port}'
-    print('Dang mo Voice Studio. Du lieu duoc luu trong voice-studio/.data.', flush=True)
+    data = Path(os.environ.get('VOICE_STUDIO_DATA_DIR', str(root / '.data'))).resolve()
+    print(f'Dang mo Voice Studio. Du lieu: {data}', flush=True)
     process = subprocess.Popen([sys.executable, '-m', 'uvicorn', 'app:app', '--host', '127.0.0.1', '--port', str(port), '--no-access-log'], cwd=root)
     try:
         opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
-        for _ in range(240):
+        deadline = time.monotonic() + 60
+        while time.monotonic() < deadline:
             if process.poll() is not None:
                 raise RuntimeError('Khong mo duoc studio. Xem thong bao loi ben tren.')
             try:
@@ -43,7 +45,10 @@ def main():
         else:
             raise RuntimeError('Studio chua san sang sau 60 giay.')
         print(f'Studio: {url}\nGiu cua so nay mo. Bam Ctrl+C de tat.', flush=True)
-        webbrowser.open(url+'/?v='+studio_version)
+        try:
+            webbrowser.open(url+'/?v='+studio_version)
+        except webbrowser.Error:
+            print('Khong tu mo duoc trinh duyet. Mo dia chi Studio ben tren.', flush=True)
         process.wait()
     except KeyboardInterrupt:
         pass

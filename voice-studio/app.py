@@ -102,7 +102,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.6.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.6.2', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -216,6 +216,11 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
             duration = audio.getnframes() / audio.getframerate()
         if not 3 <= duration <= 30:
             raise HTTPException(422, 'Dùng mẫu dài từ 3 đến 30 giây. Nên thu một người nói, ít tạp âm, không nhạc nền.')
+        import numpy as np
+        import soundfile as sf
+        samples, _ = sf.read(str(target), dtype='float32')
+        if not np.all(np.isfinite(samples)) or not np.any(np.abs(samples) > 0.0001):
+            raise HTTPException(422, 'Mẫu giọng chỉ có im lặng hoặc âm thanh không hợp lệ. Hãy thu lại lời nói rõ tiếng.')
         record = {'id': ident, 'name': name.strip(), 'category': 'cloned', 'languages': [language], 'language': language, 'transcript': transcript.strip(), 'description': f'Mẫu giọng cá nhân · {duration:.1f}s', 'duration': duration, 'consent_at': now(), 'created_at': now()}
         write_json(DATA / 'voices' / f'{ident}.json', record)
         return record
@@ -268,7 +273,7 @@ class Speech(BaseModel):
     logos: list[dict] = Field(default_factory=list,max_length=20)
     logo: dict[str, int] | None = None
     nano_threads: int = Field(default=2, ge=1, le=8)
-    nano_parallel: int = Field(default=1, ge=1, le=2)
+    nano_parallel: int = Field(default=1, ge=1, le=4)
     nano_steps: int = Field(default=8, ge=4, le=16)
     max_minutes: int = Field(default=180, ge=1, le=180)
     delivery: str = 'natural'
@@ -405,7 +410,7 @@ def speech(body: Speech):
         raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
     if engine != 'system' and not (DATA / 'models' / f'{engine}.ready').exists():
-        raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Chạy lệnh tải mô hình trong hướng dẫn cài đặt.')
+        raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Bấm Tải model cho giọng đang chọn, chờ kiểm tra hoàn tất rồi tạo lại. Cần Internet ở bước tải.')
     try:
         segment_plan = 'nano-packed-v1' if engine == 'vieneu_nano' and body.paragraph_pause == 0 else 'classic-v1'
         segments = plan_segments({**body.model_dump(), 'engine': engine, 'segment_plan': segment_plan})

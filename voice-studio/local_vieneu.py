@@ -16,7 +16,10 @@ class LocalVieneu(V3TurboVieNeuTTS):
         descriptor, path = tempfile.mkstemp(prefix='reference-', suffix='.wav', dir=root)
         os.close(descriptor)
         try:
-            return V3TurboVieNeuTTS._preclean_reference_audio(ref_audio, top_db=top_db, out_path=path)
+            cleaned = V3TurboVieNeuTTS._preclean_reference_audio(ref_audio, top_db=top_db, out_path=path)
+            if Path(cleaned).resolve() != Path(path).resolve():
+                Path(path).unlink(missing_ok=True)
+            return cleaned
         except Exception:
             Path(path).unlink(missing_ok=True)
             raise

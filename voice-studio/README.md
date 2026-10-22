@@ -1,3 +1,29 @@
+# Voice Studio 3.6.2 — giọng cục bộ và bộ Windows kèm mô hình
+
+## Mở gói Windows đầy đủ
+
+Giải nén **toàn bộ** ZIP vào thư mục có quyền ghi, rồi mở **MO_VOICE_STUDIO.bat** ở thư mục gốc. Gói kèm Python 3.12, thư viện CPU, FFmpeg, mô hình Nano/Turbo và Whisper base. Không cần cài Python, không cần API key hoặc tải lại các mô hình Việt đi kèm. Có thể chạy **KIEM_TRA_TOOL.bat** để kiểm tra offline; giữ cửa sổ tool mở khi sử dụng. Môi trường đích là Windows 10/11 x64; gói được ghép trên Linux, chưa kiểm thử trên Windows thật.
+
+Dữ liệu cá nhân nằm trong `voice-studio/.data`. Khi cập nhật, sao lưu thư mục này; không xóa mẫu giọng hoặc lịch sử. Chỉ mở một server cho mỗi thư mục dữ liệu. Tool tự chọn cổng trống và chỉ mở trình duyệt sau khi API sẵn sàng.
+
+## Tạo giọng, nhân bản và tệp
+
+- Chọn giọng sẵn sàng, nhập/dán lời hoặc nhập **TXT/SRT**, rồi tạo giọng. Tải **WAV/MP3**, xuất lời **TXT/SRT**; SRT xuất từ TXT dùng mốc âm thanh đã tạo.
+- Nhịp đọc: **Tự nhiên, Kể chuyện, Review · giới thiệu sản phẩm, Thuyết minh, Tin tức, Thư giãn, Sôi nổi**. Các lựa chọn điều chỉnh tốc độ/khoảng nghỉ, không phải mô hình diễn cảm mới.
+- Nhân bản: thêm mẫu 3–30 giây có quyền sử dụng, rõ lời, một người nói, rồi chọn giọng cá nhân để tạo nội dung mới. Mẫu im lặng bị từ chối. Lưu mẫu không phải huấn luyện lại mô hình; độ giống cần nghe kiểm tra. Turbo thực tế dùng tối đa khoảng 8 giây tham chiếu.
+- **Ưu tiên tốc độ** chọn Nano 4 bước; máy đủ ít nhất 4 CPU và 4 GB RAM trống dùng 4 tiến trình × 1 luồng. Máy ít tài nguyên có thể chọn 1–2 tiến trình. Giữ nguyên thứ tự câu và checkpoint khi tiếp tục. Nano 4 bước có thể giảm chất lượng; chế độ này không tự thay giọng nhân bản đã chọn.
+- Nhận dạng phụ đề Whisper đã kèm. Giọng quốc tế Qwen và AI dịch/viết kịch bản là tùy chọn, cần cài mô hình/dịch vụ riêng; không nằm trong gói CPU cơ bản.
+
+## Các lỗi đã sửa và kiểm chứng
+
+Đã truy cập Hugging Face, tải và chạy thật Nano/Turbo/Whisper; nhân bản Turbo và nhận dạng được kiểm tra với chế độ offline. Sửa WAV checkpoint bị cắt cụt/sai định dạng khi tiếp tục, thử lại âm thanh rỗng/hỏng/NaN, dọn tệp tham chiếu tạm, kiểm tra RAM và lỗi launcher/bộ cài. Bộ cài mặc định dùng ONNX CPU; Qwen/PyTorch là tùy chọn `--qwen`. Linux dùng `bash install.sh`, `bash start.sh`; `--no-models` bỏ bước tải mô hình đã có.
+
+**154 kiểm thử đạt, 1 bỏ qua**; đã kiểm tra trình duyệt Chromium. Đo trọn 1 giờ âm thanh Nano 4 bước: **205,3 giây (3 phút 25 giây), 17,54×** trên máy cloud CPU này, chưa đạt 2 phút. Chi tiết trong `VALIDATION-3.6.2.md`. Thư viện Windows được kiểm tra checksum, phụ thuộc và các DLL đi kèm. Chưa chạy gói trên Windows thật; không coi kiểm thử Linux là kiểm thử Windows.
+
+Không bảo đảm 1 giờ âm thanh trong 2 phút trên mọi máy. Kết quả đo thực tế nằm trong báo cáo; không dùng tốc độ chia văn bản, âm thanh giả lập hoặc thời gian tiếp tục từ cache để quảng cáo tốc độ tạo giọng.
+
+---
+
 
 ## Màn hình Video đơn giản (3.1)
 

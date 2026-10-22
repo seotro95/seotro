@@ -23,7 +23,9 @@ def sample(seconds=5):
         audio.setnchannels(1)
         audio.setsampwidth(2)
         audio.setframerate(24000)
-        audio.writeframes(b'\x00\x00' * (24000 * seconds))
+        import math
+        from array import array
+        audio.writeframes(array('h', (int(6000 * math.sin(i * 2 * math.pi * 220 / 24000)) for i in range(24000 * seconds))).tobytes())
     return file.getvalue()
 
 
