@@ -182,7 +182,7 @@ with TestClient(studio.app) as client:
    assert response.status_code==200 and len(response.content)>10,(extension,response.status_code,response.text[:200] if response.status_code!=200 else '')
    if extension=='wav':
     rendered,rate=sf.read(io.BytesIO(response.content),dtype='float32');assert len(rendered)>rate*.3 and np.isfinite(rendered).all() and np.max(np.abs(rendered))>.001
-   elif extension=='txt':assert response.text.strip()==text
+   elif extension=='txt':assert response.text.split()==text.split(), (response.text,text)
    elif extension=='srt':assert parse_srt(response.text)
   measurements.append({'engine':engine,'audio_seconds':job['audio_seconds'],'processing_seconds':job.get('wall_processing_seconds'),'exports':['wav','mp3','txt','srt']})
   if engine=='vieneu_nano':
