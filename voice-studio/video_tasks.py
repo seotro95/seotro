@@ -45,7 +45,7 @@ def run(path):
     if job['action']=='prepare_voice':
         import subprocess,importlib.util
         engine=job['engine']
-        if engine not in {'qwen','qwen_clone','vieneu','vieneu_nano','f5_hmong'}:raise ValueError('Model giọng không hợp lệ.')
+        if engine not in {'qwen','qwen_clone','vieneu','vieneu_nano','f5_hmong','hmong_native'}:raise ValueError('Model giọng không hợp lệ.')
         def prepare_update(value,phase):
             write_progress(work/'progress.json',{'progress':value,'phase':phase})
         env=dict(os.environ,VOICE_STUDIO_DATA_DIR=str(data),HF_HOME=str(data/'models'/'cache'),HF_HUB_DISABLE_XET='1')
@@ -56,7 +56,10 @@ def run(path):
             prepare_update(25,'Đang cài thư viện giọng quốc tế')
             subprocess.run([sys.executable,'-m','pip','install','-r',str(Path(__file__).parent/'requirements-qwen.txt')],check=True,env=env,timeout=1800)
         prepare_update(45,'Đang tải và kiểm tra model '+engine+' · có thể mất vài phút')
-        preparation = [sys.executable,str(Path(__file__).parent/'prepare_hmong.py')] if engine=='f5_hmong' else [sys.executable,str(Path(__file__).parent/'prepare_models.py'),engine]
+        hmong_preparers = {'f5_hmong': 'prepare_hmong.py', 'hmong_native': 'prepare_hmong_native.py'}
+        preparation = ([sys.executable, str(Path(__file__).parent / hmong_preparers[engine])]
+                       if engine in hmong_preparers else
+                       [sys.executable, str(Path(__file__).parent / 'prepare_models.py'), engine])
         subprocess.run(preparation,check=True,env=env,timeout=3600)
         prepare_update(100,'Giọng đã sẵn sàng. Chọn giọng và tạo lại.');return
     if job['action']=='translate_text':

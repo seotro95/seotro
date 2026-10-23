@@ -10,6 +10,14 @@ import sys
 BASE = Path(__file__).resolve().parent
 
 
+def selected_backend():
+    backend = os.getenv('HMOOB_BACKEND', 'f5').lower()
+    if backend not in {'f5', 'native'}:
+        raise RuntimeError('HMOOB_BACKEND chỉ nhận f5 hoặc native. '
+                           'Mở MO_VOICE_STUDIO_HMONG.bat hoặc MO_HMONG_NHANH.bat của gói đầy đủ.')
+    return backend
+
+
 def check_dependencies():
     packages = ('f5-tts', 'torch', 'torchaudio', 'fastapi', 'uvicorn', 'httpx',
                 'python-multipart', 'pydantic', 'psutil', 'soundfile', 'soxr')
@@ -56,6 +64,7 @@ def main(argv=None):
     parser.add_argument('--no-browser', action='store_true')
     action.add_argument('--install-cuda', action='store_true', help='Install a separate NVIDIA runtime explicitly.')
     args = parser.parse_args(argv)
+    backend = selected_backend()
     try:
         from bundle_check import validate_bundle
     except ModuleNotFoundError:
@@ -81,15 +90,22 @@ def main(argv=None):
                                cwd=BASE, env=environment)
     check_dependencies()
     check_audio_tools()
-    command = [sys.executable, str(BASE / 'prepare_hmong.py')]
-    print('Voice Studio Hmong · Kiểm tra tệp mô hình đã lưu...', flush=True)
+    prepare_script = 'prepare_hmong_native.py' if backend == 'native' else 'prepare_hmong.py'
+    command = [sys.executable, str(BASE / prepare_script)]
+    label = 'Hmong nhanh thử nghiệm' if backend == 'native' else 'F5-Hmong'
+    print('Voice Studio Hmong · ' + label + ' · Kiểm tra tệp mô hình đã lưu...', flush=True)
     result = subprocess.run(command + ['--verify-only'], cwd=BASE,
                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     if result.returncode:
         if args.check:
             print('Thiếu mô hình hoặc checksum không đạt. Mở tool để chuẩn bị lần đầu bằng mạng được phép.', flush=True)
             return 1
-        print('Lần đầu cần tải khoảng 1,4 GB F5-Hmong/Vocos từ nguồn chính thức. Giữ cửa sổ này mở.', flush=True)
+        if backend == 'native':
+            print('Lần đầu cần tải khoảng 580 MB mô hình đọc Hmong, chuyển giọng và dấu nhận diện âm thanh AI. '
+                  'Bộ đọc nhanh đang thử nghiệm; chưa xác nhận phát âm chuẩn hoặc mục tiêu 30×. '
+                  'Giữ cửa sổ này mở.', flush=True)
+        else:
+            print('Lần đầu cần tải khoảng 1,4 GB F5-Hmong/Vocos từ nguồn chính thức. Giữ cửa sổ này mở.', flush=True)
         subprocess.run(command, cwd=BASE, check=True)
     if args.check or args.setup_only:
         print('PASS: đủ ứng dụng/giao diện, giọng mặc định, FFmpeg, thư viện và checksum mô hình. '

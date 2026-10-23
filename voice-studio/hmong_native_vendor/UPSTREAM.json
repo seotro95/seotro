@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "package": "vits",
+      "repository": "https://github.com/jaywalnut310/vits",
+      "revision": "2e561ba58618d021b5b8323d3765880f7e0ecfdb",
+      "original_files": [
+        {
+          "path": "models.py",
+          "sha256": "de1f89cfed83b5b345a6b90c3f987b8e390b95041f0ab466e5bf76cef94a0875"
+        },
+        {
+          "path": "modules.py",
+          "sha256": "f6514eaf7fab47d866ee0f9da94ca6ab6e45ebaf246151408da20dd14f242a75"
+        },
+        {
+          "path": "commons.py",
+          "sha256": "f223dc1df791d2fb2953cfebd7014a7bc2a6ed614c05de6c17c7b44718a42cdd"
+        },
+        {
+          "path": "attentions.py",
+          "sha256": "dc65085d0e5d67da9f7603c98efad1e27eaf42c572f632a58080a5cc0f577f92"
+        },
+        {
+          "path": "transforms.py",
+          "sha256": "9d95e518610c35581c4f1c3b4e8eeca91b7c3d6899e7f0ebb86a0387394d3046"
+        },
+        {
+          "path": "text/symbols.py",
+          "sha256": "e8871acbc37bd79f61ed063a2b3aa20e20555ddec15c6b9f29e1ab05e7f8b776"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "3d8165162cef96f686f02146ac2e4ae80db5797296a99c658befa424ee64727b"
+        }
+      ]
+    },
+    {
+      "package": "openvoice",
+      "repository": "https://github.com/myshell-ai/OpenVoice",
+      "revision": "74a1d147b17a8c3092dd5430504bd83ef6c7eb23",
+      "original_files": [
+        {
+          "path": "models.py",
+          "sha256": "54f9e8284a0e9a89c75cb3163d2694cf34d90a5d05cfbcbf12ccd4f0b1ba2dc8"
+        },
+        {
+          "path": "modules.py",
+          "sha256": "b2376049141934eb63bb4d905920c486a286bec65f0735b78ba52b2fb54564d0"
+        },
+        {
+          "path": "commons.py",
+          "sha256": "046943d265635c3d9c99195562e703564a26300981a7db5b87d4cd3fd180ae0d"
+        },
+        {
+          "path": "attentions.py",
+          "sha256": "6a392057838e6051afc8beed43c2d1279d75de8c8b600552e7232ad930b356c3"
+        },
+        {
+          "path": "transforms.py",
+          "sha256": "e6798989a0d75cbec45e7e24e3697e1c4886b3664c6a80a452645ef1d2a93f9c"
+        },
+        {
+          "path": "mel_processing.py",
+          "sha256": "b8fd9924f8fb4c5b31031e04464c4a8145104e4bdfc3c29ecb6c485fa3b5c049"
+        }
+      ]
+    },
+    {
+      "package": "watermark",
+      "repository": "https://pypi.org/project/wavmark/0.0.3/",
+      "revision": "wheel SHA256 f77c7234e66b6983273fa7bd7509acaa9195cd936fd1c178b46c8e996d7e8f02",
+      "original_files": [
+        {
+          "path": "models/my_model.py",
+          "sha256": "d26d15e2bf8c4f29b3f7ca3cf1979895b7002af86b1c48a24bf7f586493a39cc"
+        },
+        {
+          "path": "models/hinet.py",
+          "sha256": "7fff7d2d95976c17d867274c35ef8e7ec53b15a9bcbb8b6ce040b999853fdaca"
+        },
+        {
+          "path": "models/invblock.py",
+          "sha256": "0e620b3bf189f3e1c0f894fb8c51b3ebe7b6a65b88cfd6f4aca99f8eebf35e12"
+        },
+        {
+          "path": "models/rrdb_denselayer.py",
+          "sha256": "574991a8f4a7ef519ed0bd80351deb0732ac147010f2b8b74aa79e090fe2794d"
+        },
+        {
+          "path": "models/module_util.py",
+          "sha256": "81466507c986b8c8fb7ac16e1cd9f2d9f26d07a82a22a532713d0025a3c22728"
+        }
+      ]
+    }
+  ],
+  "local_changes": [
+    "Private relative imports prevent namespace collisions.",
+    "VITS training-only monotonic_align import is lazy; inference needs no compiled MAS extension.",
+    "VITS inference rejects nonfinite or over-limit predicted duration before allocating alignment.",
+    "Empty package initializers contain descriptive docstrings.",
+    "Normalize Python source trailing whitespace and final newline without changing operations."
+  ]
+}

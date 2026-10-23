@@ -1,4 +1,4 @@
-"""Exercise the relocated Windows Hmong bundle with real offline F5 synthesis.
+"""Exercise the relocated Windows bundle with real offline native/F5 speech.
 
 Run only on a fresh builder-owned directory. This script creates QA jobs but
 never deletes personal data; the builder removes its own QA directory afterward.
@@ -6,6 +6,7 @@ never deletes personal data; the builder removes its own QA directory afterward.
 from __future__ import annotations
 
 import io
+import argparse
 import hashlib
 import json
 import math
@@ -39,6 +40,7 @@ def check_batch_entrypoints(root):
         # Supplying --check must forward the offline CPU check, never install
         # or download the optional CUDA environment during the native build.
         entries.append((prefix + 'install_hmong_cuda.bat', '--check'))
+    entries.append(('MO_HMONG_NHANH.bat', '--check'))
     results = {}
     shell = os.environ.get('COMSPEC', 'cmd.exe')
     for relative, flag in entries:
@@ -46,20 +48,23 @@ def check_batch_entrypoints(root):
         print('Native cmd.exe entrypoint:', relative, flag, flush=True)
         # The working directory itself contains spaces after relocation. The
         # ASCII basename avoids cmd's special handling of a quoted /c command.
-        completed = subprocess.run([shell, '/d', '/c', batch.name, flag], cwd=batch.parent,
+        backend = 'native' if relative == 'MO_HMONG_NHANH.bat' else 'f5'
+        environment = dict(os.environ, HMOOB_BACKEND=backend)
+        completed = subprocess.run([shell, '/d', '/c', batch.name, flag], cwd=batch.parent, env=environment,
             stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
             text=True, encoding='utf-8', errors='replace', timeout=180)
         print(completed.stdout, end='', flush=True)
         if completed.returncode or 'PASS:' not in completed.stdout:
             raise RuntimeError(f'Batch entrypoint failed: {relative} {flag}, exit {completed.returncode}')
         results[relative] = {'argument': flag, 'exit_code': completed.returncode,
-                             'model_download_required': False}
+                             'model_download_required': False,
+                             'engine': 'hmong_native' if backend == 'native' else 'f5_hmong'}
     return results
 
 
-def check_source_reference(personal, metadata, gender):
+def check_source_reference(personal, metadata, gender, *, engine='f5_hmong'):
     """Known source clones must use the current manifest, even for short MP3s."""
-    assert personal['engine'] == 'f5_hmong'
+    assert personal['engine'] == engine
     assert personal['automatic_reference'] is True
     assert personal['known_preset'] == 'hmong-' + gender
     assert personal['source_sha256'] == metadata['sha256']
@@ -115,15 +120,22 @@ def export_generated_preview(client, job, reports):
             'speed_report': job['speed_report'],
             'pronunciation_test_words': PRONUNCIATION_TEST_WORDS,
             'pronunciation_evaluated': False, 'target_30x_verified': False,
-            'settings': {key: job[key] for key in ('hmong_steps', 'hmong_precision', 'delivery',
+            'settings': {key: job[key] for key in ('engine', 'hmong_backend', 'hmong_steps',
+                'hmong_precision', 'hmong_device', 'delivery',
                 'emotion', 'emotion_strength', 'auto_rhythm', 'hmong_phrase_context')},
             'expression': job.get('expression')}
 
 
 def main():
     assert os.name == 'nt', 'This validation must run on native Windows'
-    root = Path(sys.argv[1]).resolve()
-    reports = Path(sys.argv[2]).resolve()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('root', type=Path)
+    parser.add_argument('reports', type=Path)
+    parser.add_argument('--backend', choices=('native', 'f5'), default='native')
+    args = parser.parse_args()
+    root, reports = args.root.resolve(), args.reports.resolve()
+    os.environ['HMOOB_BACKEND'] = args.backend
+    engine = 'hmong_native' if args.backend == 'native' else 'f5_hmong'
     app_root = root / 'voice-studio-hmong'
     assert Path(sys.executable).resolve().parent == root / 'runtime', 'Use the packaged interpreter'
     assert Path(sys.prefix).resolve() == root / 'runtime', 'Interpreter did not relocate'
@@ -142,9 +154,11 @@ def main():
         assert voice_metadata[gender]['reference_text_source'] == 'user_provided_for_selected_excerpt'
     for binary in ('ffmpeg', 'ffprobe'):
         subprocess.run([binary, '-version'], check=True, stdout=subprocess.DEVNULL)
-    results = {'success': False, 'platform': sys.platform, 'voices': {}, 'clone': False,
+    results = {'success': False, 'platform': sys.platform, 'engine': engine,
+               'hmong_backend': 'vits_openvoice_v2' if args.backend == 'native' else 'f5',
+               'voices': {}, 'clone': False,
                'full_source_previews': {}, 'source_clones': {}, 'manual_crop': False,
-               'txt_srt': False, 'mp3': False, 'normal_launcher': False, 'batch_entrypoints': {},
+               'txt_srt': False, 'mp3': False, 'fast_launcher': False, 'batch_entrypoints': {},
                'expression': {}, 'generated_auditions': {},
                'pronunciation_test_words': PRONUNCIATION_TEST_WORDS,
                'target_30x_verified': False, 'cuda_installer_included': True,
@@ -166,6 +180,11 @@ def main():
                 break
             time.sleep(.3)
         assert job['status'] == 'done', job
+        assert job['engine'] == engine
+        if args.backend == 'native':
+            assert job['hmong_backend'] == 'vits_openvoice_v2' and job['hmong_steps'] is None
+        else:
+            assert job['hmong_steps'] == 16
         response = client.get('/api/audio/' + job['id'])
         assert response.status_code == 200, response.text
         samples, rate = sf.read(io.BytesIO(response.content), dtype='float32')
@@ -176,14 +195,37 @@ def main():
         assert job['expression']['emphasis_scope'] == 'phrase'
         return job
 
+    if args.backend == 'f5':
+        # A distinct process keeps app/model globals and model caches separate.
+        with TestClient(studio.app) as client:
+            config = client.get('/api/config').json()
+            assert config['hmong_engine'] == 'f5_hmong' and config['hmong_steps'] == 16
+            assert config['models']['f5_hmong'] is True
+            started = time.monotonic()
+            job = render(client, {'text': 'Nyob zoo, kuv yog ib tug Hmoob.', 'language': 'mww',
+                                 'voice_id': 'hmong-male', 'format': 'wav', 'paragraph_pause': 0})
+            assert job['hmong_precision'] == 'fp32' and job['hmong_device'] == 'cpu'
+            compatibility = {'success': True, 'engine': engine, 'steps': 16, 'precision': 'fp32',
+                'device': 'cpu', 'real_synthesis': True, 'voice_id': 'hmong-male',
+                'audio_seconds': job['audio_seconds'], 'spoken_audio_seconds': job['spoken_audio_seconds'],
+                'speed_report': job['speed_report'], 'request_wall_seconds': round(time.monotonic() - started, 3),
+                'pronunciation_evaluated': False, 'target_30x_verified': False,
+                'cuda_inference_validated': False}
+        compatibility['normal_launcher'] = check_web_launcher(root, 'f5')
+        reports.mkdir(parents=True, exist_ok=True)
+        (reports / 'f5-smoke.json').write_text(json.dumps(compatibility, ensure_ascii=False, indent=2), encoding='utf-8')
+        print('PASS: preserved F5 CPU16-step FP32 actual synthesis and normal launcher.', flush=True)
+        return
+
     with TestClient(studio.app) as client:
         config = client.get('/api/config').json()
         assert config['variant'] == 'hmong' and config['default_language'] == 'mww'
-        assert config['hmong_steps'] == 16 and config['default_voice_id'] == 'hmong-male'
+        assert config['hmong_engine'] == engine and config['hmong_steps'] is None
+        assert config['hmong_backend'] == 'native' and config['default_voice_id'] == 'hmong-male'
         assert config['delivery'] == 'story' and config['emotion'] == 'warm'
         assert config['emotion_strength'] == .65 and config['auto_rhythm'] is False
         assert config['hmong_phrase_context'] is True
-        assert config['models']['f5_hmong'] and not config['nano_ready']
+        assert config['models'][engine] and not config['nano_ready']
         assert config['subtitle_ready'] is False, 'Do not claim Hmong Whisper recognition'
         for asset in ('app.js', 'workspace.js', 'style.css'):
             assert client.get('/static/' + asset).status_code == 200
@@ -218,8 +260,9 @@ def main():
                                       'inserted_silence_seconds': job['inserted_silence_seconds'],
                                       'speed_report': job['speed_report'],
                                       'wall_seconds': round(time.monotonic() - started, 3),
+                                      'engine': job['engine'], 'backend': job['hmong_backend'],
                                       'steps': job['hmong_steps'], 'precision': job['hmong_precision']}
-            assert job['hmong_steps'] == 16 and job['hmong_precision'] == 'fp32'
+            assert job['hmong_steps'] is None and job['hmong_precision'] == 'fp32'
             assert job['hmong_device'] == 'cpu'
             assert job['segment_plan'] == 'hmong-expression-v1'
             assert job['hmong_phrase_context'] is True and job['auto_rhythm'] is False
@@ -248,6 +291,18 @@ def main():
                 results['expression']['markup_removed_from_spoken_srt'] = True
             results['txt_srt'] = True
             results['generated_auditions'][ident] = export_generated_preview(client, job, reports)
+            pipeline_wall = time.monotonic() - started
+            results['generated_auditions'][ident]['full_pipeline'] = {
+                'wall_seconds': round(pipeline_wall, 3),
+                'worker_wall_seconds': job['wall_processing_seconds'],
+                'spoken_realtime_multiplier': round(job['spoken_audio_seconds'] / pipeline_wall, 3),
+                'includes': ['speech_request', 'model_loading_when_needed',
+                             'reference_embedding_when_needed', 'VITS', 'OpenVoice_conversion',
+                             'watermark_when_audio_long_enough',
+                             'expression', 'job_polling', 'WAV_readback', 'TXT_SRT_export',
+                             'MP3_export', 'ffprobe'],
+                'model_cache': 'process_first_job' if ident == 'hmong-female' else 'warm_process',
+                'estimate_only': True, 'target_30x_verified_one_hour': False}
         assert len(results['generated_auditions']) == 2
         results['mp3'] = True
 
@@ -260,13 +315,13 @@ def main():
                     files={'file': (source.name, audio, 'audio/mpeg')})
             assert response.status_code == 201, response.text
             personal = response.json()
-            check_source_reference(personal, metadata, gender)
+            check_source_reference(personal, metadata, gender, engine=engine)
             started = time.monotonic()
             clone = render(client, {'text': 'Kuv zoo siab tau ntsib nej.', 'language': 'mww',
                                    'voice_id': personal['id'],
                                    'format': 'wav', 'paragraph_pause': 0})
-            assert clone['engine'] == 'f5_hmong'
-            assert clone['hmong_steps'] == 16 and clone['hmong_precision'] == 'fp32'
+            assert clone['engine'] == engine
+            assert clone['hmong_steps'] is None and clone['hmong_precision'] == 'fp32'
             results['source_clones'][gender] = {
                 'source_sha256': personal['source_sha256'], 'source_seconds': personal['source_duration'],
                 'reference_seconds': personal['duration'], 'automatic_reference': True,
@@ -274,6 +329,7 @@ def main():
                 'spoken_audio_seconds': clone['spoken_audio_seconds'],
                 'inserted_silence_seconds': clone['inserted_silence_seconds'],
                 'speed_report': clone['speed_report'],
+                'engine': clone['engine'], 'backend': clone['hmong_backend'],
                 'steps': clone['hmong_steps'], 'precision': clone['hmong_precision'],
                 'wall_seconds': round(time.monotonic() - started, 3)}
         results['clone'] = True
@@ -301,19 +357,19 @@ def main():
         response = client.post('/api/voices/clone', data=fields, files=files)
         assert response.status_code == 201, response.text
         manual = response.json()
-        assert manual['engine'] == 'f5_hmong' and manual['automatic_reference'] is False
+        assert manual['engine'] == engine and manual['automatic_reference'] is False
         assert manual['transcript'] == female['reference']['text']
         assert abs(manual['reference_start'] - manual_start) < .01
         assert abs(manual['reference_end'] - manual_end) < .01
         assert abs(manual['duration'] - reference_seconds) < .05
         manual_job = render(client, {'text': 'Peb zoo siab tau nyob ua ke.', 'language': 'mww',
-                                    'voice_id': manual['id'], 'hmong_steps': 4,
+                                    'voice_id': manual['id'],
                                     'format': 'wav', 'paragraph_pause': 0})
-        assert manual_job['engine'] == 'f5_hmong'
+        assert manual_job['engine'] == engine
         results['manual_crop'] = True
         srt_text = '1\n00:00:00,000 --> 00:00:12,000\nNyob zoo, kuv yog ib tug Hmoob.\n'
         aligned = render(client, {'text': srt_text, 'input_format': 'srt', 'language': 'mww',
-                                 'voice_id': 'hmong-female', 'hmong_steps': 4,
+                                 'voice_id': 'hmong-female',
                                  'format': 'wav', 'paragraph_pause': 0, 'max_cue_tempo': 2})
         assert abs(aligned['audio_seconds'] - 12) < .1
         assert aligned['spoken_audio_seconds'] < aligned['audio_seconds']
@@ -323,20 +379,32 @@ def main():
         assert saved.status_code == 200 and '00:00:12,000' in saved.text
         results['srt_timeline'] = True
 
-    # Both presets above use the same default natural 16-step FP32 setting.
-    # Both source clones also use the natural default; manual crop and SRT
-    # jobs explicitly exercise the optional draft path.
-    results['default_synthesis'] = {'steps': 16, 'precision': 'fp32', 'presets_tested': 2,
-                                   'source_clones_tested': 2}
+    results['default_synthesis'] = {'engine': engine, 'backend': 'vits_openvoice_v2',
+                                   'steps': None, 'precision': 'fp32', 'device': 'cpu',
+                                   'presets_tested': 2, 'source_clones_tested': 2}
     results['pronunciation_evaluated'] = False
     results['reference_text_verified'] = True
     results['reference_text_source'] = 'user_provided_for_selected_excerpt'
     results['batch_entrypoints'] = check_batch_entrypoints(root)
+    results['fast_launcher'] = check_web_launcher(root, 'native')
+    results['success'] = True
+    reports.mkdir(parents=True, exist_ok=True)
+    (reports / 'native-smoke.json').write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding='utf-8')
+    print('PASS: CPU native VITS/OpenVoice presets/clones, six-word generated MP3s, expression, '
+          'full-pipeline timings, SRT and12 BAT paths. CUDA inference, pronunciation and30x remain unverified.', flush=True)
+
+
+def check_web_launcher(root, backend):
+    """Start the selected application using the actual relocated launcher."""
+    root = Path(root)
+    app_root = root / 'voice-studio-hmong'
+    environment = dict(os.environ, HMOOB_BACKEND=backend)
+    engine = 'hmong_native' if backend == 'native' else 'f5_hmong'
     subprocess.run([sys.executable, str(app_root / 'hmong_launcher.py'), '--check'],
-                   check=True, cwd=app_root, timeout=180)
-    print('Checking the normal Hmong launcher after relocation...', flush=True)
+                   check=True, cwd=app_root, env=environment, timeout=180)
+    print('Checking Hmong launcher after relocation:', backend, flush=True)
     process = subprocess.Popen([sys.executable, str(app_root / 'hmong_launcher.py'), '--no-browser'],
-        cwd=app_root, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+        cwd=app_root, env=environment, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
         encoding='utf-8', errors='replace')
     lines = queue.Queue()
     def read_output():
@@ -345,12 +413,13 @@ def main():
             lines.put(line)
     reader = threading.Thread(target=read_output, daemon=True)
     reader.start()
+    ready = False
     try:
         deadline = time.monotonic() + 180
         opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
         while time.monotonic() < deadline:
             if process.poll() is not None:
-                raise RuntimeError('Normal Hmong launcher exited: ' + str(process.returncode))
+                raise RuntimeError('Hmong launcher exited: ' + str(process.returncode))
             try:
                 line = lines.get(timeout=.25)
             except queue.Empty:
@@ -360,10 +429,11 @@ def main():
                 continue
             with opener.open(match[1] + '/api/config', timeout=5) as response:
                 live = json.load(response)
-            assert live['variant'] == 'hmong' and live['models']['f5_hmong'] and live['hmong_steps'] == 16
-            results['normal_launcher'] = True
+            assert live['variant'] == 'hmong' and live['models'][engine] and live['hmong_engine'] == engine
+            assert live['hmong_steps'] == (None if backend == 'native' else 16)
+            ready = True
             break
-        assert results['normal_launcher'], 'Normal launcher readiness timed out'
+        assert ready, 'Launcher readiness timed out: ' + backend
     finally:
         if process.poll() is None:
             if os.name == 'nt':
@@ -373,10 +443,7 @@ def main():
                 process.terminate()
             process.wait(timeout=30)
         reader.join(timeout=2)
-    results['success'] = True
-    reports.mkdir(parents=True, exist_ok=True)
-    (reports / 'native-smoke.json').write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding='utf-8')
-    print('PASS: CPU 16-step FP32 presets/clones, six-word generated auditions, phrase context, silence-excluding measurements, SRT/MP3 and11 native BAT paths. CUDA inference, pronunciation accuracy and30x remain unverified.', flush=True)
+    return ready
 
 
 if __name__ == '__main__':

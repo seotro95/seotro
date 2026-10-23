@@ -31,6 +31,7 @@ from system_voices import installed_voices
 from hardware import supports_int8, system_info
 from performance import speed_report
 from state_io import write_json_atomic,read_progress
+from hmong_assets import HMONG_ENGINES, active_engine as active_hmong_engine
 
 BASE = Path(__file__).resolve().parent
 DATA = Path(os.environ.get('VOICE_STUDIO_DATA_DIR', str(BASE / DEFAULT_DATA_FOLDER))).resolve()
@@ -59,6 +60,12 @@ if IS_HMONG:
 
 
 def model_ready(engine):
+    if engine == 'hmong_native':
+        try:
+            from hmong_native import availability
+        except ImportError:
+            return False
+        return availability()['ready']
     if engine == 'f5_hmong':
         from hmong_engine import availability
         return availability()['ready']
@@ -196,12 +203,17 @@ def config():
 
 def _config_values():
     if IS_HMONG:
+        engine = active_hmong_engine()
+        ready = model_ready(engine)
         return {'variant':'hmong','app_name':APP_NAME,'default_language':'mww','default_voice_id':'hmong-male','version':app.version,'mode':'local',
                 'languages':{'mww':LANGUAGES['mww']},'subtitle_languages':SUBTITLE_LANGUAGES,
                 'recognition_languages':{k:v for k,v in SUBTITLE_LANGUAGES.items() if k.split('-')[0] in RECOGNITION_CODES},
                 'ai_voice_languages':['mww'],'max_characters':MAX_CHARACTERS,'max_audio_minutes':180,
-                'fast_vieneu':False,'int8_cpu':False,'models':{'f5_hmong':model_ready('f5_hmong')},
-                'hmong_ready':model_ready('f5_hmong'),'hmong_steps':16,'paragraph_pause':0,'subtitle_ready':False,
+                'fast_vieneu':False,'int8_cpu':False,
+                'models':{name:(ready if name == engine else model_ready(name)) for name in HMONG_ENGINES},
+                'hmong_backend':'native' if engine == 'hmong_native' else 'f5','hmong_engine':engine,
+                'hmong_ready':ready,'hmong_steps':None if engine == 'hmong_native' else 16,
+                'paragraph_pause':0,'subtitle_ready':False,
                 'delivery':'story','emotion':'warm','emotion_strength':0.65,'auto_rhythm':False,
                 'hmong_phrase_context':True,
                 'hmong_reference_note':'Hai mẫu nam/nữ đi kèm dùng lời mẫu do bạn cung cấp và xác nhận khớp đoạn thu. Có thể nghe và sửa lời trong phần Nhân bản rồi lưu hồ sơ giọng đã chỉnh. Với mẫu khác, nhập lời khớp chính xác đoạn được chọn.',
@@ -214,6 +226,11 @@ def _config_values():
 def voices():
     entries=PRESETS+(installed_voices() if not IS_HMONG else [])+records('voices')
     entries=[{**voice,'engine':voice.get('engine','vieneu' if voice.get('languages',['vi'])[0]=='vi' else 'qwen_clone')} for voice in entries]
+    if IS_HMONG:
+        # Presentation and new renders use this launcher's backend. Keep the
+        # original profile JSON intact so old jobs can resume their own engine.
+        entries = [{**voice, 'engine': active_hmong_engine()}
+                   if voice['engine'] in HMONG_ENGINES else voice for voice in entries]
     return {'voices':[{**voice,'native_language':native_language(voice),'ready':model_ready(voice.get('engine','vieneu'))} for voice in entries]}
 
 
@@ -267,7 +284,7 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
             raise HTTPException(422, 'Mẫu giọng chỉ có im lặng hoặc âm thanh không hợp lệ. Hãy thu lại lời nói rõ tiếng.')
         record = {'id': ident, 'name': name.strip(), 'category': 'cloned', 'languages': [language], 'language': language, 'transcript': transcript.strip(), 'description': f'Mẫu giọng cá nhân · {duration:.1f}s', 'duration': duration, 'consent_at': now(), 'created_at': now()}
         if IS_HMONG:
-            record.update(engine='f5_hmong', **selection)
+            record.update(engine=active_hmong_engine(), **selection)
         write_json(DATA / 'voices' / f'{ident}.json', record)
         return record
     except (subprocess.TimeoutExpired, FileNotFoundError):
@@ -344,7 +361,7 @@ class Speech(BaseModel):
     export_quality: str = Field(default='balanced',pattern='^(best|balanced|fast)$')
     logos: list[dict] = Field(default_factory=list,max_length=20)
     logo: dict[str, int] | None = None
-    hmong_steps: int = Field(default=16, ge=4, le=32)
+    hmong_steps: int | None = Field(default=16, ge=4, le=32)
     nano_threads: int = Field(default=2, ge=1, le=8)
     nano_parallel: int = Field(default=1, ge=1, le=4)
     nano_steps: int = Field(default=8, ge=4, le=16)
@@ -460,8 +477,8 @@ def run_job(ident):
 
 @app.post('/api/speech', status_code=202)
 def speech(body: Speech):
-    if IS_HMONG and (body.language != 'mww' or body.hmong_steps not in {4,8,16,32}):
-        raise HTTPException(422, 'Bản Hmong chỉ đọc Hmong Trắng; chọn F5 4, 8, 16 hoặc 32 bước.')
+    if IS_HMONG and body.language != 'mww':
+        raise HTTPException(422, 'Bản Hmong chỉ đọc Hmong Trắng; chọn ngôn ngữ mww.')
     if not body.text.strip() or body.language not in LANGUAGES or body.format not in {'wav', 'mp3'} or body.delivery not in PROFILES:
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
     if body.video_id:
@@ -488,9 +505,13 @@ def speech(body: Speech):
     if not voice or body.language not in voice['languages']:
         raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
+    if IS_HMONG and engine in HMONG_ENGINES:
+        engine = active_hmong_engine()
+    if engine == 'f5_hmong' and body.hmong_steps not in {4, 8, 16, 32}:
+        raise HTTPException(422, 'F5-Hmong chỉ nhận 4, 8, 16 hoặc 32 bước.')
     preset_reference_fingerprint = None
     try:
-        segment_plan = ('hmong-expression-v1' if engine == 'f5_hmong' else
+        segment_plan = ('hmong-expression-v1' if engine in HMONG_ENGINES else
                         'nano-packed-v1' if engine == 'vieneu_nano' and body.paragraph_pause == 0 else 'classic-v1')
         segments = plan_segments({**body.model_dump(), 'engine': engine, 'segment_plan': segment_plan})
         from narration import validate_voice_text
@@ -506,7 +527,7 @@ def speech(body: Speech):
                 raise ValueError('Mốc SRT cộng thời điểm bắt đầu vượt thời lượng video.')
         if not any(segment.text for segment in segments):
             raise ValueError('Nhập nội dung đọc, không chỉ ký hiệu nghỉ.')
-        if engine == 'f5_hmong':
+        if engine in HMONG_ENGINES:
             if voice.get('speaker') in {'hmong-male','hmong-female'}:
                 from hmong_assets import reference, reference_fingerprint
                 _, reference_text = reference(voice['speaker'])
@@ -521,8 +542,10 @@ def speech(body: Speech):
                                   'Giải nén lại toàn bộ bản ZIP để khôi phục thư mục assets/hmong rồi tạo lại.') from None
     if not model_ready(engine):
         raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Bấm Tải model cho giọng đang chọn, chờ kiểm tra hoàn tất rồi tạo lại. Cần Internet ở bước tải.')
-    if body.quality == 'auto':
-        body.quality = ('standard' if engine == 'f5_hmong' else
+    if engine == 'hmong_native':
+        body.quality = 'standard'
+    elif body.quality == 'auto':
+        body.quality = ('standard' if engine in HMONG_ENGINES else
                         'fast' if engine != 'vieneu' or (supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists()) else 'standard')
     if body.quality == 'fast' and engine == 'vieneu':
         if not supports_int8() or not (DATA / 'models' / 'vieneu_fast.ready').exists():
@@ -532,6 +555,8 @@ def speech(body: Speech):
             raise HTTPException(429, 'Hàng đợi đã có 4 tác vụ. Hãy đợi trước khi tạo thêm.')
         ident = uuid.uuid4().hex
         job = {**body.model_dump(), 'text': body.text.strip(), 'id': ident, 'voice_name': voice['name'], 'engine': engine, 'speaker': voice.get('speaker'), 'status': 'queued', 'segment_plan': segment_plan, 'total': len(segments), 'completed': 0, 'progress': 0, 'created_at': now()}
+        if engine == 'hmong_native':
+            job.update(hmong_steps=None, hmong_backend='vits_openvoice_v2')
         if preset_reference_fingerprint is not None:
             job['hmong_reference_fingerprint'] = preset_reference_fingerprint
         write_json(DATA / 'jobs' / f'{ident}.json', job)
@@ -666,7 +691,7 @@ def resume_job(ident: str):
             raise HTTPException(429, 'Hàng đợi đã đầy.')
         if not job.get('speaker') and not (DATA / 'voices' / f"{job['voice_id']}.json").exists():
             raise HTTPException(409, 'Mẫu giọng đã bị xóa; không thể tiếp tục tác vụ này.')
-        if job.get('engine') == 'f5_hmong' and job.get('speaker') in {'hmong-male', 'hmong-female'}:
+        if job.get('engine') in HMONG_ENGINES and job.get('speaker') in {'hmong-male', 'hmong-female'}:
             from hmong_assets import reference_fingerprint
             try:
                 current_reference = reference_fingerprint(job['speaker'])
@@ -795,7 +820,7 @@ def download_script(ident: str, extension: str):
         text = '\n'.join(c['text'] for c in parse_srt(job['text'])) if job.get('input_format') == 'srt' else job['text']
     elif job.get('input_format') == 'srt':
         cues = parse_srt(job['text'])
-        expressive = job.get('engine') == 'f5_hmong' and job.get('segment_plan') == 'hmong-expression-v1'
+        expressive = job.get('engine') in HMONG_ENGINES and job.get('segment_plan') == 'hmong-expression-v1'
         timing = DATA / 'audio' / (ident + '.srt')
         if expressive and job['status'] == 'done' and timing.is_file():
             text = timing.read_text(encoding='utf-8')
@@ -855,7 +880,7 @@ class VideoTask(BaseModel):
     preview_start: float = Field(default=0,ge=0,le=10800)
     preview_seconds: float = Field(default=10,ge=1,le=15)
     preview_voice_id: str | None = None
-    engine: str = Field(default='qwen',pattern='^(qwen|qwen_clone|vieneu|vieneu_nano|f5_hmong)$')
+    engine: str = Field(default='qwen',pattern='^(qwen|qwen_clone|vieneu|vieneu_nano|f5_hmong|hmong_native)$')
     text: str = Field(default='',max_length=200000)
     input_format: str = Field(default='txt',pattern='^(txt|srt)$')
     provider: str = Field(default='ollama',pattern='^(ollama|openai|gemini)$')

@@ -10,9 +10,10 @@ import sys
 PYTHON_FILES = (
     'app.py', 'bundle_check.py', 'dubbing.py', 'hardware.py', 'hmong_acceleration.py', 'hmong_assets.py',
     'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py', 'hmong_launcher.py',
+    'hmong_native.py', 'hmong_native_models.py',
     'hmong_reference.py', 'hmong_text.py',
     'language_catalog.py', 'local_vieneu.py', 'narration.py', 'performance.py',
-    'portable_launcher.py', 'prepare_hmong.py', 'prepare_models.py',
+    'portable_launcher.py', 'prepare_hmong.py', 'prepare_hmong_native.py', 'prepare_models.py',
     'prepare_subtitles.py', 'recognition.py', 'state_io.py', 'studio_variant.py',
     'subtitles.py', 'system_voices.py', 'translation.py', 'video_editor.py',
     'video_export.py', 'video_tasks.py', 'worker.py', 'writing.py',
@@ -24,7 +25,18 @@ STATIC_FILES = tuple('static/' + name for name in (
 ASSET_FILES = tuple('assets/hmong/' + name for name in (
     'voices.json', 'female.wav', 'male.wav', 'source-female.mp3', 'source-male.mp3',
 ))
-REQUIRED_FILES = PYTHON_FILES + STATIC_FILES + ASSET_FILES
+REQUIRED_FILES = PYTHON_FILES + STATIC_FILES + ASSET_FILES + ('hmong_native_vendor/manifest.json',)
+NATIVE_VENDOR_REQUIRED = (
+    '__init__.py', 'UPSTREAM.json', 'vits/__init__.py', 'vits/models.py',
+    'vits/modules.py', 'vits/commons.py', 'vits/attentions.py', 'vits/transforms.py',
+    'vits/symbols.py', 'vits/LICENSE', 'vits/TEXT-LICENSE',
+    'openvoice/__init__.py', 'openvoice/models.py', 'openvoice/modules.py',
+    'openvoice/commons.py', 'openvoice/attentions.py', 'openvoice/transforms.py',
+    'openvoice/mel_processing.py', 'openvoice/LICENSE', 'watermark/__init__.py',
+    'watermark/models/__init__.py', 'watermark/models/my_model.py', 'watermark/models/hinet.py',
+    'watermark/models/invblock.py', 'watermark/models/rrdb_denselayer.py',
+    'watermark/models/module_util.py', 'watermark/LICENSE',
+)
 
 
 class BundleError(RuntimeError):
@@ -35,6 +47,35 @@ def _repair_message(detail):
     return (detail + '\nGiải nén TOÀN BỘ ZIP Voice Studio Hmong vào một thư mục có quyền ghi, '
             'rồi mở MO_VOICE_STUDIO_HMONG.bat ở thư mục gốc. '
             'Chép riêng các tệp .py/.bat không đủ để chạy tool. Dữ liệu cá nhân không bị xóa.')
+
+
+def validate_native_vendor(base):
+    """Check vendored code and its licenses without importing model code."""
+    root = Path(base) / 'hmong_native_vendor'
+    try:
+        manifest = root / 'manifest.json'
+        if manifest.is_symlink() or manifest.stat().st_size > 100_000:
+            raise ValueError('invalid native code manifest')
+        records = json.loads(manifest.read_text(encoding='utf-8'))
+        if not isinstance(records, dict) or not set(NATIVE_VENDOR_REQUIRED).issubset(records):
+            raise ValueError('native code or license missing from manifest')
+        for name, expected in records.items():
+            if (not isinstance(name, str) or '\\' in name or ':' in name or name.startswith('/')
+                    or any(part in {'', '.', '..'} for part in name.split('/'))):
+                raise ValueError('invalid native code path')
+            path = root / name
+            if (not (path.suffix == '.py' or path.name in {'LICENSE', 'TEXT-LICENSE', 'UPSTREAM.json'})
+                    or path.is_symlink() or any(parent.is_symlink() for parent in path.parents
+                                               if parent != root.parent)):
+                raise ValueError('unapproved native code file: ' + name)
+            if (not isinstance(expected, str) or len(expected) != 64
+                    or any(char not in '0123456789abcdef' for char in expected)):
+                raise ValueError('invalid native code checksum')
+            if not path.is_file() or not path.stat().st_size or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+                raise ValueError('native code checksum mismatch: ' + name)
+        return len(records)
+    except (OSError, ValueError, TypeError, KeyError) as exc:
+        raise BundleError(_repair_message('Mã hoặc giấy phép bộ đọc nhanh không hợp lệ: ' + str(exc))) from None
 
 
 def validate_bundle(base=None):
@@ -79,7 +120,9 @@ def validate_bundle(base=None):
                     raise ValueError('voice checksum mismatch: ' + relative)
     except (OSError, ValueError, TypeError, KeyError) as exc:
         raise BundleError(_repair_message('Tệp giọng mặc định hoặc SHA256 không hợp lệ: ' + str(exc))) from None
-    return {'application_files': len(REQUIRED_FILES), 'voice_checksums': 4}
+    vendor_checksums = validate_native_vendor(base)
+    return {'application_files': len(REQUIRED_FILES) + vendor_checksums,
+            'voice_checksums': 4, 'native_code_checksums': vendor_checksums}
 
 
 if __name__ == '__main__':

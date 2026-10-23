@@ -14,6 +14,7 @@ from pathlib import Path
 
 from state_io import write_json_atomic,write_progress,read_progress
 from narration import PCMWriter, PROFILES, plan_segments
+from hmong_assets import HMONG_ENGINES
 
 DATA = Path(os.environ['VOICE_STUDIO_DATA_DIR'])
 LANGUAGES = {'en-US': 'English', 'en-GB': 'English', 'ja': 'Japanese', 'ko': 'Korean', 'zh': 'Chinese', 'fr': 'French', 'de': 'German', 'es': 'Spanish', 'it': 'Italian', 'pt': 'Portuguese', 'ru': 'Russian'}
@@ -27,11 +28,24 @@ def write_state(path, data):
 
 def load_synthesizer(job):
     import soundfile as sf
-    if job['engine'] == 'f5_hmong':
-        global _hmong_model_instance
-        if _hmong_model_instance is None:
-            from hmong_engine import SpeechEngine
-            _hmong_model_instance = SpeechEngine()
+    if job['engine'] in HMONG_ENGINES:
+        global _hmong_model_instance, _hmong_native_instance
+        native = job['engine'] == 'hmong_native'
+        if native:
+            # A backend switch must not retain both complete model graphs.
+            _hmong_model_instance = None
+            if _hmong_native_instance is None:
+                gc.collect()
+                from hmong_native import SpeechEngine
+                _hmong_native_instance = SpeechEngine()
+            instance = _hmong_native_instance
+        else:
+            _hmong_native_instance = None
+            if _hmong_model_instance is None:
+                gc.collect()
+                from hmong_engine import SpeechEngine
+                _hmong_model_instance = SpeechEngine()
+            instance = _hmong_model_instance
         if job.get('speaker') in {'hmong-female','hmong-male'}:
             from hmong_assets import reference
             ref_path, ref_text = reference(job['speaker'])
@@ -39,14 +53,15 @@ def load_synthesizer(job):
             record = json.loads((DATA/'voices'/(job['voice_id']+'.json')).read_text(encoding='utf-8'))
             ref_path, ref_text = DATA/'voices'/(job['voice_id']+'.wav'), record.get('transcript','')
         steps = job.get('hmong_steps',16)
-        quality = {4:'turbo',8:'draft',16:'fast',32:'standard'}.get(steps)
+        quality = 'standard' if native else {4:'turbo',8:'draft',16:'fast',32:'standard'}.get(steps)
         if quality is None:raise ValueError('F5-Hmong chỉ nhận 4, 8, 16 hoặc 32 bước.')
         def synthesize(text, output):
             progress_path = Path(output).parent/'progress.json'
             def report_phase(phase):
                 write_state(progress_path,{**read_progress(progress_path),'phase':phase})
-            _hmong_model_instance.set_progress_callback(report_phase)
-            samples, rate = _hmong_model_instance.synthesize(text,ref_path,ref_text,speed=0.9,quality=quality)
+            instance.set_progress_callback(report_phase)
+            samples, rate = instance.synthesize(text,ref_path,ref_text,
+                                                speed=1.0 if native else 0.9,quality=quality)
             sf.write(str(output),samples,rate,subtype='PCM_16')
         return synthesize
     if job['engine'] == 'system':
@@ -100,6 +115,7 @@ def load_synthesizer(job):
 _cached_key = None
 _cached_synth = None
 _hmong_model_instance = None
+_hmong_native_instance = None
 
 
 def get_synthesizer(job):
@@ -238,7 +254,7 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
 
 def render(job, synthesize=None):
     global _nano_pool, _nano_pool_workers, _cached_synth, _cached_key
-    if job.get('engine') == 'f5_hmong' and job.get('speaker') in {'hmong-male', 'hmong-female'}:
+    if job.get('engine') in HMONG_ENGINES and job.get('speaker') in {'hmong-male', 'hmong-female'}:
         from hmong_assets import reference_fingerprint
         try:
             current_reference = reference_fingerprint(job['speaker'])
@@ -427,6 +443,10 @@ def render(job, synthesize=None):
     if job['engine']=='f5_hmong' and _hmong_model_instance is not None and _hmong_model_instance._model is not None:
         inference = {'hmong_precision': _hmong_model_instance._model.precision,
                      'hmong_steps': job.get('hmong_steps',16), 'hmong_device': _hmong_model_instance.device}
+    if job['engine']=='hmong_native' and _hmong_native_instance is not None and _hmong_native_instance._model is not None:
+        inference = {'hmong_precision': _hmong_native_instance._model.precision,
+                     'hmong_steps': None, 'hmong_device': _hmong_native_instance.device,
+                     'hmong_backend': _hmong_native_instance._model.backend}
     if expressive:
         emotion_counts = {}
         for segment in segments[:completed]:
@@ -455,7 +475,7 @@ def voice_error(exc):
     if isinstance(exc,ValueError):return str(exc)
     if isinstance(exc,ModuleNotFoundError):return f'Thiếu thư viện giọng {exc.name}. Dùng gói Portable đầy đủ hoặc tải lại model trong tool.'
     if isinstance(exc,MemoryError) or 'out of memory' in str(exc).lower():
-        if os.environ.get('VOICE_STUDIO_VARIANT')=='hmong':return 'Không đủ RAM/VRAM để nạp F5-Hmong. Đóng bớt ứng dụng, dùng máy có nhiều RAM hơn rồi tạo lại.'
+        if os.environ.get('VOICE_STUDIO_VARIANT')=='hmong':return 'Không đủ RAM/VRAM để nạp giọng Hmong. Đóng bớt ứng dụng, dùng máy có nhiều RAM hơn rồi tạo lại.'
         return 'Không đủ RAM/VRAM để nạp giọng. Chọn Nano Việt hoặc giọng Windows; đóng bớt ứng dụng rồi tạo lại.'
     if isinstance(exc,FileNotFoundError):return 'Thiếu tệp mô hình hoặc công cụ âm thanh. Tải model giọng đã chọn hoặc giải nén đầy đủ gói Portable.'
     return f'Không tạo được voice ({type(exc).__name__}). Giữ cửa sổ tool mở và kiểm tra model giọng đã chọn.'

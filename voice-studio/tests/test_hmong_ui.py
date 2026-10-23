@@ -38,9 +38,9 @@ def static_site():
 
 @contextlib.contextmanager
 def studio_page(site, *, hmong=True, ready=True, missing_reference_first=False, hmong_steps=16,
-                transcript_verified=True, known_reference=True):
+                transcript_verified=True, known_reference=True, native=False):
     language = 'mww' if hmong else 'vi'
-    engine = 'f5_hmong' if hmong else 'vieneu'
+    engine = ('hmong_native' if native else 'f5_hmong') if hmong else 'vieneu'
     ident = 'hmong-female' if hmong else 'vi-maianh'
     state = {'ready': ready, 'speech': [], 'tasks': [], 'errors': []}
     def configuration():
@@ -52,6 +52,7 @@ def studio_page(site, *, hmong=True, ready=True, missing_reference_first=False, 
                 'ai_voice_languages': [language], 'models': {engine: state['ready']}, 'nano_ready': False,
                 'int8_cpu': False, 'fast_vieneu': False, 'subtitle_ready': False, 'hmong_ready': state['ready'],
                 **({'hmong_steps': hmong_steps} if hmong_steps is not None else {}),
+                **({'hmong_backend': 'native' if native else 'f5', 'hmong_engine': engine} if hmong else {}),
                 'delivery': 'story' if hmong else 'natural', 'emotion': 'warm' if hmong else 'neutral',
                 'emotion_strength': .65, 'auto_rhythm': False,
                 **({'hardware_label': 'CỤC BỘ · CHƯA KIỂM TRA CPU/GPU'} if hmong else {}),
@@ -345,4 +346,54 @@ def test_legacy_speed_display_does_not_certify_a_padded_hour(static_site):
         page.evaluate('(report) => showSpeedReport({speed_report: report})', report)
         playwright.expect(page.locator('#performance-result')).to_contain_text('Báo cáo cũ')
         assert 'đạt 30×' not in page.locator('#performance-result').inner_text()
+        assert state['errors'] == []
+
+
+def test_native_hmong_hides_f5_steps_and_sends_no_step_claim_from_all_entrypoints(static_site):
+    with studio_page(static_site, native=True, hmong_steps=None) as (page, state):
+        for ident in ('hmong-steps', 'dub-hmong-steps'):
+            playwright.expect(page.locator('#' + ident)).to_be_hidden()
+            playwright.expect(page.locator('label[for="' + ident + '"]')).to_be_hidden()
+        playwright.expect(page.locator('#engine-info')).to_have_text('Hmong nhanh thử nghiệm · Mô hình đã tải')
+        intro = page.locator('#panel-create .page-heading > p')
+        playwright.expect(intro).to_contain_text('thử nghiệm')
+        playwright.expect(intro).to_contain_text('chưa kiểm chứng 30×')
+        note = page.locator('#panel-create .local-note')
+        playwright.expect(note).to_contain_text('Không dùng số bước F5')
+        assert '16 bước' not in note.inner_text()
+        page.fill('#script', 'Peb ua hauj lwm.')
+        page.click('#generate')
+        playwright.expect(page.locator('#output-title')).to_contain_text('đã sẵn sàng')
+        assert 'hmong_steps' not in state['speech'][-1]
+        assert state['speech'][-1]['emotion'] == 'warm'
+        page.locator('.nav-item[data-tab="dub"]').click()
+        page.fill('#workspace-free-script', 'Kuv rov los tsev.')
+        page.click('#workspace-free-generate')
+        playwright.expect(page.locator('#workspace-free-status')).to_contain_text('Voice riêng đã sẵn sàng')
+        assert 'hmong_steps' not in state['speech'][-1]
+        page.locator('#workspace-advanced').evaluate('(node) => {node.open = true;}')
+        page.locator('#workspace-advanced > details').first.evaluate('(node) => {node.open = true;}')
+        srt = '1\n00:00:00,000 --> 00:00:05,000\nNws hnav ris.\n'
+        page.locator('#dub-import').set_input_files({'name': 'native.srt', 'mimeType': 'text/plain', 'buffer': srt.encode()})
+        page.click('#dub-voice-only')
+        playwright.expect(page.locator('#dub-status')).to_contain_text('sẵn sàng')
+        assert 'hmong_steps' not in state['speech'][-1]
+        page.locator('.nav-item[data-tab="create"]').click()
+        page.click('#benchmark-speed')
+        playwright.expect(page.locator('#benchmark-speed')).to_be_enabled()
+        assert 'hmong_steps' not in state['speech'][-1]
+        assert all(word in state['speech'][-1]['text'].lower().replace('.', '').split()
+                   for word in ('ua', 'thaj', 'qab', 'faib', 'rov', 'ris'))
+        assert state['errors'] == []
+
+
+def test_native_hmong_download_requests_native_engine_without_f5_model(static_site):
+    with studio_page(static_site, native=True, ready=False, hmong_steps=None) as (page, state):
+        playwright.expect(page.locator('#hmong-reference-note')).to_contain_text('580 MB')
+        playwright.expect(page.locator('#hmong-reference-note')).to_contain_text('MO_HMONG_NHANH.bat')
+        page.click('#voice-load-model')
+        playwright.expect(page.locator('#voice-load-model')).to_contain_text('sẵn sàng', timeout=10000)
+        assert state['tasks'] == [{'action': 'prepare_voice', 'engine': 'hmong_native'}]
+        playwright.expect(page.locator('#hmong-reference-note')).to_contain_text('thử nghiệm đã sẵn sàng')
+        assert '580 MB' not in page.locator('#hmong-reference-note').inner_text()
         assert state['errors'] == []

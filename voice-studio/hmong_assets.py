@@ -1,9 +1,19 @@
 """The supplied Hmong recordings and user-provided excerpt words."""
 import hashlib
 import json
+import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent / 'assets' / 'hmong'
+HMONG_ENGINES = frozenset({'f5_hmong', 'hmong_native'})
+
+
+def active_engine():
+    """Choose new renders only; saved jobs retain their recorded engine."""
+    backend = os.getenv('HMOOB_BACKEND', 'f5').lower()
+    if backend not in {'f5', 'native'}:
+        raise ValueError('HMOOB_BACKEND chỉ nhận f5 hoặc native.')
+    return 'hmong_native' if backend == 'native' else 'f5_hmong'
 
 
 def references():
@@ -42,7 +52,7 @@ def source(ident):
 
 def presets():
     return [
-        {'id': 'hmong-' + gender, 'name': item['name'], 'engine': 'f5_hmong',
+        {'id': 'hmong-' + gender, 'name': item['name'], 'engine': active_engine(),
          'speaker': 'hmong-' + gender, 'languages': ['mww'],
          'description': 'Mẫu của bạn · ' + item['user_filename'] + ' · lời mẫu do bạn cung cấp',
          'source_filename': item['user_filename'], 'source_sha256': item['sha256'],

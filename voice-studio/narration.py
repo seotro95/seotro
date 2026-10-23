@@ -287,7 +287,7 @@ def _context_expression_segments(text, job, *, timed=False):
 
 
 def plan_segments(job):
-    hmong = job.get('engine') == 'f5_hmong'
+    hmong = job.get('engine') in {'f5_hmong', 'hmong_native'}
     expression = hmong and job.get('segment_plan') == 'hmong-expression-v1'
     normalizer = None
     if hmong:
@@ -361,12 +361,18 @@ class PCMWriter:
 
 def validate_voice_text(text,engine,label='Nội dung'):
     import unicodedata
-    if engine == 'f5_hmong':
+    if engine in {'f5_hmong', 'hmong_native'}:
         from hmong_text import normalize_text
         try:
             text = normalize_text(text)
         except ValueError as exc:
             raise ValueError(f'{label}: {exc}') from None
+        if engine == 'hmong_native':
+            from hmong_native import EngineError, validate_text
+            try:
+                validate_text(text)
+            except EngineError as exc:
+                raise ValueError(f'{label}: {exc}') from None
     if not any(c.isalnum() for c in text):
         raise ValueError(f'{label} chỉ có dấu hoặc ký hiệu, chưa có chữ/số để đọc. Sửa lời hoặc bỏ câu này trước khi tạo voice.')
     if engine in {'vieneu','vieneu_nano'}:

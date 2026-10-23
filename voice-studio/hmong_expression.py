@@ -23,7 +23,7 @@ _PROFILES = {
 
 def enabled(job):
     """Saved legacy jobs keep their exact previous segmentation/audio path."""
-    return job.get('engine') == 'f5_hmong' and job.get('segment_plan') == 'hmong-expression-v1'
+    return job.get('engine') in {'f5_hmong', 'hmong_native'} and job.get('segment_plan') == 'hmong-expression-v1'
 
 
 def validate_emotion(emotion):

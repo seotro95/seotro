@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -20,7 +21,7 @@ import zipfile
 from build_windows import copy_runtime, download_verified_ffmpeg
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.4.0'
+VERSION = '1.5.0'
 ARCHIVE_NAME = f'Voice-Studio-Hmong-{VERSION}-Windows-x64.zip'
 
 
@@ -44,9 +45,31 @@ def copy_source(destination, source=SOURCE):
         if folder.is_symlink() or any(path.is_symlink() for path in folder.rglob('*')):
             raise ValueError('Linked application assets cannot be bundled')
         shutil.copytree(folder, destination / relative)
+    native_guide = source / 'docs/HMONG-NATIVE.md'
+    if native_guide.is_symlink() or native_guide.parent.is_symlink():
+        raise ValueError('Linked application documentation cannot be bundled')
+    (destination / 'docs').mkdir()
+    shutil.copy2(native_guide, destination / 'docs/HMONG-NATIVE.md')
+    # Only code/license files named in the checksum manifest are approved;
+    # never sweep caches, downloaded checkpoints, or experiments into the ZIP.
+    spec = importlib.util.spec_from_file_location('hmong_bundle_copy_check', SOURCE / 'bundle_check.py')
+    checker = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(checker)
+    try:
+        checker.validate_native_vendor(source)
+    except checker.BundleError as exc:
+        raise ValueError(str(exc)) from None
+    vendor = source / 'hmong_native_vendor'
+    records = json.loads((vendor / 'manifest.json').read_text(encoding='utf-8'))
+    for relative in ('manifest.json', *records):
+        target = destination / 'hmong_native_vendor' / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(vendor / relative, target)
     required = ('app.py', 'worker.py', 'bundle_check.py', 'hmong_acceleration.py',
                 'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py',
+                'hmong_native.py', 'hmong_native_models.py',
                 'hmong_reference.py', 'hmong_text.py', 'hmong_assets.py', 'prepare_hmong.py',
+                'prepare_hmong_native.py',
                 'hmong_launcher.py', 'studio_variant.py', 'HMONG-README.md', 'requirements-hmong.txt')
     for name in required:
         if not (destination / name).is_file():
@@ -57,10 +80,12 @@ def copy_source(destination, source=SOURCE):
     shutil.copy2(destination / 'requirements-hmong.txt', destination / 'requirements.txt')
 
 
-def build_environment(root, *, offline):
+def build_environment(root, *, offline, backend='f5'):
+    if backend not in {'f5', 'native'}:
+        raise ValueError('Unknown Hmong backend')
     root = Path(root)
     data = root / 'voice-studio-hmong' / '.data'
-    environment = dict(os.environ, VOICE_STUDIO_VARIANT='hmong',
+    environment = dict(os.environ, VOICE_STUDIO_VARIANT='hmong', HMOOB_BACKEND=backend,
                        VOICE_STUDIO_DATA_DIR=str(data), HMOOB_MODEL_DIR=str(data / 'models'),
                        HF_HOME=str(data / 'models' / 'cache'), HF_HUB_DISABLE_XET='1',
                        PYTHONNOUSERSITE='1', PYTHONUTF8='1', PYTHONUNBUFFERED='1',
@@ -97,6 +122,13 @@ if not "%VOICE_EXIT%"=="0" pause
 exit /b %VOICE_EXIT%
 '''
     (root / 'MO_VOICE_STUDIO_HMONG.bat').write_bytes(content.replace('\n', '\r\n').encode('ascii'))
+    fast = '''@echo off
+setlocal
+set "HMOOB_BACKEND=native"
+call "%~dp0MO_VOICE_STUDIO_HMONG.bat" %*
+exit /b %ERRORLEVEL%
+'''
+    (root / 'MO_HMONG_NHANH.bat').write_bytes(fast.replace('\n', '\r\n').encode('ascii'))
     check = '''@echo off
 setlocal
 cd /d "%~dp0"
@@ -127,55 +159,52 @@ def checked_run(command, *, environment, cwd, timeout=2400):
 
 
 def write_notices(root, model_manifest, qa_report):
-    notice = '''VOICE STUDIO HMONG 1.4.0 — WINDOWS X64
+    notice = '''VOICE STUDIO HMONG 1.5.0 — WINDOWS X64
 
-Giai nen TOAN BO ZIP, mo MO_VOICE_STUDIO_HMONG.bat.
-Da kem Python, thu vien CPU, FFmpeg, hai MP3 goc va doan Hmong co loi tham chieu.
-LAN DAU CAN INTERNET: tool tu tai va kiem tra khoang 1,4 GB model tu nguon
-chinh thuc. Khong can API key. Sau khi chuan bi xong co the dung ngoai tuyen.
-KIEM_TRA_HMONG.bat kiem tra tep va thu vien da cai, khong tu tai model.
-start.bat/start_hmong.bat o ca thu muc goc va thu muc ung dung deu mo Hmong.
-install.bat/install_hmong.bat chuan bi Hmong bang Python da dong goi.
-Khong can cai lai Python hoac tao moi truong tieng Viet.
-Goi mac dinh dung CPU. Neu co GPU NVIDIA/driver phu hop, co the chu dong
-chay install_hmong_cuda.bat de tai them bo CUDA rieng bang Internet.
-Bo cai CUDA duoc kem theo; chua kiem chung suy luan CUDA hoac toc do GPU.
+Giai nen TOAN BO ZIP. MO_HMONG_NHANH.bat mo bo doc VITS Hmong + OpenVoice V2.
+MO_VOICE_STUDIO_HMONG.bat giu bo doc F5 Hmong 16 buoc FP32.
+Da kem Python, thu vien CPU, FFmpeg, hai MP3 nguon va cac doan tham chieu.
+LAN DAU CAN INTERNET: bo nhanh tai/kiem tra khoang 580 MB, F5 khoang 1,4 GB.
+Moi bo co manifest model rieng; khong can tai ca hai neu chi dung mot bo.
+Khong can API key. Sau khi chuan bi xong co the dung ngoai tuyen.
+KIEM_TRA_HMONG.bat kiem tra tep/thu vien/model da cai, khong tu tai model.
+start.bat/start_hmong.bat va install.bat/install_hmong.bat giu duong F5 cu.
+install_hmong_cuda.bat la tuy chon tai thu vien CUDA rieng, khong bat buoc.
+Chua kiem chung suy luan CUDA hoac toc do GPU. Goi nay kiem thu CPU.
 
 Du lieu ca nhan o voice-studio-hmong/.data. Sao luu thu muc nay khi cap nhat.
-Mac dinh tu nhien 16 buoc, FP32 de giu chat luong mo hinh goc.
-4 buoc chi la ban nhap nhanh, co the giam do ro va tu nhien.
-Co the chon 8/16/32 buoc FP32 de so sanh chat luong.
-Chi ban nhap 4 buoc thu INT8 tren CPU, du phong FP32 neu khong tuong thich.
-Hai MP3 nam/nu moi nhat duoc nhan dien bang SHA256, giu nguyen de nghe thu.
-Loi Hmong cua ca hai doan mau do ban cung cap va xac nhan khop ban thu.
-Tool tu chon doan tham chieu theo manifest va dien dung loi ban da gui.
-Tool giu loi ban sua, khong ghi de bang loi dien san.
-Voi tep khac, chon doan 3-8 giay va nhap loi Hmong khop doan mau.
-Mac dinh ke chuyen, cam xuc warm, cuong do 65%; tat tu them khoang nghi.
-Giu ngu canh cum/cau khi nhan tu; hieu ung nhan ap dung len ca cum.
-Co the bat lai nhip tu dong hoac chen [pause=...] khi can.
-Co the chon neutral/warm/joyful/sad/serious/suspense va cuong do 0..1.
-Trong TXT co the dung [emotion=warm], **tu nhan manh** va [pause=0.4].
-Cam xuc la dieu chinh toc do giu cao do, gain, envelope va khoang nghi
-tren may; khong phai mo hinh da huan luyen cam xuc hay thay doi thanh dieu.
-Chua co nhan dang loi noi Hmong: nhap TXT/SRT hoac sua phu de thu cong.
-Mo hinh Hmong cong dong can nguoi nghe danh gia phat am va do giong giong.
-Khong bao dam 1 gio voice trong 2 phut; toc do tuy CPU/GPU va chat luong.
-Chua xac minh muc tieu 30x hoac phat am dung cac tu ua/thaj/qab/faib/rov/ris.
-Hai MP3 nghe thu do tool tao co du sau tu nay de ban nghe doi chieu.
-Bao cao toc do tinh do dai cac doan loi doc, loai khoang lang tool chen.
+Bo nhanh sinh tieng Hmong bang VITS va chuyen am sac bang OpenVoice V2.
+Gan WavMark cho doan du dai; chua chung nhan dau nhan dien sau nen MP3.
+Bo nhanh khong su dung so buoc F5 hay INT8 F5.
+Bo F5 giu 16 buoc FP32; 4 buoc chi la ban nhap, 8/16/32 de doi chieu.
+Hai MP3 nguon nam/nu moi nhat giu nguyen va nhan dien bang SHA256.
+Loi cua doan tham chieu do ban cung cap, khop doan mau, duoc dien tu dong.
+Tool giu loi ban sua. Tep khac can chon doan 3-8 giay va nhap dung loi.
+Nhan ban giu am sac tu mau; khong bao dam giong hoan toan ban thu.
+Mac dinh ke chuyen, warm 65%, giu ngu canh cum/cau, tat nhip tu dong.
+Cam xuc neutral/warm/joyful/sad/serious/suspense dung xu ly nhip/am luong
+cuc bo, khong phai mo hinh dieu khien cam xuc than kinh. Co TXT/SRT,
+WAV/MP3 va [emotion=warm], **tu nhan manh**, [pause=0.4].
+Chua ho tro nhan dang loi noi Hmong tu dong; nhap TXT/SRT hoac sua thu cong.
+
+Chua xac minh phat am dung ua/thaj/qab/faib/rov/ris, do giong giong,
+hoac muc tieu 1 gio voice trong 2 phut (30x). Toc do tuy CPU/GPU.
+Hai MP3 nghe thu do bo nhanh tao co du sau tu, kem thiet lap/checksum
+va thoi gian do tron quy trinh trong NATIVE-VALIDATION.json. Bao cao
+loai khoang lang tool chen; do ngan khong chung minh toc do 1 gio.
+Bo F5 duoc kiem thu tuong thich rieng bang tao that 16 buoc FP32.
 
 LICENSE / NGUON
 Python: runtime/LICENSE.txt, https://www.python.org/
 Thu vien Python: runtime/Lib/site-packages/*.dist-info/licenses
 FFmpeg GPL: ffmpeg/LICENSE*, docs va UPSTREAM-SHA256.txt
-F5-TTS code (MIT): https://github.com/SWivid/F5-TTS
-Hmong integration: https://github.com/YangNobody12/F5-TTS-Hmong
-Weights KHONG DUOC PHAN PHOI LAI trong goi nay. Tool tai truc tiep tu
-Pakorn2112/F5TTS-Hmong va charactr/vocos-mel-24khz, voi revision/checksum
-co dinh. Xem dieu khoan cua nha phat hanh mo hinh cho muc dich su dung.
-Hai MP3 goc va doan tham chieu da duoc phep su dung trong du an. Goi khong kem
-ho so giong, lich su, credential hoac ban thu khac cua nguoi dung.
+Ma bo nhanh MIT va nguon/revision: voice-studio-hmong/hmong_native_vendor/
+VITS Hmong: leejnus/HmongTTS. OpenVoice V2: myshell-ai/OpenVoice.
+WavMark: wavmark/wavmark. F5-TTS: SWivid/F5-TTS (MIT),
+YangNobody12/F5-TTS-Hmong, Pakorn2112/F5TTS-Hmong, charactr/vocos-mel-24khz.
+Weights KHONG kem ZIP; tai truc tiep bang revision/SHA256 co dinh.
+Xem MODEL-SOURCES.json va dieu khoan nha phat hanh truoc khi su dung model.
+Goi khong kem ho so giong, lich su, credential hoac ban thu rieng khac.
 '''
     (root / 'BAT-DAU.txt').write_text(notice, encoding='utf-8')
     (root / 'MODEL-SOURCES.json').write_text(json.dumps(model_manifest, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -221,7 +250,14 @@ def main():
     environment = build_environment(root, offline=False)
     checked_run([root / 'runtime/python.exe', app / 'hmong_launcher.py', '--setup-only'],
                 environment=environment, cwd=app)
-    model_manifest = json.loads((app / '.data/models/verified-models.json').read_text(encoding='utf-8'))
+    model_manifest = {'f5_hmong': json.loads(
+        (app / '.data/models/verified-models.json').read_text(encoding='utf-8'))}
+    checked_run([root / 'runtime/python.exe', app / 'hmong_launcher.py', '--setup-only'],
+                environment=build_environment(root, offline=False, backend='native'), cwd=app)
+    model_manifest['hmong_native'] = json.loads(
+        (app / '.data/models/verified-native-models.json').read_text(encoding='utf-8'))
+    (reports / 'model-sources.json').write_text(
+        json.dumps(model_manifest, ensure_ascii=False, indent=2), encoding='utf-8')
 
     relocated = root.parent / 'Relocated Hmong test with spaces' / root.name
     relocated.parent.mkdir(parents=True, exist_ok=True)
@@ -230,23 +266,36 @@ def main():
     root.rename(relocated)
     try:
         checked_run([relocated / 'runtime/python.exe', SOURCE / 'packaging/smoke_hmong_portable.py',
-                     relocated, reports], environment=build_environment(relocated, offline=True),
+                     relocated, reports, '--backend', 'f5'],
+                    environment=build_environment(relocated, offline=True),
+                    cwd=relocated / 'voice-studio-hmong', timeout=1200)
+        checked_run([relocated / 'runtime/python.exe', SOURCE / 'packaging/smoke_hmong_portable.py',
+                     relocated, reports, '--backend', 'native'],
+                    environment=build_environment(relocated, offline=True, backend='native'),
                     cwd=relocated / 'voice-studio-hmong', timeout=2400)
     finally:
         relocated.rename(root)
     qa_report = json.loads((reports / 'native-smoke.json').read_text(encoding='utf-8'))
-    if not qa_report.get('success'):
-        raise RuntimeError('Native Hmong smoke did not complete')
+    compatibility = json.loads((reports / 'f5-smoke.json').read_text(encoding='utf-8'))
+    if not qa_report.get('success') or not compatibility.get('success'):
+        raise RuntimeError('Both native and F5 Hmong smoke tests must complete')
+    qa_report['f5_compatibility'] = compatibility
+    qa_report['normal_launcher'] = compatibility['normal_launcher']
 
     # All data here was created by this build. Never perform this operation on a
     # user's installation or copy a developer data directory into the package.
     shutil.rmtree(app / '.data')
     if (app / '.data').exists():
         raise RuntimeError('Build data was not removed')
-    empty_check = subprocess.run([root / 'runtime/python.exe', app / 'hmong_launcher.py', '--check'],
-                                cwd=app, env=build_environment(root, offline=True), timeout=180)
-    if empty_check.returncode != 1 or (app / '.data/models/verified-models.json').exists():
-        raise RuntimeError('Offline check must report missing first-run models without downloading')
+    for backend in ('f5', 'native'):
+        empty_check = subprocess.run([root / 'runtime/python.exe', app / 'hmong_launcher.py', '--check'],
+                                    cwd=app, env=build_environment(root, offline=True, backend=backend), timeout=180)
+        if empty_check.returncode != 1:
+            raise RuntimeError('Offline check must report missing first-run models without downloading: ' + backend)
+    if any(path.is_file() for path in (app / '.data').rglob('*')):
+        raise RuntimeError('Stripped offline checks unexpectedly created data or model files')
+    if (app / '.data').exists():
+        shutil.rmtree(app / '.data')
     qa_report['stripped_package_offline_check'] = True
     (reports / 'native-smoke.json').write_text(json.dumps(qa_report, ensure_ascii=False, indent=2), encoding='utf-8')
     write_notices(root, model_manifest, qa_report)
@@ -256,7 +305,10 @@ def main():
              'commit': os.environ.get('GITHUB_SHA'), 'platform': 'windows-x64',
              'native_windows_validation': True, 'relocated_runtime_tested': True,
              'models_included': False, 'first_run_model_download_required': True,
-             'model_download_approx_gb': 1.4, 'api_key_required': False,
+             'model_download_approx_gb': {'f5_hmong': 1.4, 'hmong_native': .58}, 'api_key_required': False,
+             'fast_launcher': 'MO_HMONG_NHANH.bat', 'fast_engine': 'hmong_native',
+             'fast_backend': 'vits_openvoice_v2', 'fast_steps': None,
+             'normal_launcher': 'MO_VOICE_STUDIO_HMONG.bat', 'normal_engine': 'f5_hmong',
              'default_steps': 16, 'default_precision': 'fp32', 'draft_steps': 4,
              'default_delivery': 'story', 'default_emotion': 'warm',
              'default_emotion_strength': .65, 'default_auto_rhythm': False,

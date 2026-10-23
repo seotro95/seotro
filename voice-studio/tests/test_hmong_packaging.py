@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import json
 from pathlib import Path
 import sys
 from types import SimpleNamespace
@@ -21,6 +22,7 @@ def source_fixture(root):
     root.mkdir()
     for name in ('app.py', 'worker.py', 'bundle_check.py', 'hmong_acceleration.py',
                  'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py',
+                 'hmong_native.py', 'hmong_native_models.py', 'prepare_hmong_native.py',
                  'hmong_reference.py', 'hmong_text.py', 'hmong_assets.py', 'prepare_hmong.py',
                  'hmong_launcher.py', 'studio_variant.py'):
         (root / name).write_text('# app\n', encoding='utf-8')
@@ -29,13 +31,26 @@ def source_fixture(root):
     for name in ('README.md', 'requirements.txt', 'requirements-qwen.txt', 'requirements-tested.txt',
                  'install.bat', 'start.bat', 'download_models.bat', 'VALIDATION.md'):
         (root / name).write_text('unrelated Vietnamese environment\n', encoding='utf-8')
-    for name in ('static/app.js', 'assets/hmong/female.wav', 'assets/hmong/male.wav',
+    for name in ('docs/HMONG-NATIVE.md', 'static/app.js', 'assets/hmong/female.wav', 'assets/hmong/male.wav',
                  'assets/hmong/source-female.mp3', 'assets/hmong/source-male.mp3',
                  'assets/hmong/voices.json', '.data/voices/personal.wav',
                  '.data/models/private.bin', '.venv/Lib/private.py', 'assets/private.wav', '.env'):
         path = root / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(b'fixture')
+    from bundle_check import NATIVE_VENDOR_REQUIRED
+    manifest = {}
+    for name in NATIVE_VENDOR_REQUIRED:
+        path = root / 'hmong_native_vendor' / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b'# reviewed code or license\n')
+        manifest[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    (root / 'hmong_native_vendor/manifest.json').write_text(json.dumps(manifest), encoding='utf-8')
+    # These files must not be copied, even when left beside vendored code.
+    (root / 'hmong_native_vendor/model.pth').write_bytes(b'weights')
+    (root / 'hmong_native_vendor/private.json').write_bytes(b'private data')
+    (root / 'hmong_native_vendor/__pycache__').mkdir()
+    (root / 'hmong_native_vendor/__pycache__/models.pyc').write_bytes(b'cached bytecode')
 
 
 def test_source_copy_includes_only_approved_assets(tmp_path):
@@ -55,6 +70,14 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
     assert (output / 'bundle_check.py').is_file() and (output / 'hmong_text.py').is_file()
     assert (output / 'hmong_expression.py').is_file()
     assert (output / 'hmong_acceleration.py').is_file()
+    assert (output / 'hmong_native.py').is_file()
+    assert (output / 'docs/HMONG-NATIVE.md').is_file()
+    assert (output / 'hmong_native_models.py').is_file()
+    assert (output / 'hmong_native_vendor/openvoice/LICENSE').is_file()
+    assert (output / 'hmong_native_vendor/watermark/LICENSE').is_file()
+    assert not (output / 'hmong_native_vendor/model.pth').exists()
+    assert not (output / 'hmong_native_vendor/private.json').exists()
+    assert not (output / 'hmong_native_vendor/__pycache__').exists()
     assert (output / 'README.md').read_text() == 'Hmong-only instructions\n'
     assert (output / 'requirements.txt').read_text() == 'Hmong-only instructions\n'
     for name in ('requirements-qwen.txt', 'requirements-tested.txt', 'download_models.bat', 'VALIDATION.md'):
@@ -62,7 +85,7 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
 
 
 def test_archive_has_valid_crc_and_matching_sha256(tmp_path):
-    root = tmp_path / 'Voice-Studio-Hmong-1.4.0'
+    root = tmp_path / 'Voice-Studio-Hmong-1.5.0'
     root.mkdir()
     (root / 'hello.txt').write_bytes(b'relocatable')
     archive = tmp_path / 'bundle.zip'
@@ -78,12 +101,15 @@ def test_environment_and_batch_keep_data_in_hmong_package(tmp_path, monkeypatch)
     monkeypatch.setenv('PYTHONHOME', 'unrelated-python')
     monkeypatch.setenv('PYTHONPATH', 'unrelated-packages')
     monkeypatch.setenv('HF_HUB_OFFLINE', '1')
+    monkeypatch.setenv('HMOOB_BACKEND', 'native')
     environment = packaging.build_environment(tmp_path, offline=False)
     assert 'PYTHONHOME' not in environment and 'PYTHONPATH' not in environment
     assert 'HF_HUB_OFFLINE' not in environment
     assert environment['VOICE_STUDIO_VARIANT'] == 'hmong'
     assert environment['VOICE_STUDIO_DATA_DIR'] == str(tmp_path / 'voice-studio-hmong/.data')
     assert environment['HMOOB_MODEL_DIR'] == str(tmp_path / 'voice-studio-hmong/.data/models')
+    assert environment['HMOOB_BACKEND'] == 'f5', 'Normal build paths must not inherit native selection'
+    assert packaging.build_environment(tmp_path, offline=True, backend='native')['HMOOB_BACKEND'] == 'native'
     assert packaging.build_environment(tmp_path, offline=True)['HF_HUB_OFFLINE'] == '1'
     packaging.write_launcher(tmp_path)
     batch = (tmp_path / 'MO_VOICE_STUDIO_HMONG.bat').read_bytes()
@@ -91,6 +117,10 @@ def test_environment_and_batch_keep_data_in_hmong_package(tmp_path, monkeypatch)
     assert b'VOICE_STUDIO_VARIANT=hmong' in batch
     assert b'VOICE_STUDIO_DATA_DIR=%~dp0voice-studio-hmong\\.data' in batch
     assert b'hmong_launcher.py" %*' in batch
+    assert b'HMOOB_BACKEND=' not in batch, 'Normal launcher must preserve the fast wrapper selection'
+    fast = (tmp_path / 'MO_HMONG_NHANH.bat').read_bytes()
+    assert b'\r\n' in fast and b'set "HMOOB_BACKEND=native"' in fast
+    assert b'call "%~dp0MO_VOICE_STUDIO_HMONG.bat" %*' in fast
     for folder, target in ((tmp_path, b'%~dp0MO_VOICE_STUDIO_HMONG.bat'),
                            (tmp_path / 'voice-studio-hmong', b'%~dp0..\\MO_VOICE_STUDIO_HMONG.bat')):
         for name in ('start.bat', 'start_hmong.bat', 'install.bat', 'install_hmong.bat', 'install_hmong_cuda.bat'):
@@ -115,7 +145,33 @@ def test_source_copy_refuses_linked_assets(tmp_path):
         packaging.copy_source(tmp_path / 'output', source)
 
 
-@pytest.mark.parametrize('name', ['bundle_check.py', 'hmong_text.py', 'hmong_expression.py', 'hmong_acceleration.py'])
+@pytest.mark.parametrize('failure', ['modified_code', 'missing_license', 'path_escape', 'model_weight'])
+def test_native_vendor_requires_pinned_code_and_licenses_and_rejects_unapproved_paths(tmp_path, failure):
+    from bundle_check import BundleError, validate_native_vendor
+    source = tmp_path / 'source'
+    source_fixture(source)
+    vendor = source / 'hmong_native_vendor'
+    assert validate_native_vendor(source) == 27
+    manifest_path = vendor / 'manifest.json'
+    manifest = json.loads(manifest_path.read_text())
+    if failure == 'modified_code':
+        (vendor / 'vits/models.py').write_bytes(b'changed code')
+    elif failure == 'missing_license':
+        del manifest['openvoice/LICENSE']
+    elif failure == 'path_escape':
+        manifest['../app.py'] = hashlib.sha256((source / 'app.py').read_bytes()).hexdigest()
+    else:
+        manifest['model.pth'] = hashlib.sha256((vendor / 'model.pth').read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(manifest), encoding='utf-8')
+    with pytest.raises(BundleError):
+        validate_native_vendor(source)
+    with pytest.raises(ValueError, match='Mã hoặc giấy phép'):
+        packaging.copy_source(tmp_path / 'output', source)
+
+
+@pytest.mark.parametrize('name', ['bundle_check.py', 'hmong_text.py', 'hmong_expression.py',
+                                 'hmong_acceleration.py', 'hmong_native.py', 'hmong_native_models.py',
+                                 'prepare_hmong_native.py'])
 def test_source_copy_rejects_missing_new_runtime_modules(tmp_path, name):
     source = tmp_path / 'source'
     source_fixture(source)
@@ -128,7 +184,7 @@ def test_native_smoke_probes_every_root_and_inner_batch_alias(tmp_path, monkeypa
     spec = importlib.util.spec_from_file_location('smoke_hmong', PACKAGING / 'smoke_hmong_portable.py')
     smoke = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(smoke)
-    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.4.0'
+    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.5.0'
     root.mkdir(parents=True)
     packaging.write_launcher(root)
     calls = []
@@ -137,10 +193,14 @@ def test_native_smoke_probes_every_root_and_inner_batch_alias(tmp_path, monkeypa
         assert command[1:3] == ['/d', '/c']
         assert (kwargs['cwd'] / command[3]).is_file()
         assert kwargs['stdin'] == smoke.subprocess.DEVNULL
+        expected = 'native' if command[3] == 'MO_HMONG_NHANH.bat' else 'f5'
+        assert kwargs['env']['HMOOB_BACKEND'] == expected
         return SimpleNamespace(returncode=0, stdout='PASS: verified models\n')
     monkeypatch.setattr(smoke.subprocess, 'run', run)
     result = smoke.check_batch_entrypoints(root)
-    assert len(calls) == len(result) == 11
+    assert len(calls) == len(result) == 12
+    assert result['MO_HMONG_NHANH.bat']['engine'] == 'hmong_native'
+    assert result['MO_VOICE_STUDIO_HMONG.bat']['engine'] == 'f5_hmong'
     assert {args[0][-1] for args in calls} == {'--check', '--setup-only'}
     assert result['voice-studio-hmong/install.bat']['argument'] == '--setup-only'
     assert result['voice-studio-hmong/start.bat']['argument'] == '--check'
@@ -209,7 +269,8 @@ def test_generated_audition_exports_existing_job_without_another_synthesis(tmp_p
         return b'{"streams":[{"codec_name":"mp3"}],"format":{"duration":"1.5"}}'
     monkeypatch.setattr(smoke.subprocess, 'check_output', probe)
     job = {'id': 'already-completed-job', 'voice_id': 'hmong-female', 'text': 'Nyob zoo.',
-           'audio_seconds': 1.5, 'hmong_steps': 16, 'hmong_precision': 'fp32', 'delivery': 'review',
+           'audio_seconds': 1.5, 'engine': 'hmong_native', 'hmong_backend': 'vits_openvoice_v2',
+           'hmong_steps': None, 'hmong_precision': 'fp32', 'hmong_device': 'cpu', 'delivery': 'review',
            'emotion': 'warm', 'emotion_strength': .65, 'auto_rhythm': False, 'hmong_phrase_context': True,
            'spoken_audio_seconds': 1.5, 'inserted_silence_seconds': 0, 'speed_report': {}}
     # A get-only client makes any accidental new POST /api/speech fail.
@@ -218,7 +279,10 @@ def test_generated_audition_exports_existing_job_without_another_synthesis(tmp_p
     assert (tmp_path / 'Hmong-female-2-preview.mp3').read_bytes() == audio
     assert result['sha256'] == hashlib.sha256(audio).hexdigest()
     assert result['generated'] is True and result['original_source_recording'] is False
-    assert result['settings']['hmong_steps'] == 16 and result['settings']['hmong_precision'] == 'fp32'
+    assert result['settings']['hmong_steps'] is None and result['settings']['hmong_precision'] == 'fp32'
+    assert result['settings']['engine'] == 'hmong_native'
+    assert result['settings']['hmong_backend'] == 'vits_openvoice_v2'
+    assert result['settings']['hmong_device'] == 'cpu'
     assert result['settings']['hmong_phrase_context'] is True and result['settings']['auto_rhythm'] is False
     assert result['pronunciation_evaluated'] is False and result['target_30x_verified'] is False
 

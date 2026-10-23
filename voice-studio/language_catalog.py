@@ -18,7 +18,7 @@ def system_language(culture):
 
 def native_language(voice):
     ident=voice['id']
-    if voice.get('engine')=='f5_hmong':return 'mww'
+    if voice.get('engine') in {'f5_hmong','hmong_native'}:return 'mww'
     if voice.get('engine')=='system':return voice.get('culture',voice['languages'][0]).split('-')[0]
     if voice.get('category')=='cloned':return voice['languages'][0].split('-')[0]
     if ident.startswith(('vi-','nano-')):return 'vi'

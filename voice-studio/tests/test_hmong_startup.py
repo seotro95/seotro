@@ -20,12 +20,15 @@ def bundle_fixture(destination):
         source, target = ROOT / relative, destination / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
+    shutil.copytree(ROOT / 'hmong_native_vendor', destination / 'hmong_native_vendor',
+                    dirs_exist_ok=True, ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
 
 
 def isolate_launcher(monkeypatch, root):
     monkeypatch.setattr(hmong_launcher, 'BASE', root)
     monkeypatch.setenv('VOICE_STUDIO_VARIANT', 'hmong')
     monkeypatch.setenv('VOICE_STUDIO_DATA_DIR', str(root / '.test-data'))
+    monkeypatch.setenv('HMOOB_BACKEND', 'f5')
 
 
 def test_loose_source_files_fail_clearly_before_dependencies_or_model_download(tmp_path):
@@ -106,3 +109,48 @@ def test_check_missing_models_stays_offline_and_never_reports_pass(tmp_path, mon
     output = capsys.readouterr().out
     assert 'Thiếu mô hình' in output and 'PASS:' not in output
     assert len(calls) == 3
+
+
+def test_native_check_uses_native_manifest_and_never_downloads_or_falls_back_to_f5(tmp_path, monkeypatch, capsys):
+    bundle_fixture(tmp_path)
+    isolate_launcher(monkeypatch, tmp_path)
+    monkeypatch.setenv('HMOOB_BACKEND', 'native')
+    monkeypatch.setattr(hmong_launcher, 'check_dependencies', lambda: None)
+    monkeypatch.setattr(hmong_launcher, 'check_audio_tools', lambda: None)
+    calls = []
+    def run(command, **kwargs):
+        calls.append(command)
+        assert command == [sys.executable, str(tmp_path / 'prepare_hmong_native.py'), '--verify-only']
+        return SimpleNamespace(returncode=1)
+    monkeypatch.setattr(hmong_launcher.subprocess, 'run', run)
+    assert hmong_launcher.main(['--check']) == 1
+    output = capsys.readouterr().out
+    assert 'Hmong nhanh thử nghiệm' in output and 'PASS:' not in output
+    assert len(calls) == 1
+
+
+def test_native_setup_downloads_only_native_models_after_failed_verification(tmp_path, monkeypatch, capsys):
+    bundle_fixture(tmp_path)
+    isolate_launcher(monkeypatch, tmp_path)
+    monkeypatch.setenv('HMOOB_BACKEND', 'native')
+    monkeypatch.setattr(hmong_launcher, 'check_dependencies', lambda: None)
+    monkeypatch.setattr(hmong_launcher, 'check_audio_tools', lambda: None)
+    calls = []
+    def run(command, **kwargs):
+        calls.append((command, kwargs))
+        return SimpleNamespace(returncode=1 if command[-1] == '--verify-only' else 0)
+    monkeypatch.setattr(hmong_launcher.subprocess, 'run', run)
+    assert hmong_launcher.main(['--setup-only']) == 0
+    assert [command for command, _ in calls] == [
+        [sys.executable, str(tmp_path / 'prepare_hmong_native.py'), '--verify-only'],
+        [sys.executable, str(tmp_path / 'prepare_hmong_native.py')]]
+    assert calls[1][1]['check'] is True
+    output = capsys.readouterr().out
+    assert '580 MB' in output and '30×' in output and 'PASS:' in output
+    assert '1,4 GB' not in output
+
+
+def test_unknown_hmong_backend_fails_before_any_model_preparation(monkeypatch):
+    monkeypatch.setenv('HMOOB_BACKEND', 'unknown')
+    with pytest.raises(RuntimeError, match='HMOOB_BACKEND'):
+        hmong_launcher.selected_backend()
