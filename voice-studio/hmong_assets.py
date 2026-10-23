@@ -1,4 +1,4 @@
-"""Source-identified Hmong clips with inherited project reference text."""
+"""The supplied Hmong recordings and user-provided excerpt words."""
 import hashlib
 import json
 from pathlib import Path
@@ -20,6 +20,16 @@ def reference(ident):
     return path, item['reference']['text']
 
 
+def reference_fingerprint(ident):
+    """Bind resumable preset jobs to verified audio and the exact given words."""
+    path, text = reference(ident)
+    identity = {'version': 1, 'audio_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                'transcript': text}
+    payload = json.dumps(identity, ensure_ascii=False, sort_keys=True,
+                         separators=(',', ':')).encode('utf-8')
+    return hashlib.sha256(payload).hexdigest()
+
+
 def source(ident):
     if ident not in {'hmong-female', 'hmong-male'}:
         raise ValueError('Không tìm thấy giọng Hmong mặc định.')
@@ -34,9 +44,9 @@ def presets():
     return [
         {'id': 'hmong-' + gender, 'name': item['name'], 'engine': 'f5_hmong',
          'speaker': 'hmong-' + gender, 'languages': ['mww'],
-         'description': 'Mẫu của bạn · ' + item['user_filename'] + ' · lời dự án điền sẵn, cần nghe kiểm tra',
+         'description': 'Mẫu của bạn · ' + item['user_filename'] + ' · lời mẫu do bạn cung cấp',
          'source_filename': item['user_filename'], 'source_sha256': item['sha256'],
-         'reference_text_verified': False,
+         'reference_text_verified': bool(item.get('reference_text_verified', False)),
          'sample_url': '/api/hmong/presets/hmong-' + gender + '/sample'}
         for gender in ('male', 'female')
         for item in [references()[gender]]

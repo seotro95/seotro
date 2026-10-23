@@ -14,6 +14,8 @@ class Segment:
     pause: float = 0
     emphasis: bool = False
     cue: int | None = None
+    emotion: str | None = None
+    rhythm_pause: float = 0
 
 
 def spoken_text(text):
@@ -91,15 +93,75 @@ def _pack_segments(source, limit):
     for segment in source:
         if (segment.text and packed and packed[-1].text and not segment.emphasis
                 and not packed[-1].emphasis
+                and packed[-1].emotion == segment.emotion and not packed[-1].rhythm_pause
                 and len(packed[-1].text) + 1 + len(segment.text) <= limit):
             packed[-1].text += ' ' + segment.text
+            packed[-1].rhythm_pause = segment.rhythm_pause
         else:
             packed.append(segment)
     return packed
 
 
+def _expression_segments(text, job, *, timed=False):
+    """Parse controls before text normalization; emotion persists within a cue.
+
+    TXT keeps the selected emotion across paragraphs. Every SRT cue starts
+    again with the job's emotion. Explicit pauses, including zero, override
+    the automatic pause immediately before them.
+    """
+    from hmong_expression import automatic_pause, validate_emotion, validate_strength
+    from hmong_text import normalize_text
+    emotion = validate_emotion(job.get('emotion', 'neutral'))
+    strength = validate_strength(job.get('emotion_strength', .65))
+    rhythm = bool(job.get('auto_rhythm', True)) and not timed
+    emphasis = False
+    output = []
+    for part in re.split(r'(\[emotion=[^\]]*\]|\[pause=[^\]]*\]|\*\*)', text):
+        if not part:
+            continue
+        if part == '**':
+            emphasis = not emphasis
+            continue
+        if part.startswith('[emotion='):
+            emotion = validate_emotion(part[len('[emotion='):-1].strip())
+            continue
+        if part.startswith('[pause='):
+            value = part[len('[pause='):-1]
+            if not re.fullmatch(r'\d+(?:\.\d+)?', value) or not 0 <= float(value) <= 10:
+                raise ValueError('Mỗi [pause=...] phải từ 0 đến 10 giây.')
+            if output and output[-1].text:
+                output[-1].rhythm_pause = 0
+            output.append(Segment(pause=float(value)))
+            continue
+        if re.search(r'\[emotion(?:=|\])|\[pause=', part, flags=re.IGNORECASE):
+            raise ValueError('Kiểm tra cú pháp [emotion=warm] hoặc [pause=1].')
+        for line in part.splitlines(keepends=True):
+            newline = line.endswith(('\n', '\r'))
+            normalized = normalize_text(line)
+            # Closing dialogue quotes belong to the preceding sentence. Split
+            # only at sentence punctuation, never every comma or RPA syllable.
+            phrases = re.split(r'(?<=[.!?;:])\s+|(?<=[.!?;:][\"\')\]])\s+', normalized)
+            line_segments = [segment for phrase in phrases
+                             for segment in split_script(phrase, limit=160, normalizer=normalize_text)]
+            for segment in line_segments:
+                segment.emotion = emotion
+                segment.emphasis = emphasis
+                if rhythm and segment.text:
+                    segment.rhythm_pause = automatic_pause(segment.text, emotion, strength)
+                output.append(segment)
+            if rhythm and newline and output and output[-1].text:
+                output[-1].rhythm_pause = automatic_pause(output[-1].text, output[-1].emotion,
+                                                         strength, paragraph=True)
+    if emphasis:
+        raise ValueError('Đóng phần nhấn giọng bằng dấu ** ở cuối đoạn.')
+    # Added gaps and emphasis remain barriers; packing never loses a pause or
+    # crosses an emotion change. A user-added gap also keeps sentence boundaries.
+    return _pack_segments(output, 160) if job.get('paragraph_pause', 0) == 0 else output
+
+
 def plan_segments(job):
     hmong = job.get('engine') == 'f5_hmong'
+    expression = hmong and job.get('segment_plan') == 'hmong-expression-v1'
     normalizer = None
     if hmong:
         from hmong_text import normalize_text
@@ -111,7 +173,8 @@ def plan_segments(job):
         from subtitles import parse_srt
         output = []
         for index, cue in enumerate(parse_srt(job['text'])):
-            segments = split_script(cue['text'], limit=limit, normalizer=normalizer)
+            segments = (_expression_segments(cue['text'], job, timed=True) if expression else
+                        split_script(cue['text'], limit=limit, normalizer=normalizer))
             if hmong_packed:
                 segments = _pack_segments(segments, limit)
             if not any(s.text for s in segments):
@@ -121,6 +184,8 @@ def plan_segments(job):
                 output.append(segment)
         return output
     text = spoken_text(job['text']) if job.get('skip_timestamps', True) else job['text']
+    if expression:
+        return _expression_segments(text, job)
     if hmong:
         source = split_script(text, limit=limit, normalizer=normalizer)
         return _pack_segments(source, limit) if hmong_packed else source

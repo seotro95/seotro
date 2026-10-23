@@ -16,10 +16,10 @@ with TestClient(app.app) as client:
         meta=client.post('/api/hmong/reference-info',files=upload)
         assert meta.status_code==200,meta.text
         info=meta.json()
-        assert info['duration']>8 and info['automatic'] and not info['requires_selection']
+        assert abs(info['duration']-item['duration'])<.01 and info['automatic'] and not info['requires_selection']
         assert not info['requires_transcript'] and info['known_preset']=='hmong-'+gender
         assert info['transcript']==item['reference']['text']
-        assert info['transcript_verified'] is False and info['transcript_source']=='project_prefill'
+        assert info['transcript_verified'] is item['reference_text_verified'] and info['transcript_source']==item.get('reference_text_source','project_prefill')
         response=client.post('/api/voices/clone',data={'name':'Known '+gender,'language':'mww','consent':'true'},files=upload)
         assert response.status_code==201,response.text
         record=response.json()

@@ -9,7 +9,8 @@ import sys
 
 PYTHON_FILES = (
     'app.py', 'bundle_check.py', 'dubbing.py', 'hardware.py', 'hmong_assets.py',
-    'hmong_engine.py', 'hmong_f5.py', 'hmong_launcher.py', 'hmong_reference.py', 'hmong_text.py',
+    'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py', 'hmong_launcher.py',
+    'hmong_reference.py', 'hmong_text.py',
     'language_catalog.py', 'local_vieneu.py', 'narration.py', 'performance.py',
     'portable_launcher.py', 'prepare_hmong.py', 'prepare_models.py',
     'prepare_subtitles.py', 'recognition.py', 'state_io.py', 'studio_variant.py',

@@ -19,6 +19,12 @@ import time
 import urllib.request
 
 
+EXPRESSIVE_SAMPLE = ('[emotion=warm]**Nyob zoo, phooj ywg.**[pause=0.25]'
+                     '[emotion=serious]Peb yuav nyob ua ke.')
+GENERATED_PREVIEW_FILES = {'hmong-female': 'Hmong-female-2-preview.mp3',
+                           'hmong-male': 'Hmong-male-2-preview.mp3'}
+
+
 def check_batch_entrypoints(root):
     """Exercise the files users double-click through the real Windows shell."""
     root = Path(root)
@@ -44,6 +50,44 @@ def check_batch_entrypoints(root):
     return results
 
 
+def check_source_reference(personal, metadata, gender):
+    """Known source clones must use the current manifest, even for short MP3s."""
+    assert personal['engine'] == 'f5_hmong'
+    assert personal['automatic_reference'] is True
+    assert personal['known_preset'] == 'hmong-' + gender
+    assert personal['source_sha256'] == metadata['sha256']
+    assert abs(personal['source_duration'] - metadata['duration']) < .15, 'Wrong source duration'
+    assert personal['transcript'] == metadata['reference']['text']
+    assert abs(personal['reference_start'] - metadata['reference']['start']) < .01
+    assert abs(personal['reference_end'] - metadata['reference']['end']) < .01
+    reference_seconds = metadata['reference']['end'] - metadata['reference']['start']
+    assert 3 <= personal['duration'] <= 8.001
+    assert abs(personal['duration'] - reference_seconds) < .05, 'Wrong reference duration'
+
+
+def export_generated_preview(client, job, reports):
+    """Export an already completed preset job, without requesting new speech."""
+    filename = GENERATED_PREVIEW_FILES[job['voice_id']]
+    response = client.get('/api/jobs/' + job['id'] + '/export.mp3')
+    assert response.status_code == 200 and len(response.content) > 1000, 'Generated MP3 export is missing'
+    assert response.headers.get('content-type', '').split(';')[0] == 'audio/mpeg'
+    reports = Path(reports)
+    reports.mkdir(parents=True, exist_ok=True)
+    destination = reports / filename
+    destination.write_bytes(response.content)
+    probe = json.loads(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries',
+        'stream=codec_name:format=duration', '-of', 'json', str(destination)], timeout=30))
+    assert any(stream.get('codec_name') == 'mp3' for stream in probe.get('streams', []))
+    assert float(probe['format']['duration']) > 1 / 3
+    return {'filename': filename, 'sha256': hashlib.sha256(response.content).hexdigest(),
+            'bytes': len(response.content), 'generated': True, 'original_source_recording': False,
+            'job_id': job['id'], 'voice_id': job['voice_id'], 'text': job['text'],
+            'audio_seconds': job['audio_seconds'],
+            'settings': {key: job[key] for key in ('hmong_steps', 'hmong_precision', 'delivery',
+                'emotion', 'emotion_strength', 'auto_rhythm')},
+            'expression': job.get('expression')}
+
+
 def main():
     assert os.name == 'nt', 'This validation must run on native Windows'
     root = Path(sys.argv[1]).resolve()
@@ -61,13 +105,17 @@ def main():
     import app as studio
     from hmong_assets import references
     voice_metadata = references()
+    for gender in ('female', 'male'):
+        assert voice_metadata[gender]['reference_text_verified'] is True
+        assert voice_metadata[gender]['reference_text_source'] == 'user_provided_for_selected_excerpt'
     for binary in ('ffmpeg', 'ffprobe'):
         subprocess.run([binary, '-version'], check=True, stdout=subprocess.DEVNULL)
     results = {'success': False, 'platform': sys.platform, 'voices': {}, 'clone': False,
                'full_source_previews': {}, 'source_clones': {}, 'manual_crop': False,
                'txt_srt': False, 'mp3': False, 'normal_launcher': False, 'batch_entrypoints': {},
+               'expression': {}, 'generated_auditions': {},
                'native_windows_validation': os.name == 'nt'}
-    text = 'Nyob zoo, kuv yog ib tug Hmoob. Hnub no peb sib tham ua ke.'
+    text = 'Nyob zoo, peb zoo siab tau ntsib nej.'
 
     def render(client, payload):
         response = client.post('/api/speech', json=payload)
@@ -93,6 +141,8 @@ def main():
         config = client.get('/api/config').json()
         assert config['variant'] == 'hmong' and config['default_language'] == 'mww'
         assert config['hmong_steps'] == 16 and config['default_voice_id'] == 'hmong-male'
+        assert config['delivery'] == 'story' and config['emotion'] == 'warm'
+        assert config['emotion_strength'] == .65 and config['auto_rhythm'] is True
         assert config['models']['f5_hmong'] and not config['nano_ready']
         assert config['subtitle_ready'] is False, 'Do not claim Hmong Whisper recognition'
         for asset in ('app.js', 'workspace.js', 'style.css'):
@@ -100,7 +150,7 @@ def main():
         assert 'Voice Studio Hmong' in client.get('/').text
         voices = client.get('/api/voices').json()['voices']
         assert {v['id'] for v in voices} == {'hmong-female', 'hmong-male'}
-        for ident, delivery in [('hmong-female', 'review'), ('hmong-male', 'story')]:
+        for ident, delivery in [('hmong-female', 'review'), ('hmong-male', None)]:
             print('Real offline inference:', ident, delivery, flush=True)
             preset = next(v for v in voices if v['id'] == ident)
             metadata = voice_metadata[ident.removeprefix('hmong-')]
@@ -111,22 +161,46 @@ def main():
             assert preview.status_code == 200
             assert hashlib.sha256(preview.content).hexdigest() == metadata['sha256']
             results['full_source_previews'][ident] = {'sha256': metadata['sha256'],
-                                                     'source_seconds': metadata['duration']}
+                'source_seconds': metadata['duration'], 'user_filename': metadata['user_filename'],
+                'reference_start': metadata['reference']['start'],
+                'reference_end': metadata['reference']['end']}
             started = time.monotonic()
-            job = render(client, {'text': text, 'language': 'mww', 'voice_id': ident,
-                                 'format': 'wav', 'speed': 1,
-                                 'delivery': delivery, 'paragraph_pause': 0})
+            spoken_text = EXPRESSIVE_SAMPLE if ident == 'hmong-male' else text
+            payload = {'text': spoken_text, 'language': 'mww', 'voice_id': ident,
+                       'format': 'wav', 'speed': 1, 'paragraph_pause': 0}
+            if delivery is not None:
+                payload['delivery'] = delivery
+            if ident == 'hmong-male':
+                payload['emotion'] = 'warm'
+            job = render(client, payload)
             results['voices'][ident] = {'audio_seconds': job['audio_seconds'],
                                       'wall_seconds': round(time.monotonic() - started, 3),
                                       'steps': job['hmong_steps'], 'precision': job['hmong_precision']}
             assert job['hmong_steps'] == 16 and job['hmong_precision'] == 'fp32'
+            assert job['segment_plan'] == 'hmong-expression-v1'
+            if ident == 'hmong-male':
+                assert job['delivery'] == 'story'
+                expression = job['expression']
+                assert expression['controls_version'] == 'hmong-expression-v1'
+                assert expression['mode'] == 'rhythm_dynamics_v1'
+                assert expression['emotion'] == 'warm' and expression['strength'] == .65
+                assert expression['auto_rhythm'] is True
+                assert expression['pitch_shift'] is False and expression['neural_emotion'] is False
+                assert expression['emotions_used'] == ['warm', 'serious']
+                assert expression['emotion_counts'] == {'warm': 1, 'serious': 1}
+                results['expression'] = {'voice_id': ident, 'steps': job['hmong_steps'],
+                    'precision': job['hmong_precision'], 'markup_removed_from_spoken_srt': False,
+                    **expression}
             txt = client.get('/api/jobs/' + job['id'] + '/script.txt')
             srt = client.get('/api/jobs/' + job['id'] + '/script.srt')
             assert txt.status_code == srt.status_code == 200
-            assert text in txt.text and '-->' in srt.text and 'Nyob zoo' in srt.text
+            assert spoken_text in txt.text and '-->' in srt.text and 'Nyob zoo' in srt.text
+            if ident == 'hmong-male':
+                assert '[emotion=' not in srt.text and '[pause=' not in srt.text and '**' not in srt.text
+                results['expression']['markup_removed_from_spoken_srt'] = True
             results['txt_srt'] = True
-        mp3 = client.get('/api/jobs/' + job['id'] + '/export.mp3')
-        assert mp3.status_code == 200 and len(mp3.content) > 1000, mp3.text[:200]
+            results['generated_auditions'][ident] = export_generated_preview(client, job, reports)
+        assert len(results['generated_auditions']) == 2
         results['mp3'] = True
 
         for gender in ('female', 'male'):
@@ -138,17 +212,9 @@ def main():
                     files={'file': (source.name, audio, 'audio/mpeg')})
             assert response.status_code == 201, response.text
             personal = response.json()
-            assert personal['engine'] == 'f5_hmong'
-            assert personal['automatic_reference'] is True
-            assert personal['known_preset'] == 'hmong-' + gender
-            assert personal['source_sha256'] == metadata['sha256']
-            assert personal['source_duration'] > 8
-            assert personal['transcript'] == metadata['reference']['text']
-            assert abs(personal['reference_start'] - metadata['reference']['start']) < .01
-            assert abs(personal['reference_end'] - metadata['reference']['end']) < .01
-            assert 3 <= personal['duration'] <= 8.001
+            check_source_reference(personal, metadata, gender)
             started = time.monotonic()
-            clone = render(client, {'text': 'Kuv zoo siab tau ntsib nej hnub no.', 'language': 'mww',
+            clone = render(client, {'text': 'Kuv zoo siab tau ntsib nej.', 'language': 'mww',
                                    'voice_id': personal['id'],
                                    'format': 'wav', 'paragraph_pause': 0})
             assert clone['engine'] == 'f5_hmong'
@@ -162,27 +228,33 @@ def main():
         results['clone'] = True
 
         # A different long file needs an explicit excerpt and matching words.
-        # Prefix supplied speech with one second of silence so the chosen
-        # 1.0..6.3s interval contains exactly the stored female reference.
+        # Prefix supplied speech with one second of silence and shift the
+        # manifest's reference bounds by the same amount. Keep the complete
+        # supplied MP3 for previews, including any silence outside the excerpt.
         female = voice_metadata['female']
         source = app_root / 'assets/hmong' / female['file']
+        manual_start = 1 + female['reference']['start']
+        manual_end = 1 + female['reference']['end']
+        reference_seconds = female['reference']['end'] - female['reference']['start']
         altered = subprocess.check_output(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(source),
-            '-af', 'adelay=1000:all=1', '-t', '12', '-ac', '1', '-ar', '24000',
+            '-af', 'adelay=1000:all=1,apad', '-t', str(max(12, manual_end + 1)), '-ac', '1', '-ar', '24000',
             '-codec:a', 'pcm_s16le', '-f', 'wav', 'pipe:1'], timeout=45)
+        assert sf.info(io.BytesIO(altered)).duration >= 11.99
         assert hashlib.sha256(altered).hexdigest() not in {v['sha256'] for v in voice_metadata.values()}
         fields = {'name': 'Native QA manual crop', 'language': 'mww', 'consent': 'true'}
         files = {'file': ('different-long.wav', altered, 'audio/wav')}
         missing = client.post('/api/voices/clone', data=fields, files=files)
         assert missing.status_code == 422, 'Unknown long audio must not guess words or reference bounds'
-        fields.update(transcript=female['reference']['text'], reference_start='1',
-                      reference_end=str(1 + female['reference']['end']))
+        fields.update(transcript=female['reference']['text'], reference_start=str(manual_start),
+                      reference_end=str(manual_end))
         response = client.post('/api/voices/clone', data=fields, files=files)
         assert response.status_code == 201, response.text
         manual = response.json()
         assert manual['engine'] == 'f5_hmong' and manual['automatic_reference'] is False
         assert manual['transcript'] == female['reference']['text']
-        assert abs(manual['reference_start'] - 1) < .01
-        assert abs(manual['duration'] - female['reference']['end']) < .05
+        assert abs(manual['reference_start'] - manual_start) < .01
+        assert abs(manual['reference_end'] - manual_end) < .01
+        assert abs(manual['duration'] - reference_seconds) < .05
         manual_job = render(client, {'text': 'Peb zoo siab tau nyob ua ke.', 'language': 'mww',
                                     'voice_id': manual['id'], 'hmong_steps': 4,
                                     'format': 'wav', 'paragraph_pause': 0})
@@ -203,7 +275,8 @@ def main():
     results['default_synthesis'] = {'steps': 16, 'precision': 'fp32', 'presets_tested': 2,
                                    'source_clones_tested': 2}
     results['pronunciation_evaluated'] = False
-    results['reference_text_verified'] = False
+    results['reference_text_verified'] = True
+    results['reference_text_source'] = 'user_provided_for_selected_excerpt'
     results['batch_entrypoints'] = check_batch_entrypoints(root)
     subprocess.run([sys.executable, str(app_root / 'hmong_launcher.py'), '--check'],
                    check=True, cwd=app_root, timeout=180)
@@ -249,7 +322,7 @@ def main():
     results['success'] = True
     reports.mkdir(parents=True, exist_ok=True)
     (reports / 'native-smoke.json').write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding='utf-8')
-    print('PASS: complete MP3 previews, two default 16-step FP32 offline voices, source-MP3 clones, manual excerpt, TXT/SRT/MP3, native BAT aliases and normal startup.', flush=True)
+    print('PASS: current complete MP3 previews, two default 16-step FP32 voices and source clones, local expressive markup, manual excerpt, TXT/SRT/MP3, native BAT aliases and normal startup.', flush=True)
 
 
 if __name__ == '__main__':

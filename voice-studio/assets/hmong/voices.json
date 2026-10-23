@@ -1,36 +1,42 @@
 {
   "female": {
     "file": "source-female.mp3",
-    "name": "Hmong nữ · Nữ mặc định",
-    "duration": 22.386917,
-    "sha256": "2c3467e7b5f0e49a3277397c00762810f657fd1bbd36f738a7e17d0f067f6222",
-    "source": "Tệp MP3 người dùng gửi trực tiếp trong cuộc trò chuyện; SHA256 dùng đối chiếu danh tính tệp. Lời tham chiếu kế thừa từ dự án, chưa xác minh khớp âm thanh.",
+    "name": "Hmong nữ 2 · Nữ mặc định",
+    "duration": 4.702041666666666,
+    "sha256": "874f510e723f48fcd093d55a5ba4613fc80107a863261658ec9d3961ef493d84",
+    "source": "Tệp MP3 mới và lời Hmong của đoạn mẫu do người dùng cung cấp trực tiếp ngày 23/10/2026; SHA256 xác minh danh tính tệp.",
     "reference": {
       "start": 0,
-      "end": 5.3,
-      "text": "tsis pom muaj neeg lawm ces, nws thiaj li los ze ze ntawm lawv lub tsev."
+      "end": 4.7,
+      "text": "nyob zoo os yawb txiv , kuv nim qhov los xwb, ntseem tsis ntaub muaj dab tsis li os"
     },
     "reference_file": "female.wav",
-    "reference_sha256": "e32e9ab119e5a9e0e60f75e0b02c3b1bacea55e18d74174ded6098a4049e04f3",
-    "user_filename": "hmong nữ.MP3",
-    "reference_text_verified": false,
-    "reference_text_source": "inherited_project_metadata"
+    "reference_sha256": "351b0ed55cefcdcef689b253228c1236ec14b3082b250714930588e16c20a97b",
+    "user_filename": "hmong nữ 2(1).MP3",
+    "reference_text_verified": true,
+    "reference_text_source": "user_provided_for_selected_excerpt",
+    "reference_selection": "Dùng đoạn gần trọn tệp rút gọn người dùng gửi lại; giữ đuôi âm và lời đã xác nhận.",
+    "replacement_generation": "2026-10-23-new-defaults",
+    "reference_text_confirmation_date": "2026-10-23"
   },
   "male": {
     "file": "source-male.mp3",
-    "name": "Hmong nam1 · Nam mặc định",
-    "duration": 18.93875,
-    "sha256": "29285370b91db8465222b2056b204110c6dded1a60c9004c7fb8747fe4978c9c",
-    "source": "Tệp MP3 người dùng gửi trực tiếp trong cuộc trò chuyện; SHA256 dùng đối chiếu danh tính tệp. Lời tham chiếu kế thừa từ dự án, chưa xác minh khớp âm thanh.",
+    "name": "Hmong nam 2 · Nam mặc định",
+    "duration": 4.7020625,
+    "sha256": "bc9104c2ebe00471abc46283c52627b2cadc615d96f15f1dc9d576b1316d78c8",
+    "source": "Tệp MP3 mới và lời Hmong của đoạn mẫu do người dùng cung cấp trực tiếp ngày 23/10/2026; SHA256 xác minh danh tính tệp.",
     "reference": {
       "start": 0,
-      "end": 4.5,
-      "text": "hais tias ces Nraug Xyooj thiaj li tawm tau mus hauv kev mus lawm."
+      "end": 4.7,
+      "text": "hais tias tus neeng uas nyob rau ntawm yug ib sab no nws xav dag tsis rau yug"
     },
     "reference_file": "male.wav",
-    "reference_sha256": "da022f0b4511e266bfd7083734c0d3ba4253546f5cd8f8b4b0cabb502e2cab57",
-    "user_filename": "hmong nam1.MP3",
-    "reference_text_verified": false,
-    "reference_text_source": "inherited_project_metadata"
+    "reference_sha256": "2c640add83f69b7ea24f83b3fcf880762047fa6727daf2cd4caef950e4026fe7",
+    "user_filename": "hmong nam 2.MP3",
+    "reference_text_verified": true,
+    "reference_text_source": "user_provided_for_selected_excerpt",
+    "reference_selection": "Dùng đoạn gần toàn bộ tệp ngắn; giữ đuôi âm.",
+    "replacement_generation": "2026-10-23-new-defaults",
+    "reference_text_confirmation_date": "2026-10-23"
   }
 }

@@ -19,14 +19,16 @@ with TestClient(app.app) as c, patch.object(app,'model_ready',lambda engine:engi
     cfg=c.get('/api/config').json()
     assert cfg['variant']=='hmong' and cfg['default_language']=='mww'
     assert cfg['hmong_steps']==16 and cfg['paragraph_pause']==0
+    assert cfg['delivery']=='story' and cfg['emotion']=='warm'
+    assert cfg['emotion_strength']==.65 and cfg['auto_rhythm'] is True
     assert cfg['hardware']=='unknown' and 'CHƯA KIỂM TRA' in cfg['hardware_label']
-    assert 'chưa được xác minh' in cfg['hmong_reference_note']
+    assert 'do bạn cung cấp và xác nhận' in cfg['hmong_reference_note']
     assert cfg['languages']=={'mww':'Hmong Trắng · Hmoob Daw'}
     assert 'mww' not in cfg['recognition_languages']
     voices=c.get('/api/voices').json()['voices']
     assert {v['id'] for v in voices}=={'hmong-female','hmong-male'}
     assert all(v['engine']=='f5_hmong' and v['native_language']=='mww' for v in voices)
-    assert all(v['reference_text_verified'] is False and 'cần nghe kiểm tra' in v['description'] for v in voices)
+    assert all(v['reference_text_verified'] is True and 'do bạn cung cấp' in v['description'] for v in voices)
     response=c.post('/api/speech',json={'text':'Nyob zoo.','voice_id':'hmong-female','hmong_steps':8,'delivery':'review'})
     assert response.status_code==202,response.text
     assert response.json()['engine']=='f5_hmong' and response.json()['language']=='mww'
@@ -36,7 +38,7 @@ with TestClient(app.app) as c, patch.object(app,'model_ready',lambda engine:engi
 ''')
 
 
-def test_hmong_job_defaults_pack_and_validate_rpa_before_queue(tmp_path):
+def test_hmong_job_story_defaults_and_rpa_validation_before_queue(tmp_path):
     run_case(tmp_path, '''
 from unittest.mock import patch
 from fastapi.testclient import TestClient
@@ -49,12 +51,42 @@ with TestClient(app.app) as c, patch.object(app,'model_ready',return_value=True)
     response=c.post('/api/speech',json={'text':'Nyob zoo. Ua tsaug.','voice_id':'hmong-male'})
     assert response.status_code==202,response.text
     job=response.json()
-    assert job['hmong_steps']==16 and job['delivery']=='natural' and job['paragraph_pause']==0
-    assert job['segment_plan']=='hmong-packed-v1' and job['total']==1 and job['quality']=='standard'
-    response=c.post('/api/speech',json={'text':'Nyob zoo. Ua tsaug.','voice_id':'hmong-male','paragraph_pause':.3,'hmong_steps':4})
+    assert job['hmong_steps']==16 and job['delivery']=='story' and job['paragraph_pause']==0
+    assert job['emotion']=='warm' and job['emotion_strength']==.65 and job['auto_rhythm'] is True
+    assert job['segment_plan']=='hmong-expression-v1' and job['total']>=2 and job['quality']=='standard'
+    response=c.post('/api/speech',json={'text':'Nyob zoo. Ua tsaug.','voice_id':'hmong-male','paragraph_pause':.3,'hmong_steps':4,'auto_rhythm':False})
     assert response.status_code==202,response.text
-    assert response.json()['segment_plan']=='classic-v1' and response.json()['total']==2
+    assert response.json()['segment_plan']=='hmong-expression-v1' and response.json()['total']==2
     assert response.json()['hmong_steps']==4
+''')
+
+
+def test_hmong_expression_fields_and_inline_controls_are_validated_before_queue(tmp_path):
+    run_case(tmp_path, '''
+from unittest.mock import patch
+from fastapi.testclient import TestClient
+from narration import plan_segments
+import app
+with TestClient(app.app) as c, patch.object(app,'model_ready',return_value=True), patch.object(app.executor,'submit') as submit:
+    base={'text':'Nyob zoo.','voice_id':'hmong-male'}
+    for invalid in [{'emotion':'angry'},{'emotion_strength':-0.01},{'emotion_strength':1.01},{'emotion_strength':'NaN'},{'text':'[emotion=angry]Nyob zoo.'}]:
+        response=c.post('/api/speech',json={**base,**invalid})
+        assert response.status_code==422,response.text
+    submit.assert_not_called()
+    assert not list((app.DATA/'jobs').iterdir())
+    text='Nyob zoo. [emotion=warm]**Ua tsaug.** [pause=0.5] Kuv tuaj.'
+    response=c.post('/api/speech',json={**base,'text':text,'emotion':'suspense','emotion_strength':.8,'auto_rhythm':False})
+    assert response.status_code==202,response.text
+    job=response.json()
+    assert job['text']==text and job['segment_plan']=='hmong-expression-v1'
+    assert job['emotion']=='suspense' and job['emotion_strength']==.8 and job['auto_rhythm'] is False
+    segments=plan_segments(job)
+    assert [(s.text,s.emotion) for s in segments if s.text]==[('Nyob zoo.','suspense'),('Ua tsaug.','warm'),('Kuv tuaj.','warm')]
+    assert all('[emotion=' not in s.text and '[pause=' not in s.text and '**' not in s.text for s in segments)
+    assert any(s.emphasis and s.text=='Ua tsaug.' for s in segments) and any(s.pause==.5 for s in segments)
+    response=c.post('/api/speech',json={**base,'emotion':'joyful','emotion_strength':0,'auto_rhythm':False})
+    assert response.status_code==202,response.text
+    assert response.json()['emotion_strength']==0 and response.json()['auto_rhythm'] is False
 ''')
 
 def test_hmong_clone_requires_words_and_bounded_reference(tmp_path):

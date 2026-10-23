@@ -13,6 +13,7 @@ from concurrent.futures import ThreadPoolExecutor
 from contextlib import asynccontextmanager, contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import Literal
 
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile, Query
 from fastapi.responses import FileResponse, JSONResponse
@@ -201,7 +202,8 @@ def _config_values():
                 'ai_voice_languages':['mww'],'max_characters':MAX_CHARACTERS,'max_audio_minutes':180,
                 'fast_vieneu':False,'int8_cpu':False,'models':{'f5_hmong':model_ready('f5_hmong')},
                 'hmong_ready':model_ready('f5_hmong'),'hmong_steps':16,'paragraph_pause':0,'subtitle_ready':False,
-                'hmong_reference_note':'Hai MP3 nam/nữ là tệp nguồn bạn gửi. Lời tham chiếu có sẵn trong dự án chưa được xác minh khớp bản thu. Nghe mẫu; nếu cần sửa lời, nhập MP3 gốc vào phần Nhân bản và lưu hồ sơ giọng đã chỉnh. Lời khớp đoạn thu giúp mô hình đọc rõ hơn.',
+                'delivery':'story','emotion':'warm','emotion_strength':0.65,'auto_rhythm':True,
+                'hmong_reference_note':'Hai mẫu nam/nữ đi kèm dùng lời mẫu do bạn cung cấp và xác nhận khớp đoạn thu. Có thể nghe và sửa lời trong phần Nhân bản rồi lưu hồ sơ giọng đã chỉnh. Với mẫu khác, nhập lời khớp chính xác đoạn được chọn.',
                 'hardware':'unknown','hardware_label':'CỤC BỘ · CHƯA KIỂM TRA CPU/GPU','ffmpeg':bool(shutil.which('ffmpeg')),
                 'cpu_cores':os.cpu_count() or 1,'nano_ready':False,'worker_warm':warm_worker is not None and warm_worker.poll() is None}
     return {'variant':'standard','app_name':APP_NAME,'default_language':'vi','subtitle_ready':(DATA/'models'/'whisper-base'/'model.bin').is_file(),'version':app.version,'mode': 'local', 'languages': LANGUAGES,'subtitle_languages':SUBTITLE_LANGUAGES,'ai_voice_languages':list(CORE_LANGUAGES), 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'cpu_cores': os.cpu_count() or 1, 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
@@ -346,7 +348,10 @@ class Speech(BaseModel):
     nano_parallel: int = Field(default=1, ge=1, le=4)
     nano_steps: int = Field(default=8, ge=4, le=16)
     max_minutes: int = Field(default=180, ge=1, le=180)
-    delivery: str = 'natural'
+    delivery: str = 'story' if IS_HMONG else 'natural'
+    emotion: Literal['neutral', 'warm', 'joyful', 'sad', 'serious', 'suspense'] = 'warm' if IS_HMONG else 'neutral'
+    emotion_strength: float = Field(default=0.65, ge=0, le=1)
+    auto_rhythm: bool = IS_HMONG
     paragraph_pause: float = Field(default=0 if IS_HMONG else 0.3, ge=0, le=3)
     quality: str = Field(default='auto', pattern='^(auto|standard|fast)$')
 
@@ -481,9 +486,10 @@ def speech(body: Speech):
     if not voice or body.language not in voice['languages']:
         raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
+    preset_reference_fingerprint = None
     try:
-        segment_plan = ({'vieneu_nano':'nano-packed-v1','f5_hmong':'hmong-packed-v1'}.get(engine,'classic-v1')
-                        if body.paragraph_pause == 0 else 'classic-v1')
+        segment_plan = ('hmong-expression-v1' if engine == 'f5_hmong' else
+                        'nano-packed-v1' if engine == 'vieneu_nano' and body.paragraph_pause == 0 else 'classic-v1')
         segments = plan_segments({**body.model_dump(), 'engine': engine, 'segment_plan': segment_plan})
         from narration import validate_voice_text
         for index,segment in enumerate(segments):
@@ -500,8 +506,9 @@ def speech(body: Speech):
             raise ValueError('Nhập nội dung đọc, không chỉ ký hiệu nghỉ.')
         if engine == 'f5_hmong':
             if voice.get('speaker') in {'hmong-male','hmong-female'}:
-                from hmong_assets import reference
+                from hmong_assets import reference, reference_fingerprint
                 _, reference_text = reference(voice['speaker'])
+                preset_reference_fingerprint = reference_fingerprint(voice['speaker'])
             else:
                 reference_text = voice.get('transcript','')
             validate_voice_text(reference_text,engine,'Lời mẫu tham chiếu')
@@ -523,6 +530,8 @@ def speech(body: Speech):
             raise HTTPException(429, 'Hàng đợi đã có 4 tác vụ. Hãy đợi trước khi tạo thêm.')
         ident = uuid.uuid4().hex
         job = {**body.model_dump(), 'text': body.text.strip(), 'id': ident, 'voice_name': voice['name'], 'engine': engine, 'speaker': voice.get('speaker'), 'status': 'queued', 'segment_plan': segment_plan, 'total': len(segments), 'completed': 0, 'progress': 0, 'created_at': now()}
+        if preset_reference_fingerprint is not None:
+            job['hmong_reference_fingerprint'] = preset_reference_fingerprint
         write_json(DATA / 'jobs' / f'{ident}.json', job)
         executor.submit(run_job, ident)
     return job
@@ -655,6 +664,15 @@ def resume_job(ident: str):
             raise HTTPException(429, 'Hàng đợi đã đầy.')
         if not job.get('speaker') and not (DATA / 'voices' / f"{job['voice_id']}.json").exists():
             raise HTTPException(409, 'Mẫu giọng đã bị xóa; không thể tiếp tục tác vụ này.')
+        if job.get('engine') == 'f5_hmong' and job.get('speaker') in {'hmong-male', 'hmong-female'}:
+            from hmong_assets import reference_fingerprint
+            try:
+                current_reference = reference_fingerprint(job['speaker'])
+            except (OSError, ValueError):
+                current_reference = None
+            if not current_reference or job.get('hmong_reference_fingerprint') != current_reference:
+                raise HTTPException(409, 'Mẫu giọng Hmong mặc định đã thay đổi hoặc tác vụ cũ chưa lưu danh tính mẫu. '
+                                          'Tạo tác vụ mới bằng giọng hiện tại; các đoạn đã tạo vẫn được giữ nguyên.')
         (DATA / 'parts' / ident / 'cancel.flag').unlink(missing_ok=True)
         job.update(status='queued')
         job.pop('error', None)
@@ -769,7 +787,18 @@ def download_script(ident: str, extension: str):
     if extension == 'txt':
         text = '\n'.join(c['text'] for c in parse_srt(job['text'])) if job.get('input_format') == 'srt' else job['text']
     elif job.get('input_format') == 'srt':
-        text = export_srt(parse_srt(job['text']), job.get('video_offset', 0) if job.get('video_id') else 0)
+        cues = parse_srt(job['text'])
+        expressive = job.get('engine') == 'f5_hmong' and job.get('segment_plan') == 'hmong-expression-v1'
+        timing = DATA / 'audio' / (ident + '.srt')
+        if expressive and job['status'] == 'done' and timing.is_file():
+            text = timing.read_text(encoding='utf-8')
+        else:
+            if expressive:
+                segments = plan_segments(job)
+                for index, cue in enumerate(cues):
+                    cue['text'] = ' '.join(segment.text for segment in segments
+                                           if segment.cue == index and segment.text)
+            text = export_srt(cues, job.get('video_offset', 0) if job.get('video_id') else 0)
     else:
         path = DATA / 'audio' / (ident + '.srt')
         if job['status'] != 'done' or not path.exists():

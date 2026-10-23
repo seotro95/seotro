@@ -77,6 +77,8 @@ def test_generation_queue_validation_and_metadata(studio):
         job = response.json()
         submit.assert_called_once_with(app.run_job, job['id'])
         assert job['engine'] == 'vieneu'
+        assert job['delivery'] == 'natural' and job['paragraph_pause'] == .3
+        assert job['auto_rhythm'] is False and job['emotion'] == 'neutral'
         assert client.get('/api/jobs/' + job['id']).json()['status'] == 'queued'
         assert client.delete('/api/history/' + job['id']).status_code == 409
         assert client.get('/api/audio/' + job['id']).status_code == 404

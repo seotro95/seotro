@@ -104,7 +104,7 @@ _hmong_model_instance = None
 
 def get_synthesizer(job):
     global _cached_key, _cached_synth
-    key = tuple(job.get(k) for k in ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads', 'hmong_steps'))
+    key = tuple(job.get(k) for k in ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads', 'hmong_steps', 'hmong_reference_fingerprint'))
     if _cached_key != key or _cached_synth is None:
         _cached_synth = None
         _cached_key = None
@@ -189,6 +189,15 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
     profile_speed = PROFILES[job.get('delivery', 'natural')][0]
     tempo = job['speed'] * profile_speed * (0.94 if segment.emphasis else 1)
     gain = 1.12 if segment.emphasis else 1
+    from hmong_expression import enabled as expression_enabled
+    expressive = expression_enabled(job)
+    if expressive:
+        from hmong_expression import parameters
+        emotion = segment.emotion or job.get('emotion', 'neutral')
+        strength = job.get('emotion_strength', .65)
+        emotion_tempo, emotion_gain, _, _ = parameters(emotion, strength)
+        tempo *= emotion_tempo
+        gain *= emotion_gain
     for attempt in range(3):
         if (work / 'cancel.flag').exists():raise InterruptedError('Tác vụ đã dừng.')
         raw.unlink(missing_ok=True);temporary.unlink(missing_ok=True)
@@ -210,6 +219,9 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
                 raise EmptyVoiceError('Model tạo mẫu âm thanh không hợp lệ.')
             del raw_samples
             normalize_audio(raw, temporary, tempo, gain)
+            if expressive:
+                from hmong_expression import shape_phrase_energy
+                shape_phrase_energy(temporary, emotion, strength)
             with wave.open(str(temporary)) as audio:
                 samples=np.frombuffer(audio.readframes(audio.getnframes()),dtype='<i2')
             if not len(samples) or not np.any(samples):raise EmptyVoiceError('Âm thanh rỗng hoặc chỉ có im lặng.')
@@ -226,6 +238,15 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
 
 def render(job, synthesize=None):
     global _nano_pool, _nano_pool_workers, _cached_synth, _cached_key
+    if job.get('engine') == 'f5_hmong' and job.get('speaker') in {'hmong-male', 'hmong-female'}:
+        from hmong_assets import reference_fingerprint
+        try:
+            current_reference = reference_fingerprint(job['speaker'])
+        except (OSError, ValueError):
+            current_reference = None
+        if not current_reference or job.get('hmong_reference_fingerprint') != current_reference:
+            raise ValueError('Mẫu giọng Hmong mặc định đã thay đổi hoặc tác vụ cũ chưa lưu danh tính mẫu. '
+                             'Tạo tác vụ mới bằng giọng hiện tại; các đoạn đã tạo vẫn được giữ nguyên.')
     workers = min(4, max(1, job.get('nano_parallel', 1)))
     parallel = job.get('engine') == 'vieneu_nano' and workers > 1 and synthesize is None
     if not parallel or (_nano_pool is not None and _nano_pool_workers not in (None, workers)):
@@ -250,8 +271,14 @@ def render(job, synthesize=None):
     payload = {key: value for key, value in job.items() if key != 'text'}
     profile_speed, default_pause = PROFILES[job.get('delivery', 'natural')]
     gap = job.get('paragraph_pause', default_pause)
+    from hmong_expression import enabled as expression_enabled
+    expressive = expression_enabled(job)
     from subtitles import parse_srt, export_srt
     cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
+    if expressive and cues:
+        for cue_index, cue in enumerate(cues):
+            cue['text'] = ' '.join(segment.text for segment in segments
+                                   if segment.cue == cue_index and segment.text)
     timed = []
     alignment=[]
     def save_alignment(sync_ok=False,failed=None):
@@ -287,7 +314,9 @@ def render(job, synthesize=None):
                 completed = index + 1
                 if not clipped:
                     if not cues:
-                        writer.silence(gap)
+                        following_pause = index + 1 < len(segments) and not segments[index + 1].text
+                        writer.silence(0 if expressive and following_pause else
+                                       gap + (segment.rhythm_pause if expressive else 0))
             else:
                 target_writer.silence(segment.pause)
                 completed = index + 1
@@ -376,6 +405,19 @@ def render(job, synthesize=None):
     if job['engine']=='f5_hmong' and _hmong_model_instance is not None and _hmong_model_instance._model is not None:
         inference = {'hmong_precision': _hmong_model_instance._model.precision,
                      'hmong_steps': job.get('hmong_steps',16), 'hmong_device': _hmong_model_instance.device}
+    if expressive:
+        emotion_counts = {}
+        for segment in segments[:completed]:
+            if segment.text:
+                emotion = segment.emotion or job.get('emotion', 'neutral')
+                emotion_counts[emotion] = emotion_counts.get(emotion, 0) + 1
+        inference['expression'] = {
+            'controls_version': 'hmong-expression-v1', 'mode': 'rhythm_dynamics_v1',
+            'emotion': job.get('emotion', 'neutral'), 'strength': job.get('emotion_strength', .65),
+            'auto_rhythm': bool(job.get('auto_rhythm', True)),
+            'pitch_shift': False, 'neural_emotion': False,
+            'emotion_counts': emotion_counts, 'emotions_used': list(emotion_counts),
+        }
     write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), **inference})
 
 
