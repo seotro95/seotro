@@ -19,7 +19,8 @@ spec.loader.exec_module(packaging)
 
 def source_fixture(root):
     root.mkdir()
-    for name in ('app.py', 'worker.py', 'bundle_check.py', 'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py',
+    for name in ('app.py', 'worker.py', 'bundle_check.py', 'hmong_acceleration.py',
+                 'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py',
                  'hmong_reference.py', 'hmong_text.py', 'hmong_assets.py', 'prepare_hmong.py',
                  'hmong_launcher.py', 'studio_variant.py'):
         (root / name).write_text('# app\n', encoding='utf-8')
@@ -53,6 +54,7 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
     assert not (output / 'assets/private.wav').exists()
     assert (output / 'bundle_check.py').is_file() and (output / 'hmong_text.py').is_file()
     assert (output / 'hmong_expression.py').is_file()
+    assert (output / 'hmong_acceleration.py').is_file()
     assert (output / 'README.md').read_text() == 'Hmong-only instructions\n'
     assert (output / 'requirements.txt').read_text() == 'Hmong-only instructions\n'
     for name in ('requirements-qwen.txt', 'requirements-tested.txt', 'download_models.bat', 'VALIDATION.md'):
@@ -60,7 +62,7 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
 
 
 def test_archive_has_valid_crc_and_matching_sha256(tmp_path):
-    root = tmp_path / 'Voice-Studio-Hmong-1.3.0'
+    root = tmp_path / 'Voice-Studio-Hmong-1.4.0'
     root.mkdir()
     (root / 'hello.txt').write_bytes(b'relocatable')
     archive = tmp_path / 'bundle.zip'
@@ -91,13 +93,15 @@ def test_environment_and_batch_keep_data_in_hmong_package(tmp_path, monkeypatch)
     assert b'hmong_launcher.py" %*' in batch
     for folder, target in ((tmp_path, b'%~dp0MO_VOICE_STUDIO_HMONG.bat'),
                            (tmp_path / 'voice-studio-hmong', b'%~dp0..\\MO_VOICE_STUDIO_HMONG.bat')):
-        for name in ('start.bat', 'start_hmong.bat', 'install.bat', 'install_hmong.bat'):
+        for name in ('start.bat', 'start_hmong.bat', 'install.bat', 'install_hmong.bat', 'install_hmong_cuda.bat'):
             alias = (folder / name).read_bytes()
             assert b'\r\n' in alias and target in alias
             assert b'%*' in alias and b'exit /b %ERRORLEVEL%' in alias
             assert b'.venv' not in alias and b'pip install' not in alias
             if name.startswith('install'):
-                assert b'if "%~1"=="" goto setup' in alias and b'--setup-only' in alias
+                assert b'if "%~1"=="" goto setup' in alias
+                expected = b'--install-cuda' if name == 'install_hmong_cuda.bat' else b'--setup-only'
+                assert expected in alias
 
 
 def test_source_copy_refuses_linked_assets(tmp_path):
@@ -111,7 +115,7 @@ def test_source_copy_refuses_linked_assets(tmp_path):
         packaging.copy_source(tmp_path / 'output', source)
 
 
-@pytest.mark.parametrize('name', ['bundle_check.py', 'hmong_text.py', 'hmong_expression.py'])
+@pytest.mark.parametrize('name', ['bundle_check.py', 'hmong_text.py', 'hmong_expression.py', 'hmong_acceleration.py'])
 def test_source_copy_rejects_missing_new_runtime_modules(tmp_path, name):
     source = tmp_path / 'source'
     source_fixture(source)
@@ -124,7 +128,7 @@ def test_native_smoke_probes_every_root_and_inner_batch_alias(tmp_path, monkeypa
     spec = importlib.util.spec_from_file_location('smoke_hmong', PACKAGING / 'smoke_hmong_portable.py')
     smoke = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(smoke)
-    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.3.0'
+    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.4.0'
     root.mkdir(parents=True)
     packaging.write_launcher(root)
     calls = []
@@ -136,10 +140,13 @@ def test_native_smoke_probes_every_root_and_inner_batch_alias(tmp_path, monkeypa
         return SimpleNamespace(returncode=0, stdout='PASS: verified models\n')
     monkeypatch.setattr(smoke.subprocess, 'run', run)
     result = smoke.check_batch_entrypoints(root)
-    assert len(calls) == len(result) == 9
+    assert len(calls) == len(result) == 11
     assert {args[0][-1] for args in calls} == {'--check', '--setup-only'}
     assert result['voice-studio-hmong/install.bat']['argument'] == '--setup-only'
     assert result['voice-studio-hmong/start.bat']['argument'] == '--check'
+    assert result['install_hmong_cuda.bat']['argument'] == '--check'
+    assert result['voice-studio-hmong/install_hmong_cuda.bat']['argument'] == '--check'
+    assert all('--install-cuda' not in args[0] for args in calls), 'Native CPU QA must never download CUDA'
 
 
 def test_native_smoke_rejects_false_success_without_pass(tmp_path, monkeypatch):
@@ -159,11 +166,33 @@ def test_native_expression_sample_exercises_two_local_emotions_in_two_synthesis_
     spec.loader.exec_module(smoke)
     segments = plan_segments({'text': smoke.EXPRESSIVE_SAMPLE, 'engine': 'f5_hmong',
         'segment_plan': 'hmong-expression-v1', 'emotion': 'warm', 'emotion_strength': .65,
-        'auto_rhythm': True, 'paragraph_pause': 0})
+        'auto_rhythm': False, 'hmong_phrase_context': True, 'paragraph_pause': 0})
     speech = [segment for segment in segments if segment.text]
     assert [(segment.emotion, segment.emphasis) for segment in speech] == [('warm', True), ('serious', False)]
     assert [segment.pause for segment in segments if not segment.text] == [.25]
     assert all('[emotion=' not in segment.text and '**' not in segment.text for segment in speech)
+    plain = ' '.join(segment.text for segment in speech)
+    assert plain == smoke.PLAIN_SAMPLE
+    for word in smoke.PRONUNCIATION_TEST_WORDS:
+        assert word in plain.split() or word + '.' in plain.split()
+    female = plan_segments({'text': smoke.PLAIN_SAMPLE, 'engine': 'f5_hmong',
+        'segment_plan': 'hmong-expression-v1', 'emotion': 'warm', 'emotion_strength': .65,
+        'auto_rhythm': False, 'hmong_phrase_context': True, 'paragraph_pause': 0})
+    assert len(female) == 1 and female[0].text == smoke.PLAIN_SAMPLE
+
+
+def test_native_speed_gate_rejects_a_measurement_inflated_by_inserted_silence():
+    from performance import speed_report
+    spec = importlib.util.spec_from_file_location('smoke_hmong_speed', PACKAGING / 'smoke_hmong_portable.py')
+    smoke = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(smoke)
+    job = {'audio_seconds': 120, 'spoken_audio_seconds': 2, 'inserted_silence_seconds': 118,
+           'wall_processing_seconds': 1, 'speed_report': speed_report(120, 1, spoken_audio_seconds=2)}
+    report = smoke.check_spoken_speed(job)
+    assert report['realtime_multiplier'] == 2 and report['target_30x_verified_one_hour'] is False
+    job['speed_report'] = speed_report(120, 1)
+    with pytest.raises(AssertionError):
+        smoke.check_spoken_speed(job)
 
 
 def test_generated_audition_exports_existing_job_without_another_synthesis(tmp_path, monkeypatch):
@@ -181,7 +210,8 @@ def test_generated_audition_exports_existing_job_without_another_synthesis(tmp_p
     monkeypatch.setattr(smoke.subprocess, 'check_output', probe)
     job = {'id': 'already-completed-job', 'voice_id': 'hmong-female', 'text': 'Nyob zoo.',
            'audio_seconds': 1.5, 'hmong_steps': 16, 'hmong_precision': 'fp32', 'delivery': 'review',
-           'emotion': 'neutral', 'emotion_strength': .65, 'auto_rhythm': True}
+           'emotion': 'warm', 'emotion_strength': .65, 'auto_rhythm': False, 'hmong_phrase_context': True,
+           'spoken_audio_seconds': 1.5, 'inserted_silence_seconds': 0, 'speed_report': {}}
     # A get-only client makes any accidental new POST /api/speech fail.
     result = smoke.export_generated_preview(SimpleNamespace(get=get), job, tmp_path)
     assert requests == ['/api/jobs/already-completed-job/export.mp3']
@@ -189,6 +219,8 @@ def test_generated_audition_exports_existing_job_without_another_synthesis(tmp_p
     assert result['sha256'] == hashlib.sha256(audio).hexdigest()
     assert result['generated'] is True and result['original_source_recording'] is False
     assert result['settings']['hmong_steps'] == 16 and result['settings']['hmong_precision'] == 'fp32'
+    assert result['settings']['hmong_phrase_context'] is True and result['settings']['auto_rhythm'] is False
+    assert result['pronunciation_evaluated'] is False and result['target_30x_verified'] is False
 
 
 @pytest.mark.parametrize('gender,source_seconds,reference_end', [

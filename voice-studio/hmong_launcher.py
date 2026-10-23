@@ -50,9 +50,11 @@ def check_audio_tools():
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description='Voice Studio Hmong')
-    parser.add_argument('--check', action='store_true', help='Verify prerequisites offline; do not download.')
-    parser.add_argument('--setup-only', action='store_true', help='Prepare model files and exit.')
+    action = parser.add_mutually_exclusive_group()
+    action.add_argument('--check', action='store_true', help='Verify prerequisites offline; do not download.')
+    action.add_argument('--setup-only', action='store_true', help='Prepare model files and exit.')
     parser.add_argument('--no-browser', action='store_true')
+    action.add_argument('--install-cuda', action='store_true', help='Install a separate NVIDIA runtime explicitly.')
     args = parser.parse_args(argv)
     try:
         from bundle_check import validate_bundle
@@ -64,6 +66,19 @@ def main(argv=None):
     os.environ.setdefault('VOICE_STUDIO_DATA_DIR', str(BASE / '.data-hmong'))
     os.environ.setdefault('HF_HUB_DISABLE_XET', '1')
     os.environ.setdefault('PYTHONUTF8', '1')
+    from hmong_acceleration import install_cuda, preferred_interpreter
+    if args.install_cuda:
+        install_cuda(BASE)
+        return 0
+    interpreter = preferred_interpreter(BASE)
+    if interpreter is not None:
+        # Worker children inherit this interpreter through sys.executable.
+        environment = dict(os.environ)
+        environment.pop('PYTHONHOME', None)
+        environment.pop('PYTHONPATH', None)
+        forwarded = list(sys.argv[1:] if argv is None else argv)
+        return subprocess.call([str(interpreter), str(BASE / 'hmong_launcher.py'), *forwarded],
+                               cwd=BASE, env=environment)
     check_dependencies()
     check_audio_tools()
     command = [sys.executable, str(BASE / 'prepare_hmong.py')]

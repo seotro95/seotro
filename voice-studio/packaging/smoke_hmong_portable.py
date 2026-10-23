@@ -8,6 +8,7 @@ from __future__ import annotations
 import io
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import queue
@@ -19,8 +20,11 @@ import time
 import urllib.request
 
 
-EXPRESSIVE_SAMPLE = ('[emotion=warm]**Nyob zoo, phooj ywg.**[pause=0.25]'
-                     '[emotion=serious]Peb yuav nyob ua ke.')
+PRONUNCIATION_TEST_WORDS = ['ua', 'thaj', 'qab', 'faib', 'rov', 'ris']
+PLAIN_SAMPLE = ('Peb ua hauj lwm hauv thaj chaw no. Nyob qab roob. Peb faib mov. '
+                'Kuv rov los tsev. Nws hnav ris.')
+EXPRESSIVE_SAMPLE = ('[emotion=warm]**Peb ua hauj lwm hauv thaj chaw no.**[pause=0.25]'
+                     '[emotion=serious]Nyob qab roob. Peb faib mov. Kuv rov los tsev. Nws hnav ris.')
 GENERATED_PREVIEW_FILES = {'hmong-female': 'Hmong-female-2-preview.mp3',
                            'hmong-male': 'Hmong-male-2-preview.mp3'}
 
@@ -32,6 +36,9 @@ def check_batch_entrypoints(root):
     for prefix in ('', 'voice-studio-hmong/'):
         entries.extend((prefix + name, '--check') for name in ('start.bat', 'start_hmong.bat'))
         entries.extend((prefix + name, '--setup-only') for name in ('install.bat', 'install_hmong.bat'))
+        # Supplying --check must forward the offline CPU check, never install
+        # or download the optional CUDA environment during the native build.
+        entries.append((prefix + 'install_hmong_cuda.bat', '--check'))
     results = {}
     shell = os.environ.get('COMSPEC', 'cmd.exe')
     for relative, flag in entries:
@@ -65,6 +72,26 @@ def check_source_reference(personal, metadata, gender):
     assert abs(personal['duration'] - reference_seconds) < .05, 'Wrong reference duration'
 
 
+def check_spoken_speed(job):
+    """Inserted silence must not increase the measured speech throughput."""
+    audio, spoken, silence = (job[key] for key in (
+        'audio_seconds', 'spoken_audio_seconds', 'inserted_silence_seconds'))
+    assert all(isinstance(value, (int, float)) and not isinstance(value, bool)
+               and math.isfinite(value) for value in (audio, spoken, silence))
+    assert 0 < spoken <= audio and silence >= 0
+    assert abs(spoken + silence - audio) <= 2 / 24000
+    report = job['speed_report']
+    assert report['measurement_basis'] == 'speech_chunks_excluding_inserted_silence'
+    assert abs(report['measurement_audio_seconds'] - spoken) <= .011
+    assert abs(report['measurement_output_audio_seconds'] - audio) <= .011
+    assert abs(report['measurement_inserted_silence_seconds'] - silence) <= .011
+    assert report['measurement_elapsed_seconds'] > 0
+    assert abs(report['measurement_elapsed_seconds'] - job['wall_processing_seconds']) <= .002
+    assert abs(report['realtime_multiplier'] - spoken / job['wall_processing_seconds']) <= .02
+    assert report['target_30x_verified_one_hour'] is False and report['estimate_only'] is True
+    return report
+
+
 def export_generated_preview(client, job, reports):
     """Export an already completed preset job, without requesting new speech."""
     filename = GENERATED_PREVIEW_FILES[job['voice_id']]
@@ -83,8 +110,13 @@ def export_generated_preview(client, job, reports):
             'bytes': len(response.content), 'generated': True, 'original_source_recording': False,
             'job_id': job['id'], 'voice_id': job['voice_id'], 'text': job['text'],
             'audio_seconds': job['audio_seconds'],
+            'spoken_audio_seconds': job['spoken_audio_seconds'],
+            'inserted_silence_seconds': job['inserted_silence_seconds'],
+            'speed_report': job['speed_report'],
+            'pronunciation_test_words': PRONUNCIATION_TEST_WORDS,
+            'pronunciation_evaluated': False, 'target_30x_verified': False,
             'settings': {key: job[key] for key in ('hmong_steps', 'hmong_precision', 'delivery',
-                'emotion', 'emotion_strength', 'auto_rhythm')},
+                'emotion', 'emotion_strength', 'auto_rhythm', 'hmong_phrase_context')},
             'expression': job.get('expression')}
 
 
@@ -114,8 +146,12 @@ def main():
                'full_source_previews': {}, 'source_clones': {}, 'manual_crop': False,
                'txt_srt': False, 'mp3': False, 'normal_launcher': False, 'batch_entrypoints': {},
                'expression': {}, 'generated_auditions': {},
+               'pronunciation_test_words': PRONUNCIATION_TEST_WORDS,
+               'target_30x_verified': False, 'cuda_installer_included': True,
+               'cuda_inference_validated': False, 'cuda_installation_exercised': False,
+               'speed_measurement_basis': 'speech_chunks_excluding_inserted_silence',
                'native_windows_validation': os.name == 'nt'}
-    text = 'Nyob zoo, peb zoo siab tau ntsib nej.'
+    text = PLAIN_SAMPLE
 
     def render(client, payload):
         response = client.post('/api/speech', json=payload)
@@ -135,6 +171,9 @@ def main():
         samples, rate = sf.read(io.BytesIO(response.content), dtype='float32')
         assert rate == 24000 and samples.size > rate / 3
         assert np.all(np.isfinite(samples)) and np.max(np.abs(samples)) > .001
+        check_spoken_speed(job)
+        assert job['expression']['phrase_context'] is True
+        assert job['expression']['emphasis_scope'] == 'phrase'
         return job
 
     with TestClient(studio.app) as client:
@@ -142,7 +181,8 @@ def main():
         assert config['variant'] == 'hmong' and config['default_language'] == 'mww'
         assert config['hmong_steps'] == 16 and config['default_voice_id'] == 'hmong-male'
         assert config['delivery'] == 'story' and config['emotion'] == 'warm'
-        assert config['emotion_strength'] == .65 and config['auto_rhythm'] is True
+        assert config['emotion_strength'] == .65 and config['auto_rhythm'] is False
+        assert config['hmong_phrase_context'] is True
         assert config['models']['f5_hmong'] and not config['nano_ready']
         assert config['subtitle_ready'] is False, 'Do not claim Hmong Whisper recognition'
         for asset in ('app.js', 'workspace.js', 'style.css'):
@@ -174,27 +214,35 @@ def main():
                 payload['emotion'] = 'warm'
             job = render(client, payload)
             results['voices'][ident] = {'audio_seconds': job['audio_seconds'],
+                                      'spoken_audio_seconds': job['spoken_audio_seconds'],
+                                      'inserted_silence_seconds': job['inserted_silence_seconds'],
+                                      'speed_report': job['speed_report'],
                                       'wall_seconds': round(time.monotonic() - started, 3),
                                       'steps': job['hmong_steps'], 'precision': job['hmong_precision']}
             assert job['hmong_steps'] == 16 and job['hmong_precision'] == 'fp32'
+            assert job['hmong_device'] == 'cpu'
             assert job['segment_plan'] == 'hmong-expression-v1'
+            assert job['hmong_phrase_context'] is True and job['auto_rhythm'] is False
             if ident == 'hmong-male':
                 assert job['delivery'] == 'story'
                 expression = job['expression']
                 assert expression['controls_version'] == 'hmong-expression-v1'
                 assert expression['mode'] == 'rhythm_dynamics_v1'
                 assert expression['emotion'] == 'warm' and expression['strength'] == .65
-                assert expression['auto_rhythm'] is True
+                assert expression['auto_rhythm'] is False
+                assert expression['phrase_context'] is True and expression['emphasis_scope'] == 'phrase'
                 assert expression['pitch_shift'] is False and expression['neural_emotion'] is False
                 assert expression['emotions_used'] == ['warm', 'serious']
                 assert expression['emotion_counts'] == {'warm': 1, 'serious': 1}
+                assert job['inserted_silence_seconds'] >= .25 - 1 / 24000
                 results['expression'] = {'voice_id': ident, 'steps': job['hmong_steps'],
                     'precision': job['hmong_precision'], 'markup_removed_from_spoken_srt': False,
                     **expression}
             txt = client.get('/api/jobs/' + job['id'] + '/script.txt')
             srt = client.get('/api/jobs/' + job['id'] + '/script.srt')
             assert txt.status_code == srt.status_code == 200
-            assert spoken_text in txt.text and '-->' in srt.text and 'Nyob zoo' in srt.text
+            assert spoken_text in txt.text and '-->' in srt.text and 'Peb ua' in srt.text
+            assert all(re.search(r'\b' + word + r'\b', srt.text) for word in PRONUNCIATION_TEST_WORDS)
             if ident == 'hmong-male':
                 assert '[emotion=' not in srt.text and '[pause=' not in srt.text and '**' not in srt.text
                 results['expression']['markup_removed_from_spoken_srt'] = True
@@ -223,6 +271,9 @@ def main():
                 'source_sha256': personal['source_sha256'], 'source_seconds': personal['source_duration'],
                 'reference_seconds': personal['duration'], 'automatic_reference': True,
                 'audio_seconds': clone['audio_seconds'],
+                'spoken_audio_seconds': clone['spoken_audio_seconds'],
+                'inserted_silence_seconds': clone['inserted_silence_seconds'],
+                'speed_report': clone['speed_report'],
                 'steps': clone['hmong_steps'], 'precision': clone['hmong_precision'],
                 'wall_seconds': round(time.monotonic() - started, 3)}
         results['clone'] = True
@@ -265,6 +316,9 @@ def main():
                                  'voice_id': 'hmong-female', 'hmong_steps': 4,
                                  'format': 'wav', 'paragraph_pause': 0, 'max_cue_tempo': 2})
         assert abs(aligned['audio_seconds'] - 12) < .1
+        assert aligned['spoken_audio_seconds'] < aligned['audio_seconds']
+        assert aligned['inserted_silence_seconds'] > 0
+        results['srt_speed_report'] = aligned['speed_report']
         saved = client.get('/api/jobs/' + aligned['id'] + '/script.srt')
         assert saved.status_code == 200 and '00:00:12,000' in saved.text
         results['srt_timeline'] = True
@@ -322,7 +376,7 @@ def main():
     results['success'] = True
     reports.mkdir(parents=True, exist_ok=True)
     (reports / 'native-smoke.json').write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding='utf-8')
-    print('PASS: current complete MP3 previews, two default 16-step FP32 voices and source clones, local expressive markup, manual excerpt, TXT/SRT/MP3, native BAT aliases and normal startup.', flush=True)
+    print('PASS: CPU 16-step FP32 presets/clones, six-word generated auditions, phrase context, silence-excluding measurements, SRT/MP3 and11 native BAT paths. CUDA inference, pronunciation accuracy and30x remain unverified.', flush=True)
 
 
 if __name__ == '__main__':

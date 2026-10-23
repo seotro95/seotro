@@ -53,7 +53,7 @@ def studio_page(site, *, hmong=True, ready=True, missing_reference_first=False, 
                 'int8_cpu': False, 'fast_vieneu': False, 'subtitle_ready': False, 'hmong_ready': state['ready'],
                 **({'hmong_steps': hmong_steps} if hmong_steps is not None else {}),
                 'delivery': 'story' if hmong else 'natural', 'emotion': 'warm' if hmong else 'neutral',
-                'emotion_strength': .65, 'auto_rhythm': hmong,
+                'emotion_strength': .65, 'auto_rhythm': False,
                 **({'hardware_label': 'CỤC BỘ · CHƯA KIỂM TRA CPU/GPU'} if hmong else {}),
                 'hmong_reference_note': 'Hai mẫu đi kèm dùng lời mẫu do bạn cung cấp và xác nhận khớp đoạn thu.'}
     def voices():
@@ -130,8 +130,8 @@ def test_hmong_branding_steps_and_all_speech_entrypoints(static_site):
         playwright.expect(page.locator('#delivery')).to_have_value('story')
         playwright.expect(page.locator('#hmong-emotion')).to_have_value('warm')
         playwright.expect(page.locator('#hmong-emotion-strength')).to_have_value('0.65')
-        playwright.expect(page.locator('#hmong-auto-rhythm')).to_be_checked()
-        playwright.expect(page.locator('label[for="paragraph-pause"]')).to_contain_text('Nghỉ bổ sung')
+        playwright.expect(page.locator('#hmong-auto-rhythm')).not_to_be_checked()
+        playwright.expect(page.locator('label[for="paragraph-pause"]')).to_contain_text('Nghỉ giữa')
         playwright.expect(page.locator('#hardware')).to_have_text('CỤC BỘ · CHƯA KIỂM TRA CPU/GPU')
         page.click('#sample-button')
         playwright.expect(page.locator('#script')).to_have_value('Nyob zoo, kuv zoo siab tau ntsib koj. Hnub no peb yuav mloog ib zaj dab neeg. Ua tsaug rau koj mloog.')
@@ -144,7 +144,7 @@ def test_hmong_branding_steps_and_all_speech_entrypoints(static_site):
         assert state['speech'][-1]['delivery'] == 'review'
         assert state['speech'][-1]['paragraph_pause'] == 0
         assert state['speech'][-1]['emotion'] == 'warm' and state['speech'][-1]['emotion_strength'] == .65
-        assert state['speech'][-1]['auto_rhythm'] is True
+        assert state['speech'][-1]['auto_rhythm'] is False
         playwright.expect(page.locator('#dub-hmong-steps')).to_have_value('32')
         page.locator('.nav-item[data-tab="dub"]').click()
         playwright.expect(page.locator('#editor-recognize')).to_be_hidden()
@@ -156,7 +156,7 @@ def test_hmong_branding_steps_and_all_speech_entrypoints(static_site):
         assert state['speech'][-1]['hmong_steps'] == 32
         assert state['speech'][-1]['language'] == 'mww'
         assert state['speech'][-1]['delivery'] == 'review'
-        assert state['speech'][-1]['emotion'] == 'warm' and state['speech'][-1]['auto_rhythm'] is True
+        assert state['speech'][-1]['emotion'] == 'warm' and state['speech'][-1]['auto_rhythm'] is False
         page.locator('.nav-item[data-tab="clone"]').click()
         assert page.locator('#transcript').get_attribute('required') is not None
         playwright.expect(page.locator('label[for="transcript"]')).to_contain_text('3–8 giây')
@@ -275,8 +275,12 @@ def test_hmong_expression_controls_sync_and_reach_workspace_dub_and_benchmark(st
         assert state['speech'][-1]['emotion'] == 'joyful' and state['speech'][-1]['emotion_strength'] == 0
         assert state['speech'][-1]['auto_rhythm'] is False
         page.locator('.nav-item[data-tab="create"]').click()
+        page.fill('#script', 'Nyob zoo, kuv tuaj lawm.')
         page.click('#benchmark-speed')
         playwright.expect(page.locator('#benchmark-speed')).to_be_enabled()
+        playwright.expect(page.locator('#script')).to_have_value('Nyob zoo, kuv tuaj lawm.')
+        assert all(word in state['speech'][-1]['text'].lower().replace('.', '').split()
+                   for word in ('ua', 'thaj', 'qab', 'faib', 'rov', 'ris'))
         assert state['speech'][-1]['delivery'] == 'calm' and state['speech'][-1]['emotion'] == 'joyful'
         assert state['speech'][-1]['emotion_strength'] == 0 and state['speech'][-1]['auto_rhythm'] is False
         assert state['errors'] == []
@@ -312,4 +316,33 @@ def test_hmong_phrase_buttons_insert_controls_without_replacing_other_words(stat
         page.click('#hmong-insert-example')
         assert page.locator('#script').input_value().startswith('Nyob zoo. [emotion=sad] Ua tsaug.')
         assert '**Ua tsaug.** [pause=0.5] [emotion=warm]' in page.locator('#script').input_value()
+        assert state['errors'] == []
+
+
+@pytest.mark.parametrize('speech_seconds,elapsed,expected', [
+    (2, .01, 'Mẫu dưới 60 giây'),
+    (60, 2, 'chưa kiểm chứng tạo đủ 1 giờ'),
+    (3600, 120, 'đã tạo ít nhất 1 giờ lời đọc'),
+])
+def test_hmong_speed_display_distinguishes_short_sample_from_verified_hour(static_site, speech_seconds, elapsed, expected):
+    from performance import speed_report
+    report = speed_report(speech_seconds + 3600, elapsed, spoken_audio_seconds=speech_seconds)
+    with studio_page(static_site) as (page, state):
+        page.evaluate('(report) => showSpeedReport({speed_report: report})', report)
+        display = page.locator('#performance-result')
+        playwright.expect(display).to_contain_text(expected)
+        playwright.expect(display).to_contain_text('đã loại thời gian nghỉ/phụ đề chèn thêm')
+        if speech_seconds < 3600:
+            assert 'Lượt này đã tạo ít nhất 1 giờ' not in display.inner_text()
+        assert state['errors'] == []
+
+
+def test_legacy_speed_display_does_not_certify_a_padded_hour(static_site):
+    report = {'realtime_multiplier': 30, 'measurement_audio_seconds': 3600,
+              'measurement_elapsed_seconds': 120, 'estimated_hour_seconds': 120,
+              'target_30x_met_on_sample': True}
+    with studio_page(static_site) as (page, state):
+        page.evaluate('(report) => showSpeedReport({speed_report: report})', report)
+        playwright.expect(page.locator('#performance-result')).to_contain_text('Báo cáo cũ')
+        assert 'đạt 30×' not in page.locator('#performance-result').inner_text()
         assert state['errors'] == []

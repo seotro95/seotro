@@ -20,7 +20,7 @@ with TestClient(app.app) as c, patch.object(app,'model_ready',lambda engine:engi
     assert cfg['variant']=='hmong' and cfg['default_language']=='mww'
     assert cfg['hmong_steps']==16 and cfg['paragraph_pause']==0
     assert cfg['delivery']=='story' and cfg['emotion']=='warm'
-    assert cfg['emotion_strength']==.65 and cfg['auto_rhythm'] is True
+    assert cfg['emotion_strength']==.65 and cfg['auto_rhythm'] is False and cfg['hmong_phrase_context'] is True
     assert cfg['hardware']=='unknown' and 'CHƯA KIỂM TRA' in cfg['hardware_label']
     assert 'do bạn cung cấp và xác nhận' in cfg['hmong_reference_note']
     assert cfg['languages']=={'mww':'Hmong Trắng · Hmoob Daw'}
@@ -52,8 +52,8 @@ with TestClient(app.app) as c, patch.object(app,'model_ready',return_value=True)
     assert response.status_code==202,response.text
     job=response.json()
     assert job['hmong_steps']==16 and job['delivery']=='story' and job['paragraph_pause']==0
-    assert job['emotion']=='warm' and job['emotion_strength']==.65 and job['auto_rhythm'] is True
-    assert job['segment_plan']=='hmong-expression-v1' and job['total']>=2 and job['quality']=='standard'
+    assert job['emotion']=='warm' and job['emotion_strength']==.65 and job['auto_rhythm'] is False and job['hmong_phrase_context'] is True
+    assert job['segment_plan']=='hmong-expression-v1' and job['total']==1 and job['quality']=='standard'
     response=c.post('/api/speech',json={'text':'Nyob zoo. Ua tsaug.','voice_id':'hmong-male','paragraph_pause':.3,'hmong_steps':4,'auto_rhythm':False})
     assert response.status_code==202,response.text
     assert response.json()['segment_plan']=='hmong-expression-v1' and response.json()['total']==2

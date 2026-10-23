@@ -1,6 +1,22 @@
-# Voice Studio Hmong 1.3.0 validation
+# Voice Studio Hmong 1.4.0 validation
 
-This release replaces both default recordings and adds explicit storytelling controls. It does not certify native Hmong pronunciation or human emotional acting. The separate standard Voice Studio 3.6.2 defaults/environment are preserved.
+This update preserves the final user recordings and fixes phrase context, optional CUDA setup and throughput accounting. The user reports incorrect ua/thaj/qab/faib/rov/ris and a requirement of one hour of speech in two minutes. Native pronunciation correction and30x throughput have NOT been established. Functional tests do not resolve that quality requirement. The separate standard Voice Studio 3.6.2 defaults/environment are preserved.
+
+## Current pronunciation and speed investigation
+
+The exact reported words are `ua`, `thaj`, `qab`, `faib`, `rov`, `ris`. Existing RPA normalization preserves these letters and tone suffixes; source inspection found no F5 sampling/tokenizer parity defect that establishes a pronunciation cure. The checkpoint repository contains weights/vocabulary without a training/dialect/evaluation model card. Four/eight-step drafts are not documented distilled Hmong models. A short speaker reference conditions timbre, not an independently trained Hmong pronunciation system.
+
+A concrete design fault split inline emphasized words into separate F5 calls. New requests save `hmong_phrase_context:true`: parse all marked words into their whole bounded phrase before inference. Emphasis affects that containing phrase, with no precise word-alignment claim. RPA-internal bold is rejected. Zero pauses, emotion changes and SRT cue boundaries remain barriers. Old jobs without the flag retain their exact old plan. Default automatic extra gaps are now off, allowing bounded packing; explicit controls remain available.
+
+Actual Chromium on the four-core CPU uploaded no new recording, selected the existing female preset, clicked the new six-word benchmark, preserved the editor's draft and downloaded real MP3 without JS errors. One16-step FP32 phrase produced6.88175s audio in81.337s wall time. This is a short0.085x measurement, nowhere near30x, and not a pronunciation certification. The report records phrase context, speech-only measurement basis and one-hour target=false. Audio/report are retained in `/workspace/artifacts/Hmong-1.4-female-six-word-check.mp3` and `hmong-1.4-real-browser.json`.
+
+A separate reviewed, pinned single-speaker VITS experiment at https://huggingface.co/spaces/leejnus/HmongTTS produced36.571s audio in10.897s inference (3.356x) on four CPU threads. Folding decoder weight normalization preserved bit-identical FP32 audio; a shorter warmed6.664s sample averaged1.352s (4.93x). Explicit BF16 averaged0.842s for6.653s audio (7.90x), but changed waveform/duration and has no quality-equivalence assessment. These are short tests, not sustained/hour certifications. This experimental voice has no arbitrary cloning and no established native accuracy/model redistribution terms; it is not substituted for the user's two defaults or bundled. No external inference service received audio.
+
+The portable base pins CPU PyTorch and previously could never activate NVIDIA acceleration. Optional `install_hmong_cuda.bat` now creates a separate data/.runtime-cuda environment, pins torch/torchaudio2.8.0+cu128 from the official index, retains CPU libraries and requires actual GPU tensor execution/package-path checks before recording readiness. Startup rechecks GPU, handles relocation, and respects explicit CPU. This environment has no NVIDIA hardware: actual CUDA installation/F5 inference/throughput remain untested. The real no-GPU preflight failed before download or data creation. Mocked installer tests do not establish GPU functionality or30x speed.
+
+Throughput now counts synthesized chunks after cue fitting and clipping, excluding renderer-inserted explicit/paragraph/timeline padding. Quiet samples generated inside the model remain part of the chunk (not VAD). A60s minimum is required to qualify a sustained sample; only an actual >=3600s spoken-chunk job completed in<=120s can verify the one-hour goal. Resumed jobs still do not receive a fresh speed score. Tests include a one-hour padded SRT with only a short spoken line, and real FFmpeg fitting, to prevent false success.
+
+The upstream generic TensorRT example https://github.com/SWivid/F5-TTS/blob/main/src/f5_tts/runtime/triton_trtllm/README.md reports L20 RTF0.0402 (~24.9x) at16NFE. It does not establish30x, Hmong correctness or performance of this installation. No benchmark was fabricated by counting silence, changing playback speed, reusing an old output or reducing precision without disclosure.
 
 ## New reference recordings
 
@@ -38,9 +54,13 @@ Automatic rhythm retains sentence boundaries to insert pauses and can require mo
 
 Completed expression SRT/TXT exports contain spoken words without control tags and retain actual cue-fit timing. Script SRT export uses that completed spoken file; before completion it plans clean cue text without changing saved source text. Raw project/script conversion keeps editable controls.
 
-The default remains16steps FP32 onCPU; new Hmong requests select Story/Warm with intensity0.65 and automatic rhythm. Four-step CPUINT8 remains an optional draft, with FP32 fallback when unsupported. Model/reference caching and bounded inference are retained. These settings do not establish pronunciation quality, likeness, emotion realism or hardware-independent speed.
+The default remains16steps FP32 onCPU; new Hmong requests select Story/Warm with intensity0.65, phrase context enabled and automatic extra gaps off. Four-step CPUINT8 remains an optional draft, with FP32 fallback when unsupported. Model/reference caching and bounded inference are retained. These settings do not establish pronunciation quality, likeness, emotion realism or hardware-independent speed.
 
 ## Verification record
+
+Final1.4.0 integration: shared suite333passed/5skipped; pinned Hmong environment168passed;15 Chromium contract cases passed within the shared suite. Both Python environments passed pip check; JavaScript syntax and Git whitespace checks passed. Actual Chromium generated/downloaded the six-word female audition described above. These results do not establish native pronunciation or CUDA throughput. Its Windows package must contain its own native report.
+
+The1.3.0 shared262/5skip and Hmong101 results below are historical. Old results do not establish new CUDA or pronunciation success.
 
 Completed during local integration:
 

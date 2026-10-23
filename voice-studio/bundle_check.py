@@ -8,7 +8,7 @@ import sys
 
 
 PYTHON_FILES = (
-    'app.py', 'bundle_check.py', 'dubbing.py', 'hardware.py', 'hmong_assets.py',
+    'app.py', 'bundle_check.py', 'dubbing.py', 'hardware.py', 'hmong_acceleration.py', 'hmong_assets.py',
     'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py', 'hmong_launcher.py',
     'hmong_reference.py', 'hmong_text.py',
     'language_catalog.py', 'local_vieneu.py', 'narration.py', 'performance.py',

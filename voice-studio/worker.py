@@ -267,6 +267,7 @@ def render(job, synthesize=None):
     write_state(work / 'progress.json', {'completed': 0, 'total': len(segments), 'progress': 0, 'phase': 'Chuẩn bị mô hình; lần đầu có thể chậm hơn'})
     completed = 0
     clipped = False
+    spoken_frames = 0
     futures = {}
     payload = {key: value for key, value in job.items() if key != 'text'}
     profile_speed, default_pause = PROFILES[job.get('delivery', 'natural')]
@@ -285,6 +286,7 @@ def render(job, synthesize=None):
         write_state(work/'alignment.json',{'cues':alignment,'sync_ok':sync_ok,'failed_cue':failed,'mode':job.get('cue_fit','strict'),'max_tempo':job.get('max_cue_tempo',1.5)})
     if cues:save_alignment()
     cue_writer = None
+    cue_spoken_spans = []
     cue_path = work / 'cue.wav'
     progress_limit = 85 if job.get('video_id') else 90
     try:
@@ -302,6 +304,7 @@ def render(job, synthesize=None):
             segment_start = writer.frames / writer.rate
             if cues and (index == 0 or segment.cue != segments[index-1].cue):
                 cue_writer = PCMWriter(cue_path, max_seconds=10800)
+                cue_spoken_spans = []
             target_writer = cue_writer if cues else writer
             if segment.text:
                 part = work / f'{index:06d}.wav'
@@ -309,7 +312,12 @@ def render(job, synthesize=None):
                     futures.pop(index).result()
                 else:
                     prepare_chunk(job, segment, index, work, synthesize)
+                before_append = target_writer.frames
                 clipped = target_writer.append(part)
+                if cues:
+                    cue_spoken_spans.append((before_append, target_writer.frames))
+                else:
+                    spoken_frames += target_writer.frames - before_append
                 spoken_end = writer.frames/writer.rate
                 completed = index + 1
                 if not clipped:
@@ -328,7 +336,8 @@ def render(job, synthesize=None):
                 boundary=(cues[segment.cue+1]['start'] if segment.cue+1<len(cues) else job.get('timeline_seconds',original_end))
                 available=(max(original_end,boundary) if job.get('cue_fit')=='gap' else original_end)-cue['start']
                 with wave.open(str(cue_path)) as cue_audio:
-                    actual = cue_audio.getnframes()/cue_audio.getframerate()
+                    original_cue_frames = cue_audio.getnframes()
+                    actual = original_cue_frames/cue_audio.getframerate()
                 maximum_tempo=job.get('max_cue_tempo',1.5)
                 applied_tempo=1.0
                 if actual > available:
@@ -361,7 +370,20 @@ def render(job, synthesize=None):
                     cue['end']=round(min(boundary,max(original_end,cue['start']+spoken_seconds)),3)
                 writer.silence(max(0, cue['start']-writer.frames/writer.rate))
                 actual_start=writer.frames/writer.rate
+                before_append = writer.frames
+                with wave.open(str(cue_path)) as fitted_audio:
+                    fitted_cue_frames = fitted_audio.getnframes()
                 clipped = writer.append(cue_path) or clipped
+                appended_frames = writer.frames - before_append
+                # Map spoken spans through the actual fitted cue duration.
+                # Explicit pauses remain excluded, including when a cue is
+                # compressed or the output limit clips its trailing speech.
+                # Model-internal silence is retained; this is not VAD.
+                for start_frame, end_frame in cue_spoken_spans:
+                    start_frame = round(start_frame * fitted_cue_frames / original_cue_frames)
+                    end_frame = round(end_frame * fitted_cue_frames / original_cue_frames)
+                    spoken_frames += max(0, min(end_frame, appended_frames)
+                                         - min(start_frame, appended_frames))
                 actual_end=writer.frames/writer.rate
                 alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':cue['end'],'raw_seconds':round(actual,3),'spoken_start':round(actual_start,5),'spoken_end':round(actual_end,5),'tempo':round(applied_tempo,4),'status':'matched' if abs(actual_start-cue['start'])<=.001 and actual_end<=cue['end']+.001 and not clipped else 'overflow'})
                 if len(alignment)%16==0 or len(alignment)==len(cues):save_alignment(sync_ok=all(c['status']=='matched' for c in alignment) and len(alignment)==len(cues))
@@ -415,10 +437,16 @@ def render(job, synthesize=None):
             'controls_version': 'hmong-expression-v1', 'mode': 'rhythm_dynamics_v1',
             'emotion': job.get('emotion', 'neutral'), 'strength': job.get('emotion_strength', .65),
             'auto_rhythm': bool(job.get('auto_rhythm', True)),
+            'phrase_context': bool(job.get('hmong_phrase_context', False)),
+            'emphasis_scope': 'phrase' if job.get('hmong_phrase_context') else 'segment',
             'pitch_shift': False, 'neural_emotion': False,
             'emotion_counts': emotion_counts, 'emotions_used': list(emotion_counts),
         }
-    write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), **inference})
+    write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate,
+        'spoken_audio_seconds': spoken_frames / writer.rate,
+        'inserted_silence_seconds': max(0, writer.frames - spoken_frames) / writer.rate,
+        'duration_limited': clipped, 'completed': completed, 'total': len(segments),
+        'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), **inference})
 
 
 def voice_error(exc):

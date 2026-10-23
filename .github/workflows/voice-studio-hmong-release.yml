@@ -1,8 +1,8 @@
-name: Build and publish Voice Studio Hmong 1.3.0
+name: Build and publish Voice Studio Hmong 1.4.0
 
 on:
   push:
-    branches: [release/voice-studio-hmong-1.3.0]
+    branches: [release/voice-studio-hmong-1.4.0]
     paths:
       - .github/workflows/voice-studio-hmong-release.yml
       - voice-studio/**
@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: voice-studio-hmong-1.3.0-release
+  group: voice-studio-hmong-1.4.0-release
   cancel-in-progress: false
 
 env:
@@ -20,7 +20,7 @@ env:
   PYTHONUNBUFFERED: '1'
   HF_HUB_DISABLE_XET: '1'
   GH_REPO: ${{ github.repository }}
-  RELEASE_TAG: voice-studio-hmong-1.3.0
+  RELEASE_TAG: voice-studio-hmong-1.4.0
 
 jobs:
   native-windows-release:
@@ -51,7 +51,7 @@ jobs:
           if (-not $release) {
             $notes = Join-Path $env:RUNNER_TEMP 'hmong-draft-notes.txt'
             'Building and validating a clean native Windows Hmong package. Download links appear after all checks pass.' | Set-Content -Encoding utf8 $notes
-            gh release create $env:RELEASE_TAG --repo $env:GH_REPO --target $env:GITHUB_SHA --draft --prerelease --title 'Voice Studio Hmong 1.3.0 — Windows x64' --notes-file $notes
+            gh release create $env:RELEASE_TAG --repo $env:GH_REPO --target $env:GITHUB_SHA --draft --prerelease --title 'Voice Studio Hmong 1.4.0 — Windows x64' --notes-file $notes
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
       - name: Install CPU runtime and Hmong dependencies
@@ -76,7 +76,7 @@ jobs:
       - name: Check Hmong routing and portable packaging
         working-directory: voice-studio
         run: |
-          python packaging/ci_checked.py python -m pytest tests/test_hmong_variant.py tests/test_hmong_reference.py tests/test_hmong_default_replacement.py tests/test_hmong_packaging.py tests/test_hmong_startup.py tests/test_hmong_text.py tests/test_hmong_inference_contract.py tests/test_hmong_narration.py tests/test_hmong_expression.py tests/test_hmong_resume_exports.py tests/test_hmong_ui.py tests/test_portable_launcher.py tests/test_launch_setup.py -q
+          python packaging/ci_checked.py python -m pytest tests/test_hmong_variant.py tests/test_hmong_reference.py tests/test_hmong_default_replacement.py tests/test_hmong_packaging.py tests/test_hmong_startup.py tests/test_hmong_text.py tests/test_hmong_inference_contract.py tests/test_hmong_narration.py tests/test_hmong_expression.py tests/test_hmong_context.py tests/test_hmong_throughput.py tests/test_hmong_acceleration.py tests/test_hmong_resume_exports.py tests/test_hmong_ui.py tests/test_portable_launcher.py tests/test_launch_setup.py -q
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node --check static/app.js
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
@@ -84,7 +84,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Build and synthesize with the relocated Windows runtime
         run: |
-          python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --output '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.3.0' --reports '${{ runner.temp }}/hmong-reports'
+          python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --output '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.4.0' --reports '${{ runner.temp }}/hmong-reports'
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Scan the fresh package with Windows Defender when available
         timeout-minutes: 25
@@ -92,9 +92,9 @@ jobs:
           $scanner = Join-Path $env:ProgramFiles 'Windows Defender/MpCmdRun.exe'
           $report = @{ available = (Test-Path $scanner); scan_passed = $false }
           if ($report.available) {
-            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.3.0'
+            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.4.0'
             if ($LASTEXITCODE -ne 0) { throw 'Windows Defender did not accept the fresh Hmong directory; do not publish.' }
-            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.3.0-Windows-x64.zip'
+            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.4.0-Windows-x64.zip'
             if ($LASTEXITCODE -ne 0) { throw 'Windows Defender did not accept the Hmong archive; do not publish.' }
             $report.scan_passed = $true
           } else { Write-Warning 'Windows Defender command-line scanner is unavailable on this runner; no antivirus result is claimed.' }
@@ -103,12 +103,12 @@ jobs:
         uses: actions/upload-artifact@v4
         continue-on-error: true
         with:
-          name: Voice-Studio-Hmong-1.3.0-native-windows
+          name: Voice-Studio-Hmong-1.4.0-native-windows
           compression-level: 0
           retention-days: 7
           path: |
-            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.3.0-Windows-x64.zip
-            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.3.0-Windows-x64.zip.sha256
+            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.4.0-Windows-x64.zip
+            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.4.0-Windows-x64.zip.sha256
             ${{ runner.temp }}/hmong-reports/*.json
             ${{ runner.temp }}/hmong-reports/Hmong-female-2-preview.mp3
             ${{ runner.temp }}/hmong-reports/Hmong-male-2-preview.mp3
@@ -120,7 +120,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           $release = $releases | Where-Object { $_.tag_name -eq $env:RELEASE_TAG }
           if (-not $release -or -not $release.draft) { throw 'The separate Hmong draft release is missing or was published elsewhere.' }
-          $zip = '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.3.0-Windows-x64.zip'
+          $zip = '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.4.0-Windows-x64.zip'
           $size = (Get-Item $zip).Length
           if ($size -ge 2GB) { throw 'The package exceeds the GitHub per-asset size limit.' }
           $digest = (Get-FileHash -Algorithm SHA256 $zip).Hash.ToLowerInvariant()
@@ -130,19 +130,25 @@ jobs:
           }
           $notes = Join-Path $env:RUNNER_TEMP 'hmong-release-notes.md'
           @"
-          Voice Studio Hmong cho Windows x64: giọng nữ/nam Hmong, nhân bản từ mẫu có lời tham chiếu, kể chuyện tự động, sáu lựa chọn biểu cảm, nhấn từ và khoảng nghỉ theo nội dung, nhập TXT/SRT và xuất WAV/MP3/TXT/SRT.
+          Voice Studio Hmong 1.4.0 cho Windows x64: gói nền CPU đầy đủ, hai giọng nam/nữ từ MP3 bạn gửi, nhân bản giọng, nhập TXT/SRT và xuất WAV/MP3/TXT/SRT. Mặc định giữ ngữ cảnh cụm/câu khi nhấn từ và tắt tự chèn khoảng nghỉ để giảm các lần gọi mô hình riêng lẻ.
 
-          **Tải ZIP bên dưới, giải nén toàn bộ, rồi mở MO_VOICE_STUDIO_HMONG.bat.** Đã kèm Python, thư viện CPU và FFmpeg; không cần API key hoặc cài Python hệ thống.
+          **Chưa xác minh phát âm đúng ua/thaj/qab/faib/rov/ris hoặc đạt 30x (một giờ lời đọc trong hai phút).** Phiên bản này giữ ngữ cảnh để bạn nghe so sánh; không tuyên bố đã sửa hoàn toàn cách mô hình đọc sáu từ đó.
 
-          **Bản nghe thử do tool tạo:** [Giọng nữ](https://github.com/$env:GH_REPO/releases/download/$env:RELEASE_TAG/Hmong-female-2-preview.mp3) và [Giọng nam](https://github.com/$env:GH_REPO/releases/download/$env:RELEASE_TAG/Hmong-male-2-preview.mp3). Đây là lời đọc mới được tổng hợp ở 16 bước FP32, khác hai bản thu MP3 gốc. Có thể nghe trước khi tải ZIP; thiết lập và SHA256 nằm trong native-smoke.json. Các bản nghe thử này cần được người biết Hmong đánh giá phát âm và độ giống giọng.
+          **Tải ZIP bên dưới, giải nén toàn bộ, rồi mở MO_VOICE_STUDIO_HMONG.bat.** Đã kèm Python, thư viện CPU và FFmpeg; không cần API key hoặc tự cài Python hệ thống.
 
-          **Lần đầu cần Internet để tự tải và kiểm tra khoảng 1,4 GB model.** Model Hmong không có giấy phép phân phối lại rõ ràng nên không kèm weights trong ZIP; tool tải trực tiếp các tệp được cố định revision/SHA256 từ nguồn model. Những lần sau dùng ngoại tuyến khi model đã sẵn sàng. Dữ liệu nằm trong voice-studio-hmong/.data; sao lưu thư mục này khi cập nhật.
+          **Bản nghe thử do tool tạo:** [Giọng nữ](https://github.com/$env:GH_REPO/releases/download/$env:RELEASE_TAG/Hmong-female-2-preview.mp3) và [Giọng nam](https://github.com/$env:GH_REPO/releases/download/$env:RELEASE_TAG/Hmong-male-2-preview.mp3). Cả hai đọc nội dung mới chứa đủ ua/thaj/qab/faib/rov/ris ở 16 bước FP32, khác hai bản thu MP3 gốc. Bản nam có hai phần warm/serious và khoảng nghỉ chủ động. Có thể nghe trước khi tải ZIP; nội dung, thiết lập, SHA256 và thời gian đo nằm trong native-smoke.json. Các bản nghe thử này cần người biết Hmong đánh giá phát âm và độ giống giọng.
 
-          Hai MP3 nam/nữ mới nhất bạn gửi được giữ nguyên để nghe thử, nhận diện bằng SHA256 và dùng đoạn tham chiếu theo manifest. Cả hai bản ngắn đều được nhận diện và nhân bản từ đúng tệp nguồn mới. Lời Hmong của từng đoạn mẫu do bạn cung cấp và xác nhận khớp bản thu; tool điền đúng lời này khi nhập lại MP3 nguồn và giữ lời bạn chỉnh nếu có. Với tệp khác, chọn đoạn 3–8 giây, nhập lời Hmong khớp đoạn mẫu và xác nhận quyền sử dụng giọng. Mặc định kể chuyện, cảm xúc ấm (warm), cường độ 65% và tự động điều chỉnh nhịp. Có sáu lựa chọn neutral/warm/joyful/sad/serious/suspense, cường độ 0–1; hỗ trợ chỉ dẫn cảm xúc, nhấn từ và khoảng nghỉ trong văn bản. Xử lý này chạy cục bộ bằng điều chỉnh tốc độ giữ cao độ, âm lượng, đường bao và khoảng nghỉ; không phải mô hình được huấn luyện điều khiển cảm xúc và không bảo đảm diễn xuất cảm xúc giống người. Chưa hỗ trợ nhận dạng giọng nói Hmong; dùng TXT/SRT hoặc sửa phụ đề thủ công. Không bảo đảm tạo một giờ voice trong hai phút; thời gian tùy CPU/GPU và mức chất lượng. Cần người nghe đánh giá phát âm và độ giống giọng.
+          **Tùy chọn NVIDIA:** nếu có GPU/driver tương thích, chủ động chạy install_hmong_cuda.bat để tải thư viện CUDA vào môi trường riêng bằng Internet. Gói ZIP nền vẫn dùng CPU. Có sẵn bộ cài CUDA không chứng minh suy luận CUDA hoạt động trên máy bạn, không phải kết quả kiểm thử GPU và không xác minh mức tăng tốc 30x. Kiểm thử Windows phát hành này chỉ chạy suy luận CPU; hai launcher CUDA chỉ được chạy với --check để kiểm tra đường dẫn, không tải/cài CUDA.
 
-          Mặc định chọn Tự nhiên 16 bước FP32 để giữ chất lượng mô hình gốc. Chế độ 4 bước là bản nháp nhanh, có thể giảm độ rõ và tự nhiên; chỉ chế độ nháp mới thử INT8 trên CPU và dự phòng FP32 khi không tương thích. Các mức 8/16/32 dùng FP32 theo mặc định. Chuẩn hóa văn bản giữ chữ cuối biểu thị thanh điệu Hmong RPA, kiểm tra ký tự theo bộ từ vựng mô hình và giữ đủ thời lượng cho câu ngắn. Nút Lưu và tạo thử vừa nhập mẫu vừa tạo lời đọc mới. Báo cáo ghi thời gian thực tế của từng lần tạo; không dùng chênh lệch số bước hoặc độ chính xác để tuyên bố tăng tốc giữ nguyên chất lượng.
+          **Lần đầu cần Internet để tự tải và kiểm tra khoảng 1,4 GB model.** Model Hmong không có giấy phép phân phối lại rõ ràng nên không kèm weights trong ZIP; tool tải trực tiếp các tệp cố định revision/SHA256 từ nguồn model. Sau khi chuẩn bị xong có thể tạo giọng ngoại tuyến. Dữ liệu nằm trong voice-studio-hmong/.data; sao lưu thư mục này khi cập nhật.
 
-          Đã kiểm tra bằng Python Windows x64 được đóng gói, sau khi chuyển sang đường dẫn có dấu cách: checksum đầy đủ hai MP3 nghe thử, tạo tiếng thật ngoại tuyến cho cả hai giọng ở 16 bước FP32, một lượt tạo biểu cảm từ văn bản có chỉ dẫn và hai cảm xúc, nhập và nhân bản từ từng MP3 mới khi để trống lời ở 16 bước FP32, chọn đoạn thủ công từ tệp dài khác, TXT/SRT/MP3, launcher bình thường và các tệp start/install ở cả thư mục gốc lẫn thư mục ứng dụng qua cmd.exe. Tool kiểm tra cả mã nguồn, giao diện và mẫu giọng trước khi chuẩn bị thư viện hoặc mô hình; tệp rời hoặc ZIP giải nén thiếu sẽ có hướng dẫn sửa rõ ràng. Kiểm tra ngắn này không chứng minh chất lượng phát âm hoặc độ giống giọng.
+          Hai MP3 nam/nữ mới nhất bạn gửi được giữ nguyên để nghe thử, nhận diện bằng SHA256 và dùng đoạn tham chiếu theo manifest. Lời Hmong của từng đoạn mẫu do bạn cung cấp và xác nhận khớp bản thu; tool điền đúng lời này khi nhập lại MP3 nguồn và giữ lời bạn chỉnh nếu có. Với tệp khác, chọn đoạn 3–8 giây, nhập lời Hmong khớp đoạn mẫu và xác nhận quyền sử dụng giọng.
+
+          Mặc định Tự nhiên 16 bước FP32, kể chuyện, warm 65%, giữ ngữ cảnh cụm/câu và tắt nhịp tự động. Nhấn từ áp dụng lên cả cụm chứa từ đó; chưa căn chỉnh từng từ. Có thể bật lại nhịp hoặc tự chèn khoảng nghỉ. Sáu lựa chọn neutral/warm/joyful/sad/serious/suspense dùng điều chỉnh tốc độ giữ cao độ, âm lượng, đường bao và khoảng nghỉ cục bộ; không phải mô hình huấn luyện điều khiển cảm xúc. Chế độ 4 bước là bản nháp có thể giảm độ rõ/tự nhiên; chỉ chế độ này thử INT8 trên CPU và dự phòng FP32. Các mức 8/16/32 giữ FP32 theo mặc định. Chưa hỗ trợ nhận dạng giọng nói Hmong tự động trong tool; dùng TXT/SRT hoặc sửa phụ đề thủ công.
+
+          Báo cáo tốc độ dùng thời lượng các đoạn âm thanh có lời do mô hình tạo, loại phần khoảng lặng tool chèn thêm vào nhịp/SRT. Kết quả ngắn không chứng minh mục tiêu một giờ lời đọc trong hai phút. Tốc độ phụ thuộc CPU/GPU và mức chất lượng.
+
+          Đã kiểm tra bằng Python Windows x64 được đóng gói sau khi chuyển sang đường dẫn có dấu cách: checksum hai MP3 nguồn, CPU tạo thật cho cả hai giọng và nhân bản từ từng MP3 ở 16 bước FP32, nội dung thử đủ sáu từ, hai mức biểu cảm cục bộ, đoạn mẫu thủ công, TXT/SRT/MP3, đo tốc độ loại khoảng lặng chèn, launcher bình thường và 11 tệp BAT qua cmd.exe. Kiểm tra này không chứng minh phát âm chuẩn, diễn xuất cảm xúc, độ giống giọng, suy luận CUDA hoặc đạt 30x.
 
           ZIP: $size bytes
           SHA256: $digest
@@ -162,6 +168,6 @@ jobs:
             if (-not $previewAsset -or $previewAsset.size -ne (Get-Item $preview).Length) { throw 'An uploaded generated audition MP3 is missing or its size differs.' }
             if ($previewAsset.digest -and $previewAsset.digest -ne "sha256:$previewDigest") { throw 'An uploaded generated audition MP3 digest differs.' }
           }
-          gh release edit $env:RELEASE_TAG --repo $env:GH_REPO --draft=false --prerelease=true --latest=false --target $env:GITHUB_SHA --title 'Voice Studio Hmong 1.3.0 — Windows x64' --notes-file $notes
+          gh release edit $env:RELEASE_TAG --repo $env:GH_REPO --draft=false --prerelease=true --latest=false --target $env:GITHUB_SHA --title 'Voice Studio Hmong 1.4.0 — Windows x64' --notes-file $notes
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           "Published checked Hmong ZIP ($size bytes), SHA256: $digest" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append

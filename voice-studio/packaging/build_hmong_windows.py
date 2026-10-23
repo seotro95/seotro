@@ -20,7 +20,7 @@ import zipfile
 from build_windows import copy_runtime, download_verified_ffmpeg
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.3.0'
+VERSION = '1.4.0'
 ARCHIVE_NAME = f'Voice-Studio-Hmong-{VERSION}-Windows-x64.zip'
 
 
@@ -44,7 +44,8 @@ def copy_source(destination, source=SOURCE):
         if folder.is_symlink() or any(path.is_symlink() for path in folder.rglob('*')):
             raise ValueError('Linked application assets cannot be bundled')
         shutil.copytree(folder, destination / relative)
-    required = ('app.py', 'worker.py', 'bundle_check.py', 'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py',
+    required = ('app.py', 'worker.py', 'bundle_check.py', 'hmong_acceleration.py',
+                'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py',
                 'hmong_reference.py', 'hmong_text.py', 'hmong_assets.py', 'prepare_hmong.py',
                 'hmong_launcher.py', 'studio_variant.py', 'HMONG-README.md', 'requirements-hmong.txt')
     for name in required:
@@ -115,6 +116,8 @@ exit /b %VOICE_EXIT%
             (folder / name).write_bytes(start.replace('\n', '\r\n').encode('ascii'))
         for name in ('install.bat', 'install_hmong.bat'):
             (folder / name).write_bytes(install.replace('\n', '\r\n').encode('ascii'))
+        install_cuda = install.replace('--setup-only', '--install-cuda')
+        (folder / 'install_hmong_cuda.bat').write_bytes(install_cuda.replace('\n', '\r\n').encode('ascii'))
 
 
 def checked_run(command, *, environment, cwd, timeout=2400):
@@ -124,7 +127,7 @@ def checked_run(command, *, environment, cwd, timeout=2400):
 
 
 def write_notices(root, model_manifest, qa_report):
-    notice = '''VOICE STUDIO HMONG 1.3.0 — WINDOWS X64
+    notice = '''VOICE STUDIO HMONG 1.4.0 — WINDOWS X64
 
 Giai nen TOAN BO ZIP, mo MO_VOICE_STUDIO_HMONG.bat.
 Da kem Python, thu vien CPU, FFmpeg, hai MP3 goc va doan Hmong co loi tham chieu.
@@ -134,6 +137,9 @@ KIEM_TRA_HMONG.bat kiem tra tep va thu vien da cai, khong tu tai model.
 start.bat/start_hmong.bat o ca thu muc goc va thu muc ung dung deu mo Hmong.
 install.bat/install_hmong.bat chuan bi Hmong bang Python da dong goi.
 Khong can cai lai Python hoac tao moi truong tieng Viet.
+Goi mac dinh dung CPU. Neu co GPU NVIDIA/driver phu hop, co the chu dong
+chay install_hmong_cuda.bat de tai them bo CUDA rieng bang Internet.
+Bo cai CUDA duoc kem theo; chua kiem chung suy luan CUDA hoac toc do GPU.
 
 Du lieu ca nhan o voice-studio-hmong/.data. Sao luu thu muc nay khi cap nhat.
 Mac dinh tu nhien 16 buoc, FP32 de giu chat luong mo hinh goc.
@@ -145,7 +151,9 @@ Loi Hmong cua ca hai doan mau do ban cung cap va xac nhan khop ban thu.
 Tool tu chon doan tham chieu theo manifest va dien dung loi ban da gui.
 Tool giu loi ban sua, khong ghi de bang loi dien san.
 Voi tep khac, chon doan 3-8 giay va nhap loi Hmong khop doan mau.
-Mac dinh ke chuyen, cam xuc warm, cuong do 65%, tu dong nhip va khoang nghi.
+Mac dinh ke chuyen, cam xuc warm, cuong do 65%; tat tu them khoang nghi.
+Giu ngu canh cum/cau khi nhan tu; hieu ung nhan ap dung len ca cum.
+Co the bat lai nhip tu dong hoac chen [pause=...] khi can.
 Co the chon neutral/warm/joyful/sad/serious/suspense va cuong do 0..1.
 Trong TXT co the dung [emotion=warm], **tu nhan manh** va [pause=0.4].
 Cam xuc la dieu chinh toc do giu cao do, gain, envelope va khoang nghi
@@ -153,6 +161,9 @@ tren may; khong phai mo hinh da huan luyen cam xuc hay thay doi thanh dieu.
 Chua co nhan dang loi noi Hmong: nhap TXT/SRT hoac sua phu de thu cong.
 Mo hinh Hmong cong dong can nguoi nghe danh gia phat am va do giong giong.
 Khong bao dam 1 gio voice trong 2 phut; toc do tuy CPU/GPU va chat luong.
+Chua xac minh muc tieu 30x hoac phat am dung cac tu ua/thaj/qab/faib/rov/ris.
+Hai MP3 nghe thu do tool tao co du sau tu nay de ban nghe doi chieu.
+Bao cao toc do tinh do dai cac doan loi doc, loai khoang lang tool chen.
 
 LICENSE / NGUON
 Python: runtime/LICENSE.txt, https://www.python.org/
@@ -248,7 +259,11 @@ def main():
              'model_download_approx_gb': 1.4, 'api_key_required': False,
              'default_steps': 16, 'default_precision': 'fp32', 'draft_steps': 4,
              'default_delivery': 'story', 'default_emotion': 'warm',
-             'default_emotion_strength': .65, 'default_auto_rhythm': True,
+             'default_emotion_strength': .65, 'default_auto_rhythm': False,
+             'default_hmong_phrase_context': True,
+             'cuda_installer_included': True, 'cuda_inference_validated': False,
+             'pronunciation_evaluated': False, 'target_30x_verified': False,
+             'pronunciation_test_words': qa_report['pronunciation_test_words'],
              'expression_plan': 'hmong-expression-v1',
              'expression_backend': 'local_pitch_preserving_postprocessing',
              'reference_text_verified': qa_report['reference_text_verified'],

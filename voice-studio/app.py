@@ -202,7 +202,8 @@ def _config_values():
                 'ai_voice_languages':['mww'],'max_characters':MAX_CHARACTERS,'max_audio_minutes':180,
                 'fast_vieneu':False,'int8_cpu':False,'models':{'f5_hmong':model_ready('f5_hmong')},
                 'hmong_ready':model_ready('f5_hmong'),'hmong_steps':16,'paragraph_pause':0,'subtitle_ready':False,
-                'delivery':'story','emotion':'warm','emotion_strength':0.65,'auto_rhythm':True,
+                'delivery':'story','emotion':'warm','emotion_strength':0.65,'auto_rhythm':False,
+                'hmong_phrase_context':True,
                 'hmong_reference_note':'Hai mẫu nam/nữ đi kèm dùng lời mẫu do bạn cung cấp và xác nhận khớp đoạn thu. Có thể nghe và sửa lời trong phần Nhân bản rồi lưu hồ sơ giọng đã chỉnh. Với mẫu khác, nhập lời khớp chính xác đoạn được chọn.',
                 'hardware':'unknown','hardware_label':'CỤC BỘ · CHƯA KIỂM TRA CPU/GPU','ffmpeg':bool(shutil.which('ffmpeg')),
                 'cpu_cores':os.cpu_count() or 1,'nano_ready':False,'worker_warm':warm_worker is not None and warm_worker.poll() is None}
@@ -351,7 +352,8 @@ class Speech(BaseModel):
     delivery: str = 'story' if IS_HMONG else 'natural'
     emotion: Literal['neutral', 'warm', 'joyful', 'sad', 'serious', 'suspense'] = 'warm' if IS_HMONG else 'neutral'
     emotion_strength: float = Field(default=0.65, ge=0, le=1)
-    auto_rhythm: bool = IS_HMONG
+    auto_rhythm: bool = False
+    hmong_phrase_context: bool = True
     paragraph_pause: float = Field(default=0 if IS_HMONG else 0.3, ge=0, le=3)
     quality: str = Field(default='auto', pattern='^(auto|standard|fast)$')
 
@@ -449,7 +451,7 @@ def run_job(ident):
             if job.get('video_id'):
                 job['video_url'] = f'/api/dubbed/{ident}'
             elapsed = time.monotonic() - processing_started
-            job.update(status='done', url=f'/api/audio/{ident}', finished_at=now(), wall_processing_seconds=round(elapsed, 3), speed_report=None if reused_parts else speed_report(result.get('audio_seconds', 0), elapsed))
+            job.update(status='done', url=f'/api/audio/{ident}', finished_at=now(), wall_processing_seconds=round(elapsed, 3), speed_report=None if reused_parts else speed_report(result.get('audio_seconds', 0), elapsed, spoken_audio_seconds=result.get('spoken_audio_seconds')))
     except Exception as exc:
         job.update(status='error', error=str(exc))
     with lock:
@@ -716,7 +718,12 @@ async def write_script(body: writing.WritingRequest):
 
 @app.get('/api/system-info')
 def machine_info():
-    return system_info()
+    info = system_info()
+    if IS_HMONG:
+        info['note'] = ('Hmong dùng GPU khi PyTorch CUDA chạy được. Có NVIDIA nhưng CUDA chưa dùng được: '
+                        'chạy install_hmong_cuda.bat để cài môi trường GPU riêng rồi mở lại tool. '
+                        'CPU vẫn dùng được; mục tiêu 30× cần đo bằng lời đọc thật, không tính khoảng nghỉ chèn thêm.')
+    return info
 
 
 @app.post('/api/videos', status_code=201)

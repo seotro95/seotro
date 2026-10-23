@@ -109,6 +109,8 @@ def _expression_segments(text, job, *, timed=False):
     again with the job's emotion. Explicit pauses, including zero, override
     the automatic pause immediately before them.
     """
+    if job.get('hmong_phrase_context') is True:
+        return _context_expression_segments(text, job, timed=timed)
     from hmong_expression import automatic_pause, validate_emotion, validate_strength
     from hmong_text import normalize_text
     emotion = validate_emotion(job.get('emotion', 'neutral'))
@@ -157,6 +159,131 @@ def _expression_segments(text, job, *, timed=False):
     # Added gaps and emphasis remain barriers; packing never loses a pause or
     # crosses an emotion change. A user-added gap also keeps sentence boundaries.
     return _pack_segments(output, 160) if job.get('paragraph_pause', 0) == 0 else output
+
+
+def _context_line(text, emphasis):
+    """Normalize a line while retaining which whole tokens contain bold text.
+
+    Bold delimiters inside RPA words are rejected by the caller, so preserving
+    a token-level flag is sufficient. Formatting normalization can expand
+    punctuation or replace a zero-width separator without losing tone letters.
+    """
+    from hmong_text import normalize_text
+    words, flags = [], []
+    for match in re.finditer(r'\S+', text):
+        word = normalize_text(match.group())
+        if not word:
+            continue
+        marked = any(emphasis[index] and character.isalnum()
+                     for index, character in enumerate(text[match.start():match.end()], match.start()))
+        if words:
+            words.append(' ')
+            flags.append(False)
+        words.append(word)
+        flags.extend([marked] * len(word))
+    return ''.join(words), flags
+
+
+def _context_phrases(runs, emotion, strength, rhythm):
+    """Yield bounded linguistic context; emphasis applies to a containing phrase.
+
+    No word alignment is available. A marked word does not become a separate
+    F5 prompt, and the existing emphasis processing affects its whole bounded
+    phrase. This preserves surrounding words for acoustic coarticulation.
+    """
+    from hmong_expression import automatic_pause
+    text = ''.join(part for part, _ in runs)
+    emphasis = [marked for part, marked in runs for _ in part]
+    output, offset = [], 0
+    for line in text.splitlines(keepends=True):
+        normalized, flags = _context_line(line, emphasis[offset:offset + len(line)])
+        offset += len(line)
+        start = 0
+        # Keep punctuation and closing dialogue quotes in the preceding phrase.
+        boundaries = [match.start() for match in re.finditer(
+            r'(?<=[.!?;:])\s+|(?<=[.!?;:]["\')\]])\s+', normalized)] + [len(normalized)]
+        for boundary in boundaries:
+            while start < boundary and normalized[start].isspace():
+                start += 1
+            while start < boundary:
+                end = min(start + 160, boundary)
+                if end < boundary:
+                    end = normalized.rfind(' ', start, end + 1)
+                    if end <= start:
+                        raise ValueError('Một từ Hmong quá dài và không có dấu cách. '
+                                         'Thêm dấu cách đúng giữa các âm tiết RPA; không tự cắt chữ ghi thanh điệu.')
+                phrase = normalized[start:end].strip()
+                if phrase:
+                    segment = Segment(text=phrase, emotion=emotion,
+                                      emphasis=any(flags[start:end]))
+                    if rhythm:
+                        segment.rhythm_pause = automatic_pause(phrase, emotion, strength)
+                    output.append(segment)
+                start = end
+                while start < boundary and normalized[start].isspace():
+                    start += 1
+            start = boundary
+        if rhythm and line.endswith(('\n', '\r')) and output:
+            output[-1].rhythm_pause = automatic_pause(output[-1].text, emotion, strength, paragraph=True)
+    return output
+
+
+def _context_expression_segments(text, job, *, timed=False):
+    """Opt-in context plan; old jobs retain the original expression parser.
+
+    Buffers span bold toggles, never emotion/pause controls. With automatic
+    rhythm disabled, compatible phrases can share one bounded F5 call even
+    when some words are marked. Explicit zero pauses remain real boundaries.
+    """
+    from hmong_expression import validate_emotion, validate_strength
+    if re.search(r'[A-Za-z]\*\*(?=[A-Za-z])', text):
+        raise ValueError('Đặt ** quanh cả từ hoặc cụm Hmong; không chèn dấu nhấn bên trong âm tiết RPA '
+                         'vì có thể tách chữ ghi thanh điệu.')
+    emotion = validate_emotion(job.get('emotion', 'neutral'))
+    strength = validate_strength(job.get('emotion_strength', .65))
+    rhythm = bool(job.get('auto_rhythm', True)) and not timed
+    marked, runs, output = False, [], []
+
+    def flush():
+        segments = _context_phrases(runs, emotion, strength, rhythm)
+        runs.clear()
+        if not rhythm and job.get('paragraph_pause', 0) == 0:
+            packed = []
+            for segment in segments:
+                if packed and len(packed[-1].text) + 1 + len(segment.text) <= 160:
+                    packed[-1].text += ' ' + segment.text
+                    packed[-1].emphasis = packed[-1].emphasis or segment.emphasis
+                else:
+                    packed.append(segment)
+            segments = packed
+        output.extend(segments)
+
+    for part in re.split(r'(\[emotion=[^\]]*\]|\[pause=[^\]]*\]|\*\*)', text):
+        if not part:
+            continue
+        if part == '**':
+            marked = not marked
+        elif part.startswith('[emotion='):
+            flush()
+            emotion = validate_emotion(part[len('[emotion='):-1].strip())
+        elif part.startswith('[pause='):
+            flush()
+            value = part[len('[pause='):-1]
+            if not re.fullmatch(r'\d+(?:\.\d+)?', value) or not 0 <= float(value) <= 10:
+                raise ValueError('Mỗi [pause=...] phải từ 0 đến 10 giây.')
+            if output and output[-1].text:
+                output[-1].rhythm_pause = 0
+            output.append(Segment(pause=float(value)))
+        else:
+            if re.search(r'\[(?:emotion|pause)(?:=|\]|\s|$)', part, flags=re.IGNORECASE):
+                raise ValueError('Kiểm tra cú pháp [emotion=warm] hoặc [pause=1].')
+            if '*' in part:
+                raise ValueError('Kiểm tra cú pháp **cụm cần nhấn**; mỗi đầu dùng đúng hai dấu *.')
+            runs.append((part, marked))
+    if marked:
+        raise ValueError('Đóng phần nhấn giọng bằng dấu ** ở cuối đoạn.')
+    flush()
+    return output
 
 
 def plan_segments(job):
