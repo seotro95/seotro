@@ -1,0 +1,26 @@
+{
+  "text": "Peb ua hauj lwm. Thaj chaw no zoo nkauj. Nyob qab roob. Peb faib mov. Kuv rov los tsev. Nws hnav ris.",
+  "voices": [
+    {
+      "file": "Hmong-Fast-Male-6-Words.mp3",
+      "sha256": "c2752fb6c1925a1965aa57da4a5609f86142a7e434279672f762338f99f94fe2",
+      "bytes": 134924,
+      "generated": true,
+      "backend": "experimental_vits_openvoice_v2",
+      "source": "new utterance, not original reference recording",
+      "pronunciation_verified": false,
+      "target_30x_verified": false
+    },
+    {
+      "file": "Hmong-Fast-Female-6-Words.mp3",
+      "sha256": "dd7126aede9e8c7b0503abc577579da70adeafdab8f25d13ce60ad93f27d81f9",
+      "bytes": 134924,
+      "generated": true,
+      "backend": "experimental_vits_openvoice_v2",
+      "source": "new utterance, not original reference recording",
+      "pronunciation_verified": false,
+      "target_30x_verified": false
+    }
+  ],
+  "watermark": "SEOT was verified in PCM16 source; compressed preview is not independently watermark-certified"
+}
