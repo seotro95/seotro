@@ -390,7 +390,7 @@ def test_native_hmong_hides_f5_steps_and_sends_no_step_claim_from_all_entrypoint
 def test_native_hmong_download_requests_native_engine_without_f5_model(static_site):
     with studio_page(static_site, native=True, ready=False, hmong_steps=None) as (page, state):
         playwright.expect(page.locator('#hmong-reference-note')).to_contain_text('580 MB')
-        playwright.expect(page.locator('#hmong-reference-note')).to_contain_text('MO_HMONG_NHANH.bat')
+        playwright.expect(page.locator('#hmong-reference-note')).to_contain_text('MO_VOICE_STUDIO_HMONG.bat')
         page.click('#voice-load-model')
         playwright.expect(page.locator('#voice-load-model')).to_contain_text('sẵn sàng', timeout=10000)
         assert state['tasks'] == [{'action': 'prepare_voice', 'engine': 'hmong_native'}]

@@ -34,28 +34,28 @@ GENERATED_PREVIEW_FILES = {'hmong-female': 'Hmong-female-2-preview.mp3',
 def check_batch_entrypoints(root):
     """Exercise the files users double-click through the real Windows shell."""
     root = Path(root)
-    entries = [('MO_VOICE_STUDIO_HMONG.bat', '--check')]
-    for prefix in ('', 'voice-studio-hmong/'):
-        entries.extend((prefix + name, '--check') for name in ('start.bat', 'start_hmong.bat'))
-        entries.extend((prefix + name, '--setup-only') for name in ('install.bat', 'install_hmong.bat'))
-        # Supplying --check must forward the offline CPU check, never install
-        # or download the optional CUDA environment during the native build.
-        entries.append((prefix + 'install_hmong_cuda.bat', '--check'))
-    entries.append(('MO_HMONG_NHANH.bat', '--check'))
+    entries = [('MO_VOICE_STUDIO_HMONG.bat', '--check', 'native'),
+               ('tools/launch_hmong.bat', '--setup-only', 'native'),
+               ('tools/MO_F5_HMONG.bat', '--check', 'f5'),
+               ('tools/KIEM_TRA_HMONG.bat', '--check', 'native'),
+               ('tools/install_hmong_cuda.bat', '--check', 'native')]
     results = {}
     shell = os.environ.get('COMSPEC', 'cmd.exe')
-    for relative, flag in entries:
+    for relative, flag, backend in entries:
         batch = root / relative
         print('Native cmd.exe entrypoint:', relative, flag, flush=True)
         # The working directory itself contains spaces after relocation. The
         # ASCII basename avoids cmd's special handling of a quoted /c command.
-        backend = 'native' if relative == 'MO_HMONG_NHANH.bat' else 'f5'
-        environment = dict(os.environ, HMOOB_BACKEND=backend)
+        # Root/F5 wrappers must override a conflicting inherited backend.
+        inherited_backend = ('f5' if backend == 'native' else 'native') if relative in {
+            'MO_VOICE_STUDIO_HMONG.bat', 'tools/MO_F5_HMONG.bat'} else 'native'
+        environment = dict(os.environ, HMOOB_BACKEND=inherited_backend)
         completed = subprocess.run([shell, '/d', '/c', batch.name, flag], cwd=batch.parent, env=environment,
             stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
             text=True, encoding='utf-8', errors='replace', timeout=180)
         print(completed.stdout, end='', flush=True)
-        if completed.returncode or 'PASS:' not in completed.stdout:
+        label = 'Hmong nhanh thử nghiệm' if backend == 'native' else 'F5-Hmong'
+        if completed.returncode or 'PASS:' not in completed.stdout or label not in completed.stdout:
             raise RuntimeError(f'Batch entrypoint failed: {relative} {flag}, exit {completed.returncode}')
         results[relative] = {'argument': flag, 'exit_code': completed.returncode,
                              'model_download_required': False,
@@ -159,7 +159,7 @@ def main():
                'hmong_backend': 'vits_openvoice_v2' if args.backend == 'native' else 'f5',
                'voices': {}, 'clone': False,
                'full_source_previews': {}, 'source_clones': {}, 'manual_crop': False,
-               'txt_srt': False, 'mp3': False, 'fast_launcher': False, 'batch_entrypoints': {},
+               'txt_srt': False, 'mp3': False, 'main_launcher': False, 'batch_entrypoints': {},
                'expression': {}, 'generated_auditions': {},
                'pronunciation_test_words': PRONUNCIATION_TEST_WORDS,
                'target_30x_verified': False, 'cuda_installer_included': True,
@@ -212,10 +212,10 @@ def main():
                 'speed_report': job['speed_report'], 'request_wall_seconds': round(time.monotonic() - started, 3),
                 'pronunciation_evaluated': False, 'target_30x_verified': False,
                 'cuda_inference_validated': False}
-        compatibility['normal_launcher'] = check_web_launcher(root, 'f5')
+        compatibility['advanced_f5_launcher'] = check_web_launcher(root, 'f5')
         reports.mkdir(parents=True, exist_ok=True)
         (reports / 'f5-smoke.json').write_text(json.dumps(compatibility, ensure_ascii=False, indent=2), encoding='utf-8')
-        print('PASS: preserved F5 CPU16-step FP32 actual synthesis and normal launcher.', flush=True)
+        print('PASS: preserved F5 CPU16-step FP32 actual synthesis and advanced launcher.', flush=True)
         return
 
     with TestClient(studio.app) as client:
@@ -387,12 +387,12 @@ def main():
     results['reference_text_verified'] = True
     results['reference_text_source'] = 'user_provided_for_selected_excerpt'
     results['batch_entrypoints'] = check_batch_entrypoints(root)
-    results['fast_launcher'] = check_web_launcher(root, 'native')
+    results['main_launcher'] = check_web_launcher(root, 'native')
     results['success'] = True
     reports.mkdir(parents=True, exist_ok=True)
     (reports / 'native-smoke.json').write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding='utf-8')
     print('PASS: CPU native VITS/OpenVoice presets/clones, six-word generated MP3s, expression, '
-          'full-pipeline timings, SRT and12 BAT paths. CUDA inference, pronunciation and30x remain unverified.', flush=True)
+          'full-pipeline timings, SRT and5 BAT paths. CUDA inference, pronunciation and30x remain unverified.', flush=True)
 
 
 def check_web_launcher(root, backend):
@@ -403,8 +403,12 @@ def check_web_launcher(root, backend):
     app_root = root / 'voice-studio-hmong'
     environment = dict(os.environ, HMOOB_BACKEND=backend)
     engine = 'hmong_native' if backend == 'native' else 'f5_hmong'
-    subprocess.run([sys.executable, str(app_root / 'hmong_launcher.py'), '--check'],
-                   check=True, cwd=app_root, env=environment, timeout=180)
+    relative = 'MO_VOICE_STUDIO_HMONG.bat' if backend == 'native' else 'tools/MO_F5_HMONG.bat'
+    entrypoint = root / relative
+    shell = os.environ.get('COMSPEC', 'cmd.exe')
+    # Exercise exactly the primary BAT users open, including backend selection.
+    command = [shell, '/d', '/c', entrypoint.name]
+    subprocess.run([*command, '--check'], check=True, cwd=entrypoint.parent, env=environment, timeout=180)
     # This is the builder's isolated QA directory, never an installed user's
     # data. An empty legacy lock reproduced the original Windows startup bug.
     data = Path(environment['VOICE_STUDIO_DATA_DIR'])
@@ -416,8 +420,8 @@ def check_web_launcher(root, backend):
         'root_id': 'stale-root', 'backend': engine, 'version': '1.5.0-hmong',
     }), encoding='utf-8')
     print('Checking Hmong launcher after relocation:', backend, flush=True)
-    process = subprocess.Popen([sys.executable, str(app_root / 'hmong_launcher.py'), '--no-browser'],
-        cwd=app_root, env=environment, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+    process = subprocess.Popen([*command, '--no-browser'],
+        cwd=entrypoint.parent, env=environment, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
         encoding='utf-8', errors='replace')
     lines = queue.Queue()
     def read_output():
@@ -457,7 +461,7 @@ def check_web_launcher(root, backend):
             assert isinstance(instance.get(field), str) and instance[field], 'Missing runtime identity: ' + field
         assert isinstance(instance.get('pid'), int) and instance['pid'] > 0
         assert instance['url'] == url and instance['backend'] == engine
-        assert instance['version'] == live['version'] == '1.5.1-hmong'
+        assert instance['version'] == live['version'] == '1.5.2-hmong'
         assert instance['instance_id'] != 'stale-build-qa-instance'
         server = psutil.Process(instance['pid'])
         assert server.is_running() and process.pid in {parent.pid for parent in server.parents()}, \
@@ -483,8 +487,8 @@ def check_web_launcher(root, backend):
         # A file avoids waiting for inherited PIPE handles if a broken second
         # launcher starts a child server and then exceeds the timeout.
         with tempfile.TemporaryFile(mode='w+', encoding='utf-8', errors='replace') as output:
-            second = subprocess.run([sys.executable, str(app_root / 'hmong_launcher.py'), '--no-browser'],
-                cwd=app_root, env=environment, stdin=subprocess.DEVNULL, stdout=output,
+            second = subprocess.run([*command, '--no-browser'],
+                cwd=entrypoint.parent, env=environment, stdin=subprocess.DEVNULL, stdout=output,
                 stderr=subprocess.STDOUT, timeout=15)
             output.seek(0)
             second_output = output.read()
@@ -509,7 +513,8 @@ def check_web_launcher(root, backend):
             assert job['status'] == 'done' and job['engine'] == engine, job
             assert job['audio_seconds'] > 1 / 3
             assert get_json('/api/runtime') == instance
-        result = {'ready': True, 'empty_legacy_lock_recovered': True,
+        result = {'ready': True, 'batch_entrypoint': relative, 'actual_cmd_batch': True,
+                  'empty_legacy_lock_recovered': True,
                   'stale_instance_metadata_recovered': True, 'second_launch_reused': True,
                   'second_launch_exit_code': second.returncode, 'second_launch_seconds': round(elapsed, 3),
                   'same_url_and_pid': True, 'runtime': instance,

@@ -1,23 +1,23 @@
-# Voice Studio Hmong 1.5.1
+# Voice Studio Hmong 1.5.2
 
-Phiên bản riêng của Voice Studio 3.6.2, dùng cho **Hmong Trắng / Hmoob Daw (mww)**. Bộ mở mặc định vẫn dùng F5-Hmong; bản 1.5 thêm một bộ đọc nhanh **VITS + OpenVoice V2 đang thử nghiệm**, mở riêng bằng `MO_HMONG_NHANH.bat`. Giao diện và hướng dẫn dùng tiếng Việt. Cả hai bộ dùng đúng hai mẫu mặc định **hmong nam 2.MP3** và **hmong nữ 2(1).MP3** bạn cung cấp.
+Phiên bản riêng của Voice Studio 3.6.2 cho **Hmong Trắng / Hmoob Daw (mww)**. Bản 1.5.2 chỉ có **một ZIP chính để tải** và **một tệp mở ở ngoài cùng: `MO_VOICE_STUDIO_HMONG.bat`**. Tệp này chọn bộ đọc nhanh **VITS + OpenVoice V2**; không còn vô tình mở F5 chậm khi dùng tệp chính. Hai giọng mặc định vẫn là **hmong nam 2.MP3** và **hmong nữ 2(1).MP3** cuối cùng bạn cung cấp.
 
-Bản 1.5 giữ các sửa lỗi ngữ cảnh cụm, bộ CUDA NVIDIA riêng và cách đo tốc độ theo phần lời đọc. Bộ đọc nhanh tạo lời bằng VITS rồi chuyển chất giọng bằng OpenVoice V2 theo mẫu đã chọn; chuyển chất giọng không tự sửa từ đọc sai. **Chưa đạt mục tiêu 30× (1 giờ lời đọc trong 2 phút), chưa xác nhận phát âm chuẩn các từ `ua, thaj, qab, faib, rov, ris`.** Chưa có phép đo GPU hoặc đánh giá nghe của người biết Hmong cho bộ đọc mới. Nút “Đo tốc độ và thử 6 từ Hmong” tạo câu mới để nghe đối chiếu; không thay chữ Hmong bằng cách viết giả lập tiếng Việt.
+Bộ nhanh tạo lời Hmong bằng VITS rồi chuyển chất giọng theo mẫu. **Chưa đạt mục tiêu 1 giờ lời đọc trong 2 phút; chưa có người nghe Hmong xác nhận các từ `ua, thaj, qab, faib, rov, ris` đã đọc đúng.** Kiểm tra đã xác nhận các chữ và ký tự ghi thanh điệu được giữ nguyên, khớp cách xử lý của mô hình gốc. Không thay chúng bằng cách viết giả lập tiếng Việt hoặc dùng phát âm chưa kiểm chứng để tuyên bố đã sửa. Nhân bản mẫu ngắn chuyển chất giọng, không huấn luyện lại cách phát âm của mô hình.
 
 ## Sửa lỗi không mở được tool ở bản 1.5.0
 
 Bản 1.5.1 sửa lỗi “Voice Studio đã chạy với thư mục dữ liệu này” khi bấm mở lần hai. Tool tự nhận đúng phiên đang chạy và mở lại địa chỉ của phiên đó; bài đang tạo tiếp tục bình thường. Tệp `server.lock` còn lại sau khi tắt hoặc tệp rỗng không bị coi là một phiên đang chạy. Lỗi quyền ghi hay ổ đĩa không hỗ trợ khóa được báo riêng.
 
-Nếu đã có bản 1.5.0, tải **`Voice-Studio-Hmong-1.5.1-Update.zip`**, giải nén vào chính thư mục đang có `runtime` và `voice-studio-hmong`, rồi mở **`SUA_LOI_MO_TOOL.bat`**. Không cần tải lại Python, FFmpeg hay mô hình. Bản sửa kiểm tra checksum, sao lưu các tệp ứng dụng thay đổi vào `voice-studio-hmong/.data/update-backups` và giữ giọng, mô hình, lịch sử. Nếu phiên cũ còn đang chạy, tool mở lại phiên đó; mã khởi động mới áp dụng đầy đủ trong lần mở tiếp theo sau khi bạn đóng phiên cũ.
+Khi đổi từ bản cũ, đóng tool và sao lưu **`voice-studio-hmong/.data`**, rồi giữ hoặc chép thư mục dữ liệu này sang gói mới. Đây là nơi chứa model, giọng cá nhân và lịch sử. Không còn bản vá ZIP riêng cần lựa chọn; tải gói chính bên dưới. Không xóa dữ liệu cá nhân để xử lý lỗi khóa.
 
 ## Mở bản Windows đầy đủ
 
-1. Tải **`Voice-Studio-Hmong-1.5.1-Windows-x64.zip`** trong GitHub Releases và giải nén **toàn bộ ZIP** vào một thư mục có quyền ghi. Không chạy bên trong ZIP. Bộ 46 tệp `.py`/`.bat`/hướng dẫn rời thiếu giao diện `static/`, giọng `assets/hmong/` và runtime nên không đủ để chạy.
-2. Mở **`MO_VOICE_STUDIO_HMONG.bat`** ở thư mục ngoài cùng. Gói có sẵn Python 3.12 x64, thư viện CPU và FFmpeg; không cần tự cài Python, API key hay GPU. Các lối mở `start.bat`, `start_hmong.bat` và các tệp tương ứng trong `voice-studio-hmong/` đều chuyển tới bộ khởi động Hmong của gói. `install_hmong.bat` hoặc `install.bat` chỉ chuẩn bị lần đầu, sau đó mở tool để dùng.
-3. Lần mở đầu bằng bộ F5 mặc định cần Internet để tải và kiểm tra khoảng **1,4 GB mô hình** từ Hugging Face. Giữ cửa sổ đang chạy mở. Nếu chuẩn bị thất bại, xem thông báo rồi mở lại sau khi khắc phục kết nối. Các trọng số Hmong không nằm trong ZIP vì nguồn chưa công bố giấy phép phân phối lại rõ ràng.
-4. Trình duyệt tự mở khi sẵn sàng. Sau lần chuẩn bị thành công, tạo giọng hoạt động offline. Giữ cửa sổ tool mở trong lúc sử dụng; đóng cửa sổ để dừng máy chủ.
+1. Tải **`Voice-Studio-Hmong-1.5.2-Windows-x64.zip`** trong GitHub Releases và giải nén **toàn bộ ZIP** vào thư mục có quyền ghi. Không chạy bên trong ZIP. Các thư mục `runtime`, `ffmpeg`, `voice-studio-hmong` và `tools` là thành phần cần thiết để tool chạy.
+2. Mở **`MO_VOICE_STUDIO_HMONG.bat`** ở ngoài cùng. Python 3.12, thư viện CPU và FFmpeg đã có sẵn; không cần tự cài Python hoặc API key. Bộ mở chính chọn VITS + OpenVoice. Các công cụ nâng cao được gom trong `tools/`.
+3. Lần đầu cần Internet để tải và kiểm tra khoảng **580 MB model của bộ nhanh**. Không cần tải F5 để dùng bộ chính. Các trọng số Hmong không đóng trong ZIP vì nguồn chưa công bố giấy phép phân phối lại rõ ràng. Giữ cửa sổ tool mở; sau khi chuẩn bị xong có thể tạo giọng offline.
+4. Giao diện tự mở khi sẵn sàng. Nhập Hmong chữ Latin RPA hoặc TXT/SRT, chọn giọng nam/nữ hay giọng cá nhân rồi tạo voice. Xuất WAV/MP3/TXT/SRT trong giao diện.
 
-`KIEM_TRA_HMONG.bat` kiểm tra các tệp ứng dụng/giao diện, checksum hai giọng, FFmpeg, thư viện và mô hình đã lưu. Lệnh này không tải thêm và không tạo âm thanh; thông báo PASS không phải đánh giá phát âm. Trước lần chuẩn bị đầu, thông báo thiếu mô hình là bình thường. Nếu thiếu `static/` hoặc `assets/hmong/`, hãy giải nén lại cả gói thay vì chỉ chép các tệp `.py`.
+`tools/KIEM_TRA_HMONG.bat` kiểm tra các tệp ứng dụng, checksum giọng, FFmpeg, thư viện và model đã lưu; không tải thêm và không tạo audio. Thiếu model trước lần chuẩn bị đầu là bình thường. Các báo cáo kiểm tra và MP3 do tool tạo được gom trong `reports/`; chúng không phải bản thu nguồn hay chứng nhận phát âm đúng.
 
 Dữ liệu cá nhân của bản Windows nằm trong **`voice-studio-hmong/.data`**. Sao lưu thư mục này trước khi đổi phiên bản; không ghi đè hoặc xóa hồ sơ giọng và công việc cũ khi giải nén bản mới.
 
@@ -25,16 +25,16 @@ Tác vụ mới ghi nhận đúng mẫu giọng và lời tham chiếu để ti�
 
 ## Dùng bộ đọc nhanh thử nghiệm
 
-Đóng cửa sổ tool đang chạy rồi mở **`MO_HMONG_NHANH.bat`**. Lần đầu bộ này tải và kiểm tra khoảng **580 MB** mô hình VITS, OpenVoice V2 và thành phần đánh dấu âm thanh AI. Không cần tải bộ F5 1,4 GB để dùng riêng lựa chọn này. Sau khi chuẩn bị xong, việc tạo giọng diễn ra cục bộ, offline; tệp mẫu không được gửi tới dịch vụ suy luận bên ngoài.
+Bộ đọc nhanh là mặc định của **`MO_VOICE_STUDIO_HMONG.bat`** trong gói 1.5.2. Lần đầu bộ này tải và kiểm tra khoảng **580 MB** mô hình VITS, OpenVoice V2 và thành phần đánh dấu âm thanh AI. Không cần tải bộ F5 1,4 GB để dùng riêng lựa chọn này. Sau khi chuẩn bị xong, việc tạo giọng diễn ra cục bộ, offline; tệp mẫu không được gửi tới dịch vụ suy luận bên ngoài.
 
-Giao diện ghi **Hmong nhanh thử nghiệm** và ẩn lựa chọn số bước F5. Hai mẫu nam/nữ, hồ sơ giọng đã lưu, nhập/xuất TXT/SRT/WAV/MP3, sắc thái và phép thử sáu từ vẫn dùng được. Bộ đọc này không có bước 4/8/16/32; giảm số bước F5 không áp dụng cho nó. Hãy tạo tác vụ mới khi đổi bộ đọc, không nối một bài đang dở bằng bộ khác. Mở lại **`MO_VOICE_STUDIO_HMONG.bat`** để dùng F5 mặc định.
+Giao diện ghi **Hmong nhanh thử nghiệm** và ẩn lựa chọn số bước F5. Hai mẫu nam/nữ, hồ sơ giọng đã lưu, nhập/xuất TXT/SRT/WAV/MP3, sắc thái và phép thử sáu từ vẫn dùng được. Bộ đọc này không có bước 4/8/16/32; giảm số bước F5 không áp dụng cho nó. Hãy tạo tác vụ mới khi đổi bộ đọc, không nối một bài đang dở bằng bộ khác. Nếu muốn nghe so sánh với F5, đóng tool rồi mở **`tools/MO_F5_HMONG.bat`**. F5 là tùy chọn nâng cao, cần chuẩn bị riêng khoảng 1,4 GB model và thường chậm hơn nhiều trên CPU.
 
 Bộ đọc nhanh và chuyển chất giọng có thể làm sai phát âm, thanh điệu hoặc độ giống mẫu; cần nghe kiểm tra cả nam và nữ. Tốc độ phải tính cả tạo lời, chuyển giọng và xuất tệp. Mục tiêu 1 giờ / 2 phút chưa đạt; không có cam kết tốc độ độc lập cấu hình máy. Bộ mới thử gắn WavMark khi đoạn đủ dài; đoạn quá ngắn không được gắn dấu và chưa kiểm chứng dấu còn nhận được sau xử lý/xuất MP3. Trọng số không được đóng vào ZIP; nguồn VITS Hmong chưa nêu giấy phép rõ ràng. Xem [hướng dẫn bộ đọc thử nghiệm](docs/HMONG-NATIVE.md) để biết cách chọn từ mã nguồn, nguồn mô hình và giới hạn.
 
 ## Tạo giọng và nhân bản
 
 - Nhập văn bản **Hmong chữ Latin RPA**, hoặc nhập TXT/SRT; chọn giọng nam/nữ rồi tạo giọng. Có thể tải WAV, MP3 và xuất nội dung TXT/SRT. Nên nghe một đoạn ngắn trước khi tạo cả kịch bản.
-- Với **F5 mặc định**, chọn **16 bước** để ưu tiên độ rõ hơn chế độ nháp 4 bước của bản trước. Có thể chọn **4/8 bước để nháp nhanh**, hoặc **32 bước** để nghe so sánh. Chế độ 16/8/32 bước trên CPU mặc định dùng FP32. Khi chọn riêng **nháp 4 bước**, tool tự dùng INT8 nếu CPU hỗ trợ và quay về FP32 nếu không dùng được; không cần chỉnh cấu hình máy. Bản nháp có thể giảm độ rõ và tự nhiên. Mô hình và mẫu tham chiếu được giữ trong RAM để dùng lại, các câu ngắn được gom vào đoạn phù hợp để giảm số lần suy luận. Bộ VITS + OpenVoice không dùng lựa chọn số bước này.
+- Với **F5 tùy chọn**, chọn **16 bước** để ưu tiên độ rõ hơn chế độ nháp 4 bước của bản trước. Có thể chọn **4/8 bước để nháp nhanh**, hoặc **32 bước** để nghe so sánh. Chế độ 16/8/32 bước trên CPU mặc định dùng FP32. Khi chọn riêng **nháp 4 bước**, tool tự dùng INT8 nếu CPU hỗ trợ và quay về FP32 nếu không dùng được; không cần chỉnh cấu hình máy. Bản nháp có thể giảm độ rõ và tự nhiên. Mô hình và mẫu tham chiếu được giữ trong RAM để dùng lại, các câu ngắn được gom vào đoạn phù hợp để giảm số lần suy luận. Bộ VITS + OpenVoice không dùng lựa chọn số bước này.
 - Bộ đọc giữ nguyên các chữ cuối ghi thanh điệu RPA như `b/j/v/s/g/m/d`, chuẩn hóa khoảng trắng và dấu câu thông dụng. Văn bản dùng hệ chữ khác hoặc ký tự mô hình chưa hỗ trợ được báo lỗi để sửa, thay vì âm thầm mất chữ. Hãy viết số, chữ viết tắt và tên riêng thành lời Hmong muốn đọc khi cần; tool không tự biết cách đọc mọi tên hoặc số.
 - Với F5, thời lượng và độ dài đoạn được ước tính theo nhịp âm tiết của **chính mẫu giọng**. Câu rất ngắn có giới hạn thời lượng tối thiểu và cơ chế giảm tốc để tránh ép lời vào đoạn âm thanh quá ngắn. Bộ VITS tạo lời trước khi chuyển chất giọng theo mẫu. Đây là cách xử lý đầu vào, không phải bảo đảm mô hình đọc đúng mọi từ.
 - Mặc định chọn **Kể chuyện · Ấm áp**, giữ cả cụm và **tắt chèn nghỉ tự động** để giảm số lần tạo. Có thể chọn sắc thái Tự nhiên, Ấm áp, Tươi vui, Trầm lắng, Nghiêm túc hoặc Hồi hộp. Đây là điều khiển nhịp, cường độ và khoảng nghỉ; cả hai bộ đọc chưa có bộ diễn xuất cảm xúc đã được huấn luyện hoặc bảo đảm giống người thật.
@@ -62,7 +62,7 @@ Tốc độ phụ thuộc CPU/GPU, số bước, độ dài và nhịp đọc. B
 
 ## Dùng GPU NVIDIA
 
-Bộ ZIP mặc định vẫn chạy CPU. Nếu máy có NVIDIA và driver tương thích CUDA 12.8, chạy **`install_hmong_cuda.bat`** rồi mở lại bằng bộ mở đã chọn: `MO_VOICE_STUDIO_HMONG.bat` cho F5 hoặc `MO_HMONG_NHANH.bat` cho bộ thử nghiệm. Bộ cài cần Internet và vài GB dung lượng, tạo môi trường GPU riêng trong thư mục dữ liệu; không thay PyTorch CPU hoặc xóa giọng/công việc. Cần đóng tool trước khi cài để lượt mở tiếp theo dùng đúng bộ chạy.
+Bộ ZIP mặc định vẫn chạy CPU. Nếu máy có NVIDIA và driver tương thích CUDA 12.8, chạy **`tools/install_hmong_cuda.bat`** rồi mở lại `MO_VOICE_STUDIO_HMONG.bat`. Công cụ F5 nâng cao nằm ở `tools/MO_F5_HMONG.bat`. Bộ cài cần Internet và vài GB dung lượng, tạo môi trường GPU riêng trong thư mục dữ liệu; không thay PyTorch CPU hoặc xóa giọng/công việc. Cần đóng tool trước khi cài để lượt mở tiếp theo dùng đúng bộ chạy.
 
 Tool chỉ lưu trạng thái sẵn sàng sau khi đúng phiên bản PyTorch/torchaudio chạy được phép tính trên GPU. Khi mở lại, nó kiểm tra GPU trước khi chuyển bộ chạy; bộ GPU thiếu/hỏng hoặc bị chuyển thư mục sẽ có hướng dẫn cài lại, còn bộ CPU vẫn dùng được. Máy không có NVIDIA sẽ được báo ngay, trước khi tải thư viện. Đặt `HMOOB_DEVICE=cpu` để chọn CPU rõ ràng. Người chạy mã nguồn Linux có thể dùng `python hmong_launcher.py --install-cuda` trong môi trường Hmong đã cài.
 

@@ -144,7 +144,7 @@ def _probe(interpreter, *, runtime=None):
         return details
     except (OSError, ValueError, KeyError, IndexError, TypeError, subprocess.TimeoutExpired) as exc:
         raise RuntimeError('Không chạy được phép thử CUDA. Kiểm tra GPU và driver NVIDIA tương thích CUDA 12.8. '
-                           'Chạy lại install_hmong_cuda.bat; bộ CPU và dữ liệu vẫn được giữ. '
+                           'Chạy lại tools/install_hmong_cuda.bat; bộ CPU và dữ liệu vẫn được giữ. '
                            + str(exc)[-1800:]) from None
 
 
@@ -171,11 +171,11 @@ def preferred_interpreter(base, requested_device=None):
             return None
         except RuntimeError:
             raise RuntimeError((problem or 'Chưa có CUDA hoạt động.')
-                               + ' Chạy install_hmong_cuda.bat trên máy có GPU NVIDIA, '
+                               + ' Chạy tools/install_hmong_cuda.bat trên máy có GPU NVIDIA, '
                                'hoặc đặt HMOOB_DEVICE=cpu để dùng bộ CPU hiện tại.') from None
     if marker is not None or (data_directory(base) / MARKER_NAME).is_file():
         print('Bộ NVIDIA đã lưu chưa dùng được: ' + str(problem)
-              + ' Dùng Python hiện tại. Chạy lại install_hmong_cuda.bat để sửa.', flush=True)
+              + ' Dùng Python hiện tại. Chạy lại tools/install_hmong_cuda.bat để sửa.', flush=True)
     return None
 
 
@@ -202,7 +202,7 @@ def _preflight():
             raise metadata.PackageNotFoundError('f5-tts 1.1.22')
     except metadata.PackageNotFoundError:
         raise RuntimeError('Cài bộ CPU Hmong đầy đủ trước bằng install_hmong.bat, '
-                           'rồi chạy lại install_hmong_cuda.bat bằng cùng Python.') from None
+                           'rồi chạy lại tools/install_hmong_cuda.bat bằng cùng Python.') from None
 
 
 @contextmanager
@@ -244,7 +244,7 @@ def install_cuda(base):
     _preflight()  # No filesystem mutation or network request before this passes.
     runtime = runtime_directory(base)
     if Path(sys.prefix).resolve() == runtime:
-        raise RuntimeError('Chạy install_hmong_cuda.bat bằng Python CPU đi kèm; '
+        raise RuntimeError('Chạy tools/install_hmong_cuda.bat bằng Python CPU đi kèm; '
                            'không cài lại vào môi trường NVIDIA đang chạy.')
     data = data_directory(base)
     data.mkdir(parents=True, exist_ok=True)
@@ -267,12 +267,12 @@ def install_cuda(base):
                    '--index-url', CUDA_INDEX]
         result = subprocess.run(command, env=_pip_environment(), check=False)
         if result.returncode:
-            raise RuntimeError('Cài PyTorch CUDA chưa thành công. Có thể chạy lại install_hmong_cuda.bat; '
+            raise RuntimeError('Cài PyTorch CUDA chưa thành công. Có thể chạy lại tools/install_hmong_cuda.bat; '
                                'bộ CPU và dữ liệu vẫn được giữ nguyên.')
         result = subprocess.run([str(interpreter), '-m', 'pip', 'check'], env=_pip_environment(), check=False)
         if result.returncode:
             raise RuntimeError('Thư viện NVIDIA chưa khớp. Bộ CPU vẫn được giữ; '
-                               'chạy lại install_hmong_cuda.bat để sửa.')
+                               'chạy lại tools/install_hmong_cuda.bat để sửa.')
         details = _probe(interpreter, runtime=runtime)
         record = {'schema': 1, 'identity': _identity(base), 'runtime': str(runtime),
                   'torch_version': TORCH_VERSION, 'gpu': details['gpu'],

@@ -21,7 +21,7 @@ import zipfile
 from build_windows import copy_runtime, download_verified_ffmpeg
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.5.1'
+VERSION = '1.5.2'
 ARCHIVE_NAME = f'Voice-Studio-Hmong-{VERSION}-Windows-x64.zip'
 
 
@@ -105,51 +105,58 @@ def write_launcher(root):
     root = Path(root)
     app = root / 'voice-studio-hmong'
     app.mkdir(parents=True, exist_ok=True)
+    tools = root / 'tools'
+    tools.mkdir(parents=True, exist_ok=True)
     content = '''@echo off
 setlocal
-cd /d "%~dp0"
-set "PATH=%~dp0runtime;%~dp0ffmpeg\\bin;%PATH%"
+cd /d "%~dp0.."
+set "PATH=%CD%\\runtime;%CD%\\ffmpeg\\bin;%PATH%"
 set "PYTHONHOME="
 set "PYTHONPATH="
 set "PYTHONNOUSERSITE=1"
 set "PYTHONUTF8=1"
 set "VOICE_STUDIO_VARIANT=hmong"
-set "VOICE_STUDIO_DATA_DIR=%~dp0voice-studio-hmong\\.data"
+set "VOICE_STUDIO_DATA_DIR=%CD%\\voice-studio-hmong\\.data"
 set "HMOOB_MODEL_DIR=%VOICE_STUDIO_DATA_DIR%\\models"
+if not defined HMOOB_BACKEND set "HMOOB_BACKEND=native"
 "runtime\\python.exe" "voice-studio-hmong\\hmong_launcher.py" %*
 set "VOICE_EXIT=%ERRORLEVEL%"
 if not "%VOICE_EXIT%"=="0" pause
 exit /b %VOICE_EXIT%
 '''
-    (root / 'MO_VOICE_STUDIO_HMONG.bat').write_bytes(content.replace('\n', '\r\n').encode('ascii'))
-    fast = '''@echo off
+    (tools / 'launch_hmong.bat').write_bytes(content.replace('\n', '\r\n').encode('ascii'))
+    primary = '''@echo off
 setlocal
 set "HMOOB_BACKEND=native"
-call "%~dp0MO_VOICE_STUDIO_HMONG.bat" %*
+call "%~dp0tools\\launch_hmong.bat" %*
 exit /b %ERRORLEVEL%
 '''
-    (root / 'MO_HMONG_NHANH.bat').write_bytes(fast.replace('\n', '\r\n').encode('ascii'))
+    (root / 'MO_VOICE_STUDIO_HMONG.bat').write_bytes(primary.replace('\n', '\r\n').encode('ascii'))
+    fallback = '''@echo off
+setlocal
+set "HMOOB_BACKEND=f5"
+call "%~dp0launch_hmong.bat" %*
+exit /b %ERRORLEVEL%
+'''
+    (tools / 'MO_F5_HMONG.bat').write_bytes(fallback.replace('\n', '\r\n').encode('ascii'))
     check = '''@echo off
 setlocal
-cd /d "%~dp0"
-call MO_VOICE_STUDIO_HMONG.bat --check
+call "%~dp0..\\MO_VOICE_STUDIO_HMONG.bat" --check
 set "VOICE_EXIT=%ERRORLEVEL%"
-pause
+if not "%VOICE_EXIT%"=="0" pause
 exit /b %VOICE_EXIT%
 '''
-    (root / 'KIEM_TRA_HMONG.bat').write_bytes(check.replace('\n', '\r\n').encode('ascii'))
-    for folder, target in ((root, '%~dp0MO_VOICE_STUDIO_HMONG.bat'),
-                           (app, '%~dp0..\\MO_VOICE_STUDIO_HMONG.bat')):
-        start = '@echo off\nsetlocal\ncall "' + target + '" %*\nexit /b %ERRORLEVEL%\n'
-        install = ('@echo off\nsetlocal\nif "%~1"=="" goto setup\ncall "' + target
-                   + '" %*\nexit /b %ERRORLEVEL%\n:setup\ncall "' + target
-                   + '" --setup-only\nexit /b %ERRORLEVEL%\n')
-        for name in ('start.bat', 'start_hmong.bat'):
-            (folder / name).write_bytes(start.replace('\n', '\r\n').encode('ascii'))
-        for name in ('install.bat', 'install_hmong.bat'):
-            (folder / name).write_bytes(install.replace('\n', '\r\n').encode('ascii'))
-        install_cuda = install.replace('--setup-only', '--install-cuda')
-        (folder / 'install_hmong_cuda.bat').write_bytes(install_cuda.replace('\n', '\r\n').encode('ascii'))
+    (tools / 'KIEM_TRA_HMONG.bat').write_bytes(check.replace('\n', '\r\n').encode('ascii'))
+    install_cuda = '''@echo off
+setlocal
+if "%~1"=="" goto setup
+call "%~dp0..\\MO_VOICE_STUDIO_HMONG.bat" %*
+exit /b %ERRORLEVEL%
+:setup
+call "%~dp0..\\MO_VOICE_STUDIO_HMONG.bat" --install-cuda
+exit /b %ERRORLEVEL%
+'''
+    (tools / 'install_hmong_cuda.bat').write_bytes(install_cuda.replace('\n', '\r\n').encode('ascii'))
 
 
 def checked_run(command, *, environment, cwd, timeout=2400):
@@ -159,17 +166,17 @@ def checked_run(command, *, environment, cwd, timeout=2400):
 
 
 def write_notices(root, model_manifest, qa_report):
-    notice = '''VOICE STUDIO HMONG 1.5.1 — WINDOWS X64
+    notice = '''VOICE STUDIO HMONG 1.5.2 — WINDOWS X64
 
-Giai nen TOAN BO ZIP. MO_HMONG_NHANH.bat mo bo doc VITS Hmong + OpenVoice V2.
-MO_VOICE_STUDIO_HMONG.bat giu bo doc F5 Hmong 16 buoc FP32.
+Chi tai MOT goi ZIP va giai nen TOAN BO. Mo MO_VOICE_STUDIO_HMONG.bat.
+Tep mo chinh chon bo nhanh VITS Hmong + OpenVoice V2, khong vo tinh mo F5.
+Cong cu nang cao nam trong tools; tools/MO_F5_HMONG.bat mo F5 16 buoc FP32.
 Da kem Python, thu vien CPU, FFmpeg, hai MP3 nguon va cac doan tham chieu.
 LAN DAU CAN INTERNET: bo nhanh tai/kiem tra khoang 580 MB, F5 khoang 1,4 GB.
 Moi bo co manifest model rieng; khong can tai ca hai neu chi dung mot bo.
 Khong can API key. Sau khi chuan bi xong co the dung ngoai tuyen.
-KIEM_TRA_HMONG.bat kiem tra tep/thu vien/model da cai, khong tu tai model.
-start.bat/start_hmong.bat va install.bat/install_hmong.bat giu duong F5 cu.
-install_hmong_cuda.bat la tuy chon tai thu vien CUDA rieng, khong bat buoc.
+tools/KIEM_TRA_HMONG.bat kiem tra tep/thu vien/model, khong tu tai model.
+tools/install_hmong_cuda.bat la tuy chon CUDA rieng, khong bat buoc.
 Chua kiem chung suy luan CUDA hoac toc do GPU. Goi nay kiem thu CPU.
 
 Du lieu ca nhan o voice-studio-hmong/.data. Sao luu thu muc nay khi cap nhat.
@@ -189,8 +196,8 @@ Chua ho tro nhan dang loi noi Hmong tu dong; nhap TXT/SRT hoac sua thu cong.
 
 Chua xac minh phat am dung ua/thaj/qab/faib/rov/ris, do giong giong,
 hoac muc tieu 1 gio voice trong 2 phut (30x). Toc do tuy CPU/GPU.
-Hai MP3 nghe thu do bo nhanh tao co du sau tu, kem thiet lap/checksum
-va thoi gian do tron quy trinh trong NATIVE-VALIDATION.json. Bao cao
+Hai MP3 nghe thu do bo nhanh tao nam trong reports, co du sau tu.
+Thiet lap/checksum va thoi gian do tron quy trinh o NATIVE-VALIDATION.json. Bao cao
 loai khoang lang tool chen; do ngan khong chung minh toc do 1 gio.
 Bo F5 duoc kiem thu tuong thich rieng bang tao that 16 buoc FP32.
 
@@ -209,6 +216,20 @@ Goi khong kem ho so giong, lich su, credential hoac ban thu rieng khac.
     (root / 'BAT-DAU.txt').write_text(notice, encoding='utf-8')
     (root / 'MODEL-SOURCES.json').write_text(json.dumps(model_manifest, ensure_ascii=False, indent=2), encoding='utf-8')
     (root / 'NATIVE-VALIDATION.json').write_text(json.dumps(qa_report, ensure_ascii=False, indent=2), encoding='utf-8')
+
+
+def bundle_reports(root, reports):
+    """Keep evidence and generated auditions inside the single user download."""
+    root, reports = Path(root), Path(reports)
+    approved = ('native-smoke.json', 'f5-smoke.json', 'model-sources.json',
+                'Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3')
+    destination = root / 'reports'
+    destination.mkdir(parents=True, exist_ok=False)
+    for name in approved:
+        source = reports / name
+        if source.is_symlink() or not source.is_file() or not source.stat().st_size:
+            raise ValueError('Required release report/audition is missing: ' + name)
+        shutil.copy2(source, destination / name)
 
 
 def archive_package(root, destination):
@@ -293,8 +314,8 @@ def main():
     if not qa_report.get('success') or not compatibility.get('success'):
         raise RuntimeError('Both native and F5 Hmong smoke tests must complete')
     qa_report['f5_compatibility'] = compatibility
-    qa_report['normal_launcher'] = compatibility['normal_launcher']
-    if not qa_report['fast_launcher']['second_launch_reused'] or not compatibility['normal_launcher']['second_launch_reused']:
+    qa_report['advanced_f5_launcher'] = compatibility['advanced_f5_launcher']
+    if not qa_report['main_launcher']['second_launch_reused'] or not compatibility['advanced_f5_launcher']['second_launch_reused']:
         raise RuntimeError('Both launchers must reuse the running Windows studio')
 
     # All data here was created by this build. Never perform this operation on a
@@ -314,6 +335,7 @@ def main():
     qa_report['stripped_package_offline_check'] = True
     (reports / 'native-smoke.json').write_text(json.dumps(qa_report, ensure_ascii=False, indent=2), encoding='utf-8')
     write_notices(root, model_manifest, qa_report)
+    bundle_reports(root, reports)
     dependencies = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'], text=True)
     (root / 'BUILD-DEPENDENCIES.txt').write_text(dependencies, encoding='utf-8')
     build = {'version': VERSION, 'variant': 'hmong', 'python': sys.version,
@@ -323,10 +345,12 @@ def main():
              'stale_instance_metadata_recovered': True,
              'models_included': False, 'first_run_model_download_required': True,
              'model_download_approx_gb': {'f5_hmong': 1.4, 'hmong_native': .58}, 'api_key_required': False,
-             'fast_launcher': 'MO_HMONG_NHANH.bat', 'fast_engine': 'hmong_native',
+             'main_launcher': 'MO_VOICE_STUDIO_HMONG.bat', 'main_engine': 'hmong_native',
              'fast_backend': 'vits_openvoice_v2', 'fast_steps': None,
-             'normal_launcher': 'MO_VOICE_STUDIO_HMONG.bat', 'normal_engine': 'f5_hmong',
-             'default_steps': 16, 'default_precision': 'fp32', 'draft_steps': 4,
+             'advanced_f5_launcher': 'tools/MO_F5_HMONG.bat', 'advanced_f5_engine': 'f5_hmong',
+             'default_steps': None, 'default_precision': 'fp32', 'advanced_f5_steps': 16,
+             'single_main_download': True, 'single_root_launcher': True,
+             'reports_bundled': True,
              'default_delivery': 'story', 'default_emotion': 'warm',
              'default_emotion_strength': .65, 'default_auto_rhythm': False,
              'default_hmong_phrase_context': True,

@@ -1,10 +1,10 @@
-# Bộ đọc Hmong nhanh thử nghiệm · Voice Studio Hmong 1.5
+# Bộ đọc Hmong nhanh thử nghiệm · Voice Studio Hmong 1.5.2
 
-Lựa chọn này dùng **VITS để tạo lời Hmong**, sau đó dùng **OpenVoice V2 để chuyển chất giọng theo mẫu đã chọn**. Đây là lựa chọn thử nghiệm bên cạnh F5 mặc định. Chuyển chất giọng không bảo đảm sửa phát âm, thanh điệu, độ giống người nói hay cảm xúc như người thật. Mục tiêu một giờ lời đọc trong hai phút (30×) chưa đạt; chưa có phép đo GPU hoặc đánh giá nghe của người biết Hmong xác nhận bộ mới đọc chuẩn.
+Lựa chọn này dùng **VITS để tạo lời Hmong**, sau đó dùng **OpenVoice V2 để chuyển chất giọng theo mẫu đã chọn**. Đây là bộ mặc định của tệp mở chính trong gói Windows 1.5.2; F5 vẫn có trong công cụ nâng cao. Chuyển chất giọng không bảo đảm sửa phát âm, thanh điệu, độ giống người nói hay cảm xúc như người thật. Mục tiêu một giờ lời đọc trong hai phút (30×) chưa đạt; chưa có phép đo GPU hoặc đánh giá nghe của người biết Hmong xác nhận bộ mới đọc chuẩn.
 
 ## Chọn bộ đọc
 
-Trong gói Windows đầy đủ, đóng tool đang chạy rồi mở **`MO_HMONG_NHANH.bat`**. Giao diện phải ghi **Hmong nhanh thử nghiệm**. Bộ mở **`MO_VOICE_STUDIO_HMONG.bat`** vẫn chọn F5 như các phiên bản trước. Đổi bộ mở rồi tạo tác vụ mới để nghe so sánh; không nối các đoạn của một bài đang dở bằng bộ khác.
+Trong gói Windows 1.5.2, đóng tool đang chạy rồi mở **`MO_VOICE_STUDIO_HMONG.bat`** ở ngoài cùng. Giao diện phải ghi **Hmong nhanh thử nghiệm**. Công cụ **`tools/MO_F5_HMONG.bat`** mở F5 để nghe so sánh. Đổi bộ mở rồi tạo tác vụ mới để nghe so sánh; không nối các đoạn của một bài đang dở bằng bộ khác.
 
 Hai bộ đọc dùng cùng mẫu **hmong nam 2.MP3** và bản nữ rút gọn **hmong nữ 2(1).MP3**, cùng lời Hmong do bạn xác nhận. Hồ sơ giọng và lịch sử được giữ. Bộ mới tạo lời trước rồi chuyển chất giọng; mẫu ngắn không huấn luyện lại một mô hình phát âm Hmong riêng.
 
@@ -34,7 +34,7 @@ set "HMOOB_BACKEND=native"
 
 Đặt `HMOOB_BACKEND=f5`, hoặc bỏ biến này, để về F5. `--setup-only` chuẩn bị đúng bộ đang chọn rồi thoát. `--check` chỉ kiểm tra tệp đã lưu, không tải thêm và không tạo audio; thiếu mô hình trước lần chuẩn bị đầu sẽ báo chưa sẵn sàng. Có thể chỉ định `VOICE_STUDIO_DATA_DIR` để dùng thư mục dữ liệu riêng, nhưng không dùng chung dữ liệu với bản Voice Studio tiếng Việt.
 
-Bộ CPU có sẵn trong ZIP. Nếu dùng NVIDIA, đóng tool rồi chạy `install_hmong_cuda.bat` trước khi mở lại `MO_HMONG_NHANH.bat`. Bộ GPU cài riêng và kiểm tra tính toán CUDA thật; phép kiểm tra này chưa chứng minh tốc độ hoặc chất lượng suy luận. Đặt `HMOOB_DEVICE=cpu` để chọn CPU rõ ràng. Tốc độ luôn phụ thuộc phần cứng và độ dài nội dung.
+Bộ CPU có sẵn trong ZIP. Nếu dùng NVIDIA, đóng tool rồi chạy `tools/install_hmong_cuda.bat` trước khi mở lại `MO_VOICE_STUDIO_HMONG.bat`. Bộ GPU cài riêng và kiểm tra tính toán CUDA thật; phép kiểm tra này chưa chứng minh tốc độ hoặc chất lượng suy luận. Đặt `HMOOB_DEVICE=cpu` để chọn CPU rõ ràng. Tốc độ luôn phụ thuộc phần cứng và độ dài nội dung.
 
 ## Nghe đối chiếu và đo tốc độ
 

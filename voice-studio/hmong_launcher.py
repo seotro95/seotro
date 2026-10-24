@@ -14,7 +14,7 @@ def selected_backend():
     backend = os.getenv('HMOOB_BACKEND', 'f5').lower()
     if backend not in {'f5', 'native'}:
         raise RuntimeError('HMOOB_BACKEND chỉ nhận f5 hoặc native. '
-                           'Mở MO_VOICE_STUDIO_HMONG.bat hoặc MO_HMONG_NHANH.bat của gói đầy đủ.')
+                           'Mở MO_VOICE_STUDIO_HMONG.bat của gói đầy đủ; F5 nằm trong tools/MO_F5_HMONG.bat.')
     return backend
 
 

@@ -87,7 +87,7 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
 
 
 def test_archive_has_valid_crc_and_matching_sha256(tmp_path):
-    root = tmp_path / 'Voice-Studio-Hmong-1.5.1'
+    root = tmp_path / 'Voice-Studio-Hmong-1.5.2'
     root.mkdir()
     (root / 'hello.txt').write_bytes(b'relocatable')
     archive = tmp_path / 'bundle.zip'
@@ -116,24 +116,44 @@ def test_environment_and_batch_keep_data_in_hmong_package(tmp_path, monkeypatch)
     packaging.write_launcher(tmp_path)
     batch = (tmp_path / 'MO_VOICE_STUDIO_HMONG.bat').read_bytes()
     assert b'\r\n' in batch
-    assert b'VOICE_STUDIO_VARIANT=hmong' in batch
-    assert b'VOICE_STUDIO_DATA_DIR=%~dp0voice-studio-hmong\\.data' in batch
-    assert b'hmong_launcher.py" %*' in batch
-    assert b'HMOOB_BACKEND=' not in batch, 'Normal launcher must preserve the fast wrapper selection'
-    fast = (tmp_path / 'MO_HMONG_NHANH.bat').read_bytes()
-    assert b'\r\n' in fast and b'set "HMOOB_BACKEND=native"' in fast
-    assert b'call "%~dp0MO_VOICE_STUDIO_HMONG.bat" %*' in fast
-    for folder, target in ((tmp_path, b'%~dp0MO_VOICE_STUDIO_HMONG.bat'),
-                           (tmp_path / 'voice-studio-hmong', b'%~dp0..\\MO_VOICE_STUDIO_HMONG.bat')):
-        for name in ('start.bat', 'start_hmong.bat', 'install.bat', 'install_hmong.bat', 'install_hmong_cuda.bat'):
-            alias = (folder / name).read_bytes()
-            assert b'\r\n' in alias and target in alias
-            assert b'%*' in alias and b'exit /b %ERRORLEVEL%' in alias
-            assert b'.venv' not in alias and b'pip install' not in alias
-            if name.startswith('install'):
-                assert b'if "%~1"=="" goto setup' in alias
-                expected = b'--install-cuda' if name == 'install_hmong_cuda.bat' else b'--setup-only'
-                assert expected in alias
+    assert b'set "HMOOB_BACKEND=native"' in batch
+    assert b'call "%~dp0tools\\launch_hmong.bat" %*' in batch
+    assert [path.name for path in tmp_path.glob('*.bat')] == ['MO_VOICE_STUDIO_HMONG.bat']
+    helper = (tmp_path / 'tools/launch_hmong.bat').read_bytes()
+    assert b'VOICE_STUDIO_VARIANT=hmong' in helper
+    assert b'VOICE_STUDIO_DATA_DIR=%CD%\\voice-studio-hmong\\.data' in helper
+    assert b'hmong_launcher.py" %*' in helper
+    assert b'cd /d "%~dp0.."' in helper
+    fallback = (tmp_path / 'tools/MO_F5_HMONG.bat').read_bytes()
+    assert b'set "HMOOB_BACKEND=f5"' in fallback
+    assert b'call "%~dp0launch_hmong.bat" %*' in fallback
+    assert len(list(tmp_path.rglob('*.bat'))) == 5
+    install = (tmp_path / 'tools/install_hmong_cuda.bat').read_bytes()
+    assert b'if "%~1"=="" goto setup' in install and b'--install-cuda' in install
+    for path in tmp_path.rglob('*.bat'):
+        alias = path.read_bytes()
+        assert b'\r\n' in alias and b'.venv' not in alias and b'pip install' not in alias
+
+
+def test_single_download_bundles_only_approved_reports_and_generated_auditions(tmp_path):
+    source = tmp_path / 'qa-reports'
+    source.mkdir()
+    names = ('native-smoke.json', 'f5-smoke.json', 'model-sources.json',
+             'Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3')
+    for name in (*names, 'private.wav', 'model.pth', 'credentials.json'):
+        (source / name).write_bytes(b'fixture: ' + name.encode())
+    root = tmp_path / 'portable'
+    packaging.bundle_reports(root, source)
+    assert {path.name for path in (root / 'reports').iterdir()} == set(names)
+    for name in names:
+        assert (root / 'reports' / name).read_bytes() == (source / name).read_bytes()
+
+
+def test_single_download_rejects_a_missing_generated_audition(tmp_path):
+    source = tmp_path / 'qa-reports'
+    source.mkdir()
+    with pytest.raises(ValueError, match='Required release report/audition'):
+        packaging.bundle_reports(tmp_path / 'portable', source)
 
 
 def test_source_copy_refuses_linked_assets(tmp_path):
@@ -182,11 +202,11 @@ def test_source_copy_rejects_missing_new_runtime_modules(tmp_path, name):
         packaging.copy_source(tmp_path / 'output', source)
 
 
-def test_native_smoke_probes_every_root_and_inner_batch_alias(tmp_path, monkeypatch):
+def test_native_smoke_probes_primary_and_every_advanced_batch(tmp_path, monkeypatch):
     spec = importlib.util.spec_from_file_location('smoke_hmong', PACKAGING / 'smoke_hmong_portable.py')
     smoke = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(smoke)
-    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.5.1'
+    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.5.2'
     root.mkdir(parents=True)
     packaging.write_launcher(root)
     calls = []
@@ -195,19 +215,19 @@ def test_native_smoke_probes_every_root_and_inner_batch_alias(tmp_path, monkeypa
         assert command[1:3] == ['/d', '/c']
         assert (kwargs['cwd'] / command[3]).is_file()
         assert kwargs['stdin'] == smoke.subprocess.DEVNULL
-        expected = 'native' if command[3] == 'MO_HMONG_NHANH.bat' else 'f5'
-        assert kwargs['env']['HMOOB_BACKEND'] == expected
-        return SimpleNamespace(returncode=0, stdout='PASS: verified models\n')
+        expected = 'f5' if command[3] == 'MO_F5_HMONG.bat' else 'native'
+        if command[3] in {'MO_VOICE_STUDIO_HMONG.bat', 'MO_F5_HMONG.bat'}:
+            assert kwargs['env']['HMOOB_BACKEND'] != expected, 'Probe must test inherited backend override'
+        label = 'F5-Hmong' if expected == 'f5' else 'Hmong nhanh thử nghiệm'
+        return SimpleNamespace(returncode=0, stdout=label + '\nPASS: verified models\n')
     monkeypatch.setattr(smoke.subprocess, 'run', run)
     result = smoke.check_batch_entrypoints(root)
-    assert len(calls) == len(result) == 12
-    assert result['MO_HMONG_NHANH.bat']['engine'] == 'hmong_native'
-    assert result['MO_VOICE_STUDIO_HMONG.bat']['engine'] == 'f5_hmong'
+    assert len(calls) == len(result) == 5
+    assert result['MO_VOICE_STUDIO_HMONG.bat']['engine'] == 'hmong_native'
+    assert result['tools/MO_F5_HMONG.bat']['engine'] == 'f5_hmong'
     assert {args[0][-1] for args in calls} == {'--check', '--setup-only'}
-    assert result['voice-studio-hmong/install.bat']['argument'] == '--setup-only'
-    assert result['voice-studio-hmong/start.bat']['argument'] == '--check'
-    assert result['install_hmong_cuda.bat']['argument'] == '--check'
-    assert result['voice-studio-hmong/install_hmong_cuda.bat']['argument'] == '--check'
+    assert result['tools/launch_hmong.bat']['argument'] == '--setup-only'
+    assert result['tools/install_hmong_cuda.bat']['argument'] == '--check'
     assert all('--install-cuda' not in args[0] for args in calls), 'Native CPU QA must never download CUDA'
 
 
@@ -232,13 +252,16 @@ def test_windows_launcher_smoke_checks_reuse_and_only_cleans_up_its_first_proces
     url = 'http://127.0.0.1:8770'
     engine = 'hmong_native' if backend == 'native' else 'f5_hmong'
     instance = {'instance_id': 'qa-server', 'pid': 102, 'url': url, 'data_id': 'qa-data',
-                'root_id': 'qa-root', 'backend': engine, 'version': '1.5.1-hmong'}
+                'root_id': 'qa-root', 'backend': engine, 'version': '1.5.2-hmong'}
     process = SimpleNamespace(pid=101, stdout=io.StringIO('Studio: ' + url + '\n'),
                               poll=lambda: None, wait=lambda **kwargs: 0)
     server = SimpleNamespace(is_running=lambda: True, parents=lambda: [SimpleNamespace(pid=101)])
     monkeypatch.setitem(sys.modules, 'psutil', SimpleNamespace(Process=lambda pid: server if pid == 102 else None))
     calls = []
     def popen(command, **kwargs):
+        assert command[1:3] == ['/d', '/c']
+        assert command[3] == ('MO_VOICE_STUDIO_HMONG.bat' if backend == 'native' else 'MO_F5_HMONG.bat')
+        assert kwargs['cwd'] == (tmp_path if backend == 'native' else tmp_path / 'tools')
         assert (data / 'server.lock').read_bytes() == b''
         assert json.loads((data / 'server-instance.json').read_text())['instance_id'] == 'stale-build-qa-instance'
         calls.append(('first', command))
@@ -277,6 +300,9 @@ def test_windows_launcher_smoke_checks_reuse_and_only_cleans_up_its_first_proces
     if second_ok:
         result = smoke.check_web_launcher(tmp_path, backend)
         assert result['second_launch_reused'] and result['same_url_and_pid']
+        assert result['actual_cmd_batch'] is True
+        assert result['batch_entrypoint'] == ('MO_VOICE_STUDIO_HMONG.bat' if backend == 'native'
+                                               else 'tools/MO_F5_HMONG.bat')
         assert result['active_job_preserved'] is (backend == 'native')
         assert ('/api/speech' in requested) is (backend == 'native')
     else:

@@ -743,7 +743,7 @@ def machine_info():
     info = system_info()
     if IS_HMONG:
         info['note'] = ('Hmong dùng GPU khi PyTorch CUDA chạy được. Có NVIDIA nhưng CUDA chưa dùng được: '
-                        'chạy install_hmong_cuda.bat để cài môi trường GPU riêng rồi mở lại tool. '
+                        'chạy tools/install_hmong_cuda.bat để cài môi trường GPU riêng rồi mở lại tool. '
                         'CPU vẫn dùng được; mục tiêu 30× cần đo bằng lời đọc thật, không tính khoảng nghỉ chèn thêm.')
     return info
 

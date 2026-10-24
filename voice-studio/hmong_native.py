@@ -48,7 +48,7 @@ def availability():
         except EngineError as exc:
             reason = str(exc)
     if reason is None and not dependencies:
-        reason = 'Thiếu thư viện tạo giọng. Chạy MO_HMONG_NHANH.bat để cài đặt.'
+        reason = 'Thiếu thư viện tạo giọng. Chạy MO_VOICE_STUDIO_HMONG.bat để cài đặt.'
     return {'ready': reason is None, 'reason': reason or
             'Đủ tệp để thử VITS + OpenVoice V2; cần nghe kiểm tra tiếng Hmong và độ giống giọng.',
             'device': requested, 'model_dir': str(model_directory()), 'dependencies': dependencies,
@@ -87,7 +87,7 @@ class SpeechEngine:
         import torch
         device = ('cuda' if torch.cuda.is_available() else 'cpu') if requested == 'auto' else requested
         if device == 'cuda' and not torch.cuda.is_available():
-            raise EngineError('Đã chọn CUDA nhưng PyTorch chưa nhận GPU. Chạy install_hmong_cuda.bat hoặc chọn cpu.')
+            raise EngineError('Đã chọn CUDA nhưng PyTorch chưa nhận GPU. Chạy tools/install_hmong_cuda.bat hoặc chọn cpu.')
         key = (integrity, device, 'fp32')
         if self._model is not None and self._model_key == key:
             return self._model

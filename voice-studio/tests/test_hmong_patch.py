@@ -25,6 +25,9 @@ def repair(tmp_path):
         target = source / name
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(ROOT / name, target)
+    # This legacy updater remains fixed at its historical 1.5.1 target. Keep
+    # transaction/rollback regression fixtures independent of the current app.
+    (source / 'studio_variant.py').write_text("APP_VERSION = '1.5.1-hmong' if IS_HMONG else '3.6.2'\n", encoding='utf-8')
     output = tmp_path / 'output'
     report = builder.build(source, output)
     extracted = tmp_path / 'patch'
