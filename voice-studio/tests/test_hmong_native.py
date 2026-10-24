@@ -141,10 +141,12 @@ def test_strict_checkpoint_failure_leaves_no_partially_ready_engine(fake_loader,
     state.fail = failure
     engine = native.SpeechEngine()
     engine._reference, engine._reference_key = object(), ('old reference',)
+    engine._reference_cache[('old model',)] = engine._reference
     with pytest.raises(RuntimeError, match='checkpoint keys'):
         engine._load()
     assert engine._model is None and engine._model_key is None
     assert engine._reference is None and engine._reference_key is None
+    assert not engine._reference_cache
     assert state.loads[-1] == failure
     state.fail = None
     assert engine._load().backend == 'vits_openvoice_v2'
@@ -155,17 +157,22 @@ def test_loaded_networks_are_reused_until_integrity_or_device_changes(fake_loade
     engine = native.SpeechEngine()
     first = engine._load()
     engine._reference, engine._reference_key = object(), ('reference',)
+    engine._reference_cache[('reference',)] = engine._reference
     assert engine._load() is first
+    assert engine._reference_cache
     monkeypatch.setenv('HMOOB_PRECISION', 'fp32')
     assert engine._load() is first  # auto already uses the same FP32 computation.
     assert state.loads == ['native', 'converter', 'watermark']
     state.integrity = ('new verified bytes',)
     second = engine._load()
     assert second is not first and engine._reference is None
+    assert not engine._reference_cache
+    engine._reference_cache[('second reference',)] = object()
     state.cuda = True
     monkeypatch.setenv('HMOOB_DEVICE', 'cuda')
     assert engine._load() is not second
     assert engine.device == 'cuda' and len(state.loads) == 9
+    assert not engine._reference_cache
 
 
 def write_reference(path, *, rate=24000, channels=1, width=2, seconds=3, silence=False):
@@ -219,6 +226,99 @@ def test_reference_silence_is_rejected_and_same_metadata_edit_reextracts_embeddi
     os.utime(path, ns=(stat.st_atime_ns, stat.st_mtime_ns))
     assert engine._prepare_reference(path, 'Nyob zoo.', model) is not original
     assert len(embeddings) == 2  # A content digest catches even unreliable change-time metadata.
+
+
+@pytest.fixture
+def cached_reference_encoder(tmp_path, monkeypatch):
+    pytest.importorskip('torch')
+    pytest.importorskip('soxr')
+    path = tmp_path / 'reference.wav'
+    write_reference(path)
+    engine = native.SpeechEngine()
+    engine.device = 'cpu'
+    engine._model_key = ('verified model bytes', 'cpu', 'fp32')
+    embeddings = []
+
+    def embed(spec):
+        result = spec.mean(dim=1)
+        embeddings.append(result)
+        return result
+
+    model = SimpleNamespace(converter=SimpleNamespace(ref_enc=embed))
+    monkeypatch.setattr(engine, '_spectrogram', lambda samples, model: samples.unsqueeze(1))
+    return engine, model, path, embeddings
+
+
+def test_switching_back_to_an_exact_voice_reuses_its_embedding(cached_reference_encoder, tmp_path):
+    engine, model, first_path, embeddings = cached_reference_encoder
+    second_path = tmp_path / 'second.wav'
+    second_path.write_bytes(first_path.read_bytes())
+    first = engine._prepare_reference(first_path, 'Nyob zoo.', model)
+    second = engine._prepare_reference(second_path, 'Kuv nyob ntawm no.', model)
+    assert second is not first
+    assert engine._prepare_reference(first_path, 'Nyob zoo.', model) is first
+    assert engine._prepare_reference(second_path, 'Kuv nyob ntawm no.', model) is second
+    assert len(embeddings) == 2 and len(engine._reference_cache) == 2
+
+
+def test_reference_cache_binds_exact_words_and_loaded_model(cached_reference_encoder):
+    engine, model, path, embeddings = cached_reference_encoder
+    original = engine._prepare_reference(path, 'Nyob zoo.', model)
+    edited_words = engine._prepare_reference(path, 'Nyob zoo os.', model)
+    assert edited_words is not original
+    assert engine._prepare_reference(path, 'Nyob zoo.', model) is original
+    engine._model_key = ('replacement verified model bytes', 'cpu', 'fp32')
+    assert engine._prepare_reference(path, 'Nyob zoo.', model) is not original
+    assert len(embeddings) == 3
+
+
+def test_reference_cache_is_bounded_and_evicts_the_least_recent_voice(cached_reference_encoder):
+    engine, model, path, embeddings = cached_reference_encoder
+    originals = [engine._prepare_reference(path, f'Nyob zoo {index}.', model)
+                 for index in range(native.REFERENCE_CACHE_SIZE)]
+    assert engine._prepare_reference(path, 'Nyob zoo 0.', model) is originals[0]
+    engine._prepare_reference(path, 'Kuv tuaj tshiab.', model)
+    assert len(engine._reference_cache) == native.REFERENCE_CACHE_SIZE
+    assert engine._prepare_reference(path, 'Nyob zoo 0.', model) is originals[0]
+    assert engine._prepare_reference(path, 'Nyob zoo 1.', model) is not originals[1]
+    assert len(embeddings) == native.REFERENCE_CACHE_SIZE + 2
+    assert len(engine._reference_cache) == native.REFERENCE_CACHE_SIZE
+
+
+def test_failed_reference_encoding_does_not_cache_a_failed_voice(cached_reference_encoder):
+    engine, model, path, embeddings = cached_reference_encoder
+    original = engine._prepare_reference(path, 'Nyob zoo.', model)
+    encoder = model.converter.ref_enc
+
+    def failed_encoder(spec):
+        raise RuntimeError('Reference encoding failed')
+
+    model.converter.ref_enc = failed_encoder
+    with pytest.raises(RuntimeError, match='Reference encoding failed'):
+        engine._prepare_reference(path, 'Kuv rov los.', model)
+    assert len(engine._reference_cache) == 1
+    assert engine._reference is original
+    assert engine._prepare_reference(path, 'Nyob zoo.', model) is original
+    model.converter.ref_enc = encoder
+    assert engine._prepare_reference(path, 'Kuv rov los.', model) is not original
+    assert len(embeddings) == 2 and len(engine._reference_cache) == 2
+
+
+def test_reference_encoding_decodes_the_exact_hashed_bytes(cached_reference_encoder, monkeypatch):
+    engine, model, path, embeddings = cached_reference_encoder
+    original_content = path.read_bytes()
+    read_bytes = Path.read_bytes
+
+    def replace_after_read(selected):
+        content = read_bytes(selected)
+        if selected == path:
+            write_reference(path, silence=True)
+        return content
+
+    monkeypatch.setattr(Path, 'read_bytes', replace_after_read)
+    engine._prepare_reference(path, 'Nyob zoo.', model)
+    assert len(embeddings) == 1  # Replacement silence was never encoded.
+    assert engine._reference_key[-2] == native.hashlib.sha256(original_content).hexdigest()
 
 
 @pytest.fixture

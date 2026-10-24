@@ -20,6 +20,9 @@ import tempfile
 import threading
 import time
 import urllib.request
+import uuid
+import zipfile
+from unittest.mock import patch
 
 
 PRONUNCIATION_TEST_WORDS = ['ua', 'thaj', 'qab', 'faib', 'rov', 'ris']
@@ -127,6 +130,70 @@ def export_generated_preview(client, job, reports):
             'expression': job.get('expression')}
 
 
+def check_longform(client, studio, template):
+    """Check full-size acceptance/planning, then real bounded chapter speech.
+
+    The million-character request never starts inference. Only chapter planning
+    is injected for the short, two-part real synthesis; the controller, worker,
+    reference validation, audio files, archive and download routes stay real.
+    """
+    import longform
+    from narration import plan_segments
+    text = ('Nyob zoo. ' * 100001)[:1_000_000]
+    with patch.object(studio.executor, 'submit') as queued:
+        response = client.post('/api/speech', json={'text': text, 'language': 'mww',
+            'voice_id': 'hmong-male', 'format': 'wav', 'paragraph_pause': 0})
+        assert response.status_code == 202, response.text
+        full = response.json()
+        assert len(full['text']) == 1_000_000 and full['longform'] is True
+        queued.assert_called_once()
+    chapters = longform.plan_chapters(full)
+    assert len(chapters) > 1 and all(chapter.characters <= longform.PART_CHARACTERS for chapter in chapters)
+    assert [segment for chapter in chapters for segment in chapter.segments] == plan_segments(full)
+    assert client.post('/api/speech', json={'text': text + 'a', 'language': 'mww',
+        'voice_id': 'hmong-male'}).status_code == 422
+    full.update(status='cancelled', error='Builder QA: acceptance/planning only; inference was never submitted.')
+    studio.write_json(studio.DATA / 'jobs' / (full['id'] + '.json'), full)
+
+    source = '[emotion=warm]Nyob zoo.[emotion=serious]Ua tsaug.'
+    job = {**template, 'id': uuid.uuid4().hex, 'text': source, 'input_format': 'txt',
+           'format': 'wav', 'longform': True, 'status': 'running', 'paragraph_pause': 0,
+           'created_at': studio.now(), 'qa_release_longform': True}
+    for key in ('character_cast', 'character_voices', 'cue_characters', 'video_id'):
+        job.pop(key, None)
+    segments = plan_segments(job)
+    assert len(segments) == 2 and all(segment.text for segment in segments)
+    short_chapters = [longform.Chapter(index + 1, index, index + 1, (segment,), len(segment.text))
+                      for index, segment in enumerate(segments)]
+    with patch.object(longform, 'plan_chapters', return_value=short_chapters):
+        result = longform.run_longform(job, studio.DATA, studio.execute_worker, dict(os.environ))
+    assert result['chapter_count'] == result['completed_chapters'] == 2
+    assert result['completed'] == result['total'] == 2 and result['duration_limited'] is False
+    job.update(result, status='done', url='/api/jobs/' + job['id'] + '/archive', finished_at=studio.now())
+    studio.write_json(studio.DATA / 'jobs' / (job['id'] + '.json'), job)
+    response = client.get(job['url'])
+    assert response.status_code == 200
+    with zipfile.ZipFile(io.BytesIO(response.content)) as archive:
+        assert archive.testzip() is None and archive.read('original.txt').decode('utf-8') == source
+        manifest = json.loads(archive.read('manifest.json'))
+        assert manifest['chapter_count'] == 2 and manifest['source_characters'] == len(source)
+        for chapter in manifest['chapters']:
+            from browser_hmong_portable import audio_evidence
+            audio = archive.read(chapter['files']['audio'])
+            audio_evidence(audio)
+            assert archive.read(chapter['files']['txt']).strip()
+            assert b'-->' in archive.read(chapter['files']['srt'])
+            preview = client.get(f"/api/jobs/{job['id']}/chapters/{chapter['index']}")
+            assert preview.status_code == 200 and preview.content == audio
+    return {'success': True, 'accepted_characters': len(text), 'planned_chapters': len(chapters),
+            'million_character_synthesis_performed': False, 'oversize_rejected': True,
+            'plan_preserved_all_segments': True, 'real_synthesis': True,
+            'short_sample_plan_injected': True, 'sample_characters': len(source),
+            'completed_chapters': 2, 'job_id': job['id'], 'archive_bytes': len(response.content),
+            'archive_sha256': hashlib.sha256(response.content).hexdigest(),
+            'archive_contents_verified': True, 'chapter_routes_verified': True}
+
+
 def main():
     assert os.name == 'nt', 'This validation must run on native Windows'
     parser = argparse.ArgumentParser(description=__doc__)
@@ -148,6 +215,8 @@ def main():
     for module in (np, sf, httpx):
         assert (root / 'runtime') in Path(module.__file__).resolve().parents, 'Dependency escaped bundled runtime'
     import app as studio
+    from hmong_native import REFERENCE_CACHE_SIZE
+    assert REFERENCE_CACHE_SIZE == 16
     from hmong_assets import references
     voice_metadata = references()
     for gender in ('female', 'male'):
@@ -161,6 +230,7 @@ def main():
                'full_source_previews': {}, 'source_clones': {}, 'manual_crop': False,
                'txt_srt': False, 'mp3': False, 'main_launcher': False, 'batch_entrypoints': {},
                'expression': {}, 'generated_auditions': {},
+               'reference_cache_limit': REFERENCE_CACHE_SIZE,
                'pronunciation_test_words': PRONUNCIATION_TEST_WORDS,
                'target_30x_verified': False, 'cuda_installer_included': True,
                'cuda_inference_validated': False, 'cuda_installation_exercised': False,
@@ -359,6 +429,11 @@ def main():
         assert response.status_code == 201, response.text
         manual = response.json()
         assert manual['engine'] == engine and manual['automatic_reference'] is False
+        quality = manual['quality']
+        assert isinstance(quality['advisories'], list) and isinstance(quality['guidance'], list)
+        assert isinstance(quality['attention_recommended'], bool)
+        assert 'similarity_score' not in quality and 'clone_accuracy' not in quality
+        results['reference_quality_advisories'] = True
         assert manual['transcript'] == female['reference']['text']
         assert abs(manual['reference_start'] - manual_start) < .01
         assert abs(manual['reference_end'] - manual_end) < .01
@@ -379,6 +454,34 @@ def main():
         saved = client.get('/api/jobs/' + aligned['id'] + '/script.srt')
         assert saved.status_code == 200 and '00:00:12,000' in saved.text
         results['srt_timeline'] = True
+        cast_text = ('1\n00:00:00,000 --> 00:00:12,000\nNyob zoo.\n\n'
+                     '2\n00:00:12,000 --> 00:00:24,000\nUa tsaug.\n')
+        cast = render(client, {'text': cast_text, 'input_format': 'srt', 'language': 'mww',
+            'voice_id': 'hmong-male', 'character_voices': {'narrator': 'hmong-male', 'guest': 'hmong-female'},
+            'cue_characters': ['narrator', 'guest'], 'format': 'wav',
+            'paragraph_pause': 0, 'max_cue_tempo': 2})
+        assert cast['text'] == cast_text and abs(cast['audio_seconds'] - 24) < .1
+        snapshots = cast['character_cast']['voices']
+        from hmong_assets import reference_fingerprint
+        for character, ident in [('narrator', 'hmong-male'), ('guest', 'hmong-female')]:
+            assert snapshots[character]['voice_id'] == snapshots[character]['speaker'] == ident
+            assert snapshots[character]['hmong_reference_fingerprint'] == reference_fingerprint(ident)
+        results['character_cast'] = {'success': True, 'real_synthesis': True, 'job_id': cast['id'],
+            'cue_characters': cast['character_cast']['cues'], 'voice_ids': ['hmong-male', 'hmong-female'],
+            'reference_identities_verified': True, 'original_srt_preserved': True,
+            'audio_seconds': cast['audio_seconds']}
+        results['longform'] = check_longform(client, studio, aligned)
+
+        # The browser operates this real local video and imports its SRT via
+        # the visible project controls; no video/voice API responses are mocked.
+        with tempfile.TemporaryDirectory(prefix='hmong-release-video-') as folder:
+            video = Path(folder) / 'release-cast-qa.mp4'
+            subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-f', 'lavfi', '-i',
+                'color=c=black:s=320x180:r=10', '-t', '24', '-c:v', 'libx264',
+                '-pix_fmt', 'yuv420p', str(video)], check=True, timeout=45)
+            response = client.post('/api/videos', files={'file': (video.name, video.read_bytes(), 'video/mp4')})
+            assert response.status_code == 201, response.text
+            results['browser_cast_video_id'] = response.json()['id']
 
     results['default_synthesis'] = {'engine': engine, 'backend': 'vits_openvoice_v2',
                                    'steps': None, 'precision': 'fp32', 'device': 'cpu',
@@ -481,7 +584,7 @@ def check_web_launcher(root, backend, *, reports=None):
             assert isinstance(instance.get(field), str) and instance[field], 'Missing runtime identity: ' + field
         assert isinstance(instance.get('pid'), int) and instance['pid'] > 0
         assert instance['url'] == url and instance['backend'] == engine
-        assert instance['version'] == live['version'] == '1.5.3-hmong'
+        assert instance['version'] == live['version'] == '1.6.0-hmong'
         assert instance['instance_id'] != 'stale-build-qa-instance'
         server = psutil.Process(instance['pid'])
         assert server.is_running() and process.pid in {parent.pid for parent in server.parents()}, \

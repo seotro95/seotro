@@ -22,7 +22,7 @@ import zipfile
 from build_windows import copy_runtime, download_verified_ffmpeg
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.5.3'
+VERSION = '1.6.0'
 ARCHIVE_NAME = f'Voice-Studio-Hmong-{VERSION}-Windows-x64.zip'
 
 
@@ -66,7 +66,8 @@ def copy_source(destination, source=SOURCE):
         target = destination / 'hmong_native_vendor' / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(vendor / relative, target)
-    required = ('app.py', 'worker.py', 'bundle_check.py', 'runtime_instance.py', 'hmong_acceleration.py',
+    required = ('app.py', 'worker.py', 'bundle_check.py', 'runtime_instance.py', 'character_cast.py',
+                'longform.py', 'reference_quality.py', 'hmong_acceleration.py',
                 'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py',
                 'hmong_native.py', 'hmong_native_models.py',
                 'hmong_reference.py', 'hmong_text.py', 'hmong_assets.py', 'prepare_hmong.py',
@@ -167,7 +168,7 @@ def checked_run(command, *, environment, cwd, timeout=2400):
 
 
 def write_notices(root, model_manifest, qa_report):
-    notice = '''VOICE STUDIO HMONG 1.5.3 — WINDOWS X64
+    notice = '''VOICE STUDIO HMONG 1.6.0 — WINDOWS X64
 
 Chi tai MOT goi ZIP va giai nen TOAN BO. Mo MO_VOICE_STUDIO_HMONG.bat.
 Tep mo chinh chon bo nhanh VITS Hmong + OpenVoice V2, khong vo tinh mo F5.
@@ -193,10 +194,15 @@ Mac dinh ke chuyen, warm 65%, giu ngu canh cum/cau, tat nhip tu dong.
 Cam xuc neutral/warm/joyful/sad/serious/suspense dung xu ly nhip/am luong
 cuc bo, khong phai mo hinh dieu khien cam xuc than kinh. Co TXT/SRT,
 WAV/MP3 va [emotion=warm], **tu nhan manh**, [pause=0.4].
+TXT Hmong toi da 1.000.000 ky tu, tren 20.000 ky tu tu chia chuong/phan.
+Xuat ZIP cac phan WAV/MP3, TXT/SRT va manifest; can du thoi gian/dung luong.
+SRT gan giong Hmong theo nhan vat tung cue; ten nhan vat khong doc thanh loi.
+Bo nhanh giu toi da 16 mau tham chieu gan dung trong RAM de doi giong.
 Chua ho tro nhan dang loi noi Hmong tu dong; nhap TXT/SRT hoac sua thu cong.
 
-Chua xac minh phat am dung ua/thaj/qab/faib/rov/ris, do giong giong,
-hoac muc tieu 1 gio voice trong 2 phut (30x). Toc do tuy CPU/GPU.
+Giu nguyen bo phat am Hmong ban da xac nhan; khong huan luyen model moi.
+Do giong giong khong bao dam 100%; muc tieu 1 gio voice trong 2 phut (30x)
+chua dat. Toc do tuy CPU/GPU. Khong co cai thien am hoc duoc tuyen bo.
 Hai MP3 nghe thu do bo nhanh tao nam trong reports, co du sau tu.
 Thiet lap/checksum va thoi gian do tron quy trinh o NATIVE-VALIDATION.json. Bao cao
 loai khoang lang tool chen; do ngan khong chung minh toc do 1 gio.
@@ -290,6 +296,47 @@ def validate_browser_report(report):
         raise ValueError('Browser QA must cover both explicit buttons, the library filter and workspace speech')
     if not any('Nyob-zoo' in case.get('text', '') for case in cases):
         raise ValueError('Browser QA must complete the original hyphenated Hmong text')
+    features = report.get('features_1_6', {})
+    longform, cast = features.get('longform', {}), features.get('character_cast', {})
+    if (any(longform.get(key) is not True for key in ('success', 'million_character_editor',
+            'real_archive', 'chapter_selection', 'audio_playback_checked', 'download_verified'))
+            or longform.get('million_character_synthesis_performed') is not False
+            or longform.get('completed_chapters') != 2
+            or not longform.get('archive_job_id')
+            or not re.fullmatch(r'[a-f0-9]{64}', longform.get('archive_sha256', ''))):
+        raise ValueError('Browser QA must accept a million-character draft and play/download the real chapter archive')
+    if (any(cast.get(key) is not True for key in ('success', 'real_ui_post',
+            'reference_identities_verified', 'character_names_not_spoken', 'download_verified'))
+            or cast.get('status') != 'done' or cast.get('voice_ids') != ['hmong-male', 'hmong-female']
+            or cast.get('cue_count') != 2 or not cast.get('job_id')
+            or cast.get('audio_bytes', 0) <= 1000 or cast.get('audio_seconds', 0) <= 1 / 3
+            or cast.get('sample_rate') != 24000 or cast.get('peak_amplitude', 0) <= .001
+            or not re.fullmatch(r'[a-f0-9]{64}', cast.get('sha256', ''))):
+        raise ValueError('Browser QA must route two characters to the correct real Hmong voices and download speech')
+    return report
+
+
+def validate_native_feature_report(report):
+    """Separate full-size planning from the bounded real synthesis sample."""
+    longform, cast = report.get('longform', {}), report.get('character_cast', {})
+    if (report.get('platform') != 'win32' or report.get('native_windows_validation') is not True
+            or report.get('reference_cache_limit') != 16
+            or report.get('reference_quality_advisories') is not True):
+        raise ValueError('Native Windows QA must check the bounded cache and reference quality advisories')
+    if (any(longform.get(key) is not True for key in ('success', 'oversize_rejected',
+            'plan_preserved_all_segments', 'real_synthesis', 'short_sample_plan_injected',
+            'archive_contents_verified', 'chapter_routes_verified'))
+            or longform.get('accepted_characters') != 1_000_000
+            or longform.get('million_character_synthesis_performed') is not False
+            or longform.get('planned_chapters', 0) <= 1 or longform.get('completed_chapters') != 2
+            or not 0 < longform.get('sample_characters', 0) < 1000
+            or not re.fullmatch(r'[a-f0-9]{64}', longform.get('archive_sha256', ''))):
+        raise ValueError('Native Windows QA must check million-character planning and real bounded chapter exports')
+    if (any(cast.get(key) is not True for key in ('success', 'real_synthesis',
+            'reference_identities_verified', 'original_srt_preserved'))
+            or cast.get('voice_ids') != ['hmong-male', 'hmong-female']
+            or cast.get('cue_characters') != ['narrator', 'guest'] or cast.get('audio_seconds', 0) <= 1):
+        raise ValueError('Native Windows QA must synthesize both character references in a timed script')
     return report
 
 
@@ -302,6 +349,9 @@ def validate_release_archive(archive):
         names = bundle.namelist()
         if any(not name.startswith(prefix) or '/.data/' in name for name in names):
             raise ValueError('Release archive has an unexpected root or contains QA/personal data')
+        for module in ('character_cast.py', 'longform.py', 'reference_quality.py'):
+            if not bundle.read(prefix + 'voice-studio-hmong/' + module):
+                raise ValueError('Release archive lacks a required 1.6 runtime module: ' + module)
         application_batches = {name[len(prefix):] for name in names
                                if name.lower().endswith('.bat')
                                and name[len(prefix):].split('/')[0].lower() not in {'runtime', 'ffmpeg'}}
@@ -315,6 +365,11 @@ def validate_release_archive(archive):
         build = read_json('BUILD.json')
         browser = validate_browser_report(read_json('reports/browser-smoke.json'))
         native, f5 = read_json('reports/native-smoke.json'), read_json('reports/f5-smoke.json')
+        validate_native_feature_report(native)
+        longform = browser['features_1_6']['longform']
+        if (longform['archive_job_id'] != native['longform'].get('job_id')
+                or longform['archive_sha256'] != native['longform']['archive_sha256']):
+            raise ValueError('Browser and native QA must verify the same real chapter archive')
         if (build.get('version') != VERSION or build.get('windows_browser_validation') is not True
                 or not native.get('success') or not f5.get('success')
                 or native['main_launcher'].get('browser_ui') != browser
@@ -421,6 +476,7 @@ def main():
     browser_report = validate_browser_report(json.loads((reports / 'browser-smoke.json').read_text(encoding='utf-8')))
     if not qa_report.get('success') or not compatibility.get('success'):
         raise RuntimeError('Both native and F5 Hmong smoke tests must complete')
+    validate_native_feature_report(qa_report)
     qa_report['f5_compatibility'] = compatibility
     qa_report['advanced_f5_launcher'] = compatibility['advanced_f5_launcher']
     if qa_report['main_launcher'].get('browser_ui') != browser_report:
@@ -462,6 +518,9 @@ def main():
              'single_main_download': True, 'single_root_launcher': True,
              'reports_bundled': True,
              'windows_browser_validation': True, 'real_ui_synthesis': True,
+             'max_script_characters': 1_000_000, 'native_reference_cache_limit': 16,
+             'character_cast_validation': True, 'longform_chapter_archive_validation': True,
+             'million_character_synthesis_validated': False,
              'browser_validated_presets': sorted(browser_report['voices']),
              'browser_qa_script': 'voice-studio/packaging/browser_hmong_portable.py',
              'browser_qa_script_sha256': browser_report['script_sha256'],

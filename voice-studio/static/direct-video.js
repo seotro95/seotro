@@ -29,3 +29,8 @@ $('caption-preset').onchange=()=>{const preset=$('caption-preset').value;if(pres
 // Fast text generation is separate from reading speed; keep the chosen speaker.
 const initializeFastText=setInterval(()=>{if(!config)return;clearInterval(initializeFastText);$('nano-steps').value='4';$('paragraph-pause').value='0';$('nano-parallel').value=(config.cpu_cores>=4&&config.available_ram_gb>=3)?'2':'1';},100);
 $('subtitle-target').addEventListener('change',()=>{$('translate-subtitles').checked=true;$('workspace-connection').open=true;workspaceMessage('Đã chọn ngôn ngữ phụ đề đích. Bấm Tạo phụ đề riêng hoặc Tạo / dịch phụ đề; chỉ dịch khi bạn bấm nút.');});
+const editorOriginalProofBusy=proofBusy;proofBusy=function(busy){editorOriginalProofBusy(busy);editorSetBusy(busy,'proof');};
+const editorOriginalCreateProof=createProof;createProof=async function(...args){
+ if(editorBusy){notify('Đợi hoặc dừng tác vụ hiện tại trước.',true);return;}
+ editorSetBusy(true,'proof-submit');try{return await editorOriginalCreateProof(...args);}finally{editorSetBusy(false,'proof-submit');}
+};

@@ -4,6 +4,10 @@ import gc
 import contextlib
 import traceback
 import multiprocessing
+import hashlib
+import math
+import re
+from collections import OrderedDict
 from concurrent.futures import ProcessPoolExecutor
 import os
 import subprocess
@@ -13,8 +17,9 @@ import wave
 from pathlib import Path
 
 from state_io import write_json_atomic,write_progress,read_progress
-from narration import PCMWriter, PROFILES, plan_segments
+from narration import PCMWriter, PROFILES, Segment, plan_segments
 from hmong_assets import HMONG_ENGINES
+from character_cast import checkpoint_identity, settings_for_cue, validate_job_references
 
 DATA = Path(os.environ['VOICE_STUDIO_DATA_DIR'])
 LANGUAGES = {'en-US': 'English', 'en-GB': 'English', 'ja': 'Japanese', 'ko': 'Korean', 'zh': 'Chinese', 'fr': 'French', 'de': 'German', 'es': 'Spanish', 'it': 'Italian', 'pt': 'Portuguese', 'ru': 'Russian'}
@@ -51,7 +56,10 @@ def load_synthesizer(job):
             ref_path, ref_text = reference(job['speaker'])
         else:
             record = json.loads((DATA/'voices'/(job['voice_id']+'.json')).read_text(encoding='utf-8'))
-            ref_path, ref_text = DATA/'voices'/(job['voice_id']+'.wav'), record.get('transcript','')
+            ref_path = DATA/'voices'/(job['voice_id']+'.wav')
+            snapshot = job.get('hmong_voice_snapshot')
+            ref_text = (job['reference_text'] if job.get('character_cast') else
+                        snapshot['reference_text'] if snapshot else record.get('transcript',''))
         steps = job.get('hmong_steps',16)
         quality = 'standard' if native else {4:'turbo',8:'draft',16:'fast',32:'standard'}.get(steps)
         if quality is None:raise ValueError('F5-Hmong chỉ nhận 4, 8, 16 hoặc 32 bước.')
@@ -116,11 +124,35 @@ _cached_key = None
 _cached_synth = None
 _hmong_model_instance = None
 _hmong_native_instance = None
+_cast_synthesizers = OrderedDict()
+_cast_synth_engine = None
+MAX_CAST_SYNTHESIZERS = 16
 
 
 def get_synthesizer(job):
-    global _cached_key, _cached_synth
+    global _cached_key, _cached_synth, _cast_synth_engine
     key = tuple(job.get(k) for k in ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads', 'hmong_steps', 'hmong_reference_fingerprint'))
+    key += (job.get('reference_text') if job.get('character_cast') else
+            (job.get('hmong_voice_snapshot') or {}).get('reference_text'),)
+    cast = bool(job.get('character_cast'))
+    if _cast_synthesizers and (not cast or _cast_synth_engine != job['engine']):
+        # Closures retain their model instance: release all before a backend switch.
+        _cast_synthesizers.clear()
+        _cast_synth_engine = None
+        _cached_key = _cached_synth = None
+    if cast:
+        if key in _cast_synthesizers:
+            _cast_synthesizers.move_to_end(key)
+            return _cast_synthesizers[key]
+        if not _cast_synthesizers:
+            _cached_key = _cached_synth = None
+            gc.collect()
+        _cast_synth_engine = job['engine']
+        result = load_synthesizer(job)
+        _cast_synthesizers[key] = result
+        while len(_cast_synthesizers) > MAX_CAST_SYNTHESIZERS:
+            _cast_synthesizers.popitem(last=False)
+        return result
     if _cached_key != key or _cached_synth is None:
         _cached_synth = None
         _cached_key = None
@@ -139,11 +171,17 @@ def normalize_audio(raw, temporary, tempo, gain):
         import soundfile as sf
         import soxr
         samples, rate = sf.read(str(raw), dtype='float32', always_2d=False)
+        if not np.isfinite(samples).all() or not math.isfinite(gain) or gain < 0:
+            raise ValueError('Âm thanh hoặc mức tăng âm không hợp lệ.')
         if samples.ndim > 1:
             samples = samples.mean(axis=1)
         if rate != 24000:
             samples = soxr.resample(samples, rate, 24000)
-        samples = np.clip(samples * gain, -0.95, 0.95)
+        if not np.isfinite(samples).all():
+            raise ValueError('Âm thanh sau chuyển tần số không hợp lệ.')
+        peak = float(np.max(np.abs(samples))) if samples.size else 0
+        safe_gain = min(gain, .95 / peak) if peak else gain
+        samples = samples * safe_gain
         sf.write(str(temporary), samples, 24000, subtype='PCM_16')
     else:
         subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(raw), '-vn', '-ac', '1', '-ar', '24000', '-af', f'atempo={tempo},volume={gain},alimiter=limit=0.95', '-codec:a', 'pcm_s16le', '-y', str(temporary)], check=True, timeout=120)
@@ -187,18 +225,90 @@ def valid_checkpoint(path):
         return False
 
 
+def _planned_segments(job):
+    """Accept the private chapter plan without interpreting its text a second time."""
+    if '_PREPLANNED_SEGMENTS' not in job:
+        return plan_segments(job)
+    parent = job.get('_longform_parent_id')
+    identity = job.get('_longform_identity')
+    if (job.get('engine') not in HMONG_ENGINES or job.get('input_format') != 'txt'
+            or not isinstance(parent, str) or not re.fullmatch(r'[0-9a-f]{32}', parent)
+            or not isinstance(identity, str) or not re.fullmatch(r'[0-9a-f]{64}', identity)):
+        raise ValueError('Kế hoạch chương nội bộ không hợp lệ.')
+    raw = job['_PREPLANNED_SEGMENTS']
+    fields = {'text', 'pause', 'emphasis', 'cue', 'emotion', 'rhythm_pause'}
+    if not isinstance(raw, list) or not 0 < len(raw) <= 200_000:
+        raise ValueError('Kế hoạch chương nội bộ không hợp lệ.')
+    from hmong_expression import EMOTIONS
+    from narration import validate_voice_text
+    segments, characters = [], 0
+    for row in raw:
+        if (not isinstance(row, dict) or set(row) != fields
+                or not isinstance(row['text'], str) or len(row['text']) > 240
+                or type(row['emphasis']) is not bool or row['cue'] is not None
+                or (row['emotion'] is not None and row['emotion'] not in EMOTIONS)):
+            raise ValueError('Đoạn trong kế hoạch chương nội bộ không hợp lệ.')
+        for key in ('pause', 'rhythm_pause'):
+            value = row[key]
+            if (isinstance(value, bool) or not isinstance(value, (float, int))
+                    or not math.isfinite(value) or not 0 <= value <= 10):
+                raise ValueError('Khoảng nghỉ trong kế hoạch chương nội bộ không hợp lệ.')
+        if row['text']:
+            validate_voice_text(row['text'], job['engine'])
+        characters += len(row['text'])
+        if characters > 200_000:
+            raise ValueError('Nội dung chương vượt giới hạn ký tự.')
+        segments.append(Segment(**row))
+    return segments
+
+
+def _chunk_identity(job, segment):
+    """Legacy jobs keep their checkpoints; frozen/new chapter jobs bind all inputs."""
+    cast_identity = checkpoint_identity(job, segment) if job.get('character_cast') else None
+    if '_PREPLANNED_SEGMENTS' not in job and not job.get('hmong_voice_snapshot'):
+        return cast_identity
+    keys = ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads',
+            'hmong_steps', 'hmong_reference_fingerprint', 'hmong_voice_snapshot', 'speed',
+            'delivery', 'segment_plan', 'emotion', 'emotion_strength', 'auto_rhythm',
+            'hmong_phrase_context', 'paragraph_pause', '_longform_parent_id', '_longform_identity',
+            '_PREPLANNED_SEGMENTS')
+    payload = {'version': 1, 'cast': cast_identity, 'segment': vars(segment),
+               'settings': {key: job.get(key) for key in keys}}
+    return hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True,
+                                    separators=(',', ':'), allow_nan=False).encode('utf-8')).hexdigest()
+
+
+class _ChapterPCMWriter(PCMWriter):
+    """A complete chapter must retain its final pauses as well as its words."""
+    def silence(self, seconds):
+        if round(seconds * self.rate) > self.limit - self.frames:
+            raise ValueError('Chương vượt giới hạn 3 giờ; chưa xuất âm thanh bị cắt khoảng nghỉ.')
+        super().silence(seconds)
+
+
 def prepare_chunk(job, segment, index, work, synthesize=None):
     from narration import validate_voice_text
     import soundfile as sf
     import numpy as np
+    identity = _chunk_identity(job, segment)
+    job = settings_for_cue(job, segment.cue)
     label=f'Câu SRT {segment.cue+1}' if job.get('input_format')=='srt' else f'Đoạn {index+1}'
     validate_voice_text(segment.text,job.get('engine'),label)
     work = Path(work)
     part = work / f'{index:06d}.wav'
+    identity_path = work / f'{index:06d}.identity.json'
     if part.exists():
-        if valid_checkpoint(part):
+        identity_matches = identity is None
+        if identity is not None:
+            try:
+                identity_matches = json.loads(identity_path.read_text(encoding='utf-8')).get('identity') == identity
+            except (OSError, ValueError, AttributeError):
+                identity_matches = False
+        if identity_matches and valid_checkpoint(part):
             return
         part.unlink()
+    if identity is not None:
+        identity_path.unlink(missing_ok=True)
     custom=synthesize is not None
     raw = work / f'raw-{index:06d}.wav'
     temporary = work / f'normalized-{index:06d}.wav'
@@ -249,11 +359,14 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
         finally:
             raw.unlink(missing_ok=True)
         temporary.replace(part)
+        if identity is not None:
+            write_state(identity_path, {'version': 1, 'identity': identity})
         return
 
 
 def render(job, synthesize=None):
     global _nano_pool, _nano_pool_workers, _cached_synth, _cached_key
+    validate_job_references(job, DATA)
     if job.get('engine') in HMONG_ENGINES and job.get('speaker') in {'hmong-male', 'hmong-female'}:
         from hmong_assets import reference_fingerprint
         try:
@@ -263,6 +376,9 @@ def render(job, synthesize=None):
         if not current_reference or job.get('hmong_reference_fingerprint') != current_reference:
             raise ValueError('Mẫu giọng Hmong mặc định đã thay đổi hoặc tác vụ cũ chưa lưu danh tính mẫu. '
                              'Tạo tác vụ mới bằng giọng hiện tại; các đoạn đã tạo vẫn được giữ nguyên.')
+    segments = _planned_segments(job)
+    if not any(s.text for s in segments):
+        raise ValueError('Không có nội dung đọc sau khi xử lý ký hiệu nhấn/nghỉ.')
     workers = min(4, max(1, job.get('nano_parallel', 1)))
     parallel = job.get('engine') == 'vieneu_nano' and workers > 1 and synthesize is None
     if not parallel or (_nano_pool is not None and _nano_pool_workers not in (None, workers)):
@@ -273,12 +389,10 @@ def render(job, synthesize=None):
         gc.collect()
     work = DATA / 'parts' / job['id']
     work.mkdir(parents=True, exist_ok=True)
-    segments = plan_segments(job)
-    if not any(s.text for s in segments):
-        raise ValueError('Không có nội dung đọc sau khi xử lý ký hiệu nhấn/nghỉ.')
     maximum = job.get('max_minutes', 180) * 60
     assembly = work / 'assembled.wav'
-    writer = PCMWriter(assembly, max_seconds=maximum)
+    writer_class = _ChapterPCMWriter if '_PREPLANNED_SEGMENTS' in job else PCMWriter
+    writer = writer_class(assembly, max_seconds=maximum)
     started = time.monotonic()
     write_state(work / 'progress.json', {'completed': 0, 'total': len(segments), 'progress': 0, 'phase': 'Chuẩn bị mô hình; lần đầu có thể chậm hơn'})
     completed = 0
@@ -401,7 +515,11 @@ def render(job, synthesize=None):
                     spoken_frames += max(0, min(end_frame, appended_frames)
                                          - min(start_frame, appended_frames))
                 actual_end=writer.frames/writer.rate
-                alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':cue['end'],'raw_seconds':round(actual,3),'spoken_start':round(actual_start,5),'spoken_end':round(actual_end,5),'tempo':round(applied_tempo,4),'status':'matched' if abs(actual_start-cue['start'])<=.001 and actual_end<=cue['end']+.001 and not clipped else 'overflow'})
+                cast_alignment = {}
+                if job.get('character_cast'):
+                    cue_voice = settings_for_cue(job, segment.cue)
+                    cast_alignment = {'voice_id': cue_voice['voice_id'], 'character_id': cue_voice['character_id']}
+                alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':cue['end'],'raw_seconds':round(actual,3),'spoken_start':round(actual_start,5),'spoken_end':round(actual_end,5),'tempo':round(applied_tempo,4),'status':'matched' if abs(actual_start-cue['start'])<=.001 and actual_end<=cue['end']+.001 and not clipped else 'overflow', **cast_alignment})
                 if len(alignment)%16==0 or len(alignment)==len(cues):save_alignment(sync_ok=all(c['status']=='matched' for c in alignment) and len(alignment)==len(cues))
                 writer.silence(max(0, cue['end']-writer.frames/writer.rate))
             elif not cues and segment.text:
@@ -481,18 +599,46 @@ def voice_error(exc):
     return f'Không tạo được voice ({type(exc).__name__}). Giữ cửa sổ tool mở và kiểm tra model giọng đã chọn.'
 
 
+def _load_worker_request(path):
+    """Allow normal queued jobs and the controller's exact private chapter path."""
+    path = Path(path).resolve()
+    if path.parent == (DATA / 'jobs').resolve() and path.suffix == '.json':
+        return json.loads(path.read_text(encoding='utf-8'))
+    try:
+        parts = path.relative_to((DATA / 'parts').resolve()).parts
+    except ValueError:
+        return None
+    if (len(parts) != 4 or not re.fullmatch(r'[0-9a-f]{32}', parts[0])
+            or parts[1] != 'chapters' or not re.fullmatch(r'[0-9]{4,6}', parts[2])
+            or int(parts[2]) < 1 or f'{int(parts[2]):04d}' != parts[2] or parts[3] != 'job.json'):
+        return None
+    job = json.loads(path.read_text(encoding='utf-8'))
+    if not isinstance(job, dict) or job.get('_longform_parent_id') != parts[0]:
+        return None
+    identity = job.get('_longform_identity')
+    if not isinstance(identity, str) or not re.fullmatch(r'[0-9a-f]{64}', identity):
+        return None
+    child_id = hashlib.sha256(f'longform-v1:{parts[0]}:{parts[2]}:{identity}'.encode('utf-8')).hexdigest()[:32]
+    if job.get('id') != child_id or '_PREPLANNED_SEGMENTS' not in job:
+        return None
+    _planned_segments(job)
+    return job
+
+
 def serve():
     # Only the application's serialized queue writes this private pipe.
     for line in sys.stdin:
         path = Path(line.strip()).resolve()
-        if path.parent != (DATA / 'jobs').resolve() or path.suffix != '.json':
+        job = _load_worker_request(path)
+        if job is None:
             continue
-        job = json.loads(path.read_text(encoding='utf-8'))
         work = DATA / 'parts' / job['id']
         work.mkdir(parents=True, exist_ok=True)
         code = 0
         user_error = None
-        with (DATA / 'jobs' / (job['id'] + '.log')).open('a', encoding='utf-8') as errors:
+        log_path = (path.with_suffix('.log') if path.parent != (DATA / 'jobs').resolve()
+                    else DATA / 'jobs' / (job['id'] + '.log'))
+        with log_path.open('a', encoding='utf-8') as errors:
             try:
                 with contextlib.redirect_stderr(errors):
                     render(job)

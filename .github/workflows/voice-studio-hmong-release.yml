@@ -1,8 +1,8 @@
-name: Build and publish Voice Studio Hmong 1.5.3
+name: Build and publish Voice Studio Hmong 1.6.0
 
 on:
   push:
-    branches: [release/voice-studio-hmong-1.5.3]
+    branches: [release/voice-studio-hmong-1.6.0]
     paths:
       - .github/workflows/voice-studio-hmong-release.yml
       - voice-studio/**
@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: voice-studio-hmong-1.5.3-release
+  group: voice-studio-hmong-1.6.0-release
   cancel-in-progress: false
 
 env:
@@ -20,7 +20,7 @@ env:
   PYTHONUNBUFFERED: '1'
   HF_HUB_DISABLE_XET: '1'
   GH_REPO: ${{ github.repository }}
-  RELEASE_TAG: voice-studio-hmong-1.5.3
+  RELEASE_TAG: voice-studio-hmong-1.6.0
 
 jobs:
   windows-integrity:
@@ -83,27 +83,27 @@ jobs:
           if (-not $release) {
             $notes = Join-Path $env:RUNNER_TEMP 'hmong-draft-notes.txt'
             'Building and validating a clean native Windows Hmong package. Download links appear after all checks pass.' | Set-Content -Encoding utf8 $notes
-            gh release create $env:RELEASE_TAG --repo $env:GH_REPO --target $env:GITHUB_SHA --draft --prerelease --title 'Voice Studio Hmong 1.5.3 — Windows x64' --notes-file $notes
+            gh release create $env:RELEASE_TAG --repo $env:GH_REPO --target $env:GITHUB_SHA --draft --prerelease --title 'Voice Studio Hmong 1.6.0 — Windows x64' --notes-file $notes
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
       - name: Restore the pinned public CPU runtime archive
         uses: actions/cache@v4
         with:
-          path: ${{ runner.temp }}/hmong-download/Voice-Studio-Hmong-1.5.2-Windows-x64.zip
-          key: voice-studio-hmong-base-windows-c392815cadf3ee432ba111e414e38f3a7f66f82b4092378d3c9154104c5b8634
+          path: ${{ runner.temp }}/hmong-download/Voice-Studio-Hmong-1.5.3-Windows-x64.zip
+          key: voice-studio-hmong-base-windows-5f88163dbfc79271ea2826fc3f3c82b17c799963b4ceaebc373b6e34bc0b5519
       - name: Reuse checksum-verified Python, CPU dependencies and FFmpeg
         run: |
-          $env:HMONG_BASE = Join-Path $env:RUNNER_TEMP 'hmong-base/Voice-Studio-Hmong-1.5.2'
+          $env:HMONG_BASE = Join-Path $env:RUNNER_TEMP 'hmong-base/Voice-Studio-Hmong-1.5.3'
           "HMONG_BASE=$env:HMONG_BASE" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           $downloads = Join-Path $env:RUNNER_TEMP 'hmong-download'
           New-Item -ItemType Directory -Force $downloads | Out-Null
-          $archive = Join-Path $downloads 'Voice-Studio-Hmong-1.5.2-Windows-x64.zip'
+          $archive = Join-Path $downloads 'Voice-Studio-Hmong-1.5.3-Windows-x64.zip'
           if (-not (Test-Path $archive)) {
-            Invoke-WebRequest 'https://github.com/seotro95/seotro/releases/download/voice-studio-hmong-1.5.2/Voice-Studio-Hmong-1.5.2-Windows-x64.zip' -OutFile $archive
+            Invoke-WebRequest 'https://github.com/seotro95/seotro/releases/download/voice-studio-hmong-1.5.3/Voice-Studio-Hmong-1.5.3-Windows-x64.zip' -OutFile $archive
           }
-          if ((Get-Item $archive).Length -ne 1191107515) { throw 'Pinned runtime archive size differs; do not execute it.' }
+          if ((Get-Item $archive).Length -ne 1191118663) { throw 'Pinned runtime archive size differs; do not execute it.' }
           $digest = (Get-FileHash -Algorithm SHA256 $archive).Hash.ToLowerInvariant()
-          if ($digest -ne 'c392815cadf3ee432ba111e414e38f3a7f66f82b4092378d3c9154104c5b8634') { throw 'Pinned runtime SHA256 differs; do not execute it.' }
+          if ($digest -ne '5f88163dbfc79271ea2826fc3f3c82b17c799963b4ceaebc373b6e34bc0b5519') { throw 'Pinned runtime SHA256 differs; do not execute it.' }
           Expand-Archive -LiteralPath $archive -DestinationPath (Join-Path $env:RUNNER_TEMP 'hmong-base')
           Join-Path $env:HMONG_BASE 'runtime' | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
           Join-Path $env:HMONG_BASE 'ffmpeg/bin' | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
@@ -120,19 +120,23 @@ jobs:
       - name: Check Hmong routing and portable packaging
         working-directory: voice-studio
         run: |
-          python packaging/ci_checked.py python -m pytest tests/test_hmong_native.py tests/test_prepare_hmong_native.py tests/test_hmong_native_integration.py tests/test_hmong_variant.py tests/test_hmong_reference.py tests/test_hmong_default_replacement.py tests/test_hmong_packaging.py tests/test_hmong_patch.py tests/test_hmong_startup.py tests/test_hmong_text.py tests/test_hmong_inference_contract.py tests/test_hmong_narration.py tests/test_hmong_expression.py tests/test_hmong_context.py tests/test_hmong_throughput.py tests/test_hmong_acceleration.py tests/test_hmong_resume_exports.py tests/test_hmong_ui.py tests/test_portable_launcher.py tests/test_runtime_instance.py tests/test_runtime_instance_integration.py tests/test_launch_setup.py -q
+          python packaging/ci_checked.py python -m pytest tests/test_hmong_native.py tests/test_prepare_hmong_native.py tests/test_hmong_native_integration.py tests/test_hmong_variant.py tests/test_hmong_reference.py tests/test_hmong_default_replacement.py tests/test_hmong_packaging.py tests/test_hmong_patch.py tests/test_hmong_startup.py tests/test_hmong_text.py tests/test_hmong_inference_contract.py tests/test_hmong_narration.py tests/test_hmong_expression.py tests/test_hmong_context.py tests/test_hmong_throughput.py tests/test_hmong_acceleration.py tests/test_hmong_resume_exports.py tests/test_hmong_ui.py tests/test_character_cast.py tests/test_longform_chapters.py tests/test_hmong_features_api.py tests/test_longform_ui.py tests/test_character_ui.py tests/test_reference_quality.py tests/test_portable_launcher.py tests/test_runtime_instance.py tests/test_runtime_instance_integration.py tests/test_launch_setup.py -q
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node --check static/app.js
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node --check static/workspace.js
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node --check static/video-editor.js
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node --check static/direct-video.js
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Build and synthesize with the relocated Windows runtime
         run: |
-          python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --output '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.5.3' --reports '${{ runner.temp }}/hmong-reports' --runtime-source "$env:HMONG_BASE/runtime" --ffmpeg-source "$env:HMONG_BASE/ffmpeg"
+          python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --output '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.0' --reports '${{ runner.temp }}/hmong-reports' --runtime-source "$env:HMONG_BASE/runtime" --ffmpeg-source "$env:HMONG_BASE/ffmpeg"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Require real Windows browser results in the single release ZIP
         run: |
-          python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --validate-archive '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.5.3-Windows-x64.zip'
+          python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --validate-archive '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.0-Windows-x64.zip'
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Scan the fresh package with Windows Defender when available
         timeout-minutes: 25
@@ -140,9 +144,9 @@ jobs:
           $scanner = Join-Path $env:ProgramFiles 'Windows Defender/MpCmdRun.exe'
           $report = @{ available = (Test-Path $scanner); scan_passed = $false }
           if ($report.available) {
-            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.5.3'
+            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.0'
             if ($LASTEXITCODE -ne 0) { throw 'Windows Defender did not accept the fresh Hmong directory; do not publish.' }
-            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.5.3-Windows-x64.zip'
+            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.0-Windows-x64.zip'
             if ($LASTEXITCODE -ne 0) { throw 'Windows Defender did not accept the Hmong archive; do not publish.' }
             $report.scan_passed = $true
           } else { Write-Warning 'Windows Defender command-line scanner is unavailable on this runner; no antivirus result is claimed.' }
@@ -152,12 +156,12 @@ jobs:
         uses: actions/upload-artifact@v4
         continue-on-error: true
         with:
-          name: Voice-Studio-Hmong-1.5.3-native-windows
+          name: Voice-Studio-Hmong-1.6.0-native-windows
           compression-level: 0
           retention-days: 7
           path: |
-            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.5.3-Windows-x64.zip
-            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.5.3-Windows-x64.zip.sha256
+            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.0-Windows-x64.zip
+            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.0-Windows-x64.zip.sha256
             ${{ runner.temp }}/hmong-reports/*.json
             ${{ runner.temp }}/hmong-reports/Hmong-female-2-preview.mp3
             ${{ runner.temp }}/hmong-reports/Hmong-male-2-preview.mp3
@@ -169,7 +173,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           $release = $releases | Where-Object { $_.tag_name -eq $env:RELEASE_TAG }
           if (-not $release -or -not $release.draft) { throw 'The separate Hmong draft release is missing or was published elsewhere.' }
-          $zip = '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.5.3-Windows-x64.zip'
+          $zip = '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.0-Windows-x64.zip'
           python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --validate-archive $zip
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           $size = (Get-Item $zip).Length
@@ -177,15 +181,19 @@ jobs:
           $digest = (Get-FileHash -Algorithm SHA256 $zip).Hash.ToLowerInvariant()
           $notes = Join-Path $env:RUNNER_TEMP 'hmong-release-notes.md'
           @"
-          **Chỉ tải một tệp:** [Voice-Studio-Hmong-1.5.3-Windows-x64.zip](https://github.com/$env:GH_REPO/releases/download/$env:RELEASE_TAG/Voice-Studio-Hmong-1.5.3-Windows-x64.zip). Giải nén toàn bộ rồi mở **MO_VOICE_STUDIO_HMONG.bat**.
+          **Chỉ tải một tệp:** [Voice-Studio-Hmong-1.6.0-Windows-x64.zip](https://github.com/$env:GH_REPO/releases/download/$env:RELEASE_TAG/Voice-Studio-Hmong-1.6.0-Windows-x64.zip). Giải nén toàn bộ rồi mở **MO_VOICE_STUDIO_HMONG.bat**.
 
           Tệp mở chính chọn bộ nhanh Hmong VITS + OpenVoice V2, khắc phục việc người dùng vô tình mở F5 chậm hơn. Chỉ có một tệp BAT ở ngoài cùng. F5 16 bước FP32 vẫn được giữ trong tools/MO_F5_HMONG.bat để đối chiếu; các công cụ kiểm tra và CUDA cũng ở tools.
 
-          Đã sửa chọn Giọng Nam/Giọng Nữ: có nút chọn trực tiếp, đồng bộ giữa phần tạo giọng và xưởng video. Chọn giọng mẫu từ thư viện tự bỏ lọc giọng nhân bản để tiếp tục tạo giọng. Quy trình Windows bắt buộc mở trình duyệt thật, bấm các lựa chọn nam/nữ, kiểm tra POST cùng giọng và dấu vân tay mẫu trong tác vụ, rồi tạo và đọc âm thanh thật ở cả phần chính và xưởng video; có kiểm tra câu chứa dấu gạch nối. Báo cáo browser-smoke.json nằm trong reports của ZIP.
+          Nhập tối đa 1.000.000 ký tự, lập chương/phần tự động và xuất ZIP các phần WAV/MP3 kèm TXT/SRT và manifest. Giới hạn nhập không phải cam kết tạo xong một triệu ký tự trong một thời gian cố định. SRT hỗ trợ gán giọng Hmong theo từng nhân vật/cue, giữ tên nhân vật riêng với lời đọc. Bộ nhanh dùng lại tối đa 16 mẫu tham chiếu gần nhất trong RAM để giảm việc tính lại khi đổi giọng.
+
+          Chuẩn hóa âm lượng giới hạn khuếch đại theo đỉnh tín hiệu để tránh tự tạo đỉnh bị cắt phẳng. Khi lưu mẫu, tool có chỉ dẫn về tín hiệu để chọn đoạn rõ; đây không phải điểm độ giống giọng hoặc bằng chứng mọi giọng sẽ rõ hơn.
+
+          Giữ nút chọn Nam/Nữ đồng bộ giữa phần tạo giọng và xưởng video, khôi phục lựa chọn giọng mẫu sau bộ lọc cá nhân và giữ chữ Hmong có dấu gạch nối. Quy trình Windows bắt buộc dùng trình duyệt thật, kiểm tra POST và dấu vân tay mẫu, tạo/đọc/tải âm thanh thật, cùng kiểm tra chức năng chia phần và phân vai. Báo cáo browser-smoke.json nằm trong reports của ZIP.
 
           Giữ hai giọng mẫu nam/nữ cuối cùng do bạn gửi, nhân bản từ mẫu, kể chuyện/biểu cảm, nhập TXT/SRT và xuất WAV/MP3/TXT/SRT. Giữ bản sửa lỗi khởi động trùng: mở lần hai dùng lại đúng máy chủ mà không ngắt tác vụ đang tạo giọng. Đã tạo âm thanh thật bằng cả bộ nhanh và F5 với Python đóng gói sau khi chuyển thư mục có dấu cách; thử trực tiếp các BAT bằng cmd.exe.
 
-          **Tốc độ một giờ voice trong hai phút (30×) vẫn chưa đạt; phát âm và độ giống giọng chưa được người nghe xác nhận.** Sửa đường mở mặc định không chứng minh chất lượng phát âm. Biểu cảm hiện dùng xử lý nhịp/âm lượng giữ cao độ, chưa phải mô hình điều khiển cảm xúc thần kinh. Phép đo loại khoảng lặng tool chèn thêm; đoạn thử ngắn không xác nhận tốc độ một giờ. Có gắn WavMark cho đoạn đủ dài, chưa chứng nhận phát hiện sau nén MP3.
+          **Tốc độ một giờ voice trong hai phút (30×) vẫn chưa đạt; không bảo đảm nhân bản giống 100%.** Giữ nguyên bộ phát âm Hmong bạn đã xác nhận. Thay đổi lần này không huấn luyện model âm học mới hoặc chứng minh độ giống giọng tốt hơn. Biểu cảm hiện dùng xử lý nhịp/âm lượng giữ cao độ, chưa phải mô hình điều khiển cảm xúc thần kinh. Phép đo loại khoảng lặng tool chèn thêm; đoạn thử ngắn không xác nhận tốc độ một giờ. Có gắn WavMark cho đoạn đủ dài, chưa chứng nhận phát hiện sau nén MP3.
 
           Đã kèm Python, thư viện CPU, FFmpeg và hai bản thu tham chiếu. Không cần API key hay cài Python hệ thống. Lần đầu bộ nhanh tải khoảng 580 MB mô hình cố định revision/SHA256; F5 tùy chọn cần khoảng 1,4 GB riêng. Chuẩn bị xong có thể dùng ngoại tuyến. Chưa kiểm thử suy luận CUDA hoặc tốc độ GPU.
 
@@ -205,10 +213,10 @@ jobs:
           if ($uploaded.Count -ne 1) { throw 'This release must expose exactly one full Windows ZIP.' }
           $asset = $uploaded[0]
           if ($asset.name -ne (Split-Path -Leaf $zip) -or $asset.size -ne $size -or $asset.digest -ne "sha256:$digest") { throw 'The only uploaded ZIP differs from the validated archive.' }
-          gh release edit $env:RELEASE_TAG --repo $env:GH_REPO --draft=false --prerelease=true --latest=false --target $env:GITHUB_SHA --title 'Voice Studio Hmong 1.5.3 — một gói Windows x64' --notes-file $notes
+          gh release edit $env:RELEASE_TAG --repo $env:GH_REPO --draft=false --prerelease=true --latest=false --target $env:GITHUB_SHA --title 'Voice Studio Hmong 1.6.0 — một gói Windows x64' --notes-file $notes
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           "Published one checked Hmong ZIP ($size bytes), SHA256: $digest" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
-      - name: Archive and remove the superseded Hmong 1.5.1 release
+      - name: Archive and remove the superseded Hmong 1.5.2 release
         id: cleanup
         continue-on-error: true
         env:
@@ -218,12 +226,12 @@ jobs:
           $failures = @()
           $guardPassed = $false
           try {
-            if ($env:RELEASE_TAG -ne 'voice-studio-hmong-1.5.3') { throw 'Cleanup is restricted to the checked 1.5.3 publication.' }
+            if ($env:RELEASE_TAG -ne 'voice-studio-hmong-1.6.0') { throw 'Cleanup is restricted to the checked 1.6.0 publication.' }
             $published = gh api "repos/$env:GH_REPO/releases/tags/$env:RELEASE_TAG" | ConvertFrom-Json
             if ($LASTEXITCODE -ne 0) { throw 'Cannot verify the new public release; leave old releases untouched.' }
             if ($published.draft -or $published.tag_name -ne $env:RELEASE_TAG) { throw 'The replacement release is not public.' }
             if (@($published.assets).Count -ne 1) { throw 'The replacement release must expose exactly one validated ZIP.' }
-            $checkedArchives = @('${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.5.3-Windows-x64.zip')
+            $checkedArchives = @('${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.0-Windows-x64.zip')
             foreach ($path in $checkedArchives) {
               $expected = (Get-FileHash -Algorithm SHA256 $path).Hash.ToLowerInvariant()
               $assets = @($published.assets | Where-Object { $_.name -eq (Split-Path -Leaf $path) })
@@ -233,20 +241,22 @@ jobs:
             $pages = gh api --paginate --slurp "repos/$env:GH_REPO/releases?per_page=100" | ConvertFrom-Json
             if ($LASTEXITCODE -ne 0) { throw 'Cannot archive the release metadata; leave old releases untouched.' }
             $releases = @(foreach ($page in $pages) { foreach ($entry in $page) { $entry } })
-            $obsolete = @($releases | Where-Object { $_.tag_name -match '^voice-studio-hmong-1\.5\.1$' })
+            $obsolete = @($releases | Where-Object { $_.tag_name -match '^voice-studio-hmong-1\.5\.2$' })
             ConvertTo-Json -InputObject $obsolete -Depth 100 | Set-Content -Encoding utf8 '${{ runner.temp }}/hmong-reports/obsolete-releases.json'
-            $base = @($releases | Where-Object { $_.tag_name -eq 'voice-studio-hmong-1.5.2' })
-            if ($base.Count -ne 1) { throw 'The pinned 1.5.2 runtime release must remain available.' }
+            $base = @($releases | Where-Object { $_.tag_name -eq 'voice-studio-hmong-1.5.3' })
+            if ($base.Count -ne 1) { throw 'The pinned 1.5.3 runtime release must remain available.' }
+            $baseAssets = @($base[0].assets | Where-Object { $_.name -eq 'Voice-Studio-Hmong-1.5.3-Windows-x64.zip' })
+            if ($base[0].draft -or $baseAssets.Count -ne 1 -or $baseAssets[0].size -ne 1191118663 -or $baseAssets[0].digest -ne 'sha256:5f88163dbfc79271ea2826fc3f3c82b17c799963b4ceaebc373b6e34bc0b5519') { throw 'The pinned public 1.5.3 runtime ZIP must remain available unchanged; leave obsolete releases untouched.' }
             ConvertTo-Json -InputObject $base[0] -Depth 100 | Set-Content -Encoding utf8 '${{ runner.temp }}/hmong-reports/retained-base-release.json'
-            $notice = "**Bản đang dùng: [Voice Studio Hmong 1.5.3](https://github.com/$env:GH_REPO/releases/tag/voice-studio-hmong-1.5.3).** Bản 1.5.2 chỉ được giữ làm bộ chạy nền có SHA256 cố định cho quy trình đóng gói; hãy tải bản sửa lỗi 1.5.3 để sử dụng."
+            $notice = "**Bản đang dùng: [Voice Studio Hmong 1.6.0](https://github.com/$env:GH_REPO/releases/tag/voice-studio-hmong-1.6.0).** Bản 1.5.3 chỉ được giữ làm bộ chạy nền có SHA256 cố định cho quy trình đóng gói; hãy tải bản sửa lỗi 1.6.0 để sử dụng."
             $body = [string]$base[0].body
             if (-not $body.StartsWith($notice)) { $body = $notice + [Environment]::NewLine + [Environment]::NewLine + $body }
-            $baseNotes = Join-Path $env:RUNNER_TEMP 'hmong-1.5.2-archive-notes.md'
+            $baseNotes = Join-Path $env:RUNNER_TEMP 'hmong-1.5.3-archive-notes.md'
             $body | Set-Content -Encoding utf8 $baseNotes
-            gh release edit voice-studio-hmong-1.5.2 --repo $env:GH_REPO --latest=false --title 'Voice Studio Hmong 1.5.2 — lưu trữ bộ chạy' --notes-file $baseNotes
+            gh release edit voice-studio-hmong-1.5.3 --repo $env:GH_REPO --latest=false --title 'Voice Studio Hmong 1.5.3 — lưu trữ bộ chạy' --notes-file $baseNotes
             if ($LASTEXITCODE -ne 0) { throw 'Could not identify the retained runtime archive clearly; obsolete release cleanup was not started.' }
             foreach ($entry in $obsolete) {
-              if ($entry.tag_name -notmatch '^voice-studio-hmong-1\.5\.1$') { throw 'Refuse deletion outside the superseded Hmong 1.5.1 release.' }
+              if ($entry.tag_name -notmatch '^voice-studio-hmong-1\.5\.2$') { throw 'Refuse deletion outside the superseded Hmong 1.5.2 release.' }
               # The release endpoint removes release assets, never Git tags or branches.
               gh api --method DELETE "repos/$env:GH_REPO/releases/$($entry.id)"
               if ($LASTEXITCODE -ne 0) { $failures += "Could not remove release $($entry.tag_name)" }
@@ -255,18 +265,18 @@ jobs:
             if ($failures.Count -gt 0) { throw 'Some obsolete releases could not be removed; see the retained cleanup report.' }
           } catch {
             $failures += $_.Exception.Message
-            Write-Warning 'The checked 1.5.3 release remains published; obsolete release cleanup is incomplete.'
+            Write-Warning 'The checked 1.6.0 release remains published; obsolete release cleanup is incomplete.'
             throw
           } finally {
-            @{ checked_1_5_3_public_assets = $guardPassed; removed_release_tags = $removed; retained_runtime_release = 'voice-studio-hmong-1.5.2'; git_tags_or_branches_deleted = $false; failures = $failures } | ConvertTo-Json -Depth 10 | Set-Content -Encoding utf8 '${{ runner.temp }}/hmong-reports/release-cleanup.json'
-            "Obsolete Hmong releases removed: $($removed -join ', '). Cleanup failures: $($failures.Count). The checked 1.5.3 release remains published; 1.5.2 is retained as the pinned runtime archive." | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
+            @{ checked_1_6_0_public_assets = $guardPassed; removed_release_tags = $removed; retained_runtime_release = 'voice-studio-hmong-1.5.3'; git_tags_or_branches_deleted = $false; failures = $failures } | ConvertTo-Json -Depth 10 | Set-Content -Encoding utf8 '${{ runner.temp }}/hmong-reports/release-cleanup.json'
+            "Obsolete Hmong releases removed: $($removed -join ', '). Cleanup failures: $($failures.Count). The checked 1.6.0 release remains published; 1.5.3 is retained as the pinned runtime archive." | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
           }
       - name: Retain obsolete release metadata and cleanup results
         if: always() && steps.cleanup.outcome != 'skipped'
         uses: actions/upload-artifact@v4
         continue-on-error: true
         with:
-          name: Voice-Studio-Hmong-1.5.3-release-cleanup
+          name: Voice-Studio-Hmong-1.6.0-release-cleanup
           retention-days: 90
           path: |
             ${{ runner.temp }}/hmong-reports/obsolete-releases.json

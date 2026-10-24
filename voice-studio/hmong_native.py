@@ -8,9 +8,11 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import io
 import json
 import math
 import os
+from collections import OrderedDict
 from pathlib import Path
 import threading
 from types import SimpleNamespace
@@ -22,6 +24,7 @@ from hmong_native_vendor.vits.symbols import symbols
 
 MAX_SECONDS = 120
 SAMPLE_RATE = 22050
+REFERENCE_CACHE_SIZE = 16
 _SYMBOL_IDS = {symbol: index for index, symbol in enumerate(symbols)}
 _INPUT_SYMBOLS = frozenset(_SYMBOL_IDS) - {'_'}
 
@@ -62,12 +65,13 @@ def availability():
 
 
 class SpeechEngine:
-    """Reuse a single native model set and one exact reference embedding."""
+    """Reuse a native model set and bounded exact reference embeddings."""
 
     def __init__(self):
         self._lock = threading.Lock()
         self._model = self._model_key = None
         self._reference = self._reference_key = None
+        self._reference_cache = OrderedDict()
         self._progress_callback = None
         self.device = None
 
@@ -98,6 +102,7 @@ class SpeechEngine:
             return self._model
         self._model = self._model_key = None
         self._reference = self._reference_key = None
+        self._reference_cache.clear()
         import gc
         gc.collect()
         if torch.cuda.is_available():
@@ -144,14 +149,19 @@ class SpeechEngine:
         path = Path(path)
         _reference_identity(path, words)  # Existing 3–8s mono PCM16 24k contract.
         identity = _file_fingerprint(path, path.stat())
-        digest = hashlib.sha256(path.read_bytes()).hexdigest()
-        key = (str(path.resolve()), identity, digest, words)
-        if self._reference_key != key:
+        content = path.read_bytes()
+        digest = hashlib.sha256(content).hexdigest()
+        key = (self._model_key, str(path.resolve()), identity, digest, words)
+        if key in self._reference_cache:
+            self._reference_cache.move_to_end(key)
+            self._reference = self._reference_cache[key]
+        else:
             import numpy as np
             import soundfile as sf
             import soxr
             import torch
-            samples, rate = sf.read(path, dtype='float32', always_2d=True)
+            # Decode exactly the bytes identified above, even if the file changes.
+            samples, rate = sf.read(io.BytesIO(content), dtype='float32', always_2d=True)
             samples = samples.mean(axis=1)
             if not np.isfinite(samples).all() or float(np.mean(samples ** 2)) < 1e-12:
                 raise EngineError('Đoạn mẫu chỉ có im lặng hoặc dữ liệu không hợp lệ. Chọn đoạn có tiếng nói.')
@@ -159,7 +169,10 @@ class SpeechEngine:
                 samples = soxr.resample(samples, rate, SAMPLE_RATE, quality='HQ')
             tensor = torch.from_numpy(np.ascontiguousarray(samples)).unsqueeze(0).to(self.device)
             self._reference = model.converter.ref_enc(self._spectrogram(tensor, model).transpose(1, 2)).unsqueeze(-1)
-            self._reference_key = key
+            self._reference_cache[key] = self._reference
+            if len(self._reference_cache) > REFERENCE_CACHE_SIZE:
+                self._reference_cache.popitem(last=False)
+        self._reference_key = key
         return self._reference
 
     def synthesize(self, text, reference_path, reference_text, speed=1.0, quality='fast'):

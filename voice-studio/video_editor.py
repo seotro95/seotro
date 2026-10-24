@@ -8,6 +8,7 @@ def validate_cues(cues, duration):
     if not cues or len(cues)>10000:
         raise ValueError('Cần 1–10.000 câu phụ đề.')
     normalized=[]
+    ids=set()
     for cue in cues:
         start,end=float(cue['start']),float(cue['end'])
         text=cue['text'].strip()
@@ -15,12 +16,24 @@ def validate_cues(cues, duration):
             raise ValueError('Mỗi câu cần thời điểm bắt đầu nhỏ hơn kết thúc và nằm trong video.')
         if not text or len(text)>4000:
             raise ValueError('Mỗi câu cần nội dung, tối đa 4.000 ký tự.')
-        normalized.append({'start':round(start,3),'end':round(end,3),'text':text})
+        row={'start':round(start,3),'end':round(end,3),'text':text}
+        for key in ('id','character_id'):
+            value=cue.get(key)
+            if value is not None:
+                if not isinstance(value,str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,64}',value):
+                    raise ValueError('Mã câu hoặc nhân vật không hợp lệ.')
+                row[key]=value
+        if row.get('id') in ids:
+            raise ValueError('Mỗi câu cần mã riêng, không trùng lặp.')
+        if row.get('id'):ids.add(row['id'])
+        normalized.append(row)
     if any(c['start']<normalized[i-1]['end'] for i,c in enumerate(normalized) if i):
         raise ValueError('Các câu phải theo thứ tự và không chồng mốc thời gian.')
     if sum(len(c['text']) for c in normalized)>200000:
         raise ValueError('Phụ đề tối đa 200.000 ký tự.')
-    return parse_srt(export_srt(normalized))
+    cleaned=parse_srt(export_srt(normalized))
+    return [{**cue,**{key:row[key] for key in ('id','character_id') if key in row}}
+            for cue,row in zip(cleaned,normalized)]
 
 
 def ass_text(text):

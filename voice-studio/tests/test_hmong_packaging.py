@@ -22,7 +22,8 @@ spec.loader.exec_module(packaging)
 
 def source_fixture(root):
     root.mkdir()
-    for name in ('app.py', 'worker.py', 'bundle_check.py', 'runtime_instance.py', 'hmong_acceleration.py',
+    for name in ('app.py', 'worker.py', 'bundle_check.py', 'runtime_instance.py',
+                 'character_cast.py', 'longform.py', 'reference_quality.py', 'hmong_acceleration.py',
                  'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py',
                  'hmong_native.py', 'hmong_native_models.py', 'prepare_hmong_native.py',
                  'hmong_reference.py', 'hmong_text.py', 'hmong_assets.py', 'prepare_hmong.py',
@@ -88,7 +89,7 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
 
 
 def test_archive_has_valid_crc_and_matching_sha256(tmp_path):
-    root = tmp_path / 'Voice-Studio-Hmong-1.5.3'
+    root = tmp_path / 'Voice-Studio-Hmong-1.6.0'
     root.mkdir()
     (root / 'hello.txt').write_bytes(b'relocatable')
     archive = tmp_path / 'bundle.zip'
@@ -180,7 +181,31 @@ def browser_report_fixture():
             'browser': {'channel': 'msedge', 'version': '142.0', 'responses_mocked': False},
             'script_sha256': hashlib.sha256((PACKAGING / 'browser_hmong_portable.py').read_bytes().replace(b'\r\n', b'\n')).hexdigest(),
             'expected_reference_fingerprints': expected,
+            'features_1_6': {'longform': {'success': True, 'million_character_editor': True,
+                'million_character_synthesis_performed': False, 'real_archive': True,
+                'chapter_selection': True, 'audio_playback_checked': True, 'download_verified': True,
+                'archive_job_id': 'chapter-qa', 'archive_sha256': 'c' * 64, 'completed_chapters': 2},
+                'character_cast': {'success': True, 'real_ui_post': True,
+                    'reference_identities_verified': True, 'character_names_not_spoken': True,
+                    'download_verified': True, 'status': 'done', 'voice_ids': ['hmong-male', 'hmong-female'],
+                    'cue_count': 2, 'job_id': 'cast-qa', 'audio_bytes': 48044, 'audio_seconds': 1,
+                    'sample_rate': 24000, 'peak_amplitude': .2, 'sha256': 'd' * 64}},
             'voices': {'hmong-male': cases[0], 'hmong-female': cases[1]}, 'cases': cases}
+
+
+def native_feature_fixture():
+    return {'platform': 'win32', 'native_windows_validation': True, 'reference_cache_limit': 16,
+        'reference_quality_advisories': True, 'longform': {'success': True,
+            'oversize_rejected': True, 'plan_preserved_all_segments': True,
+            'real_synthesis': True, 'short_sample_plan_injected': True,
+            'archive_contents_verified': True, 'chapter_routes_verified': True,
+            'accepted_characters': 1_000_000, 'million_character_synthesis_performed': False,
+            'planned_chapters': 101, 'completed_chapters': 2, 'sample_characters': 56,
+            'archive_sha256': 'c' * 64, 'job_id': 'chapter-qa'},
+        'character_cast': {'success': True, 'real_synthesis': True,
+            'reference_identities_verified': True, 'original_srt_preserved': True,
+            'voice_ids': ['hmong-male', 'hmong-female'], 'cue_characters': ['narrator', 'guest'],
+            'audio_seconds': 24}}
 
 
 def test_windows_browser_gate_accepts_all_actual_ui_synthesis_cases():
@@ -190,7 +215,8 @@ def test_windows_browser_gate_accepts_all_actual_ui_synthesis_cases():
 
 @pytest.mark.parametrize('failure', ['linux', 'skipped', 'library', 'workspace', 'speaker',
                                     'reference', 'missing_case', 'wrong_case', 'silent_audio',
-                                    'no_playback', 'stale_script', 'hyphen_text'])
+                                    'no_playback', 'stale_script', 'hyphen_text',
+                                    'no_chapter_download', 'no_million_editor', 'no_cast_routing'])
 def test_windows_browser_gate_rejects_incomplete_or_wrong_voice_evidence(failure):
     report = copy.deepcopy(browser_report_fixture())
     if failure == 'linux':
@@ -215,11 +241,35 @@ def test_windows_browser_gate_rejects_incomplete_or_wrong_voice_evidence(failure
         report['cases'][0]['audio_playback_checked'] = False
     elif failure == 'stale_script':
         report['script_sha256'] = 'b' * 64
+    elif failure == 'no_chapter_download':
+        report['features_1_6']['longform']['download_verified'] = False
+    elif failure == 'no_million_editor':
+        report['features_1_6']['longform']['million_character_editor'] = False
+    elif failure == 'no_cast_routing':
+        report['features_1_6']['character_cast']['reference_identities_verified'] = False
     else:
         for case in report['cases']:
             case['text'] = 'Nyob zoo.'
     with pytest.raises(ValueError):
         packaging.validate_browser_report(report)
+
+
+@pytest.mark.parametrize('failure', ['cache', 'missing', 'pretend_full_synthesis', 'no_real_speech', 'no_reference'])
+def test_native_feature_gate_rejects_incomplete_or_misleading_evidence(failure):
+    report = native_feature_fixture()
+    assert packaging.validate_native_feature_report(report) is report
+    if failure == 'cache':
+        report['reference_cache_limit'] = 1
+    elif failure == 'missing':
+        report.pop('longform')
+    elif failure == 'pretend_full_synthesis':
+        report['longform']['million_character_synthesis_performed'] = True
+    elif failure == 'no_real_speech':
+        report['longform']['real_synthesis'] = False
+    else:
+        report['character_cast']['reference_identities_verified'] = False
+    with pytest.raises(ValueError):
+        packaging.validate_native_feature_report(report)
 
 
 def test_publication_gate_reads_mandatory_browser_evidence_from_the_zip(tmp_path):
@@ -230,11 +280,15 @@ def test_publication_gate_reads_mandatory_browser_evidence_from_the_zip(tmp_path
     reports.mkdir()
     files = {'BUILD.json': {'version': packaging.VERSION, 'windows_browser_validation': True},
              'reports/browser-smoke.json': report,
-             'reports/native-smoke.json': {'success': True, 'main_launcher': {
+             'reports/native-smoke.json': {**native_feature_fixture(), 'success': True, 'main_launcher': {
                  'browser_ui': report, 'second_launch_reused': True, 'active_job_preserved': True}},
              'reports/f5-smoke.json': {'success': True, 'advanced_f5_launcher': {'second_launch_reused': True}}}
     for name, value in files.items():
         (root / name).write_text(json.dumps(value), encoding='utf-8')
+    for module in ('character_cast.py', 'longform.py', 'reference_quality.py'):
+        path = root / 'voice-studio-hmong' / module
+        path.parent.mkdir(exist_ok=True)
+        path.write_text('# required release source\n', encoding='utf-8')
     for name in ('Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3'):
         (reports / name).write_bytes(b'ID3' + b'x' * 1200)
     # The pinned Python runtime contains standard BAT files of its own.
@@ -336,7 +390,8 @@ def test_native_vendor_requires_pinned_code_and_licenses_and_rejects_unapproved_
 
 @pytest.mark.parametrize('name', ['bundle_check.py', 'hmong_text.py', 'hmong_expression.py',
                                  'hmong_acceleration.py', 'hmong_native.py', 'hmong_native_models.py',
-                                 'prepare_hmong_native.py', 'runtime_instance.py'])
+                                 'prepare_hmong_native.py', 'runtime_instance.py',
+                                 'character_cast.py', 'longform.py', 'reference_quality.py'])
 def test_source_copy_rejects_missing_new_runtime_modules(tmp_path, name):
     source = tmp_path / 'source'
     source_fixture(source)
@@ -349,7 +404,7 @@ def test_native_smoke_probes_primary_and_every_advanced_batch(tmp_path, monkeypa
     spec = importlib.util.spec_from_file_location('smoke_hmong', PACKAGING / 'smoke_hmong_portable.py')
     smoke = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(smoke)
-    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.5.3'
+    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.6.0'
     root.mkdir(parents=True)
     packaging.write_launcher(root)
     calls = []
@@ -395,7 +450,7 @@ def test_windows_launcher_smoke_checks_reuse_and_only_cleans_up_its_first_proces
     url = 'http://127.0.0.1:8770'
     engine = 'hmong_native' if backend == 'native' else 'f5_hmong'
     instance = {'instance_id': 'qa-server', 'pid': 102, 'url': url, 'data_id': 'qa-data',
-                'root_id': 'qa-root', 'backend': engine, 'version': '1.5.3-hmong'}
+                'root_id': 'qa-root', 'backend': engine, 'version': '1.6.0-hmong'}
     process = SimpleNamespace(pid=101, stdout=io.StringIO('Studio: ' + url + '\n'),
                               poll=lambda: None, wait=lambda **kwargs: 0)
     server = SimpleNamespace(is_running=lambda: True, parents=lambda: [SimpleNamespace(pid=101)])

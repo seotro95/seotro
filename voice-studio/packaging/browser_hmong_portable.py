@@ -18,6 +18,7 @@ import sys
 import time
 from urllib.parse import urlparse
 import wave
+import zipfile
 
 
 MALE = 'hmong-male'
@@ -25,6 +26,118 @@ FEMALE = 'hmong-female'
 REPORT_NAME = 'browser-smoke.json'
 HYPHENATED_SAMPLE = 'Nyob-zoo, kuv yog ib tug Hmoob.'
 SAMPLE = 'Nyob zoo. Ua tsaug rau koj mloog.'
+
+
+def check_release_features(page, context, get_json, expect, tab, references):
+    """Use the actual editor, cast controls and completed chapter deliverable."""
+    tab('create')
+    script = page.locator('#script')
+    expect(script).to_have_attribute('maxlength', '1000000')
+    original = script.input_value()
+    million = ('Nyob zoo. ' * 100001)[:1_000_000]
+    script.fill(million)
+    assert len(script.input_value()) == 1_000_000
+    expect(page.locator('#longform-note')).to_be_visible()
+    script.fill(original)
+
+    completed = [job for job in get_json('/api/history')['items']
+                 if job.get('qa_release_longform') and job.get('status') == 'done']
+    assert len(completed) == 1, 'Native QA must leave one real two-part deliverable for browser validation'
+    long_job = completed[0]
+    assert long_job['chapter_count'] == 2 and long_job['longform'] is True
+    tab('history')
+    archive_link = page.locator('a[href="/api/jobs/' + long_job['id'] + '/archive"]')
+    expect(archive_link).to_have_count(1)
+    card = page.locator('.history-item').filter(has=archive_link)
+    chapter_select = card.get_by_label('Chọn phần để nghe', exact=True)
+    expect(chapter_select).to_be_visible()
+    chapter_select.select_option('2')
+    audio = card.locator('audio')
+    expect(audio).to_have_attribute('src', '/api/jobs/' + long_job['id'] + '/chapters/2')
+    audio.evaluate('async audio => { audio.muted=true; audio.currentTime=0; await audio.play(); }')
+    page.wait_for_function('id => document.querySelector(`audio[src="/api/jobs/${id}/chapters/2"]`).currentTime > .05',
+                           arg=long_job['id'], timeout=10000)
+    playback = audio.evaluate('audio => { const r={ready_state:audio.readyState,media_error:audio.error?.code??null,current_time:audio.currentTime}; audio.pause(); return r; }')
+    assert playback['ready_state'] >= 2 and playback['media_error'] is None
+    with page.expect_download(timeout=30000) as pending:
+        archive_link.click()
+    download = pending.value
+    assert download.failure() is None and download.suggested_filename.endswith('.zip')
+    archive_bytes = Path(download.path()).read_bytes()
+    with zipfile.ZipFile(io.BytesIO(archive_bytes)) as archive:
+        assert archive.testzip() is None
+        manifest = json.loads(archive.read('manifest.json'))
+        assert manifest['chapter_count'] == 2
+        for chapter in manifest['chapters']:
+            audio_evidence(archive.read(chapter['files']['audio']))
+            assert archive.read(chapter['files']['txt']).strip()
+            assert b'-->' in archive.read(chapter['files']['srt'])
+    longform = {'success': True, 'million_character_editor': True,
+                'million_character_synthesis_performed': False, 'real_archive': True,
+                'chapter_selection': True, 'audio_playback_checked': True,
+                'download_verified': True, 'archive_job_id': long_job['id'],
+                'archive_sha256': hashlib.sha256(archive_bytes).hexdigest(),
+                'completed_chapters': 2}
+
+    tab('dub')
+    videos = [item for item in get_json('/api/videos')['items'] if item['name'] == 'release-cast-qa.mp4']
+    assert len(videos) == 1, 'A real builder-owned cast video is required'
+    page.locator('#dub-existing').select_option(videos[0]['id'])
+    expect(page.locator('#editor-character-add')).to_be_visible()
+    srt = ('1\n00:00:00,000 --> 00:00:12,000\nNyob zoo.\n\n'
+           '2\n00:00:12,000 --> 00:00:24,000\nUa tsaug.\n')
+    page.locator('#editor-project-file').set_input_files({'name': 'release-cast.srt',
+        'mimeType': 'application/x-subrip', 'buffer': srt.encode('utf-8')})
+    expect(page.locator('#editor-cues select[data-cue-character]')).to_have_count(2)
+    character_ids = []
+    for index, ident in enumerate((MALE, FEMALE)):
+        page.locator('#editor-character-add').click()
+        row = page.locator('#editor-character-list .editor-character').nth(index)
+        character = row.get_attribute('data-character-id')
+        assert character
+        row.locator('input').fill('Narrator' if index == 0 else 'Guest')
+        row.locator('select[data-character-voice]').select_option(ident)
+        page.locator('#editor-cues select[data-cue-character]').nth(index).select_option(character)
+        character_ids.append(character)
+    page.locator('#workspace-caption-language').select_option('mww')
+    page.locator('#dub-language').select_option('mww')
+    with page.expect_response(lambda response: urlparse(response.url).path == '/api/speech'
+                              and response.request.method == 'POST', timeout=30000) as pending:
+        page.locator('#workspace-voice').click()
+    response = pending.value
+    payload = response.request.post_data_json
+    assert response.status == 202, response.text()
+    assert payload['character_voices'] == dict(zip(character_ids, (MALE, FEMALE)))
+    assert payload['cue_characters'] == character_ids and payload['input_format'] == 'srt'
+    assert 'Narrator' not in payload['text'] and 'Guest' not in payload['text']
+    ident = response.json()['id']
+    deadline = time.monotonic() + 600
+    while True:
+        job = get_json('/api/jobs/' + ident)
+        if job['status'] not in {'queued', 'running', 'cancelling'}:
+            break
+        assert time.monotonic() < deadline, 'Cast UI speech exceeded ten minutes'
+        page.wait_for_timeout(300)
+    assert job['status'] == 'done' and job['engine'] == 'hmong_native', job
+    cast = job['character_cast']
+    assert cast['cues'] == character_ids
+    for character, voice in zip(character_ids, (MALE, FEMALE)):
+        assert cast['voices'][character]['voice_id'] == cast['voices'][character]['speaker'] == voice
+        assert cast['voices'][character]['hmong_reference_fingerprint'] == references[voice]
+    wav = context.request.get('/api/audio/' + ident)
+    assert wav.ok
+    evidence = audio_evidence(wav.body())
+    expect(page.locator('#workspace-audio')).to_be_visible(timeout=20000)
+    expect(page.locator('#workspace-audio')).to_have_attribute('src', job['url'])
+    with page.expect_download(timeout=30000) as pending:
+        page.locator('#workspace-audio-download').click()
+    downloaded = pending.value
+    assert downloaded.failure() is None
+    assert hashlib.sha256(Path(downloaded.path()).read_bytes()).hexdigest() == evidence['sha256']
+    return {'longform': longform, 'character_cast': {'success': True, 'real_ui_post': True,
+        'job_id': ident, 'status': job['status'], 'voice_ids': [MALE, FEMALE],
+        'reference_identities_verified': True, 'character_names_not_spoken': True,
+        'download_verified': True, 'cue_count': 2, **evidence}}
 
 
 def audio_evidence(content):
@@ -282,6 +395,8 @@ def run(url, reports, expected_references, *, allow_non_windows=False):
             page.locator('#dub-voice').select_option(MALE)
             selected(MALE)
             result['dropdown_selection'] = True
+            result['features_1_6'] = check_release_features(page, context, get_json, expect, tab,
+                                                         expected_references)
             assert not result['page_errors'], result['page_errors']
             assert len(result['cases']) == 4 and set(result['voices']) == {MALE, FEMALE}
             result['real_ui_synthesis'] = True

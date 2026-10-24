@@ -32,6 +32,7 @@ from hardware import supports_int8, system_info
 from performance import speed_report
 from state_io import write_json_atomic,read_progress
 from hmong_assets import HMONG_ENGINES, active_engine as active_hmong_engine
+from character_cast import make_voice_snapshot, validate_cast_request, validate_job_references, cast_voice_ids
 
 BASE = Path(__file__).resolve().parent
 DATA = Path(os.environ.get('VOICE_STUDIO_DATA_DIR', str(BASE / DEFAULT_DATA_FOLDER))).resolve()
@@ -205,7 +206,8 @@ def _config_values():
         return {'variant':'hmong','app_name':APP_NAME,'default_language':'mww','default_voice_id':'hmong-male','version':app.version,'mode':'local',
                 'languages':{'mww':LANGUAGES['mww']},'subtitle_languages':SUBTITLE_LANGUAGES,
                 'recognition_languages':{k:v for k,v in SUBTITLE_LANGUAGES.items() if k.split('-')[0] in RECOGNITION_CODES},
-                'ai_voice_languages':['mww'],'max_characters':MAX_CHARACTERS,'max_audio_minutes':180,
+                'ai_voice_languages':['mww'],'max_characters':1_000_000,'max_audio_minutes':180,
+                'longform':{'enabled':True,'threshold_characters':20000,'part_characters':10000,'output':'zip'},
                 'fast_vieneu':False,'int8_cpu':False,
                 'models':{name:(ready if name == engine else model_ready(name)) for name in HMONG_ENGINES},
                 'hmong_backend':'native' if engine == 'hmong_native' else 'f5','hmong_engine':engine,
@@ -286,6 +288,8 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
         record = {'id': ident, 'name': name.strip(), 'category': 'cloned', 'languages': [language], 'language': language, 'transcript': transcript.strip(), 'description': f'Mẫu giọng cá nhân · {duration:.1f}s', 'duration': duration, 'consent_at': now(), 'created_at': now()}
         if IS_HMONG:
             record.update(engine=active_hmong_engine(), **selection)
+            from reference_quality import analyze_reference
+            record['quality'] = await run_in_threadpool(analyze_reference, target)
         write_json(DATA / 'voices' / f'{ident}.json', record)
         return record
     except (subprocess.TimeoutExpired, FileNotFoundError):
@@ -336,7 +340,7 @@ def voice_sample(ident: str):
 def delete_voice(ident: str):
     valid_id(ident)
     with lock:
-        if any(j['status'] in {'queued', 'running', 'cancelling'} and j.get('voice_id') == ident for j in records('jobs')):
+        if any(j['status'] in {'queued', 'running', 'cancelling'} and ident in cast_voice_ids(j) for j in records('jobs')):
             raise HTTPException(409, 'Giọng đang được dùng trong hàng đợi. Đợi tác vụ hoàn tất trước khi xóa.')
         for suffix in ('.json', '.wav'):
             (DATA / 'voices' / f'{ident}{suffix}').unlink(missing_ok=True)
@@ -347,7 +351,9 @@ class Speech(BaseModel):
     cue_fit: str = Field(default='strict',pattern='^(strict|gap)$')
     timeline_seconds: float = Field(default=10800,gt=0,le=10800)
     caption_style: dict = Field(default_factory=dict)
-    text: str = Field(min_length=1, max_length=MAX_CHARACTERS)
+    text: str = Field(min_length=1, max_length=1_000_000)
+    character_voices: dict[str, str] = Field(default_factory=dict, max_length=32)
+    cue_characters: list[str | None] = Field(default_factory=list, max_length=10000)
     voice_id: str = Field(min_length=1, max_length=128)
     language: str = DEFAULT_LANGUAGE
     speed: float = Field(default=1, ge=0.7, le=1.4)
@@ -450,6 +456,17 @@ def run_job(ident):
         write_json(path, job)
     try:
         env = dict(os.environ, VOICE_STUDIO_DATA_DIR=str(DATA), HF_HOME=str(DATA / 'models' / 'cache'), HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1', OMP_NUM_THREADS=os.environ.get('VOICE_STUDIO_THREADS', '4'), PYTHONUTF8='1')
+        validate_job_references(job, DATA)
+        if job.get('longform'):
+            from longform import run_longform
+            result = run_longform(job, DATA, execute_worker, env, cancelled=shutdown_event.is_set)
+            elapsed = time.monotonic() - processing_started
+            job.update(result)
+            job.update(status='done', url=f'/api/jobs/{ident}/archive', finished_at=now(),
+                       wall_processing_seconds=round(elapsed, 3), speed_report=None)
+            with lock:
+                write_json(path, job)
+            return
         code = execute_worker(path, env, work)
         if code == -2 or (work / 'cancel.flag').exists():
             job.update(status='cancelled', error='Đã dừng. Bạn có thể tiếp tục từ các đoạn đã tạo.')
@@ -470,6 +487,8 @@ def run_job(ident):
                 job['video_url'] = f'/api/dubbed/{ident}'
             elapsed = time.monotonic() - processing_started
             job.update(status='done', url=f'/api/audio/{ident}', finished_at=now(), wall_processing_seconds=round(elapsed, 3), speed_report=None if reused_parts else speed_report(result.get('audio_seconds', 0), elapsed, spoken_audio_seconds=result.get('spoken_audio_seconds')))
+    except InterruptedError as exc:
+        job.update(status='cancelled', error=str(exc))
     except Exception as exc:
         job.update(status='error', error=str(exc))
     with lock:
@@ -478,6 +497,8 @@ def run_job(ident):
 
 @app.post('/api/speech', status_code=202)
 def speech(body: Speech):
+    if len(body.text) > (1_000_000 if IS_HMONG else MAX_CHARACTERS):
+        raise HTTPException(422, 'Văn bản vượt giới hạn ký tự của phiên bản này.')
     if IS_HMONG and body.language != 'mww':
         raise HTTPException(422, 'Bản Hmong chỉ đọc Hmong Trắng; chọn ngôn ngữ mww.')
     if not body.text.strip() or body.language not in LANGUAGES or body.format not in {'wav', 'mp3'} or body.delivery not in PROFILES:
@@ -511,7 +532,11 @@ def speech(body: Speech):
     if engine == 'f5_hmong' and body.hmong_steps not in {4, 8, 16, 32}:
         raise HTTPException(422, 'F5-Hmong chỉ nhận 4, 8, 16 hoặc 32 bước.')
     preset_reference_fingerprint = None
+    voice_snapshot = None
+    character_cast = None
     try:
+        if body.video_id and len(body.text) > MAX_CHARACTERS:
+            raise ValueError('Lồng tiếng video tối đa 200.000 ký tự và 3 giờ. Dùng mục Văn bản thành giọng nói cho sách dài tới 1.000.000 ký tự.')
         segment_plan = ('hmong-expression-v1' if engine in HMONG_ENGINES else
                         'nano-packed-v1' if engine == 'vieneu_nano' and body.paragraph_pause == 0 else 'classic-v1')
         segments = plan_segments({**body.model_dump(), 'engine': engine, 'segment_plan': segment_plan})
@@ -536,6 +561,23 @@ def speech(body: Speech):
             else:
                 reference_text = voice.get('transcript','')
             validate_voice_text(reference_text,engine,'Lời mẫu tham chiếu')
+            voice_snapshot = make_voice_snapshot({**voice, 'engine': engine}, engine, body.language, DATA)
+            preset_reference_fingerprint = voice_snapshot['hmong_reference_fingerprint']
+        if body.character_voices or body.cue_characters:
+            if engine not in HMONG_ENGINES or body.language != 'mww' or body.input_format != 'srt':
+                raise ValueError('Phân vai cần kịch bản SRT Hmong Trắng.')
+            validate_cast_request(body.character_voices, body.cue_characters, len(cues))
+            available = {v['id']: v for v in PRESETS + records('voices')}
+            used = set(body.cue_characters) - {None}
+            snapshots = {}
+            for character in used:
+                profile = available.get(body.character_voices[character])
+                if not profile or profile.get('engine', engine) not in HMONG_ENGINES:
+                    raise ValueError('Không tìm thấy giọng Hmong cho một nhân vật. Chọn lại giọng trước khi tạo.')
+                snapshots[character] = make_voice_snapshot({**profile, 'engine': engine}, engine, body.language, DATA)
+            if snapshots:
+                character_cast = {'version': 1, 'default_voice': make_voice_snapshot({**voice, 'engine': engine}, engine, body.language, DATA),
+                                  'voices': snapshots, 'cues': body.cue_characters}
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from None
     except OSError:
@@ -555,7 +597,13 @@ def speech(body: Speech):
         if sum(j['status'] in {'queued', 'running', 'cancelling'} for j in records('jobs')) >= 4:
             raise HTTPException(429, 'Hàng đợi đã có 4 tác vụ. Hãy đợi trước khi tạo thêm.')
         ident = uuid.uuid4().hex
-        job = {**body.model_dump(), 'text': body.text.strip(), 'id': ident, 'voice_name': voice['name'], 'engine': engine, 'speaker': voice.get('speaker'), 'status': 'queued', 'segment_plan': segment_plan, 'total': len(segments), 'completed': 0, 'progress': 0, 'created_at': now()}
+        job = {**body.model_dump(), 'text': body.text, 'id': ident, 'voice_name': voice['name'], 'engine': engine, 'speaker': voice.get('speaker'), 'status': 'queued', 'segment_plan': segment_plan, 'total': len(segments), 'completed': 0, 'progress': 0, 'created_at': now()}
+        if character_cast:
+            job['character_cast'] = character_cast
+        if voice_snapshot:
+            job['hmong_voice_snapshot'] = voice_snapshot
+        if IS_HMONG and body.input_format == 'txt' and not body.video_id and len(body.text) > 20_000:
+            job['longform'] = True
         if engine == 'hmong_native':
             job.update(hmong_steps=None, hmong_backend='vits_openvoice_v2')
         if preset_reference_fingerprint is not None:
@@ -578,6 +626,8 @@ def get_job(ident: str):
 @app.get('/api/audio/{ident}')
 def audio(ident: str):
     job = get_job(ident)
+    if job.get('longform'):
+        raise HTTPException(422, 'Bản thu dài có nhiều phần. Tải ZIP hoặc chọn một phần để nghe.')
     if job['status'] != 'done':
         raise HTTPException(404, 'Bản thu chưa sẵn sàng.')
     path = DATA / 'audio' / f"{ident}.{job['format']}"
@@ -586,12 +636,38 @@ def audio(ident: str):
     return FileResponse(path, media_type='audio/wav' if job['format'] == 'wav' else 'audio/mpeg', filename=f"voice-studio-{ident[:8]}.{job['format']}", content_disposition_type='inline')
 
 
+@app.get('/api/jobs/{ident}/archive')
+def longform_archive(ident: str):
+    ident=valid_id(ident)
+    job=read_json(DATA/'jobs'/f'{ident}.json')
+    path=DATA/'audio'/f'{ident}.zip'
+    if not job.get('longform') or job['status']!='done' or not path.is_file():
+        raise HTTPException(404, 'ZIP chương chưa sẵn sàng.')
+    return FileResponse(path,media_type='application/zip',filename=f'voice-studio-{ident[:8]}.zip')
+
+
+@app.get('/api/jobs/{ident}/chapters/{index}')
+def longform_chapter(ident: str,index: int):
+    ident=valid_id(ident)
+    job=read_json(DATA/'jobs'/f'{ident}.json')
+    if (not job.get('longform') or job['status']!='done' or index<1
+            or index>len(job.get('chapters',[]))):
+        raise HTTPException(404,'Không tìm thấy chương đã hoàn tất.')
+    extension=job['format']
+    path=DATA/'parts'/ident/'chapters'/f'{index:04d}'/f'audio.{extension}'
+    if not path.is_file():raise HTTPException(404,'Không tìm thấy âm thanh chương.')
+    return FileResponse(path,media_type='audio/wav' if extension=='wav' else 'audio/mpeg',
+                        filename=f'chapter-{index:04d}.{extension}',content_disposition_type='inline')
+
+
 @app.get('/api/jobs/{ident}/export.{extension}')
 def export_voice(ident:str,extension:str):
     if extension not in {'wav','mp3','txt','srt'}:raise HTTPException(422,'Chọn WAV, MP3, TXT hoặc SRT.')
     ident=valid_id(ident)
     job=get_job(ident)
     if job['status']!='done':raise HTTPException(409,'Đợi voice hoàn tất trước khi xuất.')
+    if job.get('longform'):
+        raise HTTPException(422,'Tải ZIP chương để nhận đầy đủ audio, TXT và SRT từng phần.')
     if extension in {'txt','srt'}:
         from fastapi.responses import Response
         timing=DATA/'audio'/f'{ident}.srt'
@@ -634,8 +710,15 @@ def delete_record(ident: str):
         job = get_job(ident)
         if job['status'] in {'queued', 'running', 'cancelling'}:
             raise HTTPException(409, 'Đợi tác vụ hoàn tất trước khi xóa.')
+        plan=DATA/'parts'/ident/'plan.json'
+        if job.get('longform') and plan.is_file():
+            for chapter in read_json(plan).get('chapters',[]):
+                child=valid_id(chapter['id'])
+                shutil.rmtree(DATA/'parts'/child,ignore_errors=True)
+                for suffix in ('wav','mp3','srt'):
+                    (DATA/'audio'/f'{child}.{suffix}').unlink(missing_ok=True)
         shutil.rmtree(DATA / 'parts' / ident, ignore_errors=True)
-        for path in [DATA / 'audio' / f'{ident}.wav', DATA / 'audio' / f'{ident}.mp3', DATA / 'audio' / f'{ident}.mp4', DATA / 'audio' / f'{ident}.srt', DATA / 'jobs' / f'{ident}.json', DATA / 'jobs' / f'{ident}.log']:
+        for path in [DATA / 'audio' / f'{ident}.wav', DATA / 'audio' / f'{ident}.mp3', DATA / 'audio' / f'{ident}.mp4', DATA / 'audio' / f'{ident}.srt', DATA/'audio'/f'{ident}.zip', DATA / 'jobs' / f'{ident}.json', DATA / 'jobs' / f'{ident}.log']:
             path.unlink(missing_ok=True)
 
 
@@ -692,6 +775,10 @@ def resume_job(ident: str):
             raise HTTPException(429, 'Hàng đợi đã đầy.')
         if not job.get('speaker') and not (DATA / 'voices' / f"{job['voice_id']}.json").exists():
             raise HTTPException(409, 'Mẫu giọng đã bị xóa; không thể tiếp tục tác vụ này.')
+        try:
+            validate_job_references(job, DATA)
+        except (ValueError, OSError) as exc:
+            raise HTTPException(409, str(exc)) from None
         if job.get('engine') in HMONG_ENGINES and job.get('speaker') in {'hmong-male', 'hmong-female'}:
             from hmong_assets import reference_fingerprint
             try:
@@ -841,7 +928,7 @@ def download_script(ident: str, extension: str):
 
 
 class ScriptConversion(BaseModel):
-    text: str = Field(min_length=1, max_length=MAX_CHARACTERS)
+    text: str = Field(min_length=1, max_length=1_000_000)
     input_format: str = Field(pattern='^(txt|srt)$')
     output_format: str = Field(pattern='^(txt|srt)$')
 
@@ -849,6 +936,8 @@ class ScriptConversion(BaseModel):
 @app.post('/api/scripts/convert')
 def convert_script(body: ScriptConversion):
     try:
+        if len(body.text) > (1_000_000 if IS_HMONG else MAX_CHARACTERS):
+            raise ValueError('Văn bản vượt giới hạn ký tự của phiên bản này.')
         cues = parse_srt(body.text) if body.input_format == 'srt' else None
         if body.output_format == 'srt' and cues is None:
             raise ValueError('Tạo voice hoàn tất rồi xuất SRT để có mốc thời gian thật.')
@@ -862,9 +951,21 @@ class EditorCue(BaseModel):
     start: float = Field(ge=0,le=10800)
     end: float = Field(gt=0,le=10800)
     text: str = Field(min_length=1,max_length=4000)
+    id: str | None = Field(default=None,pattern=r'^[A-Za-z0-9_-]{1,64}$')
+    character_id: str | None = Field(default=None,pattern=r'^[A-Za-z0-9_-]{1,64}$')
+
+
+class EditorCharacter(BaseModel):
+    id: str = Field(pattern=r'^[A-Za-z0-9_-]{1,64}$')
+    name: str = Field(min_length=1,max_length=80)
+    voice_id: str = Field(default='',max_length=128)
 
 
 class EditorProject(BaseModel):
+    project_version: int = Field(default=1,ge=1,le=2)
+    characters: list[EditorCharacter] = Field(default_factory=list,max_length=32)
+    source_cues: list[EditorCue] | None = Field(default=None,max_length=10000)
+    source_language: str = Field(default='',max_length=16)
     language:str=Field(default='',max_length=16)
     caption_style: dict = Field(default_factory=dict)
     cues: list[EditorCue] = Field(default_factory=list,max_length=10000)
@@ -1089,12 +1190,26 @@ def save_editor(ident:str,body:EditorProject):
         if body.language and body.language!='auto' and body.language not in LANGUAGES and body.language.split('-')[0] not in RECOGNITION_CODES:raise ValueError('Ngôn ngữ phụ đề không hợp lệ.')
         style=validate_style(body.caption_style)
         cues=validate_cues([c.model_dump() for c in body.cues],meta['duration']) if body.cues else []
+        source_cues=validate_cues([c.model_dump() for c in body.source_cues],meta['duration']) if body.source_cues else []
+        characters=[c.model_dump() for c in body.characters]
+        character_ids={c['id'] for c in characters}
+        if len(character_ids)!=len(characters):
+            raise ValueError('Mỗi nhân vật cần một mã riêng.')
+        if any(not c['name'].strip() for c in characters):
+            raise ValueError('Nhập tên cho mỗi nhân vật.')
+        if any(c.get('character_id') and c['character_id'] not in character_ids for c in cues+source_cues):
+            raise ValueError('Câu đang dùng nhân vật chưa có trong dự án.')
+        if body.source_language and body.source_language!='auto' and body.source_language not in LANGUAGES and body.source_language.split('-')[0] not in RECOGNITION_CODES:
+            raise ValueError('Ngôn ngữ lời gốc không hợp lệ.')
     except ValueError as exc:
         raise HTTPException(422,str(exc)) from None
     folder=DATA/'editor';folder.mkdir(exist_ok=True)
+    project={'project_version':body.project_version,'characters':characters,'cues':cues,
+             'source_cues':source_cues,'source_language':body.source_language,
+             'caption_style':style,'language':body.language}
     with lock:
-        write_json(folder/f'{ident}.json',{'cues':cues,'caption_style':style,'language':body.language})
-    return {'cues':cues,'caption_style':style,'language':body.language}
+        write_json(folder/f'{ident}.json',project)
+    return project
 
 
 @app.get('/api/videos/{ident}/editor/export.{extension}')

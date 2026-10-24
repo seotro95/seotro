@@ -26,4 +26,6 @@
 .alignment-row{display:flex;gap:10px;align-items:center;border-top:1px solid var(--line);padding:6px 0;font-size:12px}#workspace-alignment-rows{max-height:320px;overflow:auto}
 
 #workspace-free-script{width:100%;min-height:220px}#workspace-free-audio{width:100%;margin:12px 0}.editor-cue input:invalid{border-color:#c44}#workspace-free-status{overflow-wrap:anywhere}
+
+.editor-characters{margin:18px 0;padding:14px;border:1px solid var(--line);border-radius:10px;background:#faf9fe}.editor-characters h3{margin:0 0 8px;font-size:14px}.editor-character{display:grid;grid-template-columns:minmax(100px,1fr) minmax(140px,1.4fr) auto;gap:10px;align-items:end;margin:12px 0}.editor-character label{min-width:0;margin:0}.editor-character select{margin:0}.editor-character .text-button{padding-bottom:11px}.editor-characters .workspace-actions{gap:6px;margin-bottom:0}.workspace-script .editor-cue .editor-cue-character{grid-column:1/-1;margin:0}.editor-cue-character select{margin:5px 0 0}@media(max-width:650px){.editor-character{grid-template-columns:1fr}.editor-character .text-button{text-align:left;padding:0}}
 #video-logo-overlay{position:absolute;pointer-events:none;touch-action:none;z-index:2}#editor-caption{z-index:3}
