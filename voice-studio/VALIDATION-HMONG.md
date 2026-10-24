@@ -1,4 +1,6 @@
-# Voice Studio Hmong 1.5.0 validation
+# Voice Studio Hmong 1.5.1 validation
+
+Version1.5.1 repairs duplicate startup and Windows lock diagnostics. The launcher serializes first startup, reopens only a verified server for its data directory, and keeps an active job intact. A new runtime identity binds PID, process creation time, random instance ID and data/root hashes; protected legacy processes may prove their data through a temporary unregistered WAV nonce that is removed immediately. File lock errors no longer all masquerade as duplicate sessions; Windows uses a named kernel mutex plus compatible byte locking. A small validated updater preserves models, voices, jobs and the existing runtime. New Windows/public artifact results live in the release BUILD/NATIVE-VALIDATION reports; historical1.5.0 results below do not certify a new build.
 
 Version 1.5 adds an optional experimental Hmong VITS + OpenVoice V2 backend while preserving F5 as the normal launcher's default, the final user recordings, phrase context, optional CUDA setup and speech-only throughput accounting. The user reports incorrect `ua/thaj/qab/faib/rov/ris` and a requirement of one hour of speech in two minutes. Native-speaker pronunciation correction has NOT been established, and the 30× target remains unmet. Functional tests do not resolve that quality requirement. The separate standard Voice Studio 3.6.2 defaults/environment are preserved.
 

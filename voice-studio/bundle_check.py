@@ -13,7 +13,7 @@ PYTHON_FILES = (
     'hmong_native.py', 'hmong_native_models.py',
     'hmong_reference.py', 'hmong_text.py',
     'language_catalog.py', 'local_vieneu.py', 'narration.py', 'performance.py',
-    'portable_launcher.py', 'prepare_hmong.py', 'prepare_hmong_native.py', 'prepare_models.py',
+    'portable_launcher.py', 'runtime_instance.py', 'prepare_hmong.py', 'prepare_hmong_native.py', 'prepare_models.py',
     'prepare_subtitles.py', 'recognition.py', 'state_io.py', 'studio_variant.py',
     'subtitles.py', 'system_voices.py', 'translation.py', 'video_editor.py',
     'video_export.py', 'video_tasks.py', 'worker.py', 'writing.py',

@@ -16,6 +16,7 @@ import queue
 import re
 import subprocess
 import sys
+import tempfile
 import threading
 import time
 import urllib.request
@@ -395,13 +396,25 @@ def main():
 
 
 def check_web_launcher(root, backend):
-    """Start the selected application using the actual relocated launcher."""
+    """Start once with stale files, then reuse that live server without damage."""
+    import psutil
+
     root = Path(root)
     app_root = root / 'voice-studio-hmong'
     environment = dict(os.environ, HMOOB_BACKEND=backend)
     engine = 'hmong_native' if backend == 'native' else 'f5_hmong'
     subprocess.run([sys.executable, str(app_root / 'hmong_launcher.py'), '--check'],
                    check=True, cwd=app_root, env=environment, timeout=180)
+    # This is the builder's isolated QA directory, never an installed user's
+    # data. An empty legacy lock reproduced the original Windows startup bug.
+    data = Path(environment['VOICE_STUDIO_DATA_DIR'])
+    data.mkdir(parents=True, exist_ok=True)
+    (data / 'server.lock').write_bytes(b'')
+    (data / 'server-instance.json').write_text(json.dumps({
+        'instance_id': 'stale-build-qa-instance', 'pid': 2147483647,
+        'url': 'http://127.0.0.1:1', 'data_id': 'stale-data',
+        'root_id': 'stale-root', 'backend': engine, 'version': '1.5.0-hmong',
+    }), encoding='utf-8')
     print('Checking Hmong launcher after relocation:', backend, flush=True)
     process = subprocess.Popen([sys.executable, str(app_root / 'hmong_launcher.py'), '--no-browser'],
         cwd=app_root, env=environment, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
@@ -414,9 +427,14 @@ def check_web_launcher(root, backend):
     reader = threading.Thread(target=read_output, daemon=True)
     reader.start()
     ready = False
+    result = {}
     try:
         deadline = time.monotonic() + 180
         opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+        def get_json(path):
+            with opener.open(url + path, timeout=10) as response:
+                return json.load(response)
+
         while time.monotonic() < deadline:
             if process.poll() is not None:
                 raise RuntimeError('Hmong launcher exited: ' + str(process.returncode))
@@ -427,14 +445,79 @@ def check_web_launcher(root, backend):
             match = re.search(r'Studio:\s*(http://127\.0\.0\.1:\d+)', line)
             if not match:
                 continue
-            with opener.open(match[1] + '/api/config', timeout=5) as response:
-                live = json.load(response)
+            url = match[1]
+            live = get_json('/api/config')
             assert live['variant'] == 'hmong' and live['models'][engine] and live['hmong_engine'] == engine
             assert live['hmong_steps'] == (None if backend == 'native' else 16)
             ready = True
             break
         assert ready, 'Launcher readiness timed out: ' + backend
+        instance = get_json('/api/runtime')
+        for field in ('instance_id', 'url', 'data_id', 'root_id', 'backend', 'version'):
+            assert isinstance(instance.get(field), str) and instance[field], 'Missing runtime identity: ' + field
+        assert isinstance(instance.get('pid'), int) and instance['pid'] > 0
+        assert instance['url'] == url and instance['backend'] == engine
+        assert instance['version'] == live['version'] == '1.5.1-hmong'
+        assert instance['instance_id'] != 'stale-build-qa-instance'
+        server = psutil.Process(instance['pid'])
+        assert server.is_running() and process.pid in {parent.pid for parent in server.parents()}, \
+            'The first QA launcher must own the server; never clean up a reused external server'
+        history = {job['id']: job['status'] for job in get_json('/api/history')['items']}
+
+        # Keep a real native synthesis active across the second click. F5's
+        # separate real-inference check above remains at 16 steps FP32.
+        active_job = None
+        if backend == 'native':
+            payload = {'text': 'Nyob zoo, kuv yog ib tug Hmoob.', 'language': 'mww',
+                       'voice_id': 'hmong-male', 'format': 'wav', 'paragraph_pause': 0}
+            request = urllib.request.Request(url + '/api/speech',
+                data=json.dumps(payload).encode('utf-8'), headers={'Content-Type': 'application/json'})
+            with opener.open(request, timeout=15) as response:
+                assert response.status == 202
+                active_job = json.load(response)
+            assert active_job['status'] in {'queued', 'running'}
+            assert get_json('/api/jobs/' + active_job['id'])['status'] in {'queued', 'running'}, \
+                'The native QA job must still be active before the second launch'
+
+        started = time.monotonic()
+        # A file avoids waiting for inherited PIPE handles if a broken second
+        # launcher starts a child server and then exceeds the timeout.
+        with tempfile.TemporaryFile(mode='w+', encoding='utf-8', errors='replace') as output:
+            second = subprocess.run([sys.executable, str(app_root / 'hmong_launcher.py'), '--no-browser'],
+                cwd=app_root, env=environment, stdin=subprocess.DEVNULL, stdout=output,
+                stderr=subprocess.STDOUT, timeout=15)
+            output.seek(0)
+            second_output = output.read()
+        elapsed = time.monotonic() - started
+        print(second_output, end='', flush=True)
+        assert second.returncode == 0 and 'REUSED: existing Voice Studio' in second_output, \
+            'A second launcher must exit successfully after reusing the live server'
+        assert re.findall(r'Studio:\s*(http://127\.0\.0\.1:\d+)', second_output) == [url]
+        assert process.poll() is None and server.is_running(), 'The reused server was stopped'
+        assert get_json('/api/runtime') == instance, 'The second launch changed the server identity'
+        after = {job['id']: job['status'] for job in get_json('/api/history')['items']}
+        assert all(after.get(ident) == status for ident, status in history.items()), \
+            'The second launcher interrupted or changed existing QA jobs'
+        if active_job is not None:
+            deadline = time.monotonic() + 600
+            while time.monotonic() < deadline:
+                job = get_json('/api/jobs/' + active_job['id'])
+                assert job['status'] in {'queued', 'running', 'done'}, job
+                if job['status'] == 'done':
+                    break
+                time.sleep(.3)
+            assert job['status'] == 'done' and job['engine'] == engine, job
+            assert job['audio_seconds'] > 1 / 3
+            assert get_json('/api/runtime') == instance
+        result = {'ready': True, 'empty_legacy_lock_recovered': True,
+                  'stale_instance_metadata_recovered': True, 'second_launch_reused': True,
+                  'second_launch_exit_code': second.returncode, 'second_launch_seconds': round(elapsed, 3),
+                  'same_url_and_pid': True, 'runtime': instance,
+                  'existing_jobs_unchanged': True, 'active_job_preserved': active_job is not None,
+                  'active_job_id': active_job['id'] if active_job else None}
     finally:
+        # Only the first QA launcher owns a server tree. The second process
+        # exits on its own, so it must never be passed to taskkill.
         if process.poll() is None:
             if os.name == 'nt':
                 subprocess.run(['taskkill', '/PID', str(process.pid), '/T', '/F'],
@@ -443,7 +526,7 @@ def check_web_launcher(root, backend):
                 process.terminate()
             process.wait(timeout=30)
         reader.join(timeout=2)
-    return ready
+    return result
 
 
 if __name__ == '__main__':

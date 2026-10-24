@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import io
 import json
 from pathlib import Path
 import sys
@@ -20,7 +21,7 @@ spec.loader.exec_module(packaging)
 
 def source_fixture(root):
     root.mkdir()
-    for name in ('app.py', 'worker.py', 'bundle_check.py', 'hmong_acceleration.py',
+    for name in ('app.py', 'worker.py', 'bundle_check.py', 'runtime_instance.py', 'hmong_acceleration.py',
                  'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py',
                  'hmong_native.py', 'hmong_native_models.py', 'prepare_hmong_native.py',
                  'hmong_reference.py', 'hmong_text.py', 'hmong_assets.py', 'prepare_hmong.py',
@@ -68,6 +69,7 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
     assert not (output / '.env').exists()
     assert not (output / 'assets/private.wav').exists()
     assert (output / 'bundle_check.py').is_file() and (output / 'hmong_text.py').is_file()
+    assert (output / 'runtime_instance.py').is_file()
     assert (output / 'hmong_expression.py').is_file()
     assert (output / 'hmong_acceleration.py').is_file()
     assert (output / 'hmong_native.py').is_file()
@@ -85,7 +87,7 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
 
 
 def test_archive_has_valid_crc_and_matching_sha256(tmp_path):
-    root = tmp_path / 'Voice-Studio-Hmong-1.5.0'
+    root = tmp_path / 'Voice-Studio-Hmong-1.5.1'
     root.mkdir()
     (root / 'hello.txt').write_bytes(b'relocatable')
     archive = tmp_path / 'bundle.zip'
@@ -171,7 +173,7 @@ def test_native_vendor_requires_pinned_code_and_licenses_and_rejects_unapproved_
 
 @pytest.mark.parametrize('name', ['bundle_check.py', 'hmong_text.py', 'hmong_expression.py',
                                  'hmong_acceleration.py', 'hmong_native.py', 'hmong_native_models.py',
-                                 'prepare_hmong_native.py'])
+                                 'prepare_hmong_native.py', 'runtime_instance.py'])
 def test_source_copy_rejects_missing_new_runtime_modules(tmp_path, name):
     source = tmp_path / 'source'
     source_fixture(source)
@@ -184,7 +186,7 @@ def test_native_smoke_probes_every_root_and_inner_batch_alias(tmp_path, monkeypa
     spec = importlib.util.spec_from_file_location('smoke_hmong', PACKAGING / 'smoke_hmong_portable.py')
     smoke = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(smoke)
-    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.5.0'
+    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.5.1'
     root.mkdir(parents=True)
     packaging.write_launcher(root)
     calls = []
@@ -217,6 +219,71 @@ def test_native_smoke_rejects_false_success_without_pass(tmp_path, monkeypatch):
                         SimpleNamespace(returncode=0, stdout='tool incomplete\n'))
     with pytest.raises(RuntimeError, match='MO_VOICE_STUDIO_HMONG.bat'):
         smoke.check_batch_entrypoints(tmp_path)
+
+
+@pytest.mark.parametrize('backend,second_ok', [('native', True), ('f5', True), ('native', False)])
+def test_windows_launcher_smoke_checks_reuse_and_only_cleans_up_its_first_process(tmp_path, monkeypatch,
+                                                                               backend, second_ok):
+    spec = importlib.util.spec_from_file_location('smoke_hmong_reuse', PACKAGING / 'smoke_hmong_portable.py')
+    smoke = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(smoke)
+    data = tmp_path / 'voice-studio-hmong/.data'
+    monkeypatch.setattr(smoke, 'os', SimpleNamespace(name='nt', environ={'VOICE_STUDIO_DATA_DIR': str(data)}))
+    url = 'http://127.0.0.1:8770'
+    engine = 'hmong_native' if backend == 'native' else 'f5_hmong'
+    instance = {'instance_id': 'qa-server', 'pid': 102, 'url': url, 'data_id': 'qa-data',
+                'root_id': 'qa-root', 'backend': engine, 'version': '1.5.1-hmong'}
+    process = SimpleNamespace(pid=101, stdout=io.StringIO('Studio: ' + url + '\n'),
+                              poll=lambda: None, wait=lambda **kwargs: 0)
+    server = SimpleNamespace(is_running=lambda: True, parents=lambda: [SimpleNamespace(pid=101)])
+    monkeypatch.setitem(sys.modules, 'psutil', SimpleNamespace(Process=lambda pid: server if pid == 102 else None))
+    calls = []
+    def popen(command, **kwargs):
+        assert (data / 'server.lock').read_bytes() == b''
+        assert json.loads((data / 'server-instance.json').read_text())['instance_id'] == 'stale-build-qa-instance'
+        calls.append(('first', command))
+        return process
+    def run(command, **kwargs):
+        calls.append(('run', command))
+        if command[0] == 'taskkill':
+            assert command == ['taskkill', '/PID', '101', '/T', '/F']
+        if command[-1] == '--no-browser':
+            assert kwargs['timeout'] == 15
+            kwargs['stdout'].write('REUSED: existing Voice Studio\nStudio: ' + url + '\n')
+            return SimpleNamespace(returncode=0 if second_ok else 1)
+        return SimpleNamespace(returncode=0)
+    requested = []
+    class Opener:
+        def open(self, request, timeout):
+            address = request if isinstance(request, str) else request.full_url
+            path = address.removeprefix(url)
+            requested.append(path)
+            value = {'/api/config': {'variant': 'hmong', 'models': {engine: True},
+                                     'hmong_engine': engine, 'hmong_steps': None if backend == 'native' else 16,
+                                     'version': instance['version']},
+                     '/api/runtime': instance,
+                     '/api/history': {'items': [{'id': 'previous', 'status': 'done'}]},
+                     '/api/speech': {'id': 'active-qa', 'status': 'queued'},
+                     '/api/jobs/active-qa': {'id': 'active-qa', 'status': 'done',
+                                             'engine': engine, 'audio_seconds': 1.5}}[path]
+            if path == '/api/jobs/active-qa' and requested.count(path) == 1:
+                value = {**value, 'status': 'running'}
+            response = io.BytesIO(json.dumps(value).encode())
+            response.status = 202 if path == '/api/speech' else 200
+            return response
+    monkeypatch.setattr(smoke.subprocess, 'Popen', popen)
+    monkeypatch.setattr(smoke.subprocess, 'run', run)
+    monkeypatch.setattr(smoke.urllib.request, 'build_opener', lambda *_args: Opener())
+    if second_ok:
+        result = smoke.check_web_launcher(tmp_path, backend)
+        assert result['second_launch_reused'] and result['same_url_and_pid']
+        assert result['active_job_preserved'] is (backend == 'native')
+        assert ('/api/speech' in requested) is (backend == 'native')
+    else:
+        with pytest.raises(AssertionError, match='second launcher'):
+            smoke.check_web_launcher(tmp_path, backend)
+    assert [command for kind, command in calls if command[0] == 'taskkill'] == [
+        ['taskkill', '/PID', '101', '/T', '/F']]
 
 
 def test_native_expression_sample_exercises_two_local_emotions_in_two_synthesis_chunks():

@@ -2,6 +2,7 @@
 voice-studio/hmong_native_vendor/** -text
 # Keep packaged source identical to the reviewed Git blobs on Windows too.
 voice-studio/*.py text eol=lf
+voice-studio/packaging/*.py text eol=lf
 voice-studio/static/* text eol=lf
 voice-studio/*.md text eol=lf
 voice-studio/docs/*.md text eol=lf

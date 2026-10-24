@@ -21,7 +21,7 @@ import zipfile
 from build_windows import copy_runtime, download_verified_ffmpeg
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.5.0'
+VERSION = '1.5.1'
 ARCHIVE_NAME = f'Voice-Studio-Hmong-{VERSION}-Windows-x64.zip'
 
 
@@ -65,7 +65,7 @@ def copy_source(destination, source=SOURCE):
         target = destination / 'hmong_native_vendor' / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(vendor / relative, target)
-    required = ('app.py', 'worker.py', 'bundle_check.py', 'hmong_acceleration.py',
+    required = ('app.py', 'worker.py', 'bundle_check.py', 'runtime_instance.py', 'hmong_acceleration.py',
                 'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py',
                 'hmong_native.py', 'hmong_native_models.py',
                 'hmong_reference.py', 'hmong_text.py', 'hmong_assets.py', 'prepare_hmong.py',
@@ -159,7 +159,7 @@ def checked_run(command, *, environment, cwd, timeout=2400):
 
 
 def write_notices(root, model_manifest, qa_report):
-    notice = '''VOICE STUDIO HMONG 1.5.0 — WINDOWS X64
+    notice = '''VOICE STUDIO HMONG 1.5.1 — WINDOWS X64
 
 Giai nen TOAN BO ZIP. MO_HMONG_NHANH.bat mo bo doc VITS Hmong + OpenVoice V2.
 MO_VOICE_STUDIO_HMONG.bat giu bo doc F5 Hmong 16 buoc FP32.
@@ -234,6 +234,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--reports', required=True, type=Path)
+    parser.add_argument('--runtime-source', type=Path,
+                        help='Reuse the runtime from a checksum-verified previous portable release.')
+    parser.add_argument('--ffmpeg-source', type=Path,
+                        help='Reuse FFmpeg from a checksum-verified previous portable release.')
     args = parser.parse_args()
     if os.name != 'nt' or sys.maxsize <= 2 ** 32 or sys.version_info[:2] != (3, 12):
         raise RuntimeError('Build with native Windows x64 base Python 3.12')
@@ -244,8 +248,17 @@ def main():
     reports.mkdir(parents=True, exist_ok=True)
     app = root / 'voice-studio-hmong'
     copy_source(app)
-    download_verified_ffmpeg(root / 'ffmpeg', root.parent / 'downloads')
-    copy_runtime(Path(sys.base_prefix), root / 'runtime')
+    if args.ffmpeg_source:
+        ffmpeg_source = args.ffmpeg_source.resolve()
+        for relative in ('bin/ffmpeg.exe', 'bin/ffprobe.exe', 'UPSTREAM-SHA256.txt'):
+            if not (ffmpeg_source / relative).is_file():
+                raise ValueError('Verified FFmpeg source is incomplete: ' + relative)
+        if any(path.is_symlink() for path in ffmpeg_source.rglob('*')):
+            raise ValueError('Verified FFmpeg source cannot contain links')
+        shutil.copytree(ffmpeg_source, root / 'ffmpeg')
+    else:
+        download_verified_ffmpeg(root / 'ffmpeg', root.parent / 'downloads')
+    copy_runtime(args.runtime_source.resolve() if args.runtime_source else Path(sys.base_prefix), root / 'runtime')
     write_launcher(root)
     environment = build_environment(root, offline=False)
     checked_run([root / 'runtime/python.exe', app / 'hmong_launcher.py', '--setup-only'],
@@ -281,6 +294,8 @@ def main():
         raise RuntimeError('Both native and F5 Hmong smoke tests must complete')
     qa_report['f5_compatibility'] = compatibility
     qa_report['normal_launcher'] = compatibility['normal_launcher']
+    if not qa_report['fast_launcher']['second_launch_reused'] or not compatibility['normal_launcher']['second_launch_reused']:
+        raise RuntimeError('Both launchers must reuse the running Windows studio')
 
     # All data here was created by this build. Never perform this operation on a
     # user's installation or copy a developer data directory into the package.
@@ -304,6 +319,8 @@ def main():
     build = {'version': VERSION, 'variant': 'hmong', 'python': sys.version,
              'commit': os.environ.get('GITHUB_SHA'), 'platform': 'windows-x64',
              'native_windows_validation': True, 'relocated_runtime_tested': True,
+             'duplicate_launch_reused': True, 'empty_windows_lock_validated': True,
+             'stale_instance_metadata_recovered': True,
              'models_included': False, 'first_run_model_download_required': True,
              'model_download_approx_gb': {'f5_hmong': 1.4, 'hmong_native': .58}, 'api_key_required': False,
              'fast_launcher': 'MO_HMONG_NHANH.bat', 'fast_engine': 'hmong_native',

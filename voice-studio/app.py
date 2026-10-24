@@ -74,30 +74,18 @@ def model_ready(engine):
 
 @contextmanager
 def studio_lock():
-    # Prevent a second server from marking a still-running long job interrupted.
-    handle = (DATA / 'server.lock').open('a+b')
-    try:
-        handle.write(b'0')
-        handle.flush()
-        handle.seek(0)
-        try:
-            if os.name == 'nt':
-                import msvcrt
-                msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
-            else:
-                import fcntl
-                fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except OSError:
-            raise RuntimeError('Voice Studio đã chạy với thư mục dữ liệu này. Hãy dùng cửa sổ đang mở.') from None
-        yield
-    finally:
-        handle.close()
+    from runtime_instance import StudioInstance
+    with StudioInstance(DATA, BASE, APP_VERSION, 'hmong' if IS_HMONG else 'standard',
+                        active_hmong_engine() if IS_HMONG else 'standard',
+                        os.getenv('VOICE_STUDIO_URL')) as instance:
+        yield instance
 
 
 @asynccontextmanager
 async def lifespan(application):
     global executor
-    with studio_lock():
+    with studio_lock() as instance:
+        application.state.runtime_identity = instance.public_identity()
         shutdown_event.clear()
         for path in (DATA/'video_tasks').glob('*/job.json'):
             task = read_json(path)
@@ -121,10 +109,19 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
             with writing.KEY_LOCK:
                 writing.KEYS.clear()
+            application.state.runtime_identity = None
 
 
 app = FastAPI(title=APP_NAME + ' · Local AI', version=APP_VERSION, lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
+
+
+@app.get('/api/runtime')
+def runtime_identity():
+    identity = getattr(app.state, 'runtime_identity', None)
+    if identity is None:
+        raise HTTPException(503, 'Studio đang khởi động.')
+    return JSONResponse(identity, headers={'Cache-Control': 'no-store'})
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
     # Pydantic's default details can echo an invalid API key; return no raw input.

@@ -1,12 +1,18 @@
-# Voice Studio Hmong 1.5.0
+# Voice Studio Hmong 1.5.1
 
 Phiên bản riêng của Voice Studio 3.6.2, dùng cho **Hmong Trắng / Hmoob Daw (mww)**. Bộ mở mặc định vẫn dùng F5-Hmong; bản 1.5 thêm một bộ đọc nhanh **VITS + OpenVoice V2 đang thử nghiệm**, mở riêng bằng `MO_HMONG_NHANH.bat`. Giao diện và hướng dẫn dùng tiếng Việt. Cả hai bộ dùng đúng hai mẫu mặc định **hmong nam 2.MP3** và **hmong nữ 2(1).MP3** bạn cung cấp.
 
 Bản 1.5 giữ các sửa lỗi ngữ cảnh cụm, bộ CUDA NVIDIA riêng và cách đo tốc độ theo phần lời đọc. Bộ đọc nhanh tạo lời bằng VITS rồi chuyển chất giọng bằng OpenVoice V2 theo mẫu đã chọn; chuyển chất giọng không tự sửa từ đọc sai. **Chưa đạt mục tiêu 30× (1 giờ lời đọc trong 2 phút), chưa xác nhận phát âm chuẩn các từ `ua, thaj, qab, faib, rov, ris`.** Chưa có phép đo GPU hoặc đánh giá nghe của người biết Hmong cho bộ đọc mới. Nút “Đo tốc độ và thử 6 từ Hmong” tạo câu mới để nghe đối chiếu; không thay chữ Hmong bằng cách viết giả lập tiếng Việt.
 
+## Sửa lỗi không mở được tool ở bản 1.5.0
+
+Bản 1.5.1 sửa lỗi “Voice Studio đã chạy với thư mục dữ liệu này” khi bấm mở lần hai. Tool tự nhận đúng phiên đang chạy và mở lại địa chỉ của phiên đó; bài đang tạo tiếp tục bình thường. Tệp `server.lock` còn lại sau khi tắt hoặc tệp rỗng không bị coi là một phiên đang chạy. Lỗi quyền ghi hay ổ đĩa không hỗ trợ khóa được báo riêng.
+
+Nếu đã có bản 1.5.0, tải **`Voice-Studio-Hmong-1.5.1-Update.zip`**, giải nén vào chính thư mục đang có `runtime` và `voice-studio-hmong`, rồi mở **`SUA_LOI_MO_TOOL.bat`**. Không cần tải lại Python, FFmpeg hay mô hình. Bản sửa kiểm tra checksum, sao lưu các tệp ứng dụng thay đổi vào `voice-studio-hmong/.data/update-backups` và giữ giọng, mô hình, lịch sử. Nếu phiên cũ còn đang chạy, tool mở lại phiên đó; mã khởi động mới áp dụng đầy đủ trong lần mở tiếp theo sau khi bạn đóng phiên cũ.
+
 ## Mở bản Windows đầy đủ
 
-1. Tải **`Voice-Studio-Hmong-1.5.0-Windows-x64.zip`** trong GitHub Releases và giải nén **toàn bộ ZIP** vào một thư mục có quyền ghi. Không chạy bên trong ZIP. Bộ 46 tệp `.py`/`.bat`/hướng dẫn rời thiếu giao diện `static/`, giọng `assets/hmong/` và runtime nên không đủ để chạy.
+1. Tải **`Voice-Studio-Hmong-1.5.1-Windows-x64.zip`** trong GitHub Releases và giải nén **toàn bộ ZIP** vào một thư mục có quyền ghi. Không chạy bên trong ZIP. Bộ 46 tệp `.py`/`.bat`/hướng dẫn rời thiếu giao diện `static/`, giọng `assets/hmong/` và runtime nên không đủ để chạy.
 2. Mở **`MO_VOICE_STUDIO_HMONG.bat`** ở thư mục ngoài cùng. Gói có sẵn Python 3.12 x64, thư viện CPU và FFmpeg; không cần tự cài Python, API key hay GPU. Các lối mở `start.bat`, `start_hmong.bat` và các tệp tương ứng trong `voice-studio-hmong/` đều chuyển tới bộ khởi động Hmong của gói. `install_hmong.bat` hoặc `install.bat` chỉ chuẩn bị lần đầu, sau đó mở tool để dùng.
 3. Lần mở đầu bằng bộ F5 mặc định cần Internet để tải và kiểm tra khoảng **1,4 GB mô hình** từ Hugging Face. Giữ cửa sổ đang chạy mở. Nếu chuẩn bị thất bại, xem thông báo rồi mở lại sau khi khắc phục kết nối. Các trọng số Hmong không nằm trong ZIP vì nguồn chưa công bố giấy phép phân phối lại rõ ràng.
 4. Trình duyệt tự mở khi sẵn sàng. Sau lần chuẩn bị thành công, tạo giọng hoạt động offline. Giữ cửa sổ tool mở trong lúc sử dụng; đóng cửa sổ để dừng máy chủ.
