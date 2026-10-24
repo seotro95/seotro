@@ -228,7 +228,11 @@ def voices():
         # original profile JSON intact so old jobs can resume their own engine.
         entries = [{**voice, 'engine': active_hmong_engine()}
                    if voice['engine'] in HMONG_ENGINES else voice for voice in entries]
-    return {'voices':[{**voice,'native_language':native_language(voice),'ready':model_ready(voice.get('engine','vieneu'))} for voice in entries]}
+    # Presets and personal profiles share their engine's files. Read readiness
+    # once per engine so a refresh cannot show contradictory male/female states
+    # or repeatedly hash the same large models on uncached Windows filesystems.
+    readiness = {engine: model_ready(engine) for engine in dict.fromkeys(voice['engine'] for voice in entries)}
+    return {'voices':[{**voice,'native_language':native_language(voice),'ready':readiness[voice['engine']]} for voice in entries]}
 
 
 

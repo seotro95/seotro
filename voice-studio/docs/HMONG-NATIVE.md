@@ -1,10 +1,10 @@
-# Bộ đọc Hmong nhanh thử nghiệm · Voice Studio Hmong 1.5.2
+# Bộ đọc Hmong nhanh thử nghiệm · Voice Studio Hmong 1.5.3
 
-Lựa chọn này dùng **VITS để tạo lời Hmong**, sau đó dùng **OpenVoice V2 để chuyển chất giọng theo mẫu đã chọn**. Đây là bộ mặc định của tệp mở chính trong gói Windows 1.5.2; F5 vẫn có trong công cụ nâng cao. Chuyển chất giọng không bảo đảm sửa phát âm, thanh điệu, độ giống người nói hay cảm xúc như người thật. Mục tiêu một giờ lời đọc trong hai phút (30×) chưa đạt; chưa có phép đo GPU hoặc đánh giá nghe của người biết Hmong xác nhận bộ mới đọc chuẩn.
+Lựa chọn này dùng **VITS để tạo lời Hmong**, sau đó dùng **OpenVoice V2 để chuyển chất giọng theo mẫu đã chọn**. Đây là bộ mặc định của tệp mở chính trong gói Windows 1.5.3; F5 vẫn có trong công cụ nâng cao. Chuyển chất giọng không bảo đảm sửa phát âm, thanh điệu, độ giống người nói hay cảm xúc như người thật. Mục tiêu một giờ lời đọc trong hai phút (30×) chưa đạt; chưa có phép đo GPU hoặc đánh giá nghe của người biết Hmong xác nhận bộ mới đọc chuẩn.
 
 ## Chọn bộ đọc
 
-Trong gói Windows 1.5.2, đóng tool đang chạy rồi mở **`MO_VOICE_STUDIO_HMONG.bat`** ở ngoài cùng. Giao diện phải ghi **Hmong nhanh thử nghiệm**. Công cụ **`tools/MO_F5_HMONG.bat`** mở F5 để nghe so sánh. Đổi bộ mở rồi tạo tác vụ mới để nghe so sánh; không nối các đoạn của một bài đang dở bằng bộ khác.
+Trong gói Windows 1.5.3, đóng tool đang chạy rồi mở **`MO_VOICE_STUDIO_HMONG.bat`** ở ngoài cùng. Giao diện phải ghi **Hmong nhanh thử nghiệm**. Công cụ **`tools/MO_F5_HMONG.bat`** mở F5 để nghe so sánh. Đổi bộ mở rồi tạo tác vụ mới để nghe so sánh; không nối các đoạn của một bài đang dở bằng bộ khác.
 
 Hai bộ đọc dùng cùng mẫu **hmong nam 2.MP3** và bản nữ rút gọn **hmong nữ 2(1).MP3**, cùng lời Hmong do bạn xác nhận. Hồ sơ giọng và lịch sử được giữ. Bộ mới tạo lời trước rồi chuyển chất giọng; mẫu ngắn không huấn luyện lại một mô hình phát âm Hmong riêng.
 
@@ -12,7 +12,7 @@ Lần chuẩn bị đầu cần Internet và khoảng **580 MB** tệp mô hình
 
 Không có lựa chọn 4/8/16/32 bước trong bộ này. Các số đó thuộc F5; giao diện ẩn chúng khi chọn bộ thử nghiệm. Bộ mới dùng FP32; nếu từng đặt `HMOOB_PRECISION=int8` cho F5, hãy bỏ biến đó hoặc đặt `HMOOB_PRECISION=auto` hay `fp32` trước khi mở bộ thử nghiệm. Nhập/xuất TXT/SRT/WAV/MP3, hai giọng mặc định, giọng cá nhân, nhấn cụm, khoảng nghỉ và sắc thái vẫn dùng chung. Sắc thái chỉ điều chỉnh nhịp/cường độ, không phải cảm xúc được huấn luyện trong mô hình.
 
-Bộ nhanh kiểm tra ký tự theo từ vựng mô hình; viết số bằng chữ Hmong và thay dấu chưa hỗ trợ khi tool báo lỗi. Tool giữ chữ cuối ghi thanh điệu và không tự bỏ ký tự để tạo audio.
+Bộ nhanh giữ các chữ và dấu thanh điệu RPA; dấu gạch nối được đưa thành ranh giới từ lúc tạo tiếng, trong khi kịch bản gốc vẫn giữ nguyên. Các ký tự khác được kiểm tra theo từ vựng mô hình; viết số bằng chữ Hmong và thay dấu chưa hỗ trợ khi tool báo lỗi. Tool giữ chữ cuối ghi thanh điệu và không tự bỏ ký tự để tạo audio.
 
 Bộ mới thử gắn dấu WavMark lên đoạn có ít nhất 16.000 mẫu âm thanh. Đoạn ngắn hơn, khoảng 0,726 giây ở 22.050 Hz, bỏ qua bước này. Chưa kiểm chứng khả năng nhận diện dấu sau chỉnh nhịp, resample, ghép SRT hay xuất MP3. Không coi mọi tệp xuất là đã có dấu hoặc chắc chắn được máy dò nhận diện; audio do tool tạo vẫn là audio AI.
 

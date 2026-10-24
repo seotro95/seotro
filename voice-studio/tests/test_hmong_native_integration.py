@@ -59,6 +59,18 @@ def test_native_config_and_presets_report_the_active_backend(native_studio):
     assert all(voice['reference_text_verified'] for voice in voices)
 
 
+def test_male_and_female_share_one_consistent_model_readiness_snapshot(native_studio, monkeypatch):
+    client, _, _ = native_studio
+    # A model download may finish while the voice list is being refreshed.
+    # Both preset choices must reflect the same snapshot of their shared model.
+    readiness = Mock(side_effect=[True, False])
+    monkeypatch.setattr(app, 'model_ready', readiness)
+    voices = client.get('/api/voices').json()['voices']
+    assert {voice['id']: voice['ready'] for voice in voices} == {
+        'hmong-male': True, 'hmong-female': True}
+    readiness.assert_called_once_with('hmong_native')
+
+
 @pytest.mark.parametrize('steps', [None, 4, 16, 32])
 def test_native_job_omits_diffusion_steps_and_binds_reference_identity(native_studio, steps):
     client, root, submit = native_studio
@@ -146,7 +158,6 @@ def test_native_clone_keeps_the_exact_supplied_reference_words(native_studio):
 @pytest.mark.parametrize('text,detail', [
     ('Nyob zoo 你好', 'RPA'),
     ('Kuv 123', 'Mô hình không có'),
-    ('Nyob-zoo.', 'Mô hình không có'),
     ('Nyob/zoo.', 'Mô hình không có'),
 ])
 def test_native_unsupported_text_is_rejected_before_queue(native_studio, text, detail):
@@ -166,6 +177,21 @@ def test_native_validation_keeps_the_original_script_case_and_rpa_tone_letters(n
     assert job['text'] == script
     assert app.read_json(root / 'jobs' / (job['id'] + '.json'))['text'] == script
     assert [segment.text for segment in plan_segments(job)] == [script]
+
+
+@pytest.mark.parametrize('speaker', ['hmong-male', 'hmong-female'])
+def test_native_hyphenated_script_queues_with_exact_original_text_and_selected_reference(native_studio, speaker):
+    client, root, submit = native_studio
+    script = 'Nyob-zoo, kuv rov‑los tsev. POB–POJ POS—POV POM-POG POD-PO'
+    response = client.post('/api/speech', json=speech_request(text=script, voice_id=speaker))
+    assert response.status_code == 202, response.text
+    job = response.json()
+    assert job['text'] == script and job['voice_id'] == job['speaker'] == speaker
+    assert job['hmong_reference_fingerprint'] == hmong_assets.reference_fingerprint(speaker)
+    assert app.read_json(root / 'jobs' / (job['id'] + '.json'))['text'] == script
+    assert ' '.join(validate_native_text(segment.text) for segment in plan_segments(job)) == (
+        'nyob zoo, kuv rov los tsev. pob poj pos pov pom pog pod po')
+    submit.assert_called_once_with(app.run_job, job['id'])
 
 
 @pytest.fixture

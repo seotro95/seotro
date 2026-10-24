@@ -46,6 +46,14 @@ def test_basic_cleaning_keeps_every_rpa_tone_letter_and_target_word():
     assert native.validate_text('NYOB ZOO, “KUV ZOO”…') == 'nyob zoo, "kuv zoo"...'
 
 
+@pytest.mark.parametrize('dash', ['-', '‐', '‑', '‒', '–', '—', '―', '−'])
+def test_written_hyphens_keep_word_boundaries_and_every_rpa_tone_letter(dash):
+    text = f'UA{dash}THAJ QAB{dash}FAIB ROV{dash}RIS. POB{dash}POJ POS{dash}POV POM{dash}POG{dash}POD{dash}PO'
+    assert native.validate_text(text) == 'ua thaj qab faib rov ris. pob poj pos pov pom pog pod po'
+    # General/source normalization is deliberately unchanged for other engines.
+    assert native.normalize_text(f'POB{dash}POJ') == 'POB-POJ'
+
+
 @pytest.mark.parametrize('text', ['Kuv 123', 'Kuv @ zoo', 'Kuv_zoo', 'Nyob 😀', 'Kuv ꟽ', 'Nyob zòo'])
 def test_unsupported_text_is_rejected_instead_of_dropping_characters(text):
     with pytest.raises(native.EngineError):
@@ -251,6 +259,15 @@ def test_native_pipeline_preserves_target_tokens_and_applies_requested_speed(ten
     assert state.conversions[0]['sid_tgt'] is target
     assert samples.dtype.name == 'float32' and rate == 22050 and len(samples) == 20000
     assert state.watermark_calls == 1
+
+
+def test_hyphenated_native_input_uses_identical_tokens_to_spaced_words(tensor_pipeline):
+    _, engine, state, _ = tensor_pipeline
+    engine.synthesize('UA-THAJ, QAB–FAIB, ROV‑RIS.', 'ref.wav', 'Nyob zoo.')
+    engine.synthesize('UA THAJ, QAB FAIB, ROV RIS.', 'ref.wav', 'Nyob zoo.')
+    first, second = state.inference
+    assert first[0].equal(second[0]) and first[1].equal(second[1])
+    assert first[2] == second[2]
 
 
 def test_short_word_keeps_its_natural_duration_without_padding_or_watermark(tensor_pipeline):

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import copy
 import importlib.util
 import io
 import json
@@ -87,7 +88,7 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
 
 
 def test_archive_has_valid_crc_and_matching_sha256(tmp_path):
-    root = tmp_path / 'Voice-Studio-Hmong-1.5.2'
+    root = tmp_path / 'Voice-Studio-Hmong-1.5.3'
     root.mkdir()
     (root / 'hello.txt').write_bytes(b'relocatable')
     archive = tmp_path / 'bundle.zip'
@@ -138,7 +139,7 @@ def test_environment_and_batch_keep_data_in_hmong_package(tmp_path, monkeypatch)
 def test_single_download_bundles_only_approved_reports_and_generated_auditions(tmp_path):
     source = tmp_path / 'qa-reports'
     source.mkdir()
-    names = ('native-smoke.json', 'f5-smoke.json', 'model-sources.json',
+    names = ('native-smoke.json', 'f5-smoke.json', 'browser-smoke.json', 'model-sources.json',
              'Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3')
     for name in (*names, 'private.wav', 'model.pth', 'credentials.json'):
         (source / name).write_bytes(b'fixture: ' + name.encode())
@@ -154,6 +155,148 @@ def test_single_download_rejects_a_missing_generated_audition(tmp_path):
     source.mkdir()
     with pytest.raises(ValueError, match='Required release report/audition'):
         packaging.bundle_reports(tmp_path / 'portable', source)
+
+
+def browser_report_fixture():
+    expected = packaging.expected_reference_fingerprints()
+    cases = []
+    for index, (name, ident) in enumerate([
+            ('main_male_button', 'hmong-male'), ('main_female_button', 'hmong-female'),
+            ('library_preset_after_cloned_filter', 'hmong-male'),
+            ('main_female_to_workspace_speech', 'hmong-female')]):
+        cases.append({'case': name, 'voice_id': ident, 'post_voice_id': ident, 'speaker': ident,
+                      'hmong_reference_fingerprint': expected[ident], 'engine': 'hmong_native',
+                      'job_id': 'job-' + str(index), 'status': 'done', 'real_ui_post': True,
+                      'audio_bytes': 48044, 'audio_seconds': 1, 'sha256': 'a' * 64,
+                      'peak_amplitude': .2, 'sample_rate': 24000, 'sample_width': 2,
+                      'playback': {'ready_state': 4, 'media_error': None, 'current_time': .1, 'duration': 1},
+                      'audio_playback_checked': True, 'download_verified': True,
+                      'original_text_preserved': True, 'text': 'Nyob-zoo, kuv yog ib tug Hmoob.'})
+    return {'success': True, 'platform': 'win32', 'native_windows_validation': True,
+            'real_ui_synthesis': True, 'engine': 'hmong_native',
+            'cloned_filter_library_selection': True, 'cross_panel_selection': True,
+            'hyphenated_text_preserved': True,
+            'runtime': {'version': packaging.VERSION + '-hmong', 'backend': 'hmong_native'},
+            'browser': {'channel': 'msedge', 'version': '142.0', 'responses_mocked': False},
+            'script_sha256': hashlib.sha256((PACKAGING / 'browser_hmong_portable.py').read_bytes().replace(b'\r\n', b'\n')).hexdigest(),
+            'expected_reference_fingerprints': expected,
+            'voices': {'hmong-male': cases[0], 'hmong-female': cases[1]}, 'cases': cases}
+
+
+def test_windows_browser_gate_accepts_all_actual_ui_synthesis_cases():
+    report = browser_report_fixture()
+    assert packaging.validate_browser_report(report) is report
+
+
+@pytest.mark.parametrize('failure', ['linux', 'skipped', 'library', 'workspace', 'speaker',
+                                    'reference', 'missing_case', 'wrong_case', 'silent_audio',
+                                    'no_playback', 'stale_script', 'hyphen_text'])
+def test_windows_browser_gate_rejects_incomplete_or_wrong_voice_evidence(failure):
+    report = copy.deepcopy(browser_report_fixture())
+    if failure == 'linux':
+        report['platform'] = 'linux'
+    elif failure == 'skipped':
+        report['real_ui_synthesis'] = False
+    elif failure == 'library':
+        report['cloned_filter_library_selection'] = False
+    elif failure == 'workspace':
+        report['cross_panel_selection'] = False
+    elif failure == 'speaker':
+        report['cases'][0]['speaker'] = 'hmong-female'
+    elif failure == 'reference':
+        report['cases'][1]['hmong_reference_fingerprint'] = 'b' * 64
+    elif failure == 'missing_case':
+        report['cases'].pop()
+    elif failure == 'wrong_case':
+        report['cases'][3]['case'] = 'another_main_case'
+    elif failure == 'silent_audio':
+        report['cases'][2]['audio_bytes'] = 0
+    elif failure == 'no_playback':
+        report['cases'][0]['audio_playback_checked'] = False
+    elif failure == 'stale_script':
+        report['script_sha256'] = 'b' * 64
+    else:
+        for case in report['cases']:
+            case['text'] = 'Nyob zoo.'
+    with pytest.raises(ValueError):
+        packaging.validate_browser_report(report)
+
+
+def test_publication_gate_reads_mandatory_browser_evidence_from_the_zip(tmp_path):
+    root = tmp_path / ('Voice-Studio-Hmong-' + packaging.VERSION)
+    packaging.write_launcher(root)
+    report = browser_report_fixture()
+    reports = root / 'reports'
+    reports.mkdir()
+    files = {'BUILD.json': {'version': packaging.VERSION, 'windows_browser_validation': True},
+             'reports/browser-smoke.json': report,
+             'reports/native-smoke.json': {'success': True, 'main_launcher': {
+                 'browser_ui': report, 'second_launch_reused': True, 'active_job_preserved': True}},
+             'reports/f5-smoke.json': {'success': True, 'advanced_f5_launcher': {'second_launch_reused': True}}}
+    for name, value in files.items():
+        (root / name).write_text(json.dumps(value), encoding='utf-8')
+    for name in ('Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3'):
+        (reports / name).write_bytes(b'ID3' + b'x' * 1200)
+    # The pinned Python runtime contains standard BAT files of its own.
+    activation = root / 'runtime/Scripts/activate.bat'
+    activation.parent.mkdir(parents=True)
+    activation.write_bytes(b'@echo off\r\n')
+    archive = tmp_path / 'release.zip'
+    packaging.archive_package(root, archive)
+    assert packaging.validate_release_archive(archive) == report
+    extra = root / 'UNEXPECTED.BAT'
+    extra.write_bytes(b'@echo off\r\n')
+    packaging.archive_package(root, archive)
+    with pytest.raises(ValueError, match='one root BAT'):
+        packaging.validate_release_archive(archive)
+    extra.unlink()
+    (reports / 'browser-smoke.json').unlink()
+    packaging.archive_package(root, archive)
+    with pytest.raises(KeyError, match='browser-smoke'):
+        packaging.validate_release_archive(archive)
+
+
+def test_browser_smoke_requires_a_separate_qa_interpreter(tmp_path, monkeypatch):
+    spec = importlib.util.spec_from_file_location('smoke_hmong_browser', PACKAGING / 'smoke_hmong_portable.py')
+    smoke = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(smoke)
+    monkeypatch.delenv('HMOOB_BROWSER_PYTHON', raising=False)
+    with pytest.raises(RuntimeError, match='separate HMOOB_BROWSER_PYTHON'):
+        smoke.check_browser_selection(tmp_path, 'http://127.0.0.1:8770', tmp_path / 'reports')
+    interpreter = tmp_path / 'runtime/python.exe'
+    interpreter.parent.mkdir()
+    interpreter.touch()
+    monkeypatch.setenv('HMOOB_BROWSER_PYTHON', str(interpreter))
+    with pytest.raises(RuntimeError, match='outside the portable package'):
+        smoke.check_browser_selection(tmp_path, 'http://127.0.0.1:8770', tmp_path / 'reports')
+
+
+def test_browser_smoke_passes_verified_references_to_external_browser_without_development_bypass(tmp_path, monkeypatch):
+    spec = importlib.util.spec_from_file_location('smoke_hmong_browser_run', PACKAGING / 'smoke_hmong_portable.py')
+    smoke = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(smoke)
+    interpreter = tmp_path / 'qa/python.exe'
+    interpreter.parent.mkdir()
+    interpreter.touch()
+    monkeypatch.setenv('HMOOB_BROWSER_PYTHON', str(interpreter))
+    expected = packaging.expected_reference_fingerprints()
+    monkeypatch.setitem(sys.modules, 'hmong_assets', SimpleNamespace(reference_fingerprint=expected.__getitem__))
+    report = browser_report_fixture()
+    report['runtime']['url'] = 'http://127.0.0.1:8770'
+    reports = tmp_path / 'reports'
+    reports.mkdir()
+    def run(command, **kwargs):
+        assert Path(command[0]) == interpreter
+        assert Path(command[1]).name == 'browser_hmong_portable.py'
+        assert command[2:4] == ['--url', report['runtime']['url']]
+        assert command[4:6] == ['--reports', str(reports)]
+        assert command[6] == '--expected-references'
+        assert json.loads(command[7]) == expected
+        assert len(command) == 8, 'Production QA must never pass --allow-non-windows'
+        assert kwargs == {'check': True, 'timeout': 1800}
+        (reports / 'browser-smoke.json').write_text(json.dumps(report), encoding='utf-8')
+    monkeypatch.setattr(smoke.subprocess, 'run', run)
+    assert smoke.check_browser_selection(tmp_path / 'portable', report['runtime']['url'], reports) == report
 
 
 def test_source_copy_refuses_linked_assets(tmp_path):
@@ -206,7 +349,7 @@ def test_native_smoke_probes_primary_and_every_advanced_batch(tmp_path, monkeypa
     spec = importlib.util.spec_from_file_location('smoke_hmong', PACKAGING / 'smoke_hmong_portable.py')
     smoke = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(smoke)
-    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.5.2'
+    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.5.3'
     root.mkdir(parents=True)
     packaging.write_launcher(root)
     calls = []
@@ -252,7 +395,7 @@ def test_windows_launcher_smoke_checks_reuse_and_only_cleans_up_its_first_proces
     url = 'http://127.0.0.1:8770'
     engine = 'hmong_native' if backend == 'native' else 'f5_hmong'
     instance = {'instance_id': 'qa-server', 'pid': 102, 'url': url, 'data_id': 'qa-data',
-                'root_id': 'qa-root', 'backend': engine, 'version': '1.5.2-hmong'}
+                'root_id': 'qa-root', 'backend': engine, 'version': '1.5.3-hmong'}
     process = SimpleNamespace(pid=101, stdout=io.StringIO('Studio: ' + url + '\n'),
                               poll=lambda: None, wait=lambda **kwargs: 0)
     server = SimpleNamespace(is_running=lambda: True, parents=lambda: [SimpleNamespace(pid=101)])

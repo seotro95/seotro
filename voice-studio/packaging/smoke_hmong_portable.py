@@ -387,7 +387,7 @@ def main():
     results['reference_text_verified'] = True
     results['reference_text_source'] = 'user_provided_for_selected_excerpt'
     results['batch_entrypoints'] = check_batch_entrypoints(root)
-    results['main_launcher'] = check_web_launcher(root, 'native')
+    results['main_launcher'] = check_web_launcher(root, 'native', reports=reports)
     results['success'] = True
     reports.mkdir(parents=True, exist_ok=True)
     (reports / 'native-smoke.json').write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -395,7 +395,27 @@ def main():
           'full-pipeline timings, SRT and5 BAT paths. CUDA inference, pronunciation and30x remain unverified.', flush=True)
 
 
-def check_web_launcher(root, backend):
+def check_browser_selection(root, url, reports):
+    """Keep browser tooling outside the package while exercising its real server."""
+    interpreter = os.environ.get('HMOOB_BROWSER_PYTHON')
+    if not interpreter:
+        raise RuntimeError('A separate HMOOB_BROWSER_PYTHON is required for real Windows browser QA')
+    interpreter = Path(interpreter).resolve()
+    if not interpreter.is_file() or Path(root).resolve() in interpreter.parents:
+        raise RuntimeError('The browser QA interpreter must exist outside the portable package')
+    from hmong_assets import reference_fingerprint
+    expected = {ident: reference_fingerprint(ident) for ident in ('hmong-male', 'hmong-female')}
+    script = Path(__file__).with_name('browser_hmong_portable.py')
+    subprocess.run([str(interpreter), str(script), '--url', url, '--reports', str(reports),
+                    '--expected-references', json.dumps(expected)], check=True, timeout=1800)
+    report = json.loads((Path(reports) / 'browser-smoke.json').read_text(encoding='utf-8'))
+    assert report.get('success') is True and report.get('native_windows_validation') is True
+    assert report['runtime']['url'] == url and report['runtime']['backend'] == 'hmong_native'
+    assert report['expected_reference_fingerprints'] == expected
+    return report
+
+
+def check_web_launcher(root, backend, *, reports=None):
     """Start once with stale files, then reuse that live server without damage."""
     import psutil
 
@@ -461,7 +481,7 @@ def check_web_launcher(root, backend):
             assert isinstance(instance.get(field), str) and instance[field], 'Missing runtime identity: ' + field
         assert isinstance(instance.get('pid'), int) and instance['pid'] > 0
         assert instance['url'] == url and instance['backend'] == engine
-        assert instance['version'] == live['version'] == '1.5.2-hmong'
+        assert instance['version'] == live['version'] == '1.5.3-hmong'
         assert instance['instance_id'] != 'stale-build-qa-instance'
         server = psutil.Process(instance['pid'])
         assert server.is_running() and process.pid in {parent.pid for parent in server.parents()}, \
@@ -520,6 +540,9 @@ def check_web_launcher(root, backend):
                   'same_url_and_pid': True, 'runtime': instance,
                   'existing_jobs_unchanged': True, 'active_job_preserved': active_job is not None,
                   'active_job_id': active_job['id'] if active_job else None}
+        if backend == 'native' and reports is not None:
+            result['browser_ui'] = check_browser_selection(root, url, reports)
+            assert get_json('/api/runtime') == instance, 'Browser QA changed the running server identity'
     finally:
         # Only the first QA launcher owns a server tree. The second process
         # exits on its own, so it must never be passed to taskkill.

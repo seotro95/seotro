@@ -109,6 +109,6 @@ trusting the creation time returned by Python's stat().
         return key
     except (OSError, ValueError, KeyError, TypeError, RecursionError):
         raise EngineError(
-            "Thiếu mô hình Hmong nhanh hoặc SHA-256 không đạt. Chạy MO_HMONG_NHANH.bat "
+            "Thiếu mô hình Hmong nhanh hoặc SHA-256 không đạt. Chạy MO_VOICE_STUDIO_HMONG.bat "
             "hoặc python prepare_hmong_native.py bằng mạng được phép; không dùng tệp chưa xác minh."
         ) from None

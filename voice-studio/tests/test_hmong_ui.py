@@ -38,11 +38,11 @@ def static_site():
 
 @contextlib.contextmanager
 def studio_page(site, *, hmong=True, ready=True, missing_reference_first=False, hmong_steps=16,
-                transcript_verified=True, known_reference=True, native=False):
+                transcript_verified=True, known_reference=True, native=False, voice_choices=False):
     language = 'mww' if hmong else 'vi'
     engine = ('hmong_native' if native else 'f5_hmong') if hmong else 'vieneu'
-    ident = 'hmong-female' if hmong else 'vi-maianh'
-    state = {'ready': ready, 'speech': [], 'tasks': [], 'errors': []}
+    ident = ('hmong-male' if voice_choices else 'hmong-female') if hmong else 'vi-maianh'
+    state = {'ready': ready, 'speech': [], 'tasks': [], 'errors': [], 'clones': [], 'job_pending': False}
     def configuration():
         return {'variant': 'hmong' if hmong else 'standard', 'app_name': 'Voice Studio Hmong' if hmong else 'Voice Studio',
                 'default_language': language, 'version': '3.6.2', 'mode': 'local', 'hardware': 'CPU', 'cpu_cores': 4,
@@ -58,15 +58,25 @@ def studio_page(site, *, hmong=True, ready=True, missing_reference_first=False, 
                 **({'hardware_label': 'CỤC BỘ · CHƯA KIỂM TRA CPU/GPU'} if hmong else {}),
                 'hmong_reference_note': 'Hai mẫu đi kèm dùng lời mẫu do bạn cung cấp và xác nhận khớp đoạn thu.'}
     def voices():
-        entries = [{'id': ident, 'engine': engine, 'name': 'Hmong Nữ' if hmong else 'Mai Anh',
+        entries = [{'id': 'hmong-female' if hmong else ident, 'engine': engine, 'name': 'Hmong Nữ' if hmong else 'Mai Anh',
                     'languages': [language], 'native_language': language, 'ready': state['ready'],
                     'description': 'Giọng tham chiếu'}]
+        if voice_choices:
+            if hmong:
+                entries[0]['sample_url'] = '/api/hmong/presets/hmong-female/sample'
+                entries.insert(0, {**entries[0], 'id': 'hmong-male', 'name': 'Hmong Nam',
+                                   'sample_url': '/api/hmong/presets/hmong-male/sample'})
+                entries.append({**entries[0], 'id': 'hmong-personal', 'name': 'Giọng cá nhân Hmong',
+                                'category': 'cloned', 'sample_url': '/api/voices/hmong-personal/sample'})
+            else:
+                entries.append({**entries[0], 'id': 'vi-other', 'name': 'Giọng Việt khác'})
         if missing_reference_first:
             entries.insert(0, {**entries[0], 'id': 'hmong-male', 'name': 'Mẫu đã bị xóa', 'ready': False})
-        return {'voices': entries}
+        return {'voices': entries + state['clones']}
     def job(payload=None):
         payload = payload or (state['speech'][-1] if state['speech'] else {})
-        return {**payload, 'id': 'a' * 32, 'status': 'done', 'progress': 100, 'audio_seconds': 4,
+        return {**payload, 'id': 'a' * 32, 'status': 'queued' if state['job_pending'] else 'done',
+                'progress': 0 if state['job_pending'] else 100, 'audio_seconds': 4,
                 'voice_name': 'Hmong Nữ', 'url': '/api/audio/' + 'a' * 32, 'format': 'wav', 'speed_report': None}
     def handle(route):
         request = route.request
@@ -76,6 +86,11 @@ def studio_page(site, *, hmong=True, ready=True, missing_reference_first=False, 
             response = configuration()
         elif path in ['/api/voices', '/api/voices/refresh']:
             response = voices()
+        elif path == '/api/voices/clone':
+            response = {'id': 'hmong-new-personal', 'name': 'Hmong mới', 'engine': engine,
+                        'languages': [language], 'native_language': language, 'category': 'cloned',
+                        'ready': state['ready'], 'description': 'Mẫu vừa lưu'}
+            state['clones'].append(response)
         elif path in ['/api/history', '/api/videos']:
             response = {'items': []}
         elif path == '/api/writing/connections':
@@ -396,4 +411,148 @@ def test_native_hmong_download_requests_native_engine_without_f5_model(static_si
         assert state['tasks'] == [{'action': 'prepare_voice', 'engine': 'hmong_native'}]
         playwright.expect(page.locator('#hmong-reference-note')).to_contain_text('thử nghiệm đã sẵn sàng')
         assert '580 MB' not in page.locator('#hmong-reference-note').inner_text()
+        assert state['errors'] == []
+
+
+@pytest.mark.parametrize('gender,name', [('male', 'Hmong Nam'), ('female', 'Hmong Nữ')])
+def test_hmong_library_preset_clears_personal_filter_and_posts_selected_voice(static_site, gender, name):
+    with studio_page(static_site, native=True, voice_choices=True) as (page, state):
+        page.select_option('#create-native', 'cloned')
+        playwright.expect(page.locator('#voice')).to_have_value('hmong-personal')
+        page.locator('.nav-item[data-tab="voices"]').click()
+        card = page.locator('.voice-card').filter(has=page.get_by_role('heading', name=name, exact=True))
+        card.get_by_role('button', name='Sử dụng giọng →', exact=True).click()
+        playwright.expect(page.locator('#voice')).to_have_value('hmong-' + gender)
+        playwright.expect(page.locator('#dub-voice')).to_have_value('hmong-' + gender)
+        playwright.expect(page.locator('#create-native')).to_have_value('all')
+        playwright.expect(page.locator('#workspace-native')).to_have_value('all')
+        playwright.expect(page.locator('#generate')).to_be_enabled()
+        page.fill('#script', 'Nyob zoo. Ua tsaug.')
+        page.click('#generate')
+        playwright.expect(page.locator('#output-title')).to_contain_text('đã sẵn sàng')
+        assert state['speech'][-1]['voice_id'] == 'hmong-' + gender
+        assert state['errors'] == []
+
+
+def test_hmong_main_dropdown_reaches_workspace_post_and_reverse_choice_invalidates_audio(static_site):
+    with studio_page(static_site, native=True, voice_choices=True) as (page, state):
+        page.select_option('#voice', 'hmong-female')
+        page.locator('.nav-item[data-tab="dub"]').click()
+        page.fill('#workspace-free-script', 'Kuv rov los tsev.')
+        page.click('#workspace-free-generate')
+        playwright.expect(page.locator('#workspace-free-status')).to_contain_text('Voice riêng đã sẵn sàng')
+        assert state['speech'][-1]['voice_id'] == 'hmong-female'
+        playwright.expect(page.locator('#dub-voice')).to_have_value('hmong-female')
+        playwright.expect(page.locator('#workspace-free-audio')).to_be_visible()
+        page.click('#workspace-hmong-voice-choices [data-hmong-gender="male"]')
+        playwright.expect(page.locator('#voice')).to_have_value('hmong-male')
+        playwright.expect(page.locator('#workspace-free-audio')).to_be_hidden()
+        playwright.expect(page.locator('#workspace-free-status')).to_contain_text('Giọng đã đổi')
+        page.click('#workspace-free-generate')
+        playwright.expect(page.locator('#workspace-free-status')).to_contain_text('Voice riêng đã sẵn sàng')
+        assert [request['voice_id'] for request in state['speech']] == ['hmong-female', 'hmong-male']
+        assert state['errors'] == []
+
+
+@pytest.mark.parametrize('ready', [True, False])
+def test_hmong_explicit_choices_are_selectable_and_survive_refresh_with_model_missing_or_ready(static_site, ready):
+    with studio_page(static_site, native=True, ready=ready, voice_choices=True) as (page, state):
+        for gender in ('male', 'female'):
+            playwright.expect(page.locator(f'#hmong-voice-choices [data-hmong-gender="{gender}"]')).to_be_enabled()
+        page.click('#hmong-voice-choices [data-hmong-gender="female"]')
+        for select in ('voice', 'dub-voice'):
+            playwright.expect(page.locator('#' + select)).to_have_value('hmong-female')
+        playwright.expect(page.locator('#hmong-voice-choices [data-hmong-gender="female"]')).to_have_attribute('aria-pressed', 'true')
+        playwright.expect(page.locator('#hmong-reference-sample')).to_have_attribute('src', '/api/hmong/presets/hmong-female/sample')
+        with page.expect_response(lambda response: urlparse(response.url).path == '/api/voices'):
+            page.click('#voice-refresh-voices')
+        playwright.expect(page.locator('#voice-refresh-voices')).to_be_enabled()
+        playwright.expect(page.locator('#voice')).to_have_value('hmong-female')
+        playwright.expect(page.locator('#dub-voice')).to_have_value('hmong-female')
+        page.locator('.nav-item[data-tab="dub"]').click()
+        page.click('#workspace-hmong-voice-choices [data-hmong-gender="male"]')
+        playwright.expect(page.locator('#voice')).to_have_value('hmong-male')
+        playwright.expect(page.locator('#workspace-hmong-voice-choices [data-hmong-gender="male"]')).to_have_attribute('aria-pressed', 'true')
+        playwright.expect(page.locator('#workspace-hmong-reference-sample')).to_have_attribute('src', '/api/hmong/presets/hmong-male/sample')
+        if not ready:
+            playwright.expect(page.locator('#workspace-hmong-selected-voice')).to_contain_text('Cần tải model')
+            page.click('#dub-load-voice')
+            playwright.expect(page.locator('#dub-load-voice')).to_contain_text('sẵn sàng', timeout=10000)
+            assert state['tasks'] == [{'action': 'prepare_voice', 'engine': 'hmong_native'}]
+            playwright.expect(page.locator('#voice')).to_have_value('hmong-male')
+            playwright.expect(page.locator('#dub-voice')).to_have_value('hmong-male')
+        assert state['errors'] == []
+
+
+def test_hmong_choice_during_queued_workspace_job_preserves_request_and_rejects_stale_audio(static_site):
+    with studio_page(static_site, native=True, voice_choices=True) as (page, state):
+        page.click('#hmong-voice-choices [data-hmong-gender="female"]')
+        page.locator('.nav-item[data-tab="dub"]').click()
+        page.fill('#workspace-free-script', 'Nyob zoo. Ua tsaug.')
+        state['job_pending'] = True
+        with page.expect_response(lambda response: urlparse(response.url).path == '/api/speech'):
+            page.click('#workspace-free-generate')
+        playwright.expect(page.locator('#workspace-free-status')).to_contain_text('queued')
+        assert state['speech'][-1]['voice_id'] == 'hmong-female'
+        page.click('#workspace-hmong-voice-choices [data-hmong-gender="male"]')
+        state['job_pending'] = False
+        playwright.expect(page.locator('#workspace-free-status')).to_contain_text('Lời hoặc giọng đã đổi')
+        playwright.expect(page.locator('#workspace-free-audio')).to_be_hidden()
+        assert state['speech'][-1]['voice_id'] == 'hmong-female'
+        playwright.expect(page.locator('#voice')).to_have_value('hmong-male')
+        assert state['errors'] == []
+
+
+def test_hmong_library_personal_voice_and_new_clone_select_both_panels(static_site):
+    with studio_page(static_site, native=True, voice_choices=True) as (page, state):
+        page.locator('.nav-item[data-tab="voices"]').click()
+        card = page.locator('.voice-card').filter(has=page.get_by_role('heading', name='Giọng cá nhân Hmong', exact=True))
+        card.get_by_role('button', name='Sử dụng giọng →', exact=True).click()
+        for select in ('voice', 'dub-voice'):
+            playwright.expect(page.locator('#' + select)).to_have_value('hmong-personal')
+        for group in ('hmong-voice-choices', 'workspace-hmong-voice-choices'):
+            assert page.locator('#' + group + ' [aria-pressed="true"]').count() == 0
+        page.locator('.nav-item[data-tab="clone"]').click()
+        page.fill('#clone-name', 'Hmong mới')
+        page.locator('#clone-file').set_input_files(ROOT / 'assets/hmong' / PROJECT_REFERENCES['female']['file'])
+        playwright.expect(page.locator('#clone-submit')).to_be_enabled()
+        page.check('#clone-form input[name="consent"]')
+        page.click('#clone-submit')
+        playwright.expect(page.locator('#panel-create')).to_be_visible()
+        for select in ('voice', 'dub-voice'):
+            playwright.expect(page.locator('#' + select)).to_have_value('hmong-new-personal')
+        assert len(state['clones']) == 1
+        assert state['errors'] == []
+
+
+def test_standard_voice_choices_remain_independent_and_hmong_buttons_stay_hidden(static_site):
+    with studio_page(static_site, hmong=False, voice_choices=True) as (page, state):
+        playwright.expect(page.locator('#workspace-hmong-voice-choices')).to_be_hidden()
+        playwright.expect(page.locator('#dub-voice')).to_have_value('vi-maianh')
+        page.locator('.nav-item[data-tab="create"]').click()
+        playwright.expect(page.locator('#hmong-voice-choices')).to_be_hidden()
+        page.select_option('#voice', 'vi-other')
+        playwright.expect(page.locator('#dub-voice')).to_have_value('vi-maianh')
+        page.locator('.nav-item[data-tab="dub"]').click()
+        page.fill('#workspace-free-script', 'Xin chào.')
+        page.click('#workspace-free-generate')
+        playwright.expect(page.locator('#workspace-free-status')).to_contain_text('Voice riêng đã sẵn sàng')
+        assert state['speech'][-1]['voice_id'] == 'vi-maianh'
+        playwright.expect(page.locator('#voice')).to_have_value('vi-other')
+        assert state['errors'] == []
+
+
+def test_hmong_choose_ready_ai_buttons_sync_both_panels_from_female_choice(static_site):
+    with studio_page(static_site, native=True, voice_choices=True) as (page, state):
+        for panel, button in [('create', 'voice-use-ai'), ('dub', 'dub-use-ai')]:
+            page.locator('.nav-item[data-tab="create"]').click()
+            page.select_option('#voice', 'hmong-female')
+            playwright.expect(page.locator('#dub-voice')).to_have_value('hmong-female')
+            page.locator(f'.nav-item[data-tab="{panel}"]').click()
+            page.click('#' + button)
+            for select in ('voice', 'dub-voice'):
+                playwright.expect(page.locator('#' + select)).to_have_value('hmong-male')
+            for group in ('hmong-voice-choices', 'workspace-hmong-voice-choices'):
+                playwright.expect(page.locator('#' + group + ' [data-hmong-gender="male"]')).to_have_attribute('aria-pressed', 'true')
+                playwright.expect(page.locator('#' + group + ' [data-hmong-gender="female"]')).to_have_attribute('aria-pressed', 'false')
         assert state['errors'] == []

@@ -27,9 +27,14 @@ _INPUT_SYMBOLS = frozenset(_SYMBOL_IDS) - {'_'}
 
 
 def validate_text(text):
-    """Match training basic_cleaners, retaining every RPA tone letter."""
+    """Keep RPA letters intact and treat written hyphens as word boundaries.
+
+    The shared formatter folds Unicode dashes to ASCII ``-``, which is absent
+    from this model's symbols. Keeping the boundary as a space accepts normal
+    hyphenated Hmong without dropping letters or guessing another spelling.
+    """
     try:
-        result = normalize_text(text).lower()
+        result = normalize_text(text).replace('-', ' ').lower()
         return normalize_text(result, vocabulary=_INPUT_SYMBOLS)
     except HmongTextError as exc:
         raise EngineError(str(exc)) from None
