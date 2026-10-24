@@ -16,16 +16,16 @@ import uuid
 
 ALLOWLIST = frozenset({
     'app.py', 'portable_launcher.py', 'runtime_instance.py', 'bundle_check.py',
-    'studio_variant.py', 'hmong_launcher.py', 'HMONG-README.md',
+    'studio_variant.py', 'hmong_launcher.py', 'hmong_engine.py', 'HMONG-README.md',
     'docs/HMONG-NATIVE.md', 'VALIDATION-HMONG.md',
 })
 REQUIRED_PAYLOAD = frozenset({
     'app.py', 'portable_launcher.py', 'runtime_instance.py', 'bundle_check.py',
-    'studio_variant.py', 'hmong_launcher.py', 'HMONG-README.md',
+    'studio_variant.py', 'hmong_launcher.py', 'hmong_engine.py', 'HMONG-README.md',
 })
 BASE_REQUIRED = (
     'app.py', 'studio_variant.py', 'hmong_launcher.py', 'hmong_assets.py',
-    'hmong_acceleration.py', 'hmong_native.py', 'hmong_native_models.py',
+    'hmong_acceleration.py', 'hmong_engine.py', 'hmong_native.py', 'hmong_native_models.py',
     'worker.py', 'state_io.py', 'static/index.html',
     'hmong_native_vendor/manifest.json', 'hmong_native_vendor/vits/models.py',
     'hmong_native_vendor/openvoice/models.py', 'hmong_native_vendor/watermark/models/my_model.py',

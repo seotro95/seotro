@@ -13,6 +13,7 @@ import json
 import math
 import os
 from pathlib import Path
+import struct
 import threading
 import wave
 
@@ -64,23 +65,82 @@ def _windows_file_information():
     return query, FileBasicInfo
 
 
+@lru_cache(maxsize=1)
+def _windows_usn_api():
+    import ctypes
+    from ctypes import wintypes
+
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    create = kernel.CreateFileW
+    create.argtypes = (wintypes.LPCWSTR, ctypes.c_uint32, ctypes.c_uint32,
+                       ctypes.c_void_p, ctypes.c_uint32, ctypes.c_uint32, wintypes.HANDLE)
+    create.restype = wintypes.HANDLE
+    control = kernel.DeviceIoControl
+    control.argtypes = (wintypes.HANDLE, ctypes.c_uint32, ctypes.c_void_p,
+                        ctypes.c_uint32, ctypes.c_void_p, ctypes.c_uint32,
+                        ctypes.POINTER(ctypes.c_uint32), ctypes.c_void_p)
+    control.restype = wintypes.BOOL
+    close = kernel.CloseHandle
+    close.argtypes = (wintypes.HANDLE,)
+    close.restype = wintypes.BOOL
+    return create, control, close
+
+
+def _windows_file_usn(handle, control):
+    """Read the per-file journal sequence; unknown/unavailable journals are unsafe."""
+    import ctypes
+
+    # READ_FILE_USN_DATA selects the documented V2/V3 layouts. V3 uses 128-bit
+    # file IDs, so its signed 64-bit USN starts 16 bytes later than V2's.
+    request = ctypes.create_string_buffer(struct.pack('<HH', 2, 3))
+    output = ctypes.create_string_buffer(4096)
+    returned = ctypes.c_uint32()
+    if not control(handle, 0x900EB, request, 4, output, len(output), ctypes.byref(returned), None):
+        return None
+    if not 8 <= returned.value <= len(output):
+        return None
+    raw = output.raw[:returned.value]
+    record_length, major, _ = struct.unpack_from('<IHH', raw)
+    layout = {2: (60, 24), 3: (76, 40)}.get(major)
+    if layout is None or not layout[0] <= record_length <= len(raw):
+        return None
+    usn = struct.unpack_from('<q', raw, layout[1])[0]
+    return usn if usn > 0 else None
+
+
+def _windows_change_identity(path):
+    """Require a journal token and no open writer before reusing verified bytes."""
+    import ctypes
+
+    handle = None
+    close = None
+    try:
+        query, info_type = _windows_file_information()
+        create, control, close = _windows_usn_api()
+        # FILE_SHARE_READ excludes writers, whose repeated writes can otherwise
+        # be coalesced under one USN until their handle closes.
+        handle = create(str(path), 0x80000000, 1, None, 3, 0x80, None)
+        if handle in (None, 0, -1, ctypes.c_void_p(-1).value):
+            handle = None
+            return None
+        info = info_type()
+        if not query(handle, 0, ctypes.byref(info), ctypes.sizeof(info)) or info.ChangeTime <= 0:
+            return None
+        usn = _windows_file_usn(handle, control)
+        return (info.ChangeTime, usn) if usn is not None else None
+    except (AttributeError, ImportError, OSError, ValueError):
+        return None
+    finally:
+        if handle is not None and close is not None:
+            close(handle)
+
+
 def _file_fingerprint(path, stat):
     change_time = stat.st_ctime_ns
     if os.name == "nt":
-        # Windows st_ctime is creation time, so it cannot invalidate a cache
-        # after an overwrite whose last-write time has been restored.
-        change_time = None
-        try:
-            import ctypes
-            import msvcrt
-            query, info_type = _windows_file_information()
-            info = info_type()
-            with path.open("rb") as handle:
-                if (query(msvcrt.get_osfhandle(handle.fileno()), 0, ctypes.byref(info), ctypes.sizeof(info))
-                        and info.ChangeTime > 0):
-                    change_time = info.ChangeTime
-        except (AttributeError, ImportError, OSError, ValueError):
-            pass
+        # Creation/ChangeTime can both remain unchanged on an overwrite with a
+        # restored mtime. Without a trustworthy USN, callers must hash again.
+        change_time = _windows_change_identity(path)
     return stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, change_time
 
 

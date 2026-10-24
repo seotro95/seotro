@@ -23,7 +23,30 @@ env:
   RELEASE_TAG: voice-studio-hmong-1.5.1
 
 jobs:
+  windows-integrity:
+    if: github.repository == 'seotro95/seotro'
+    runs-on: windows-2022
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: voice-studio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Install the small verification test runner
+        run: |
+          python -m pip install pytest==8.4.2
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check real Windows model mutation detection
+        run: |
+          python packaging/ci_checked.py python -m pytest tests/test_prepare_hmong_native.py tests/test_windows_model_identity.py -q
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
   native-windows-release:
+    needs: windows-integrity
     if: github.repository == 'seotro95/seotro'
     runs-on: windows-2022
     timeout-minutes: 75
