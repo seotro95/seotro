@@ -1,12 +1,10 @@
 """Open this data directory's running studio, or start one local server."""
-import json
 import os
 from pathlib import Path
 import socket
 import subprocess
 import sys
 import time
-import urllib.request
 import webbrowser
 
 from hmong_assets import active_engine as active_hmong_engine
@@ -69,7 +67,6 @@ def main(open_browser=True):
                 process = subprocess.Popen(
                     [sys.executable, '-m', 'uvicorn', 'app:app', '--host', '127.0.0.1',
                      '--port', str(port), '--no-access-log', '--no-use-colors'], cwd=root, env=child_env)
-                opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
                 deadline = time.monotonic() + 60
                 while time.monotonic() < deadline:
                     if process.poll() is not None:
@@ -81,14 +78,11 @@ def main(open_browser=True):
                         raise RuntimeError('Khong mo duoc studio. Xem thong bao loi ben tren.')
                     studio = discover_instance(data, root)
                     if studio and studio['pid'] == process.pid and studio['url'] == url:
-                        try:
-                            with opener.open(url + '/api/config', timeout=1) as response:
-                                studio_config = json.load(response)
-                                if studio_config.get('mode') == 'local':
-                                    studio_version = studio_config.get('version', '')
-                                    break
-                        except (OSError, ValueError):
-                            pass
+                        # Verified /api/runtime identity proves ASGI startup is
+                        # complete. /api/config can hash gigabytes of models on
+                        # filesystems where integrity caching is unavailable.
+                        studio_version = studio.get('version', '')
+                        break
                     time.sleep(.25)
                 else:
                     raise RuntimeError('Studio chua san sang sau 60 giay.')

@@ -1,7 +1,7 @@
 """A launcher owns only its child and reopens a proven server for its data."""
-import io
 from pathlib import Path
 import threading
+import urllib.request
 
 import pytest
 
@@ -61,16 +61,23 @@ def isolated_launcher(monkeypatch, tmp_path):
 
 
 def launch_ready(monkeypatch, process):
-    class LocalOpener:
-        def open(self, url, timeout):
-            assert url == 'http://127.0.0.1:8770/api/config'
-            return io.BytesIO(b'{"mode":"local","version":"1.2.0"}')
-
     records = iter([None, studio_record()])
     monkeypatch.setattr(portable_launcher, 'discover_instance', lambda data, root: next(records))
     monkeypatch.setattr(portable_launcher, 'available_port', lambda: 8770)
     monkeypatch.setattr(portable_launcher.subprocess, 'Popen', lambda *args, **kwargs: process)
-    monkeypatch.setattr(portable_launcher.urllib.request, 'build_opener', lambda *args: LocalOpener())
+
+
+def test_verified_runtime_is_ready_without_querying_heavy_model_config(monkeypatch):
+    process = ReadyProcess(0)
+    launch_ready(monkeypatch, process)
+
+    class HeavyConfigOpener:
+        def open(self, url, timeout):
+            pytest.fail('Readiness must not request /api/config, which may hash gigabytes of models')
+
+    monkeypatch.setattr(urllib.request, 'build_opener', lambda *args: HeavyConfigOpener())
+    assert portable_launcher.main(open_browser=False) == 0
+    assert process.wait_calls == [None]
 
 
 def forbid_spawn(monkeypatch):
@@ -190,7 +197,7 @@ def test_child_gets_canonical_data_and_url_and_waits_outside_startup_lock(monkey
 
 
 @pytest.mark.parametrize('bad_identity', [{'pid': 9999}, {'url': 'http://127.0.0.1:8771'}])
-def test_config_alone_cannot_make_another_process_ready(monkeypatch, bad_identity):
+def test_runtime_identity_must_match_child_pid_and_assigned_url(monkeypatch, bad_identity):
     process = ReadyProcess(0)
     launch_ready(monkeypatch, process)
     foreign = studio_record()
@@ -200,8 +207,7 @@ def test_config_alone_cannot_make_another_process_ready(monkeypatch, bad_identit
     sleeps = []
     monkeypatch.setattr(portable_launcher.time, 'sleep', sleeps.append)
     assert portable_launcher.main(open_browser=False) == 0
-    # A config endpoint cannot establish readiness until identity matches the
-    # child PID and assigned URL; the preceding mismatch must be retried.
+    # The preceding mismatched runtime identity must be retried.
     assert sleeps == [.25]
 
 
@@ -217,7 +223,7 @@ def test_unverified_local_config_is_never_adopted(monkeypatch):
         def open(self, *args, **kwargs):
             pytest.fail('An unrelated config endpoint must not be queried or adopted')
 
-    monkeypatch.setattr(portable_launcher.urllib.request, 'build_opener', lambda *args: ForeignOpener())
+    monkeypatch.setattr(urllib.request, 'build_opener', lambda *args: ForeignOpener())
     with pytest.raises(RuntimeError, match='60 giay'):
         portable_launcher.main(open_browser=False)
     assert process.wait_calls == [8]
@@ -283,11 +289,11 @@ def test_concurrent_launchers_wait_for_readiness_and_start_only_one_server(monke
         shared['studio'] = studio_record()
         return process
 
-    class ReadinessOpener:
-        def open(self, url, timeout):
+    def discover(data, root):
+        if shared['studio'] is not None and threading.current_thread().name == 'owner':
             waiting_for_readiness.set()
             assert allow_readiness.wait(timeout=3)
-            return io.BytesIO(b'{"mode":"local","version":"1.2.0"}')
+        return shared['studio']
 
     def launch(name):
         try:
@@ -299,10 +305,9 @@ def test_concurrent_launchers_wait_for_readiness_and_start_only_one_server(monke
                 reopened.set()
 
     monkeypatch.setattr(portable_launcher, 'StartupLock', SerializedLock)
-    monkeypatch.setattr(portable_launcher, 'discover_instance', lambda data, root: shared['studio'])
+    monkeypatch.setattr(portable_launcher, 'discover_instance', discover)
     monkeypatch.setattr(portable_launcher, 'available_port', lambda: 8770)
     monkeypatch.setattr(portable_launcher.subprocess, 'Popen', spawn)
-    monkeypatch.setattr(portable_launcher.urllib.request, 'build_opener', lambda *args: ReadinessOpener())
     owner = threading.Thread(target=launch, args=('owner',), name='owner')
     second = threading.Thread(target=launch, args=('reopener',), name='reopener')
     owner.start()
