@@ -1,0 +1,20 @@
+﻿HMONG NHANH — BẢN GỌN 0.4.0
+
+1. Giải nén toàn bộ ZIP vào một thư mục mới. Cài Python 3.12 64-bit nếu máy chưa có; bật Python Launcher khi cài.
+2. Mở MO_HMONG_NHANH.bat. Lần đầu công cụ tự cài thư viện và tải mô hình F5-Hmong/Vocos (khoảng 1,4 GB mô hình, chưa tính thư viện). Cần Internet và nên có ít nhất 6 GB đĩa trống. Giữ cửa sổ lệnh mở. Các lần sau dùng lại dữ liệu đã tải. Không cần cài FFmpeg riêng.
+3. Chọn Nữ hoặc Nam. Mở “Chuẩn bị mẫu”, chọn một đoạn rõ lời 3–8 giây, nghe đoạn đó và chép chính xác lời Hmong vào ô lời mẫu rồi bấm Lưu. Làm một lần cho mỗi giọng. Hai MP3 gốc được giữ riêng; bản này chưa có lời tham chiếu đã được xác nhận nên không tự điền hoặc đoán nội dung mẫu.
+4. Nhập hoặc nhập tệp TXT, tối đa 2.000 ký tự/lượt. Chọn tốc độ rồi bấm Tạo giọng nói. Khi xong có thể nghe và Tải WAV. Nút Dừng chấm dứt tác vụ đang tạo.
+
+Bản gọn chỉ giữ đọc văn bản Hmong, Nam/Nữ, tốc độ, mẫu tham chiếu, Tạo/Dừng và WAV. Không còn các màn hình video, nhận dạng, thu âm, biên tập, dự án, cảm xúc hoặc dịch vụ từ xa.
+
+Dữ liệu nằm trong .data cạnh MO_HMONG_NHANH.bat. Thư mục app là mã và thư viện cần cho công cụ; không xóa. Tải WAV trước khi đóng cửa sổ lệnh. Khi cập nhật, giữ lại .data. Gói mới không xóa các bản công cụ khác đang có trên máy.
+
+KIỂM TRA THỰC TẾ
+- 23 kiểm thử xử lý và tác vụ đạt, gồm chọn đúng mẫu Nam/Nữ, lưu độc lập, dừng/tạo lại và tải WAV.
+- Chromium đã kiểm tra giữ bản nháp theo giọng, phản hồi lưu chậm, gửi đúng giọng/tốc độ, phát/tải âm thanh và giao diện điện thoại. Phần tác vụ trong bài kiểm tra giao diện dùng dữ liệu mô phỏng.
+- Mô hình F5 thật đã tạo WAV 24 kHz dài 3,232 giây, có âm thanh, trong chế độ offline với mẫu công khai có lời chép đi kèm. Lần thử CPU mất khoảng 163 giây; không cam kết tạo nhanh trên mọi máy.
+- Chưa kiểm chứng phát âm Hmong Trắng hoặc độ giống hai giọng người dùng vì chưa có lời chép chính xác của hai đoạn tham chiếu. Chưa chạy tệp BAT trên Windows thật. Nghe kiểm tra trước khi sử dụng.
+
+Nguồn mô hình: huggingface.co/Pakorn2112/F5TTS-Hmong
+Vocos: huggingface.co/charactr/vocos-mel-24khz
+Mô hình được tải từ HTTPS và đối chiếu checksum; không kèm trọng số trong ZIP nhỏ này.
