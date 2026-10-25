@@ -126,7 +126,71 @@ def runtime_identity():
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
     # Pydantic's default details can echo an invalid API key; return no raw input.
+    if request.method == 'POST' and request.url.path == '/api/speech':
+        feedback = speech_field_feedback(error.errors())
+        if feedback:
+            return JSONResponse(feedback, status_code=422)
     return JSONResponse({'detail': 'Dữ liệu không hợp lệ. Kiểm tra giới hạn ký tự, thời lượng và các trường đã nhập.'}, status_code=422)
+
+
+def speech_field_feedback(errors):
+    """Explain known speech controls without returning request values or keys."""
+    hints = {
+        'text': 'Nhập nội dung cần đọc; tối đa ' + ('1.000.000' if IS_HMONG else '200.000') + ' ký tự.',
+        'voice_id': 'Chọn giọng đọc trước khi tạo voice.',
+        'language': 'Chọn ngôn ngữ được giọng đọc hỗ trợ.',
+        'speed': 'Tốc độ đọc cần từ 0,7 đến 1,4 lần.',
+        'format': 'Chọn định dạng âm thanh WAV hoặc MP3.',
+        'input_format': 'Chọn định dạng lời TXT hoặc SRT.',
+        'skip_timestamps': 'Kiểm tra tùy chọn bỏ mốc phút–giây.',
+        'max_minutes': 'Giới hạn bản thu cần là số phút nguyên từ 1 đến 180.',
+        'paragraph_pause': 'Khoảng nghỉ cần từ 0 đến 3 giây.',
+        'delivery': 'Chọn nhịp đọc trong danh sách.',
+        'emotion': 'Chọn sắc thái trong danh sách.',
+        'emotion_strength': 'Mức độ sắc thái cần từ 0 đến 1.',
+        'auto_rhythm': 'Kiểm tra tùy chọn tự chia nhịp.',
+        'hmong_phrase_context': 'Kiểm tra tùy chọn giữ ngữ cảnh cụm Hmong.',
+        'quality': 'Chọn chế độ xử lý tự động, tiêu chuẩn hoặc nhanh.',
+        'hmong_steps': 'Số bước Hmong cần là số nguyên từ 4 đến 32.',
+        'nano_threads': 'Số luồng CPU cần là số nguyên từ 1 đến 8.',
+        'nano_parallel': 'Số tiến trình cần là số nguyên từ 1 đến 4.',
+        'nano_steps': 'Số bước Nano cần là số nguyên từ 4 đến 16.',
+        'video_id': 'Chọn lại video cần lồng tiếng.',
+        'video_offset': 'Thời điểm bắt đầu đọc cần từ 0 đến 10.800 giây.',
+        'video_mix': 'Kiểm tra tùy chọn giữ âm thanh gốc.',
+        'timeline_seconds': 'Thời lượng video cần lớn hơn 0 và không quá 10.800 giây.',
+        'max_cue_tempo': 'Mức tăng tốc SRT tối đa cần từ 1 đến 2 lần.',
+        'cue_fit': 'Chọn cách căn SRT đúng ô hoặc dùng khoảng trống.',
+        'character_voices': 'Kiểm tra giọng nhân vật; tối đa 32 nhân vật.',
+        'cue_characters': 'Kiểm tra nhân vật của từng câu; tối đa 10.000 câu.',
+        'caption_style': 'Kiểm tra thiết lập hiển thị phụ đề.',
+        'caption_cues': 'Kiểm tra phụ đề; tối đa 10.000 câu.',
+        'export_resolution': 'Chọn độ phân giải gốc, 720p, 1080p hoặc 2160p.',
+        'export_quality': 'Chọn chất lượng xuất cân bằng, cao nhất hoặc nhanh.',
+        'logo': 'Chọn lại vùng logo trên video.',
+        'logos': 'Kiểm tra vùng logo; tối đa 20 vùng.',
+    }
+    safe_codes = {'missing', 'string_type', 'string_too_short', 'string_too_long',
+                  'string_pattern_mismatch', 'float_type', 'float_parsing', 'finite_number',
+                  'int_type', 'int_parsing', 'int_from_float', 'greater_than',
+                  'greater_than_equal', 'less_than', 'less_than_equal', 'bool_type',
+                  'bool_parsing', 'literal_error', 'list_type', 'dict_type', 'too_long'}
+    feedback = []
+    seen = set()
+    for error in errors:
+        location = error.get('loc', ())
+        field = location[1] if len(location) > 1 and location[0] == 'body' else None
+        if field not in hints or field in seen:
+            continue
+        seen.add(field)
+        code = error.get('type')
+        feedback.append({'field': field, 'code': code if code in safe_codes else 'invalid',
+                         'message': hints[field]})
+        if len(feedback) == 8:
+            break
+    if feedback:
+        return {'detail': ' '.join(item['message'] for item in feedback[:3]),
+                'code': 'invalid_speech_fields', 'field': feedback[0]['field'], 'errors': feedback}
 
 
 executor = ThreadPoolExecutor(max_workers=1)
@@ -586,6 +650,7 @@ def speech(body: Speech):
     preset_reference_fingerprint = None
     voice_snapshot = None
     character_cast = None
+    validation_field = 'text'
     try:
         if body.video_id and len(body.text) > MAX_CHARACTERS:
             raise ValueError('Lồng tiếng video tối đa 200.000 ký tự và 3 giờ. Dùng mục Văn bản thành giọng nói cho sách dài tới 1.000.000 ký tự.')
@@ -612,6 +677,7 @@ def speech(body: Speech):
                 preset_reference_fingerprint = reference_fingerprint(voice['speaker'])
             else:
                 reference_text = voice.get('transcript','')
+            validation_field = 'voice_id'
             validate_voice_text(reference_text,engine,'Lời mẫu tham chiếu')
             voice_snapshot = make_voice_snapshot({**voice, 'engine': engine}, engine, body.language, DATA)
             preset_reference_fingerprint = voice_snapshot['hmong_reference_fingerprint']
@@ -631,6 +697,16 @@ def speech(body: Speech):
                 character_cast = {'version': 1, 'default_voice': make_voice_snapshot({**voice, 'engine': engine}, engine, body.language, DATA),
                                   'voices': snapshots, 'cues': body.cue_characters}
     except ValueError as exc:
+        if getattr(exc, 'code', None) == 'unsupported_speech_characters':
+            characters = getattr(exc, 'unsupported_characters', [])[:16]
+            detail = str(exc)
+            if any(character.isdigit() for character in characters):
+                detail += ' Viết các số bằng chữ Hmong trước khi tạo voice.'
+            if any(character in '/@' for character in characters):
+                detail += ' Sửa đường dẫn hoặc địa chỉ thành lời Hmong muốn đọc.'
+            return JSONResponse({'detail': detail, 'field': validation_field,
+                                 'code': 'unsupported_speech_characters',
+                                 'unsupported_characters': characters}, status_code=422)
         raise HTTPException(422, str(exc)) from None
     except OSError:
         raise HTTPException(422, 'Không đọc được mẫu giọng Hmong mặc định. '

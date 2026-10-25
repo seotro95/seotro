@@ -26,6 +26,58 @@ FEMALE = 'hmong-female'
 REPORT_NAME = 'browser-smoke.json'
 HYPHENATED_SAMPLE = 'Nyob-zoo, kuv yog ib tug Hmoob.'
 SAMPLE = 'Nyob zoo. Ua tsaug rau koj mloog.'
+INVALID_SAMPLE = 'Kuv muaj 2 tug me nyuam.'
+
+
+def check_click_rejection(page, expect):
+    """Reject a real unsupported draft and keep the visible editor recoverable."""
+    script, button = page.locator('#script'), page.locator('#generate')
+    script.fill(INVALID_SAMPLE)
+    page.locator('#format').select_option('wav')
+    page.locator('#script-format').select_option('txt')
+    expect(button).to_be_enabled()
+    requests = []
+
+    def collect(request):
+        if urlparse(request.url).path == '/api/speech' and request.method == 'POST':
+            requests.append(request)
+
+    page.on('request', collect)
+    try:
+        with page.expect_response(lambda response:
+                urlparse(response.url).path == '/api/speech'
+                and response.request.method == 'POST', timeout=30000) as pending:
+            button.click()
+        response = pending.value
+        payload = response.request.post_data_json
+        assert response.status == 422, response.text()
+        assert payload['text'] == INVALID_SAMPLE and payload['voice_id'] == MALE
+        assert payload['language'] == 'mww'
+        detail = response.json()['detail']
+        assert isinstance(detail, str) and detail.strip(), 'HTTP 422 must explain how to fix the draft'
+        inline, output = page.locator('#generate-status'), page.locator('#output-subtitle')
+        expect(inline).to_have_text(detail)
+        expect(output).to_have_text(detail)
+        expect(page.locator('#output-title')).to_have_text('Chưa tạo được bản thu')
+        expect(button).to_be_enabled()
+        assert script.input_value() == INVALID_SAMPLE, 'Rejected speech must preserve the editable draft'
+        # Visibility must include the viewport: the original notice had a
+        # nonzero box but was thousands of pixels above the clicked button.
+        expect(inline).to_be_in_viewport()
+        expect(output).to_be_in_viewport()
+        page.wait_for_timeout(350)
+        assert len(requests) == 1, 'A rejected speech POST must never be retried automatically'
+        return {'success': True, 'real_ui_post': True, 'responses_mocked': False,
+                'ui_entrypoint': '#generate', 'invalid_text': INVALID_SAMPLE,
+                'request_text': payload['text'], 'request_voice_id': payload['voice_id'],
+                'request_language': payload['language'], 'http_status': response.status,
+                'request_count': len(requests), 'error_detail': detail,
+                'inline_error': inline.inner_text(), 'output_error': output.inner_text(),
+                'output_error_title': page.locator('#output-title').inner_text(),
+                'inline_error_visible': True, 'output_error_visible': True,
+                'button_unlocked': True, 'draft_preserved': True}
+    finally:
+        page.remove_listener('request', collect)
 
 
 def check_release_features(page, context, get_json, expect, tab, references):
@@ -354,7 +406,13 @@ def run(url, reports, expected_references, *, allow_non_windows=False):
                 return record
 
             explicit('male')
+            result['click_recovery'] = check_click_rejection(page, expect)
             result['voices'][MALE] = synthesize('main_male_button', MALE, HYPHENATED_SAMPLE)
+            result['click_recovery'].update({
+                'recovery_case': 'main_male_button',
+                'recovery_job_id': result['voices'][MALE]['job_id'],
+                'recovered_audio_sha256': result['voices'][MALE]['sha256'],
+                'recovery_succeeded': True})
             result['hyphenated_text_preserved'] = True
             explicit('female')
             result['voices'][FEMALE] = synthesize('main_female_button', FEMALE)
@@ -417,7 +475,7 @@ def run(url, reports, expected_references, *, allow_non_windows=False):
                 pass
         (reports / REPORT_NAME).write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding='utf-8')
     print('PASS: real ' + ('Windows ' if sys.platform == 'win32' else 'development ') +
-          'browser male/female selection, library filter recovery, '
+          'browser click-error recovery, male/female selection, library filter recovery, '
           'cross-panel speech, playback, downloads and verified references.', flush=True)
     return result
 

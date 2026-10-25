@@ -359,6 +359,14 @@ class PCMWriter:
         self.file.close()
 
 
+def _labelled_voice_text_error(exc, label):
+    error = ValueError(f'{label}: {exc}')
+    for attribute in ('code', 'unsupported_characters'):
+        if hasattr(exc, attribute):
+            setattr(error, attribute, getattr(exc, attribute))
+    return error
+
+
 def validate_voice_text(text,engine,label='Nội dung'):
     import unicodedata
     if engine in {'f5_hmong', 'hmong_native'}:
@@ -366,13 +374,13 @@ def validate_voice_text(text,engine,label='Nội dung'):
         try:
             text = normalize_text(text)
         except ValueError as exc:
-            raise ValueError(f'{label}: {exc}') from None
+            raise _labelled_voice_text_error(exc, label) from None
         if engine == 'hmong_native':
             from hmong_native import EngineError, validate_text
             try:
                 validate_text(text)
             except EngineError as exc:
-                raise ValueError(f'{label}: {exc}') from None
+                raise _labelled_voice_text_error(exc, label) from None
     if not any(c.isalnum() for c in text):
         raise ValueError(f'{label} chỉ có dấu hoặc ký hiệu, chưa có chữ/số để đọc. Sửa lời hoặc bỏ câu này trước khi tạo voice.')
     if engine in {'vieneu','vieneu_nano'}:

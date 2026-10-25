@@ -16,6 +16,11 @@ import unicodedata
 class HmongTextError(ValueError):
     """An actionable text or pacing error suitable for the user interface."""
 
+    def __init__(self, message, *, unsupported_characters=()):
+        super().__init__(message)
+        self.unsupported_characters = list(dict.fromkeys(unsupported_characters))[:16]
+        self.code = 'unsupported_speech_characters' if self.unsupported_characters else None
+
 
 _TRANSLATION = str.maketrans({
     **{character: "'" for character in '‘’‚‛ʼ'},
@@ -46,12 +51,14 @@ def normalize_text(text: str, *, vocabulary: Collection[str] | Mapping[str, obje
     unsupported = [character for character in normalized if character not in _ALLOWED]
     if unsupported:
         raise HmongTextError('Nội dung cần dùng chữ Hmong RPA (a–z), với chữ đuôi ghi thanh điệu. '
-                             'Ký tự chưa hỗ trợ: ' + _shown(unsupported) + '. Không tự đổi hoặc bỏ chữ.')
+                             'Ký tự chưa hỗ trợ: ' + _shown(unsupported) + '. Không tự đổi hoặc bỏ chữ.',
+                             unsupported_characters=unsupported)
     if vocabulary is not None:
         unknown = [character for character in normalized if character not in vocabulary]
         if unknown:
             raise HmongTextError('Mô hình không có các ký tự: ' + _shown(unknown)
-                                 + '. Hãy sửa văn bản; tool không tự thay chúng bằng khoảng trắng.')
+                                 + '. Hãy sửa văn bản; tool không tự thay chúng bằng khoảng trắng.',
+                                 unsupported_characters=unknown)
     return normalized
 
 

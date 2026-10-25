@@ -54,7 +54,10 @@ def validate_text(text):
         result = normalize_text(text).replace('-', ' ').lower()
         return normalize_text(result, vocabulary=_INPUT_SYMBOLS)
     except HmongTextError as exc:
-        raise EngineError(str(exc)) from None
+        error = EngineError(str(exc))
+        error.code = exc.code
+        error.unsupported_characters = exc.unsupported_characters
+        raise error from None
 
 
 def availability():

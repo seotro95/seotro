@@ -23,7 +23,7 @@ from build_windows import copy_runtime, download_verified_ffmpeg
 from fresh_hmong_portable import wave_evidence_bytes
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.6.1'
+VERSION = '1.6.2'
 ARCHIVE_NAME = f'Voice-Studio-Hmong-{VERSION}-Windows-x64.zip'
 
 
@@ -172,11 +172,13 @@ def checked_run(command, *, environment, cwd, timeout=2400):
 
 
 def write_notices(root, model_manifest, qa_report):
-    notice = '''VOICE STUDIO HMONG 1.6.1 — WINDOWS X64
+    notice = '''VOICE STUDIO HMONG 1.6.2 — WINDOWS X64
 
 Chi tai MOT goi ZIP va giai nen TOAN BO. Mo MO_VOICE_STUDIO_HMONG.bat.
 HUONG DAN DAY DU: mo HUONG-DAN-HMONG.html cung thu muc bang trinh duyet.
 Khi tool da mo, bam Huong dan hoac truy cap /help/hmong trong giao dien.
+Bam Tao giong gap loi: xem thong bao ngay canh nut va khu vuc ket qua.
+Ban nhap duoc giu de sua; loi tai danh sach giong co nut Thu lai.
 Tep mo chinh chon bo nhanh VITS Hmong + OpenVoice V2, khong vo tinh mo F5.
 Cong cu nang cao nam trong tools; tools/MO_F5_HMONG.bat mo F5 16 buoc FP32.
 Da kem Python, thu vien CPU, FFmpeg, hai MP3 nguon va cac doan tham chieu.
@@ -278,7 +280,7 @@ def validate_browser_report(report):
     if report.get('expected_reference_fingerprints') != expected:
         raise ValueError('Browser QA preset reference identities differ from the supplied recordings')
     voices, cases = report.get('voices', {}), report.get('cases', [])
-    if set(voices) != set(expected) or len(cases) < 4:
+    if set(voices) != set(expected) or len(cases) != 4:
         raise ValueError('Browser QA must render both presets and the library/workspace cases')
     for item in [*voices.values(), *cases]:
         ident = item.get('voice_id')
@@ -304,6 +306,27 @@ def validate_browser_report(report):
                       'main_female_to_workspace_speech': 'hmong-female'}
     if {case.get('case'): case.get('voice_id') for case in cases} != expected_cases:
         raise ValueError('Browser QA must cover both explicit buttons, the library filter and workspace speech')
+    click = report.get('click_recovery', {})
+    first_male = next(case for case in cases if case['case'] == 'main_male_button')
+    detail = click.get('error_detail')
+    if (any(click.get(key) is not True for key in ('success', 'real_ui_post',
+            'inline_error_visible', 'output_error_visible', 'button_unlocked',
+            'draft_preserved', 'recovery_succeeded'))
+            or click.get('responses_mocked') is not False
+            or click.get('ui_entrypoint') != '#generate'
+            or click.get('invalid_text') != 'Kuv muaj 2 tug me nyuam.'
+            or click.get('request_text') != click.get('invalid_text')
+            or click.get('request_voice_id') != 'hmong-male' or click.get('request_language') != 'mww'
+            or type(click.get('http_status')) is not int or click.get('http_status') != 422
+            or type(click.get('request_count')) is not int or click.get('request_count') != 1
+            or not isinstance(detail, str) or not detail.strip()
+            or click.get('inline_error') != detail or click.get('output_error') != detail
+            or click.get('output_error_title') != 'Chưa tạo được bản thu'
+            or click.get('recovery_case') != 'main_male_button'
+            or click.get('recovery_job_id') != first_male['job_id']
+            or click.get('recovered_audio_sha256') != first_male['sha256']
+            or voices['hmong-male'] != first_male):
+        raise ValueError('Browser QA must visibly recover from a real rejected Generate click and complete the first male WAV')
     if not any('Nyob-zoo' in case.get('text', '') for case in cases):
         raise ValueError('Browser QA must complete the original hyphenated Hmong text')
     features = report.get('features_1_6', {})

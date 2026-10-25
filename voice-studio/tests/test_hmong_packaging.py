@@ -93,7 +93,7 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
 
 
 def test_archive_has_valid_crc_and_matching_sha256(tmp_path):
-    root = tmp_path / 'Voice-Studio-Hmong-1.6.1'
+    root = tmp_path / 'Voice-Studio-Hmong-1.6.2'
     root.mkdir()
     (root / 'hello.txt').write_bytes(b'relocatable')
     archive = tmp_path / 'bundle.zip'
@@ -182,6 +182,18 @@ def browser_report_fixture():
             'real_ui_synthesis': True, 'engine': 'hmong_native',
             'cloned_filter_library_selection': True, 'cross_panel_selection': True,
             'hyphenated_text_preserved': True,
+            'click_recovery': {'success': True, 'real_ui_post': True, 'responses_mocked': False,
+                'ui_entrypoint': '#generate', 'invalid_text': 'Kuv muaj 2 tug me nyuam.',
+                'request_text': 'Kuv muaj 2 tug me nyuam.', 'request_voice_id': 'hmong-male',
+                'request_language': 'mww', 'http_status': 422, 'request_count': 1,
+                'error_detail': 'Write numbers as Hmong words.',
+                'inline_error': 'Write numbers as Hmong words.',
+                'output_error': 'Write numbers as Hmong words.',
+                'output_error_title': 'Chưa tạo được bản thu',
+                'inline_error_visible': True, 'output_error_visible': True,
+                'button_unlocked': True, 'draft_preserved': True,
+                'recovery_case': 'main_male_button', 'recovery_job_id': cases[0]['job_id'],
+                'recovered_audio_sha256': cases[0]['sha256'], 'recovery_succeeded': True},
             'runtime': {'version': packaging.VERSION + '-hmong', 'backend': 'hmong_native'},
             'browser': {'channel': 'msedge', 'version': '142.0', 'responses_mocked': False},
             'script_sha256': hashlib.sha256((PACKAGING / 'browser_hmong_portable.py').read_bytes().replace(b'\r\n', b'\n')).hexdigest(),
@@ -329,6 +341,40 @@ def test_first_run_qa_refuses_existing_data_without_modifying_it(tmp_path, monke
 def test_windows_browser_gate_accepts_all_actual_ui_synthesis_cases():
     report = browser_report_fixture()
     assert packaging.validate_browser_report(report) is report
+
+
+@pytest.mark.parametrize('failure', ['missing', 'mocked', 'not_rejected', 'duplicate_post',
+        'inline_offscreen', 'output_offscreen', 'locked', 'draft_lost', 'empty_error',
+        'wrong_inline', 'wrong_output', 'idle_output', 'wrong_text', 'wrong_request',
+        'wrong_voice', 'wrong_language', 'no_recovery', 'unrelated_job', 'unrelated_audio',
+        'wrong_entrypoint', 'fifth_case', 'boolean_count', 'string_status'])
+def test_windows_browser_gate_requires_real_click_error_and_same_job_recovery(failure):
+    report = copy.deepcopy(browser_report_fixture())
+    mutations = {
+        'mocked': ('responses_mocked', True), 'not_rejected': ('http_status', 202),
+        'duplicate_post': ('request_count', 2), 'inline_offscreen': ('inline_error_visible', False),
+        'output_offscreen': ('output_error_visible', False), 'locked': ('button_unlocked', False),
+        'draft_lost': ('draft_preserved', False), 'empty_error': ('error_detail', ''),
+        'wrong_inline': ('inline_error', 'Different error'),
+        'wrong_output': ('output_error', 'Different error'),
+        'idle_output': ('output_error_title', 'Bản thu của bạn sẽ xuất hiện ở đây'),
+        'wrong_text': ('invalid_text', 'Nyob zoo.'), 'wrong_request': ('request_text', 'Nyob zoo.'),
+        'wrong_voice': ('request_voice_id', 'hmong-female'), 'wrong_language': ('request_language', 'vi'),
+        'no_recovery': ('recovery_succeeded', False), 'unrelated_job': ('recovery_job_id', 'other-job'),
+        'unrelated_audio': ('recovered_audio_sha256', 'b' * 64),
+        'wrong_entrypoint': ('ui_entrypoint', '#another-button'),
+        'boolean_count': ('request_count', True), 'string_status': ('http_status', '422')}
+    if failure == 'missing':
+        del report['click_recovery']
+    elif failure == 'fifth_case':
+        extra = copy.deepcopy(report['cases'][0])
+        extra['job_id'] = 'job-5'
+        report['cases'].append(extra)
+    else:
+        key, value = mutations[failure]
+        report['click_recovery'][key] = value
+    with pytest.raises(ValueError):
+        packaging.validate_browser_report(report)
 
 
 @pytest.mark.parametrize('failure', ['linux', 'skipped', 'library', 'workspace', 'speaker',
@@ -574,7 +620,7 @@ def test_native_smoke_probes_primary_and_every_advanced_batch(tmp_path, monkeypa
     spec = importlib.util.spec_from_file_location('smoke_hmong', PACKAGING / 'smoke_hmong_portable.py')
     smoke = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(smoke)
-    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.6.1'
+    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.6.2'
     root.mkdir(parents=True)
     packaging.write_launcher(root)
     calls = []
@@ -620,7 +666,7 @@ def test_windows_launcher_smoke_checks_reuse_and_only_cleans_up_its_first_proces
     url = 'http://127.0.0.1:8770'
     engine = 'hmong_native' if backend == 'native' else 'f5_hmong'
     instance = {'instance_id': 'qa-server', 'pid': 102, 'url': url, 'data_id': 'qa-data',
-                'root_id': 'qa-root', 'backend': engine, 'version': '1.6.1-hmong'}
+                'root_id': 'qa-root', 'backend': engine, 'version': '1.6.2-hmong'}
     process = SimpleNamespace(pid=101, stdout=io.StringIO('Studio: ' + url + '\n'),
                               poll=lambda: None, wait=lambda **kwargs: 0)
     server = SimpleNamespace(is_running=lambda: True, parents=lambda: [SimpleNamespace(pid=101)])
