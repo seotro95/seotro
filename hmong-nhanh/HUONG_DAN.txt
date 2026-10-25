@@ -1,20 +1,49 @@
-﻿HMONG NHANH — BẢN GỌN 0.4.0
+HMONG NHANH — BẢN GỌN 0.5.0
 
-1. Giải nén toàn bộ ZIP vào một thư mục mới. Cài Python 3.12 64-bit nếu máy chưa có; bật Python Launcher khi cài.
-2. Mở MO_HMONG_NHANH.bat. Lần đầu công cụ tự cài thư viện và tải mô hình F5-Hmong/Vocos (khoảng 1,4 GB mô hình, chưa tính thư viện). Cần Internet và nên có ít nhất 6 GB đĩa trống. Giữ cửa sổ lệnh mở. Các lần sau dùng lại dữ liệu đã tải. Không cần cài FFmpeg riêng.
+CÁCH MỞ VÀ TẠO GIỌNG
+
+1. Giải nén toàn bộ ZIP vào một thư mục mới. Cài Python 3.12 64-bit nếu máy chưa có; bật Python Launcher khi cài. Chỉ mở MO_HMONG_NHANH.bat để sử dụng.
+2. Lần đầu công cụ tự cài thư viện và tải mô hình F5-Hmong/Vocos, khoảng 1,4 GB mô hình chưa tính thư viện. Cần Internet và nhiều GB đĩa trống; bộ CUDA cần thêm vài GB. Giữ cửa sổ lệnh mở. Các lần sau dùng lại dữ liệu đã tải. Không cần cài FFmpeg riêng.
 3. Chọn Nữ hoặc Nam. Mở “Chuẩn bị mẫu”, chọn một đoạn rõ lời 3–8 giây, nghe đoạn đó và chép chính xác lời Hmong vào ô lời mẫu rồi bấm Lưu. Làm một lần cho mỗi giọng. Hai MP3 gốc được giữ riêng; bản này chưa có lời tham chiếu đã được xác nhận nên không tự điền hoặc đoán nội dung mẫu.
-4. Nhập hoặc nhập tệp TXT, tối đa 2.000 ký tự/lượt. Chọn tốc độ rồi bấm Tạo giọng nói. Khi xong có thể nghe và Tải WAV. Nút Dừng chấm dứt tác vụ đang tạo.
+4. Nhập văn bản hoặc mở TXT UTF-8, tối đa 1.000.000 ký tự Unicode mỗi bản đọc. Tệp TXT tối đa 8 MB. Nội dung vượt giới hạn được báo lỗi, không tự cắt bỏ.
+5. Chọn cách kể, chế độ tạo giọng và nhịp đọc. Nên bấm “Đo tốc độ máy” và nghe một đoạn ngắn trước khi tạo bản dài. Bấm “Tạo giọng nói” để bắt đầu.
+6. Theo dõi tiến độ; nghe hoặc tải từng phần WAV khi phần đó hoàn tất. Mỗi phần dài tối đa khoảng 30 phút, nên bản dài có nhiều tệp. Giao diện phát trực tiếp từng phần, không nạp toàn bộ bản đọc vào bộ nhớ trình duyệt.
+7. Bấm “Dừng” khi cần. Những đoạn hoàn tất được lưu trên đĩa. Chọn bản đọc rồi bấm “Tiếp tục từ đoạn đã lưu”; sau khi đóng và mở lại tool cũng có thể tiếp tục. Đoạn đang tạo dở sẽ được làm lại. Chỉ một bản đọc được xử lý tại một thời điểm.
 
-Bản gọn chỉ giữ đọc văn bản Hmong, Nam/Nữ, tốc độ, mẫu tham chiếu, Tạo/Dừng và WAV. Không còn các màn hình video, nhận dạng, thu âm, biên tập, dự án, cảm xúc hoặc dịch vụ từ xa.
+CÁCH KỂ VÀ TỐC ĐỘ
 
-Dữ liệu nằm trong .data cạnh MO_HMONG_NHANH.bat. Thư mục app là mã và thư viện cần cho công cụ; không xóa. Tải WAV trước khi đóng cửa sổ lệnh. Khi cập nhật, giữ lại .data. Gói mới không xóa các bản công cụ khác đang có trên máy.
+- Sáu lựa chọn: Tự nhiên, Kể chuyện, Review phim, Tin tức, Quảng cáo, Thư giãn. Các lựa chọn điều chỉnh nhịp đọc và khoảng nghỉ giữa các đoạn xử lý. Đây không phải mô hình điều khiển cảm xúc hay chức năng tự viết kịch bản/review; bạn nhập nội dung cần đọc.
+- Bản nháp: 4 bước; Nhanh: 8 bước (mặc định); Cân bằng: 16 bước; Chất lượng: 32 bước. Ít bước giảm thời gian tính nhưng có thể giảm độ rõ hoặc độ giống giọng. Nghe thử để chọn mức phù hợp.
+- “Nhịp đọc” điều chỉnh nhanh/chậm của lời nói. “Chế độ tạo giọng” điều chỉnh số bước tính toán; hai lựa chọn có tác dụng khác nhau.
+- Công cụ giữ mô hình và mẫu đã xử lý trong bộ nhớ giữa các lượt để giảm thời gian nạp lại. Khi dừng tác vụ hoặc tắt tool, lần tạo sau cần nạp lại mô hình.
+- Mặc định tự chọn thiết bị khả dụng. Với GPU NVIDIA và driver tương thích, bộ cài chọn hoặc nâng từ bộ CPU sang CUDA. Không có GPU tương thích thì dùng CPU. Giao diện hiển thị thiết bị và kết quả đo; phát hiện có card NVIDIA chưa đồng nghĩa đã chạy được CUDA.
+- Nếu muốn dùng CPU và tránh tự nâng bộ CUDA, mở CMD tại thư mục công cụ rồi chạy: MO_HMONG_NHANH.bat --cpu
+- Có thể yêu cầu kiểm tra GPU bằng: MO_HMONG_NHANH.bat --gpu
 
-KIỂM TRA THỰC TẾ
-- 23 kiểm thử xử lý và tác vụ đạt, gồm chọn đúng mẫu Nam/Nữ, lưu độc lập, dừng/tạo lại và tải WAV.
-- Chromium đã kiểm tra giữ bản nháp theo giọng, phản hồi lưu chậm, gửi đúng giọng/tốc độ, phát/tải âm thanh và giao diện điện thoại. Phần tác vụ trong bài kiểm tra giao diện dùng dữ liệu mô phỏng.
-- Mô hình F5 thật đã tạo WAV 24 kHz dài 3,232 giây, có âm thanh, trong chế độ offline với mẫu công khai có lời chép đi kèm. Lần thử CPU mất khoảng 163 giây; không cam kết tạo nhanh trên mọi máy.
-- Chưa kiểm chứng phát âm Hmong Trắng hoặc độ giống hai giọng người dùng vì chưa có lời chép chính xác của hai đoạn tham chiếu. Chưa chạy tệp BAT trên Windows thật. Nghe kiểm tra trước khi sử dụng.
+MỤC TIÊU 1 GIỜ VOICE TRONG 2 PHÚT
 
-Nguồn mô hình: huggingface.co/Pakorn2112/F5TTS-Hmong
-Vocos: huggingface.co/charactr/vocos-mel-24khz
-Mô hình được tải từ HTTPS và đối chiếu checksum; không kèm trọng số trong ZIP nhỏ này.
+Mục tiêu này tương đương tốc độ 30 lần thời gian thực. Bản 0.5 chưa được xác nhận đạt mục tiêu đó.
+
+Mẫu thử thật trên CPU, cùng một câu ngắn với mẫu tham chiếu công khai có lời chép đi kèm:
+- Bản trước, 32 bước: 162,590 giây xử lý cho 3,232 giây âm thanh.
+- Bản 0.5, 8 bước, lượt đầu: 59,528 giây xử lý cho 3,467 giây âm thanh.
+- Bản 0.5, 8 bước, mô hình đã nạp: 55,949 giây xử lý cho 3,467 giây âm thanh.
+
+Thời gian lượt đầu giảm khoảng 2,7 lần trong các mẫu này. Tốc độ lượt đã nạp mô hình khoảng 0,062 lần thời gian thực, còn rất xa 30 lần. Đây là các lần sinh ngẫu nhiên độc lập; không phải phép so sánh chất lượng có kiểm soát. Chưa đo tạo đủ một giờ voice, chưa tạo âm thanh thật cho toàn bộ 1.000.000 ký tự và chưa đo GPU. Ước tính thời gian một giờ trong giao diện chỉ là phép ngoại suy từ phần đã xử lý; phần khoảng lặng được thêm vào không được tính là tăng tốc tạo lời nói.
+
+GIỮ DỮ LIỆU KHI CẬP NHẬT
+
+- Khi mở bằng MO_HMONG_NHANH.bat, dữ liệu nằm trong thư mục .data cạnh tệp BAT: mô hình, mẫu đã lưu, văn bản, tiến độ và âm thanh. Thư mục app chứa mã và thư viện cần cho công cụ; không xóa.
+- Khi cập nhật từ bản gọn cũ, tắt tool rồi chép thư mục .data sang cạnh tệp BAT của bản mới. Giữ bản sao cũ đến khi kiểm tra xong. Nếu trước đây bạn đã đặt HMONG_STUDIO_DATA_DIR, tiếp tục dùng đường dẫn đó.
+- WAV mono 24 kHz, 16-bit chiếm khoảng 173 MB mỗi giờ. Vì công cụ giữ cả các đoạn nhỏ để tiếp tục và các phần WAV đã ghép, cần khoảng 346 MB cho mỗi giờ thành phẩm, chưa tính tệp tạm, mô hình, thư viện và bộ nhớ đệm. Dành thêm dung lượng khi xử lý văn bản dài.
+- Gói mới chỉ có một lối mở chính và các tệp cần thiết cho đọc giọng. Các tính năng video, nhận dạng, thu âm, biên tập và dịch vụ từ xa của các bản khác không nằm trong gói này. Giải nén gói mới không tự xóa các thư mục công cụ cũ trên máy.
+
+PHẠM VI ĐÃ KIỂM CHỨNG
+
+94 kiểm thử tự động đã đạt. Một lượt kiểm tra tích hợp thật đi qua API, tác vụ lưu trên đĩa, xử lý văn bản dài, mô hình F5-Hmong và tải phần WAV đã hoàn tất: chế độ Kể chuyện, Nhanh 8 bước, CPU; 83,147 giây xử lý cho 3,691 giây âm thanh. Lượt này dùng mẫu công khai, có các công việc khác chạy cùng máy, nên không dùng để so sánh tốc độ có kiểm soát.
+
+Mô hình F5-Hmong thật đã xuất được WAV 24 kHz có âm thanh trong thử nghiệm offline. Chưa kiểm chứng phát âm Hmong Trắng hoặc độ giống hai giọng người dùng vì chưa có lời chép chính xác của hai đoạn tham chiếu. Chưa chạy tệp BAT trên Windows thật. Kiểm tra bằng tai trước khi sử dụng bản đọc dài.
+
+Nguồn mô hình: https://huggingface.co/Pakorn2112/F5TTS-Hmong
+Vocos: https://huggingface.co/charactr/vocos-mel-24khz
+Mô hình được tải từ HTTPS và đối chiếu checksum; trọng số không nằm trong ZIP nhỏ này.

@@ -1,4 +1,5 @@
 """Open the local reader after its loopback HTTP server is ready."""
+import argparse
 import os
 from pathlib import Path
 import socket
@@ -31,7 +32,16 @@ def open_when_ready(url):
             time.sleep(.5)
 
 
-def main():
+def main(argv=None):
+    parser = argparse.ArgumentParser(description='Mo Hmong Nhanh tren may nay.')
+    device = parser.add_mutually_exclusive_group()
+    device.add_argument('--cpu', action='store_true', help='Tao giong bang CPU.')
+    device.add_argument('--gpu', action='store_true', help='Uu tien GPU sau khi bo cai da kiem tra CUDA.')
+    args = parser.parse_args(argv)
+    if args.cpu:
+        os.environ['HMONG_F5_DEVICE'] = 'cpu'
+    elif args.gpu:
+        os.environ['HMONG_F5_DEVICE'] = 'auto'
     import uvicorn
     from app import app
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as listener:

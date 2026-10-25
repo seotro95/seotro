@@ -1,0 +1,48 @@
+{
+  "text": "Nyob zoo, hnub no koj nyob li cas?",
+  "reference": "Bundled public F5 reference with exact transcript; not user voice references",
+  "quality": "fast",
+  "steps": 8,
+  "python": "3.12.14",
+  "dependencies": {
+    "f5-tts": "1.1.22",
+    "torch": "2.6.0+cpu",
+    "torchaudio": "2.6.0+cpu",
+    "numpy": "2.5.4"
+  },
+  "runs": [
+    {
+      "run": "cold",
+      "wall_seconds": 59.528,
+      "audio_seconds": 3.467,
+      "speed_factor": 0.0582,
+      "estimated_one_hour_seconds": 61817.81,
+      "rate": 24000,
+      "peak": 0.539520263671875,
+      "rms": 0.10842341929674149,
+      "device": "cpu"
+    },
+    {
+      "run": "warm",
+      "wall_seconds": 55.949,
+      "audio_seconds": 3.467,
+      "speed_factor": 0.062,
+      "estimated_one_hour_seconds": 58101.34,
+      "rate": 24000,
+      "peak": 0.49847412109375,
+      "rms": 0.10526780784130096,
+      "device": "cpu"
+    }
+  ],
+  "baseline32": {
+    "wall_seconds": 162.59,
+    "audio_seconds": 3.232,
+    "same_host": true,
+    "note": "Prior F5 high-level API; independent stochastic run, not a controlled quality comparison"
+  },
+  "limits": [
+    "One short sentence, CPU only; user voice similarity and Hmong pronunciation not evaluated.",
+    "Independent stochastic runs; new reference preprocessing preserves exact selected audio, unlike old high-level preprocessing.",
+    "One-hour times are arithmetic extrapolations of a short sample, not measured longform runs."
+  ]
+}

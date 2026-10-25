@@ -42,11 +42,11 @@ def test_status_requires_explicit_local_artifacts(tmp_path):
 def test_long_unpunctuated_text_is_read_sequentially_without_losing_words(tmp_path):
     reference = make_reference(tmp_path / 'ref.wav')
     model = Mock()
-    model.infer.return_value = ([.2] * 800, 8000, None)
     text = ' '.join(['Kuv hais lus Hmoob'] * 60)
-    with patch.object(engine, 'availability', return_value={'ready': True}), patch.object(engine, '_load_model', return_value=model):
+    prepared = {'seconds': 4, 'text': 'Kuv hais lus Hmoob rau koj. '}
+    with patch.object(engine, 'availability', return_value={'ready': True}), patch.object(engine, '_load_model', return_value=model), patch.object(engine, '_prepare_reference', return_value=prepared), patch.object(engine, '_infer_one', return_value=engine._wav([.2] * 800, 8000)) as infer:
         result = engine.synthesize(text, .8, reference, 'Kuv hais lus Hmoob rau koj.')
-    batches = [call.kwargs['gen_text'] for call in model.infer.call_args_list]
+    batches = [call.args[2] for call in infer.call_args_list]
     assert len(batches) > 1
     assert ' '.join(batches).split() == text.split()
     assert all(len(part.encode('utf-8')) <= 180 for part in batches)
@@ -97,15 +97,13 @@ def test_reference_duration_is_not_silently_cropped(tmp_path, seconds):
 def test_contract_uses_exact_reference_and_returns_decodable_wav(tmp_path):
     reference = make_reference(tmp_path / 'ref.wav')
     model = Mock()
-    model.infer.return_value = ([math.sin(index * .1) * .3 for index in range(8000)], 8000, None)
-    with patch.object(engine, 'availability', return_value={'ready': True}), patch.object(engine, '_load_model', return_value=model):
+    prepared = {'seconds': 4, 'text': 'Kuv hais lus Hmoob. '}
+    wav = engine._wav([math.sin(index * .1) * .3 for index in range(8000)], 8000)
+    with patch.object(engine, 'availability', return_value={'ready': True}), patch.object(engine, '_load_model', return_value=model), patch.object(engine, '_prepare_reference', return_value=prepared) as prepare, patch.object(engine, '_infer_one', return_value=wav) as infer:
         data = engine.synthesize(' Nyob zoo. ', .8, reference, ' Kuv hais lus Hmoob. ')
-    call = model.infer.call_args.kwargs
-    assert call['ref_file'] == str(reference)
-    assert call['ref_text'] == 'Kuv hais lus Hmoob.'
-    assert call['gen_text'] == 'Nyob zoo.'
-    assert call['speed'] == .8
-    assert call['progress'] is None
+    assert prepare.call_args.args[1] == reference
+    assert prepare.call_args.args[2].strip() == 'Kuv hais lus Hmoob.'
+    infer.assert_called_once_with(model, prepared, 'Nyob zoo.', .8, 8)
     with wave.open(io.BytesIO(data)) as output:
         assert output.getnchannels() == 1
         assert output.getsampwidth() == 2
@@ -123,8 +121,8 @@ def test_invalid_generated_audio_is_never_reported_as_success(samples):
 def test_inference_exception_is_sanitized_and_lock_is_released(tmp_path):
     reference = make_reference(tmp_path / 'ref.wav')
     model = Mock()
-    model.infer.side_effect = RuntimeError('private/path and untrusted details')
-    with patch.object(engine, 'availability', return_value={'ready': True}), patch.object(engine, '_load_model', return_value=model):
+    prepared = {'seconds': 4, 'text': 'Kuv hais lus Hmoob. '}
+    with patch.object(engine, 'availability', return_value={'ready': True}), patch.object(engine, '_load_model', return_value=model), patch.object(engine, '_prepare_reference', return_value=prepared), patch.object(engine, '_infer_one', side_effect=RuntimeError('private/path and untrusted details')):
         with pytest.raises(engine.CloningError) as caught:
             engine.synthesize('Nyob zoo', 1, reference, 'Kuv hais lus Hmoob')
     assert 'private/path' not in str(caught.value)

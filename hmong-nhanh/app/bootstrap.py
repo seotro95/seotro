@@ -16,7 +16,7 @@ PREFERRED = ((3, 12), (3, 11), (3, 10))
 INSTALL_HELP = (
     "Can cai Python 3.12 (64-bit), bat Python Launcher va Add Python to PATH. "
     "Tai tu https://www.python.org/downloads/windows/ . "
-    "Sau khi cai, mo lai start.bat. Khong can cai Visual C++ de sua loi Python 3.15 nay."
+    "Sau khi cai, mo lai MO_HMONG_NHANH.bat. Khong can cai Visual C++ de sua loi Python 3.15 nay."
 )
 _PROBE = (
     "import json,sys,struct; "

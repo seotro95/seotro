@@ -6,9 +6,9 @@ set "PYTHONUTF8=1"
 echo Hmong Nhanh - Doc van ban bang giong Nam / Nu
 call prepare_env.bat
 if errorlevel 1 goto fail
-.venv\Scripts\python.exe setup_runtime.py
+.venv\Scripts\python.exe setup_runtime.py %*
 if errorlevel 1 goto fail
-.venv\Scripts\python.exe launch.py
+.venv\Scripts\python.exe launch.py %*
 if errorlevel 1 goto fail
 exit /b 0
 :fail

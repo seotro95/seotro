@@ -43,7 +43,8 @@ def wav_bytes():
 
 def test_male_and_female_route_to_distinct_wav_and_exact_transcript(client):
     seen = []
-    def synth(text, speed, sample, transcript):
+    def synth(text, speed, sample, transcript, quality='fast'):
+        assert quality == 'fast'
         with wave.open(str(sample)) as wav:
             assert wav.getframerate() == 24000
             assert wav.getnchannels() == 1
@@ -96,7 +97,7 @@ def test_missing_model_reference_and_bad_input_never_start_worker(client):
             assert result.status_code == 503
             assert result.json()['detail'] == 'Cần cài mô hình.'
         for payload in ({'text': ' ', 'voice': 'hmong-white-male'},
-                        {'text': 'x' * 2001, 'voice': 'hmong-white-male'},
+                        {'text': 'x' * 1_000_001, 'voice': 'hmong-white-male'},
                         {'text': 'Nyob zoo', 'voice': 'unknown'},
                         {'text': 'Nyob zoo', 'voice': 'hmong-white-female', 'speed': 4}):
             assert client.post('/api/speech/jobs', json=payload).status_code == 422
@@ -148,6 +149,11 @@ def test_cancellable_worker_and_restart(client, tmp_path, monkeypatch):
     assert client.post('/api/speech/jobs/' + ident + '/stop').json()['status'] == 'cancelled'
     assert process.returncode is not None
     assert client.get('/api/speech/jobs/' + ident + '/audio').status_code == 409
+    listed = client.get('/api/speech/jobs').json()['jobs']
+    assert listed[0]['id'] == ident and listed[0]['resumable']
+    resumed = client.post('/api/speech/jobs/' + ident + '/resume')
+    assert resumed.status_code == 202 and resumed.json()['id'] == ident
+    assert client.post('/api/speech/jobs/' + ident + '/stop').json()['status'] == 'cancelled'
     another = client.post('/api/speech/jobs', json=payload)
     assert another.status_code == 202
     assert client.post('/api/speech/jobs/' + another.json()['id'] + '/stop').json()['status'] == 'cancelled'
@@ -157,14 +163,18 @@ def test_worker_result_is_downloadable_audio(client, tmp_path, monkeypatch):
     worker = tmp_path / 'worker.py'
     worker.write_text("""import sys,json,wave
 from pathlib import Path
-p=Path(sys.argv[1]); raw=json.load(sys.stdin)
-assert raw['voice']=='hmong-white-male'
-assert raw['_reference']['text']=='Exact male transcript'
-assert Path(raw['_reference']['path']).is_file()
-with wave.open(str(p/'audio.bin'),'wb') as wav:
-    wav.setnchannels(1);wav.setsampwidth(2);wav.setframerate(24000)
-    wav.writeframes(b'\\x01\\x01'*2400)
-(p/'result.json').write_text(json.dumps({'media_type':'audio/wav'}))
+for line in sys.stdin:
+    p=Path(json.loads(line)['folder']); raw=json.loads((p/'input.json').read_text())
+    assert raw['voice']=='hmong-white-male'
+    assert raw['_reference']['text']=='Exact male transcript'
+    assert Path(raw['_reference']['path']).is_file()
+    (p/'parts').mkdir(exist_ok=True)
+    with wave.open(str(p/'parts/part-0001.wav'),'wb') as wav:
+        wav.setnchannels(1);wav.setsampwidth(2);wav.setframerate(24000)
+        wav.writeframes(bytes([1,1])*2400)
+    (p/'result.json').write_text(json.dumps({'completed':1,'total':1,'parts':[
+        {'number':1,'filename':'part-0001.wav','seconds':0.1}]}))
+    print(json.dumps({'ok':True}), flush=True)
 """, encoding='utf-8')
     monkeypatch.setattr(voice_jobs, 'WORKER', worker)
     save(client, 'male', 'Exact male transcript')
@@ -181,5 +191,38 @@ with wave.open(str(p/'audio.bin'),'wb') as wav:
     assert state['status'] == 'completed', state
     response = client.get('/api/speech/jobs/' + ident + '/audio')
     assert response.status_code == 200
+    part = state['parts'][0]
+    downloaded = client.get(part['url'])
+    assert downloaded.content == response.content
+    ranged = client.get(part['url'], headers={'Range': 'bytes=0-43'})
+    assert ranged.status_code == 206 and ranged.content == response.content[:44]
+    assert client.get('/api/speech/jobs/' + ident + '/parts/2').status_code == 404
     with wave.open(io.BytesIO(response.content)) as audio:
         assert audio.getnframes() == 2400 and audio.getframerate() == 24000
+
+
+def test_million_unicode_options_and_benchmark_contract(client):
+    save(client, 'female', 'Exact female transcript')
+    with patch('app.voice_jobs.create', return_value={'id': 'sample', 'status': 'running', 'parts': []}) as create:
+        text = '😀' * 1_000_000
+        response = client.post('/api/speech/jobs', json={
+            'text': text, 'voice': 'hmong-white-female', 'quality': 'draft', 'style': 'film_review'})
+        assert response.status_code == 202
+        sent = create.call_args.args[0]
+        assert sent['text'] == text and sent['quality'] == 'draft' and sent['style'] == 'film_review'
+        for changes in ({'text': text + 'x'}, {'quality': 'unknown'}, {'style': 'unknown'}):
+            payload = {'text': 'Nyob zoo', 'voice': 'hmong-white-female', **changes}
+            assert client.post('/api/speech/jobs', json=payload).status_code == 422
+        result = client.post('/api/benchmark', json={'voice': 'hmong-white-female', 'quality': 'balanced', 'style': 'news'})
+        assert result.status_code == 202
+        sent = create.call_args.args[0]
+        assert sent['benchmark'] is True and sent['quality'] == 'balanced'
+        assert sent['style'] == 'news' and len(sent['text']) < 100
+        assert client.get('/api/status').json()['max_characters'] == 1_000_000
+
+
+def test_long_input_uses_jobs_not_synchronous_memory_buffer(client):
+    with patch('app.cloning_engine.synthesize') as synth:
+        response = client.post('/api/speech', json={'text': 'x' * 2001, 'voice': 'hmong-white-male'})
+        assert response.status_code == 422
+        synth.assert_not_called()
