@@ -309,7 +309,9 @@ def run_longform(job, data, execute_worker, env, *, cancelled=None):
             # completed. No parent archive can contain a limited/partial part.
             generated.replace(audio)
             subtitles.replace(folder / 'subtitles.srt')
-            (folder / 'transcript.txt').write_text(chapter.text + '\n', encoding='utf-8')
+            # Keep the archive's UTF-8/LF transcript identical on Windows;
+            # text-mode writes would expand LF to CRLF inside the ZIP.
+            (folder / 'transcript.txt').write_bytes((chapter.text + '\n').encode('utf-8'))
             hashes = {name: _file_digest(folder / name, check_cancel)
                       for name in ('audio.' + audio_format, 'transcript.txt', 'subtitles.srt')}
             write_json_atomic(folder / 'complete.json', {'identity': identity,
