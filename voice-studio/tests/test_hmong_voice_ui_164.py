@@ -28,6 +28,13 @@ def test_main_srt_defaults_to_words_without_timeline_and_allows_timed_mode(stati
 
 def test_new_presets_and_preferred_voice_survive_reload_but_not_override_manual_refresh(static_site):
     with click_page(static_site) as (page, state, config, voices, _):
+        # The fixture yields at DOMContentLoaded so startup-failure tests can
+        # hold its API calls. Finish this initial bootstrap before changing the
+        # simulated persisted preference and navigating to another document.
+        playwright.expect(page.locator('#voice')).to_have_value('hmong-male')
+        page.wait_for_function('studioInitialized === true && document.getElementById("workspace-version").textContent.includes("Voice Studio Hmong")')
+        error_stacks = []
+        page.on('pageerror', lambda error: error_stacks.append(error.stack))
         config['default_voice_id'] = 'hmong-female-3'
         voices.extend([{**voices[0], 'id': ident, 'name': name, 'builtin': True,
                         'sample_url': '/api/hmong/presets/' + ident + '/sample'}
@@ -60,7 +67,7 @@ def test_new_presets_and_preferred_voice_survive_reload_but_not_override_manual_
         assert page.locator('#voice-source').input_value() == 'ai'
         page.reload(wait_until='networkidle')
         playwright.expect(page.locator('#voice')).to_have_value('hmong-ngoc-huyen')
-        assert state['errors'] == []
+        assert state['errors'] == [], error_stacks
 
 
 def test_clone_file_selected_during_bootstrap_is_inspected_after_config_arrives(static_site):

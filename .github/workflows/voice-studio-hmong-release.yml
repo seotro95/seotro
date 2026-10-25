@@ -291,7 +291,7 @@ jobs:
             Write-Warning 'The checked 1.6.4 release remains published; obsolete release cleanup is incomplete.'
             throw
           } finally {
-            @{ checked_1_6_3_public_assets = $guardPassed; removed_release_tags = $removed; retained_runtime_release = 'voice-studio-hmong-1.6.1'; git_tags_or_branches_deleted = $false; failures = $failures } | ConvertTo-Json -Depth 10 | Set-Content -Encoding utf8 '${{ runner.temp }}/hmong-reports/release-cleanup.json'
+            @{ checked_1_6_4_public_assets = $guardPassed; removed_release_tags = $removed; retained_runtime_release = 'voice-studio-hmong-1.6.1'; git_tags_or_branches_deleted = $false; failures = $failures } | ConvertTo-Json -Depth 10 | Set-Content -Encoding utf8 '${{ runner.temp }}/hmong-reports/release-cleanup.json'
             "Obsolete Hmong releases removed: $($removed -join ', '). Cleanup failures: $($failures.Count). The checked 1.6.4 release remains published; 1.6.1 is retained as the pinned runtime archive." | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
           }
       - name: Retain obsolete release metadata and cleanup results
