@@ -140,9 +140,16 @@ def parse_document(text, timing='auto'):
     """
     if not isinstance(text, str) or not text.strip() or len(text) > MAX_CHARACTERS:
         raise ValueError('Nhập từ 1 đến 1.000.000 ký tự có nội dung.')
-    if timing not in ('auto', 'natural'):
-        raise ValueError('Chế độ thời gian phải là auto hoặc natural.')
+    if timing not in ('fit', 'auto', 'natural'):
+        raise ValueError('Chế độ thời gian phải là fit, auto hoặc natural.')
     text = text.lstrip('\ufeff').replace('\r\n', '\n').replace('\r', '\n')
+    candidate = text.strip()
+    if (len(candidate) > 2 and candidate[0] in (chr(34), chr(39))
+            and candidate[-1] == candidate[0]):
+        inner = candidate[1:-1].strip()
+        first_lines = inner.split('\n', 2)
+        if len(first_lines) > 1 and first_lines[0].strip().isdecimal() and _range(first_lines[1], 2):
+            text = inner
     lines, is_vtt = _without_vtt_metadata(text.split('\n'))
     ranges = [(i, value) for i, line in enumerate(lines) if (value := _range(line, i + 1)) is not None]
     if not ranges:
@@ -171,7 +178,7 @@ def parse_document(text, timing='auto'):
     cues, warning = [], []
     previous_end = 0
     for offset, (index, value) in enumerate(ranges):
-        if timing == 'auto' and value['end_ms'] > MAX_TIMELINE_SECONDS * 1000:
+        if timing != 'natural' and value['end_ms'] > MAX_TIMELINE_SECONDS * 1000:
             raise ValueError(f'Dòng {index + 1}: thời gian phụ đề vượt 168 giờ. Sửa mốc hoặc chọn đọc theo nhịp tự nhiên.')
         after = ranges[offset + 1][0] if offset + 1 < len(ranges) else len(lines)
         body = [value['inline']] + [lines[i] for i in range(index + 1, after) if i not in ids]
@@ -179,12 +186,16 @@ def parse_document(text, timing='auto'):
         if not spoken:
             raise ValueError(f'Dòng {index + 1}: phụ đề có thời gian nhưng chưa có lời để đọc.')
         if value['start_ms'] < previous_end:
-            if timing == 'auto':
+            if timing != 'natural':
                 raise ValueError(f'Dòng {index + 1}: mốc phụ đề chồng lấn hoặc sai thứ tự. Sửa mốc hoặc chọn đọc theo nhịp tự nhiên.')
             if not warning:
                 warning.append('Mốc phụ đề chồng lấn hoặc sai thứ tự; đọc lời theo thứ tự trong tệp, không căn thời gian.')
         previous_end = value['end_ms']
         cues.append({'start': value['start_ms'] / 1000, 'end': value['end_ms'] / 1000, 'text': spoken})
+        duration = (value['end_ms'] - value['start_ms']) / 1000
+        if len(spoken.split()) / duration > 5 and len(warning) < 20:
+            warning.append(f'Phụ đề {offset + 1} có {len(spoken.split())} từ trong {duration:.3f} giây; '
+                           'khớp khung này có thể đọc rất nhanh và giảm độ rõ. Kéo dài mốc hoặc chọn đọc liền nếu cần.')
     return {'format': 'vtt' if is_vtt else 'srt', 'text': '\n\n'.join(cue['text'] for cue in cues),
             'cues': cues, 'duration': max(cue['end'] for cue in cues),
-            'timed': timing == 'auto', 'warnings': warning}
+            'timed': timing != 'natural', 'warnings': warning}

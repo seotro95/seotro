@@ -15,12 +15,50 @@ from pathlib import Path
 import re
 import sys
 import threading
+import traceback
 import wave
 from model_files import model_directory
 
 
 class CloningError(Exception):
     """Actionable local inference failure, safe to display in the UI."""
+
+
+def _inference_error_message(exc):
+    """Classify common runtime failures without exposing exception payloads."""
+    message = str(exc).lower()
+    if isinstance(exc, MemoryError) or any(fragment in message for fragment in (
+            'out of memory', 'cannot allocate memory', 'not enough memory',
+            'paging file is too small', 'winerror 1455')):
+        return ('Không đủ RAM hoặc bộ nhớ GPU để tạo giọng. Đóng ứng dụng dùng nhiều bộ nhớ; '
+                'nếu GPU hết bộ nhớ, mở lại MO_HMONG_NHANH.bat --cpu rồi tiếp tục bản đọc đã lưu.')
+    if any(fragment in message for fragment in ('dll load failed', 'winerror 126', 'winerror 193')):
+        return ('Không nạp được thư viện âm thanh/PyTorch trên Windows. Dùng Python 3.12 64-bit và '
+                'mở lại MO_HMONG_NHANH.bat để kiểm tra bộ thư viện; xem worker.log nếu vẫn lỗi.')
+    if isinstance(exc, (ImportError, ModuleNotFoundError)):
+        return ('Thiếu thư viện tạo giọng hoặc các phiên bản chưa tương thích. '
+                'Mở lại MO_HMONG_NHANH.bat để cài/kiểm tra thư viện rồi thử lại; xem worker.log nếu vẫn lỗi.')
+    if any(fragment in message for fragment in ('cuda', 'cudnn', 'no kernel image', 'device-side assert')):
+        return ('Bộ tạo giọng không chạy được trên GPU hiện tại. Mở MO_HMONG_NHANH.bat --cpu để '
+                'thử bằng CPU, hoặc kiểm tra driver và bộ PyTorch/CUDA hỗ trợ GPU này.')
+    if isinstance(exc, PermissionError):
+        return ('Không có quyền đọc mô hình hoặc ghi dữ liệu âm thanh. Chuyển tool sang thư mục '
+                'bạn có quyền ghi, giữ lại .data rồi mở lại MO_HMONG_NHANH.bat.')
+    return ('Không nạp/chạy được F5-Hmong cục bộ. Kiểm tra checkpoint F5TTS_Base, '
+            'vocab đi kèm, Vocos, phiên bản thư viện và RAM. Xem worker.log để xác định bước lỗi; '
+            'chưa có bản đọc hoàn tất.')
+
+
+def _log_failure(exc):
+    """Record local stack locations, never input text or arbitrary error details."""
+    try:
+        # Unlike print_exception(), format_tb() omits the exception message and
+        # frame locals, which can contain the user's script or reference text.
+        stack = ''.join(traceback.format_tb(exc.__traceback__, limit=8))
+        sys.stderr.write('F5 generation failure: ' + type(exc).__name__ + '\n' + stack)
+        sys.stderr.flush()
+    except (OSError, UnicodeError):
+        pass
 
 
 _lock = threading.Lock()
@@ -93,7 +131,7 @@ def availability():
         'requested_device': settings['device'],
         'device': getattr(_model, 'device', None),
         'quality_steps': QUALITY_STEPS.copy(),
-        'default_quality': 'fast',
+        'default_quality': 'balanced',
         'model_warm': _model is not None,
         'dialect_verified': False,
         'reason': problem or ('Đã có điều kiện chạy thử F5-Hmong cục bộ. Chưa kiểm chứng '
@@ -383,8 +421,8 @@ def synthesize(text, speed, reference_path, reference_text, quality='fast'):
         return _join_wavs(rendered_parts())
     except CloningError:
         raise
-    except Exception:
-        raise CloningError('Không nạp/chạy được F5-Hmong cục bộ. Kiểm tra checkpoint F5TTS_Base, '
-                           'vocab đi kèm, Vocos, phiên bản thư viện và RAM. Chưa có bản đọc hoàn tất.') from None
+    except Exception as exc:
+        _log_failure(exc)
+        raise CloningError(_inference_error_message(exc)) from None
     finally:
         _lock.release()

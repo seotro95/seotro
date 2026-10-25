@@ -1,0 +1,28 @@
+{
+  "version": "0.7.0",
+  "automated_tests_passed": 205,
+  "browser": "Chromium mocked API workflow: persistent history/search/filter/native audio/download/retry-natural; custom M4A upload; UTF16 BOM user SRT; one million characters.",
+  "real_integration": {
+    "model": "F5-Hmong",
+    "reference": "Public English reference uploaded as M4A with exact original-language transcript",
+    "generated_text": "nws tsis txhawj txog nws tus kheej ntau",
+    "device": "cpu",
+    "quality": "balanced",
+    "steps": 16,
+    "wall_seconds": 148.715,
+    "sample_rate": 24000,
+    "total_frames": 8028792,
+    "total_seconds": 334.533,
+    "speech_start_seconds": 333.366,
+    "speech_end_seconds": 334.533,
+    "speech_window_seconds": 1.167,
+    "fitting_rate": 3.42,
+    "restart_history_download_verified": true
+  },
+  "limits": [
+    "Speaker similarity and Hmong pronunciation not perceptually verified; no new model training.",
+    "A1.167second window for8words requires fast delivery; fittingcanreduceclarity.",
+    "No Windows/GPU execution in this environment.",
+    "No30xrealtimeclaim."
+  ]
+}

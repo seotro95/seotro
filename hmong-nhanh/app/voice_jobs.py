@@ -26,8 +26,8 @@ _worker_log = None
 ID_PATTERN = re.compile(r'[0-9a-f]{32}')
 PART_PATTERN = re.compile(r'part-([0-9]{4,8})\.wav')
 STATES = {'running', 'completed', 'failed', 'cancelled'}
-DETAILS = ('voice', 'voice_name', 'quality', 'style', 'speed', 'characters', 'benchmark',
-           'timing', 'source_format', 'spoken_characters', 'target_seconds')
+DETAILS = ('title', 'voice', 'voice_name', 'quality', 'style', 'speed', 'characters', 'benchmark',
+           'timing', 'source_format', 'spoken_characters', 'target_seconds', 'first_speech_seconds')
 METRICS = ('completed', 'total', 'progress', 'elapsed_seconds', 'audio_seconds',
            'throughput', 'estimated_seconds_for_hour', 'device')
 
@@ -82,6 +82,16 @@ def _restore(folder):
         job = {key: metadata.get(key, '') for key in ('id', 'status', 'message', 'created_at', 'updated_at')}
         job['folder'] = folder
         job.update({key: metadata[key] for key in DETAILS if key in metadata})
+        if not job.get('title') or 'first_speech_seconds' not in job:
+            try:
+                from documents import parse_document
+                source = read_json(folder / 'input.json')
+                document = parse_document(source['text'], timing='natural')
+                job['title'] = job.get('title') or ' '.join(document['text'].split())[:120]
+                job['first_speech_seconds'] = (document['cues'][0]['start']
+                    if source.get('timing', 'auto') != 'natural' and document['cues'] else 0)
+            except (OSError, ValueError, KeyError, TypeError):
+                job['title'] = 'Bản đọc đã lưu'
         if job['status'] == 'running':
             job.update(status='cancelled', message='Phiên trước đã dừng. Bấm Tiếp tục để đọc tiếp từ đoạn đã lưu.')
             persist(job)
@@ -355,6 +365,26 @@ def resume(ident):
         raise HTTPException(409, 'Thiếu dữ liệu bản đọc đã lưu; không thể tiếp tục.') from None
     (job['folder'] / 'result.json').unlink(missing_ok=True)
     return _start(job)
+
+
+def retry_natural(ident):
+    """Make a separate recording using the failed job's frozen voice pair."""
+    job = get(ident)
+    if job['status'] != 'failed' or job.get('timing') not in {'auto', 'fit'}:
+        raise HTTPException(409, 'Chỉ tạo lại đọc liền cho bản phụ đề đã gặp lỗi.')
+    try:
+        payload = read_json(job['folder'] / 'input.json')
+        sample = job['folder'] / 'reference.wav'
+        if sample.is_symlink() or not sample.is_file() or not payload.get('_reference', {}).get('text'):
+            raise ValueError('Missing reference')
+        payload['_reference']['path'] = str(sample)
+        payload['timing'] = 'natural'
+        payload['target_seconds'] = None
+        payload['first_speech_seconds'] = 0
+        payload['title'] = ('Đọc liền · ' + str(job.get('title') or 'Bản đọc đã lưu'))[:120]
+    except (OSError, ValueError, TypeError):
+        raise HTTPException(409, 'Thiếu dữ liệu bản đọc hoặc mẫu giọng đã lưu; không tự chuyển sang giọng khác.') from None
+    return create(payload)
 
 
 async def cancel(ident):

@@ -2,6 +2,8 @@
 const $ = id => document.getElementById(id);
 const MAX_CHARACTERS = 1000000;
 const drafts = new Map(), jobs = new Map(), partNodes = new Map();
+const historyNodes = new Map();
+let historyLimit = 50, historyLoaded = false;
 const activeStates = new Set(['running', 'queued', 'cancelling']);
 const resumableStates = new Set(['failed', 'cancelled']);
 let voices = [], status = null, displayedVoice = null, activeJob = null, selectedJob = null;
@@ -71,7 +73,7 @@ async function previewDocument() {
     if (revision !== documentRevision) return false;
     checkedRevision = revision; documentError = '';
     const cleaned = String(data.text || ''), count = Number(data.characters) || countCodepoints(cleaned);
-    const timed = timing === 'auto' && data.timed;
+    const timed = timing !== 'natural' && data.timed;
     $('document-summary').classList.remove('error');
     $('document-summary').textContent = `${String(data.format || 'text').toUpperCase()} · ${formatNumber(count)} ký tự lời đọc${data.cue_count ? ' · ' + formatNumber(data.cue_count) + ' câu phụ đề' : ''} · ${timed ? 'Khớp mốc: ' + timelineDuration(data.duration) + ' (gồm khoảng lặng)' : 'Đọc theo nhịp tự nhiên'}.`;
     const warnings = Array.isArray(data.warnings) ? data.warnings.filter(item => typeof item === 'string') : [];
@@ -106,6 +108,12 @@ function update() {
   $('generate').disabled = busy || saving || uploading || checkingDocument || Boolean(blocker);
   $('generate').title = blocker;
   $('generate').textContent = busy ? 'Đang tạo giọng…' : 'Tạo giọng nói';
+  const help = busy ? 'Tool đang tạo một bản đọc. Bạn vẫn có thể nghe và tải các bản cũ trong Lịch sử.' : saving ? 'Đang lưu đoạn và lời mẫu…' : uploading ? 'Đang tải mẫu giọng…' : checkingDocument ? 'Đang kiểm tra lời cần đọc…' : blocker || 'Sẵn sàng. Bấm Tạo giọng nói để đọc văn bản bằng giọng đã chọn.';
+  $('generation-blocker').textContent = help;
+  $('generation-help').classList.toggle('needs-action', !busy && Boolean(blocker));
+  $('generation-help').classList.toggle('ready', !busy && !blocker);
+  $('prepare-selected-voice').hidden = busy || uploading || !voice || !(dirty || !voice.reference_ready);
+  $('voice-next-step').textContent = dirty || !voice?.reference_ready ? 'Lưu đoạn mẫu và đúng lời nói của đoạn đó trước khi tạo giọng.' : '3. Mẫu đã sẵn sàng: nhập văn bản cần đọc rồi bấm Tạo giọng nói.';
   $('benchmark').disabled = busy || saving || uploading || Boolean(generationBlocker(false));
   $('benchmark').title = generationBlocker(false);
   $('stop').disabled = !activeJob || stopping;
@@ -122,6 +130,8 @@ function update() {
   const job = jobs.get(selectedJob);
   $('resume').hidden = !job || !resumableStates.has(job.status);
   $('resume').disabled = busy || !engineReady();
+  $('retry-natural-panel').hidden = !job || job.status !== 'failed' || !(job.timing === 'auto' || job.timing === 'fit' || job.alignment === 'subtitle');
+  $('retry-natural').disabled = busy || !engineReady();
 }
 function renderVoiceMenu() {
   const menu = $('custom-voice'), previous = menu.value;
@@ -195,6 +205,19 @@ function renderJobMenu() {
   }
   if (selectedJob) menu.value = selectedJob;
   $('recordings').hidden = !jobs.size;
+  renderHistory();
+}
+function speechStartButton(row, audio, part) {
+  const offset = Number(part.speech_offset_seconds);
+  if (!Number.isFinite(offset) || offset <= 0 || offset >= Number(part.seconds)) return;
+  if (row.querySelector('.speech-start')) return;
+  const button = document.createElement('button'); button.type = 'button';
+  button.className = 'small speech-start'; button.textContent = 'Nghe từ lời đầu · ' + timelineDuration(offset);
+  button.addEventListener('click', async () => {
+    try { audio.currentTime = offset; await audio.play(); }
+    catch { message('Chưa phát được âm thanh. Bấm tải WAV hoặc thử lại trình nghe.', true); }
+  });
+  row.append(button);
 }
 function renderParts(job) {
   const signature = job.id;
@@ -213,11 +236,12 @@ function renderParts(job) {
       const meta = document.createElement('span'); meta.className = 'hint';
       const audio = document.createElement('audio'); audio.controls = true; audio.preload = 'none'; audio.src = url;
       audio.setAttribute('aria-label', `Nghe chương ${number}`);
-      const link = document.createElement('a'); link.className = 'file-button small'; link.href = url; link.textContent = 'Tải WAV ↓'; link.download = part.filename || `chuong-${number}.wav`;
+      const link = document.createElement('a'); link.className = 'file-button small'; link.href = url + '?download=true'; link.textContent = 'Tải WAV ↓'; link.download = part.filename || `chuong-${number}.wav`;
       row.append(heading, meta, audio, link); $('parts').append(row);
       item = {row, heading, meta, audio}; partNodes.set(number, item);
     }
     item.heading.textContent = `Chương ${number}`; item.meta.textContent = duration(part.seconds);
+    speechStartButton(item.row, item.audio, part);
   }
   $('parts-note').textContent = (job.parts || []).length ? 'Nghe hoặc tải từng chương. Các chương đã tạo được giữ lại khi dừng; bản dài tiếp tục thành chương mới.' : 'Chương âm thanh sẽ xuất hiện sau khi tạo đủ một phần. Tiến độ từng đoạn vẫn được lưu.';
 }
@@ -226,12 +250,13 @@ function renderJob(job) {
   $('recordings').hidden = false;
   const progress = Math.max(0, Math.min(100, Number(job.progress) || (job.status === 'completed' ? 100 : 0)));
   $('job-state').textContent = statusLabels[job.status] || job.status;
-  $('job-voice').textContent = `Giọng ${voiceName(job)}${job.device ? ' · ' + String(job.device).toUpperCase() : ''}${job.timing === 'auto' && job.alignment_mode === 'timed' ? ' · Khớp mốc phụ đề' : ''}`;
+  $('job-voice').textContent = `Giọng ${voiceName(job)}${job.device ? ' · ' + String(job.device).toUpperCase() : ''}${job.alignment === 'subtitle' ? ' · Khớp mốc phụ đề' : ''}`;
   $('progress').value = progress; $('progress-value').textContent = `${Math.floor(progress)}%`;
   $('segments').textContent = `${formatNumber(job.completed || 0)} / ${formatNumber(job.total || 0)} đoạn`;
   $('audio-duration').textContent = job.alignment === 'subtitle' ? timelineDuration(job.audio_seconds) : duration(job.audio_seconds);
   const warnings = Array.isArray(job.warnings) ? job.warnings.filter(value => typeof value === 'string') : [];
   $('job-timing').textContent = (job.alignment === 'subtitle' ? 'Khớp phụ đề · Đích ' + timelineDuration(job.target_seconds) + '. ' : '') + warnings.join(' ');
+  if (Number(job.first_speech_seconds) > 0) $('job-timing').textContent += ' Lời đầu bắt đầu ở ' + timelineDuration(job.first_speech_seconds) + '. Bấm Nghe từ lời đầu để bỏ qua khoảng lặng khi nghe thử.';
   $('job-timing').hidden = !$('job-timing').textContent;
   $('elapsed').textContent = duration(job.elapsed_seconds);
   $('throughput').textContent = Number.isFinite(job.throughput) && job.throughput > 0 ? `${formatNumber(job.throughput)}× thời gian thực` : 'Đang đo';
@@ -243,10 +268,79 @@ function renderJob(job) {
 async function refreshJobs() {
   const data = await api('/api/speech/jobs');
   for (const job of data.jobs || []) rememberJob(job);
+  historyLoaded = true;
   if (!selectedJob || !jobs.has(selectedJob)) selectedJob = activeJob || data.jobs?.[0]?.id || null;
   renderJobMenu(); if (selectedJob) renderJob(jobs.get(selectedJob));
   if (activeJob) schedulePoll();
   update();
+}
+
+function readableDate(value) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? 'Không rõ ngày tạo' : date.toLocaleString('vi-VN', {dateStyle: 'short', timeStyle: 'short'});
+}
+function historyTitle(job) {
+  return typeof job.title === 'string' && job.title.trim() ? job.title : job.benchmark ? 'Đo tốc độ máy' : 'Bản đọc ' + job.id.slice(0, 8);
+}
+async function openHistoryJob(ident) {
+  selectedJob = ident; renderJob(jobs.get(ident));
+  $('recordings').scrollIntoView({behavior: 'smooth', block: 'start'});
+  try {
+    const job = await api('/api/speech/jobs/' + encodeURIComponent(ident));
+    rememberJob(job); if (selectedJob === ident) renderJob(job);
+    if (activeJob) schedulePoll();
+  } catch (error) { message(error.message, true); }
+}
+function renderHistory() {
+  const query = $('history-search').value.trim().toLocaleLowerCase('vi-VN');
+  const wanted = $('history-status').value;
+  const all = [...jobs.values()].sort((a, b) => String(b.created_at || '').localeCompare(String(a.created_at || '')));
+  const matches = all.filter(job => (wanted === 'all' || (wanted === 'running' ? activeStates.has(job.status) : job.status === wanted)) && (!query || [historyTitle(job), voiceName(job), readableDate(job.created_at), job.id].join(' ').toLocaleLowerCase('vi-VN').includes(query)));
+  const visible = matches.slice(0, historyLimit), visibleIds = new Set(visible.map(job => job.id));
+  for (const [ident, item] of historyNodes) {
+    if (!visibleIds.has(ident)) {
+      item.row.hidden = true;
+      for (const audio of item.row.querySelectorAll('audio')) audio.pause();
+    }
+  }
+  for (const [position, job] of visible.entries()) {
+    let item = historyNodes.get(job.id);
+    if (!item) {
+      const row = document.createElement('article'); row.className = 'history-item'; row.dataset.id = job.id;
+      const heading = document.createElement('div'); heading.className = 'row';
+      const title = document.createElement('h3'), badge = document.createElement('span'); badge.className = 'history-status'; heading.append(title, badge);
+      const meta = document.createElement('p'); meta.className = 'hint history-meta';
+      const actions = document.createElement('div'); actions.className = 'history-actions';
+      const open = document.createElement('button'); open.type = 'button'; open.className = 'small'; open.textContent = 'Mở bản đọc'; open.addEventListener('click', () => openHistoryJob(job.id)); actions.append(open);
+      const note = document.createElement('p'); note.className = 'hint';
+      const parts = document.createElement('div'); parts.className = 'history-audio';
+      row.append(heading, meta, actions, note, parts);
+      item = {row, title, badge, meta, note, parts, partNodes: new Map()}; historyNodes.set(job.id, item);
+    }
+    item.row.hidden = false; item.row.dataset.status = job.status;
+    item.title.textContent = historyTitle(job); item.badge.textContent = statusLabels[job.status] || job.status;
+    item.meta.textContent = `${readableDate(job.created_at)} · Giọng ${voiceName(job)} · ${duration(job.audio_seconds)}${job.characters ? ' · ' + formatNumber(job.characters) + ' ký tự' : ''}`;
+    const parts = (job.parts || []).filter(part => Number.isInteger(Number(part.number)) && Number(part.number) > 0);
+    item.note.textContent = parts.length ? `${parts.length} phần có thể nghe và tải${parts.length > 3 ? '; hiển thị 3 phần đầu. Mở bản đọc để xem tất cả.' : ' ngay.'}` : job.status === 'completed' ? 'Chưa tìm thấy tệp âm thanh của bản này. Mở bản đọc để xem chi tiết.' : job.status === 'failed' ? job.message || 'Tạo giọng gặp lỗi. Mở bản đọc để xem cách xử lý.' : 'Chưa có phần âm thanh hoàn tất.';
+    for (const part of parts.slice(0, 3)) {
+      const number = Number(part.number);
+      if (item.partNodes.has(number)) continue;
+      const row = document.createElement('div'); row.className = 'part';
+      const title = document.createElement('strong'); title.textContent = `Phần ${number}`;
+      const durationLabel = document.createElement('span'); durationLabel.className = 'hint'; durationLabel.textContent = duration(part.seconds);
+      const url = `/api/speech/jobs/${encodeURIComponent(job.id)}/parts/${number}`;
+      const audio = document.createElement('audio'); audio.controls = true; audio.preload = 'none'; audio.src = url; audio.setAttribute('aria-label', `Nghe ${historyTitle(job)}, phần ${number}`);
+      const download = document.createElement('a'); download.href = url + '?download=true'; download.download = part.filename || `hmong-${job.id.slice(0, 8)}-${number}.wav`; download.className = 'file-button small'; download.textContent = 'Tải WAV ↓';
+      row.append(title, durationLabel, audio, download); speechStartButton(row, audio, part); item.parts.append(row); item.partNodes.set(number, row);
+    }
+    // Do not detach/reinsert a playing audio node on every status poll.
+    const before = $('history-list').children[position];
+    if (before !== item.row) $('history-list').insertBefore(item.row, before || null);
+  }
+  $('history-empty').hidden = matches.length > 0;
+  $('history-empty').textContent = all.length ? 'Không có bản đọc khớp bộ lọc. Thử đổi từ khóa hoặc trạng thái.' : 'Chưa có bản đọc nào. Các bản đã tạo sẽ được lưu tại đây.';
+  $('history-summary').textContent = !historyLoaded && !all.length ? 'Đang tải lịch sử…' : `${formatNumber(matches.length)} bản đọc${matches.length > visible.length ? ' · đang hiển thị ' + formatNumber(visible.length) : ''}.`;
+  $('history-more').hidden = matches.length <= historyLimit;
 }
 function schedulePoll(delay = 1000) { clearTimeout(pollTimer); pollTimer = setTimeout(poll, delay); }
 async function poll() {
@@ -292,10 +386,23 @@ $('timing').addEventListener('change', () => { invalidateDocument(); update(); }
 $('preview-document').addEventListener('click', previewDocument);
 $('speed').addEventListener('input', () => { $('speed-value').textContent = Number($('speed').value).toLocaleString('vi-VN', {minimumFractionDigits: 1}) + '×'; });
 $('quality').addEventListener('change', () => {
-  $('quality-note').textContent = {draft: '4 bước để nghe thử nhanh; có thể giảm độ rõ và phát âm.', fast: '8 bước ưu tiên tốc độ. Nghe thử trước khi tạo bản dài.', balanced: '16 bước cân bằng thời gian xử lý và độ rõ.', quality: '32 bước, xử lý lâu hơn. Chất lượng vẫn phụ thuộc mô hình và mẫu.'}[$('quality').value];
+  $('quality-note').textContent = {draft: '4 bước để nghe thử nhanh; có thể giảm độ rõ và phát âm.', fast: '8 bước ưu tiên tốc độ. Nghe thử trước khi tạo bản dài.', balanced: '16 bước cân bằng thời gian xử lý và độ rõ. Chọn 32 bước khi ưu tiên chất lượng; xử lý lâu hơn.', quality: '32 bước, xử lý lâu hơn. Chất lượng vẫn phụ thuộc mô hình và mẫu.'}[$('quality').value];
 });
 $('refresh').addEventListener('click', refresh);
 $('refresh-jobs').addEventListener('click', () => refreshJobs().catch(e => message(e.message, true)));
+$('history-refresh').addEventListener('click', async () => {
+  $('history-refresh').disabled = true;
+  try { await refreshJobs(); }
+  catch (error) { $('history-summary').textContent = error.message; message(error.message, true); }
+  finally { $('history-refresh').disabled = false; }
+});
+['history-search', 'history-status'].forEach(id => $(id).addEventListener(id === 'history-search' ? 'input' : 'change', () => { historyLimit = 50; renderHistory(); }));
+$('history-more').addEventListener('click', () => { historyLimit += 50; renderHistory(); });
+$('prepare-selected-voice').addEventListener('click', () => {
+  $('reference-panel').open = true;
+  $('reference-panel').scrollIntoView({behavior: 'smooth', block: 'center'});
+  $('reference-text').focus({preventScroll: true});
+});
 $('job-select').addEventListener('change', async () => {
   selectedJob = $('job-select').value;
   renderJob(jobs.get(selectedJob));
@@ -309,8 +416,12 @@ $('text-file').addEventListener('change', async () => {
   try {
     if (file.size > 8 * 1024 * 1024) throw Error('Tệp TXT/SRT/VTT tối đa 8 MB. Nội dung tối đa 1.000.000 ký tự Unicode.');
     let text;
-    try { text = new TextDecoder('utf-8', {fatal: true}).decode(await file.arrayBuffer()).replace(/^\uFEFF/, ''); }
-    catch { throw Error('Tệp chưa phải UTF-8 hợp lệ. Lưu TXT/SRT/VTT bằng UTF-8 rồi nhập lại.'); }
+    try {
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      const encoding = bytes[0] === 0xff && bytes[1] === 0xfe ? 'utf-16le' : bytes[0] === 0xfe && bytes[1] === 0xff ? 'utf-16be' : 'utf-8';
+      text = new TextDecoder(encoding, {fatal: true}).decode(bytes).replace(/^\uFEFF/, '');
+      if (text.includes('\0')) throw Error('Unexpected NUL');
+    } catch { throw Error('Tệp chưa phải UTF-8 hợp lệ hoặc UTF-16 có BOM. Lưu TXT/SRT/VTT bằng UTF-8 hoặc Unicode rồi nhập lại.'); }
     if (countCodepoints(text) > MAX_CHARACTERS) throw Error('Tệp vượt 1.000.000 ký tự. Văn bản đang soạn được giữ nguyên; chia tệp thành các phần nhỏ hơn.');
     $('text').value = text; invalidateDocument(); recount(); message('Đã nhập toàn bộ văn bản/phụ đề. Bấm Kiểm tra lời sẽ đọc để xem nội dung và thời lượng.');
   } catch (e) { message(e.message, true); }
@@ -318,7 +429,7 @@ $('text-file').addEventListener('change', async () => {
 });
 $('voice-file').addEventListener('change', () => {
   const file = $('voice-file').files[0];
-  $('voice-file-name').textContent = file ? `${file.name} · ${formatNumber(file.size / (1024 * 1024))} MB` : 'WAV, MP3, FLAC hoặc OGG · tối đa 50 MB';
+  $('voice-file-name').textContent = file ? `${file.name} · ${formatNumber(file.size / (1024 * 1024))} MB` : 'WAV, MP3, FLAC, OGG, M4A, AAC, MP4, WEBM · tối đa 50 MB';
   if (file && !$('voice-name').value.trim()) $('voice-name').value = Array.from(file.name.replace(/\.[^.]+$/, '')).slice(0, 80).join('');
   $('upload-state').textContent = ''; update();
 });
@@ -327,7 +438,7 @@ $('upload-voice').addEventListener('click', async () => {
   if (!file || uploading || saving || isBusy()) return;
   const name = $('voice-name').value.trim() || Array.from(file.name.replace(/\.[^.]+$/, '')).slice(0, 80).join('');
   if (!file.size || file.size > 50 * 1024 * 1024) { $('upload-state').textContent = 'Chọn tệp âm thanh có nội dung, tối đa 50 MB.'; return; }
-  if (!/\.(wav|mp3|flac|ogg)$/i.test(file.name)) { $('upload-state').textContent = 'Dùng tệp WAV, MP3, FLAC hoặc OGG.'; return; }
+  if (!/\.(wav|mp3|flac|ogg|m4a|aac|mp4|webm)$/i.test(file.name)) { $('upload-state').textContent = 'Dùng tệp WAV, MP3, FLAC, OGG, M4A, AAC, MP4 hoặc WEBM.'; return; }
   uploading = true; update(); $('upload-state').textContent = 'Đang lưu mẫu giọng trên máy…';
   try {
     const result = await api('/api/voices/upload', {method: 'POST', body: file,
@@ -338,8 +449,10 @@ $('upload-voice').addEventListener('click', async () => {
     document.querySelectorAll('input[name="voice"]').forEach(input => { input.checked = false; });
     renderVoice(); $('reference-panel').open = true;
     $('voice-file').value = ''; $('voice-name').value = '';
-    $('voice-file-name').textContent = 'WAV, MP3, FLAC hoặc OGG · tối đa 50 MB';
-    $('upload-state').textContent = 'Đã chọn giọng ' + result.voice.name + '. Chọn đoạn và lưu đúng lời mẫu ở bên dưới.';
+    $('voice-file-name').textContent = 'WAV, MP3, FLAC, OGG, M4A, AAC, MP4, WEBM · tối đa 50 MB';
+    $('upload-state').textContent = 'Đã tải giọng ' + result.voice.name + '. Còn bước 2: chọn đoạn và lưu đúng lời mẫu ở bên dưới.';
+    $('reference-panel').scrollIntoView({behavior: 'smooth', block: 'center'});
+    $('reference-text').focus({preventScroll: true});
     message('Đã tải mẫu riêng ' + result.voice.name + '. Lời mẫu cần giữ nguyên ngôn ngữ gốc; phần văn bản cần đọc nhập bằng tiếng Hmong.');
   } catch (error) { $('upload-state').textContent = error.message; message(error.message, true); }
   finally { uploading = false; update(); }
@@ -392,6 +505,18 @@ $('resume').addEventListener('click', async () => {
     const job = await api(`/api/speech/jobs/${encodeURIComponent(id)}/resume`, {method: 'POST'});
     rememberJob(job); renderJob(job); message('Đang tiếp tục từ các đoạn đã lưu.'); if (activeJob) schedulePoll(200);
   } catch (e) { message(e.message, true); }
+  finally { submitting = false; update(); }
+});
+$('retry-natural').addEventListener('click', async () => {
+  const id = selectedJob, existing = jobs.get(id);
+  if (isBusy() || !existing || existing.status !== 'failed' || !engineReady()) return;
+  submitting = true; update();
+  try {
+    const job = await api(`/api/speech/jobs/${encodeURIComponent(id)}/retry-natural`, {method: 'POST'});
+    rememberJob(job); selectedJob = job.id; renderJob(job);
+    message('Đã tạo bản mới đọc liền toàn bộ lời, không giữ mốc phụ đề. Bản cũ vẫn nằm trong lịch sử.');
+    if (activeJob) schedulePoll(200);
+  } catch (error) { message(error.message, true); }
   finally { submitting = false; update(); }
 });
 recount();

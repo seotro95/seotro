@@ -140,10 +140,10 @@ def process_job(folder):
     folder = Path(folder)
     payload = json.loads((folder / 'input.json').read_text(encoding='utf-8'))
     timing = payload.get('timing', 'auto')
-    if timing not in ('auto', 'natural'):
+    if timing not in ('auto', 'fit', 'natural'):
         raise ValueError('Chọn căn theo phụ đề hoặc chỉ đọc nội dung.')
-    document = parse_document(payload['text'], timing=timing)
-    if document['timed'] and timing == 'auto':
+    document = parse_document(payload['text'], timing='auto' if timing == 'fit' else timing)
+    if document['timed'] and timing in ('auto', 'fit'):
         return _process_timed(folder, payload, document)
     source = payload['text']
     # Keep the exact legacy input in plain-text fingerprints so 0.5 checkpoints
@@ -277,6 +277,8 @@ def timed_plan(cues):
 def _process_timed(folder, payload, document):
     from audio_timing import RATE, TimelineWriter, fit_wav, frame_count
     style, quality, speed = payload.get('style', 'natural'), payload.get('quality', 'fast'), payload.get('speed', 1)
+    timing = payload.get('timing', 'auto')
+    max_speed = 4 if timing == 'fit' else 2
     if style not in STYLES or quality not in cloning_engine.QUALITY_STEPS:
         raise ValueError('Kiểu đọc hoặc chế độ chất lượng không hợp lệ.')
     if isinstance(speed, bool) or not isinstance(speed, (int, float)) or not math.isfinite(speed) or not .5 <= speed <= 2:
@@ -287,7 +289,7 @@ def _process_timed(folder, payload, document):
     sample = Path(reference['path'])
     fingerprint = hashlib.sha256(json.dumps({
         'version': 'timed-1', 'text': payload['text'], 'style': style, 'quality': quality,
-        'speed': speed, 'voice': payload['voice'], 'timing': 'auto', 'reference_text': reference['text'],
+        'speed': speed, 'voice': payload['voice'], 'timing': timing, 'reference_text': reference['text'],
         'reference_sha256': hashlib.sha256(sample.read_bytes()).hexdigest(),
     }, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
     checkpoint = folder / 'checkpoint.json'
@@ -297,19 +299,44 @@ def _process_timed(folder, payload, document):
     completed = saved.get('completed', 0)
     previous_elapsed = saved.get('elapsed_seconds', 0)
     spoken_seconds = saved.get('spoken_seconds', 0)
+    padding = saved.get('padding_frames', {})
+    fast_cues = saved.get('fast_cues', {})
     if (type(completed) is not int or not 0 <= completed <= len(plan)
             or any(isinstance(value, bool) or not isinstance(value, (int, float))
                    or not math.isfinite(value) or value < 0
-                   for value in (previous_elapsed, spoken_seconds))):
+                   for value in (previous_elapsed, spoken_seconds))
+            or not isinstance(padding, dict)
+            or any(not isinstance(key, str) or not key.isdecimal() or int(key) >= completed
+                   or type(value) is not int or value < 0
+                   or value >= plan[int(key)]['end_frame'] - plan[int(key)]['start_frame']
+                   for key, value in padding.items())
+            or not isinstance(fast_cues, dict)
+            or any(not isinstance(key, str) or not key.isdecimal() or int(key) >= completed
+                   or isinstance(value, bool) or not isinstance(value, (int, float))
+                   or not math.isfinite(value) or not 2 < value <= max_speed
+                   for key, value in fast_cues.items())):
         raise ValueError('Checkpoint không hợp lệ. Giữ lại tác vụ và tạo tác vụ mới.')
-    for name in ('chunks', 'parts'):
+    for name in ('chunks', 'parts', 'raw'):
         (folder / name).mkdir(parents=True, exist_ok=True)
     started = time.perf_counter()
     before = completed
     effective_speed = max(.5, min(2, speed * STYLES[style]['speed']))
     warnings = list(document.get('warnings', []))
     warnings.append('Đã căn lời đọc theo mốc phụ đề; khoảng trống đầu và giữa các câu được giữ. Khoảng nghỉ của kiểu đọc không thêm ngoài các mốc này.')
+    padding_warning = 'Khung phụ đề dài hơn lời đọc: chỉ làm chậm tối đa 2 lần, rồi giữ im lặng đến hết khung.'
+    if padding:
+        warnings.append(padding_warning)
     timeline = TimelineWriter(folder, total_frames, round(CHAPTER_SECONDS * RATE))
+
+    def save_checkpoint():
+        atomic_json(checkpoint, {'fingerprint': fingerprint, 'completed': completed,
+                                'spoken_seconds': spoken_seconds, 'padding_frames': padding, 'fast_cues': fast_cues,
+                                'elapsed_seconds': previous_elapsed + time.perf_counter() - started})
+
+    # Publish the fingerprint before keeping raw generated audio. A failed first
+    # fit is resumable, and changing its text/reference cannot reuse stale audio.
+    if not saved:
+        save_checkpoint()
 
     def report(message, done=False):
         elapsed = previous_elapsed + time.perf_counter() - started
@@ -322,7 +349,12 @@ def _process_timed(folder, payload, document):
                   'device': cloning_engine.runtime_device(), 'parts': list(timeline.parts),
                   'style': style, 'quality': quality, 'effective_speed': effective_speed,
                   'resumed': before > 0, 'alignment': 'subtitle', 'source_format': document['format'],
-                  'target_seconds': total_frames / RATE, 'warnings': warnings}
+                  'target_seconds': total_frames / RATE, 'warnings': list(warnings)}
+        if fast_cues:
+            result['warnings'].append(
+                f'{len(fast_cues)} đoạn cần tăng nhịp trên 2 lần (cao nhất {max(fast_cues.values()):.2f} lần) '
+                'để khớp phụ đề. Cao độ được giữ nhưng lời sẽ nhanh và có thể kém rõ; '
+                'nghe kiểm tra hoặc chọn đọc tự nhiên để ưu tiên độ rõ.')
         atomic_json(folder / 'progress.json', result)
         return result
 
@@ -331,30 +363,57 @@ def _process_timed(folder, payload, document):
             segment = plan[index]
             path = folder / 'chunks' / f'chunk-{index:06d}.wav'
             try:
-                if frame_count(path) != segment['end_frame'] - segment['start_frame']:
+                trailing = padding.get(str(index), 0)
+                if frame_count(path) + trailing != segment['end_frame'] - segment['start_frame']:
                     raise ValueError('duration')
             except (OSError, ValueError, wave.Error, EOFError):
                 raise ValueError('Một đoạn đã lưu bị thiếu/hỏng hoặc không khớp phụ đề. Tạo tác vụ mới; không ghi đè các phần còn tốt.') from None
-            timeline.append(path, segment['start_frame'], segment['end_frame'])
+            timeline.append(path, segment['start_frame'], segment['end_frame'], trailing)
         report('Đang tiếp tục từ phụ đề đã lưu…' if completed else 'Đang tạo lời theo mốc phụ đề…')
         for index in range(completed, len(plan)):
             if shutil.disk_usage(folder).free < 100 * 1024 * 1024:
                 raise ValueError('Ổ đĩa còn dưới 100 MB. Giải phóng dung lượng rồi bấm Tiếp tục.')
             segment = plan[index]
             report(f"Đang tạo phụ đề {segment['cue_number']}, đoạn {index + 1}/{len(plan)}…")
-            audio = cloning_engine.synthesize(segment['text'], effective_speed, sample, reference['text'], quality=quality)
-            fitted, original_seconds, ratio = fit_wav(audio, segment['end_frame'] - segment['start_frame'], segment['cue_number'])
+            raw_path = folder / 'raw' / f'chunk-{index:06d}.wav'
+            if raw_path.is_file():
+                try:
+                    generated_frames = frame_count(raw_path)
+                    if generated_frames > cloning_engine.MAX_GENERATED_SECONDS * RATE or raw_path.is_symlink():
+                        raise ValueError('raw audio size')
+                    audio = raw_path.read_bytes()
+                except (OSError, ValueError, wave.Error, EOFError):
+                    raise ValueError('Đoạn lời gốc đã lưu bị hỏng. Tạo bản đọc mới; không thay bằng giọng khác.') from None
+            else:
+                audio = cloning_engine.synthesize(segment['text'], effective_speed, sample, reference['text'], quality=quality)
+                write_chunk(raw_path, audio, 0)
+                generated_frames = frame_count(raw_path)
+                save_checkpoint()
+            slot_frames = segment['end_frame'] - segment['start_frame']
+            fitted_frames = min(slot_frames, 2 * generated_frames)
+            trailing = slot_frames - fitted_frames
+            fitted, original_seconds, ratio = fit_wav(audio, fitted_frames, segment['cue_number'], max_speed=max_speed)
             path = folder / 'chunks' / f'chunk-{index:06d}.wav'
             write_chunk(path, fitted, 0)
             del audio, fitted
+            if trailing:
+                padding[str(index)] = trailing
+                if padding_warning not in warnings:
+                    warnings.append(padding_warning)
+            if ratio > 2:
+                fast_cues[str(index)] = ratio
             spoken_seconds += original_seconds
             completed = index + 1
             # Commit speech before streaming a potentially long silence/chapter.
             # Resuming after a disk error never has to regenerate this speech.
-            atomic_json(checkpoint, {'fingerprint': fingerprint, 'completed': completed,
-                                    'spoken_seconds': spoken_seconds,
-                                    'elapsed_seconds': previous_elapsed + time.perf_counter() - started})
-            timeline.append(path, segment['start_frame'], segment['end_frame'])
+            save_checkpoint()
+            # Once the fitted chunk is checkpointed, raw audio is unnecessary.
+            # Retain it only for an interrupted/unfittable cue, not every chapter.
+            try:
+                raw_path.unlink(missing_ok=True)
+            except OSError:
+                pass
+            timeline.append(path, segment['start_frame'], segment['end_frame'], trailing)
             report(f'Đã căn {completed}/{len(plan)} đoạn theo phụ đề.')
         timeline.finish()
         result = report('Đã tạo xong âm thanh khớp mốc thời gian phụ đề.', done=True)

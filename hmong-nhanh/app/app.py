@@ -1,6 +1,7 @@
 """Small, local Hmong reader with independent male/female references."""
 from contextlib import asynccontextmanager
 from pathlib import Path
+import math
 import tempfile
 from typing import Literal
 from urllib.parse import unquote
@@ -28,25 +29,26 @@ async def lifespan(app):
     await voice_jobs.shutdown()
 
 
-app = FastAPI(title='Hmong Nhanh', version='0.6.0', lifespan=lifespan)
+app = FastAPI(title='Hmong Nhanh', version='0.7.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 
 class ReadingOptions(BaseModel):
     voice: str = Field(pattern=r'^(hmong-white-(female|male)|custom-[0-9a-f]{32})$')
     speed: float = Field(default=1, ge=0.5, le=2, allow_inf_nan=False)
-    quality: Literal['draft', 'fast', 'balanced', 'quality'] = 'fast'
+    quality: Literal['draft', 'fast', 'balanced', 'quality'] = 'balanced'
     style: Literal['natural', 'storytelling', 'film_review', 'news', 'advertising', 'relaxing'] = 'natural'
-    timing: Literal['auto', 'natural'] = 'auto'
+    timing: Literal['fit', 'auto', 'natural'] = 'fit'
 
 
 class Speech(ReadingOptions):
     text: str = Field(min_length=1, max_length=MAX_CHARACTERS)
+    title: str = Field(default='', max_length=120)
 
 
 class DocumentInput(BaseModel):
     text: str = Field(min_length=1, max_length=MAX_CHARACTERS)
-    timing: Literal['auto', 'natural'] = 'auto'
+    timing: Literal['fit', 'auto', 'natural'] = 'fit'
 
 
 def parsed_document(payload):
@@ -181,8 +183,14 @@ async def speech(payload: Speech):
 
 
 def public_job(value):
+    cursor = 0
+    first = value.get('first_speech_seconds')
     for part in value.get('parts', []):
         part['url'] = f"/api/speech/jobs/{value['id']}/parts/{part['number']}"
+        seconds = part.get('seconds', 0)
+        if isinstance(first, (int, float)) and math.isfinite(first) and cursor <= first < cursor + seconds:
+            part['speech_offset_seconds'] = max(0, first - cursor)
+        cursor += seconds
     return value
 
 
@@ -195,6 +203,8 @@ async def create_job(payload: Speech):
     data['_reference'] = {'path': str(sample.resolve()), 'text': transcript}
     data.update(voice_name=voice_name(payload.voice), source_format=document['format'],
                 spoken_characters=len(document['text']), target_seconds=document['duration'] if document['timed'] else None)
+    data['title'] = payload.title.strip() or ' '.join(document['text'].split())[:120]
+    data['first_speech_seconds'] = document['cues'][0]['start'] if document['timed'] else 0
     return public_job(voice_jobs.create(data))
 
 
@@ -205,6 +215,7 @@ async def benchmark(payload: ReadingOptions):
     data = speech.model_dump()
     data.update(benchmark=True, _reference={'path': str(sample.resolve()), 'text': transcript})
     data['voice_name'] = voice_name(payload.voice)
+    data['title'] = 'Đo tốc độ · ' + data['voice_name']
     return public_job(voice_jobs.create(data))
 
 
@@ -228,15 +239,20 @@ async def resume_job(ident: str):
     return public_job(voice_jobs.resume(ident))
 
 
+@app.post('/api/speech/jobs/{ident}/retry-natural', status_code=202)
+async def retry_natural(ident: str):
+    return public_job(voice_jobs.retry_natural(ident))
+
+
 @app.get('/api/speech/jobs/{ident}/parts/{number}')
-async def job_part(ident: str, number: int):
+async def job_part(ident: str, number: int, download: bool = False):
     job = voice_jobs.get(ident)
     part = next((part for part in voice_jobs.view(job)['parts'] if part['number'] == number), None)
     if part is None:
         raise HTTPException(404, 'Phần âm thanh này chưa hoàn tất.')
     return FileResponse(job['folder'] / 'parts' / part['filename'], media_type='audio/wav',
                         filename=f"hmong-{ident[:8]}-{part['filename']}",
-                        content_disposition_type='inline', headers={'Cache-Control': 'no-store'})
+                        content_disposition_type='attachment' if download else 'inline', headers={'Cache-Control': 'no-store'})
 
 
 @app.get('/api/speech/jobs/{ident}/audio')

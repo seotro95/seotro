@@ -44,7 +44,7 @@ def wav_bytes():
 def test_male_and_female_route_to_distinct_wav_and_exact_transcript(client):
     seen = []
     def synth(text, speed, sample, transcript, quality='fast'):
-        assert quality == 'fast'
+        assert quality == 'balanced'
         with wave.open(str(sample)) as wav:
             assert wav.getframerate() == 24000
             assert wav.getnchannels() == 1

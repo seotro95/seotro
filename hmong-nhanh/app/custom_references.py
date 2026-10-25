@@ -29,6 +29,10 @@ FORMAT_EXTENSIONS = {'WAV': 'wav', 'WAVEX': 'wav', 'RF64': 'wav',
                      'MP3': 'mp3', 'FLAC': 'flac', 'OGG': 'ogg'}
 
 
+class _NeedsDecoder(Exception):
+    """The native decoder cannot inspect this container."""
+
+
 def directory():
     return Path(os.getenv('HMONG_STUDIO_DATA_DIR', str(BASE / '.data'))) / 'custom_voices'
 
@@ -81,7 +85,10 @@ def _inspect(path):
         size = path.stat().st_size
         if not 0 < size <= MAX_UPLOAD_BYTES:
             raise HTTPException(413, 'Tệp giọng tối đa 50 MB và không được rỗng.')
-        info = soundfile.info(str(path))
+        try:
+            info = soundfile.info(str(path))
+        except (RuntimeError, OSError):
+            raise _NeedsDecoder from None
         duration = info.frames / info.samplerate
         if (info.format not in FORMAT_EXTENSIONS or not 1 <= info.channels <= 2
                 or not 8000 <= info.samplerate <= 192000 or not math.isfinite(duration)
@@ -91,7 +98,7 @@ def _inspect(path):
     except ImportError:
         raise HTTPException(503, 'Chưa cài thư viện đọc âm thanh. Mở lại MO_HMONG_NHANH.bat.') from None
     except (OSError, RuntimeError, ValueError, ZeroDivisionError):
-        raise HTTPException(422, 'Chọn tệp WAV, MP3, FLAC hoặc OGG có âm thanh hợp lệ, mono/stereo, dài từ 3 giây đến 10 phút.') from None
+        raise HTTPException(422, 'Chọn âm thanh hợp lệ dài từ 3 giây đến 10 phút; mẫu WAV/MP3/FLAC/OGG cần mono hoặc stereo.') from None
 
 
 def register(upload_path, name, filename):
@@ -99,19 +106,36 @@ def register(upload_path, name, filename):
     if not _valid_name(name):
         raise HTTPException(422, 'Tên giọng cần từ 1 đến 80 ký tự, không chứa ký tự điều khiển.')
     path = Path(upload_path)
-    audio_format, duration = _inspect(path)
     root = directory()
     root.mkdir(parents=True, exist_ok=True)
     ident = 'custom-' + uuid.uuid4().hex
     temporary = Path(tempfile.mkdtemp(prefix='.upload-', dir=root))
     try:
+        converted = False
+        try:
+            audio_format, duration = _inspect(path)
+        except _NeedsDecoder:
+            from audio_import import AudioImportError, DecoderUnavailable, decode_to_wav
+            try:
+                path = decode_to_wav(path, temporary / 'source.wav', MAX_SOURCE_SECONDS)
+            except DecoderUnavailable as exc:
+                raise HTTPException(503, str(exc)) from None
+            except AudioImportError as exc:
+                raise HTTPException(422, str(exc)) from None
+            try:
+                audio_format, duration = _inspect(path)
+            except _NeedsDecoder:
+                raise HTTPException(422, 'Không kiểm tra được WAV sau giải mã. Thử xuất lại mẫu âm thanh.') from None
+            converted = True
         source_name = 'source.' + FORMAT_EXTENSIONS[audio_format]
-        shutil.copyfile(path, temporary / source_name)
+        if path != temporary / source_name:
+            shutil.copyfile(path, temporary / source_name)
         # The user's filename is display metadata only, never a filesystem path.
         original_name = str(filename or '').replace('\\', '/').rsplit('/', 1)[-1]
         original_name = ''.join(character for character in original_name if ord(character) >= 32 and ord(character) != 127)[:200]
         metadata = {'id': ident, 'name': name.strip(), 'source': source_name,
                     'original_name': original_name, 'format': audio_format,
+                    'converted': converted,
                     'duration': duration, 'created_at': datetime.now(timezone.utc).isoformat()}
         (temporary / 'metadata.json').write_text(json.dumps(metadata, ensure_ascii=False), encoding='utf-8')
         temporary.rename(root / ident)

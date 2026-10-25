@@ -11,7 +11,7 @@ BLOCK_FRAMES = 65536
 RESERVE_BYTES = 100 * 1024 * 1024
 
 
-def fit_wav(audio, target_frames, cue_number):
+def fit_wav(audio, target_frames, cue_number, max_speed=2):
     """Fit every generated sample to a cue, never truncate spoken content."""
     with wave.open(io.BytesIO(audio), 'rb') as source:
         frames = source.getnframes()
@@ -23,13 +23,15 @@ def fit_wav(audio, target_frames, cue_number):
             raise ValueError('Bộ tạo giọng trả WAV chưa đầy đủ.')
     if type(target_frames) is not int or target_frames <= 0:
         raise ValueError(f'Phụ đề {cue_number} có khoảng thời gian quá ngắn.')
+    if max_speed not in (2, 4):
+        raise ValueError('Giới hạn căn nhịp phải là 2 hoặc 4 lần.')
     ratio = frames / target_frames
-    if not .5 <= ratio <= 2:
+    if not .5 <= ratio <= max_speed:
         seconds, target = frames / RATE, target_frames / RATE
         raise ValueError(
             f'Phụ đề {cue_number}: lời đọc tự nhiên dài {seconds:.2f} giây nhưng khoảng phụ đề là '
-            f'{target:.2f} giây. Chỉ căn nhịp từ 0,5 đến 2 lần để giữ lời và giọng; '
-            'sửa mốc thời gian hoặc chọn Chỉ đọc nội dung. Không cắt bỏ lời đọc.')
+            f'{target:.2f} giây. Chỉ căn nhịp từ 0,5 đến {max_speed} lần; '
+            'sửa mốc thời gian hoặc bấm Tạo lại đọc liền. Không cắt bỏ lời đọc.')
     if frames != target_frames:
         import numpy as np
         import librosa
@@ -129,13 +131,17 @@ class TimelineWriter:
             count = min(BLOCK_FRAMES, end_frame - self.cursor)
             self._write(blank[:count * 2])
 
-    def append(self, path, start_frame, end_frame):
+    def append(self, path, start_frame, end_frame, padding_frames=0):
         self.silence_until(start_frame)
-        if frame_count(path) != end_frame - start_frame:
+        if (type(padding_frames) is not int or padding_frames < 0
+                or frame_count(path) + padding_frames != end_frame - start_frame):
             raise ValueError('Đoạn đã lưu không khớp mốc phụ đề; giữ lại dữ liệu và tạo tác vụ mới.')
         with wave.open(str(path), 'rb') as source:
             while raw := source.readframes(BLOCK_FRAMES):
                 self._write(raw)
+        # Long subtitle slots do not require stretching speech beyond 2x or
+        # allocating one enormous waveform. Silence is streamed across parts.
+        self.silence_until(end_frame)
         if self.cursor != end_frame:
             raise ValueError('Đoạn âm thanh chưa được ghi đầy đủ.')
 
