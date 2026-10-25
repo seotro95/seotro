@@ -54,7 +54,7 @@ def test_written_hyphens_keep_word_boundaries_and_every_rpa_tone_letter(dash):
     assert native.normalize_text(f'POB{dash}POJ') == 'POB-POJ'
 
 
-@pytest.mark.parametrize('text', ['Kuv 123', 'Kuv @ zoo', 'Kuv_zoo', 'Nyob 😀', 'Kuv ꟽ', 'Nyob zòo'])
+@pytest.mark.parametrize('text', ['Kuv ua123', 'Kuv @ zoo', 'Kuv_zoo', 'Nyob 😀', 'Kuv ꟽ', 'Nyob zòo'])
 def test_unsupported_text_is_rejected_instead_of_dropping_characters(text):
     with pytest.raises(native.EngineError):
         native.validate_text(text)
@@ -62,8 +62,8 @@ def test_unsupported_text_is_rejected_instead_of_dropping_characters(text):
 
 @pytest.mark.parametrize('field,value', [
     ('text', None), ('text', ''), ('text', '  '), ('text', 'a' * 401), ('text', '...'),
-    ('text', 'ua2'), ('reference_text', None), ('reference_text', ''),
-    ('reference_text', 'a' * 2001), ('reference_text', 'Nyob ꟽ'),
+    ('text', 'ua2'), ('reference_text', None), ('reference_text', []),
+    ('reference_text', 'a' * 2001),
     ('speed', True), ('speed', None), ('speed', '1'), ('speed', 0), ('speed', .49),
     ('speed', 2.01), ('speed', math.nan), ('speed', math.inf),
     ('quality', 'unknown'), ('quality', []),
@@ -75,6 +75,15 @@ def test_invalid_requests_fail_before_loading_weights(monkeypatch, field, value)
     options[field] = value
     with pytest.raises(native.EngineError):
         engine.synthesize(**options)
+
+
+def test_number_verbalization_cannot_exceed_direct_native_inference_limit(monkeypatch):
+    engine = native.SpeechEngine()
+    monkeypatch.setattr(engine, '_load', lambda: pytest.fail('Oversized spoken text must fail before loading weights'))
+    text = 'Kuv ' + '123 ' * 50
+    assert len(text) <= 400 and len(native.validate_text(text)) > 400
+    with pytest.raises(native.EngineError, match='sau khi chuyển số vượt 400'):
+        engine.synthesize(text, 'reference.wav', '')
 
 
 @pytest.fixture
@@ -359,6 +368,36 @@ def test_native_pipeline_preserves_target_tokens_and_applies_requested_speed(ten
     assert state.conversions[0]['sid_tgt'] is target
     assert samples.dtype.name == 'float32' and rate == 22050 and len(samples) == 20000
     assert state.watermark_calls == 1
+
+
+@pytest.mark.parametrize('words', ['', 'Xin chào, tôi đang đọc tiếng Việt.',
+                                  '你好，这是声音样本。', 'Hello, this is my voice.'])
+def test_native_clone_accepts_any_reference_language_without_using_its_words_as_tokens(tensor_pipeline, monkeypatch, words):
+    _, engine, state, target = tensor_pipeline
+    references = []
+
+    def prepare(path, reference_words, model):
+        references.append((path, reference_words))
+        return target
+
+    monkeypatch.setattr(engine, '_prepare_reference', prepare)
+    engine.synthesize('Nyob zoo, kuv rov tuaj.', 'external-selected.wav', words)
+    assert references == [('external-selected.wav', words)]
+    tokens = state.inference[0][0][0].tolist()
+    assert ''.join(native.symbols[value] for value in tokens if value) == 'nyob zoo, kuv rov tuaj.'
+    assert state.conversions[0]['sid_tgt'] is target
+
+
+def test_reference_failure_cannot_fall_back_to_default_speaker(tensor_pipeline, monkeypatch):
+    _, engine, state, _ = tensor_pipeline
+
+    def missing_reference(*args):
+        raise native.EngineError('Không đọc được mẫu đã chọn.')
+
+    monkeypatch.setattr(engine, '_prepare_reference', missing_reference)
+    with pytest.raises(native.EngineError, match='mẫu đã chọn'):
+        engine.synthesize('Nyob zoo.', 'missing-personal.wav', '')
+    assert not state.inference and not state.conversions
 
 
 def test_hyphenated_native_input_uses_identical_tokens_to_spaced_words(tensor_pipeline):

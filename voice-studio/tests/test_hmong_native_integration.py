@@ -157,7 +157,7 @@ def test_native_clone_keeps_the_exact_supplied_reference_words(native_studio):
 
 @pytest.mark.parametrize('text,detail', [
     ('Nyob zoo 你好', 'RPA'),
-    ('Kuv 123', 'Mô hình không có'),
+    ('Kuv ua123', 'Mô hình không có'),
     ('Nyob/zoo.', 'Mô hình không có'),
 ])
 def test_native_unsupported_text_is_rejected_before_queue(native_studio, text, detail):
@@ -177,6 +177,18 @@ def test_native_validation_keeps_the_original_script_case_and_rpa_tone_letters(n
     assert job['text'] == script
     assert app.read_json(root / 'jobs' / (job['id'] + '.json'))['text'] == script
     assert [segment.text for segment in plan_segments(job)] == [script]
+
+
+def test_native_prose_numbers_queue_original_source_and_plan_hmong_words(native_studio):
+    client, root, submit = native_studio
+    script = 'Kuv muaj 2 tug me nyuam thiab 200.000 nyiaj.'
+    response = client.post('/api/speech', json=speech_request(text=script))
+    assert response.status_code == 202, response.text
+    job = response.json()
+    assert job['text'] == script
+    assert app.read_json(root / 'jobs' / (job['id'] + '.json'))['text'] == script
+    assert ' '.join(segment.text for segment in plan_segments(job)) == 'Kuv muaj ob tug me nyuam thiab ob puas txhiab nyiaj.'
+    submit.assert_called_once_with(app.run_job, job['id'])
 
 
 @pytest.mark.parametrize('speaker', ['hmong-male', 'hmong-female'])

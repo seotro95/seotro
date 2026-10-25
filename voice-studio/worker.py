@@ -19,7 +19,7 @@ from pathlib import Path
 from state_io import write_json_atomic,write_progress,read_progress
 from narration import PCMWriter, PROFILES, Segment, plan_segments
 from hmong_assets import HMONG_ENGINES
-from character_cast import checkpoint_identity, settings_for_cue, validate_job_references
+from character_cast import checkpoint_identity, settings_for_cue, validate_job_references, is_preset_voice
 
 DATA = Path(os.environ['VOICE_STUDIO_DATA_DIR'])
 LANGUAGES = {'en-US': 'English', 'en-GB': 'English', 'ja': 'Japanese', 'ko': 'Korean', 'zh': 'Chinese', 'fr': 'French', 'de': 'German', 'es': 'Spanish', 'it': 'Italian', 'pt': 'Portuguese', 'ru': 'Russian'}
@@ -34,6 +34,9 @@ def write_state(path, data):
 def load_synthesizer(job):
     import soundfile as sf
     if job['engine'] in HMONG_ENGINES:
+        if job.get('speaker') in {'hmong-female', 'hmong-male'} and not is_preset_voice(job):
+            raise ValueError('Danh tính giọng cá nhân không khớp giọng mặc định. '
+                             'Tạo tác vụ mới bằng hồ sơ giọng cá nhân; không thay bằng giọng mặc định.')
         global _hmong_model_instance, _hmong_native_instance
         native = job['engine'] == 'hmong_native'
         if native:
@@ -51,7 +54,7 @@ def load_synthesizer(job):
                 from hmong_engine import SpeechEngine
                 _hmong_model_instance = SpeechEngine()
             instance = _hmong_model_instance
-        if job.get('speaker') in {'hmong-female','hmong-male'}:
+        if is_preset_voice(job):
             from hmong_assets import reference
             ref_path, ref_text = reference(job['speaker'])
         else:

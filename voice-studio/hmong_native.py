@@ -20,7 +20,7 @@ from types import SimpleNamespace
 
 from hmong_engine import EngineError, _file_fingerprint, _reference_identity
 from hmong_native_models import model_directory, verify_models
-from hmong_text import HmongTextError, normalize_text
+from hmong_text import HmongTextError, normalize_speech_text, normalize_text
 from hmong_native_vendor.vits.symbols import symbols
 
 MAX_SECONDS = 120
@@ -51,7 +51,7 @@ def validate_text(text):
     hyphenated Hmong without dropping letters or guessing another spelling.
     """
     try:
-        result = normalize_text(text).replace('-', ' ').lower()
+        result = normalize_speech_text(text).replace('-', ' ').lower()
         return normalize_text(result, vocabulary=_INPUT_SYMBOLS)
     except HmongTextError as exc:
         error = EngineError(str(exc))
@@ -197,18 +197,20 @@ class SpeechEngine:
     def synthesize(self, text, reference_path, reference_text, speed=1.0, quality='fast'):
         if not isinstance(text, str) or not text.strip() or len(text) > 400:
             raise EngineError('Mỗi đoạn tạo giọng cần 1–400 ký tự; dùng hàng đợi cho kịch bản dài.')
-        if not isinstance(reference_text, str) or not reference_text.strip() or len(reference_text) > 2000:
-            raise EngineError('Nhập đúng lời Hmong của đoạn mẫu; không tự đoán lời mẫu.')
+        if not isinstance(reference_text, str) or len(reference_text) > 2000:
+            raise EngineError('Lời mẫu tùy chọn cần là văn bản, tối đa 2.000 ký tự.')
         if (isinstance(speed, bool) or not isinstance(speed, (int, float))
                 or not math.isfinite(speed) or not .5 <= speed <= 2):
             raise EngineError('Tốc độ đọc cần từ 0,5 đến 2 lần.')
         if not isinstance(quality, str) or quality not in {'turbo', 'draft', 'fast', 'standard'}:
             raise EngineError('Chế độ chất lượng không hợp lệ.')
         text = validate_text(text)
-        try:
-            normalize_text(reference_text)
-        except HmongTextError as exc:
-            raise EngineError(str(exc)) from None
+        if len(text) > 400:
+            raise EngineError('Lời đọc sau khi chuyển số vượt 400 ký tự; dùng hàng đợi để chia đoạn.')
+        # OpenVoice extracts speaker identity from the selected WAV, not its
+        # transcript. Applying the target Hmong vocabulary here rejected valid
+        # reference speakers using Vietnamese, Chinese and other languages.
+        # Keep metadata unchanged and validate only the words being synthesized.
         if not any(character.isalpha() for character in text):
             raise EngineError('Nội dung cần có từ Hmong RPA, không chỉ dấu câu.')
         with self._lock:

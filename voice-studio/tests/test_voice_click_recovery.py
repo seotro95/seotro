@@ -25,7 +25,7 @@ def click_page(site, *, fail=None, failures=1, hold=None, hmong=True):
     female = 'hmong-female' if hmong else 'vi-other'
     state = {'fail': fail, 'failures': failures, 'hold': hold, 'pending': [], 'posts': [], 'errors': [], 'reads': {}}
     config = {'variant': 'hmong' if hmong else 'standard', 'app_name': 'Voice Studio Hmong' if hmong else 'Voice Studio',
-              'version': '1.6.2-hmong', 'default_language': language, 'languages': {language: 'Hmong' if hmong else 'Tiếng Việt'},
+              'version': '1.6.3-hmong', 'default_language': language, 'languages': {language: 'Hmong' if hmong else 'Tiếng Việt'},
               'subtitle_languages': {language: 'Hmong'}, 'ai_voice_languages': [language], 'models': {engine: True},
               'hmong_backend': 'native', 'hmong_engine': engine, 'hmong_ready': True, 'nano_ready': False,
               'hardware': 'CPU', 'cpu_cores': 4, 'available_ram_gb': 8, 'max_characters': 1000000,
@@ -141,13 +141,13 @@ def test_exhausted_config_failure_recovers_using_visible_controls(static_site, r
 def test_http_validation_error_is_visible_at_clicked_button_and_preserves_exact_draft(static_site):
     with click_page(static_site) as (page, state, *_):
         ready(page)
-        message = 'Văn bản có ký tự chưa được hỗ trợ: 2. Hãy viết số bằng chữ.'
+        message = 'Văn bản có ký tự chưa được hỗ trợ: /. Hãy bỏ đường dẫn khỏi lời đọc.'
         def invalid(route):
             state['posts'].append(route.request.post_data_json)
             route.fulfill(status=422, json={'detail': message, 'field': 'text', 'code': 'unsupported_characters',
-                                           'unsupported_characters': ['2']})
+                                           'unsupported_characters': ['/']})
         page.route('**/api/speech', invalid)
-        original = 'Kuv muaj 2 tug me nyuam.'
+        original = 'Nyob zoo https://example.com.'
         page.locator('#script').fill(original)
         page.locator('#generate').click()
         playwright.expect(page.locator('#generate-status')).to_have_text(message)
@@ -277,7 +277,7 @@ def test_late_previous_job_response_cannot_overwrite_new_rejection(static_site, 
         else:
             page.wait_for_timeout(100)
             assert len(state['pending']) == 1
-        page.locator('#script').fill('Kuv muaj 2 tug me nyuam.')
+        page.locator('#script').fill('Nyob zoo https://example.com.')
         page.locator('#generate').click()
         playwright.expect(page.locator('#output-subtitle')).to_have_text('Kịch bản mới có ký tự chưa hỗ trợ.')
         if stale_source == 'poll':

@@ -26,7 +26,10 @@ FEMALE = 'hmong-female'
 REPORT_NAME = 'browser-smoke.json'
 HYPHENATED_SAMPLE = 'Nyob-zoo, kuv yog ib tug Hmoob.'
 SAMPLE = 'Nyob zoo. Ua tsaug rau koj mloog.'
-INVALID_SAMPLE = 'Kuv muaj 2 tug me nyuam.'
+INVALID_SAMPLE = 'Nyob zoo https://example.com.'
+CAPTION_SAMPLE = ('\ufeff1\n"00:04:28,533 --> 00:04:29,333"\nNyob zoo.\n'
+                  '2\n99:59.500 --> 100:00.300\nKuv muaj 2 tug me nyuam.\n')
+CAPTION_SPOKEN = 'Nyob zoo. Kuv muaj ob tug me nyuam.'
 
 
 def check_click_rejection(page, expect):
@@ -240,7 +243,7 @@ def launch_browser(driver):
                        + ' | '.join(failures))
 
 
-def run(url, reports, expected_references, *, allow_non_windows=False):
+def run(url, reports, expected_references, *, allow_non_windows=False, external_reference=None):
     """Write a mandatory browser report; raise if any release check fails."""
     reports = Path(reports)
     reports.mkdir(parents=True, exist_ok=True)
@@ -323,7 +326,9 @@ def run(url, reports, expected_references, *, allow_non_windows=False):
                 for selector in ('#create-native', '#workspace-native'):
                     expect(page.locator(selector)).to_have_value('all')
 
-            def synthesize(name, ident, text=SAMPLE, workspace=False):
+            render_references = dict(expected_references)
+
+            def synthesize(name, ident, text=SAMPLE, workspace=False, *, record_case=True, custom=False):
                 script = '#workspace-free-script' if workspace else '#script'
                 button = '#workspace-free-generate' if workspace else '#generate'
                 audio = '#workspace-free-audio' if workspace else '#output-audio'
@@ -352,8 +357,8 @@ def run(url, reports, expected_references, *, allow_non_windows=False):
                     assert time.monotonic() < deadline, 'Browser speech did not finish within ten minutes'
                     page.wait_for_timeout(300)
                 assert job['status'] == 'done', job
-                assert job['voice_id'] == job['speaker'] == ident, job
-                assert job['hmong_reference_fingerprint'] == expected_references[ident], job
+                assert job['voice_id'] == ident and job['speaker'] == (None if custom else ident), job
+                assert job['hmong_reference_fingerprint'] == render_references[ident], job
                 assert job['text'] == text, 'The stored job must preserve the original UI text'
                 assert job['engine'] == 'hmong_native' and job['hmong_backend'] == 'vits_openvoice_v2'
                 assert job['hmong_steps'] is None and job['hmong_precision'] == 'fp32'
@@ -402,7 +407,8 @@ def run(url, reports, expected_references, *, allow_non_windows=False):
                           'playback': playback, 'audio_playback_checked': True,
                           'download_verified': True,
                           'wall_seconds': round(time.monotonic() - started, 3), **evidence}
-                result['cases'].append(record)
+                if record_case:
+                    result['cases'].append(record)
                 return record
 
             explicit('male')
@@ -453,6 +459,72 @@ def run(url, reports, expected_references, *, allow_non_windows=False):
             page.locator('#dub-voice').select_option(MALE)
             selected(MALE)
             result['dropdown_selection'] = True
+            tab('create')
+            explicit('male')
+            caption = synthesize('caption_metadata_as_txt', MALE, CAPTION_SAMPLE,
+                                 record_case=False)
+            exported = context.request.get('/api/jobs/' + caption['job_id'] + '/export.txt')
+            assert exported.ok
+            spoken = ' '.join(exported.text().split())
+            assert spoken == CAPTION_SPOKEN, 'Only caption words may enter the speech/export plan'
+            assert 1 / 3 < caption['audio_seconds'] < 30, 'TXT clocks must not create timestamp silence'
+            result['caption_metadata'] = {**caption, 'success': True,
+                'input_format': 'txt', 'exported_spoken_text': spoken,
+                'timestamps_not_spoken': True, 'cue_indices_not_spoken': True,
+                'continuous_txt_duration': True}
+            assert external_reference is not None, 'A real non-Hmong reference is required'
+            external = Path(external_reference)
+            assert external.is_file() and external.name == 'external-english-reference.wav'
+            external_bytes = external.read_bytes()
+            tab('clone')
+            page.locator('#clone-name').fill('English reference QA')
+            with page.expect_response(lambda response:
+                    urlparse(response.url).path == '/api/hmong/reference-info'
+                    and response.request.method == 'POST', timeout=30000) as pending:
+                page.locator('#clone-file').set_input_files(str(external))
+            info = pending.value
+            assert info.status == 200 and info.json()['requires_transcript'] is False
+            expect(page.locator('#clone-reference-start')).to_be_enabled()
+            page.locator('#clone-reference-start').fill('0')
+            page.locator('#clone-reference-end').fill('5')
+            page.locator('#transcript').fill('')
+            page.locator('#clone-form input[name="consent"]').check()
+            with page.expect_response(lambda response:
+                    urlparse(response.url).path == '/api/voices/clone'
+                    and response.request.method == 'POST', timeout=30000) as pending:
+                page.locator('#clone-submit').click()
+            response = pending.value
+            assert response.status == 201, response.text()
+            profile = response.json()
+            custom_id = profile['id']
+            assert custom_id not in expected_references and profile['transcript'] == ''
+            assert profile['reference_conditioning'] == 'audio' and profile['cross_language_reference'] is True
+            assert profile['source_sha256'] == hashlib.sha256(external_bytes).hexdigest()
+            expect(page.locator('#panel-create')).to_be_visible()
+            expect(page.locator('#voice')).to_have_value(custom_id)
+            expect(page.locator('#dub-voice')).to_have_value(custom_id)
+            reference_response = context.request.get('/api/voices/' + custom_id + '/sample')
+            assert reference_response.ok
+            reference_bytes = reference_response.body()
+            (reports / 'external-clone-reference.wav').write_bytes(reference_bytes)
+            reference = audio_evidence(reference_bytes)
+            assert abs(reference['audio_seconds'] - 5) < .001
+            identity = hashlib.sha256(json.dumps({'version': 1,
+                'audio_sha256': reference['sha256'], 'transcript': ''},
+                ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()
+            assert identity not in expected_references.values()
+            render_references[custom_id] = identity
+            custom = synthesize('external_english_reference_to_hmong', custom_id,
+                                record_case=False, custom=True)
+            result['external_clone'] = {**custom, 'success': True,
+                'source_language': 'en', 'output_language': 'mww',
+                'reference_conditioning': 'audio', 'no_transcript': True,
+                'cross_language_reference': True, 'auto_selected': True,
+                'source_sha256': profile['source_sha256'],
+                'reference_audio_sha256': reference['sha256'],
+                'reference_seconds': reference['audio_seconds'],
+                'independent_reference_fingerprint': identity,
+                'default_fallback': False, 'perceptual_similarity_evaluated': False}
             result['features_1_6'] = check_release_features(page, context, get_json, expect, tab,
                                                          expected_references)
             assert not result['page_errors'], result['page_errors']
@@ -488,9 +560,11 @@ def main():
                         help='JSON map of preset IDs to fingerprints verified by the packaged runtime.')
     parser.add_argument('--allow-non-windows', action='store_true',
                         help='Local development only; this report cannot pass the Windows release gate.')
+    parser.add_argument('--external-reference', required=True, type=Path,
+                        help='Builder-owned five-second English reference, independent of default voices.')
     args = parser.parse_args()
     run(args.url, args.reports, json.loads(args.expected_references),
-        allow_non_windows=args.allow_non_windows)
+        allow_non_windows=args.allow_non_windows, external_reference=args.external_reference)
 
 
 if __name__ == '__main__':

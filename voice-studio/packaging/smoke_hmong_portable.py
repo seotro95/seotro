@@ -508,9 +508,17 @@ def check_browser_selection(root, url, reports):
         raise RuntimeError('The browser QA interpreter must exist outside the portable package')
     from hmong_assets import reference_fingerprint
     expected = {ident: reference_fingerprint(ident) for ident in ('hmong-male', 'hmong-female')}
+    # The F5 package's English example is independent of both Hmong defaults.
+    # Keep this fixture only in builder-owned QA data, never personal profiles.
+    source = Path(root) / 'runtime/Lib/site-packages/f5_tts/infer/examples/basic/basic_ref_en.wav'
+    external = Path(reports) / 'external-english-reference.wav'
+    subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(source), '-t', '5',
+                    '-ac', '1', '-ar', '24000', '-c:a', 'pcm_s16le', '-y', str(external)],
+                   check=True, capture_output=True, timeout=30)
     script = Path(__file__).with_name('browser_hmong_portable.py')
     subprocess.run([str(interpreter), str(script), '--url', url, '--reports', str(reports),
-                    '--expected-references', json.dumps(expected)], check=True, timeout=1800)
+                    '--expected-references', json.dumps(expected),
+                    '--external-reference', str(external)], check=True, timeout=1800)
     report = json.loads((Path(reports) / 'browser-smoke.json').read_text(encoding='utf-8'))
     assert report.get('success') is True and report.get('native_windows_validation') is True
     assert report['runtime']['url'] == url and report['runtime']['backend'] == 'hmong_native'
@@ -584,7 +592,7 @@ def check_web_launcher(root, backend, *, reports=None):
             assert isinstance(instance.get(field), str) and instance[field], 'Missing runtime identity: ' + field
         assert isinstance(instance.get('pid'), int) and instance['pid'] > 0
         assert instance['url'] == url and instance['backend'] == engine
-        assert instance['version'] == live['version'] == '1.6.2-hmong'
+        assert instance['version'] == live['version'] == '1.6.3-hmong'
         assert instance['instance_id'] != 'stale-build-qa-instance'
         server = psutil.Process(instance['pid'])
         assert server.is_running() and process.pid in {parent.pid for parent in server.parents()}, \

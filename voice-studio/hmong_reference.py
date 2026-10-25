@@ -1,9 +1,10 @@
-"""Decode local uploads and pair bounded Hmong references with their exact words.
+"""Decode local uploads and select bounded voice reference recordings.
 
 Only byte-identical project originals receive automatic cropping/text prefill.
 The stored words are editable project metadata, not a verified transcription.
-Other recordings need the user's transcript of the selected interval; no ASR or
-text guessing is performed here.
+F5 recordings need the exact words of the selected interval. Native OpenVoice
+uses audio for speaker identity and can accept any reference language without a
+transcript. Neither path performs ASR or guesses reference words.
 """
 from __future__ import annotations
 
@@ -63,7 +64,7 @@ def known_source(content):
     return None, None
 
 
-def describe_reference(content, duration):
+def describe_reference(content, duration, *, require_transcript=True):
     preset, item = known_source(content)
     selected = item['reference'] if item else {'start': 0, 'end': min(duration, 8), 'text': ''}
     return {
@@ -75,14 +76,16 @@ def describe_reference(content, duration):
         'transcript_verified': bool(item and item.get('reference_text_verified', False)),
         'transcript_source': item.get('reference_text_source', 'project_prefill') if item else 'manual',
         'automatic': item is not None,
-        'requires_transcript': item is None,
+        'requires_transcript': item is None and require_transcript,
         'requires_selection': item is None and duration > 8.001,
+        'reference_conditioning': 'audio_and_transcript' if require_transcript else 'audio',
+        'cross_language_reference': not require_transcript,
     }
 
 
-def select_reference(content, duration, transcript, start=None, end=None):
+def select_reference(content, duration, transcript, start=None, end=None, *, require_transcript=True):
     """Resolve a crop and editable project prefill without replacing user words."""
-    info = describe_reference(content, duration)
+    info = describe_reference(content, duration, require_transcript=require_transcript)
     exact_known_interval = (info['automatic'] and not isinstance(start, bool) and not isinstance(end, bool)
                             and start == info['reference_start'] and end == info['reference_end'])
     known_interval = info['automatic'] and ((start is None and end is None) or exact_known_interval)
@@ -96,14 +99,17 @@ def select_reference(content, duration, transcript, start=None, end=None):
             transcript = info['transcript']
     elif start is None:
         if duration > 8.001:
-            raise ReferenceError('Mẫu dài hơn 8 giây. Chọn đoạn 3–8 giây, nghe lại và nhập đúng lời của đoạn đã chọn.')
+            detail = ' và nhập đúng lời của đoạn đã chọn' if require_transcript else ''
+            raise ReferenceError('Mẫu dài hơn 8 giây. Chọn đoạn 3–8 giây, nghe lại' + detail + '.')
         start, end = 0.0, duration
     if (isinstance(start, bool) or isinstance(end, bool)
             or not isinstance(start, (int, float)) or not isinstance(end, (int, float))
             or not math.isfinite(start) or not math.isfinite(end)
             or start < 0 or end > duration + 0.001 or not 3 <= end - start <= 8.001):
         raise ReferenceError('Đoạn mẫu cần dài 3–8 giây và nằm trong âm thanh gốc.')
-    if not isinstance(transcript, str) or not transcript.strip():
+    if not isinstance(transcript, str) or len(transcript) > 2000:
+        raise ReferenceError('Lời mẫu cần là văn bản, tối đa 2.000 ký tự.')
+    if require_transcript and not transcript.strip():
         raise ReferenceError('Nhập đúng lời Hmong của đoạn mẫu đã chọn; tool không tự đoán lời mẫu.')
     return {
         'source_sha256': hashlib.sha256(content).hexdigest(),
@@ -113,6 +119,8 @@ def select_reference(content, duration, transcript, start=None, end=None):
         'transcript': transcript.strip(),
         'automatic_reference': automatic,
         'known_preset': info['known_preset'],
+        'reference_conditioning': info['reference_conditioning'],
+        'cross_language_reference': info['cross_language_reference'],
     }
 
 

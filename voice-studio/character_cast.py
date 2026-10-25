@@ -15,6 +15,13 @@ _VOICE_ID = re.compile(r'[A-Za-z0-9_-]{1,128}\Z')
 _FINGERPRINT = re.compile(r'[0-9a-f]{64}\Z')
 
 
+def is_preset_voice(voice):
+    """A preset name in legacy personal metadata must never override its WAV."""
+    speaker = voice.get('speaker')
+    return (voice.get('category') != 'cloned' and speaker in {'hmong-male', 'hmong-female'}
+            and voice.get('voice_id', voice.get('id')) == speaker)
+
+
 def _digest(value):
     return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True,
                                     separators=(',', ':')).encode('utf-8')).hexdigest()
@@ -39,10 +46,10 @@ def validate_cast_request(character_voices, cue_characters, cue_count):
 
 def reference_identity(voice, data):
     """Hash verified preset audio or a personal WAV and its exact reference words."""
-    if voice.get('speaker') in {'hmong-male', 'hmong-female'}:
+    voice_id = voice.get('id', voice.get('voice_id'))
+    if is_preset_voice({**voice, 'voice_id': voice_id}):
         from hmong_assets import reference_fingerprint
         return reference_fingerprint(voice['speaker'])
-    voice_id = voice.get('voice_id', voice.get('id'))
     if not isinstance(voice_id, str) or not _VOICE_ID.fullmatch(voice_id):
         raise ValueError('Không tìm thấy mẫu giọng nhân vật hợp lệ.')
     audio_hash = hashlib.sha256()
@@ -61,15 +68,22 @@ def make_voice_snapshot(voice, engine, language, data):
     voice_id = voice.get('id', voice.get('voice_id'))
     if not isinstance(voice_id, str) or not _VOICE_ID.fullmatch(voice_id):
         raise ValueError('Không tìm thấy giọng nhân vật hợp lệ.')
-    if voice.get('speaker') in {'hmong-male', 'hmong-female'}:
+    voice = {**voice, 'voice_id': voice_id}
+    # Older imported personal profiles can carry a copied preset `speaker`.
+    # Keep their stored JSON intact, but freeze their own audio for new jobs.
+    if not is_preset_voice(voice):
+        voice = {**voice, 'speaker': None}
+    if is_preset_voice(voice):
         from hmong_assets import reference
         _, words = reference(voice['speaker'])
     else:
         words = voice.get('transcript', '')
-    if not isinstance(words, str) or not words.strip() or len(words) > 2000:
+    audio_reference = engine == 'hmong_native' and voice.get('speaker') not in {'hmong-male', 'hmong-female'}
+    if not isinstance(words, str) or (not audio_reference and not words.strip()) or len(words) > 2000:
         raise ValueError('Nhập đúng lời Hmong của mẫu giọng nhân vật, tối đa 2.000 ký tự.')
     from narration import validate_voice_text
-    validate_voice_text(words, engine, 'Lời mẫu tham chiếu nhân vật')
+    if not audio_reference:
+        validate_voice_text(words, engine, 'Lời mẫu tham chiếu nhân vật')
     return {'voice_id': voice_id, 'voice_name': voice.get('name', voice_id),
             'engine': engine, 'speaker': voice.get('speaker'), 'language': language,
             'reference_text': words, 'hmong_reference_fingerprint': reference_identity(voice, data)}
@@ -99,16 +113,20 @@ def validate_cast(job):
 def _validate_snapshot(voice, job):
     if (not isinstance(voice, dict) or voice.get('engine') not in HMONG_ENGINES
             or voice.get('engine') != job.get('engine')
-            or (voice.get('speaker') is not None and not isinstance(voice['speaker'], str))
+            or (voice.get('speaker') is not None and not is_preset_voice(voice))
             or voice.get('language') != 'mww' or voice.get('language') != job.get('language')
             or not isinstance(voice.get('voice_id'), str) or not _VOICE_ID.fullmatch(voice['voice_id'])
             or not isinstance(voice.get('hmong_reference_fingerprint'), str)
             or not _FINGERPRINT.fullmatch(voice['hmong_reference_fingerprint'])
-            or not isinstance(voice.get('reference_text'), str) or not voice['reference_text'].strip()
+            or not isinstance(voice.get('reference_text'), str)
+            or (not voice['reference_text'].strip()
+                and (job.get('engine') != 'hmong_native'
+                     or voice.get('speaker') in {'hmong-male', 'hmong-female'}))
             or len(voice['reference_text']) > 2000):
         raise ValueError('Danh tính mẫu giọng nhân vật chưa đầy đủ hoặc khác mô hình; tạo tác vụ mới.')
     from narration import validate_voice_text
-    validate_voice_text(voice['reference_text'], job['engine'], 'Lời mẫu tham chiếu nhân vật')
+    if job['engine'] != 'hmong_native' or voice.get('speaker') in {'hmong-male', 'hmong-female'}:
+        validate_voice_text(voice['reference_text'], job['engine'], 'Lời mẫu tham chiếu nhân vật')
 
 
 def cast_voice_ids(job):
@@ -134,6 +152,11 @@ def validate_cast_references(job, data):
 
 def validate_job_references(job, data):
     """Verify every frozen Hmong reference before resuming or changing output."""
+    if (job.get('engine') in HMONG_ENGINES
+            and job.get('speaker') in {'hmong-male', 'hmong-female'}
+            and not is_preset_voice(job)):
+        raise ValueError('Tác vụ cũ đã gắn giọng cá nhân với giọng mặc định. '
+                         'Tạo tác vụ mới bằng hồ sơ giọng cá nhân; các đoạn cũ được giữ nguyên.')
     cast = validate_cast(job)
     snapshots = [cast['default_voice'], *cast['voices'].values()] if cast else []
     base = job.get('hmong_voice_snapshot')

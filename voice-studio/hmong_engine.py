@@ -17,7 +17,7 @@ import struct
 import threading
 import wave
 
-from hmong_text import HmongTextError, iter_batches, normalize_text
+from hmong_text import HmongTextError, iter_batches, normalize_speech_text, normalize_text
 
 
 BASE = Path(__file__).resolve().parent
@@ -339,7 +339,7 @@ class SpeechEngine:
         if quality not in QUALITY_STEPS:
             raise EngineError("Chọn turbo (4 bước), draft (8 bước), fast (16 bước) hoặc standard (32 bước).")
         try:
-            text = normalize_text(text)
+            text = normalize_speech_text(text)
             reference_text = normalize_text(reference_text)
         except HmongTextError as exc:
             raise EngineError(str(exc)) from None

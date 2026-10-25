@@ -1,12 +1,12 @@
 # Hướng dẫn đầy đủ Voice Studio Hmong
 
-Hướng dẫn cho người dùng **Voice Studio Hmong 1.6.2 trên Windows** lần đầu: tải gói đầy đủ, mở tool, tạo giọng Hmong Nam/Nữ, thêm giọng của mình, đọc TXT hoặc sách dài, phân vai SRT và xuất video. Tool dùng **Hmong Trắng / Hmoob Daw, chữ Latin RPA**. Giao diện hiển thị ngôn ngữ này là Hmong Trắng hoặc `mww`.
+Hướng dẫn cho người dùng **Voice Studio Hmong 1.6.3 trên Windows** lần đầu: tải gói đầy đủ, mở tool, tạo giọng Hmong Nam/Nữ, thêm giọng của mình, đọc TXT hoặc sách dài, phân vai SRT và xuất video. Tool dùng **Hmong Trắng / Hmoob Daw, chữ Latin RPA**. Giao diện hiển thị ngôn ngữ này là Hmong Trắng hoặc `mww`.
 
 **Bắt đầu nhanh:** tải ZIP Windows đầy đủ → giải nén toàn bộ → mở `MO_VOICE_STUDIO_HMONG.bat` ở ngoài cùng → chờ tải mô hình lần đầu → chọn **Văn bản thành giọng nói** → chọn **Giọng Nam** hoặc **Giọng Nữ** → nhập câu Hmong → bấm **Tạo giọng nói** → nghe và tải WAV/MP3.
 
 Bạn **không cần cài Python, không cần API key, không cần GPU** để tạo giọng Hmong bằng gói Windows đầy đủ. Lần đầu cần Internet và khoảng **580 MB mô hình**, ngoài dung lượng của ZIP, bộ chạy và các bản thu. Khi chuẩn bị xong, phần tạo giọng chạy trên máy và có thể dùng offline. Chức năng AI viết/dịch là tùy chọn riêng.
 
-**Khi bấm Tạo giọng:** đọc trạng thái ngay dưới nút. Nếu studio chưa kết nối, chờ kiểm tra hoặc bấm **Thử kết nối lại**; lời đang soạn được giữ nguyên. Nếu báo ký tự chưa hỗ trợ, sửa đúng ký tự được chỉ ra rồi tạo lại. Ví dụ viết số `2` thành từ Hmong `ob` khi đúng nghĩa câu của bạn; URL, emoji và ký tự lạ cần sửa hoặc bỏ trước khi đọc. Tool không tự đoán hay đổi chính tả. Khi đã nhận công việc, trạng thái sẽ chuyển sang hàng đợi/đang tạo và hiện audio khi hoàn tất.
+**Khi bấm Tạo giọng:** đọc trạng thái ngay dưới nút. Nếu studio chưa kết nối, chờ kiểm tra hoặc bấm **Thử kết nối lại**; lời đang soạn được giữ nguyên. Tool tự bỏ mốc phụ đề khỏi lời đọc và giữ số có nghĩa trong nội dung; bộ nhanh đọc các số đếm được hỗ trợ bằng chữ Hmong. Nếu báo ký tự hay cách viết số chưa hỗ trợ, sửa đúng chỗ được chỉ ra rồi tạo lại. URL, emoji và ký tự lạ cần sửa thành lời muốn đọc hoặc bỏ trước khi tạo; tool không tự sửa chính tả. Khi đã nhận công việc, trạng thái sẽ chuyển sang hàng đợi/đang tạo và hiện audio khi hoàn tất.
 
 ## Mục lục
 
@@ -31,7 +31,7 @@ Bạn **không cần cài Python, không cần API key, không cần GPU** để
 ## 1. Chọn đúng gói và giải nén
 
 1. Mở trang phát hành chính thức: [github.com/seotro95/seotro/releases](https://github.com/seotro95/seotro/releases). Chọn bản **Voice Studio Hmong** và mở danh sách **Assets**.
-2. Tải tệp đầy đủ **`Voice-Studio-Hmong-1.6.2-Windows-x64.zip`** trong bản phát hành 1.6.2. Hai mục **Source code (zip)** và **Source code (tar.gz)** là mã nguồn, không phải gói chạy sẵn. Không dùng vài tệp `.py` hoặc `.bat` tải rời để thay cho gói đầy đủ.
+2. Tải tệp đầy đủ **`Voice-Studio-Hmong-1.6.3-Windows-x64.zip`** trong bản phát hành 1.6.3. Hai mục **Source code (zip)** và **Source code (tar.gz)** là mã nguồn, không phải gói chạy sẵn. Không dùng vài tệp `.py` hoặc `.bat` tải rời để thay cho gói đầy đủ.
 3. Trong File Explorer, bấm phải ZIP → **Extract All… / Giải nén tất cả…** → chọn thư mục có quyền ghi, ví dụ `D:\VoiceStudioHmong` hoặc một thư mục trong Documents → **Extract / Giải nén**. Với 7-Zip, chọn **Extract to… / Giải nén vào…**.
 4. Mở **thư mục đã giải nén**. Tại thư mục ngoài cùng phải thấy `MO_VOICE_STUDIO_HMONG.bat` cùng các thư mục `runtime`, `ffmpeg`, `voice-studio-hmong` và `tools`. Nếu chúng nằm trong một thư mục con, mở tiếp thư mục đó.
 5. Giữ nguyên cả bộ thư mục. Không kéo riêng tệp BAT ra Desktop, không chạy khi File Explorer vẫn đang mở nội dung bên trong ZIP, không chép chồng gói mới lên bộ đang chạy. Có thể tạo **shortcut** của BAT ra Desktop nếu muốn mở nhanh.
@@ -56,7 +56,7 @@ Mở lại BAT lần sau sẽ dùng mô hình đã lưu nếu tệp hợp lệ. 
 
 ### Ba mức kiểm tra: bộ chạy, mô hình và giọng thật
 
-Không coi thông báo “đủ tệp” là đã tạo được lời đọc. Bản 1.6.2 có các lệnh sau; chạy sau khi lưu công việc và đóng phiên tạo giọng. Mở thư mục ngoài cùng trong File Explorer, bấm thanh địa chỉ, gõ `cmd` rồi Enter để mở dòng lệnh đúng thư mục. Gõ **một lệnh cần dùng**, bấm Enter và chờ kết quả:
+Không coi thông báo “đủ tệp” là đã tạo được lời đọc. Bản 1.6.3 có các lệnh sau; chạy sau khi lưu công việc và đóng phiên tạo giọng. Mở thư mục ngoài cùng trong File Explorer, bấm thanh địa chỉ, gõ `cmd` rồi Enter để mở dòng lệnh đúng thư mục. Gõ **một lệnh cần dùng**, bấm Enter và chờ kết quả:
 
 | Lệnh | Kiểm tra gì? | Có tải model / tạo lời không? |
 | --- | --- | --- |
@@ -105,8 +105,27 @@ Muốn kiểm tra nhanh **chính giọng đang chọn**, bấm **?** → **Tạo
 
 1. Chuẩn bị tệp `.txt` hoặc `.srt`, nên lưu mã hóa **UTF-8** để giữ chữ và dấu chính xác. Trong Notepad, dùng **Save as / Lưu thành**, chọn mã hóa UTF-8 và kiểm tra tên tệp không thành `ten-bai.srt.txt`.
 2. Ở **Văn bản thành giọng nói**, bấm **Nhập TXT / SRT** cạnh khung nội dung, chọn tệp rồi kiểm tra **Định dạng lời** và nội dung đã nạp. Bạn cũng có thể dán văn bản trực tiếp.
-3. Với TXT, tùy chọn **Không đọc mốc phút–giây ở đầu dòng** dùng khi bản chép lời có tiền tố thời gian. Với SRT cần bám thời gian, chọn đúng định dạng **SRT**, không dán như TXT rồi mong mốc tự căn.
+3. Chọn **TXT · đọc liên tục** khi chỉ muốn đọc lời: các dòng mốc kiểu `00:04:28,533 --> 00:04:29,333` và số thứ tự cue được loại khỏi lời đọc. Chọn **SRT · theo mốc từng câu** khi cần đặt lời đúng thời điểm phụ đề. Tùy chọn **Không đọc mốc phút–giây ở đầu dòng** áp dụng thêm cho tiền tố thời gian đơn trong TXT; cặp mốc có mũi tên luôn được hiểu là thời gian, không phải lời.
 4. Kiểm tra bộ đếm ký tự trước khi tạo. TXT Hmong tối đa 1.000.000 ký tự; video và SRT có giới hạn riêng bên dưới.
+
+### Phân biệt mốc thời gian và số trong lời
+
+`00:04:28,533 --> 00:04:29,333` nghĩa là bắt đầu ở **4 phút 28,533 giây**, kết thúc ở **4 phút 29,333 giây**: cửa sổ dài **0,8 giây**. Những số này và số thứ tự cue không được đưa vào bộ đọc. Ví dụ:
+
+```srt
+1
+00:04:28,533 --> 00:04:29,333
+Nyob zoo.
+2
+00:04:30,000 --> 00:04:34,000
+Kuv muaj 2 tug me nyuam.
+```
+
+- Ở **TXT**, tool chỉ đọc hai câu liên tục; số `2` trong câu thứ hai vẫn là nội dung và được đọc bằng lời Hmong theo cách đọc số được hỗ trợ. Không chèn hơn bốn phút im lặng chỉ vì tệp có mốc `00:04:28,533`.
+- Ở **SRT**, tool giữ thời điểm hai cue; khoảng đầu audio có thể im lặng đến mốc 4 phút 28,533 giây. Câu đầu chỉ có 0,8 giây để đọc. Tool căn nhịp trong giới hạn cho phép; nếu lời không vừa, nó báo cue cần nới mốc hoặc sửa lời, không cắt mất phần cuối.
+- Số trong câu, chẳng hạn `2` trong ví dụ, khác với số thứ tự ở dòng riêng ngay trước mốc. Tool giữ số nội dung và các chữ RPA; không dùng cách xóa mọi chữ số khỏi tệp.
+
+Tool nhận cặp mốc dùng dấu phẩy hoặc dấu chấm phần nghìn giây, dạng `HH:MM:SS,mmm`, dạng tổng phút `MM:SS.mmm`, mốc có dấu nháy/ngoặc và cue dán sát nhau thiếu dòng trống. Bản xuất TXT có phút–giây của chính tool có thể nhập lại. Với SRT cần giữ mốc tăng dần, không chồng nhau, có lời và trong giới hạn thời lượng. Mốc thiếu hoặc sai được báo để sửa, không được đọc thành lời. Kịch bản gốc vẫn được giữ để chỉnh sửa; tệp lời đã đọc chỉ chứa nội dung đã đưa vào audio.
 
 ### Xuất đúng loại tệp
 
@@ -126,12 +145,27 @@ SRT từ TXT bám các đoạn đọc đã tạo, không phải căn âm thanh c
 Giữ đúng chính tả Hmong RPA và **các chữ cuối ghi thanh điệu**, chẳng hạn `b`, `j`, `v`, `s`, `g`, `m`, `d`. Chúng là thành phần của từ, không phải ký tự thừa. Không tự bỏ đuôi chữ, không đổi sang cách viết mô phỏng tiếng Việt và không để AI sửa chúng theo chính tả tiếng Anh.
 
 1. Viết câu rõ ràng, có dấu cách đúng giữa các âm tiết và dấu câu hợp lý. Ví dụ: `Peb ua hauj lwm. Thaj chaw no zoo nkauj.`
-2. Nếu tool báo **Ký tự chưa hỗ trợ** hoặc **Mô hình không có các ký tự**, tìm đúng ký tự được chỉ ra. Đổi số, ký hiệu, chữ viết tắt hoặc từ mượn thành cách nói bằng chữ Hmong mà bạn muốn nghe. Tool không tự đoán cách đọc mọi con số hay tên riêng.
-3. Với số như `2026` hoặc ký hiệu `%`, viết thành lời Hmong tương ứng theo nội dung và nhờ người biết Hmong kiểm tra. Không dùng công cụ “xóa ký tự lạ” hàng loạt vì có thể làm đổi nghĩa.
+2. Bộ nhanh giữ số trong lời và chuyển số đếm được hỗ trợ thành chữ Hmong trước khi tạo tiếng. Số ở mốc thời gian và số thứ tự phụ đề được tách riêng, không đưa vào bước đọc số. Kiểm tra lại các câu có số, tên riêng và từ mượn.
+3. Nếu tool báo **Ký tự chưa hỗ trợ**, **Mô hình không có các ký tự** hoặc cách viết số chưa hỗ trợ, sửa đúng phần được chỉ ra thành cách nói Hmong bạn muốn nghe. Không dùng công cụ “xóa ký tự lạ” hàng loạt vì có thể làm đổi nghĩa. Các cách diễn đạt năm, số điện thoại, mã và đơn vị cần kiểm tra theo ngữ cảnh; tool không tự biết ý nghĩa mọi chuỗi số.
 4. Dùng dấu câu đơn giản như dấu chấm, phẩy, hỏi; bỏ emoji hoặc ký tự của hệ chữ khác nếu mô hình báo không hỗ trợ. Dấu nháy cong, gạch dài và dấu ba chấm thông dụng có thể được chuẩn hóa để xử lý.
 5. Nếu báo **một từ hoặc cụm không có dấu cách vượt giới hạn**, kiểm tra đoạn bị dính chữ. Thêm dấu cách đúng chỗ giữa các âm tiết; không chẻ ngẫu nhiên một từ và không tách chữ ghi thanh điệu.
 
 Bộ nhanh giữ chữ RPA, chuyển gạch nối thành ranh giới từ khi tạo tiếng và giữ cách viết gốc trong kịch bản. Việc đầu vào được giữ đúng **không chứng minh mọi từ sẽ được đọc đúng**. Hãy nghe các tên riêng, từ hiếm, thanh điệu và câu dài.
+
+### Cách đọc số trong nội dung
+
+Bộ đọc chuyển chữ số đứng riêng trong lời thành các từ Hmong trước khi tạo tiếng; kịch bản gốc vẫn giữ chữ số. Đây là quy tắc đọc số theo hình thức viết, không tự suy ra số đó là năm, số lượng, mã hay số điện thoại.
+
+| Nội dung có số | Cách xử lý |
+| --- | --- |
+| `Kuv muaj 2 tug me nyuam.` | `2` được đọc là `ob`; các từ quanh số giữ nguyên. |
+| Số nguyên từ `0` đến `999999999` | Đọc số đếm, ví dụ `20` → `nees nkaum`, `30` → `peb caug`. |
+| Số có số `0` ở đầu, hoặc chuỗi từ 10 chữ số | Đọc từng chữ số, để giữ mã/số dài thay vì đoán đơn vị. |
+| `200.000` hoặc `200,000` | Nhóm ba chữ số được hiểu là hàng nghìn: `ob puas txhiab`. |
+| `12.05` hoặc `12,05` | Phần nguyên đọc theo số đếm, phần lẻ từng chữ số; dấu chấm/phẩy giữ vai trò ngắt nhịp. |
+| `1,234.50` hoặc `1.234,50` | Dấu cuối là phần lẻ; nhóm hàng nghìn trước đó phải đúng định dạng. |
+
+Nếu dấu phân cách có ý nghĩa khác, hãy viết rõ bằng lời Hmong bạn muốn nghe. Chuỗi dính vào chữ như `ua2`, URL, địa chỉ IP và cách viết số không hợp lệ không được tự đoán; tool báo phần cần sửa khi bộ đọc không hỗ trợ. Những quy tắc này không thay thế việc nghe kiểm tra cách đọc năm, số thứ tự, phần trăm, tiền tệ hoặc đơn vị trong câu cụ thể.
 
 ## 6. Nhịp đọc, nhấn cụm, khoảng nghỉ và sắc thái
 
@@ -182,24 +216,26 @@ Hồ sơ giọng lưu **mẫu tham chiếu** để tool dùng khi đọc nội d
 1. Dùng giọng của bạn hoặc giọng đã được chủ giọng cho phép sử dụng. Chọn đoạn **một người nói**, rõ tiếng, không nhạc, không vọng mạnh, không có người nói chồng lên nhau.
 2. Tệp tải lên dài **3–30 giây**, tối đa **20 MB**; hỗ trợ WAV, MP3, M4A, FLAC, OGG, WEBM. Nếu bản gốc dài hơn, dùng phần mềm cắt audio để lấy một tệp trong giới hạn này trước.
 3. Trong tệp đó, chọn đoạn nói rõ dài **3–8 giây**. Tránh chọn phần đầu chỉ có im lặng, tiếng thở hoặc đoạn bị cắt giữa từ.
-4. Chuẩn bị **đúng lời Hmong đã nói trong chính đoạn được chọn**. Không điền lời cả tệp dài, bản dịch tiếng Việt hoặc câu bạn muốn tool tạo sau này.
+4. Với bộ chính **Hmong nhanh thử nghiệm / VITS + OpenVoice V2**, mẫu có thể nói **Hmong, tiếng Việt hoặc ngôn ngữ khác**. Lời tham chiếu là tùy chọn và không cần dịch sang Hmong; bộ chuyển giọng dùng audio. **Ngôn ngữ lời đọc đầu ra** vẫn là Hmong Trắng. Với **F5 nâng cao**, mẫu và lời tham chiếu vẫn phải là Hmong, khớp đúng đoạn được chọn; không điền bản dịch hoặc câu muốn tạo sau này.
 
 ### Lưu và thử giọng
 
-1. Mở **Nhân bản giọng nói**, nhập **Tên giọng**, ví dụ `Maiv · kể chuyện`, chọn ngôn ngữ Hmong Trắng.
+1. Mở **Nhân bản giọng nói**, nhập **Tên giọng**, ví dụ `Maiv · kể chuyện`, chọn **Ngôn ngữ lời đọc đầu ra** là Hmong Trắng. Lựa chọn này chỉ ngôn ngữ tool sẽ đọc, không giới hạn tiếng nói trong mẫu của bộ chính.
 2. Bấm **Chọn mẫu âm thanh của bạn**, chọn tệp và đợi tool kiểm tra. Thanh trạng thái phải chuyển khỏi trạng thái đang xử lý.
 3. Điền **Bắt đầu đoạn mẫu (giây)** và **Kết thúc đoạn mẫu (giây)**. Ví dụ, bắt đầu `1.2`, kết thúc `6.2` là đoạn dài 5 giây. Hai mốc phải nằm trong tệp và chênh nhau từ 3 đến 8 giây.
 4. Bấm **Nghe đúng đoạn mẫu đã chọn**. Nghe lại từ đầu đến cuối đúng đoạn này; nếu mất đầu/cuối từ, sửa mốc rồi nghe lại.
-5. Ở **Kiểm tra / sửa lời Hmong cho khớp đoạn mẫu 3–8 giây (bắt buộc)**, gõ đúng từng từ vừa nghe, giữ đủ chữ thanh điệu. Khi thay mốc, phải kiểm tra và sửa lời tương ứng. Tool không tự nhận dạng lời Hmong của mẫu khác.
+5. Với bộ chính, có thể để trống **Lời trong mẫu · ngôn ngữ bất kỳ (không bắt buộc)** hoặc ghi đúng lời gốc để lưu tham khảo (tối đa 2.000 ký tự); lời này không phải câu sẽ được đọc và không cần là Hmong. Với F5, ô lời Hmong vẫn bắt buộc: gõ đúng từng từ trong đoạn 3–8 giây, giữ đủ chữ thanh điệu, sửa lại khi thay mốc. Tool không tự nhận dạng lời của mẫu khác.
 6. Tích ô xác nhận quyền sử dụng giọng.
 7. Bấm **Lưu và tạo thử giọng Hmong** để vừa lưu vừa tạo câu thử mới. Tool chuyển về tab tạo giọng, chọn giọng vừa lưu và tạo câu `Nyob zoo. Ua tsaug rau koj mloog.`. Theo dõi tiến độ, nghe và tải WAV/MP3 khi xong.
 8. Nếu chỉ muốn lưu để dùng sau, bấm **Lưu hồ sơ giọng**. Sau đó nhập lời mới và bấm **Tạo giọng nói**; chỉ lưu hồ sơ sẽ chưa có một bản audio mới.
 
 Ví dụ tự thu: đọc câu `Nyob zoo, kuv zoo siab tau ntsib koj.` rõ ràng, tự nhiên. Chỉ dùng câu đó làm lời tham chiếu nếu bạn nghe thấy đúng câu ấy trong đoạn 3–8 giây đã chọn. Nếu đoạn chỉ chứa `kuv zoo siab tau ntsib koj`, lời tham chiếu cũng phải bắt đầu bằng `kuv`, không chép thêm `Nyob zoo`.
 
-Với **đúng hai MP3 gốc đi kèm**, tool nhận diện tệp bằng SHA-256, chọn đoạn **0–4,7 giây** và điền lời Hmong đã được cung cấp/xác nhận cho đoạn đó. Bạn vẫn phải nghe và có thể sửa. Tệp đã cắt, đổi mã hóa hoặc chỉ trùng tên sẽ không nhất thiết được nhận diện; khi ấy chọn đoạn và gõ lời thủ công.
+Với **đúng hai MP3 gốc đi kèm**, tool nhận diện tệp bằng SHA-256, chọn đoạn **0–4,7 giây** và điền lời Hmong đã được cung cấp/xác nhận cho đoạn đó. Bạn vẫn phải nghe và có thể sửa. Tệp đã cắt, đổi mã hóa hoặc chỉ trùng tên sẽ không nhất thiết được nhận diện; khi ấy chọn đoạn thủ công và điền lời nếu dùng F5.
 
-Nếu giọng nghe kém giống, thử mẫu khác rõ lời hơn và kiểm tra lại sự khớp giữa lời/mốc trước khi đổi nhiều thiết lập. Không xóa hồ sơ đang được tác vụ dở dùng nếu bạn muốn tiếp tục tác vụ đó.
+Sau khi lưu, kiểm tra **Đang chọn:** ở tab tạo giọng hoặc phần tạo voice trong xưởng video phải là tên hồ sơ vừa thêm. Tạo một câu ngắn mới và so với **Nghe đúng đoạn mẫu đã chọn**; nghe mẫu gốc chỉ phát bản tham chiếu, chưa phải giọng AI. Bộ chuyển giọng dùng mẫu của hồ sơ đã chọn; nếu hồ sơ/mẫu không còn hợp lệ, cần chọn hoặc tạo lại hồ sơ thay vì dùng kết quả cũ.
+
+Mẫu tiếng Việt hoặc ngôn ngữ khác có thể dùng để chuyển chất giọng khi đọc Hmong; điều đó không huấn luyện một người nói Hmong mới hay bảo đảm giống 100%. Nếu nghe kém giống, thử mẫu rõ lời, tự nhiên hơn, không nhạc và không nhiều người nói; với F5 kiểm tra thêm lời/mốc khớp nhau. Không xóa hồ sơ đang được tác vụ dở dùng nếu bạn muốn tiếp tục tác vụ đó.
 
 ## 8. Đọc sách dài đến một triệu ký tự
 
@@ -219,7 +255,7 @@ Giới hạn một triệu ký tự là giới hạn nhập, không phải cam k
 
 ## 9. Tạo voice theo SRT và phân giọng nhân vật
 
-SRT gồm số thứ tự, dòng thời gian, lời thoại và dòng trống ngăn câu. Cue là một ô phụ đề có thời điểm bắt đầu/kết thúc. Mốc phải tăng dần, không chồng nhau, có lời và kết thúc trong ba giờ. Tối đa **10.000 cue**. Trong dự án video còn giới hạn **200.000 ký tự tổng** và **4.000 ký tự mỗi cue**.
+SRT gồm số thứ tự, dòng thời gian và lời thoại; nên có dòng trống ngăn câu để dễ kiểm tra. Tool cũng nhận cue liền nhau thiếu dòng trống. Cue là một ô phụ đề có thời điểm bắt đầu/kết thúc. Mốc phải tăng dần, không chồng nhau, có lời và kết thúc trong ba giờ. Tối đa **10.000 cue**. Trong dự án video còn giới hạn **200.000 ký tự tổng** và **4.000 ký tự mỗi cue**.
 
 ### Ví dụ SRT hai nhân vật
 
@@ -351,7 +387,7 @@ Gói mặc định dùng CPU. Nếu máy có **GPU NVIDIA và driver phù hợp*
 
 Bộ cài kiểm tra khả năng tính toán CUDA trước khi đánh dấu sẵn sàng. Nếu lựa chọn NVIDIA đã lưu không còn chạy được, launcher **báo rõ rồi chuyển sang CPU** để bạn tiếp tục dùng; bộ NVIDIA hợp lệ vẫn được dùng. Bạn có thể cài lại bộ NVIDIA trong `tools` khi cần. Kiểm tra CUDA thành công không chứng minh tốc độ hoặc chất lượng của một dự án dài. Không chép các tệp DLL hoặc PyTorch ngẫu nhiên vào `runtime`.
 
-Nếu máy còn biến cấu hình F5 cũ **`HMOOB_PRECISION=int8`**, bản 1.6.2 nhận ra cấu hình này và thông báo bộ nhanh vẫn chạy **FP32**. Bạn không cần đổi chính tả Hmong hay chọn mô hình phát âm khác; đây là xử lý tương thích cấu hình, không phải đổi bộ phát âm. Bộ nhanh vẫn giữ cách xử lý chữ và thanh điệu như trước.
+Nếu máy còn biến cấu hình F5 cũ **`HMOOB_PRECISION=int8`**, bản 1.6.3 nhận ra cấu hình này và thông báo bộ nhanh vẫn chạy **FP32**. Bạn không cần đổi chính tả Hmong hay chọn mô hình phát âm khác; đây là xử lý tương thích cấu hình, không phải đổi bộ phát âm. Bộ nhanh vẫn giữ cách xử lý chữ và thanh điệu như trước.
 
 **F5 là lựa chọn so sánh nâng cao:** đóng phiên hiện tại rồi mở **`tools\MO_F5_HMONG.bat`**. Lần đầu cần mô hình riêng khoảng **1,4 GB**. F5 có các mức **4/8/16/32 bước**: 16 bước là mặc định, 4/8 dành cho nháp có thể kém rõ, 32 có thể chậm hơn. Bộ nhanh VITS + OpenVoice **không có các số bước này**; không tìm cách giảm bước F5 để tăng tốc bộ chính.
 
@@ -406,20 +442,20 @@ Kiểm tra cửa sổ CMD còn mở và không có lỗi. Dùng đúng địa ch
 1. Chờ **Hoàn tất**; trạng thái đang tạo chưa phải bản audio có thể phát đủ.
 2. Kiểm tra nút phát, âm lượng của trình phát, âm lượng Windows, tab bị tắt tiếng và thiết bị đầu ra Bluetooth/tai nghe/loa.
 3. **Tải WAV/MP3 xuống** và mở bằng một trình phát trên Windows. Nếu tệp tải phát được, kiểm tra/trở lại Edge hoặc Chrome; đây có thể là lỗi phát của trình duyệt.
-4. Nếu audio chỉ yên lặng, kiểm tra mẫu tham chiếu có tiếng nói rõ trong chính đoạn 3–8 giây đang chọn, lời mẫu đúng và nội dung không chỉ có `[pause=…]`.
+4. Nếu audio chỉ yên lặng, kiểm tra mẫu có tiếng nói rõ trong chính đoạn 3–8 giây đang chọn, lời mẫu khớp nếu dùng F5 và nội dung không chỉ có `[pause=…]`. Với SRT bắt đầu từ phút thứ tư, tua đến mốc đầu tiên; muốn đọc liên tục từ đầu, dùng TXT.
 5. Tạo lại một câu ngắn bằng giọng Nam hoặc Nữ mặc định. Nếu cả hai vẫn không có tiếng, giữ thông báo lỗi và tệp kết quả để hỗ trợ kiểm tra; đừng tạo ngay lại cả cuốn sách.
 
 ### SRT báo mốc sai, chồng nhau hoặc câu quá dài
 
-Mốc tệp phải có dạng `00:00:05,000 --> 00:00:10,000`, sau đó có lời và một dòng trống trước cue kế tiếp. Mốc kết thúc phải lớn hơn bắt đầu; cue sau bắt đầu từ lúc cue trước kết thúc hoặc muộn hơn, không vượt video/ba giờ. Bấm **Sắp xếp theo mốc** nếu thứ tự sai rồi sửa các chỗ chồng nhau; sắp xếp không tự chữa chồng mốc. Lời không vừa thì rút gọn, nới thời gian vào khoảng trống, tách cue hoặc chọn giới hạn căn tốc độ phù hợp như phần 9. Giảm khoảng nghỉ trong cue nếu bạn đã chèn nhiều thẻ pause.
+Dùng mốc như `00:00:05,000 --> 00:00:10,000`, sau đó có lời; nên thêm dòng trống trước cue kế tiếp để dễ đọc. Tool nhận cả các biến thể ở phần 4 nhưng mốc thiếu hoặc sai phải sửa. Mốc kết thúc phải lớn hơn bắt đầu; cue sau bắt đầu từ lúc cue trước kết thúc hoặc muộn hơn, không vượt video/ba giờ. Bấm **Sắp xếp theo mốc** nếu thứ tự sai rồi sửa các chỗ chồng nhau; sắp xếp không tự chữa chồng mốc. Lời không vừa thì rút gọn, nới thời gian vào khoảng trống, tách cue hoặc chọn giới hạn căn tốc độ phù hợp như phần 9. Giảm khoảng nghỉ trong cue nếu bạn đã chèn nhiều thẻ pause.
 
 ### Báo RPA/ký tự chưa hỗ trợ, số hoặc từ dính quá dài
 
-Tìm đúng ký tự/cụm mà thông báo chỉ ra; viết số và chữ viết tắt thành lời Hmong, bỏ/đổi ký hiệu không thuộc từ vựng mô hình, sửa dấu cách đúng giữa các âm tiết. Giữ các chữ đuôi thanh điệu. Nếu từ nghe sai dù không báo lỗi, thử câu ngắn để đối chiếu và sửa nội dung bằng người biết Hmong; mô hình vẫn có thể đọc sai đầu vào hợp lệ.
+Tìm đúng ký tự/cụm mà thông báo chỉ ra; sửa cách viết số chưa hỗ trợ, chữ viết tắt hoặc ký hiệu thành lời Hmong muốn đọc và sửa dấu cách đúng giữa các âm tiết. Không xóa những số có nghĩa trong câu để xử lý mốc thời gian. Giữ các chữ đuôi thanh điệu. Nếu từ nghe sai dù không báo lỗi, thử câu ngắn để đối chiếu và sửa nội dung bằng người biết Hmong; mô hình vẫn có thể đọc sai đầu vào hợp lệ.
 
 ### Bấm lưu giọng nhưng chưa có audio, hoặc không thấy giọng
 
-**Lưu hồ sơ giọng** chỉ lưu mẫu. Chọn hồ sơ đó rồi nhập lời và **Tạo giọng nói**, hoặc dùng **Lưu và tạo thử giọng Hmong**. Nếu danh sách trống, chọn **Tất cả nguồn / Tất cả giọng**, bấm **Cập nhật giọng** và kiểm tra lại tên đang chọn. Với mẫu mới, đợi kiểm tra tệp xong và điền đủ lời khớp đoạn trước khi lưu.
+**Lưu hồ sơ giọng** chỉ lưu mẫu. Chọn hồ sơ đó rồi nhập lời và **Tạo giọng nói**, hoặc dùng **Lưu và tạo thử giọng Hmong**. Nếu danh sách trống, chọn **Tất cả nguồn / Tất cả giọng**, bấm **Cập nhật giọng** và kiểm tra lại tên đang chọn. Với mẫu mới, đợi kiểm tra tệp xong, chọn đoạn có tiếng nói rõ và tích xác nhận quyền sử dụng. Bộ chính cho phép lời tham chiếu để trống và mẫu nói ngôn ngữ khác; F5 vẫn cần lời Hmong khớp đoạn. Sau khi lưu, kiểm tra tên hồ sơ đang chọn ở cả nơi tạo giọng bạn muốn dùng.
 
 ### Thiếu runtime, FFmpeg, bundle_check hoặc thư viện
 
@@ -431,7 +467,7 @@ Nếu thông báo DLL yêu cầu **Microsoft Visual C++ 2015–2022 x64**, cài 
 
 ### Công việc báo lỗi tạo giọng hoặc worker dừng
 
-Đọc phần lỗi trên kết quả hoặc thẻ **Lịch sử bản thu**. Bản 1.6.2 hiển thị hướng xử lý và dòng **Nhật ký tác vụ:** kèm đường dẫn tệp log cục bộ của chính công việc. Mở đúng tệp log đó bằng Notepad nếu cần xem thêm, hoặc lưu lại thông báo và đường dẫn để nhờ hỗ trợ. Sửa nguyên nhân được chỉ ra như thiếu RAM, thư viện/DLL, cấu hình, model hoặc dung lượng; sau đó dùng **Tiếp tục** nếu tác vụ còn các đoạn đã tạo. Đừng chỉ bấm tạo lại liên tục hay gửi toàn bộ `.data`; log có thể chứa nội dung công việc nên chỉ chia sẻ phần bạn muốn cung cấp.
+Đọc phần lỗi trên kết quả hoặc thẻ **Lịch sử bản thu**. Bản 1.6.3 hiển thị hướng xử lý và dòng **Nhật ký tác vụ:** kèm đường dẫn tệp log cục bộ của chính công việc. Mở đúng tệp log đó bằng Notepad nếu cần xem thêm, hoặc lưu lại thông báo và đường dẫn để nhờ hỗ trợ. Sửa nguyên nhân được chỉ ra như thiếu RAM, thư viện/DLL, cấu hình, model hoặc dung lượng; sau đó dùng **Tiếp tục** nếu tác vụ còn các đoạn đã tạo. Đừng chỉ bấm tạo lại liên tục hay gửi toàn bộ `.data`; log có thể chứa nội dung công việc nên chỉ chia sẻ phần bạn muốn cung cấp.
 
 ### Tạo giọng chậm, phần trăm đứng lâu hoặc không tiếp tục được
 
@@ -445,6 +481,6 @@ Lần nạp model và câu dài có thể mất thời gian; xem trạng thái C
 4. Tải một tệp về máy, mở bằng trình phát bên ngoài và nghe trước khi chia sẻ. Lưu TXT gốc, JSON phân vai và sao lưu `.data` khi công việc quan trọng.
 5. Đây là âm thanh AI. Bộ nhanh có thử gắn dấu WavMark với đoạn đủ dài, nhưng đoạn quá ngắn có thể bỏ qua và chưa xác nhận dấu còn nhận được sau mọi kiểu xử lý/xuất. Không coi mọi tệp đều đã có dấu chắc chắn.
 
-Nguồn và giấy phép mô hình được ghi trong `MODEL-SOURCES.json` của gói và [tài liệu bộ Hmong nhanh trực tuyến](https://github.com/seotro95/seotro/blob/release/voice-studio-hmong-1.6.2/voice-studio/docs/HMONG-NATIVE.md). Trọng số được tải từ nguồn, không đóng sẵn trong ZIP. Kho trọng số Hmong chưa nêu giấy phép rõ ràng; xem điều kiện của nguồn trước khi phân phối lại hoặc dùng thương mại. Tải và kiểm tra tệp thành công không xác nhận quyền sử dụng hay phát âm chuẩn.
+Nguồn và giấy phép mô hình được ghi trong `MODEL-SOURCES.json` của gói và [tài liệu bộ Hmong nhanh trực tuyến](https://github.com/seotro95/seotro/blob/release/voice-studio-hmong-1.6.3/voice-studio/docs/HMONG-NATIVE.md). Trọng số được tải từ nguồn, không đóng sẵn trong ZIP. Kho trọng số Hmong chưa nêu giấy phép rõ ràng; xem điều kiện của nguồn trước khi phân phối lại hoặc dùng thương mại. Tải và kiểm tra tệp thành công không xác nhận quyền sử dụng hay phát âm chuẩn.
 
 Khi cần nhờ hỗ trợ, gửi số phiên bản đang hiện, tên BAT đã mở, nội dung lỗi trong CMD, giọng/bộ đọc đã chọn và một câu ngắn tái hiện. Với lỗi tải, cho biết đó là tải ZIP hay model. Chỉ gửi mẫu giọng hoặc nội dung riêng tư khi bạn chủ động muốn chia sẻ chúng.

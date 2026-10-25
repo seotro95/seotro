@@ -18,21 +18,46 @@ class Segment:
     rhythm_pause: float = 0
 
 
-def spoken_text(text):
-    """Remove line-leading caption clocks, never numbers inside spoken prose."""
-    clock = r'(?:\d{1,3}:)?\d{1,2}:[0-5]\d(?:[.,]\d{1,3})?'
-    timing = re.compile(r'^\s*' + clock + r'\s*-->\s*' + clock + r'(?=\s|$)\s*')
-    leading = re.compile(r'^\s*(?:\[' + clock + r'\]|\(' + clock + r'\)|' + clock + r')(?=\s|$)\s*(?:[-–—|]\s*)?')
-    lines = text.replace('\r\n', '\n').split('\n')
-    output = []
-    for index, line in enumerate(lines):
-        span = timing.match(line)
-        if span:
-            output.append(line[span.end():])
+def spoken_text(text, *, remove_labels=True):
+    """Ignore caption ranges/indices; retain all ordinary words and numbers.
+
+    Strong range metadata is never narration, even when single-clock labels
+    are opted out. Original editable source is retained separately by the job.
+    """
+    from caption_markers import normalize_caption_text, parse_timing_line, strip_leading_clock, is_cue_index
+    from html import unescape
+    lines=normalize_caption_text(text).split('\n')
+    spans=[parse_timing_line(line) for line in lines]
+    caption_mode=any(span is not None for span in spans)
+    output=[]
+    seen_range=False
+    has_body=False
+    next_index=1
+    for index,line in enumerate(lines):
+        span=spans[index]
+        if span is not None:
+            seen_range=True
+            content=unescape(re.sub(r'<[^>]*>','',span['text']))
+            has_body=bool(content.strip())
+            output.append(content)
+            next_index+=1
             continue
-        if line.strip().isdigit() and index + 1 < len(lines) and timing.match(lines[index + 1]):
-            continue  # SRT cue index immediately before its timing line.
-        output.append(leading.sub('', line))
+        if is_cue_index(line):
+            following=index+1
+            while following<len(lines) and not lines[following].strip():
+                following+=1
+            if following<len(lines) and spans[following] is not None and (not seen_range or has_body):
+                value=int(line.strip().rstrip('.)'))
+                if value>0 and (not seen_range or value==next_index):
+                    next_index=value
+                    continue
+        if caption_mode and line.strip()=='WEBVTT':
+            continue
+        content=strip_leading_clock(line) if remove_labels else line
+        if caption_mode:
+            content=unescape(re.sub(r'<[^>]*>','',content))
+        output.append(content)
+        has_body=has_body or bool(content.strip())
     return '\n'.join(output)
 
 
@@ -112,7 +137,7 @@ def _expression_segments(text, job, *, timed=False):
     if job.get('hmong_phrase_context') is True:
         return _context_expression_segments(text, job, timed=timed)
     from hmong_expression import automatic_pause, validate_emotion, validate_strength
-    from hmong_text import normalize_text
+    from hmong_text import normalize_speech_text as normalize_text
     emotion = validate_emotion(job.get('emotion', 'neutral'))
     strength = validate_strength(job.get('emotion_strength', .65))
     rhythm = bool(job.get('auto_rhythm', True)) and not timed
@@ -168,7 +193,7 @@ def _context_line(text, emphasis):
     a token-level flag is sufficient. Formatting normalization can expand
     punctuation or replace a zero-width separator without losing tone letters.
     """
-    from hmong_text import normalize_text
+    from hmong_text import normalize_speech_text as normalize_text
     words, flags = [], []
     for match in re.finditer(r'\S+', text):
         word = normalize_text(match.group())
@@ -291,7 +316,7 @@ def plan_segments(job):
     expression = hmong and job.get('segment_plan') == 'hmong-expression-v1'
     normalizer = None
     if hmong:
-        from hmong_text import normalize_text
+        from hmong_text import normalize_speech_text as normalize_text
         normalizer = normalize_text
     hmong_packed = (hmong and job.get('segment_plan') == 'hmong-packed-v1'
                     and job.get('paragraph_pause') == 0)
@@ -310,7 +335,7 @@ def plan_segments(job):
                 segment.cue = index
                 output.append(segment)
         return output
-    text = spoken_text(job['text']) if job.get('skip_timestamps', True) else job['text']
+    text = spoken_text(job['text'], remove_labels=job.get('skip_timestamps', True))
     if expression:
         return _expression_segments(text, job)
     if hmong:

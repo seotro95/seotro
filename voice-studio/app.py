@@ -32,7 +32,7 @@ from hardware import supports_int8, system_info
 from performance import speed_report
 from state_io import write_json_atomic,read_progress
 from hmong_assets import HMONG_ENGINES, active_engine as active_hmong_engine
-from character_cast import make_voice_snapshot, validate_cast_request, validate_job_references, cast_voice_ids
+from character_cast import make_voice_snapshot, validate_cast_request, validate_job_references, cast_voice_ids, is_preset_voice
 
 BASE = Path(__file__).resolve().parent
 DATA = Path(os.environ.get('VOICE_STUDIO_DATA_DIR', str(BASE / DEFAULT_DATA_FOLDER))).resolve()
@@ -296,7 +296,11 @@ def _config_values():
                 'paragraph_pause':0,'subtitle_ready':False,
                 'delivery':'story','emotion':'warm','emotion_strength':0.65,'auto_rhythm':False,
                 'hmong_phrase_context':True,
-                'hmong_reference_note':'Hai mẫu nam/nữ đi kèm dùng lời mẫu do bạn cung cấp và xác nhận khớp đoạn thu. Có thể nghe và sửa lời trong phần Nhân bản rồi lưu hồ sơ giọng đã chỉnh. Với mẫu khác, nhập lời khớp chính xác đoạn được chọn.',
+                'cross_language_reference':engine == 'hmong_native',
+                'hmong_reference_note':('Hai mẫu nam/nữ đi kèm dùng lời mẫu do bạn cung cấp và xác nhận khớp đoạn thu. '
+                                        'Mẫu cá nhân có thể nói ngôn ngữ bất kỳ; bộ đọc nhanh lấy chất giọng từ âm thanh và không bắt buộc lời mẫu.'
+                                        if engine == 'hmong_native' else
+                                        'Hai mẫu nam/nữ đi kèm dùng lời mẫu do bạn cung cấp và xác nhận khớp đoạn thu. Có thể nghe và sửa lời trong phần Nhân bản rồi lưu hồ sơ giọng đã chỉnh. Với mẫu khác, nhập lời khớp chính xác đoạn được chọn.'),
                 'hardware':'unknown','hardware_label':'CỤC BỘ · CHƯA KIỂM TRA CPU/GPU','ffmpeg':bool(shutil.which('ffmpeg')),
                 'cpu_cores':os.cpu_count() or 1,'nano_ready':False,'worker_warm':warm_worker is not None and warm_worker.poll() is None}
     return {'variant':'standard','app_name':APP_NAME,'default_language':'vi','subtitle_ready':(DATA/'models'/'whisper-base'/'model.bin').is_file(),'version':app.version,'mode': 'local', 'languages': LANGUAGES,'subtitle_languages':SUBTITLE_LANGUAGES,'ai_voice_languages':list(CORE_LANGUAGES), 'max_characters': MAX_CHARACTERS, 'max_audio_minutes': 180, 'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(), 'int8_cpu': supports_int8(), 'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')}, 'hardware': 'GPU' if shutil.which('nvidia-smi') else 'CPU', 'ffmpeg': bool(shutil.which('ffmpeg')), 'cpu_cores': os.cpu_count() or 1, 'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(), 'worker_warm': warm_worker is not None and warm_worker.poll() is None}
@@ -341,11 +345,15 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
         if IS_HMONG:
             from hmong_reference import decode_upload, select_reference, crop_reference, ReferenceError
             from hmong_text import normalize_text, HmongTextError
+            native_reference = active_hmong_engine() == 'hmong_native'
             try:
-                transcript = normalize_text(transcript)
+                if not native_reference:
+                    transcript = normalize_text(transcript)
                 source_duration = await run_in_threadpool(decode_upload, source, decoded)
-                selection = select_reference(content, source_duration, transcript, reference_start, reference_end)
-                selection['transcript'] = normalize_text(selection['transcript'])
+                selection = select_reference(content, source_duration, transcript, reference_start, reference_end,
+                                             require_transcript=not native_reference)
+                if not native_reference:
+                    selection['transcript'] = normalize_text(selection['transcript'])
                 duration = await run_in_threadpool(crop_reference, decoded, target,
                                                    selection['reference_start'], selection['reference_end'])
                 transcript = selection['transcript']
@@ -369,8 +377,18 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
         record = {'id': ident, 'name': name.strip(), 'category': 'cloned', 'languages': [language], 'language': language, 'transcript': transcript.strip(), 'description': f'Mẫu giọng cá nhân · {duration:.1f}s', 'duration': duration, 'consent_at': now(), 'created_at': now()}
         if IS_HMONG:
             record.update(engine=active_hmong_engine(), **selection)
-            from reference_quality import analyze_reference
+            if native_reference:
+                # The reference's spoken language does not determine the output
+                # language: OpenVoice conditions on audio, and the reader is Hmong.
+                record.update(languages=['mww'], language='mww', reference_conditioning='audio',
+                              cross_language_reference=True)
+            from reference_quality import analyze_reference, GUIDANCE
             record['quality'] = await run_in_threadpool(analyze_reference, target)
+            if native_reference:
+                record['quality']['guidance'] = [
+                    'Mẫu có thể nói ngôn ngữ bất kỳ; lời mẫu tùy chọn, âm thanh quyết định chất giọng.'
+                    if message == GUIDANCE[1] else message
+                    for message in record['quality'].get('guidance', [])]
         write_json(DATA / 'voices' / f'{ident}.json', record)
         return record
     except (subprocess.TimeoutExpired, FileNotFoundError):
@@ -399,7 +417,8 @@ async def hmong_reference_info(file: UploadFile = File(...)):
             source, decoded = Path(folder) / 'source.upload', Path(folder) / 'decoded.wav'
             source.write_bytes(content)
             duration = await run_in_threadpool(decode_upload, source, decoded)
-            return describe_reference(content, duration)
+            return describe_reference(content, duration,
+                                      require_transcript=active_hmong_engine() != 'hmong_native')
     except ReferenceError as exc:
         raise HTTPException(422, str(exc)) from None
     except (subprocess.TimeoutExpired, FileNotFoundError):
@@ -645,6 +664,10 @@ def speech(body: Speech):
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
     if IS_HMONG and engine in HMONG_ENGINES:
         engine = active_hmong_engine()
+    if engine in HMONG_ENGINES:
+        voice = {**voice, 'voice_id': voice['id']}
+        if not is_preset_voice(voice):
+            voice = {**voice, 'speaker': None}
     if engine == 'f5_hmong' and body.hmong_steps not in {4, 8, 16, 32}:
         raise HTTPException(422, 'F5-Hmong chỉ nhận 4, 8, 16 hoặc 32 bước.')
     preset_reference_fingerprint = None
@@ -678,7 +701,8 @@ def speech(body: Speech):
             else:
                 reference_text = voice.get('transcript','')
             validation_field = 'voice_id'
-            validate_voice_text(reference_text,engine,'Lời mẫu tham chiếu')
+            if engine != 'hmong_native' or voice.get('speaker') in {'hmong-male','hmong-female'}:
+                validate_voice_text(reference_text,engine,'Lời mẫu tham chiếu')
             voice_snapshot = make_voice_snapshot({**voice, 'engine': engine}, engine, body.language, DATA)
             preset_reference_fingerprint = voice_snapshot['hmong_reference_fingerprint']
         if body.character_voices or body.cue_characters:
@@ -701,7 +725,7 @@ def speech(body: Speech):
             characters = getattr(exc, 'unsupported_characters', [])[:16]
             detail = str(exc)
             if any(character.isdigit() for character in characters):
-                detail += ' Viết các số bằng chữ Hmong trước khi tạo voice.'
+                detail += ' Số đứng riêng được đọc bằng chữ Hmong; kiểm tra số dính liền chữ hoặc định dạng số chưa được hỗ trợ.'
             if any(character in '/@' for character in characters):
                 detail += ' Sửa đường dẫn hoặc địa chỉ thành lời Hmong muốn đọc.'
             return JSONResponse({'detail': detail, 'field': validation_field,
@@ -709,6 +733,9 @@ def speech(body: Speech):
                                  'unsupported_characters': characters}, status_code=422)
         raise HTTPException(422, str(exc)) from None
     except OSError:
+        if not is_preset_voice(voice):
+            raise HTTPException(422, 'Không đọc được tệp âm thanh của giọng cá nhân. '
+                                      'Nhập lại mẫu ở mục Nhân bản rồi chọn hồ sơ vừa lưu để tạo voice.') from None
         raise HTTPException(422, 'Không đọc được mẫu giọng Hmong mặc định. '
                                   'Giải nén lại toàn bộ bản ZIP để khôi phục thư mục assets/hmong rồi tạo lại.') from None
     if not model_ready(engine):

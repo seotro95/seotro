@@ -23,7 +23,7 @@ from build_windows import copy_runtime, download_verified_ffmpeg
 from fresh_hmong_portable import wave_evidence_bytes
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.6.2'
+VERSION = '1.6.3'
 ARCHIVE_NAME = f'Voice-Studio-Hmong-{VERSION}-Windows-x64.zip'
 
 
@@ -70,7 +70,7 @@ def copy_source(destination, source=SOURCE):
         target = destination / 'hmong_native_vendor' / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(vendor / relative, target)
-    required = ('app.py', 'worker.py', 'bundle_check.py', 'runtime_instance.py', 'character_cast.py',
+    required = ('app.py', 'worker.py', 'bundle_check.py', 'caption_markers.py', 'runtime_instance.py', 'character_cast.py',
                 'longform.py', 'reference_quality.py', 'hmong_acceleration.py',
                 'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py', 'hmong_health.py',
                 'hmong_native.py', 'hmong_native_models.py',
@@ -172,7 +172,7 @@ def checked_run(command, *, environment, cwd, timeout=2400):
 
 
 def write_notices(root, model_manifest, qa_report):
-    notice = '''VOICE STUDIO HMONG 1.6.2 — WINDOWS X64
+    notice = '''VOICE STUDIO HMONG 1.6.3 — WINDOWS X64
 
 Chi tai MOT goi ZIP va giai nen TOAN BO. Mo MO_VOICE_STUDIO_HMONG.bat.
 HUONG DAN DAY DU: mo HUONG-DAN-HMONG.html cung thu muc bang trinh duyet.
@@ -198,12 +198,16 @@ Bo nhanh khong su dung so buoc F5 hay INT8 F5.
 Bo F5 giu 16 buoc FP32; 4 buoc chi la ban nhap, 8/16/32 de doi chieu.
 Hai MP3 nguon nam/nu moi nhat giu nguyen va nhan dien bang SHA256.
 Loi cua doan tham chieu do ban cung cap, khop doan mau, duoc dien tu dong.
-Tool giu loi ban sua. Tep khac can chon doan 3-8 giay va nhap dung loi.
+Tool giu loi ban sua. Bo nhanh nhan mau noi bat ky ngon ngu nao, doan 3-8 giay,
+khong bat buoc loi mau. F5 van can loi Hmong khop doan tham chieu.
 Nhan ban giu am sac tu mau; khong bao dam giong hoan toan ban thu.
 Mac dinh ke chuyen, warm 65%, giu ngu canh cum/cau, tat nhip tu dong.
 Cam xuc neutral/warm/joyful/sad/serious/suspense dung xu ly nhip/am luong
 cuc bo, khong phai mo hinh dieu khien cam xuc than kinh. Co TXT/SRT,
 WAV/MP3 va [emotion=warm], **tu nhan manh**, [pause=0.4].
+TXT/SRT tu bo dong moc gio va so thu tu phu de, giu so trong loi doc.
+So trong van ban duoc doi thanh loi Hmong truoc khi gui bo doc nhanh.
+TXT doc lien mach; SRT giu moc va co che khop thoi luong tung cau.
 TXT Hmong toi da 1.000.000 ky tu, tren 20.000 ky tu tu chia chuong/phan.
 Xuat ZIP cac phan WAV/MP3, TXT/SRT va manifest; can du thoi gian/dung luong.
 SRT gan giong Hmong theo nhan vat tung cue; ten nhan vat khong doc thanh loi.
@@ -241,6 +245,7 @@ def bundle_reports(root, reports):
     root, reports = Path(root), Path(reports)
     approved = ('fresh-start.json', 'native-smoke.json', 'f5-smoke.json', 'browser-smoke.json', 'model-sources.json',
                 'first-run-male.wav', 'first-run-female.wav',
+                'external-english-reference.wav', 'external-clone-reference.wav',
                 'Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3')
     destination = root / 'reports'
     destination.mkdir(parents=True, exist_ok=False)
@@ -314,7 +319,7 @@ def validate_browser_report(report):
             'draft_preserved', 'recovery_succeeded'))
             or click.get('responses_mocked') is not False
             or click.get('ui_entrypoint') != '#generate'
-            or click.get('invalid_text') != 'Kuv muaj 2 tug me nyuam.'
+            or click.get('invalid_text') != 'Nyob zoo https://example.com.'
             or click.get('request_text') != click.get('invalid_text')
             or click.get('request_voice_id') != 'hmong-male' or click.get('request_language') != 'mww'
             or type(click.get('http_status')) is not int or click.get('http_status') != 422
@@ -329,6 +334,64 @@ def validate_browser_report(report):
         raise ValueError('Browser QA must visibly recover from a real rejected Generate click and complete the first male WAV')
     if not any('Nyob-zoo' in case.get('text', '') for case in cases):
         raise ValueError('Browser QA must complete the original hyphenated Hmong text')
+    caption = report.get('caption_metadata', {})
+    expected_caption = ('\ufeff1\n"00:04:28,533 --> 00:04:29,333"\nNyob zoo.\n'
+                        '2\n99:59.500 --> 100:00.300\nKuv muaj 2 tug me nyuam.\n')
+    if (any(caption.get(key) is not True for key in ('success', 'real_ui_post',
+            'original_text_preserved', 'audio_playback_checked', 'download_verified',
+            'timestamps_not_spoken', 'cue_indices_not_spoken', 'continuous_txt_duration'))
+            or caption.get('case') != 'caption_metadata_as_txt'
+            or caption.get('input_format') != 'txt' or caption.get('text') != expected_caption
+            or caption.get('exported_spoken_text') != 'Nyob zoo. Kuv muaj ob tug me nyuam.'
+            or caption.get('voice_id') != caption.get('post_voice_id')
+            or caption.get('voice_id') != caption.get('speaker')
+            or caption.get('voice_id') != 'hmong-male'
+            or caption.get('hmong_reference_fingerprint') != expected['hmong-male']
+            or caption.get('engine') != 'hmong_native' or caption.get('status') != 'done'
+            or not caption.get('job_id') or caption['job_id'] in {item['job_id'] for item in cases}
+            or not 1 / 3 < caption.get('audio_seconds', 0) < 30
+            or caption.get('audio_bytes', 0) <= 1000 or caption.get('sample_rate') != 24000
+            or caption.get('sample_width') != 2 or caption.get('peak_amplitude', 0) <= .001
+            or not re.fullmatch(r'[a-f0-9]{64}', caption.get('sha256', ''))):
+        raise ValueError('Browser QA must render pasted timestamped TXT as only its spoken text without clock silence')
+    playback = caption.get('playback', {})
+    if (playback.get('ready_state', 0) < 2 or playback.get('media_error') is not None
+            or playback.get('current_time', 0) <= .05 or playback.get('duration', 0) <= 1 / 3):
+        raise ValueError('Browser must decode and play the timestamp-cleaned speech')
+    clone = report.get('external_clone', {})
+    clone_id = clone.get('voice_id')
+    reference_hash = clone.get('reference_audio_sha256', '')
+    identity = hashlib.sha256(json.dumps({'version': 1, 'audio_sha256': reference_hash,
+                                         'transcript': ''}, ensure_ascii=False,
+                                        sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()
+    if (any(clone.get(key) is not True for key in ('success', 'real_ui_post',
+            'original_text_preserved', 'audio_playback_checked', 'download_verified',
+            'cross_language_reference', 'no_transcript', 'auto_selected'))
+            or clone.get('case') != 'external_english_reference_to_hmong'
+            or not isinstance(clone_id, str) or not re.fullmatch(r'[a-f0-9]{32}', clone_id)
+            or clone_id in expected or clone.get('post_voice_id') != clone_id
+            or clone.get('speaker') is not None or clone.get('engine') != 'hmong_native'
+            or clone.get('source_language') != 'en' or clone.get('output_language') != 'mww'
+            or clone.get('reference_conditioning') != 'audio'
+            or clone.get('default_fallback') is not False
+            or clone.get('perceptual_similarity_evaluated') is not False
+            or not re.fullmatch(r'[a-f0-9]{64}', clone.get('source_sha256', ''))
+            or not re.fullmatch(r'[a-f0-9]{64}', reference_hash)
+            or clone.get('independent_reference_fingerprint') != identity
+            or clone.get('hmong_reference_fingerprint') != identity or identity in expected.values()
+            or abs(clone.get('reference_seconds', 0) - 5) >= .001
+            or clone.get('status') != 'done' or not clone.get('job_id')
+            or clone['job_id'] in {caption['job_id'], *(item['job_id'] for item in cases)}
+            or clone.get('text') != 'Nyob zoo. Ua tsaug rau koj mloog.'
+            or clone.get('audio_bytes', 0) <= 1000 or clone.get('audio_seconds', 0) <= 1 / 3
+            or clone.get('sample_rate') != 24000 or clone.get('sample_width') != 2
+            or clone.get('peak_amplitude', 0) <= .001
+            or not re.fullmatch(r'[a-f0-9]{64}', clone.get('sha256', ''))):
+        raise ValueError('Browser QA must clone an independent English reference and use its audio identity for Hmong speech')
+    playback = clone.get('playback', {})
+    if (playback.get('ready_state', 0) < 2 or playback.get('media_error') is not None
+            or playback.get('current_time', 0) <= .05 or playback.get('duration', 0) <= 1 / 3):
+        raise ValueError('Browser must decode and play the externally cloned Hmong speech')
     features = report.get('features_1_6', {})
     longform, cast = features.get('longform', {}), features.get('character_cast', {})
     if (any(longform.get(key) is not True for key in ('success', 'million_character_editor',
@@ -468,7 +531,7 @@ def validate_release_archive(archive):
                 or hashlib.sha256(bundle.read(prefix + 'runtime/python.exe')).hexdigest() != fresh['runtime_python_sha256']):
             raise ValueError('Release archive lacks the exact runtime tested from empty Windows data')
         sources = build.get('application_sha256', {})
-        for required in ('hmong_launcher.py', 'hmong_health.py', 'voice_errors.py', 'prepare_hmong.py',
+        for required in ('hmong_launcher.py', 'hmong_health.py', 'voice_errors.py', 'caption_markers.py', 'prepare_hmong.py',
                          'hmong_native.py', 'docs/HUONG-DAN-HMONG.md', 'docs/HUONG-DAN-HMONG.html'):
             if required not in sources:
                 raise ValueError('Release archive lacks a required source checksum: ' + required)
@@ -491,6 +554,12 @@ def validate_release_archive(archive):
         if bundle.read(prefix + 'HUONG-DAN-HMONG.html') != guide:
             raise ValueError('The root full guide differs from the in-app full guide')
         browser = validate_browser_report(read_json('reports/browser-smoke.json'))
+        for name, field in (('external-english-reference.wav', 'source_sha256'),
+                            ('external-clone-reference.wav', 'reference_audio_sha256')):
+            reference = wave_evidence_bytes(bundle.read(prefix + 'reports/' + name), name)
+            if (reference['output_sha256'] != browser['external_clone'][field]
+                    or abs(reference['duration_seconds'] - 5) >= .001):
+                raise ValueError('The bundled external reference differs from the browser clone identity')
         native, f5 = read_json('reports/native-smoke.json'), read_json('reports/f5-smoke.json')
         validate_native_feature_report(native)
         longform = browser['features_1_6']['longform']

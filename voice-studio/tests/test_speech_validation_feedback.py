@@ -87,7 +87,7 @@ def test_non_speech_key_validation_retains_generic_private_response(studio):
 
 
 @pytest.mark.parametrize('text,characters,hint', [
-    ('Kuv muaj 2 tug me nyuam.', ['2'], 'Viết các số bằng chữ Hmong'),
+    ('Kuv muaj ua2 tug me nyuam.', ['2'], 'kiểm tra số dính liền chữ'),
     ('Mus saib https://example.com.', ['/'], 'đường dẫn hoặc địa chỉ'),
     ('Nyob zoo 😀.', ['😀'], 'RPA'),
 ])
@@ -100,7 +100,7 @@ def test_unsupported_spoken_text_reports_characters_without_creating_job(studio,
 
 
 def test_srt_error_keeps_cue_location_and_excludes_timestamps_from_characters(studio):
-    text = '1\n00:00:00,000 --> 00:00:10,000\nKuv muaj 2 tug me nyuam.\n'
+    text = '1\n00:00:00,000 --> 00:00:10,000\nKuv muaj ua2 tug me nyuam.\n'
     result = assert_rejected(studio, speech(text=text, input_format='srt')).json()
     assert 'Câu SRT 1' in result['detail']
     assert result['unsupported_characters'] == ['2']
@@ -114,13 +114,13 @@ def test_unsupported_character_metadata_is_deduplicated_and_bounded(studio):
     assert text not in result['detail']
 
 
-def test_reference_validation_points_to_voice_selection(studio, monkeypatch):
+def test_broken_preset_reference_metadata_points_to_voice_selection(studio, monkeypatch):
     path, _ = hmong_assets.reference('hmong-male')
-    monkeypatch.setattr(hmong_assets, 'reference', lambda speaker: (path, 'Kuv muaj 2.'))
+    monkeypatch.setattr(hmong_assets, 'reference', lambda speaker: (path, 'Giọng mẫu 2.'))
     result = assert_rejected(studio, speech()).json()
     assert result['field'] == 'voice_id'
     assert 'Lời mẫu tham chiếu' in result['detail']
-    assert result['unsupported_characters'] == ['2']
+    assert result['unsupported_characters'] == ['ọ', 'ẫ']
 
 
 @pytest.mark.parametrize('text', [
@@ -128,6 +128,7 @@ def test_reference_validation_points_to_voice_selection(studio, monkeypatch):
     "Kuv hais tias 'Nyob zoo'.",
     'Kuv hais tias ’Nyob zoo’.',
     'Kuv muaj ob tug me nyuam.',
+    'Kuv muaj 2 tug me nyuam.',
     '[pause=0.5] [emotion=warm]Nyob zoo. **Ua tsaug.**',
 ])
 def test_supported_words_apostrophes_and_controls_still_queue_exact_source(studio, text):

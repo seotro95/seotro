@@ -1,27 +1,62 @@
-"""Strict, bounded SRT parsing and millisecond exports."""
+"""Bounded caption parsing and millisecond SRT exports."""
 import re
 from html import unescape
 
+from caption_markers import is_cue_index, normalize_caption_text, parse_timing_line
+
 
 def parse_srt(text):
-    blocks = re.split(r'\n\s*\n', text.lstrip('\ufeff').replace('\r\n', '\n').strip())
+    """Read cue boundaries from timing lines, including adjacent pasted cues.
+
+    Blank separators are common formatting rather than the boundary itself.
+    Otherwise an omitted blank would put the next cue's number and clocks in
+    the words sent to the speech engine.
+    """
     cues = []
-    for block in blocks:
-        lines = block.strip().splitlines()
-        if lines and lines[0].strip().isdigit():
-            lines = lines[1:]
-        match = re.fullmatch(r'\s*(\d{2,3}):([0-5]\d):([0-5]\d)[,.](\d{3})\s*-->\s*(\d{2,3}):([0-5]\d):([0-5]\d)[,.](\d{3})\s*', lines[0] if lines else '')
-        if not match:
-            raise ValueError(f'SRT: mốc thời gian không hợp lệ ở câu {len(cues)+1}. Dùng HH:MM:SS,mmm --> HH:MM:SS,mmm.')
-        numbers = list(map(int, match.groups()))
-        start = numbers[0]*3600+numbers[1]*60+numbers[2]+numbers[3]/1000
-        end = numbers[4]*3600+numbers[5]*60+numbers[6]+numbers[7]/1000
-        content = unescape(re.sub(r'<[^>]*>', '', '\n'.join(lines[1:]))).strip()
+    timing = None
+    content_lines = []
+    next_index = 1
+
+    def finish():
+        start, end = timing['start'], timing['end']
+        lines = ([timing['text']] if timing['text'] else []) + content_lines
+        content = unescape(re.sub(r'<[^>]*>', '', '\n'.join(lines))).strip()
         if not content or start >= end or end > 10800 or (cues and start < cues[-1]['end']):
             raise ValueError('SRT: cần lời đọc, mốc tăng dần, không chồng nhau và kết thúc trong 3 giờ.')
         cues.append({'start': start, 'end': end, 'text': content})
         if len(cues) > 10000:
             raise ValueError('SRT tối đa 10.000 câu.')
+
+    for line in normalize_caption_text(text).split('\n'):
+        try:
+            marker = parse_timing_line(line)
+        except ValueError as exc:
+            raise ValueError(f'SRT: mốc thời gian không hợp lệ ở câu {len(cues)+1}. {exc}') from None
+        if marker is None:
+            content_lines.append(line)
+            continue
+        # A standalone number just before a timing line can be the next
+        # cue's index. Keep it when it is the current cue's only body line:
+        # a numeric caption is speech, and must never become an empty cue.
+        while content_lines and not content_lines[-1].strip():
+            content_lines.pop()
+        has_other_words = (timing is None or timing['text']
+                           or any(line.strip() for line in content_lines[:-1]))
+        if content_lines and is_cue_index(content_lines[-1]) and has_other_words:
+            value = int(content_lines[-1].strip().rstrip('.)'))
+            if value > 0 and (timing is None or value == next_index):
+                content_lines.pop()
+                next_index = value
+        if timing is not None:
+            finish()
+        elif any(line.strip() for line in content_lines):
+            raise ValueError('SRT: cần bắt đầu bằng mốc thời gian hoặc số thứ tự câu.')
+        timing = marker
+        content_lines = []
+        next_index += 1
+    if timing is None:
+        raise ValueError('SRT: mốc thời gian không hợp lệ ở câu 1. Dùng HH:MM:SS,mmm --> HH:MM:SS,mmm.')
+    finish()
     return cues
 
 

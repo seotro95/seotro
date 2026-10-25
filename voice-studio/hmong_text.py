@@ -30,6 +30,9 @@ _TRANSLATION = str.maketrans({
 })
 _ALLOWED = frozenset(string.ascii_letters + string.digits + string.punctuation + ' ')
 _SYLLABLE = re.compile(r"[A-Za-z]+(?:'[A-Za-z]+)*|[0-9]+(?:[.,][0-9]+)*")
+_NUMERAL = re.compile(r'[0-9]+(?:[.,][0-9]+)*')
+_DIGITS = ('xoom', 'ib', 'ob', 'peb', 'plaub', 'tsib', 'rau', 'xya', 'yim', 'cuaj')
+_GROUPED_INTEGER = re.compile(r'[0-9]{1,3}([.,])[0-9]{3}(?:\1[0-9]{3})*')
 
 
 def _shown(characters):
@@ -60,6 +63,78 @@ def normalize_text(text: str, *, vocabulary: Collection[str] | Mapping[str, obje
                                  + '. Hãy sửa văn bản; tool không tự thay chúng bằng khoảng trắng.',
                                  unsupported_characters=unknown)
     return normalized
+
+
+def _integer_words(digits: str) -> str:
+    # Leading zeroes identify codes/phone-style fields, not a cardinal count.
+    # Bound cardinal conversion independently of the length of a user script.
+    if len(digits) > 9 or (len(digits) > 1 and digits.startswith('0')):
+        return ' '.join(_DIGITS[int(digit)] for digit in digits)
+    value = int(digits)
+    if value < 10:
+        return _DIGITS[value]
+    if value < 100:
+        tens, units = divmod(value, 10)
+        head = 'kaum' if tens == 1 else 'nees nkaum' if tens == 2 else _DIGITS[tens] + ' caug'
+        return head + (' ' + _DIGITS[units] if units else '')
+    for scale, name in ((1_000_000, 'lab'), (1_000, 'txhiab'), (100, 'puas')):
+        if value >= scale:
+            count, remainder = divmod(value, scale)
+            words = _integer_words(str(count)) + ' ' + name
+            return words + (' ' + _integer_words(str(remainder)) if remainder else '')
+    raise AssertionError('unreachable cardinal number')
+
+
+def _numeral_words(token: str) -> str:
+    if token.isdigit():
+        return _integer_words(token)
+    if _GROUPED_INTEGER.fullmatch(token):
+        return _integer_words(token.replace('.', '').replace(',', ''))
+    # A single separator is decimal unless it is a conventional triplet
+    # grouping above. Mixed separators use the final one as the decimal mark;
+    # the integer part must itself be a valid grouped integer.
+    separator = max(token.rfind('.'), token.rfind(','))
+    whole, fraction = token[:separator], token[separator + 1:]
+    if whole.isdigit():
+        integer = whole
+    elif ('.' in token and ',' in token and _GROUPED_INTEGER.fullmatch(whole)
+          and token[separator] not in whole):
+        integer = whole.replace('.', '').replace(',', '')
+    else:
+        # Do not turn malformed numbers or IPv4 addresses into invented words.
+        # The engine's normal vocabulary validation will report remaining digits.
+        return token
+    return _integer_words(integer) + token[separator] + ' ' + ' '.join(_DIGITS[int(digit)] for digit in fraction)
+
+
+def normalize_speech_text(text: str) -> str:
+    """Format Hmong target speech and verbalize standalone Arabic numerals.
+
+    Source/reference normalization stays in ``normalize_text``. Whole counts
+    up to nine digits use Hmong cardinal words; leading-zero identifiers and
+    longer digit strings are read one digit at a time. A dot or comma between
+    groups of exactly three digits denotes thousands. Otherwise a decimal
+    separator remains punctuation and fractional digits are read individually.
+    Existing RPA letters/case and unsupported alphanumeric tokens stay intact.
+    Remove subtitle metadata before calling this target-speech formatter.
+    """
+    normalized = normalize_text(text)
+
+    def replace(match):
+        before = normalized[match.start() - 1] if match.start() else ''
+        after = normalized[match.end()] if match.end() < len(normalized) else ''
+        if before in {'+', '-'}:
+            preceding = normalized[match.start() - 2] if match.start() > 1 else ''
+            if not preceding or preceding.isspace() or preceding in '([,:;=':
+                raise HmongTextError('Viết số có dấu + hoặc - bằng lời Hmong muốn đọc; '
+                                     'tool chưa tự suy đoán cách đọc số âm.')
+            if not preceding.isdigit():
+                return match.group()
+        if any(character and (character.isalnum() or character in '_/@') for character in (before, after)):
+            return match.group()
+        return _numeral_words(match.group())
+
+    return _NUMERAL.sub(replace, normalized)
 
 
 def syllable_count(text: str) -> int:

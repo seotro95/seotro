@@ -99,7 +99,7 @@ def run_first_start(root, reports):
         return completed
 
     reports.mkdir(parents=True, exist_ok=True)
-    report = {'schema_version': 1, 'version': '1.6.2', 'success': False, 'platform': sys.platform,
+    report = {'schema_version': 1, 'version': '1.6.3', 'success': False, 'platform': sys.platform,
               'native_windows_validation': True, 'actual_cmd_batch': True,
               'script_sha256': hashlib.sha256(Path(__file__).read_bytes().replace(b'\r\n', b'\n')).hexdigest(),
               'initial_data_absent': True,

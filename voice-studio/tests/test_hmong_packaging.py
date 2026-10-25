@@ -22,7 +22,7 @@ spec.loader.exec_module(packaging)
 
 def source_fixture(root):
     root.mkdir()
-    for name in ('app.py', 'worker.py', 'bundle_check.py', 'runtime_instance.py',
+    for name in ('app.py', 'worker.py', 'bundle_check.py', 'caption_markers.py', 'runtime_instance.py',
                  'character_cast.py', 'longform.py', 'reference_quality.py', 'hmong_acceleration.py',
                  'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py', 'hmong_health.py', 'voice_errors.py',
                  'hmong_native.py', 'hmong_native_models.py', 'prepare_hmong_native.py',
@@ -93,7 +93,7 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
 
 
 def test_archive_has_valid_crc_and_matching_sha256(tmp_path):
-    root = tmp_path / 'Voice-Studio-Hmong-1.6.2'
+    root = tmp_path / 'Voice-Studio-Hmong-1.6.3'
     root.mkdir()
     (root / 'hello.txt').write_bytes(b'relocatable')
     archive = tmp_path / 'bundle.zip'
@@ -146,6 +146,7 @@ def test_single_download_bundles_only_approved_reports_and_generated_auditions(t
     source.mkdir()
     names = ('fresh-start.json', 'native-smoke.json', 'f5-smoke.json', 'browser-smoke.json', 'model-sources.json',
              'first-run-male.wav', 'first-run-female.wav',
+             'external-english-reference.wav', 'external-clone-reference.wav',
              'Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3')
     for name in (*names, 'private.wav', 'model.pth', 'credentials.json'):
         (source / name).write_bytes(b'fixture: ' + name.encode())
@@ -178,13 +179,35 @@ def browser_report_fixture():
                       'playback': {'ready_state': 4, 'media_error': None, 'current_time': .1, 'duration': 1},
                       'audio_playback_checked': True, 'download_verified': True,
                       'original_text_preserved': True, 'text': 'Nyob-zoo, kuv yog ib tug Hmoob.'})
+    caption = {**copy.deepcopy(cases[0]), 'case': 'caption_metadata_as_txt',
+               'job_id': 'caption-qa', 'success': True, 'input_format': 'txt',
+               'text': ('\ufeff1\n"00:04:28,533 --> 00:04:29,333"\nNyob zoo.\n'
+                        '2\n99:59.500 --> 100:00.300\nKuv muaj 2 tug me nyuam.\n'),
+               'exported_spoken_text': 'Nyob zoo. Kuv muaj ob tug me nyuam.',
+               'timestamps_not_spoken': True, 'cue_indices_not_spoken': True,
+               'continuous_txt_duration': True}
+    clone_identity = hashlib.sha256(json.dumps({'version': 1, 'audio_sha256': 'f' * 64,
+        'transcript': ''}, ensure_ascii=False, sort_keys=True,
+        separators=(',', ':')).encode('utf-8')).hexdigest()
+    clone = {**copy.deepcopy(cases[0]), 'case': 'external_english_reference_to_hmong',
+             'job_id': 'clone-qa', 'voice_id': 'a' * 32, 'post_voice_id': 'a' * 32,
+             'speaker': None, 'success': True, 'source_language': 'en', 'output_language': 'mww',
+             'reference_conditioning': 'audio', 'no_transcript': True,
+             'cross_language_reference': True, 'auto_selected': True,
+             'source_sha256': 'e' * 64, 'reference_audio_sha256': 'f' * 64,
+             'reference_seconds': 5, 'independent_reference_fingerprint': clone_identity,
+             'hmong_reference_fingerprint': clone_identity, 'default_fallback': False,
+             'text': 'Nyob zoo. Ua tsaug rau koj mloog.',
+             'perceptual_similarity_evaluated': False}
     return {'success': True, 'platform': 'win32', 'native_windows_validation': True,
             'real_ui_synthesis': True, 'engine': 'hmong_native',
             'cloned_filter_library_selection': True, 'cross_panel_selection': True,
             'hyphenated_text_preserved': True,
+            'caption_metadata': caption,
+            'external_clone': clone,
             'click_recovery': {'success': True, 'real_ui_post': True, 'responses_mocked': False,
-                'ui_entrypoint': '#generate', 'invalid_text': 'Kuv muaj 2 tug me nyuam.',
-                'request_text': 'Kuv muaj 2 tug me nyuam.', 'request_voice_id': 'hmong-male',
+                'ui_entrypoint': '#generate', 'invalid_text': 'Nyob zoo https://example.com.',
+                'request_text': 'Nyob zoo https://example.com.', 'request_voice_id': 'hmong-male',
                 'request_language': 'mww', 'http_status': 422, 'request_count': 1,
                 'error_detail': 'Write numbers as Hmong words.',
                 'inline_error': 'Write numbers as Hmong words.',
@@ -343,6 +366,78 @@ def test_windows_browser_gate_accepts_all_actual_ui_synthesis_cases():
     assert packaging.validate_browser_report(report) is report
 
 
+@pytest.mark.parametrize('failure', ['missing', 'clock_leaked', 'index_leaked', 'source_lost',
+        'clock_silence', 'wrong_reference', 'wrong_voice', 'unrelated_source',
+        'reused_job', 'no_post', 'no_download', 'silent', 'no_playback'])
+def test_windows_browser_gate_requires_real_timestamp_cleaned_txt(failure):
+    report = copy.deepcopy(browser_report_fixture())
+    caption = report['caption_metadata']
+    if failure == 'missing':
+        del report['caption_metadata']
+    elif failure == 'clock_leaked':
+        caption['exported_spoken_text'] = '00:04:28,533 Nyob zoo. Ua tsaug.'
+    elif failure == 'index_leaked':
+        caption['exported_spoken_text'] = '1 Nyob zoo. 2 Ua tsaug.'
+    elif failure == 'source_lost':
+        caption['original_text_preserved'] = False
+    elif failure == 'clock_silence':
+        caption['audio_seconds'] = 269.333
+    elif failure == 'wrong_reference':
+        caption['hmong_reference_fingerprint'] = 'b' * 64
+    elif failure == 'wrong_voice':
+        caption['speaker'] = 'hmong-female'
+    elif failure == 'unrelated_source':
+        caption['text'] = 'Nyob zoo.'
+    elif failure == 'reused_job':
+        caption['job_id'] = report['cases'][0]['job_id']
+    elif failure == 'no_post':
+        caption['real_ui_post'] = False
+    elif failure == 'no_download':
+        caption['download_verified'] = False
+    elif failure == 'silent':
+        caption['peak_amplitude'] = 0
+    else:
+        caption['playback']['current_time'] = 0
+    with pytest.raises(ValueError):
+        packaging.validate_browser_report(report)
+
+
+@pytest.mark.parametrize('failure', ['missing', 'default', 'wrong_audio', 'wrong_identity',
+        'no_cross_language', 'transcript_required', 'not_selected', 'wrong_language',
+        'no_post', 'no_playback', 'no_download', 'silent', 'claimed_similarity'])
+def test_windows_browser_gate_requires_external_audio_conditioned_clone(failure):
+    report = copy.deepcopy(browser_report_fixture())
+    clone = report['external_clone']
+    if failure == 'missing':
+        del report['external_clone']
+    elif failure == 'default':
+        clone['voice_id'] = clone['post_voice_id'] = clone['speaker'] = 'hmong-male'
+    elif failure == 'wrong_audio':
+        clone['reference_audio_sha256'] = 'b' * 64
+    elif failure == 'wrong_identity':
+        clone['hmong_reference_fingerprint'] = report['expected_reference_fingerprints']['hmong-male']
+    elif failure == 'no_cross_language':
+        clone['cross_language_reference'] = False
+    elif failure == 'transcript_required':
+        clone['no_transcript'] = False
+    elif failure == 'not_selected':
+        clone['auto_selected'] = False
+    elif failure == 'wrong_language':
+        clone['output_language'] = 'en'
+    elif failure == 'no_post':
+        clone['real_ui_post'] = False
+    elif failure == 'no_playback':
+        clone['playback']['ready_state'] = 0
+    elif failure == 'no_download':
+        clone['download_verified'] = False
+    elif failure == 'silent':
+        clone['peak_amplitude'] = 0
+    else:
+        clone['perceptual_similarity_evaluated'] = True
+    with pytest.raises(ValueError):
+        packaging.validate_browser_report(report)
+
+
 @pytest.mark.parametrize('failure', ['missing', 'mocked', 'not_rejected', 'duplicate_post',
         'inline_offscreen', 'output_offscreen', 'locked', 'draft_lost', 'empty_error',
         'wrong_inline', 'wrong_output', 'idle_output', 'wrong_text', 'wrong_request',
@@ -458,7 +553,18 @@ def test_publication_gate_reads_mandatory_browser_evidence_from_the_zip(tmp_path
                                   reference_fingerprint=packaging.expected_reference_fingerprints()[ident]))
     fresh['speech_check']['voices'] = actual_voices
     fresh['independently_verified_voices'] = copy.deepcopy(actual_voices)
-    source_files = ('character_cast.py', 'longform.py', 'reference_quality.py', 'hmong_health.py', 'voice_errors.py',
+    for name, field in (('external-english-reference.wav', 'source_sha256'),
+                        ('external-clone-reference.wav', 'reference_audio_sha256')):
+        with wave.open(str(reports / name), 'wb') as audio:
+            audio.setparams((1, 2, 24000, 120000, 'NONE', 'not compressed'))
+            audio.writeframes((reports / 'first-run-male.wav').read_bytes()[44:] * 5)
+        report['external_clone'][field] = hashlib.sha256((reports / name).read_bytes()).hexdigest()
+    clone_identity = hashlib.sha256(json.dumps({'version': 1,
+        'audio_sha256': report['external_clone']['reference_audio_sha256'], 'transcript': ''},
+        ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()
+    report['external_clone']['independent_reference_fingerprint'] = clone_identity
+    report['external_clone']['hmong_reference_fingerprint'] = clone_identity
+    source_files = ('caption_markers.py', 'character_cast.py', 'longform.py', 'reference_quality.py', 'hmong_health.py', 'voice_errors.py',
                     'hmong_launcher.py', 'prepare_hmong.py', 'hmong_native.py',
                     'docs/HUONG-DAN-HMONG.md', 'docs/HUONG-DAN-HMONG.html')
     for module in source_files:
@@ -495,6 +601,13 @@ def test_publication_gate_reads_mandatory_browser_evidence_from_the_zip(tmp_path
     with pytest.raises(ValueError, match='application checksum mismatch'):
         packaging.validate_release_archive(archive)
     health.write_bytes(original)
+    reference_path = reports / 'external-clone-reference.wav'
+    reference_original = reference_path.read_bytes()
+    reference_path.write_bytes(reference_original[:-2] + b'\x00\x00')
+    packaging.archive_package(root, archive)
+    with pytest.raises(ValueError, match='external reference differs'):
+        packaging.validate_release_archive(archive)
+    reference_path.write_bytes(reference_original)
     (root / 'runtime/python.exe').write_bytes(b'another-python')
     packaging.archive_package(root, archive)
     with pytest.raises(ValueError, match='exact runtime'):
@@ -556,13 +669,21 @@ def test_browser_smoke_passes_verified_references_to_external_browser_without_de
     reports = tmp_path / 'reports'
     reports.mkdir()
     def run(command, **kwargs):
+        if command[0] == 'ffmpeg':
+            assert command[1:5] == ['-nostdin', '-v', 'error', '-i']
+            assert command[5].endswith('/runtime/Lib/site-packages/f5_tts/infer/examples/basic/basic_ref_en.wav')
+            assert command[6:] == ['-t', '5', '-ac', '1', '-ar', '24000', '-c:a', 'pcm_s16le',
+                                   '-y', str(reports / 'external-english-reference.wav')]
+            assert kwargs == {'check': True, 'capture_output': True, 'timeout': 30}
+            return
         assert Path(command[0]) == interpreter
         assert Path(command[1]).name == 'browser_hmong_portable.py'
         assert command[2:4] == ['--url', report['runtime']['url']]
         assert command[4:6] == ['--reports', str(reports)]
         assert command[6] == '--expected-references'
         assert json.loads(command[7]) == expected
-        assert len(command) == 8, 'Production QA must never pass --allow-non-windows'
+        assert command[8:] == ['--external-reference', str(reports / 'external-english-reference.wav')]
+        assert len(command) == 10 and '--allow-non-windows' not in command
         assert kwargs == {'check': True, 'timeout': 1800}
         (reports / 'browser-smoke.json').write_text(json.dumps(report), encoding='utf-8')
     monkeypatch.setattr(smoke.subprocess, 'run', run)
@@ -620,7 +741,7 @@ def test_native_smoke_probes_primary_and_every_advanced_batch(tmp_path, monkeypa
     spec = importlib.util.spec_from_file_location('smoke_hmong', PACKAGING / 'smoke_hmong_portable.py')
     smoke = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(smoke)
-    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.6.2'
+    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.6.3'
     root.mkdir(parents=True)
     packaging.write_launcher(root)
     calls = []
@@ -666,7 +787,7 @@ def test_windows_launcher_smoke_checks_reuse_and_only_cleans_up_its_first_proces
     url = 'http://127.0.0.1:8770'
     engine = 'hmong_native' if backend == 'native' else 'f5_hmong'
     instance = {'instance_id': 'qa-server', 'pid': 102, 'url': url, 'data_id': 'qa-data',
-                'root_id': 'qa-root', 'backend': engine, 'version': '1.6.2-hmong'}
+                'root_id': 'qa-root', 'backend': engine, 'version': '1.6.3-hmong'}
     process = SimpleNamespace(pid=101, stdout=io.StringIO('Studio: ' + url + '\n'),
                               poll=lambda: None, wait=lambda **kwargs: 0)
     server = SimpleNamespace(is_running=lambda: True, parents=lambda: [SimpleNamespace(pid=101)])
