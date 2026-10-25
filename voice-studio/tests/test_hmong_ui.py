@@ -1,9 +1,11 @@
 """Browser contracts for the Hmong variant; mocked API, no inference claims."""
 import contextlib
 import json
+import os
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import shutil
+import sys
 import threading
 from urllib.parse import urlparse
 
@@ -11,7 +13,8 @@ import pytest
 
 playwright = pytest.importorskip('playwright.sync_api', reason='Optional Chromium UI checks need Playwright')
 CHROMIUM = shutil.which('chromium') or shutil.which('chromium-browser')
-pytestmark = pytest.mark.skipif(not CHROMIUM, reason='Optional UI checks need system Chromium')
+CHANNEL = os.environ.get('HMOOB_BROWSER_CHANNEL') or ('msedge' if sys.platform == 'win32' else None)
+pytestmark = pytest.mark.skipif(not CHANNEL and not CHROMIUM, reason='Optional UI checks need Chromium or HMOOB_BROWSER_CHANNEL')
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT_REFERENCES = json.loads((ROOT / 'assets/hmong/voices.json').read_text(encoding='utf-8'))
 
@@ -121,7 +124,12 @@ def studio_page(site, *, hmong=True, ready=True, missing_reference_first=False, 
             return
         route.fulfill(status=200, content_type='application/json', body=json.dumps(response))
     with playwright.sync_playwright() as driver:
-        browser = driver.chromium.launch(executable_path=CHROMIUM, headless=True, args=['--no-sandbox'])
+        launch = {'headless': True}
+        if CHANNEL:
+            launch['channel'] = CHANNEL
+        else:
+            launch.update(executable_path=CHROMIUM, args=['--no-sandbox'])
+        browser = driver.chromium.launch(**launch)
         page = browser.new_page()
         page.on('pageerror', lambda error: state['errors'].append(str(error)))
         page.route('**/api/**', handle)

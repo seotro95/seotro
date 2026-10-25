@@ -1,5 +1,5 @@
 """The native clone form accepts external audio without a Hmong transcript."""
-from test_hmong_ui import PROJECT_REFERENCES, ROOT, playwright, static_site, studio_page  # noqa: F401
+from test_hmong_ui import PROJECT_REFERENCES, ROOT, playwright, pytestmark, static_site, studio_page  # noqa: F401
 
 
 def test_native_external_voice_without_transcript_is_selected_and_used_after_refresh(static_site):
