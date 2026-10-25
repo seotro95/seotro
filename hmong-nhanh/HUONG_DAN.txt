@@ -1,49 +1,56 @@
-HMONG NHANH — BẢN GỌN 0.5.0
+HMONG NHANH — BẢN GỌN 0.6.0
 
-CÁCH MỞ VÀ TẠO GIỌNG
+MỞ CÔNG CỤ
 
-1. Giải nén toàn bộ ZIP vào một thư mục mới. Cài Python 3.12 64-bit nếu máy chưa có; bật Python Launcher khi cài. Chỉ mở MO_HMONG_NHANH.bat để sử dụng.
-2. Lần đầu công cụ tự cài thư viện và tải mô hình F5-Hmong/Vocos, khoảng 1,4 GB mô hình chưa tính thư viện. Cần Internet và nhiều GB đĩa trống; bộ CUDA cần thêm vài GB. Giữ cửa sổ lệnh mở. Các lần sau dùng lại dữ liệu đã tải. Không cần cài FFmpeg riêng.
-3. Chọn Nữ hoặc Nam. Mở “Chuẩn bị mẫu”, chọn một đoạn rõ lời 3–8 giây, nghe đoạn đó và chép chính xác lời Hmong vào ô lời mẫu rồi bấm Lưu. Làm một lần cho mỗi giọng. Hai MP3 gốc được giữ riêng; bản này chưa có lời tham chiếu đã được xác nhận nên không tự điền hoặc đoán nội dung mẫu.
-4. Nhập văn bản hoặc mở TXT UTF-8, tối đa 1.000.000 ký tự Unicode mỗi bản đọc. Tệp TXT tối đa 8 MB. Nội dung vượt giới hạn được báo lỗi, không tự cắt bỏ.
-5. Chọn cách kể, chế độ tạo giọng và nhịp đọc. Nên bấm “Đo tốc độ máy” và nghe một đoạn ngắn trước khi tạo bản dài. Bấm “Tạo giọng nói” để bắt đầu.
-6. Theo dõi tiến độ; nghe hoặc tải từng phần WAV khi phần đó hoàn tất. Mỗi phần dài tối đa khoảng 30 phút, nên bản dài có nhiều tệp. Giao diện phát trực tiếp từng phần, không nạp toàn bộ bản đọc vào bộ nhớ trình duyệt.
-7. Bấm “Dừng” khi cần. Những đoạn hoàn tất được lưu trên đĩa. Chọn bản đọc rồi bấm “Tiếp tục từ đoạn đã lưu”; sau khi đóng và mở lại tool cũng có thể tiếp tục. Đoạn đang tạo dở sẽ được làm lại. Chỉ một bản đọc được xử lý tại một thời điểm.
+Giải nén toàn bộ ZIP, rồi mở MO_HMONG_NHANH.bat. Cần Python 3.12 64-bit kèm Python Launcher. Lần đầu cần Internet để tải thư viện và mô hình F5-Hmong/Vocos (khoảng 1,4 GB trọng số, chưa tính thư viện). Giữ cửa sổ lệnh mở; các lần sau dùng lại dữ liệu đã tải. Không cần cài FFmpeg riêng.
 
-CÁCH KỂ VÀ TỐC ĐỘ
+ĐỌC TXT, SRT VÀ VTT
 
-- Sáu lựa chọn: Tự nhiên, Kể chuyện, Review phim, Tin tức, Quảng cáo, Thư giãn. Các lựa chọn điều chỉnh nhịp đọc và khoảng nghỉ giữa các đoạn xử lý. Đây không phải mô hình điều khiển cảm xúc hay chức năng tự viết kịch bản/review; bạn nhập nội dung cần đọc.
-- Bản nháp: 4 bước; Nhanh: 8 bước (mặc định); Cân bằng: 16 bước; Chất lượng: 32 bước. Ít bước giảm thời gian tính nhưng có thể giảm độ rõ hoặc độ giống giọng. Nghe thử để chọn mức phù hợp.
-- “Nhịp đọc” điều chỉnh nhanh/chậm của lời nói. “Chế độ tạo giọng” điều chỉnh số bước tính toán; hai lựa chọn có tác dụng khác nhau.
-- Công cụ giữ mô hình và mẫu đã xử lý trong bộ nhớ giữa các lượt để giảm thời gian nạp lại. Khi dừng tác vụ hoặc tắt tool, lần tạo sau cần nạp lại mô hình.
-- Mặc định tự chọn thiết bị khả dụng. Với GPU NVIDIA và driver tương thích, bộ cài chọn hoặc nâng từ bộ CPU sang CUDA. Không có GPU tương thích thì dùng CPU. Giao diện hiển thị thiết bị và kết quả đo; phát hiện có card NVIDIA chưa đồng nghĩa đã chạy được CUDA.
-- Nếu muốn dùng CPU và tránh tự nâng bộ CUDA, mở CMD tại thư mục công cụ rồi chạy: MO_HMONG_NHANH.bat --cpu
-- Có thể yêu cầu kiểm tra GPU bằng: MO_HMONG_NHANH.bat --gpu
+1. Nhập nội dung hoặc chọn tệp TXT/SRT/VTT UTF-8, tối đa 8 MB và 1.000.000 ký tự Unicode. Nội dung vượt giới hạn được báo lỗi, không tự cắt bỏ.
+2. Bấm “Kiểm tra lời sẽ đọc” để xem văn bản sau khi bỏ mốc thời gian, số thứ tự phụ đề và các thẻ định dạng phụ đề thông dụng. Số nằm trong lời nói vẫn được giữ, ví dụ “Kuv muaj 25 xyoo.” vẫn có số 25. Phần xem trước có thể chỉ hiển thị một phần; toàn bộ nội dung gốc vẫn được xử lý khi tạo giọng.
+3. Chọn “Khớp mốc phụ đề nếu có” để căn âm thanh theo từng cặp mốc bắt đầu/kết thúc. Hỗ trợ dấu phẩy hoặc dấu chấm ở phần mili giây, dạng giờ:phút:giây hoặc phút:giây, phụ đề nhiều dòng và các mốc được chép vào TXT.
+4. Chọn “Đọc liền theo nhịp tự nhiên” nếu chỉ muốn đọc lời mà không giữ thời gian. Mốc thời gian và số thứ tự phụ đề vẫn được loại bỏ.
 
-MỤC TIÊU 1 GIỜ VOICE TRONG 2 PHÚT
+Ví dụ:
+27
+00:04:28,533 --> 00:04:29,333
+Kuv muaj 25 xyoo.
 
-Mục tiêu này tương đương tốc độ 30 lần thời gian thực. Bản 0.5 chưa được xác nhận đạt mục tiêu đó.
+Công cụ chỉ đưa “Kuv muaj 25 xyoo.” vào bộ đọc. 27 là số thứ tự phụ đề nên được bỏ; số 25 trong câu vẫn được đọc. Ở chế độ khớp mốc, lời bắt đầu tại 4 phút 28,533 giây và kết thúc tại 4 phút 29,333 giây. Khoảng trống đầu và giữa các câu được giữ, vì vậy nếu đây là đoạn duy nhất thì WAV dài tổng cộng 4 phút 29,333 giây, gồm khoảng lặng đầu.
 
-Mẫu thử thật trên CPU, cùng một câu ngắn với mẫu tham chiếu công khai có lời chép đi kèm:
-- Bản trước, 32 bước: 162,590 giây xử lý cho 3,232 giây âm thanh.
-- Bản 0.5, 8 bước, lượt đầu: 59,528 giây xử lý cho 3,467 giây âm thanh.
-- Bản 0.5, 8 bước, mô hình đã nạp: 55,949 giây xử lý cho 3,467 giây âm thanh.
+Căn thời gian thay đổi độ dài lời đọc bằng xử lý giữ cao độ. Chỉ cho phép căn từ 0,5 đến 2 lần so với âm thanh vừa tạo. Nếu câu quá dài hoặc quá ngắn so với ô thời gian, tool báo rõ đoạn cần sửa; không tự cắt mất từ. Hãy điều chỉnh mốc hoặc chọn đọc tự nhiên. Khi giữ mốc, các khoảng nghỉ của kiểu kể không được thêm ngoài khung phụ đề.
 
-Thời gian lượt đầu giảm khoảng 2,7 lần trong các mẫu này. Tốc độ lượt đã nạp mô hình khoảng 0,062 lần thời gian thực, còn rất xa 30 lần. Đây là các lần sinh ngẫu nhiên độc lập; không phải phép so sánh chất lượng có kiểm soát. Chưa đo tạo đủ một giờ voice, chưa tạo âm thanh thật cho toàn bộ 1.000.000 ký tự và chưa đo GPU. Ước tính thời gian một giờ trong giao diện chỉ là phép ngoại suy từ phần đã xử lý; phần khoảng lặng được thêm vào không được tính là tăng tốc tạo lời nói.
+Mốc lỗi, đảo thứ tự hoặc chồng lấn được báo để sửa trước khi căn thời gian. Chế độ đọc tự nhiên có thể đọc các mốc hợp lệ nhưng chồng lấn theo thứ tự trong tệp. Giới hạn tổng thời gian phụ đề là 168 giờ. TXT không có mốc, hoặc chỉ có mốc bắt đầu như [00:12.50], được đọc tự nhiên: không có đủ dữ liệu để suy ra chính xác thời lượng mong muốn.
 
-GIỮ DỮ LIỆU KHI CẬP NHẬT
+CHỌN NAM/NỮ HOẶC NHÂN BẢN GIỌNG BÊN NGOÀI
 
-- Khi mở bằng MO_HMONG_NHANH.bat, dữ liệu nằm trong thư mục .data cạnh tệp BAT: mô hình, mẫu đã lưu, văn bản, tiến độ và âm thanh. Thư mục app chứa mã và thư viện cần cho công cụ; không xóa.
-- Khi cập nhật từ bản gọn cũ, tắt tool rồi chép thư mục .data sang cạnh tệp BAT của bản mới. Giữ bản sao cũ đến khi kiểm tra xong. Nếu trước đây bạn đã đặt HMONG_STUDIO_DATA_DIR, tiếp tục dùng đường dẫn đó.
-- WAV mono 24 kHz, 16-bit chiếm khoảng 173 MB mỗi giờ. Vì công cụ giữ cả các đoạn nhỏ để tiếp tục và các phần WAV đã ghép, cần khoảng 346 MB cho mỗi giờ thành phẩm, chưa tính tệp tạm, mô hình, thư viện và bộ nhớ đệm. Dành thêm dung lượng khi xử lý văn bản dài.
-- Gói mới chỉ có một lối mở chính và các tệp cần thiết cho đọc giọng. Các tính năng video, nhận dạng, thu âm, biên tập và dịch vụ từ xa của các bản khác không nằm trong gói này. Giải nén gói mới không tự xóa các thư mục công cụ cũ trên máy.
+- Nam và Nữ có mẫu, đoạn đã chọn và lời chép riêng như trước.
+- Để thêm giọng, mở “Nhân bản giọng từ tệp âm thanh”, đặt tên và chọn WAV, MP3, FLAC hoặc OGG. Tệp tối đa 50 MB, dài từ 3 giây đến 10 phút, mono hoặc stereo. Bấm “Tải mẫu giọng lên tool”.
+- Chọn đoạn rõ lời dài 3–8 giây, nghe lại và chép chính xác lời của đoạn đó. Giữ NGUYÊN NGÔN NGỮ CỦA MẪU, không dịch sang Hmong. Ví dụ mẫu nói tiếng Anh thì lời tham chiếu phải là đúng câu tiếng Anh đã nghe. Bấm lưu một lần cho mỗi giọng.
+- Nhập lời cần tạo bằng tiếng Hmong và chọn giọng vừa tải. Giọng ngoài được lưu trong thư viện và dùng đúng mẫu của nó; thiếu mẫu sẽ báo lỗi, không tự thay bằng Nam/Nữ mặc định.
+- Mỗi bản đọc giữ một bản sao của đoạn mẫu và lời chép lúc bắt đầu. Sửa thư viện sau đó không làm đổi giọng của bản đang chạy hoặc đang dừng.
+- Nên chọn Cân bằng (16 bước) hoặc Chất lượng (32 bước), dùng mẫu sạch, một người nói, ít nhạc/nhiễu và nghe thử trước khi tạo dài. Chế độ Nhanh vẫn giữ mặc định 8 bước.
 
-PHẠM VI ĐÃ KIỂM CHỨNG
+Mẫu có thể nói ngôn ngữ khác tiếng Hmong. Tuy nhiên, F5-Hmong hiện tại có giới hạn về ngôn ngữ và từ vựng của lời tham chiếu; dùng đúng mẫu không đồng nghĩa nhân bản chính xác mọi giọng. Bản này chưa bảo đảm độ giống cho bất kỳ người nói/ngôn ngữ nào, và không tự dịch văn bản đầu vào. Chưa có phép đánh giá bằng tai xác nhận độ giống mọi mẫu ngoài.
 
-94 kiểm thử tự động đã đạt. Một lượt kiểm tra tích hợp thật đi qua API, tác vụ lưu trên đĩa, xử lý văn bản dài, mô hình F5-Hmong và tải phần WAV đã hoàn tất: chế độ Kể chuyện, Nhanh 8 bước, CPU; 83,147 giây xử lý cho 3,691 giây âm thanh. Lượt này dùng mẫu công khai, có các công việc khác chạy cùng máy, nên không dùng để so sánh tốc độ có kiểm soát.
+CÁC CHỨC NĂNG GIỮ LẠI
 
-Mô hình F5-Hmong thật đã xuất được WAV 24 kHz có âm thanh trong thử nghiệm offline. Chưa kiểm chứng phát âm Hmong Trắng hoặc độ giống hai giọng người dùng vì chưa có lời chép chính xác của hai đoạn tham chiếu. Chưa chạy tệp BAT trên Windows thật. Kiểm tra bằng tai trước khi sử dụng bản đọc dài.
+- Tối đa 1.000.000 ký tự; sáu kiểu nhịp đọc: Tự nhiên, Kể chuyện, Review phim, Tin tức, Quảng cáo, Thư giãn. Đây là thay đổi nhịp/khoảng nghỉ, không tự viết kịch bản hoặc tạo mô hình cảm xúc mới.
+- Bản nháp / Nhanh / Cân bằng / Chất lượng: 4 / 8 / 16 / 32 bước. Ít bước có thể giảm độ rõ hoặc độ giống giọng.
+- Tiến độ, Dừng, Tiếp tục sau khi mở lại, nghe/tải từng phần WAV khoảng 30 phút. Một bản đọc được xử lý tại một thời điểm; đoạn đang tạo dở có thể phải làm lại.
+- Bộ máy giữ mô hình giữa các lượt. Tự dùng NVIDIA CUDA khi phần cứng/driver tương thích, nếu không thì dùng CPU. Có thể chạy MO_HMONG_NHANH.bat --cpu hoặc MO_HMONG_NHANH.bat --gpu từ CMD.
+- “Đo tốc độ máy” hiển thị tốc độ thực và ước tính. Chưa đạt/xác nhận mục tiêu 1 giờ voice trong 2 phút (30 lần thời gian thực). Mẫu ngắn CPU của bản 0.5 mất 59,528 giây ở lượt đầu, 55,949 giây khi mô hình đã nạp để tạo 3,467 giây âm thanh; đây không phải đo một giờ hoặc đo GPU. Khoảng lặng được thêm không được tính là tăng tốc tạo lời nói.
+
+DỮ LIỆU VÀ CẬP NHẬT
+
+Dữ liệu nằm trong .data cạnh MO_HMONG_NHANH.bat, gồm mô hình, giọng ngoài, lời tham chiếu, văn bản, tiến độ và âm thanh. Tắt tool trước khi chép .data từ bản cũ sang cạnh BAT của bản mới; giữ bản sao cũ đến khi kiểm tra xong. Nếu đã dùng HMONG_STUDIO_DATA_DIR, tiếp tục dùng đường dẫn đó. Không xóa thư mục app vì đây là mã và thư viện cần chạy.
+
+Một giờ WAV mono 24 kHz, 16-bit chiếm khoảng 173 MB. Các đoạn để tiếp tục và phần đã ghép có thể cần khoảng 346 MB mỗi giờ lời đọc, chưa tính tệp tạm, khoảng lặng dài, mô hình và thư viện. Phụ đề bắt đầu muộn tạo khoảng lặng thật trong WAV nên vẫn tốn đĩa. Dành thêm dung lượng cho bản dài.
+
+173 kiểm thử tự động đã đạt, gồm xử lý mốc phụ đề, giữ số trong lời, căn thời lượng/cao độ, lưu/tiếp tục và dùng độc lập mẫu giọng ngoài. Chưa thử tạo toàn bộ 1.000.000 ký tự thành âm thanh thật; chưa chạy BAT trên Windows thật hoặc đo GPU. Kiểm thử dùng đúng mẫu không phải chứng nhận độ giống giọng hay phát âm Hmong Trắng.
 
 Nguồn mô hình: https://huggingface.co/Pakorn2112/F5TTS-Hmong
 Vocos: https://huggingface.co/charactr/vocos-mel-24khz
-Mô hình được tải từ HTTPS và đối chiếu checksum; trọng số không nằm trong ZIP nhỏ này.
+Trọng số được tải qua HTTPS, đối chiếu checksum và không nằm trong ZIP nhỏ này.
+
+Thử tích hợp thật 0.6: tải mẫu tiếng Anh công khai, lưu lời chép gốc, tạo câu Hmong ở chế độ Cân bằng 16 bước, căn SRT từ 00:00:01,000 đến 00:00:06,000. WAV 24 kHz có đúng 144.000 mẫu (6 giây), 1 giây đầu im lặng và 5 giây trong khung lời; CPU xử lý khoảng 130,4 giây. Đây là bằng chứng dùng mẫu ngoài và khớp thời lượng, chưa đánh giá độ giống giọng bằng tai. Chromium cũng đã kiểm tra luồng giao diện với API mô phỏng, gồm tải mẫu ngoài, SRT/VTT/TXT, 1 triệu ký tự và dừng/tiếp tục.

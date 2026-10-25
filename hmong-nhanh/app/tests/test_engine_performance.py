@@ -120,7 +120,7 @@ def test_direct_inference_submits_one_batch_and_preserves_parameters(monkeypatch
     torch=SimpleNamespace(inference_mode=lambda:__import__('contextlib').nullcontext())
     monkeypatch.setitem(sys.modules,'torch',torch)
     monkeypatch.setitem(sys.modules,'f5_tts.infer.utils_infer',SimpleNamespace(infer_batch_process=upstream))
-    prepared={'audio':('exact cached waveform',24000),'text':'exact transcript. ','conditioned_model':object()}
+    prepared={'audio':('exact cached waveform',24000),'text':'exact transcript. ','conditioned_model':object(),'seconds':4}
     model=SimpleNamespace(vocoder=object(),device='cuda',mel_spec_type='vocos')
     data=engine._infer_one(model,prepared,'Nyob zoo.',.8,4)
     call=upstream.call_args

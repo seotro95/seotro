@@ -7,14 +7,18 @@
 </head>
 <body>
 <main>
-  <header><div><p class="eyebrow">ĐỌC VĂN BẢN TRÊN MÁY · 0.5</p><h1>Hmong Nhanh</h1><p>Chọn giọng, nhập lời và tạo bản đọc.</p></div><span class="pill">Hmong Trắng</span></header>
+  <header><div><p class="eyebrow">ĐỌC VĂN BẢN TRÊN MÁY · 0.6</p><h1>Hmong Nhanh</h1><p>Chọn giọng, nhập lời hoặc phụ đề và tạo bản đọc.</p></div><span class="pill">Đọc tiếng Hmong</span></header>
   <div id="engine-state" class="status" role="status">Đang kiểm tra bộ tạo giọng…</div>
   <div class="layout">
     <section class="card editor" aria-label="Văn bản cần đọc">
-      <div class="row"><label for="text">Văn bản cần đọc</label><label class="file-button">Nhập TXT<input id="text-file" type="file" accept=".txt,text/plain" hidden></label></div>
+      <div class="row"><label for="text">Văn bản hoặc phụ đề</label><label class="file-button">Nhập TXT / SRT / VTT<input id="text-file" type="file" accept=".txt,.srt,.vtt,text/plain,text/vtt,application/x-subrip" hidden></label></div>
       <textarea id="text" rows="13" placeholder="Nhập lời Hmong muốn đọc…" spellcheck="false" aria-describedby="count-line"></textarea>
-      <p class="hint count" id="count-line"><span id="count">0</span> / 1.000.000 ký tự Unicode · TXT tối đa 8 MB</p>
+      <p class="hint count" id="count-line"><span id="count">0</span> / 1.000.000 ký tự Unicode · Tệp tối đa 8 MB</p>
       <p class="hint" id="long-text-note" hidden>Văn bản dài được giữ nguyên dòng để thao tác nhanh hơn. Cuộn ngang để xem hết dòng.</p>
+      <label for="timing">Thời gian bản đọc</label><select id="timing"><option value="auto">Khớp mốc phụ đề nếu có</option><option value="natural">Đọc liền theo nhịp tự nhiên</option></select>
+      <p class="hint">Mốc như 00:04:28,533 → 00:04:29,333 và số thứ tự phụ đề không được đọc. Số nằm trong lời nói vẫn giữ nguyên. Chế độ khớp mốc giữ cả khoảng lặng đầu và giữa các câu; văn bản không có mốc sẽ đọc tự nhiên.</p>
+      <button id="preview-document" class="small" disabled>Kiểm tra lời sẽ đọc</button>
+      <div id="document-preview" class="document-preview" hidden><p id="document-summary" class="hint" role="status"></p><p id="document-warnings" class="hint" hidden></p><details id="spoken-details"><summary>Xem lời đọc sau khi bỏ mốc thời gian</summary><textarea id="spoken-preview" rows="5" readonly spellcheck="false" aria-label="Lời đọc đã bỏ mốc thời gian"></textarea><p id="spoken-preview-note" class="hint" hidden></p></details></div>
       <div class="actions"><button id="generate" class="primary" disabled>Tạo giọng nói</button><button id="stop" disabled>Dừng, giữ tiến độ</button></div>
       <p id="notice" role="status" aria-live="polite"></p>
       <section id="recordings" aria-label="Tiến độ và bản đọc" hidden>
@@ -24,13 +28,14 @@
         <progress id="progress" max="100" value="0" aria-label="Tiến độ tạo giọng"></progress>
         <div class="metrics"><span id="segments">0 / 0 đoạn</span><span>Âm thanh <strong id="audio-duration">0:00:00</strong></span><span>Đã xử lý <strong id="elapsed">0:00:00</strong></span></div>
         <div class="speed-result"><div><span>Tốc độ thực đo</span><strong id="throughput">Đang đo</strong></div><div><span>Ước tính tạo 1 giờ âm thanh</span><strong id="hour-estimate">Chưa đủ dữ liệu</strong></div></div>
-        <p id="job-error" class="hint error" hidden></p>
+        <p id="job-timing" class="hint" hidden></p><p id="job-error" class="hint error" hidden></p>
         <button id="resume" class="small" hidden>Tiếp tục từ đoạn đã lưu</button>
         <div id="parts" class="parts"></div><p id="parts-note" class="hint"></p>
       </section>
     </section>
     <aside class="card controls">
-      <fieldset><legend>Giọng đọc</legend><div class="voices"><label class="voice"><input name="voice" type="radio" value="hmong-white-female" checked><span>Nữ</span></label><label class="voice"><input name="voice" type="radio" value="hmong-white-male"><span>Nam</span></label></div></fieldset>
+      <fieldset><legend>Giọng đọc</legend><div class="voices"><label class="voice"><input name="voice" type="radio" value="hmong-white-female" checked><span>Nữ</span></label><label class="voice"><input name="voice" type="radio" value="hmong-white-male"><span>Nam</span></label></div><div id="custom-voice-picker" hidden><label for="custom-voice">Giọng đã tải từ bên ngoài</label><select id="custom-voice"><option value="">Dùng giọng Nam/Nữ ở trên</option></select></div></fieldset>
+      <details id="upload-panel" class="upload-panel"><summary>Nhân bản giọng từ tệp âm thanh</summary><p class="hint">Tải mẫu giọng của bạn, sau đó chọn đoạn rõ lời 3–8 giây và lưu đúng lời nói của đoạn đó. Mẫu có thể nói ngôn ngữ khác; lời cần tạo nhập bằng tiếng Hmong.</p><label for="voice-name">Tên giọng</label><input id="voice-name" type="text" maxlength="80" placeholder="Ví dụ: Giọng của tôi"><label class="file-button voice-file-label">Chọn mẫu âm thanh<input id="voice-file" type="file" accept=".wav,.mp3,.flac,.ogg,audio/wav,audio/mpeg,audio/flac,audio/ogg" hidden></label><p id="voice-file-name" class="hint">WAV, MP3, FLAC hoặc OGG · tối đa 50 MB</p><button id="upload-voice" class="small" disabled>Tải mẫu giọng lên tool</button><p id="upload-state" class="hint" role="status"></p><p class="hint">Độ giống phụ thuộc mẫu và mô hình; chưa bảo đảm nhân bản chính xác mọi giọng hoặc ngôn ngữ. Chọn Cân bằng/Chất lượng và nghe thử để đánh giá.</p></details>
       <label for="quality">Chế độ tạo giọng</label><select id="quality"><option value="draft">Bản nháp · 4 bước</option><option value="fast" selected>Nhanh · 8 bước</option><option value="balanced">Cân bằng · 16 bước</option><option value="quality">Chất lượng · 32 bước</option></select>
       <p id="quality-note" class="hint">8 bước ưu tiên tốc độ. Nghe thử trước khi tạo bản dài.</p>
       <label for="style">Cách kể</label><select id="style"><option value="natural">Tự nhiên</option><option value="storytelling">Kể chuyện</option><option value="film_review">Review phim</option><option value="news">Tin tức</option><option value="advertising">Quảng cáo</option><option value="relaxing">Thư giãn</option></select>
@@ -43,7 +48,7 @@
         <audio id="reference-player" controls preload="metadata"></audio>
         <div class="bounds"><label>Từ giây<input id="reference-start" type="number" min="0" step="0.1" value="0"></label><label>Đến giây<input id="reference-end" type="number" min="3" step="0.1" value="8"></label></div>
         <button id="preview-reference" class="small">Nghe đoạn đã chọn</button>
-        <label for="reference-text">Lời nói đúng trong đoạn mẫu</label><textarea id="reference-text" rows="4" maxlength="2000" placeholder="Chép đúng lời Hmong vừa nghe…"></textarea>
+        <label for="reference-text">Lời nói đúng trong đoạn mẫu</label><textarea id="reference-text" rows="4" maxlength="2000" placeholder="Chép đúng lời vừa nghe, giữ nguyên ngôn ngữ của mẫu…"></textarea>
         <button id="save-reference">Lưu mẫu cho giọng Nữ</button><p id="reference-state" class="hint"></p>
       </details>
       <button id="refresh" class="small refresh">Kiểm tra lại bộ tạo giọng</button>

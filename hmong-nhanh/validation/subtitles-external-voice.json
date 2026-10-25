@@ -1,0 +1,26 @@
+{
+  "version": "0.6.0",
+  "automated_tests_passed": 173,
+  "browser": "Chromium mocked API workflow passed; TXT/SRT/VTT, 1M Unicode, custom voice upload and exact source-language transcript, stop/resume, chapters",
+  "real_integration": {
+    "model": "F5-Hmong",
+    "reference": "Uploaded public English F5 reference with exact English transcript",
+    "generated_text": "Nyob zoo, hnub no koj nyob li cas?",
+    "device": "cpu",
+    "quality": "balanced",
+    "steps": 16,
+    "wall_seconds": 130.815,
+    "sample_rate": 24000,
+    "total_frames": 144000,
+    "total_seconds": 6,
+    "leading_silence_seconds": 1,
+    "cue_start_seconds": 1,
+    "cue_end_seconds": 6
+  },
+  "limits": [
+    "Speaker similarity and Hmong pronunciation not perceptually evaluated.",
+    "No Windows or GPU execution in this environment.",
+    "One million characters validated/planned, not fully synthesized.",
+    "No claim of universal speaker/language support or 30x realtime."
+  ]
+}

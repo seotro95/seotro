@@ -26,7 +26,8 @@ _worker_log = None
 ID_PATTERN = re.compile(r'[0-9a-f]{32}')
 PART_PATTERN = re.compile(r'part-([0-9]{4,8})\.wav')
 STATES = {'running', 'completed', 'failed', 'cancelled'}
-DETAILS = ('voice', 'quality', 'style', 'speed', 'characters', 'benchmark')
+DETAILS = ('voice', 'voice_name', 'quality', 'style', 'speed', 'characters', 'benchmark',
+           'timing', 'source_format', 'spoken_characters', 'target_seconds')
 METRICS = ('completed', 'total', 'progress', 'elapsed_seconds', 'audio_seconds',
            'throughput', 'estimated_seconds_for_hour', 'device')
 
@@ -173,6 +174,11 @@ def view(job):
         data = {}
     if job['status'] == 'running' and isinstance(data.get('message'), str):
         public['message'] = data['message'][:1000]
+    for key in ('alignment', 'source_format'):
+        if isinstance(data.get(key), str):
+            public[key] = data[key][:80]
+    if isinstance(data.get('warnings'), list):
+        public['warnings'] = [value[:500] for value in data['warnings'][:20] if isinstance(value, str)]
     for key in METRICS:
         value = data.get(key)
         if key == 'device':

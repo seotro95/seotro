@@ -2,3 +2,4 @@
 f5-tts==1.1.22
 soundfile>=0.13,<1
 scipy>=1.11,<2
+librosa>=0.10,<2

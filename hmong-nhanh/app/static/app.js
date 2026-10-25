@@ -5,9 +5,10 @@ const drafts = new Map(), jobs = new Map(), partNodes = new Map();
 const activeStates = new Set(['running', 'queued', 'cancelling']);
 const resumableStates = new Set(['failed', 'cancelled']);
 let voices = [], status = null, displayedVoice = null, activeJob = null, selectedJob = null;
-let submitting = false, saving = false, stopping = false, previewEnd = null;
+let submitting = false, saving = false, stopping = false, uploading = false, checkingDocument = false, previewEnd = null;
 let textCount = 0, hasText = false, countPending = false, countTimer = null, pollTimer = null, polling = false;
-const selected = () => document.querySelector('input[name="voice"]:checked').value;
+let documentRevision = 0, checkedRevision = -1, documentError = '';
+const selected = () => $('custom-voice').value || document.querySelector('input[name="voice"]:checked')?.value || '';
 const current = () => voices.find(v => v.id === selected());
 const readDraft = () => ({start: Number($('reference-start').value), end: Number($('reference-end').value), text: $('reference-text').value});
 const equal = (a, b) => a && b && a.start === b.start && a.end === b.end && a.text.trim() === b.text.trim();
@@ -50,6 +51,44 @@ function recount() {
   $('text').setAttribute('aria-invalid', String(textCount > MAX_CHARACTERS));
   update();
 }
+function invalidateDocument() {
+  documentRevision++; checkedRevision = -1; documentError = '';
+  if (!$('document-preview').hidden) {
+    $('document-summary').textContent = 'Nội dung hoặc chế độ thời gian đã thay đổi. Bấm Kiểm tra lời sẽ đọc để xem lại.';
+    $('document-warnings').hidden = true; $('spoken-details').hidden = true;
+  }
+}
+async function previewDocument() {
+  recount();
+  if (countPending || !hasText || textCount > MAX_CHARACTERS || checkingDocument) return false;
+  const revision = documentRevision, text = $('text').value, timing = $('timing').value;
+  checkingDocument = true; update();
+  $('document-preview').hidden = false;
+  $('document-summary').textContent = 'Đang kiểm tra phụ đề và lời cần đọc…';
+  $('document-warnings').hidden = true; $('spoken-details').hidden = true;
+  try {
+    const data = await api('/api/documents/preview', {method: 'POST', body: JSON.stringify({text, timing})});
+    if (revision !== documentRevision) return false;
+    checkedRevision = revision; documentError = '';
+    const cleaned = String(data.text || ''), count = Number(data.characters) || countCodepoints(cleaned);
+    const timed = timing === 'auto' && data.timed;
+    $('document-summary').classList.remove('error');
+    $('document-summary').textContent = `${String(data.format || 'text').toUpperCase()} · ${formatNumber(count)} ký tự lời đọc${data.cue_count ? ' · ' + formatNumber(data.cue_count) + ' câu phụ đề' : ''} · ${timed ? 'Khớp mốc: ' + timelineDuration(data.duration) + ' (gồm khoảng lặng)' : 'Đọc theo nhịp tự nhiên'}.`;
+    const warnings = Array.isArray(data.warnings) ? data.warnings.filter(item => typeof item === 'string') : [];
+    $('document-warnings').textContent = warnings.join(' '); $('document-warnings').hidden = !warnings.length;
+    const sample = Array.from(cleaned.slice(0, 24000)).slice(0, 12000).join('');
+    $('spoken-preview').value = sample; $('spoken-preview').wrap = sample.length > 4000 ? 'off' : 'soft';
+    $('spoken-preview-note').hidden = !data.preview_truncated && sample.length >= cleaned.length;
+    $('spoken-preview-note').textContent = 'Đây là phần xem trước; toàn bộ nội dung gốc vẫn được xử lý khi tạo giọng.';
+    $('spoken-details').hidden = false;
+    return true;
+  } catch (error) {
+    if (revision !== documentRevision) return false;
+    checkedRevision = revision; documentError = error.message;
+    $('document-summary').textContent = error.message; $('document-summary').classList.add('error');
+    return false;
+  } finally { checkingDocument = false; update(); }
+}
 function generationBlocker(requireText = true) {
   const voice = current();
   if (!engineReady()) return status?.engine?.reason || 'Chưa có bộ tạo giọng. Bấm Kiểm tra lại sau khi cài mô hình.';
@@ -58,25 +97,40 @@ function generationBlocker(requireText = true) {
   if (!voice.generation_configured) return voice.reason || 'Chuẩn bị đoạn mẫu và lời tham chiếu cho giọng đã chọn.';
   if (requireText && (countPending || !hasText)) return 'Nhập văn bản cần đọc.';
   if (requireText && textCount > MAX_CHARACTERS) return 'Văn bản vượt 1.000.000 ký tự. Nội dung được giữ nguyên để bạn chia nhỏ.';
+  if (requireText && checkedRevision === documentRevision && documentError) return documentError;
   return '';
 }
 function update() {
   const voice = current(), busy = isBusy();
   const dirty = voice && !equal(readDraft(), voice.reference_settings), blocker = generationBlocker();
-  $('generate').disabled = busy || saving || Boolean(blocker);
+  $('generate').disabled = busy || saving || uploading || checkingDocument || Boolean(blocker);
   $('generate').title = blocker;
   $('generate').textContent = busy ? 'Đang tạo giọng…' : 'Tạo giọng nói';
-  $('benchmark').disabled = busy || saving || Boolean(generationBlocker(false));
+  $('benchmark').disabled = busy || saving || uploading || Boolean(generationBlocker(false));
   $('benchmark').title = generationBlocker(false);
   $('stop').disabled = !activeJob || stopping;
   $('stop').textContent = stopping ? 'Đang dừng…' : 'Dừng, giữ tiến độ';
   $('voice-state').textContent = dirty ? 'Đoạn mẫu có thay đổi chưa lưu.' : voice?.generation_configured ? `Giọng ${voice.name} đã có mẫu và sẵn sàng tạo lời đọc.` : voice?.reason || 'Đang tải mẫu giọng…';
   $('reference-state').textContent = dirty ? 'Chưa lưu thay đổi.' : voice?.reference_ready ? 'Đã lưu riêng cho giọng này.' : 'Chưa có lời tham chiếu.';
-  for (const node of document.querySelectorAll('input[name="voice"],#text,#text-file,#speed,#quality,#style,#reference-start,#reference-end,#reference-text')) node.disabled = busy;
-  $('save-reference').disabled = saving || busy || !voice;
+  for (const node of document.querySelectorAll('input[name="voice"],#custom-voice,#text,#text-file,#speed,#quality,#style,#timing,#reference-start,#reference-end,#reference-text')) node.disabled = busy || uploading;
+  $('save-reference').disabled = saving || busy || uploading || !voice;
+  $('preview-document').disabled = busy || checkingDocument || countPending || !hasText || textCount > MAX_CHARACTERS;
+  $('preview-document').textContent = checkingDocument ? 'Đang kiểm tra…' : 'Kiểm tra lời sẽ đọc';
+  $('voice-file').disabled = $('voice-name').disabled = busy || uploading;
+  $('upload-voice').disabled = busy || saving || uploading || !$('voice-file').files.length;
+  $('upload-voice').textContent = uploading ? 'Đang lưu mẫu…' : 'Tải mẫu giọng lên tool';
   const job = jobs.get(selectedJob);
   $('resume').hidden = !job || !resumableStates.has(job.status);
   $('resume').disabled = busy || !engineReady();
+}
+function renderVoiceMenu() {
+  const menu = $('custom-voice'), previous = menu.value;
+  const custom = voices.filter(voice => !['hmong-white-female', 'hmong-white-male'].includes(voice.id));
+  const options = [new Option('Dùng giọng Nam/Nữ ở trên', '')];
+  for (const voice of custom) options.push(new Option(voice.name, voice.id));
+  if (previous && !custom.some(voice => voice.id === previous)) options.push(new Option('Mẫu đã chọn không còn trong thư viện', previous));
+  menu.replaceChildren(...options); menu.value = previous;
+  $('custom-voice-picker').hidden = !custom.length && !previous;
 }
 function renderVoice() {
   if (displayedVoice) drafts.set(displayedVoice, readDraft());
@@ -105,13 +159,17 @@ async function refresh() {
   $('refresh').disabled = true;
   try {
     const [state, list] = await Promise.all([api('/api/status'), api('/api/voices')]);
-    status = state; voices = list.voices; renderEngine(); renderVoice();
+    status = state; voices = list.voices; renderVoiceMenu(); renderEngine(); renderVoice();
   } catch (e) { status = null; update(); message(e.message, true); }
   finally { $('refresh').disabled = false; }
 }
 function duration(value) {
   const seconds = Math.max(0, Math.floor(Number(value) || 0));
   return `${Math.floor(seconds / 3600)}:${String(Math.floor(seconds / 60) % 60).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
+}
+function timelineDuration(value) {
+  const ms = Math.max(0, Math.round((Number(value) || 0) * 1000));
+  return duration(Math.floor(ms / 1000)) + ',' + String(ms % 1000).padStart(3, '0');
 }
 function estimate(value) {
   if (!Number.isFinite(value) || value <= 0) return 'Chưa đủ dữ liệu';
@@ -120,7 +178,7 @@ function estimate(value) {
   return `Khoảng ${formatNumber(value / 3600)} giờ`;
 }
 const statusLabels = {queued: 'Đang chờ', running: 'Đang tạo giọng', cancelling: 'Đang dừng', completed: 'Hoàn tất', failed: 'Có lỗi', cancelled: 'Đã dừng'};
-function voiceName(job) { return voices.find(voice => voice.id === job.voice)?.name || (String(job.voice).endsWith('male') && !String(job.voice).endsWith('female') ? 'Nam' : 'Nữ'); }
+function voiceName(job) { return job.voice_name || voices.find(voice => voice.id === job.voice)?.name || ({'hmong-white-female': 'Nữ', 'hmong-white-male': 'Nam'}[job.voice]) || 'Mẫu bên ngoài đã lưu'; }
 function rememberJob(job) {
   if (!job || typeof job.id !== 'string') return;
   jobs.set(job.id, job);
@@ -168,10 +226,13 @@ function renderJob(job) {
   $('recordings').hidden = false;
   const progress = Math.max(0, Math.min(100, Number(job.progress) || (job.status === 'completed' ? 100 : 0)));
   $('job-state').textContent = statusLabels[job.status] || job.status;
-  $('job-voice').textContent = `Giọng ${voiceName(job)}${job.device ? ' · ' + String(job.device).toUpperCase() : ''}`;
+  $('job-voice').textContent = `Giọng ${voiceName(job)}${job.device ? ' · ' + String(job.device).toUpperCase() : ''}${job.timing === 'auto' && job.alignment_mode === 'timed' ? ' · Khớp mốc phụ đề' : ''}`;
   $('progress').value = progress; $('progress-value').textContent = `${Math.floor(progress)}%`;
   $('segments').textContent = `${formatNumber(job.completed || 0)} / ${formatNumber(job.total || 0)} đoạn`;
-  $('audio-duration').textContent = duration(job.audio_seconds);
+  $('audio-duration').textContent = job.alignment === 'subtitle' ? timelineDuration(job.audio_seconds) : duration(job.audio_seconds);
+  const warnings = Array.isArray(job.warnings) ? job.warnings.filter(value => typeof value === 'string') : [];
+  $('job-timing').textContent = (job.alignment === 'subtitle' ? 'Khớp phụ đề · Đích ' + timelineDuration(job.target_seconds) + '. ' : '') + warnings.join(' ');
+  $('job-timing').hidden = !$('job-timing').textContent;
   $('elapsed').textContent = duration(job.elapsed_seconds);
   $('throughput').textContent = Number.isFinite(job.throughput) && job.throughput > 0 ? `${formatNumber(job.throughput)}× thời gian thực` : 'Đang đo';
   $('hour-estimate').textContent = estimate(job.estimated_seconds_for_hour);
@@ -204,10 +265,10 @@ async function poll() {
 }
 async function startJob(benchmark = false) {
   recount();
-  if (isBusy() || saving) return;
+  if (isBusy() || saving || uploading || checkingDocument) return;
   const blocker = generationBlocker(!benchmark);
   if (blocker) { message(blocker, true); return; }
-  const payload = {voice: selected(), speed: Number($('speed').value), quality: $('quality').value, style: $('style').value};
+  const payload = {voice: selected(), speed: Number($('speed').value), quality: $('quality').value, style: $('style').value, timing: $('timing').value};
   if (!benchmark) payload.text = $('text').value;
   submitting = true; update(); message(benchmark ? 'Đang đo tốc độ bằng một câu ngắn. Lượt đầu có thể cần nạp mô hình.' : 'Đang chuẩn bị bản đọc. Các đoạn đã xong sẽ được lưu để tiếp tục khi cần.');
   try {
@@ -219,9 +280,16 @@ async function startJob(benchmark = false) {
   finally { submitting = false; update(); }
 }
 
-document.querySelectorAll('input[name="voice"]').forEach(input => input.addEventListener('change', renderVoice));
+document.querySelectorAll('input[name="voice"]').forEach(input => input.addEventListener('change', () => { $('custom-voice').value = ''; renderVoice(); }));
+$('custom-voice').addEventListener('change', () => {
+  if ($('custom-voice').value) document.querySelectorAll('input[name="voice"]').forEach(input => { input.checked = false; });
+  else if (!document.querySelector('input[name="voice"]:checked')) document.querySelector('input[name="voice"][value="hmong-white-female"]').checked = true;
+  renderVoice();
+});
 ['reference-start', 'reference-end', 'reference-text'].forEach(id => $(id).addEventListener('input', () => { drafts.set(selected(), readDraft()); update(); }));
-$('text').addEventListener('input', () => { clearTimeout(countTimer); fitLongText(); countPending = true; update(); countTimer = setTimeout(recount, 180); });
+$('text').addEventListener('input', () => { invalidateDocument(); clearTimeout(countTimer); fitLongText(); countPending = true; update(); countTimer = setTimeout(recount, 180); });
+$('timing').addEventListener('change', () => { invalidateDocument(); update(); });
+$('preview-document').addEventListener('click', previewDocument);
 $('speed').addEventListener('input', () => { $('speed-value').textContent = Number($('speed').value).toLocaleString('vi-VN', {minimumFractionDigits: 1}) + '×'; });
 $('quality').addEventListener('change', () => {
   $('quality-note').textContent = {draft: '4 bước để nghe thử nhanh; có thể giảm độ rõ và phát âm.', fast: '8 bước ưu tiên tốc độ. Nghe thử trước khi tạo bản dài.', balanced: '16 bước cân bằng thời gian xử lý và độ rõ.', quality: '32 bước, xử lý lâu hơn. Chất lượng vẫn phụ thuộc mô hình và mẫu.'}[$('quality').value];
@@ -239,14 +307,42 @@ $('job-select').addEventListener('change', async () => {
 $('text-file').addEventListener('change', async () => {
   const file = $('text-file').files[0]; if (!file) return;
   try {
-    if (file.size > 8 * 1024 * 1024) throw Error('Tệp TXT tối đa 8 MB. Nội dung tối đa 1.000.000 ký tự Unicode.');
+    if (file.size > 8 * 1024 * 1024) throw Error('Tệp TXT/SRT/VTT tối đa 8 MB. Nội dung tối đa 1.000.000 ký tự Unicode.');
     let text;
     try { text = new TextDecoder('utf-8', {fatal: true}).decode(await file.arrayBuffer()).replace(/^\uFEFF/, ''); }
-    catch { throw Error('Tệp chưa phải TXT UTF-8 hợp lệ. Lưu lại bằng UTF-8 rồi nhập lại.'); }
+    catch { throw Error('Tệp chưa phải UTF-8 hợp lệ. Lưu TXT/SRT/VTT bằng UTF-8 rồi nhập lại.'); }
     if (countCodepoints(text) > MAX_CHARACTERS) throw Error('Tệp vượt 1.000.000 ký tự. Văn bản đang soạn được giữ nguyên; chia tệp thành các phần nhỏ hơn.');
-    $('text').value = text; recount(); message('Đã nhập toàn bộ văn bản từ tệp TXT.');
+    $('text').value = text; invalidateDocument(); recount(); message('Đã nhập toàn bộ văn bản/phụ đề. Bấm Kiểm tra lời sẽ đọc để xem nội dung và thời lượng.');
   } catch (e) { message(e.message, true); }
   finally { $('text-file').value = ''; }
+});
+$('voice-file').addEventListener('change', () => {
+  const file = $('voice-file').files[0];
+  $('voice-file-name').textContent = file ? `${file.name} · ${formatNumber(file.size / (1024 * 1024))} MB` : 'WAV, MP3, FLAC hoặc OGG · tối đa 50 MB';
+  if (file && !$('voice-name').value.trim()) $('voice-name').value = Array.from(file.name.replace(/\.[^.]+$/, '')).slice(0, 80).join('');
+  $('upload-state').textContent = ''; update();
+});
+$('upload-voice').addEventListener('click', async () => {
+  const file = $('voice-file').files[0];
+  if (!file || uploading || saving || isBusy()) return;
+  const name = $('voice-name').value.trim() || Array.from(file.name.replace(/\.[^.]+$/, '')).slice(0, 80).join('');
+  if (!file.size || file.size > 50 * 1024 * 1024) { $('upload-state').textContent = 'Chọn tệp âm thanh có nội dung, tối đa 50 MB.'; return; }
+  if (!/\.(wav|mp3|flac|ogg)$/i.test(file.name)) { $('upload-state').textContent = 'Dùng tệp WAV, MP3, FLAC hoặc OGG.'; return; }
+  uploading = true; update(); $('upload-state').textContent = 'Đang lưu mẫu giọng trên máy…';
+  try {
+    const result = await api('/api/voices/upload', {method: 'POST', body: file,
+      headers: {'Content-Type': 'application/octet-stream', 'X-Voice-Name': encodeURIComponent(name), 'X-File-Name': encodeURIComponent(file.name)}});
+    if (!result.voice?.id) throw Error('Tool chưa trả mẫu giọng đã lưu. Thử kiểm tra lại thư viện giọng.');
+    voices = [...voices.filter(voice => voice.id !== result.voice.id), result.voice];
+    renderVoiceMenu(); $('custom-voice').value = result.voice.id;
+    document.querySelectorAll('input[name="voice"]').forEach(input => { input.checked = false; });
+    renderVoice(); $('reference-panel').open = true;
+    $('voice-file').value = ''; $('voice-name').value = '';
+    $('voice-file-name').textContent = 'WAV, MP3, FLAC hoặc OGG · tối đa 50 MB';
+    $('upload-state').textContent = 'Đã chọn giọng ' + result.voice.name + '. Chọn đoạn và lưu đúng lời mẫu ở bên dưới.';
+    message('Đã tải mẫu riêng ' + result.voice.name + '. Lời mẫu cần giữ nguyên ngôn ngữ gốc; phần văn bản cần đọc nhập bằng tiếng Hmong.');
+  } catch (error) { $('upload-state').textContent = error.message; message(error.message, true); }
+  finally { uploading = false; update(); }
 });
 function validReference(ref, voice) {
   return voice && Number.isFinite(ref.start) && Number.isFinite(ref.end) && ref.start >= 0 && ref.end - ref.start >= 3 && ref.end - ref.start <= 8 && ref.end <= voice.reference_settings.duration + .001;

@@ -278,6 +278,19 @@ def _infer_one(engine, reference, text, speed, steps):
     from f5_tts.infer.utils_infer import infer_batch_process
     # Supplying one batch prevents upstream's ThreadPool from running concurrent
     # model calls. All text and reference values stay local; no ASR or downloads.
+    timing = {}
+    if len(text.encode('utf-8')) < 10:
+        # F5's helper silently forces speed=0.3 for very short text. Subtitle
+        # cues such as "Nyob zoo" must still honour the chosen speaking speed.
+        # Use its usual frame estimate explicitly to bypass that special case.
+        ref_frames = int(reference['seconds'] * 24000) // 256
+        ref_text = reference['text']
+        if len(ref_text[-1].encode('utf-8')) == 1:
+            ref_text += ' '
+        generated_frames = max(1, int(ref_frames * len(text.encode('utf-8'))
+                                      / len(ref_text.encode('utf-8')) / float(speed)))
+        # Half a frame avoids float roundoff when upstream converts back to int.
+        timing['fix_duration'] = (ref_frames + generated_frames + .5) * 256 / 24000
     with torch.inference_mode():
         audio, rate, _ = next(infer_batch_process(
             reference['audio'], reference['text'], [text],
@@ -285,6 +298,7 @@ def _infer_one(engine, reference, text, speed, steps):
             mel_spec_type=engine.mel_spec_type, progress=None,
             nfe_step=steps, speed=float(speed), device=engine.device,
             cross_fade_duration=0,
+            **timing,
         ))
     return _wav(audio, rate)
 
@@ -342,7 +356,7 @@ def synthesize(text, speed, reference_path, reference_text, quality='fast'):
     if not isinstance(text, str) or not text.strip() or len(text) > 2000:
         raise CloningError('Nhân bản cục bộ nhận 1–2.000 ký tự mỗi lượt; hãy chia nhỏ kịch bản dài.')
     if not isinstance(reference_text, str) or not reference_text.strip() or len(reference_text) > 2000:
-        raise CloningError('Nhập bản chép Hmong khớp chính xác đoạn mẫu 3–8 giây; không tự đoán lời mẫu.')
+        raise CloningError('Nhập bản chép khớp chính xác đoạn mẫu 3–8 giây, bằng ngôn ngữ gốc của mẫu; không dịch hoặc tự đoán lời mẫu.')
     if isinstance(speed, bool) or not isinstance(speed, (int, float)) or not math.isfinite(speed) or not 0.5 <= speed <= 2:
         raise CloningError('Tốc độ đọc phải từ 0,5 đến 2 lần.')
     if not isinstance(quality, str) or quality not in QUALITY_STEPS:

@@ -222,3 +222,18 @@ def test_truncated_engine_audio_is_not_persisted(tmp_path):
         longform.write_chunk(destination, audio()[:-4], .1)
     assert not destination.exists()
     assert not list(tmp_path.glob('*.pending'))
+
+
+def test_resume_05_plain_text_checkpoint_preserves_original_whitespace(folder, monkeypatch):
+    payload = json.loads((folder / 'input.json').read_text())
+    payload['text'] = '  Nyob zoo.\r\n Kuv muaj 12.  '
+    longform.atomic_json(folder / 'input.json', payload)
+    fingerprint = hashlib.sha256(json.dumps({
+        'version': 1, 'text': payload['text'], 'style': payload['style'], 'quality': payload['quality'],
+        'speed': payload['speed'], 'voice': payload['voice'], 'reference_text': payload['_reference']['text'],
+        'reference_sha256': hashlib.sha256(Path(payload['_reference']['path']).read_bytes()).hexdigest(),
+    }, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+    longform.atomic_json(folder / 'checkpoint.json', {'fingerprint': fingerprint, 'completed': 0,
+                                                    'spoken_seconds': 0, 'elapsed_seconds': 0})
+    monkeypatch.setattr(longform.cloning_engine, 'synthesize', lambda *a, **kw: audio())
+    assert longform.process_job(folder)['progress'] == 100

@@ -82,7 +82,7 @@ def main(argv=None):
         print('Dang cai giao dien doc van ban...', flush=True)
         pip('-r', str(BASE / 'requirements.txt'))
     prepare_torch(gpu=args.gpu, cpu=args.cpu)
-    if not installed('f5-tts', '1.1.22') or not all(installed(name) for name in ('soundfile', 'scipy', 'numpy')):
+    if not installed('f5-tts', '1.1.22') or not all(installed(name) for name in ('soundfile', 'scipy', 'numpy', 'librosa')):
         print('Dang cai bo tao giong Hmong...', flush=True)
         pip('-r', str(BASE / 'requirements-voice.txt'))
     from model_files import EngineError, model_directory, verify_models
