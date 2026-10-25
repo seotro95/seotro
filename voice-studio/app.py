@@ -133,6 +133,7 @@ executor = ThreadPoolExecutor(max_workers=1)
 lock = threading.RLock()
 shutdown_event = threading.Event()
 warm_worker = None
+warm_worker_log_start = 0
 
 
 def now():
@@ -174,7 +175,7 @@ async def local_browser_guard(request: Request, call_next):
     response = await call_next(request)
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['Referrer-Policy'] = 'no-referrer'
-    response.headers['Content-Security-Policy'] = "default-src 'self'; style-src 'self'; script-src 'self'; media-src 'self' blob:; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    response.headers.setdefault('Content-Security-Policy', "default-src 'self'; style-src 'self'; script-src 'self'; media-src 'self' blob:; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'")
     return response
 
 
@@ -197,6 +198,22 @@ def config():
     except ImportError:
         available=0
     return {'available_ram_gb':available,**_config_values()}
+
+
+@app.get('/help/hmong')
+def hmong_full_guide():
+    path=BASE/'docs'/'HUONG-DAN-HMONG.html'
+    if not IS_HMONG or not path.is_file():
+        raise HTTPException(404,'Không tìm thấy hướng dẫn Hmong. Giải nén toàn bộ gói cập nhật.')
+    import base64,hashlib,re
+    document=path.read_text(encoding='utf-8')
+    def hashes(tag):
+        blocks=re.findall(r'<'+tag+r'\b[^>]*>(.*?)</'+tag+r'>',document,re.S|re.I)
+        return ' '.join("'sha256-"+base64.b64encode(hashlib.sha256(block.encode()).digest()).decode()+"'" for block in blocks)
+    policy=("default-src 'none'; style-src "+hashes('style')+"; script-src "+hashes('script')+
+            "; img-src data:; frame-ancestors 'none'; base-uri 'none'; form-action 'none'")
+    return FileResponse(path,media_type='text/html; charset=utf-8',
+                        headers={'Cache-Control':'no-store','Content-Security-Policy':policy})
 
 
 def _config_values():
@@ -410,15 +427,46 @@ def close_warm_worker():
             process.stdin.close()
 
 
+def _record_worker_failure(path, work, *, exc=None, returncode=None):
+    """Preserve startup failures that happen before worker.py can write a marker."""
+    from voice_errors import describe_failure
+    startup = DATA / 'worker-startup.log'
+    detail = ''
+    try:
+        with startup.open('rb') as stream:
+            stream.seek(0, os.SEEK_END)
+            stream.seek(max(warm_worker_log_start, stream.tell() - 65536))
+            detail = stream.read().decode('utf-8', errors='replace')
+    except OSError:
+        pass
+    path = Path(path)
+    log_path = (path.with_suffix('.log') if path.parent != (DATA / 'jobs').resolve()
+                else DATA / 'jobs' / (path.stem + '.log'))
+    with log_path.open('a', encoding='utf-8') as errors:
+        errors.write('\nWorker stopped before returning a result.\n')
+        if exc is not None:
+            errors.write(f'{type(exc).__name__}: {exc}\n')
+        if detail:
+            errors.write(detail)
+    message = describe_failure(exc, returncode=returncode, log_tail=detail)
+    message += f' Nhật ký tác vụ: {log_path}.'
+    write_json(work / 'worker-done.json', {'code': 1, 'user_error': message})
+    return 1
+
+
 def execute_worker(path, env, work):
-    global warm_worker
+    global warm_worker, warm_worker_log_start
     # Keep one model process resident for consecutive jobs; cancellation kills it.
     done = work / 'worker-done.json'
     done.unlink(missing_ok=True)
     if warm_worker is None or warm_worker.poll() is not None:
         close_warm_worker()
-        with (DATA / 'worker-startup.log').open('a', encoding='utf-8') as errors:
-            warm_worker = subprocess.Popen([sys.executable, str(BASE / 'worker.py'), '--serve'], env=env, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=errors, text=True, encoding='utf-8', **({'creationflags': subprocess.CREATE_NEW_PROCESS_GROUP} if os.name == 'nt' else {'start_new_session': True}))
+        try:
+            with (DATA / 'worker-startup.log').open('ab') as errors:
+                warm_worker_log_start = errors.tell()
+                warm_worker = subprocess.Popen([sys.executable, str(BASE / 'worker.py'), '--serve'], env=env, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=errors, text=True, encoding='utf-8', **({'creationflags': subprocess.CREATE_NEW_PROCESS_GROUP} if os.name == 'nt' else {'start_new_session': True}))
+        except OSError as exc:
+            return _record_worker_failure(path, work, exc=exc)
     process = warm_worker
     try:
         process.stdin.write(str(path.resolve()) + '\n')
@@ -431,11 +479,15 @@ def execute_worker(path, env, work):
             if done.exists():
                 return read_json(done)['code']
             if process.poll() is not None:
+                code = process.returncode
                 close_warm_worker()
-                return 1
+                return _record_worker_failure(path, work, returncode=code)
             if time.monotonic() - started > 7 * 86400:
                 raise TimeoutError('Tác vụ vượt giới hạn xử lý 7 ngày. Có thể tiếp tục từ các đoạn đã tạo.')
             time.sleep(0.1)
+    except (BrokenPipeError, ConnectionResetError) as exc:
+        close_warm_worker()
+        return _record_worker_failure(path, work, exc=exc, returncode=process.returncode)
     except BaseException:
         close_warm_worker()
         raise

@@ -9,14 +9,14 @@ import sys
 
 PYTHON_FILES = (
     'app.py', 'bundle_check.py', 'character_cast.py', 'dubbing.py', 'hardware.py', 'hmong_acceleration.py', 'hmong_assets.py',
-    'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py', 'hmong_launcher.py',
+    'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py', 'hmong_health.py', 'hmong_launcher.py',
     'hmong_native.py', 'hmong_native_models.py',
     'hmong_reference.py', 'hmong_text.py',
     'language_catalog.py', 'local_vieneu.py', 'longform.py', 'narration.py', 'performance.py', 'reference_quality.py',
     'portable_launcher.py', 'runtime_instance.py', 'prepare_hmong.py', 'prepare_hmong_native.py', 'prepare_models.py',
     'prepare_subtitles.py', 'recognition.py', 'state_io.py', 'studio_variant.py',
     'subtitles.py', 'system_voices.py', 'translation.py', 'video_editor.py',
-    'video_export.py', 'video_tasks.py', 'worker.py', 'writing.py',
+    'video_export.py', 'video_tasks.py', 'voice_errors.py', 'worker.py', 'writing.py',
 )
 STATIC_FILES = tuple('static/' + name for name in (
     'index.html', 'style.css', 'app.js', 'workspace.js', 'studio-tools.js',
@@ -25,7 +25,8 @@ STATIC_FILES = tuple('static/' + name for name in (
 ASSET_FILES = tuple('assets/hmong/' + name for name in (
     'voices.json', 'female.wav', 'male.wav', 'source-female.mp3', 'source-male.mp3',
 ))
-REQUIRED_FILES = PYTHON_FILES + STATIC_FILES + ASSET_FILES + ('hmong_native_vendor/manifest.json',)
+DOCUMENTATION_FILES = ('docs/HUONG-DAN-HMONG.md', 'docs/HUONG-DAN-HMONG.html')
+REQUIRED_FILES = PYTHON_FILES + STATIC_FILES + ASSET_FILES + DOCUMENTATION_FILES + ('hmong_native_vendor/manifest.json',)
 NATIVE_VENDOR_REQUIRED = (
     '__init__.py', 'UPSTREAM.json', 'vits/__init__.py', 'vits/models.py',
     'vits/modules.py', 'vits/commons.py', 'vits/attentions.py', 'vits/transforms.py',

@@ -25,6 +25,10 @@ def bundle_fixture(destination):
 
 
 def isolate_launcher(monkeypatch, root):
+    import hmong_health
+    # These tests isolate bundle/dependency/model setup, while runtime probe
+    # execution and its failure ordering have dedicated repair/health tests.
+    monkeypatch.setattr(hmong_health, 'run_runtime_probe', lambda base: {'ok': True})
     monkeypatch.setattr(hmong_launcher, 'BASE', root)
     monkeypatch.setenv('VOICE_STUDIO_VARIANT', 'hmong')
     monkeypatch.setenv('VOICE_STUDIO_DATA_DIR', str(root / '.test-data'))

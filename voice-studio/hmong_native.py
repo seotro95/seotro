@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+from importlib import metadata
 import io
 import json
 import math
@@ -29,6 +30,19 @@ _SYMBOL_IDS = {symbol: index for index, symbol in enumerate(symbols)}
 _INPUT_SYMBOLS = frozenset(_SYMBOL_IDS) - {'_'}
 
 
+def runtime_settings():
+    """Keep old F5 INT8 preferences from disabling the FP32 native engine."""
+    device = os.getenv('HMOOB_DEVICE', 'auto').strip().lower()
+    requested_precision = os.getenv('HMOOB_PRECISION', 'auto').strip().lower()
+    if device not in {'auto', 'cpu', 'cuda'}:
+        raise EngineError('Bộ đọc nhanh hỗ trợ HMOOB_DEVICE=auto, cpu hoặc cuda.')
+    if requested_precision not in {'auto', 'fp32', 'int8'}:
+        raise EngineError('Bộ đọc nhanh dùng FP32; đặt HMOOB_PRECISION=auto hoặc fp32.')
+    return {'device': device, 'precision': 'fp32', 'requested_precision': requested_precision,
+            'compatibility_note': ('Đã bỏ tùy chọn INT8 của F5 cũ; bộ đọc nhanh dùng FP32.'
+                                   if requested_precision == 'int8' else None)}
+
+
 def validate_text(text):
     """Keep RPA letters intact and treat written hyphens as word boundaries.
 
@@ -44,23 +58,26 @@ def validate_text(text):
 
 
 def availability():
-    requested = os.getenv('HMOOB_DEVICE', 'auto').lower()
+    requested = os.getenv('HMOOB_DEVICE', 'auto').strip().lower()
     dependencies = all(importlib.util.find_spec(name) is not None for name in
                        ('torch', 'numpy', 'soundfile', 'soxr', 'scipy', 'librosa'))
     reason = None
-    if requested not in {'auto', 'cpu', 'cuda'}:
-        reason = 'Bộ đọc nhanh hỗ trợ HMOOB_DEVICE=auto, cpu hoặc cuda.'
-    else:
-        try:
+    settings = None
+    try:
+        settings = runtime_settings()
+        if requested == 'cuda' and metadata.version('torch').endswith('+cpu'):
+            reason = 'Bộ chạy hiện tại chỉ có CPU. Mở launcher để tự chọn CPU hoặc cài bộ NVIDIA trong tools.'
+        if reason is None:
             verify_models()
-        except EngineError as exc:
-            reason = str(exc)
+    except (EngineError, metadata.PackageNotFoundError) as exc:
+        reason = str(exc) if isinstance(exc, EngineError) else 'Thiếu thư viện PyTorch trong bộ chạy.'
     if reason is None and not dependencies:
         reason = 'Thiếu thư viện tạo giọng. Chạy MO_VOICE_STUDIO_HMONG.bat để cài đặt.'
     return {'ready': reason is None, 'reason': reason or
             'Đủ tệp để thử VITS + OpenVoice V2; cần nghe kiểm tra tiếng Hmong và độ giống giọng.',
             'device': requested, 'model_dir': str(model_directory()), 'dependencies': dependencies,
             'dialect_verified': False, 'backend': 'vits_openvoice_v2', 'precision': 'fp32',
+            'compatibility_note': settings['compatibility_note'] if settings else None,
             'quality_steps': {}, 'target_30x_verified': False}
 
 
@@ -88,11 +105,10 @@ class SpeechEngine:
         self._notify('Đang kiểm tra mô hình đọc nhanh…')
         root = model_directory()
         integrity = verify_models(root)
-        requested = os.getenv('HMOOB_DEVICE', 'auto').lower()
-        if requested not in {'auto', 'cpu', 'cuda'}:
-            raise EngineError('Bộ đọc nhanh hỗ trợ HMOOB_DEVICE=auto, cpu hoặc cuda.')
-        if os.getenv('HMOOB_PRECISION', 'auto') not in {'auto', 'fp32'}:
-            raise EngineError('Bộ đọc nhanh dùng FP32; đặt HMOOB_PRECISION=auto hoặc fp32.')
+        settings = runtime_settings()
+        requested = settings['device']
+        if settings['compatibility_note']:
+            self._notify(settings['compatibility_note'])
         import torch
         device = ('cuda' if torch.cuda.is_available() else 'cpu') if requested == 'auto' else requested
         if device == 'cuda' and not torch.cuda.is_available():

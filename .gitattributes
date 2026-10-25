@@ -6,5 +6,6 @@ voice-studio/packaging/*.py text eol=lf
 voice-studio/static/* text eol=lf
 voice-studio/*.md text eol=lf
 voice-studio/docs/*.md text eol=lf
+voice-studio/docs/*.html text eol=lf
 voice-studio/requirements-hmong.txt text eol=lf
 voice-studio/assets/hmong/voices.json text eol=lf

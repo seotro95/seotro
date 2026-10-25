@@ -589,14 +589,13 @@ def render(job, synthesize=None):
 
 def voice_error(exc):
     from hmong_engine import EngineError
+    from voice_errors import describe_failure
     if isinstance(exc,EngineError):return str(exc)
     if isinstance(exc,ValueError):return str(exc)
-    if isinstance(exc,ModuleNotFoundError):return f'Thiếu thư viện giọng {exc.name}. Dùng gói Portable đầy đủ hoặc tải lại model trong tool.'
     if isinstance(exc,MemoryError) or 'out of memory' in str(exc).lower():
         if os.environ.get('VOICE_STUDIO_VARIANT')=='hmong':return 'Không đủ RAM/VRAM để nạp giọng Hmong. Đóng bớt ứng dụng, dùng máy có nhiều RAM hơn rồi tạo lại.'
         return 'Không đủ RAM/VRAM để nạp giọng. Chọn Nano Việt hoặc giọng Windows; đóng bớt ứng dụng rồi tạo lại.'
-    if isinstance(exc,FileNotFoundError):return 'Thiếu tệp mô hình hoặc công cụ âm thanh. Tải model giọng đã chọn hoặc giải nén đầy đủ gói Portable.'
-    return f'Không tạo được voice ({type(exc).__name__}). Giữ cửa sổ tool mở và kiểm tra model giọng đã chọn.'
+    return describe_failure(exc)
 
 
 def _load_worker_request(path):
@@ -643,7 +642,7 @@ def serve():
                 with contextlib.redirect_stderr(errors):
                     render(job)
             except Exception as exc:
-                user_error = voice_error(exc)
+                user_error = voice_error(exc) + f' Nhật ký tác vụ: {log_path}.'
                 code = 1
                 traceback.print_exc(file=errors)
         write_state(work / 'worker-done.json', {'code': code, 'user_error': user_error})

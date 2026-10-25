@@ -412,3 +412,31 @@ def test_predicted_duration_is_bounded_before_alignment_allocation(monkeypatch, 
                         pytest.fail('Reject duration before allocating an alignment mask'))
     with pytest.raises(ValueError, match='bounded inference duration'):
         models.SynthesizerTrn.infer(probe, torch.ones((1, 3), dtype=torch.long), torch.tensor([3]), max_len=100)
+
+
+def test_old_f5_int8_preference_uses_same_native_fp32_graph(fake_loader, monkeypatch):
+    engine = native.SpeechEngine()
+    baseline = engine._load()
+    monkeypatch.setenv('HMOOB_PRECISION', ' INT8 ')
+    settings = native.runtime_settings()
+    assert settings['precision'] == 'fp32' and settings['requested_precision'] == 'int8'
+    assert settings['compatibility_note']
+    assert engine._load() is baseline
+    assert fake_loader.loads == ['native', 'converter', 'watermark']
+
+
+def test_precision_readiness_rejects_invalid_setting_before_models(monkeypatch):
+    monkeypatch.setenv('HMOOB_DEVICE', 'cpu')
+    monkeypatch.setenv('HMOOB_PRECISION', 'unknown')
+    monkeypatch.setattr(native, 'verify_models', lambda: pytest.fail('Invalid setting must fail first'))
+    status = native.availability()
+    assert not status['ready'] and 'FP32' in status['reason']
+
+
+def test_cpu_distribution_cannot_advertise_explicit_cuda_ready(monkeypatch):
+    monkeypatch.setenv('HMOOB_DEVICE', 'cuda')
+    monkeypatch.setenv('HMOOB_PRECISION', 'auto')
+    monkeypatch.setattr(native.metadata, 'version', lambda name: '2.8.0+cpu')
+    monkeypatch.setattr(native, 'verify_models', lambda: pytest.fail('CPU-only CUDA request must fail first'))
+    status = native.availability()
+    assert not status['ready'] and 'CPU' in status['reason']

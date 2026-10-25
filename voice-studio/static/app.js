@@ -83,6 +83,7 @@ function updateHmongReferenceNote(){if(isHmongStudio()){ $('hmong-reference-note
 function hideStudioControl(id){const node=$(id);if(node)node.hidden=true;document.querySelectorAll('label[for="'+id+'"]').forEach(label=>label.hidden=true);}
 function applyStudioVariant(){
  if(!isHmongStudio())return;
+ $('hmong-help-tools').hidden=false;
  document.title=config.app_name||'Voice Studio Hmong';
  const intro=document.querySelector('#panel-create .page-heading > p');if(intro)intro.textContent=isNativeHmong()?'Bộ đọc Hmong nhanh thử nghiệm và chuyển chất giọng theo mẫu của bạn. Cần nghe đánh giá phát âm và độ giống giọng; chưa kiểm chứng 30×.':'Tạo lời đọc Hmong Trắng / Hmoob Daw từ văn bản và mẫu giọng của bạn.';
  const languageFeature=document.querySelector('#panel-create .feature[data-tab="voices"] p');if(languageFeature)languageFeature.textContent='Hai mẫu nam/nữ Hmong và các giọng cá nhân đã thêm.';
@@ -257,3 +258,14 @@ function paintLogo(){const canvas=$('logo-canvas'),ctx=canvas.getContext('2d');c
 $('logo-frame').onclick=()=>{if(!dubSource){notify('Chọn video trước.',true);return;}const id=dubSource.id;const image=new Image();image.onload=()=>{if(dubSource?.id!==id)return;logoImage=image;logoVideoId=id;logoRect=null;const c=$('logo-canvas');c.width=image.naturalWidth;c.height=image.naturalHeight;c.hidden=false;paintLogo();};image.onerror=()=>notify('Không lấy được khung hình video.',true);image.src='/api/videos/'+id+'/frame?at='+encodeURIComponent($('editor-video')?.currentTime||Number($('editor-seek')?.value)||0);};
 function logoPoint(e){const c=$('logo-canvas'),r=c.getBoundingClientRect();return {x:Math.max(1,Math.min(c.width-2,Math.round((e.clientX-r.left)*c.width/r.width))),y:Math.max(1,Math.min(c.height-2,Math.round((e.clientY-r.top)*c.height/r.height)))};}
 $('logo-canvas').onpointerdown=e=>{logoStart=logoPoint(e);$('logo-canvas').setPointerCapture(e.pointerId);};$('logo-canvas').onpointermove=e=>{if(!logoStart)return;const p=logoPoint(e);logoRect={x:Math.min(p.x,logoStart.x),y:Math.min(p.y,logoStart.y),w:Math.abs(p.x-logoStart.x),h:Math.abs(p.y-logoStart.y)};paintLogo();};$('logo-canvas').onpointerup=()=>{logoStart=null;};
+
+$('hmong-test-selected-voice').onclick=async()=>{
+ const button=$('hmong-test-selected-voice'),voice=voices.find(v=>v.id===$('voice').value);
+ if(!isHmongStudio()||!voice){notify('Chọn giọng Nam, Nữ hoặc giọng cá nhân trước.',true);return;}
+ if(voice.ready===false){notify('Model chưa sẵn sàng. Mở tool bằng MO_VOICE_STUDIO_HMONG.bat để hoàn tất tải và kiểm tra model.',true);return;}
+ button.disabled=true;
+ try{
+  const job=await api('/api/speech',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:'Nyob zoo. Ua tsaug rau koj mloog.',voice_id:voice.id,language:'mww',format:'wav',speed:1,delivery:'natural',emotion:'neutral',emotion_strength:0,auto_rhythm:false,paragraph_pause:0,max_minutes:1,hmong_steps:hmongSteps()})});
+  $('help-dialog').close();showTab('create');activeOutputId=job.id;setOutput(job);pollJob(job.id);notify('Đang tạo câu kiểm tra bằng '+voice.name+'. Lời bạn đang soạn được giữ nguyên.');
+ }catch(error){notify(error.message,true);}finally{button.disabled=false;}
+};

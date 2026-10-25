@@ -7,12 +7,16 @@ gets a local SHA-256 manifest checked by the offline inference engine.
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 import hashlib
+import http.client
 import json
 import os
 from pathlib import Path
+import re
 import sys
 import tempfile
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -38,6 +42,88 @@ MODEL_REVISIONS = {
 
 class SetupError(RuntimeError):
     pass
+
+
+class _InterruptedDownload(SetupError):
+    pass
+
+
+DOWNLOAD_ATTEMPTS = 3
+DOWNLOAD_TIMEOUT = 60
+
+
+@contextmanager
+def _download_lock(destination):
+    """Two first-launch windows must not write the same resumable file."""
+    with destination.with_name(destination.name + ".download.lock").open("a+b") as handle:
+        if handle.tell() == 0:
+            handle.write(b"0")
+            handle.flush()
+        try:
+            if os.name == "nt":
+                import msvcrt
+                handle.seek(0)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+            else:
+                import fcntl
+                fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError:
+            raise SetupError("Một cửa sổ khác đang chuẩn bị " + destination.name
+                             + ". Giữ cửa sổ đó mở và chờ hoàn tất trước khi thử lại.") from None
+        try:
+            yield
+        finally:
+            if os.name == "nt":
+                handle.seek(0)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+
+
+def _retry_url(url, attempt):
+    # Re-resolve the SAME pinned upstream path instead of replaying an expired
+    # cached CDN redirect. TLS verification and final integrity checks stay on.
+    if not attempt:
+        return url
+    parts = urllib.parse.urlsplit(url)
+    query = urllib.parse.parse_qsl(parts.query, keep_blank_values=True)
+    query.append(("voice_studio_retry", str(time.time_ns())))
+    return urllib.parse.urlunsplit(parts._replace(query=urllib.parse.urlencode(query)))
+
+
+def _receive_model(response, temporary, size, offset):
+    status = getattr(response, "status", 200)
+    headers = getattr(response, "headers", {})
+    if status == 206:
+        match = re.fullmatch(r"bytes (\d+)-(\d+)/(\d+)", headers.get("Content-Range", ""))
+        if (match is None or int(match[1]) != offset or int(match[3]) != size
+                or not offset <= int(match[2]) < size):
+            raise SetupError("Máy chủ trả Content-Range không khớp; không nối tệp mô hình.")
+        response_size = int(match[2]) - offset + 1
+    elif status == 200:
+        # A server may ignore Range. Replace the partial rather than appending
+        # a complete response to its existing prefix.
+        offset, response_size = 0, size
+    else:
+        raise SetupError("Máy chủ trả HTTP không hợp lệ: " + str(status))
+    length = headers.get("Content-Length")
+    if length is not None and (not length.isdigit() or int(length) != response_size):
+        raise SetupError("Kích thước HTTP không khớp mô hình; chưa cài tệp này.")
+    with temporary.open("ab" if offset else "wb") as output:
+        total, last_report = offset, offset
+        while True:
+            block = response.read(1024 * 1024)
+            if not block:
+                break
+            total += len(block)
+            if total > offset + response_size or total > size:
+                raise SetupError("Tệp tải về lớn hơn metadata. Dừng để bảo vệ tính toàn vẹn.")
+            output.write(block)
+            if total - last_report >= 64 * 1024 * 1024:
+                print(f"  {temporary.name}: {total // (1024 ** 2)}/{size // (1024 ** 2)} MiB", flush=True)
+                last_report = total
+    if total != size:
+        raise _InterruptedDownload("Kết nối kết thúc khi mới tải " + str(total) + "/" + str(size) + " byte.")
 
 
 def _get_metadata(repository):
@@ -106,36 +192,60 @@ def _verified(path, size, sha256, blob):
 
 
 def _download(url, destination, size, sha256, blob):
-    existing = _verified(destination, size, sha256, blob)
-    if existing:
-        print("Đã xác minh, dùng lại:", destination.name, flush=True)
-        return existing
+    destination = Path(destination)
     destination.parent.mkdir(parents=True, exist_ok=True)
-    fd, temporary = tempfile.mkstemp(prefix=destination.name + ".", suffix=".part", dir=destination.parent)
-    temporary = Path(temporary)
-    try:
-        request = urllib.request.Request(url, headers={"User-Agent": "Hmoob-VoiceLab/1.0"})
-        with os.fdopen(fd, "wb") as output, urllib.request.urlopen(request, timeout=120) as response:
-            total = 0
-            last_report = 0
-            while True:
-                block = response.read(1024 * 1024)
-                if not block:
-                    break
-                total += len(block)
-                if total > size:
-                    raise SetupError("Tệp tải về lớn hơn metadata. Dừng để bảo vệ tính toàn vẹn.")
-                output.write(block)
-                if total - last_report >= 64 * 1024 * 1024:
-                    print(f"  {destination.name}: {total // (1024 ** 2)}/{size // (1024 ** 2)} MiB", flush=True)
-                    last_report = total
-        actual_sha = _verified(temporary, size, sha256, blob)
-        if actual_sha is None:
-            raise SetupError("Checksum/kích thước không khớp cho " + destination.name + "; không cài tệp này.")
-        temporary.replace(destination)
-        return actual_sha
-    finally:
-        temporary.unlink(missing_ok=True)
+    with _download_lock(destination):
+        existing = _verified(destination, size, sha256, blob)
+        if existing:
+            print("Đã xác minh, dùng lại:", destination.name, flush=True)
+            return existing
+        temporary = destination.with_name(destination.name + ".part")
+        for attempt in range(DOWNLOAD_ATTEMPTS):
+            offset = temporary.stat().st_size if temporary.is_file() else 0
+            if offset >= size:
+                complete = _verified(temporary, size, sha256, blob)
+                if complete:
+                    temporary.replace(destination)
+                    return complete
+                temporary.unlink()
+                offset = 0
+            headers = {"User-Agent": "Hmoob-VoiceLab/1.0", "Accept-Encoding": "identity"}
+            if offset:
+                headers["Range"] = "bytes=" + str(offset) + "-"
+                print(f"Tiếp tục tải {destination.name} từ {offset // (1024 ** 2)} MiB; kiểm tra SHA-256 khi đủ tệp.", flush=True)
+            if attempt:
+                headers["Cache-Control"] = "no-cache"
+            request = urllib.request.Request(_retry_url(url, attempt), headers=headers)
+            delay = attempt + 1
+            try:
+                with urllib.request.urlopen(request, timeout=DOWNLOAD_TIMEOUT) as response:
+                    _receive_model(response, temporary, size, offset)
+                actual_sha = _verified(temporary, size, sha256, blob)
+                if actual_sha is None:
+                    temporary.unlink(missing_ok=True)
+                    raise SetupError("Checksum/kích thước không khớp cho " + destination.name + "; không cài tệp này.")
+                temporary.replace(destination)
+                return actual_sha
+            except urllib.error.HTTPError as exc:
+                if exc.code not in {403, 408, 416, 429, 500, 502, 503, 504}:
+                    raise
+                if exc.code == 416:
+                    temporary.unlink(missing_ok=True)
+                retry_after = exc.headers.get("Retry-After", "") if exc.headers else ""
+                if retry_after.isdigit():
+                    delay = min(3, max(1, int(retry_after)))
+                detail = "HTTP " + str(exc.code)
+                exc.close()
+            except (urllib.error.URLError, ConnectionError, TimeoutError,
+                    http.client.IncompleteRead, _InterruptedDownload) as exc:
+                detail = str(exc)
+            if attempt + 1 == DOWNLOAD_ATTEMPTS:
+                saved = temporary.stat().st_size if temporary.is_file() else 0
+                raise SetupError(f"Chưa tải được {destination.name} sau {DOWNLOAD_ATTEMPTS} lần: {detail}. "
+                                 f"Đã giữ {saved} byte tải dở; mở lại tool để tiếp tục. "
+                                 "Nếu vẫn gặp 403, dùng mạng có quyền truy cập Hugging Face/CDN.") from None
+            print(f"Tải gián đoạn ({detail}). Giữ phần đã tải; tự thử lại {attempt + 2}/{DOWNLOAD_ATTEMPTS}...", flush=True)
+            time.sleep(delay)
 
 
 def install(root):

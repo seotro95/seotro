@@ -20,9 +20,10 @@ import sys
 import zipfile
 
 from build_windows import copy_runtime, download_verified_ffmpeg
+from fresh_hmong_portable import wave_evidence_bytes
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.6.0'
+VERSION = '1.6.1'
 ARCHIVE_NAME = f'Voice-Studio-Hmong-{VERSION}-Windows-x64.zip'
 
 
@@ -46,11 +47,14 @@ def copy_source(destination, source=SOURCE):
         if folder.is_symlink() or any(path.is_symlink() for path in folder.rglob('*')):
             raise ValueError('Linked application assets cannot be bundled')
         shutil.copytree(folder, destination / relative)
-    native_guide = source / 'docs/HMONG-NATIVE.md'
-    if native_guide.is_symlink() or native_guide.parent.is_symlink():
-        raise ValueError('Linked application documentation cannot be bundled')
     (destination / 'docs').mkdir()
-    shutil.copy2(native_guide, destination / 'docs/HMONG-NATIVE.md')
+    for relative in ('docs/HMONG-NATIVE.md', 'docs/HUONG-DAN-HMONG.md', 'docs/HUONG-DAN-HMONG.html'):
+        guide = source / relative
+        if guide.is_symlink() or guide.parent.is_symlink():
+            raise ValueError('Linked application documentation cannot be bundled')
+        if not guide.is_file() or not guide.stat().st_size:
+            raise ValueError('Required Hmong documentation is missing: ' + relative)
+        shutil.copy2(guide, destination / relative)
     # Only code/license files named in the checksum manifest are approved;
     # never sweep caches, downloaded checkpoints, or experiments into the ZIP.
     spec = importlib.util.spec_from_file_location('hmong_bundle_copy_check', SOURCE / 'bundle_check.py')
@@ -68,11 +72,11 @@ def copy_source(destination, source=SOURCE):
         shutil.copy2(vendor / relative, target)
     required = ('app.py', 'worker.py', 'bundle_check.py', 'runtime_instance.py', 'character_cast.py',
                 'longform.py', 'reference_quality.py', 'hmong_acceleration.py',
-                'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py',
+                'hmong_engine.py', 'hmong_expression.py', 'hmong_f5.py', 'hmong_health.py',
                 'hmong_native.py', 'hmong_native_models.py',
                 'hmong_reference.py', 'hmong_text.py', 'hmong_assets.py', 'prepare_hmong.py',
                 'prepare_hmong_native.py',
-                'hmong_launcher.py', 'studio_variant.py', 'HMONG-README.md', 'requirements-hmong.txt')
+                'hmong_launcher.py', 'voice_errors.py', 'studio_variant.py', 'HMONG-README.md', 'requirements-hmong.txt')
     for name in required:
         if not (destination / name).is_file():
             raise ValueError('Required Hmong application file is missing: ' + name)
@@ -168,16 +172,20 @@ def checked_run(command, *, environment, cwd, timeout=2400):
 
 
 def write_notices(root, model_manifest, qa_report):
-    notice = '''VOICE STUDIO HMONG 1.6.0 — WINDOWS X64
+    notice = '''VOICE STUDIO HMONG 1.6.1 — WINDOWS X64
 
 Chi tai MOT goi ZIP va giai nen TOAN BO. Mo MO_VOICE_STUDIO_HMONG.bat.
+HUONG DAN DAY DU: mo HUONG-DAN-HMONG.html cung thu muc bang trinh duyet.
+Khi tool da mo, bam Huong dan hoac truy cap /help/hmong trong giao dien.
 Tep mo chinh chon bo nhanh VITS Hmong + OpenVoice V2, khong vo tinh mo F5.
 Cong cu nang cao nam trong tools; tools/MO_F5_HMONG.bat mo F5 16 buoc FP32.
 Da kem Python, thu vien CPU, FFmpeg, hai MP3 nguon va cac doan tham chieu.
 LAN DAU CAN INTERNET: bo nhanh tai/kiem tra khoang 580 MB, F5 khoang 1,4 GB.
 Moi bo co manifest model rieng; khong can tai ca hai neu chi dung mot bo.
 Khong can API key. Sau khi chuan bi xong co the dung ngoai tuyen.
-tools/KIEM_TRA_HMONG.bat kiem tra tep/thu vien/model, khong tu tai model.
+tools/KIEM_TRA_HMONG.bat kiem tra tep/thu vien/model va phep tinh that, khong tai model.
+Chan doan tao voice that: MO_VOICE_STUDIO_HMONG.bat --test-voice
+Ket qua: voice-studio-hmong/.data/diagnostics/speech-check.json va hai WAV nam/nu.
 tools/install_hmong_cuda.bat la tuy chon CUDA rieng, khong bat buoc.
 Chua kiem chung suy luan CUDA hoac toc do GPU. Goi nay kiem thu CPU.
 
@@ -203,7 +211,7 @@ Chua ho tro nhan dang loi noi Hmong tu dong; nhap TXT/SRT hoac sua thu cong.
 Giu nguyen bo phat am Hmong ban da xac nhan; khong huan luyen model moi.
 Do giong giong khong bao dam 100%; muc tieu 1 gio voice trong 2 phut (30x)
 chua dat. Toc do tuy CPU/GPU. Khong co cai thien am hoc duoc tuyen bo.
-Hai MP3 nghe thu do bo nhanh tao nam trong reports, co du sau tu.
+Hai MP3 nghe thu va first-run-male.wav/first-run-female.wav nam trong reports.
 Thiet lap/checksum va thoi gian do tron quy trinh o NATIVE-VALIDATION.json. Bao cao
 loai khoang lang tool chen; do ngan khong chung minh toc do 1 gio.
 Bo F5 duoc kiem thu tuong thich rieng bang tao that 16 buoc FP32.
@@ -221,6 +229,7 @@ Xem MODEL-SOURCES.json va dieu khoan nha phat hanh truoc khi su dung model.
 Goi khong kem ho so giong, lich su, credential hoac ban thu rieng khac.
 '''
     (root / 'BAT-DAU.txt').write_text(notice, encoding='utf-8')
+    shutil.copy2(root / 'voice-studio-hmong/docs/HUONG-DAN-HMONG.html', root / 'HUONG-DAN-HMONG.html')
     (root / 'MODEL-SOURCES.json').write_text(json.dumps(model_manifest, ensure_ascii=False, indent=2), encoding='utf-8')
     (root / 'NATIVE-VALIDATION.json').write_text(json.dumps(qa_report, ensure_ascii=False, indent=2), encoding='utf-8')
 
@@ -228,7 +237,8 @@ Goi khong kem ho so giong, lich su, credential hoac ban thu rieng khac.
 def bundle_reports(root, reports):
     """Keep evidence and generated auditions inside the single user download."""
     root, reports = Path(root), Path(reports)
-    approved = ('native-smoke.json', 'f5-smoke.json', 'browser-smoke.json', 'model-sources.json',
+    approved = ('fresh-start.json', 'native-smoke.json', 'f5-smoke.json', 'browser-smoke.json', 'model-sources.json',
+                'first-run-male.wav', 'first-run-female.wav',
                 'Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3')
     destination = root / 'reports'
     destination.mkdir(parents=True, exist_ok=False)
@@ -340,6 +350,66 @@ def validate_native_feature_report(report):
     return report
 
 
+def validate_fresh_start_report(report):
+    """Prepared/offline smoke results cannot substitute for a user's first run."""
+    flags = ('success', 'native_windows_validation', 'actual_cmd_batch', 'initial_data_absent',
+             'missing_models_rejected_offline', 'models_prepared_from_empty_data')
+    if (any(report.get(key) is not True for key in flags)
+            or report.get('platform') != 'win32' or report.get('version') != VERSION
+            or report.get('prepared_models_reused') is not False
+            or report.get('external_model_cache_used') is not False):
+        raise ValueError('Fresh Windows QA must prepare native models from empty data without prepared model reuse')
+    script_hash = hashlib.sha256((SOURCE / 'packaging/fresh_hmong_portable.py').read_bytes().replace(b'\r\n', b'\n')).hexdigest()
+    if report.get('script_sha256') != script_hash:
+        raise ValueError('Fresh Windows QA does not match the reviewed first-run script')
+    expected_steps = [('--check', True, 1), ('--probe-runtime', True, 0),
+                      ('--setup-only', False, 0), ('--check', True, 0), ('--test-voice', True, 0)]
+    steps = report.get('steps', [])
+    if [(step.get('argument'), step.get('offline'), step.get('exit_code')) for step in steps] != expected_steps:
+        raise ValueError('Fresh Windows QA must reject missing models, probe, prepare, check and synthesize in order')
+    recovery = {'requested_device': 'cuda', 'requested_precision': 'int8',
+                'effective_device': 'cpu', 'effective_precision': 'fp32',
+                'fallback_notice': True, 'int8_notice': True, 'real_synthesis': True}
+    if (report.get('legacy_environment_recovery') != recovery
+            or steps[-1].get('environment_overrides') != {'HMOOB_DEVICE': 'cuda', 'HMOOB_PRECISION': 'int8'}
+            or 'Đang dùng bộ CPU để tạo giọng' not in steps[-1].get('output', '')
+            or 'Đã bỏ tùy chọn INT8 của F5 cũ' not in steps[-1].get('output', '')):
+        raise ValueError('Fresh Windows QA must recover inherited CUDA/INT8 settings and actually synthesize on CPU FP32')
+    runtime, speech = report.get('runtime_health', {}), report.get('speech_check', {})
+    required_runtime_checks = {'cpu-conv1d-numpy', 'wav-soxr-scipy-librosa',
+                               'import:hmong_native_vendor.vits.models',
+                               'import:hmong_native_vendor.openvoice.models',
+                               'import:hmong_native_vendor.watermark.models.my_model'}
+    if (runtime.get('ok') is not True or runtime.get('inference_tested') is not False
+            or runtime.get('kind') != 'runtime' or runtime.get('backend') != 'native'
+            or not runtime.get('checks') or any(check.get('ok') is not True for check in runtime['checks'])
+            or not required_runtime_checks.issubset({check.get('name') for check in runtime['checks']})
+            or speech.get('ok') is not True or speech.get('inference_tested') is not True
+            or speech.get('kind') != 'speech' or speech.get('backend') != 'native'
+            or speech.get('device') != 'cpu'
+            or speech.get('configuration', {}).get('precision') != 'fp32'):
+        raise ValueError('Fresh Windows QA must execute runtime math and real speech diagnostics')
+    expected = expected_reference_fingerprints()
+    voices, measured = speech.get('voices', []), report.get('independently_verified_voices', [])
+    for collection in (voices, measured):
+        if {item.get('id') for item in collection} != set(expected) or len(collection) != 2:
+            raise ValueError('Fresh Windows QA must synthesize and independently measure both default voices')
+        for item in collection:
+            if (item.get('reference_fingerprint') != expected[item['id']]
+                    or item.get('sample_rate') != 24000 or item.get('channels') != 1
+                    or item.get('frames', 0) < 8000 or item.get('duration_seconds', 0) < 1 / 3
+                    or item.get('peak', 0) <= .001 or item.get('rms', 0) <= .00001
+                    or not re.fullmatch(r'[a-f0-9]{64}', item.get('output_sha256', ''))):
+                raise ValueError('Fresh Windows speech must match the selected reference and contain real non-silent audio')
+    if ({item['id']: item['output_sha256'] for item in voices}
+            != {item['id']: item['output_sha256'] for item in measured}):
+        raise ValueError('Fresh Windows diagnostic WAV hashes do not match the independent measurements')
+    for key in ('runtime_python_sha256', 'model_manifest_sha256'):
+        if not re.fullmatch(r'[a-f0-9]{64}', report.get(key, '')):
+            raise ValueError('Fresh Windows QA lacks runtime or prepared-model identity')
+    return report
+
+
 def validate_release_archive(archive):
     """Publication gate reads evidence from the single ZIP being uploaded."""
     prefix = f'Voice-Studio-Hmong-{VERSION}/'
@@ -349,7 +419,7 @@ def validate_release_archive(archive):
         names = bundle.namelist()
         if any(not name.startswith(prefix) or '/.data/' in name for name in names):
             raise ValueError('Release archive has an unexpected root or contains QA/personal data')
-        for module in ('character_cast.py', 'longform.py', 'reference_quality.py'):
+        for module in ('character_cast.py', 'longform.py', 'reference_quality.py', 'hmong_health.py', 'voice_errors.py'):
             if not bundle.read(prefix + 'voice-studio-hmong/' + module):
                 raise ValueError('Release archive lacks a required 1.6 runtime module: ' + module)
         application_batches = {name[len(prefix):] for name in names
@@ -363,6 +433,40 @@ def validate_release_archive(archive):
         def read_json(relative):
             return json.loads(bundle.read(prefix + relative))
         build = read_json('BUILD.json')
+        fresh = validate_fresh_start_report(read_json('reports/fresh-start.json'))
+        for voice in fresh['independently_verified_voices']:
+            name = 'first-run-' + voice['id'].removeprefix('hmong-') + '.wav'
+            measured = wave_evidence_bytes(bundle.read(prefix + 'reports/' + name), name)
+            if (measured['output_sha256'] != voice['output_sha256']
+                    or measured['frames'] != voice['frames']):
+                raise ValueError('The bundled first-run diagnostic speech differs from the tested WAV')
+        if (build.get('fresh_windows_first_run_validation') is not True
+                or build.get('runtime_python_sha256') != fresh['runtime_python_sha256']
+                or hashlib.sha256(bundle.read(prefix + 'runtime/python.exe')).hexdigest() != fresh['runtime_python_sha256']):
+            raise ValueError('Release archive lacks the exact runtime tested from empty Windows data')
+        sources = build.get('application_sha256', {})
+        for required in ('hmong_launcher.py', 'hmong_health.py', 'voice_errors.py', 'prepare_hmong.py',
+                         'hmong_native.py', 'docs/HUONG-DAN-HMONG.md', 'docs/HUONG-DAN-HMONG.html'):
+            if required not in sources:
+                raise ValueError('Release archive lacks a required source checksum: ' + required)
+        for relative, expected in sources.items():
+            if ('..' in relative.split('/') or relative.startswith('/') or '\\' in relative
+                    or not re.fullmatch(r'[a-f0-9]{64}', expected)):
+                raise ValueError('Invalid release source checksum entry')
+            raw = bundle.read(prefix + 'voice-studio-hmong/' + relative)
+            if hashlib.sha256(raw).hexdigest() != expected:
+                raise ValueError('Release application checksum mismatch: ' + relative)
+            source = SOURCE / {'README.md': 'HMONG-README.md',
+                               'requirements.txt': 'requirements-hmong.txt'}.get(relative, relative)
+            if source.is_file() and hashlib.sha256(raw.replace(b'\r\n', b'\n')).digest() != hashlib.sha256(source.read_bytes().replace(b'\r\n', b'\n')).digest():
+                raise ValueError('Release application differs from the reviewed source: ' + relative)
+        app_prefix = prefix + 'voice-studio-hmong/'
+        if any(name.startswith(app_prefix) and not name.endswith('/')
+               and name[len(app_prefix):] not in sources for name in names):
+            raise ValueError('Release application contains files outside the approved source manifest')
+        guide = bundle.read(prefix + 'voice-studio-hmong/docs/HUONG-DAN-HMONG.html')
+        if bundle.read(prefix + 'HUONG-DAN-HMONG.html') != guide:
+            raise ValueError('The root full guide differs from the in-app full guide')
         browser = validate_browser_report(read_json('reports/browser-smoke.json'))
         native, f5 = read_json('reports/native-smoke.json'), read_json('reports/f5-smoke.json')
         validate_native_feature_report(native)
@@ -415,7 +519,7 @@ def main():
     args = parser.parse_args()
     if args.validate_archive:
         validate_release_archive(args.validate_archive)
-        print('PASS: single ZIP, real Windows browser synthesis, native/F5 and duplicate-launch evidence.')
+        print('PASS: single ZIP, empty-data Windows first-run preparation/runtime/speech, browser, native/F5 and duplicate-launch evidence.')
         return
     if args.output is None or args.reports is None:
         parser.error('--output and --reports are required when building')
@@ -431,6 +535,8 @@ def main():
     reports.mkdir(parents=True, exist_ok=True)
     app = root / 'voice-studio-hmong'
     copy_source(app)
+    application_sha256 = {path.relative_to(app).as_posix(): sha256(path)
+                          for path in sorted(app.rglob('*')) if path.is_file()}
     if args.ffmpeg_source:
         ffmpeg_source = args.ffmpeg_source.resolve()
         for relative in ('bin/ffmpeg.exe', 'bin/ffprobe.exe', 'UPSTREAM-SHA256.txt'):
@@ -443,6 +549,11 @@ def main():
         download_verified_ffmpeg(root / 'ffmpeg', root.parent / 'downloads')
     copy_runtime(args.runtime_source.resolve() if args.runtime_source else Path(sys.base_prefix), root / 'runtime')
     write_launcher(root)
+    # This gate runs before either backend's existing prepared/offline smoke.
+    # It must exercise an unprepared user download, not restore models from QA.
+    checked_run([root / 'runtime/python.exe', SOURCE / 'packaging/fresh_hmong_portable.py', root, reports],
+                environment=build_environment(root, offline=False, backend='native'), cwd=app, timeout=3600)
+    fresh_report = validate_fresh_start_report(json.loads((reports / 'fresh-start.json').read_text(encoding='utf-8')))
     environment = build_environment(root, offline=False)
     checked_run([root / 'runtime/python.exe', app / 'hmong_launcher.py', '--setup-only'],
                 environment=environment, cwd=app)
@@ -494,11 +605,12 @@ def main():
                                     cwd=app, env=build_environment(root, offline=True, backend=backend), timeout=180)
         if empty_check.returncode != 1:
             raise RuntimeError('Offline check must report missing first-run models without downloading: ' + backend)
-    if any(path.is_file() for path in (app / '.data').rglob('*')):
-        raise RuntimeError('Stripped offline checks unexpectedly created data or model files')
+    if any(path.is_file() for path in (app / '.data/models').rglob('*')):
+        raise RuntimeError('Stripped offline checks unexpectedly created model files')
     if (app / '.data').exists():
         shutil.rmtree(app / '.data')
     qa_report['stripped_package_offline_check'] = True
+    qa_report['fresh_windows_first_run'] = fresh_report
     (reports / 'native-smoke.json').write_text(json.dumps(qa_report, ensure_ascii=False, indent=2), encoding='utf-8')
     write_notices(root, model_manifest, qa_report)
     bundle_reports(root, reports)
@@ -507,6 +619,10 @@ def main():
     build = {'version': VERSION, 'variant': 'hmong', 'python': sys.version,
              'commit': os.environ.get('GITHUB_SHA'), 'platform': 'windows-x64',
              'native_windows_validation': True, 'relocated_runtime_tested': True,
+             'fresh_windows_first_run_validation': True,
+             'fresh_windows_first_run_script_sha256': fresh_report['script_sha256'],
+             'runtime_python_sha256': fresh_report['runtime_python_sha256'],
+             'application_sha256': application_sha256,
              'duplicate_launch_reused': True, 'empty_windows_lock_validated': True,
              'stale_instance_metadata_recovered': True,
              'models_included': False, 'first_run_model_download_required': True,
@@ -537,6 +653,8 @@ def main():
              'validated_presets': ['hmong-female', 'hmong-male'],
              'validation_workflow_run': os.environ.get('GITHUB_RUN_ID')}
     (root / 'BUILD.json').write_text(json.dumps(build, ensure_ascii=False, indent=2), encoding='utf-8')
+    for cache in app.rglob('__pycache__'):
+        shutil.rmtree(cache)
     destination = root.parent / ARCHIVE_NAME
     digest = archive_package(root, destination)
     validate_release_archive(destination)
