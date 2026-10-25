@@ -405,10 +405,9 @@ def main():
                 'wall_seconds': round(time.monotonic() - started, 3)}
         results['clone'] = True
 
-        # A different long file needs an explicit excerpt and matching words.
-        # Prefix supplied speech with one second of silence and shift the
-        # manifest's reference bounds by the same amount. Keep the complete
-        # supplied MP3 for previews, including any silence outside the excerpt.
+        # Native can suggest a signal interval without inventing words. Also
+        # retain the explicit crop check with known words below; the separate
+        # F5 path continues to require its exact transcript.
         female = voice_metadata['female']
         source = app_root / 'assets/hmong' / female['file']
         manual_start = 1 + female['reference']['start']
@@ -421,8 +420,32 @@ def main():
         assert hashlib.sha256(altered).hexdigest() not in {v['sha256'] for v in voice_metadata.values()}
         fields = {'name': 'Native QA manual crop', 'language': 'mww', 'consent': 'true'}
         files = {'file': ('different-long.wav', altered, 'audio/wav')}
-        missing = client.post('/api/voices/clone', data=fields, files=files)
-        assert missing.status_code == 422, 'Unknown long audio must not guess words or reference bounds'
+        suggested = client.post('/api/voices/clone', data=fields, files=files)
+        assert suggested.status_code == 201, suggested.text
+        automatic = suggested.json()
+        assert automatic['known_preset'] is None and automatic['transcript'] == ''
+        assert automatic['automatic_selection'] is True
+        assert automatic['reference_selection_source'] == 'signal_energy'
+        assert automatic['reference_conditioning'] == 'audio'
+        assert automatic['source_sha256'] == hashlib.sha256(altered).hexdigest()
+        assert 0 <= automatic['reference_start'] < automatic['reference_end'] <= automatic['source_duration']
+        assert 3 <= automatic['duration'] <= 8.001
+        selected_audio = (app.DATA / 'voices' / (automatic['id'] + '.wav')).read_bytes()
+        selected_sha = hashlib.sha256(selected_audio).hexdigest()
+        expected_identity = hashlib.sha256(json.dumps({'version': 1,
+            'audio_sha256': selected_sha, 'transcript': ''}, ensure_ascii=False,
+            sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()
+        automatic_job = render(client, {'text': 'Nyob zoo. Ua tsaug.', 'language': 'mww',
+                                       'voice_id': automatic['id'], 'format': 'wav', 'paragraph_pause': 0})
+        assert automatic_job['speaker'] is None and automatic_job['voice_id'] == automatic['id']
+        assert automatic_job['hmong_reference_fingerprint'] == expected_identity
+        results['automatic_reference_selection'] = {'success': True, 'real_synthesis': True,
+            'job_id': automatic_job['id'], 'voice_id': automatic['id'],
+            'source_sha256': automatic['source_sha256'], 'reference_audio_sha256': selected_sha,
+            'hmong_reference_fingerprint': expected_identity,
+            'reference_start': automatic['reference_start'], 'reference_end': automatic['reference_end'],
+            'reference_seconds': automatic['duration'], 'reference_conditioning': 'audio',
+            'transcript': '', 'default_fallback': False, 'audio_seconds': automatic_job['audio_seconds']}
         fields.update(transcript=female['reference']['text'], reference_start=str(manual_start),
                       reference_end=str(manual_end))
         response = client.post('/api/voices/clone', data=fields, files=files)
