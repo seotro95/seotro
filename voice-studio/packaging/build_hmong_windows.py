@@ -23,7 +23,7 @@ from build_windows import copy_runtime, download_verified_ffmpeg
 from fresh_hmong_portable import wave_evidence_bytes
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.6.3'
+VERSION = '1.6.4'
 ARCHIVE_NAME = f'Voice-Studio-Hmong-{VERSION}-Windows-x64.zip'
 
 
@@ -172,7 +172,7 @@ def checked_run(command, *, environment, cwd, timeout=2400):
 
 
 def write_notices(root, model_manifest, qa_report):
-    notice = '''VOICE STUDIO HMONG 1.6.3 — WINDOWS X64
+    notice = '''VOICE STUDIO HMONG 1.6.4 — WINDOWS X64
 
 Chi tai MOT goi ZIP va giai nen TOAN BO. Mo MO_VOICE_STUDIO_HMONG.bat.
 HUONG DAN DAY DU: mo HUONG-DAN-HMONG.html cung thu muc bang trinh duyet.
@@ -181,7 +181,9 @@ Bam Tao giong gap loi: xem thong bao ngay canh nut va khu vuc ket qua.
 Ban nhap duoc giu de sua; loi tai danh sach giong co nut Thu lai.
 Tep mo chinh chon bo nhanh VITS Hmong + OpenVoice V2, khong vo tinh mo F5.
 Cong cu nang cao nam trong tools; tools/MO_F5_HMONG.bat mo F5 16 buoc FP32.
-Da kem Python, thu vien CPU, FFmpeg, hai MP3 nguon va cac doan tham chieu.
+Da kem Python, thu vien CPU, FFmpeg, bon MP3 nguon va cac doan tham chieu.
+Them Ngoc Huyen nang cao va Hmong nu 3; mo moi chon Hmong nu 3.
+SRT tao giong chi doc loi mac dinh; bat Giu moc thoi gian khi can can video.
 LAN DAU CAN INTERNET: bo nhanh tai/kiem tra khoang 580 MB, F5 khoang 1,4 GB.
 Moi bo co manifest model rieng; khong can tai ca hai neu chi dung mot bo.
 Khong can API key. Sau khi chuan bi xong co the dung ngoai tuyen.
@@ -261,6 +263,13 @@ def expected_reference_fingerprints():
     assets = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(assets)
     return {ident: assets.reference_fingerprint(ident) for ident in ('hmong-male', 'hmong-female')}
+
+
+def expected_additional_reference_fingerprints():
+    spec = importlib.util.spec_from_file_location('hmong_additional_browser_reference_check', SOURCE / 'hmong_assets.py')
+    assets = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(assets)
+    return {ident: assets.reference_fingerprint(ident) for ident in ('hmong-ngoc-huyen', 'hmong-female-3')}
 
 
 def validate_browser_report(report):
@@ -392,6 +401,70 @@ def validate_browser_report(report):
     if (playback.get('ready_state', 0) < 2 or playback.get('media_error') is not None
             or playback.get('current_time', 0) <= .05 or playback.get('duration', 0) <= 1 / 3):
         raise ValueError('Browser must decode and play the externally cloned Hmong speech')
+    additional_expected = expected_additional_reference_fingerprints()
+    if (report.get('initial_voice_id') != 'hmong-female-3'
+            or report.get('expected_additional_reference_fingerprints') != additional_expected):
+        raise ValueError('Browser QA must start with the new Hmong female 3 default and pinned additional references')
+    additional = report.get('additional_presets')
+    if not isinstance(additional, dict) or set(additional) != set(additional_expected):
+        raise ValueError('Browser QA must generate both newly supplied native voices')
+    metadata = json.loads((SOURCE / 'assets/hmong/additional-voices.json').read_text(encoding='utf-8'))
+    used_jobs = {clone['job_id'], caption['job_id'], *(item['job_id'] for item in cases)}
+    for ident, added in additional.items():
+        if (any(added.get(key) is not True for key in ('success', 'real_ui_post',
+                'original_text_preserved', 'audio_playback_checked', 'download_verified',
+                'no_transcript', 'preset_button_checked', 'full_source_preview_checked'))
+                or added.get('case') != 'additional_preset_' + ident
+                or added.get('voice_id') != ident or added.get('post_voice_id') != ident
+                or added.get('speaker') != ident or added.get('engine') != 'hmong_native'
+                or added.get('reference_conditioning') != 'audio'
+                or added.get('hmong_reference_fingerprint') != additional_expected[ident]
+                or added.get('source_sha256') != metadata[ident]['sha256']
+                or added.get('reference_audio_sha256') != metadata[ident]['reference_sha256']
+                or added.get('status') != 'done' or not added.get('job_id')
+                or added['job_id'] in used_jobs
+                or added.get('audio_bytes', 0) <= 1000 or not 1 / 3 < added.get('audio_seconds', 0) < 30
+                or added.get('sample_rate') != 24000 or added.get('sample_width') != 2
+                or added.get('peak_amplitude', 0) <= .001
+                or not re.fullmatch(r'[a-f0-9]{64}', added.get('sha256', ''))):
+            raise ValueError('Additional native voice proof must use its exact supplied source and reference audio')
+        playback = added.get('playback', {})
+        if (playback.get('ready_state', 0) < 2 or playback.get('media_error') is not None
+                or playback.get('current_time', 0) <= .05 or playback.get('duration', 0) <= 1 / 3):
+            raise ValueError('Browser must decode and play both new native voices')
+        used_jobs.add(added['job_id'])
+    spoken = report.get('srt_speech_only', {})
+    source_217 = '"217\n00:06:07,200 --> 00:06:08,400\nTae-yong cov ntaub ntawv tus kheej "'
+    if (any(spoken.get(key) is not True for key in ('success', 'real_ui_post',
+            'original_text_preserved', 'audio_playback_checked', 'download_verified',
+            'generated_timing_checked', 'timestamps_not_spoken', 'cue_indices_not_spoken',
+            'continuous_srt_duration'))
+            or spoken.get('case') != 'quoted_217_srt_speech_only'
+            or spoken.get('input_format') != 'srt' or spoken.get('subtitle_timing') is not False
+            or spoken.get('text') != source_217
+            or spoken.get('exported_spoken_text') != 'Tae-yong cov ntaub ntawv tus kheej'
+            or spoken.get('voice_id') != 'hmong-male' or spoken.get('post_voice_id') != 'hmong-male'
+            or spoken.get('speaker') != 'hmong-male' or spoken.get('engine') != 'hmong_native'
+            or spoken.get('hmong_reference_fingerprint') != expected['hmong-male']
+            or spoken.get('status') != 'done' or not spoken.get('job_id') or spoken['job_id'] in used_jobs
+            or spoken.get('audio_bytes', 0) <= 1000 or not 1 / 3 < spoken.get('audio_seconds', 0) < 30
+            or spoken.get('sample_rate') != 24000 or spoken.get('sample_width') != 2
+            or spoken.get('peak_amplitude', 0) <= .001
+            or not re.fullmatch(r'[a-f0-9]{64}', spoken.get('sha256', ''))):
+        raise ValueError('Browser QA must read only the words of the exact quoted 217 SRT without timeline silence')
+    generated = spoken.get('generated_srt', '').replace('\r\n', '\n')
+    clocks = re.findall(r'(\d{2}):(\d{2}):(\d{2}),(\d{3})', generated)
+    if (not generated.startswith('1\n00:00:00,000 --> ') or len(clocks) < 2
+            or '00:06:07,200' in generated or '217\n' in generated):
+        raise ValueError('Spoken-only SRT exports need actual generated audio timing')
+    last = tuple(map(int, clocks[-1]))
+    end = last[0] * 3600 + last[1] * 60 + last[2] + last[3] / 1000
+    if not 0 < end <= spoken['audio_seconds'] + .01:
+        raise ValueError('Spoken-only SRT export exceeds generated audio')
+    playback = spoken.get('playback', {})
+    if (playback.get('ready_state', 0) < 2 or playback.get('media_error') is not None
+            or playback.get('current_time', 0) <= .05 or playback.get('duration', 0) <= 1 / 3):
+        raise ValueError('Browser must decode and play the exact spoken-only 217 excerpt')
     features = report.get('features_1_6', {})
     longform, cast = features.get('longform', {}), features.get('character_cast', {})
     if (any(longform.get(key) is not True for key in ('success', 'million_character_editor',
@@ -532,7 +605,10 @@ def validate_release_archive(archive):
             raise ValueError('Release archive lacks the exact runtime tested from empty Windows data')
         sources = build.get('application_sha256', {})
         for required in ('hmong_launcher.py', 'hmong_health.py', 'voice_errors.py', 'caption_markers.py', 'prepare_hmong.py',
-                         'hmong_native.py', 'docs/HUONG-DAN-HMONG.md', 'docs/HUONG-DAN-HMONG.html'):
+                         'hmong_native.py', 'static/text-import.js', 'assets/hmong/additional-voices.json',
+                         'assets/hmong/source-ngoc-huyen.mp3', 'assets/hmong/ngoc-huyen.wav',
+                         'assets/hmong/source-female-3.mp3', 'assets/hmong/female-3.wav',
+                         'docs/HUONG-DAN-HMONG.md', 'docs/HUONG-DAN-HMONG.html'):
             if required not in sources:
                 raise ValueError('Release archive lacks a required source checksum: ' + required)
         for relative, expected in sources.items():
@@ -730,6 +806,10 @@ def main():
              'character_cast_validation': True, 'longform_chapter_archive_validation': True,
              'million_character_synthesis_validated': False,
              'browser_validated_presets': sorted(browser_report['voices']),
+             'additional_validated_presets': sorted(browser_report['additional_presets']),
+             'additional_reference_conditioning': 'audio',
+             'srt_speech_only_validation': browser_report['srt_speech_only']['success'],
+             'initial_default_voice_id': browser_report['initial_voice_id'],
              'browser_qa_script': 'voice-studio/packaging/browser_hmong_portable.py',
              'browser_qa_script_sha256': browser_report['script_sha256'],
              'default_delivery': 'story', 'default_emotion': 'warm',

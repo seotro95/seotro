@@ -1,10 +1,10 @@
-# Bộ đọc Hmong nhanh thử nghiệm · Voice Studio Hmong 1.6.3
+# Bộ đọc Hmong nhanh thử nghiệm · Voice Studio Hmong 1.6.4
 
-Lựa chọn này dùng **VITS để tạo lời Hmong**, sau đó dùng **OpenVoice V2 để chuyển chất giọng theo mẫu đã chọn**. Đây là bộ mặc định của tệp mở chính trong gói Windows 1.6.3; F5 vẫn có trong công cụ nâng cao. Chuyển chất giọng không bảo đảm sửa phát âm, thanh điệu, độ giống người nói hay cảm xúc như người thật. Giữ nguyên bộ phát âm Hmong bạn đã xác nhận. Mục tiêu một giờ lời đọc trong hai phút (30×) chưa đạt; chưa có phép đo GPU, và bản này không huấn luyện mô hình phát âm mới.
+Lựa chọn này dùng **VITS để tạo lời Hmong**, sau đó dùng **OpenVoice V2 để chuyển chất giọng theo mẫu đã chọn**. Đây là bộ mặc định của tệp mở chính trong gói Windows 1.6.4; F5 vẫn có trong công cụ nâng cao. Chuyển chất giọng không bảo đảm sửa phát âm, thanh điệu, độ giống người nói hay cảm xúc như người thật. Giữ nguyên bộ phát âm Hmong bạn đã xác nhận. Mục tiêu một giờ lời đọc trong hai phút (30×) chưa đạt; chưa có phép đo GPU, và bản này không huấn luyện mô hình phát âm mới.
 
 ## Chọn bộ đọc
 
-Trong gói Windows 1.6.3, đóng tool đang chạy rồi mở **`MO_VOICE_STUDIO_HMONG.bat`** ở ngoài cùng. Giao diện phải ghi **Hmong nhanh thử nghiệm**. Công cụ **`tools/MO_F5_HMONG.bat`** mở F5 để nghe so sánh. Đổi bộ mở rồi tạo tác vụ mới để nghe so sánh; không nối các đoạn của một bài đang dở bằng bộ khác.
+Trong gói Windows 1.6.4, đóng tool đang chạy rồi mở **`MO_VOICE_STUDIO_HMONG.bat`** ở ngoài cùng. Giao diện phải ghi **Hmong nhanh thử nghiệm**. Công cụ **`tools/MO_F5_HMONG.bat`** mở F5 để nghe so sánh. Đổi bộ mở rồi tạo tác vụ mới để nghe so sánh; không nối các đoạn của một bài đang dở bằng bộ khác.
 
 Hai bộ đọc dùng cùng mẫu **hmong nam 2.MP3** và bản nữ rút gọn **hmong nữ 2(1).MP3**, cùng lời Hmong do bạn xác nhận. Hồ sơ giọng và lịch sử được giữ. Bộ mới tạo lời trước rồi chuyển chất giọng; mẫu ngắn không huấn luyện lại một mô hình phát âm Hmong riêng.
 
@@ -26,7 +26,7 @@ Dòng `00:04:28,533 --> 00:04:29,333` được hiểu là khoảng thời gian 0
 
 ## Kịch bản dài và nhiều nhân vật
 
-TXT Hmong của bản 1.6.3 nhận tối đa một triệu ký tự, trên 20.000 ký tự tự lập chương/phần để xuất ZIP; chế độ này không ghép video hoặc chia chương SRT. SRT hỗ trợ gán giọng Hmong theo nhân vật ở từng cue; tên nhân vật không trở thành lời đọc. Bộ nhanh giữ tối đa 16 mẫu tham chiếu gần dùng theo thứ tự LRU, loại mẫu ít dùng nhất khi đầy và dùng chung model đã nạp. Bộ đệm chỉ tránh tính lại tham chiếu khi đổi giọng; không xác nhận tốc độ cố định, phát âm hay độ giống giọng tốt hơn. Tạo bài dài vẫn cần đủ thời gian và dung lượng, và nên nghe thử trước khi tạo toàn bộ.
+TXT Hmong của bản 1.6.4 nhận tối đa một triệu ký tự, trên 20.000 ký tự tự lập chương/phần để xuất ZIP; chế độ này không ghép video hoặc chia chương SRT. SRT hỗ trợ gán giọng Hmong theo nhân vật ở từng cue; tên nhân vật không trở thành lời đọc. Bộ nhanh giữ tối đa 16 mẫu tham chiếu gần dùng theo thứ tự LRU, loại mẫu ít dùng nhất khi đầy và dùng chung model đã nạp. Bộ đệm chỉ tránh tính lại tham chiếu khi đổi giọng; không xác nhận tốc độ cố định, phát âm hay độ giống giọng tốt hơn. Tạo bài dài vẫn cần đủ thời gian và dung lượng, và nên nghe thử trước khi tạo toàn bộ.
 
 ## Chạy từ mã nguồn
 
@@ -59,3 +59,12 @@ Báo cáo tốc độ cần tính toàn bộ thời gian tạo lời, chuyển c
 Nguồn trọng số VITS Hmong là [leejnus/HmongTTS](https://huggingface.co/spaces/leejnus/HmongTTS); nguồn mã VITS là [jaywalnut310/vits](https://github.com/jaywalnut310/vits), nguồn OpenVoice V2 là [MyShell OpenVoice](https://github.com/myshell-ai/OpenVoice). Các tệp mô hình cần thiết, revision và SHA256 được ghi cụ thể trong `hmong_native_models.py` và được tải bằng `prepare_hmong_native.py`, gồm cả thành phần WavMark của bộ chuyển giọng. Nguồn và giấy phép mã được lưu trong `hmong_native_vendor/UPSTREAM.json` cùng các tệp giấy phép. Quá trình chuẩn bị không tắt TLS hoặc bỏ kiểm tra checksum để vượt lỗi tải.
 
 **Trọng số không được đóng trong ZIP.** Kho Hmong VITS chưa nêu giấy phép rõ ràng cho trọng số; giấy phép của OpenVoice hoặc mã ứng dụng không tự cấp quyền cho mô hình Hmong đó. Cần kiểm tra điều kiện của từng nguồn trước khi phân phối lại hay sử dụng thương mại. Tải thành công và checksum đúng chỉ xác nhận đúng tệp, không xác nhận quyền sử dụng hoặc phát âm chuẩn.
+
+
+## Giọng có sẵn và SRT chỉ đọc lời trong 1.6.4
+
+Native có thêm `hmong-female-3` và `hmong-ngoc-huyen`, lấy từ hai MP3 người dùng gửi, với WAV tham chiếu PCM16 mono 24 kHz 7,44/7,78 giây. `additional-voices.json` ghi SHA nguồn, SHA đoạn mẫu và gain cố định. MP3 gốc giữ nguyên. Không có transcript được xác nhận cho hai mẫu này; tham chiếu chỉ điều kiện âm thanh, không tự tạo lời. Hai mẫu chỉ hiện với Native; bộ F5 giữ hai giọng có lời Hmong đã xác nhận trước đó.
+
+`subtitle_timing=False` cho SRT độc lập giữ nguồn nguyên bản nhưng chỉ tạo lời liên tục, xuất SRT theo âm thanh thực. Mặc định API/worker cũ vẫn căn mốc; giao diện tạo giọng Hmong chủ động chọn đọc lời. Lồng tiếng video và phân vai yêu cầu giữ mốc. Lựa chọn mặc định được lưu riêng với snapshot tác vụ: đổi mặc định không đổi giọng của tác vụ đã xếp hàng.
+
+Nhân bản Native gợi ý cửa sổ có năng lượng tiếng nói 3–8 giây trong bản thu 3–30 giây, không nhận dạng ngôn ngữ/lời hay chứng nhận độ giống. Decode được kiểm tra ở float trước khi giảm gain và chuyển PCM16 để tránh tự tạo clipping; tệp nguồn người dùng không bị thay. Các mẫu mặc định nhận diện bằng SHA dùng đúng WAV đã kiểm chứng khi nhập lại chính nguồn đó.

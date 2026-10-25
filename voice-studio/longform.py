@@ -107,8 +107,13 @@ def _digest(value):
 
 
 def plan_identity(job, chapters):
+    settings = {key: job.get(key) for key in _SETTINGS}
+    # Explicit speech-only subtitle work must not share a timed plan. Omitted
+    # or True retains previous identities, including all legacy TXT chapters.
+    if job.get('input_format') == 'srt' and job.get('subtitle_timing', True) is False:
+        settings['subtitle_timing'] = False
     return _digest({'version': VERSION, 'text': job['text'],
-                    'settings': {key: job.get(key) for key in _SETTINGS},
+                    'settings': settings,
                     'chapters': [[asdict(segment) for segment in chapter.segments]
                                  for chapter in chapters]})
 

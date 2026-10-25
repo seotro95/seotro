@@ -34,9 +34,11 @@ def source_fixture(root):
     for name in ('README.md', 'requirements.txt', 'requirements-qwen.txt', 'requirements-tested.txt',
                  'install.bat', 'start.bat', 'download_models.bat', 'VALIDATION.md'):
         (root / name).write_text('unrelated Vietnamese environment\n', encoding='utf-8')
-    for name in ('docs/HMONG-NATIVE.md', 'docs/HUONG-DAN-HMONG.md', 'docs/HUONG-DAN-HMONG.html', 'static/app.js', 'assets/hmong/female.wav', 'assets/hmong/male.wav',
+    for name in ('docs/HMONG-NATIVE.md', 'docs/HUONG-DAN-HMONG.md', 'docs/HUONG-DAN-HMONG.html', 'static/app.js', 'static/text-import.js', 'assets/hmong/female.wav', 'assets/hmong/male.wav',
                  'assets/hmong/source-female.mp3', 'assets/hmong/source-male.mp3',
-                 'assets/hmong/voices.json', '.data/voices/personal.wav',
+                 'assets/hmong/voices.json', 'assets/hmong/additional-voices.json',
+                 'assets/hmong/source-ngoc-huyen.mp3', 'assets/hmong/ngoc-huyen.wav',
+                 'assets/hmong/source-female-3.mp3', 'assets/hmong/female-3.wav', '.data/voices/personal.wav',
                  '.data/models/private.bin', '.venv/Lib/private.py', 'assets/private.wav', '.env'):
         path = root / name
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -66,6 +68,10 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
     assert (output / 'assets/hmong/male.wav').is_file()
     assert (output / 'assets/hmong/source-female.mp3').is_file()
     assert (output / 'assets/hmong/source-male.mp3').is_file()
+    for name in ('additional-voices.json', 'source-ngoc-huyen.mp3', 'ngoc-huyen.wav',
+                 'source-female-3.mp3', 'female-3.wav'):
+        assert (output / 'assets/hmong' / name).is_file()
+    assert (output / 'static/text-import.js').is_file()
     assert not (output / '.data').exists()
     assert not (output / '.venv').exists()
     assert not (output / '.env').exists()
@@ -93,7 +99,7 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
 
 
 def test_archive_has_valid_crc_and_matching_sha256(tmp_path):
-    root = tmp_path / 'Voice-Studio-Hmong-1.6.3'
+    root = tmp_path / 'Voice-Studio-Hmong-1.6.4'
     root.mkdir()
     (root / 'hello.txt').write_bytes(b'relocatable')
     archive = tmp_path / 'bundle.zip'
@@ -199,12 +205,34 @@ def browser_report_fixture():
              'hmong_reference_fingerprint': clone_identity, 'default_fallback': False,
              'text': 'Nyob zoo. Ua tsaug rau koj mloog.',
              'perceptual_similarity_evaluated': False}
+    additional_expected = packaging.expected_additional_reference_fingerprints()
+    metadata = json.loads((PACKAGING.parent / 'assets/hmong/additional-voices.json').read_text(encoding='utf-8'))
+    additional = {ident: {**copy.deepcopy(cases[0]),
+        'case': 'additional_preset_' + ident, 'voice_id': ident, 'post_voice_id': ident,
+        'speaker': ident, 'job_id': 'additional-' + ident, 'success': True,
+        'hmong_reference_fingerprint': additional_expected[ident],
+        'source_sha256': metadata[ident]['sha256'],
+        'reference_audio_sha256': metadata[ident]['reference_sha256'],
+        'reference_conditioning': 'audio', 'no_transcript': True,
+        'preset_button_checked': True, 'full_source_preview_checked': True}
+        for ident in additional_expected}
+    srt_only = {**copy.deepcopy(cases[0]), 'case': 'quoted_217_srt_speech_only',
+        'job_id': 'srt-only-217', 'success': True, 'input_format': 'srt', 'subtitle_timing': False,
+        'text': '"217\n00:06:07,200 --> 00:06:08,400\nTae-yong cov ntaub ntawv tus kheej "',
+        'exported_spoken_text': 'Tae-yong cov ntaub ntawv tus kheej',
+        'generated_srt': '1\n00:00:00,000 --> 00:00:01,000\nTae-yong cov ntaub ntawv tus kheej\n',
+        'generated_timing_checked': True, 'timestamps_not_spoken': True,
+        'cue_indices_not_spoken': True, 'continuous_srt_duration': True}
     return {'success': True, 'platform': 'win32', 'native_windows_validation': True,
             'real_ui_synthesis': True, 'engine': 'hmong_native',
             'cloned_filter_library_selection': True, 'cross_panel_selection': True,
             'hyphenated_text_preserved': True,
             'caption_metadata': caption,
             'external_clone': clone,
+            'initial_voice_id': 'hmong-female-3',
+            'expected_additional_reference_fingerprints': additional_expected,
+            'additional_presets': additional,
+            'srt_speech_only': srt_only,
             'click_recovery': {'success': True, 'real_ui_post': True, 'responses_mocked': False,
                 'ui_entrypoint': '#generate', 'invalid_text': 'Nyob zoo https://example.com.',
                 'request_text': 'Nyob zoo https://example.com.', 'request_voice_id': 'hmong-male',
@@ -565,7 +593,9 @@ def test_publication_gate_reads_mandatory_browser_evidence_from_the_zip(tmp_path
     report['external_clone']['independent_reference_fingerprint'] = clone_identity
     report['external_clone']['hmong_reference_fingerprint'] = clone_identity
     source_files = ('caption_markers.py', 'character_cast.py', 'longform.py', 'reference_quality.py', 'hmong_health.py', 'voice_errors.py',
-                    'hmong_launcher.py', 'prepare_hmong.py', 'hmong_native.py',
+                    'hmong_launcher.py', 'prepare_hmong.py', 'hmong_native.py', 'static/text-import.js',
+                    'assets/hmong/additional-voices.json', 'assets/hmong/source-ngoc-huyen.mp3',
+                    'assets/hmong/ngoc-huyen.wav', 'assets/hmong/source-female-3.mp3', 'assets/hmong/female-3.wav',
                     'docs/HUONG-DAN-HMONG.md', 'docs/HUONG-DAN-HMONG.html')
     for module in source_files:
         path = root / 'voice-studio-hmong' / module
@@ -663,7 +693,9 @@ def test_browser_smoke_passes_verified_references_to_external_browser_without_de
     interpreter.touch()
     monkeypatch.setenv('HMOOB_BROWSER_PYTHON', str(interpreter))
     expected = packaging.expected_reference_fingerprints()
-    monkeypatch.setitem(sys.modules, 'hmong_assets', SimpleNamespace(reference_fingerprint=expected.__getitem__))
+    additional = packaging.expected_additional_reference_fingerprints()
+    combined = {**expected, **additional}
+    monkeypatch.setitem(sys.modules, 'hmong_assets', SimpleNamespace(reference_fingerprint=combined.__getitem__))
     report = browser_report_fixture()
     report['runtime']['url'] = 'http://127.0.0.1:8770'
     reports = tmp_path / 'reports'
@@ -682,8 +714,10 @@ def test_browser_smoke_passes_verified_references_to_external_browser_without_de
         assert command[4:6] == ['--reports', str(reports)]
         assert command[6] == '--expected-references'
         assert json.loads(command[7]) == expected
-        assert command[8:] == ['--external-reference', str(reports / 'external-english-reference.wav')]
-        assert len(command) == 10 and '--allow-non-windows' not in command
+        assert command[8:10] == ['--external-reference', str(reports / 'external-english-reference.wav')]
+        assert command[10] == '--expected-additional-references'
+        assert json.loads(command[11]) == additional
+        assert len(command) == 12 and '--allow-non-windows' not in command
         assert kwargs == {'check': True, 'timeout': 1800}
         (reports / 'browser-smoke.json').write_text(json.dumps(report), encoding='utf-8')
     monkeypatch.setattr(smoke.subprocess, 'run', run)
@@ -741,7 +775,7 @@ def test_native_smoke_probes_primary_and_every_advanced_batch(tmp_path, monkeypa
     spec = importlib.util.spec_from_file_location('smoke_hmong', PACKAGING / 'smoke_hmong_portable.py')
     smoke = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(smoke)
-    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.6.3'
+    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.6.4'
     root.mkdir(parents=True)
     packaging.write_launcher(root)
     calls = []
@@ -787,7 +821,7 @@ def test_windows_launcher_smoke_checks_reuse_and_only_cleans_up_its_first_proces
     url = 'http://127.0.0.1:8770'
     engine = 'hmong_native' if backend == 'native' else 'f5_hmong'
     instance = {'instance_id': 'qa-server', 'pid': 102, 'url': url, 'data_id': 'qa-data',
-                'root_id': 'qa-root', 'backend': engine, 'version': '1.6.3-hmong'}
+                'root_id': 'qa-root', 'backend': engine, 'version': '1.6.4-hmong'}
     process = SimpleNamespace(pid=101, stdout=io.StringIO('Studio: ' + url + '\n'),
                               poll=lambda: None, wait=lambda **kwargs: 0)
     server = SimpleNamespace(is_running=lambda: True, parents=lambda: [SimpleNamespace(pid=101)])

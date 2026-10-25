@@ -178,7 +178,7 @@ async function editorImportFile(file){
   if(editorBusy)throw Error('Đợi hoặc dừng tác vụ trước khi nhập dự án.');if(!dubSource)throw Error('Chọn video trước.');
   const videoId=editorVideoId,revision=editorRevision;
   if(file.size>editorTextLimit*8+1000000)throw Error('Tệp quá lớn. Phụ đề video hỗ trợ 200.000 ký tự trong 3 giờ.');
-  const text=(await file.text()).replace(/^\uFEFF/,'');
+  const text=await readScriptFileText(file);
   if(editorBusy||editorVideoId!==videoId||dubSource?.id!==videoId||editorRevision!==revision)throw Error('Video hoặc dự án đã đổi khi đọc tệp. Nhập lại tệp cho bản đang mở.');
   let imported;
   if(file.name.toLowerCase().endsWith('.json'))imported=editorCheckedImport(JSON.parse(text));

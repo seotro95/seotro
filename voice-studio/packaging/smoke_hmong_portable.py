@@ -292,7 +292,7 @@ def main():
         config = client.get('/api/config').json()
         assert config['variant'] == 'hmong' and config['default_language'] == 'mww'
         assert config['hmong_engine'] == engine and config['hmong_steps'] is None
-        assert config['hmong_backend'] == 'native' and config['default_voice_id'] == 'hmong-male'
+        assert config['hmong_backend'] == 'native' and config['default_voice_id'] == 'hmong-female-3'
         assert config['delivery'] == 'story' and config['emotion'] == 'warm'
         assert config['emotion_strength'] == .65 and config['auto_rhythm'] is False
         assert config['hmong_phrase_context'] is True
@@ -302,7 +302,7 @@ def main():
             assert client.get('/static/' + asset).status_code == 200
         assert 'Voice Studio Hmong' in client.get('/').text
         voices = client.get('/api/voices').json()['voices']
-        assert {v['id'] for v in voices} == {'hmong-female', 'hmong-male'}
+        assert {v['id'] for v in voices} == {'hmong-female', 'hmong-male', 'hmong-ngoc-huyen', 'hmong-female-3'}
         for ident, delivery in [('hmong-female', 'review'), ('hmong-male', None)]:
             print('Real offline inference:', ident, delivery, flush=True)
             preset = next(v for v in voices if v['id'] == ident)
@@ -508,6 +508,7 @@ def check_browser_selection(root, url, reports):
         raise RuntimeError('The browser QA interpreter must exist outside the portable package')
     from hmong_assets import reference_fingerprint
     expected = {ident: reference_fingerprint(ident) for ident in ('hmong-male', 'hmong-female')}
+    additional = {ident: reference_fingerprint(ident) for ident in ('hmong-ngoc-huyen', 'hmong-female-3')}
     # The F5 package's English example is independent of both Hmong defaults.
     # Keep this fixture only in builder-owned QA data, never personal profiles.
     source = Path(root) / 'runtime/Lib/site-packages/f5_tts/infer/examples/basic/basic_ref_en.wav'
@@ -518,11 +519,13 @@ def check_browser_selection(root, url, reports):
     script = Path(__file__).with_name('browser_hmong_portable.py')
     subprocess.run([str(interpreter), str(script), '--url', url, '--reports', str(reports),
                     '--expected-references', json.dumps(expected),
-                    '--external-reference', str(external)], check=True, timeout=1800)
+                    '--external-reference', str(external),
+                    '--expected-additional-references', json.dumps(additional)], check=True, timeout=1800)
     report = json.loads((Path(reports) / 'browser-smoke.json').read_text(encoding='utf-8'))
     assert report.get('success') is True and report.get('native_windows_validation') is True
     assert report['runtime']['url'] == url and report['runtime']['backend'] == 'hmong_native'
     assert report['expected_reference_fingerprints'] == expected
+    assert report['expected_additional_reference_fingerprints'] == additional
     return report
 
 
@@ -592,7 +595,7 @@ def check_web_launcher(root, backend, *, reports=None):
             assert isinstance(instance.get(field), str) and instance[field], 'Missing runtime identity: ' + field
         assert isinstance(instance.get('pid'), int) and instance['pid'] > 0
         assert instance['url'] == url and instance['backend'] == engine
-        assert instance['version'] == live['version'] == '1.6.3-hmong'
+        assert instance['version'] == live['version'] == '1.6.4-hmong'
         assert instance['instance_id'] != 'stale-build-qa-instance'
         server = psutil.Process(instance['pid'])
         assert server.is_running() and process.pid in {parent.pid for parent in server.parents()}, \

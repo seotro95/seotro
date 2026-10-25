@@ -1,0 +1,72 @@
+{
+  "hmong-ngoc-huyen": {
+    "name": "Ngọc Huyền nâng cao",
+    "user_filename": "ngọc huyền nâng cao.MP3",
+    "file": "source-ngoc-huyen.mp3",
+    "sha256": "aea67355902f6d57949e7a9dbac9c41b6d127b2fac0df81d3c540a302731cf9d",
+    "duration": 10.266125,
+    "reference_file": "ngoc-huyen.wav",
+    "reference_sha256": "e074215d0ffdb0855efa4951fbaf7f7eec274f9b2e384fcb6262b6eab936b8ce",
+    "reference": {
+      "start": 0.0,
+      "end": 7.78,
+      "text": ""
+    },
+    "reference_text_verified": false,
+    "reference_text_source": "not_provided_audio_only",
+    "reference_conditioning": "audio",
+    "engine": "hmong_native",
+    "source": "Tệp MP3 người dùng tải lên trực tiếp ngày 26/10/2026; SHA256 xác minh đúng tệp gốc.",
+    "reference_selection": "Chọn đoạn từ đầu bản thu, kết thúc gần khoảng nghỉ của tín hiệu; giữ nguyên nhịp và cao độ.",
+    "audio_processing": {
+      "sample_rate": 24000,
+      "channels": 1,
+      "sample_width": 2,
+      "constant_gain_db": -5.23803515,
+      "peak_target_dbfs": -3,
+      "denoise": false,
+      "pitch_shift": false,
+      "time_stretch": false
+    },
+    "reference_signal": {
+      "peak_dbfs": -2.99999,
+      "rms_dbfs": -17.4193,
+      "clipped_samples": 0
+    }
+  },
+  "hmong-female-3": {
+    "name": "Hmong nữ 3",
+    "user_filename": "hmong nữ 3.MP3",
+    "file": "source-female-3.mp3",
+    "sha256": "aec83955c0c81abe7355167c779c7ca4c6c4b51422b4ba1018b7ff8f6b30fb1b",
+    "duration": 10.631833333333333,
+    "reference_file": "female-3.wav",
+    "reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+    "reference": {
+      "start": 0.0,
+      "end": 7.44,
+      "text": ""
+    },
+    "reference_text_verified": false,
+    "reference_text_source": "not_provided_audio_only",
+    "reference_conditioning": "audio",
+    "engine": "hmong_native",
+    "source": "Tệp MP3 người dùng tải lên trực tiếp ngày 26/10/2026; SHA256 xác minh đúng tệp gốc.",
+    "reference_selection": "Chọn đoạn từ đầu bản thu, kết thúc gần khoảng nghỉ của tín hiệu; giữ nguyên nhịp và cao độ.",
+    "audio_processing": {
+      "sample_rate": 24000,
+      "channels": 1,
+      "sample_width": 2,
+      "constant_gain_db": 6.40456595,
+      "peak_target_dbfs": -3,
+      "denoise": false,
+      "pitch_shift": false,
+      "time_stretch": false
+    },
+    "reference_signal": {
+      "peak_dbfs": -2.99999,
+      "rms_dbfs": -18.79955,
+      "clipped_samples": 0
+    }
+  }
+}

@@ -18,7 +18,19 @@ _LEADING = re.compile(r'^\s*(?P<clock>' + _TOKEN + r')(?=\s|$)\s*(?:[-–—|]\s
 def normalize_caption_text(text):
     if not isinstance(text, str):
         raise ValueError('Nội dung phụ đề cần là văn bản.')
-    return _PREFIX.sub('', text.replace('\r\n', '\n').replace('\r', '\n'))
+    result = _PREFIX.sub('', text.replace('\r\n', '\n').replace('\r', '\n'))
+    # Pasted excerpts are often enclosed in one pair of quotation marks,
+    # starting before the cue index and ending after the last spoken line.
+    # Recognize only a numeric caption header, never ordinary quoted prose.
+    stripped = result.strip()
+    if '\n' in stripped and stripped[:1] in {'"', "'", '“', '‘'}:
+        opening = stripped[0]
+        first = stripped.split('\n', 1)[0][1:].strip()
+        header = (re.fullmatch(r'\d{1,9}[.)]?', first)
+                  or re.match(r'^\d[\d:.,\s]*(?:-->|->|→|⟶|–>|—>)', first))
+        if header and not first.endswith(_WRAPS[opening]) and stripped.endswith(_WRAPS[opening]):
+            result = _PREFIX.sub('', stripped[1:-1])
+    return result
 
 
 def _seconds(token):
@@ -78,7 +90,17 @@ def strip_leading_clock(line):
 
 
 def is_cue_index(line):
-    return bool(re.fullmatch(r'\d{1,9}[.)]?', normalize_caption_text(line).strip()))
+    return cue_index_value(line) is not None
+
+
+def cue_index_value(line):
+    """Read a caption ordinal, including a separately quoted numeric line."""
+    source = normalize_caption_text(line).strip()
+    if source[:1] in _WRAPS and source.endswith(_WRAPS[source[0]]):
+        source = source[1:-1].strip()
+    if not re.fullmatch(r'\d{1,9}[.)]?', source):
+        return None
+    return int(source.rstrip('.)'))
 
 
 def looks_like_timing_line(line):

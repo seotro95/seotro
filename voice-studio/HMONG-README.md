@@ -1,6 +1,13 @@
-# Voice Studio Hmong 1.6.3
+# Voice Studio Hmong 1.6.4
 
-Phiên bản riêng của Voice Studio 3.6.2 cho **Hmong Trắng / Hmoob Daw (mww)**. Bản 1.6.3 chỉ có **một ZIP chính để tải** và **một tệp mở ở ngoài cùng: `MO_VOICE_STUDIO_HMONG.bat`**. Tệp này chọn bộ đọc nhanh **VITS + OpenVoice V2**. Hai giọng mặc định vẫn là **hmong nam 2.MP3** và **hmong nữ 2(1).MP3** cuối cùng bạn cung cấp.
+Bản 1.6.4 thêm **Hmong nữ 3** và **Ngọc Huyền nâng cao** từ hai MP3 mới của bạn. Bộ chính mặc định chọn Hmong nữ 3; cả hai đều có nút chọn nhanh. Hai giọng Nam/Nữ trước giữ nguyên. Trong Thư viện giọng, bấm **Đặt làm giọng mặc định** để lưu giọng có sẵn hoặc giọng cá nhân cho lần mở tiếp theo. Hai mẫu mới chỉ dùng Native OpenVoice, không cần transcript; F5 vẫn yêu cầu mẫu/lời Hmong khớp nhau.
+
+Đoạn `217` + `00:06:07,200 --> 00:06:08,400` + `Tae-yong cov ntaub ntawv tus kheej` chỉ đọc dòng **Tae-yong cov ntaub ntawv tus kheej**. SRT trong phần tạo giọng Hmong mặc định đọc lời liên tục, không chèn 367 giây im lặng hoặc ép câu vào ô 1,2 giây. Bật **Giữ mốc SRT để khớp thời gian** khi cần căn ô; video/phân vai giữ mốc như trước. Nhập TXT/SRT hỗ trợ UTF-8 và UTF-16, dấu nháy quanh đoạn/số câu và số thứ tự nhảy số.
+
+Nhân bản bằng bộ chính gợi ý đoạn 3–8 giây có tiếng nói trong bản thu 3–30 giây; hãy nghe và điều chỉnh đoạn nếu cần. Mẫu có thể nói ngôn ngữ khác; đầu ra vẫn đọc văn bản Hmong. Lưu hồ sơ thành công sẽ chọn đúng giọng đó, kể cả khi tải lại thư viện bị lỗi tạm thời.
+
+
+Phiên bản riêng của Voice Studio 3.6.2 cho **Hmong Trắng / Hmoob Daw (mww)**. Bản 1.6.4 chỉ có **một ZIP chính để tải** và **một tệp mở ở ngoài cùng: `MO_VOICE_STUDIO_HMONG.bat`**. Tệp này chọn bộ đọc nhanh **VITS + OpenVoice V2**. Hai giọng mặc định vẫn là **hmong nam 2.MP3** và **hmong nữ 2(1).MP3** cuối cùng bạn cung cấp.
 
 **[Đọc hướng dẫn đầy đủ](docs/HUONG-DAN-HMONG.md)** cho tất cả chức năng và cách xử lý lỗi. Trong ZIP, mở **`HUONG-DAN-HMONG.html`** ở ngoài cùng bằng trình duyệt; trong tool, bấm **Hướng dẫn** để mở cùng nội dung tại `/help/hmong`.
 
@@ -19,13 +26,13 @@ Bộ nhanh tạo lời Hmong bằng VITS rồi chuyển chất giọng theo mẫ
 
 ## Khi bấm Tạo giọng chưa có bản thu
 
-Bản 1.6.3 hiển thị lỗi ngay cạnh nút **Tạo giọng** và trong khu vực kết quả, giữ nguyên lời đang nhập và mở lại nút để sửa rồi thử tiếp. Cặp mốc phụ đề và số thứ tự được tách khỏi lời đọc; số nằm trong câu được giữ và bộ nhanh chuyển các số đếm được hỗ trợ thành lời Hmong. Nếu có cách viết số, URL, emoji hoặc ký tự chưa hỗ trợ, tool chỉ rõ phần cần sửa; không âm thầm xóa nội dung. Khi tải cấu hình/danh sách giọng bị lỗi tạm thời, tool thử lại có giới hạn; nếu vẫn chưa được, bấm **Thử lại** hoặc **Cập nhật giọng**. Không cần xóa dữ liệu hay làm mới trang để thử lại.
+Bản 1.6.4 hiển thị lỗi ngay cạnh nút **Tạo giọng** và trong khu vực kết quả, giữ nguyên lời đang nhập và mở lại nút để sửa rồi thử tiếp. Cặp mốc phụ đề và số thứ tự được tách khỏi lời đọc; số nằm trong câu được giữ và bộ nhanh chuyển các số đếm được hỗ trợ thành lời Hmong. Nếu có cách viết số, URL, emoji hoặc ký tự chưa hỗ trợ, tool chỉ rõ phần cần sửa; không âm thầm xóa nội dung. Khi tải cấu hình/danh sách giọng bị lỗi tạm thời, tool thử lại có giới hạn; nếu vẫn chưa được, bấm **Thử lại** hoặc **Cập nhật giọng**. Không cần xóa dữ liệu hay làm mới trang để thử lại.
 
 ## TXT/SRT: chỉ đọc nội dung, bỏ mốc phụ đề
 
 Dòng `00:04:28,533 --> 00:04:29,333` là mốc từ **4 phút 28,533 giây** đến **4 phút 29,333 giây**, không phải lời. Tool tách cặp mốc và số thứ tự cue trước khi đưa lời vào bộ đọc, kể cả khi dán SRT vào TXT, cue thiếu dòng trống, có BOM, dùng dấu chấm phần nghìn giây, có ngoặc/dấu nháy hoặc dùng tổng phút. Số trong câu như `Kuv muaj 2 tug me nyuam.` vẫn là nội dung và được xử lý theo cách đọc số Hmong được hỗ trợ.
 
-Chọn **TXT · đọc liên tục** để đọc lời ngay từ đầu, không thêm khoảng chờ theo mốc. Chọn **SRT · theo mốc từng câu** để giữ thời điểm phụ đề: ví dụ trên chỉ dành **0,8 giây** cho lời và audio có thể có khoảng đầu im lặng hơn bốn phút. Tool căn nhịp có giới hạn; lời quá dài được báo để nới mốc hoặc sửa, không cắt mất từ. Bản kịch bản gốc giữ để chỉnh sửa; TXT/SRT lời đã đọc phản ánh những đoạn đã tạo thật. Xem phần 4 và 9 trong hướng dẫn đầy đủ.
+TXT và SRT chỉ đọc lời trong phần tạo giọng Hmong đọc ngay từ đầu, không thêm khoảng chờ. Bật **Giữ mốc SRT để khớp thời gian** để giữ thời điểm phụ đề: ví dụ trên chỉ dành **0,8 giây** cho lời và audio có thể có khoảng đầu im lặng hơn bốn phút. Tool căn nhịp có giới hạn; lời quá dài được báo để nới mốc hoặc sửa, không cắt mất từ. Bản kịch bản gốc giữ để chỉnh sửa; TXT/SRT lời đã đọc phản ánh những đoạn đã tạo thật. Xem phần 4 và 9 trong hướng dẫn đầy đủ.
 
 ## Chọn Nam / Nữ và tạo voice
 
@@ -53,7 +60,7 @@ Khi đổi từ bản cũ, đóng tool và sao lưu **`voice-studio-hmong/.data`
 
 ## Mở bản Windows đầy đủ
 
-1. Tải **`Voice-Studio-Hmong-1.6.3-Windows-x64.zip`** trong GitHub Releases và giải nén **toàn bộ ZIP** vào thư mục có quyền ghi. Không chạy bên trong ZIP. Các thư mục `runtime`, `ffmpeg`, `voice-studio-hmong` và `tools` là thành phần cần thiết để tool chạy.
+1. Tải **`Voice-Studio-Hmong-1.6.4-Windows-x64.zip`** trong GitHub Releases và giải nén **toàn bộ ZIP** vào thư mục có quyền ghi. Không chạy bên trong ZIP. Các thư mục `runtime`, `ffmpeg`, `voice-studio-hmong` và `tools` là thành phần cần thiết để tool chạy.
 2. Mở **`MO_VOICE_STUDIO_HMONG.bat`** ở ngoài cùng. Python 3.12, thư viện CPU và FFmpeg đã có sẵn; không cần tự cài Python hoặc API key. Bộ mở chính chọn VITS + OpenVoice. Các công cụ nâng cao được gom trong `tools/`.
 3. Lần đầu cần Internet để tải và kiểm tra khoảng **580 MB model của bộ nhanh**. Không cần tải F5 để dùng bộ chính. Các trọng số Hmong không đóng trong ZIP vì nguồn chưa công bố giấy phép phân phối lại rõ ràng. Giữ cửa sổ tool mở; sau khi chuẩn bị xong có thể tạo giọng offline.
 4. Giao diện tự mở khi sẵn sàng. Nhập Hmong chữ Latin RPA hoặc TXT/SRT, chọn giọng nam/nữ hay giọng cá nhân rồi tạo voice. Xuất WAV/MP3/TXT/SRT trong giao diện.
@@ -66,7 +73,7 @@ Tác vụ mới ghi nhận đúng mẫu giọng và lời tham chiếu để ti�
 
 ## Dùng bộ đọc nhanh thử nghiệm
 
-Bộ đọc nhanh là mặc định của **`MO_VOICE_STUDIO_HMONG.bat`** trong gói 1.6.3. Lần đầu bộ này tải và kiểm tra khoảng **580 MB** mô hình VITS, OpenVoice V2 và thành phần đánh dấu âm thanh AI. Không cần tải bộ F5 1,4 GB để dùng riêng lựa chọn này. Sau khi chuẩn bị xong, việc tạo giọng diễn ra cục bộ, offline; tệp mẫu không được gửi tới dịch vụ suy luận bên ngoài.
+Bộ đọc nhanh là mặc định của **`MO_VOICE_STUDIO_HMONG.bat`** trong gói 1.6.4. Lần đầu bộ này tải và kiểm tra khoảng **580 MB** mô hình VITS, OpenVoice V2 và thành phần đánh dấu âm thanh AI. Không cần tải bộ F5 1,4 GB để dùng riêng lựa chọn này. Sau khi chuẩn bị xong, việc tạo giọng diễn ra cục bộ, offline; tệp mẫu không được gửi tới dịch vụ suy luận bên ngoài.
 
 Giao diện ghi **Hmong nhanh thử nghiệm** và ẩn lựa chọn số bước F5. Hai mẫu nam/nữ, hồ sơ giọng đã lưu, nhập/xuất TXT/SRT/WAV/MP3, sắc thái và phép thử sáu từ vẫn dùng được. Bộ đọc này không có bước 4/8/16/32; giảm số bước F5 không áp dụng cho nó. Hãy tạo tác vụ mới khi đổi bộ đọc, không nối một bài đang dở bằng bộ khác. Nếu muốn nghe so sánh với F5, đóng tool rồi mở **`tools/MO_F5_HMONG.bat`**. F5 là tùy chọn nâng cao, cần chuẩn bị riêng khoảng 1,4 GB model và thường chậm hơn nhiều trên CPU.
 
@@ -97,7 +104,7 @@ Chọn sắc thái và mức độ trên giao diện. Dùng `**cụm từ**` đ�
 
 Lời gốc của công việc vẫn giữ các thẻ để chỉnh sửa; phụ đề đi kèm âm thanh chỉ hiển thị lời đọc, không in thẻ điều khiển.
 
-Trong TXT, sắc thái duy trì đến thẻ đổi tiếp theo. Trong SRT, mỗi cue bắt đầu lại bằng sắc thái đã chọn trên giao diện; các mốc thời gian vẫn được giữ, lời quá dài được báo để chỉnh thay vì cắt mất từ. Nên nhấn một cụm đủ nghĩa thay vì tách từng âm tiết.
+Trong TXT, sắc thái duy trì đến thẻ đổi tiếp theo. Trong SRT giữ mốc, mỗi cue bắt đầu lại bằng sắc thái đã chọn trên giao diện; các mốc thời gian vẫn được giữ, lời quá dài được báo để chỉnh thay vì cắt mất từ. Nên nhấn một cụm đủ nghĩa thay vì tách từng âm tiết.
 
 Tốc độ phụ thuộc CPU/GPU, số bước, độ dài và nhịp đọc. Bản CPU không cần GPU nhưng vẫn cần đủ RAM; khoảng 8 GB RAM trở lên, 16 GB được khuyến nghị, cùng dung lượng đĩa cho mô hình, công việc và bản xuất. Không có cam kết tạo một giờ âm thanh trong hai phút hay tốc độ bằng nhau trên mọi máy. Mô hình cộng đồng vẫn có thể đọc sai một số từ hoặc đoạn dài; cần người biết Hmong nghe đánh giá phát âm và độ giống giọng.
 

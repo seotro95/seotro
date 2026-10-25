@@ -332,7 +332,7 @@ def test_video_project_limit_stays_200k_while_free_text_limit_is_1m(static_site)
 def test_delayed_import_cannot_overwrite_changed_project_or_busy_job(static_site, change):
     with cast_page(static_site) as (page, state):
         page.evaluate('''() => {window.pendingCharacterImport=editorImportFile({name:'late.srt',size:100,
-            text:()=>new Promise(resolve=>{window.finishCharacterImport=resolve;})});}''')
+            arrayBuffer:()=>new Promise(resolve=>{window.finishCharacterImport=text=>resolve(new TextEncoder().encode(text).buffer);})});}''')
         if change == 'edit':
             page.fill('[data-cue-id="cue-a"] textarea', 'Kuv hloov lawm.')
         elif change == 'busy':

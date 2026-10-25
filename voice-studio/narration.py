@@ -24,7 +24,7 @@ def spoken_text(text, *, remove_labels=True):
     Strong range metadata is never narration, even when single-clock labels
     are opted out. Original editable source is retained separately by the job.
     """
-    from caption_markers import normalize_caption_text, parse_timing_line, strip_leading_clock, is_cue_index
+    from caption_markers import normalize_caption_text, parse_timing_line, strip_leading_clock, cue_index_value
     from html import unescape
     lines=normalize_caption_text(text).split('\n')
     spans=[parse_timing_line(line) for line in lines]
@@ -33,6 +33,7 @@ def spoken_text(text, *, remove_labels=True):
     seen_range=False
     has_body=False
     next_index=1
+    numbered_captions=False
     for index,line in enumerate(lines):
         span=spans[index]
         if span is not None:
@@ -42,14 +43,16 @@ def spoken_text(text, *, remove_labels=True):
             output.append(content)
             next_index+=1
             continue
-        if is_cue_index(line):
+        value=cue_index_value(line)
+        if value is not None:
             following=index+1
             while following<len(lines) and not lines[following].strip():
                 following+=1
             if following<len(lines) and spans[following] is not None and (not seen_range or has_body):
-                value=int(line.strip().rstrip('.)'))
-                if value>0 and (not seen_range or value==next_index):
+                blank_before=index>0 and not lines[index-1].strip()
+                if not seen_range or numbered_captions or value==next_index or blank_before:
                     next_index=value
+                    numbered_captions=True
                     continue
         if caption_mode and line.strip()=='WEBVTT':
             continue
@@ -323,19 +326,29 @@ def plan_segments(job):
     limit = 160 if hmong_packed else 130 if job.get('engine') == 'vieneu_nano' else 240
     if job.get('input_format') == 'srt':
         from subtitles import parse_srt
-        output = []
-        for index, cue in enumerate(parse_srt(job['text'])):
-            segments = (_expression_segments(cue['text'], job, timed=True) if expression else
-                        split_script(cue['text'], limit=limit, normalizer=normalizer))
-            if hmong_packed:
-                segments = _pack_segments(segments, limit)
-            if not any(s.text for s in segments):
-                raise ValueError('Mỗi câu SRT cần có lời đọc.')
-            for segment in segments:
-                segment.cue = index
-                output.append(segment)
-        return output
-    text = spoken_text(job['text'], remove_labels=job.get('skip_timestamps', True))
+        cues = parse_srt(job['text'])
+        if job.get('subtitle_timing', True):
+            output = []
+            for index, cue in enumerate(cues):
+                segments = (_expression_segments(cue['text'], job, timed=True) if expression else
+                            split_script(cue['text'], limit=limit, normalizer=normalizer))
+                if hmong_packed:
+                    segments = _pack_segments(segments, limit)
+                if not any(s.text for s in segments):
+                    raise ValueError('Mỗi câu SRT cần có lời đọc.')
+                for segment in segments:
+                    segment.cue = index
+                    output.append(segment)
+            return output
+        if job.get('video_id') or job.get('character_cast'):
+            raise ValueError('Lồng video hoặc phân vai cần giữ mốc thời gian SRT.')
+        # Cue bodies are already parsed speech. Do not run the TXT clock-label
+        # cleaner again: a spoken time such as "12:30 yog..." belongs to words.
+        # Keeping the saved source/input_format intact also preserves editing
+        # and original subtitle exports independently of the generated audio.
+        text = '\n'.join(cue['text'] for cue in cues)
+    else:
+        text = spoken_text(job['text'], remove_labels=job.get('skip_timestamps', True))
     if expression:
         return _expression_segments(text, job)
     if hmong:

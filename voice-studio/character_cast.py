@@ -6,7 +6,7 @@ import json
 import re
 from pathlib import Path
 
-from hmong_assets import HMONG_ENGINES
+from hmong_assets import HMONG_ENGINES, is_builtin_voice_id, reference_text_required
 
 
 MAX_CHARACTERS = 32
@@ -18,7 +18,7 @@ _FINGERPRINT = re.compile(r'[0-9a-f]{64}\Z')
 def is_preset_voice(voice):
     """A preset name in legacy personal metadata must never override its WAV."""
     speaker = voice.get('speaker')
-    return (voice.get('category') != 'cloned' and speaker in {'hmong-male', 'hmong-female'}
+    return (voice.get('category') != 'cloned' and is_builtin_voice_id(speaker)
             and voice.get('voice_id', voice.get('id')) == speaker)
 
 
@@ -78,7 +78,7 @@ def make_voice_snapshot(voice, engine, language, data):
         _, words = reference(voice['speaker'])
     else:
         words = voice.get('transcript', '')
-    audio_reference = engine == 'hmong_native' and voice.get('speaker') not in {'hmong-male', 'hmong-female'}
+    audio_reference = not reference_text_required(voice.get('speaker'), engine)
     if not isinstance(words, str) or (not audio_reference and not words.strip()) or len(words) > 2000:
         raise ValueError('Nhập đúng lời Hmong của mẫu giọng nhân vật, tối đa 2.000 ký tự.')
     from narration import validate_voice_text
@@ -96,7 +96,8 @@ def validate_cast(job):
         return None
     if not isinstance(cast, dict) or type(cast.get('version')) is not int or cast['version'] != 1:
         raise ValueError('Phiên bản phân vai không hợp lệ; tạo tác vụ mới.')
-    if job.get('input_format') != 'srt' or job.get('engine') not in HMONG_ENGINES or job.get('language') != 'mww':
+    if (job.get('input_format') != 'srt' or job.get('subtitle_timing', True) is False
+            or job.get('engine') not in HMONG_ENGINES or job.get('language') != 'mww'):
         raise ValueError('Phân vai nhân vật cần kịch bản SRT Hmong Trắng.')
     voices = cast.get('voices')
     if not isinstance(voices, dict) or not voices:
@@ -120,12 +121,11 @@ def _validate_snapshot(voice, job):
             or not _FINGERPRINT.fullmatch(voice['hmong_reference_fingerprint'])
             or not isinstance(voice.get('reference_text'), str)
             or (not voice['reference_text'].strip()
-                and (job.get('engine') != 'hmong_native'
-                     or voice.get('speaker') in {'hmong-male', 'hmong-female'}))
+                and reference_text_required(voice.get('speaker'), job.get('engine')))
             or len(voice['reference_text']) > 2000):
         raise ValueError('Danh tính mẫu giọng nhân vật chưa đầy đủ hoặc khác mô hình; tạo tác vụ mới.')
     from narration import validate_voice_text
-    if job['engine'] != 'hmong_native' or voice.get('speaker') in {'hmong-male', 'hmong-female'}:
+    if reference_text_required(voice.get('speaker'), job['engine']):
         validate_voice_text(voice['reference_text'], job['engine'], 'Lời mẫu tham chiếu nhân vật')
 
 
@@ -153,7 +153,7 @@ def validate_cast_references(job, data):
 def validate_job_references(job, data):
     """Verify every frozen Hmong reference before resuming or changing output."""
     if (job.get('engine') in HMONG_ENGINES
-            and job.get('speaker') in {'hmong-male', 'hmong-female'}
+            and is_builtin_voice_id(job.get('speaker'))
             and not is_preset_voice(job)):
         raise ValueError('Tác vụ cũ đã gắn giọng cá nhân với giọng mặc định. '
                          'Tạo tác vụ mới bằng hồ sơ giọng cá nhân; các đoạn cũ được giữ nguyên.')
@@ -178,7 +178,7 @@ def _validate_references(snapshots, data):
             continue
         seen.add(key)
         try:
-            if voice.get('speaker') in {'hmong-male', 'hmong-female'}:
+            if is_preset_voice(voice):
                 current = reference_identity(voice, data)
                 from hmong_assets import reference
                 _, words = reference(voice['speaker'])

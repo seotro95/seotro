@@ -31,7 +31,8 @@ from system_voices import installed_voices
 from hardware import supports_int8, system_info
 from performance import speed_report
 from state_io import write_json_atomic,read_progress
-from hmong_assets import HMONG_ENGINES, active_engine as active_hmong_engine
+from hmong_assets import (HMONG_ENGINES, active_engine as active_hmong_engine,
+                          is_builtin_voice_id, reference_text_required, default_preset_id)
 from character_cast import make_voice_snapshot, validate_cast_request, validate_job_references, cast_voice_ids, is_preset_voice
 
 BASE = Path(__file__).resolve().parent
@@ -280,11 +281,56 @@ def hmong_full_guide():
                         headers={'Cache-Control':'no-store','Content-Security-Policy':policy})
 
 
+def _default_voice_profile(voice_id):
+    """Resolve an available Hmong reference without loading/downloading its model."""
+    voice = next((item for item in PRESETS + records('voices')
+                  if item.get('id') == voice_id), None)
+    engine = active_hmong_engine()
+    if (not voice or voice.get('engine') not in HMONG_ENGINES
+            or 'mww' not in voice.get('languages', [])):
+        raise ValueError('Chọn một giọng Hmong có sẵn hoặc giọng cá nhân đã lưu.')
+    if is_builtin_voice_id(voice_id) and engine != 'hmong_native' and voice_id not in {'hmong-male', 'hmong-female'}:
+        raise ValueError('Giọng mẫu mới dùng bộ đọc nhanh. Mở launcher chính để chọn giọng này.')
+    voice = {**voice, 'voice_id': voice['id'], 'engine': engine}
+    if not is_preset_voice(voice):
+        voice['speaker'] = None
+    make_voice_snapshot(voice, engine, 'mww', DATA)
+    return voice
+
+
+def preferred_voice_id():
+    fallback = default_preset_id(active_hmong_engine())
+    try:
+        preference = json.loads((DATA / 'voice-preferences.json').read_text(encoding='utf-8'))
+        selected = preference.get('voice_id') if isinstance(preference, dict) else None
+        _default_voice_profile(selected)
+        return selected
+    except (ValueError, OSError, TypeError):
+        return fallback
+
+
+class DefaultVoice(BaseModel):
+    voice_id: str = Field(min_length=1, max_length=128)
+
+
+@app.put('/api/voices/default')
+def set_default_voice(body: DefaultVoice):
+    if not IS_HMONG:
+        raise HTTPException(404, 'Chức năng giọng mặc định dành cho bản Hmong.')
+    with lock:
+        try:
+            voice = _default_voice_profile(body.voice_id)
+        except (ValueError, OSError) as exc:
+            raise HTTPException(422, str(exc)) from None
+        write_json(DATA / 'voice-preferences.json', {'version': 1, 'voice_id': body.voice_id})
+    return {'default_voice_id': body.voice_id, 'voice': voice}
+
+
 def _config_values():
     if IS_HMONG:
         engine = active_hmong_engine()
         ready = model_ready(engine)
-        return {'variant':'hmong','app_name':APP_NAME,'default_language':'mww','default_voice_id':'hmong-male','version':app.version,'mode':'local',
+        return {'variant':'hmong','app_name':APP_NAME,'default_language':'mww','default_voice_id':preferred_voice_id(),'version':app.version,'mode':'local',
                 'languages':{'mww':LANGUAGES['mww']},'subtitle_languages':SUBTITLE_LANGUAGES,
                 'recognition_languages':{k:v for k,v in SUBTITLE_LANGUAGES.items() if k.split('-')[0] in RECOGNITION_CODES},
                 'ai_voice_languages':['mww'],'max_characters':1_000_000,'max_audio_minutes':180,
@@ -351,11 +397,21 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
                     transcript = normalize_text(transcript)
                 source_duration = await run_in_threadpool(decode_upload, source, decoded)
                 selection = select_reference(content, source_duration, transcript, reference_start, reference_end,
-                                             require_transcript=not native_reference)
+                                             require_transcript=not native_reference, decoded=decoded)
                 if not native_reference:
                     selection['transcript'] = normalize_text(selection['transcript'])
-                duration = await run_in_threadpool(crop_reference, decoded, target,
-                                                   selection['reference_start'], selection['reference_end'])
+                if selection['automatic_reference'] and selection.get('known_preset'):
+                    # Identical bundled originals use the verified selected WAV,
+                    # including its documented headroom normalization.
+                    from hmong_assets import reference
+                    selected, _ = reference(selection['known_preset'])
+                    await run_in_threadpool(shutil.copyfile, selected, target)
+                    import wave
+                    with wave.open(str(target), 'rb') as audio:
+                        duration = audio.getnframes() / audio.getframerate()
+                else:
+                    duration = await run_in_threadpool(crop_reference, decoded, target,
+                                                       selection['reference_start'], selection['reference_end'])
                 transcript = selection['transcript']
             except (ReferenceError, HmongTextError) as exc:
                 raise HTTPException(422, str(exc)) from None
@@ -418,7 +474,7 @@ async def hmong_reference_info(file: UploadFile = File(...)):
             source.write_bytes(content)
             duration = await run_in_threadpool(decode_upload, source, decoded)
             return describe_reference(content, duration,
-                                      require_transcript=active_hmong_engine() != 'hmong_native')
+                                      require_transcript=active_hmong_engine() != 'hmong_native', decoded=decoded)
     except ReferenceError as exc:
         raise HTTPException(422, str(exc)) from None
     except (subprocess.TimeoutExpired, FileNotFoundError):
@@ -444,6 +500,12 @@ def delete_voice(ident: str):
             raise HTTPException(409, 'Giọng đang được dùng trong hàng đợi. Đợi tác vụ hoàn tất trước khi xóa.')
         for suffix in ('.json', '.wav'):
             (DATA / 'voices' / f'{ident}{suffix}').unlink(missing_ok=True)
+        preference = DATA / 'voice-preferences.json'
+        try:
+            if json.loads(preference.read_text(encoding='utf-8')).get('voice_id') == ident:
+                write_json(preference, {'version': 1, 'voice_id': default_preset_id(active_hmong_engine())})
+        except (ValueError, OSError, AttributeError):
+            pass
 
 
 class Speech(BaseModel):
@@ -459,6 +521,7 @@ class Speech(BaseModel):
     speed: float = Field(default=1, ge=0.7, le=1.4)
     format: str = 'wav'
     input_format: str = Field(default='txt', pattern='^(txt|srt)$')
+    subtitle_timing: bool = True
     skip_timestamps: bool = True
     video_id: str | None = None
     video_offset: float = Field(default=0, ge=0, le=10800)
@@ -675,6 +738,8 @@ def speech(body: Speech):
     character_cast = None
     validation_field = 'text'
     try:
+        if body.subtitle_timing is False and (body.video_id or body.character_voices or body.cue_characters):
+            raise ValueError('Lồng tiếng video hoặc phân vai cần giữ mốc thời gian SRT. Bật giữ mốc rồi tạo lại.')
         if body.video_id and len(body.text) > MAX_CHARACTERS:
             raise ValueError('Lồng tiếng video tối đa 200.000 ký tự và 3 giờ. Dùng mục Văn bản thành giọng nói cho sách dài tới 1.000.000 ký tự.')
         segment_plan = ('hmong-expression-v1' if engine in HMONG_ENGINES else
@@ -682,8 +747,8 @@ def speech(body: Speech):
         segments = plan_segments({**body.model_dump(), 'engine': engine, 'segment_plan': segment_plan})
         from narration import validate_voice_text
         for index,segment in enumerate(segments):
-            if segment.text:validate_voice_text(segment.text,engine,f'Câu SRT {segment.cue+1}' if body.input_format=='srt' else f'Đoạn {index+1}')
-        if body.input_format == 'srt':
+            if segment.text:validate_voice_text(segment.text,engine,f'Câu SRT {segment.cue+1}' if segment.cue is not None else f'Đoạn {index+1}')
+        if body.input_format == 'srt' and body.subtitle_timing:
             cues = parse_srt(body.text)
             if body.cue_fit=='gap' and cues[-1]['end']>body.timeline_seconds+.001:
                 raise ValueError('Phụ đề vượt thời lượng video đã chọn.')
@@ -694,14 +759,14 @@ def speech(body: Speech):
         if not any(segment.text for segment in segments):
             raise ValueError('Nhập nội dung đọc, không chỉ ký hiệu nghỉ.')
         if engine in HMONG_ENGINES:
-            if voice.get('speaker') in {'hmong-male','hmong-female'}:
+            if is_preset_voice(voice):
                 from hmong_assets import reference, reference_fingerprint
                 _, reference_text = reference(voice['speaker'])
                 preset_reference_fingerprint = reference_fingerprint(voice['speaker'])
             else:
                 reference_text = voice.get('transcript','')
             validation_field = 'voice_id'
-            if engine != 'hmong_native' or voice.get('speaker') in {'hmong-male','hmong-female'}:
+            if reference_text_required(voice.get('speaker'), engine):
                 validate_voice_text(reference_text,engine,'Lời mẫu tham chiếu')
             voice_snapshot = make_voice_snapshot({**voice, 'engine': engine}, engine, body.language, DATA)
             preset_reference_fingerprint = voice_snapshot['hmong_reference_fingerprint']
@@ -934,7 +999,7 @@ def resume_job(ident: str):
             validate_job_references(job, DATA)
         except (ValueError, OSError) as exc:
             raise HTTPException(409, str(exc)) from None
-        if job.get('engine') in HMONG_ENGINES and job.get('speaker') in {'hmong-male', 'hmong-female'}:
+        if job.get('engine') in HMONG_ENGINES and is_builtin_voice_id(job.get('speaker')):
             from hmong_assets import reference_fingerprint
             try:
                 current_reference = reference_fingerprint(job['speaker'])
@@ -1061,7 +1126,7 @@ def download_script(ident: str, extension: str):
         raise HTTPException(404, 'Chỉ hỗ trợ TXT và SRT.')
     if extension == 'txt':
         text = '\n'.join(c['text'] for c in parse_srt(job['text'])) if job.get('input_format') == 'srt' else job['text']
-    elif job.get('input_format') == 'srt':
+    elif job.get('input_format') == 'srt' and job.get('subtitle_timing', True):
         cues = parse_srt(job['text'])
         expressive = job.get('engine') in HMONG_ENGINES and job.get('segment_plan') == 'hmong-expression-v1'
         timing = DATA / 'audio' / (ident + '.srt')

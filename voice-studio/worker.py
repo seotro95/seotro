@@ -18,7 +18,7 @@ from pathlib import Path
 
 from state_io import write_json_atomic,write_progress,read_progress
 from narration import PCMWriter, PROFILES, Segment, plan_segments
-from hmong_assets import HMONG_ENGINES
+from hmong_assets import HMONG_ENGINES, is_builtin_voice_id
 from character_cast import checkpoint_identity, settings_for_cue, validate_job_references, is_preset_voice
 
 DATA = Path(os.environ['VOICE_STUDIO_DATA_DIR'])
@@ -34,7 +34,7 @@ def write_state(path, data):
 def load_synthesizer(job):
     import soundfile as sf
     if job['engine'] in HMONG_ENGINES:
-        if job.get('speaker') in {'hmong-female', 'hmong-male'} and not is_preset_voice(job):
+        if is_builtin_voice_id(job.get('speaker')) and not is_preset_voice(job):
             raise ValueError('Danh tính giọng cá nhân không khớp giọng mặc định. '
                              'Tạo tác vụ mới bằng hồ sơ giọng cá nhân; không thay bằng giọng mặc định.')
         global _hmong_model_instance, _hmong_native_instance
@@ -275,8 +275,11 @@ def _chunk_identity(job, segment):
             'delivery', 'segment_plan', 'emotion', 'emotion_strength', 'auto_rhythm',
             'hmong_phrase_context', 'paragraph_pause', '_longform_parent_id', '_longform_identity',
             '_PREPLANNED_SEGMENTS')
+    settings = {key: job.get(key) for key in keys}
+    if job.get('input_format') == 'srt' and job.get('subtitle_timing', True) is False:
+        settings['subtitle_timing'] = False
     payload = {'version': 1, 'cast': cast_identity, 'segment': vars(segment),
-               'settings': {key: job.get(key) for key in keys}}
+               'settings': settings}
     return hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True,
                                     separators=(',', ':'), allow_nan=False).encode('utf-8')).hexdigest()
 
@@ -295,7 +298,7 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
     import numpy as np
     identity = _chunk_identity(job, segment)
     job = settings_for_cue(job, segment.cue)
-    label=f'Câu SRT {segment.cue+1}' if job.get('input_format')=='srt' else f'Đoạn {index+1}'
+    label=f'Câu SRT {segment.cue+1}' if segment.cue is not None else f'Đoạn {index+1}'
     validate_voice_text(segment.text,job.get('engine'),label)
     work = Path(work)
     part = work / f'{index:06d}.wav'
@@ -370,7 +373,7 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
 def render(job, synthesize=None):
     global _nano_pool, _nano_pool_workers, _cached_synth, _cached_key
     validate_job_references(job, DATA)
-    if job.get('engine') in HMONG_ENGINES and job.get('speaker') in {'hmong-male', 'hmong-female'}:
+    if job.get('engine') in HMONG_ENGINES and is_builtin_voice_id(job.get('speaker')):
         from hmong_assets import reference_fingerprint
         try:
             current_reference = reference_fingerprint(job['speaker'])
@@ -408,7 +411,12 @@ def render(job, synthesize=None):
     from hmong_expression import enabled as expression_enabled
     expressive = expression_enabled(job)
     from subtitles import parse_srt, export_srt
-    cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
+    cues = (parse_srt(job['text']) if job.get('input_format') == 'srt'
+            and job.get('subtitle_timing', True) else None)
+    if job.get('input_format') == 'srt' and job.get('subtitle_timing', True) is False:
+        # A previously interrupted timed attempt is not alignment evidence
+        # for this newly planned continuous reading.
+        (work / 'alignment.json').unlink(missing_ok=True)
     if expressive and cues:
         for cue_index, cue in enumerate(cues):
             cue['text'] = ' '.join(segment.text for segment in segments

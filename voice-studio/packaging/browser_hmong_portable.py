@@ -23,6 +23,9 @@ import zipfile
 
 MALE = 'hmong-male'
 FEMALE = 'hmong-female'
+ADDITIONAL = ('hmong-ngoc-huyen', 'hmong-female-3')
+SRT_SPOKEN_SAMPLE = '"217\n00:06:07,200 --> 00:06:08,400\nTae-yong cov ntaub ntawv tus kheej "'
+SRT_SPOKEN_WORDS = 'Tae-yong cov ntaub ntawv tus kheej'
 REPORT_NAME = 'browser-smoke.json'
 HYPHENATED_SAMPLE = 'Nyob-zoo, kuv yog ib tug Hmoob.'
 SAMPLE = 'Nyob zoo. Ua tsaug rau koj mloog.'
@@ -243,7 +246,8 @@ def launch_browser(driver):
                        + ' | '.join(failures))
 
 
-def run(url, reports, expected_references, *, allow_non_windows=False, external_reference=None):
+def run(url, reports, expected_references, *, allow_non_windows=False, external_reference=None,
+        expected_additional_references=None):
     """Write a mandatory browser report; raise if any release check fails."""
     reports = Path(reports)
     reports.mkdir(parents=True, exist_ok=True)
@@ -252,6 +256,7 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
               'engine': 'hmong_native', 'real_ui_synthesis': False,
               'browser': {}, 'runtime': {}, 'voices': {}, 'cases': [],
               'expected_reference_fingerprints': expected_references,
+              'expected_additional_reference_fingerprints': expected_additional_references,
               'cloned_filter_library_selection': False,
               'cross_panel_selection': False, 'hyphenated_text_preserved': False,
               'page_errors': [],
@@ -268,6 +273,8 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
         assert isinstance(expected_references, dict) and set(expected_references) == {MALE, FEMALE}
         assert all(isinstance(value, str) and re.fullmatch(r'[a-f0-9]{64}', value)
                    for value in expected_references.values()), 'Missing independently verified reference identities'
+        assert isinstance(expected_additional_references, dict) and set(expected_additional_references) == set(ADDITIONAL)
+        assert all(re.fullmatch(r'[a-f0-9]{64}', value) for value in expected_additional_references.values())
         from playwright.sync_api import expect, sync_playwright
         with sync_playwright() as driver:
             browser, channel = launch_browser(driver)
@@ -292,16 +299,23 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
             assert result['runtime']['url'].rstrip('/') == url.rstrip('/')
             assert result['runtime']['version'] == config['version']
             result['application_version'] = config['version']
+            assert config['default_voice_id'] == 'hmong-female-3'
+            result['initial_voice_id'] = config['default_voice_id']
             voices = get_json('/api/voices')['voices']
             presets = {voice['id']: voice for voice in voices if voice['id'] in {MALE, FEMALE}}
             assert set(presets) == {MALE, FEMALE}
             assert all(voice['ready'] is not False and voice['engine'] == 'hmong_native'
                        for voice in presets.values())
+            additional_presets = {voice['id']: voice for voice in voices if voice['id'] in ADDITIONAL}
+            assert set(additional_presets) == set(ADDITIONAL)
+            assert all(voice['ready'] is not False and voice['engine'] == 'hmong_native'
+                       and voice['reference_conditioning'] == 'audio'
+                       for voice in additional_presets.values())
             page.goto(url, wait_until='networkidle')
             expect(page).to_have_title('Voice Studio Hmong')
             expect(page.locator('#panel-create')).to_be_visible()
-            expect(page.locator('#voice')).to_have_value(MALE)
-            expect(page.locator('#dub-voice')).to_have_value(MALE)
+            expect(page.locator('#voice')).to_have_value('hmong-female-3')
+            expect(page.locator('#dub-voice')).to_have_value('hmong-female-3')
 
             def tab(name):
                 page.locator('.nav-item[data-tab="' + name + '"]').click()
@@ -327,15 +341,19 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
                     expect(page.locator(selector)).to_have_value('all')
 
             render_references = dict(expected_references)
+            render_references.update(expected_additional_references)
 
-            def synthesize(name, ident, text=SAMPLE, workspace=False, *, record_case=True, custom=False):
+            def synthesize(name, ident, text=SAMPLE, workspace=False, *, record_case=True, custom=False,
+                           input_format='txt', subtitle_timing=True):
                 script = '#workspace-free-script' if workspace else '#script'
                 button = '#workspace-free-generate' if workspace else '#generate'
                 audio = '#workspace-free-audio' if workspace else '#output-audio'
                 page.locator(script).fill(text)
                 if not workspace:
                     page.locator('#format').select_option('wav')
-                    page.locator('#script-format').select_option('txt')
+                    page.locator('#script-format').select_option(input_format)
+                    if input_format == 'srt':
+                        page.locator('#create-subtitle-timing').set_checked(subtitle_timing)
                 expect(page.locator(button)).to_be_enabled()
                 started = time.monotonic()
                 with page.expect_response(lambda response:
@@ -346,6 +364,8 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
                 payload = response.request.post_data_json
                 assert payload['voice_id'] == ident and payload['language'] == 'mww', payload
                 assert payload['text'] == text and payload['format'] == 'wav', payload
+                if input_format == 'srt':
+                    assert payload['input_format'] == 'srt' and payload['subtitle_timing'] is subtitle_timing
                 assert 'hmong_steps' not in payload, 'Native UI must not request F5 steps'
                 assert response.status == 202, response.text()
                 queued = response.json()
@@ -403,6 +423,7 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
                           'hmong_steps': job['hmong_steps'], 'hmong_precision': job['hmong_precision'],
                           'hmong_device': job['hmong_device'], 'text': text,
                           'original_text_preserved': job['text'] == text,
+                          'input_format': job['input_format'], 'subtitle_timing': job.get('subtitle_timing', True),
                           'ui_entrypoint': button, 'real_ui_post': True,
                           'playback': playback, 'audio_playback_checked': True,
                           'download_verified': True,
@@ -472,6 +493,45 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
                 'input_format': 'txt', 'exported_spoken_text': spoken,
                 'timestamps_not_spoken': True, 'cue_indices_not_spoken': True,
                 'continuous_txt_duration': True}
+            only_words = synthesize('quoted_217_srt_speech_only', MALE, SRT_SPOKEN_SAMPLE,
+                                    record_case=False, input_format='srt', subtitle_timing=False)
+            exported = context.request.get('/api/jobs/' + only_words['job_id'] + '/export.txt')
+            generated_srt = context.request.get('/api/jobs/' + only_words['job_id'] + '/script.srt')
+            assert exported.ok and generated_srt.ok
+            assert ' '.join(exported.text().split()) == SRT_SPOKEN_WORDS
+            assert 1 / 3 < only_words['audio_seconds'] < 30
+            generated_text = generated_srt.text().replace('\r\n', '\n')
+            assert generated_text.startswith('1\n00:00:00,000 --> ')
+            assert '00:06:07,200' not in generated_text and '217\n' not in generated_text
+            result['srt_speech_only'] = {**only_words, 'success': True,
+                'exported_spoken_text': SRT_SPOKEN_WORDS,
+                'generated_srt': generated_text, 'generated_timing_checked': True,
+                'timestamps_not_spoken': True, 'cue_indices_not_spoken': True,
+                'continuous_srt_duration': True}
+            additional_metadata = json.loads((Path(__file__).resolve().parents[1]
+                / 'assets/hmong/additional-voices.json').read_text(encoding='utf-8'))
+            result['additional_presets'] = {}
+            for ident in ADDITIONAL:
+                metadata = additional_metadata[ident]
+                page.locator('#hmong-voice-choices [data-hmong-voice="' + ident + '"]').click()
+                expect(page.locator('#voice')).to_have_value(ident)
+                expect(page.locator('#dub-voice')).to_have_value(ident)
+                source = context.request.get(additional_presets[ident]['sample_url'])
+                assert source.ok and hashlib.sha256(source.body()).hexdigest() == metadata['sha256']
+                refbytes = (Path(__file__).resolve().parents[1] / 'assets/hmong' / metadata['reference_file']).read_bytes()
+                assert hashlib.sha256(refbytes).hexdigest() == metadata['reference_sha256']
+                identity = hashlib.sha256(json.dumps({'version': 1,
+                    'audio_sha256': metadata['reference_sha256'], 'transcript': ''},
+                    ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()
+                assert identity == expected_additional_references[ident]
+                added = synthesize('additional_preset_' + ident, ident, record_case=False)
+                snapshot = get_json('/api/jobs/' + added['job_id'])['hmong_voice_snapshot']
+                assert snapshot['reference_text'] == '' and snapshot['speaker'] == ident
+                result['additional_presets'][ident] = {**added, 'success': True,
+                    'source_sha256': metadata['sha256'],
+                    'reference_audio_sha256': metadata['reference_sha256'],
+                    'reference_conditioning': 'audio', 'no_transcript': True,
+                    'preset_button_checked': True, 'full_source_preview_checked': True}
             assert external_reference is not None, 'A real non-Hmong reference is required'
             external = Path(external_reference)
             assert external.is_file() and external.name == 'external-english-reference.wav'
@@ -562,9 +622,12 @@ def main():
                         help='Local development only; this report cannot pass the Windows release gate.')
     parser.add_argument('--external-reference', required=True, type=Path,
                         help='Builder-owned five-second English reference, independent of default voices.')
+    parser.add_argument('--expected-additional-references', required=True,
+                        help='Exact JSON fingerprints of the two additional user-supplied native voices.')
     args = parser.parse_args()
     run(args.url, args.reports, json.loads(args.expected_references),
-        allow_non_windows=args.allow_non_windows, external_reference=args.external_reference)
+        allow_non_windows=args.allow_non_windows, external_reference=args.external_reference,
+        expected_additional_references=json.loads(args.expected_additional_references))
 
 
 if __name__ == '__main__':

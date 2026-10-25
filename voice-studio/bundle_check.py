@@ -19,11 +19,13 @@ PYTHON_FILES = (
     'video_export.py', 'video_tasks.py', 'voice_errors.py', 'worker.py', 'writing.py',
 )
 STATIC_FILES = tuple('static/' + name for name in (
-    'index.html', 'style.css', 'app.js', 'workspace.js', 'studio-tools.js',
+    'index.html', 'style.css', 'text-import.js', 'app.js', 'workspace.js', 'studio-tools.js',
     'video-editor.js', 'video-preview.js', 'direct-video.js',
 ))
 ASSET_FILES = tuple('assets/hmong/' + name for name in (
     'voices.json', 'female.wav', 'male.wav', 'source-female.mp3', 'source-male.mp3',
+    'additional-voices.json', 'source-ngoc-huyen.mp3', 'ngoc-huyen.wav',
+    'source-female-3.mp3', 'female-3.wav',
 ))
 DOCUMENTATION_FILES = ('docs/HUONG-DAN-HMONG.md', 'docs/HUONG-DAN-HMONG.html')
 REQUIRED_FILES = PYTHON_FILES + STATIC_FILES + ASSET_FILES + DOCUMENTATION_FILES + ('hmong_native_vendor/manifest.json',)
@@ -100,8 +102,14 @@ def validate_bundle(base=None):
         if manifest_path.stat().st_size > 100_000:
             raise ValueError('voice manifest too large')
         records = json.loads(manifest_path.read_text(encoding='utf-8'))
-        for gender in ('male', 'female'):
-            item = records[gender]
+        additional_path = root / 'additional-voices.json'
+        if additional_path.stat().st_size > 100_000:
+            raise ValueError('additional voice manifest too large')
+        additional = json.loads(additional_path.read_text(encoding='utf-8'))
+        if set(additional) != {'hmong-ngoc-huyen', 'hmong-female-3'}:
+            raise ValueError('additional voice IDs differ')
+        voice_records = [records[gender] for gender in ('male', 'female')] + list(additional.values())
+        for item in voice_records:
             for key, checksum in (('file', 'sha256'), ('reference_file', 'reference_sha256')):
                 relative = item[key]
                 if (not isinstance(relative, str) or Path(relative).name != relative
@@ -123,13 +131,13 @@ def validate_bundle(base=None):
         raise BundleError(_repair_message('Tệp giọng mặc định hoặc SHA256 không hợp lệ: ' + str(exc))) from None
     vendor_checksums = validate_native_vendor(base)
     return {'application_files': len(REQUIRED_FILES) + vendor_checksums,
-            'voice_checksums': 4, 'native_code_checksums': vendor_checksums}
+            'voice_checksums': 8, 'native_code_checksums': vendor_checksums}
 
 
 if __name__ == '__main__':
     try:
         validate_bundle()
-        print('PASS: đủ tệp ứng dụng, giao diện và bốn checksum giọng mặc định.')
+        print('PASS: đủ tệp ứng dụng, giao diện và tám checksum của bốn giọng có sẵn.')
     except BundleError as exc:
         print('LỖI: ' + str(exc), file=sys.stderr)
         sys.exit(1)

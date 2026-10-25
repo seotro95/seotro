@@ -2,7 +2,7 @@
 import re
 from html import unescape
 
-from caption_markers import is_cue_index, normalize_caption_text, parse_timing_line
+from caption_markers import cue_index_value, normalize_caption_text, parse_timing_line
 
 
 def parse_srt(text):
@@ -16,6 +16,7 @@ def parse_srt(text):
     timing = None
     content_lines = []
     next_index = 1
+    numbered_captions = False
 
     def finish():
         start, end = timing['start'], timing['end']
@@ -42,11 +43,13 @@ def parse_srt(text):
             content_lines.pop()
         has_other_words = (timing is None or timing['text']
                            or any(line.strip() for line in content_lines[:-1]))
-        if content_lines and is_cue_index(content_lines[-1]) and has_other_words:
-            value = int(content_lines[-1].strip().rstrip('.)'))
-            if value > 0 and (timing is None or value == next_index):
+        value = cue_index_value(content_lines[-1]) if content_lines else None
+        if value is not None and has_other_words:
+            blank_before = len(content_lines) > 1 and not content_lines[-2].strip()
+            if timing is None or numbered_captions or value == next_index or blank_before:
                 content_lines.pop()
                 next_index = value
+                numbered_captions = True
         if timing is not None:
             finish()
         elif any(line.strip() for line in content_lines):

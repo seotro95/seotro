@@ -53,10 +53,13 @@ def test_native_config_and_presets_report_the_active_backend(native_studio):
     assert config['models'] == {'hmong_native': True, 'f5_hmong': False}
     assert config['auto_rhythm'] is False and config['hmong_phrase_context'] is True
     voices = client.get('/api/voices').json()['voices']
-    assert {voice['id'] for voice in voices} == {'hmong-male', 'hmong-female'}
+    assert {voice['id'] for voice in voices} == {'hmong-male', 'hmong-female', 'hmong-female-3', 'hmong-ngoc-huyen'}
+    assert config['default_voice_id'] == 'hmong-female-3'
     assert all(voice['engine'] == 'hmong_native' and voice['native_language'] == 'mww'
                and voice['ready'] for voice in voices)
-    assert all(voice['reference_text_verified'] for voice in voices)
+    assert all(voice['reference_text_verified'] for voice in voices if voice['id'] in {'hmong-male', 'hmong-female'})
+    assert all(not voice['reference_text_verified'] and voice['reference_conditioning'] == 'audio'
+               for voice in voices if voice['id'] in {'hmong-female-3', 'hmong-ngoc-huyen'})
 
 
 def test_male_and_female_share_one_consistent_model_readiness_snapshot(native_studio, monkeypatch):
@@ -67,7 +70,7 @@ def test_male_and_female_share_one_consistent_model_readiness_snapshot(native_st
     monkeypatch.setattr(app, 'model_ready', readiness)
     voices = client.get('/api/voices').json()['voices']
     assert {voice['id']: voice['ready'] for voice in voices} == {
-        'hmong-male': True, 'hmong-female': True}
+        'hmong-male': True, 'hmong-female': True, 'hmong-female-3': True, 'hmong-ngoc-huyen': True}
     readiness.assert_called_once_with('hmong_native')
 
 
