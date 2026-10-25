@@ -671,7 +671,7 @@ def test_browser_smoke_passes_verified_references_to_external_browser_without_de
     def run(command, **kwargs):
         if command[0] == 'ffmpeg':
             assert command[1:5] == ['-nostdin', '-v', 'error', '-i']
-            assert command[5].endswith('/runtime/Lib/site-packages/f5_tts/infer/examples/basic/basic_ref_en.wav')
+            assert Path(command[5]) == tmp_path / 'portable/runtime/Lib/site-packages/f5_tts/infer/examples/basic/basic_ref_en.wav'
             assert command[6:] == ['-t', '5', '-ac', '1', '-ar', '24000', '-c:a', 'pcm_s16le',
                                    '-y', str(reports / 'external-english-reference.wav')]
             assert kwargs == {'check': True, 'capture_output': True, 'timeout': 30}
