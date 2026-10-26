@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "package_version": "0.8.1",
+  "notice": "Integrity inventory; not an antivirus verdict or digital signature.",
+  "files": {
+    "HUONG_DAN.txt": {
+      "bytes": 13735,
+      "sha256": "c69a1b4fd4d05ab602216bac99a96b8e9e0f13848ca8b822fb50eee8f85cd2e1"
+    },
+    "MO_HMONG_NHANH.bat": {
+      "bytes": 491,
+      "sha256": "7bf0a39e0ad7861ea24450ac0ada1d807bb6fabcc479154d22b5ae95f6a4a124"
+    },
+    "app/app.py": {
+      "bytes": 11155,
+      "sha256": "aa19cc143383328d0e487284f447ca29e4fa1b863f76561900b02508e8b15386"
+    },
+    "app/audio_import.py": {
+      "bytes": 3185,
+      "sha256": "fefdf8422c9560d25c6f5becbc3028a7304036a476dc3c33633ba528bd314a87"
+    },
+    "app/audio_timing.py": {
+      "bytes": 7414,
+      "sha256": "0e501d8f813a3f9c920556f6be21ca3440b9bc9554fd6ac311a36671c9310c67"
+    },
+    "app/bootstrap.py": {
+      "bytes": 6317,
+      "sha256": "ab99bfe6942dde0c4499915dd06100629db8aa6a8a4bfa166cc6078906356e31"
+    },
+    "app/builtin_references.py": {
+      "bytes": 5397,
+      "sha256": "94db112cca02959414a0d3e208178fc3c8d2e22dbe523665f76540777f187d73"
+    },
+    "app/cloning_engine.py": {
+      "bytes": 22011,
+      "sha256": "9e0c12e5db9784359836c618a803fed89afb54c2690a73cb8c35fcece4e02df0"
+    },
+    "app/cpu_runtime.py": {
+      "bytes": 1493,
+      "sha256": "39e3e912cfa4f3ad6ecc7c82be46a45ce0c1126ce129b7c049662c2be5bec484"
+    },
+    "app/custom_references.py": {
+      "bytes": 9587,
+      "sha256": "3b6a2d01c8589d1ddf2314116425b149e5c2ac9a3c8ec07335f09fa40e212f4b"
+    },
+    "app/documents.py": {
+      "bytes": 10364,
+      "sha256": "6ab5c2eb91717f8486188604f9313e7656b8db7564d92aa8709a1c56ac1e007f"
+    },
+    "app/hardware.py": {
+      "bytes": 8293,
+      "sha256": "85cdb7b5f9584ec86074ea28006c7423780f8df88ada35613c5e300929850e9d"
+    },
+    "app/launch.py": {
+      "bytes": 2206,
+      "sha256": "e88c2024384b6442120c60810b73b81c19e8ab90e63c13feff0746bc18ada586"
+    },
+    "app/longform.py": {
+      "bytes": 23130,
+      "sha256": "d1558ba72fb9f5d4e0cf22bcbebf96f1a4cf159f078a6be3e96ab2e936ec0bb6"
+    },
+    "app/model_files.py": {
+      "bytes": 3898,
+      "sha256": "f0584ebca6818af5d85c4ee661eac156830526e467df17e1cf51ba7f40c77503"
+    },
+    "app/model_manifest.py": {
+      "bytes": 1788,
+      "sha256": "c1f14d9ea728fbde2fa5334d9d957b81441b9435b58c1b8decd4cf4f7881a2c7"
+    },
+    "app/prepare_env.bat": {
+      "bytes": 395,
+      "sha256": "c02c6a6b4b8bed5421a69b06f42d531ea42348eaa6d5736a564ff746e92906fb"
+    },
+    "app/render_cache.py": {
+      "bytes": 1324,
+      "sha256": "ec2d60b9e6f372b83f0ba1122ed362427bd4082246d4ae656d6f900c6941d0ad"
+    },
+    "app/requirements-voice.txt": {
+      "bytes": 109,
+      "sha256": "33ddda40e9b7074e1d303f9528308504b3fb440a0aad4c712829e3392666fa1d"
+    },
+    "app/requirements.txt": {
+      "bytes": 53,
+      "sha256": "336e4b8dc30a86023cfbd5fff988e5b2f19405a44bb38efde01a31e442e955c8"
+    },
+    "app/setup_runtime.py": {
+      "bytes": 5032,
+      "sha256": "7caabe084ac661bf83838df0d8c5666d83032984ae3a26c868a63484d6547c72"
+    },
+    "app/setup_voice.py": {
+      "bytes": 5781,
+      "sha256": "b6f4f7c02f256c4656083b33ddb385058644b8ae68bed48b214846bd4fef69db"
+    },
+    "app/static/app.js": {
+      "bytes": 41288,
+      "sha256": "228237914853428524ad9c81417cbb9601b860127b41c7de19f96275185ece56"
+    },
+    "app/static/index.html": {
+      "bytes": 11080,
+      "sha256": "ba1257e173ec822b9b358bf04d2683debe86ec6d77b79b34e749612bf1bb463a"
+    },
+    "app/static/style.css": {
+      "bytes": 8903,
+      "sha256": "3af8e775aebe8f60ba7189748227d03345d6cb1f31fba7d24da729ef24dc9064"
+    },
+    "app/static/voices/builtin-hmong-female-1.mp3": {
+      "bytes": 537336,
+      "sha256": "2c3467e7b5f0e49a3277397c00762810f657fd1bbd36f738a7e17d0f067f6222"
+    },
+    "app/static/voices/builtin-hmong-female-2.mp3": {
+      "bytes": 112899,
+      "sha256": "874f510e723f48fcd093d55a5ba4613fc80107a863261658ec9d3961ef493d84"
+    },
+    "app/static/voices/builtin-hmong-female-3.mp3": {
+      "bytes": 255214,
+      "sha256": "aec83955c0c81abe7355167c779c7ca4c6c4b51422b4ba1018b7ff8f6b30fb1b"
+    },
+    "app/static/voices/builtin-hmong-male-1.mp3": {
+      "bytes": 454580,
+      "sha256": "29285370b91db8465222b2056b204110c6dded1a60c9004c7fb8747fe4978c9c"
+    },
+    "app/static/voices/builtin-hmong-male-2.mp3": {
+      "bytes": 112899,
+      "sha256": "bc9104c2ebe00471abc46283c52627b2cadc615d96f15f1dc9d576b1316d78c8"
+    },
+    "app/static/voices/builtin-ngoc-huyen.mp3": {
+      "bytes": 236405,
+      "sha256": "0f0902ae57716c6933d2cc9385714a68d318080bed4addcf7f4ac1804545070f"
+    },
+    "app/static/voices/catalog.json": {
+      "bytes": 2263,
+      "sha256": "5543754de94dff7e2726d8f8a08d21e619b7e7acf70aa09ba45cc4c705a107f6"
+    },
+    "app/static/voices/hmong-white-female.mp3": {
+      "bytes": 373078,
+      "sha256": "7b06d1398f3599020f2a9e80a8883b4f82cd20998cd8e3fe8ed29c203a8415c5"
+    },
+    "app/static/voices/hmong-white-male.mp3": {
+      "bytes": 358032,
+      "sha256": "c5939f29cfd9c032618b99e409981e9d237dfaca08340dc3ab9d67df8a05c86e"
+    },
+    "app/verify_release.py": {
+      "bytes": 2896,
+      "sha256": "dc033734ebbfa3de14d23884ca27ab2ad4b5f7c8f1f3841e1d3655acd291fdd3"
+    },
+    "app/voice_jobs.py": {
+      "bytes": 17479,
+      "sha256": "0433d6ad94ea2e7a68ee40cb2e44a2ac6f8ddeffe296b2b2b52564d52644a35d"
+    },
+    "app/voice_worker.py": {
+      "bytes": 2308,
+      "sha256": "b30fbfa57fb70064e2cf288421a65c2186bfeaf4a99852532417e69b61c03485"
+    }
+  }
+}

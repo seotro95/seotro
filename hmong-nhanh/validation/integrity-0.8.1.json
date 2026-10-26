@@ -1,0 +1,63 @@
+{
+  "version": "0.8.1",
+  "tests_passed": 287,
+  "test_seconds": 21.03,
+  "real_model_integrity": {
+    "trusted_release_models_verified": true,
+    "files": 4,
+    "initial_verify_seconds": 2.474455,
+    "cached_verify_seconds": 0.000145,
+    "actual_override_paths_verified": true,
+    "local_receipt_required": false
+  },
+  "real_model_load": {
+    "version": "0.8.1",
+    "real_pinned_model_loaded": true,
+    "device": "cpu",
+    "cached_reload_same_object": true,
+    "load_seconds": 15.647,
+    "inference_not_rerun": true,
+    "antivirus_verdict": "unknown"
+  },
+  "prior_0_8_artifact": {
+    "sha256": "940bf6d0fc768d6c954be484b60cc8a9c98e1934663d53e3969b3e16f34a9665",
+    "static_archive_checks": {
+      "zip_crc_error": null,
+      "entries": 35,
+      "path_traversal_or_ads": [],
+      "symlinks": [],
+      "encrypted_entries": [],
+      "native_executables_or_flagged_script_extensions": [],
+      "bat_entries": [
+        "Hmong-Nhanh/MO_HMONG_NHANH.bat",
+        "Hmong-Nhanh/app/prepare_env.bat"
+      ]
+    }
+  },
+  "antivirus": {
+    "verdict": "unknown",
+    "engine_scan_performed": false,
+    "reported_by_user": "Browser screenshot says Virus detected; detecting engine and threat name not provided.",
+    "scan_limitation": "No installed AV scanner or signature database. Official ClamAV daily.cvd request blocked by managed proxy with HTTP403; no workaround attempted. Windows Defender unavailable on Linux.",
+    "warning_resolved": false
+  },
+  "changes": [
+    "Pin exact four reviewed model artifacts by immutable source commit, SHA256 and size.",
+    "Verify actual files before F5/Vocos construction and reload; ignore local receipt as trust authority.",
+    "Validate shipped program/audio inventory before bootstrap prepares environment.",
+    "Keep existing features, reference files and user data; no antivirus exclusion, disablement, disguised extension or archive encryption."
+  ],
+  "validation_limits": [
+    "No Windows Defender execution or Windows BAT execution.",
+    "Integrity tests and static archive audit are not malware scans.",
+    "No assertion that rebuilding or integrity changes resolve the browser alert."
+  ],
+  "package": {
+    "path": "/workspace/work/Hmong-Nhanh-0.8.1.zip",
+    "bytes": 2449762,
+    "sha256": "6ef5e0c70ffc2bc744575c9d386cb3acf949dd8fce7390d073daea6659eefd24",
+    "git_blob": "884b2ab857a1640d16a5aea4e26b73c6f5d9149e",
+    "zip_entries": 38,
+    "source_files": 58
+  }
+}

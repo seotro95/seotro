@@ -137,7 +137,7 @@ def test_local_model_constructor_does_not_use_implicit_downloads(tmp_path):
     factory = Mock()
     torch = Mock()
     with patch.dict('sys.modules', {'torch': torch, 'f5_tts': Mock(), 'f5_tts.api': Mock(F5TTS=factory)}):
-        with patch.object(engine, '_model', None), patch.object(engine, '_model_key', None):
+        with patch.object(engine, '_model', None), patch.object(engine, '_model_key', None), patch.object(engine, 'verify_model_paths', return_value=('verified test fixtures',)):
             first = engine._load_model(arguments)
             assert engine._load_model(arguments) is first
             factory.assert_called_once_with(model='F5TTS_Base', ckpt_file=arguments['checkpoint'],

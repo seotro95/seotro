@@ -1,4 +1,17 @@
-HMONG NHANH — BẢN 0.8.0
+HMONG NHANH — BẢN 0.8.1
+
+
+CẢNH BÁO TẢI XUỐNG VÀ KIỂM TRA BẢN 0.8.1
+
+Bản 0.8 trước đó được báo chặn tải với thông báo “Đã phát hiện thấy vi-rút”. Ảnh chưa cho biết tên mối đe dọa hoặc bộ phát hiện. Rà mã/gói chỉ là kiểm tra tĩnh; chưa có kết quả quét Windows Defender xác nhận. KHÔNG coi bản này là “đã được antivirus chứng nhận sạch”, không tắt antivirus, thêm ngoại lệ hoặc khôi phục file bị cách ly để chạy.
+
+Bản 0.8.1 cố định bốn file mô hình vào đúng commit và SHA-256 đã dùng để kiểm thử, kiểm tra chúng ngay trước khi nạp mô hình, và dừng nếu cấu hình/trọng số sai. Danh sách tải không còn lấy phiên bản main thay đổi theo thời gian. Mô hình đã tải đúng bản được dùng lại; không phải tải lại 1,4 GB chỉ vì cập nhật tool.
+
+release-files.json liệt kê SHA-256 và kích thước từng tệp phát hành. Bộ khởi chạy đối chiếu danh sách trước khi tạo/cập nhật môi trường Python; tệp thiếu hoặc bị đổi sẽ dừng. Có thể kiểm tra bằng lệnh “py app\verify_release.py” trong thư mục tool. Kiểm tra hash xác nhận các tệp khớp bản phát hành, không thay thế antivirus hoặc chữ ký số. Mã kiểm tra toàn bộ ZIP được công bố trên GitHub. Không chạm tới dữ liệu riêng trong .data.
+
+Gói vẫn dùng mã nguồn Python/BAT/JS đọc được và các mẫu âm thanh; không đóng kèm EXE/DLL, môi trường Python hoặc mô hình. Lần cài đầu vẫn tải thư viện từ nguồn PyPI/PyTorch và mô hình Hugging Face qua HTTPS. Giữ nguyên cách mở MO_HMONG_NHANH.bat và các chức năng giọng/SRT/lịch sử của bản 0.8.
+
+Nếu trình duyệt tiếp tục báo vi-rút, dừng dùng gói đó và xem Bảo mật Windows → Bảo vệ khỏi vi-rút và mối đe dọa → Lịch sử bảo vệ để lấy tên như Trojan:Win32/… và tệp bị ảnh hưởng. Thông tin này cần để xác định cảnh báo; đổi tên/nén lại không phải cách xác nhận an toàn.
 
 MỞ TOOL VÀ GIỮ LỊCH SỬ
 
@@ -81,3 +94,5 @@ Với SRT bắt đầu ở phút thứ 6, WAV giữ khoảng lặng đầu để
 Bằng chứng bản 0.7 trước đó: 205 kiểm thử tự động đạt, gồm mẫu SRT 196, codec âm thanh thật, lịch sử sau khởi động lại, tải WAV và xử lý đường dẫn tiếng Việt của worker. Kết quả kiểm tra bản 0.8 được ghi trong hướng dẫn GitHub kèm bản phát hành.
 
 Kiểm tra bản 0.8: 252 kiểm thử tự động đạt và kiểm thử giao diện Chromium đạt. Thử mô hình thật cùng câu Tae-yong, 16 bước: tạo mới 74,492 giây cho 3,467 giây âm thanh; lặp lại đúng điều kiện dùng lại WAV trong 0,012789 giây. Dùng lại kết quả không phải tốc độ tạo lời mới.
+
+Kiểm thử bản 0.8.1: 287 kiểm thử tự động đạt. Bộ mô hình chính thức đang có được xác minh đúng SHA-256. Đây là kiểm tra phần mềm/toàn vẹn; chưa xác nhận cảnh báo antivirus trên Windows đã hết.

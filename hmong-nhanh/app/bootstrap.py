@@ -147,6 +147,11 @@ def main(argv=None):
     action.add_argument('--prepare', action='store_true', help='Prepare .venv (the default).')
     args = parser.parse_args(argv)
     try:
+        from verify_release import verify_package, ReleaseIntegrityError
+        try:
+            verify_package(Path(__file__).resolve().parent.parent)
+        except ReleaseIntegrityError as exc:
+            raise BootstrapError(str(exc)) from None
         prepare(Path(__file__).resolve().parent, check_only=args.check)
     except BootstrapError as exc:
         print('LOI: ' + str(exc), file=sys.stderr)

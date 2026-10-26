@@ -1,49 +1,30 @@
-# Hmong Nhanh 0.8.0
+# Hmong Nhanh 0.8.1
 
-Bản 0.8 thêm sáu file giọng được gửi vào danh sách mẫu có sẵn, xử lý phụ đề sao chép có dấu ngoặc kép, nhớ giọng đang chọn và giảm việc tạo lại những câu giống hệt nhau.
+Bản 0.8 được người dùng báo trình duyệt chặn với thông báo **“Đã phát hiện thấy vi-rút”**. Chưa có tên mối đe dọa hoặc kết quả quét Windows Defender để xác định nguyên nhân. Bản 0.8.1 sửa khâu xác minh tệp/mô hình; **chưa xác nhận cảnh báo antivirus đã được giải quyết**.
 
-[Tải Hmong-Nhanh-da-sua.zip](https://github.com/seotro95/seotro/raw/refs/heads/codex/hmong-nhanh-0.8.0/Hmong-Nhanh-da-sua.zip) · [Mã nguồn](hmong-nhanh/) · [Hướng dẫn đầy đủ](hmong-nhanh/HUONG_DAN.txt)
+[Gói 0.8.1](https://github.com/seotro95/seotro/raw/refs/heads/codex/hmong-nhanh-0.8.1/Hmong-Nhanh-da-sua.zip) · [Mã nguồn](hmong-nhanh/) · [Hướng dẫn](hmong-nhanh/HUONG_DAN.txt) · [Báo cáo kiểm tra](hmong-nhanh/validation/integrity-0.8.1.json)
 
-Giải nén rồi mở **MO_HMONG_NHANH.bat**. Khi cập nhật, tắt tool, thay tệp chương trình và **giữ nguyên `.data`** để giữ mô hình, mẫu đã lưu và lịch sử. Cần Python 3.12 64-bit; lần đầu cần mạng tải thư viện và khoảng 1,4 GB trọng số.
+## Thay đổi có thể kiểm tra
 
-## Sáu mẫu có sẵn
+- Cố định bốn tệp F5-Hmong/Vocos theo đúng commit, kích thước và SHA-256 của các tệp đã dùng kiểm thử. Bộ cài không lấy bản `main` mới nhất làm nguồn tin cậy.
+- Kiểm tra các tệp thực tế ngay trước khi nạp/nạp lại mô hình. Cấu hình Vocos bị thay đổi bị chặn trước khi thư viện đọc và khởi tạo lớp Python từ cấu hình.
+- Không lấy `verified-models.json` có thể sửa trong thư mục dữ liệu làm nguồn checksum đáng tin duy nhất. Đường dẫn tùy chỉnh vẫn phải chứa đúng các tệp mô hình đã cố định.
+- Thêm `release-files.json` chứa kích thước/SHA-256 của các tệp trong gói. Bộ khởi chạy kiểm tra trước khi chuẩn bị môi trường Python, dừng nếu tệp thiếu hoặc không khớp. Có thể chạy riêng `py app\verify_release.py`.
 
-Danh sách **Giọng có sẵn** chứa đúng các file: `hmong nữ 3.MP3`, `hmong nữ.MP3`, `ngọc huyền.MP3`, `hmong nam 2.MP3`, `hmong nam1.MP3`, `hmong nữ 2(1).MP3`. Mỗi file giữ nguyên dữ liệu âm thanh; có tên và thiết lập riêng. Hai mẫu Nam/Nữ cũ tiếp tục hoạt động với thiết lập cũ. Tool nhớ giọng được chọn trên cùng trình duyệt.
+Hash xác nhận tính toàn vẹn so với bản phát hành; **không phải kết quả quét antivirus hay chữ ký số**. Không đổi phần mở rộng, mã hóa ZIP, tắt Defender, thêm ngoại lệ hoặc yêu cầu khôi phục tệp đang bị cách ly.
 
-**Sáu mẫu mới đã được đóng gói, nhưng chưa có lời chép tham chiếu chính xác để bật nhân bản ngay.** Chọn một giọng, nghe đoạn rõ lời 3–8 giây, nhập đúng lời của đoạn đó bằng ngôn ngữ gốc và bấm lưu một lần. Không cần tải lại file. Tool không đoán lời và không thay bằng giọng mặc định khi mẫu chưa sẵn sàng. Có thể tiếp tục nhập các mẫu ngoài khác như bản trước.
+## Phạm vi kiểm tra
 
-## Chỉ đọc lời trong TXT/SRT
+Gói 0.8 cũ có SHA-256 `940bf6d0fc768d6c954be484b60cc8a9c98e1934663d53e3969b3e16f34a9665`, 35 tệp, CRC hợp lệ; không có EXE/DLL đóng sẵn, tệp ZIP mã hóa, đường dẫn thoát thư mục hoặc symlink. Rà các đường khởi chạy/cài đặt không thấy lệnh tắt antivirus, tự khởi động cùng Windows, thu thập thông tin đăng nhập hoặc tự tải dữ liệu người dùng lên mạng.
 
-```srt
-217
-00:06:07,200 --> 00:06:08,400
-Tae-yong cov ntaub ntawv tus kheej
-```
+Đây là rà mã và cấu trúc gói, không chứng minh “không có virus”. Môi trường kiểm thử Linux không có Windows Defender/ClamAV hoặc bộ chữ ký; yêu cầu đến nguồn chữ ký ClamAV chính thức bị mạng quản lý chặn HTTP 403. Không có kết luận cảnh báo là nhầm. Nếu bản mới tiếp tục bị chặn, dừng dùng và lấy **tên mối đe dọa, tệp bị ảnh hưởng** trong Bảo mật Windows → Lịch sử bảo vệ để điều tra tiếp.
 
-Bộ tạo giọng chỉ nhận **Tae-yong cov ntaub ntawv tus kheej**. Không nhận số `217` hoặc dòng thời gian; số thuộc lời nói và dấu gạch trong tên vẫn được giữ. Hỗ trợ cả dấu ngoặc kép thẳng/cong bao quanh khối phụ đề khi sao chép.
+## Sử dụng và dữ liệu giữ lại
 
-Ở chế độ khớp phụ đề, lời nằm trong khung **367,2–368,4 giây**, dài **1,2 giây**. Nếu đây là đoạn duy nhất, WAV giữ khoảng lặng đầu để ghép video; bấm **Nghe từ lời đầu** để nghe ngay. Chọn **Đọc liền theo nhịp tự nhiên** nếu chỉ muốn đọc lời liên tục. Khung quá ngắn có thể buộc đọc nhanh hoặc cần nới mốc; không cắt mất lời để vừa khung.
+Mở `MO_HMONG_NHANH.bat`; cần Python 3.12 64-bit. Bộ cài vẫn tải thư viện PyPI/PyTorch và mô hình Hugging Face qua HTTPS ở lần đầu. Cập nhật bằng cách thay các tệp chương trình và **giữ `.data`**. Mô hình cũ đúng checksum được dùng lại.
 
-Đoạn ngắn có mốc được tự xem trước sau khi ngừng gõ. Với văn bản rất dài, bấm **Kiểm tra lời sẽ đọc**. Giữ giới hạn **1.000.000 ký tự Unicode**, tệp TXT/SRT/VTT tối đa 8 MB, UTF-8 hoặc UTF-16 có BOM.
+Giữ sáu mẫu giọng mới, hai mẫu cũ, nhập giọng ngoài, lịch sử nghe/tải, SRT/TXT chỉ đọc lời, căn thời gian, giới hạn 1 triệu ký tự và tối ưu câu lặp. Sáu mẫu mới cần lời chép chính xác của đoạn 3–8 giây để bật nhân bản. Không có thay đổi mô hình/phát âm hoặc cam kết 1 giờ voice trong 2 phút ở bản này.
 
-## Tốc độ
+Kiểm thử bản 0.8.1: **287 kiểm thử tự động đạt**, gồm phát hiện cấu hình mô hình bị đổi, checksum giả trong biên nhận, tệp thiếu, tải sai hash và chặn chuẩn bị môi trường khi tệp chương trình không khớp. Các kiểm thử này không phải quét antivirus.
 
-- Tự giới hạn luồng CPU theo số lõi thực sự được cấp, gồm giới hạn container. Không đổi số bước chất lượng để tạo ra kết quả đo nhanh hơn.
-- Giữ tối đa **32 MiB / 128 kết quả** trong bộ nhớ của worker. Câu lặp lại với cùng mẫu âm thanh, lời tham chiếu, nội dung, nhịp, chất lượng và mô hình được dùng lại. Câu mới hoặc đổi thiết lập vẫn phải tạo mới. Bộ nhớ này mất khi đóng hoặc dừng worker.
-- Mặc định vẫn là **Cân bằng 16 bước**. Có thể chọn **Nhanh 8 bước** để giảm công tính toán, với khả năng giảm độ rõ. Nhịp đọc và tốc độ xử lý là hai thiết lập khác nhau.
-
-Phép đo CPU trên cùng câu ở trên, cùng mẫu, cùng seed và 16 bước: 3 luồng mất **96,329 giây**; 2 luồng mất **69,690 giây**, lần đo lại **56,045 giây**. Máy thử bị giới hạn 2 lõi; vì vậy kết quả không bảo đảm mức cải thiện tương tự trên Windows hoặc máy khác. Đoạn âm thanh tạo mới dài 3,467 giây, chưa căn phụ đề; thời gian nạp mô hình được đo riêng. Đây **không phải** bằng chứng đạt mục tiêu tạo 1 giờ voice trong 2 phút.
-
-## Các chức năng giữ lại
-
-Lịch sử nghe/tải bản hoàn tất; nhập giọng ngoài; sáu kiểu nhịp đọc; Dừng/Tiếp tục; WAV theo phần khoảng 30 phút; tự chọn CUDA tương thích/CPU; `--cpu` và `--gpu`; căn từng khung phụ đề và phát từ lời đầu.
-
-Chưa có đánh giá của người nói Hmong bản ngữ về phát âm hoặc độ giống sáu giọng mới. Bản này không huấn luyện lại mô hình, không bảo đảm nhân bản mọi giọng/ngôn ngữ. Chưa chạy BAT trên Windows thật hoặc đo GPU. Kiểm thử phần mềm không thay thế nghe đánh giá giọng.
-
-Nguồn mô hình: [F5TTS-Hmong](https://huggingface.co/Pakorn2112/F5TTS-Hmong), [Vocos](https://huggingface.co/charactr/vocos-mel-24khz). ZIP không chứa trọng số, môi trường Python hoặc dữ liệu `.data` của người dùng.
-
-## Kiểm tra bản 0.8
-
-**252 kiểm thử tự động đạt**; Chromium kiểm tra giao diện, giọng có sẵn, ghi nhớ lựa chọn, mẫu SRT 217, nhập 1 triệu ký tự và lịch sử. Thử mô hình thật: tạo mới câu Tae-yong ở 16 bước mất 74,492 giây cho 3,467 giây âm thanh; lần lặp lại với bản sao cùng mẫu lấy đúng WAV trong 0,012789 giây. Lần lặp là dùng lại kết quả, không phải tốc độ tạo lời mới. Nút đo tốc độ bỏ qua bộ nhớ kết quả.
-
-ZIP: 2,444,296 bytes; SHA-256 `940bf6d0fc768d6c954be484b60cc8a9c98e1934663d53e3969b3e16f34a9665`.
+ZIP: 2,449,762 bytes; SHA-256 `6ef5e0c70ffc2bc744575c9d386cb3acf949dd8fce7390d073daea6659eefd24`.

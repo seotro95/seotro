@@ -18,7 +18,7 @@ import sys
 import threading
 import traceback
 import wave
-from model_files import model_directory
+from model_files import EngineError, model_directory, verify_model_paths
 from cpu_runtime import cpu_thread_count
 from render_cache import RenderCache
 
@@ -229,15 +229,16 @@ def _resolve_device(requested, torch):
 
 def _load_model(settings):
     global _model, _model_key, _reference, _reference_key
+    # Vocos configuration chooses Python classes. Verify all actual paths
+    # against release-owned hashes before constructing F5/Vocos, including
+    # when a cached model would reload after a file replacement.
+    try:
+        verified = verify_model_paths(settings)
+    except EngineError as exc:
+        raise CloningError(str(exc)) from None
     import torch
     device = _resolve_device(settings['device'], torch)
-    # File identity allows replacement in place without reusing a stale model.
-    paths = [Path(settings['checkpoint']), Path(settings['vocab']),
-             Path(settings['vocoder']) / 'config.yaml',
-             Path(settings['vocoder']) / 'pytorch_model.bin']
-    key = tuple((str(path.resolve()), path.stat().st_size,
-                 path.stat().st_mtime_ns, path.stat().st_ctime_ns) for path in paths)
-    key += (settings['model'], device)
+    key = verified + (settings['model'], device)
     if _model is None or _model_key != key:
         cache = model_directory().parent / 'cache'
         for name, subfolder in (('MPLCONFIGDIR', 'matplotlib'), ('NUMBA_CACHE_DIR', 'numba'),
