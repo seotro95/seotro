@@ -12,7 +12,8 @@ MAX_CHARACTERS = 1_000_000
 MAX_TIMELINE_SECONDS = 168 * 3600
 _TIME = r'\d+(?::\d+){1,2}(?:[,.]\d+)?'
 _RANGE = re.compile(rf'^(?P<start>{_TIME})\s*(?:-->|->|→|–>)\s*(?P<end>{_TIME})(?P<tail>.*)$')
-_TIMEISH_RANGE = re.compile(r'^\s*[\[\("\'`]*\d+:[^\n]*?(?:-->|->|→|–>)')
+_TIMEISH_RANGE = re.compile(r'^\s*[\[\("\'`“‘]*\d+:[^\n]*?(?:-->|->|→|–>)')
+_QUOTE_PAIRS = (('"', '"'), ("'", "'"), ('“', '”'), ('‘', '’'))
 _TAG = re.compile(r'</?(?:b|i|u|s|font|c(?:\.[\w-]+)*|v|lang|ruby|rt)(?:\s+[^<>]*?)?\s*>', re.I)
 _INLINE_TIME = re.compile(rf'<{_TIME}>')
 _ASS_OVERRIDE = re.compile(r'\{\\[^{}]*\}')
@@ -42,7 +43,7 @@ def _milliseconds(value):
 def _unquote(line):
     line = line.strip()
     # A timestamp quoted when pasted is still a timestamp, not spoken text.
-    for left, right in (('"', '"'), ("'", "'"), ('`', '`'), ('[', ']'), ('(', ')')):
+    for left, right in _QUOTE_PAIRS + (('`', '`'), ('[', ']'), ('(', ')')):
         if line.startswith(left) and line.endswith(right):
             line = line[1:-1].strip()
     return line
@@ -144,12 +145,19 @@ def parse_document(text, timing='auto'):
         raise ValueError('Chế độ thời gian phải là fit, auto hoặc natural.')
     text = text.lstrip('\ufeff').replace('\r\n', '\n').replace('\r', '\n')
     candidate = text.strip()
-    if (len(candidate) > 2 and candidate[0] in (chr(34), chr(39))
-            and candidate[-1] == candidate[0]):
-        inner = candidate[1:-1].strip()
-        first_lines = inner.split('\n', 2)
-        if len(first_lines) > 1 and first_lines[0].strip().isdecimal() and _range(first_lines[1], 2):
-            text = inner
+    for left, right in _QUOTE_PAIRS:
+        if len(candidate) > 2 and candidate.startswith(left) and candidate.endswith(right):
+            inner = candidate[1:-1].strip()
+            first_lines = inner.split('\n', 2)
+            # Copied subtitle blocks may have surrounding straight/smart quotes.
+            # Strip them only with a valid opening timestamp, optionally after
+            # a cue ID; ordinary quoted dialogue remains exactly as written.
+            starts_with_range = _range(first_lines[0], 1) is not None
+            numbered_range = (len(first_lines) > 1 and first_lines[0].strip().isdecimal()
+                              and _range(first_lines[1], 2) is not None)
+            if starts_with_range or numbered_range:
+                text = inner
+            break
     lines, is_vtt = _without_vtt_metadata(text.split('\n'))
     ranges = [(i, value) for i, line in enumerate(lines) if (value := _range(line, i + 1)) is not None]
     if not ranges:

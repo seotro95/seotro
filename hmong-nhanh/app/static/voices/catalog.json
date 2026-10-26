@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "voices": [
+    {
+      "id": "hmong-white-female",
+      "name": "Nữ",
+      "gender": "female",
+      "filename": "hmong-white-female.mp3",
+      "source_filename": "hmong nữ.MP3 (mẫu cũ)",
+      "sha256": "7b06d1398f3599020f2a9e80a8883b4f82cd20998cd8e3fe8ed29c203a8415c5"
+    },
+    {
+      "id": "hmong-white-male",
+      "name": "Nam",
+      "gender": "male",
+      "filename": "hmong-white-male.mp3",
+      "source_filename": "hmong nam.MP3 (mẫu cũ)",
+      "sha256": "c5939f29cfd9c032618b99e409981e9d237dfaca08340dc3ab9d67df8a05c86e"
+    },
+    {
+      "id": "builtin-hmong-female-3",
+      "name": "Hmong nữ 3",
+      "gender": "female",
+      "filename": "builtin-hmong-female-3.mp3",
+      "source_filename": "hmong nữ 3.MP3",
+      "sha256": "aec83955c0c81abe7355167c779c7ca4c6c4b51422b4ba1018b7ff8f6b30fb1b"
+    },
+    {
+      "id": "builtin-hmong-female-1",
+      "name": "Hmong nữ",
+      "gender": "female",
+      "filename": "builtin-hmong-female-1.mp3",
+      "source_filename": "hmong nữ.MP3",
+      "sha256": "2c3467e7b5f0e49a3277397c00762810f657fd1bbd36f738a7e17d0f067f6222"
+    },
+    {
+      "id": "builtin-ngoc-huyen",
+      "name": "Ngọc Huyền",
+      "gender": "female",
+      "filename": "builtin-ngoc-huyen.mp3",
+      "source_filename": "ngọc huyền.MP3",
+      "sha256": "0f0902ae57716c6933d2cc9385714a68d318080bed4addcf7f4ac1804545070f"
+    },
+    {
+      "id": "builtin-hmong-male-2",
+      "name": "Hmong nam 2",
+      "gender": "male",
+      "filename": "builtin-hmong-male-2.mp3",
+      "source_filename": "hmong nam 2.MP3",
+      "sha256": "bc9104c2ebe00471abc46283c52627b2cadc615d96f15f1dc9d576b1316d78c8"
+    },
+    {
+      "id": "builtin-hmong-male-1",
+      "name": "Hmong nam 1",
+      "gender": "male",
+      "filename": "builtin-hmong-male-1.mp3",
+      "source_filename": "hmong nam1.MP3",
+      "sha256": "29285370b91db8465222b2056b204110c6dded1a60c9004c7fb8747fe4978c9c"
+    },
+    {
+      "id": "builtin-hmong-female-2",
+      "name": "Hmong nữ 2 (1)",
+      "gender": "female",
+      "filename": "builtin-hmong-female-2.mp3",
+      "source_filename": "hmong nữ 2(1).MP3",
+      "sha256": "874f510e723f48fcd093d55a5ba4613fc80107a863261658ec9d3961ef493d84"
+    }
+  ]
+}

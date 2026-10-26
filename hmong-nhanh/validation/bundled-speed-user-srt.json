@@ -1,0 +1,80 @@
+{
+  "version": "0.8.0",
+  "automated_tests_passed": 252,
+  "automated_test_seconds": 23.75,
+  "browser_regression": "Chromium passed: six bundled samples, voice persistence/missing-voice blocking, latest SRT217 auto preview, full1M manual preview, upload/history/playback/download/stop/resume/mobile.",
+  "user_subtitle": {
+    "input": "217\n00:06:07,200 --> 00:06:08,400\nTae-yong cov ntaub ntawv tus kheej",
+    "spoken_text": "Tae-yong cov ntaub ntawv tus kheej",
+    "start_seconds": 367.2,
+    "end_seconds": 368.4,
+    "speech_window_seconds": 1.2,
+    "timeline_test": "Exact sample reaches mocked synthesizer without metadata; actual waveform assembly has367.2s silence and1.2s speech."
+  },
+  "bundled_samples": {
+    "added": 6,
+    "legacy_preserved": 2,
+    "exact_source_hashes_verified": true,
+    "transcripts_provided": false,
+    "ready_without_transcripts": false
+  },
+  "controlled_threads": {
+    "text": "Tae-yong cov ntaub ntawv tus kheej",
+    "quality": "balanced",
+    "steps": 16,
+    "load_seconds": 14.728,
+    "cgroup_cpu_max": "200000 100000",
+    "runs": [
+      {
+        "threads": 3,
+        "seconds": 96.329,
+        "audio_seconds": 3.466666666666667,
+        "wav_sha256": "c22cc5939c860d5b5e242e7f283d498c6dc7b88bc26fa55722508a431a589e54"
+      },
+      {
+        "threads": 2,
+        "seconds": 69.69,
+        "audio_seconds": 3.466666666666667,
+        "wav_sha256": "3a348c490e5b1d93cf37ac7586a9dbd54033f80533809cdc1485322a736f7c92"
+      },
+      {
+        "threads": 1,
+        "seconds": 121.932,
+        "audio_seconds": 3.466666666666667,
+        "wav_sha256": "12cfea26341efdf26477319edd197d7f05af13064131a022e20b534a2b7919a4"
+      },
+      {
+        "threads": 2,
+        "seconds": 56.045,
+        "audio_seconds": 3.466666666666667,
+        "wav_sha256": "3a348c490e5b1d93cf37ac7586a9dbd54033f80533809cdc1485322a736f7c92"
+      }
+    ]
+  },
+  "real_generation_and_cache": {
+    "text": "Tae-yong cov ntaub ntawv tus kheej",
+    "quality": "balanced",
+    "steps": 16,
+    "device": "cpu",
+    "threads": 2,
+    "model_load_seconds": 10.337363,
+    "fresh_inference_seconds": 74.491863,
+    "exact_result_reuse_seconds": 0.012789,
+    "audio_seconds": 3.466666666666667,
+    "sample_rate": 24000,
+    "copied_reference_path": true,
+    "wav_identical": true,
+    "wav_sha256": "3a348c490e5b1d93cf37ac7586a9dbd54033f80533809cdc1485322a736f7c92",
+    "cache_bytes": 166444,
+    "speaker_similarity_verified": false,
+    "pronunciation_verified": false,
+    "note": "Reuse avoids inference only for exact settings/reference/text while worker remains alive. It is not new-text throughput or a 30x realtime measurement."
+  },
+  "limitations": [
+    "Six new samples need exact original-language transcript for selected3–8second section before cloning.",
+    "No native Hmong pronunciation/speaker similarity evaluation.",
+    "No Windows or GPU execution.",
+    "New-text generation has not reached1hour voice in2minutes.",
+    "Exact-result cache saves repeated generation only while worker remains alive."
+  ]
+}

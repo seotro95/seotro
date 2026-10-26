@@ -29,12 +29,12 @@ async def lifespan(app):
     await voice_jobs.shutdown()
 
 
-app = FastAPI(title='Hmong Nhanh', version='0.7.0', lifespan=lifespan)
+app = FastAPI(title='Hmong Nhanh', version='0.8.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 
 class ReadingOptions(BaseModel):
-    voice: str = Field(pattern=r'^(hmong-white-(female|male)|custom-[0-9a-f]{32})$')
+    voice: str = Field(pattern=builtin_references.VOICE_PATTERN)
     speed: float = Field(default=1, ge=0.5, le=2, allow_inf_nan=False)
     quality: Literal['draft', 'fast', 'balanced', 'quality'] = 'balanced'
     style: Literal['natural', 'storytelling', 'film_review', 'news', 'advertising', 'relaxing'] = 'natural'
@@ -91,12 +91,16 @@ def reference_library(ident):
 
 
 def voice_name(ident):
-    return {'hmong-white-female': 'Nữ', 'hmong-white-male': 'Nam'}.get(ident) or custom_references.name(ident)
+    if ident in builtin_references.VOICE_IDS:
+        return builtin_references.metadata(ident)['name']
+    return custom_references.name(ident)
 
 
 def voice_details(ident, engine=None):
     engine = engine or cloning_engine.availability()
     name = voice_name(ident)
+    bundled = ident in builtin_references.VOICE_IDS
+    entry = builtin_references.metadata(ident) if bundled else {}
     try:
         ref = reference_library(ident).settings(ident)
         reference_ready = bool(ref.get('sample') and ref['text'].strip())
@@ -108,7 +112,9 @@ def voice_details(ident, engine=None):
     if not engine['ready']:
         reason = engine['reason']
     return {'id': ident, 'name': name,
-            'gender': ident.removeprefix('hmong-white-') if ident in builtin_references.VOICE_IDS else 'custom',
+            'gender': entry.get('gender', 'custom'),
+            'source_type': 'bundled' if bundled else 'custom',
+            'source_filename': entry.get('source_filename', ''),
             'reference': f'/api/voices/{ident}/source',
             'reference_settings': {k: v for k, v in ref.items() if k != 'sample'},
             'reference_ready': reference_ready,

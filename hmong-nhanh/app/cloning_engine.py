@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from array import array
 import importlib.util
+import hashlib
 import io
 import math
 import os
@@ -18,6 +19,8 @@ import threading
 import traceback
 import wave
 from model_files import model_directory
+from cpu_runtime import cpu_thread_count
+from render_cache import RenderCache
 
 
 class CloningError(Exception):
@@ -68,6 +71,7 @@ _reference = None
 _reference_key = None
 _cuda_probe_key = None
 _cuda_probe_result = None
+_render_cache = RenderCache()
 MAX_GENERATED_SECONDS = 600
 QUALITY_STEPS = {'draft': 4, 'fast': 8, 'balanced': 16, 'quality': 32}
 
@@ -231,7 +235,8 @@ def _load_model(settings):
     paths = [Path(settings['checkpoint']), Path(settings['vocab']),
              Path(settings['vocoder']) / 'config.yaml',
              Path(settings['vocoder']) / 'pytorch_model.bin']
-    key = tuple((str(path.resolve()), path.stat().st_size, path.stat().st_mtime_ns) for path in paths)
+    key = tuple((str(path.resolve()), path.stat().st_size,
+                 path.stat().st_mtime_ns, path.stat().st_ctime_ns) for path in paths)
     key += (settings['model'], device)
     if _model is None or _model_key != key:
         cache = model_directory().parent / 'cache'
@@ -242,17 +247,14 @@ def _load_model(settings):
                 location.mkdir(parents=True, exist_ok=True)
                 os.environ[name] = str(location)
         from f5_tts.api import F5TTS
-        try:
-            threads = int(os.getenv('HMONG_CPU_THREADS', '4'))
-        except ValueError:
-            threads = 4
-        torch.set_num_threads(max(1, min(threads, os.cpu_count() or 1)))
+        torch.set_num_threads(cpu_thread_count())
         candidate = F5TTS(model=settings['model'], ckpt_file=settings['checkpoint'],
                           vocab_file=settings['vocab'], vocoder_local_path=settings['vocoder'],
                           device=device)
         # F5 1.1.22 selects fp16 on supported CUDA devices and fp32 on CPU/MPS.
         # Keep its tested dtype selection; no costly compile on first generation.
         _model, _model_key = candidate, key
+        _render_cache.set_owner(candidate)
         _reference = _reference_key = None
     return _model
 
@@ -385,11 +387,12 @@ def _join_wavs(parts):
     return output.getvalue()
 
 
-def synthesize(text, speed, reference_path, reference_text, quality='fast'):
+def synthesize(text, speed, reference_path, reference_text, quality='fast', *, use_cache=True):
     """Generate with local F5 files and an explicitly transcribed 3–8s WAV.
 
     This API never requests automatic ASR, cloud synthesis, or model downloads.
     A configured model still requires native evaluation for dialect and quality.
+    Benchmarks pass use_cache=False so an exact prior WAV cannot inflate speed.
     """
     if not isinstance(text, str) or not text.strip() or len(text) > 2000:
         raise CloningError('Nhân bản cục bộ nhận 1–2.000 ký tự mỗi lượt; hãy chia nhỏ kịch bản dài.')
@@ -409,6 +412,17 @@ def synthesize(text, speed, reference_path, reference_text, quality='fast'):
         raise CloningError('Bộ nhân bản cục bộ đang xử lý tác vụ khác. Hãy chờ hoàn tất.')
     try:
         engine = _load_model(_settings())
+        # Job reference snapshots have different paths but may contain exactly
+        # the same voice. Hash their bytes so repeated cues and reruns reuse the
+        # original waveform, while changed audio, transcript, model, speaking
+        # speed or quality always trigger fresh synthesis. In-memory only.
+        _render_cache.set_owner(engine)
+        digest = hashlib.sha256(Path(reference_path).read_bytes()).digest()
+        cache_key = (_model_key, digest, reference_text.strip(), text.strip(),
+                     float(speed), QUALITY_STEPS[quality])
+        cached = _render_cache.get(cache_key) if use_cache else None
+        if cached is not None:
+            return cached
         reference = _prepare_reference(engine, reference_path, reference_text, identity)
         reference_seconds = reference['seconds']
         budget = int(len(reference['text'].encode('utf-8')) / reference_seconds
@@ -418,7 +432,10 @@ def synthesize(text, speed, reference_path, reference_text, quality='fast'):
         def rendered_parts():
             for batch in _batches(text.strip(), min(350, budget)):
                 yield _infer_one(engine, reference, batch, speed, QUALITY_STEPS[quality])
-        return _join_wavs(rendered_parts())
+        result = _join_wavs(rendered_parts())
+        if use_cache:
+            _render_cache.put(cache_key, result)
+        return result
     except CloningError:
         raise
     except Exception as exc:

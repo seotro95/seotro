@@ -230,7 +230,10 @@ def _process_natural(folder, payload, document, source):
             raise ValueError('Ổ đĩa còn dưới 100 MB. Giải phóng dung lượng rồi bấm Tiếp tục.')
         segment = plan[index]
         report(f'Đang tạo đoạn {index + 1}/{len(plan)}…')
-        audio = cloning_engine.synthesize(segment['text'], effective_speed, sample, reference['text'], quality=quality)
+        # A speed measurement must run inference even if its fixed test sentence
+        # was rendered earlier in this worker. Ordinary jobs may reuse exact WAVs.
+        audio = cloning_engine.synthesize(segment['text'], effective_speed, sample, reference['text'], quality=quality,
+                                         **({'use_cache': False} if payload.get('benchmark') else {}))
         path = folder / 'chunks' / f'chunk-{index:06d}.wav'
         spoken_seconds += write_chunk(path, audio, segment['pause'])
         del audio
@@ -385,7 +388,8 @@ def _process_timed(folder, payload, document):
                 except (OSError, ValueError, wave.Error, EOFError):
                     raise ValueError('Đoạn lời gốc đã lưu bị hỏng. Tạo bản đọc mới; không thay bằng giọng khác.') from None
             else:
-                audio = cloning_engine.synthesize(segment['text'], effective_speed, sample, reference['text'], quality=quality)
+                audio = cloning_engine.synthesize(segment['text'], effective_speed, sample, reference['text'], quality=quality,
+                                                 **({'use_cache': False} if payload.get('benchmark') else {}))
                 write_chunk(raw_path, audio, 0)
                 generated_frames = frame_count(raw_path)
                 save_checkpoint()

@@ -1,4 +1,4 @@
-HMONG NHANH — BẢN 0.7.0
+HMONG NHANH — BẢN 0.8.0
 
 MỞ TOOL VÀ GIỮ LỊCH SỬ
 
@@ -7,6 +7,12 @@ Giải nén toàn bộ gói rồi mở MO_HMONG_NHANH.bat. Cần Python 3.12 64-
 Khi cập nhật, tắt tool và giải nén đè các tệp chương trình vào thư mục đang dùng; GIỮ NGUYÊN .data. Nếu dùng thư mục mới, chép .data từ bản cũ sang cạnh BAT mới. Giữ bản sao cũ đến khi kiểm tra xong. Nếu đã đặt HMONG_STUDIO_DATA_DIR, tiếp tục dùng đường dẫn đó. Không xóa app.
 
 Mục “Lịch sử tạo voice” hiển thị tên bản đọc, ngày, giọng, trạng thái và thời lượng. Có thể tìm theo tên/giọng, lọc “Đã hoàn tất”, nghe và tải WAV trực tiếp. Với nhiều phần, bấm “Mở bản đọc” để xem tất cả. Các bản đã lưu vẫn có sau khi đóng và mở lại tool, miễn là còn dùng đúng thư mục .data và các tệp WAV chưa bị xóa.
+
+SÁU MẪU GIỌNG MỚI CÓ SẴN
+
+Có sẵn Hmong nữ 3, Hmong nữ, Ngọc Huyền, Hmong nam 2, Hmong nam 1 và Hmong nữ 2 (1) trong danh sách giọng; không cần tải lại từng file. Các file gốc được giữ nguyên. Hai mẫu Nam/Nữ cũ vẫn giữ nguyên để các thiết lập đã lưu tiếp tục hoạt động.
+
+Chọn mẫu có sẵn, nghe đoạn 3–8 giây rồi nhập và lưu đúng lời nói trong đoạn đó một lần. Chưa có lời chép chính xác của sáu file mới nên các mẫu chưa được đánh dấu sẵn sàng nhân bản. Không tự thay bằng giọng khác. Mỗi giọng giữ riêng đoạn/lời tham chiếu; lựa chọn giọng được nhớ khi tải lại trang trên cùng trình duyệt.
 
 NHÂN BẢN GIỌNG BÊN NGOÀI
 
@@ -23,18 +29,18 @@ Mỗi giọng có mẫu và lời chép riêng. Mỗi tác vụ chụp lại c�
 Nhập văn bản hoặc tệp TXT/SRT/VTT UTF-8 hoặc UTF-16 có BOM, tối đa 8 MB và 1.000.000 ký tự Unicode. Bấm “Kiểm tra lời sẽ đọc” để xem lời đã bỏ mốc thời gian/số thứ tự. Số nằm trong câu vẫn giữ nguyên. Phần xem trước có giới hạn hiển thị; toàn bộ nội dung vẫn được xử lý khi tạo giọng.
 
 Với mẫu:
-196
-00:05:33,366 --> 00:05:34,533
-nws tsis txhawj txog nws tus kheej ntau
+217
+00:06:07,200 --> 00:06:08,400
+Tae-yong cov ntaub ntawv tus kheej
 
-Tool chỉ đưa câu “nws tsis txhawj txog nws tus kheej ntau” vào bộ tạo giọng. Không đọc 196 hoặc dòng mốc. Cửa sổ lời dài 1,167 giây, từ giây 333,366 đến 334,533. Nếu đây là đoạn duy nhất, WAV dài 334,533 giây và có 333,366 giây im lặng đầu để khớp vị trí trong video. Khoảng trống giữa các câu cũng được giữ.
+Tool chỉ đưa câu “Tae-yong cov ntaub ntawv tus kheej” vào bộ tạo giọng. Không đọc 217 hoặc dòng mốc. Cửa sổ lời dài 1,2 giây, từ giây 367,2 đến 368,4. Nếu đây là đoạn duy nhất, WAV dài 368,4 giây và có 367,2 giây im lặng đầu để khớp vị trí trong video. Bấm “Nghe từ lời đầu” để nghe ngay câu nói. Khoảng trống giữa các câu cũng được giữ. Dấu ngoặc kép thẳng hoặc cong bao quanh khối phụ đề khi sao chép được bỏ đúng cấu trúc; dấu câu, tên Tae-yong và các số trong lời nói vẫn giữ nguyên.
 
 Ba lựa chọn thời gian:
 - “Khớp phụ đề, cho phép đọc nhanh” (mặc định): căn từng khung, cho phép tăng nhịp tối đa 4 lần. Trên 2 lần có cảnh báo vì lời có thể kém rõ.
 - “Khớp mốc, ưu tiên rõ lời”: giới hạn tăng nhịp 2 lần. Khung quá ngắn sẽ báo lỗi, không cắt mất từ.
 - “Đọc liền theo nhịp tự nhiên”: vẫn bỏ mốc/số thứ tự nhưng không giữ thời gian phụ đề.
 
-Căn thời gian dùng xử lý giữ cao độ. Khung dài chỉ làm chậm tối đa 2 lần rồi thêm im lặng đến hết khung. Khung quá ngắn ngay cả ở mức 4 lần cần kéo dài mốc hoặc chuyển sang đọc tự nhiên. Câu mẫu trên có 8 từ trong 1,167 giây: giữ thời gian chặt có thể khiến lời rất nhanh; không thể đồng thời bảo đảm nhịp tự nhiên trong mọi khung ngắn.
+Căn thời gian dùng xử lý giữ cao độ. Khung dài chỉ làm chậm tối đa 2 lần rồi thêm im lặng đến hết khung. Khung quá ngắn ngay cả ở mức 4 lần cần kéo dài mốc hoặc chuyển sang đọc tự nhiên. Câu mẫu trên có 6 từ trong 1,2 giây: giữ thời gian chặt có thể khiến lời rất nhanh; không thể đồng thời bảo đảm nhịp tự nhiên trong mọi khung ngắn.
 
 Khi tác vụ phụ đề lỗi, có thể chọn “Tạo lại đọc liền”. Tool tạo một tác vụ mới từ toàn bộ lời và đúng mẫu đã lưu; bản cũ vẫn còn trong lịch sử. Đoạn âm thanh gốc đã tạo trước lỗi căn nhịp được giữ để thử tiếp, tránh tạo lại cùng đoạn khi không cần.
 
@@ -42,9 +48,17 @@ Mốc sai, chồng lấn hoặc đảo thứ tự được báo trước khi că
 
 CHẤT LƯỢNG VÀ TIẾNG HMONG
 
-Mặc định mới là Cân bằng 16 bước. Bốn mức vẫn có: Bản nháp 4, Nhanh 8, Cân bằng 16 và Chất lượng 32 bước. Với phát âm/độ giống giọng chưa tốt, thử Chất lượng 32 bước và mẫu rõ lời, ít nhạc hoặc nhiễu. Nhiều bước thường tốn thời gian hơn; cần nghe đánh giá kết quả.
+Mặc định là Cân bằng 16 bước. Bốn mức vẫn có: Bản nháp 4, Nhanh 8, Cân bằng 16 và Chất lượng 32 bước. Với phát âm/độ giống giọng chưa tốt, thử Chất lượng 32 bước và mẫu rõ lời, ít nhạc hoặc nhiễu. Nhiều bước thường tốn thời gian hơn; cần nghe đánh giá kết quả.
 
 Mẫu ngoài có thể nói ngôn ngữ khác Hmong, nhưng checkpoint F5-Hmong hiện tại có giới hạn ngôn ngữ và từ vựng tham chiếu. Bản này không huấn luyện mô hình mới và chưa được người nói Hmong bản ngữ xác nhận phát âm chuẩn. Dùng đúng mẫu không đồng nghĩa bảo đảm giống mọi giọng/ngôn ngữ. Công cụ cũng không tự dịch kịch bản.
+
+TỐI ƯU TỐC ĐỘ BẢN 0.8
+
+Bộ tạo giọng giới hạn số luồng CPU theo số lõi được cấp, gồm giới hạn CPU của container. Phép đo cùng câu Tae-yong, cùng mẫu/seed/16 bước trên máy thử có hạn mức 2 lõi: 3 luồng mất 96,329 giây; 2 luồng mất 69,690 giây, lần đo lại 56,045 giây. Đây là thời gian tạo mới 3,467 giây lời chưa căn phụ đề, không gồm nạp mô hình. Kết quả không bảo đảm cùng mức tăng tốc trên Windows/máy khác.
+
+Trong một phiên worker, tối đa 32 MiB / 128 WAV được giữ để dùng lại các câu giống hệt khi mẫu, lời mẫu, văn bản, nhịp, chất lượng và mô hình đều khớp. Câu mới hoặc thiết lập khác vẫn phải chạy mô hình. Đóng hoặc dừng worker sẽ xóa bộ nhớ này. Nút Đo tốc độ máy luôn tạo mới, không dùng WAV có sẵn để báo tốc độ.
+
+Mặc định vẫn là Cân bằng 16 bước; muốn giảm công tính toán có thể chọn Nhanh 8 bước và nghe kiểm tra độ rõ. Chưa đạt mục tiêu tạo 1 giờ voice trong 2 phút.
 
 CÁC CHỨC NĂNG KHÁC
 
@@ -60,8 +74,10 @@ Nguồn mô hình: https://huggingface.co/Pakorn2112/F5TTS-Hmong
 Vocos: https://huggingface.co/charactr/vocos-mel-24khz
 Trọng số được tải qua HTTPS và đối chiếu checksum, không nằm trong ZIP.
 
-Thử tích hợp thật 0.7: tải mẫu tiếng Anh công khai ở định dạng M4A, lưu lời chép gốc và tạo đúng câu Hmong trong mẫu SRT trên ở chế độ Cân bằng 16 bước. WAV 24 kHz dài đúng 334,533 giây, gồm 333,366 giây im lặng đầu và khung lời 1,167 giây. Sau khi khởi động lại máy chủ, giọng ngoài, bản hoàn tất và đường tải WAV vẫn đọc được. Đây là bằng chứng hoạt động của luồng nhập mẫu/căn thời gian/lịch sử, chưa đánh giá phát âm hoặc độ giống bằng tai.
+Thử tích hợp thật 0.7: tải mẫu tiếng Anh công khai ở định dạng M4A, lưu lời chép gốc và tạo đúng câu Hmong trong mẫu SRT 196 ở chế độ Cân bằng 16 bước. WAV 24 kHz dài đúng 334,533 giây, gồm 333,366 giây im lặng đầu và khung lời 1,167 giây. Sau khi khởi động lại máy chủ, giọng ngoài, bản hoàn tất và đường tải WAV vẫn đọc được. Đây là bằng chứng hoạt động của luồng nhập mẫu/căn thời gian/lịch sử, chưa đánh giá phát âm hoặc độ giống bằng tai.
 
-Với SRT bắt đầu ở phút thứ 5, WAV giữ khoảng lặng đầu để ghép đúng video. Bấm “Nghe từ lời đầu” trong bản đọc hoặc Lịch sử để nghe ngay lời nói; file tải xuống vẫn giữ đầy đủ thời gian phụ đề.
+Với SRT bắt đầu ở phút thứ 6, WAV giữ khoảng lặng đầu để ghép đúng video. Bấm “Nghe từ lời đầu” trong bản đọc hoặc Lịch sử để nghe ngay lời nói; file tải xuống vẫn giữ đầy đủ thời gian phụ đề.
 
-Kiểm tra bản 0.7: 205 kiểm thử tự động đạt, gồm mẫu SRT 196, codec âm thanh thật, lịch sử sau khởi động lại, tải WAV và xử lý đường dẫn tiếng Việt của worker.
+Bằng chứng bản 0.7 trước đó: 205 kiểm thử tự động đạt, gồm mẫu SRT 196, codec âm thanh thật, lịch sử sau khởi động lại, tải WAV và xử lý đường dẫn tiếng Việt của worker. Kết quả kiểm tra bản 0.8 được ghi trong hướng dẫn GitHub kèm bản phát hành.
+
+Kiểm tra bản 0.8: 252 kiểm thử tự động đạt và kiểm thử giao diện Chromium đạt. Thử mô hình thật cùng câu Tae-yong, 16 bước: tạo mới 74,492 giây cho 3,467 giây âm thanh; lặp lại đúng điều kiện dùng lại WAV trong 0,012789 giây. Dùng lại kết quả không phải tốc độ tạo lời mới.

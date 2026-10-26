@@ -11,7 +11,18 @@ from fastapi import HTTPException
 from pydantic import BaseModel, Field
 
 BASE = Path(__file__).resolve().parent
-VOICE_IDS = ('hmong-white-female', 'hmong-white-male')
+_CATALOG_PATH = BASE / 'static' / 'voices' / 'catalog.json'
+_CATALOG = json.loads(_CATALOG_PATH.read_text(encoding='utf-8'))
+VOICES = {voice['id']: voice for voice in _CATALOG['voices']}
+VOICE_IDS = tuple(VOICES)
+VOICE_PATTERN = r'^(?:' + '|'.join(map(re.escape, VOICE_IDS)) + r'|custom-[0-9a-f]{32})$'
+
+
+def metadata(voice):
+    """Bundled labels and source paths, independent of saved user selections."""
+    if voice not in VOICES:
+        raise HTTPException(404, 'Không tìm thấy mẫu giọng có sẵn.')
+    return VOICES[voice].copy()
 
 
 class ReferenceSettings(BaseModel):
@@ -25,9 +36,8 @@ def directory():
 
 
 def original(voice):
-    if voice not in VOICE_IDS:
-        raise HTTPException(404, 'Không tìm thấy mẫu giọng nam/nữ.')
-    return BASE / 'static' / 'voices' / f'{voice}.mp3'
+    entry = metadata(voice)
+    return BASE / 'static' / 'voices' / entry['filename']
 
 
 def _duration(path):

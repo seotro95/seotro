@@ -60,7 +60,8 @@ def test_external_voice_uses_own_audio_and_original_language_never_default(clien
                 assert response.status_code == 200, response.text
     assert seen[0][:2] == ('Kuv muaj 12 phau ntawv.', 'This is the exact English reference.')
     assert seen[0][2] != seen[1][2]
-    assert len(client.get('/api/voices').json()['voices']) == 4
+    catalog = client.get('/api/voices').json()['voices']
+    assert {voice['id'] for voice in catalog if voice['source_type'] == 'custom'} == {one['id'], two['id']}
 
 
 def test_preview_strips_indices_and_timestamps_but_retains_spoken_numbers(client):
@@ -104,7 +105,7 @@ def test_missing_custom_voice_invalid_timing_and_audio_have_no_default_fallback(
         create.assert_not_called()
     assert client.post('/api/voices/upload', content=b'not audio').status_code == 422
     assert client.post('/api/voices/upload', content=b'x', headers={'Content-Length': str(51 * 1024 * 1024)}).status_code == 413
-    assert len(client.get('/api/voices').json()['voices']) == 2
+    assert all(voice['source_type'] == 'bundled' for voice in client.get('/api/voices').json()['voices'])
 
 
 def test_preview_limits_response_without_truncating_document_validation(client):
