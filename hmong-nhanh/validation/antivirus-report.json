@@ -1,0 +1,30 @@
+{
+  "status": "unresolved",
+  "reported_after_version": "0.8.1",
+  "browser_message": "Virus detected",
+  "exact_threat_name": null,
+  "detecting_product": null,
+  "affected_item_path": null,
+  "user_machine_artifact_hash": null,
+  "published_artifact": {
+    "commit": "70e9e208b61c6a5c7a846180ee96dec7e7373eda",
+    "sha256": "6ef5e0c70ffc2bc744575c9d386cb3acf949dd8fce7390d073daea6659eefd24",
+    "git_blob": "884b2ab857a1640d16a5aea4e26b73c6f5d9149e",
+    "bytes": 2449762
+  },
+  "warning_cleared": false,
+  "malware_scan_completed": false,
+  "actions": [
+    "Marked release warning unresolved; removed recommended direct download link from latest release guide.",
+    "Preserved original artifact/hash for investigation; no repackaging or filename change."
+  ],
+  "needed_evidence": [
+    "Detecting antivirus product",
+    "Exact threat name",
+    "Affected-item path including any file inside ZIP"
+  ],
+  "limits": [
+    "Published package integrity is confirmed; this does not establish a false positive.",
+    "No Windows Defender available in this environment; official ClamAV signatures were blocked by managed network policy."
+  ]
+}

@@ -1,8 +1,10 @@
 # Hmong Nhanh 0.8.1
 
+> **Cảnh báo chưa được xử lý xong.** Người dùng tiếp tục báo file tải bị phát hiện vi-rút sau khi nhận bản 0.8.1. Tạm ngừng khuyến nghị tải/chạy gói này trong lúc xác định tên mối đe dọa và tệp bị ảnh hưởng. Không coi kiểm thử phần mềm hoặc SHA-256 là kết quả quét antivirus.
+
 Bản 0.8 được người dùng báo trình duyệt chặn với thông báo **“Đã phát hiện thấy vi-rút”**. Chưa có tên mối đe dọa hoặc kết quả quét Windows Defender để xác định nguyên nhân. Bản 0.8.1 sửa khâu xác minh tệp/mô hình; **chưa xác nhận cảnh báo antivirus đã được giải quyết**.
 
-[Gói 0.8.1](https://github.com/seotro95/seotro/raw/refs/heads/codex/hmong-nhanh-0.8.1/Hmong-Nhanh-da-sua.zip) · [Mã nguồn](hmong-nhanh/) · [Hướng dẫn](hmong-nhanh/HUONG_DAN.txt) · [Báo cáo kiểm tra](hmong-nhanh/validation/integrity-0.8.1.json)
+[Mã nguồn](hmong-nhanh/) · [Hướng dẫn](hmong-nhanh/HUONG_DAN.txt) · [Báo cáo kiểm tra](hmong-nhanh/validation/integrity-0.8.1.json)
 
 ## Thay đổi có thể kiểm tra
 
@@ -19,7 +21,9 @@ Gói 0.8 cũ có SHA-256 `940bf6d0fc768d6c954be484b60cc8a9c98e1934663d53e3969b3e
 
 Đây là rà mã và cấu trúc gói, không chứng minh “không có virus”. Môi trường kiểm thử Linux không có Windows Defender/ClamAV hoặc bộ chữ ký; yêu cầu đến nguồn chữ ký ClamAV chính thức bị mạng quản lý chặn HTTP 403. Không có kết luận cảnh báo là nhầm. Nếu bản mới tiếp tục bị chặn, dừng dùng và lấy **tên mối đe dọa, tệp bị ảnh hưởng** trong Bảo mật Windows → Lịch sử bảo vệ để điều tra tiếp.
 
-## Sử dụng và dữ liệu giữ lại
+## Tài liệu vận hành và dữ liệu giữ lại
+
+Không chạy tệp đang bị phần mềm bảo mật chặn hoặc cách ly. Các chỉ dẫn dưới đây được giữ để tham khảo sau khi nguyên nhân cảnh báo đã được xác định.
 
 Mở `MO_HMONG_NHANH.bat`; cần Python 3.12 64-bit. Bộ cài vẫn tải thư viện PyPI/PyTorch và mô hình Hugging Face qua HTTPS ở lần đầu. Cập nhật bằng cách thay các tệp chương trình và **giữ `.data`**. Mô hình cũ đúng checksum được dùng lại.
 
