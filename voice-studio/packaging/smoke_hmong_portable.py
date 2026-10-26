@@ -430,7 +430,7 @@ def main():
         assert automatic['source_sha256'] == hashlib.sha256(altered).hexdigest()
         assert 0 <= automatic['reference_start'] < automatic['reference_end'] <= automatic['source_duration']
         assert 3 <= automatic['duration'] <= 8.001
-        selected_audio = (app.DATA / 'voices' / (automatic['id'] + '.wav')).read_bytes()
+        selected_audio = (studio.DATA / 'voices' / (automatic['id'] + '.wav')).read_bytes()
         selected_sha = hashlib.sha256(selected_audio).hexdigest()
         expected_identity = hashlib.sha256(json.dumps({'version': 1,
             'audio_sha256': selected_sha, 'transcript': ''}, ensure_ascii=False,
