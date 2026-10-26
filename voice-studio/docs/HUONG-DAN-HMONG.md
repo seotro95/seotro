@@ -1,12 +1,14 @@
 # Hướng dẫn đầy đủ Voice Studio Hmong
 
-Hướng dẫn cho người dùng **Voice Studio Hmong 1.6.4 trên Windows** lần đầu: tải gói đầy đủ, mở tool, tạo giọng Hmong Nam/Nữ, thêm giọng của mình, đọc TXT hoặc sách dài, phân vai SRT và xuất video. Tool dùng **Hmong Trắng / Hmoob Daw, chữ Latin RPA**. Giao diện hiển thị ngôn ngữ này là Hmong Trắng hoặc `mww`.
+Hướng dẫn cho người dùng **Voice Studio Hmong 1.6.5 trên Windows** lần đầu: tải gói đầy đủ, mở tool, tạo giọng Hmong Nam/Nữ, thêm giọng của mình, đọc TXT hoặc sách dài, phân vai SRT và xuất video. Tool dùng **Hmong Trắng / Hmoob Daw, chữ Latin RPA**. Giao diện hiển thị ngôn ngữ này là Hmong Trắng hoặc `mww`.
 
 **Bắt đầu nhanh:** tải ZIP Windows đầy đủ → giải nén toàn bộ → mở `MO_VOICE_STUDIO_HMONG.bat` ở ngoài cùng → chờ tải mô hình lần đầu → chọn **Văn bản thành giọng nói** → chọn **Giọng Nam** hoặc **Giọng Nữ** → nhập câu Hmong → bấm **Tạo giọng nói** → nghe và tải WAV/MP3.
 
 Bạn **không cần cài Python, không cần API key, không cần GPU** để tạo giọng Hmong bằng gói Windows đầy đủ. Lần đầu cần Internet và khoảng **580 MB mô hình**, ngoài dung lượng của ZIP, bộ chạy và các bản thu. Khi chuẩn bị xong, phần tạo giọng chạy trên máy và có thể dùng offline. Chức năng AI viết/dịch là tùy chọn riêng.
 
 **Khi bấm Tạo giọng:** đọc trạng thái ngay dưới nút. Nếu studio chưa kết nối, chờ kiểm tra hoặc bấm **Thử kết nối lại**; lời đang soạn được giữ nguyên. Tool tự bỏ mốc phụ đề khỏi lời đọc và giữ số có nghĩa trong nội dung; bộ nhanh đọc các số đếm được hỗ trợ bằng chữ Hmong. Nếu báo ký tự hay cách viết số chưa hỗ trợ, sửa đúng chỗ được chỉ ra rồi tạo lại. URL, emoji và ký tự lạ cần sửa thành lời muốn đọc hoặc bỏ trước khi tạo; tool không tự sửa chính tả. Khi đã nhận công việc, trạng thái sẽ chuyển sang hàng đợi/đang tạo và hiện audio khi hoàn tất.
+
+Bản 1.6.5 sửa đường xử lý âm thanh của bộ nhanh để giữ tín hiệu gốc trước bước giới hạn đỉnh và nối mềm phần đánh dấu âm thanh AI. Chữ Hmong, mẫu gốc và bộ phát âm giữ nguyên. Tạo tác vụ mới sau khi cập nhật để dùng cách xử lý mới; bấm Tiếp tục cho công việc cũ sẽ giữ thiết lập cũ. Trong ZIP, mở `reports/Ngoc-Huyen-preview.mp3` hoặc `reports/Hmong-female-3-preview.mp3` để nghe đầu ra thật, rồi đối chiếu nút nghe mẫu gốc trong tool. Chất giọng và phát âm vẫn phụ thuộc mô hình; chưa bảo đảm giống 100% hoặc mọi từ đều đúng.
 
 ## Mục lục
 
@@ -31,7 +33,7 @@ Bạn **không cần cài Python, không cần API key, không cần GPU** để
 ## 1. Chọn đúng gói và giải nén
 
 1. Mở trang phát hành chính thức: [github.com/seotro95/seotro/releases](https://github.com/seotro95/seotro/releases). Chọn bản **Voice Studio Hmong** và mở danh sách **Assets**.
-2. Tải tệp đầy đủ **`Voice-Studio-Hmong-1.6.4-Windows-x64.zip`** trong bản phát hành 1.6.4. Hai mục **Source code (zip)** và **Source code (tar.gz)** là mã nguồn, không phải gói chạy sẵn. Không dùng vài tệp `.py` hoặc `.bat` tải rời để thay cho gói đầy đủ.
+2. Tải tệp đầy đủ **`Voice-Studio-Hmong-1.6.5-Windows-x64.zip`** trong bản phát hành 1.6.5. Hai mục **Source code (zip)** và **Source code (tar.gz)** là mã nguồn, không phải gói chạy sẵn. Không dùng vài tệp `.py` hoặc `.bat` tải rời để thay cho gói đầy đủ.
 3. Trong File Explorer, bấm phải ZIP → **Extract All… / Giải nén tất cả…** → chọn thư mục có quyền ghi, ví dụ `D:\VoiceStudioHmong` hoặc một thư mục trong Documents → **Extract / Giải nén**. Với 7-Zip, chọn **Extract to… / Giải nén vào…**.
 4. Mở **thư mục đã giải nén**. Tại thư mục ngoài cùng phải thấy `MO_VOICE_STUDIO_HMONG.bat` cùng các thư mục `runtime`, `ffmpeg`, `voice-studio-hmong` và `tools`. Nếu chúng nằm trong một thư mục con, mở tiếp thư mục đó.
 5. Giữ nguyên cả bộ thư mục. Không kéo riêng tệp BAT ra Desktop, không chạy khi File Explorer vẫn đang mở nội dung bên trong ZIP, không chép chồng gói mới lên bộ đang chạy. Có thể tạo **shortcut** của BAT ra Desktop nếu muốn mở nhanh.
@@ -56,7 +58,7 @@ Mở lại BAT lần sau sẽ dùng mô hình đã lưu nếu tệp hợp lệ. 
 
 ### Ba mức kiểm tra: bộ chạy, mô hình và giọng thật
 
-Không coi thông báo “đủ tệp” là đã tạo được lời đọc. Bản 1.6.4 có các lệnh sau; chạy sau khi lưu công việc và đóng phiên tạo giọng. Mở thư mục ngoài cùng trong File Explorer, bấm thanh địa chỉ, gõ `cmd` rồi Enter để mở dòng lệnh đúng thư mục. Gõ **một lệnh cần dùng**, bấm Enter và chờ kết quả:
+Không coi thông báo “đủ tệp” là đã tạo được lời đọc. Bản 1.6.5 có các lệnh sau; chạy sau khi lưu công việc và đóng phiên tạo giọng. Mở thư mục ngoài cùng trong File Explorer, bấm thanh địa chỉ, gõ `cmd` rồi Enter để mở dòng lệnh đúng thư mục. Gõ **một lệnh cần dùng**, bấm Enter và chờ kết quả:
 
 | Lệnh | Kiểm tra gì? | Có tải model / tạo lời không? |
 | --- | --- | --- |
@@ -77,7 +79,7 @@ Mở hai WAV để nghe; lệnh kiểm tra giọng không thêm chúng vào Lị
 
 ## 3. Tạo bản thu Nam và Nữ đầu tiên
 
-Bản 1.6.4 có thêm hai giọng có sẵn **Hmong nữ 3** và **Ngọc Huyền nâng cao** từ đúng hai MP3 bạn gửi. Bộ chính mở lần đầu chọn **Hmong nữ 3**; bấm **Ngọc Huyền** hoặc chọn tên trong danh sách để đổi. Hai giọng Nam/Nữ trước vẫn còn. Mở **Thư viện giọng** rồi bấm **Đặt làm giọng mặc định** ở giọng muốn dùng mỗi lần mở; có thể đặt cả giọng cá nhân đã nhân bản. Đổi lựa chọn trong một lượt đọc không tự ghi đè giọng mặc định đã lưu.
+Bản 1.6.5 có thêm hai giọng có sẵn **Hmong nữ 3** và **Ngọc Huyền nâng cao** từ đúng hai MP3 bạn gửi. Bộ chính mở lần đầu chọn **Hmong nữ 3**; bấm **Ngọc Huyền** hoặc chọn tên trong danh sách để đổi. Hai giọng Nam/Nữ trước vẫn còn. Mở **Thư viện giọng** rồi bấm **Đặt làm giọng mặc định** ở giọng muốn dùng mỗi lần mở; có thể đặt cả giọng cá nhân đã nhân bản. Đổi lựa chọn trong một lượt đọc không tự ghi đè giọng mặc định đã lưu.
 
 Hai mẫu mới lấy chất giọng từ âm thanh, không có lời mẫu được người dùng xác nhận và không tự bịa transcript. Chúng dùng bộ chính **VITS + OpenVoice V2** để đọc văn bản Hmong, kể cả khi bản thu gốc nói ngôn ngữ khác. Trong bộ F5 nâng cao, chỉ dùng giọng có mẫu/lời Hmong khớp nhau; hai giọng mới không hiện ở đó. Mẫu WAV được cân mức âm bằng hệ số cố định, không đổi cao độ hay nhịp; MP3 gốc vẫn được giữ để nghe đối chiếu.
 
@@ -410,7 +412,7 @@ Gói mặc định dùng CPU. Nếu máy có **GPU NVIDIA và driver phù hợp*
 
 Bộ cài kiểm tra khả năng tính toán CUDA trước khi đánh dấu sẵn sàng. Nếu lựa chọn NVIDIA đã lưu không còn chạy được, launcher **báo rõ rồi chuyển sang CPU** để bạn tiếp tục dùng; bộ NVIDIA hợp lệ vẫn được dùng. Bạn có thể cài lại bộ NVIDIA trong `tools` khi cần. Kiểm tra CUDA thành công không chứng minh tốc độ hoặc chất lượng của một dự án dài. Không chép các tệp DLL hoặc PyTorch ngẫu nhiên vào `runtime`.
 
-Nếu máy còn biến cấu hình F5 cũ **`HMOOB_PRECISION=int8`**, bản 1.6.4 nhận ra cấu hình này và thông báo bộ nhanh vẫn chạy **FP32**. Bạn không cần đổi chính tả Hmong hay chọn mô hình phát âm khác; đây là xử lý tương thích cấu hình, không phải đổi bộ phát âm. Bộ nhanh vẫn giữ cách xử lý chữ và thanh điệu như trước.
+Nếu máy còn biến cấu hình F5 cũ **`HMOOB_PRECISION=int8`**, bản 1.6.5 nhận ra cấu hình này và thông báo bộ nhanh vẫn chạy **FP32**. Bạn không cần đổi chính tả Hmong hay chọn mô hình phát âm khác; đây là xử lý tương thích cấu hình, không phải đổi bộ phát âm. Bộ nhanh vẫn giữ cách xử lý chữ và thanh điệu như trước.
 
 **F5 là lựa chọn so sánh nâng cao:** đóng phiên hiện tại rồi mở **`tools\MO_F5_HMONG.bat`**. Lần đầu cần mô hình riêng khoảng **1,4 GB**. F5 có các mức **4/8/16/32 bước**: 16 bước là mặc định, 4/8 dành cho nháp có thể kém rõ, 32 có thể chậm hơn. Bộ nhanh VITS + OpenVoice **không có các số bước này**; không tìm cách giảm bước F5 để tăng tốc bộ chính.
 
@@ -490,7 +492,7 @@ Nếu thông báo DLL yêu cầu **Microsoft Visual C++ 2015–2022 x64**, cài 
 
 ### Công việc báo lỗi tạo giọng hoặc worker dừng
 
-Đọc phần lỗi trên kết quả hoặc thẻ **Lịch sử bản thu**. Bản 1.6.4 hiển thị hướng xử lý và dòng **Nhật ký tác vụ:** kèm đường dẫn tệp log cục bộ của chính công việc. Mở đúng tệp log đó bằng Notepad nếu cần xem thêm, hoặc lưu lại thông báo và đường dẫn để nhờ hỗ trợ. Sửa nguyên nhân được chỉ ra như thiếu RAM, thư viện/DLL, cấu hình, model hoặc dung lượng; sau đó dùng **Tiếp tục** nếu tác vụ còn các đoạn đã tạo. Đừng chỉ bấm tạo lại liên tục hay gửi toàn bộ `.data`; log có thể chứa nội dung công việc nên chỉ chia sẻ phần bạn muốn cung cấp.
+Đọc phần lỗi trên kết quả hoặc thẻ **Lịch sử bản thu**. Bản 1.6.5 hiển thị hướng xử lý và dòng **Nhật ký tác vụ:** kèm đường dẫn tệp log cục bộ của chính công việc. Mở đúng tệp log đó bằng Notepad nếu cần xem thêm, hoặc lưu lại thông báo và đường dẫn để nhờ hỗ trợ. Sửa nguyên nhân được chỉ ra như thiếu RAM, thư viện/DLL, cấu hình, model hoặc dung lượng; sau đó dùng **Tiếp tục** nếu tác vụ còn các đoạn đã tạo. Đừng chỉ bấm tạo lại liên tục hay gửi toàn bộ `.data`; log có thể chứa nội dung công việc nên chỉ chia sẻ phần bạn muốn cung cấp.
 
 ### Tạo giọng chậm, phần trăm đứng lâu hoặc không tiếp tục được
 
@@ -504,6 +506,6 @@ Lần nạp model và câu dài có thể mất thời gian; xem trạng thái C
 4. Tải một tệp về máy, mở bằng trình phát bên ngoài và nghe trước khi chia sẻ. Lưu TXT gốc, JSON phân vai và sao lưu `.data` khi công việc quan trọng.
 5. Đây là âm thanh AI. Bộ nhanh có thử gắn dấu WavMark với đoạn đủ dài, nhưng đoạn quá ngắn có thể bỏ qua và chưa xác nhận dấu còn nhận được sau mọi kiểu xử lý/xuất. Không coi mọi tệp đều đã có dấu chắc chắn.
 
-Nguồn và giấy phép mô hình được ghi trong `MODEL-SOURCES.json` của gói và [tài liệu bộ Hmong nhanh trực tuyến](https://github.com/seotro95/seotro/blob/release/voice-studio-hmong-1.6.4/voice-studio/docs/HMONG-NATIVE.md). Trọng số được tải từ nguồn, không đóng sẵn trong ZIP. Kho trọng số Hmong chưa nêu giấy phép rõ ràng; xem điều kiện của nguồn trước khi phân phối lại hoặc dùng thương mại. Tải và kiểm tra tệp thành công không xác nhận quyền sử dụng hay phát âm chuẩn.
+Nguồn và giấy phép mô hình được ghi trong `MODEL-SOURCES.json` của gói và [tài liệu bộ Hmong nhanh trực tuyến](https://github.com/seotro95/seotro/blob/release/voice-studio-hmong-1.6.5/voice-studio/docs/HMONG-NATIVE.md). Trọng số được tải từ nguồn, không đóng sẵn trong ZIP. Kho trọng số Hmong chưa nêu giấy phép rõ ràng; xem điều kiện của nguồn trước khi phân phối lại hoặc dùng thương mại. Tải và kiểm tra tệp thành công không xác nhận quyền sử dụng hay phát âm chuẩn.
 
 Khi cần nhờ hỗ trợ, gửi số phiên bản đang hiện, tên BAT đã mở, nội dung lỗi trong CMD, giọng/bộ đọc đã chọn và một câu ngắn tái hiện. Với lỗi tải, cho biết đó là tải ZIP hay model. Chỉ gửi mẫu giọng hoặc nội dung riêng tư khi bạn chủ động muốn chia sẻ chúng.

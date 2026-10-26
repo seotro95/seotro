@@ -210,6 +210,8 @@ def checkpoint_identity(job, segment):
     keys = ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads',
             'hmong_steps', 'hmong_reference_fingerprint', 'reference_text', 'speed', 'delivery',
             'segment_plan', 'emotion', 'emotion_strength', 'auto_rhythm', 'hmong_phrase_context')
+    if settings.get('engine') == 'hmong_native' and settings.get('hmong_audio_profile') not in (None, 'legacy-v1'):
+        keys += ('hmong_audio_profile',)
     cast = job['character_cast']
     references = {character: voice['hmong_reference_fingerprint']
                   for character, voice in cast['voices'].items()}

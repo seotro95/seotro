@@ -339,6 +339,7 @@ def _config_values():
                 'models':{name:(ready if name == engine else model_ready(name)) for name in HMONG_ENGINES},
                 'hmong_backend':'native' if engine == 'hmong_native' else 'f5','hmong_engine':engine,
                 'hmong_ready':ready,'hmong_steps':None if engine == 'hmong_native' else 16,
+                'hmong_audio_profile':'clear-v1' if engine == 'hmong_native' else None,
                 'paragraph_pause':0,'subtitle_ready':False,
                 'delivery':'story','emotion':'warm','emotion_strength':0.65,'auto_rhythm':False,
                 'hmong_phrase_context':True,
@@ -825,7 +826,8 @@ def speech(body: Speech):
         if IS_HMONG and body.input_format == 'txt' and not body.video_id and len(body.text) > 20_000:
             job['longform'] = True
         if engine == 'hmong_native':
-            job.update(hmong_steps=None, hmong_backend='vits_openvoice_v2')
+            job.update(hmong_steps=None, hmong_backend='vits_openvoice_v2',
+                       hmong_audio_profile='clear-v1')
         if preset_reference_fingerprint is not None:
             job['hmong_reference_fingerprint'] = preset_reference_fingerprint
         write_json(DATA / 'jobs' / f'{ident}.json', job)

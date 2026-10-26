@@ -422,6 +422,7 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
                           'engine': job['engine'], 'hmong_backend': job['hmong_backend'],
                           'hmong_steps': job['hmong_steps'], 'hmong_precision': job['hmong_precision'],
                           'hmong_device': job['hmong_device'], 'text': text,
+                          'hmong_audio_profile': job['hmong_audio_profile'],
                           'original_text_preserved': job['text'] == text,
                           'input_format': job['input_format'], 'subtitle_timing': job.get('subtitle_timing', True),
                           'ui_entrypoint': button, 'real_ui_post': True,

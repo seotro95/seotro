@@ -26,8 +26,53 @@ from hmong_native_vendor.vits.symbols import symbols
 MAX_SECONDS = 120
 SAMPLE_RATE = 22050
 REFERENCE_CACHE_SIZE = 16
+AUDIO_PROFILES = frozenset({'legacy-v1', 'clear-v1'})
 _SYMBOL_IDS = {symbol: index for index, symbol in enumerate(symbols)}
 _INPUT_SYMBOLS = frozenset(_SYMBOL_IDS) - {'_'}
+
+
+def _mark_clear_audio(samples, watermark, device):
+    """Add the 16 kHz marker residual without low-passing the speech itself.
+
+    WavMark's 16,000 sample input is one second at 16 kHz, not one second
+    of the native 22,050 Hz waveform. Only its small residual is resampled
+    back. Fading that residual avoids a new edge at either splice.
+    """
+    import numpy as np
+    import soxr
+    import torch
+    if (samples.ndim != 1 or not np.isfinite(samples).all()
+            or len(samples) < SAMPLE_RATE):
+        raise EngineError('Đoạn gắn dấu nhận diện âm thanh không hợp lệ.')
+    original = samples[:SAMPLE_RATE]
+    signal = soxr.resample(original, SAMPLE_RATE, 16000, quality='HQ')
+    bits = np.unpackbits(np.frombuffer(b'SEOT', dtype=np.uint8))
+    message = torch.tensor(bits, dtype=torch.float32, device=device).unsqueeze(0)
+    tensor = torch.from_numpy(np.ascontiguousarray(signal, dtype=np.float32)).to(device).unsqueeze(0)
+    marked = watermark.encode(tensor, message)[0].detach().cpu().numpy()
+    if marked.shape != signal.shape or not np.isfinite(marked).all():
+        raise EngineError('Dấu nhận diện trả âm thanh không hợp lệ.')
+    residual = marked - signal
+    signal_power = float(np.mean(signal.astype(np.float64) ** 2))
+    residual_power = float(np.mean(residual.astype(np.float64) ** 2))
+    # Fail closed on an unstable marker instead of emitting audibly damaged
+    # speech or silently dropping the marker. Normal pinned-model SNR is >40 dB.
+    if residual_power > max(signal_power * .01, 1e-12):
+        raise EngineError('Dấu nhận diện làm thay đổi âm thanh quá mức. Hãy tạo lại đoạn này.')
+    residual = soxr.resample(residual, 16000, SAMPLE_RATE, quality='HQ')
+    if residual.shape != original.shape or not np.isfinite(residual).all():
+        raise EngineError('Dấu nhận diện sau chuyển tần số không hợp lệ.')
+    fade = round(.02 * SAMPLE_RATE)
+    envelope = np.sin(np.linspace(0, np.pi / 2, fade)) ** 2
+    residual[:fade] *= envelope
+    residual[-fade:] *= envelope[::-1]
+    if float(np.max(np.abs(residual))) > max(.05, .5 * float(np.max(np.abs(original)))):
+        raise EngineError('Dấu nhận diện có đỉnh âm thanh không hợp lệ.')
+    result = samples.copy()
+    result[:SAMPLE_RATE] = original + residual
+    if not np.isfinite(result).all():
+        raise EngineError('Âm thanh sau gắn dấu nhận diện không hợp lệ.')
+    return result
 
 
 def runtime_settings():
@@ -194,7 +239,8 @@ class SpeechEngine:
         self._reference_key = key
         return self._reference
 
-    def synthesize(self, text, reference_path, reference_text, speed=1.0, quality='fast'):
+    def synthesize(self, text, reference_path, reference_text, speed=1.0, quality='fast', *,
+                   audio_profile='clear-v1'):
         if not isinstance(text, str) or not text.strip() or len(text) > 400:
             raise EngineError('Mỗi đoạn tạo giọng cần 1–400 ký tự; dùng hàng đợi cho kịch bản dài.')
         if not isinstance(reference_text, str) or len(reference_text) > 2000:
@@ -204,6 +250,8 @@ class SpeechEngine:
             raise EngineError('Tốc độ đọc cần từ 0,5 đến 2 lần.')
         if not isinstance(quality, str) or quality not in {'turbo', 'draft', 'fast', 'standard'}:
             raise EngineError('Chế độ chất lượng không hợp lệ.')
+        if not isinstance(audio_profile, str) or audio_profile not in AUDIO_PROFILES:
+            raise EngineError('Chế độ xử lý âm thanh không hợp lệ.')
         text = validate_text(text)
         if len(text) > 400:
             raise EngineError('Lời đọc sau khi chuyển số vượt 400 ký tự; dùng hàng đợi để chia đoạn.')
@@ -240,15 +288,22 @@ class SpeechEngine:
                                                                sid_tgt=target, tau=.3)[0][0, 0]
                     if not torch.isfinite(audio).all() or len(audio) < 1024:
                         raise EngineError('Bộ chuyển giọng trả âm thanh không hợp lệ.')
-                    if len(audio) >= 16000:
+                    minimum = SAMPLE_RATE if audio_profile == 'clear-v1' else 16000
+                    if len(audio) >= minimum:
                         self._notify('Đang thêm dấu nhận diện âm thanh tạo bằng máy…')
-                        bits = np.unpackbits(np.frombuffer(b'SEOT', dtype=np.uint8))
-                        message = torch.tensor(bits, dtype=torch.float32, device=self.device).unsqueeze(0)
-                        marked = model.watermark.encode(audio[:16000].unsqueeze(0), message)[0]
-                        audio[:16000] = marked
+                        if audio_profile == 'legacy-v1':
+                            # Preserve pre-upgrade checkpoint/resume semantics.
+                            bits = np.unpackbits(np.frombuffer(b'SEOT', dtype=np.uint8))
+                            message = torch.tensor(bits, dtype=torch.float32, device=self.device).unsqueeze(0)
+                            marked = model.watermark.encode(audio[:16000].unsqueeze(0), message)[0]
+                            audio[:16000] = marked
+                        else:
+                            samples = audio.detach().cpu().numpy().astype('float32', copy=True)
+                            samples = _mark_clear_audio(samples, model.watermark, self.device)
                     else:
                         self._notify('Đoạn quá ngắn để gắn WavMark; đang hoàn tất âm thanh tạo bằng máy…')
-                    samples = audio.detach().cpu().numpy().astype('float32', copy=True)
+                    if audio_profile == 'legacy-v1' or len(audio) < minimum:
+                        samples = audio.detach().cpu().numpy().astype('float32', copy=True)
                 if (samples.ndim != 1 or not 0 < len(samples) <= MAX_SECONDS * SAMPLE_RATE
                         or not np.isfinite(samples).all() or float(np.max(np.abs(samples))) < 1e-6):
                     raise EngineError('Âm thanh tạo ra rỗng, im lặng hoặc không hợp lệ.')

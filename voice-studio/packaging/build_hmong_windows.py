@@ -23,7 +23,7 @@ from build_windows import copy_runtime, download_verified_ffmpeg
 from fresh_hmong_portable import wave_evidence_bytes
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.6.4'
+VERSION = '1.6.5'
 ARCHIVE_NAME = f'Voice-Studio-Hmong-{VERSION}-Windows-x64.zip'
 
 
@@ -172,7 +172,7 @@ def checked_run(command, *, environment, cwd, timeout=2400):
 
 
 def write_notices(root, model_manifest, qa_report):
-    notice = '''VOICE STUDIO HMONG 1.6.4 — WINDOWS X64
+    notice = '''VOICE STUDIO HMONG 1.6.5 — WINDOWS X64
 
 Chi tai MOT goi ZIP va giai nen TOAN BO. Mo MO_VOICE_STUDIO_HMONG.bat.
 HUONG DAN DAY DU: mo HUONG-DAN-HMONG.html cung thu muc bang trinh duyet.
@@ -219,7 +219,11 @@ Chua ho tro nhan dang loi noi Hmong tu dong; nhap TXT/SRT hoac sua thu cong.
 Giu nguyen bo phat am Hmong ban da xac nhan; khong huan luyen model moi.
 Do giong giong khong bao dam 100%; muc tieu 1 gio voice trong 2 phut (30x)
 chua dat. Toc do tuy CPU/GPU. Khong co cai thien am hoc duoc tuyen bo.
-Hai MP3 nghe thu va first-run-male.wav/first-run-female.wav nam trong reports.
+Bon MP3 nghe thu va first-run-male.wav/first-run-female.wav nam trong reports.
+Ngoc-Huyen-preview.mp3/Hmong-female-3-preview.mp3 la dau ra clear-v1 thuc te.
+Tao tac vu moi de dung clear-v1; tac vu cu giu xu ly cu khi Tiep tuc.
+Ban nay sua dung tan so WavMark, noi mem marker, FLOAT truoc gioi han dinh.
+Khong dung ASR chua hieu chuan de chung nhan loi Hmong hoac do giong.
 Thiet lap/checksum va thoi gian do tron quy trinh o NATIVE-VALIDATION.json. Bao cao
 loai khoang lang tool chen; do ngan khong chung minh toc do 1 gio.
 Bo F5 duoc kiem thu tuong thich rieng bang tao that 16 buoc FP32.
@@ -248,7 +252,8 @@ def bundle_reports(root, reports):
     approved = ('fresh-start.json', 'native-smoke.json', 'f5-smoke.json', 'browser-smoke.json', 'model-sources.json',
                 'first-run-male.wav', 'first-run-female.wav',
                 'external-english-reference.wav', 'external-clone-reference.wav',
-                'Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3')
+                'Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3',
+                'Ngoc-Huyen-preview.mp3', 'Hmong-female-3-preview.mp3')
     destination = root / 'reports'
     destination.mkdir(parents=True, exist_ok=False)
     for name in approved:
@@ -417,6 +422,7 @@ def validate_browser_report(report):
                 or added.get('case') != 'additional_preset_' + ident
                 or added.get('voice_id') != ident or added.get('post_voice_id') != ident
                 or added.get('speaker') != ident or added.get('engine') != 'hmong_native'
+                or added.get('hmong_audio_profile') != 'clear-v1'
                 or added.get('reference_conditioning') != 'audio'
                 or added.get('hmong_reference_fingerprint') != additional_expected[ident]
                 or added.get('source_sha256') != metadata[ident]['sha256']
@@ -487,6 +493,21 @@ def validate_browser_report(report):
 
 def validate_native_feature_report(report):
     """Separate full-size planning from the bounded real synthesis sample."""
+    additional = report.get('generated_auditions', {})
+    fingerprints = expected_additional_reference_fingerprints()
+    filenames = {'hmong-ngoc-huyen': 'Ngoc-Huyen-preview.mp3',
+                 'hmong-female-3': 'Hmong-female-3-preview.mp3'}
+    for ident, filename in filenames.items():
+        audition = additional.get(ident, {})
+        if (audition.get('voice_id') != ident or audition.get('filename') != filename
+                or audition.get('hmong_audio_profile') != 'clear-v1'
+                or audition.get('hmong_reference_fingerprint') != fingerprints[ident]
+                or audition.get('generated') is not True
+                or audition.get('original_source_recording') is not False
+                or audition.get('audio_seconds', 0) <= 1 / 3
+                or audition.get('bytes', 0) <= 1000
+                or not re.fullmatch(r'[a-f0-9]{64}', audition.get('sha256', ''))):
+            raise ValueError('Native Windows QA must export both clear-profile new-voice auditions')
     longform, cast = report.get('longform', {}), report.get('character_cast', {})
     if (report.get('platform') != 'win32' or report.get('native_windows_validation') is not True
             or report.get('reference_cache_limit') != 16
@@ -649,9 +670,15 @@ def validate_release_archive(archive):
                 or not native['main_launcher'].get('second_launch_reused')
                 or not f5['advanced_f5_launcher'].get('second_launch_reused')):
             raise ValueError('Release archive lacks required native, F5, browser or duplicate-launch evidence')
-        for name in ('Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3'):
+        for name in ('Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3',
+                     'Ngoc-Huyen-preview.mp3', 'Hmong-female-3-preview.mp3'):
             if len(bundle.read(prefix + 'reports/' + name)) <= 1000:
                 raise ValueError('Release archive lacks a generated male/female MP3 audition')
+        for ident in ('hmong-ngoc-huyen', 'hmong-female-3'):
+            audition = native['generated_auditions'][ident]
+            audio = bundle.read(prefix + 'reports/' + audition['filename'])
+            if len(audio) != audition['bytes'] or hashlib.sha256(audio).hexdigest() != audition['sha256']:
+                raise ValueError('Bundled new-voice MP3 differs from the actual clear-profile audition')
     return browser
 
 
@@ -808,6 +835,7 @@ def main():
              'browser_validated_presets': sorted(browser_report['voices']),
              'additional_validated_presets': sorted(browser_report['additional_presets']),
              'additional_reference_conditioning': 'audio',
+             'native_audio_profile': 'clear-v1',
              'srt_speech_only_validation': browser_report['srt_speech_only']['success'],
              'initial_default_voice_id': browser_report['initial_voice_id'],
              'browser_qa_script': 'voice-studio/packaging/browser_hmong_portable.py',

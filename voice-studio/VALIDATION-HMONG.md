@@ -1,4 +1,12 @@
-# Voice Studio Hmong 1.6.4 validation
+# Voice Studio Hmong 1.6.5 validation
+
+New Native jobs select the immutable `clear-v1` audio profile. Resumable jobs without a profile retain `legacy-v1`; profile changes invalidate chapter/cast/chunk reuse. The clear profile supplies WavMark one second resampled to its 16 kHz contract, adds only the watermark residual back to the unchanged 22.05 kHz carrier with a 20 ms edge fade, keeps raw Native intermediate WAVs as FLOAT until peak limiting, and disables implicit limiter auto-level in the tempo branch. Weights, tone letters, converter tau and original reference files are unchanged.
+
+The pre-change signal audit of eight generated examples found zero marker bit errors with correct-rate residual processing, versus 10–16 errors with the old wrong-rate path; residual SNR was 41.97–46.03 dB. This is a marker/signal result, not proof of correct Hmong words. These particular original examples had peaks below clipping; the FLOAT change prevents future pre-limiter clipping rather than claiming it removed clipping observed in those examples. Cached Hmong ASR failed calibration on the two user-confirmed references (WER 0.50 and 0.778); its transcripts cannot certify pronunciation or pick a "correct" voice.
+
+The candidate's Windows gate must create real `clear-v1` jobs and MP3 exports for both Ngọc Huyền nâng cao and Hmong nữ 3, bind each to its frozen reference fingerprint, and place `Ngoc-Huyen-preview.mp3` and `Hmong-female-3-preview.mp3` beside the two earlier auditions in `reports`. The ZIP gate independently checks their bytes and SHA256 against the native report. Human listening remains necessary for pronunciation, friendliness and resemblance; no 100% identity, universal correction or 30x throughput is claimed. Candidate Windows/public verification must be recorded after these changes; no historical result below establishes success for 1.6.5.
+
+# Historical 1.6.4 validation
 
 The candidate adds two native audio-only builtin presets from the exact new user uploads while preserving the original male/female files and pinned acoustic model. Source/reference hashes, intervals and constant gain are recorded in `assets/hmong/additional-voices.json`. Both references must pass waveform/source integrity checks and actual selected-reference synthesis; no transcript, perceptual identity percentage, new pronunciation certification or 30x claim is invented. Native defaults to Hmong female 3 and supports a separately persisted preferred preset/personal voice. F5 excludes new references without verified Hmong words.
 

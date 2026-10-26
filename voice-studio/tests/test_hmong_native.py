@@ -67,6 +67,7 @@ def test_unsupported_text_is_rejected_instead_of_dropping_characters(text):
     ('speed', True), ('speed', None), ('speed', '1'), ('speed', 0), ('speed', .49),
     ('speed', 2.01), ('speed', math.nan), ('speed', math.inf),
     ('quality', 'unknown'), ('quality', []),
+    ('audio_profile', 'unknown'), ('audio_profile', None), ('audio_profile', []),
 ])
 def test_invalid_requests_fail_before_loading_weights(monkeypatch, field, value):
     engine = native.SpeechEngine()
@@ -367,7 +368,16 @@ def test_native_pipeline_preserves_target_tokens_and_applies_requested_speed(ten
     assert options['length_scale'] == .8 and options['max_len'] > 0
     assert state.conversions[0]['sid_tgt'] is target
     assert samples.dtype.name == 'float32' and rate == 22050 and len(samples) == 20000
+    # The native 20,000 samples are shorter than WavMark's one-second input.
+    assert state.watermark_calls == 0
+
+
+def test_legacy_pipeline_keeps_original_watermark_window(tensor_pipeline):
+    _, engine, state, _ = tensor_pipeline
+    samples, _ = engine.synthesize('Nyob zoo.', 'ref.wav', '', audio_profile='legacy-v1')
     assert state.watermark_calls == 1
+    assert samples[:16000].mean() == pytest.approx(.19, abs=1e-6)
+    assert samples[16000:].mean() == pytest.approx(.2, abs=1e-6)
 
 
 @pytest.mark.parametrize('words', ['', 'Xin chào, tôi đang đọc tiếng Việt.',

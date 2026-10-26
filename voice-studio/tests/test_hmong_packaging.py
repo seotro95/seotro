@@ -99,7 +99,7 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
 
 
 def test_archive_has_valid_crc_and_matching_sha256(tmp_path):
-    root = tmp_path / 'Voice-Studio-Hmong-1.6.4'
+    root = tmp_path / 'Voice-Studio-Hmong-1.6.5'
     root.mkdir()
     (root / 'hello.txt').write_bytes(b'relocatable')
     archive = tmp_path / 'bundle.zip'
@@ -153,7 +153,8 @@ def test_single_download_bundles_only_approved_reports_and_generated_auditions(t
     names = ('fresh-start.json', 'native-smoke.json', 'f5-smoke.json', 'browser-smoke.json', 'model-sources.json',
              'first-run-male.wav', 'first-run-female.wav',
              'external-english-reference.wav', 'external-clone-reference.wav',
-             'Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3')
+             'Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3',
+             'Ngoc-Huyen-preview.mp3', 'Hmong-female-3-preview.mp3')
     for name in (*names, 'private.wav', 'model.pth', 'credentials.json'):
         (source / name).write_bytes(b'fixture: ' + name.encode())
     root = tmp_path / 'portable'
@@ -211,6 +212,7 @@ def browser_report_fixture():
         'case': 'additional_preset_' + ident, 'voice_id': ident, 'post_voice_id': ident,
         'speaker': ident, 'job_id': 'additional-' + ident, 'success': True,
         'hmong_reference_fingerprint': additional_expected[ident],
+        'hmong_audio_profile': 'clear-v1',
         'source_sha256': metadata[ident]['sha256'],
         'reference_audio_sha256': metadata[ident]['reference_sha256'],
         'reference_conditioning': 'audio', 'no_transcript': True,
@@ -263,6 +265,13 @@ def browser_report_fixture():
 
 def native_feature_fixture():
     return {'platform': 'win32', 'native_windows_validation': True, 'reference_cache_limit': 16,
+        'generated_auditions': {ident: {
+            'voice_id': ident, 'filename': filename, 'hmong_audio_profile': 'clear-v1',
+            'hmong_reference_fingerprint': packaging.expected_additional_reference_fingerprints()[ident],
+            'generated': True, 'original_source_recording': False, 'audio_seconds': 4,
+            'bytes': 1203, 'sha256': hashlib.sha256(b'ID3' + b'x' * 1200).hexdigest()}
+            for ident, filename in [('hmong-ngoc-huyen', 'Ngoc-Huyen-preview.mp3'),
+                                    ('hmong-female-3', 'Hmong-female-3-preview.mp3')]},
         'reference_quality_advisories': True, 'longform': {'success': True,
             'oversize_rejected': True, 'plan_preserved_all_segments': True,
             'real_synthesis': True, 'short_sample_plan_injected': True,
@@ -274,6 +283,35 @@ def native_feature_fixture():
             'reference_identities_verified': True, 'original_srt_preserved': True,
             'voice_ids': ['hmong-male', 'hmong-female'], 'cue_characters': ['narrator', 'guest'],
             'audio_seconds': 24}}
+
+
+@pytest.mark.parametrize('ident', ['hmong-ngoc-huyen', 'hmong-female-3'])
+@pytest.mark.parametrize('failure', [
+    'missing', 'old-profile', 'wrong-reference', 'source-audio',
+    'wrong-voice', 'not-generated', 'empty-audio', 'no-digest',
+])
+def test_clear_profile_release_requires_each_actual_selected_new_voice(ident, failure):
+    report = native_feature_fixture()
+    assert packaging.validate_native_feature_report(report) is report
+    audition = report['generated_auditions'][ident]
+    if failure == 'missing': report['generated_auditions'].pop(ident)
+    elif failure == 'old-profile': audition['hmong_audio_profile'] = 'legacy-v1'
+    elif failure == 'wrong-reference': audition['hmong_reference_fingerprint'] = '0' * 64
+    elif failure == 'source-audio': audition['original_source_recording'] = True
+    elif failure == 'wrong-voice': audition['voice_id'] = 'hmong-female'
+    elif failure == 'not-generated': audition['generated'] = False
+    elif failure == 'empty-audio': audition['bytes'] = 0
+    elif failure == 'no-digest': audition['sha256'] = ''
+    with pytest.raises(ValueError, match='clear-profile'):
+        packaging.validate_native_feature_report(report)
+
+
+@pytest.mark.parametrize('ident', ['hmong-ngoc-huyen', 'hmong-female-3'])
+def test_clear_profile_browser_release_rejects_previous_audio_path(ident):
+    report = browser_report_fixture()
+    report['additional_presets'][ident]['hmong_audio_profile'] = 'legacy-v1'
+    with pytest.raises(ValueError):
+        packaging.validate_browser_report(report)
 
 
 def fresh_start_fixture():
@@ -614,7 +652,8 @@ def test_publication_gate_reads_mandatory_browser_evidence_from_the_zip(tmp_path
              'reports/f5-smoke.json': {'success': True, 'advanced_f5_launcher': {'second_launch_reused': True}}}
     for name, value in files.items():
         (root / name).write_text(json.dumps(value), encoding='utf-8')
-    for name in ('Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3'):
+    for name in ('Hmong-female-2-preview.mp3', 'Hmong-male-2-preview.mp3',
+                 'Ngoc-Huyen-preview.mp3', 'Hmong-female-3-preview.mp3'):
         (reports / name).write_bytes(b'ID3' + b'x' * 1200)
     # The pinned Python runtime contains standard BAT files of its own.
     activation = root / 'runtime/Scripts/activate.bat'
@@ -624,6 +663,14 @@ def test_publication_gate_reads_mandatory_browser_evidence_from_the_zip(tmp_path
     archive = tmp_path / 'release.zip'
     packaging.archive_package(root, archive)
     assert packaging.validate_release_archive(archive) == report
+    for filename in ('Ngoc-Huyen-preview.mp3', 'Hmong-female-3-preview.mp3'):
+        audition_path = reports / filename
+        original_audition = audition_path.read_bytes()
+        audition_path.write_bytes(b'ID3' + b'y' * 1200)
+        packaging.archive_package(root, archive)
+        with pytest.raises(ValueError, match='actual clear-profile audition'):
+            packaging.validate_release_archive(archive)
+        audition_path.write_bytes(original_audition)
     health = root / 'voice-studio-hmong/hmong_health.py'
     original = health.read_bytes()
     health.write_bytes(b'outdated health checks\n')
@@ -775,7 +822,7 @@ def test_native_smoke_probes_primary_and_every_advanced_batch(tmp_path, monkeypa
     spec = importlib.util.spec_from_file_location('smoke_hmong', PACKAGING / 'smoke_hmong_portable.py')
     smoke = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(smoke)
-    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.6.4'
+    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.6.5'
     root.mkdir(parents=True)
     packaging.write_launcher(root)
     calls = []
@@ -821,7 +868,7 @@ def test_windows_launcher_smoke_checks_reuse_and_only_cleans_up_its_first_proces
     url = 'http://127.0.0.1:8770'
     engine = 'hmong_native' if backend == 'native' else 'f5_hmong'
     instance = {'instance_id': 'qa-server', 'pid': 102, 'url': url, 'data_id': 'qa-data',
-                'root_id': 'qa-root', 'backend': engine, 'version': '1.6.4-hmong'}
+                'root_id': 'qa-root', 'backend': engine, 'version': '1.6.5-hmong'}
     process = SimpleNamespace(pid=101, stdout=io.StringIO('Studio: ' + url + '\n'),
                               poll=lambda: None, wait=lambda **kwargs: 0)
     server = SimpleNamespace(is_running=lambda: True, parents=lambda: [SimpleNamespace(pid=101)])

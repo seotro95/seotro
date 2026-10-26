@@ -31,7 +31,9 @@ PLAIN_SAMPLE = ('Peb ua hauj lwm hauv thaj chaw no. Nyob qab roob. Peb faib mov.
 EXPRESSIVE_SAMPLE = ('[emotion=warm]**Peb ua hauj lwm hauv thaj chaw no.**[pause=0.25]'
                      '[emotion=serious]Nyob qab roob. Peb faib mov. Kuv rov los tsev. Nws hnav ris.')
 GENERATED_PREVIEW_FILES = {'hmong-female': 'Hmong-female-2-preview.mp3',
-                           'hmong-male': 'Hmong-male-2-preview.mp3'}
+                           'hmong-male': 'Hmong-male-2-preview.mp3',
+                           'hmong-ngoc-huyen': 'Ngoc-Huyen-preview.mp3',
+                           'hmong-female-3': 'Hmong-female-3-preview.mp3'}
 
 
 def check_batch_entrypoints(root):
@@ -118,6 +120,8 @@ def export_generated_preview(client, job, reports):
     return {'filename': filename, 'sha256': hashlib.sha256(response.content).hexdigest(),
             'bytes': len(response.content), 'generated': True, 'original_source_recording': False,
             'job_id': job['id'], 'voice_id': job['voice_id'], 'text': job['text'],
+            'hmong_audio_profile': job.get('hmong_audio_profile'),
+            'hmong_reference_fingerprint': job.get('hmong_reference_fingerprint'),
             'audio_seconds': job['audio_seconds'],
             'spoken_audio_seconds': job['spoken_audio_seconds'],
             'inserted_silence_seconds': job['inserted_silence_seconds'],
@@ -254,6 +258,7 @@ def main():
         assert job['engine'] == engine
         if args.backend == 'native':
             assert job['hmong_backend'] == 'vits_openvoice_v2' and job['hmong_steps'] is None
+            assert job['hmong_audio_profile'] == 'clear-v1'
         else:
             assert job['hmong_steps'] == 16
         response = client.get('/api/audio/' + job['id'])
@@ -374,7 +379,18 @@ def main():
                              'MP3_export', 'ffprobe'],
                 'model_cache': 'process_first_job' if ident == 'hmong-female' else 'warm_process',
                 'estimate_only': True, 'target_30x_verified_one_hour': False}
-        assert len(results['generated_auditions']) == 2
+        from hmong_assets import reference_fingerprint
+        for ident in ('hmong-ngoc-huyen', 'hmong-female-3'):
+            print('Real clear-profile new-voice audition:', ident, flush=True)
+            job = render(client, {'text': PLAIN_SAMPLE, 'language': 'mww', 'voice_id': ident,
+                'format': 'wav', 'delivery': 'story', 'emotion': 'warm',
+                'emotion_strength': .65, 'speed': 1, 'paragraph_pause': 0})
+            assert job['speaker'] == ident
+            assert job['hmong_reference_fingerprint'] == reference_fingerprint(ident)
+            audition = export_generated_preview(client, job, reports)
+            assert audition['hmong_audio_profile'] == 'clear-v1'
+            results['generated_auditions'][ident] = audition
+        assert set(results['generated_auditions']) == set(GENERATED_PREVIEW_FILES)
         results['mp3'] = True
 
         for gender in ('female', 'male'):
@@ -618,7 +634,7 @@ def check_web_launcher(root, backend, *, reports=None):
             assert isinstance(instance.get(field), str) and instance[field], 'Missing runtime identity: ' + field
         assert isinstance(instance.get('pid'), int) and instance['pid'] > 0
         assert instance['url'] == url and instance['backend'] == engine
-        assert instance['version'] == live['version'] == '1.6.4-hmong'
+        assert instance['version'] == live['version'] == '1.6.5-hmong'
         assert instance['instance_id'] != 'stale-build-qa-instance'
         server = psutil.Process(instance['pid'])
         assert server.is_running() and process.pid in {parent.pid for parent in server.parents()}, \

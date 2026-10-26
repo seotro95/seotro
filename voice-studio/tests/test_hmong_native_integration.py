@@ -240,7 +240,7 @@ def engine_probe(calls, label):
         def set_progress_callback(self, callback):
             self.callback = callback
 
-        def synthesize(self, text, reference, words, speed=1, quality='fast'):
+        def synthesize(self, text, reference, words, speed=1, quality='fast', *, audio_profile='legacy-v1'):
             calls.append((label, text, Path(reference), words, speed, quality))
             self.callback('Đang tạo âm thanh native')
             return (.1 * np.sin(np.arange(2205, dtype=np.float32) * .1)).astype(np.float32), 22050

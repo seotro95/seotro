@@ -31,6 +31,17 @@ def write_state(path, data):
     return write_json_atomic(path,data)
 
 
+def _native_audio_profile(job):
+    if job.get('engine') != 'hmong_native':
+        return 'legacy-v1'
+    profile = job.get('hmong_audio_profile')
+    if profile is None:
+        profile = 'legacy-v1'
+    if not isinstance(profile, str) or profile not in {'legacy-v1', 'clear-v1'}:
+        raise ValueError('Chế độ xử lý âm thanh Hmong không hợp lệ.')
+    return profile
+
+
 def load_synthesizer(job):
     import soundfile as sf
     if job['engine'] in HMONG_ENGINES:
@@ -39,6 +50,7 @@ def load_synthesizer(job):
                              'Tạo tác vụ mới bằng hồ sơ giọng cá nhân; không thay bằng giọng mặc định.')
         global _hmong_model_instance, _hmong_native_instance
         native = job['engine'] == 'hmong_native'
+        audio_profile = _native_audio_profile(job)
         if native:
             # A backend switch must not retain both complete model graphs.
             _hmong_model_instance = None
@@ -71,9 +83,13 @@ def load_synthesizer(job):
             def report_phase(phase):
                 write_state(progress_path,{**read_progress(progress_path),'phase':phase})
             instance.set_progress_callback(report_phase)
+            options = {'audio_profile': audio_profile} if native else {}
             samples, rate = instance.synthesize(text,ref_path,ref_text,
-                                                speed=1.0 if native else 0.9,quality=quality)
-            sf.write(str(output),samples,rate,subtype='PCM_16')
+                                                speed=1.0 if native else 0.9,quality=quality, **options)
+            # Preserve float headroom until normalization; PCM16 here clips
+            # peaks irreversibly before the final limiter can act.
+            subtype = 'FLOAT' if native and audio_profile == 'clear-v1' else 'PCM_16'
+            sf.write(str(output),samples,rate,subtype=subtype)
         return synthesize
     if job['engine'] == 'system':
         from system_voices import speak
@@ -137,6 +153,7 @@ def get_synthesizer(job):
     key = tuple(job.get(k) for k in ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads', 'hmong_steps', 'hmong_reference_fingerprint'))
     key += (job.get('reference_text') if job.get('character_cast') else
             (job.get('hmong_voice_snapshot') or {}).get('reference_text'),)
+    key += (_native_audio_profile(job),)
     cast = bool(job.get('character_cast'))
     if _cast_synthesizers and (not cast or _cast_synth_engine != job['engine']):
         # Closures retain their model instance: release all before a backend switch.
@@ -167,7 +184,9 @@ def get_synthesizer(job):
     return _cached_synth
 
 
-def normalize_audio(raw, temporary, tempo, gain):
+def normalize_audio(raw, temporary, tempo, gain, *, audio_profile='legacy-v1'):
+    if not isinstance(audio_profile, str) or audio_profile not in {'legacy-v1', 'clear-v1'}:
+        raise ValueError('Chế độ xử lý âm thanh không hợp lệ.')
     # Avoid spawning FFmpeg for each natural-speed chunk, especially on Windows.
     if abs(tempo - 1) < 1e-6:
         import numpy as np
@@ -187,7 +206,8 @@ def normalize_audio(raw, temporary, tempo, gain):
         samples = samples * safe_gain
         sf.write(str(temporary), samples, 24000, subtype='PCM_16')
     else:
-        subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(raw), '-vn', '-ac', '1', '-ar', '24000', '-af', f'atempo={tempo},volume={gain},alimiter=limit=0.95', '-codec:a', 'pcm_s16le', '-y', str(temporary)], check=True, timeout=120)
+        limiter = 'alimiter=limit=0.95' + (':level=false' if audio_profile == 'clear-v1' else '')
+        subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(raw), '-vn', '-ac', '1', '-ar', '24000', '-af', f'atempo={tempo},volume={gain},{limiter}', '-codec:a', 'pcm_s16le', '-y', str(temporary)], check=True, timeout=120)
 
 
 _nano_pool = None
@@ -268,7 +288,8 @@ def _planned_segments(job):
 def _chunk_identity(job, segment):
     """Legacy jobs keep their checkpoints; frozen/new chapter jobs bind all inputs."""
     cast_identity = checkpoint_identity(job, segment) if job.get('character_cast') else None
-    if '_PREPLANNED_SEGMENTS' not in job and not job.get('hmong_voice_snapshot'):
+    clear_audio = _native_audio_profile(job) == 'clear-v1'
+    if '_PREPLANNED_SEGMENTS' not in job and not job.get('hmong_voice_snapshot') and not clear_audio:
         return cast_identity
     keys = ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads',
             'hmong_steps', 'hmong_reference_fingerprint', 'hmong_voice_snapshot', 'speed',
@@ -276,6 +297,8 @@ def _chunk_identity(job, segment):
             'hmong_phrase_context', 'paragraph_pause', '_longform_parent_id', '_longform_identity',
             '_PREPLANNED_SEGMENTS')
     settings = {key: job.get(key) for key in keys}
+    if clear_audio:
+        settings['hmong_audio_profile'] = 'clear-v1'
     if job.get('input_format') == 'srt' and job.get('subtitle_timing', True) is False:
         settings['subtitle_timing'] = False
     payload = {'version': 1, 'cast': cast_identity, 'segment': vars(segment),
@@ -350,7 +373,10 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
             if not np.all(np.isfinite(raw_samples)):
                 raise EmptyVoiceError('Model tạo mẫu âm thanh không hợp lệ.')
             del raw_samples
-            normalize_audio(raw, temporary, tempo, gain)
+            if _native_audio_profile(job) == 'clear-v1':
+                normalize_audio(raw, temporary, tempo, gain, audio_profile='clear-v1')
+            else:
+                normalize_audio(raw, temporary, tempo, gain)
             if expressive:
                 from hmong_expression import shape_phrase_energy
                 shape_phrase_energy(temporary, emotion, strength)
@@ -492,7 +518,10 @@ def render(job, synthesize=None):
                     for attempt in range(5):
                         if (work / 'cancel.flag').exists():
                             raise InterruptedError('Tác vụ đã dừng.')
-                        normalize_audio(cue_path, fitted, tempo, 1)
+                        if _native_audio_profile(job) == 'clear-v1':
+                            normalize_audio(cue_path, fitted, tempo, 1, audio_profile='clear-v1')
+                        else:
+                            normalize_audio(cue_path, fitted, tempo, 1)
                         with wave.open(str(fitted)) as fitted_audio:
                             fitted_seconds = fitted_audio.getnframes()/fitted_audio.getframerate()
                         if fitted_seconds <= available+.00001:
@@ -575,7 +604,8 @@ def render(job, synthesize=None):
     if job['engine']=='hmong_native' and _hmong_native_instance is not None and _hmong_native_instance._model is not None:
         inference = {'hmong_precision': _hmong_native_instance._model.precision,
                      'hmong_steps': None, 'hmong_device': _hmong_native_instance.device,
-                     'hmong_backend': _hmong_native_instance._model.backend}
+                     'hmong_backend': _hmong_native_instance._model.backend,
+                     'hmong_audio_profile': _native_audio_profile(job)}
     if expressive:
         emotion_counts = {}
         for segment in segments[:completed]:
