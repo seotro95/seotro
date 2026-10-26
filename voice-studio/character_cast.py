@@ -212,6 +212,8 @@ def checkpoint_identity(job, segment):
             'segment_plan', 'emotion', 'emotion_strength', 'auto_rhythm', 'hmong_phrase_context')
     if settings.get('engine') == 'hmong_native' and settings.get('hmong_audio_profile') not in (None, 'legacy-v1'):
         keys += ('hmong_audio_profile',)
+    if settings.get('require_complete_audio') is True:
+        keys += ('require_complete_audio',)
     cast = job['character_cast']
     references = {character: voice['hmong_reference_fingerprint']
                   for character, voice in cast['voices'].items()}

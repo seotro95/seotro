@@ -112,6 +112,8 @@ def plan_identity(job, chapters):
     # chapter audio, including when the text and voice are unchanged.
     if job.get('engine') == 'hmong_native' and job.get('hmong_audio_profile') not in (None, 'legacy-v1'):
         settings['hmong_audio_profile'] = job['hmong_audio_profile']
+    if job.get('require_complete_audio') is True:
+        settings['require_complete_audio'] = True
     # Explicit speech-only subtitle work must not share a timed plan. Omitted
     # or True retains previous identities, including all legacy TXT chapters.
     if job.get('input_format') == 'srt' and job.get('subtitle_timing', True) is False:
@@ -264,6 +266,8 @@ def run_longform(job, data, execute_worker, env, *, cancelled=None):
             child = {key: job.get(key) for key in _SETTINGS if key in job}
             if job.get('engine') == 'hmong_native' and 'hmong_audio_profile' in job:
                 child['hmong_audio_profile'] = job['hmong_audio_profile']
+            if 'require_complete_audio' in job:
+                child['require_complete_audio'] = job['require_complete_audio']
             child.update(id=entry['id'], text=chapter.text, input_format='txt', format=audio_format,
                          status='running', max_minutes=180, _longform_parent_id=ident,
                          _longform_identity=identity,

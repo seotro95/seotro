@@ -1,8 +1,8 @@
-name: Build and publish Voice Studio Hmong 1.6.5
+name: Build and publish Voice Studio Hmong 1.6.6
 
 on:
   push:
-    branches: [release/voice-studio-hmong-1.6.5]
+    branches: [release/voice-studio-hmong-1.6.6]
     paths:
       - .github/workflows/voice-studio-hmong-release.yml
       - voice-studio/**
@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: voice-studio-hmong-1.6.5-release
+  group: voice-studio-hmong-1.6.6-release
   cancel-in-progress: false
 
 env:
@@ -20,7 +20,7 @@ env:
   PYTHONUNBUFFERED: '1'
   HF_HUB_DISABLE_XET: '1'
   GH_REPO: ${{ github.repository }}
-  RELEASE_TAG: voice-studio-hmong-1.6.5
+  RELEASE_TAG: voice-studio-hmong-1.6.6
 
 jobs:
   windows-integrity:
@@ -83,7 +83,7 @@ jobs:
           if (-not $release) {
             $notes = Join-Path $env:RUNNER_TEMP 'hmong-draft-notes.txt'
             'Building and validating a clean native Windows Hmong package. Download links appear after all checks pass.' | Set-Content -Encoding utf8 $notes
-            gh release create $env:RELEASE_TAG --repo $env:GH_REPO --target $env:GITHUB_SHA --draft --prerelease --title 'Voice Studio Hmong 1.6.5 — Windows x64' --notes-file $notes
+            gh release create $env:RELEASE_TAG --repo $env:GH_REPO --target $env:GITHUB_SHA --draft --prerelease --title 'Voice Studio Hmong 1.6.6 — Windows x64' --notes-file $notes
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
       - name: Restore the pinned public CPU runtime archive
@@ -120,7 +120,7 @@ jobs:
       - name: Check Hmong routing and portable packaging
         working-directory: voice-studio
         run: |
-          python packaging/ci_checked.py python -m pytest tests/test_hmong_native.py tests/test_prepare_hmong_native.py tests/test_model_download_recovery.py tests/test_voice_errors.py tests/test_speech_validation_feedback.py tests/test_voice_click_recovery.py tests/test_hmong_health.py tests/test_hmong_repair_launcher.py tests/test_hmong_native_integration.py tests/test_hmong_variant.py tests/test_hmong_reference.py tests/test_hmong_default_replacement.py tests/test_hmong_packaging.py tests/test_hmong_patch.py tests/test_hmong_startup.py tests/test_hmong_text.py tests/test_hmong_inference_contract.py tests/test_hmong_narration.py tests/test_hmong_expression.py tests/test_hmong_context.py tests/test_hmong_throughput.py tests/test_hmong_acceleration.py tests/test_hmong_resume_exports.py tests/test_hmong_ui.py tests/test_character_cast.py tests/test_longform_chapters.py tests/test_hmong_features_api.py tests/test_longform_ui.py tests/test_character_ui.py tests/test_reference_quality.py tests/test_portable_launcher.py tests/test_runtime_instance.py tests/test_runtime_instance_integration.py tests/test_launch_setup.py tests/test_caption_timestamp_parsing.py tests/test_caption_text_speech.py tests/test_hmong_numbers.py tests/test_cross_language_reference.py tests/test_cross_language_clone_api.py tests/test_additional_voice_assets.py tests/test_srt_speech_only.py tests/test_user_excerpt_217.py tests/test_script_file_encodings.py tests/test_additional_native_voices_api.py tests/test_native_reference_selection.py tests/test_release_164_proofs.py tests/test_hmong_clear_audio.py tests/test_hmong_audio_profile.py -q
+          python packaging/ci_checked.py python -m pytest tests/test_hmong_native.py tests/test_prepare_hmong_native.py tests/test_model_download_recovery.py tests/test_voice_errors.py tests/test_speech_validation_feedback.py tests/test_voice_click_recovery.py tests/test_hmong_health.py tests/test_hmong_repair_launcher.py tests/test_hmong_native_integration.py tests/test_hmong_variant.py tests/test_hmong_reference.py tests/test_hmong_default_replacement.py tests/test_hmong_packaging.py tests/test_hmong_patch.py tests/test_hmong_startup.py tests/test_hmong_text.py tests/test_hmong_inference_contract.py tests/test_hmong_narration.py tests/test_hmong_expression.py tests/test_hmong_context.py tests/test_hmong_throughput.py tests/test_hmong_acceleration.py tests/test_hmong_resume_exports.py tests/test_hmong_ui.py tests/test_character_cast.py tests/test_longform_chapters.py tests/test_hmong_features_api.py tests/test_longform_ui.py tests/test_character_ui.py tests/test_reference_quality.py tests/test_portable_launcher.py tests/test_runtime_instance.py tests/test_runtime_instance_integration.py tests/test_launch_setup.py tests/test_caption_timestamp_parsing.py tests/test_caption_text_speech.py tests/test_hmong_numbers.py tests/test_cross_language_reference.py tests/test_cross_language_clone_api.py tests/test_additional_voice_assets.py tests/test_srt_speech_only.py tests/test_user_excerpt_217.py tests/test_script_file_encodings.py tests/test_additional_native_voices_api.py tests/test_native_reference_selection.py tests/test_release_164_proofs.py tests/test_hmong_clear_audio.py tests/test_hmong_audio_profile.py tests/test_user_srt_166.py tests/test_timed_srt_api_166.py tests/test_srt_adaptive_complete.py -q
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node --check static/text-import.js
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
@@ -137,15 +137,15 @@ jobs:
         env:
           HMOOB_BROWSER_CHANNEL: msedge
         run: |
-          & $env:HMOOB_BROWSER_PYTHON packaging/ci_checked.py $env:HMOOB_BROWSER_PYTHON -m pytest tests/test_voice_click_recovery.py tests/test_cross_language_clone_ui.py tests/test_hmong_voice_ui_164.py tests/test_script_file_encodings.py -q
+          & $env:HMOOB_BROWSER_PYTHON packaging/ci_checked.py $env:HMOOB_BROWSER_PYTHON -m pytest tests/test_voice_click_recovery.py tests/test_cross_language_clone_ui.py tests/test_hmong_voice_ui_164.py tests/test_script_file_encodings.py tests/test_hmong_ui_166.py -q
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Require empty-data first-run setup, real diagnostic voices and relocated Windows synthesis
         run: |
-          python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --output '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.5' --reports '${{ runner.temp }}/hmong-reports' --runtime-source "$env:HMONG_BASE/runtime" --ffmpeg-source "$env:HMONG_BASE/ffmpeg"
+          python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --output '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.6' --reports '${{ runner.temp }}/hmong-reports' --runtime-source "$env:HMONG_BASE/runtime" --ffmpeg-source "$env:HMONG_BASE/ffmpeg"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Require fresh setup, real runtime math, diagnostic speech and browser results inside the single ZIP
         run: |
-          python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --validate-archive '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.5-Windows-x64.zip'
+          python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --validate-archive '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.6-Windows-x64.zip'
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Scan the fresh package with Windows Defender when available
         timeout-minutes: 25
@@ -153,9 +153,9 @@ jobs:
           $scanner = Join-Path $env:ProgramFiles 'Windows Defender/MpCmdRun.exe'
           $report = @{ available = (Test-Path $scanner); scan_passed = $false }
           if ($report.available) {
-            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.5'
+            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.6'
             if ($LASTEXITCODE -ne 0) { throw 'Windows Defender did not accept the fresh Hmong directory; do not publish.' }
-            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.5-Windows-x64.zip'
+            & $scanner -Scan -ScanType 3 -File '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.6-Windows-x64.zip'
             if ($LASTEXITCODE -ne 0) { throw 'Windows Defender did not accept the Hmong archive; do not publish.' }
             $report.scan_passed = $true
           } else { Write-Warning 'Windows Defender command-line scanner is unavailable on this runner; no antivirus result is claimed.' }
@@ -165,12 +165,12 @@ jobs:
         uses: actions/upload-artifact@v4
         continue-on-error: true
         with:
-          name: Voice-Studio-Hmong-1.6.5-native-windows
+          name: Voice-Studio-Hmong-1.6.6-native-windows
           compression-level: 0
           retention-days: 7
           path: |
-            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.5-Windows-x64.zip
-            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.5-Windows-x64.zip.sha256
+            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.6-Windows-x64.zip
+            ${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.6-Windows-x64.zip.sha256
             ${{ runner.temp }}/hmong-reports/*.json
             ${{ runner.temp }}/hmong-reports/Hmong-female-2-preview.mp3
             ${{ runner.temp }}/hmong-reports/Hmong-male-2-preview.mp3
@@ -186,7 +186,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           $release = $releases | Where-Object { $_.tag_name -eq $env:RELEASE_TAG }
           if (-not $release -or -not $release.draft) { throw 'The separate Hmong draft release is missing or was published elsewhere.' }
-          $zip = '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.5-Windows-x64.zip'
+          $zip = '${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.6-Windows-x64.zip'
           python voice-studio/packaging/ci_checked.py python voice-studio/packaging/build_hmong_windows.py --validate-archive $zip
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           $size = (Get-Item $zip).Length
@@ -194,17 +194,23 @@ jobs:
           $digest = (Get-FileHash -Algorithm SHA256 $zip).Hash.ToLowerInvariant()
           $notes = Join-Path $env:RUNNER_TEMP 'hmong-release-notes.md'
           @"
-          **Chỉ tải một tệp:** [Voice-Studio-Hmong-1.6.5-Windows-x64.zip](https://github.com/$env:GH_REPO/releases/download/$env:RELEASE_TAG/Voice-Studio-Hmong-1.6.5-Windows-x64.zip). Giải nén toàn bộ rồi mở **MO_VOICE_STUDIO_HMONG.bat**.
+          **Chỉ tải một tệp:** [Voice-Studio-Hmong-1.6.6-Windows-x64.zip](https://github.com/$env:GH_REPO/releases/download/$env:RELEASE_TAG/Voice-Studio-Hmong-1.6.6-Windows-x64.zip). Giải nén toàn bộ rồi mở **MO_VOICE_STUDIO_HMONG.bat**.
 
           **Hướng dẫn đầy đủ:** mở HUONG-DAN-HMONG.html ở thư mục ngoài cùng hoặc bấm Hướng dẫn trong tool. Hướng dẫn gồm chạy lần đầu, tạo giọng nam/nữ, nhân bản, TXT/SRT, biểu cảm, phân vai, kịch bản dài, xuất âm thanh/video, sao lưu và xử lý lỗi.
 
-          Bản 1.6.5 sửa xử lý âm thanh của bộ nhanh: WavMark nhận đúng 16 kHz, chỉ cộng phần dấu nhận diện về âm thanh gốc và nối mềm 20 ms; WAV trung gian giữ FLOAT trước giới hạn đỉnh; nhánh đổi tốc độ tắt tự tăng âm lượng của limiter. Tác vụ mới dùng clear-v1, tác vụ cũ tiếp tục bằng thiết lập cũ để không trộn các đoạn khác nhau. Chữ Hmong, mô hình phát âm, tham chiếu và tau được giữ nguyên. Các sửa lỗi tín hiệu không chứng minh mọi từ Hmong đã đúng hoặc giống 100% mẫu gốc.
+          Bản 1.6.6 sửa việc nhận SRT/TXT có mốc thời gian và chọn giọng nhân bản sau khi lọc danh sách. Mặc định Hmong giữ mốc từng câu; TXT chứa mốc được nhận thành SRT mà không đổi bản nguồn. Dấu nháy và ngoặc giữ toàn bộ lời bên trong. Nếu phụ đề sai, thông báo chỉ rõ câu, mốc và nguyên nhân thực tế thay vì gộp tất cả thành lỗi 3 giờ.
+
+          Đoạn bốn câu bạn gửi được kiểm tra bằng mô hình thật và trình duyệt Windows, từ 00:00:00,133 đến 00:00:09,000: giữ đủ lời, khớp bốn ô và xuất WAV đúng 9,000 giây, cả khi nhập .srt lẫn .txt. Tự căn nhịp tối đa 4 lần bằng chuỗi atempo không quá 2 lần mỗi bước để tránh bỏ mẫu. Câu cần trên 2 lần được báo đọc nhanh; mốc quá chật vượt giới hạn sẽ báo lỗi, không cắt mất lời. Muốn nhịp tự nhiên hơn thì nới mốc; việc tăng nhịp phát không phải tăng tốc tạo mô hình.
+
+          Đã sửa lỗi bộ lọc hiện giọng cá nhân nhưng trạng thái trong phần khác vẫn giữ giọng mẫu, khiến lúc tạo lại dùng giọng mặc định. Giọng được chọn, hai bảng chọn và mẫu WAV đã đóng băng nay được kiểm tra cùng nhau qua POST thật ở cả màn hình tạo giọng và workspace. Tác vụ mới không xuất bản thu bị thiếu đoạn khi chạm giới hạn thời lượng; giữ đoạn đã tạo để tiếp tục.
+
+          Giữ các sửa âm thanh 1.6.5: WavMark đúng 16 kHz, chỉ cộng phần dấu nối mềm vào âm thanh gốc, FLOAT trước giới hạn đỉnh và tắt tăng âm ngầm khi đổi nhịp. Tác vụ cũ giữ cách xử lý/checkpoint cũ. Không đổi trọng số, chữ thanh điệu RPA, tham chiếu, pitch hay tau. Các kiểm tra tín hiệu không chứng minh mọi từ đã đúng hoặc độ giống mẫu 100%.
 
           Nghe đầu ra thật của hai giọng trong reports/Ngoc-Huyen-preview.mp3 và reports/Hmong-female-3-preview.mp3 của cùng ZIP, rồi đối chiếu với mẫu gốc trong tool. Hai MP3 nam/nữ trước vẫn kèm. Tệp nghe thử được nối với tác vụ clear-v1 và dấu vân tay mẫu; bản đóng gói đối chiếu cả độ dài và SHA256.
 
-          Bản 1.6.5 có sẵn hai giọng Ngọc Huyền nâng cao và Hmong nữ 3 từ đúng hai tệp mới bạn gửi; bộ nhanh lấy chất giọng từ âm thanh, không đoán lời mẫu. Hmong nữ 3 được chọn khi khởi động mới; có thể đặt một giọng khác làm mặc định và lưu lựa chọn. Hai giọng nam/nữ trước vẫn giữ nguyên. Hai giọng mới dùng bộ nhanh Native; F5 vẫn dùng các mẫu có lời Hmong đã xác nhận.
+          Bản 1.6.6 có sẵn hai giọng Ngọc Huyền nâng cao và Hmong nữ 3 từ đúng hai tệp mới bạn gửi; bộ nhanh lấy chất giọng từ âm thanh, không đoán lời mẫu. Hmong nữ 3 được chọn khi khởi động mới; có thể đặt một giọng khác làm mặc định và lưu lựa chọn. Hai giọng nam/nữ trước vẫn giữ nguyên. Hai giọng mới dùng bộ nhanh Native; F5 vẫn dùng các mẫu có lời Hmong đã xác nhận.
 
-          Bản 1.6.5 hiểu dòng mốc giờ như 00:04:28,533 --> 00:04:29,333 và số thứ tự phụ đề, kể cả SRT dán thành TXT thiếu dòng trống, mốc có dấu nháy/ngoặc hoặc TXT phút dài. Tool chỉ đọc nội dung, vẫn đọc số nằm trong câu bằng lời Hmong và giữ nguyên bản nguồn để sửa. TXT đọc liên tục; phần tạo giọng Hmong mặc định đọc SRT chỉ lấy lời, bỏ khoảng chờ theo mốc. Đoạn 217 / 00:06:07,200 --> 00:06:08,400 chỉ đọc “Tae-yong cov ntaub ntawv tus kheej”, không ép câu vào ô 1,2 giây hoặc chèn hơn sáu phút im lặng. Bật Giữ mốc thời gian khi cần căn phụ đề; phần video/phân vai giữ cơ chế căn mốc từng câu. Tệp UTF-8, UTF-16LE/BE được giải mã trước khi nhận diện phụ đề.
+          Bản 1.6.6 hiểu dòng mốc giờ như 00:04:28,533 --> 00:04:29,333 và số thứ tự phụ đề, kể cả SRT dán thành TXT thiếu dòng trống, mốc có dấu nháy/ngoặc hoặc TXT phút dài. Tool chỉ đọc nội dung, vẫn đọc số nằm trong câu bằng lời Hmong và giữ nguyên bản nguồn để sửa. TXT không có mốc đọc liên tục; SRT và TXT có mốc mặc định giữ thời gian. Có thể bỏ chọn Giữ mốc SRT để khớp thời gian khi muốn chỉ đọc lời liên tục. Đoạn 217 / 00:06:07,200 --> 00:06:08,400 chỉ đọc “Tae-yong cov ntaub ntawv tus kheej”: bật giữ mốc để căn theo ô đã đưa, hoặc bỏ chọn để không chèn hơn sáu phút chờ. Phần video/phân vai giữ cơ chế căn mốc từng câu. Tệp UTF-8, UTF-16LE/BE được giải mã trước khi nhận diện phụ đề.
 
           Bộ nhanh nhân bản từ âm thanh 3–8 giây của một người nói, kể cả mẫu nói ngôn ngữ khác, không bắt buộc nhập lời mẫu. Bộ nhanh tự đề xuất đoạn có lời trong bản thu dài, giới hạn khuếch đại trước khi đổi PCM16 để tránh thêm đỉnh bị cắt. Tệp chọn trong khi studio còn khởi động được kiểm tra sau khi cấu hình sẵn sàng; lưu hồ sơ thành công không bị báo lỗi giả do tải lại thư viện thất bại. Hồ sơ vừa lưu được chọn đúng để đọc Hmong; dấu vân tay âm thanh được nối từ mẫu riêng tới tác vụ. F5 giữ yêu cầu mẫu/lời Hmong khớp nhau. Độ giống tùy mẫu và mô hình, chưa xác nhận giống 100% hoặc mọi giọng đều đạt độ giống như nhau.
 
@@ -218,13 +224,13 @@ jobs:
 
           Chuẩn hóa âm lượng giới hạn khuếch đại theo đỉnh tín hiệu để tránh tự tạo đỉnh bị cắt phẳng. Khi lưu mẫu, tool có chỉ dẫn về tín hiệu để chọn đoạn rõ; đây không phải điểm độ giống giọng hoặc bằng chứng mọi giọng sẽ rõ hơn.
 
-          Giữ nút chọn Nam/Nữ đồng bộ giữa phần tạo giọng và xưởng video, khôi phục lựa chọn giọng mẫu sau bộ lọc cá nhân và giữ chữ Hmong có dấu gạch nối. Quy trình Windows bắt buộc dùng trình duyệt thật, kiểm tra POST và dấu vân tay mẫu, tạo/đọc/tải âm thanh thật, cùng kiểm tra chức năng chia phần và phân vai. Trước lượt nam đầu tiên, quy trình bấm nút thật với câu chứa URL chưa hỗ trợ, nhận HTTP 422 thật, xác nhận lỗi trong vùng nhìn thấy, nút mở lại và bản nháp còn nguyên, rồi sửa lời và tạo/phát/tải WAV thật. Báo cáo click_recovery trong browser-smoke.json nối lượt lỗi với đúng tác vụ nam đã hoàn tất; báo cáo nằm trong reports của ZIP. Thêm lượt trình duyệt tạo TXT chứa đúng mốc giờ trên và số trong câu: kiểm tra lời xuất không chứa mốc/số thứ tự, số trong câu thành lời Hmong, không chèn hàng phút im lặng. Lượt nhân bản tiếng Anh dùng mẫu độc lập từ ví dụ F5 đã đóng gói, bỏ trống lời mẫu, kiểm tra tự chọn đúng hồ sơ, dấu vân tay âm thanh riêng, tạo/phát/tải WAV Hmong thật. Các lượt này không chứng nhận độ giống cảm nhận.
+          Giữ nút chọn Nam/Nữ đồng bộ giữa phần tạo giọng và xưởng video, khôi phục lựa chọn giọng mẫu sau bộ lọc cá nhân và giữ chữ Hmong có dấu gạch nối. Quy trình Windows bắt buộc dùng trình duyệt thật, kiểm tra POST và dấu vân tay mẫu, tạo/đọc/tải âm thanh thật, cùng kiểm tra chức năng chia phần và phân vai. Trước lượt nam đầu tiên, quy trình bấm nút thật với câu chứa URL chưa hỗ trợ, nhận HTTP 422 thật, xác nhận lỗi trong vùng nhìn thấy, nút mở lại và bản nháp còn nguyên, rồi sửa lời và tạo/phát/tải WAV thật. Báo cáo click_recovery trong browser-smoke.json nối lượt lỗi với đúng tác vụ nam đã hoàn tất; báo cáo nằm trong reports của ZIP. Giữ lượt TXT có mốc với chế độ đọc liên tục được chọn rõ ràng: kiểm tra lời xuất không chứa mốc/số thứ tự, số trong câu thành lời Hmong và không chèn hàng phút im lặng. Thêm hai lượt nhập tệp bốn câu của bạn (.srt/.txt) với chế độ giữ mốc, kiểm tra đủ từng lời và WAV 9 giây. Lượt nhân bản tiếng Anh dùng mẫu độc lập từ ví dụ F5 đã đóng gói, bỏ trống lời mẫu, kiểm tra tự chọn đúng hồ sơ, dấu vân tay âm thanh riêng, tạo/phát/tải WAV Hmong thật. Các lượt này không chứng nhận độ giống cảm nhận.
 
           Giữ hai giọng mẫu nam/nữ cuối cùng do bạn gửi, nhân bản từ mẫu, kể chuyện/biểu cảm, nhập TXT/SRT và xuất WAV/MP3/TXT/SRT. Giữ bản sửa lỗi khởi động trùng: mở lần hai dùng lại đúng máy chủ mà không ngắt tác vụ đang tạo giọng. Đã tạo âm thanh thật bằng cả bộ nhanh và F5 với Python đóng gói sau khi chuyển thư mục có dấu cách; thử trực tiếp các BAT bằng cmd.exe.
 
           **Tốc độ một giờ voice trong hai phút (30×) vẫn chưa đạt; không bảo đảm nhân bản giống 100%.** Giữ nguyên bộ phát âm Hmong bạn đã xác nhận. Thay đổi lần này không huấn luyện model âm học mới hoặc chứng minh độ giống giọng tốt hơn. Biểu cảm hiện dùng xử lý nhịp/âm lượng giữ cao độ, chưa phải mô hình điều khiển cảm xúc thần kinh. Phép đo loại khoảng lặng tool chèn thêm; đoạn thử ngắn không xác nhận tốc độ một giờ. Có gắn WavMark cho đoạn đủ dài, chưa chứng nhận phát hiện sau nén MP3.
 
-          Đã kèm Python, thư viện CPU, FFmpeg và hai bản thu tham chiếu. Không cần API key hay cài Python hệ thống. Lần đầu bộ nhanh tải khoảng 580 MB mô hình cố định revision/SHA256; F5 tùy chọn cần khoảng 1,4 GB riêng. Chuẩn bị xong có thể dùng ngoại tuyến. Chưa kiểm thử suy luận CUDA hoặc tốc độ GPU.
+          Đã kèm Python, thư viện CPU, FFmpeg và bốn giọng có sẵn cùng tệp nguồn/tham chiếu. Không cần API key hay cài Python hệ thống. Lần đầu bộ nhanh tải khoảng 580 MB mô hình cố định revision/SHA256; F5 tùy chọn cần khoảng 1,4 GB riêng. Chuẩn bị xong có thể dùng ngoại tuyến. Chưa kiểm thử suy luận CUDA hoặc tốc độ GPU.
 
           Báo cáo lần đầu fresh-start.json, hai WAV first-run-male.wav/first-run-female.wav, kiểm tra browser/native/F5 hai WAV tham chiếu QA tiếng Anh external-english-reference.wav/external-clone-reference.wav và bốn MP3 nghe thử do tool tạo nằm trong thư mục reports của cùng ZIP; không cần tải thêm tệp phụ. BUILD.json, MODEL-SOURCES.json và NATIVE-VALIDATION.json giữ thông tin nguồn, thiết lập và kết quả kiểm tra. Trọng số model và thư mục .data của QA đã được loại khỏi gói; chỉ giữ báo cáo và âm thanh kiểm tra đã nêu.
 
@@ -242,10 +248,10 @@ jobs:
           if ($uploaded.Count -ne 1) { throw 'This release must expose exactly one full Windows ZIP.' }
           $asset = $uploaded[0]
           if ($asset.name -ne (Split-Path -Leaf $zip) -or $asset.size -ne $size -or $asset.digest -ne "sha256:$digest") { throw 'The only uploaded ZIP differs from the validated archive.' }
-          gh release edit $env:RELEASE_TAG --repo $env:GH_REPO --draft=false --prerelease=true --latest=false --target $env:GITHUB_SHA --title 'Voice Studio Hmong 1.6.5 — một gói Windows x64' --notes-file $notes
+          gh release edit $env:RELEASE_TAG --repo $env:GH_REPO --draft=false --prerelease=true --latest=false --target $env:GITHUB_SHA --title 'Voice Studio Hmong 1.6.6 — một gói Windows x64' --notes-file $notes
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           "Published one checked Hmong ZIP ($size bytes), SHA256: $digest" | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
-      - name: Archive and remove the superseded Hmong 1.6.0–1.6.4 releases
+      - name: Archive and remove the superseded Hmong 1.6.0–1.6.5 releases
         id: cleanup
         continue-on-error: true
         env:
@@ -255,12 +261,12 @@ jobs:
           $failures = @()
           $guardPassed = $false
           try {
-            if ($env:RELEASE_TAG -ne 'voice-studio-hmong-1.6.5') { throw 'Cleanup is restricted to the checked 1.6.5 publication.' }
+            if ($env:RELEASE_TAG -ne 'voice-studio-hmong-1.6.6') { throw 'Cleanup is restricted to the checked 1.6.6 publication.' }
             $published = gh api "repos/$env:GH_REPO/releases/tags/$env:RELEASE_TAG" | ConvertFrom-Json
             if ($LASTEXITCODE -ne 0) { throw 'Cannot verify the new public release; leave old releases untouched.' }
             if ($published.draft -or $published.tag_name -ne $env:RELEASE_TAG) { throw 'The replacement release is not public.' }
             if (@($published.assets).Count -ne 1) { throw 'The replacement release must expose exactly one validated ZIP.' }
-            $checkedArchives = @('${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.5-Windows-x64.zip')
+            $checkedArchives = @('${{ runner.temp }}/hmong-portable/Voice-Studio-Hmong-1.6.6-Windows-x64.zip')
             foreach ($path in $checkedArchives) {
               $expected = (Get-FileHash -Algorithm SHA256 $path).Hash.ToLowerInvariant()
               $assets = @($published.assets | Where-Object { $_.name -eq (Split-Path -Leaf $path) })
@@ -270,14 +276,14 @@ jobs:
             $pages = gh api --paginate --slurp "repos/$env:GH_REPO/releases?per_page=100" | ConvertFrom-Json
             if ($LASTEXITCODE -ne 0) { throw 'Cannot archive the release metadata; leave old releases untouched.' }
             $releases = @(foreach ($page in $pages) { foreach ($entry in $page) { $entry } })
-            $obsolete = @($releases | Where-Object { $_.tag_name -match '^voice-studio-hmong-1\.6\.[0234]$' })
+            $obsolete = @($releases | Where-Object { $_.tag_name -match '^voice-studio-hmong-1\.6\.[02345]$' })
             ConvertTo-Json -InputObject $obsolete -Depth 100 | Set-Content -Encoding utf8 '${{ runner.temp }}/hmong-reports/obsolete-releases.json'
             $base = @($releases | Where-Object { $_.tag_name -eq 'voice-studio-hmong-1.6.1' })
             if ($base.Count -ne 1) { throw 'The pinned 1.6.1 runtime release must remain available.' }
             $baseAssets = @($base[0].assets | Where-Object { $_.name -eq 'Voice-Studio-Hmong-1.6.1-Windows-x64.zip' })
             if ($base[0].draft -or $baseAssets.Count -ne 1 -or $baseAssets[0].size -ne 1193296854 -or $baseAssets[0].digest -ne 'sha256:656430126fac0d5b8d15b0d41d70c3d5ef547204eed7915d1864cc558acbfa34') { throw 'The pinned public 1.6.1 runtime ZIP must remain available unchanged; leave obsolete releases untouched.' }
             ConvertTo-Json -InputObject $base[0] -Depth 100 | Set-Content -Encoding utf8 '${{ runner.temp }}/hmong-reports/retained-base-release.json'
-            $notice = "**Bản đang dùng: [Voice Studio Hmong 1.6.5](https://github.com/$env:GH_REPO/releases/tag/voice-studio-hmong-1.6.5).** Bản 1.6.1 chỉ được giữ làm bộ chạy nền có SHA256 cố định cho quy trình đóng gói; hãy tải bản sửa lỗi 1.6.5 để sử dụng."
+            $notice = "**Bản đang dùng: [Voice Studio Hmong 1.6.6](https://github.com/$env:GH_REPO/releases/tag/voice-studio-hmong-1.6.6).** Bản 1.6.1 chỉ được giữ làm bộ chạy nền có SHA256 cố định cho quy trình đóng gói; hãy tải bản sửa lỗi 1.6.6 để sử dụng."
             $body = [string]$base[0].body
             if (-not $body.StartsWith($notice)) { $body = $notice + [Environment]::NewLine + [Environment]::NewLine + $body }
             $baseNotes = Join-Path $env:RUNNER_TEMP 'hmong-1.6.1-archive-notes.md'
@@ -285,7 +291,7 @@ jobs:
             gh release edit voice-studio-hmong-1.6.1 --repo $env:GH_REPO --latest=false --title 'Voice Studio Hmong 1.6.1 — lưu trữ bộ chạy' --notes-file $baseNotes
             if ($LASTEXITCODE -ne 0) { throw 'Could not identify the retained runtime archive clearly; obsolete release cleanup was not started.' }
             foreach ($entry in $obsolete) {
-              if ($entry.tag_name -notmatch '^voice-studio-hmong-1\.6\.[0234]$') { throw 'Refuse deletion outside the superseded Hmong 1.6.0/1.6.2/1.6.3/1.6.4 releases.' }
+              if ($entry.tag_name -notmatch '^voice-studio-hmong-1\.6\.[02345]$') { throw 'Refuse deletion outside the superseded Hmong 1.6.0/1.6.2/1.6.3/1.6.4/1.6.5 releases.' }
               # The release endpoint removes release assets, never Git tags or branches.
               gh api --method DELETE "repos/$env:GH_REPO/releases/$($entry.id)"
               if ($LASTEXITCODE -ne 0) { $failures += "Could not remove release $($entry.tag_name)" }
@@ -294,18 +300,18 @@ jobs:
             if ($failures.Count -gt 0) { throw 'Some obsolete releases could not be removed; see the retained cleanup report.' }
           } catch {
             $failures += $_.Exception.Message
-            Write-Warning 'The checked 1.6.5 release remains published; obsolete release cleanup is incomplete.'
+            Write-Warning 'The checked 1.6.6 release remains published; obsolete release cleanup is incomplete.'
             throw
           } finally {
-            @{ checked_1_6_5_public_assets = $guardPassed; removed_release_tags = $removed; retained_runtime_release = 'voice-studio-hmong-1.6.1'; git_tags_or_branches_deleted = $false; failures = $failures } | ConvertTo-Json -Depth 10 | Set-Content -Encoding utf8 '${{ runner.temp }}/hmong-reports/release-cleanup.json'
-            "Obsolete Hmong releases removed: $($removed -join ', '). Cleanup failures: $($failures.Count). The checked 1.6.5 release remains published; 1.6.1 is retained as the pinned runtime archive." | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
+            @{ checked_1_6_6_public_assets = $guardPassed; removed_release_tags = $removed; retained_runtime_release = 'voice-studio-hmong-1.6.1'; git_tags_or_branches_deleted = $false; failures = $failures } | ConvertTo-Json -Depth 10 | Set-Content -Encoding utf8 '${{ runner.temp }}/hmong-reports/release-cleanup.json'
+            "Obsolete Hmong releases removed: $($removed -join ', '). Cleanup failures: $($failures.Count). The checked 1.6.6 release remains published; 1.6.1 is retained as the pinned runtime archive." | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
           }
       - name: Retain obsolete release metadata and cleanup results
         if: always() && steps.cleanup.outcome != 'skipped'
         uses: actions/upload-artifact@v4
         continue-on-error: true
         with:
-          name: Voice-Studio-Hmong-1.6.5-release-cleanup
+          name: Voice-Studio-Hmong-1.6.6-release-cleanup
           retention-days: 90
           path: |
             ${{ runner.temp }}/hmong-reports/obsolete-releases.json

@@ -43,7 +43,7 @@ assert not any(name in sys.modules for name in ('torch', 'torchaudio', 'numpy', 
 def test_basic_cleaning_keeps_every_rpa_tone_letter_and_target_word():
     text = '  UA\tTHAJ  QAB\nFAIB ROV RIS.\nPOB POJ POS POV POM POG POD PO '
     assert native.validate_text(text) == 'ua thaj qab faib rov ris. pob poj pos pov pom pog pod po'
-    assert native.validate_text('NYOB ZOO, “KUV ZOO”…') == 'nyob zoo, "kuv zoo"...'
+    assert native.validate_text('NYOB ZOO, “KUV ZOO”…') == 'nyob zoo, kuv zoo...'
 
 
 @pytest.mark.parametrize('dash', ['-', '‐', '‑', '‒', '–', '—', '―', '−'])

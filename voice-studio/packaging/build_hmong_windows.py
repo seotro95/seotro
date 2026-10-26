@@ -11,6 +11,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -21,9 +22,10 @@ import zipfile
 
 from build_windows import copy_runtime, download_verified_ffmpeg
 from fresh_hmong_portable import wave_evidence_bytes
+from browser_hmong_portable import TIMED_USER_SAMPLE, TIMED_USER_TIMES, TIMED_USER_WORDS
 
 SOURCE = Path(__file__).resolve().parents[1]
-VERSION = '1.6.5'
+VERSION = '1.6.6'
 ARCHIVE_NAME = f'Voice-Studio-Hmong-{VERSION}-Windows-x64.zip'
 
 
@@ -172,7 +174,7 @@ def checked_run(command, *, environment, cwd, timeout=2400):
 
 
 def write_notices(root, model_manifest, qa_report):
-    notice = '''VOICE STUDIO HMONG 1.6.5 — WINDOWS X64
+    notice = '''VOICE STUDIO HMONG 1.6.6 — WINDOWS X64
 
 Chi tai MOT goi ZIP va giai nen TOAN BO. Mo MO_VOICE_STUDIO_HMONG.bat.
 HUONG DAN DAY DU: mo HUONG-DAN-HMONG.html cung thu muc bang trinh duyet.
@@ -183,7 +185,10 @@ Tep mo chinh chon bo nhanh VITS Hmong + OpenVoice V2, khong vo tinh mo F5.
 Cong cu nang cao nam trong tools; tools/MO_F5_HMONG.bat mo F5 16 buoc FP32.
 Da kem Python, thu vien CPU, FFmpeg, bon MP3 nguon va cac doan tham chieu.
 Them Ngoc Huyen nang cao va Hmong nu 3; mo moi chon Hmong nu 3.
-SRT tao giong chi doc loi mac dinh; bat Giu moc thoi gian khi can can video.
+SRT/TXT co moc gio mac dinh giu moc; bo chon Giu moc khi muon doc lien tuc.
+Tu can nhip toi da 4 lan; tren 2 lan co canh bao, khong cat bo loi cho vua o.
+Khong xuat tac vu moi neu da cham gioi han ma con noi dung chua doc.
+Bo loc giong ca nhan giu dung lua chon o ca hai man hinh va luc Tao giong.
 LAN DAU CAN INTERNET: bo nhanh tai/kiem tra khoang 580 MB, F5 khoang 1,4 GB.
 Moi bo co manifest model rieng; khong can tai ca hai neu chi dung mot bo.
 Khong can API key. Sau khi chuan bi xong co the dung ngoai tuyen.
@@ -209,7 +214,8 @@ cuc bo, khong phai mo hinh dieu khien cam xuc than kinh. Co TXT/SRT,
 WAV/MP3 va [emotion=warm], **tu nhan manh**, [pause=0.4].
 TXT/SRT tu bo dong moc gio va so thu tu phu de, giu so trong loi doc.
 So trong van ban duoc doi thanh loi Hmong truoc khi gui bo doc nhanh.
-TXT doc lien mach; SRT giu moc va co che khop thoi luong tung cau.
+TXT khong co moc doc lien mach; SRT/TXT co moc khop thoi luong tung cau.
+Ngoac va dau nhay giu loi ben trong; dung **nhan**, [pause=0.5], [emotion=warm].
 TXT Hmong toi da 1.000.000 ky tu, tren 20.000 ky tu tu chia chuong/phan.
 Xuat ZIP cac phan WAV/MP3, TXT/SRT va manifest; can du thoi gian/dung luong.
 SRT gan giong Hmong theo nhan vat tung cue; ten nhan vat khong doc thanh loi.
@@ -222,7 +228,7 @@ chua dat. Toc do tuy CPU/GPU. Khong co cai thien am hoc duoc tuyen bo.
 Bon MP3 nghe thu va first-run-male.wav/first-run-female.wav nam trong reports.
 Ngoc-Huyen-preview.mp3/Hmong-female-3-preview.mp3 la dau ra clear-v1 thuc te.
 Tao tac vu moi de dung clear-v1; tac vu cu giu xu ly cu khi Tiep tuc.
-Ban nay sua dung tan so WavMark, noi mem marker, FLOAT truoc gioi han dinh.
+Giu sua loi tan so WavMark, noi mem marker, FLOAT truoc gioi han dinh tu 1.6.5.
 Khong dung ASR chua hieu chuan de chung nhan loi Hmong hoac do giong.
 Thiet lap/checksum va thoi gian do tron quy trinh o NATIVE-VALIDATION.json. Bao cao
 loai khoang lang tool chen; do ngan khong chung minh toc do 1 gio.
@@ -275,6 +281,85 @@ def expected_additional_reference_fingerprints():
     assets = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(assets)
     return {ident: assets.reference_fingerprint(ident) for ident in ('hmong-ngoc-huyen', 'hmong-female-3')}
+
+
+def _complete_browser_audio(item):
+    if (not isinstance(item, dict) or any(item.get(key) is not True for key in (
+            'success', 'real_ui_post', 'original_text_preserved', 'audio_playback_checked',
+            'download_verified', 'require_complete_audio', 'speech_complete'))
+            or item.get('engine') != 'hmong_native' or item.get('status') != 'done'
+            or not isinstance(item.get('job_id'), str) or not item['job_id']
+            or item.get('sample_rate') != 24000 or item.get('sample_width') != 2
+            or type(item.get('audio_seconds')) not in (int, float)
+            or not math.isfinite(item['audio_seconds']) or item['audio_seconds'] <= 1 / 3
+            or type(item.get('audio_bytes')) is not int or item['audio_bytes'] <= 1000
+            or type(item.get('peak_amplitude')) not in (int, float)
+            or not math.isfinite(item['peak_amplitude']) or item['peak_amplitude'] <= .001
+            or not isinstance(item.get('sha256'), str)
+            or not re.fullmatch(r'[a-f0-9]{64}', item['sha256'])):
+        raise ValueError('Complete browser speech proof needs the selected real WAV and no truncated completion')
+    playback = item.get('playback', {})
+    if (playback.get('ready_state', 0) < 2 or playback.get('media_error') is not None
+            or playback.get('current_time', 0) <= .05 or playback.get('duration', 0) <= 1 / 3):
+        raise ValueError('Complete browser speech proof must play the generated WAV')
+
+
+def validate_timed_subtitle_report(report, expected, used_jobs):
+    timed = report.get('timed_subtitles', {})
+    if (timed.get('success') is not True or timed.get('default_checked') is not True
+            or not isinstance(timed.get('cases'), dict) or set(timed['cases']) != {'srt', 'txt'}):
+        raise ValueError('Timed subtitle QA must cover the exact four-cue SRT and timestamped TXT')
+    for kind, item in timed['cases'].items():
+        _complete_browser_audio(item)
+        if (item.get('case') != 'user_four_cue_' + kind or item.get('text') != TIMED_USER_SAMPLE
+                or item.get('source_filename') != 'user-four-cues.' + kind
+                or item.get('source_import_format') != kind or item.get('real_file_import') is not True
+                or item.get('requested_input_format') != kind
+                or item.get('auto_detected_from_txt') is not (kind == 'txt')
+                or item.get('input_format') != 'srt' or item.get('subtitle_timing') is not True
+                or item.get('voice_id') != 'hmong-male' or item.get('post_voice_id') != 'hmong-male'
+                or item.get('speaker') != 'hmong-male'
+                or item.get('hmong_reference_fingerprint') != expected['hmong-male']
+                or item.get('hmong_audio_profile') != 'clear-v1'
+                or item.get('cue_fit') != 'adaptive' or item.get('max_cue_tempo') != 4
+                or item.get('all_source_words_retained') is not True or item.get('cue_count') != 4
+                or item.get('timestamps_not_spoken') is not True or item.get('cue_indices_not_spoken') is not True
+                or item.get('exact_timeline_seconds') != 9 or abs(item['audio_seconds'] - 9) > 1 / 24000
+                or item.get('exported_spoken_text') != ' '.join(TIMED_USER_WORDS)
+                or item.get('generated_srt', '').replace('\r\n', '\n').strip() != TIMED_USER_SAMPLE[1:-1]
+                or item['job_id'] in used_jobs):
+            raise ValueError('Timed subtitle QA must preserve every source word and the exact nine-second timeline')
+        alignment = item.get('alignment', {})
+        if (alignment.get('sync_ok') is not True or alignment.get('mode') != 'adaptive'
+                or alignment.get('failed_cue') is not None or alignment.get('max_tempo') != 4
+                or not isinstance(alignment.get('cues'), list) or len(alignment['cues']) != 4):
+            raise ValueError('Timed subtitle QA needs all four cue alignment results')
+        warnings = []
+        for index, (cue, (start, end), words) in enumerate(zip(
+                alignment['cues'], TIMED_USER_TIMES, TIMED_USER_WORDS), 1):
+            numeric = ('spoken_start', 'spoken_end', 'raw_seconds', 'required_tempo', 'tempo')
+            if (not isinstance(cue, dict) or any(type(cue.get(key)) not in (int, float)
+                    or not math.isfinite(cue[key]) for key in numeric)
+                    or cue.get('cue') != index or cue.get('start') != start or cue.get('end') != end
+                    or cue.get('status') != 'matched' or cue.get('spoken_text') != words
+                    or abs(cue['spoken_start'] - start) > .001
+                    or not start < cue['spoken_end'] <= end + .001
+                    or cue['raw_seconds'] <= 0 or not 1 <= cue['tempo'] <= 4
+                    or not 1 <= cue['required_tempo'] <= 4
+                    or abs(cue['required_tempo'] - max(1, cue['raw_seconds'] / (end-start))) > .01
+                    or cue['tempo'] + .01 < cue['required_tempo']):
+                raise ValueError('Timed subtitle QA must align each full cue without skipping source words')
+            warning = cue.get('quality_warning')
+            if cue['tempo'] > 2:
+                if not isinstance(warning, str) or not warning.strip():
+                    raise ValueError('Timed subtitle QA must disclose accelerated speech above two times')
+                warnings.append(warning)
+            elif warning is not None:
+                raise ValueError('Timed subtitle QA has an unexpected acceleration warning')
+        if item.get('timing_warnings') != warnings:
+            raise ValueError('Timed subtitle acceleration warnings differ from cue alignment')
+        used_jobs.add(item['job_id'])
+    return timed
 
 
 def validate_browser_report(report):
@@ -355,7 +440,9 @@ def validate_browser_report(report):
             'original_text_preserved', 'audio_playback_checked', 'download_verified',
             'timestamps_not_spoken', 'cue_indices_not_spoken', 'continuous_txt_duration'))
             or caption.get('case') != 'caption_metadata_as_txt'
-            or caption.get('input_format') != 'txt' or caption.get('text') != expected_caption
+            or caption.get('input_format') != 'srt' or caption.get('subtitle_timing') is not False
+            or caption.get('requested_input_format') != 'txt' or caption.get('auto_detected_from_txt') is not True
+            or caption.get('text') != expected_caption
             or caption.get('exported_spoken_text') != 'Nyob zoo. Kuv muaj ob tug me nyuam.'
             or caption.get('voice_id') != caption.get('post_voice_id')
             or caption.get('voice_id') != caption.get('speaker')
@@ -471,6 +558,51 @@ def validate_browser_report(report):
     if (playback.get('ready_state', 0) < 2 or playback.get('media_error') is not None
             or playback.get('current_time', 0) <= .05 or playback.get('duration', 0) <= 1 / 3):
         raise ValueError('Browser must decode and play the exact spoken-only 217 excerpt')
+    used_jobs.add(spoken['job_id'])
+    validate_timed_subtitle_report(report, expected, used_jobs)
+    filtered = report.get('clone_filter_selection', {})
+    _complete_browser_audio(filtered)
+    adopted = filtered.get('main_filter_adopted_voice_id')
+    auto_personal = filtered.get('main_filter_auto_speech', {})
+    _complete_browser_audio(auto_personal)
+    reference_text = auto_personal.get('reference_text')
+    reference_hash = auto_personal.get('reference_audio_sha256')
+    if not isinstance(reference_text, str) or not isinstance(reference_hash, str) or not re.fullmatch(r'[a-f0-9]{64}', reference_hash):
+        raise ValueError('Automatically adopted personal voice needs its exact sampled reference identity')
+    adopted_identity = hashlib.sha256(json.dumps({'version': 1,
+        'audio_sha256': reference_hash, 'transcript': reference_text}, ensure_ascii=False,
+        sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()
+    if (auto_personal.get('case') != 'personal_filter_main_auto_speech'
+            or auto_personal.get('voice_id') != adopted or auto_personal.get('post_voice_id') != adopted
+            or auto_personal.get('speaker') is not None or auto_personal.get('ui_entrypoint') != '#generate'
+            or auto_personal.get('selection_after_filter_without_manual_choice') is not True
+            or auto_personal.get('default_fallback') is not False
+            or auto_personal.get('hmong_audio_profile') != 'clear-v1'
+            or auto_personal.get('independent_reference_fingerprint') != adopted_identity
+            or auto_personal.get('hmong_reference_fingerprint') != adopted_identity
+            or auto_personal.get('text') != 'Nyob zoo. Ua tsaug rau koj mloog.'
+            or auto_personal['job_id'] in used_jobs):
+        raise ValueError('Personal filter QA must really post and play its automatically selected voice before manual selection')
+    used_jobs.add(auto_personal['job_id'])
+    if (filtered.get('case') != 'personal_filter_workspace_speech'
+            or not isinstance(adopted, str) or not re.fullmatch(r'[a-f0-9]{32}', adopted)
+            or filtered.get('main_filter_other_panel_voice_id') != adopted
+            or filtered.get('main_filter_preserved') is not True
+            or filtered.get('workspace_filter_preserved') is not True
+            or filtered.get('main_filter_value') != 'cloned' or filtered.get('workspace_filter_value') != 'cloned'
+            or filtered.get('main_job_id') != clone['job_id']
+            or filtered.get('main_reference_fingerprint') != identity
+            or filtered.get('voice_id') != clone_id or filtered.get('post_voice_id') != clone_id
+            or filtered.get('speaker') is not None
+            or filtered.get('main_selected_voice_id') != clone_id
+            or filtered.get('workspace_selected_voice_id') != clone_id
+            or filtered.get('independent_reference_fingerprint') != identity
+            or filtered.get('hmong_reference_fingerprint') != identity
+            or filtered.get('default_fallback') is not False
+            or filtered.get('perceptual_similarity_evaluated') is not False
+            or filtered.get('text') != 'Nyob zoo. Ua tsaug rau koj mloog.'
+            or filtered['job_id'] in used_jobs):
+        raise ValueError('Personal filter QA must preserve its selected clone across panels and actual speech')
     features = report.get('features_1_6', {})
     longform, cast = features.get('longform', {}), features.get('character_cast', {})
     if (any(longform.get(key) is not True for key in ('success', 'million_character_editor',
@@ -504,6 +636,7 @@ def validate_native_feature_report(report):
                 or audition.get('hmong_reference_fingerprint') != fingerprints[ident]
                 or audition.get('generated') is not True
                 or audition.get('original_source_recording') is not False
+                or audition.get('require_complete_audio') is not True or audition.get('speech_complete') is not True
                 or audition.get('audio_seconds', 0) <= 1 / 3
                 or audition.get('bytes', 0) <= 1000
                 or not re.fullmatch(r'[a-f0-9]{64}', audition.get('sha256', ''))):

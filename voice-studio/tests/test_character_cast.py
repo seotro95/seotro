@@ -234,6 +234,21 @@ def test_every_cast_reference_and_audio_control_changes_checkpoint_identity(tmp_
     assert cast.checkpoint_identity(job, Segment(text='Nyob zoo.', cue=0, rhythm_pause=.2)) != original
 
 
+@pytest.mark.parametrize('engine', ['f5_hmong', 'hmong_native'])
+def test_complete_audio_cast_checkpoints_cannot_reuse_legacy_cue_audio(tmp_path, engine):
+    job = cast_job(tmp_path)
+    job['engine'] = engine
+    for voice in [job['character_cast']['default_voice'], *job['character_cast']['voices'].values()]:
+        voice['engine'] = engine
+    segment = Segment(text='Nyob zoo.', cue=0)
+    original = cast.checkpoint_identity(job, segment)
+    assert cast.checkpoint_identity({**job, 'require_complete_audio': None}, segment) == original
+    assert cast.checkpoint_identity({**job, 'require_complete_audio': False}, segment) == original
+    assert cast.checkpoint_identity({**job, 'require_complete_audio': True}, segment) != original
+    selected = cast.settings_for_cue({**job, 'require_complete_audio': True}, 0)
+    assert selected['require_complete_audio'] is True
+
+
 def test_cast_cache_is_lru_and_backend_switch_releases_voices(worker, tmp_path, monkeypatch):
     job = cast_job(tmp_path)
     monkeypatch.setattr(worker, 'MAX_CAST_SYNTHESIZERS', 2)

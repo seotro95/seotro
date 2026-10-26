@@ -99,7 +99,7 @@ def test_source_copy_includes_only_approved_assets(tmp_path):
 
 
 def test_archive_has_valid_crc_and_matching_sha256(tmp_path):
-    root = tmp_path / 'Voice-Studio-Hmong-1.6.5'
+    root = tmp_path / 'Voice-Studio-Hmong-1.6.6'
     root.mkdir()
     (root / 'hello.txt').write_bytes(b'relocatable')
     archive = tmp_path / 'bundle.zip'
@@ -185,9 +185,14 @@ def browser_report_fixture():
                       'peak_amplitude': .2, 'sample_rate': 24000, 'sample_width': 2,
                       'playback': {'ready_state': 4, 'media_error': None, 'current_time': .1, 'duration': 1},
                       'audio_playback_checked': True, 'download_verified': True,
+                      'require_complete_audio': True, 'speech_complete': True,
+                      'hmong_audio_profile': 'clear-v1', 'cue_fit': 'strict',
+                      'max_cue_tempo': 1.5, 'timing_warnings': [],
                       'original_text_preserved': True, 'text': 'Nyob-zoo, kuv yog ib tug Hmoob.'})
     caption = {**copy.deepcopy(cases[0]), 'case': 'caption_metadata_as_txt',
-               'job_id': 'caption-qa', 'success': True, 'input_format': 'txt',
+               'job_id': 'caption-qa', 'success': True, 'input_format': 'srt',
+               'subtitle_timing': False, 'requested_input_format': 'txt',
+               'auto_detected_from_txt': True,
                'text': ('\ufeff1\n"00:04:28,533 --> 00:04:29,333"\nNyob zoo.\n'
                         '2\n99:59.500 --> 100:00.300\nKuv muaj 2 tug me nyuam.\n'),
                'exported_spoken_text': 'Nyob zoo. Kuv muaj ob tug me nyuam.',
@@ -225,6 +230,44 @@ def browser_report_fixture():
         'generated_srt': '1\n00:00:00,000 --> 00:00:01,000\nTae-yong cov ntaub ntawv tus kheej\n',
         'generated_timing_checked': True, 'timestamps_not_spoken': True,
         'cue_indices_not_spoken': True, 'continuous_srt_duration': True}
+    timed_cases = {}
+    for kind in ('srt', 'txt'):
+        alignments = []
+        for index, ((start, end), words, tempo) in enumerate(zip(
+                packaging.TIMED_USER_TIMES, packaging.TIMED_USER_WORDS,
+                (2.1, 1.9, 1.6, 2.9)), 1):
+            warning = f'Câu SRT {index} cần đọc nhanh {tempo} lần.' if tempo > 2 else None
+            alignments.append({'cue': index, 'start': start, 'end': end,
+                'spoken_start': start, 'spoken_end': end, 'raw_seconds': (end-start)*tempo,
+                'required_tempo': tempo, 'tempo': tempo, 'status': 'matched',
+                'spoken_text': words, 'quality_warning': warning})
+        timed_cases[kind] = {**copy.deepcopy(cases[0]), 'case': 'user_four_cue_' + kind,
+            'job_id': 'timed-' + kind, 'success': True, 'input_format': 'srt',
+            'subtitle_timing': True, 'requested_input_format': kind,
+            'auto_detected_from_txt': kind == 'txt', 'text': packaging.TIMED_USER_SAMPLE,
+            'source_filename': 'user-four-cues.' + kind, 'source_import_format': kind,
+            'real_file_import': True, 'cue_fit': 'adaptive', 'max_cue_tempo': 4,
+            'all_source_words_retained': True, 'cue_count': 4,
+            'timestamps_not_spoken': True, 'cue_indices_not_spoken': True,
+            'audio_seconds': 9, 'audio_bytes': 432044,
+            'playback': {'ready_state': 4, 'media_error': None, 'current_time': .1, 'duration': 9},
+            'exported_spoken_text': ' '.join(packaging.TIMED_USER_WORDS),
+            'generated_srt': packaging.TIMED_USER_SAMPLE[1:-1] + '\n',
+            'exact_timeline_seconds': 9,
+            'timing_warnings': [item['quality_warning'] for item in alignments if item['quality_warning']],
+            'alignment': {'sync_ok': True, 'mode': 'adaptive', 'max_tempo': 4,
+                          'failed_cue': None, 'cues': alignments}}
+    filtered = {**copy.deepcopy(clone), 'case': 'personal_filter_workspace_speech',
+        'job_id': 'filtered-clone-qa', 'main_filter_adopted_voice_id': clone['voice_id'],
+        'main_filter_other_panel_voice_id': clone['voice_id'],
+        'main_filter_preserved': True, 'workspace_filter_preserved': True,
+        'main_filter_value': 'cloned', 'workspace_filter_value': 'cloned',
+        'main_job_id': clone['job_id'], 'main_reference_fingerprint': clone_identity,
+        'workspace_selected_voice_id': clone['voice_id'], 'main_selected_voice_id': clone['voice_id']}
+    filtered['main_filter_auto_speech'] = {**copy.deepcopy(clone),
+        'case': 'personal_filter_main_auto_speech', 'job_id': 'auto-filter-clone-qa',
+        'ui_entrypoint': '#generate', 'reference_text': '',
+        'selection_after_filter_without_manual_choice': True}
     return {'success': True, 'platform': 'win32', 'native_windows_validation': True,
             'real_ui_synthesis': True, 'engine': 'hmong_native',
             'cloned_filter_library_selection': True, 'cross_panel_selection': True,
@@ -235,6 +278,8 @@ def browser_report_fixture():
             'expected_additional_reference_fingerprints': additional_expected,
             'additional_presets': additional,
             'srt_speech_only': srt_only,
+            'timed_subtitles': {'success': True, 'default_checked': True, 'cases': timed_cases},
+            'clone_filter_selection': filtered,
             'click_recovery': {'success': True, 'real_ui_post': True, 'responses_mocked': False,
                 'ui_entrypoint': '#generate', 'invalid_text': 'Nyob zoo https://example.com.',
                 'request_text': 'Nyob zoo https://example.com.', 'request_voice_id': 'hmong-male',
@@ -269,6 +314,7 @@ def native_feature_fixture():
             'voice_id': ident, 'filename': filename, 'hmong_audio_profile': 'clear-v1',
             'hmong_reference_fingerprint': packaging.expected_additional_reference_fingerprints()[ident],
             'generated': True, 'original_source_recording': False, 'audio_seconds': 4,
+            'require_complete_audio': True, 'speech_complete': True,
             'bytes': 1203, 'sha256': hashlib.sha256(b'ID3' + b'x' * 1200).hexdigest()}
             for ident, filename in [('hmong-ngoc-huyen', 'Ngoc-Huyen-preview.mp3'),
                                     ('hmong-female-3', 'Hmong-female-3-preview.mp3')]},
@@ -283,6 +329,67 @@ def native_feature_fixture():
             'reference_identities_verified': True, 'original_srt_preserved': True,
             'voice_ids': ['hmong-male', 'hmong-female'], 'cue_characters': ['narrator', 'guest'],
             'audio_seconds': 24}}
+
+
+@pytest.mark.parametrize('kind', ['srt', 'txt'])
+@pytest.mark.parametrize('failure', [
+    'missing', 'continuous', 'wrong-import', 'no-real-import', 'missing-word',
+    'wrong-length', 'incomplete', 'old-profile', 'reused-job', 'silent-wave',
+    'missing-cue', 'outside-cue', 'cue-missing-word', 'not-matched',
+    'nonfinite', 'missing-warning', 'no-download',
+])
+def test_timed_release_gate_requires_exact_user_file_full_audio_and_all_cues(kind, failure):
+    report = browser_report_fixture()
+    assert packaging.validate_browser_report(report) is report
+    item = report['timed_subtitles']['cases'][kind]
+    if failure == 'missing': report['timed_subtitles']['cases'].pop(kind)
+    elif failure == 'continuous': item['subtitle_timing'] = False
+    elif failure == 'wrong-import': item['source_filename'] = 'other.srt'
+    elif failure == 'no-real-import': item['real_file_import'] = False
+    elif failure == 'missing-word': item['exported_spoken_text'] = ' '.join(packaging.TIMED_USER_WORDS[1:])
+    elif failure == 'wrong-length': item['audio_seconds'] = 8.99
+    elif failure == 'incomplete': item['speech_complete'] = False
+    elif failure == 'old-profile': item['hmong_audio_profile'] = 'legacy-v1'
+    elif failure == 'reused-job': item['job_id'] = report['external_clone']['job_id']
+    elif failure == 'silent-wave': item['peak_amplitude'] = 0
+    elif failure == 'missing-cue': item['alignment']['cues'].pop()
+    elif failure == 'outside-cue': item['alignment']['cues'][0]['spoken_end'] = 3.2
+    elif failure == 'cue-missing-word': item['alignment']['cues'][1]['spoken_text'] = 'Tab sis'
+    elif failure == 'not-matched': item['alignment']['cues'][0]['status'] = 'overflow'
+    elif failure == 'nonfinite': item['alignment']['cues'][0]['tempo'] = float('nan')
+    elif failure == 'missing-warning': item['alignment']['cues'][0]['quality_warning'] = None
+    elif failure == 'no-download': item['download_verified'] = False
+    with pytest.raises(ValueError):
+        packaging.validate_browser_report(report)
+
+
+@pytest.mark.parametrize('failure', [
+    'missing', 'default-voice', 'other-panel-stale', 'lost-filter', 'fallback',
+    'wrong-ref', 'wrong-post', 'no-real-post', 'shared-job', 'incomplete',
+    'auto-missing', 'auto-explicit-selection', 'auto-default', 'auto-wrong-ref', 'auto-shared-job',
+])
+def test_filtered_clone_release_gate_requires_auto_adoption_and_actual_personal_posts(failure):
+    report = browser_report_fixture()
+    assert packaging.validate_browser_report(report) is report
+    item = report['clone_filter_selection']
+    auto = item['main_filter_auto_speech']
+    if failure == 'missing': report.pop('clone_filter_selection')
+    elif failure == 'default-voice': item['main_filter_adopted_voice_id'] = 'hmong-male'
+    elif failure == 'other-panel-stale': item['main_filter_other_panel_voice_id'] = 'hmong-male'
+    elif failure == 'lost-filter': item['workspace_filter_value'] = 'all'
+    elif failure == 'fallback': item['default_fallback'] = True
+    elif failure == 'wrong-ref': item['hmong_reference_fingerprint'] = '0' * 64
+    elif failure == 'wrong-post': item['post_voice_id'] = 'hmong-male'
+    elif failure == 'no-real-post': item['real_ui_post'] = False
+    elif failure == 'shared-job': item['job_id'] = report['external_clone']['job_id']
+    elif failure == 'incomplete': item['require_complete_audio'] = False
+    elif failure == 'auto-missing': item.pop('main_filter_auto_speech')
+    elif failure == 'auto-explicit-selection': auto['selection_after_filter_without_manual_choice'] = False
+    elif failure == 'auto-default': auto['post_voice_id'] = 'hmong-male'
+    elif failure == 'auto-wrong-ref': auto['reference_audio_sha256'] = '0' * 64
+    elif failure == 'auto-shared-job': auto['job_id'] = report['external_clone']['job_id']
+    with pytest.raises(ValueError):
+        packaging.validate_browser_report(report)
 
 
 @pytest.mark.parametrize('ident', ['hmong-ngoc-huyen', 'hmong-female-3'])
@@ -630,6 +737,13 @@ def test_publication_gate_reads_mandatory_browser_evidence_from_the_zip(tmp_path
         ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()
     report['external_clone']['independent_reference_fingerprint'] = clone_identity
     report['external_clone']['hmong_reference_fingerprint'] = clone_identity
+    report['clone_filter_selection']['main_reference_fingerprint'] = clone_identity
+    report['clone_filter_selection']['independent_reference_fingerprint'] = clone_identity
+    report['clone_filter_selection']['hmong_reference_fingerprint'] = clone_identity
+    auto = report['clone_filter_selection']['main_filter_auto_speech']
+    auto['reference_audio_sha256'] = report['external_clone']['reference_audio_sha256']
+    auto['independent_reference_fingerprint'] = clone_identity
+    auto['hmong_reference_fingerprint'] = clone_identity
     source_files = ('caption_markers.py', 'character_cast.py', 'longform.py', 'reference_quality.py', 'hmong_health.py', 'voice_errors.py',
                     'hmong_launcher.py', 'prepare_hmong.py', 'hmong_native.py', 'static/text-import.js',
                     'assets/hmong/additional-voices.json', 'assets/hmong/source-ngoc-huyen.mp3',
@@ -822,7 +936,7 @@ def test_native_smoke_probes_primary_and_every_advanced_batch(tmp_path, monkeypa
     spec = importlib.util.spec_from_file_location('smoke_hmong', PACKAGING / 'smoke_hmong_portable.py')
     smoke = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(smoke)
-    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.6.5'
+    root = tmp_path / 'Relocated Hmong test with spaces' / 'Voice-Studio-Hmong-1.6.6'
     root.mkdir(parents=True)
     packaging.write_launcher(root)
     calls = []
@@ -868,7 +982,7 @@ def test_windows_launcher_smoke_checks_reuse_and_only_cleans_up_its_first_proces
     url = 'http://127.0.0.1:8770'
     engine = 'hmong_native' if backend == 'native' else 'f5_hmong'
     instance = {'instance_id': 'qa-server', 'pid': 102, 'url': url, 'data_id': 'qa-data',
-                'root_id': 'qa-root', 'backend': engine, 'version': '1.6.5-hmong'}
+                'root_id': 'qa-root', 'backend': engine, 'version': '1.6.6-hmong'}
     process = SimpleNamespace(pid=101, stdout=io.StringIO('Studio: ' + url + '\n'),
                               poll=lambda: None, wait=lambda **kwargs: 0)
     server = SimpleNamespace(is_running=lambda: True, parents=lambda: [SimpleNamespace(pid=101)])

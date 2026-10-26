@@ -24,8 +24,8 @@ def spoken_text(text, *, remove_labels=True):
     Strong range metadata is never narration, even when single-clock labels
     are opted out. Original editable source is retained separately by the job.
     """
-    from caption_markers import normalize_caption_text, parse_timing_line, strip_leading_clock, cue_index_value
-    from html import unescape
+    from caption_markers import (normalize_caption_text, parse_timing_line,
+                                 strip_leading_clock, cue_index_value, clean_caption_markup)
     lines=normalize_caption_text(text).split('\n')
     spans=[parse_timing_line(line) for line in lines]
     caption_mode=any(span is not None for span in spans)
@@ -38,7 +38,7 @@ def spoken_text(text, *, remove_labels=True):
         span=spans[index]
         if span is not None:
             seen_range=True
-            content=unescape(re.sub(r'<[^>]*>','',span['text']))
+            content=clean_caption_markup(span['text'])
             has_body=bool(content.strip())
             output.append(content)
             next_index+=1
@@ -58,7 +58,7 @@ def spoken_text(text, *, remove_labels=True):
             continue
         content=strip_leading_clock(line) if remove_labels else line
         if caption_mode:
-            content=unescape(re.sub(r'<[^>]*>','',content))
+            content=clean_caption_markup(content)
         output.append(content)
         has_body=has_body or bool(content.strip())
     return '\n'.join(output)

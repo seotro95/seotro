@@ -115,7 +115,7 @@ def test_normalization_keeps_tone_letters_across_quotes_and_paragraphs():
     source = '“Peb **ua** hauj lwm…”\nThaj\u00a0chaw no zoo nkauj.\n\nKuv rov los tsev.'
     segments = spoken(plan_segments(job(source)))
     assert [segment.text for segment in segments] == [
-        '"Peb ua hauj lwm..."', 'Thaj chaw no zoo nkauj.', 'Kuv rov los tsev.']
+        'Peb ua hauj lwm...', 'Thaj chaw no zoo nkauj.', 'Kuv rov los tsev.']
     assert segments[0].emphasis and all(segment.rhythm_pause > 0 for segment in segments)
     assert all(segment.emotion == 'warm' for segment in segments)
 

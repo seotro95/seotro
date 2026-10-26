@@ -24,7 +24,7 @@ class HmongTextError(ValueError):
 
 _TRANSLATION = str.maketrans({
     **{character: "'" for character in '‘’‚‛ʼ'},
-    **{character: '"' for character in '“”„‟'},
+    **{character: '"' for character in '“”„‟«»'},
     **{character: '-' for character in '‐‑‒–—―−'},
     '…': '...', '\u200b': ' ', '\ufeff': ' ',
 })
@@ -119,6 +119,12 @@ def normalize_speech_text(text: str) -> str:
     Remove subtitle metadata before calling this target-speech formatter.
     """
     normalized = normalize_text(text)
+    # Dialogue/parenthetical formatting is never a request to omit the words
+    # inside it. These delimiters are not phonemes and some engines lack them.
+    # Boundaries prevent adjacent words from being joined when delimiters go.
+    normalized = re.sub(r'["()]+(?=[,.;:!?])', '', normalized)
+    normalized = re.sub(r'["()]', ' ', normalized)
+    normalized = re.sub(r' +', ' ', normalized).strip()
 
     def replace(match):
         before = normalized[match.start() - 1] if match.start() else ''

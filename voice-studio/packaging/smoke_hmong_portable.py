@@ -122,6 +122,8 @@ def export_generated_preview(client, job, reports):
             'job_id': job['id'], 'voice_id': job['voice_id'], 'text': job['text'],
             'hmong_audio_profile': job.get('hmong_audio_profile'),
             'hmong_reference_fingerprint': job.get('hmong_reference_fingerprint'),
+            'require_complete_audio': job.get('require_complete_audio'),
+            'speech_complete': job.get('speech_complete'),
             'audio_seconds': job['audio_seconds'],
             'spoken_audio_seconds': job['spoken_audio_seconds'],
             'inserted_silence_seconds': job['inserted_silence_seconds'],
@@ -255,6 +257,7 @@ def main():
                 break
             time.sleep(.3)
         assert job['status'] == 'done', job
+        assert job['require_complete_audio'] is True and job['speech_complete'] is True
         assert job['engine'] == engine
         if args.backend == 'native':
             assert job['hmong_backend'] == 'vits_openvoice_v2' and job['hmong_steps'] is None
@@ -634,7 +637,7 @@ def check_web_launcher(root, backend, *, reports=None):
             assert isinstance(instance.get(field), str) and instance[field], 'Missing runtime identity: ' + field
         assert isinstance(instance.get('pid'), int) and instance['pid'] > 0
         assert instance['url'] == url and instance['backend'] == engine
-        assert instance['version'] == live['version'] == '1.6.5-hmong'
+        assert instance['version'] == live['version'] == '1.6.6-hmong'
         assert instance['instance_id'] != 'stale-build-qa-instance'
         server = psutil.Process(instance['pid'])
         assert server.is_running() and process.pid in {parent.pid for parent in server.parents()}, \

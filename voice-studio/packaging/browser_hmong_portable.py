@@ -33,6 +33,17 @@ INVALID_SAMPLE = 'Nyob zoo https://example.com.'
 CAPTION_SAMPLE = ('\ufeff1\n"00:04:28,533 --> 00:04:29,333"\nNyob zoo.\n'
                   '2\n99:59.500 --> 100:00.300\nKuv muaj 2 tug me nyuam.\n')
 CAPTION_SPOKEN = 'Nyob zoo. Kuv muaj ob tug me nyuam.'
+TIMED_USER_WORDS = (
+    'Tus txiv neej taub hau do nqa ib tog ntoo hnyav tsib caug kilo ntaus rau daim iav kawg zog',
+    'Tab sis daim iav muaj zog ntawd tseem tsis tawg li',
+    'Thaum Win pom lo lus Made in China sau rau saum daim iav',
+    'Nws thiaj xav tsis thoob kiag',
+)
+TIMED_USER_TIMES = ((.133, 3.066), (3.5, 5.166), (5.533, 8), (8.266, 9))
+TIMED_USER_SAMPLE = ('"1\n00:00:00,133 --> 00:00:03,066\n' + TIMED_USER_WORDS[0]
+    + '\n\n2\n00:00:03,500 --> 00:00:05,166\n' + TIMED_USER_WORDS[1]
+    + '\n\n3\n00:00:05,533 --> 00:00:08,000\n' + TIMED_USER_WORDS[2]
+    + '\n\n4\n00:00:08,266 --> 00:00:09,000\n' + TIMED_USER_WORDS[3] + '"')
 
 
 def check_click_rejection(page, expect):
@@ -316,6 +327,9 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
             expect(page.locator('#panel-create')).to_be_visible()
             expect(page.locator('#voice')).to_have_value('hmong-female-3')
             expect(page.locator('#dub-voice')).to_have_value('hmong-female-3')
+            assert config['subtitle_timing_default'] is True
+            assert page.locator('#create-subtitle-timing').is_checked()
+            result['timed_subtitles'] = {'success': False, 'default_checked': True, 'cases': {}}
 
             def tab(name):
                 page.locator('.nav-item[data-tab="' + name + '"]').click()
@@ -344,15 +358,29 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
             render_references.update(expected_additional_references)
 
             def synthesize(name, ident, text=SAMPLE, workspace=False, *, record_case=True, custom=False,
-                           input_format='txt', subtitle_timing=True):
+                           input_format='txt', subtitle_timing=True, auto_detect=False,
+                           source_filename=None):
                 script = '#workspace-free-script' if workspace else '#script'
                 button = '#workspace-free-generate' if workspace else '#generate'
                 audio = '#workspace-free-audio' if workspace else '#output-audio'
-                page.locator(script).fill(text)
                 if not workspace:
                     page.locator('#format').select_option('wav')
-                    page.locator('#script-format').select_option(input_format)
-                    if input_format == 'srt':
+                    page.locator('#script-format').select_option('txt' if auto_detect else input_format)
+                if source_filename:
+                    assert not workspace
+                    page.locator('#import-script').set_input_files({'name': source_filename,
+                        'mimeType': 'text/plain' if source_filename.endswith('.txt') else 'application/x-subrip',
+                        'buffer': text.encode('utf-8')})
+                    expect(page.locator(script)).to_have_value(text)
+                else:
+                    page.locator(script).fill(text)
+                effective_format = 'srt' if auto_detect else input_format
+                if not workspace:
+                    if auto_detect:
+                        expect(page.locator('#script-format')).to_have_value('srt')
+                    else:
+                        page.locator('#script-format').select_option(effective_format)
+                    if effective_format == 'srt':
                         page.locator('#create-subtitle-timing').set_checked(subtitle_timing)
                 expect(page.locator(button)).to_be_enabled()
                 started = time.monotonic()
@@ -364,7 +392,7 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
                 payload = response.request.post_data_json
                 assert payload['voice_id'] == ident and payload['language'] == 'mww', payload
                 assert payload['text'] == text and payload['format'] == 'wav', payload
-                if input_format == 'srt':
+                if effective_format == 'srt':
                     assert payload['input_format'] == 'srt' and payload['subtitle_timing'] is subtitle_timing
                 assert 'hmong_steps' not in payload, 'Native UI must not request F5 steps'
                 assert response.status == 202, response.text()
@@ -383,6 +411,7 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
                 assert job['engine'] == 'hmong_native' and job['hmong_backend'] == 'vits_openvoice_v2'
                 assert job['hmong_steps'] is None and job['hmong_precision'] == 'fp32'
                 assert job['hmong_device'] == 'cpu', 'Release browser gate validates the shipped CPU runtime'
+                assert job['require_complete_audio'] is True and job['speech_complete'] is True
                 audio_response = context.request.get(job['url'])
                 assert audio_response.ok and audio_response.headers['content-type'].split(';')[0] == 'audio/wav'
                 evidence = audio_evidence(audio_response.body())
@@ -425,6 +454,11 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
                           'hmong_audio_profile': job['hmong_audio_profile'],
                           'original_text_preserved': job['text'] == text,
                           'input_format': job['input_format'], 'subtitle_timing': job.get('subtitle_timing', True),
+                          'requested_input_format': input_format, 'auto_detected_from_txt': auto_detect,
+                          'source_filename': source_filename, 'require_complete_audio': job['require_complete_audio'],
+                          'speech_complete': job['speech_complete'], 'cue_fit': job['cue_fit'],
+                          'max_cue_tempo': job['max_cue_tempo'],
+                          'timing_warnings': job.get('timing_warnings', []),
                           'ui_entrypoint': button, 'real_ui_post': True,
                           'playback': playback, 'audio_playback_checked': True,
                           'download_verified': True,
@@ -484,14 +518,14 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
             tab('create')
             explicit('male')
             caption = synthesize('caption_metadata_as_txt', MALE, CAPTION_SAMPLE,
-                                 record_case=False)
+                                 record_case=False, auto_detect=True, subtitle_timing=False)
             exported = context.request.get('/api/jobs/' + caption['job_id'] + '/export.txt')
             assert exported.ok
             spoken = ' '.join(exported.text().split())
             assert spoken == CAPTION_SPOKEN, 'Only caption words may enter the speech/export plan'
             assert 1 / 3 < caption['audio_seconds'] < 30, 'TXT clocks must not create timestamp silence'
             result['caption_metadata'] = {**caption, 'success': True,
-                'input_format': 'txt', 'exported_spoken_text': spoken,
+                'exported_spoken_text': spoken,
                 'timestamps_not_spoken': True, 'cue_indices_not_spoken': True,
                 'continuous_txt_duration': True}
             only_words = synthesize('quoted_217_srt_speech_only', MALE, SRT_SPOKEN_SAMPLE,
@@ -509,6 +543,35 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
                 'generated_srt': generated_text, 'generated_timing_checked': True,
                 'timestamps_not_spoken': True, 'cue_indices_not_spoken': True,
                 'continuous_srt_duration': True}
+            for kind in ('srt', 'txt'):
+                timed = synthesize('user_four_cue_' + kind, MALE, TIMED_USER_SAMPLE,
+                    record_case=False, input_format=kind, subtitle_timing=True,
+                    auto_detect=kind == 'txt', source_filename='user-four-cues.' + kind)
+                exported = context.request.get('/api/jobs/' + timed['job_id'] + '/export.txt')
+                generated = context.request.get('/api/jobs/' + timed['job_id'] + '/script.srt')
+                assert exported.ok and generated.ok
+                sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+                from subtitles import parse_srt
+                expected = [dict(start=start, end=end, text=words)
+                    for (start, end), words in zip(TIMED_USER_TIMES, TIMED_USER_WORDS)]
+                assert parse_srt(generated.text()) == expected
+                spoken = ' '.join(exported.text().split())
+                assert spoken == ' '.join(TIMED_USER_WORDS), 'Timed audio must retain every source word'
+                alignment = get_json('/api/jobs/' + timed['job_id'] + '/alignment')
+                assert alignment['sync_ok'] is True and alignment['mode'] == 'adaptive'
+                assert len(alignment['cues']) == 4 and abs(timed['audio_seconds'] - 9) < 1/24000
+                for measured, cue in zip(alignment['cues'], expected):
+                    assert measured['status'] == 'matched'
+                    assert measured['start'] == cue['start'] and measured['end'] == cue['end']
+                    assert measured['spoken_text'] == cue['text']
+                    assert abs(measured['spoken_start'] - cue['start']) <= .001
+                    assert measured['spoken_end'] <= cue['end'] + .001
+                result['timed_subtitles']['cases'][kind] = {**timed, 'success': True,
+                    'exported_spoken_text': spoken, 'generated_srt': generated.text().replace('\r\n', '\n'),
+                    'alignment': alignment, 'cue_count': 4, 'all_source_words_retained': True,
+                    'exact_timeline_seconds': 9, 'source_import_format': kind,
+                    'real_file_import': True, 'timestamps_not_spoken': True, 'cue_indices_not_spoken': True}
+            result['timed_subtitles']['success'] = True
             additional_metadata = json.loads((Path(__file__).resolve().parents[1]
                 / 'assets/hmong/additional-voices.json').read_text(encoding='utf-8'))
             result['additional_presets'] = {}
@@ -575,6 +638,38 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
                 ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()
             assert identity not in expected_references.values()
             render_references[custom_id] = identity
+            # The old bug changed the visible personal dropdown while the
+            # canonical selection and other panel still pointed to a preset.
+            # Check automatic filter adoption before explicitly choosing the
+            # newly imported English reference.
+            explicit('male')
+            page.locator('#create-native').select_option('cloned')
+            adopted = page.locator('#voice').input_value()
+            assert re.fullmatch(r'[a-f0-9]{32}', adopted) and adopted not in presets
+            expect(page.locator('#dub-voice')).to_have_value(adopted)
+            expect(page.locator('#create-native')).to_have_value('cloned')
+            adopted_profile = next(voice for voice in get_json('/api/voices')['voices']
+                                   if voice['id'] == adopted)
+            adopted_sample = context.request.get('/api/voices/' + adopted + '/sample')
+            assert adopted_sample.ok
+            adopted_reference = audio_evidence(adopted_sample.body())
+            adopted_words = adopted_profile.get('transcript', '')
+            assert isinstance(adopted_words, str)
+            adopted_identity = hashlib.sha256(json.dumps({'version': 1,
+                'audio_sha256': adopted_reference['sha256'], 'transcript': adopted_words},
+                ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()
+            render_references[adopted] = adopted_identity
+            auto_personal = synthesize('personal_filter_main_auto_speech', adopted,
+                                       record_case=False, custom=True)
+            expect(page.locator('#create-native')).to_have_value('cloned')
+            expect(page.locator('#voice')).to_have_value(adopted)
+            expect(page.locator('#dub-voice')).to_have_value(adopted)
+            auto_personal = {**auto_personal, 'success': True,
+                'reference_audio_sha256': adopted_reference['sha256'],
+                'reference_text': adopted_words, 'independent_reference_fingerprint': adopted_identity,
+                'selection_after_filter_without_manual_choice': True, 'default_fallback': False}
+            page.locator('#voice').select_option(custom_id)
+            expect(page.locator('#dub-voice')).to_have_value(custom_id)
             custom = synthesize('external_english_reference_to_hmong', custom_id,
                                 record_case=False, custom=True)
             result['external_clone'] = {**custom, 'success': True,
@@ -586,6 +681,25 @@ def run(url, reports, expected_references, *, allow_non_windows=False, external_
                 'reference_seconds': reference['audio_seconds'],
                 'independent_reference_fingerprint': identity,
                 'default_fallback': False, 'perceptual_similarity_evaluated': False}
+            tab('dub')
+            page.locator('#workspace-native').select_option('cloned')
+            expect(page.locator('#workspace-native')).to_have_value('cloned')
+            expect(page.locator('#dub-voice')).to_have_value(custom_id)
+            expect(page.locator('#voice')).to_have_value(custom_id)
+            filtered = synthesize('personal_filter_workspace_speech', custom_id,
+                                 workspace=True, record_case=False, custom=True)
+            expect(page.locator('#workspace-native')).to_have_value('cloned')
+            expect(page.locator('#dub-voice')).to_have_value(custom_id)
+            expect(page.locator('#voice')).to_have_value(custom_id)
+            result['clone_filter_selection'] = {**filtered, 'success': True,
+                'main_filter_auto_speech': auto_personal,
+                'main_filter_adopted_voice_id': adopted, 'main_filter_other_panel_voice_id': adopted,
+                'main_filter_preserved': True, 'workspace_filter_preserved': True,
+                'main_filter_value': 'cloned', 'workspace_filter_value': 'cloned',
+                'main_job_id': custom['job_id'], 'main_reference_fingerprint': identity,
+                'workspace_selected_voice_id': custom_id, 'main_selected_voice_id': custom_id,
+                'independent_reference_fingerprint': identity, 'default_fallback': False,
+                'perceptual_similarity_evaluated': False}
             result['features_1_6'] = check_release_features(page, context, get_json, expect, tab,
                                                          expected_references)
             assert not result['page_errors'], result['page_errors']

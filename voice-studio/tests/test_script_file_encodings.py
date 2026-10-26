@@ -62,9 +62,11 @@ def test_browser_import_preserves_decoded_hmong_excerpt(encoding, bom, extension
         # HTML textareas standardize line endings to LF. The decoded bytes
         # above and the conversion request below retain the original CRLF.
         playwright.expect(page.locator('#script')).to_have_value(SOURCE.replace('\r\n', '\n'))
-        playwright.expect(page.locator('#script-format')).to_have_value(extension)
-        if extension == 'srt':
-            assert conversions[0]['text'] == SOURCE
+        # The decoded clock ranges determine the effective format, including
+        # captions saved by Windows editors with a .txt filename.
+        playwright.expect(page.locator('#script-format')).to_have_value('srt')
+        playwright.expect(page.locator('#create-subtitle-timing')).to_be_checked()
+        assert conversions == [{'text': SOURCE, 'input_format': 'srt', 'output_format': 'srt'}]
         assert state['errors'] == []
 
 

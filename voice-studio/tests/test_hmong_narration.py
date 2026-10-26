@@ -35,7 +35,7 @@ def test_explicit_zero_pause_and_emphasis_remain_packing_barriers():
 def test_unicode_formatting_normalizes_only_spoken_content_after_control_parsing():
     segments = plan_segments(hmong_job('“Nyob\u00a0zoo…” **Pab—paj.** [pause=1.5]\nUa tsaug.'))
     assert [(segment.text, segment.pause, segment.emphasis) for segment in segments] == [
-        ('"Nyob zoo..."', 0, False), ('Pab-paj.', 0, True),
+        ('Nyob zoo...', 0, False), ('Pab-paj.', 0, True),
         ('', 1.5, False), ('Ua tsaug.', 0, False)]
     with pytest.raises(ValueError, match='RPA'):
         plan_segments(hmong_job('Nyob zoo. **你好** [pause=1] Ua tsaug.'))

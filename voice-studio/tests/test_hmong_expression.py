@@ -56,7 +56,7 @@ def test_rhythm_keeps_sentence_and_paragraph_gaps_and_explicit_pause_overrides()
 
 def test_dialogue_quotes_keep_sentence_pauses_without_splitting_each_comma():
     segments = plan_segments(expression_job('“Nyob zoo.” Kuv tuaj, kuv nyob nov.'))
-    assert [segment.text for segment in segments] == ['"Nyob zoo."', 'Kuv tuaj, kuv nyob nov.']
+    assert [segment.text for segment in segments] == ['Nyob zoo.', 'Kuv tuaj, kuv nyob nov.']
     assert all(segment.rhythm_pause > 0 for segment in segments)
 
 

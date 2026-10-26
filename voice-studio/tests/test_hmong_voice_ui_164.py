@@ -6,23 +6,26 @@ from test_voice_click_recovery import click_page
 SOURCE = '217\n00:06:07,200 --> 00:06:08,400\nTae-yong cov ntaub ntawv tus kheej'
 
 
-def test_main_srt_defaults_to_words_without_timeline_and_allows_timed_mode(static_site):
+def test_main_srt_defaults_to_timeline_and_allows_explicit_speech_only(static_site):
     with click_page(static_site) as (page, state, *_):
         playwright.expect(page.locator('#voice')).to_have_value('hmong-male')
         page.locator('.nav-item[data-tab="create"]').click()
         page.locator('#script-format').select_option('srt')
         page.locator('#script').fill(SOURCE)
-        playwright.expect(page.locator('#create-subtitle-timing')).not_to_be_checked()
-        playwright.expect(page.locator('#srt-reading-note')).to_contain_text('Chỉ đọc lời Hmong')
-        page.locator('#generate').click()
-        playwright.expect(page.locator('#output-title')).to_contain_text('đã sẵn sàng')
-        assert state['posts'][-1]['subtitle_timing'] is False
-        assert state['posts'][-1]['text'] == SOURCE
-        assert state['posts'][-1]['input_format'] == 'srt'
-        page.locator('#create-subtitle-timing').check()
+        playwright.expect(page.locator('#create-subtitle-timing')).to_be_checked()
+        playwright.expect(page.locator('#srt-reading-note')).to_contain_text('Giữ đúng mốc')
         page.locator('#generate').click()
         playwright.expect(page.locator('#output-title')).to_contain_text('đã sẵn sàng')
         assert state['posts'][-1]['subtitle_timing'] is True
+        assert state['posts'][-1]['cue_fit'] == 'adaptive'
+        assert state['posts'][-1]['max_cue_tempo'] == 4
+        assert state['posts'][-1]['text'] == SOURCE
+        assert state['posts'][-1]['input_format'] == 'srt'
+        page.locator('#create-subtitle-timing').uncheck()
+        page.locator('#generate').click()
+        playwright.expect(page.locator('#output-title')).to_contain_text('đã sẵn sàng')
+        assert state['posts'][-1]['subtitle_timing'] is False
+        assert 'cue_fit' not in state['posts'][-1]
         assert state['errors'] == []
 
 

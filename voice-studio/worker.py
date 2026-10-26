@@ -184,7 +184,27 @@ def get_synthesizer(job):
     return _cached_synth
 
 
-def normalize_audio(raw, temporary, tempo, gain, *, audio_profile='legacy-v1'):
+def _tempo_filter(tempo):
+    """Keep every FFmpeg atempo stage in its sample-blending range.
+
+    A single atempo above 2 can skip input samples. New adaptive SRT fitting
+    chains smaller stages instead; legacy normalization retains its old path.
+    """
+    if (isinstance(tempo, bool) or not isinstance(tempo, (int, float))
+            or not math.isfinite(tempo) or tempo <= 0):
+        raise ValueError('Nhịp căn âm thanh không hợp lệ.')
+    stages = []
+    while tempo > 2:
+        stages.append(2.0)
+        tempo /= 2
+    while tempo < .5:
+        stages.append(.5)
+        tempo /= .5
+    stages.append(tempo)
+    return ','.join(f'atempo={value:.12g}' for value in stages)
+
+
+def normalize_audio(raw, temporary, tempo, gain, *, audio_profile='legacy-v1', chain_tempo=False):
     if not isinstance(audio_profile, str) or audio_profile not in {'legacy-v1', 'clear-v1'}:
         raise ValueError('Chế độ xử lý âm thanh không hợp lệ.')
     # Avoid spawning FFmpeg for each natural-speed chunk, especially on Windows.
@@ -207,7 +227,8 @@ def normalize_audio(raw, temporary, tempo, gain, *, audio_profile='legacy-v1'):
         sf.write(str(temporary), samples, 24000, subtype='PCM_16')
     else:
         limiter = 'alimiter=limit=0.95' + (':level=false' if audio_profile == 'clear-v1' else '')
-        subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(raw), '-vn', '-ac', '1', '-ar', '24000', '-af', f'atempo={tempo},volume={gain},{limiter}', '-codec:a', 'pcm_s16le', '-y', str(temporary)], check=True, timeout=120)
+        pacing = _tempo_filter(tempo) if chain_tempo else f'atempo={tempo}'
+        subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(raw), '-vn', '-ac', '1', '-ar', '24000', '-af', f'{pacing},volume={gain},{limiter}', '-codec:a', 'pcm_s16le', '-y', str(temporary)], check=True, timeout=120)
 
 
 _nano_pool = None
@@ -289,7 +310,8 @@ def _chunk_identity(job, segment):
     """Legacy jobs keep their checkpoints; frozen/new chapter jobs bind all inputs."""
     cast_identity = checkpoint_identity(job, segment) if job.get('character_cast') else None
     clear_audio = _native_audio_profile(job) == 'clear-v1'
-    if '_PREPLANNED_SEGMENTS' not in job and not job.get('hmong_voice_snapshot') and not clear_audio:
+    complete_audio = job.get('require_complete_audio') is True
+    if '_PREPLANNED_SEGMENTS' not in job and not job.get('hmong_voice_snapshot') and not clear_audio and not complete_audio:
         return cast_identity
     keys = ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads',
             'hmong_steps', 'hmong_reference_fingerprint', 'hmong_voice_snapshot', 'speed',
@@ -299,6 +321,8 @@ def _chunk_identity(job, segment):
     settings = {key: job.get(key) for key in keys}
     if clear_audio:
         settings['hmong_audio_profile'] = 'clear-v1'
+    if complete_audio:
+        settings['require_complete_audio'] = True
     if job.get('input_format') == 'srt' and job.get('subtitle_timing', True) is False:
         settings['subtitle_timing'] = False
     payload = {'version': 1, 'cast': cast_identity, 'segment': vars(segment),
@@ -312,6 +336,23 @@ class _ChapterPCMWriter(PCMWriter):
     def silence(self, seconds):
         if round(seconds * self.rate) > self.limit - self.frames:
             raise ValueError('Chương vượt giới hạn 3 giờ; chưa xuất âm thanh bị cắt khoảng nghỉ.')
+        super().silence(seconds)
+
+
+class _CompletePCMWriter(PCMWriter):
+    """New Hmong output never publishes a waveform with its final words cut."""
+    def append(self, path):
+        with wave.open(str(path), 'rb') as source:
+            frames = source.getnframes()
+        if frames > self.limit - self.frames:
+            raise ValueError('Lời đọc vượt thời lượng xuất đã chọn. Tăng giới hạn phút hoặc chia phần rồi tiếp tục; '
+                             'các đoạn đã tạo được giữ và chưa xuất bản thu bị cắt lời.')
+        return super().append(path)
+
+    def silence(self, seconds):
+        if round(seconds * self.rate) > self.limit - self.frames:
+            raise ValueError('Mốc thời gian hoặc khoảng nghỉ vượt thời lượng xuất đã chọn. '
+                             'Tăng giới hạn phút rồi tiếp tục; chưa xuất bản thu bị thiếu nội dung.')
         super().silence(seconds)
 
 
@@ -373,10 +414,12 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
             if not np.all(np.isfinite(raw_samples)):
                 raise EmptyVoiceError('Model tạo mẫu âm thanh không hợp lệ.')
             del raw_samples
+            normalization = {}
             if _native_audio_profile(job) == 'clear-v1':
-                normalize_audio(raw, temporary, tempo, gain, audio_profile='clear-v1')
-            else:
-                normalize_audio(raw, temporary, tempo, gain)
+                normalization['audio_profile'] = 'clear-v1'
+            if job.get('require_complete_audio') is True:
+                normalization['chain_tempo'] = True
+            normalize_audio(raw, temporary, tempo, gain, **normalization)
             if expressive:
                 from hmong_expression import shape_phrase_energy
                 shape_phrase_energy(temporary, emotion, strength)
@@ -398,6 +441,9 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
 
 def render(job, synthesize=None):
     global _nano_pool, _nano_pool_workers, _cached_synth, _cached_key
+    complete_policy = job.get('require_complete_audio')
+    if complete_policy is not None and type(complete_policy) is not bool:
+        raise ValueError('Chính sách giữ đầy đủ lời đọc không hợp lệ.')
     validate_job_references(job, DATA)
     if job.get('engine') in HMONG_ENGINES and is_builtin_voice_id(job.get('speaker')):
         from hmong_assets import reference_fingerprint
@@ -423,7 +469,8 @@ def render(job, synthesize=None):
     work.mkdir(parents=True, exist_ok=True)
     maximum = job.get('max_minutes', 180) * 60
     assembly = work / 'assembled.wav'
-    writer_class = _ChapterPCMWriter if '_PREPLANNED_SEGMENTS' in job else PCMWriter
+    writer_class = (_CompletePCMWriter if complete_policy else
+                    _ChapterPCMWriter if '_PREPLANNED_SEGMENTS' in job else PCMWriter)
     writer = writer_class(assembly, max_seconds=maximum)
     started = time.monotonic()
     write_state(work / 'progress.json', {'completed': 0, 'total': len(segments), 'progress': 0, 'phase': 'Chuẩn bị mô hình; lần đầu có thể chậm hơn'})
@@ -449,8 +496,10 @@ def render(job, synthesize=None):
                                    if segment.cue == cue_index and segment.text)
     timed = []
     alignment=[]
+    timing_warnings=[]
     def save_alignment(sync_ok=False,failed=None):
-        write_state(work/'alignment.json',{'cues':alignment,'sync_ok':sync_ok,'failed_cue':failed,'mode':job.get('cue_fit','strict'),'max_tempo':job.get('max_cue_tempo',1.5)})
+        write_state(work/'alignment.json',{'cues':alignment,'sync_ok':sync_ok,'failed_cue':failed,'mode':job.get('cue_fit','strict'),'max_tempo':job.get('max_cue_tempo',1.5),
+                                         'warnings':timing_warnings})
     if cues:save_alignment()
     cue_writer = None
     cue_spoken_spans = []
@@ -518,7 +567,10 @@ def render(job, synthesize=None):
                     for attempt in range(5):
                         if (work / 'cancel.flag').exists():
                             raise InterruptedError('Tác vụ đã dừng.')
-                        if _native_audio_profile(job) == 'clear-v1':
+                        if job.get('cue_fit') == 'adaptive' or complete_policy:
+                            normalize_audio(cue_path, fitted, tempo, 1,
+                                            audio_profile=_native_audio_profile(job), chain_tempo=True)
+                        elif _native_audio_profile(job) == 'clear-v1':
                             normalize_audio(cue_path, fitted, tempo, 1, audio_profile='clear-v1')
                         else:
                             normalize_audio(cue_path, fitted, tempo, 1)
@@ -559,7 +611,18 @@ def render(job, synthesize=None):
                 if job.get('character_cast'):
                     cue_voice = settings_for_cue(job, segment.cue)
                     cast_alignment = {'voice_id': cue_voice['voice_id'], 'character_id': cue_voice['character_id']}
-                alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':cue['end'],'raw_seconds':round(actual,3),'spoken_start':round(actual_start,5),'spoken_end':round(actual_end,5),'tempo':round(applied_tempo,4),'status':'matched' if abs(actual_start-cue['start'])<=.001 and actual_end<=cue['end']+.001 and not clipped else 'overflow', **cast_alignment})
+                quality_warning = None
+                if (job.get('cue_fit') == 'adaptive' or complete_policy) and applied_tempo > 2:
+                    quality_warning = (f'Câu SRT {segment.cue+1} cần đọc nhanh {applied_tempo:.2f} lần để giữ đúng mốc. '
+                                       'Đã giữ toàn bộ đoạn âm thanh; ô thời gian ngắn có thể làm lời khó nghe. '
+                                       'Nới mốc để giữ nhịp tự nhiên hơn.')
+                    timing_warnings.append(quality_warning)
+                alignment.append({'cue':segment.cue+1,'start':cue['start'],'end':cue['end'],'raw_seconds':round(actual,3),
+                                  'spoken_text':cue['text'],
+                                  'required_tempo':round(max(1.0, actual/available),4),
+                                  'spoken_start':round(actual_start,5),'spoken_end':round(actual_end,5),'tempo':round(applied_tempo,4),
+                                  'quality_warning':quality_warning,
+                                  'status':'matched' if abs(actual_start-cue['start'])<=.001 and actual_end<=cue['end']+.001 and not clipped else 'overflow', **cast_alignment})
                 if len(alignment)%16==0 or len(alignment)==len(cues):save_alignment(sync_ok=all(c['status']=='matched' for c in alignment) and len(alignment)==len(cues))
                 writer.silence(max(0, cue['end']-writer.frames/writer.rate))
             elif not cues and segment.text:
@@ -579,6 +642,9 @@ def render(job, synthesize=None):
                 future.result()
     if (work / 'cancel.flag').exists():
         raise InterruptedError('Tác vụ đã dừng.')
+    if complete_policy and (clipped or completed < len(segments)):
+        raise ValueError('Chưa đọc hết kịch bản trong thời lượng đã chọn. Tăng giới hạn hoặc chia phần rồi tạo tác vụ mới; '
+                         'chưa xuất bản thu bị thiếu lời.')
     destination = DATA / 'audio' / f"{job['id']}.{job['format']}"
     pending = work / ('finished.' + job['format'])
     write_state(work / 'progress.json', {'completed': completed, 'total': len(segments), 'progress': progress_limit, 'phase': 'Đang xuất âm thanh'})
@@ -625,7 +691,10 @@ def render(job, synthesize=None):
         'spoken_audio_seconds': spoken_frames / writer.rate,
         'inserted_silence_seconds': max(0, writer.frames - spoken_frames) / writer.rate,
         'duration_limited': clipped, 'completed': completed, 'total': len(segments),
-        'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), **inference})
+        'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3),
+        'timing_warnings': timing_warnings,
+        'speech_complete': not clipped and completed == len(segments),
+        'require_complete_audio': complete_policy is True, **inference})
 
 
 def voice_error(exc):

@@ -17,7 +17,7 @@ function updateScriptLimits(){
  $('script').oninput();
 }
 function isNativeHmong(){return isHmongStudio()&&(config?.hmong_backend==='native'||config?.hmong_engine==='hmong_native');}
-let hmongVoiceId=null;
+let hmongVoiceId=null,hmongVoiceSyncing=false;
 function updateHmongVoiceChoices(){
  if(!isHmongStudio())return;
  for(const [group,select,status,sample]of [['hmong-voice-choices','voice','hmong-selected-voice','hmong-reference-sample'],['workspace-hmong-voice-choices','dub-voice','workspace-hmong-selected-voice','workspace-hmong-reference-sample']]){
@@ -31,10 +31,31 @@ function updateHmongVoiceChoices(){
 function selectHmongVoice(id){
  const voice=voices.find(v=>v.id===id);if(!isHmongStudio()||!voice)return;
  const changed=hmongVoiceId!==id||$('dub-voice').value!==id;hmongVoiceId=id;
- for(const [language,source,native]of [['language','voice-source','create-native'],['dub-language','dub-voice-source','workspace-native']]){$(language).value=voice.languages[0];$(source).value='all';$(native).value='all';}
- updateVoiceOptions();updateDubVoices();$('voice').value=id;$('dub-voice').value=id;updateVoice();updateDubVoiceInfo();
+ hmongVoiceSyncing=true;
+ try{
+  for(const [language,source,native]of [['language','voice-source','create-native'],['dub-language','dub-voice-source','workspace-native']]){$(language).value=voice.languages[0];$(source).value='all';$(native).value='all';}
+  updateVoiceOptions();updateDubVoices();$('voice').value=id;$('dub-voice').value=id;updateVoice();updateDubVoiceInfo();
+ }finally{hmongVoiceSyncing=false;}
  if(changed&&typeof workspaceInvalidate==='function')workspaceInvalidate();
  if(changed&&typeof workspaceFreeVoice!=='undefined'&&workspaceFreeVoice){workspaceFreeVoice=null;$('workspace-free-audio').pause();$('workspace-free-audio').hidden=true;if($('workspace-free-audio')._chapterSelect)$('workspace-free-audio')._chapterSelect.hidden=true;$('workspace-free-status').textContent='Giọng đã đổi. Tạo voice riêng lại để áp dụng giọng mới.';}
+}
+function adoptFilteredHmongVoice(select){
+ if(!isHmongStudio()||!studioInitialized||hmongVoiceSyncing)return;
+ const id=$(select).value,voice=voices.find(v=>v.id===id);if(!voice)return;
+ const changed=hmongVoiceId!==id;hmongVoiceId=id;
+ const main=select==='voice',target=main?'dub-voice':'voice';
+ hmongVoiceSyncing=true;
+ try{
+  if(![...$(target).options].some(option=>option.value===id)){
+   $(main?'dub-language':'language').value=voice.languages[0];
+   $(main?'dub-voice-source':'voice-source').value='all';
+   $(main?'workspace-native':'create-native').value='all';
+   if(main)updateDubVoices();else updateVoiceOptions();
+  }
+  $(target).value=id;updateVoice();updateDubVoiceInfo();
+ }finally{hmongVoiceSyncing=false;}
+ if(changed&&typeof workspaceInvalidate==='function')workspaceInvalidate();
+ if(changed&&typeof workspaceInvalidateFreeVoice==='function')workspaceInvalidateFreeVoice();
 }
 function selectLibraryVoice(voice){
  if(isHmongStudio()){selectHmongVoice(voice.id);return;}
@@ -89,6 +110,9 @@ function hideStudioControl(id){const node=$(id);if(node)node.hidden=true;documen
 function applyStudioVariant(){
  if(!isHmongStudio())return;
  $('hmong-help-tools').hidden=false;
+ $('create-subtitle-timing').checked=config.subtitle_timing_default!==false;
+ for(const selector of ['#workspace-sync-mode option[value="adaptive"]','#workspace-sync-tempo option[value="4"]'])document.querySelector(selector).hidden=false;
+ $('workspace-sync-mode').value='adaptive';$('workspace-sync-tempo').value='4';
  document.title=config.app_name||'Voice Studio Hmong';
  const intro=document.querySelector('#panel-create .page-heading > p');if(intro)intro.textContent=isNativeHmong()?'Bộ đọc Hmong nhanh thử nghiệm và chuyển chất giọng theo mẫu của bạn. Cần nghe đánh giá phát âm và độ giống giọng; chưa kiểm chứng 30×.':'Tạo lời đọc Hmong Trắng / Hmoob Daw từ văn bản và mẫu giọng của bạn.';
  const languageFeature=document.querySelector('#panel-create .feature[data-tab="voices"] p');if(languageFeature)languageFeature.textContent='Các mẫu Hmong có sẵn, Ngọc Huyền và các giọng cá nhân đã thêm.';
@@ -125,7 +149,7 @@ function applyStudioVariant(){
 const hmongPronunciationSample='Peb ua hauj lwm. Thaj chaw no zoo nkauj. Nyob qab roob. Peb faib mov. Kuv rov los tsev. Nws hnav ris.';
 const samples = {mww:'Nyob zoo, kuv zoo siab tau ntsib koj. Hnub no peb yuav mloog ib zaj dab neeg. Ua tsaug rau koj mloog.',vi:'Có những câu chuyện bắt đầu bằng một lời chào. Có những ý tưởng chỉ cần một giọng nói để chạm đến trái tim. Chào mừng bạn đến với Voice Studio — nơi câu chữ của bạn cất thành lời.', 'en-US':'Every great story begins with a voice. Welcome to your personal studio, where a little imagination becomes something worth listening to.', 'en-GB':'Every great story begins with a voice. Welcome to your personal studio, where a little imagination becomes something worth listening to.', ja:'こんにちは。あなたの物語を、あなたらしい声で届けましょう。', ko:'안녕하세요. 당신만의 목소리로 새로운 이야기를 시작해 보세요.'};
 function notify(message, error = false) { const el = $('notice'); el.textContent = message; el.classList.toggle('error', error); el.hidden = !message; }
-async function api(path, options = {}) { if(isHmongStudio()&&path==='/api/speech'&&typeof options.body==='string'){const payload=JSON.parse(options.body);Object.assign(payload,hmongExpressionSettings());if(isNativeHmong())delete payload.hmong_steps;else payload.hmong_steps=hmongSteps();options={...options,body:JSON.stringify(payload)};} let res;try{res=await fetch(path,options);}catch(e){throw new Error('Mất kết nối với tool. Giữ cửa sổ CMD mở; nếu đã tắt, chạy lại '+(isHmongStudio()?hmongLauncher():'MO_VOICE_STUDIO.bat')+' và dùng tab vừa mở.');} if(!res.ok){let failure;try{failure=await res.json();}catch{}const error=new Error(typeof failure?.detail==='string'?failure.detail:`Yêu cầu không thành công (${res.status}). Kiểm tra dữ liệu và thử lại.`);error.status=res.status;error.field=failure?.field;error.code=failure?.code;error.unsupportedCharacters=failure?.unsupported_characters;error.errors=failure?.errors;throw error;} return res.status === 204 ? null : res.json(); }
+async function api(path, options = {}) { if(isHmongStudio()&&path==='/api/speech'&&typeof options.body==='string'){const payload=JSON.parse(options.body);Object.assign(payload,hmongExpressionSettings());if(payload.subtitle_timing!==false&&(payload.input_format==='srt'||hasScriptTimeRanges(payload.text||''))){payload.input_format='srt';payload.cue_fit??='adaptive';if(payload.cue_fit==='adaptive')payload.max_cue_tempo??=4;}if(isNativeHmong())delete payload.hmong_steps;else payload.hmong_steps=hmongSteps();options={...options,body:JSON.stringify(payload)};} let res;try{res=await fetch(path,options);}catch(e){throw new Error('Mất kết nối với tool. Giữ cửa sổ CMD mở; nếu đã tắt, chạy lại '+(isHmongStudio()?hmongLauncher():'MO_VOICE_STUDIO.bat')+' và dùng tab vừa mở.');} if(!res.ok){let failure;try{failure=await res.json();}catch{}const error=new Error(typeof failure?.detail==='string'?failure.detail:`Yêu cầu không thành công (${res.status}). Kiểm tra dữ liệu và thử lại.`);error.status=res.status;error.field=failure?.field;error.code=failure?.code;error.unsupportedCharacters=failure?.unsupported_characters;error.errors=failure?.errors;throw error;} return res.status === 204 ? null : res.json(); }
 function element(tag, text, cls) { const el = document.createElement(tag); if (text !== undefined) el.textContent = text; if (cls) el.className = cls; return el; }
 function showTab(tab) { currentTab = tab; document.querySelectorAll('.panel').forEach(p => p.hidden = p.id !== `panel-${tab}`); document.querySelectorAll('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.tab === tab)); $('breadcrumb').textContent = {create:'Văn bản thành giọng nói',dub:'Lồng tiếng video',writing:'AI viết kịch bản',clone:'Nhân bản giọng nói',voices:'Thư viện giọng',history:'Lịch sử bản thu'}[tab]; notify(''); if(tab === 'history') refreshHistory().catch(e=>notify(e.message,true)); if(tab === 'voices') renderVoices(); if(tab==='dub'){refreshDubSources().catch(e=>notify(e.message,true));} if(tab==='dub')$('dub-settings').textContent=`Nhịp đọc: ${$('speed').value}× · ${$('delivery').selectedOptions[0].textContent}. Chọn giọng lồng tiếng trực tiếp bên dưới.`; }
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{userNavigated=true;showTab(b.dataset.tab);}));
@@ -141,10 +165,13 @@ async function setDefaultHmongVoice(voice){
  try{await ensureStudioReady();const result=await api('/api/voices/default',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({voice_id:voice.id})});config.default_voice_id=result.default_voice_id||voice.id;selectHmongVoice(config.default_voice_id);renderVoices();notify('Đã đặt “'+voice.name+'” làm giọng mặc định cho lần mở tool sau.');}
  catch(error){notify(error.message,true);throw error;}
 }
+function hasScriptTimeRanges(text){
+ return /(?:^|\n)\s*(?:\d+[.)]?\s+)?[\[('\"“‘]*\s*\d{1,5}:\d{2}(?::\d{2})?(?:[,.]\d{1,3})?[\s\])'\"”’]*(?:-->|->|→|⟶|–>|—>)/m.test(text.replace(/\r\n?/g,'\n').replace(/[\u200b\u200e\u200f\ufeff]/g,''));
+}
 function updateSubtitleMode(){
  const visible=isHmongStudio()&&$('script-format').value==='srt';
  $('srt-reading-mode').hidden=!visible;$('srt-reading-note').hidden=!visible;
- $('srt-reading-note').textContent=$('create-subtitle-timing').checked?'Giữ mốc từng câu và khoảng chờ của SRT. Câu quá dài so với ô sẽ báo lỗi để sửa mốc; tool không cắt mất lời.':'Chỉ đọc lời Hmong, bỏ số thứ tự và mốc giờ; không thêm khoảng chờ theo phụ đề. Bật giữ mốc khi cần căn thời gian.';
+ $('srt-reading-note').textContent=$('create-subtitle-timing').checked?'Giữ đúng mốc từng câu, tự căn tốc độ và giữ đủ lời. Câu quá dài có thể đọc nhanh; vượt giới hạn sẽ báo rõ câu cần nới mốc, không cắt chữ.':'Chỉ đọc lời Hmong, bỏ số thứ tự và mốc giờ; không thêm khoảng chờ theo phụ đề. Bật giữ mốc khi cần căn thời gian.';
 }
 $('script-format').addEventListener('change',updateSubtitleMode);
 $('create-subtitle-timing').addEventListener('change',updateSubtitleMode);
@@ -152,7 +179,7 @@ async function refreshVoices(){applyStudioVoices((await api('/api/voices')).voic
 function renderVoices() { const search=$('voice-search').value.toLocaleLowerCase(); const list=voices.filter(v=>v.name.toLocaleLowerCase().includes(search)); $('voice-library').replaceChildren(); if(!list.length) $('voice-library').append(element('div','Chưa có giọng phù hợp. Hãy thêm giọng cá nhân.','empty')); for(const v of list) { const card=element('article',undefined,'voice-card card'); card.append(element('span','≋','voice-orb'),element('h3',v.name),element('p',v.description)); const tags=element('div',undefined,'tags'); tags.append(element('span',v.category==='cloned'?'GIỌNG CÁ NHÂN':'GIỌNG CÓ SẴN','tag')); for(const lang of v.languages.slice(0,4)) tags.append(element('span',config.languages[lang]||lang,'tag')); if(v.languages.length>4) tags.append(element('span',`+${v.languages.length-4}`,'tag')); if(isNativeHmong()&&config.default_voice_id===v.id)tags.append(element('span','MẶC ĐỊNH','tag')); card.append(tags); if(v.category==='cloned'||v.sample_url) { const audio=element('audio'); audio.controls=true; audio.preload='none'; audio.src=v.sample_url||`/api/voices/${v.id}/sample`; card.append(audio); } const actions=element('div',undefined,'voice-actions'); const use=element('button','Sử dụng giọng →'); use.onclick=()=>{ selectLibraryVoice(v); showTab('create'); $('script').focus(); }; actions.append(use); if(isNativeHmong()&&['hmong_native','f5_hmong'].includes(v.engine)&&v.languages.includes('mww')){const preferred=element('button',config.default_voice_id===v.id?'Giọng mặc định':'Đặt làm giọng mặc định');preferred.disabled=config.default_voice_id===v.id;preferred.dataset.defaultVoice=v.id;preferred.onclick=async()=>{preferred.disabled=true;try{await setDefaultHmongVoice(v);}catch{preferred.disabled=false;}};actions.append(preferred);} if(v.category==='cloned') { const del=element('button','Xóa','delete'); del.onclick=async()=>{if(!confirm(`Xóa mẫu và hồ sơ giọng “${v.name}”?`))return; try{await api(`/api/voices/${v.id}`,{method:'DELETE'});if(config.default_voice_id===v.id)config.default_voice_id=null; await refreshVoices();}catch(e){notify(e.message,true);} }; actions.append(del); } card.append(actions); $('voice-library').append(card); } }
 $('voice-search').oninput=renderVoices;
 $('language').onchange=updateVoiceOptions; $('voice').onchange=()=>{if(isHmongStudio())selectHmongVoice($('voice').value);else updateVoice();};
-$('script').oninput=()=>{$('char-count').textContent=`${scriptCharacterCount($('script').value).toLocaleString('vi-VN')} / ${scriptCharacterLimit().toLocaleString('vi-VN')} ký tự`;};
+$('script').oninput=()=>{$('char-count').textContent=`${scriptCharacterCount($('script').value).toLocaleString('vi-VN')} / ${scriptCharacterLimit().toLocaleString('vi-VN')} ký tự`;if(isHmongStudio()&&hasScriptTimeRanges($('script').value))$('script-format').value='srt';updateSubtitleMode();};
 updateScriptLimits();
 $('sample-button').onclick=()=>{$('script').value=samples[$('language').value]||samples['en-US']; $('script').oninput();};
 $('speed').oninput=()=>{$('speed-value').textContent=Number($('speed').value).toFixed(2)+'×';};
@@ -178,7 +205,7 @@ function renderJobAudio(job,audio,download,chapterSelect){
  if(download){const url=done?jobDownloadUrl(job):'';download.hidden=!url;if(url){download.href=url;download.download=`voice-studio-${job.id.slice(0,8)}.${jobDownloadExtension(job)}`;download.textContent=job.longform?`Tải ZIP · ${chapters.length} phần ${(job.format||'wav').toUpperCase()} ↓`:`Tải ${(job.format||'wav').toUpperCase()} ↓`;}else download.removeAttribute('href');}
  return choose();
 }
-function setOutput(job) { if(activeOutputId && activeOutputId!==job.id)return;if(job.video_id||dubJob===job.id)updateDub(job);$('voice-progress').value=job.progress||0;$('voice-percent').textContent=`${job.progress||0}%`;const working=['queued','running','cancelling'].includes(job.status);$('stop-generation').hidden=!working;$('stop-generation').disabled=job.status==='cancelling';$('stop-generation').textContent=job.status==='cancelling'?'Đang dừng…':'■ Dừng tạo giọng'; $('output-title').textContent = {queued:'Bản thu đang trong hàng đợi…',running:'AI đang tạo giọng nói trên máy…',cancelling:'Đang dừng…',cancelled:'Đã dừng · Có thể tiếp tục trong Lịch sử',error:'Chưa tạo được bản thu',done:'Bản thu của bạn đã sẵn sàng'}[job.status]; voiceFeedback(job.error||({queued:'Yêu cầu đã nhận. Bản thu đang trong hàng đợi…',running:'Đang tạo giọng: '+(job.phase||'đang xử lý')+' · '+(job.progress||0)+'%',cancelling:'Đang dừng tạo giọng…',cancelled:'Đã dừng tạo giọng. Có thể tiếp tục trong Lịch sử.',error:'Chưa tạo được bản thu.',done:'Bản thu đã sẵn sàng. Nghe thử hoặc tải tệp bên dưới.'}[job.status]||job.status),job.status==='error'); $('output-subtitle').textContent=job.error || `${job.voice_name} · ${job.phase || ''} · ${job.progress || 0}% · ${duration(job.audio_seconds || 0)}${job.longform?' · '+(job.chapters?.length||job.chapter_count||0)+' phần · tải trọn bộ ZIP':''}${job.duration_limited ? ' · Đã đạt giới hạn; còn nội dung chưa đọc' : ''}`;showSpeedReport(job);renderJobAudio(job,$('output-audio'),$('download'),$('output-chapter')); }
+function setOutput(job) { if(activeOutputId && activeOutputId!==job.id)return;if(job.video_id||dubJob===job.id)updateDub(job);$('voice-progress').value=job.progress||0;$('voice-percent').textContent=`${job.progress||0}%`;const working=['queued','running','cancelling'].includes(job.status);$('stop-generation').hidden=!working;$('stop-generation').disabled=job.status==='cancelling';$('stop-generation').textContent=job.status==='cancelling'?'Đang dừng…':'■ Dừng tạo giọng'; $('output-title').textContent = {queued:'Bản thu đang trong hàng đợi…',running:'AI đang tạo giọng nói trên máy…',cancelling:'Đang dừng…',cancelled:'Đã dừng · Có thể tiếp tục trong Lịch sử',error:'Chưa tạo được bản thu',done:'Bản thu của bạn đã sẵn sàng'}[job.status]; voiceFeedback(job.error||({queued:'Yêu cầu đã nhận. Bản thu đang trong hàng đợi…',running:'Đang tạo giọng: '+(job.phase||'đang xử lý')+' · '+(job.progress||0)+'%',cancelling:'Đang dừng tạo giọng…',cancelled:'Đã dừng tạo giọng. Có thể tiếp tục trong Lịch sử.',error:'Chưa tạo được bản thu.',done:'Bản thu đã sẵn sàng. Nghe thử hoặc tải tệp bên dưới.'+(Array.isArray(job.timing_warnings)&&job.timing_warnings.length?' '+job.timing_warnings.join(' '):'')}[job.status]||job.status),job.status==='error'); $('output-subtitle').textContent=job.error || `${job.voice_name} · ${job.phase || ''} · ${job.progress || 0}% · ${duration(job.audio_seconds || 0)}${job.longform?' · '+(job.chapters?.length||job.chapter_count||0)+' phần · tải trọn bộ ZIP':''}${job.duration_limited ? ' · Đã đạt giới hạn; còn nội dung chưa đọc' : ''}`;showSpeedReport(job);renderJobAudio(job,$('output-audio'),$('download'),$('output-chapter')); }
 $('generate').onclick=async()=>{
  if(voiceSubmitting)return;
  voiceSubmitting=true;const attempt=++voiceAttempt;activeOutputId='attempt-'+attempt;$('generate').disabled=true;notify('');
@@ -191,7 +218,7 @@ $('generate').onclick=async()=>{
   if(scriptCharacterCount(text)>scriptCharacterLimit())throw Error('Tối đa '+scriptCharacterLimit().toLocaleString('vi-VN')+' ký tự.');
   if(!voice||voice.ready===false){const message=voice?'Giọng chưa tải model. Bấm Tải model giọng đã chọn, chờ Sẵn sàng rồi tạo lại.':'Chưa có giọng phù hợp. Chọn lại bộ lọc hoặc bấm Chọn giọng AI phù hợp.';$('voice-model-status').textContent=message;throw Error(message);}
   voiceFeedback('Đang gửi yêu cầu tạo giọng…',false,'Đang gửi yêu cầu tạo giọng');
-  const job=await api('/api/speech',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({input_format:$('script-format').value,subtitle_timing:!isHmongStudio()||$('script-format').value!=='srt'||$('create-subtitle-timing').checked,skip_timestamps:$('create-skip-times').checked,text,voice_id:voice.id,language:$('language').value,speed:Number($('speed').value),format:$('format').value,max_minutes:Number($('max-minutes').value),delivery:$('delivery').value,paragraph_pause:Number($('paragraph-pause').value),quality:$('quality').value,nano_steps:Number($('nano-steps').value),nano_threads:Number($('nano-threads').value),nano_parallel:Number($('nano-parallel').value)})});
+  const job=await api('/api/speech',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({input_format:$('script-format').value,subtitle_timing:!isHmongStudio()||$('create-subtitle-timing').checked,skip_timestamps:$('create-skip-times').checked,text,voice_id:voice.id,language:$('language').value,speed:Number($('speed').value),format:$('format').value,max_minutes:Number($('max-minutes').value),delivery:$('delivery').value,paragraph_pause:Number($('paragraph-pause').value),quality:$('quality').value,nano_steps:Number($('nano-steps').value),nano_threads:Number($('nano-threads').value),nano_parallel:Number($('nano-parallel').value)})});
   if(attempt!==voiceAttempt)return;activeOutputId=job.id;setOutput(job);pollJob(job.id);
  }catch(error){if(attempt===voiceAttempt){if(error.field==='text')$('script').focus({preventScroll:true});voiceFeedback(error.message,true,'Chưa tạo được bản thu');}}
  finally{voiceSubmitting=false;$('generate').disabled=false;}
@@ -396,7 +423,7 @@ async function importScript(file,editor,format){
  try{
   const text=await readScriptFileText(file);
   if(scriptCharacterCount(text)>scriptCharacterLimit())throw Error('Tối đa '+scriptCharacterLimit().toLocaleString('vi-VN')+' ký tự.');
-  const kind=file.name.toLowerCase().endsWith('.srt')?'srt':'txt';
+  const kind=file.name.toLowerCase().endsWith('.srt')||(isHmongStudio()&&hasScriptTimeRanges(text))?'srt':'txt';
   if(kind==='srt')await api('/api/scripts/convert',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,input_format:'srt',output_format:'srt'})});
   $(editor).value=text;$(format).value=kind;
   if(editor==='script'){$('script').oninput();updateSubtitleMode();}

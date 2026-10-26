@@ -70,13 +70,39 @@ def test_per_character_snapshots_and_null_fallback(studio):
     {'cue_characters':['girl']},
     {'character_voices':{'girl':'missing'}},
     {'character_voices':{'../x':'hmong-female'},'cue_characters':['../x',None]},
-    {'input_format':'txt'},
+    {'input_format':'txt','text':'Nyob zoo. Ua tsaug.'},
 ])
 def test_invalid_cast_rejected_before_queue(studio,changes):
     client,_,submit=studio
     payload=base(text=SRT,input_format='srt',character_voices={'girl':'hmong-female'},cue_characters=['girl',None])
     payload.update(changes)
     assert client.post('/api/speech',json=payload).status_code==422
+    submit.assert_not_called()
+
+
+def test_txt_caption_cast_keeps_source_and_frozen_per_cue_voices(studio):
+    client,data,submit=studio
+    response=client.post('/api/speech',json=base(text=SRT,input_format='txt',
+        character_voices={'girl':'hmong-female'},cue_characters=['girl',None]))
+    assert response.status_code==202,response.text
+    job=response.json()
+    assert job['input_format']=='srt' and job['source_input_format']=='txt'
+    assert job['subtitle_timing'] is True and job['text']==SRT
+    cast=job['character_cast']
+    assert cast['cues']==['girl',None]
+    assert cast['voices']['girl']['voice_id']=='hmong-female'
+    assert cast['default_voice']['voice_id']=='hmong-male'
+    assert cast['voices']['girl']['hmong_reference_fingerprint']==hmong_assets.reference_fingerprint('hmong-female')
+    assert cast['default_voice']['hmong_reference_fingerprint']==hmong_assets.reference_fingerprint('hmong-male')
+    assert app.read_json(data/'jobs'/f"{job['id']}.json")==job
+    submit.assert_called_once_with(app.run_job,job['id'])
+
+
+def test_txt_caption_cast_still_rejects_wrong_cue_count_before_queue(studio):
+    client,_,submit=studio
+    response=client.post('/api/speech',json=base(text=SRT,input_format='txt',
+        character_voices={'girl':'hmong-female'},cue_characters=['girl']))
+    assert response.status_code==422,response.text
     submit.assert_not_called()
 
 

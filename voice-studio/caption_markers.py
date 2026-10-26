@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import re
+from html import unescape
 
 _PREFIX = re.compile(r'^[ \t\ufeff\u200b\u200e\u200f]+', re.M)
 CLOCK = r'\d{1,5}:\d{2}(?::\d{2})?(?:[,.]\d{1,3})?(?![\d:.,])'
@@ -13,17 +14,31 @@ _RANGE = re.compile(r'^(?P<start>' + _TOKEN + r')\s*(?:-->|->|→|⟶|–>|—>)
 _INDEX = re.compile(r'^\d{1,9}[.)]?\s+(?=[\[\(\"\'“‘]?\d+:)')
 _SETTING = re.compile(r'^\s*(?:align|position|line|size|vertical):[^\s]+(?:\s+|$)', re.I)
 _LEADING = re.compile(r'^\s*(?P<clock>' + _TOKEN + r')(?=\s|$)\s*(?:[-–—|]\s*)?')
+_STYLE_TAG = re.compile(
+    r'</?(?:b|i|u|s|font|span|ruby|rt|rp|c|v|lang)'
+    r'(?:\s[^<>]*|\.[A-Za-z0-9_.-]+)?\s*/?>', re.I)
+_BREAK_TAG = re.compile(r'<br\s*/?>', re.I)
+
+
+def clean_caption_markup(text):
+    """Remove recognized subtitle styling while retaining literal words.
+
+    A blanket ``<...>`` substitution can silently erase dialogue or a
+    comparison. Encoded angle brackets also remain literal text: unescape
+    only after recognizing actual SRT/WebVTT styling tags.
+    """
+    return unescape(_STYLE_TAG.sub('', _BREAK_TAG.sub('\n', text)))
 
 
 def normalize_caption_text(text):
     if not isinstance(text, str):
         raise ValueError('Nội dung phụ đề cần là văn bản.')
     result = _PREFIX.sub('', text.replace('\r\n', '\n').replace('\r', '\n'))
-    # Pasted excerpts are often enclosed in one pair of quotation marks,
+    # Pasted excerpts are often enclosed in one pair of quotes or brackets,
     # starting before the cue index and ending after the last spoken line.
     # Recognize only a numeric caption header, never ordinary quoted prose.
     stripped = result.strip()
-    if '\n' in stripped and stripped[:1] in {'"', "'", '“', '‘'}:
+    if '\n' in stripped and stripped[:1] in _WRAPS:
         opening = stripped[0]
         first = stripped.split('\n', 1)[0][1:].strip()
         header = (re.fullmatch(r'\d{1,9}[.)]?', first)

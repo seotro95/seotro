@@ -160,8 +160,8 @@ def speech_field_feedback(errors):
         'video_offset': 'Thời điểm bắt đầu đọc cần từ 0 đến 10.800 giây.',
         'video_mix': 'Kiểm tra tùy chọn giữ âm thanh gốc.',
         'timeline_seconds': 'Thời lượng video cần lớn hơn 0 và không quá 10.800 giây.',
-        'max_cue_tempo': 'Mức tăng tốc SRT tối đa cần từ 1 đến 2 lần.',
-        'cue_fit': 'Chọn cách căn SRT đúng ô hoặc dùng khoảng trống.',
+        'max_cue_tempo': 'Mức tăng tốc SRT tối đa cần từ 1 đến 4 lần; mức trên 2 chỉ dành cho căn mốc Hmong.',
+        'cue_fit': 'Chọn cách căn SRT đúng ô, tự căn nhịp hoặc dùng khoảng trống.',
         'character_voices': 'Kiểm tra giọng nhân vật; tối đa 32 nhân vật.',
         'cue_characters': 'Kiểm tra nhân vật của từng câu; tối đa 10.000 câu.',
         'caption_style': 'Kiểm tra thiết lập hiển thị phụ đề.',
@@ -340,6 +340,7 @@ def _config_values():
                 'hmong_backend':'native' if engine == 'hmong_native' else 'f5','hmong_engine':engine,
                 'hmong_ready':ready,'hmong_steps':None if engine == 'hmong_native' else 16,
                 'hmong_audio_profile':'clear-v1' if engine == 'hmong_native' else None,
+                'subtitle_timing_default':True,'subtitle_cue_fit':'adaptive','subtitle_max_cue_tempo':4,
                 'paragraph_pause':0,'subtitle_ready':False,
                 'delivery':'story','emotion':'warm','emotion_strength':0.65,'auto_rhythm':False,
                 'hmong_phrase_context':True,
@@ -510,8 +511,8 @@ def delete_voice(ident: str):
 
 
 class Speech(BaseModel):
-    max_cue_tempo: float = Field(default=1.5,ge=1,le=2)
-    cue_fit: str = Field(default='strict',pattern='^(strict|gap)$')
+    max_cue_tempo: float = Field(default=1.5,ge=1,le=4)
+    cue_fit: str = Field(default='strict',pattern='^(strict|gap|adaptive)$')
     timeline_seconds: float = Field(default=10800,gt=0,le=10800)
     caption_style: dict = Field(default_factory=dict)
     text: str = Field(min_length=1, max_length=1_000_000)
@@ -700,6 +701,20 @@ def speech(body: Speech):
         raise HTTPException(422, 'Văn bản vượt giới hạn ký tự của phiên bản này.')
     if IS_HMONG and body.language != 'mww':
         raise HTTPException(422, 'Bản Hmong chỉ đọc Hmong Trắng; chọn ngôn ngữ mww.')
+    source_input_format = body.input_format
+    if IS_HMONG and body.input_format == 'txt' and body.subtitle_timing:
+        # A caption saved with a .txt extension still carries a timeline.
+        # Keep the exact source; a deliberately disabled timeline stays plain
+        # speech. Malformed ranges must reach the SRT parser's precise error.
+        from caption_markers import normalize_caption_text, parse_timing_line, looks_like_timing_line
+        for line in normalize_caption_text(body.text).splitlines():
+            try:
+                detected = parse_timing_line(line) is not None
+            except ValueError:
+                detected = looks_like_timing_line(line)
+            if detected:
+                body.input_format = 'srt'
+                break
     if not body.text.strip() or body.language not in LANGUAGES or body.format not in {'wav', 'mp3'} or body.delivery not in PROFILES:
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
     if body.video_id:
@@ -728,6 +743,13 @@ def speech(body: Speech):
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
     if IS_HMONG and engine in HMONG_ENGINES:
         engine = active_hmong_engine()
+    if engine not in HMONG_ENGINES and (body.cue_fit == 'adaptive' or body.max_cue_tempo > 2):
+        raise HTTPException(422, 'Tự căn nhịp tới 4 lần chỉ hỗ trợ giọng Hmong; giọng khác tối đa 2 lần.')
+    if engine in HMONG_ENGINES and body.input_format == 'srt' and body.subtitle_timing:
+        if 'cue_fit' not in body.model_fields_set:
+            body.cue_fit = 'adaptive'
+        if body.cue_fit == 'adaptive' and 'max_cue_tempo' not in body.model_fields_set:
+            body.max_cue_tempo = 4
     if engine in HMONG_ENGINES:
         voice = {**voice, 'voice_id': voice['id']}
         if not is_preset_voice(voice):
@@ -819,6 +841,10 @@ def speech(body: Speech):
             raise HTTPException(429, 'Hàng đợi đã có 4 tác vụ. Hãy đợi trước khi tạo thêm.')
         ident = uuid.uuid4().hex
         job = {**body.model_dump(), 'text': body.text, 'id': ident, 'voice_name': voice['name'], 'engine': engine, 'speaker': voice.get('speaker'), 'status': 'queued', 'segment_plan': segment_plan, 'total': len(segments), 'completed': 0, 'progress': 0, 'created_at': now()}
+        if source_input_format != body.input_format:
+            job['source_input_format'] = source_input_format
+        if engine in HMONG_ENGINES:
+            job['require_complete_audio'] = True
         if character_cast:
             job['character_cast'] = character_cast
         if voice_snapshot:

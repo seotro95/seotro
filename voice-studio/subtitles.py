@@ -1,8 +1,6 @@
 """Bounded caption parsing and millisecond SRT exports."""
-import re
-from html import unescape
-
-from caption_markers import cue_index_value, normalize_caption_text, parse_timing_line
+from caption_markers import (clean_caption_markup, cue_index_value,
+                             normalize_caption_text, parse_timing_line)
 
 
 def parse_srt(text):
@@ -21,9 +19,17 @@ def parse_srt(text):
     def finish():
         start, end = timing['start'], timing['end']
         lines = ([timing['text']] if timing['text'] else []) + content_lines
-        content = unescape(re.sub(r'<[^>]*>', '', '\n'.join(lines))).strip()
-        if not content or start >= end or end > 10800 or (cues and start < cues[-1]['end']):
-            raise ValueError('SRT: cần lời đọc, mốc tăng dần, không chồng nhau và kết thúc trong 3 giờ.')
+        content = clean_caption_markup('\n'.join(lines)).strip()
+        label = f'SRT: câu {len(cues)+1} ({timestamp(start)} --> {timestamp(end)})'
+        if not content:
+            raise ValueError(label + ' chưa có lời đọc. Thêm nội dung sau dòng mốc thời gian.')
+        if start >= end:
+            raise ValueError(label + ': mốc kết thúc phải lớn hơn mốc bắt đầu.')
+        if end > 10800:
+            raise ValueError(label + ': mốc kết thúc vượt giới hạn 3 giờ (03:00:00,000).')
+        if cues and start < cues[-1]['end']:
+            raise ValueError(label + f' chồng lên câu {len(cues)}; câu trước kết thúc lúc '
+                             f'{timestamp(cues[-1]["end"])}. Sửa mốc bắt đầu hoặc mốc kết thúc của hai câu này.')
         cues.append({'start': start, 'end': end, 'text': content})
         if len(cues) > 10000:
             raise ValueError('SRT tối đa 10.000 câu.')
