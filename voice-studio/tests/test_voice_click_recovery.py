@@ -86,6 +86,9 @@ def click_page(site, *, fail=None, failures=1, hold=None, hmong=True):
 
 def ready(page):
     playwright.expect(page.locator('#voice')).to_have_value('hmong-male')
+    # These cases exercise speech-button recovery, independently of the
+    # workspace's delayed initial navigation on a busy Windows runner.
+    page.locator('.nav-item[data-tab="create"]').click()
     playwright.expect(page.locator('#panel-create')).to_be_visible()
 
 
