@@ -1,0 +1,209 @@
+name: Hmong 0.8.1 Defender diagnostic
+
+on:
+  push:
+    branches:
+      - codex/hmong-defender-audit
+    paths:
+      - .github/workflows/hmong-defender-audit.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hmong-defender-audit
+  cancel-in-progress: false
+
+jobs:
+  scan-pinned-release:
+    runs-on: windows-2022
+    timeout-minutes: 15
+    steps:
+      - name: Enable Defender and scan exact reported files without executing them
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Set-StrictMode -Version Latest
+          $auditStarted = Get-Date
+          $sampleRoot = Join-Path $env:RUNNER_TEMP ('hmong-defender-samples-' + [guid]::NewGuid().ToString('N'))
+          $logRoot = Join-Path $env:RUNNER_TEMP 'hmong-defender-evidence'
+          $null = New-Item -ItemType Directory -Path $sampleRoot, $logRoot -Force
+          $report = [ordered]@{
+            schema_version = 1
+            status = 'inconclusive'
+            notice = 'A scan result is not a Microsoft false-positive determination or a guarantee of safety on another device.'
+            source_commit = '70e9e208b61c6a5c7a846180ee96dec7e7373eda'
+            reported_signature = 'Trojan:Script/Ulthar.A!ml'
+            started_utc = $auditStarted.ToUniversalTime().ToString('o')
+            runner_os = [Environment]::OSVersion.VersionString
+            image_version = $env:ImageVersion
+            samples = @()
+            command_results = @()
+            errors = @()
+            relevant_detections = @()
+            events = @()
+          }
+          $script:mpcmd = $null
+          
+          function Invoke-DefenderCommand {
+            param([string[]]$CommandArguments, [string]$Label, [int]$TimeoutSeconds = 120)
+            $startInfo = [Diagnostics.ProcessStartInfo]::new()
+            $startInfo.FileName = $script:mpcmd
+            $startInfo.UseShellExecute = $false
+            $startInfo.RedirectStandardOutput = $true
+            $startInfo.RedirectStandardError = $true
+            foreach ($argument in $CommandArguments) { $startInfo.ArgumentList.Add($argument) }
+            $process = [Diagnostics.Process]::new()
+            $process.StartInfo = $startInfo
+            $null = $process.Start()
+            $stdoutTask = $process.StandardOutput.ReadToEndAsync()
+            $stderrTask = $process.StandardError.ReadToEndAsync()
+            if (-not $process.WaitForExit($TimeoutSeconds * 1000)) {
+              $process.Kill()
+              throw "Defender command timed out: $Label"
+            }
+            $stdout = $stdoutTask.GetAwaiter().GetResult()
+            $stderr = $stderrTask.GetAwaiter().GetResult()
+            $result = [ordered]@{ label = $Label; arguments = $CommandArguments; exit_code = $process.ExitCode; stdout = $stdout; stderr = $stderr }
+            $report.command_results += $result
+            $result | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $logRoot ($Label + '.json')) -Encoding utf8
+            Write-Host ($result | ConvertTo-Json -Depth 8 -Compress)
+            return $result
+          }
+          
+          function Get-StatusSnapshot {
+            Get-MpComputerStatus | Select-Object AMRunningMode, AMServiceEnabled, AntivirusEnabled, RealTimeProtectionEnabled, IoavProtectionEnabled, BehaviorMonitorEnabled, AMEngineVersion, AMProductVersion, AntivirusSignatureVersion, AntivirusSignatureLastUpdated, AntivirusSignatureAge, IsTamperProtected
+          }
+          
+          function Get-PreferenceSnapshot {
+            Get-MpPreference | Select-Object DisableArchiveScanning, DisableScriptScanning, DisableRealtimeMonitoring, DisableBehaviorMonitoring, DisableIOAVProtection, DisableBlockAtFirstSeen, DisableAutoExclusions, MAPSReporting, SubmitSamplesConsent, ExclusionPath, ExclusionProcess, ExclusionExtension
+          }
+          
+          function Assert-ProtectionReady {
+            $status = Get-StatusSnapshot
+            $prefs = Get-PreferenceSnapshot
+            if ($status.AMRunningMode -ne 'Normal') { throw "Defender is not in Normal mode: $($status.AMRunningMode)" }
+            foreach ($name in @('AMServiceEnabled','AntivirusEnabled','RealTimeProtectionEnabled','IoavProtectionEnabled','BehaviorMonitorEnabled')) {
+              if ($status.$name -ne $true) { throw "Protection is unavailable: $name" }
+            }
+            foreach ($name in @('DisableArchiveScanning','DisableScriptScanning','DisableRealtimeMonitoring','DisableBehaviorMonitoring','DisableIOAVProtection','DisableBlockAtFirstSeen')) {
+              if ($prefs.$name -ne $false) { throw "Required protection remains disabled: $name" }
+            }
+            if ($prefs.DisableAutoExclusions -ne $true) { throw 'Automatic server exclusions are still enabled.' }
+            if ([int]$prefs.MAPSReporting -ne 2) { throw 'Advanced MAPS cloud protection is not enabled.' }
+            foreach ($name in @('ExclusionPath','ExclusionProcess','ExclusionExtension')) {
+              if (@($prefs.$name | Where-Object { $_ }).Count -gt 0) { throw "Exclusions remain: $name" }
+            }
+            if (-not $status.AntivirusSignatureLastUpdated) { throw 'No antivirus signature timestamp.' }
+            $signatureAge = (Get-Date) - $status.AntivirusSignatureLastUpdated
+            if ($signatureAge.TotalDays -gt 2 -or $signatureAge.TotalHours -lt -2) { throw 'Antivirus signature date is stale or invalid.' }
+          }
+          
+          try {
+            # This changes only the disposable GitHub-hosted VM. No application is checked out or run.
+            Import-Module Defender
+            $report.status_before = Get-StatusSnapshot
+            $report.preferences_before = Get-PreferenceSnapshot
+            Start-Service WinDefend
+            Set-MpPreference -DisableArchiveScanning $false -DisableScriptScanning $false -DisableRealtimeMonitoring $false -DisableBehaviorMonitoring $false -DisableIOAVProtection $false -DisableBlockAtFirstSeen $false -DisableAutoExclusions $true -MAPSReporting Advanced -SubmitSamplesConsent SendSafeSamples -ScanAvgCPULoadFactor 50
+            $preferences = Get-MpPreference
+            foreach ($name in @('ExclusionPath','ExclusionProcess','ExclusionExtension')) {
+              $values = @($preferences.$name | Where-Object { $_ })
+              if ($values.Count -gt 0) {
+                $parameters = @{}
+                $parameters[$name] = $values
+                Remove-MpPreference @parameters
+              }
+            }
+            Update-MpSignature -UpdateSource MMPC
+            $report.signature_update_completed = $true
+            Assert-ProtectionReady
+            $report.status_before_download = Get-StatusSnapshot
+            $report.preferences_before_download = Get-PreferenceSnapshot
+          
+            $platformRoot = Join-Path $env:ProgramData 'Microsoft\Windows Defender\Platform'
+            $platforms = @(Get-ChildItem -LiteralPath $platformRoot -Directory -ErrorAction SilentlyContinue | Sort-Object Name -Descending)
+            foreach ($platform in $platforms) {
+              $candidate = Join-Path $platform.FullName 'MpCmdRun.exe'
+              if (Test-Path -LiteralPath $candidate) { $script:mpcmd = $candidate; break }
+            }
+            if (-not $script:mpcmd) { $script:mpcmd = Join-Path $env:ProgramFiles 'Windows Defender\MpCmdRun.exe' }
+            if (-not (Test-Path -LiteralPath $script:mpcmd)) { throw 'MpCmdRun.exe is unavailable.' }
+            $report.scanner_path = $script:mpcmd
+            $signature = Get-AuthenticodeSignature -LiteralPath $script:mpcmd
+            $report.scanner_authenticode_status = [string]$signature.Status
+            if ($signature.Status -ne 'Valid') { throw 'MpCmdRun Authenticode signature is not valid.' }
+            $cloud = Invoke-DefenderCommand -CommandArguments @('-ValidateMapsConnection') -Label 'cloud-connection'
+            if ($cloud.exit_code -ne 0) { throw 'Defender cloud connectivity validation failed.' }
+            $targets = @(
+              @{ name='app.js'; path='hmong-nhanh/app/static/app.js'; bytes=41288; sha256='228237914853428524ad9c81417cbb9601b860127b41c7de19f96275185ece56' },
+              @{ name='index.html'; path='hmong-nhanh/app/static/index.html'; bytes=11080; sha256='ba1257e173ec822b9b358bf04d2683debe86ec6d77b79b34e749612bf1bb463a' },
+              @{ name='Hmong-Nhanh-da-sua.zip'; path='Hmong-Nhanh-da-sua.zip'; bytes=2449762; sha256='6ef5e0c70ffc2bc744575c9d386cb3acf949dd8fce7390d073daea6659eefd24' }
+            )
+            foreach ($target in $targets) {
+              $path = Join-Path $sampleRoot $target.name
+              $sample = [ordered]@{ name=$target.name; expected_sha256=$target.sha256; expected_bytes=$target.bytes; path=$path; download_completed=$false; scan_completed=$false; unchanged_after_scan=$false }
+              $report.samples += $sample
+              try {
+                $url = 'https://raw.githubusercontent.com/seotro95/seotro/' + $report.source_commit + '/' + $target.path
+                $sample.url = $url
+                Invoke-WebRequest -Uri $url -OutFile $path -TimeoutSec 60 -MaximumRedirection 0
+                $sample.download_completed = $true
+                $sample.sha256_before = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant()
+                $sample.bytes_before = (Get-Item -LiteralPath $path).Length
+                if ($sample.sha256_before -ne $target.sha256 -or $sample.bytes_before -ne $target.bytes) { throw 'Downloaded sample does not match the pinned release.' }
+                $exclusion = Invoke-DefenderCommand -CommandArguments @('-CheckExclusion','-Path',$path) -Label ('exclusion-' + $target.name)
+                if ($exclusion.exit_code -ne 1 -or $exclusion.stdout -notmatch 'is not excluded') { throw 'The scanner did not confirm this path is included.' }
+                $scan = Invoke-DefenderCommand -CommandArguments @('-Scan','-ScanType','3','-File',$path) -Label ('scan-' + $target.name)
+                $sample.scan_exit_code = $scan.exit_code
+                $sample.scan_completed = ($scan.exit_code -eq 0 -and $scan.stdout -match 'Scan finished')
+                $sample.scan_output = $scan.stdout
+                $sample.exists_after_scan = Test-Path -LiteralPath $path
+                if ($sample.exists_after_scan) {
+                  $sample.sha256_after = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant()
+                  $sample.unchanged_after_scan = ($sample.sha256_after -eq $target.sha256)
+                }
+                if (-not $sample.scan_completed -or -not $sample.unchanged_after_scan) { throw 'Scan failed, reported a threat, or changed/quarantined the sample; review evidence.' }
+              } catch {
+                $sample.error = $_.Exception.Message
+                $report.errors += ($target.name + ': ' + $_.Exception.Message)
+              }
+            }
+            Assert-ProtectionReady
+          } catch {
+            $report.errors += $_.Exception.Message
+          } finally {
+            # No quarantine restore, allow-listing, encryption, or execution occurs here.
+            Start-Sleep -Seconds 3
+            try { $report.status_after = Get-StatusSnapshot; $report.preferences_after = Get-PreferenceSnapshot } catch { $report.errors += ('Final protection state: ' + $_.Exception.Message) }
+            try {
+              $detections = @(Get-MpThreatDetection)
+              $report.relevant_detections = @($detections | Where-Object { ($_.Resources -join ' ') -like ('*' + $sampleRoot + '*') } | Select-Object DetectionID, ThreatID, InitialDetectionTime, LastThreatStatusChangeTime, ActionSuccess, CleaningActionID, CurrentThreatExecutionStatusID, Resources)
+              $report.new_detections = @($detections | Where-Object { $_.InitialDetectionTime -ge $auditStarted } | Select-Object DetectionID, ThreatID, InitialDetectionTime, ActionSuccess, Resources)
+              $report.threats = @(Get-MpThreat | Select-Object ThreatID, ThreatName, SeverityID, IsActive, DidThreatExecute, Resources)
+            } catch { $report.errors += ('Threat history unavailable: ' + $_.Exception.Message) }
+            try {
+              # Enumerate recent records instead of treating Get-WinEvent's no-match exception as a clean result.
+              $events = @(Get-WinEvent -LogName 'Microsoft-Windows-Windows Defender/Operational' -MaxEvents 400 -ErrorAction Stop | Where-Object { $_.TimeCreated -ge $auditStarted -and $_.Id -in @(1000,1001,1002,1116,1117,1118,1119,2000,2001,5001) })
+              $report.events = @($events | Select-Object TimeCreated, Id, RecordId, Message)
+              $relevantEvents = @($events | Where-Object { $_.Id -in @(1116,1117,1118,1119) -and $_.Message -like ('*' + $sampleRoot + '*') })
+              $report.relevant_threat_event_count = $relevantEvents.Count
+              $scanErrors = @($events | Where-Object { $_.Id -in @(1002,1118,1119,2001,5001) })
+              if ($scanErrors.Count -gt 0) { $report.errors += 'Defender reported an interruption, remediation/update error, or disabled protection during the audit; review events.' }
+            } catch { $report.errors += ('Defender event log unavailable: ' + $_.Exception.Message) }
+            $report.completed_utc = (Get-Date).ToUniversalTime().ToString('o')
+            $hasDetection = $report.relevant_detections.Count -gt 0
+            if ($report.Contains('relevant_threat_event_count')) { $hasDetection = $hasDetection -or $report.relevant_threat_event_count -gt 0 }
+            if ($hasDetection) {
+              $report.status = 'detection_reproduced'
+            } elseif ($report.errors.Count -eq 0 -and $report.samples.Count -eq 3 -and @($report.samples | Where-Object { -not $_.scan_completed -or -not $_.unchanged_after_scan }).Count -eq 0) {
+              $report.status = 'no_detection_in_this_scan'
+            }
+            $json = $report | ConvertTo-Json -Depth 15
+            $json | Set-Content -LiteralPath (Join-Path $logRoot 'defender-report.json') -Encoding utf8
+            Write-Host 'DEFENDER_REPORT_BEGIN'
+            Write-Host $json
+            Write-Host 'DEFENDER_REPORT_END'
+            @('## Defender diagnostic', '', ('Result: **' + $report.status + '**'), '', 'Exact 0.8.1 files only. The tool was never executed. This does not establish a false positive or guarantee safety on the reporting Windows client.', '', 'Full report is between DEFENDER_REPORT_BEGIN and DEFENDER_REPORT_END in the step log.') | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY
+          }
+          if ($report.status -ne 'no_detection_in_this_scan') { exit 1 }
