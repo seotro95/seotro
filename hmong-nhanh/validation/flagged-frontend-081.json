@@ -1,0 +1,55 @@
+{
+  "version": "0.8.1",
+  "published_commit": "70e9e208b61c6a5c7a846180ee96dec7e7373eda",
+  "reported_detection": "Trojan:Script/Ulthar.A!ml",
+  "review_type": "Read-only source/dataflow review, not an antivirus scan",
+  "files": [
+    {
+      "path": "app/static/app.js",
+      "sha256": "228237914853428524ad9c81417cbb9601b860127b41c7de19f96275185ece56",
+      "bytes": 41288,
+      "git_blob": "7cbdb81d80b9f6139b73db783c8a5632241bd776",
+      "zip_and_published_source_match": true
+    },
+    {
+      "path": "app/static/index.html",
+      "sha256": "ba1257e173ec822b9b358bf04d2683debe86ec6d77b79b34e749612bf1bb463a",
+      "bytes": 11080,
+      "git_blob": "91bdf1d6695715e64d880f06edfa524a7d7bc907",
+      "zip_and_published_source_match": true
+    }
+  ],
+  "html_asset_references": [
+    {
+      "tag": "link",
+      "attribute": "href",
+      "value": "/static/style.css"
+    },
+    {
+      "tag": "script",
+      "attribute": "src",
+      "value": "/static/app.js"
+    }
+  ],
+  "inline_event_handlers": [],
+  "script_elements": [
+    {
+      "defer": null,
+      "src": "/static/app.js"
+    }
+  ],
+  "findings": [
+    "No eval/Function/dynamic code injection, HTML parser sinks, encoded payload decoder or external endpoint found.",
+    "One fetch wrapper; every caller supplies a root-relative /api route. Job ids are URL-encoded. Voice id route values originate from server-owned built-in ids or custom-32hex UUIDs.",
+    "User text/files/names/job metadata render with textContent/value/newOption; no innerHTML/document.write use.",
+    "Selected user text files are locally decoded by TextDecoder and placed into textarea; selected voice files are posted only to /api/voices/upload after user click.",
+    "Audio/download job URLs are constructed locally; reference-player src comes from /api/voices/{id}/source generated in app.py line118.",
+    "Only localStorage value is selected voice identifier; no cookies/credential collection or general filesystem access.",
+    "No front-end defect identified that explains the Defender signature."
+  ],
+  "limits": [
+    "Source review cannot determine whether Defender classification is a false positive.",
+    "No product code modified to vary detection signature.",
+    "Same-origin/CSP/Host-Origin guards could be separate hardening, but no evidence they caused this alert."
+  ]
+}

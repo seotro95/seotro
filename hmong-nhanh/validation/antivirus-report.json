@@ -1,10 +1,10 @@
 {
-  "status": "unresolved",
+  "status": "unresolved_on_reporting_device",
   "reported_after_version": "0.8.1",
   "browser_message": "Virus detected",
-  "exact_threat_name": null,
-  "detecting_product": null,
-  "affected_item_path": null,
+  "exact_threat_name": "Trojan:Script/Ulthar.A!ml",
+  "detecting_product": "Microsoft Defender Antivirus",
+  "affected_item_path": "Hmong-Nhanh-da-sua.zip -> Hmong-Nhanh/app/static/{app.js,index.html}",
   "user_machine_artifact_hash": null,
   "published_artifact": {
     "commit": "70e9e208b61c6a5c7a846180ee96dec7e7373eda",
@@ -13,18 +13,57 @@
     "bytes": 2449762
   },
   "warning_cleared": false,
-  "malware_scan_completed": false,
+  "malware_scan_completed": true,
   "actions": [
     "Marked release warning unresolved; removed recommended direct download link from latest release guide.",
-    "Preserved original artifact/hash for investigation; no repackaging or filename change."
+    "Preserved original artifact/hash for investigation; no repackaging or filename change.",
+    "Captured exact detection and affected source files from Protection History screenshot; original release stays unrecommended.",
+    "Prepared isolated Windows scan of pinned files without executing the application.",
+    "Completed native Windows Defender scan of the original ZIP and exact two flagged files; recorded three completed scans and no threats, with hashes unchanged.",
+    "Prepared Microsoft software-developer analysis report; not submitted (account sign-in and submitter review required)."
   ],
   "needed_evidence": [
-    "Detecting antivirus product",
-    "Exact threat name",
-    "Affected-item path including any file inside ZIP"
+    "Affected Windows client's outcome after security intelligence update or a final Microsoft classification determination."
   ],
   "limits": [
-    "Published package integrity is confirmed; this does not establish a false positive.",
-    "No Windows Defender available in this environment; official ClamAV signatures were blocked by managed network policy."
-  ]
+    "Exact original release files were scanned without changing their contents; no detection occurred in this controlled scan.",
+    "Windows Server 2022 with current definitions differs from the reporting client's browser and security environment.",
+    "No execution test or dynamic analysis of the application/dependencies occurred in the scan.",
+    "The reporting device's warning is not verified as cleared, and Microsoft has not classified the submission."
+  ],
+  "severity": "Severe",
+  "remediation_status": "Failed; Remediation incomplete",
+  "evidence_source": "User-supplied Windows Security Protection History screenshot",
+  "affected_files": [
+    {
+      "path": "Hmong-Nhanh/app/static/app.js",
+      "bytes": 41288,
+      "sha256": "228237914853428524ad9c81417cbb9601b860127b41c7de19f96275185ece56"
+    },
+    {
+      "path": "Hmong-Nhanh/app/static/index.html",
+      "bytes": 11080,
+      "sha256": "ba1257e173ec822b9b358bf04d2683debe86ec6d77b79b34e749612bf1bb463a"
+    }
+  ],
+  "reported_download_url": "https://raw.githubusercontent.com/seotro95/seotro/70e9e208b61c6a5c7a846180ee96dec7e7373eda/Hmong-Nhanh-da-sua.zip",
+  "independent_scan": {
+    "status": "no_detection_in_this_scan",
+    "run_url": "https://github.com/seotro95/seotro/actions/runs/40450978700",
+    "workflow_commit": "c5796a94d9c79911de8175c2746d918150b8fa6b",
+    "started_utc": "2026-10-27T04:40:04.2106778Z",
+    "completed_utc": "2026-10-27T04:40:35.6077683Z",
+    "os": "Windows Server 2022 (GitHub-hosted runner)",
+    "engine": "1.1.26090.9",
+    "platform": "4.18.26090.9",
+    "security_intelligence": "1.461.217.0",
+    "files_scanned": 3,
+    "hashes_unchanged": true,
+    "archive_and_script_scanning_enabled": true,
+    "cloud_connection_verified": true,
+    "exclusions_removed": true,
+    "threats_recorded": 0,
+    "errors_recorded": 0,
+    "report": "defender-report-2026-10-27.json"
+  }
 }

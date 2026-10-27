@@ -1,0 +1,289 @@
+{
+  "schema_version": 1,
+  "status": "no_detection_in_this_scan",
+  "notice": "A scan result is not a Microsoft false-positive determination or a guarantee of safety on another device.",
+  "source_commit": "70e9e208b61c6a5c7a846180ee96dec7e7373eda",
+  "reported_signature": "Trojan:Script/Ulthar.A!ml",
+  "started_utc": "2026-10-27T04:40:04.2106778Z",
+  "runner_os": "Microsoft Windows NT 10.0.20348.0",
+  "image_version": "20261022.344.1",
+  "samples": [
+    {
+      "name": "app.js",
+      "expected_sha256": "228237914853428524ad9c81417cbb9601b860127b41c7de19f96275185ece56",
+      "expected_bytes": 41288,
+      "path": "D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\app.js",
+      "download_completed": true,
+      "scan_completed": true,
+      "unchanged_after_scan": true,
+      "url": "https://raw.githubusercontent.com/seotro95/seotro/70e9e208b61c6a5c7a846180ee96dec7e7373eda/hmong-nhanh/app/static/app.js",
+      "sha256_before": "228237914853428524ad9c81417cbb9601b860127b41c7de19f96275185ece56",
+      "bytes_before": 41288,
+      "scan_exit_code": 0,
+      "scan_output": "Scan starting...\r\nScan finished.\r\nScanning D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\app.js found no threats.\r\n",
+      "exists_after_scan": true,
+      "sha256_after": "228237914853428524ad9c81417cbb9601b860127b41c7de19f96275185ece56"
+    },
+    {
+      "name": "index.html",
+      "expected_sha256": "ba1257e173ec822b9b358bf04d2683debe86ec6d77b79b34e749612bf1bb463a",
+      "expected_bytes": 11080,
+      "path": "D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\index.html",
+      "download_completed": true,
+      "scan_completed": true,
+      "unchanged_after_scan": true,
+      "url": "https://raw.githubusercontent.com/seotro95/seotro/70e9e208b61c6a5c7a846180ee96dec7e7373eda/hmong-nhanh/app/static/index.html",
+      "sha256_before": "ba1257e173ec822b9b358bf04d2683debe86ec6d77b79b34e749612bf1bb463a",
+      "bytes_before": 11080,
+      "scan_exit_code": 0,
+      "scan_output": "Scan starting...\r\nScan finished.\r\nScanning D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\index.html found no threats.\r\n",
+      "exists_after_scan": true,
+      "sha256_after": "ba1257e173ec822b9b358bf04d2683debe86ec6d77b79b34e749612bf1bb463a"
+    },
+    {
+      "name": "Hmong-Nhanh-da-sua.zip",
+      "expected_sha256": "6ef5e0c70ffc2bc744575c9d386cb3acf949dd8fce7390d073daea6659eefd24",
+      "expected_bytes": 2449762,
+      "path": "D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\Hmong-Nhanh-da-sua.zip",
+      "download_completed": true,
+      "scan_completed": true,
+      "unchanged_after_scan": true,
+      "url": "https://raw.githubusercontent.com/seotro95/seotro/70e9e208b61c6a5c7a846180ee96dec7e7373eda/Hmong-Nhanh-da-sua.zip",
+      "sha256_before": "6ef5e0c70ffc2bc744575c9d386cb3acf949dd8fce7390d073daea6659eefd24",
+      "bytes_before": 2449762,
+      "scan_exit_code": 0,
+      "scan_output": "Scan starting...\r\nScan finished.\r\nScanning D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\Hmong-Nhanh-da-sua.zip found no threats.\r\n",
+      "exists_after_scan": true,
+      "sha256_after": "6ef5e0c70ffc2bc744575c9d386cb3acf949dd8fce7390d073daea6659eefd24"
+    }
+  ],
+  "command_results": [
+    {
+      "label": "cloud-connection",
+      "arguments": [
+        "-ValidateMapsConnection"
+      ],
+      "exit_code": 0,
+      "stdout": "---------------------------- MpCmdRunShowNetworkInfo() ------------------------------\r\nMpIsConnectedToInternet(): hr = 0, fIsConnectToInternet: true\r\nMpIsPaidNetwork(): hr = 0x1 (0 - S_OK, paid; 1 - S_FALSE, not paid; other - failure)\r\n-------------------------------------------------------------------------------------\r\nLast Successful MAPS connection: [10/27/2026 4:40:15 AM]\r\nValidateMapsConnection successfully established a connection to MAPS\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "exclusion-app.js",
+      "arguments": [
+        "-CheckExclusion",
+        "-Path",
+        "D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\app.js"
+      ],
+      "exit_code": 1,
+      "stdout": "D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\app.js [\\Device\\HarddiskVolume6\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\app.js] is not excluded. Exit code is 1.\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "scan-app.js",
+      "arguments": [
+        "-Scan",
+        "-ScanType",
+        "3",
+        "-File",
+        "D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\app.js"
+      ],
+      "exit_code": 0,
+      "stdout": "Scan starting...\r\nScan finished.\r\nScanning D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\app.js found no threats.\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "exclusion-index.html",
+      "arguments": [
+        "-CheckExclusion",
+        "-Path",
+        "D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\index.html"
+      ],
+      "exit_code": 1,
+      "stdout": "D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\index.html [\\Device\\HarddiskVolume6\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\index.html] is not excluded. Exit code is 1.\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "scan-index.html",
+      "arguments": [
+        "-Scan",
+        "-ScanType",
+        "3",
+        "-File",
+        "D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\index.html"
+      ],
+      "exit_code": 0,
+      "stdout": "Scan starting...\r\nScan finished.\r\nScanning D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\index.html found no threats.\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "exclusion-Hmong-Nhanh-da-sua.zip",
+      "arguments": [
+        "-CheckExclusion",
+        "-Path",
+        "D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\Hmong-Nhanh-da-sua.zip"
+      ],
+      "exit_code": 1,
+      "stdout": "D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\Hmong-Nhanh-da-sua.zip [\\Device\\HarddiskVolume6\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\Hmong-Nhanh-da-sua.zip] is not excluded. Exit code is 1.\r\n",
+      "stderr": ""
+    },
+    {
+      "label": "scan-Hmong-Nhanh-da-sua.zip",
+      "arguments": [
+        "-Scan",
+        "-ScanType",
+        "3",
+        "-File",
+        "D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\Hmong-Nhanh-da-sua.zip"
+      ],
+      "exit_code": 0,
+      "stdout": "Scan starting...\r\nScan finished.\r\nScanning D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\Hmong-Nhanh-da-sua.zip found no threats.\r\n",
+      "stderr": ""
+    }
+  ],
+  "errors": [],
+  "relevant_detections": [],
+  "events": [
+    {
+      "TimeCreated": "2026-10-27T04:40:31.7043426+00:00",
+      "Id": 1001,
+      "RecordId": 434,
+      "Message": "Microsoft Defender Antivirus scan has finished.\r\n \tScan ID: {BE78471A-D7D6-4730-A59D-86584CF920C9}\r\n \tScan Type: Antimalware\r\n \tScan Parameters: Custom Scan\r\n \tUser: runnervma5ucf\\runneradmin\r\n \tScan Time: 0:00:00"
+    },
+    {
+      "TimeCreated": "2026-10-27T04:40:31.4227721+00:00",
+      "Id": 1000,
+      "RecordId": 433,
+      "Message": "Microsoft Defender Antivirus scan has started.\r\n \tScan ID: {BE78471A-D7D6-4730-A59D-86584CF920C9}\r\n \tScan Type: Antimalware\r\n \tScan Parameters: Custom Scan\r\n \tScan Resources: file:_D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\Hmong-Nhanh-da-sua.zip\r\n  \tUser: runnervma5ucf\\runneradmin\r\n \tScan Trigger: On demand\r\n \tScan Only If Idle: Enabled\r\n \tLow CPU Priority for Scans: Disabled\r\n \tThread Priority: 7"
+    },
+    {
+      "TimeCreated": "2026-10-27T04:40:31.243564+00:00",
+      "Id": 1001,
+      "RecordId": 432,
+      "Message": "Microsoft Defender Antivirus scan has finished.\r\n \tScan ID: {E5BB9CC2-50EA-4649-A69F-76DDBBC334D4}\r\n \tScan Type: Antimalware\r\n \tScan Parameters: Custom Scan\r\n \tUser: runnervma5ucf\\runneradmin\r\n \tScan Time: 0:00:00"
+    },
+    {
+      "TimeCreated": "2026-10-27T04:40:31.2327496+00:00",
+      "Id": 1000,
+      "RecordId": 431,
+      "Message": "Microsoft Defender Antivirus scan has started.\r\n \tScan ID: {E5BB9CC2-50EA-4649-A69F-76DDBBC334D4}\r\n \tScan Type: Antimalware\r\n \tScan Parameters: Custom Scan\r\n \tScan Resources: file:_D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\index.html\r\n  \tUser: runnervma5ucf\\runneradmin\r\n \tScan Trigger: On demand\r\n \tScan Only If Idle: Enabled\r\n \tLow CPU Priority for Scans: Disabled\r\n \tThread Priority: 7"
+    },
+    {
+      "TimeCreated": "2026-10-27T04:40:31.0964665+00:00",
+      "Id": 1001,
+      "RecordId": 430,
+      "Message": "Microsoft Defender Antivirus scan has finished.\r\n \tScan ID: {8948F13F-C8EC-4858-932F-8F9B973CDC97}\r\n \tScan Type: Antimalware\r\n \tScan Parameters: Custom Scan\r\n \tUser: runnervma5ucf\\runneradmin\r\n \tScan Time: 0:00:00"
+    },
+    {
+      "TimeCreated": "2026-10-27T04:40:31.0707041+00:00",
+      "Id": 1000,
+      "RecordId": 429,
+      "Message": "Microsoft Defender Antivirus scan has started.\r\n \tScan ID: {8948F13F-C8EC-4858-932F-8F9B973CDC97}\r\n \tScan Type: Antimalware\r\n \tScan Parameters: Custom Scan\r\n \tScan Resources: file:_D:\\a\\_temp\\hmong-defender-samples-46f28ef458ac435e8b5f4af0146c84ac\\app.js\r\n  \tUser: runnervma5ucf\\runneradmin\r\n \tScan Trigger: On demand\r\n \tScan Only If Idle: Enabled\r\n \tLow CPU Priority for Scans: Disabled\r\n \tThread Priority: 7"
+    },
+    {
+      "TimeCreated": "2026-10-27T04:40:29.1607219+00:00",
+      "Id": 2000,
+      "RecordId": 427,
+      "Message": "Microsoft Defender Antivirus security intelligence version updated.\r\n \tCurrent security intelligence Version: 1.461.217.0\r\n \tPrevious security intelligence Version: 1.461.156.0\r\n \tSecurity intelligence Type: AntiSpyware\r\n \tUpdate Type: Delta\r\n \tUser: NT AUTHORITY\\SYSTEM\r\n \tCurrent Engine Version: 1.1.26090.9\r\n \tPrevious Engine Version: 1.1.26090.9"
+    },
+    {
+      "TimeCreated": "2026-10-27T04:40:29.1604074+00:00",
+      "Id": 2000,
+      "RecordId": 426,
+      "Message": "Microsoft Defender Antivirus security intelligence version updated.\r\n \tCurrent security intelligence Version: 1.461.217.0\r\n \tPrevious security intelligence Version: 1.461.156.0\r\n \tSecurity intelligence Type: AntiVirus\r\n \tUpdate Type: Delta\r\n \tUser: NT AUTHORITY\\SYSTEM\r\n \tCurrent Engine Version: 1.1.26090.9\r\n \tPrevious Engine Version: 1.1.26090.9"
+    }
+  ],
+  "status_before": {
+    "AMRunningMode": "Normal",
+    "AMServiceEnabled": true,
+    "AntivirusEnabled": true,
+    "RealTimeProtectionEnabled": false,
+    "IoavProtectionEnabled": false,
+    "BehaviorMonitorEnabled": false,
+    "AMEngineVersion": "1.1.26090.9",
+    "AMProductVersion": "4.18.26090.9",
+    "AntivirusSignatureVersion": "1.461.156.0",
+    "AntivirusSignatureLastUpdated": "2026-10-22T18:40:20+00:00",
+    "AntivirusSignatureAge": 4,
+    "IsTamperProtected": false
+  },
+  "preferences_before": {
+    "DisableArchiveScanning": true,
+    "DisableScriptScanning": true,
+    "DisableRealtimeMonitoring": true,
+    "DisableBehaviorMonitoring": true,
+    "DisableIOAVProtection": true,
+    "DisableBlockAtFirstSeen": true,
+    "DisableAutoExclusions": true,
+    "MAPSReporting": 0,
+    "SubmitSamplesConsent": 2,
+    "ExclusionPath": [
+      "C:\\",
+      "D:\\"
+    ],
+    "ExclusionProcess": null,
+    "ExclusionExtension": null
+  },
+  "signature_update_completed": true,
+  "status_before_download": {
+    "AMRunningMode": "Normal",
+    "AMServiceEnabled": true,
+    "AntivirusEnabled": true,
+    "RealTimeProtectionEnabled": true,
+    "IoavProtectionEnabled": true,
+    "BehaviorMonitorEnabled": true,
+    "AMEngineVersion": "1.1.26090.9",
+    "AMProductVersion": "4.18.26090.9",
+    "AntivirusSignatureVersion": "1.461.217.0",
+    "AntivirusSignatureLastUpdated": "2026-10-26T16:57:49+00:00",
+    "AntivirusSignatureAge": 0,
+    "IsTamperProtected": false
+  },
+  "preferences_before_download": {
+    "DisableArchiveScanning": false,
+    "DisableScriptScanning": false,
+    "DisableRealtimeMonitoring": false,
+    "DisableBehaviorMonitoring": false,
+    "DisableIOAVProtection": false,
+    "DisableBlockAtFirstSeen": false,
+    "DisableAutoExclusions": true,
+    "MAPSReporting": 2,
+    "SubmitSamplesConsent": 1,
+    "ExclusionPath": null,
+    "ExclusionProcess": null,
+    "ExclusionExtension": null
+  },
+  "scanner_path": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\CurrentVersion\\MpCmdRun.exe",
+  "scanner_authenticode_status": "Valid",
+  "status_after": {
+    "AMRunningMode": "Normal",
+    "AMServiceEnabled": true,
+    "AntivirusEnabled": true,
+    "RealTimeProtectionEnabled": true,
+    "IoavProtectionEnabled": true,
+    "BehaviorMonitorEnabled": true,
+    "AMEngineVersion": "1.1.26090.9",
+    "AMProductVersion": "4.18.26090.9",
+    "AntivirusSignatureVersion": "1.461.217.0",
+    "AntivirusSignatureLastUpdated": "2026-10-26T16:57:49+00:00",
+    "AntivirusSignatureAge": 0,
+    "IsTamperProtected": false
+  },
+  "preferences_after": {
+    "DisableArchiveScanning": false,
+    "DisableScriptScanning": false,
+    "DisableRealtimeMonitoring": false,
+    "DisableBehaviorMonitoring": false,
+    "DisableIOAVProtection": false,
+    "DisableBlockAtFirstSeen": false,
+    "DisableAutoExclusions": true,
+    "MAPSReporting": 2,
+    "SubmitSamplesConsent": 1,
+    "ExclusionPath": null,
+    "ExclusionProcess": null,
+    "ExclusionExtension": null
+  },
+  "new_detections": [],
+  "threats": [],
+  "relevant_threat_event_count": 0,
+  "completed_utc": "2026-10-27T04:40:35.6077683Z"
+}

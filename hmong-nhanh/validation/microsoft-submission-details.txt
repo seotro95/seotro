@@ -1,0 +1,11 @@
+Please review Trojan:Script/Ulthar.A!ml on the public JavaScript/HTML UI of Hmong Nhanh 0.8.1, a local Hmong text-to-speech app. A user's ZIP download is blocked. Windows Security shows Severe, Remediation incomplete, Status: Failed, and identifies Hmong-Nhanh/app/static/app.js and Hmong-Nhanh/app/static/index.html. No application execution was reported.
+
+Exact public release identified in the screenshot:
+https://raw.githubusercontent.com/seotro95/seotro/70e9e208b61c6a5c7a846180ee96dec7e7373eda/Hmong-Nhanh-da-sua.zip
+ZIP SHA256: 6ef5e0c70ffc2bc744575c9d386cb3acf949dd8fce7390d073daea6659eefd24
+app.js SHA256: 228237914853428524ad9c81417cbb9601b860127b41c7de19f96275185ece56
+index.html SHA256: ba1257e173ec822b9b358bf04d2683debe86ec6d77b79b34e749612bf1bb463a
+
+A controlled Windows Server 2022 Defender scan on 2026-10-27 found no threats in these three exact samples. Engine: 1.1.26090.9; platform: 4.18.26090.9; definitions: 1.461.217.0. Archive/script/realtime/download scanning and cloud protection were enabled; sample paths were verified not excluded. Each custom scan completed with no threats; all file hashes remained unchanged and no relevant threat history/events appeared. Logs: https://github.com/seotro95/seotro/actions/runs/40450978700
+
+This did not reproduce the user's client/browser download flow and is not a false-positive determination. Their engine/signature versions and downloaded-file hash are unknown; their alert remains unresolved. Static review found no dynamic code execution, shell commands, credential collection or external telemetry endpoint in the two UI files; they call root-relative local /api routes. Please determine the correct classification and any actionable issue. No application files were modified to vary the detection, and no user protection bypass was recommended.
