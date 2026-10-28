@@ -141,6 +141,8 @@ def copy_source(root):
     shutil.copy2(SOURCE/'packaging/MO_TOOL.bat', root/'MO_TOOL.bat')
     shutil.copy2(SOURCE/'packaging/benchmarks/voxcpm-cpu-short-samples.qa.json',
                  root/'CPU-SHORT-SPEECH-BENCHMARK.json')
+    shutil.copy2(SOURCE/'packaging/benchmarks/nano-srt-short-samples.qa.json',
+                 root/'CPU-SRT-SHORT-SAMPLES.json')
 
 
 def copy_runtime(destination):
@@ -247,7 +249,8 @@ Chon WAV de dung video; cau bi ep qua nhanh van can nghe kiem tra.
 Co che do Nhanh/Can bang/Chat luong va kiem tra cau hinh may, do toc do mau.
 Ho tro toi da 32 tac vu Nano/Turbo, tu do va luu cau hinh rieng cho moi bo giong.
 Mai Anh/Turbo ho tro nhieu tac vu, giu FP32 tren CPU thieu VNNI.
-SRT tao va can tung cau song song, ghep lai dung thu tu va moc goc.
+SRT dung FFmpeg tao va can song song; WSOLA giu duong xu ly nhanh hien co.
+Ghep lai dung thu tu va moc goc.
 Bo giong quoc te co Nhanh4/Can bang8/Chat luong10 buoc, tai dung mau giong.
 Vox CPU chi tinh attention tren cache da co du lieu, giu nguyen trong so.
 Cau hinh quoc te du tru 16 GiB/model va toi da 8 tien trinh; do bang loi that.
@@ -331,7 +334,8 @@ def main():
                 'bundled_runtime': True, 'bundled_model_weights': True,
                 'optional_international_engine': 'voxcpm2', 'international_runtime_bundled': False,
                 'private_voice_library_bundled': False, 'native_windows_offline_smoke': 'passed',
-                'parallel_srt_cue_preparation': True, 'international_active_kv_attention': 'guarded-v2.0.3-cpu-fp32',
+                'parallel_srt_cue_preparation': True, 'parallel_srt_auto_fit_backend': 'ffmpeg',
+                'international_active_kv_attention': 'guarded-v2.0.3-cpu-fp32',
                 'international_reference_cache': True, 'target_30x_guaranteed': False,
                 'verified_base_sha256': args.base_sha256 if args.base_archive else None}
     metadata['native_qa'] = json.loads((root/'PORTABLE-QA.json').read_text(encoding='utf-8'))

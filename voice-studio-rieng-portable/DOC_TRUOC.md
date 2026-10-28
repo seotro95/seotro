@@ -14,7 +14,7 @@ Ví dụ `00:27:20,519 --> 00:27:23,671` có ô lời dài **3,152 giây**. Nế
 
 Bản 1.8 giữ giọng đang chọn và ghi nhớ chế độ tốc độ, ngôn ngữ cùng cấu hình CPU. Chọn **Ưu tiên tốc độ**, nghe mẫu và bấm **Đo tốc độ** để kiểm tra kết quả thực trên máy bạn. Bộ đo dùng câu thử đúng ngôn ngữ của giọng Việt/Anh và giọng mẫu quốc tế.
 
-Câu SRT được tạo và căn trong nhiều tiến trình; bước xuất cuối vẫn ghép theo thứ tự mốc gốc. Các mảnh đã xong được giữ để tiếp tục, và bản thu chỉ hoàn tất khi đủ lời, đủ câu và đúng timeline.
+Với bộ căn FFmpeg, nhiều câu SRT được tạo và căn đồng thời; WSOLA giữ đường xử lý nhanh hiện có. Bước xuất cuối ghép theo thứ tự mốc gốc. Các mảnh đã xong được giữ để tiếp tục, và bản thu chỉ hoàn tất khi đủ lời, đủ câu và đúng timeline.
 
 Bộ giọng quốc tế dùng lại phần mã hóa mẫu, tránh xử lý lại cùng bản thu ở mỗi câu. Với đúng VoxCPM 2.0.3 trên CPU FP32, attention chỉ đọc phần cache đã có dữ liệu; phép tính và trọng số được giữ nguyên. **Nhanh** dùng 4 bước, **Cân bằng** 8 bước và **Chất lượng** 10 bước. Giảm số bước có thể thay đổi phát âm và sắc thái; hãy nghe mẫu trước bản dài.
 

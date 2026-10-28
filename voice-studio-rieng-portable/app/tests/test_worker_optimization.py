@@ -237,10 +237,35 @@ def test_single_multichunk_cue_loads_only_one_model(worker,tmp_path,monkeypatch)
     monkeypatch.setattr(worker,'get_synthesizer',lambda job:native)
     text='1\n00:00:00,000 --> 00:00:01,000\nLời đầu.\nLời sau.'
     job={'id':'single','text':text,'input_format':'srt','engine':'voxcpm','format':'wav','speed':1,
-         'nano_parallel':8,'nano_threads':3,'voxcpm_steps':4,'cue_fit':'auto','audio_fit_backend':'wsola'}
+         'nano_parallel':8,'nano_threads':3,'voxcpm_steps':4,'cue_fit':'auto','audio_fit_backend':'ffmpeg'}
     worker.render(job)
     result=json.loads((tmp_path/'parts/single/result.json').read_text())
     assert result['completed']==2
     assert result['execution_settings']['workers']==1
     assert result['execution_settings']['threads']==3
     assert result['execution_settings']['voxcpm_steps']==4
+
+
+def test_wsola_single_multichunk_cue_uses_chunk_workers_and_keeps_pcm_order(worker,tmp_path,monkeypatch):
+    from concurrent.futures import ThreadPoolExecutor
+    executors=[]
+    def executor(max_workers,**kwargs):
+        executors.append(max_workers)
+        return ThreadPoolExecutor(max_workers=max_workers)
+    def native(text,path):
+        write_pcm(path,tones([220 if 'đầu' in text else 440],.7))
+    monkeypatch.setattr(worker,'ProcessPoolExecutor',executor)
+    monkeypatch.setattr(worker,'get_synthesizer',lambda job:native)
+    text='1\n00:00:00,000 --> 00:00:01,000\nLời đầu.\nLời sau.'
+    settings={'text':text,'input_format':'srt','engine':'vieneu','format':'wav','speed':1,
+              'nano_threads':1,'cue_fit':'auto','audio_fit_backend':'wsola'}
+    worker.render({**settings,'id':'one-model','nano_parallel':1})
+    worker.render({**settings,'id':'two-models','nano_parallel':2})
+    assert executors==[2]
+    assert (tmp_path/'audio/one-model.wav').read_bytes()==(tmp_path/'audio/two-models.wav').read_bytes()
+    result=json.loads((tmp_path/'parts/two-models/result.json').read_text())
+    assert result['completed']==2 and result['audio_seconds']==1
+    assert result['execution_settings']['workers']==2
+    assert result['execution_settings']['cue_fit_pipeline']=='serial'
+    assert json.loads((tmp_path/'parts/two-models/alignment.json').read_text())['sync_ok']
+    worker.close_nano_pool()

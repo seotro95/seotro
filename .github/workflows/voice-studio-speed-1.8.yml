@@ -234,6 +234,7 @@ jobs:
           Copy-Item -LiteralPath "${{ runner.temp }}/password-paste-windows-qa.json" -Destination "${{ runner.temp }}/github-download/Windows-Password-Paste.qa.json"
           Copy-Item -LiteralPath "${{ runner.temp }}/international-acceleration.qa.json" -Destination "${{ runner.temp }}/github-download/Windows-International-Acceleration.qa.json"
           Copy-Item -LiteralPath "voice-studio-rieng-portable/packaging/benchmarks/voxcpm-cpu-short-samples.qa.json" -Destination "${{ runner.temp }}/github-download/Linux-International-Short-Speech.qa.json"
+          Copy-Item -LiteralPath "voice-studio-rieng-portable/packaging/benchmarks/nano-srt-short-samples.qa.json" -Destination "${{ runner.temp }}/github-download/Linux-Nano-SRT-Short-Samples.qa.json"
       - name: Upload single full archive and measured QA
         uses: actions/upload-artifact@v4
         with:
@@ -255,7 +256,7 @@ jobs:
           Voice Studio Riêng 1.8.0 - bản Windows đầy đủ, tối ưu tốc độ cho tất cả bộ giọng.
 
           Tải duy nhất ZIP Voice-Studio-Rieng-1.8.0-19-Giong-GitHub-Windows-x64.zip và giải nén TOÀN BỘ vào thư mục mới. Chạy CAI_19_GIONG.bat, dùng nút Dán để nhập mật khẩu đã gửi riêng trong chat, sau đó mở MO_TOOL.bat. Không chạy trực tiếp trong cửa sổ xem ZIP. Bước cài giọng giữ nguyên mã ứng dụng 1.8, lịch sử và model.
-          Bản này ghi nhớ chế độ tốc độ, xử lý và căn câu SRT đồng thời, giữ thứ tự và các mốc gốc, dùng lại mã hóa mẫu giọng quốc tế và chỉ tính attention trên cache đã có dữ liệu. Bộ quốc tế có cấu hình 4/8/10 bước và giới hạn số model theo lõi vật lý/RAM; không tự đổi giọng để đạt số đo. Giảm số bước có thể thay đổi phát âm và sắc thái, cần nghe thử trước bản dài.
+          Bản này ghi nhớ chế độ tốc độ, xử lý và căn câu SRT đồng thời khi dùng FFmpeg, giữ đường xử lý nhanh hiện có của WSOLA và giữ thứ tự cùng các mốc gốc. Giọng quốc tế dùng lại mã hóa mẫu và chỉ tính attention trên cache đã có dữ liệu. Bộ quốc tế có cấu hình 4/8/10 bước và giới hạn số model theo lõi vật lý/RAM; không tự đổi giọng để đạt số đo. Giảm số bước có thể thay đổi phát âm và sắc thái, cần nghe thử trước bản dài.
           Bao gồm Python Windows, FFmpeg và model Việt/Anh; bộ 19 giọng riêng chỉ được công khai ở dạng mã hóa. Mật khẩu không nằm trên GitHub hoặc trong ZIP. Giọng quốc tế cần chạy TAI_GIONG_DA_NGON_NGU.bat một lần có Internet để tải khoảng 5 GB model cùng thư viện CPU riêng. Model quốc tế không nằm trong ZIP.
           Quy trình phát hành kiểm tra Windows PowerShell 5.1 bằng dữ liệu giả, kiểm tra mở bộ giọng cũ không làm hạ phiên bản ứng dụng, tạo lời Nano/Turbo ngoại tuyến trong thư mục di chuyển có dấu, xuất WAV/MP3/TXT/SRT, căn đúng ô 0.900 giây và kiểm tra tương đương attention bằng tensor nhỏ trong runtime Torch CPU riêng. Bản thu riêng và mật khẩu riêng không được giải mã trên GitHub Actions.
           Kết quả đo Nano/Turbo thực trên máy GitHub nằm trong Windows-Portable.qa.json, loại thời gian im lặng khỏi chỉ số tốc độ. Mẫu ngắn chỉ cho ước tính; chưa bảo đảm 2 phút cho 1 giờ voice trên mọi máy hoặc mọi giọng. Chọn Ưu tiên tốc độ và Đo tốc độ để kiểm tra trực tiếp trên máy đang dùng. Cảm xúc và độ giống mẫu cần nghe kiểm tra.

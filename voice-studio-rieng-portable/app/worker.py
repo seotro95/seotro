@@ -419,10 +419,17 @@ def render(job, synthesize=None):
         raise ValueError('Không có nội dung đọc sau khi xử lý ký hiệu nhấn/nghỉ.')
     cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
     parallel_workers=min(8 if job.get('engine')=='voxcpm' else 32,max(1,int(job.get('nano_parallel',1)))) if job.get('engine') in {'vieneu_nano','vieneu','voxcpm'} and synthesize is None else 1
-    # A complete SRT cue is one task, even when it contains several TTS chunks.
-    # Do not load additional models that cannot receive any work.
-    parallel_workers=min(parallel_workers,len(cues) if cues else sum(bool(s.text) for s in segments))
+    # WSOLA is inexpensive enough to overlap in the assembling process while
+    # model workers synthesize upcoming chunks. Moving it into those workers
+    # competes with TTS and adds fitted-cache I/O for every short subtitle.
+    # Parallelize whole cues only for the slower FFmpeg fitting paths.
+    whole_cue_eligible=bool(cues and
+                            (job.get('audio_fit_backend','ffmpeg')=='ffmpeg' or job.get('cue_fit')!='auto'))
+    # Whole-cue jobs can use at most one model per cue; the fast WSOLA chunk
+    # pipeline can use several models even within a single long subtitle.
+    parallel_workers=min(parallel_workers,len(cues) if whole_cue_eligible else sum(bool(s.text) for s in segments))
     parallel=parallel_workers>1
+    parallel_cue_fit=whole_cue_eligible and parallel
     if job.get('engine')=='voxcpm':
         # A VoxCPM child keeps the same weights for all reference voices and
         # step counts. Each submitted job still selects its own closure and
@@ -465,9 +472,8 @@ def render(job, synthesize=None):
     progress_limit = 90
     try:
         remaining_segments = segments
-        if cues and parallel:
-            # The same bounded workers now fit complete cues too. FFmpeg/WSOLA
-            # no longer form a serial queue behind otherwise parallel TTS.
+        if parallel_cue_fit:
+            # FFmpeg fitting can proceed concurrently in complete-cue tasks.
             _nano_pool_key = pool_key
             completed, spoken_audio_frames, alignment = _render_parallel_cues(
                 job, segments, cues, work, writer, parallel_workers)
@@ -605,6 +611,7 @@ def render(job, synthesize=None):
     fit_warning_cues=[c['cue'] for c in alignment if c.get('warning')=='fast_tempo']
     execution={'engine':job.get('engine'),'workers':parallel_workers,
                'worker_budget':parallel_workers,'threads':job.get('nano_threads',2),'blas_threads':1}
+    if cues:execution['cue_fit_pipeline']='parallel' if parallel_cue_fit else 'serial'
     if job.get('engine')=='vieneu':execution['precision']='int8' if job.get('quality')=='fast' else 'fp32'
     if job.get('engine')=='vieneu_nano':execution['nano_steps']=job.get('nano_steps',8)
     if job.get('engine')=='voxcpm':execution.update(threads=max(1,min(8,int(job.get('nano_threads',4)))),precision='fp32',voxcpm_steps=job.get('voxcpm_steps',8))

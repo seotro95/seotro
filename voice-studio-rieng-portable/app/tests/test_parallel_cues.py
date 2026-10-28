@@ -42,7 +42,7 @@ def job(ident='parallel', **settings):
                     '2\n00:00:01,500 --> 00:00:02,000\nCâu sau.',
             'input_format': 'srt', 'format': 'wav', 'speed': 1,
             'nano_parallel': 2, 'nano_threads': 1, 'nano_steps': 4,
-            'cue_fit': 'auto', 'max_cue_tempo': 1.5, 'audio_fit_backend': 'wsola',
+            'cue_fit': 'auto', 'max_cue_tempo': 1.5, 'audio_fit_backend': 'ffmpeg',
             'delivery': 'natural', 'paragraph_pause': 0, **settings}
 
 
@@ -89,6 +89,26 @@ def test_fit_runs_in_parallel_but_pcm_and_original_cues_stay_ordered(renderer, m
     assert alignment['sync_ok'] and [c['spoken_start'] for c in alignment['cues']] == [.25, 1.5]
     assert result['completed'] == result['total'] == 2
     assert result['spoken_audio_seconds'] <= 1
+    assert result['execution_settings']['cue_fit_pipeline'] == 'parallel'
+
+
+def test_wsola_auto_overlaps_main_process_fitting_with_chunk_workers(renderer, monkeypatch):
+    worker, data, calls = renderer
+    fit = worker.fit_cue_audio
+    fitting_threads = set()
+    def main_fit(*args, **kwargs):
+        fitting_threads.add(threading.get_ident())
+        return fit(*args, **kwargs)
+    def unexpected(*args, **kwargs):
+        pytest.fail('Fast automatic WSOLA must use chunk prefetch and main-process fitting.')
+    monkeypatch.setattr(worker, 'fit_cue_audio', main_fit)
+    monkeypatch.setattr(worker, 'prepare_cue', unexpected)
+    worker.render(job('wsola-fast', audio_fit_backend='wsola'))
+    assert fitting_threads == {threading.get_ident()} and len(calls) == 2
+    result = json.loads((data/'parts/wsola-fast/result.json').read_text())
+    assert result['execution_settings']['cue_fit_pipeline'] == 'serial'
+    assert len(read_pcm(data/'audio/wsola-fast.wav')) == 2*RATE
+    assert json.loads((data/'parts/wsola-fast/alignment.json').read_text())['sync_ok']
 
 
 @pytest.mark.parametrize('backend', ['wsola', 'ffmpeg'])
@@ -105,6 +125,7 @@ def test_parallel_matches_sequential_timeline_and_complete_cue_chunks(renderer, 
     assert parse_srt((data/'audio/concurrent.srt').read_text()) == parse_srt(text)
     result = json.loads((data/'parts/concurrent/result.json').read_text())
     assert result['completed'] == result['total'] == 3
+    assert result['execution_settings']['cue_fit_pipeline'] == ('serial' if backend == 'wsola' else 'parallel')
     alignment = json.loads((data/'parts/concurrent/alignment.json').read_text())
     assert alignment['sync_ok'] and len(alignment['cues']) == 2
 
