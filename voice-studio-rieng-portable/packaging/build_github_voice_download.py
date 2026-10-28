@@ -66,7 +66,7 @@ UPDATE_README = '''VOICE STUDIO RIÊNG - CẬP NHẬT 19 GIỌNG TỪ GITHUB
 
 Gói mã hóa bảo vệ bản thu riêng khi tải qua GitHub; mật khẩu không nằm trên
 GitHub và không được lưu trong ZIP. Hãy giữ lại mật khẩu.
-Lịch sử, model và các giọng cá nhân đang có được giữ lại; tệp thay thế có bản sao lưu.
+Gói này chỉ mở thư viện giọng trong bản Portable đang dùng; không thay mã ứng dụng bằng bản cũ. Dùng ZIP đầy đủ mới khi muốn nâng cấp ứng dụng. Lịch sử, model và giọng cá nhân đang có được giữ lại.
 
 Ba giọng tiếng Anh dùng Turbo đi kèm bản Portable đầy đủ. Các giọng Hàn, Nga,
 Nhật, Pháp, Tây Ban Nha và Thái cần chạy TAI_GIONG_DA_NGON_NGU.bat một lần
@@ -175,13 +175,14 @@ def _new_entry(name, size, root=ROOT):
     return entry
 
 
-def build_bundle(base_archive, delivery, output, expected_base=BASE_SHA256):
+def build_bundle(base_archive, delivery, output, expected_base=BASE_SHA256,
+                 base_root=BASE_ROOT, root_name=ROOT, expected_version='1.7.0'):
     base_archive, delivery, output = Path(base_archive), Path(delivery), Path(output)
     if not base_archive.is_file() or sha256(base_archive) != expected_base:
         raise ValueError('Public Windows base SHA256 mismatch; refusing to package')
     manifest = verify_delivery(delivery)
     output.mkdir(parents=True, exist_ok=True)
-    destination = output/FILENAME
+    destination = output/(root_name+'-Windows-x64.zip')
     if destination.exists():
         raise ValueError('Refusing to overwrite an existing GitHub package')
     pending = destination.with_name(destination.name+'.partial')
@@ -193,14 +194,14 @@ def build_bundle(base_archive, delivery, output, expected_base=BASE_SHA256):
             old_names = {entry.filename for entry in entries}
             if len(old_names) != len(entries):
                 raise ValueError('Duplicate names in public Windows base')
-            build = json.loads(original.read(BASE_ROOT+'/BUILD_INFO.json'))
-            if build.get('version') != '1.7.0' or not build.get('bundled_runtime'):
+            build = json.loads(original.read(base_root+'/BUILD_INFO.json'))
+            if build.get('version') != expected_version or not build.get('bundled_runtime'):
                 raise ValueError('Unexpected Windows base version/runtime')
             required = {'runtime/python.exe', 'app/app.py', 'MO_TOOL.bat',
                         'TAI_GIONG_DA_NGON_NGU.bat'}
             for entry in entries:
                 path = safe_path(entry.filename)
-                if path.parts[0] != BASE_ROOT:
+                if path.parts[0] != base_root:
                     raise ValueError('Unexpected public Windows base root')
                 if entry.is_dir():
                     continue
@@ -217,7 +218,7 @@ def build_bundle(base_archive, delivery, output, expected_base=BASE_SHA256):
                 if relative in DELIVERY_FILES or relative == 'README_GITHUB_19_GIONG.txt':
                     raise ValueError('Base conflicts with encrypted delivery files')
                 digest = hashlib.sha256()
-                new = _new_entry(relative, entry.file_size)
+                new = _new_entry(relative, entry.file_size, root_name)
                 with original.open(entry) as source, target.open(new, 'w', force_zip64=True) as sink:
                     for block in iter(lambda: source.read(BLOCK), b''):
                         digest.update(block)
@@ -229,20 +230,20 @@ def build_bundle(base_archive, delivery, output, expected_base=BASE_SHA256):
             build.update(encrypted_private_pack_bundled=True, private_voice_library_bundled=False,
                          encrypted_private_voice_count=19, private_voice_unlock_required=True,
                          github_delivery_source_commit=os.environ.get('GITHUB_SHA'),
-                         verified_public_1_7_base_sha256=expected_base,
+                         verified_public_base_sha256=expected_base,
                          private_delivery_format=manifest['format'],
                          private_delivery_plaintext_published=False)
             additional = {'BUILD_INFO.json': (json.dumps(build, ensure_ascii=False, indent=2)+'\n').encode(),
-                          'README_GITHUB_19_GIONG.txt': README.encode('utf-8')}
+                          'README_GITHUB_19_GIONG.txt': README.replace('1.7.0', expected_version).replace('bản 1.7', 'bản '+expected_version.rsplit('.', 1)[0]).encode('utf-8')}
             for relative in DELIVERY_FILES:
                 file = delivery/relative
                 content = file.read_bytes()
                 additional[relative] = content
             for relative, content in additional.items():
-                target.writestr(_new_entry(relative, len(content)), content)
+                target.writestr(_new_entry(relative, len(content), root_name), content)
                 hashes[relative] = hashlib.sha256(content).hexdigest()
             checksums = ''.join(digest+'  '+name+'\n' for name, digest in sorted(hashes.items())).encode()
-            target.writestr(_new_entry('MANIFEST.sha256', len(checksums)), checksums)
+            target.writestr(_new_entry('MANIFEST.sha256', len(checksums), root_name), checksums)
         with zipfile.ZipFile(pending) as checked:
             if checked.testzip() is not None:
                 raise ValueError('GitHub bundle ZIP CRC check failed')
@@ -260,7 +261,8 @@ def build_bundle(base_archive, delivery, output, expected_base=BASE_SHA256):
               'verified_base_sha256': expected_base, 'reused_base_files': reused,
               'encrypted_voice_count': 19, 'plaintext_voice_files_published': False,
               'password_included': False, 'user_unlock_required': True,
-              'windows_ps_crypto_test': 'required by publishing workflow; recorded separately'}
+              'windows_ps_crypto_test': 'required by publishing workflow; recorded separately',
+              'voice_unlock_preserves_current_application': True}
     destination.with_suffix('.qa.json').write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8')
     print(json.dumps(report), flush=True)
     return destination
@@ -373,6 +375,29 @@ class BuilderTests(unittest.TestCase):
                 for line in archive.read(ROOT+'/MANIFEST.sha256').decode().splitlines():
                     expected, name = line.split('  ', 1)
                     self.assertEqual(hashlib.sha256(archive.read(ROOT+'/'+name)).hexdigest(), expected)
+            # A newly built release must keep its new source and metadata while
+            # using the same encrypted legacy reference packet.
+            current_base = directory/'base-1.8.zip'
+            current_root = 'Voice-Studio-Rieng-1.8.0-Portable'
+            current_full = 'Voice-Studio-Rieng-1.8.0-19-Giong-GitHub'
+            with zipfile.ZipFile(base) as original, zipfile.ZipFile(current_base, 'w') as current:
+                for entry in original.infolist():
+                    relative = entry.filename[len(BASE_ROOT)+1:]
+                    content = original.read(entry)
+                    if relative == 'BUILD_INFO.json':
+                        content = json.dumps({'version': '1.8.0', 'bundled_runtime': True}).encode()
+                    current.writestr(current_root+'/'+relative, content)
+                current.writestr(current_root+'/app/voxcpm_acceleration.py', b'new acceleration module')
+            full = build_bundle(current_base, delivery, directory/'current-output',
+                                sha256(current_base), current_root, current_full, '1.8.0')
+            with zipfile.ZipFile(full) as archive:
+                self.assertEqual(archive.read(current_full+'/app/voxcpm_acceleration.py'), b'new acceleration module')
+                self.assertEqual(json.loads(archive.read(current_full+'/BUILD_INFO.json'))['version'], '1.8.0')
+                self.assertEqual(archive.read(current_full+'/delivery/voices.vspack'), encrypted)
+                self.assertIn('bản 1.8', archive.read(current_full+'/README_GITHUB_19_GIONG.txt').decode())
+            with self.assertRaisesRegex(ValueError, 'version/runtime'):
+                build_bundle(current_base, delivery, directory/'bad-version', sha256(current_base),
+                             current_root, current_full, '1.7.0')
             update = build_update(delivery, directory/'output')
             with zipfile.ZipFile(update) as archive:
                 self.assertEqual(archive.read(UPDATE_ROOT+'/delivery/voices.vspack'), encrypted)
@@ -402,6 +427,11 @@ def main():
     parser.add_argument('--base-archive', type=Path)
     parser.add_argument('--delivery-dir', type=Path, default=Path(__file__).with_name('github-delivery'))
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--base-sha256', default=BASE_SHA256)
+    parser.add_argument('--base-root', default=BASE_ROOT)
+    parser.add_argument('--version', default='1.7.0')
+    parser.add_argument('--bundle-root', default=ROOT)
+    parser.add_argument('--full-only', action='store_true')
     parser.add_argument('--self-test', action='store_true')
     args = parser.parse_args()
     if args.self_test:
@@ -410,11 +440,16 @@ def main():
     if not args.output:
         parser.error('--output is required')
     base = args.base_archive or args.output.parent/'verified-public-base.zip'
-    build_repair(args.delivery_dir, args.output)
+    if args.version != '1.7.0' and not args.base_archive:
+        parser.error('A new version requires its checksum-verified native Windows base')
+    if not args.full_only:
+        build_repair(args.delivery_dir, args.output)
     if not args.base_archive:
         download_base(base)
-    build_bundle(base, args.delivery_dir, args.output)
-    build_update(args.delivery_dir, args.output)
+    build_bundle(base, args.delivery_dir, args.output, args.base_sha256,
+                 args.base_root, args.bundle_root, args.version)
+    if not args.full_only:
+        build_update(args.delivery_dir, args.output)
 
 
 if __name__ == '__main__':

@@ -43,21 +43,23 @@ def test_mode_defaults_and_explicit_tuning(studio,monkeypatch):
 
 
 def test_real_benchmark_uses_text_and_normal_queue(studio,monkeypatch):
-    client,data=studio;ready_system(monkeypatch)
-    response=client.post('/api/benchmark',json={'voice_id':'test-system','render_mode':'balanced','delivery':'documentary'})
+    client,data=studio
+    monkeypatch.setattr(app.executor,'submit',Mock())
+    (data/'models/vieneu_nano.ready').touch()
+    response=client.post('/api/benchmark',json={'voice_id':'nano-minhquan','render_mode':'balanced','delivery':'documentary'})
     assert response.status_code==202,response.text
     job=response.json()
     assert job['input_format']=='txt' and '[pause=' not in job['text']
     assert len(job['text'])>500 and job['paragraph_pause']==0
     assert job['status']=='queued' and job['render_mode']=='balanced'
     assert (data/'jobs'/f"{job['id']}.json").exists()
-    assert client.post('/api/benchmark',json={'voice_id':'test-system','language':'en-US'}).status_code==422
+    assert client.post('/api/benchmark',json={'voice_id':'nano-minhquan','language':'en-US'}).status_code==422
 
 
 def test_genres_expose_real_bundled_speakers(studio):
     client,data=studio
     config=client.get('/api/config').json()
-    assert config['version']=='1.7.0'
+    assert config['version']=='1.8.0'
     assert {'review','horror','fairytale','documentary','ad'}<={p['id'] for p in config['delivery_profiles']}
     voices=client.get('/api/voices').json()['voices']
     assert len({v['speaker'] for v in voices if v.get('engine')=='vieneu_nano'})==11

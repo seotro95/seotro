@@ -1,5 +1,6 @@
 """One loaded model per long job, reusable chunk checkpoints, bounded PCM output."""
 import json
+import hashlib
 import gc
 import contextlib
 import traceback
@@ -68,7 +69,9 @@ def load_synthesizer(job):
         from voice_library import resolve_reference
         from voxcpm_backend import create_synthesizer
         reference,_=resolve_reference(job['voice_id'],DATA)
-        return create_synthesizer(reference,DATA,threads=max(1,min(8,os.cpu_count() or 1)))
+        return create_synthesizer(reference,DATA,
+                                  threads=max(1,min(8,int(job.get('nano_threads',4)))),
+                                  steps=job.get('voxcpm_steps',8))
     import torch
     from qwen_tts import Qwen3TTSModel
     from huggingface_hub import snapshot_download
@@ -101,7 +104,7 @@ _cached_synth = None
 
 def get_synthesizer(job):
     global _cached_key, _cached_synth
-    key = tuple(job.get(k) for k in ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads'))
+    key = tuple(job.get(k) for k in ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads', 'voxcpm_steps'))
     if _cached_key != key or _cached_synth is None:
         if _cached_key and _cached_key[0]=='voxcpm' and job['engine']!='voxcpm':
             from voxcpm_backend import close_backends
@@ -209,26 +212,238 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
         return
 
 
+class CuePreparationError(ValueError):
+    """Keep a failed cue's alignment detail across a process boundary."""
+    def __init__(self, message, record):
+        super().__init__(message)
+        self.record = record
+
+    def __reduce__(self):
+        return type(self), (str(self), self.record)
+
+
+def _file_digest(path):
+    with Path(path).open('rb') as source:
+        return hashlib.file_digest(source, 'sha256').hexdigest()
+
+
+def _json_digest(value):
+    return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True,
+                                     separators=(',', ':')).encode('utf-8')).hexdigest()
+
+
+def prepare_cue(job, cue_index, cue, indexed_segments, work, boundary):
+    """Prepare and fit one complete cue inside its existing model worker.
+
+    Chunk checkpoints retain their global indices, so earlier recordings can be
+    resumed. Fitted cues have separate paths: concurrent workers never share the
+    sequential renderer's cue.wav or FFmpeg temporary files.
+    """
+    work = Path(work)
+    cancel = work/'cancel.flag'
+    cue = dict(cue)
+    parts = []
+    for index, segment in indexed_segments:
+        if cancel.exists():raise InterruptedError('Tác vụ đã dừng.')
+        if segment.text:
+            prepare_chunk(job, segment, index, work)
+            part = work/f'{index:06d}.wav'
+            parts.append({'index': index, 'sha256': _file_digest(part)})
+    cache = work/'fitted-cues'
+    cache.mkdir(parents=True, exist_ok=True)
+    path = cache/f'{cue_index:06d}.wav'
+    metadata_path = path.with_suffix('.json')
+    settings = {key: job.get(key) for key in (
+        'engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'voxcpm_steps',
+        'nano_threads', 'speed', 'delivery', 'paragraph_pause', 'input_format',
+        'cue_fit', 'max_cue_tempo', 'audio_fit_backend', 'segment_plan')}
+    signature = _json_digest({'version': 1, 'settings': settings, 'cue': cue,
+                             'boundary': boundary, 'parts': parts,
+                             'segments': [{'index': index, 'text': segment.text,
+                                           'pause': segment.pause, 'emphasis': segment.emphasis}
+                                          for index, segment in indexed_segments]})
+    try:
+        record = json.loads(metadata_path.read_text(encoding='utf-8'))
+        result = record['result']
+        if (record['signature'] == signature and record['result_sha256'] == _json_digest(result)
+                and record['wav_sha256'] == _file_digest(path)):
+            with wave.open(str(path)) as audio:
+                valid = ((audio.getnchannels(), audio.getsampwidth(), audio.getframerate()) == (1, 2, 24000)
+                         and audio.getnframes() == result['frames'] and audio.getnframes() > 0)
+            if valid:
+                if cancel.exists():raise InterruptedError('Tác vụ đã dừng.')
+                return {**result, 'path': str(path)}
+    except (OSError, ValueError, KeyError, TypeError, wave.Error, EOFError):
+        pass
+    raw = cache/f'{cue_index:06d}-source.wav'
+    try:
+        writer = PCMWriter(raw, max_seconds=86400)
+        try:
+            for index, segment in indexed_segments:
+                if cancel.exists():raise InterruptedError('Tác vụ đã dừng.')
+                if segment.text:
+                    if writer.append(work/f'{index:06d}.wav'):
+                        raise ValueError(f'Câu SRT {cue_index+1} có lời đọc vượt giới hạn WAV tạm; chia câu trước khi tạo lại. Không xuất câu bị cắt lời.')
+                else:
+                    writer.silence(segment.pause)
+        finally:
+            writer.close()
+        with wave.open(str(raw)) as audio:
+            actual = audio.getnframes()/audio.getframerate()
+        original_end = cue['end']
+        available = (max(original_end, boundary) if job.get('cue_fit') == 'gap' else original_end)-cue['start']
+        maximum_tempo = job.get('max_cue_tempo', 1.5)
+        applied_tempo, details = 1.0, None
+        failure = {'cue': cue_index+1, 'start': cue['start'], 'end': original_end,
+                   'available': round(available, 3), 'raw_seconds': round(actual, 3)}
+        if job.get('cue_fit') == 'auto':
+            target_frames = round(cue['end']*24000)-round(cue['start']*24000)
+            try:
+                details = fit_cue_audio(raw, target_frames, cancel,
+                                        backend=job.get('audio_fit_backend', 'ffmpeg'))
+            except ValueError as exc:
+                raise CuePreparationError(f'Câu SRT {cue_index+1}: {exc}',
+                                           {**failure, 'status': 'fit_failed', 'error': str(exc)}) from exc
+            applied_tempo = details['tempo']
+        elif actual > available:
+            ratio = actual/available
+            failure.update(status='too_long', required_tempo=round(ratio, 3))
+            if ratio > maximum_tempo:
+                raise CuePreparationError(
+                    f'Câu SRT {cue_index+1} đọc quá dài ({actual:.2f}s cho ô {available:.2f}s). Nới mốc, rút ngắn lời hoặc chọn nhịp nhanh hơn; không cắt mất lời.', failure)
+            fitted = cache/f'{cue_index:06d}-strict-fit.wav'
+            tempo = min(maximum_tempo, ratio*1.002)
+            try:
+                for attempt in range(5):
+                    if cancel.exists():raise InterruptedError('Tác vụ đã dừng.')
+                    normalize_audio(raw, fitted, tempo, 1)
+                    with wave.open(str(fitted)) as audio:
+                        fitted_seconds = audio.getnframes()/audio.getframerate()
+                    if fitted_seconds <= available+.00001:
+                        fitted.replace(raw)
+                        applied_tempo = tempo
+                        break
+                    if tempo >= maximum_tempo or attempt == 4:
+                        raise CuePreparationError(
+                            f'Câu SRT {cue_index+1} vẫn vượt ô ở mức căn nhịp tối đa; hãy nới mốc thời gian.', failure)
+                    tempo = min(maximum_tempo, tempo*fitted_seconds/available*1.005)
+            finally:
+                fitted.unlink(missing_ok=True)
+        with wave.open(str(raw)) as audio:
+            frames = audio.getnframes()
+        if job.get('cue_fit') == 'gap':
+            cue['end'] = round(min(boundary, max(original_end, cue['start']+frames/24000)), 3)
+        result = {'frames': frames, 'raw_seconds': round(actual, 3),
+                  'end': cue['end'], 'tempo': applied_tempo, 'fit_details': details}
+        if cancel.exists():raise InterruptedError('Tác vụ đã dừng.')
+        raw.replace(path)
+        write_state(metadata_path, {'version': 1, 'signature': signature, 'result': result,
+                                    'result_sha256': _json_digest(result), 'wav_sha256': _file_digest(path)})
+        return {**result, 'path': str(path)}
+    finally:
+        raw.unlink(missing_ok=True)
+
+
+def _render_parallel_cues(job, segments, cues, work, writer, workers):
+    """Fit ahead in the model pool, then commit original clocks in cue order."""
+    global _nano_pool
+    groups = [[] for _ in cues]
+    for index, segment in enumerate(segments):groups[segment.cue].append((index, segment))
+    pending, alignment = {}, []
+    next_submit, completed, spoken_frames = 0, 0, 0
+    payload = {key: value for key, value in job.items() if key != 'text'}
+    def save_alignment(failed=None):
+        write_state(work/'alignment.json', {'cues': alignment,
+                    'sync_ok': len(alignment) == len(cues) and all(c['status'] == 'matched' for c in alignment),
+                    'failed_cue': failed, 'mode': job.get('cue_fit', 'strict'),
+                    'max_tempo': job.get('max_cue_tempo', 1.5)})
+    try:
+        for cue_index, cue in enumerate(cues):
+            if (work/'cancel.flag').exists():raise InterruptedError('Tác vụ đã dừng.')
+            while next_submit < min(cue_index+2*workers, len(cues)):
+                ahead = next_submit
+                boundary = cues[ahead+1]['start'] if ahead+1 < len(cues) else job.get('timeline_seconds', cues[ahead]['end'])
+                if _nano_pool is None:
+                    _nano_pool = ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context('spawn'))
+                pending[ahead] = _nano_pool.submit(prepare_cue, payload, ahead, cues[ahead], groups[ahead], str(work), boundary)
+                next_submit += 1
+            try:
+                result = pending.pop(cue_index).result()
+            except CuePreparationError as exc:
+                alignment.append(exc.record)
+                save_alignment(cue_index+1)
+                raise ValueError(str(exc)) from exc
+            if (work/'cancel.flag').exists():raise InterruptedError('Tác vụ đã dừng.')
+            cue['end'] = result['end']
+            writer.silence(max(0, cue['start']-writer.frames/writer.rate))
+            actual_start = writer.frames/writer.rate
+            cue_start_frame = writer.frames
+            clipped = writer.append(result['path'])
+            spoken_frames += writer.frames-cue_start_frame
+            actual_end = writer.frames/writer.rate
+            matched = {'cue': cue_index+1, 'start': cue['start'], 'end': cue['end'],
+                       'raw_seconds': result['raw_seconds'], 'spoken_start': round(actual_start, 5),
+                       'spoken_end': round(actual_end, 5), 'tempo': round(result['tempo'], 4),
+                       'status': 'matched' if abs(actual_start-cue['start']) <= .001 and actual_end <= cue['end']+.001 and not clipped else 'overflow'}
+            details = result['fit_details']
+            if details is not None:
+                matched.update(auto_fitted=details['fitted'], trimmed_silence_seconds=round(details['trimmed_frames']/writer.rate, 6))
+                if result['tempo'] > 2:matched['warning'] = 'fast_tempo'
+            alignment.append(matched)
+            if len(alignment)%16 == 0 or len(alignment) == len(cues):save_alignment()
+            if clipped or matched['status'] != 'matched':
+                save_alignment(cue_index+1)
+                raise ValueError('Voice chưa khớp đầy đủ mốc phụ đề; không xuất bản thu sai thời gian.')
+            writer.silence(max(0, cue['end']-writer.frames/writer.rate))
+            completed += len(groups[cue_index])
+            write_state(work/'progress.json', {'completed': completed, 'total': len(segments),
+                        'audio_seconds': writer.frames/writer.rate, 'progress': min(90, round(90*completed/len(segments))),
+                        'phase': f'Đã căn {cue_index+1}/{len(cues)} câu SRT · {completed}/{len(segments)} đoạn'})
+    finally:
+        active_error = sys.exc_info()[0] is not None
+        running = [future for future in pending.values() if not future.cancel()]
+        for future in running:
+            try:future.result()
+            except Exception:
+                if not active_error:raise
+    return completed, spoken_frames, alignment
+
+
 def render(job, synthesize=None):
     global _nano_pool, _nano_pool_key, _cached_synth, _cached_key
     if job.get('video_id'):
         raise ValueError('Gói này chỉ tạo âm thanh; không xử lý video.')
-    parallel_workers=min(32,max(1,int(job.get('nano_parallel',1)))) if job.get('engine') in {'vieneu_nano','vieneu'} and synthesize is None else 1
+    from subtitles import parse_srt, export_srt
+    segments = plan_segments(job)
+    if not any(s.text for s in segments):
+        raise ValueError('Không có nội dung đọc sau khi xử lý ký hiệu nhấn/nghỉ.')
+    cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
+    parallel_workers=min(8 if job.get('engine')=='voxcpm' else 32,max(1,int(job.get('nano_parallel',1)))) if job.get('engine') in {'vieneu_nano','vieneu','voxcpm'} and synthesize is None else 1
+    # A complete SRT cue is one task, even when it contains several TTS chunks.
+    # Do not load additional models that cannot receive any work.
+    parallel_workers=min(parallel_workers,len(cues) if cues else sum(bool(s.text) for s in segments))
     parallel=parallel_workers>1
-    pool_key=(parallel_workers,)+tuple(job.get(k) for k in ('engine','voice_id','speaker','language','quality','nano_steps','nano_threads'))
+    if job.get('engine')=='voxcpm':
+        # A VoxCPM child keeps the same weights for all reference voices and
+        # step counts. Each submitted job still selects its own closure and
+        # reference cache; rebuilding the process pool would reload every 2B
+        # model when only the requested voice or sampling steps changed.
+        pool_key=(parallel_workers,'voxcpm',max(1,min(8,int(job.get('nano_threads',4)))))
+    else:
+        pool_key=(parallel_workers,)+tuple(job.get(k) for k in ('engine','voice_id','speaker','language','quality','nano_steps','nano_threads','voxcpm_steps'))
     if _nano_pool is not None and _nano_pool_key!=pool_key:
         close_nano_pool()
     if not parallel:
         close_nano_pool()
     elif _cached_synth is not None:
+        if _cached_key and _cached_key[0]=='voxcpm':
+            from voxcpm_backend import close_backends
+            close_backends()
         _cached_synth = None
         _cached_key = None
         gc.collect()
     work = DATA / 'parts' / job['id']
     work.mkdir(parents=True, exist_ok=True)
-    segments = plan_segments(job)
-    if not any(s.text for s in segments):
-        raise ValueError('Không có nội dung đọc sau khi xử lý ký hiệu nhấn/nghỉ.')
     maximum = job.get('max_minutes', 1440) * 60
     assembly = work / 'assembled.wav'
     writer = PCMWriter(assembly, max_seconds=maximum)
@@ -240,8 +455,6 @@ def render(job, synthesize=None):
     futures = {}
     payload = {key: value for key, value in job.items() if key != 'text'}
     gap = segment_delivery(job)['pause']
-    from subtitles import parse_srt, export_srt
-    cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
     timed = []
     alignment=[]
     def save_alignment(sync_ok=False,failed=None):
@@ -251,7 +464,15 @@ def render(job, synthesize=None):
     cue_path = work / 'cue.wav'
     progress_limit = 90
     try:
-        for index, segment in enumerate(segments):
+        remaining_segments = segments
+        if cues and parallel:
+            # The same bounded workers now fit complete cues too. FFmpeg/WSOLA
+            # no longer form a serial queue behind otherwise parallel TTS.
+            _nano_pool_key = pool_key
+            completed, spoken_audio_frames, alignment = _render_parallel_cues(
+                job, segments, cues, work, writer, parallel_workers)
+            remaining_segments = ()
+        for index, segment in enumerate(remaining_segments):
             if (work / 'cancel.flag').exists():
                 raise InterruptedError('Tác vụ đã dừng; các đoạn đã tạo được giữ để tiếp tục.')
             if parallel:
@@ -382,11 +603,11 @@ def render(job, synthesize=None):
     subtitle_text = export_srt(cues if cues else timed)
     (DATA / 'audio' / (job['id'] + '.srt')).write_text(subtitle_text, encoding='utf-8')
     fit_warning_cues=[c['cue'] for c in alignment if c.get('warning')=='fast_tempo']
-    execution={'engine':job.get('engine'),'workers':min(parallel_workers,sum(bool(s.text) for s in segments)),
+    execution={'engine':job.get('engine'),'workers':parallel_workers,
                'worker_budget':parallel_workers,'threads':job.get('nano_threads',2),'blas_threads':1}
     if job.get('engine')=='vieneu':execution['precision']='int8' if job.get('quality')=='fast' else 'fp32'
     if job.get('engine')=='vieneu_nano':execution['nano_steps']=job.get('nano_steps',8)
-    if job.get('engine')=='voxcpm':execution.update(threads=max(1,min(8,os.cpu_count() or 1)),precision='fp32')
+    if job.get('engine')=='voxcpm':execution.update(threads=max(1,min(8,int(job.get('nano_threads',4)))),precision='fp32',voxcpm_steps=job.get('voxcpm_steps',8))
     write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'spoken_audio_seconds': spoken_audio_frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), 'auto_fitted_cues':sum(bool(c.get('auto_fitted')) for c in alignment), 'fit_warning_count':len(fit_warning_cues), 'fit_warning_cues':fit_warning_cues,'execution_settings':execution})
 
 

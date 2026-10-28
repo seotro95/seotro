@@ -1,4 +1,4 @@
-"""Build the standalone 1.7 Windows bundle; publish only after native validation.
+"""Build the standalone 1.8 Windows bundle; publish only after native validation.
 
 A checksum-pinned, previously tested portable release can supply the runtime and
 models. Only its runtime, FFmpeg and model storage are reused; application source,
@@ -139,6 +139,8 @@ def copy_source(root):
     guide=root/'HUONG_DAN_CAN_MOC.txt'
     guide.write_text(guide.read_text(encoding='utf-8').replace('Chạy CAI_DAT.bat rồi MO_TOOL.bat theo DOC_TRUOC.md.', 'Bản Portable: mở MO_TOOL.bat; không cần cài Python hay tải model.'), encoding='utf-8')
     shutil.copy2(SOURCE/'packaging/MO_TOOL.bat', root/'MO_TOOL.bat')
+    shutil.copy2(SOURCE/'packaging/benchmarks/voxcpm-cpu-short-samples.qa.json',
+                 root/'CPU-SHORT-SPEECH-BENCHMARK.json')
 
 
 def copy_runtime(destination):
@@ -235,7 +237,7 @@ def verify_relocated(root):
 
 
 def write_notices(root):
-    (root/'DOC_TRUOC_PORTABLE.txt').write_text('''VOICE STUDIO RIENG 1.7.0 - WINDOWS 10/11 X64 PORTABLE
+    (root/'DOC_TRUOC_PORTABLE.txt').write_text('''VOICE STUDIO RIENG 1.8.0 - WINDOWS 10/11 X64 PORTABLE
 
 Giai nen TOAN BO ZIP vao thu muc moi, vi du D:\\VoiceStudio.
 Mo MO_TOOL.bat. Khong can cai Python, FFmpeg hay tai lai giong Nano da kem theo.
@@ -245,6 +247,10 @@ Chon WAV de dung video; cau bi ep qua nhanh van can nghe kiem tra.
 Co che do Nhanh/Can bang/Chat luong va kiem tra cau hinh may, do toc do mau.
 Ho tro toi da 32 tac vu Nano/Turbo, tu do va luu cau hinh rieng cho moi bo giong.
 Mai Anh/Turbo ho tro nhieu tac vu, giu FP32 tren CPU thieu VNNI.
+SRT tao va can tung cau song song, ghep lai dung thu tu va moc goc.
+Bo giong quoc te co Nhanh4/Can bang8/Chat luong10 buoc, tai dung mau giong.
+Vox CPU chi tinh attention tren cache da co du lieu, giu nguyen trong so.
+Cau hinh quoc te du tru 16 GiB/model va toi da 8 tien trinh; do bang loi that.
 Giu giong dang chon > Uu tien toc do > Tu do va toi uu CPU.
 Nut Chuyen sang Nano va do toc do doi giong va tao mau do, giu kich ban.
 Nhanh dung Nano 4 buoc va WSOLA; can nghe lai, khong bao dam dat 30x tren moi may.
@@ -320,11 +326,13 @@ def main():
     write_notices(root)
     verify_relocated(root)
     check_bundle_hygiene(root)
-    metadata = {'product': 'Voice Studio Rieng', 'version': '1.7.0', 'package_type': 'windows-x64-portable',
+    metadata = {'product': 'Voice Studio Rieng', 'version': '1.8.0', 'package_type': 'windows-x64-portable',
                 'source_commit': os.environ.get('GITHUB_SHA'), 'max_characters': 1000000,
                 'bundled_runtime': True, 'bundled_model_weights': True,
                 'optional_international_engine': 'voxcpm2', 'international_runtime_bundled': False,
                 'private_voice_library_bundled': False, 'native_windows_offline_smoke': 'passed',
+                'parallel_srt_cue_preparation': True, 'international_active_kv_attention': 'guarded-v2.0.3-cpu-fp32',
+                'international_reference_cache': True, 'target_30x_guaranteed': False,
                 'verified_base_sha256': args.base_sha256 if args.base_archive else None}
     metadata['native_qa'] = json.loads((root/'PORTABLE-QA.json').read_text(encoding='utf-8'))
     (root/'BUILD_INFO.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')

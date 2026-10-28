@@ -1,4 +1,4 @@
-# Voice Studio Riêng 1.7.0 · Windows 10/11 x64 Portable
+# Voice Studio Riêng 1.8.0 · Windows 10/11 x64 Portable
 
 Giải nén **toàn bộ ZIP** vào thư mục có quyền ghi, ví dụ `D:/VoiceStudio`, rồi mở **MO_TOOL.bat**. Giữ cửa sổ lệnh mở trong khi sử dụng; dùng Ctrl+C để tắt. Bản Portable đã có Python, FFmpeg, Nano và Turbo, dùng cục bộ với các giọng đi kèm.
 
@@ -11,6 +11,16 @@ Chọn **WAV** khi dựng video. Tool tự căn từng câu: câu dài đổi nh
 Ví dụ `00:27:20,519 --> 00:27:23,671` có ô lời dài **3,152 giây**. Nếu đây là câu cuối, WAV giữ timeline từ 0 đến **27:23,671**. MP3 có thể có padding tùy phần mềm giải mã. Chi tiết TXT có mốc nằm trong `HUONG_DAN_CAN_MOC.txt`.
 
 ## Chọn tốc độ và giọng
+
+Bản 1.8 giữ giọng đang chọn và ghi nhớ chế độ tốc độ, ngôn ngữ cùng cấu hình CPU. Chọn **Ưu tiên tốc độ**, nghe mẫu và bấm **Đo tốc độ** để kiểm tra kết quả thực trên máy bạn. Bộ đo dùng câu thử đúng ngôn ngữ của giọng Việt/Anh và giọng mẫu quốc tế.
+
+Câu SRT được tạo và căn trong nhiều tiến trình; bước xuất cuối vẫn ghép theo thứ tự mốc gốc. Các mảnh đã xong được giữ để tiếp tục, và bản thu chỉ hoàn tất khi đủ lời, đủ câu và đúng timeline.
+
+Bộ giọng quốc tế dùng lại phần mã hóa mẫu, tránh xử lý lại cùng bản thu ở mỗi câu. Với đúng VoxCPM 2.0.3 trên CPU FP32, attention chỉ đọc phần cache đã có dữ liệu; phép tính và trọng số được giữ nguyên. **Nhanh** dùng 4 bước, **Cân bằng** 8 bước và **Chất lượng** 10 bước. Giảm số bước có thể thay đổi phát âm và sắc thái; hãy nghe mẫu trước bản dài.
+
+Đo cùng 10 bước trên máy đám mây dùng 4 luồng cho thấy mẫu Nhật ngắn nhanh hơn khoảng **2,00 lần**, mẫu Thái khoảng **1,79 lần** sau tối ưu và tái sử dụng mẫu. Đây là hai câu thử dài 2–4 giây, chưa phải phép đo một giờ hoặc kết quả trên máy của bạn. Báo cáo chi tiết nằm trong **CPU-SHORT-SPEECH-BENCHMARK.json**. Mẫu Nhật 4 bước bị sai phần cuối khi kiểm tra bằng nhận dạng giọng nói tự động, nên lần mở đầu vẫn dùng Cân bằng; chọn Nhanh khi chấp nhận đánh đổi và đã nghe thử.
+
+Số tiến trình quốc tế được giới hạn riêng theo RAM và lõi vật lý, tối đa 8; mỗi model FP32 được dự trù 16 GiB cùng khoảng trống cho hệ thống. Ví dụ 28 lõi vật lý và 128 GiB RAM còn đủ trống có thể chọn tối đa 7 tiến trình × 4 luồng. Nano/Turbo vẫn có giới hạn và phép tự đo riêng. Không áp số đo Nano cho giọng quốc tế.
 
 Mai Anh/Turbo hỗ trợ nhiều tác vụ song song. Chọn **Ưu tiên tốc độ → Tự đo và tối ưu CPU** để tối ưu giọng đang chọn. Nano và Turbo có cấu hình RAM/CPU và kết quả đo riêng. CPU Xeon E5 v4 dùng Turbo FP32; không ép INT8 trên CPU thiếu VNNI.
 
@@ -30,15 +40,15 @@ Bấm **Chuyển sang Nano và đo tốc độ** khi muốn so sánh bộ giọn
 
 ## Thư viện giọng mẫu và giọng quốc tế
 
-Bản 1.7 đọc thư viện giọng mặc định trong **app/voice-library**. Nếu có gói giọng riêng, cài gói cập nhật vào thư mục Portable đang dùng, sau khi đóng tool. Các giọng xuất hiện trong nhóm mẫu mặc định; bấm nghe thử để chọn. Mẫu và giọng cá nhân trong **app/.data/voices** vẫn được giữ. Gói công khai không chứa các bản ghi âm riêng.
+Bản 1.8 đọc thư viện giọng mặc định trong **app/voice-library**. Nếu có gói giọng riêng, cài gói cập nhật vào thư mục Portable đang dùng, sau khi đóng tool. Các giọng xuất hiện trong nhóm mẫu mặc định; bấm nghe thử để chọn. Mẫu và giọng cá nhân trong **app/.data/voices** vẫn được giữ. Các bản ghi âm riêng chỉ được đưa vào bản GitHub ở dạng mã hóa; mật khẩu được gửi riêng. Khi mở bộ 19 giọng, chỉ thư viện giọng được thêm, mã ứng dụng hiện tại được giữ để tránh quay lại bản cũ.
 
 Mẫu tiếng Anh dùng Turbo đã đi kèm. Với mẫu tiếng Hàn, Nga, Nhật, Pháp, Tây Ban Nha và Thái, chạy **TAI_GIONG_DA_NGON_NGU.bat** một lần khi có Internet. Bộ cài tải model **VoxCPM2 khoảng 5 GB** cùng các thư viện CPU vào **runtime-international** riêng; cần thêm dung lượng cho thư viện, tệp tải tạm và quá trình cài đặt. Runtime Nano/Turbo hiện có được giữ nguyên. Giấy phép, nguồn và checksum model được lưu cùng bộ model.
 
-Cài đặt và nạp model lần đầu có thể mất nhiều thời gian. Chỉ khi kiểm tra tạo lời thành công, giọng quốc tế mới báo sẵn sàng. Mở lại tool sau khi hoàn tất; những lần tạo tiếp theo dùng model cục bộ. Bộ này chạy CPU FP32 và có tốc độ riêng, không áp dụng số đo Nano/Turbo hay cam kết 2 phút/1 giờ. Độ giống giọng và cảm xúc phụ thuộc mẫu, lời đọc và model; nghe kiểm tra trước khi dựng video.
+Cài đặt và nạp model lần đầu có thể mất nhiều thời gian. Chỉ khi kiểm tra tạo lời thành công, giọng quốc tế mới báo sẵn sàng. Mở lại tool sau khi hoàn tất; những lần tạo tiếp theo dùng model cục bộ. Bộ này chạy CPU FP32, có cấu hình Nhanh/Cân bằng/Chất lượng cùng số đo riêng; không dùng số đo Nano/Turbo để suy ra tốc độ quốc tế hoặc cam kết 2 phút/1 giờ. Độ giống giọng và cảm xúc phụ thuộc mẫu, lời đọc và model; nghe kiểm tra trước khi dựng video.
 
 ## Dữ liệu và phạm vi
 
-Mẫu cá nhân, bản thu, lịch sử và model nằm trong **app/.data**. Sao lưu trước cập nhật. Giải nén sang thư mục mới; giữ bản cũ để bảo toàn dữ liệu. Gói công khai không chứa lời, bản thu hoặc khóa của người dùng. Gói giọng riêng chứa các mẫu được đưa vào thư viện và cần được giữ riêng.
+Mẫu cá nhân, bản thu, lịch sử và model nằm trong **app/.data**. Sao lưu trước cập nhật. Giải nén sang thư mục mới; giữ bản cũ để bảo toàn dữ liệu. Bản công khai không chứa lời hoặc khóa riêng; nếu kèm bộ giọng riêng thì bộ đó được mã hóa, không công khai bản thu ở dạng đọc được. Gói giọng riêng chứa các mẫu được đưa vào thư viện và cần được giữ riêng.
 
 Tối đa **24 giờ** mỗi tác vụ. Một triệu ký tự có thể vượt thời lượng hoặc dung lượng đĩa; chia kịch bản để đọc hết. WAV mono 24 kHz dài 24 giờ cần khoảng 4,15 GB, chưa tính cache/tệp tạm. Tool báo khi không thể xuất đầy đủ.
 

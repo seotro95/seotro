@@ -21,6 +21,20 @@ def archive(entries):
 
 
 class BaseArchiveTests(unittest.TestCase):
+    def test_current_source_modules_and_measured_limitations_are_bundled(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            builder.copy_source(root)
+            for file in (builder.SOURCE/'app').glob('*.py'):
+                self.assertEqual((root/'app'/file.name).read_bytes(), file.read_bytes())
+            self.assertTrue((root/'app/voxcpm_acceleration.py').is_file())
+            import json
+            report = json.loads((root/'CPU-SHORT-SPEECH-BENCHMARK.json').read_text(encoding='utf-8'))
+            self.assertFalse(report['target_30x_guaranteed'])
+            self.assertFalse(report['complete_hour_measured'])
+            self.assertFalse(report['reference_recordings_and_generated_audio_published'])
+            self.assertEqual(report['product_version'], '1.8.0')
+
     def test_selective_base_reuse_keeps_models_licenses_and_omits_history(self):
         content = archive([
             ('Voice-Studio/runtime/python.exe', b'python'),

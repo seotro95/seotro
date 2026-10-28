@@ -1,0 +1,267 @@
+name: Voice Studio 1.8 - Speed update and full Windows download
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [voice-studio-speed-v1.8.0]
+    paths:
+      - '.github/workflows/voice-studio-speed-1.8.yml'
+      - 'voice-studio-rieng-portable/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-studio-speed-1.8-full-windows
+  cancel-in-progress: true
+
+env:
+  PYTHONUTF8: '1'
+  HF_HUB_DISABLE_XET: '1'
+  PIP_DISABLE_PIP_VERSION_CHECK: '1'
+
+jobs:
+  package:
+    runs-on: windows-2022
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Validate encrypted-only packaging boundaries
+        shell: pwsh
+        run: |
+          python voice-studio-rieng-portable/packaging/build_github_voice_download.py --self-test
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Verify Windows password paste controls with synthetic input
+        shell: pwsh
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $false
+          $script = Join-Path $env:GITHUB_WORKSPACE 'voice-studio-rieng-portable/packaging/github-delivery/install_secure_voices.ps1'
+          $diagnostic = & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -InputSelfTest 2>&1 | Out-String
+          $inputExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($inputExit -ne 0) {
+            $escaped = $diagnostic.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+            Write-Output ("::error::Windows password paste control test failed: " + $escaped)
+            throw 'Windows password paste controls did not pass their synthetic test'
+          }
+          @{
+            platform = 'Windows PowerShell 5.1'
+            password_paste_controls = 'passed'
+            synthetic_input_only = $true
+            actual_private_password_used = $false
+          } | ConvertTo-Json | Set-Content -Encoding utf8 (Join-Path $env:RUNNER_TEMP 'password-paste-windows-qa.json')
+          exit 0
+      - name: Verify decryption on Windows PowerShell 5.1 with synthetic data only
+        shell: pwsh
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $false
+          try {
+          $source = Join-Path $env:GITHUB_WORKSPACE 'voice-studio-rieng-portable/packaging/github-delivery'
+          $script = Join-Path $source 'install_secure_voices.ps1'
+          $fixture = Join-Path $source 'test-fixture'
+          $work = Join-Path $env:RUNNER_TEMP 'synthetic-crypto-qa'
+          New-Item -ItemType Directory -Path $work | Out-Null
+          $output = Join-Path $work 'synthetic-decoded.txt'
+          $dummyPassword = 'voice-studio-synthetic-test-only'
+          $diagnostic = & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $fixture -DecryptOnly -OutputPath $output -Password $dummyPassword 2>&1 | Out-String
+          $positiveExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($positiveExit -ne 0) {
+            $escapedDiagnostic = $diagnostic.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+            Write-Output ("::error::Windows PS 5.1 synthetic decrypt failed: " + $escapedDiagnostic)
+            throw 'Synthetic correct-password decryption failed on Windows PowerShell 5.1'
+          }
+          $expected = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $fixture 'expected.txt')).Hash
+          if ((Get-FileHash -Algorithm SHA256 -LiteralPath $output).Hash -ne $expected) { throw 'Synthetic decrypted bytes differ' }
+          $diagnostic = & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $fixture -DecryptOnly -OutputPath $output -Password $dummyPassword 2>&1 | Out-String
+          $negativeExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($negativeExit -eq 0 -or (Get-FileHash -Algorithm SHA256 -LiteralPath $output).Hash -ne $expected) { throw 'Existing output must be refused and preserved' }
+          $wrongOutput = Join-Path $work 'wrong-password-output.txt'
+          $diagnostic = & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $fixture -DecryptOnly -OutputPath $wrongOutput -Password 'incorrect-synthetic-password' 2>&1 | Out-String
+          $negativeExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($negativeExit -eq 0 -or (Test-Path -LiteralPath $wrongOutput)) { throw 'Wrong password must fail without creating plaintext' }
+          $tampered = Join-Path $work 'tampered-fixture'
+          Copy-Item -LiteralPath $fixture -Destination $tampered -Recurse
+          $packet = Join-Path $tampered 'delivery/voices.vspack'
+          $bytes = [IO.File]::ReadAllBytes($packet)
+          $bytes[48] = $bytes[48] -bxor 1
+          [IO.File]::WriteAllBytes($packet, $bytes)
+          # Change only the dummy public checksum so this test reaches the HMAC gate.
+          $manifestPath = Join-Path $tampered 'delivery/manifest.json'
+          $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+          $manifest.encrypted_sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $packet).Hash.ToLowerInvariant()
+          $manifest | ConvertTo-Json | Set-Content -LiteralPath $manifestPath -Encoding utf8
+          $tamperOutput = Join-Path $work 'tampered-output.txt'
+          $diagnostic = & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $tampered -DecryptOnly -OutputPath $tamperOutput -Password $dummyPassword 2>&1 | Out-String
+          $negativeExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($negativeExit -eq 0 -or (Test-Path -LiteralPath $tamperOutput)) { throw 'Tampered ciphertext must fail authentication without plaintext' }
+          $shortened = Join-Path $work 'shortened-fixture'
+          Copy-Item -LiteralPath $fixture -Destination $shortened -Recurse
+          $shortPacket = Join-Path $shortened 'delivery/voices.vspack'
+          $shortBytes = [IO.File]::ReadAllBytes($shortPacket)
+          [IO.File]::WriteAllBytes($shortPacket, $shortBytes[0..($shortBytes.Length-2)])
+          $shortManifestPath = Join-Path $shortened 'delivery/manifest.json'
+          $shortManifest = Get-Content -LiteralPath $shortManifestPath -Raw | ConvertFrom-Json
+          $shortManifest.encrypted_size = (Get-Item -LiteralPath $shortPacket).Length
+          $shortManifest.encrypted_sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $shortPacket).Hash.ToLowerInvariant()
+          $shortManifest | ConvertTo-Json | Set-Content -LiteralPath $shortManifestPath -Encoding utf8
+          $shortOutput = Join-Path $work 'shortened-output.txt'
+          $diagnostic = & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $shortened -DecryptOnly -OutputPath $shortOutput -Password $dummyPassword 2>&1 | Out-String
+          $negativeExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($negativeExit -eq 0 -or (Test-Path -LiteralPath $shortOutput)) { throw 'Invalid length must fail without plaintext' }
+          if (@(Get-ChildItem -LiteralPath $work -Recurse -Force -File -Filter '.voice-decrypt-*.tmp').Count -ne 0) { throw 'Crypto failure left a plaintext temporary file' }
+          @{
+            platform = 'Windows PowerShell 5.1'
+            synthetic_correct_password = 'passed'
+            synthetic_existing_output = 'refused and preserved'
+            synthetic_wrong_password = 'rejected without plaintext'
+            synthetic_tampered_ciphertext = 'rejected without plaintext'
+            synthetic_invalid_packet_length = 'rejected without plaintext'
+            plaintext_temporary_files_remaining = 0
+            actual_private_password_used = $false
+            actual_private_packet_decrypted = $false
+          } | ConvertTo-Json | Set-Content -Encoding utf8 (Join-Path $env:RUNNER_TEMP 'crypto-windows-qa.json')
+          # The rejected negative tests intentionally exit 1; all assertions
+          # above passed, so do not propagate their expected native exit code.
+          exit 0
+          } catch {
+            $escapedException = $_.Exception.ToString().Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+            Write-Output ("::error::Synthetic Windows crypto QA failed: " + $escapedException)
+            if ($diagnostic) {
+              $escapedDiagnostic = $diagnostic.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+              Write-Output ("::error::Last synthetic PowerShell output: " + $escapedDiagnostic)
+            }
+            throw
+          }
+      - name: Verify legacy encrypted unlock preserves the current application
+        shell: pwsh
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $false
+          python -m pip --isolated install --disable-pip-version-check --only-binary=:all: pytest==8.3.5 cryptography==44.0.3
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $diagnostic = & python -m pytest -q -p no:cacheprovider voice-studio-rieng-portable/packaging/test_voice_unlock_payload.py 2>&1 | Out-String
+          $testExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($testExit -ne 0) {
+            if ($diagnostic.Length -gt 6000) { $diagnostic = $diagnostic.Substring($diagnostic.Length - 6000) }
+            $escaped = $diagnostic.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+            Write-Output ("::error title=Legacy encrypted unlock regression::" + $escaped)
+            exit $testExit
+          }
+      - name: Download checksum-pinned Windows runtime and models
+        shell: python
+        run: |
+          from pathlib import Path
+          import hashlib, os, shutil, urllib.request
+          asset = Path(os.environ['RUNNER_TEMP'])/'Voice-Studio-base36.zip'
+          url = 'https://github.com/seotro95/seotro/releases/download/windows-portable-36/Voice-Studio-Windows-x64.zip'
+          expected = '5998b2f9e5198cf8ef4ab82a4796539bed0754f2b5eeaeb4da72d4fec27d1501'
+          with urllib.request.urlopen(url, timeout=120) as source, asset.open('wb') as target:
+              shutil.copyfileobj(source, target)
+          with asset.open('rb') as source:
+              actual = hashlib.file_digest(source, 'sha256').hexdigest()
+          if actual != expected:
+              raise RuntimeError('Base archive SHA256 mismatch; do not extract or execute it.')
+          print('Verified trusted base36:', asset.stat().st_size, 'bytes')
+      - name: Build current application and verify relocated offline synthesis
+        shell: pwsh
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $false
+          $diagnostic = & python voice-studio-rieng-portable/packaging/build_windows.py --base-archive "${{ runner.temp }}/Voice-Studio-base36.zip" --output "${{ runner.temp }}/portable/Voice-Studio-Rieng-1.8.0-Portable" 2>&1 | Out-String
+          $buildExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($buildExit -ne 0) {
+            if ($diagnostic.Length -gt 6000) { $diagnostic = $diagnostic.Substring($diagnostic.Length - 6000) }
+            $escaped = $diagnostic.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+            Write-Output ("::error title=Windows portable build and native validation::" + $escaped)
+            exit $buildExit
+          }
+      - name: Verify international acceleration parity in isolated Windows CPU runtime
+        shell: pwsh
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $false
+          $bundle = "${{ runner.temp }}/portable/Voice-Studio-Rieng-1.8.0-Portable"
+          $international = "${{ runner.temp }}/international-runtime"
+          $data = "${{ runner.temp }}/international-qa-data"
+          & "$bundle/runtime/python.exe" -s -X utf8 "$bundle/app/prepare_international.py" --runtime-only --runtime-dir $international --data-dir $data
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $env:HF_HUB_OFFLINE = '1'
+          $env:TRANSFORMERS_OFFLINE = '1'
+          & "$international/python.exe" -s -X utf8 "$bundle/app/voxcpm_backend.py" --check --data-dir $data | Set-Content -Encoding utf8 "${{ runner.temp }}/international-runtime.qa.json"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $check = Get-Content -Raw "${{ runner.temp }}/international-runtime.qa.json" | ConvertFrom-Json
+          if (-not $check.ok -or -not $check.runtime_ok -or $check.model_ready -or $check.device -ne 'cpu') { throw 'International runtime check did not pass' }
+          & "$international/python.exe" -s -m pip --isolated install --disable-pip-version-check --only-binary=:all: pytest==8.3.5
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $diagnostic = & "$international/python.exe" -s -m pytest -q -p no:cacheprovider voice-studio-rieng-portable/app/tests/test_voxcpm_acceleration.py 2>&1 | Out-String
+          $testExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($testExit -ne 0) {
+            if ($diagnostic.Length -gt 6000) { $diagnostic = $diagnostic.Substring($diagnostic.Length - 6000) }
+            $escaped = $diagnostic.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+            Write-Output ("::error title=Windows international acceleration parity::" + $escaped)
+            exit $testExit
+          }
+          & "$bundle/runtime/python.exe" -s -m pip check
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          @{
+            platform = 'native-windows-x64'
+            isolated_runtime = $check
+            tiny_tensor_active_kv_parity = 'passed'
+            reference_cache_regressions = 'passed'
+            private_reference_recordings_used = $false
+            international_model_bundled = $false
+            actual_hour_generation_measured = $false
+            target_30x_guaranteed = $false
+          } | ConvertTo-Json -Depth 5 | Set-Content -Encoding utf8 "${{ runner.temp }}/international-acceleration.qa.json"
+      - name: Package one full download with current app and encrypted 19 voice library
+        shell: pwsh
+        run: |
+          $base = "${{ runner.temp }}/portable/Voice-Studio-Rieng-1.8.0-Portable-Windows-x64.zip"
+          $expected = (Get-FileHash -Algorithm SHA256 -LiteralPath $base).Hash.ToLowerInvariant()
+          python voice-studio-rieng-portable/packaging/build_github_voice_download.py --base-archive $base --base-sha256 $expected --base-root Voice-Studio-Rieng-1.8.0-Portable --version 1.8.0 --bundle-root Voice-Studio-Rieng-1.8.0-19-Giong-GitHub --full-only --output "${{ runner.temp }}/github-download"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Copy-Item -LiteralPath "${{ runner.temp }}/portable/Voice-Studio-Rieng-1.8.0-Portable/PORTABLE-QA.json" -Destination "${{ runner.temp }}/github-download/Windows-Portable.qa.json"
+          Copy-Item -LiteralPath "${{ runner.temp }}/crypto-windows-qa.json" -Destination "${{ runner.temp }}/github-download/Windows-PowerShell-Crypto.qa.json"
+          Copy-Item -LiteralPath "${{ runner.temp }}/password-paste-windows-qa.json" -Destination "${{ runner.temp }}/github-download/Windows-Password-Paste.qa.json"
+          Copy-Item -LiteralPath "${{ runner.temp }}/international-acceleration.qa.json" -Destination "${{ runner.temp }}/github-download/Windows-International-Acceleration.qa.json"
+          Copy-Item -LiteralPath "voice-studio-rieng-portable/packaging/benchmarks/voxcpm-cpu-short-samples.qa.json" -Destination "${{ runner.temp }}/github-download/Linux-International-Short-Speech.qa.json"
+      - name: Upload single full archive and measured QA
+        uses: actions/upload-artifact@v4
+        with:
+          name: Voice-Studio-Rieng-1.8.0-19-Giong-Windows-x64
+          path: |
+            ${{ runner.temp }}/github-download/*.zip
+            ${{ runner.temp }}/github-download/*.sha256
+            ${{ runner.temp }}/github-download/*.qa.json
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+      - name: Publish checked full Windows download
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = "voice-studio-speed-1.8-${{ github.run_id }}"
+          @"
+          Voice Studio Riêng 1.8.0 - bản Windows đầy đủ, tối ưu tốc độ cho tất cả bộ giọng.
+
+          Tải duy nhất ZIP Voice-Studio-Rieng-1.8.0-19-Giong-GitHub-Windows-x64.zip và giải nén TOÀN BỘ vào thư mục mới. Chạy CAI_19_GIONG.bat, dùng nút Dán để nhập mật khẩu đã gửi riêng trong chat, sau đó mở MO_TOOL.bat. Không chạy trực tiếp trong cửa sổ xem ZIP. Bước cài giọng giữ nguyên mã ứng dụng 1.8, lịch sử và model.
+          Bản này ghi nhớ chế độ tốc độ, xử lý và căn câu SRT đồng thời, giữ thứ tự và các mốc gốc, dùng lại mã hóa mẫu giọng quốc tế và chỉ tính attention trên cache đã có dữ liệu. Bộ quốc tế có cấu hình 4/8/10 bước và giới hạn số model theo lõi vật lý/RAM; không tự đổi giọng để đạt số đo. Giảm số bước có thể thay đổi phát âm và sắc thái, cần nghe thử trước bản dài.
+          Bao gồm Python Windows, FFmpeg và model Việt/Anh; bộ 19 giọng riêng chỉ được công khai ở dạng mã hóa. Mật khẩu không nằm trên GitHub hoặc trong ZIP. Giọng quốc tế cần chạy TAI_GIONG_DA_NGON_NGU.bat một lần có Internet để tải khoảng 5 GB model cùng thư viện CPU riêng. Model quốc tế không nằm trong ZIP.
+          Quy trình phát hành kiểm tra Windows PowerShell 5.1 bằng dữ liệu giả, kiểm tra mở bộ giọng cũ không làm hạ phiên bản ứng dụng, tạo lời Nano/Turbo ngoại tuyến trong thư mục di chuyển có dấu, xuất WAV/MP3/TXT/SRT, căn đúng ô 0.900 giây và kiểm tra tương đương attention bằng tensor nhỏ trong runtime Torch CPU riêng. Bản thu riêng và mật khẩu riêng không được giải mã trên GitHub Actions.
+          Kết quả đo Nano/Turbo thực trên máy GitHub nằm trong Windows-Portable.qa.json, loại thời gian im lặng khỏi chỉ số tốc độ. Mẫu ngắn chỉ cho ước tính; chưa bảo đảm 2 phút cho 1 giờ voice trên mọi máy hoặc mọi giọng. Chọn Ưu tiên tốc độ và Đo tốc độ để kiểm tra trực tiếp trên máy đang dùng. Cảm xúc và độ giống mẫu cần nghe kiểm tra.
+          Runtime/model gốc được kiểm tra SHA256 5998b2f9e5198cf8ef4ab82a4796539bed0754f2b5eeaeb4da72d4fec27d1501 trước khi dùng; mã ứng dụng được đóng gói từ commit dưới đây.
+          Source: ${{ github.sha }}
+          "@ | Set-Content -Encoding utf8 "${{ runner.temp }}/speed-release-notes.txt"
+          $assets = Get-ChildItem -File "${{ runner.temp }}/github-download" | Where-Object { $_.Name -match '\.(zip|sha256|qa\.json)$' } | ForEach-Object { $_.FullName }
+          gh release create $tag @assets --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Voice Studio 1.8 - Tăng tốc - Windows đầy đủ 19 giọng" --notes-file "${{ runner.temp }}/speed-release-notes.txt" --latest=false
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

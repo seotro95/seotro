@@ -109,7 +109,7 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
 
 
-app = FastAPI(title='Voice Studio Riêng', version='1.7.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio Riêng', version='1.8.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 @app.exception_handler(RequestValidationError)
@@ -193,16 +193,20 @@ def effective_rendering_presets(engine='vieneu_nano'):
             state=json.loads((DATA/'warm-model.json').read_text(encoding='utf-8'))
             if state.get('pid')==warm_worker.pid:resident=state
         except (OSError,ValueError):pass
-    return read_saved_presets(DATA,rendering_presets(engine),engine,resident)
+    defaults=rendering_presets(engine,resident=resident) if engine=='voxcpm' else rendering_presets(engine)
+    return read_saved_presets(DATA,defaults,engine,resident)
 
 
 def _config_values():
+    from calibration import BENCHMARK_LANGUAGES
     reference_languages={language for voice in catalog_voices() for language in voice['languages']}
     if model_ready('voxcpm'):reference_languages.add('th')
     return {
         'version': app.version,
         'rendering_presets': effective_rendering_presets(),
         'turbo_rendering_presets': effective_rendering_presets('vieneu'),
+        'voxcpm_rendering_presets': effective_rendering_presets('voxcpm'),
+        'benchmark_languages': list(BENCHMARK_LANGUAGES),
         'delivery_profiles': profile_catalog(),
         'mode': 'local',
         'edition': 'standalone-voice',
@@ -319,6 +323,7 @@ class Speech(BaseModel):
     nano_threads: int = Field(default=2, ge=1, le=8)
     nano_parallel: int = Field(default=1, ge=1, le=32)
     nano_steps: int = Field(default=8, ge=4, le=16)
+    voxcpm_steps: int = Field(default=8, ge=4, le=10)
     render_mode: str = Field(default='balanced', pattern='^(fast|balanced|quality)$')
     audio_fit_backend: str = Field(default='ffmpeg', pattern='^(wsola|ffmpeg)$')
     max_minutes: int = Field(default=1440, ge=1, le=1440)
@@ -443,10 +448,17 @@ def _submit_speech(body: Speech,calibration=False):
     if not voice or body.language not in voice['languages']:
         raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
-    preset=effective_rendering_presets(engine)[body.render_mode]
+    presets=effective_rendering_presets(engine)
+    preset=presets[body.render_mode]
     for field,value in preset.items():
         if field not in body.model_fields_set:setattr(body,field,value)
     if body.nano_steps not in {4,8,16}:raise HTTPException(422,'Chọn Nano 4, 8 hoặc 16 bước.')
+    if engine=='voxcpm':
+        if body.voxcpm_steps not in {4,8,10}:raise HTTPException(422,'Chọn bộ đọc quốc tế 4, 8 hoặc 10 bước.')
+        limit=presets['fast']
+        body.nano_parallel=min(body.nano_parallel,limit['nano_parallel'],8)
+        physical_budget=limit['nano_parallel']*limit['nano_threads']
+        body.nano_threads=min(body.nano_threads,max(1,physical_budget//body.nano_parallel),8)
     if body.paragraph_pause is None:body.paragraph_pause=get_profile(body.delivery).pause
     from subtitles import normalize_script
     try:
@@ -614,7 +626,7 @@ def resume_job(ident: str, auto_fit: bool = True):
 
 @app.get('/api/system-info')
 def machine_info():
-    return {**system_info(), 'rendering_presets': effective_rendering_presets(), 'turbo_rendering_presets':effective_rendering_presets('vieneu')}
+    return {**system_info(), 'rendering_presets': effective_rendering_presets(), 'turbo_rendering_presets':effective_rendering_presets('vieneu'), 'voxcpm_rendering_presets':effective_rendering_presets('voxcpm')}
 
 
 @app.get('/api/jobs/{ident}/script.{extension}')
@@ -688,6 +700,7 @@ class BenchmarkRequest(BaseModel):
     render_mode: str = Field(default='balanced',pattern='^(fast|balanced|quality)$')
     delivery: str = 'natural'
     nano_steps: int | None = Field(default=None, ge=4, le=16)
+    voxcpm_steps: int | None = Field(default=None, ge=4, le=10)
     nano_parallel: int | None = Field(default=None, ge=1, le=32)
     nano_threads: int | None = Field(default=None, ge=1, le=8)
     audio_fit_backend: str | None = Field(default=None, pattern='^(wsola|ffmpeg)$')
@@ -696,12 +709,14 @@ class BenchmarkRequest(BaseModel):
 
 @app.post('/api/benchmark',status_code=202)
 def benchmark(body: BenchmarkRequest):
-    if body.language != 'vi':raise HTTPException(422,'Mẫu đo hiện dùng lời tiếng Việt; chọn giọng tiếng Việt để đo.')
-    from calibration import sample_text
+    from calibration import benchmark_sample_text, BENCHMARK_LANGUAGES
     voice=next((v for v in available_voices() if v['id']==body.voice_id),None)
     engine=voice.get('engine') if voice else None
-    workers=(body.nano_parallel or effective_rendering_presets(engine)[body.render_mode]['nano_parallel']) if engine in {'vieneu_nano','vieneu'} else 1
-    text=sample_text(workers)
+    if not voice or body.language not in voice['languages'] or body.language not in BENCHMARK_LANGUAGES:
+        raise HTTPException(422,'Chọn giọng và ngôn ngữ hỗ trợ mẫu đo.')
+    if engine not in {'vieneu_nano','vieneu','voxcpm'}:raise HTTPException(422,'Đo tốc độ hiện hỗ trợ Nano, Turbo và bộ giọng mẫu đa ngôn ngữ.')
+    workers=body.nano_parallel or effective_rendering_presets(engine)[body.render_mode]['nano_parallel']
+    text=benchmark_sample_text(body.language,workers,engine)
     settings=body.model_dump(exclude_none=True)
     payload=Speech(text=text,**settings,paragraph_pause=0,format='wav')
     job=speech(payload)

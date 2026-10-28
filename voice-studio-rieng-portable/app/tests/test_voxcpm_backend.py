@@ -79,22 +79,25 @@ def test_voice_switch_keeps_one_backend_and_correct_reference(tmp_path, monkeypa
             self.process = SimpleNamespace(poll=lambda: None)
             self.closed = False
             created.append(self)
-        def synthesize(self, text, reference, output):
-            calls.append((text, reference.name))
+        def synthesize(self, text, reference, output, steps=10):
+            calls.append((text, reference.name, steps))
         def close(self):
             self.closed = True
     monkeypatch.setattr(backend, '_client', None)
     monkeypatch.setattr(backend, '_BackendClient', Client)
     refs = [tmp_path/'first.wav', tmp_path/'second.wav']
     for path in refs:path.write_bytes(b'reference fixture')
-    first = backend.create_synthesizer(refs[0], tmp_path, 4)
-    second = backend.create_synthesizer(refs[1], tmp_path, 4)
+    first = backend.create_synthesizer(refs[0], tmp_path, 4, steps=10)
+    second = backend.create_synthesizer(refs[1], tmp_path, 4, steps=4)
+    balanced = backend.create_synthesizer(refs[1], tmp_path, 4, steps=8)
     try:
         first('first', tmp_path/'a.wav')
         second('second', tmp_path/'b.wav')
+        balanced('balanced', tmp_path/'d.wav')
         first('first again', tmp_path/'c.wav')
         assert len(created) == 1
-        assert calls == [('first', 'first.wav'), ('second', 'second.wav'), ('first again', 'first.wav')]
+        assert calls == [('first', 'first.wav', 10), ('second', 'second.wav', 4),
+                         ('balanced', 'second.wav', 8), ('first again', 'first.wav', 10)]
     finally:
         backend.close_backends()
     assert created[0].closed
@@ -104,10 +107,13 @@ def test_child_stdout_contains_only_json_responses(tmp_path, monkeypatch):
     data = tmp_path/'data';(data/'parts').mkdir(parents=True)
     reference = tmp_path/'ref.wav';reference.write_bytes(b'reference fixture')
     requests = [{'id': str(index), 'text': 'sample', 'reference_wav': str(reference),
-                 'output': str(data/'parts'/f'{index}.wav')} for index in (1, 2)]
+                 'output': str(data/'parts'/f'{index}.wav'), **settings}
+                for index, settings in enumerate(({'steps': 4}, {'steps': 8}, {}), 1)]
     monkeypatch.setattr(backend, 'prepared_model', lambda data: tmp_path)
     monkeypatch.setattr(backend, '_load_model', lambda path, threads: object())
-    def generate(model, text, reference, output):
+    received_steps = []
+    def generate(model, text, reference, output, steps=10):
+        received_steps.append(steps)
         print('upstream progress text')
         output.write_bytes(b'output fixture')
         return 24000
@@ -118,7 +124,46 @@ def test_child_stdout_contains_only_json_responses(tmp_path, monkeypatch):
     with contextlib.redirect_stdout(output), contextlib.redirect_stderr(errors):
         backend.main()
     responses = [json.loads(line) for line in output.getvalue().splitlines()]
-    assert [entry['id'] for entry in responses] == ['1', '2']
+    assert [entry['id'] for entry in responses] == ['1', '2', '3']
+    assert received_steps == [4, 8, 10]
     assert all(entry['ok'] and entry['sample_rate'] == 24000 for entry in responses)
     assert 'upstream progress text' in errors.getvalue()
     assert 'upstream progress text' not in output.getvalue()
+
+
+@pytest.mark.parametrize('steps', [0, 3, 5, 9, 11, 4.0, '4', True, None])
+def test_invalid_steps_are_rejected_before_loading_a_backend(tmp_path, monkeypatch, steps):
+    reference = tmp_path/'reference.wav';reference.write_bytes(b'reference fixture')
+    def unexpected_client(*args, **kwargs):
+        pytest.fail('invalid settings must never start an international model')
+    monkeypatch.setattr(backend, '_BackendClient', unexpected_client)
+    with pytest.raises(ValueError, match='4, 8'):
+        backend.create_synthesizer(reference, tmp_path, steps=steps)
+
+
+@pytest.mark.parametrize('steps', [4, 8, 10])
+def test_generation_preserves_reference_and_requested_steps(tmp_path, steps):
+    import numpy as np
+    import soundfile as sf
+    calls = []
+    class Model:
+        tts_model = SimpleNamespace(sample_rate=48000)
+        def generate(self, **settings):
+            calls.append(settings)
+            return np.sin(np.arange(4800, dtype=np.float32)/10)*0.1
+    reference = tmp_path/'reference.wav'
+    destination = tmp_path/'parts'/'speech.wav'
+    frames = backend._generate(Model(), 'Read this sentence.', reference, destination, steps=steps)
+    assert calls == [{'text': 'Read this sentence.', 'reference_wav_path': str(reference),
+                      'cfg_value': 2.0, 'inference_timesteps': steps,
+                      'normalize': False, 'denoise': False, 'retry_badcase': True}]
+    samples, rate = sf.read(destination)
+    assert frames == len(samples) == 2400 and rate == 24000
+    assert np.max(np.abs(samples)) > 0.01
+
+
+@pytest.mark.parametrize('steps', [3, 9, 10.0, '8', True, None])
+def test_generation_rejects_unsupported_steps_without_running_model(tmp_path, steps):
+    model = SimpleNamespace(generate=lambda **kwargs: pytest.fail('invalid step count reached model'))
+    with pytest.raises(ValueError, match='bước'):
+        backend._generate(model, 'Sample.', None, tmp_path/'out.wav', steps=steps)

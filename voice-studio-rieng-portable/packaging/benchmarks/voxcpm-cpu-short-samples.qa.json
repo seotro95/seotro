@@ -1,0 +1,117 @@
+{
+  "format": "voice-studio-short-speech-benchmark-v1",
+  "product_version": "1.8.0",
+  "platform": "Linux cloud CPU, 4-thread model execution",
+  "engine": "VoxCPM2 CPU FP32, voxcpm 2.0.3",
+  "method": "Same public synthetic sentences, same references, same seed 2026; sequential runs in one loaded model. Baseline 10 steps, active-prefix 10 steps, active-prefix plus reference cache 10 steps, optional fast 4 steps. Measures actual synthesis wall time and generated speech duration; no SRT gaps or artificial silence.",
+  "includes_initial_model_load": false,
+  "complete_hour_measured": false,
+  "target_30x_guaranteed": false,
+  "reference_recordings_and_generated_audio_published": false,
+  "asr": {
+    "method": "Whisper base multilingual offline CPU int8, explicit language, no prompt, beam 5",
+    "human_verified": false,
+    "short_clips_may_limit_asr_accuracy": true,
+    "not_speaker_identity_or_emotion_test": true
+  },
+  "same_steps_gain": {
+    "ja": 2.0006,
+    "th": 1.7944
+  },
+  "limitations": [
+    "Two very short synthetic sentences cannot establish throughput for one hour, all languages, all voices, or the user computer.",
+    "The 4-step Japanese result was shorter and automatic transcription differed at the ending. Fast mode remains an explicit speed/quality choice; the first-run balanced mode is retained.",
+    "ASR is an automated approximation; it does not verify every word, speaker identity, naturalness, or emotion.",
+    "Attention microbenchmarks do not describe complete synthesis throughput."
+  ],
+  "measurements": [
+    {
+      "label": "baseline",
+      "language": "ja",
+      "text": "こんにちは、音声スタジオへようこそ。",
+      "steps": 10,
+      "audio_seconds": 3.84,
+      "elapsed_seconds": 83.5382,
+      "realtime_multiplier": 0.046,
+      "asr_text": "こんにちは、本生スタジオへようこそ",
+      "asr_character_error_rate": 0.125
+    },
+    {
+      "label": "baseline",
+      "language": "th",
+      "text": "สวัสดีครับ ยินดีต้อนรับ",
+      "steps": 10,
+      "audio_seconds": 2.24,
+      "elapsed_seconds": 46.6578,
+      "realtime_multiplier": 0.048,
+      "asr_text": "สวัสดีครับ ยินดีตอนรับ",
+      "asr_character_error_rate": 0.045454545454545456
+    },
+    {
+      "label": "optimized10",
+      "language": "ja",
+      "text": "こんにちは、音声スタジオへようこそ。",
+      "steps": 10,
+      "audio_seconds": 3.84,
+      "elapsed_seconds": 46.2985,
+      "realtime_multiplier": 0.0829,
+      "asr_text": "こんにちは、音声スタジオへようこそ",
+      "asr_character_error_rate": 0.0
+    },
+    {
+      "label": "optimized10",
+      "language": "th",
+      "text": "สวัสดีครับ ยินดีต้อนรับ",
+      "steps": 10,
+      "audio_seconds": 2.24,
+      "elapsed_seconds": 28.0522,
+      "realtime_multiplier": 0.0799,
+      "asr_text": "สวัสดีครับ ยินดีตอนรับ",
+      "asr_character_error_rate": 0.045454545454545456
+    },
+    {
+      "label": "cached10",
+      "language": "ja",
+      "text": "こんにちは、音声スタジオへようこそ。",
+      "steps": 10,
+      "audio_seconds": 3.84,
+      "elapsed_seconds": 41.7574,
+      "realtime_multiplier": 0.092,
+      "asr_text": "こんにちは、音声スタジオへようこそ",
+      "asr_character_error_rate": 0.0
+    },
+    {
+      "label": "cached10",
+      "language": "th",
+      "text": "สวัสดีครับ ยินดีต้อนรับ",
+      "steps": 10,
+      "audio_seconds": 2.24,
+      "elapsed_seconds": 26.0013,
+      "realtime_multiplier": 0.0861,
+      "asr_text": "สวัสดีครับ ยินดีตอนรับ",
+      "asr_character_error_rate": 0.045454545454545456
+    },
+    {
+      "label": "fast4",
+      "language": "ja",
+      "text": "こんにちは、音声スタジオへようこそ。",
+      "steps": 4,
+      "audio_seconds": 2.08,
+      "elapsed_seconds": 14.4342,
+      "realtime_multiplier": 0.1441,
+      "asr_text": "こんにちは、音声スタジオへよくぞ",
+      "asr_character_error_rate": 0.1875
+    },
+    {
+      "label": "fast4",
+      "language": "th",
+      "text": "สวัสดีครับ ยินดีต้อนรับ",
+      "steps": 4,
+      "audio_seconds": 2.08,
+      "elapsed_seconds": 17.8054,
+      "realtime_multiplier": 0.1168,
+      "asr_text": "สวัสดีครับ ยินดีตอนรับ",
+      "asr_character_error_rate": 0.045454545454545456
+    }
+  ]
+}

@@ -128,14 +128,17 @@ def test_resumed_checkpoints_do_not_claim_loaded_model_memory(worker,tmp_path,mo
 
 
 @pytest.mark.parametrize('parallel_workers',[4,8,28,32])
-@pytest.mark.parametrize('engine',['vieneu_nano','vieneu'])
+@pytest.mark.parametrize('engine',['vieneu_nano','vieneu','voxcpm'])
 def test_nano_and_turbo_pool_prefetch_is_bounded_and_model_settings_recreate_it(worker,tmp_path,monkeypatch,parallel_workers,engine):
     executors=[]
+    selected=[]
     class Future:
-        def __init__(self,pool):
+        def __init__(self,pool,value):
             self.pool=pool
+            self.value=value
         def result(self):
             self.pool.pending-=1
+            return self.value
         def cancel(self):
             return True
     class Executor:
@@ -145,24 +148,28 @@ def test_nano_and_turbo_pool_prefetch_is_bounded_and_model_settings_recreate_it(
             self.closed=False
             executors.append(self)
         def submit(self,fn,*args):
-            fn(*args)
+            value=fn(*args)
             self.pending+=1
             self.peak=max(self.peak,self.pending)
-            return Future(self)
+            return Future(self,value)
         def shutdown(self,**kwargs):
             self.closed=True
     def native(text,path,speed=1):
         write_pcm(path,tones([220],.04))
+    def choose(settings):
+        selected.append({key:settings.get(key) for key in ('voice_id','language','voxcpm_steps','nano_threads')})
+        return native
     monkeypatch.setattr(worker,'ProcessPoolExecutor',Executor)
-    monkeypatch.setattr(worker,'get_synthesizer',lambda job:native)
+    monkeypatch.setattr(worker,'get_synthesizer',choose)
     text='\n\n'.join(f'{index+1}\n00:00:{index:02d},000 --> 00:00:{index:02d},500\nXin chào.' for index in range(10))
     base={'text':text,'input_format':'srt','engine':engine,'format':'wav','speed':1,
           'nano_parallel':parallel_workers,'nano_steps':4,'cue_fit':'auto','audio_fit_backend':'wsola'}
     worker.render({**base,'id':'first'})
     worker.render({**base,'id':'reuse'})
     assert len(executors)==1
-    assert executors[0].workers==parallel_workers and executors[0].peak<=2*parallel_workers
-    worker.render({**base,'id':'changed','nano_steps':8,'nano_parallel':2})
+    active=min(parallel_workers,8 if engine=='voxcpm' else 32,10)
+    assert executors[0].workers==active and executors[0].peak<=2*active
+    worker.render({**base,'id':'changed','nano_steps':8,'voxcpm_steps':4,'nano_parallel':2})
     assert len(executors)==2 and executors[0].closed
     assert executors[1].workers==2 and executors[1].peak<=4
     result=json.loads((tmp_path/'parts/changed/result.json').read_text())
@@ -170,5 +177,70 @@ def test_nano_and_turbo_pool_prefetch_is_bounded_and_model_settings_recreate_it(
     assert result['execution_settings']['engine']==engine
     assert result['execution_settings']['workers']==2
     if engine=='vieneu':assert result['execution_settings']['precision']=='fp32'
+    if engine=='voxcpm':
+        assert result['execution_settings']['precision']=='fp32'
+        assert result['execution_settings']['voxcpm_steps']==4
     assert result['spoken_audio_seconds']==pytest.approx(.4)
+    if engine=='voxcpm':
+        worker.render({**base,'id':'different-steps','nano_steps':8,'voxcpm_steps':10,'nano_parallel':2})
+        assert len(executors)==2 and not executors[1].closed
+        assert all(settings['voxcpm_steps']==10 for settings in selected[-10:])
+        result=json.loads((tmp_path/'parts/different-steps/result.json').read_text())
+        assert result['execution_settings']['voxcpm_steps']==10
+        worker.render({**base,'id':'different-voice','voice_id':'another-reference','language':'ko',
+                       'quality':'standard','nano_steps':16,'voxcpm_steps':4,'nano_parallel':2})
+        assert len(executors)==2 and not executors[1].closed
+        assert all(settings['voice_id']=='another-reference' and settings['language']=='ko'
+                   and settings['voxcpm_steps']==4 for settings in selected[-10:])
+        worker.render({**base,'id':'different-threads','nano_threads':3,'voxcpm_steps':4,'nano_parallel':2})
+        assert len(executors)==3 and executors[1].closed
+        assert all(settings['nano_threads']==3 for settings in selected[-10:])
+        worker.render({**base,'id':'different-engine','engine':'vieneu','nano_threads':3,'nano_parallel':2})
+        assert len(executors)==4 and executors[2].closed
     worker.close_nano_pool()
+
+
+def test_international_constructor_preserves_reference_and_uses_budgeted_steps_threads(worker,tmp_path,monkeypatch):
+    import sys
+    from types import SimpleNamespace
+    observed={}
+    reference=tmp_path/'reference.wav'
+    def create(path,data,**kwargs):
+        observed.update(path=path,data=data,**kwargs)
+        return lambda text,output:None
+    monkeypatch.setitem(sys.modules,'voxcpm_backend',SimpleNamespace(create_synthesizer=create))
+    monkeypatch.setitem(sys.modules,'voice_library',SimpleNamespace(resolve_reference=lambda ident,data:(reference,{})))
+    worker.load_synthesizer({'engine':'voxcpm','voice_id':'chosen','nano_threads':3,'voxcpm_steps':4})
+    assert observed=={'path':reference,'data':tmp_path,'threads':3,'steps':4}
+
+
+def test_international_steps_change_invalidates_cached_synthesizer(worker,monkeypatch):
+    loaded=[]
+    def load(job):
+        loaded.append(job['voxcpm_steps'])
+        return object()
+    monkeypatch.setattr(worker,'load_synthesizer',load)
+    monkeypatch.setattr(worker,'_cached_synth',None)
+    monkeypatch.setattr(worker,'_cached_key',None)
+    settings={'engine':'voxcpm','voice_id':'same','voxcpm_steps':10,'nano_threads':2}
+    original=worker.get_synthesizer(settings)
+    assert worker.get_synthesizer(settings) is original
+    assert worker.get_synthesizer({**settings,'voxcpm_steps':4}) is not original
+    assert loaded==[10,4]
+
+
+def test_single_multichunk_cue_loads_only_one_model(worker,tmp_path,monkeypatch):
+    def unexpected(*args,**kwargs):
+        pytest.fail('One cue cannot use multiple model workers.')
+    def native(text,path):write_pcm(path,tones([220],.04))
+    monkeypatch.setattr(worker,'ProcessPoolExecutor',unexpected)
+    monkeypatch.setattr(worker,'get_synthesizer',lambda job:native)
+    text='1\n00:00:00,000 --> 00:00:01,000\nLời đầu.\nLời sau.'
+    job={'id':'single','text':text,'input_format':'srt','engine':'voxcpm','format':'wav','speed':1,
+         'nano_parallel':8,'nano_threads':3,'voxcpm_steps':4,'cue_fit':'auto','audio_fit_backend':'wsola'}
+    worker.render(job)
+    result=json.loads((tmp_path/'parts/single/result.json').read_text())
+    assert result['completed']==2
+    assert result['execution_settings']['workers']==1
+    assert result['execution_settings']['threads']==3
+    assert result['execution_settings']['voxcpm_steps']==4

@@ -94,10 +94,10 @@ class _BackendClient:
         finally:
             self.responses.put(None)
 
-    def synthesize(self, text, reference, output):
+    def synthesize(self, text, reference, output, steps=10):
         with self.lock:
             ident = uuid.uuid4().hex
-            request = {'id': ident, 'text': text, 'reference_wav': str(reference), 'output': str(output)}
+            request = {'id': ident, 'text': text, 'reference_wav': str(reference), 'output': str(output), 'steps': steps}
             try:
                 self.process.stdin.write(json.dumps(request, ensure_ascii=False)+'\n')
                 self.process.stdin.flush()
@@ -139,11 +139,13 @@ def close_backends():
 atexit.register(close_backends)
 
 
-def create_synthesizer(reference_audio: Path, data: Path, threads: int = 4):
+def create_synthesizer(reference_audio: Path, data: Path, threads: int = 4, steps: int = 10):
     """Keep one model resident across different reference voices, without Torch here."""
     reference = Path(reference_audio).resolve()
     data = Path(data).resolve()
     threads = max(1, min(8, int(threads)))
+    if type(steps) is not int or steps not in {4, 8, 10}:
+        raise ValueError('Chọn bộ đọc quốc tế 4, 8 hoặc 10 bước.')
     if not reference.is_file():
         raise ValueError('Không tìm thấy mẫu giọng đã chọn.')
 
@@ -155,7 +157,7 @@ def create_synthesizer(reference_audio: Path, data: Path, threads: int = 4):
                 close_backends()
                 _client = _BackendClient(data, threads)
             client = _client
-        client.synthesize(text, reference, Path(output).resolve())
+        client.synthesize(text, reference, Path(output).resolve(), steps=steps)
     return synthesize
 
 
@@ -173,17 +175,25 @@ def _load_model(path, threads):
     if importlib.metadata.version('voxcpm') != PACKAGE_VERSION:
         raise ValueError('Cần voxcpm '+PACKAGE_VERSION+' trong runtime-international.')
     torch.set_num_threads(max(1, min(8, int(threads))))
-    return VoxCPM.from_pretrained(str(path), local_files_only=True, load_denoiser=False,
-                                 optimize=False, device='cpu')
+    model = VoxCPM.from_pretrained(str(path), local_files_only=True, load_denoiser=False,
+                                   optimize=False, device='cpu')
+    from voxcpm_acceleration import enable_active_kv_attention, CachedReferenceModel
+    status = enable_active_kv_attention(model)
+    print('Voice Studio CPU acceleration: '+json.dumps(status), file=sys.stderr, flush=True)
+    optimized = CachedReferenceModel(model)
+    optimized.voice_studio_acceleration = status
+    return optimized
 
 
-def _generate(model, text, reference, output):
+def _generate(model, text, reference, output, steps=10):
     import numpy as np
     import soundfile as sf
     from scipy.signal import resample_poly
     if not isinstance(text, str) or not text.strip():
         raise ValueError('Chưa có lời đọc.')
-    options = {'text': text, 'cfg_value': 2.0, 'inference_timesteps': 10,
+    if type(steps) is not int or steps not in {4, 8, 10}:
+        raise ValueError('Số bước đọc quốc tế không hợp lệ.')
+    options = {'text': text, 'cfg_value': 2.0, 'inference_timesteps': steps,
                'normalize': False, 'denoise': False, 'retry_badcase': True}
     if reference is not None:
         options['reference_wav_path'] = str(reference)
@@ -371,7 +381,7 @@ def main():
                 if not reference.is_file() or data/'parts' not in output.parents:
                     raise ValueError('Đường dẫn mẫu hoặc tệp đầu ra không hợp lệ.')
                 with contextlib.redirect_stdout(sys.stderr):
-                    frames = _generate(model, request['text'], reference, output)
+                    frames = _generate(model, request['text'], reference, output, steps=request.get('steps', 10))
                 response = {'ok': True, 'id': ident, 'output': str(output), 'sample_rate': 24000, 'frames': frames}
             except Exception as exc:
                 response = {'ok': False, 'id': ident, 'error': str(exc)}

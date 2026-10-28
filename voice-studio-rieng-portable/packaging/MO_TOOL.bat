@@ -1,6 +1,6 @@
 @echo off
 setlocal
-title Voice Studio Rieng 1.7.0 Portable
+title Voice Studio Rieng 1.8.0 Portable
 cd /d "%~dp0"
 set "PYTHONHOME="
 set "PYTHONPATH="

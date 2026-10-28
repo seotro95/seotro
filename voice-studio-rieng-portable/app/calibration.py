@@ -24,14 +24,107 @@ SAMPLES=(
     'Những thông tin vừa đọc chỉ là đoạn thử công khai để đo tốc độ tạo giọng trên máy.',
 )
 
+# Public, language-native text for measuring the selected voice. These are
+# synthesis inputs, rather than silence or subtitle gaps in the speed metric.
+NATIVE_SAMPLES={
+    'en':(
+        'The morning light fills the quiet room as a new day begins.',
+        'A good story can help us see familiar places in a different way.',
+        'We are reading a short passage to measure the speed of this voice.',
+        'Along the river, people are enjoying a peaceful walk together.',
+    ),
+    'ja':(
+        '朝の光が静かな部屋を照らし、新しい一日が始まります。',
+        '川沿いの道を歩きながら、穏やかな景色を楽しみます。',
+        'この短い文章で、選んだ声の読み上げ速度を測ります。',
+        '物語を読むと、身近な世界にも新しい発見があります。',
+    ),
+    'ko':(
+        '아침 햇살이 조용한 방을 비추며 새로운 하루가 시작됩니다.',
+        '강가의 길을 걸으며 우리는 평화로운 풍경을 즐깁니다.',
+        '선택한 목소리의 속도를 측정하기 위해 짧은 글을 읽습니다.',
+        '좋은 이야기는 익숙한 세상을 새로운 시선으로 보게 합니다.',
+    ),
+    'zh':(
+        '清晨的阳光照进安静的房间，新的一天开始了。',
+        '我们沿着河边的小路散步，欣赏平静的风景。',
+        '这段简短的文字用于测量所选声音的朗读速度。',
+        '一个好故事可以让我们发现身边世界的不同面貌。',
+    ),
+    'fr':(
+        'La lumière du matin éclaire la pièce et une nouvelle journée commence.',
+        'Nous marchons au bord de la rivière pour profiter du paysage paisible.',
+        'Ce court passage permet de mesurer la vitesse de la voix choisie.',
+        'Une belle histoire nous aide à regarder le monde avec curiosité.',
+    ),
+    'de':(
+        'Das Morgenlicht erfüllt den ruhigen Raum und ein neuer Tag beginnt.',
+        'Wir gehen am Fluss entlang und genießen die friedliche Landschaft.',
+        'Mit diesem kurzen Text messen wir die Geschwindigkeit der gewählten Stimme.',
+        'Eine gute Geschichte lässt uns vertraute Orte mit neuen Augen sehen.',
+    ),
+    'es':(
+        'La luz de la mañana ilumina la habitación y comienza un nuevo día.',
+        'Caminamos junto al río para disfrutar de un paisaje tranquilo.',
+        'Este breve texto sirve para medir la velocidad de la voz elegida.',
+        'Una buena historia nos ayuda a descubrir el mundo con otros ojos.',
+    ),
+    'it':(
+        'La luce del mattino illumina la stanza e comincia una nuova giornata.',
+        'Camminiamo lungo il fiume per ammirare il paesaggio tranquillo.',
+        'Questo breve testo misura la velocità della voce che hai scelto.',
+        'Una bella storia ci aiuta a guardare il mondo con occhi nuovi.',
+    ),
+    'pt':(
+        'A luz da manhã ilumina o quarto e um novo dia começa.',
+        'Caminhamos ao lado do rio para apreciar uma paisagem tranquila.',
+        'Este pequeno texto mede a velocidade da voz que você escolheu.',
+        'Uma boa história nos ajuda a olhar o mundo de uma maneira diferente.',
+    ),
+    'ru':(
+        'Утренний свет наполняет тихую комнату, и начинается новый день.',
+        'Мы идём вдоль реки и любуемся спокойным пейзажем.',
+        'Этот короткий текст помогает измерить скорость выбранного голоса.',
+        'Хорошая история позволяет по-новому взглянуть на знакомый мир.',
+    ),
+    'th':(
+        'แสงแดดยามเช้าส่องเข้ามาในห้องที่เงียบสงบและวันใหม่ก็เริ่มต้นขึ้น',
+        'เราเดินเล่นริมแม่น้ำและชมทิวทัศน์ที่สวยงามอย่างสบายใจ',
+        'ข้อความสั้นนี้ใช้วัดความเร็วในการสร้างเสียงที่คุณเลือก',
+        'เรื่องราวที่ดีช่วยให้เรามองเห็นสิ่งรอบตัวจากมุมมองใหม่',
+    ),
+}
+BENCHMARK_LANGUAGES=('vi','en-US','en-GB',*tuple(language for language in NATIVE_SAMPLES if language!='en'))
 
-def sample_text(workers):
+
+def sample_text(workers,language='vi'):
     # Multiple waves keep a many-core machine busy after every model is loaded.
     count=max(12,min(96,int(workers)*3))
-    return '\n'.join(SAMPLES[i%len(SAMPLES)]+f' Đây là đoạn đo số {i+1}.' for i in range(count))
+    if language=='vi':
+        return '\n'.join(SAMPLES[i%len(SAMPLES)]+f' Đây là đoạn đo số {i+1}.' for i in range(count))
+    samples=_native_samples(language)
+    return '\n'.join(samples[i%len(samples)] for i in range(count))
+
+
+def _native_samples(language):
+    if language not in BENCHMARK_LANGUAGES:
+        raise ValueError('Chưa có văn bản đo tốc độ cho ngôn ngữ đã chọn.')
+    return SAMPLES if language=='vi' else NATIVE_SAMPLES[language.split('-')[0]]
+
+
+def benchmark_sample_text(language='vi',workers=1,engine='vieneu_nano'):
+    """Keep international trials bounded while feeding every selected worker."""
+    samples=_native_samples(language)
+    if engine!='voxcpm':
+        return sample_text(workers,language)
+    count=max(4,min(16,max(1,int(workers))*2))
+    return '\n'.join(samples[i%len(samples)] for i in range(count))
 
 
 def read_saved_presets(data,defaults,engine='vieneu_nano',resident=None):
+    # CPU calibration currently measures the two ONNX engines. International
+    # inference uses a separate model/memory budget and must not reuse it.
+    if engine not in {'vieneu_nano','vieneu'}:return defaults
     try:
         saved=json.loads((Path(data)/'calibration.json').read_text(encoding='utf-8'))
         if saved.get('logical_cores') != os.cpu_count():return defaults

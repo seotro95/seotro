@@ -273,7 +273,7 @@ function Unprotect-VoicePackage([string]$Root, [string]$PlainPassword, [string]$
         $cryptoStream.FlushFinalBlock()
         $cryptoStream.Dispose(); $cryptoStream = $null
         $writer.Dispose(); $writer = $null
-        if ((Get-Item -LiteralPath $pending).Length -ne [long]$manifest.plaintext_size -or
+        if (([IO.FileInfo]::new($pending)).Length -ne [long]$manifest.plaintext_size -or
             (Get-FileSha256 $pending) -cne $manifest.plaintext_sha256) {
             throw 'Tep giong sau giai ma khong khop. Khong cai dat tep nao.'
         }
@@ -374,8 +374,19 @@ try {
         $Password = $null
         $extracted = Join-Path $privateTemporary 'extracted'
         Expand-Archive -LiteralPath $plainZip -DestinationPath $extracted
-        $installer = Join-Path (Join-Path $extracted $manifest.updater_root) 'install_update.py'
+        $unlockedRoot = Join-Path $extracted $manifest.updater_root
+        $installer = Join-Path $unlockedRoot 'install_update.py'
         if (-not [IO.File]::Exists($installer)) { throw 'Goi cap nhat thieu chuong trinh cai dat.' }
+        # The encrypted pack was created with version 1.7 application code.
+        # Install its voices only: never let an old payload downgrade the app.
+        $currentApp = Join-Path $targetRoot 'app\app.py'
+        if (-not [IO.File]::Exists($currentApp)) { throw 'Thu muc tool thieu app\app.py.' }
+        $oldPayload = Join-Path $unlockedRoot 'payload'
+        if (-not [IO.Directory]::Exists($oldPayload)) { throw 'Goi cap nhat thieu payload.' }
+        Remove-Item -LiteralPath $oldPayload -Recurse -Force
+        $voiceOnlyApp = Join-Path $oldPayload 'app'
+        $null = [IO.Directory]::CreateDirectory($voiceOnlyApp)
+        Copy-Item -LiteralPath $currentApp -Destination (Join-Path $voiceOnlyApp 'app.py')
         $env:PYTHONUTF8 = '1'; $env:PYTHONNOUSERSITE = '1'
         Remove-Item Env:PYTHONHOME, Env:PYTHONPATH -ErrorAction SilentlyContinue
         & $python -s -X utf8 $installer --target $targetRoot

@@ -52,7 +52,7 @@ def system_info():
     return {'cpu': cpu, 'logical_cores': os.cpu_count(), 'physical_cores': physical, 'ram_gb': ram, 'nvidia_gpus': gpus, 'pytorch_cuda_available': cuda, 'int8_vnni': supports_int8(), 'note': 'Các giọng Nano/Turbo trong gói này chạy CPU; có card NVIDIA không tự làm Nano dùng GPU. Đo mẫu để biết tốc độ thực tế trên máy đang chạy tool.'}
 
 
-def rendering_presets(engine='vieneu_nano'):
+def rendering_presets(engine='vieneu_nano',resident=None):
     """Conservative CPU/RAM budgets; GPU presence is not a Nano accelerator."""
     import os
     from pathlib import Path
@@ -70,11 +70,23 @@ def rendering_presets(engine='vieneu_nano'):
             pass
     try:
         import psutil
-        available=psutil.virtual_memory().available
+        memory=psutil.virtual_memory()
+        available=memory.available
+        total=getattr(memory,'total',available)
+        # A verified resident team already owns its model allocations. Credit
+        # that reservation once so the next request can reuse the same team.
+        credit=0
+        if (engine=='voxcpm' and isinstance(resident,dict)
+                and resident.get('engine')=='voxcpm' and resident.get('precision')=='fp32'
+                and type(resident.get('workers')) is int and 1<=resident['workers']<=8
+                and type(resident.get('threads')) is int and 1<=resident['threads']<=8):
+            credit=resident['workers']*16*1024**3
+            available=min(total,available+credit)
         cap=Path('/sys/fs/cgroup/memory.max')
         used=Path('/sys/fs/cgroup/memory.current')
         if cap.is_file() and used.is_file() and cap.read_text().strip()!='max':
-            available=min(available,max(0,int(cap.read_text())-int(used.read_text())))
+            ceiling=int(cap.read_text())
+            available=min(available,ceiling,max(0,ceiling-int(used.read_text()))+credit)
         ram_gb=available/1024**3
     except (ImportError,OSError,ValueError):
         ram_gb=0
@@ -89,6 +101,22 @@ def rendering_presets(engine='vieneu_nano'):
 def resource_presets(logical,physical,available_gb,engine='vieneu_nano'):
     """Use physical CPU capacity; Hyper-Threading is not another model budget."""
     physical=max(1,min(logical,physical))
+    if engine=='voxcpm':
+        # Each isolated FP32 VoxCPM2 process has its own model allocation.
+        # Leave room for Windows/the studio and for transient model loading;
+        # reusing the much smaller Nano budget can exhaust a 128 GiB machine.
+        memory_workers=max(1,int(max(0,available_gb-4)/16)) if available_gb else 1
+        cpu_workers=max(1,physical//2)
+        fast=max(1,min(8,cpu_workers,memory_workers))
+        balanced=max(1,fast//2)
+        quality=max(1,fast//4)
+        def settings(workers,steps,backend):
+            return {'voxcpm_steps':steps,'nano_parallel':workers,
+                    'nano_threads':max(1,min(8,physical//workers)),
+                    'audio_fit_backend':backend}
+        return {'fast':settings(fast,4,'wsola'),
+                'balanced':settings(balanced,8,'ffmpeg'),
+                'quality':settings(quality,10,'ffmpeg')}
     per_worker_gb=3 if engine=='vieneu' else 1.25
     memory_workers=max(1,int(max(0,available_gb-1.5)/per_worker_gb)) if available_gb else 1
     fast=max(1,min(32,physical,memory_workers))

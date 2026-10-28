@@ -27,6 +27,54 @@ let appliedCalibrationId = '';
 let appliedRenderEngine = null;
 let speedSummary = null;
 const historyNodes = new Map();
+const renderPreferenceKey = 'voice-studio.render-settings.v1';
+const renderModes = new Set(['fast', 'balanced', 'quality']);
+const renderEngines = new Set(['vieneu_nano', 'vieneu', 'voxcpm']);
+let renderPreferences = readRenderPreferences();
+
+function readRenderPreferences() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(renderPreferenceKey));
+    if (saved?.schema_version === 1 && saved.tuning && typeof saved.tuning === 'object' && !Array.isArray(saved.tuning)) return saved;
+  } catch { /* Restricted browser storage must not prevent local synthesis. */ }
+  return {schema_version: 1, tuning: {}};
+}
+
+function saveRenderPreferences() {
+  if (!renderSettingsInitialized) return;
+  renderPreferences.mode = $('render-mode').value;
+  renderPreferences.language = $('language').value;
+  renderPreferences.voice_id = $('voice').value;
+  try { localStorage.setItem(renderPreferenceKey, JSON.stringify(renderPreferences)); }
+  catch { /* The current session remains usable when storage is unavailable. */ }
+}
+
+function savedRenderTuning(engine, mode) {
+  const saved = renderPreferences.tuning[`${engine}:${mode}`];
+  if (!saved || typeof saved !== 'object' || Array.isArray(saved)) return {};
+  const tuning = {};
+  for (const [key, maximum] of [['nano_parallel', engine === 'voxcpm' ? 8 : 32], ['nano_threads', 8]]) {
+    if (Number.isInteger(saved[key]) && saved[key] >= 1 && saved[key] <= maximum) tuning[key] = saved[key];
+  }
+  if ([4, 8, 16].includes(saved.nano_steps)) tuning.nano_steps = saved.nano_steps;
+  if ([4, 8, 10].includes(saved.voxcpm_steps)) tuning.voxcpm_steps = saved.voxcpm_steps;
+  if (['ffmpeg', 'wsola'].includes(saved.audio_fit_backend)) tuning.audio_fit_backend = saved.audio_fit_backend;
+  if (['auto', 'standard', 'fast'].includes(saved.quality)) tuning.quality = saved.quality;
+  return tuning;
+}
+
+function rememberRenderTuning() {
+  const voice = voices.find((item) => item.id === $('voice').value);
+  if (renderEngines.has(voice?.engine)) {
+    const tuning = {nano_parallel: Number($('nano-parallel').value), nano_threads: Number($('nano-threads').value),
+      audio_fit_backend: $('audio-fit-backend').value, quality: $('quality').value};
+    if (voice.engine === 'vieneu_nano') tuning.nano_steps = Number($('nano-steps').value);
+    if (voice.engine === 'voxcpm') tuning.voxcpm_steps = Number($('voxcpm-steps').value);
+    renderPreferences.tuning[`${voice.engine}:${$('render-mode').value}`] = tuning;
+  }
+  saveRenderPreferences();
+  updateRenderNote();
+}
 
 function node(tag, text, className) {
   const el = document.createElement(tag);
@@ -101,9 +149,19 @@ function engineName(voice) {
   return {vieneu_nano: 'Nano', vieneu: 'Turbo', voxcpm: 'Giọng mẫu đa ngôn ngữ', qwen: 'Qwen', qwen_clone: 'Qwen · Nhân bản', system: 'Hệ thống Windows'}[voice?.engine] || voice?.engine || 'AI';
 }
 
-function cpuVoice(voice) { return ['vieneu_nano', 'vieneu'].includes(voice?.engine); }
+function cpuVoice(voice) { return renderEngines.has(voice?.engine); }
+function calibrationVoice(voice) { return ['vieneu_nano', 'vieneu'].includes(voice?.engine); }
+
+function benchmarkSupported(voice) {
+  const language = $('language').value;
+  if (Array.isArray(config?.benchmark_languages)) return config.benchmark_languages.includes(language);
+  if (voice?.engine === 'voxcpm') return (config?.ai_voice_languages || []).includes(language);
+  if (voice?.engine === 'vieneu') return ['vi', 'en-US', 'en-GB'].includes(language);
+  return language === 'vi';
+}
 
 function renderingPresets(voice) {
+  if (voice?.engine === 'voxcpm') return config?.voxcpm_rendering_presets;
   return voice?.engine === 'vieneu' ? config?.turbo_rendering_presets : config?.rendering_presets;
 }
 
@@ -175,8 +233,9 @@ function updateRenderNote() {
   if (cpuVoice(current)) {
     note += ` Đang giữ giọng ${current.name} · ${engineName(current)}: ${$('nano-parallel').value} tác vụ × ${$('nano-threads').value} luồng CPU.`;
     if (current.engine === 'vieneu' && config?.int8_cpu === false) note += ' CPU này không hỗ trợ VNNI; Turbo dùng FP32. Có thể chuyển sang Nano để đo so sánh.';
+    if (current.engine === 'voxcpm') note += ` ${$('voxcpm-steps').value} bước tạo giọng. Ít bước hơn có thể giảm độ tự nhiên; đo và nghe mẫu trước khi tạo bản dài.`;
   } else if ($('render-mode').value === 'fast' && current) {
-    note += ` Đang giữ giọng ${current.name} · ${engineName(current)}. Cấu hình nhiều tác vụ CPU chỉ áp dụng cho Nano và Turbo.`;
+    note += ` Đang giữ giọng ${current.name} · ${engineName(current)}. Giọng này dùng cơ chế xử lý riêng của mô hình.`;
   }
   $('render-note').textContent = note;
   const nano = fastNanoVoice();
@@ -184,15 +243,22 @@ function updateRenderNote() {
   $('choose-nano').title = nano ? `Chuyển sang ${nano.name}, áp dụng ưu tiên tốc độ và tạo mẫu đo. Kịch bản đang nhập được giữ nguyên.` : 'Cần chọn tiếng Việt và tải giọng Nano trước khi sử dụng.';
 }
 
-function applyRenderMode(mode) {
+function applyRenderMode(mode, {useSaved = true, remember = true} = {}) {
   $('render-mode').value = mode;
   const voice = voices.find((item) => item.id === $('voice').value);
-  const preset = renderingPresets(voice)?.[mode] || {};
+  const key = `${voice?.engine}:${mode}`;
+  if (!useSaved) delete renderPreferences.tuning[key];
+  const preset = {...(renderingPresets(voice)?.[mode] || {}), ...(useSaved ? savedRenderTuning(voice?.engine, mode) : {})};
+  const changedEngine = voice?.engine !== appliedRenderEngine;
   appliedRenderEngine = voice?.engine || null;
   $('nano-steps').value = String(preset.nano_steps || {fast: 4, balanced: 8, quality: 16}[mode] || 8);
-  $('nano-parallel').value = String(Math.max(1, Math.min(32, Number(preset.nano_parallel) || 1)));
+  $('voxcpm-steps').value = String(preset.voxcpm_steps || {fast: 4, balanced: 8, quality: 10}[mode] || 8);
+  $('nano-parallel').value = String(Math.max(1, Math.min(voice?.engine === 'voxcpm' ? 8 : 32, Number(preset.nano_parallel) || 1)));
   $('nano-threads').value = String(Math.max(1, Math.min(8, Number(preset.nano_threads) || 2)));
-  $('audio-fit-backend').value = mode === 'fast' ? 'wsola' : (preset.audio_fit_backend === 'wsola' ? 'wsola' : 'ffmpeg');
+  $('audio-fit-backend').value = preset.audio_fit_backend || (mode === 'fast' ? 'wsola' : 'ffmpeg');
+  if (preset.quality) $('quality').value = preset.quality;
+  else if (changedEngine || !useSaved) $('quality').value = 'auto';
+  if (remember) saveRenderPreferences();
   updateRenderNote();
 }
 
@@ -203,6 +269,7 @@ async function inspectMachine() {
     const info = await api('/api/system-info');
     if (info.rendering_presets && config) config.rendering_presets = info.rendering_presets;
     if (info.turbo_rendering_presets && config) config.turbo_rendering_presets = info.turbo_rendering_presets;
+    if (info.voxcpm_rendering_presets && config) config.voxcpm_rendering_presets = info.voxcpm_rendering_presets;
     const gpuNames = Array.isArray(info.nvidia_gpus) ? info.nvidia_gpus : [];
     const rows = [
       ['Bộ xử lý', info.cpu || 'Chưa xác định'],
@@ -273,22 +340,31 @@ function populateVoices() {
 
 function updateVoice() {
   const voice = voices.find((item) => item.id === $('voice').value);
-  if (voice?.engine !== appliedRenderEngine) applyRenderMode($('render-mode').value);
+  if (voice?.engine !== appliedRenderEngine) applyRenderMode($('render-mode').value, {remember: false});
   const ready = voiceReady(voice);
   $('voice-status').className = `voice-status ${ready ? 'ready' : 'missing'}`;
   $('voice-status-title').textContent = !voice ? 'Chưa có giọng phù hợp' : ready ? `${engineName(voice)} · Sẵn sàng sử dụng` : `${engineName(voice)} · Cần tải mô hình`;
   $('voice-status-detail').textContent = !voice ? 'Chọn ngôn ngữ khác hoặc thêm mẫu giọng cá nhân được hỗ trợ.' : ready ? (voice.description || 'Giọng đã có trên máy.') : voiceSetupMessage(voice);
   $('generate').disabled = !ready || submitting;
-  $('benchmark').disabled = !ready || submitting || $('language').value !== 'vi';
-  $('calibrate-machine').disabled = !ready || submitting || $('language').value !== 'vi' || !cpuVoice(voice);
-  $('calibrate-machine').title = cpuVoice(voice) ? `Đo cấu hình nhiều tác vụ cho giọng ${voice.name} · ${engineName(voice)}.` : 'Chọn giọng tiếng Việt Nano hoặc Turbo để đo nhiều tác vụ CPU.';
-  $('benchmark').title = $('language').value === 'vi' ? 'Đo bằng giọng và chế độ ưu tiên đang chọn.' : 'Mẫu đo hiện hỗ trợ tiếng Việt.';
+  $('benchmark').disabled = !ready || submitting || !benchmarkSupported(voice);
+  $('calibrate-machine').disabled = !ready || submitting || $('language').value !== 'vi' || !calibrationVoice(voice);
+  $('calibrate-machine').title = calibrationVoice(voice) ? `Đo cấu hình nhiều tác vụ cho giọng ${voice.name} · ${engineName(voice)}.` : 'Tự tối ưu nhiều cấu hình hiện dùng Nano hoặc Turbo tiếng Việt. Với giọng đa ngôn ngữ, dùng Đo giọng đang chọn.';
+  $('benchmark').title = benchmarkSupported(voice) ? 'Đo bằng giọng, ngôn ngữ và chế độ ưu tiên đang chọn.' : 'Chưa có lời đọc mẫu cho ngôn ngữ này.';
   $('nano-parallel').disabled = !cpuVoice(voice) || submitting;
+  for (const option of $('nano-parallel').options) {
+    const outsideBudget = voice?.engine === 'voxcpm' && Number(option.value) > 8;
+    option.disabled = outsideBudget; option.hidden = outsideBudget;
+  }
   $('nano-threads').disabled = !cpuVoice(voice) || submitting;
   $('nano-steps').disabled = voice?.engine !== 'vieneu_nano' || submitting;
+  $('voxcpm-steps').disabled = voice?.engine !== 'voxcpm' || submitting;
+  $('nano-step-field').hidden = voice?.engine !== 'vieneu_nano';
+  $('voxcpm-step-field').hidden = voice?.engine !== 'voxcpm';
   $('resource-note').textContent = cpuVoice(voice)
-    ? `Các tác vụ CPU áp dụng cho giọng ${engineName(voice)} đang chọn. Nhiều tác vụ dùng thêm RAM; bấm tự đo để tìm cấu hình phù hợp. Số bước tạo giọng chỉ áp dụng cho Nano.`
-    : 'Chọn Nano hoặc Turbo để dùng nhiều tác vụ CPU. Giọng hiện tại dùng cơ chế xử lý riêng của mô hình.';
+    ? voice.engine === 'voxcpm'
+      ? 'Các tác vụ và luồng CPU áp dụng cho giọng đa ngôn ngữ đang chọn. Mỗi tác vụ dùng nhiều RAM; đo mẫu để kiểm tra tốc độ và chọn ít tác vụ hơn nếu máy thiếu RAM.'
+      : `Các tác vụ CPU áp dụng cho giọng ${engineName(voice)} đang chọn. Nhiều tác vụ dùng thêm RAM; bấm tự đo để tìm cấu hình phù hợp. Số bước Nano được chỉnh riêng bên dưới.`
+    : 'Giọng hiện tại dùng cơ chế xử lý riêng của mô hình.';
   updateSuggestion();
   updateRenderNote();
   $('generate-note').textContent = !voice ? 'Cần chọn giọng hỗ trợ ngôn ngữ lời đọc.' : !ready ? (voice.has_sample || voice.category === 'reference' ? 'Cài mô hình trước khi tạo giọng. Bạn vẫn có thể nghe mẫu trong Thư viện giọng.' : 'Tải mô hình trước khi tạo giọng. Mở Hướng dẫn để xem chi tiết.') : 'Tạo trên máy · Có thể dừng và tiếp tục trong Bản thu';
@@ -418,7 +494,7 @@ function setOutput(job) {
     $('speed-report').textContent=`Đã lưu cấu hình ${engineName({engine:job.calibration_report.engine || job.engine})} đo được: ${selected.settings.nano_parallel} tác vụ × ${selected.settings.nano_threads} luồng. Kết quả khi model đã nạp: ${formatSpeedReport(selected.warm)} Tổng thời gian thử các cấu hình: ${duration(job.calibration_report.total_calibration_seconds)}.`;
     if (appliedCalibrationId !== job.id) {
       appliedCalibrationId=job.id;
-      api('/api/config').then(fresh => { config=fresh; if ($('voice').value===job.voice_id && $('render-mode').value===job.render_mode) applyRenderMode(job.render_mode); }).catch(error => notify(error.message,true));
+      api('/api/config').then(fresh => { config=fresh; if ($('voice').value===job.voice_id && $('render-mode').value===job.render_mode) applyRenderMode(job.render_mode, {useSaved: false}); }).catch(error => notify(error.message,true));
     }
   }
 }
@@ -431,6 +507,7 @@ function formatExecutionSettings(job) {
     if (cpuVoice({engine}) && Number(actual.workers)>0 && Number(actual.threads)>0) parts.push(`${actual.workers} tác vụ × ${actual.threads} luồng CPU`);
     if (actual.precision) parts.push(String(actual.precision).toUpperCase());
     if (engine==='vieneu_nano' && actual.nano_steps) parts.push(`${actual.nano_steps} bước`);
+    if (engine==='voxcpm' && (actual.voxcpm_steps || actual.inference_steps)) parts.push(`${actual.voxcpm_steps || actual.inference_steps} bước`);
   } else if (activeStatuses.has(job.status) && cpuVoice({engine})) {
     parts.push(`yêu cầu ${job.nano_parallel || 1} tác vụ × ${job.nano_threads || 2} luồng CPU`);
   }
@@ -475,7 +552,8 @@ async function generate() {
       paragraph_pause: paragraphPauseEdited ? Number($('paragraph-pause').value) : null, quality: $('quality').value,
       cue_fit: $('cue-fit').value, max_cue_tempo: Number($('cue-tempo').value),
       render_mode: $('render-mode').value, audio_fit_backend: $('audio-fit-backend').value,
-      nano_steps: Number($('nano-steps').value), nano_threads: Number($('nano-threads').value), nano_parallel: Number($('nano-parallel').value)
+      nano_steps: Number($('nano-steps').value), nano_threads: Number($('nano-threads').value), nano_parallel: Number($('nano-parallel').value),
+      ...(voice.engine === 'voxcpm' ? {voxcpm_steps: Number($('voxcpm-steps').value)} : {})
     });
     setOutput(job); notify('Đã nhận nội dung. Bạn có thể theo dõi bản thu ở bên dưới.');
     await refreshHistory();
@@ -485,8 +563,8 @@ async function generate() {
 
 async function benchmark() {
   if (submitting) return;
-  if ($('language').value !== 'vi') { notify('Mẫu đo tốc độ hiện hỗ trợ tiếng Việt. Chọn tiếng Việt để đo thử.', true); return; }
   const voice = voices.find((item) => item.id === $('voice').value);
+  if (!benchmarkSupported(voice)) { notify('Chưa có lời đọc mẫu cho ngôn ngữ đang chọn.', true); return; }
   if (!voiceReady(voice)) { notify('Chọn giọng đã sẵn sàng trước khi đo tốc độ.', true); return; }
   submitting = true; updateVoice(); notify('');
   try {
@@ -494,7 +572,8 @@ async function benchmark() {
       voice_id: voice.id, language: $('language').value,
       render_mode: $('render-mode').value, delivery: $('delivery').value,
       nano_steps: Number($('nano-steps').value), nano_parallel: Number($('nano-parallel').value),
-      nano_threads: Number($('nano-threads').value), audio_fit_backend: $('audio-fit-backend').value, quality: $('quality').value
+      nano_threads: Number($('nano-threads').value), audio_fit_backend: $('audio-fit-backend').value, quality: $('quality').value,
+      ...(voice.engine === 'voxcpm' ? {voxcpm_steps: Number($('voxcpm-steps').value)} : {})
     });
     setOutput(job);
     notify('Đang tạo mẫu ngắn để đo tốc độ. Kết quả và ước tính tạo 1 giờ lời đọc sẽ hiện ở Bản thu.');
@@ -509,7 +588,7 @@ async function chooseNanoAndBenchmark() {
   const voice=fastNanoVoice();
   if (!voice) { notify('Chọn tiếng Việt và tải giọng Nano trước khi đo so sánh.', true); return; }
   $('voice').value=voice.id;
-  applyRenderMode('fast');
+  applyRenderMode('fast', {useSaved: false});
   updateVoice();
   await benchmark();
 }
@@ -574,6 +653,7 @@ function renderLibrary() {
         ? voice.native_language : (voice.languages || []).find(supported);
       if (!language) throw new Error('Chưa có ngôn ngữ phù hợp cho giọng này.');
       $('language').value = language; populateVoices(); $('voice').value = voice.id; updateVoice();
+      saveRenderPreferences();
       showView('create'); $('script').focus();
       if (!ready) notify(voiceSetupMessage(voice), true);
     }));
@@ -668,8 +748,20 @@ async function refreshVoices() {
   const results = await Promise.all([api('/api/config'), api('/api/voices')]);
   config = results[0]; voices = results[1].voices || [];
   populateDeliveryProfiles();
-  if (!renderSettingsInitialized) { applyRenderMode($('render-mode').value); renderSettingsInitialized = true; }
-  populateLanguages(); populateVoices(); renderLibrary(); renderModelStatus();
+  const initial = !renderSettingsInitialized;
+  if (initial && renderModes.has(renderPreferences.mode)) $('render-mode').value = renderPreferences.mode;
+  populateLanguages();
+  if (initial && [...$('language').options].some((option) => option.value === renderPreferences.language)) $('language').value = renderPreferences.language;
+  populateVoices();
+  if (initial) {
+    if ([...$('voice').options].some((option) => option.value === renderPreferences.voice_id)) {
+      $('voice').value = renderPreferences.voice_id;
+      updateVoice();
+    }
+    applyRenderMode($('render-mode').value, {remember: false});
+    renderSettingsInitialized = true;
+  }
+  renderLibrary(); renderModelStatus();
   $('version').textContent = config.version ? `· ${config.version}` : '';
   setConnection(true);
 }
@@ -707,8 +799,8 @@ async function poll() {
 }
 
 for (const button of document.querySelectorAll('[data-view]')) button.addEventListener('click', () => showView(button.dataset.view));
-$('language').addEventListener('change', populateVoices);
-$('voice').addEventListener('change', () => { applyRenderMode($('render-mode').value); updateVoice(); });
+$('language').addEventListener('change', () => { populateVoices(); saveRenderPreferences(); });
+$('voice').addEventListener('change', () => { updateVoice(); saveRenderPreferences(); });
 $('script').addEventListener('input', updateCharacterCount);
 $('script-format').addEventListener('change', updateFormat);
 $('speed').addEventListener('input', () => { $('speed-value').textContent = `${Number($('speed').value).toLocaleString('vi-VN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}×`; });
@@ -716,17 +808,22 @@ $('delivery').addEventListener('change', updateDelivery);
 $('paragraph-pause').addEventListener('input', () => { paragraphPauseEdited = true; });
 $('render-mode').addEventListener('change', () => applyRenderMode($('render-mode').value));
 $('optimize-speed').addEventListener('click', () => {
-  applyRenderMode('fast');
+  applyRenderMode('fast', {useSaved: false});
   const voice=voices.find((item)=>item.id===$('voice').value);
   notify(`Đã giữ giọng ${voice?.name || 'đang chọn'} và áp dụng cấu hình ${engineName(voice)} ưu tiên tốc độ. Bấm Đo giọng đang chọn để kiểm tra trước khi tạo bản dài.`);
 });
 $('choose-nano').addEventListener('click', chooseNanoAndBenchmark);
-$('nano-parallel').addEventListener('change', updateRenderNote);
-$('nano-threads').addEventListener('input', updateRenderNote);
+$('nano-parallel').addEventListener('change', rememberRenderTuning);
+$('nano-threads').addEventListener('input', rememberRenderTuning);
+$('nano-steps').addEventListener('change', rememberRenderTuning);
+$('voxcpm-steps').addEventListener('change', rememberRenderTuning);
+$('audio-fit-backend').addEventListener('change', rememberRenderTuning);
+$('quality').addEventListener('change', rememberRenderTuning);
 $('suggest-voice').addEventListener('click', () => {
   const suggested = suggestedVoice();
   if (!suggested) { notify('Chưa có giọng gợi ý sẵn sàng. Chọn giọng khác hoặc tải thêm giọng trong Thư viện giọng.', true); return; }
   $('voice').value = suggested.id; updateVoice();
+  saveRenderPreferences();
   notify(`Đã chọn ${suggested.name} cho ${$('delivery').selectedOptions[0]?.textContent || 'thể loại đang chọn'}. Hãy nghe mẫu để đánh giá sắc thái.`);
 });
 $('benchmark').addEventListener('click', benchmark);
@@ -776,7 +873,7 @@ $('cue-fit').addEventListener('change', updateFormat);
 
 $('calibrate-machine').addEventListener('click', async () => {
   const voice=voices.find(item=>item.id===$('voice').value);
-  if (submitting || !voiceReady(voice) || !cpuVoice(voice))return;
+  if (submitting || !voiceReady(voice) || !calibrationVoice(voice) || $('language').value !== 'vi')return;
   submitting=true;updateVoice();
   try {
     const job=await post('/api/calibrate',{voice_id:voice.id,language:$('language').value,render_mode:$('render-mode').value,delivery:$('delivery').value});
