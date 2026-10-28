@@ -37,6 +37,8 @@ jobs:
       - name: Verify decryption on Windows PowerShell 5.1 with synthetic data only
         shell: pwsh
         run: |
+          $PSNativeCommandUseErrorActionPreference = $false
+          try {
           $source = Join-Path $env:GITHUB_WORKSPACE 'voice-studio-rieng-portable/packaging/github-delivery'
           $script = Join-Path $source 'install_secure_voices.ps1'
           $fixture = Join-Path $source 'test-fixture'
@@ -44,15 +46,25 @@ jobs:
           New-Item -ItemType Directory -Path $work | Out-Null
           $output = Join-Path $work 'synthetic-decoded.txt'
           $dummyPassword = 'voice-studio-synthetic-test-only'
-          & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $fixture -DecryptOnly -OutputPath $output -Password $dummyPassword
-          if ($LASTEXITCODE -ne 0) { throw 'Synthetic correct-password decryption failed on Windows PowerShell 5.1' }
+          $diagnostic = & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $fixture -DecryptOnly -OutputPath $output -Password $dummyPassword 2>&1 | Out-String
+          $positiveExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($positiveExit -ne 0) {
+            $escapedDiagnostic = $diagnostic.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+            Write-Output ("::error::Windows PS 5.1 synthetic decrypt failed: " + $escapedDiagnostic)
+            throw 'Synthetic correct-password decryption failed on Windows PowerShell 5.1'
+          }
           $expected = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $fixture 'expected.txt')).Hash
           if ((Get-FileHash -Algorithm SHA256 -LiteralPath $output).Hash -ne $expected) { throw 'Synthetic decrypted bytes differ' }
-          & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $fixture -DecryptOnly -OutputPath $output -Password $dummyPassword
-          if ($LASTEXITCODE -eq 0 -or (Get-FileHash -Algorithm SHA256 -LiteralPath $output).Hash -ne $expected) { throw 'Existing output must be refused and preserved' }
+          $diagnostic = & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $fixture -DecryptOnly -OutputPath $output -Password $dummyPassword 2>&1 | Out-String
+          $negativeExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($negativeExit -eq 0 -or (Get-FileHash -Algorithm SHA256 -LiteralPath $output).Hash -ne $expected) { throw 'Existing output must be refused and preserved' }
           $wrongOutput = Join-Path $work 'wrong-password-output.txt'
-          & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $fixture -DecryptOnly -OutputPath $wrongOutput -Password 'incorrect-synthetic-password'
-          if ($LASTEXITCODE -eq 0 -or (Test-Path -LiteralPath $wrongOutput)) { throw 'Wrong password must fail without creating plaintext' }
+          $diagnostic = & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $fixture -DecryptOnly -OutputPath $wrongOutput -Password 'incorrect-synthetic-password' 2>&1 | Out-String
+          $negativeExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($negativeExit -eq 0 -or (Test-Path -LiteralPath $wrongOutput)) { throw 'Wrong password must fail without creating plaintext' }
           $tampered = Join-Path $work 'tampered-fixture'
           Copy-Item -LiteralPath $fixture -Destination $tampered -Recurse
           $packet = Join-Path $tampered 'delivery/voices.vspack'
@@ -65,8 +77,10 @@ jobs:
           $manifest.encrypted_sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $packet).Hash.ToLowerInvariant()
           $manifest | ConvertTo-Json | Set-Content -LiteralPath $manifestPath -Encoding utf8
           $tamperOutput = Join-Path $work 'tampered-output.txt'
-          & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $tampered -DecryptOnly -OutputPath $tamperOutput -Password $dummyPassword
-          if ($LASTEXITCODE -eq 0 -or (Test-Path -LiteralPath $tamperOutput)) { throw 'Tampered ciphertext must fail authentication without plaintext' }
+          $diagnostic = & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $tampered -DecryptOnly -OutputPath $tamperOutput -Password $dummyPassword 2>&1 | Out-String
+          $negativeExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($negativeExit -eq 0 -or (Test-Path -LiteralPath $tamperOutput)) { throw 'Tampered ciphertext must fail authentication without plaintext' }
           $shortened = Join-Path $work 'shortened-fixture'
           Copy-Item -LiteralPath $fixture -Destination $shortened -Recurse
           $shortPacket = Join-Path $shortened 'delivery/voices.vspack'
@@ -78,8 +92,10 @@ jobs:
           $shortManifest.encrypted_sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $shortPacket).Hash.ToLowerInvariant()
           $shortManifest | ConvertTo-Json | Set-Content -LiteralPath $shortManifestPath -Encoding utf8
           $shortOutput = Join-Path $work 'shortened-output.txt'
-          & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $shortened -DecryptOnly -OutputPath $shortOutput -Password $dummyPassword
-          if ($LASTEXITCODE -eq 0 -or (Test-Path -LiteralPath $shortOutput)) { throw 'Invalid length must fail without plaintext' }
+          $diagnostic = & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $shortened -DecryptOnly -OutputPath $shortOutput -Password $dummyPassword 2>&1 | Out-String
+          $negativeExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($negativeExit -eq 0 -or (Test-Path -LiteralPath $shortOutput)) { throw 'Invalid length must fail without plaintext' }
           if (@(Get-ChildItem -LiteralPath $work -Recurse -Force -File -Filter '.voice-decrypt-*.tmp').Count -ne 0) { throw 'Crypto failure left a plaintext temporary file' }
           @{
             platform = 'Windows PowerShell 5.1'
@@ -95,6 +111,15 @@ jobs:
           # The rejected negative tests intentionally exit 1; all assertions
           # above passed, so do not propagate their expected native exit code.
           exit 0
+          } catch {
+            $escapedException = $_.Exception.ToString().Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+            Write-Output ("::error::Synthetic Windows crypto QA failed: " + $escapedException)
+            if ($diagnostic) {
+              $escapedDiagnostic = $diagnostic.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+              Write-Output ("::error::Last synthetic PowerShell output: " + $escapedDiagnostic)
+            }
+            throw
+          }
       - name: Build downloads from the checksum-verified Windows release
         shell: pwsh
         run: |
