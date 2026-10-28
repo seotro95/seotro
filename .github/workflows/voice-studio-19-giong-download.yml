@@ -1,0 +1,132 @@
+name: Voice Studio - GitHub download with 19 protected voices
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [voice-studio-github-download-1.7.0]
+    paths:
+      - '.github/workflows/voice-studio-19-giong-download.yml'
+      - 'voice-studio-rieng-portable/packaging/build_github_voice_download.py'
+      - 'voice-studio-rieng-portable/packaging/github-delivery/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-studio-19-giong-github-download
+  cancel-in-progress: true
+
+env:
+  PYTHONUTF8: '1'
+
+jobs:
+  package:
+    runs-on: windows-2022
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Validate encrypted-only packaging boundaries
+        shell: pwsh
+        run: |
+          python voice-studio-rieng-portable/packaging/build_github_voice_download.py --self-test
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Verify decryption on Windows PowerShell 5.1 with synthetic data only
+        shell: pwsh
+        run: |
+          $source = Join-Path $env:GITHUB_WORKSPACE 'voice-studio-rieng-portable/packaging/github-delivery'
+          $script = Join-Path $source 'install_secure_voices.ps1'
+          $fixture = Join-Path $source 'test-fixture'
+          $work = Join-Path $env:RUNNER_TEMP 'synthetic-crypto-qa'
+          New-Item -ItemType Directory -Path $work | Out-Null
+          $output = Join-Path $work 'synthetic-decoded.txt'
+          $dummyPassword = 'voice-studio-synthetic-test-only'
+          & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $fixture -DecryptOnly -OutputPath $output -Password $dummyPassword
+          if ($LASTEXITCODE -ne 0) { throw 'Synthetic correct-password decryption failed on Windows PowerShell 5.1' }
+          $expected = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $fixture 'expected.txt')).Hash
+          if ((Get-FileHash -Algorithm SHA256 -LiteralPath $output).Hash -ne $expected) { throw 'Synthetic decrypted bytes differ' }
+          & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $fixture -DecryptOnly -OutputPath $output -Password $dummyPassword
+          if ($LASTEXITCODE -eq 0 -or (Get-FileHash -Algorithm SHA256 -LiteralPath $output).Hash -ne $expected) { throw 'Existing output must be refused and preserved' }
+          $wrongOutput = Join-Path $work 'wrong-password-output.txt'
+          & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $fixture -DecryptOnly -OutputPath $wrongOutput -Password 'incorrect-synthetic-password'
+          if ($LASTEXITCODE -eq 0 -or (Test-Path -LiteralPath $wrongOutput)) { throw 'Wrong password must fail without creating plaintext' }
+          $tampered = Join-Path $work 'tampered-fixture'
+          Copy-Item -LiteralPath $fixture -Destination $tampered -Recurse
+          $packet = Join-Path $tampered 'delivery/voices.vspack'
+          $bytes = [IO.File]::ReadAllBytes($packet)
+          $bytes[48] = $bytes[48] -bxor 1
+          [IO.File]::WriteAllBytes($packet, $bytes)
+          # Change only the dummy public checksum so this test reaches the HMAC gate.
+          $manifestPath = Join-Path $tampered 'delivery/manifest.json'
+          $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+          $manifest.encrypted_sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $packet).Hash.ToLowerInvariant()
+          $manifest | ConvertTo-Json | Set-Content -LiteralPath $manifestPath -Encoding utf8
+          $tamperOutput = Join-Path $work 'tampered-output.txt'
+          & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $tampered -DecryptOnly -OutputPath $tamperOutput -Password $dummyPassword
+          if ($LASTEXITCODE -eq 0 -or (Test-Path -LiteralPath $tamperOutput)) { throw 'Tampered ciphertext must fail authentication without plaintext' }
+          $shortened = Join-Path $work 'shortened-fixture'
+          Copy-Item -LiteralPath $fixture -Destination $shortened -Recurse
+          $shortPacket = Join-Path $shortened 'delivery/voices.vspack'
+          $shortBytes = [IO.File]::ReadAllBytes($shortPacket)
+          [IO.File]::WriteAllBytes($shortPacket, $shortBytes[0..($shortBytes.Length-2)])
+          $shortManifestPath = Join-Path $shortened 'delivery/manifest.json'
+          $shortManifest = Get-Content -LiteralPath $shortManifestPath -Raw | ConvertFrom-Json
+          $shortManifest.encrypted_size = (Get-Item -LiteralPath $shortPacket).Length
+          $shortManifest.encrypted_sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $shortPacket).Hash.ToLowerInvariant()
+          $shortManifest | ConvertTo-Json | Set-Content -LiteralPath $shortManifestPath -Encoding utf8
+          $shortOutput = Join-Path $work 'shortened-output.txt'
+          & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -PackageRoot $shortened -DecryptOnly -OutputPath $shortOutput -Password $dummyPassword
+          if ($LASTEXITCODE -eq 0 -or (Test-Path -LiteralPath $shortOutput)) { throw 'Invalid length must fail without plaintext' }
+          if (@(Get-ChildItem -LiteralPath $work -Recurse -Force -File -Filter '.voice-decrypt-*.tmp').Count -ne 0) { throw 'Crypto failure left a plaintext temporary file' }
+          @{
+            platform = 'Windows PowerShell 5.1'
+            synthetic_correct_password = 'passed'
+            synthetic_existing_output = 'refused and preserved'
+            synthetic_wrong_password = 'rejected without plaintext'
+            synthetic_tampered_ciphertext = 'rejected without plaintext'
+            synthetic_invalid_packet_length = 'rejected without plaintext'
+            plaintext_temporary_files_remaining = 0
+            actual_private_password_used = $false
+            actual_private_packet_decrypted = $false
+          } | ConvertTo-Json | Set-Content -Encoding utf8 (Join-Path $env:RUNNER_TEMP 'crypto-windows-qa.json')
+          # The rejected negative tests intentionally exit 1; all assertions
+          # above passed, so do not propagate their expected native exit code.
+          exit 0
+      - name: Build downloads from the checksum-verified Windows release
+        shell: pwsh
+        run: |
+          python voice-studio-rieng-portable/packaging/build_github_voice_download.py --output "${{ runner.temp }}/github-download"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Copy-Item -LiteralPath "${{ runner.temp }}/crypto-windows-qa.json" -Destination "${{ runner.temp }}/github-download/Windows-PowerShell-Crypto.qa.json"
+      - name: Upload checked GitHub downloads
+        uses: actions/upload-artifact@v4
+        with:
+          name: Voice-Studio-Rieng-1.7.0-19-Giong-GitHub
+          path: |
+            ${{ runner.temp }}/github-download/*.zip
+            ${{ runner.temp }}/github-download/*.sha256
+            ${{ runner.temp }}/github-download/*.qa.json
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+      - name: Publish full Windows package and small encrypted update
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = "voice-studio-19-giong-${{ github.run_id }}"
+          @"
+          Voice Studio Riêng 1.7.0 - tải trên GitHub, có gói 19 giọng được mã hóa.
+
+          Tải bản Windows đầy đủ nếu chưa có tool, hoặc gói Cap-Nhat nhỏ nếu đã có bản Portable. Giải nén TOÀN BỘ ZIP, chạy CAI_19_GIONG.bat và dán mật khẩu được gửi riêng trong cuộc trò chuyện. Sau khi cài 19 giọng, mở MO_TOOL.bat.
+          Mật khẩu không nằm trên GitHub hoặc trong ZIP. Các bản thu, tên mẫu và nội dung riêng chỉ có bên trong gói đã mã hóa; không giải mã chúng trên GitHub Actions.
+          Ba giọng tiếng Anh dùng Turbo đi kèm. Các giọng Hàn, Nga, Nhật, Pháp, Tây Ban Nha và Thái cần chạy TAI_GIONG_DA_NGON_NGU.bat một lần có Internet để tải khoảng 5 GB model và thư viện CPU. Tốc độ 2 phút/1 giờ chưa được bảo đảm.
+          Runtime, model Việt/Anh, mã ứng dụng và giấy phép được giữ từ bản Windows 1.7 đã kiểm tra, SHA256 b8a089d2431a743c5b3f3c68692c2075bae59bf2715c15d4531ec46b1c6900a4. Quy trình này kiểm tra giải mã bằng dữ liệu giả trên Windows PowerShell 5.1, từ chối mật khẩu sai và dữ liệu bị sửa trước khi xuất file. Nó không dùng mật khẩu riêng hoặc giải mã bản thu riêng trên GitHub.
+          Source: ${{ github.sha }}
+          "@ | Set-Content -Encoding utf8 "${{ runner.temp }}/github-download-release-notes.txt"
+          $assets = Get-ChildItem -File "${{ runner.temp }}/github-download" | Where-Object { $_.Name -match '\.(zip|sha256|qa\.json)$' } | ForEach-Object { $_.FullName }
+          gh release create $tag @assets --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Voice Studio 1.7 - 19 giọng - tải cho Windows" --notes-file "${{ runner.temp }}/github-download-release-notes.txt" --latest=false
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

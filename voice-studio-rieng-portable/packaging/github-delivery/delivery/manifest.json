@@ -1,0 +1,9 @@
+{
+  "format": "voice-studio-private-delivery-v1",
+  "encrypted_file": "voices.vspack",
+  "encrypted_size": 6544320,
+  "encrypted_sha256": "1992c607a8ea9f64aa1821c751259698c146743a10b3da5b73f5738816fb7d82",
+  "plaintext_size": 6544228,
+  "plaintext_sha256": "ac79eea8d4df9e8ef0f7d3417e151406fdd634b151fe4b62010ae523f825749d",
+  "updater_root": "Voice-Studio-Rieng-1.7.0-Cap-Nhat-19-Giong"
+}
