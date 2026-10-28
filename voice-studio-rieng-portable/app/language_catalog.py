@@ -12,9 +12,10 @@ def system_language(culture):
     return 'en-US' if base=='en' else base
 
 def native_language(voice):
+    if voice.get('native_language'):return voice['native_language']
     ident=voice['id']
     if voice.get('engine')=='system':return voice.get('culture',voice['languages'][0]).split('-')[0]
-    if voice.get('category')=='cloned':return voice['languages'][0].split('-')[0]
+    if voice.get('category') in {'cloned','reference'}:return voice['languages'][0].split('-')[0]
     if ident.startswith(('vi-','nano-')):return 'vi'
     if ident in ('qw-ryan','qw-aiden'):return 'en'
     if ident=='qw-ono':return 'ja'

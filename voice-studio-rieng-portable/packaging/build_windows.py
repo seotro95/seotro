@@ -1,4 +1,4 @@
-"""Build the standalone 1.6 Windows bundle; publish only after native validation.
+"""Build the standalone 1.7 Windows bundle; publish only after native validation.
 
 A checksum-pinned, previously tested portable release can supply the runtime and
 models. Only its runtime, FFmpeg and model storage are reused; application source,
@@ -132,7 +132,9 @@ def copy_source(root):
         if file.is_file() and file.suffix in {'.py', '.ps1'}:
             shutil.copy2(file, app/file.name)
     shutil.copytree(SOURCE/'app/static', app/'static')
-    for name in ('HUONG_DAN_CAN_MOC.txt', 'requirements-runtime.txt'):
+    for name in ('HUONG_DAN_CAN_MOC.txt', 'DOC_TRUOC.md', 'THIRD_PARTY_NOTICES.md',
+                 'requirements-runtime.txt', 'requirements-qwen.txt',
+                 'requirements-international.txt', 'TAI_GIONG_DA_NGON_NGU.bat'):
         shutil.copy2(SOURCE/name, root/name)
     guide=root/'HUONG_DAN_CAN_MOC.txt'
     guide.write_text(guide.read_text(encoding='utf-8').replace('Chạy CAI_DAT.bat rồi MO_TOOL.bat theo DOC_TRUOC.md.', 'Bản Portable: mở MO_TOOL.bat; không cần cài Python hay tải model.'), encoding='utf-8')
@@ -233,7 +235,7 @@ def verify_relocated(root):
 
 
 def write_notices(root):
-    (root/'DOC_TRUOC_PORTABLE.txt').write_text('''VOICE STUDIO RIENG 1.6.0 - WINDOWS 10/11 X64 PORTABLE
+    (root/'DOC_TRUOC_PORTABLE.txt').write_text('''VOICE STUDIO RIENG 1.7.0 - WINDOWS 10/11 X64 PORTABLE
 
 Giai nen TOAN BO ZIP vao thu muc moi, vi du D:\\VoiceStudio.
 Mo MO_TOOL.bat. Khong can cai Python, FFmpeg hay tai lai giong Nano da kem theo.
@@ -242,13 +244,21 @@ Ban nay giu nguyen moc SRT, tu can nhip tung cau va them khoang lang.
 Chon WAV de dung video; cau bi ep qua nhanh van can nghe kiem tra.
 Co che do Nhanh/Can bang/Chat luong va kiem tra cau hinh may, do toc do mau.
 Ho tro toi da 32 tac vu Nano/Turbo, tu do va luu cau hinh rieng cho moi bo giong.
-Ban1.6 sua loi Mai Anh/Turbo chi chay mot tac vu, giu FP32 tren CPU thieu VNNI.
+Mai Anh/Turbo ho tro nhieu tac vu, giu FP32 tren CPU thieu VNNI.
 Giu giong dang chon > Uu tien toc do > Tu do va toi uu CPU.
 Nut Chuyen sang Nano va do toc do doi giong va tao mau do, giu kich ban.
 Nhanh dung Nano 4 buoc va WSOLA; can nghe lai, khong bao dam dat 30x tren moi may.
 10 phong cach dieu chinh nhip; goi y giong ke chuyen/tin tuc tu mau giong that.
 Chi chen [cuoi], [tho dai], [hang giong] khi ban chu dong muon them am thanh do.
 TXT khong co moc thoi gian khong the xac dinh thoi luong video.
+Thu vien giong mac dinh co the duoc them bang goi rieng; bam nghe thu de chon.
+Mau tieng Anh dung Turbo da co. Mau Han, Nga, Nhat, Phap, Tay Ban Nha, Thai
+can chay TAI_GIONG_DA_NGON_NGU.bat mot lan khi co Internet.
+Bo nay tai model VoxCPM2 khoang 5 GB va thu vien CPU vao runtime-international
+rieng, khong thay doi runtime Nano/Turbo. Can du dung luong dia cho cai dat.
+Lan dau cai va nap model co the lau; khong cam ket tao 1 gio trong 2 phut.
+Chi khi kiem tra tao loi thanh cong, cac giong quoc te moi san sang.
+Model quoc te va mau ca nhan khong nam trong ZIP cong khai.
 Qwen quoc te khong duoc dong goi. Giong Windows phu thuoc may dang su dung.
 Khong ghi de app/.data khi cap nhat; sao luu du lieu truoc khi thay goi.
 
@@ -261,6 +271,10 @@ MSVC app-local runtime: Microsoft Visual Studio redistributable license;
 https://learn.microsoft.com/cpp/windows/redistributing-visual-cpp-files
 Vietnamese models: model cards/licenses in app/.data/models/cache/hub and
 MODEL-APACHE-2.0-LICENSE.txt or BASE-MODEL-APACHE-2.0-LICENSE.txt.
+Optional VoxCPM2: Apache-2.0; https://github.com/OpenBMB/VoxCPM
+Official weights: https://huggingface.co/openbmb/VoxCPM2
+Original model license and provenance remain beside downloaded weights.
+See THIRD_PARTY_NOTICES.md for source and portable installation paths.
 Source, binary and weight redistribution remain subject to those licenses.
 No personal recordings, uploaded subtitles, API keys or history are included.
 ''', encoding='utf-8')
@@ -306,9 +320,11 @@ def main():
     write_notices(root)
     verify_relocated(root)
     check_bundle_hygiene(root)
-    metadata = {'product': 'Voice Studio Rieng', 'version': '1.6.0', 'package_type': 'windows-x64-portable',
+    metadata = {'product': 'Voice Studio Rieng', 'version': '1.7.0', 'package_type': 'windows-x64-portable',
                 'source_commit': os.environ.get('GITHUB_SHA'), 'max_characters': 1000000,
-                'bundled_runtime': True, 'bundled_model_weights': True, 'native_windows_offline_smoke': 'passed',
+                'bundled_runtime': True, 'bundled_model_weights': True,
+                'optional_international_engine': 'voxcpm2', 'international_runtime_bundled': False,
+                'private_voice_library_bundled': False, 'native_windows_offline_smoke': 'passed',
                 'verified_base_sha256': args.base_sha256 if args.base_archive else None}
     metadata['native_qa'] = json.loads((root/'PORTABLE-QA.json').read_text(encoding='utf-8'))
     (root/'BUILD_INFO.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')

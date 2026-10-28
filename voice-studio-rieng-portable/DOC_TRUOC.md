@@ -1,4 +1,4 @@
-# Voice Studio Riêng 1.6.0 · Windows 10/11 x64 Portable
+# Voice Studio Riêng 1.7.0 · Windows 10/11 x64 Portable
 
 Giải nén **toàn bộ ZIP** vào thư mục có quyền ghi, ví dụ `D:/VoiceStudio`, rồi mở **MO_TOOL.bat**. Giữ cửa sổ lệnh mở trong khi sử dụng; dùng Ctrl+C để tắt. Bản Portable đã có Python, FFmpeg, Nano và Turbo, dùng cục bộ với các giọng đi kèm.
 
@@ -12,7 +12,7 @@ Ví dụ `00:27:20,519 --> 00:27:23,671` có ô lời dài **3,152 giây**. Nế
 
 ## Chọn tốc độ và giọng
 
-Bản 1.6 sửa lỗi giọng Mai Anh/Turbo chỉ chạy một tác vụ. Chọn **Ưu tiên tốc độ → Tự đo và tối ưu CPU** để tối ưu giọng đang chọn. Nano và Turbo có cấu hình RAM/CPU và kết quả đo riêng. CPU Xeon E5 v4 dùng Turbo FP32; không ép INT8 trên CPU thiếu VNNI.
+Mai Anh/Turbo hỗ trợ nhiều tác vụ song song. Chọn **Ưu tiên tốc độ → Tự đo và tối ưu CPU** để tối ưu giọng đang chọn. Nano và Turbo có cấu hình RAM/CPU và kết quả đo riêng. CPU Xeon E5 v4 dùng Turbo FP32; không ép INT8 trên CPU thiếu VNNI.
 
 Bấm **Chuyển sang Nano và đo tốc độ** khi muốn so sánh bộ giọng nhanh. Chỉ nút đổi giọng chủ động mới chọn Nano; kịch bản giữ nguyên. Bản thu hiện rõ bộ giọng, số tác vụ/luồng và FP32 hoặc số bước Nano thực dùng.
 
@@ -28,9 +28,17 @@ Bấm **Chuyển sang Nano và đo tốc độ** khi muốn so sánh bộ giọn
 
 **Không bảo đảm đạt 30× thời gian thực hoặc tạo 1 giờ trong 2 phút.** Hiệu năng phụ thuộc CPU, RAM, giọng, độ dài đoạn và nạp model. Lượt đo ngắn chỉ là ước tính; nhiều tiến trình có thể chậm hơn nếu máy thiếu tài nguyên.
 
+## Thư viện giọng mẫu và giọng quốc tế
+
+Bản 1.7 đọc thư viện giọng mặc định trong **app/voice-library**. Nếu có gói giọng riêng, cài gói cập nhật vào thư mục Portable đang dùng, sau khi đóng tool. Các giọng xuất hiện trong nhóm mẫu mặc định; bấm nghe thử để chọn. Mẫu và giọng cá nhân trong **app/.data/voices** vẫn được giữ. Gói công khai không chứa các bản ghi âm riêng.
+
+Mẫu tiếng Anh dùng Turbo đã đi kèm. Với mẫu tiếng Hàn, Nga, Nhật, Pháp, Tây Ban Nha và Thái, chạy **TAI_GIONG_DA_NGON_NGU.bat** một lần khi có Internet. Bộ cài tải model **VoxCPM2 khoảng 5 GB** cùng các thư viện CPU vào **runtime-international** riêng; cần thêm dung lượng cho thư viện, tệp tải tạm và quá trình cài đặt. Runtime Nano/Turbo hiện có được giữ nguyên. Giấy phép, nguồn và checksum model được lưu cùng bộ model.
+
+Cài đặt và nạp model lần đầu có thể mất nhiều thời gian. Chỉ khi kiểm tra tạo lời thành công, giọng quốc tế mới báo sẵn sàng. Mở lại tool sau khi hoàn tất; những lần tạo tiếp theo dùng model cục bộ. Bộ này chạy CPU FP32 và có tốc độ riêng, không áp dụng số đo Nano/Turbo hay cam kết 2 phút/1 giờ. Độ giống giọng và cảm xúc phụ thuộc mẫu, lời đọc và model; nghe kiểm tra trước khi dựng video.
+
 ## Dữ liệu và phạm vi
 
-Mẫu cá nhân, bản thu, lịch sử và model nằm trong **app/.data**. Sao lưu trước cập nhật. Giải nén sang thư mục mới; giữ bản cũ để bảo toàn dữ liệu. Gói không chứa lời, bản thu hoặc khóa của người dùng.
+Mẫu cá nhân, bản thu, lịch sử và model nằm trong **app/.data**. Sao lưu trước cập nhật. Giải nén sang thư mục mới; giữ bản cũ để bảo toàn dữ liệu. Gói công khai không chứa lời, bản thu hoặc khóa của người dùng. Gói giọng riêng chứa các mẫu được đưa vào thư viện và cần được giữ riêng.
 
 Tối đa **24 giờ** mỗi tác vụ. Một triệu ký tự có thể vượt thời lượng hoặc dung lượng đĩa; chia kịch bản để đọc hết. WAV mono 24 kHz dài 24 giờ cần khoảng 4,15 GB, chưa tính cache/tệp tạm. Tool báo khi không thể xuất đầy đủ.
 
@@ -40,6 +48,6 @@ Gói chỉ tạo âm thanh, không dựng video. Qwen quốc tế không đượ
 
 Builder chỉ tạo ZIP sau kiểm tra Windows bằng Python đóng gói tại đường dẫn đã di chuyển: inference Nano/Turbo ngoại tuyến, nhịp tin tức bằng Nano, căn SRT với FFmpeg/WSOLA, giữ cao độ và phần đầu/cuối âm thanh thử, xuất WAV/MP3/TXT/SRT và khởi động giao diện HTTP. Kết quả mẫu lạnh/ấm nằm trong **PORTABLE-QA.json** và **BUILD_INFO.json**. Đây là số đo máy dựng gói, không phải cam kết với máy của bạn hoặc thử toàn bộ một triệu ký tự.
 
-SHA256 của ZIP và manifest từng tệp đi kèm bản phát hành. Giấy phép Python, thư viện, FFmpeg và model được giữ trong gói. Không tắt TLS, checksum hoặc phần mềm bảo vệ để xử lý lỗi tải.
+SHA256 của ZIP và manifest từng tệp đi kèm bản phát hành. Giấy phép Python, thư viện, FFmpeg và model đi kèm được giữ trong gói; bộ quốc tế tải riêng giữ giấy phép cạnh model. Không tắt TLS, checksum hoặc phần mềm bảo vệ để xử lý lỗi tải.
 
 Nếu bạn chủ động dùng **bản mã nguồn**, có thể dùng Python 3.12 x64 cùng các BAT cài đặt của mã nguồn. Đây là quy trình khác; người dùng gói Portable chỉ cần giải nén và mở MO_TOOL.bat.

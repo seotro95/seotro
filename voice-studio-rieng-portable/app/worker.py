@@ -55,10 +55,20 @@ def load_synthesizer(job):
                 raise RuntimeError('CPU không hỗ trợ VNNI cho chế độ nhanh.')
         model = LocalVieneu(backend='onnx', device='cpu', precision=precision, threads=job.get('nano_threads',2))
         # VieNeu caches reference encoding once for subsequent chunks.
-        options = {'voice': job['speaker']} if job.get('speaker') else {'ref_audio': str(DATA / 'voices' / (job['voice_id'] + '.wav')), 'denoise': False}
+        if job.get('speaker'):
+            options={'voice':job['speaker']}
+        else:
+            from voice_library import resolve_reference
+            reference,_=resolve_reference(job['voice_id'],DATA)
+            options={'ref_audio':str(reference),'denoise':False}
         def synthesize(text, output):
             model.save(model.infer(text, **options), str(output))
         return synthesize
+    if job['engine']=='voxcpm':
+        from voice_library import resolve_reference
+        from voxcpm_backend import create_synthesizer
+        reference,_=resolve_reference(job['voice_id'],DATA)
+        return create_synthesizer(reference,DATA,threads=max(1,min(8,os.cpu_count() or 1)))
     import torch
     from qwen_tts import Qwen3TTSModel
     from huggingface_hub import snapshot_download
@@ -69,9 +79,10 @@ def load_synthesizer(job):
     model = Qwen3TTSModel.from_pretrained(model_path, device_map='cuda:0' if gpu else 'cpu', dtype=torch.bfloat16 if gpu else torch.float32, attn_implementation='sdpa')
     prompt = None
     if job['engine'] == 'qwen_clone':
-        voice = json.loads((DATA / 'voices' / (job['voice_id'] + '.json')).read_text(encoding='utf-8'))
+        from voice_library import resolve_reference
+        reference,voice=resolve_reference(job['voice_id'],DATA)
         reference_text = voice.get('transcript', '').strip()
-        prompt = model.create_voice_clone_prompt(ref_audio=str(DATA / 'voices' / (job['voice_id'] + '.wav')), ref_text=reference_text or None, x_vector_only_mode=not bool(reference_text))
+        prompt = model.create_voice_clone_prompt(ref_audio=str(reference), ref_text=reference_text or None, x_vector_only_mode=not bool(reference_text))
     def synthesize(text, output):
         options = {'text': text, 'language': LANGUAGES[job['language']], 'max_new_tokens': 2048}
         if job.get('quality') == 'fast':
@@ -92,6 +103,9 @@ def get_synthesizer(job):
     global _cached_key, _cached_synth
     key = tuple(job.get(k) for k in ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads'))
     if _cached_key != key or _cached_synth is None:
+        if _cached_key and _cached_key[0]=='voxcpm' and job['engine']!='voxcpm':
+            from voxcpm_backend import close_backends
+            close_backends()
         _cached_synth = None
         _cached_key = None
         gc.collect()
@@ -139,6 +153,7 @@ def reset_nano_models():
     """Start calibration cold, including when a one-process model was cached."""
     global _cached_synth, _cached_key
     close_nano_pool()
+    if 'voxcpm_backend' in sys.modules:sys.modules['voxcpm_backend'].close_backends()
     _cached_synth = None
     _cached_key = None
     gc.collect()
@@ -371,6 +386,7 @@ def render(job, synthesize=None):
                'worker_budget':parallel_workers,'threads':job.get('nano_threads',2),'blas_threads':1}
     if job.get('engine')=='vieneu':execution['precision']='int8' if job.get('quality')=='fast' else 'fp32'
     if job.get('engine')=='vieneu_nano':execution['nano_steps']=job.get('nano_steps',8)
+    if job.get('engine')=='voxcpm':execution.update(threads=max(1,min(8,os.cpu_count() or 1)),precision='fp32')
     write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'spoken_audio_seconds': spoken_audio_frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), 'auto_fitted_cues':sum(bool(c.get('auto_fitted')) for c in alignment), 'fit_warning_count':len(fit_warning_cues), 'fit_warning_cues':fit_warning_cues,'execution_settings':execution})
 
 
@@ -421,3 +437,4 @@ if __name__ == '__main__':
             render(json.loads(Path(sys.argv[1]).read_text(encoding='utf-8')))
     finally:
         close_nano_pool()
+        if 'voxcpm_backend' in sys.modules:sys.modules['voxcpm_backend'].close_backends()

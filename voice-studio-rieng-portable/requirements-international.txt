@@ -1,0 +1,21 @@
+# Isolated runtime only. prepare_international.py installs the CPU builds first.
+# Never install this file into the main Nano/Turbo runtime.
+torch==2.8.0+cpu
+torchaudio==2.8.0+cpu
+torchcodec==0.7.0
+voxcpm==2.0.3
+transformers==4.51.3
+huggingface-hub==0.36.2
+numpy==1.26.4
+scipy==1.15.3
+soundfile==0.13.1
+librosa==0.11.0
+sentencepiece==0.2.1
+protobuf==5.29.5
+gradio==6.15.0
+funasr==1.4.16
+argbind==0.3.9
+wetext==0.1.8
+modelscope==1.40.2
+datasets==3.6.0
+pydantic==2.11.10

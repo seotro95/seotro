@@ -30,6 +30,7 @@ from delivery import get_profile, profile_catalog, supported_preset_voices
 from performance import speed_report
 from state_io import write_json_atomic, read_progress
 from language_catalog import LANGUAGES, CORE_LANGUAGES, QWEN_LANGUAGES, native_language
+from voice_library import catalog_voices, resolve_reference
 
 BASE = Path(__file__).resolve().parent
 DATA = Path(os.environ.get('VOICE_STUDIO_DATA_DIR', str(BASE / '.data'))).resolve()
@@ -108,7 +109,7 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
 
 
-app = FastAPI(title='Voice Studio Riêng', version='1.6.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio Riêng', version='1.7.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 @app.exception_handler(RequestValidationError)
@@ -196,6 +197,8 @@ def effective_rendering_presets(engine='vieneu_nano'):
 
 
 def _config_values():
+    reference_languages={language for voice in catalog_voices() for language in voice['languages']}
+    if model_ready('voxcpm'):reference_languages.add('th')
     return {
         'version': app.version,
         'rendering_presets': effective_rendering_presets(),
@@ -204,13 +207,13 @@ def _config_values():
         'mode': 'local',
         'edition': 'standalone-voice',
         'languages': LANGUAGES,
-        'ai_voice_languages': list(CORE_LANGUAGES),
+        'ai_voice_languages': list(dict.fromkeys([*CORE_LANGUAGES,*sorted(reference_languages)])),
         'max_characters': MAX_CHARACTERS,
         'max_audio_minutes': 1440,
         'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(),
         'int8_cpu': supports_int8(),
-        'models': {name: (DATA / 'models' / f'{name}.ready').exists() for name in ('vieneu', 'qwen', 'qwen_clone')},
-        'hardware': 'CPU · Nano/Turbo',
+        'models': {name: model_ready(name) for name in ('vieneu', 'qwen', 'qwen_clone','voxcpm')},
+        'hardware': 'CPU · Giọng Việt / mẫu quốc tế',
         'ffmpeg': bool(shutil.which('ffmpeg')),
         'cpu_cores': os.cpu_count() or 1,
         'nano_ready': (DATA / 'models' / 'vieneu_nano.ready').exists(),
@@ -220,9 +223,31 @@ def _config_values():
 
 @app.get('/api/voices')
 def voices():
-    entries=PRESETS+installed_voices()+records('voices')
+    entries=available_voices()
     entries=[{**voice,'engine':voice.get('engine','vieneu' if voice.get('languages',['vi'])[0]=='vi' else 'qwen_clone')} for voice in entries]
-    return {'voices':[{**voice,'native_language':native_language(voice),'ready':voice.get('engine')=='system' or (DATA/'models'/f"{voice.get('engine','vieneu')}.ready").exists()} for voice in entries]}
+    output=[]
+    for voice in entries:
+        ready=model_ready(voice['engine']) and (voice.get('has_sample',True) if voice.get('category')=='reference' else True)
+        reason=voice.get('missing_reason') if voice.get('has_sample') is False else None
+        if not ready and not reason:
+            reason=('Chạy TAI_GIONG_DA_NGON_NGU.bat một lần để tải bộ tạo giọng cho các mẫu quốc tế, kể cả tiếng Thái.'
+                    if voice['engine']=='voxcpm' else 'Mô hình của giọng này chưa được chuẩn bị trên máy.')
+        output.append({**voice,'native_language':native_language(voice),'ready':ready,'missing_reason':reason})
+    return {'voices':output}
+
+
+def available_voices():
+    return catalog_voices()+PRESETS+installed_voices()+records('voices')
+
+
+def model_ready(engine):
+    if engine=='system':return True
+    marker=DATA/'models'/f'{engine}.ready'
+    if engine=='voxcpm':
+        from voxcpm_backend import runtime_python,prepared_model
+        try:return runtime_python().is_file() and prepared_model(DATA).is_dir()
+        except (OSError,ValueError,KeyError):return False
+    return marker.is_file()
 
 
 @app.post('/api/voices/clone', status_code=201)
@@ -233,7 +258,7 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
     try:
         if not consent:
             raise HTTPException(422, 'Cần xác nhận quyền sử dụng mẫu giọng.')
-        if language not in CORE_LANGUAGES:raise HTTPException(422,'Nhân bản AI chưa hỗ trợ ngôn ngữ này. Chọn giọng hệ thống Windows đã cài cho ngôn ngữ đó.')
+        if language not in {*CORE_LANGUAGES,'th'}:raise HTTPException(422,'Bộ tạo giọng hiện chưa hỗ trợ nhân bản ngôn ngữ này.')
         if not name.strip() or language not in LANGUAGES:
             raise HTTPException(422, 'Tên hoặc ngôn ngữ không hợp lệ.')
         if Path(file.filename or '').suffix.lower() not in {'.mp3', '.wav', '.m4a', '.flac', '.ogg', '.webm'}:
@@ -251,7 +276,7 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
             duration = audio.getnframes() / audio.getframerate()
         if not 3 <= duration <= 30:
             raise HTTPException(422, 'Dùng mẫu dài từ 3 đến 30 giây. Nên thu một người nói, ít tạp âm, không nhạc nền.')
-        record = {'id': ident, 'name': name.strip(), 'category': 'cloned', 'languages': [language], 'language': language, 'transcript': transcript.strip(), 'description': f'Mẫu giọng cá nhân · {duration:.1f}s', 'duration': duration, 'consent_at': now(), 'created_at': now()}
+        record = {'id': ident, 'name': name.strip(), 'category': 'cloned','engine':'vieneu' if language in {'vi','en-US','en-GB'} else 'voxcpm', 'languages': [language], 'language': language, 'transcript': transcript.strip(), 'description': f'Mẫu giọng cá nhân · {duration:.1f}s', 'duration': duration, 'consent_at': now(), 'created_at': now()}
         write_json(DATA / 'voices' / f'{ident}.json', record)
         return record
     except (subprocess.TimeoutExpired, FileNotFoundError):
@@ -266,15 +291,15 @@ async def clone(name: str = Form(min_length=1, max_length=80), language: str = F
 @app.get('/api/voices/{ident}/sample')
 def voice_sample(ident: str):
     valid_id(ident)
-    path = DATA / 'voices' / f'{ident}.wav'
-    if not path.exists():
-        raise HTTPException(404, 'Không tìm thấy mẫu giọng.')
+    try:path,_=resolve_reference(ident,DATA)
+    except (OSError,ValueError):raise HTTPException(404,'Không tìm thấy mẫu giọng hợp lệ.') from None
     return FileResponse(path, media_type='audio/wav')
 
 
 @app.delete('/api/voices/{ident}', status_code=204)
 def delete_voice(ident: str):
     valid_id(ident)
+    if any(voice['id']==ident for voice in catalog_voices()):raise HTTPException(403,'Giọng mặc định trong bộ mẫu riêng không bị xóa từ thư viện cá nhân.')
     with lock:
         if any(j['status'] in {'queued', 'running', 'cancelling'} and j.get('voice_id') == ident for j in records('jobs')):
             raise HTTPException(409, 'Giọng đang được dùng trong hàng đợi. Đợi tác vụ hoàn tất trước khi xóa.')
@@ -414,7 +439,7 @@ def speech(body: Speech):
 def _submit_speech(body: Speech,calibration=False):
     if not body.text.strip() or body.language not in LANGUAGES or body.format not in {'wav', 'mp3'} or body.delivery not in PROFILES:
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
-    voice = next((v for v in PRESETS + installed_voices() + records('voices') if v['id'] == body.voice_id), None)
+    voice = next((v for v in available_voices() if v['id'] == body.voice_id), None)
     if not voice or body.language not in voice['languages']:
         raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
@@ -428,8 +453,10 @@ def _submit_speech(body: Speech,calibration=False):
         body.text, body.input_format = normalize_script(body.text, body.input_format)
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from None
-    if engine != 'system' and not (DATA / 'models' / f'{engine}.ready').exists():
-        raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Chạy lệnh tải mô hình trong hướng dẫn cài đặt.')
+    if voice.get('category')=='reference' and not voice.get('has_sample'):
+        raise HTTPException(503,'Tệp mẫu của giọng mặc định đang thiếu hoặc không hợp lệ. Cài lại bộ mẫu riêng.')
+    if not model_ready(engine):
+        raise HTTPException(503,'Chạy TAI_GIONG_DA_NGON_NGU.bat một lần để chuẩn bị các giọng quốc tế mới.' if engine=='voxcpm' else f'Mô hình {engine} chưa sẵn sàng. Chạy lệnh tải mô hình trong hướng dẫn cài đặt.')
     if calibration and engine not in {'vieneu_nano','vieneu'}:raise HTTPException(422,'Chọn giọng Nano hoặc Turbo để đo và tối ưu CPU.')
     try:
         segment_plan = 'nano-packed-v1' if engine == 'vieneu_nano' and body.paragraph_pause == 0 else 'classic-v1'
@@ -572,8 +599,9 @@ def resume_job(ident: str, auto_fit: bool = True):
             raise HTTPException(409, 'Chỉ tiếp tục tác vụ đã dừng hoặc có lỗi.')
         if sum(j['status'] in {'queued', 'running', 'cancelling'} for j in records('jobs')) >= 4:
             raise HTTPException(429, 'Hàng đợi đã đầy.')
-        if not job.get('speaker') and not (DATA / 'voices' / f"{job['voice_id']}.json").exists():
-            raise HTTPException(409, 'Mẫu giọng đã bị xóa; không thể tiếp tục tác vụ này.')
+        if not job.get('speaker'):
+            try:resolve_reference(job['voice_id'],DATA)
+            except (OSError,ValueError):raise HTTPException(409,'Mẫu giọng đã bị xóa hoặc không hợp lệ; không thể tiếp tục tác vụ này.') from None
         (DATA / 'parts' / ident / 'cancel.flag').unlink(missing_ok=True)
         if auto_fit and job.get('input_format') == 'srt':
             job['cue_fit'] = 'auto'
@@ -670,7 +698,7 @@ class BenchmarkRequest(BaseModel):
 def benchmark(body: BenchmarkRequest):
     if body.language != 'vi':raise HTTPException(422,'Mẫu đo hiện dùng lời tiếng Việt; chọn giọng tiếng Việt để đo.')
     from calibration import sample_text
-    voice=next((v for v in PRESETS+installed_voices()+records('voices') if v['id']==body.voice_id),None)
+    voice=next((v for v in available_voices() if v['id']==body.voice_id),None)
     engine=voice.get('engine') if voice else None
     workers=(body.nano_parallel or effective_rendering_presets(engine)[body.render_mode]['nano_parallel']) if engine in {'vieneu_nano','vieneu'} else 1
     text=sample_text(workers)
@@ -684,7 +712,7 @@ def benchmark(body: BenchmarkRequest):
 def calibrate_machine(body: BenchmarkRequest):
     from calibration import sample_text
     if body.language!='vi':raise HTTPException(422,'Mẫu tối ưu hiện dùng giọng tiếng Việt Nano hoặc Turbo.')
-    voice=next((v for v in PRESETS+installed_voices()+records('voices') if v['id']==body.voice_id),None)
+    voice=next((v for v in available_voices() if v['id']==body.voice_id),None)
     if not voice or voice.get('engine') not in {'vieneu_nano','vieneu'}:raise HTTPException(422,'Chọn giọng Nano hoặc Turbo để tự đo CPU.')
     preset=rendering_presets(voice['engine'])[body.render_mode]
     payload=Speech(text=sample_text(preset['nano_parallel']),voice_id=body.voice_id,language=body.language,
