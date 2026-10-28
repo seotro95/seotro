@@ -5,7 +5,8 @@ import gc
 import contextlib
 import traceback
 import multiprocessing
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+import threading
 import os
 # Each ORT worker has its own explicit thread budget. Unbounded NumPy BLAS
 # teams otherwise multiply across processes and compete for the same cores.
@@ -41,7 +42,11 @@ def load_synthesizer(job):
     if job['engine'] == 'vieneu_nano':
         from vieneu.v3nano import V3NanoVieNeuTTS
         steps = job.get('nano_steps', 8)
-        model = V3NanoVieNeuTTS(steps=steps, threads=job.get('nano_threads', 2))
+        factory=lambda:V3NanoVieNeuTTS(steps=steps, threads=job.get('nano_threads', 2))
+        if job.get('model_memory')=='shared':
+            from shared_synthesis import acquire_model
+            model=acquire_model(('vieneu_nano',job.get('nano_threads',2),'fp32'),factory)
+        else:model=factory()
         def synthesize(text, output, speed=1):
             # Nano controls duration in its decoder, avoiding a second audio
             # transform and an FFmpeg startup for every paced sentence.
@@ -54,7 +59,11 @@ def load_synthesizer(job):
             from hardware import supports_int8
             if not supports_int8():
                 raise RuntimeError('CPU không hỗ trợ VNNI cho chế độ nhanh.')
-        model = LocalVieneu(backend='onnx', device='cpu', precision=precision, threads=job.get('nano_threads',2))
+        factory=lambda:LocalVieneu(backend='onnx', device='cpu', precision=precision, threads=job.get('nano_threads',2))
+        if job.get('model_memory')=='shared':
+            from shared_synthesis import acquire_model
+            model=acquire_model(('vieneu',job.get('nano_threads',2),precision),factory)
+        else:model=factory()
         # VieNeu caches reference encoding once for subsequent chunks.
         if job.get('speaker'):
             options={'voice':job['speaker']}
@@ -71,7 +80,8 @@ def load_synthesizer(job):
         reference,_=resolve_reference(job['voice_id'],DATA)
         return create_synthesizer(reference,DATA,
                                   threads=max(1,min(8,int(job.get('nano_threads',4)))),
-                                  steps=job.get('voxcpm_steps',8))
+                                  steps=job.get('voxcpm_steps',8),
+                                  precision=job.get('international_precision','fp32'))
     import torch
     from qwen_tts import Qwen3TTSModel
     from huggingface_hub import snapshot_download
@@ -100,11 +110,18 @@ def load_synthesizer(job):
 
 _cached_key = None
 _cached_synth = None
+_thread_synth = threading.local()
+_shared_weight_key = None
 
 
 def get_synthesizer(job):
     global _cached_key, _cached_synth
-    key = tuple(job.get(k) for k in ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads', 'voxcpm_steps'))
+    key = tuple(job.get(k) for k in ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads', 'voxcpm_steps','international_precision'))
+    if job.get('model_memory')=='shared' and job.get('engine') in {'vieneu_nano','vieneu'}:
+        if getattr(_thread_synth,'key',None)!=key:
+            _thread_synth.synth=load_synthesizer(job)
+            _thread_synth.key=key
+        return _thread_synth.synth
     if _cached_key != key or _cached_synth is None:
         if _cached_key and _cached_key[0]=='voxcpm' and job['engine']!='voxcpm':
             from voxcpm_backend import close_backends
@@ -144,12 +161,35 @@ _nano_pool = None
 _nano_pool_key = None
 
 
-def close_nano_pool():
-    global _nano_pool, _nano_pool_key
+def close_nano_pool(clear_models=True):
+    global _nano_pool, _nano_pool_key, _thread_synth, _shared_weight_key
     if _nano_pool is not None:
         _nano_pool.shutdown(wait=True, cancel_futures=True)
         _nano_pool = None
     _nano_pool_key = None
+    _thread_synth=threading.local()
+    if clear_models and 'shared_synthesis' in sys.modules:
+        sys.modules['shared_synthesis'].clear_shared_models()
+        _shared_weight_key=None
+
+
+def create_render_pool(workers,job):
+    if job.get('model_memory')=='shared' and job.get('engine') in {'vieneu_nano','vieneu'}:
+        return ThreadPoolExecutor(max_workers=workers,thread_name_prefix='voice-shared')
+    return ProcessPoolExecutor(max_workers=workers,mp_context=multiprocessing.get_context('spawn'))
+
+
+def set_render_priority(profile):
+    try:
+        import psutil
+    except ImportError:return
+    try:
+        process=psutil.Process()
+        priority=(psutil.NORMAL_PRIORITY_CLASS if profile=='maximum' else psutil.BELOW_NORMAL_PRIORITY_CLASS) if os.name=='nt' else (0 if profile=='maximum' else 5)
+        for current in [process,*process.children(recursive=True)]:
+            try:current.nice(priority)
+            except (psutil.Error,OSError):pass
+    except (psutil.Error,OSError):pass
 
 
 def reset_nano_models():
@@ -254,7 +294,7 @@ def prepare_cue(job, cue_index, cue, indexed_segments, work, boundary):
     path = cache/f'{cue_index:06d}.wav'
     metadata_path = path.with_suffix('.json')
     settings = {key: job.get(key) for key in (
-        'engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'voxcpm_steps',
+        'engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'voxcpm_steps','international_precision',
         'nano_threads', 'speed', 'delivery', 'paragraph_pause', 'input_format',
         'cue_fit', 'max_cue_tempo', 'audio_fit_backend', 'segment_plan')}
     signature = _json_digest({'version': 1, 'settings': settings, 'cue': cue,
@@ -364,7 +404,7 @@ def _render_parallel_cues(job, segments, cues, work, writer, workers):
                 ahead = next_submit
                 boundary = cues[ahead+1]['start'] if ahead+1 < len(cues) else job.get('timeline_seconds', cues[ahead]['end'])
                 if _nano_pool is None:
-                    _nano_pool = ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context('spawn'))
+                    _nano_pool = create_render_pool(workers,job)
                 pending[ahead] = _nano_pool.submit(prepare_cue, payload, ahead, cues[ahead], groups[ahead], str(work), boundary)
                 next_submit += 1
             try:
@@ -410,7 +450,8 @@ def _render_parallel_cues(job, segments, cues, work, writer, workers):
 
 
 def render(job, synthesize=None):
-    global _nano_pool, _nano_pool_key, _cached_synth, _cached_key
+    global _nano_pool, _nano_pool_key, _cached_synth, _cached_key, _shared_weight_key
+    if 'resource_profile' in job:set_render_priority(job['resource_profile'])
     if job.get('video_id'):
         raise ValueError('Gói này chỉ tạo âm thanh; không xử lý video.')
     from subtitles import parse_srt, export_srt
@@ -430,25 +471,32 @@ def render(job, synthesize=None):
     parallel_workers=min(parallel_workers,len(cues) if whole_cue_eligible else sum(bool(s.text) for s in segments))
     parallel=parallel_workers>1
     parallel_cue_fit=whole_cue_eligible and parallel
-    if job.get('engine')=='voxcpm':
+    shared=job.get('model_memory')=='shared' and job.get('engine') in {'vieneu_nano','vieneu'} and synthesize is None
+    weight_key=(job.get('engine'),job.get('nano_threads',2),'int8' if job.get('engine')=='vieneu' and job.get('quality')=='fast' else 'fp32') if shared else None
+    if shared:
+        pool_key=(parallel_workers,'shared',*weight_key)
+    elif job.get('engine')=='voxcpm':
         # A VoxCPM child keeps the same weights for all reference voices and
         # step counts. Each submitted job still selects its own closure and
         # reference cache; rebuilding the process pool would reload every 2B
         # model when only the requested voice or sampling steps changed.
-        pool_key=(parallel_workers,'voxcpm',max(1,min(8,int(job.get('nano_threads',4)))))
+        pool_key=(parallel_workers,'voxcpm',max(1,min(8,int(job.get('nano_threads',4)))),job.get('international_precision','fp32'))
     else:
         pool_key=(parallel_workers,)+tuple(job.get(k) for k in ('engine','voice_id','speaker','language','quality','nano_steps','nano_threads','voxcpm_steps'))
     if _nano_pool is not None and _nano_pool_key!=pool_key:
-        close_nano_pool()
+        close_nano_pool(clear_models=not(shared and _shared_weight_key==weight_key))
     if not parallel:
-        close_nano_pool()
-    elif _cached_synth is not None:
+        close_nano_pool(clear_models=not(shared and _shared_weight_key==weight_key))
+    if _cached_synth is not None and (parallel or shared):
         if _cached_key and _cached_key[0]=='voxcpm':
             from voxcpm_backend import close_backends
             close_backends()
         _cached_synth = None
         _cached_key = None
         gc.collect()
+    if _shared_weight_key!=weight_key:
+        if 'shared_synthesis' in sys.modules:sys.modules['shared_synthesis'].clear_shared_models()
+        _shared_weight_key=weight_key
     work = DATA / 'parts' / job['id']
     work.mkdir(parents=True, exist_ok=True)
     maximum = job.get('max_minutes', 1440) * 60
@@ -486,7 +534,7 @@ def render(job, synthesize=None):
                     candidate = segments[ahead]
                     if candidate.text and ahead not in futures:
                         if _nano_pool is None:
-                            _nano_pool = ProcessPoolExecutor(max_workers=parallel_workers, mp_context=multiprocessing.get_context('spawn'))
+                            _nano_pool = create_render_pool(parallel_workers,job)
                             _nano_pool_key=pool_key
                         futures[ahead] = _nano_pool.submit(prepare_chunk, payload, candidate, ahead, str(work))
             segment_start = writer.frames / writer.rate
@@ -611,10 +659,11 @@ def render(job, synthesize=None):
     fit_warning_cues=[c['cue'] for c in alignment if c.get('warning')=='fast_tempo']
     execution={'engine':job.get('engine'),'workers':parallel_workers,
                'worker_budget':parallel_workers,'threads':job.get('nano_threads',2),'blas_threads':1}
+    execution.update(model_memory='shared' if shared else 'process',resource_profile=job.get('resource_profile','maximum'))
     if cues:execution['cue_fit_pipeline']='parallel' if parallel_cue_fit else 'serial'
     if job.get('engine')=='vieneu':execution['precision']='int8' if job.get('quality')=='fast' else 'fp32'
     if job.get('engine')=='vieneu_nano':execution['nano_steps']=job.get('nano_steps',8)
-    if job.get('engine')=='voxcpm':execution.update(threads=max(1,min(8,int(job.get('nano_threads',4)))),precision='fp32',voxcpm_steps=job.get('voxcpm_steps',8))
+    if job.get('engine')=='voxcpm':execution.update(threads=max(1,min(8,int(job.get('nano_threads',4)))),precision=job.get('international_precision','fp32'),voxcpm_steps=job.get('voxcpm_steps',8))
     write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'spoken_audio_seconds': spoken_audio_frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), 'auto_fitted_cues':sum(bool(c.get('auto_fitted')) for c in alignment), 'fit_warning_count':len(fit_warning_cues), 'fit_warning_cues':fit_warning_cues,'execution_settings':execution})
 
 

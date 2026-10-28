@@ -121,34 +121,66 @@ def benchmark_sample_text(language='vi',workers=1,engine='vieneu_nano'):
     return '\n'.join(samples[i%len(samples)] for i in range(count))
 
 
-def read_saved_presets(data,defaults,engine='vieneu_nano',resident=None):
+def read_saved_presets(data,defaults,engine='vieneu_nano',resident=None,
+                       resource_profile='maximum',execution_model='process',limits=None,precision=None):
     # CPU calibration currently measures the two ONNX engines. International
     # inference uses a separate model/memory budget and must not reuse it.
     if engine not in {'vieneu_nano','vieneu'}:return defaults
+    if resource_profile not in {'maximum','smooth','light'} or execution_model not in {'process','shared'}:
+        return defaults
     try:
         saved=json.loads((Path(data)/'calibration.json').read_text(encoding='utf-8'))
         if saved.get('logical_cores') != os.cpu_count():return defaults
-        for key,record in saved.get('profiles',{}).items():
-            if ':' in key:
-                saved_engine,mode=key.split(':',1)
-                if saved_engine!=engine:continue
-            else:
-                if engine!='vieneu_nano':continue
-                mode=key
-            if mode not in defaults:continue
+        profiles=saved.get('profiles',{})
+        if not isinstance(profiles,dict):return defaults
+    except (OSError,ValueError,KeyError,TypeError,AttributeError):
+        return defaults
+    # Reserve the CPU capacity represented by this profile, even if a resident
+    # legacy team has enough memory to justify a larger model count.
+    cpu_budget=max((value['nano_parallel']*value['nano_threads'] for value in defaults.values()),default=1)
+    if limits is not None:
+        try:
+            cpu_budget=limits['cpu_budget']
+            max_workers=limits['max_workers']
+            max_threads=limits['max_threads']
+            if any(type(value) is not int or value<1 for value in (cpu_budget,max_workers,max_threads)):
+                return defaults
+        except (KeyError,TypeError):return defaults
+    # Scoped records supersede old keys, irrespective of JSON insertion order.
+    for key,record in sorted(profiles.items(),key=lambda item:str(item[0]).count(':')):
+        try:
+            parts=key.split(':')
+            if len(parts)==3:
+                saved_engine,profile,mode=parts
+                if saved_engine!=engine or profile!=resource_profile:continue
+            elif len(parts)==2:
+                saved_engine,mode=parts
+                if saved_engine!=engine or resource_profile!='maximum' or execution_model!='process':continue
+            elif len(parts)==1:
+                if engine!='vieneu_nano' or resource_profile!='maximum' or execution_model!='process':continue
+                mode=parts[0]
+            else:continue
+            if mode not in defaults or record.get('resource_profile',resource_profile)!=resource_profile:continue
+            if record.get('model_memory','process')!=execution_model:continue
+            if engine=='vieneu' and precision is not None and record.get('precision')!=precision:continue
             chosen=record['selected']['settings']
-            if record['nano_steps'] != defaults[mode]['nano_steps']:continue
+            if record['nano_steps']!=defaults[mode]['nano_steps']:continue
             workers,threads=chosen['nano_parallel'],chosen['nano_threads']
-            # Available RAM already excludes resident models. Reuse a verified
-            # loaded team instead of budgeting its memory for a second time.
-            loaded=bool(resident and resident.get('engine')==engine and resident.get('workers',0)>=workers
-                        and resident.get('threads')==threads and
-                        (resident.get('precision')==record.get('precision') if engine=='vieneu'
-                         else resident.get('nano_steps')==record['nano_steps']))
-            if isinstance(workers,int) and isinstance(threads,int) and 1<=workers<=32 and (workers<=defaults[mode]['nano_parallel'] or loaded) and 1<=threads<=8:
+            if (type(workers) is not int or type(threads) is not int or not 1<=workers<=32
+                    or not 1<=threads<=8 or workers*threads>cpu_budget):continue
+            if limits is not None and (workers>max_workers or threads>max_threads):continue
+            # The shared runtime's warm allocation is credited by hardware.py.
+            # Only legacy maximum/process records retain the old credit path.
+            loaded=bool(execution_model=='process' and resource_profile=='maximum'
+                        and resident and resident.get('engine')==engine
+                        and resident.get('model_memory','process')=='process'
+                        and resident.get('workers',0)>=workers and resident.get('threads')==threads
+                        and (resident.get('precision')==record.get('precision') if engine=='vieneu'
+                             else resident.get('nano_steps')==record['nano_steps']))
+            if workers<=defaults[mode]['nano_parallel'] or loaded or limits is not None:
                 defaults[mode].update(nano_parallel=workers,nano_threads=threads)
-    except (OSError,ValueError,KeyError,TypeError):
-        pass
+        except (AttributeError,KeyError,TypeError,ValueError):
+            continue
     return defaults
 
 
@@ -168,7 +200,9 @@ def calibrate(job,render,close_pool,data=None):
     work=data/'parts'/job['id'];work.mkdir(parents=True,exist_ok=True)
     cleanup_measurements(data,job['id'])
     engine=job.get('engine','vieneu_nano')
-    presets=rendering_presets(engine)
+    resource_profile=job.get('resource_profile','maximum')
+    presets=rendering_presets(engine,resource_profile=resource_profile,
+                              execution_model=job.get('model_memory','process'))
     mode=job.get('render_mode','fast')
     base=presets[mode]
     candidates=calibration_candidates(base)
@@ -210,14 +244,17 @@ def calibrate(job,render,close_pool,data=None):
             shutil.copyfile(data/'audio'/f'{best["id"]}.{extension}',data/'audio'/f'{job["id"]}.{extension}')
         report={'selected':selected,'candidates':records,'nano_steps':job['nano_steps'],'engine':engine,
                 'precision':('int8' if job.get('quality')=='fast' else 'fp32') if engine=='vieneu' else None,
+                'resource_profile':resource_profile,
+                'model_memory':best['result'].get('execution_settings',{}).get('model_memory',job.get('model_memory','process')),
                 'logical_cores':os.cpu_count(),'estimate_only':True,'target_30x_met_on_sample':selected['warm']['target_30x_met_on_sample'],
                 'total_calibration_seconds':round(time.perf_counter()-started,3)}
         saved={'logical_cores':os.cpu_count(),'profiles':{}}
         try:
             previous=json.loads((data/'calibration.json').read_text(encoding='utf-8'))
-            if previous.get('logical_cores')==os.cpu_count():saved=previous
-        except (OSError,ValueError):pass
-        saved.setdefault('profiles',{})[engine+':'+mode]=report
+            if (previous.get('logical_cores')==os.cpu_count()
+                    and isinstance(previous.get('profiles',{}),dict)):saved=previous
+        except (OSError,ValueError,AttributeError):pass
+        saved.setdefault('profiles',{})[engine+':'+resource_profile+':'+mode]=report
         write_json_atomic(data/'calibration.json',saved)
         final={**best['result'],**selected['settings'],'processing_seconds':report['total_calibration_seconds'],'calibration_report':report,'progress':100}
         write_json_atomic(work/'result.json',final)

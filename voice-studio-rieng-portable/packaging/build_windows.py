@@ -1,4 +1,4 @@
-"""Build the standalone 1.8 Windows bundle; publish only after native validation.
+"""Build the standalone 1.9 Windows bundle; publish only after native validation.
 
 A checksum-pinned, previously tested portable release can supply the runtime and
 models. Only its runtime, FFmpeg and model storage are reused; application source,
@@ -143,6 +143,10 @@ def copy_source(root):
                  root/'CPU-SHORT-SPEECH-BENCHMARK.json')
     shutil.copy2(SOURCE/'packaging/benchmarks/nano-srt-short-samples.qa.json',
                  root/'CPU-SRT-SHORT-SAMPLES.json')
+    shutil.copy2(SOURCE/'packaging/benchmarks/shared-onnx-short-samples.qa.json',
+                 root/'CPU-SHARED-MODEL-BENCHMARK.json')
+    shutil.copy2(SOURCE/'packaging/benchmarks/voxcpm-int8-seven-languages.qa.json',
+                 root/'CPU-INTERNATIONAL-INT8-BENCHMARK.json')
 
 
 def copy_runtime(destination):
@@ -233,13 +237,17 @@ def verify_relocated(root):
         subprocess.run([str(relocated/'runtime/python.exe'), '-s', '-X', 'utf8',
                         str(SOURCE/'packaging/smoke_portable.py'), str(relocated)],
                        env=runtime_environment(relocated, offline=True), cwd=relocated, check=True, timeout=1200)
+        subprocess.run([str(relocated/'runtime/python.exe'), '-s', '-X', 'utf8',
+                        str(SOURCE/'packaging/benchmark_shared_runtime.py'), str(relocated),
+                        '--output', str(relocated/'SHARED-MODEL-QA.json')],
+                       env=runtime_environment(relocated, offline=True), cwd=relocated, check=True, timeout=1200)
     finally:
         relocated.rename(root)
     clean_data(root)
 
 
 def write_notices(root):
-    (root/'DOC_TRUOC_PORTABLE.txt').write_text('''VOICE STUDIO RIENG 1.8.0 - WINDOWS 10/11 X64 PORTABLE
+    (root/'DOC_TRUOC_PORTABLE.txt').write_text('''VOICE STUDIO RIENG 1.9.0 - WINDOWS 10/11 X64 PORTABLE
 
 Giai nen TOAN BO ZIP vao thu muc moi, vi du D:\\VoiceStudio.
 Mo MO_TOOL.bat. Khong can cai Python, FFmpeg hay tai lai giong Nano da kem theo.
@@ -248,12 +256,17 @@ Ban nay giu nguyen moc SRT, tu can nhip tung cau va them khoang lang.
 Chon WAV de dung video; cau bi ep qua nhanh van can nghe kiem tra.
 Co che do Nhanh/Can bang/Chat luong va kiem tra cau hinh may, do toc do mau.
 Ho tro toi da 32 tac vu Nano/Turbo, tu do va luu cau hinh rieng cho moi bo giong.
+Nano/Turbo dung chung trong so ONNX; moi tac vu co trang thai giai ma rieng.
+Chon Muot khi lam viec, Toc do toi da hoac It RAM doc lap chat luong giong.
+Lich su chi tai tom tat kich ban, giam cap nhat khi khong can.
 Mai Anh/Turbo ho tro nhieu tac vu, giu FP32 tren CPU thieu VNNI.
 SRT dung FFmpeg tao va can song song; WSOLA giu duong xu ly nhanh hien co.
 Ghep lai dung thu tu va moc goc.
 Bo giong quoc te co Nhanh4/Can bang8/Chat luong10 buoc, tai dung mau giong.
 Vox CPU chi tinh attention tren cache da co du lieu, giu nguyen trong so.
 Cau hinh quoc te du tru 16 GiB/model va toi da 8 tien trinh; do bang loi that.
+INT8 quoc te la tuy chon; FP32 van mac dinh. INT8 them thoi gian chuyen doi
+va du tru 20 GiB/model luc nap dau, du RAM thuong truc co the thap hon.
 Giu giong dang chon > Uu tien toc do > Tu do va toi uu CPU.
 Nut Chuyen sang Nano va do toc do doi giong va tao mau do, giu kich ban.
 Nhanh dung Nano 4 buoc va WSOLA; can nghe lai, khong bao dam dat 30x tren moi may.
@@ -270,6 +283,8 @@ Chi khi kiem tra tao loi thanh cong, cac giong quoc te moi san sang.
 Model quoc te va mau ca nhan khong nam trong ZIP cong khai.
 Qwen quoc te khong duoc dong goi. Giong Windows phu thuoc may dang su dung.
 Khong ghi de app/.data khi cap nhat; sao luu du lieu truoc khi thay goi.
+So lieu process/shared that tren Windows nam trong SHARED-MODEL-QA.json.
+Giam RAM khong tu dong dong nghia tang toc tao voice khi model da nap.
 
 THIRD-PARTY NOTICES
 Python: runtime/LICENSE.txt; https://www.python.org/psf/license/
@@ -329,7 +344,7 @@ def main():
     write_notices(root)
     verify_relocated(root)
     check_bundle_hygiene(root)
-    metadata = {'product': 'Voice Studio Rieng', 'version': '1.8.0', 'package_type': 'windows-x64-portable',
+    metadata = {'product': 'Voice Studio Rieng', 'version': '1.9.0', 'package_type': 'windows-x64-portable',
                 'source_commit': os.environ.get('GITHUB_SHA'), 'max_characters': 1000000,
                 'bundled_runtime': True, 'bundled_model_weights': True,
                 'optional_international_engine': 'voxcpm2', 'international_runtime_bundled': False,
@@ -337,8 +352,12 @@ def main():
                 'parallel_srt_cue_preparation': True, 'parallel_srt_auto_fit_backend': 'ffmpeg',
                 'international_active_kv_attention': 'guarded-v2.0.3-cpu-fp32',
                 'international_reference_cache': True, 'target_30x_guaranteed': False,
+                'shared_onnx_model_weights': True, 'compact_history_polling': True,
+                'resource_profiles': ['maximum', 'smooth', 'light'],
+                'international_int8_optional': True, 'international_default_precision': 'fp32',
                 'verified_base_sha256': args.base_sha256 if args.base_archive else None}
     metadata['native_qa'] = json.loads((root/'PORTABLE-QA.json').read_text(encoding='utf-8'))
+    metadata['shared_model_native_qa'] = json.loads((root/'SHARED-MODEL-QA.json').read_text(encoding='utf-8'))
     (root/'BUILD_INFO.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
     manifest = [sha256(file)+'  '+file.relative_to(root).as_posix() for file in sorted(root.rglob('*')) if file.is_file()]
     (root/'MANIFEST.sha256').write_text('\n'.join(manifest)+'\n', encoding='utf-8')

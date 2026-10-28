@@ -211,7 +211,7 @@ def test_international_constructor_preserves_reference_and_uses_budgeted_steps_t
     monkeypatch.setitem(sys.modules,'voxcpm_backend',SimpleNamespace(create_synthesizer=create))
     monkeypatch.setitem(sys.modules,'voice_library',SimpleNamespace(resolve_reference=lambda ident,data:(reference,{})))
     worker.load_synthesizer({'engine':'voxcpm','voice_id':'chosen','nano_threads':3,'voxcpm_steps':4})
-    assert observed=={'path':reference,'data':tmp_path,'threads':3,'steps':4}
+    assert observed=={'path':reference,'data':tmp_path,'threads':3,'steps':4,'precision':'fp32'}
 
 
 def test_international_steps_change_invalidates_cached_synthesizer(worker,monkeypatch):
@@ -269,3 +269,39 @@ def test_wsola_single_multichunk_cue_uses_chunk_workers_and_keeps_pcm_order(work
     assert result['execution_settings']['cue_fit_pipeline']=='serial'
     assert json.loads((tmp_path/'parts/two-models/alignment.json').read_text())['sync_ok']
     worker.close_nano_pool()
+
+
+def test_shared_synthesis_closures_are_thread_local_and_keep_each_voice_and_step(worker,monkeypatch):
+    from concurrent.futures import ThreadPoolExecutor
+    import threading
+    monkeypatch.setattr(worker,'_thread_synth',threading.local())
+    loaded=[]
+    def load(job):
+        signature=(threading.get_ident(),job['voice_id'],job['nano_steps'])
+        loaded.append(signature)
+        return lambda:signature
+    monkeypatch.setattr(worker,'load_synthesizer',load)
+    barrier=threading.Barrier(2)
+    def task(voice):
+        job={'engine':'vieneu_nano','model_memory':'shared','voice_id':voice,'nano_steps':4}
+        first=worker.get_synthesizer(job)
+        barrier.wait(timeout=3)
+        assert worker.get_synthesizer(job) is first
+        result=first()
+        changed=worker.get_synthesizer({**job,'nano_steps':16})()
+        return result,changed
+    with ThreadPoolExecutor(2) as pool:
+        outputs=list(pool.map(task,['first','second']))
+    assert outputs[0][0][0]!=outputs[1][0][0]
+    assert [(old[1:],new[1:]) for old,new in outputs]==[(('first',4),('first',16)),(('second',4),('second',16))]
+    assert len(loaded)==4
+
+
+def test_shared_pool_is_threaded_and_legacy_pool_remains_isolated(worker):
+    from concurrent.futures import ThreadPoolExecutor,ProcessPoolExecutor
+    shared=worker.create_render_pool(2,{'engine':'vieneu_nano','model_memory':'shared'})
+    legacy=worker.create_render_pool(2,{'engine':'voxcpm','model_memory':'process'})
+    try:
+        assert isinstance(shared,ThreadPoolExecutor) and isinstance(legacy,ProcessPoolExecutor)
+    finally:
+        shared.shutdown();legacy.shutdown()

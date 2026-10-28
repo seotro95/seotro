@@ -42,10 +42,11 @@ def main():
     data = app/'.data'
     with TestClient(studio.app) as client:
         config = client.get('/api/config').json()
-        assert config['edition'] == 'standalone-voice' and config['version'] == '1.8.0'
+        assert config['edition'] == 'standalone-voice' and config['version'] == '1.9.0'
         assert config['nano_ready'] and config['max_characters'] == 1000000
         assert len(config['delivery_profiles']) == 10
         assert set(config['rendering_presets']) == {'fast', 'balanced', 'quality'}
+        assert set(config['rendering_presets_by_resource']) == {'maximum', 'smooth', 'light'}
         hardware_response = client.get('/api/system-info')
         assert hardware_response.status_code == 200
         hardware = hardware_response.json()
@@ -64,7 +65,8 @@ def main():
         job = {'id': 'portable-real-'+engine, 'text': 'Xin chào, đây là bản kiểm tra giọng nói tiếng Việt.',
                'engine': engine, 'speaker': speaker, 'voice_id': 'check', 'language': 'vi',
                'quality': 'standard', 'format': 'wav', 'speed': 1, 'nano_steps': 16,
-               'nano_threads': 2, 'paragraph_pause': 0}
+               'nano_threads': 2, 'paragraph_pause': 0, 'model_memory': 'shared',
+               'resource_profile': 'maximum'}
         render(job)
         samples, rate = sf.read(data/'audio'/(job['id']+'.wav'))
         assert rate == 24000 and len(samples) > rate*.3 and np.max(np.abs(samples)) > .001
@@ -119,7 +121,7 @@ def main():
     assert sf.info(data/'audio/portable-native-news-wsola.wav').frames == round(1.15*24000)
     paced_report = json.loads((data/'parts/portable-native-news-wsola/alignment.json').read_text(encoding='utf-8'))
     assert paced_report['sync_ok']
-    # Mai Anh/Turbo must use the same bounded process path, keep its reference
+    # Mai Anh/Turbo must use the shared bounded path, keep its reference
     # voice/FP32 and preserve two original subtitle clocks in ordered assembly.
     if (data/'models/vieneu.ready').exists():
         turbo_srt='1\n00:00:00,250 --> 00:00:01,150\nXin chào.\n\n2\n00:00:01,500 --> 00:00:02,750\nCảm ơn.'
@@ -129,9 +131,10 @@ def main():
         turbo_result=json.loads((data/'parts'/turbo_job['id']/'result.json').read_text(encoding='utf-8'))
         assert turbo_result['execution_settings']['engine']=='vieneu'
         assert turbo_result['execution_settings']['workers']==2 and turbo_result['execution_settings']['precision']=='fp32'
+        assert turbo_result['execution_settings']['model_memory']=='shared'
         assert sf.info(data/'audio'/(turbo_job['id']+'.wav')).frames==round(2.75*24000)
         assert parse_srt((data/'audio'/(turbo_job['id']+'.srt')).read_text(encoding='utf-8'))==parse_srt(turbo_srt)
-    # Two fresh jobs distinguish cold process/model setup from reusable warm
+    # Two fresh jobs distinguish cold model setup from reusable warm
     # workers. Distinct sentences cannot reuse chunk checkpoints. No artificial
     # paragraph gaps or subtitle silence inflate speech throughput.
     benchmark_text = '\n'.join([
@@ -164,6 +167,7 @@ def main():
             assert result['completed'] == segment_count and not result['duration_limited']
             info = sf.info(data/'audio'/(measured_job['id']+'.wav'))
             assert info.frames > 24000 and result['spoken_audio_seconds'] > 1
+            assert result['execution_settings']['model_memory']=='shared'
             measurements.append({'phase': phase, 'includes_process_model_setup': phase == 'cold',
                                  **speed_report(info.duration, wall_seconds, result['spoken_audio_seconds'])})
     finally:
@@ -175,7 +179,7 @@ def main():
                           'threads_per_worker': 2, 'genre': 'news', 'native_speed': 1.04,
                           'segments': segment_count, 'paragraph_pause': 0, 'measurements': measurements},
           'target_30x_guaranteed': False,
-          'checks': ['offline Nano and Turbo', 'real native news pacing', 'FFmpeg and WSOLA clock/pitch/tail', 'WAV MP3 TXT SRT exports', 'launcher HTTP']}
+          'checks': ['offline shared-model Nano and Turbo', 'real native news pacing', 'FFmpeg and WSOLA clock/pitch/tail', 'WAV MP3 TXT SRT exports', 'launcher HTTP']}
     print('PORTABLE_BENCHMARK '+json.dumps(qa['fast_sample'], ensure_ascii=False), flush=True)
     # Exercise user download endpoints, including conversion with bundled FFmpeg.
     export_id = uuid.uuid4().hex
@@ -241,6 +245,7 @@ def main():
                 assert turbo['speaker']=='Mai Anh' and turbo['engine']=='vieneu'
                 assert turbo['execution_settings']['workers']==2 and turbo['execution_settings']['threads']==1
                 assert turbo['execution_settings']['precision']=='fp32' and turbo['speed_report']['measurement_audio_seconds']>10
+                assert turbo['execution_settings']['model_memory']=='shared'
                 turbo_measurements.append({'phase':phase,**turbo['speed_report']})
             qa['turbo_sample']={'engine':'vieneu','speaker':'Mai Anh','precision':'fp32',
                                'parallel':2,'threads_per_worker':1,'blas_threads':1,'measurements':turbo_measurements}

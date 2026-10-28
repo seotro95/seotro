@@ -59,7 +59,7 @@ def test_real_benchmark_uses_text_and_normal_queue(studio,monkeypatch):
 def test_genres_expose_real_bundled_speakers(studio):
     client,data=studio
     config=client.get('/api/config').json()
-    assert config['version']=='1.8.0'
+    assert config['version']=='1.9.0'
     assert {'review','horror','fairytale','documentary','ad'}<={p['id'] for p in config['delivery_profiles']}
     voices=client.get('/api/voices').json()['voices']
     assert len({v['speaker'] for v in voices if v.get('engine')=='vieneu_nano'})==11
@@ -70,7 +70,8 @@ def test_turbo_uses_its_own_resource_budget_without_changing_mai_anh(studio,monk
     client,data=studio
     monkeypatch.setattr(app.executor,'submit',Mock())
     monkeypatch.setattr(app,'supports_int8',lambda:False)
-    monkeypatch.setattr(app,'effective_rendering_presets',lambda engine='vieneu_nano':{
+    monkeypatch.setattr(app,'rendering_limits',lambda *args,**kwargs:{'max_workers':28,'max_threads':8,'cpu_budget':28})
+    monkeypatch.setattr(app,'effective_rendering_presets',lambda engine='vieneu_nano',*args,**kwargs:{
         'fast':{'nano_steps':4,'nano_parallel':6 if engine=='vieneu' else 28,'nano_threads':2,'audio_fit_backend':'wsola'}})
     (data/'models/vieneu.ready').touch()
     response=client.post('/api/speech',json={'voice_id':'vi-maianh','text':'Xin chào.','render_mode':'fast'})

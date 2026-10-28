@@ -74,8 +74,8 @@ def test_voice_switch_keeps_one_backend_and_correct_reference(tmp_path, monkeypa
     created = []
     calls = []
     class Client:
-        def __init__(self, data, threads):
-            self.key = (str(backend.runtime_python()), str(data), threads)
+        def __init__(self, data, threads, precision='fp32'):
+            self.key = (str(backend.runtime_python()), str(data), threads, precision)
             self.process = SimpleNamespace(poll=lambda: None)
             self.closed = False
             created.append(self)
@@ -103,14 +103,19 @@ def test_voice_switch_keeps_one_backend_and_correct_reference(tmp_path, monkeypa
     assert created[0].closed
 
 
-def test_child_stdout_contains_only_json_responses(tmp_path, monkeypatch):
+@pytest.mark.parametrize('precision',['fp32','int8'])
+def test_child_stdout_contains_only_json_responses(tmp_path, monkeypatch, precision):
     data = tmp_path/'data';(data/'parts').mkdir(parents=True)
     reference = tmp_path/'ref.wav';reference.write_bytes(b'reference fixture')
     requests = [{'id': str(index), 'text': 'sample', 'reference_wav': str(reference),
                  'output': str(data/'parts'/f'{index}.wav'), **settings}
                 for index, settings in enumerate(({'steps': 4}, {'steps': 8}, {}), 1)]
     monkeypatch.setattr(backend, 'prepared_model', lambda data: tmp_path)
-    monkeypatch.setattr(backend, '_load_model', lambda path, threads: object())
+    loaded=[]
+    def load(path,threads,precision='fp32'):
+        loaded.append(precision)
+        return object()
+    monkeypatch.setattr(backend, '_load_model', load)
     received_steps = []
     def generate(model, text, reference, output, steps=10):
         received_steps.append(steps)
@@ -118,7 +123,7 @@ def test_child_stdout_contains_only_json_responses(tmp_path, monkeypatch):
         output.write_bytes(b'output fixture')
         return 24000
     monkeypatch.setattr(backend, '_generate', generate)
-    monkeypatch.setattr(backend.sys, 'argv', ['backend', '--serve', '--data-dir', str(data)])
+    monkeypatch.setattr(backend.sys, 'argv', ['backend', '--serve', '--data-dir', str(data),'--precision',precision])
     monkeypatch.setattr(backend.sys, 'stdin', io.StringIO('\n'.join(map(json.dumps, requests))+'\n'))
     output, errors = io.StringIO(), io.StringIO()
     with contextlib.redirect_stdout(output), contextlib.redirect_stderr(errors):
@@ -126,6 +131,7 @@ def test_child_stdout_contains_only_json_responses(tmp_path, monkeypatch):
     responses = [json.loads(line) for line in output.getvalue().splitlines()]
     assert [entry['id'] for entry in responses] == ['1', '2', '3']
     assert received_steps == [4, 8, 10]
+    assert loaded==[precision]
     assert all(entry['ok'] and entry['sample_rate'] == 24000 for entry in responses)
     assert 'upstream progress text' in errors.getvalue()
     assert 'upstream progress text' not in output.getvalue()
@@ -167,3 +173,94 @@ def test_generation_rejects_unsupported_steps_without_running_model(tmp_path, st
     model = SimpleNamespace(generate=lambda **kwargs: pytest.fail('invalid step count reached model'))
     with pytest.raises(ValueError, match='bước'):
         backend._generate(model, 'Sample.', None, tmp_path/'out.wav', steps=steps)
+
+
+@pytest.mark.parametrize('precision',['float16','auto','INT8','',None,True,{},8])
+def test_invalid_precision_is_rejected_without_starting_model(tmp_path,monkeypatch,precision):
+    reference=tmp_path/'reference.wav';reference.write_bytes(b'fixture')
+    monkeypatch.setattr(backend,'_BackendClient',lambda *a,**kw:pytest.fail('invalid precision started a model'))
+    with pytest.raises(ValueError,match='FP32 hoặc INT8'):
+        backend.create_synthesizer(reference,tmp_path,precision=precision)
+    with pytest.raises(ValueError,match='FP32 hoặc INT8'):
+        backend._load_model(tmp_path,4,precision=precision)
+
+
+def test_precision_change_releases_old_backend_but_voice_change_reuses_it(tmp_path,monkeypatch):
+    clients=[];calls=[]
+    class Client:
+        def __init__(self,data,threads,precision='fp32'):
+            self.key=(str(backend.runtime_python()),str(data),threads,precision)
+            self.process=SimpleNamespace(poll=lambda:None)
+            self.closed=False;clients.append(self)
+        def synthesize(self,text,reference,output,steps=10):
+            calls.append((text,self.key[-1],reference.name,steps))
+        def close(self):self.closed=True
+    monkeypatch.setattr(backend,'_BackendClient',Client)
+    monkeypatch.setattr(backend,'_client',None)
+    first=tmp_path/'first.wav';first.write_bytes(b'fixture')
+    second=tmp_path/'second.wav';second.write_bytes(b'fixture')
+    standard=backend.create_synthesizer(first,tmp_path,steps=10)
+    compact=backend.create_synthesizer(first,tmp_path,steps=10,precision='int8')
+    compact_other=backend.create_synthesizer(second,tmp_path,steps=4,precision='int8')
+    try:
+        standard('standard',tmp_path/'one.wav')
+        compact('compact',tmp_path/'two.wav')
+        compact_other('other',tmp_path/'three.wav')
+        assert len(clients)==2 and clients[0].closed and not clients[1].closed
+        assert calls==[('standard','fp32','first.wav',10),('compact','int8','first.wav',10),('other','int8','second.wav',4)]
+    finally:backend.close_backends()
+
+
+@pytest.mark.parametrize('precision,quantized',[('fp32',False),('int8',True)])
+def test_load_applies_requested_precision_before_attention(tmp_path,monkeypatch,precision,quantized):
+    torch=pytest.importorskip('torch')
+    import sys
+    import voxcpm_quantization
+    import voxcpm_acceleration
+    order=[];raw=SimpleNamespace(tts_model=object())
+    def load(*a,**kw):
+        assert kw=={'local_files_only':True,'load_denoiser':False,'optimize':False,'device':'cpu'}
+        order.append('load');return raw
+    def quantize(model):
+        assert model is raw
+        order.append('quantize');return {'enabled':True,'linear_layers':252}
+    def accelerate(model):
+        assert model is raw
+        order.append('attention');return {'enabled':True,'active_layers':60}
+    monkeypatch.setitem(sys.modules,'voxcpm',SimpleNamespace(VoxCPM=SimpleNamespace(from_pretrained=load)))
+    monkeypatch.setattr(backend.importlib.metadata,'version',lambda package:'2.0.3')
+    monkeypatch.setattr(torch,'set_num_threads',lambda count:None)
+    monkeypatch.setattr(voxcpm_quantization,'quantize_cpu_language_models',quantize)
+    monkeypatch.setattr(voxcpm_acceleration,'enable_active_kv_attention',accelerate)
+    wrapper=backend._load_model(tmp_path,4,precision=precision)
+    assert order==(['load','quantize','attention'] if quantized else ['load','attention'])
+    assert wrapper.voice_studio_precision==precision
+    assert wrapper.voice_studio_acceleration['precision']==precision
+    assert wrapper.voice_studio_acceleration['quantization']['enabled']==quantized
+
+
+def test_requested_compact_mode_never_silently_falls_back_to_fp32(tmp_path,monkeypatch):
+    torch=pytest.importorskip('torch')
+    import sys
+    import voxcpm_quantization
+    import voxcpm_acceleration
+    monkeypatch.setitem(sys.modules,'voxcpm',SimpleNamespace(VoxCPM=SimpleNamespace(from_pretrained=lambda *a,**kw:object())))
+    monkeypatch.setattr(backend.importlib.metadata,'version',lambda package:'2.0.3')
+    monkeypatch.setattr(torch,'set_num_threads',lambda count:None)
+    monkeypatch.setattr(voxcpm_quantization,'quantize_cpu_language_models',lambda model:{'enabled':False,'reason':'unavailable'})
+    monkeypatch.setattr(voxcpm_acceleration,'enable_active_kv_attention',lambda model:pytest.fail('failed INT8 must stop before inference'))
+    with pytest.raises(ValueError,match='Không thể nạp INT8'):
+        backend._load_model(tmp_path,4,precision='int8')
+
+
+def test_compact_load_reports_transient_ram_failure(tmp_path,monkeypatch):
+    torch=pytest.importorskip('torch')
+    import sys
+    import voxcpm_quantization
+    monkeypatch.setitem(sys.modules,'voxcpm',SimpleNamespace(VoxCPM=SimpleNamespace(from_pretrained=lambda *a,**kw:object())))
+    monkeypatch.setattr(backend.importlib.metadata,'version',lambda package:'2.0.3')
+    monkeypatch.setattr(torch,'set_num_threads',lambda count:None)
+    monkeypatch.setattr(voxcpm_quantization,'quantize_cpu_language_models',
+                        lambda model:{'enabled':False,'reason':'quantization_failed','error_type':'MemoryError'})
+    with pytest.raises(ValueError,match='RAM tạm'):
+        backend._load_model(tmp_path,4,precision='int8')

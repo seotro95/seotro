@@ -53,7 +53,7 @@ def test_calibration_measures_selects_saves_and_preserves_user_files(tmp_path,mo
     for folder in ('audio','parts'): (tmp_path/folder).mkdir()
     unrelated=tmp_path/'audio/user-recording.wav';unrelated.write_bytes(b'user data')
     modes=resource_presets(4,4,16)
-    monkeypatch.setattr(calibration,'rendering_presets',lambda selected_engine:modes)
+    monkeypatch.setattr(calibration,'rendering_presets',lambda selected_engine,**kwargs:modes)
     clock=[0.]
     monkeypatch.setattr(calibration.time,'perf_counter',lambda:clock[0])
     calls={};settings_seen=[]
@@ -121,3 +121,84 @@ def test_calibration_endpoint_accepts_nano_and_turbo_and_rejects_other_models(st
     assert turbo.json()['engine']=='vieneu' and turbo.json()['speaker']=='Mai Anh'
     assert turbo.json()['calibration'] is True and turbo.json()['quality']=='standard'
     assert client.post('/api/calibrate',json={'voice_id':'qw-ryan'}).status_code==422
+
+
+def test_shared_calibration_is_scoped_to_profile_and_execution_model(tmp_path):
+    import os
+    def entry(workers,profile='smooth',memory='shared'):
+        return {'nano_steps':4,'resource_profile':profile,'model_memory':memory,
+                'selected':{'settings':{'nano_parallel':workers,'nano_threads':1}}}
+    saved={'logical_cores':os.cpu_count(),'profiles':{
+        'fast':entry(20,'maximum','process'),
+        'vieneu_nano:maximum:fast':entry(24,'maximum'),
+        'vieneu_nano:smooth:fast':entry(12),
+        'vieneu_nano:light:fast':entry(1,'light'),
+        'vieneu:smooth:fast':entry(4)}}
+    (tmp_path/'calibration.json').write_text(json.dumps(saved))
+    smooth=calibration.read_saved_presets(tmp_path,resource_presets(56,28,128,'vieneu_nano','smooth'),
+                                         resource_profile='smooth',execution_model='shared')
+    maximum=calibration.read_saved_presets(tmp_path,resource_presets(56,28,128),
+                                          resource_profile='maximum',execution_model='shared')
+    light=calibration.read_saved_presets(tmp_path,resource_presets(56,28,128,'vieneu_nano','light'),
+                                        resource_profile='light',execution_model='shared')
+    legacy=calibration.read_saved_presets(tmp_path,resource_presets(56,28,128))
+    assert smooth['fast']['nano_parallel']==12
+    assert maximum['fast']['nano_parallel']==24
+    assert light['fast']['nano_parallel']==1
+    assert legacy['fast']['nano_parallel']==20
+
+
+def test_saved_record_cannot_escape_hard_cpu_ram_or_thread_limits(tmp_path):
+    import os
+    def save(workers,threads):
+        saved={'logical_cores':os.cpu_count(),'profiles':{'vieneu:smooth:fast':{
+            'nano_steps':4,'resource_profile':'smooth','model_memory':'shared',
+            'selected':{'settings':{'nano_parallel':workers,'nano_threads':threads}}}}}
+        (tmp_path/'calibration.json').write_text(json.dumps(saved))
+    limits={'max_workers':3,'max_threads':8,'cpu_budget':26}
+    def read():
+        return calibration.read_saved_presets(tmp_path,resource_presets(56,28,12,'vieneu','smooth'),
+            'vieneu',resource_profile='smooth',execution_model='shared',limits=limits)
+    # A RAM-limited preset cannot express every valid CPU split. The actual
+    # hard limits allow this measured team without allowing oversubscription.
+    save(2,8)
+    assert (read()['fast']['nano_parallel'],read()['fast']['nano_threads'])==(2,8)
+    save(4,2)
+    assert read()['fast']['nano_parallel']==3
+    save(3,9)
+    assert read()['fast']['nano_threads']==2
+    save(3,8)
+    limits['cpu_budget']=20
+    assert read()['fast']['nano_threads']==2
+
+
+def test_resident_legacy_team_does_not_override_explicit_profile_limits(tmp_path):
+    import os
+    (tmp_path/'calibration.json').write_text(json.dumps({'logical_cores':os.cpu_count(),'profiles':{
+        'vieneu:fast':{'nano_steps':4,'precision':'fp32',
+            'selected':{'settings':{'nano_parallel':28,'nano_threads':1}}}}}))
+    resident={'engine':'vieneu','workers':28,'threads':1,'precision':'fp32'}
+    defaults=resource_presets(56,28,60,'vieneu')
+    limits={'max_workers':19,'max_threads':8,'cpu_budget':28}
+    loaded=calibration.read_saved_presets(tmp_path,defaults,'vieneu',resident,limits=limits)
+    assert loaded['fast']['nano_parallel']==19
+
+
+def test_turbo_calibration_precision_is_not_reused_across_weights(tmp_path):
+    import os
+    saved={'logical_cores':os.cpu_count(),'profiles':{'vieneu:smooth:fast':{
+        'nano_steps':4,'precision':'fp32','resource_profile':'smooth','model_memory':'shared',
+        'selected':{'settings':{'nano_parallel':2,'nano_threads':2}}}}}
+    (tmp_path/'calibration.json').write_text(json.dumps(saved))
+    def read(precision):
+        return calibration.read_saved_presets(tmp_path,resource_presets(56,28,128,'vieneu','smooth'),
+            'vieneu',resource_profile='smooth',execution_model='shared',precision=precision)
+    assert read('fp32')['fast']['nano_parallel']==2
+    assert read('int8')['fast']['nano_parallel']==26
+
+
+@pytest.mark.parametrize('malformed',['[]','{}','{"profiles": []}','null'])
+def test_invalid_calibration_metadata_keeps_safe_defaults(tmp_path,malformed):
+    (tmp_path/'calibration.json').write_text(malformed)
+    defaults=resource_presets(4,4,16)
+    assert calibration.read_saved_presets(tmp_path,defaults) is defaults

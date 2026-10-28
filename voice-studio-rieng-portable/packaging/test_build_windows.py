@@ -28,12 +28,25 @@ class BaseArchiveTests(unittest.TestCase):
             for file in (builder.SOURCE/'app').glob('*.py'):
                 self.assertEqual((root/'app'/file.name).read_bytes(), file.read_bytes())
             self.assertTrue((root/'app/voxcpm_acceleration.py').is_file())
+            self.assertTrue((root/'app/shared_synthesis.py').is_file())
+            self.assertTrue((root/'app/voxcpm_quantization.py').is_file())
             import json
             report = json.loads((root/'CPU-SHORT-SPEECH-BENCHMARK.json').read_text(encoding='utf-8'))
             self.assertFalse(report['target_30x_guaranteed'])
             self.assertFalse(report['complete_hour_measured'])
             self.assertFalse(report['reference_recordings_and_generated_audio_published'])
             self.assertEqual(report['product_version'], '1.8.0')
+            shared = json.loads((root/'CPU-SHARED-MODEL-BENCHMARK.json').read_text(encoding='utf-8'))
+            self.assertEqual(shared['product_version'], '1.9.0')
+            self.assertFalse(shared['complete_hour_measured'])
+            self.assertFalse(shared['target_30x_guaranteed'])
+            self.assertFalse(shared['private_reference_recordings_used'])
+            self.assertFalse(shared['generated_audio_published'])
+            compact = json.loads((root/'CPU-INTERNATIONAL-INT8-BENCHMARK.json').read_text(encoding='utf-8'))
+            self.assertTrue(compact['complete'])
+            self.assertFalse(compact['complete_hour_measured'])
+            self.assertFalse(compact['target_30x_guaranteed'])
+            self.assertFalse(compact['private_recordings_and_generated_audio_published'])
 
     def test_selective_base_reuse_keeps_models_licenses_and_omits_history(self):
         content = archive([

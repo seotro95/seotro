@@ -1,7 +1,7 @@
 """Run the real unlock script against encrypted synthetic legacy updaters.
 
 The reference archive deliberately contains 1.7 application files while the
-installed target is 1.8. No user recordings or private delivery keys are used.
+installed target is 1.9. No user recordings or private delivery keys are used.
 """
 from __future__ import annotations
 
@@ -91,14 +91,16 @@ def encrypted_package(source, package):
 @pytest.fixture
 def legacy_unlock(tmp_path):
     powershell_path = powershell()
-    target = tmp_path/'installed 1.8 é'
+    target = tmp_path/'installed 1.9 é'
     embedded_python(target/'runtime')
     current = {
-        'app/app.py': b"VERSION = '1.8.0'\n",
+        'app/app.py': b"VERSION = '1.9.0'\n",
         'app/worker.py': b'new parallel cue renderer\n',
         'app/voxcpm_acceleration.py': b'new reference and active KV cache\n',
-        'MO_TOOL.bat': b'current 1.8 launcher\r\n',
-        'BUILD_INFO.json': b'{"version":"1.8.0"}\n',
+        'app/shared_synthesis.py': b'current shared ONNX models\n',
+        'app/voxcpm_quantization.py': b'current optional INT8 helper\n',
+        'MO_TOOL.bat': b'current 1.9 launcher\r\n',
+        'BUILD_INFO.json': b'{"version":"1.9.0"}\n',
         'app/.data/jobs/history.json': b'private history kept\n',
         'app/.data/models/existing.ready': b'existing model kept\n',
         'runtime-international/python.exe': b'existing international runtime kept\n',

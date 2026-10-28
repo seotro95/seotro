@@ -1,0 +1,1065 @@
+{
+  "format": "voice-studio-shared-onnx-short-samples-v1",
+  "product_version": "1.9.0",
+  "platform": "Linux cloud, 4 CPU quota, 32 GiB memory limit",
+  "sdk": "vieneu3.8.3, ONNX Runtime CPU FP32",
+  "model_weights_changed": false,
+  "complete_hour_measured": false,
+  "target_30x_guaranteed": false,
+  "private_reference_recordings_used": false,
+  "generated_audio_published": false,
+  "method": [
+    "Compare four independent model processes with four threads holding private engine/model state and sharing one set of immutable ONNX sessions. One ORT thread per inference.",
+    "Nano uses twelve public sentences alternating two bundled voices, four inference steps and per-input seeds100+i. Turbo uses four public sentences alternating two bundled voices and benchmark-only greedy temperature0 for byte-exact reference comparison; production retains SDKdefaulttemperature0.8.",
+    "Each benchmark has one cold wave and two warm waves, with new inference every time and no audio/checkpoint reuse. Peak RSS sums parent and descendants; operating-system caches are not reset.",
+    "All concurrent Nano/Turbo waveforms are byte-identical to independent serial results under these deterministic comparison settings. Native Windows synthesis and shared concurrency are checked separately by the release workflow."
+  ],
+  "limitations": [
+    "Short-sample results on the cloud host do not establish performance for a full hour, all speakers/languages, natural-sampling Turbo or the user computer.",
+    "Both engines show substantially lower measured RAM. Their warm synthesis throughput was essentially unchanged within about2percent; do not claim a warm speed increase from sharing alone.",
+    "Nano cold timing varied and was slower in this pair. Turbo showed a faster cold sample in one clean pair; neither establishes a universal startup improvement.",
+    "The first Turbo shared cold sample overlapped a brief browser test, and the first Turbo process sample overlapped unit tests. Those timing runs are excluded; clean repeats are reported.",
+    "Serial Turbo timing partly overlapped unit tests and is used only as the deterministic audio parity reference, never as a performance baseline.",
+    "No private voice source recordings or generated waveforms are redistributed. Public preset names and synthetic input hashes are verification metadata."
+  ],
+  "helper_source_sha256": "14e8124d2eec9a01c10f80cf7f61f6af83f516215cebfa41457f5b2d200e5ad1",
+  "measurements": {
+    "nano": {
+      "shared": {
+        "engine": "nano",
+        "kind": "thread",
+        "workers": 4,
+        "greedy": false,
+        "reference": false,
+        "records": [
+          {
+            "phase": "cold",
+            "wall_seconds": 4.596385076001752,
+            "audio_seconds": 37.06,
+            "peak_rss": 582221824,
+            "outputs": [
+              {
+                "index": 0,
+                "voice": "Minh Quân",
+                "frames": 65280,
+                "audio_seconds": 2.72,
+                "sha256": "f6b104bf6616584cee4f3402a00c66957937109d308be9ef59d0c6468a6e00ef",
+                "seconds": 1.0238211389951175
+              },
+              {
+                "index": 1,
+                "voice": "Mai Anh",
+                "frames": 75840,
+                "audio_seconds": 3.16,
+                "sha256": "0e20b540235068f2e04d8ee5f01f4555e27089c6a2b8469bf8b5c3c9f854eb53",
+                "seconds": 1.181011741005932
+              },
+              {
+                "index": 2,
+                "voice": "Minh Quân",
+                "frames": 75120,
+                "audio_seconds": 3.13,
+                "sha256": "95c92a615aa74a4a04a77c1cd44eed5b21f5ade1009a27d1b3e9d93f368fd585",
+                "seconds": 1.1435664380114758
+              },
+              {
+                "index": 3,
+                "voice": "Mai Anh",
+                "frames": 81360,
+                "audio_seconds": 3.39,
+                "sha256": "571d6bf0b0331535197952accfad04922c492d0a9dd684fb0a3f1fffdb98b161",
+                "seconds": 1.201732407003874
+              },
+              {
+                "index": 4,
+                "voice": "Minh Quân",
+                "frames": 65520,
+                "audio_seconds": 2.73,
+                "sha256": "403acdfc2b5633f05ff8ce732f2b0219d04737fd7cae4ef96aaa13e3e1ab4570",
+                "seconds": 0.8122523370111594
+              },
+              {
+                "index": 5,
+                "voice": "Mai Anh",
+                "frames": 75600,
+                "audio_seconds": 3.15,
+                "sha256": "74e157c977902c768ff509512f48bbe4d2af798d7ff75acd802bf306b93b0a3d",
+                "seconds": 0.9484526650048792
+              },
+              {
+                "index": 6,
+                "voice": "Minh Quân",
+                "frames": 73920,
+                "audio_seconds": 3.08,
+                "sha256": "513127a1eacf5da1b8a3096605eb891dc0438f934adbace0a1c6c2588d8dcb2e",
+                "seconds": 0.8505025219928939
+              },
+              {
+                "index": 7,
+                "voice": "Mai Anh",
+                "frames": 81120,
+                "audio_seconds": 3.38,
+                "sha256": "b957c7e0498995194d453af67376429b54336422d0c96d69fb93aaccaec8f714",
+                "seconds": 0.9644213829888031
+              },
+              {
+                "index": 8,
+                "voice": "Minh Quân",
+                "frames": 65040,
+                "audio_seconds": 2.71,
+                "sha256": "97cf37aae7a5708aefb28adc5e061fe802ada7c97ff1e8eb043fe09cf4350e53",
+                "seconds": 0.7679323329939507
+              },
+              {
+                "index": 9,
+                "voice": "Mai Anh",
+                "frames": 75840,
+                "audio_seconds": 3.16,
+                "sha256": "7192a6787d4dfa2fca27e758c40e03caf6a6b673c7a5596d6116b587b7b2d22e",
+                "seconds": 0.9290713880036492
+              },
+              {
+                "index": 10,
+                "voice": "Minh Quân",
+                "frames": 73920,
+                "audio_seconds": 3.08,
+                "sha256": "503137597f73976a6c9278aa698cc0115e34175ef565a68201e96eb9ea2effce",
+                "seconds": 0.8527241479896475
+              },
+              {
+                "index": 11,
+                "voice": "Mai Anh",
+                "frames": 80880,
+                "audio_seconds": 3.37,
+                "sha256": "8801bee088f93f378d0533788c2abf8892fbf1170d694366a977a3faf27a39e4",
+                "seconds": 0.7923876879940508
+              }
+            ]
+          },
+          {
+            "phase": "warm",
+            "wall_seconds": 2.5486151610093657,
+            "audio_seconds": 37.06,
+            "peak_rss": 583483392,
+            "outputs": [
+              {
+                "index": 0,
+                "voice": "Minh Quân",
+                "frames": 65280,
+                "audio_seconds": 2.72,
+                "sha256": "f6b104bf6616584cee4f3402a00c66957937109d308be9ef59d0c6468a6e00ef",
+                "seconds": 0.5511592860129895
+              },
+              {
+                "index": 1,
+                "voice": "Mai Anh",
+                "frames": 75840,
+                "audio_seconds": 3.16,
+                "sha256": "0e20b540235068f2e04d8ee5f01f4555e27089c6a2b8469bf8b5c3c9f854eb53",
+                "seconds": 0.5832333239959553
+              },
+              {
+                "index": 2,
+                "voice": "Minh Quân",
+                "frames": 75120,
+                "audio_seconds": 3.13,
+                "sha256": "95c92a615aa74a4a04a77c1cd44eed5b21f5ade1009a27d1b3e9d93f368fd585",
+                "seconds": 0.9460321630031103
+              },
+              {
+                "index": 3,
+                "voice": "Mai Anh",
+                "frames": 81360,
+                "audio_seconds": 3.39,
+                "sha256": "571d6bf0b0331535197952accfad04922c492d0a9dd684fb0a3f1fffdb98b161",
+                "seconds": 0.8951901809923584
+              },
+              {
+                "index": 4,
+                "voice": "Minh Quân",
+                "frames": 65520,
+                "audio_seconds": 2.73,
+                "sha256": "403acdfc2b5633f05ff8ce732f2b0219d04737fd7cae4ef96aaa13e3e1ab4570",
+                "seconds": 0.7833452479972038
+              },
+              {
+                "index": 5,
+                "voice": "Mai Anh",
+                "frames": 75600,
+                "audio_seconds": 3.15,
+                "sha256": "74e157c977902c768ff509512f48bbe4d2af798d7ff75acd802bf306b93b0a3d",
+                "seconds": 0.5991781799966702
+              },
+              {
+                "index": 6,
+                "voice": "Minh Quân",
+                "frames": 73920,
+                "audio_seconds": 3.08,
+                "sha256": "513127a1eacf5da1b8a3096605eb891dc0438f934adbace0a1c6c2588d8dcb2e",
+                "seconds": 0.8529390019975835
+              },
+              {
+                "index": 7,
+                "voice": "Mai Anh",
+                "frames": 81120,
+                "audio_seconds": 3.38,
+                "sha256": "b957c7e0498995194d453af67376429b54336422d0c96d69fb93aaccaec8f714",
+                "seconds": 0.9740274020005018
+              },
+              {
+                "index": 8,
+                "voice": "Minh Quân",
+                "frames": 65040,
+                "audio_seconds": 2.71,
+                "sha256": "97cf37aae7a5708aefb28adc5e061fe802ada7c97ff1e8eb043fe09cf4350e53",
+                "seconds": 0.9638298649952048
+              },
+              {
+                "index": 9,
+                "voice": "Mai Anh",
+                "frames": 75840,
+                "audio_seconds": 3.16,
+                "sha256": "7192a6787d4dfa2fca27e758c40e03caf6a6b673c7a5596d6116b587b7b2d22e",
+                "seconds": 0.8620217380084796
+              },
+              {
+                "index": 10,
+                "voice": "Minh Quân",
+                "frames": 73920,
+                "audio_seconds": 3.08,
+                "sha256": "503137597f73976a6c9278aa698cc0115e34175ef565a68201e96eb9ea2effce",
+                "seconds": 0.7228594729967881
+              },
+              {
+                "index": 11,
+                "voice": "Mai Anh",
+                "frames": 80880,
+                "audio_seconds": 3.37,
+                "sha256": "8801bee088f93f378d0533788c2abf8892fbf1170d694366a977a3faf27a39e4",
+                "seconds": 0.6277103109896416
+              }
+            ]
+          },
+          {
+            "phase": "warm2",
+            "wall_seconds": 2.089368264991208,
+            "audio_seconds": 37.06,
+            "peak_rss": 588058624,
+            "outputs": [
+              {
+                "index": 0,
+                "voice": "Minh Quân",
+                "frames": 65280,
+                "audio_seconds": 2.72,
+                "sha256": "f6b104bf6616584cee4f3402a00c66957937109d308be9ef59d0c6468a6e00ef",
+                "seconds": 0.7423560520110186
+              },
+              {
+                "index": 1,
+                "voice": "Mai Anh",
+                "frames": 75840,
+                "audio_seconds": 3.16,
+                "sha256": "0e20b540235068f2e04d8ee5f01f4555e27089c6a2b8469bf8b5c3c9f854eb53",
+                "seconds": 0.6140378959971713
+              },
+              {
+                "index": 2,
+                "voice": "Minh Quân",
+                "frames": 75120,
+                "audio_seconds": 3.13,
+                "sha256": "95c92a615aa74a4a04a77c1cd44eed5b21f5ade1009a27d1b3e9d93f368fd585",
+                "seconds": 0.6479653760034125
+              },
+              {
+                "index": 3,
+                "voice": "Mai Anh",
+                "frames": 81360,
+                "audio_seconds": 3.39,
+                "sha256": "571d6bf0b0331535197952accfad04922c492d0a9dd684fb0a3f1fffdb98b161",
+                "seconds": 0.6733551549987169
+              },
+              {
+                "index": 4,
+                "voice": "Minh Quân",
+                "frames": 65520,
+                "audio_seconds": 2.73,
+                "sha256": "403acdfc2b5633f05ff8ce732f2b0219d04737fd7cae4ef96aaa13e3e1ab4570",
+                "seconds": 0.5363157499959925
+              },
+              {
+                "index": 5,
+                "voice": "Mai Anh",
+                "frames": 75600,
+                "audio_seconds": 3.15,
+                "sha256": "74e157c977902c768ff509512f48bbe4d2af798d7ff75acd802bf306b93b0a3d",
+                "seconds": 0.6412181799969403
+              },
+              {
+                "index": 6,
+                "voice": "Minh Quân",
+                "frames": 73920,
+                "audio_seconds": 3.08,
+                "sha256": "513127a1eacf5da1b8a3096605eb891dc0438f934adbace0a1c6c2588d8dcb2e",
+                "seconds": 0.5914280849974602
+              },
+              {
+                "index": 7,
+                "voice": "Mai Anh",
+                "frames": 81120,
+                "audio_seconds": 3.38,
+                "sha256": "b957c7e0498995194d453af67376429b54336422d0c96d69fb93aaccaec8f714",
+                "seconds": 0.7170746909978334
+              },
+              {
+                "index": 8,
+                "voice": "Minh Quân",
+                "frames": 65040,
+                "audio_seconds": 2.71,
+                "sha256": "97cf37aae7a5708aefb28adc5e061fe802ada7c97ff1e8eb043fe09cf4350e53",
+                "seconds": 0.5190734079951653
+              },
+              {
+                "index": 9,
+                "voice": "Mai Anh",
+                "frames": 75840,
+                "audio_seconds": 3.16,
+                "sha256": "7192a6787d4dfa2fca27e758c40e03caf6a6b673c7a5596d6116b587b7b2d22e",
+                "seconds": 0.619280744009302
+              },
+              {
+                "index": 10,
+                "voice": "Minh Quân",
+                "frames": 73920,
+                "audio_seconds": 3.08,
+                "sha256": "503137597f73976a6c9278aa698cc0115e34175ef565a68201e96eb9ea2effce",
+                "seconds": 0.5998319139907835
+              },
+              {
+                "index": 11,
+                "voice": "Mai Anh",
+                "frames": 80880,
+                "audio_seconds": 3.37,
+                "sha256": "8801bee088f93f378d0533788c2abf8892fbf1170d694366a977a3faf27a39e4",
+                "seconds": 0.6295292760041775
+              }
+            ]
+          }
+        ]
+      },
+      "process_baseline": {
+        "engine": "nano",
+        "kind": "process",
+        "workers": 4,
+        "greedy": false,
+        "reference": false,
+        "records": [
+          {
+            "phase": "cold",
+            "wall_seconds": 3.562513583994587,
+            "audio_seconds": 37.06,
+            "peak_rss": 1976508416,
+            "outputs": [
+              {
+                "index": 0,
+                "voice": "Minh Quân",
+                "frames": 65280,
+                "audio_seconds": 2.72,
+                "sha256": "f6b104bf6616584cee4f3402a00c66957937109d308be9ef59d0c6468a6e00ef",
+                "seconds": 0.6059911659976933
+              },
+              {
+                "index": 1,
+                "voice": "Mai Anh",
+                "frames": 75840,
+                "audio_seconds": 3.16,
+                "sha256": "0e20b540235068f2e04d8ee5f01f4555e27089c6a2b8469bf8b5c3c9f854eb53",
+                "seconds": 0.6432226370088756
+              },
+              {
+                "index": 2,
+                "voice": "Minh Quân",
+                "frames": 75120,
+                "audio_seconds": 3.13,
+                "sha256": "95c92a615aa74a4a04a77c1cd44eed5b21f5ade1009a27d1b3e9d93f368fd585",
+                "seconds": 0.6660778799996478
+              },
+              {
+                "index": 3,
+                "voice": "Mai Anh",
+                "frames": 81360,
+                "audio_seconds": 3.39,
+                "sha256": "571d6bf0b0331535197952accfad04922c492d0a9dd684fb0a3f1fffdb98b161",
+                "seconds": 0.6740152909915196
+              },
+              {
+                "index": 4,
+                "voice": "Minh Quân",
+                "frames": 65520,
+                "audio_seconds": 2.73,
+                "sha256": "403acdfc2b5633f05ff8ce732f2b0219d04737fd7cae4ef96aaa13e3e1ab4570",
+                "seconds": 0.5391654759878293
+              },
+              {
+                "index": 5,
+                "voice": "Mai Anh",
+                "frames": 75600,
+                "audio_seconds": 3.15,
+                "sha256": "74e157c977902c768ff509512f48bbe4d2af798d7ff75acd802bf306b93b0a3d",
+                "seconds": 0.5924258500017459
+              },
+              {
+                "index": 6,
+                "voice": "Minh Quân",
+                "frames": 73920,
+                "audio_seconds": 3.08,
+                "sha256": "513127a1eacf5da1b8a3096605eb891dc0438f934adbace0a1c6c2588d8dcb2e",
+                "seconds": 0.6158555689908098
+              },
+              {
+                "index": 7,
+                "voice": "Mai Anh",
+                "frames": 81120,
+                "audio_seconds": 3.38,
+                "sha256": "b957c7e0498995194d453af67376429b54336422d0c96d69fb93aaccaec8f714",
+                "seconds": 0.6960853720083833
+              },
+              {
+                "index": 8,
+                "voice": "Minh Quân",
+                "frames": 65040,
+                "audio_seconds": 2.71,
+                "sha256": "97cf37aae7a5708aefb28adc5e061fe802ada7c97ff1e8eb043fe09cf4350e53",
+                "seconds": 0.5610629629954929
+              },
+              {
+                "index": 9,
+                "voice": "Mai Anh",
+                "frames": 75840,
+                "audio_seconds": 3.16,
+                "sha256": "7192a6787d4dfa2fca27e758c40e03caf6a6b673c7a5596d6116b587b7b2d22e",
+                "seconds": 0.618763485996169
+              },
+              {
+                "index": 10,
+                "voice": "Minh Quân",
+                "frames": 73920,
+                "audio_seconds": 3.08,
+                "sha256": "503137597f73976a6c9278aa698cc0115e34175ef565a68201e96eb9ea2effce",
+                "seconds": 0.6306938659981824
+              },
+              {
+                "index": 11,
+                "voice": "Mai Anh",
+                "frames": 80880,
+                "audio_seconds": 3.37,
+                "sha256": "8801bee088f93f378d0533788c2abf8892fbf1170d694366a977a3faf27a39e4",
+                "seconds": 0.6797664420009824
+              }
+            ]
+          },
+          {
+            "phase": "warm",
+            "wall_seconds": 2.164568338004756,
+            "audio_seconds": 37.06,
+            "peak_rss": 1985052672,
+            "outputs": [
+              {
+                "index": 0,
+                "voice": "Minh Quân",
+                "frames": 65280,
+                "audio_seconds": 2.72,
+                "sha256": "f6b104bf6616584cee4f3402a00c66957937109d308be9ef59d0c6468a6e00ef",
+                "seconds": 0.6188288840057794
+              },
+              {
+                "index": 1,
+                "voice": "Mai Anh",
+                "frames": 75840,
+                "audio_seconds": 3.16,
+                "sha256": "0e20b540235068f2e04d8ee5f01f4555e27089c6a2b8469bf8b5c3c9f854eb53",
+                "seconds": 0.6720804520009551
+              },
+              {
+                "index": 2,
+                "voice": "Minh Quân",
+                "frames": 75120,
+                "audio_seconds": 3.13,
+                "sha256": "95c92a615aa74a4a04a77c1cd44eed5b21f5ade1009a27d1b3e9d93f368fd585",
+                "seconds": 0.6759575719916029
+              },
+              {
+                "index": 3,
+                "voice": "Mai Anh",
+                "frames": 81360,
+                "audio_seconds": 3.39,
+                "sha256": "571d6bf0b0331535197952accfad04922c492d0a9dd684fb0a3f1fffdb98b161",
+                "seconds": 0.7151390040089609
+              },
+              {
+                "index": 4,
+                "voice": "Minh Quân",
+                "frames": 65520,
+                "audio_seconds": 2.73,
+                "sha256": "403acdfc2b5633f05ff8ce732f2b0219d04737fd7cae4ef96aaa13e3e1ab4570",
+                "seconds": 0.6163955720112426
+              },
+              {
+                "index": 5,
+                "voice": "Mai Anh",
+                "frames": 75600,
+                "audio_seconds": 3.15,
+                "sha256": "74e157c977902c768ff509512f48bbe4d2af798d7ff75acd802bf306b93b0a3d",
+                "seconds": 0.6833383110060822
+              },
+              {
+                "index": 6,
+                "voice": "Minh Quân",
+                "frames": 73920,
+                "audio_seconds": 3.08,
+                "sha256": "513127a1eacf5da1b8a3096605eb891dc0438f934adbace0a1c6c2588d8dcb2e",
+                "seconds": 0.6717148949974217
+              },
+              {
+                "index": 7,
+                "voice": "Mai Anh",
+                "frames": 81120,
+                "audio_seconds": 3.38,
+                "sha256": "b957c7e0498995194d453af67376429b54336422d0c96d69fb93aaccaec8f714",
+                "seconds": 0.6783131590054836
+              },
+              {
+                "index": 8,
+                "voice": "Minh Quân",
+                "frames": 65040,
+                "audio_seconds": 2.71,
+                "sha256": "97cf37aae7a5708aefb28adc5e061fe802ada7c97ff1e8eb043fe09cf4350e53",
+                "seconds": 0.620999580991338
+              },
+              {
+                "index": 9,
+                "voice": "Mai Anh",
+                "frames": 75840,
+                "audio_seconds": 3.16,
+                "sha256": "7192a6787d4dfa2fca27e758c40e03caf6a6b673c7a5596d6116b587b7b2d22e",
+                "seconds": 0.7036149429914076
+              },
+              {
+                "index": 10,
+                "voice": "Minh Quân",
+                "frames": 73920,
+                "audio_seconds": 3.08,
+                "sha256": "503137597f73976a6c9278aa698cc0115e34175ef565a68201e96eb9ea2effce",
+                "seconds": 0.6377265019982588
+              },
+              {
+                "index": 11,
+                "voice": "Mai Anh",
+                "frames": 80880,
+                "audio_seconds": 3.37,
+                "sha256": "8801bee088f93f378d0533788c2abf8892fbf1170d694366a977a3faf27a39e4",
+                "seconds": 0.7693752239865717
+              }
+            ]
+          },
+          {
+            "phase": "warm2",
+            "wall_seconds": 2.3803555320046144,
+            "audio_seconds": 37.06,
+            "peak_rss": 1999331328,
+            "outputs": [
+              {
+                "index": 0,
+                "voice": "Minh Quân",
+                "frames": 65280,
+                "audio_seconds": 2.72,
+                "sha256": "f6b104bf6616584cee4f3402a00c66957937109d308be9ef59d0c6468a6e00ef",
+                "seconds": 0.6961579689959763
+              },
+              {
+                "index": 1,
+                "voice": "Mai Anh",
+                "frames": 75840,
+                "audio_seconds": 3.16,
+                "sha256": "0e20b540235068f2e04d8ee5f01f4555e27089c6a2b8469bf8b5c3c9f854eb53",
+                "seconds": 0.7326289749908028
+              },
+              {
+                "index": 2,
+                "voice": "Minh Quân",
+                "frames": 75120,
+                "audio_seconds": 3.13,
+                "sha256": "95c92a615aa74a4a04a77c1cd44eed5b21f5ade1009a27d1b3e9d93f368fd585",
+                "seconds": 0.617559218997485
+              },
+              {
+                "index": 3,
+                "voice": "Mai Anh",
+                "frames": 81360,
+                "audio_seconds": 3.39,
+                "sha256": "571d6bf0b0331535197952accfad04922c492d0a9dd684fb0a3f1fffdb98b161",
+                "seconds": 0.6604962140118005
+              },
+              {
+                "index": 4,
+                "voice": "Minh Quân",
+                "frames": 65520,
+                "audio_seconds": 2.73,
+                "sha256": "403acdfc2b5633f05ff8ce732f2b0219d04737fd7cae4ef96aaa13e3e1ab4570",
+                "seconds": 0.7591568100033328
+              },
+              {
+                "index": 5,
+                "voice": "Mai Anh",
+                "frames": 75600,
+                "audio_seconds": 3.15,
+                "sha256": "74e157c977902c768ff509512f48bbe4d2af798d7ff75acd802bf306b93b0a3d",
+                "seconds": 0.7235902140091639
+              },
+              {
+                "index": 6,
+                "voice": "Minh Quân",
+                "frames": 73920,
+                "audio_seconds": 3.08,
+                "sha256": "513127a1eacf5da1b8a3096605eb891dc0438f934adbace0a1c6c2588d8dcb2e",
+                "seconds": 0.8914144480077084
+              },
+              {
+                "index": 7,
+                "voice": "Mai Anh",
+                "frames": 81120,
+                "audio_seconds": 3.38,
+                "sha256": "b957c7e0498995194d453af67376429b54336422d0c96d69fb93aaccaec8f714",
+                "seconds": 0.8180465379991801
+              },
+              {
+                "index": 8,
+                "voice": "Minh Quân",
+                "frames": 65040,
+                "audio_seconds": 2.71,
+                "sha256": "97cf37aae7a5708aefb28adc5e061fe802ada7c97ff1e8eb043fe09cf4350e53",
+                "seconds": 0.680127932006144
+              },
+              {
+                "index": 9,
+                "voice": "Mai Anh",
+                "frames": 75840,
+                "audio_seconds": 3.16,
+                "sha256": "7192a6787d4dfa2fca27e758c40e03caf6a6b673c7a5596d6116b587b7b2d22e",
+                "seconds": 0.6202717460109852
+              },
+              {
+                "index": 10,
+                "voice": "Minh Quân",
+                "frames": 73920,
+                "audio_seconds": 3.08,
+                "sha256": "503137597f73976a6c9278aa698cc0115e34175ef565a68201e96eb9ea2effce",
+                "seconds": 0.5815935200080276
+              },
+              {
+                "index": 11,
+                "voice": "Mai Anh",
+                "frames": 80880,
+                "audio_seconds": 3.37,
+                "sha256": "8801bee088f93f378d0533788c2abf8892fbf1170d694366a977a3faf27a39e4",
+                "seconds": 0.7914187309943372
+              }
+            ]
+          }
+        ]
+      },
+      "serial_parity_reference": {
+        "sample_count": 12,
+        "all_concurrent_waveforms_bit_identical": true,
+        "hashes": [
+          "f6b104bf6616584cee4f3402a00c66957937109d308be9ef59d0c6468a6e00ef",
+          "0e20b540235068f2e04d8ee5f01f4555e27089c6a2b8469bf8b5c3c9f854eb53",
+          "95c92a615aa74a4a04a77c1cd44eed5b21f5ade1009a27d1b3e9d93f368fd585",
+          "571d6bf0b0331535197952accfad04922c492d0a9dd684fb0a3f1fffdb98b161",
+          "403acdfc2b5633f05ff8ce732f2b0219d04737fd7cae4ef96aaa13e3e1ab4570",
+          "74e157c977902c768ff509512f48bbe4d2af798d7ff75acd802bf306b93b0a3d",
+          "513127a1eacf5da1b8a3096605eb891dc0438f934adbace0a1c6c2588d8dcb2e",
+          "b957c7e0498995194d453af67376429b54336422d0c96d69fb93aaccaec8f714",
+          "97cf37aae7a5708aefb28adc5e061fe802ada7c97ff1e8eb043fe09cf4350e53",
+          "7192a6787d4dfa2fca27e758c40e03caf6a6b673c7a5596d6116b587b7b2d22e",
+          "503137597f73976a6c9278aa698cc0115e34175ef565a68201e96eb9ea2effce",
+          "8801bee088f93f378d0533788c2abf8892fbf1170d694366a977a3faf27a39e4"
+        ]
+      },
+      "summary": {
+        "shared_peak_rss_bytes": 588058624,
+        "process_peak_rss_bytes": 1999331328,
+        "observed_rss_reduction_percent": 70.59,
+        "shared_warm_seconds_mean": 2.318991713000287,
+        "process_warm_seconds_mean": 2.272461935004685,
+        "observed_warm_speed_ratio": 0.9799353409782555,
+        "throughput_improvement_established": false,
+        "cold_shared_seconds": 4.596385076001752,
+        "cold_process_seconds": 3.562513583994587,
+        "universal_startup_improvement_established": false
+      }
+    },
+    "turbo": {
+      "shared": {
+        "engine": "turbo",
+        "kind": "thread",
+        "workers": 4,
+        "greedy": true,
+        "reference": false,
+        "records": [
+          {
+            "phase": "cold",
+            "wall_seconds": 3.3834582100098487,
+            "audio_seconds": 5.28,
+            "peak_rss": 1296302080,
+            "outputs": [
+              {
+                "index": 0,
+                "voice": "Mai Anh",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "672579c696b5784d584b6144f5a4016d491c8a42cf25af07a9c9298bbdcc03ff",
+                "seconds": 1.035649656012538
+              },
+              {
+                "index": 1,
+                "voice": "Hải Đăng",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "167dbd5a1f1dc51257e21260bb907bc66a5b06c07fe876c61ba29d642af792f4",
+                "seconds": 1.0364293930033455
+              },
+              {
+                "index": 2,
+                "voice": "Mai Anh",
+                "frames": 69120,
+                "audio_seconds": 1.44,
+                "sha256": "44092bf71bcde9b78d482048f940d5f188c66346d44691363950d396b848d4ed",
+                "seconds": 1.1119439179892652
+              },
+              {
+                "index": 3,
+                "voice": "Hải Đăng",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "e3a8e2159a22a25376bcdd1cc20654d8b21872c36e16b59b98951355a87dbeb5",
+                "seconds": 1.0852011899987701
+              }
+            ]
+          },
+          {
+            "phase": "warm",
+            "wall_seconds": 1.1324437449948164,
+            "audio_seconds": 5.28,
+            "peak_rss": 1335906304,
+            "outputs": [
+              {
+                "index": 0,
+                "voice": "Mai Anh",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "672579c696b5784d584b6144f5a4016d491c8a42cf25af07a9c9298bbdcc03ff",
+                "seconds": 1.0890992439963156
+              },
+              {
+                "index": 1,
+                "voice": "Hải Đăng",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "167dbd5a1f1dc51257e21260bb907bc66a5b06c07fe876c61ba29d642af792f4",
+                "seconds": 1.0591964839986758
+              },
+              {
+                "index": 2,
+                "voice": "Mai Anh",
+                "frames": 69120,
+                "audio_seconds": 1.44,
+                "sha256": "44092bf71bcde9b78d482048f940d5f188c66346d44691363950d396b848d4ed",
+                "seconds": 1.0438289869925939
+              },
+              {
+                "index": 3,
+                "voice": "Hải Đăng",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "e3a8e2159a22a25376bcdd1cc20654d8b21872c36e16b59b98951355a87dbeb5",
+                "seconds": 1.1312670199986314
+              }
+            ]
+          },
+          {
+            "phase": "warm2",
+            "wall_seconds": 1.2404121539875632,
+            "audio_seconds": 5.28,
+            "peak_rss": 1337085952,
+            "outputs": [
+              {
+                "index": 0,
+                "voice": "Mai Anh",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "672579c696b5784d584b6144f5a4016d491c8a42cf25af07a9c9298bbdcc03ff",
+                "seconds": 1.0533867970079882
+              },
+              {
+                "index": 1,
+                "voice": "Hải Đăng",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "167dbd5a1f1dc51257e21260bb907bc66a5b06c07fe876c61ba29d642af792f4",
+                "seconds": 1.096352377004223
+              },
+              {
+                "index": 2,
+                "voice": "Mai Anh",
+                "frames": 69120,
+                "audio_seconds": 1.44,
+                "sha256": "44092bf71bcde9b78d482048f940d5f188c66346d44691363950d396b848d4ed",
+                "seconds": 1.239773184992373
+              },
+              {
+                "index": 3,
+                "voice": "Hải Đăng",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "e3a8e2159a22a25376bcdd1cc20654d8b21872c36e16b59b98951355a87dbeb5",
+                "seconds": 1.1036493219871772
+              }
+            ]
+          }
+        ]
+      },
+      "process_baseline": {
+        "engine": "turbo",
+        "kind": "process",
+        "workers": 4,
+        "greedy": true,
+        "reference": false,
+        "records": [
+          {
+            "phase": "cold",
+            "wall_seconds": 4.117227330003516,
+            "audio_seconds": 5.28,
+            "peak_rss": 4861530112,
+            "outputs": [
+              {
+                "index": 0,
+                "voice": "Mai Anh",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "672579c696b5784d584b6144f5a4016d491c8a42cf25af07a9c9298bbdcc03ff",
+                "seconds": 1.146827566990396
+              },
+              {
+                "index": 1,
+                "voice": "Hải Đăng",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "167dbd5a1f1dc51257e21260bb907bc66a5b06c07fe876c61ba29d642af792f4",
+                "seconds": 1.183996521998779
+              },
+              {
+                "index": 2,
+                "voice": "Mai Anh",
+                "frames": 69120,
+                "audio_seconds": 1.44,
+                "sha256": "44092bf71bcde9b78d482048f940d5f188c66346d44691363950d396b848d4ed",
+                "seconds": 1.3219469499890693
+              },
+              {
+                "index": 3,
+                "voice": "Hải Đăng",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "e3a8e2159a22a25376bcdd1cc20654d8b21872c36e16b59b98951355a87dbeb5",
+                "seconds": 1.3204022910067579
+              }
+            ]
+          },
+          {
+            "phase": "warm",
+            "wall_seconds": 1.2603214219998335,
+            "audio_seconds": 5.28,
+            "peak_rss": 4916355072,
+            "outputs": [
+              {
+                "index": 0,
+                "voice": "Mai Anh",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "672579c696b5784d584b6144f5a4016d491c8a42cf25af07a9c9298bbdcc03ff",
+                "seconds": 1.2338611409941223
+              },
+              {
+                "index": 1,
+                "voice": "Hải Đăng",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "167dbd5a1f1dc51257e21260bb907bc66a5b06c07fe876c61ba29d642af792f4",
+                "seconds": 1.259260417005862
+              },
+              {
+                "index": 2,
+                "voice": "Mai Anh",
+                "frames": 69120,
+                "audio_seconds": 1.44,
+                "sha256": "44092bf71bcde9b78d482048f940d5f188c66346d44691363950d396b848d4ed",
+                "seconds": 1.1394019719882635
+              },
+              {
+                "index": 3,
+                "voice": "Hải Đăng",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "e3a8e2159a22a25376bcdd1cc20654d8b21872c36e16b59b98951355a87dbeb5",
+                "seconds": 0.8842431259981822
+              }
+            ]
+          },
+          {
+            "phase": "warm2",
+            "wall_seconds": 1.0714842929883162,
+            "audio_seconds": 5.28,
+            "peak_rss": 4929740800,
+            "outputs": [
+              {
+                "index": 0,
+                "voice": "Mai Anh",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "672579c696b5784d584b6144f5a4016d491c8a42cf25af07a9c9298bbdcc03ff",
+                "seconds": 1.0521772159991087
+              },
+              {
+                "index": 1,
+                "voice": "Hải Đăng",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "167dbd5a1f1dc51257e21260bb907bc66a5b06c07fe876c61ba29d642af792f4",
+                "seconds": 0.9165488150028978
+              },
+              {
+                "index": 2,
+                "voice": "Mai Anh",
+                "frames": 69120,
+                "audio_seconds": 1.44,
+                "sha256": "44092bf71bcde9b78d482048f940d5f188c66346d44691363950d396b848d4ed",
+                "seconds": 1.0700791389972437
+              },
+              {
+                "index": 3,
+                "voice": "Hải Đăng",
+                "frames": 61440,
+                "audio_seconds": 1.28,
+                "sha256": "e3a8e2159a22a25376bcdd1cc20654d8b21872c36e16b59b98951355a87dbeb5",
+                "seconds": 0.9636639910022495
+              }
+            ]
+          }
+        ]
+      },
+      "serial_parity_reference": {
+        "sample_count": 4,
+        "all_concurrent_waveforms_bit_identical": true,
+        "hashes": [
+          "672579c696b5784d584b6144f5a4016d491c8a42cf25af07a9c9298bbdcc03ff",
+          "167dbd5a1f1dc51257e21260bb907bc66a5b06c07fe876c61ba29d642af792f4",
+          "44092bf71bcde9b78d482048f940d5f188c66346d44691363950d396b848d4ed",
+          "e3a8e2159a22a25376bcdd1cc20654d8b21872c36e16b59b98951355a87dbeb5"
+        ]
+      },
+      "summary": {
+        "shared_peak_rss_bytes": 1337085952,
+        "process_peak_rss_bytes": 4929740800,
+        "observed_rss_reduction_percent": 72.88,
+        "shared_warm_seconds_mean": 1.1864279494911898,
+        "process_warm_seconds_mean": 1.1659028574940749,
+        "observed_warm_speed_ratio": 0.9827000940040924,
+        "throughput_improvement_established": false,
+        "cold_shared_seconds": 3.3834582100098487,
+        "cold_process_seconds": 4.117227330003516,
+        "universal_startup_improvement_established": false
+      }
+    }
+  },
+  "helper_cleanup_note": "Final helper additionally collects unreachable per-clone bound-method cycles when the stopped pool releases models; this cleanup is outside timed generation and does not change inference.",
+  "production_functional_checks": {
+    "product_version": "1.9.0",
+    "timing_claims": false,
+    "private_reference_recordings_used": false,
+    "worker_srt_checks": [
+      {
+        "engine": "vieneu_nano",
+        "production_default_sampling": true,
+        "output_frames": 60000,
+        "all_original_cue_clocks_and_text_preserved": true,
+        "alignment_sync_ok": true,
+        "execution_settings": {
+          "engine": "vieneu_nano",
+          "workers": 2,
+          "worker_budget": 2,
+          "threads": 1,
+          "blas_threads": 1,
+          "model_memory": "shared",
+          "resource_profile": "maximum",
+          "cue_fit_pipeline": "serial",
+          "nano_steps": 4
+        },
+        "wav_sha256": "5179fe5658ce9f38d83da80e652231bddd9ea511a5669bce90ddf4f4761105c8"
+      },
+      {
+        "engine": "vieneu",
+        "production_default_sampling": true,
+        "output_frames": 60000,
+        "all_original_cue_clocks_and_text_preserved": true,
+        "alignment_sync_ok": true,
+        "execution_settings": {
+          "engine": "vieneu",
+          "workers": 2,
+          "worker_budget": 2,
+          "threads": 1,
+          "blas_threads": 1,
+          "model_memory": "shared",
+          "resource_profile": "maximum",
+          "cue_fit_pipeline": "serial",
+          "precision": "fp32"
+        },
+        "wav_sha256": "30fa36abef8add7cbbbdd62d61e0f8b2810fc650e8e93410a188491765f6f5d7"
+      }
+    ],
+    "english_reference": {
+      "source": "generated from public bundled preset and public sentence",
+      "production_default_sampling": true,
+      "concurrent_calls": 4,
+      "model_loads": 1,
+      "reference_encodings": 1,
+      "reference_file_unchanged": true,
+      "all_outputs_nonempty_and_finite": true,
+      "outputs": [
+        {
+          "index": 0,
+          "frames": 134400,
+          "sample_rate": 48000,
+          "sha256": "819a0ff174bf4d69995e2722c1a803c13df979e90b94e99d8db4c2fcc0e08261"
+        },
+        {
+          "index": 1,
+          "frames": 130560,
+          "sample_rate": 48000,
+          "sha256": "b26557ecafd67ff562e99603501dbb3ad57bc12b231bb8f56903cd9ca403c6a1"
+        },
+        {
+          "index": 2,
+          "frames": 134400,
+          "sample_rate": 48000,
+          "sha256": "d7e18493680dedf7d7a067ee0980675b48191ae80c82af8eb0be547729db0011"
+        },
+        {
+          "index": 3,
+          "frames": 126720,
+          "sample_rate": 48000,
+          "sha256": "3dc33a77350fed8159fb856dc350ee9b442c42b85dd0be220dbc23f15edbf275"
+        }
+      ]
+    }
+  }
+}

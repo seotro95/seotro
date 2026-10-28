@@ -15,7 +15,7 @@ succeed in the native smoke; missing detection cannot silently pass as a
 one-worker hardware budget. RUNTIME-ADDITIONS.txt records the added dependency.
 
 ```powershell
-python packaging/build_windows.py --output "$env:RUNNER_TEMP/Voice-Studio-Rieng-1.6.0-Portable" --base-archive "$env:RUNNER_TEMP/Voice-Studio-Windows-x64.zip"
+python packaging/build_windows.py --output "$env:RUNNER_TEMP/Voice-Studio-Rieng-1.9.0-Portable" --base-archive "$env:RUNNER_TEMP/Voice-Studio-Windows-x64.zip"
 ```
 
 Pinned base URL:
@@ -41,6 +41,23 @@ Only after those Windows checks pass does the builder write `BUILD_INFO.json`,
 the complete file SHA256 manifest, ZIP and ZIP checksum. A successful build may be
 published as a GitHub release; a Linux source archive must not be described as a
 tested ready-to-use Windows binary.
+
+Version 1.9 additionally runs `benchmark_shared_runtime.py` in the relocated
+bundled interpreter. Separate native subprocesses compare two shared-weight
+tasks with two independent model processes for Nano and Turbo, then validate
+real SRT timing on both paths. Peak process-tree RSS, cold/warm speech throughput
+and sampling limitations are saved in `SHARED-MODEL-QA.json`. The shared cases
+must observe distinct engine copies/decode locks and identical ONNX session
+objects. Nano gets a benchmark-only deterministic per-text seed; Turbo retains
+production stochastic sampling. The whole-hour 30x goal is not inferred from
+short samples, RAM savings, or artificial subtitle silence.
+
+The optional international runtime separately runs small-tensor attention/cache,
+INT8 rollback/precision and IPC tests. It does not load the private reference
+recordings or the full international model on GitHub Actions. FP32 stays the
+default; real INT8 language checks and Linux measurements are reported with
+their own scope and quality limits. INT8 cold model conversion can consume more
+RAM and time than its eventual resident allocation.
 
 Expect roughly 1.2 GB compressed for the prepared base variant, 3–5 GB unpacked,
 about 8–12 GB temporary disk and 4–8 GB RAM during single-process Nano/Turbo

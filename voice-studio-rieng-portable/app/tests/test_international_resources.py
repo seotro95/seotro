@@ -59,6 +59,7 @@ def test_detected_voxcpm_presets_respect_linux_cpu_and_memory_quotas(monkeypatch
     monkeypatch.setattr(os,'cpu_count',lambda:56)
     monkeypatch.setattr(os,'sched_getaffinity',lambda pid:set(range(56)),raising=False)
     monkeypatch.setattr(psutil,'cpu_count',lambda logical=False:28)
+    monkeypatch.setattr(psutil,'Process',lambda:SimpleNamespace(cpu_affinity=lambda:list(range(56))))
     monkeypatch.setattr(psutil,'virtual_memory',lambda:SimpleNamespace(available=128*1024**3))
     monkeypatch.setattr(Path,'is_file',lambda path:True if str(path) in values else original_is_file(path))
     monkeypatch.setattr(Path,'read_text',lambda path,*args,**kwargs:values[str(path)] if str(path) in values else original_read_text(path,*args,**kwargs))
@@ -111,12 +112,13 @@ def test_resident_voxcpm_reservation_is_credited_once_and_capped(monkeypatch):
     monkeypatch.setattr(os,'cpu_count',lambda:56)
     monkeypatch.setattr(os,'sched_getaffinity',lambda pid:set(range(56)),raising=False)
     monkeypatch.setattr(psutil,'cpu_count',lambda logical=False:28)
+    monkeypatch.setattr(psutil,'Process',lambda:SimpleNamespace(cpu_affinity=lambda:list(range(56))))
     monkeypatch.setattr(psutil,'virtual_memory',lambda:SimpleNamespace(available=8*1024**3,total=128*1024**3))
     original=Path.is_file
     monkeypatch.setattr(Path,'is_file',lambda path:False if str(path).startswith('/sys/fs/cgroup/') else original(path))
     resident={'engine':'voxcpm','precision':'fp32','workers':7,'threads':4}
     assert rendering_presets('voxcpm')['fast']['nano_parallel']==1
-    assert rendering_presets('voxcpm',resident)['fast']['nano_parallel']==7
+    assert rendering_presets('voxcpm',resident,resource_profile='maximum')['fast']['nano_parallel']==7
     assert rendering_presets('voxcpm',{**resident,'precision':'int8'})['fast']['nano_parallel']==1
     assert rendering_presets('voxcpm',{**resident,'workers':99})['fast']['nano_parallel']==1
     assert rendering_presets('voxcpm',{**resident,'engine':'vieneu'})['fast']['nano_parallel']==1

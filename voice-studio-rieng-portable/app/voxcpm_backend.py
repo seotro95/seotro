@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import atexit
 import contextlib
+import gc
 import hashlib
 import importlib.metadata
 import json
@@ -71,18 +72,19 @@ def prepared_model(data):
 
 
 class _BackendClient:
-    def __init__(self, data, threads):
+    def __init__(self, data, threads, precision='fp32'):
+        precision = _validate_precision(precision)
         executable = runtime_python()
         if not executable.is_file() or not (data/'models/voxcpm.ready').is_file():
             raise ValueError('Bộ giọng quốc tế chưa sẵn sàng. Chạy TAI_GIONG_DA_NGON_NGU.bat một lần rồi mở lại tool.')
-        self.key = (str(executable), str(data), threads)
+        self.key = (str(executable), str(data), threads, precision)
         self.lock = threading.RLock()
         self.responses = queue.Queue()
         data.mkdir(parents=True, exist_ok=True)
         self.log = (data/'international-backend.log').open('a', encoding='utf-8')
         self.process = subprocess.Popen(
             [str(executable), '-s', '-X', 'utf8', str(Path(__file__).resolve()), '--serve',
-             '--data-dir', str(data), '--threads', str(threads)],
+             '--data-dir', str(data), '--threads', str(threads), '--precision', precision],
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=self.log,
             text=True, encoding='utf-8', bufsize=1, env=isolated_environment(data, threads))
         threading.Thread(target=self._read, daemon=True).start()
@@ -139,11 +141,19 @@ def close_backends():
 atexit.register(close_backends)
 
 
-def create_synthesizer(reference_audio: Path, data: Path, threads: int = 4, steps: int = 10):
+def _validate_precision(precision):
+    if not isinstance(precision,str) or precision not in {'fp32','int8'}:
+        raise ValueError('Chọn bộ giọng quốc tế FP32 hoặc INT8 gọn nhẹ.')
+    return precision
+
+
+def create_synthesizer(reference_audio: Path, data: Path, threads: int = 4,
+                       steps: int = 10, precision: str = 'fp32'):
     """Keep one model resident across different reference voices, without Torch here."""
     reference = Path(reference_audio).resolve()
     data = Path(data).resolve()
     threads = max(1, min(8, int(threads)))
+    precision = _validate_precision(precision)
     if type(steps) is not int or steps not in {4, 8, 10}:
         raise ValueError('Chọn bộ đọc quốc tế 4, 8 hoặc 10 bước.')
     if not reference.is_file():
@@ -151,11 +161,11 @@ def create_synthesizer(reference_audio: Path, data: Path, threads: int = 4, step
 
     def synthesize(text, output):
         global _client
-        key = (str(runtime_python()), str(data), threads)
+        key = (str(runtime_python()), str(data), threads, precision)
         with _client_lock:
             if _client is None or _client.key != key or _client.process.poll() is not None:
                 close_backends()
-                _client = _BackendClient(data, threads)
+                _client = _BackendClient(data, threads, precision=precision)
             client = _client
         client.synthesize(text, reference, Path(output).resolve(), steps=steps)
     return synthesize
@@ -169,7 +179,8 @@ def _write_json(path, value):
     temporary.replace(path)
 
 
-def _load_model(path, threads):
+def _load_model(path, threads, precision='fp32'):
+    precision = _validate_precision(precision)
     import torch
     from voxcpm import VoxCPM
     if importlib.metadata.version('voxcpm') != PACKAGE_VERSION:
@@ -177,11 +188,27 @@ def _load_model(path, threads):
     torch.set_num_threads(max(1, min(8, int(threads))))
     model = VoxCPM.from_pretrained(str(path), local_files_only=True, load_denoiser=False,
                                    optimize=False, device='cpu')
+    quantization = {'enabled':False,'reason':'not_requested'}
+    if precision=='int8':
+        from voxcpm_quantization import quantize_cpu_language_models
+        print('Voice Studio: preparing compact INT8 language models; the first load can take longer.',
+              file=sys.stderr,flush=True)
+        quantization = quantize_cpu_language_models(model)
+        if not quantization['enabled']:
+            if quantization.get('error_type')=='MemoryError':
+                raise ValueError('Không đủ RAM tạm để nạp INT8 gọn nhẹ. Chọn FP32 hoặc giảm số tác vụ rồi thử lại.')
+            raise ValueError('Không thể nạp INT8 gọn nhẹ trên runtime này ('+
+                             str(quantization.get('reason','unknown'))+'). Chọn FP32 rồi thử lại.')
+        # Replaced FP32 modules can retain bound-method cycles. Release them
+        # before the next allocation instead of retaining both weight sets.
+        gc.collect()
     from voxcpm_acceleration import enable_active_kv_attention, CachedReferenceModel
     status = enable_active_kv_attention(model)
+    status.update(precision=precision,quantization=quantization)
     print('Voice Studio CPU acceleration: '+json.dumps(status), file=sys.stderr, flush=True)
     optimized = CachedReferenceModel(model)
     optimized.voice_studio_acceleration = status
+    optimized.voice_studio_precision = precision
     return optimized
 
 
@@ -353,6 +380,8 @@ def main():
     parser.add_argument('--data-dir')
     parser.add_argument('--model-source', type=Path)
     parser.add_argument('--threads', type=int, default=4)
+    parser.add_argument('--precision', choices=('fp32','int8'), default='fp32',
+                        help='CPU inference precision for --serve; source weights stay unchanged.')
     args = parser.parse_args()
     data = data_directory(args.data_dir)
     protocol = sys.stdout
@@ -363,7 +392,7 @@ def main():
             elif args.prepare_model:
                 result = prepare_model(data, args.threads, args.model_source)
             elif args.serve:
-                model = _load_model(prepared_model(data), args.threads)
+                model = _load_model(prepared_model(data), args.threads, precision=args.precision)
                 result = None
             else:
                 parser.error('Chọn --serve, --check hoặc --prepare-model.')

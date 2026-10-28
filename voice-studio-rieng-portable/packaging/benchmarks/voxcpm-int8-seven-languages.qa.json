@@ -1,0 +1,449 @@
+{
+  "format": "voxcpm-int8-seven-languages-v1",
+  "threads": 4,
+  "seed": 2026,
+  "steps": 10,
+  "loads": [
+    {
+      "precision": "fp32",
+      "load_seconds": 12.1386,
+      "acceleration": {
+        "enabled": true,
+        "active_layers": 60,
+        "patched_layers": 60,
+        "reason": null,
+        "precision": "fp32",
+        "quantization": {
+          "enabled": false,
+          "reason": "not_requested"
+        }
+      },
+      "rss_gib": 10.267,
+      "process_peak_rss_gib": 14.837,
+      "timing_excluded_from_load_comparison": false
+    },
+    {
+      "precision": "int8",
+      "load_seconds": 23.9736,
+      "acceleration": {
+        "enabled": true,
+        "active_layers": 60,
+        "patched_layers": 60,
+        "reason": null,
+        "precision": "int8",
+        "quantization": {
+          "enabled": true,
+          "reason": null,
+          "linear_layers": 252,
+          "engine": "x86",
+          "dtype": "qint8"
+        }
+      },
+      "rss_gib": 13.548,
+      "process_peak_rss_gib": 19.733,
+      "timing_excluded_from_load_comparison": true
+    }
+  ],
+  "same_public_text_and_reference_per_language": true,
+  "complete_hour_measured": false,
+  "target_30x_guaranteed": false,
+  "complete": true,
+  "platform": "Linux cloud, CPU quota4, Torch2.8.0 CPU, voxcpm2.0.3",
+  "includes_reference_encoding": true,
+  "includes_initial_model_load_in_generation_timing": false,
+  "private_recordings_and_generated_audio_published": false,
+  "limitations": [
+    "Seven short sentences, one reference per language; no complete hour measured.",
+    "English private references normally use Turbo in the application; the English VoxCPM case tests model coverage only.",
+    "Automatic ASR is not a full pronunciation, emotion or voice-identity test.",
+    "INT8 changes arithmetic and output durations. Speed comparison must use generated speech duration, not wall time alone.",
+    "INT8 cold conversion retains larger FP32 source weights temporarily and is budgeted at20GiB per simultaneous loader."
+  ],
+  "asr": {
+    "method": "Whisper base multilingual, offline CPU int8, explicit language, beam5, no prompt",
+    "human_verified": false,
+    "speaker_identity_or_emotion_test": false,
+    "short_clips_may_limit_asr_accuracy": true,
+    "results": [
+      {
+        "precision": "fp32",
+        "language": "en",
+        "expected": "Hello, welcome to the voice studio.",
+        "asr_text": "Hello, welcome to the Voice Studio.",
+        "audio_seconds": 2.88,
+        "character_error_rate": 0.0,
+        "normalized_exact_match": true,
+        "empty_transcription": false,
+        "max_no_speech_probability": 0.18898548185825348
+      },
+      {
+        "precision": "fp32",
+        "language": "ko",
+        "expected": "안녕하세요. 음성 스튜디오에 오신 것을 환영합니다.",
+        "asr_text": "안녕하세요. 음성 스튜디오에 오신 것을 환영합니다.",
+        "audio_seconds": 3.36,
+        "character_error_rate": 0.0,
+        "normalized_exact_match": true,
+        "empty_transcription": false,
+        "max_no_speech_probability": 0.002179366070777178
+      },
+      {
+        "precision": "fp32",
+        "language": "ru",
+        "expected": "Здравствуйте, добро пожаловать в студию голоса.",
+        "asr_text": "Здравствуйте! Добро пожаловать в студию голос!",
+        "audio_seconds": 2.08,
+        "character_error_rate": 0.025,
+        "normalized_exact_match": false,
+        "empty_transcription": false,
+        "max_no_speech_probability": 0.015158982947468758
+      },
+      {
+        "precision": "fp32",
+        "language": "ja",
+        "expected": "こんにちは、音声スタジオへようこそ。",
+        "asr_text": "こんにちは、音声スタジオへようこそ",
+        "audio_seconds": 3.84,
+        "character_error_rate": 0.0,
+        "normalized_exact_match": true,
+        "empty_transcription": false,
+        "max_no_speech_probability": 0.10679309815168381
+      },
+      {
+        "precision": "fp32",
+        "language": "fr",
+        "expected": "Bonjour, bienvenue dans notre studio de voix.",
+        "asr_text": "Bonjour, bienvenue dans notre studio de voix.",
+        "audio_seconds": 2.56,
+        "character_error_rate": 0.0,
+        "normalized_exact_match": true,
+        "empty_transcription": false,
+        "max_no_speech_probability": 0.02983267791569233
+      },
+      {
+        "precision": "fp32",
+        "language": "es",
+        "expected": "Hola, bienvenidos a nuestro estudio de voz.",
+        "asr_text": "Hola, bienvenidos a nuestro estudio de vos.",
+        "audio_seconds": 2.88,
+        "character_error_rate": 0.02857142857142857,
+        "normalized_exact_match": false,
+        "empty_transcription": false,
+        "max_no_speech_probability": 0.003376367036253214
+      },
+      {
+        "precision": "fp32",
+        "language": "th",
+        "expected": "สวัสดีครับ ยินดีต้อนรับ",
+        "asr_text": "สวัสดีครับ ยินดีตอนรับ",
+        "audio_seconds": 2.24,
+        "character_error_rate": 0.045454545454545456,
+        "normalized_exact_match": false,
+        "empty_transcription": false,
+        "max_no_speech_probability": 0.07854871451854706
+      },
+      {
+        "precision": "int8",
+        "language": "en",
+        "expected": "Hello, welcome to the voice studio.",
+        "asr_text": "Hello, welcome to the Voice Studio.",
+        "audio_seconds": 2.08,
+        "character_error_rate": 0.0,
+        "normalized_exact_match": true,
+        "empty_transcription": false,
+        "max_no_speech_probability": 0.1328708529472351
+      },
+      {
+        "precision": "int8",
+        "language": "ko",
+        "expected": "안녕하세요. 음성 스튜디오에 오신 것을 환영합니다.",
+        "asr_text": "안녕하세요, 음성 스튜디오에 오신 것을 환영합니다.",
+        "audio_seconds": 3.36,
+        "character_error_rate": 0.0,
+        "normalized_exact_match": true,
+        "empty_transcription": false,
+        "max_no_speech_probability": 0.00621724734082818
+      },
+      {
+        "precision": "int8",
+        "language": "ru",
+        "expected": "Здравствуйте, добро пожаловать в студию голоса.",
+        "asr_text": "Здравствуйте! Добро пожаловать в студию голоса!",
+        "audio_seconds": 2.24,
+        "character_error_rate": 0.0,
+        "normalized_exact_match": true,
+        "empty_transcription": false,
+        "max_no_speech_probability": 0.006447905674576759
+      },
+      {
+        "precision": "int8",
+        "language": "ja",
+        "expected": "こんにちは、音声スタジオへようこそ。",
+        "asr_text": "こんにちは、音声スタジオへようこそ",
+        "audio_seconds": 2.08,
+        "character_error_rate": 0.0,
+        "normalized_exact_match": true,
+        "empty_transcription": false,
+        "max_no_speech_probability": 0.048116378486156464
+      },
+      {
+        "precision": "int8",
+        "language": "fr",
+        "expected": "Bonjour, bienvenue dans notre studio de voix.",
+        "asr_text": "Bonjour, bienvenue dans notre studio de voix.",
+        "audio_seconds": 2.08,
+        "character_error_rate": 0.0,
+        "normalized_exact_match": true,
+        "empty_transcription": false,
+        "max_no_speech_probability": 0.008782762102782726
+      },
+      {
+        "precision": "int8",
+        "language": "es",
+        "expected": "Hola, bienvenidos a nuestro estudio de voz.",
+        "asr_text": "Hola bienvenidos a nuestro estudio de vos.",
+        "audio_seconds": 1.92,
+        "character_error_rate": 0.02857142857142857,
+        "normalized_exact_match": false,
+        "empty_transcription": false,
+        "max_no_speech_probability": 0.007135464809834957
+      },
+      {
+        "precision": "int8",
+        "language": "th",
+        "expected": "สวัสดีครับ ยินดีต้อนรับ",
+        "asr_text": "สวัสดีครับ ยินดีต้นรับ",
+        "audio_seconds": 1.92,
+        "character_error_rate": 0.045454545454545456,
+        "normalized_exact_match": false,
+        "empty_transcription": false,
+        "max_no_speech_probability": 0.22812268137931824
+      }
+    ],
+    "complete": true,
+    "fp32_normalized_exact_count": 4,
+    "int8_normalized_exact_count": 5,
+    "no_detected_new_word_omission_in_compact_samples": true,
+    "review_note": "English/Korean/Russian/Japanese/French compact samples matched expected text after punctuation/case normalization. Spanish and Thai each had one ASR character/accent difference, as in FP32. Automatic review does not guarantee every voice or every sentence."
+  },
+  "results": [
+    {
+      "precision": "fp32",
+      "language": "en",
+      "text": "Hello, welcome to the voice studio.",
+      "steps": 10,
+      "audio_seconds": 2.88,
+      "elapsed_seconds": 27.2382,
+      "realtime_multiplier": 0.1057,
+      "rss_gib": 10.693,
+      "process_peak_rss_gib": 14.837,
+      "timing_contended": false
+    },
+    {
+      "precision": "fp32",
+      "language": "ko",
+      "text": "안녕하세요. 음성 스튜디오에 오신 것을 환영합니다.",
+      "steps": 10,
+      "audio_seconds": 3.36,
+      "elapsed_seconds": 31.2174,
+      "realtime_multiplier": 0.1076,
+      "rss_gib": 10.764,
+      "process_peak_rss_gib": 14.837,
+      "timing_contended": false
+    },
+    {
+      "precision": "fp32",
+      "language": "ru",
+      "text": "Здравствуйте, добро пожаловать в студию голоса.",
+      "steps": 10,
+      "audio_seconds": 2.08,
+      "elapsed_seconds": 21.3942,
+      "realtime_multiplier": 0.0972,
+      "rss_gib": 10.821,
+      "process_peak_rss_gib": 14.837,
+      "timing_contended": false
+    },
+    {
+      "precision": "fp32",
+      "language": "ja",
+      "text": "こんにちは、音声スタジオへようこそ。",
+      "steps": 10,
+      "audio_seconds": 3.84,
+      "elapsed_seconds": 38.3864,
+      "realtime_multiplier": 0.1,
+      "rss_gib": 10.914,
+      "process_peak_rss_gib": 14.837,
+      "timing_contended": false
+    },
+    {
+      "precision": "fp32",
+      "language": "fr",
+      "text": "Bonjour, bienvenue dans notre studio de voix.",
+      "steps": 10,
+      "audio_seconds": 2.56,
+      "elapsed_seconds": 24.2,
+      "realtime_multiplier": 0.1058,
+      "rss_gib": 10.963,
+      "process_peak_rss_gib": 14.837,
+      "timing_contended": false
+    },
+    {
+      "precision": "fp32",
+      "language": "es",
+      "text": "Hola, bienvenidos a nuestro estudio de voz.",
+      "steps": 10,
+      "audio_seconds": 2.88,
+      "elapsed_seconds": 28.3583,
+      "realtime_multiplier": 0.1016,
+      "rss_gib": 10.987,
+      "process_peak_rss_gib": 14.837,
+      "timing_contended": false
+    },
+    {
+      "precision": "fp32",
+      "language": "th",
+      "text": "สวัสดีครับ ยินดีต้อนรับ",
+      "steps": 10,
+      "audio_seconds": 2.24,
+      "elapsed_seconds": 22.0582,
+      "realtime_multiplier": 0.1015,
+      "rss_gib": 10.995,
+      "process_peak_rss_gib": 14.837,
+      "timing_contended": false
+    },
+    {
+      "precision": "int8",
+      "language": "en",
+      "text": "Hello, welcome to the voice studio.",
+      "steps": 10,
+      "audio_seconds": 2.08,
+      "elapsed_seconds": 14.4894,
+      "realtime_multiplier": 0.1436,
+      "rss_gib": 13.332,
+      "process_peak_rss_gib": 19.733,
+      "timing_contended": false
+    },
+    {
+      "precision": "int8",
+      "language": "ko",
+      "text": "안녕하세요. 음성 스튜디오에 오신 것을 환영합니다.",
+      "steps": 10,
+      "audio_seconds": 3.36,
+      "elapsed_seconds": 22.4089,
+      "realtime_multiplier": 0.1499,
+      "rss_gib": 13.592,
+      "process_peak_rss_gib": 19.733,
+      "timing_contended": false
+    },
+    {
+      "precision": "int8",
+      "language": "ru",
+      "text": "Здравствуйте, добро пожаловать в студию голоса.",
+      "steps": 10,
+      "audio_seconds": 2.24,
+      "elapsed_seconds": 14.8441,
+      "realtime_multiplier": 0.1509,
+      "rss_gib": 13.358,
+      "process_peak_rss_gib": 19.733,
+      "timing_contended": false
+    },
+    {
+      "precision": "int8",
+      "language": "ja",
+      "text": "こんにちは、音声スタジオへようこそ。",
+      "steps": 10,
+      "audio_seconds": 2.08,
+      "elapsed_seconds": 14.3873,
+      "realtime_multiplier": 0.1446,
+      "rss_gib": 13.612,
+      "process_peak_rss_gib": 19.733,
+      "timing_contended": false
+    },
+    {
+      "precision": "int8",
+      "language": "fr",
+      "text": "Bonjour, bienvenue dans notre studio de voix.",
+      "steps": 10,
+      "audio_seconds": 2.08,
+      "elapsed_seconds": 15.1213,
+      "realtime_multiplier": 0.1376,
+      "rss_gib": 13.374,
+      "process_peak_rss_gib": 19.733,
+      "timing_contended": false
+    },
+    {
+      "precision": "int8",
+      "language": "es",
+      "text": "Hola, bienvenidos a nuestro estudio de voz.",
+      "steps": 10,
+      "audio_seconds": 1.92,
+      "elapsed_seconds": 13.199,
+      "realtime_multiplier": 0.1455,
+      "rss_gib": 13.652,
+      "process_peak_rss_gib": 19.733,
+      "timing_contended": false
+    },
+    {
+      "precision": "int8",
+      "language": "th",
+      "text": "สวัสดีครับ ยินดีต้อนรับ",
+      "steps": 10,
+      "audio_seconds": 1.92,
+      "elapsed_seconds": 13.0048,
+      "realtime_multiplier": 0.1476,
+      "rss_gib": 13.402,
+      "process_peak_rss_gib": 19.733,
+      "timing_contended": false
+    }
+  ],
+  "resource_contention": {
+    "window_utc": [
+      "2026-10-28T23:36:00Z",
+      "2026-10-28T23:36:11Z"
+    ],
+    "workload": "Full API unit suite",
+    "affected": "INT8 model loading only",
+    "generation_timings_affected": false,
+    "load_comparison_excludes_int8_timing": true
+  },
+  "model_ram_validation": {
+    "method": "Production compact load after adding GC of replaced FP32 modules; CPU timing not measured",
+    "after_load": {
+      "rss_gib": 7.693,
+      "peak_rss_gib": 19.832
+    },
+    "after_extra_gc": {
+      "rss_gib": 7.693,
+      "peak_rss_gib": 19.832
+    },
+    "fp32_loaded_rss_gib": 10.267,
+    "gc_loaded_reduction_percent": 25.07,
+    "generation_benchmark_predates_gc_cleanup": true,
+    "cleanup_changes_allocations_not_model_arithmetic": true,
+    "audio_parity_after_cleanup": {
+      "precision": "int8",
+      "language": "ja",
+      "seed": 2026,
+      "steps": 10,
+      "production_gc_preserves_wave_bytes": true,
+      "after_generation_rss_gib": 7.597,
+      "wave_sha256": "59da3f23eeae20874e6f2a8465a719cfa5f27dfbe1339d4af54f143a54a0dc6c"
+    }
+  },
+  "aggregate": {
+    "fp32": {
+      "generated_audio_seconds": 19.84,
+      "generation_wall_seconds": 192.8527,
+      "realtime_multiplier": 0.10287644404252572
+    },
+    "int8": {
+      "generated_audio_seconds": 15.68,
+      "generation_wall_seconds": 107.4548,
+      "realtime_multiplier": 0.14592182015135668
+    },
+    "normalized_throughput_gain": 1.4184181958217514,
+    "same_input_wall_time_gain": 1.7947332273662973
+  },
+  "backend_sha256": "ba3d7a11b0a73fbc2338bda58fb57b3340916085a7251d4788b400e8702e931e",
+  "quantization_helper_sha256": "5c820bae77318bb8f510a7f61f1197bbc1c8c180f91255448e6aadbc1d91d3ce"
+}

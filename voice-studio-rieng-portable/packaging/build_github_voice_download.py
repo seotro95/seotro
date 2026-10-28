@@ -377,24 +377,24 @@ class BuilderTests(unittest.TestCase):
                     self.assertEqual(hashlib.sha256(archive.read(ROOT+'/'+name)).hexdigest(), expected)
             # A newly built release must keep its new source and metadata while
             # using the same encrypted legacy reference packet.
-            current_base = directory/'base-1.8.zip'
-            current_root = 'Voice-Studio-Rieng-1.8.0-Portable'
-            current_full = 'Voice-Studio-Rieng-1.8.0-19-Giong-GitHub'
+            current_base = directory/'base-1.9.zip'
+            current_root = 'Voice-Studio-Rieng-1.9.0-Portable'
+            current_full = 'Voice-Studio-Rieng-1.9.0-19-Giong-GitHub'
             with zipfile.ZipFile(base) as original, zipfile.ZipFile(current_base, 'w') as current:
                 for entry in original.infolist():
                     relative = entry.filename[len(BASE_ROOT)+1:]
                     content = original.read(entry)
                     if relative == 'BUILD_INFO.json':
-                        content = json.dumps({'version': '1.8.0', 'bundled_runtime': True}).encode()
+                        content = json.dumps({'version': '1.9.0', 'bundled_runtime': True}).encode()
                     current.writestr(current_root+'/'+relative, content)
                 current.writestr(current_root+'/app/voxcpm_acceleration.py', b'new acceleration module')
             full = build_bundle(current_base, delivery, directory/'current-output',
-                                sha256(current_base), current_root, current_full, '1.8.0')
+                                sha256(current_base), current_root, current_full, '1.9.0')
             with zipfile.ZipFile(full) as archive:
                 self.assertEqual(archive.read(current_full+'/app/voxcpm_acceleration.py'), b'new acceleration module')
-                self.assertEqual(json.loads(archive.read(current_full+'/BUILD_INFO.json'))['version'], '1.8.0')
+                self.assertEqual(json.loads(archive.read(current_full+'/BUILD_INFO.json'))['version'], '1.9.0')
                 self.assertEqual(archive.read(current_full+'/delivery/voices.vspack'), encrypted)
-                self.assertIn('bản 1.8', archive.read(current_full+'/README_GITHUB_19_GIONG.txt').decode())
+                self.assertIn('bản 1.9', archive.read(current_full+'/README_GITHUB_19_GIONG.txt').decode())
             with self.assertRaisesRegex(ValueError, 'version/runtime'):
                 build_bundle(current_base, delivery, directory/'bad-version', sha256(current_base),
                              current_root, current_full, '1.7.0')

@@ -1,4 +1,4 @@
-# Voice Studio Riêng 1.8.0 · Windows 10/11 x64 Portable
+# Voice Studio Riêng 1.9.0 · Windows 10/11 x64 Portable
 
 Giải nén **toàn bộ ZIP** vào thư mục có quyền ghi, ví dụ `D:/VoiceStudio`, rồi mở **MO_TOOL.bat**. Giữ cửa sổ lệnh mở trong khi sử dụng; dùng Ctrl+C để tắt. Bản Portable đã có Python, FFmpeg, Nano và Turbo, dùng cục bộ với các giọng đi kèm.
 
@@ -10,9 +10,23 @@ Chọn **WAV** khi dựng video. Tool tự căn từng câu: câu dài đổi nh
 
 Ví dụ `00:27:20,519 --> 00:27:23,671` có ô lời dài **3,152 giây**. Nếu đây là câu cuối, WAV giữ timeline từ 0 đến **27:23,671**. MP3 có thể có padding tùy phần mềm giải mã. Chi tiết TXT có mốc nằm trong `HUONG_DAN_CAN_MOC.txt`.
 
+## Chạy nhẹ và giữ giao diện mượt
+
+Bản 1.9 cho giọng Nano/Turbo dùng chung trọng số ONNX trong một tiến trình, mỗi tác vụ vẫn có vùng dữ liệu và khóa giải mã riêng. Nhiều câu dùng chung model thay vì nạp một bản model cho mỗi tác vụ. Giọng, số bước, lời đọc và mốc SRT giữ theo lựa chọn hiện tại. Đổi giữa các giọng cùng bộ đọc có thể dùng lại trọng số đã nạp.
+
+Chọn cấu hình tài nguyên độc lập với chất lượng giọng:
+
+- **Mượt khi làm việc:** ưu tiên giao diện và ứng dụng đang dùng; chừa một ít lõi trên máy nhiều lõi và hạ ưu tiên xử lý nền.
+- **Tốc độ tối đa:** dùng toàn bộ ngân sách CPU/RAM cho phép. Không tăng số bước hoặc tự đổi giọng.
+- **Ít RAM:** một tác vụ, tối đa hai luồng. Dùng khi muốn máy nhẹ hơn; tốc độ tổng có thể thấp hơn.
+
+Giao diện chỉ tải tóm tắt kịch bản khi cập nhật lịch sử, giữ nguyên phần văn bản đầy đủ để tạo giọng và xuất tệp. Lịch sử hiển thị từng nhóm; khi không có tác vụ hoặc tab bị ẩn, giao diện giảm tần suất cập nhật. Mở lại bản thu không tự đặt lại vị trí phát ở mỗi lần cập nhật tiến độ.
+
+Số đo Linux và giới hạn nằm trong **CPU-SHARED-MODEL-BENCHMARK.json**. Số đo so sánh trực tiếp bản dùng chung và bản nhiều tiến trình trên Windows nằm trong **SHARED-MODEL-QA.json**, gồm thời gian nạp lạnh/đã nạp, lời thực và RAM working set của cả cây tiến trình. Trang hệ thống và báo cáo bản thu hiển thị cấu hình thực đã dùng. Các số đo ngắn không chứng minh tạo một giờ trong hai phút.
+
 ## Chọn tốc độ và giọng
 
-Bản 1.8 giữ giọng đang chọn và ghi nhớ chế độ tốc độ, ngôn ngữ cùng cấu hình CPU. Chọn **Ưu tiên tốc độ**, nghe mẫu và bấm **Đo tốc độ** để kiểm tra kết quả thực trên máy bạn. Bộ đo dùng câu thử đúng ngôn ngữ của giọng Việt/Anh và giọng mẫu quốc tế.
+Bản 1.9 giữ giọng đang chọn và ghi nhớ chế độ tốc độ, ngôn ngữ cùng cấu hình CPU. Chọn **Ưu tiên tốc độ**, nghe mẫu và bấm **Đo tốc độ** để kiểm tra kết quả thực trên máy bạn. Bộ đo dùng câu thử đúng ngôn ngữ của giọng Việt/Anh và giọng mẫu quốc tế.
 
 Với bộ căn FFmpeg, nhiều câu SRT được tạo và căn đồng thời; WSOLA giữ đường xử lý nhanh hiện có. Bước xuất cuối ghép theo thứ tự mốc gốc. Các mảnh đã xong được giữ để tiếp tục, và bản thu chỉ hoàn tất khi đủ lời, đủ câu và đúng timeline.
 
@@ -26,9 +40,9 @@ Mai Anh/Turbo hỗ trợ nhiều tác vụ song song. Chọn **Ưu tiên tốc �
 
 Bấm **Chuyển sang Nano và đo tốc độ** khi muốn so sánh bộ giọng nhanh. Chỉ nút đổi giọng chủ động mới chọn Nano; kịch bản giữ nguyên. Bản thu hiện rõ bộ giọng, số tác vụ/luồng và FP32 hoặc số bước Nano thực dùng.
 
-- **Nhanh:** Nano 4 bước, nhiều tiến trình theo tài nguyên máy, bộ căn WSOLA. Cần nghe lại chất lượng.
+- **Nhanh:** Nano 4 bước, nhiều tác vụ dùng chung trọng số theo tài nguyên máy, bộ căn WSOLA. Cần nghe lại chất lượng.
 - **Cân bằng:** Nano 8 bước. **Chất lượng:** Nano 16 bước; ưu tiên chất lượng thay vì số đo tốc độ.
-- Nano và Turbo hỗ trợ tối đa **32 tác vụ CPU**. Máy 56 luồng / 28 lõi vật lý, đủ RAM bắt đầu ở 28 tác vụ × 1 luồng; tool không coi luồng ảo là lõi vật lý.
+- Nano và Turbo hỗ trợ tối đa **32 tác vụ CPU**. Ở cấu hình Tốc độ tối đa, máy 56 luồng / 28 lõi vật lý, đủ RAM có thể dùng 28 tác vụ × 1 luồng; tool không coi luồng ảo là lõi vật lý.
 - Chọn **giọng Nano → Ưu tiên tốc độ → Tự đo và tối ưu CPU**. Tool thử nhiều cấu hình bằng lời thật và lưu cấu hình nhanh nhất đo được; số bước tạo giọng giữ theo chế độ đã chọn. Thử nhiều cấu hình lần đầu có thể mất vài phút.
 - Bấm **Sao chép kết quả đo** để gửi số liệu, không kèm kịch bản riêng. Có thể dừng quá trình đo bằng nút Dừng tạo.
 - Số đo dùng thời lượng lời đã tạo, loại khoảng lặng SRT. Kết quả phân biệt lượt nạp model và lượt model đã sẵn sàng; hãy kiểm tra cả kịch bản dài để xác nhận mốc 2 phút/1 giờ.
@@ -40,11 +54,15 @@ Bấm **Chuyển sang Nano và đo tốc độ** khi muốn so sánh bộ giọn
 
 ## Thư viện giọng mẫu và giọng quốc tế
 
-Bản 1.8 đọc thư viện giọng mặc định trong **app/voice-library**. Nếu có gói giọng riêng, cài gói cập nhật vào thư mục Portable đang dùng, sau khi đóng tool. Các giọng xuất hiện trong nhóm mẫu mặc định; bấm nghe thử để chọn. Mẫu và giọng cá nhân trong **app/.data/voices** vẫn được giữ. Các bản ghi âm riêng chỉ được đưa vào bản GitHub ở dạng mã hóa; mật khẩu được gửi riêng. Khi mở bộ 19 giọng, chỉ thư viện giọng được thêm, mã ứng dụng hiện tại được giữ để tránh quay lại bản cũ.
+Bản 1.9 đọc thư viện giọng mặc định trong **app/voice-library**. Nếu có gói giọng riêng, cài gói cập nhật vào thư mục Portable đang dùng, sau khi đóng tool. Các giọng xuất hiện trong nhóm mẫu mặc định; bấm nghe thử để chọn. Mẫu và giọng cá nhân trong **app/.data/voices** vẫn được giữ. Các bản ghi âm riêng chỉ được đưa vào bản GitHub ở dạng mã hóa; mật khẩu được gửi riêng. Khi mở bộ 19 giọng, chỉ thư viện giọng được thêm, mã ứng dụng hiện tại được giữ để tránh quay lại bản cũ.
 
 Mẫu tiếng Anh dùng Turbo đã đi kèm. Với mẫu tiếng Hàn, Nga, Nhật, Pháp, Tây Ban Nha và Thái, chạy **TAI_GIONG_DA_NGON_NGU.bat** một lần khi có Internet. Bộ cài tải model **VoxCPM2 khoảng 5 GB** cùng các thư viện CPU vào **runtime-international** riêng; cần thêm dung lượng cho thư viện, tệp tải tạm và quá trình cài đặt. Runtime Nano/Turbo hiện có được giữ nguyên. Giấy phép, nguồn và checksum model được lưu cùng bộ model.
 
-Cài đặt và nạp model lần đầu có thể mất nhiều thời gian. Chỉ khi kiểm tra tạo lời thành công, giọng quốc tế mới báo sẵn sàng. Mở lại tool sau khi hoàn tất; những lần tạo tiếp theo dùng model cục bộ. Bộ này chạy CPU FP32, có cấu hình Nhanh/Cân bằng/Chất lượng cùng số đo riêng; không dùng số đo Nano/Turbo để suy ra tốc độ quốc tế hoặc cam kết 2 phút/1 giờ. Độ giống giọng và cảm xúc phụ thuộc mẫu, lời đọc và model; nghe kiểm tra trước khi dựng video.
+Cài đặt và nạp model lần đầu có thể mất nhiều thời gian. Chỉ khi kiểm tra tạo lời thành công, giọng quốc tế mới báo sẵn sàng. Mở lại tool sau khi hoàn tất; những lần tạo tiếp theo dùng model cục bộ. Bộ này mặc định chạy CPU FP32, có cấu hình Nhanh/Cân bằng/Chất lượng cùng số đo riêng; không dùng số đo Nano/Turbo để suy ra tốc độ quốc tế hoặc cam kết 2 phút/1 giờ. Độ giống giọng và cảm xúc phụ thuộc mẫu, lời đọc và model; nghe kiểm tra trước khi dựng video.
+
+Với giọng quốc tế, **Tiết kiệm RAM (INT8)** là lựa chọn chủ động; mặc định vẫn là **FP32**. INT8 chỉ lượng tử hóa các lớp Linear trong hai bộ ngôn ngữ, giữ model gốc trên đĩa cùng bộ mã hóa/giải mã âm thanh và diffusion. Mỗi lần nạp model mới vào RAM phải chuyển đổi model, có thể thêm khoảng 19 giây trên máy đo; đây không phải bước chỉ chạy một lần khi cài đặt. Cần dự trù khoảng 20 GiB RAM cho mỗi tác vụ đang khởi tạo cùng khoảng trống hệ thống, tương đương tối thiểu khoảng 24 GiB RAM khả dụng cho một tác vụ INT8. RAM khi đã nạp thấp hơn không có nghĩa mức dùng RAM cao nhất khi nạp cũng thấp. Tool giới hạn số tác vụ theo cả mức nạp đầu này. Nghe thử mẫu đúng giọng/ngôn ngữ trước bản dài; không có cam kết tự nhiên hoặc chính xác tuyệt đối cho mọi kịch bản.
+
+Đo bảy câu thử ngắn bằng bảy ngôn ngữ cho thấy INT8 tăng thông lượng lời thực khoảng **1,42 lần** so với FP32; phép đo RAM riêng sau khi nạp cho thấy **10,267 → 7,693 GiB**, giảm khoảng **25%**, với đỉnh khởi tạo **19,832 GiB**. Nhận dạng tự động không phát hiện thêm từ bị mất trong bảy mẫu này; mẫu Tây Ban Nha và Thái vẫn có sai khác một ký tự như FP32. Đây không phải kiểm chứng bằng người nghe, cảm xúc, toàn bộ giọng hoặc bản một giờ. Báo cáo **CPU-INTERNATIONAL-INT8-BENCHMARK.json** ghi đầy đủ giới hạn và cách đo.
 
 ## Dữ liệu và phạm vi
 

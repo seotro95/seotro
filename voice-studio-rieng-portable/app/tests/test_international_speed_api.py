@@ -3,18 +3,23 @@ from unittest.mock import Mock
 
 import pytest
 import app
-from hardware import resource_presets
+from hardware import resource_presets, resource_limits
 from test_reference_voices_api import (reference_catalog, prepared_international_model,
                                        KOREAN, THAI, ENGLISH)
 from test_standalone_api import studio  # noqa: F401
+
+
+def xeon_resources(monkeypatch):
+    monkeypatch.setattr(app,'effective_rendering_presets',lambda engine='vieneu_nano',resource_profile='smooth',precision='fp32':resource_presets(56,28,128,engine,resource_profile,precision))
+    monkeypatch.setattr(app,'rendering_limits',lambda engine='vieneu_nano',resident=None,resource_profile='smooth',precision='fp32':resource_limits(56,28,128,engine,resource_profile,precision))
 
 
 @pytest.mark.parametrize('ident,language',[(KOREAN,'ko'),(THAI,'th')])
 def test_native_benchmark_preserves_voice_and_applies_international_fast_mode(reference_catalog,monkeypatch,ident,language):
     client,data,root,submit=reference_catalog
     prepared_international_model(data,monkeypatch)
-    monkeypatch.setattr(app,'effective_rendering_presets',lambda engine='vieneu_nano':resource_presets(56,28,128,engine))
-    response=client.post('/api/benchmark',json={'voice_id':ident,'language':language,'render_mode':'fast'})
+    xeon_resources(monkeypatch)
+    response=client.post('/api/benchmark',json={'voice_id':ident,'language':language,'render_mode':'fast','resource_profile':'maximum'})
     assert response.status_code==202,response.text
     job=response.json()
     assert job['voice_id']==ident and job['engine']=='voxcpm'
@@ -27,9 +32,9 @@ def test_native_benchmark_preserves_voice_and_applies_international_fast_mode(re
 def test_explicit_international_resources_are_bounded_without_voice_switch(reference_catalog,monkeypatch):
     client,data,root,_=reference_catalog
     prepared_international_model(data,monkeypatch)
-    monkeypatch.setattr(app,'effective_rendering_presets',lambda engine='vieneu_nano':resource_presets(56,28,128,engine))
+    xeon_resources(monkeypatch)
     response=client.post('/api/speech',json={'voice_id':KOREAN,'language':'ko','text':'안녕하세요.',
-        'render_mode':'fast','voxcpm_steps':10,'nano_parallel':32,'nano_threads':8})
+        'render_mode':'fast','resource_profile':'maximum','voxcpm_steps':10,'nano_parallel':32,'nano_threads':8})
     assert response.status_code==202,response.text
     job=response.json()
     assert job['voice_id']==KOREAN and job['engine']=='voxcpm' and job['speaker'] is None
@@ -51,9 +56,10 @@ def test_warm_credit_requires_live_matching_worker_pid(studio,monkeypatch):
     import json
     from types import SimpleNamespace
     client,data=studio
-    monkeypatch.setattr(app,'warm_worker',SimpleNamespace(pid=12345,poll=lambda:None))
+    monkeypatch.setattr(app,'warm_worker',SimpleNamespace(pid=12345,poll=lambda:None,wait=Mock()))
+    monkeypatch.setattr(app,'stop_worker',Mock())
     calls=[]
-    def presets(engine='vieneu_nano',resident=None):
+    def presets(engine='vieneu_nano',resident=None,**kwargs):
         calls.append(resident)
         return resource_presets(56,28,128,engine)
     monkeypatch.setattr(app,'rendering_presets',presets)

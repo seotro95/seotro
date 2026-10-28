@@ -52,36 +52,77 @@ def system_info():
     return {'cpu': cpu, 'logical_cores': os.cpu_count(), 'physical_cores': physical, 'ram_gb': ram, 'nvidia_gpus': gpus, 'pytorch_cuda_available': cuda, 'int8_vnni': supports_int8(), 'note': 'Các giọng Nano/Turbo trong gói này chạy CPU; có card NVIDIA không tự làm Nano dùng GPU. Đo mẫu để biết tốc độ thực tế trên máy đang chạy tool.'}
 
 
-def rendering_presets(engine='vieneu_nano',resident=None):
-    """Conservative CPU/RAM budgets; GPU presence is not a Nano accelerator."""
+
+RESOURCE_PROFILES=('maximum','smooth','light')
+
+
+def _resource_profile(value):
+    if value not in RESOURCE_PROFILES:
+        raise ValueError('Chọn cấu hình tài nguyên maximum, smooth hoặc light.')
+    return value
+
+
+def _cpu_budget(physical,resource_profile):
+    if resource_profile=='light':return min(2,physical)
+    reserve=(2 if physical>=24 else 1 if physical>=8 else 0) if resource_profile=='smooth' else 0
+    return max(1,physical-reserve)
+
+
+def _resident_credit(engine,resident,precision,execution_model='shared'):
+    """Credit only a compatible resident allocation that the API verified alive."""
+    if not isinstance(resident,dict) or resident.get('engine')!=engine:return 0
+    workers,threads=resident.get('workers'),resident.get('threads')
+    maximum=8 if engine=='voxcpm' else 32
+    if type(workers) is not int or not 1<=workers<=maximum:return 0
+    if type(threads) is not int or not 1<=threads<=8:return 0
+    if engine=='voxcpm':
+        if resident.get('precision')!=precision:return 0
+        return workers*(8 if precision=='int8' else 16)*1024**3
+    if resident.get('model_memory','process')!=execution_model:return 0
+    if engine=='vieneu_nano' and execution_model=='shared':
+        return int((1+.25*workers)*1024**3)
+    if engine=='vieneu' and resident.get('precision')==precision:
+        if execution_model=='shared':return int((3+.5*workers)*1024**3)
+        return workers*(1 if precision=='int8' else 3)*1024**3
+    return 0
+
+
+def _machine_resources(engine,resident=None,precision='fp32',execution_model='shared'):
     import os
+    import math
     from pathlib import Path
-    cores=os.cpu_count() or 1
+    logical=os.cpu_count() or 1
+    cores=logical
     try:
         cores=min(cores,len(os.sched_getaffinity(0)))
     except (AttributeError,OSError):
         pass
+    # psutil is also available on Windows, where sched_getaffinity is absent.
+    try:
+        import psutil
+    except ImportError:
+        pass
+    else:
+        try:
+            affinity=psutil.Process().cpu_affinity()
+            if affinity:cores=min(cores,len(affinity))
+        except (AttributeError,OSError,psutil.Error):
+            pass
+    affinity_cores=cores
     quota=Path('/sys/fs/cgroup/cpu.max')
     if quota.is_file():
         try:
             maximum,period=quota.read_text().split()
             if maximum!='max':cores=min(cores,max(1,int(maximum)//int(period)))
-        except (OSError,ValueError):
+        except (OSError,ValueError,ZeroDivisionError):
             pass
     try:
         import psutil
         memory=psutil.virtual_memory()
         available=memory.available
         total=getattr(memory,'total',available)
-        # A verified resident team already owns its model allocations. Credit
-        # that reservation once so the next request can reuse the same team.
-        credit=0
-        if (engine=='voxcpm' and isinstance(resident,dict)
-                and resident.get('engine')=='voxcpm' and resident.get('precision')=='fp32'
-                and type(resident.get('workers')) is int and 1<=resident['workers']<=8
-                and type(resident.get('threads')) is int and 1<=resident['threads']<=8):
-            credit=resident['workers']*16*1024**3
-            available=min(total,available+credit)
+        credit=_resident_credit(engine,resident,precision,execution_model)
+        available=min(total,available+credit)
         cap=Path('/sys/fs/cgroup/memory.max')
         used=Path('/sys/fs/cgroup/memory.current')
         if cap.is_file() and used.is_file() and cap.read_text().strip()!='max':
@@ -92,41 +133,108 @@ def rendering_presets(engine='vieneu_nano',resident=None):
         ram_gb=0
     try:
         import psutil
-        physical=min(cores,psutil.cpu_count(logical=False) or cores)
+        total_physical=psutil.cpu_count(logical=False) or logical
+        # A restricted logical affinity must not be counted as that many
+        # physical cores on a Hyper-Threaded machine. Without a per-socket
+        # topology API, proportionally cap the affinity's physical capacity.
+        # CPU quotas are applied afterwards; four scheduled cores remain four
+        # even when the host exposes hundreds of logical CPUs.
+        physical=min(cores,total_physical,max(1,math.ceil(affinity_cores*total_physical/logical)))
     except ImportError:
         physical=cores
-    return resource_presets(cores,physical,ram_gb,engine)
+    return cores,physical,ram_gb
 
 
-def resource_presets(logical,physical,available_gb,engine='vieneu_nano'):
-    """Use physical CPU capacity; Hyper-Threading is not another model budget."""
+def rendering_presets(engine='vieneu_nano',resident=None,resource_profile='smooth',precision='fp32',execution_model='shared'):
+    """Default to a reserved CPU budget; maximum preserves the old policy."""
+    return resource_presets(*_machine_resources(engine,resident,precision,execution_model),engine,
+                            resource_profile=resource_profile,precision=precision,execution_model=execution_model)
+
+
+def rendering_limits(engine='vieneu_nano',resident=None,resource_profile='smooth',precision='fp32',execution_model='shared'):
+    limits=resource_limits(*_machine_resources(engine,resident,precision,execution_model),engine,
+                           resource_profile=resource_profile,precision=precision,execution_model=execution_model)
+    # A compatible live backend needs no cold model conversion. Its reservation
+    # may be smaller than the startup threshold (notably for compact INT8).
+    if engine=='voxcpm' and _resident_credit(engine,resident,precision,execution_model)>0:
+        limits['memory_sufficient']=True
+    return limits
+
+
+def resource_limits(logical,physical,available_gb,engine='vieneu_nano',resource_profile='maximum',precision='fp32',execution_model='process'):
+    """Hard worker/thread ceilings, separate from each quality-mode preset."""
+    _resource_profile(resource_profile)
+    if precision not in {'fp32','int8'}:raise ValueError('Định dạng model không hợp lệ.')
+    if execution_model not in {'process','shared'}:raise ValueError('Cấu hình bộ nhớ model không hợp lệ.')
     physical=max(1,min(logical,physical))
+    cpu=_cpu_budget(physical,resource_profile)
     if engine=='voxcpm':
-        # Each isolated FP32 VoxCPM2 process has its own model allocation.
-        # Leave room for Windows/the studio and for transient model loading;
-        # reusing the much smaller Nano budget can exhaust a 128 GiB machine.
-        memory_workers=max(1,int(max(0,available_gb-4)/16)) if available_gb else 1
-        cpu_workers=max(1,physical//2)
-        fast=max(1,min(8,cpu_workers,memory_workers))
+        # INT8 reduces warm RAM, but conversion temporarily holds FP32 weights.
+        # Budget cold startup, including simultaneous model conversions.
+        per_model=20 if precision=='int8' else 16
+        memory=max(1,int(max(0,available_gb-4)/per_model)) if available_gb else 1
+        workers=max(1,min(8,max(1,cpu//2),memory))
+    elif engine=='vieneu_nano' and execution_model=='shared':
+        # Shared ORT sessions/constants, independent per-sequence workspaces.
+        memory=max(1,int(max(0,available_gb-2.5)/.25)) if available_gb else 1
+        workers=max(1,min(32,cpu,memory))
+    elif engine=='vieneu' and execution_model=='shared':
+        memory=max(1,int(max(0,available_gb-4.5)/.5)) if available_gb else 1
+        workers=max(1,min(32,cpu,memory))
+    else:
+        per_model=1.25 if engine=='vieneu_nano' else 3
+        memory=max(1,int(max(0,available_gb-1.5)/per_model)) if available_gb else 1
+        workers=max(1,min(32,cpu,memory))
+    if resource_profile=='light':workers=1
+    return {'max_workers':workers,'max_threads':min(2 if resource_profile=='light' else 8,cpu),
+            'cpu_budget':cpu,
+            'memory_sufficient':available_gb>=(24 if precision=='int8' else 20) if engine=='voxcpm' else True}
+
+
+def _uniform_team(maximum,cpu):
+    # Select a team with the greatest useful uniform CPU budget. Prefer more
+    # independent sequences when two teams use the same number of CPU cores.
+    return max(range(1,maximum+1),key=lambda workers:(workers*min(8,cpu//workers),workers))
+
+
+def resource_presets(logical,physical,available_gb,engine='vieneu_nano',resource_profile='maximum',precision='fp32',execution_model='process'):
+    """Use physical CPU/RAM capacity while keeping model quality independent."""
+    limits=resource_limits(logical,physical,available_gb,engine,resource_profile,precision,execution_model)
+    cpu,maximum=limits['cpu_budget'],limits['max_workers']
+    if engine=='voxcpm':
+        fast=maximum
+        if resource_profile=='smooth' or precision=='int8':fast=_uniform_team(maximum,cpu)
         balanced=max(1,fast//2)
         quality=max(1,fast//4)
         def settings(workers,steps,backend):
             return {'voxcpm_steps':steps,'nano_parallel':workers,
-                    'nano_threads':max(1,min(8,physical//workers)),
+                    'nano_threads':min(limits['max_threads'],max(1,cpu//workers)),
                     'audio_fit_backend':backend}
         return {'fast':settings(fast,4,'wsola'),
                 'balanced':settings(balanced,8,'ffmpeg'),
                 'quality':settings(quality,10,'ffmpeg')}
-    per_worker_gb=3 if engine=='vieneu' else 1.25
-    memory_workers=max(1,int(max(0,available_gb-1.5)/per_worker_gb)) if available_gb else 1
-    fast=max(1,min(32,physical,memory_workers))
-    balanced=max(1,min(16,max(1,physical//2),memory_workers))
-    quality=max(1,min(8,max(1,physical//4),memory_workers))
-    return {
-        'fast':{'nano_steps':4,'nano_parallel':fast,'nano_threads':max(1,min(2,physical//fast)),'audio_fit_backend':'wsola'},
-        'balanced':{'nano_steps':8,'nano_parallel':balanced,'nano_threads':max(1,min(2,physical//balanced)),'audio_fit_backend':'ffmpeg'},
-        'quality':{'nano_steps':16,'nano_parallel':quality,'nano_threads':max(1,min(4,physical//quality)),'audio_fit_backend':'ffmpeg'},
-    }
+    balanced=min(maximum,16,max(1,cpu//2))
+    quality=min(maximum,8,max(1,cpu//4))
+    def settings(workers,steps,threads,backend):
+        return {'nano_steps':steps,'nano_parallel':workers,
+                'nano_threads':min(limits['max_threads'],threads,max(1,cpu//workers)),
+                'audio_fit_backend':backend}
+    return {'fast':settings(maximum,4,2,'wsola'),
+            'balanced':settings(balanced,8,2,'ffmpeg'),
+            'quality':settings(quality,16,4,'ffmpeg')}
+
+
+def bounded_settings(selected,allowed):
+    """Clamp explicit tuning to the actual RAM, physical-CPU and profile limits."""
+    def integer(value,name):
+        if type(value) is not int or value<1:raise ValueError('Cấu hình tài nguyên không hợp lệ: '+name)
+        return value
+    maximum=integer(allowed.get('max_workers',allowed.get('nano_parallel')),'workers')
+    thread_limit=integer(allowed.get('max_threads',8),'threads')
+    budget=integer(allowed.get('cpu_budget',maximum*allowed.get('nano_threads',1)),'CPU')
+    workers=min(maximum,integer(selected.get('nano_parallel',maximum),'workers'))
+    threads=min(thread_limit,max(1,budget//workers),integer(selected.get('nano_threads',thread_limit),'threads'))
+    return {**selected,'nano_parallel':workers,'nano_threads':threads}
 
 
 def calibration_candidates(preset):

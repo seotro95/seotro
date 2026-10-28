@@ -26,16 +26,24 @@ let paragraphPauseEdited = false;
 let appliedCalibrationId = '';
 let appliedRenderEngine = null;
 let speedSummary = null;
+let historyVisibleCount = 20;
+let characterCountFrame;
+let lastSavedRenderPreferences = '';
+let renderStorageAvailable = true;
 const historyNodes = new Map();
 const renderPreferenceKey = 'voice-studio.render-settings.v1';
 const renderModes = new Set(['fast', 'balanced', 'quality']);
 const renderEngines = new Set(['vieneu_nano', 'vieneu', 'voxcpm']);
+const resourceProfiles = new Set(['maximum', 'smooth', 'light']);
 let renderPreferences = readRenderPreferences();
 
 function readRenderPreferences() {
   try {
     const saved = JSON.parse(localStorage.getItem(renderPreferenceKey));
-    if (saved?.schema_version === 1 && saved.tuning && typeof saved.tuning === 'object' && !Array.isArray(saved.tuning)) return saved;
+    if (saved?.schema_version === 1 && saved.tuning && typeof saved.tuning === 'object' && !Array.isArray(saved.tuning)) {
+      lastSavedRenderPreferences = JSON.stringify(saved);
+      return saved;
+    }
   } catch { /* Restricted browser storage must not prevent local synthesis. */ }
   return {schema_version: 1, tuning: {}};
 }
@@ -45,12 +53,25 @@ function saveRenderPreferences() {
   renderPreferences.mode = $('render-mode').value;
   renderPreferences.language = $('language').value;
   renderPreferences.voice_id = $('voice').value;
-  try { localStorage.setItem(renderPreferenceKey, JSON.stringify(renderPreferences)); }
-  catch { /* The current session remains usable when storage is unavailable. */ }
+  renderPreferences.resource_profile = $('resource-profile').value;
+  renderPreferences.international_precision = $('international-precision').value;
+  const serialized = JSON.stringify(renderPreferences);
+  if (!renderStorageAvailable || serialized === lastSavedRenderPreferences) return;
+  try { localStorage.setItem(renderPreferenceKey, serialized); lastSavedRenderPreferences = serialized; }
+  catch { renderStorageAvailable = false; /* Keep using session settings when storage is unavailable. */ }
+}
+
+function renderTuningKey(engine, mode) {
+  const base = `${$('resource-profile').value}:${engine}:${mode}`;
+  return engine === 'voxcpm' ? `${base}:${$('international-precision').value}` : base;
 }
 
 function savedRenderTuning(engine, mode) {
-  const saved = renderPreferences.tuning[`${engine}:${mode}`];
+  const profile = $('resource-profile').value;
+  const legacyCompatible = engine !== 'voxcpm' || $('international-precision').value === 'fp32';
+  const saved = renderPreferences.tuning[renderTuningKey(engine, mode)]
+    || (legacyCompatible ? renderPreferences.tuning[`${profile}:${engine}:${mode}`] : null)
+    || (legacyCompatible && profile === 'smooth' ? renderPreferences.tuning[`${engine}:${mode}`] : null);
   if (!saved || typeof saved !== 'object' || Array.isArray(saved)) return {};
   const tuning = {};
   for (const [key, maximum] of [['nano_parallel', engine === 'voxcpm' ? 8 : 32], ['nano_threads', 8]]) {
@@ -70,7 +91,7 @@ function rememberRenderTuning() {
       audio_fit_backend: $('audio-fit-backend').value, quality: $('quality').value};
     if (voice.engine === 'vieneu_nano') tuning.nano_steps = Number($('nano-steps').value);
     if (voice.engine === 'voxcpm') tuning.voxcpm_steps = Number($('voxcpm-steps').value);
-    renderPreferences.tuning[`${voice.engine}:${$('render-mode').value}`] = tuning;
+    renderPreferences.tuning[renderTuningKey(voice.engine, $('render-mode').value)] = tuning;
   }
   saveRenderPreferences();
   updateRenderNote();
@@ -124,6 +145,7 @@ function showView(view) {
     if (selected) button.setAttribute('aria-current', 'page');
     else button.removeAttribute('aria-current');
   }
+  if (view === 'history') renderHistory();
 }
 
 function voiceReady(voice) {
@@ -161,8 +183,41 @@ function benchmarkSupported(voice) {
 }
 
 function renderingPresets(voice) {
+  if (voice?.engine === 'voxcpm' && $('international-precision').value === 'int8') {
+    const compact = config?.voxcpm_int8_rendering_presets_by_resource?.[$('resource-profile').value];
+    if (compact) return compact;
+  }
+  const profilePresets = config?.rendering_presets_by_resource?.[$('resource-profile').value]?.[voice?.engine];
+  if (profilePresets) return profilePresets;
   if (voice?.engine === 'voxcpm') return config?.voxcpm_rendering_presets;
   return voice?.engine === 'vieneu' ? config?.turbo_rendering_presets : config?.rendering_presets;
+}
+
+function populateResourceProfiles() {
+  const selected = $('resource-profile').value;
+  if (Array.isArray(config?.resource_profiles)) {
+    const options = config.resource_profiles.filter((profile) => resourceProfiles.has(profile.id));
+    if (options.length) {
+      $('resource-profile').replaceChildren(...options.map((profile) => {
+        const option = node('option', profile.name || profile.id);
+        option.value = profile.id;
+        return option;
+      }));
+      $('resource-profile').value = options.some((profile) => profile.id === selected) ? selected
+        : options.some((profile) => profile.id === 'smooth') ? 'smooth' : options[0].id;
+    }
+  }
+  updateResourceNote();
+}
+
+function updateResourceNote() {
+  const descriptions = {
+    maximum: 'Dùng nhiều CPU hơn để hoàn thành nhanh; máy có thể kém mượt khi làm việc khác.',
+    smooth: 'Ưu tiên máy phản hồi mượt trong khi tạo giọng. Có thể mất thêm thời gian so với dùng tối đa CPU.',
+    light: 'Ít tác vụ và luồng hơn để giảm RAM và tải CPU. Tốc độ hoàn thành có thể chậm hơn.'
+  };
+  const profile = config?.resource_profiles?.find((item) => item.id === $('resource-profile').value);
+  $('resource-profile-note').textContent = profile?.description || descriptions[$('resource-profile').value] || '';
 }
 
 function populateDeliveryProfiles() {
@@ -233,7 +288,7 @@ function updateRenderNote() {
   if (cpuVoice(current)) {
     note += ` Đang giữ giọng ${current.name} · ${engineName(current)}: ${$('nano-parallel').value} tác vụ × ${$('nano-threads').value} luồng CPU.`;
     if (current.engine === 'vieneu' && config?.int8_cpu === false) note += ' CPU này không hỗ trợ VNNI; Turbo dùng FP32. Có thể chuyển sang Nano để đo so sánh.';
-    if (current.engine === 'voxcpm') note += ` ${$('voxcpm-steps').value} bước tạo giọng. Ít bước hơn có thể giảm độ tự nhiên; đo và nghe mẫu trước khi tạo bản dài.`;
+    if (current.engine === 'voxcpm') note += ` ${$('voxcpm-steps').value} bước tạo giọng · ${$('international-precision').value.toUpperCase()}. Ít bước hơn có thể giảm độ tự nhiên; đo và nghe mẫu trước khi tạo bản dài.`;
   } else if ($('render-mode').value === 'fast' && current) {
     note += ` Đang giữ giọng ${current.name} · ${engineName(current)}. Giọng này dùng cơ chế xử lý riêng của mô hình.`;
   }
@@ -246,8 +301,14 @@ function updateRenderNote() {
 function applyRenderMode(mode, {useSaved = true, remember = true} = {}) {
   $('render-mode').value = mode;
   const voice = voices.find((item) => item.id === $('voice').value);
-  const key = `${voice?.engine}:${mode}`;
-  if (!useSaved) delete renderPreferences.tuning[key];
+  const key = renderTuningKey(voice?.engine, mode);
+  if (!useSaved) {
+    delete renderPreferences.tuning[key];
+    if (voice?.engine !== 'voxcpm' || $('international-precision').value === 'fp32') {
+      delete renderPreferences.tuning[`${$('resource-profile').value}:${voice?.engine}:${mode}`];
+      if ($('resource-profile').value === 'smooth') delete renderPreferences.tuning[`${voice?.engine}:${mode}`];
+    }
+  }
   const preset = {...(renderingPresets(voice)?.[mode] || {}), ...(useSaved ? savedRenderTuning(voice?.engine, mode) : {})};
   const changedEngine = voice?.engine !== appliedRenderEngine;
   appliedRenderEngine = voice?.engine || null;
@@ -262,6 +323,18 @@ function applyRenderMode(mode, {useSaved = true, remember = true} = {}) {
   updateRenderNote();
 }
 
+function applyResourceBudget() {
+  const voice = voices.find((item) => item.id === $('voice').value);
+  const preset = renderingPresets(voice)?.[$('render-mode').value];
+  if (preset) {
+    $('nano-parallel').value = String(Math.max(1, Math.min(voice?.engine === 'voxcpm' ? 8 : 32, Number(preset.nano_parallel) || 1)));
+    $('nano-threads').value = String(Math.max(1, Math.min(8, Number(preset.nano_threads) || 1)));
+  }
+  // A resource choice changes CPU/RAM use. Keep the selected voice, sampling
+  // steps and fitting method, which also affect pronunciation and timing.
+  rememberRenderTuning();
+}
+
 async function inspectMachine() {
   const button = $('inspect-machine');
   button.disabled = true; button.textContent = 'Đang kiểm tra máy…';
@@ -270,6 +343,8 @@ async function inspectMachine() {
     if (info.rendering_presets && config) config.rendering_presets = info.rendering_presets;
     if (info.turbo_rendering_presets && config) config.turbo_rendering_presets = info.turbo_rendering_presets;
     if (info.voxcpm_rendering_presets && config) config.voxcpm_rendering_presets = info.voxcpm_rendering_presets;
+    if (info.rendering_presets_by_resource && config) config.rendering_presets_by_resource = info.rendering_presets_by_resource;
+    if (info.voxcpm_int8_rendering_presets_by_resource && config) config.voxcpm_int8_rendering_presets_by_resource = info.voxcpm_int8_rendering_presets_by_resource;
     const gpuNames = Array.isArray(info.nvidia_gpus) ? info.nvidia_gpus : [];
     const rows = [
       ['Bộ xử lý', info.cpu || 'Chưa xác định'],
@@ -358,6 +433,7 @@ function updateVoice() {
   $('nano-threads').disabled = !cpuVoice(voice) || submitting;
   $('nano-steps').disabled = voice?.engine !== 'vieneu_nano' || submitting;
   $('voxcpm-steps').disabled = voice?.engine !== 'voxcpm' || submitting;
+  $('international-precision').disabled = voice?.engine !== 'voxcpm' || submitting;
   $('nano-step-field').hidden = voice?.engine !== 'vieneu_nano';
   $('voxcpm-step-field').hidden = voice?.engine !== 'voxcpm';
   $('resource-note').textContent = cpuVoice(voice)
@@ -374,6 +450,14 @@ function updateCharacterCount() {
   const count = $('script').value.length;
   $('char-count').textContent = `${count.toLocaleString('vi-VN')} / 1.000.000`;
   $('char-count').classList.toggle('limit', count >= 1000000);
+}
+
+function scheduleCharacterCount() {
+  if (characterCountFrame) return;
+  characterCountFrame = requestAnimationFrame(() => {
+    characterCountFrame = null;
+    updateCharacterCount();
+  });
 }
 
 function updateFormat() {
@@ -494,7 +578,11 @@ function setOutput(job) {
     $('speed-report').textContent=`Đã lưu cấu hình ${engineName({engine:job.calibration_report.engine || job.engine})} đo được: ${selected.settings.nano_parallel} tác vụ × ${selected.settings.nano_threads} luồng. Kết quả khi model đã nạp: ${formatSpeedReport(selected.warm)} Tổng thời gian thử các cấu hình: ${duration(job.calibration_report.total_calibration_seconds)}.`;
     if (appliedCalibrationId !== job.id) {
       appliedCalibrationId=job.id;
-      api('/api/config').then(fresh => { config=fresh; if ($('voice').value===job.voice_id && $('render-mode').value===job.render_mode) applyRenderMode(job.render_mode, {useSaved: false}); }).catch(error => notify(error.message,true));
+      api('/api/config').then(fresh => {
+        config=fresh;
+        const measuredProfile=job.resource_profile || job.calibration_report.resource_profile || 'maximum';
+        if ($('voice').value===job.voice_id && $('render-mode').value===job.render_mode && $('resource-profile').value===measuredProfile) applyRenderMode(job.render_mode, {useSaved: false});
+      }).catch(error => notify(error.message,true));
     }
   }
 }
@@ -552,8 +640,9 @@ async function generate() {
       paragraph_pause: paragraphPauseEdited ? Number($('paragraph-pause').value) : null, quality: $('quality').value,
       cue_fit: $('cue-fit').value, max_cue_tempo: Number($('cue-tempo').value),
       render_mode: $('render-mode').value, audio_fit_backend: $('audio-fit-backend').value,
+      resource_profile: $('resource-profile').value,
       nano_steps: Number($('nano-steps').value), nano_threads: Number($('nano-threads').value), nano_parallel: Number($('nano-parallel').value),
-      ...(voice.engine === 'voxcpm' ? {voxcpm_steps: Number($('voxcpm-steps').value)} : {})
+      ...(voice.engine === 'voxcpm' ? {voxcpm_steps: Number($('voxcpm-steps').value), international_precision: $('international-precision').value} : {})
     });
     setOutput(job); notify('Đã nhận nội dung. Bạn có thể theo dõi bản thu ở bên dưới.');
     await refreshHistory();
@@ -571,9 +660,10 @@ async function benchmark() {
     const job = await post('/api/benchmark', {
       voice_id: voice.id, language: $('language').value,
       render_mode: $('render-mode').value, delivery: $('delivery').value,
+      resource_profile: $('resource-profile').value,
       nano_steps: Number($('nano-steps').value), nano_parallel: Number($('nano-parallel').value),
       nano_threads: Number($('nano-threads').value), audio_fit_backend: $('audio-fit-backend').value, quality: $('quality').value,
-      ...(voice.engine === 'voxcpm' ? {voxcpm_steps: Number($('voxcpm-steps').value)} : {})
+      ...(voice.engine === 'voxcpm' ? {voxcpm_steps: Number($('voxcpm-steps').value), international_precision: $('international-precision').value} : {})
     });
     setOutput(job);
     notify('Đang tạo mẫu ngắn để đo tốc độ. Kết quả và ước tính tạo 1 giờ lời đọc sẽ hiện ở Bản thu.');
@@ -670,8 +760,9 @@ function historyCard(job) {
   const heading = node('div', null, 'history-heading');
   const title = node('div'); title.append(node('h2', job.voice_name || 'Bản thu'), node('p', `${languageName(job.language)} · ${new Date(job.created_at).toLocaleString('vi-VN')} · ${(job.format || 'wav').toUpperCase()}`, 'history-meta'));
   heading.append(title, node('span', statusNames[job.status] || job.status, `status-badge ${job.status}`));
-  card.append(heading, node('p', (job.text || '').length > 220 ? `${job.text.slice(0, 220)}…` : job.text, 'history-excerpt'));
-  card.append(node('p', `${Number(job.progress) || 0}% · ${duration(job.audio_seconds)}${job.completed !== undefined && job.total ? ` · ${job.completed}/${job.total} đoạn xử lý` : ''}${job.phase ? ` · ${job.phase}` : ''}`, 'field-note'));
+  const excerpt = job.text_excerpt ?? job.text ?? '';
+  card.append(heading, node('p', `${excerpt.slice(0, 220)}${(job.text_length ?? excerpt.length) > 220 ? '…' : ''}`, 'history-excerpt'));
+  card.append(node('p', historyProgressText(job), 'field-note history-progress-note'));
   if (activeStatuses.has(job.status)) {
     const progress = node('progress'); progress.max = 100; progress.value = Number(job.progress) || 0; progress.setAttribute('aria-label', 'Tiến độ bản thu'); card.append(progress);
   }
@@ -683,7 +774,7 @@ function historyCard(job) {
   }
   const controls = node('div', null, 'history-controls'); const actions = node('div', null, 'button-row');
   addJobControls(actions, job);
-  actions.append(makeButton('Mở bản thu ↗', async () => { setOutput(job); showView('create'); $('output-heading').scrollIntoView({block: 'center', behavior: 'auto'}); }));
+  actions.append(makeButton('Mở bản thu ↗', async () => { setOutput(history.find((item) => item.id === job.id) || job); showView('create'); $('output-heading').scrollIntoView({block: 'center', behavior: 'auto'}); }));
   controls.append(actions);
   if (!activeStatuses.has(job.status)) controls.append(makeButton('Xóa', async () => {
     if (!window.confirm('Xóa bản thu và những tệp âm thanh của bản thu này khỏi máy?')) return;
@@ -692,6 +783,10 @@ function historyCard(job) {
     await refreshHistory(); notify('Đã xóa bản thu.');
   }, 'text-button danger-button'));
   card.append(controls); return card;
+}
+
+function historyProgressText(job) {
+  return `${Number(job.progress) || 0}% · ${duration(job.audio_seconds)}${job.completed !== undefined && job.total ? ` · ${job.completed}/${job.total} đoạn xử lý` : ''}${job.phase ? ` · ${job.phase}` : ''}`;
 }
 
 function resetOutput() {
@@ -705,35 +800,57 @@ function resetOutput() {
 
 function renderHistory() {
   $('history-count').textContent = String(history.length);
+  // The create screen does not need a hidden collection of audio controls.
+  if (currentView !== 'history') return;
   const list = $('history-list');
+  const more = $('history-more');
+  more.hidden = history.length <= historyVisibleCount;
+  more.textContent = `Hiện thêm ${Math.min(20, Math.max(0, history.length - historyVisibleCount))} bản thu`;
   if (!history.length) {
     historyNodes.clear(); list.replaceChildren(); const empty = node('div', null, 'empty-state');
     empty.append(node('strong', 'Chưa có bản thu nào'), node('span', 'Tạo giọng từ lời đọc của bạn; âm thanh và các tác vụ sẽ được lưu tại đây.'));
     list.append(empty); return;
   }
   if (list.firstElementChild?.classList.contains('empty-state')) list.replaceChildren();
-  const ids = new Set(history.map((job) => job.id));
+  const visible = history.slice(0, historyVisibleCount);
+  // Keep a currently playing row if a new recording pushes it off this page.
+  for (const [id, entry] of historyNodes) {
+    const audio = entry.element.querySelector('audio');
+    if (audio && !audio.paused && !visible.some((job) => job.id === id)) {
+      const playing = history.find((job) => job.id === id);
+      if (playing) visible.push(playing);
+    }
+  }
+  const ids = new Set(visible.map((job) => job.id));
   for (const [id, entry] of historyNodes) if (!ids.has(id)) { entry.element.remove(); historyNodes.delete(id); }
-  history.forEach((job, index) => {
+  visible.forEach((job, index) => {
     const signature = JSON.stringify([job.status, job.progress, job.phase, job.completed, job.audio_seconds, job.error, job.duration_limited]);
     let entry = historyNodes.get(job.id);
-    if (!entry || entry.signature !== signature) {
+    if (entry && entry.signature !== signature && entry.job.status === job.status && entry.job.error === job.error && entry.job.duration_limited === job.duration_limited) {
+      // Preserve the card and media element while only progress is changing.
+      entry.element.querySelector('.history-progress-note').textContent = historyProgressText(job);
+      const progress = entry.element.querySelector('progress');
+      if (progress) progress.value = Number(job.progress) || 0;
+      entry.signature = signature;
+    } else if (!entry || entry.signature !== signature) {
       const element = historyCard(job);
       if (entry) entry.element.replaceWith(element);
-      entry = {element, signature}; historyNodes.set(job.id, entry);
+      entry = {element, signature, job}; historyNodes.set(job.id, entry);
     }
+    entry.job = job;
     if (list.children[index] !== entry.element) list.insertBefore(entry.element, list.children[index] || null);
   });
 }
 
 async function refreshHistory() {
-  const result = await api('/api/history');
+  const result = await api('/api/history?compact=true');
   history = (result.items || []).filter((job) => /^[a-f0-9]{32}$/.test(job.id));
   renderHistory();
   if (selectedJob) {
     const updated = history.find((job) => job.id === selectedJob.id);
     if (updated) setOutput(updated);
   }
+  if (!polling && history.some((job) => activeStatuses.has(job.status))) schedulePoll(3000);
 }
 
 function renderModelStatus() {
@@ -749,6 +866,12 @@ async function refreshVoices() {
   config = results[0]; voices = results[1].voices || [];
   populateDeliveryProfiles();
   const initial = !renderSettingsInitialized;
+  populateResourceProfiles();
+  if (initial) {
+    $('resource-profile').value = resourceProfiles.has(renderPreferences.resource_profile) ? renderPreferences.resource_profile : 'smooth';
+    $('international-precision').value = renderPreferences.international_precision === 'int8' ? 'int8' : 'fp32';
+    updateResourceNote();
+  }
   if (initial && renderModes.has(renderPreferences.mode)) $('render-mode').value = renderPreferences.mode;
   populateLanguages();
   if (initial && [...$('language').options].some((option) => option.value === renderPreferences.language)) $('language').value = renderPreferences.language;
@@ -794,19 +917,30 @@ async function poll() {
     connectionFailed = true;
   } finally {
     polling = false;
-    pollTimer = setTimeout(poll, document.hidden ? 12000 : 3000);
+    const active = history.some((job) => activeStatuses.has(job.status));
+    schedulePoll(document.hidden ? (active ? 15000 : 60000) : (active ? 3000 : 15000));
   }
+}
+
+function schedulePoll(delay) {
+  clearTimeout(pollTimer);
+  pollTimer = setTimeout(poll, delay);
 }
 
 for (const button of document.querySelectorAll('[data-view]')) button.addEventListener('click', () => showView(button.dataset.view));
 $('language').addEventListener('change', () => { populateVoices(); saveRenderPreferences(); });
 $('voice').addEventListener('change', () => { updateVoice(); saveRenderPreferences(); });
-$('script').addEventListener('input', updateCharacterCount);
+$('script').addEventListener('input', scheduleCharacterCount);
 $('script-format').addEventListener('change', updateFormat);
 $('speed').addEventListener('input', () => { $('speed-value').textContent = `${Number($('speed').value).toLocaleString('vi-VN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}×`; });
 $('delivery').addEventListener('change', updateDelivery);
 $('paragraph-pause').addEventListener('input', () => { paragraphPauseEdited = true; });
 $('render-mode').addEventListener('change', () => applyRenderMode($('render-mode').value));
+$('resource-profile').addEventListener('change', () => {
+  updateResourceNote();
+  applyResourceBudget();
+});
+$('international-precision').addEventListener('change', applyResourceBudget);
 $('optimize-speed').addEventListener('click', () => {
   applyRenderMode('fast', {useSaved: false});
   const voice=voices.find((item)=>item.id===$('voice').value);
@@ -850,6 +984,7 @@ $('refresh-history').addEventListener('click', async () => {
   try { if (!config) await refreshVoices(); await refreshHistory(); notify('Đã cập nhật danh sách bản thu.'); } catch (error) { notify(error.message, true); }
   finally { $('refresh-history').disabled = false; }
 });
+$('history-more').addEventListener('click', () => { historyVisibleCount += 20; renderHistory(); });
 $('clone-form').addEventListener('submit', cloneVoice);
 $('help-open').addEventListener('click', () => $('help-dialog').showModal());
 $('help-close').addEventListener('click', () => $('help-dialog').close());
@@ -864,7 +999,7 @@ async function init() {
     if (history[0]) setOutput(history[0]);
     if (!voices.some(voiceReady)) notify('Phòng thu đã mở. Chưa có giọng sẵn sàng; xem Hướng dẫn để tải mô hình trước khi tạo âm thanh.');
   } catch (error) { notify(error.message, true); setConnection(false); connectionFailed = true; }
-  pollTimer = setTimeout(poll, 3000);
+  schedulePoll(3000);
 }
 init();
 
@@ -876,7 +1011,7 @@ $('calibrate-machine').addEventListener('click', async () => {
   if (submitting || !voiceReady(voice) || !calibrationVoice(voice) || $('language').value !== 'vi')return;
   submitting=true;updateVoice();
   try {
-    const job=await post('/api/calibrate',{voice_id:voice.id,language:$('language').value,render_mode:$('render-mode').value,delivery:$('delivery').value});
+    const job=await post('/api/calibrate',{voice_id:voice.id,language:$('language').value,render_mode:$('render-mode').value,resource_profile:$('resource-profile').value,delivery:$('delivery').value});
     setOutput(job);await refreshHistory();
     notify('Đang thử nhiều cấu hình CPU bằng lời đọc thật. Có thể mất vài phút và dùng nhiều CPU/RAM; cấu hình tốt nhất sẽ được lưu. Có thể bấm Dừng tạo.');
     $('output-heading').scrollIntoView({block:'center',behavior:'auto'});
