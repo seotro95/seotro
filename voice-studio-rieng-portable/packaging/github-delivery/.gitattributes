@@ -1,1 +1,2 @@
 *.vspack binary
+test-fixture/expected.txt -text
