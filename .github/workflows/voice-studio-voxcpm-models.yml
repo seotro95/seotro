@@ -1,0 +1,88 @@
+name: Public VoxCPM2 Original Model Pack
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [voice-studio-private-voices-v1.7.0]
+    paths:
+      - '.github/workflows/voice-studio-voxcpm-models.yml'
+      - 'voice-studio-rieng-portable/packaging/build_voxcpm_modelpack.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-studio-voxcpm-public-modelpack
+  cancel-in-progress: true
+
+env:
+  PYTHONUTF8: '1'
+  HF_HUB_DISABLE_XET: '1'
+  HF_HUB_DISABLE_TELEMETRY: '1'
+  PIP_DISABLE_PIP_VERSION_CHECK: '1'
+
+jobs:
+  package-public-model:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Install download client only
+        run: python -m pip install 'huggingface-hub==0.36.2'
+      - name: Test chunk transport without downloading or loading a model
+        run: python voice-studio-rieng-portable/packaging/build_voxcpm_modelpack.py --self-test
+      - name: Download frozen public upstream weights and build verified model assets
+        run: >-
+          python voice-studio-rieng-portable/packaging/build_voxcpm_modelpack.py
+          --output '${{ runner.temp }}/voxcpm2-modelpack'
+      - name: Retain public manifest and reassembly instructions
+        uses: actions/upload-artifact@v4
+        with:
+          name: VoxCPM2-public-modelpack-manifest
+          path: |
+            ${{ runner.temp }}/voxcpm2-modelpack/release-assets/MODELPACK_MANIFEST.json
+            ${{ runner.temp }}/voxcpm2-modelpack/release-assets/README_MODELPACK.txt
+            ${{ runner.temp }}/voxcpm2-modelpack/voxcpm2-original/MODEL_PROVENANCE.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: Publish only official public model files and provenance
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          BUILD_REVISION: ${{ github.sha }}
+          BUILD_RUN_ID: ${{ github.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          asset_dir='${{ runner.temp }}/voxcpm2-modelpack/release-assets'
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          assets = Path(os.environ['RUNNER_TEMP'])/'voxcpm2-modelpack/release-assets'
+          manifest = json.loads((assets/'MODELPACK_MANIFEST.json').read_text())
+          text = (
+              'Official public openbmb/VoxCPM2 model pack under Apache-2.0.\n\n'
+              'Download every numbered chunk, MODELPACK_MANIFEST.json and REASSEMBLE_MODELPACK.py into one folder. '
+              'The helper reassembles the ZIP and verifies every part and full archive SHA256 before extraction. '
+              'Extract all files to obtain voxcpm2-original, containing unchanged upstream weights/config and MODEL_PROVENANCE.json.\n\n'
+              'Only official public model files, licenses and generic reassembly instructions are redistributed. '
+              'No private voice samples, scripts, application data or credentials are included. '
+              'No Torch/model loading or speech inference is performed in this packaging job.\n\n'
+              'Upstream: https://huggingface.co/openbmb/VoxCPM2/tree/'+manifest['revision']+'\n'
+              'Complete ZIP SHA256: '+manifest['archive']['sha256']+'\n'
+              'Packaging source commit: '+os.environ['BUILD_REVISION']+'\n'
+          )
+          (Path(os.environ['RUNNER_TEMP'])/'voxcpm2-modelpack-release-notes.txt').write_text(text)
+          PY
+          gh release create "voxcpm2-modelpack-${BUILD_RUN_ID}" \
+            "$asset_dir"/*.part* \
+            "$asset_dir/MODELPACK_MANIFEST.json" \
+            "$asset_dir/REASSEMBLE_MODELPACK.py" \
+            "$asset_dir/README_MODELPACK.txt" \
+            --repo "$GH_REPO" --target "$BUILD_REVISION" \
+            --title 'VoxCPM2 official public original model pack' \
+            --notes-file "$RUNNER_TEMP/voxcpm2-modelpack-release-notes.txt" --latest=false
