@@ -4,10 +4,144 @@ param(
     [string]$Password = '',
     [string]$Target = '',
     [switch]$DecryptOnly,
-    [string]$OutputPath = ''
+    [string]$OutputPath = '',
+    [switch]$InputSelfTest
 )
 
 $ErrorActionPreference = 'Stop'
+
+function ConvertTo-InteractiveVoicePassword([string]$Value) {
+    $normalized = $Value.Trim()
+    if ($normalized -cnotmatch '^[0-9a-fA-F]{32}$') {
+        throw 'Mat khau can du 32 ky tu. Hay sao chep mat khau trong chat va bam Dan mat khau.'
+    }
+    return $normalized.ToLowerInvariant()
+}
+
+function Set-VoicePasswordFieldFromClipboard([object]$Dialog, [scriptblock]$ClipboardReader) {
+    # This is called only by the explicit Paste button, never on dialog creation.
+    $copied = [string](& $ClipboardReader)
+    $Dialog.TextBox.Text = $copied.Trim()
+    $Dialog.TextBox.SelectionStart = $Dialog.TextBox.TextLength
+    $Dialog.TextBox.Focus() | Out-Null
+}
+
+function New-VoicePasswordDialog {
+    Add-Type -AssemblyName System.Windows.Forms
+    Add-Type -AssemblyName System.Drawing
+    [Windows.Forms.Application]::EnableVisualStyles()
+    $form = [Windows.Forms.Form]::new()
+    $form.Text = 'Voice Studio - Cai 19 giong'
+    $form.ClientSize = [Drawing.Size]::new(590, 270)
+    $form.StartPosition = [Windows.Forms.FormStartPosition]::CenterScreen
+    $form.FormBorderStyle = [Windows.Forms.FormBorderStyle]::FixedDialog
+    $form.MaximizeBox = $false
+    $form.MinimizeBox = $false
+    $form.Font = [Drawing.Font]::new('Segoe UI', 10)
+
+    $instructions = [Windows.Forms.Label]::new()
+    $instructions.Location = [Drawing.Point]::new(20, 16)
+    $instructions.Size = [Drawing.Size]::new(550, 48)
+    $instructions.Text = "Sao chep mat khau trong cuoc tro chuyen, roi bam Dan mat khau.`r`nKiem tra du 32 ky tu va bam Cai 19 giong."
+    $box = [Windows.Forms.TextBox]::new()
+    $box.Location = [Drawing.Point]::new(20, 76)
+    $box.Size = [Drawing.Size]::new(550, 30)
+    $box.MaxLength = 256
+    $box.UseSystemPasswordChar = $true
+    $box.ShortcutsEnabled = $true
+    $paste = [Windows.Forms.Button]::new()
+    $paste.Text = 'Dan mat khau'
+    $paste.Location = [Drawing.Point]::new(20, 118)
+    $paste.Size = [Drawing.Size]::new(140, 34)
+    $show = [Windows.Forms.CheckBox]::new()
+    $show.Text = 'Hien mat khau'
+    $show.Location = [Drawing.Point]::new(180, 123)
+    $show.Size = [Drawing.Size]::new(160, 26)
+    $count = [Windows.Forms.Label]::new()
+    $count.Location = [Drawing.Point]::new(20, 166)
+    $count.Size = [Drawing.Size]::new(550, 28)
+    $count.Text = 'Da nhap: 0/32 ky tu'
+    $install = [Windows.Forms.Button]::new()
+    $install.Text = 'Cai 19 giong'
+    $install.Location = [Drawing.Point]::new(276, 214)
+    $install.Size = [Drawing.Size]::new(140, 36)
+    $install.Enabled = $false
+    $cancel = [Windows.Forms.Button]::new()
+    $cancel.Text = 'Huy'
+    $cancel.Location = [Drawing.Point]::new(430, 214)
+    $cancel.Size = [Drawing.Size]::new(140, 36)
+    $cancel.DialogResult = [Windows.Forms.DialogResult]::Cancel
+    $form.Controls.AddRange([Windows.Forms.Control[]]@($instructions, $box, $paste, $show, $count, $install, $cancel))
+    $form.AcceptButton = $install
+    $form.CancelButton = $cancel
+    $state = [PSCustomObject]@{
+        Form = $form; TextBox = $box; PasteButton = $paste; ShowCheckBox = $show
+        CountLabel = $count; InstallButton = $install; CancelButton = $cancel
+        AcceptedPassword = $null; ClipboardReader = { [Windows.Forms.Clipboard]::GetText() }
+        PasteAction = $null; SuppressMessageBoxes = $false
+    }
+    $normalizePassword = ${function:ConvertTo-InteractiveVoicePassword}
+    $pasteToField = ${function:Set-VoicePasswordFieldFromClipboard}
+    $box.Add_TextChanged({
+        $value = $state.TextBox.Text.Trim()
+        $valid = $value -cmatch '^[0-9a-fA-F]{32}$'
+        $state.CountLabel.Text = ('Da nhap: {0}/32 ky tu' -f $value.Length)
+        $state.CountLabel.ForeColor = if ($valid) { [Drawing.Color]::DarkGreen } else { [Drawing.Color]::DarkRed }
+        $state.InstallButton.Enabled = $valid
+    }.GetNewClosure())
+    $show.Add_CheckedChanged({ $state.TextBox.UseSystemPasswordChar = -not $state.ShowCheckBox.Checked }.GetNewClosure())
+    $state.PasteAction = {
+        try { & $pasteToField $state $state.ClipboardReader }
+        catch {
+            if ($state.SuppressMessageBoxes) { throw }
+            [Windows.Forms.MessageBox]::Show('Chua doc duoc noi dung da sao chep. Hay sao chep mat khau va bam Dan mat khau lai.', 'Voice Studio') | Out-Null
+        }
+    }.GetNewClosure()
+    $paste.Add_Click($state.PasteAction)
+    $install.Add_Click({
+        try {
+            $state.AcceptedPassword = & $normalizePassword $state.TextBox.Text
+            $state.Form.DialogResult = [Windows.Forms.DialogResult]::OK
+            $state.Form.Close()
+        } catch { [Windows.Forms.MessageBox]::Show($_.Exception.Message, 'Voice Studio') | Out-Null }
+    }.GetNewClosure())
+    return $state
+}
+
+function Read-InteractiveVoicePassword {
+    $state = New-VoicePasswordDialog
+    try {
+        if ($state.Form.ShowDialog() -ne [Windows.Forms.DialogResult]::OK) { return $null }
+        return $state.AcceptedPassword
+    } finally {
+        $state.AcceptedPassword = $null
+        $state.TextBox.Clear()
+        $state.Form.Dispose()
+    }
+}
+
+function Test-VoicePasswordInput {
+    $state = New-VoicePasswordDialog
+    try {
+        $state.SuppressMessageBoxes = $true
+        if ($state.InstallButton.Enabled -or $state.TextBox.TextLength -ne 0) { throw 'Empty input must not enable installation.' }
+        $state.ClipboardReader = { '  ABCDEF0123456789ABCDEF0123456789  ' }
+        & $state.PasteAction
+        if ($state.TextBox.Text -cne 'ABCDEF0123456789ABCDEF0123456789' -or -not $state.InstallButton.Enabled -or
+            $state.CountLabel.Text -ne 'Da nhap: 32/32 ky tu') { throw 'Paste action or length validation failed.' }
+        if ((ConvertTo-InteractiveVoicePassword $state.TextBox.Text) -cne 'abcdef0123456789abcdef0123456789') { throw 'Interactive normalization failed.' }
+        $state.ShowCheckBox.Checked = $true
+        if ($state.TextBox.UseSystemPasswordChar) { throw 'Show-password control failed.' }
+        $state.ShowCheckBox.Checked = $false
+        if (-not $state.TextBox.UseSystemPasswordChar) { throw 'Password masking control failed.' }
+        $state.TextBox.Text = 'x'
+        if ($state.InstallButton.Enabled -or $state.CountLabel.Text -ne 'Da nhap: 1/32 ky tu') { throw 'Short input must be refused.' }
+        $state.TextBox.Text = 'z' * 32
+        if ($state.InstallButton.Enabled) { throw 'Non-hex input must be refused.' }
+        if ($null -ne $state.AcceptedPassword -or $state.CancelButton.DialogResult -ne [Windows.Forms.DialogResult]::Cancel) { throw 'Cancellation state is invalid.' }
+        Write-Host 'Windows password input controls and paste validation passed. No private password or clipboard was used.'
+    } finally { $state.TextBox.Clear(); $state.Form.Dispose() }
+}
 
 function Read-ExactBytes([IO.Stream]$Stream, [int]$Count) {
     [byte[]]$buffer = New-Object byte[] $Count
@@ -111,7 +245,7 @@ function Unprotect-VoicePackage([string]$Root, [string]$PlainPassword, [string]$
             $difference = $difference -bor ($storedTag[$index] -bxor $calculatedTag[$index])
         }
         if ($difference -ne 0) {
-            throw 'Mat khau chua dung hoac goi giong bi thay doi. Khong cai dat tep nao.'
+            throw 'Mat khau chua khop. Hay sao chep mat khau trong chat, mo lai cua so cai va bam Dan mat khau. Khong cai dat tep nao.'
         }
 
         # No plaintext file is created until the complete MAC has passed.
@@ -162,11 +296,30 @@ function Unprotect-VoicePackage([string]$Root, [string]$PlainPassword, [string]$
 $privateTemporary = $null
 try {
     [Console]::OutputEncoding = [Text.UTF8Encoding]::new($false)
+    if ($InputSelfTest) { Test-VoicePasswordInput; exit 0 }
     $root = [IO.Path]::GetFullPath($PackageRoot)
     if ($DecryptOnly -and [string]::IsNullOrWhiteSpace($OutputPath)) {
         throw 'Can chi dinh OutputPath khi kiem tra giai ma.'
     }
     if (-not $DecryptOnly) {
+        if (-not [IO.File]::Exists((Join-Path $root 'delivery\manifest.json')) -or
+            -not [IO.File]::Exists((Join-Path $root 'delivery\voices.vspack'))) {
+            Add-Type -AssemblyName System.Windows.Forms
+            $sourceDialog = [Windows.Forms.FolderBrowserDialog]::new()
+            try {
+                $sourceDialog.Description = 'Chon thu muc ban day du da giai nen, co app, runtime va delivery.'
+                $sourceDialog.ShowNewFolderButton = $false
+                if ($sourceDialog.ShowDialog() -ne [Windows.Forms.DialogResult]::OK) {
+                    Write-Host 'Da huy cai dat; khong thay doi tep nao.'
+                    exit 0
+                }
+                $root = [IO.Path]::GetFullPath($sourceDialog.SelectedPath)
+            } finally { $sourceDialog.Dispose() }
+            if (-not [IO.File]::Exists((Join-Path $root 'delivery\manifest.json')) -or
+                -not [IO.File]::Exists((Join-Path $root 'delivery\voices.vspack'))) {
+                throw 'Hay chon dung thu muc ban day du co thu muc delivery. Khong can tai lai file ZIP lon.'
+            }
+        }
         $targetRoot = $root
         if (-not [string]::IsNullOrWhiteSpace($Target)) { $targetRoot = [IO.Path]::GetFullPath($Target) }
         if (-not [IO.File]::Exists((Join-Path $targetRoot 'runtime\python.exe')) -or
@@ -197,10 +350,17 @@ try {
         throw 'Chi su dung mot cach nhap mat khau.'
     }
     if ([string]::IsNullOrEmpty($Password)) {
-        if (-not $SecurePassword) { $SecurePassword = Read-Host 'Dan mat khau goi 19 giong duoc gui rieng trong chat' -AsSecureString }
-        $address = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($SecurePassword)
-        try { $Password = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($address) }
-        finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($address) }
+        if ($SecurePassword) {
+            $address = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($SecurePassword)
+            try { $Password = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($address) }
+            finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($address) }
+        } else {
+            $Password = Read-InteractiveVoicePassword
+            if ([string]::IsNullOrEmpty($Password)) {
+                Write-Host 'Da huy cai dat; khong thay doi tep nao.'
+                exit 0
+            }
+        }
     }
     if ([string]::IsNullOrEmpty($Password)) { throw 'Chua nhap mat khau.' }
     if ($DecryptOnly) {

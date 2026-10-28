@@ -28,6 +28,9 @@ ROOT = 'Voice-Studio-Rieng-1.7.0-19-Giong-GitHub'
 FILENAME = ROOT+'-Windows-x64.zip'
 UPDATE_ROOT = 'Voice-Studio-Rieng-1.7.0-Cap-Nhat-19-Giong-GitHub'
 UPDATE_FILENAME = UPDATE_ROOT+'.zip'
+REPAIR_ROOT = 'Voice-Studio-Sua-Loi-Nhap-Mat-Khau'
+REPAIR_FILENAME = REPAIR_ROOT+'.zip'
+REPAIR_FILES = ('SUA_LOI_CAI_19_GIONG.bat', 'install_secure_voices.ps1')
 BLOCK = 1024*1024
 DELIVERY_FILES = ('CAI_19_GIONG.bat', 'install_secure_voices.ps1',
                   'delivery/manifest.json', 'delivery/voices.vspack')
@@ -35,7 +38,8 @@ README = '''VOICE STUDIO RIÊNG 1.7.0 - 19 GIỌNG - TẢI TỪ GITHUB
 
 1. Tải ZIP đầy đủ này từ GitHub, rồi giải nén TOÀN BỘ vào thư mục mới.
    Không chạy trực tiếp trong cửa sổ xem nội dung ZIP.
-2. Mở CAI_19_GIONG.bat. Dán mật khẩu được gửi riêng trong cuộc trò chuyện.
+2. Mở CAI_19_GIONG.bat. Trong cửa sổ nhập mật khẩu, bấm nút Dán để dán
+   mật khẩu đã sao chép từ cuộc trò chuyện, rồi bấm Cài đặt.
    Gói giọng được mã hóa để bản thu riêng không xuất hiện công khai trên GitHub.
 3. Khi báo cài xong 19 giọng, mở MO_TOOL.bat. Có thể nghe thử từng mẫu.
 
@@ -56,7 +60,7 @@ Không nhập nội dung bí mật hoặc mật khẩu vào trang GitHub.
 UPDATE_README = '''VOICE STUDIO RIÊNG - CẬP NHẬT 19 GIỌNG TỪ GITHUB
 
 1. Giải nén TOÀN BỘ ZIP này ra thư mục mới. Đóng Voice Studio đang chạy.
-2. Mở CAI_19_GIONG.bat, dán mật khẩu được gửi riêng trong cuộc trò chuyện.
+2. Mở CAI_19_GIONG.bat, dùng nút Dán trong cửa sổ nhập mật khẩu rồi bấm Cài đặt.
 3. Chọn thư mục Voice Studio Portable cũ có thư mục runtime và app.
 4. Khi báo cài xong, mở MO_TOOL.bat trong thư mục tool vừa chọn.
 
@@ -69,6 +73,25 @@ Nhật, Pháp, Tây Ban Nha và Thái cần chạy TAI_GIONG_DA_NGON_NGU.bat m�
 trong thư mục tool khi có Internet để tải khoảng 5 GB model cùng thư viện CPU.
 Nên để trống ít nhất 15 GB cho lần tải/cài đầu. Sau đó mở lại MO_TOOL.bat.
 Tốc độ 2 phút tạo 1 giờ voice chưa được bảo đảm; cần nghe kiểm tra giọng tạo.
+'''
+REPAIR_README = '''VOICE STUDIO - SỬA BƯỚC DÁN MẬT KHẨU CÀI 19 GIỌNG
+
+Dùng gói nhỏ này nếu đã tải và giải nén bản đầy đủ nhưng cửa sổ dòng lệnh
+báo mật khẩu chưa đúng. Không cần tải lại bản đầy đủ hoặc các model.
+
+1. Giải nén TOÀN BỘ ZIP sửa lỗi này vào một thư mục mới.
+2. Đóng Voice Studio, mở SUA_LOI_CAI_19_GIONG.bat.
+3. Chọn thư mục bản đầy đủ đã giải nén, có runtime, app và delivery.
+4. Sao chép mật khẩu được gửi trong chat. Trong cửa sổ nhập mật khẩu,
+   bấm nút Dán; có thể bật Hiện mật khẩu để kiểm tra, rồi bấm Cài đặt.
+5. Khi cài xong, mở MO_TOOL.bat trong thư mục tool đã chọn.
+
+Mật khẩu vẫn là mật khẩu đã gửi riêng trong cuộc trò chuyện. Gói sửa lỗi
+không chứa mật khẩu hoặc bản thu; nó mở gói giọng sẵn có trên máy bạn.
+Lịch sử, model và các giọng cá nhân đang có được giữ lại.
+
+Các giọng quốc tế cần bộ đọc đã chuẩn bị bằng TAI_GIONG_DA_NGON_NGU.bat.
+Nếu chưa chuẩn bị, chạy tệp đó một lần có Internet để tải model cùng thư viện.
 '''
 
 
@@ -278,6 +301,46 @@ def build_update(delivery, output):
     return destination
 
 
+def build_repair(delivery, output):
+    """Ship only the paste-friendly installer; reuse the user's downloaded pack."""
+    delivery, output = Path(delivery), Path(output)
+    files = {}
+    for name in REPAIR_FILES:
+        path = delivery/name
+        if path.is_symlink() or not path.is_file() or path.stat().st_size > BLOCK:
+            raise ValueError('Missing or invalid password input repair file: '+name)
+        files[name] = path.read_bytes()
+    files['DOC_TRUOC_SUA_LOI.txt'] = REPAIR_README.encode('utf-8')
+    checksums = ''.join(hashlib.sha256(content).hexdigest()+'  '+name+'\n'
+                        for name, content in sorted(files.items())).encode()
+    files['MANIFEST.sha256'] = checksums
+    output.mkdir(parents=True, exist_ok=True)
+    destination = output/REPAIR_FILENAME
+    if destination.exists():
+        raise ValueError('Refusing to overwrite an existing password input repair')
+    pending = destination.with_name(destination.name+'.partial')
+    try:
+        with zipfile.ZipFile(pending, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
+            for name, content in files.items():
+                archive.writestr(_new_entry(name, len(content), REPAIR_ROOT), content)
+        with zipfile.ZipFile(pending) as checked:
+            expected = {REPAIR_ROOT+'/'+name for name in files}
+            if checked.testzip() is not None or set(checked.namelist()) != expected:
+                raise ValueError('Password input repair ZIP check failed')
+        pending.replace(destination)
+    finally:
+        pending.unlink(missing_ok=True)
+    digest = sha256(destination)
+    Path(str(destination)+'.sha256').write_text(digest+'  '+destination.name+'\n', encoding='ascii')
+    report = {'format': 'voice-studio-github-input-repair-v1', 'file': destination.name,
+              'bytes': destination.stat().st_size, 'sha256': digest, 'zip_crc': 'passed',
+              'existing_full_download_required': True, 'includes_private_voice_packet': False,
+              'password_included': False, 'fix': 'paste-friendly Windows password input'}
+    destination.with_suffix('.qa.json').write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8')
+    print(json.dumps(report), flush=True)
+    return destination
+
+
 class BuilderTests(unittest.TestCase):
     def test_preserves_base_and_adds_only_encrypted_update(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -314,6 +377,15 @@ class BuilderTests(unittest.TestCase):
             with zipfile.ZipFile(update) as archive:
                 self.assertEqual(archive.read(UPDATE_ROOT+'/delivery/voices.vspack'), encrypted)
                 self.assertFalse(any('/runtime/' in name for name in archive.namelist()))
+            (delivery/REPAIR_FILES[0]).write_bytes(b'generic paste repair launcher')
+            repair = build_repair(delivery, directory/'output')
+            with zipfile.ZipFile(repair) as archive:
+                self.assertEqual(archive.read(REPAIR_ROOT+'/'+REPAIR_FILES[0]), b'generic paste repair launcher')
+                self.assertFalse(any(name.endswith('.vspack') or '/delivery/' in name or '/runtime/' in name
+                                     for name in archive.namelist()))
+                for line in archive.read(REPAIR_ROOT+'/MANIFEST.sha256').decode().splitlines():
+                    expected, name = line.split('  ', 1)
+                    self.assertEqual(hashlib.sha256(archive.read(REPAIR_ROOT+'/'+name)).hexdigest(), expected)
             (delivery/'delivery/voices.vspack').write_bytes(encrypted+b'bad')
             with self.assertRaisesRegex(ValueError, 'SHA256'):
                 verify_delivery(delivery)
@@ -338,6 +410,7 @@ def main():
     if not args.output:
         parser.error('--output is required')
     base = args.base_archive or args.output.parent/'verified-public-base.zip'
+    build_repair(args.delivery_dir, args.output)
     if not args.base_archive:
         download_base(base)
     build_bundle(base, args.delivery_dir, args.output)

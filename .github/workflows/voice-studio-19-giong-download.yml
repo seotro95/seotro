@@ -34,6 +34,26 @@ jobs:
         run: |
           python voice-studio-rieng-portable/packaging/build_github_voice_download.py --self-test
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Verify Windows password paste controls with synthetic input
+        shell: pwsh
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $false
+          $script = Join-Path $env:GITHUB_WORKSPACE 'voice-studio-rieng-portable/packaging/github-delivery/install_secure_voices.ps1'
+          $diagnostic = & powershell.exe -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File $script -InputSelfTest 2>&1 | Out-String
+          $inputExit = $LASTEXITCODE
+          Write-Output $diagnostic
+          if ($inputExit -ne 0) {
+            $escaped = $diagnostic.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+            Write-Output ("::error::Windows password paste control test failed: " + $escaped)
+            throw 'Windows password paste controls did not pass their synthetic test'
+          }
+          @{
+            platform = 'Windows PowerShell 5.1'
+            password_paste_controls = 'passed'
+            synthetic_input_only = $true
+            actual_private_password_used = $false
+          } | ConvertTo-Json | Set-Content -Encoding utf8 (Join-Path $env:RUNNER_TEMP 'password-paste-windows-qa.json')
+          exit 0
       - name: Verify decryption on Windows PowerShell 5.1 with synthetic data only
         shell: pwsh
         run: |
@@ -126,6 +146,7 @@ jobs:
           python voice-studio-rieng-portable/packaging/build_github_voice_download.py --output "${{ runner.temp }}/github-download"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           Copy-Item -LiteralPath "${{ runner.temp }}/crypto-windows-qa.json" -Destination "${{ runner.temp }}/github-download/Windows-PowerShell-Crypto.qa.json"
+          Copy-Item -LiteralPath "${{ runner.temp }}/password-paste-windows-qa.json" -Destination "${{ runner.temp }}/github-download/Windows-Password-Paste.qa.json"
       - name: Upload checked GitHub downloads
         uses: actions/upload-artifact@v4
         with:
@@ -137,7 +158,7 @@ jobs:
           if-no-files-found: error
           compression-level: 0
           retention-days: 14
-      - name: Publish full Windows package and small encrypted update
+      - name: Publish password repair and full Windows downloads
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
@@ -146,7 +167,8 @@ jobs:
           @"
           Voice Studio Riêng 1.7.0 - tải trên GitHub, có gói 19 giọng được mã hóa.
 
-          Tải bản Windows đầy đủ nếu chưa có tool, hoặc gói Cap-Nhat nhỏ nếu đã có bản Portable. Giải nén TOÀN BỘ ZIP, chạy CAI_19_GIONG.bat và dán mật khẩu được gửi riêng trong cuộc trò chuyện. Sau khi cài 19 giọng, mở MO_TOOL.bat.
+          Nếu đã tải bản đầy đủ và gặp lỗi khi dán mật khẩu trong cửa sổ dòng lệnh, chỉ cần tải Voice-Studio-Sua-Loi-Nhap-Mat-Khau.zip. Giải nén gói sửa lỗi, mở SUA_LOI_CAI_19_GIONG.bat, chọn thư mục bản đầy đủ đã tải, rồi dùng nút Dán trong cửa sổ nhập mật khẩu. Không cần tải lại tool hoặc model.
+          Tải bản Windows đầy đủ nếu chưa có tool, hoặc gói Cap-Nhat nhỏ nếu đã có bản Portable. Giải nén TOÀN BỘ ZIP, chạy CAI_19_GIONG.bat, dùng nút Dán để nhập mật khẩu được gửi riêng trong cuộc trò chuyện rồi bấm Cài đặt. Sau khi cài 19 giọng, mở MO_TOOL.bat.
           Mật khẩu không nằm trên GitHub hoặc trong ZIP. Các bản thu, tên mẫu và nội dung riêng chỉ có bên trong gói đã mã hóa; không giải mã chúng trên GitHub Actions.
           Ba giọng tiếng Anh dùng Turbo đi kèm. Các giọng Hàn, Nga, Nhật, Pháp, Tây Ban Nha và Thái cần chạy TAI_GIONG_DA_NGON_NGU.bat một lần có Internet để tải khoảng 5 GB model và thư viện CPU. Tốc độ 2 phút/1 giờ chưa được bảo đảm.
           Runtime, model Việt/Anh, mã ứng dụng và giấy phép được giữ từ bản Windows 1.7 đã kiểm tra, SHA256 b8a089d2431a743c5b3f3c68692c2075bae59bf2715c15d4531ec46b1c6900a4. Quy trình này kiểm tra giải mã bằng dữ liệu giả trên Windows PowerShell 5.1, từ chối mật khẩu sai và dữ liệu bị sửa trước khi xuất file. Nó không dùng mật khẩu riêng hoặc giải mã bản thu riêng trên GitHub.
