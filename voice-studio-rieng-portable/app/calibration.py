@@ -232,7 +232,7 @@ def calibrate(job,render,close_pool,data=None):
     for memory in executions:
         presets=rendering_presets(engine,resource_profile=resource_profile,precision=precision,
                                   execution_model=memory)
-        candidates.extend((memory,settings) for settings in calibration_candidates(presets[mode]))
+        candidates.extend((memory,settings) for settings in calibration_candidates(presets[mode],engine))
     trial_text=job.get('text','')
     if compare:
         language=job.get('language','vi')

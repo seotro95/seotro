@@ -292,13 +292,19 @@ def bounded_settings(selected,allowed):
     return {**selected,'nano_parallel':workers,'nano_threads':threads}
 
 
-def calibration_candidates(preset):
+def calibration_candidates(preset,engine='vieneu_nano'):
     """Compare fewer/larger ORT teams with more single-thread model workers."""
     maximum=preset['nano_parallel']
     cores=max(1,maximum*preset['nano_threads'])
     candidates=[{'nano_parallel':max(1,maximum//2),'nano_threads':min(2,max(1,cores//max(1,maximum//2)))},
                 {'nano_parallel':max(1,maximum*3//4),'nano_threads':1},
                 {'nano_parallel':maximum,'nano_threads':preset['nano_threads']}]
+    if engine=='vieneu' and maximum>=12:
+        # A large shared decoder team can compete for memory bandwidth or
+        # Python scheduling. Measure smaller Turbo teams rather than assuming
+        # that every available model worker improves actual throughput.
+        candidates=[{'nano_parallel':workers,'nano_threads':min(threads,max(1,cores//workers))}
+                    for workers,threads in ((4,4),(8,2))]+candidates
     result=[]
     for candidate in candidates:
         if candidate not in result:result.append(candidate)
