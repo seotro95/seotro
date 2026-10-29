@@ -101,7 +101,7 @@ def load_synthesizer(job):
                                       steps=job.get('omnivoice_steps',16),
                                       device=job.get('international_device','cpu'),
                                       language=job.get('language'),
-                                      reference_text=voice.get('transcript',''),
+                                      reference_text=voice.get('transcript') or '',
                                       reference_language=voice.get('native_language') or voice.get('language') or job.get('language'))
         from voxcpm_backend import create_synthesizer
         return create_synthesizer(reference,DATA,

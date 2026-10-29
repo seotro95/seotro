@@ -169,7 +169,7 @@ def reference_transcript(reference, data, language, existing=''):
                     input=json.dumps(request, ensure_ascii=False), stdout=subprocess.PIPE, stderr=errors,
                     text=True, encoding='utf-8', env=_child_environment(), timeout=300, check=False)
         except subprocess.TimeoutExpired:
-            raise ValueError('Nhận dạng lời mẫu quá 5 phút. Nhập lời mẫu chính xác rồi thử lại.') from None
+            raise ValueError('Nhận dạng lời mẫu quá 5 phút. Chọn VoxCPM, hoặc nhập lại mẫu trong Nhân bản giọng kèm lời mẫu chính xác.') from None
         try:
             result = json.loads(response.stdout)
         except (ValueError, TypeError):
@@ -178,7 +178,7 @@ def reference_transcript(reference, data, language, existing=''):
                 or result.get('reference_sha256') != reference_sha
                 or result.get('asr_manifest_sha256') != manifest_sha
                 or result.get('language') != language or not _valid_text(result.get('text'))):
-            raise ValueError('Không nhận dạng được lời mẫu chắc chắn. Kiểm tra native-transcript.log hoặc nhập lời mẫu chính xác.')
+            raise ValueError('Không nhận dạng được lời mẫu chắc chắn. Kiểm tra native-transcript.log; chọn VoxCPM hoặc nhập lại mẫu trong Nhân bản giọng kèm lời mẫu chính xác.')
         if _reference_metadata(reference)[1] != reference_sha:
             raise ValueError('Mẫu giọng đã thay đổi trong lúc nhận dạng; hãy thử lại.')
         text = result['text'].strip()

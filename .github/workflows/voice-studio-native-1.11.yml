@@ -12,8 +12,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: voice-studio-native-1.11-windows
-  cancel-in-progress: true
+  group: voice-studio-native-1.11-windows-${{ github.sha }}
+  cancel-in-progress: false
 
 env:
   PYTHONUTF8: '1'
@@ -41,12 +41,14 @@ jobs:
           arch: x64
       - name: Install Pascal-compatible CUDA 12.6 toolkit
         if: matrix.device == 'cuda'
-        uses: Jimver/cuda-toolkit@v0.2.24
-        with:
-          cuda: '12.6.3'
-          method: network
-          sub-packages: '["nvcc", "cudart", "cudart_dev", "cublas", "cublas_dev", "thrust", "visual_studio_integration"]'
-          use-github-cache: true
+        shell: pwsh
+        run: |
+          $cuda = "${{ runner.temp }}/cuda-12.6.3"
+          python voice-studio-rieng-portable/packaging/prepare_cuda.py --output $cuda --downloads "${{ runner.temp }}/cuda-downloads"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          "CUDA_PATH=$cuda" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "CUDAToolkit_ROOT=$cuda" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "$cuda/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
       - name: Fetch the pinned native source
         shell: pwsh
         run: |

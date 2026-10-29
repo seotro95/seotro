@@ -72,6 +72,12 @@ def stage_runtime(build, destination, device):
                 if not library.is_file():
                     raise ValueError('Missing CUDA 12 runtime: ' + str(library))
                 shutil.copy2(library, destination / library.name)
+            provenance = Path(cuda) / 'CUDA-REDISTRIBUTABLES.json'
+            if provenance.is_file():
+                shutil.copy2(provenance, destination / provenance.name)
+            component_metadata = Path(cuda) / 'component-metadata'
+            if component_metadata.is_dir():
+                shutil.copytree(component_metadata, destination / 'licenses/cuda', dirs_exist_ok=True)
 
 
 def build_native(source, build, destination, device='cpu', jobs=2):
