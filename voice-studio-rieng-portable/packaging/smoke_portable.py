@@ -56,12 +56,13 @@ def verify_custom_turbo_cache(root):
         destination = data/'audio/portable-custom-turbo-cache.wav'
         model.save(output, str(destination))
         samples, rate = sf.read(destination)
-        assert rate == 24000 and len(samples) > rate*.3 and np.max(np.abs(samples)) > .001
+        assert rate == model.sample_rate and len(samples) > rate*.3 and np.max(np.abs(samples)) > .001
         return {'engine': 'vieneu', 'precision': 'fp32',
                 'reference_source': 'Generated public Mai Anh preset audio; no private recording',
                 'reference_encoded_once': True, 'lossless_array_round_trip': True,
                 'disk_cache_hit_without_encoder': True,
                 'preset_dictionary_inference_without_reference_enrollment': True,
+                'sdk_output_sample_rate': rate,
                 'prepare_seconds': round(prepare_seconds, 6),
                 'disk_cache_load_seconds': round(cache_load_seconds, 6),
                 'complete_hour_measured': False, 'target_30x_guaranteed': False}
