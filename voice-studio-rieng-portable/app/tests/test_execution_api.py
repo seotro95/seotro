@@ -79,3 +79,7 @@ def test_saved_auto_winner_is_used_by_configuration_and_submission(studio, monke
     job = response.json()
     assert job['model_memory'] == 'process' and job['speaker'] == 'Mai Anh'
     assert (job['nano_parallel'], job['nano_threads']) == (8, 2)
+    int8 = config['turbo_int8_rendering_presets_by_resource']['smooth']['fast']
+    assert (int8['nano_parallel'], int8['nano_threads']) != (8, 2)
+    for execution in ('shared', 'process'):
+        assert set(config['turbo_int8_cpu_execution_rendering_presets'][execution]) == {'maximum', 'smooth', 'light'}

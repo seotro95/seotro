@@ -57,6 +57,7 @@ function saveRenderPreferences() {
   renderPreferences.voice_id = $('voice').value;
   renderPreferences.resource_profile = $('resource-profile').value;
   renderPreferences.cpu_execution = $('cpu-execution').value;
+  if (voices.find((voice) => voice.id === $('voice').value)?.engine === 'vieneu') renderPreferences.turbo_quality = $('quality').value;
   renderPreferences.international_precision = $('international-precision').value;
   const serialized = JSON.stringify(renderPreferences);
   if (!renderStorageAvailable || serialized === lastSavedRenderPreferences) return;
@@ -66,6 +67,7 @@ function saveRenderPreferences() {
 
 function renderTuningKey(engine, mode) {
   const base = `${$('resource-profile').value}:${engine}:${mode}`;
+  if (engine === 'vieneu') return `${base}:cpu:${$('cpu-execution').value}:${turboPrecision()}`;
   if (['vieneu_nano', 'vieneu'].includes(engine)) return `${base}:cpu:${$('cpu-execution').value}`;
   return engine === 'voxcpm' ? `${base}:${$('international-precision').value}` : base;
 }
@@ -74,10 +76,12 @@ function savedRenderTuning(engine, mode) {
   const profile = $('resource-profile').value;
   const legacyCompatible = engine !== 'voxcpm' || $('international-precision').value === 'fp32';
   const current = renderPreferences.tuning[renderTuningKey(engine, mode)];
-  const legacy = (legacyCompatible ? renderPreferences.tuning[`${profile}:${engine}:${mode}`] : null)
+  const legacy = (engine === 'vieneu' ? renderPreferences.tuning[`${profile}:${engine}:${mode}:cpu:${$('cpu-execution').value}`] : null)
+    || (legacyCompatible ? renderPreferences.tuning[`${profile}:${engine}:${mode}`] : null)
     || (legacyCompatible && profile === 'smooth' ? renderPreferences.tuning[`${engine}:${mode}`] : null);
   const saved = current || legacy;
   if (!saved || typeof saved !== 'object' || Array.isArray(saved)) return {};
+  if (engine === 'vieneu' && turboPrecision(saved.quality || 'auto') !== turboPrecision()) return {};
   const tuning = {};
   for (const [key, maximum] of [['nano_parallel', engine === 'voxcpm' ? 8 : 32], ['nano_threads', 8]]) {
     // Older preferences describe the shared-model runtime. Preserve their
@@ -191,6 +195,13 @@ function benchmarkSupported(voice) {
 }
 
 function renderingPresets(voice) {
+  if (voice?.engine === 'vieneu' && turboPrecision() === 'int8') {
+    const execution = $('cpu-execution').value;
+    const compact = execution === 'auto'
+      ? config?.turbo_int8_rendering_presets_by_resource?.[$('resource-profile').value]
+      : config?.turbo_int8_cpu_execution_rendering_presets?.[execution]?.[$('resource-profile').value];
+    if (compact) return compact;
+  }
   if (calibrationVoice(voice) && $('cpu-execution').value !== 'auto') {
     const execution = config?.cpu_execution_rendering_presets?.[$('cpu-execution').value]?.[$('resource-profile').value]?.[voice.engine];
     if (execution) return execution;
@@ -203,6 +214,22 @@ function renderingPresets(voice) {
   if (profilePresets) return profilePresets;
   if (voice?.engine === 'voxcpm') return config?.voxcpm_rendering_presets;
   return voice?.engine === 'vieneu' ? config?.turbo_rendering_presets : config?.rendering_presets;
+}
+
+function turboPrecision(quality = $('quality').value) {
+  return quality === 'fast' || quality === 'auto' && config?.fast_vieneu ? 'int8' : 'fp32';
+}
+
+function savedTurboQuality(mode) {
+  if (['auto', 'standard', 'fast'].includes(renderPreferences.turbo_quality)) return renderPreferences.turbo_quality;
+  const profile = $('resource-profile').value;
+  const keys = [`${profile}:vieneu:${mode}:cpu:${$('cpu-execution').value}`, `${profile}:vieneu:${mode}`];
+  if (profile === 'smooth') keys.push(`vieneu:${mode}`);
+  for (const key of keys) {
+    const quality = renderPreferences.tuning[key]?.quality;
+    if (['auto', 'standard', 'fast'].includes(quality)) return quality;
+  }
+  return 'auto';
 }
 
 function populateResourceProfiles() {
@@ -323,6 +350,10 @@ function updateRenderNote() {
 function applyRenderMode(mode, {useSaved = true, remember = true} = {}) {
   $('render-mode').value = mode;
   const voice = voices.find((item) => item.id === $('voice').value);
+  const changedEngine = voice?.engine !== appliedRenderEngine;
+  // Resolve precision before choosing a CPU budget or looking up saved tuning.
+  if (!useSaved || changedEngine && voice?.engine !== 'vieneu') $('quality').value = 'auto';
+  else if (changedEngine && voice?.engine === 'vieneu') $('quality').value = savedTurboQuality(mode);
   const key = renderTuningKey(voice?.engine, mode);
   if (!useSaved) {
     delete renderPreferences.tuning[key];
@@ -332,7 +363,6 @@ function applyRenderMode(mode, {useSaved = true, remember = true} = {}) {
     }
   }
   const preset = {...(renderingPresets(voice)?.[mode] || {}), ...(useSaved ? savedRenderTuning(voice?.engine, mode) : {})};
-  const changedEngine = voice?.engine !== appliedRenderEngine;
   appliedRenderEngine = voice?.engine || null;
   $('nano-steps').value = String(preset.nano_steps || {fast: 4, balanced: 8, quality: 16}[mode] || 8);
   $('voxcpm-steps').value = String(preset.voxcpm_steps || {fast: 4, balanced: 8, quality: 10}[mode] || 8);
@@ -340,7 +370,6 @@ function applyRenderMode(mode, {useSaved = true, remember = true} = {}) {
   $('nano-threads').value = String(Math.max(1, Math.min(8, Number(preset.nano_threads) || 2)));
   $('audio-fit-backend').value = preset.audio_fit_backend || (mode === 'fast' ? 'wsola' : 'ffmpeg');
   if (preset.quality) $('quality').value = preset.quality;
-  else if (changedEngine || !useSaved) $('quality').value = 'auto';
   if (remember) saveRenderPreferences();
   updateRenderNote();
 }
@@ -368,6 +397,8 @@ async function inspectMachine() {
     if (info.rendering_presets_by_resource && config) config.rendering_presets_by_resource = info.rendering_presets_by_resource;
     if (info.voxcpm_int8_rendering_presets_by_resource && config) config.voxcpm_int8_rendering_presets_by_resource = info.voxcpm_int8_rendering_presets_by_resource;
     if (info.cpu_execution_rendering_presets && config) config.cpu_execution_rendering_presets = info.cpu_execution_rendering_presets;
+    if (info.turbo_int8_rendering_presets_by_resource && config) config.turbo_int8_rendering_presets_by_resource = info.turbo_int8_rendering_presets_by_resource;
+    if (info.turbo_int8_cpu_execution_rendering_presets && config) config.turbo_int8_cpu_execution_rendering_presets = info.turbo_int8_cpu_execution_rendering_presets;
     machineSummary = info;
     const gpuNames = Array.isArray(info.nvidia_gpus) ? info.nvidia_gpus : [];
     const rows = [
@@ -1000,7 +1031,10 @@ $('nano-threads').addEventListener('input', rememberRenderTuning);
 $('nano-steps').addEventListener('change', rememberRenderTuning);
 $('voxcpm-steps').addEventListener('change', rememberRenderTuning);
 $('audio-fit-backend').addEventListener('change', rememberRenderTuning);
-$('quality').addEventListener('change', rememberRenderTuning);
+$('quality').addEventListener('change', () => {
+  if (voices.find((voice) => voice.id === $('voice').value)?.engine === 'vieneu') applyResourceBudget();
+  else rememberRenderTuning();
+});
 $('suggest-voice').addEventListener('click', () => {
   const suggested = suggestedVoice();
   if (!suggested) { notify('Chưa có giọng gợi ý sẵn sàng. Chọn giọng khác hoặc tải thêm giọng trong Thư viện giọng.', true); return; }

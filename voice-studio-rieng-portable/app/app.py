@@ -244,6 +244,9 @@ def resource_config():
             for engine in ('vieneu_nano','vieneu','voxcpm')} for profile in profiles},
         'cpu_execution_rendering_presets':{execution:{profile:{engine:effective_rendering_presets(engine,profile,cpu_execution=execution)
             for engine in ('vieneu_nano','vieneu')} for profile in profiles} for execution in ('shared','process')},
+        'turbo_int8_rendering_presets_by_resource':{profile:effective_rendering_presets('vieneu',profile,'int8') for profile in profiles},
+        'turbo_int8_cpu_execution_rendering_presets':{execution:{profile:effective_rendering_presets('vieneu',profile,'int8',execution)
+            for profile in profiles} for execution in ('shared','process')},
         'voxcpm_int8_rendering_presets_by_resource':{profile:effective_rendering_presets('voxcpm',profile,'int8') for profile in profiles}}
 
 
