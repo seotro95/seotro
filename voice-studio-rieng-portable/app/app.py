@@ -541,7 +541,7 @@ def _submit_speech(body: Speech,calibration=False):
             body.nano_threads=min(8,os.cpu_count() or 1,2 if body.resource_profile=='light' else 4)
         if body.resource_profile=='light':body.nano_threads=min(body.nano_threads,2)
         if 'omnivoice_steps' not in body.model_fields_set:
-            body.omnivoice_steps={'fast':8,'balanced':16,'quality':32}[body.render_mode]
+            body.omnivoice_steps={'fast':8,'balanced':16,'quality':16}[body.render_mode]
     else:
         model_memory=choose_execution_model(engine,body.resource_profile,body.cpu_execution,resident_model(),precision,
                                             data=DATA,render_mode=body.render_mode)

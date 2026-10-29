@@ -52,16 +52,17 @@ def test_native_srt_keeps_voice_language_timeline_and_one_model(reference_catalo
     submit.assert_called_once_with(app.run_job, job['id'])
 
 
-def test_native_benchmark_uses_selected_language_and_fast_steps(reference_catalog, monkeypatch):
+@pytest.mark.parametrize(('mode', 'steps'), [('fast', 8), ('balanced', 16), ('quality', 16)])
+def test_native_benchmark_uses_selected_language_and_measured_presets(reference_catalog, monkeypatch, mode, steps):
     client, data, root, submit = reference_catalog
     installed(monkeypatch)
     response = client.post('/api/benchmark', json={
-        'voice_id': THAI, 'language': 'th', 'render_mode': 'fast',
+        'voice_id': THAI, 'language': 'th', 'render_mode': mode,
         'international_backend': 'omnivoice', 'nano_parallel': 8})
     assert response.status_code == 202, response.text
     job = response.json()
     assert job['voice_id'] == THAI and job['language'] == 'th'
-    assert job['nano_parallel'] == 1 and job['omnivoice_steps'] == 8
+    assert job['nano_parallel'] == 1 and job['omnivoice_steps'] == steps
     assert job['paragraph_pause'] == 0 and 'Đây là đoạn đo' not in job['text']
 
 

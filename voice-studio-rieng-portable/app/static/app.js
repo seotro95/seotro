@@ -221,7 +221,7 @@ function benchmarkSupported(voice) {
 function renderingPresets(voice) {
   if (nativeMultilingual(voice)) {
     const threads = $('resource-profile').value === 'light' ? 1 : Math.max(1, Math.min(8, Math.floor(Number(config?.cpu_cores || 4) / ($('resource-profile').value === 'smooth' ? 2 : 1))));
-    return Object.fromEntries([['fast', 8], ['balanced', 16], ['quality', 32]].map(([mode, steps]) =>
+    return Object.fromEntries([['fast', 8], ['balanced', 16], ['quality', 16]].map(([mode, steps]) =>
       [mode, {nano_parallel: 1, nano_threads: threads, omnivoice_steps: steps, audio_fit_backend: 'wsola'}]));
   }
   if (voice?.engine === 'vieneu' && turboPrecision() === 'int8') {
@@ -396,7 +396,7 @@ function applyRenderMode(mode, {useSaved = true, remember = true} = {}) {
   appliedRenderEngine = voice?.engine || null;
   $('nano-steps').value = String(preset.nano_steps || {fast: 4, balanced: 8, quality: 16}[mode] || 8);
   $('voxcpm-steps').value = String(preset.voxcpm_steps || {fast: 4, balanced: 8, quality: 10}[mode] || 8);
-  $('omnivoice-steps').value = String(preset.omnivoice_steps || {fast: 8, balanced: 16, quality: 32}[mode] || 16);
+  $('omnivoice-steps').value = String(preset.omnivoice_steps || {fast: 8, balanced: 16, quality: 16}[mode] || 16);
   $('nano-parallel').value = nativeMultilingual(voice) ? '1' : String(Math.max(1, Math.min(voice?.engine === 'voxcpm' ? 8 : 32, Number(preset.nano_parallel) || 1)));
   $('nano-threads').value = String(Math.max(1, Math.min(8, Number(preset.nano_threads) || 2)));
   $('audio-fit-backend').value = preset.audio_fit_backend || (mode === 'fast' ? 'wsola' : 'ffmpeg');

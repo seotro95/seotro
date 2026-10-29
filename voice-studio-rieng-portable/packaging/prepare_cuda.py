@@ -27,15 +27,17 @@ COMPONENTS = [
      'size': 2929962, 'sha256': '469b783b6731964170b3d27ae214e97e2a63ec93c57ace3ed4052e6d01261f2e'},
     {'name': 'libcublas', 'path': 'libcublas/windows-x86_64/libcublas-windows-x86_64-12.6.4.1-archive.zip',
      'size': 428583217, 'sha256': '1a87ec80f8c0e5a39badc87010d479930c5b63abd788b3a05bd688a5980a3d07'},
+    {'name': 'libcufft', 'path': 'libcufft/windows-x86_64/libcufft-windows-x86_64-11.3.0.4-archive.zip',
+     'size': 197843242, 'sha256': '7b3c75e90a907b3a2d215f7c846d67b684c6ddb76369d1bced67d2cdd411014b'},
     {'name': 'cuda_nvml_dev', 'path': 'cuda_nvml_dev/windows-x86_64/cuda_nvml_dev-windows-x86_64-12.6.77-archive.zip',
      'size': 129922, 'sha256': '45f2466ff154a44701388a90913b7d1c4c0ec591f0ec33b3d30464d5c2ffbe8d'},
 ]
 REQUIRED = (
     'bin/nvcc.exe', 'bin/ptxas.exe', 'bin/cudart64_12.dll',
-    'bin/cublas64_12.dll', 'bin/cublasLt64_12.dll',
-    'include/cuda_runtime.h', 'include/cublas_v2.h', 'include/thrust/version.h',
+    'bin/cublas64_12.dll', 'bin/cublasLt64_12.dll', 'bin/cufft64_11.dll',
+    'include/cuda_runtime.h', 'include/cublas_v2.h', 'include/cufft.h', 'include/thrust/version.h',
     'lib/x64/cudart.lib', 'lib/x64/cudart_static.lib', 'lib/x64/cublas.lib',
-    'nvvm/libdevice/libdevice.10.bc',
+    'lib/x64/cufft.lib', 'nvvm/libdevice/libdevice.10.bc',
 )
 
 

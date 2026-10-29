@@ -12,6 +12,8 @@ Với các mẫu Pháp, Nhật, Hàn, Nga, Tây Ban Nha, Thái…, có thể ch�
 
 OmniVoice giữ một mô hình để dùng lại giữa các câu và mẫu giọng, tránh nhân bản trọng số trong RAM/VRAM. Nếu mẫu chưa có lời chép, tool nhận dạng một lần bằng Whisper trên CPU, lưu kết quả cục bộ rồi dùng lại; lần đầu sẽ lâu hơn. Không gửi bản thu riêng lên mạng để nhận dạng. Bản chép tự động có thể có sai sót, nên cần nghe kiểm tra trước khi tạo bản dài.
 
+Số bước cao hơn chưa bảo đảm đọc tốt hơn: mẫu thử CPU Q8 ở 32 bước đã có trường hợp chỉ phát âm kéo dài, trong khi mẫu 8 bước cùng giọng đọc được lời. Hai chế độ Cân bằng và Chất lượng của OmniVoice hiện đều khởi đầu ở 16 bước; 32 bước là lựa chọn thử riêng. Giữ VoxCPM nếu mẫu của giọng đang chọn không đọc đúng.
+
 Khi nâng cấp từ 1.10, giải nén bản đầy đủ vào thư mục mới rồi chép **app/.data**, **runtime-international** và **app/voice-library** từ bản cũ, hoặc dùng ZIP cập nhật trên một bản sao của thư mục cũ. Bộ cài 19 giọng vẫn dùng mật khẩu đã có. Đóng tool trước khi sao chép. Bản cập nhật không chứa `.data` hay thư viện mẫu của bạn.
 
 Chưa có số đo chứng minh mọi giọng nhanh bằng Turbo hoặc tạo một giờ lời đọc trong hai phút. Các kết quả CPU dưới đây là số đo lịch sử của các bản trước. Trọng số OmniVoice dùng CC-BY-NC; bộ mã hóa âm thanh dùng giấy phép Boson riêng, khác với giấy phép mã nguồn. Chi tiết nguồn và điều khoản nằm trong `runtime-native` và thư mục mô hình sau khi cài.

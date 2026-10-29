@@ -67,7 +67,7 @@ def stage_runtime(build, destination, device):
             cuda = os.environ.get('CUDA_PATH')
             if not cuda:
                 raise ValueError('CUDA_PATH is needed to stage CUDA runtime DLLs')
-            for pattern in ('cudart64_12.dll', 'cublas64_12.dll', 'cublasLt64_12.dll'):
+            for pattern in ('cudart64_12.dll', 'cublas64_12.dll', 'cublasLt64_12.dll', 'cufft64_11.dll'):
                 library = Path(cuda) / 'bin' / pattern
                 if not library.is_file():
                     raise ValueError('Missing CUDA 12 runtime: ' + str(library))

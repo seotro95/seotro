@@ -48,7 +48,7 @@
             <div id="native-multilingual-field" hidden>
               <label for="international-device">Thiết bị chạy OmniVoice</label><select id="international-device" aria-describedby="international-device-note"><option value="cpu" selected>CPU</option><option value="cuda">GPU NVIDIA · CUDA</option></select>
               <p id="international-device-note" class="field-note">CUDA cần bộ chạy GPU và trình điều khiển NVIDIA phù hợp. Nếu không chạy được, tool báo lỗi và giữ lựa chọn của bạn; chọn CPU nếu muốn thử lại trên CPU.</p>
-              <label for="omnivoice-steps">OmniVoice · Số bước tạo giọng</label><select id="omnivoice-steps"><option value="8">8 bước · Ưu tiên tốc độ</option><option value="16" selected>16 bước · Cân bằng</option><option value="32">32 bước · Ưu tiên chất lượng</option></select>
+              <label for="omnivoice-steps">OmniVoice · Số bước tạo giọng</label><select id="omnivoice-steps"><option value="8">8 bước · Thử tốc độ</option><option value="16" selected>16 bước · Thử cân bằng</option><option value="32">32 bước · Thử riêng</option></select><p class="field-note">Số bước cao hơn chưa bảo đảm chất lượng tốt hơn; mẫu 32 bước đã có trường hợp không đọc thành lời. Nghe mẫu đúng giọng trước khi tạo bản dài.</p>
               <p class="field-note">Một mô hình được dùng lại giữa các câu. Ít bước hơn có thể giảm độ rõ tiếng; kết quả đo trên máy này mới cho biết tốc độ thực tế.</p>
             </div>
           </div>
