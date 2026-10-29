@@ -197,8 +197,124 @@ def test_turbo_calibration_precision_is_not_reused_across_weights(tmp_path):
     assert read('int8')['fast']['nano_parallel']==26
 
 
+def test_explicit_execution_records_override_legacy_keys_without_crossing_modes(tmp_path):
+    import os
+    def entry(workers,memory):
+        return {'nano_steps':4,'precision':'fp32','resource_profile':'smooth','model_memory':memory,
+                'selected':{'settings':{'nano_parallel':workers,'nano_threads':1}}}
+    # Insert the older key last: specificity, rather than insertion order,
+    # must determine which compatible measurement is loaded.
+    saved={'logical_cores':os.cpu_count(),'profiles':{
+        'vieneu:smooth:shared:fast':entry(7,'shared'),
+        'vieneu:smooth:process:fast':entry(12,'process'),
+        'vieneu:smooth:fast':entry(3,'shared'),
+        'vieneu:maximum:process:fast':{**entry(20,'process'),'resource_profile':'maximum'}}}
+    (tmp_path/'calibration.json').write_text(json.dumps(saved))
+    def read(memory):
+        return calibration.read_saved_presets(tmp_path,resource_presets(56,28,128,'vieneu','smooth'),
+            'vieneu',resource_profile='smooth',execution_model=memory,precision='fp32')
+    assert read('shared')['fast']['nano_parallel']==7
+    assert read('process')['fast']['nano_parallel']==12
+    # Mismatched metadata must not override a valid three-part fallback.
+    saved['profiles']['vieneu:smooth:shared:fast']['model_memory']='process'
+    (tmp_path/'calibration.json').write_text(json.dumps(saved))
+    assert read('shared')['fast']['nano_parallel']==3
+
+
+def test_calibration_saves_both_execution_models_and_loads_the_matching_team(tmp_path,monkeypatch):
+    for folder in ('audio','parts'):(tmp_path/folder).mkdir()
+    modes=resource_presets(2,2,16)
+    monkeypatch.setattr(calibration,'rendering_presets',lambda selected_engine,**kwargs:modes)
+    clock=[0.]
+    monkeypatch.setattr(calibration.time,'perf_counter',lambda:clock[0])
+    def render(job):
+        workers=job['nano_parallel'];memory=job['model_memory']
+        clock[0]+=({'shared':{1:.02,2:.06},'process':{1:.06,2:.02}}[memory][workers])
+        path=tmp_path/'parts'/job['id'];path.mkdir()
+        with wave.open(str(tmp_path/'audio'/f"{job['id']}.wav"),'wb') as output:
+            output.setparams((1,2,24000,0,'NONE','not compressed'))
+            output.writeframes(b'\x00\x20'*9600)
+        (tmp_path/'audio'/f"{job['id']}.srt").write_text('1\n00:00:00,000 --> 00:00:00,400\nMẫu đo.')
+        (path/'result.json').write_text(json.dumps({'completed':1,'total':1,'audio_seconds':.4,
+            'spoken_audio_seconds':.4,'duration_limited':False,'execution_settings':{'model_memory':memory}}))
+    for memory,ident in [('shared','a'*32),('process','b'*32)]:
+        calibration.calibrate({'id':ident,'engine':'vieneu','nano_steps':4,'quality':'standard',
+            'render_mode':'fast','resource_profile':'smooth','model_memory':memory},render,Mock(),tmp_path)
+    saved=json.loads((tmp_path/'calibration.json').read_text())['profiles']
+    assert set(saved)=={'vieneu:smooth:shared:fast','vieneu:smooth:process:fast'}
+    assert saved['vieneu:smooth:shared:fast']['model_memory']=='shared'
+    assert saved['vieneu:smooth:process:fast']['model_memory']=='process'
+    shared=calibration.read_saved_presets(tmp_path,resource_presets(2,2,16),'vieneu',
+        resource_profile='smooth',execution_model='shared',precision='fp32')
+    process=calibration.read_saved_presets(tmp_path,resource_presets(2,2,16),'vieneu',
+        resource_profile='smooth',execution_model='process',precision='fp32')
+    assert (shared['fast']['nano_parallel'],shared['fast']['nano_threads'])==(1,2)
+    assert (process['fast']['nano_parallel'],process['fast']['nano_threads'])==(2,1)
+
+
 @pytest.mark.parametrize('malformed',['[]','{}','{"profiles": []}','null'])
 def test_invalid_calibration_metadata_keeps_safe_defaults(tmp_path,malformed):
     (tmp_path/'calibration.json').write_text(malformed)
     defaults=resource_presets(4,4,16)
     assert calibration.read_saved_presets(tmp_path,defaults) is defaults
+
+
+@pytest.mark.parametrize('process_gain,expected',[(2.,'process'),(1.03,'shared')])
+def test_auto_calibration_compares_execution_models_and_preserves_reference_identity(tmp_path,monkeypatch,process_gain,expected):
+    import hardware
+    for folder in ('audio','parts'):(tmp_path/folder).mkdir()
+    modes=resource_presets(2,2,16)
+    monkeypatch.setattr(calibration,'rendering_presets',lambda selected_engine,**kwargs:modes)
+    monkeypatch.setattr(hardware,'_machine_resources',lambda *args:(4,2,16))
+    clock=[0.]
+    monkeypatch.setattr(calibration.time,'perf_counter',lambda:clock[0])
+    seen=[]
+    def render(job):
+        seen.append(dict(job));memory=job['model_memory']
+        # Both mechanisms prefer two workers; only a material measured gain
+        # should make auto duplicate the weights in independent processes.
+        elapsed=1. if job['nano_parallel']==2 else 2.
+        clock[0]+=elapsed/(process_gain if memory=='process' else 1.)
+        path=tmp_path/'parts'/job['id'];path.mkdir()
+        with wave.open(str(tmp_path/'audio'/f"{job['id']}.wav"),'wb') as output:
+            output.setparams((1,2,24000,0,'NONE','not compressed'))
+            output.writeframes(b'\x00\x20'*9600)
+        (tmp_path/'audio'/f"{job['id']}.srt").write_text('1\n00:00:00,000 --> 00:00:00,400\nSample.')
+        (path/'result.json').write_text(json.dumps({'completed':8,'total':8,'audio_seconds':.4,
+            'spoken_audio_seconds':.4,'duration_limited':False,'execution_settings':{'model_memory':memory}}))
+    job={'id':'d'*32,'engine':'vieneu','nano_steps':4,'quality':'standard','render_mode':'fast',
+         'resource_profile':'smooth','model_memory':'shared','cpu_execution':'auto',
+         'voice_id':'custom-english-reference','language':'en-GB','text':'Public calibration placeholder.'}
+    calibration.calibrate(job,render,Mock(),tmp_path)
+    result=json.loads((tmp_path/'parts'/job['id']/'result.json').read_text())
+    report=result['calibration_report']
+    assert report['model_memory']==expected
+    assert report['selected']['model_memory']==expected
+    assert set(report['execution_comparison'])=={'shared','process'}
+    saved=json.loads((tmp_path/'calibration.json').read_text())
+    assert set(saved['profiles'])=={'vieneu:smooth:shared:fast','vieneu:smooth:process:fast'}
+    assert saved['execution_choices']['vieneu:smooth:fast:fp32']['model_memory']==expected
+    assert hardware.choose_execution_model('vieneu',data=tmp_path)==expected
+    assert {trial['voice_id'] for trial in seen}=={'custom-english-reference'}
+    assert {trial['language'] for trial in seen}=={'en-GB'}
+    assert {trial['nano_steps'] for trial in seen}=={4}
+    assert {trial['quality'] for trial in seen}=={'standard'}
+    assert len({trial['text'] for trial in seen})==1
+    assert len(seen[0]['text'].splitlines())==8
+    assert 'morning light' in seen[0]['text']
+    assert not list((tmp_path/'parts').glob('*-measure-*'))
+
+
+def test_saved_auto_team_keeps_its_precision_after_another_precision_is_measured(tmp_path):
+    import os
+    saved={'logical_cores':os.cpu_count(),'profiles':{'vieneu:smooth:process:fast':{
+        'nano_steps':4,'precision':'int8','resource_profile':'smooth','model_memory':'process',
+        'selected':{'settings':{'nano_parallel':3,'nano_threads':1}}}},
+        'execution_choices':{'vieneu:smooth:fast:fp32':{'model_memory':'process','nano_steps':4,
+            'settings':{'nano_parallel':2,'nano_threads':2}}}}
+    (tmp_path/'calibration.json').write_text(json.dumps(saved))
+    def read(precision):
+        return calibration.read_saved_presets(tmp_path,resource_presets(8,4,16,'vieneu','smooth'),
+            'vieneu',resource_profile='smooth',execution_model='process',precision=precision,use_auto_choice=True)
+    assert (read('fp32')['fast']['nano_parallel'],read('fp32')['fast']['nano_threads'])==(2,2)
+    assert (read('int8')['fast']['nano_parallel'],read('int8')['fast']['nano_threads'])==(3,1)

@@ -6,7 +6,7 @@ def supports_int8():
         return False
 
 
-def system_info():
+def system_info(include_cuda_probe=True):
     import json
     import os
     import platform
@@ -43,12 +43,13 @@ def system_info():
         except (OSError, subprocess.TimeoutExpired):
             pass
     cuda = None
-    try:
-        result = subprocess.run([sys.executable, '-c', 'import json,torch; print(json.dumps({"cuda":torch.cuda.is_available()}))'], capture_output=True, text=True, timeout=20, check=False)
-        if result.returncode == 0:
-            cuda = json.loads(result.stdout.strip().splitlines()[-1])['cuda']
-    except (OSError, ValueError, IndexError, subprocess.TimeoutExpired):
-        pass
+    if include_cuda_probe:
+        try:
+            result = subprocess.run([sys.executable, '-c', 'import json,torch; print(json.dumps({"cuda":torch.cuda.is_available()}))'], capture_output=True, text=True, timeout=20, check=False)
+            if result.returncode == 0:
+                cuda = json.loads(result.stdout.strip().splitlines()[-1])['cuda']
+        except (OSError, ValueError, IndexError, subprocess.TimeoutExpired):
+            pass
     return {'cpu': cpu, 'logical_cores': os.cpu_count(), 'physical_cores': physical, 'ram_gb': ram, 'nvidia_gpus': gpus, 'pytorch_cuda_available': cuda, 'int8_vnni': supports_int8(), 'note': 'Các giọng Nano/Turbo trong gói này chạy CPU; có card NVIDIA không tự làm Nano dùng GPU. Đo mẫu để biết tốc độ thực tế trên máy đang chạy tool.'}
 
 
@@ -79,8 +80,12 @@ def _resident_credit(engine,resident,precision,execution_model='shared'):
         if resident.get('precision')!=precision:return 0
         return workers*(8 if precision=='int8' else 16)*1024**3
     if resident.get('model_memory','process')!=execution_model:return 0
-    if engine=='vieneu_nano' and execution_model=='shared':
-        return int((1+.25*workers)*1024**3)
+    if engine=='vieneu_nano':
+        # Nano execution reports historically omit precision: its CPU model
+        # has no user-selectable INT8 variant. Do not count a mismatched mode.
+        if precision!='fp32' or resident.get('precision','fp32')!='fp32':return 0
+        if execution_model=='shared':return int((1+.25*workers)*1024**3)
+        return int(1.25*workers*1024**3)
     if engine=='vieneu' and resident.get('precision')==precision:
         if execution_model=='shared':return int((3+.5*workers)*1024**3)
         return workers*(1 if precision=='int8' else 3)*1024**3
@@ -161,6 +166,53 @@ def rendering_limits(engine='vieneu_nano',resident=None,resource_profile='smooth
     return limits
 
 
+def choose_execution_model(engine,resource_profile='smooth',cpu_execution='auto',resident=None,precision='fp32',
+                           data=None,render_mode='fast'):
+    """Use the measured ONNX winner, retaining shared weights until measured.
+
+    A large core count alone does not prove independent Python processes are
+    faster. Explicit selections remain available; automatic selection requires
+    a completed comparison on this machine and a team that still fits its
+    current CPU/RAM budget. Non-ONNX engines keep their isolated backend.
+    """
+    _resource_profile(resource_profile)
+    if not isinstance(cpu_execution,str) or cpu_execution not in {'auto','process','shared'}:
+        raise ValueError('Chọn cơ chế CPU auto, process hoặc shared.')
+    if not isinstance(precision,str) or precision not in {'fp32','int8'}:
+        raise ValueError('Định dạng model không hợp lệ.')
+    if engine not in {'vieneu_nano','vieneu'}:return 'process'
+    if cpu_execution!='auto':return cpu_execution
+    if data is None or render_mode not in {'fast','balanced','quality'}:return 'shared'
+    try:
+        import json
+        import math
+        import os
+        from pathlib import Path
+        saved=json.loads((Path(data)/'calibration.json').read_text(encoding='utf-8'))
+        if saved.get('logical_cores')!=os.cpu_count():return 'shared'
+        record=saved['execution_choices'][f'{engine}:{resource_profile}:{render_mode}:{precision}']
+        memory=record['model_memory']
+        if memory not in {'shared','process'}:return 'shared'
+        measured=record['measurements']
+        speeds={name:measured[name]['realtime_multiplier'] for name in ('shared','process')}
+        if any(isinstance(value,bool) or not isinstance(value,(int,float)) or not math.isfinite(value)
+               or value<=0 for value in speeds.values()):return 'shared'
+        expected='process' if speeds['process']>speeds['shared']*1.05 else 'shared'
+        if memory!=expected:return 'shared'
+        team=record['settings']
+        workers,threads=team['nano_parallel'],team['nano_threads']
+        limits=rendering_limits(engine,resident=resident,resource_profile=resource_profile,
+                                precision=precision,execution_model=memory)
+        if (type(workers) is not int or type(threads) is not int or not 1<=workers<=limits['max_workers']
+                or not 1<=threads<=limits['max_threads'] or workers*threads>limits['cpu_budget']):return 'shared'
+        presets=rendering_presets(engine,resident=resident,resource_profile=resource_profile,
+                                  precision=precision,execution_model=memory)
+        if record['nano_steps']!=presets[render_mode]['nano_steps']:return 'shared'
+        return memory
+    except (OSError,ValueError,KeyError,TypeError,AttributeError):
+        return 'shared'
+
+
 def resource_limits(logical,physical,available_gb,engine='vieneu_nano',resource_profile='maximum',precision='fp32',execution_model='process'):
     """Hard worker/thread ceilings, separate from each quality-mode preset."""
     _resource_profile(resource_profile)
@@ -204,15 +256,18 @@ def resource_presets(logical,physical,available_gb,engine='vieneu_nano',resource
     if engine=='voxcpm':
         fast=maximum
         if resource_profile=='smooth' or precision=='int8':fast=_uniform_team(maximum,cpu)
-        balanced=max(1,fast//2)
-        quality=max(1,fast//4)
+        # The quality selector controls diffusion steps, not how much of the
+        # independent CPU/RAM profile may be used. Reducing both previously
+        # left a many-core machine mostly idle at the highest quality: with
+        # 28 physical cores, smooth quality used only one 8-thread model.
+        # All step counts can run the same safely budgeted independent cues.
         def settings(workers,steps,backend):
             return {'voxcpm_steps':steps,'nano_parallel':workers,
                     'nano_threads':min(limits['max_threads'],max(1,cpu//workers)),
                     'audio_fit_backend':backend}
         return {'fast':settings(fast,4,'wsola'),
-                'balanced':settings(balanced,8,'ffmpeg'),
-                'quality':settings(quality,10,'ffmpeg')}
+                'balanced':settings(fast,8,'ffmpeg'),
+                'quality':settings(fast,10,'ffmpeg')}
     balanced=min(maximum,16,max(1,cpu//2))
     quality=min(maximum,8,max(1,cpu//4))
     def settings(workers,steps,threads,backend):

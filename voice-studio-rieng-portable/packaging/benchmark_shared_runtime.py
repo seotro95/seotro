@@ -160,7 +160,7 @@ def main():
     nano = [record for record in records if record['engine'] == 'vieneu_nano']
     assert [[phase['output_frames'] for phase in item['measurements']] for item in nano][0] == \
            [[phase['output_frames'] for phase in item['measurements']] for item in nano][1]
-    report = {'format': 'voice-studio-shared-native-qa-v1', 'version': '1.9.0',
+    report = {'format': 'voice-studio-shared-native-qa-v1', 'version': '1.10.0',
               'platform': 'native-windows-x64', 'measurements': records,
               'nano_seed_method': 'Benchmark-only deterministic per-text seed; installed SDK files unchanged',
               'turbo_sampling': 'Production stochastic sampling; durations may differ between jobs',

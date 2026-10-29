@@ -1,4 +1,4 @@
-"""Build the standalone 1.9 Windows bundle; publish only after native validation.
+"""Build the standalone 1.10 Windows bundle; publish only after native validation.
 
 A checksum-pinned, previously tested portable release can supply the runtime and
 models. Only its runtime, FFmpeg and model storage are reused; application source,
@@ -247,7 +247,7 @@ def verify_relocated(root):
 
 
 def write_notices(root):
-    (root/'DOC_TRUOC_PORTABLE.txt').write_text('''VOICE STUDIO RIENG 1.9.0 - WINDOWS 10/11 X64 PORTABLE
+    (root/'DOC_TRUOC_PORTABLE.txt').write_text('''VOICE STUDIO RIENG 1.10.0 - WINDOWS 10/11 X64 PORTABLE
 
 Giai nen TOAN BO ZIP vao thu muc moi, vi du D:\\VoiceStudio.
 Mo MO_TOOL.bat. Khong can cai Python, FFmpeg hay tai lai giong Nano da kem theo.
@@ -256,7 +256,12 @@ Ban nay giu nguyen moc SRT, tu can nhip tung cau va them khoang lang.
 Chon WAV de dung video; cau bi ep qua nhanh van can nghe kiem tra.
 Co che do Nhanh/Can bang/Chat luong va kiem tra cau hinh may, do toc do mau.
 Ho tro toi da 32 tac vu Nano/Turbo, tu do va luu cau hinh rieng cho moi bo giong.
-Nano/Turbo dung chung trong so ONNX; moi tac vu co trang thai giai ma rieng.
+Nano/Turbo mac dinh dung chung trong so ONNX, moi tac vu giai ma rieng.
+Tu do CPU so sanh dung chung va nhieu tien trinh bang loi doc that.
+Chi luu cach chay nhanh hon da do duoc, trong gioi han RAM va CPU.
+Mau giong Turbo duoc luu ma rieng tren may sau lan ma hoa dau tien;
+cac cau sau dung truc tiep ma giong nhu preset, khong doc lai mau moi cau.
+Cache khong thay doi giong, so buoc hay toc do phat audio.
 Chon Muot khi lam viec, Toc do toi da hoac It RAM doc lap chat luong giong.
 Lich su chi tai tom tat kich ban, giam cap nhat khi khong can.
 Mai Anh/Turbo ho tro nhieu tac vu, giu FP32 tren CPU thieu VNNI.
@@ -344,7 +349,7 @@ def main():
     write_notices(root)
     verify_relocated(root)
     check_bundle_hygiene(root)
-    metadata = {'product': 'Voice Studio Rieng', 'version': '1.9.0', 'package_type': 'windows-x64-portable',
+    metadata = {'product': 'Voice Studio Rieng', 'version': '1.10.0', 'package_type': 'windows-x64-portable',
                 'source_commit': os.environ.get('GITHUB_SHA'), 'max_characters': 1000000,
                 'bundled_runtime': True, 'bundled_model_weights': True,
                 'optional_international_engine': 'voxcpm2', 'international_runtime_bundled': False,
@@ -353,6 +358,8 @@ def main():
                 'international_active_kv_attention': 'guarded-v2.0.3-cpu-fp32',
                 'international_reference_cache': True, 'target_30x_guaranteed': False,
                 'shared_onnx_model_weights': True, 'compact_history_polling': True,
+                'turbo_private_encoded_reference_cache': True,
+                'measured_cpu_execution_selection': True,
                 'resource_profiles': ['maximum', 'smooth', 'light'],
                 'international_int8_optional': True, 'international_default_precision': 'fp32',
                 'verified_base_sha256': args.base_sha256 if args.base_archive else None}

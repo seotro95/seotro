@@ -9,9 +9,9 @@ from test_reference_voices_api import reference_catalog, prepared_international_
 
 
 def xeon(monkeypatch):
-    monkeypatch.setattr(app,'effective_rendering_presets',lambda engine='vieneu_nano',resource_profile='smooth',precision='fp32':
+    monkeypatch.setattr(app,'effective_rendering_presets',lambda engine='vieneu_nano',resource_profile='smooth',precision='fp32',cpu_execution='auto':
         resource_presets(56,28,128,engine,resource_profile,precision,execution_model='shared'))
-    monkeypatch.setattr(app,'rendering_limits',lambda engine='vieneu_nano',resident=None,resource_profile='smooth',precision='fp32':
+    monkeypatch.setattr(app,'rendering_limits',lambda engine='vieneu_nano',resident=None,resource_profile='smooth',precision='fp32',execution_model='shared':
         resource_limits(56,28,128,engine,resource_profile,precision,execution_model='shared'))
 
 
@@ -56,4 +56,4 @@ def test_configuration_exposes_independent_resource_and_precision_budgets(studio
     for profile in ('maximum','smooth','light'):
         assert set(config['rendering_presets_by_resource'][profile])=={'vieneu_nano','vieneu','voxcpm'}
         assert set(config['voxcpm_int8_rendering_presets_by_resource'][profile])=={'fast','balanced','quality'}
-    assert config['version']=='1.9.0'
+    assert config['version']=='1.10.0'

@@ -13,6 +13,63 @@ import uuid
 import wave
 
 
+def verify_custom_turbo_cache(root):
+    """Use only a public preset's generated audio, never private recordings."""
+    import numpy as np
+    import soundfile as sf
+    from local_vieneu import LocalVieneu
+    from shared_synthesis import acquire_model
+    from turbo_reference import prepared_turbo_voice
+
+    data = root/'app/.data'
+    reference = data/'audio/portable-real-vieneu.wav'
+    model = acquire_model(('vieneu', 1, 'fp32'),
+                          lambda: LocalVieneu(backend='onnx', device='cpu', precision='fp32', threads=1))
+    original_encode = model.encode_reference
+    original_enroll = model._enroll_reference
+    encoded = []
+
+    def capture(*args, **kwargs):
+        result = original_encode(*args, **kwargs)
+        encoded.append(tuple(value.copy() for value in result))
+        return result
+
+    def fail(*args, **kwargs):
+        raise AssertionError('A prepared Turbo voice must not enroll its sample during inference')
+
+    try:
+        model.encode_reference = capture
+        started = time.perf_counter()
+        first = prepared_turbo_voice(model, reference, data)
+        prepare_seconds = time.perf_counter()-started
+        assert len(encoded) == 1, 'The first custom reference must be encoded exactly once'
+        assert np.array_equal(first['speaker_emb'], encoded[0][0])
+        assert np.array_equal(first['codes'], encoded[0][1])
+        model.encode_reference = fail
+        model._enroll_reference = fail
+        started = time.perf_counter()
+        second = prepared_turbo_voice(model, reference, data)
+        cache_load_seconds = time.perf_counter()-started
+        assert np.array_equal(first['speaker_emb'], second['speaker_emb'])
+        assert np.array_equal(first['codes'], second['codes'])
+        output = model.infer('Xin chào. Đây là giọng mẫu đã được chuẩn bị.', voice=second)
+        destination = data/'audio/portable-custom-turbo-cache.wav'
+        model.save(output, str(destination))
+        samples, rate = sf.read(destination)
+        assert rate == 24000 and len(samples) > rate*.3 and np.max(np.abs(samples)) > .001
+        return {'engine': 'vieneu', 'precision': 'fp32',
+                'reference_source': 'Generated public Mai Anh preset audio; no private recording',
+                'reference_encoded_once': True, 'lossless_array_round_trip': True,
+                'disk_cache_hit_without_encoder': True,
+                'preset_dictionary_inference_without_reference_enrollment': True,
+                'prepare_seconds': round(prepare_seconds, 6),
+                'disk_cache_load_seconds': round(cache_load_seconds, 6),
+                'complete_hour_measured': False, 'target_30x_guaranteed': False}
+    finally:
+        model.encode_reference = original_encode
+        model._enroll_reference = original_enroll
+
+
 def main():
     root = Path(sys.argv[1]).resolve()
     app = root/'app'
@@ -42,7 +99,7 @@ def main():
     data = app/'.data'
     with TestClient(studio.app) as client:
         config = client.get('/api/config').json()
-        assert config['edition'] == 'standalone-voice' and config['version'] == '1.9.0'
+        assert config['edition'] == 'standalone-voice' and config['version'] == '1.10.0'
         assert config['nano_ready'] and config['max_characters'] == 1000000
         assert len(config['delivery_profiles']) == 10
         assert set(config['rendering_presets']) == {'fast', 'balanced', 'quality'}
@@ -59,6 +116,7 @@ def main():
         assert len([item for item in voices if item['engine'] == 'vieneu_nano']) >= 11
         assert len([item for item in voices if item['engine'] == 'vieneu']) >= 25
     engines = [('vieneu_nano', 'Minh Quân')]
+    custom_turbo_qa = None
     if (data/'models/vieneu.ready').exists():
         engines.append(('vieneu', 'Mai Anh'))
     for engine, speaker in engines:
@@ -134,6 +192,7 @@ def main():
         assert turbo_result['execution_settings']['model_memory']=='shared'
         assert sf.info(data/'audio'/(turbo_job['id']+'.wav')).frames==round(2.75*24000)
         assert parse_srt((data/'audio'/(turbo_job['id']+'.srt')).read_text(encoding='utf-8'))==parse_srt(turbo_srt)
+        custom_turbo_qa = verify_custom_turbo_cache(root)
     # Two fresh jobs distinguish cold model setup from reusable warm
     # workers. Distinct sentences cannot reuse chunk checkpoints. No artificial
     # paragraph gaps or subtitle silence inflate speech throughput.
@@ -180,6 +239,9 @@ def main():
                           'segments': segment_count, 'paragraph_pause': 0, 'measurements': measurements},
           'target_30x_guaranteed': False,
           'checks': ['offline shared-model Nano and Turbo', 'real native news pacing', 'FFmpeg and WSOLA clock/pitch/tail', 'WAV MP3 TXT SRT exports', 'launcher HTTP']}
+    if custom_turbo_qa is not None:
+        qa['custom_turbo_reference_cache'] = custom_turbo_qa
+        qa['checks'].append('real custom Turbo reference: lossless disk cache and preset dictionary inference')
     print('PORTABLE_BENCHMARK '+json.dumps(qa['fast_sample'], ensure_ascii=False), flush=True)
     # Exercise user download endpoints, including conversion with bundled FFmpeg.
     export_id = uuid.uuid4().hex

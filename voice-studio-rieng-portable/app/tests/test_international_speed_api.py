@@ -10,8 +10,8 @@ from test_standalone_api import studio  # noqa: F401
 
 
 def xeon_resources(monkeypatch):
-    monkeypatch.setattr(app,'effective_rendering_presets',lambda engine='vieneu_nano',resource_profile='smooth',precision='fp32':resource_presets(56,28,128,engine,resource_profile,precision))
-    monkeypatch.setattr(app,'rendering_limits',lambda engine='vieneu_nano',resident=None,resource_profile='smooth',precision='fp32':resource_limits(56,28,128,engine,resource_profile,precision))
+    monkeypatch.setattr(app,'effective_rendering_presets',lambda engine='vieneu_nano',resource_profile='smooth',precision='fp32',cpu_execution='auto':resource_presets(56,28,128,engine,resource_profile,precision))
+    monkeypatch.setattr(app,'rendering_limits',lambda engine='vieneu_nano',resident=None,resource_profile='smooth',precision='fp32',execution_model='process':resource_limits(56,28,128,engine,resource_profile,precision))
 
 
 @pytest.mark.parametrize('ident,language',[(KOREAN,'ko'),(THAI,'th')])

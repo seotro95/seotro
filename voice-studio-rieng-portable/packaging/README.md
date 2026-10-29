@@ -15,7 +15,7 @@ succeed in the native smoke; missing detection cannot silently pass as a
 one-worker hardware budget. RUNTIME-ADDITIONS.txt records the added dependency.
 
 ```powershell
-python packaging/build_windows.py --output "$env:RUNNER_TEMP/Voice-Studio-Rieng-1.9.0-Portable" --base-archive "$env:RUNNER_TEMP/Voice-Studio-Windows-x64.zip"
+python packaging/build_windows.py --output "$env:RUNNER_TEMP/Voice-Studio-Rieng-1.10.0-Portable" --base-archive "$env:RUNNER_TEMP/Voice-Studio-Windows-x64.zip"
 ```
 
 Pinned base URL:
@@ -70,3 +70,30 @@ Version 1.6 tests real Nano news pacing at native speed 1.04 and the fast WSOLA 
 Version 1.6 expands bounded Nano pools to32, budgets physical CPU cores and available RAM, and calibrates candidate worker/thread teams with fresh real speech. Steps stay unchanged within the selected mode. The native smoke also measures and persists a real on-runner calibration, including warm model reuse and temporary-output cleanup. The runner calibration is removed before packaging so each user calibrates their own hardware.
 
 Version 1.6 enables the same bounded ordered process pool for Turbo/Mai Anh, honors per-worker ORT threads, limits nested BLAS teams, and budgets 3GiB per Turbo worker. Calibration records are separated by engine. Native QA additionally requires real Mai Anh FP32 two-worker SRT alignment and cold/warm HTTP benchmarks. An explicit UI Nano comparison changes the selected voice and starts measurement without replacing the editor text.
+
+Version 1.10 saves custom Turbo speaker embeddings and reference codes in a
+private, validated local cache. After enrollment, custom VI/EN references use
+the same `voice` dictionary path as built-in Turbo presets. This avoids reading
+and locking the reference for every sentence and re-encoding after restarts; it
+does not establish a 30x end-to-end synthesis result. Cached voice data is not
+part of the public archive. A changed reference invalidates its content key.
+Native smoke enrollment uses generated audio from the public Mai Anh preset,
+checks exact array round trips, disables the encoder, and requires actual
+dictionary-based speech inference after a disk cache hit. The prepare/load
+timings are recorded in `PORTABLE-QA.json`; private references are never used.
+
+Automatic ONNX CPU selection keeps shared weights until calibration compares
+actual speech with shared and process execution and records a measured winner.
+Results are scoped to the engine, quality mode, resource profile and precision.
+The calibration preserves the selected voice and synthesis steps. Explicit
+shared/process choices remain available within CPU/RAM budgets.
+
+Turbo supports Vietnamese and English. The private Korean, Russian, Japanese,
+French, Spanish and Thai defaults continue to use the separate multilingual
+VoxCPM2 runtime. Labeling a sample as a default does not change that engine.
+No equal-speed or full-hour 30x result is claimed for these references.
+
+`.github/workflows/voice-studio-reference-1.10.yml` builds a single full Windows
+download on pushes to `voice-studio-throughput-v1.10.0` or a manual dispatch.
+It keeps the existing encrypted 19-voice package, tests the current application
+and legacy unlock path, and publishes only after native Windows QA passes.

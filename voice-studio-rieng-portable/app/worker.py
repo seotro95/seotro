@@ -69,8 +69,10 @@ def load_synthesizer(job):
             options={'voice':job['speaker']}
         else:
             from voice_library import resolve_reference
+            from turbo_reference import prepared_turbo_voice
             reference,_=resolve_reference(job['voice_id'],DATA)
-            options={'ref_audio':str(reference),'denoise':False}
+            cancel_path=DATA/'parts'/job['id']/'cancel.flag' if job.get('id') else None
+            options={'voice':prepared_turbo_voice(model,reference,DATA,precision=precision,cancel_path=cancel_path)}
         def synthesize(text, output):
             model.save(model.infer(text, **options), str(output))
         return synthesize

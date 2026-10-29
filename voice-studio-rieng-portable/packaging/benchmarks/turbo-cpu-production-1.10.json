@@ -1,0 +1,328 @@
+{
+  "schema_version": 1,
+  "app_version": "1.10.0",
+  "voice": "Ngọc Huyền",
+  "engine": "vieneu",
+  "precision": "fp32",
+  "sampling": "unmodified SDK temperature0.8",
+  "cpu_quota": "400000 100000",
+  "text_sentences_per_wave": 24,
+  "runs": [
+    {
+      "execution": "shared",
+      "workers": 4,
+      "warm_speech_seconds": 66.48,
+      "warm_wall_seconds": 13.672,
+      "warm_realtime_multiplier": 4.862,
+      "peak_rss_bytes": 1396113408,
+      "trials": [
+        {
+          "phase": "cold",
+          "wall_seconds": 10.779007720993832,
+          "cpu_seconds": 29.54,
+          "mean_cpu_cores": 2.7405119993064067,
+          "speech_seconds": 33.04,
+          "audio_seconds": 33.04,
+          "speech_realtime_multiplier": 3.0652172124943693,
+          "rss_peak_bytes": 1388089344,
+          "audio_sha256": "3f6e27320472b1de8ac467e0aefc5112de3f8ce6e79f9cb2e233c046cc314d3d",
+          "output_frames": 792960,
+          "execution_settings": {
+            "engine": "vieneu",
+            "workers": 4,
+            "worker_budget": 4,
+            "threads": 1,
+            "blas_threads": 1,
+            "model_memory": "shared",
+            "resource_profile": "maximum",
+            "precision": "fp32"
+          }
+        },
+        {
+          "phase": "warm",
+          "wall_seconds": 7.015401436001412,
+          "cpu_seconds": 26.270000000000003,
+          "mean_cpu_cores": 3.744618214602583,
+          "speech_seconds": 33.28,
+          "audio_seconds": 33.28,
+          "speech_realtime_multiplier": 4.7438482749133595,
+          "rss_peak_bytes": 1391144960,
+          "audio_sha256": "6f4413d286bdf8f81eee1ccc7f696ef4773f6df31a2a3f9cf0fcb2a688e5c818",
+          "output_frames": 798720,
+          "execution_settings": {
+            "engine": "vieneu",
+            "workers": 4,
+            "worker_budget": 4,
+            "threads": 1,
+            "blas_threads": 1,
+            "model_memory": "shared",
+            "resource_profile": "maximum",
+            "precision": "fp32"
+          }
+        },
+        {
+          "phase": "warm2",
+          "wall_seconds": 6.656976829995983,
+          "cpu_seconds": 25.14,
+          "mean_cpu_cores": 3.776489034289634,
+          "speech_seconds": 33.2,
+          "audio_seconds": 33.2,
+          "speech_realtime_multiplier": 4.987248844010177,
+          "rss_peak_bytes": 1396113408,
+          "audio_sha256": "62d223ab98013b9a31709bb21c0b1ae15ee1fec8209cda642054f83d7fbfc5c1",
+          "output_frames": 796800,
+          "execution_settings": {
+            "engine": "vieneu",
+            "workers": 4,
+            "worker_budget": 4,
+            "threads": 1,
+            "blas_threads": 1,
+            "model_memory": "shared",
+            "resource_profile": "maximum",
+            "precision": "fp32"
+          }
+        }
+      ]
+    },
+    {
+      "execution": "process",
+      "workers": 4,
+      "warm_speech_seconds": 66.64,
+      "warm_wall_seconds": 13.529,
+      "warm_realtime_multiplier": 4.926,
+      "peak_rss_bytes": 5014179840,
+      "trials": [
+        {
+          "phase": "cold",
+          "wall_seconds": 13.996123034012271,
+          "cpu_seconds": 53.55,
+          "mean_cpu_cores": 3.8260595359062664,
+          "speech_seconds": 33.2,
+          "audio_seconds": 33.2,
+          "speech_realtime_multiplier": 2.372085463904539,
+          "rss_peak_bytes": 4963549184,
+          "audio_sha256": "02dd7773584f5a4b768d5c6e5ec460a23d4d52b2c9c1dbd39cecb218a2c6cd0e",
+          "output_frames": 796800,
+          "execution_settings": {
+            "engine": "vieneu",
+            "workers": 4,
+            "worker_budget": 4,
+            "threads": 1,
+            "blas_threads": 1,
+            "model_memory": "process",
+            "resource_profile": "maximum",
+            "precision": "fp32"
+          }
+        },
+        {
+          "phase": "warm",
+          "wall_seconds": 6.763464211995597,
+          "cpu_seconds": 25.610000000000007,
+          "mean_cpu_cores": 3.786521107715544,
+          "speech_seconds": 33.2,
+          "audio_seconds": 33.2,
+          "speech_realtime_multiplier": 4.9087270900490445,
+          "rss_peak_bytes": 4989657088,
+          "audio_sha256": "69bb6ffa6a5e03d4c6b2cfd1e842ec1c72644ff78b696e25cd58fd52c8f62469",
+          "output_frames": 796800,
+          "execution_settings": {
+            "engine": "vieneu",
+            "workers": 4,
+            "worker_budget": 4,
+            "threads": 1,
+            "blas_threads": 1,
+            "model_memory": "process",
+            "resource_profile": "maximum",
+            "precision": "fp32"
+          }
+        },
+        {
+          "phase": "warm2",
+          "wall_seconds": 6.765808951997315,
+          "cpu_seconds": 25.189999999999984,
+          "mean_cpu_cores": 3.7231320273333637,
+          "speech_seconds": 33.44,
+          "audio_seconds": 33.44,
+          "speech_realtime_multiplier": 4.942498411831194,
+          "rss_peak_bytes": 5014179840,
+          "audio_sha256": "5459bc9e48ddc30dfbb4436e472a74490cbe9cf092f6ddd83323d3003fa2f521",
+          "output_frames": 802560,
+          "execution_settings": {
+            "engine": "vieneu",
+            "workers": 4,
+            "worker_budget": 4,
+            "threads": 1,
+            "blas_threads": 1,
+            "model_memory": "process",
+            "resource_profile": "maximum",
+            "precision": "fp32"
+          }
+        }
+      ]
+    },
+    {
+      "execution": "shared",
+      "workers": 8,
+      "warm_speech_seconds": 66.96,
+      "warm_wall_seconds": 15.666,
+      "warm_realtime_multiplier": 4.274,
+      "peak_rss_bytes": 1446612992,
+      "trials": [
+        {
+          "phase": "cold",
+          "wall_seconds": 11.11078796700167,
+          "cpu_seconds": 35.910000000000004,
+          "mean_cpu_cores": 3.23199399598394,
+          "speech_seconds": 33.36,
+          "audio_seconds": 33.36,
+          "speech_realtime_multiplier": 3.0024873212482377,
+          "rss_peak_bytes": 1420353536,
+          "audio_sha256": "fbed393e93d46ee36ab6cd3876fef8d50b0ce7a22062aca2a7326dfef0f50a81",
+          "output_frames": 800640,
+          "execution_settings": {
+            "engine": "vieneu",
+            "workers": 8,
+            "worker_budget": 8,
+            "threads": 1,
+            "blas_threads": 1,
+            "model_memory": "shared",
+            "resource_profile": "maximum",
+            "precision": "fp32"
+          }
+        },
+        {
+          "phase": "warm",
+          "wall_seconds": 7.9314035450079245,
+          "cpu_seconds": 30.06000000000001,
+          "mean_cpu_cores": 3.789997549540896,
+          "speech_seconds": 33.76,
+          "audio_seconds": 33.76,
+          "speech_realtime_multiplier": 4.256497580588842,
+          "rss_peak_bytes": 1444401152,
+          "audio_sha256": "02539070c646784583cc2d2b2b2c325821b92f2c08d5bfbf37bb13909ca57f61",
+          "output_frames": 810240,
+          "execution_settings": {
+            "engine": "vieneu",
+            "workers": 8,
+            "worker_budget": 8,
+            "threads": 1,
+            "blas_threads": 1,
+            "model_memory": "shared",
+            "resource_profile": "maximum",
+            "precision": "fp32"
+          }
+        },
+        {
+          "phase": "warm2",
+          "wall_seconds": 7.734166452995851,
+          "cpu_seconds": 30.299999999999997,
+          "mean_cpu_cores": 3.917681392577633,
+          "speech_seconds": 33.2,
+          "audio_seconds": 33.2,
+          "speech_realtime_multiplier": 4.292640997807836,
+          "rss_peak_bytes": 1446612992,
+          "audio_sha256": "2661a1689b61cfead537f1a3c04a88969abe3fb0516b10d3bb17e558ff792b5b",
+          "output_frames": 796800,
+          "execution_settings": {
+            "engine": "vieneu",
+            "workers": 8,
+            "worker_budget": 8,
+            "threads": 1,
+            "blas_threads": 1,
+            "model_memory": "shared",
+            "resource_profile": "maximum",
+            "precision": "fp32"
+          }
+        }
+      ]
+    },
+    {
+      "execution": "process",
+      "workers": 8,
+      "warm_speech_seconds": 66.64,
+      "warm_wall_seconds": 15.761,
+      "warm_realtime_multiplier": 4.228,
+      "peak_rss_bytes": 9912766464,
+      "trials": [
+        {
+          "phase": "cold",
+          "wall_seconds": 15.707877306005685,
+          "cpu_seconds": 56.50000000000001,
+          "mean_cpu_cores": 3.5969213980553585,
+          "speech_seconds": 33.52,
+          "audio_seconds": 33.52,
+          "speech_realtime_multiplier": 2.133961155094082,
+          "rss_peak_bytes": 9812901888,
+          "audio_sha256": "4346cb19958fef490a4cc348508c603cbcf5ea64c72efd931566d8eb17c76e86",
+          "output_frames": 804480,
+          "execution_settings": {
+            "engine": "vieneu",
+            "workers": 8,
+            "worker_budget": 8,
+            "threads": 1,
+            "blas_threads": 1,
+            "model_memory": "process",
+            "resource_profile": "maximum",
+            "precision": "fp32"
+          }
+        },
+        {
+          "phase": "warm",
+          "wall_seconds": 7.899799126011203,
+          "cpu_seconds": 28.07,
+          "mean_cpu_cores": 3.553254905884324,
+          "speech_seconds": 33.28,
+          "audio_seconds": 33.28,
+          "speech_realtime_multiplier": 4.212765346199868,
+          "rss_peak_bytes": 9882636288,
+          "audio_sha256": "0b8a45ae31c632453c7b7040c14fa98e3572ec8f6766d3e5d1ab06a0303d4e3b",
+          "output_frames": 798720,
+          "execution_settings": {
+            "engine": "vieneu",
+            "workers": 8,
+            "worker_budget": 8,
+            "threads": 1,
+            "blas_threads": 1,
+            "model_memory": "process",
+            "resource_profile": "maximum",
+            "precision": "fp32"
+          }
+        },
+        {
+          "phase": "warm2",
+          "wall_seconds": 7.860883005996584,
+          "cpu_seconds": 28.049999999999997,
+          "mean_cpu_cores": 3.5683014209221,
+          "speech_seconds": 33.36,
+          "audio_seconds": 33.36,
+          "speech_realtime_multiplier": 4.243798053545856,
+          "rss_peak_bytes": 9912766464,
+          "audio_sha256": "3e6754cf3497fc25210165e35ac9a82ef7504ae42500b27d0cc61680fb6212d1",
+          "output_frames": 800640,
+          "execution_settings": {
+            "engine": "vieneu",
+            "workers": 8,
+            "worker_budget": 8,
+            "threads": 1,
+            "blas_threads": 1,
+            "model_memory": "process",
+            "resource_profile": "maximum",
+            "precision": "fp32"
+          }
+        }
+      ]
+    }
+  ],
+  "conclusions": [
+    "On this four-CPU cloud, private processes did not show a material warm throughput benefit over shared weights.",
+    "Eight workers were slower than four in both execution modes.",
+    "This does not establish scaling on the user Xeon with28physicalcores or meet30x.",
+    "Automatic selection uses on-device measured settings rather than a large-core heuristic."
+  ],
+  "limitations": [
+    "4CPU quota cloud not28physical Xeon",
+    "24short publicsentences/wave",
+    "No full hour measured",
+    "RSS is sum of parent+descendant working sets; shared OS pages can be counted repeatedly"
+  ]
+}

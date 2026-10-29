@@ -29,6 +29,7 @@ class BaseArchiveTests(unittest.TestCase):
                 self.assertEqual((root/'app'/file.name).read_bytes(), file.read_bytes())
             self.assertTrue((root/'app/voxcpm_acceleration.py').is_file())
             self.assertTrue((root/'app/shared_synthesis.py').is_file())
+            self.assertTrue((root/'app/turbo_reference.py').is_file())
             self.assertTrue((root/'app/voxcpm_quantization.py').is_file())
             import json
             report = json.loads((root/'CPU-SHORT-SPEECH-BENCHMARK.json').read_text(encoding='utf-8'))

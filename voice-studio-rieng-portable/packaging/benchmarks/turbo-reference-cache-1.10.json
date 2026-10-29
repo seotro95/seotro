@@ -1,0 +1,36 @@
+{
+  "app_version": "1.10.0",
+  "engine": "vieneu",
+  "precision": "fp32",
+  "reference": "Private English default; no audio or reference data included",
+  "qa_sampling": "temperature0 solely for exact output comparison; production sampling unchanged",
+  "reference_arrays_exact": true,
+  "codec_shape": [
+    54,
+    16
+  ],
+  "raw_first_use": {
+    "variant": "raw",
+    "model_load_seconds": 2.6136326439882396,
+    "prepare_seconds": 1.0976000339724123e-05,
+    "infer_seconds": 3.6593282029934926,
+    "total_seconds": 6.272971822982072,
+    "audio_seconds": 3.52,
+    "wave_sha256": "30624a8f2d1677414ccf3eb07ed3e364bbbda726374488676302c3f9ab71f2c4"
+  },
+  "prepared_cache_after_fresh_model_load": {
+    "variant": "cached",
+    "model_load_seconds": 2.2163632969895843,
+    "prepare_seconds": 0.0030728349956916645,
+    "infer_seconds": 1.6458661969954846,
+    "total_seconds": 3.8653023289807606,
+    "audio_seconds": 3.52,
+    "wave_sha256": "30624a8f2d1677414ccf3eb07ed3e364bbbda726374488676302c3f9ab71f2c4"
+  },
+  "waveform_identical": true,
+  "limitations": [
+    "One short sample on a four-CPU cloud; model-load variation included.",
+    "Improves reference preparation/startup, not autoregressive long-form synthesis cost.",
+    "Full-hour30x goal not established."
+  ]
+}

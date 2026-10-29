@@ -59,7 +59,7 @@ def test_real_benchmark_uses_text_and_normal_queue(studio,monkeypatch):
 def test_genres_expose_real_bundled_speakers(studio):
     client,data=studio
     config=client.get('/api/config').json()
-    assert config['version']=='1.9.0'
+    assert config['version']=='1.10.0'
     assert {'review','horror','fairytale','documentary','ad'}<={p['id'] for p in config['delivery_profiles']}
     voices=client.get('/api/voices').json()['voices']
     assert len({v['speaker'] for v in voices if v.get('engine')=='vieneu_nano'})==11
@@ -86,7 +86,7 @@ def test_missing_warm_model_snapshot_during_render_does_not_break_config(studio,
     client,data=studio
     with monkeypatch.context() as scoped:
         scoped.setattr(app,'warm_worker',SimpleNamespace(pid=999999,poll=lambda:None))
-        scoped.setattr(app,'system_info',lambda:{'cpu':'test'})
+        scoped.setattr(app,'system_info',lambda **kwargs:{'cpu':'test'})
         assert not (data/'warm-model.json').exists()
         assert client.get('/api/config').status_code==200
         assert client.get('/api/system-info').status_code==200

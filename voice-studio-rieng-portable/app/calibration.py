@@ -122,7 +122,8 @@ def benchmark_sample_text(language='vi',workers=1,engine='vieneu_nano'):
 
 
 def read_saved_presets(data,defaults,engine='vieneu_nano',resident=None,
-                       resource_profile='maximum',execution_model='process',limits=None,precision=None):
+                       resource_profile='maximum',execution_model='process',limits=None,precision=None,
+                       use_auto_choice=False):
     # CPU calibration currently measures the two ONNX engines. International
     # inference uses a separate model/memory budget and must not reuse it.
     if engine not in {'vieneu_nano','vieneu'}:return defaults
@@ -135,8 +136,23 @@ def read_saved_presets(data,defaults,engine='vieneu_nano',resident=None,
         if not isinstance(profiles,dict):return defaults
     except (OSError,ValueError,KeyError,TypeError,AttributeError):
         return defaults
+    # A later explicit calibration of another precision can replace a legacy
+    # four-part profile. Keep the exact team of the automatic, precision-scoped
+    # winner available, subject to the same CPU/RAM checks below.
+    profiles=dict(profiles)
+    choices=saved.get('execution_choices',{})
+    if use_auto_choice and isinstance(choices,dict) and (engine!='vieneu' or precision in {'fp32','int8'}):
+        selected_precision=precision or 'fp32'
+        for mode in defaults:
+            choice=choices.get(f'{engine}:{resource_profile}:{mode}:{selected_precision}')
+            if isinstance(choice,dict) and choice.get('model_memory')==execution_model:
+                profiles[f'{engine}:{resource_profile}:{execution_model}:{mode}:{selected_precision}']={
+                    'nano_steps':choice.get('nano_steps'),'resource_profile':resource_profile,
+                    'model_memory':execution_model,'precision':selected_precision,
+                    'selected':{'settings':choice.get('settings')}}
     # Reserve the CPU capacity represented by this profile, even if a resident
     # legacy team has enough memory to justify a larger model count.
+    default_worker_limits={mode:value['nano_parallel'] for mode,value in defaults.items()}
     cpu_budget=max((value['nano_parallel']*value['nano_threads'] for value in defaults.values()),default=1)
     if limits is not None:
         try:
@@ -150,7 +166,14 @@ def read_saved_presets(data,defaults,engine='vieneu_nano',resident=None,
     for key,record in sorted(profiles.items(),key=lambda item:str(item[0]).count(':')):
         try:
             parts=key.split(':')
-            if len(parts)==3:
+            if len(parts)==5:
+                saved_engine,profile,memory,mode,saved_precision=parts
+                if (saved_engine!=engine or profile!=resource_profile or memory!=execution_model
+                        or saved_precision!=(precision or 'fp32')):continue
+            elif len(parts)==4:
+                saved_engine,profile,memory,mode=parts
+                if saved_engine!=engine or profile!=resource_profile or memory!=execution_model:continue
+            elif len(parts)==3:
                 saved_engine,profile,mode=parts
                 if saved_engine!=engine or profile!=resource_profile:continue
             elif len(parts)==2:
@@ -177,7 +200,7 @@ def read_saved_presets(data,defaults,engine='vieneu_nano',resident=None,
                         and resident.get('workers',0)>=workers and resident.get('threads')==threads
                         and (resident.get('precision')==record.get('precision') if engine=='vieneu'
                              else resident.get('nano_steps')==record['nano_steps']))
-            if workers<=defaults[mode]['nano_parallel'] or loaded or limits is not None:
+            if workers<=default_worker_limits[mode] or loaded or limits is not None:
                 defaults[mode].update(nano_parallel=workers,nano_threads=threads)
         except (AttributeError,KeyError,TypeError,ValueError):
             continue
@@ -201,23 +224,40 @@ def calibrate(job,render,close_pool,data=None):
     cleanup_measurements(data,job['id'])
     engine=job.get('engine','vieneu_nano')
     resource_profile=job.get('resource_profile','maximum')
-    presets=rendering_presets(engine,resource_profile=resource_profile,
-                              execution_model=job.get('model_memory','process'))
     mode=job.get('render_mode','fast')
-    base=presets[mode]
-    candidates=calibration_candidates(base)
+    precision='int8' if engine=='vieneu' and job.get('quality')=='fast' else 'fp32'
+    compare=job.get('cpu_execution')=='auto' and engine in {'vieneu_nano','vieneu'}
+    executions=('shared','process') if compare else (job.get('model_memory','process'),)
+    candidates=[]
+    for memory in executions:
+        presets=rendering_presets(engine,resource_profile=resource_profile,precision=precision,
+                                  execution_model=memory)
+        candidates.extend((memory,settings) for settings in calibration_candidates(presets[mode]))
+    trial_text=job.get('text','')
+    if compare:
+        language=job.get('language','vi')
+        samples=(
+            'Hôm nay trời nắng đẹp và có gió nhẹ.',
+            'Một câu chuyện hay mang đến nhiều cảm xúc.',
+            'Chúng ta cùng bước đi trên con đường nhỏ.',
+            'Giọng đọc rõ ràng giúp người nghe dễ hiểu.',
+        ) if language=='vi' else _native_samples(language)
+        count=max(8,min(64,max(settings['nano_parallel'] for _,settings in candidates)*2))
+        trial_text='\n'.join(samples[index%len(samples)] for index in range(count))
     records=[];owned=[];best=None
+    best_by_execution={}
     started=time.perf_counter()
     success=False
     close_pool()
     def cancelled():
         if (work/'cancel.flag').exists():raise InterruptedError('Đã dừng đo cấu hình; các bản thu khác được giữ nguyên.')
-    def run(settings,phase,progress):
+    def run(memory,settings,phase,progress):
         cancelled()
         ident=job['id']+'-measure-'+uuid.uuid4().hex
         owned.append(ident)
-        write_progress(work/'progress.json',{'progress':progress,'phase':f'Đang đo {settings["nano_parallel"]} tác vụ × {settings["nano_threads"]} luồng · {phase}'})
-        measured={**job,**settings,'id':ident,'calibration':False,'format':'wav','input_format':'txt','paragraph_pause':0}
+        label='dùng chung mô hình' if memory=='shared' else 'tiến trình riêng'
+        write_progress(work/'progress.json',{'progress':progress,'phase':f'Đang đo {label} · {settings["nano_parallel"]} tác vụ × {settings["nano_threads"]} luồng · {phase}'})
+        measured={**job,**settings,'model_memory':memory,'text':trial_text,'id':ident,'calibration':False,'format':'wav','input_format':'txt','paragraph_pause':0}
         before=time.perf_counter();render(measured);elapsed=time.perf_counter()-before
         cancelled()
         result=json.loads((data/'parts'/ident/'result.json').read_text(encoding='utf-8'))
@@ -227,25 +267,34 @@ def calibrate(job,render,close_pool,data=None):
         if not report:raise ValueError('Mẫu đo chưa có lời đọc hợp lệ.')
         return ident,result,report
     try:
-        for index,settings in enumerate(candidates):
-            cold_id,_,cold=run(settings,'nạp model',round(90*(2*index)/(2*len(candidates))))
-            ident,result,warm=run(settings,'model đã nạp',round(90*(2*index+1)/(2*len(candidates))))
-            record={'settings':settings,'cold':cold,'warm':warm}
+        for index,(memory,settings) in enumerate(candidates):
+            cold_id,_,cold=run(memory,settings,'nạp model',round(90*(2*index)/(2*len(candidates))))
+            ident,result,warm=run(memory,settings,'model đã nạp',round(90*(2*index+1)/(2*len(candidates))))
+            record={'settings':settings,'model_memory':memory,'cold':cold,'warm':warm}
             records.append(record)
-            if best is None or warm['realtime_multiplier']>best['record']['warm']['realtime_multiplier']:
-                best={'record':record,'id':ident,'result':result}
+            previous=best_by_execution.get(memory)
+            if previous is None or warm['realtime_multiplier']>previous['record']['warm']['realtime_multiplier']:
+                best_by_execution[memory]={'record':record,'id':ident,'result':result}
+        if compare:
+            shared=best_by_execution['shared'];process=best_by_execution['process']
+            # A small noisy gain does not justify loading a copy of every
+            # weight in each process. Both candidates use the same voice,
+            # precision, quality steps and text throughout the comparison.
+            best=process if process['record']['warm']['realtime_multiplier']>shared['record']['warm']['realtime_multiplier']*1.05 else shared
+        else:
+            best=best_by_execution[executions[0]]
         selected=best['record']
         # Leave the selected team loaded for the next real job, including when
         # a smaller team measured faster than the last candidate.
-        if selected['settings']!=candidates[-1]:
-            run(selected['settings'],'chuẩn bị cấu hình đã chọn',95)
+        if (selected['model_memory'],selected['settings'])!=candidates[-1]:
+            run(selected['model_memory'],selected['settings'],'chuẩn bị cấu hình đã chọn',95)
         cancelled()
         for extension in ('wav','srt'):
             shutil.copyfile(data/'audio'/f'{best["id"]}.{extension}',data/'audio'/f'{job["id"]}.{extension}')
         report={'selected':selected,'candidates':records,'nano_steps':job['nano_steps'],'engine':engine,
-                'precision':('int8' if job.get('quality')=='fast' else 'fp32') if engine=='vieneu' else None,
+                'precision':precision if engine=='vieneu' else None,
                 'resource_profile':resource_profile,
-                'model_memory':best['result'].get('execution_settings',{}).get('model_memory',job.get('model_memory','process')),
+                'model_memory':selected['model_memory'],
                 'logical_cores':os.cpu_count(),'estimate_only':True,'target_30x_met_on_sample':selected['warm']['target_30x_met_on_sample'],
                 'total_calibration_seconds':round(time.perf_counter()-started,3)}
         saved={'logical_cores':os.cpu_count(),'profiles':{}}
@@ -254,7 +303,18 @@ def calibrate(job,render,close_pool,data=None):
             if (previous.get('logical_cores')==os.cpu_count()
                     and isinstance(previous.get('profiles',{}),dict)):saved=previous
         except (OSError,ValueError,AttributeError):pass
-        saved.setdefault('profiles',{})[engine+':'+resource_profile+':'+mode]=report
+        for memory,chosen in best_by_execution.items():
+            scoped={**report,'selected':chosen['record'],'candidates':[record for record in records if record['model_memory']==memory],
+                    'model_memory':memory,'target_30x_met_on_sample':chosen['record']['warm']['target_30x_met_on_sample']}
+            saved.setdefault('profiles',{})[engine+':'+resource_profile+':'+memory+':'+mode]=scoped
+        if compare:
+            comparison={memory:chosen['record']['warm'] for memory,chosen in best_by_execution.items()}
+            report['execution_comparison']=comparison
+            choices=saved.get('execution_choices')
+            if not isinstance(choices,dict):choices={};saved['execution_choices']=choices
+            choices[f'{engine}:{resource_profile}:{mode}:{precision}']={
+                'model_memory':selected['model_memory'],'settings':selected['settings'],
+                'nano_steps':job['nano_steps'],'measurements':comparison}
         write_json_atomic(data/'calibration.json',saved)
         final={**best['result'],**selected['settings'],'processing_seconds':report['total_calibration_seconds'],'calibration_report':report,'progress':100}
         write_json_atomic(work/'result.json',final)

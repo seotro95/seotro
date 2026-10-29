@@ -26,6 +26,7 @@ let paragraphPauseEdited = false;
 let appliedCalibrationId = '';
 let appliedRenderEngine = null;
 let speedSummary = null;
+let machineSummary = null;
 let historyVisibleCount = 20;
 let characterCountFrame;
 let lastSavedRenderPreferences = '';
@@ -35,6 +36,7 @@ const renderPreferenceKey = 'voice-studio.render-settings.v1';
 const renderModes = new Set(['fast', 'balanced', 'quality']);
 const renderEngines = new Set(['vieneu_nano', 'vieneu', 'voxcpm']);
 const resourceProfiles = new Set(['maximum', 'smooth', 'light']);
+const cpuExecutions = new Set(['auto', 'shared', 'process']);
 let renderPreferences = readRenderPreferences();
 
 function readRenderPreferences() {
@@ -54,6 +56,7 @@ function saveRenderPreferences() {
   renderPreferences.language = $('language').value;
   renderPreferences.voice_id = $('voice').value;
   renderPreferences.resource_profile = $('resource-profile').value;
+  renderPreferences.cpu_execution = $('cpu-execution').value;
   renderPreferences.international_precision = $('international-precision').value;
   const serialized = JSON.stringify(renderPreferences);
   if (!renderStorageAvailable || serialized === lastSavedRenderPreferences) return;
@@ -63,18 +66,23 @@ function saveRenderPreferences() {
 
 function renderTuningKey(engine, mode) {
   const base = `${$('resource-profile').value}:${engine}:${mode}`;
+  if (['vieneu_nano', 'vieneu'].includes(engine)) return `${base}:cpu:${$('cpu-execution').value}`;
   return engine === 'voxcpm' ? `${base}:${$('international-precision').value}` : base;
 }
 
 function savedRenderTuning(engine, mode) {
   const profile = $('resource-profile').value;
   const legacyCompatible = engine !== 'voxcpm' || $('international-precision').value === 'fp32';
-  const saved = renderPreferences.tuning[renderTuningKey(engine, mode)]
-    || (legacyCompatible ? renderPreferences.tuning[`${profile}:${engine}:${mode}`] : null)
+  const current = renderPreferences.tuning[renderTuningKey(engine, mode)];
+  const legacy = (legacyCompatible ? renderPreferences.tuning[`${profile}:${engine}:${mode}`] : null)
     || (legacyCompatible && profile === 'smooth' ? renderPreferences.tuning[`${engine}:${mode}`] : null);
+  const saved = current || legacy;
   if (!saved || typeof saved !== 'object' || Array.isArray(saved)) return {};
   const tuning = {};
   for (const [key, maximum] of [['nano_parallel', engine === 'voxcpm' ? 8 : 32], ['nano_threads', 8]]) {
+    // Older preferences describe the shared-model runtime. Preserve their
+    // quality choices, but choose a fresh CPU/RAM budget for another runtime.
+    if (!current && ['vieneu_nano', 'vieneu'].includes(engine) && $('cpu-execution').value !== 'shared') continue;
     if (Number.isInteger(saved[key]) && saved[key] >= 1 && saved[key] <= maximum) tuning[key] = saved[key];
   }
   if ([4, 8, 16].includes(saved.nano_steps)) tuning.nano_steps = saved.nano_steps;
@@ -168,7 +176,7 @@ function voiceSetupMessage(voice) {
 
 function languageName(language) { return config?.languages?.[language] || language || 'Chưa rõ ngôn ngữ'; }
 function engineName(voice) {
-  return {vieneu_nano: 'Nano', vieneu: 'Turbo', voxcpm: 'Giọng mẫu đa ngôn ngữ', qwen: 'Qwen', qwen_clone: 'Qwen · Nhân bản', system: 'Hệ thống Windows'}[voice?.engine] || voice?.engine || 'AI';
+  return {vieneu_nano: 'Nano', vieneu: 'Turbo', voxcpm: 'VoxCPM · Đa ngôn ngữ', qwen: 'Qwen', qwen_clone: 'Qwen · Nhân bản', system: 'Hệ thống Windows'}[voice?.engine] || voice?.engine || 'AI';
 }
 
 function cpuVoice(voice) { return renderEngines.has(voice?.engine); }
@@ -183,6 +191,10 @@ function benchmarkSupported(voice) {
 }
 
 function renderingPresets(voice) {
+  if (calibrationVoice(voice) && $('cpu-execution').value !== 'auto') {
+    const execution = config?.cpu_execution_rendering_presets?.[$('cpu-execution').value]?.[$('resource-profile').value]?.[voice.engine];
+    if (execution) return execution;
+  }
   if (voice?.engine === 'voxcpm' && $('international-precision').value === 'int8') {
     const compact = config?.voxcpm_int8_rendering_presets_by_resource?.[$('resource-profile').value];
     if (compact) return compact;
@@ -218,6 +230,16 @@ function updateResourceNote() {
   };
   const profile = config?.resource_profiles?.find((item) => item.id === $('resource-profile').value);
   $('resource-profile-note').textContent = profile?.description || descriptions[$('resource-profile').value] || '';
+  updateCpuExecutionNote();
+}
+
+function updateCpuExecutionNote() {
+  const notes = {
+    auto: 'Dùng cấu hình đã đo nhanh hơn trên máy này. Khi chưa đo, các tác vụ dùng chung mô hình để tiết kiệm RAM; bấm Tự đo cấu hình CPU để so sánh.',
+    shared: 'Các tác vụ dùng chung mô hình để giảm RAM. Tốc độ phụ thuộc giọng và CPU; tự đo trên máy này để so sánh.',
+    process: 'Các tác vụ dùng mô hình riêng và cần thêm RAM. Tự đo trên máy này để so sánh tốc độ với dùng chung mô hình.'
+  };
+  $('cpu-execution-note').textContent = notes[$('cpu-execution').value] || notes.auto;
 }
 
 function populateDeliveryProfiles() {
@@ -345,6 +367,8 @@ async function inspectMachine() {
     if (info.voxcpm_rendering_presets && config) config.voxcpm_rendering_presets = info.voxcpm_rendering_presets;
     if (info.rendering_presets_by_resource && config) config.rendering_presets_by_resource = info.rendering_presets_by_resource;
     if (info.voxcpm_int8_rendering_presets_by_resource && config) config.voxcpm_int8_rendering_presets_by_resource = info.voxcpm_int8_rendering_presets_by_resource;
+    if (info.cpu_execution_rendering_presets && config) config.cpu_execution_rendering_presets = info.cpu_execution_rendering_presets;
+    machineSummary = info;
     const gpuNames = Array.isArray(info.nvidia_gpus) ? info.nvidia_gpus : [];
     const rows = [
       ['Bộ xử lý', info.cpu || 'Chưa xác định'],
@@ -352,7 +376,7 @@ async function inspectMachine() {
       ['Luồng CPU', info.logical_cores || 'Chưa xác định'],
       ['RAM', info.ram_gb == null ? 'Chưa xác định' : `${info.ram_gb} GB`],
       ['GPU NVIDIA', gpuNames.length ? gpuNames.join('; ') : 'Chưa tìm thấy'],
-      ['Tăng tốc GPU cho giọng hỗ trợ', info.pytorch_cuda_available === true ? 'Sẵn sàng' : info.pytorch_cuda_available === false ? 'Chưa sẵn sàng' : 'Chưa xác định']
+      ['CUDA trong runtime ứng dụng', info.pytorch_cuda_available === true ? 'Sẵn sàng' : info.pytorch_cuda_available === false ? 'Chưa sẵn sàng' : 'Chưa xác định']
     ];
     const details = $('machine-details'); details.replaceChildren();
     for (const [label, value] of rows) details.append(node('dt', label), node('dd', String(value)));
@@ -419,11 +443,16 @@ function updateVoice() {
   const ready = voiceReady(voice);
   $('voice-status').className = `voice-status ${ready ? 'ready' : 'missing'}`;
   $('voice-status-title').textContent = !voice ? 'Chưa có giọng phù hợp' : ready ? `${engineName(voice)} · Sẵn sàng sử dụng` : `${engineName(voice)} · Cần tải mô hình`;
-  $('voice-status-detail').textContent = !voice ? 'Chọn ngôn ngữ khác hoặc thêm mẫu giọng cá nhân được hỗ trợ.' : ready ? (voice.description || 'Giọng đã có trên máy.') : voiceSetupMessage(voice);
+  let detail = !voice ? 'Chọn ngôn ngữ khác hoặc thêm mẫu giọng cá nhân được hỗ trợ.' : ready ? (voice.description || 'Giọng đã có trên máy.') : voiceSetupMessage(voice);
+  if (ready && ['reference', 'cloned'].includes(voice?.category)) {
+    if (voice.engine === 'vieneu') detail += ' Mẫu giọng dùng Turbo Việt–Anh; dữ liệu giọng được lưu lại sau lần mã hóa đầu để dùng cho các lần tạo tiếp theo.';
+    if (voice.engine === 'voxcpm') detail += ' Mẫu giọng này dùng VoxCPM đa ngôn ngữ, cần nhiều tài nguyên hơn Turbo Việt–Anh.';
+  }
+  $('voice-status-detail').textContent = detail;
   $('generate').disabled = !ready || submitting;
   $('benchmark').disabled = !ready || submitting || !benchmarkSupported(voice);
-  $('calibrate-machine').disabled = !ready || submitting || $('language').value !== 'vi' || !calibrationVoice(voice);
-  $('calibrate-machine').title = calibrationVoice(voice) ? `Đo cấu hình nhiều tác vụ cho giọng ${voice.name} · ${engineName(voice)}.` : 'Tự tối ưu nhiều cấu hình hiện dùng Nano hoặc Turbo tiếng Việt. Với giọng đa ngôn ngữ, dùng Đo giọng đang chọn.';
+  $('calibrate-machine').disabled = !ready || submitting || !benchmarkSupported(voice) || !calibrationVoice(voice);
+  $('calibrate-machine').title = calibrationVoice(voice) ? `Đo cấu hình nhiều tác vụ cho giọng ${voice.name} · ${engineName(voice)}.` : 'Tự tối ưu nhiều cấu hình dùng Nano tiếng Việt hoặc Turbo Việt–Anh. Với giọng đa ngôn ngữ, dùng Đo giọng đang chọn.';
   $('benchmark').title = benchmarkSupported(voice) ? 'Đo bằng giọng, ngôn ngữ và chế độ ưu tiên đang chọn.' : 'Chưa có lời đọc mẫu cho ngôn ngữ này.';
   $('nano-parallel').disabled = !cpuVoice(voice) || submitting;
   for (const option of $('nano-parallel').options) {
@@ -431,6 +460,9 @@ function updateVoice() {
     option.disabled = outsideBudget; option.hidden = outsideBudget;
   }
   $('nano-threads').disabled = !cpuVoice(voice) || submitting;
+  $('cpu-execution-field').hidden = !calibrationVoice(voice);
+  $('cpu-execution').disabled = !calibrationVoice(voice) || submitting;
+  $('maximize-cpu').disabled = !cpuVoice(voice) || submitting;
   $('nano-steps').disabled = voice?.engine !== 'vieneu_nano' || submitting;
   $('voxcpm-steps').disabled = voice?.engine !== 'voxcpm' || submitting;
   $('international-precision').disabled = voice?.engine !== 'voxcpm' || submitting;
@@ -570,7 +602,7 @@ function setOutput(job) {
   }
   $('speed-report').hidden = !done || !report;
   $('speed-report').textContent = report ? formatSpeedReport(report) : '';
-  speedSummary = done ? {version: config?.version, voice: job.voice_name, engine:job.engine, execution_settings:job.execution_settings, render_mode: job.render_mode, speed_report:report, calibration_report:job.calibration_report} : null;
+  speedSummary = done ? {version: config?.version, voice: job.voice_name, engine:job.engine, execution_settings:job.execution_settings, render_mode: job.render_mode, resource_profile:job.resource_profile, cpu_execution:job.cpu_execution, international_precision:job.international_precision, speed_report:report, calibration_report:job.calibration_report} : null;
   $('copy-speed-report').hidden = !done || (!report && !job.calibration_report);
   if (done && job.calibration_report) {
     const selected=job.calibration_report.selected;
@@ -581,7 +613,8 @@ function setOutput(job) {
       api('/api/config').then(fresh => {
         config=fresh;
         const measuredProfile=job.resource_profile || job.calibration_report.resource_profile || 'maximum';
-        if ($('voice').value===job.voice_id && $('render-mode').value===job.render_mode && $('resource-profile').value===measuredProfile) applyRenderMode(job.render_mode, {useSaved: false});
+        const measuredExecution=job.cpu_execution || job.calibration_report.model_memory || 'process';
+        if ($('voice').value===job.voice_id && $('render-mode').value===job.render_mode && $('resource-profile').value===measuredProfile && (!calibrationVoice({engine:job.engine}) || $('cpu-execution').value===measuredExecution)) applyResourceBudget();
       }).catch(error => notify(error.message,true));
     }
   }
@@ -594,6 +627,7 @@ function formatExecutionSettings(job) {
   if (actual) {
     if (cpuVoice({engine}) && Number(actual.workers)>0 && Number(actual.threads)>0) parts.push(`${actual.workers} tác vụ × ${actual.threads} luồng CPU`);
     if (actual.precision) parts.push(String(actual.precision).toUpperCase());
+    if (calibrationVoice({engine}) && actual.model_memory) parts.push(actual.model_memory === 'shared' ? 'Dùng chung mô hình' : 'Các tiến trình riêng');
     if (engine==='vieneu_nano' && actual.nano_steps) parts.push(`${actual.nano_steps} bước`);
     if (engine==='voxcpm' && (actual.voxcpm_steps || actual.inference_steps)) parts.push(`${actual.voxcpm_steps || actual.inference_steps} bước`);
   } else if (activeStatuses.has(job.status) && cpuVoice({engine})) {
@@ -642,6 +676,7 @@ async function generate() {
       render_mode: $('render-mode').value, audio_fit_backend: $('audio-fit-backend').value,
       resource_profile: $('resource-profile').value,
       nano_steps: Number($('nano-steps').value), nano_threads: Number($('nano-threads').value), nano_parallel: Number($('nano-parallel').value),
+      ...(calibrationVoice(voice) ? {cpu_execution: $('cpu-execution').value} : {}),
       ...(voice.engine === 'voxcpm' ? {voxcpm_steps: Number($('voxcpm-steps').value), international_precision: $('international-precision').value} : {})
     });
     setOutput(job); notify('Đã nhận nội dung. Bạn có thể theo dõi bản thu ở bên dưới.');
@@ -663,6 +698,7 @@ async function benchmark() {
       resource_profile: $('resource-profile').value,
       nano_steps: Number($('nano-steps').value), nano_parallel: Number($('nano-parallel').value),
       nano_threads: Number($('nano-threads').value), audio_fit_backend: $('audio-fit-backend').value, quality: $('quality').value,
+      ...(calibrationVoice(voice) ? {cpu_execution: $('cpu-execution').value} : {}),
       ...(voice.engine === 'voxcpm' ? {voxcpm_steps: Number($('voxcpm-steps').value), international_precision: $('international-precision').value} : {})
     });
     setOutput(job);
@@ -869,6 +905,7 @@ async function refreshVoices() {
   populateResourceProfiles();
   if (initial) {
     $('resource-profile').value = resourceProfiles.has(renderPreferences.resource_profile) ? renderPreferences.resource_profile : 'smooth';
+    $('cpu-execution').value = cpuExecutions.has(renderPreferences.cpu_execution) ? renderPreferences.cpu_execution : 'auto';
     $('international-precision').value = renderPreferences.international_precision === 'int8' ? 'int8' : 'fp32';
     updateResourceNote();
   }
@@ -941,6 +978,17 @@ $('resource-profile').addEventListener('change', () => {
   applyResourceBudget();
 });
 $('international-precision').addEventListener('change', applyResourceBudget);
+$('cpu-execution').addEventListener('change', () => {
+  updateCpuExecutionNote();
+  applyResourceBudget();
+});
+$('maximize-cpu').addEventListener('click', () => {
+  $('resource-profile').value = 'maximum';
+  updateResourceNote();
+  applyResourceBudget();
+  const voice = voices.find((item) => item.id === $('voice').value);
+  notify(`Đã giữ giọng ${voice?.name || 'đang chọn'}, số bước và cách căn mốc; áp dụng ngân sách CPU/RAM tối đa. Bấm Đo giọng đang chọn để kiểm tra.`);
+});
 $('optimize-speed').addEventListener('click', () => {
   applyRenderMode('fast', {useSaved: false});
   const voice=voices.find((item)=>item.id===$('voice').value);
@@ -1008,10 +1056,10 @@ $('cue-fit').addEventListener('change', updateFormat);
 
 $('calibrate-machine').addEventListener('click', async () => {
   const voice=voices.find(item=>item.id===$('voice').value);
-  if (submitting || !voiceReady(voice) || !calibrationVoice(voice) || $('language').value !== 'vi')return;
+  if (submitting || !voiceReady(voice) || !calibrationVoice(voice) || !benchmarkSupported(voice))return;
   submitting=true;updateVoice();
   try {
-    const job=await post('/api/calibrate',{voice_id:voice.id,language:$('language').value,render_mode:$('render-mode').value,resource_profile:$('resource-profile').value,delivery:$('delivery').value});
+    const job=await post('/api/calibrate',{voice_id:voice.id,language:$('language').value,render_mode:$('render-mode').value,resource_profile:$('resource-profile').value,cpu_execution:$('cpu-execution').value,quality:$('quality').value,delivery:$('delivery').value});
     setOutput(job);await refreshHistory();
     notify('Đang thử nhiều cấu hình CPU bằng lời đọc thật. Có thể mất vài phút và dùng nhiều CPU/RAM; cấu hình tốt nhất sẽ được lưu. Có thể bấm Dừng tạo.');
     $('output-heading').scrollIntoView({block:'center',behavior:'auto'});
@@ -1019,6 +1067,17 @@ $('calibrate-machine').addEventListener('click', async () => {
   finally {submitting=false;updateVoice();}
 });
 $('copy-speed-report').addEventListener('click', async () => {
-  try {await navigator.clipboard.writeText(JSON.stringify(speedSummary,null,2));notify('Đã sao chép kết quả đo. Bạn có thể dán vào cuộc trò chuyện.');}
+  const button = $('copy-speed-report');
+  const summary = speedSummary;
+  if (!summary) return;
+  button.disabled = true;
+  try {
+    let hardware = machineSummary;
+    try { hardware = await api('/api/system-info?quick=true'); machineSummary = hardware; }
+    catch { /* The measured result can still be copied when diagnostics fail. */ }
+    await navigator.clipboard.writeText(JSON.stringify({...summary, ...(hardware ? {hardware} : {})},null,2));
+    notify('Đã sao chép kết quả đo và thông tin máy hiện có. Bạn có thể dán vào cuộc trò chuyện.');
+  }
   catch {notify('Chưa sao chép được. Hãy chọn và sao chép nội dung kết quả đo đang hiện.',true);}
+  finally {button.disabled = false;}
 });
