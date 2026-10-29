@@ -1,0 +1,72 @@
+name: Prepare public OmniVoice native model
+on:
+  workflow_dispatch:
+  push:
+    branches: [voice-studio-multilingual-v1.11.0]
+    paths: ['.github/workflows/voice-studio-omnivoice-model.yml']
+permissions:
+  contents: write
+concurrency:
+  group: voice-studio-omnivoice-model
+  cancel-in-progress: false
+jobs:
+  model:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download and verify the public model
+        shell: python
+        run: |
+          import hashlib, json, os, pathlib, urllib.request
+          repo = 'audio-cpp/audio.cpp-gguf'
+          folder = 'OmniVoice-GGUF'
+          filename = 'omnivoice-q8_0.gguf'
+          headers = {'User-Agent': 'Voice-Studio-Model-Preparation'}
+          def get_json(url):
+              with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=60) as source:
+                  return json.load(source)
+          model = get_json('https://huggingface.co/api/models/' + repo)
+          revision = model['sha']
+          entries = get_json('https://huggingface.co/api/models/' + repo + '/tree/' + revision + '/' + folder + '?expand=true')
+          entry = next(item for item in entries if item['path'] == folder + '/' + filename)
+          expected = entry['lfs'].get('sha256') or entry['lfs'].get('oid')
+          size = entry['size']
+          assert len(expected) == 64 and 0 < size < 8 * 1024**3
+          url = 'https://huggingface.co/' + repo + '/resolve/' + revision + '/' + folder + '/' + filename
+          metadata = {'repository': repo, 'revision': revision, 'filename': filename, 'size': size, 'sha256': expected, 'source_url': url}
+          print('::notice title=OmniVoice model metadata::' + json.dumps(metadata), flush=True)
+          out = pathlib.Path(os.environ['RUNNER_TEMP']) / 'omnivoice-model'
+          out.mkdir()
+          digest, count = hashlib.sha256(), 0
+          destination = out / filename
+          with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=120) as source, destination.open('wb') as target:
+              while chunk := source.read(8 * 1024**2):
+                  count += len(chunk)
+                  if count > size: raise RuntimeError('Model exceeds its published size')
+                  digest.update(chunk)
+                  target.write(chunk)
+          assert count == size and digest.hexdigest() == expected, 'Model checksum mismatch'
+          with destination.open('rb') as source: assert source.read(4) == b'GGUF'
+          metadata.update(download_verified=True, private_reference_audio_included=False, speech_performance_tested=False, target_30x_claimed=False)
+          if size >= 1900000000:
+              metadata['parts'] = []
+              with destination.open('rb') as source:
+                  index = 0
+                  while block := source.read(1024**3):
+                      name = filename + '.part' + str(index)
+                      (out / name).write_bytes(block)
+                      metadata['parts'].append({'name': name, 'size': len(block), 'sha256': hashlib.sha256(block).hexdigest()})
+                      index += 1
+              destination.unlink()
+          (out / 'OmniVoice-Model.json').write_text(json.dumps(metadata, indent=2) + '\n')
+          (out / 'SOURCE-AND-LICENSE.txt').write_text('Native GGUF model source: ' + url + '\nOriginal model: https://huggingface.co/k2-fsa/OmniVoice\nOriginal project: https://github.com/k2-fsa/OmniVoice\nOriginal license: Apache-2.0\nNo private references or generated user speech are included.\nModel redistribution does not establish any synthesis speed.\n')
+      - name: Publish checksum-verified public weights
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "omnivoice-model-${{ github.run_id }}" "${{ runner.temp }}/omnivoice-model/"* --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "OmniVoice native model with source checksums" --notes "Public Q8 model and source metadata only. No application or private voice samples. Synthesis performance is not claimed by this model download." --latest=false
