@@ -134,7 +134,8 @@ def copy_source(root):
     shutil.copytree(SOURCE/'app/static', app/'static')
     for name in ('HUONG_DAN_CAN_MOC.txt', 'DOC_TRUOC.md', 'THIRD_PARTY_NOTICES.md',
                  'requirements-runtime.txt', 'requirements-qwen.txt',
-                 'requirements-international.txt', 'TAI_GIONG_DA_NGON_NGU.bat'):
+                 'requirements-international.txt', 'TAI_GIONG_DA_NGON_NGU.bat',
+                 'TAI_GIONG_DA_NGON_NGU_NHANH.bat', 'requirements-native-asr.txt'):
         shutil.copy2(SOURCE/name, root/name)
     guide=root/'HUONG_DAN_CAN_MOC.txt'
     guide.write_text(guide.read_text(encoding='utf-8').replace('Chạy CAI_DAT.bat rồi MO_TOOL.bat theo DOC_TRUOC.md.', 'Bản Portable: mở MO_TOOL.bat; không cần cài Python hay tải model.'), encoding='utf-8')

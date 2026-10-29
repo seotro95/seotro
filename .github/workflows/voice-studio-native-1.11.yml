@@ -1,0 +1,172 @@
+name: Voice Studio 1.11 - Native multilingual experiment
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [voice-studio-multilingual-v1.11.0]
+    paths:
+      - '.github/workflows/voice-studio-native-1.11.yml'
+      - 'voice-studio-rieng-portable/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-studio-native-1.11-windows
+  cancel-in-progress: true
+
+env:
+  PYTHONUTF8: '1'
+  HF_HUB_DISABLE_XET: '1'
+
+jobs:
+  native:
+    runs-on: windows-2022
+    timeout-minutes: 70
+    strategy:
+      fail-fast: false
+      matrix:
+        device: [cpu, cuda]
+    # A CUDA toolkit or compiler failure must not hide the working CPU build.
+    # GPU inference is not claimed on GitHub's CPU-only hosted Windows runner.
+    continue-on-error: ${{ matrix.device == 'cuda' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+      - name: Install Pascal-compatible CUDA 12.6 toolkit
+        if: matrix.device == 'cuda'
+        uses: Jimver/cuda-toolkit@v0.2.24
+        with:
+          cuda: '12.6.3'
+          method: network
+          sub-packages: '["nvcc", "cudart", "cudart_dev", "cublas", "cublas_dev", "thrust", "visual_studio_integration"]'
+          use-github-cache: true
+      - name: Fetch the pinned native source
+        shell: pwsh
+        run: |
+          git init "${{ runner.temp }}/audio.cpp"
+          git -C "${{ runner.temp }}/audio.cpp" remote add origin https://github.com/0xShug0/audio.cpp.git
+          git -C "${{ runner.temp }}/audio.cpp" fetch --depth=1 origin 2597b300f5961999387c84c65f2e8e79c088a571
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          git -C "${{ runner.temp }}/audio.cpp" checkout --detach FETCH_HEAD
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Build minimal native library and stage verified redistributables
+        shell: pwsh
+        run: |
+          python voice-studio-rieng-portable/packaging/build_native.py --source "${{ runner.temp }}/audio.cpp" --build "${{ runner.temp }}/native-build" --output "${{ runner.temp }}/runtime-native/${{ matrix.device }}" --device '${{ matrix.device }}' --jobs 2
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Stage isolated offline reference-transcription runtime
+        if: matrix.device == 'cpu'
+        shell: pwsh
+        run: |
+          python -m pip --isolated install --disable-pip-version-check --only-binary=:all: --no-compile --target "${{ runner.temp }}/runtime-native/asr" -r voice-studio-rieng-portable/requirements-native-asr.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $env:VOICE_STUDIO_ASR_TARGET = "${{ runner.temp }}/runtime-native/asr"
+          @'
+          import hashlib, importlib.metadata, json, os, pathlib, sys
+          root = pathlib.Path(os.environ['VOICE_STUDIO_ASR_TARGET'])
+          sys.path.insert(0, str(root))
+          import faster_whisper
+          packages = {dist.metadata['Name']: dist.version for dist in importlib.metadata.distributions(path=[str(root)])}
+          assert packages['faster-whisper'] == '1.2.1'
+          files = {}
+          for path in root.rglob('*'):
+              if path.is_file() and '__pycache__' not in path.parts:
+                  with path.open('rb') as source:
+                      files[path.relative_to(root).as_posix()] = hashlib.file_digest(source, 'sha256').hexdigest()
+          (root / 'native-asr-runtime.json').write_text(json.dumps({'schema': 1, 'python': '3.12', 'isolated_target': True, 'packages': packages, 'sha256': files}, indent=2) + '\n')
+          '@ | python -
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: voice-native-${{ matrix.device }}
+          path: ${{ runner.temp }}/runtime-native/${{ matrix.device }}
+          retention-days: 14
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: matrix.device == 'cpu'
+        with:
+          name: voice-native-asr
+          path: ${{ runner.temp }}/runtime-native/asr
+          retention-days: 14
+          if-no-files-found: error
+
+  package:
+    needs: native
+    runs-on: windows-2022
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: voice-native-*
+          path: ${{ runner.temp }}/native-artifacts
+      - name: Arrange available native runtimes
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force "${{ runner.temp }}/runtime-native" | Out-Null
+          Copy-Item -Recurse "${{ runner.temp }}/native-artifacts/voice-native-cpu" "${{ runner.temp }}/runtime-native/cpu"
+          if (Test-Path "${{ runner.temp }}/native-artifacts/voice-native-cuda") {
+            Copy-Item -Recurse "${{ runner.temp }}/native-artifacts/voice-native-cuda" "${{ runner.temp }}/runtime-native/cuda"
+          }
+          Copy-Item -Recurse "${{ runner.temp }}/native-artifacts/voice-native-asr" "${{ runner.temp }}/runtime-native/asr"
+      - name: Download checksum-pinned public Windows 1.10 base
+        shell: python
+        run: |
+          import hashlib, os, pathlib, shutil, urllib.request
+          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'Voice-Studio-1.10-base.zip'
+          url = 'https://github.com/seotro95/seotro/releases/download/voice-studio-reference-1.10-40852923612/Voice-Studio-Rieng-1.10.0-19-Giong-GitHub-Windows-x64.zip'
+          with urllib.request.urlopen(url, timeout=120) as source, target.open('wb') as output:
+              shutil.copyfileobj(source, output, 8 * 1024**2)
+          with target.open('rb') as source:
+              assert hashlib.file_digest(source, 'sha256').hexdigest() == '65446c1a1799699b3aadad616461e97cf66c049597c7ae9a5cbf3887f20312f6'
+      - name: Stage current source over the verified base
+        shell: pwsh
+        run: |
+          python voice-studio-rieng-portable/packaging/build_native_bundle.py stage --base-archive "${{ runner.temp }}/Voice-Studio-1.10-base.zip" --native-root "${{ runner.temp }}/runtime-native" --root "${{ runner.temp }}/portable"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Prepare a separate verified model for real Windows speech checks
+        shell: pwsh
+        run: |
+          & "${{ runner.temp }}/portable/runtime/python.exe" -s -X utf8 "${{ runner.temp }}/portable/app/prepare_native.py" --data-dir "${{ runner.temp }}/native-qa-data"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          git init "${{ runner.temp }}/audio.cpp"
+          git -C "${{ runner.temp }}/audio.cpp" remote add origin https://github.com/0xShug0/audio.cpp.git
+          git -C "${{ runner.temp }}/audio.cpp" fetch --depth=1 origin 2597b300f5961999387c84c65f2e8e79c088a571
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          git -C "${{ runner.temp }}/audio.cpp" checkout --detach FETCH_HEAD
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Verify real French and Japanese PCM with a public reference
+        shell: pwsh
+        run: |
+          & "${{ runner.temp }}/portable/runtime/python.exe" -s -X utf8 voice-studio-rieng-portable/packaging/smoke_native.py --app-dir "${{ runner.temp }}/portable/app" --data-dir "${{ runner.temp }}/native-qa-data" --reference "${{ runner.temp }}/audio.cpp/tests/omnivoice/assets/ref_audio_01.wav" --reference-text "${{ runner.temp }}/audio.cpp/tests/omnivoice/assets/ref_text_01.txt" --asr-reference "${{ runner.temp }}/audio.cpp/assets/resources/b.wav" --output "${{ runner.temp }}/native-qa/Windows-Native-Short-Speech.qa.json"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Package a full portable archive and a data-preserving update
+        shell: pwsh
+        run: |
+          python voice-studio-rieng-portable/packaging/build_native_bundle.py package --root "${{ runner.temp }}/portable" --output "${{ runner.temp }}/downloads"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Copy-Item "${{ runner.temp }}/native-qa/Windows-Native-Short-Speech.qa.json" "${{ runner.temp }}/downloads/Windows-Native-Short-Speech.qa.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Voice-Studio-1.11-Native-Windows-Verified
+          path: ${{ runner.temp }}/downloads/*
+          retention-days: 14
+          if-no-files-found: error
+      - name: Publish the verified experimental package
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "voice-studio-native-1.11-${{ github.run_id }}" "${{ runner.temp }}/downloads/"* --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Voice Studio 1.11 - native multilingual experiment" --prerelease --latest=false --notes "Full Windows portable and an update for existing 1.10 installations. Native CPU synthesis was checked with public French/Japanese short prompts; QA is included. Optional CUDA library is built with CUDA 12.6 and sm_61 for Pascal compatibility when available. GTX 1060 performance, identical voice timbre, an hour-long render and 30x real-time speed are not established. Run TAI_GIONG_DA_NGON_NGU_NHANH.bat once to download the checksum-verified 1.35 GB OmniVoice model, then select OmniVoice and measure/listen to the selected voice. Model weights are CC-BY-NC; embedded audio tokenizer has the Boson Higgs Audio 2 Community License. Private reference recordings remain outside the public release."
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

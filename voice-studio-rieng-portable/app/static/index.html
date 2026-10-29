@@ -41,6 +41,17 @@
           <label for="language">Ngôn ngữ</label><select id="language" disabled><option>Đang tải ngôn ngữ…</option></select>
           <label for="voice">Giọng đọc</label><select id="voice" disabled><option>Đang tải giọng…</option></select>
           <div id="voice-status" class="voice-status"><span class="status-dot" aria-hidden="true"></span><div><strong id="voice-status-title">Đang kiểm tra</strong><p id="voice-status-detail">Giọng AI cần mô hình đã tải trên máy.</p></div></div>
+          <div id="international-backend-field" hidden>
+            <label for="international-backend">Bộ đọc giọng đa ngôn ngữ</label>
+            <select id="international-backend" aria-describedby="international-backend-note"><option value="voxcpm" selected>VoxCPM · Bộ đọc hiện tại</option><option value="omnivoice">OmniVoice Q8 · Thử nghiệm</option></select>
+            <p id="international-backend-note" class="field-note">Giữ tệp mẫu giọng và ngôn ngữ đã chọn. Đổi bộ đọc có thể thay đổi âm sắc và phát âm; nghe mẫu, đo tốc độ trước khi tạo bản dài.</p>
+            <div id="native-multilingual-field" hidden>
+              <label for="international-device">Thiết bị chạy OmniVoice</label><select id="international-device" aria-describedby="international-device-note"><option value="cpu" selected>CPU</option><option value="cuda">GPU NVIDIA · CUDA</option></select>
+              <p id="international-device-note" class="field-note">CUDA cần bộ chạy GPU và trình điều khiển NVIDIA phù hợp. Nếu không chạy được, tool báo lỗi và giữ lựa chọn của bạn; chọn CPU nếu muốn thử lại trên CPU.</p>
+              <label for="omnivoice-steps">OmniVoice · Số bước tạo giọng</label><select id="omnivoice-steps"><option value="8">8 bước · Ưu tiên tốc độ</option><option value="16" selected>16 bước · Cân bằng</option><option value="32">32 bước · Ưu tiên chất lượng</option></select>
+              <p class="field-note">Một mô hình được dùng lại giữa các câu. Ít bước hơn có thể giảm độ rõ tiếng; kết quả đo trên máy này mới cho biết tốc độ thực tế.</p>
+            </div>
+          </div>
           <div class="field-row"><div><label for="delivery">Thể loại &amp; cách đọc</label><select id="delivery" aria-describedby="delivery-note"><option value="natural">Đọc tự nhiên</option><option value="story">Kể chuyện</option><option value="news">Bản tin / review phim</option><option value="calm">Chậm rãi</option><option value="energetic">Năng động</option></select></div><div><label for="format">Định dạng âm thanh</label><select id="format"><option value="wav">WAV · Chất lượng gốc</option><option value="mp3">MP3 · Dễ chia sẻ</option></select></div></div>
           <p id="delivery-note" class="field-note">Giữ nhịp đọc mặc định, nghỉ nhẹ giữa câu. Sắc thái phụ thuộc giọng có sẵn hoặc mẫu thu cá nhân.</p>
           <button type="button" id="suggest-voice" class="text-button genre-voice-button" disabled>Chọn giọng gợi ý cho thể loại</button>

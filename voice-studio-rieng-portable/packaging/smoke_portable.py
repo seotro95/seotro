@@ -100,7 +100,7 @@ def main():
     data = app/'.data'
     with TestClient(studio.app) as client:
         config = client.get('/api/config').json()
-        assert config['edition'] == 'standalone-voice' and config['version'] == '1.10.0'
+        assert config['edition'] == 'standalone-voice' and config['version'] == '1.11.0'
         assert config['nano_ready'] and config['max_characters'] == 1000000
         assert len(config['delivery_profiles']) == 10
         assert set(config['rendering_presets']) == {'fast', 'balanced', 'quality'}

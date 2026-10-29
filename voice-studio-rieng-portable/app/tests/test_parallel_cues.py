@@ -3,7 +3,6 @@ import importlib
 import json
 import pickle
 import threading
-import time
 import wave
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 
@@ -134,10 +133,13 @@ def test_out_of_order_preparation_cannot_reorder_spoken_cues(renderer, monkeypat
     worker, data, _ = renderer
     original = worker.prepare_cue
     finished = []
+    second_finished = threading.Event()
     def delayed(settings, cue_index, *args):
-        if cue_index == 0:time.sleep(.08)
+        if cue_index == 0:
+            assert second_finished.wait(timeout=10), 'The second cue did not finish concurrently'
         result = original(settings, cue_index, *args)
         finished.append(cue_index)
+        if cue_index == 1:second_finished.set()
         return result
     monkeypatch.setattr(worker, 'prepare_cue', delayed)
     worker.render(job())

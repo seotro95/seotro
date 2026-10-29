@@ -1,6 +1,20 @@
-# Voice Studio Riêng 1.9.0 · Windows 10/11 x64 Portable
+# Voice Studio Riêng 1.11.0 · Windows 10/11 x64 Portable
 
 Giải nén **toàn bộ ZIP** vào thư mục có quyền ghi, ví dụ `D:/VoiceStudio`, rồi mở **MO_TOOL.bat**. Giữ cửa sổ lệnh mở trong khi sử dụng; dùng Ctrl+C để tắt. Bản Portable đã có Python, FFmpeg, Nano và Turbo, dùng cục bộ với các giọng đi kèm.
+
+## Bộ đọc đa ngôn ngữ mới
+
+Với các mẫu Pháp, Nhật, Hàn, Nga, Tây Ban Nha, Thái…, có thể chọn **OmniVoice Q8 · Thử nghiệm** để dùng bộ chạy native thay cho VoxCPM trên CPU. Mẫu giọng và ngôn ngữ đã chọn được giữ; mô hình khác có thể thay đổi âm sắc và phát âm. Turbo Việt–Anh tiếp tục dùng bộ đọc hiện tại.
+
+1. Đóng tool, chạy **TAI_GIONG_DA_NGON_NGU_NHANH.bat** một lần khi có Internet. Bộ tải kiểm tra SHA256 của OmniVoice khoảng 1,35 GB và mô hình nhận dạng mẫu khoảng 145 MB.
+2. Mở lại **MO_TOOL.bat**, chọn giọng/ngôn ngữ, rồi chọn bộ đọc **OmniVoice**. Chọn **CUDA** nếu gói có bộ chạy GPU và trình điều khiển NVIDIA hỗ trợ CUDA 12. Bộ chạy CUDA có mã `sm_61` cho GTX 1060; tốc độ trên card này cần đo thực tế.
+3. Bấm **Đo giọng đang chọn**, nghe mẫu và xem báo cáo. Thử 16 bước trước; 8 bước có thể nhanh hơn nhưng giảm chất lượng. Chọn CUDA mà không khởi động được sẽ báo lỗi để bạn tự chọn thiết bị khác.
+
+OmniVoice giữ một mô hình để dùng lại giữa các câu và mẫu giọng, tránh nhân bản trọng số trong RAM/VRAM. Nếu mẫu chưa có lời chép, tool nhận dạng một lần bằng Whisper trên CPU, lưu kết quả cục bộ rồi dùng lại; lần đầu sẽ lâu hơn. Không gửi bản thu riêng lên mạng để nhận dạng. Bản chép tự động có thể có sai sót, nên cần nghe kiểm tra trước khi tạo bản dài.
+
+Khi nâng cấp từ 1.10, giải nén bản đầy đủ vào thư mục mới rồi chép **app/.data**, **runtime-international** và **app/voice-library** từ bản cũ, hoặc dùng ZIP cập nhật trên một bản sao của thư mục cũ. Bộ cài 19 giọng vẫn dùng mật khẩu đã có. Đóng tool trước khi sao chép. Bản cập nhật không chứa `.data` hay thư viện mẫu của bạn.
+
+Chưa có số đo chứng minh mọi giọng nhanh bằng Turbo hoặc tạo một giờ lời đọc trong hai phút. Các kết quả CPU dưới đây là số đo lịch sử của các bản trước. Trọng số OmniVoice dùng CC-BY-NC; bộ mã hóa âm thanh dùng giấy phép Boson riêng, khác với giấy phép mã nguồn. Chi tiết nguồn và điều khoản nằm trong `runtime-native` và thư mục mô hình sau khi cài.
 
 ## Nhập lời và khớp video
 

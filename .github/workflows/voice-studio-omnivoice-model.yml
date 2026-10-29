@@ -63,7 +63,7 @@ jobs:
                       index += 1
               destination.unlink()
           (out / 'OmniVoice-Model.json').write_text(json.dumps(metadata, indent=2) + '\n')
-          (out / 'SOURCE-AND-LICENSE.txt').write_text('Native GGUF model source: ' + url + '\nOriginal model: https://huggingface.co/k2-fsa/OmniVoice\nOriginal project: https://github.com/k2-fsa/OmniVoice\nOriginal license: Apache-2.0\nNo private references or generated user speech are included.\nModel redistribution does not establish any synthesis speed.\n')
+          (out / 'SOURCE-AND-LICENSE.txt').write_text('Native GGUF model source: ' + url + '\nOriginal model: https://huggingface.co/k2-fsa/OmniVoice\nOriginal project: https://github.com/k2-fsa/OmniVoice\nCode license: Apache-2.0\nModel weights: CC-BY-NC; see the upstream model card.\nEmbedded audio tokenizer: https://huggingface.co/bosonai/higgs-audio-v2-tokenizer ; Boson Higgs Audio 2 Community License.\nNo private references or generated user speech are included.\nModel redistribution does not establish any synthesis speed.\n')
       - name: Publish checksum-verified public weights
         shell: bash
         env:

@@ -110,7 +110,7 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
 
 
-app = FastAPI(title='Voice Studio Riêng', version='1.10.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio Riêng', version='1.11.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 @app.exception_handler(RequestValidationError)
@@ -252,10 +252,14 @@ def resource_config():
 
 def _config_values():
     from calibration import BENCHMARK_LANGUAGES
+    from fast_multilingual import is_ready, cuda_available
     reference_languages={language for voice in catalog_voices() for language in voice['languages']}
     if model_ready('voxcpm'):reference_languages.add('th')
     return {
         'version': app.version,
+        'native_multilingual_ready': is_ready(DATA),
+        'native_multilingual_cpu_available': is_ready(DATA,device='cpu'),
+        'native_multilingual_cuda_available': cuda_available(DATA),
         'rendering_presets': effective_rendering_presets(),
         'turbo_rendering_presets': effective_rendering_presets('vieneu'),
         'voxcpm_rendering_presets': effective_rendering_presets('voxcpm'),
@@ -285,12 +289,18 @@ def voices():
     entries=[{**voice,'engine':voice.get('engine','vieneu' if voice.get('languages',['vi'])[0]=='vi' else 'qwen_clone')} for voice in entries]
     output=[]
     for voice in entries:
-        ready=model_ready(voice['engine']) and (voice.get('has_sample',True) if voice.get('category')=='reference' else True)
+        has_sample=voice.get('has_sample',True) if voice.get('category')=='reference' else True
+        readiness={}
+        ready=model_ready(voice['engine']) and has_sample
+        if voice['engine']=='voxcpm':
+            from fast_multilingual import is_ready
+            readiness={'ready_voxcpm':ready,'ready_native':is_ready(DATA) and has_sample}
+            ready=ready or readiness['ready_native']
         reason=voice.get('missing_reason') if voice.get('has_sample') is False else None
         if not ready and not reason:
             reason=('Chạy TAI_GIONG_DA_NGON_NGU.bat một lần để tải bộ tạo giọng cho các mẫu quốc tế, kể cả tiếng Thái.'
                     if voice['engine']=='voxcpm' else 'Mô hình của giọng này chưa được chuẩn bị trên máy.')
-        output.append({**voice,'native_language':native_language(voice),'ready':ready,'missing_reason':reason})
+        output.append({**voice,**readiness,'native_language':native_language(voice),'ready':ready,'missing_reason':reason})
     return {'voices':output}
 
 
@@ -304,7 +314,7 @@ def model_ready(engine):
     if engine=='voxcpm':
         from voxcpm_backend import runtime_python,prepared_model
         try:return runtime_python().is_file() and prepared_model(DATA).is_dir()
-        except (OSError,ValueError,KeyError):return False
+        except (OSError,ValueError,KeyError,TypeError,AttributeError):return False
     return marker.is_file()
 
 
@@ -379,6 +389,9 @@ class Speech(BaseModel):
     nano_steps: int = Field(default=8, ge=4, le=16)
     voxcpm_steps: int = Field(default=8, ge=4, le=10)
     international_precision: str = Field(default='fp32',pattern='^(fp32|int8)$')
+    international_backend: str = Field(default='voxcpm',pattern='^(voxcpm|omnivoice)$')
+    international_device: str = Field(default='cpu',pattern='^(cpu|cuda)$')
+    omnivoice_steps: int = Field(default=16,ge=8,le=32)
     resource_profile: str = Field(default='smooth',pattern='^(maximum|smooth|light)$')
     cpu_execution: str = Field(default='auto',pattern='^(auto|shared|process)$')
     render_mode: str = Field(default='balanced', pattern='^(fast|balanced|quality)$')
@@ -505,22 +518,42 @@ def _submit_speech(body: Speech,calibration=False):
     if not voice or body.language not in voice['languages']:
         raise HTTPException(422, 'Chọn giọng hỗ trợ ngôn ngữ này. Giọng cá nhân chỉ dùng với ngôn ngữ đã đăng ký.')
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
+    native=engine=='voxcpm' and body.international_backend=='omnivoice'
+    if body.international_backend!='voxcpm' and engine!='voxcpm':
+        raise HTTPException(422,'Bộ đọc đa ngôn ngữ chỉ áp dụng cho mẫu giọng quốc tế.')
+    if body.international_device!='cpu' and not native:
+        raise HTTPException(422,'Chọn OmniVoice để dùng bộ chạy CUDA đa ngôn ngữ.')
+    if native and body.omnivoice_steps not in {8,16,32}:
+        raise HTTPException(422,'Chọn OmniVoice 8, 16 hoặc 32 bước.')
+    if native and body.international_precision!='fp32':
+        raise HTTPException(422,'OmniVoice dùng mô hình Q8 có sẵn; chọn bộ nhớ Tiêu chuẩn trước khi đổi bộ đọc.')
     if body.quality == 'auto':
         body.quality = 'fast' if engine != 'vieneu' or (supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists()) else 'standard'
     precision=body.international_precision if engine=='voxcpm' else ('int8' if body.quality=='fast' and engine=='vieneu' else 'fp32')
     if engine not in {'vieneu_nano','vieneu'} and body.cpu_execution!='auto':
         raise HTTPException(422,'Chọn cách chạy CPU riêng cho giọng Nano hoặc Turbo.')
-    model_memory=choose_execution_model(engine,body.resource_profile,body.cpu_execution,resident_model(),precision,
-                                        data=DATA,render_mode=body.render_mode)
-    presets=effective_rendering_presets(engine,body.resource_profile,precision,body.cpu_execution)
-    preset=presets[body.render_mode]
-    for field,value in preset.items():
-        if field not in body.model_fields_set:setattr(body,field,value)
+    if native:
+        # One warm native session avoids replicating model weights, particularly
+        # on the GTX 1060's 6 GB. VoxCPM's FP32 RAM budgets do not apply to GGUF.
+        model_memory='native'
+        body.nano_parallel=1
+        if 'nano_threads' not in body.model_fields_set:
+            body.nano_threads=min(8,os.cpu_count() or 1,2 if body.resource_profile=='light' else 4)
+        if body.resource_profile=='light':body.nano_threads=min(body.nano_threads,2)
+        if 'omnivoice_steps' not in body.model_fields_set:
+            body.omnivoice_steps={'fast':8,'balanced':16,'quality':32}[body.render_mode]
+    else:
+        model_memory=choose_execution_model(engine,body.resource_profile,body.cpu_execution,resident_model(),precision,
+                                            data=DATA,render_mode=body.render_mode)
+        presets=effective_rendering_presets(engine,body.resource_profile,precision,body.cpu_execution)
+        preset=presets[body.render_mode]
+        for field,value in preset.items():
+            if field not in body.model_fields_set:setattr(body,field,value)
     if body.nano_steps not in {4,8,16}:raise HTTPException(422,'Chọn Nano 4, 8 hoặc 16 bước.')
     if engine=='voxcpm':
         if body.voxcpm_steps not in {4,8,10}:raise HTTPException(422,'Chọn bộ đọc quốc tế 4, 8 hoặc 10 bước.')
     elif body.international_precision!='fp32':raise HTTPException(422,'INT8 quốc tế chỉ dùng với bộ giọng đa ngôn ngữ.')
-    if engine in {'vieneu_nano','vieneu','voxcpm'}:
+    if engine in {'vieneu_nano','vieneu','voxcpm'} and not native:
         limits=rendering_limits(engine,resident=resident_model(),resource_profile=body.resource_profile,precision=precision,execution_model=model_memory)
         if engine=='voxcpm' and precision=='int8' and limits.get('memory_sufficient') is False:
             raise HTTPException(503,'INT8 quốc tế cần khoảng 24 GB RAM khả dụng khi nạp. Chọn FP32 hoặc giải phóng RAM rồi thử lại.')
@@ -534,7 +567,11 @@ def _submit_speech(body: Speech,calibration=False):
         raise HTTPException(422, str(exc)) from None
     if voice.get('category')=='reference' and not voice.get('has_sample'):
         raise HTTPException(503,'Tệp mẫu của giọng mặc định đang thiếu hoặc không hợp lệ. Cài lại bộ mẫu riêng.')
-    if not model_ready(engine):
+    if native:
+        from fast_multilingual import is_ready
+        if not is_ready(DATA,device=body.international_device):
+            raise HTTPException(503,'Chạy TAI_GIONG_DA_NGON_NGU_NHANH.bat để chuẩn bị OmniVoice và bộ chạy đã chọn. CUDA cần bản cài GPU tương thích với máy.')
+    elif not model_ready(engine):
         raise HTTPException(503,'Chạy TAI_GIONG_DA_NGON_NGU.bat một lần để chuẩn bị các giọng quốc tế mới.' if engine=='voxcpm' else f'Mô hình {engine} chưa sẵn sàng. Chạy lệnh tải mô hình trong hướng dẫn cài đặt.')
     if calibration and engine not in {'vieneu_nano','vieneu'}:raise HTTPException(422,'Chọn giọng Nano hoặc Turbo để đo và tối ưu CPU.')
     try:
@@ -776,6 +813,9 @@ class BenchmarkRequest(BaseModel):
     resource_profile: str = Field(default='smooth',pattern='^(maximum|smooth|light)$')
     cpu_execution: str = Field(default='auto',pattern='^(auto|shared|process)$')
     international_precision: str = Field(default='fp32',pattern='^(fp32|int8)$')
+    international_backend: str = Field(default='voxcpm',pattern='^(voxcpm|omnivoice)$')
+    international_device: str = Field(default='cpu',pattern='^(cpu|cuda)$')
+    omnivoice_steps: int | None = Field(default=None,ge=8,le=32)
     nano_parallel: int | None = Field(default=None, ge=1, le=32)
     nano_threads: int | None = Field(default=None, ge=1, le=8)
     audio_fit_backend: str | None = Field(default=None, pattern='^(wsola|ffmpeg)$')
@@ -790,7 +830,8 @@ def benchmark(body: BenchmarkRequest):
     if not voice or body.language not in voice['languages'] or body.language not in BENCHMARK_LANGUAGES:
         raise HTTPException(422,'Chọn giọng và ngôn ngữ hỗ trợ mẫu đo.')
     if engine not in {'vieneu_nano','vieneu','voxcpm'}:raise HTTPException(422,'Đo tốc độ hiện hỗ trợ Nano, Turbo và bộ giọng mẫu đa ngôn ngữ.')
-    workers=body.nano_parallel or effective_rendering_presets(engine,body.resource_profile,body.international_precision if engine=='voxcpm' else 'fp32',body.cpu_execution)[body.render_mode]['nano_parallel']
+    native=engine=='voxcpm' and body.international_backend=='omnivoice'
+    workers=1 if native else body.nano_parallel or effective_rendering_presets(engine,body.resource_profile,body.international_precision if engine=='voxcpm' else 'fp32',body.cpu_execution)[body.render_mode]['nano_parallel']
     text=benchmark_sample_text(body.language,workers,engine)
     settings=body.model_dump(exclude_none=True)
     payload=Speech(text=text,**settings,paragraph_pause=0,format='wav')
