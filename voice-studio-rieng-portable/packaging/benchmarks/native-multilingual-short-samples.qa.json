@@ -1,0 +1,207 @@
+{
+  "schema": 1,
+  "platform": "Linux x86_64",
+  "scheduled_cpu_quota": 3,
+  "model_repository": "audio-cpp/audio.cpp-gguf",
+  "model_revision": "874fcb41ececda20bcbc0782d6b4ea7f7d069ea8",
+  "model_sha256": "0e5a721edd1b08d9067ef66f40ded609a6b14f5a8445c703f9869736cabd350a",
+  "device": "cpu",
+  "precision": "q8_0",
+  "private_reference_audio_used": false,
+  "gpu_tested": false,
+  "gtx1060_tested": false,
+  "actual_hour_generated": false,
+  "target_30x_established": false,
+  "human_pronunciation_reviewed": false,
+  "recognizer": {
+    "repository": "Systran/faster-whisper-small",
+    "revision": "536b0662742c02347bc0e980a01041f333bce120",
+    "device": "cpu",
+    "compute_type": "int8",
+    "limits": "Automatic word recognition does not establish speaker similarity or subjective pronunciation quality. Character similarity is punctuation/space-insensitive.",
+    "license": "MIT"
+  },
+  "speech_variants": [
+    {
+      "id": "french8",
+      "reference_language": "bn",
+      "output_language": "fr",
+      "steps": 8,
+      "processing_seconds": 75.2409,
+      "audio_seconds": 4.36,
+      "realtime_multiplier": 0.05795,
+      "expected_text": "Bonjour, nous testons une voix française avec le nouveau moteur.",
+      "asr_transcript": "Ok, bonjour, nous testons une voix française avec le nouveau moteur...",
+      "normalized_character_similarity": 0.9815,
+      "valid_pcm": true,
+      "word_check_passed": true,
+      "reference_source": "bengali-omnivoice-fixture",
+      "timing_scope": "CLI-reported request.wall_ms"
+    },
+    {
+      "id": "japanese16",
+      "reference_language": "bn",
+      "output_language": "ja",
+      "steps": 16,
+      "processing_seconds": 165.678,
+      "audio_seconds": 4.4,
+      "realtime_multiplier": 0.02656,
+      "expected_text": "こんにちは。新しい音声エンジンの日本語テストです。",
+      "asr_transcript": "こんにちは 新しい音声演じのニョムデストです",
+      "normalized_character_similarity": 0.6818,
+      "valid_pcm": true,
+      "word_check_passed": false,
+      "reference_source": "bengali-omnivoice-fixture",
+      "timing_scope": "CLI-reported request.wall_ms"
+    },
+    {
+      "id": "french32",
+      "reference_language": "bn",
+      "output_language": "fr",
+      "steps": 32,
+      "processing_seconds": 256.534,
+      "audio_seconds": 4.36,
+      "realtime_multiplier": 0.017,
+      "expected_text": "Bonjour, nous testons une voix française avec le nouveau moteur.",
+      "asr_transcript": "Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "normalized_character_similarity": 0.0,
+      "valid_pcm": true,
+      "word_check_passed": false,
+      "reference_source": "bengali-omnivoice-fixture",
+      "second_recognizer": {
+        "repository": "Systran/faster-whisper-base",
+        "revision": "ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66",
+        "asr_transcript": "Ahhhhhhhhhhhhhhh",
+        "normalized_character_similarity": 0.029
+      },
+      "observed_quality_failure": "Both recognizers reported a sustained vowel rather than the requested French sentence.",
+      "timing_scope": "CLI-reported request.wall_ms"
+    },
+    {
+      "id": "japanese32",
+      "reference_language": "bn",
+      "output_language": "ja",
+      "steps": 32,
+      "processing_seconds": 300.404,
+      "audio_seconds": 4.4,
+      "realtime_multiplier": 0.01465,
+      "expected_text": "こんにちは。新しい音声エンジンの日本語テストです。",
+      "asr_transcript": "こんにちは 新しい音声エンジンの日本語テストです",
+      "normalized_character_similarity": 1.0,
+      "valid_pcm": true,
+      "word_check_passed": true,
+      "reference_source": "bengali-omnivoice-fixture",
+      "timing_scope": "CLI-reported request.wall_ms"
+    },
+    {
+      "id": "native-japanese-reference-api-srt16",
+      "reference_language": "ja",
+      "output_language": "ja",
+      "steps": 16,
+      "processing_seconds": 120.68,
+      "audio_seconds": 5.0,
+      "realtime_multiplier": 0.04143,
+      "expected_text": "こんにちは。新しい音声エンジンの日本語テストです。",
+      "asr_transcript": "こんにちは 新しい音声エンジンの日本語テストです",
+      "normalized_character_similarity": 1.0,
+      "valid_pcm": true,
+      "word_check_passed": true,
+      "timeline_seconds": 5.0,
+      "timeline_preserved": true,
+      "source_srt_export_preserved": true,
+      "wav_export_identical": true,
+      "backend": "omnivoice",
+      "device": "cpu",
+      "workers": 1,
+      "reference_source": "japanese-common-voice",
+      "pcm": {
+        "sample_rate": 24000,
+        "channels": 1,
+        "sample_width_bytes": 2,
+        "frames": 120000
+      },
+      "path_tested": "HTTP API submission -> real background worker -> warm native child -> automatic cue fit -> WAV and source SRT export",
+      "timing_scope": "HTTP submission through completed exports"
+    }
+  ],
+  "local_missing_transcript_fallback": {
+    "public_english_reference_only": true,
+    "cache_reused": true,
+    "first_transcription_seconds": 8.497,
+    "cached_seconds": 0.006,
+    "japanese_source_transcription_exact_words": true
+  },
+  "interpretation": [
+    "Native CPU is substantially slower than real time on this3CPU host; no CPU speed-up versus Turbo is established.",
+    "Matching-language Japanese reference passed at16steps through the real API and SRT export pipeline.",
+    "Cross-language Bengali-to-Japanese passed at32steps but not16 in this test.",
+    "French8 passed the stronger word recognizer; French32 produced non-speech-like vowel output according to two recognizers. More steps are not a general quality guarantee.",
+    "CUDA/GTX1060 performance and quality remain untested."
+  ],
+  "native_runtime": {
+    "repository": "https://github.com/0xShug0/audio.cpp",
+    "source_revision": "2597b300f5961999387c84c65f2e8e79c088a571",
+    "source_license": "Apache-2.0",
+    "abi": "0.2",
+    "binary_filename": "libaudiocpp.so",
+    "linux_binary_sha256": "ddabcb86f878165b32078f0c7840015fc548396491551072b9ea05fa4d40912e",
+    "threads": 3,
+    "cpu_baseline": "AVX2/FMA/F16C; no host-specific AVX512/VNNI",
+    "graph_reuse": "one resident model and session",
+    "windows_binary_tested_by_this_report": false
+  },
+  "model_license": "CC-BY-NC",
+  "embedded_tokenizer_license": "Boson Higgs Audio 2 Community License",
+  "public_reference_sources": [
+    {
+      "id": "bengali-omnivoice-fixture",
+      "upstream_relative_audio": "tests/omnivoice/assets/ref_audio_02.wav",
+      "upstream_relative_transcript": "tests/omnivoice/assets/ref_text_02.txt",
+      "language": "bn",
+      "fixture_license": "not separately stated in upstream fixture README",
+      "audio_redistributed_in_this_report": false
+    },
+    {
+      "id": "japanese-common-voice",
+      "upstream_relative_audio": "assets/asr_validation/common_voice_ja/common_voice_ja_20461197.wav",
+      "upstream_relative_transcript": "assets/asr_validation/common_voice_ja/common_voice_ja_20461197.txt",
+      "upstream_relative_manifest": "assets/asr_validation/common_voice_ja/manifest.jsonl",
+      "language": "ja",
+      "license": "CC0-1.0",
+      "dataset": "japanese-asr/ja_asr.common_voice_8_0",
+      "split": "test",
+      "row": 264,
+      "audio_redistributed_in_this_report": false
+    },
+    {
+      "id": "english-transcript-fallback-fixture",
+      "upstream_relative_audio": "assets/resources/b.wav",
+      "language": "en",
+      "fixture_license": "not separately stated in model documentation",
+      "audio_redistributed_in_this_report": false
+    }
+  ],
+  "resident_process_test": {
+    "model_load_process_reused": true,
+    "requests": 2,
+    "input_text": "Bonjour.",
+    "input_reference": "bengali-omnivoice-fixture",
+    "steps": 8,
+    "output_language": "fr",
+    "audio_seconds_each": 1.48,
+    "processing_seconds": [
+      76.048,
+      80.669
+    ],
+    "word_check_performed": false,
+    "model_copies": 1,
+    "device": "cpu"
+  },
+  "notes": [
+    "These are short public-reference tests, not an hour-long benchmark.",
+    "CPU inference on this three-CPU environment is slow; this report establishes no CPU speed increase versus Turbo.",
+    "The native model, input language, reference language and step count affect speech fidelity; higher steps did not consistently improve the word check.",
+    "Only CPU inference was executed here. Building CUDA sm_61 support does not establish GTX 1060 speed or quality.",
+    "No private voice samples, voice-library records, user scripts, passwords, process IDs or absolute local filesystem paths are included."
+  ]
+}

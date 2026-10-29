@@ -148,6 +148,8 @@ def copy_source(root):
                  root/'CPU-SHARED-MODEL-BENCHMARK.json')
     shutil.copy2(SOURCE/'packaging/benchmarks/voxcpm-int8-seven-languages.qa.json',
                  root/'CPU-INTERNATIONAL-INT8-BENCHMARK.json')
+    shutil.copy2(SOURCE/'packaging/benchmarks/native-multilingual-short-samples.qa.json',
+                 root/'CPU-NATIVE-SHORT-SAMPLES.json')
 
 
 def copy_runtime(destination):

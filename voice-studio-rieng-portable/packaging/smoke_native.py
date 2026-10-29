@@ -26,6 +26,8 @@ def main():
     import numpy as np
     import soundfile as sf
     args.output.parent.mkdir(parents=True, exist_ok=True)
+    audio_directory = args.data_dir.resolve() / 'qa-audio'
+    audio_directory.mkdir(parents=True, exist_ok=True)
     samples = []
     asr_check = None
     public_transcript = args.reference_text.read_text(encoding='utf-8').strip()
@@ -38,7 +40,7 @@ def main():
             synthesize = fast_multilingual.create_synthesizer(
                 args.reference.resolve(), args.data_dir.resolve(), threads=4,
                 steps=16, device='cpu', language=language, reference_text=public_transcript)
-            audio = args.output.parent / f'native-public-{index}-{language}.wav'
+            audio = audio_directory / f'native-public-{index}-{language}.wav'
             start = time.monotonic()
             synthesize(text, audio)
             elapsed = time.monotonic() - start
@@ -64,7 +66,7 @@ def main():
             cached_before = {p.name: (p.stat().st_mtime_ns, p.read_bytes()) for p in cache.glob('*.json')}
             assert reference_transcript(args.asr_reference, args.data_dir, 'en-US') == recognized
             assert cached_before == {p.name: (p.stat().st_mtime_ns, p.read_bytes()) for p in cache.glob('*.json')}
-            output = args.output.parent / 'native-public-missing-transcript.wav'
+            output = audio_directory / 'native-public-missing-transcript.wav'
             synthesize = fast_multilingual.create_synthesizer(
                 args.asr_reference.resolve(), args.data_dir.resolve(), threads=4,
                 steps=8, device='cpu', language='fr', reference_text='', reference_language='en-US')
@@ -77,6 +79,9 @@ def main():
                          'processing_seconds': asr_elapsed, 'persistent_cache_reused': True,
                          'blank_transcript_synthesis_passed': True}
         result = {'platform': 'native-windows-x64', 'device': 'cpu',
+                  'app_source_commit': os.environ.get('GITHUB_SHA'),
+                  'native_source_run': os.environ.get('NATIVE_SOURCE_RUN_ID'),
+                  'native_source_commit': os.environ.get('NATIVE_SOURCE_COMMIT'),
                   'public_reference_only': True, 'private_recordings_used': False,
                   'requests': samples, 'valid_pcm_audio': True,
                   'missing_reference_transcript': asr_check,

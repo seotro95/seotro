@@ -100,6 +100,8 @@ def stage(base_archive, native_root, output):
         raise ValueError('A verified native CPU library is required')
     (output / 'DOC_TRUOC_NATIVE.txt').write_text(GUIDE, encoding='utf-8')
     build = {'version': '1.11.0', 'source_commit': os.environ.get('GITHUB_SHA'),
+             'native_source_run': os.environ.get('NATIVE_SOURCE_RUN_ID'),
+             'native_source_commit': os.environ.get('NATIVE_SOURCE_COMMIT'),
              'verified_base_sha256': BASE_SHA256, 'native_backend': 'omnivoice',
              'native_source_revision': '2597b300f5961999387c84c65f2e8e79c088a571',
              'native_model_bundled': False, 'native_model_explicit_download': True,
@@ -129,7 +131,7 @@ def package(root, output_directory):
                         (relative.parts[0] == 'app' and '.data' not in relative.parts
                          and 'voice-library' not in relative.parts)
                         or relative.parts[0] == 'runtime-native'
-                        or relative.as_posix() in {'TAI_GIONG_DA_NGON_NGU_NHANH.bat', 'DOC_TRUOC_NATIVE.txt',
+                        or relative.as_posix() in {'TAI_GIONG_DA_NGON_NGU_NHANH.bat', 'DOC_TRUOC_NATIVE.txt', 'CPU-NATIVE-SHORT-SAMPLES.json',
                                                    'requirements-native-asr.txt', 'DOC_TRUOC.md'}):
                     continue
                 name = (Path('Voice-Studio-1.11-Native-Update') if update_only else Path(ROOT_NAME)) / relative

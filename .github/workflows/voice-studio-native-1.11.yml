@@ -159,6 +159,17 @@ jobs:
           python voice-studio-rieng-portable/packaging/build_native_bundle.py package --root "${{ runner.temp }}/portable" --output "${{ runner.temp }}/downloads"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           Copy-Item "${{ runner.temp }}/native-qa/Windows-Native-Short-Speech.qa.json" "${{ runner.temp }}/downloads/Windows-Native-Short-Speech.qa.json"
+      - name: Retain native diagnostics after a failed Windows speech check
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Voice-Studio-1.11-Native-Windows-Failure-Diagnostics
+          path: |
+            ${{ runner.temp }}/native-qa-data/international-native-backend.log
+            ${{ runner.temp }}/native-qa-data/native-transcript.log
+            ${{ runner.temp }}/native-qa/Windows-Native-Short-Speech.qa.json
+          retention-days: 7
+          if-no-files-found: ignore
       - uses: actions/upload-artifact@v4
         with:
           name: Voice-Studio-1.11-Native-Windows-Verified

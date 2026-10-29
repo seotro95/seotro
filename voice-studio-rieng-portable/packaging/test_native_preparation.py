@@ -102,3 +102,46 @@ def test_asr_install_checks_every_file_before_atomic_swap(tmp_path, monkeypatch)
     assert (destination / 'model.bin').read_bytes() == b'broken previous model'
     assert (destination / 'VOICE-STUDIO-ASR.json').read_bytes() == old_manifest
     assert not list(destination.parent.glob('native-asr.*.tmp'))
+
+
+@pytest.mark.parametrize('with_asr', [False, True])
+def test_windows_speech_check_keeps_native_audio_inside_data_directory(tmp_path, monkeypatch, with_asr):
+    """The report may be external; the native child restricts every WAV to DATA."""
+    import sys
+    from types import SimpleNamespace
+    import numpy as np
+    import soundfile as sf
+    from unittest.mock import Mock
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parent))
+    import smoke_native
+    data = tmp_path / 'private-data'
+    output = tmp_path / 'external-public-report/qa.json'
+    transcript = tmp_path / 'public-reference.txt'
+    transcript.write_text('This is the public reference recording.')
+    paths = []
+    def create(*args, **kwargs):
+        def synthesize(text, path):
+            assert path.resolve().is_relative_to(data.resolve())
+            paths.append(path)
+            sf.write(path, .1 * np.sin(np.arange(12000) / 20), 24000, subtype='PCM_16')
+        return synthesize
+    backend = SimpleNamespace(create_synthesizer=create, execution_info=lambda: {'backend': 'omnivoice', 'device': 'cpu'},
+                              close_backends=Mock())
+    monkeypatch.setitem(sys.modules, 'fast_multilingual', backend)
+    def reference_transcript(*args):
+        cache = data / 'cache/native-transcripts'
+        cache.mkdir(parents=True, exist_ok=True)
+        path = cache / 'public.json'
+        if not path.exists():
+            path.write_text('{"text":"This is the public reference recording."}')
+        return 'This is the public reference recording.'
+    monkeypatch.setitem(sys.modules, 'native_transcript', SimpleNamespace(reference_transcript=reference_transcript))
+    arguments = ['smoke_native.py', '--app-dir', str(tmp_path / 'app'), '--data-dir', str(data),
+                 '--reference', str(tmp_path / 'public.wav'), '--reference-text', str(transcript), '--output', str(output)]
+    if with_asr:
+        arguments += ['--asr-reference', str(tmp_path / 'public-english.wav')]
+    monkeypatch.setattr(sys, 'argv', arguments)
+    smoke_native.main()
+    assert output.is_file() and len(paths) == (4 if with_asr else 3)
+    assert all(path.parent == data / 'qa-audio' for path in paths)
+    backend.close_backends.assert_called_once()
