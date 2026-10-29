@@ -269,3 +269,28 @@ def test_invalid_or_noisy_automatic_records_keep_shared_weights(tmp_path,monkeyp
 def test_corrupt_automatic_execution_file_is_ignored(tmp_path,contents):
     (tmp_path/'calibration.json').write_text(contents)
     assert choose_execution_model('vieneu',data=tmp_path)=='shared'
+
+
+@pytest.mark.parametrize('memory',['shared','process'])
+@pytest.mark.parametrize('profile',['maximum','smooth','light'])
+@pytest.mark.parametrize('ram',[8,32,128])
+def test_turbo_calibration_tests_smaller_teams_within_cpu_and_memory_budgets(memory,profile,ram):
+    limits=resource_limits(56,28,ram,'vieneu',profile,execution_model=memory)
+    preset=resource_presets(56,28,ram,'vieneu',profile,execution_model=memory)['fast']
+    candidates=hardware.calibration_candidates(preset,'vieneu')
+    for settings in candidates:
+        assert 1<=settings['nano_parallel']<=limits['max_workers']
+        assert 1<=settings['nano_threads']<=limits['max_threads']
+        assert settings['nano_parallel']*settings['nano_threads']<=limits['cpu_budget']
+    if preset['nano_parallel']>=12:
+        assert {'nano_parallel':4,'nano_threads':4} in candidates
+        assert {'nano_parallel':8,'nano_threads':2} in candidates
+    if profile=='light':assert {settings['nano_parallel'] for settings in candidates}=={1}
+
+
+@pytest.mark.parametrize('physical',[2,4])
+def test_small_turbo_and_nano_calibration_candidates_remain_unchanged(physical):
+    preset=resource_presets(physical*2,physical,16,'vieneu')['fast']
+    assert hardware.calibration_candidates(preset,'vieneu')==hardware.calibration_candidates(preset)
+    nano=resource_presets(56,28,128,'vieneu_nano')['fast']
+    assert len(hardware.calibration_candidates(nano,'vieneu_nano'))==3
