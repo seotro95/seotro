@@ -101,6 +101,10 @@ jobs:
           $smokeExit = $LASTEXITCODE
           if ($smokeExit -ne 0) {
             $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'extra-pcm.log') -Tail 50) -join ' | ')
+            $childLog = Join-Path $env:RUNNER_TEMP 'extras/app/.data/qwen-backend.log'
+            if (Test-Path -LiteralPath $childLog) {
+              $detail += ' | QWEN CHILD STDERR: ' + ((Get-Content -LiteralPath $childLog -Tail 45) -join ' | ')
+            }
             Write-Output ('::error title=Actual Qwen or ASR Windows CPU check failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
             exit $smokeExit
           }
@@ -166,6 +170,7 @@ jobs:
             ${{ runner.temp }}/EXTRA-MODEL-PINS.json
             ${{ runner.temp }}/extras/EXTRA-MODEL-PINS.json
             ${{ runner.temp }}/EXTRA-MODEL-CPU-QA.json
+            ${{ runner.temp }}/extras/app/.data/qwen-backend.log
           if-no-files-found: ignore
           retention-days: 7
       - uses: actions/upload-artifact@v4

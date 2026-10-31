@@ -292,11 +292,20 @@ def _config_values():
     }
 
 
+def _reference_needs_transcription(voice):
+    """Read private metadata internally; callers expose only the boolean."""
+    metadata=voice
+    if voice.get('category') in {'reference','cloned'}:
+        from voice_library import resolve_reference
+        _,metadata=resolve_reference(voice['id'],DATA)
+    transcript=metadata.get('transcript')
+    return not isinstance(transcript,str) or not transcript.strip()
+
+
 @app.get('/api/voices')
 def voices():
     from fast_multilingual import is_ready
     from native_transcript import asr_ready
-    from voice_library import resolve_reference
     entries=available_voices()
     entries=[{**voice,'engine':voice.get('engine','vieneu' if voice.get('languages',['vi'])[0]=='vi' else 'qwen_clone')} for voice in entries]
     prepared={engine:model_ready(engine) for engine in {voice['engine'] for voice in entries}}
@@ -309,15 +318,13 @@ def voices():
         readiness={}
         reason=voice.get('missing_reason') if voice.get('has_sample') is False else None
         if voice['engine']=='voxcpm':
-            metadata=voice
-            if has_sample and voice.get('category') in {'reference','cloned'}:
+            requires_transcription=True
+            if has_sample:
                 try:
-                    _,metadata=resolve_reference(voice['id'],DATA)
+                    requires_transcription=_reference_needs_transcription(voice)
                 except (OSError,ValueError,TypeError,KeyError):
                     has_sample=False
                     reason='Tệp mẫu giọng đang thiếu hoặc không hợp lệ. Khôi phục mẫu giọng trước khi tạo.'
-            transcript=metadata.get('transcript')
-            requires_transcription=not isinstance(transcript,str) or not transcript.strip()
             readiness={'ready_voxcpm':prepared[voice['engine']] and has_sample,
                        'ready_native':omni_prepared and has_sample and (not requires_transcription or transcription_ready),
                        'ready_voxcpm_native':voxcpm_native_prepared and has_sample,
@@ -633,6 +640,15 @@ def _submit_speech(body: Speech,calibration=False):
             message=('Cần gói đầy đủ VoxCPM2 native Q8 với mô hình và thư viện ' + body.international_device.upper() + '.'
                      if native_voxcpm else 'Chạy TAI_GIONG_DA_NGON_NGU_NHANH.bat để chuẩn bị OmniVoice và bộ chạy đã chọn.')
             raise HTTPException(503,message+' CUDA cần bộ chạy GPU và trình điều khiển tương thích; tool không tự chuyển sang CPU.')
+        if not native_voxcpm:
+            try:
+                requires_transcription=_reference_needs_transcription(voice)
+            except (OSError,ValueError,TypeError,KeyError):
+                raise HTTPException(503,'Tệp mẫu giọng đang thiếu hoặc không hợp lệ. Khôi phục mẫu giọng trước khi tạo.') from None
+            if requires_transcription:
+                from native_transcript import asr_ready
+                if not asr_ready(DATA):
+                    raise HTTPException(503,'Mẫu này chưa có lời chép. OmniVoice cần mô hình và thư viện nhận dạng lời mẫu ngoại tuyến; dùng bộ Windows 1.12.2 đầy đủ hoặc chạy lại trình cài bộ đó để khôi phục trước khi tạo.')
     elif not model_ready(engine):
         raise HTTPException(503,'Chạy TAI_GIONG_DA_NGON_NGU.bat một lần để chuẩn bị các giọng quốc tế mới.' if engine=='voxcpm' else f'Mô hình {engine} chưa sẵn sàng. Chạy lệnh tải mô hình trong hướng dẫn cài đặt.')
     if calibration and engine not in {'vieneu_nano','vieneu'}:raise HTTPException(422,'Chọn giọng Nano hoặc Turbo để đo và tối ưu CPU.')

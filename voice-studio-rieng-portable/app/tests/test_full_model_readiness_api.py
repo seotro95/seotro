@@ -95,3 +95,54 @@ def test_uploaded_reference_readiness_checks_file_and_never_exposes_private_tran
     sample.unlink()
     voice = next(v for v in client.get('/api/voices').json()['voices'] if v['id'] == ident)
     assert not voice['has_sample'] and not voice['ready']
+
+
+@pytest.mark.parametrize('supplied_text', ['', 'Private reference words.'])
+def test_direct_omni_post_rejects_missing_asr_before_queue_unless_reference_has_text(reference_catalog, monkeypatch, supplied_text):
+    client, data, root, submit = reference_catalog
+    manifest = root / 'manifest.json'
+    document = json.loads(manifest.read_text())
+    next(v for v in document['voices'] if v['id'] == KOREAN)['transcript'] = supplied_text
+    manifest.write_text(json.dumps(document))
+    monkeypatch.setattr(fast_multilingual, 'is_ready', lambda data, device=None, family='omnivoice': family == 'omnivoice')
+    monkeypatch.setattr(native_transcript, 'asr_ready', lambda data: False)
+    response = client.post('/api/speech', json={
+        'voice_id': KOREAN, 'language': 'ko', 'text': '안녕하세요.',
+        'international_backend': 'omnivoice', 'international_device': 'cpu',
+    })
+    if supplied_text:
+        assert response.status_code == 202, response.text
+        submit.assert_called_once()
+        assert len(list((data / 'jobs').glob('*.json'))) == 1
+        assert supplied_text not in response.text
+    else:
+        assert response.status_code == 503, response.text
+        assert 'nhận dạng lời mẫu' in response.json()['detail']
+        assert '1.12.2' in response.json()['detail']
+        submit.assert_not_called()
+        assert not list((data / 'jobs').glob('*.json'))
+    assert str(root) not in response.text and 'transcript' not in response.json()
+
+
+def test_direct_omni_post_accepts_uploaded_reference_text_without_asr(studio, monkeypatch):
+    from unittest.mock import Mock
+    client, data = studio
+    ident = 'e' * 32
+    text = 'Private uploaded reference words.'
+    record = {'id': ident, 'engine': 'voxcpm', 'category': 'cloned', 'name': 'Uploaded sample',
+              'languages': ['fr'], 'language': 'fr', 'transcript': text}
+    (data / 'voices' / (ident + '.json')).write_text(json.dumps(record))
+    (data / 'voices' / (ident + '.wav')).write_bytes(sine_wave())
+    submit = Mock()
+    monkeypatch.setattr(app.executor, 'submit', submit)
+    monkeypatch.setattr(fast_multilingual, 'is_ready', lambda data, device=None, family='omnivoice': family == 'omnivoice')
+    monkeypatch.setattr(native_transcript, 'asr_ready', lambda data: pytest.fail('Supplied reference text must not require ASR'))
+    response = client.post('/api/speech', json={
+        'voice_id': ident, 'language': 'fr', 'text': 'Bonjour.',
+        'international_backend': 'omnivoice', 'international_device': 'cpu',
+    })
+    assert response.status_code == 202, response.text
+    assert response.json()['voice_id'] == ident
+    assert response.json()['language'] == 'fr'
+    assert text not in response.text and 'transcript' not in response.json()
+    submit.assert_called_once()

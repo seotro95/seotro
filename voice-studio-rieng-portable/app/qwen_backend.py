@@ -231,8 +231,12 @@ class _BackendClient:
                 raise ValueError('Bộ Qwen riêng đã dừng. Xem qwen-backend.log trong dữ liệu ứng dụng.')
             response = json.loads(line)
             if (not isinstance(response, dict) or response.get('id') != request['id']
-                    or response.get('output') != str(output) or response.get('ok') is not True):
-                raise ValueError('Bộ Qwen không hoàn tất đúng tác vụ. Xem qwen-backend.log.')
+                    or response.get('output') != str(output)):
+                raise ValueError('Phản hồi bộ Qwen không khớp tác vụ. Xem qwen-backend.log.')
+            if response.get('ok') is not True:
+                detail = response.get('error')
+                detail = detail[:600] if isinstance(detail, str) and detail.strip() else 'lỗi chưa xác định'
+                raise ValueError('Không tạo được giọng Qwen: ' + detail)
             execution = response.get('execution')
             if (not isinstance(execution, dict) or execution.get('backend') != 'qwen_isolated'
                     or execution.get('engine') != self.engine or execution.get('device') != 'cpu'
@@ -401,12 +405,14 @@ def serve(data, engine, threads, source=None, protocol=None, errors=None):
                         session = _Session(data, engine, threads)
                     execution = session.synthesize(request)
                 response = {'ok': True, 'id': ident, 'output': str(output), 'execution': execution}
-            except Exception:
+            except Exception as exc:
                 traceback.print_exc(file=errors)
                 if session is not None:
                     session.close()
                     session = None
-                response = {'ok': False, 'id': ident, 'output': str(output) if output else None}
+                detail = (type(exc).__name__ + ': ' + str(exc)).replace('\r', ' ').replace('\n', ' ')[:600]
+                response = {'ok': False, 'id': ident, 'output': str(output) if output else None,
+                            'error': detail}
             protocol.write(json.dumps(response, ensure_ascii=False) + '\n')
             protocol.flush()
     finally:
@@ -421,7 +427,13 @@ def main(argv=None):
     parser.add_argument('--engine', choices=tuple(MODELS), required=True)
     parser.add_argument('--threads', type=int, choices=range(1, 9), default=4)
     args = parser.parse_args(argv)
-    serve(args.data_dir, args.engine, args.threads)
+    # C/C++ dependencies can write directly to descriptor 1. Keep the private
+    # JSON protocol on its own descriptor, just as the native model server does.
+    sys.stdout.flush()
+    with os.fdopen(os.dup(1), 'w', encoding='utf-8', buffering=1) as protocol:
+        os.dup2(2, 1)
+        sys.stdout = sys.stderr
+        serve(args.data_dir, args.engine, args.threads, protocol=protocol)
 
 
 atexit.register(close_backends)

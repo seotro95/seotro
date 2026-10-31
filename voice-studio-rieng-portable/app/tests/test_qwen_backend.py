@@ -290,6 +290,59 @@ def test_stdio_rejects_output_outside_app_data_before_loading_model(prepared, mo
     assert not (tmp_path / 'outside.wav').exists()
 
 
+def test_stdio_preserves_the_actual_bounded_model_loading_error(prepared, monkeypatch):
+    data, _, _ = prepared
+    actual = 'missing processor dependency\n' + 'x' * 1000
+    def fail(*args):
+        raise ValueError(actual)
+    monkeypatch.setattr(backend, '_Session', fail)
+    job = request(data)
+    protocol = io.StringIO()
+    backend.serve(data, 'qwen', 4, source=io.StringIO(json.dumps(job) + '\n'),
+                  protocol=protocol, errors=io.StringIO())
+    result = json.loads(protocol.getvalue())
+    assert result['ok'] is False and result['id'] == job['id'] and result['output'] == job['output']
+    assert result['error'].startswith('ValueError: missing processor dependency ')
+    assert len(result['error']) == 600 and '\n' not in result['error']
+
+
+def test_client_reports_bound_child_error_and_closes_the_failed_process(prepared, monkeypatch):
+    data, _, _ = prepared
+    ident = 'a' * 32
+    monkeypatch.setattr(backend.uuid, 'uuid4', lambda: SimpleNamespace(hex=ident))
+    client = backend._BackendClient.__new__(backend._BackendClient)
+    client.process = SimpleNamespace(stdin=io.StringIO())
+    client.responses = queue.Queue()
+    client.responses.put(json.dumps({'ok': False, 'id': ident, 'output': str(data / 'out.wav'),
+                                     'error': 'ImportError: actual missing runtime dependency'}))
+    client.close = mock.Mock()
+    with pytest.raises(ValueError, match='ImportError: actual missing runtime dependency'):
+        client.synthesize('Hello.', data / 'out.wav')
+    client.close.assert_called_once()
+
+
+def test_main_redirects_descriptor_one_logs_without_corrupting_stdio_protocol(tmp_path):
+    script = '''
+import json,os,sys
+sys.path.insert(0,sys.argv[1])
+import qwen_backend as backend
+def fake_serve(data,engine,threads,protocol=None):
+    os.write(1,b'C dependency stdout message\\n')
+    print('Python dependency stdout message',flush=True)
+    protocol.write(json.dumps({'ok':True,'device':'cpu'})+'\\n')
+    protocol.flush()
+backend.serve=fake_serve
+backend.main(['--serve','--data-dir',sys.argv[2],'--engine','qwen'])
+'''
+    result = subprocess.run([sys.executable, '-s', '-X', 'utf8', '-c', script,
+                             str(Path(backend.__file__).parent), str(tmp_path)],
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                            text=True, encoding='utf-8', check=True, timeout=30)
+    assert json.loads(result.stdout) == {'ok': True, 'device': 'cpu'}
+    assert 'C dependency stdout message' in result.stderr
+    assert 'Python dependency stdout message' in result.stderr
+
+
 def test_child_environment_is_offline_and_cannot_inherit_main_python_packages(prepared, monkeypatch):
     data, _, _ = prepared
     monkeypatch.setenv('PYTHONPATH', 'must-not-enter-isolated-runtime')
