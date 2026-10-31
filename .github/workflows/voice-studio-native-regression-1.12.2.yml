@@ -1,0 +1,108 @@
+name: Voice Studio 1.12.2 - Independent Windows native regressions
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [voice-studio-native-fixed-v1.12.2]
+    paths:
+      - '.github/workflows/voice-studio-native-regression-1.12.2.yml'
+      - 'voice-studio-rieng-portable/packaging/probe_native_regressions.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-studio-native-regression-1.12.2
+  cancel-in-progress: true
+
+env:
+  PYTHONUTF8: '1'
+  PYTHONNOUSERSITE: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+  SOURCE_TAG: voice-studio-native-voxcpm-1.12.1-41214648685-1
+  SOURCE_SHA: a4646d2ab03d0ea9f605961dc7cde8fee4c512cc70344764564f3130fd3e2864
+
+jobs:
+  native:
+    runs-on: windows-2022
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Select fresh job-owned scratch space
+        shell: pwsh
+        run: |
+          $drives = @(Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -in @('C','D') -and $_.Free -ge 12GB } | Sort-Object Free -Descending)
+          if ($drives.Count -eq 0) { throw 'At least 12 GiB free scratch space is required' }
+          $work = Join-Path $drives[0].Root 'voice-native-regression-${{ github.run_id }}-${{ github.run_attempt }}'
+          if (Test-Path -LiteralPath $work) { throw 'Use a fresh diagnostic directory' }
+          New-Item -ItemType Directory $work | Out-Null
+          "VOICE_NATIVE_WORK=$work" | Out-File -LiteralPath $env:GITHUB_ENV -Encoding utf8 -Append
+      - name: Retrieve and SHA256-verify the immutable public native Windows source
+        shell: python
+        run: |
+          import hashlib,json,os,pathlib,urllib.request
+          base='https://github.com/'+os.environ['GITHUB_REPOSITORY']+'/releases/download/'+os.environ['SOURCE_TAG']+'/'
+          with urllib.request.urlopen(base+'DOWNLOAD-PARTS.json',timeout=60) as response:
+              manifest=json.loads(response.read(65536))
+          if manifest['archive_sha256']!=os.environ['SOURCE_SHA']: raise ValueError('Unexpected full source SHA256')
+          target=pathlib.Path(os.environ['VOICE_NATIVE_WORK'])/'source-full.zip'
+          total=hashlib.sha256()
+          with target.open('xb') as output:
+              for part in manifest['parts']:
+                  if (not part['name'].startswith('Voice-Studio-1.12.1-Full-Windows-x64.zip.part')
+                      or pathlib.PurePosixPath(part['name']).name!=part['name']):
+                      raise ValueError('Unexpected source part name')
+                  digest,size=hashlib.sha256(),0
+                  with urllib.request.urlopen(base+part['name'],timeout=180) as response:
+                      for block in iter(lambda:response.read(8*1024**2),b''):
+                          digest.update(block);total.update(block);size+=len(block);output.write(block)
+                  if size!=part['size'] or digest.hexdigest()!=part['sha256']: raise ValueError('Source part SHA256/size mismatch')
+          if total.hexdigest()!=os.environ['SOURCE_SHA'] or target.stat().st_size!=manifest['archive_size']:
+              raise ValueError('Full source SHA256/size mismatch')
+      - name: Stage only native CPU dependencies and current source under a Unicode path
+        shell: pwsh
+        run: |
+          $stage = Join-Path $env:VOICE_NATIVE_WORK 'kiem tra Tiếng Việt !/Native-Probe'
+          python voice-studio-rieng-portable/packaging/probe_native_regressions.py stage --archive "$env:VOICE_NATIVE_WORK/source-full.zip" --root $stage --source voice-studio-rieng-portable
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Remove-Item -LiteralPath "$env:VOICE_NATIVE_WORK/source-full.zip"
+      - name: Fetch the pinned public reference WAV
+        shell: python
+        run: |
+          import hashlib,os,pathlib,urllib.request
+          url='https://raw.githubusercontent.com/0xShug0/audio.cpp/2597b300f5961999387c84c65f2e8e79c088a571/assets/resources/b.wav'
+          with urllib.request.urlopen(url,timeout=60) as response: payload=response.read(8*1024**2)
+          if hashlib.sha256(payload).hexdigest()!='32bf74dfb8342ccc8284f47a9e5fe1f41b458a983a00938ed170f76951ce638f':
+              raise ValueError('Public reference differs from pinned SHA256')
+          (pathlib.Path(os.environ['VOICE_NATIVE_WORK'])/'public-reference.wav').write_bytes(payload)
+      - name: Run real isolated Korean Chinese and thirty-second reference regression checks
+        shell: pwsh
+        run: |
+          $stage = Join-Path $env:VOICE_NATIVE_WORK 'kiem tra Tiếng Việt !/Native-Probe'
+          $env:PYTHONHOME = ''
+          $env:PYTHONPATH = ''
+          & "$stage/runtime/python.exe" -s -X utf8 voice-studio-rieng-portable/packaging/probe_native_regressions.py run --root $stage --reference "$env:VOICE_NATIVE_WORK/public-reference.wav" --output "$env:VOICE_NATIVE_WORK/qa/WINDOWS-NATIVE-REGRESSION-QA.json"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Retain JSON metadata only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Voice-Studio-1.12.2-Windows-Native-Regression-QA
+          path: ${{ env.VOICE_NATIVE_WORK }}/qa/*.json
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Publish only the bounded public-input regression JSON
+        if: always()
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $report = Join-Path $env:VOICE_NATIVE_WORK 'qa/WINDOWS-NATIVE-REGRESSION-QA.json'
+          if (Test-Path -LiteralPath $report) {
+            gh release create 'voice-studio-native-regression-${{ github.run_id }}-${{ github.run_attempt }}' $report --repo '${{ github.repository }}' --target '${{ github.sha }}' --prerelease --latest=false --title 'Windows native regression report - public inputs only' --notes 'Independent actual Windows CPU UTF-8 Korean/Chinese and full thirty-second public-reference checks. Read complete and requests in the JSON for outcomes. No GPU, private voice, full-hour, pronunciation or 30x claim. This is a diagnostic report, not an application download.'
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
