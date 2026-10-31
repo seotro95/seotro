@@ -150,8 +150,7 @@ class WindowsRuntimeTests(unittest.TestCase):
         self.assertEqual(self.archive.read_bytes(), self.payload)
         for part, piece in zip(self.manifest['parts'], self.pieces):
             self.assertEqual((self.root/part['name']).read_bytes(), piece)
-        for file in self.cache.iterdir(): file.unlink()
-        self.cache.rmdir()
+        self.assertFalse(self.cache.exists(), 'Successful join should remove the owned temporary cache')
         code, output = self.run_command()
         self.assertEqual(code, 0, output)
         self.assertFalse(self.cache.exists(), 'Valid full ZIP should avoid downloads and cache work')
@@ -182,7 +181,52 @@ class WindowsRuntimeTests(unittest.TestCase):
         code, output = self.run_command()
         self.assertEqual(code, 0, output)
         self.assertEqual(self.archive.read_bytes(), self.payload)
-        self.assertFalse(list(self.cache.glob('*.partial')))
+        self.assertFalse(self.cache.exists(), 'Verified cached parts become redundant after the full ZIP is verified')
+
+    def test_valid_existing_zip_cleans_verified_parts_partial_and_staging(self):
+        self.archive.write_bytes(self.payload)
+        self.seed_cache()
+        for index, (part, piece) in enumerate(zip(self.manifest['parts'], self.pieces)):
+            suffix = '.partial' if index == 0 else ''
+            (self.cache/(part['name'] + suffix)).write_bytes(piece)
+        (self.cache/'complete.zip.assembling').write_bytes(self.payload)
+        code, output = self.run_command()
+        self.assertEqual(code, 0, output)
+        self.assertEqual(self.archive.read_bytes(), self.payload)
+        self.assertFalse(self.cache.exists())
+
+    def test_valid_zip_preserves_entire_cache_containing_unrelated_user_data(self):
+        self.archive.write_bytes(self.payload)
+        self.seed_cache()
+        for part, piece in zip(self.manifest['parts'], self.pieces):
+            (self.cache/part['name']).write_bytes(piece)
+        sentinel = self.cache/'my-notes.txt'
+        sentinel.write_bytes(b'user notes')
+        code, output = self.run_command()
+        self.assertEqual(code, 0, output)
+        self.assertEqual(sentinel.read_bytes(), b'user notes')
+        self.assertTrue((self.cache/'OWNER.txt').is_file())
+        for part, piece in zip(self.manifest['parts'], self.pieces):
+            self.assertEqual((self.cache/part['name']).read_bytes(), piece)
+
+    def test_valid_zip_preserves_cache_with_mismatching_partial_bytes(self):
+        self.archive.write_bytes(self.payload)
+        self.seed_cache()
+        part = self.cache/(self.manifest['parts'][0]['name'] + '.partial')
+        part.write_bytes(b'incomplete download or other bytes')
+        code, output = self.run_command()
+        self.assertEqual(code, 0, output)
+        self.assertEqual(part.read_bytes(), b'incomplete download or other bytes')
+        self.assertTrue((self.cache/'OWNER.txt').is_file())
+
+    def test_valid_zip_preserves_cache_with_wrong_owner(self):
+        self.archive.write_bytes(self.payload)
+        self.seed_cache()
+        marker = self.cache/'OWNER.txt'
+        marker.write_bytes(b'belongs to something else')
+        code, output = self.run_command()
+        self.assertEqual(code, 0, output)
+        self.assertEqual(marker.read_bytes(), b'belongs to something else')
 
     def test_corrupt_completed_cache_part_is_preserved(self):
         self.seed_cache()

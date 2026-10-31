@@ -175,6 +175,7 @@ function voiceReady(voice) {
   if (!voice || !config) return false;
   if (voice.engine === 'system') return true;
   if (nativeMultilingual(voice)) {
+    if (omniMultilingual(voice) && voice.requires_reference_transcription === true && !config.native_reference_transcription_ready) return false;
     const installed = nativeInstallation();
     const voicePrepared = $('international-backend').value === 'voxcpm_native' ? voice.ready_voxcpm_native : voice.ready_native;
     return voice.has_sample !== false && Boolean(voicePrepared ?? installed.ready)
@@ -188,6 +189,7 @@ function voiceReady(voice) {
 function modelInstruction(voice) {
   if (voice?.engine === 'vieneu_nano') return 'TAI_GIONG_VIET.bat';
   if (voice?.engine === 'vieneu') return 'TAI_GIONG_TIEU_CHUAN.bat';
+  if (['qwen','qwen_clone'].includes(voice?.engine)) return 'Bộ Windows 1.12.2 đầy đủ · Qwen';
   if (voice?.engine === 'voxcpm') {
     if ($('international-backend').value === 'voxcpm_native') return 'Bộ Windows có VoxCPM2 native Q8';
     return omniMultilingual(voice) ? 'TAI_GIONG_DA_NGON_NGU_NHANH.bat' : 'TAI_GIONG_DA_NGON_NGU.bat';
@@ -196,9 +198,11 @@ function modelInstruction(voice) {
 }
 
 function voiceSetupMessage(voice) {
+  if (['qwen','qwen_clone'].includes(voice?.engine)) return voice.missing_reason || 'Cần runtime Qwen, mô hình đúng loại và bộ mã hóa âm thanh. Dùng bộ Windows 1.12.2 đầy đủ hoặc chạy lại trình cài bộ đó để khôi phục các thành phần còn thiếu.';
   if (nativeMultilingual(voice)) {
     const installed = nativeInstallation();
     if (voice.has_sample === false) return 'Tệp mẫu của giọng này đang thiếu. Cài lại bộ mẫu giọng trước khi tạo.';
+    if (omniMultilingual(voice) && voice.requires_reference_transcription === true && !config?.native_reference_transcription_ready) return 'Mẫu giọng này chưa có lời chép. OmniVoice cần mô hình và thư viện nhận dạng lời mẫu ngoại tuyến; dùng bộ Windows 1.12.2 đầy đủ hoặc chạy lại trình cài bộ đó để khôi phục. Tệp mẫu giọng được giữ trên máy.';
     if (installed.ready && $('international-device').value === 'cuda') return 'Bộ chạy CUDA đang thiếu hoặc chưa phù hợp với bộ đọc đã chọn. Kiểm tra bộ cài GPU và trình điều khiển NVIDIA; lựa chọn CUDA được giữ nguyên. Bạn có thể tự chọn CPU để đo thử.';
     if ($('international-backend').value === 'voxcpm_native') {
       if (installed.ready && !installed.cpu && installed.cuda) return 'Bộ chạy CPU đang thiếu. Bộ VoxCPM2 native CUDA đã cài; chọn CUDA nếu máy có GPU NVIDIA và trình điều khiển phù hợp, rồi đo mẫu để xác nhận.';
@@ -605,7 +609,7 @@ function populateVoices() {
   const previous = $('voice').value;
   const choices = voices.filter((voice) => (voice.languages || []).includes($('language').value));
   $('voice').replaceChildren(...choices.map((voice) => {
-    const option = node('option', `${voice.name}${voice.category === 'reference' && voice.is_default ? ' · Mặc định của bạn' : ''} · ${selectedEngineName(voice)}${voiceReady(voice) ? '' : ' · Chưa tải'}`);
+    const option = node('option', `${voice.name}${voice.category === 'reference' && voice.is_default ? ' · Mặc định của bạn' : ''} · ${selectedEngineName(voice)}${voiceReady(voice) ? '' : ' · Cần chuẩn bị'}`);
     option.value = voice.id; return option;
   }));
   if (choices.some((voice) => voice.id === previous)) $('voice').value = previous;
@@ -987,7 +991,7 @@ function renderLibrary() {
     if ((voice.languages || []).length > 2) tags.append(node('span', `+${voice.languages.length - 2} ngôn ngữ`, 'small-tag'));
     card.append(tags);
     const ready = voiceReady(voice);
-    card.append(node('p', ready ? '● Sẵn sàng sử dụng' : `○ ${voice.missing_reason || 'Chưa tải mô hình'} · ${modelInstruction(voice)}`, `readiness ${ready ? 'ready' : 'missing'}`));
+    card.append(node('p', ready ? '● Sẵn sàng sử dụng' : `○ ${voiceSetupMessage(voice)}`, `readiness ${ready ? 'ready' : 'missing'}`));
     if (voice.has_sample || voice.category === 'reference' || voice.category === 'cloned') {
       const audio = node('audio'); audio.controls = true; audio.preload = 'none'; audio.src = voice.sample_url || `/api/voices/${encodeURIComponent(voice.id)}/sample`;
       audio.setAttribute('aria-label', `Nghe mẫu giọng ${voice.name}`); card.append(audio);
@@ -1113,8 +1117,11 @@ function renderModelStatus() {
   const target = $('model-status'); target.replaceChildren();
   target.append(node('p', `${config.hardware} · ${config.cpu_cores} luồng CPU · ${config.available_ram_gb ?? '?'} GB RAM trống`));
   target.append(node('p', `FFmpeg: ${config.ffmpeg ? 'Đã cài' : 'Chưa tìm thấy · chạy lại CAI_DAT.bat'}`));
-  for (const [key, ready] of [['vieneu_nano', config.nano_ready], ...Object.entries(config.models || {})]) target.append(node('p', `${ready ? '●' : '○'} ${key}: ${ready ? 'Đã tải' : 'Chưa tải'}`));
-  target.append(node('p', `${config.native_multilingual_ready ? '●' : '○'} OmniVoice Q8: ${config.native_multilingual_ready ? 'Đã chuẩn bị' : 'Chưa chuẩn bị'} · Bộ chạy CPU: ${config.native_multilingual_cpu_available ? 'Đã cài' : 'Chưa cài'} · CUDA: ${config.native_multilingual_cuda_available ? 'Đã cài' : 'Chưa cài'}`));
+  for (const [key, ready] of [['vieneu_nano', config.nano_ready], ...Object.entries(config.models || {})]) target.append(node('p', `${ready ? '●' : '○'} ${key}: ${ready ? 'Đã chuẩn bị' : 'Cần chuẩn bị'}`));
+  const omniComplete = config.native_multilingual_ready && config.native_reference_transcription_ready;
+  const omniStatus = !config.native_multilingual_ready ? 'Cần mô hình và bộ chạy' : config.native_reference_transcription_ready ? 'Đã chuẩn bị' : 'Cần nhận dạng cho mẫu chưa có lời chép';
+  target.append(node('p', `${omniComplete ? '●' : '○'} OmniVoice Q8: ${omniStatus} · Bộ chạy CPU: ${config.native_multilingual_cpu_available ? 'Đã cài' : 'Chưa cài'} · CUDA: ${config.native_multilingual_cuda_available ? 'Đã cài' : 'Chưa cài'} · Tạo mẫu để xác nhận GPU hoạt động.`));
+  target.append(node('p', `${config.native_reference_transcription_ready ? '●' : '○'} Nhận dạng lời mẫu ngoại tuyến: ${config.native_reference_transcription_ready ? 'Đã chuẩn bị mô hình và thư viện' : 'Cần chuẩn bị mô hình và thư viện'}. Mẫu đã có lời chép vẫn dùng được khi chưa cài nhận dạng.`));
   target.append(node('p', `${config.native_voxcpm_ready ? '●' : '○'} VoxCPM2 native Q8: ${config.native_voxcpm_ready ? 'Đã chuẩn bị' : 'Chưa chuẩn bị'} · Bộ chạy CPU: ${config.native_voxcpm_cpu_available ? 'Đã cài' : 'Chưa cài'} · CUDA: ${config.native_voxcpm_cuda_available ? 'Đã cài' : 'Chưa cài'} · Cần tạo mẫu để xác nhận GPU và tốc độ thực tế.`));
   target.append(node('p', 'Giọng hệ thống Windows có thể dùng ngay khi đã được cài trong hệ điều hành.'));
 }

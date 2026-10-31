@@ -211,9 +211,10 @@ def main():
     if not args.model_only:
         library = BASE.parent / 'runtime-native' / 'cpu' / ('audiocpp.dll' if os.name == 'nt' else 'libaudiocpp.so')
         if not library.is_file():
-            raise SystemExit('Thiếu bộ chạy native. Giải nén bản Windows 1.11 đầy đủ rồi chạy lại tệp tải giọng nhanh.')
-        if not (BASE.parent / 'runtime-native/asr/faster_whisper').is_dir():
-            raise SystemExit('Thiếu bộ nhận lời mẫu giọng ngoại tuyến. Dùng gói Windows 1.11 có runtime-native\\asr.')
+            raise SystemExit('Thiếu bộ chạy native. Giải nén gói Windows đầy đủ rồi chạy lại tệp tải giọng nhanh.')
+        from native_transcript import asr_runtime_ready
+        if not asr_runtime_ready():
+            raise SystemExit('Thiếu thư viện nhận lời mẫu ngoại tuyến đúng phiên bản. Dùng gói Windows đầy đủ có bộ nhận lời mẫu đi kèm.')
     print(NOTICES, flush=True)
     prepare_asr(args.data_dir, args.asr_source)
     prepare(args.data_dir, args.model_source)

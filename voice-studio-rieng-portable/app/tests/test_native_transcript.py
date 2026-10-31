@@ -3,6 +3,7 @@ import hashlib
 import io
 import json
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 from types import SimpleNamespace
@@ -38,6 +39,10 @@ def prepared(tmp_path, monkeypatch):
     write_reference(reference)
     dependencies = tmp_path/'runtime-native/asr'
     dependencies.mkdir(parents=True)
+    for name, version in transcript.ASR_RUNTIME_PINS.items():
+        metadata = dependencies/(name.replace('-', '_')+'-'+version+'.dist-info')
+        metadata.mkdir()
+        (metadata/'METADATA').write_text('Metadata-Version: 2.1\nName: '+name+'\nVersion: '+version+'\n', encoding='utf-8')
     monkeypatch.setenv('VOICE_STUDIO_NATIVE_ROOT', str(dependencies.parent))
     return data, reference, manifest, dependencies
 
@@ -163,7 +168,6 @@ def test_child_uses_only_local_cpu_asr_and_rejects_empty_low_confidence_speech(p
             observed['inference'] = options
             return iter(segments), None
     monkeypatch.setitem(sys.modules, 'faster_whisper', SimpleNamespace(WhisperModel=Model))
-    monkeypatch.setattr(transcript.importlib.metadata, 'version', lambda package: transcript.ASR_VERSION)
     original_path = list(sys.path)
     try:
         if segments and segments[0].no_speech_prob < .8:
@@ -180,6 +184,115 @@ def test_child_uses_only_local_cpu_asr_and_rejects_empty_low_confidence_speech(p
     assert observed['local_files_only'] is True and observed['num_workers'] == 1
     assert observed['reference'] == str(reference)
     assert observed['inference']['language'] == 'en' and observed['inference']['beam_size'] == 3
+
+
+def test_dedicated_runtime_is_preferred_without_imports_or_parent_sys_path_change(prepared, monkeypatch):
+    _, _, _, dependencies = prepared
+    original_path, original_modules = list(sys.path), set(sys.modules)
+    monkeypatch.setattr(transcript.importlib.metadata, 'version',
+                        lambda package: pytest.fail('Dedicated runtime must not inspect the main package version'))
+    assert transcript.asr_runtime_dependencies() == dependencies
+    assert transcript.asr_runtime_ready()
+    assert sys.path == original_path
+    assert not ({'faster_whisper', 'ctranslate2', 'av', 'tokenizers'} & (set(sys.modules)-original_modules))
+
+
+def test_pinned_main_runtime_is_supported_without_dedicated_target_or_parent_imports(prepared, monkeypatch):
+    _, _, _, dependencies = prepared
+    shutil.rmtree(dependencies)
+    original_path, original_modules = list(sys.path), set(sys.modules)
+    monkeypatch.setattr(transcript.importlib.metadata, 'version', transcript.ASR_RUNTIME_PINS.__getitem__)
+    assert transcript.asr_runtime_dependencies() is None
+    assert transcript.asr_runtime_ready()
+    assert sys.path == original_path
+    assert not ({'faster_whisper', 'ctranslate2', 'av', 'tokenizers'} & (set(sys.modules)-original_modules))
+
+
+def test_public_asr_ready_checks_model_and_runtime_without_imports(prepared):
+    data, _, _, _ = prepared
+    original_path, original_modules = list(sys.path), set(sys.modules)
+    assert transcript.asr_ready(data)
+    assert sys.path == original_path
+    assert not ({'faster_whisper', 'ctranslate2', 'av', 'tokenizers'} & (set(sys.modules)-original_modules))
+
+
+def test_public_asr_ready_supports_pinned_bundled_runtime(prepared, monkeypatch):
+    data, _, _, dependencies = prepared
+    shutil.rmtree(dependencies)
+    monkeypatch.setattr(transcript.importlib.metadata, 'version', transcript.ASR_RUNTIME_PINS.__getitem__)
+    assert transcript.asr_ready(data)
+
+
+@pytest.mark.parametrize('failure', ['missing_model', 'wrong_size', 'invalid_manifest',
+                                   'invalid_json', 'non_object', 'incomplete_runtime'])
+def test_public_asr_ready_rejects_missing_or_malformed_model_and_runtime(prepared, failure):
+    data, _, manifest, dependencies = prepared
+    if failure == 'missing_model':
+        (manifest.parent/'model.bin').unlink()
+    elif failure == 'wrong_size':
+        (manifest.parent/'model.bin').write_bytes(b'short')
+    elif failure == 'invalid_manifest':
+        record = json.loads(manifest.read_text())
+        record['repository'] = 'different/repository'
+        manifest.write_text(json.dumps(record))
+    elif failure == 'invalid_json':
+        manifest.write_text('{broken')
+    elif failure == 'non_object':
+        manifest.write_text('[]')
+    else:
+        shutil.rmtree(next(dependencies.glob('av-*.dist-info')))
+    assert not transcript.asr_ready(data)
+
+
+def test_public_asr_ready_handles_unprepared_data_directory(tmp_path):
+    assert not transcript.asr_ready(tmp_path/'missing-data')
+
+
+@pytest.mark.parametrize('package', list(transcript.ASR_RUNTIME_PINS))
+@pytest.mark.parametrize('failure', ['missing', 'version'])
+def test_main_runtime_requires_every_pinned_dependency(prepared, monkeypatch, package, failure):
+    _, _, _, dependencies = prepared
+    shutil.rmtree(dependencies)
+    def version(name):
+        if name == package:
+            if failure == 'missing':
+                raise transcript.importlib.metadata.PackageNotFoundError(name)
+            return '0.0.0'
+        return transcript.ASR_RUNTIME_PINS[name]
+    monkeypatch.setattr(transcript.importlib.metadata, 'version', version)
+    assert not transcript.asr_runtime_ready()
+    with pytest.raises(ValueError):
+        transcript.asr_runtime_dependencies()
+
+
+def test_incomplete_dedicated_runtime_cannot_shadow_pinned_main_runtime(prepared, monkeypatch):
+    _, _, _, dependencies = prepared
+    shutil.rmtree(next(dependencies.glob('av-*.dist-info')))
+    monkeypatch.setattr(transcript.importlib.metadata, 'version', transcript.ASR_RUNTIME_PINS.__getitem__)
+    assert not transcript.asr_runtime_ready()
+    with pytest.raises(ValueError, match='riêng'):
+        transcript.asr_runtime_dependencies()
+
+
+def test_child_can_transcribe_with_pinned_bundled_packages_when_target_is_absent(prepared, monkeypatch):
+    data, reference, _, dependencies = prepared
+    shutil.rmtree(dependencies)
+    monkeypatch.setattr(transcript.importlib.metadata, 'version', transcript.ASR_RUNTIME_PINS.__getitem__)
+    observed = {}
+    class Model:
+        def __init__(self, path, **options):
+            observed.update(path=path, **options)
+        def transcribe(self, path, **options):
+            observed['reference'] = path
+            return iter([SimpleNamespace(text=' Texte de test.', no_speech_prob=.1, avg_logprob=-.2)]), None
+    monkeypatch.setitem(sys.modules, 'faster_whisper', SimpleNamespace(WhisperModel=Model))
+    original_path = list(sys.path)
+    result = transcript._transcribe_request(request_for(data, reference, 'fr'))
+    assert result['text'] == 'Texte de test.'
+    assert sys.path == original_path
+    assert observed['path'] == str(data/'models/native-asr')
+    assert observed['reference'] == str(reference)
+    assert observed['device'] == 'cpu' and observed['compute_type'] == 'int8' and observed['local_files_only'] is True
 
 
 def test_child_stdout_is_json_and_upstream_logging_stays_on_stderr(monkeypatch, capsys):

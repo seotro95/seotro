@@ -112,7 +112,7 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
 
 
-app = FastAPI(title='Voice Studio Riêng', version='1.12.1', lifespan=lifespan)
+app = FastAPI(title='Voice Studio Riêng', version='1.12.2', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 @app.exception_handler(RequestValidationError)
@@ -257,6 +257,7 @@ def resource_config():
 def _config_values():
     from calibration import BENCHMARK_LANGUAGES
     from fast_multilingual import is_ready, cuda_available
+    from native_transcript import asr_ready
     reference_languages={language for voice in catalog_voices() for language in voice['languages']}
     if model_ready('voxcpm'):reference_languages.add('th')
     return {
@@ -264,6 +265,7 @@ def _config_values():
         'native_multilingual_ready': is_ready(DATA),
         'native_multilingual_cpu_available': is_ready(DATA,device='cpu'),
         'native_multilingual_cuda_available': cuda_available(DATA),
+        'native_reference_transcription_ready': asr_ready(DATA),
         'native_voxcpm_ready': is_ready(DATA,family='voxcpm2'),
         'native_voxcpm_cpu_available': is_ready(DATA,device='cpu',family='voxcpm2'),
         'native_voxcpm_cuda_available': cuda_available(DATA,family='voxcpm2'),
@@ -292,23 +294,50 @@ def _config_values():
 
 @app.get('/api/voices')
 def voices():
+    from fast_multilingual import is_ready
+    from native_transcript import asr_ready
+    from voice_library import resolve_reference
     entries=available_voices()
     entries=[{**voice,'engine':voice.get('engine','vieneu' if voice.get('languages',['vi'])[0]=='vi' else 'qwen_clone')} for voice in entries]
+    prepared={engine:model_ready(engine) for engine in {voice['engine'] for voice in entries}}
+    omni_prepared=is_ready(DATA)
+    voxcpm_native_prepared=is_ready(DATA,family='voxcpm2')
+    transcription_ready=asr_ready(DATA)
     output=[]
     for voice in entries:
         has_sample=voice.get('has_sample',True) if voice.get('category')=='reference' else True
         readiness={}
-        ready=model_ready(voice['engine']) and has_sample
-        if voice['engine']=='voxcpm':
-            from fast_multilingual import is_ready
-            readiness={'ready_voxcpm':ready,'ready_native':is_ready(DATA) and has_sample,
-                       'ready_voxcpm_native':is_ready(DATA,family='voxcpm2') and has_sample}
-            ready=ready or readiness['ready_native'] or readiness['ready_voxcpm_native']
         reason=voice.get('missing_reason') if voice.get('has_sample') is False else None
+        if voice['engine']=='voxcpm':
+            metadata=voice
+            if has_sample and voice.get('category') in {'reference','cloned'}:
+                try:
+                    _,metadata=resolve_reference(voice['id'],DATA)
+                except (OSError,ValueError,TypeError,KeyError):
+                    has_sample=False
+                    reason='Tệp mẫu giọng đang thiếu hoặc không hợp lệ. Khôi phục mẫu giọng trước khi tạo.'
+            transcript=metadata.get('transcript')
+            requires_transcription=not isinstance(transcript,str) or not transcript.strip()
+            readiness={'ready_voxcpm':prepared[voice['engine']] and has_sample,
+                       'ready_native':omni_prepared and has_sample and (not requires_transcription or transcription_ready),
+                       'ready_voxcpm_native':voxcpm_native_prepared and has_sample,
+                       'requires_reference_transcription':requires_transcription,
+                       'has_sample':has_sample}
+            ready=readiness['ready_voxcpm']
+            ready=ready or readiness['ready_native'] or readiness['ready_voxcpm_native']
+        else:
+            ready=prepared[voice['engine']] and has_sample
         if not ready and not reason:
-            reason=('Chạy TAI_GIONG_DA_NGON_NGU.bat một lần để tải bộ tạo giọng cho các mẫu quốc tế, kể cả tiếng Thái.'
-                    if voice['engine']=='voxcpm' else 'Mô hình của giọng này chưa được chuẩn bị trên máy.')
-        output.append({**voice,**readiness,'native_language':native_language(voice),'ready':ready,'missing_reason':reason})
+            if voice['engine'] in {'qwen','qwen_clone'}:
+                variant='CustomVoice' if voice['engine']=='qwen' else 'Base'
+                reason=f'Cần runtime Qwen, mô hình {variant} và bộ mã hóa âm thanh đúng phiên bản. Dùng bộ Windows 1.12.2 đầy đủ hoặc chạy lại trình cài bộ đó để khôi phục các thành phần còn thiếu.'
+            elif voice['engine']=='voxcpm' and omni_prepared and readiness['requires_reference_transcription'] and not transcription_ready:
+                reason='Mẫu này chưa có lời chép. OmniVoice cần mô hình và thư viện nhận dạng lời mẫu ngoại tuyến; dùng bộ Windows 1.12.2 đầy đủ để khôi phục.'
+            else:
+                reason=('Chạy TAI_GIONG_DA_NGON_NGU.bat một lần để tải bộ tạo giọng cho các mẫu quốc tế, kể cả tiếng Thái.'
+                        if voice['engine']=='voxcpm' else 'Mô hình của giọng này chưa được chuẩn bị trên máy.')
+        public={key:value for key,value in voice.items() if key not in {'transcript','original_audio','reference_audio','reference_sha256','reference_frames','reference_sample_rate'}}
+        output.append({**public,**readiness,'native_language':native_language(voice),'ready':ready,'missing_reason':reason})
     return {'voices':output}
 
 
@@ -318,6 +347,9 @@ def available_voices():
 
 def model_ready(engine):
     if engine=='system':return True
+    if engine in {'qwen','qwen_clone'}:
+        from qwen_backend import is_ready
+        return is_ready(DATA,engine=engine)
     marker=DATA/'models'/f'{engine}.ready'
     if engine=='voxcpm':
         from voxcpm_backend import runtime_python,prepared_model

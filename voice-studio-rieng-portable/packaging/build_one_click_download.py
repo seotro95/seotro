@@ -104,6 +104,7 @@ if errorlevel 1 goto failed
 
 :success
 set "VS_EXIT=0"
+call :cleanup_cache
 echo.
 echo DA TAO VA KIEM TRA SHA256 MOT TEP ZIP DAY DU:
 powershell.exe -NoLogo -NoProfile -NonInteractive -Command "Write-Host $env:VS_FINAL"
@@ -133,6 +134,12 @@ exit /b %VS_EXIT%
 :verify
 powershell.exe -NoLogo -NoProfile -NonInteractive -Command "$ErrorActionPreference='Stop';$s=$null;$h=$null;try{$p=$env:VS_CHECK;if(-not(Test-Path -LiteralPath $p -PathType Leaf)){exit 2};$f=Get-Item -LiteralPath $p;if(($f.Attributes -band [IO.FileAttributes]::ReparsePoint) -or $f.Length -ne [long]$env:VS_EXPECT_SIZE){exit 1};$s=[IO.File]::OpenRead($p);$h=[Security.Cryptography.SHA256]::Create();$digest=([BitConverter]::ToString($h.ComputeHash($s))).Replace('-','').ToLowerInvariant();if($digest -cne $env:VS_EXPECT_SHA){exit 1};exit 0}catch{Write-Host $_.Exception.Message;exit 1}finally{if($null -ne $s){$s.Dispose()};if($null -ne $h){$h.Dispose()}}"
 exit /b %ERRORLEVEL%
+
+:cleanup_cache
+rem Only after the complete ZIP is verified: clean an entirely owned cache.
+rem Unknown data, unsafe paths or mismatching bytes preserve the entire cache.
+powershell.exe -NoLogo -NoProfile -NonInteractive -Command "$ErrorActionPreference='Stop';function Matches($f,$size,$sha){if($f.Length -ne [long]$size){return $false};$s=$null;$h=$null;try{$s=[IO.File]::OpenRead($f.FullName);$h=[Security.Cryptography.SHA256]::Create();return ([BitConverter]::ToString($h.ComputeHash($s))).Replace('-','').ToLowerInvariant() -ceq $sha}finally{if($null -ne $s){$s.Dispose()};if($null -ne $h){$h.Dispose()}}};try{$p=$env:VS_CACHE;if(-not(Test-Path -LiteralPath $p)){exit 0};$d=Get-Item -LiteralPath $p;$m=Join-Path $p 'OWNER.txt';if(-not $d.PSIsContainer -or ($d.Attributes -band [IO.FileAttributes]::ReparsePoint) -or -not(Test-Path -LiteralPath $m -PathType Leaf)){Write-Host 'Giu cache vi khong xac nhan duoc quyen so huu.';exit 0};$marker=Get-Item -LiteralPath $m;if(($marker.Attributes -band [IO.FileAttributes]::ReparsePoint) -or $marker.Length -gt 256 -or [IO.File]::ReadAllText($m).Trim() -cne $env:VS_OWNER){Write-Host 'Giu cache vi khong xac nhan duoc quyen so huu.';exit 0};$known=@{@CLEANUP_PARTS@};$files=@();foreach($f in Get-ChildItem -LiteralPath $p -Force){if($f.Name -eq 'OWNER.txt'){continue};$key=$f.Name;if($f.PSIsContainer -or ($f.Attributes -band [IO.FileAttributes]::ReparsePoint) -or -not $known.ContainsKey($key)){Write-Host 'Giu cache vi co tep khac hoac du lieu chua khop.';exit 0};$expected=$known[$key];if(-not(Matches $f $expected[0] $expected[1])){Write-Host 'Giu cache vi co tep khac hoac du lieu chua khop.';exit 0};$files+=$f};foreach($f in $files){Remove-Item -LiteralPath $f.FullName};if(@(Get-ChildItem -LiteralPath $p -Force).Count -eq 1){Remove-Item -LiteralPath $m;[IO.Directory]::Delete($p);Write-Host 'Da xoa cac phan tai tam; chi giu ZIP day du.'};exit 0}catch{Write-Host 'Chua don het cache; ZIP day du van da duoc xac minh.';exit 0}"
+exit /b 0
 
 :part
 set "VS_PART=%~1"
@@ -211,11 +218,15 @@ def make_script(manifest, base_url=DEFAULT_BASE):
     calls = []
     for index, part in enumerate(data['parts'], 1):
         calls.append(f'call :part "{part["name"]}" "{part["size"]}" "{part["sha256"]}" "{index:03d}"\nif errorlevel 1 goto failed')
+    cleanup_parts = [f"'{part['name']}{suffix}'=@({part['size']},'{part['sha256']}')"
+                     for part in data['parts'] for suffix in ('', '.partial')]
+    cleanup_parts.append(f"'complete.zip.assembling'=@({data['archive_size']},'{data['archive_sha256']}')")
     substitutions = {
         '@ARCHIVE@': data['archive'], '@FULL_SIZE@': str(data['archive_size']),
         '@FULL_SHA@': data['archive_sha256'], '@BASE@': base_url,
         '@CACHE@': data['archive_sha256'][:12], '@PART_CALLS@': '\n'.join(calls),
         '@COPY_SOURCES@': '+'.join(f'"%VS_SOURCE_{index:03d}%"' for index in range(1, len(data['parts']) + 1)),
+        '@CLEANUP_PARTS@': ';'.join(cleanup_parts),
     }
     script = _TEMPLATE
     for token, value in substitutions.items():

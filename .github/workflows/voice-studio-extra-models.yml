@@ -1,0 +1,196 @@
+name: Voice Studio - Complete optional model and CPU runtime pack
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [voice-studio-native-fixed-v1.12.2]
+    paths:
+      - '.github/workflows/voice-studio-extra-models.yml'
+      - 'voice-studio-rieng-portable/packaging/prepare_complete_models.py'
+      - 'voice-studio-rieng-portable/packaging/test_prepare_complete_models.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-studio-extra-models-${{ github.sha }}
+  cancel-in-progress: false
+
+env:
+  PYTHONUTF8: '1'
+  PYTHONNOUSERSITE: '1'
+  HF_HUB_DISABLE_XET: '1'
+  HF_HUB_DISABLE_TELEMETRY: '1'
+  GRADIO_ANALYTICS_ENABLED: 'False'
+  DO_NOT_TRACK: '1'
+  EXTRA_RELEASE_TAG: voice-studio-extra-models-1.12.2-${{ github.run_id }}-${{ github.run_attempt }}
+  WINDOWS_BASE_SHA256: 65446c1a1799699b3aadad616461e97cf66c049597c7ae9a5cbf3887f20312f6
+
+jobs:
+  prepare-verify-publish:
+    runs-on: windows-2022
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Verify model preparation boundaries before downloading weights
+        shell: pwsh
+        run: |
+          python -m unittest discover -s voice-studio-rieng-portable/packaging -p test_prepare_complete_models.py -v 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'extra-tests.log')
+          $testExit = $LASTEXITCODE
+          if ($testExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'extra-tests.log') -Tail 60) -join ' | ')
+            Write-Output ('::error title=Extra model preparation tests failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $testExit
+          }
+      - name: Pin immutable public checkpoint inputs and prepare Omni ASR and both Qwen models
+        shell: pwsh
+        run: |
+          python voice-studio-rieng-portable/packaging/prepare_complete_models.py prepare --output "${{ runner.temp }}/extras" 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'extra-models.log')
+          $prepareExit = $LASTEXITCODE
+          if ($prepareExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'extra-models.log') -Tail 45) -join ' | ')
+            Write-Output ('::error title=Extra model checkpoint preparation failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $prepareExit
+          }
+      - name: Fetch the checksum-pinned Windows Python base for isolated runtimes
+        shell: python
+        run: |
+          import hashlib, os, pathlib, urllib.request
+          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'Voice-Studio-1.10-base.zip'
+          url = ('https://github.com/seotro95/seotro/releases/download/voice-studio-reference-1.10-40852923612/'
+                 'Voice-Studio-Rieng-1.10.0-19-Giong-GitHub-Windows-x64.zip')
+          digest = hashlib.sha256()
+          received = 0
+          with urllib.request.urlopen(url, timeout=180) as source, target.open('xb') as output:
+              for block in iter(lambda: source.read(8 * 1024**2), b''):
+                  received += len(block)
+                  if received > 4 * 1024**3:
+                      raise ValueError('Published Windows base exceeds the expected bound')
+                  digest.update(block)
+                  output.write(block)
+          if digest.hexdigest() != os.environ['WINDOWS_BASE_SHA256']:
+              raise ValueError('Published Windows base SHA256 mismatch; do not extract or execute')
+          print('Verified the immutable Windows base before extracting isolated Python.', flush=True)
+      - name: Build the isolated Qwen runtime and a temporary pinned main runtime for ASR validation
+        shell: pwsh
+        run: |
+          $env:PYTHONHOME = ''
+          $env:PYTHONPATH = ''
+          python voice-studio-rieng-portable/packaging/prepare_complete_models.py runtime --root "${{ runner.temp }}/extras" --base-archive "${{ runner.temp }}/Voice-Studio-1.10-base.zip" 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'extra-runtimes.log')
+          $runtimeExit = $LASTEXITCODE
+          if ($runtimeExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'extra-runtimes.log') -Tail 45) -join ' | ')
+            Write-Output ('::error title=Isolated Qwen or temporary QA runtime preparation failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $runtimeExit
+          }
+          Remove-Item -LiteralPath "${{ runner.temp }}/Voice-Studio-1.10-base.zip"
+      - name: Synthesize all nine Qwen presets and Base clone and transcribe the public reference on Windows CPU
+        shell: pwsh
+        run: |
+          $env:PYTHONHOME = ''
+          $env:PYTHONPATH = ''
+          $env:HF_HUB_OFFLINE = '1'
+          $env:TRANSFORMERS_OFFLINE = '1'
+          $env:HF_HOME = "${{ runner.temp }}/extras/app/.data/models/cache"
+          $env:VOICE_STUDIO_DATA_DIR = "${{ runner.temp }}/extras/app/.data"
+          & "${{ runner.temp }}/qa-base-runtime/runtime/python.exe" -s -X utf8 voice-studio-rieng-portable/packaging/prepare_complete_models.py smoke --root "${{ runner.temp }}/extras" --output "${{ runner.temp }}/EXTRA-MODEL-CPU-QA.json" 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'extra-pcm.log')
+          $smokeExit = $LASTEXITCODE
+          if ($smokeExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'extra-pcm.log') -Tail 50) -join ' | ')
+            Write-Output ('::error title=Actual Qwen or ASR Windows CPU check failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $smokeExit
+          }
+      - name: Preserve the final verified model tree and publishable immutable input metadata
+        shell: python
+        run: |
+          import hashlib, json, os, pathlib, shutil
+          temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          root = temp / 'extras'
+          if not (root / 'EXTRA-PACK-OWNER.json').is_file():
+              raise ValueError('The extra model tree is not owned by this preparation job')
+          shutil.copy2(temp / 'EXTRA-MODEL-CPU-QA.json', root / 'EXTRA-MODEL-CPU-QA.json')
+          # These are this job's public test samples and Python-generated caches.
+          public_qa = root / 'qa-public'
+          if public_qa.exists():
+              shutil.rmtree(public_qa)
+          for cache in root.rglob('__pycache__'):
+              if cache.is_dir() and not cache.is_symlink():
+                  shutil.rmtree(cache)
+          for cached in root.rglob('*.pyc'):
+              if cached.is_file() and not cached.is_symlink():
+                  cached.unlink()
+          temporary_main_runtime = temp / 'qa-base-runtime'
+          if temporary_main_runtime.exists():
+              shutil.rmtree(temporary_main_runtime)
+          records = {}
+          for path in sorted(root.rglob('*')):
+              if path.is_symlink():
+                  raise ValueError('Model artifact tree contains an unexpected symlink')
+              if path.is_file():
+                  with path.open('rb') as source:
+                      records[path.relative_to(root).as_posix()] = hashlib.file_digest(source, 'sha256').hexdigest()
+          manifest = root / 'EXTRA-TREE-MANIFEST.sha256'
+          with manifest.open('x', encoding='utf-8', newline='\n') as output:
+              output.write(''.join(value + '  ' + name + '\n' for name, value in sorted(records.items())))
+          metadata = temp / 'extra-metadata'
+          metadata.mkdir()
+          for name in ('EXTRA-MODEL-PLAN.json', 'EXTRA-MODEL-PINS.json', 'EXTRA-MODEL-CPU-QA.json',
+                       'EXTRA-TREE-MANIFEST.sha256', 'BUNDLED-QWEN-PACKAGES.txt',
+                       'QWEN-RUNTIME-REQUIREMENTS.txt', 'TORCH-INSTALL-REPORT.json', 'QWEN-INSTALL-REPORT.json'):
+              source = root / name
+              if not source.is_file():
+                  raise ValueError('Verified model metadata is missing: ' + name)
+              shutil.copy2(source, metadata / name)
+          description = {'format': 'voice-studio-extra-model-artifact-v1',
+                         'artifact_name': 'Voice-Studio-1.12.2-Verified-Extra-Models-Windows-CPU',
+                         'repository': os.environ['GITHUB_REPOSITORY'], 'source_commit': os.environ['GITHUB_SHA'],
+                         'source_run_id': os.environ['GITHUB_RUN_ID'], 'source_run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
+                         'artifact_includes_hidden_data': True, 'tree_file_count': len(records),
+                         'tree_manifest_sha256': hashlib.sha256(manifest.read_bytes()).hexdigest(),
+                         'qwen_device_tested': 'cpu', 'qwen_precision_tested': 'fp32',
+                         'asr_dependencies': 'verified original bundled main runtime, separate transcription process',
+                         'omnivoice_inference_test': 'not_run', 'gpu_inference_test': 'not_run',
+                         'target_30x_guaranteed': False, 'private_recordings_or_passwords_included': False}
+          (metadata / 'EXTRA-ARTIFACT-INPUTS.json').write_text(json.dumps(description, indent=2) + '\n', encoding='utf-8')
+      - name: Preserve bounded public preparation diagnostics if a required check fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Voice-Studio-1.12.2-Extra-Model-Failure-Diagnostics
+          path: |
+            ${{ runner.temp }}/extra-*.log
+            ${{ runner.temp }}/EXTRA-MODEL-PINS.json
+            ${{ runner.temp }}/extras/EXTRA-MODEL-PINS.json
+            ${{ runner.temp }}/EXTRA-MODEL-CPU-QA.json
+          if-no-files-found: ignore
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Voice-Studio-1.12.2-Verified-Extra-Models-Windows-CPU
+          path: ${{ runner.temp }}/extras/**
+          include-hidden-files: true
+          compression-level: 0
+          if-no-files-found: error
+          retention-days: 14
+      - name: Publish immutable model input metadata after actual Windows CPU Qwen and ASR checks
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $assets = @(Get-ChildItem -LiteralPath "${{ runner.temp }}/extra-metadata" -File | ForEach-Object { $_.FullName })
+          if ($assets.Count -lt 9) { throw 'Checkpoint pins, final tree manifest, runtime inventory and CPU report are required' }
+          $notes = @'
+          Verified build-input metadata for assembling the complete Windows Voice Studio package: checksum-pinned OmniVoice Q8, the local Whisper base reference model, and immutable Qwen3-TTS 0.6B CustomVoice/Base checkpoints including their speech tokenizer. Qwen uses its own CPU runtime. Local ASR reuses the verified original main runtime in a separate transcription process; no duplicate ASR dependency target is shipped.
+
+          This metadata is published only after actual Windows CPU FP32 synthesis of the nine Qwen preset voices through the application adapter, Base reference cloning, and local transcription using a pinned public sample. See EXTRA-MODEL-CPU-QA.json and EXTRA-MODEL-PINS.json for precise scope and immutable source/file hashes. The complete verified model/runtime directory is retained in the matching Actions artifact; EXTRA-ARTIFACT-INPUTS.json identifies its exact source commit, run and tree manifest. OmniVoice weights are verified here; this input workflow does not claim native OmniVoice inference has been tested in the final combined application.
+
+          These small release assets are build-input evidence, not the downloadable complete portable. GPU inference, GTX1060 throughput, pronunciation, private recordings and the one-hour-in-two-minutes target are not established by these CPU checks. Original model and dependency notices are retained in the artifact. No decrypted private recordings, passwords or user history are published.
+          '@
+          $notesPath = Join-Path $env:RUNNER_TEMP 'extra-release-notes.txt'
+          $notes | Set-Content -LiteralPath $notesPath -Encoding utf8
+          gh release create $env:EXTRA_RELEASE_TAG @assets --repo '${{ github.repository }}' --target '${{ github.sha }}' --title 'Voice Studio 1.12.2 - Verified model input pins and CPU evidence' --prerelease --latest=false --notes-file $notesPath
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

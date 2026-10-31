@@ -12,6 +12,7 @@ import json
 import os
 from pathlib import Path
 import queue
+import re
 import subprocess
 import sys
 import threading
@@ -197,7 +198,9 @@ class _BackendClient:
         self.process, self.log = None, None
         self.execution = {}
         data.mkdir(parents=True, exist_ok=True)
-        self.log = (data / 'international-native-backend.log').open('a', encoding='utf-8')
+        self._log_path = data / 'international-native-backend.log'
+        self.log = self._log_path.open('a', encoding='utf-8')
+        self._log_start = self.log.tell()
         env = dict(os.environ)
         for name in ('PYTHONPATH', 'PYTHONHOME'):
             env.pop(name, None)
@@ -229,13 +232,41 @@ class _BackendClient:
         try:
             line = self.responses.get(timeout=600)
             if line is None:
-                raise ValueError('Bộ đọc native đã dừng. Xem international-native-backend.log trong dữ liệu ứng dụng.')
+                raise ValueError(self._stopped_message())
             result = json.loads(line)
             if not isinstance(result, dict):
                 raise ValueError('Bộ đọc native trả về dữ liệu không hợp lệ.')
             return result
         except (queue.Empty, json.JSONDecodeError) as exc:
             raise ValueError('Bộ đọc native không phản hồi hợp lệ; có thể tiếp tục để thử lại.') from exc
+
+    def _stopped_message(self):
+        """Explain the stopped child using only its own bounded stderr region."""
+        message = 'Bộ đọc native đã dừng'
+        process = getattr(self, 'process', None)
+        code = process.poll() if process is not None else None
+        if code is None and callable(getattr(process, 'wait', None)):
+            try:
+                code = process.wait(timeout=.2)
+            except (subprocess.TimeoutExpired, OSError):
+                pass
+        if isinstance(code, int):
+            display = f'0x{code & 0xffffffff:08X}' if os.name == 'nt' and (code < 0 or code >= 0x80000000) else str(code)
+            message += ' (mã thoát ' + display + ')'
+        path = getattr(self, '_log_path', None)
+        if path is not None:
+            try:
+                with Path(path).open('rb') as source:
+                    source.seek(0, 2)
+                    source.seek(max(int(getattr(self, '_log_start', 0)), source.tell() - 4096))
+                    tail = source.read(4096).decode('utf-8', errors='replace')
+                tail = re.sub(r'\x1b\[[0-?]*[ -/]*[@-~]', '', tail)
+                tail = ''.join(char for char in tail if char in '\n\r\t' or ord(char) >= 32).strip()
+                if tail:
+                    return message + '. Chi tiết bộ chạy:\n' + tail[-2000:]
+            except (OSError, ValueError):
+                pass
+        return message + '. Xem international-native-backend.log trong dữ liệu ứng dụng.'
 
     def _execution(self, value):
         if (not isinstance(value, dict) or value.get('backend') != self.backend

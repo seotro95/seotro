@@ -24,10 +24,64 @@ BASE = Path(__file__).resolve().parent
 ASR_REPOSITORY = 'Systran/faster-whisper-base'
 ASR_REVISION = 'ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66'
 ASR_VERSION = '1.2.1'
+ASR_RUNTIME_PINS = {'faster-whisper': ASR_VERSION, 'ctranslate2': '4.8.3',
+                    'av': '16.1.0', 'tokenizers': '0.23.3'}
 ASR_FILES = frozenset({'config.json', 'model.bin', 'tokenizer.json', 'vocabulary.txt'})
 _SHA256 = re.compile(r'[0-9a-f]{64}')
 _lock = threading.RLock()
 _MAX_TEXT = 8000
+
+
+def asr_runtime_dependencies():
+    """Return the preferred target directory, or None for bundled site packages.
+
+    Reading wheel metadata does not import ASR, CTranslate2 or tokenizers into
+    Nano/Turbo. The selected packages are imported only by the separate child.
+    An existing dedicated target must be valid; it cannot shadow a valid main
+    runtime with an incomplete or differently versioned installation.
+    """
+    native = Path(os.environ.get('VOICE_STUDIO_NATIVE_ROOT', str(BASE.parent/'runtime-native'))).resolve()
+    dependencies = native/'asr'
+    try:
+        if dependencies.is_dir():
+            versions = {}
+            for distribution in importlib.metadata.distributions(path=[str(dependencies)]):
+                name = re.sub(r'[-_.]+', '-', distribution.metadata.get('Name', '')).lower()
+                if name in ASR_RUNTIME_PINS:
+                    if name in versions:
+                        raise ValueError('Trùng bản ghi thư viện nhận dạng lời mẫu.')
+                    versions[name] = distribution.version
+            if versions != ASR_RUNTIME_PINS:
+                raise ValueError('Thư viện nhận dạng lời mẫu riêng thiếu hoặc sai phiên bản đã chuẩn bị.')
+            return dependencies
+        versions = {name: importlib.metadata.version(name) for name in ASR_RUNTIME_PINS}
+        if versions != ASR_RUNTIME_PINS:
+            raise ValueError('Thư viện nhận dạng lời mẫu trong Python đi kèm chưa đúng phiên bản.')
+        return None
+    except (importlib.metadata.PackageNotFoundError, OSError, UnicodeError) as exc:
+        raise ValueError('Chưa có đủ thư viện nhận dạng lời mẫu đã chuẩn bị. Dùng gói Portable đầy đủ hoặc chạy TAI_GIONG_DA_NGON_NGU_NHANH.bat.') from exc
+
+
+def asr_runtime_ready():
+    """Check installed versions without loading optional inference libraries."""
+    try:
+        asr_runtime_dependencies()
+        return True
+    except (ValueError, TypeError, AttributeError):
+        return False
+
+
+def asr_ready(data):
+    """Report local model and pinned runtime readiness without loading ASR.
+
+    This inexpensive UI check verifies the prepared model manifest and sizes;
+    the isolated transcription child still verifies every model SHA256.
+    """
+    try:
+        _asr_manifest(data, verify=False)
+        return asr_runtime_ready()
+    except (OSError, ValueError, TypeError, AttributeError, KeyError):
+        return False
 
 
 def _language(language):
@@ -196,13 +250,9 @@ def _transcribe_request(request):
     if (request.get('reference_sha256') != reference_sha
             or request.get('asr_manifest_sha256') != manifest_sha):
         raise ValueError('Mẫu giọng hoặc mô hình đã thay đổi trước khi nhận dạng.')
-    native = Path(os.environ.get('VOICE_STUDIO_NATIVE_ROOT', str(BASE.parent/'runtime-native'))).resolve()
-    dependencies = native/'asr'
-    if not dependencies.is_dir():
-        raise ValueError('Chưa cài thư viện nhận dạng lời mẫu. Chạy TAI_GIONG_DA_NGON_NGU_NHANH.bat.')
-    sys.path.insert(0, str(dependencies))
-    if importlib.metadata.version('faster-whisper') != ASR_VERSION:
-        raise ValueError('Thư viện nhận dạng lời mẫu không đúng phiên bản đã chuẩn bị.')
+    dependencies = asr_runtime_dependencies()
+    if dependencies is not None:
+        sys.path.insert(0, str(dependencies))
     from faster_whisper import WhisperModel
     model = WhisperModel(str(model), device='cpu', compute_type='int8',
                          cpu_threads=4, num_workers=1, local_files_only=True)

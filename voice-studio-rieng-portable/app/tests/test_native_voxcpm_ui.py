@@ -427,7 +427,7 @@ post=async(path,payload)=>{requests.push({path,payload});return {id:'uploaded-vo
 ''')
 
 
-def test_clean3_html_requests_new_javascript_cache_identity():
+def test_full_1_12_2_html_requests_new_javascript_cache_identity():
     class Scripts(HTMLParser):
         def __init__(self):
             super().__init__()
@@ -439,4 +439,37 @@ def test_clean3_html_requests_new_javascript_cache_identity():
 
     parser = Scripts()
     parser.feed(SCRIPT.with_name('index.html').read_text(encoding='utf-8'))
-    assert parser.sources == ['/static/app.js?v=1.12.1-clean3']
+    assert parser.sources == ['/static/app.js?v=1.12.2']
+
+
+def test_omni_readiness_and_setup_message_explain_missing_asr_without_blocking_supplied_text():
+    run_javascript(r'''
+config={native_multilingual_ready:true,native_multilingual_cpu_available:true,
+ native_multilingual_cuda_available:true,native_reference_transcription_ready:false};
+$('international-backend').value='omnivoice'; $('international-device').value='cpu';
+const voice={id:'selected',engine:'voxcpm',has_sample:true,ready_native:false,
+ requires_reference_transcription:true};
+assert.equal(voiceReady(voice),false);
+assert.match(voiceSetupMessage(voice),/mô hình và thư viện nhận dạng/);
+assert.match(voiceSetupMessage(voice),/1.12.2/);
+assert.equal(voiceReady({...voice,requires_reference_transcription:false,ready_native:true}),true);
+config.native_reference_transcription_ready=true;
+assert.equal(voiceReady({...voice,ready_native:true}),true);
+''')
+
+
+def test_qwen_setup_and_model_status_use_full_bundle_recovery_not_old_main_runtime_installer():
+    run_javascript(r'''
+config={models:{qwen:false,qwen_clone:false},native_multilingual_ready:true,
+ native_multilingual_cpu_available:true,native_reference_transcription_ready:false};
+const voice={engine:'qwen',ready:false};
+assert.equal(voiceReady(voice),false);
+assert.match(voiceSetupMessage(voice),/runtime Qwen/);
+assert.match(voiceSetupMessage(voice),/1.12.2/);
+assert.doesNotMatch(voiceSetupMessage(voice),/TAI_GIONG_QUOC_TE.bat/);
+renderModelStatus();
+const rows=$('model-status').options.map(item=>item.textContent).join('\n');
+assert.match(rows,/qwen: Cần chuẩn bị/);
+assert.match(rows,/Cần nhận dạng cho mẫu chưa có lời chép/);
+assert.match(rows,/Nhận dạng lời mẫu ngoại tuyến: Cần chuẩn bị mô hình và thư viện/);
+''')

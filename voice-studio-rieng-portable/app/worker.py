@@ -46,7 +46,7 @@ def native_performance(job):
 
 def close_international_backends(keep=None):
     """Release the other model family before allocating its replacement."""
-    for name in ('voxcpm_backend', 'fast_multilingual'):
+    for name in ('voxcpm_backend', 'fast_multilingual', 'qwen_backend'):
         module = sys.modules.get(name)
         close = getattr(module, 'close_backends', None)
         if name != keep and close is not None:
@@ -55,7 +55,7 @@ def close_international_backends(keep=None):
 
 def load_synthesizer(job):
     import soundfile as sf
-    selected = ('fast_multilingual' if uses_native_multilingual(job) else 'voxcpm_backend') if job.get('engine') == 'voxcpm' else None
+    selected = ('fast_multilingual' if uses_native_multilingual(job) else 'voxcpm_backend') if job.get('engine') == 'voxcpm' else ('qwen_backend' if job.get('engine') in {'qwen', 'qwen_clone'} else None)
     close_international_backends(keep=selected)
     if job['engine'] == 'system':
         from system_voices import speak
@@ -121,30 +121,19 @@ def load_synthesizer(job):
                                   threads=max(1,min(8,int(job.get('nano_threads',4)))),
                                   steps=job.get('voxcpm_steps',8),
                                   precision=job.get('international_precision','fp32'))
-    import torch
-    from qwen_tts import Qwen3TTSModel
-    from huggingface_hub import snapshot_download
-    torch.set_num_threads(int(os.environ.get('OMP_NUM_THREADS', '4')))
-    gpu = torch.cuda.is_available()
-    suffix = 'Base' if job['engine'] == 'qwen_clone' else 'CustomVoice'
-    model_path = snapshot_download(f'Qwen/Qwen3-TTS-12Hz-0.6B-{suffix}', local_files_only=True)
-    model = Qwen3TTSModel.from_pretrained(model_path, device_map='cuda:0' if gpu else 'cpu', dtype=torch.bfloat16 if gpu else torch.float32, attn_implementation='sdpa')
-    prompt = None
-    if job['engine'] == 'qwen_clone':
-        from voice_library import resolve_reference
-        reference,voice=resolve_reference(job['voice_id'],DATA)
-        reference_text = voice.get('transcript', '').strip()
-        prompt = model.create_voice_clone_prompt(ref_audio=str(reference), ref_text=reference_text or None, x_vector_only_mode=not bool(reference_text))
-    def synthesize(text, output):
-        options = {'text': text, 'language': LANGUAGES[job['language']], 'max_new_tokens': 2048}
-        if job.get('quality') == 'fast':
-            options.update(do_sample=False, subtalker_dosample=False)
-        if prompt is not None:
-            samples, rate = model.generate_voice_clone(**options, voice_clone_prompt=prompt)
-        else:
-            samples, rate = model.generate_custom_voice(**options, speaker=job['speaker'])
-        sf.write(str(output), samples[0], rate)
-    return synthesize
+    if job['engine'] in {'qwen', 'qwen_clone'}:
+        from qwen_backend import create_synthesizer
+        reference, reference_text = None, ''
+        if job['engine'] == 'qwen_clone':
+            from voice_library import resolve_reference
+            reference, voice = resolve_reference(job['voice_id'], DATA)
+            reference_text = (voice.get('transcript') or '').strip()
+        return create_synthesizer(DATA, engine=job['engine'], language=job['language'],
+                                  speaker=job.get('speaker'), reference_audio=reference,
+                                  reference_text=reference_text,
+                                  threads=max(1, min(8, int(job.get('nano_threads', 4)))),
+                                  quality=job.get('quality', 'standard'), device='cpu')
+    raise ValueError('Bộ tạo giọng chưa được hỗ trợ.')
 
 
 _cached_key = None
@@ -733,6 +722,13 @@ def render(job, synthesize=None):
         execution.update(engine=job.get('engine'),workers=parallel_workers,worker_budget=parallel_workers)
         execution['model_memory']='native'
     elif job.get('engine')=='voxcpm':execution.update(threads=max(1,min(8,int(job.get('nano_threads',4)))),precision=job.get('international_precision','fp32'),voxcpm_steps=job.get('voxcpm_steps',8))
+    elif job.get('engine') in {'qwen', 'qwen_clone'} and synthesize is None:
+        from qwen_backend import execution_info
+        actual = execution_info()
+        if actual:
+            execution.update(actual)
+        execution.update(engine=job['engine'], workers=parallel_workers,
+                         worker_budget=parallel_workers, model_memory='process')
     write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'spoken_audio_seconds': spoken_audio_frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), 'auto_fitted_cues':sum(bool(c.get('auto_fitted')) for c in alignment), 'fit_warning_count':len(fit_warning_cues), 'fit_warning_cues':fit_warning_cues,'execution_settings':execution})
 
 
