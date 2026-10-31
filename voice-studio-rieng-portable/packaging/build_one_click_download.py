@@ -23,12 +23,12 @@ def validate_manifest(value):
     name, size, digest = (value.get(k) for k in ('archive', 'archive_size', 'archive_sha256'))
     if (not isinstance(name, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,140}\.zip', name)
             or re.match(r'(?i)^(con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.|$)', name)
-            or type(size) is not int or not 0 < size <= 12 * 1024**3
+            or type(size) is not int or not 0 < size <= 24 * 1024**3
             or not isinstance(digest, str) or not re.fullmatch('[0-9a-f]{64}', digest)):
         raise ValueError('Invalid archive filename, size or SHA256')
     parts = value.get('parts')
-    if not isinstance(parts, list) or not 1 <= len(parts) <= 8:
-        raise ValueError('A download needs between one and eight ordered parts')
+    if not isinstance(parts, list) or not 1 <= len(parts) <= 16:
+        raise ValueError('A download needs between one and sixteen ordered parts')
     normalized = []
     for index, part in enumerate(parts, 1):
         if (not isinstance(part, dict) or part.get('name') != name + f'.part{index:03d}'

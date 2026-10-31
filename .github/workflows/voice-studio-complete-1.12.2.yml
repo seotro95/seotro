@@ -303,6 +303,7 @@ jobs:
                   'payload_embedded_in_cmd':False,'gpu_inference_tested':False,'target_30x_guaranteed':False}
           (helper/'WINDOWS-COMPLETE-DOWNLOAD-QA.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
           guide=('VOICE STUDIO 1.12.2 - GÓI WINDOWS ĐẦY ĐỦ\n\n'
+                 f'Kích thước ZIP đầy đủ: {manifest["archive_size"]/10**9:.2f} GB.\n'
                  'Đây là trình tải tự động; tệp nhỏ không chứa sẵn toàn bộ model.\n'
                  'Giải nén, chạy TAI_TOOL_DAY_DU_1.12.2.cmd trong một thư mục mới.\n'
                  'Nó tải đủ các phần dữ liệu, ghép và xác minh một ZIP đầy đủ rồi tự dọn cache.\n'

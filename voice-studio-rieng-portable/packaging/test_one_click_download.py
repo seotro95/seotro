@@ -35,6 +35,26 @@ def fixture():
 
 
 class GeneratorTests(unittest.TestCase):
+    def test_complete_model_payload_supports_sixteen_parts_within_cmd_line_limit(self):
+        name='Voice-Studio-1.12.2-Full-Windows-x64.zip'
+        part_size=1536 * 1024**2
+        manifest={'format':'voice-studio-full-zip-parts-v1','archive':name,
+                  'archive_size':16 * part_size,'archive_sha256':'a' * 64,
+                  'parts':[{'name':name+f'.part{index:03d}','size':part_size,'sha256':'b' * 64}
+                           for index in range(1,17)]}
+        payload=builder.make_script(manifest).decode('ascii')
+        self.assertIn('set "VS_FULL_SIZE=25769803776"',payload)
+        self.assertEqual(sum(line.startswith('call :part ') for line in payload.splitlines()),16)
+        self.assertLess(max(map(len,payload.splitlines())),8191)
+        with self.assertRaises(ValueError):
+            builder.make_script({**manifest,'archive_size':24 * 1024**3+1})
+        long_name='A' * 141 + '.zip'
+        overlong={**manifest,'archive':long_name,
+                  'parts':[{**part,'name':long_name+f'.part{index:03d}'}
+                           for index,part in enumerate(manifest['parts'],1)]}
+        with self.assertRaisesRegex(ValueError,'command-line limit'):
+            builder.make_script(overlong)
+
     def test_payload_pins_all_bytes_and_is_readable_ascii_crlf(self):
         manifest, _, _ = fixture()
         payload = builder.make_script(manifest)
