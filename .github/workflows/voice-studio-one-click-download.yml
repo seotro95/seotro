@@ -35,8 +35,14 @@ jobs:
       - name: Check downloader paths, reuse and preservation on Windows
         shell: pwsh
         run: |
-          python -m unittest discover -s voice-studio-rieng-portable/packaging -p test_one_click_download.py -v
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m unittest discover -s voice-studio-rieng-portable/packaging -p test_one_click_download.py -v 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'one-click-tests.log')
+          $testExit = $LASTEXITCODE
+          if ($testExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'one-click-tests.log') -Tail 90) -join ' | ')
+            $detail = $detail.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+            Write-Output "::error title=One-click Windows tests failed::$detail"
+            exit $testExit
+          }
       - name: Read and pin the existing verified full archive manifest
         shell: python
         run: |
