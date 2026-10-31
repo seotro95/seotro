@@ -1,0 +1,315 @@
+name: Voice Studio 1.12.2 - Complete verified Windows package
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [voice-studio-native-fixed-v1.12.2]
+    paths:
+      - '.github/workflows/voice-studio-complete-1.12.2.yml'
+      - 'voice-studio-rieng-portable/packaging/build_complete_bundle.py'
+      - 'voice-studio-rieng-portable/packaging/test_build_complete_bundle.py'
+      - 'voice-studio-rieng-portable/packaging/smoke_complete_bundle.py'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: voice-studio-complete-1.12.2
+  cancel-in-progress: true
+
+env:
+  PYTHONUTF8: '1'
+  PYTHONNOUSERSITE: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+  EXTRA_SOURCE_RUN: '41236277105'
+  EXTRA_SOURCE_COMMIT: 'b86b1e10a55045a95b6b7fbd4b3a85b479484f4b'
+  EXTRA_ARTIFACT: Voice-Studio-1.12.2-Verified-Extra-Models-Windows-CPU
+  SOURCE_TAG: voice-studio-native-voxcpm-1.12.1-41214648685-1
+  SOURCE_SHA: a4646d2ab03d0ea9f605961dc7cde8fee4c512cc70344764564f3130fd3e2864
+  PORTABLE_NAME: Voice-Studio-1.12.2-Full-Windows-x64
+  ARCHIVE_NAME: Voice-Studio-1.12.2-Full-Windows-x64.zip
+  RELEASE_TAG: voice-studio-complete-1.12.2-${{ github.run_id }}-${{ github.run_attempt }}
+
+jobs:
+  complete:
+    runs-on: windows-2022
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Check package boundaries and owned download-cache cleanup on Windows
+        shell: pwsh
+        run: |
+          python -m pip --disable-pip-version-check install pytest==8.4.1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m pytest -q voice-studio-rieng-portable/packaging/test_build_complete_bundle.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          foreach ($pattern in @('test_prepare_complete_models.py','test_one_click_download.py')) {
+            python -m unittest discover -s voice-studio-rieng-portable/packaging -p $pattern -v
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+          foreach ($pattern in @('test_native_locale.py','test_native_paths.py','test_native_client_shutdown.py','test_native_diagnostics.py')) {
+            python -m unittest discover -s voice-studio-rieng-portable/app/tests -p $pattern -v
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+      - name: Select sufficient job-owned scratch space for all offline models
+        shell: pwsh
+        run: |
+          function Get-BuildDrives {
+            @(Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Name -in @('C','D') -and $_.Free -gt 0 } | Sort-Object Free -Descending)
+          }
+          $drives = Get-BuildDrives
+          if ($drives.Count -eq 0) { throw 'No build volume is available' }
+          if ($drives[0].Free -lt 35GB) {
+            # Only preinstalled SDKs on this ephemeral GitHub runner are removed.
+            # The portable uses verified bundled binaries, not these build tools.
+            $sdkPaths = @('C:\Android','C:\Program Files\Android','C:\Program Files\dotnet','C:\Program Files\Microsoft Visual Studio')
+            foreach ($path in $sdkPaths) {
+              if (Test-Path -LiteralPath $path) { Remove-Item -LiteralPath $path -Recurse -Force -ErrorAction SilentlyContinue }
+              $drives = Get-BuildDrives
+              if ($drives[0].Free -ge 35GB) { break }
+            }
+          }
+          $drives = Get-BuildDrives
+          if ($drives[0].Free -lt 35GB) { throw 'At least 35 GiB scratch space is required for the complete offline bundle' }
+          $work = Join-Path $drives[0].Root 'voice-studio-${{ github.run_id }}-${{ github.run_attempt }}'
+          if (Test-Path -LiteralPath $work) { throw 'Use a new job-owned build directory' }
+          New-Item -ItemType Directory $work | Out-Null
+          "VOICE_WORK=$work" | Out-File -LiteralPath $env:GITHUB_ENV -Encoding utf8 -Append
+          Write-Output ('Scratch volume: ' + $drives[0].Name + ', free GiB: ' + [Math]::Round($drives[0].Free / 1GB, 1))
+      - name: Wait for the exact successful model and runtime input build
+        shell: python
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          import json, os, pathlib, subprocess, time, urllib.request
+          expected = os.environ['EXTRA_SOURCE_COMMIT']
+          if len(expected)!=40: raise ValueError('Use the exact immutable extra-model input source commit')
+          api = 'https://api.github.com/repos/' + os.environ['GITHUB_REPOSITORY']
+          headers = {'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json',
+                     'X-GitHub-Api-Version':'2022-11-28','User-Agent':'Voice-Studio-Complete-Package/1.12.2'}
+          def get(path):
+              with urllib.request.urlopen(urllib.request.Request(api+path,headers=headers),timeout=60) as response:
+                  return json.load(response)
+          deadline = time.monotonic()+3600
+          while True:
+              run = get('/actions/runs/'+os.environ['EXTRA_SOURCE_RUN'])
+              if run.get('head_sha') != expected:
+                  raise ValueError('Extra model artifact source commit differs from the reviewed input')
+              if run.get('status') == 'completed':
+                  if run.get('conclusion') != 'success':
+                      raise ValueError('The required actual Qwen/ASR Windows input checks failed')
+                  artifacts = get('/actions/runs/'+os.environ['EXTRA_SOURCE_RUN']+'/artifacts?per_page=100')['artifacts']
+                  if not any(row['name']==os.environ['EXTRA_ARTIFACT'] and not row.get('expired') and row.get('size_in_bytes',0)>0 for row in artifacts):
+                      raise ValueError('The verified complete model tree artifact is missing')
+                  break
+              if time.monotonic()>deadline: raise TimeoutError('Required model input build did not finish')
+              print('Waiting for the pinned Windows Qwen and ASR PCM checks.',flush=True)
+              time.sleep(25)
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.EXTRA_ARTIFACT }}
+          run-id: ${{ env.EXTRA_SOURCE_RUN }}
+          github-token: ${{ github.token }}
+          path: ${{ env.VOICE_WORK }}/extras
+      - name: Fetch and verify the immutable complete Windows base
+        shell: python
+        run: |
+          import hashlib,json,os,pathlib,urllib.request
+          base='https://github.com/'+os.environ['GITHUB_REPOSITORY']+'/releases/download/'+os.environ['SOURCE_TAG']+'/'
+          with urllib.request.urlopen(base+'DOWNLOAD-PARTS.json',timeout=60) as response:
+              manifest=json.loads(response.read(65536))
+          if manifest['archive_sha256']!=os.environ['SOURCE_SHA']: raise ValueError('Unexpected full source archive')
+          target=pathlib.Path(os.environ['VOICE_WORK'])/'source-full.zip'
+          total=hashlib.sha256()
+          with target.open('xb') as output:
+              for part in manifest['parts']:
+                  if not part['name'].startswith('Voice-Studio-1.12.1-Full-Windows-x64.zip.part'):
+                      raise ValueError('Unexpected source part name')
+                  digest,size=hashlib.sha256(),0
+                  with urllib.request.urlopen(base+part['name'],timeout=180) as response:
+                      for block in iter(lambda:response.read(8*1024**2),b''):
+                          digest.update(block);total.update(block);size+=len(block);output.write(block)
+                  if size!=part['size'] or digest.hexdigest()!=part['sha256']: raise ValueError('Incomplete or mismatching source part')
+          if total.hexdigest()!=os.environ['SOURCE_SHA'] or target.stat().st_size!=manifest['archive_size']:
+              raise ValueError('Complete Windows source SHA256 mismatch')
+      - name: Stage the cleaned current application with every prepared model
+        shell: pwsh
+        run: |
+          $stage = Join-Path (Join-Path $env:VOICE_WORK 'kiem tra Tiếng Việt !') $env:PORTABLE_NAME
+          python voice-studio-rieng-portable/packaging/build_complete_bundle.py stage --source-archive "$env:VOICE_WORK/source-full.zip" --extras-directory "$env:VOICE_WORK/extras" --output $stage 2>&1 | Tee-Object -FilePath (Join-Path $env:VOICE_WORK 'complete-stage.log')
+          $stageExit = $LASTEXITCODE
+          if ($stageExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:VOICE_WORK 'complete-stage.log') -Tail 40) -join ' | ')
+            Write-Output ('::error title=Complete package stage failed::'+$detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $stageExit
+          }
+          Remove-Item -LiteralPath "$env:VOICE_WORK/source-full.zip"
+          Remove-Item -LiteralPath "$env:VOICE_WORK/extras" -Recurse -Force
+          New-Item -ItemType Directory -Path "$env:VOICE_WORK/qa" | Out-Null
+          Copy-Item -LiteralPath "$stage/CLEANUP-REPORT.json" -Destination "$env:VOICE_WORK/qa/CLEANUP-REPORT.json"
+      - name: Retrieve the pinned public reference for real multilingual checks
+        shell: python
+        run: |
+          import hashlib,os,pathlib,urllib.request
+          url='https://raw.githubusercontent.com/0xShug0/audio.cpp/2597b300f5961999387c84c65f2e8e79c088a571/assets/resources/b.wav'
+          with urllib.request.urlopen(url,timeout=60) as response: payload=response.read(8*1024**2)
+          if hashlib.sha256(payload).hexdigest()!='32bf74dfb8342ccc8284f47a9e5fe1f41b458a983a00938ed170f76951ce638f':
+              raise ValueError('Public reference audio differs from the verified input')
+          (pathlib.Path(os.environ['VOICE_WORK'])/'public-reference.wav').write_bytes(payload)
+      - name: Run actual Korean Chinese Spanish Japanese Omni ASR Qwen Nano and Turbo on Windows
+        shell: pwsh
+        run: |
+          $stage = Join-Path (Join-Path $env:VOICE_WORK 'kiem tra Tiếng Việt !') $env:PORTABLE_NAME
+          $env:PYTHONHOME = ''
+          $env:PYTHONPATH = ''
+          $env:VOICE_STUDIO_QWEN_PYTHON = Join-Path $stage 'runtime-qwen/python.exe'
+          $env:PATH = "$stage/ffmpeg/bin;$stage/runtime;$env:PATH"
+          & "$stage/runtime/python.exe" -s -X utf8 voice-studio-rieng-portable/packaging/smoke_complete_bundle.py --root $stage --reference "$env:VOICE_WORK/public-reference.wav" --output "$env:VOICE_WORK/qa/WINDOWS-COMPLETE-QA.json" 2>&1 | Tee-Object -FilePath (Join-Path $env:VOICE_WORK 'complete-pcm.log')
+          $pcmExit = $LASTEXITCODE
+          if ($pcmExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:VOICE_WORK 'complete-pcm.log') -Tail 40) -join ' | ')
+            foreach ($name in @('international-native-backend.log','qwen-backend.log')) {
+              $log = Join-Path $stage ('app/.data/'+$name)
+              if (Test-Path -LiteralPath $log) { $detail += ' | '+$name+': '+((Get-Content -LiteralPath $log -Tail 20) -join ' | ') }
+            }
+            Write-Output ('::error title=Actual complete Windows model check failed::'+$detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $pcmExit
+          }
+      - name: Archive only the frozen verified files and final JSON reports
+        shell: pwsh
+        run: |
+          $stage = Join-Path (Join-Path $env:VOICE_WORK 'kiem tra Tiếng Việt !') $env:PORTABLE_NAME
+          python voice-studio-rieng-portable/packaging/build_complete_bundle.py archive --stage $stage --output "$env:VOICE_WORK/$env:ARCHIVE_NAME" --qa-dir "$env:VOICE_WORK/qa" 2>&1 | Tee-Object -FilePath (Join-Path $env:VOICE_WORK 'complete-archive.log')
+          $archiveExit = $LASTEXITCODE
+          if ($archiveExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:VOICE_WORK 'complete-archive.log') -Tail 35) -join ' | ')
+            Write-Output ('::error title=Complete frozen archive failed::'+$detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $archiveExit
+          }
+          Remove-Item -LiteralPath (Join-Path $env:VOICE_WORK 'kiem tra Tiếng Việt !') -Recurse -Force
+      - name: Prepare GitHub data pieces and the automatic single-file downloader
+        shell: python
+        run: |
+          import json,os,pathlib,shutil,sys
+          sys.path.insert(0,str(pathlib.Path('voice-studio-rieng-portable/packaging').resolve()))
+          from build_full_update import split_release
+          from build_one_click_download import build
+          work=pathlib.Path(os.environ['VOICE_WORK'])
+          archive=work/os.environ['ARCHIVE_NAME']
+          downloads=split_release(archive,work/'downloads')
+          for path in (work/'qa').glob('*.json'): shutil.copy2(path,downloads/path.name)
+          # These are transport data, never three separate copies of the tool.
+          # The automatic downloader removes its verified cache after assembly.
+          (downloads/'DOC_TAI_VE.txt').write_text('Tải TAI_TOOL_DAY_DU_1.12.2.zip rồi giải nén và chạy CMD. Các partNNN là phần dữ liệu của cùng một ZIP; trình tải tự lấy, ghép, kiểm tra SHA256 và dọn cache sau khi thành công.\n',encoding='utf-8')
+          base='https://github.com/'+os.environ['GITHUB_REPOSITORY']+'/releases/download/'+os.environ['RELEASE_TAG']+'/'
+          build(downloads/'DOWNLOAD-PARTS.json',work/'helper/TAI_TOOL_DAY_DU_1.12.2.cmd',base)
+          archive.unlink()
+      - name: Publish the complete package after all actual Windows checks
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $notes = @'
+          Complete Windows Voice Studio 1.12.2 includes the bundled Nano/Turbo runtime, native VoxCPM2 Q8 CPU/CUDA12 sm61, OmniVoice Q8 plus its local ASR model, both Qwen 0.6B model variants and an isolated Qwen CPU FP32 runtime. Fixes the Windows locale-dependent corruption of Korean/Chinese UTF-8 and the missing Omni reference-transcription dependencies. No decrypted private recordings or passwords are published.
+
+          Actual Windows CPU checks cover public Nano/Turbo WAV/MP3/SRT/TXT exports, all nine Qwen model presets in the input pack plus representative jobs in the combined application, Base cloning, Omni with automatic local reference transcription, and native VoxCPM2 Korean/Chinese/Spanish/Japanese synthesis. Final reports are included inside the full ZIP. Qwen uses CPU FP32; native CUDA libraries are installed prerequisites and GPU operation is confirmed only by an actual local benchmark. GTX1060 inference, private voice identity, a full-hour render and 30x throughput are not established here.
+
+          Download TAI_TOOL_DAY_DU_1.12.2.zip, extract and run its CMD to obtain the complete large ZIP. This small file is a downloader. GitHub partNNN assets are transport pieces of one archive, not duplicate tools; the downloader removes its own verified cache after assembling the full ZIP. Keep your existing private-voice password. Extract the complete ZIP into a new folder and open MO_TOOL.bat.
+          '@
+          $notesPath = Join-Path $env:VOICE_WORK 'release-notes.txt'
+          $notes | Set-Content -LiteralPath $notesPath -Encoding utf8
+          $assets = @(Get-ChildItem -LiteralPath "$env:VOICE_WORK/downloads" -File | ForEach-Object { $_.FullName })
+          gh release create $env:RELEASE_TAG @assets --repo '${{ github.repository }}' --target '${{ github.sha }}' --title 'Voice Studio 1.12.2 - Complete Windows voices' --prerelease --latest=false --notes-file $notesPath
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          # Remote uploads are closed and SHA metadata exists. Release local data
+          # pieces before the independent full download so scratch use stays bounded.
+          $manifest = Get-Content -LiteralPath "$env:VOICE_WORK/downloads/DOWNLOAD-PARTS.json" -Raw | ConvertFrom-Json
+          foreach ($part in $manifest.parts) { Remove-Item -LiteralPath (Join-Path "$env:VOICE_WORK/downloads" $part.name) }
+      - name: Download the actual full package and verify only one ZIP remains
+        shell: pwsh
+        run: |
+          $work = Join-Path $env:VOICE_WORK 'tai mot goi Tiếng Việt !'
+          New-Item -ItemType Directory $work | Out-Null
+          Copy-Item -LiteralPath "$env:VOICE_WORK/helper/TAI_TOOL_DAY_DU_1.12.2.cmd" -Destination $work
+          $env:VOICE_DOWNLOAD_NO_PAUSE = '1'
+          Push-Location $work
+          try {
+            & cmd.exe /d /c '.\TAI_TOOL_DAY_DU_1.12.2.cmd' 2>&1 | Tee-Object -FilePath (Join-Path $env:VOICE_WORK 'complete-download.log')
+            $downloadExit = $LASTEXITCODE
+            if ($downloadExit -ne 0) {
+              $detail = ((Get-Content -LiteralPath (Join-Path $env:VOICE_WORK 'complete-download.log') -Tail 30) -join ' | ')
+              Write-Output ('::error title=Complete package public download failed::'+$detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+              exit $downloadExit
+            }
+            $archive = Join-Path $work $env:ARCHIVE_NAME
+            $before = (Get-Item -LiteralPath $archive).LastWriteTimeUtc.Ticks
+            & cmd.exe /d /c '.\TAI_TOOL_DAY_DU_1.12.2.cmd'
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+            if ((Get-Item -LiteralPath $archive).LastWriteTimeUtc.Ticks -ne $before) { throw 'The valid existing full ZIP was replaced' }
+          } finally { Pop-Location }
+      - name: Verify the complete download and make the single browser-friendly file
+        shell: python
+        run: |
+          import hashlib,json,os,pathlib,zipfile
+          work=pathlib.Path(os.environ['VOICE_WORK'])
+          directory=work/'tai mot goi Tiếng Việt !'
+          archive=directory/os.environ['ARCHIVE_NAME']
+          manifest=json.loads((work/'downloads/DOWNLOAD-PARTS.json').read_text(encoding='utf-8'))
+          with archive.open('rb') as source: actual=hashlib.file_digest(source,'sha256').hexdigest()
+          if actual!=manifest['archive_sha256'] or archive.stat().st_size!=manifest['archive_size']:
+              raise ValueError('The public full download differs from the tested archive')
+          if list(directory.glob('_Voice-Studio-Download-*')) or list(directory.glob('*.part*')):
+              raise ValueError('Verified temporary data pieces were not cleaned')
+          with zipfile.ZipFile(archive) as package:
+              info=json.loads(package.read(os.environ['PORTABLE_NAME']+'/BUILD_INFO.json'))
+              if info.get('version')!='1.12.2' or len(info.get('model_components',[]))!=7:
+                  raise ValueError('The downloaded archive is incomplete')
+          helper=work/'helper'
+          report={'platform':'win32','source_commit':os.environ['GITHUB_SHA'],'release_tag':os.environ['RELEASE_TAG'],
+                  'full_archive':archive.name,'full_size':archive.stat().st_size,'full_sha256':actual,
+                  'single_cmd_full_download_passed':True,'second_run_reused_valid_zip':True,
+                  'owned_part_cache_removed':True,'one_complete_zip_remains':True,
+                  'payload_embedded_in_cmd':False,'gpu_inference_tested':False,'target_30x_guaranteed':False}
+          (helper/'WINDOWS-COMPLETE-DOWNLOAD-QA.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
+          guide=('VOICE STUDIO 1.12.2 - GÓI WINDOWS ĐẦY ĐỦ\n\n'
+                 'Đây là trình tải tự động; tệp nhỏ không chứa sẵn toàn bộ model.\n'
+                 'Giải nén, chạy TAI_TOOL_DAY_DU_1.12.2.cmd trong một thư mục mới.\n'
+                 'Nó tải đủ các phần dữ liệu, ghép và xác minh một ZIP đầy đủ rồi tự dọn cache.\n'
+                 'Các partNNN không phải bản tool thừa. Khi tải bị ngắt, chạy lại CMD để tiếp tục.\n'
+                 'Giải nén ZIP đầy đủ vào thư mục mới rồi mở MO_TOOL.bat.\n'
+                 'Bộ mẫu riêng dùng mật khẩu cũ qua CAI_19_GIONG.bat.\n'
+                 'VoxCPM2 native đã sửa lỗi UTF-8 Windows; OmniVoice có model/ASR; Qwen có runtime CPU riêng.\n'
+                 'Chọn giọng/ngôn ngữ rồi thử VoxCPM2 CUDA 4 bước hoặc OmniVoice CUDA 8 bước để đo trên GPU của bạn.\n'
+                 'Chưa xác minh tốc độ GTX1060 ngang Turbo hoặc mục tiêu 30×.\n')
+          target=helper/'TAI_TOOL_DAY_DU_1.12.2.zip'
+          with zipfile.ZipFile(target,'x',zipfile.ZIP_DEFLATED) as package:
+              package.write(helper/'TAI_TOOL_DAY_DU_1.12.2.cmd','TAI_TOOL_DAY_DU_1.12.2.cmd')
+              package.writestr('DOC_TRUOC.txt',guide.encode('utf-8'))
+              package.write(work/'qa/WINDOWS-COMPLETE-QA.json','WINDOWS-COMPLETE-QA.json')
+              package.write(helper/'WINDOWS-COMPLETE-DOWNLOAD-QA.json','WINDOWS-COMPLETE-DOWNLOAD-QA.json')
+          for name in ('TAI_TOOL_DAY_DU_1.12.2.cmd','TAI_TOOL_DAY_DU_1.12.2.zip'):
+              path=helper/name
+              (helper/(name+'.sha256')).write_text(hashlib.sha256(path.read_bytes()).hexdigest()+'  '+name+'\n',encoding='utf-8')
+      - name: Attach the verified one-file automatic download
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $assets = @(Get-ChildItem -LiteralPath "$env:VOICE_WORK/helper" -File | ForEach-Object { $_.FullName })
+          gh release upload $env:RELEASE_TAG @assets --repo '${{ github.repository }}'
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: Voice-Studio-1.12.2-Complete-Failure-Diagnostics
+          path: |
+            ${{ env.VOICE_WORK }}/complete-*.log
+            ${{ env.VOICE_WORK }}/qa/*.json
+            ${{ env.VOICE_WORK }}/kiem tra Tiếng Việt !/${{ env.PORTABLE_NAME }}/app/.data/*backend.log
+          if-no-files-found: ignore
+          retention-days: 7

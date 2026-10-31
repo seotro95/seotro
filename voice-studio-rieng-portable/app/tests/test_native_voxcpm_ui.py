@@ -473,3 +473,119 @@ assert.match(rows,/qwen: Cần chuẩn bị/);
 assert.match(rows,/Cần nhận dạng cho mẫu chưa có lời chép/);
 assert.match(rows,/Nhận dạng lời mẫu ngoại tuyến: Cần chuẩn bị mô hình và thư viện/);
 ''')
+
+
+@pytest.mark.parametrize('language', ['fr', 'es', 'ja'])
+@pytest.mark.parametrize('requires_asr', [False, True])
+def test_fast_cuda_keeps_selected_omni_family_and_resets_stale_sixteen_steps(language, requires_asr):
+    run_javascript('const selectedLanguage=' + json.dumps(language) + "; const originalScript='Original script remains here.';\n"
+                   + CUDA_ACTION_SETUP + '\nconst requiresAsr=' + json.dumps(requires_asr) + r''';
+Object.assign(config,{native_multilingual_ready:true,native_multilingual_cpu_available:true,
+ native_multilingual_cuda_available:true,native_reference_transcription_ready:requiresAsr});
+Object.assign(voices[0],{ready_native:true,requires_reference_transcription:requiresAsr});
+$('international-backend').value='omnivoice';
+renderPreferences.tuning['maximum:voxcpm:fast:omnivoice:cuda']={omnivoice_steps:16,nano_parallel:1,nano_threads:8};
+post=async(path,payload)=>{requests.push({path,payload});return {id:'actual-omni-job',status:'queued'};};
+(async()=>{
+ await chooseNativeVoxCudaFastAndBenchmark();
+ assert.equal(requests.length,1);
+ const {path,payload}=requests[0];
+ assert.equal(path,'/api/benchmark');
+ assert.equal(payload.international_backend,'omnivoice');
+ assert.equal(payload.international_device,'cuda');
+ assert.equal(payload.omnivoice_steps,8);
+ assert.equal(payload.voxcpm_steps,10);
+ assert.equal(payload.nano_parallel,1);
+ assert.equal(payload.render_mode,'fast');
+ assert.equal(payload.voice_id,'selected-private-reference');
+ assert.equal(payload.language,selectedLanguage);
+ assert.equal($('voice').value,'selected-private-reference');
+ assert.equal($('language').value,selectedLanguage);
+ assert.equal($('script').value,originalScript);
+ assert.equal($('international-backend').value,'omnivoice');
+ assert.equal(renderPreferences.tuning['maximum:voxcpm:fast:omnivoice:cuda'].omnivoice_steps,8);
+ assert.equal(renderPreferences.tuning['maximum:voxcpm:quality:omnivoice:cpu'].omnivoice_steps,16);
+ assert.equal(renderPreferences.tuning['maximum:voxcpm:fast:voxcpm_native:cuda'].voxcpm_steps,10);
+ assert.equal(displayed[0].id,'actual-omni-job');
+ assert.match($('notice').textContent,/Đang tạo mẫu ngắn/);
+ assert.doesNotMatch($('notice').textContent,/Đã xác minh|đạt 30×|GPU đã hoạt động/);
+})().catch(error=>{console.error(error);process.exitCode=1;});
+''')
+
+
+@pytest.mark.parametrize('missing', ['omni_cuda', 'asr', 'voice_ready', 'config'])
+def test_fast_omni_does_not_use_installed_voxcpm_as_fallback_when_omni_is_unready(missing):
+    changes = {
+        'omni_cuda': 'delete config.native_multilingual_cuda_available;',
+        'asr': 'delete config.native_reference_transcription_ready; voices[0].requires_reference_transcription=true;',
+        'voice_ready': 'delete voices[0].ready_native;',
+        'config': 'config=null;',
+    }
+    run_javascript("const selectedLanguage='ja'; const originalScript='元の原稿。';\n"
+                   + CUDA_ACTION_SETUP + r'''
+Object.assign(config,{native_multilingual_ready:true,native_multilingual_cpu_available:true,
+ native_multilingual_cuda_available:true,native_reference_transcription_ready:true});
+Object.assign(voices[0],{ready_native:true,requires_reference_transcription:false});
+$('international-backend').value='omnivoice';
+''' + changes[missing] + r'''
+post=async(path,payload)=>{requests.push({path,payload});return {id:'unexpected'};};
+(async()=>{
+ await chooseNativeVoxCudaFastAndBenchmark();
+ assert.equal(requests.length,0);
+ assert.equal($('international-backend').value,'omnivoice');
+ assert.equal($('international-device').value,'cpu');
+ assert.equal($('render-mode').value,'quality');
+ assert.equal($('omnivoice-steps').value,'16');
+ assert.equal($('voxcpm-steps').value,'10');
+ assert.equal($('voice').value,'selected-private-reference');
+ assert.equal($('language').value,'ja');
+ assert.equal($('script').value,originalScript);
+ assert.match($('notice').textContent,/OmniVoice/);
+})().catch(error=>{console.error(error);process.exitCode=1;});
+''')
+
+
+def test_fast_omni_gpu_error_keeps_omni_cuda_eight_steps_for_diagnostics():
+    run_javascript("const selectedLanguage='fr'; const originalScript='Mon texte original.';\n"
+                   + CUDA_ACTION_SETUP + r'''
+Object.assign(config,{native_multilingual_ready:true,native_multilingual_cuda_available:true});
+Object.assign(voices[0],{ready_native:true,requires_reference_transcription:false});
+$('international-backend').value='omnivoice';
+post=async(path,payload)=>{requests.push({path,payload});throw new Error('OmniVoice CUDA device initialization failed');};
+(async()=>{
+ await chooseNativeVoxCudaFastAndBenchmark();
+ assert.equal(requests.length,1);
+ assert.equal($('international-backend').value,'omnivoice');
+ assert.equal($('international-device').value,'cuda');
+ assert.equal($('omnivoice-steps').value,'8');
+ assert.equal($('language').value,'fr');
+ assert.equal($('script').value,originalScript);
+ assert.match($('notice').textContent,/OmniVoice CUDA device initialization failed/);
+ assert.equal(submitting,false);
+})().catch(error=>{console.error(error);process.exitCode=1;});
+''')
+
+
+def test_fast_button_label_and_prerequisites_follow_current_model_family():
+    run_javascript(r'''
+config={cpu_cores:56,native_voxcpm_ready:true,native_voxcpm_cuda_available:true,
+ native_multilingual_ready:true,native_multilingual_cuda_available:true,
+ native_reference_transcription_ready:false,benchmark_languages:['ja']};
+voices=[{id:'selected',name:'Selected reference',engine:'voxcpm',languages:['ja'],has_sample:true,
+ ready_native:true,requires_reference_transcription:false,ready_voxcpm_native:true}];
+$('voice').value='selected'; $('language').value='ja'; $('render-mode').value='balanced';
+$('international-device').value='cpu'; $('omnivoice-steps').value='16';
+$('international-backend').value='omnivoice';
+updateRenderNote();
+assert.equal($('try-voxcpm-native-cuda-fast').textContent,'Thử OmniVoice CUDA · 8 bước');
+assert.match($('try-voxcpm-native-cuda-fast').title,/OmniVoice CUDA.*8 bước/);
+assert.equal($('try-voxcpm-native-cuda-fast').disabled,false);
+voices[0].requires_reference_transcription=true;
+updateRenderNote();
+assert.equal($('try-voxcpm-native-cuda-fast').disabled,true);
+assert.equal($('try-voxcpm-native-cuda-fast').textContent,'Thử OmniVoice CUDA · 8 bước');
+$('international-backend').value='voxcpm';
+updateRenderNote();
+assert.equal($('try-voxcpm-native-cuda-fast').textContent,'Thử VoxCPM2 CUDA · 4 bước');
+assert.equal($('try-voxcpm-native-cuda-fast').disabled,false);
+''')

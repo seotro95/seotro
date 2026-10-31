@@ -1,6 +1,6 @@
 """Generate one readable Windows download command for a verified full ZIP.
 
-The command is a downloader, not the 4.72 GB application itself. It downloads
+The command is a downloader, not the complete large application itself. It downloads
 only fixed HTTPS release assets, verifies each piece and the complete ZIP, and
 never executes downloaded code. Windows' built-in PowerShell handles hashes;
 curl.exe resumes partial downloads when available, with WebClient as fallback.
@@ -70,7 +70,7 @@ where powershell.exe >nul 2>&1
 if errorlevel 1 goto missing_powershell
 echo VOICE STUDIO - TAI GOI DAY DU THANH MOT TEP ZIP
 echo Day la tep tai tu dong, khong chua san toan bo tool.
-echo Can Internet va khoang 20 GB dung luong trong de tai, ghep va giai nen.
+echo Can Internet va nen co it nhat 35 GB dung luong trong de tai, ghep va giai nen.
 echo Co the chay lai neu mat mang; cac phan da xac minh duoc dung lai.
 echo.
 set "VS_CHECK=%VS_FINAL%"
