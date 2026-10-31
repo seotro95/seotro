@@ -166,6 +166,48 @@ def rendering_limits(engine='vieneu_nano',resident=None,resource_profile='smooth
     return limits
 
 
+def native_voxcpm_cpu_limits(resource_profile='smooth'):
+    """Budget independent native Q8 CPU models, without legacy FP32 credit.
+
+    Each worker owns a mutable native session and its reference/KV caches.
+    Reserve six GiB for each cold model/workspace and four GiB outside the
+    worker team. This is a conservative admission budget, not measured peak
+    memory or a promise of linear scaling across sockets.
+    """
+    import math
+
+    _resource_profile(resource_profile)
+    logical, physical, available = _machine_resources('voxcpm_native', None, 'fp32', 'process')
+    physical = max(1, min(int(logical), int(physical)))
+    cpu = _cpu_budget(physical, resource_profile)
+    if isinstance(available, bool) or not isinstance(available, (int, float)) or not math.isfinite(available):
+        available = 0
+    memory_workers = max(0, int((max(0, available) - 4) // 6))
+    workers = max(1, min(8, cpu, memory_workers))
+    if resource_profile == 'light':
+        workers = 1
+    return {'cpu_budget': cpu, 'max_workers': workers,
+            'max_threads': min(2 if resource_profile == 'light' else 8, cpu),
+            'memory_sufficient': available >= 10,
+            'available_memory_gb': max(0, available),
+            'per_worker_memory_budget_gb': 6, 'memory_reserve_gb': 4,
+            'minimum_available_gb': 10}
+
+
+def native_voxcpm_cpu_presets(resource_profile='smooth'):
+    """Prefer four threads per native model while retaining synthesis quality."""
+    limits = native_voxcpm_cpu_limits(resource_profile)
+    cpu = limits['cpu_budget']
+    workers = min(limits['max_workers'], max(1, cpu // 4))
+    threads = min(4, limits['max_threads'], max(1, cpu // workers))
+    def settings(steps, backend):
+        return {'nano_parallel': workers, 'nano_threads': threads,
+                'voxcpm_steps': steps, 'audio_fit_backend': backend}
+    return {'fast': settings(4, 'wsola'),
+            'balanced': settings(8, 'ffmpeg'),
+            'quality': settings(10, 'ffmpeg')}
+
+
 def choose_execution_model(engine,resource_profile='smooth',cpu_execution='auto',resident=None,precision='fp32',
                            data=None,render_mode='fast'):
     """Use the measured ONNX winner, retaining shared weights until measured.

@@ -87,7 +87,7 @@ function savedRenderTuning(engine, mode) {
   if (!saved || typeof saved !== 'object' || Array.isArray(saved)) return {};
   if (engine === 'vieneu' && turboPrecision(saved.quality || 'auto') !== turboPrecision()) return {};
   const tuning = {};
-  for (const [key, maximum] of [['nano_parallel', nativeMultilingual({engine}) ? 1 : engine === 'voxcpm' ? 8 : 32], ['nano_threads', 8]]) {
+  for (const [key, maximum] of [['nano_parallel', parallelLimit({engine})], ['nano_threads', threadLimit({engine})]]) {
     // Older preferences describe the shared-model runtime. Preserve their
     // quality choices, but choose a fresh CPU/RAM budget for another runtime.
     if (!current && ['vieneu_nano', 'vieneu'].includes(engine) && $('cpu-execution').value !== 'shared') continue;
@@ -104,6 +104,11 @@ function savedRenderTuning(engine, mode) {
 function rememberRenderTuning() {
   const voice = voices.find((item) => item.id === $('voice').value);
   if (renderEngines.has(voice?.engine)) {
+    if (nativeVoxCpu(voice)) {
+      const resources = boundedRenderResources(voice, {nano_parallel: Number($('nano-parallel').value), nano_threads: Number($('nano-threads').value)});
+      $('nano-parallel').value = String(resources.nano_parallel);
+      $('nano-threads').value = String(resources.nano_threads);
+    }
     const tuning = {nano_parallel: Number($('nano-parallel').value), nano_threads: Number($('nano-threads').value),
       audio_fit_backend: $('audio-fit-backend').value, quality: $('quality').value};
     if (voice.engine === 'vieneu_nano') tuning.nano_steps = Number($('nano-steps').value);
@@ -214,6 +219,28 @@ function engineName(voice) {
 
 function nativeMultilingual(voice) { return voice?.engine === 'voxcpm' && ['voxcpm_native', 'omnivoice'].includes($('international-backend').value); }
 function omniMultilingual(voice) { return voice?.engine === 'voxcpm' && $('international-backend').value === 'omnivoice'; }
+function nativeVoxCpu(voice) { return voice?.engine === 'voxcpm' && $('international-backend').value === 'voxcpm_native' && $('international-device').value === 'cpu'; }
+function nativeVoxCpuLimits() {
+  return config?.native_voxcpm_cpu_limits_by_resource?.[$('resource-profile').value] || {};
+}
+function boundedInteger(value, maximum, fallback = 1) {
+  const number = Number(value);
+  return Number.isInteger(number) && number >= 1 ? Math.min(number, maximum) : fallback;
+}
+function parallelLimit(voice) {
+  if (nativeVoxCpu(voice)) {
+    const limits = nativeVoxCpuLimits();
+    return Math.min(boundedInteger(limits.max_workers, 8), boundedInteger(limits.cpu_budget, 64, 64));
+  }
+  return nativeMultilingual(voice) ? 1 : voice?.engine === 'voxcpm' ? 8 : 32;
+}
+function threadLimit(voice) { return nativeVoxCpu(voice) ? boundedInteger(nativeVoxCpuLimits().max_threads, 8, 8) : 8; }
+function boundedRenderResources(voice, requested) {
+  const workers = boundedInteger(requested.nano_parallel, parallelLimit(voice));
+  let threads = boundedInteger(requested.nano_threads, threadLimit(voice));
+  if (nativeVoxCpu(voice)) threads = Math.min(threads, Math.max(1, Math.floor(boundedInteger(nativeVoxCpuLimits().cpu_budget, 64, 64) / workers)));
+  return {nano_parallel: workers, nano_threads: threads};
+}
 function selectedEngineName(voice) { return engineName(nativeMultilingual(voice) ? {...voice, international_backend: $('international-backend').value} : voice); }
 function nativeInstallation(backend = $('international-backend').value) {
   const prefix = backend === 'voxcpm_native' ? 'native_voxcpm' : 'native_multilingual';
@@ -264,6 +291,10 @@ function benchmarkSupported(voice) {
 
 function renderingPresets(voice) {
   if (nativeMultilingual(voice)) {
+    if (nativeVoxCpu(voice)) {
+      const presets = config?.native_voxcpm_cpu_rendering_presets_by_resource?.[$('resource-profile').value];
+      if (presets) return presets;
+    }
     const threads = $('resource-profile').value === 'light' ? 1 : Math.max(1, Math.min(8, Math.floor(Number(config?.cpu_cores || 4) / ($('resource-profile').value === 'smooth' ? 2 : 1))));
     const omni = omniMultilingual(voice);
     return Object.fromEntries((omni ? [['fast', 8], ['balanced', 16], ['quality', 16]] : [['fast', 4], ['balanced', 8], ['quality', 10]]).map(([mode, steps]) =>
@@ -447,8 +478,9 @@ function applyRenderMode(mode, {useSaved = true, remember = true} = {}) {
   $('nano-steps').value = String(preset.nano_steps || {fast: 4, balanced: 8, quality: 16}[mode] || 8);
   $('voxcpm-steps').value = String(preset.voxcpm_steps || {fast: 4, balanced: 8, quality: 10}[mode] || 8);
   $('omnivoice-steps').value = String(preset.omnivoice_steps || {fast: 8, balanced: 16, quality: 16}[mode] || 16);
-  $('nano-parallel').value = nativeMultilingual(voice) ? '1' : String(Math.max(1, Math.min(voice?.engine === 'voxcpm' ? 8 : 32, Number(preset.nano_parallel) || 1)));
-  $('nano-threads').value = String(Math.max(1, Math.min(8, Number(preset.nano_threads) || 2)));
+  const resources = boundedRenderResources(voice, {nano_parallel: preset.nano_parallel, nano_threads: preset.nano_threads || 2});
+  $('nano-parallel').value = String(resources.nano_parallel);
+  $('nano-threads').value = String(resources.nano_threads);
   $('audio-fit-backend').value = preset.audio_fit_backend || (mode === 'fast' ? 'wsola' : 'ffmpeg');
   if (preset.quality) $('quality').value = preset.quality;
   if (remember) saveRenderPreferences();
@@ -459,8 +491,9 @@ function applyResourceBudget() {
   const voice = voices.find((item) => item.id === $('voice').value);
   const preset = renderingPresets(voice)?.[$('render-mode').value];
   if (preset) {
-    $('nano-parallel').value = nativeMultilingual(voice) ? '1' : String(Math.max(1, Math.min(voice?.engine === 'voxcpm' ? 8 : 32, Number(preset.nano_parallel) || 1)));
-    $('nano-threads').value = String(Math.max(1, Math.min(8, Number(preset.nano_threads) || 1)));
+    const resources = boundedRenderResources(voice, preset);
+    $('nano-parallel').value = String(resources.nano_parallel);
+    $('nano-threads').value = String(resources.nano_threads);
   }
   // A resource choice changes CPU/RAM use. Keep the selected voice, sampling
   // steps and fitting method, which also affect pronunciation and timing.
@@ -480,6 +513,8 @@ async function inspectMachine() {
     if (info.cpu_execution_rendering_presets && config) config.cpu_execution_rendering_presets = info.cpu_execution_rendering_presets;
     if (info.turbo_int8_rendering_presets_by_resource && config) config.turbo_int8_rendering_presets_by_resource = info.turbo_int8_rendering_presets_by_resource;
     if (info.turbo_int8_cpu_execution_rendering_presets && config) config.turbo_int8_cpu_execution_rendering_presets = info.turbo_int8_cpu_execution_rendering_presets;
+    if (info.native_voxcpm_cpu_rendering_presets_by_resource && config) config.native_voxcpm_cpu_rendering_presets_by_resource = info.native_voxcpm_cpu_rendering_presets_by_resource;
+    if (info.native_voxcpm_cpu_limits_by_resource && config) config.native_voxcpm_cpu_limits_by_resource = info.native_voxcpm_cpu_limits_by_resource;
     machineSummary = info;
     const gpuNames = Array.isArray(info.nvidia_gpus) ? info.nvidia_gpus : [];
     const rows = [
@@ -568,13 +603,18 @@ function updateVoice() {
   $('calibrate-machine').disabled = !ready || submitting || !benchmarkSupported(voice) || !calibrationVoice(voice);
   $('calibrate-machine').title = calibrationVoice(voice) ? `Đo cấu hình nhiều tác vụ cho giọng ${voice.name} · ${engineName(voice)}.` : 'Tự tối ưu nhiều cấu hình dùng Nano tiếng Việt hoặc Turbo Việt–Anh. Với giọng đa ngôn ngữ, dùng Đo giọng đang chọn.';
   $('benchmark').title = benchmarkSupported(voice) ? 'Đo bằng giọng, ngôn ngữ và chế độ ưu tiên đang chọn.' : 'Chưa có lời đọc mẫu cho ngôn ngữ này.';
-  if (nativeMultilingual(voice)) $('nano-parallel').value = '1';
-  $('nano-parallel').disabled = !cpuVoice(voice) || nativeMultilingual(voice) || submitting;
+  const resources = boundedRenderResources(voice, {nano_parallel: $('nano-parallel').value, nano_threads: $('nano-threads').value});
+  if (nativeMultilingual(voice)) {
+    $('nano-parallel').value = String(resources.nano_parallel);
+    $('nano-threads').value = String(resources.nano_threads);
+  }
+  $('nano-parallel').disabled = !cpuVoice(voice) || parallelLimit(voice) === 1 || submitting;
   for (const option of $('nano-parallel').options) {
-    const outsideBudget = voice?.engine === 'voxcpm' && Number(option.value) > (nativeMultilingual(voice) ? 1 : 8);
+    const outsideBudget = Number(option.value) > parallelLimit(voice);
     option.disabled = outsideBudget; option.hidden = outsideBudget;
   }
   $('nano-threads').disabled = !cpuVoice(voice) || submitting;
+  $('nano-threads').max = String(threadLimit(voice));
   $('cpu-execution-field').hidden = !calibrationVoice(voice);
   $('cpu-execution').disabled = !calibrationVoice(voice) || submitting;
   $('maximize-cpu').disabled = !cpuVoice(voice) || submitting;
@@ -593,7 +633,9 @@ function updateVoice() {
   $('resource-note').textContent = cpuVoice(voice)
     ? voice.engine === 'voxcpm'
       ? nativeMultilingual(voice)
-        ? `${selectedEngineName(voice)} giữ một mô hình dùng lại cho các câu và giọng mẫu. Một tác vụ giúp tránh nhân bản mô hình trong RAM/VRAM; luồng CPU vẫn áp dụng cho phần xử lý trên CPU.`
+        ? nativeVoxCpu(voice)
+          ? `VoxCPM2 native trên CPU có thể chạy đến ${parallelLimit(voice)} tác vụ theo ngân sách CPU/RAM hiện tại. Mỗi tác vụ giữ một bản mô hình để dùng lại giữa các câu; lần nạp đầu dùng thêm RAM. Cấu hình nhiều tác vụ cần đo bằng lời đọc thật để xác nhận tốc độ.`
+          : `${selectedEngineName(voice)} giữ một mô hình dùng lại cho các câu và giọng mẫu. Một tác vụ giúp tránh nhân bản mô hình trong RAM/VRAM; luồng CPU vẫn áp dụng cho phần xử lý trên CPU.`
         : 'Các tác vụ và luồng CPU áp dụng cho giọng đa ngôn ngữ đang chọn. Mỗi tác vụ dùng nhiều RAM; đo mẫu để kiểm tra tốc độ và chọn ít tác vụ hơn nếu máy thiếu RAM.'
       : `Các tác vụ CPU áp dụng cho giọng ${engineName(voice)} đang chọn. Nhiều tác vụ dùng thêm RAM; bấm tự đo để tìm cấu hình phù hợp. Số bước Nano được chỉnh riêng bên dưới.`
     : 'Giọng hiện tại dùng cơ chế xử lý riêng của mô hình.';
@@ -771,19 +813,29 @@ function formatSpeedReport(report) {
   const seconds = Number(report.estimated_hour_seconds);
   const measuredSeconds = Number(report.voiced_seconds ?? report.measurement_audio_seconds);
   const elapsed = Number(report.measurement_elapsed_seconds);
+  const actualHour = report.actual_hour_of_speech_generated === true
+    && Number.isFinite(measuredSeconds) && measuredSeconds >= 3600 && Number.isFinite(elapsed) && elapsed > 0;
+  const verifiedThirty = actualHour && report.target_30x_verified_on_hour_or_longer === true && measuredSeconds / elapsed >= 30;
   const number = (value) => value.toLocaleString('vi-VN', {maximumFractionDigits: 2});
   const parts = [];
   if (Number.isFinite(multiplier) && multiplier > 0) parts.push(`Tốc độ đo: ${number(multiplier)}× thời gian thực`);
-  if (Number.isFinite(measuredSeconds) && Number.isFinite(elapsed)) parts.push(`${number(measuredSeconds)} giây ${report.voiced_seconds != null || report.excluded_silence_seconds != null ? 'lời đọc' : 'âm thanh'} / ${number(elapsed)} giây xử lý`);
-  if (Number.isFinite(seconds) && seconds > 0) parts.push(`Ước tính tạo 1 giờ lời đọc: ${duration(Math.ceil(seconds))}`);
-  if (typeof report.target_30x_met_on_sample === 'boolean') parts.push(report.target_30x_met_on_sample ? 'Mẫu đo đạt mục tiêu 30× (1 giờ trong 2 phút).' : 'Mẫu đo chưa đạt mục tiêu 30× (1 giờ trong 2 phút).');
+  if (Number.isFinite(measuredSeconds) && Number.isFinite(elapsed)) parts.push(`${number(measuredSeconds)} giây ${report.voiced_seconds != null || report.excluded_silence_seconds != null ? 'lời đọc' : 'âm thanh'} / ${elapsed.toLocaleString('vi-VN', {maximumFractionDigits: 3})} giây xử lý`);
+  if (Number.isFinite(seconds) && seconds > 0) parts.push(`${actualHour ? 'Thời gian quy đổi từ bản thu này cho 1 giờ lời đọc' : 'Ước tính tạo 1 giờ lời đọc'}: ${duration(Math.ceil(seconds))}`);
+  if (actualHour) {
+    parts.push('Tác vụ này đã tạo đủ ít nhất 1 giờ lời đọc thực tế.');
+    parts.push(verifiedThirty
+      ? 'Đã xác minh tốc độ từ 30× trên bản tạo đủ 1 giờ lời đọc trở lên.'
+      : 'Bản tạo đủ 1 giờ lời đọc này chưa xác minh đạt mục tiêu 30×.');
+  } else if (typeof report.target_30x_met_on_sample === 'boolean') parts.push(report.target_30x_met_on_sample
+    ? 'Mẫu ngắn đạt tốc độ 30×; chưa xác minh bằng bản tạo đủ 1 giờ lời đọc.'
+    : 'Mẫu đo chưa đạt mục tiêu 30× (1 giờ trong 2 phút).');
   if (report.includes_silence) parts.push(report.voiced_seconds != null
     ? 'Ước tính dựa trên phần lời đọc; khoảng lặng trên timeline được tách riêng.'
     : 'Bản thu có khoảng lặng; tỷ lệ theo tổng thời lượng có thể cao hơn tốc độ tạo lời đọc thực.');
   else if (Number(report.excluded_silence_seconds) > 0) parts.push(`Đã loại ${number(Number(report.excluded_silence_seconds))} giây khoảng lặng khỏi phép đo tốc độ lời đọc.`);
-  parts.push(report.estimate_only
-    ? 'Đây là ước tính từ mẫu ngắn, chưa phải kết quả tạo đủ 1 giờ; bản dài có thể khác.'
-    : 'Thời gian tạo bản khác thay đổi theo giọng, nội dung và tài nguyên máy.');
+  parts.push(actualHour
+    ? 'Đây là kết quả của bản thu này; thời gian bản khác thay đổi theo giọng, nội dung và tài nguyên máy.'
+    : 'Ước tính cho bản dài chưa được xác minh bằng phép thử tạo đủ 1 giờ lời đọc; bản dài có thể khác.');
   return parts.join(' · ');
 }
 

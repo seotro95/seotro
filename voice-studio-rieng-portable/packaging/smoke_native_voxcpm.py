@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib
 import json
 import os
 from pathlib import Path
@@ -15,6 +16,51 @@ import time
 import wave
 
 from build_full_update import _sources, application_digest
+
+
+def app_http_smoke(app_dir, expected_version):
+    """Start the current ASGI application and exercise its UI/API lifecycle.
+
+    Uses the interpreter's installed FastAPI/Starlette/httpx, including when
+    invoked with the bundled Windows Python. It does not enqueue synthesis,
+    decrypt a voice library or claim that every bundled model was inferred.
+    """
+    from fastapi.testclient import TestClient
+
+    app_dir = Path(app_dir).resolve()
+    if str(app_dir) not in sys.path:
+        sys.path.insert(0, str(app_dir))
+    application = importlib.import_module('app')
+    if Path(application.__file__).resolve() != app_dir / 'app.py':
+        raise ValueError('HTTP smoke imported a different application source')
+    with TestClient(application.app) as client:
+        root = client.get('/')
+        if root.status_code != 200 or 'Voice Studio' not in root.text:
+            raise ValueError('Current application HTML did not load')
+        config_response = client.get('/api/config')
+        if config_response.status_code != 200:
+            raise ValueError('Current application configuration did not load')
+        config = config_response.json()
+        if config.get('version') != expected_version or config.get('edition') != 'standalone-voice':
+            raise ValueError('HTTP configuration does not identify this application/version')
+        script = client.get('/static/app.js')
+        if script.status_code != 200 or script.content != (app_dir / 'static/app.js').read_bytes():
+            raise ValueError('The HTTP UI script does not match the current source')
+        voices_response = client.get('/api/voices')
+        if voices_response.status_code != 200:
+            raise ValueError('Current application voice catalog did not load')
+        voices = voices_response.json().get('voices')
+        if not isinstance(voices, list) or not voices:
+            raise ValueError('Current application voice catalog is empty or malformed')
+        conversion = client.post('/api/scripts/convert', json={
+            'text': 'Bonjour. Merci.', 'input_format': 'txt', 'output_format': 'txt'})
+        if conversion.status_code != 200 or conversion.json().get('text') != 'Bonjour. Merci.':
+            raise ValueError('Current application TXT conversion did not preserve the text')
+    return {'lifespan_started_and_stopped': True, 'ui_html': True,
+            'current_ui_script': True, 'config_version': expected_version,
+            'voice_catalog': True, 'voice_catalog_count': len(voices),
+            'txt_conversion': True, 'private_voice_unlock_attempted': False,
+            'additional_model_inference_attempted': False}
 
 
 def main(argv=None):
@@ -79,11 +125,13 @@ def main(argv=None):
                              'audio_seconds': duration, 'processing_seconds': elapsed,
                              'realtime_multiplier': duration / elapsed,
                              'valid_pcm_audio': True, 'execution': execution})
+        http_checks = app_http_smoke(app_dir, version)
         report = {'format': 'native-voxcpm-windows-pcm-v1', 'platform': sys.platform,
                   'product_version': version, 'source_commit': os.environ.get('GITHUB_SHA'),
                   'app_source_sha256': application_digest(overlay),
                   'native_cpu_sha256': library_digest,
                   'native_model_sha256': marker['sha256'], 'native_smoke_passed': True,
+                  'app_http_smoke_passed': True, 'app_http_smoke': http_checks,
                   'public_reference_only': True, 'private_reference_audio_included': False,
                   'device': 'cpu', 'steps': args.steps, 'threads': args.threads,
                   'requests': requests, 'gpu_inference_tested': False,

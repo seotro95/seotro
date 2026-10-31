@@ -506,7 +506,9 @@ def render(job, synthesize=None):
         raise ValueError('Không có nội dung đọc sau khi xử lý ký hiệu nhấn/nghỉ.')
     cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
     parallel_workers=min(8 if job.get('engine')=='voxcpm' else 32,max(1,int(job.get('nano_parallel',1)))) if job.get('engine') in {'vieneu_nano','vieneu','voxcpm'} and synthesize is None else 1
-    if uses_native_multilingual(job):
+    native_cpu_parallel=(job.get('engine')=='voxcpm' and job.get('international_backend')=='voxcpm_native'
+                         and job.get('international_device','cpu')=='cpu')
+    if uses_native_multilingual(job) and not native_cpu_parallel:
         # One resident native session reuses weights and reference tokens.
         # Replicating it across model processes can exhaust a 6 GB GPU.
         parallel_workers=1
@@ -526,7 +528,7 @@ def render(job, synthesize=None):
     if shared:
         pool_key=(parallel_workers,'shared',*weight_key)
     elif uses_native_multilingual(job):
-        pool_key=(1,job.get('international_backend'),max(1,min(8,int(job.get('nano_threads',4)))),job.get('international_device','cpu'),native_performance(job))
+        pool_key=(parallel_workers,job.get('international_backend'),max(1,min(8,int(job.get('nano_threads',4)))),job.get('international_device','cpu'),native_performance(job))
     elif job.get('engine')=='voxcpm':
         # A VoxCPM child keeps the same weights for all reference voices and
         # step counts. Each submitted job still selects its own closure and
@@ -728,7 +730,7 @@ def render(job, synthesize=None):
             actual=execution_info()
             if actual:
                 execution.update(actual)
-        execution.update(engine=job.get('engine'),workers=1,worker_budget=1)
+        execution.update(engine=job.get('engine'),workers=parallel_workers,worker_budget=parallel_workers)
         execution['model_memory']='native'
     elif job.get('engine')=='voxcpm':execution.update(threads=max(1,min(8,int(job.get('nano_threads',4)))),precision=job.get('international_precision','fp32'),voxcpm_steps=job.get('voxcpm_steps',8))
     write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'spoken_audio_seconds': spoken_audio_frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), 'auto_fitted_cues':sum(bool(c.get('auto_fitted')) for c in alignment), 'fit_warning_count':len(fit_warning_cues), 'fit_warning_cues':fit_warning_cues,'execution_settings':execution})

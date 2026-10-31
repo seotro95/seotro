@@ -1,0 +1,217 @@
+name: Voice Studio 1.12.1 - Package pinned native Windows assets
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish after current-source Windows CPU PCM checks
+        type: boolean
+        default: true
+  push:
+    branches: [voice-studio-native-voxcpm-v1.12.1]
+    paths:
+      - '.github/workflows/voice-studio-native-package-1.12.1.yml'
+      - 'voice-studio-rieng-portable/app/**'
+      - 'voice-studio-rieng-portable/packaging/build_full_update.py'
+      - 'voice-studio-rieng-portable/packaging/smoke_native_voxcpm.py'
+      - 'voice-studio-rieng-portable/DOC_TRUOC.md'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: voice-studio-voxcpm-1.12.1-package-${{ github.sha }}
+  cancel-in-progress: false
+
+env:
+  PYTHONUTF8: '1'
+  HF_HUB_DISABLE_XET: '1'
+  NATIVE_SOURCE_RUN_ID: '41212088151'
+  NATIVE_SOURCE_COMMIT: '24686c335e6347ad81171c3e67f51eae2ffb5098'
+
+jobs:
+  package:
+    runs-on: windows-2022
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Fetch the immutable native-build source commit
+        shell: pwsh
+        run: |
+          git fetch --no-tags --depth=1 origin "$env:NATIVE_SOURCE_COMMIT"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Confirm build inputs and wait for the pinned successful native artifacts
+        shell: python
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          import json, os, pathlib, subprocess, time, urllib.request
+          expected_sha = os.environ['NATIVE_SOURCE_COMMIT']
+          run_id = os.environ['NATIVE_SOURCE_RUN_ID']
+          paths = (
+              'voice-studio-rieng-portable/packaging/build_native.py',
+              'voice-studio-rieng-portable/packaging/prepare_cuda.py',
+              'voice-studio-rieng-portable/packaging/prepare_voxcpm_gguf.py',
+              'voice-studio-rieng-portable/app/public_modelpack.py',
+          )
+          for path in paths:
+              pinned = subprocess.check_output(['git', 'show', expected_sha + ':' + path])
+              current = pathlib.Path(path).read_bytes()
+              # Git stores LF; checkout may apply CRLF on Windows.
+              if current.replace(b'\r\n', b'\n') != pinned.replace(b'\r\n', b'\n'):
+                  raise RuntimeError('Native build or converter inputs changed: ' + path)
+          api = 'https://api.github.com/repos/' + os.environ['GITHUB_REPOSITORY']
+          headers = {'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+                     'Accept': 'application/vnd.github+json',
+                     'X-GitHub-Api-Version': '2022-11-28',
+                     'User-Agent': 'Voice-Studio-Pinned-Native-Package/1.12.1'}
+          def get(path):
+              request = urllib.request.Request(api + path, headers=headers)
+              with urllib.request.urlopen(request, timeout=60) as response:
+                  return json.load(response)
+          metadata = get('/actions/runs/' + run_id)
+          if metadata.get('head_sha') != expected_sha:
+              raise RuntimeError('Pinned native run has a different source commit')
+          required_jobs = {'native (cpu)', 'native (cuda)'}
+          required_artifacts = {'voice-voxcpm-native-cpu', 'voice-voxcpm-native-cuda', 'voice-voxcpm-native-model'}
+          deadline = time.monotonic() + 60 * 60
+          while True:
+              jobs = get('/actions/runs/' + run_id + '/jobs?per_page=100')['jobs']
+              selected = [job for job in jobs if job['name'] in required_jobs]
+              for job in selected:
+                  if job.get('conclusion') in {'failure', 'cancelled', 'timed_out', 'action_required', 'stale', 'skipped'}:
+                      raise RuntimeError('Required pinned native build did not pass: ' + job['name'])
+              artifacts = get('/actions/runs/' + run_id + '/artifacts?per_page=100')['artifacts']
+              available = {entry['name'] for entry in artifacts
+                           if not entry.get('expired') and entry.get('size_in_bytes', 0) > 0}
+              successful = {job['name'] for job in selected if job.get('conclusion') == 'success'}
+              if required_jobs <= successful and required_artifacts <= available:
+                  print('Pinned CPU, CUDA and standalone Q8 model are available. Current application source will be tested on Windows.', flush=True)
+                  break
+              if time.monotonic() >= deadline:
+                  raise TimeoutError('Pinned native artifacts were not ready within 60 minutes; do not recompile them in this package-only workflow')
+              print('Waiting for successful native jobs/artifacts: ' + ', '.join(sorted((required_jobs - successful) | (required_artifacts - available))), flush=True)
+              time.sleep(30)
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ env.NATIVE_SOURCE_RUN_ID }}
+          github-token: ${{ github.token }}
+          pattern: voice-voxcpm-native-*
+          path: ${{ runner.temp }}/native-artifacts
+      - name: Arrange the pinned CPU, CUDA and model assets
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force "${{ runner.temp }}/runtime-native" | Out-Null
+          New-Item -ItemType Directory -Force "${{ runner.temp }}/native-model-data" | Out-Null
+          Move-Item "${{ runner.temp }}/native-artifacts/voice-voxcpm-native-cpu" "${{ runner.temp }}/runtime-native/cpu"
+          Move-Item "${{ runner.temp }}/native-artifacts/voice-voxcpm-native-cuda" "${{ runner.temp }}/runtime-native/cuda"
+          Move-Item "${{ runner.temp }}/native-artifacts/voice-voxcpm-native-model" "${{ runner.temp }}/native-model-data/models"
+      - name: Download checksum-pinned Windows base and extract only its QA runtime
+        shell: python
+        run: |
+          import hashlib, os, pathlib, shutil, sys, urllib.request, zipfile
+          temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          target = temp / 'Voice-Studio-1.10-base.zip'
+          url = 'https://github.com/seotro95/seotro/releases/download/voice-studio-reference-1.10-40852923612/Voice-Studio-Rieng-1.10.0-19-Giong-GitHub-Windows-x64.zip'
+          with urllib.request.urlopen(url, timeout=120) as source, target.open('xb') as output:
+              shutil.copyfileobj(source, output, 8 * 1024**2)
+          with target.open('rb') as source:
+              actual = hashlib.file_digest(source, 'sha256').hexdigest()
+          if actual != '65446c1a1799699b3aadad616461e97cf66c049597c7ae9a5cbf3887f20312f6':
+              raise ValueError('Published Windows base SHA256 mismatch')
+          sys.path.insert(0, str(pathlib.Path('voice-studio-rieng-portable/packaging').resolve()))
+          from build_windows import safe_zip_path
+          with zipfile.ZipFile(target) as archive:
+              for entry in archive.infolist():
+                  relative = safe_zip_path(entry)[1:]
+                  if not relative or relative[0] not in {'runtime', 'ffmpeg'}:
+                      continue
+                  if any(part in {'.git', '.aws', '.agents', '.codex'} for part in relative):
+                      continue
+                  destination = (temp / 'qa-runtime').joinpath(*relative)
+                  if entry.is_dir():
+                      destination.mkdir(parents=True, exist_ok=True)
+                  else:
+                      destination.parent.mkdir(parents=True, exist_ok=True)
+                      with archive.open(entry) as source, destination.open('xb') as output:
+                          shutil.copyfileobj(source, output, 1024**2)
+      - name: Retrieve the pinned public reference WAV
+        shell: python
+        run: |
+          import hashlib, os, pathlib, urllib.request
+          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'public-reference.wav'
+          url = 'https://raw.githubusercontent.com/0xShug0/audio.cpp/2597b300f5961999387c84c65f2e8e79c088a571/assets/resources/b.wav'
+          with urllib.request.urlopen(url, timeout=60) as response:
+              value = response.read()
+          if hashlib.sha256(value).hexdigest() != '32bf74dfb8342ccc8284f47a9e5fe1f41b458a983a00938ed170f76951ce638f':
+              raise ValueError('Public reference SHA256 mismatch')
+          target.write_bytes(value)
+      - name: Validate actual French/Japanese PCM and current ASGI UI/API on Windows CPU
+        shell: pwsh
+        run: |
+          $env:PYTHONHOME = ''
+          $env:PYTHONPATH = ''
+          $env:PYTHONNOUSERSITE = '1'
+          $env:PATH = "${{ runner.temp }}/qa-runtime/ffmpeg/bin;${{ runner.temp }}/qa-runtime/runtime;$env:PATH"
+          & "${{ runner.temp }}/qa-runtime/runtime/python.exe" -s -X utf8 voice-studio-rieng-portable/packaging/smoke_native_voxcpm.py --app-dir voice-studio-rieng-portable/app --native-root "${{ runner.temp }}/runtime-native" --data-dir "${{ runner.temp }}/native-model-data" --reference "${{ runner.temp }}/public-reference.wav" --output "${{ runner.temp }}/Windows-Native-VoxCPM-QA.json" --steps 8 --threads 4
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Assemble the complete portable with current source and all native assets
+        shell: pwsh
+        run: |
+          python voice-studio-rieng-portable/packaging/build_full_update.py --base-archive "${{ runner.temp }}/Voice-Studio-1.10-base.zip" --output "${{ runner.temp }}/full-archive/Voice-Studio-1.12.1-Full-Windows-x64.zip" --native-root "${{ runner.temp }}/runtime-native" --native-model "${{ runner.temp }}/native-model-data" --windows-qa "${{ runner.temp }}/Windows-Native-VoxCPM-QA.json"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Release assembly inputs after the complete ZIP is closed and checksummed
+        shell: pwsh
+        run: |
+          Remove-Item -Recurse -Force "${{ runner.temp }}/native-artifacts", "${{ runner.temp }}/runtime-native", "${{ runner.temp }}/native-model-data", "${{ runner.temp }}/qa-runtime"
+          Remove-Item -Force "${{ runner.temp }}/Voice-Studio-1.10-base.zip"
+      - name: Split the complete ZIP into GitHub-sized release pieces with verified joiner
+        shell: python
+        run: |
+          import os, pathlib, sys, shutil
+          sys.path.insert(0, str(pathlib.Path('voice-studio-rieng-portable/packaging').resolve()))
+          from build_full_update import split_release
+          temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          output = split_release(temp / 'full-archive/Voice-Studio-1.12.1-Full-Windows-x64.zip', temp / 'downloads')
+          shutil.copy2(temp / 'Windows-Native-VoxCPM-QA.json', output / 'Windows-Native-VoxCPM-QA.json')
+      - name: Preserve diagnostics when a native Windows check fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Voice-Studio-1.12.1-Windows-Failure-Diagnostics
+          path: |
+            ${{ runner.temp }}/native-model-data/international-native-backend.log
+            ${{ runner.temp }}/Windows-Native-VoxCPM-QA.json
+          if-no-files-found: ignore
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Voice-Studio-1.12.1-Full-Windows-Native-VoxCPM
+          path: ${{ runner.temp }}/downloads/*
+          if-no-files-found: error
+          retention-days: 14
+      - name: Publish the full experimental portable only after Windows CPU speech checks
+        if: github.event_name == 'push' || inputs.publish
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = "voice-studio-native-voxcpm-1.12.1-${{ github.run_id }}-${{ github.run_attempt }}"
+          $assets = @(Get-ChildItem -File "${{ runner.temp }}/downloads" | ForEach-Object { $_.FullName })
+          if ($assets.Count -lt 6) { throw 'Full archive parts, hashes, joiner and QA report are required' }
+          $notes = @'
+          Complete Windows portable: bundled Python, FFmpeg, public Nano/Turbo models, encrypted 19-voice installer, native VoxCPM2 Q8 model and CPU/CUDA libraries. Version 1.12.1 adds bounded CPU parallelism for large-memory multicore machines while CUDA keeps a single resident model.
+
+          Download every .partNNN file and GHEP_GOI.cmd into the same new folder. Run GHEP_GOI.cmd to reassemble and verify the full ZIP, then extract the entire ZIP. Keep the original private-voice password; decrypted recordings are not published.
+
+          Actual short French/Japanese VoxCPM2 PCM and the current ASGI UI/config/voice catalog/TXT conversion passed on Windows CPU. Nano/Turbo synthesis and private-voice unlocking were not repeated in this version. CUDA12 includes sm61 code for Pascal compatibility; GPU inference, GTX1060 performance, pronunciation/voice identity, a full-hour render and 30x real-time throughput are not established. All model, runtime and full-archive checksums are retained. The native Q8 path keeps the VoxCPM2 model family instead of silently changing languages or substituting Turbo.
+          '@
+          $notesFile = "${{ runner.temp }}/release-notes.txt"
+          $notes | Set-Content -Encoding utf8 $notesFile
+          gh release create $tag @assets --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Voice Studio 1.12.1 - Full native VoxCPM2 Windows experiment" --prerelease --latest=false --notes-file $notesFile
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

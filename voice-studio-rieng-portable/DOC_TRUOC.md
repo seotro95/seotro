@@ -1,4 +1,18 @@
-# Voice Studio Riêng 1.12.0 · Windows 10/11 x64 Portable
+# Voice Studio Riêng 1.12.1 · Windows 10/11 x64 Portable
+
+## Máy hai Xeon 28 nhân / 56 luồng, RAM 128 GB, GTX 1060 6 GB
+
+CUDA vẫn dùng một mô hình Q8 để giữ bộ nhớ GPU. Khi chọn CPU, bản 1.12.1 cho
+phép các tiến trình native độc lập xử lý câu/đoạn đồng thời và ghép lại đúng thứ
+tự. Với 28 nhân vật lý và đủ RAM khả dụng, preset **Tốc độ tối đa** là 7 tác vụ
+× 4 luồng, **Mượt khi làm việc** là 6 × 4; **Ít RAM** giữ một tác vụ, tối đa hai
+luồng. Ngân sách dựa trên nhân vật lý và RAM đang khả dụng, không nhân đôi theo
+56 luồng logic. Tool chừa RAM dự phòng và giới hạn số mô hình nạp đồng thời.
+
+Cấu hình này giúp tận dụng CPU nhiều nhân, không chứng minh tốc độ tạo tiếng
+trên máy người dùng. Máy kiểm tra 4 nhân đã chạy được hai tiến trình với mô hình
+thật, kiểm tra đủ hai đoạn và WAV đầu ra; chưa đo mô hình GPU hoặc tạo một giờ
+tiếng trên GTX 1060. Chọn giọng/ngôn ngữ, đo và nghe mẫu sau khi đổi CPU/CUDA.
 
 ## VoxCPM2 native Q8 cho mẫu giọng quốc tế
 
@@ -11,7 +25,7 @@ thanh/phát âm khác; nghe mẫu trước khi dùng cho tài liệu dài.
 Chọn giọng và đúng ngôn ngữ, chọn **VoxCPM2 native Q8**, rồi **GPU NVIDIA · CUDA**
 hoặc nút dùng GPU ngay cạnh lựa chọn bộ đọc. Chế độ **Nhanh** trên CUDA bật đường
 chiếu gộp được upstream hỗ trợ; có thể thay đổi kết quả số học so với Cân bằng.
-Số bước VoxCPM2 vẫn là 4/8/10 và được giữ nếu người dùng đã chỉnh riêng. Tool dùng
+Số bước VoxCPM2 vẫn là 4/8/10 và được giữ nếu người dùng đã chỉnh riêng. GPU dùng
 một mô hình để tiết kiệm VRAM và giữ cache tham chiếu giữa các câu. CUDA không
 khởi động được sẽ báo lỗi, giữ lựa chọn đã yêu cầu để người dùng quyết định.
 

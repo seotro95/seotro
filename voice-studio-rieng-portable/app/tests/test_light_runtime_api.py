@@ -56,4 +56,4 @@ def test_configuration_exposes_independent_resource_and_precision_budgets(studio
     for profile in ('maximum','smooth','light'):
         assert set(config['rendering_presets_by_resource'][profile])=={'vieneu_nano','vieneu','voxcpm'}
         assert set(config['voxcpm_int8_rendering_presets_by_resource'][profile])=={'fast','balanced','quality'}
-    assert config['version']=='1.12.0'
+    assert config['version']=='1.12.1'

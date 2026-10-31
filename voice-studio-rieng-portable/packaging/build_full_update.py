@@ -281,6 +281,7 @@ def _windows_qa(path, overlay, native_manifests, model_record):
     if (record.get('format') != 'native-voxcpm-windows-pcm-v1'
             or record.get('platform') != 'win32'
             or record.get('native_smoke_passed') is not True
+            or record.get('app_http_smoke_passed') is not True
             or record.get('private_reference_audio_included') is not False
             or record.get('app_source_sha256') != application_digest(overlay)
             or record.get('native_cpu_sha256') != native_manifests['cpu']['sha256']['audiocpp.dll']
@@ -347,12 +348,18 @@ def build_full(base_archive, output, qa_report=None, *, source_root=None, native
                 'base_product_version': base_info.get('version'),
                 'base_native_windows_offline_smoke': base_info.get('native_windows_offline_smoke'),
                 'current_native_windows_offline_smoke': 'passed' if windows_qa is not None else 'not_run',
+                'current_windows_validation_scope': 'VoxCPM2 native CPU short PCM plus current ASGI UI/config/voice catalog/TXT conversion' if windows_qa is not None else None,
+                'current_windows_app_http_smoke_passed': windows_qa is not None,
+                'current_windows_nanoturbo_inference_repeated': False,
+                'current_windows_private_voice_unlock_tested': False,
                 'current_gpu_inference_test': 'not_run',
                 'bundled_runtime': True, 'bundled_model_weights': ['vieneu_nano', 'vieneu_turbo'],
                 'international_runtime_bundled': bool(native_paths),
                 'international_runtime_type': 'native-windows-c-abi' if native_paths else None,
                 'international_model_bundled': model_record is not None,
                 'international_model': model_record,
+                'native_build_source_run': (os.environ.get('NATIVE_SOURCE_RUN_ID') or os.environ.get('GITHUB_RUN_ID')) if native_paths else None,
+                'native_build_project_commit': (os.environ.get('NATIVE_SOURCE_COMMIT') or os.environ.get('GITHUB_SHA')) if native_paths else None,
                 'native_cpu_library_bundled': bool(native_paths),
                 'native_cuda_library_bundled': bool(native_paths),
                 'encrypted_private_pack_bundled': True,
@@ -364,13 +371,16 @@ def build_full(base_archive, output, qa_report=None, *, source_root=None, native
             })
             overlay['DOC_TRUOC_FULL.txt'] = GUIDE.format(
                 version=version,
-                qa_status=('Tạo tiếng ngắn trên Windows CPU đã đạt; GPU chưa được đo.'
+                qa_status=('VoxCPM2 native CPU tạo tiếng ngắn và giao diện/API Windows đã đạt;\n'
+                           'GPU và tạo tiếng Nano/Turbo chưa được đo lại.'
                            if windows_qa is not None else 'Chưa chạy lại bản ghép này trên Windows hoặc GPU.'),
                 international_status=(
                     'Đã kèm VoxCPM2 Q8 GGUF cùng bộ native CPU/CUDA12 có mã sm61.\n'
                     'Chọn đúng mẫu giọng/ngôn ngữ, chọn bộ VoxCPM2 native Q8,\n'
                     'chọn CUDA rồi Nhanh và bấm Đo giọng đang chọn để đo/nghe mẫu.\n'
-                    'CPU vẫn có thể chậm; không suy ra tốc độ GPU từ phép thử CPU.\n'
+                    'CUDA giữ một model. Với máy 28 nhân vật lý / 128GB RAM,\n'
+                    'có thể chọn CPU, Nhanh và thử 7 tác vụ x 4 luồng rồi đo thực tế.\n'
+                    'CPU vẫn có thể chậm; không suy ra 30x từ số nhân hoặc số tác vụ.\n'
                     'CUDA cần driver NVIDIA tương thích; tốc độ GTX1060 chưa được xác minh.'
                     if native_paths else
                     'Bộ giọng quốc tế VoxCPM2 vẫn cần runtime/model riêng khi chưa cài.\n'

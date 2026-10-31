@@ -171,3 +171,114 @@ assert.equal($('international-device').disabled, true);
 assert.equal($('international-precision-field').hidden, false);
 assert.equal($('voxcpm-steps').disabled, false);
 ''')
+
+
+def test_dual_xeon_uses_budgeted_cpu_parallelism_but_cuda_and_omni_keep_one_model():
+    run_javascript(r'''
+config = {cpu_cores:56, native_voxcpm_ready:true, native_voxcpm_cpu_available:true,
+ native_voxcpm_cuda_available:true, native_multilingual_ready:true,
+ native_multilingual_cpu_available:true, benchmark_languages:['ja'],
+ native_voxcpm_cpu_limits_by_resource: {
+  maximum:{max_workers:7,max_threads:4,cpu_budget:28},
+  smooth:{max_workers:6,max_threads:4,cpu_budget:26},
+  light:{max_workers:1,max_threads:2,cpu_budget:2}},
+ native_voxcpm_cpu_rendering_presets_by_resource: {
+  maximum:{fast:{nano_parallel:7,nano_threads:4,voxcpm_steps:4,audio_fit_backend:'wsola'}},
+  smooth:{fast:{nano_parallel:6,nano_threads:4,voxcpm_steps:4,audio_fit_backend:'wsola'}},
+  light:{fast:{nano_parallel:1,nano_threads:2,voxcpm_steps:4,audio_fit_backend:'wsola'}}}};
+voices = [{id:'selected-ja',name:'Selected sample',engine:'voxcpm',languages:['ja'],
+ has_sample:true,ready_voxcpm_native:true,ready_native:true}];
+$('voice').value='selected-ja'; $('language').value='ja'; $('script').value='元のスクリプト。';
+$('international-backend').value='voxcpm_native'; $('international-device').value='cpu';
+$('resource-profile').value='maximum'; $('render-mode').value='fast';
+$('nano-parallel').options=Array.from({length:32},(_,i)=>({value:String(i+1)}));
+updateSuggestion=()=>{}; updateRenderNote=()=>{};
+applyRenderMode('fast',{useSaved:false,remember:false});
+updateVoice();
+assert.equal($('nano-parallel').value,'7');
+assert.equal($('nano-threads').value,'4');
+assert.equal($('nano-threads').max,'4');
+assert.equal($('nano-parallel').disabled,false);
+assert.equal($('nano-parallel').options[6].disabled,false);
+assert.equal($('nano-parallel').options[7].disabled,true);
+rememberRenderTuning();
+$('resource-profile').value='smooth';
+$('voxcpm-steps').value='10';
+applyResourceBudget();
+assert.equal($('nano-parallel').value,'6');
+assert.equal($('nano-threads').value,'4');
+assert.equal($('voxcpm-steps').value,'10');
+assert.equal($('voice').value,'selected-ja');
+assert.equal($('language').value,'ja');
+assert.equal($('script').value,'元のスクリプト。');
+$('resource-profile').value='maximum';
+applyRenderMode('fast',{remember:false});
+assert.equal($('nano-parallel').value,'7');
+$('international-device').value='cuda';
+applyRenderMode('fast',{remember:false}); updateVoice();
+assert.equal($('nano-parallel').value,'1');
+assert.equal($('nano-parallel').disabled,true);
+assert.equal($('nano-parallel').options[1].disabled,true);
+$('international-device').value='cpu';
+applyRenderMode('fast',{remember:false}); updateVoice();
+assert.equal($('nano-parallel').value,'7');
+assert.equal($('nano-parallel').disabled,false);
+$('international-backend').value='omnivoice';
+applyRenderMode('fast',{remember:false}); updateVoice();
+assert.equal($('nano-parallel').value,'1');
+assert.equal($('nano-parallel').disabled,true);
+''')
+
+
+def test_native_cpu_manual_resources_cannot_exceed_server_thread_or_ram_budget():
+    run_javascript(r'''
+config={native_voxcpm_cpu_limits_by_resource:{maximum:{max_workers:8,max_threads:8,cpu_budget:26}}};
+$('international-backend').value='voxcpm_native'; $('international-device').value='cpu';
+$('resource-profile').value='maximum';
+voices=[{id:'selected',engine:'voxcpm'}]; $('voice').value='selected';
+$('render-mode').value='fast'; $('nano-parallel').value='8'; $('nano-threads').value='8';
+updateRenderNote=()=>{};
+rememberRenderTuning();
+assert.equal($('nano-parallel').value,'8');
+assert.equal($('nano-threads').value,'3');
+const saved=renderPreferences.tuning[renderTuningKey('voxcpm','fast')];
+assert.equal(saved.nano_parallel*saved.nano_threads,24);
+config.native_voxcpm_cpu_limits_by_resource.maximum.max_workers=6;
+rememberRenderTuning();
+assert.equal($('nano-parallel').value,'6');
+''')
+
+
+def test_hour_proof_is_distinct_from_a_fast_short_sample_and_subtitle_timeline():
+    run_javascript(r'''
+const sample={spoken_realtime_multiplier:50,estimated_hour_seconds:72,
+ measurement_audio_seconds:10,measurement_elapsed_seconds:.2,
+ target_30x_met_on_sample:true,actual_hour_of_speech_generated:false,
+ target_30x_verified_on_hour_or_longer:false,estimate_only:true};
+const short=formatSpeedReport(sample);
+assert.match(short,/Mẫu ngắn đạt tốc độ 30×/);
+assert.match(short,/chưa xác minh bằng bản tạo đủ 1 giờ/);
+assert.doesNotMatch(short,/Đã xác minh tốc độ/);
+const full=formatSpeedReport({...sample,measurement_audio_seconds:3600,
+ measurement_elapsed_seconds:120,actual_hour_of_speech_generated:true,
+ target_30x_verified_on_hour_or_longer:true});
+assert.match(full,/đã tạo đủ ít nhất 1 giờ lời đọc thực tế/);
+assert.match(full,/Đã xác minh tốc độ từ 30×/);
+assert.match(full,/Thời gian quy đổi từ bản thu này/);
+assert.doesNotMatch(full,/Ước tính cho bản dài chưa được xác minh/);
+const slow=formatSpeedReport({...sample,measurement_audio_seconds:3600,
+ measurement_elapsed_seconds:121,actual_hour_of_speech_generated:true,
+ target_30x_met_on_sample:false});
+assert.match(slow,/Bản tạo đủ 1 giờ lời đọc này chưa xác minh đạt mục tiêu 30×/);
+const boundary=formatSpeedReport({...sample,measurement_audio_seconds:3600,
+ measurement_elapsed_seconds:120.001,actual_hour_of_speech_generated:true,
+ target_30x_verified_on_hour_or_longer:true});
+assert.doesNotMatch(boundary,/Đã xác minh tốc độ/);
+assert.match(boundary,/120,001 giây xử lý/);
+const timeline=formatSpeedReport({...sample,output_timeline_seconds:7200,
+ excluded_silence_seconds:7190,actual_hour_of_speech_generated:true,
+ target_30x_verified_on_hour_or_longer:true});
+assert.doesNotMatch(timeline,/Đã xác minh tốc độ/);
+assert.doesNotMatch(timeline,/đã tạo đủ ít nhất 1 giờ/);
+assert.match(timeline,/7.190 giây khoảng lặng/);
+''')

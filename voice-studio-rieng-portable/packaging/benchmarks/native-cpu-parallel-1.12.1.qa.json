@@ -1,0 +1,40 @@
+{
+  "platform": "linux",
+  "public_reference_only": true,
+  "requested_threads_per_worker": 2,
+  "private_voice_data_included": false,
+  "functional_check_passed": true,
+  "processing_seconds": 44.456728011999985,
+  "peak_sampled_process_tree_rss_gib": 7.269374847412109,
+  "maximum_observed_child_count": 5,
+  "result": {
+    "audio_seconds": 2.08,
+    "spoken_audio_seconds": 2.08,
+    "duration_limited": false,
+    "completed": 2,
+    "total": 2,
+    "progress": 100,
+    "processing_seconds": 44.198,
+    "auto_fitted_cues": 0,
+    "fit_warning_count": 0,
+    "fit_warning_cues": [],
+    "execution_settings": {
+      "engine": "voxcpm",
+      "workers": 2,
+      "worker_budget": 2,
+      "threads": 2,
+      "blas_threads": 1,
+      "model_memory": "native",
+      "resource_profile": "maximum",
+      "backend": "voxcpm_native",
+      "device": "cpu",
+      "precision": "q8_0",
+      "voxcpm_steps": 4,
+      "native_performance": "off"
+    }
+  },
+  "note": "Functional two-worker test with explicit settings on the 4-core lab host; no speed claim for the user Xeon or GTX1060.",
+  "configured_cpu_process_workers": 2,
+  "distinct_native_pids_recorded": false,
+  "product_version": "1.12.1"
+}

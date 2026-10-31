@@ -7,11 +7,17 @@ from test_reference_voices_api import reference_catalog, KOREAN, THAI, ENGLISH
 from test_standalone_api import studio  # noqa: F401
 
 
-def installed(monkeypatch, devices=('cpu', 'cuda')):
+def installed(monkeypatch, devices=('cpu', 'cuda'), cpu_workers=1):
     monkeypatch.setattr(fast_multilingual, 'is_ready', lambda data, device=None, family='omnivoice':
                         family == 'voxcpm2' and (bool(devices) if device is None else device in devices))
     monkeypatch.setattr(fast_multilingual, 'cuda_available', lambda data, family='omnivoice':
                         family == 'voxcpm2' and 'cuda' in devices)
+    monkeypatch.setattr(app, 'native_voxcpm_cpu_limits', lambda profile='smooth': {
+        'max_workers': cpu_workers, 'max_threads': 8, 'cpu_budget': max(4, cpu_workers * 4), 'memory_sufficient': True})
+    monkeypatch.setattr(app, 'native_voxcpm_cpu_presets', lambda profile='smooth': {
+        mode: {'nano_parallel': cpu_workers, 'nano_threads': 4, 'voxcpm_steps': steps,
+               'audio_fit_backend': 'wsola' if mode == 'fast' else 'ffmpeg'}
+        for mode, steps in [('fast', 4), ('balanced', 8), ('quality', 10)]})
 
 
 def test_native_voxcpm_only_install_keeps_defaults_ready_without_pytorch(reference_catalog, monkeypatch):
@@ -94,4 +100,34 @@ def test_turbo_reference_is_never_replaced_by_native_voxcpm(reference_catalog, m
     r = client.post('/api/speech', json={'voice_id': ENGLISH, 'language': 'en-US', 'text': 'Hello.',
         'international_backend': 'voxcpm_native'})
     assert r.status_code == 422
+    submit.assert_not_called()
+
+
+def test_many_core_native_cpu_keeps_model_family_and_bounded_parallelism(reference_catalog, monkeypatch):
+    client, data, _, _ = reference_catalog
+    installed(monkeypatch, cpu_workers=7)
+    r = client.post('/api/speech', json={'voice_id': KOREAN, 'language': 'ko', 'text': '안녕하세요. 다음 문장입니다.',
+        'international_backend': 'voxcpm_native', 'international_device': 'cpu', 'resource_profile': 'maximum', 'render_mode': 'quality'})
+    assert r.status_code == 202, r.text
+    job = r.json()
+    assert job['nano_parallel'] == 7 and job['nano_threads'] == 4 and job['voxcpm_steps'] == 10
+    assert job['voice_id'] == KOREAN and job['language'] == 'ko'
+
+
+def test_gpu_remains_single_context_on_a_many_core_machine(reference_catalog, monkeypatch):
+    client, data, _, _ = reference_catalog
+    installed(monkeypatch, cpu_workers=7)
+    r = client.post('/api/speech', json={'voice_id': KOREAN, 'language': 'ko', 'text': '안녕하세요.',
+        'international_backend': 'voxcpm_native', 'international_device': 'cuda', 'nano_parallel': 7})
+    assert r.status_code == 202, r.text
+    assert r.json()['nano_parallel'] == 1
+
+
+def test_native_cpu_low_available_memory_does_not_queue(reference_catalog, monkeypatch):
+    client, data, _, submit = reference_catalog
+    installed(monkeypatch)
+    monkeypatch.setattr(app, 'native_voxcpm_cpu_limits', lambda profile='smooth': {'memory_sufficient': False})
+    r = client.post('/api/speech', json={'voice_id': KOREAN, 'language': 'ko', 'text': '안녕하세요.',
+        'international_backend': 'voxcpm_native', 'international_device': 'cpu'})
+    assert r.status_code == 503 and 'RAM' in r.json()['detail']
     submit.assert_not_called()

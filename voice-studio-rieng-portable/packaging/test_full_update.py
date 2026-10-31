@@ -227,6 +227,8 @@ def test_native_package_requires_actual_x64_windows_libraries_and_verified_model
     source = source_tree(tmp_path)
     base, _ = base_archive(tmp_path, monkeypatch)
     runtime, data = native_tree(tmp_path)
+    monkeypatch.setenv('NATIVE_SOURCE_RUN_ID', '41212088151')
+    monkeypatch.setenv('NATIVE_SOURCE_COMMIT', '24686c335e6347ad81171c3e67f51eae2ffb5098')
     output, _ = builder.build_full(base, tmp_path / 'native-full.zip', source_root=source,
                                    native_root=runtime, native_model=data)
     with zipfile.ZipFile(output) as archive:
@@ -239,6 +241,8 @@ def test_native_package_requires_actual_x64_windows_libraries_and_verified_model
         metadata = json.loads(archive.read(root + 'BUILD_INFO.json'))
         assert metadata['international_model_bundled'] and metadata['international_runtime_bundled']
         assert metadata['native_cpu_library_bundled'] and metadata['native_cuda_library_bundled']
+        assert metadata['native_build_source_run'] == '41212088151'
+        assert metadata['native_build_project_commit'] == '24686c335e6347ad81171c3e67f51eae2ffb5098'
         assert metadata['current_native_windows_offline_smoke'] == 'not_run'
 
 
@@ -277,6 +281,7 @@ def test_windows_qa_only_applies_to_exact_source_cpu_dll_and_model(tmp_path, mon
     model = json.loads((data / 'models/voxcpm-native.ready').read_text())
     report = {'format': 'native-voxcpm-windows-pcm-v1', 'platform': 'win32',
               'native_smoke_passed': True, 'private_reference_audio_included': False,
+              'app_http_smoke_passed': True,
               'app_source_sha256': builder.application_digest(overlay),
               'native_cpu_sha256': cpu['sha256']['audiocpp.dll'],
               'native_model_sha256': model['sha256'],
@@ -289,11 +294,37 @@ def test_windows_qa_only_applies_to_exact_source_cpu_dll_and_model(tmp_path, mon
     with zipfile.ZipFile(output) as archive:
         info = json.loads(archive.read('Voice-Studio-1.11.1-Full-Windows-x64/BUILD_INFO.json'))
         assert info['current_native_windows_offline_smoke'] == 'passed'
+        assert info['current_windows_app_http_smoke_passed'] is True
+        assert info['current_windows_nanoturbo_inference_repeated'] is False
+        assert info['current_windows_private_voice_unlock_tested'] is False
         assert info['current_gpu_inference_test'] == 'not_run'
     (source / 'app/worker.py').write_text('different source since the QA report')
     with pytest.raises(ValueError, match='exact source/runtime/model'):
         builder.build_full(base, tmp_path / 'unverified-full.zip', source_root=source,
                            native_root=runtime, native_model=data, windows_qa=qa)
+
+
+def test_pcm_only_qa_cannot_claim_current_windows_application_readiness(tmp_path, monkeypatch):
+    source = source_tree(tmp_path)
+    base, _ = base_archive(tmp_path, monkeypatch)
+    runtime, data = native_tree(tmp_path)
+    overlay, _ = builder._sources(source)
+    cpu = json.loads((runtime / 'cpu/native-build.json').read_text())
+    model = json.loads((data / 'models/voxcpm-native.ready').read_text())
+    qa = tmp_path / 'PCM-only-QA.json'
+    qa.write_text(json.dumps({
+        'format': 'native-voxcpm-windows-pcm-v1', 'platform': 'win32',
+        'native_smoke_passed': True, 'private_reference_audio_included': False,
+        'app_source_sha256': builder.application_digest(overlay),
+        'native_cpu_sha256': cpu['sha256']['audiocpp.dll'],
+        'native_model_sha256': model['sha256'],
+        'requests': [{'valid_pcm_audio': True,
+                      'execution': {'device': 'cpu', 'backend': 'voxcpm_native'}}] * 3,
+    }))
+    with pytest.raises(ValueError, match='exact source/runtime/model'):
+        builder.build_full(base, tmp_path / 'full.zip', source_root=source,
+                           native_root=runtime, native_model=data, windows_qa=qa)
+    assert not (tmp_path / 'full.zip').exists()
 
 
 def test_release_splits_round_trip_and_verify_complete_archive(tmp_path):

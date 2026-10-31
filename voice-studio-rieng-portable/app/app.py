@@ -26,7 +26,9 @@ from starlette.concurrency import run_in_threadpool
 from narration import MAX_CHARACTERS, PROFILES, plan_segments
 from subtitles import parse_srt, export_srt
 from system_voices import installed_voices
-from hardware import supports_int8, system_info, rendering_presets, rendering_limits, bounded_settings, choose_execution_model
+from hardware import (supports_int8, system_info, rendering_presets, rendering_limits,
+                      bounded_settings, choose_execution_model,
+                      native_voxcpm_cpu_limits, native_voxcpm_cpu_presets)
 from delivery import get_profile, profile_catalog, supported_preset_voices
 from performance import speed_report
 from state_io import write_json_atomic, read_progress
@@ -110,7 +112,7 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
 
 
-app = FastAPI(title='Voice Studio Riêng', version='1.12.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio Riêng', version='1.12.1', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 @app.exception_handler(RequestValidationError)
@@ -240,6 +242,8 @@ def resource_config():
         {'id':'maximum','name':'Tốc độ tối đa','description':'Dùng ngân sách CPU/RAM tối đa cho bộ đọc.'},
         {'id':'smooth','name':'Mượt khi làm việc','description':'Ưu tiên ứng dụng đang sử dụng, chừa CPU trên máy nhiều lõi.'},
         {'id':'light','name':'Ít RAM','description':'Một tác vụ, tối đa hai luồng; giữ giọng và chất lượng đã chọn.'}],
+        'native_voxcpm_cpu_rendering_presets_by_resource':{profile:native_voxcpm_cpu_presets(profile) for profile in profiles},
+        'native_voxcpm_cpu_limits_by_resource':{profile:native_voxcpm_cpu_limits(profile) for profile in profiles},
         'rendering_presets_by_resource':{profile:{engine:effective_rendering_presets(engine,profile)
             for engine in ('vieneu_nano','vieneu','voxcpm')} for profile in profiles},
         'cpu_execution_rendering_presets':{execution:{profile:{engine:effective_rendering_presets(engine,profile,cpu_execution=execution)
@@ -524,6 +528,7 @@ def _submit_speech(body: Speech,calibration=False):
     engine = voice.get('engine', 'vieneu' if body.language == 'vi' else 'qwen_clone')
     native=engine=='voxcpm' and body.international_backend in {'omnivoice','voxcpm_native'}
     native_voxcpm=native and body.international_backend=='voxcpm_native'
+    native_voxcpm_cpu=native_voxcpm and body.international_device=='cpu'
     if body.international_backend!='voxcpm' and engine!='voxcpm':
         raise HTTPException(422,'Bộ đọc đa ngôn ngữ chỉ áp dụng cho mẫu giọng quốc tế.')
     if body.international_device!='cpu' and not native:
@@ -542,13 +547,23 @@ def _submit_speech(body: Speech,calibration=False):
     if engine not in {'vieneu_nano','vieneu'} and body.cpu_execution!='auto':
         raise HTTPException(422,'Chọn cách chạy CPU riêng cho giọng Nano hoặc Turbo.')
     if native:
-        # One warm native session avoids replicating model weights, particularly
-        # on the GTX 1060's 6 GB. VoxCPM's FP32 RAM budgets do not apply to GGUF.
+        # GPU contexts remain single-model on a 6 GB card. Independent CPU
+        # workers use their own bounded GGUF budget rather than legacy FP32.
         model_memory='native'
-        body.nano_parallel=1
-        if 'nano_threads' not in body.model_fields_set:
-            body.nano_threads=min(8,os.cpu_count() or 1,2 if body.resource_profile=='light' else 4)
-        if body.resource_profile=='light':body.nano_threads=min(body.nano_threads,2)
+        if native_voxcpm_cpu:
+            preset=native_voxcpm_cpu_presets(body.resource_profile)[body.render_mode]
+            for field,value in preset.items():
+                if field not in body.model_fields_set:setattr(body,field,value)
+            limits=native_voxcpm_cpu_limits(body.resource_profile)
+            if not limits['memory_sufficient']:
+                raise HTTPException(503,'VoxCPM2 native CPU cần khoảng 10 GiB RAM khả dụng cho một mô hình và phần dự phòng. Đóng bớt ứng dụng rồi thử lại.')
+            bounded=bounded_settings({'nano_parallel':body.nano_parallel,'nano_threads':body.nano_threads},limits)
+            body.nano_parallel=bounded['nano_parallel'];body.nano_threads=bounded['nano_threads']
+        else:
+            body.nano_parallel=1
+            if 'nano_threads' not in body.model_fields_set:
+                body.nano_threads=min(8,os.cpu_count() or 1,2 if body.resource_profile=='light' else 4)
+            if body.resource_profile=='light':body.nano_threads=min(body.nano_threads,2)
         if native_voxcpm and 'voxcpm_steps' not in body.model_fields_set:
             body.voxcpm_steps={'fast':4,'balanced':8,'quality':10}[body.render_mode]
         if not native_voxcpm and 'omnivoice_steps' not in body.model_fields_set:
@@ -851,7 +866,10 @@ def benchmark(body: BenchmarkRequest):
         raise HTTPException(422,'Chọn giọng và ngôn ngữ hỗ trợ mẫu đo.')
     if engine not in {'vieneu_nano','vieneu','voxcpm'}:raise HTTPException(422,'Đo tốc độ hiện hỗ trợ Nano, Turbo và bộ giọng mẫu đa ngôn ngữ.')
     native=engine=='voxcpm' and body.international_backend in {'omnivoice','voxcpm_native'}
-    workers=1 if native else body.nano_parallel or effective_rendering_presets(engine,body.resource_profile,body.international_precision if engine=='voxcpm' else 'fp32',body.cpu_execution)[body.render_mode]['nano_parallel']
+    if native and body.international_backend=='voxcpm_native' and body.international_device=='cpu':
+        workers=body.nano_parallel or native_voxcpm_cpu_presets(body.resource_profile)[body.render_mode]['nano_parallel']
+    else:
+        workers=1 if native else body.nano_parallel or effective_rendering_presets(engine,body.resource_profile,body.international_precision if engine=='voxcpm' else 'fp32',body.cpu_execution)[body.render_mode]['nano_parallel']
     text=benchmark_sample_text(body.language,workers,engine)
     settings=body.model_dump(exclude_none=True)
     payload=Speech(text=text,**settings,paragraph_pause=0,format='wav')
