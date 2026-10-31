@@ -81,7 +81,7 @@ jobs:
           New-Item -ItemType Directory $work | Out-Null
           "VOICE_WORK=$work" | Out-File -LiteralPath $env:GITHUB_ENV -Encoding utf8 -Append
           Write-Output ('Scratch volume: ' + $drives[0].Name + ', free GiB: ' + [Math]::Round($drives[0].Free / 1GB, 1))
-      - name: Wait for the exact successful model and runtime input build
+      - name: Verify the exact successful model checks and immutable artifact
         shell: python
         env:
           GH_TOKEN: ${{ github.token }}
@@ -102,7 +102,28 @@ jobs:
                   raise ValueError('Extra model artifact source commit differs from the reviewed input')
               if run.get('status') == 'completed':
                   if run.get('conclusion') != 'success':
-                      raise ValueError('The required actual Qwen/ASR Windows input checks failed')
+                      # Publishing the small evidence release is separate from
+                      # inference and the already uploaded exact model tree.
+                      # Accept that one publication failure only; every model,
+                      # runtime, CPU and artifact step must have succeeded.
+                      jobs=get('/actions/runs/'+os.environ['EXTRA_SOURCE_RUN']+'/jobs?per_page=100')['jobs']
+                      if len(jobs)!=1 or jobs[0].get('name')!='prepare-verify-publish':
+                          raise ValueError('Unexpected model-input job identity')
+                      steps=jobs[0].get('steps',[])
+                      results={step['name']:step.get('conclusion') for step in steps}
+                      required={
+                          'Pin immutable public checkpoint inputs and prepare Omni ASR and both Qwen models',
+                          'Build the isolated Qwen runtime and a temporary pinned main runtime for ASR validation',
+                          'Synthesize all nine Qwen presets and Base clone and transcribe the public reference on Windows CPU',
+                          'Preserve the final verified model tree and publishable immutable input metadata',
+                          'Run actions/upload-artifact@v4',
+                      }
+                      failed={step['name'] for step in steps if step.get('conclusion')=='failure'}
+                      publication='Publish immutable model input metadata after actual Windows CPU Qwen and ASR checks'
+                      if (run.get('conclusion')!='failure' or failed!={publication}
+                          or not all(results.get(name)=='success' for name in required)):
+                          raise ValueError('The required actual Qwen/ASR Windows input checks or artifact upload failed')
+                      print('All required model/CPU/artifact steps passed; only the separate metadata release failed.',flush=True)
                   artifacts = get('/actions/runs/'+os.environ['EXTRA_SOURCE_RUN']+'/artifacts?per_page=100')['artifacts']
                   if not any(row['name']==os.environ['EXTRA_ARTIFACT'] and not row.get('expired') and row.get('size_in_bytes',0)>0 for row in artifacts):
                       raise ValueError('The verified complete model tree artifact is missing')
@@ -224,8 +245,13 @@ jobs:
           $notesPath = Join-Path $env:VOICE_WORK 'release-notes.txt'
           $notes | Set-Content -LiteralPath $notesPath -Encoding utf8
           $assets = @(Get-ChildItem -LiteralPath "$env:VOICE_WORK/downloads" -File | ForEach-Object { $_.FullName })
-          gh release create $env:RELEASE_TAG @assets --repo '${{ github.repository }}' --target '${{ github.sha }}' --title 'Voice Studio 1.12.2 - Complete Windows voices' --prerelease --latest=false --notes-file $notesPath
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          gh release create $env:RELEASE_TAG @assets --repo '${{ github.repository }}' --target '${{ github.sha }}' --title 'Voice Studio 1.12.2 - Complete Windows voices' --prerelease --latest=false --notes-file $notesPath 2>&1 | Tee-Object -FilePath "$env:VOICE_WORK/complete-release.log"
+          $publishExit = $LASTEXITCODE
+          if ($publishExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath "$env:VOICE_WORK/complete-release.log" -Tail 25) -join ' | ')
+            Write-Output ('::error title=Complete package publication failed::'+$detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $publishExit
+          }
           # Remote uploads are closed and SHA metadata exists. Release local data
           # pieces before the independent full download so scratch use stays bounded.
           $manifest = Get-Content -LiteralPath "$env:VOICE_WORK/downloads/DOWNLOAD-PARTS.json" -Raw | ConvertFrom-Json
@@ -301,8 +327,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           $assets = @(Get-ChildItem -LiteralPath "$env:VOICE_WORK/helper" -File | ForEach-Object { $_.FullName })
-          gh release upload $env:RELEASE_TAG @assets --repo '${{ github.repository }}'
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          gh release upload $env:RELEASE_TAG @assets --repo '${{ github.repository }}' 2>&1 | Tee-Object -FilePath "$env:VOICE_WORK/complete-helper-upload.log"
+          $publishExit = $LASTEXITCODE
+          if ($publishExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath "$env:VOICE_WORK/complete-helper-upload.log" -Tail 25) -join ' | ')
+            Write-Output ('::error title=Verified single-file download publication failed::'+$detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $publishExit
+          }
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
