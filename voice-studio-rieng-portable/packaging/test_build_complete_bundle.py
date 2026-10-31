@@ -200,6 +200,8 @@ def test_extras_cleanup_retains_runtime_distributions_licenses_and_js(tmp_path, 
         'runtime-qwen/Lib/idlelib/idle_test/test_run.py': b'IDLE test',
         'runtime-qwen/Lib/site-packages/example/__pycache__/a.pyc': b'generated cache',
         'runtime-qwen/Lib/site-packages/fastapi/.agents/skills/fastapi/SKILL.md': b'vendor development documentation',
+        'runtime-qwen/Lib/site-packages/typer/.agents/skills/typer/SKILL.md': b'vendor development documentation',
+        'runtime-qwen/Lib/site-packages/other_module/.agents/skills/normal/SKILL.md': b'vendor development documentation',
         'runtime-qwen/Lib/site-packages/gradio/front/app.js': b'required browser code',
         'runtime-qwen/Lib/site-packages/gradio-5.49.1.dist-info/METADATA': b'Name: gradio\nVersion: 5.49.1\n',
         'runtime-qwen/Lib/site-packages/gradio-5.49.1.dist-info/licenses/LICENSE': b'retained license',
@@ -217,19 +219,22 @@ def test_extras_cleanup_retains_runtime_distributions_licenses_and_js(tmp_path, 
         if name in removed: assert not (stage / name).exists()
         else: assert (stage / name).read_bytes() == payload
     report = json.loads((stage / 'CLEANUP-REPORT.json').read_bytes())
-    assert report['extra_removed_file_count'] == len(removed) == 7
+    assert report['extra_removed_file_count'] == len(removed) == 9
     assert {row['path'] for row in report['extra_removed_files']} == removed
     assert all(row['sha256'] == sha(additions[row['path']]) for row in report['extra_removed_files'])
     assert report['extra_removed_uncompressed_bytes'] == sum(len(additions[name]) for name in removed)
     assert report['total_removed_file_count'] == report['removed_file_count'] + len(removed)
-    vendor = next(row for row in report['extra_removed_files'] if row['path'].endswith('SKILL.md'))
-    assert vendor['reason'] == 'qwen-fastapi-development-skills'
+    vendor = [row for row in report['extra_removed_files'] if row['path'].endswith('SKILL.md')]
+    assert len(vendor) == 3
+    assert all(row['reason'] == 'qwen-vendor-development-skills' for row in vendor)
     builder.archive(stage, tmp_path / 'cleaned-extra.zip')
 
 
 @pytest.mark.parametrize('name', [
     'runtime-qwen/Lib/site-packages/gradio/front/app.js.map',
     'runtime-qwen/Lib/site-packages/fastapi/.agents/skills/fastapi/SKILL.md',
+    'runtime-qwen/Lib/site-packages/typer/.agents/skills/typer/SKILL.md',
+    'runtime-qwen/Lib/site-packages/other_module/.agents/skills/normal/SKILL.md',
 ])
 def test_discarded_extra_still_requires_valid_sha256(tmp_path, monkeypatch, name):
     source, _, base, extras, _ = fixture(tmp_path, monkeypatch)
@@ -246,16 +251,46 @@ def test_discarded_extra_still_requires_valid_sha256(tmp_path, monkeypatch, name
 @pytest.mark.parametrize('name', [
     'app/.agents/skills/unknown/SKILL.md',
     'runtime-qwen/.agents/skills/unknown/SKILL.md',
-    'runtime-qwen/Lib/site-packages/other/.agents/skills/unknown/SKILL.md',
+    'runtime-qwen/Lib/site-packages/invalid-module/.agents/skills/unknown/SKILL.md',
+    'runtime-qwen/Lib/site-packages/normal/submodule/.agents/skills/unknown/SKILL.md',
     'runtime-qwen/Lib/site-packages/fastapi/.agents/.aws/credentials',
+    'runtime-qwen/Lib/site-packages/typer/.agents/.codex/config.toml',
 ])
-def test_fastapi_docs_exception_does_not_allow_other_private_paths(tmp_path, monkeypatch, name):
+def test_vendor_docs_exception_does_not_allow_other_private_paths(tmp_path, monkeypatch, name):
     source, _, base, extras, _ = fixture(tmp_path, monkeypatch)
     write_tree(extras, {name: b'must never ship'})
     records = builder._parse_manifest((extras / builder.EXTRA_MANIFEST).read_bytes())
     records[name] = sha(b'must never ship')
     (extras / builder.EXTRA_MANIFEST).write_bytes(builder._manifest_bytes(records))
     with pytest.raises(ValueError, match='(Unknown extra-model artifact|Excluded private/cache)'):
+        builder.stage(base, extras, tmp_path / 'stage', source_root=source,
+                      _expected_source_sha256=builder.clean.file_sha256(base))
+    assert not (tmp_path / 'stage').exists()
+
+
+def test_excluded_extra_paths_are_reported_together_with_bounded_diagnostics(tmp_path, monkeypatch):
+    source, _, base, extras, _ = fixture(tmp_path, monkeypatch)
+    additions = {f'runtime-qwen/.agents/unexpected-{index:02}.md': b'not vendor data' for index in range(25)}
+    write_tree(extras, additions)
+    records = builder._parse_manifest((extras / builder.EXTRA_MANIFEST).read_bytes())
+    records.update({name: sha(value) for name, value in additions.items()})
+    (extras / builder.EXTRA_MANIFEST).write_bytes(builder._manifest_bytes(records))
+    with pytest.raises(ValueError, match='25 total; first 20') as caught:
+        builder.stage(base, extras, tmp_path / 'stage', source_root=source,
+                      _expected_source_sha256=builder.clean.file_sha256(base))
+    assert 'unexpected-00.md' in str(caught.value)
+    assert 'unexpected-19.md' in str(caught.value)
+    assert 'unexpected-20.md' not in str(caught.value)
+    assert not (tmp_path / 'stage').exists()
+
+
+def test_vendor_doc_symlink_is_rejected(tmp_path, monkeypatch):
+    source, _, base, extras, _ = fixture(tmp_path, monkeypatch)
+    path = extras / 'runtime-qwen/Lib/site-packages/typer/.agents/SKILL.md'
+    path.parent.mkdir(parents=True)
+    try: path.symlink_to(extras / 'runtime-qwen/python.exe')
+    except OSError: pytest.skip('Symlink creation unavailable')
+    with pytest.raises(ValueError, match='Symlink'):
         builder.stage(base, extras, tmp_path / 'stage', source_root=source,
                       _expected_source_sha256=builder.clean.file_sha256(base))
     assert not (tmp_path / 'stage').exists()

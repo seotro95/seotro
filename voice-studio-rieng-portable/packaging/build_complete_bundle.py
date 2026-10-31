@@ -38,7 +38,8 @@ EXTRA_MARKERS = frozenset('app/.data/models/' + name + '.ready'
                           for name in ('omnivoice', 'qwen', 'qwen_clone'))
 EXTRA_BUILD_METADATA = frozenset({'TORCH-INSTALL-REPORT.json', 'QWEN-INSTALL-REPORT.json',
                                   'EXTRA-PACK-OWNER.json'})
-FASTAPI_VENDOR_SKILLS_PREFIX = 'runtime-qwen/Lib/site-packages/fastapi/.agents/'
+VENDOR_SKILLS_PATH = re.compile(
+    r'runtime-qwen/Lib/site-packages/([A-Za-z_][A-Za-z0-9_]*)/\.agents/(.+)')
 GUIDE = '''VOICE STUDIO {version} — BẢN WINDOWS ĐẦY ĐỦ
 
 Giải nén toàn bộ ZIP vào thư mục mới có quyền ghi rồi chạy MO_TOOL.bat.
@@ -135,9 +136,9 @@ def _read_small(path, limit=8 * 1024**2):
 
 def _extra_removal_reason(name):
     if not name.startswith('runtime-qwen/'): return None
-    # Some FastAPI wheels bundle development documentation in this exact
-    # vendor subtree. Treat it solely as verified, nonshipping package data.
-    if name.startswith(FASTAPI_VENDOR_SKILLS_PREFIX): return 'qwen-fastapi-development-skills'
+    # Wheels can bundle development documentation below their top-level Python
+    # package. Treat these files solely as verified, nonshipping package data.
+    if VENDOR_SKILLS_PATH.fullmatch(name): return 'qwen-vendor-development-skills'
     if name.startswith('runtime-qwen/Doc/'): return 'qwen-python-offline-documentation'
     if name.startswith(('runtime-qwen/Lib/test/', 'runtime-qwen/Lib/idlelib/idle_test/')):
         return 'qwen-python-unit-tests'
@@ -159,12 +160,16 @@ def _extras(root):
                 'BUNDLED-QWEN-PACKAGES.txt', 'runtime-qwen/python.exe',
                 'runtime-qwen/VOICE-STUDIO-QWEN.json'} | EXTRA_MARKERS
     if not required <= records.keys(): raise ValueError('Incomplete prepared extra-model artifact')
-    for name, digest in records.items():
+    path_errors = []
+    for name in records:
         if name not in EXTRA_METADATA and name not in EXTRA_MARKERS and not name.startswith(EXTRA_PREFIXES):
-            raise ValueError('Unknown extra-model artifact path: ' + name)
-        if _private_path(name, allow_bytecode=bool(_extra_removal_reason(name)),
-                         allow_fastapi_vendor_docs=True):
-            raise ValueError('Excluded private/cache extra-model path: ' + name)
+            path_errors.append('Unknown extra-model artifact path: ' + name)
+        elif _private_path(name, allow_bytecode=bool(_extra_removal_reason(name)), allow_vendor_docs=True):
+            path_errors.append('Excluded private/cache extra-model path: ' + name)
+    if path_errors:
+        raise ValueError(f'Rejected extra-model paths ({len(path_errors)} total; first 20):\n'
+                         + '\n'.join(path_errors[:20]))
+    for name, digest in records.items():
         if clean.file_sha256(files[name]) != digest: raise ValueError('Extra-model SHA256 mismatch: ' + name)
     if json.loads(_read_small(files['EXTRA-PACK-OWNER.json'])) != models.OWNER:
         raise ValueError('Unexpected extra-model artifact owner')
@@ -183,11 +188,12 @@ def _source_commit(root):
     return value if result.returncode == 0 and re.fullmatch('[0-9a-f]{40}', value) else None
 
 
-def _private_path(name, *, allow_bytecode=False, allow_fastapi_vendor_docs=False):
+def _private_path(name, *, allow_bytecode=False, allow_vendor_docs=False):
     checked_name = name
-    if allow_fastapi_vendor_docs and name.startswith(FASTAPI_VENDOR_SKILLS_PREFIX):
-        checked_name = ('runtime-qwen/Lib/site-packages/fastapi/_bundled_development_docs/'
-                        + name[len(FASTAPI_VENDOR_SKILLS_PREFIX):])
+    vendor = VENDOR_SKILLS_PATH.fullmatch(name) if allow_vendor_docs else None
+    if vendor:
+        checked_name = ('runtime-qwen/Lib/site-packages/' + vendor[1]
+                        + '/_bundled_development_docs/' + vendor[2])
     parts = PurePosixPath(checked_name).parts
     return (any(p in {'.git', '.aws', '.agents', '.codex', 'voice-library'} for p in parts)
             or (name.startswith('app/.data/') and not name.startswith('app/.data/models/'))
