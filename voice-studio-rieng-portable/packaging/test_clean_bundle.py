@@ -27,6 +27,7 @@ def contents():
     files['requirements-runtime.txt'] = b'numpy==0.0.1\n'
     files.update({
         'runtime/Lib/site-packages/numpy-2.0.0.dist-info/METADATA':b'Metadata-Version: 2.1\nName: numpy\nVersion: 2.0.0\n\n',
+        'app/native_synthesis.py':b'ORIGINAL_BINDING = True\n',
         'runtime/Lib/site-packages/numpy-2.0.0.dist-info/licenses/LICENSE.txt':b'Important license',
         'runtime/Lib/site-packages/numpy/testing/helper.py':b'required helper',
         'runtime/Lib/site-packages/scipy/_lib/_testutils.py':b'required helper',
@@ -173,6 +174,61 @@ class CleanBundleTests(unittest.TestCase):
                      'CPU-NEW-CURRENT-DIAGNOSTIC.json'):
             self.assertIsNone(builder.removal_reason(name,0),name)
         self.assertIsNone(builder.removal_reason('runtime/Lib/site-packages/scipy-1.18.1-cp312-cp312-win_amd64.whl',10))
+
+    def test_explicit_two_file_overlay_records_changes_and_preserves_every_other_app_asset(self):
+        original=contents()
+        sha=write_source(self.source,original)
+        overlay=self.root/'app-overlay';overlay.mkdir()
+        binding=b'CORRECTED_BINDING = True\n'
+        helper=b'def native_path(path):\n    return path\n'
+        (overlay/'native_synthesis.py').write_bytes(binding)
+        (overlay/'native_paths.py').write_bytes(helper)
+        (overlay/'app.py').write_bytes(b'UNREQUESTED = True\n')
+        builder.build_clean(self.source,self.output,app_overlay=overlay,_expected_sha256=sha)
+        result=read_clean(self.output)
+        self.assertEqual(result['app/native_synthesis.py'],binding)
+        self.assertEqual(result['app/native_paths.py'],helper)
+        for name,value in original.items():
+            if builder._protected(name) and name!='app/native_synthesis.py':
+                self.assertEqual(result[name],value,name)
+        report=json.loads(result['CLEANUP-REPORT.json'])
+        info=json.loads(result['BUILD_INFO.json'])
+        self.assertEqual(info['package_revision'],'clean-2')
+        self.assertEqual(report['package_revision'],'clean-2')
+        self.assertFalse(report['app_model_native_and_encrypted_voice_assets_unchanged'])
+        self.assertTrue(report['model_native_and_encrypted_voice_assets_unchanged'])
+        self.assertEqual({row['path'] for row in report['app_source_modified_files']},
+                         {'app/native_synthesis.py','app/native_paths.py'})
+        self.assertEqual(report['app_source_modified_files'][0]['source_sha256'],None)
+        self.assertEqual(info['current_native_windows_offline_smoke'],'not_run')
+        self.assertFalse(info['current_windows_app_http_smoke_passed'])
+        self.assertIn('before the Unicode-path correction',info['inherited_windows_native_qa_scope'])
+        digests={name:digest(value) for name,value in result.items()}
+        self.assertEqual(report['app_source_sha256'],builder._app_digest(digests))
+        self.assertNotEqual(report['original_app_source_sha256'],report['app_source_sha256'])
+        self.assertIn('CLEAN-2',result['DOC_TRUOC.txt'].decode())
+        self.assertIn('trước khi sửa đường dẫn tiếng Việt',result['DOC_TRUOC.txt'].decode())
+
+    def test_overlay_missing_or_invalid_syntax_does_not_publish(self):
+        sha=write_source(self.source,contents())
+        overlay=self.root/'app-overlay';overlay.mkdir()
+        (overlay/'native_synthesis.py').write_bytes(b'CORRECTED_BINDING = True\n')
+        with self.assertRaises(ValueError):
+            builder.build_clean(self.source,self.output,app_overlay=overlay,_expected_sha256=sha)
+        (overlay/'native_paths.py').write_bytes(b'def broken(')
+        with self.assertRaises(SyntaxError):
+            builder.build_clean(self.source,self.output,app_overlay=overlay,_expected_sha256=sha)
+        self.assertFalse(self.output.exists())
+        self.assertFalse(list(self.root.glob('*.assembling*')))
+
+    def test_app_digest_excludes_model_weights_and_matches_source_hash_mapping(self):
+        original=contents()
+        before={name:digest(value) for name,value in original.items()}
+        after={**before,'app/.data/models/voxcpm2-native/voxcpm2-q8_0.gguf':'0'*64}
+        self.assertEqual(builder._app_digest(before),builder._app_digest(after))
+        records={name:value for name,value in before.items() if builder._app_source(name)}
+        expected=digest(json.dumps(records,sort_keys=True,separators=(',',':')).encode())
+        self.assertEqual(builder._app_digest(before),expected)
 
 
 if __name__=='__main__':unittest.main()

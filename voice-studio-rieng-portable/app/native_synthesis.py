@@ -18,6 +18,7 @@ import traceback
 import uuid
 
 from fast_multilingual import library_path, prepared_model, _validate, language_code, _runtime_manifest, validate_native_performance
+from native_paths import native_model_path
 
 
 _REFERENCE_CACHE_MAX_ENTRIES = 8
@@ -80,6 +81,7 @@ class NativeSession:
         self.native_performance = native_performance
         self.registry, self.model, self.session = C.c_void_p(), C.c_void_p(), C.c_void_p()
         self._dll_directory = None
+        self._model_path_stack = contextlib.ExitStack()
         self.lib = None
         self._reference_cache = OrderedDict()
         self._reference_cache_bytes = 0
@@ -101,7 +103,8 @@ class NativeSession:
                 raise ValueError('Bộ native dùng C ABI không tương thích; cần audio.cpp C ABI 0.2 trở lên.')
             self._check(self.lib.audiocpp_registry_create(None, C.byref(self.registry)))
             config = ModelConfig(family.encode('ascii'), None, None, None)
-            self._check(self.lib.audiocpp_model_load(self.registry, str(model).encode('utf-8'),
+            native_filename = self._model_path_stack.enter_context(native_model_path(model))
+            self._check(self.lib.audiocpp_model_load(self.registry, native_filename,
                                                     C.byref(config), None, C.byref(self.model)))
             options = self.lib.audiocpp_options_create()
             if not options:
@@ -259,15 +262,22 @@ class NativeSession:
     def close(self):
         getattr(self, '_reference_cache', {}).clear()
         self._reference_cache_bytes = 0
-        if self.lib is not None:
-            for name in ('session', 'model', 'registry'):
-                handle = getattr(self, name)
-                if handle:
-                    getattr(self.lib, 'audiocpp_'+name+'_free')(handle)
-                    setattr(self, name, C.c_void_p())
-        if self._dll_directory is not None:
-            self._dll_directory.close()
-            self._dll_directory = None
+        try:
+            if self.lib is not None:
+                for name in ('session', 'model', 'registry'):
+                    handle = getattr(self, name)
+                    if handle:
+                        getattr(self.lib, 'audiocpp_'+name+'_free')(handle)
+                        setattr(self, name, C.c_void_p())
+        finally:
+            try:
+                if self._dll_directory is not None:
+                    self._dll_directory.close()
+                    self._dll_directory = None
+            finally:
+                stack = getattr(self, '_model_path_stack', None)
+                if stack is not None:
+                    stack.close()
 
 
 def serve(data, threads, device, source=None, protocol=None, errors=None, family='omnivoice', native_performance='off'):

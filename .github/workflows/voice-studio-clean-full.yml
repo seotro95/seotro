@@ -9,6 +9,9 @@ on:
       - 'voice-studio-rieng-portable/packaging/build_clean_bundle.py'
       - 'voice-studio-rieng-portable/packaging/test_clean_bundle.py'
       - 'voice-studio-rieng-portable/packaging/smoke_clean_bundle.py'
+      - 'voice-studio-rieng-portable/app/native_paths.py'
+      - 'voice-studio-rieng-portable/app/native_synthesis.py'
+      - 'voice-studio-rieng-portable/app/tests/test_native_paths.py'
 
 permissions:
   contents: write
@@ -38,6 +41,13 @@ jobs:
       - name: Test cleanup and downloader boundaries
         shell: pwsh
         run: |
+          python -m unittest discover -s voice-studio-rieng-portable/app/tests -p test_native_paths.py -v 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'clean-path-tests.log')
+          $pathExit = $LASTEXITCODE
+          if ($pathExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'clean-path-tests.log') -Tail 70) -join ' | ')
+            Write-Output ('::error title=Native Unicode path tests failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $pathExit
+          }
           python -m unittest discover -s voice-studio-rieng-portable/packaging -p test_clean_bundle.py -v 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'clean-tests.log')
           $testExit = $LASTEXITCODE
           if ($testExit -ne 0) {
@@ -73,7 +83,7 @@ jobs:
       - name: Remove audited unused files and regenerate the complete file manifest
         shell: pwsh
         run: |
-          python voice-studio-rieng-portable/packaging/build_clean_bundle.py --source-archive "${{ runner.temp }}/source-full.zip" --output "${{ runner.temp }}/clean-archive/$env:ARCHIVE_NAME" 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'clean-build.log')
+          python voice-studio-rieng-portable/packaging/build_clean_bundle.py --source-archive "${{ runner.temp }}/source-full.zip" --output "${{ runner.temp }}/clean-archive/$env:ARCHIVE_NAME" --app-overlay voice-studio-rieng-portable/app 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'clean-build.log')
           $buildExit = $LASTEXITCODE
           if ($buildExit -ne 0) {
             $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'clean-build.log') -Tail 35) -join ' | ')
@@ -176,7 +186,7 @@ jobs:
         run: |
           $assets = @(Get-ChildItem -LiteralPath "${{ runner.temp }}/clean-downloads" -File | ForEach-Object { $_.FullName })
           $notes = @'
-          Complete Voice Studio 1.12.1, package revision clean-1. Audited cleanup removes the redundant Python installer, Python manuals and test suites, Gradio JavaScript/CSS source maps, stale benchmarks and outdated guides. All application modules, encrypted 19-voice data, public Nano/Turbo models, native VoxCPM2 Q8 model, CPU/CUDA12 sm61 libraries, Python packages and licenses are retained. Includes a current Vietnamese guide, actual installed-package inventory, exact removal report and new full SHA256 manifest.
+          Complete Voice Studio 1.12.1, package revision clean-2. Audited cleanup removes the redundant Python installer, Python manuals and test suites, Gradio JavaScript/CSS source maps, stale benchmarks and outdated guides. A targeted Windows native-model path fix supports Unicode installation folders without copying model weights. The exact source changes are recorded; all encrypted 19-voice data, public Nano/Turbo models, native VoxCPM2 Q8 model, CPU/CUDA12 sm61 libraries, Python packages and licenses are retained. Includes a current Vietnamese guide, actual installed-package inventory, exact removal report and new full SHA256 manifest.
 
           Actual Nano/Turbo CPU speech and native VoxCPM2 French/Japanese speech plus current UI/API were tested with the cleaned bundled Python on Windows. Download TAI_TOOL_SACH_DAY_DU.zip, extract and run the CMD to automatically obtain the complete large ZIP; that small ZIP is a downloader, not the embedded application. It is attached only after a full Windows download and checksum verification. Keep the previous private-voice password. GPU inference on GTX1060, private-voice unlocking, voice identity, a complete-hour render and 30x throughput are not established. Cleanup does not change the speech model or claim an inference speed increase.
           '@
@@ -219,7 +229,7 @@ jobs:
               raise ValueError('Published clean ZIP download differs from the tested archive')
           with zipfile.ZipFile(archive) as package:
               info = json.loads(package.read(os.environ['PORTABLE_NAME'] + '/BUILD_INFO.json'))
-              if info.get('package_revision') != 'clean-1' or not info.get('international_model_bundled'):
+              if info.get('package_revision') != 'clean-2' or not info.get('international_model_bundled'):
                   raise ValueError('The downloader retrieved an incomplete or different package')
           helpers = temp / 'clean-helper'
           report = {'platform': 'win32', 'single_cmd_download_passed': True, 'second_run_reused_complete_zip': True,

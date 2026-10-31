@@ -8,6 +8,7 @@ existing user installation and does not establish fresh Windows or GPU QA.
 from __future__ import annotations
 
 import argparse
+import ast
 from collections import Counter
 from email.parser import BytesParser
 import hashlib
@@ -29,6 +30,7 @@ _OLD_QA = frozenset({'BASE-1.10-MANIFEST.sha256', 'BASE-1.10-PORTABLE-QA.json',
                      'BASE-1.10-SHARED-MODEL-QA.json'})
 _OLD_GUIDES = frozenset({'DOC_TRUOC_PORTABLE.txt', 'README_GITHUB_19_GIONG.txt',
                          'DOC_TRUOC.md', 'DOC_TRUOC_FULL.txt'})
+_APP_OVERLAY = ('native_synthesis.py', 'native_paths.py')
 _REQUIRED = frozenset({
     'BUILD_INFO.json', 'MANIFEST.sha256', 'MO_TOOL.bat', 'HUONG_DAN_CAN_MOC.txt',
     'requirements-runtime.txt', 'requirements-international.txt', 'THIRD_PARTY_NOTICES.md',
@@ -182,7 +184,38 @@ def _protected(name):
                         'runtime/python.exe', 'ffmpeg/bin/ffmpeg.exe', 'ffmpeg/bin/ffprobe.exe'})
 
 
-def build_clean(source_archive, output, *, _expected_sha256=SOURCE_SHA256):
+def _app_source(name):
+    return (name.startswith('app/') and not name.startswith('app/.data/')
+            and PurePosixPath(name).suffix.lower() in {'.py', '.ps1', '.html', '.css', '.js'})
+
+
+def _app_digest(digests):
+    records = {name: value for name, value in digests.items() if _app_source(name)}
+    return hashlib.sha256(json.dumps(records, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+
+def _app_overlays(directory, original):
+    if directory is None: return {}
+    directory = Path(directory)
+    if directory.is_symlink() or not directory.is_dir():
+        raise ValueError('App overlay must be a real application source directory')
+    if 'app/native_synthesis.py' not in original or 'app/native_paths.py' in original:
+        raise ValueError('Unexpected source baseline for the two-file native path correction')
+    result = {}
+    for name in _APP_OVERLAY:
+        path = directory / name
+        if (path.is_symlink() or not path.is_file() or not 1 <= path.stat().st_size <= 256 * 1024
+                or not path.resolve().is_relative_to(directory.resolve())):
+            raise ValueError('Missing, unsafe or unbounded native path correction source: ' + name)
+        payload = path.read_bytes()
+        ast.parse(payload.decode('utf-8-sig'), filename=name)
+        result['app/' + name] = payload
+    if hashlib.sha256(result['app/native_synthesis.py']).hexdigest() == original['app/native_synthesis.py']:
+        raise ValueError('The native binding overlay does not contain a correction')
+    return result
+
+
+def build_clean(source_archive, output, *, app_overlay=None, _expected_sha256=SOURCE_SHA256):
     source_archive, output = Path(source_archive), Path(output)
     checksum = Path(str(output) + '.sha256')
     if output.suffix.lower() != '.zip': raise ValueError('Output must be a ZIP path')
@@ -201,6 +234,8 @@ def build_clean(source_archive, output, *, _expected_sha256=SOURCE_SHA256):
         with zipfile.ZipFile(source_archive) as source:
             files = _members(source)
             original = _manifest(source, files)
+            app_changes = _app_overlays(app_overlay, original)
+            revision = 'clean-2' if app_changes else 'clean-1'
             info = json.loads(_read(source, files['BUILD_INFO.json']))
             if info.get('version') != '1.12.1' or info.get('encrypted_private_pack_bundled') is not True:
                 raise ValueError('Expected the complete 1.12.1 source distribution')
@@ -208,19 +243,49 @@ def build_clean(source_archive, output, *, _expected_sha256=SOURCE_SHA256):
             launcher = _read(source, files['MO_TOOL.bat'])
             if launcher.count(b'title Voice Studio Rieng 1.9.0 Portable') != 1:
                 raise ValueError('Unexpected source launcher title')
+            guide = GUIDE
+            if app_changes:
+                guide = (guide.replace('(CLEAN-1)', '(CLEAN-2)')
+                         .replace('Không thay model,\nDLL hoặc mã ứng dụng; việc dọn tệp không tự làm tốc độ suy luận nhanh hơn.',
+                                  'Giữ nguyên model và DLL. Mã native đã được sửa lỗi đọc model khi thư mục\n'
+                                  'có dấu tiếng Việt; việc dọn tệp không tự làm tốc độ suy luận nhanh hơn.')
+                         .replace('là kiểm tra mã ứng dụng/model của bản nguồn.',
+                                  'là kiểm tra model và mã ứng dụng bản nguồn,\n'
+                                  'trước khi sửa đường dẫn tiếng Việt; không phải kiểm tra lại mã Clean-2.'))
             changes = {
                 'MO_TOOL.bat': launcher.replace(b'title Voice Studio Rieng 1.9.0 Portable', b'title Voice Studio Rieng 1.12.1 Clean Portable'),
                 'HUONG_DAN_CAN_MOC.txt': _read(source, files['HUONG_DAN_CAN_MOC.txt']).replace(b'PORTABLE-QA.json', b'WINDOWS-NATIVE-VOXCPM-QA.json'),
                 'requirements-runtime.txt': (b'# Build recipe only; actual bundled versions are in BUNDLED-PACKAGES.txt.\n'
                                              + _read(source, files['requirements-runtime.txt'])),
-                'DOC_TRUOC.txt': GUIDE.encode('utf-8'),
+                'DOC_TRUOC.txt': guide.encode('utf-8'),
                 'BUNDLED-PACKAGES.txt': inventory,
             }
-            info.update(package_type='windows-x64-portable-cleaned', package_revision='clean-1',
+            changes.update(app_changes)
+            app_records = [{'path': name, 'source_sha256': original.get(name),
+                            'clean_sha256': hashlib.sha256(payload).hexdigest()}
+                           for name, payload in sorted(app_changes.items())]
+            final_app_digests = {**original, **{name: hashlib.sha256(payload).hexdigest()
+                                              for name, payload in app_changes.items()}}
+            info.update(package_type='windows-x64-portable-cleaned', package_revision=revision,
                         source_full_archive_sha256=_expected_sha256,
                         cleanup_report='CLEANUP-REPORT.json', bundled_package_inventory='BUNDLED-PACKAGES.txt',
-                        cleanup_changes_inference_assets=False, cleaned_windows_package_qa='not_run',
+                        cleanup_changes_inference_assets=bool(app_changes),
+                        cleanup_changes_model_or_native_library_assets=False,
+                        native_unicode_path_correction_applied=bool(app_changes), cleaned_windows_package_qa='not_run',
                         cleaned_windows_package_qa_scope=None)
+            if app_changes:
+                info.update(
+                    inherited_windows_native_qa_report='WINDOWS-NATIVE-VOXCPM-QA.json',
+                    inherited_windows_native_qa_scope='Pinned original application before the Unicode-path correction only',
+                    inherited_windows_native_qa_source_commit=info.get('application_source_commit'),
+                    inherited_source_windows_native_offline_smoke=info.get('current_native_windows_offline_smoke'),
+                    application_source_commit=os.environ.get('GITHUB_SHA'), application_source_modified=True,
+                    app_source_modified_files=app_records,
+                    original_app_source_sha256=_app_digest(original), app_source_sha256=_app_digest(final_app_digests),
+                    current_native_windows_offline_smoke='not_run', current_windows_validation_scope=None,
+                    current_windows_app_http_smoke_passed=False, current_windows_nanoturbo_inference_repeated=False,
+                    current_windows_private_voice_unlock_tested=False,
+                )
             changes['BUILD_INFO.json'] = _json(info)
             removals, categories, category_bytes, digests = [], Counter(), Counter(), {}
             protected = {}
@@ -254,7 +319,7 @@ def build_clean(source_archive, output, *, _expected_sha256=SOURCE_SHA256):
                              'clean_sha256': hashlib.sha256(value).hexdigest()}
                             for name, value in sorted(changes.items()) if name in original]
                 report = {
-                    'schema': 1, 'package_revision': 'clean-1', 'source_full_archive_sha256': _expected_sha256,
+                    'schema': 1, 'package_revision': revision, 'source_full_archive_sha256': _expected_sha256,
                     'source_file_count': len(files), 'removed_file_count': len(removals),
                     'removed_uncompressed_bytes': sum(row['bytes'] for row in removals),
                     'categories': {name: {'files': categories[name], 'uncompressed_bytes': category_bytes[name]}
@@ -263,7 +328,12 @@ def build_clean(source_archive, output, *, _expected_sha256=SOURCE_SHA256):
                     'added_files': sorted(set(changes) - set(original)) + ['CLEANUP-REPORT.json'],
                     'bundled_distribution_count': package_count,
                     'all_source_files_sha256_verified': True,
-                    'app_model_native_and_encrypted_voice_assets_unchanged': True,
+                    'app_model_native_and_encrypted_voice_assets_unchanged': not bool(app_changes),
+                    'model_native_and_encrypted_voice_assets_unchanged': True,
+                    'all_other_app_sources_unchanged': True,
+                    'app_source_modified_files': app_records,
+                    'original_app_source_sha256': _app_digest(original),
+                    'app_source_sha256': _app_digest(final_app_digests),
                     'protected_asset_sha256': protected,
                     'installed_distribution_metadata_and_licenses_preserved': True,
                     'old_installation_or_user_data_read': False,
@@ -274,7 +344,7 @@ def build_clean(source_archive, output, *, _expected_sha256=SOURCE_SHA256):
                 for name, value in sorted(changes.items()):
                     target.writestr(_zip_info(name), value, compresslevel=5)
                     digests[name] = hashlib.sha256(value).hexdigest()
-                if set(protected) != {name for name in original if _protected(name)}:
+                if set(protected) != {name for name in original if _protected(name) and name not in app_changes}:
                     raise ValueError('Protected inference assets were not all retained')
                 manifest = ''.join(digest + '  ' + name + '\n' for name, digest in sorted(digests.items()))
                 target.writestr(_zip_info('MANIFEST.sha256'), manifest.encode('utf-8'), compresslevel=5)
@@ -297,8 +367,9 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source-archive', required=True, type=Path)
     parser.add_argument('--output', required=True, type=Path)
+    parser.add_argument('--app-overlay', type=Path, help='Explicit two-file native Windows Unicode-path correction')
     args = parser.parse_args(argv)
-    for path in build_clean(args.source_archive, args.output): print(path, flush=True)
+    for path in build_clean(args.source_archive, args.output, app_overlay=args.app_overlay): print(path, flush=True)
 
 
 if __name__ == '__main__': main()
