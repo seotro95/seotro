@@ -11,14 +11,17 @@ on:
       - 'voice-studio-rieng-portable/packaging/smoke_clean_bundle.py'
       - 'voice-studio-rieng-portable/app/native_paths.py'
       - 'voice-studio-rieng-portable/app/native_synthesis.py'
+      - 'voice-studio-rieng-portable/app/fast_multilingual.py'
       - 'voice-studio-rieng-portable/app/tests/test_native_paths.py'
+      - 'voice-studio-rieng-portable/app/tests/test_native_client_shutdown.py'
 
 permissions:
   contents: write
 
 concurrency:
-  group: voice-studio-clean-full-${{ github.sha }}
-  cancel-in-progress: false
+  # Share the first clean-2 run's group so a corrected package supersedes it.
+  group: voice-studio-clean-full-1dd8ba1fc4d069f9daefc5c4fe80e49b8a335ba5
+  cancel-in-progress: true
 
 env:
   PYTHONUTF8: '1'
@@ -47,6 +50,13 @@ jobs:
             $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'clean-path-tests.log') -Tail 70) -join ' | ')
             Write-Output ('::error title=Native Unicode path tests failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
             exit $pathExit
+          }
+          python -m unittest discover -s voice-studio-rieng-portable/app/tests -p test_native_client_shutdown.py -v 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'clean-shutdown-tests.log')
+          $shutdownExit = $LASTEXITCODE
+          if ($shutdownExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'clean-shutdown-tests.log') -Tail 70) -join ' | ')
+            Write-Output ('::error title=Native shutdown tests failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $shutdownExit
           }
           python -m unittest discover -s voice-studio-rieng-portable/packaging -p test_clean_bundle.py -v 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'clean-tests.log')
           $testExit = $LASTEXITCODE

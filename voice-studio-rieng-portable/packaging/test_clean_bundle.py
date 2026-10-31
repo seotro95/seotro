@@ -28,6 +28,7 @@ def contents():
     files.update({
         'runtime/Lib/site-packages/numpy-2.0.0.dist-info/METADATA':b'Metadata-Version: 2.1\nName: numpy\nVersion: 2.0.0\n\n',
         'app/native_synthesis.py':b'ORIGINAL_BINDING = True\n',
+        'app/fast_multilingual.py':b'ORIGINAL_WORKER = True\n',
         'runtime/Lib/site-packages/numpy-2.0.0.dist-info/licenses/LICENSE.txt':b'Important license',
         'runtime/Lib/site-packages/numpy/testing/helper.py':b'required helper',
         'runtime/Lib/site-packages/scipy/_lib/_testutils.py':b'required helper',
@@ -175,21 +176,24 @@ class CleanBundleTests(unittest.TestCase):
             self.assertIsNone(builder.removal_reason(name,0),name)
         self.assertIsNone(builder.removal_reason('runtime/Lib/site-packages/scipy-1.18.1-cp312-cp312-win_amd64.whl',10))
 
-    def test_explicit_two_file_overlay_records_changes_and_preserves_every_other_app_asset(self):
+    def test_explicit_three_file_overlay_records_changes_and_preserves_every_other_app_asset(self):
         original=contents()
         sha=write_source(self.source,original)
         overlay=self.root/'app-overlay';overlay.mkdir()
         binding=b'CORRECTED_BINDING = True\n'
         helper=b'def native_path(path):\n    return path\n'
+        worker=b'CORRECTED_WORKER = True\n'
         (overlay/'native_synthesis.py').write_bytes(binding)
         (overlay/'native_paths.py').write_bytes(helper)
+        (overlay/'fast_multilingual.py').write_bytes(worker)
         (overlay/'app.py').write_bytes(b'UNREQUESTED = True\n')
         builder.build_clean(self.source,self.output,app_overlay=overlay,_expected_sha256=sha)
         result=read_clean(self.output)
         self.assertEqual(result['app/native_synthesis.py'],binding)
         self.assertEqual(result['app/native_paths.py'],helper)
+        self.assertEqual(result['app/fast_multilingual.py'],worker)
         for name,value in original.items():
-            if builder._protected(name) and name!='app/native_synthesis.py':
+            if builder._protected(name) and name not in {'app/native_synthesis.py','app/fast_multilingual.py'}:
                 self.assertEqual(result[name],value,name)
         report=json.loads(result['CLEANUP-REPORT.json'])
         info=json.loads(result['BUILD_INFO.json'])
@@ -198,8 +202,9 @@ class CleanBundleTests(unittest.TestCase):
         self.assertFalse(report['app_model_native_and_encrypted_voice_assets_unchanged'])
         self.assertTrue(report['model_native_and_encrypted_voice_assets_unchanged'])
         self.assertEqual({row['path'] for row in report['app_source_modified_files']},
-                         {'app/native_synthesis.py','app/native_paths.py'})
-        self.assertEqual(report['app_source_modified_files'][0]['source_sha256'],None)
+                         {'app/native_synthesis.py','app/native_paths.py','app/fast_multilingual.py'})
+        self.assertEqual(next(row for row in report['app_source_modified_files']
+                              if row['path']=='app/native_paths.py')['source_sha256'],None)
         self.assertEqual(info['current_native_windows_offline_smoke'],'not_run')
         self.assertFalse(info['current_windows_app_http_smoke_passed'])
         self.assertIn('before the Unicode-path correction',info['inherited_windows_native_qa_scope'])
@@ -216,6 +221,7 @@ class CleanBundleTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             builder.build_clean(self.source,self.output,app_overlay=overlay,_expected_sha256=sha)
         (overlay/'native_paths.py').write_bytes(b'def broken(')
+        (overlay/'fast_multilingual.py').write_bytes(b'CORRECTED_WORKER = True\n')
         with self.assertRaises(SyntaxError):
             builder.build_clean(self.source,self.output,app_overlay=overlay,_expected_sha256=sha)
         self.assertFalse(self.output.exists())

@@ -269,19 +269,39 @@ class _BackendClient:
             raise
 
     def close(self):
-        if self.process is not None:
-            if self.process.poll() is None:
-                self.process.terminate()
-                try:
-                    self.process.wait(timeout=5)
-                except subprocess.TimeoutExpired:
-                    self.process.kill()
-                    self.process.wait(timeout=5)
-            for stream in (self.process.stdin, self.process.stdout):
-                if stream is not None:
-                    stream.close()
-        if self.log is not None:
-            self.log.close()
+        process = getattr(self, 'process', None)
+        try:
+            if process is not None:
+                # EOF lets the isolated server release native handles and its
+                # temporary model link. TerminateProcess skips Python finally.
+                source = getattr(process, 'stdin', None)
+                if source is not None:
+                    try:
+                        source.close()
+                    except (OSError, ValueError):
+                        pass
+                if process.poll() is None:
+                    try:
+                        process.wait(timeout=5)
+                    except subprocess.TimeoutExpired:
+                        process.terminate()
+                        try:
+                            process.wait(timeout=5)
+                        except subprocess.TimeoutExpired:
+                            process.kill()
+                            process.wait(timeout=5)
+        finally:
+            if process is not None:
+                for name in ('stdin', 'stdout'):
+                    stream = getattr(process, name, None)
+                    if stream is not None:
+                        try:
+                            stream.close()
+                        except (OSError, ValueError):
+                            pass
+            log = getattr(self, 'log', None)
+            if log is not None:
+                log.close()
 
 
 def close_backends():

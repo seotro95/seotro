@@ -30,7 +30,7 @@ _OLD_QA = frozenset({'BASE-1.10-MANIFEST.sha256', 'BASE-1.10-PORTABLE-QA.json',
                      'BASE-1.10-SHARED-MODEL-QA.json'})
 _OLD_GUIDES = frozenset({'DOC_TRUOC_PORTABLE.txt', 'README_GITHUB_19_GIONG.txt',
                          'DOC_TRUOC.md', 'DOC_TRUOC_FULL.txt'})
-_APP_OVERLAY = ('native_synthesis.py', 'native_paths.py')
+_APP_OVERLAY = ('native_synthesis.py', 'native_paths.py', 'fast_multilingual.py')
 _REQUIRED = frozenset({
     'BUILD_INFO.json', 'MANIFEST.sha256', 'MO_TOOL.bat', 'HUONG_DAN_CAN_MOC.txt',
     'requirements-runtime.txt', 'requirements-international.txt', 'THIRD_PARTY_NOTICES.md',
@@ -199,8 +199,9 @@ def _app_overlays(directory, original):
     directory = Path(directory)
     if directory.is_symlink() or not directory.is_dir():
         raise ValueError('App overlay must be a real application source directory')
-    if 'app/native_synthesis.py' not in original or 'app/native_paths.py' in original:
-        raise ValueError('Unexpected source baseline for the two-file native path correction')
+    if (not {'app/native_synthesis.py', 'app/fast_multilingual.py'} <= original.keys()
+            or 'app/native_paths.py' in original):
+        raise ValueError('Unexpected source baseline for the native path and worker-close correction')
     result = {}
     for name in _APP_OVERLAY:
         path = directory / name
@@ -210,8 +211,9 @@ def _app_overlays(directory, original):
         payload = path.read_bytes()
         ast.parse(payload.decode('utf-8-sig'), filename=name)
         result['app/' + name] = payload
-    if hashlib.sha256(result['app/native_synthesis.py']).hexdigest() == original['app/native_synthesis.py']:
-        raise ValueError('The native binding overlay does not contain a correction')
+    for name in ('app/native_synthesis.py', 'app/fast_multilingual.py'):
+        if hashlib.sha256(result[name]).hexdigest() == original[name]:
+            raise ValueError('The native binding/worker overlay does not contain a correction: ' + name)
     return result
 
 
@@ -367,7 +369,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source-archive', required=True, type=Path)
     parser.add_argument('--output', required=True, type=Path)
-    parser.add_argument('--app-overlay', type=Path, help='Explicit two-file native Windows Unicode-path correction')
+    parser.add_argument('--app-overlay', type=Path, help='Explicit three-file native Windows Unicode-path and worker-close correction')
     args = parser.parse_args(argv)
     for path in build_clean(args.source_archive, args.output, app_overlay=args.app_overlay): print(path, flush=True)
 
