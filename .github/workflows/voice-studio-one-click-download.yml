@@ -1,0 +1,152 @@
+name: Voice Studio - Verify and publish one-click full download
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [voice-studio-one-click-download-v1.12.1]
+    paths:
+      - '.github/workflows/voice-studio-one-click-download.yml'
+      - 'voice-studio-rieng-portable/packaging/build_one_click_download.py'
+      - 'voice-studio-rieng-portable/packaging/test_one_click_download.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-studio-one-click-download-${{ github.sha }}
+  cancel-in-progress: false
+
+env:
+  RELEASE_TAG: voice-studio-native-voxcpm-1.12.1-41214648685-1
+  FULL_ZIP: Voice-Studio-1.12.1-Full-Windows-x64.zip
+  FULL_SHA256: a4646d2ab03d0ea9f605961dc7cde8fee4c512cc70344764564f3130fd3e2864
+  PYTHONUTF8: '1'
+
+jobs:
+  verify-and-publish:
+    runs-on: windows-2022
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Check downloader paths, reuse and preservation on Windows
+        shell: pwsh
+        run: |
+          python -m unittest discover -s voice-studio-rieng-portable/packaging -p test_one_click_download.py -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Read and pin the existing verified full archive manifest
+        shell: python
+        run: |
+          import json, os, pathlib, urllib.request
+          url = 'https://github.com/' + os.environ['GITHUB_REPOSITORY'] + '/releases/download/' + os.environ['RELEASE_TAG'] + '/DOWNLOAD-PARTS.json'
+          with urllib.request.urlopen(url, timeout=60) as source:
+              payload = source.read(1024**2 + 1)
+          if len(payload) > 1024**2:
+              raise ValueError('Manifest is unexpectedly large')
+          manifest = json.loads(payload)
+          if manifest.get('archive') != os.environ['FULL_ZIP'] or manifest.get('archive_sha256') != os.environ['FULL_SHA256']:
+              raise ValueError('The existing full archive differs from the verified release')
+          (pathlib.Path(os.environ['RUNNER_TEMP']) / 'DOWNLOAD-PARTS.json').write_bytes(payload)
+      - name: Build the single-file downloader
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force "${{ runner.temp }}/one-click" | Out-Null
+          python voice-studio-rieng-portable/packaging/build_one_click_download.py --manifest "${{ runner.temp }}/DOWNLOAD-PARTS.json" --output "${{ runner.temp }}/one-click/TAI_TOOL_DAY_DU_1.12.1.cmd"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Download and assemble the actual full ZIP using the CMD on Windows
+        shell: pwsh
+        run: |
+          $work = Join-Path $env:RUNNER_TEMP 'tai mot tep Tiếng Việt !'
+          New-Item -ItemType Directory -Force $work | Out-Null
+          Copy-Item "${{ runner.temp }}/one-click/TAI_TOOL_DAY_DU_1.12.1.cmd" $work
+          'Existing user file: preserve this.' | Set-Content -LiteralPath (Join-Path $work 'USER_KEEP.txt') -Encoding utf8
+          $env:VOICE_DOWNLOAD_NO_PAUSE = '1'
+          Push-Location $work
+          try {
+            & cmd.exe /d /c '.\TAI_TOOL_DAY_DU_1.12.1.cmd' 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'one-click-run.log')
+            $downloadExit = $LASTEXITCODE
+            if ($downloadExit -ne 0) {
+              $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'one-click-run.log') -Tail 20) -join ' | ')
+              $detail = $detail.Replace('%', '%25').Replace("`r", '%0D').Replace("`n", '%0A')
+              Write-Output "::error title=One-click downloader failed::$detail"
+              exit $downloadExit
+            }
+          } finally { Pop-Location }
+      - name: Verify the complete archive and preservation of the existing user file
+        shell: python
+        run: |
+          import hashlib, json, os, pathlib, zipfile
+          work = pathlib.Path(os.environ['RUNNER_TEMP']) / 'tai mot tep Tiếng Việt !'
+          archive = work / os.environ['FULL_ZIP']
+          manifest = json.loads((pathlib.Path(os.environ['RUNNER_TEMP']) / 'DOWNLOAD-PARTS.json').read_text(encoding='utf-8'))
+          if archive.stat().st_size != manifest['archive_size']:
+              raise ValueError('The CMD assembled an incomplete full archive')
+          with archive.open('rb') as source:
+              if hashlib.file_digest(source, 'sha256').hexdigest() != os.environ['FULL_SHA256']:
+                  raise ValueError('The CMD did not reconstruct the verified full ZIP')
+          if (work / 'USER_KEEP.txt').read_text(encoding='utf-8-sig').strip() != 'Existing user file: preserve this.':
+              raise ValueError('The downloader modified an unrelated file')
+          with zipfile.ZipFile(archive) as package:
+              info = json.loads(package.read('Voice-Studio-1.12.1-Full-Windows-x64/BUILD_INFO.json'))
+          if info.get('version') != '1.12.1' or not info.get('international_model_bundled'):
+              raise ValueError('The assembled archive does not contain the full tool')
+          report = {'platform': 'win32', 'single_cmd_download_passed': True,
+                    'full_archive': archive.name, 'full_size': archive.stat().st_size,
+                    'full_sha256': os.environ['FULL_SHA256'], 'existing_user_file_preserved': True,
+                    'unicode_and_spaces_and_exclamation_path_tested': True,
+                    'downloads_payload': True, 'payload_embedded_in_cmd': False}
+          (pathlib.Path(os.environ['RUNNER_TEMP']) / 'one-click/ONE-CLICK-DOWNLOAD-QA.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
+      - name: Verify a second run reuses the valid complete ZIP
+        shell: pwsh
+        run: |
+          $work = Join-Path $env:RUNNER_TEMP 'tai mot tep Tiếng Việt !'
+          $archive = Join-Path $work $env:FULL_ZIP
+          $before = (Get-Item -LiteralPath $archive).LastWriteTimeUtc.Ticks
+          $env:VOICE_DOWNLOAD_NO_PAUSE = '1'
+          Push-Location $work
+          try {
+            & cmd.exe /d /c '.\TAI_TOOL_DAY_DU_1.12.1.cmd'
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          } finally { Pop-Location }
+          if ((Get-Item -LiteralPath $archive).LastWriteTimeUtc.Ticks -ne $before) { throw 'Existing valid ZIP was replaced' }
+          $reportPath = Join-Path $env:RUNNER_TEMP 'one-click/ONE-CLICK-DOWNLOAD-QA.json'
+          $report = Get-Content -LiteralPath $reportPath -Raw | ConvertFrom-Json
+          $report | Add-Member -NotePropertyName second_run_reused_complete_zip -NotePropertyValue $true
+          $report | ConvertTo-Json | Set-Content -LiteralPath $reportPath -Encoding utf8
+      - name: Make an optional browser-friendly ZIP of the downloader
+        shell: python
+        run: |
+          import hashlib, os, pathlib, zipfile
+          root = pathlib.Path(os.environ['RUNNER_TEMP']) / 'one-click'
+          cmd = root / 'TAI_TOOL_DAY_DU_1.12.1.cmd'
+          guide = ('TỆP TẢI TỰ ĐỘNG VOICE STUDIO 1.12.1\n\n'
+                   'Gói nhỏ này chứa trình tải, không chứa sẵn toàn bộ tool.\n'
+                   'Giải nén rồi chạy TAI_TOOL_DAY_DU_1.12.1.cmd trong thư mục mới.\n'
+                   'Trình tải lấy khoảng 4,72 GB dữ liệu từ GitHub, kiểm tra SHA256 và tạo một ZIP đầy đủ.\n'
+                   'Sau đó giải nén ZIP đầy đủ, mở bộ mẫu bằng mật khẩu cũ và chạy MO_TOOL.bat.\n'
+                   'Nếu mạng ngắt, chạy lại trình tải để dùng lại phần đã tải/kiểm tra.\n')
+          target = root / 'TAI_TOOL_DAY_DU_1.12.1.zip'
+          with zipfile.ZipFile(target, 'x', zipfile.ZIP_DEFLATED) as package:
+              package.write(cmd, cmd.name)
+              package.writestr('DOC_TRUOC.txt', guide.encode('utf-8'))
+          for path in (cmd, target):
+              with path.open('rb') as source:
+                  digest = hashlib.file_digest(source, 'sha256').hexdigest()
+              pathlib.Path(str(path) + '.sha256').write_text(digest + '  ' + path.name + '\n', encoding='utf-8')
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Voice-Studio-1.12.1-Verified-One-Click-Downloader
+          path: ${{ runner.temp }}/one-click/*
+          if-no-files-found: error
+          retention-days: 14
+      - name: Attach the verified one-click downloader to the existing full release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $assets = @(Get-ChildItem -LiteralPath "${{ runner.temp }}/one-click" -File | ForEach-Object { $_.FullName })
+          gh release upload $env:RELEASE_TAG @assets --repo '${{ github.repository }}'
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
