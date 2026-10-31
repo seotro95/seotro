@@ -131,7 +131,7 @@ if defined VS_PUSHED popd
 exit /b %VS_EXIT%
 
 :verify
-powershell.exe -NoLogo -NoProfile -NonInteractive -Command "$ErrorActionPreference='Stop';try{$p=$env:VS_CHECK;if(-not(Test-Path -LiteralPath $p -PathType Leaf)){exit 2};$f=Get-Item -LiteralPath $p;if(($f.Attributes -band [IO.FileAttributes]::ReparsePoint) -or $f.Length -ne [long]$env:VS_EXPECT_SIZE){exit 1};if((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash.ToLowerInvariant() -cne $env:VS_EXPECT_SHA){exit 1};exit 0}catch{Write-Host $_.Exception.Message;exit 1}"
+powershell.exe -NoLogo -NoProfile -NonInteractive -Command "$ErrorActionPreference='Stop';$s=$null;$h=$null;try{$p=$env:VS_CHECK;if(-not(Test-Path -LiteralPath $p -PathType Leaf)){exit 2};$f=Get-Item -LiteralPath $p;if(($f.Attributes -band [IO.FileAttributes]::ReparsePoint) -or $f.Length -ne [long]$env:VS_EXPECT_SIZE){exit 1};$s=[IO.File]::OpenRead($p);$h=[Security.Cryptography.SHA256]::Create();$digest=([BitConverter]::ToString($h.ComputeHash($s))).Replace('-','').ToLowerInvariant();if($digest -cne $env:VS_EXPECT_SHA){exit 1};exit 0}catch{Write-Host $_.Exception.Message;exit 1}finally{if($null -ne $s){$s.Dispose()};if($null -ne $h){$h.Dispose()}}"
 exit /b %ERRORLEVEL%
 
 :part

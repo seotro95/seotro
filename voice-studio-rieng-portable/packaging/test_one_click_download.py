@@ -92,7 +92,9 @@ class GeneratorTests(unittest.TestCase):
         self.assertIn('--proto "=https" --proto-redir "=https"', text)
         self.assertIn('--continue-at -', text)
         self.assertIn('[Net.SecurityProtocolType]::Tls12', text)
-        self.assertIn('Get-FileHash -LiteralPath $p -Algorithm SHA256', text)
+        self.assertIn('[Security.Cryptography.SHA256]::Create()', text)
+        self.assertIn('$h.ComputeHash($s)', text)
+        self.assertNotIn('Get-FileHash', text, 'Hashing must work without optional PowerShell modules')
         for forbidden in ('EncodedCommand', 'ExecutionPolicy', 'ScriptBlock', 'ServerCertificateValidationCallback',
                           'Invoke-Expression', 'Start-Process', ' --insecure', ' -k ', ' -SkipCertificateCheck'):
             self.assertNotIn(forbidden.lower(), text.lower())
