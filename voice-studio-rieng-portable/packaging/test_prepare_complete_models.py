@@ -117,15 +117,15 @@ class CompleteModelsTests(unittest.TestCase):
             'runtime_manifest_sha256':builder.sha256(root/'runtime-qwen/VOICE-STUDIO-QWEN.json'),
             'actual_application_adapter_tested':True,'main_runtime_heavy_qwen_imports':False,
             'gpu_inference_test':'not_run','target_30x_guaranteed':False,'private_voice_library_decoded':False,
-            'qwen_customvoice':{'requests':[{'speaker':name,'valid_pcm_audio':True,'device':'cpu'} for name in builder.SPEAKERS]},
-            'qwen_base':{'valid_pcm_audio':True,'device':'cpu','public_reference_sha256':builder.REFERENCE_SHA256},
+            'qwen_customvoice':{'requests':[{'speaker':name,'valid_pcm_audio':True,'device':'cpu','audio_seconds':2} for name in builder.SPEAKERS]},
+            'qwen_base':{'valid_pcm_audio':True,'device':'cpu','audio_seconds':2,'public_reference_sha256':builder.REFERENCE_SHA256},
             'asr':{'valid_transcription':True,'device':'cpu','public_reference_sha256':builder.REFERENCE_SHA256},
             'omnivoice_model_sha256':native.MODEL_SHA256}
         return root,report
 
     def test_cpu_qa_requires_all_nine_presets_clone_asr_and_exact_artifact_identity(self):
         root,report=self.qa_fixture();builder.validate_qa(root,report)
-        for case in ('missing','gpu','stale','clone','asr','falseclaim'):
+        for case in ('missing','gpu','stale','clone','asr','falseclaim','looping','looping_clone'):
             bad=copy.deepcopy(report)
             if case=='missing':bad['qwen_customvoice']['requests'].pop()
             if case=='gpu':bad['qwen_customvoice']['requests'][0]['device']='cuda'
@@ -133,6 +133,8 @@ class CompleteModelsTests(unittest.TestCase):
             if case=='clone':bad['qwen_base']['valid_pcm_audio']=False
             if case=='asr':bad['asr']['valid_transcription']=False
             if case=='falseclaim':bad['target_30x_guaranteed']=True
+            if case=='looping':bad['qwen_customvoice']['requests'][0]['audio_seconds']=163.76
+            if case=='looping_clone':bad['qwen_base']['audio_seconds']=163.76
             with self.subTest(case=case),self.assertRaises(ValueError):builder.validate_qa(root,bad)
         (root/'app/.data/models/qwen.ready').write_bytes(b'changed')
         with self.assertRaises(ValueError):builder.validate_qa(root,report)

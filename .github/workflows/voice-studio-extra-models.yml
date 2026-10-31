@@ -11,10 +11,11 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
-  group: voice-studio-extra-models-${{ github.sha }}
-  cancel-in-progress: false
+  group: voice-studio-extra-models-1.12.2
+  cancel-in-progress: true
 
 env:
   PYTHONUTF8: '1'
@@ -36,6 +37,32 @@ jobs:
         with:
           python-version: '3.12.10'
           architecture: x64
+      - name: Cancel superseded model builds from the previous per-commit groups
+        shell: python
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          import json,os,urllib.error,urllib.request
+          repository=os.environ['GITHUB_REPOSITORY']
+          branch='voice-studio-native-fixed-v1.12.2'
+          api='https://api.github.com/repos/'+repository
+          headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json',
+                   'X-GitHub-Api-Version':'2022-11-28','User-Agent':'Voice-Studio-Model-Build/1.12.2'}
+          request=urllib.request.Request(api+'/actions/workflows/voice-studio-extra-models.yml/runs?branch='+branch+'&per_page=30',headers=headers)
+          with urllib.request.urlopen(request,timeout=30) as response:
+              runs=json.load(response)['workflow_runs']
+          for run in runs:
+              if (str(run['id'])==os.environ['GITHUB_RUN_ID'] or run.get('head_branch')!=branch
+                  or run.get('event')!='push' or run.get('status') not in {'queued','in_progress'}
+                  or run.get('run_number',0)>=int(os.environ['GITHUB_RUN_NUMBER'])):
+                  continue
+              request=urllib.request.Request(api+'/actions/runs/'+str(run['id'])+'/cancel',
+                                             data=b'',headers=headers,method='POST')
+              try:
+                  with urllib.request.urlopen(request,timeout=30): pass
+                  print('Cancelled superseded model build '+str(run['id']),flush=True)
+              except urllib.error.HTTPError as error:
+                  if error.code!=409: raise
       - name: Verify model preparation boundaries before downloading weights
         shell: pwsh
         run: |

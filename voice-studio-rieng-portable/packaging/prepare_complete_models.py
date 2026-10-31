@@ -274,6 +274,15 @@ def runtime(root, base_archive):
     write_json(root/'EXTRA-MODEL-PINS.json',pins)
 
 
+def _short_prompt_duration(value):
+    return type(value) in {int, float} and .08 <= value <= 20
+
+
+def _public_notice(title, value):
+    line=json.dumps(value,ensure_ascii=False,separators=(',',':'))
+    print('::notice title='+title+'::'+line.replace('%','%25').replace('\r','%0D').replace('\n','%0A'),flush=True)
+
+
 def _valid_audio(samples, rate, destination):
     import numpy as np
     import soundfile as sf
@@ -281,6 +290,8 @@ def _valid_audio(samples, rate, destination):
     if (value.ndim != 1 or not 8000 <= rate <= 48000 or len(value) < rate * .08
             or not np.isfinite(value).all() or np.max(np.abs(value)) <= 0.00001):
         raise ValueError('Model did not generate valid non-silent PCM audio')
+    if not _short_prompt_duration(len(value)/rate):
+        raise ValueError('One-word Qwen QA generated implausibly long audio; completion is not verified')
     sf.write(str(destination),value,rate,subtype='PCM_16')
     return {'valid_pcm_audio':True,'sample_rate':int(rate),'audio_seconds':len(value)/rate,'device':'cpu','precision':'fp32'}
 
@@ -326,6 +337,7 @@ def smoke(root, output):
     for speaker in SPEAKERS:
         language,text = (('ja','はい。') if speaker=='Ono_Anna' else ('ko','안녕.') if speaker=='Sohee'
                          else ('en-US','Hello.') if speaker in {'Ryan','Aiden'} else ('zh','你好。'))
+        _public_notice('Qwen CPU preset starting',{'speaker':speaker,'language':language})
         started = time.perf_counter()
         synth=qwen_backend.create_synthesizer(root/'app/.data',engine='qwen',language=language,speaker=speaker,
                                               threads=4,quality='fast',device='cpu')
@@ -333,7 +345,7 @@ def smoke(root, output):
         samples,rate=sf.read(str(destination),dtype='float32')
         requests.append({'speaker':speaker,'language':language,'seconds':time.perf_counter()-started,
                          **_valid_audio(samples,rate,destination),'execution':qwen_backend.execution_info()})
-        print('Actual CPU PCM: '+speaker,flush=True)
+        _public_notice('Qwen CPU preset passed',requests[-1])
     synth=qwen_backend.create_synthesizer(root/'app/.data',engine='qwen_clone',language='en-US',
         reference_audio=reference,reference_text='',threads=4,quality='fast',device='cpu')
     destination=qa/'base-clone.wav';synth('Hello.',destination)
@@ -341,6 +353,7 @@ def smoke(root, output):
     base = {**_valid_audio(samples,rate,destination),'x_vector_only_mode':True,
             'execution':qwen_backend.execution_info(),
             'public_reference_sha256':REFERENCE_SHA256,'private_reference_used':False}
+    _public_notice('Qwen CPU public clone passed',base)
     qwen_backend.close_backends()
     if any(name in sys.modules for name in ('torch','transformers','qwen_tts')):
         raise ValueError('A heavy Qwen module escaped its isolated child')
@@ -389,9 +402,11 @@ def validate_qa(root, report):
         raise ValueError('Windows CPU QA does not identify these exact prepared models/runtime')
     rows=report.get('qwen_customvoice',{}).get('requests',[])
     if (len(rows)!=9 or {r.get('speaker') for r in rows}!=set(SPEAKERS)
-            or not all(r.get('valid_pcm_audio') is True and r.get('device')=='cpu' for r in rows)
+            or not all(r.get('valid_pcm_audio') is True and r.get('device')=='cpu'
+                       and _short_prompt_duration(r.get('audio_seconds')) for r in rows)
             or report.get('qwen_base',{}).get('valid_pcm_audio') is not True
             or report.get('qwen_base',{}).get('device')!='cpu'
+            or not _short_prompt_duration(report.get('qwen_base',{}).get('audio_seconds'))
             or report.get('qwen_base',{}).get('public_reference_sha256')!=REFERENCE_SHA256
             or report.get('asr',{}).get('valid_transcription') is not True
             or report.get('asr',{}).get('device')!='cpu'

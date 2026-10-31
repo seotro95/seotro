@@ -231,7 +231,8 @@ def test_all_nine_preset_speakers_use_local_cpu_fp32_and_pcm16(prepared, fake_qw
         assert options == {'device_map': 'cpu', 'dtype': torch.float32,
                            'attn_implementation': 'sdpa', 'local_files_only': True}
         assert {value['speaker'] for value in observed['custom']} == backend.SPEAKERS
-        assert all(v['do_sample'] is False and v['subtalker_dosample'] is False for v in observed['custom'])
+        assert all('do_sample' not in v and 'subtalker_dosample' not in v for v in observed['custom'])
+        assert session.info['sampling_policy'] == 'checkpoint-defaults'
     finally:
         session.close()
 
@@ -244,8 +245,8 @@ def test_clone_prompt_cache_preserves_reference_and_supplied_transcript(prepared
     original = reference.read_bytes()
     session = backend._Session(data, 'qwen_clone', 2)
     try:
-        for _ in range(2):
-            session.synthesize(request(data, reference_wav=str(reference), speaker=None))
+        for quality in ('fast', 'standard'):
+            session.synthesize(request(data, reference_wav=str(reference), speaker=None, quality=quality))
         assert len(observed['prompts']) == 1
         assert observed['prompts'][0] == {'ref_audio': str(reference), 'ref_text': None, 'x_vector_only_mode': True}
         session.synthesize(request(data, reference_wav=str(reference), speaker=None,
@@ -253,6 +254,8 @@ def test_clone_prompt_cache_preserves_reference_and_supplied_transcript(prepared
         assert len(observed['prompts']) == 2 and len(observed['clone']) == 3
         assert observed['prompts'][1]['ref_text'] == 'Exact words supplied locally.'
         assert observed['prompts'][1]['x_vector_only_mode'] is False
+        assert all('do_sample' not in options and 'subtalker_dosample' not in options
+                   for options in observed['clone'])
         assert reference.read_bytes() == original
     finally:
         session.close()
@@ -286,17 +289,18 @@ def test_generation_at_codec_limit_is_rejected_without_publishing_or_trimming(pr
         assert not output.exists()
         assert not list(data.rglob('*.tmp.wav'))
         assert observed['custom'][0]['max_new_tokens'] == 2048
-        assert observed['custom'][0]['do_sample'] is False
+        assert 'do_sample' not in observed['custom'][0] and 'subtalker_dosample' not in observed['custom'][0]
     finally:
         session.close()
 
 
-def test_short_finished_length_audio_is_preserved_with_standard_generation_defaults(prepared, fake_qwen):
+@pytest.mark.parametrize('quality', ['auto', 'standard', 'fast'])
+def test_short_finished_length_audio_is_preserved_with_checkpoint_sampling_for_every_mode(prepared, fake_qwen, quality):
     data, _, _ = prepared
     observed, _ = fake_qwen
     observed['audio_frames'] = 12 * 1920
     session = backend._Session(data, 'qwen', 4)
-    job = request(data, quality='standard')
+    job = request(data, quality=quality)
     try:
         session.synthesize(job)
         assert sf.info(job['output']).frames == observed['audio_frames']

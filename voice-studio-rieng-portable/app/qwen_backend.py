@@ -306,6 +306,7 @@ class _Session:
         self.prompts = OrderedDict()
         self.info = {'backend': 'qwen_isolated', 'engine': engine, 'device': 'cpu',
                      'precision': 'fp32', 'attention': 'sdpa', 'threads': threads,
+                     'sampling_policy': 'checkpoint-defaults',
                      'model_repository': record['repository'], 'model_revision': record['revision'],
                      'gpu_inference_tested': False}
 
@@ -350,8 +351,9 @@ class _Session:
         if not isinstance(text, str) or not text.strip() or len(text) > 16000:
             raise ValueError('Lời đọc Qwen không hợp lệ hoặc quá dài.')
         options = {'text': text, 'language': LANGUAGES[language], 'max_new_tokens': 2048}
-        if quality == 'fast':
-            options.update(do_sample=False, subtalker_dosample=False)
+        # Keep checkpoint sampling for every UI quality mode. Real CPU probing
+        # showed that greedy talker/subtalker generation could repeat codes
+        # until its token limit even for a short greeting.
         with self.torch.inference_mode():
             if self.engine == 'qwen_clone':
                 prompt = self._clone_prompt(reference, reference_text.strip())
