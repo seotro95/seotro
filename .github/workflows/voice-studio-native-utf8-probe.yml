@@ -1,0 +1,51 @@
+name: Voice Studio - Probe Windows UCRT UTF8 byte handling
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [voice-studio-native-fixed-v1.12.2]
+    paths:
+      - '.github/workflows/voice-studio-native-utf8-probe.yml'
+      - 'voice-studio-rieng-portable/packaging/probe_native_locale.py'
+      - 'voice-studio-rieng-portable/app/native_locale.py'
+      - 'voice-studio-rieng-portable/app/native_synthesis.py'
+
+permissions:
+  contents: read
+
+jobs:
+  probe-ucrt:
+    runs-on: windows-2022
+    timeout-minutes: 8
+    env:
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+      - name: Measure actual shared MSVC dynamic UCRT locale tables and UTF8 preservation
+        shell: pwsh
+        run: |
+          python -m unittest discover -s voice-studio-rieng-portable/app/tests -p test_native_locale.py -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python voice-studio-rieng-portable/packaging/probe_native_locale.py --require-compiled --output "${{ runner.temp }}/WINDOWS-UCRT-UTF8-PROBE.json" 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'ucrt-probe.log')
+          $probeExit = $LASTEXITCODE
+          if ($probeExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'ucrt-probe.log') -Tail 30) -join ' | ')
+            Write-Output ('::error title=Windows UCRT probe failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $probeExit
+          }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Windows-UCRT-UTF8-Probe
+          path: |
+            ${{ runner.temp }}/WINDOWS-UCRT-UTF8-PROBE.json
+            ${{ runner.temp }}/ucrt-probe.log
+          if-no-files-found: error
+          retention-days: 14

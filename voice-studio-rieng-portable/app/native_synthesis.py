@@ -19,6 +19,7 @@ import uuid
 
 from fast_multilingual import library_path, prepared_model, _validate, language_code, _runtime_manifest, validate_native_performance
 from native_paths import native_model_path
+from native_locale import native_character_locale, normalize_native_text
 
 
 _REFERENCE_CACHE_MAX_ENTRIES = 8
@@ -95,6 +96,9 @@ class NativeSession:
         else:
             model, provenance = prepared_model(self.data, verify=True)
         try:
+            # This session lives in the private native stdio child. MSVC's
+            # locale-dependent byte classifier must not split Hangul/Chinese.
+            self._model_path_stack.enter_context(native_character_locale())
             if os.name == 'nt':
                 self._dll_directory = os.add_dll_directory(str(path.parent))
             self.lib = _bind(C.CDLL(str(path)))
@@ -127,6 +131,7 @@ class NativeSession:
             self.info = {'international_backend': name, 'backend': name,
                          'device': device, 'precision': 'q8_0', 'workers': 1,
                          'threads': threads, 'model': 'VoxCPM2-GGUF' if family == 'voxcpm2' else 'OmniVoice-GGUF',
+                         'native_text_handling': 'unicode-whitespace+ctype-C-v1',
                          'native_runtime_version': self.lib.audiocpp_build_version().decode('utf-8', 'replace')}
             if family == 'voxcpm2':
                 self.info['model_family'] = family
@@ -207,6 +212,8 @@ class NativeSession:
             raise ValueError('Lời đọc native không hợp lệ hoặc quá dài.')
         if family == 'omnivoice' and not reference_text.strip():
             raise ValueError('OmniVoice cần bản chép lời chính xác của tệp mẫu giọng.')
+        text = normalize_native_text(text)
+        reference_text = normalize_native_text(reference_text)
         import numpy as np
         import soundfile as sf
         samples, rate = self._reference_audio(reference)
