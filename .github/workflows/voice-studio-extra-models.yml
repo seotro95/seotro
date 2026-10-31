@@ -121,6 +121,17 @@ jobs:
           public_qa = root / 'qa-public'
           if public_qa.exists():
               shutil.rmtree(public_qa)
+          # Only this job's prepared model tree is eligible for shipment.
+          # Adapter logs and public QA outputs live in DATA, not in models.
+          for generated in (root / 'app/.data').iterdir():
+              if generated.name == 'models':
+                  continue
+              if generated.is_symlink():
+                  raise ValueError('Unexpected redirected QA data')
+              if generated.is_dir():
+                  shutil.rmtree(generated)
+              else:
+                  generated.unlink()
           for cache in root.rglob('__pycache__'):
               if cache.is_dir() and not cache.is_symlink():
                   shutil.rmtree(cache)

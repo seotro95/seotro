@@ -316,7 +316,8 @@ def smoke(root, output):
     import soundfile as sf
     if not qwen_backend.runtime_ready():raise ValueError('The actual adapter rejected the isolated Qwen runtime')
     if 'torch' in sys.modules:raise ValueError('Torch entered the main runtime before adapter QA')
-    qa = root/'qa-public'; qa.mkdir()
+    # The application adapter deliberately permits output only inside DATA.
+    qa = root/'app/.data/qa-public'; qa.mkdir()
     reference = qa/'public-reference.wav'
     with urllib.request.urlopen(PUBLIC_REFERENCE,timeout=90) as incoming, reference.open('xb') as destination:
         shutil.copyfileobj(incoming,destination)
