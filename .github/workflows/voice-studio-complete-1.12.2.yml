@@ -335,6 +335,15 @@ jobs:
             Write-Output ('::error title=Verified single-file download publication failed::'+$detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
             exit $publishExit
           }
+      - name: Retain any completed release data if publication fails
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: Voice-Studio-1.12.2-Verified-Release-Data
+          path: ${{ env.VOICE_WORK }}/downloads/**
+          compression-level: 0
+          if-no-files-found: ignore
+          retention-days: 3
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

@@ -38,6 +38,7 @@ EXTRA_MARKERS = frozenset('app/.data/models/' + name + '.ready'
                           for name in ('omnivoice', 'qwen', 'qwen_clone'))
 EXTRA_BUILD_METADATA = frozenset({'TORCH-INSTALL-REPORT.json', 'QWEN-INSTALL-REPORT.json',
                                   'EXTRA-PACK-OWNER.json'})
+FASTAPI_VENDOR_SKILLS_PREFIX = 'runtime-qwen/Lib/site-packages/fastapi/.agents/'
 GUIDE = '''VOICE STUDIO {version} — BẢN WINDOWS ĐẦY ĐỦ
 
 Giải nén toàn bộ ZIP vào thư mục mới có quyền ghi rồi chạy MO_TOOL.bat.
@@ -134,6 +135,9 @@ def _read_small(path, limit=8 * 1024**2):
 
 def _extra_removal_reason(name):
     if not name.startswith('runtime-qwen/'): return None
+    # Some FastAPI wheels bundle development documentation in this exact
+    # vendor subtree. Treat it solely as verified, nonshipping package data.
+    if name.startswith(FASTAPI_VENDOR_SKILLS_PREFIX): return 'qwen-fastapi-development-skills'
     if name.startswith('runtime-qwen/Doc/'): return 'qwen-python-offline-documentation'
     if name.startswith(('runtime-qwen/Lib/test/', 'runtime-qwen/Lib/idlelib/idle_test/')):
         return 'qwen-python-unit-tests'
@@ -158,7 +162,8 @@ def _extras(root):
     for name, digest in records.items():
         if name not in EXTRA_METADATA and name not in EXTRA_MARKERS and not name.startswith(EXTRA_PREFIXES):
             raise ValueError('Unknown extra-model artifact path: ' + name)
-        if _private_path(name, allow_bytecode=bool(_extra_removal_reason(name))):
+        if _private_path(name, allow_bytecode=bool(_extra_removal_reason(name)),
+                         allow_fastapi_vendor_docs=True):
             raise ValueError('Excluded private/cache extra-model path: ' + name)
         if clean.file_sha256(files[name]) != digest: raise ValueError('Extra-model SHA256 mismatch: ' + name)
     if json.loads(_read_small(files['EXTRA-PACK-OWNER.json'])) != models.OWNER:
@@ -178,8 +183,12 @@ def _source_commit(root):
     return value if result.returncode == 0 and re.fullmatch('[0-9a-f]{40}', value) else None
 
 
-def _private_path(name, *, allow_bytecode=False):
-    parts = PurePosixPath(name).parts
+def _private_path(name, *, allow_bytecode=False, allow_fastapi_vendor_docs=False):
+    checked_name = name
+    if allow_fastapi_vendor_docs and name.startswith(FASTAPI_VENDOR_SKILLS_PREFIX):
+        checked_name = ('runtime-qwen/Lib/site-packages/fastapi/_bundled_development_docs/'
+                        + name[len(FASTAPI_VENDOR_SKILLS_PREFIX):])
+    parts = PurePosixPath(checked_name).parts
     return (any(p in {'.git', '.aws', '.agents', '.codex', 'voice-library'} for p in parts)
             or (name.startswith('app/.data/') and not name.startswith('app/.data/models/'))
             or (not allow_bytecode and ('__pycache__' in parts or name.endswith(('.pyc', '.pyo')))))

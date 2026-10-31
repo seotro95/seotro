@@ -199,6 +199,7 @@ def test_extras_cleanup_retains_runtime_distributions_licenses_and_js(tmp_path, 
         'runtime-qwen/Lib/test/test_audio.py': b'stdlib test',
         'runtime-qwen/Lib/idlelib/idle_test/test_run.py': b'IDLE test',
         'runtime-qwen/Lib/site-packages/example/__pycache__/a.pyc': b'generated cache',
+        'runtime-qwen/Lib/site-packages/fastapi/.agents/skills/fastapi/SKILL.md': b'vendor development documentation',
         'runtime-qwen/Lib/site-packages/gradio/front/app.js': b'required browser code',
         'runtime-qwen/Lib/site-packages/gradio-5.49.1.dist-info/METADATA': b'Name: gradio\nVersion: 5.49.1\n',
         'runtime-qwen/Lib/site-packages/gradio-5.49.1.dist-info/licenses/LICENSE': b'retained license',
@@ -216,22 +217,45 @@ def test_extras_cleanup_retains_runtime_distributions_licenses_and_js(tmp_path, 
         if name in removed: assert not (stage / name).exists()
         else: assert (stage / name).read_bytes() == payload
     report = json.loads((stage / 'CLEANUP-REPORT.json').read_bytes())
-    assert report['extra_removed_file_count'] == len(removed) == 6
+    assert report['extra_removed_file_count'] == len(removed) == 7
     assert {row['path'] for row in report['extra_removed_files']} == removed
     assert all(row['sha256'] == sha(additions[row['path']]) for row in report['extra_removed_files'])
     assert report['extra_removed_uncompressed_bytes'] == sum(len(additions[name]) for name in removed)
     assert report['total_removed_file_count'] == report['removed_file_count'] + len(removed)
+    vendor = next(row for row in report['extra_removed_files'] if row['path'].endswith('SKILL.md'))
+    assert vendor['reason'] == 'qwen-fastapi-development-skills'
     builder.archive(stage, tmp_path / 'cleaned-extra.zip')
 
 
-def test_discarded_extra_source_map_still_requires_valid_sha256(tmp_path, monkeypatch):
+@pytest.mark.parametrize('name', [
+    'runtime-qwen/Lib/site-packages/gradio/front/app.js.map',
+    'runtime-qwen/Lib/site-packages/fastapi/.agents/skills/fastapi/SKILL.md',
+])
+def test_discarded_extra_still_requires_valid_sha256(tmp_path, monkeypatch, name):
     source, _, base, extras, _ = fixture(tmp_path, monkeypatch)
-    name = 'runtime-qwen/Lib/site-packages/gradio/front/app.js.map'
     write_tree(extras, {name: b'changed after source manifest'})
     records = builder._parse_manifest((extras / builder.EXTRA_MANIFEST).read_bytes())
     records[name] = sha(b'original map')
     (extras / builder.EXTRA_MANIFEST).write_bytes(builder._manifest_bytes(records))
     with pytest.raises(ValueError, match='Extra-model SHA256 mismatch'):
+        builder.stage(base, extras, tmp_path / 'stage', source_root=source,
+                      _expected_source_sha256=builder.clean.file_sha256(base))
+    assert not (tmp_path / 'stage').exists()
+
+
+@pytest.mark.parametrize('name', [
+    'app/.agents/skills/unknown/SKILL.md',
+    'runtime-qwen/.agents/skills/unknown/SKILL.md',
+    'runtime-qwen/Lib/site-packages/other/.agents/skills/unknown/SKILL.md',
+    'runtime-qwen/Lib/site-packages/fastapi/.agents/.aws/credentials',
+])
+def test_fastapi_docs_exception_does_not_allow_other_private_paths(tmp_path, monkeypatch, name):
+    source, _, base, extras, _ = fixture(tmp_path, monkeypatch)
+    write_tree(extras, {name: b'must never ship'})
+    records = builder._parse_manifest((extras / builder.EXTRA_MANIFEST).read_bytes())
+    records[name] = sha(b'must never ship')
+    (extras / builder.EXTRA_MANIFEST).write_bytes(builder._manifest_bytes(records))
+    with pytest.raises(ValueError, match='(Unknown extra-model artifact|Excluded private/cache)'):
         builder.stage(base, extras, tmp_path / 'stage', source_root=source,
                       _expected_source_sha256=builder.clean.file_sha256(base))
     assert not (tmp_path / 'stage').exists()
