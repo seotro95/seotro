@@ -138,6 +138,13 @@ def main(argv=None):
             'The check imported a different application or data directory')
     require(qwen_backend.runtime_python().resolve() == root / 'runtime-qwen/python.exe',
             'The Qwen adapter selected a runtime outside the complete bundle')
+    extra_qa = json.loads((root / 'EXTRA-MODEL-CPU-QA.json').read_text(encoding='utf-8'))
+    short_prompts = {row['speaker']: row.get('audio_seconds')
+                     for row in extra_qa['qwen_customvoice']['requests']}
+    short_prompts['Base-public-clone'] = extra_qa['qwen_base'].get('audio_seconds')
+    require(all(isinstance(seconds, (int, float)) and .08 <= seconds <= 20
+                for seconds in short_prompts.values()),
+            'One-word Qwen input checks generated implausibly long audio: ' + repr(short_prompts))
     for module in (np, onnxruntime, sf, httpx, psutil):
         require(runtime in Path(module.__file__).resolve().parents,
                 'Dependency escaped bundled Python: ' + module.__name__)

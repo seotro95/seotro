@@ -181,8 +181,12 @@ def test_gpu_request_is_rejected_explicitly_instead_of_changing_precision(prepar
 
 @pytest.fixture
 def fake_qwen(prepared, monkeypatch):
-    observed = {'loads': [], 'custom': [], 'clone': [], 'prompts': []}
+    observed = {'loads': [], 'custom': [], 'clone': [], 'prompts': [],
+                'audio_frames': 1200, 'codec_hop': 1920}
     class Model:
+        def __init__(self):
+            self.model = SimpleNamespace(speech_tokenizer=SimpleNamespace(
+                get_decode_upsample_rate=lambda: observed['codec_hop']))
         @classmethod
         def from_pretrained(cls, path, **options):
             print('Fake upstream loading progress')
@@ -190,13 +194,13 @@ def fake_qwen(prepared, monkeypatch):
             return cls()
         def generate_custom_voice(self, **options):
             observed['custom'].append(options)
-            return [np.full(1200, .1, dtype=np.float32)], 24000
+            return [np.full(observed['audio_frames'], .1, dtype=np.float32)], 24000
         def create_voice_clone_prompt(self, **options):
             observed['prompts'].append(options)
             return {'fixture_prompt': len(observed['prompts'])}
         def generate_voice_clone(self, **options):
             observed['clone'].append(options)
-            return [np.full(1200, .2, dtype=np.float32)], 24000
+            return [np.full(observed['audio_frames'], .2, dtype=np.float32)], 24000
     torch = SimpleNamespace(float32=object(), set_num_threads=lambda value: observed.update(threads=value),
                             inference_mode=contextlib.nullcontext)
     monkeypatch.setitem(sys.modules, 'torch', torch)
@@ -263,6 +267,56 @@ def test_clone_rejects_silent_reference_before_enrolling(prepared, fake_qwen, tm
         with pytest.raises(ValueError, match='Mẫu Qwen'):
             session.synthesize(request(data, reference_wav=str(reference), speaker=None))
         assert not fake_qwen[0]['prompts']
+    finally:
+        session.close()
+
+
+@pytest.mark.parametrize('frames', [(2048 - 1) * 1920, (2048 - 1) * 1920 - 1,
+                                   (2048 - 1) * 1920 + 1])
+def test_generation_at_codec_limit_is_rejected_without_publishing_or_trimming(prepared, fake_qwen, frames):
+    data, _, _ = prepared
+    observed, _ = fake_qwen
+    observed['audio_frames'] = frames
+    session = backend._Session(data, 'qwen', 4)
+    job = request(data, quality='fast')
+    output = Path(job['output'])
+    try:
+        with pytest.raises(ValueError, match='giới hạn'):
+            session.synthesize(job)
+        assert not output.exists()
+        assert not list(data.rglob('*.tmp.wav'))
+        assert observed['custom'][0]['max_new_tokens'] == 2048
+        assert observed['custom'][0]['do_sample'] is False
+    finally:
+        session.close()
+
+
+def test_short_finished_length_audio_is_preserved_with_standard_generation_defaults(prepared, fake_qwen):
+    data, _, _ = prepared
+    observed, _ = fake_qwen
+    observed['audio_frames'] = 12 * 1920
+    session = backend._Session(data, 'qwen', 4)
+    job = request(data, quality='standard')
+    try:
+        session.synthesize(job)
+        assert sf.info(job['output']).frames == observed['audio_frames']
+        options = observed['custom'][0]
+        assert options['max_new_tokens'] == 2048
+        assert 'do_sample' not in options and 'subtalker_dosample' not in options
+    finally:
+        session.close()
+
+
+@pytest.mark.parametrize('hop', [0, -1, None, True, 1920.0])
+def test_unverified_tokenizer_hop_does_not_publish_audio(prepared, fake_qwen, hop):
+    data, _, _ = prepared
+    fake_qwen[0]['codec_hop'] = hop
+    session = backend._Session(data, 'qwen', 4)
+    job = request(data)
+    try:
+        with pytest.raises(ValueError, match='mã âm thanh'):
+            session.synthesize(job)
+        assert not Path(job['output']).exists()
     finally:
         session.close()
 

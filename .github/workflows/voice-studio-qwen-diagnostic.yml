@@ -1,0 +1,100 @@
+name: Voice Studio - Bounded Qwen sampling diagnostic
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [voice-studio-native-fixed-v1.12.2]
+    paths:
+      - '.github/workflows/voice-studio-qwen-diagnostic.yml'
+      - 'voice-studio-rieng-portable/packaging/probe_qwen_generation.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-studio-qwen-diagnostic-${{ github.sha }}
+  cancel-in-progress: false
+
+env:
+  PYTHONUTF8: '1'
+  PYTHONNOUSERSITE: '1'
+  HF_HUB_DISABLE_XET: '1'
+  HF_HUB_DISABLE_TELEMETRY: '1'
+  GRADIO_ANALYTICS_ENABLED: 'False'
+  DO_NOT_TRACK: '1'
+
+jobs:
+  probe:
+    runs-on: windows-2022
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Prepare only the immutable public CustomVoice checkpoint needed by the diagnostic
+        shell: pwsh
+        run: |
+          python voice-studio-rieng-portable/packaging/probe_qwen_generation.py prepare --root "${{ runner.temp }}/qwen-probe" 2>&1 | Tee-Object -FilePath "${{ runner.temp }}/qwen-probe-prepare.log"
+          $code = $LASTEXITCODE
+          if ($code -ne 0) {
+            $detail = ((Get-Content -LiteralPath "${{ runner.temp }}/qwen-probe-prepare.log" -Tail 35) -join ' | ')
+            Write-Output ('::error title=Qwen diagnostic preparation failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $code
+          }
+      - name: Download the fixed Windows Python base before extracting isolated dependencies
+        shell: python
+        run: |
+          import hashlib, os, pathlib, urllib.request
+          target=pathlib.Path(os.environ['RUNNER_TEMP'])/'probe-windows-base.zip'
+          url='https://github.com/seotro95/seotro/releases/download/voice-studio-reference-1.10-40852923612/Voice-Studio-Rieng-1.10.0-19-Giong-GitHub-Windows-x64.zip'
+          digest=hashlib.sha256()
+          with urllib.request.urlopen(url,timeout=180) as source,target.open('xb') as output:
+              for block in iter(lambda:source.read(8*1024**2),b''):
+                  digest.update(block);output.write(block)
+          if digest.hexdigest()!='65446c1a1799699b3aadad616461e97cf66c049597c7ae9a5cbf3887f20312f6':
+              raise ValueError('Diagnostic Python source checksum mismatch')
+      - name: Build the pinned isolated CPU runtime
+        shell: pwsh
+        run: |
+          python voice-studio-rieng-portable/packaging/prepare_complete_models.py runtime --root "${{ runner.temp }}/qwen-probe" --base-archive "${{ runner.temp }}/probe-windows-base.zip" 2>&1 | Tee-Object -FilePath "${{ runner.temp }}/qwen-probe-runtime.log"
+          $code = $LASTEXITCODE
+          if ($code -ne 0) {
+            $detail = ((Get-Content -LiteralPath "${{ runner.temp }}/qwen-probe-runtime.log" -Tail 35) -join ' | ')
+            Write-Output ('::error title=Qwen diagnostic runtime failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $code
+          }
+          Remove-Item -LiteralPath "${{ runner.temp }}/probe-windows-base.zip"
+      - name: Compare standard sampling and greedy sampling on the same warm CPU model with a 128-token cap
+        timeout-minutes: 20
+        shell: pwsh
+        run: |
+          & "${{ runner.temp }}/qwen-probe/runtime-qwen/python.exe" -s -X utf8 voice-studio-rieng-portable/packaging/probe_qwen_generation.py run --root "${{ runner.temp }}/qwen-probe" --output "${{ runner.temp }}/QWEN-GENERATION-PROBE.json" --max-new-tokens 128 2>&1 | Tee-Object -FilePath "${{ runner.temp }}/qwen-probe-run.log"
+          $code = $LASTEXITCODE
+          if ($code -ne 0) {
+            $detail = ((Get-Content -LiteralPath "${{ runner.temp }}/qwen-probe-run.log" -Tail 45) -join ' | ')
+            Write-Output ('::error title=Bounded Qwen generation probe failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $code
+          }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Voice-Studio-Qwen-Bounded-Generation-Probe
+          path: |
+            ${{ runner.temp }}/QWEN-GENERATION-PROBE.json
+            ${{ runner.temp }}/qwen-probe-*.log
+            ${{ runner.temp }}/qwen-probe/EXTRA-MODEL-PLAN.json
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Publish the small diagnostic report only
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = "voice-studio-qwen-probe-${{ github.run_id }}-${{ github.run_attempt }}"
+          $notes = 'Public Ryan Hello CPU FP32 diagnostic comparing checkpoint defaults with greedy settings on one warm model, capped at 128 speech tokens. EOS is observed without changing model output. These measurements do not establish pronunciation, private voice identity, GPU throughput or 30x performance. No application generation behavior is changed by this probe.'
+          $notesPath = "${{ runner.temp }}/qwen-probe-notes.txt"
+          $notes | Set-Content -LiteralPath $notesPath -Encoding utf8
+          gh release create $tag "${{ runner.temp }}/QWEN-GENERATION-PROBE.json" "${{ runner.temp }}/qwen-probe/EXTRA-MODEL-PLAN.json" --repo '${{ github.repository }}' --target '${{ github.sha }}' --title 'Qwen bounded CPU sampling diagnostic' --prerelease --latest=false --notes-file $notesPath
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

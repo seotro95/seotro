@@ -362,6 +362,18 @@ class _Session:
         if (audio.ndim != 1 or not audio.size or not 8000 <= rate <= 192000
                 or not np.isfinite(audio).all() or np.max(np.abs(audio)) <= 1e-5):
             raise ValueError('Bộ Qwen không tạo được lời đọc hợp lệ.')
+        # The pinned high-level SDK discards the EOS/stop reason and returns
+        # PCM even when generation exhausts max_new_tokens. For batch size 1,
+        # its first (prefill) step has no codec frame, so max_new_tokens - 1
+        # decoded frames is the ambiguous limit boundary. Check raw frames
+        # with the tokenizer's own hop length, before any resampling or write.
+        hop = self.model.model.speech_tokenizer.get_decode_upsample_rate()
+        if type(hop) is not int or hop <= 0:
+            raise ValueError('Không xác minh được độ dài mã âm thanh Qwen; chưa xuất tệp.')
+        codec_frames = (len(audio) + hop - 1) // hop
+        if codec_frames >= options['max_new_tokens'] - 1:
+            raise ValueError('Qwen chạm giới hạn tạo âm thanh và chưa xác nhận đọc hết lời; '
+                             'không xuất bản thu này. Hãy thử chế độ Tiêu chuẩn hoặc chia văn bản thành đoạn ngắn hơn.')
         if rate != 24000:
             import soxr
             audio = np.asarray(soxr.resample(audio, rate, 24000, quality='HQ'), dtype=np.float32)
