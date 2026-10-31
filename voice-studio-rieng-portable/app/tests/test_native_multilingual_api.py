@@ -10,8 +10,8 @@ from test_standalone_api import studio  # noqa: F401
 
 def installed(monkeypatch, devices=('cpu',)):
     monkeypatch.setattr(fast_multilingual, 'is_ready',
-                        lambda data, device=None: bool(devices) if device is None else device in devices)
-    monkeypatch.setattr(fast_multilingual, 'cuda_available', lambda data: 'cuda' in devices)
+                        lambda data, device=None, family='omnivoice': family == 'omnivoice' and (bool(devices) if device is None else device in devices))
+    monkeypatch.setattr(fast_multilingual, 'cuda_available', lambda data, family='omnivoice': family == 'omnivoice' and 'cuda' in devices)
 
 
 def test_native_only_install_lists_same_reference_ids(reference_catalog, monkeypatch):

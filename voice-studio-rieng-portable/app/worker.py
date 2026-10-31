@@ -35,7 +35,13 @@ def write_state(path, data):
 
 
 def uses_native_multilingual(job):
-    return job.get('engine') == 'voxcpm' and job.get('international_backend') == 'omnivoice'
+    return job.get('engine') == 'voxcpm' and job.get('international_backend') in {'omnivoice', 'voxcpm_native'}
+
+
+def native_performance(job):
+    return ('cuda_perf' if job.get('international_backend') == 'voxcpm_native'
+            and job.get('international_device') == 'cuda' and job.get('render_mode') == 'fast'
+            else 'off')
 
 
 def close_international_backends(keep=None):
@@ -96,6 +102,13 @@ def load_synthesizer(job):
         reference,voice=resolve_reference(job['voice_id'],DATA)
         if uses_native_multilingual(job):
             from fast_multilingual import create_synthesizer
+            if job.get('international_backend') == 'voxcpm_native':
+                return create_synthesizer(reference,DATA,
+                                          threads=max(1,min(8,int(job.get('nano_threads',4)))),
+                                          steps=job.get('voxcpm_steps',8),
+                                          device=job.get('international_device','cpu'),
+                                          language=job.get('language'),family='voxcpm2',
+                                          native_performance=native_performance(job))
             return create_synthesizer(reference,DATA,
                                       threads=max(1,min(8,int(job.get('nano_threads',4)))),
                                       steps=job.get('omnivoice_steps',16),
@@ -143,7 +156,7 @@ _shared_weight_key = None
 def get_synthesizer(job):
     global _cached_key, _cached_synth
     key = tuple(job.get(k) for k in ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads', 'voxcpm_steps','international_precision',
-                                    'international_backend','international_device','omnivoice_steps'))
+                                    'international_backend','international_device','omnivoice_steps')) + (native_performance(job),)
     if job.get('model_memory')=='shared' and job.get('engine') in {'vieneu_nano','vieneu'}:
         if getattr(_thread_synth,'key',None)!=key:
             _thread_synth.synth=load_synthesizer(job)
@@ -513,7 +526,7 @@ def render(job, synthesize=None):
     if shared:
         pool_key=(parallel_workers,'shared',*weight_key)
     elif uses_native_multilingual(job):
-        pool_key=(1,'omnivoice',max(1,min(8,int(job.get('nano_threads',4)))),job.get('international_device','cpu'))
+        pool_key=(1,job.get('international_backend'),max(1,min(8,int(job.get('nano_threads',4)))),job.get('international_device','cpu'),native_performance(job))
     elif job.get('engine')=='voxcpm':
         # A VoxCPM child keeps the same weights for all reference voices and
         # step counts. Each submitted job still selects its own closure and
@@ -702,15 +715,21 @@ def render(job, synthesize=None):
     if job.get('engine')=='vieneu':execution['precision']='int8' if job.get('quality')=='fast' else 'fp32'
     if job.get('engine')=='vieneu_nano':execution['nano_steps']=job.get('nano_steps',8)
     if uses_native_multilingual(job):
-        execution.update(backend='omnivoice',device=job.get('international_device','cpu'),
-                         precision='q8_0',omnivoice_steps=job.get('omnivoice_steps',16),
+        backend=job.get('international_backend')
+        execution.update(backend=backend,device=job.get('international_device','cpu'),
+                         precision='q8_0',
                          threads=max(1,min(8,int(job.get('nano_threads',4)))))
+        if backend=='voxcpm_native':
+            execution['voxcpm_steps']=job.get('voxcpm_steps',8)
+            execution['native_performance']=native_performance(job)
+        else:execution['omnivoice_steps']=job.get('omnivoice_steps',16)
         if synthesize is None:
             from fast_multilingual import execution_info
             actual=execution_info()
             if actual:
                 execution.update(actual)
         execution.update(engine=job.get('engine'),workers=1,worker_budget=1)
+        execution['model_memory']='native'
     elif job.get('engine')=='voxcpm':execution.update(threads=max(1,min(8,int(job.get('nano_threads',4)))),precision=job.get('international_precision','fp32'),voxcpm_steps=job.get('voxcpm_steps',8))
     write_state(work / 'result.json', {'audio_seconds': writer.frames / writer.rate, 'spoken_audio_seconds': spoken_audio_frames / writer.rate, 'duration_limited': clipped, 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3), 'auto_fitted_cues':sum(bool(c.get('auto_fitted')) for c in alignment), 'fit_warning_count':len(fit_warning_cues), 'fit_warning_cues':fit_warning_cues,'execution_settings':execution})
 

@@ -52,6 +52,61 @@ def test_english_reference_benchmark_stays_on_turbo(reference_catalog,monkeypatc
     assert 'The morning light' in job['text'] and 'Đây là đoạn đo' not in job['text']
 
 
+@pytest.mark.parametrize('paragraph_pause,expected', [(0, 'international-packed-v1'), (.5, 'classic-v1')])
+def test_new_international_jobs_pack_only_continuous_text(reference_catalog, monkeypatch, paragraph_pause, expected):
+    client, data, _, _ = reference_catalog
+    prepared_international_model(data, monkeypatch)
+    response = client.post('/api/speech', json={
+        'voice_id': KOREAN, 'language': 'ko',
+        'text': '안녕하세요. 첫 번째 문장입니다. 다음 문장입니다.',
+        'paragraph_pause': paragraph_pause, 'voxcpm_steps': 8, 'render_mode': 'fast', 'nano_parallel': 1,
+    })
+    assert response.status_code == 202, response.text
+    job = response.json()
+    assert job['segment_plan'] == expected
+    assert job['total'] == (1 if paragraph_pause == 0 else 3)
+    assert (job['voice_id'], job['language'], job['engine'], job['voxcpm_steps']) == (KOREAN, 'ko', 'voxcpm', 8)
+    assert app.read_json(data / 'jobs' / (job['id'] + '.json'))['segment_plan'] == expected
+
+
+def test_balanced_international_jobs_keep_sentence_boundaries(reference_catalog, monkeypatch):
+    client, data, _, _ = reference_catalog
+    prepared_international_model(data, monkeypatch)
+    response = client.post('/api/speech', json={
+        'voice_id': KOREAN, 'language': 'ko', 'text': '안녕하세요. 다음 문장입니다.',
+        'paragraph_pause': 0, 'render_mode': 'balanced',
+    })
+    assert response.status_code == 202, response.text
+    assert response.json()['segment_plan'] == 'classic-v1' and response.json()['total'] == 2
+
+
+def test_parallel_international_jobs_keep_enough_independent_sentences(reference_catalog, monkeypatch):
+    client, data, _, _ = reference_catalog
+    prepared_international_model(data, monkeypatch)
+    xeon_resources(monkeypatch)
+    response = client.post('/api/speech', json={
+        'voice_id': KOREAN, 'language': 'ko', 'text': '안녕하세요. 다음 문장입니다.',
+        'paragraph_pause': 0, 'render_mode': 'fast', 'nano_parallel': 2,
+    })
+    assert response.status_code == 202, response.text
+    job = response.json()
+    assert job['nano_parallel'] == 2 and job['segment_plan'] == 'classic-v1' and job['total'] == 2
+
+
+def test_international_subtitles_keep_separate_timed_cues(reference_catalog, monkeypatch):
+    client, data, _, _ = reference_catalog
+    prepared_international_model(data, monkeypatch)
+    text = '1\n00:00:00,000 --> 00:00:03,000\n안녕하세요. 첫 문장입니다.\n\n2\n00:00:04,000 --> 00:00:07,000\n다음 문장입니다.'
+    response = client.post('/api/speech', json={
+        'voice_id': KOREAN, 'language': 'ko', 'text': text,
+        'input_format': 'srt', 'paragraph_pause': 0,
+    })
+    assert response.status_code == 202, response.text
+    job = response.json()
+    assert job['segment_plan'] == 'classic-v1' and job['total'] == 3
+    assert job['text'] == text and job['voice_id'] == KOREAN
+
+
 def test_warm_credit_requires_live_matching_worker_pid(studio,monkeypatch):
     import json
     from types import SimpleNamespace

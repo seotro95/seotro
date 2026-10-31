@@ -92,13 +92,21 @@ def plan_segments(job):
                 output.append(segment)
         return output
     text = spoken_text(job['text']) if job.get('skip_timestamps', True) else job['text']
-    if job.get('segment_plan') != 'nano-packed-v1':
+    plan = job.get('segment_plan')
+    if plan == 'nano-packed-v1':
+        limit = 130
+    elif (plan == 'international-packed-v1' and job.get('engine') == 'voxcpm'
+          and job.get('paragraph_pause') == 0):
+        limit = 240
+    else:
         return split_script(text)
-    # Packing is opt-in with zero added sentence gap; explicit pauses/emphasis stay barriers.
-    source = split_script(text, limit=130)
+    # Persisted plan versions keep existing checkpoints stable. International
+    # packing only joins consecutive speech when no sentence gap was requested;
+    # explicit pauses and emphasis remain barriers, as do the SRT cues above.
+    source = split_script(text, limit=limit)
     packed = []
     for segment in source:
-        if segment.text and packed and packed[-1].text and not segment.emphasis and not packed[-1].emphasis and len(packed[-1].text) + 1 + len(segment.text) <= 130:
+        if segment.text and packed and packed[-1].text and not segment.emphasis and not packed[-1].emphasis and len(packed[-1].text) + 1 + len(segment.text) <= limit:
             packed[-1].text += ' ' + segment.text
         else:
             packed.append(segment)

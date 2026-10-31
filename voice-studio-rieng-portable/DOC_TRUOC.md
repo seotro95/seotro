@@ -1,4 +1,59 @@
-# Voice Studio Riêng 1.11.0 · Windows 10/11 x64 Portable
+# Voice Studio Riêng 1.12.0 · Windows 10/11 x64 Portable
+
+## VoxCPM2 native Q8 cho mẫu giọng quốc tế
+
+Bản 1.12 thêm bộ đọc **VoxCPM2 native Q8**, dùng cùng họ mô hình VoxCPM2 và tệp
+mẫu giọng đang có, hỗ trợ 30 ngôn ngữ của mô hình. Bộ đọc này không cần runtime
+PyTorch quốc tế hoặc chép/nhận dạng lời mẫu. Mô hình Q8 khoảng 2,95 GB và thư viện
+CPU/CUDA được ghép vào gói Windows native đầy đủ. Lượng tử hóa có thể làm âm
+thanh/phát âm khác; nghe mẫu trước khi dùng cho tài liệu dài.
+
+Chọn giọng và đúng ngôn ngữ, chọn **VoxCPM2 native Q8**, rồi **GPU NVIDIA · CUDA**
+hoặc nút dùng GPU ngay cạnh lựa chọn bộ đọc. Chế độ **Nhanh** trên CUDA bật đường
+chiếu gộp được upstream hỗ trợ; có thể thay đổi kết quả số học so với Cân bằng.
+Số bước VoxCPM2 vẫn là 4/8/10 và được giữ nếu người dùng đã chỉnh riêng. Tool dùng
+một mô hình để tiết kiệm VRAM và giữ cache tham chiếu giữa các câu. CUDA không
+khởi động được sẽ báo lỗi, giữ lựa chọn đã yêu cầu để người dùng quyết định.
+
+Thư viện CUDA dùng CUDA 12 và có mã `sm_61` để tương thích Pascal/GTX 1060.
+Được biên dịch cho một card không đồng nghĩa đã đo tốc độ trên card đó. Phép thử
+CPU với mô hình Q8 tạo được PCM Pháp/Nhật, nhưng vẫn chậm hơn Turbo; không tự coi
+CPU Q8 là đường chạy nhanh. Chưa có phép đo GPU/GTX 1060 hoặc tạo đủ một giờ tiếng
+chứng minh mục tiêu một giờ trong hai phút. Báo cáo chỉ xác nhận mục tiêu 30× trên
+một giờ khi tác vụ thực sự tạo ít nhất 3.600 giây tiếng và đạt thông lượng đó;
+đoạn mẫu ngắn, ước tính hoặc khoảng im lặng SRT không đủ để xác nhận.
+
+Gói đầy đủ giữ bộ cài 19 mẫu mã hóa của bản cũ: dùng mật khẩu đã có để mở mẫu.
+Không ghi đè thư viện `runtime-native` mới bằng bộ DLL OmniVoice cũ. Khi chuyển
+dữ liệu, ghép thư mục `.data`/`voice-library`, giữ mô hình Q8 mới và sao lưu trước.
+
+## Bản cập nhật xử lý giọng mẫu 1.11.1
+
+Chế độ **Nhanh**, **1 tác vụ** và **khoảng nghỉ 0 giây** ghép các câu TXT ngắn
+thành đoạn tối đa 240 ký tự cho giọng quốc tế. Cách này giảm số lượt gọi mô hình
+khi đọc liên tục; giọng đã chọn, ngôn ngữ và số bước đang chọn được giữ nguyên.
+SRT, dấu nghỉ `[pause=...]`, phần nhấn mạnh, chế độ Cân bằng và tác vụ đang tiếp
+tục vẫn giữ cách chia cũ. Khi chạy nhiều tác vụ song song, tool tiếp tục giữ câu
+riêng để tránh giảm số tác vụ có thể chạy đồng thời.
+
+Bộ đọc OmniVoice bổ sung cache PCM mẫu giọng có giới hạn trong RAM, không đọc và
+giải mã lại cùng tệp mẫu ở từng câu. Đây là tối ưu phần chuẩn bị mẫu, không phải
+cam kết tăng tốc suy luận mô hình. Giọng quốc tế VoxCPM2 trên CPU chưa được chứng
+minh nhanh ngang Turbo Việt/Anh; không tự đổi giọng quốc tế sang Turbo hoặc sang
+một mô hình khác. Nghe kiểm tra phát âm sau khi đổi chế độ đọc.
+
+Phép đo minh họa trên Linux CPU, một mô hình đã nạp, cùng mẫu công khai và 8
+bước, lặp với hai thứ tự chạy: thông lượng tiếng Pháp tăng khoảng 11,0%, tiếng
+Nhật tăng khoảng 6,8%. Đây không phải số đo toàn bộ pipeline trên máy người
+dùng. Độ dài âm thanh hai cách đọc khác nhau; chưa kiểm tra đủ lời/phát âm hoặc
+độ giống giọng bằng người nghe. Báo cáo đầy đủ nằm trong
+`packaging/benchmarks/international-packing-1.11.1.qa.json` của mã nguồn và
+`INTERNATIONAL-PACKING-QA.json` trong ZIP cập nhật.
+
+Bản ZIP cập nhật mã cần tool 1.10/1.11 đầy đủ đã cài trên máy; không chứa Python,
+mô hình, thư viện CUDA hoặc bộ mẫu riêng. Đóng tool, sao lưu thư mục cũ rồi chép
+thư mục `app` từ gói cập nhật vào cạnh `MO_TOOL.bat`. Giữ nguyên dữ liệu và mô
+hình cũ. Xem `DOC_CAP_NHAT.txt` trong gói cập nhật cho hướng dẫn chi tiết.
 
 Giải nén **toàn bộ ZIP** vào thư mục có quyền ghi, ví dụ `D:/VoiceStudio`, rồi mở **MO_TOOL.bat**. Giữ cửa sổ lệnh mở trong khi sử dụng; dùng Ctrl+C để tắt. Bản Portable đã có Python, FFmpeg, Nano và Turbo, dùng cục bộ với các giọng đi kèm.
 

@@ -1,0 +1,99 @@
+{
+  "format": "native-voxcpm-windows-pcm-v1",
+  "platform": "linux",
+  "product_version": "1.12.0",
+  "source_commit": null,
+  "app_source_sha256": "4f35753abbdae5a4d691f8df674e23f979ef36abba3ce6d3b50225fdd51b2fe6",
+  "native_cpu_sha256": "815ff7ea6c9838bdbd0d5bbdc624ac6f1f2a94fad81ea617706508a2e00bf97f",
+  "native_model_sha256": "fd0239bd91581e7e772d7e21787defb205f54ab80d928162ce11ccd3b3ada1b4",
+  "native_smoke_passed": true,
+  "public_reference_only": true,
+  "private_reference_audio_included": false,
+  "device": "cpu",
+  "steps": 8,
+  "threads": 4,
+  "requests": [
+    {
+      "language": "fr",
+      "text": "Bonjour. Cette phrase vérifie la lecture en français.",
+      "audio_seconds": 3.52,
+      "processing_seconds": 58.191365733999646,
+      "realtime_multiplier": 0.06049007366643328,
+      "valid_pcm_audio": true,
+      "execution": {
+        "model_sha256": "fd0239bd91581e7e772d7e21787defb205f54ab80d928162ce11ccd3b3ada1b4",
+        "model_repository": "openbmb/VoxCPM2",
+        "model_revision": "32279effe8c19989596f05d353d1447f51d9e915",
+        "backend": "voxcpm_native",
+        "device": "cpu",
+        "precision": "q8_0",
+        "native_runtime_version": "dev",
+        "native_source_revision": "2597b300f5961999387c84c65f2e8e79c088a571",
+        "workers": 1,
+        "threads": 4,
+        "voxcpm_steps": 8,
+        "model_language": "fr",
+        "model_family": "voxcpm2",
+        "native_performance": "off"
+      }
+    },
+    {
+      "language": "ja",
+      "text": "こんにちは。これは日本語の音声テストです。",
+      "audio_seconds": 3.52,
+      "processing_seconds": 28.288926303000153,
+      "realtime_multiplier": 0.12443031461489898,
+      "valid_pcm_audio": true,
+      "execution": {
+        "model_sha256": "fd0239bd91581e7e772d7e21787defb205f54ab80d928162ce11ccd3b3ada1b4",
+        "model_repository": "openbmb/VoxCPM2",
+        "model_revision": "32279effe8c19989596f05d353d1447f51d9e915",
+        "backend": "voxcpm_native",
+        "device": "cpu",
+        "precision": "q8_0",
+        "native_runtime_version": "dev",
+        "native_source_revision": "2597b300f5961999387c84c65f2e8e79c088a571",
+        "workers": 1,
+        "threads": 4,
+        "voxcpm_steps": 8,
+        "model_language": "ja",
+        "model_family": "voxcpm2",
+        "native_performance": "off"
+      }
+    },
+    {
+      "language": "fr",
+      "text": "Le modèle reste chargé pour la phrase suivante.",
+      "audio_seconds": 2.4,
+      "processing_seconds": 19.65424992899989,
+      "realtime_multiplier": 0.12211099424653162,
+      "valid_pcm_audio": true,
+      "execution": {
+        "model_sha256": "fd0239bd91581e7e772d7e21787defb205f54ab80d928162ce11ccd3b3ada1b4",
+        "model_repository": "openbmb/VoxCPM2",
+        "model_revision": "32279effe8c19989596f05d353d1447f51d9e915",
+        "backend": "voxcpm_native",
+        "device": "cpu",
+        "precision": "q8_0",
+        "native_runtime_version": "dev",
+        "native_source_revision": "2597b300f5961999387c84c65f2e8e79c088a571",
+        "workers": 1,
+        "threads": 4,
+        "voxcpm_steps": 8,
+        "model_language": "fr",
+        "model_family": "voxcpm2",
+        "native_performance": "off"
+      }
+    }
+  ],
+  "gpu_inference_tested": false,
+  "gtx1060_tested": false,
+  "full_hour_generated": false,
+  "target_30x_guaranteed": false,
+  "human_pronunciation_reviewed": false,
+  "limitations": [
+    "CPU functional validation only; first request includes model loading and overlapped short regression checks.",
+    "No GPU/GTX1060, full-hour, word-completeness, pronunciation or voice-identity validation was performed.",
+    "CPU Q8 is not established as a Turbo-speed path. GPU performance must be measured on the intended card."
+  ]
+}

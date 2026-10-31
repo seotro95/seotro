@@ -1,4 +1,4 @@
-"""Build the pinned, minimal audio.cpp C ABI for portable OmniVoice.
+"""Build the pinned audio.cpp C ABI for portable OmniVoice and VoxCPM2.
 
 CPU uses an AVX2 baseline without host-specific AVX512/VNNI flags. The optional
 CUDA build deliberately requires CUDA 12 and includes sm_61 for GTX 1060.
@@ -27,7 +27,7 @@ def cmake_arguments(source, build, device):
         'cmake', '-S', str(source), '-B', str(build), '-G', 'Ninja',
         '-DCMAKE_BUILD_TYPE=Release', '-DAUDIOCPP_BUILD_C_API=ON',
         '-DAUDIOCPP_DEPLOYMENT_BUILD=ON',
-        '-DAUDIOCPP_MODEL_SET=custom', '-DAUDIOCPP_MODELS=omnivoice',
+        '-DAUDIOCPP_MODEL_SET=custom', '-DAUDIOCPP_MODELS=omnivoice,voxcpm2',
         '-DENGINE_ENABLE_NATIVE_CPU=OFF', '-DENGINE_ENABLE_LLAMAFILE=OFF',
         '-DENGINE_BUILD_EXAMPLES=OFF', '-DENGINE_BUILD_TESTS=OFF',
         '-DENGINE_BUILD_WARMBENCH=OFF', '-DAUDIOCPP_BUILD_NATIVE_MODEL_MANAGER=OFF',
@@ -90,8 +90,13 @@ def build_native(source, build, destination, device='cpu', jobs=2):
         if not re.search(r'release 12\.', version):
             raise ValueError('CUDA 12 is required: CUDA 13 removes GTX 1060 / sm_61 support')
     run(*cmake_arguments(source, build, device))
-    run('cmake', '--build', build, '--config', 'Release', '--target', 'audiocpp', '--parallel', str(jobs))
+    run('cmake', '--build', build, '--config', 'Release', '--target', 'audiocpp', 'audiocpp_gguf', '--parallel', str(jobs))
     stage_runtime(build, destination, device)
+    converter_name = 'audiocpp_gguf.exe' if os.name == 'nt' else 'audiocpp_gguf'
+    converters = [path for path in build.rglob(converter_name) if path.is_file()]
+    if len(converters) != 1:
+        raise ValueError('Expected exactly one built ' + converter_name)
+    shutil.copy2(converters[0], destination / converter_name)
     notices = destination / 'licenses'
     notices.mkdir(exist_ok=True)
     shutil.copy2(source / 'LICENSE', notices / 'audio.cpp-LICENSE.txt')
@@ -109,11 +114,12 @@ def build_native(source, build, destination, device='cpu', jobs=2):
     manifest = {
         'schema': 1, 'repository': NATIVE_REPOSITORY, 'revision': NATIVE_REVISION,
         'source_revision': NATIVE_REVISION, 'native_revision': NATIVE_REVISION,
-        'abi': '0.2', 'family': 'omnivoice', 'device': device,
+        'abi': '0.2', 'family': 'omnivoice', 'families': ['omnivoice', 'voxcpm2'], 'device': device,
         'cpu_baseline': 'AVX2/FMA/F16C; no AVX512/VNNI',
         'cuda_architectures': ['61', '75', '86'] if device == 'cuda' else [],
         'cuda_toolkit_major': 12 if device == 'cuda' else None,
         'sha256': checksums, 'gpu_performance_tested': False,
+        'tools_sha256': {converter_name: hashlib.sha256((destination / converter_name).read_bytes()).hexdigest()},
     }
     (destination / 'native-build.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
     return manifest

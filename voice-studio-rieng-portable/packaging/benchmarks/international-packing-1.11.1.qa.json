@@ -1,0 +1,164 @@
+{
+  "format": "international-packing-real-speech-v1",
+  "engine": "voxcpm2",
+  "device": "cpu",
+  "precision": "fp32",
+  "threads": 4,
+  "steps": 8,
+  "seed": 2026,
+  "load_seconds": 23.038146678999965,
+  "includes_model_load": false,
+  "same_model_reference_and_steps": true,
+  "model_warm_and_reference_cached": true,
+  "private_reference_audio_included": false,
+  "human_pronunciation_reviewed": false,
+  "gtx1060_tested": false,
+  "turbo_speed_equivalence_established": false,
+  "limitation": "Short public-text samples; valid PCM alone does not establish pronunciation, voice similarity or performance on another machine.",
+  "results": [
+    {
+      "language": "fr",
+      "text": "Bonjour. Cette phrase présente le studio. Nous gardons la même voix.",
+      "classic": {
+        "plan": "classic-v1",
+        "model_requests": 3,
+        "processing_seconds": 53.500591448999785,
+        "audio_seconds": 4.64,
+        "realtime_multiplier": 0.08672801317389447,
+        "valid_pcm_audio": true
+      },
+      "packed": {
+        "plan": "international-packed-v1",
+        "model_requests": 1,
+        "processing_seconds": 45.36952624800006,
+        "audio_seconds": 4.32,
+        "realtime_multiplier": 0.09521809807724037,
+        "valid_pcm_audio": true
+      },
+      "throughput_ratio": 1.0978932249528512
+    },
+    {
+      "language": "ja",
+      "text": "こんにちは。音声スタジオへようこそ。同じ声で次の文を読みます。",
+      "classic": {
+        "plan": "classic-v1",
+        "model_requests": 3,
+        "processing_seconds": 73.63198719000002,
+        "audio_seconds": 6.720000000000001,
+        "realtime_multiplier": 0.0912646834134696,
+        "valid_pcm_audio": true
+      },
+      "packed": {
+        "plan": "international-packed-v1",
+        "model_requests": 1,
+        "processing_seconds": 55.87165985399997,
+        "audio_seconds": 5.44,
+        "realtime_multiplier": 0.09736599940319365,
+        "valid_pcm_audio": true
+      },
+      "throughput_ratio": 1.0668529792853427
+    }
+  ],
+  "execution_order": "classic-first",
+  "product_version": "1.11.1",
+  "complete": true,
+  "platform": "Linux cloud CPU, four-thread sequential warm model",
+  "model_repository": "openbmb/VoxCPM2",
+  "model_revision": "32279effe8c19989596f05d353d1447f51d9e915",
+  "voxcpm_version": "2.0.3",
+  "torch_version": "2.8.0+cpu",
+  "public_reference_source": "https://github.com/0xShug0/audio.cpp/blob/2597b300f5961999387c84c65f2e8e79c088a571/assets/resources/b.wav",
+  "public_reference_sha256": "32bf74dfb8342ccc8284f47a9e5fe1f41b458a983a00938ed170f76951ce638f",
+  "end_to_end_app_throughput_measured": false,
+  "new_windows_smoke_run": false,
+  "replication": {
+    "format": "international-packing-real-speech-v1",
+    "engine": "voxcpm2",
+    "device": "cpu",
+    "precision": "fp32",
+    "threads": 4,
+    "steps": 8,
+    "seed": 2026,
+    "execution_order": "packed-first",
+    "load_seconds": 25.133424260000083,
+    "includes_model_load": false,
+    "same_model_reference_and_steps": true,
+    "model_warm_and_reference_cached": true,
+    "private_reference_audio_included": false,
+    "human_pronunciation_reviewed": false,
+    "gtx1060_tested": false,
+    "turbo_speed_equivalence_established": false,
+    "limitation": "Short public-text samples; valid PCM alone does not establish pronunciation, voice similarity or performance on another machine.",
+    "results": [
+      {
+        "language": "fr",
+        "text": "Bonjour. Cette phrase présente le studio. Nous gardons la même voix.",
+        "classic": {
+          "plan": "classic-v1",
+          "model_requests": 3,
+          "processing_seconds": 53.43275019700013,
+          "audio_seconds": 4.64,
+          "realtime_multiplier": 0.0868381279813013,
+          "valid_pcm_audio": true
+        },
+        "packed": {
+          "plan": "international-packed-v1",
+          "model_requests": 1,
+          "processing_seconds": 44.29701113500005,
+          "audio_seconds": 4.32,
+          "realtime_multiplier": 0.0975235098104999,
+          "valid_pcm_audio": true
+        },
+        "throughput_ratio": 1.1230494263015371
+      },
+      {
+        "language": "ja",
+        "text": "こんにちは。音声スタジオへようこそ。同じ声で次の文を読みます。",
+        "classic": {
+          "plan": "classic-v1",
+          "model_requests": 3,
+          "processing_seconds": 74.06297142499989,
+          "audio_seconds": 6.720000000000001,
+          "realtime_multiplier": 0.09073359967477176,
+          "valid_pcm_audio": true
+        },
+        "packed": {
+          "plan": "international-packed-v1",
+          "model_requests": 1,
+          "processing_seconds": 56.03933731999996,
+          "audio_seconds": 5.44,
+          "realtime_multiplier": 0.09707466683512175,
+          "valid_pcm_audio": true
+        },
+        "throughput_ratio": 1.0698866481995546
+      }
+    ]
+  },
+  "summary": [
+    {
+      "language": "fr",
+      "trials": 2,
+      "classic_realtime_multiplier": 0.0867830356477702,
+      "packed_realtime_multiplier": 0.09635701625340179,
+      "throughput_gain_percent": 11.032087704894188,
+      "requests_per_sample_before": 3,
+      "requests_per_sample_after": 1
+    },
+    {
+      "language": "ja",
+      "trials": 2,
+      "classic_realtime_multiplier": 0.0909983666743452,
+      "packed_realtime_multiplier": 0.09722011486577774,
+      "throughput_gain_percent": 6.837208643203718,
+      "requests_per_sample_before": 3,
+      "requests_per_sample_after": 1
+    }
+  ],
+  "limitations": [
+    "Only short public-reference French/Japanese samples; none of the user private default recordings was available.",
+    "No human pronunciation, word-completeness or voice-identity evaluation has been performed.",
+    "Generated duration differs between classic and packed. Wall-time reduction alone is not a throughput claim.",
+    "Single warm-model synthesis, not end-to-end worker-pool or cold startup throughput. Two execution orders were measured.",
+    "No new Windows execution or GPU/GTX1060 benchmark, and no evidence of equivalence to Turbo."
+  ]
+}

@@ -59,7 +59,7 @@ def test_real_benchmark_uses_text_and_normal_queue(studio,monkeypatch):
 def test_genres_expose_real_bundled_speakers(studio):
     client,data=studio
     config=client.get('/api/config').json()
-    assert config['version']=='1.11.0'
+    assert config['version']=='1.12.0'
     assert {'review','horror','fairytale','documentary','ad'}<={p['id'] for p in config['delivery_profiles']}
     voices=client.get('/api/voices').json()['voices']
     assert len({v['speaker'] for v in voices if v.get('engine')=='vieneu_nano'})==11
