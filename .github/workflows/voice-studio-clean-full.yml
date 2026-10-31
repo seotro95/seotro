@@ -1,0 +1,263 @@
+name: Voice Studio - Clean complete Windows portable
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [voice-studio-clean-full-v1.12.1]
+    paths:
+      - '.github/workflows/voice-studio-clean-full.yml'
+      - 'voice-studio-rieng-portable/packaging/build_clean_bundle.py'
+      - 'voice-studio-rieng-portable/packaging/test_clean_bundle.py'
+      - 'voice-studio-rieng-portable/packaging/smoke_clean_bundle.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-studio-clean-full-${{ github.sha }}
+  cancel-in-progress: false
+
+env:
+  PYTHONUTF8: '1'
+  RELEASE_TAG: voice-studio-1.12.1-clean-${{ github.run_id }}-${{ github.run_attempt }}
+  SOURCE_TAG: voice-studio-native-voxcpm-1.12.1-41214648685-1
+  SOURCE_SHA: a4646d2ab03d0ea9f605961dc7cde8fee4c512cc70344764564f3130fd3e2864
+  ARCHIVE_NAME: Voice-Studio-1.12.1-Clean-Full-Windows-x64.zip
+  PORTABLE_NAME: Voice-Studio-1.12.1-Clean-Full-Windows-x64
+
+jobs:
+  clean-verify-publish:
+    runs-on: windows-2022
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Test cleanup and downloader boundaries
+        shell: pwsh
+        run: |
+          python -m unittest discover -s voice-studio-rieng-portable/packaging -p test_clean_bundle.py -v 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'clean-tests.log')
+          $testExit = $LASTEXITCODE
+          if ($testExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'clean-tests.log') -Tail 70) -join ' | ')
+            Write-Output ('::error title=Cleanup tests failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $testExit
+          }
+          python -m unittest discover -s voice-studio-rieng-portable/packaging -p test_one_click_download.py -v
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Fetch the checksum-pinned complete source archive
+        shell: python
+        run: |
+          import hashlib, json, os, pathlib, urllib.request
+          base = 'https://github.com/' + os.environ['GITHUB_REPOSITORY'] + '/releases/download/' + os.environ['SOURCE_TAG'] + '/'
+          with urllib.request.urlopen(base + 'DOWNLOAD-PARTS.json', timeout=60) as response:
+              manifest = json.loads(response.read(65536))
+          if manifest['archive_sha256'] != os.environ['SOURCE_SHA']:
+              raise ValueError('Source release differs from the audited complete ZIP')
+          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'source-full.zip'
+          total = hashlib.sha256()
+          with target.open('xb') as output:
+              for part in manifest['parts']:
+                  if not part['name'].startswith('Voice-Studio-1.12.1-Full-Windows-x64.zip.part'):
+                      raise ValueError('Unexpected source part filename')
+                  digest, size = hashlib.sha256(), 0
+                  with urllib.request.urlopen(base + part['name'], timeout=180) as response:
+                      for block in iter(lambda: response.read(8 * 1024**2), b''):
+                          digest.update(block); total.update(block); size += len(block); output.write(block)
+                  if digest.hexdigest() != part['sha256'] or size != part['size']:
+                      raise ValueError('Source part size/SHA mismatch: ' + part['name'])
+          if total.hexdigest() != os.environ['SOURCE_SHA'] or target.stat().st_size != manifest['archive_size']:
+              raise ValueError('The full source archive failed verification')
+      - name: Remove audited unused files and regenerate the complete file manifest
+        shell: pwsh
+        run: |
+          python voice-studio-rieng-portable/packaging/build_clean_bundle.py --source-archive "${{ runner.temp }}/source-full.zip" --output "${{ runner.temp }}/clean-archive/$env:ARCHIVE_NAME" 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'clean-build.log')
+          $buildExit = $LASTEXITCODE
+          if ($buildExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'clean-build.log') -Tail 35) -join ' | ')
+            Write-Output ('::error title=Clean package assembly failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $buildExit
+          }
+          Remove-Item -LiteralPath "${{ runner.temp }}/source-full.zip"
+      - name: Extract the exact clean archive and verify every packaged file
+        shell: python
+        run: |
+          import hashlib, json, os, pathlib, shutil, sys, zipfile
+          temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          sys.path.insert(0, str(pathlib.Path('voice-studio-rieng-portable/packaging').resolve()))
+          from build_windows import safe_zip_path
+          stage = temp / 'kiem tra Tiếng Việt !'
+          with zipfile.ZipFile(temp / 'clean-archive' / os.environ['ARCHIVE_NAME']) as archive:
+              root = os.environ['PORTABLE_NAME']
+              manifest = archive.read(root + '/MANIFEST.sha256').decode('utf-8')
+              expected = {line.split('  ', 1)[1]: line.split('  ', 1)[0] for line in manifest.splitlines()}
+              seen = set()
+              for entry in archive.infolist():
+                  parts = safe_zip_path(entry)
+                  if parts[0] != root or entry.is_dir():
+                      raise ValueError('Unexpected clean archive structure')
+                  relative = '/'.join(parts[1:])
+                  destination = stage.joinpath(*parts)
+                  destination.parent.mkdir(parents=True, exist_ok=True)
+                  digest = hashlib.sha256()
+                  with archive.open(entry) as source, destination.open('xb') as output:
+                      for block in iter(lambda: source.read(4 * 1024**2), b''):
+                          digest.update(block); output.write(block)
+                  if relative != 'MANIFEST.sha256':
+                      if digest.hexdigest() != expected.get(relative):
+                          raise ValueError('Clean manifest mismatch: ' + relative)
+                      seen.add(relative)
+                  if relative.startswith('app/') and destination.suffix.lower() in {'.py', '.ps1', '.html', '.css', '.js'}:
+                      current = pathlib.Path('voice-studio-rieng-portable') / relative
+                      if destination.read_bytes().replace(b'\r\n', b'\n') != current.read_bytes().replace(b'\r\n', b'\n'):
+                          raise ValueError('The clean application differs from the checked-out source: ' + relative)
+              if seen != expected.keys():
+                  raise ValueError('Clean manifest includes missing files')
+          package = stage / root
+          for name in ('CLEANUP-REPORT.json', 'BUNDLED-PACKAGES.txt'):
+              shutil.copy2(package / name, temp / name)
+          print('Verified all files in the clean complete ZIP.', flush=True)
+      - name: Run actual Nano Turbo and native VoxCPM2 plus current UI using the cleaned Windows runtime
+        shell: pwsh
+        run: |
+          $root = Join-Path (Join-Path $env:RUNNER_TEMP 'kiem tra Tiếng Việt !') $env:PORTABLE_NAME
+          $env:PYTHONHOME = ''
+          $env:PYTHONPATH = ''
+          $env:PYTHONNOUSERSITE = '1'
+          $env:HF_HUB_OFFLINE = '1'
+          $env:TRANSFORMERS_OFFLINE = '1'
+          $env:VOICE_STUDIO_DATA_DIR = Join-Path $root 'app/.data'
+          $env:HF_HOME = Join-Path $root 'app/.data/models/cache'
+          $env:HF_HUB_CACHE = Join-Path $root 'app/.data/models/cache/hub'
+          $env:HUGGINGFACE_HUB_CACHE = $env:HF_HUB_CACHE
+          $env:HF_HUB_DISABLE_TELEMETRY = '1'
+          $env:GRADIO_ANALYTICS_ENABLED = 'False'
+          $env:DO_NOT_TRACK = '1'
+          $env:PATH = "$root/ffmpeg/bin;$root/runtime;$env:PATH"
+          & "$root/runtime/python.exe" -s -X utf8 voice-studio-rieng-portable/packaging/smoke_clean_bundle.py --root $root --output "${{ runner.temp }}/CLEAN-WINDOWS-QA.json" 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'clean-runtime.log')
+          $smokeExit = $LASTEXITCODE
+          if ($smokeExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'clean-runtime.log') -Tail 45) -join ' | ')
+            Write-Output ('::error title=Clean Windows runtime failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $smokeExit
+          }
+          python -c "import hashlib,pathlib,urllib.request; p=pathlib.Path(r'${{ runner.temp }}/public-reference.wav'); b=urllib.request.urlopen('https://raw.githubusercontent.com/0xShug0/audio.cpp/2597b300f5961999387c84c65f2e8e79c088a571/assets/resources/b.wav',timeout=60).read(); assert hashlib.sha256(b).hexdigest()=='32bf74dfb8342ccc8284f47a9e5fe1f41b458a983a00938ed170f76951ce638f';p.write_bytes(b)"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & "$root/runtime/python.exe" -s -X utf8 voice-studio-rieng-portable/packaging/smoke_native_voxcpm.py --app-dir voice-studio-rieng-portable/app --native-root "$root/runtime-native" --data-dir "$root/app/.data" --reference "${{ runner.temp }}/public-reference.wav" --output "${{ runner.temp }}/CLEAN-NATIVE-WINDOWS-QA.json" --steps 8 --threads 4 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'clean-native.log')
+          $nativeExit = $LASTEXITCODE
+          if ($nativeExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'clean-native.log') -Tail 45) -join ' | ')
+            Write-Output ('::error title=Clean Windows native speech failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $nativeExit
+          }
+          Remove-Item -LiteralPath (Join-Path $env:RUNNER_TEMP 'kiem tra Tiếng Việt !') -Recurse -Force
+      - name: Prepare release parts and the single-file automatic downloader
+        shell: python
+        run: |
+          import hashlib, json, os, pathlib, shutil, sys
+          sys.path.insert(0, str(pathlib.Path('voice-studio-rieng-portable/packaging').resolve()))
+          from build_full_update import split_release
+          from build_one_click_download import build
+          temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          archive = temp / 'clean-archive' / os.environ['ARCHIVE_NAME']
+          downloads = split_release(archive, temp / 'clean-downloads')
+          for name in ('CLEAN-WINDOWS-QA.json', 'CLEAN-NATIVE-WINDOWS-QA.json', 'CLEANUP-REPORT.json', 'BUNDLED-PACKAGES.txt'):
+              shutil.copy2(temp / name, downloads / name)
+          helpers = temp / 'clean-helper'
+          base = 'https://github.com/' + os.environ['GITHUB_REPOSITORY'] + '/releases/download/' + os.environ['RELEASE_TAG'] + '/'
+          build(downloads / 'DOWNLOAD-PARTS.json', helpers / 'TAI_TOOL_SACH_DAY_DU.cmd', base)
+          archive.unlink()
+      - name: Publish the cleaned complete archive after actual Windows speech checks
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $assets = @(Get-ChildItem -LiteralPath "${{ runner.temp }}/clean-downloads" -File | ForEach-Object { $_.FullName })
+          $notes = @'
+          Complete Voice Studio 1.12.1, package revision clean-1. Audited cleanup removes the redundant Python installer, Python manuals and test suites, Gradio JavaScript/CSS source maps, stale benchmarks and outdated guides. All application modules, encrypted 19-voice data, public Nano/Turbo models, native VoxCPM2 Q8 model, CPU/CUDA12 sm61 libraries, Python packages and licenses are retained. Includes a current Vietnamese guide, actual installed-package inventory, exact removal report and new full SHA256 manifest.
+
+          Actual Nano/Turbo CPU speech and native VoxCPM2 French/Japanese speech plus current UI/API were tested with the cleaned bundled Python on Windows. Download TAI_TOOL_SACH_DAY_DU.zip, extract and run the CMD to automatically obtain the complete large ZIP; that small ZIP is a downloader, not the embedded application. It is attached only after a full Windows download and checksum verification. Keep the previous private-voice password. GPU inference on GTX1060, private-voice unlocking, voice identity, a complete-hour render and 30x throughput are not established. Cleanup does not change the speech model or claim an inference speed increase.
+          '@
+          $notesPath = Join-Path $env:RUNNER_TEMP 'clean-release-notes.txt'
+          $notes | Set-Content -LiteralPath $notesPath -Encoding utf8
+          gh release create $env:RELEASE_TAG @assets --repo '${{ github.repository }}' --target '${{ github.sha }}' --title 'Voice Studio 1.12.1 Clean - Complete Windows portable' --prerelease --latest=false --notes-file $notesPath
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Download the complete published clean ZIP using the single CMD and verify reuse
+        shell: pwsh
+        run: |
+          $work = Join-Path $env:RUNNER_TEMP 'tai ban sach Tiếng Việt !'
+          New-Item -ItemType Directory -Force $work | Out-Null
+          Copy-Item "${{ runner.temp }}/clean-helper/TAI_TOOL_SACH_DAY_DU.cmd" $work
+          $env:VOICE_DOWNLOAD_NO_PAUSE = '1'
+          Push-Location $work
+          try {
+            & cmd.exe /d /c '.\TAI_TOOL_SACH_DAY_DU.cmd' 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'clean-download.log')
+            $downloadExit = $LASTEXITCODE
+            if ($downloadExit -ne 0) {
+              $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'clean-download.log') -Tail 25) -join ' | ')
+              Write-Output ('::error title=Clean full download failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+              exit $downloadExit
+            }
+            $archive = Join-Path $work $env:ARCHIVE_NAME
+            $before = (Get-Item -LiteralPath $archive).LastWriteTimeUtc.Ticks
+            & cmd.exe /d /c '.\TAI_TOOL_SACH_DAY_DU.cmd'
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+            if ((Get-Item -LiteralPath $archive).LastWriteTimeUtc.Ticks -ne $before) { throw 'Existing clean ZIP was replaced' }
+          } finally { Pop-Location }
+      - name: Verify the downloaded ZIP and make one browser-friendly download file
+        shell: python
+        run: |
+          import hashlib, json, os, pathlib, zipfile
+          temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          archive = temp / 'tai ban sach Tiếng Việt !' / os.environ['ARCHIVE_NAME']
+          manifest = json.loads((temp / 'clean-downloads/DOWNLOAD-PARTS.json').read_text(encoding='utf-8'))
+          with archive.open('rb') as source:
+              digest = hashlib.file_digest(source, 'sha256').hexdigest()
+          if digest != manifest['archive_sha256'] or archive.stat().st_size != manifest['archive_size']:
+              raise ValueError('Published clean ZIP download differs from the tested archive')
+          with zipfile.ZipFile(archive) as package:
+              info = json.loads(package.read(os.environ['PORTABLE_NAME'] + '/BUILD_INFO.json'))
+              if info.get('package_revision') != 'clean-1' or not info.get('international_model_bundled'):
+                  raise ValueError('The downloader retrieved an incomplete or different package')
+          helpers = temp / 'clean-helper'
+          report = {'platform': 'win32', 'single_cmd_download_passed': True, 'second_run_reused_complete_zip': True,
+                    'full_archive': archive.name, 'full_size': archive.stat().st_size, 'full_sha256': digest,
+                    'unicode_and_spaces_and_exclamation_path_tested': True, 'payload_embedded_in_cmd': False,
+                    'release_tag': os.environ['RELEASE_TAG']}
+          (helpers / 'CLEAN-DOWNLOAD-QA.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
+          guide = ('BẢN TOOL ĐẦY ĐỦ ĐÃ DỌN GỌN - VOICE STUDIO 1.12.1 Clean\n\n'
+                   'Đây là trình tải tự động; gói nhỏ không chứa sẵn tool.\n'
+                   'Giải nén rồi chạy TAI_TOOL_SACH_DAY_DU.cmd trong thư mục mới.\n'
+                   'Cần Internet và khoảng 20 GB trống để tải, ghép ZIP đầy đủ rồi giải nén.\n'
+                   'Sau đó giải nén ZIP lớn, mở CAI_19_GIONG.bat bằng mật khẩu cũ nếu cần, rồi chạy MO_TOOL.bat.\n'
+                   'Đã bỏ các tệp thừa; giữ model, bộ 19 giọng mã hóa và thư viện cần để chạy.\n'
+                   'Đã chạy tạo tiếng Nano/Turbo và VoxCPM2 native CPU trên Windows sau khi dọn.\n'
+                   'Hiệu năng GTX1060 và mục tiêu tạo 1 giờ voice trong 2 phút chưa được xác minh.\n')
+          target = helpers / 'TAI_TOOL_SACH_DAY_DU.zip'
+          with zipfile.ZipFile(target, 'x', zipfile.ZIP_DEFLATED) as package:
+              package.write(helpers / 'TAI_TOOL_SACH_DAY_DU.cmd', 'TAI_TOOL_SACH_DAY_DU.cmd')
+              package.writestr('DOC_TRUOC.txt', guide.encode('utf-8'))
+              for name in ('CLEAN-WINDOWS-QA.json', 'CLEAN-NATIVE-WINDOWS-QA.json'):
+                  package.write(temp / name, name)
+          for name in ('TAI_TOOL_SACH_DAY_DU.cmd', 'TAI_TOOL_SACH_DAY_DU.zip'):
+              path = helpers / name
+              (helpers / (name + '.sha256')).write_text(hashlib.sha256(path.read_bytes()).hexdigest() + '  ' + name + '\n', encoding='utf-8')
+      - name: Attach the verified single-file download
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $assets = @(Get-ChildItem -LiteralPath "${{ runner.temp }}/clean-helper" -File | ForEach-Object { $_.FullName })
+          gh release upload $env:RELEASE_TAG @assets --repo '${{ github.repository }}'
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: Voice-Studio-Clean-Failure-Diagnostics
+          path: |
+            ${{ runner.temp }}/clean-*.log
+            ${{ runner.temp }}/CLEAN*-QA.json
+          if-no-files-found: ignore
+          retention-days: 7
