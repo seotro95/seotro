@@ -30,7 +30,8 @@ _OLD_QA = frozenset({'BASE-1.10-MANIFEST.sha256', 'BASE-1.10-PORTABLE-QA.json',
                      'BASE-1.10-SHARED-MODEL-QA.json'})
 _OLD_GUIDES = frozenset({'DOC_TRUOC_PORTABLE.txt', 'README_GITHUB_19_GIONG.txt',
                          'DOC_TRUOC.md', 'DOC_TRUOC_FULL.txt'})
-_APP_OVERLAY = ('native_synthesis.py', 'native_paths.py', 'fast_multilingual.py')
+_APP_OVERLAY = ('native_synthesis.py', 'native_paths.py', 'fast_multilingual.py',
+                'static/app.js', 'static/index.html')
 _REQUIRED = frozenset({
     'BUILD_INFO.json', 'MANIFEST.sha256', 'MO_TOOL.bat', 'HUONG_DAN_CAN_MOC.txt',
     'requirements-runtime.txt', 'requirements-international.txt', 'THIRD_PARTY_NOTICES.md',
@@ -199,21 +200,27 @@ def _app_overlays(directory, original):
     directory = Path(directory)
     if directory.is_symlink() or not directory.is_dir():
         raise ValueError('App overlay must be a real application source directory')
-    if (not {'app/native_synthesis.py', 'app/fast_multilingual.py'} <= original.keys()
+    if (not {'app/' + name for name in _APP_OVERLAY if name != 'native_paths.py'} <= original.keys()
             or 'app/native_paths.py' in original):
-        raise ValueError('Unexpected source baseline for the native path and worker-close correction')
+        raise ValueError('Unexpected source baseline for the native path, worker-close and explicit CUDA control correction')
     result = {}
     for name in _APP_OVERLAY:
         path = directory / name
-        if (path.is_symlink() or not path.is_file() or not 1 <= path.stat().st_size <= 256 * 1024
+        limit = 1024**2 if name.startswith('static/') else 256 * 1024
+        if (path.is_symlink() or not path.is_file() or not 1 <= path.stat().st_size <= limit
                 or not path.resolve().is_relative_to(directory.resolve())):
-            raise ValueError('Missing, unsafe or unbounded native path correction source: ' + name)
+            raise ValueError('Missing, unsafe or unbounded application correction source: ' + name)
         payload = path.read_bytes()
-        ast.parse(payload.decode('utf-8-sig'), filename=name)
+        text = payload.decode('utf-8-sig')
+        if '\x00' in text: raise ValueError('Application source contains a null byte: ' + name)
+        if name.endswith('.py'):
+            ast.parse(text, filename=name)
+        elif name not in {'static/app.js', 'static/index.html'}:
+            raise ValueError('Unexpected static application overlay: ' + name)
         result['app/' + name] = payload
-    for name in ('app/native_synthesis.py', 'app/fast_multilingual.py'):
+    for name in ('app/' + item for item in _APP_OVERLAY if item != 'native_paths.py'):
         if hashlib.sha256(result[name]).hexdigest() == original[name]:
-            raise ValueError('The native binding/worker overlay does not contain a correction: ' + name)
+            raise ValueError('The application overlay does not contain a correction: ' + name)
     return result
 
 
@@ -237,7 +244,7 @@ def build_clean(source_archive, output, *, app_overlay=None, _expected_sha256=SO
             files = _members(source)
             original = _manifest(source, files)
             app_changes = _app_overlays(app_overlay, original)
-            revision = 'clean-2' if app_changes else 'clean-1'
+            revision = 'clean-3' if app_changes else 'clean-1'
             info = json.loads(_read(source, files['BUILD_INFO.json']))
             if info.get('version') != '1.12.1' or info.get('encrypted_private_pack_bundled') is not True:
                 raise ValueError('Expected the complete 1.12.1 source distribution')
@@ -247,13 +254,20 @@ def build_clean(source_archive, output, *, app_overlay=None, _expected_sha256=SO
                 raise ValueError('Unexpected source launcher title')
             guide = GUIDE
             if app_changes:
-                guide = (guide.replace('(CLEAN-1)', '(CLEAN-2)')
+                guide = (guide.replace('(CLEAN-1)', '(CLEAN-3)')
+                         .replace('CUDA và chế độ Nhanh rồi bấm đo giọng để nghe và đo thực tế. CUDA giữ một model.',
+                                  'bấm “Thử CUDA nhanh · 4 bước” để chọn CUDA và đặt đúng 4 bước, kể cả khi\n'
+                                  'trước đó đã lưu 10 bước. Nút giữ nguyên giọng, ngôn ngữ và nội dung. Sau đó\n'
+                                  'bấm đo giọng để nghe chất lượng và đo tốc độ thực tế. CUDA giữ một model.\n'
+                                  '4 bước có thể giảm chất lượng so với nhiều bước hơn; hãy nghe mẫu trước.\n'
+                                  'Nút này không bảo đảm nhanh ngang Turbo hoặc đạt 30 lần thời gian thực.')
                          .replace('Không thay model,\nDLL hoặc mã ứng dụng; việc dọn tệp không tự làm tốc độ suy luận nhanh hơn.',
                                   'Giữ nguyên model và DLL. Mã native đã được sửa lỗi đọc model khi thư mục\n'
                                   'có dấu tiếng Việt; việc dọn tệp không tự làm tốc độ suy luận nhanh hơn.')
                          .replace('là kiểm tra mã ứng dụng/model của bản nguồn.',
                                   'là kiểm tra model và mã ứng dụng bản nguồn,\n'
-                                  'trước khi sửa đường dẫn tiếng Việt; không phải kiểm tra lại mã Clean-2.'))
+                                  'trước khi sửa đường dẫn tiếng Việt và thêm nút CUDA 4 bước;\n'
+                                  'không phải kiểm tra lại mã Clean-3.'))
             changes = {
                 'MO_TOOL.bat': launcher.replace(b'title Voice Studio Rieng 1.9.0 Portable', b'title Voice Studio Rieng 1.12.1 Clean Portable'),
                 'HUONG_DAN_CAN_MOC.txt': _read(source, files['HUONG_DAN_CAN_MOC.txt']).replace(b'PORTABLE-QA.json', b'WINDOWS-NATIVE-VOXCPM-QA.json'),
@@ -274,11 +288,12 @@ def build_clean(source_archive, output, *, app_overlay=None, _expected_sha256=SO
                         cleanup_changes_inference_assets=bool(app_changes),
                         cleanup_changes_model_or_native_library_assets=False,
                         native_unicode_path_correction_applied=bool(app_changes), cleaned_windows_package_qa='not_run',
+                        explicit_cuda_fast4_control_added=bool(app_changes),
                         cleaned_windows_package_qa_scope=None)
             if app_changes:
                 info.update(
                     inherited_windows_native_qa_report='WINDOWS-NATIVE-VOXCPM-QA.json',
-                    inherited_windows_native_qa_scope='Pinned original application before the Unicode-path correction only',
+                    inherited_windows_native_qa_scope='Pinned original application before the Unicode-path correction and explicit CUDA 4-step control only',
                     inherited_windows_native_qa_source_commit=info.get('application_source_commit'),
                     inherited_source_windows_native_offline_smoke=info.get('current_native_windows_offline_smoke'),
                     application_source_commit=os.environ.get('GITHUB_SHA'), application_source_modified=True,
@@ -369,7 +384,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source-archive', required=True, type=Path)
     parser.add_argument('--output', required=True, type=Path)
-    parser.add_argument('--app-overlay', type=Path, help='Explicit three-file native Windows Unicode-path and worker-close correction')
+    parser.add_argument('--app-overlay', type=Path, help='Explicit five-file native Windows path/worker and CUDA 4-step control correction')
     args = parser.parse_args(argv)
     for path in build_clean(args.source_archive, args.output, app_overlay=args.app_overlay): print(path, flush=True)
 

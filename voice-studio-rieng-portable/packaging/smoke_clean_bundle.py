@@ -55,8 +55,8 @@ def check_packaging(root):
         if not (root / name).is_file():
             raise ValueError('Missing required clean-bundle file: ' + name)
     build = json.loads((root / 'BUILD_INFO.json').read_text(encoding='utf-8'))
-    if build.get('version') != '1.12.1' or build.get('package_revision') != 'clean-2':
-        raise ValueError('Expected application 1.12.1 with clean-2 package revision')
+    if build.get('version') != '1.12.1' or build.get('package_revision') != 'clean-3':
+        raise ValueError('Expected application 1.12.1 with clean-3 package revision')
     launcher = (root / 'MO_TOOL.bat').read_text(encoding='utf-8-sig')
     if '1.12.1' not in launcher or '1.9.0' in launcher:
         raise ValueError('The launcher still identifies an obsolete version')
@@ -66,7 +66,7 @@ def check_packaging(root):
     encrypted = root / 'delivery/voices.vspack'
     if encrypted.stat().st_size != manifest.get('encrypted_size') or digest(encrypted) != manifest.get('encrypted_sha256'):
         raise ValueError('The encrypted voice pack does not match its original manifest')
-    return {'clean_package_revision': 'clean-2', 'encrypted_voice_pack_sha256': digest(encrypted),
+    return {'clean_package_revision': 'clean-3', 'encrypted_voice_pack_sha256': digest(encrypted),
             'encrypted_voice_pack_preserved': True, 'private_voice_unlock_attempted': False,
             'private_voice_identity_or_count_independently_verified': False,
             'launcher_identifies_current_version': True}
@@ -137,6 +137,9 @@ def main(argv=None):
                 response = client.get(url)
                 if response.status_code != 200 or (expected is not None and response.content != expected.read_bytes()):
                     raise ValueError('UI asset did not match the clean package: ' + url)
+                if url == '/' and ('try-voxcpm-native-cuda-fast' not in response.text
+                                   or '/static/app.js?v=1.12.1-clean3' not in response.text):
+                    raise ValueError('The explicit four-step CUDA action or its current script URL is missing')
             catalog = client.get('/api/voices')
             if catalog.status_code != 200:
                 raise ValueError('Voice catalog request failed')

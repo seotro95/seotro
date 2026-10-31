@@ -176,7 +176,7 @@ class CleanBundleTests(unittest.TestCase):
             self.assertIsNone(builder.removal_reason(name,0),name)
         self.assertIsNone(builder.removal_reason('runtime/Lib/site-packages/scipy-1.18.1-cp312-cp312-win_amd64.whl',10))
 
-    def test_explicit_three_file_overlay_records_changes_and_preserves_every_other_app_asset(self):
+    def test_explicit_five_file_overlay_records_changes_and_preserves_every_other_app_asset(self):
         original=contents()
         sha=write_source(self.source,original)
         overlay=self.root/'app-overlay';overlay.mkdir()
@@ -186,23 +186,31 @@ class CleanBundleTests(unittest.TestCase):
         (overlay/'native_synthesis.py').write_bytes(binding)
         (overlay/'native_paths.py').write_bytes(helper)
         (overlay/'fast_multilingual.py').write_bytes(worker)
+        (overlay/'static').mkdir()
+        script='// Thử CUDA nhanh · 4 bước\nwindow.fast = true;\n'.encode('utf-8')
+        html='<!doctype html><button>Thử CUDA nhanh · 4 bước</button>\n'.encode('utf-8')
+        (overlay/'static/app.js').write_bytes(script)
+        (overlay/'static/index.html').write_bytes(html)
         (overlay/'app.py').write_bytes(b'UNREQUESTED = True\n')
         builder.build_clean(self.source,self.output,app_overlay=overlay,_expected_sha256=sha)
         result=read_clean(self.output)
         self.assertEqual(result['app/native_synthesis.py'],binding)
         self.assertEqual(result['app/native_paths.py'],helper)
         self.assertEqual(result['app/fast_multilingual.py'],worker)
+        self.assertEqual(result['app/static/app.js'],script)
+        self.assertEqual(result['app/static/index.html'],html)
         for name,value in original.items():
-            if builder._protected(name) and name not in {'app/native_synthesis.py','app/fast_multilingual.py'}:
+            if builder._protected(name) and name not in {'app/' + item for item in builder._APP_OVERLAY}:
                 self.assertEqual(result[name],value,name)
         report=json.loads(result['CLEANUP-REPORT.json'])
         info=json.loads(result['BUILD_INFO.json'])
-        self.assertEqual(info['package_revision'],'clean-2')
-        self.assertEqual(report['package_revision'],'clean-2')
+        self.assertEqual(info['package_revision'],'clean-3')
+        self.assertEqual(report['package_revision'],'clean-3')
         self.assertFalse(report['app_model_native_and_encrypted_voice_assets_unchanged'])
         self.assertTrue(report['model_native_and_encrypted_voice_assets_unchanged'])
         self.assertEqual({row['path'] for row in report['app_source_modified_files']},
-                         {'app/native_synthesis.py','app/native_paths.py','app/fast_multilingual.py'})
+                         {'app/native_synthesis.py','app/native_paths.py','app/fast_multilingual.py',
+                          'app/static/app.js','app/static/index.html'})
         self.assertEqual(next(row for row in report['app_source_modified_files']
                               if row['path']=='app/native_paths.py')['source_sha256'],None)
         self.assertEqual(info['current_native_windows_offline_smoke'],'not_run')
@@ -211,8 +219,11 @@ class CleanBundleTests(unittest.TestCase):
         digests={name:digest(value) for name,value in result.items()}
         self.assertEqual(report['app_source_sha256'],builder._app_digest(digests))
         self.assertNotEqual(report['original_app_source_sha256'],report['app_source_sha256'])
-        self.assertIn('CLEAN-2',result['DOC_TRUOC.txt'].decode())
+        self.assertIn('CLEAN-3',result['DOC_TRUOC.txt'].decode())
         self.assertIn('trước khi sửa đường dẫn tiếng Việt',result['DOC_TRUOC.txt'].decode())
+        self.assertIn('Thử CUDA nhanh · 4 bước',result['DOC_TRUOC.txt'].decode())
+        self.assertIn('không bảo đảm nhanh ngang Turbo',result['DOC_TRUOC.txt'].decode())
+        self.assertTrue(info['explicit_cuda_fast4_control_added'])
 
     def test_overlay_missing_or_invalid_syntax_does_not_publish(self):
         sha=write_source(self.source,contents())
@@ -226,6 +237,33 @@ class CleanBundleTests(unittest.TestCase):
             builder.build_clean(self.source,self.output,app_overlay=overlay,_expected_sha256=sha)
         self.assertFalse(self.output.exists())
         self.assertFalse(list(self.root.glob('*.assembling*')))
+
+    def test_static_overlays_are_bounded_utf8_data_and_cannot_expand_the_allowlist(self):
+        original=contents()
+        sha=write_source(self.source,original)
+        overlay=self.root/'app-overlay';overlay.mkdir()
+        (overlay/'native_synthesis.py').write_bytes(b'CORRECTED_BINDING = True\n')
+        (overlay/'native_paths.py').write_bytes(b'HELPER = True\n')
+        (overlay/'fast_multilingual.py').write_bytes(b'CORRECTED_WORKER = True\n')
+        (overlay/'static').mkdir()
+        script=overlay/'static/app.js'
+        html=overlay/'static/index.html'
+        html.write_bytes(b'<!doctype html><p>Updated</p>')
+        script.write_bytes(b'\xff')
+        with self.assertRaises(UnicodeDecodeError):
+            builder.build_clean(self.source,self.output,app_overlay=overlay,_expected_sha256=sha)
+        script.write_bytes(b'window.fast = true;')
+        html.write_bytes(b'<p>unsafe\x00</p>')
+        with self.assertRaisesRegex(ValueError,'null byte'):
+            builder.build_clean(self.source,self.output,app_overlay=overlay,_expected_sha256=sha)
+        html.write_bytes(b'<!doctype html><p>Updated</p>')
+        script.write_bytes(b'a'*(1024**2+1))
+        with self.assertRaisesRegex(ValueError,'unbounded'):
+            builder.build_clean(self.source,self.output,app_overlay=overlay,_expected_sha256=sha)
+        script.write_bytes(original['app/static/app.js'])
+        with self.assertRaisesRegex(ValueError,'does not contain a correction'):
+            builder.build_clean(self.source,self.output,app_overlay=overlay,_expected_sha256=sha)
+        self.assertFalse(self.output.exists())
 
     def test_app_digest_excludes_model_weights_and_matches_source_hash_mapping(self):
         original=contents()

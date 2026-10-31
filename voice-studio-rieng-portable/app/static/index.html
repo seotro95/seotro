@@ -7,7 +7,7 @@
   <title>Voice Studio Riêng · Văn bản thành giọng nói</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="/static/style.css">
-  <script src="/static/app.js" defer></script>
+  <script src="/static/app.js?v=1.12.1-clean3" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Đến nội dung</a>
@@ -45,7 +45,8 @@
             <label for="international-backend">Bộ đọc giọng đa ngôn ngữ</label>
             <select id="international-backend" aria-describedby="international-backend-note"><option value="voxcpm" selected>VoxCPM · Bộ đọc hiện tại</option><option value="voxcpm_native">VoxCPM2 native Q8 · Thử nghiệm</option><option value="omnivoice">OmniVoice Q8 · Thử nghiệm</option></select>
             <p id="international-backend-note" class="field-note">VoxCPM2 native Q8 dùng cùng họ mô hình VoxCPM2 và mẫu giọng đã chọn. Lượng tử hóa hoặc đổi bộ đọc có thể thay đổi âm sắc, phát âm; nghe mẫu và đo tốc độ trước khi tạo bản dài.</p>
-            <button type="button" id="choose-voxcpm-native-cuda" class="secondary-button" disabled>Dùng VoxCPM2 Q8 trên GPU</button>
+            <div class="button-row"><button type="button" id="try-voxcpm-native-cuda-fast" class="secondary-button" disabled>Thử CUDA nhanh · 4 bước</button><button type="button" id="choose-voxcpm-native-cuda" class="secondary-button" disabled>Dùng GPU · Giữ số bước</button></div>
+            <p class="field-note">Thử CUDA nhanh chọn 4 bước và đo bằng đúng mẫu giọng, ngôn ngữ đang chọn; kịch bản đang nhập được giữ nguyên. Lượt đo đầu có thể gồm thời gian nạp mô hình. 4 bước có thể giảm độ rõ tiếng hoặc độ tự nhiên. Nghe mẫu trước khi tạo bản dài; có bộ chạy GPU chưa xác nhận GPU hoạt động hoặc đạt 30×.</p>
             <div id="native-multilingual-field" hidden>
               <label for="international-device">Thiết bị chạy bộ đọc native</label><select id="international-device" aria-describedby="international-device-note"><option value="cpu" selected>CPU</option><option value="cuda">GPU NVIDIA · CUDA</option></select>
               <p id="international-device-note" class="field-note">CUDA cần bộ chạy GPU và trình điều khiển NVIDIA phù hợp. Nếu không chạy được, tool báo lỗi và giữ lựa chọn của bạn; chọn CPU nếu muốn thử lại trên CPU.</p>

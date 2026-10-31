@@ -271,6 +271,39 @@ function chooseNativeVoxCuda() {
   saveRenderPreferences();
   notify(`Đã giữ mẫu giọng ${voice.name}, ngôn ngữ và kịch bản; chọn VoxCPM2 native Q8 trên CUDA. Bấm Đo giọng đang chọn để xác nhận GPU hoạt động và tốc độ thực tế. Nếu lỗi, lựa chọn CUDA được giữ nguyên để bạn kiểm tra.`);
 }
+
+function voiceHasReferenceSample(voice) {
+  return voice?.has_sample === true || (voice?.category === 'cloned' && voice.has_sample !== false);
+}
+
+async function chooseNativeVoxCudaFastAndBenchmark() {
+  const voice = voices.find((item) => item.id === $('voice').value);
+  if (submitting) return;
+  if (voice?.engine !== 'voxcpm' || !voiceHasReferenceSample(voice)) {
+    notify('Chọn mẫu giọng quốc tế có tệp âm thanh trước khi thử CUDA. Giọng, ngôn ngữ và kịch bản được giữ nguyên.', true);
+    return;
+  }
+  if (!nativeInstallation('voxcpm_native').cuda) {
+    notify('Cần cài mô hình VoxCPM2 Q8 và bộ chạy native CUDA trước khi đo. Có card NVIDIA chưa xác nhận bộ chạy đã hoạt động.', true);
+    return;
+  }
+  if (!benchmarkSupported(voice)) {
+    notify('Chưa có lời đọc mẫu để đo ngôn ngữ đang chọn. Giọng, ngôn ngữ và cấu hình cũ được giữ nguyên.', true);
+    return;
+  }
+  rememberRenderTuning();
+  $('international-backend').value = 'voxcpm_native';
+  $('international-device').value = 'cuda';
+  // This explicit action changes quality to four steps. Old CPU/balanced
+  // tuning remains separate; a saved ten-step Fast choice cannot override it.
+  applyRenderMode('fast', {useSaved: false});
+  $('voxcpm-steps').value = '4';
+  rememberRenderTuning();
+  populateVoices();
+  renderLibrary();
+  saveRenderPreferences();
+  await benchmark();
+}
 function internationalSettings() {
   return {international_backend: $('international-backend').value,
     international_device: nativeMultilingual({engine: 'voxcpm'}) ? $('international-device').value : 'cpu',
@@ -446,7 +479,10 @@ function updateRenderNote() {
       const steps = omniMultilingual(current) ? $('omnivoice-steps').value : $('voxcpm-steps').value;
       note += ` ${steps} bước · ${$('international-device').value === 'cuda' ? 'GPU CUDA' : 'CPU'} · Q8. ${omniMultilingual(current) ? 'Mô hình mới dùng lại' : 'VoxCPM2 dùng lại'} tệp mẫu và ngôn ngữ đã chọn; lượng tử hóa hoặc đổi mô hình có thể thay đổi âm sắc, phát âm. Đo bằng tiếng thực tạo ra, nghe mẫu để so sánh; chưa có cam kết đạt 30×.`;
     }
-    else if (current.engine === 'voxcpm') note += ` ${$('voxcpm-steps').value} bước tạo giọng · ${$('international-precision').value.toUpperCase()}. Ít bước hơn có thể giảm độ tự nhiên; đo và nghe mẫu trước khi tạo bản dài.`;
+    else if (current.engine === 'voxcpm') {
+      note += ` ${$('voxcpm-steps').value} bước tạo giọng · ${$('international-precision').value.toUpperCase()}. Ít bước hơn có thể giảm độ tự nhiên; đo và nghe mẫu trước khi tạo bản dài.`;
+      if (nativeInstallation('voxcpm_native').cuda) note += ' Bộ native CUDA đã cài. Bấm Thử CUDA nhanh · 4 bước để chuyển và đo bằng đúng mẫu giọng này.';
+    }
   } else if ($('render-mode').value === 'fast' && current) {
     note += ` Đang giữ giọng ${current.name} · ${engineName(current)}. Giọng này dùng cơ chế xử lý riêng của mô hình.`;
   }
@@ -456,6 +492,8 @@ function updateRenderNote() {
   $('choose-nano').title = nano ? `Chuyển sang ${nano.name}, áp dụng ưu tiên tốc độ và tạo mẫu đo. Kịch bản đang nhập được giữ nguyên.` : 'Cần chọn tiếng Việt và tải giọng Nano trước khi sử dụng.';
   $('choose-voxcpm-native-cuda').disabled = current?.engine !== 'voxcpm' || current.has_sample === false || !nativeInstallation('voxcpm_native').cuda || submitting;
   $('choose-voxcpm-native-cuda').title = nativeInstallation('voxcpm_native').cuda ? 'Chọn bộ chạy VoxCPM2 native CUDA đã cài; giữ mẫu giọng, ngôn ngữ, số bước và kịch bản. Cần đo mẫu để xác nhận GPU và tốc độ.' : 'Cần bộ VoxCPM2 native có mô hình Q8 và thư viện CUDA. Có card NVIDIA chưa đủ để xác nhận bộ chạy đã sẵn sàng.';
+  $('try-voxcpm-native-cuda-fast').disabled = current?.engine !== 'voxcpm' || !voiceHasReferenceSample(current) || !nativeInstallation('voxcpm_native').cuda || !benchmarkSupported(current) || submitting;
+  $('try-voxcpm-native-cuda-fast').title = 'Chọn VoxCPM2 native CUDA, chế độ Nhanh và 4 bước rồi tạo mẫu đo thật; giữ mẫu giọng, ngôn ngữ và kịch bản. Ít bước hơn có thể giảm chất lượng.';
 }
 
 function applyRenderMode(mode, {useSaved = true, remember = true} = {}) {
@@ -1187,6 +1225,7 @@ $('optimize-speed').addEventListener('click', () => {
 });
 $('choose-nano').addEventListener('click', chooseNanoAndBenchmark);
 $('choose-voxcpm-native-cuda').addEventListener('click', chooseNativeVoxCuda);
+$('try-voxcpm-native-cuda-fast').addEventListener('click', chooseNativeVoxCudaFastAndBenchmark);
 $('nano-parallel').addEventListener('change', rememberRenderTuning);
 $('nano-threads').addEventListener('input', rememberRenderTuning);
 $('nano-steps').addEventListener('change', rememberRenderTuning);

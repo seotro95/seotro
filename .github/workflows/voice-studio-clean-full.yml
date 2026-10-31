@@ -14,6 +14,9 @@ on:
       - 'voice-studio-rieng-portable/app/fast_multilingual.py'
       - 'voice-studio-rieng-portable/app/tests/test_native_paths.py'
       - 'voice-studio-rieng-portable/app/tests/test_native_client_shutdown.py'
+      - 'voice-studio-rieng-portable/app/static/app.js'
+      - 'voice-studio-rieng-portable/app/static/index.html'
+      - 'voice-studio-rieng-portable/app/tests/test_native_voxcpm_ui.py'
 
 permissions:
   contents: write
@@ -67,6 +70,20 @@ jobs:
           }
           python -m unittest discover -s voice-studio-rieng-portable/packaging -p test_one_click_download.py -v
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Verify the explicit fast CUDA action preserves the chosen voice language and script
+        shell: pwsh
+        run: |
+          node --version
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m pip --disable-pip-version-check install pytest==8.4.1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m pytest -q voice-studio-rieng-portable/app/tests/test_native_voxcpm_ui.py 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'clean-ui-tests.log')
+          $uiExit = $LASTEXITCODE
+          if ($uiExit -ne 0) {
+            $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'clean-ui-tests.log') -Tail 60) -join ' | ')
+            Write-Output ('::error title=Fast CUDA UI tests failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $uiExit
+          }
       - name: Fetch the checksum-pinned complete source archive
         shell: python
         run: |
@@ -165,7 +182,7 @@ jobs:
           }
           python -c "import hashlib,pathlib,urllib.request; p=pathlib.Path(r'${{ runner.temp }}/public-reference.wav'); b=urllib.request.urlopen('https://raw.githubusercontent.com/0xShug0/audio.cpp/2597b300f5961999387c84c65f2e8e79c088a571/assets/resources/b.wav',timeout=60).read(); assert hashlib.sha256(b).hexdigest()=='32bf74dfb8342ccc8284f47a9e5fe1f41b458a983a00938ed170f76951ce638f';p.write_bytes(b)"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          & "$root/runtime/python.exe" -s -X utf8 voice-studio-rieng-portable/packaging/smoke_native_voxcpm.py --app-dir voice-studio-rieng-portable/app --native-root "$root/runtime-native" --data-dir "$root/app/.data" --reference "${{ runner.temp }}/public-reference.wav" --output "${{ runner.temp }}/CLEAN-NATIVE-WINDOWS-QA.json" --steps 8 --threads 4 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'clean-native.log')
+          & "$root/runtime/python.exe" -s -X utf8 voice-studio-rieng-portable/packaging/smoke_native_voxcpm.py --app-dir voice-studio-rieng-portable/app --native-root "$root/runtime-native" --data-dir "$root/app/.data" --reference "${{ runner.temp }}/public-reference.wav" --output "${{ runner.temp }}/CLEAN-NATIVE-WINDOWS-QA.json" --steps 4 --threads 4 2>&1 | Tee-Object -FilePath (Join-Path $env:RUNNER_TEMP 'clean-native.log')
           $nativeExit = $LASTEXITCODE
           if ($nativeExit -ne 0) {
             $detail = ((Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'clean-native.log') -Tail 45) -join ' | ')
@@ -196,7 +213,7 @@ jobs:
         run: |
           $assets = @(Get-ChildItem -LiteralPath "${{ runner.temp }}/clean-downloads" -File | ForEach-Object { $_.FullName })
           $notes = @'
-          Complete Voice Studio 1.12.1, package revision clean-2. Audited cleanup removes the redundant Python installer, Python manuals and test suites, Gradio JavaScript/CSS source maps, stale benchmarks and outdated guides. A targeted Windows native-model path fix supports Unicode installation folders without copying model weights. The exact source changes are recorded; all encrypted 19-voice data, public Nano/Turbo models, native VoxCPM2 Q8 model, CPU/CUDA12 sm61 libraries, Python packages and licenses are retained. Includes a current Vietnamese guide, actual installed-package inventory, exact removal report and new full SHA256 manifest.
+          Complete Voice Studio 1.12.1, package revision clean-3. Adds an explicit "Try fast CUDA - 4 steps" action that resets stale 10-step settings, keeps the selected reference voice/language/script and starts a real benchmark job. Four steps can affect output quality; the action does not claim verified GPU operation before a result. Includes the Unicode native-model path fix and graceful native-worker cleanup. Audited cleanup removes 3313 redundant installer/manual/test/source-map/stale-report files. All encrypted 19-voice data, public Nano/Turbo models, native VoxCPM2 Q8 model, CPU/CUDA12 sm61 libraries, Python packages and licenses are retained. Includes the exact source/removal report, actual installed-package inventory and regenerated SHA256 manifest.
 
           Actual Nano/Turbo CPU speech and native VoxCPM2 French/Japanese speech plus current UI/API were tested with the cleaned bundled Python on Windows. Download TAI_TOOL_SACH_DAY_DU.zip, extract and run the CMD to automatically obtain the complete large ZIP; that small ZIP is a downloader, not the embedded application. It is attached only after a full Windows download and checksum verification. Keep the previous private-voice password. GPU inference on GTX1060, private-voice unlocking, voice identity, a complete-hour render and 30x throughput are not established. Cleanup does not change the speech model or claim an inference speed increase.
           '@
@@ -239,7 +256,7 @@ jobs:
               raise ValueError('Published clean ZIP download differs from the tested archive')
           with zipfile.ZipFile(archive) as package:
               info = json.loads(package.read(os.environ['PORTABLE_NAME'] + '/BUILD_INFO.json'))
-              if info.get('package_revision') != 'clean-2' or not info.get('international_model_bundled'):
+              if info.get('package_revision') != 'clean-3' or not info.get('international_model_bundled'):
                   raise ValueError('The downloader retrieved an incomplete or different package')
           helpers = temp / 'clean-helper'
           report = {'platform': 'win32', 'single_cmd_download_passed': True, 'second_run_reused_complete_zip': True,
@@ -253,6 +270,8 @@ jobs:
                    'Cần Internet và khoảng 20 GB trống để tải, ghép ZIP đầy đủ rồi giải nén.\n'
                    'Sau đó giải nén ZIP lớn, mở CAI_19_GIONG.bat bằng mật khẩu cũ nếu cần, rồi chạy MO_TOOL.bat.\n'
                    'Đã bỏ các tệp thừa; giữ model, bộ 19 giọng mã hóa và thư viện cần để chạy.\n'
+                   'Để thử tốc độ giọng quốc tế: chọn giọng/ngôn ngữ rồi bấm "Thử CUDA nhanh · 4 bước".\n'
+                   'Nút này tạo mẫu đo thật; kiểm tra kết quả dùng CUDA, nghe thử chất lượng và sao chép kết quả đo.\n'
                    'Đã chạy tạo tiếng Nano/Turbo và VoxCPM2 native CPU trên Windows sau khi dọn.\n'
                    'Hiệu năng GTX1060 và mục tiêu tạo 1 giờ voice trong 2 phút chưa được xác minh.\n')
           target = helpers / 'TAI_TOOL_SACH_DAY_DU.zip'
