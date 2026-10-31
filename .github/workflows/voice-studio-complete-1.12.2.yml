@@ -46,7 +46,7 @@ jobs:
         run: |
           python -m pip --disable-pip-version-check install pytest==8.4.1
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          python -m pytest -q voice-studio-rieng-portable/packaging/test_build_complete_bundle.py
+          python -m pytest -q voice-studio-rieng-portable/packaging/test_build_complete_bundle.py voice-studio-rieng-portable/app/tests/test_native_reference_capacity.py
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           foreach ($pattern in @('test_prepare_complete_models.py','test_one_click_download.py')) {
             python -m unittest discover -s voice-studio-rieng-portable/packaging -p $pattern -v
@@ -215,7 +215,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           $notes = @'
-          Complete Windows Voice Studio 1.12.2 includes the bundled Nano/Turbo runtime, native VoxCPM2 Q8 CPU/CUDA12 sm61, OmniVoice Q8 plus its local ASR model, both Qwen 0.6B model variants and an isolated Qwen CPU FP32 runtime. Fixes the Windows locale-dependent corruption of Korean/Chinese UTF-8 and the missing Omni reference-transcription dependencies. No decrypted private recordings or passwords are published.
+          Complete Windows Voice Studio 1.12.2 includes the bundled Nano/Turbo runtime, native VoxCPM2 Q8 CPU/CUDA12 sm61, OmniVoice Q8 plus its local ASR model, both Qwen 0.6B model variants and an isolated Qwen CPU FP32 runtime. Fixes Windows locale-dependent corruption of Korean/Chinese UTF-8, missing Omni reference-transcription dependencies, and native reference-encoder capacity for full samples up to thirty seconds. No decrypted private recordings or passwords are published.
 
           Actual Windows CPU checks cover public Nano/Turbo WAV/MP3/SRT/TXT exports, all nine Qwen model presets in the input pack plus representative jobs in the combined application, Base cloning, Omni with automatic local reference transcription, and native VoxCPM2 Korean/Chinese/Spanish/Japanese synthesis. Final reports are included inside the full ZIP. Qwen uses CPU FP32; native CUDA libraries are installed prerequisites and GPU operation is confirmed only by an actual local benchmark. GTX1060 inference, private voice identity, a full-hour render and 30x throughput are not established here.
 

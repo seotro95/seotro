@@ -24,6 +24,22 @@ from native_locale import native_character_locale, normalize_native_text
 
 _REFERENCE_CACHE_MAX_ENTRIES = 8
 _REFERENCE_CACHE_MAX_BYTES = 16 * 1024**2
+_VOXCPM2_ENCODER_DEFAULT = 240000
+_VOXCPM2_ENCODER_RATE = 16000
+_VOXCPM2_ENCODER_PATCH = 2560
+_VOXCPM2_ENCODER_MAXIMUM = 481280
+
+
+def _voxcpm_reference_capacity(sample_count, sample_rate):
+    """Reserve whole AudioVAE patches after the native encoder's 16 kHz resample."""
+    if (type(sample_count) is not int or type(sample_rate) is not int
+            or not 8000 <= sample_rate <= 192000 or not 0 < sample_count <= 30 * sample_rate):
+        raise ValueError('Mẫu giọng native phải là âm thanh hợp lệ dài tối đa 30 giây.')
+    resampled = (sample_count * _VOXCPM2_ENCODER_RATE + sample_rate - 1) // sample_rate
+    needed = ((resampled + _VOXCPM2_ENCODER_PATCH - 1) // _VOXCPM2_ENCODER_PATCH) * _VOXCPM2_ENCODER_PATCH
+    if needed > _VOXCPM2_ENCODER_MAXIMUM:
+        raise ValueError('Mẫu giọng vượt sức chứa bộ mã hóa VoxCPM2; không cắt ngắn mẫu.')
+    return max(_VOXCPM2_ENCODER_DEFAULT, needed)
 
 
 def _reference_key(path, stat):
@@ -110,23 +126,7 @@ class NativeSession:
             native_filename = self._model_path_stack.enter_context(native_model_path(model))
             self._check(self.lib.audiocpp_model_load(self.registry, native_filename,
                                                     C.byref(config), None, C.byref(self.model)))
-            options = self.lib.audiocpp_options_create()
-            if not options:
-                raise MemoryError('Không cấp phát được tùy chọn native.')
-            try:
-                # Keep graphs and conservative GGUF weight types as authored.
-                # Runtime tokenizer INT8 has known audible quality failures.
-                session_options = ({'voxcpm2.mem_saver': 'false',
-                                    'voxcpm2.prompt_cache_slots': '4',
-                                    'voxcpm2.perf_mode': native_performance} if family == 'voxcpm2'
-                                   else {'omnivoice.mem_saver': 'false'})
-                for name, value in session_options.items():
-                    self._check(self.lib.audiocpp_options_set(options, name.encode('ascii'), value.encode('ascii')))
-                backend = BackendConfig(device.encode('ascii'), 0, threads)
-                self._check(self.lib.audiocpp_session_create(self.model, b'tts', b'offline',
-                                                            C.byref(backend), options, C.byref(self.session)))
-            finally:
-                self.lib.audiocpp_options_free(options)
+            self._create_session(_VOXCPM2_ENCODER_DEFAULT if family == 'voxcpm2' else None)
             name = 'voxcpm_native' if family == 'voxcpm2' else 'omnivoice'
             self.info = {'international_backend': name, 'backend': name,
                          'device': device, 'precision': 'q8_0', 'workers': 1,
@@ -136,6 +136,7 @@ class NativeSession:
             if family == 'voxcpm2':
                 self.info['model_family'] = family
                 self.info['native_performance'] = native_performance
+                self.info['voxcpm_reference_encoder_capacity'] = self._encoder_sample_capacity
             build_marker = path.parent/'native-build.json'
             if not build_marker.is_file():
                 build_marker = path.parent.parent/'native-build.json'
@@ -152,6 +153,54 @@ class NativeSession:
         if status:
             message = self.lib.audiocpp_last_error().decode('utf-8', 'replace')
             raise RuntimeError('audio.cpp '+self.device.upper()+': '+message)
+
+    def _create_session(self, encoder_capacity=None):
+        options = self.lib.audiocpp_options_create()
+        if not options:
+            raise MemoryError('Không cấp phát được tùy chọn native.')
+        candidate = C.c_void_p()
+        try:
+            try:
+                # Keep graphs and conservative GGUF weights as authored. Growing
+                # the reference encoder changes capacity, never the audio itself.
+                session_options = ({'voxcpm2.mem_saver': 'false',
+                                    'voxcpm2.prompt_cache_slots': '4',
+                                    'voxcpm2.perf_mode': self.native_performance}
+                                   if self.family == 'voxcpm2' else {'omnivoice.mem_saver': 'false'})
+                if self.family == 'voxcpm2' and encoder_capacity != _VOXCPM2_ENCODER_DEFAULT:
+                    session_options['voxcpm2.audiovae_encoder_sample_capacity'] = str(encoder_capacity)
+                for name, value in session_options.items():
+                    self._check(self.lib.audiocpp_options_set(options, name.encode('ascii'), value.encode('ascii')))
+                backend = BackendConfig(self.device.encode('ascii'), 0, self.threads)
+                self._check(self.lib.audiocpp_session_create(self.model, b'tts', b'offline',
+                                                            C.byref(backend), options, C.byref(candidate)))
+                if not candidate:
+                    raise RuntimeError('Bộ native không tạo được phiên đọc hợp lệ.')
+            finally:
+                self.lib.audiocpp_options_free(options)
+        except BaseException:
+            if candidate:
+                self.lib.audiocpp_session_free(candidate)
+            raise
+        self.session = candidate
+        if self.family == 'voxcpm2':
+            self._encoder_sample_capacity = encoder_capacity
+
+    def _ensure_reference_capacity(self, sample_count, sample_rate):
+        if getattr(self, 'family', 'omnivoice') != 'voxcpm2':
+            return
+        needed = _voxcpm_reference_capacity(sample_count, sample_rate)
+        current = getattr(self, '_encoder_sample_capacity', _VOXCPM2_ENCODER_DEFAULT)
+        if self.session and needed <= current:
+            return
+        previous, self.session = self.session, C.c_void_p()
+        if previous:
+            # Free the old session before allocating a larger one: do not hold
+            # two sets of model weights/graphs on a 6 GB GPU. The verified model,
+            # registry, DLL, path alias and native locale remain alive.
+            self.lib.audiocpp_session_free(previous)
+        self._create_session(max(current, needed))
+        self.info['voxcpm_reference_encoder_capacity'] = self._encoder_sample_capacity
 
     def _reference_audio(self, reference):
         """Retain exact validated PCM between sentences, never encoded voice data."""
@@ -217,6 +266,7 @@ class NativeSession:
         import numpy as np
         import soundfile as sf
         samples, rate = self._reference_audio(reference)
+        self._ensure_reference_capacity(len(samples), rate)
         request, result = self.lib.audiocpp_request_create(), C.c_void_p()
         if not request:
             raise MemoryError('Không cấp phát được tác vụ native.')

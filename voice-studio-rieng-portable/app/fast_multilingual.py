@@ -275,7 +275,7 @@ class _BackendClient:
                     or value.get('native_performance') != getattr(self, 'native_performance', 'off')))):
             raise ValueError('Bộ đọc native không xác nhận đúng thiết bị đã chọn.')
         # Permit only public runtime metadata in the visible speed report.
-        for name in ('backend', 'device', 'precision', 'native_runtime_version', 'native_source_revision', 'workers', 'threads', 'omnivoice_steps', 'voxcpm_steps', 'model_language', 'model_family', 'native_performance', 'native_text_handling'):
+        for name in ('backend', 'device', 'precision', 'native_runtime_version', 'native_source_revision', 'workers', 'threads', 'omnivoice_steps', 'voxcpm_steps', 'model_language', 'model_family', 'native_performance', 'native_text_handling', 'voxcpm_reference_encoder_capacity'):
             if name in value:
                 self.execution[name] = value[name]
 

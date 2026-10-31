@@ -317,6 +317,33 @@ def main(argv=None):
                              'valid_pcm': True, 'audio_seconds': len(audio) / rate,
                              'processing_seconds': round(elapsed, 3), 'audio_sha256': digest(output), 'execution': execution})
             assert_isolated_imports()
+        phase = 'VoxCPM2 full thirty-second public reference'
+        public_samples, public_rate = sf.read(reference, dtype='float32')
+        require(public_samples.ndim == 1, 'Expected the pinned mono public reference')
+        long_samples = np.tile(public_samples, 3)[:30 * public_rate]
+        require(len(long_samples) == 30 * public_rate, 'The public reference fixture is not thirty seconds')
+        long_reference = qa_audio / 'public-reference-thirty-seconds.wav'
+        sf.write(long_reference, long_samples, public_rate, subtype='PCM_16')
+        long_reference_sha = digest(long_reference)
+        synthesize = fast_multilingual.create_synthesizer(long_reference, data, threads=4, steps=4,
+                                                         device='cpu', language='zh', family='voxcpm2')
+        output = qa_audio / 'voxcpm-thirty-second-reference.wav'
+        started = time.perf_counter()
+        synthesize('你好。', output)
+        elapsed = time.perf_counter() - started
+        audio, rate = pcm(output, np, sf)
+        execution = fast_multilingual.execution_info()
+        check_native_execution(execution, 'voxcpm2')
+        require(execution.get('voxcpm_reference_encoder_capacity') == 481280,
+                'The native encoder did not reserve the aligned full thirty-second reference capacity')
+        require(digest(long_reference) == long_reference_sha and sf.info(long_reference).duration == 30,
+                'The full reference audio was changed or shortened')
+        requests.append({'engine': 'voxcpm_native', 'language': 'zh', 'text': '你好。', 'steps': 4,
+                         'reference_seconds': 30, 'reference_audio_preserved': True,
+                         'reference_created_from_pinned_public_audio': True,
+                         'valid_pcm': True, 'audio_seconds': len(audio) / rate,
+                         'processing_seconds': round(elapsed, 3), 'audio_sha256': digest(output), 'execution': execution})
+        assert_isolated_imports()
         worker.close_international_backends()
         report = {'format': 'voice-studio-complete-windows-smoke-v1', 'platform': sys.platform,
                   'product_version': '1.12.2', 'source_commit': os.environ.get('GITHUB_SHA'), **package,
@@ -331,6 +358,7 @@ def main(argv=None):
                   'qwen_base_clone_inference_repeated_here': False,
                   'omnivoice_blank_transcript_local_asr_and_cpu_synthesis_passed': True,
                   'voxcpm2_four_language_stdio_child_cpu_synthesis_passed': True,
+                  'voxcpm2_thirty_second_public_reference_preserved_and_synthesized': True,
                   'native_text_handling': NATIVE_TEXT_POLICY, 'native_main_caller_lc_ctype_tested': native_caller_locale,
                   'optional_model_libraries_isolated_from_main': True, 'requests': requests,
                   'gpu_inference_tested': False, 'gtx1060_tested': False, 'full_hour_generated': False,
