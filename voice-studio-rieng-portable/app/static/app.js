@@ -104,7 +104,7 @@ function savedRenderTuning(engine, mode) {
 function rememberRenderTuning() {
   const voice = voices.find((item) => item.id === $('voice').value);
   if (renderEngines.has(voice?.engine)) {
-    if (nativeVoxCpu(voice)) {
+    if (nativeCpu(voice)) {
       const resources = boundedRenderResources(voice, {nano_parallel: Number($('nano-parallel').value), nano_threads: Number($('nano-threads').value)});
       $('nano-parallel').value = String(resources.nano_parallel);
       $('nano-threads').value = String(resources.nano_threads);
@@ -224,6 +224,9 @@ function engineName(voice) {
 function nativeMultilingual(voice) { return voice?.engine === 'voxcpm' && ['voxcpm_native', 'omnivoice'].includes($('international-backend').value); }
 function omniMultilingual(voice) { return voice?.engine === 'voxcpm' && $('international-backend').value === 'omnivoice'; }
 function nativeVoxCpu(voice) { return voice?.engine === 'voxcpm' && $('international-backend').value === 'voxcpm_native' && $('international-device').value === 'cpu'; }
+function nativeOmniCpu(voice) { return omniMultilingual(voice) && $('international-device').value === 'cpu'; }
+function nativeCpu(voice) { return nativeVoxCpu(voice) || nativeOmniCpu(voice); }
+function nativeCpuLimits(voice) { return nativeVoxCpu(voice) ? nativeVoxCpuLimits() : config?.native_omni_cpu_limits_by_resource?.[$('resource-profile').value] || {}; }
 function nativeVoxCpuLimits() {
   return config?.native_voxcpm_cpu_limits_by_resource?.[$('resource-profile').value] || {};
 }
@@ -232,17 +235,17 @@ function boundedInteger(value, maximum, fallback = 1) {
   return Number.isInteger(number) && number >= 1 ? Math.min(number, maximum) : fallback;
 }
 function parallelLimit(voice) {
-  if (nativeVoxCpu(voice)) {
-    const limits = nativeVoxCpuLimits();
+  if (nativeCpu(voice)) {
+    const limits = nativeCpuLimits(voice);
     return Math.min(boundedInteger(limits.max_workers, 8), boundedInteger(limits.cpu_budget, 64, 64));
   }
   return nativeMultilingual(voice) ? 1 : voice?.engine === 'voxcpm' ? 8 : 32;
 }
-function threadLimit(voice) { return nativeVoxCpu(voice) ? boundedInteger(nativeVoxCpuLimits().max_threads, 8, 8) : 8; }
+function threadLimit(voice) { return nativeCpu(voice) ? boundedInteger(nativeCpuLimits(voice).max_threads, 8, 8) : 8; }
 function boundedRenderResources(voice, requested) {
   const workers = boundedInteger(requested.nano_parallel, parallelLimit(voice));
   let threads = boundedInteger(requested.nano_threads, threadLimit(voice));
-  if (nativeVoxCpu(voice)) threads = Math.min(threads, Math.max(1, Math.floor(boundedInteger(nativeVoxCpuLimits().cpu_budget, 64, 64) / workers)));
+  if (nativeCpu(voice)) threads = Math.min(threads, Math.max(1, Math.floor(boundedInteger(nativeCpuLimits(voice).cpu_budget, 64, 64) / workers)));
   return {nano_parallel: workers, nano_threads: threads};
 }
 function selectedEngineName(voice) { return engineName(nativeMultilingual(voice) ? {...voice, international_backend: $('international-backend').value} : voice); }
@@ -252,6 +255,7 @@ function nativeInstallation(backend = $('international-backend').value) {
 }
 
 function initialInternationalBackend() {
+  if (config?.distribution_profile === 'lean-19-cpu') return 'omnivoice';
   // An explicit legacy choice remains a choice, including VoxCPM on CPU.
   if (internationalBackends.has(renderPreferences.international_backend)) return renderPreferences.international_backend;
   return config?.native_voxcpm_ready ? 'voxcpm_native' : 'voxcpm';
@@ -274,6 +278,26 @@ function chooseNativeVoxCuda() {
   renderLibrary();
   saveRenderPreferences();
   notify(`Đã giữ mẫu giọng ${voice.name}, ngôn ngữ và kịch bản; chọn VoxCPM2 native Q8 trên CUDA. Bấm Đo giọng đang chọn để xác nhận GPU hoạt động và tốc độ thực tế. Nếu lỗi, lựa chọn CUDA được giữ nguyên để bạn kiểm tra.`);
+}
+
+function chooseNativeVoxCpu() {
+  const voice = voices.find((item) => item.id === $('voice').value);
+  if (submitting || voice?.engine !== 'voxcpm' || !voiceHasReferenceSample(voice)
+      || voice.ready_voxcpm_native !== true || !nativeInstallation('voxcpm_native').cpu) {
+    notify('Cần mẫu giọng quốc tế và mô hình VoxCPM2 Q8 cùng bộ chạy CPU. Gói gọn chỉ có Turbo/Nano chưa đủ; giữ nguyên giọng và cấu hình hiện tại.', true);
+    return false;
+  }
+  const steps = $('voxcpm-steps').value;
+  rememberRenderTuning();
+  $('international-backend').value = 'voxcpm_native';
+  $('international-device').value = 'cpu';
+  $('international-precision').value = 'fp32'; // Native precision belongs to the verified Q8 model.
+  applyRenderMode($('render-mode').value);
+  $('voxcpm-steps').value = steps;
+  rememberRenderTuning();
+  populateVoices(); renderLibrary(); saveRenderPreferences();
+  notify('Đã chọn VoxCPM2 native Q8 CPU, giữ mẫu giọng '+voice.name+', ngôn ngữ, số bước và kịch bản. Bấm Đo giọng đang chọn để so sánh; lượng tử hóa có thể ảnh hưởng âm sắc.');
+  return true;
 }
 
 function voiceHasReferenceSample(voice) {
@@ -349,6 +373,10 @@ function renderingPresets(voice) {
   if (nativeMultilingual(voice)) {
     if (nativeVoxCpu(voice)) {
       const presets = config?.native_voxcpm_cpu_rendering_presets_by_resource?.[$('resource-profile').value];
+      if (presets) return presets;
+    }
+    if (nativeOmniCpu(voice)) {
+      const presets = config?.native_omni_cpu_rendering_presets_by_resource?.[$('resource-profile').value];
       if (presets) return presets;
     }
     const threads = $('resource-profile').value === 'light' ? 1 : Math.max(1, Math.min(8, Math.floor(Number(config?.cpu_cores || 4) / ($('resource-profile').value === 'smooth' ? 2 : 1))));
@@ -513,6 +541,7 @@ function updateRenderNote() {
   const nano = fastNanoVoice();
   $('choose-nano').disabled = !nano || submitting;
   $('choose-nano').title = nano ? `Chuyển sang ${nano.name}, áp dụng ưu tiên tốc độ và tạo mẫu đo. Kịch bản đang nhập được giữ nguyên.` : 'Cần chọn tiếng Việt và tải giọng Nano trước khi sử dụng.';
+  $('choose-voxcpm-native-cpu').disabled = current?.engine !== 'voxcpm' || !voiceHasReferenceSample(current) || current.ready_voxcpm_native !== true || !nativeInstallation('voxcpm_native').cpu || submitting;
   $('choose-voxcpm-native-cuda').disabled = current?.engine !== 'voxcpm' || current.has_sample === false || !nativeInstallation('voxcpm_native').cuda || submitting;
   $('choose-voxcpm-native-cuda').title = nativeInstallation('voxcpm_native').cuda ? 'Chọn bộ chạy VoxCPM2 native CUDA đã cài; giữ mẫu giọng, ngôn ngữ, số bước và kịch bản. Cần đo mẫu để xác nhận GPU và tốc độ.' : 'Cần bộ VoxCPM2 native có mô hình Q8 và thư viện CUDA. Có card NVIDIA chưa đủ để xác nhận bộ chạy đã sẵn sàng.';
   const selected = fastNativeCudaSelection();
@@ -655,6 +684,7 @@ function updateVoice() {
   $('voice-status-title').textContent = !voice ? 'Chưa có giọng phù hợp' : ready ? `${selectedEngineName(voice)} · Sẵn sàng sử dụng` : `${selectedEngineName(voice)} · Cần chuẩn bị bộ đọc`;
   let detail = !voice ? 'Chọn ngôn ngữ khác hoặc thêm mẫu giọng cá nhân được hỗ trợ.' : ready ? (voice.description || 'Giọng đã có trên máy.') : voiceSetupMessage(voice);
   if (ready && ['reference', 'cloned'].includes(voice?.category)) {
+    if (voice.variant === 'turbo_vi_en') detail += ' Bản này đọc tiếng Việt hoặc tiếng Anh; muốn đọc tiếng gốc, chọn ngôn ngữ gốc và tên giọng không có hậu tố Turbo Việt/Anh. Cần nghe thử để kiểm tra độ giống giọng.';
     if (voice.engine === 'vieneu') detail += ' Mẫu giọng dùng Turbo Việt–Anh; dữ liệu giọng được lưu lại sau lần mã hóa đầu để dùng cho các lần tạo tiếp theo.';
     if (voice.engine === 'voxcpm') detail += nativeMultilingual(voice)
       ? ` ${omniMultilingual(voice) ? 'OmniVoice' : 'VoxCPM2 native Q8'} dùng tệp mẫu giọng và ngôn ngữ đã chọn. Lượng tử hóa hoặc đổi mô hình có thể thay đổi âm sắc, phát âm; nghe mẫu và đo tốc độ trước khi tạo bản dài.${$('international-device').value === 'cuda' ? ' Bộ chạy CUDA đã cài; tạo mẫu để xác nhận GPU hoạt động trên máy này.' : ''}`
@@ -1136,6 +1166,7 @@ async function refreshHistory() {
 
 function renderModelStatus() {
   const target = $('model-status'); target.replaceChildren();
+  if (config.distribution_profile === 'compact-19') target.append(node('p', 'Gói gọn · Có sẵn Nano/Turbo. Bộ 19 mẫu riêng được giữ nguyên; các mẫu quốc tế cần bộ đọc tương ứng. Không cần tải lại toàn bộ gói 11 GB.'));
   target.append(node('p', `${config.hardware} · ${config.cpu_cores} luồng CPU · ${config.available_ram_gb ?? '?'} GB RAM trống`));
   target.append(node('p', `FFmpeg: ${config.ffmpeg ? 'Đã cài' : 'Chưa tìm thấy · chạy lại CAI_DAT.bat'}`));
   for (const [key, ready] of [['vieneu_nano', config.nano_ready], ...Object.entries(config.models || {})]) target.append(node('p', `${ready ? '●' : '○'} ${key}: ${ready ? 'Đã chuẩn bị' : 'Cần chuẩn bị'}`));
@@ -1154,11 +1185,16 @@ async function refreshVoices() {
   const initial = !renderSettingsInitialized;
   populateResourceProfiles();
   if (initial) {
-    $('resource-profile').value = resourceProfiles.has(renderPreferences.resource_profile) ? renderPreferences.resource_profile : 'smooth';
+    $('resource-profile').value = resourceProfiles.has(renderPreferences.resource_profile) ? renderPreferences.resource_profile
+      : config.default_resource_profile === 'maximum' ? 'maximum' : 'smooth';
     $('cpu-execution').value = cpuExecutions.has(renderPreferences.cpu_execution) ? renderPreferences.cpu_execution : 'auto';
     $('international-precision').value = renderPreferences.international_precision === 'int8' ? 'int8' : 'fp32';
     $('international-backend').value = initialInternationalBackend();
-    $('international-device').value = renderPreferences.international_device === 'cuda' ? 'cuda' : 'cpu';
+    $('international-device').value = config.distribution_profile === 'lean-19-cpu' ? 'cpu' : renderPreferences.international_device === 'cuda' ? 'cuda' : 'cpu';
+    if (config.distribution_profile === 'lean-19-cpu') {
+      for (const option of $('international-backend').options) option.disabled = option.value !== 'omnivoice';
+      for (const option of $('international-device').options) option.disabled = option.value !== 'cpu';
+    }
     updateResourceNote();
   }
   if (initial && renderModes.has(renderPreferences.mode)) $('render-mode').value = renderPreferences.mode;
@@ -1174,7 +1210,7 @@ async function refreshVoices() {
     renderSettingsInitialized = true;
   }
   renderLibrary(); renderModelStatus();
-  $('version').textContent = config.version ? `· ${config.version}` : '';
+  $('version').textContent = config.version ? `· ${config.version}${config.distribution_profile === 'compact-19' ? ' · Gọn 19 · Turbo CPU' : ''}` : '';
   setConnection(true);
 }
 
@@ -1252,6 +1288,7 @@ $('optimize-speed').addEventListener('click', () => {
   notify(`Đã giữ mẫu giọng ${voice?.name || 'đang chọn'} và áp dụng cấu hình ${selectedEngineName(voice)} ưu tiên tốc độ. Bấm Đo giọng đang chọn để kiểm tra trước khi tạo bản dài.`);
 });
 $('choose-nano').addEventListener('click', chooseNanoAndBenchmark);
+$('choose-voxcpm-native-cpu').addEventListener('click', chooseNativeVoxCpu);
 $('choose-voxcpm-native-cuda').addEventListener('click', chooseNativeVoxCuda);
 $('try-voxcpm-native-cuda-fast').addEventListener('click', chooseNativeVoxCudaFastAndBenchmark);
 $('nano-parallel').addEventListener('change', rememberRenderTuning);

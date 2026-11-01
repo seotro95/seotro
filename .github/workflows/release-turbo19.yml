@@ -1,0 +1,46 @@
+name: Publish verified Turbo 19-voice update and complete package
+on:
+  push:
+    branches: [codex/release-turbo19]
+    paths:
+      - '.github/workflows/release-turbo19.yml'
+      - 'release-turbo19/**'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: release-turbo191
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check whether all existing release assets are already verified
+        id: existing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if python release-turbo19/verify_remote.py; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Reconstruct exact SHA256-verified package and release parts
+        if: steps.existing.outputs.ready != 'true'
+        run: python release-turbo19/reconstruct.py
+      - name: Upload verified release assets
+        if: steps.existing.outputs.ready != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload voice-studio-1.12.3-turbo19 "$RUNNER_TEMP"/turbo19-release-assets/* --repo seotro95/seotro --clobber
+      - name: Verify server-side sizes and SHA256 digests
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python release-turbo19/verify_remote.py
+      - name: Publish complete release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release edit voice-studio-1.12.3-turbo19 --repo seotro95/seotro --draft=false --latest=false --target "$GITHUB_SHA"

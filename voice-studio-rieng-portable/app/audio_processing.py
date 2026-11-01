@@ -64,3 +64,23 @@ def run_ffmpeg(command, work, duration, start, end, phase, timeout=21600, cwd=No
     update(end)
 
 
+
+
+def pcm_with_headroom(samples, gain=1.0, ceiling=0.95):
+    """Lower uniform gain before PCM encoding; preserve waveform shape and timing.
+
+    Hard clipping flattens peaks and adds harmonics. A single attenuation factor
+    keeps relative samples intact and never amplifies an already quiet signal.
+    This prevents digital clipping, not model pronunciation errors or source noise.
+    """
+    import math
+    import numpy as np
+    if not math.isfinite(gain) or gain < 0 or not 0 < ceiling < 1:
+        raise ValueError('Thiết lập biên độ âm thanh không hợp lệ.')
+    audio = np.asarray(samples, dtype=np.float32) * gain
+    if audio.ndim not in {1, 2} or not audio.size or not np.isfinite(audio).all():
+        raise ValueError('Âm thanh rỗng hoặc có giá trị không hợp lệ.')
+    peak = float(np.max(np.abs(audio)))
+    if peak > ceiling:
+        audio = audio * (ceiling / peak)
+    return audio

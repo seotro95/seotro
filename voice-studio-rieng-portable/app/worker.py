@@ -177,10 +177,11 @@ def normalize_audio(raw, temporary, tempo, gain, backend='ffmpeg', cancel_path=N
             samples = soxr.resample(samples, rate, 24000)
         if abs(tempo-1)>=1e-6:
             samples=wsola_samples(samples,tempo,cancel_path)
-        samples = np.clip(samples * gain, -0.95, 0.95)
+        from audio_processing import pcm_with_headroom
+        samples = pcm_with_headroom(samples, gain)
         sf.write(str(temporary), samples, 24000, subtype='PCM_16')
     else:
-        subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(raw), '-vn', '-ac', '1', '-ar', '24000', '-af', f'{atempo_filter(tempo)},volume={gain},alimiter=limit=0.95', '-codec:a', 'pcm_s16le', '-y', str(temporary)], check=True, timeout=120)
+        subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(raw), '-vn', '-ac', '1', '-ar', '24000', '-af', f'{atempo_filter(tempo)},volume={gain},alimiter=limit=0.95:level=false', '-codec:a', 'pcm_s16le', '-y', str(temporary)], check=True, timeout=120)
 
 
 _nano_pool = None
@@ -495,7 +496,7 @@ def render(job, synthesize=None):
         raise ValueError('Không có nội dung đọc sau khi xử lý ký hiệu nhấn/nghỉ.')
     cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
     parallel_workers=min(8 if job.get('engine')=='voxcpm' else 32,max(1,int(job.get('nano_parallel',1)))) if job.get('engine') in {'vieneu_nano','vieneu','voxcpm'} and synthesize is None else 1
-    native_cpu_parallel=(job.get('engine')=='voxcpm' and job.get('international_backend')=='voxcpm_native'
+    native_cpu_parallel=(uses_native_multilingual(job)
                          and job.get('international_device','cpu')=='cpu')
     if uses_native_multilingual(job) and not native_cpu_parallel:
         # One resident native session reuses weights and reference tokens.

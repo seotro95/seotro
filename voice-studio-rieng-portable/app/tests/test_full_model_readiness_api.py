@@ -24,7 +24,7 @@ def test_all_nine_qwen_presets_remain_visible_and_use_complete_backend_readiness
 
     monkeypatch.setattr(qwen_backend, 'is_ready', ready)
     config = client.get('/api/config').json()
-    assert config['version'] == '1.12.2'
+    assert config['version'] == '1.12.3'
     assert config['models']['qwen'] is custom_voice_ready
     assert config['models']['qwen_clone'] is False
     rows = [v for v in client.get('/api/voices').json()['voices'] if v['engine'] == 'qwen']

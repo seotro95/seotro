@@ -439,7 +439,7 @@ def test_full_1_12_2_html_requests_new_javascript_cache_identity():
 
     parser = Scripts()
     parser.feed(SCRIPT.with_name('index.html').read_text(encoding='utf-8'))
-    assert parser.sources == ['/static/app.js?v=1.12.2']
+    assert parser.sources == ['/static/app.js?v=1.12.3-turbo19']
 
 
 def test_omni_readiness_and_setup_message_explain_missing_asr_without_blocking_supplied_text():
@@ -588,4 +588,37 @@ $('international-backend').value='voxcpm';
 updateRenderNote();
 assert.equal($('try-voxcpm-native-cuda-fast').textContent,'Thử VoxCPM2 CUDA · 4 bước');
 assert.equal($('try-voxcpm-native-cuda-fast').disabled,false);
+''')
+
+
+def test_cpu_q8_action_keeps_all_seven_original_languages_voice_steps_and_text():
+    run_javascript(r'''
+config={native_voxcpm_ready:true,native_voxcpm_cpu_available:true,cpu_cores:8};
+rememberRenderTuning=()=>{};populateVoices=()=>{};renderLibrary=()=>{};saveRenderPreferences=()=>{};
+applyRenderMode=()=>{$('voxcpm-steps').value='4';};
+for(const language of ['en-US','ko','ru','ja','fr','es','th']) {
+ voices=[{id:'my-private-reference',name:'My reference',engine:'voxcpm',has_sample:true,ready_voxcpm_native:true}];
+ $('voice').value='my-private-reference';$('language').value=language;$('script').value='Original script';
+ $('voxcpm-steps').value='10';$('render-mode').value='quality';$('international-backend').value='voxcpm';
+ assert.equal(chooseNativeVoxCpu(),true);
+ assert.equal($('international-backend').value,'voxcpm_native');
+ assert.equal($('international-device').value,'cpu');
+ assert.equal($('voxcpm-steps').value,'10');
+ assert.equal($('voice').value,'my-private-reference');
+ assert.equal($('language').value,language);assert.equal($('script').value,'Original script');
+}
+''')
+
+
+def test_cpu_q8_action_leaves_incomplete_installations_unchanged():
+    run_javascript(r'''
+config={native_voxcpm_ready:true,native_voxcpm_cpu_available:false};
+voices=[{id:'my-reference',engine:'voxcpm',has_sample:true,ready_voxcpm_native:true}];
+$('voice').value='my-reference';$('international-backend').value='voxcpm';$('international-device').value='cpu';
+assert.equal(chooseNativeVoxCpu(),false);
+assert.equal($('international-backend').value,'voxcpm');
+config.native_voxcpm_cpu_available=true;
+voices[0].ready_voxcpm_native=false;
+assert.equal(chooseNativeVoxCpu(),false);
+assert.equal($('international-backend').value,'voxcpm');
 ''')

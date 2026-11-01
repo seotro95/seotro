@@ -316,6 +316,14 @@ def resource_presets(logical,physical,available_gb,engine='vieneu_nano',resource
         return {'nano_steps':steps,'nano_parallel':workers,
                 'nano_threads':min(limits['max_threads'],threads,max(1,cpu//workers)),
                 'audio_fit_backend':backend}
+    if engine == 'vieneu':
+        # Turbo's balanced mode has no Nano Euler steps to trade for speed.
+        # Prefer independent single-thread sequences to Nano's inherited 2x
+        # layout. Preserve the fast/quality CPU teams and legacy calibration
+        # budgets; measured calibration can still override these defaults.
+        return {'fast':settings(maximum,4,2,'wsola'),
+                'balanced':settings(maximum,8,1,'ffmpeg'),
+                'quality':settings(quality,16,4,'ffmpeg')}
     return {'fast':settings(maximum,4,2,'wsola'),
             'balanced':settings(balanced,8,2,'ffmpeg'),
             'quality':settings(quality,16,4,'ffmpeg')}
@@ -351,3 +359,34 @@ def calibration_candidates(preset,engine='vieneu_nano'):
     for candidate in candidates:
         if candidate not in result:result.append(candidate)
     return result
+
+
+def native_omni_cpu_limits(resource_profile='smooth'):
+    """Conservative independent OmniVoice CPU sessions; never share mutable KV state."""
+    import math
+    _resource_profile(resource_profile)
+    logical, physical, available = _machine_resources('omnivoice_native', None, 'fp32', 'process')
+    cpu = _cpu_budget(max(1, min(int(logical), int(physical))), resource_profile)
+    if isinstance(available, bool) or not isinstance(available, (int, float)) or not math.isfinite(available):
+        available = 0
+    memory_workers = max(0, int((max(0, available) - 4) // 6))
+    workers = max(1, min(8, cpu, memory_workers))
+    if resource_profile == 'light':workers = 1
+    return {'cpu_budget': cpu, 'max_workers': workers,
+            'max_threads': min(2 if resource_profile == 'light' else 8, cpu),
+            'memory_sufficient': available >= 10, 'available_memory_gb': max(0, available),
+            'per_worker_memory_budget_gb': 6, 'memory_reserve_gb': 4, 'minimum_available_gb': 10}
+
+
+def native_omni_cpu_presets(resource_profile='smooth'):
+    """Keep existing 8/16-step quality; overlap independent sentences when memory allows."""
+    limits = native_omni_cpu_limits(resource_profile)
+    # Leave admission room for the same warm team on the next UI request.
+    warm_room = max(1, int((limits['available_memory_gb'] - 4) // 12))
+    workers = min(limits['max_workers'], warm_room, max(1, limits['cpu_budget'] // 2))
+    threads = min(4, limits['max_threads'], max(1, limits['cpu_budget'] // workers))
+    def settings(steps, audio_backend):
+        return {'nano_parallel': workers, 'nano_threads': threads,
+                'omnivoice_steps': steps, 'audio_fit_backend': audio_backend}
+    return {'fast': settings(8, 'wsola'), 'balanced': settings(16, 'ffmpeg'),
+            'quality': settings(16, 'ffmpeg')}

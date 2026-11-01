@@ -8,6 +8,7 @@ import os
 from pathlib import Path, PurePosixPath
 import re
 import wave
+import uuid
 
 
 CATALOG_LANGUAGES = frozenset({'en-US', 'en-GB', 'ko', 'ru', 'ja', 'fr', 'es', 'th'})
@@ -15,6 +16,14 @@ CATALOG_ENGINES = frozenset({'vieneu', 'voxcpm'})
 _IDENT = re.compile(r'[0-9a-f]{32}')
 _SHA256 = re.compile(r'[0-9a-f]{64}')
 _MAX_WAV_BYTES = 64 * 1024 * 1024
+_TURBO_NAMESPACE = uuid.UUID('c1c6950b-97d4-5d43-a1e5-3f08a1285a52')
+TURBO_LANGUAGES = ('vi', 'en-US', 'en-GB')
+
+
+def turbo_variant_id(source_id: str) -> str:
+    """Stable virtual IDs keep existing jobs and original-language IDs intact."""
+    _valid_id(source_id)
+    return uuid.uuid5(_TURBO_NAMESPACE, source_id).hex
 
 
 class ReferenceValidationError(ValueError):
@@ -76,11 +85,24 @@ def _catalog_records(root: Path):
         if not isinstance(supplied_engine, str) or supplied_engine not in CATALOG_ENGINES or supplied_engine != engine:
             continue
         seen.add(ident)
+        entry = {key: value for key, value in entry.items() if key not in {'variant', 'source_voice_id'}}
         records.append({**entry, 'name': name.strip(), 'engine': engine,
                         'languages': ['en-US', 'en-GB'] if language.startswith('en-') else [language],
                         'native_language': language.split('-')[0], 'category': 'reference',
                         'is_default': True, 'readonly': True})
-    return records
+    # Variants reuse the same verified WAV, encoder cache and bundled model.
+    # Never relabel foreign-language text as supported by the Turbo engine.
+    variants = []
+    for source in records:
+        ident = turbo_variant_id(source['id'])
+        if ident in seen:
+            continue
+        seen.add(ident)
+        variants.append({**source, 'id': ident,
+                         'name': source['name'][:62] + ' · Turbo Việt/Anh',
+                         'engine': 'vieneu', 'languages': list(TURBO_LANGUAGES),
+                         'variant': 'turbo_vi_en', 'source_voice_id': source['id']})
+    return records + variants
 
 
 def _verify_audio(path: Path, metadata: dict, *, require_hash: bool) -> float:
@@ -138,8 +160,11 @@ def catalog_voices() -> list[dict]:
                       if isinstance(exc, FileNotFoundError) else 'Không đọc được tệp mẫu giọng.')
         voice = {key: record[key] for key in ('id', 'name', 'category', 'is_default', 'readonly',
                                               'engine', 'languages', 'native_language')}
+        if record.get('variant') == 'turbo_vi_en':
+            voice.update(variant='turbo_vi_en', source_voice_id=record['source_voice_id'])
         voice.update(has_sample=has_sample, sample_url=f"/api/voices/{record['id']}/sample",
-                     duration=duration, description='Mẫu giọng mặc định riêng' +
+                     duration=duration, description=('Turbo Việt/Anh từ mẫu giọng của bạn; giữ bản tiếng gốc riêng'
+                     if record.get('variant') == 'turbo_vi_en' else 'Mẫu giọng mặc định riêng') +
                      (f' · {duration:.1f}s' if duration is not None else ''))
         if reason:
             voice['missing_reason'] = reason

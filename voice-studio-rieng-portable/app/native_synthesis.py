@@ -306,7 +306,8 @@ class NativeSession:
             output.parent.mkdir(parents=True, exist_ok=True)
             temporary = output.with_name(output.stem+'.'+uuid.uuid4().hex+'.tmp.wav')
             try:
-                sf.write(str(temporary), audio, 24000, subtype='PCM_16')
+                from audio_processing import pcm_with_headroom
+                sf.write(str(temporary), pcm_with_headroom(audio), 24000, subtype='PCM_16')
                 temporary.replace(output)
             finally:
                 temporary.unlink(missing_ok=True)

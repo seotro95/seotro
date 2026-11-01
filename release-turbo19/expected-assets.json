@@ -1,0 +1,42 @@
+{
+  "Voice-Studio-1.12.3-Turbo19-Update.zip": {
+    "size": 175924,
+    "sha256": "1a49f10581ac8ab250e84817c78a52562e4d842a569baa34d7fb72c68534b200"
+  },
+  "QA.json": {
+    "size": 6033,
+    "sha256": "b3d3d02bd88987fb8af48ecf640cc5c5da64b6156c655eca17fd87e309682809"
+  },
+  "TAI_TOOL_19_TURBO.zip": {
+    "size": 3592,
+    "sha256": "691f82ce98761bbba87dc390338ec1a871883d063d00a69e8141cbd0e06af082"
+  },
+  "DOWNLOAD-PARTS.json": {
+    "size": 620,
+    "sha256": "18bce74755370e22cf73399b0cc512755cf8a77d4d7a29ca4838892a6114a187"
+  },
+  "TAI_TOOL_19_TURBO.cmd": {
+    "size": 11402,
+    "sha256": "4b1ebd251e4e2c1dfa81fec46bcce47f48511a260244b89b55d3c92f46748ea5"
+  },
+  "Voice-Studio-1.12.3-19-Turbo-Windows.zip.part001": {
+    "size": 1610612736,
+    "sha256": "8f897e6a798cb9c8708e458ae7db7bbfecf5673ba022531c54787a2fefd1d779"
+  },
+  "Voice-Studio-1.12.3-Turbo19-Update.zip.sha256": {
+    "size": 105,
+    "sha256": "46f78251b1ac7589b575b7ab5a888a019ce248ba5179e25c2720758d15b039e9"
+  },
+  "Voice-Studio-1.12.3-19-Turbo-Windows.zip.part002": {
+    "size": 849241274,
+    "sha256": "45ce6038a6d05df05f5494d1765f8aa71d7ce01ac6aa042be86f6be83fe1c168"
+  },
+  "Voice-Studio-1.12.3-19-Turbo-Windows.zip.sha256": {
+    "size": 107,
+    "sha256": "53d8ca6a32901ddc2474093a63026fe273b7572dc911f079ea82d4c08842c21e"
+  },
+  "TAI_TOOL_19_TURBO.zip.sha256": {
+    "size": 88,
+    "sha256": "846d1c2d9a280fa369c305bce9702a4b432af1a464d4faf002862b899ecb443a"
+  }
+}

@@ -59,7 +59,9 @@ def prepared_international_model(data, monkeypatch):
 def test_defaults_are_listed_with_native_languages_without_private_metadata(reference_catalog):
     client, data, root, _ = reference_catalog
     voices = default_voices(client)
-    assert set(voices) == {ENGLISH, KOREAN, THAI}
+    from voice_library import turbo_variant_id
+    assert set(voices) == {ENGLISH, KOREAN, THAI, *(turbo_variant_id(v) for v in (ENGLISH, KOREAN, THAI))}
+    voices = {key: value for key, value in voices.items() if not value.get('variant')}
     assert {ident: voice['native_language'] for ident, voice in voices.items()} == {
         ENGLISH: 'en', KOREAN: 'ko', THAI: 'th'}
     assert voices[ENGLISH]['languages'] == ['en-US', 'en-GB']

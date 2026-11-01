@@ -9,6 +9,9 @@ from test_standalone_api import studio  # noqa: F401
 
 
 def installed(monkeypatch, devices=('cpu',)):
+    # This fixture represents the existing low-memory single-session installation.
+    monkeypatch.setattr(app, 'native_omni_cpu_limits', lambda profile='smooth': {'cpu_budget':8, 'max_workers':1, 'max_threads':8})
+    monkeypatch.setattr(app, 'native_omni_cpu_presets', lambda profile='smooth': {mode:{'nano_parallel':1, 'nano_threads':4, 'omnivoice_steps':steps} for mode,steps in [('fast',8),('balanced',16),('quality',16)]})
     monkeypatch.setattr(fast_multilingual, 'is_ready',
                         lambda data, device=None, family='omnivoice': family == 'omnivoice' and (bool(devices) if device is None else device in devices))
     monkeypatch.setattr(fast_multilingual, 'cuda_available', lambda data, family='omnivoice': family == 'omnivoice' and 'cuda' in devices)

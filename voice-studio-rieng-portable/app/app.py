@@ -22,13 +22,15 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 from starlette.concurrency import run_in_threadpool
+from distribution import distribution_profile
 
 from narration import MAX_CHARACTERS, PROFILES, plan_segments
 from subtitles import parse_srt, export_srt
 from system_voices import installed_voices
 from hardware import (supports_int8, system_info, rendering_presets, rendering_limits,
                       bounded_settings, choose_execution_model,
-                      native_voxcpm_cpu_limits, native_voxcpm_cpu_presets)
+                      native_voxcpm_cpu_limits, native_voxcpm_cpu_presets,
+                      native_omni_cpu_limits, native_omni_cpu_presets)
 from delivery import get_profile, profile_catalog, supported_preset_voices
 from performance import speed_report
 from state_io import write_json_atomic, read_progress
@@ -112,7 +114,7 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
 
 
-app = FastAPI(title='Voice Studio Riêng', version='1.12.2', lifespan=lifespan)
+app = FastAPI(title='Voice Studio Riêng', version='1.12.3', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 @app.exception_handler(RequestValidationError)
@@ -244,6 +246,8 @@ def resource_config():
         {'id':'light','name':'Ít RAM','description':'Một tác vụ, tối đa hai luồng; giữ giọng và chất lượng đã chọn.'}],
         'native_voxcpm_cpu_rendering_presets_by_resource':{profile:native_voxcpm_cpu_presets(profile) for profile in profiles},
         'native_voxcpm_cpu_limits_by_resource':{profile:native_voxcpm_cpu_limits(profile) for profile in profiles},
+        'native_omni_cpu_rendering_presets_by_resource':{profile:native_omni_cpu_presets(profile) for profile in profiles},
+        'native_omni_cpu_limits_by_resource':{profile:native_omni_cpu_limits(profile) for profile in profiles},
         'rendering_presets_by_resource':{profile:{engine:effective_rendering_presets(engine,profile)
             for engine in ('vieneu_nano','vieneu','voxcpm')} for profile in profiles},
         'cpu_execution_rendering_presets':{execution:{profile:{engine:effective_rendering_presets(engine,profile,cpu_execution=execution)
@@ -262,6 +266,8 @@ def _config_values():
     if model_ready('voxcpm'):reference_languages.add('th')
     return {
         'version': app.version,
+        'distribution_profile': distribution_profile(),
+        'default_resource_profile': 'maximum' if distribution_profile() == 'compact-19' else 'smooth',
         'native_multilingual_ready': is_ready(DATA),
         'native_multilingual_cpu_available': is_ready(DATA,device='cpu'),
         'native_multilingual_cuda_available': cuda_available(DATA),
@@ -309,6 +315,11 @@ def voices():
     entries=available_voices()
     entries=[{**voice,'engine':voice.get('engine','vieneu' if voice.get('languages',['vi'])[0]=='vi' else 'qwen_clone')} for voice in entries]
     prepared={engine:model_ready(engine) for engine in {voice['engine'] for voice in entries}}
+    if distribution_profile() == 'compact-19':
+        optional_presets = {v['id'] for v in PRESETS if v['engine'] in {'qwen', 'qwen_clone'}}
+        entries = [v for v in entries if v['id'] not in optional_presets or prepared[v['engine']]]
+    if distribution_profile() == 'lean-19-cpu':
+        entries = [v for v in entries if v['id'] not in {p['id'] for p in PRESETS if p['engine'] not in {'vieneu','vieneu_nano'}}]
     omni_prepared=is_ready(DATA)
     voxcpm_native_prepared=is_ready(DATA,family='voxcpm2')
     transcription_ready=asr_ready(DATA)
@@ -568,6 +579,7 @@ def _submit_speech(body: Speech,calibration=False):
     native=engine=='voxcpm' and body.international_backend in {'omnivoice','voxcpm_native'}
     native_voxcpm=native and body.international_backend=='voxcpm_native'
     native_voxcpm_cpu=native_voxcpm and body.international_device=='cpu'
+    native_omni_cpu=native and not native_voxcpm and body.international_device=='cpu'
     if body.international_backend!='voxcpm' and engine!='voxcpm':
         raise HTTPException(422,'Bộ đọc đa ngôn ngữ chỉ áp dụng cho mẫu giọng quốc tế.')
     if body.international_device!='cpu' and not native:
@@ -589,12 +601,12 @@ def _submit_speech(body: Speech,calibration=False):
         # GPU contexts remain single-model on a 6 GB card. Independent CPU
         # workers use their own bounded GGUF budget rather than legacy FP32.
         model_memory='native'
-        if native_voxcpm_cpu:
-            preset=native_voxcpm_cpu_presets(body.resource_profile)[body.render_mode]
+        if native_voxcpm_cpu or native_omni_cpu:
+            preset=(native_voxcpm_cpu_presets(body.resource_profile) if native_voxcpm_cpu else native_omni_cpu_presets(body.resource_profile))[body.render_mode]
             for field,value in preset.items():
                 if field not in body.model_fields_set:setattr(body,field,value)
-            limits=native_voxcpm_cpu_limits(body.resource_profile)
-            if not limits['memory_sufficient']:
+            limits=native_voxcpm_cpu_limits(body.resource_profile) if native_voxcpm_cpu else native_omni_cpu_limits(body.resource_profile)
+            if native_voxcpm_cpu and not limits['memory_sufficient']:
                 raise HTTPException(503,'VoxCPM2 native CPU cần khoảng 10 GiB RAM khả dụng cho một mô hình và phần dự phòng. Đóng bớt ứng dụng rồi thử lại.')
             bounded=bounded_settings({'nano_parallel':body.nano_parallel,'nano_threads':body.nano_threads},limits)
             body.nano_parallel=bounded['nano_parallel'];body.nano_threads=bounded['nano_threads']

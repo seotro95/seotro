@@ -7,7 +7,7 @@
   <title>Voice Studio Riêng · Văn bản thành giọng nói</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="/static/style.css">
-  <script src="/static/app.js?v=1.12.2" defer></script>
+  <script src="/static/app.js?v=1.12.3-turbo19" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Đến nội dung</a>
@@ -45,7 +45,7 @@
             <label for="international-backend">Bộ đọc giọng đa ngôn ngữ</label>
             <select id="international-backend" aria-describedby="international-backend-note"><option value="voxcpm" selected>VoxCPM · Bộ đọc hiện tại</option><option value="voxcpm_native">VoxCPM2 native Q8 · Thử nghiệm</option><option value="omnivoice">OmniVoice Q8 · Thử nghiệm</option></select>
             <p id="international-backend-note" class="field-note">VoxCPM2 native Q8 dùng cùng họ mô hình VoxCPM2 và mẫu giọng đã chọn. Lượng tử hóa hoặc đổi bộ đọc có thể thay đổi âm sắc, phát âm; nghe mẫu và đo tốc độ trước khi tạo bản dài.</p>
-            <div class="button-row"><button type="button" id="try-voxcpm-native-cuda-fast" class="secondary-button" disabled>Thử VoxCPM2 CUDA · 4 bước</button><button type="button" id="choose-voxcpm-native-cuda" class="secondary-button" disabled>VoxCPM2 GPU · Giữ bước</button></div>
+            <div class="button-row"><button type="button" id="choose-voxcpm-native-cpu" class="secondary-button" disabled>VoxCPM2 Q8 CPU · Giữ giọng và số bước</button><button type="button" id="try-voxcpm-native-cuda-fast" class="secondary-button" disabled>Thử VoxCPM2 CUDA · 4 bước</button><button type="button" id="choose-voxcpm-native-cuda" class="secondary-button" disabled>VoxCPM2 GPU · Giữ bước</button></div>
             <p class="field-note">Nút thử giữ bộ OmniVoice đang chọn và dùng 8 bước; với VoxCPM cũ hoặc native, nút chọn VoxCPM2 native 4 bước. Phép đo dùng đúng mẫu giọng, ngôn ngữ đang chọn và giữ kịch bản đang nhập. Lượt đo đầu có thể gồm thời gian nạp mô hình. Ít bước hơn có thể giảm độ rõ tiếng hoặc độ tự nhiên. Nghe mẫu trước khi tạo bản dài; có bộ chạy GPU chưa xác nhận GPU hoạt động hoặc đạt 30×.</p>
             <div id="native-multilingual-field" hidden>
               <label for="international-device">Thiết bị chạy bộ đọc native</label><select id="international-device" aria-describedby="international-device-note"><option value="cpu" selected>CPU</option><option value="cuda">GPU NVIDIA · CUDA</option></select>
