@@ -3,7 +3,7 @@ import hashlib,json,zipfile
 HERE=Path(__file__).resolve().parent
 record=json.loads((HERE/'expected-package.json').read_text())
 package=HERE/'package.zip'
-with package.open('rb') as f:assert hashlib.file_digest(f,'sha256').hexdigest()==record['sha256'], 'Installer ZIP SHA256 mismatch'
+assert hashlib.sha256(package.read_bytes()).hexdigest()==record['sha256'], 'Installer ZIP SHA256 mismatch'
 assert package.stat().st_size==record['size']
 source=HERE.parent/'melo-viet-local'
 with zipfile.ZipFile(package) as z:
