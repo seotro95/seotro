@@ -17,9 +17,22 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+      - name: Check whether all existing release assets are already verified
+        id: existing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if python release-lean19-cpu/verify_remote.py; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Reconstruct exact SHA256-verified package and release parts
+        if: steps.existing.outputs.ready != 'true'
         run: python release-lean19-cpu/reconstruct.py
       - name: Upload verified release assets
+        if: steps.existing.outputs.ready != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release upload voice-studio-lean19-cpu1 "$RUNNER_TEMP"/lean19-release-assets/* --repo seotro95/seotro --clobber

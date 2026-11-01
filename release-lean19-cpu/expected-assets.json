@@ -1,0 +1,38 @@
+{
+  "TAI_TOOL_19_GIONG_GON.zip": {
+    "size": 4009,
+    "sha256": "496798b9390900c94c7323057f0a7ff6e5af85bb2e2697f7ddfef30b10b31ca4"
+  },
+  "Voice-Studio-19-Giong-CPU-Gon-Windows.zip.part002": {
+    "size": 849238167,
+    "sha256": "4491fe74a5f0a2937821c0cbceebde484f08df885518065a1b3279f67c0a3876"
+  },
+  "TAI_TOOL_19_GIONG_GON.zip.sha256": {
+    "size": 92,
+    "sha256": "d89ba7abb6b0cdd43ec2789526ed5a9b22734e9fd67478ced6a7431ff338f9c1"
+  },
+  "TAI_TOOL_19_GIONG_GON.cmd": {
+    "size": 11406,
+    "sha256": "4e5d97a95d4b6fdc082f4397dc268b4d655cc7d620804378f8b23b43544233bc"
+  },
+  "Voice-Studio-19-Giong-CPU-Gon-Windows.zip.part001": {
+    "size": 1610612736,
+    "sha256": "8f897e6a798cb9c8708e458ae7db7bbfecf5673ba022531c54787a2fefd1d779"
+  },
+  "TAI_TOOL_19_GIONG_GON.cmd.sha256": {
+    "size": 92,
+    "sha256": "6a12ac0a1113441d98818fa4405f360b3d4f3d6cabaa96bf0b811d892cfb261d"
+  },
+  "DOWNLOAD-PARTS.json": {
+    "size": 618,
+    "sha256": "6e8142df6358bdc27d0af00d2cef2f7760a1edd6f149c1333b137fd54f43a480"
+  },
+  "Voice-Studio-19-Giong-CPU-Gon-Windows.QA.json": {
+    "size": 287,
+    "sha256": "d6e9e79b7df458f02607d7bcfa2f9fe626e501cbd46398bf97ac1a4e1d6ca005"
+  },
+  "Voice-Studio-19-Giong-CPU-Gon-Windows.zip.sha256": {
+    "size": 108,
+    "sha256": "240ec9bd5ca926e41bf643f40678dea72014750a5093ee85850c330c69e4e3e8"
+  }
+}
