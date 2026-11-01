@@ -316,6 +316,14 @@ def resource_presets(logical,physical,available_gb,engine='vieneu_nano',resource
         return {'nano_steps':steps,'nano_parallel':workers,
                 'nano_threads':min(limits['max_threads'],threads,max(1,cpu//workers)),
                 'audio_fit_backend':backend}
+    if engine == 'vieneu':
+        # Turbo's balanced mode has no Nano Euler steps to trade for speed.
+        # Prefer independent single-thread sequences to Nano's inherited 2x
+        # layout. Preserve the fast/quality CPU teams and legacy calibration
+        # budgets; measured calibration can still override these defaults.
+        return {'fast':settings(maximum,4,2,'wsola'),
+                'balanced':settings(maximum,8,1,'ffmpeg'),
+                'quality':settings(quality,16,4,'ffmpeg')}
     return {'fast':settings(maximum,4,2,'wsola'),
             'balanced':settings(balanced,8,2,'ffmpeg'),
             'quality':settings(quality,16,4,'ffmpeg')}

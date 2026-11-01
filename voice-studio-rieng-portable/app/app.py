@@ -22,6 +22,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 from starlette.concurrency import run_in_threadpool
+from distribution import distribution_profile
 
 from narration import MAX_CHARACTERS, PROFILES, plan_segments
 from subtitles import parse_srt, export_srt
@@ -262,6 +263,8 @@ def _config_values():
     if model_ready('voxcpm'):reference_languages.add('th')
     return {
         'version': app.version,
+        'distribution_profile': distribution_profile(),
+        'default_resource_profile': 'maximum' if distribution_profile() == 'compact-19' else 'smooth',
         'native_multilingual_ready': is_ready(DATA),
         'native_multilingual_cpu_available': is_ready(DATA,device='cpu'),
         'native_multilingual_cuda_available': cuda_available(DATA),
@@ -309,6 +312,9 @@ def voices():
     entries=available_voices()
     entries=[{**voice,'engine':voice.get('engine','vieneu' if voice.get('languages',['vi'])[0]=='vi' else 'qwen_clone')} for voice in entries]
     prepared={engine:model_ready(engine) for engine in {voice['engine'] for voice in entries}}
+    if distribution_profile() == 'compact-19':
+        optional_presets = {v['id'] for v in PRESETS if v['engine'] in {'qwen', 'qwen_clone'}}
+        entries = [v for v in entries if v['id'] not in optional_presets or prepared[v['engine']]]
     omni_prepared=is_ready(DATA)
     voxcpm_native_prepared=is_ready(DATA,family='voxcpm2')
     transcription_ready=asr_ready(DATA)

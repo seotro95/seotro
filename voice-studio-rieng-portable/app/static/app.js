@@ -1136,6 +1136,7 @@ async function refreshHistory() {
 
 function renderModelStatus() {
   const target = $('model-status'); target.replaceChildren();
+  if (config.distribution_profile === 'compact-19') target.append(node('p', 'Gói gọn · Có sẵn Nano/Turbo. Bộ 19 mẫu riêng được giữ nguyên; các mẫu quốc tế cần bộ đọc tương ứng. Không cần tải lại toàn bộ gói 11 GB.'));
   target.append(node('p', `${config.hardware} · ${config.cpu_cores} luồng CPU · ${config.available_ram_gb ?? '?'} GB RAM trống`));
   target.append(node('p', `FFmpeg: ${config.ffmpeg ? 'Đã cài' : 'Chưa tìm thấy · chạy lại CAI_DAT.bat'}`));
   for (const [key, ready] of [['vieneu_nano', config.nano_ready], ...Object.entries(config.models || {})]) target.append(node('p', `${ready ? '●' : '○'} ${key}: ${ready ? 'Đã chuẩn bị' : 'Cần chuẩn bị'}`));
@@ -1154,7 +1155,8 @@ async function refreshVoices() {
   const initial = !renderSettingsInitialized;
   populateResourceProfiles();
   if (initial) {
-    $('resource-profile').value = resourceProfiles.has(renderPreferences.resource_profile) ? renderPreferences.resource_profile : 'smooth';
+    $('resource-profile').value = resourceProfiles.has(renderPreferences.resource_profile) ? renderPreferences.resource_profile
+      : config.default_resource_profile === 'maximum' ? 'maximum' : 'smooth';
     $('cpu-execution').value = cpuExecutions.has(renderPreferences.cpu_execution) ? renderPreferences.cpu_execution : 'auto';
     $('international-precision').value = renderPreferences.international_precision === 'int8' ? 'int8' : 'fp32';
     $('international-backend').value = initialInternationalBackend();
@@ -1174,7 +1176,7 @@ async function refreshVoices() {
     renderSettingsInitialized = true;
   }
   renderLibrary(); renderModelStatus();
-  $('version').textContent = config.version ? `· ${config.version}` : '';
+  $('version').textContent = config.version ? `· ${config.version}${config.distribution_profile === 'compact-19' ? ' · Gọn 19 · Turbo CPU' : ''}` : '';
   setConnection(true);
 }
 

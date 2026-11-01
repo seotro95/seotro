@@ -1,0 +1,357 @@
+{
+  "platform": "linux",
+  "public_voice": "Mai Anh",
+  "private_voices_tested": false,
+  "engine": "vieneu",
+  "precision": "fp32",
+  "text": "Hôm nay trời nắng đẹp và có gió nhẹ.\nMột câu chuyện hay mang đến nhiều cảm xúc.\nChúng ta cùng bước đi trên con đường nhỏ.\nGiọng đọc rõ ràng giúp người nghe dễ hiểu.\nHôm nay trời nắng đẹp và có gió nhẹ.\nMột câu chuyện hay mang đến nhiều cảm xúc.\nChúng ta cùng bước đi trên con đường nhỏ.\nGiọng đọc rõ ràng giúp người nghe dễ hiểu.\nHôm nay trời nắng đẹp và có gió nhẹ.\nMột câu chuyện hay mang đến nhiều cảm xúc.\nChúng ta cùng bước đi trên con đường nhỏ.\nGiọng đọc rõ ràng giúp người nghe dễ hiểu.\nHôm nay trời nắng đẹp và có gió nhẹ.\nMột câu chuyện hay mang đến nhiều cảm xúc.\nChúng ta cùng bước đi trên con đường nhỏ.\nGiọng đọc rõ ràng giúp người nghe dễ hiểu.\nHôm nay trời nắng đẹp và có gió nhẹ.\nMột câu chuyện hay mang đến nhiều cảm xúc.\nChúng ta cùng bước đi trên con đường nhỏ.\nGiọng đọc rõ ràng giúp người nghe dễ hiểu.\nHôm nay trời nắng đẹp và có gió nhẹ.\nMột câu chuyện hay mang đến nhiều cảm xúc.\nChúng ta cùng bước đi trên con đường nhỏ.\nGiọng đọc rõ ràng giúp người nghe dễ hiểu.",
+  "text_unchanged": true,
+  "speech_playback_speed": 1,
+  "quality_and_sampling_unchanged": true,
+  "trials": [
+    {
+      "mode": "original",
+      "round": 1,
+      "phase": "cold",
+      "execution": {
+        "engine": "vieneu",
+        "workers": 2,
+        "worker_budget": 2,
+        "threads": 2,
+        "blas_threads": 1,
+        "model_memory": "shared",
+        "resource_profile": "smooth",
+        "precision": "fp32"
+      },
+      "report": {
+        "realtime_multiplier": 2.42,
+        "estimated_hour_seconds": 1487.5,
+        "target_30x_met_on_sample": false,
+        "actual_hour_of_speech_generated": false,
+        "target_30x_verified_on_hour_or_longer": false,
+        "measurement_audio_seconds": 55.2,
+        "measurement_elapsed_seconds": 22.808,
+        "output_timeline_seconds": 55.2,
+        "excluded_silence_seconds": 0,
+        "includes_silence": false,
+        "estimate_only": true
+      }
+    },
+    {
+      "mode": "original",
+      "round": 1,
+      "phase": "warm",
+      "execution": {
+        "engine": "vieneu",
+        "workers": 2,
+        "worker_budget": 2,
+        "threads": 2,
+        "blas_threads": 1,
+        "model_memory": "shared",
+        "resource_profile": "smooth",
+        "precision": "fp32"
+      },
+      "report": {
+        "realtime_multiplier": 3.03,
+        "estimated_hour_seconds": 1187.7,
+        "target_30x_met_on_sample": false,
+        "actual_hour_of_speech_generated": false,
+        "target_30x_verified_on_hour_or_longer": false,
+        "measurement_audio_seconds": 55.44,
+        "measurement_elapsed_seconds": 18.29,
+        "output_timeline_seconds": 55.44,
+        "excluded_silence_seconds": 0,
+        "includes_silence": false,
+        "estimate_only": true
+      }
+    },
+    {
+      "mode": "compact",
+      "round": 1,
+      "phase": "cold",
+      "execution": {
+        "engine": "vieneu",
+        "workers": 4,
+        "worker_budget": 4,
+        "threads": 1,
+        "blas_threads": 1,
+        "model_memory": "shared",
+        "resource_profile": "smooth",
+        "precision": "fp32"
+      },
+      "report": {
+        "realtime_multiplier": 3.17,
+        "estimated_hour_seconds": 1136.6,
+        "target_30x_met_on_sample": false,
+        "actual_hour_of_speech_generated": false,
+        "target_30x_verified_on_hour_or_longer": false,
+        "measurement_audio_seconds": 55.36,
+        "measurement_elapsed_seconds": 17.478,
+        "output_timeline_seconds": 55.36,
+        "excluded_silence_seconds": 0,
+        "includes_silence": false,
+        "estimate_only": true
+      }
+    },
+    {
+      "mode": "compact",
+      "round": 1,
+      "phase": "warm",
+      "execution": {
+        "engine": "vieneu",
+        "workers": 4,
+        "worker_budget": 4,
+        "threads": 1,
+        "blas_threads": 1,
+        "model_memory": "shared",
+        "resource_profile": "smooth",
+        "precision": "fp32"
+      },
+      "report": {
+        "realtime_multiplier": 4.26,
+        "estimated_hour_seconds": 844.6,
+        "target_30x_met_on_sample": false,
+        "actual_hour_of_speech_generated": false,
+        "target_30x_verified_on_hour_or_longer": false,
+        "measurement_audio_seconds": 55.68,
+        "measurement_elapsed_seconds": 13.063,
+        "output_timeline_seconds": 55.68,
+        "excluded_silence_seconds": 0,
+        "includes_silence": false,
+        "estimate_only": true
+      }
+    },
+    {
+      "mode": "compact",
+      "round": 2,
+      "phase": "cold",
+      "execution": {
+        "engine": "vieneu",
+        "workers": 4,
+        "worker_budget": 4,
+        "threads": 1,
+        "blas_threads": 1,
+        "model_memory": "shared",
+        "resource_profile": "smooth",
+        "precision": "fp32"
+      },
+      "report": {
+        "realtime_multiplier": 3.28,
+        "estimated_hour_seconds": 1098.9,
+        "target_30x_met_on_sample": false,
+        "actual_hour_of_speech_generated": false,
+        "target_30x_verified_on_hour_or_longer": false,
+        "measurement_audio_seconds": 55.04,
+        "measurement_elapsed_seconds": 16.801,
+        "output_timeline_seconds": 55.04,
+        "excluded_silence_seconds": 0,
+        "includes_silence": false,
+        "estimate_only": true
+      }
+    },
+    {
+      "mode": "compact",
+      "round": 2,
+      "phase": "warm",
+      "execution": {
+        "engine": "vieneu",
+        "workers": 4,
+        "worker_budget": 4,
+        "threads": 1,
+        "blas_threads": 1,
+        "model_memory": "shared",
+        "resource_profile": "smooth",
+        "precision": "fp32"
+      },
+      "report": {
+        "realtime_multiplier": 4.09,
+        "estimated_hour_seconds": 879.7,
+        "target_30x_met_on_sample": false,
+        "actual_hour_of_speech_generated": false,
+        "target_30x_verified_on_hour_or_longer": false,
+        "measurement_audio_seconds": 55.84,
+        "measurement_elapsed_seconds": 13.646,
+        "output_timeline_seconds": 55.84,
+        "excluded_silence_seconds": 0,
+        "includes_silence": false,
+        "estimate_only": true
+      }
+    },
+    {
+      "mode": "original",
+      "round": 2,
+      "phase": "cold",
+      "execution": {
+        "engine": "vieneu",
+        "workers": 2,
+        "worker_budget": 2,
+        "threads": 2,
+        "blas_threads": 1,
+        "model_memory": "shared",
+        "resource_profile": "smooth",
+        "precision": "fp32"
+      },
+      "report": {
+        "realtime_multiplier": 2.14,
+        "estimated_hour_seconds": 1681.6,
+        "target_30x_met_on_sample": false,
+        "actual_hour_of_speech_generated": false,
+        "target_30x_verified_on_hour_or_longer": false,
+        "measurement_audio_seconds": 54.96,
+        "measurement_elapsed_seconds": 25.673,
+        "output_timeline_seconds": 54.96,
+        "excluded_silence_seconds": 0,
+        "includes_silence": false,
+        "estimate_only": true
+      }
+    },
+    {
+      "mode": "original",
+      "round": 2,
+      "phase": "warm",
+      "execution": {
+        "engine": "vieneu",
+        "workers": 2,
+        "worker_budget": 2,
+        "threads": 2,
+        "blas_threads": 1,
+        "model_memory": "shared",
+        "resource_profile": "smooth",
+        "precision": "fp32"
+      },
+      "report": {
+        "realtime_multiplier": 2.33,
+        "estimated_hour_seconds": 1543.4,
+        "target_30x_met_on_sample": false,
+        "actual_hour_of_speech_generated": false,
+        "target_30x_verified_on_hour_or_longer": false,
+        "measurement_audio_seconds": 55.36,
+        "measurement_elapsed_seconds": 23.733,
+        "output_timeline_seconds": 55.36,
+        "excluded_silence_seconds": 0,
+        "includes_silence": false,
+        "estimate_only": true
+      }
+    },
+    {
+      "mode": "original",
+      "round": 3,
+      "phase": "cold",
+      "execution": {
+        "engine": "vieneu",
+        "workers": 2,
+        "worker_budget": 2,
+        "threads": 2,
+        "blas_threads": 1,
+        "model_memory": "shared",
+        "resource_profile": "smooth",
+        "precision": "fp32"
+      },
+      "report": {
+        "realtime_multiplier": 2.4,
+        "estimated_hour_seconds": 1501.6,
+        "target_30x_met_on_sample": false,
+        "actual_hour_of_speech_generated": false,
+        "target_30x_verified_on_hour_or_longer": false,
+        "measurement_audio_seconds": 55.04,
+        "measurement_elapsed_seconds": 22.958,
+        "output_timeline_seconds": 55.04,
+        "excluded_silence_seconds": 0,
+        "includes_silence": false,
+        "estimate_only": true
+      }
+    },
+    {
+      "mode": "original",
+      "round": 3,
+      "phase": "warm",
+      "execution": {
+        "engine": "vieneu",
+        "workers": 2,
+        "worker_budget": 2,
+        "threads": 2,
+        "blas_threads": 1,
+        "model_memory": "shared",
+        "resource_profile": "smooth",
+        "precision": "fp32"
+      },
+      "report": {
+        "realtime_multiplier": 2.95,
+        "estimated_hour_seconds": 1220.2,
+        "target_30x_met_on_sample": false,
+        "actual_hour_of_speech_generated": false,
+        "target_30x_verified_on_hour_or_longer": false,
+        "measurement_audio_seconds": 55.6,
+        "measurement_elapsed_seconds": 18.846,
+        "output_timeline_seconds": 55.6,
+        "excluded_silence_seconds": 0,
+        "includes_silence": false,
+        "estimate_only": true
+      }
+    },
+    {
+      "mode": "compact",
+      "round": 3,
+      "phase": "cold",
+      "execution": {
+        "engine": "vieneu",
+        "workers": 4,
+        "worker_budget": 4,
+        "threads": 1,
+        "blas_threads": 1,
+        "model_memory": "shared",
+        "resource_profile": "smooth",
+        "precision": "fp32"
+      },
+      "report": {
+        "realtime_multiplier": 3.18,
+        "estimated_hour_seconds": 1132.1,
+        "target_30x_met_on_sample": false,
+        "actual_hour_of_speech_generated": false,
+        "target_30x_verified_on_hour_or_longer": false,
+        "measurement_audio_seconds": 55.92,
+        "measurement_elapsed_seconds": 17.585,
+        "output_timeline_seconds": 55.92,
+        "excluded_silence_seconds": 0,
+        "includes_silence": false,
+        "estimate_only": true
+      }
+    },
+    {
+      "mode": "compact",
+      "round": 3,
+      "phase": "warm",
+      "execution": {
+        "engine": "vieneu",
+        "workers": 4,
+        "worker_budget": 4,
+        "threads": 1,
+        "blas_threads": 1,
+        "model_memory": "shared",
+        "resource_profile": "smooth",
+        "precision": "fp32"
+      },
+      "report": {
+        "realtime_multiplier": 4.0,
+        "estimated_hour_seconds": 900.9,
+        "target_30x_met_on_sample": false,
+        "actual_hour_of_speech_generated": false,
+        "target_30x_verified_on_hour_or_longer": false,
+        "measurement_audio_seconds": 54.88,
+        "measurement_elapsed_seconds": 13.734,
+        "output_timeline_seconds": 54.88,
+        "excluded_silence_seconds": 0,
+        "includes_silence": false,
+        "estimate_only": true
+      }
+    }
+  ],
+  "warm_median_throughput": {
+    "original": 2.95,
+    "compact": 4.09
+  },
+  "relative_throughput": 1.3864406779661016,
+  "windows_tested": false,
+  "gpu_tested": false,
+  "target_30x_verified": false
+}

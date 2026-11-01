@@ -43,6 +43,19 @@ def test_shared_turbo_budget_does_not_reserve_weights_per_worker():
     assert hardware._resident_credit('vieneu',warm,'fp32','process')==0
 
 
+@pytest.mark.parametrize('profile', ['smooth', 'maximum', 'light'])
+@pytest.mark.parametrize('physical,ram', [(1,4), (4,16), (28,128)])
+def test_turbo_balanced_uses_single_thread_sequences_inside_the_resource_budget(profile, physical, ram):
+    limits = resource_limits(physical*2, physical, ram, 'vieneu', profile, execution_model='shared')
+    modes = resource_presets(physical*2, physical, ram, 'vieneu', profile, execution_model='shared')
+    assert modes['balanced']['nano_parallel'] == limits['max_workers']
+    assert modes['balanced']['nano_threads'] == 1
+    for preset in modes.values():
+        assert preset['nano_parallel'] * preset['nano_threads'] <= limits['cpu_budget']
+    # Audio fitting and Nano's ignored compatibility fields retain their meaning.
+    assert modes['balanced']['audio_fit_backend'] == modes['quality']['audio_fit_backend'] == 'ffmpeg'
+
+
 def test_xeon_voxcpm_smooth_uses_a_uniform_team_inside_reserved_budget():
     limits=resource_limits(56,28,128,'voxcpm','smooth')
     fast=resource_presets(56,28,128,'voxcpm','smooth')['fast']

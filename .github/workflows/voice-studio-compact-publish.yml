@@ -1,0 +1,133 @@
+name: Voice Studio compact 19 - verify Windows and publish one ZIP
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/compact-speed]
+    paths:
+      - '.github/workflows/voice-studio-compact-publish.yml'
+      - 'voice-studio-rieng-portable/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: voice-studio-compact-19-cpu1
+  cancel-in-progress: false
+
+env:
+  PYTHONUTF8: '1'
+  RELEASE_TAG: voice-studio-compact-19-cpu1
+  ARCHIVE_NAME: Voice-Studio-Compact-19-CPU1-Windows-x64.zip
+
+jobs:
+  build-test-publish:
+    runs-on: windows-2022
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+          architecture: x64
+      - name: Download and verify the original 1.10 Nano Turbo and encrypted voice package
+        shell: python
+        run: |
+          import hashlib, os, pathlib, urllib.request
+          url = 'https://github.com/seotro95/seotro/releases/download/voice-studio-reference-1.10-40852923612/Voice-Studio-Rieng-1.10.0-19-Giong-GitHub-Windows-x64.zip'
+          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'original.zip'
+          digest = hashlib.sha256()
+          with urllib.request.urlopen(url, timeout=180) as source, target.open('xb') as output:
+              while block := source.read(8 * 1024**2):
+                  digest.update(block); output.write(block)
+          assert digest.hexdigest() == '65446c1a1799699b3aadad616461e97cf66c049597c7ae9a5cbf3887f20312f6'
+      - name: Build one complete compact ZIP with full checksum verification
+        shell: pwsh
+        run: |
+          python voice-studio-rieng-portable/packaging/build_compact_bundle.py --base "$env:RUNNER_TEMP/original.zip" --output "$env:RUNNER_TEMP/release/$env:ARCHIVE_NAME" --evidence voice-studio-rieng-portable/packaging/benchmarks/compact-cpu-20261101.qa.json | Tee-Object -FilePath "$env:RUNNER_TEMP/COMPACT-DELIVERY-QA.json"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Extract the exact ZIP into a folder with Vietnamese letters and spaces
+        shell: python
+        run: |
+          import os, pathlib, sys, zipfile
+          sys.path.insert(0, str(pathlib.Path('voice-studio-rieng-portable/packaging').resolve()))
+          from build_windows import safe_zip_path
+          temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          stage = temp / 'Kiểm tra bản gọn !'
+          with zipfile.ZipFile(temp / 'release' / os.environ['ARCHIVE_NAME']) as archive:
+              for entry in archive.infolist():
+                  parts = safe_zip_path(entry)
+                  if entry.is_dir(): continue
+                  target = stage.joinpath(*parts)
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  with archive.open(entry) as source, target.open('xb') as output:
+                      import shutil
+                      shutil.copyfileobj(source, output, 4 * 1024**2)
+          (temp / 'compact-root.txt').write_text(str(stage / 'Voice-Studio-Compact-19-Windows-x64'), encoding='utf-8')
+      - name: Run relevant regression tests in the bundled Windows Python
+        shell: pwsh
+        run: |
+          $root = Get-Content -LiteralPath "$env:RUNNER_TEMP/compact-root.txt" -Encoding utf8 -Raw
+          $env:PYTHONHOME = ''
+          $env:PYTHONPATH = (Resolve-Path 'voice-studio-rieng-portable/app').Path + ';' + (Resolve-Path 'voice-studio-rieng-portable/packaging').Path
+          Push-Location voice-studio-rieng-portable
+          & "$root/runtime/python.exe" -s -X utf8 -m pytest -q --junitxml="$env:RUNNER_TEMP/WINDOWS-COMPACT-TESTS.xml" app/tests/test_compact_distribution.py app/tests/test_resource_profiles.py app/tests/test_calibration.py app/tests/test_render_modes.py app/tests/test_shared_synthesis.py app/tests/test_turbo_reference.py app/tests/test_standalone_api.py app/tests/test_full_model_readiness_api.py app/tests/test_native_voxcpm_ui.py packaging/test_build_compact_bundle.py
+          $result = $LASTEXITCODE
+          Pop-Location
+          if ($result -ne 0) { exit $result }
+      - name: Verify real offline speech and launcher HTTP in the relocated Windows package
+        shell: pwsh
+        run: |
+          $root = Get-Content -LiteralPath "$env:RUNNER_TEMP/compact-root.txt" -Encoding utf8 -Raw
+          $env:PYTHONHOME = ''
+          $env:PYTHONPATH = ''
+          & "$root/runtime/python.exe" -s -X utf8 voice-studio-rieng-portable/packaging/smoke_compact_bundle.py --root $root --output "$env:RUNNER_TEMP/WINDOWS-COMPACT-QA.json"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Prepare verified release assets and notes
+        shell: python
+        run: |
+          import hashlib, json, os, pathlib, shutil
+          temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          root = temp / 'release'
+          archive = root / os.environ['ARCHIVE_NAME']
+          with archive.open('rb') as source:
+              digest = hashlib.file_digest(source, 'sha256').hexdigest()
+          assert digest == archive.with_suffix('.zip.sha256').read_text().split()[0]
+          report = json.loads((temp / 'WINDOWS-COMPACT-QA.json').read_text(encoding='utf-8'))
+          report.update(source_commit=os.environ['GITHUB_SHA'], archive_sha256=digest, archive_bytes=archive.stat().st_size)
+          (root / 'WINDOWS-COMPACT-QA.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
+          for name in ('WINDOWS-COMPACT-TESTS.xml', 'COMPACT-DELIVERY-QA.json'):
+              shutil.copy2(temp / name, root / name)
+          shutil.copy2('voice-studio-rieng-portable/packaging/benchmarks/compact-cpu-20261101.qa.json', root / 'LINUX-TURBO-CPU-QA.json')
+          notes = '''Bản gọn mới: một ZIP đầy đủ khoảng 1,10 GB, khoảng 2,16 GB sau giải nén. Không cần ghép các phần.
+
+          Giữ nguyên bộ 19 mẫu giọng mã hóa, Nano/Turbo, Python và FFmpeg. Giải nén vào thư mục mới, chạy MO_TOOL.bat. Dùng CAI_19_GIONG.bat với mật khẩu cũ để mở bộ mẫu riêng. Giữ bản cũ để sao lưu dữ liệu.
+
+          Turbo ở chế độ Cân bằng dùng các lượt đọc một luồng CPU thay cho đội hai luồng kế thừa từ Nano. Giữ giọng, FP32 và chất lượng lấy mẫu. Phép đo Linux với giọng công khai: trung vị từ 2,95x lên 4,09x, nhanh hơn khoảng 39%. Đây không phải phép đo trên GTX1060 hoặc với mẫu riêng.
+
+          ZIP này đã kiểm tra suy luận Nano/Turbo thật và launcher HTTP bằng Python Windows đóng kèm, sau khi chuyển vào đường dẫn có dấu tiếng Việt. Xem WINDOWS-COMPACT-QA.json để đối chiếu SHA256 của đúng ZIP đã thử.
+
+          Chỉ Nano/Turbo được đóng kèm. Giữ mẫu quốc tế không tự cấp khả năng đọc ngôn ngữ đó; Qwen/VoxCPM2/OmniVoice là các bộ đọc riêng. Qwen tiếng Pháp chưa được tăng tốc trong bản này. Chưa kiểm thử GPU, chưa tạo đủ một giờ lời đọc và không cam kết 1 giờ voice trong 2 phút.
+          '''
+          (temp / 'release-notes.md').write_text(notes, encoding='utf-8')
+      - name: Publish the single complete ZIP after Windows checks pass
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --draft --title "Voice Studio Gọn 19 - Turbo CPU" --notes-file "$env:RUNNER_TEMP/release-notes.md"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $assets = @(Get-ChildItem -LiteralPath "$env:RUNNER_TEMP/release" -File | ForEach-Object { $_.FullName })
+          gh release upload $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY @assets
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          gh release edit $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --draft=false
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Retain diagnostic reports if a check fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compact-windows-diagnostics
+          path: |
+            ${{ runner.temp }}/WINDOWS-COMPACT-TESTS.xml
+            ${{ runner.temp }}/WINDOWS-COMPACT-QA.json
+            ${{ runner.temp }}/COMPACT-DELIVERY-QA.json
