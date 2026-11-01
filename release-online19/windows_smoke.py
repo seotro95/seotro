@@ -17,8 +17,14 @@ def main(archive,destination):
              PATH=str(root/'ffmpeg/bin')+os.pathsep+str(root/'runtime')+os.pathsep+os.environ['PATH'])
     env.pop('AZURE_SPEECH_KEY',None);env.pop('AZURE_SPEECH_REGION',None)
     report=destination/'WINDOWS-QA.json'
-    subprocess.run([str(root/'runtime/python.exe'),'-s','-X','utf8',str(HERE/'windows_runtime_qa.py'),
-                    '--root',str(root),'--report',str(report)],env=env,check=True,timeout=180)
+    completed=subprocess.run([str(root/'runtime/python.exe'),'-s','-X','utf8',str(HERE/'windows_runtime_qa.py'),
+                    '--root',str(root),'--report',str(report)],env=env,capture_output=True,text=True,encoding='utf-8',timeout=180)
+    if completed.returncode:
+        detail=(completed.stdout+'\n'+completed.stderr)[-10000:]
+        escaped=detail.replace('%','%25').replace('\r','%0D').replace('\n','%0A')
+        print('::error title=Windows bundle smoke test::'+escaped,flush=True)
+        raise RuntimeError('Bundled Windows test failed; see the structured check annotation.')
+    print(completed.stdout)
     assert json.loads(report.read_text())==json.loads((HERE/'windows-expected.json').read_text())
 
 if __name__=='__main__':
