@@ -94,7 +94,7 @@ def main(root, report):
         subprocess.run(['ffmpeg','-nostdin','-v','error','-i',str(data/'audio'/f"{job['id']}.wav"),'-f','null','-'],check=True,timeout=30)
     finally:
         worker.close_nano_pool();azure.clear_configuration(data)
-    Path(report).write_text(json.dumps(REPORT,sort_keys=True,indent=2)+'\n',encoding='utf-8')
+    Path(report).write_bytes((json.dumps(REPORT,sort_keys=True,indent=2)+'\n').encode('utf-8'))
     print('Windows bundle, DPAPI, local API and synthetic cloud PCM pipeline verified. No Azure audio request was sent.')
 
 if __name__=='__main__':
