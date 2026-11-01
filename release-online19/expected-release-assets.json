@@ -1,0 +1,38 @@
+{
+  "QA.json": {
+    "size": 586,
+    "sha256": "a1b126cbd525993d255bd9f2d74834985ec7752d1e89eb0690c2db5031da700e"
+  },
+  "Voice-Studio-1.13.0-Online19-Windows.zip": {
+    "size": 164441257,
+    "sha256": "7fdd9f299f2ef1dff7eb15822ea06c780032a36395c8846d1285e8ec4b417a2c"
+  },
+  "Voice-Studio-1.13.0-Online19-Update.zip.sha256": {
+    "size": 106,
+    "sha256": "4a277b32f4666d7fbe3c47a06924d208cec3b7e371c85039fa741ec5e49c2187"
+  },
+  "HUONG_DAN.txt": {
+    "size": 4023,
+    "sha256": "9235e2f2a3be1fdea5e49a1f7c6703bab5985789bc4c8c3726892b02d7bbf1cc"
+  },
+  "Voice-Studio-1.13.0-Online19-Windows.zip.sha256": {
+    "size": 107,
+    "sha256": "0cf4f0530e264f288de52ba14620dd66c1145213aeab95f855336a1ce39f4ea2"
+  },
+  "Voice-Studio-1.13.0-Online19-Update.zip": {
+    "size": 183860,
+    "sha256": "08ec733eabb52615e91795d5bca03ba0d6852cb1c6c251ac0a95f175919c6970"
+  },
+  "HUONG_DAN.txt.sha256": {
+    "size": 80,
+    "sha256": "04298a149dcceee23588ae5b6dd5df863d4a70c0dc86525881d2150a2a119174"
+  },
+  "QA.json.sha256": {
+    "size": 74,
+    "sha256": "e373e31e089308e29a045e077ca040e6ccbb340b4a8277fa637e740bd546d038"
+  },
+  "WINDOWS-QA.json": {
+    "size": 564,
+    "sha256": "4fd0a7c7810f0e9a008ec992386f0d495c7cafccff7f0fbe5a5f19dfb4c2a8bd"
+  }
+}

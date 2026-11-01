@@ -439,7 +439,7 @@ def test_full_1_12_2_html_requests_new_javascript_cache_identity():
 
     parser = Scripts()
     parser.feed(SCRIPT.with_name('index.html').read_text(encoding='utf-8'))
-    assert parser.sources == ['/static/app.js?v=1.12.3-turbo19']
+    assert parser.sources == ['/static/app.js?v=1.13.0-online19']
 
 
 def test_omni_readiness_and_setup_message_explain_missing_asr_without_blocking_supplied_text():

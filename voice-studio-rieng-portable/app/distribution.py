@@ -11,6 +11,8 @@ def distribution_profile(root=None):
             return 'standard'
         record = json.loads(path.read_text(encoding='utf-8'))
         if isinstance(record, dict) and type(record.get('schema')) is int and record['schema'] == 1:
+            if record.get('profile') == 'online-19':
+                return 'online-19'
             if record.get('profile') == 'lean-19-cpu':
                 return 'lean-19-cpu'
             if record.get('profile') == 'compact-19':

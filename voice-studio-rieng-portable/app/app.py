@@ -20,7 +20,7 @@ from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, SecretStr
 from starlette.concurrency import run_in_threadpool
 from distribution import distribution_profile
 
@@ -114,7 +114,7 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
 
 
-app = FastAPI(title='Voice Studio Riêng', version='1.12.3', lifespan=lifespan)
+app = FastAPI(title='Voice Studio Riêng', version='1.13.0', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 @app.exception_handler(RequestValidationError)
@@ -266,6 +266,8 @@ def _config_values():
     if model_ready('voxcpm'):reference_languages.add('th')
     return {
         'version': app.version,
+        'azure_speech': __import__('azure_speech').status(DATA),
+        'azure_regions': list(__import__('azure_speech').REGIONS),
         'distribution_profile': distribution_profile(),
         'default_resource_profile': 'maximum' if distribution_profile() == 'compact-19' else 'smooth',
         'native_multilingual_ready': is_ready(DATA),
@@ -284,7 +286,8 @@ def _config_values():
         'mode': 'local',
         'edition': 'standalone-voice',
         'languages': LANGUAGES,
-        'ai_voice_languages': list(dict.fromkeys([*CORE_LANGUAGES,*sorted(reference_languages)])),
+        'ai_voice_languages': (list(dict.fromkeys(v['languages'][0] for v in __import__('azure_speech').VOICES))
+                               if distribution_profile()=='online-19' else list(dict.fromkeys([*CORE_LANGUAGES,*sorted(reference_languages)]))),
         'max_characters': MAX_CHARACTERS,
         'max_audio_minutes': 1440,
         'fast_vieneu': supports_int8() and (DATA / 'models' / 'vieneu_fast.ready').exists(),
@@ -328,7 +331,9 @@ def voices():
         has_sample=voice.get('has_sample',True) if voice.get('category')=='reference' else True
         readiness={}
         reason=voice.get('missing_reason') if voice.get('has_sample') is False else None
-        if voice['engine']=='voxcpm':
+        if voice['engine']=='azure':
+            ready=voice['ready']
+        elif voice['engine']=='voxcpm':
             requires_transcription=True
             if has_sample:
                 try:
@@ -360,11 +365,15 @@ def voices():
 
 
 def available_voices():
-    return catalog_voices()+PRESETS+installed_voices()+records('voices')
+    from azure_speech import catalog
+    online=catalog(DATA)
+    if distribution_profile()=='online-19':return online
+    return online+catalog_voices()+PRESETS+installed_voices()+records('voices')
 
 
 def model_ready(engine):
     if engine=='system':return True
+    if engine=='azure':return __import__('azure_speech').status(DATA)['verified']
     if engine in {'qwen','qwen_clone'}:
         from qwen_backend import is_ready
         return is_ready(DATA,engine=engine)
@@ -597,7 +606,13 @@ def _submit_speech(body: Speech,calibration=False):
     precision=body.international_precision if engine=='voxcpm' else ('int8' if body.quality=='fast' and engine=='vieneu' else 'fp32')
     if engine not in {'vieneu_nano','vieneu'} and body.cpu_execution!='auto':
         raise HTTPException(422,'Chọn cách chạy CPU riêng cho giọng Nano hoặc Turbo.')
-    if native:
+    if engine == 'azure':
+        model_memory='remote'
+        body.nano_threads=1
+        body.nano_parallel=min(1 if body.resource_profile=='light' else 4,
+                               body.nano_parallel if 'nano_parallel' in body.model_fields_set else 4)
+        if 'audio_fit_backend' not in body.model_fields_set:body.audio_fit_backend='ffmpeg'
+    elif native:
         # GPU contexts remain single-model on a 6 GB card. Independent CPU
         # workers use their own bounded GGUF budget rather than legacy FP32.
         model_memory='native'
@@ -636,7 +651,7 @@ def _submit_speech(body: Speech,calibration=False):
             raise HTTPException(503,'INT8 quốc tế cần khoảng 24 GB RAM khả dụng khi nạp. Chọn FP32 hoặc giải phóng RAM rồi thử lại.')
         bounded=bounded_settings({'nano_parallel':body.nano_parallel,'nano_threads':body.nano_threads},limits)
         body.nano_parallel=bounded['nano_parallel'];body.nano_threads=bounded['nano_threads']
-    if body.paragraph_pause is None:body.paragraph_pause=get_profile(body.delivery).pause
+    if body.paragraph_pause is None:body.paragraph_pause=0 if engine=='azure' else get_profile(body.delivery).pause
     from subtitles import normalize_script
     try:
         body.text, body.input_format = normalize_script(body.text, body.input_format)
@@ -661,13 +676,18 @@ def _submit_speech(body: Speech,calibration=False):
                 from native_transcript import asr_ready
                 if not asr_ready(DATA):
                     raise HTTPException(503,'Mẫu này chưa có lời chép. OmniVoice cần mô hình và thư viện nhận dạng lời mẫu ngoại tuyến; dùng bộ Windows 1.12.2 đầy đủ hoặc chạy lại trình cài bộ đó để khôi phục trước khi tạo.')
+    elif engine=='azure':
+        if not voice.get('ready'):
+            raise HTTPException(503,voice.get('missing_reason') or 'Kiểm tra kết nối Azure trước khi tạo.')
     elif not model_ready(engine):
         raise HTTPException(503,'Chạy TAI_GIONG_DA_NGON_NGU.bat một lần để chuẩn bị các giọng quốc tế mới.' if engine=='voxcpm' else f'Mô hình {engine} chưa sẵn sàng. Chạy lệnh tải mô hình trong hướng dẫn cài đặt.')
     if calibration and engine not in {'vieneu_nano','vieneu'}:raise HTTPException(422,'Chọn giọng Nano hoặc Turbo để đo và tối ưu CPU.')
     try:
         segment_plan = 'classic-v1'
         if body.input_format == 'txt' and body.paragraph_pause == 0:
-            if engine == 'vieneu_nano':
+            if engine == 'azure':
+                segment_plan = 'azure-packed-v1'
+            elif engine == 'vieneu_nano':
                 segment_plan = 'nano-packed-v1'
             elif engine == 'voxcpm' and body.render_mode == 'fast' and body.nano_parallel == 1:
                 segment_plan = 'international-packed-v1'
@@ -815,6 +835,10 @@ def resume_job(ident: str, auto_fit: bool = True):
             raise HTTPException(409, 'Chỉ tiếp tục tác vụ đã dừng hoặc có lỗi.')
         if sum(j['status'] in {'queued', 'running', 'cancelling'} for j in records('jobs')) >= 4:
             raise HTTPException(429, 'Hàng đợi đã đầy.')
+        if job.get('engine')=='azure':
+            from azure_speech import catalog
+            current=next((v for v in catalog(DATA) if v['id']==job['voice_id']),None)
+            if not current or not current['ready']:raise HTTPException(409,'Kiểm tra lại kết nối Azure và giọng đã chọn trước khi tiếp tục.')
         if not job.get('speaker'):
             try:resolve_reference(job['voice_id'],DATA)
             except (OSError,ValueError):raise HTTPException(409,'Mẫu giọng đã bị xóa hoặc không hợp lệ; không thể tiếp tục tác vụ này.') from None
@@ -924,9 +948,11 @@ def benchmark(body: BenchmarkRequest):
     engine=voice.get('engine') if voice else None
     if not voice or body.language not in voice['languages'] or body.language not in BENCHMARK_LANGUAGES:
         raise HTTPException(422,'Chọn giọng và ngôn ngữ hỗ trợ mẫu đo.')
-    if engine not in {'vieneu_nano','vieneu','voxcpm'}:raise HTTPException(422,'Đo tốc độ hiện hỗ trợ Nano, Turbo và bộ giọng mẫu đa ngôn ngữ.')
+    if engine not in {'vieneu_nano','vieneu','voxcpm','azure'}:raise HTTPException(422,'Đo tốc độ hiện hỗ trợ Nano, Turbo và bộ giọng mẫu đa ngôn ngữ.')
     native=engine=='voxcpm' and body.international_backend in {'omnivoice','voxcpm_native'}
-    if native and body.international_backend=='voxcpm_native' and body.international_device=='cpu':
+    if engine=='azure':
+        workers=min(1 if body.resource_profile=='light' else 4,body.nano_parallel or 4)
+    elif native and body.international_backend=='voxcpm_native' and body.international_device=='cpu':
         workers=body.nano_parallel or native_voxcpm_cpu_presets(body.resource_profile)[body.render_mode]['nano_parallel']
     else:
         workers=1 if native else body.nano_parallel or effective_rendering_presets(engine,body.resource_profile,body.international_precision if engine=='voxcpm' else 'fp32',body.cpu_execution)[body.render_mode]['nano_parallel']
@@ -950,3 +976,47 @@ def calibrate_machine(body: BenchmarkRequest):
     payload=Speech(text=sample_text(preset['nano_parallel'],body.language),voice_id=body.voice_id,language=body.language,
                    render_mode=body.render_mode,resource_profile=body.resource_profile,cpu_execution=body.cpu_execution,quality=body.quality,delivery=body.delivery,paragraph_pause=0,format='wav',**preset)
     return _submit_speech(payload,calibration=True)
+
+
+class AzureConfiguration(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    region: str = Field(min_length=2, max_length=40)
+    key: SecretStr = Field(min_length=16, max_length=256)
+
+
+def _azure_idle():
+    if any(j.get('engine')=='azure' and j.get('status') in {'queued','running','cancelling'} for j in records('jobs')):
+        raise HTTPException(409,'Đợi các tác vụ Azure dừng hẳn trước khi đổi hoặc kiểm tra lại cấu hình.')
+
+
+@app.get('/api/online/azure')
+def azure_status():
+    from azure_speech import status
+    return status(DATA)
+
+
+@app.put('/api/online/azure')
+def azure_configure(body: AzureConfiguration):
+    from azure_speech import save_configuration, status, AzureSpeechError
+    with lock:
+        _azure_idle()
+        try:save_configuration(DATA,body.region,body.key.get_secret_value())
+        except (ValueError,AzureSpeechError) as error:raise HTTPException(422,str(error)) from None
+    return status(DATA)
+
+
+@app.post('/api/online/azure/check')
+def azure_check():
+    from azure_speech import check_connection, AzureSpeechError
+    with lock:
+        _azure_idle()
+        try:return check_connection(DATA)
+        except (ValueError,AzureSpeechError) as error:raise HTTPException(503,str(error)) from None
+
+
+@app.delete('/api/online/azure')
+def azure_clear():
+    from azure_speech import clear_configuration
+    with lock:
+        _azure_idle()
+        return clear_configuration(DATA)

@@ -1,0 +1,16 @@
+{
+  "azure_network_requests_sent": 0,
+  "cloud_pipeline_with_synthetic_wav_passed": true,
+  "credential_not_returned_in_api": true,
+  "ffmpeg_pcm_pipeline_passed": true,
+  "live_azure_synthesis_tested": false,
+  "native_voice_catalog_count": 19,
+  "new_job_after_old_cancellation_passed": true,
+  "numpy_soundfile_soxr_imported": true,
+  "platform": "Windows x64, bundled Python",
+  "startup_and_local_api_passed": true,
+  "target_30x_verified": false,
+  "version": "1.13.0",
+  "voice_quality_listening_verified": false,
+  "windows_dpapi_roundtrip_passed": true
+}

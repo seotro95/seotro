@@ -93,7 +93,9 @@ def plan_segments(job):
         return output
     text = spoken_text(job['text']) if job.get('skip_timestamps', True) else job['text']
     plan = job.get('segment_plan')
-    if plan == 'nano-packed-v1':
+    if plan == 'azure-packed-v1' and job.get('engine')=='azure' and job.get('paragraph_pause')==0:
+        limit = 800
+    elif plan == 'nano-packed-v1':
         limit = 130
     elif (plan == 'international-packed-v1' and job.get('engine') == 'voxcpm'
           and job.get('paragraph_pause') == 0):

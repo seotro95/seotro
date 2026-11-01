@@ -57,6 +57,10 @@ def load_synthesizer(job):
     import soundfile as sf
     selected = ('fast_multilingual' if uses_native_multilingual(job) else 'voxcpm_backend') if job.get('engine') == 'voxcpm' else ('qwen_backend' if job.get('engine') in {'qwen', 'qwen_clone'} else None)
     close_international_backends(keep=selected)
+    if job['engine'] == 'azure':
+        from azure_speech import create_synthesizer
+        cancel=DATA/'parts'/job['id']/'cancel.flag' if job.get('id') else None
+        return create_synthesizer(DATA,job['voice_id'],job['language'],cancel)
     if job['engine'] == 'system':
         from system_voices import speak
         return lambda text, output: speak(text, job['speaker'], output)
@@ -146,6 +150,7 @@ def get_synthesizer(job):
     global _cached_key, _cached_synth
     key = tuple(job.get(k) for k in ('engine', 'voice_id', 'speaker', 'language', 'quality', 'nano_steps', 'nano_threads', 'voxcpm_steps','international_precision',
                                     'international_backend','international_device','omnivoice_steps')) + (native_performance(job),)
+    if job.get('engine')=='azure':key += (job.get('id'),)
     if job.get('model_memory')=='shared' and job.get('engine') in {'vieneu_nano','vieneu'}:
         if getattr(_thread_synth,'key',None)!=key:
             _thread_synth.synth=load_synthesizer(job)
@@ -201,6 +206,8 @@ def close_nano_pool(clear_models=True):
 
 
 def create_render_pool(workers,job):
+    if job.get('engine')=='azure':
+        return ThreadPoolExecutor(max_workers=min(4,workers),thread_name_prefix='voice-online')
     if job.get('model_memory')=='shared' and job.get('engine') in {'vieneu_nano','vieneu'}:
         return ThreadPoolExecutor(max_workers=workers,thread_name_prefix='voice-shared')
     return ProcessPoolExecutor(max_workers=workers,mp_context=multiprocessing.get_context('spawn'),
@@ -261,7 +268,8 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
     controls=segment_delivery(job,segment.emphasis)
     tempo,gain=controls['tempo'],controls['gain']
     native_speed=not custom and job.get('engine')=='vieneu_nano'
-    for attempt in range(3):
+    attempts=1 if job.get('engine')=='azure' else 3
+    for attempt in range(attempts):
         if (work / 'cancel.flag').exists():raise InterruptedError('Tác vụ đã dừng.')
         raw.unlink(missing_ok=True);temporary.unlink(missing_ok=True)
         if not custom:
@@ -273,14 +281,15 @@ def prepare_chunk(job, segment, index, work, synthesize=None):
             else:
                 synthesize(segment.text,raw)
             if not raw.is_file() or sf.info(str(raw)).frames==0:raise EmptyVoiceError('Model không tạo mẫu âm thanh.')
-            normalize_audio(raw, temporary, 1 if native_speed else tempo, gain,job.get('audio_fit_backend','ffmpeg'),work/'cancel.flag')
+            normalize_audio(raw, temporary, 1 if native_speed else tempo, gain,
+                            'wsola' if job.get('engine')=='azure' and abs(tempo-1)<1e-6 else job.get('audio_fit_backend','ffmpeg'),work/'cancel.flag')
             with wave.open(str(temporary)) as audio:
                 samples=np.frombuffer(audio.readframes(audio.getnframes()),dtype='<i2')
             if not len(samples) or not np.any(samples):raise EmptyVoiceError('Âm thanh rỗng hoặc chỉ có im lặng.')
         except EmptyVoiceError:
-            if attempt<2:continue
+            if attempt<attempts-1:continue
             excerpt=segment.text[:100].replace('\n',' ')
-            raise ValueError(f'{label}: giọng {job.get("speaker") or job.get("engine")} vẫn không tạo được âm thanh sau 3 lần thử. Lời: “{excerpt}”. Kiểm tra ngôn ngữ, sửa câu hoặc chọn giọng khác. Không bỏ qua câu này.') from None
+            raise ValueError(f'{label}: giọng {job.get("speaker") or job.get("engine")} vẫn không tạo được âm thanh sau {attempts} lần thử. Lời: “{excerpt}”. Kiểm tra ngôn ngữ, sửa câu hoặc chọn giọng khác. Không bỏ qua câu này.') from None
         finally:
             raw.unlink(missing_ok=True)
         temporary.replace(part)
@@ -496,6 +505,8 @@ def render(job, synthesize=None):
         raise ValueError('Không có nội dung đọc sau khi xử lý ký hiệu nhấn/nghỉ.')
     cues = parse_srt(job['text']) if job.get('input_format') == 'srt' else None
     parallel_workers=min(8 if job.get('engine')=='voxcpm' else 32,max(1,int(job.get('nano_parallel',1)))) if job.get('engine') in {'vieneu_nano','vieneu','voxcpm'} and synthesize is None else 1
+    if job.get('engine')=='azure' and synthesize is None:
+        parallel_workers=min(4,max(1,int(job.get('nano_parallel',1))))
     native_cpu_parallel=(uses_native_multilingual(job)
                          and job.get('international_device','cpu')=='cpu')
     if uses_native_multilingual(job) and not native_cpu_parallel:
@@ -706,6 +717,9 @@ def render(job, synthesize=None):
     if cues:execution['cue_fit_pipeline']='parallel' if parallel_cue_fit else 'serial'
     if job.get('engine')=='vieneu':execution['precision']='int8' if job.get('quality')=='fast' else 'fp32'
     if job.get('engine')=='vieneu_nano':execution['nano_steps']=job.get('nano_steps',8)
+    if job.get('engine')=='azure':
+        execution.update(backend='azure-neural',device='cloud',model_memory='remote',
+                         provider_voice_id=job.get('speaker'),threads=1,network_required=True)
     if uses_native_multilingual(job):
         backend=job.get('international_backend')
         execution.update(backend=backend,device=job.get('international_device','cpu'),

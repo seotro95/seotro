@@ -155,7 +155,7 @@ function post(path, data) {
 function setConnection(online) {
   $('connection').className = `connection ${online ? 'ready' : 'offline'}`;
   $('connection').textContent = online
-    ? `${config?.hardware || 'Máy cá nhân'} · Xử lý trên máy · ${config?.available_ram_gb ?? '?'} GB RAM còn trống`
+    ? `${config?.hardware || 'Máy cá nhân'} · Tool trên máy; giọng trực tuyến dùng Internet · ${config?.available_ram_gb ?? '?'} GB RAM còn trống`
     : 'Chưa kết nối được phòng thu';
 }
 
@@ -198,6 +198,7 @@ function modelInstruction(voice) {
 }
 
 function voiceSetupMessage(voice) {
+  if (voice?.engine === 'azure') return voice.missing_reason || 'Mở 19 giọng quốc tế trực tuyến, nhập khóa và vùng Azure Speech rồi kiểm tra kết nối.';
   if (['qwen','qwen_clone'].includes(voice?.engine)) return voice.missing_reason || 'Cần runtime Qwen, mô hình đúng loại và bộ mã hóa âm thanh. Dùng bộ Windows 1.12.2 đầy đủ hoặc chạy lại trình cài bộ đó để khôi phục các thành phần còn thiếu.';
   if (nativeMultilingual(voice)) {
     const installed = nativeInstallation();
@@ -218,7 +219,7 @@ function languageName(language) { return config?.languages?.[language] || langua
 function engineName(voice) {
   if (voice?.engine === 'voxcpm' && voice.international_backend === 'voxcpm_native') return 'VoxCPM2 native Q8 · Đa ngôn ngữ';
   if (voice?.engine === 'voxcpm' && voice.international_backend === 'omnivoice') return 'OmniVoice Q8 · Đa ngôn ngữ';
-  return {vieneu_nano: 'Nano', vieneu: 'Turbo', voxcpm: 'VoxCPM · Đa ngôn ngữ', qwen: 'Qwen', qwen_clone: 'Qwen · Nhân bản', system: 'Hệ thống Windows'}[voice?.engine] || voice?.engine || 'AI';
+  return {azure: 'Azure Neural · Trực tuyến', vieneu_nano: 'Nano', vieneu: 'Turbo', voxcpm: 'VoxCPM · Đa ngôn ngữ', qwen: 'Qwen', qwen_clone: 'Qwen · Nhân bản', system: 'Hệ thống Windows'}[voice?.engine] || voice?.engine || 'AI';
 }
 
 function nativeMultilingual(voice) { return voice?.engine === 'voxcpm' && ['voxcpm_native', 'omnivoice'].includes($('international-backend').value); }
@@ -235,13 +236,14 @@ function boundedInteger(value, maximum, fallback = 1) {
   return Number.isInteger(number) && number >= 1 ? Math.min(number, maximum) : fallback;
 }
 function parallelLimit(voice) {
+  if (voice?.engine === 'azure') return $('resource-profile').value === 'light' ? 1 : 4;
   if (nativeCpu(voice)) {
     const limits = nativeCpuLimits(voice);
     return Math.min(boundedInteger(limits.max_workers, 8), boundedInteger(limits.cpu_budget, 64, 64));
   }
   return nativeMultilingual(voice) ? 1 : voice?.engine === 'voxcpm' ? 8 : 32;
 }
-function threadLimit(voice) { return nativeCpu(voice) ? boundedInteger(nativeCpuLimits(voice).max_threads, 8, 8) : 8; }
+function threadLimit(voice) { if (voice?.engine === 'azure') return 1; return nativeCpu(voice) ? boundedInteger(nativeCpuLimits(voice).max_threads, 8, 8) : 8; }
 function boundedRenderResources(voice, requested) {
   const workers = boundedInteger(requested.nano_parallel, parallelLimit(voice));
   let threads = boundedInteger(requested.nano_threads, threadLimit(voice));
@@ -370,6 +372,7 @@ function benchmarkSupported(voice) {
 }
 
 function renderingPresets(voice) {
+  if (voice?.engine === 'azure') return Object.fromEntries(['fast','balanced','quality'].map(mode => [mode, {nano_parallel: parallelLimit(voice), nano_threads: 1, audio_fit_backend: 'ffmpeg'}]));
   if (nativeMultilingual(voice)) {
     if (nativeVoxCpu(voice)) {
       const presets = config?.native_voxcpm_cpu_rendering_presets_by_resource?.[$('resource-profile').value];
@@ -537,6 +540,7 @@ function updateRenderNote() {
   } else if ($('render-mode').value === 'fast' && current) {
     note += ` Đang giữ giọng ${current.name} · ${engineName(current)}. Giọng này dùng cơ chế xử lý riêng của mô hình.`;
   }
+  if (current?.engine === 'azure') note = `Azure Neural · ${$('nano-parallel').value} yêu cầu đồng thời; không dùng mô hình CPU/GPU trên máy. Các chế độ giữ cùng giọng và mô hình Neural. Thời gian gồm mạng và giới hạn dịch vụ; bấm Đo giọng đang chọn, nghe mẫu trước bản dài. Chưa xác minh 30×.`;
   $('render-note').textContent = note;
   const nano = fastNanoVoice();
   $('choose-nano').disabled = !nano || submitting;
@@ -666,7 +670,7 @@ function populateVoices() {
   else {
     const defaults = choices.filter((voice) => voice.category === 'reference' && voice.is_default);
     const vietnameseNano = $('language').value === 'vi' && choices.find((voice) => voice.engine === 'vieneu_nano' && voiceReady(voice));
-    const preferred = vietnameseNano || defaults.find(voiceReady) || defaults[0] || choices.find(voiceReady);
+    const preferred = choices.find(v => v.engine === 'azure' && voiceReady(v)) || choices.find(v => v.engine === 'azure') || vietnameseNano || defaults.find(voiceReady) || defaults[0] || choices.find(voiceReady);
     if (preferred) $('voice').value = preferred.id;
   }
   if (!choices.length) {
@@ -701,11 +705,16 @@ function updateVoice() {
     $('nano-parallel').value = String(resources.nano_parallel);
     $('nano-threads').value = String(resources.nano_threads);
   }
-  $('nano-parallel').disabled = !cpuVoice(voice) || parallelLimit(voice) === 1 || submitting;
+  $('nano-parallel').disabled = (!cpuVoice(voice) && voice?.engine !== 'azure') || parallelLimit(voice) === 1 || submitting;
   for (const option of $('nano-parallel').options) {
+    option._originalText ??= option.textContent;
+    option.textContent = voice?.engine === 'azure' ? `${option.value} yêu cầu` : option._originalText;
     const outsideBudget = Number(option.value) > parallelLimit(voice);
     option.disabled = outsideBudget; option.hidden = outsideBudget;
   }
+  $('parallel-label').textContent = voice?.engine === 'azure' ? 'Yêu cầu Azure đồng thời · tối đa 4' : 'Tác vụ CPU đồng thời · Giọng đang chọn';
+  $('cpu-threads-field').hidden = voice?.engine === 'azure';
+  $('quality').disabled = voice?.engine === 'azure' || submitting;
   $('nano-threads').disabled = !cpuVoice(voice) || submitting;
   $('nano-threads').max = String(threadLimit(voice));
   $('cpu-execution-field').hidden = !calibrationVoice(voice);
@@ -732,9 +741,11 @@ function updateVoice() {
         : 'Các tác vụ và luồng CPU áp dụng cho giọng đa ngôn ngữ đang chọn. Mỗi tác vụ dùng nhiều RAM; đo mẫu để kiểm tra tốc độ và chọn ít tác vụ hơn nếu máy thiếu RAM.'
       : `Các tác vụ CPU áp dụng cho giọng ${engineName(voice)} đang chọn. Nhiều tác vụ dùng thêm RAM; bấm tự đo để tìm cấu hình phù hợp. Số bước Nano được chỉnh riêng bên dưới.`
     : 'Giọng hiện tại dùng cơ chế xử lý riêng của mô hình.';
+  if (voice?.engine === 'azure') $('resource-note').textContent = 'Các đoạn gửi tối đa 4 yêu cầu đồng thời, hoặc 1 khi chọn Nhẹ. Nếu gặp giới hạn Azure, giảm số yêu cầu. Không nhân bản mô hình trong RAM.';
   updateSuggestion();
   updateRenderNote();
-  $('generate-note').textContent = !voice ? 'Cần chọn giọng hỗ trợ ngôn ngữ lời đọc.' : !ready ? (voice.has_sample || voice.category === 'reference' ? 'Cài mô hình trước khi tạo giọng. Bạn vẫn có thể nghe mẫu trong Thư viện giọng.' : 'Tải mô hình trước khi tạo giọng. Mở Hướng dẫn để xem chi tiết.') : 'Tạo trên máy · Có thể dừng và tiếp tục trong Bản thu';
+  if (voice?.engine === 'azure' && !ready) $('azure-settings').open = true;
+  $('generate-note').textContent = !voice ? 'Cần chọn giọng hỗ trợ ngôn ngữ lời đọc.' : !ready ? (voice.engine === 'azure' ? 'Nhập khóa và vùng Azure Speech trong phần 19 giọng quốc tế trực tuyến, rồi kiểm tra kết nối.' : voice.has_sample || voice.category === 'reference' ? 'Cài mô hình trước khi tạo giọng. Bạn vẫn có thể nghe mẫu trong Thư viện giọng.' : 'Tải mô hình trước khi tạo giọng. Mở Hướng dẫn để xem chi tiết.') : voice.engine === 'azure' ? 'Tạo qua Azure · Nội dung gửi tới dịch vụ và có thể tính phí · Có thể dừng/tiếp tục' : 'Tạo trên máy · Có thể dừng và tiếp tục trong Bản thu';
 }
 
 function updateCharacterCount() {
@@ -938,7 +949,7 @@ async function generate() {
   if ($('script').value.length > 1000000) { notify('Mỗi lần tạo nhận tối đa 1.000.000 ký tự.', true); return; }
   for (const id of ['max-minutes', 'paragraph-pause', 'nano-threads']) if (!$(id).reportValidity()) return;
   const voice = voices.find((item) => item.id === $('voice').value);
-  if (!voiceReady(voice)) { notify('Chọn một giọng đã sẵn sàng hoặc tải mô hình trước.', true); return; }
+  if (!voiceReady(voice)) { notify(voice?.engine === 'azure' ? voiceSetupMessage(voice) : 'Chọn một giọng đã sẵn sàng hoặc tải mô hình trước.', true); return; }
   submitting = true; updateVoice(); notify('');
   try {
     const job = await post('/api/speech', {
@@ -1166,6 +1177,7 @@ async function refreshHistory() {
 
 function renderModelStatus() {
   const target = $('model-status'); target.replaceChildren();
+  if (config.distribution_profile === 'online-19') { target.append(node('p', `19 giọng Azure Neural bản ngữ · Internet · Không dùng mô hình cục bộ. ${config.azure_speech?.message || ''}`)); return; }
   if (config.distribution_profile === 'compact-19') target.append(node('p', 'Gói gọn · Có sẵn Nano/Turbo. Bộ 19 mẫu riêng được giữ nguyên; các mẫu quốc tế cần bộ đọc tương ứng. Không cần tải lại toàn bộ gói 11 GB.'));
   target.append(node('p', `${config.hardware} · ${config.cpu_cores} luồng CPU · ${config.available_ram_gb ?? '?'} GB RAM trống`));
   target.append(node('p', `FFmpeg: ${config.ffmpeg ? 'Đã cài' : 'Chưa tìm thấy · chạy lại CAI_DAT.bat'}`));
@@ -1181,7 +1193,9 @@ function renderModelStatus() {
 async function refreshVoices() {
   const results = await Promise.all([api('/api/config'), api('/api/voices')]);
   config = results[0]; voices = results[1].voices || [];
+  $('clone-card').hidden = config.distribution_profile === 'online-19';
   populateDeliveryProfiles();
+  updateAzureSettings();
   const initial = !renderSettingsInitialized;
   populateResourceProfiles();
   if (initial) {
@@ -1202,12 +1216,14 @@ async function refreshVoices() {
   if (initial && [...$('language').options].some((option) => option.value === renderPreferences.language)) $('language').value = renderPreferences.language;
   populateVoices();
   if (initial) {
-    if ([...$('voice').options].some((option) => option.value === renderPreferences.voice_id)) {
+    if ((renderPreferences.online19_initialized || !voices.some(v => v.engine === 'azure' && v.languages.includes($('language').value))) && [...$('voice').options].some((option) => option.value === renderPreferences.voice_id)) {
       $('voice').value = renderPreferences.voice_id;
       updateVoice();
     }
     applyRenderMode($('render-mode').value, {remember: false});
     renderSettingsInitialized = true;
+    renderPreferences.online19_initialized = true;
+    saveRenderPreferences();
   }
   renderLibrary(); renderModelStatus();
   $('version').textContent = config.version ? `· ${config.version}${config.distribution_profile === 'compact-19' ? ' · Gọn 19 · Turbo CPU' : ''}` : '';
@@ -1252,8 +1268,45 @@ function schedulePoll(delay) {
   pollTimer = setTimeout(poll, delay);
 }
 
+function updateAzureSettings() {
+  const selected = $('azure-region').value;
+  const regions = config?.azure_regions || ['southeastasia'];
+  $('azure-region').replaceChildren(...regions.map(value => { const option = node('option', value); option.value = value; return option; }));
+  $('azure-region').value = config?.azure_speech?.region || (regions.includes(selected) ? selected : regions[0]);
+  const state = config?.azure_speech;
+  $('azure-status').textContent = `${state?.message || 'Chưa cấu hình Azure Speech.'}${state?.verified ? ' Có ' + (state.available_voices || []).length + '/19 giọng trong vùng này.' : ''}`;
+}
+
+async function configureAzure(action) {
+  const buttons = ['azure-save', 'azure-check', 'azure-clear'];
+  for (const id of buttons) $(id).disabled = true;
+  try {
+    if (action === 'save') {
+      const key = $('azure-key').value.trim();
+      $('azure-key').value = '';
+      if (!key) throw new Error('Nhập khóa Azure Speech trước khi lưu.');
+      await api('/api/online/azure', {method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify({region: $('azure-region').value, key})});
+    }
+    if (action === 'clear') await api('/api/online/azure', {method: 'DELETE'});
+    else await post('/api/online/azure/check', {});
+    await refreshVoices();
+    if (action !== 'clear') {
+      const voice = voices.find(v => v.engine === 'azure' && v.languages.includes($('language').value) && voiceReady(v));
+      if (voice) { $('voice').value = voice.id; updateVoice(); saveRenderPreferences(); }
+    }
+    notify(action === 'clear' ? 'Đã xóa khóa lưu trong tool. Biến môi trường (nếu có) vẫn do bạn quản lý.' : 'Đã kiểm tra danh sách giọng. Bấm Đo giọng đang chọn để tạo mẫu thật; lượt tạo mẫu có thể tính phí.');
+  } catch (error) {
+    await refreshVoices().catch(() => {});
+    $('azure-status').textContent = error.message;
+    notify(error.message, true);
+  } finally { for (const id of buttons) $(id).disabled = false; }
+}
+
 for (const button of document.querySelectorAll('[data-view]')) button.addEventListener('click', () => showView(button.dataset.view));
 $('language').addEventListener('change', () => { populateVoices(); saveRenderPreferences(); });
+$('azure-save').addEventListener('click', () => configureAzure('save'));
+$('azure-check').addEventListener('click', () => configureAzure('check'));
+$('azure-clear').addEventListener('click', () => configureAzure('clear'));
 $('voice').addEventListener('change', () => { updateVoice(); saveRenderPreferences(); });
 $('script').addEventListener('input', scheduleCharacterCount);
 $('script-format').addEventListener('change', updateFormat);
