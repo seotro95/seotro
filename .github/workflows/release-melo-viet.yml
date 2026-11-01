@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 35
     env:
-      MELO_VIET_ROOT: ${{ runner.temp }}/melo-viet-installed
+      MELO_VIET_ROOT: /tmp/melo-viet-installed
       HF_HUB_DISABLE_TELEMETRY: '1'
       DO_NOT_TRACK: '1'
     steps:
