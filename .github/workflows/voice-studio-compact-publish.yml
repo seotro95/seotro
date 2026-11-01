@@ -44,8 +44,13 @@ jobs:
       - name: Build one complete compact ZIP with full checksum verification
         shell: pwsh
         run: |
-          python voice-studio-rieng-portable/packaging/build_compact_bundle.py --base "$env:RUNNER_TEMP/original.zip" --output "$env:RUNNER_TEMP/release/$env:ARCHIVE_NAME" --evidence voice-studio-rieng-portable/packaging/benchmarks/compact-cpu-20261101.qa.json | Tee-Object -FilePath "$env:RUNNER_TEMP/COMPACT-DELIVERY-QA.json"
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python voice-studio-rieng-portable/packaging/build_compact_bundle.py --base "$env:RUNNER_TEMP/original.zip" --output "$env:RUNNER_TEMP/release/$env:ARCHIVE_NAME" --evidence voice-studio-rieng-portable/packaging/benchmarks/compact-cpu-20261101.qa.json 2>&1 | Tee-Object -FilePath "$env:RUNNER_TEMP/COMPACT-DELIVERY-QA.json"
+          $result = $LASTEXITCODE
+          if ($result -ne 0) {
+            $detail = ((Get-Content -LiteralPath "$env:RUNNER_TEMP/COMPACT-DELIVERY-QA.json" -Tail 35) -join ' | ')
+            Write-Output ('::error title=Compact package assembly failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $result
+          }
       - name: Extract the exact ZIP into a folder with Vietnamese letters and spaces
         shell: python
         run: |
@@ -71,18 +76,27 @@ jobs:
           $env:PYTHONHOME = ''
           $env:PYTHONPATH = (Resolve-Path 'voice-studio-rieng-portable/app').Path + ';' + (Resolve-Path 'voice-studio-rieng-portable/packaging').Path
           Push-Location voice-studio-rieng-portable
-          & "$root/runtime/python.exe" -s -X utf8 -m pytest -q --junitxml="$env:RUNNER_TEMP/WINDOWS-COMPACT-TESTS.xml" app/tests/test_compact_distribution.py app/tests/test_resource_profiles.py app/tests/test_calibration.py app/tests/test_render_modes.py app/tests/test_shared_synthesis.py app/tests/test_turbo_reference.py app/tests/test_standalone_api.py app/tests/test_full_model_readiness_api.py app/tests/test_native_voxcpm_ui.py packaging/test_build_compact_bundle.py
+          & "$root/runtime/python.exe" -s -X utf8 -m pytest -q --junitxml="$env:RUNNER_TEMP/WINDOWS-COMPACT-TESTS.xml" app/tests/test_compact_distribution.py app/tests/test_resource_profiles.py app/tests/test_calibration.py app/tests/test_render_modes.py app/tests/test_shared_synthesis.py app/tests/test_turbo_reference.py app/tests/test_standalone_api.py app/tests/test_full_model_readiness_api.py app/tests/test_native_voxcpm_ui.py packaging/test_build_compact_bundle.py 2>&1 | Tee-Object -FilePath "$env:RUNNER_TEMP/compact-regression.log"
           $result = $LASTEXITCODE
           Pop-Location
-          if ($result -ne 0) { exit $result }
+          if ($result -ne 0) {
+            $detail = ((Get-Content -LiteralPath "$env:RUNNER_TEMP/compact-regression.log" -Tail 75) -join ' | ')
+            Write-Output ('::error title=Compact Windows regression failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $result
+          }
       - name: Verify real offline speech and launcher HTTP in the relocated Windows package
         shell: pwsh
         run: |
           $root = Get-Content -LiteralPath "$env:RUNNER_TEMP/compact-root.txt" -Encoding utf8 -Raw
           $env:PYTHONHOME = ''
           $env:PYTHONPATH = ''
-          & "$root/runtime/python.exe" -s -X utf8 voice-studio-rieng-portable/packaging/smoke_compact_bundle.py --root $root --output "$env:RUNNER_TEMP/WINDOWS-COMPACT-QA.json"
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & "$root/runtime/python.exe" -s -X utf8 voice-studio-rieng-portable/packaging/smoke_compact_bundle.py --root $root --output "$env:RUNNER_TEMP/WINDOWS-COMPACT-QA.json" 2>&1 | Tee-Object -FilePath "$env:RUNNER_TEMP/compact-smoke.log"
+          $result = $LASTEXITCODE
+          if ($result -ne 0) {
+            $detail = ((Get-Content -LiteralPath "$env:RUNNER_TEMP/compact-smoke.log" -Tail 55) -join ' | ')
+            Write-Output ('::error title=Compact Windows offline speech failed::' + $detail.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A'))
+            exit $result
+          }
       - name: Prepare verified release assets and notes
         shell: python
         run: |
