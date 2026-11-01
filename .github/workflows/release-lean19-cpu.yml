@@ -1,0 +1,33 @@
+name: Publish verified lean 19-voice CPU package
+on:
+  push:
+    branches: [codex/release-lean19-cpu1]
+    paths:
+      - '.github/workflows/release-lean19-cpu.yml'
+      - 'release-lean19-cpu/**'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: release-lean19-cpu1
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reconstruct exact SHA256-verified package and release parts
+        run: python release-lean19-cpu/reconstruct.py
+      - name: Upload verified release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload voice-studio-lean19-cpu1 "$RUNNER_TEMP"/lean19-release-assets/* --repo seotro95/seotro --clobber
+      - name: Verify server-side sizes and SHA256 digests
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python release-lean19-cpu/verify_remote.py
+      - name: Publish complete release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release edit voice-studio-lean19-cpu1 --repo seotro95/seotro --draft=false --latest=false --target "$GITHUB_SHA"
