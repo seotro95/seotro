@@ -20,7 +20,7 @@ def main(archive,destination):
     completed=subprocess.run([str(root/'runtime/python.exe'),'-s','-X','utf8',str(HERE/'windows_runtime_qa.py'),
                     '--root',str(root),'--report',str(report)],env=env,capture_output=True,text=True,encoding='utf-8',timeout=180)
     if completed.returncode:
-        detail=(completed.stdout+'\n'+completed.stderr)[-10000:]
+        detail=(completed.stdout+'\n'+completed.stderr)[-3000:]
         escaped=detail.replace('%','%25').replace('\r','%0D').replace('\n','%0A')
         print('::error title=Windows bundle smoke test::'+escaped,flush=True)
         raise RuntimeError('Bundled Windows test failed; see the structured check annotation.')
