@@ -1,0 +1,99 @@
+MELO + VIỆT 1.0.0 — CÀI RIÊNG TRÊN WINDOWS QUA WSL2
+
+Bộ này độc lập với Voice Studio/Azure. Không cần khóa Azure hoặc trả phí
+API tạo giọng. Tổng hợp chạy trên CPU của máy; Internet dùng để cài thư
+viện và tải mô hình/từ điển lần đầu. ZIP nhỏ là bộ cài, không chứa sẵn
+Python, các mô hình hoặc từ điển. Khi cài và thử các tiếng sẽ tải thêm
+vài GB; nên chuẩn bị ít nhất 15 GB trống. Không gọi bộ này là portable 2 GB.
+
+BỘ ĐỌC
+- Việt: VieNeu v3 Turbo FP32, CPU. Có các giọng sẵn của mô hình.
+- Anh, Pháp, Nhật, Hàn, Tây Ban Nha, Trung: MeloTTS chính thức.
+- MeloTTS source: main 209145371cff8fc3bd60d7be902ea69cbdb7965a,
+  bản phát hành chính thức hiện vẫn là v0.1.2; không phải model tự đổi tên.
+- Nga, Thái và nhân bản 19 mẫu giọng cũ không nằm trong bộ này.
+- Hai môi trường riêng để tránh xung đột NumPy/Librosa/Gradio.
+  Máy Xeon E5-2680 v4 dùng FP32 cho Việt; không ép Turbo INT8/VNNI.
+  Bộ cài chỉ cài PyTorch CPU, không cài CUDA hoặc sửa driver GTX 1060.
+
+BƯỚC 1 — BẬT WSL2 VÀ UBUNTU 22.04 (LÀM MỘT LẦN)
+1. Windows 10/11: mở Start, gõ PowerShell, chọn Run as administrator.
+2. Dán lệnh sau rồi Enter:
+
+   wsl --install -d Ubuntu-22.04
+
+3. Khởi động lại Windows nếu được yêu cầu.
+4. Mở Ubuntu 22.04 từ Start. Đợi cài xong, tự tạo username và mật khẩu
+   Linux. Khi gõ mật khẩu, không hiện ký tự là bình thường.
+5. Trong PowerShell, kiểm tra:
+
+   wsl -l -v
+
+   Dòng Ubuntu-22.04 nên có VERSION 2. Nếu đang là 1, chuyển bằng:
+
+   wsl --set-version Ubuntu-22.04 2
+
+BƯỚC 2 — GIẢI NÉN VÀ CÀI
+1. Giải nén toàn bộ ZIP vào thư mục cố định, ví dụ D:\Melo-Viet.
+   Giữ thư mục này để chạy các tệp BAT về sau. Không chép vào tool cũ.
+2. Nhấp đôi CAI_DAT.bat. Không cần chạy BAT bằng quyền administrator.
+3. Khi Ubuntu hỏi mật khẩu sudo, nhập mật khẩu Linux đã tạo ở bước 1.
+4. Chờ cài xong các thư viện và từ điển Nhật. Lần đầu có thể lâu;
+   không đóng cửa sổ giữa chừng. Thấy thông báo “Da cai xong thu vien”
+   là bước này hoàn tất. Nếu lỗi, giữ nội dung lỗi; chạy lại không xóa
+   các mô hình hoặc bản thu đã có.
+
+BƯỚC 3 — MỞ VÀ CHUẨN BỊ GIỌNG
+1. Nhấp đôi MO_TOOL.bat, giữ cửa sổ chạy mở.
+2. Trình duyệt tự mở. Nếu chưa mở, truy cập:
+
+   http://localhost:8817/
+
+3. Chọn ngôn ngữ, để 4 luồng CPU trước rồi bấm Tải/chuẩn bị giọng.
+   Đây là lúc tải mô hình. Mỗi tiếng có mô hình riêng. Không cần tải
+   trước toàn bộ ngôn ngữ nếu chỉ dùng một vài tiếng. Một số tokenizer
+   của MeloTTS được tải chung khi mở bộ đọc lần đầu.
+4. Danh sách giọng hiện ra: chọn giọng, nhập đúng tiếng và bấm Tạo WAV.
+5. Nghe thử; bấm Tải WAV để lưu sang thư mục tải về của Windows.
+6. Giữ cửa sổ tool mở giữa các lượt tạo để dùng lại mô hình, tránh nạp
+   lại mỗi câu. Đổi tiếng hoặc số luồng có thể nạp lại mô hình.
+
+BƯỚC 4 — DÙNG NGOẠI TUYẾN
+Sau khi đã chuẩn bị và tạo thử thành công các ngôn ngữ muốn dùng:
+- Đóng cửa sổ MO_TOOL.bat.
+- Mở MO_OFFLINE.bat. Chế độ này bật cờ ngoại tuyến cho Hugging Face
+  và Transformers. Tiếng nào chưa đủ mô hình/từ điển sẽ báo lỗi,
+  không tự đổi sang tiếng khác. Mở MO_TOOL.bat với Internet để tải bổ sung.
+
+LƯU TRỮ VÀ TỰ ĐỘNG HÓA
+Thư viện, mô hình và kết quả nằm trong Ubuntu tại:
+~/.local/share/melo-viet-local/
+Các thư mục envs/melo và envs/viet là hai môi trường riêng.
+models/huggingface giữ mô hình; outputs giữ WAV và báo cáo JSON.
+Đường dẫn NLTK/UniDic do các thư viện lưu trong user/môi trường Linux.
+Để tự động hóa từ Windows khi tool đang mở, có thể POST JSON đến
+http://localhost:8817/api/start, rồi GET /api/job để theo dõi.
+Ngôn ngữ: VI, EN, FR, JP, KR, ES, ZH. Trước hết gửi op=voices để lấy ID
+mẫu giọng của mô hình; sau đó gửi op=render với text và voice đã chọn.
+Xem AUTOMATION.md. Chỉ có một tác vụ tạo/tải giọng tại một thời điểm.
+
+TỐC ĐỘ VÀ CHẤT LƯỢNG
+Giữ nguyên tốc độ phát âm 1.0; không rút lời, đổi giọng hoặc thêm im lặng
+để đạt số đo. Có hạ đồng đều biên độ khi đỉnh quá cao trước khi ghi PCM,
+tránh cắt phẳng đỉnh gây vỡ tiếng. Việc này không sửa phát âm của mô hình.
+Số đo ở UI là độ dài WAV (có khoảng nghỉ) chia thời gian yêu cầu; không
+phải phép xác minh 30x lời đọc thực. Lượt đầu có thể gồm tải/nạp mô hình.
+Real-time chỉ có nghĩa cỡ 1 giây xử lý cho 1 giây tiếng, không phải 30x.
+Kết quả CPU Linux trong QA không bảo đảm tốc độ trên Windows/WSL của bạn.
+Chưa có đánh giá nghe bởi người bản ngữ cho mọi giọng; thử đoạn ngắn trước.
+
+LỖI THƯỜNG GẶP
+- Không thấy Ubuntu-22.04: mở Ubuntu từ Start, tạo xong user/mật khẩu.
+- WSL lỗi 0x80370102/virtualization: bật Virtualization (VT-x) trong BIOS,
+  rồi khởi động lại. Có thể cần quản trị viên máy nếu máy bị quản lý.
+- Không tải được model: kiểm tra Internet, dung lượng trống và truy cập
+  Hugging Face, PyPI, GitHub. Không nhập khóa Azure vào bộ này.
+- Cài bị gián đoạn: chạy lại CAI_DAT.bat. Không xóa outputs/models.
+- Trang chưa mở: thử http://localhost:8817 khi cửa sổ tool còn chạy.
+- Tác vụ lỗi: xem logs/melo.log hoặc logs/viet.log trong thư mục Linux
+  ở trên, gửi phần thông báo lỗi bằng văn bản để được xử lý.

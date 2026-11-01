@@ -1,0 +1,10 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Melo + Việt · Đọc trên máy</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+<main><h1>Melo + Việt</h1><p>MeloTTS cho 6 tiếng quốc tế · VieNeu Turbo FP32 cho tiếng Việt · CPU</p>
+<p class="note">Lần đầu bấm <b>Tải/chuẩn bị giọng</b> có thể tải mô hình và từ điển, cần Internet và vài GB dung lượng. Lời đọc được tổng hợp trên máy, không gửi đến dịch vụ tạo giọng trực tuyến. Nga và Thái chưa được hỗ trợ.</p>
+<div class="row"><label>Ngôn ngữ<select id="language"></select></label><label>Luồng CPU<input id="threads" type="number" min="1" max="16" value="4"></label></div>
+<button id="load" type="button">Tải/chuẩn bị giọng</button><label>Giọng đọc<select id="voice" disabled><option>Bấm Tải/chuẩn bị giọng trước</option></select></label>
+<label>Lời đọc<textarea id="text" rows="9" maxlength="100000" placeholder="Nhập lời đúng ngôn ngữ đã chọn. Tối đa 100.000 ký tự."></textarea></label>
+<div class="row"><button id="render" disabled>Tạo WAV</button><button id="cancel" disabled>Dừng</button></div>
+<p id="status" role="status">Đang kết nối…</p><audio id="audio" controls hidden></audio><p><a id="download" hidden>Tải WAV</a></p><pre id="report"></pre>
+<p class="note">Giữ cửa sổ chạy tool mở. Mô hình được giữ lại giữa các lượt đọc; đổi ngôn ngữ hoặc số luồng có thể phải nạp lại. Lượt đầu gồm thời gian tải/nạp. Mở MO_OFFLINE.bat sau khi đã chuẩn bị đủ mô hình muốn dùng.</p>
+<p class="note">Đo bằng thời gian yêu cầu và độ dài WAV, có khoảng nghỉ. Chưa xác minh chất lượng mọi giọng hoặc mục tiêu 30× lời đọc thực. Không tăng tốc phát âm để làm đẹp số đo.</p></main></html>
