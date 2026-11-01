@@ -46,12 +46,28 @@ jobs:
       DO_NOT_TRACK: '1'
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/cache/restore@v4
+        with:
+          path: |
+            /tmp/melo-viet-installed/models
+            ~/.cache/pip
+            ~/nltk_data
+          key: melo-viet-public-models-${{ github.run_id }}
+          restore-keys: melo-viet-public-models-
       - name: Run the exact Ubuntu 22.04 CPU installer
         run: bash melo-viet-local/setup.sh
       - name: Synthesize short public-voice samples in all seven languages
         run: |
           mkdir -p "$RUNNER_TEMP/model-qa"
           python3 melo-viet-local/check_models.py --root "$MELO_VIET_ROOT" --output "$RUNNER_TEMP/model-qa"
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: |
+            /tmp/melo-viet-installed/models
+            ~/.cache/pip
+            ~/nltk_data
+          key: melo-viet-public-models-${{ github.run_id }}
       - uses: actions/upload-artifact@v4
         with:
           name: melo-viet-model-qa
