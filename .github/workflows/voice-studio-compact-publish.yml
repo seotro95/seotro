@@ -74,6 +74,7 @@ jobs:
         run: |
           $root = Get-Content -LiteralPath "$env:RUNNER_TEMP/compact-root.txt" -Encoding utf8 -Raw
           $env:PYTHONHOME = ''
+          $env:PATH = "$root/ffmpeg/bin;$root/runtime;$env:PATH"
           $env:PYTHONPATH = (Resolve-Path 'voice-studio-rieng-portable/app').Path + ';' + (Resolve-Path 'voice-studio-rieng-portable/packaging').Path
           Push-Location voice-studio-rieng-portable
           & "$root/runtime/python.exe" -s -X utf8 -m pytest -q --junitxml="$env:RUNNER_TEMP/WINDOWS-COMPACT-TESTS.xml" app/tests/test_compact_distribution.py app/tests/test_resource_profiles.py app/tests/test_calibration.py app/tests/test_render_modes.py app/tests/test_shared_synthesis.py app/tests/test_turbo_reference.py app/tests/test_standalone_api.py app/tests/test_full_model_readiness_api.py app/tests/test_native_voxcpm_ui.py packaging/test_build_compact_bundle.py 2>&1 | Tee-Object -FilePath "$env:RUNNER_TEMP/compact-regression.log"

@@ -12,8 +12,8 @@ def fixture(tmp_path, extra=None):
     source = tmp_path/'source'
     (source/'app/static').mkdir(parents=True)
     (source/'packaging').mkdir()
-    (source/'app/app.py').write_text('CURRENT_APPLICATION=True\n')
-    (source/'app/static/app.js').write_text('current_script();')
+    (source/'app/app.py').write_bytes(b'CURRENT_APPLICATION=True\n')
+    (source/'app/static/app.js').write_bytes(b'current_script();')
     (source/'packaging/MO_TOOL.bat').write_bytes(b'current launcher')
     payloads = {name: ('fixture '+name).encode() for name in builder.REQUIRED}
     payloads['BUILD_INFO.json'] = json.dumps({'encrypted_private_voice_count':19,
