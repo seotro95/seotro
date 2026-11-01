@@ -32,7 +32,7 @@ def read_model(language,threads):
             model=TTS(language=language,device='cpu')
         model_key=key
     voices=([{'id':ident,'name':label} for label,ident in model.list_preset_voices()]
-            if language=='VI' else [{'id':ident,'name':ident} for ident in model.hps.data.spk2id])
+            if language=='VI' else [{'id':ident,'name':ident} for ident in model.hps.data.spk2id.keys()])
     return model,voices,(time.perf_counter()-started if loaded else 0)
 
 

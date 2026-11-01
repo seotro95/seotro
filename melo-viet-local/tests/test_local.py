@@ -172,3 +172,20 @@ def test_failed_language_switch_cannot_reuse_a_released_model(monkeypatch):
     with pytest.raises(RuntimeError):worker.read_model('FR',4)
     again,_,_=worker.read_model('EN',4)
     assert again is not None and again is not first
+
+
+def test_melo_speaker_catalog_accepts_upstream_hparams_mapping(monkeypatch):
+    from types import SimpleNamespace
+    class HParams:
+        def keys(self):return {'EN-US':0,'EN-BR':1}.keys()
+        def __getitem__(self,key):
+            if not isinstance(key,str):raise TypeError('getattr(): attribute name must be string')
+            return {'EN-US':0,'EN-BR':1}[key]
+    class TTS:
+        hps=SimpleNamespace(data=SimpleNamespace(spk2id=HParams()))
+        def __init__(self,**kwargs):pass
+    monkeypatch.setitem(sys.modules,'melo.api',SimpleNamespace(TTS=TTS))
+    monkeypatch.setitem(sys.modules,'torch',SimpleNamespace(set_num_threads=lambda count:None))
+    monkeypatch.setattr(worker,'model',None);monkeypatch.setattr(worker,'model_key',None)
+    _,voices,_=worker.read_model('EN',4)
+    assert [v['id'] for v in voices]==['EN-US','EN-BR']
