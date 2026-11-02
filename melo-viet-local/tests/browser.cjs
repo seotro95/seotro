@@ -37,8 +37,11 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
   await page.waitForFunction(()=>document.querySelectorAll('.state-done').length===4,{},{timeout:20000});
   await page.locator('.job').first().getByRole('button',{name:'Nghe / tải',exact:true}).click();
   await page.locator('#player-panel').waitFor();
+  // A recording older than the first history page must still finish/download MP3.
+  const oldMp3Id=await page.locator('.job').first().getAttribute('data-id');
+  await page.route('**/api/jobs?*',async route=>{const response=await route.fetch();const data=await response.json();data.jobs=data.jobs.filter(j=>j.id!==oldMp3Id);await route.fulfill({response,json:data});});
   const mp3Promise=page.waitForEvent('download');await page.locator('#player-downloads').getByRole('button',{name:'Tải MP3',exact:true}).click();
-  const mp3=await mp3Promise;assert(mp3.suggestedFilename().endsWith('.mp3'));assert((await fs.stat(await mp3.path())).size>64);
+  const mp3=await mp3Promise;assert(mp3.suggestedFilename().endsWith('.mp3'));assert((await fs.stat(await mp3.path())).size>64);await page.unroute('**/api/jobs?*');
   const downloadPromise=page.waitForEvent('download');await page.locator('#player-downloads').getByRole('link',{name:'SRT',exact:true}).click();
   const download=await downloadPromise;const content=await fs.readFile(await download.path(),'utf8');
   assert.match(content,/00:00:00,000 -->/);assert(!content.includes('00:00:10,000'));

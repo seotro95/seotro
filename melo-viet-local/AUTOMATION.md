@@ -1,4 +1,4 @@
-# Local API — 1.2.0
+# Local API — 1.3.0
 
 Keep `MO_TOOL.bat` open. Base URL: `http://localhost:8817`. Only local Host and same-origin browser requests are accepted. This is a local service, not an authenticated network server.
 
@@ -38,8 +38,18 @@ Completed jobs expose `audio_url`, `downloads` for individual WAV parts, `text_u
 
 ## Local fast CPU selection
 
-`GET /api/config` now returns 27 local languages, `fast_languages`, `original_languages`, available CPU quota and a recommended parallel chunk count. For voice discovery add `"local_provider":"fast"` to the local request. The returned IDs are `piper:MODEL_ID:SPEAKER_ID`; use those exact IDs for rendering. Original Melo/VieNeu IDs remain valid and never silently change to another model. `local_provider="original"` prefers the seven original local readers; the twenty new languages use Piper.
+`GET /api/config` returns 36 local language groups (including experimental Hmong RPA), `fast_languages`, `original_languages`, available CPU quota and a recommended parallel chunk count. For voice discovery add `"local_provider":"fast"` to the local request. The returned IDs are `piper:MODEL_ID:SPEAKER_ID`; use those exact IDs for rendering. Original Melo/VieNeu IDs remain valid and never silently change to another model. `local_provider="original"` prefers the seven original local readers; the twenty new languages use Piper.
 
 Rendering can include `"chunk_workers":4` (1–4). Only Piper uses concurrent chunks of a single output. Effective concurrency is bounded by the detected CPU quota, per-chunk thread budget and configured concurrent output jobs. Results retain source order. Output reports contain `parallel_chunks`, `threads` and the real engine. Synthesis remains FP32 at native speaking rate; requested tempo is applied separately. WAV assembly preserves native sample rate when possible.
 
 Online catalogue refresh accepts `"refresh":true` with `op="catalog"`. Errors keep the selected voice and include a visible service/network classification; no language/voice substitution occurs.
+
+## Additional native presets, progress, MP3
+
+Use `local_provider="multi"` for Supertonic 3's 10 real presets in 31 languages. It uses optional CPU INT8, five inference steps; it does not replace original FP32 readers. For unsupported languages the existing reader is used. Rendering is routed by the exact returned voice ID, preserving existing jobs. Hmong uses `language="HMN"` and its returned native voice ID, independently of the provider selector. It is experimental: one speaker, unverified gender/White Hmong dialect, direct on-demand download from the pinned community source. No English/Vietnamese substitute.
+
+Rendering and inspection accept boolean `expressive` (punctuation-aware pacing) and `emphasis` (recognize balanced `**words**` marks). Explicit emphasis applies modest pitch-preserving slowing and bounded gain. Exported spoken TXT/SRT omits the marks. Defaults are false, preserving previous behavior. `friendly` is a pacing preset, not an emotion model.
+
+`progress` is a fraction of completed source characters, capped below 1 until assembly succeeds. `stage` is queued/preparing/synthesizing/assembling/done; model preparation may stay at zero.
+
+Once WAV rendering is done, `POST /api/mp3` with `{"id":"ID"}` queues MP3 export (192 kbps, 44.1 kHz mono). Repeating is idempotent while active or completed. `POST /api/cancel-mp3` stops that export only. Poll `/api/job?id=ID`, including for old recordings beyond the first history page. Fields: `mp3_status`, `mp3_progress` (0–1), `mp3_url`, `mp3_encoding_seconds`, `mp3_error`. A single exporter and bounded queue limit CPU/disk pressure; WAVs remain intact. The recording ZIP includes MP3/report after export finishes. Export time is separate from synthesis measurements.
