@@ -115,3 +115,8 @@ try {
     $env:MELO_VIET_DISTRO = $oldDistro
     Remove-Item -LiteralPath $testRoot -Recurse -Force
 }
+
+# Expected negative cases set LASTEXITCODE=1 in the mock. Do not leak that
+# code into the Actions PowerShell wrapper after all assertions passed.
+$global:LASTEXITCODE = 0
+Write-Host '::notice title=Windows launcher tests::11 cases passed on Windows PowerShell 5.1 with mocked WSL.'
