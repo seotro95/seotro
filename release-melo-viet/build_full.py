@@ -27,7 +27,7 @@ try:
   # Preserve the model's own license alongside the conversion project's MIT license.
   license_url='https://huggingface.co/supertone-oss-archive/supertonic-3/resolve/aafc6e32416a594460b32413efc49d7fe4ce6d46/LICENSE'
   with urllib.request.urlopen(license_url,timeout=60) as f:license_text=f.read()
-  assert b'OpenRAIL' in license_text
+  assert hashlib.sha256(license_text).hexdigest()=='0d944a9110fed9a9602d60e0423a272903e7bd21ab060490774efc77c2275e9f', 'Model license SHA256 mismatch'
   relative='models/supertonic3/LICENSE-MODEL';z.writestr(prefix+'voice-pack/'+relative,license_text);manifest.append(hashlib.sha256(license_text).hexdigest()+'  '+relative+'\n')
   z.writestr(prefix+'voice-pack/PACK.json',json.dumps({'piper':[m['id'] for m in catalog],'multi':list(multi)},indent=2))
   z.writestr(prefix+'voice-pack/MANIFEST.sha256',''.join(manifest))
