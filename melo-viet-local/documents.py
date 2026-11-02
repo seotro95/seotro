@@ -99,17 +99,17 @@ def timestamp(seconds):
     return f'{hour:02}:{minute:02}:{sec:02},{ms:03}'
 
 
-def convert_audio(source, destination, speed=1.0):
-    """Pitch-preserving atempo; unchanged 24kHz PCM bypasses the subprocess."""
+def convert_audio(source, destination, speed=1.0, sample_rate=24000):
+    """Pitch-preserving atempo; unchanged native PCM bypasses the subprocess."""
     if not .5 <= speed <= 2.0:
         raise ValueError('Tốc độ đọc cần từ 0,5× đến 2×.')
     with wave.open(str(source), 'rb') as audio:
-        compatible = audio.getparams()[:3] == (1, 2, 24000)
+        compatible = audio.getparams()[:3] == (1, 2, sample_rate)
     if compatible and speed == 1.0:
         shutil.copyfile(source, destination)
         return
     command = ['ffmpeg', '-hide_banner', '-loglevel', 'error', '-nostdin', '-y', '-i', str(source),
-               '-ac', '1', '-ar', '24000', '-c:a', 'pcm_s16le']
+               '-ac', '1', '-ar', str(sample_rate), '-c:a', 'pcm_s16le']
     if speed != 1.0:
         command += ['-af', f'atempo={speed:.6f}']
     result = subprocess.run(command + [str(destination)], capture_output=True, timeout=180)
@@ -119,15 +119,15 @@ def convert_audio(source, destination, speed=1.0):
 
 class Assembler:
     """Write at most one hour per RIFF WAV; never hold a whole book in memory."""
-    def __init__(self, folder, part_seconds=3600):
-        self.folder = Path(folder); self.limit = int(part_seconds * 24000)
+    def __init__(self, folder, part_seconds=3600, sample_rate=24000):
+        self.folder = Path(folder); self.rate=sample_rate; self.limit = int(part_seconds * self.rate)
         self.parts = []; self.part_starts = []; self.writer = None; self.part_subtitle = None; self.part_cues = 0; self.part_frames = 0; self.total_frames = 0; self.cue_count = 0
         self.subtitle = (self.folder / 'subtitles.srt.partial').open('w', encoding='utf-8')
 
     def append(self, path, text, pause_ms=0):
         with wave.open(str(path), 'rb') as audio:
-            if audio.getparams()[:3] != (1, 2, 24000) or audio.getnframes() == 0:
-                raise ValueError('Đoạn âm thanh không phải PCM mono 24 kHz hợp lệ.')
+            if audio.getparams()[:3] != (1, 2, self.rate) or audio.getnframes() == 0:
+                raise ValueError('Đoạn âm thanh không phải PCM mono có cùng tần số lấy mẫu.')
             count = audio.getnframes()
             if self.writer is None or (self.part_frames and self.part_frames + count > self.limit):
                 if self.writer:
@@ -135,19 +135,19 @@ class Assembler:
                     self.part_subtitle.close()
                 name = f'part-{len(self.parts) + 1:04}.wav'
                 self.parts.append(name); self.writer = wave.open(str(self.folder / name), 'wb')
-                self.writer.setparams((1, 2, 24000, 0, 'NONE', 'not compressed')); self.part_frames = 0
-                self.part_starts.append(self.total_frames / 24000); self.part_cues = 0
+                self.writer.setparams((1, 2, self.rate, 0, 'NONE', 'not compressed')); self.part_frames = 0
+                self.part_starts.append(self.total_frames / self.rate); self.part_cues = 0
                 self.part_subtitle = (self.folder / name.replace('.wav','.srt')).open('w',encoding='utf-8')
-            start = self.total_frames / 24000
+            start = self.total_frames / self.rate
             while block := audio.readframes(32768):
                 self.writer.writeframesraw(block)
             self.part_frames += count; self.total_frames += count
             self.cue_count += 1; self.part_cues += 1
             offset = self.part_starts[-1]
-            self.part_subtitle.write(f'{self.part_cues}\n{timestamp(start-offset)} --> {timestamp(self.total_frames / 24000-offset)}\n{text.strip()}\n\n')
+            self.part_subtitle.write(f'{self.part_cues}\n{timestamp(start-offset)} --> {timestamp(self.total_frames / self.rate-offset)}\n{text.strip()}\n\n')
             self.part_subtitle.flush()
-            self.subtitle.write(f'{self.cue_count}\n{timestamp(start)} --> {timestamp(self.total_frames / 24000)}\n{text.strip()}\n\n')
-            silence = round(pause_ms * 24)
+            self.subtitle.write(f'{self.cue_count}\n{timestamp(start)} --> {timestamp(self.total_frames / self.rate)}\n{text.strip()}\n\n')
+            silence = round(pause_ms * self.rate / 1000)
             if silence:
                 self.writer.writeframesraw(b'\x00\x00' * silence)
                 self.part_frames += silence; self.total_frames += silence
@@ -157,7 +157,7 @@ class Assembler:
     def finish(self):
         self.close()
         (self.folder / 'subtitles.srt.partial').replace(self.folder / 'subtitles.srt')
-        return {'audio_seconds': self.total_frames / 24000, 'sample_rate': 24000, 'parts': self.parts, 'part_start_seconds': self.part_starts}
+        return {'audio_seconds': self.total_frames / self.rate, 'sample_rate': self.rate, 'parts': self.parts, 'part_start_seconds': self.part_starts}
 
     def close(self):
         if self.writer:

@@ -1,17 +1,63 @@
-MELO + VIỆT STUDIO 1.1.0 — WINDOWS / WSL2 UBUNTU 22.04
+MELO + VIỆT STUDIO 1.2.0 — WINDOWS / WSL2 UBUNTU 22.04
 
-NÂNG CẤP TỪ 1.0.0 / 1.0.1
+ĐIỂM MỚI 1.2.0 — TẠO LỜI MỚI NHANH HƠN TRÊN CPU
+- Phần Trên máy có 27 tiếng tổng cộng, thêm 20 tiếng thật qua Piper ONNX:
+  Nga, Đức, Ý, Bồ Đào Nha, Hà Lan, Ba Lan, Hindi, Thụy Điển, Đan Mạch,
+  Phần Lan, Na Uy, Séc, Slovakia, Hungary, Romania, Thổ Nhĩ Kỳ, Ả Rập,
+  Ba Tư, Indonesia, Catalan.
+- Piper có 27 mô hình/giọng FP32 cho 24 tiếng, kể cả Việt/Anh/Pháp/TBN.
+  Đây là mô hình/giọng KHÁC với Melo/VieNeu, không phải đổi tên giọng cũ.
+  Chọn Loại giọng trên máy = CPU nhanh để dùng các giọng ONNX.
+  Chọn Melo/VieNeu gốc để giữ preset cũ. Nhật/Hàn/Trung vẫn dùng Melo.
+- Tạo song song 1–4 đoạn của cùng một bản Piper, tự giới hạn theo CPU,
+  số bản đồng thời và luồng mỗi đoạn. Máy nhiều nhân có thể tận dụng thêm
+  CPU; không đảm bảo mọi cấu hình đều nhanh hơn. Có thể chỉnh trong Tùy chọn.
+- Giữ tần số lấy mẫu gốc khi ghép WAV; tốc độ 1× không phải chạy ffmpeg
+  để đổi tần số từng đoạn. Vẫn có khoảng dự phòng biên độ, không ép INT8.
+- Chọn giọng đơn là mặc định. Bật Chọn nhiều giọng khi cần; bấm Nghe thử
+  để kiểm tra giọng trước khi tạo bản dài. Lỗi hiện ngay cạnh ô chọn giọng,
+  có nút Sao chép lỗi; không chỉ hiện ở cuối trang/hàng đợi.
+- Tải danh mục trực tuyến nay thực sự làm mới danh sách, thay vì giữ nguyên
+  danh sách trong bộ nhớ. Lỗi không có âm thanh, HTTP 401/403, SSL, proxy
+  được báo rõ; không âm thầm đổi giọng hay giả tiếng nước khác.
+
+BẢN ĐẦY ĐỦ VÀ BẢN CẬP NHẬT NHỎ
+- ZIP ĐẦY ĐỦ có sẵn 27 mô hình Piper FP32 và MODEL_CARD gốc của từng giọng.
+  CAP_NHAT.bat sẽ xác minh và chép vào models/piper trong Ubuntu. Các giọng
+  Piper dùng được khi mất mạng SAU KHI đã cài thư viện thành công.
+- Cài thư viện lần đầu/cập nhật vẫn cần Internet (PyPI/Ubuntu). ZIP không
+  chứa môi trường Python dựng sẵn. Các mô hình Melo/VieNeu cũ được giữ lại.
+- ZIP cập nhật nhỏ chỉ có chương trình; mỗi giọng Piper tải từ GitHub lần
+  đầu dùng. Tải đúng giọng đã chọn, kiểm tra SHA256, không tải hết 27 model.
+- Cài MỚI nhẹ: CAI_CPU_NHANH.bat cài Piper + trực tuyến, không cài PyTorch,
+  Melo hoặc VieNeu. Khi đó có 24 tiếng Piper. Chạy CAI_DAT.bat nếu muốn
+  đủ cả 27 tiếng, gồm Nhật/Hàn/Trung qua Melo và giọng VieNeu gốc.
+- Đã dùng bản cũ: chỉ cần CAP_NHAT.bat; không cần cài lại Ubuntu.
+- Sau khi bản đầy đủ đã cài xong, có thể tự xóa thư mục voice-pack trong
+  THƯ MỤC BỘ CÀI Windows để tiết kiệm dung lượng. Giữ các BAT/bootstrap/
+  start.sh; không xóa models/outputs trong Ubuntu.
+
+CÁCH ĐO LẠI TIẾNG TÂY BAN NHA
+1. Đóng tool cũ, chạy CAP_NHAT.bat rồi MO_TOOL.bat MỚI, Ctrl+F5.
+2. Bộ đọc = Trên máy; Loại giọng trên máy = CPU nhanh; Ngôn ngữ = TBN.
+3. Chuẩn bị danh sách, chọn ONNX nhanh · es_ES-davefx-medium.
+4. Bấm Nghe thử. Sau đó nhập lời, bỏ Dùng lại đoạn để đo tổng hợp mới.
+5. Tạo bản MỚI, đọc báo cáo có engine Piper ONNX FP32 CPU.
+   Bản MeloTTS cũ trong lịch sử vẫn giữ số đo 78,98 giây; cập nhật không
+   sửa các báo cáo cũ thành nhanh hơn và không đổi giọng giữa tác vụ.
+
+NÂNG CẤP TỪ 1.0.x / 1.1.0
 1. Đóng cửa sổ MO_TOOL cũ (Ctrl+C). Không xóa Ubuntu, models hoặc outputs.
-2. Giải nén toàn bộ ZIP mới vào thư mục cố định, ví dụ D:\Melo-Viet-1.1.0.
-3. Nhấp đôi CAP_NHAT.bat. Bản cập nhật thêm giao diện và bộ trực tuyến nhỏ;
+2. Giải nén toàn bộ ZIP mới vào thư mục cố định, ví dụ D:\Melo-Viet-1.2.0.
+3. Nhấp đôi CAP_NHAT.bat. Bản cập nhật thêm bộ Piper CPU nhanh và sửa điều khiển chọn giọng;
    không chạy lại cài Melo/VieNeu, không tải lại mô hình đã có.
 4. Chờ báo cài/cập nhật xong. Nhấp đôi MO_TOOL.bat trong thư mục MỚI.
 5. Mở http://localhost:8817/ và Ctrl+F5 nếu vẫn thấy giao diện cũ.
    Nếu bản cũ vẫn đang chạy, đóng đúng cửa sổ đó trước; không kill tất cả Python.
 
 CÀI MỚI
-Bộ này độc lập với Voice Studio/Azure. ZIP là bộ cài, chưa chứa Python,
-thư viện, từ điển và mô hình. Có hai lựa chọn:
+Bộ này độc lập với Voice Studio/Azure. ZIP là bộ cài: bản đầy đủ có sẵn mô hình Piper, nhưng không chứa sẵn
+Python, các thư viện và các mô hình Melo/VieNeu. Có thêm lựa chọn CPU nhanh nêu trên, và hai lựa chọn cũ:
 - CAI_DAT.bat: cài cả MeloTTS, VieNeu Turbo Việt và bộ trực tuyến.
   Cần Internet lúc đầu; nên có ít nhất 15 GB trống. Mô hình tải khi dùng.
 - CAI_TRUC_TUYEN.bat: chỉ cài giao diện, ffmpeg và bộ giọng trực tuyến,
@@ -42,8 +88,8 @@ Gõ mật khẩu Linux/sudo không hiện ký tự là bình thường.
 
 CHỌN BỘ ĐỌC, NGÔN NGỮ VÀ NHIỀU GIỌNG
 1. Mở MO_TOOL.bat, giữ cửa sổ này mở. Trang: http://localhost:8817/.
-2. Trên máy: Việt dùng VieNeu Turbo FP32; Anh, Pháp, Nhật, Hàn,
-   Tây Ban Nha, Trung dùng MeloTTS. Bấm tải/chuẩn bị danh sách giọng.
+2. Ở chế độ Melo/VieNeu gốc: Việt dùng VieNeu Turbo FP32; Anh, Pháp,
+   Nhật, Hàn, Tây Ban Nha, Trung dùng MeloTTS. Bấm tải/chuẩn bị danh sách giọng.
    Chỉ hiển thị các preset thực của mô hình, không nhân bản giả giọng.
 3. Trực tuyến: bấm tải danh mục, chọn ngôn ngữ/quốc gia rồi chọn giọng.
    Có các tiếng khác như Nga, Thái, Đức, Ý... nếu dịch vụ đang cung cấp.
@@ -52,7 +98,7 @@ CHỌN BỘ ĐỌC, NGÔN NGỮ VÀ NHIỀU GIỌNG
    chính thức, không cần khóa trong tool. Dịch vụ có thể thay đổi hoặc
    giới hạn; lỗi sẽ hiện rõ, không tự thay bằng giọng/quốc gia khác.
    NỘI DUNG ĐỌC SẼ GỬI ĐẾN MICROSOFT khi chọn Trực tuyến.
-4. Giữ Ctrl khi chọn để chọn nhiều giọng. Mỗi giọng tạo một bản thu riêng.
+4. Bật Chọn nhiều giọng, giữ Ctrl khi chọn để chọn nhiều giọng. Mỗi giọng tạo một bản thu riêng.
 5. Các preset nhịp kể chuyện, review phim, thuyết minh, bản tin, nhẹ nhàng
    đặt tốc độ gợi ý và độ nghỉ giữa các đoạn; không phải model cảm xúc
    riêng. Có thể chỉnh tốc độ 0,5–2×; giữ cao độ bằng ffmpeg atempo.
@@ -100,7 +146,7 @@ NGOẠI TUYẾN VÀ LƯU TRỮ
 Mở MO_OFFLINE.bat sau khi đã chuẩn bị và tạo thử các tiếng muốn dùng.
 Chế độ này chặn giọng trực tuyến; mô hình thiếu sẽ báo lỗi, không đổi giọng.
 Trong Ubuntu: ~/.local/share/melo-viet-local/
-  envs/melo, envs/viet, envs/online: các môi trường độc lập
+  envs/melo, envs/viet, envs/online, envs/piper: các môi trường độc lập
   models: mô hình và danh mục giọng; cache/audio: các đoạn dùng lại
   outputs/<mã bản thu>/: lời gốc, lịch sử, WAV, TXT, SRT và báo cáo
   logs: thông báo SDK; backups: giao diện cũ khi cập nhật

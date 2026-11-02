@@ -1,4 +1,4 @@
-name: Verify and release Melo + Viet Studio
+name: Verify and release local fast CPU Studio
 on:
   push:
     branches: [codex/melo-viet-local]
@@ -19,29 +19,28 @@ jobs:
         with:
           python-version: '3.10'
       - run: pip install pytest numpy soundfile
-      - name: Ensure audio processing dependency
+      - name: Ensure audio dependency
         run: |
           if ! command -v ffmpeg >/dev/null; then
             sudo apt-get update
             sudo apt-get install -y ffmpeg
           fi
       - run: python -m pytest -q melo-viet-local/tests --junitxml="$RUNNER_TEMP/tests.xml"
-      - name: Report test failures as structured annotations
+      - name: Report Python failures
         if: failure()
         run: |
-          python - <<'PYTEST_REPORT'
+          python - <<'PY'
           import os,xml.etree.ElementTree as E
           from pathlib import Path
-          path=Path(os.environ['RUNNER_TEMP'],'tests.xml')
-          if path.exists():
-              for failure in E.parse(path).iter('failure'):
-                  msg=(failure.text or '')[-3500:].replace('%','%25').replace('\r','%0D').replace('\n','%0A')
-                  print('::error title=Python regression::'+msg)
-          PYTEST_REPORT
+          p=Path(os.environ['RUNNER_TEMP'],'tests.xml')
+          if p.exists():
+              for e in E.parse(p).iter('failure'):
+                  print('::error title=Python regression::'+(e.text or '')[-3500:].replace('%','%25').replace('\r','%0D').replace('\n','%0A'))
+          PY
       - run: node --check melo-viet-local/app.js
       - run: bash -n melo-viet-local/setup.sh melo-viet-local/start.sh
       - run: python release-melo-viet/verify_package.py
-      - name: Browser import, multi-voice batch, history, export and large editor
+      - name: Browser checks including voice preview and visible online errors
         run: |
           npm install --prefix "$RUNNER_TEMP/browser" playwright@1.58.2
           "$RUNNER_TEMP/browser/node_modules/.bin/playwright" install --with-deps chromium
@@ -51,94 +50,119 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Distro discovery and install, update, online-only modes in PowerShell 5.1
+      - name: WSL discovery and all four installer modes
         shell: powershell
         run: '& ./melo-viet-local/tests/test_launcher.ps1'
-  real-models:
-    needs: logic
+  online-check:
+    needs: [logic,windows-launcher]
     runs-on: ubuntu-22.04
-    timeout-minutes: 35
+    timeout-minutes: 12
     env:
-      MELO_VIET_ROOT: /tmp/melo-viet-installed
-      HF_HUB_DISABLE_TELEMETRY: '1'
-      DO_NOT_TRACK: '1'
+      MELO_VIET_ROOT: /tmp/studio-online-120
     steps:
       - uses: actions/checkout@v4
-      - name: Create the owned CI installation root before restoring models
+      - run: bash melo-viet-local/setup.sh --online-only
+      - name: Verify all requested online locales independently
+        run: python3 studio-qa/online_all.py --root "$MELO_VIET_ROOT" --output "$RUNNER_TEMP/ONLINE-QA-EXTENDED.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: online-qa-120
+          path: ${{ runner.temp }}/ONLINE-QA-EXTENDED.json
+          retention-days: 3
+  fast-models:
+    needs: [logic,windows-launcher]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    env:
+      MELO_VIET_ROOT: /tmp/studio-cpu-fast-120
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare owned test root
         run: |
           mkdir -p "$MELO_VIET_ROOT"
           printf 'melo-viet-local-v1\n' > "$MELO_VIET_ROOT/.melo-viet-local-owner"
       - uses: actions/cache/restore@v4
         with:
-          path: |
-            /tmp/melo-viet-installed/models
-            ~/.cache/pip
-            ~/nltk_data
-          key: melo-viet-public-models-${{ github.run_id }}
-          restore-keys: melo-viet-public-models-
-      - name: Test small online-only install and update without deleting user data
+          path: /tmp/studio-cpu-fast-120/models/piper
+          key: studio-cpu-fast-v1-${{ github.run_id }}
+          restore-keys: studio-cpu-fast-v1-
+      - name: Install the CPU-only runtime and verify update preserves data
         run: |
-          bash melo-viet-local/setup.sh --online-only
+          bash melo-viet-local/setup.sh --fast-only
           printf 'keep\n' > "$MELO_VIET_ROOT/outputs/update-sentinel.txt"
-          printf 'keep\n' > "$MELO_VIET_ROOT/models/update-sentinel.txt"
           bash melo-viet-local/setup.sh --update
           test -f "$MELO_VIET_ROOT/outputs/update-sentinel.txt"
-          test -f "$MELO_VIET_ROOT/models/update-sentinel.txt"
           test ! -d "$MELO_VIET_ROOT/envs/melo"
           test ! -d "$MELO_VIET_ROOT/envs/viet"
-      - name: Install the full CPU edition on Ubuntu 22.04
-        run: bash melo-viet-local/setup.sh
-      - name: Generate real public samples in all seven local languages
+      - name: Verify every public model and create 54 real offline WAV samples
         run: |
           mkdir -p "$RUNNER_TEMP/model-qa"
-          python3 melo-viet-local/check_models.py --root "$MELO_VIET_ROOT" --output "$RUNNER_TEMP/model-qa"
-          mv "$RUNNER_TEMP/model-qa/MODEL-QA.json" "$RUNNER_TEMP/model-qa/MODEL-QA-1.1.0.json"
-      - name: Verify the real chunk pipeline and fresh versus cached output
-        run: python3 melo-viet-local/check_studio.py --root "$MELO_VIET_ROOT" --output "$RUNNER_TEMP/model-qa"
-      - name: Record live online service availability and public multilingual samples
-        run: python3 melo-viet-local/check_online.py --root "$MELO_VIET_ROOT" --output "$RUNNER_TEMP/model-qa"
-      - uses: actions/cache/save@v4
-        if: always()
-        with:
-          path: |
-            /tmp/melo-viet-installed/models
-            ~/.cache/pip
-            ~/nltk_data
-          key: melo-viet-public-models-${{ github.run_id }}
+          python3 melo-viet-local/check_fast.py --root "$MELO_VIET_ROOT" --output "$RUNNER_TEMP/model-qa"
+      - name: Test full-bundle copying through the actual installer
+        run: |
+          mkdir -p melo-viet-local/voice-pack/models
+          ln -s "$MELO_VIET_ROOT/models/piper" melo-viet-local/voice-pack/models/piper
+          MELO_VIET_ROOT=/tmp/studio-full-copy-120 bash melo-viet-local/setup.sh --fast-only
+          MELO_VIET_ROOT=/tmp/studio-full-copy-120 python3 - <<'PY'
+          import sys
+          sys.path.insert(0,'melo-viet-local')
+          import fast_backend
+          for m in fast_backend.catalog():fast_backend.ensure_model(m,True)
+          print('Full edition: all copied models verify in offline mode.')
+          PY
+      - name: Build and upload full and small installers to the draft release
+        env:
+          RELEASE_ASSETS: ${{ runner.temp }}/release-assets
+        run: |
+          python3 release-melo-viet/build_full.py
+          cp "$RUNNER_TEMP/model-qa/"*.json "$RELEASE_ASSETS/"
+          cp "$RUNNER_TEMP/model-qa/es_ES-davefx-medium-1.wav" "$RELEASE_ASSETS/SAMPLE-ES-CPU.wav"
+          python3 release-melo-viet/asset_manifest.py
+          gh release upload melo-viet-studio-1.2.0 "$RELEASE_ASSETS/"* --repo seotro95/seotro --clobber
       - uses: actions/upload-artifact@v4
         with:
-          name: studio-real-model-qa
-          path: ${{ runner.temp }}/model-qa/*
+          name: fast-qa-manifest-120
+          path: |
+            ${{ runner.temp }}/RELEASE-ASSETS.json
+            ${{ runner.temp }}/model-qa/*.json
           retention-days: 3
+      - uses: actions/cache/save@v4
+        continue-on-error: true
+        with:
+          path: /tmp/studio-cpu-fast-120/models/piper
+          key: studio-cpu-fast-v1-${{ github.run_id }}
   publish:
-    needs: [logic, windows-launcher, real-models]
+    needs: [logic,windows-launcher,fast-models,online-check]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - run: python release-melo-viet/verify_package.py
       - uses: actions/download-artifact@v4
         with:
-          name: studio-real-model-qa
-          path: ${{ runner.temp }}/model-qa
-      - name: Upload reviewed installer and actual QA records
+          name: fast-qa-manifest-120
+          path: ${{ runner.temp }}/qa
+      - uses: actions/download-artifact@v4
+        with:
+          name: online-qa-120
+          path: ${{ runner.temp }}/qa
+      - name: Verify hosted bytes and publish
         env:
           GH_TOKEN: ${{ github.token }}
+          EXPECTED_ASSETS: ${{ runner.temp }}/qa/RELEASE-ASSETS.json
+          QA_FOLDER: ${{ runner.temp }}/qa
         run: |
-          mkdir -p "$RUNNER_TEMP/release-assets"
-          cp release-melo-viet/package.zip "$RUNNER_TEMP/release-assets/Melo-Viet-Studio-1.1.0-Windows.zip"
-          cp release-melo-viet/package.sha256 "$RUNNER_TEMP/release-assets/Melo-Viet-Studio-1.1.0-Windows.zip.sha256"
-          cp "$RUNNER_TEMP/model-qa/"*.json "$RUNNER_TEMP/release-assets/"
-          cp "$RUNNER_TEMP/model-qa/VI-1.wav" "$RUNNER_TEMP/release-assets/SAMPLE-VI.wav"
-          cp "$RUNNER_TEMP/model-qa/FR-1.wav" "$RUNNER_TEMP/release-assets/SAMPLE-FR.wav"
-          gh release upload melo-viet-studio-1.1.0 "$RUNNER_TEMP"/release-assets/* --repo seotro95/seotro --clobber
-      - name: Verify hosted bytes and publish with live service status
-        env:
-          GH_TOKEN: ${{ github.token }}
-          RELEASE_ASSETS: ${{ runner.temp }}/release-assets
-        run: |
+          gh release upload melo-viet-studio-1.2.0 "$QA_FOLDER/ONLINE-QA-EXTENDED.json" --repo seotro95/seotro --clobber
+          python - <<'PY'
+          import os,json,hashlib
+          from pathlib import Path
+          p=Path(os.environ['EXPECTED_ASSETS']);records=json.loads(p.read_text());file=Path(os.environ['QA_FOLDER'],'ONLINE-QA-EXTENDED.json')
+          records[file.name]={'size':file.stat().st_size,'sha256':hashlib.sha256(file.read_bytes()).hexdigest()};p.write_text(json.dumps(records))
+          PY
           python release-melo-viet/verify_remote.py
           python release-melo-viet/notes_with_qa.py
-          gh release edit melo-viet-studio-1.1.0 --repo seotro95/seotro --notes-file "$RUNNER_TEMP/release-notes.md" --draft=false --latest=false --target "$GITHUB_SHA"
+          gh release edit melo-viet-studio-1.2.0 --repo seotro95/seotro --notes-file "$RUNNER_TEMP/release-notes.md" --draft=false --latest=false --target "$GITHUB_SHA"

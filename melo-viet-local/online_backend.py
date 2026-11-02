@@ -2,6 +2,8 @@
 import asyncio
 import json
 import os
+import re
+import shutil
 from pathlib import Path
 import subprocess
 import time
@@ -25,12 +27,12 @@ async def fetch_catalog():
     return valid
 
 
-def get_catalog():
+def get_catalog(force=False):
     global CATALOG
-    if CATALOG is not None:
+    if CATALOG is not None and not force:
         return CATALOG
     cache = catalog_file()
-    if cache.is_file() and time.time()-cache.stat().st_mtime < 7*86400:
+    if not force and cache.is_file() and time.time()-cache.stat().st_mtime < 86400:
         try:
             data = json.loads(cache.read_text(encoding='utf-8'))
             if data and all(isinstance(v,dict) and all(k in v for k in ('ShortName','Locale','Gender','FriendlyName')) for v in data):
@@ -58,13 +60,27 @@ async def download_audio(text, voice, output):
             error = caught
             if attempt < 2:
                 await asyncio.sleep(1.5 * (2**attempt))
-    raise RuntimeError('Không tạo được giọng trực tuyến. Kiểm tra Internet; dịch vụ có thể giới hạn truy cập. Không tự đổi giọng. '+str(error)[:250])
+    kind=type(error).__name__;status=getattr(error,'status',None)
+    if status in {401,403}:
+        help_text='Dịch vụ từ chối kết nối (HTTP '+str(status)+'). Kiểm tra ngày/giờ Windows và Ubuntu, kết nối mạng rồi làm mới danh mục. Danh sách giọng tải được chưa bảo đảm đường tạo âm thanh kết nối được.'
+    elif 'Certificate' in kind or 'SSL' in kind:
+        help_text='Lỗi chứng chỉ hoặc ngày/giờ hệ thống khi kết nối. Kiểm tra giờ Windows/Ubuntu và mạng; không tắt xác minh TLS.'
+    elif 'Proxy' in kind or 'Connector' in kind:
+        help_text='Không kết nối được dịch vụ/proxy từ Ubuntu WSL. Kiểm tra cấu hình mạng của WSL.'
+    elif 'Timeout' in kind:
+        help_text='Dịch vụ giọng đọc hết thời gian chờ. Thử lại hoặc dùng bộ đọc trên máy.'
+    elif 'NoAudioReceived' in kind:
+        help_text='Dịch vụ không trả về âm thanh cho giọng đã chọn. Làm mới danh mục và Nghe thử lại; có thể chọn giọng khác cùng tiếng.'
+    else:
+        help_text='Không tạo được giọng trực tuyến. Kiểm tra Internet, làm mới danh mục và thử lại.'
+    detail=re.sub(r'https?://\S+|wss?://\S+','[địa chỉ dịch vụ]',str(error))[:200]
+    raise RuntimeError(help_text+' ['+kind+'] '+detail)
 
 
 def handle(request):
     if os.environ.get('HF_HUB_OFFLINE')=='1':
         raise ValueError('Đang ngoại tuyến; giọng Edge cần Internet.')
-    all_voices = get_catalog()
+    all_voices = get_catalog(bool(request.get('refresh')))
     voices = [{'id':v['ShortName'],'name':v['FriendlyName'], 'locale':v['Locale'], 'gender':v['Gender']} for v in all_voices]
     if request['op']=='catalog':
         locales = {v['locale']:0 for v in voices}
@@ -81,6 +97,8 @@ def handle(request):
     text = request.get('text')
     if not isinstance(text,str) or not text.strip() or len(text)>1200 or '\x00' in text:
         raise ValueError('Mỗi đoạn trực tuyến cần 1–1.200 ký tự hợp lệ.')
+    if not shutil.which('ffmpeg'):
+        raise ValueError('Thiếu ffmpeg để giải mã âm thanh. Đóng tool và chạy CAP_NHAT.bat hoặc CAI_DAT.bat.')
     output = Path(request['output']); mp3 = output.with_suffix('.edge.mp3'); temporary = output.with_suffix('.edge.partial.wav')
     started = time.perf_counter()
     try:

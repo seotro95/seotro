@@ -6,7 +6,7 @@ if [[ ! -f "$LOCAL_ROOT/app/app.py" || ! -x /usr/bin/python3.10 ]]; then
   exit 1
 fi
 if [[ "${1:-}" == 'offline' ]]; then
-  if [[ ! -x "$LOCAL_ROOT/envs/viet/bin/python" || ! -x "$LOCAL_ROOT/envs/melo/bin/python" ]]; then
+  if [[ ! -x "$LOCAL_ROOT/envs/piper/bin/python" && ! -x "$LOCAL_ROOT/envs/viet/bin/python" && ! -x "$LOCAL_ROOT/envs/melo/bin/python" ]]; then
     echo 'Chua cai bo doc ngoai tuyen. Chay CAI_DAT.bat hoac mo MO_TOOL.bat de dung truc tuyen.' >&2
     exit 1
   fi

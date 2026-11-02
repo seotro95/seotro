@@ -83,6 +83,9 @@ def synthesize(reader,language,voice,text,output):
 
 
 def handle(request):
+    if request.get('backend')=='piper':
+        from fast_backend import handle as fast_handle
+        return fast_handle(request)
     if request.get('engine')=='edge':
         from online_backend import handle as online_handle
         return online_handle(request)

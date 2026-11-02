@@ -1,4 +1,4 @@
-# Local API — 1.1.0
+# Local API — 1.2.0
 
 Keep `MO_TOOL.bat` open. Base URL: `http://localhost:8817`. Only local Host and same-origin browser requests are accepted. This is a local service, not an authenticated network server.
 
@@ -35,3 +35,11 @@ For online rendering use `engine="edge"`, its exact locale such as `vi-VN`, and 
 Completed jobs expose `audio_url`, `downloads` for individual WAV parts, `text_url`, `srt_url`, `report_url` and `bundle_url`. WAV parts are about one hour each, to avoid RIFF size limits. ZIP64 downloads stream directly without a second full audio copy on disk. WAV downloads support byte ranges.
 
 `processing_seconds` includes synthesis/loading and WAV assembly but excludes queue wait and download time. `realtime_multiplier` is output WAV duration (including pauses, after the requested speaking-rate adjustment) divided by processing time. Always inspect `cache_hits`, `fresh_inference`, and `speed` when comparing performance; cached reassembly is not fresh model inference. `target_30x_verified` remains false.
+
+## Local fast CPU selection
+
+`GET /api/config` now returns 27 local languages, `fast_languages`, `original_languages`, available CPU quota and a recommended parallel chunk count. For voice discovery add `"local_provider":"fast"` to the local request. The returned IDs are `piper:MODEL_ID:SPEAKER_ID`; use those exact IDs for rendering. Original Melo/VieNeu IDs remain valid and never silently change to another model. `local_provider="original"` prefers the seven original local readers; the twenty new languages use Piper.
+
+Rendering can include `"chunk_workers":4` (1–4). Only Piper uses concurrent chunks of a single output. Effective concurrency is bounded by the detected CPU quota, per-chunk thread budget and configured concurrent output jobs. Results retain source order. Output reports contain `parallel_chunks`, `threads` and the real engine. Synthesis remains FP32 at native speaking rate; requested tempo is applied separately. WAV assembly preserves native sample rate when possible.
+
+Online catalogue refresh accepts `"refresh":true` with `op="catalog"`. Errors keep the selected voice and include a visible service/network classification; no language/voice substitution occurs.

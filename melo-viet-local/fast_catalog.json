@@ -1,0 +1,547 @@
+{
+  "version": 1,
+  "runtime": "piper-tts 1.8.0 / ONNX Runtime CPU FP32",
+  "source": "k2-fsa/sherpa-onnx tts-models, Piper exports",
+  "models": [
+    {
+      "id": "en_US-lessac-medium",
+      "language": "EN",
+      "label": "Anh",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-en_US-lessac-medium.tar.bz2",
+      "archive_sha256": "9e3febfacf0abf4270172d2958bcec246032b7e88efc2720840cc80c93de334e",
+      "archive_bytes": 67230653,
+      "files": {
+        "model.onnx": "4ba07d8549906668ee855fd9abf9faf66c5db74742712ff026a159f7277fca9f",
+        "config.json": "efe19c417bed055f2d69908248c6ba650fa135bc868b0e6abb3da181dab690a0",
+        "MODEL_CARD": "ce49eb457742208166d399a40cdec2c7fa9db77960930031564ab56f12882645"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/en"
+    },
+    {
+      "id": "en_US-amy-medium",
+      "language": "EN",
+      "label": "Anh",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-en_US-amy-medium.tar.bz2",
+      "archive_sha256": "9a5d1fc497f85e8022b785bff5f8105203b1e33099ee6265203efc70b0cb0264",
+      "archive_bytes": 67223746,
+      "files": {
+        "model.onnx": "fbaa8e36d8f26fe6f3ebb65cab461e629d8b37a5b7c5fb78fb64317db73e1c25",
+        "config.json": "95a23eb4d42909d38df73bb9ac7f45f597dbfcde2d1bf9526fdeaf5466977d77",
+        "MODEL_CARD": "9c50e04cc298ca7f04f5e5435007be028334338a2c857894a3e496dbf04b25bb"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/en"
+    },
+    {
+      "id": "fr_FR-siwis-medium",
+      "language": "FR",
+      "label": "Pháp",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-fr_FR-siwis-medium.tar.bz2",
+      "archive_sha256": "375909aa30842b3a4efa10b1beb1d761af792960ae6873b4d53889f96c66195b",
+      "archive_bytes": 67207459,
+      "files": {
+        "model.onnx": "b015076c2bedcff22fbedd5da6ffb49b7d0abb2e3bdc51e1a7906e0000e411ed",
+        "config.json": "39479916c2db192b5ac9764daddd0c744d83e023ad890c6976c0633ae4df8959",
+        "MODEL_CARD": "bd8b8d079d4d3d2c4cc20345889bbcd586d72f021a132f93357a763eb5232cce"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/fr"
+    },
+    {
+      "id": "fr_FR-tom-medium",
+      "language": "FR",
+      "label": "Pháp",
+      "sample_rate": 44100,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-fr_FR-tom-medium.tar.bz2",
+      "archive_sha256": "3d8258ef8466b5d5f2cc46c06e1415d3d01c9cbaeed8b6d5b3d152073672472c",
+      "archive_bytes": 67202955,
+      "files": {
+        "model.onnx": "1548b82666f41f5adf24e0924c622170e504c1dc49f7aaed723f718d8ed368a5",
+        "config.json": "2f7f885ad5a0aad802e3cc24e4f57239febdcb142b4876de5d238094674361cc",
+        "MODEL_CARD": "ece4132df4a1ae2f90e22c9f01539aec14acb7f8dc8ded64edd2051945d0f1e9"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/fr"
+    },
+    {
+      "id": "es_ES-davefx-medium",
+      "language": "ES",
+      "label": "Tây Ban Nha",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-es_ES-davefx-medium.tar.bz2",
+      "archive_sha256": "a3f6beb54a9cb893279f72978a22f807a4d9fc9c7848157b524d5cc7b7f58b22",
+      "archive_bytes": 67184952,
+      "files": {
+        "model.onnx": "6826f9ac3fb4aac5c89c597f76ff32e84e7a0dea9469a6f18d1d387b696163eb",
+        "config.json": "0e0dda87c732f6f38771ff274a6380d9252f327dca77aa2963d5fbdf9ec54842",
+        "MODEL_CARD": "17523d253d605b262341aac23226b49686c31992af90236bd0abb7d4d154774d"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/es"
+    },
+    {
+      "id": "es_MX-ald-medium",
+      "language": "ES",
+      "label": "Tây Ban Nha",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-es_MX-ald-medium.tar.bz2",
+      "archive_sha256": "c60cf7bc853eb01a875fba0756523fecf9d9f46c763b19785d223fc981fb4fb6",
+      "archive_bytes": 67196497,
+      "files": {
+        "model.onnx": "b8198f4e0495029a686db2f7a7cb70bd4b3d6fe4300e3ee743d8a82602194389",
+        "config.json": "5a71498158e04afc8099bfd019c7e87c68eb9d042505a2b1a87e5c1ac2b1a61d",
+        "MODEL_CARD": "1f0694ceb3f1e78c1e2ee0e2d5da40f19f965bc638e1b4fb4fca9bdca420d713"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/es"
+    },
+    {
+      "id": "vi_VN-vais1000-medium",
+      "language": "VI",
+      "label": "Việt",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-vi_VN-vais1000-medium.tar.bz2",
+      "archive_sha256": "fa1367710767d36ed5cf13b4a449e20c35ffd12791c2e47c2e64142bfa55551a",
+      "archive_bytes": 67154040,
+      "files": {
+        "model.onnx": "df1512ef3265609f147ae23726b8c8867c6d28e60acb9ffca3545e11783b809f",
+        "config.json": "fafb9da1354ed4b77c31af228ed41fb41cd825c14cffa105454b25e6ae751ee0",
+        "MODEL_CARD": "302db8a930ffc2b1c2181db26deaf8272116eca2b08b8f80da6375b0a994af7b"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/vi"
+    },
+    {
+      "id": "ru_RU-ruslan-medium",
+      "language": "RU",
+      "label": "Nga",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-ru_RU-ruslan-medium.tar.bz2",
+      "archive_sha256": "0690b1cad01f86e8db9ba988af24898bdc1af774e23cb2e46b9c730269b6fd83",
+      "archive_bytes": 67210684,
+      "files": {
+        "model.onnx": "3cb25352186ef2ae116f994ca4a06444a07c11187c8aa1c9e3e64aafea99b054",
+        "config.json": "706a4fb17bc304abd07809b552deae615e64dcbffbfbd09854ba37ca59e88117",
+        "MODEL_CARD": "28f5c0381c1234eb17bfd77e77f893b008948c29bc351fb811abd2d6a69e7662"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/ru"
+    },
+    {
+      "id": "de_DE-thorsten-medium",
+      "language": "DE",
+      "label": "Đức",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-de_DE-thorsten-medium.tar.bz2",
+      "archive_sha256": "50487d9c95fdf2191f31d2588569381063ba1591dcd4c7d4bdd30f12b2191714",
+      "archive_bytes": 67214254,
+      "files": {
+        "model.onnx": "2d98b40baac55e4206f64114110a3474807e26440b80d465cd202af1e95be5e0",
+        "config.json": "974adee790533adb273a1ac88f49027d2a1b8f0f2cf4905954a4791e79264e85",
+        "MODEL_CARD": "5196b5ab0794e6056263a1f37c18bec407b61ac187529bee29d1c366871e5c9e"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/de"
+    },
+    {
+      "id": "it_IT-paola-medium",
+      "language": "IT",
+      "label": "Ý",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-it_IT-paola-medium.tar.bz2",
+      "archive_sha256": "7541f75778afa164e44e34baaef63befad7698595df26a95ca944b63ef1a16b4",
+      "archive_bytes": 67221173,
+      "files": {
+        "model.onnx": "477ab68d8021543decc9e067d12c5fddbc777d81b7b221e233d3c14719a1a6b9",
+        "config.json": "aea19c0a7fce29fbc359b93f10e7902854401e4c95ae2ea328ae516b15d296cf",
+        "MODEL_CARD": "c53fd0070dc93b438edbce06728eb83759ba030fff0cce523209ee4a0a6363c0"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/it"
+    },
+    {
+      "id": "pt_PT-tugao-medium",
+      "language": "PT",
+      "label": "Bồ Đào Nha",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-pt_PT-tugao-medium.tar.bz2",
+      "archive_sha256": "6b4f0a7bfc957bef26d6ac0703a8fa1ba659c8ab2df8b294f20206551859070c",
+      "archive_bytes": 67195014,
+      "files": {
+        "model.onnx": "aa8a702775132d0e3b1500ba92bd3d4b300a2b02c307c1db90f2ea0355804f8e",
+        "config.json": "fe0918dfc0f1a89264a6eea4afe8e95d8e9fed3cc6c81b5c2f87fcb2b50c7320",
+        "MODEL_CARD": "1d6c23095980c0c58a044f1cb23e26fdc1d27bd95b68db0b5b0c548788b99d50"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/pt"
+    },
+    {
+      "id": "nl_NL-ronnie-medium",
+      "language": "NL",
+      "label": "Hà Lan",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-nl_NL-ronnie-medium.tar.bz2",
+      "archive_sha256": "d2cc688abf46054eba1d47b3b1406c742ccf66732cd47998a3ee727c1b96c09f",
+      "archive_bytes": 67194164,
+      "files": {
+        "model.onnx": "36052fe7979ad9a15a3e40ca374307f393fb73694ffd573bfe08a95bd794c11a",
+        "config.json": "4329a4deb198d119b7f7364173e388afb8efec9eca10e849f9394aa1a92bb7bc",
+        "MODEL_CARD": "f2c1697b528901ba7e7178500d6d06da6fc93ba43129b2f40d13ff1c197d0884"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/nl"
+    },
+    {
+      "id": "pl_PL-gosia-medium",
+      "language": "PL",
+      "label": "Ba Lan",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-pl_PL-gosia-medium.tar.bz2",
+      "archive_sha256": "75bd34dcbdc4dd98d763954756b4b34b4208100497c836381542e4d73dcefa9c",
+      "archive_bytes": 67211182,
+      "files": {
+        "model.onnx": "f22aeb41672b3fb71ff1003863c890e5d2a3632c123b7bc1cac9907119d6cb56",
+        "config.json": "1aefb31a9d53ffe44a8163ff73ec833acb7a6253848f6bb0403d8a66f9c7510d",
+        "MODEL_CARD": "6b4de033dfff0da758bbe4d438fd87fbd917ab843bdd83f591fa0f32b8eb5780"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/pl"
+    },
+    {
+      "id": "hi_IN-priyamvada-medium",
+      "language": "HI",
+      "label": "Hindi",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-hi_IN-priyamvada-medium.tar.bz2",
+      "archive_sha256": "399d91cc97eb288725633261f26b715f9a971e3bf7ec4fa1d7910cd0080d37eb",
+      "archive_bytes": 67240610,
+      "files": {
+        "model.onnx": "8871f3e07adb6ca490f8dbcd3956a8647c53c35b5d0a1c2a8d097b3bf721a31b",
+        "config.json": "5efc0ccf7529f3528996d46e0fac1f969f681d44a8e55bfa6236ff8841b5d52d",
+        "MODEL_CARD": "8ce0324466010a59127fe8cab16416befcca136abf4b57ebd8ad5a2033c2021e"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/hi"
+    },
+    {
+      "id": "sv_SE-nst-medium",
+      "language": "SV",
+      "label": "Thụy Điển",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-sv_SE-nst-medium.tar.bz2",
+      "archive_sha256": "5aed0f5ab75135fc3ba6a4f3567e171d72df753305b08a01ca42f79411587f67",
+      "archive_bytes": 67144884,
+      "files": {
+        "model.onnx": "5de1daa67ae8e52af806bdf2ea027fa03a3a5407ec0d0c744d61aae10a7123b3",
+        "config.json": "d45dd74cbb4eca58694bf04a97e243044092476f28a55ae26424f0653086980a",
+        "MODEL_CARD": "c85d3e26e47d93e9d9b8572d3c89537c3f8ff212595cb9a3fbd2e07c19432317"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/sv"
+    },
+    {
+      "id": "da_DK-talesyntese-medium",
+      "language": "DA",
+      "label": "Đan Mạch",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-da_DK-talesyntese-medium.tar.bz2",
+      "archive_sha256": "f2e2cbcdb2b21e76f93635b35105d07b37997ace434d7289d04b689a97c19bd0",
+      "archive_bytes": 67185257,
+      "files": {
+        "model.onnx": "33a51b3246c74cfe7530388117189e7d414ea1159f2e14996dab0ee810a273f1",
+        "config.json": "89fe13bd251406cc0088570d103ea7ac35823211d8466faf913268ab8506f41b",
+        "MODEL_CARD": "b5b7a51d4d815a307594619a519eb389b2e17839b30c0eb69a39d3ade5b1ed65"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/da"
+    },
+    {
+      "id": "fi_FI-harri-medium",
+      "language": "FI",
+      "label": "Phần Lan",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-fi_FI-harri-medium.tar.bz2",
+      "archive_sha256": "a7fd608e73983c366a5e0bcd13382e6529a6749f67efc406b5a7f9021e3a8b1d",
+      "archive_bytes": 67205198,
+      "files": {
+        "model.onnx": "d6a42383b3c3386dd867ea5c5ed45904f7d08e50436a5cb114c0c2c520b6b696",
+        "config.json": "3f9c9f76f74adf1fbe7279e41eea17d6610757e45effd6808bbea6be74b8916d",
+        "MODEL_CARD": "a0a7fa3f046f1e582689db76f93099735530343a3126f3f40ed64380c419a0b2"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/fi"
+    },
+    {
+      "id": "no_NO-talesyntese-medium",
+      "language": "NO",
+      "label": "Na Uy",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-no_NO-talesyntese-medium.tar.bz2",
+      "archive_sha256": "dcb7c36b7222e290cca1fd4cdecb474e7fd651dc5b0d3d42c33d416a8e62018b",
+      "archive_bytes": 67194829,
+      "files": {
+        "model.onnx": "8027a2c33f6dc30e137a0f7f15022c07ef2d0e56300a5dfc29e38408970a0ddf",
+        "config.json": "b0eb0491fc8bf9843d2beac8acf8773b6cf59274316406b36ff579ae8a1909d5",
+        "MODEL_CARD": "0a03b201db00e1bdc384e2dee4f8710075ef8d32ca3c64ed16782b04d2605f6c"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/no"
+    },
+    {
+      "id": "cs_CZ-jirka-medium",
+      "language": "CS",
+      "label": "Séc",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-cs_CZ-jirka-medium.tar.bz2",
+      "archive_sha256": "321aafd83dd89b3d5b2c36c5898e0710d4f472f3c191cb7f73901a89b7f8539f",
+      "archive_bytes": 67212775,
+      "files": {
+        "model.onnx": "e22a799812a7088b533dc363845ddc56bca78e8c89c44ba0b9fcad7567ea38c3",
+        "config.json": "fb38b1799b7354808227c065efa97b1ffa2b0cde59505babb56a36d35af9c637",
+        "MODEL_CARD": "27f3ecff306b91dfa8a16b9666f01a7244ca3f03d48f942a02ad4788405e5166"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/cs"
+    },
+    {
+      "id": "sk_SK-lili-medium",
+      "language": "SK",
+      "label": "Slovakia",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-sk_SK-lili-medium.tar.bz2",
+      "archive_sha256": "a00dfbca5d34733862a59d9e309f4e94a92fccc9337c2b124de9a241b604fc0d",
+      "archive_bytes": 67183092,
+      "files": {
+        "model.onnx": "4184b6990b4cd832ed7889abbeaff217d96cb1eb168c29231168b0d8c4848993",
+        "config.json": "b7c474eba411913f9feb65b9da322463e8698e7b200d2b757f6e684802951333",
+        "MODEL_CARD": "9f779cd3b68fe0f1b6a354a63f348a348f6776ebcbc5d961f1db0cb0e1bc62bd"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/sk"
+    },
+    {
+      "id": "hu_HU-imre-medium",
+      "language": "HU",
+      "label": "Hungary",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-hu_HU-imre-medium.tar.bz2",
+      "archive_sha256": "7be44b928bb26b03e403660894cd8210828dd8a0e9dccc4bade4a1632fc4f8c4",
+      "archive_bytes": 67218203,
+      "files": {
+        "model.onnx": "73d3736cd1659a0b16e9dd0abb21a094549d206eec748b96c7979e0e9e668bed",
+        "config.json": "bb9c31dd8429b1414d486e5d52d52f0790949c63bfaf1345075d42e23ad10c83",
+        "MODEL_CARD": "2b03743ba8fbfa1005d9aae991a8911dbd8b704fc22d5f957d73a365fd9a2261"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/hu"
+    },
+    {
+      "id": "ro_RO-mihai-medium",
+      "language": "RO",
+      "label": "Romania",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-ro_RO-mihai-medium.tar.bz2",
+      "archive_sha256": "cfbee3cdc25cf063339f69e189f4d93cc3be6610d267567537323ced3cf87f4d",
+      "archive_bytes": 67182137,
+      "files": {
+        "model.onnx": "83c35f4d5bdd286f0143e876bfdc964c94ed95dc33b36a1d80a7214e24871432",
+        "config.json": "8cc0c9f077dc0cec3c25a6a055ec8046db8e40a2510591582f2c9c869f4bc47e",
+        "MODEL_CARD": "f5d53558c24f8585b9c46072700c9396165c090d10c6bf0b15bce1944fd5adb1"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/ro"
+    },
+    {
+      "id": "tr_TR-fahrettin-medium",
+      "language": "TR",
+      "label": "Thổ Nhĩ Kỳ",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-tr_TR-fahrettin-medium.tar.bz2",
+      "archive_sha256": "2ee3c18b5dc0a5faf913f995b027163befa6e7a6ad2f5c6b8a2e99fe1aad8b6d",
+      "archive_bytes": 67212827,
+      "files": {
+        "model.onnx": "36e899b5e448e726cd742578fd9d1c0bdd57a0bd8f83297b0e0046c0d69d97a2",
+        "config.json": "93741b234acc5f123430a0e343f619e01cfda6b1dc0970ee80bce7da22b1a09b",
+        "MODEL_CARD": "796da7da7f453bcfdad6c0168ee02ce4e4c6a9fd764157532a0fc6f65223db7c"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/tr"
+    },
+    {
+      "id": "ar_JO-kareem-medium",
+      "language": "AR",
+      "label": "Ả Rập",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-ar_JO-kareem-medium.tar.bz2",
+      "archive_sha256": "9ebbcea30e0fbd588f7b2cb45ee897d6aeb1bf5791cbc037a7b5a3f641e3dbce",
+      "archive_bytes": 67177830,
+      "files": {
+        "model.onnx": "e8cf4ac98d47831f8a8150b90d25938b74bb6168cd03f431a8d43aa8bc8d8309",
+        "config.json": "ea6d9b9d9076dbdb6bf5c98c6a141ef154959d2359709b37855727964e7d6c4d",
+        "MODEL_CARD": "38e1e4f94c4cb9eda041a639096763a8c5681d0be5a5b3e22f990aed6bb4b86e"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/ar"
+    },
+    {
+      "id": "fa_IR-amir-medium",
+      "language": "FA",
+      "label": "Ba Tư",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-fa_IR-amir-medium.tar.bz2",
+      "archive_sha256": "46af65c1cdd86ec300db3998f2bf31a68d9e38da930c0655c1ff6f610e84f864",
+      "archive_bytes": 67180373,
+      "files": {
+        "model.onnx": "ec6cf5d89067fcf72c410206d42b83ebaf95ee8219ecd169c85c6868a2ab977c",
+        "config.json": "75f918a3bf0f57a9179abe725af529f2a5c79d6c899e2a84aec76c685d5dfb9a",
+        "MODEL_CARD": "0d7d315699945ac830162f82d485d79af51a33081a7649e8992726bd4bba2384"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/fa"
+    },
+    {
+      "id": "id_ID-news_tts-medium",
+      "language": "ID",
+      "label": "Indonesia",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-id_ID-news_tts-medium.tar.bz2",
+      "archive_sha256": "634b0169fe41c368e9fafe128f30647f9e0301e852ce503cd78146db524f1f12",
+      "archive_bytes": 67243848,
+      "files": {
+        "model.onnx": "3c2e55d7b8485b9c132383f07e6fc6807b54ed8d6f4a8f54d1d4d4740d2b54ff",
+        "config.json": "1ef677072668a5e172e0759b1d3871f129009d1167f093325a17607f7add5ad7",
+        "MODEL_CARD": "0115bfc12e2b7d9cc28b43e2ebc746e402b6ed867c619ae61bc80d0427a95c83"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/id"
+    },
+    {
+      "id": "ca_ES-upc_ona-medium",
+      "language": "CA",
+      "label": "Catalan",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-ca_ES-upc_ona-medium.tar.bz2",
+      "archive_sha256": "b6c50f22e13cfc72ce51c496d22b987adf6704047f6d342968197b4b0b3127a5",
+      "archive_bytes": 67223188,
+      "files": {
+        "model.onnx": "b64de8ad74b5960c00d405f21121f44010eaece98bfd86eb585704539f06ad83",
+        "config.json": "7f76acc9c06f4eda9e6aef2997b75782d97855aab48d4b401eb956a6e655eddc",
+        "MODEL_CARD": "2961b53af17c66971b3ebe3b174566a16ae6e9302997eed111a7d2b1954d31fd"
+      },
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/ca"
+    }
+  ]
+}

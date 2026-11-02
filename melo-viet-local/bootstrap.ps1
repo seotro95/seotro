@@ -4,7 +4,7 @@ $ErrorActionPreference = 'Stop'
 $OutputEncoding = [Console]::OutputEncoding
 $package = $env:MELO_VIET_PACKAGE
 $action = $env:MELO_VIET_ACTION
-if ($action -notin @('install','install-online','update','run','offline')) { throw 'Thao tac khong hop le.' }
+if ($action -notin @('install','install-online','install-fast','update','run','offline')) { throw 'Thao tac khong hop le.' }
 if (-not $package -or -not (Test-Path -LiteralPath $package -PathType Container)) { throw 'Khong tim thay thu muc bo cai. Hay giai nen toan bo ZIP truoc.' }
 # A trailing backslash can escape the closing quote in native Windows arguments.
 if ($package.Length -gt 3) { $package = $package.TrimEnd('\','/') }
@@ -34,10 +34,11 @@ if ($osRelease -notmatch '(?m)^ID="?ubuntu"?\s*$' -or $osRelease -notmatch '(?m)
 $linuxPath = (& wsl.exe --distribution $distribution --exec wslpath -a -u $package | Out-String).Replace("`0",'').Trim()
 if ($LASTEXITCODE -ne 0 -or -not $linuxPath.StartsWith('/')) { throw "Khong doi duoc duong dan bo cai sang Linux. Giai nen ZIP vao thu muc tren o C: hoac D: va chay lai. WSL: $distribution" }
 Set-Content -LiteralPath $choiceFile -Value $distribution -Encoding UTF8
-if ($action -in @('install','install-online','update')) {
+if ($action -in @('install','install-online','install-fast','update')) {
     $mode = '--install'
     if ($action -eq 'update') { $mode = '--update' }
     if ($action -eq 'install-online') { $mode = '--online-only' }
+    if ($action -eq 'install-fast') { $mode = '--fast-only' }
     & wsl.exe --distribution $distribution --exec bash ($linuxPath.TrimEnd('/') + '/setup.sh') $mode
     if ($LASTEXITCODE -ne 0) { throw 'Cai dat chua hoan tat. Giu cua so loi de kiem tra; chay lai khong xoa model/ban thu.' }
 } else {
@@ -45,7 +46,7 @@ if ($action -in @('install','install-online','update')) {
         for ($i=0; $i -lt 60; $i++) {
             try {
                 $state = Invoke-RestMethod -Uri 'http://localhost:8817/api/config' -TimeoutSec 1
-                if ($state.version -eq '1.1.0') { Start-Process 'http://localhost:8817/'; break }
+                if ($state.version -eq '1.2.0') { Start-Process 'http://localhost:8817/'; break }
             } catch { }
             Start-Sleep -Milliseconds 500
         }

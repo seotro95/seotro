@@ -1,19 +1,32 @@
-Melo + Việt Studio **1.1.0**: soạn tối đa **1.000.000 ký tự**, tự chia đoạn, tạo **1–4 bản đồng thời**, nhập nhiều TXT/SRT và lưu lịch sử bản thu.
+**Melo + Việt Studio 1.2.0** thêm bộ đọc **Piper ONNX FP32 chạy CPU** để tạo lời mới nhanh hơn và thêm đúng **20 ngôn ngữ trên máy**. Không đổi tên các giọng này thành Melo/VieNeu.
 
-**Đang dùng 1.0.0 / 1.0.1:** đóng tool cũ, giải nén ZIP mới vào thư mục cố định, chạy **CAP_NHAT.bat**, chờ xong rồi chạy **MO_TOOL.bat mới**. Không cài lại Ubuntu, không xóa mô hình hoặc bản thu. Nếu trang cũ còn hiện, Ctrl+F5. Bản cập nhật không chạy lại cài hai bộ Melo/VieNeu.
+### Tải và cập nhật
 
-**Cài mới:** `CAI_DAT.bat` cài đủ ba bộ đọc. `CAI_TRUC_TUYEN.bat` chỉ cài bộ trực tuyến nhẹ, không tải mô hình Melo/VieNeu. ZIP là bộ cài, chưa chứa thư viện/mô hình. Vẫn cần **WSL2 với hệ điều hành Ubuntu 22.04**, tên đăng ký có thể là `Ubuntu`; không cần tên phải là `Ubuntu-22.04`.
+- **CPU-Day-Du-Windows.zip**: chương trình và **27 mô hình Piper cho 24 tiếng**, có cấu hình, mã SHA256 và MODEL_CARD gốc. Cài thư viện vẫn cần Internet lần đầu. Sau khi cài, những giọng Piper này dùng ngoại tuyến. Melo/VieNeu giữ nguyên mô hình đã có; khi cài mới, các mô hình đó được tải riêng lúc dùng.
+- **Cap-Nhat-Windows.zip**: chương trình nhỏ; tải mô hình Piper đã chọn khi dùng lần đầu. Phù hợp nếu muốn tải ít giọng.
 
-Các tính năng:
+Đóng tool cũ → giải nén ZIP → chạy **CAP_NHAT.bat** → mở **MO_TOOL.bat mới** → Ctrl+F5. Không cần cài lại Ubuntu; tên WSL `Ubuntu` với hệ điều hành 22.04 vẫn dùng được. Các mô hình, bản thu và lịch sử cũ được giữ lại.
 
-- Chọn nhiều giọng để cùng một văn bản có nhiều bản thu. Hàng đợi theo thứ tự gửi, tiến độ theo đoạn, dừng từng bản, nghe đoạn đầu và tiếp tục sau gián đoạn. Giữ mô hình trong RAM; Melo giữ tối đa hai mô hình mỗi tiến trình xử lý và đổi số luồng không phải nạp lại trọng số.
-- Kiểu nhịp kể chuyện, review phim, thuyết minh, bản tin, nhẹ nhàng. Đây là tốc độ gợi ý và nhịp nghỉ, **không phải mô hình cảm xúc riêng**. Tốc độ đọc 0,5–2×, giữ cao độ.
-- Nhập nhiều TXT/SRT, tự nhận dạng theo nội dung và UTF-8/UTF-16 có BOM; chọn thêm Windows-1258/1252 nếu cần. Tệp lỗi được đánh dấu riêng. Không đọc số thứ tự/mốc SRT thành lời.
-- Xuất WAV, TXT, SRT và báo cáo. SRT đầu ra theo ranh giới từng đoạn âm thanh thực, **không căn từng từ và không ép vào thời gian SRT nhập**. Mỗi phần WAV có phụ đề riêng; còn có phụ đề toàn bản. Bản dài tự chia WAV khoảng một giờ/phần để tránh giới hạn RIFF; ZIP64 tải trực tiếp không tạo thêm bản sao toàn bộ WAV trên đĩa.
-- Lịch sử giữ lại giữa các lần mở; vẫn thấy WAV cũ 1.0.x. Dùng lại các đoạn đã tạo theo nội dung/giọng để tạo lại hoặc tiếp tục. Có thể tắt dùng lại đoạn khi đo tổng hợp mới.
-- Ngoại tuyến: VieNeu Turbo FP32 cho Việt; MeloTTS cho Anh, Pháp, Nhật, Hàn, Tây Ban Nha, Trung. Không ép INT8 trên Xeon cũ, không cài CUDA/đụng driver GPU.
-- Trực tuyến: tải danh mục giọng/quốc gia thật từ Microsoft Edge qua **edge-tts 7.3.1**, gồm các tiếng khác như Nga, Thái, Đức, Ý khi dịch vụ cung cấp. Không cần khóa trong tool. **Nội dung sẽ gửi tới Microsoft**; đây là tích hợp bên thứ ba, không phải API Azure chính thức, dịch vụ có thể thay đổi hoặc giới hạn. Mỗi quốc gia chỉ hiển thị giọng thực sự có, không nhân bản giả giọng.
+Cài mới nhẹ: **CAI_CPU_NHANH.bat** cài Piper + bộ trực tuyến, không cài PyTorch/CUDA, có 24 tiếng Piper. **CAI_DAT.bat** cài thêm Melo/VieNeu để đủ tổng cộng 27 tiếng và các preset gốc.
 
-Kiểm tra chức năng gồm 52 kiểm thử Python, 13 tình huống launcher Windows PowerShell 5.1 với WSL giả lập, kiểm thử trình duyệt máy tính/di động (âm thanh mô phỏng) và thử mô hình thật trên Ubuntu 22.04. Báo cáo thật kèm Release phân biệt tổng hợp mới và dùng lại đoạn; không dùng âm thanh mô phỏng để tuyên bố tốc độ mô hình.
+### Chọn đúng bộ đọc để đo lại
 
-**Chưa xác minh tạo một giờ lời đọc trong hai phút hoặc chất lượng nghe bởi người bản ngữ cho mọi giọng.** Số đo theo WAV có khoảng nghỉ, thời gian nạp, tốc độ phát âm đã chọn và số đoạn dùng lại; lượt có cache không phải tốc độ tổng hợp mới. Tạo nhiều bản đồng thời dùng thêm CPU/RAM và có thể làm từng bản chậm hơn. Kết quả Linux CI không bảo đảm tốc độ trên Windows/Xeon của bạn. Hướng dẫn đầy đủ trong `HUONG_DAN.txt`.
+Bộ đọc **Trên máy** → Loại giọng **CPU nhanh** → tiếng **Tây Ban Nha** → giọng **ONNX nhanh · es_ES-davefx-medium**. Bấm **Nghe thử** trước, rồi nhập lời và tạo **bản mới**. Bỏ chọn dùng lại đoạn nếu muốn đo tổng hợp mới. Báo cáo cần ghi **Piper ONNX FP32 CPU**. Số đo MeloTTS cũ trong lịch sử không thay đổi sau cập nhật.
+
+Piper là mô hình/giọng khác với Melo/VieNeu; chất giọng và phát âm có thể khác. Chọn **Melo/VieNeu gốc** để dùng các giọng cũ. Nhật/Hàn/Trung vẫn dùng MeloTTS. Không có việc âm thầm thay giọng trong một tác vụ.
+
+### Hai mươi tiếng mới chạy trên máy
+
+Nga, Đức, Ý, Bồ Đào Nha, Hà Lan, Ba Lan, Hindi, Thụy Điển, Đan Mạch, Phần Lan, Na Uy, Séc, Slovakia, Hungary, Romania, Thổ Nhĩ Kỳ, Ả Rập, Ba Tư, Indonesia và Catalan. Tổng cộng **27 tiếng** khi có cả Melo/VieNeu. Piper còn cung cấp các lựa chọn CPU nhanh cho Việt/Anh/Pháp/Tây Ban Nha.
+
+### Tăng tốc và sửa điều khiển
+
+- Tạo 1–4 đoạn Piper song song trong cùng một bản, giữ đúng thứ tự lời. Tự giới hạn theo CPU khả dụng, số bản đồng thời và số luồng mỗi đoạn để giảm quá tải. Giữ 1–4 bản đồng thời như trước.
+- Giữ tần số lấy mẫu gốc khi ghép WAV. Tốc độ đọc 1× không cần chạy ffmpeg để đổi tần số từng đoạn. Giữ FP32 và khoảng dự phòng biên độ; không ép INT8 hoặc đổi tốc độ phát âm để làm đẹp số đo.
+- Chọn một giọng là mặc định; bật **Chọn nhiều giọng** khi cần. **Nghe thử** tạo âm thanh thật với giọng đang chọn và mở trình phát khi xong.
+- Nút tải danh mục trực tuyến thực sự làm mới danh sách. Lỗi tạo âm thanh xuất hiện ngay gần ô chọn giọng, có **Sao chép lỗi**; phân biệt không có âm thanh, HTTP 401/403, SSL, proxy và hết thời gian chờ. Không chỉ dựa vào việc tải được danh sách để cho rằng tạo giọng đã hoạt động.
+- Trực tuyến vẫn cần mạng truy cập Microsoft từ WSL. Đã kiểm tra bằng mẫu thật; không thể bảo đảm mọi mạng/mọi thời điểm đều kết nối được. Chọn bộ trên máy để dùng ngoại tuyến.
+
+Giữ các tính năng 1.1.0: ô một triệu ký tự, chia đoạn, TXT/SRT và mã hóa tệp, kiểu nhịp đọc, tốc độ 0,5–2×, nhiều giọng, hàng đợi, lịch sử, tiếp tục, WAV từng phần và ZIP tải trực tiếp. SRT xuất theo ranh giới âm thanh thực, không căn từng từ hay ép mốc nhập.
+
+**Chưa xác minh tạo đủ một giờ lời đọc trong hai phút trên máy Windows của bạn.** Các mẫu FP32 tổng hợp mới nhanh hơn đáng kể trong kiểm thử, nhưng tốc độ còn phụ thuộc giọng, CPU, số đoạn/bản đồng thời. Báo cáo phân biệt cache với tổng hợp mới; không coi dùng lại âm thanh là tăng tốc mô hình. Chưa có đánh giá nghe bởi người bản ngữ cho mọi giọng. Các bộ/mô hình giữ giấy phép riêng trong SOURCES.md và MODEL_CARD.

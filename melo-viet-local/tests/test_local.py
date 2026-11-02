@@ -64,7 +64,7 @@ def test_each_supported_language_routes_to_the_correct_isolated_reader(studio,la
     assert seen==['viet' if language=='VI' else 'melo']
 
 
-@pytest.mark.parametrize('language',['RU','TH','EN-US','vi','../x'])
+@pytest.mark.parametrize('language',['XX','TH','EN-US','vi','../x'])
 def test_unsupported_languages_are_rejected_without_substitution(studio,language):
     with pytest.raises(ValueError):studio.start({'op':'voices','language':language})
 
@@ -102,7 +102,7 @@ def test_http_origin_guard_and_generated_audio_route(studio):
     thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
     base='http://127.0.0.1:'+str(server.server_port)
     try:
-        with urllib.request.urlopen(base+'/api/config') as r:assert len(json.load(r)['languages'])==7
+        with urllib.request.urlopen(base+'/api/config') as r:assert len(json.load(r)['languages'])==27
         req=urllib.request.Request(base+'/api/start',data=json.dumps({'op':'render','language':'EN','voice':'EN','text':'Hello.'}).encode(),headers={'Content-Type':'application/json','Origin':'https://attacker.example'})
         with pytest.raises(urllib.error.HTTPError) as e:urllib.request.urlopen(req)
         assert e.value.code==403

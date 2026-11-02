@@ -23,9 +23,24 @@ from urllib.parse import urlsplit, parse_qs
 
 from documents import MAX_CHARS, STYLES, parse_document, plan_document, Assembler, convert_audio
 
-VERSION = '1.1.0'
+VERSION = '1.2.0'
 LABELS = {'VI':'Việt · VieNeu Turbo', 'EN':'Anh · MeloTTS', 'FR':'Pháp · MeloTTS', 'JP':'Nhật · MeloTTS',
           'KR':'Hàn · MeloTTS', 'ES':'Tây Ban Nha · MeloTTS', 'ZH':'Trung · MeloTTS'}
+FAST_LABELS = {'VI':'Việt','EN':'Anh','FR':'Pháp','ES':'Tây Ban Nha','RU':'Nga','DE':'Đức','IT':'Ý',
+    'PT':'Bồ Đào Nha','NL':'Hà Lan','PL':'Ba Lan','HI':'Hindi','SV':'Thụy Điển','DA':'Đan Mạch',
+    'FI':'Phần Lan','NO':'Na Uy','CS':'Séc','SK':'Slovakia','HU':'Hungary','RO':'Romania',
+    'TR':'Thổ Nhĩ Kỳ','AR':'Ả Rập','FA':'Ba Tư','ID':'Indonesia','CA':'Catalan'}
+LOCAL_LABELS = {**LABELS, **FAST_LABELS}
+
+
+def backend_for(body):
+    if body['engine']=='edge':return 'online'
+    language=body['language']
+    if body.get('voice','').startswith('piper:'):return 'piper'
+    if body['op']=='voices' and language in FAST_LABELS and (body.get('local_provider')=='fast' or language not in LABELS):return 'piper'
+    return 'viet' if language=='VI' else 'melo'
+
+
 TERMINAL = {'done', 'error', 'cancelled', 'interrupted'}
 IDENT = re.compile(r'^[a-f0-9]{32}$')
 CACHE_REVISION = 'melo209145-vieneu3.8.3-edge7.3.1-pcm-v1'
@@ -35,6 +50,17 @@ def atomic_json(path, body):
     temporary = path.with_suffix('.json.partial')
     temporary.write_text(json.dumps(body, ensure_ascii=False, indent=2), encoding='utf-8')
     temporary.replace(path)
+
+
+def available_cpus():
+    count=os.cpu_count() or 1
+    if hasattr(os,'sched_getaffinity'):
+        count=min(count,len(os.sched_getaffinity(0)))
+    try:
+        quota,period=Path('/sys/fs/cgroup/cpu.max').read_text().split()
+        if quota!='max':count=min(count,max(1,int(quota)//int(period)))
+    except (OSError,ValueError):pass
+    return max(1,count)
 
 
 def wave_seconds(path):
@@ -63,13 +89,15 @@ class Reader:
             if self.process is None or self.process.poll() is not None:
                 self.close()
                 python=self.root/'envs'/self.engine/'bin/python'
-                if not python.is_file():raise ValueError('Chưa cài môi trường. Chạy CAI_DAT.bat trước.')
+                if not python.is_file():raise ValueError('Chưa cài bộ đọc '+self.engine+'. Đóng tool và chạy CAP_NHAT.bat (hoặc CAI_DAT.bat nếu cài mới).')
                 logs=self.root/'logs';logs.mkdir(exist_ok=True)
                 self.log=(logs/(self.engine+'.log')).open('a',encoding='utf-8')
                 env=dict(os.environ,MELO_VIET_ROOT=str(self.root),HF_HOME=str(self.root/'models/huggingface'),
                     HF_HUB_DISABLE_TELEMETRY='1',DO_NOT_TRACK='1',GRADIO_ANALYTICS_ENABLED='False',
                     OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='4',OMP_NUM_THREADS='4',PYTHONUNBUFFERED='1')
                 if self.offline:env.update(HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1')
+                elif self.engine=='online':
+                    env.pop('HF_HUB_OFFLINE',None);env.pop('TRANSFORMERS_OFFLINE',None)
                 self.process=subprocess.Popen([str(python),'-u',str(Path(__file__).with_name('worker.py'))],
                     stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=self.log,text=True,encoding='utf-8',env=env,start_new_session=True)
                 process=self.process
@@ -171,9 +199,13 @@ class Studio:
                 raise ValueError('Chế độ ngoại tuyến không gọi giọng trực tuyến. Mở MO_TOOL.bat để dùng Internet.')
             if op != 'catalog' and (not isinstance(language, str) or not re.fullmatch(r'[a-z]{2,3}(?:-[A-Za-z0-9]{2,8}){1,2}', language)):
                 raise ValueError('Chọn ngôn ngữ/quốc gia từ danh mục trực tuyến.')
-        elif language not in LABELS or op == 'catalog':
+        elif language not in LOCAL_LABELS or op == 'catalog':
             raise ValueError('Ngôn ngữ chưa có trong bộ đọc ngoại tuyến; chọn Trực tuyến để xem các tiếng khác.')
-        normalized = {'op':op, 'engine':engine, 'language':language, 'threads':threads}
+        workers=body.get('chunk_workers',1)
+        if type(workers) is not int or not 1<=workers<=4:raise ValueError('Chọn 1–4 đoạn song song cho Piper.')
+        provider=body.get('local_provider','original')
+        if provider not in {'fast','original'}:raise ValueError('Chọn CPU nhanh hoặc Melo/VieNeu gốc.')
+        normalized = {'op':op, 'engine':engine, 'language':language, 'threads':threads, 'local_provider':provider, 'refresh':bool(body.get('refresh',False)), 'chunk_workers':workers}
         if op == 'render':
             document = parse_document(body.get('text'), body.get('name', ''), body.get('format', 'auto'))
             speed = body.get('speed', 1.0); style = body.get('style', 'neutral'); size = body.get('chunk_size', 480)
@@ -219,7 +251,7 @@ class Studio:
         return self.start_batch([body])[0]
 
     def reader_for(self, slot, body):
-        engine = 'online' if body['engine'] == 'edge' else ('viet' if body['language']=='VI' else 'melo')
+        engine = backend_for(body)
         key = (slot, engine)
         if key not in self.readers:
             self.readers[key] = self.reader_factory(self.root, engine, self.offline)
@@ -249,7 +281,7 @@ class Studio:
                 self.condition.notify_all()
             started = time.perf_counter(); reader = self.reader_for(slot, body); reader.owner = ident
             if body['op'] != 'render':
-                result = reader.request(body, event)
+                result = reader.request({**body,'backend':backend_for(body)}, event)
                 self.update(ident, **{k:v for k,v in result.items() if k!='ok'}, status='done', progress=1)
                 return
             document = parse_document(body['text'], body['name'], body['format'])
@@ -258,50 +290,64 @@ class Studio:
             (folder / 'script.txt').write_text(document['text'], encoding='utf-8')
             if document['format'] == 'srt':
                 (folder / 'original.srt').write_text(body['text'], encoding='utf-8')
-            assembler = Assembler(folder); total_load = 0; cache_hits = 0; raw_seconds = 0; spoken_chars = 0
-            for index, text in enumerate(chunks):
-                if event.is_set():
-                    raise InterruptedError('Đã dừng.')
-                fingerprint = json.dumps([CACHE_REVISION, body['engine'], body['language'], body['voice'], text], ensure_ascii=False)
-                digest = hashlib.sha256(fingerprint.encode()).hexdigest(); cache = self.root / 'cache/audio' / (digest+'.wav')
-                hit = False
-                if body['use_cache'] and cache.is_file():
-                    try:
-                        raw_seconds += wave_seconds(cache); hit = True
-                    except (OSError, EOFError, wave.Error, ValueError):
-                        pass
-                if not hit:
-                    raw = folder / 'raw.wav'
-                    result = reader.request({**body, 'text':text, 'output':str(raw)}, event)
-                    total_load += result.get('model_load_seconds',0)
-                    raw_seconds += wave_seconds(raw)
-                    if event.is_set():
-                        raise InterruptedError('Đã dừng.')
-                    # Unique temp file prevents simultaneous jobs from sharing a partial WAV.
-                    temporary = cache.with_name(digest+'.'+ident+'.partial.wav')
-                    shutil.copyfile(raw, temporary); temporary.replace(cache)
-                else:
-                    cache_hits += 1
-                prepared = folder / 'prepared.wav'
-                convert_audio(cache, prepared, body['speed'])
-                if event.is_set():
-                    raise InterruptedError('Đã dừng.')
-                pause = STYLES[body['style']]['pause_ms'] if index + 1 < len(chunks) else 0
-                assembler.append(prepared, text, pause)
-                if index == 0:
-                    shutil.copyfile(prepared, folder / 'preview.wav')
-                spoken_chars += len(text)
-                elapsed = time.perf_counter() - started
-                self.update(ident, completed_chunks=index+1, progress=(index+1)/len(chunks), cache_hits=cache_hits,
-                    elapsed_seconds=elapsed, eta_seconds=elapsed/(index+1)*(len(chunks)-index-1),
-                    preview_url='/download/'+ident+'/preview.wav')
+            assembler = None; total_load = 0; cache_hits = 0; raw_seconds = 0; spoken_chars = 0
+            lanes=min(body['chunk_workers'],max(1,available_cpus()//max(1,self.parallelism*body['threads']))) if backend_for(body)=='piper' else 1
+            index=0
+            while index<len(chunks):
+                if event.is_set():raise InterruptedError('Đã dừng.')
+                # Produce the first preview quickly, then use bounded parallel chunks.
+                size=min(1 if index==0 else lanes,len(chunks)-index)
+                batch=[];missing=[]
+                for offset in range(size):
+                    text=chunks[index+offset]
+                    fingerprint=json.dumps([CACHE_REVISION,body['engine'],body['language'],body['voice'],text],ensure_ascii=False)
+                    digest=hashlib.sha256(fingerprint.encode()).hexdigest();cache=self.root/'cache/audio'/(digest+'.wav')
+                    hit=False
+                    if body['use_cache'] and cache.is_file():
+                        try:wave_seconds(cache);hit=True
+                        except (OSError,EOFError,wave.Error,ValueError):pass
+                    item={'text':text,'cache':cache,'hit':hit,'raw':folder/f'raw-{offset}.wav','digest':digest}
+                    batch.append(item)
+                    if not hit:missing.append(item)
+                if missing:
+                    if backend_for(body)=='piper':
+                        reply=reader.request({**body,'backend':'piper','op':'render_many','entries':[{'text':item['text'],'output':str(item['raw'])} for item in missing]},event)
+                        results=reply['results'];total_load+=reply.get('model_load_seconds',0)
+                    else:
+                        results=[reader.request({**body,'backend':backend_for(body),'text':missing[0]['text'],'output':str(missing[0]['raw'])},event)]
+                        total_load+=results[0].get('model_load_seconds',0)
+                    if len(results)!=len(missing):raise ValueError('Số đoạn âm thanh trả về không khớp. Không ghép thiếu lời.')
+                    for item in missing:
+                        wave_seconds(item['raw'])
+                        if event.is_set():raise InterruptedError('Đã dừng.')
+                        temporary=item['cache'].with_name(item['digest']+'.'+ident+'.partial.wav')
+                        shutil.copyfile(item['raw'],temporary);temporary.replace(item['cache'])
+                for item in batch:
+                    if event.is_set():raise InterruptedError('Đã dừng.')
+                    source=item['cache'] if item['hit'] else item['raw']
+                    raw_seconds+=wave_seconds(source)
+                    if item['hit']:cache_hits+=1
+                    if assembler is None:
+                        with wave.open(str(source),'rb') as native:rate=native.getframerate()
+                        assembler=Assembler(folder,sample_rate=rate)
+                    prepared=folder/'prepared.wav';convert_audio(source,prepared,body['speed'],sample_rate=assembler.rate)
+                    if event.is_set():raise InterruptedError('Đã dừng.')
+                    pause=STYLES[body['style']]['pause_ms'] if index+1<len(chunks) else 0
+                    assembler.append(prepared,item['text'],pause)
+                    if index==0:shutil.copyfile(prepared,folder/'preview.wav')
+                    spoken_chars+=len(item['text']);index+=1
+                    elapsed=time.perf_counter()-started
+                    self.update(ident,completed_chunks=index,progress=index/len(chunks),cache_hits=cache_hits,parallel_chunks=lanes,
+                        elapsed_seconds=elapsed,eta_seconds=elapsed/index*(len(chunks)-index),preview_url='/download/'+ident+'/preview.wav')
+                    item['raw'].unlink(missing_ok=True)
             result = assembler.finish(); assembler = None
             if event.is_set():
                 raise InterruptedError('Đã dừng.')
             elapsed = time.perf_counter()-started
             downloads = [{'name':name, 'url':'/download/'+ident+'/'+name} for name in result['parts']]
             report = {**result, 'id':ident, 'version':VERSION, 'language':body['language'], 'voice':body['voice'],
-                'engine':('Microsoft Edge trực tuyến' if body['engine']=='edge' else ('VieNeu Turbo FP32' if body['language']=='VI' else 'MeloTTS CPU')),
+                'engine':('Piper ONNX FP32 CPU' if backend_for(body)=='piper' else 'Microsoft Edge trực tuyến' if body['engine']=='edge' else ('VieNeu Turbo FP32' if body['language']=='VI' else 'MeloTTS CPU')),
+                'title':body['name'], 'threads':body['threads'], 'local_provider':body['local_provider'], 'parallel_chunks':lanes, 'available_cpu_count':available_cpus(),
                 'model_load_seconds':total_load, 'processing_seconds':elapsed, 'realtime_multiplier':result['audio_seconds']/elapsed,
                 'target_30x_verified':False, 'measurement':'Độ dài WAV (có khoảng nghỉ) / thời gian xử lý; không xác minh 30× lời đọc thực.',
                 'cache_hits':cache_hits, 'total_chunks':len(chunks), 'fresh_inference':cache_hits==0,
@@ -323,7 +369,7 @@ class Studio:
         finally:
             if assembler:
                 assembler.close()
-            for name in ('raw.wav', 'prepared.wav'):
+            for name in ('raw.wav','raw-0.wav','raw-1.wav','raw-2.wav','raw-3.wav','prepared.wav'):
                 (folder / name).unlink(missing_ok=True)
             with self.condition:
                 if slot is not None:
@@ -429,9 +475,10 @@ def handler(studio):
                     return self.reply(200,Path(__file__).with_name(path[1:]).read_bytes(),
                         'text/javascript; charset=utf-8' if path.endswith('.js') else 'text/css; charset=utf-8')
                 if path=='/api/config':
-                    return self.reply(200,{'languages':LABELS, 'styles':STYLES, 'offline':studio.offline,
+                    return self.reply(200,{'languages':LOCAL_LABELS, 'original_languages':list(LABELS), 'fast_languages':list(FAST_LABELS), 'styles':STYLES, 'offline':studio.offline,
                         'version':VERSION, 'max_characters':MAX_CHARS, 'parallelism':studio.parallelism,
-                        'cpu_count':os.cpu_count(), 'local_installed':all((studio.root/'envs'/key/'bin/python').is_file() for key in ('melo','viet')), 'online_provider':'Microsoft Edge qua edge-tts (không phải API Azure chính thức)'})
+                        'samples':json.loads(Path(__file__).with_name('samples.json').read_text(encoding='utf-8')),
+                        'cpu_count':os.cpu_count(), 'available_cpu_count':available_cpus(), 'recommended_chunk_workers':min(4,max(1,available_cpus()//8)), 'local_installed':any((studio.root/'envs'/key/'bin/python').is_file() for key in ('melo','viet','piper')), 'fast_installed':(studio.root/'envs/piper/bin/python').is_file(), 'online_provider':'Microsoft Edge qua edge-tts (không phải API Azure chính thức)'})
                 if path=='/api/jobs':
                     query = parse_qs(urlsplit(self.path).query)
                     limit = max(1,min(100,int(query.get('limit',['50'])[0]))); offset = max(0,int(query.get('offset',['0'])[0]))

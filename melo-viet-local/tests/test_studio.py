@@ -137,7 +137,7 @@ def test_online_is_explicit_and_disabled_in_offline_mode(tmp_path):
     s=app.Studio(tmp_path,True,reader_factory=FakeReader)
     try:
         with pytest.raises(ValueError):s.start(body(engine='edge',language='ru-RU',voice='ru-RU-DmitryNeural'))
-        with pytest.raises(ValueError):s.start(body(language='RU'))
+        with pytest.raises(ValueError):s.start(body(language='XX'))
     finally:s.close()
 
 
