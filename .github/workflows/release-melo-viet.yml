@@ -28,53 +28,11 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Parse the Windows launcher without installing WSL or altering policy
-        shell: pwsh
-        run: |
-          $tokens=$null; $errors=$null
-          $source=(Resolve-Path 'melo-viet-local/bootstrap.ps1').Path
-          $null=[System.Management.Automation.Language.Parser]::ParseFile($source,[ref]$tokens,[ref]$errors)
-          if ($errors.Count) { throw ($errors | Out-String) }
-          Write-Host 'PowerShell syntax passed; actual WSL installation is user initiated.'
-  public-models:
-    needs: logic
-    runs-on: ubuntu-22.04
-    timeout-minutes: 35
-    env:
-      MELO_VIET_ROOT: /tmp/melo-viet-installed
-      HF_HUB_DISABLE_TELEMETRY: '1'
-      DO_NOT_TRACK: '1'
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache/restore@v4
-        with:
-          path: |
-            /tmp/melo-viet-installed/models
-            ~/.cache/pip
-            ~/nltk_data
-          key: melo-viet-public-models-${{ github.run_id }}
-          restore-keys: melo-viet-public-models-
-      - name: Run the exact Ubuntu 22.04 CPU installer
-        run: bash melo-viet-local/setup.sh
-      - name: Synthesize short public-voice samples in all seven languages
-        run: |
-          mkdir -p "$RUNNER_TEMP/model-qa"
-          python3 melo-viet-local/check_models.py --root "$MELO_VIET_ROOT" --output "$RUNNER_TEMP/model-qa"
-      - uses: actions/cache/save@v4
-        if: always()
-        with:
-          path: |
-            /tmp/melo-viet-installed/models
-            ~/.cache/pip
-            ~/nltk_data
-          key: melo-viet-public-models-${{ github.run_id }}
-      - uses: actions/upload-artifact@v4
-        with:
-          name: melo-viet-model-qa
-          path: ${{ runner.temp }}/model-qa/*
-          retention-days: 3
+      - name: Exercise distro selection and errors on Windows PowerShell 5.1
+        shell: powershell
+        run: '& ./melo-viet-local/tests/test_launcher.ps1'
   publish:
-    needs: [logic, windows-launcher, public-models]
+    needs: [logic, windows-launcher]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -82,23 +40,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python release-melo-viet/verify_package.py
-      - uses: actions/download-artifact@v4
-        with:
-          name: melo-viet-model-qa
-          path: ${{ runner.temp }}/model-qa
-      - name: Upload installer and actual public-model QA
+      - name: Upload fixed launcher and earlier model QA with provenance
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p "$RUNNER_TEMP/release-assets"
-          cp release-melo-viet/package.zip "$RUNNER_TEMP/release-assets/MeloTTS-VieNeu-Turbo-Cai-Rieng-Windows.zip"
-          cp release-melo-viet/package.sha256 "$RUNNER_TEMP/release-assets/MeloTTS-VieNeu-Turbo-Cai-Rieng-Windows.zip.sha256"
-          cp "$RUNNER_TEMP/model-qa/MODEL-QA.json" "$RUNNER_TEMP/release-assets/MODEL-QA.json"
-          gh release upload melo-viet-local-1.0.0 "$RUNNER_TEMP"/release-assets/* --repo seotro95/seotro --clobber
+          cp release-melo-viet/package.zip "$RUNNER_TEMP/release-assets/MeloTTS-VieNeu-Turbo-Cai-Rieng-Windows-1.0.1.zip"
+          cp release-melo-viet/package.sha256 "$RUNNER_TEMP/release-assets/MeloTTS-VieNeu-Turbo-Cai-Rieng-Windows-1.0.1.zip.sha256"
+          cp release-melo-viet/MODEL-QA-1.0.0.json "$RUNNER_TEMP/release-assets/MODEL-QA-1.0.0.json"
+          gh release upload melo-viet-local-1.0.1 "$RUNNER_TEMP"/release-assets/* --repo seotro95/seotro --clobber
       - name: Verify release bytes and publish
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_ASSETS: ${{ runner.temp }}/release-assets
         run: |
           python release-melo-viet/verify_remote.py
-          gh release edit melo-viet-local-1.0.0 --repo seotro95/seotro --draft=false --latest=false --target "$GITHUB_SHA"
+          gh release edit melo-viet-local-1.0.1 --repo seotro95/seotro --draft=false --latest=false --target "$GITHUB_SHA"

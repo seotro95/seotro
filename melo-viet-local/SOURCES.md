@@ -9,4 +9,4 @@
   The installer does not bundle model weights, private reference recordings,
   third-party binaries, credentials or cloud speech credits.
 
-This local wrapper and installer are version 1.0.0, separate from Voice Studio.
+This local wrapper and installer are version 1.0.1, separate from Voice Studio.

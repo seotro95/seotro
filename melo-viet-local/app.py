@@ -138,7 +138,7 @@ def handler(studio):
             if path=='/':return self.reply(200,Path(__file__).with_name('index.html').read_bytes(),'text/html; charset=utf-8')
             if path in {'/app.js','/style.css'}:
                 return self.reply(200,Path(__file__).with_name(path[1:]).read_bytes(),'text/javascript; charset=utf-8' if path.endswith('.js') else 'text/css; charset=utf-8')
-            if path=='/api/config':return self.reply(200,{'languages':LABELS,'offline':studio.offline,'version':'1.0.0'})
+            if path=='/api/config':return self.reply(200,{'languages':LABELS,'offline':studio.offline,'version':'1.0.1'})
             if path=='/api/job':
                 with studio.lock:return self.reply(200,dict(studio.job) if studio.job else {'status':'idle'})
             if re.fullmatch(r'/audio/[a-f0-9]{32}\.wav',path):

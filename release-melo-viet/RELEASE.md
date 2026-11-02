@@ -1,17 +1,15 @@
-Bộ cài **MeloTTS riêng + VieNeu Turbo tiếng Việt**, chạy CPU trên Windows thông qua Ubuntu 22.04 / WSL2. Không cần Azure hoặc API tạo giọng trả phí. Không sửa Voice Studio đang có.
+Sửa bộ cài riêng **MeloTTS + VieNeu Turbo Việt** khi WSL đăng ký tên `Ubuntu` nhưng hệ điều hành bên trong là Ubuntu 22.04.5. **Không cần cài lại Ubuntu hoặc xóa bản Linux đang có.**
 
-**ZIP khoảng 25 KB là bộ cài, chưa chứa mô hình**: khi cài và thử các tiếng sẽ tải thêm vài GB thư viện, từ điển và mô hình; nên chuẩn bị ít nhất 15 GB trống.
+1. Tải ZIP bên dưới, giải nén toàn bộ vào thư mục cố định, ví dụ `D:\Melo-Viet-1.0.1`.
+2. Nhấp đôi `CAI_DAT.bat`. Bộ cài tự chọn `Ubuntu-22.04` hoặc `Ubuntu` đã cài và kiểm tra hệ điều hành là Ubuntu 22.04. Tên được lưu vào `wsl-distro.txt` để lần mở sau dùng đúng bản đó.
+3. Nhập mật khẩu Linux khi sudo hỏi, chờ cài xong. Chạy `MO_TOOL.bat`, mở `http://localhost:8817`.
 
-1. Trong PowerShell **Run as administrator**, chạy `wsl --install -d Ubuntu-22.04`; khởi động lại nếu được yêu cầu.
-2. Mở Ubuntu 22.04 từ Start, tạo username/mật khẩu Linux.
-3. Giải nén ZIP vào thư mục cố định, ví dụ `D:\Melo-Viet`. Chạy `CAI_DAT.bat`, nhập mật khẩu Linux khi sudo hỏi và chờ cài xong.
-4. Chạy `MO_TOOL.bat`. Mở `http://localhost:8817`, chọn ngôn ngữ, bấm **Tải/chuẩn bị giọng**, rồi tạo WAV.
-5. Sau khi đã tạo thử thành công các tiếng muốn dùng, có thể mở `MO_OFFLINE.bat` để dùng những mô hình đã lưu.
+Nếu `wsl -d Ubuntu -- cat /etc/os-release` hiện `VERSION_ID="22.04"`, bạn đã có đúng hệ điều hành. `Stopped` trong danh sách WSL là bình thường. **Không chạy lại `wsl --install -d Ubuntu-22.04`** trong trường hợp này. Nếu tên WSL khác, ghi tên đó vào `wsl-distro.txt`. Không đổi bản WSL mặc định, không tự cài thêm hoặc nâng cấp Ubuntu.
 
-**Các tiếng:** VI dùng VieNeu Turbo FP32; EN, FR, JP, KR, ES, ZH dùng MeloTTS. Nga/Thái và nhân bản 19 mẫu riêng cũ không nằm trong bộ này. Các giọng hiển thị từ chính mô hình sau khi tải.
+ZIP nhỏ là **bộ cài**, chưa chứa mô hình hoặc thư viện. Cần Internet khi cài và tải mô hình lần đầu; nên có ít nhất 15 GB trống. Mô hình, môi trường và WAV đã có trong `~/.local/share/melo-viet-local` được giữ lại; chạy lại bộ cài không xóa dữ liệu. Không cần khóa Azure.
 
-MeloTTS chính thức hiện có release v0.1.2; bộ cài dùng main `209145371cff8fc3bd60d7be902ea69cbdb7965a` đã kiểm tra. Hai môi trường độc lập tránh xung đột NumPy/Librosa; PyTorch CPU, không cài CUDA/driver và không ép INT8 trên Xeon E5-2680 v4. Mô hình giữ lại giữa các lượt đọc; không nạp lại mỗi câu khi giữ tool mở.
+Các tiếng: VI dùng VieNeu Turbo FP32; EN, FR, JP, KR, ES, ZH dùng MeloTTS. Không gồm tiếng Nga/Thái hoặc nhân bản 19 mẫu riêng. Bộ đọc, khóa phụ thuộc và quy trình cài thư viện giống 1.0.0; bản 1.0.1 sửa nhận diện WSL, thông báo lỗi và hướng dẫn.
 
-30 kiểm thử điều khiển/API/PCM đạt. Cổng phát hành chạy cài đặt thực trên Ubuntu 22.04, kiểm tra mô hình bằng các câu ngắn công khai trong bảy tiếng; số đo trong `MODEL-QA.json` là CPU Linux của runner, không phải Windows/Xeon của bạn. Kiểm tra launcher Windows chỉ xác nhận cú pháp PowerShell; WSL vẫn cần được bạn bật và cài trên máy.
+Kiểm tra: 30 kiểm thử ứng dụng/API/PCM và 11 tình huống launcher trên Windows PowerShell 5.1 với WSL giả lập. Chưa chạy thao tác cài WSL trên máy Windows của bạn. Cài đặt Ubuntu 22.04 và tổng hợp thật 14 WAV / bảy ngôn ngữ đã được kiểm tra ở bản 1.0.0 (Actions run 41337929203); `MODEL-QA-1.0.0.json` là báo cáo cũ được giữ nguyên, không phải số đo mới.
 
-**Chưa có đánh giá nghe bởi người bản ngữ cho mọi giọng hoặc xác minh 30× lời đọc thực.** WAV có khoảng nghỉ; số đo theo độ dài WAV không chứng minh tạo một giờ lời đọc trong hai phút. Nghe mẫu trước khi tạo bản dài. Chi tiết cài, lỗi thường gặp và tự động hóa nằm trong ZIP.
+Các số đo CPU Linux ở bản 1.0.0: MeloTTS khoảng 0,64–0,67× theo độ dài WAV ở lượt thứ hai; VieNeu Việt khoảng 2,15×. **Chưa đạt 30×**, chưa có đánh giá nghe bởi người bản ngữ cho mọi giọng và không bảo đảm tốc độ trên Windows/Xeon của bạn. Bản vá launcher không thay đổi tốc độ tổng hợp.

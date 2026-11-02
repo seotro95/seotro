@@ -1,4 +1,4 @@
-MELO + VIỆT 1.0.0 — CÀI RIÊNG TRÊN WINDOWS QUA WSL2
+MELO + VIỆT 1.0.1 — CÀI RIÊNG TRÊN WINDOWS QUA WSL2
 
 Bộ này độc lập với Voice Studio/Azure. Không cần khóa Azure hoặc trả phí
 API tạo giọng. Tổng hợp chạy trên CPU của máy; Internet dùng để cài thư
@@ -16,22 +16,41 @@ BỘ ĐỌC
   Máy Xeon E5-2680 v4 dùng FP32 cho Việt; không ép Turbo INT8/VNNI.
   Bộ cài chỉ cài PyTorch CPU, không cài CUDA hoặc sửa driver GTX 1060.
 
-BƯỚC 1 — BẬT WSL2 VÀ UBUNTU 22.04 (LÀM MỘT LẦN)
-1. Windows 10/11: mở Start, gõ PowerShell, chọn Run as administrator.
-2. Dán lệnh sau rồi Enter:
+BƯỚC 1 — KIỂM TRA WSL2 VÀ UBUNTU 22.04
+1. Mở PowerShell, kiểm tra bản Linux đã cài:
+
+   wsl --list --verbose
+
+2. Nếu đã có dòng Ubuntu (VERSION 2), kiểm tra phiên bản bên trong:
+
+   wsl -d Ubuntu -- cat /etc/os-release
+
+   Nếu hiện VERSION_ID="22.04" thì đã đủ. Không cài lại Ubuntu.
+   Tên đăng ký WSL có thể là Ubuntu dù hệ điều hành là Ubuntu 22.04.5.
+   Trạng thái Stopped là bình thường; bộ cài sẽ tự khởi động bản này.
+   Bộ cài 1.0.1 tự nhận Ubuntu-22.04 hoặc Ubuntu và kiểm tra phiên bản.
+   Nếu tên WSL khác, tạo tệp wsl-distro.txt trong thư mục bộ cài,
+   ghi đúng một dòng tên đó. Tên được chọn sẽ được lưu cho lần mở sau.
+3. Chỉ khi chưa có Ubuntu 22.04: mở PowerShell Run as administrator,
+   xem danh mục trước:
+
+   wsl --list --online
+
+   Nếu danh mục có Ubuntu-22.04, chạy:
 
    wsl --install -d Ubuntu-22.04
 
-3. Khởi động lại Windows nếu được yêu cầu.
-4. Mở Ubuntu 22.04 từ Start. Đợi cài xong, tự tạo username và mật khẩu
-   Linux. Khi gõ mật khẩu, không hiện ký tự là bình thường.
-5. Trong PowerShell, kiểm tra:
+   Nếu báo Invalid distribution name, không lặp lại lệnh này. Kiểm tra
+   bản Ubuntu đang có theo bước 2. Nếu không có bản 22.04, xem hướng dẫn
+   chính thức https://learn.microsoft.com/windows/wsl/install và
+   https://ubuntu.com/wsl để cài đúng bản; không xóa bản Linux hiện tại.
+4. Khởi động lại Windows nếu được yêu cầu. Mở bản Ubuntu đã chọn từ
+   Start hoặc bằng wsl -d Ubuntu; tạo username/mật khẩu nếu được hỏi.
+   Khi gõ mật khẩu, không hiện ký tự là bình thường.
+5. VERSION trong wsl --list --verbose cần là 2. Nếu là 1, mở PowerShell
+   quản trị và dùng đúng tên ở cột NAME, ví dụ:
 
-   wsl -l -v
-
-   Dòng Ubuntu-22.04 nên có VERSION 2. Nếu đang là 1, chuyển bằng:
-
-   wsl --set-version Ubuntu-22.04 2
+   wsl --set-version Ubuntu 2
 
 BƯỚC 2 — GIẢI NÉN VÀ CÀI
 1. Giải nén toàn bộ ZIP vào thư mục cố định, ví dụ D:\Melo-Viet.
@@ -88,7 +107,9 @@ Kết quả CPU Linux trong QA không bảo đảm tốc độ trên Windows/WSL
 Chưa có đánh giá nghe bởi người bản ngữ cho mọi giọng; thử đoạn ngắn trước.
 
 LỖI THƯỜNG GẶP
-- Không thấy Ubuntu-22.04: mở Ubuntu từ Start, tạo xong user/mật khẩu.
+- Lỗi tên Ubuntu: kiểm tra wsl --list --verbose; bản 1.0.1 dùng được tên
+  Ubuntu chứa hệ điều hành 22.04. Không cần tên phải là Ubuntu-22.04.
+- Đã chọn sai WSL: sửa wsl-distro.txt theo tên ở cột NAME rồi chạy lại.
 - WSL lỗi 0x80370102/virtualization: bật Virtualization (VT-x) trong BIOS,
   rồi khởi động lại. Có thể cần quản trị viên máy nếu máy bị quản lý.
 - Không tải được model: kiểm tra Internet, dung lượng trống và truy cập
