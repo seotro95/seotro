@@ -1,8 +1,8 @@
 import json,os,subprocess
 from pathlib import Path
 expected=json.loads(Path(os.environ['EXPECTED_ASSETS']).read_text())
-release=json.loads(subprocess.check_output(['gh','api','repos/seotro95/seotro/releases/431224144']))
-assert release['tag_name']=='melo-viet-studio-1.2.0'
+release=next(r for r in json.loads(subprocess.check_output(['gh','api','repos/seotro95/seotro/releases?per_page=30'])) if r['tag_name']=='melo-viet-studio-1.3.0')
+assert release['tag_name']=='melo-viet-studio-1.3.0'
 actual={a['name']:a for a in release['assets']}
 assert set(actual)==set(expected),(set(actual),set(expected))
 for name,record in expected.items():

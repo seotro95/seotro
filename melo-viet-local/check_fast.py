@@ -22,17 +22,18 @@ def main(root,output,prepare_only=False,threads=4):
         'cached_audio':False,'target_30x_verified':False,'human_listening_quality_verified':False,'results':[]}
     try:
         for model in records:
-            voice=next(v for v in fast_backend.voices_for(model['language']) if v['id'].startswith('piper:'+model['id']+':'))
-            for repeat in range(2):
-                start=time.perf_counter()
-                result=reader.request({'op':'render','backend':'piper','engine':'local','language':model['language'],
-                    'voice':voice['id'],'text':samples[model['language']],'threads':threads,'output':str(output/(model['id']+'-'+str(repeat)+'.wav'))})
-                elapsed=time.perf_counter()-start
-                assert .3<result['audio_seconds']<80 and 0<result['peak']<=.951
-                report['results'].append({**result,'model':model['id'],'language':model['language'],'round':repeat,
-                    'wall_seconds':elapsed,'realtime_multiplier':result['audio_seconds']/elapsed,'threads':threads})
+            voices=[v for v in fast_backend.voices_for(model['language']) if v['id'].startswith('piper:'+model['id']+':')]
+            for voice in voices:
+             for repeat in range(2):
+                 start=time.perf_counter()
+                 result=reader.request({'op':'render','backend':'piper','engine':'local','language':model['language'],
+                     'voice':voice['id'],'text':samples[model['language']],'threads':threads,'output':str(output/(model['id']+'-speaker'+voice['id'].rsplit(':',1)[1]+'-'+str(repeat)+'.wav'))})
+                 elapsed=time.perf_counter()-start
+                 assert .3<result['audio_seconds']<80 and 0<result['peak']<=.951
+                 report['results'].append({**result,'model':model['id'],'language':model['language'],'round':repeat,
+                     'wall_seconds':elapsed,'realtime_multiplier':result['audio_seconds']/elapsed,'threads':threads})
             print('Real offline synthesis passed:',model['id'],flush=True)
-            (output/'LOCAL-27-MODEL-QA.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+            (output/'LOCAL-MODEL-QA.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
         report['status']='passed'
     except Exception:
         log=root/'logs/piper.log'
@@ -41,7 +42,7 @@ def main(root,output,prepare_only=False,threads=4):
             print('::error title=Local model synthesis::'+tail,flush=True)
         raise
     finally:
-        reader.close();(output/'LOCAL-27-MODEL-QA.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+        reader.close();(output/'LOCAL-MODEL-QA.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
     # Test the real ordered parallel chunk pipeline and persistent history too.
     studio=Studio(root,offline=True);studio.settings(1)
     def wait(ident):

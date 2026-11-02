@@ -102,7 +102,7 @@ def test_http_origin_guard_and_generated_audio_route(studio):
     thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
     base='http://127.0.0.1:'+str(server.server_port)
     try:
-        with urllib.request.urlopen(base+'/api/config') as r:assert len(json.load(r)['languages'])==27
+        with urllib.request.urlopen(base+'/api/config') as r:assert len(json.load(r)['languages'])==len(app.LOCAL_LABELS)
         req=urllib.request.Request(base+'/api/start',data=json.dumps({'op':'render','language':'EN','voice':'EN','text':'Hello.'}).encode(),headers={'Content-Type':'application/json','Origin':'https://attacker.example'})
         with pytest.raises(urllib.error.HTTPError) as e:urllib.request.urlopen(req)
         assert e.value.code==403

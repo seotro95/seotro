@@ -1,6 +1,9 @@
 """Lossless text planning, strict SRT recognition and bounded-memory WAV assembly."""
 from dataclasses import dataclass
 import html
+import array
+import math
+import sys
 from pathlib import Path
 import re
 import shutil
@@ -9,6 +12,7 @@ import wave
 
 MAX_CHARS = 1_000_000
 STYLES = {
+    'friendly': {'name': 'Thân thiện · dễ nghe', 'speed': .98, 'pause_ms': 150, 'pitch': '+0Hz'},
     'neutral': {'name': 'Tự nhiên', 'speed': 1.0, 'pause_ms': 100, 'pitch': '+0Hz'},
     'story': {'name': 'Kể chuyện', 'speed': .96, 'pause_ms': 240, 'pitch': '+0Hz'},
     'review': {'name': 'Review phim', 'speed': 1.10, 'pause_ms': 80, 'pitch': '+0Hz'},
@@ -99,19 +103,29 @@ def timestamp(seconds):
     return f'{hour:02}:{minute:02}:{sec:02},{ms:03}'
 
 
-def convert_audio(source, destination, speed=1.0, sample_rate=24000):
+def convert_audio(source, destination, speed=1.0, sample_rate=24000, gain_db=0.0):
     """Pitch-preserving atempo; unchanged native PCM bypasses the subprocess."""
     if not .5 <= speed <= 2.0:
         raise ValueError('Tốc độ đọc cần từ 0,5× đến 2×.')
     with wave.open(str(source), 'rb') as audio:
         compatible = audio.getparams()[:3] == (1, 2, sample_rate)
-    if compatible and speed == 1.0:
+    if compatible and speed == 1.0 and gain_db==0:
         shutil.copyfile(source, destination)
         return
     command = ['ffmpeg', '-hide_banner', '-loglevel', 'error', '-nostdin', '-y', '-i', str(source),
                '-ac', '1', '-ar', str(sample_rate), '-c:a', 'pcm_s16le']
-    if speed != 1.0:
-        command += ['-af', f'atempo={speed:.6f}']
+    filters=[]
+    if speed!=1.0:filters.append(f'atempo={speed:.6f}')
+    if gain_db:
+        peak=0
+        with wave.open(str(source),'rb') as audio:
+            while block:=audio.readframes(65536):
+                samples=array.array('h',block)
+                if sys.byteorder!='little':samples.byteswap()
+                peak=max(peak,max((abs(x) for x in samples),default=0))
+        factor=min(10**(gain_db/20),max(1.0,.92*32767/max(1,peak)))
+        filters.extend([f'volume={factor:.6f}','alimiter=limit=0.95:level=false'])
+    if filters:command+=['-af',','.join(filters)]
     result = subprocess.run(command + [str(destination)], capture_output=True, timeout=180)
     if result.returncode:
         raise ValueError('Không đổi được tốc độ/định dạng WAV: ' + result.stderr.decode('utf-8', 'replace')[-600:])

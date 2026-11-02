@@ -21,7 +21,10 @@
         "config.json": "efe19c417bed055f2d69908248c6ba650fa135bc868b0e6abb3da181dab690a0",
         "MODEL_CARD": "ce49eb457742208166d399a40cdec2c7fa9db77960930031564ab56f12882645"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/en"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/en",
+      "bundled": true,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "en_US-amy-medium",
@@ -41,7 +44,10 @@
         "config.json": "95a23eb4d42909d38df73bb9ac7f45f597dbfcde2d1bf9526fdeaf5466977d77",
         "MODEL_CARD": "9c50e04cc298ca7f04f5e5435007be028334338a2c857894a3e496dbf04b25bb"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/en"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/en",
+      "bundled": true,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "fr_FR-siwis-medium",
@@ -61,7 +67,10 @@
         "config.json": "39479916c2db192b5ac9764daddd0c744d83e023ad890c6976c0633ae4df8959",
         "MODEL_CARD": "bd8b8d079d4d3d2c4cc20345889bbcd586d72f021a132f93357a763eb5232cce"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/fr"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/fr",
+      "bundled": true,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "fr_FR-tom-medium",
@@ -81,7 +90,10 @@
         "config.json": "2f7f885ad5a0aad802e3cc24e4f57239febdcb142b4876de5d238094674361cc",
         "MODEL_CARD": "ece4132df4a1ae2f90e22c9f01539aec14acb7f8dc8ded64edd2051945d0f1e9"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/fr"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/fr",
+      "bundled": true,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "es_ES-davefx-medium",
@@ -101,7 +113,10 @@
         "config.json": "0e0dda87c732f6f38771ff274a6380d9252f327dca77aa2963d5fbdf9ec54842",
         "MODEL_CARD": "17523d253d605b262341aac23226b49686c31992af90236bd0abb7d4d154774d"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/es"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/es",
+      "bundled": true,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "es_MX-ald-medium",
@@ -121,7 +136,10 @@
         "config.json": "5a71498158e04afc8099bfd019c7e87c68eb9d042505a2b1a87e5c1ac2b1a61d",
         "MODEL_CARD": "1f0694ceb3f1e78c1e2ee0e2d5da40f19f965bc638e1b4fb4fca9bdca420d713"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/es"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/es",
+      "bundled": true,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "vi_VN-vais1000-medium",
@@ -141,7 +159,10 @@
         "config.json": "fafb9da1354ed4b77c31af228ed41fb41cd825c14cffa105454b25e6ae751ee0",
         "MODEL_CARD": "302db8a930ffc2b1c2181db26deaf8272116eca2b08b8f80da6375b0a994af7b"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/vi"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/vi",
+      "bundled": true,
+      "gender": "Unknown",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "ru_RU-ruslan-medium",
@@ -161,7 +182,10 @@
         "config.json": "706a4fb17bc304abd07809b552deae615e64dcbffbfbd09854ba37ca59e88117",
         "MODEL_CARD": "28f5c0381c1234eb17bfd77e77f893b008948c29bc351fb811abd2d6a69e7662"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/ru"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/ru",
+      "bundled": true,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "de_DE-thorsten-medium",
@@ -181,7 +205,10 @@
         "config.json": "974adee790533adb273a1ac88f49027d2a1b8f0f2cf4905954a4791e79264e85",
         "MODEL_CARD": "5196b5ab0794e6056263a1f37c18bec407b61ac187529bee29d1c366871e5c9e"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/de"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/de",
+      "bundled": true,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "it_IT-paola-medium",
@@ -201,7 +228,10 @@
         "config.json": "aea19c0a7fce29fbc359b93f10e7902854401e4c95ae2ea328ae516b15d296cf",
         "MODEL_CARD": "c53fd0070dc93b438edbce06728eb83759ba030fff0cce523209ee4a0a6363c0"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/it"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/it",
+      "bundled": true,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "pt_PT-tugao-medium",
@@ -221,7 +251,10 @@
         "config.json": "fe0918dfc0f1a89264a6eea4afe8e95d8e9fed3cc6c81b5c2f87fcb2b50c7320",
         "MODEL_CARD": "1d6c23095980c0c58a044f1cb23e26fdc1d27bd95b68db0b5b0c548788b99d50"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/pt"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/pt",
+      "bundled": true,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "nl_NL-ronnie-medium",
@@ -241,7 +274,10 @@
         "config.json": "4329a4deb198d119b7f7364173e388afb8efec9eca10e849f9394aa1a92bb7bc",
         "MODEL_CARD": "f2c1697b528901ba7e7178500d6d06da6fc93ba43129b2f40d13ff1c197d0884"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/nl"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/nl",
+      "bundled": true,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "pl_PL-gosia-medium",
@@ -261,7 +297,10 @@
         "config.json": "1aefb31a9d53ffe44a8163ff73ec833acb7a6253848f6bb0403d8a66f9c7510d",
         "MODEL_CARD": "6b4de033dfff0da758bbe4d438fd87fbd917ab843bdd83f591fa0f32b8eb5780"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/pl"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/pl",
+      "bundled": true,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "hi_IN-priyamvada-medium",
@@ -281,7 +320,10 @@
         "config.json": "5efc0ccf7529f3528996d46e0fac1f969f681d44a8e55bfa6236ff8841b5d52d",
         "MODEL_CARD": "8ce0324466010a59127fe8cab16416befcca136abf4b57ebd8ad5a2033c2021e"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/hi"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/hi",
+      "bundled": true,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "sv_SE-nst-medium",
@@ -301,7 +343,10 @@
         "config.json": "d45dd74cbb4eca58694bf04a97e243044092476f28a55ae26424f0653086980a",
         "MODEL_CARD": "c85d3e26e47d93e9d9b8572d3c89537c3f8ff212595cb9a3fbd2e07c19432317"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/sv"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/sv",
+      "bundled": true,
+      "gender": "Unknown",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "da_DK-talesyntese-medium",
@@ -321,7 +366,10 @@
         "config.json": "89fe13bd251406cc0088570d103ea7ac35823211d8466faf913268ab8506f41b",
         "MODEL_CARD": "b5b7a51d4d815a307594619a519eb389b2e17839b30c0eb69a39d3ade5b1ed65"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/da"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/da",
+      "bundled": true,
+      "gender": "Unknown",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "fi_FI-harri-medium",
@@ -341,7 +389,10 @@
         "config.json": "3f9c9f76f74adf1fbe7279e41eea17d6610757e45effd6808bbea6be74b8916d",
         "MODEL_CARD": "a0a7fa3f046f1e582689db76f93099735530343a3126f3f40ed64380c419a0b2"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/fi"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/fi",
+      "bundled": true,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "no_NO-talesyntese-medium",
@@ -361,7 +412,10 @@
         "config.json": "b0eb0491fc8bf9843d2beac8acf8773b6cf59274316406b36ff579ae8a1909d5",
         "MODEL_CARD": "0a03b201db00e1bdc384e2dee4f8710075ef8d32ca3c64ed16782b04d2605f6c"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/no"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/no",
+      "bundled": true,
+      "gender": "Unknown",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "cs_CZ-jirka-medium",
@@ -381,7 +435,10 @@
         "config.json": "fb38b1799b7354808227c065efa97b1ffa2b0cde59505babb56a36d35af9c637",
         "MODEL_CARD": "27f3ecff306b91dfa8a16b9666f01a7244ca3f03d48f942a02ad4788405e5166"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/cs"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/cs",
+      "bundled": true,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "sk_SK-lili-medium",
@@ -401,7 +458,10 @@
         "config.json": "b7c474eba411913f9feb65b9da322463e8698e7b200d2b757f6e684802951333",
         "MODEL_CARD": "9f779cd3b68fe0f1b6a354a63f348a348f6776ebcbc5d961f1db0cb0e1bc62bd"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/sk"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/sk",
+      "bundled": true,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "hu_HU-imre-medium",
@@ -421,7 +481,10 @@
         "config.json": "bb9c31dd8429b1414d486e5d52d52f0790949c63bfaf1345075d42e23ad10c83",
         "MODEL_CARD": "2b03743ba8fbfa1005d9aae991a8911dbd8b704fc22d5f957d73a365fd9a2261"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/hu"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/hu",
+      "bundled": true,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "ro_RO-mihai-medium",
@@ -441,7 +504,10 @@
         "config.json": "8cc0c9f077dc0cec3c25a6a055ec8046db8e40a2510591582f2c9c869f4bc47e",
         "MODEL_CARD": "f5d53558c24f8585b9c46072700c9396165c090d10c6bf0b15bce1944fd5adb1"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/ro"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/ro",
+      "bundled": true,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "tr_TR-fahrettin-medium",
@@ -461,7 +527,10 @@
         "config.json": "93741b234acc5f123430a0e343f619e01cfda6b1dc0970ee80bce7da22b1a09b",
         "MODEL_CARD": "796da7da7f453bcfdad6c0168ee02ce4e4c6a9fd764157532a0fc6f65223db7c"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/tr"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/tr",
+      "bundled": true,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "ar_JO-kareem-medium",
@@ -481,7 +550,10 @@
         "config.json": "ea6d9b9d9076dbdb6bf5c98c6a141ef154959d2359709b37855727964e7d6c4d",
         "MODEL_CARD": "38e1e4f94c4cb9eda041a639096763a8c5681d0be5a5b3e22f990aed6bb4b86e"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/ar"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/ar",
+      "bundled": true,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "fa_IR-amir-medium",
@@ -501,7 +573,10 @@
         "config.json": "75f918a3bf0f57a9179abe725af529f2a5c79d6c899e2a84aec76c685d5dfb9a",
         "MODEL_CARD": "0d7d315699945ac830162f82d485d79af51a33081a7649e8992726bd4bba2384"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/fa"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/fa",
+      "bundled": true,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "id_ID-news_tts-medium",
@@ -521,7 +596,10 @@
         "config.json": "1ef677072668a5e172e0759b1d3871f129009d1167f093325a17607f7add5ad7",
         "MODEL_CARD": "0115bfc12e2b7d9cc28b43e2ebc746e402b6ed867c619ae61bc80d0427a95c83"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/id"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/id",
+      "bundled": true,
+      "gender": "Unknown",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
     },
     {
       "id": "ca_ES-upc_ona-medium",
@@ -541,7 +619,504 @@
         "config.json": "7f76acc9c06f4eda9e6aef2997b75782d97855aab48d4b401eb956a6e655eddc",
         "MODEL_CARD": "2961b53af17c66971b3ebe3b174566a16ae6e9302997eed111a7d2b1954d31fd"
       },
-      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/ca"
+      "model_card_url": "https://huggingface.co/rhasspy/piper-voices/tree/main/ca",
+      "bundled": true,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; unknown where not established"
+    },
+    {
+      "id": "en_US-hfc_male-medium",
+      "language": "EN",
+      "label": "Anh",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-en_US-hfc_male-medium.tar.bz2",
+      "archive_sha256": "76388f84acfca8ba5c0ed1636a26ada14c598abd52e76f110d4756fe326fc5f2",
+      "archive_bytes": 67214049,
+      "files": {
+        "model.onnx": "ff8cfaf8141bf1aaeae6a79f9d4080492a50ae8aa5e9e8021f16895fd9dfd881",
+        "config.json": "f66847424aed0bf99ecbb5d7cfde47c0a906f426a0daf7c46f305e7d21afd886",
+        "MODEL_CARD": "acd9f3607969454dead836c1939d4906a7b7b618f38dfd2c282856d13e4e968c"
+      },
+      "bundled": false,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "en_US-hfc_female-medium",
+      "language": "EN",
+      "label": "Anh",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-en_US-hfc_female-medium.tar.bz2",
+      "archive_sha256": "3fffdceb0c65bd9415a085d09c3cb88cc82f9d74a6ca453f8ce7fc5eaee81ff8",
+      "archive_bytes": 67228166,
+      "files": {
+        "model.onnx": "a8a935660c1d719e170312da2833f1e651ee29149b55087f89be7b44c3dfba52",
+        "config.json": "03f1fa0622b80463283592d97aca9f6e89aec345a5c56b7257723e0093c58b6c",
+        "MODEL_CARD": "108e287f2128ef724e67b0e7b5f886c3f9b5ec7eaa0e07554b815d7d683c4fc3"
+      },
+      "bundled": false,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "en_US-ryan-medium",
+      "language": "EN",
+      "label": "Anh",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-en_US-ryan-medium.tar.bz2",
+      "archive_sha256": "c546af78b6395b4e7c4ce1ed899438b64426a362f5d4ec5fecd090ded9ad7505",
+      "archive_bytes": 67213100,
+      "files": {
+        "model.onnx": "7194c57359c49aaa1abb9c66d6d30d376475859f4ffdfd9c0415be8e032565f9",
+        "config.json": "44034c056cb15681b2ad494307c7f3f2e4499d1253c700c711fa0a4607ffe78d",
+        "MODEL_CARD": "3a24ae5f7aa856199f338ad9af784cda796734f397f7e1b4a1bd3c07d06945b1"
+      },
+      "bundled": false,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "es_ES-sharvard-medium",
+      "language": "ES",
+      "label": "Tây Ban Nha",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "M": 0,
+        "F": 1
+      },
+      "num_speakers": 2,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-es_ES-sharvard-medium.tar.bz2",
+      "archive_sha256": "b30a7a83df0518f0ee1c7039506648cade99f1f9b498fc49ed2ced2e2536bb5a",
+      "archive_bytes": 80318184,
+      "files": {
+        "model.onnx": "b1281e1c9d9ddd2c4c509d85b97f75ac70d28dfc0fc784c6699af7ec21866417",
+        "config.json": "7438c9b699c72b0c3388dae1b68d3f364dc66a2150fe554a1c11f03372957b2c",
+        "MODEL_CARD": "37655314d08fe8a0900abc628d3bcbee48ffbdd8fad9306b89525a0ada20fefc"
+      },
+      "bundled": false,
+      "gender": "Unknown",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion",
+      "speaker_genders": {
+        "0": "Male",
+        "1": "Female"
+      }
+    },
+    {
+      "id": "es_AR-daniela-high",
+      "language": "ES",
+      "label": "Tây Ban Nha",
+      "sample_rate": 22050,
+      "quality": "high",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-es_AR-daniela-high.tar.bz2",
+      "archive_sha256": "71cbf6b7f646ab74f3c51336151abef41e6c54467ac929ffdb19ed706a07dd7b",
+      "archive_bytes": 115562134,
+      "files": {
+        "model.onnx": "a9606e518795605fedc1d424154ddde1550eeee9df97786cb3efba3dabe971e7",
+        "config.json": "aedbf69647e1d754c62ecf8e0366ca5f16af3e768e3c6b5329af6eb6bde3852b",
+        "MODEL_CARD": "e43e3cb376f4460ad039b534be588eaa8be76f7266ea89ba52403233d9f918ab"
+      },
+      "bundled": false,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "fr_FR-upmc-medium",
+      "language": "FR",
+      "label": "Pháp",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "jessica": 0,
+        "pierre": 1
+      },
+      "num_speakers": 2,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-fr_FR-upmc-medium.tar.bz2",
+      "archive_sha256": "e9830a331a16f6cc5ef3116a287065e015d3495c3f56b974889a266da7f89a7f",
+      "archive_bytes": 80422639,
+      "files": {
+        "model.onnx": "c5b3a0a548541710e6d0f8a3c26184df420121faaffb938c6e36b85efb24e9ee",
+        "config.json": "e8636ec15dfd5d72db37a02cb5320a20f2b8d339f2a0e4337da64c58a33a5868",
+        "MODEL_CARD": "cf1ac7309e0e04bb159b7e6ae80bc8f66bfce9bdfb3e62ae93a6f57e210ab98a"
+      },
+      "bundled": false,
+      "gender": "Unknown",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion",
+      "speaker_genders": {
+        "0": "Female",
+        "1": "Male"
+      }
+    },
+    {
+      "id": "ru_RU-irina-medium",
+      "language": "RU",
+      "label": "Nga",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-ru_RU-irina-medium.tar.bz2",
+      "archive_sha256": "1fc0f54e5e084fe287c07909f2f6e0ba6d857864cf800e3ab80286a4e8233008",
+      "archive_bytes": 67153308,
+      "files": {
+        "model.onnx": "44c31fdb9de753d25380b558effb84f250d98acb2cc0971fea78ec40eda98cdd",
+        "config.json": "c2ec28bb38e2b59e93b959b3e40348c1afebbd272f30fed5d41205d08e98a9d7",
+        "MODEL_CARD": "f4fc2deb0e8c6219f29202b8dd06c9638c5ffd50ad5c6b2c90cf1aa59d507593"
+      },
+      "bundled": false,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "ru_RU-denis-medium",
+      "language": "RU",
+      "label": "Nga",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-ru_RU-denis-medium.tar.bz2",
+      "archive_sha256": "efa4c18e0b5e32b81d1b6df36b9d312831e5d545200e27848ef926a4cd930300",
+      "archive_bytes": 67190991,
+      "files": {
+        "model.onnx": "75c9f1117d5e4a620a20cb665408adc0828699f4a7a2eb44a233f8c34096be04",
+        "config.json": "831c860dac0b5073eaa81610a0a638ec23d90a6cf8e5f871b4485c2cec3767c8",
+        "MODEL_CARD": "f037c8ec8b6574de644bf9e5916c749e83d4ff297facd97895b56d733f6ba3fe"
+      },
+      "bundled": false,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "ru_RU-dmitri-medium",
+      "language": "RU",
+      "label": "Nga",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-ru_RU-dmitri-medium.tar.bz2",
+      "archive_sha256": "c86d0803737de13d441923ff3b3f309482fab8d7af3ec85949942809eb9a3660",
+      "archive_bytes": 67188551,
+      "files": {
+        "model.onnx": "f98e751ed00b34b3e1b09ff8c3a7cfbd620fc24777e500e1605e10e7bbb86ea2",
+        "config.json": "667ef3117bc642c2892dff7690d8bdc8ca4228aeaa783b2dc1416df632855e0d",
+        "MODEL_CARD": "56440cd6a7f0789669f53989b1c0ea244e335c2533fdb1fa8bac60e57205908e"
+      },
+      "bundled": false,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "de_DE-kerstin-low",
+      "language": "DE",
+      "label": "Đức",
+      "sample_rate": 16000,
+      "quality": "low",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-de_DE-kerstin-low.tar.bz2",
+      "archive_sha256": "4bfe121d5f690a3b87acecd7ae1e70b48f4589ce6ae9f45a1809e6eb19fad97b",
+      "archive_bytes": 67107768,
+      "files": {
+        "model.onnx": "ca90248a848ee41c6f252e6f121ad06a7ba27d53356154fb396bfb5ad05d243b",
+        "config.json": "56e708556b7b9b7a53c4f8957e021421e69f11a600962bba554cffbe72cf2d47",
+        "MODEL_CARD": "7019006374a5fe5358186d5f3333e9f904385e7bdfbb68bc85dafce1a3cddae5"
+      },
+      "bundled": false,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "de_DE-ramona-low",
+      "language": "DE",
+      "label": "Đức",
+      "sample_rate": 16000,
+      "quality": "low",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-de_DE-ramona-low.tar.bz2",
+      "archive_sha256": "79f985c10f86c4d58205b519abc488aa65eb713d54665ff729880a02e2625a42",
+      "archive_bytes": 67084795,
+      "files": {
+        "model.onnx": "9c6100fe2ed70c1af0a47652444f5ae18de868ddc503388b7925708697d3c48b",
+        "config.json": "64906ab7a050ac685fa3dcea044baa798f67ed77be164f9c668a69298c6487d2",
+        "MODEL_CARD": "3b6dbf2cde464e35cbdd3c06fccb34bf8cd590878c251391e9fd0a6f1bb993da"
+      },
+      "bundled": false,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "it_IT-riccardo-x_low",
+      "language": "IT",
+      "label": "Ý",
+      "sample_rate": 16000,
+      "quality": "x_low",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-it_IT-riccardo-x_low.tar.bz2",
+      "archive_sha256": "8ad0791558ae2b3e96054fc5756ae3ae2f6457fb1765bc01f43bbab85e0a7021",
+      "archive_bytes": 26496614,
+      "files": {
+        "model.onnx": "5dcc9ef27cd389946fc139d11743dd154ae7684ddf0fa2b10d8efdca9fc42e5f",
+        "config.json": "146ab9c634afe524e9fb7530f2510df7a42fb1db56b52658ca1fb3d98001a62a",
+        "MODEL_CARD": "7ce3b2fc4f454c84936887971574e436cc2154049b427a530f70bee050b2fdc6"
+      },
+      "bundled": false,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "nl_BE-nathalie-medium",
+      "language": "NL",
+      "label": "Hà Lan",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-nl_BE-nathalie-medium.tar.bz2",
+      "archive_sha256": "c7484313abea395243e872196bc75181c07aad8120b8a61e0f6f4b3863b6a7c8",
+      "archive_bytes": 67226472,
+      "files": {
+        "model.onnx": "6fe81f0e69c94a90c7a7a7a9a0d17ee3d81709ff3cc268f7280502c153f92b2b",
+        "config.json": "4704af2736022e910a3f32672480d5530dd39da5c2bcc079f315f604166ff0de",
+        "MODEL_CARD": "129daeda6c74903efac7aa522ae4fd6628a6acdd0975ee897384e1079acbcd2f"
+      },
+      "bundled": false,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "nl_NL-pim-medium",
+      "language": "NL",
+      "label": "Hà Lan",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-nl_NL-pim-medium.tar.bz2",
+      "archive_sha256": "e78ed301bf6fc66561a04c110754cd6928d772630a3b80b09a83f89410130171",
+      "archive_bytes": 67240538,
+      "files": {
+        "model.onnx": "369448594e2e3ace75688aaa551a79ef6e09f5d0f0946d6b115cc6b8daf7a95d",
+        "config.json": "08b58456ca00cf77123826b1712758f99d5fd19ddfb7ec7da8e1a715b047f642",
+        "MODEL_CARD": "512ccabe7312e8709abdb04df03f1bf3eee84a5a8420e189b4f5bda0d08b6a44"
+      },
+      "bundled": false,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "pl_PL-mc_speech-medium",
+      "language": "PL",
+      "label": "Ba Lan",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-pl_PL-mc_speech-medium.tar.bz2",
+      "archive_sha256": "6252744660fb9d2e4c93589b88d8d738df5003b0c651e52ed1202539aed77649",
+      "archive_bytes": 67234285,
+      "files": {
+        "model.onnx": "8d838d8a1616f906eb47ca11fc8e2edc595d6f99c5de48cd31fa7a202cba535b",
+        "config.json": "b8bb11228e15c505219846a88fdc129e93f57e774ed7f9bac263156d1aa3d324",
+        "MODEL_CARD": "defd8213e3a438ebb80130dc1db17b6995bf5bf8d57fdee7b5b74a5a69c2c0d2"
+      },
+      "bundled": false,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "hi_IN-rohan-medium",
+      "language": "HI",
+      "label": "Hindi",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-hi_IN-rohan-medium.tar.bz2",
+      "archive_sha256": "f0bb7781724951e9c90c49f68abfe821cffcbc198a9ae0031366d045a6ad5488",
+      "archive_bytes": 67221139,
+      "files": {
+        "model.onnx": "353d2a20bdb6dd03b74e1aff82b7a10a1646f677f8474c6c81fd606705536224",
+        "config.json": "07b9ae19bd0bac7fbbc99f7ee69c91245eb5470e926632c31fc0c50ba653c817",
+        "MODEL_CARD": "231592a0c299bacae6e5945ee27d5a36204e14ee9d83f01ee15e34a26810651e"
+      },
+      "bundled": false,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "hi_IN-pratham-medium",
+      "language": "HI",
+      "label": "Hindi",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-hi_IN-pratham-medium.tar.bz2",
+      "archive_sha256": "2084d321e1d2752f2b64ed3012ba27751df01a80da46f52920098cdcb7e35648",
+      "archive_bytes": 67238438,
+      "files": {
+        "model.onnx": "1d77908e8ab724c813c5cefaa48feadc9f2670ec5d145f83bade981c428740a0",
+        "config.json": "b68edd2cd7950dd436314013b7cd12e9699e5a3f6fe5af5af94294cf6aa7b9fd",
+        "MODEL_CARD": "89cf491ea99e69b27c94599cecea3f0fc6aeacb30f4ccdb12897f659868df29e"
+      },
+      "bundled": false,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "sv_SE-lisa-medium",
+      "language": "SV",
+      "label": "Thụy Điển",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-sv_SE-lisa-medium.tar.bz2",
+      "archive_sha256": "78b5f6808e513d545d9284a015075ef31f09623e6c08d6186a29a1997aa577d7",
+      "archive_bytes": 67223955,
+      "files": {
+        "model.onnx": "39bbb14313b3fa45dbf98f992bd6e53cad22b445ee19d1b4f84889adf44fb548",
+        "config.json": "51e48b65d7427aee9e8e736b370ff4fe6e3e45e47a56e5d8819647b7076ffb0a",
+        "MODEL_CARD": "952c05227c175d48aafe40eb73935d8cf6b7a214ad4f9772b4180c084e5094c3"
+      },
+      "bundled": false,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "sv_SE-alma-medium",
+      "language": "SV",
+      "label": "Thụy Điển",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-sv_SE-alma-medium.tar.bz2",
+      "archive_sha256": "4ab8212595575e52595bc95c37d0b4f79450c0f00b63496346cdc5941d913edc",
+      "archive_bytes": 67154700,
+      "files": {
+        "model.onnx": "7308cc65b47570d31966eaa46c6477662d7457a3a10f5c603825e5a790e70912",
+        "config.json": "6924380892f769afa92fc6b28ff91d558690d7fb4e3ef8cbf821cefadc8f38fe",
+        "MODEL_CARD": "3e4347b72a1d396ca0905470094331fee8dd3a9a641a834466cdbf7812df9396"
+      },
+      "bundled": false,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "hu_HU-berta-medium",
+      "language": "HU",
+      "label": "Hungary",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-hu_HU-berta-medium.tar.bz2",
+      "archive_sha256": "a00ba073fa7f8e1b2be58f881b24892e2dca16c3c5979ee4ea4bc6ccdd89dbc0",
+      "archive_bytes": 67178197,
+      "files": {
+        "model.onnx": "fbb95cdd0d7c061005431f32b562f6a7f809959d1b3f65fc8a3001632b1557be",
+        "config.json": "3fd75422fcb0da86d54391256607a08d1ee4fb70f031941197e4400b9067b603",
+        "MODEL_CARD": "8be3e56a9230566120708916734d864f6ae85d911729e75b5a602ddddaa1d91f"
+      },
+      "bundled": false,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "hu_HU-anna-medium",
+      "language": "HU",
+      "label": "Hungary",
+      "sample_rate": 22050,
+      "quality": "medium",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-hu_HU-anna-medium.tar.bz2",
+      "archive_sha256": "c67b13e57b71eca19098fe499afc35ebce8f63a0b524017c786af2025821216a",
+      "archive_bytes": 67167701,
+      "files": {
+        "model.onnx": "d369ccfeafdaafd1098b34eb47784566a313bd72fa9dac2028f81587d6463598",
+        "config.json": "ccf967d8db8018c9d8ffdb0edc8814ffcb6b75273bb0d84337317240f710283a",
+        "MODEL_CARD": "95e4260972d732b8c4559e47e9488da3653a8777fccfa87b4642f8e5bf7b4113"
+      },
+      "bundled": false,
+      "gender": "Female",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
+    },
+    {
+      "id": "ca_ES-upc_pau-x_low",
+      "language": "CA",
+      "label": "Catalan",
+      "sample_rate": 16000,
+      "quality": "x_low",
+      "speaker_map": {
+        "default": 0
+      },
+      "num_speakers": 1,
+      "archive_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-ca_ES-upc_pau-x_low.tar.bz2",
+      "archive_sha256": "9c06bc1c2fa9f132df02f413d5b3a93b37682edcb6d41be97b725775bf5e28ba",
+      "archive_bytes": 26520095,
+      "files": {
+        "model.onnx": "97e378a61b71b6753a5f9a3e6784b33342dc79e1ac7d7d69e85c1befd46bee77",
+        "config.json": "f3e76f0640c73a0a87482b37e5c85dd93532127f81e37ea2875e0dace28bb1e2",
+        "MODEL_CARD": "82d24aa9943e3b2f7303ef863fefb31a95c270ad62083ee37af77a92c74e918e"
+      },
+      "bundled": false,
+      "gender": "Male",
+      "gender_source": "Curated speaker/dataset metadata; no pitch-based gender conversion"
     }
   ]
 }

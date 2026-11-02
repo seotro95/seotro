@@ -20,12 +20,12 @@ from test_studio import body,await_job
 
 def test_real_catalog_adds_twenty_languages_and_only_uses_fp32_models():
     models=fast_backend.catalog()
-    assert len(models)==27 and len(fast_backend.labels())==24
-    assert set(app.LOCAL_LABELS)-set(app.LABELS)==set(fast_backend.labels())-set(app.LABELS)
-    assert len(set(app.LOCAL_LABELS)-set(app.LABELS))==20
+    assert len(models)==49 and sum(m.get('bundled',True) for m in models)==27 and len(fast_backend.labels())==24
+    assert set(app.LOCAL_LABELS)==set(app.LABELS)|set(fast_backend.labels())|set(app.MULTI_LANGUAGES)|{'HMN'}
+    assert len(set(app.FAST_LABELS)-set(app.LABELS))==20
     for model in models:
         assert 'int8' not in model['id'] and 'fp16' not in model['id']
-        assert model['quality']=='medium'
+        assert model['quality']=='medium' if model.get('bundled',True) else model['quality'] in {'x_low','low','medium','high'}
         assert len(model['archive_sha256'])==64 and model['archive_bytes']>0
         assert model['archive_url'].startswith('https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/')
 

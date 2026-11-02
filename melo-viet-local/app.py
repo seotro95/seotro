@@ -21,22 +21,29 @@ import zipfile
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlsplit, parse_qs
 
+from audio_exports import Exports
+from speaking import speech_plan
+from voice_catalog import ONLINE_LOCALES,vietnamese_presets
 from documents import MAX_CHARS, STYLES, parse_document, plan_document, Assembler, convert_audio
 
-VERSION = '1.2.0'
+VERSION = '1.3.0'
 LABELS = {'VI':'Việt · VieNeu Turbo', 'EN':'Anh · MeloTTS', 'FR':'Pháp · MeloTTS', 'JP':'Nhật · MeloTTS',
           'KR':'Hàn · MeloTTS', 'ES':'Tây Ban Nha · MeloTTS', 'ZH':'Trung · MeloTTS'}
 FAST_LABELS = {'VI':'Việt','EN':'Anh','FR':'Pháp','ES':'Tây Ban Nha','RU':'Nga','DE':'Đức','IT':'Ý',
     'PT':'Bồ Đào Nha','NL':'Hà Lan','PL':'Ba Lan','HI':'Hindi','SV':'Thụy Điển','DA':'Đan Mạch',
     'FI':'Phần Lan','NO':'Na Uy','CS':'Séc','SK':'Slovakia','HU':'Hungary','RO':'Romania',
     'TR':'Thổ Nhĩ Kỳ','AR':'Ả Rập','FA':'Ba Tư','ID':'Indonesia','CA':'Catalan'}
-LOCAL_LABELS = {**LABELS, **FAST_LABELS}
+LOCAL_LABELS = {**LABELS, **FAST_LABELS, 'BG':'Bulgaria','HR':'Croatia','ET':'Estonia','EL':'Hy Lạp','LV':'Latvia','LT':'Lithuania','SL':'Slovenia','UK':'Ukraina','HMN':'Hmong RPA · thử nghiệm, chưa xác minh Hmong Trắng'}
+from multilingual_backend import LANGUAGES as MULTI_LANGUAGES
 
 
 def backend_for(body):
     if body['engine']=='edge':return 'online'
     language=body['language']
+    if language=='HMN':return 'hmong'
+    if body.get('voice','').startswith('supertonic:'):return 'multi'
     if body.get('voice','').startswith('piper:'):return 'piper'
+    if body['op']=='voices' and language in MULTI_LANGUAGES and (body.get('local_provider')=='multi' or language not in LABELS and language not in FAST_LABELS):return 'multi'
     if body['op']=='voices' and language in FAST_LABELS and (body.get('local_provider')=='fast' or language not in LABELS):return 'piper'
     return 'viet' if language=='VI' else 'melo'
 
@@ -147,11 +154,12 @@ class Studio:
                             'title':'Bản thu cũ', 'legacy':True, 'audio_url':'/audio/'+file.stem+'.wav'}
                 except (OSError, ValueError):
                     pass
+        self.exports=Exports(self)
         atexit.register(self.close)
 
     def persist(self, job):
-        if not job.get('legacy'):
-            atomic_json(self.root / 'outputs' / job['id'] / 'job.json', job)
+        folder=self.root/'outputs'/job['id'];folder.mkdir(parents=True,exist_ok=True)
+        atomic_json(folder/'job.json',job)
 
     def snapshot(self, job):
         return json.loads(json.dumps(job, ensure_ascii=False))
@@ -176,6 +184,7 @@ class Studio:
             self.condition.notify_all()
         for reader in list(self.readers.values()):
             reader.close()
+        self.exports.close()
         self.executor.shutdown(wait=False, cancel_futures=True)
 
     def settings(self, parallelism):
@@ -204,7 +213,7 @@ class Studio:
         workers=body.get('chunk_workers',1)
         if type(workers) is not int or not 1<=workers<=4:raise ValueError('Chọn 1–4 đoạn song song cho Piper.')
         provider=body.get('local_provider','original')
-        if provider not in {'fast','original'}:raise ValueError('Chọn CPU nhanh hoặc Melo/VieNeu gốc.')
+        if provider not in {'fast','original','multi'}:raise ValueError('Chọn CPU nhanh hoặc Melo/VieNeu gốc.')
         normalized = {'op':op, 'engine':engine, 'language':language, 'threads':threads, 'local_provider':provider, 'refresh':bool(body.get('refresh',False)), 'chunk_workers':workers}
         if op == 'render':
             document = parse_document(body.get('text'), body.get('name', ''), body.get('format', 'auto'))
@@ -216,7 +225,10 @@ class Studio:
             voice = body.get('voice')
             if not isinstance(voice, str) or not voice or len(voice) > 160:
                 raise ValueError('Chọn một giọng đọc thực trong danh sách.')
-            normalized.update(text=body['text'], voice=voice, speed=speed, style=style, chunk_size=size,
+            expressive=body.get('expressive',False);emphasis=body.get('emphasis',False)
+            if type(expressive) is not bool or type(emphasis) is not bool:raise ValueError('Kiểm tra tùy chọn nhấn nhá.')
+            speech_plan(document,size,style,expressive,emphasis)
+            normalized.update(expressive=expressive,emphasis=emphasis,text=body['text'], voice=voice, speed=speed, style=style, chunk_size=size,
                               format=document['format'], name=str(body.get('name') or 'Lời đọc')[:200],
                               use_cache=bool(body.get('use_cache', True)))
         return normalized
@@ -240,7 +252,7 @@ class Studio:
                 job = {'id':ident, 'status':'queued', 'op':body['op'], 'engine':body['engine'], 'language':body['language'],
                     'voice':body.get('voice',''), 'title':body.get('name','Chuẩn bị giọng'),
                     'created_at':datetime.now(timezone.utc).isoformat(), 'characters':len(body.get('text','')),
-                    'completed_chunks':0, 'total_chunks':0, 'cache_hits':0, 'progress':0,
+                    'completed_chunks':0, 'total_chunks':0, 'cache_hits':0, 'progress':0, 'stage':'queued',
                     'speed':body.get('speed',1), 'style':body.get('style','neutral')}
                 self.jobs[ident] = job; self.job = job; self.events[ident] = threading.Event(); self.persist(job)
                 self.executor.submit(self.work, ident, body)
@@ -254,7 +266,7 @@ class Studio:
         engine = backend_for(body)
         key = (slot, engine)
         if key not in self.readers:
-            self.readers[key] = self.reader_factory(self.root, engine, self.offline)
+            self.readers[key] = self.reader_factory(self.root, 'piper' if engine=='multi' else engine, self.offline)
         return self.readers[key]
 
     def update(self, ident, **fields):
@@ -277,15 +289,20 @@ class Studio:
                     self.condition.wait()
                 if slot is None or event.is_set():
                     raise InterruptedError('Đã dừng.')
-                self.update(ident, status='running', started_at=datetime.now(timezone.utc).isoformat())
+                self.update(ident, status='running', stage='preparing', started_at=datetime.now(timezone.utc).isoformat())
                 self.condition.notify_all()
             started = time.perf_counter(); reader = self.reader_for(slot, body); reader.owner = ident
             if body['op'] != 'render':
                 result = reader.request({**body,'backend':backend_for(body)}, event)
+                if body['op']=='voices' and body['engine']=='local' and body['language']=='VI' and backend_for(body)=='piper':
+                    result['voices']+=vietnamese_presets(self.root)
                 self.update(ident, **{k:v for k,v in result.items() if k!='ok'}, status='done', progress=1)
                 return
             document = parse_document(body['text'], body['name'], body['format'])
-            chunks = plan_document(document, body['chunk_size'])
+            document,units=speech_plan(document,body['chunk_size'],body['style'],body.get('expressive',False),body.get('emphasis',False))
+            chunks=[u['text'] for u in units]
+            total_characters=sum(len(t) for t in chunks)
+            if body['language']=='HMN':document['warnings'].append('Hmong RPA thử nghiệm: một giọng cộng đồng, chưa xác minh phương ngữ Hmong Trắng hoặc giới tính. Nghe thử trước khi làm bản dài.')
             self.update(ident, total_chunks=len(chunks), warnings=document['warnings'])
             (folder / 'script.txt').write_text(document['text'], encoding='utf-8')
             if document['format'] == 'srt':
@@ -330,31 +347,33 @@ class Studio:
                     if assembler is None:
                         with wave.open(str(source),'rb') as native:rate=native.getframerate()
                         assembler=Assembler(folder,sample_rate=rate)
-                    prepared=folder/'prepared.wav';convert_audio(source,prepared,body['speed'],sample_rate=assembler.rate)
+                    unit=units[index]
+                    prepared=folder/'prepared.wav';convert_audio(source,prepared,max(.5,min(2,body['speed']*unit['speed_scale'])),sample_rate=assembler.rate,gain_db=unit['gain_db'])
                     if event.is_set():raise InterruptedError('Đã dừng.')
-                    pause=STYLES[body['style']]['pause_ms'] if index+1<len(chunks) else 0
+                    pause=unit['pause_ms']
                     assembler.append(prepared,item['text'],pause)
                     if index==0:shutil.copyfile(prepared,folder/'preview.wav')
                     spoken_chars+=len(item['text']);index+=1
                     elapsed=time.perf_counter()-started
-                    self.update(ident,completed_chunks=index,progress=index/len(chunks),cache_hits=cache_hits,parallel_chunks=lanes,
+                    self.update(ident,completed_chunks=index,progress=min(.95,.95*spoken_chars/total_characters),stage='synthesizing',cache_hits=cache_hits,parallel_chunks=lanes,
                         elapsed_seconds=elapsed,eta_seconds=elapsed/index*(len(chunks)-index),preview_url='/download/'+ident+'/preview.wav')
                     item['raw'].unlink(missing_ok=True)
+            self.update(ident,progress=.97,stage='assembling')
             result = assembler.finish(); assembler = None
             if event.is_set():
                 raise InterruptedError('Đã dừng.')
             elapsed = time.perf_counter()-started
             downloads = [{'name':name, 'url':'/download/'+ident+'/'+name} for name in result['parts']]
             report = {**result, 'id':ident, 'version':VERSION, 'language':body['language'], 'voice':body['voice'],
-                'engine':('Piper ONNX FP32 CPU' if backend_for(body)=='piper' else 'Microsoft Edge trực tuyến' if body['engine']=='edge' else ('VieNeu Turbo FP32' if body['language']=='VI' else 'MeloTTS CPU')),
+                'engine':('Hmong RPA Pilot VITS CPU FP32 · thử nghiệm' if backend_for(body)=='hmong' else 'Supertonic 3 CPU INT8 · 5 bước' if backend_for(body)=='multi' else 'Piper ONNX FP32 CPU' if backend_for(body)=='piper' else 'Microsoft Edge trực tuyến' if body['engine']=='edge' else ('VieNeu Turbo FP32' if body['language']=='VI' else 'MeloTTS CPU')),
                 'title':body['name'], 'threads':body['threads'], 'local_provider':body['local_provider'], 'parallel_chunks':lanes, 'available_cpu_count':available_cpus(),
                 'model_load_seconds':total_load, 'processing_seconds':elapsed, 'realtime_multiplier':result['audio_seconds']/elapsed,
                 'target_30x_verified':False, 'measurement':'Độ dài WAV (có khoảng nghỉ) / thời gian xử lý; không xác minh 30× lời đọc thực.',
                 'cache_hits':cache_hits, 'total_chunks':len(chunks), 'fresh_inference':cache_hits==0,
-                'source_audio_seconds':raw_seconds, 'speed':body['speed'], 'style':body['style'], 'warnings':document['warnings'],
+                'source_audio_seconds':raw_seconds, 'speed':body['speed'], 'style':body['style'], 'expressive':body.get('expressive',False),'emphasis':body.get('emphasis',False), 'warnings':document['warnings'],
                 'subtitle_alignment':'Ranh giới từng đoạn tổng hợp, không căn từng từ.', 'downloads':downloads}
             atomic_json(folder / 'report.json', report)
-            self.update(ident, **report, status='done', progress=1, eta_seconds=0,
+            self.update(ident, **report, status='done', stage='done', progress=1, eta_seconds=0,
                 audio_url=downloads[0]['url'], bundle_url='/download/'+ident+'/all-files.zip',
                 text_url='/download/'+ident+'/script.txt', srt_url='/download/'+ident+'/subtitles.srt',
                 report_url='/download/'+ident+'/report.json')
@@ -453,6 +472,9 @@ def handler(studio):
         def send_bundle(self, folder, ident):
             # Stream ZIP64 straight to the browser instead of duplicating hours of WAV on disk.
             names = sorted(p.name for p in folder.glob('part-*.wav')) + sorted(p.name for p in folder.glob('part-*.srt')) + ['script.txt','subtitles.srt','report.json']
+            if studio.jobs.get(ident,{}).get('mp3_status')=='done':
+                for extra in ('voice.mp3','mp3-report.json'):
+                    if (folder/extra).is_file():names.append(extra)
             if (folder/'original.srt').is_file():
                 names.append('original.srt')
             self.send_response(200); self.send_header('Content-Type','application/zip')
@@ -476,7 +498,7 @@ def handler(studio):
                         'text/javascript; charset=utf-8' if path.endswith('.js') else 'text/css; charset=utf-8')
                 if path=='/api/config':
                     return self.reply(200,{'languages':LOCAL_LABELS, 'original_languages':list(LABELS), 'fast_languages':list(FAST_LABELS), 'styles':STYLES, 'offline':studio.offline,
-                        'version':VERSION, 'max_characters':MAX_CHARS, 'parallelism':studio.parallelism,
+                        'online_locales':ONLINE_LOCALES, 'version':VERSION, 'max_characters':MAX_CHARS, 'parallelism':studio.parallelism,
                         'samples':json.loads(Path(__file__).with_name('samples.json').read_text(encoding='utf-8')),
                         'cpu_count':os.cpu_count(), 'available_cpu_count':available_cpus(), 'recommended_chunk_workers':min(4,max(1,available_cpus()//8)), 'local_installed':any((studio.root/'envs'/key/'bin/python').is_file() for key in ('melo','viet','piper')), 'fast_installed':(studio.root/'envs/piper/bin/python').is_file(), 'online_provider':'Microsoft Edge qua edge-tts (không phải API Azure chính thức)'})
                 if path=='/api/jobs':
@@ -492,17 +514,18 @@ def handler(studio):
                     file = studio.root/'outputs'/path.rsplit('/',1)[1]
                     if file.is_file():
                         return self.send_file(file,'audio/wav')
-                match = re.fullmatch(r'/download/([a-f0-9]{32})/(part-\d{4}\.(?:wav|srt)|preview\.wav|script\.txt|subtitles\.srt|original\.srt|report\.json|all-files\.zip)',path)
+                match = re.fullmatch(r'/download/([a-f0-9]{32})/(part-\d{4}\.(?:wav|srt)|preview\.wav|voice\.mp3|mp3-report\.json|script\.txt|subtitles\.srt|original\.srt|report\.json|all-files\.zip)',path)
                 if match:
                     ident, name = match.groups(); folder = studio.root/'outputs'/ident
                     with studio.lock:
                         job = studio.jobs.get(ident)
                         ready = job and (job['status']=='done' or name=='preview.wav')
+                        if name in {'voice.mp3','mp3-report.json'}:ready=ready and job.get('mp3_status')=='done'
                     if ready and name=='all-files.zip' and (folder/'report.json').is_file():
                         return self.send_bundle(folder, ident)
                     file = folder/name
                     if ready and file.is_file():
-                        mime = ('audio/wav' if name.endswith('.wav') else 'application/json; charset=utf-8'
+                        mime = ('audio/wav' if name.endswith('.wav') else 'audio/mpeg' if name.endswith('.mp3') else 'application/json; charset=utf-8'
                                 if name.endswith('.json') else 'application/x-subrip; charset=utf-8'
                                 if name.endswith('.srt') else 'text/plain; charset=utf-8')
                         return self.send_file(file,mime)
@@ -528,13 +551,18 @@ def handler(studio):
                     return self.reply(202,{'jobs':studio.start_batch(body.get('jobs'))})
                 if self.path=='/api/cancel':
                     return self.reply(200,studio.cancel(body.get('id'),bool(body.get('all'))))
+                if self.path=='/api/mp3':
+                    return self.reply(202,studio.exports.start(body.get('id')))
+                if self.path=='/api/cancel-mp3':
+                    return self.reply(200,studio.exports.stop(body.get('id')))
                 if self.path=='/api/resume':
                     return self.reply(202,studio.resume(body.get('id')))
                 if self.path=='/api/settings':
                     return self.reply(200,studio.settings(body.get('parallelism')))
                 if self.path=='/api/inspect':
                     document = parse_document(body.get('text'),body.get('name',''),body.get('format','auto'))
-                    chunks = plan_document(document,body.get('chunk_size',480))
+                    document,units=speech_plan(document,body.get('chunk_size',480),body.get('style','neutral'),bool(body.get('expressive',False)),bool(body.get('emphasis',False)))
+                    chunks=[u['text'] for u in units]
                     return self.reply(200,{'format':document['format'], 'characters':len(document['text']),
                         'chunks':len(chunks), 'cues':len(document['cues']), 'preview':document['text'][:500],
                         'warnings':document['warnings'], 'spoken_text':document['text'] if body.get('include_text') else None})

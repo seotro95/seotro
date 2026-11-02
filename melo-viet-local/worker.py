@@ -47,7 +47,8 @@ def read_model(language,threads):
         gc.collect()
     models.move_to_end(key)
     model=models[key];model_key=key
-    voices=([{'id':ident,'name':label} for label,ident in model.list_preset_voices()]
+    from voice_catalog import gender
+    voices=([{'id':ident,'name':label,'gender':gender(getattr(model,'_preset_voices',{}).get(ident,{}).get('gender'))} for label,ident in model.list_preset_voices()]
             if language=='VI' else [{'id':ident,'name':ident} for ident in model.hps.data.spk2id.keys()])
     return model,voices,(time.perf_counter()-started if loaded else 0)
 
@@ -83,6 +84,12 @@ def synthesize(reader,language,voice,text,output):
 
 
 def handle(request):
+    if request.get('backend')=='hmong':
+        from hmong_backend import handle as hmong_handle
+        return hmong_handle(request)
+    if request.get('backend')=='multi':
+        from multilingual_backend import handle as multi_handle
+        return multi_handle(request)
     if request.get('backend')=='piper':
         from fast_backend import handle as fast_handle
         return fast_handle(request)

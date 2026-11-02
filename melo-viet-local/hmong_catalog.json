@@ -1,0 +1,15 @@
+{
+  "repo": "svue1986/hmong-tts-pilot-v1",
+  "revision": "d2c2c012afbf729c9542570516eb3eeaa11f42d3",
+  "dialect_verified_by_native_listener": false,
+  "gender": "Unknown",
+  "files": {
+    "vocab.json": "304f7e71c40d601f9b89d81904609512eebe96b2a941f0a251fc0c9f397bcc45",
+    "README.md": "0336368f8274a5ed09f54cee8d56a851ecee96026d9f391a6735762c16608a60",
+    "config.json": "8e80587c931e51d57cbc6c47211f74e89c056f6476248e743b25a2dc7580fa12",
+    "added_tokens.json": "a2f778d2e56f3470211c8a6e2204de3926c241d939a138a486ac45d9486364ca",
+    "tokenizer_config.json": "6f1091e675857fbdc24eedbc0061539c9f2d5139da8cf5979be9dee7af215036",
+    "model.safetensors": "6b7acc4d446e9198d486f6df7b1cb684ff5d0c7b125d296d141b9c9c841708e1",
+    "preprocessor_config.json": "8cc7af7e6783938fea2f98b31f6c7708e932e83bfc125c4e861ff7f8d1498ac1"
+  }
+}

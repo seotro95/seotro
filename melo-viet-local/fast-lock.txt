@@ -13,3 +13,5 @@ pycparser==3.11
 soundfile==0.14.0
 sympy==1.14.0
 typing-extensions==4.16.0
+sherpa-onnx==2.0.1
+sherpa-onnx-core==2.0.1

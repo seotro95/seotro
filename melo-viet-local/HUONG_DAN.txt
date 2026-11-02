@@ -1,41 +1,62 @@
-MELO + VIỆT STUDIO 1.2.0 — WINDOWS / WSL2 UBUNTU 22.04
+MELO + VIỆT STUDIO 1.3.0 — WINDOWS / WSL2 UBUNTU 22.04
 
-ĐIỂM MỚI 1.2.0 — TẠO LỜI MỚI NHANH HƠN TRÊN CPU
-- Phần Trên máy có 27 tiếng tổng cộng, thêm 20 tiếng thật qua Piper ONNX:
-  Nga, Đức, Ý, Bồ Đào Nha, Hà Lan, Ba Lan, Hindi, Thụy Điển, Đan Mạch,
-  Phần Lan, Na Uy, Séc, Slovakia, Hungary, Romania, Thổ Nhĩ Kỳ, Ả Rập,
-  Ba Tư, Indonesia, Catalan.
-- Piper có 27 mô hình/giọng FP32 cho 24 tiếng, kể cả Việt/Anh/Pháp/TBN.
-  Đây là mô hình/giọng KHÁC với Melo/VieNeu, không phải đổi tên giọng cũ.
-  Chọn Loại giọng trên máy = CPU nhanh để dùng các giọng ONNX.
-  Chọn Melo/VieNeu gốc để giữ preset cũ. Nhật/Hàn/Trung vẫn dùng Melo.
-- Tạo song song 1–4 đoạn của cùng một bản Piper, tự giới hạn theo CPU,
-  số bản đồng thời và luồng mỗi đoạn. Máy nhiều nhân có thể tận dụng thêm
-  CPU; không đảm bảo mọi cấu hình đều nhanh hơn. Có thể chỉnh trong Tùy chọn.
-- Giữ tần số lấy mẫu gốc khi ghép WAV; tốc độ 1× không phải chạy ffmpeg
-  để đổi tần số từng đoạn. Vẫn có khoảng dự phòng biên độ, không ép INT8.
-- Chọn giọng đơn là mặc định. Bật Chọn nhiều giọng khi cần; bấm Nghe thử
-  để kiểm tra giọng trước khi tạo bản dài. Lỗi hiện ngay cạnh ô chọn giọng,
-  có nút Sao chép lỗi; không chỉ hiện ở cuối trang/hàng đợi.
-- Tải danh mục trực tuyến nay thực sự làm mới danh sách, thay vì giữ nguyên
-  danh sách trong bộ nhớ. Lỗi không có âm thanh, HTTP 401/403, SSL, proxy
-  được báo rõ; không âm thầm đổi giọng hay giả tiếng nước khác.
+NÂNG CẤP CHO BẢN 1.2.0 ĐANG DÙNG TỐT
+- Giữ toàn bộ giọng cũ, mô hình, bản thu và báo cáo. Không cần cài lại Ubuntu.
+- Thêm 22 mô hình Piper: tổng 49 mô hình, 51 preset thực cho 24 tiếng.
+  Bộ lọc Nam/Nữ/Chưa phân loại, đánh dấu giọng yêu thích và nhớ lựa chọn.
+- Loại giọng trên máy = Đa giọng: Supertonic 3 có 5 giọng nữ F1–F5,
+  5 giọng nam M1–M5 cho 31 tiếng. Đây là các preset thật dùng chung
+  giữa các tiếng, không phải 310 người nói hoặc bản đổi cao độ.
+  Chạy CPU INT8, 5 bước suy luận; là lựa chọn riêng, không thay Piper FP32.
+  Không cam kết chạy nhanh hơn trên mọi CPU. Nghe thử để chọn giọng hợp tai.
+- Tổng 36 ngôn ngữ/nhóm trên máy, thêm Bulgaria, Croatia, Estonia, Hy Lạp,
+  Latvia, Lithuania, Slovenia và Ukraina qua Supertonic 3.
+- Supertonic chưa hỗ trợ Trung, Na Uy, Ba Tư và Catalan. Các tiếng này
+  giữ bộ đọc cũ. Nếu nhóm trên máy thiếu giọng nam/nữ, nút Thêm nam/nữ
+  trực tuyến cùng quốc gia mở đúng locale, cần Internet và gửi lời tới Microsoft.
+  Số giọng thực tế phụ thuộc dịch vụ; không tạo nhãn giọng giả.
+- Lọc giới tính theo thông tin preset/dataset; thiếu nguồn được ghi Chưa phân loại.
+  VieNeu Việt có 25 preset gốc nam/nữ khi SDK cũ đã cài; giữ nguyên tên.
+- Tải MP3 thật: sau khi tạo xong, bấm Tải MP3 ở lịch sử hoặc Nghe / tải.
+  Xuất cả bản (kể cả nhiều WAV) thành một MP3 192 kbps; WAV vẫn được giữ.
+  Có phần trăm xuất MP3, nút dừng và liên kết tải lại. ZIP chứa MP3 sau khi xuất.
+  Thời gian xuất MP3 không làm thay đổi phép đo tốc độ tổng hợp giọng.
+- Hiện % tạo giọng theo số ký tự đã tạo xong, 100% sau khi ghép bản hoàn chỉnh.
+  Khi đang tải/nạp mô hình đầu tiên có thể ở 0%; không đoán phần trăm tải.
+- Nhấn nhá theo câu/dấu câu điều chỉnh ngắt nghỉ. Kiểu Thân thiện đặt nhịp nhẹ.
+  Đánh dấu **cụm từ** (hoặc bôi đen rồi bấm Nhấn mạnh phần đã chọn) để
+  đọc chậm nhẹ và rõ hơn, giữ cao độ, giới hạn biên độ. Bật Nhận dấu nhấn mạnh.
+  Dấu ** được bỏ khỏi TXT/SRT lời đọc. Không phải mô hình cảm xúc riêng;
+  chất giọng/độ tự nhiên vẫn phụ thuộc mô hình. Mặc định tắt để giữ cách đọc cũ.
 
-BẢN ĐẦY ĐỦ VÀ BẢN CẬP NHẬT NHỎ
-- ZIP ĐẦY ĐỦ có sẵn 27 mô hình Piper FP32 và MODEL_CARD gốc của từng giọng.
-  CAP_NHAT.bat sẽ xác minh và chép vào models/piper trong Ubuntu. Các giọng
-  Piper dùng được khi mất mạng SAU KHI đã cài thư viện thành công.
-- Cài thư viện lần đầu/cập nhật vẫn cần Internet (PyPI/Ubuntu). ZIP không
-  chứa môi trường Python dựng sẵn. Các mô hình Melo/VieNeu cũ được giữ lại.
-- ZIP cập nhật nhỏ chỉ có chương trình; mỗi giọng Piper tải từ GitHub lần
-  đầu dùng. Tải đúng giọng đã chọn, kiểm tra SHA256, không tải hết 27 model.
-- Cài MỚI nhẹ: CAI_CPU_NHANH.bat cài Piper + trực tuyến, không cài PyTorch,
-  Melo hoặc VieNeu. Khi đó có 24 tiếng Piper. Chạy CAI_DAT.bat nếu muốn
-  đủ cả 27 tiếng, gồm Nhật/Hàn/Trung qua Melo và giọng VieNeu gốc.
-- Đã dùng bản cũ: chỉ cần CAP_NHAT.bat; không cần cài lại Ubuntu.
-- Sau khi bản đầy đủ đã cài xong, có thể tự xóa thư mục voice-pack trong
-  THƯ MỤC BỘ CÀI Windows để tiết kiệm dung lượng. Giữ các BAT/bootstrap/
-  start.sh; không xóa models/outputs trong Ubuntu.
+HMONG RPA — THỬ NGHIỆM
+- Chọn Ngôn ngữ = Hmong RPA, chuẩn bị danh sách rồi Nghe thử.
+- Một giọng bản địa từ mô hình cộng đồng svue1986/hmong-tts-pilot-v1.
+  Đọc được văn bản RPA trong kiểm thử CPU. Chưa có người nghe bản ngữ
+  xác nhận phương ngữ Hmong Trắng hoặc giới tính; không nhân bản thành nam/nữ giả.
+- Mô hình tải một lần từ Hugging Face khi tạo/Nghe thử lần đầu; sau đó dùng
+  ngoại tuyến. Dùng môi trường CPU FP32 riêng; không đổi thư viện của Melo/VieNeu.
+  Không gửi lời đọc lên dịch vụ tạo giọng. ZIP không chứa trọng số Hmong;
+  nguồn hiện chưa công bố rõ giấy phép, nên chương trình tải trực tiếp khi dùng.
+- Hãy nghe mẫu với chữ RPA của bạn trước khi làm bản dài. Đây chưa phải
+  cam kết phát âm Hmong Trắng đã được kiểm chứng. Không dùng giọng Việt/Anh
+  để giả giọng Hmong nếu mô hình không tải được.
+
+HAI GÓI CẬP NHẬT 1.3.0
+- Them-Giong-Windows.zip dành cho người đã có 1.2.0: chứa mã mới, 22 mô hình
+  Piper bổ sung và mô hình Supertonic 3 dùng chung. CAP_NHAT.bat xác minh
+  SHA256 rồi chép vào Ubuntu, giữ nguyên 27 mô hình Piper cũ.
+  Gói này không chứa lại các mô hình của bản 1.2.0.
+- Cap-Nhat-Windows.zip nhỏ chỉ có chương trình; tải đúng mô hình mới đã chọn
+  khi Nghe thử/Tạo lần đầu. Giữ mô hình để dùng lại, không tải hết mọi giọng.
+- Đóng tool, giải nén toàn bộ ZIP mới, chạy CAP_NHAT.bat, chờ xong,
+  rồi MO_TOOL.bat trong thư mục MỚI. Ctrl+F5, kiểm tra góc phiên bản v1.3.0.
+  Cài/cập nhật thư viện cần Internet; sau khi đã có đủ mô hình thì MO_OFFLINE.bat
+  dùng giọng trên máy. Không có khóa API bắt buộc cho các bộ đọc trên máy.
+- Cài mới nhẹ bằng CAI_CPU_NHANH.bat: Piper + Supertonic + giọng trực tuyến,
+  không cài Melo/VieNeu/PyTorch; mô hình tải khi dùng. CAI_DAT.bat cài đủ cả hai SDK cũ.
+- Gói thêm giọng không chứa môi trường Python dựng sẵn. Có thể xóa voice-pack
+  trong thư mục bộ cài Windows sau khi cập nhật; không xóa models/outputs trong Ubuntu.
 
 CÁCH ĐO LẠI TIẾNG TÂY BAN NHA
 1. Đóng tool cũ, chạy CAP_NHAT.bat rồi MO_TOOL.bat MỚI, Ctrl+F5.
@@ -46,9 +67,9 @@ CÁCH ĐO LẠI TIẾNG TÂY BAN NHA
    Bản MeloTTS cũ trong lịch sử vẫn giữ số đo 78,98 giây; cập nhật không
    sửa các báo cáo cũ thành nhanh hơn và không đổi giọng giữa tác vụ.
 
-NÂNG CẤP TỪ 1.0.x / 1.1.0
+NÂNG CẤP TỪ 1.0.x / 1.1.0 / 1.2.0
 1. Đóng cửa sổ MO_TOOL cũ (Ctrl+C). Không xóa Ubuntu, models hoặc outputs.
-2. Giải nén toàn bộ ZIP mới vào thư mục cố định, ví dụ D:\Melo-Viet-1.2.0.
+2. Giải nén toàn bộ ZIP mới vào thư mục cố định, ví dụ D:\Melo-Viet-1.3.0.
 3. Nhấp đôi CAP_NHAT.bat. Bản cập nhật thêm bộ Piper CPU nhanh và sửa điều khiển chọn giọng;
    không chạy lại cài Melo/VieNeu, không tải lại mô hình đã có.
 4. Chờ báo cài/cập nhật xong. Nhấp đôi MO_TOOL.bat trong thư mục MỚI.

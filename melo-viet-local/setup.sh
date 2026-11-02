@@ -64,6 +64,16 @@ if [[ "$MODE" != '--online-only' ]]; then
   "$LOCAL_ROOT/envs/piper/bin/python" -m pip install -r "$SOURCE_ROOT/fast-lock.txt"
   "$LOCAL_ROOT/envs/piper/bin/python" -m pip check
 fi
+# Native Hmong pilot uses its own pinned CPU interpreter; never upgrade the old Melo SDK.
+if [[ "$MODE" != '--online-only' ]]; then
+  if [[ ! -x "$LOCAL_ROOT/envs/hmong/bin/python" ]]; then
+    /usr/bin/python3.10 -m venv "$LOCAL_ROOT/envs/hmong"
+  fi
+  "$LOCAL_ROOT/envs/hmong/bin/python" -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+  "$LOCAL_ROOT/envs/hmong/bin/python" -m pip install 'torch==2.2.2+cpu' --index-url https://download.pytorch.org/whl/cpu
+  "$LOCAL_ROOT/envs/hmong/bin/python" -m pip install -r "$SOURCE_ROOT/hmong-lock.txt"
+  "$LOCAL_ROOT/envs/hmong/bin/python" -m pip check
+fi
 # Tiny third environment adds many online languages without touching the two SDKs.
 if [[ ! -x "$LOCAL_ROOT/envs/online/bin/python" ]]; then
   /usr/bin/python3.10 -m venv "$LOCAL_ROOT/envs/online"
@@ -77,34 +87,12 @@ if [[ -d "$LOCAL_ROOT/app" ]]; then
   cp -a "$LOCAL_ROOT/app" "$BACKUP_ROOT/app"
 fi
 mkdir -p "$LOCAL_ROOT/app"
-for file in app.py worker.py documents.py online_backend.py fast_backend.py fast_catalog.json samples.json index.html app.js style.css; do
+for file in app.py worker.py documents.py speaking.py audio_exports.py voice_catalog.py hmong_backend.py hmong_catalog.json pack_install.py local_models.py multi_catalog.json multilingual_backend.py online_backend.py fast_backend.py fast_catalog.json samples.json index.html app.js style.css; do
   install -m 0644 "$SOURCE_ROOT/$file" "$LOCAL_ROOT/app/$file"
 done
 # Full edition carries model weights. Verify before copying; preserve all old readers/recordings.
-if [[ -d "$SOURCE_ROOT/voice-pack/models/piper" ]]; then
-  /usr/bin/python3.10 - "$SOURCE_ROOT" "$LOCAL_ROOT" <<'COPY_PACK'
-import hashlib,json,sys,shutil
-from pathlib import Path
-source,root=map(Path,sys.argv[1:])
-catalog=json.loads((source/'fast_catalog.json').read_text())['models']
-def digest(path):
-    h=hashlib.sha256()
-    with path.open('rb') as f:
-        while block:=f.read(1024*1024):h.update(block)
-    return h.hexdigest()
-for record in catalog:
-    src=source/'voice-pack/models/piper'/record['id'];dst=root/'models/piper'/record['id']
-    for name,sha in record['files'].items():
-        if not (src/name).is_file() or digest(src/name)!=sha:
-            raise SystemExit('Sai/thieu mo hinh trong ban day du: '+record['id']+'/'+name)
-    dst.mkdir(parents=True,exist_ok=True)
-    for name,sha in record['files'].items():
-        target=dst/name
-        if target.is_file() and digest(target)==sha:continue
-        temporary=target.with_name(target.name+'.install.partial')
-        shutil.copyfile(src/name,temporary);temporary.replace(target)
-    print('Da san sang mo hinh CPU:',record['id'],flush=True)
-COPY_PACK
+if [[ "$MODE" != '--online-only' && -d "$SOURCE_ROOT/voice-pack/models" ]]; then
+  /usr/bin/python3.10 "$SOURCE_ROOT/pack_install.py" "$SOURCE_ROOT" "$LOCAL_ROOT"
 fi
 printf '\nDa cai/cap nhat xong. Mo MO_TOOL.bat, chon bo doc va bam Tai / chuan bi danh sach giong.\n'
 printf 'Mo hinh se duoc tai khi dung lan dau. Chua xac minh 30x.\n'

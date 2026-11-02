@@ -32,7 +32,9 @@ def voices_for(language):
         for speaker,sid in model['speaker_map'].items():
             label=model['id']+((' · '+speaker) if len(model['speaker_map'])>1 else '')
             voices.append({'id':f"piper:{model['id']}:{sid}",'name':'ONNX nhanh · '+label,'backend':'piper',
-                           'sample_rate':model['sample_rate'],'quality':model['quality']})
+                           'sample_rate':model['sample_rate'],'quality':model['quality'],
+                           'gender':model.get('speaker_genders',{}).get(str(sid),model.get('gender','Unknown')),
+                           'locale':model['id'].split('-')[0].replace('_','-'),'download_required':not model.get('bundled',True)})
     return voices
 
 
@@ -68,7 +70,7 @@ def ensure_model(record,offline=False):
         error=None
         for attempt in range(3):
             try:
-                request=urllib.request.Request(record['archive_url'],headers={'User-Agent':'Melo-Viet-Studio/1.2.0'})
+                request=urllib.request.Request(record['archive_url'],headers={'User-Agent':'Melo-Viet-Studio/1.3.0'})
                 with urllib.request.urlopen(request,timeout=90) as source,archive.open('wb') as output:
                     received=0
                     while block:=source.read(1024*1024):

@@ -46,7 +46,7 @@ if ($action -in @('install','install-online','install-fast','update')) {
         for ($i=0; $i -lt 60; $i++) {
             try {
                 $state = Invoke-RestMethod -Uri 'http://localhost:8817/api/config' -TimeoutSec 1
-                if ($state.version -eq '1.2.0') { Start-Process 'http://localhost:8817/'; break }
+                if ($state.version -eq '1.3.0') { Start-Process 'http://localhost:8817/'; break }
             } catch { }
             Start-Sleep -Milliseconds 500
         }

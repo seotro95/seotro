@@ -16,7 +16,7 @@ class SyntheticReader:
             voices=[{'id':locale+'-'+name,'name':name+' (synthetic UI test)','locale':locale,'gender':gender}
                 for locale in ['vi-VN','fr-FR','ru-RU','th-TH'] for name,gender in [('A','Female'),('B','Male')]]
             return {'voices':voices,'locales':{k:2 for k in ['vi-VN','fr-FR','ru-RU','th-TH']}}
-        if body['op']=='voices':return {'voices':[{'id':'voice-a','name':'Synthetic A'},{'id':'voice-b','name':'Synthetic B'}]}
+        if body['op']=='voices':return {'voices':[{'id':'voice-a','name':'Synthetic A','gender':'Male'},{'id':'voice-b','name':'Synthetic B','gender':'Female'}]}
         if body.get('voice')=='ru-RU-B':raise RuntimeError('Lỗi dịch vụ giả lập: không trả về âm thanh')
         with wave.open(body['output'],'wb') as f:
             f.setparams((1,2,24000,0,'NONE','not compressed'));f.writeframes(b'\x01\x00'*4800)
