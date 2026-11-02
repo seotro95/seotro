@@ -5,7 +5,7 @@ from pathlib import Path
 ONLINE_LOCALES={'VI':'vi-VN','EN':'en-US','FR':'fr-FR','ES':'es-ES','JP':'ja-JP','KR':'ko-KR','ZH':'zh-CN',
  'RU':'ru-RU','DE':'de-DE','IT':'it-IT','PT':'pt-PT','NL':'nl-NL','PL':'pl-PL','HI':'hi-IN','SV':'sv-SE',
  'DA':'da-DK','FI':'fi-FI','NO':'nb-NO','CS':'cs-CZ','SK':'sk-SK','HU':'hu-HU','RO':'ro-RO','TR':'tr-TR',
- 'AR':'ar-JO','FA':'fa-IR','ID':'id-ID','CA':'ca-ES'}
+ 'AR':'ar-JO','FA':'fa-IR','ID':'id-ID','CA':'ca-ES','BG':'bg-BG','HR':'hr-HR','ET':'et-EE','EL':'el-GR','LV':'lv-LV','LT':'lt-LT','SL':'sl-SI','UK':'uk-UA'}
 
 
 def gender(value):

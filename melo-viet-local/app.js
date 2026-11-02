@@ -28,7 +28,7 @@ function renderVoiceOptions(){
  $('voice-count').textContent=`${voices.length}/${state.availableVoices.length} giọng · ${male} nam · ${female} nữ${unknown?' · '+unknown+' chưa phân loại':''}`;
  $('voice-availability').textContent=$('language').value==='HMN'?'Hmong RPA thử nghiệm: một giọng cộng đồng chưa phân loại giới tính. Chưa xác minh đúng phương ngữ Hmong Trắng; hãy Nghe thử.':$('engine').value==='local'&&(!male||!female)?'Nhóm ngoại tuyến này chưa có đủ giọng được phân loại nam/nữ. Có thể mở nhóm trực tuyến cùng quốc gia để thêm lựa chọn.':($('engine').value==='local'?'Giọng bổ sung tải một lần khi Nghe thử/Tạo, giữ nguyên các giọng cũ.':'Giới tính lấy từ danh mục của nhà cung cấp. Nội dung đọc được gửi đến Microsoft.');
  if(!voices.length)$('voice-availability').textContent+=' Không có giọng khớp bộ lọc; đổi về Tất cả hoặc bỏ Chỉ giọng yêu thích.';
- $('more-online').disabled=$('engine').value!=='local'||state.config.offline;
+ $('more-online').disabled=$('engine').value!=='local'||state.config.offline||!state.config.online_locales[$('language').value];
 }
 function setVoices(voices){state.availableVoices=voices;state.ready=voiceKey();renderVoiceOptions();}
 function languageChanged(){invalidate();if($('engine').value==='local'&&$('language').value==='HMN')message('Hmong RPA thử nghiệm có một giọng cộng đồng. Chưa xác minh phương ngữ Hmong Trắng hoặc giới tính; Nghe thử trước. Lần đầu cần Internet để tải mô hình.');if($('engine').value==='edge'&&state.catalog){setVoices(state.catalog.voices.filter(v=>v.locale===$('language').value));}persist();}
