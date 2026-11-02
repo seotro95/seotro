@@ -49,4 +49,4 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
   assert.deepEqual(errors,[]);
   console.log('Browser passed: multi-file UTF-8/UTF-16 import, content SRT detection, multi-voice batch, persisted history, real SRT export, online catalog UI, million-character editor, mobile layout. Audio was synthetic.');
  }finally{await browser.close();server.kill('SIGTERM');await new Promise(resolve=>server.once('exit',resolve));await fs.rm(root,{recursive:true,force:true});}
-})().catch(error=>{console.error(error);process.exitCode=1;});
+})().catch(error=>{console.error(error);console.log('::error title=Browser regression::'+String(error.message).replaceAll('%','%25').replaceAll('\n','%0A'));process.exitCode=1;});

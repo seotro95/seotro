@@ -19,7 +19,25 @@ jobs:
         with:
           python-version: '3.10'
       - run: pip install pytest numpy soundfile
-      - run: python -m pytest -q melo-viet-local/tests
+      - name: Ensure audio processing dependency
+        run: |
+          if ! command -v ffmpeg >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+      - run: python -m pytest -q melo-viet-local/tests --junitxml="$RUNNER_TEMP/tests.xml"
+      - name: Report test failures as structured annotations
+        if: failure()
+        run: |
+          python - <<'PYTEST_REPORT'
+          import os,xml.etree.ElementTree as E
+          from pathlib import Path
+          path=Path(os.environ['RUNNER_TEMP'],'tests.xml')
+          if path.exists():
+              for failure in E.parse(path).iter('failure'):
+                  msg=(failure.text or '')[-3500:].replace('%','%25').replace('\r','%0D').replace('\n','%0A')
+                  print('::error title=Python regression::'+msg)
+          PYTEST_REPORT
       - run: node --check melo-viet-local/app.js
       - run: bash -n melo-viet-local/setup.sh melo-viet-local/start.sh
       - run: python release-melo-viet/verify_package.py
