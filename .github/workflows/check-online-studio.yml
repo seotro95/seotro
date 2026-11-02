@@ -1,0 +1,37 @@
+name: Verify international online voices independently
+on:
+  push:
+    branches: [codex/melo-viet-local]
+    paths: ['studio-qa/**', '.github/workflows/check-online-studio.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  online-locales:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 12
+    env:
+      MELO_VIET_ROOT: /tmp/studio-online-native-check
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash melo-viet-local/setup.sh --online-only
+      - name: Test every requested locale even when another fails
+        run: python3 studio-qa/online_all.py --root "$MELO_VIET_ROOT" --output "$RUNNER_TEMP/ONLINE-QA-EXTENDED.json"
+      - name: Publish the independent report without replacing the installer
+        run: |
+          gh release upload melo-viet-studio-1.1.0 "$RUNNER_TEMP/ONLINE-QA-EXTENDED.json" --repo seotro95/seotro --clobber
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          root=Path(os.environ['RUNNER_TEMP'])
+          report=json.loads((root/'ONLINE-QA-EXTENDED.json').read_text())
+          passed=[r['locale'] for r in report['results'] if r['status']=='passed']
+          failed=[r['locale'] for r in report['results'] if r['status']!='passed']
+          notes=Path('release-melo-viet/RELEASE.md').read_text()
+          notes+='\n\nKiểm thử trực tuyến bổ sung trên bản cài 1.1.0: **'+str(len(passed))+'/8 ngôn ngữ tạo mẫu thật thành công**: '+', '.join(passed)+'. Danh mục có '+str(report.get('catalog_voice_count',0))+' giọng / '+str(report.get('catalog_locale_count',0))+' locale lúc thử. Xem `ONLINE-QA-EXTENDED.json` để biết chính xác preset thành công/lỗi; không thay giọng người dùng tự động. '
+          if failed:notes+='Các locale gặp lỗi dịch vụ khi thử: '+', '.join(failed)+'. '
+          notes+='Đây là mẫu ngắn trên Linux CI, không phải xác minh một giờ lời đọc trong hai phút hoặc tốc độ trên Windows của bạn.\n'
+          (root/'extended-notes.md').write_text(notes)
+          PY
+          gh release edit melo-viet-studio-1.1.0 --repo seotro95/seotro --notes-file "$RUNNER_TEMP/extended-notes.md"
