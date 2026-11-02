@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
+MODE="${1:---install}"
+case "$MODE" in --install|--update|--online-only) ;; *) echo "Tham so cai dat khong hop le." >&2; exit 1;; esac
 SOURCE_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 LOCAL_ROOT="${MELO_VIET_ROOT:-$HOME/.local/share/melo-viet-local}"
 if [[ -e "$LOCAL_ROOT" && ! -f "$LOCAL_ROOT/.melo-viet-local-owner" ]]; then
@@ -9,12 +11,24 @@ fi
 mkdir -p "$LOCAL_ROOT"
 printf '%s\n' 'melo-viet-local-v1' > "$LOCAL_ROOT/.melo-viet-local-owner"
 if [[ ! -x /usr/bin/python3.10 ]]; then
-  echo 'Bo cai nay dung Ubuntu 22.04 / Python 3.10. Mo dung Ubuntu-22.04 trong WSL.' >&2
+  echo 'Bo cai nay dung Ubuntu 22.04 / Python 3.10. Kiem tra phien ban ben trong Ubuntu bang cat /etc/os-release.' >&2
   exit 1
 fi
-sudo apt-get update
-sudo apt-get install -y python3.10-venv python3.10-dev build-essential git libsndfile1 mecab libmecab-dev mecab-ipadic-utf8 ffmpeg
+if [[ "$MODE" == '--install' ]]; then
+  sudo apt-get update
+  sudo apt-get install -y python3.10-venv python3.10-dev build-essential git libsndfile1 mecab libmecab-dev mecab-ipadic-utf8 ffmpeg
+elif [[ "$MODE" == '--online-only' ]]; then
+  sudo apt-get update
+  sudo apt-get install -y python3.10-venv ffmpeg
+elif [[ ! -f "$LOCAL_ROOT/app/app.py" ]]; then
+  echo 'Chua co ban cu. Chay CAI_DAT.bat hoac CAI_TRUC_TUYEN.bat truoc.' >&2
+  exit 1
+elif ! command -v ffmpeg >/dev/null; then
+  echo 'Thieu ffmpeg. Chay CAI_DAT.bat de bo sung.' >&2
+  exit 1
+fi
 mkdir -p "$LOCAL_ROOT/envs" "$LOCAL_ROOT/src" "$LOCAL_ROOT/models" "$LOCAL_ROOT/outputs" "$LOCAL_ROOT/logs"
+if [[ "$MODE" == '--install' ]]; then
 for environment in melo viet; do
   if [[ ! -x "$LOCAL_ROOT/envs/$environment/bin/python" ]]; then
     /usr/bin/python3.10 -m venv "$LOCAL_ROOT/envs/$environment"
@@ -40,14 +54,22 @@ if ! "$MELO_PYTHON" -c 'import pathlib,unidic; raise SystemExit(not (pathlib.Pat
 fi
 "$VIET_PYTHON" -m pip install -r "$SOURCE_ROOT/viet-lock.txt"
 "$VIET_PYTHON" -m pip check
+fi
+# Tiny third environment adds many online languages without touching the two SDKs.
+if [[ ! -x "$LOCAL_ROOT/envs/online/bin/python" ]]; then
+  /usr/bin/python3.10 -m venv "$LOCAL_ROOT/envs/online"
+fi
+"$LOCAL_ROOT/envs/online/bin/python" -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+"$LOCAL_ROOT/envs/online/bin/python" -m pip install -r "$SOURCE_ROOT/online-lock.txt"
+"$LOCAL_ROOT/envs/online/bin/python" -m pip check
 if [[ -d "$LOCAL_ROOT/app" ]]; then
   BACKUP_ROOT="$LOCAL_ROOT/backups/$(date -u +%Y%m%dT%H%M%SZ)-$$"
   mkdir -p "$BACKUP_ROOT"
   cp -a "$LOCAL_ROOT/app" "$BACKUP_ROOT/app"
 fi
 mkdir -p "$LOCAL_ROOT/app"
-for file in app.py worker.py index.html app.js style.css; do
+for file in app.py worker.py documents.py online_backend.py index.html app.js style.css; do
   install -m 0644 "$SOURCE_ROOT/$file" "$LOCAL_ROOT/app/$file"
 done
-printf '\nDa cai xong thu vien. Mo MO_TOOL.bat, chon ngon ngu va bam Tai/chuan bi giong.\n'
+printf '\nDa cai/cap nhat xong. Mo MO_TOOL.bat, chon bo doc va bam Tai / chuan bi danh sach giong.\n'
 printf 'Mo hinh se duoc tai khi dung lan dau. Chua xac minh 30x.\n'

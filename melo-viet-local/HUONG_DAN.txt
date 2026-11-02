@@ -1,120 +1,130 @@
-MELO + VIỆT 1.0.1 — CÀI RIÊNG TRÊN WINDOWS QUA WSL2
+MELO + VIỆT STUDIO 1.1.0 — WINDOWS / WSL2 UBUNTU 22.04
 
-Bộ này độc lập với Voice Studio/Azure. Không cần khóa Azure hoặc trả phí
-API tạo giọng. Tổng hợp chạy trên CPU của máy; Internet dùng để cài thư
-viện và tải mô hình/từ điển lần đầu. ZIP nhỏ là bộ cài, không chứa sẵn
-Python, các mô hình hoặc từ điển. Khi cài và thử các tiếng sẽ tải thêm
-vài GB; nên chuẩn bị ít nhất 15 GB trống. Không gọi bộ này là portable 2 GB.
+NÂNG CẤP TỪ 1.0.0 / 1.0.1
+1. Đóng cửa sổ MO_TOOL cũ (Ctrl+C). Không xóa Ubuntu, models hoặc outputs.
+2. Giải nén toàn bộ ZIP mới vào thư mục cố định, ví dụ D:\Melo-Viet-1.1.0.
+3. Nhấp đôi CAP_NHAT.bat. Bản cập nhật thêm giao diện và bộ trực tuyến nhỏ;
+   không chạy lại cài Melo/VieNeu, không tải lại mô hình đã có.
+4. Chờ báo cài/cập nhật xong. Nhấp đôi MO_TOOL.bat trong thư mục MỚI.
+5. Mở http://localhost:8817/ và Ctrl+F5 nếu vẫn thấy giao diện cũ.
+   Nếu bản cũ vẫn đang chạy, đóng đúng cửa sổ đó trước; không kill tất cả Python.
 
-BỘ ĐỌC
-- Việt: VieNeu v3 Turbo FP32, CPU. Có các giọng sẵn của mô hình.
-- Anh, Pháp, Nhật, Hàn, Tây Ban Nha, Trung: MeloTTS chính thức.
-- MeloTTS source: main 209145371cff8fc3bd60d7be902ea69cbdb7965a,
-  bản phát hành chính thức hiện vẫn là v0.1.2; không phải model tự đổi tên.
-- Nga, Thái và nhân bản 19 mẫu giọng cũ không nằm trong bộ này.
-- Hai môi trường riêng để tránh xung đột NumPy/Librosa/Gradio.
-  Máy Xeon E5-2680 v4 dùng FP32 cho Việt; không ép Turbo INT8/VNNI.
-  Bộ cài chỉ cài PyTorch CPU, không cài CUDA hoặc sửa driver GTX 1060.
+CÀI MỚI
+Bộ này độc lập với Voice Studio/Azure. ZIP là bộ cài, chưa chứa Python,
+thư viện, từ điển và mô hình. Có hai lựa chọn:
+- CAI_DAT.bat: cài cả MeloTTS, VieNeu Turbo Việt và bộ trực tuyến.
+  Cần Internet lúc đầu; nên có ít nhất 15 GB trống. Mô hình tải khi dùng.
+- CAI_TRUC_TUYEN.bat: chỉ cài giao diện, ffmpeg và bộ giọng trực tuyến,
+  nhẹ hơn nhiều, không tải mô hình Melo/VieNeu. Cần Internet khi đọc.
+Chạy CAI_DAT.bat sau này nếu muốn thêm các bộ đọc ngoại tuyến.
 
-BƯỚC 1 — KIỂM TRA WSL2 VÀ UBUNTU 22.04
-1. Mở PowerShell, kiểm tra bản Linux đã cài:
+WSL — KHÔNG CẦN CÀI LẠI NẾU ĐÃ CÓ UBUNTU 22.04
+Trong PowerShell:
+  wsl --list --verbose
+  wsl -d Ubuntu -- cat /etc/os-release
+Nếu VERSION_ID="22.04", đã đúng. Tên cột NAME có thể chỉ là Ubuntu;
+Ubuntu 22.04.5 đăng ký tên Ubuntu vẫn dùng được. Stopped là bình thường.
+Bộ cài tự chọn Ubuntu-22.04 hoặc Ubuntu và lưu tên vào wsl-distro.txt.
+Nếu tên khác, ghi đúng tên đó vào wsl-distro.txt trong thư mục ZIP đã giải nén.
+Không thay bản Linux mặc định, không xóa hoặc tự nâng cấp Ubuntu.
+Nếu WSL VERSION là 1, PowerShell quản trị, dùng đúng tên cột NAME:
+  wsl --set-version Ubuntu 2
+Chỉ khi chưa có bản Ubuntu 22.04, xem:
+  wsl --list --online
+Nếu có Ubuntu-22.04, PowerShell quản trị:
+  wsl --install -d Ubuntu-22.04
+Khởi động lại nếu được yêu cầu; mở Ubuntu, tạo user/mật khẩu Linux.
+Nếu báo Invalid distribution name, kiểm tra bản Ubuntu đang có trước;
+không lặp lại lệnh cài hoặc xóa Linux. Hướng dẫn WSL chính thức:
+https://learn.microsoft.com/windows/wsl/install
+https://ubuntu.com/wsl
+Gõ mật khẩu Linux/sudo không hiện ký tự là bình thường.
 
-   wsl --list --verbose
+CHỌN BỘ ĐỌC, NGÔN NGỮ VÀ NHIỀU GIỌNG
+1. Mở MO_TOOL.bat, giữ cửa sổ này mở. Trang: http://localhost:8817/.
+2. Trên máy: Việt dùng VieNeu Turbo FP32; Anh, Pháp, Nhật, Hàn,
+   Tây Ban Nha, Trung dùng MeloTTS. Bấm tải/chuẩn bị danh sách giọng.
+   Chỉ hiển thị các preset thực của mô hình, không nhân bản giả giọng.
+3. Trực tuyến: bấm tải danh mục, chọn ngôn ngữ/quốc gia rồi chọn giọng.
+   Có các tiếng khác như Nga, Thái, Đức, Ý... nếu dịch vụ đang cung cấp.
+   Danh sách lấy từ dịch vụ thật; số giọng mỗi nước có thể khác nhau.
+   Tích hợp Microsoft Edge Read Aloud qua edge-tts, không phải Azure API
+   chính thức, không cần khóa trong tool. Dịch vụ có thể thay đổi hoặc
+   giới hạn; lỗi sẽ hiện rõ, không tự thay bằng giọng/quốc gia khác.
+   NỘI DUNG ĐỌC SẼ GỬI ĐẾN MICROSOFT khi chọn Trực tuyến.
+4. Giữ Ctrl khi chọn để chọn nhiều giọng. Mỗi giọng tạo một bản thu riêng.
+5. Các preset nhịp kể chuyện, review phim, thuyết minh, bản tin, nhẹ nhàng
+   đặt tốc độ gợi ý và độ nghỉ giữa các đoạn; không phải model cảm xúc
+   riêng. Có thể chỉnh tốc độ 0,5–2×; giữ cao độ bằng ffmpeg atempo.
+   Chỉnh tốc độ phát âm khác với tăng tốc tính toán.
 
-2. Nếu đã có dòng Ubuntu (VERSION 2), kiểm tra phiên bản bên trong:
+VĂN BẢN DÀI, NHIỀU TỆP VÀ PHỤ ĐỀ
+- Ô soạn nhận tối đa 1.000.000 ký tự mỗi nội dung, không cắt bớt lời.
+- Chia đoạn tự động theo câu/từ khi có thể; mặc định tối đa 480 ký tự.
+  Trong Tùy chọn có thể đặt 80–1.200 ký tự. Chia nhỏ giảm RAM và cho phép
+  tiếp tục, không bảo đảm làm mô hình nhanh hơn trên mọi văn bản.
+- Nhập cùng lúc nhiều TXT/SRT. Tự nhận SRT theo nội dung dù đuôi TXT.
+  Mỗi tệp có tên, loại, số ký tự lời, số đoạn; tệp lỗi được đánh dấu.
+  Tối đa 32 tệp trong danh sách, 8 MB/tệp và 1 triệu ký tự/tệp.
+- Tự nhận UTF-8 hoặc UTF-16 có BOM. Nếu tệp cũ khác mã hóa, chọn rõ
+  UTF-16 LE/BE, Windows-1258 hoặc Windows-1252 rồi nhập lại.
+- SRT chỉ đọc lời, bỏ số thứ tự, mốc thời gian và thẻ định dạng.
+  Mốc lỗi/đảo thứ tự được báo; không lặng lẽ đọc số thành lời.
+- Tạo bản từ ô soạn hoặc Tạo tất cả tệp đã nhập. Mỗi tổ hợp tệp × giọng
+  là một bản. Mỗi lần gửi tối đa 32 bản; hàng đợi tối đa 64 tác vụ,
+  tổng văn bản đang chờ tối đa 16 triệu ký tự.
+- Xuất TXT lấy phần lời. SRT nhập có thể xuất lại mốc gốc trước khi tạo.
+  SRT của bản thu mới có mốc theo RANH GIỚI CÁC ĐOẠN ÂM THANH THỰC,
+  không căn từng từ và không ép lời vào các mốc nhập. Muốn đồng bộ video
+  với mốc gốc cần kiểm tra/chỉnh riêng; tool không tự tăng tốc để nhét lời.
 
-   wsl -d Ubuntu -- cat /etc/os-release
+HÀNG ĐỢI, LỊCH SỬ VÀ TIẾP TỤC
+- Chọn 1–4 bản tạo đồng thời; mặc định 2, mỗi bản 4 luồng CPU.
+  Bắt đầu 1 hoặc 2 nếu máy chậm/thiếu RAM. Nhiều bản đồng thời dùng thêm
+  CPU/RAM; không bảo đảm mỗi bản nhanh hơn.
+- Hàng đợi theo thứ tự gửi. Có tiến độ đoạn, thời gian còn lại ước tính,
+  nghe mẫu đoạn đầu và dừng từng bản hoặc toàn bộ hàng đợi.
+- Lịch sử giữ tên, thời gian, giọng, thông số, WAV, TXT, SRT và báo cáo.
+  Có thể nghe/tải lại sau khi đóng/mở tool. Bản 1.0.x còn WAV vẫn hiện.
+- Dùng lại đoạn đã tạo: lưu WAV theo nội dung + giọng + bộ đọc. Thay tốc
+  độ/nhịp nghỉ vẫn dùng lại âm thanh gốc và xử lý lại mà không gọi model.
+- Bấm Tiếp tục khi lỗi, dừng hoặc bị đóng giữa chừng. Một bản mới được
+  tạo từ văn bản gốc, tái sử dụng các đoạn hợp lệ; bản trước được giữ lại.
+- Giữ mô hình trong RAM giữa các lượt; Melo giữ tối đa hai mô hình mỗi
+  tiến trình xử lý, đổi số luồng không bắt buộc nạp lại trọng số Melo.
+- WAV dài được chia thành phần khoảng một giờ để tránh giới hạn RIFF.
+  Tải từng WAV hoặc ZIP chứa tất cả WAV + TXT + SRT + báo cáo. ZIP được
+  truyền trực tiếp, không tạo thêm bản sao toàn bộ WAV trên đĩa.
 
-   Nếu hiện VERSION_ID="22.04" thì đã đủ. Không cài lại Ubuntu.
-   Tên đăng ký WSL có thể là Ubuntu dù hệ điều hành là Ubuntu 22.04.5.
-   Trạng thái Stopped là bình thường; bộ cài sẽ tự khởi động bản này.
-   Bộ cài 1.0.1 tự nhận Ubuntu-22.04 hoặc Ubuntu và kiểm tra phiên bản.
-   Nếu tên WSL khác, tạo tệp wsl-distro.txt trong thư mục bộ cài,
-   ghi đúng một dòng tên đó. Tên được chọn sẽ được lưu cho lần mở sau.
-3. Chỉ khi chưa có Ubuntu 22.04: mở PowerShell Run as administrator,
-   xem danh mục trước:
-
-   wsl --list --online
-
-   Nếu danh mục có Ubuntu-22.04, chạy:
-
-   wsl --install -d Ubuntu-22.04
-
-   Nếu báo Invalid distribution name, không lặp lại lệnh này. Kiểm tra
-   bản Ubuntu đang có theo bước 2. Nếu không có bản 22.04, xem hướng dẫn
-   chính thức https://learn.microsoft.com/windows/wsl/install và
-   https://ubuntu.com/wsl để cài đúng bản; không xóa bản Linux hiện tại.
-4. Khởi động lại Windows nếu được yêu cầu. Mở bản Ubuntu đã chọn từ
-   Start hoặc bằng wsl -d Ubuntu; tạo username/mật khẩu nếu được hỏi.
-   Khi gõ mật khẩu, không hiện ký tự là bình thường.
-5. VERSION trong wsl --list --verbose cần là 2. Nếu là 1, mở PowerShell
-   quản trị và dùng đúng tên ở cột NAME, ví dụ:
-
-   wsl --set-version Ubuntu 2
-
-BƯỚC 2 — GIẢI NÉN VÀ CÀI
-1. Giải nén toàn bộ ZIP vào thư mục cố định, ví dụ D:\Melo-Viet.
-   Giữ thư mục này để chạy các tệp BAT về sau. Không chép vào tool cũ.
-2. Nhấp đôi CAI_DAT.bat. Không cần chạy BAT bằng quyền administrator.
-3. Khi Ubuntu hỏi mật khẩu sudo, nhập mật khẩu Linux đã tạo ở bước 1.
-4. Chờ cài xong các thư viện và từ điển Nhật. Lần đầu có thể lâu;
-   không đóng cửa sổ giữa chừng. Thấy thông báo “Da cai xong thu vien”
-   là bước này hoàn tất. Nếu lỗi, giữ nội dung lỗi; chạy lại không xóa
-   các mô hình hoặc bản thu đã có.
-
-BƯỚC 3 — MỞ VÀ CHUẨN BỊ GIỌNG
-1. Nhấp đôi MO_TOOL.bat, giữ cửa sổ chạy mở.
-2. Trình duyệt tự mở. Nếu chưa mở, truy cập:
-
-   http://localhost:8817/
-
-3. Chọn ngôn ngữ, để 4 luồng CPU trước rồi bấm Tải/chuẩn bị giọng.
-   Đây là lúc tải mô hình. Mỗi tiếng có mô hình riêng. Không cần tải
-   trước toàn bộ ngôn ngữ nếu chỉ dùng một vài tiếng. Một số tokenizer
-   của MeloTTS được tải chung khi mở bộ đọc lần đầu.
-4. Danh sách giọng hiện ra: chọn giọng, nhập đúng tiếng và bấm Tạo WAV.
-5. Nghe thử; bấm Tải WAV để lưu sang thư mục tải về của Windows.
-6. Giữ cửa sổ tool mở giữa các lượt tạo để dùng lại mô hình, tránh nạp
-   lại mỗi câu. Đổi tiếng hoặc số luồng có thể nạp lại mô hình.
-
-BƯỚC 4 — DÙNG NGOẠI TUYẾN
-Sau khi đã chuẩn bị và tạo thử thành công các ngôn ngữ muốn dùng:
-- Đóng cửa sổ MO_TOOL.bat.
-- Mở MO_OFFLINE.bat. Chế độ này bật cờ ngoại tuyến cho Hugging Face
-  và Transformers. Tiếng nào chưa đủ mô hình/từ điển sẽ báo lỗi,
-  không tự đổi sang tiếng khác. Mở MO_TOOL.bat với Internet để tải bổ sung.
-
-LƯU TRỮ VÀ TỰ ĐỘNG HÓA
-Thư viện, mô hình và kết quả nằm trong Ubuntu tại:
-~/.local/share/melo-viet-local/
-Các thư mục envs/melo và envs/viet là hai môi trường riêng.
-models/huggingface giữ mô hình; outputs giữ WAV và báo cáo JSON.
-Đường dẫn NLTK/UniDic do các thư viện lưu trong user/môi trường Linux.
-Để tự động hóa từ Windows khi tool đang mở, có thể POST JSON đến
-http://localhost:8817/api/start, rồi GET /api/job để theo dõi.
-Ngôn ngữ: VI, EN, FR, JP, KR, ES, ZH. Trước hết gửi op=voices để lấy ID
-mẫu giọng của mô hình; sau đó gửi op=render với text và voice đã chọn.
-Xem AUTOMATION.md. Chỉ có một tác vụ tạo/tải giọng tại một thời điểm.
+NGOẠI TUYẾN VÀ LƯU TRỮ
+Mở MO_OFFLINE.bat sau khi đã chuẩn bị và tạo thử các tiếng muốn dùng.
+Chế độ này chặn giọng trực tuyến; mô hình thiếu sẽ báo lỗi, không đổi giọng.
+Trong Ubuntu: ~/.local/share/melo-viet-local/
+  envs/melo, envs/viet, envs/online: các môi trường độc lập
+  models: mô hình và danh mục giọng; cache/audio: các đoạn dùng lại
+  outputs/<mã bản thu>/: lời gốc, lịch sử, WAV, TXT, SRT và báo cáo
+  logs: thông báo SDK; backups: giao diện cũ khi cập nhật
+Lời gốc được giữ trên máy cho lịch sử/tiếp tục. Không xóa models/outputs
+khi cập nhật. Cache có thể tăng dung lượng khi dùng lâu; nếu cần dọn,
+đóng tool rồi chỉ xóa các WAV trong cache/audio. Các bản thu đã xong vẫn còn.
 
 TỐC ĐỘ VÀ CHẤT LƯỢNG
-Giữ nguyên tốc độ phát âm 1.0; không rút lời, đổi giọng hoặc thêm im lặng
-để đạt số đo. Có hạ đồng đều biên độ khi đỉnh quá cao trước khi ghi PCM,
-tránh cắt phẳng đỉnh gây vỡ tiếng. Việc này không sửa phát âm của mô hình.
-Số đo ở UI là độ dài WAV (có khoảng nghỉ) chia thời gian yêu cầu; không
-phải phép xác minh 30x lời đọc thực. Lượt đầu có thể gồm tải/nạp mô hình.
-Real-time chỉ có nghĩa cỡ 1 giây xử lý cho 1 giây tiếng, không phải 30x.
-Kết quả CPU Linux trong QA không bảo đảm tốc độ trên Windows/WSL của bạn.
-Chưa có đánh giá nghe bởi người bản ngữ cho mọi giọng; thử đoạn ngắn trước.
+Không có cam kết 30× hoặc một giờ lời trong hai phút trên CPU này.
+Giao diện ghi độ dài WAV (gồm khoảng nghỉ) / thời gian xử lý và số đoạn
+đã dùng lại. Lượt có cache KHÔNG PHẢI tốc độ tổng hợp mới của mô hình.
+Tắt Dùng lại đoạn khi đo lần tạo mới; giữ cùng văn bản, giọng, kiểu và
+số bản đồng thời để so sánh. Lượt đầu còn nạp/tải mô hình.
+Giữ FP32 cho VieNeu trên Xeon E5-2680 v4; không ép INT8/VNNI, không cài
+CUDA hoặc sửa driver GPU. Đầu ra PCM có khoảng dự phòng biên độ; không
+bộ lọc nào tự sửa được phát âm/lời do mô hình tạo. Thử đoạn ngắn và nghe
+trước; chưa đánh giá bởi người bản ngữ cho mọi giọng hoặc bản 1 triệu ký tự.
 
-LỖI THƯỜNG GẶP
-- Lỗi tên Ubuntu: kiểm tra wsl --list --verbose; bản 1.0.1 dùng được tên
-  Ubuntu chứa hệ điều hành 22.04. Không cần tên phải là Ubuntu-22.04.
-- Đã chọn sai WSL: sửa wsl-distro.txt theo tên ở cột NAME rồi chạy lại.
-- WSL lỗi 0x80370102/virtualization: bật Virtualization (VT-x) trong BIOS,
-  rồi khởi động lại. Có thể cần quản trị viên máy nếu máy bị quản lý.
-- Không tải được model: kiểm tra Internet, dung lượng trống và truy cập
-  Hugging Face, PyPI, GitHub. Không nhập khóa Azure vào bộ này.
-- Cài bị gián đoạn: chạy lại CAI_DAT.bat. Không xóa outputs/models.
-- Trang chưa mở: thử http://localhost:8817 khi cửa sổ tool còn chạy.
-- Tác vụ lỗi: xem logs/melo.log hoặc logs/viet.log trong thư mục Linux
-  ở trên, gửi phần thông báo lỗi bằng văn bản để được xử lý.
+NẾU CÓ LỖI
+- Trang cũ: đóng cửa sổ tool cũ, dùng MO_TOOL.bat mới, Ctrl+F5.
+- Chưa có bộ trực tuyến sau nâng cấp: chạy CAP_NHAT.bat, mở lại tool.
+- Không có giọng trực tuyến: kiểm tra Internet, mạng/VPN/firewall và
+  speech.platform.bing.com; không tự đổi DNS hoặc tắt bảo vệ để thử.
+- Cài bị ngắt: chạy lại đúng BAT; models/outputs không bị xóa.
+- Cổng 8817 đang dùng: đóng đúng tool cũ; không dừng các ứng dụng khác.
+- Lỗi tác vụ: giữ thông báo và xem logs trong đường dẫn Ubuntu ở trên.
+Tự động hóa: xem AUTOMATION.md.

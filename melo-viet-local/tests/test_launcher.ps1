@@ -106,7 +106,17 @@ try {
     try { & $launcher } catch { $message = $_.Exception.Message }
     Assert-True ($message -like '*Cai dat chua hoan tat*') 'Installer failure must not report success'
 
-    Write-Host '11 Windows PowerShell launcher cases passed with mocked WSL; no Linux distribution was installed or modified.'
+    Reset-Case
+    $env:MELO_VIET_ACTION = 'update'
+    & $launcher
+    Assert-True ($global:meloTestWsCalls[$global:meloTestWsCalls.Count-1][5] -eq '--update') 'Fast update must not request full model installation'
+
+    Reset-Case
+    $env:MELO_VIET_ACTION = 'install-online'
+    & $launcher
+    Assert-True ($global:meloTestWsCalls[$global:meloTestWsCalls.Count-1][5] -eq '--online-only') 'Online-only installation must not install the offline SDKs'
+
+    Write-Host '13 Windows PowerShell launcher cases passed with mocked WSL; no Linux distribution was installed or modified.'
 } finally {
     Remove-Item Function:\wsl.exe -ErrorAction SilentlyContinue
     Remove-Variable -Name meloTestWsCalls,meloTestNames,meloTestOsVersion,meloTestPathFail,meloTestLaunchFail,meloTestInstallFail -Scope Global -ErrorAction SilentlyContinue
@@ -119,4 +129,4 @@ try {
 # Expected negative cases set LASTEXITCODE=1 in the mock. Do not leak that
 # code into the Actions PowerShell wrapper after all assertions passed.
 $global:LASTEXITCODE = 0
-Write-Host '::notice title=Windows launcher tests::11 cases passed on Windows PowerShell 5.1 with mocked WSL.'
+Write-Host '::notice title=Windows launcher tests::13 cases passed on Windows PowerShell 5.1 with mocked WSL.'

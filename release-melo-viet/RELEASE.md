@@ -1,15 +1,19 @@
-Sửa bộ cài riêng **MeloTTS + VieNeu Turbo Việt** khi WSL đăng ký tên `Ubuntu` nhưng hệ điều hành bên trong là Ubuntu 22.04.5. **Không cần cài lại Ubuntu hoặc xóa bản Linux đang có.**
+Melo + Việt Studio **1.1.0**: soạn tối đa **1.000.000 ký tự**, tự chia đoạn, tạo **1–4 bản đồng thời**, nhập nhiều TXT/SRT và lưu lịch sử bản thu.
 
-1. Tải ZIP bên dưới, giải nén toàn bộ vào thư mục cố định, ví dụ `D:\Melo-Viet-1.0.1`.
-2. Nhấp đôi `CAI_DAT.bat`. Bộ cài tự chọn `Ubuntu-22.04` hoặc `Ubuntu` đã cài và kiểm tra hệ điều hành là Ubuntu 22.04. Tên được lưu vào `wsl-distro.txt` để lần mở sau dùng đúng bản đó.
-3. Nhập mật khẩu Linux khi sudo hỏi, chờ cài xong. Chạy `MO_TOOL.bat`, mở `http://localhost:8817`.
+**Đang dùng 1.0.0 / 1.0.1:** đóng tool cũ, giải nén ZIP mới vào thư mục cố định, chạy **CAP_NHAT.bat**, chờ xong rồi chạy **MO_TOOL.bat mới**. Không cài lại Ubuntu, không xóa mô hình hoặc bản thu. Nếu trang cũ còn hiện, Ctrl+F5. Bản cập nhật không chạy lại cài hai bộ Melo/VieNeu.
 
-Nếu `wsl -d Ubuntu -- cat /etc/os-release` hiện `VERSION_ID="22.04"`, bạn đã có đúng hệ điều hành. `Stopped` trong danh sách WSL là bình thường. **Không chạy lại `wsl --install -d Ubuntu-22.04`** trong trường hợp này. Nếu tên WSL khác, ghi tên đó vào `wsl-distro.txt`. Không đổi bản WSL mặc định, không tự cài thêm hoặc nâng cấp Ubuntu.
+**Cài mới:** `CAI_DAT.bat` cài đủ ba bộ đọc. `CAI_TRUC_TUYEN.bat` chỉ cài bộ trực tuyến nhẹ, không tải mô hình Melo/VieNeu. ZIP là bộ cài, chưa chứa thư viện/mô hình. Vẫn cần **WSL2 với hệ điều hành Ubuntu 22.04**, tên đăng ký có thể là `Ubuntu`; không cần tên phải là `Ubuntu-22.04`.
 
-ZIP nhỏ là **bộ cài**, chưa chứa mô hình hoặc thư viện. Cần Internet khi cài và tải mô hình lần đầu; nên có ít nhất 15 GB trống. Mô hình, môi trường và WAV đã có trong `~/.local/share/melo-viet-local` được giữ lại; chạy lại bộ cài không xóa dữ liệu. Không cần khóa Azure.
+Các tính năng:
 
-Các tiếng: VI dùng VieNeu Turbo FP32; EN, FR, JP, KR, ES, ZH dùng MeloTTS. Không gồm tiếng Nga/Thái hoặc nhân bản 19 mẫu riêng. Bộ đọc, khóa phụ thuộc và quy trình cài thư viện giống 1.0.0; bản 1.0.1 sửa nhận diện WSL, thông báo lỗi và hướng dẫn.
+- Chọn nhiều giọng để cùng một văn bản có nhiều bản thu. Hàng đợi theo thứ tự gửi, tiến độ theo đoạn, dừng từng bản, nghe đoạn đầu và tiếp tục sau gián đoạn. Giữ mô hình trong RAM; Melo giữ tối đa hai mô hình mỗi tiến trình xử lý và đổi số luồng không phải nạp lại trọng số.
+- Kiểu nhịp kể chuyện, review phim, thuyết minh, bản tin, nhẹ nhàng. Đây là tốc độ gợi ý và nhịp nghỉ, **không phải mô hình cảm xúc riêng**. Tốc độ đọc 0,5–2×, giữ cao độ.
+- Nhập nhiều TXT/SRT, tự nhận dạng theo nội dung và UTF-8/UTF-16 có BOM; chọn thêm Windows-1258/1252 nếu cần. Tệp lỗi được đánh dấu riêng. Không đọc số thứ tự/mốc SRT thành lời.
+- Xuất WAV, TXT, SRT và báo cáo. SRT đầu ra theo ranh giới từng đoạn âm thanh thực, **không căn từng từ và không ép vào thời gian SRT nhập**. Mỗi phần WAV có phụ đề riêng; còn có phụ đề toàn bản. Bản dài tự chia WAV khoảng một giờ/phần để tránh giới hạn RIFF; ZIP64 tải trực tiếp không tạo thêm bản sao toàn bộ WAV trên đĩa.
+- Lịch sử giữ lại giữa các lần mở; vẫn thấy WAV cũ 1.0.x. Dùng lại các đoạn đã tạo theo nội dung/giọng để tạo lại hoặc tiếp tục. Có thể tắt dùng lại đoạn khi đo tổng hợp mới.
+- Ngoại tuyến: VieNeu Turbo FP32 cho Việt; MeloTTS cho Anh, Pháp, Nhật, Hàn, Tây Ban Nha, Trung. Không ép INT8 trên Xeon cũ, không cài CUDA/đụng driver GPU.
+- Trực tuyến: tải danh mục giọng/quốc gia thật từ Microsoft Edge qua **edge-tts 7.3.1**, gồm các tiếng khác như Nga, Thái, Đức, Ý khi dịch vụ cung cấp. Không cần khóa trong tool. **Nội dung sẽ gửi tới Microsoft**; đây là tích hợp bên thứ ba, không phải API Azure chính thức, dịch vụ có thể thay đổi hoặc giới hạn. Mỗi quốc gia chỉ hiển thị giọng thực sự có, không nhân bản giả giọng.
 
-Kiểm tra: 30 kiểm thử ứng dụng/API/PCM và 11 tình huống launcher trên Windows PowerShell 5.1 với WSL giả lập. Chưa chạy thao tác cài WSL trên máy Windows của bạn. Cài đặt Ubuntu 22.04 và tổng hợp thật 14 WAV / bảy ngôn ngữ đã được kiểm tra ở bản 1.0.0 (Actions run 41337929203); `MODEL-QA-1.0.0.json` là báo cáo cũ được giữ nguyên, không phải số đo mới.
+Kiểm tra chức năng gồm 52 kiểm thử Python, 13 tình huống launcher Windows PowerShell 5.1 với WSL giả lập, kiểm thử trình duyệt máy tính/di động (âm thanh mô phỏng) và thử mô hình thật trên Ubuntu 22.04. Báo cáo thật kèm Release phân biệt tổng hợp mới và dùng lại đoạn; không dùng âm thanh mô phỏng để tuyên bố tốc độ mô hình.
 
-Các số đo CPU Linux ở bản 1.0.0: MeloTTS khoảng 0,64–0,67× theo độ dài WAV ở lượt thứ hai; VieNeu Việt khoảng 2,15×. **Chưa đạt 30×**, chưa có đánh giá nghe bởi người bản ngữ cho mọi giọng và không bảo đảm tốc độ trên Windows/Xeon của bạn. Bản vá launcher không thay đổi tốc độ tổng hợp.
+**Chưa xác minh tạo một giờ lời đọc trong hai phút hoặc chất lượng nghe bởi người bản ngữ cho mọi giọng.** Số đo theo WAV có khoảng nghỉ, thời gian nạp, tốc độ phát âm đã chọn và số đoạn dùng lại; lượt có cache không phải tốc độ tổng hợp mới. Tạo nhiều bản đồng thời dùng thêm CPU/RAM và có thể làm từng bản chậm hơn. Kết quả Linux CI không bảo đảm tốc độ trên Windows/Xeon của bạn. Hướng dẫn đầy đủ trong `HUONG_DAN.txt`.

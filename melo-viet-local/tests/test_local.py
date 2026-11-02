@@ -20,16 +20,24 @@ import app
 import worker
 
 
+@pytest.fixture(autouse=True)
+def clean_model_cache():
+    worker.models.clear();worker.model=None;worker.model_key=None
+    yield
+    worker.models.clear();worker.model=None;worker.model_key=None
+
+
 def wait(studio):
     deadline=time.monotonic()+5
     while time.monotonic()<deadline:
         with studio.lock:job=dict(studio.job)
-        if job['status']!='running':return job
+        if job['status'] not in {'queued','running'}:return job
         time.sleep(.01)
     raise AssertionError('Timed out')
 
 
 class FakeReader:
+    def __init__(self,*args):pass
     def request(self,body,cancel=None):
         if body['op']=='voices':return {'voices':[{'id':body['language'],'name':body['language']}],'model_load_seconds':0}
         with wave.open(body['output'],'wb') as f:f.setparams((1,2,24000,0,'NONE','not compressed'));f.writeframes(b'\x01\x00'*2400)
@@ -39,8 +47,7 @@ class FakeReader:
 
 @pytest.fixture
 def studio(tmp_path):
-    s=app.Studio(tmp_path)
-    s.readers={k:FakeReader() for k in s.readers}
+    s=app.Studio(tmp_path,reader_factory=FakeReader)
     yield s
     s.close()
 
@@ -49,9 +56,9 @@ def studio(tmp_path):
 def test_each_supported_language_routes_to_the_correct_isolated_reader(studio,language):
     seen=[]
     class Reader(FakeReader):
-        def __init__(self,name):self.name=name
+        def __init__(self,root,name,offline):self.name=name
         def request(self,body,cancel=None):seen.append(self.name);return super().request(body,cancel)
-    studio.readers={key:Reader(key) for key in ('melo','viet')}
+    studio.reader_factory=Reader
     studio.start({'op':'voices','language':language,'threads':4})
     assert wait(studio)['status']=='done'
     assert seen==['viet' if language=='VI' else 'melo']
@@ -66,7 +73,7 @@ def test_outputs_are_owned_and_speed_report_does_not_verify_30x(studio,tmp_path)
     studio.start({'op':'render','language':'VI','voice':'VI','text':'Xin chào.','output':'../outside.wav'})
     result=wait(studio)
     assert result['status']=='done' and result['target_30x_verified'] is False
-    assert (tmp_path/'outputs'/(result['id']+'.wav')).is_file()
+    assert (tmp_path/'outputs'/result['id']/'part-0001.wav').is_file()
     assert not (tmp_path.parent/'outside.wav').exists()
     assert 'khoảng nghỉ' in result['measurement']
 
@@ -75,7 +82,7 @@ def test_cancelled_late_result_cannot_overwrite_next_job(studio):
     entered=threading.Event();release=threading.Event()
     class Slow(FakeReader):
         def request(self,body,cancel=None):entered.set();release.wait(5);return super().request(body,cancel)
-    studio.readers['viet']=Slow()
+    studio.reader_factory=lambda root,engine,offline:Slow() if engine=='viet' else FakeReader()
     first=studio.start({'op':'voices','language':'VI'})
     assert entered.wait(2)
     studio.cancel()
@@ -171,7 +178,7 @@ def test_failed_language_switch_cannot_reuse_a_released_model(monkeypatch):
     first,_,_=worker.read_model('EN',4)
     with pytest.raises(RuntimeError):worker.read_model('FR',4)
     again,_,_=worker.read_model('EN',4)
-    assert again is not None and again is not first
+    assert again is first  # Failed construction keeps the valid cached model.
 
 
 def test_melo_speaker_catalog_accepts_upstream_hparams_mapping(monkeypatch):
