@@ -1,4 +1,8 @@
 $ErrorActionPreference = 'Stop'
+trap {
+    Write-Host ('::error title=Windows launcher test::' + $_.Exception.Message + ' at ' + ($_.ScriptStackTrace -replace "`r?`n", ' | '))
+    throw
+}
 $launcher = Join-Path (Split-Path $PSScriptRoot -Parent) 'bootstrap.ps1'
 $testRoot = Join-Path ([IO.Path]::GetTempPath()) ('melo-launcher-' + [guid]::NewGuid())
 $null = New-Item -Path $testRoot -ItemType Directory

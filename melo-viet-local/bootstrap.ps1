@@ -1,4 +1,7 @@
 $ErrorActionPreference = 'Stop'
+# Decode UTF-8 paths from Linux correctly in Windows PowerShell 5.1.
+[Console]::OutputEncoding = New-Object System.Text.UTF8Encoding($false)
+$OutputEncoding = [Console]::OutputEncoding
 $package = $env:MELO_VIET_PACKAGE
 $action = $env:MELO_VIET_ACTION
 if ($action -notin @('install','run','offline')) { throw 'Thao tac khong hop le.' }
