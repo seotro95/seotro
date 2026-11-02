@@ -1,7 +1,7 @@
 import json,os
 from pathlib import Path
 folder=Path(os.environ['QA_FOLDER']);notes=Path('release-melo-viet/RELEASE.md').read_text()
-local=json.loads((folder/'LOCAL-27-MODEL-QA.json').read_text())
+local=json.loads(next(folder.rglob('LOCAL-27-MODEL-QA.json')).read_text())
 assert local['status']=='passed' and len(local['results'])==54
 record=json.loads((folder/'ONLINE-QA-EXTENDED.json').read_text())
 passed=[r['locale'] for r in record.get('results',[]) if r['status']=='passed']
