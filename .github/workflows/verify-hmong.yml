@@ -13,14 +13,5 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-      - run: pip install torch==2.2.2+cpu --index-url https://download.pytorch.org/whl/cpu
-      - run: pip install transformers==4.46.3 'numpy<2' soundfile onnx==1.17.0 onnxruntime==1.23.2
+      - run: pip install huggingface-hub==0.36.2
       - run: python studio-hmong-qa/hmong.py
-      - name: Retain verified integration output
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          cd "$RUNNER_TEMP/hmong-qa"
-          tar -czf hmong-native-test.tar.gz model.onnx model HMONG-QA.json hmong-rpa.wav
-          gh release create studio-hmong-native-test --title 'Native Hmong Daw RPA integration test (not installer)' --draft --repo seotro95/seotro || true
-          gh release upload studio-hmong-native-test hmong-native-test.tar.gz HMONG-QA.json --clobber --repo seotro95/seotro
