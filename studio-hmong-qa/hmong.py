@@ -8,7 +8,18 @@ try:
  from transformers import VitsModel,AutoTokenizer
  root=Path(os.environ['RUNNER_TEMP'])/'hmong-qa';root.mkdir()
  repo='facebook/mms-tts-mww'
- info=HfApi().model_info(repo)
+ api=HfApi()
+ info=None
+ for term in ['hmong','mms-tts-hmn','mms-tts-mww','mms-tts-hnj']:
+  results=list(api.list_models(search=term,limit=30))
+  print('::notice title=Hmong candidate models::'+json.dumps([x.id for x in results]),flush=True)
+ for candidate in ['facebook/mms-tts-hmn','facebook/mms-tts-mww','facebook/mms-tts-hnj']:
+  try:
+   found=api.model_info(candidate)
+   print('::notice title=Hmong candidate metadata::'+json.dumps({'repo':candidate,'revision':found.sha,'card':dict(found.card_data or {})},ensure_ascii=False)[:5000],flush=True)
+   if candidate=='facebook/mms-tts-hmn':repo=candidate;info=found
+  except Exception as e:print('::notice title=Hmong candidate unavailable::'+candidate+' '+str(e).splitlines()[0],flush=True)
+ if info is None:raise ValueError('No verified native Hmong Daw checkpoint found')
  print('::notice title=Hmong source::'+json.dumps({'repo':repo,'revision':info.sha,'card':dict(info.card_data or {})},ensure_ascii=False)[:5000],flush=True)
  folder=Path(snapshot_download(repo,revision=info.sha,local_dir=root/'model',allow_patterns=['*.json','*.safetensors','*.bin','README.md']))
  model=VitsModel.from_pretrained(folder).eval();tokenizer=AutoTokenizer.from_pretrained(folder)
