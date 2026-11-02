@@ -64,6 +64,10 @@ jobs:
       DO_NOT_TRACK: '1'
     steps:
       - uses: actions/checkout@v4
+      - name: Create the owned CI installation root before restoring models
+        run: |
+          mkdir -p "$MELO_VIET_ROOT"
+          printf 'melo-viet-local-v1\n' > "$MELO_VIET_ROOT/.melo-viet-local-owner"
       - uses: actions/cache/restore@v4
         with:
           path: |
