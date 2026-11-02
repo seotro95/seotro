@@ -2,7 +2,7 @@ import hashlib,json,os,subprocess
 from pathlib import Path
 root=Path(os.environ['RELEASE_ASSETS'])
 expected={p.name:{'size':p.stat().st_size,'sha256':hashlib.file_digest(p.open('rb'),'sha256').hexdigest()} for p in root.iterdir() if p.is_file()}
-release=json.loads(subprocess.check_output(['gh','api','repos/seotro95/seotro/releases/tags/melo-viet-local-1.0.1']))
+release=json.loads(subprocess.check_output(['gh','api','repos/seotro95/seotro/releases/431104505']))
 assert release['tag_name']=='melo-viet-local-1.0.1'
 actual={a['name']:a for a in release['assets']}
 assert set(actual)==set(expected)
