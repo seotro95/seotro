@@ -10,6 +10,7 @@ import subprocess
 import threading
 import time
 import wave
+from timing import measure_encoded
 
 
 class Exports:
@@ -58,7 +59,10 @@ class Exports:
         temporary=folder/'voice.partial.mp3';listing=folder/'mp3-inputs.ffconcat';started=time.perf_counter();process=None
         try:
             if event.is_set():raise InterruptedError('Đã dừng xuất MP3.')
-            with self.studio.lock:legacy=self.studio.jobs[ident].get('legacy',False)
+            with self.studio.lock:
+                legacy=self.studio.jobs[ident].get('legacy',False)
+                timed=self.studio.jobs[ident].get('timing_mode')=='exact'
+            export_rate=24000 if timed else 44100
             files=([self.studio.root/'outputs'/(ident+'.wav')] if legacy else
                    sorted(p for p in folder.glob('part-*.wav') if re.fullmatch(r'part-\d{4}\.wav',p.name)))
             if not files:raise ValueError('Không tìm thấy WAV của bản thu.')
@@ -74,7 +78,7 @@ class Exports:
             self.update(ident,mp3_status='running',mp3_progress=0)
             command=['ffmpeg','-hide_banner','-loglevel','error','-nostdin','-y','-f','concat','-safe','0',
                 '-protocol_whitelist','file,pipe','-i',str(listing),'-map','0:a:0','-map_metadata','-1',
-                '-c:a','libmp3lame','-b:a','192k','-ar','44100','-ac','1','-threads','1',
+                '-c:a','libmp3lame','-b:a','192k','-ar',str(export_rate),'-ac','1','-threads','1',
                 '-progress','pipe:1','-nostats',str(temporary)]
             with (folder/'mp3-encode.log').open('w',encoding='utf-8') as log:
                 process=subprocess.Popen(command,stdout=subprocess.PIPE,stderr=log,text=True,encoding='utf-8',start_new_session=True)
@@ -95,13 +99,15 @@ class Exports:
             if code or not temporary.is_file() or temporary.stat().st_size<64:
                 detail=(folder/'mp3-encode.log').read_text(encoding='utf-8',errors='replace')[-600:]
                 raise ValueError('Không xuất được MP3; WAV vẫn còn. '+detail)
+            actual=measure_encoded(temporary,folder,export_rate,round(total*export_rate) if timed else None,event)
+            if event.is_set():raise InterruptedError('Đã dừng xuất MP3.')
             temporary.replace(folder/'voice.mp3')
-            info={'format':'MP3','codec':'libmp3lame','bitrate':192000,'sample_rate':44100,
+            info={'format':'MP3','codec':'libmp3lame','bitrate':192000,'sample_rate':export_rate,'actual_audio_seconds':actual['audio_seconds'],'duration_verified':True,'duration_report':actual,
                   'source_audio_seconds':total,'encoding_seconds':time.perf_counter()-started,
                   'created_at':datetime.now(timezone.utc).isoformat(),'source_parts':len(files)}
             (folder/'mp3-report.json').write_text(json.dumps(info,ensure_ascii=False,indent=2),encoding='utf-8')
             self.update(ident,mp3_status='done',mp3_progress=1,mp3_url='/download/'+ident+'/voice.mp3',
-                        mp3_encoding_seconds=info['encoding_seconds'],mp3_error=None)
+                        mp3_encoding_seconds=info['encoding_seconds'],mp3_audio_seconds=actual['audio_seconds'],mp3_duration_verified=True,mp3_error=None)
         except InterruptedError:
             with self.studio.lock:
                 if self.studio.jobs[ident].get('mp3_status')!='interrupted':self.update(ident,mp3_status='cancelled')

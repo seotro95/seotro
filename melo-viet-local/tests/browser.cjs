@@ -14,7 +14,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
  const page=await browser.newPage({acceptDownloads:true});const errors=[];page.on('pageerror',error=>errors.push(error.message));
  try{
   await page.goto('http://127.0.0.1:'+port);
-  await page.getByText('v1.3.0',{exact:true}).waitFor();
+  await page.getByText('v1.3.1',{exact:true}).waitFor();
   await page.locator('#language').selectOption('EN');
   await page.locator('#load').click();await page.waitForFunction(()=>document.querySelector('#voice').options.length===2&&!document.querySelector('#voice').disabled);
   assert.equal(await page.locator('#voice').evaluate(el=>el.multiple),false);
@@ -23,6 +23,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
   await page.locator('#favorites-only').uncheck();await page.locator('#gender-filter').selectOption('all');
   await page.locator('#style').selectOption('review');assert.equal(await page.locator('#speed').inputValue(),'1.1');
   const srt='1\r\n00:00:10,000 --> 00:00:12,000\r\nBonjour le monde.\r\n\r\n2\r\n00:00:15,000 --> 00:00:18,000\r\nBonsoir tout le monde.\r\n';
+  await page.locator('#target-duration').fill('00:18');
   await page.locator('#files').setInputFiles([
    {name:'First <script>.txt',mimeType:'text/plain',buffer:Buffer.from('Xin chào thế giới. Đây là một tệp TXT.')},
    {name:'SRT named as TXT.txt',mimeType:'text/plain',buffer:Buffer.concat([Buffer.from([255,254]),Buffer.from(srt,'utf16le')])}
@@ -44,8 +45,8 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
   const mp3=await mp3Promise;assert(mp3.suggestedFilename().endsWith('.mp3'));assert((await fs.stat(await mp3.path())).size>64);await page.unroute('**/api/jobs?*');
   const downloadPromise=page.waitForEvent('download');await page.locator('#player-downloads').getByRole('link',{name:'SRT',exact:true}).click();
   const download=await downloadPromise;const content=await fs.readFile(await download.path(),'utf8');
-  assert.match(content,/00:00:00,000 -->/);assert(!content.includes('00:00:10,000'));
-  await page.reload();await page.waitForFunction(()=>document.querySelectorAll('.state-done').length===4);
+  assert.match(content,/00:00:10,000 --> 00:00:12,000/);assert(content.includes('00:00:15,000 --> 00:00:18,000'));
+  await page.reload();await page.waitForFunction(()=>document.querySelectorAll('.state-done').length===4);assert.equal(await page.locator('#target-duration').inputValue(),'00:18');
   await page.locator('#engine').selectOption('edge');await page.locator('#load').click();
   await page.waitForFunction(()=>document.querySelector('#language').options.length===4);
   await page.locator('#language').selectOption('ru-RU');

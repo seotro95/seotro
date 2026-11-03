@@ -61,13 +61,12 @@ def parse_document(text, name='Lời đọc.txt', requested='auto'):
             body.append(lines[i]); i += 1
         spoken = re.sub(r'(?i)<br\s*/?>', '\n', '\n'.join(body))
         spoken = html.unescape(re.sub(r'<[^>]*>|\{\\[^}]*\}', '', spoken)).strip()
-        if spoken:
-            cues.append({'start_ms': start, 'end_ms': end, 'text': spoken})
-    if not cues:
+        cues.append({'start_ms': start, 'end_ms': end, 'text': spoken})
+    if not cues or not any(c['text'] for c in cues):
         raise ValueError('SRT không có lời đọc.')
-    warnings = ['Mốc SRT xuất được tạo lại theo âm thanh thực; không ép lời vào mốc nhập và không căn từng từ.']
+    warnings = ['Chế độ Giữ thời lượng TXT/SRT sẽ giữ mốc từng câu và mốc cuối; câu quá dài sẽ được báo lỗi, không cắt lời.']
     if any(a['end_ms'] > b['start_ms'] for a, b in zip(cues, cues[1:])):
-        warnings.append('SRT nhập có mốc chồng nhau; các câu được đọc theo thứ tự.')
+        warnings.append('SRT có mốc chồng nhau; cần sửa mốc trước khi dùng chế độ giữ thời lượng.')
     return {'format': 'srt', 'text': '\n'.join(c['text'] for c in cues), 'cues': cues, 'warnings': warnings}
 
 

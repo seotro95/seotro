@@ -87,7 +87,7 @@ if [[ -d "$LOCAL_ROOT/app" ]]; then
   cp -a "$LOCAL_ROOT/app" "$BACKUP_ROOT/app"
 fi
 mkdir -p "$LOCAL_ROOT/app"
-for file in app.py worker.py documents.py speaking.py audio_exports.py voice_catalog.py hmong_backend.py hmong_catalog.json pack_install.py local_models.py multi_catalog.json multilingual_backend.py online_backend.py fast_backend.py fast_catalog.json samples.json index.html app.js style.css; do
+for file in app.py worker.py documents.py speaking.py audio_exports.py timing.py voice_catalog.py hmong_backend.py hmong_catalog.json pack_install.py local_models.py multi_catalog.json multilingual_backend.py online_backend.py fast_backend.py fast_catalog.json samples.json index.html app.js style.css; do
   install -m 0644 "$SOURCE_ROOT/$file" "$LOCAL_ROOT/app/$file"
 done
 # Full edition carries model weights. Verify before copying; preserve all old readers/recordings.

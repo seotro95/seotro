@@ -160,14 +160,15 @@ def test_downloaded_bundle_and_range_requests_have_exact_audio_and_text(studio):
     finally:server.shutdown();server.server_close();thread.join(2)
 
 
-def test_exported_srt_uses_actual_duration_instead_of_input_deadlines(studio):
+def test_exported_srt_preserves_input_deadlines_by_default(studio):
     source='1\n00:00:30,000 --> 00:00:35,000\nBonjour.\n\n2\n00:01:00,000 --> 00:01:05,000\nBonsoir.\n'
     result=await_job(studio,studio.start(body(text=source,name='input.srt'))['id'])
     assert result['status']=='done'
     file=studio.root/'outputs'/result['id']/'subtitles.srt'
     cues=parse_document(file.read_text(),'output.srt')['cues']
-    assert cues[0]['start_ms']==0 and cues[0]['end_ms']==100
-    assert cues[1]['start_ms']==200
+    assert cues[0]['start_ms']==30000 and cues[0]['end_ms']==35000
+    assert cues[1]['start_ms']==60000 and cues[1]['end_ms']==65000
+    assert result['audio_seconds']==65 and result['duration_verified'] and result['sync_ok']
 
 
 def test_bad_cache_is_regenerated_instead_of_exporting_invalid_audio(studio):

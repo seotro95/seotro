@@ -23,10 +23,11 @@ from urllib.parse import urlsplit, parse_qs
 
 from audio_exports import Exports
 from speaking import speech_plan
+from timing import timing_plan, TimedAssembler, verify_parts
 from voice_catalog import ONLINE_LOCALES,vietnamese_presets
 from documents import MAX_CHARS, STYLES, parse_document, plan_document, Assembler, convert_audio
 
-VERSION = '1.3.0'
+VERSION = '1.3.1'
 LABELS = {'VI':'Việt · VieNeu Turbo', 'EN':'Anh · MeloTTS', 'FR':'Pháp · MeloTTS', 'JP':'Nhật · MeloTTS',
           'KR':'Hàn · MeloTTS', 'ES':'Tây Ban Nha · MeloTTS', 'ZH':'Trung · MeloTTS'}
 FAST_LABELS = {'VI':'Việt','EN':'Anh','FR':'Pháp','ES':'Tây Ban Nha','RU':'Nga','DE':'Đức','IT':'Ý',
@@ -74,7 +75,12 @@ def wave_seconds(path):
     with wave.open(str(path), 'rb') as audio:
         if audio.getnchannels() != 1 or audio.getsampwidth() != 2 or audio.getnframes() <= 0:
             raise ValueError('WAV không hợp lệ.')
-        return audio.getnframes() / audio.getframerate()
+        count=0;has_signal=False
+        while block:=audio.readframes(65536):
+            count+=len(block)//2;has_signal=has_signal or any(block)
+        if count!=audio.getnframes() or not has_signal:
+            raise ValueError('WAV thiếu mẫu hoặc chỉ có im lặng; không bỏ lời để ghép tiếp.')
+        return count / audio.getframerate()
 
 
 class Reader:
@@ -217,6 +223,8 @@ class Studio:
         normalized = {'op':op, 'engine':engine, 'language':language, 'threads':threads, 'local_provider':provider, 'refresh':bool(body.get('refresh',False)), 'chunk_workers':workers}
         if op == 'render':
             document = parse_document(body.get('text'), body.get('name', ''), body.get('format', 'auto'))
+            mode=body.get('timing_mode','auto');target=body.get('target_seconds')
+            resolved=timing_plan(document,mode,target)
             speed = body.get('speed', 1.0); style = body.get('style', 'neutral'); size = body.get('chunk_size', 480)
             if type(speed) not in {int, float} or not math.isfinite(speed) or not .5 <= speed <= 2:
                 raise ValueError('Tốc độ đọc cần từ 0,5× đến 2×.')
@@ -228,7 +236,7 @@ class Studio:
             expressive=body.get('expressive',False);emphasis=body.get('emphasis',False)
             if type(expressive) is not bool or type(emphasis) is not bool:raise ValueError('Kiểm tra tùy chọn nhấn nhá.')
             speech_plan(document,size,style,expressive,emphasis)
-            normalized.update(expressive=expressive,emphasis=emphasis,text=body['text'], voice=voice, speed=speed, style=style, chunk_size=size,
+            normalized.update(timing_mode=mode,target_seconds=target,expressive=expressive,emphasis=emphasis,text=body['text'], voice=voice, speed=speed, style=style, chunk_size=size,
                               format=document['format'], name=str(body.get('name') or 'Lời đọc')[:200],
                               use_cache=bool(body.get('use_cache', True)))
         return normalized
@@ -253,7 +261,8 @@ class Studio:
                     'voice':body.get('voice',''), 'title':body.get('name','Chuẩn bị giọng'),
                     'created_at':datetime.now(timezone.utc).isoformat(), 'characters':len(body.get('text','')),
                     'completed_chunks':0, 'total_chunks':0, 'cache_hits':0, 'progress':0, 'stage':'queued',
-                    'speed':body.get('speed',1), 'style':body.get('style','neutral')}
+                    'speed':body.get('speed',1), 'style':body.get('style','neutral'),
+                    'timing_mode':body.get('timing_mode','auto'), 'target_seconds':body.get('target_seconds')}
                 self.jobs[ident] = job; self.job = job; self.events[ident] = threading.Event(); self.persist(job)
                 self.executor.submit(self.work, ident, body)
                 result.append(self.snapshot(job))
@@ -300,6 +309,7 @@ class Studio:
                 return
             document = parse_document(body['text'], body['name'], body['format'])
             document,units=speech_plan(document,body['chunk_size'],body['style'],body.get('expressive',False),body.get('emphasis',False))
+            plan=timing_plan(document,body.get('timing_mode','auto'),body.get('target_seconds'))
             chunks=[u['text'] for u in units]
             total_characters=sum(len(t) for t in chunks)
             if body['language']=='HMN':document['warnings'].append('Hmong RPA thử nghiệm: một giọng cộng đồng, chưa xác minh phương ngữ Hmong Trắng hoặc giới tính. Nghe thử trước khi làm bản dài.')
@@ -346,20 +356,24 @@ class Studio:
                     if item['hit']:cache_hits+=1
                     if assembler is None:
                         with wave.open(str(source),'rb') as native:rate=native.getframerate()
-                        assembler=Assembler(folder,sample_rate=rate)
+                        assembler=TimedAssembler(folder,plan,event,progress=lambda done,total:self.update(ident,progress=.95+.04*done/total,stage='timing')) if plan else Assembler(folder,sample_rate=rate)
                     unit=units[index]
                     prepared=folder/'prepared.wav';convert_audio(source,prepared,max(.5,min(2,body['speed']*unit['speed_scale'])),sample_rate=assembler.rate,gain_db=unit['gain_db'])
                     if event.is_set():raise InterruptedError('Đã dừng.')
                     pause=unit['pause_ms']
-                    assembler.append(prepared,item['text'],pause)
+                    if plan:assembler.append(prepared,item['text'],pause,unit.get('cue'))
+                    else:assembler.append(prepared,item['text'],pause)
                     if index==0:shutil.copyfile(prepared,folder/'preview.wav')
                     spoken_chars+=len(item['text']);index+=1
                     elapsed=time.perf_counter()-started
                     self.update(ident,completed_chunks=index,progress=min(.95,.95*spoken_chars/total_characters),stage='synthesizing',cache_hits=cache_hits,parallel_chunks=lanes,
                         elapsed_seconds=elapsed,eta_seconds=elapsed/index*(len(chunks)-index),preview_url='/download/'+ident+'/preview.wav')
                     item['raw'].unlink(missing_ok=True)
-            self.update(ident,progress=.97,stage='assembling')
+            self.update(ident,progress=.95 if plan else .97,stage='timing' if plan else 'assembling')
             result = assembler.finish(); assembler = None
+            if not plan:
+                measured=verify_parts(folder,result['parts'],result['sample_rate'])
+                result.update(duration_verified=True,duration_report=measured)
             if event.is_set():
                 raise InterruptedError('Đã dừng.')
             elapsed = time.perf_counter()-started
@@ -367,11 +381,11 @@ class Studio:
             report = {**result, 'id':ident, 'version':VERSION, 'language':body['language'], 'voice':body['voice'],
                 'engine':('Hmong RPA Pilot VITS CPU FP32 · thử nghiệm' if backend_for(body)=='hmong' else 'Supertonic 3 CPU INT8 · 5 bước' if backend_for(body)=='multi' else 'Piper ONNX FP32 CPU' if backend_for(body)=='piper' else 'Microsoft Edge trực tuyến' if body['engine']=='edge' else ('VieNeu Turbo FP32' if body['language']=='VI' else 'MeloTTS CPU')),
                 'title':body['name'], 'threads':body['threads'], 'local_provider':body['local_provider'], 'parallel_chunks':lanes, 'available_cpu_count':available_cpus(),
-                'model_load_seconds':total_load, 'processing_seconds':elapsed, 'realtime_multiplier':result['audio_seconds']/elapsed,
-                'target_30x_verified':False, 'measurement':'Độ dài WAV (có khoảng nghỉ) / thời gian xử lý; không xác minh 30× lời đọc thực.',
+                'model_load_seconds':total_load, 'processing_seconds':elapsed, 'realtime_multiplier':(raw_seconds if plan else result['audio_seconds'])/elapsed,
+                'target_30x_verified':False, 'measurement':('Âm thanh gốc trước khi căn / thời gian xử lý; không tính khoảng lặng đích để tăng số đo tốc độ.' if plan else 'Độ dài WAV (có khoảng nghỉ) / thời gian xử lý; không xác minh 30× lời đọc thực.'),
                 'cache_hits':cache_hits, 'total_chunks':len(chunks), 'fresh_inference':cache_hits==0,
                 'source_audio_seconds':raw_seconds, 'speed':body['speed'], 'style':body['style'], 'expressive':body.get('expressive',False),'emphasis':body.get('emphasis',False), 'warnings':document['warnings'],
-                'subtitle_alignment':'Ranh giới từng đoạn tổng hợp, không căn từng từ.', 'downloads':downloads}
+                'subtitle_alignment':('Giữ mốc SRT / thời lượng TXT; đo lại từng phần WAV thực tế, không căn từng từ.' if plan else 'Ranh giới từng đoạn tổng hợp, không căn từng từ.'), 'downloads':downloads}
             atomic_json(folder / 'report.json', report)
             self.update(ident, **report, status='done', stage='done', progress=1, eta_seconds=0,
                 audio_url=downloads[0]['url'], bundle_url='/download/'+ident+'/all-files.zip',
@@ -561,9 +575,10 @@ def handler(studio):
                     return self.reply(200,studio.settings(body.get('parallelism')))
                 if self.path=='/api/inspect':
                     document = parse_document(body.get('text'),body.get('name',''),body.get('format','auto'))
+                    plan=timing_plan(document,body.get('timing_mode','auto'),body.get('target_seconds'))
                     document,units=speech_plan(document,body.get('chunk_size',480),body.get('style','neutral'),bool(body.get('expressive',False)),bool(body.get('emphasis',False)))
                     chunks=[u['text'] for u in units]
-                    return self.reply(200,{'format':document['format'], 'characters':len(document['text']),
+                    return self.reply(200,{'format':document['format'], 'timing_mode':'exact' if plan else 'natural', 'target_seconds':plan['target_seconds'] if plan else None, 'characters':len(document['text']),
                         'chunks':len(chunks), 'cues':len(document['cues']), 'preview':document['text'][:500],
                         'warnings':document['warnings'], 'spoken_text':document['text'] if body.get('include_text') else None})
                 self.reply(404,{'error':'Không tìm thấy.'})

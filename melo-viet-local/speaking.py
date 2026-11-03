@@ -37,7 +37,7 @@ def speech_plan(document,limit=480,style='neutral',expressive=False,emphasis=Fal
     if style not in STYLES:raise ValueError('Kiểu nhịp đọc không hợp lệ.')
     doc=deepcopy(document);sources=[c['text'] for c in doc['cues']] if doc['format']=='srt' else [doc['text']]
     units=[];plain=[];base=STYLES[style]['pause_ms']
-    for source in sources:
+    for cue_index,source in enumerate(sources):
         spans=marked_parts(source,emphasis);plain.append(''.join(text for text,_ in spans))
         source_start=len(units);pending=''
         for text,is_emphasis in spans:
@@ -48,6 +48,8 @@ def speech_plan(document,limit=480,style='neutral',expressive=False,emphasis=Fal
                     continue
                 units.append({'text':pending+piece,'emphasis':is_emphasis});pending=''
         if pending and len(units)>source_start:units[-1]['text']+=pending
+        if doc['format']=='srt':
+            for unit in units[source_start:]:unit['cue']=cue_index
     if not units:raise ValueError('Nội dung không có lời đọc.')
     for index,unit in enumerate(units):
         piece=unit['text'];pause=base
