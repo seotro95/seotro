@@ -313,6 +313,10 @@ def render(job, synthesize=None):
         for cue in timed:
             cue['start'] *= fit_report['timing_scale']
             cue['end'] *= fit_report['timing_scale']
+        # Keep the exported SRT's final clock equal to the TXT voice duration,
+        # including any deliberate trailing silence, so re-import stays in sync.
+        if timed:
+            timed[-1]['end'] = expected
         writer.frames = pcm_frames(assembly)
     if (work / 'cancel.flag').exists():
         raise InterruptedError('Tác vụ đã dừng.')

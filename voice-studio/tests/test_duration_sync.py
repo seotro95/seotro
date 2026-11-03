@@ -229,3 +229,15 @@ def test_real_windows_speech_exports_match_duration(tmp_path, monkeypatch):
         'engine': 'Windows SAPI', 'speaker': voice['speaker'],
         'language': voice['languages'][0], 'text': text, 'reports': reports,
     }, ensure_ascii=False, indent=2), encoding='utf-8')
+
+
+def test_txt_exported_srt_round_trip_keeps_the_final_target(tmp_path, monkeypatch):
+    worker = local_worker(tmp_path, monkeypatch)
+    synth = lambda text, path: tone(path, .6)
+    worker.render(job('original', target_seconds=10), synth)
+    text = (tmp_path/'audio/original.srt').read_text(encoding='utf-8')
+    cues = parse_srt(text)
+    assert cues[-1]['end'] == 10
+    assert [c['text'] for c in cues] == ['First sentence.', 'Last sentence.']
+    worker.render(job('roundtrip', text, input_format='srt'), synth)
+    assert pcm_frames(tmp_path/'audio/original.wav') == pcm_frames(tmp_path/'audio/roundtrip.wav') == 240000
