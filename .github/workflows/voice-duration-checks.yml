@@ -20,7 +20,6 @@ jobs:
     timeout-minutes: 20
     env:
       PYTHONUTF8: '1'
-      VOICE_STUDIO_SPEECH_PROOF: ${{ runner.temp }}/voice-duration-proof
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -46,6 +45,8 @@ jobs:
           python -c "import glob,subprocess;[subprocess.run(['node','--check',p],check=True) for p in glob.glob('static/*.js')]"
           node --test tests/test_duration_ui.cjs
       - name: Run regression tests with real FFmpeg and deterministic synthesis
+        env:
+          VOICE_STUDIO_SPEECH_PROOF: ${{ runner.temp }}/voice-duration-proof
         working-directory: voice-studio
         run: python -m pytest -q -ra --junitxml=duration-regression.xml
       - name: Package source from the tested commit
