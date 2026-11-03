@@ -70,15 +70,17 @@ def test_txt_and_strict_srt_have_identical_measured_duration(tmp_path, monkeypat
 
 @pytest.mark.parametrize('extension', ['wav', 'mp3'])
 @pytest.mark.parametrize('kind', ['txt', 'srt'])
-def test_actual_export_decodes_to_exact_target(tmp_path, monkeypatch, extension, kind):
+@pytest.mark.parametrize('seconds', [2.345, 1.001])
+def test_actual_export_decodes_to_exact_target(tmp_path, monkeypatch, extension, kind, seconds):
     worker = local_worker(tmp_path, monkeypatch)
-    text = 'Hello.' if kind == 'txt' else '1\n00:00:00,100 --> 00:00:02,345\nHello.'
+    from subtitles import timestamp
+    text = 'Hello.' if kind == 'txt' else f'1\n00:00:00,000 --> {timestamp(seconds)}\nHello.'
     payload = job('export', text, format=extension, input_format=kind)
     if kind == 'txt':
-        payload['target_seconds'] = 2.345
-    worker.render(payload, lambda text, path: tone(path, 1))
-    report = verify_export(tmp_path/f'audio/export.{extension}', tmp_path, 2.345)
-    assert report['sample_frames'] == 56280 and report['verified']
+        payload['target_seconds'] = seconds
+    worker.render(payload, lambda text, path: tone(path, .75))
+    report = verify_export(tmp_path/f'audio/export.{extension}', tmp_path, seconds)
+    assert report['sample_frames'] == round(seconds*24000) and report['verified']
     assert report['measurement'] == 'decoded_pcm'
     assert not list(tmp_path.glob('verify-*.wav'))
 

@@ -109,7 +109,7 @@ class PCMWriter:
     """Write small blocks, never allocate a multi-hour waveform in RAM."""
     def __init__(self, path, rate=24000, max_seconds=MAX_SECONDS, strict=False):
         self.rate = rate
-        self.limit = int(rate * max_seconds)
+        self.limit = round(rate * max_seconds)
         self.frames = 0
         self.strict = strict
         self.file = wave.open(str(path), 'wb')
