@@ -195,3 +195,37 @@ def test_download_conversion_also_verifies_decoded_duration(studio):
     response = client.get(f'/api/jobs/{ident}/export.mp3')
     assert response.status_code == 200, response.text
     assert verify_export(root/f'audio/{ident}.mp3', root/'parts', 2.345)['error_frames'] == 0
+
+
+def test_real_windows_speech_exports_match_duration(tmp_path, monkeypatch):
+    """Exercise the production SAPI engine when the Windows runner has a voice."""
+    import os
+    from pathlib import Path
+    if os.name != 'nt':
+        pytest.skip('Real Windows SAPI speech requires Windows')
+    from system_voices import installed_voices
+    installed_voices.cache_clear()
+    voice = next((v for v in installed_voices() if v['languages'][0].startswith('en')), None)
+    if voice is None:
+        pytest.skip('This Windows host has no installed English SAPI voice')
+    root = Path(os.environ.get('VOICE_STUDIO_SPEECH_PROOF', str(tmp_path)))
+    root.mkdir(parents=True, exist_ok=True)
+    worker = local_worker(root, monkeypatch)
+    text = 'Hello. Every spoken word stays in this recording.'
+    payload = {'speaker': voice['speaker'], 'language': voice['languages'][0],
+               'voice_id': voice['id'], 'max_minutes': 1}
+    worker.render(job('real-txt', text, target_seconds=10, **payload))
+    srt = f'1\n00:00:00,500 --> 00:00:10,000\n{text}'
+    worker.render(job('real-srt', srt, input_format='srt', format='mp3', **payload))
+    reports = {}
+    for ident, extension in [('real-txt', 'wav'), ('real-srt', 'mp3')]:
+        report = verify_export(root/f'audio/{ident}.{extension}', root, 10)
+        assert report['sample_frames'] == 240000
+        reports[ident] = report
+    with wave.open(str(root/'audio/real-txt.wav')) as audio:
+        samples = np.frombuffer(audio.readframes(audio.getnframes()), '<i2')
+    assert samples.any() and samples.std() > 10
+    (root/'proof.json').write_text(json.dumps({
+        'engine': 'Windows SAPI', 'speaker': voice['speaker'],
+        'language': voice['languages'][0], 'text': text, 'reports': reports,
+    }, ensure_ascii=False, indent=2), encoding='utf-8')

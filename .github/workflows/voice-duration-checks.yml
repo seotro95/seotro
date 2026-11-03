@@ -20,6 +20,7 @@ jobs:
     timeout-minutes: 20
     env:
       PYTHONUTF8: '1'
+      VOICE_STUDIO_SPEECH_PROOF: ${{ runner.temp }}/voice-duration-proof
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -56,4 +57,12 @@ jobs:
           path: |
             Voice-Studio-3.6.1-source.zip
             voice-studio/duration-regression.xml
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: runner.os == 'Windows' && success()
+        with:
+          name: Voice-Studio-3.6.1-real-Windows-speech
+          path: |
+            ${{ runner.temp }}/voice-duration-proof/audio/real-*
+            ${{ runner.temp }}/voice-duration-proof/proof.json
           retention-days: 14
