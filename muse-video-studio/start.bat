@@ -13,8 +13,8 @@ if exist dist\index.html goto launch
 call npm run build
 if errorlevel 1 goto failed
 :launch
-echo Open http://127.0.0.1:8788 after the server is ready. Ctrl+C to stop.
-call npm start
+echo KEEP THIS WINDOW OPEN while using the tool. The browser will open automatically.
+node --use-env-proxy server.mjs --open
 if errorlevel 1 goto failed
 exit /b 0
 :missingnode

@@ -1,9 +1,12 @@
 import http from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { openBrowser } from './browser.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
+if (existsSync(path.join(ROOT, '.env'))) process.loadEnvFile(path.join(ROOT, '.env'));
 const dev = process.argv.includes('--dev');
 const port = Number(process.env.PORT || 8788);
 const host = '127.0.0.1';
@@ -111,6 +114,15 @@ const server = http.createServer(async (req, res) => {
   } catch { json(res, 404, { error: 'Không tìm thấy tệp. Chạy npm run build trước npm start.' }); }
 });
 server.requestTimeout = 12 * 60 * 1000;
-server.listen(port, host, () => console.log(`Muse Studio: http://${host}:${server.address().port} · ${dev ? 'development' : 'production'} · Muse adapter ${process.env.MUSE_ADAPTER_URL ? 'configured' : 'not configured'}`));
-server.on('error', error => { console.error(error.message); process.exitCode = 1; });
+server.listen(port, host, () => {
+  const url = `http://${host}:${server.address().port}`;
+  console.log(`Muse Studio: ${url} · ${dev ? 'development' : 'production'}`);
+  console.log('Giu cua so nay mo khi su dung. Ctrl+C chi dung khi muon tat tool.');
+  if (!process.env.MUSE_ADAPTER_URL) console.log('Chua ket noi nguon tao video AI. Giao dien van hoat dong; xem muc Ket noi trong tool.');
+  if (process.argv.includes('--open')) openBrowser(url);
+});
+server.on('error', error => {
+  console.error(error.code === 'EADDRINUSE' ? `Cong ${port} dang duoc su dung. Neu tool da mo, truy cap http://${host}:${port}; neu chua, dat PORT khac trong .env.` : error.message);
+  process.exitCode = 1;
+});
 for (const name of ['SIGINT', 'SIGTERM']) process.on(name, () => { server.close(); vite?.close(); process.exit(0); });

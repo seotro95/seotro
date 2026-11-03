@@ -7,4 +7,4 @@ if ! command -v node >/dev/null || ! node -e "if(Number(process.versions.node.sp
 fi
 if [[ ! -f node_modules/react/package.json ]]; then npm ci; fi
 if [[ ! -f dist/index.html ]]; then npm run build; fi
-exec npm start
+exec node --use-env-proxy server.mjs --open

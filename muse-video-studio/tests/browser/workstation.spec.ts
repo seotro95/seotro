@@ -1,8 +1,13 @@
 import { test, expect } from '@playwright/test';
+import type { Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 const video = (await readFile(new URL('../../public/demo.mp4', import.meta.url))).toString('base64');
 const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aO1sAAAAASUVORK5CYII=', 'base64');
 test.beforeEach(async ({ page }) => { await page.goto('/'); });
+async function configureAdapter(page: Page) {
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, busy: false, credit: null, gpu: null } }));
+  await page.reload();
+}
 
 test('matches 10-slot layout on desktop and remains within mobile viewport', async ({ page }) => {
   await page.setViewportSize({ width: 1433, height: 1000 });
@@ -50,6 +55,7 @@ test('global image sync, per-scene override and manual reapply', async ({ page }
 });
 
 test('Muse contract sends accountId, settings, R2V and modifier; video plays and downloads', async ({ page }) => {
+  await configureAdapter(page);
   let payload: Record<string, any> = {};
   await page.route('**/api/video', async route => { payload = route.request().postDataJSON(); await route.fulfill({ json: { base64: video, mimeType: 'video/mp4' } }); });
   const chooser = page.waitForEvent('filechooser');
@@ -76,6 +82,7 @@ test('Muse contract sends accountId, settings, R2V and modifier; video plays and
 });
 
 test('batch respects disabled accounts, shows failures, and never overlaps render requests', async ({ page }) => {
+  await configureAdapter(page);
   const calls: number[] = []; let active = 0; let peak = 0;
   await page.route('**/api/video', async route => {
     const id = route.request().postDataJSON().accountId; calls.push(id); active++; peak = Math.max(peak, active);
@@ -96,7 +103,7 @@ test('batch respects disabled accounts, shows failures, and never overlaps rende
 
 test('demo batch can be stopped and resumed; test clips are labelled', async ({ page }) => {
   await page.getByRole('button', { name: 'Chẩn đoán API', exact: true }).click();
-  await page.getByLabel('Kết nối tạo video').selectOption('demo');
+  await page.getByLabel('Kết nối tạo video', { exact: true }).selectOption('demo');
   await page.getByRole('button', { name: 'Đóng', exact: true }).last().click();
   await page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' }).click();
   await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
@@ -109,15 +116,25 @@ test('demo batch can be stopped and resumed; test clips are labelled', async ({ 
   await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '10', { timeout: 15000 });
 });
 
-test('missing Muse integration produces a real setup error instead of a fake success', async ({ page }) => {
-  await page.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này' }).click();
-  await expect(page.getByTestId('scene-1').getByRole('button', { name: 'Thử lại cảnh này' })).toBeVisible();
+test('missing integration is explained before render and sends no doomed AI requests', async ({ page }) => {
+  const requests: string[] = [];
+  page.on('request', request => { if (/\/api\/(video|text)$/.test(request.url())) requests.push(request.url()); });
+  await expect(page.getByRole('region', { name: 'Cần kết nối tạo video' })).toContainText('Chưa có kết nối tạo video AI');
+  await expect(page.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này' })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' })).toBeDisabled();
+  await expect(page.getByTestId('scene-1').getByRole('button', { name: 'AI Enhance' })).toBeDisabled();
   await expect(page.locator('video')).toHaveCount(0);
-  await page.getByTestId('scene-1').getByText('Mã lỗi gốc').click();
-  await expect(page.getByTestId('scene-1').locator('pre')).toContainText('MUSE_NOT_CONFIGURED');
+  await page.getByRole('button', { name: 'Xem cách kết nối' }).click();
+  await expect(page.getByRole('heading', { name: 'Cần gì để tạo video thật?' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Mở trang tài khoản Muse.ai' })).toHaveAttribute('href', 'https://muse.ai/');
+  await expect(page.locator('#provider-mode option')).toHaveCount(2);
+  expect(await page.locator('#provider-mode option').evaluateAll(options => options.map(option => (option as HTMLOptionElement).value))).toEqual(['muse', 'demo']);
+  await expect(page.getByRole('button', { name: 'Kiểm tra render thực tế' })).toBeDisabled();
+  expect(requests).toEqual([]);
 });
 
 test('Enhance uses the scene account; diagnostic never renders without explicit consent', async ({ page }) => {
+  await configureAdapter(page);
   let textPayload: any; let renders = 0; let videoPayload: any;
   await page.route('**/api/text', async route => { textPayload = route.request().postDataJSON(); await route.fulfill({ json: { text: 'Cinematic tracking shot through an ancient temple at sunrise.' } }); });
   await page.route('**/api/video', async route => { renders++; videoPayload = route.request().postDataJSON(); await route.fulfill({ json: { base64: video, mimeType: 'video/mp4' } }); });
@@ -134,4 +151,15 @@ test('Enhance uses the scene account; diagnostic never renders without explicit 
   expect(renders).toBe(1);
   expect(videoPayload.duration).toBe(4); expect(videoPayload.resolution).toBe('360p');
   await expect(page.locator('.diagnostic-result')).toContainText('API không cung cấp');
+});
+
+test('refreshing a newly configured adapter enables rendering without losing the script', async ({ page }) => {
+  await page.getByLabel('Kịch bản cảnh 1', { exact: true }).fill('Keep this script while connecting.');
+  await page.getByRole('button', { name: 'Xem cách kết nối' }).click();
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, busy: false, credit: null, gpu: null } }));
+  await page.getByRole('button', { name: 'Đọc cấu hình', exact: true }).click();
+  await expect(page.locator('.setup-help')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Đóng', exact: true }).last().click();
+  await expect(page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' })).toBeEnabled();
+  await expect(page.getByLabel('Kịch bản cảnh 1', { exact: true })).toHaveValue('Keep this script while connecting.');
 });

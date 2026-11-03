@@ -1,8 +1,8 @@
-export const FLOW_MODELS = ['Omni 1.1 Flash', 'Veo 3.1 - Lite', 'Veo 3.1 - Fast'] as const;
-export type Model = typeof FLOW_MODELS[number];
-export type Mode = 'flow' | 'muse' | 'demo';
+export const MUSE_MODELS = ['Omni 1.1 Flash', 'Veo 3.1 - Lite', 'Veo 3.1 - Fast'] as const;
+export type Model = typeof MUSE_MODELS[number];
+export type Mode = 'muse' | 'demo';
 export type Status = 'ready' | 'running' | 'done' | 'error' | 'cancelled';
-export type Reference = { id: string; name: string; url: string; mediaId?: string; base64?: string; mimeType?: string };
+export type Reference = { id: string; name: string; url: string; base64?: string; mimeType?: string };
 export type Settings = { model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: '360p' | '720p'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
 export type VideoResult = { base64: string; mimeType: string; url: string; demo: boolean };
 export type Scene = { id: number; email: string; enabled: boolean; prompt: string; reference: Reference | null; status: Status; error?: string; video?: VideoResult; enhancing?: boolean };
@@ -31,7 +31,7 @@ export const RUNWAY = [
   'Người mẫu đứng giữa sân khấu trong ánh đèn cuối buổi, toàn cảnh runway sang trọng.'
 ];
 export const DEFAULT_SETTINGS: Settings = { model: 'Omni 1.1 Flash', aspectRatio: '16:9', duration: 4, resolution: '360p', autoSync: true, r2v: true, modifier: '', mode: 'muse' };
-export const createScenes = (): Scene[] => ADVENTURE.map((prompt, i) => ({ id: i + 1, email: `flow_node_${String(i + 1).padStart(2, '0')}@muse.local`, enabled: true, prompt, reference: null, status: 'ready' }));
+export const createScenes = (): Scene[] => ADVENTURE.map((prompt, i) => ({ id: i + 1, email: `muse_slot_${String(i + 1).padStart(2, '0')}@muse.local`, enabled: true, prompt, reference: null, status: 'ready' }));
 
 // Subtitle blocks become scenes; TXT uses paragraphs, or one non-empty line per scene.
 export function parseScript(text: string): string[] {
@@ -66,7 +66,6 @@ export function errorInfo(error: unknown): { raw: string; hint: string } {
   else if (/safety|filter|blocked|policy|rai|responsible/i.test(raw)) hint = 'Nội dung hoặc ảnh có thể bị bộ lọc từ chối. Chỉnh kịch bản, dùng ảnh phù hợp rồi thử lại.';
   else if (/overload|unavailable|503|502|gpu/i.test(raw)) hint = 'Dịch vụ đang bận hoặc tạm ngừng. Đợi một lúc rồi tạo lại cảnh lỗi.';
   else if (/401|403|key|permission|auth/i.test(raw)) hint = 'Kiểm tra quyền truy cập, API key và mô hình được cấp cho tài khoản.';
-  else if (/FLOW_UNAVAILABLE|SDK/i.test(raw)) hint = 'Chưa có Flow SDK trong trang này. Chọn kết nối Muse AI hoặc chế độ kiểm thử ở Chẩn đoán API.';
   else if (/MUSE_NOT_CONFIGURED/i.test(raw)) hint = 'Chưa kết nối dịch vụ Muse AI. Cần cấu hình API hoặc adapter chính thức của dịch vụ Muse bạn đang dùng.';
   else if (/MODEL_UNSUPPORTED/i.test(raw)) hint = 'Mô hình chưa được tài khoản Muse hỗ trợ. Kiểm tra quyền truy cập với nhà cung cấp.';
   else if (/abort|cancel/i.test(raw)) hint = 'Đã dừng nhận kết quả. Nhà cung cấp vẫn có thể tính phí cho yêu cầu đã gửi.';
@@ -80,18 +79,18 @@ export function restoreWorkspace(raw: string | null): { scenes: Scene[]; setting
     if (data.version !== 1 || !Array.isArray(data.scenes) || data.scenes.length !== 10) return fallback;
     fallback.scenes = fallback.scenes.map((scene, i) => ({ ...scene,
       prompt: typeof data.scenes[i]?.prompt === 'string' ? data.scenes[i].prompt.slice(0, 8000) : scene.prompt,
-      email: typeof data.scenes[i]?.email === 'string' ? data.scenes[i].email.slice(0, 120) : scene.email,
+      email: typeof data.scenes[i]?.email === 'string' && !/@muse\.local$/i.test(data.scenes[i].email) ? data.scenes[i].email.slice(0, 120) : scene.email,
       enabled: data.scenes[i]?.enabled !== false
     }));
     const s = data.settings ?? {};
     fallback.settings = normalizeSettings({ ...DEFAULT_SETTINGS,
-      model: FLOW_MODELS.includes(s.model) ? s.model : DEFAULT_SETTINGS.model,
+      model: MUSE_MODELS.includes(s.model) ? s.model : DEFAULT_SETTINGS.model,
       aspectRatio: s.aspectRatio === '9:16' ? '9:16' : '16:9',
       duration: [4, 6, 8, 10].includes(s.duration) ? s.duration : 4,
       resolution: s.resolution === '720p' ? '720p' : '360p',
       autoSync: s.autoSync !== false, r2v: s.r2v !== false,
       modifier: typeof s.modifier === 'string' ? s.modifier.slice(0, 2000) : '',
-      mode: ['flow', 'muse', 'demo'].includes(s.mode) ? s.mode : 'muse'
+      mode: ['muse', 'demo'].includes(s.mode) ? s.mode : 'muse'
     });
     return fallback;
   } catch { return fallback; }

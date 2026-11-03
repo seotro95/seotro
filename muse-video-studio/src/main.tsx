@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Play, Download, FileText, Users, ShieldPlus, ImagePlus, ScanFace, WandSparkles, Clapperboard, X, Check, ChevronDown, RefreshCw, Square, Settings2, Activity, ArrowRight, Copy, Upload, CircleAlert, Video, Link2, Trash2, Film, FlaskConical, CheckCheck, LoaderCircle } from 'lucide-react';
-import { ADVENTURE, RUNWAY, FLOW_MODELS, normalizeSettings, restoreWorkspace, parseScript, extractEmails, errorInfo } from './core.ts';
+import { ADVENTURE, RUNWAY, MUSE_MODELS, normalizeSettings, restoreWorkspace, parseScript, extractEmails, errorInfo } from './core.ts';
 import type { Scene, Settings, Reference, Status, Mode } from './core.ts';
-import { hasFlow, generateVideo, enhancePrompt, readImage, selectFlowImage, downloadVideo, releaseVideo, providerStatus } from './provider.ts';
+import { generateVideo, enhancePrompt, readImage, downloadVideo, releaseVideo, providerStatus } from './provider.ts';
 import './styles.css';
 
 const STORAGE = 'muse-workstation-v1';
@@ -40,6 +40,8 @@ function App() {
   const [importText, setImportText] = useState('');
   const [emailText, setEmailText] = useState('');
   const [status, setStatus] = useState<{ museConfigured: boolean; busy: boolean } | null>(null);
+  const [statusLoading, setStatusLoading] = useState(true);
+  const [statusError, setStatusError] = useState('');
   const [diagnosticBusy, setDiagnosticBusy] = useState(false);
   const [diagnostic, setDiagnostic] = useState<{ message: string; error?: string } | null>(null);
   const [diagnosticConsent, setDiagnosticConsent] = useState(false);
@@ -52,6 +54,20 @@ function App() {
   const enabled = scenes.filter(s => s.enabled).length;
   const parsed = parseScript(importText);
   const canImport = parsed.length > 0 && parsed.length <= 10;
+  const providerReady = settings.mode === 'demo' || status?.museConfigured === true;
+  const renderBlocked = !providerReady;
+  const connectionProblem = statusLoading ? 'Đang đọc cấu hình kết nối từ máy chủ…' : statusError ? 'Không đọc được cấu hình máy chủ. Kiểm tra cửa sổ chạy tool rồi bấm Đọc cấu hình.' : 'Chưa có kết nối tạo video AI của Muse. Cần xác thực tài khoản qua API được Muse hỗ trợ; chỉ nhập email chưa đủ để kết nối.';
+
+  async function refreshStatus() {
+    setStatusLoading(true); setStatusError('');
+    try { setStatus(await providerStatus()); }
+    catch (e) { setStatus(null); setStatusError(errorInfo(e).raw); }
+    finally { setStatusLoading(false); }
+  }
+  function requireProvider() {
+    if (providerReady) return true;
+    setModal('diagnostics'); setNotice(connectionProblem); return false;
+  }
 
   function updateScenes(fn: (current: Scene[]) => Scene[]) { const next = fn(scenesRef.current); scenesRef.current = next; setScenes(next); }
   function invalidate(scene: Scene): Scene { releaseVideo(scene.video); return { ...scene, video: undefined, status: 'ready', error: undefined }; }
@@ -66,7 +82,7 @@ function App() {
     setLogs(all => [{ ...info, scene, time: new Date().toLocaleTimeString('vi-VN') }, ...all].slice(0, 30));
     return info;
   }
-  useEffect(() => { providerStatus().then(setStatus).catch(() => setStatus(null)); }, []);
+  useEffect(() => { void refreshStatus(); }, []);
   useEffect(() => {
     try { localStorage.setItem(STORAGE, JSON.stringify({ version: 1, settings, scenes: scenes.map(({ prompt, email, enabled }) => ({ prompt, email, enabled })) })); }
     catch { setNotice('Trình duyệt không lưu được phiên. Hãy xuất dự án JSON để giữ kịch bản.'); }
@@ -83,12 +99,7 @@ function App() {
   }
   async function chooseImage(target: number | 'global') {
     if (locked) return;
-    if (settings.mode === 'flow') {
-      setImageBusy(true);
-      try { const image = await selectFlowImage(); if (image) applyImage(image, target); }
-      catch (e) { setNotice(logError(e, 'Chọn ảnh').hint); }
-      finally { setImageBusy(false); }
-    } else { imageTarget.current = target; imageInput.current?.click(); }
+    imageTarget.current = target; imageInput.current?.click();
   }
   async function handleImage(file?: File) {
     if (!file || locked) return;
@@ -99,7 +110,7 @@ function App() {
     finally { setImageBusy(false); }
   }
   async function run(ids?: number[], override?: Scene[]) {
-    if (controller.current) return;
+    if (controller.current || !requireProvider()) return;
     const source = override || scenesRef.current;
     const targets = source.filter(s => s.enabled && (ids ? ids.includes(s.id) : s.status !== 'done'));
     if (!targets.length) return setNotice('Không có cảnh cần tạo. Bật tài khoản hoặc chỉnh kịch bản để tạo lại.');
@@ -121,14 +132,14 @@ function App() {
           const info = logError(e, `Cảnh #${String(scene.id).padStart(2, '0')}`);
           changeScene(scene.id, { status: 'error', error: info.raw }, false); failed++;
           // Avoid ten identical failing requests when the provider is absent.
-          if (/FLOW_UNAVAILABLE|MUSE_NOT_CONFIGURED|MODEL_UNSUPPORTED/.test(info.raw)) break;
+          if (/MUSE_NOT_CONFIGURED|MODEL_UNSUPPORTED/.test(info.raw)) break;
         }
       }
       setNotice(control.signal.aborted ? 'Đã dừng hàng đợi. Yêu cầu AI đã gửi có thể vẫn được tính phí.' : `Đã xử lý: ${completed} hoàn tất, ${failed} lỗi${settings.mode === 'demo' ? ' · Clip kiểm thử, không phải video AI.' : '.'}`);
     } finally { controller.current = null; setBusy(false); setBatch(false); setCancelling(false); }
   }
   async function enhance(scene: Scene) {
-    if (controller.current || !scene.prompt.trim()) return;
+    if (controller.current || !scene.prompt.trim() || settings.mode === 'demo' || !requireProvider()) return;
     const control = new AbortController(); controller.current = control; setBusy(true);
     changeScene(scene.id, { enhancing: true }, false);
     try { const prompt = await enhancePrompt(scene.prompt, settings.mode, control.signal, scene.id); changeScene(scene.id, { prompt }); }
@@ -138,13 +149,13 @@ function App() {
   function cancel() { setCancelling(true); controller.current?.abort(); }
   async function downloadAll() {
     setDownloading(true);
-    try { for (const scene of scenesRef.current) if (scene.video) { await downloadVideo(scene.video, scene.id, settings.mode); await new Promise(r => setTimeout(r, 250)); }
+    try { for (const scene of scenesRef.current) if (scene.video) { await downloadVideo(scene.video, scene.id); await new Promise(r => setTimeout(r, 250)); }
       setNotice('Đã gửi các lệnh tải. Nếu trình duyệt hỏi, cho phép tải nhiều tệp.');
     } catch (e) { setNotice(logError(e, 'Tải video').raw); }
     finally { setDownloading(false); }
   }
   function importScenes(andRun: boolean) {
-    if (!canImport || locked) return;
+    if (!canImport || locked || (andRun && !requireProvider())) return;
     const next = scenesRef.current.map((s, i) => ({ ...invalidate(s), prompt: parsed[i] || '' }));
     updateScenes(() => next); setModal(null);
     setNotice(`Đã nạp ${parsed.length} cảnh. ${10 - parsed.length} ô còn lại được để trống.`);
@@ -157,7 +168,7 @@ function App() {
     try { setImportText(await file.text()); } catch { setNotice('Không đọc được tệp kịch bản.'); }
   }
   async function diagnose() {
-    if (controller.current || !diagnosticConsent) return;
+    if (controller.current || !diagnosticConsent || !requireProvider()) return;
     setDiagnosticBusy(true); setDiagnostic(null);
     const control = new AbortController(); controller.current = control;
     const started = performance.now();
@@ -167,7 +178,7 @@ function App() {
       releaseVideo(video);
       setDiagnostic({ message: `${settings.mode === 'demo' ? 'Luồng kiểm thử' : 'Render thử'} hoàn tất sau ${((performance.now() - started) / 1000).toFixed(1)} giây. ${testSettings.duration}s · ${testSettings.resolution}. Credit và GPU: API không cung cấp thông tin.` });
     } catch (e) { const info = logError(e, 'Chẩn đoán'); setDiagnostic({ message: info.hint, error: info.raw }); }
-    finally { controller.current = null; setDiagnosticBusy(false); setCancelling(false); providerStatus().then(setStatus).catch(() => setStatus(null)); }
+    finally { controller.current = null; setDiagnosticBusy(false); setCancelling(false); void refreshStatus(); }
   }
   function exportProject() {
     const blob = new Blob([JSON.stringify({ version: 1, settings, scenes: scenes.map(({ prompt, email, enabled }) => ({ prompt, email, enabled })) }, null, 2)], { type: 'application/json' });
@@ -181,22 +192,22 @@ function App() {
       const restored = restoreWorkspace(text); updateScenes(all => { all.forEach(s => releaseVideo(s.video)); return restored.scenes; }); setSettings(restored.settings); setGlobalImage(null); setNotice('Đã mở dự án. Chọn lại ảnh tham chiếu; video và ảnh không lưu trong JSON.');
     } catch (e) { setNotice(errorInfo(e).raw); }
   }
-  const connection = settings.mode === 'demo' ? 'Kiểm thử · không dùng AI' : settings.mode === 'flow' ? (hasFlow() ? 'Flow SDK đã kết nối' : 'Chưa có Flow SDK') : status?.museConfigured ? 'Đã khai báo Muse AI' : 'Chưa kết nối Muse AI';
+  const connection = settings.mode === 'demo' ? 'Kiểm thử · không dùng AI' : status?.museConfigured ? 'Đã khai báo Muse AI' : 'Chưa kết nối Muse AI';
 
   return <div className="app-shell">
     <input ref={imageInput} type="file" accept="image/png,image/jpeg,image/webp" hidden onChange={e => { void handleImage(e.target.files?.[0]); e.target.value = ''; }}/>
     <input ref={fileInput} type="file" accept=".txt,.srt" hidden onChange={e => { void importFile(e.target.files?.[0]); e.target.value = ''; }}/>
     <header className="topbar">
       <div className="actions-row">
-        {busy ? <button className="button danger" onClick={cancel} disabled={cancelling}><Square size={16}/>{cancelling ? 'Đang dừng…' : batch ? 'Dừng hàng đợi' : 'Dừng tác vụ'}</button> : <button className="button primary" disabled={locked || !enabled} onClick={() => void run()}><Play size={17} fill="currentColor"/>CHẠY TOÀN BỘ 10 VIDEO</button>}
+        {busy ? <button className="button danger" onClick={cancel} disabled={cancelling}><Square size={16}/>{cancelling ? 'Đang dừng…' : batch ? 'Dừng hàng đợi' : 'Dừng tác vụ'}</button> : <button className="button primary" title={renderBlocked ? connectionProblem : 'Tạo lần lượt các cảnh đang bật'} disabled={locked || !enabled || renderBlocked} onClick={() => void run()}><Play size={17} fill="currentColor"/>CHẠY TOÀN BỘ 10 VIDEO</button>}
         <button className="button" disabled={!done || downloading || locked} onClick={() => void downloadAll()}><Download size={17}/>{downloading ? 'Đang tải…' : `Tải tất cả (${done}/10)`}</button>
         <button className="button" disabled={locked} onClick={() => setModal('import')}><FileText size={18}/>Nhập TXT / SRT</button>
         <button className="button" onClick={() => setModal('accounts')}><Users size={19}/>10 Tài khoản Muse</button>
         <button className="button diagnostic-button" onClick={() => setModal('diagnostics')}><ShieldPlus size={19}/>Chẩn đoán API</button>
-        <span className={`connection-pill ${settings.mode === 'demo' ? 'is-demo' : (settings.mode === 'flow' ? hasFlow() : status?.museConfigured) ? 'connected' : ''}`} title="Mở Chẩn đoán API để cấu hình kết nối"><i/>{connection}</span>
+        <span className={`connection-pill ${settings.mode === 'demo' ? 'is-demo' : status?.museConfigured ? 'connected' : ''}`} title="Mở Chẩn đoán API để cấu hình kết nối"><i/>{connection}</span>
       </div>
       <div className="settings-row">
-        <label className="setting model-setting"><span>MODEL:</span><select aria-label="Model AI" disabled={locked} value={settings.model} onChange={e => changeSettings({ model: e.target.value as Settings['model'] })}>{FLOW_MODELS.map(model => <option key={model} value={model}>{model}{model === 'Omni 1.1 Flash' ? ' (Khuyên dùng)' : ''}</option>)}</select></label>
+        <label className="setting model-setting"><span>MODEL:</span><select aria-label="Model AI" disabled={locked} value={settings.model} onChange={e => changeSettings({ model: e.target.value as Settings['model'] })}>{MUSE_MODELS.map(model => <option key={model} value={model}>{model}{model === 'Omni 1.1 Flash' ? ' (Khuyên dùng)' : ''}</option>)}</select></label>
         <div className="setting"><span>KHUNG:</span><div className="segmented">{(['16:9', '9:16'] as const).map(ratio => <button key={ratio} disabled={locked} aria-pressed={settings.aspectRatio === ratio} onClick={() => changeSettings({ aspectRatio: ratio })}>{ratio}</button>)}</div></div>
         <label className="setting"><span>THỜI LƯỢNG:</span><select aria-label="Thời lượng" value={settings.duration} disabled={locked || settings.model !== 'Omni 1.1 Flash'} onChange={e => changeSettings({ duration: Number(e.target.value) })}>{[4, 6, 8, 10].map(n => <option key={n} value={n}>{n} giây</option>)}</select></label>
         <label className="setting"><span>CHẤT LƯỢNG:</span><select aria-label="Chất lượng" value={settings.resolution} disabled={locked || settings.model !== 'Omni 1.1 Flash'} onChange={e => changeSettings({ resolution: e.target.value as Settings['resolution'] })}><option value="360p">360p (Siêu tốc)</option><option value="720p">720p (HD)</option></select></label>
@@ -205,6 +216,7 @@ function App() {
     </header>
 
     <main>
+      {renderBlocked && <section className="connection-warning" aria-label="Cần kết nối tạo video"><CircleAlert size={20}/><div><strong>{settings.mode === 'muse' && statusLoading ? 'Đang kiểm tra kết nối' : 'Chưa thể tạo video AI'}</strong><p>{connectionProblem}</p><p>Kịch bản và ảnh vẫn có thể chỉnh sửa. Tạo video và AI Enhance sẽ bật sau khi có kết nối phù hợp.</p></div><button className="button" onClick={() => setModal('diagnostics')}>Xem cách kết nối</button></section>}
       {settings.mode === 'demo' && <div className="demo-banner"><FlaskConical size={16}/>CHẾ ĐỘ KIỂM THỬ · Mỗi cảnh dùng cùng clip thử 4s/360p. Không tạo video AI từ kịch bản hoặc ảnh.</div>}
       <section className="character-banner" aria-label="Đồng nhất nhân vật">
         <button className={`global-image ${globalImage ? 'has-image' : ''}`} disabled={locked} onClick={() => void chooseImage('global')} aria-label={globalImage ? 'Đổi ảnh nhân vật chung' : 'Tải ảnh nhân vật chung'}>
@@ -230,11 +242,11 @@ function App() {
             {scene.reference ? <button className="scene-image" disabled={locked} aria-label={`Đổi ảnh cảnh ${scene.id}`} onClick={() => void chooseImage(scene.id)}>{scene.reference.url ? <img src={scene.reference.url} alt={`Nhân vật cảnh ${scene.id}`}/> : <ScanFace size={24}/>}<span>{scene.reference.id === globalImage?.id ? 'Ảnh chung · đã đồng bộ' : 'Ảnh riêng'}<small>Nhấn để đổi ảnh</small></span></button> : <button className="select-image" disabled={locked} onClick={() => void chooseImage(scene.id)}><ImagePlus size={18}/>+ Chọn ảnh nhân vật</button>}
             {globalImage && scene.reference?.id !== globalImage.id && <button className="paste-image" disabled={locked} onClick={() => changeScene(scene.id, { reference: globalImage })}><Copy size={10}/>Dùng ảnh chung</button>}
           </div>
-          <div className="prompt-label"><label htmlFor={`prompt-${scene.id}`}>Kịch bản Prompt:</label><button disabled={locked || !scene.prompt.trim() || !scene.enabled} onClick={() => void enhance(scene)} title="Dịch và trau chuốt prompt bằng AI">{scene.enhancing ? <LoaderCircle size={18} className="spin"/> : <WandSparkles size={19}/>}AI Enhance</button></div>
+          <div className="prompt-label"><label htmlFor={`prompt-${scene.id}`}>Kịch bản Prompt:</label><button disabled={locked || renderBlocked || settings.mode === 'demo' || !scene.prompt.trim() || !scene.enabled} onClick={() => void enhance(scene)} title="Dịch và trau chuốt prompt bằng AI">{scene.enhancing ? <LoaderCircle size={18} className="spin"/> : <WandSparkles size={19}/>}AI Enhance</button></div>
           <textarea id={`prompt-${scene.id}`} aria-label={`Kịch bản cảnh ${scene.id}`} disabled={locked} maxLength={8000} value={scene.prompt} onChange={e => changeScene(scene.id, { prompt: e.target.value })} placeholder="Nhập mô tả phân cảnh…"/>
           {scene.error && <div className="scene-error"><span><CircleAlert size={13}/>{errorInfo(scene.error).hint}</span><details><summary>Mã lỗi gốc</summary><pre>{scene.error}</pre></details></div>}
         </div>
-        <footer className="card-footer"><button className={`scene-run ${scene.video ? 'has-result' : ''}`} disabled={locked || !scene.enabled || !scene.prompt.trim()} onClick={() => void run([scene.id])}>{scene.video || scene.status === 'error' ? <RefreshCw size={15}/> : <Play size={15}/>} {scene.video ? 'Tạo lại cảnh' : scene.status === 'error' ? 'Thử lại cảnh này' : 'Tạo cảnh này'}</button>{scene.video && <button className="download-one" title={`Tải cảnh ${scene.id}`} aria-label={`Tải cảnh ${scene.id}`} onClick={() => void downloadVideo(scene.video!, scene.id, settings.mode).catch(e => setNotice(logError(e, 'Tải video').raw))}><Download size={16}/></button>}</footer>
+        <footer className="card-footer"><button className={`scene-run ${scene.video ? 'has-result' : ''}`} disabled={locked || renderBlocked || !scene.enabled || !scene.prompt.trim()} onClick={() => void run([scene.id])}>{scene.video || scene.status === 'error' ? <RefreshCw size={15}/> : <Play size={15}/>} {scene.video ? 'Tạo lại cảnh' : scene.status === 'error' ? 'Thử lại cảnh này' : 'Tạo cảnh này'}</button>{scene.video && <button className="download-one" title={`Tải cảnh ${scene.id}`} aria-label={`Tải cảnh ${scene.id}`} onClick={() => void downloadVideo(scene.video!, scene.id).catch(e => setNotice(logError(e, 'Tải video').raw))}><Download size={16}/></button>}</footer>
       </article>)}</section>
       <footer className="workspace-footer"><span><i/>Tự lưu kịch bản trên trình duyệt <span className="footer-divider">/</span> Ảnh & video chỉ giữ trong phiên</span><div><label className={`footer-button ${locked ? 'muted' : ''}`}><Upload size={13}/>Mở dự án<input type="file" accept=".json" hidden disabled={locked} onChange={e => { void restoreProject(e.target.files?.[0]); e.target.value = ''; }}/></label><button onClick={exportProject}><Download size={13}/>Xuất dự án JSON</button></div></footer>
     </main>
@@ -245,7 +257,7 @@ function App() {
         <textarea className="import-text" aria-label="Nội dung TXT / SRT" value={importText} onChange={e => setImportText(e.target.value)} placeholder={'Dán kịch bản hoặc phụ đề vào đây…\n\n1\n00:00:00,000 --> 00:00:04,000\nMột người thám hiểm bước vào ngôi đền cổ.'}/>
         <div className="import-count"><b className={parsed.length > 10 ? 'red' : 'mint'}>{parsed.length}/10 cảnh</b><span>{parsed.length > 10 ? 'Có hơn 10 cảnh. Rút gọn trước khi nạp, không tự cắt bỏ nội dung.' : parsed.length < 10 ? 'Các ô còn lại sẽ được để trống.' : 'Đã đủ 10 phân cảnh.'}</span></div>
         <div className="script-preview">{parsed.slice(0, 10).map((text, i) => <div key={i}><span>#{String(i + 1).padStart(2, '0')}</span><p>{text}</p></div>)}</div><p className="small muted">Nạp kịch bản sẽ thay prompt và xóa kết quả video cũ của 10 cảnh. Giữ ảnh tham chiếu và tài khoản.</p>
-      </div><footer className="modal-footer"><button className="button" onClick={() => setModal(null)}>Đóng</button><button className="button" disabled={!canImport || locked} onClick={() => importScenes(false)}>Nạp vào Studio</button><button className="button primary" disabled={!canImport || locked} onClick={() => importScenes(true)}><Play size={15}/>Nạp & Chạy các cảnh</button></footer>
+      </div><footer className="modal-footer"><button className="button" onClick={() => setModal(null)}>Đóng</button><button className="button" disabled={!canImport || locked} onClick={() => importScenes(false)}>Nạp vào Studio</button><button className="button primary" disabled={!canImport || locked || renderBlocked} onClick={() => importScenes(true)}><Play size={15}/>Nạp & Chạy các cảnh</button></footer>
     </Modal>}
 
     {modal === 'accounts' && <Modal title="Quản lý 10 tài khoản Muse" eyebrow="ACCOUNT POOL / PROMPT CONTROL" close={() => setModal(null)}>
@@ -257,11 +269,12 @@ function App() {
     </Modal>}
 
     {modal === 'diagnostics' && <Modal title="Chẩn đoán & kết nối API" eyebrow="CONNECTION / HEALTH / ERROR LOG" close={() => setModal(null)}>
-      <div className="modal-body"><label className="field-label" htmlFor="provider-mode">Kết nối tạo video</label><select id="provider-mode" className="provider-select" disabled={locked} value={settings.mode} onChange={e => { const mode = e.target.value as Mode; changeSettings({ mode }); setDiagnostic(null); setDiagnosticConsent(false); }}><option value="muse">Muse AI API · Web độc lập</option><option value="flow">Flow SDK · Cần runtime tương thích</option><option value="demo">Kiểm thử giao diện · Không tạo video AI</option></select>
-        <div className="connection-details"><Link2 size={18}/><div><strong>{connection}</strong><p>{settings.mode === 'muse' ? 'Cần API hoặc adapter Muse AI đã xác thực các tài khoản. Chỉ nhập email không tạo kết nối. Xem README để cấu hình; hỗ trợ mô hình, R2V và hạn mức phụ thuộc dịch vụ Muse thực tế.' : settings.mode === 'flow' ? 'Cần window.Flow với media.select, generate.video, generate.text và download theo hợp đồng README. Việc mở trang web bên ngoài không tự có Flow SDK.' : 'Clip màu có nhãn TEST CLIP dùng để kiểm tra phát, tải và hàng đợi. Không đọc nội dung prompt, không thay cho video AI.'}</p></div></div>
+      <div className="modal-body"><label className="field-label" htmlFor="provider-mode">Kết nối tạo video</label><select id="provider-mode" className="provider-select" disabled={locked} value={settings.mode} onChange={e => { const mode = e.target.value as Mode; changeSettings({ mode }); setDiagnostic(null); setDiagnosticConsent(false); }}><option value="muse">Muse AI API · Web độc lập</option><option value="demo">Kiểm thử giao diện · Không tạo video AI</option></select>
+        <div className="connection-details"><Link2 size={18}/><div><strong>{connection}</strong><p>{settings.mode === 'muse' ? 'Cần API hoặc adapter Muse AI đã xác thực các tài khoản. Chỉ nhập email không tạo kết nối. Xem README để cấu hình; hỗ trợ mô hình, R2V và hạn mức phụ thuộc dịch vụ Muse thực tế.' : 'Clip màu có nhãn TEST CLIP dùng để kiểm tra phát, tải và hàng đợi. Không đọc nội dung prompt, không thay cho video AI.'}</p></div></div>
+        {renderBlocked && <div className="setup-help"><h3>Cần gì để tạo video thật?</h3><p>Bản web chưa có adapter tạo video Muse.ai thực tế. Các email là nhãn phân công, không phải phiên đăng nhập.</p><ol><li>Cần tài liệu API tạo video của Muse AI, kèm phương thức xác thực tài khoản chính thức.</li><li>Sau khi có adapter tương thích, cấu hình địa chỉ và thông tin xác thực trên máy chủ rồi khởi động lại tool.</li><li>Bấm Đọc cấu hình; chỉ chạy render thử khi có kết nối.</li></ol><a href="https://muse.ai/" target="_blank" rel="noopener noreferrer">Mở trang tài khoản Muse.ai</a><p className="small muted">Tính năng và mô hình khả dụng cần được xác nhận bằng API Muse thực tế. Chế độ kiểm thử chỉ phát clip mẫu có nhãn.</p>{statusError && <pre>{statusError}</pre>}</div>}
         <div className="diagnostic-stats"><div><span>TRẠNG THÁI</span><b>{diagnosticBusy ? 'Đang kiểm tra…' : busy ? 'Đang có tác vụ' : 'Chờ kiểm tra'}</b></div><div><span>CREDIT</span><b>Không được API cung cấp</b></div><div><span>GPU</span><b>Không được API cung cấp</b></div></div>
         <label className="checkbox-label consent"><input type="checkbox" checked={diagnosticConsent} disabled={locked} onChange={e => setDiagnosticConsent(e.target.checked)}/><span>{settings.mode === 'demo' ? 'Tôi muốn chạy clip kiểm thử giao diện.' : `Tôi đồng ý gửi một yêu cầu render thử (${settings.model === 'Omni 1.1 Flash' ? '4s / 360p' : '8s / 720p'}), có thể tính phí theo tài khoản AI.`}</span></label>
-        <div className="preset-row"><button className="button primary" disabled={!diagnosticConsent || locked} onClick={() => void diagnose()}>{diagnosticBusy ? <LoaderCircle size={17} className="spin"/> : <Activity size={17}/>}Kiểm tra render thực tế</button><button className="button" disabled={locked} onClick={() => { providerStatus().then(s => { setStatus(s); setNotice(s.museConfigured ? 'Đã khai báo kết nối Muse AI. Chạy render thử để kiểm tra quyền truy cập thật.' : 'Chưa khai báo kết nối Muse AI. Cần API hoặc adapter của dịch vụ bạn sử dụng.'); }).catch(e => setNotice(errorInfo(e).raw)); }}><RefreshCw size={15}/>Đọc cấu hình</button>{diagnosticBusy && <button className="button danger" onClick={cancel}><Square size={15}/>Dừng chờ</button>}</div>
+        <div className="preset-row"><button className="button primary" disabled={!diagnosticConsent || locked || renderBlocked} onClick={() => void diagnose()}>{diagnosticBusy ? <LoaderCircle size={17} className="spin"/> : <Activity size={17}/>}Kiểm tra render thực tế</button><button className="button" disabled={locked || statusLoading} onClick={() => void refreshStatus()}><RefreshCw size={15}/>Đọc cấu hình</button>{diagnosticBusy && <button className="button danger" onClick={cancel}><Square size={15}/>Dừng chờ</button>}</div>
         {diagnostic && <div className={`diagnostic-result ${diagnostic.error ? 'failed' : ''}`} role="status"><p>{diagnostic.message}</p>{diagnostic.error && <pre>{diagnostic.error}</pre>}</div>}
         <div className="log-heading"><h3>Nhật ký lỗi gần nhất <span>{logs.length}</span></h3><button disabled={!logs.length} onClick={() => setLogs([])}><Trash2 size={13}/>Xóa nhật ký</button></div><div className="error-log">{logs.length ? logs.map((log, i) => <details key={i}><summary><span>{log.time}</span>{log.scene}<ChevronDown size={13}/></summary><p>{log.hint}</p><pre>{log.raw}</pre></details>) : <p className="muted">Chưa có lỗi được ghi nhận trong phiên này.</p>}</div>
       </div><footer className="modal-footer"><span className="small muted">Thông tin đăng nhập không lưu trong trình duyệt hoặc dự án.</span><button className="button" onClick={() => setModal(null)}>Đóng</button></footer>

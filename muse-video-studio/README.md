@@ -1,12 +1,21 @@
 # 10-Slot Video Workstation & Character Sync Studio
 
-Bản web React/TypeScript dựng theo ảnh và bản mô tả Flow do người dùng cung cấp. Chạy độc lập trên máy tính, giao diện tiếng Việt, 10 cảnh, chủ đề slate/indigo. **Không dùng Gemini.**
+Bản web React/TypeScript dành cho quy trình Muse AI, dựng theo ảnh và bản mô tả người dùng cung cấp. Chạy độc lập trên máy tính, giao diện tiếng Việt, 10 cảnh, chủ đề slate/indigo. **Không dùng Gemini.**
+
+## Bản 1.0.1: khởi động và kiểm tra kết nối
+
+- Muse AI là kết nối dịch vụ duy nhất; ảnh chọn từ máy, video tải trực tiếp bằng trình duyệt.
+- Cảnh báo thiếu kết nối hiện ngay khi mở. Các nút tạo video, AI Enhance và render thử chỉ bật khi máy chủ có khai báo adapter; chế độ kiểm thử vẫn ghi nhãn rõ.
+- Bấm **Đọc cấu hình** sau khi kết nối để bật lại chức năng mà không mất kịch bản. Việc khai báo URL không chứng minh tài khoản được xác thực; cần render thật để xác minh.
+- `start.bat` chạy Node trực tiếp và tự mở trình duyệt khi máy chủ lắng nghe, không dùng script PowerShell. Thiếu `.env` là trạng thái bình thường, không in cảnh báo lỗi.
+- Thông báo `Terminate batch job (Y/N)?` xuất hiện khi cửa sổ CMD nhận Ctrl+C. Đây là thao tác dừng; giữ cửa sổ máy chủ mở khi sử dụng.
+- Bản này chưa bổ sung API tạo video hoặc cơ chế đăng nhập Muse.ai thực tế; cần tài liệu API tương ứng để hoàn tất.
 
 ## Tình trạng kết nối Muse AI
 
-**Chưa kết nối hoặc đăng nhập tài khoản Muse.ai thực tế. Chưa kiểm chứng tạo video AI.** URL người dùng cung cấp là `https://muse.ai/`. Môi trường phát triển hiện bị proxy từ chối truy cập URL này (CONNECT 403). Chưa có tài liệu chứng minh API của dịch vụ đó hỗ trợ `Omni 1.1 Flash`, `Veo 3.1 - Lite`, `Veo 3.1 - Fast` hay R2V theo prompt Flow.
+**Chưa kết nối hoặc đăng nhập tài khoản Muse.ai thực tế. Chưa kiểm chứng tạo video AI.** URL người dùng cung cấp là `https://muse.ai/`. Môi trường phát triển hiện bị proxy từ chối truy cập URL này (CONNECT 403). Chưa có tài liệu chứng minh API của dịch vụ đó hỗ trợ `Omni 1.1 Flash`, `Veo 3.1 - Lite`, `Veo 3.1 - Fast` hay R2V như bản mô tả yêu cầu.
 
-Người dùng đã xác nhận: **Flow tự tạo video, chưa kiểm tra Muse.ai**. Tên mô hình trong giao diện lấy từ bản mô tả, không phải xác nhận nhà cung cấp Muse.ai có các mô hình đó. Muse.ai được biết đến là nền tảng lưu trữ/tìm kiếm video; cần xác minh tính năng tạo video và phương thức xác thực chính thức trước khi tích hợp. Không thể chuyển SDK của một tool Flow sang web độc lập chỉ bằng cách nhập 10 email.
+Tên mô hình trong giao diện lấy từ bản mô tả, không phải xác nhận nhà cung cấp Muse.ai có các mô hình đó. Cần xác minh tính năng tạo video và phương thức xác thực chính thức trước khi tích hợp. Nhập 10 email chỉ đặt nhãn phân công, không đăng nhập các tài khoản.
 
 Đã chuẩn bị adapter phía máy chủ để nối dịch vụ tạo video khi có hợp đồng API thật. Adapter này là **giao thức của ứng dụng này**, không phải Muse.ai SDK và không tự triển khai đăng nhập/OAuth, lấy cookie hoặc gọi API riêng chưa được công bố. Chưa có adapter Muse.ai thực tế trong gói.
 
@@ -22,7 +31,7 @@ npm start
 
 Windows: chạy `start.bat`. Linux/macOS: `bash start.sh`. Launcher tự cài thư viện nếu còn thiếu; lần đầu cần Internet đến registry.npmjs.org. Bản ZIP đi kèm có sẵn `dist`, có thể bỏ bước build khi chỉ muốn chạy. Các lệnh trên đã được thử trên Linux; launcher Windows chưa chạy trên Windows thật.
 
-Máy chủ in địa chỉ cục bộ (mặc định cổng 8788). Mở địa chỉ đó bằng trình duyệt trên cùng máy, giữ cửa sổ máy chủ mở; Ctrl+C để dừng. Không mở `index.html` trực tiếp bằng `file://`. Máy chủ chỉ lắng nghe loopback. Các bước khởi động cần lặp lại sau khi khởi động lại máy; tiến trình không nằm trong ZIP/snapshot.
+Launcher tự mở trình duyệt sau khi máy chủ sẵn sàng. Nếu trình duyệt không mở, nhập địa chỉ cục bộ mà máy chủ in ra (mặc định cổng 8788). Giữ cửa sổ máy chủ mở; Ctrl+C để dừng. Không mở `index.html` trực tiếp bằng `file://`. Máy chủ chỉ lắng nghe loopback. Các bước khởi động cần lặp lại sau khi khởi động lại máy; tiến trình không nằm trong ZIP/snapshot.
 
 Phát triển: `npm run dev`. Sau khi sửa nguồn, chạy lại `npm run build` để cập nhật bản production.
 
@@ -71,17 +80,6 @@ Backend gọi `POST {MUSE_ADAPTER_URL}/video`:
 Backend gọi `POST {MUSE_ADAPTER_URL}/text` với `{"accountId":1,"prompt":"enhancement instruction..."}`, kỳ vọng `{"text":"rewritten English scene..."}`. Nếu tài khoản không có AI văn bản thì adapter cần trả lỗi rõ, không giả lập Enhance thành công.
 
 Nếu đặt token, backend thêm `Authorization: Bearer ...` khi gọi adapter. Secret không gửi ra frontend hoặc lưu vào dự án. Node chạy với `--use-env-proxy`, giữ proxy/TLS của môi trường. Không cần key Gemini. Dừng hàng đợi ngừng chờ và không gửi cảnh tiếp; không đảm bảo upstream hủy tác vụ đã gửi hoặc hoàn credit.
-
-## Chế độ Flow SDK tùy chọn
-
-Chỉ dùng trong runtime thực sự cung cấp `window.Flow`. Không tìm thấy SDK thì trả lỗi, không giả vờ kết nối. Hợp đồng trong `src/provider.ts` dựa trên prompt người dùng, **chưa xác minh với SDK Flow thực tế**:
-
-- `Flow.media.select({filter:'image'})` → `{mediaId, url?, name?}` hoặc mảng như vậy.
-- `Flow.generate.video({prompt, modelDisplayName, referenceImageMediaIds, aspectRatio, durationSeconds, resolution})` → `{base64, mimeType?}`.
-- `Flow.generate.text({prompt})` → chuỗi hoặc `{text}`.
-- `Flow.download({base64, mimeType, filename})`.
-
-Chọn ảnh qua Flow để có `mediaId`. Chế độ SDK dùng phiên runtime hiện tại; không có chức năng chuyển 10 phiên đăng nhập dựa vào email. Nếu cấu trúc SDK thật khác, sửa adapter theo tài liệu được cung cấp.
 
 ## Kiểm tra
 
