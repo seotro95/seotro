@@ -1,0 +1,54 @@
+name: Repackage original standalone 1.3 TXT SRT fix
+on:
+  push:
+    branches: [codex/standalone13-timing-fix-20261103]
+    paths:
+      - 'voice-studio-standalone/**'
+      - '.github/workflows/standalone13-timing-fix.yml'
+permissions:
+  contents: write
+concurrency:
+  group: standalone13-timing-fix
+  cancel-in-progress: true
+jobs:
+  repack:
+    runs-on: windows-2022
+    timeout-minutes: 60
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.10'
+      - name: Download the exact original 2.02 GB standalone 1.3 ZIP
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          New-Item -ItemType Directory -Force -Path "${{ runner.temp }}/standalone13-base" | Out-Null
+          gh release download voice-standalone-portable-39114519048 --repo seotro95/seotro --pattern Voice-Studio-Rieng-1.3.0-Portable-Windows-x64.zip --dir "${{ runner.temp }}/standalone13-base"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Apply code-only fixes, run native tests, and verify original model bytes
+        run: python voice-studio-standalone/packaging/repack_original13.py --base-zip "${{ runner.temp }}/standalone13-base/Voice-Studio-Rieng-1.3.0-Portable-Windows-x64.zip" --work "${{ runner.temp }}/standalone13-fixed"
+      - name: Publish the one-file checked Windows package
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = "voice-studio-rieng-1.3.1-txt-srt-${{ github.run_id }}"
+          $zip = "${{ runner.temp }}/standalone13-fixed/Voice-Studio-Rieng-1.3.1-TXT-SRT-Windows-x64.zip"
+          @"
+          Voice Studio Rieng 1.3.1 - TXT/SRT timing fix on the original 1.3.0 portable.
+
+          Download the single ZIP, extract all files into a new folder, and open MO_TOOL.bat.
+          Reuses the exact original Python/FFmpeg/Nano/Turbo/Piper runtime and models.
+          The complete original 2.02 GB ZIP passed SHA-256 before patching; every runtime and model file was preserved.
+          Native Windows tests, offline synthesis/cloning, and all 16 Piper voices as TXT/WAV and SRT/MP3 passed.
+          TXT: enable timeline fitting and enter the same target as the final SRT timestamp (for example 10:00).
+          Real decoded exports are measured before completion; speech that cannot fit fails without clipping.
+          Source commit: ${{ github.sha }}
+          "@ | Set-Content -Encoding utf8 "${{ runner.temp }}/standalone13-release.txt"
+          gh release create $tag $zip "$zip.sha256" "${{ runner.temp }}/standalone13-fixed/QA.json" --repo seotro95/seotro --target "${{ github.sha }}" --title "Voice Studio Rieng 1.3.1 - sua TXT/SRT - giu goi goc 2 GB" --notes-file "${{ runner.temp }}/standalone13-release.txt" --latest=false
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

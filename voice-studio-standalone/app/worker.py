@@ -304,7 +304,8 @@ def render(job, synthesize=None):
         from timeline_audio import timeline_frames
         target_frames = timeline_frames(cues, job.get('timeline_seconds'), maximum)
     assembly = work / 'assembled.wav'
-    writer = PCMWriter(assembly, max_seconds=maximum)
+    writer = PCMWriter(assembly, max_seconds=maximum, strict=exact_timing)
+    verified_export = None
     write_state(work / 'progress.json', {**runtime_fields, 'completed': 0, 'total': len(segments), 'progress': 0, 'phase': 'Chuẩn bị mô hình; lần đầu có thể chậm hơn'})
     completed = 0
     clipped = False
@@ -325,7 +326,7 @@ def render(job, synthesize=None):
         requested = job.get('timeline_seconds')
         if requested is None:
             requested = cues[-1]['end']
-        actual_seconds = writer.frames / writer.rate
+        actual_seconds = verified_export['audio_seconds'] if verified_export else writer.frames / writer.rate
         errors = [abs(actual_seconds - requested) * 1000]
         for entry in alignment:
             if entry['status'] == 'matched':
@@ -335,7 +336,7 @@ def render(job, synthesize=None):
         speech_seconds = sum(entry['spoken_end'] - entry['spoken_start'] for entry in alignment if entry['status'] == 'matched')
         return {'mode': 'exact', 'target_seconds': requested, 'actual_seconds': actual_seconds,
                 'max_error_ms': round(max(errors), 6), 'matched_cues': matched,
-                'total_cues': len(cues), 'complete': completed == len(segments) and matched == len(cues) and not clipped and writer.frames == target_frames,
+                'total_cues': len(cues), 'complete': verified_export is not None and completed == len(segments) and matched == len(cues) and not clipped and writer.frames == target_frames,
                 'fitted_audio_seconds': round(speech_seconds, 6),
                 'padding_seconds': round(max(0, actual_seconds - speech_seconds), 6),
                 'sample_rate': writer.rate, 'format': job['format'],
@@ -376,7 +377,7 @@ def render(job, synthesize=None):
                 schedule_chunks()
             segment_start = writer.frames / writer.rate
             if cues and (index == 0 or segment.cue != segments[index-1].cue):
-                cue_writer = PCMWriter(cue_path, max_seconds=10800)
+                cue_writer = PCMWriter(cue_path, max_seconds=21600 if exact_timing else 10800, strict=exact_timing)
             target_writer = cue_writer if cues else writer
             if segment.text:
                 part = work / f'{index:06d}.wav'
@@ -494,7 +495,7 @@ def render(job, synthesize=None):
             if completed != len(segments):
                 raise ValueError('Chưa đọc hết lời thoại; tool không xuất bản căn thời gian thiếu câu.')
             fill_to_frame(writer, target_frames)
-            save_alignment(sync_ok=len(alignment) == len(cues) and all(c['status'] == 'matched' for c in alignment))
+            save_alignment()
     finally:
         failure = sys.exc_info()[1]
         failed = failure is not None
@@ -524,11 +525,17 @@ def render(job, synthesize=None):
     else:
         from audio_processing import run_ffmpeg
         run_ffmpeg(['ffmpeg', '-nostdin', '-v', 'error', '-i', str(assembly), '-codec:a', 'libmp3lame', '-b:a', '192k', '-y', str(pending)], work, writer.frames/writer.rate, progress_limit, 99, 'Đang xuất MP3', timeout=3600)
+    from export_duration import verify_audio_export
+    verified_export = verify_audio_export(pending, work, target_frames)
+    if (work / 'cancel.flag').exists():
+        raise InterruptedError('Tác vụ đã dừng.')
+    if exact_timing:
+        save_alignment(sync_ok=sync_report()['complete'])
     pending.replace(destination)
     assembly.unlink(missing_ok=True)
     subtitle_text = export_srt(cues if cues else timed)
     (DATA / 'audio' / (job['id'] + '.srt')).write_text(subtitle_text, encoding='utf-8')
-    write_state(work / 'result.json', {**runtime_fields, 'audio_seconds': writer.frames / writer.rate, 'synthesized_audio_seconds': round(synthesized_seconds, 5), 'reused_chunks': reused_chunks, 'reused_audio_seconds': round(reused_seconds, 5), 'duration_limited': clipped, 'timing_mode': 'exact' if exact_timing else job.get('timing_mode', 'legacy'), 'target_audio_seconds': target_frames / writer.rate if target_frames is not None else None, 'sync_ok': exact_timing and not clipped and writer.frames == target_frames, 'sync_report': sync_report(), 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3)})
+    write_state(work / 'result.json', {**runtime_fields, 'audio_seconds': verified_export['audio_seconds'], 'duration_verified': True, 'duration_report': verified_export, 'synthesized_audio_seconds': round(synthesized_seconds, 5), 'reused_chunks': reused_chunks, 'reused_audio_seconds': round(reused_seconds, 5), 'duration_limited': clipped, 'timing_mode': 'exact' if exact_timing else job.get('timing_mode', 'legacy'), 'target_audio_seconds': target_frames / writer.rate if target_frames is not None else None, 'sync_ok': exact_timing and not clipped and writer.frames == target_frames, 'sync_report': sync_report(), 'completed': completed, 'total': len(segments), 'progress': 100, 'processing_seconds': round(time.monotonic()-started, 3)})
 
 
 def voice_error(exc):

@@ -107,10 +107,11 @@ def plan_segments(job):
 
 class PCMWriter:
     """Write small blocks, never allocate a multi-hour waveform in RAM."""
-    def __init__(self, path, rate=24000, max_seconds=MAX_SECONDS):
+    def __init__(self, path, rate=24000, max_seconds=MAX_SECONDS, strict=False):
         self.rate = rate
-        self.limit = int(rate * max_seconds)
+        self.limit = round(rate * max_seconds)
         self.frames = 0
+        self.strict = strict
         self.file = wave.open(str(path), 'wb')
         self.file.setnchannels(1)
         self.file.setsampwidth(2)
@@ -120,6 +121,8 @@ class PCMWriter:
         with wave.open(str(path), 'rb') as source:
             if (source.getnchannels(), source.getsampwidth(), source.getframerate()) != (1, 2, self.rate):
                 raise ValueError('PCM input format mismatch')
+            if self.strict and self.frames + source.getnframes() > self.limit:
+                raise ValueError('Lời đọc vượt giới hạn xử lý; tool không cắt mất lời. Tăng thời lượng hoặc chia nhỏ kịch bản.')
             while self.frames < self.limit:
                 block = source.readframes(min(65536, self.limit - self.frames))
                 if not block:
@@ -133,6 +136,8 @@ class PCMWriter:
         self.silence_frames(round(seconds * self.rate))
 
     def silence_frames(self, frames):
+        if self.strict and self.frames + frames > self.limit:
+            raise ValueError('Khoảng nghỉ vượt giới hạn xử lý; hãy tăng thời lượng hoặc sửa khoảng nghỉ.')
         remaining = max(0, min(frames, self.limit - self.frames))
         while remaining > 0:
             count = min(65536, remaining)

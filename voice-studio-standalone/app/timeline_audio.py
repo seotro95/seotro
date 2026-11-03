@@ -26,6 +26,8 @@ def timeline_frames(cues, seconds=None, maximum=10800):
     target = end if seconds is None else seconds
     if not math.isfinite(target) or target <= 0 or target > 10800:
         raise ValueError('Độ dài video phải lớn hơn 0 và không quá 3 giờ.')
+    if round(target * RATE) < 1:
+        raise ValueError('Thời lượng đích quá ngắn để tạo âm thanh.')
     if round(target * RATE) < round(end * RATE):
         raise ValueError(f'Độ dài video {target:.3f}s ngắn hơn mốc cuối {end:.3f}s trong lời thoại.')
     if round(target * RATE) > round(maximum * RATE):

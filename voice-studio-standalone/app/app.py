@@ -101,7 +101,7 @@ async def lifespan(application):
                     write_json(DATA / 'jobs' / f"{pending['id']}.json", pending)
 
 
-app = FastAPI(title='Voice Studio Riêng', version='1.3.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio Riêng', version='1.3.1', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 
 @app.exception_handler(RequestValidationError)
@@ -318,7 +318,7 @@ class Speech(BaseModel):
     min_cue_tempo: float = Field(default=0.65, ge=0.5, le=1)
     max_cue_tempo: float = Field(default=2.0, ge=1, le=2)
     cue_fit: str = Field(default='strict', pattern='^(strict|gap)$')
-    timeline_seconds: float | None = Field(default=None, gt=0, le=10800)
+    timeline_seconds: float | None = Field(default=None, gt=0, le=10800, allow_inf_nan=False)
 
 
 def stop_worker(process, force=False):
@@ -434,6 +434,8 @@ def queue_speech(body: Speech, *, benchmark=False):
         raise HTTPException(422, 'Kiểm tra nội dung, ngôn ngữ và định dạng xuất.')
     source_input_format = body.input_format
     try:
+        if body.timeline_seconds is not None and body.timing_mode == 'natural':
+            raise ValueError('Đã nhập thời lượng đích: bật Tự căn lời đọc theo mốc thời gian để giữ đúng độ dài, hoặc xóa thời lượng nếu muốn đọc tự nhiên.')
         imported = parse_script_text(body.text, body.input_format, total_seconds=body.timeline_seconds)
         if body.timing_mode == 'natural':
             if imported['has_timeline']:
@@ -584,7 +586,13 @@ def export_voice(ident:str,extension:str):
         temporary=DATA/'audio'/f'{ident}-{uuid.uuid4().hex}.{extension}'
         try:
             subprocess.run(['ffmpeg','-nostdin','-v','error','-i',str(source),'-vn','-codec:a','libmp3lame' if extension=='mp3' else 'pcm_s16le',*(['-b:a','192k'] if extension=='mp3' else []),'-y',str(temporary)],check=True,timeout=600,capture_output=True)
+            if job.get('duration_verified'):
+                from export_duration import verify_audio_export
+                report = job.get('duration_report') or {}
+                expected = round(report['target_seconds'] * 24000) if report.get('target_seconds') is not None else None
+                verify_audio_export(temporary, DATA/'parts', expected)
             temporary.replace(target)
+        except ValueError as exc:raise HTTPException(500,str(exc)) from None
         except (OSError,subprocess.SubprocessError):raise HTTPException(500,'Chưa chuyển được âm thanh. Kiểm tra FFmpeg và dung lượng trống.') from None
         finally:temporary.unlink(missing_ok=True)
     return FileResponse(target,media_type='audio/mpeg' if extension=='mp3' else 'audio/wav',filename=f'voice-studio.{extension}')

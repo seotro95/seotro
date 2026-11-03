@@ -371,7 +371,13 @@ function renderTimeline(result, error = '') {
     try { targetSeconds = timelineDuration() ?? targetSeconds; } catch { /* The import error is shown after validation. */ }
     target.textContent = `${cues.length} câu · Thời lượng đích ${cueTime(targetSeconds)}${result.encoding ? ` · ${result.encoding}` : ''}. ${$('auto-sync').checked ? 'Sẽ căn từng câu theo mốc khi tạo.' : 'Đã tắt tự căn: lời đọc dùng nhịp tự nhiên.'}`;
   }
-  else target.textContent = 'Văn bản chưa có mốc thời gian. Lời đọc dùng nhịp tự nhiên; SRT xuất sau khi tạo sẽ theo thời lượng đọc thực.';
+  else {
+    let requested = null;
+    try { requested = timelineDuration(); } catch { /* Input validation supplies the error. */ }
+    target.textContent = requested !== null && $('auto-sync').checked
+      ? `TXT sẽ được căn đủ ${cueTime(requested)}. Nhập cùng mốc cuối SRT để các bản voice có cùng thời lượng.`
+      : 'TXT chưa có mốc: nhập thời lượng đích bằng mốc cuối SRT để hai bản voice cùng số phút; để trống sẽ đọc tự nhiên.';
+  }
   if (!error && Array.isArray(result?.warnings) && result.warnings.length) target.textContent += ` ${result.warnings.join(' ')}`;
   updateFormat();
 }
@@ -547,7 +553,7 @@ function setOutput(job) {
   if (sync) {
     const complete = done && sync.complete === true && Number(sync.matched_cues) === Number(sync.total_cues);
     $('sync-report').classList.toggle('incomplete', !complete);
-    $('sync-report').textContent = `${complete ? 'Đã căn khớp mốc thời gian' : activeStatuses.has(job.status) ? 'Đang kiểm tra đồng bộ' : 'Chưa căn khớp toàn bộ'} · ${Number(sync.matched_cues) || 0}/${Number(sync.total_cues) || 0} câu · Đích ${cueTime(sync.target_seconds)} · Bản thu ${cueTime(sync.actual_seconds)} · Sai lệch lớn nhất ${Number(sync.max_error_ms || 0).toLocaleString('vi-VN', {maximumFractionDigits: 3})} ms. ${job.format === 'mp3' ? 'MP3 có thể hiển thị thêm đệm nén ở một số phần mềm. Dùng WAV để ghép video theo mẫu âm thanh chính xác.' : 'Tải WAV cùng SRT để đặt vào video theo mốc gốc.'}`;
+    $('sync-report').textContent = `${complete ? (job.duration_verified ? 'Đã đo file voice và căn khớp mốc thời gian' : 'Đã căn khớp mốc thời gian') : activeStatuses.has(job.status) ? 'Đang kiểm tra đồng bộ' : 'Chưa căn khớp toàn bộ'} · ${Number(sync.matched_cues) || 0}/${Number(sync.total_cues) || 0} câu · Đích ${cueTime(sync.target_seconds)} · Bản thu ${cueTime(sync.actual_seconds)} · Sai lệch lớn nhất ${Number(sync.max_error_ms || 0).toLocaleString('vi-VN', {maximumFractionDigits: 3})} ms. ${job.format === 'mp3' ? 'MP3 có thể hiển thị thêm đệm nén ở một số phần mềm. Dùng WAV để ghép video theo mẫu âm thanh chính xác.' : 'Tải WAV cùng SRT để đặt vào video theo mốc gốc.'}`;
   }
   const report = job.speed_report;
   $('speed-report').hidden = !done || !report?.realtime_multiplier;
@@ -571,6 +577,7 @@ async function generate() {
     clearTimeout(previewTimer);
     const sync = $('auto-sync').checked;
     const target = timelineDuration();
+    if (target !== null && !sync) throw new Error('Đã nhập thời lượng đích: bật Tự căn lời đọc theo mốc thời gian, hoặc xóa thời lượng để đọc tự nhiên.');
     let text = $('script').value;
     let inputFormat = $('script-format').value;
     let parsed = null;

@@ -84,7 +84,7 @@ def verify_app():
     # Generate a 3–30 second reference through the actual bundled preset API.
     with TestClient(app.app) as client:
         conf = client.get('/api/config').json()
-        assert conf['version'] == '1.3.0' and conf['max_characters'] == 200000
+        assert conf['version'] == '1.3.1' and conf['max_characters'] == 200000
         assert conf['nano_ready'] and conf['nano_clone_ready'] and conf['models']['vieneu']
         assert client.get('/').status_code == 200
         for asset in ('app.js', 'style.css'):
@@ -151,6 +151,21 @@ def verify_app():
             assert rate == 24000 and len(samples) > rate // 2 and np.max(np.abs(samples)) > .001
             assert client.get(f'/api/jobs/{job["id"]}/export.srt').status_code == 200
             print('OFFLINE COUNTRY VOICE:', language, voice['id'], flush=True)
+            # Both public import paths use the original bundled Piper model.
+            from export_duration import verify_audio_export
+            from subtitles import export_srt
+            for kind, extension in [('txt', 'wav'), ('srt', 'mp3')]:
+                content = DEMO_TEXTS[language] if kind == 'txt' else export_srt([
+                    {'start': .125, 'end': 20, 'text': DEMO_TEXTS[language]}])
+                response = client.post('/api/speech', json={
+                    'text': content, 'input_format': kind, 'timeline_seconds': 20,
+                    'voice_id': voice['id'], 'language': language, 'format': extension})
+                assert response.status_code == 202, response.text
+                timed = wait_job(client, response.json()['id'])
+                assert timed['sync_ok'] and timed['duration_verified']
+                output = DATA/'audio'/(timed['id']+'.'+extension)
+                assert verify_audio_export(output, DATA, 480000)['error_frames'] == 0
+            print('PASS TIMED COUNTRY VOICE:', language, voice['id'], 'TXT/WAV and SRT/MP3 20 seconds', flush=True)
 
 
 def verify_timeline(client, reference_id, sf, np):
@@ -224,7 +239,7 @@ def verify_launcher():
                     for port in range(8770, 8790):
                         try:
                             probe = client.get(f'http://127.0.0.1:{port}/api/config')
-                            if probe.status_code == 200 and probe.json().get('version') == '1.3.0':
+                            if probe.status_code == 200 and probe.json().get('version') == '1.3.1':
                                 url = f'http://127.0.0.1:{port}'
                                 break
                         except httpx.RequestError:
