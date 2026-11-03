@@ -62,7 +62,7 @@ class Exports:
             with self.studio.lock:
                 legacy=self.studio.jobs[ident].get('legacy',False)
                 timed=self.studio.jobs[ident].get('timing_mode')=='exact'
-            export_rate=24000 if timed else 44100
+            export_rate=self.studio.jobs[ident].get('sample_rate',48000) if timed else 44100
             files=([self.studio.root/'outputs'/(ident+'.wav')] if legacy else
                    sorted(p for p in folder.glob('part-*.wav') if re.fullmatch(r'part-\d{4}\.wav',p.name)))
             if not files:raise ValueError('Không tìm thấy WAV của bản thu.')

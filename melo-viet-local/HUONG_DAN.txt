@@ -1,3 +1,12 @@
+CAP NHAT 1.3.1 - GIU THOI LUONG TXT/SRT
+
+Đóng tool, giải nén gói này, chạy CAP_NHAT.bat rồi MO_TOOL.bat.
+Nhấn Ctrl+F5 và kiểm tra v1.3.1. Giữ nguyên model, bộ đọc, giọng yêu thích và outputs đang có.
+Bật Giữ thời lượng TXT/SRT. SRT bám từng mốc và kết thúc ở mốc cuối.
+TXT: nhập cùng thời lượng, ví dụ 10:00 hoặc 10 phút. Số không có dấu : là phút.
+WAV và MP3 được đo trên file thực tế trước khi báo hoàn tất. Lời quá dài sẽ báo lỗi, không cắt mất từ.
+Gói Thêm Giọng này vẫn dùng bản nền 1.2.0/1.3.0 đang cài trên máy; không cài lại Ubuntu.
+
 MELO + VIỆT STUDIO 1.3.0 — WINDOWS / WSL2 UBUNTU 22.04
 
 NÂNG CẤP CHO BẢN 1.2.0 ĐANG DÙNG TỐT
@@ -141,9 +150,10 @@ VĂN BẢN DÀI, NHIỀU TỆP VÀ PHỤ ĐỀ
   là một bản. Mỗi lần gửi tối đa 32 bản; hàng đợi tối đa 64 tác vụ,
   tổng văn bản đang chờ tối đa 16 triệu ký tự.
 - Xuất TXT lấy phần lời. SRT nhập có thể xuất lại mốc gốc trước khi tạo.
-  SRT của bản thu mới có mốc theo RANH GIỚI CÁC ĐOẠN ÂM THANH THỰC,
-  không căn từng từ và không ép lời vào các mốc nhập. Muốn đồng bộ video
-  với mốc gốc cần kiểm tra/chỉnh riêng; tool không tự tăng tốc để nhét lời.
+  Khi bật Giữ thời lượng TXT/SRT, SRT giữ mốc gốc và TXT dùng thời lượng đã nhập.
+  Tool căn tốc độ giữ cao độ trong giới hạn 2× rồi thêm khoảng lặng nếu cần.
+  Nếu không thể đọc đủ lời trong ô thời gian, tool báo lỗi để sửa; không cắt mất từ.
+  Đây là căn theo câu, không phải căn từng từ.
 
 HÀNG ĐỢI, LỊCH SỬ VÀ TIẾP TỤC
 - Chọn 1–4 bản tạo đồng thời; mặc định 2, mỗi bản 4 luồng CPU.

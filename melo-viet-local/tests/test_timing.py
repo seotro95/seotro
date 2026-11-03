@@ -58,7 +58,7 @@ def test_txt_and_srt_use_identical_samples_independent_of_language(studio, langu
     for job in (txt, timed):
         assert job['status'] == 'done', job.get('error')
         assert job['timing_mode'] == 'exact' and job['duration_verified'] and job['sync_ok']
-        assert job['duration_report']['sample_frames'] == 56280
+        assert job['duration_report']['sample_frames'] == round(2.345*RATE)
         assert job['target_30x_verified'] is False
     cues = parse_document((studio.root/'outputs'/timed['id']/'subtitles.srt').read_text(), 'output.srt')['cues']
     assert [(c['start_ms'],c['end_ms']) for c in cues] == [(125,2345)]
@@ -70,8 +70,8 @@ def test_mp3_is_measured_after_encoding_at_the_same_sample_rate(studio, target):
     assert job['status'] == 'done', job.get('error')
     encoded(studio, job)
     report = json.loads((studio.root/'outputs'/job['id']/'mp3-report.json').read_text())
-    assert report['sample_rate'] == 24000
-    assert report['duration_report']['sample_frames'] == round(target*24000)
+    assert report['sample_rate'] == RATE
+    assert report['duration_report']['sample_frames'] == round(target*RATE)
     assert report['duration_report']['error_frames'] == 0 and job['mp3_duration_verified']
 
 
@@ -109,7 +109,7 @@ def test_trailing_empty_srt_cue_retains_the_final_clock(studio):
 
 def test_long_timeline_rolls_exactly_across_wav_parts(tmp_path):
     source=tmp_path/'source.wav'
-    x=(np.sin(2*np.pi*330*np.arange(12000)/RATE)*8000).astype('<i2')
+    x=(np.sin(2*np.pi*330*np.arange(RATE//2)/RATE)*8000).astype('<i2')
     with wave.open(str(source),'wb') as target:
         target.setparams((1,2,RATE,0,'NONE','not compressed'));target.writeframes(x.tobytes())
     document=parse_document('All words remain.')
@@ -119,9 +119,9 @@ def test_long_timeline_rolls_exactly_across_wav_parts(tmp_path):
         result=assembler.finish()
     finally:assembler.close()
     assert len(result['parts'])==4 and result['part_start_seconds']==[0,.7,1.4,2.1]
-    assert verify_parts(tmp_path,result['parts'],RATE,56280)['verified']
+    assert verify_parts(tmp_path,result['parts'],RATE,round(2.345*RATE))['verified']
     for part in result['parts']:
-        with wave.open(str(tmp_path/part)) as audio:assert audio.getnframes()<=16800
+        with wave.open(str(tmp_path/part)) as audio:assert audio.getnframes()<=round(.7*RATE)
     captions=parse_document((tmp_path/'subtitles.srt').read_text(),'captions.srt')['cues']
     assert captions[-1]['end_ms']==2345
 

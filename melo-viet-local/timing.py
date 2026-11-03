@@ -9,7 +9,7 @@ import subprocess
 import time
 import wave
 
-RATE = 24000
+RATE = 48000
 MAX_SECONDS = 7 * 24 * 3600
 
 
