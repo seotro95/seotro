@@ -1,0 +1,46 @@
+name: Voice duration regression
+on:
+  push:
+    branches: [main, 'codex/voice-duration-sync-*']
+    paths:
+      - 'voice-studio/**'
+      - '.github/workflows/voice-duration-checks.yml'
+permissions:
+  contents: read
+concurrency:
+  group: voice-duration-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install audio tools and lightweight test dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          python -m pip install fastapi==0.143.1 uvicorn==0.54.0 httpx==0.28.1 python-multipart==0.0.32 pydantic==2.11.10 numpy soundfile soxr psutil pytest
+      - name: Check JavaScript syntax and duration input
+        working-directory: voice-studio
+        run: |
+          for file in static/*.js; do node --check "$file"; done
+          node --test tests/test_duration_ui.cjs
+      - name: Run regression tests with real FFmpeg and deterministic synthesis
+        working-directory: voice-studio
+        run: python -m pytest -q --junitxml=duration-regression.xml
+      - name: Package source from the tested commit
+        run: git archive --format=zip --output=Voice-Studio-3.6.1-source.zip HEAD voice-studio
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: Voice-Studio-3.6.1-tested-source
+          path: |
+            Voice-Studio-3.6.1-source.zip
+            voice-studio/duration-regression.xml
+          retention-days: 14
