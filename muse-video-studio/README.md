@@ -1,8 +1,16 @@
-# Muse AI Studio 1.4.3 · Một tài khoản, 10 luồng đồng thời
+# Muse AI Studio 1.4.4 · Một tài khoản, 10 luồng đồng thời
 
 Ứng dụng desktop React/TypeScript và Electron cho 10 cảnh ảnh/video. **Bản 1.4 thay cách chạy tuần tự bằng 10 cuộc trò chuyện độc lập trên cùng một phiên Muse. Trang đăng nhập Muse nằm trong cửa sổ tool; không cần cài hoặc mở Chrome/Edge riêng.**
 
 Cầu nối giao diện này **không chính thức**. Đã kiểm thử đăng nhập, 10 luồng, tách kết quả và dừng tác vụ bằng Electron thật với dịch vụ Muse giả lập cục bộ. **Chưa đăng nhập, tạo ảnh/video hoặc đọc số dư trên Muse.ai thật**: cloud chưa có phiên người dùng và các lần truy cập muse.ai nhận CONNECT 403. Muse có thể giới hạn tác vụ đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các kiểm thử không chứng minh gói tài khoản thực tế hỗ trợ 10 render cùng lúc.
+
+## Trang luồng và kiểm tra ô Message trong bản 1.4.4
+
+Mỗi luồng dùng đường dẫn trang Muse đã xác minh sau đăng nhập thay vì luôn mở lại trang gốc. Các tham số truy vấn và fragment không được sao chép từ URL đăng nhập. Nếu ô Message nằm trong iframe hiển thị cùng miền Muse, thao tác nhập, đính kèm ảnh, đọc phản hồi mới và Stop đều thực hiện trong khung đó. Không nhập vào khung của miền khác.
+
+Trước khi chạy cả bộ, bấm **Kiểm tra ô Message** ở bảng tài khoản hoặc hộp **Tài khoản Muse**. Tool mở trang luồng riêng, xác minh phiên và tìm ô nhập mà không gửi prompt hay yêu cầu tạo nội dung; trang kiểm tra được đóng sau đó. Kết quả giữ ở bảng tài khoản. Nếu lỗi, mở **Chi tiết trang luồng**: chẩn đoán gồm miền, đường dẫn đã che phần riêng tư, trạng thái tải/hiển thị, kích thước và số ô nhập. Không thu nội dung chat, bản nháp, mật khẩu, cookie, token hoặc tham số URL.
+
+Đã tái hiện bằng fixture: tài khoản đang ở `/chat` nhưng luồng mở `/` không có editor; dùng lại đường dẫn trò chuyện và xử lý trong iframe thì nhận được kết quả. Đây là sửa lỗi được kiểm chứng cục bộ; chưa xác nhận đây là nguyên nhân duy nhất trên Muse thật của người dùng.
 
 ## Sửa nút tạo bị khóa trong bản 1.4.3
 

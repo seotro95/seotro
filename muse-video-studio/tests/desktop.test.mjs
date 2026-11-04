@@ -67,6 +67,21 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       assert.equal(await studio.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true }).isEnabled(), true);
       await assert.rejects(studio.evaluate(() => window.museTransport.request(crypto.randomUUID(), 'https://example.com', {})), /Invalid Studio request/);
     });
+    await t.test('Message check uses the logged-in workspace and its frame without submitting content', async () => {
+      fixture.state.chatPath = '/chat'; fixture.state.frameComposer = true;
+      await login.goto(fixtureURL + 'chat?fixture_private=not-for-diagnostics#private-fragment');
+      const checked = studio.waitForResponse(response => response.url().endsWith('/api/account/composer'));
+      await studio.getByRole('button', { name: 'Kiểm tra ô Message', exact: true }).click();
+      const response = await checked;
+      assert.equal(response.status(), 200);
+      const result = await response.json();
+      assert.equal(result.composer.ready, true);
+      assert.equal(result.composer.details.length, 2);
+      assert.equal(JSON.stringify(result).includes('not-for-diagnostics'), false);
+      assert.equal(fixture.state.submitted.length, 0);
+      await waitFor(() => desktop.context().pages().length === 3, 'Message check worker disposed');
+      assert.match(await studio.locator('.composer-feedback').innerText(), /Chưa gửi prompt/);
+    });
     await t.test('ten image jobs overlap before any response, share login, and keep scene outputs separate', async () => {
       fixture.state.behavior = 'image'; fixture.state.hold = true; fixture.state.uniqueImages = true;
       for (let i = 1; i <= 10; i++) await studio.getByLabel(`Kịch bản cảnh ${i}`, { exact: true }).fill(`Desktop image ${i}`);
@@ -74,6 +89,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       await studio.getByRole('button', { name: 'TẠO 10 ẢNH', exact: true }).click();
       await waitFor(() => fixture.state.pending.size === 10, 'ten concurrent embedded requests');
       assert.equal(fixture.state.peak, 10);
+      assert.ok(fixture.state.submitted.every(request => request.path === '/composer-frame'));
       assert.ok(fixture.state.submitted.every(request => request.authenticated));
       assert.ok(fixture.state.submitted.every(request => request.viewport.width > 0 && request.viewport.height > 0 && request.prehydrationValue === ''));
       assert.equal(await studio.locator('.status-badge.running').count(), 10);
@@ -125,6 +141,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       assert.equal(status.activeRequests, 0);
     });
     await t.test('closing and reopening the app restores the same embedded session without another login', async () => {
+      fixture.state.chatPath = ''; fixture.state.frameComposer = false;
       await desktop.close(); desktop = null;
       desktop = await _electron.launch({ executablePath: require('electron'), args: [
         ...(process.env.MUSE_ELECTRON_TEST_NO_SANDBOX === '1' ? ['--no-sandbox', '--disable-gpu'] : []), path.join(root, 'desktop/main.mjs'),

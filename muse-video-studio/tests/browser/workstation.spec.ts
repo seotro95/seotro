@@ -359,3 +359,22 @@ test('a verified Muse session enables generation even without a login-page compo
   await expect(page.locator('.connection-feedback')).toContainText('HTTP 503');
   await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true })).toBeDisabled();
 });
+
+test('Message diagnostics show a persistent failure without sending a render', async ({ page }) => {
+  const account = { id: 1, state: 'ready', authenticated: true, sessionAuthenticated: true, composerReady: false, active: true };
+  const renderCalls: string[] = [];
+  page.on('request', request => { if (/\/api\/(image|video|text)$/.test(request.url())) renderCalls.push(request.url()); });
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', embeddedLogin: true, accounts: [account], busy: false } }));
+  await page.route('**/api/account/composer', route => route.fulfill({ status: 504, json: { error: 'MUSE_COMPOSER_NOT_READY: Chưa gửi prompt. Chẩn đoán trang luồng: {"origin":"https://muse.ai","route":"/chat","visibleEditors":0}' } }));
+  await page.reload();
+  await page.getByRole('button', { name: 'Kiểm tra ô Message', exact: true }).click();
+  await expect(page.locator('.composer-feedback')).toContainText('Chưa tìm được ô nhập Message');
+  await page.locator('.composer-feedback').getByText('Chi tiết trang luồng', { exact: true }).click();
+  await expect(page.locator('.composer-feedback pre')).toContainText('visibleEditors');
+  await page.getByRole('button', { name: 'Tài khoản Muse', exact: true }).click();
+  await expect(page.getByRole('dialog').locator('.composer-feedback')).toContainText('Chưa tìm được ô nhập Message');
+  await page.getByRole('dialog').getByLabel('Đóng', { exact: true }).click();
+  await expect(page.locator('.composer-feedback pre')).toBeVisible();
+  expect(renderCalls).toEqual([]);
+  await expect(page.locator('.status-badge.running')).toHaveCount(0);
+});

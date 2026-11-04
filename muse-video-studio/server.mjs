@@ -85,7 +85,7 @@ async function api(req, res, pathname) {
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
   if (!req.headers['content-type']?.startsWith('application/json')) return json(res, 415, { error: 'Cần Content-Type application/json.' });
-  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close)$/);
+  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close|composer)$/);
   const legacyAccountRoute = pathname.match(/^\/api\/accounts\/(\d+)\/(connect|check|close)$/);
   if (!['/api/video', '/api/image', '/api/text'].includes(pathname) && !accountRoute && !legacyAccountRoute) return json(res, 404, { error: 'API không tồn tại.' });
   let acquired = false;
@@ -103,6 +103,7 @@ async function api(req, res, pathname) {
       if (activeRequests || accountBusy) return json(res, 409, { error: 'Đang có tác vụ. Đợi các luồng hoàn tất trước khi thay đổi phiên tài khoản.' });
       muse.account(accountId);
       accountBusy = accountAcquired = true;
+      if (action === 'composer') { const composer = await muse.checkComposer(abort.signal); return json(res, 200, { accounts: muse.snapshot(), composer }); }
       if (action === 'close') { if (muse.active?.id === accountId) await muse.close(); }
       else await muse.connect(accountId, { show: action === 'connect' });
       return json(res, 200, { accounts: muse.snapshot() });

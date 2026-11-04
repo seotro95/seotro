@@ -1,4 +1,4 @@
-# Xác minh bản 1.4.3
+# Xác minh bản 1.4.4
 
 ## Kết quả trên Linux
 
@@ -6,10 +6,19 @@
 - `npm run build`: TypeScript và Vite thành công. Cảnh báo `use client` của bộ icon không ngăn build.
 - Lệnh `npm start` qua launcher phát hành đã mở ứng dụng trên Linux/Xorg với hồ sơ fixture mới, trả HTML/API đúng trạng thái và thoát sạch khi đóng cửa sổ. Không mở Chrome ngoài.
 - `npm test`: 7 bài parser/chuyển dự án cũ/kích thước/state, 7 bài máy chủ API trong một nhóm, 3 bài lệnh mở trình duyệt dự phòng và 2 bài phân tích số dư đã qua, không bỏ qua bài nào.
-- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge`: 18 kịch bản trong một nhóm đã qua, dùng Chromium thật với Muse giả lập trên loopback và hồ sơ tạm.
-- `DISPLAY=:97 MUSE_ELECTRON_TEST_NO_SANDBOX=1 npm run test:desktop`: 6 kịch bản trong một nhóm đã qua, dùng Electron thật trên màn hình Xorg dummy. Cờ tắt sandbox chỉ áp dụng cho fixture trong cloud; launcher phát hành không dùng cờ này.
-- `CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e`: lượt đầy đủ có **17/18** bài qua; ca 10 ảnh hết giới hạn 30 giây. Chạy lại riêng ca 10 ảnh và ca phiên đã xác minh/nút tạo đều qua (`test-results/.last-run.json`: `passed`). Desktop 5 cột, mobile không tràn ngang đã qua trong lượt đầy đủ.
+- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge`: 21 kịch bản trong một nhóm đã qua (22 Node tests), dùng Chromium thật với Muse giả lập trên loopback và hồ sơ tạm.
+- `DISPLAY=:97 MUSE_ELECTRON_TEST_NO_SANDBOX=1 npm run test:desktop`: 7 kịch bản trong một nhóm đã qua (8 Node tests), dùng Electron thật trên màn hình Xorg dummy. Cờ tắt sandbox chỉ áp dụng cho fixture trong cloud; launcher phát hành không dùng cờ này.
+- `CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e`: **18 ca đầu** qua trong lượt đầy đủ. Ca chẩn đoán Message mới chờ nhầm một toast không được chức năng tạo ra; sửa test để mở/đóng hộp tài khoản và giữ chi tiết lỗi ở bảng tài khoản, rồi chạy riêng ca này: **1/1 qua**. Không thay mã ứng dụng để xử lý lỗi trong test. Desktop 5 cột, mobile không tràn ngang đã qua.
 - Kiểm tra cú pháp Node cho server/cầu nối/desktop/launcher, `bash -n start.sh` và whitespace Git đã qua.
+
+## Trang trò chuyện và ô Message trong bản 1.4.4
+
+- Tái hiện đường dẫn sai: trang đăng nhập ở `/chat`, nhưng worker mở `/` với dashboard không có editor thì `MUSE_COMPOSER_NOT_READY`. Dùng đường dẫn trang Muse đã xác minh thì kiểm tra được ô Message, không gửi nội dung. Không sao chép query hoặc fragment từ URL đăng nhập.
+- Ca Chromium nhận ảnh mới và xác nhận ảnh tham chiếu trong iframe cùng miền. Cả việc tìm Message, New chat, theo dõi phản hồi mới và tải kết quả dùng đúng khung. Ô nhập của miền khác không được chọn.
+- Ca chuyển hướng trang luồng từ miền fixture đã xác minh sang miền khác bị từ chối bằng `MUSE_WORKSPACE_ORIGIN` trước khi nhập/gửi prompt; không render và worker được đóng.
+- Chẩn đoán thiếu editor chứa số lượng và trạng thái trang, che phần đường dẫn riêng tư. Ca hồi quy đưa email, token query/fragment giả và bản nháp riêng vào fixture; thông báo không chứa các dữ liệu đó, không có yêu cầu render phát sinh, worker được đóng.
+- Electron thật: nút Kiểm tra ô Message gọi endpoint kiểm tra trang luồng, trả thành công với hai khung và không render. Sau đó 10 ảnh, 10 video từ ảnh và Stop đều chạy qua iframe ở đúng trang `/chat`; khôi phục phiên và popup đăng nhập vẫn qua.
+- Đo trực tiếp Electron 1.4.3 cho thấy worker nền có viewport 1280×900 và `document.visibilityState=visible` trên Linux. Không quy lỗi cho trạng thái ẩn và không thay cơ chế hiển thị các view.
 
 ## Nút tạo và ô Message trong bản 1.4.3
 

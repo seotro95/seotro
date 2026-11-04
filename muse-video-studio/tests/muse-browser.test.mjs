@@ -96,6 +96,65 @@ test('owned browser bridge against local Muse-shaped pages (not live Muse)', asy
         assert.equal(state.submitted.length, count);
       } finally { state.composerLayout = 'hatch'; state.editorLabel = 'Message'; state.newChat = true; driver.composerTimeoutMs = timeout; }
     });
+    await t.test('checks the verified chat route without rendering, then reads output and references in its same-origin frame', async () => {
+      const count = state.submitted.length;
+      const timeout = driver.composerTimeoutMs;
+      state.chatPath = '/chat'; state.frameComposer = true; state.landingOnly = true; state.composerLayout = 'semantic'; state.behavior = 'image';
+      try {
+        driver.composerTimeoutMs = 2000;
+        await driver.active.page.goto(driver.serviceURL + 'chat?oauth_token=fixture-private-token#fixture-private-fragment');
+        assert.equal(driver.workerURL(), driver.serviceURL + 'chat');
+        const workerURL = driver.workerURL;
+        driver.workerURL = () => driver.serviceURL;
+        driver.composerTimeoutMs = 150;
+        try { await assert.rejects(driver.checkComposer(new AbortController().signal), /MUSE_COMPOSER_NOT_READY/); }
+        finally { driver.workerURL = workerURL; driver.composerTimeoutMs = 2000; }
+        const check = await driver.checkComposer(new AbortController().signal);
+        assert.equal(check.ready, true);
+        assert.equal(state.submitted.length, count);
+        assert.equal(driver.workers.size, 0);
+        assert.equal(driver.active.context.pages().length, 1);
+        assert.equal(JSON.stringify(check).includes('fixture-private'), false);
+        const result = await driver.generateImage({ accountId: 1, prompt: 'Render inside the workspace frame', aspectRatio: '16:9', resolution: '2k', characterLock: true, referenceImage: { base64: png, mimeType: 'image/png' } }, new AbortController().signal);
+        assert.equal(result.base64, image.toString('base64'));
+        assert.equal(state.submitted.length, count + 1);
+        assert.equal(state.submitted.at(-1).path, '/composer-frame');
+        assert.equal(state.submitted.at(-1).attached, 1);
+      } finally {
+        state.chatPath = ''; state.frameComposer = false; state.landingOnly = false; state.composerLayout = 'hatch'; driver.composerTimeoutMs = timeout;
+        await driver.active.page.goto(driver.serviceURL);
+      }
+    });
+    await t.test('refuses a worker redirected away from the verified Muse origin before typing', async () => {
+      const count = state.submitted.length;
+      const route = driver.serviceURL + 'chat';
+      await driver.active.page.goto(route);
+      await driver.active.context.route(route, interception => interception.fulfill({ status: 302, headers: { location: driver.serviceURL.replace('127.0.0.1', 'localhost') + 'composer-frame' } }));
+      try {
+        await assert.rejects(driver.generateText({ accountId: 1, prompt: 'Never send this to another origin' }, new AbortController().signal), /MUSE_WORKSPACE_ORIGIN/);
+        assert.equal(state.submitted.length, count);
+        assert.equal(driver.workers.size, 0);
+      } finally { await driver.active.context.unroute(route); await driver.active.page.goto(driver.serviceURL); }
+    });
+    await t.test('missing-editor diagnostics contain counts and sanitized routes, never drafts or URL secrets', async () => {
+      const timeout = driver.composerTimeoutMs;
+      const count = state.submitted.length;
+      state.composerLayout = 'semantic'; state.editorLabel = 'Search'; state.newChat = false;
+      try {
+        driver.composerTimeoutMs = 150;
+        await driver.active.page.goto(driver.serviceURL + 'private-person@example.com?token=fixture-private-token#fixture-private-fragment');
+        await driver.active.page.locator('#fixture-editor').fill('Private unsent draft');
+        await assert.rejects(driver.checkComposer(new AbortController().signal), error => {
+          assert.match(error.message, /MUSE_COMPOSER_NOT_READY/);
+          assert.match(error.message, /visibleEditors/);
+          assert.match(error.message, /\[ẩn\]/);
+          assert.doesNotMatch(error.message, /private-person|fixture-private|Private unsent/);
+          return true;
+        });
+        assert.equal(state.submitted.length, count);
+        assert.equal(driver.workers.size, 0);
+      } finally { state.composerLayout = 'hatch'; state.editorLabel = 'Message'; state.newChat = true; driver.composerTimeoutMs = timeout; await driver.active.page.goto(driver.serviceURL); }
+    });
     await t.test('submits the reference and returns the new playable video with observed metadata', async () => {
       state.behavior = 'video';
       const result = await driver.generateVideo({ ...data, referenceImage: { base64: png, mimeType: 'image/png' } }, new AbortController().signal);

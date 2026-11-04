@@ -147,16 +147,59 @@ export class MuseBrowser {
     }).catch(() => ({ authenticated: false, state: 'check_failed', message: 'Chưa đọc được trang Muse để xác minh phiên. Mở tab Muse rồi kiểm tra lại.' }));
   }
   async findComposer(page) {
+    const frames = await this.composerFrames(page);
     for (const selector of [EDITOR, NAMED_EDITOR]) {
-      const candidates = page.locator(selector);
-      const count = await candidates.count();
-      if (count === 1) return candidates.first();
-      if (count > 1) throw fail('MUSE_COMPOSER_AMBIGUOUS', 'Có nhiều ô nhập phù hợp trong cuộc trò chuyện Muse. Chưa gửi prompt để tránh nhập nhầm ô.');
+      const matches = [];
+      for (const frame of frames) {
+        const candidates = frame.locator(selector);
+        for (let index = 0, count = await candidates.count(); index < count; index++) matches.push(candidates.nth(index));
+      }
+      if (matches.length === 1) return matches[0];
+      if (matches.length > 1) throw fail('MUSE_COMPOSER_AMBIGUOUS', 'Có nhiều ô nhập phù hợp trong cuộc trò chuyện Muse. Chưa gửi prompt để tránh nhập nhầm ô.');
     }
     return null;
   }
-  newChatControl(page) {
-    return page.getByRole('button', { name: NEW_CHAT }).or(page.getByRole('link', { name: NEW_CHAT })).filter({ visible: true }).first();
+  async composerFrames(page) {
+    if (!page.frames) return [page];
+    const frames = [page.mainFrame()];
+    for (const frame of page.frames()) {
+      if (frame === page.mainFrame() || new URL(frame.url(), this.serviceURL).origin !== new URL(this.serviceURL).origin) continue;
+      const element = await frame.frameElement().catch(() => null);
+      try { if (await element?.isVisible()) frames.push(frame); }
+      finally { await element?.dispose(); }
+    }
+    return frames;
+  }
+  async newChatControl(page) {
+    for (const frame of await this.composerFrames(page)) {
+      const entry = frame.getByRole('button', { name: NEW_CHAT }).or(frame.getByRole('link', { name: NEW_CHAT })).filter({ visible: true }).first();
+      if (await entry.count()) return entry;
+    }
+    return null;
+  }
+  workerURL() {
+    // Use the user's verified app route, rather than sending every worker back
+    // to a marketing/landing page. OAuth query parameters are never copied.
+    const current = new URL(this.active.page.url());
+    const service = new URL(this.serviceURL);
+    return current.origin === service.origin && !/\/(?:auth|oauth|login|signin|callback)(?:\/|$)/i.test(current.pathname)
+      ? new URL(current.pathname, service.origin).href : this.serviceURL;
+  }
+  async composerDiagnostics(page) {
+    const frames = page.frames ? page.frames() : [page];
+    const known = new Set(['app', 'chat', 'chats', 'new', 'home', 'workspace', 'studio', 'login', 'auth', 'signin', 'callback']);
+    return Promise.all(frames.slice(0, 8).map(async frame => {
+      const url = new URL(frame.url(), this.serviceURL);
+      const route = url.pathname.split('/').map(part => !part || known.has(part.toLowerCase()) ? part : '[ẩn]').join('/');
+      const metrics = await frame.evaluate(() => {
+        const visible = el => el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+        return { ready: document.readyState, visibility: document.visibilityState, viewport: [innerWidth, innerHeight],
+          composerRoots: document.querySelectorAll('[data-hatch-composer-root]').length,
+          prehydration: document.querySelectorAll('[data-hatch-composer-prehydration-input="true"]').length,
+          visibleEditors: [...document.querySelectorAll('textarea, [contenteditable="true"], [contenteditable="plaintext-only"]')].filter(visible).length };
+      }).catch(() => ({ ready: 'unavailable' }));
+      return { origin: url.origin, route, ...metrics };
+    }));
   }
   async waitForComposer(page, { openConversation = false } = {}) {
     const deadline = Date.now() + this.composerTimeoutMs;
@@ -165,22 +208,28 @@ export class MuseBrowser {
       const editor = await this.findComposer(page);
       if (editor) return editor;
       if (openConversation && !opened) {
-        const entry = this.newChatControl(page);
-        if (await entry.count()) { await entry.click(); opened = true; }
+        const entry = await this.newChatControl(page);
+        if (entry) { await entry.click(); opened = true; }
       }
       await pause(Math.min(100, Math.max(1, deadline - Date.now())));
     } while (Date.now() < deadline);
-    throw fail('MUSE_COMPOSER_NOT_READY', 'Chưa mở được ô nhập trong cuộc trò chuyện Muse của cảnh này. Chưa gửi prompt. Mở tab Muse kiểm tra mục trò chuyện hoặc thử lại cảnh lỗi.', 504);
+    const details = await this.composerDiagnostics(page);
+    throw fail('MUSE_COMPOSER_NOT_READY', `Chưa mở được ô nhập trong cuộc trò chuyện Muse của cảnh này. Chưa gửi prompt. Chẩn đoán trang luồng (không chứa nội dung chat): ${JSON.stringify(details)}`, 504);
   }
   async prepareConversation(page) {
-    await this.waitForComposer(page, { openConversation: true });
-    const users = page.locator(`${MESSAGES}[data-message-role="user"]`);
-    if (!await users.count()) return;
-    const newChat = this.newChatControl(page);
-    if (!await newChat.isVisible().catch(() => false)) throw fail('MUSE_NEW_CHAT_UNAVAILABLE', 'Không mở được cuộc trò chuyện riêng. Chưa gửi prompt; Muse cần hỗ trợ các cuộc trò chuyện độc lập để chạy đồng thời.');
+    const editor = await this.waitForComposer(page, { openConversation: true });
+    const handle = await editor.elementHandle();
+    let frame;
+    try { frame = await handle.ownerFrame(); }
+    finally { await handle.dispose(); }
+    const users = frame.locator(`${MESSAGES}[data-message-role="user"]`);
+    if (!await users.count()) return frame;
+    const newChat = await this.newChatControl(frame);
+    if (!newChat) throw fail('MUSE_NEW_CHAT_UNAVAILABLE', 'Không mở được cuộc trò chuyện riêng. Chưa gửi prompt; Muse cần hỗ trợ các cuộc trò chuyện độc lập để chạy đồng thời.');
     await newChat.click();
-    await page.waitForFunction(selector => document.querySelectorAll(selector).length === 0, `${MESSAGES}[data-message-role="user"]`, { timeout: 15000 });
-    await this.waitForComposer(page);
+    await frame.waitForFunction(selector => document.querySelectorAll(selector).length === 0, `${MESSAGES}[data-message-role="user"]`, { timeout: 15000 });
+    await this.waitForComposer(frame);
+    return frame;
   }
   async attach(page, image) {
     const editor = await this.waitForComposer(page);
@@ -196,7 +245,7 @@ export class MuseBrowser {
     } catch { throw fail('MUSE_UPLOAD_NOT_READY', 'Ảnh chưa xuất hiện trong ô soạn Muse. Chưa gửi prompt; kiểm tra cửa sổ Muse rồi thử lại.'); }
     finally { await areaHandle?.dispose(); }
   }
-  async turn({ accountId, prompt, image, video, output = video ? 'video' : 'text', signal }) {
+  async turn({ accountId, prompt, image, video, output = video ? 'video' : 'text', signal, checkOnly = false }) {
     this.requireSingleAccount(accountId);
     if (this.workers.size >= 10) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã có 10 luồng đang chạy trên tài khoản Muse.', 429);
     const key = randomUUID();
@@ -218,22 +267,25 @@ export class MuseBrowser {
       page = owned.createWorkerPage ? await owned.createWorkerPage() : await owned.context.newPage();
       this.workers.set(key, page);
       signal.throwIfAborted();
-      await page.goto(this.serviceURL, { waitUntil: 'domcontentloaded', timeout: 45000 });
+      await page.goto(this.workerURL(), { waitUntil: 'domcontentloaded', timeout: 45000 });
+      if (new URL(page.url()).origin !== new URL(this.serviceURL).origin) throw fail('MUSE_WORKSPACE_ORIGIN', 'Trang luồng chuyển sang miền khác Muse. Chưa nhập hoặc gửi prompt. Hoàn tất đăng nhập trong tab Muse rồi kiểm tra lại phiên.', 409);
       const workerProbe = await this.inspectAuthentication(page);
       if (!workerProbe.authenticated) {
         Object.assign(this.account(accountId), { authenticated: false, sessionAuthenticated: false, composerReady: false, state: workerProbe.state, connectionMessage: workerProbe.message });
         throw fail(workerProbe.state === 'check_failed' ? 'MUSE_SESSION_CHECK_FAILED' : 'MUSE_LOGIN_REQUIRED', workerProbe.message, workerProbe.state === 'check_failed' ? 503 : 401);
       }
-      await this.prepareConversation(page);
+      const conversation = await this.prepareConversation(page);
       signal.throwIfAborted();
-      if (await page.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
-      return await this.sendTurn({ page, prompt, image, output, signal, onSubmit: () => { sending = true; } });
+      if (await conversation.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
+      if (checkOnly) return { ready: true, message: 'Đã mở được ô Message trong trang luồng riêng. Chưa gửi prompt hoặc yêu cầu tạo nội dung.', details: await this.composerDiagnostics(page) };
+      return await this.sendTurn({ page: conversation, prompt, image, output, signal, onSubmit: () => { sending = true; } });
     } finally {
       signal.removeEventListener('abort', cancelled);
       if (page) await (owned?.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()).catch(() => {});
       this.workers.delete(key);
     }
   }
+  async checkComposer(signal) { return this.turn({ accountId: 1, checkOnly: true, signal }); }
   async sendTurn({ page, prompt, image, output, signal, onSubmit }) {
     const editor = await this.waitForComposer(page);
     if ((await editor.innerText().catch(() => '')).trim() || (await editor.inputValue().catch(() => '')).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có nội dung chưa gửi. Gửi hoặc xóa bản nháp đó trước; tool không ghi đè.', 409);

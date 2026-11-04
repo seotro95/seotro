@@ -1,8 +1,8 @@
-# Muse AI Studio 1.4.3 · 10 luồng đồng thời
+# Muse AI Studio 1.4.4 · 10 luồng đồng thời
 
 [Tải ZIP mới](https://github.com/seotro95/seotro/raw/refs/heads/main/Muse-Video-Workstation.zip) · [Hướng dẫn đầy đủ](muse-video-studio/README.md)
 
-**Bản 1.4.3 sửa nút tạo bị khóa dù đã đăng nhập.** Phiên Muse được API xác minh sẽ mở nút tạo; mỗi cảnh tự mở cuộc trò chuyện và tìm ô Message riêng. Hỗ trợ ô Message ngoài khung giao diện cũ. Đóng hẳn tool cũ trước khi giải nén bản mới đè các tệp chương trình; giữ nguyên `.data` và `.env`.
+**Bản 1.4.4 sửa cách mở trang trò chuyện cho các luồng.** Tool dùng đường dẫn của trang Muse đã xác minh sau đăng nhập, tìm ô Message cả trong khung cùng miền và đọc kết quả tại đúng khung đó. Thêm **Kiểm tra ô Message** ở bảng tài khoản: mở một trang luồng để kiểm tra, chưa gửi prompt hoặc yêu cầu tạo nội dung. Nếu chưa tìm thấy ô nhập, mở **Chi tiết trang luồng** để xem chẩn đoán. Đóng hẳn tool cũ trước khi giải nén bản mới đè các tệp chương trình; giữ nguyên `.data` và `.env`.
 
 **Một tài khoản Muse, tối đa 10 luồng ảnh/video chạy đồng thời trong các cuộc trò chuyện riêng. Đăng nhập ngay trong cửa sổ tool bằng tab Muse tích hợp; không cần cài hoặc mở Chrome riêng.**
 

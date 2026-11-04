@@ -14,3 +14,4 @@
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 .connection-feedback{margin:0;max-width:310px;font-size:11px;line-height:1.6;color:#a9bad6;white-space:normal;overflow-wrap:anywhere}
+.composer-feedback{width:100%;min-width:0;font-size:11px;color:#a9bad6;line-height:1.6;overflow-wrap:anywhere}.composer-feedback details{margin-top:6px}.composer-feedback pre{max-height:220px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:10px}

@@ -1,7 +1,7 @@
 import http from 'node:http';
 
 export function createMuseFixture({ image, clip }) {
-const state = { behavior: 'video', submitted: [], stops: 0, hold: false, peak: 0, pending: new Map(), released: new Set(), outputs: new Map(), uniqueImages: false, oldConversation: false, newChat: true, prehydrationInput: false, richComposer: false, hydrationDelayMs: 0, authStatus: 200, loginInPopup: false, composerLayout: 'hatch', landingOnly: false, editorLabel: 'Message' };
+const state = { behavior: 'video', submitted: [], stops: 0, hold: false, peak: 0, pending: new Map(), released: new Set(), outputs: new Map(), uniqueImages: false, oldConversation: false, newChat: true, prehydrationInput: false, richComposer: false, hydrationDelayMs: 0, authStatus: 200, loginInPopup: false, composerLayout: 'hatch', landingOnly: false, editorLabel: 'Message', chatPath: '', frameComposer: false };
 const fixture = http.createServer(async (req, res) => {
   if (req.url === '/api/auth/check') { res.statusCode = state.authStatus; res.setHeader('Content-Type', 'application/json'); return res.end(JSON.stringify({ ok: /fixture_session=connected/.test(req.headers.cookie || '') })); }
   if (req.url === '/fixture-auth-popup') { res.setHeader('Content-Type', 'text/html; charset=utf-8'); return res.end(`<html><button id="finish">Finish fixture login</button><script>document.querySelector('#finish').onclick=()=>{document.cookie='fixture_session=connected; Max-Age=3600; SameSite=Strict';window.close()}</script></html>`); }
@@ -21,6 +21,9 @@ const fixture = http.createServer(async (req, res) => {
   if (req.url?.endsWith('.png')) { res.setHeader('Content-Type', 'image/png'); return res.end(image); }
   if (req.url?.endsWith('.mp4')) { res.setHeader('Content-Type', 'video/mp4'); return res.end(clip); }
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  const requestPath = new URL(req.url, 'http://127.0.0.1').pathname;
+  if (state.chatPath && requestPath === '/') return res.end('<!doctype html><html><body><h1>Fixture dashboard without chat</h1></body></html>');
+  if (state.frameComposer && requestPath !== '/composer-frame') return res.end('<!doctype html><html><body><iframe title="Muse chat" src="/composer-frame" style="width:100%;height:900px;border:0"></iframe></body></html>');
   const rootTag = state.composerLayout === 'hatch' ? 'div' : 'form';
   res.end(`<!doctype html><html><body>
   <header><span data-testid="token-balance">Tokens remaining: 1,234</span></header><button id="login">Fixture login</button>
@@ -37,7 +40,7 @@ const fixture = http.createServer(async (req, res) => {
   root.querySelector('input').onchange=e=>{const img=new Image();img.src=URL.createObjectURL(e.target.files[0]);document.querySelector('#attachments').appendChild(img)};
   stop.onclick=()=>{stop.style.display='none';fetch('/stop')};
   editor.onkeydown=async e=>{if(e.key!=='Enter')return;e.preventDefault();const prompt=editor.tagName==='TEXTAREA'?editor.value:editor.innerText;const user=document.createElement('div');user.setAttribute('data-message-item','');user.setAttribute('data-message-role','user');user.textContent=prompt;history.appendChild(user);if(editor.tagName==='TEXTAREA')editor.value='';else editor.replaceChildren();const attached=root.querySelectorAll('img').length;document.querySelector('#attachments').replaceChildren();root.querySelector('input').value='';stop.style.display='block';
-    const mode=await(await fetch('/turn',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt,attached,viewport:{width:innerWidth,height:innerHeight},prehydrationValue:root.querySelector('[data-hatch-composer-prehydration-input]')?.value||''})})).json();
+    const mode=await(await fetch('/turn',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt,attached,path:location.pathname,viewport:{width:innerWidth,height:innerHeight},prehydrationValue:root.querySelector('[data-hatch-composer-prehydration-input]')?.value||''})})).json();
     if(mode.held) while(!(await(await fetch('/ready?id='+mode.id)).json()).ready) await new Promise(resolve=>setTimeout(resolve,80));
     if(mode.behavior==='slow')return;
     setTimeout(()=>{const reply=document.createElement('div');reply.setAttribute('data-message-item','');reply.setAttribute('data-message-role','assistant');

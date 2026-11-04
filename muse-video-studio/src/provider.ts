@@ -108,4 +108,4 @@ export async function downloadVideo(media: MediaResult, id: number) {
   const a = document.createElement('a'); a.href = media.url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
 }
 export const providerStatus = () => api('/api/status');
-export const accountAction = (action: 'connect' | 'check' | 'close') => api(`/api/account/${action}`, {});
+export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer') => api(`/api/account/${action}`, {});
