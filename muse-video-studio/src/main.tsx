@@ -256,7 +256,7 @@ function App() {
       const restored = restoreWorkspace(text); updateScenes(all => { all.forEach(s => { releaseVideo(s.video); releaseVideo(s.image); }); return restored.scenes; }); setSettings(restored.settings); setGlobalImage(null); setNotice('Đã mở dự án. Chọn lại ảnh tham chiếu; video và ảnh không lưu trong JSON.');
     } catch (e) { setNotice(errorInfo(e).raw); }
   }
-  const connection = settings.mode === 'demo' ? 'Kiểm thử · không dùng AI' : usingBrowser ? (museAccount?.authenticated ? 'Muse · Đã xác minh' : 'Muse · Chưa đăng nhập') : status?.museConfigured ? 'Đã khai báo adapter Muse' : 'Chưa kết nối Muse AI';
+  const connection = settings.mode === 'demo' ? 'Kiểm thử · không dùng AI' : usingBrowser ? (museAccount?.authenticated ? 'Muse · Đã xác minh' : museAccount?.sessionAuthenticated ? 'Muse · Đã đăng nhập · Đang tải' : 'Muse · Chưa xác minh') : status?.museConfigured ? 'Đã khai báo adapter Muse' : 'Chưa kết nối Muse AI';
 
   return <div className="app-shell">
     <input ref={imageInput} type="file" accept="image/png,image/jpeg,image/webp" hidden onChange={e => { void handleImage(e.target.files?.[0]); e.target.value = ''; }}/>

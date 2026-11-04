@@ -342,6 +342,7 @@ test('connection feedback remains visible and distinguishes login from composer 
   await page.route('**/api/account/check', route => route.fulfill({ json: { accounts: [account] } }));
   await page.reload();
   await expect(page.locator('.single-account-controls')).toContainText('Đã đăng nhập · Đang tải Muse');
+  await expect(page.locator('.connection-pill')).toContainText('Đã đăng nhập · Đang tải');
   await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true })).toBeDisabled();
   account.state = 'check_failed'; account.sessionAuthenticated = false;
   account.connectionMessage = 'Không xác minh được phiên Muse (HTTP 503). Kiểm tra tab Muse rồi thử Kiểm tra phiên lại.';
