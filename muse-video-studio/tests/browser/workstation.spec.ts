@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 const video = (await readFile(new URL('../../public/demo.mp4', import.meta.url))).toString('base64');
+const image = (await readFile(new URL('../../public/demo-image.png', import.meta.url))).toString('base64');
 const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aO1sAAAAASUVORK5CYII=', 'base64');
 test.beforeEach(async ({ page }) => { await page.goto('/'); });
 async function configureAdapter(page: Page) {
@@ -18,6 +19,8 @@ test('matches 10-slot layout on desktop and remains within mobile viewport', asy
   await page.getByLabel('Model AI').selectOption('Veo 3.1 - Fast');
   await expect(page.getByLabel('Thời lượng')).toHaveValue('8');
   await expect(page.getByLabel('Chất lượng')).toHaveValue('720p');
+  await page.getByLabel('Chất lượng').selectOption('4k');
+  await expect(page.getByLabel('Chất lượng')).toHaveValue('4k');
   await expect(page.getByLabel('Thời lượng')).toBeDisabled();
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -46,7 +49,7 @@ test('global image sync, per-scene override and manual reapply', async ({ page }
   await expect(page.locator('.scene-image')).toHaveCount(10);
   await upload('Đổi ảnh cảnh 1', 'private.png');
   await expect(page.getByTestId('scene-1').getByText('Ảnh riêng', { exact: false })).toBeVisible();
-  await page.getByRole('button', { name: 'Áp dụng cho toàn bộ 10 tài khoản' }).click();
+  await page.getByRole('button', { name: 'Áp dụng cho 10 cảnh' }).click();
   await expect(page.getByTestId('scene-1').getByText('Ảnh chung · đã đồng bộ')).toBeVisible();
   await page.getByRole('button', { name: 'Gỡ ảnh cảnh 2', exact: true }).click();
   await expect(page.getByTestId('scene-2').locator('.scene-image')).toHaveCount(0);
@@ -82,6 +85,7 @@ test('Muse contract sends accountId, settings, R2V and modifier; video plays and
 });
 
 test('batch respects disabled accounts, shows failures, and never overlaps render requests', async ({ page }) => {
+  test.setTimeout(60000);
   await configureAdapter(page);
   const calls: number[] = []; let active = 0; let peak = 0;
   await page.route('**/api/video', async route => {
@@ -93,7 +97,8 @@ test('batch respects disabled accounts, shows failures, and never overlaps rende
   await page.locator('.account-list input[type=checkbox]').nth(1).uncheck();
   await page.getByRole('button', { name: 'Hoàn tất', exact: true }).click();
   await page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' }).click();
-  await expect(page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' })).toBeVisible();
+  await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '8', { timeout: 20000 });
+  await expect(page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' })).toBeVisible({ timeout: 10000 });
   expect(calls).toEqual([1, 3, 4, 5, 6, 7, 8, 9, 10]); expect(peak).toBe(1);
   await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '8');
   await expect(page.getByTestId('scene-3').getByText('Kiểm tra hạn mức', { exact: false })).toBeVisible();
@@ -152,7 +157,7 @@ test('Enhance uses the scene account; diagnostic never renders without explicit 
   await expect(page.locator('.diagnostic-result')).toContainText('hoàn tất');
   expect(renders).toBe(1);
   expect(videoPayload.duration).toBe(4); expect(videoPayload.resolution).toBe('360p');
-  await expect(page.locator('.diagnostic-result')).toContainText('API không cung cấp');
+  await expect(page.locator('.diagnostic-result')).toContainText('GPU: chưa có thông tin');
 });
 
 test('refreshing a newly configured adapter enables rendering without losing the script', async ({ page }) => {
@@ -166,7 +171,7 @@ test('refreshing a newly configured adapter enables rendering without losing the
   await expect(page.getByLabel('Kịch bản cảnh 1', { exact: true })).toHaveValue('Keep this script while connecting.');
 });
 
-test('connect/check account enables only its slot and reports observed video metadata', async ({ page }) => {
+test('connect/check one account enables unassigned slots and reports observed video metadata', async ({ page }) => {
   const accounts = Array.from({ length: 10 }, (_, i) => ({ id: i + 1, state: 'disconnected', authenticated: false, active: false, checkedAt: null as string | null }));
   await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', accounts, busy: false } }));
   await page.route('**/api/accounts/1/connect', route => { accounts[0].state = 'login_open'; accounts[0].active = true; return route.fulfill({ json: { accounts } }); });
@@ -181,10 +186,10 @@ test('connect/check account enables only its slot and reports observed video met
   await expect(page.locator('.account-session').first()).toContainText('Đã xác minh');
   await page.getByRole('button', { name: 'Hoàn tất', exact: true }).click();
   await expect(page.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này' })).toBeEnabled();
-  await expect(page.getByTestId('scene-2').getByRole('button', { name: 'Tạo cảnh này' })).toBeDisabled();
+  await expect(page.getByTestId('scene-2').getByRole('button', { name: 'Tạo cảnh này' })).toBeEnabled();
   await page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' }).click();
-  await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
-  expect(calls).toEqual([1]);
+  await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '10');
+  expect(calls).toEqual(Array(10).fill(1));
   await expect(page.getByTestId('scene-1').locator('.video-metadata')).toHaveText('Muse trả về: 640×360 · 4.0 giây');
   accounts[0].authenticated = false; accounts[0].state = 'login_open';
   await page.getByRole('button', { name: 'Chẩn đoán API', exact: true }).click();
@@ -192,4 +197,125 @@ test('connect/check account enables only its slot and reports observed video met
   await page.getByRole('button', { name: 'Đóng', exact: true }).last().click();
   await expect(page.getByTestId('scene-1').getByRole('button', { name: 'Tạo lại cảnh' })).toBeDisabled();
   await expect(page.getByTestId('scene-1').locator('video')).toBeVisible();
+});
+
+test('shared account routing respects explicit assignments and survives reload', async ({ page }) => {
+  const accounts = Array.from({ length: 10 }, (_, i) => ({ id: i + 1, state: i < 2 ? 'ready' : 'disconnected', authenticated: i < 2, active: i === 0, checkedAt: null }));
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', accounts, busy: false } }));
+  const calls: number[] = [];
+  await page.route('**/api/video', route => { calls.push(route.request().postDataJSON().accountId); return route.fulfill({ json: { base64: video, mimeType: 'video/mp4' } }); });
+  await page.reload();
+  await page.getByLabel('Tài khoản dùng chung', { exact: true }).selectOption('1');
+  await page.getByLabel('Gán tài khoản cảnh 3', { exact: true }).selectOption('2');
+  await page.getByLabel('Gán tài khoản cảnh 4', { exact: true }).selectOption('4');
+  await expect(page.getByTestId('scene-4').getByRole('button', { name: 'Tạo cảnh này' })).toBeDisabled();
+  await page.getByTestId('scene-3').getByRole('button', { name: 'Tạo cảnh này' }).click();
+  await expect(page.getByTestId('scene-3').locator('video')).toBeVisible();
+  await page.getByTestId('scene-5').getByRole('button', { name: 'Tạo cảnh này' }).click();
+  await expect(page.getByTestId('scene-5').locator('video')).toBeVisible();
+  expect(calls).toEqual([2, 1]);
+  await page.reload();
+  await expect(page.getByLabel('Gán tài khoản cảnh 4', { exact: true })).toHaveValue('4');
+  await expect(page.getByLabel('Tài khoản dùng chung', { exact: true })).toHaveValue('1');
+  await page.getByRole('checkbox', { name: 'Tự dùng chung cho ô chưa gán tài khoản' }).uncheck();
+  await expect(page.getByTestId('scene-5').getByRole('button', { name: 'Tạo cảnh này' })).toBeDisabled();
+  await expect(page.getByTestId('scene-3').getByRole('button', { name: 'Tạo cảnh này' })).toBeEnabled();
+});
+
+test('imports a 4K image batch from SRT, follows independent prompts, and converts the images to 1080p video requests', async ({ page }) => {
+  await configureAdapter(page);
+  const imageCalls: any[] = []; const videoCalls: any[] = [];
+  await page.route('**/api/image', route => { imageCalls.push(route.request().postDataJSON()); return route.fulfill({ json: { base64: image, mimeType: 'image/png', metadata: { width: 3840, height: 2160 } } }); });
+  await page.route('**/api/video', route => { videoCalls.push(route.request().postDataJSON()); return route.fulfill({ json: { base64: video, mimeType: 'video/mp4', metadata: { width: 640, height: 360, duration: 4 } } }); });
+  await page.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
+  await page.getByLabel('Độ nét ảnh', { exact: true }).selectOption('4k');
+  await page.getByRole('checkbox', { name: 'Đồng nhất nhân vật', exact: true }).uncheck();
+  await page.getByRole('button', { name: 'Nhập TXT / SRT', exact: true }).click();
+  await page.getByLabel('Nội dung TXT / SRT').fill('1\n00:00:00,000 --> 00:00:04,000\nA person in a forest\n\n2\n00:00:04,000 --> 00:00:08,000\nA different person at sea');
+  await page.getByRole('button', { name: 'Nạp & Chạy các cảnh', exact: true }).click();
+  await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '2');
+  expect(imageCalls.map(c => c.prompt)).toEqual(['A person in a forest', 'A different person at sea']);
+  expect(imageCalls.every(c => c.resolution === '4k' && c.characterLock === false && c.image === undefined)).toBe(true);
+  await expect(page.getByTestId('scene-1').locator('.video-metadata')).toHaveText('Muse trả về: 640×360');
+  await expect(page.getByTestId('scene-1').locator('.quality-result')).toHaveText('Chưa đạt yêu cầu 4K');
+  const download = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Tải cảnh 1', exact: true }).click();
+  expect((await download).suggestedFilename()).toBe('image-01.png');
+  await page.getByRole('button', { name: 'Chuyển bộ ảnh đã tạo sang video' }).click();
+  await expect(page.getByRole('button', { name: 'Từ ảnh', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  await page.getByLabel('Chất lượng', { exact: true }).selectOption('1080p');
+  await page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO', exact: true }).click();
+  await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '2');
+  expect(videoCalls).toHaveLength(2);
+  expect(videoCalls.every(c => c.sourceMode === 'image' && c.image.imageBytes === image && c.characterLock === false && c.resolution === '1080p')).toBe(true);
+  await page.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
+  await expect(page.locator('.generated-image')).toHaveCount(2);
+});
+
+test('character lock attaches the portrait; disabling it and editing the prompt regenerates independently', async ({ page }) => {
+  await configureAdapter(page);
+  const calls: any[] = [];
+  await page.route('**/api/image', route => { calls.push(route.request().postDataJSON()); return route.fulfill({ json: { base64: image, mimeType: 'image/png' } }); });
+  await page.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
+  const chooser = page.waitForEvent('filechooser');
+  await page.getByRole('button', { name: 'Tải ảnh nhân vật chung' }).click();
+  await (await chooser).setFiles({ name: 'portrait.png', mimeType: 'image/png', buffer: png });
+  await expect(page.locator('.scene-image')).toHaveCount(10);
+  await page.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này' }).click();
+  await expect(page.getByTestId('scene-1').locator('.generated-image')).toBeVisible();
+  expect(calls[0].image.imageBytes).toBe(png.toString('base64'));
+  expect(calls[0].characterLock).toBe(true);
+  await page.getByRole('checkbox', { name: 'Đồng nhất nhân vật', exact: true }).uncheck();
+  await page.getByLabel('Kịch bản cảnh 1', { exact: true }).fill('A new independent character');
+  await expect(page.getByTestId('scene-1').locator('.generated-image')).toHaveCount(0);
+  await page.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này' }).click();
+  await expect(page.getByTestId('scene-1').locator('.generated-image')).toBeVisible();
+  expect(calls[1].image).toBeUndefined(); expect(calls[1].characterLock).toBe(false);
+  expect(calls[1].prompt).toBe('A new independent character');
+});
+
+test('balance panel shows an observed zero and distinguishes an unreadable balance', async ({ page }) => {
+  const account = { id: 1, state: 'ready', authenticated: true, active: true, checkedAt: null, balance: { valueText: '0', unit: 'token', label: 'Tokens remaining: 0', observedAt: new Date().toISOString(), source: 'muse-ui' } as any };
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', accounts: [account], busy: false } }));
+  await page.route('**/api/accounts/1/check', route => { account.balance = null; return route.fulfill({ json: { accounts: [account] } }); });
+  await page.reload();
+  await expect(page.getByTestId('account-balance')).toContainText('0 token');
+  await page.getByRole('button', { name: 'Cập nhật số dư', exact: true }).click();
+  await expect(page.getByTestId('account-balance')).toContainText('Chưa đọc được');
+  await expect(page.getByTestId('account-balance')).not.toContainText('0 token');
+});
+
+test('large generated image is compressed only for video input while the original image is retained', async ({ page }) => {
+  await configureAdapter(page);
+  const largeImage = Buffer.concat([png, Buffer.alloc(9 * 1024 * 1024)]).toString('base64');
+  await page.route('**/api/image', route => route.fulfill({ json: { base64: largeImage, mimeType: 'image/png' } }));
+  let input: any;
+  await page.route('**/api/video', route => { input = route.request().postDataJSON(); return route.fulfill({ json: { base64: video, mimeType: 'video/mp4' } }); });
+  await page.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
+  await page.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này' }).click();
+  await expect(page.getByTestId('scene-1').locator('.generated-image')).toBeVisible();
+  await page.getByTestId('scene-1').getByRole('button', { name: 'Dùng ảnh này tạo video', exact: true }).click();
+  await page.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này' }).click();
+  await expect(page.getByTestId('scene-1').locator('video')).toBeVisible();
+  expect(input.image.mimeType).toBe('image/webp');
+  expect(input.image.imageBytes.length).toBeLessThan(8 * 1024 * 1024 * 4 / 3);
+  await expect(page.getByTestId('scene-1')).toContainText('Ảnh đầu vào đã nén dưới 8 MB; ảnh gốc được giữ.');
+  await page.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
+  await expect(page.getByTestId('scene-1').locator('.generated-image')).toBeVisible();
+});
+
+test('image-to-video batch only sends scenes that have a source frame', async ({ page }) => {
+  await configureAdapter(page);
+  const calls: number[] = [];
+  await page.route('**/api/video', route => { calls.push(route.request().postDataJSON().accountId); return route.fulfill({ json: { base64: video, mimeType: 'video/mp4' } }); });
+  await page.getByRole('button', { name: 'Từ ảnh', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO', exact: true })).toBeDisabled();
+  const chooser = page.waitForEvent('filechooser');
+  await page.getByTestId('scene-1').getByRole('button', { name: '+ Chọn ảnh nhân vật', exact: true }).click();
+  await (await chooser).setFiles({ name: 'frame.png', mimeType: 'image/png', buffer: png });
+  await expect(page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO', exact: true })).toBeEnabled();
+  await page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO', exact: true }).click();
+  await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
+  expect(calls).toEqual([1]);
+  await expect(page.locator('.scene-error')).toHaveCount(0);
 });

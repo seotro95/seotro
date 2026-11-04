@@ -28,13 +28,20 @@ async function body(req) {
   try { return JSON.parse(Buffer.concat(chunks).toString()); }
   catch { throw Object.assign(new Error('JSON không hợp lệ.'), { status: 400 }); }
 }
-function validate(data, video) {
-  if (!data || typeof data.prompt !== 'string' || !data.prompt.trim() || data.prompt.length > 12000) throw Object.assign(new Error('Prompt cần có 1–12.000 ký tự.'), { status: 400 });
-  if (!Number.isInteger(data.accountId) || data.accountId < 1 || data.accountId > 10) throw Object.assign(new Error('accountId cần nằm trong 1–10.'), { status: 400 });
-  if (!video) return;
-  if (!['Omni 1.1 Flash', 'Veo 3.1 - Lite', 'Veo 3.1 - Fast'].includes(data.model)) throw Object.assign(new Error('MODEL_UNSUPPORTED: Model không hợp lệ.'), { status: 400 });
-  if (!['16:9', '9:16'].includes(data.aspectRatio) || ![4, 6, 8, 10].includes(data.duration) || !['360p', '720p'].includes(data.resolution) || (data.model !== 'Omni 1.1 Flash' && (data.duration !== 8 || data.resolution !== '720p'))) throw Object.assign(new Error('Thiết lập mô hình, thời lượng hoặc độ phân giải không hợp lệ.'), { status: 400 });
-  if (data.image && (!['image/png', 'image/jpeg', 'image/webp'].includes(data.image.mimeType) || typeof data.image.imageBytes !== 'string' || !/^[A-Za-z0-9+/]+={0,2}$/.test(data.image.imageBytes) || data.image.imageBytes.length > 11200000)) throw Object.assign(new Error('Ảnh cần là PNG, JPEG hoặc WebP base64, tối đa 8 MB.'), { status: 400 });
+function validate(data, kind) {
+  const invalid = message => { throw Object.assign(new Error(message), { status: 400 }); };
+  if (!data || typeof data.prompt !== 'string' || !data.prompt.trim() || data.prompt.length > 12000) invalid('Prompt cần có 1–12.000 ký tự.');
+  if (!Number.isInteger(data.accountId) || data.accountId < 1 || data.accountId > 10) invalid('accountId cần nằm trong 1–10.');
+  if (kind === 'text') return;
+  if (!['16:9', '9:16'].includes(data.aspectRatio)) invalid('Tỉ lệ khung hình không hợp lệ.');
+  if (kind === 'video') {
+    if (!['Omni 1.1 Flash', 'Veo 3.1 - Lite', 'Veo 3.1 - Fast'].includes(data.model)) invalid('MODEL_UNSUPPORTED: Model không hợp lệ.');
+    if (![4, 6, 8, 10].includes(data.duration) || !['360p', '720p', '1080p', '2k', '4k'].includes(data.resolution) || (data.model !== 'Omni 1.1 Flash' && data.duration !== 8)) invalid('Thiết lập thời lượng hoặc độ phân giải không hợp lệ.');
+    if (data.sourceMode !== undefined && !['text', 'image'].includes(data.sourceMode)) invalid('Chế độ nguồn video không hợp lệ.');
+    if (data.sourceMode === 'image' && !data.image) invalid('SOURCE_IMAGE_REQUIRED: Chọn ảnh đầu vào trước khi tạo video từ ảnh.');
+  } else if (!['2k', '4k'].includes(data.resolution)) invalid('Ảnh hỗ trợ mức yêu cầu 2K hoặc 4K.');
+  if (data.characterLock !== undefined && typeof data.characterLock !== 'boolean') invalid('Tùy chọn đồng nhất nhân vật không hợp lệ.');
+  if (data.image && (!['image/png', 'image/jpeg', 'image/webp'].includes(data.image.mimeType) || typeof data.image.imageBytes !== 'string' || !/^[A-Za-z0-9+/]+={0,2}$/.test(data.image.imageBytes) || data.image.imageBytes.length > 11200000)) invalid('Ảnh cần là PNG, JPEG hoặc WebP base64, tối đa 8 MB.');
 }
 function safeError(error) {
   let text = error instanceof Error ? error.message : String(error);
@@ -78,7 +85,7 @@ async function api(req, res, pathname) {
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
   if (!req.headers['content-type']?.startsWith('application/json')) return json(res, 415, { error: 'Cần Content-Type application/json.' });
   const accountRoute = pathname.match(/^\/api\/accounts\/(\d+)\/(connect|check|close)$/);
-  if (!['/api/video', '/api/text'].includes(pathname) && !accountRoute) return json(res, 404, { error: 'API không tồn tại.' });
+  if (!['/api/video', '/api/image', '/api/text'].includes(pathname) && !accountRoute) return json(res, 404, { error: 'API không tồn tại.' });
   let acquired = false;
   const abort = new AbortController();
   res.on('close', () => abort.abort());
@@ -95,24 +102,28 @@ async function api(req, res, pathname) {
       else await muse.connect(accountId);
       return json(res, 200, { accounts: muse.snapshot() });
     }
-    validate(data, pathname === '/api/video');
-    if (!muse) adapterURL(pathname === '/api/video' ? '/video' : '/text');
+    const kind = pathname === '/api/video' ? 'video' : pathname === '/api/image' ? 'image' : 'text';
+    validate(data, kind);
+    const endpoint = `/${kind}`;
+    if (!muse) adapterURL(endpoint);
     if (busy) return json(res, 409, { error: 'Đang có một yêu cầu AI. Vui lòng đợi tác vụ hiện tại kết thúc.' });
     busy = acquired = true;
-    const payload = {
-      accountId: data.accountId, prompt: data.prompt,
-      ...(pathname === '/api/video' ? { modelDisplayName: data.model, aspectRatio: data.aspectRatio,
-        durationSeconds: data.duration, resolution: data.resolution,
-        referenceImage: data.image ? { base64: data.image.imageBytes, mimeType: data.image.mimeType } : undefined } : {})
+    const useImage = data.image && (data.characterLock !== false || (kind === 'video' && data.sourceMode === 'image'));
+    const payload = { accountId: data.accountId, prompt: data.prompt,
+      ...(kind !== 'text' ? { aspectRatio: data.aspectRatio, resolution: data.resolution, characterLock: data.characterLock !== false,
+        referenceImage: useImage ? { base64: data.image.imageBytes, mimeType: data.image.mimeType } : undefined } : {}),
+      ...(kind === 'video' ? { modelDisplayName: data.model, durationSeconds: data.duration, sourceMode: data.sourceMode || 'text' } : {})
     };
-    const result = muse ? await (pathname === '/api/video' ? muse.generateVideo(payload, abort.signal) : muse.generateText(payload, abort.signal)) : await callAdapter(pathname === '/api/video' ? '/video' : '/text', payload, abort.signal);
-    if (pathname === '/api/video' && (typeof result.base64 !== 'string' || !result.base64 || !/^[A-Za-z0-9+/\s]+={0,2}$/.test(result.base64) || !['video/mp4', 'video/webm', 'video/quicktime'].includes(result.mimeType))) throw new Error('MUSE_RESPONSE_INVALID: Cần {base64, mimeType} video hợp lệ từ adapter.');
-    if (pathname === '/api/text' && (typeof result.text !== 'string' || !result.text.trim())) throw new Error('MUSE_RESPONSE_INVALID: Cần {text} không trống từ adapter.');
-    return json(res, 200, pathname === '/api/video' ? { base64: result.base64, mimeType: result.mimeType, ...(result.metadata ? { metadata: result.metadata } : {}) } : { text: result.text });
+    const result = muse ? await (kind === 'video' ? muse.generateVideo(payload, abort.signal) : kind === 'image' ? muse.generateImage(payload, abort.signal) : muse.generateText(payload, abort.signal)) : await callAdapter(endpoint, payload, abort.signal);
+    const allowedMime = kind === 'image' ? ['image/png', 'image/jpeg', 'image/webp'] : ['video/mp4', 'video/webm', 'video/quicktime'];
+    if (kind !== 'text' && (typeof result.base64 !== 'string' || !result.base64 || !/^[A-Za-z0-9+/\s]+={0,2}$/.test(result.base64) || !allowedMime.includes(result.mimeType))) throw new Error('MUSE_RESPONSE_INVALID: Cần dữ liệu base64 và MIME của tệp ảnh/video hợp lệ.');
+    if (kind === 'text' && (typeof result.text !== 'string' || !result.text.trim())) throw new Error('MUSE_RESPONSE_INVALID: Cần {text} không trống.');
+    const metadata = result.metadata && Number.isFinite(result.metadata.width) && Number.isFinite(result.metadata.height) ? result.metadata : undefined;
+    return json(res, 200, kind !== 'text' ? { base64: result.base64, mimeType: result.mimeType, ...(metadata ? { metadata } : {}) } : { text: result.text });
   } catch (error) { json(res, Number.isInteger(error.status) && error.status >= 400 && error.status <= 599 ? error.status : 502, { error: safeError(error) }); }
   finally { clearTimeout(timeout); if (acquired) busy = false; }
 }
-const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.mp4': 'video/mp4', '.ico': 'image/x-icon' };
+const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.mp4': 'video/mp4', '.png': 'image/png', '.ico': 'image/x-icon' };
 const server = http.createServer(async (req, res) => {
   if (!['127.0.0.1', 'localhost'].includes((req.headers.host || '').split(':')[0])) return json(res, 403, { error: 'Chỉ hỗ trợ truy cập cục bộ.' });
   let pathname;

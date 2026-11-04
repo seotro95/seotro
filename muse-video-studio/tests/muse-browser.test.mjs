@@ -8,6 +8,7 @@ import { MuseBrowser } from '../muse-browser.mjs';
 
 const executablePath = process.env.CHROMIUM_PATH;
 if (!executablePath) throw new Error('Set CHROMIUM_PATH to a local Chromium/Chrome executable to run the browser bridge fixture checks.');
+const image = await readFile(new URL('../public/demo-image.png', import.meta.url));
 const clip = await readFile(new URL('../public/demo.mp4', import.meta.url));
 const png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aO1sAAAAASUVORK5CYII=';
 let behavior = 'video';
@@ -17,15 +18,16 @@ const fixture = http.createServer(async (req, res) => {
   if (req.url === '/api/auth/check') { res.setHeader('Content-Type', 'application/json'); return res.end(JSON.stringify({ ok: /fixture_session=connected/.test(req.headers.cookie || '') })); }
   if (req.url === '/turn') { let text = ''; for await (const chunk of req) text += chunk; submitted.push(JSON.parse(text)); res.setHeader('Content-Type', 'application/json'); return res.end(JSON.stringify({ behavior })); }
   if (req.url === '/stop') { stops++; return res.end('ok'); }
+  if (req.url?.endsWith('.png')) { res.setHeader('Content-Type', 'image/png'); return res.end(image); }
   if (req.url?.endsWith('.mp4')) { res.setHeader('Content-Type', 'video/mp4'); return res.end(clip); }
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.end(`<!doctype html><html><body>
-  <button id="login">Fixture login</button>
-  <div id="history"><div data-message-item data-message-role="assistant">OLD RESPONSE<video src="/old.mp4" preload="metadata"></video></div></div>
+  <header><span data-testid="token-balance">Tokens remaining: 1,234</span></header><button id="login">Fixture login</button>
+  <div id="history"><div data-message-item data-message-role="assistant">OLD RESPONSE Tokens remaining: 999999<img src="/old.png"><video src="/old.mp4" preload="metadata"></video></div></div>
   <div data-hatch-composer-root style="display:none"><textarea></textarea><input type="file" accept="image/*"><span id="attachments"></span></div>
   <button data-testid="hatch-composer-stop-button" style="display:none">Stop</button>
   <script>
-  const root=document.querySelector('[data-hatch-composer-root]');const editor=root.querySelector('textarea');const history=document.querySelector('#history');const stop=document.querySelector('[data-testid]');
+  const root=document.querySelector('[data-hatch-composer-root]');const editor=root.querySelector('textarea');const history=document.querySelector('#history');const stop=document.querySelector('[data-testid="hatch-composer-stop-button"]');
   function ready(){root.style.display=document.cookie.includes('fixture_session=connected')?'block':'none'};ready();
   document.querySelector('#login').onclick=()=>{document.cookie='fixture_session=connected; Max-Age=3600; SameSite=Strict';ready()};
   root.querySelector('input').onchange=e=>{const img=new Image();img.src=URL.createObjectURL(e.target.files[0]);document.querySelector('#attachments').appendChild(img)};
@@ -35,6 +37,7 @@ const fixture = http.createServer(async (req, res) => {
     if(mode.behavior==='slow')return;
     setTimeout(()=>{const reply=document.createElement('div');reply.setAttribute('data-message-item','');reply.setAttribute('data-message-role','assistant');
       if(mode.behavior==='video'){const video=document.createElement('video');video.src='/new.mp4';video.preload='metadata';reply.appendChild(video)}
+      else if(mode.behavior==='image'){const img=document.createElement('img');img.src='/new.png';reply.appendChild(img)}
       else if(mode.behavior==='error'){reply.innerHTML='<span data-testid="assistant-response-error-notice">429 quota exhausted</span>'}
       else reply.textContent='A new cinematic prompt, not old history.';
       history.appendChild(reply);stop.style.display='none';},100);
@@ -68,6 +71,30 @@ test('owned browser bridge against local Muse-shaped pages (not live Muse)', asy
       assert.equal(submitted.at(-1).attached, 1);
       assert.match(submitted.at(-1).prompt, /A forest at sunrise/);
       assert.match(submitted.at(-1).prompt, /Requested model: Omni 1.1 Flash/);
+    });
+    await t.test('reads real labelled account balance and never copies a token number from chat', async () => {
+      await driver.refreshActive();
+      assert.equal(driver.snapshot()[0].balance.valueText, '1,234');
+      assert.equal(driver.snapshot()[0].balance.unit, 'token');
+      await driver.active.page.locator('[data-testid="token-balance"]').evaluate(el => el.textContent = 'Tokens remaining: 0');
+      await driver.refreshActive(); assert.equal(driver.snapshot()[0].balance.valueText, '0');
+      await driver.active.page.locator('[data-testid="token-balance"]').evaluate(el => el.remove());
+      await driver.refreshActive(); assert.equal(driver.snapshot()[0].balance, null);
+    });
+    await t.test('generates images with measured size and independent prompts, then animates an image', async () => {
+      behavior = 'image';
+      const referenceImage = { base64: png, mimeType: 'image/png' };
+      const locked = await driver.generateImage({ accountId: 1, prompt: 'Portrait in a forest', aspectRatio: '16:9', resolution: '4k', characterLock: true, referenceImage }, new AbortController().signal);
+      assert.equal(locked.mimeType, 'image/png'); assert.equal(locked.base64, image.toString('base64'));
+      assert.equal(locked.metadata.width, 640); assert.equal(locked.metadata.height, 360);
+      assert.equal(submitted.at(-1).attached, 1); assert.match(submitted.at(-1).prompt, /3840x2160/);
+      await driver.generateImage({ accountId: 1, prompt: 'A different person at sea', aspectRatio: '9:16', resolution: '2k', characterLock: false, referenceImage }, new AbortController().signal);
+      assert.equal(submitted.at(-1).attached, 0); assert.match(submitted.at(-1).prompt, /A different person at sea/);
+      assert.match(submitted.at(-1).prompt, /Do not reuse characters/);
+      behavior = 'video';
+      await driver.generateVideo({ ...data, sourceMode: 'image', characterLock: false, resolution: '1080p', referenceImage: { base64: locked.base64, mimeType: locked.mimeType } }, new AbortController().signal);
+      assert.equal(submitted.at(-1).attached, 1); assert.match(submitted.at(-1).prompt, /starting frame/);
+      assert.match(submitted.at(-1).prompt, /1080p/);
     });
     await t.test('reads only the new text turn and preserves an unrelated unsent draft', async () => {
       behavior = 'text';

@@ -1,6 +1,6 @@
-import type { Mode, Reference, Settings, VideoResult } from './core.ts';
+import type { Mode, Reference, Settings, MediaResult } from './core.ts';
 
-type MuseVideo = { base64: string; mimeType?: string; metadata?: { duration: number; width: number; height: number } };
+type ResponseMedia = { base64: string; mimeType: string; metadata?: { duration?: number; width: number; height: number } };
 async function api(path: string, data?: unknown, signal?: AbortSignal) {
   const response = await fetch(path, { method: data === undefined ? 'GET' : 'POST',
     headers: data === undefined ? undefined : { 'Content-Type': 'application/json' },
@@ -12,63 +12,84 @@ async function api(path: string, data?: unknown, signal?: AbortSignal) {
 export async function readImage(file: File): Promise<Reference> {
   if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) throw new Error('Chọn ảnh PNG, JPG hoặc WebP.');
   if (file.size > 8 * 1024 * 1024) throw new Error('Ảnh tham chiếu tối đa 8 MB.');
-  const url = await new Promise<string>((resolve, reject) => { const reader = new FileReader();
-    reader.onload = () => resolve(String(reader.result)); reader.onerror = () => reject(new Error('Không đọc được ảnh.')); reader.readAsDataURL(file);
-  });
+  const url = await new Promise<string>((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(String(reader.result)); reader.onerror = () => reject(new Error('Không đọc được ảnh.')); reader.readAsDataURL(file); });
   await new Promise<void>((resolve, reject) => { const img = new Image(); img.onload = () => resolve(); img.onerror = () => reject(new Error('Tệp ảnh bị hỏng hoặc không hỗ trợ.')); img.src = url; });
   return { id: crypto.randomUUID(), name: file.name, url, base64: url.split(',')[1], mimeType: file.type };
 }
-function videoResult(base64: string, mimeType = 'video/mp4', demo = false): VideoResult {
-  if (!base64 || !/^video\/(mp4|webm|quicktime)$/.test(mimeType)) throw new Error('MUSE_VIDEO_INVALID: Cần {base64, mimeType: video/mp4 hoặc video/webm}.');
-  const clean = base64.replace(/^data:[^;]+;base64,/, '').replace(/\s/g, '');
-  let binary: string;
-  try { binary = atob(clean); } catch { throw new Error('MUSE_VIDEO_INVALID: Dữ liệu video base64 không hợp lệ.'); }
-  const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
-  return { base64: clean, mimeType, url: URL.createObjectURL(new Blob([bytes], { type: mimeType })), demo };
+async function mediaResult(kind: Settings['output'], result: ResponseMedia, settings: Settings): Promise<MediaResult> {
+  const allowed = kind === 'image' ? ['image/png', 'image/jpeg', 'image/webp'] : ['video/mp4', 'video/webm', 'video/quicktime'];
+  if (!result || typeof result.base64 !== 'string' || !result.base64 || !allowed.includes(result.mimeType)) throw new Error('MUSE_MEDIA_INVALID: Muse chưa trả về tệp ảnh/video hợp lệ.');
+  let bytes: Uint8Array;
+  const clean = result.base64.replace(/^data:[^;]+;base64,/, '').replace(/\s/g, '');
+  try { bytes = Uint8Array.from(atob(clean), c => c.charCodeAt(0)); } catch { throw new Error('MUSE_MEDIA_INVALID: Dữ liệu base64 không hợp lệ.'); }
+  const url = URL.createObjectURL(new Blob([bytes.slice().buffer], { type: result.mimeType }));
+  let metadata = result.metadata && [result.metadata.width, result.metadata.height].every(n => Number.isFinite(n) && n > 0) ? result.metadata : undefined;
+  if (kind === 'image') {
+    try { metadata = await new Promise((resolve, reject) => { const img = new Image(); img.onload = () => resolve({ width: img.naturalWidth, height: img.naturalHeight }); img.onerror = reject; img.src = url; }); }
+    catch { URL.revokeObjectURL(url); throw new Error('MUSE_IMAGE_INVALID: Tệp ảnh trả về không giải mã được.'); }
+  }
+  return { kind, base64: clean, mimeType: result.mimeType, url, demo: settings.mode === 'demo', metadata,
+    requestedResolution: kind === 'image' ? settings.imageResolution : settings.resolution, aspectRatio: settings.aspectRatio };
 }
-export function releaseVideo(video?: VideoResult) { if (video?.url.startsWith('blob:')) URL.revokeObjectURL(video.url); }
-export async function generateVideo(prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, accountId: number): Promise<VideoResult> {
+export function releaseVideo(media?: MediaResult) { if (media?.url.startsWith('blob:')) URL.revokeObjectURL(media.url); }
+async function referencePayload(reference: Reference, signal: AbortSignal) {
+  if ((reference.base64?.length || 0) <= 8 * 1024 * 1024 * 4 / 3) return { imageBytes: reference.base64, mimeType: reference.mimeType, compressed: false };
+  const img = await new Promise<HTMLImageElement>((resolve, reject) => { const image = new Image(); image.onload = () => resolve(image); image.onerror = reject; image.src = reference.url; });
+  signal.throwIfAborted();
+  const canvas = document.createElement('canvas'); canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+  canvas.getContext('2d')!.drawImage(img, 0, 0);
+  for (const quality of [0.9, 0.75, 0.6]) {
+    signal.throwIfAborted();
+    const encoded = canvas.toDataURL('image/webp', quality);
+    const data = encoded.split(',')[1];
+    const mimeType = encoded.slice(5, encoded.indexOf(';'));
+    if (data.length <= 8 * 1024 * 1024 * 4 / 3) return { imageBytes: data, mimeType, compressed: true };
+  }
+  throw new Error('REFERENCE_TOO_LARGE: Chưa nén được ảnh đầu vào xuống 8 MB; hãy dùng ảnh nhỏ hơn. Bản ảnh gốc vẫn được giữ.');
+}
+async function demoMedia(kind: Settings['output'], signal: AbortSignal): Promise<ResponseMedia> {
+  await new Promise<void>((resolve, reject) => {
+    const finish = () => { signal.removeEventListener('abort', abort); resolve(); };
+    const timeout = setTimeout(finish, 550);
+    const abort = () => { clearTimeout(timeout); reject(new DOMException('Đã dừng', 'AbortError')); };
+    signal.addEventListener('abort', abort, { once: true });
+  });
+  const response = await fetch(kind === 'image' ? '/demo-image.png' : '/demo.mp4', { signal });
+  if (!response.ok) throw new Error('Không tìm thấy tệp kiểm thử đi kèm.');
+  const bytes = new Uint8Array(await response.arrayBuffer());
+  let binary = ''; for (const byte of bytes) binary += String.fromCharCode(byte);
+  return { base64: btoa(binary), mimeType: kind === 'image' ? 'image/png' : 'video/mp4' };
+}
+async function generate(kind: Settings['output'], prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, accountId: number) {
   signal.throwIfAborted();
   const fullPrompt = [prompt.trim(), settings.modifier.trim()].filter(Boolean).join('\n\n');
-  if (!fullPrompt) throw new Error('Hãy nhập kịch bản cho cảnh trước khi tạo.');
-  let result: MuseVideo;
-  if (settings.mode === 'muse') {
-    if (reference && settings.r2v && !reference.base64) throw new Error('Tải ảnh từ máy tính để dùng với kết nối Muse AI.');
-    result = await api('/api/video', { accountId, prompt: fullPrompt, model: settings.model, aspectRatio: settings.aspectRatio,
-      duration: settings.duration, resolution: settings.resolution,
-      image: settings.r2v && reference ? { imageBytes: reference.base64, mimeType: reference.mimeType } : undefined }, signal);
-  } else {
-    // Labelled UI/transport test; not AI generation or an authenticated account.
-    await new Promise<void>((resolve, reject) => {
-      const finish = () => { signal.removeEventListener('abort', abort); resolve(); };
-      const timeout = setTimeout(finish, 550);
-      const abort = () => { clearTimeout(timeout); reject(new DOMException('Đã dừng', 'AbortError')); };
-      signal.addEventListener('abort', abort, { once: true });
-    });
-    const response = await fetch('/demo.mp4', { signal });
-    if (!response.ok) throw new Error('Không tìm thấy clip kiểm thử đi kèm.');
-    const bytes = new Uint8Array(await response.arrayBuffer());
-    let binary = '';
-    for (const byte of bytes) binary += String.fromCharCode(byte);
-    result = { base64: btoa(binary), mimeType: 'video/mp4' };
-  }
+  if (!prompt.trim()) throw new Error('Hãy nhập prompt cho cảnh trước khi tạo.');
+  if (kind === 'video' && settings.videoInput === 'image' && !reference) throw new Error('SOURCE_IMAGE_REQUIRED: Chọn ảnh đầu vào hoặc dùng ảnh vừa tạo để làm video.');
+  const sendReference = reference && (settings.r2v || (kind === 'video' && settings.videoInput === 'image'));
+  if (sendReference && !reference.base64) throw new Error('Ảnh đầu vào chưa có dữ liệu để gửi đến Muse.');
+  const prepared = sendReference && settings.mode !== 'demo' ? await referencePayload(reference, signal) : null;
+  const result = settings.mode === 'demo' ? await demoMedia(kind, signal) : await api(`/api/${kind}`, {
+    accountId, prompt: fullPrompt, aspectRatio: settings.aspectRatio, resolution: kind === 'image' ? settings.imageResolution : settings.resolution,
+    characterLock: settings.r2v, ...(kind === 'video' ? { model: settings.model, duration: settings.duration, sourceMode: settings.videoInput } : {}),
+    image: prepared ? { imageBytes: prepared.imageBytes, mimeType: prepared.mimeType } : undefined
+  }, signal);
   signal.throwIfAborted();
-  if (!result || typeof result.base64 !== 'string') throw new Error('MUSE_VIDEO_INVALID: Adapter chưa trả về {base64, mimeType}. Xem README để đối chiếu API thực tế.');
-  return { ...videoResult(result.base64, result.mimeType, settings.mode === 'demo'), ...(result.metadata ? { metadata: result.metadata } : {}) };
+  return { ...await mediaResult(kind, result, settings), referenceCompressed: prepared?.compressed || false };
 }
+export const generateVideo = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, accountId: number) => generate('video', prompt, reference, settings, signal, accountId);
+export const generateImage = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, accountId: number) => generate('image', prompt, reference, settings, signal, accountId);
 export async function enhancePrompt(prompt: string, mode: Mode, signal: AbortSignal, accountId: number): Promise<string> {
   if (mode === 'demo') throw new Error('Chế độ kiểm thử không có AI Enhance. Kết nối Muse AI để trau chuốt thật.');
-  const instruction = `Rewrite this scene as one concise cinematic video prompt in English. Preserve the characters, action and narrative. Add specific camera movement, composition and lighting. Return only the rewritten prompt, no headings. Scene:\n${prompt}`;
+  const instruction = `Rewrite this scene as one concise cinematic visual prompt in English. Preserve the characters, action and narrative. Add specific composition and lighting. Return only the rewritten prompt, no headings. Scene:\n${prompt}`;
   const result = await api('/api/text', { prompt: instruction, accountId }, signal);
   signal.throwIfAborted();
-  const text = result?.text;
-  if (typeof text !== 'string' || !text.trim()) throw new Error('AI không trả về prompt văn bản.');
-  return text.trim().slice(0, 8000);
+  if (typeof result.text !== 'string' || !result.text.trim()) throw new Error('AI không trả về prompt văn bản.');
+  return result.text.trim().slice(0, 8000);
 }
-export async function downloadVideo(video: VideoResult, id: number) {
-  const ext = video.mimeType === 'video/webm' ? 'webm' : video.mimeType === 'video/quicktime' ? 'mov' : 'mp4';
-  const filename = `${video.demo ? 'kiem-thu' : 'scene'}-${String(id).padStart(2, '0')}.${ext}`;
-  const a = document.createElement('a'); a.href = video.url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+export async function downloadVideo(media: MediaResult, id: number) {
+  const ext = ({ 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'video/webm': 'webm', 'video/quicktime': 'mov' } as Record<string, string>)[media.mimeType] || 'mp4';
+  const filename = `${media.demo ? 'kiem-thu' : media.kind === 'image' ? 'image' : 'scene'}-${String(id).padStart(2, '0')}.${ext}`;
+  const a = document.createElement('a'); a.href = media.url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
 }
 export const providerStatus = () => api('/api/status');
 export const accountAction = (id: number, action: 'connect' | 'check' | 'close') => api(`/api/accounts/${id}/${action}`, {});

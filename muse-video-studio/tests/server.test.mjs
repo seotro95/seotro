@@ -4,6 +4,7 @@ import http from 'node:http';
 import { spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 
+const image = (await readFile(new URL('../public/demo-image.png', import.meta.url))).toString('base64');
 const clip = (await readFile(new URL('../public/demo.mp4', import.meta.url))).toString('base64');
 const calls = [];
 let adapterMode = 'ok';
@@ -14,7 +15,7 @@ const adapter = http.createServer(async (req, res) => {
   if (adapterMode === 'wait') await new Promise(r => { release = r; });
   res.setHeader('Content-Type', 'application/json');
   if (adapterMode === 'error') { res.writeHead(429); return res.end(JSON.stringify({ error: '429 quota exhausted; Bearer test-bridge-secret' })); }
-  res.end(JSON.stringify(req.url === '/text' ? { text: 'A cinematic scene in English.' } : { base64: clip, mimeType: 'video/mp4' }));
+  res.end(JSON.stringify(req.url === '/text' ? { text: 'A cinematic scene in English.' } : req.url === '/image' ? { base64: image, mimeType: 'image/png' } : { base64: clip, mimeType: 'video/mp4' }));
 });
 const payload = { accountId: 7, prompt: 'A cinematic forest scene', model: 'Omni 1.1 Flash', aspectRatio: '9:16', duration: 6, resolution: '720p', image: { imageBytes: 'aGVsbG8=', mimeType: 'image/png' } };
 
@@ -43,7 +44,7 @@ test('server adapter integration (local test server, not real Muse.ai)', async t
       assert.equal((await result.json()).base64, clip);
       const call = calls.at(-1);
       assert.equal(call.path, '/video'); assert.equal(call.auth, 'Bearer test-bridge-secret');
-      assert.deepEqual(call.body, { accountId: 7, prompt: payload.prompt, modelDisplayName: payload.model, aspectRatio: '9:16', durationSeconds: 6, resolution: '720p', referenceImage: { base64: 'aGVsbG8=', mimeType: 'image/png' } });
+      assert.deepEqual(call.body, { accountId: 7, prompt: payload.prompt, modelDisplayName: payload.model, aspectRatio: '9:16', durationSeconds: 6, resolution: '720p', characterLock: true, sourceMode: 'text', referenceImage: { base64: 'aGVsbG8=', mimeType: 'image/png' } });
     });
     await t.test('rejects invalid account/model constraints and cross-origin writes before adapter', async () => {
       const count = calls.length;
@@ -51,6 +52,19 @@ test('server adapter integration (local test server, not real Muse.ai)', async t
       assert.equal((await post('/api/video', { ...payload, model: 'Veo 3.1 - Fast', duration: 4 })).status, 400);
       assert.equal((await post('/api/video', payload, { Origin: 'https://other-site.example' })).status, 403);
       assert.equal(calls.length, count);
+    });
+    await t.test('accepts requested 4K video and 2K/4K images; independent images omit references', async () => {
+      const video = await post('/api/video', { ...payload, resolution: '4k', model: 'Veo 3.1 - Fast', duration: 8 });
+      assert.equal(video.status, 200); assert.equal(calls.at(-1).body.resolution, '4k');
+      const result = await post('/api/image', { accountId: 1, prompt: 'A new scene', aspectRatio: '9:16', resolution: '4k', characterLock: false, image: payload.image });
+      assert.equal(result.status, 200); assert.equal((await result.json()).mimeType, 'image/png');
+      assert.equal(calls.at(-1).path, '/image'); assert.equal(calls.at(-1).body.referenceImage, undefined);
+      assert.equal(calls.at(-1).body.characterLock, false);
+      const count = calls.length;
+      assert.equal((await post('/api/video', { ...payload, image: undefined, sourceMode: 'image' })).status, 400);
+      assert.equal(calls.length, count);
+      const fromImage = await post('/api/video', { ...payload, sourceMode: 'image', characterLock: false });
+      assert.equal(fromImage.status, 200); assert.equal(calls.at(-1).body.referenceImage.base64, payload.image.imageBytes);
     });
     await t.test('routes enhancement to text endpoint', async () => {
       const result = await post('/api/text', { accountId: 2, prompt: 'Enhance this scene' });
