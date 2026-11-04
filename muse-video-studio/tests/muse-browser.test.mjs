@@ -247,6 +247,53 @@ test('owned browser bridge against local Muse-shaped pages (not live Muse)', asy
         assert.equal(state.submitted.at(-1).prehydrationValue, '');
       } finally { state.prehydrationInput = false; state.richComposer = false; }
     });
+    await t.test('activates the visible Message placeholder and sends only after the real editor appears', async () => {
+      const count = state.submitted.length;
+      const timeout = driver.composerTimeoutMs;
+      state.prehydrationInput = true; state.richComposer = true; state.hydrateOnFocus = true; state.behavior = 'image';
+      driver.composerTimeoutMs = 2000;
+      try {
+        await driver.active.page.reload({ waitUntil: 'load' });
+        const [diagnostic] = await driver.composerDiagnostics(driver.active.page);
+        assert.equal(diagnostic.ready, 'complete');
+        assert.equal(diagnostic.visibility, 'visible');
+        assert.equal(diagnostic.composerRoots, 1);
+        assert.equal(diagnostic.prehydration, 1);
+        assert.equal(diagnostic.visibleEditors, 1);
+        assert.equal(await driver.findComposer(driver.active.page), null);
+        const result = await driver.generateImage({ accountId: 1, prompt: 'Wake the Message composer before sending this scene', aspectRatio: '16:9', resolution: '2k', characterLock: false }, new AbortController().signal);
+        assert.equal(result.mimeType, 'image/png');
+        assert.equal(state.submitted.length, count + 1);
+        assert.equal(state.submitted.at(-1).prehydrationFocus, 1);
+        assert.equal(state.submitted.at(-1).prehydrationInputEvents, 0);
+        assert.equal(state.submitted.at(-1).prehydrationValue, '');
+      } finally { state.hydrateOnFocus = false; state.prehydrationInput = false; state.richComposer = false; driver.composerTimeoutMs = timeout; await driver.active.page.reload(); }
+    });
+    await t.test('preserves an existing prehydration draft and never submits if activation cannot initialize the editor', async () => {
+      const count = state.submitted.length;
+      const timeout = driver.composerTimeoutMs;
+      state.prehydrationInput = true; state.richComposer = true; state.hydrateOnFocus = true;
+      const probe = await driver.active.context.newPage();
+      try {
+        await probe.goto(driver.serviceURL);
+        const placeholder = probe.locator('[data-hatch-composer-prehydration-input]');
+        await placeholder.evaluate(el => { el.value = 'Keep this existing Message draft'; });
+        await assert.rejects(driver.waitForComposer(probe), /MUSE_DRAFT_EXISTS/);
+        assert.equal(await placeholder.inputValue(), 'Keep this existing Message draft');
+        assert.equal(await placeholder.evaluate(el => el === document.activeElement), false);
+        state.hydrationDelayMs = 5000;
+        driver.composerTimeoutMs = 200;
+        await assert.rejects(driver.generateImage({ accountId: 1, prompt: 'Do not send to an uninitialized Message field', aspectRatio: '16:9', resolution: '2k', characterLock: false }, new AbortController().signal), error => {
+          assert.match(error.message, /MUSE_COMPOSER_NOT_READY/);
+          assert.match(error.message, /Đã thử kích hoạt ô Message ban đầu: có/);
+          return true;
+        });
+        assert.equal(state.submitted.length, count);
+        assert.equal(driver.workers.size, 0);
+      } finally {
+        await probe.close(); state.hydrateOnFocus = false; state.prehydrationInput = false; state.richComposer = false; state.hydrationDelayMs = 0; driver.composerTimeoutMs = timeout;
+      }
+    });
     await t.test('waits for the hydrated editor and never submits to a visible prehydration placeholder', async () => {
       state.prehydrationInput = true; state.richComposer = true; state.hydrationDelayMs = 600; state.behavior = 'image';
       const originalTimeout = driver.composerTimeoutMs;

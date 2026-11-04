@@ -1,8 +1,16 @@
-# Muse AI Studio 1.4.4 · Một tài khoản, 10 luồng đồng thời
+# Muse AI Studio 1.4.5 · Một tài khoản, 10 luồng đồng thời
 
 Ứng dụng desktop React/TypeScript và Electron cho 10 cảnh ảnh/video. **Bản 1.4 thay cách chạy tuần tự bằng 10 cuộc trò chuyện độc lập trên cùng một phiên Muse. Trang đăng nhập Muse nằm trong cửa sổ tool; không cần cài hoặc mở Chrome/Edge riêng.**
 
 Cầu nối giao diện này **không chính thức**. Đã kiểm thử đăng nhập, 10 luồng, tách kết quả và dừng tác vụ bằng Electron thật với dịch vụ Muse giả lập cục bộ. **Chưa đăng nhập, tạo ảnh/video hoặc đọc số dư trên Muse.ai thật**: cloud chưa có phiên người dùng và các lần truy cập muse.ai nhận CONNECT 403. Muse có thể giới hạn tác vụ đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các kiểm thử không chứng minh gói tài khoản thực tế hỗ trợ 10 render cùng lúc.
+
+## Kích hoạt ô Message trong bản 1.4.5
+
+Log thực tế cho thấy Muse tải xong ở `/`, viewport 1280×900, một khung soạn, một ô prehydration và một ô nhập đang hiện. Bộ chọn 1.4.4 loại bỏ ô prehydration và không bấm kích hoạt nó, nên có thể chờ hết thời gian dù Message hiện trên trang.
+
+Bản này đặt con trỏ vào ô Message ban đầu duy nhất đang hiện trong khung Muse, bấm nếu còn hiện, rồi đợi ô nhập thật. Focus trực tiếp giúp khởi tạo editor trong luồng desktop nền, nơi click có thể không đặt được con trỏ vào iframe. Chỉ gửi prompt sau khi tìm được editor đã khởi tạo; không nhập prompt hoặc Enter vào ô prehydration. Nếu ô ban đầu có bản nháp, nội dung được giữ nguyên và tool báo lỗi. Nếu editor không khởi tạo, tool giữ lỗi `MUSE_COMPOSER_NOT_READY`, kèm thông tin đã thử kích hoạt và số ô prehydration đang hiện. Không dùng click cưỡng bức.
+
+Đã tái hiện bằng fixture có các chỉ số giống log và cần focus để khởi tạo editor: bản 1.4.4 timeout. Đây là kiểm chứng điều kiện lỗi và cách khôi phục cục bộ; chưa xác nhận trang Muse thật dùng cùng cơ chế khởi tạo. Sau cập nhật, bấm **Kiểm tra ô Message** trước khi chạy cả bộ.
 
 ## Trang luồng và kiểm tra ô Message trong bản 1.4.4
 

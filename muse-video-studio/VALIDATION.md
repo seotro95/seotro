@@ -1,6 +1,16 @@
-# Xác minh bản 1.4.4
+# Xác minh bản 1.4.5
 
-## Kết quả trên Linux
+## Kích hoạt Message trong bản 1.4.5
+
+- Log người dùng: `ready=complete`, `visibility=visible`, viewport 1280×900, `composerRoots=1`, `prehydration=1`, `visibleEditors=1` tại `https://muse.ai/`.
+- Thêm fixture để ô prehydration hiện, editor rich text ẩn và chỉ khởi tạo khi ô Message được focus. Các chỉ số DOM giống log; bản 1.4.4 thất bại đúng `MUSE_COMPOSER_NOT_READY`, trong khi các ca cũ vẫn qua.
+- Sửa bằng focus trực tiếp vào ô prehydration duy nhất đang hiện trong khung Muse, click bình thường nếu còn hiện; không fill hoặc Enter ở đó. Editor thật vẫn phải qua bộ chọn trước khi gửi prompt. Không thay mô hình, độ phân giải, xác thực hoặc giới hạn 10 luồng.
+- Native còn phát hiện click-only không ổn định trong iframe của view nền: ô prehydration hiện, bộ đếm focus=0, chưa render. Phép đo riêng sau khi thêm focus: focus=1, editor thật hiện và fixture nhận đúng một yêu cầu. Không dùng force click hoặc giả sự kiện DOM.
+- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge`: **24/24 Node tests qua** (23 kịch bản trong một nhóm), gồm giữ nguyên bản nháp prehydration, không gửi khi kích hoạt thất bại, textarea ẩn trước editor thật và 10 ảnh đồng thời.
+- `DISPLAY=:97 MUSE_ELECTRON_TEST_NO_SANDBOX=1 npm run test:desktop`: **8/8 Node tests qua** (7 kịch bản trong một nhóm). Cả 10 luồng đều dùng Message cần focus để khởi tạo trong iframe: mỗi luồng focus đúng một lần, không có sự kiện nhập hoặc giá trị ở ô prehydration. Kiểm tra Message không render, 10 ảnh riêng, 10 video từ ảnh, Stop và khôi phục phiên đều qua. Cờ tắt sandbox chỉ dùng cho fixture cloud, không dùng trong launcher phát hành.
+- `npm run build` bản 1.4.5, kiểm tra cú pháp Node và whitespace Git đã qua. Giao diện không thay đổi trong bản này; kết quả E2E 1.4.4 được giữ bên dưới làm kết quả nền, không ghi là đã chạy lại.
+
+## Kết quả nền đã xác minh trên Linux
 
 - `npm ci --cache /workspace/.cache/seotro-npm --no-audit --no-fund` từ lockfile thành công. Runtime Electron 45.2.2 tải/cài bằng bộ cài chính thức với checksum bật.
 - `npm run build`: TypeScript và Vite thành công. Cảnh báo `use client` của bộ icon không ngăn build.

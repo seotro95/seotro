@@ -6,9 +6,10 @@ import { randomUUID } from 'node:crypto';
 import { readMuseBalance } from './muse-balance.mjs';
 
 // Public UI selectors observed in community Muse clients, not an official SDK.
-// Muse retains a hidden prehydration textarea before its hydrated rich editor.
-// Filter before first(): waiting on the first unfiltered match never reaches it.
+// Muse retains a prehydration textarea before its hydrated rich editor. It may
+// need focus/click to initialize that editor, but must never receive a prompt.
 const EDITOR = '[data-hatch-composer-root] textarea:not([data-hatch-composer-prehydration-input="true"]):not([readonly]):not([disabled]):visible, [data-hatch-composer-root] [contenteditable="true"]:visible, [data-hatch-composer-root] [contenteditable="plaintext-only"]:visible';
+const PREHYDRATION = '[data-hatch-composer-root] textarea[data-hatch-composer-prehydration-input="true"]:not([readonly]):not([disabled]):visible';
 const FIELD = 'textarea:not([data-hatch-composer-prehydration-input="true"]):not([readonly]):not([disabled]), [contenteditable="true"], [contenteditable="plaintext-only"]';
 const NAMED_EDITOR = ['Message', 'Message Muse', 'Tin nhắn', 'Nhập tin nhắn'].flatMap(label => FIELD.split(', ').flatMap(field =>
   [`${field}[aria-label="${label}" i]:visible`, `${field}[placeholder="${label}" i]:visible`]
@@ -170,6 +171,26 @@ export class MuseBrowser {
     }
     return frames;
   }
+  async activateComposerPlaceholder(page, timeout) {
+    const matches = [];
+    for (const frame of await this.composerFrames(page)) {
+      const candidates = frame.locator(PREHYDRATION);
+      for (let index = 0, count = await candidates.count(); index < count; index++) matches.push(candidates.nth(index));
+    }
+    if (matches.length > 1) throw fail('MUSE_COMPOSER_AMBIGUOUS', 'Có nhiều ô Message ban đầu trong trang Muse. Chưa kích hoạt hoặc gửi prompt để tránh chọn nhầm ô.');
+    if (!matches.length) return false;
+    const placeholder = matches[0];
+    if ((await placeholder.inputValue()).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Ô Message ban đầu đang có bản nháp. Tool giữ nguyên nội dung và chưa gửi prompt.', 409);
+    try {
+      // A background Electron view can receive a click without focusing its
+      // iframe input. DOM focus initializes focus-driven editors there too.
+      await placeholder.focus({ timeout: Math.min(1500, timeout) });
+      if (await placeholder.isVisible()) await placeholder.click({ timeout: Math.min(1500, timeout) });
+    }
+    catch (error) { if (error.name !== 'TimeoutError') throw error; }
+    // Focus/click only. The hydrated editor must still pass findComposer().
+    return true;
+  }
   async newChatControl(page) {
     for (const frame of await this.composerFrames(page)) {
       const entry = frame.getByRole('button', { name: NEW_CHAT }).or(frame.getByRole('link', { name: NEW_CHAT })).filter({ visible: true }).first();
@@ -196,6 +217,7 @@ export class MuseBrowser {
         return { ready: document.readyState, visibility: document.visibilityState, viewport: [innerWidth, innerHeight],
           composerRoots: document.querySelectorAll('[data-hatch-composer-root]').length,
           prehydration: document.querySelectorAll('[data-hatch-composer-prehydration-input="true"]').length,
+          visiblePrehydration: [...document.querySelectorAll('[data-hatch-composer-prehydration-input="true"]')].filter(visible).length,
           visibleEditors: [...document.querySelectorAll('textarea, [contenteditable="true"], [contenteditable="plaintext-only"]')].filter(visible).length };
       }).catch(() => ({ ready: 'unavailable' }));
       return { origin: url.origin, route, ...metrics };
@@ -204,17 +226,19 @@ export class MuseBrowser {
   async waitForComposer(page, { openConversation = false } = {}) {
     const deadline = Date.now() + this.composerTimeoutMs;
     let opened = false;
+    let activated = false;
     do {
       const editor = await this.findComposer(page);
       if (editor) return editor;
-      if (openConversation && !opened) {
+      if (!activated) activated = await this.activateComposerPlaceholder(page, Math.max(1, deadline - Date.now()));
+      if (openConversation && !opened && !activated) {
         const entry = await this.newChatControl(page);
         if (entry) { await entry.click(); opened = true; }
       }
       await pause(Math.min(100, Math.max(1, deadline - Date.now())));
     } while (Date.now() < deadline);
     const details = await this.composerDiagnostics(page);
-    throw fail('MUSE_COMPOSER_NOT_READY', `Chưa mở được ô nhập trong cuộc trò chuyện Muse của cảnh này. Chưa gửi prompt. Chẩn đoán trang luồng (không chứa nội dung chat): ${JSON.stringify(details)}`, 504);
+    throw fail('MUSE_COMPOSER_NOT_READY', `Chưa mở được ô nhập trong cuộc trò chuyện Muse của cảnh này. Chưa gửi prompt. Đã thử kích hoạt ô Message ban đầu: ${activated ? 'có' : 'không'}. Chẩn đoán trang luồng (không chứa nội dung chat): ${JSON.stringify(details)}`, 504);
   }
   async prepareConversation(page) {
     const editor = await this.waitForComposer(page, { openConversation: true });

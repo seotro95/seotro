@@ -27,7 +27,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
   const fixture = createMuseFixture({ image, clip });
   fixture.state.prehydrationInput = true;
   fixture.state.richComposer = true;
-  fixture.state.composerLayout = 'semantic';
+  fixture.state.hydrateOnFocus = true;
   fixture.state.landingOnly = true;
   await new Promise(resolve => fixture.server.listen(0, '127.0.0.1', resolve));
   const fixtureURL = `http://127.0.0.1:${fixture.server.address().port}/`;
@@ -92,6 +92,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       assert.ok(fixture.state.submitted.every(request => request.path === '/composer-frame'));
       assert.ok(fixture.state.submitted.every(request => request.authenticated));
       assert.ok(fixture.state.submitted.every(request => request.viewport.width > 0 && request.viewport.height > 0 && request.prehydrationValue === ''));
+      assert.ok(fixture.state.submitted.every(request => request.prehydrationFocus === 1 && request.prehydrationInputEvents === 0));
       assert.equal(await studio.locator('.status-badge.running').count(), 10);
       assert.equal(await studio.locator('.generated-image').count(), 0);
       const activeStatus = await studio.evaluate(async () => (await fetch('/api/status')).json());
