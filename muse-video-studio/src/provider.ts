@@ -1,7 +1,23 @@
 import type { Mode, Reference, Settings, MediaResult } from './core.ts';
 
 type ResponseMedia = { base64: string; mimeType: string; metadata?: { duration?: number; width: number; height: number } };
+declare global {
+  interface Window { museTransport?: { request(id: string, endpoint: string, data: unknown): Promise<{ ok: boolean; body: any }>; cancel(id: string): void } }
+}
 async function api(path: string, data?: unknown, signal?: AbortSignal) {
+  const transport = window.museTransport;
+  if (transport && ['/api/video', '/api/image', '/api/text'].includes(path)) {
+    signal?.throwIfAborted();
+    const id = crypto.randomUUID();
+    const cancel = () => transport.cancel(id);
+    signal?.addEventListener('abort', cancel, { once: true });
+    try {
+      const result = await transport.request(id, path, data);
+      signal?.throwIfAborted();
+      if (!result.ok) throw new Error(result.body?.error || 'DESKTOP_REQUEST_FAILED');
+      return result.body;
+    } finally { signal?.removeEventListener('abort', cancel); }
+  }
   const response = await fetch(path, { method: data === undefined ? 'GET' : 'POST',
     headers: data === undefined ? undefined : { 'Content-Type': 'application/json' },
     body: data === undefined ? undefined : JSON.stringify(data), signal });

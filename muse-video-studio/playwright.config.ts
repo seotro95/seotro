@@ -5,5 +5,5 @@ export default defineConfig({
   fullyParallel: false,
   use: { baseURL: 'http://127.0.0.1:8789', headless: true,
     launchOptions: process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {} },
-  webServer: { command: 'npm start', url: 'http://127.0.0.1:8789', env: { PORT: '8789', MUSE_TRANSPORT: 'browser', MUSE_ADAPTER_URL: '' }, reuseExistingServer: false },
+  webServer: { command: 'npm run start:web', url: 'http://127.0.0.1:8789', env: { PORT: '8789', MUSE_TRANSPORT: 'browser', MUSE_ADAPTER_URL: '' }, reuseExistingServer: false },
 });

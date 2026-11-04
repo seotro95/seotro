@@ -1,31 +1,42 @@
-# Xác minh bản 1.3.0
+# Xác minh bản 1.4.0
 
 ## Kết quả trên Linux
 
-- Cài lại bằng `npm ci --cache /workspace/.cache/seotro-npm --no-audit --no-fund` từ lockfile thành công.
-- `npm run build`: TypeScript và Vite thành công. Cảnh báo `use client` của bộ icon trong app client-only không ngăn build.
-- `npm test`: 7 bài parser/chuyển dự án cũ/kích thước/state, 7 bài máy chủ API trong một nhóm, 3 bài lệnh mở trình duyệt và 2 bài phân tích số dư đã qua, không bỏ qua bài nào.
-- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge`: 9 kịch bản trong một nhóm đã qua. Dùng Chromium thật với trang Muse giả lập trên loopback và hồ sơ tạm.
+- `npm ci --cache /workspace/.cache/seotro-npm --no-audit --no-fund` từ lockfile thành công. Runtime Electron 45.2.2 tải/cài bằng bộ cài chính thức với checksum bật.
+- `npm run build`: TypeScript và Vite thành công. Cảnh báo `use client` của bộ icon không ngăn build.
+- Lệnh `npm start` qua launcher phát hành đã mở ứng dụng trên Linux/Xorg với hồ sơ fixture mới, trả HTML/API đúng trạng thái và thoát sạch khi đóng cửa sổ. Không mở Chrome ngoài.
+- `npm test`: 7 bài parser/chuyển dự án cũ/kích thước/state, 7 bài máy chủ API trong một nhóm, 3 bài lệnh mở trình duyệt dự phòng và 2 bài phân tích số dư đã qua, không bỏ qua bài nào.
+- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge`: 11 kịch bản trong một nhóm đã qua, dùng Chromium thật với Muse giả lập trên loopback và hồ sơ tạm.
+- `DISPLAY=:97 MUSE_ELECTRON_TEST_NO_SANDBOX=1 npm run test:desktop`: 5 kịch bản trong một nhóm đã qua, dùng Electron thật trên màn hình Xorg dummy. Cờ tắt sandbox chỉ áp dụng cho fixture trong cloud; launcher phát hành không dùng cờ này.
 - `CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e`: **17/17** bài giao diện đã qua. Desktop 5 cột, mobile không tràn ngang.
-- `node --check server.mjs`, `node --check muse-browser.mjs`, `node --check muse-balance.mjs`, `bash -n start.sh` và kiểm tra whitespace Git đã qua.
+- Kiểm tra cú pháp Node cho server/cầu nối/desktop/launcher, `bash -n start.sh` và whitespace Git đã qua.
 
-## Hành vi đã chứng minh bằng fixture
+## 10 luồng và đăng nhập nhúng đã chứng minh
 
-- Đăng nhập một tài khoản rồi bấm TẠO 10 VIDEO một lần: cả 10 yêu cầu dùng accountId=1. TẠO 10 ẢNH cũng gửi đủ 10 yêu cầu đến cùng tài khoản. Không còn ô email, danh sách tài khoản hoặc nút gán riêng.
-- Mở dự án cũ có gán tài khoản 1–10 vẫn giữ đủ 10 prompt, bỏ các gán cũ và chỉ gửi accountId=1. Máy chủ và cầu nối từ chối tài khoản số 2 trở đi; chỉ tạo một hồ sơ trình duyệt và mở lại phiên đã lưu.
-- Hàng đợi chạy tuần tự, bỏ cảnh tắt, giữ lỗi từng cảnh, dừng/tiếp tục không tạo lại cảnh hoàn tất và xóa trạng thái chờ sau khi dừng. Phiên chưa xác minh hoặc hết hạn không được gửi yêu cầu mới.
-- Bảng số dư đọc nhãn token/credit và giá trị 0 tổng hợp đúng; không coi hạn mức ngữ cảnh, tỷ lệ, số không nhãn hoặc nội dung chat là số dư. Không đọc được thì trả null và hiển thị Chưa đọc được.
-- Nhập hai cảnh SRT tạo đúng hai ảnh riêng, tắt khóa nhân vật không gửi ảnh chân dung, chỉnh prompt xóa kết quả cũ và gửi nội dung mới.
-- Yêu cầu 4K nhưng tệp fixture là 640×360 được hiển thị là 640×360 và Chưa đạt yêu cầu 4K, kể cả metadata API giả nói 3840×2160. Kích thước ảnh lấy từ bytes giải mã được.
-- Bộ ảnh chuyển sang video với sourceMode=image và đúng ảnh theo cảnh. Đổi chất lượng video hoặc chuyển tab giữ ảnh. Chỉ các cảnh có ảnh đầu vào được gửi trong chế độ ảnh→video.
-- Ảnh tổng hợp hơn 8 MB được nén ở bản tham chiếu gửi video; bản ảnh gốc vẫn còn. Không giả lập đầu ra 4K bằng cách đổi nhãn hoặc phóng ảnh.
-- Cầu nối chỉ lấy media sau tin nhắn mới có marker; không lấy video cũ, giữ bản nháp chưa gửi, kiểm tra lại đăng nhập trước gửi, giữ lỗi quota và bấm Stop khi dừng.
-- Các bài kiểm tra API xác nhận các mức yêu cầu video/ảnh, giữ nguồn ảnh khi tắt khóa nhân vật trong ảnh→video và từ chối thiếu ảnh đầu vào trước khi gọi adapter.
+- Một cửa sổ Electron chứa Studio và trang đăng nhập Muse giả lập. Không mở Chrome/Edge ngoài. Remote view không có `require`, `studioDesktop` hoặc `museTransport`. IPC từ Studio từ chối endpoint không được phép.
+- Đăng nhập một lần trong view Muse, Về Studio và Kiểm tra phiên: đúng một tài khoản xác minh, embeddedLogin=true và maxConcurrency=10.
+- Bấm TẠO 10 ẢNH: đủ 10 yêu cầu được gửi và 10 cảnh cùng trạng thái Đang tạo trước khi fixture trả kết quả đầu tiên. Tất cả xác thực bằng cùng phiên. Fixture trả 10 ảnh khác nhau; từng ảnh được so sánh với đúng yêu cầu của cảnh đó.
+- Chuyển bộ ảnh sang video: đủ 10 cuộc trò chuyện đang xử lý đồng thời, mỗi cuộc nhận đúng một ảnh tham chiếu và dùng chung phiên. Kết quả hoàn tất được đặt vào 10 ô; view worker được đóng, giữ lại Studio và đăng nhập.
+- Dừng cả bộ gửi hủy qua IPC tới cả 10 yêu cầu, fixture nhận đủ 10 lần Stop và các view worker được đóng. Số yêu cầu máy chủ trở về 0.
+- Đóng/mở lại ứng dụng với cùng thư mục dữ liệu khôi phục phiên đã lưu và xác minh được mà không bấm đăng nhập lần nữa.
+- Kiểm thử API giữ đồng thời 10 HTTP request đến adapter, từ chối request thứ 11. Một request xong chỉ giải phóng một chỗ, không làm mất trạng thái bận của 9 request còn lại. Thay đổi phiên khi còn tác vụ bị từ chối.
+- Frontend cũng được kiểm tra với barrier: 10 yêu cầu ảnh trước khi trả kết quả, 9 cảnh đang bật xử lý song song và lỗi quota vẫn ở đúng cảnh. Dừng/tiếp tục giữ cảnh đã hoàn tất. Dự án cũ gán tài khoản 1–10 chỉ còn gửi accountId=1, giữ đủ prompt; ID 2+ bị từ chối.
+
+Fixture giữ kết quả bằng hàng rào đồng bộ, không phụ thuộc tốc độ trả lời mẫu. Đây là kiểm tra đồng thời thực sự của các tác vụ trong tool, không chỉ đếm tổng 10 kết quả sau khi chạy tuần tự. Fixture không mô phỏng thời gian, hạn mức hay quyền tạo nội dung của Muse thật.
+
+## Các chức năng khác được giữ
+
+- Bảng số dư đọc nhãn token/credit, gồm giá trị 0 tổng hợp; không coi hạn mức ngữ cảnh, tỷ lệ, số không nhãn hoặc nội dung chat là số dư. Không đọc được thì trả null.
+- SRT nạp đúng số cảnh, không cắt im lặng khi quá 10. Tắt khóa nhân vật không gửi chân dung; chỉnh prompt xóa kết quả liên quan và gửi nội dung mới.
+- Yêu cầu 4K nhưng fixture 640×360 thì hiện kích thước thật và Chưa đạt yêu cầu 4K, kể cả metadata giả nói 3840×2160. Kích thước ảnh được đọc từ bytes giải mã.
+- Ảnh→video giữ đúng nguồn ảnh kể cả khi tắt khóa nhân vật; bỏ ô thiếu ảnh. Đổi chất lượng video giữ ảnh. Ảnh gốc hơn 8 MB được giữ, chỉ bản tham chiếu gửi đi được nén.
+- Cầu nối chỉ lấy media sau tin nhắn mới có marker, giữ bản nháp của tab đăng nhập, kiểm tra xác thực trước gửi, mở hội thoại riêng hoặc báo lỗi nếu không mở được, giữ lỗi quota.
 
 ## Giới hạn còn lại
 
-- **Chưa đăng nhập/tạo ảnh/video hoặc đọc số dư trên Muse.ai thật.** Môi trường không có phiên người dùng và các lần truy cập trực tiếp Muse nhận CONNECT 403. Fixture không chứng minh dịch vụ thật hoặc gói tài khoản hỗ trợ tính năng nào.
-- Cầu nối trình duyệt và các selector không phải API chính thức. Muse đổi giao diện có thể cần cập nhật. Bảng số dư chỉ hiện khi có vùng số dư rõ nhãn mà bộ đọc nhận diện được; không cam kết Muse công khai số token/credit cho mọi tài khoản.
-- Model, khung hình, thời lượng và 2K/4K là yêu cầu trong prompt, chưa xác minh Muse thực hiện đúng. Chất lượng khuôn mặt, sự đồng nhất, độ nét thật và tên model không được suy ra từ số pixel.
-- Kiểm thử headless Chromium cục bộ không chứng minh đăng nhập Chrome/Edge trên Windows thật. Launcher Windows chưa được chạy trên máy Windows thật.
-- Không đọc/xuất cookie hay token thật; fixture dùng cookie tổng hợp. Không có dữ liệu phiên người dùng trong Git/ZIP.
+- **Chưa đăng nhập, tạo ảnh/video hoặc đọc số dư trên Muse.ai thật.** Cloud không có phiên người dùng và truy cập trước đây nhận CONNECT 403. Không thể cam kết dịch vụ/gói tài khoản cho phép 10 render cùng lúc.
+- Muse hoặc nhà cung cấp đăng nhập có thể không hỗ trợ view nhúng. Bản này không có API/OAuth chính thức để thay thế nếu đăng nhập bị từ chối. Không giả trạng thái đăng nhập và không nhập mật khẩu vào form tự chế.
+- Selector, auth check và cầu nối là không chính thức; Muse đổi giao diện có thể cần cập nhật. Không bảo đảm công khai số dư token/credit cho mọi tài khoản.
+- Mô hình, thời lượng, khung hình và 2K/4K là yêu cầu trong prompt; độ giống nhân vật, độ nét gốc và tên model cần kiểm tra trên kết quả thật.
+- Kiểm thử Linux/Chromium/Electron không chứng minh launcher hoặc đăng nhập trên Windows thật. `start.bat` chưa được chạy trên máy Windows thật.
+- Dữ liệu phiên chỉ là dữ liệu fixture tạm và được dọn sau test. ZIP/Git không chứa `.data`, `.env`, cookie hoặc token người dùng.

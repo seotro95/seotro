@@ -8,11 +8,11 @@ const image = (await readFile(new URL('../public/demo-image.png', import.meta.ur
 const clip = (await readFile(new URL('../public/demo.mp4', import.meta.url))).toString('base64');
 const calls = [];
 let adapterMode = 'ok';
-let release;
+const releases = [];
 const adapter = http.createServer(async (req, res) => {
   let raw = ''; for await (const chunk of req) raw += chunk;
   calls.push({ path: req.url, auth: req.headers.authorization, body: JSON.parse(raw) });
-  if (adapterMode === 'wait') await new Promise(r => { release = r; });
+  if (adapterMode === 'wait') await new Promise(r => { releases.push(r); });
   res.setHeader('Content-Type', 'application/json');
   if (adapterMode === 'error') { res.writeHead(429); return res.end(JSON.stringify({ error: '429 quota exhausted; Bearer test-bridge-secret' })); }
   res.end(JSON.stringify(req.url === '/text' ? { text: 'A cinematic scene in English.' } : req.url === '/image' ? { base64: image, mimeType: 'image/png' } : { base64: clip, mimeType: 'video/mp4' }));
@@ -34,7 +34,7 @@ test('server adapter integration (local test server, not real Muse.ai)', async t
     await t.test('static app and honest status, no credential values', async () => {
       assert.equal((await fetch(base)).status, 200);
       const status = await (await fetch(base + '/api/status')).json();
-      assert.deepEqual(status, { museConfigured: true, transport: 'adapter', accounts: [], busy: false, credit: null, gpu: null });
+      assert.deepEqual(status, { museConfigured: true, transport: 'adapter', accounts: [], busy: false, activeRequests: 0, maxConcurrency: 10, embeddedLogin: false, credit: null, gpu: null });
       assert.equal(JSON.stringify(status).includes('test-bridge-secret'), false);
       assert.equal((await fetch(base + '/.env')).status, 404);
     });
@@ -81,15 +81,28 @@ test('server adapter integration (local test server, not real Muse.ai)', async t
       assert.match(error, /429 quota exhausted/); assert.equal(error.includes('test-bridge-secret'), false);
       adapterMode = 'ok';
     });
-    await t.test('prevents parallel generation through the local server', async () => {
+    await t.test('admits ten parallel requests and keeps the remaining slots busy when one finishes', async () => {
       adapterMode = 'wait';
-      const first = post('/api/video', payload);
-      for (let i = 0; !release && i < 100; i++) await new Promise(r => setTimeout(r, 10));
-      assert.ok(release);
-      const next = await post('/api/video', payload);
-      assert.equal(next.status, 409);
-      release(); adapterMode = 'ok';
-      assert.equal((await first).status, 200);
+      const tasks = Array.from({ length: 10 }, (_, i) => post('/api/video', { ...payload, prompt: `Parallel scene ${i + 1}` }));
+      await waitFor(() => releases.length === 10);
+      let status = await (await fetch(base + '/api/status')).json();
+      assert.equal(status.activeRequests, 10); assert.equal(status.busy, true);
+      assert.equal((await post('/api/video', payload)).status, 429);
+      assert.equal((await post('/api/account/close', {})).status, 409);
+      releases.shift()();
+      assert.equal((await tasks[0]).status, 200);
+      status = await (await fetch(base + '/api/status')).json();
+      assert.equal(status.activeRequests, 9); assert.equal(status.busy, true);
+      const replacement = post('/api/video', payload);
+      await waitFor(() => releases.length === 10);
+      assert.equal((await post('/api/video', payload)).status, 429);
+      for (const release of releases.splice(0)) release();
+      adapterMode = 'ok';
+      for (const response of await Promise.all([...tasks, replacement])) assert.equal(response.status, 200);
+      status = await (await fetch(base + '/api/status')).json();
+      assert.equal(status.activeRequests, 0); assert.equal(status.busy, false);
     });
   } finally { child.kill('SIGTERM'); adapter.closeAllConnections(); await new Promise(resolve => adapter.close(resolve)); }
 });
+
+async function waitFor(predicate) { const deadline = Date.now() + 5000; while (!predicate()) { if (Date.now() > deadline) throw new Error('Adapter barrier timed out'); await new Promise(resolve => setTimeout(resolve, 10)); } }

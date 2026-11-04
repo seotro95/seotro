@@ -6,7 +6,7 @@ if errorlevel 1 goto missingnode
 node -e "if(Number(process.versions.node.split('.')[0])<24)process.exit(1)"
 if errorlevel 1 goto missingnode
 if not exist node_modules\react\package.json goto install
-if exist node_modules\playwright-core\package.json goto build
+if exist node_modules\electron\package.json goto build
 :install
 call npm ci
 if errorlevel 1 goto failed
@@ -15,8 +15,8 @@ if exist dist\index.html goto launch
 call npm run build
 if errorlevel 1 goto failed
 :launch
-echo KEEP THIS WINDOW OPEN while using the tool. The browser will open automatically.
-node --use-env-proxy server.mjs --open
+echo Muse AI Studio: embedded login, one account, up to 10 concurrent streams.
+node desktop-launcher.mjs
 if errorlevel 1 goto failed
 exit /b 0
 :missingnode

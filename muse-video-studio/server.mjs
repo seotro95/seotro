@@ -8,14 +8,15 @@ import { MuseBrowser } from './muse-browser.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 if (existsSync(path.join(ROOT, '.env'))) process.loadEnvFile(path.join(ROOT, '.env'));
-const dev = process.argv.includes('--dev');
-const port = Number(process.env.PORT || 8788);
+export async function startStudioServer({ museDriver, embeddedLogin = false, port = Number(process.env.PORT || 8788), dev = false } = {}) {
 const host = '127.0.0.1';
 const transport = process.env.MUSE_TRANSPORT || (process.env.MUSE_ADAPTER_URL ? 'adapter' : 'browser');
 if (!['browser', 'adapter'].includes(transport)) throw new Error('MUSE_TRANSPORT must be browser or adapter.');
-const muse = transport === 'browser' ? new MuseBrowser({ profileRoot: path.resolve(process.env.MUSE_PROFILE_ROOT || path.join(ROOT, '.data', 'muse-accounts')), accountProfile: process.env.MUSE_ACCOUNT_PROFILE }) : null;
+const muse = transport === 'browser' ? museDriver || new MuseBrowser({ profileRoot: path.resolve(process.env.MUSE_PROFILE_ROOT || path.join(ROOT, '.data', 'muse-accounts')), accountProfile: process.env.MUSE_ACCOUNT_PROFILE }) : null;
 const MAX_BODY = 12 * 1024 * 1024;
-let busy = false;
+let activeRequests = 0;
+let accountBusy = false;
+const maxConcurrency = 10;
 const vite = dev ? await (await import('vite')).createServer({ root: ROOT, server: { middlewareMode: true, hmr: false } }) : null;
 const json = (res, status, value) => { if (!res.destroyed) { res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(value)); } };
 async function body(req) {
@@ -78,8 +79,8 @@ async function callAdapter(endpoint, data, signal) {
 }
 async function api(req, res, pathname) {
   if (req.method === 'GET' && pathname === '/api/status') {
-    if (muse && !busy) await muse.refreshActive();
-    return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy, credit: null, gpu: null });
+    if (muse && !activeRequests && !accountBusy) await muse.refreshActive();
+    return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, embeddedLogin, credit: null, gpu: null });
   }
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
@@ -88,6 +89,7 @@ async function api(req, res, pathname) {
   const legacyAccountRoute = pathname.match(/^\/api\/accounts\/(\d+)\/(connect|check|close)$/);
   if (!['/api/video', '/api/image', '/api/text'].includes(pathname) && !accountRoute && !legacyAccountRoute) return json(res, 404, { error: 'API không tồn tại.' });
   let acquired = false;
+  let accountAcquired = false;
   const abort = new AbortController();
   res.on('close', () => abort.abort());
   const timeout = setTimeout(() => abort.abort(new Error('TIMEOUT: Hết 10 phút chờ. Yêu cầu đã gửi có thể vẫn được tính phí.')), 10 * 60 * 1000);
@@ -98,19 +100,20 @@ async function api(req, res, pathname) {
       const action = accountRoute ? accountRoute[1] : legacyAccountRoute[2];
       if (accountId !== 1) return json(res, 400, { error: 'ACCOUNT_INVALID: Bản này chỉ dùng một tài khoản Muse.' });
       if (!muse) return json(res, 409, { error: 'Tài khoản đang do adapter riêng quản lý. Chọn MUSE_TRANSPORT=browser để đăng nhập bằng Chrome/Edge.' });
-      if (busy) return json(res, 409, { error: 'Đang có tác vụ. Đợi hoàn tất trước khi đổi cửa sổ tài khoản.' });
+      if (activeRequests || accountBusy) return json(res, 409, { error: 'Đang có tác vụ. Đợi các luồng hoàn tất trước khi thay đổi phiên tài khoản.' });
       muse.account(accountId);
-      busy = acquired = true;
+      accountBusy = accountAcquired = true;
       if (action === 'close') { if (muse.active?.id === accountId) await muse.close(); }
-      else await muse.connect(accountId);
+      else await muse.connect(accountId, { show: action === 'connect' });
       return json(res, 200, { accounts: muse.snapshot() });
     }
     const kind = pathname === '/api/video' ? 'video' : pathname === '/api/image' ? 'image' : 'text';
     validate(data, kind);
     const endpoint = `/${kind}`;
     if (!muse) adapterURL(endpoint);
-    if (busy) return json(res, 409, { error: 'Đang có một yêu cầu AI. Vui lòng đợi tác vụ hiện tại kết thúc.' });
-    busy = acquired = true;
+    if (accountBusy) return json(res, 409, { error: 'Đang kiểm tra tài khoản Muse. Vui lòng đợi.' });
+    if (activeRequests >= maxConcurrency) return json(res, 429, { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 10 luồng AI đang chạy. Đợi một luồng hoàn tất.' });
+    activeRequests++; acquired = true;
     const useImage = data.image && (data.characterLock !== false || (kind === 'video' && data.sourceMode === 'image'));
     const payload = { accountId: data.accountId, prompt: data.prompt,
       ...(kind !== 'text' ? { aspectRatio: data.aspectRatio, resolution: data.resolution, characterLock: data.characterLock !== false,
@@ -124,7 +127,7 @@ async function api(req, res, pathname) {
     const metadata = result.metadata && Number.isFinite(result.metadata.width) && Number.isFinite(result.metadata.height) ? result.metadata : undefined;
     return json(res, 200, kind !== 'text' ? { base64: result.base64, mimeType: result.mimeType, ...(metadata ? { metadata } : {}) } : { text: result.text });
   } catch (error) { json(res, Number.isInteger(error.status) && error.status >= 400 && error.status <= 599 ? error.status : 502, { error: safeError(error) }); }
-  finally { clearTimeout(timeout); if (acquired) busy = false; }
+  finally { clearTimeout(timeout); if (acquired) activeRequests--; if (accountAcquired) accountBusy = false; }
 }
 const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.mp4': 'video/mp4', '.png': 'image/png', '.ico': 'image/x-icon' };
 const server = http.createServer(async (req, res) => {
@@ -147,22 +150,35 @@ const server = http.createServer(async (req, res) => {
   } catch { json(res, 404, { error: 'Không tìm thấy tệp. Chạy npm run build trước npm start.' }); }
 });
 server.requestTimeout = 12 * 60 * 1000;
-server.listen(port, host, () => {
-  const url = `http://${host}:${server.address().port}`;
-  console.log(`Muse Studio: ${url} · ${dev ? 'development' : 'production'}`);
-  console.log('Giu cua so nay mo khi su dung. Ctrl+C chi dung khi muon tat tool.');
-  console.log(transport === 'browser' ? 'Ket noi Muse: bam Tai khoan Muse va dang nhap mot lan de tao ca 10 anh/video.' : 'Ket noi Muse qua adapter rieng.');
-  if (process.argv.includes('--open')) openBrowser(url);
+await new Promise((resolve, reject) => {
+  server.once('error', reject);
+  server.listen(port, host, () => { server.removeListener('error', reject); resolve(); });
 });
-server.on('error', error => {
-  console.error(error.code === 'EADDRINUSE' ? `Cong ${port} dang duoc su dung. Neu tool da mo, truy cap http://${host}:${port}; neu chua, dat PORT khac trong .env.` : error.message);
-  process.exitCode = 1;
-});
-let stopping = false;
-for (const name of ['SIGINT', 'SIGTERM']) process.on(name, async () => {
-  if (stopping) return;
-  stopping = true;
-  server.close();
-  const timer = setTimeout(() => process.exit(0), 5000);
-  await muse?.close(); await vite?.close(); clearTimeout(timer); process.exit(0);
-});
+const url = `http://${host}:${server.address().port}`;
+console.log(`Muse Studio: ${url} · ${dev ? 'development' : 'production'} · 10 parallel streams`);
+let closed = false;
+return { server, url, muse, close: async () => {
+  if (closed) return;
+  closed = true;
+  server.close(); server.closeAllConnections();
+  await muse?.close(); await vite?.close();
+} };
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  startStudioServer({ dev: process.argv.includes('--dev') }).then(runtime => {
+    console.log('Giu cua so nay mo khi su dung. Ctrl+C chi dung khi muon tat tool.');
+    console.log('Mot tai khoan Muse: toi da 10 luong dong thoi. Ban desktop cho phep dang nhap trong tool.');
+    if (process.argv.includes('--open')) openBrowser(runtime.url);
+    let stopping = false;
+    for (const name of ['SIGINT', 'SIGTERM']) process.on(name, async () => {
+      if (stopping) return;
+      stopping = true;
+      const timer = setTimeout(() => process.exit(0), 5000);
+      await runtime.close(); clearTimeout(timer); process.exit(0);
+    });
+  }).catch(error => {
+    console.error(error.code === 'EADDRINUSE' ? 'Cong tool dang duoc su dung. Dong ban cu hoac doi PORT trong .env.' : error.message);
+    process.exitCode = 1;
+  });
+}

@@ -5,6 +5,6 @@ if ! command -v node >/dev/null || ! node -e "if(Number(process.versions.node.sp
   echo 'Cần Node.js 24 trở lên: https://nodejs.org/' >&2
   exit 1
 fi
-if [[ ! -f node_modules/react/package.json || ! -f node_modules/playwright-core/package.json ]]; then npm ci; fi
+if [[ ! -f node_modules/react/package.json || ! -f node_modules/electron/package.json ]]; then npm ci; fi
 if [[ ! -f dist/index.html ]]; then npm run build; fi
-exec node --use-env-proxy server.mjs --open
+exec node desktop-launcher.mjs

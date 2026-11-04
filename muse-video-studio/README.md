@@ -1,36 +1,23 @@
-# Muse AI · 10-Slot Video Workstation 1.3.0
+# Muse AI Studio 1.4.0 · Một tài khoản, 10 luồng đồng thời
 
-Bản web độc lập React/TypeScript cho 10 phân cảnh. Tool có **đăng nhập tài khoản Muse bằng cửa sổ Chrome/Edge riêng**, gửi prompt/ảnh và lấy video mới hiển thị trong phản hồi. Đây là cầu nối trình duyệt **không chính thức**, không phải SDK/API được Muse cam kết hỗ trợ.
+Ứng dụng desktop React/TypeScript và Electron cho 10 cảnh ảnh/video. **Bản 1.4 thay cách chạy tuần tự bằng 10 cuộc trò chuyện độc lập trên cùng một phiên Muse. Trang đăng nhập Muse nằm trong cửa sổ tool; không cần cài hoặc mở Chrome/Edge riêng.**
 
-**Đã kiểm thử với trang giả lập cục bộ, chưa đăng nhập hoặc tạo video trên Muse.ai thật.** Môi trường phát triển chưa có tài khoản và bị proxy từ chối truy cập muse.ai (CONNECT 403). Người dùng cần đăng nhập và thử một cảnh trên máy của mình để xác minh với dịch vụ thật. Nếu Muse đổi giao diện, selector trong `muse-browser.mjs` có thể cần cập nhật.
+Cầu nối giao diện này **không chính thức**. Đã kiểm thử đăng nhập, 10 luồng, tách kết quả và dừng tác vụ bằng Electron thật với dịch vụ Muse giả lập cục bộ. **Chưa đăng nhập, tạo ảnh/video hoặc đọc số dư trên Muse.ai thật**: cloud chưa có phiên người dùng và các lần truy cập muse.ai nhận CONNECT 403. Muse có thể giới hạn tác vụ đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các kiểm thử không chứng minh gói tài khoản thực tế hỗ trợ 10 render cùng lúc.
 
-## Một tài khoản · Một lần bấm · Cả bộ 10 cảnh
+## Cài và chạy trên Windows
 
-Bản 1.3.0 chỉ dùng **một tài khoản Muse duy nhất**. Đã bỏ danh sách tài khoản, email từng ô, gán riêng và chọn tài khoản dùng chung. Cả 10 ô ảnh/video tự sử dụng cùng một phiên đăng nhập.
+1. Cài Node.js 24+ trên Windows 10/11. Không cần Chrome/Edge cho bản desktop.
+2. Đóng tool cũ. Giải nén ZIP mới vào một thư mục riêng, chạy `start.bat`.
+3. Lần đầu cần Internet để cài các gói và tải runtime Electron chính thức. Bộ cài Electron kiểm tra checksum. Không đổi chính sách PowerShell; nếu chạy lệnh thủ công, dùng `npm.cmd`.
+4. Bấm **Đăng nhập Muse trong tool**. Đăng nhập trực tiếp trên trang Muse/nhà cung cấp trong tab tích hợp. Nếu nhà cung cấp mở popup xác thực, popup vẫn thuộc ứng dụng.
+5. Bấm **← Về Studio**, rồi **Kiểm tra phiên**. Một phiên xác minh dùng cho cả 10 ô.
+6. Nhập 10 prompt hoặc nạp TXT/SRT. Chọn **Tạo ảnh hàng loạt** hoặc **Tạo video**, bấm **TẠO 10 ẢNH / TẠO 10 VIDEO**.
 
-1. Cài Node.js 24+ và Chrome hoặc Edge trên máy chạy tool.
-2. Giải nén ZIP vào thư mục mới, chạy `start.bat` (Windows) hoặc `bash start.sh` (Linux/macOS có desktop). Trình duyệt mở khi máy chủ sẵn sàng; giữ cửa sổ máy chủ chạy.
-3. Bấm **Kết nối Muse**, đăng nhập trực tiếp trong cửa sổ Chrome/Edge được mở, rồi quay lại tool bấm **Kiểm tra phiên**.
-4. Nhập 10 prompt hoặc nạp TXT/SRT, chọn **Tạo video** hoặc **Tạo ảnh hàng loạt**.
-5. Bấm **TẠO 10 VIDEO** hoặc **TẠO 10 ẢNH** đúng một lần. Tool tự xử lý lần lượt các cảnh trên cùng phiên, nhận và đặt từng kết quả vào đúng ô.
+Tool bắt đầu các cảnh đủ điều kiện đồng thời và trả mỗi kết quả về đúng ô. Số luồng đang chạy hiện cạnh tiến độ. Dùng **Dừng tất cả luồng** để ngừng nhận kết quả và gửi Stop tới từng cuộc trò chuyện đang chạy. Muse vẫn có thể tính phí hoặc tiếp tục tác vụ đã nhận. Bấm Tạo 10 lại chỉ chạy phần chưa xong; có thể tạo lại riêng một cảnh. Cảnh tắt, prompt trống, cảnh đã hoàn tất hoặc thiếu ảnh nguồn trong chế độ ảnh→video được bỏ qua.
 
-Một lần bấm khởi động cả hàng đợi, không có nghĩa Muse xử lý đồng thời hoặc trả đủ 10 tệp trong một phản hồi. Tốc độ/hạn mức do Muse quyết định. Các cảnh chờ có nhãn **Đang chờ**, cảnh hiện tại có nhãn **Đang tạo**. Không cần bấm từng ô hay đăng nhập thêm tài khoản.
+Các yêu cầu đều dùng tài khoản duy nhất, không có email/gán tài khoản từng cảnh. Khi mở dự án JSON cũ, các gán tài khoản được bỏ qua, prompt và bật/tắt vẫn giữ. Để chuyển kịch bản từ bản web cũ, xuất dự án JSON rồi mở trong bản desktop. Phiên đăng nhập Chrome của bản cũ không tự chuyển sang Electron: đăng nhập một lần trong bản mới. Thư mục phiên cũ không bị xóa.
 
-Có thể tắt từng cảnh bằng checkbox **Bật**. Cảnh trống, đã xong hoặc thiếu ảnh đầu vào trong chế độ ảnh→video được bỏ qua. Dừng sẽ ngừng lượt đang chạy và đưa các cảnh chưa gửi về Sẵn sàng. Bấm Tạo 10 lại để tiếp tục phần chưa xong; không tạo lại các kết quả đã hoàn tất. Nếu phiên hết hạn, hàng đợi dừng để bạn đăng nhập lại cùng tài khoản.
-
-Đăng nhập trong Chrome thông thường không đăng nhập hồ sơ riêng mà tool mở. Khi khởi động lại máy chủ, bấm Kết nối/Kiểm tra phiên để xác minh phiên đã lưu. Cấu hình gán tài khoản từ dự án cũ bị bỏ qua, nhưng prompt và trạng thái bật/tắt vẫn được giữ.
-
-## Các chức năng được giữ lại
-
-- Bảng token/credit đọc số dư có nhãn từ Muse, hiển thị thời điểm đọc và nút cập nhật. Chưa đọc được thì ghi rõ; không tự tính, đoán hoặc coi là 0.
-- Ảnh hàng loạt từ prompt/TXT/SRT, yêu cầu 2K/4K, tùy chọn Đồng nhất nhân vật.
-- Video từ prompt hoặc ảnh, mức yêu cầu 720p/1080p/2K/4K và 360p để kiểm tra nhanh.
-- Chuyển ảnh đã tạo thành nguồn video mà vẫn giữ ảnh gốc; nén riêng bản tham chiếu trên 8 MB nếu cần.
-- Kiểm tra kích thước thật, tải từng kết quả hoặc tải cả bộ, lưu dự án JSON và nhật ký lỗi.
-
-2K là QHD 2560×1440; 4K là UHD 3840×2160 ở khung ngang, hoán đổi hai chiều khi dọc. Đây là mức yêu cầu qua prompt, không bảo đảm Muse hỗ trợ. Tệp thấp hơn được ghi Chưa đạt yêu cầu; không đổi nhãn hoặc phóng ảnh để giả đầu ra AI 4K gốc.
-
-Chạy bằng lệnh:
+Trên Linux/macOS có desktop, dùng `bash start.sh`. Chạy bằng lệnh:
 
 ```sh
 npm ci
@@ -38,92 +25,71 @@ npm run build
 npm start
 ```
 
-Máy chủ chỉ lắng nghe 127.0.0.1, mặc định cổng 8788. Mở địa chỉ máy chủ in ra nếu trình duyệt không tự mở. Không mở `index.html` qua `file://`. Ctrl+C dùng để tắt máy chủ; `Terminate batch job (Y/N)?` là câu hỏi của CMD khi nhận lệnh dừng.
+`npm start` mở ứng dụng desktop. Đóng cửa sổ ứng dụng để dừng máy chủ và các luồng. Máy chủ chỉ lắng nghe 127.0.0.1, mặc định cổng 8788. Nếu cổng bị chiếm, đóng tool cũ hoặc đổi PORT trong `.env`.
 
-## Dữ liệu và quyền riêng tư
+## Ảnh, video và đồng nhất nhân vật
 
-- Mật khẩu nhập trực tiếp trên trang đăng nhập của Muse/nhà cung cấp, không nhập vào form của tool. Tool không xuất cookie hoặc token của trình duyệt.
-- Phiên được Chrome/Edge lưu trong `.data/muse-accounts/slot-01` trên máy bạn. Không đưa thư mục này lên Git, ZIP, ảnh chụp hay chat. Không chia sẻ thư mục tool có chứa `.data` cho người khác.
-- Tool dùng hồ sơ riêng; không đọc hồ sơ Chrome mặc định của bạn. Không mở hồ sơ này bằng một tiến trình Chrome khác khi tool đang dùng nó.
-- Prompt và ảnh được gửi đến Muse khi bấm tạo. Các yêu cầu có thể tiêu hạn mức của tài khoản theo chính sách Muse. Kiểm tra phiên không gửi chat hoặc render.
-- Dừng sẽ ngừng hàng đợi và thử bấm Stop ở lượt đang chạy; không đảm bảo dịch vụ hoàn credit hoặc dừng tác vụ đã nhận.
-- Không gõ chat thủ công trong cửa sổ Muse khi tool đang tạo video. Nếu phát hiện bản nháp chưa gửi hoặc lượt đang chạy, tool báo lỗi thay vì ghi đè.
+- TXT/SRT UTF-8 tối đa 2 MB; mỗi dòng/đoạn TXT hoặc khối SRT là một cảnh. Xem trước trước khi nạp; tối đa 10 cảnh mỗi bộ, không tự cắt nội dung vượt giới hạn.
+- Tạo ảnh hàng loạt với mức yêu cầu 2K hoặc 4K. 2K là 2560×1440, 4K là 3840×2160 ở khung ngang; hoán đổi hai chiều khi dọc.
+- Bật **Đồng nhất nhân vật** và chọn ảnh chân dung chung hoặc riêng từng ô để gửi ảnh tham chiếu. Tắt tùy chọn để theo prompt độc lập. Mỗi luồng là cuộc trò chuyện mới; không dựa vào trí nhớ hội thoại của luồng khác. Không có ảnh tham chiếu thì không bảo đảm cùng diện mạo nhân vật.
+- Video từ prompt hoặc ảnh, mức yêu cầu 360p/720p/1080p/2K/4K. Ở chế độ Từ ảnh, ảnh vẫn được gửi khi tắt khóa nhân vật; chỉ gửi các ô có ảnh nguồn.
+- **Chuyển bộ ảnh đã tạo sang video** giữ ảnh gốc và dùng đúng ảnh của từng cảnh. Đổi tab/chất lượng video giữ ảnh. Nếu ảnh tạo lớn hơn 8 MB, chỉ bản tham chiếu gửi đi được nén, giữ kích thước pixel; ảnh gốc vẫn tải được.
+- Tải từng kết quả hoặc cả bộ, xem ảnh lớn, phát video thật, mở/xuất dự án JSON, AI Enhance và modifier chung.
+- Bảng số dư đọc token/credit có nhãn từ giao diện Muse, gồm số 0 thực sự. Không đọc được thì ghi rõ; không đoán hoặc tự tính. Có thời điểm đọc và nút cập nhật.
 
-## Tạo ảnh theo prompt, TXT hoặc SRT
+Mô hình, thời lượng, khung hình và độ phân giải là **yêu cầu bằng lời trong prompt**, không phải tham số API được Muse xác nhận. Danh sách Omni/Veo theo mô tả người dùng, chưa xác minh trên dịch vụ thật. Tool hiển thị kích thước quan sát được; tệp thấp hơn mức yêu cầu được ghi **Chưa đạt yêu cầu**, không phóng ảnh hoặc đổi nhãn để giả 4K gốc. Độ giống nhân vật và chất lượng AI cần kiểm tra bằng kết quả thực tế.
 
-1. Chọn tab **Tạo ảnh hàng loạt**, mức 2K hoặc 4K và khung hình.
-2. Nhập prompt vào từng ô hoặc **Nhập TXT / SRT → Nạp vào Studio / Nạp & Chạy các cảnh**. Mỗi dòng/đoạn TXT hay mỗi khối SRT là một cảnh. Tối đa 10 cảnh mỗi bộ; quá 10 cảnh không bị tự cắt mất nội dung.
-3. Muốn giữ nhân vật: bật **Đồng nhất nhân vật**, chọn một chân dung chung hoặc ảnh riêng ở từng ô. Muốn tạo nhân vật độc lập theo prompt: tắt tùy chọn đó.
-4. Bấm tạo từng cảnh hoặc chạy cả bộ. Ảnh có thể xem lớn, tải riêng hoặc tải toàn bộ.
-5. Để làm video từ bộ ảnh, bấm **Chuyển bộ ảnh đã tạo sang video**, chọn chất lượng video và chạy. Có thể dùng nút **Dùng ảnh này tạo video** cho một cảnh. Chuyển tab hoặc đổi chất lượng video giữ lại ảnh đã tạo. Ảnh đã tạo lớn hơn 8 MB được nén riêng ở bản gửi làm tham chiếu (giữ kích thước pixel); ảnh gốc vẫn được giữ để tải. Giao diện báo rõ khi nén đầu vào.
+Chỉnh prompt/ảnh/settings sẽ xóa kết quả liên quan để tránh dùng lại tệp không khớp. Ảnh/video chỉ giữ trong phiên; dự án JSON và localStorage chỉ lưu prompt, bật/tắt và settings. Tải kết quả cần giữ trước khi đóng.
 
-## Video, mô hình và ảnh tham chiếu
+## Đăng nhập và dữ liệu
 
-Mô hình, độ phân giải, thời lượng và khung hình trong UI được gửi cho Muse **dưới dạng yêu cầu trong prompt**, không phải tham số API được bảo đảm thi hành. Danh sách Omni/Veo lấy từ mô tả người dùng; chưa xác minh dịch vụ cung cấp đủ các lựa chọn đó. Muse quyết định khả năng thực tế. Video trả về hiển thị thời lượng và kích thước quan sát được để đối chiếu; chưa xác minh được tên mô hình thực sự đã sử dụng.
+- Trang Muse chạy trong view Electron riêng, không nằm trong iframe. Mật khẩu được nhập trực tiếp trên trang nhà cung cấp; tool không có form mật khẩu tự chế và không xuất cookie/token.
+- Muse và các popup xác thực không được truy cập Node.js hoặc IPC của Studio. Context isolation, sandbox và web security được bật trong ứng dụng phát hành. Không tắt TLS verification.
+- Một partition `persist:muse` lưu phiên ở `.data/muse-desktop` trên máy bạn. Không chia sẻ thư mục này hoặc đưa lên Git, ZIP, ảnh chụp/chat. Không đọc hồ sơ Chrome cá nhân.
+- Mỗi cảnh tạo một view/hội thoại riêng trong cùng phiên, đóng khi hoàn tất hoặc dừng. Tool chỉ nhận media sau tin nhắn mới có marker, không lấy ảnh/video cũ để giả thành công.
+- Trường hợp Muse tải lại một hội thoại cũ, tool thử nút New chat và yêu cầu hội thoại mới trước khi gửi. Không mở được thì báo `MUSE_NEW_CHAT_UNAVAILABLE`.
+- Đường gửi desktop đi qua IPC giới hạn endpoint và máy chủ cục bộ, tránh giới hạn 6 kết nối HTTP/1 của trang web. Máy chủ giữ tối đa 10 yêu cầu đang hoạt động; hoàn tất một yêu cầu chỉ giải phóng một chỗ.
+- Không cần `.env` cho đăng nhập desktop mặc định. Không gửi mật khẩu/cookie/token trong chat.
 
-Ở video Từ ảnh, hàng đợi chỉ gửi các cảnh có ảnh đầu vào hoặc ảnh đã tạo; cảnh chưa có ảnh được bỏ qua. Ảnh là khung hình đầu và vẫn được gửi nếu tắt khóa nhân vật. Ở Từ prompt hoặc chế độ tạo ảnh, ảnh chân dung chỉ được gửi khi bật Đồng nhất nhân vật. Ảnh tham chiếu được tải qua ô đính kèm trong Muse. Nếu không tìm thấy ô tải hoặc ảnh chưa xuất hiện, tool báo lỗi trước khi gửi prompt. Yêu cầu giữ diện mạo nhân vật không chứng minh độ giống nhân vật hoặc chất lượng R2V. Hãy xem kết quả thực tế.
+## Lỗi và giới hạn thực tế
 
-Tool chỉ lấy video trong phản hồi sau tin nhắn mới có dấu nhận diện riêng; không lấy video cũ trong lịch sử để giả lập hoàn tất. Nếu Muse chỉ trả văn bản, lỗi, quá hạn hoặc video không đọc được, cảnh không được đánh dấu thành công. Trường hợp video hiển thị nhưng chưa đọc được dữ liệu, mở cửa sổ Muse để tải trực tiếp.
+- Không tải được runtime: kiểm tra Internet và quyền ghi thư mục tool rồi chạy `start.bat` lại. Không vô hiệu checksum hoặc TLS.
+- `MUSE_LOGIN_REQUIRED`: mở tab đăng nhập trong tool, hoàn tất đăng nhập, Về Studio rồi Kiểm tra phiên.
+- Nếu Muse/nhà cung cấp từ chối trình đăng nhập nhúng, bản này chưa có API/OAuth chính thức thay thế. Không giả trạng thái đăng nhập; cần phương thức xác thực được dịch vụ hỗ trợ.
+- `MUSE_CONCURRENCY_LIMIT`: đã có 10 luồng cục bộ; đợi một luồng hoàn tất. Lỗi quota/429 do Muse trả được giữ ở đúng ô; không tự đổi tài khoản, tăng hạn mức hoặc retry hàng loạt.
+- `MUSE_NEW_CHAT_UNAVAILABLE`, `MUSE_ATTACHMENT_UNAVAILABLE`, `MUSE_UPLOAD_NOT_READY`: giao diện Muse có thể đã đổi hoặc chưa nhận ảnh. Chưa gửi prompt khi thiếu điều kiện bắt buộc.
+- `MUSE_TIMEOUT`, `MUSE_NO_IMAGE`, `MUSE_NO_VIDEO`, `MUSE_MEDIA_UNREADABLE`: mở lịch sử trong tab Muse kiểm tra trước khi thử lại để tránh tạo trùng hoặc tính phí hai lần.
 
-## Các thao tác khác
+## Chế độ web và adapter nâng cao
 
-- 10 slot responsive; prompt sửa riêng; bật/tắt từng cảnh. Tất cả cùng một phiên Muse.
-- Ảnh PNG/JPG/WebP tối đa 8 MB; chọn ảnh chung đồng bộ 10 cảnh, ảnh riêng, dùng lại và gỡ ảnh. Giới hạn upload thực tế của Muse có thể thấp hơn.
-- TXT/SRT UTF-8 tối đa 2 MB, bỏ timestamp và số thứ tự; xem trước, 2 kịch bản mẫu, tối đa 10 cảnh. Ít hơn 10 cảnh thì các ô còn lại trống; quá 10 cảnh không bị âm thầm cắt bỏ.
-- Hàng đợi tuần tự, bỏ cảnh đã hoàn tất và slot chưa sẵn sàng, tạo lại một cảnh, dừng/tiếp tục, nhật ký lỗi và gợi ý.
-- AI Enhance gửi yêu cầu viết prompt tiếng Anh qua tài khoản Muse duy nhất. Modifier chung được nối vào prompt tạo video.
-- Player thật, tải một video hoặc tải tất cả tuần tự. Trình duyệt có thể hỏi quyền tải nhiều tệp.
-- Tự lưu prompt, bật/tắt và settings trong localStorage; mở/xuất dự án JSON. Ảnh và video chỉ giữ trong phiên. Tải video cần giữ trước khi đóng trang.
-- Chỉnh prompt/ảnh/settings xóa kết quả cũ để tránh dùng video không còn khớp. Bật/tắt cảnh không xóa kết quả.
+`npm run start:web` hoặc `npm run dev` giữ cách phục vụ web cũ. Chế độ này dùng Chrome/Edge riêng để đăng nhập khi MUSE_TRANSPORT=browser. Giới hạn kết nối của trình duyệt có thể giảm số HTTP request chạy đồng thời; **dùng bản desktop mặc định để chạy đủ 10 luồng của tool**. Không mở `index.html` bằng `file://`.
 
-## Kiểm thử giao diện không tiêu render
+`.env.example` mô tả các tùy chọn. `MUSE_DESKTOP_DATA` đổi thư mục dữ liệu Electron. `MUSE_BALANCE_SELECTOR` chỉ vùng số dư có nhãn, không dùng vùng chat. `MUSE_PROFILE_ROOT`, `MUSE_ACCOUNT_PROFILE`, `MUSE_BROWSER_CHANNEL` chỉ áp dụng cho đăng nhập trình duyệt ngoài của chế độ web. Không trỏ dữ liệu Electron vào hồ sơ Chrome cũ.
 
-Chọn **Chẩn đoán API → Kiểm thử giao diện**. Video dùng clip 4s/360p/16:9 có nhãn `TEST CLIP - NOT AI GENERATED`; ảnh dùng PNG 640×360 có nhãn `TEST IMAGE - NOT AI GENERATED`. Chế độ này không tạo nội dung theo prompt, không dùng ảnh hoặc AI Enhance, không chứng minh phiên đăng nhập hay chất lượng AI.
+Nếu đã có adapter tương thích, dùng `MUSE_TRANSPORT=adapter`, `MUSE_ADAPTER_URL`, `MUSE_ADAPTER_TOKEN` nếu cần. Adapter xác thực **một** tài khoản, accountId=1; mọi ID khác bị từ chối. Không trỏ URL adapter vào trang chủ Muse.ai. Adapter cũng có thể nhận 10 yêu cầu đồng thời và phải tuân thủ hạn mức của nhà cung cấp. Đây là hợp đồng của ứng dụng, không phải API chính thức của Muse:
 
-## Xử lý lỗi thường gặp
+- `POST /video`: `{accountId:1,prompt,modelDisplayName,aspectRatio,durationSeconds,resolution,sourceMode,characterLock,referenceImage?}`. Kết quả `{base64,mimeType}` với MP4/WebM/QuickTime.
+- `POST /image`: `{accountId:1,prompt,aspectRatio,resolution,characterLock,referenceImage?}`. Kết quả `{base64,mimeType}` với PNG/JPEG/WebP.
+- `referenceImage`: `{base64,mimeType}`. Ảnh chỉ gửi khi cần; ảnh→video luôn cần nguồn ảnh.
+- `POST /text`: `{accountId:1,prompt}` → `{text}`.
+- Lỗi HTTP 4xx/5xx với `{error}`. Timeout 10 phút, mỗi yêu cầu tối đa 12 MB, phản hồi tối đa 150 MB. Token bearer chỉ có phía máy chủ.
 
-- `MUSE_BROWSER_UNAVAILABLE`: cài Chrome hoặc Edge trên máy đang chạy máy chủ, không chỉ trên máy xem giao diện. Có thể đặt `MUSE_BROWSER_CHANNEL=msedge` trong `.env` để dùng Edge.
-- `MUSE_LOGIN_REQUIRED`: bấm Kết nối Muse, hoàn tất đăng nhập trong cửa sổ tool mở, rồi Kiểm tra phiên.
-- `MUSE_PROFILE_BUSY`: đóng cửa sổ/tiến trình khác đang dùng hồ sơ riêng đó. Không xóa dữ liệu đăng nhập để xử lý một lỗi khóa hồ sơ.
-- `MUSE_DRAFT_EXISTS`/`MUSE_CHAT_BUSY`: xử lý bản nháp hoặc đợi lượt hiện tại trong Muse hoàn tất trước.
-- `MUSE_ATTACHMENT_UNAVAILABLE`/`MUSE_UPLOAD_NOT_READY`: Muse đổi ô đính kèm hoặc chưa nhận ảnh. Kiểm tra cửa sổ Muse; không tự gửi prompt khi chưa có ảnh yêu cầu.
-- `MUSE_TIMEOUT`/`MUSE_NO_VIDEO`: kiểm tra phản hồi của Muse trước khi thử lại để tránh tạo trùng. Cần quyền/hạn mức tạo video tương ứng trong tài khoản.
-
-## Cấu hình tùy chọn
-
-Không cần `.env` cho cách đăng nhập trình duyệt mặc định. Nếu cần, sao chép `.env.example` thành `.env` và khởi động lại máy chủ:
-
-```dotenv
-MUSE_TRANSPORT=browser
-MUSE_BROWSER_CHANNEL=msedge
-PORT=8788
-```
-
-`MUSE_BALANCE_SELECTOR` là tùy chọn nâng cao để chỉ vùng số dư có nhãn nếu Muse đổi bố cục; vùng chat không được dùng để suy đoán số dư. Token/credit chưa được dịch vụ công khai qua API của bản này. `MUSE_PROFILE_ROOT` có thể đổi thư mục cha của hồ sơ duy nhất. `MUSE_ACCOUNT_PROFILE` có thể trỏ trực tiếp tới một hồ sơ đã lưu để tái sử dụng. Bản nâng cấp không xóa thư mục phiên cũ. Cầu nối chỉ điều khiển các trình duyệt nó tự mở, không gắn vào cổng debug của Chrome cá nhân.
-
-### Adapter API riêng (nâng cao)
-
-Nếu đã có adapter tương thích, đặt `MUSE_TRANSPORT=adapter`, `MUSE_ADAPTER_URL` và `MUSE_ADAPTER_TOKEN` nếu cần. Không trỏ URL adapter vào trang chủ Muse.ai. Adapter chịu trách nhiệm xác thực tài khoản duy nhất, với `accountId=1`; mọi ID khác bị từ chối; khi dùng adapter, nút đăng nhập trình duyệt không hoạt động.
-
-Backend gọi `POST {MUSE_ADAPTER_URL}/video` với:
-
-```json
-{"accountId":1,"prompt":"scene + modifier","modelDisplayName":"Omni 1.1 Flash","aspectRatio":"16:9","durationSeconds":4,"resolution":"360p","referenceImage":{"base64":"...","mimeType":"image/png"}}
-```
-
-`referenceImage` chỉ có khi bật ảnh tham chiếu. Kết quả: `{"base64":"...","mimeType":"video/mp4"}` (hoặc WebM/QuickTime). Ảnh: `POST /image` với `accountId`, `prompt`, `aspectRatio`, `resolution` (2k/4k), `characterLock` và `referenceImage` tùy chọn; trả về base64 và MIME PNG/JPEG/WebP. Video có thêm `sourceMode` (text/image), `characterLock`; sourceMode=image cần ảnh đầu vào. Text: `POST /text` với `{"accountId":1,"prompt":"..."}` → `{"text":"..."}`. Lỗi HTTP 4xx/5xx với `{"error":"..."}`. Timeout 10 phút, phản hồi tối đa 150 MB. Token thêm dưới dạng bearer trên máy chủ, không gửi ra frontend. Đây là hợp đồng adapter của ứng dụng, không phải tài liệu API chính thức của Muse.
-
-## Kiểm tra và nguồn tham khảo
+## Kiểm thử và nguồn
 
 ```sh
 npm run build
 npm test
-CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e
 CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge
+CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e
+npm run test:desktop
 ```
 
-Các kiểm tra cầu nối dùng trang Muse giả lập cục bộ và hồ sơ tạm, không gửi chat/video đến Muse.ai. Test giao diện dùng adapter/phản hồi giả để kiểm tra trạng thái và payload. Không xem kết quả test giả lập là chứng minh đăng nhập hoặc render thật. Launcher Windows chưa được chạy trên Windows thật.
+Test desktop cần màn hình/virtual display và runtime Electron (lần đầu: `node node_modules/electron/install.js`). Trên Linux cloud có thể dùng Xorg dummy/Xvfb. Môi trường kiểm thử không hỗ trợ sandbox có thể bật **riêng cho fixture** `MUSE_ELECTRON_TEST_NO_SANDBOX=1`; launcher phát hành không dùng cờ này.
 
-Tham khảo giao diện/protocol công khai: [muse-mcp (không chính thức)](https://github.com/degokisss/muse-mcp), [Muse Gadget SDK của facebookincubator](https://github.com/facebookincubator/muse-gadget-sdk). SDK gadget có quy trình ghép thiết bị riêng; bản Windows này sử dụng cầu nối trình duyệt tự triển khai, không dùng SDK gadget hoặc chạy mã thư viện community.
+Fixture desktop dùng một phiên giả lập và chặn kết quả cho tới khi cả 10 yêu cầu đã được gửi, rồi trả ảnh khác nhau để xác minh ánh xạ từng ô; đồng thời kiểm tra video từ ảnh, hủy cả 10 và lưu phiên sau mở lại. Test không gửi yêu cầu đến Muse thật. Xem `VALIDATION.md`. Launcher Windows chưa được chạy trên Windows thật.
 
-Mỗi cloud task đã có môi trường riêng; dùng checkout sẵn có, không tạo Git worktree cho setup. Để kiểm tra dịch vụ thật từ cloud cần truy cập Muse và phiên đăng nhập được xác thực; snapshot không giữ tiến trình trình duyệt đang chạy.
+**Chẩn đoán API → Kiểm thử giao diện** dùng clip/ảnh 640×360 có nhãn TEST CLIP/TEST IMAGE, không tạo nội dung AI và không chứng minh đăng nhập/hạn mức/chất lượng.
+
+Nguồn: [Electron](https://github.com/electron/electron), [muse-mcp (không chính thức)](https://github.com/degokisss/muse-mcp), [Muse Gadget SDK](https://github.com/facebookincubator/muse-gadget-sdk). Cầu nối tự triển khai, không chạy mã community hoặc dùng SDK gadget để giả API tạo video.
+
+Mỗi cloud task đã có môi trường riêng; dùng checkout hiện có, không tạo Git worktree cho setup. Snapshot không giữ tiến trình ứng dụng đang chạy.
