@@ -35,7 +35,7 @@ export class MuseBrowser {
     this.composerTimeoutMs = composerTimeoutMs;
     this.active = null;
     this.profilePath = accountProfile || path.join(this.profileRoot, 'slot-01');
-    this.accounts = [{ id: 1, state: existsSync(this.profile(1)) ? 'saved' : 'disconnected', authenticated: false, checkedAt: null, balance: null }];
+    this.accounts = [{ id: 1, state: existsSync(this.profile(1)) ? 'saved' : 'disconnected', authenticated: false, sessionAuthenticated: false, composerReady: false, connectionMessage: '', checkedAt: null, balance: null }];
   }
   profile(id = 1) { this.requireSingleAccount(id); return this.profilePath; }
   requireSingleAccount(id) { if (id !== 1) throw fail('ACCOUNT_INVALID', 'Bản này chỉ sử dụng một tài khoản Muse duy nhất.', 400); }
@@ -99,33 +99,60 @@ export class MuseBrowser {
     const page = await this.open(id);
     if (show) { if (this.active.showLogin) this.active.showLogin(); else await page.bringToFront(); }
     await this.refreshActive();
+    // An OAuth popup can update the session while the original page still shows
+    // its signed-out UI. Reconcile that page only after positive authentication.
+    if (!show && this.account(id).sessionAuthenticated && !this.account(id).composerReady) {
+      await page.locator(EDITOR).first().waitFor({ state: 'visible', timeout: 1200 }).catch(() => {});
+      await this.refreshActive();
+      const draft = await page.locator('[data-hatch-composer-root]').evaluateAll(roots => roots.some(root =>
+        [...root.querySelectorAll('textarea, [contenteditable="true"], [contenteditable="plaintext-only"]')].some(editor => (editor.tagName === 'TEXTAREA' ? editor.value : editor.textContent)?.trim())
+      ));
+      if (this.account(id).sessionAuthenticated && !this.account(id).composerReady && !draft) {
+        try { await page.reload({ waitUntil: 'domcontentloaded', timeout: 15000 }); }
+        catch { throw fail('MUSE_SESSION_REFRESH_FAILED', 'Đã nhận phiên đăng nhập nhưng chưa tải lại được trang Muse. Kiểm tra tab Muse rồi bấm Kiểm tra phiên.', 503); }
+        await page.locator(EDITOR).first().waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+        await this.refreshActive();
+      }
+    }
     return this.snapshot();
   }
   async refreshActive() {
     const active = this.active;
     if (!active || active.page.isClosed()) return;
     const account = this.account(active.id);
+    account.checkedAt = new Date().toISOString();
     // The login page remains separate from the ten worker conversations.
     if (new URL(active.page.url()).origin !== new URL(this.serviceURL).origin) {
-      account.authenticated = false; account.state = 'login_open'; account.balance = null; return;
+      Object.assign(account, { authenticated: false, sessionAuthenticated: false, composerReady: false, state: 'login_open', balance: null, connectionMessage: 'Hoàn tất đăng nhập để tab xác thực quay về Muse, rồi bấm Kiểm tra phiên.' }); return;
     }
     // Only the owned browser uses its session. No cookie/token export or passwords.
-    const authenticated = await this.authenticated(active.page);
+    const probe = await this.inspectAuthentication(active.page);
     const composerReady = await active.page.locator(EDITOR).first().isVisible().catch(() => false);
     if (this.active !== active) return;
-    account.authenticated = Boolean(authenticated && composerReady);
-    account.state = account.authenticated ? 'ready' : 'login_open';
-    account.checkedAt = new Date().toISOString();
+    account.sessionAuthenticated = probe.authenticated;
+    account.composerReady = composerReady;
+    account.authenticated = Boolean(probe.authenticated && composerReady);
+    account.state = account.authenticated ? 'ready' : probe.authenticated ? 'composer_loading' : probe.state;
+    account.connectionMessage = account.authenticated ? 'Phiên Muse đã được xác minh. Có thể gửi yêu cầu tạo ảnh/video.' : probe.authenticated ? 'Đã xác minh đăng nhập, đang chờ trang Muse tải ô soạn. Bấm Kiểm tra phiên để cập nhật.' : probe.message;
     account.balance = account.authenticated ? await readMuseBalance(active.page) : null;
   }
   async authenticated(page) {
+    return (await this.inspectAuthentication(page)).authenticated;
+  }
+  async inspectAuthentication(page) {
     return page.evaluate(async () => {
       const abort = new AbortController();
       const timer = setTimeout(() => abort.abort(), 4000);
-      try { const response = await fetch('/api/auth/check', { method: 'POST', signal: abort.signal }); return response.ok && (await response.json())?.ok === true; }
-      catch { return false; }
+      try {
+        const response = await fetch('/api/auth/check', { method: 'POST', signal: abort.signal });
+        const data = await response.json().catch(() => null);
+        if (response.ok && data?.ok === true) return { authenticated: true, state: 'ready', message: '' };
+        if (response.status === 401 || (response.ok && data?.ok === false)) return { authenticated: false, state: 'login_open', message: 'Chưa xác minh được phiên đăng nhập. Hoàn tất đăng nhập trong tab Muse rồi quay về Studio.' };
+        return { authenticated: false, state: 'check_failed', message: `Không xác minh được phiên Muse (HTTP ${response.status}). Kiểm tra tab Muse rồi thử Kiểm tra phiên lại.` };
+      }
+      catch { return { authenticated: false, state: 'check_failed', message: 'Không đọc được trạng thái phiên từ Muse. Kiểm tra kết nối mạng và tab Muse rồi thử Kiểm tra phiên lại.' }; }
       finally { clearTimeout(timer); }
-    }).catch(() => false);
+    }).catch(() => ({ authenticated: false, state: 'check_failed', message: 'Chưa đọc được trang Muse để xác minh phiên. Mở tab Muse rồi kiểm tra lại.' }));
   }
   async waitForComposer(page) {
     try { await page.locator(EDITOR).first().waitFor({ state: 'visible', timeout: this.composerTimeoutMs }); }
@@ -165,15 +192,20 @@ export class MuseBrowser {
       await this.open(accountId);
       owned = this.active;
       await this.refreshActive();
-      if (!this.account(accountId).authenticated) throw fail('MUSE_LOGIN_REQUIRED', 'Đăng nhập tài khoản Muse trong tool, rồi bấm Kiểm tra phiên.', 401);
+      if (!this.account(accountId).authenticated) {
+        const account = this.account(accountId);
+        const code = account.sessionAuthenticated ? 'MUSE_COMPOSER_NOT_READY' : account.state === 'check_failed' ? 'MUSE_SESSION_CHECK_FAILED' : 'MUSE_LOGIN_REQUIRED';
+        throw fail(code, account.connectionMessage || 'Đăng nhập tài khoản Muse trong tool, rồi bấm Kiểm tra phiên.', code === 'MUSE_LOGIN_REQUIRED' ? 401 : 503);
+      }
       signal.throwIfAborted();
       page = owned.createWorkerPage ? await owned.createWorkerPage() : await owned.context.newPage();
       this.workers.set(key, page);
       signal.throwIfAborted();
       await page.goto(this.serviceURL, { waitUntil: 'domcontentloaded', timeout: 45000 });
-      if (!await this.authenticated(page)) {
+      const workerProbe = await this.inspectAuthentication(page);
+      if (!workerProbe.authenticated) {
         this.account(accountId).authenticated = false;
-        throw fail('MUSE_LOGIN_REQUIRED', 'Phiên Muse đã hết hạn. Đăng nhập lại tài khoản trong tool.', 401);
+        throw fail(workerProbe.state === 'check_failed' ? 'MUSE_SESSION_CHECK_FAILED' : 'MUSE_LOGIN_REQUIRED', workerProbe.message, workerProbe.state === 'check_failed' ? 503 : 401);
       }
       await this.prepareConversation(page);
       signal.throwIfAborted();

@@ -1,8 +1,14 @@
-# Muse AI Studio 1.4.1 · Một tài khoản, 10 luồng đồng thời
+# Muse AI Studio 1.4.2 · Một tài khoản, 10 luồng đồng thời
 
 Ứng dụng desktop React/TypeScript và Electron cho 10 cảnh ảnh/video. **Bản 1.4 thay cách chạy tuần tự bằng 10 cuộc trò chuyện độc lập trên cùng một phiên Muse. Trang đăng nhập Muse nằm trong cửa sổ tool; không cần cài hoặc mở Chrome/Edge riêng.**
 
 Cầu nối giao diện này **không chính thức**. Đã kiểm thử đăng nhập, 10 luồng, tách kết quả và dừng tác vụ bằng Electron thật với dịch vụ Muse giả lập cục bộ. **Chưa đăng nhập, tạo ảnh/video hoặc đọc số dư trên Muse.ai thật**: cloud chưa có phiên người dùng và các lần truy cập muse.ai nhận CONNECT 403. Muse có thể giới hạn tác vụ đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các kiểm thử không chứng minh gói tài khoản thực tế hỗ trợ 10 render cùng lúc.
+
+## Nhận phiên đăng nhập trong bản 1.4.2
+
+Sửa trường hợp đã đăng nhập Muse nhưng Studio chưa nhận kết nối. Tab đăng nhập ẩn cũng được cấp kích thước bố cục; khi bấm **← Về Studio**, tool tự kiểm tra lại phiên. Nếu đăng nhập qua popup đã hoàn tất nhưng trang Muse cũ chưa cập nhật, tool làm mới trang đó sau khi API xác nhận phiên hợp lệ. Bản nháp chưa gửi được giữ nguyên.
+
+Ngay cạnh nút **Kiểm tra phiên** luôn có kết quả: đang kiểm tra, đã xác minh, đã đăng nhập nhưng đang tải ô soạn, hoặc chưa đọc được trạng thái phiên. Lỗi mạng/HTTP không bị coi là đăng nhập thành công. Chỉ bật tạo ảnh/video sau khi xác thực và ô soạn đều sẵn sàng. Việc kiểm tra không gửi prompt hoặc render.
 
 ## Sửa lỗi ô soạn Muse trong bản 1.4.1
 
@@ -18,7 +24,7 @@ Khắc phục lỗi `locator.waitFor: Timeout 15000ms exceeded` khi Muse giữ `
 2. Đóng tool cũ. Giải nén ZIP mới vào một thư mục riêng, chạy `start.bat`.
 3. Lần đầu cần Internet để cài các gói và tải runtime Electron chính thức. Bộ cài Electron kiểm tra checksum. Không đổi chính sách PowerShell; nếu chạy lệnh thủ công, dùng `npm.cmd`.
 4. Bấm **Đăng nhập Muse trong tool**. Đăng nhập trực tiếp trên trang Muse/nhà cung cấp trong tab tích hợp. Nếu nhà cung cấp mở popup xác thực, popup vẫn thuộc ứng dụng.
-5. Bấm **← Về Studio**, rồi **Kiểm tra phiên**. Một phiên xác minh dùng cho cả 10 ô.
+5. Bấm **← Về Studio** để tool tự xác minh phiên. Khi hiện **Đã xác minh**, cả 10 ô có thể dùng cùng phiên đó. Có thể bấm **Kiểm tra phiên** để cập nhật thủ công; kết quả luôn hiện ngay bên cạnh.
 6. Nhập 10 prompt hoặc nạp TXT/SRT. Chọn **Tạo ảnh hàng loạt** hoặc **Tạo video**, bấm **TẠO 10 ẢNH / TẠO 10 VIDEO**.
 
 Tool bắt đầu các cảnh đủ điều kiện đồng thời và trả mỗi kết quả về đúng ô. Số luồng đang chạy hiện cạnh tiến độ. Dùng **Dừng tất cả luồng** để ngừng nhận kết quả và gửi Stop tới từng cuộc trò chuyện đang chạy. Muse vẫn có thể tính phí hoặc tiếp tục tác vụ đã nhận. Bấm Tạo 10 lại chỉ chạy phần chưa xong; có thể tạo lại riêng một cảnh. Cảnh tắt, prompt trống, cảnh đã hoàn tất hoặc thiếu ảnh nguồn trong chế độ ảnh→video được bỏ qua.

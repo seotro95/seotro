@@ -1,4 +1,4 @@
-# Xác minh bản 1.4.1
+# Xác minh bản 1.4.2
 
 ## Kết quả trên Linux
 
@@ -6,10 +6,18 @@
 - `npm run build`: TypeScript và Vite thành công. Cảnh báo `use client` của bộ icon không ngăn build.
 - Lệnh `npm start` qua launcher phát hành đã mở ứng dụng trên Linux/Xorg với hồ sơ fixture mới, trả HTML/API đúng trạng thái và thoát sạch khi đóng cửa sổ. Không mở Chrome ngoài.
 - `npm test`: 7 bài parser/chuyển dự án cũ/kích thước/state, 7 bài máy chủ API trong một nhóm, 3 bài lệnh mở trình duyệt dự phòng và 2 bài phân tích số dư đã qua, không bỏ qua bài nào.
-- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge`: 13 kịch bản trong một nhóm đã qua, dùng Chromium thật với Muse giả lập trên loopback và hồ sơ tạm.
-- `DISPLAY=:97 MUSE_ELECTRON_TEST_NO_SANDBOX=1 npm run test:desktop`: 5 kịch bản trong một nhóm đã qua, dùng Electron thật trên màn hình Xorg dummy. Cờ tắt sandbox chỉ áp dụng cho fixture trong cloud; launcher phát hành không dùng cờ này.
-- `CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e`: **17/17** bài giao diện đã qua. Desktop 5 cột, mobile không tràn ngang.
+- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge`: 16 kịch bản trong một nhóm đã qua, dùng Chromium thật với Muse giả lập trên loopback và hồ sơ tạm.
+- `DISPLAY=:97 MUSE_ELECTRON_TEST_NO_SANDBOX=1 npm run test:desktop`: 6 kịch bản trong một nhóm đã qua, dùng Electron thật trên màn hình Xorg dummy. Cờ tắt sandbox chỉ áp dụng cho fixture trong cloud; launcher phát hành không dùng cờ này.
+- `CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e`: **18/18** bài giao diện đã qua. Desktop 5 cột, mobile không tràn ngang.
 - Kiểm tra cú pháp Node cho server/cầu nối/desktop/launcher, `bash -n start.sh` và whitespace Git đã qua.
+
+## Nhận kết nối sau đăng nhập trong bản 1.4.2
+
+- Trước sửa, ca kiểm tra phiên đã lưu trong tab chưa hiển thị trả `authenticated=false`, dù phiên hợp lệ. Đã tái hiện lỗi này và sửa viewport của tab đăng nhập, không chỉ worker. Sau sửa xác minh được mà không phải hiện tab trước.
+- Về Studio tự gửi một lần kiểm tra phiên. Kiểm thử đăng nhập trực tiếp và đăng nhập qua popup đều xác minh thành công; trang Muse cũ được cập nhật sau khi API xác thực, không dựa vào trạng thái cũ của Studio.
+- Kiểm tra phiên/API lỗi HTTP 503 hiển thị trạng thái không xác minh được; một ô soạn hiển thị không được dùng làm bằng chứng đăng nhập.
+- Bản nháp trong trang có ô soạn bị ẩn không bị xóa để cập nhật phiên. Kiểm tra không gửi chat hoặc render; số yêu cầu tạo nội dung giữ nguyên qua các bước xác minh.
+- Phản hồi kết nối hiển thị cố định ở bảng tài khoản. Ca UI mới kiểm tra trạng thái đã đăng nhập nhưng chưa có ô soạn và lỗi HTTP 503; nút tạo vẫn khóa. Đóng toast không làm mất thông báo tại bảng tài khoản.
 
 ## Lỗi thực tế được tái hiện và sửa
 
@@ -27,7 +35,7 @@
 - Bấm TẠO 10 ẢNH: đủ 10 yêu cầu được gửi và 10 cảnh cùng trạng thái Đang tạo trước khi fixture trả kết quả đầu tiên. Tất cả xác thực bằng cùng phiên. Fixture trả 10 ảnh khác nhau; từng ảnh được so sánh với đúng yêu cầu của cảnh đó.
 - Chuyển bộ ảnh sang video: đủ 10 cuộc trò chuyện đang xử lý đồng thời, mỗi cuộc nhận đúng một ảnh tham chiếu và dùng chung phiên. Kết quả hoàn tất được đặt vào 10 ô; view worker được đóng, giữ lại Studio và đăng nhập.
 - Dừng cả bộ gửi hủy qua IPC tới cả 10 yêu cầu, fixture nhận đủ 10 lần Stop và các view worker được đóng. Số yêu cầu máy chủ trở về 0.
-- Đóng/mở lại ứng dụng với cùng thư mục dữ liệu khôi phục phiên đã lưu và xác minh được mà không bấm đăng nhập lần nữa.
+- Đóng/mở lại ứng dụng với cùng thư mục dữ liệu khôi phục phiên đã lưu và xác minh được qua Kiểm tra phiên khi tab đăng nhập còn ẩn, không bấm đăng nhập lần nữa.
 - Kiểm thử API giữ đồng thời 10 HTTP request đến adapter, từ chối request thứ 11. Một request xong chỉ giải phóng một chỗ, không làm mất trạng thái bận của 9 request còn lại. Thay đổi phiên khi còn tác vụ bị từ chối.
 - Frontend cũng được kiểm tra với barrier: 10 yêu cầu ảnh trước khi trả kết quả, 9 cảnh đang bật xử lý song song và lỗi quota vẫn ở đúng cảnh. Dừng/tiếp tục giữ cảnh đã hoàn tất. Dự án cũ gán tài khoản 1–10 chỉ còn gửi accountId=1, giữ đủ prompt; ID 2+ bị từ chối.
 

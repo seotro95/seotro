@@ -334,3 +334,21 @@ test('image-to-video batch only sends scenes that have a source frame', async ({
   expect(calls).toEqual([1]);
   await expect(page.locator('.scene-error')).toHaveCount(0);
 });
+
+test('connection feedback remains visible and distinguishes login from composer readiness', async ({ page }) => {
+  const account = { id: 1, state: 'composer_loading', authenticated: false, sessionAuthenticated: true, composerReady: false, active: true,
+    connectionMessage: 'Đã xác minh đăng nhập, đang chờ trang Muse tải ô soạn.', checkedAt: null };
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', embeddedLogin: true, accounts: [account], busy: false } }));
+  await page.route('**/api/account/check', route => route.fulfill({ json: { accounts: [account] } }));
+  await page.reload();
+  await expect(page.locator('.single-account-controls')).toContainText('Đã đăng nhập · Đang tải Muse');
+  await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true })).toBeDisabled();
+  account.state = 'check_failed'; account.sessionAuthenticated = false;
+  account.connectionMessage = 'Không xác minh được phiên Muse (HTTP 503). Kiểm tra tab Muse rồi thử Kiểm tra phiên lại.';
+  await page.getByRole('button', { name: 'Kiểm tra phiên', exact: true }).click();
+  await expect(page.locator('.connection-feedback')).toContainText('HTTP 503');
+  await page.getByLabel('Đóng thông báo', { exact: true }).click();
+  await expect(page.locator('.connection-feedback')).toBeVisible();
+  await expect(page.locator('.connection-feedback')).toContainText('HTTP 503');
+  await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true })).toBeDisabled();
+});

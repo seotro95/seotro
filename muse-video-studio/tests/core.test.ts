@@ -52,4 +52,5 @@ test('errors distinguish credit, filtering, service capacity and missing Muse in
   assert.match(errorInfo('503 overloaded').hint, /đang bận/);
   assert.match(errorInfo('MUSE_NOT_CONFIGURED').hint, /Muse AI/);
   assert.match(errorInfo('MUSE_COMPOSER_NOT_READY').hint, /Ô soạn Muse chưa tải xong/);
+  assert.match(errorInfo('MUSE_SESSION_CHECK_FAILED').hint, /Chưa cập nhật được phiên Muse/);
 });

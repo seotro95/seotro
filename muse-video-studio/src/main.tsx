@@ -11,9 +11,9 @@ const statusNames: Record<Status, string> = { ready: 'Sẵn sàng', queued: 'Đa
 type Log = { time: string; scene: string; raw: string; hint: string };
 type ModalName = 'import' | 'accounts' | 'diagnostics' | null;
 type Balance = { valueText: string; unit: 'token' | 'credit'; label: string; observedAt: string; source: string };
-type AccountSession = { balance?: Balance | null; id: number; state: string; authenticated: boolean; checkedAt: string | null; active: boolean };
+type AccountSession = { balance?: Balance | null; id: number; state: string; authenticated: boolean; sessionAuthenticated?: boolean; composerReady?: boolean; connectionMessage?: string; checkedAt: string | null; active: boolean };
 type ProviderStatus = { museConfigured: boolean; busy: boolean; transport?: 'browser' | 'adapter'; accounts?: AccountSession[]; embeddedLogin?: boolean; activeRequests?: number; maxConcurrency?: number };
-const accountStateName = (account?: AccountSession) => !account ? 'Chưa kết nối' : account.authenticated ? account.active ? 'Đã xác minh' : 'Phiên đã lưu' : account.state === 'login_open' ? 'Chờ đăng nhập' : account.state === 'saved' ? 'Cần kiểm tra phiên' : 'Chưa kết nối';
+const accountStateName = (account?: AccountSession) => !account ? 'Chưa kết nối' : account.authenticated ? account.active ? 'Đã xác minh' : 'Phiên đã lưu' : account.state === 'composer_loading' ? 'Đã đăng nhập · Đang tải Muse' : account.state === 'check_failed' ? 'Chưa xác minh được phiên' : account.state === 'login_open' ? 'Chờ đăng nhập' : account.state === 'saved' || account.state === 'session_saved' ? 'Cần kiểm tra phiên' : 'Chưa kết nối';
 function load() { try { return restoreWorkspace(localStorage.getItem(STORAGE)); } catch { return restoreWorkspace(null); } }
 const initial = load();
 
@@ -46,6 +46,7 @@ function App() {
   const [connectingId, setConnectingId] = useState<number | null>(null);
   const [statusLoading, setStatusLoading] = useState(true);
   const [statusError, setStatusError] = useState('');
+  const [connectionError, setConnectionError] = useState('');
   const [diagnosticBusy, setDiagnosticBusy] = useState(false);
   const [diagnostic, setDiagnostic] = useState<{ message: string; error?: string } | null>(null);
   const [diagnosticConsent, setDiagnosticConsent] = useState(false);
@@ -70,14 +71,14 @@ function App() {
   const accountReady = () => providerReady;
   const sourceReady = (scene: Scene) => settings.output !== 'video' || settings.videoInput !== 'image' || Boolean(scene.reference || scene.image);
   const renderBlocked = !providerReady;
-  const connectionProblem = statusLoading ? 'Đang đọc cấu hình kết nối từ máy chủ…' : statusError ? 'Không đọc được cấu hình máy chủ. Kiểm tra cửa sổ chạy tool rồi bấm Đọc cấu hình.' : usingBrowser ? `Đăng nhập một tài khoản Muse trong ${loginPlace} rồi Kiểm tra phiên. Cả 10 luồng sử dụng duy nhất phiên này.` : 'Chưa cấu hình adapter Muse riêng. Chọn kết nối trình duyệt trong cấu hình máy chủ để đăng nhập bằng Chrome/Edge.';
+  const connectionProblem = statusLoading ? 'Đang đọc cấu hình kết nối từ máy chủ…' : statusError ? 'Không đọc được cấu hình máy chủ. Kiểm tra cửa sổ chạy tool rồi bấm Đọc cấu hình.' : usingBrowser ? museAccount?.connectionMessage || `Đăng nhập một tài khoản Muse trong ${loginPlace} rồi Kiểm tra phiên. Cả 10 luồng sử dụng duy nhất phiên này.` : 'Chưa cấu hình adapter Muse riêng. Chọn kết nối trình duyệt trong cấu hình máy chủ để đăng nhập bằng Chrome/Edge.';
 
   async function refreshStatus(showLoading = true) {
     if (statusPending.current) return;
     statusPending.current = true;
     if (showLoading) setStatusLoading(true);
     setStatusError('');
-    try { setStatus(await providerStatus()); }
+    try { const result = await providerStatus(); setStatus(result); if (result.accounts?.some((account: AccountSession) => account.authenticated)) setConnectionError(''); }
     catch (e) { setStatus(null); setStatusError(errorInfo(e).raw); }
     finally { setStatusLoading(false); statusPending.current = false; }
   }
@@ -88,11 +89,13 @@ function App() {
   async function connectAccount(check = false) {
     if (locked) return;
     setConnectingId(1);
+    setConnectionError('');
     try {
       const result = await accountAction(check ? 'check' : 'connect');
       setStatus(current => current ? { ...current, accounts: result.accounts } : current);
-      setNotice(result.accounts.some((account: AccountSession) => account.id === 1 && account.authenticated) ? 'Đã xác minh tài khoản Muse. Cả 10 ô đã dùng chung phiên này.' : `Đăng nhập trực tiếp trên trang Muse trong ${loginPlace}, rồi quay về Studio bấm Kiểm tra phiên.`);
-    } catch (e) { setNotice(logError(e, 'Kết nối Muse').raw); }
+      const account = result.accounts.find((account: AccountSession) => account.id === 1);
+      setNotice(account?.connectionMessage || (account?.authenticated ? 'Đã xác minh tài khoản Muse. Cả 10 ô đã dùng chung phiên này.' : `Đăng nhập trực tiếp trên trang Muse trong ${loginPlace}, rồi quay về Studio bấm Kiểm tra phiên.`));
+    } catch (e) { const info = logError(e, 'Kết nối Muse'); setConnectionError(info.raw); setNotice(info.raw); }
     finally { setConnectingId(null); void refreshStatus(false); }
   }
 
@@ -127,11 +130,14 @@ function App() {
     return info;
   }
   useEffect(() => { void refreshStatus(); }, []);
+  useEffect(() => window.museTransport?.onSessionRefresh?.(() => {
+    if (usingBrowser && !locked) void connectAccount(true);
+  }), [usingBrowser, locked]);
   useEffect(() => {
-    if (!usingBrowser || busy || diagnosticBusy || connectingId !== null || !['accounts', 'diagnostics'].includes(modal || '')) return;
+    if (!usingBrowser || busy || diagnosticBusy || connectingId !== null || (museAccount?.authenticated && !['accounts', 'diagnostics'].includes(modal || ''))) return;
     const timer = setInterval(() => { void refreshStatus(false); }, 3000);
     return () => clearInterval(timer);
-  }, [usingBrowser, modal, busy, diagnosticBusy, connectingId]);
+  }, [usingBrowser, modal, busy, diagnosticBusy, connectingId, museAccount?.authenticated]);
   useEffect(() => {
     try { localStorage.setItem(STORAGE, JSON.stringify({ version: 1, settings, scenes: scenes.map(({ prompt, enabled }) => ({ prompt, enabled })) })); }
     catch { setNotice('Trình duyệt không lưu được phiên. Hãy xuất dự án JSON để giữ kịch bản.'); }
@@ -279,7 +285,7 @@ function App() {
       {settings.mode === 'demo' && <div className="demo-banner"><FlaskConical size={16}/>CHẾ ĐỘ KIỂM THỬ · Dùng tệp mẫu 640×360 có nhãn. Không tạo nội dung AI từ prompt hoặc ảnh.</div>}
       <section className="single-account-panel" aria-label="Một tài khoản Muse và số dư">
         <div><span className="eyebrow">MỘT TÀI KHOẢN DUY NHẤT</span><h2>Một tài khoản · 10 luồng đồng thời</h2><p>Nhập 10 prompt hoặc TXT/SRT rồi bấm Tạo 10. Cả 10 luồng chạy đồng thời trong các cuộc trò chuyện riêng, dùng cùng một phiên Muse.</p></div>
-        <div className="single-account-controls"><strong className={providerReady ? 'mint' : 'muted'}>{usingBrowser ? accountStateName(museAccount) : connection}</strong><button className="button" disabled={locked || !usingBrowser} onClick={() => void connectAccount()}><Link2 size={15}/>{connectingId !== null ? 'Đang kết nối…' : embeddedLogin ? 'Đăng nhập Muse trong tool' : 'Kết nối Muse'}</button><button className="micro-button" disabled={locked || !usingBrowser} onClick={() => void connectAccount(true)}>Kiểm tra phiên</button></div>
+        <div className="single-account-controls"><strong className={providerReady ? 'mint' : 'muted'}>{usingBrowser ? accountStateName(museAccount) : connection}</strong><button className="button" disabled={locked || !usingBrowser} onClick={() => void connectAccount()}><Link2 size={15}/>{connectingId !== null ? 'Đang kết nối…' : embeddedLogin ? 'Đăng nhập Muse trong tool' : 'Kết nối Muse'}</button><button className="micro-button" disabled={locked || !usingBrowser} onClick={() => void connectAccount(true)}>Kiểm tra phiên</button><p className="connection-feedback" role="status">{connectingId !== null ? 'Đang kiểm tra phiên Muse…' : connectionError || museAccount?.connectionMessage || (museAccount?.authenticated ? 'Phiên Muse đã được xác minh.' : 'Hoàn tất đăng nhập trong tab Muse rồi quay về Studio để tự kết nối.')}</p></div>
         <div className="balance-card" data-testid="account-balance"><span>SỐ DƯ TÀI KHOẢN MUSE</span><strong>{settings.mode === 'demo' ? 'Chế độ kiểm thử' : balanceAccount?.balance ? `${balanceAccount.balance.valueText} ${balanceAccount.balance.unit}` : 'Chưa đọc được'}</strong><small>{balanceAccount?.balance ? `Đọc lúc ${new Date(balanceAccount.balance.observedAt).toLocaleTimeString('vi-VN')}` : 'Không tự suy đoán token hoặc credit'}</small><button className="micro-button" disabled={locked || !usingBrowser || !museAccount?.authenticated} onClick={() => void connectAccount(true)}><RefreshCw size={12}/>Cập nhật số dư</button></div>
       </section>
       <section className="character-banner" aria-label="Đồng nhất nhân vật">

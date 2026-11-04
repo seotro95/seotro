@@ -1,9 +1,10 @@
 import http from 'node:http';
 
 export function createMuseFixture({ image, clip }) {
-const state = { behavior: 'video', submitted: [], stops: 0, hold: false, peak: 0, pending: new Map(), released: new Set(), outputs: new Map(), uniqueImages: false, oldConversation: false, newChat: true, prehydrationInput: false, richComposer: false, hydrationDelayMs: 0 };
+const state = { behavior: 'video', submitted: [], stops: 0, hold: false, peak: 0, pending: new Map(), released: new Set(), outputs: new Map(), uniqueImages: false, oldConversation: false, newChat: true, prehydrationInput: false, richComposer: false, hydrationDelayMs: 0, authStatus: 200, loginInPopup: false };
 const fixture = http.createServer(async (req, res) => {
-  if (req.url === '/api/auth/check') { res.setHeader('Content-Type', 'application/json'); return res.end(JSON.stringify({ ok: /fixture_session=connected/.test(req.headers.cookie || '') })); }
+  if (req.url === '/api/auth/check') { res.statusCode = state.authStatus; res.setHeader('Content-Type', 'application/json'); return res.end(JSON.stringify({ ok: /fixture_session=connected/.test(req.headers.cookie || '') })); }
+  if (req.url === '/fixture-auth-popup') { res.setHeader('Content-Type', 'text/html; charset=utf-8'); return res.end(`<html><button id="finish">Finish fixture login</button><script>document.querySelector('#finish').onclick=()=>{document.cookie='fixture_session=connected; Max-Age=3600; SameSite=Strict';window.close()}</script></html>`); }
   if (req.url === '/turn') {
     let text = ''; for await (const chunk of req) text += chunk;
     const request = { ...JSON.parse(text), id: state.submitted.length + 1, authenticated: /fixture_session=connected/.test(req.headers.cookie || '') };
@@ -30,7 +31,7 @@ const fixture = http.createServer(async (req, res) => {
   if(${state.hydrationDelayMs})setTimeout(()=>{root.querySelector('[data-hatch-composer-prehydration-input]')?.style.setProperty('display','none');editor.style.display='block'},${state.hydrationDelayMs});
   function ready(){root.style.display=document.cookie.includes('fixture_session=connected')?'block':'none'};ready();
   document.querySelector('#new-chat')?.addEventListener('click',()=>history.replaceChildren());
-  document.querySelector('#login').onclick=()=>{document.cookie='fixture_session=connected; Max-Age=3600; SameSite=Strict';ready()};
+  document.querySelector('#login').onclick=()=>{if(${state.loginInPopup}){window.open('/fixture-auth-popup');return}document.cookie='fixture_session=connected; Max-Age=3600; SameSite=Strict';ready()};
   root.querySelector('input').onchange=e=>{const img=new Image();img.src=URL.createObjectURL(e.target.files[0]);document.querySelector('#attachments').appendChild(img)};
   stop.onclick=()=>{stop.style.display='none';fetch('/stop')};
   editor.onkeydown=async e=>{if(e.key!=='Enter')return;e.preventDefault();const prompt=editor.tagName==='TEXTAREA'?editor.value:editor.innerText;const user=document.createElement('div');user.setAttribute('data-message-item','');user.setAttribute('data-message-role','user');user.textContent=prompt;history.appendChild(user);if(editor.tagName==='TEXTAREA')editor.value='';else editor.replaceChildren();const attached=root.querySelectorAll('img').length;document.querySelector('#attachments').replaceChildren();root.querySelector('input').value='';stop.style.display='block';

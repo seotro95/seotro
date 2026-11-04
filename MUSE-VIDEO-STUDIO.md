@@ -1,14 +1,14 @@
-# Muse AI Studio 1.4.1 · 10 luồng đồng thời
+# Muse AI Studio 1.4.2 · 10 luồng đồng thời
 
 [Tải ZIP mới](https://github.com/seotro95/seotro/raw/refs/heads/main/Muse-Video-Workstation.zip) · [Hướng dẫn đầy đủ](muse-video-studio/README.md)
 
-**Bản 1.4.1 sửa lỗi timeout 15 giây do chọn nhầm ô nhập Muse bị ẩn.** Tool chọn ô soạn đang hiển thị, sửa kích thước khung xử lý nền và đợi trang tải xong trước khi gửi. Đóng hẳn tool cũ rồi giải nén bản mới đè tệp chương trình; giữ nguyên `.data` và `.env`.
+**Bản 1.4.2 sửa bước nhận kết nối sau đăng nhập.** Bấm **← Về Studio** để tự xác minh phiên; kết quả luôn hiện cạnh nút Kiểm tra phiên. Nhận được phiên đã lưu khi tab còn ẩn, và cập nhật trang Muse cũ sau khi xác thực qua popup. Đóng hẳn tool cũ trước khi giải nén bản mới đè các tệp chương trình; giữ nguyên `.data` và `.env`.
 
 **Một tài khoản Muse, tối đa 10 luồng ảnh/video chạy đồng thời trong các cuộc trò chuyện riêng. Đăng nhập ngay trong cửa sổ tool bằng tab Muse tích hợp; không cần cài hoặc mở Chrome riêng.**
 
 1. Đóng tool cũ, giải nén ZIP mới, chạy `start.bat` (cần Node.js 24+; lần đầu cần Internet để tải runtime Electron chính thức).
 2. Bấm **Đăng nhập Muse trong tool**, hoàn tất đăng nhập trực tiếp trên trang Muse.
-3. Bấm **← Về Studio → Kiểm tra phiên**.
+3. Bấm **← Về Studio**, đợi **Đã xác minh**; có thể bấm Kiểm tra phiên để cập nhật thủ công.
 4. Nhập 10 prompt hoặc TXT/SRT, chọn ảnh/video, bấm **TẠO 10 ẢNH / TẠO 10 VIDEO**.
 
 Số luồng hiện tại được hiển thị. Có thể dừng toàn bộ, chạy lại phần chưa xong, tải từng kết quả hoặc cả bộ. Giữ các chức năng ảnh 2K/4K, đồng nhất nhân vật, video từ prompt/ảnh, yêu cầu độ nét 720p/1080p/2K/4K và bảng số dư đọc được từ Muse.

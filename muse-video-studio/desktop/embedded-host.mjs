@@ -52,18 +52,25 @@ export class EmbeddedMuseHost {
         await new Promise(resolve => setTimeout(resolve, 30));
       }
       if (!page) throw new Error('DESKTOP_VIEW_FAILED: Không khởi tạo được luồng Muse tích hợp.');
-      // Hidden Electron views may retain a 0×0 native viewport. Give workers a
-      // real layout so a full-width rich editor is measurable without showing it.
-      if (worker) await page.setViewportSize({ width: 1280, height: 900 });
+      // Verification also opens the login view while hidden, so it needs layout
+      // metrics just like workers, even before the user displays the view.
+      const [width, height] = this.window.getContentSize();
+      const viewport = worker ? { width: 1280, height: 900 } : { width, height: Math.max(1, height - 54) };
+      await page.setViewportSize(viewport);
       this.views.set(page, view);
       this.layout();
-      return { page, view };
+      return { page, view, viewport };
     } catch (error) { this.window.contentView.removeChildView(view); view.webContents.close(); throw error; }
   }
   layout() {
     if (this.window.isDestroyed()) return;
     const [width, height] = this.window.getContentSize();
     for (const view of this.views.values()) view.setBounds({ x: 0, y: 54, width, height: Math.max(1, height - 54) });
+    const viewport = { width, height: Math.max(1, height - 54) };
+    if (this.login && (this.login.viewport.width !== viewport.width || this.login.viewport.height !== viewport.height)) {
+      this.login.viewport = viewport;
+      void this.login.page.setViewportSize(viewport).catch(() => {});
+    }
   }
   showLogin() {
     if (!this.login) return;

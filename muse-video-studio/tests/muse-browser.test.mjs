@@ -30,6 +30,40 @@ test('owned browser bridge against local Muse-shaped pages (not live Muse)', asy
       await driver.refreshActive();
       assert.equal(driver.snapshot()[0].authenticated, true);
     });
+    await t.test('reconciles authenticated sessions with a stale signed-out page without sending a chat', async () => {
+      const count = state.submitted.length;
+      await driver.active.page.locator('[data-hatch-composer-root]').evaluate(root => root.style.display = 'none');
+      await driver.refreshActive();
+      assert.equal(driver.snapshot()[0].sessionAuthenticated, true);
+      assert.equal(driver.snapshot()[0].authenticated, false);
+      assert.equal(driver.snapshot()[0].state, 'composer_loading');
+      await driver.connect(1, { show: false });
+      assert.equal(driver.snapshot()[0].authenticated, true);
+      assert.equal(state.submitted.length, count);
+    });
+    await t.test('keeps drafts when a session check finds a hidden composer', async () => {
+      const page = driver.active.page;
+      await page.locator('textarea').fill('Keep this unsent fixture draft');
+      await page.locator('[data-hatch-composer-root]').evaluate(root => root.style.display = 'none');
+      await driver.connect(1, { show: false });
+      assert.equal(await page.locator('textarea').inputValue(), 'Keep this unsent fixture draft');
+      assert.equal(driver.snapshot()[0].state, 'composer_loading');
+      await page.locator('[data-hatch-composer-root]').evaluate(root => root.style.display = 'block');
+      await page.locator('textarea').fill('');
+      await driver.refreshActive();
+    });
+    await t.test('reports a failed auth probe distinctly and never trusts a composer alone', async () => {
+      state.authStatus = 503;
+      const count = state.submitted.length;
+      try {
+        await driver.refreshActive();
+        assert.equal(driver.snapshot()[0].state, 'check_failed');
+        assert.equal(driver.snapshot()[0].authenticated, false);
+        assert.match(driver.snapshot()[0].connectionMessage, /HTTP 503/);
+        await assert.rejects(driver.generateVideo(data, new AbortController().signal), /MUSE_SESSION_CHECK_FAILED/);
+        assert.equal(state.submitted.length, count);
+      } finally { state.authStatus = 200; await driver.refreshActive(); }
+    });
     await t.test('submits the reference and returns the new playable video with observed metadata', async () => {
       state.behavior = 'video';
       const result = await driver.generateVideo({ ...data, referenceImage: { base64: png, mimeType: 'image/png' } }, new AbortController().signal);

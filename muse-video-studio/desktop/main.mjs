@@ -75,7 +75,10 @@ async function start() {
   ipcMain.on('studio:cancel', (event, id) => { if (event.sender === studio.webContents) requests.get(id)?.abort(); });
   ipcMain.handle('studio:view', async (event, name) => {
     if (event.sender !== window.webContents) throw new Error('Untrusted sender');
-    if (name === 'studio') { host.hideLogin(); studio.webContents.focus(); }
+    if (name === 'studio') {
+      host.hideLogin(); studio.webContents.focus();
+      studio.webContents.send('studio:session-refresh');
+    }
     else if (name === 'muse') await muse.connect(1);
     else throw new Error('Unknown view');
   });

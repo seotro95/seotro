@@ -2,7 +2,7 @@ import type { Mode, Reference, Settings, MediaResult } from './core.ts';
 
 type ResponseMedia = { base64: string; mimeType: string; metadata?: { duration?: number; width: number; height: number } };
 declare global {
-  interface Window { museTransport?: { request(id: string, endpoint: string, data: unknown): Promise<{ ok: boolean; body: any }>; cancel(id: string): void } }
+  interface Window { museTransport?: { request(id: string, endpoint: string, data: unknown): Promise<{ ok: boolean; body: any }>; cancel(id: string): void; onSessionRefresh?(callback: () => void): () => void } }
 }
 async function api(path: string, data?: unknown, signal?: AbortSignal) {
   const transport = window.museTransport;
