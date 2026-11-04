@@ -335,15 +335,21 @@ test('image-to-video batch only sends scenes that have a source frame', async ({
   await expect(page.locator('.scene-error')).toHaveCount(0);
 });
 
-test('connection feedback remains visible and distinguishes login from composer readiness', async ({ page }) => {
+test('a verified Muse session enables generation even without a login-page composer', async ({ page }) => {
   const account = { id: 1, state: 'composer_loading', authenticated: false, sessionAuthenticated: true, composerReady: false, active: true,
-    connectionMessage: 'Đã xác minh đăng nhập, đang chờ trang Muse tải ô soạn.', checkedAt: null };
+    connectionMessage: 'Phiên Muse đã được xác minh. Tool mở ô soạn riêng khi bạn bấm tạo.', checkedAt: null };
   await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', embeddedLogin: true, accounts: [account], busy: false } }));
   await page.route('**/api/account/check', route => route.fulfill({ json: { accounts: [account] } }));
   await page.reload();
-  await expect(page.locator('.single-account-controls')).toContainText('Đã đăng nhập · Đang tải Muse');
-  await expect(page.locator('.connection-pill')).toContainText('Đã đăng nhập · Đang tải');
-  await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true })).toBeEnabled();
+  await expect(page.locator('.connection-pill')).toContainText('Đã xác minh');
+  await expect(page.locator('.connection-warning')).toHaveCount(0);
+  const calls: number[] = [];
+  await page.route('**/api/video', route => { calls.push(route.request().postDataJSON().accountId); return route.fulfill({ json: { base64: video, mimeType: 'video/mp4' } }); });
+  await page.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này', exact: true }).click();
+  await expect(page.getByTestId('scene-1').locator('video')).toHaveCount(1);
+  expect(calls).toEqual([1]);
+  await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true })).toBeVisible();
   account.state = 'check_failed'; account.sessionAuthenticated = false;
   account.connectionMessage = 'Không xác minh được phiên Muse (HTTP 503). Kiểm tra tab Muse rồi thử Kiểm tra phiên lại.';
   await page.getByRole('button', { name: 'Kiểm tra phiên', exact: true }).click();

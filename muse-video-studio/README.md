@@ -1,14 +1,20 @@
-# Muse AI Studio 1.4.2 · Một tài khoản, 10 luồng đồng thời
+# Muse AI Studio 1.4.3 · Một tài khoản, 10 luồng đồng thời
 
 Ứng dụng desktop React/TypeScript và Electron cho 10 cảnh ảnh/video. **Bản 1.4 thay cách chạy tuần tự bằng 10 cuộc trò chuyện độc lập trên cùng một phiên Muse. Trang đăng nhập Muse nằm trong cửa sổ tool; không cần cài hoặc mở Chrome/Edge riêng.**
 
 Cầu nối giao diện này **không chính thức**. Đã kiểm thử đăng nhập, 10 luồng, tách kết quả và dừng tác vụ bằng Electron thật với dịch vụ Muse giả lập cục bộ. **Chưa đăng nhập, tạo ảnh/video hoặc đọc số dư trên Muse.ai thật**: cloud chưa có phiên người dùng và các lần truy cập muse.ai nhận CONNECT 403. Muse có thể giới hạn tác vụ đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các kiểm thử không chứng minh gói tài khoản thực tế hỗ trợ 10 render cùng lúc.
 
+## Sửa nút tạo bị khóa trong bản 1.4.3
+
+Phiên Muse được API xác minh sẽ mở nút tạo ảnh/video ngay cả khi tab đăng nhập chưa hiển thị ô soạn. Mỗi cảnh mở cuộc trò chuyện riêng và tìm ô **Message** ở đó trước khi gửi prompt. Bản này bỏ điều kiện chờ ô soạn trên tab đăng nhập làm khóa cả Studio.
+
+Bộ nhận ô nhập hỗ trợ textarea/ô rich text có nhãn Message và editor Lexical ngoài khung giao diện cũ. Khi trang đầu vào có nút/link New chat nhưng chưa có editor, luồng mở cuộc trò chuyện bằng nút đó. Không dùng ô tìm kiếm; nếu có nhiều ô phù hợp thì báo rõ và chưa gửi prompt. Ảnh tham chiếu được xác nhận ở đúng vùng soạn hoặc form trước khi gửi.
+
 ## Nhận phiên đăng nhập trong bản 1.4.2
 
-Sửa trường hợp đã đăng nhập Muse nhưng Studio chưa nhận kết nối. Tab đăng nhập ẩn cũng được cấp kích thước bố cục; khi bấm **← Về Studio**, tool tự kiểm tra lại phiên. Nếu đăng nhập qua popup đã hoàn tất nhưng trang Muse cũ chưa cập nhật, tool làm mới trang đó sau khi API xác nhận phiên hợp lệ. Bản nháp chưa gửi được giữ nguyên.
+Sửa trường hợp đã đăng nhập Muse nhưng Studio chưa nhận kết nối. Tab đăng nhập ẩn cũng được cấp kích thước bố cục; khi bấm **← Về Studio**, tool tự kiểm tra lại phiên. Đăng nhập qua popup cũng được xác minh khi quay về Studio. Tab đăng nhập và bản nháp được giữ nguyên; phần tạo nội dung dùng các cuộc trò chuyện riêng.
 
-Ngay cạnh nút **Kiểm tra phiên** luôn có kết quả: đang kiểm tra, đã xác minh, đã đăng nhập nhưng đang tải ô soạn, hoặc chưa đọc được trạng thái phiên. Lỗi mạng/HTTP không bị coi là đăng nhập thành công. Chỉ bật tạo ảnh/video sau khi xác thực và ô soạn đều sẵn sàng. Việc kiểm tra không gửi prompt hoặc render.
+Ngay cạnh nút **Kiểm tra phiên** luôn có kết quả: đang kiểm tra, đã xác minh, hoặc chưa đọc được trạng thái phiên. Lỗi mạng/HTTP không bị coi là đăng nhập thành công. Nút tạo bật sau khi phiên được xác thực. Mỗi luồng kiểm tra ô nhập của riêng mình trước khi gửi prompt. Việc kiểm tra không gửi prompt hoặc render.
 
 ## Sửa lỗi ô soạn Muse trong bản 1.4.1
 
@@ -71,7 +77,7 @@ Chỉnh prompt/ảnh/settings sẽ xóa kết quả liên quan để tránh dùn
 - `MUSE_LOGIN_REQUIRED`: mở tab đăng nhập trong tool, hoàn tất đăng nhập, Về Studio rồi Kiểm tra phiên.
 - Nếu Muse/nhà cung cấp từ chối trình đăng nhập nhúng, bản này chưa có API/OAuth chính thức thay thế. Không giả trạng thái đăng nhập; cần phương thức xác thực được dịch vụ hỗ trợ.
 - `MUSE_CONCURRENCY_LIMIT`: đã có 10 luồng cục bộ; đợi một luồng hoàn tất. Lỗi quota/429 do Muse trả được giữ ở đúng ô; không tự đổi tài khoản, tăng hạn mức hoặc retry hàng loạt.
-- `MUSE_NEW_CHAT_UNAVAILABLE`, `MUSE_ATTACHMENT_UNAVAILABLE`, `MUSE_UPLOAD_NOT_READY`: giao diện Muse có thể đã đổi hoặc chưa nhận ảnh. Chưa gửi prompt khi thiếu điều kiện bắt buộc.
+- `MUSE_NEW_CHAT_UNAVAILABLE`, `MUSE_COMPOSER_NOT_READY`, `MUSE_COMPOSER_AMBIGUOUS`, `MUSE_ATTACHMENT_UNAVAILABLE`, `MUSE_UPLOAD_NOT_READY`: giao diện Muse có thể đã đổi hoặc chưa nhận ảnh. Chưa gửi prompt khi thiếu điều kiện bắt buộc.
 - `MUSE_TIMEOUT`, `MUSE_NO_IMAGE`, `MUSE_NO_VIDEO`, `MUSE_MEDIA_UNREADABLE`: mở lịch sử trong tab Muse kiểm tra trước khi thử lại để tránh tạo trùng hoặc tính phí hai lần.
 
 ## Chế độ web và adapter nâng cao

@@ -1,4 +1,4 @@
-# Xác minh bản 1.4.2
+# Xác minh bản 1.4.3
 
 ## Kết quả trên Linux
 
@@ -6,18 +6,25 @@
 - `npm run build`: TypeScript và Vite thành công. Cảnh báo `use client` của bộ icon không ngăn build.
 - Lệnh `npm start` qua launcher phát hành đã mở ứng dụng trên Linux/Xorg với hồ sơ fixture mới, trả HTML/API đúng trạng thái và thoát sạch khi đóng cửa sổ. Không mở Chrome ngoài.
 - `npm test`: 7 bài parser/chuyển dự án cũ/kích thước/state, 7 bài máy chủ API trong một nhóm, 3 bài lệnh mở trình duyệt dự phòng và 2 bài phân tích số dư đã qua, không bỏ qua bài nào.
-- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge`: 16 kịch bản trong một nhóm đã qua, dùng Chromium thật với Muse giả lập trên loopback và hồ sơ tạm.
+- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge`: 18 kịch bản trong một nhóm đã qua, dùng Chromium thật với Muse giả lập trên loopback và hồ sơ tạm.
 - `DISPLAY=:97 MUSE_ELECTRON_TEST_NO_SANDBOX=1 npm run test:desktop`: 6 kịch bản trong một nhóm đã qua, dùng Electron thật trên màn hình Xorg dummy. Cờ tắt sandbox chỉ áp dụng cho fixture trong cloud; launcher phát hành không dùng cờ này.
-- `CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e`: **18/18** bài giao diện đã qua. Desktop 5 cột, mobile không tràn ngang.
+- `CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e`: lượt đầy đủ có **17/18** bài qua; ca 10 ảnh hết giới hạn 30 giây. Chạy lại riêng ca 10 ảnh và ca phiên đã xác minh/nút tạo đều qua (`test-results/.last-run.json`: `passed`). Desktop 5 cột, mobile không tràn ngang đã qua trong lượt đầy đủ.
 - Kiểm tra cú pháp Node cho server/cầu nối/desktop/launcher, `bash -n start.sh` và whitespace Git đã qua.
+
+## Nút tạo và ô Message trong bản 1.4.3
+
+- Ca UI dùng đúng trạng thái ảnh báo lỗi: `sessionAuthenticated=true`, `authenticated=false`, `composerReady=false`. Chạy với bundle 1.4.2 tái hiện nút TẠO 10 VIDEO vẫn disabled. Sau sửa, nút bật và thao tác Tạo cảnh gửi đúng accountId=1, nhận/phát được kết quả fixture.
+- Một phiên được API xác minh giữ trạng thái kết nối khi ô soạn của tab đăng nhập bị ẩn hoặc không có. Ô soạn không được dùng làm bằng chứng xác thực.
+- Bộ desktop chạy với trang đăng nhập không có editor khả dụng; cả 10 luồng tự mở New chat, tìm Message trong form ngoài khung Hatch cũ và nhận 10 ảnh đúng từng ô. Chuyển 10 ảnh sang video, Stop và khôi phục phiên đều qua.
+- Kiểm thử cầu nối bao gồm ô Message đã hiện sẵn ngoài khung cũ, trang đầu vào phải mở New chat, ảnh tham chiếu trong form, và từ chối chọn ô Search hoặc một trong nhiều ô Message không rõ đích. Không gửi yêu cầu trong các trường hợp chưa xác định được ô nhập.
 
 ## Nhận kết nối sau đăng nhập trong bản 1.4.2
 
 - Trước sửa, ca kiểm tra phiên đã lưu trong tab chưa hiển thị trả `authenticated=false`, dù phiên hợp lệ. Đã tái hiện lỗi này và sửa viewport của tab đăng nhập, không chỉ worker. Sau sửa xác minh được mà không phải hiện tab trước.
-- Về Studio tự gửi một lần kiểm tra phiên. Kiểm thử đăng nhập trực tiếp và đăng nhập qua popup đều xác minh thành công; trang Muse cũ được cập nhật sau khi API xác thực, không dựa vào trạng thái cũ của Studio.
+- Về Studio tự gửi một lần kiểm tra phiên. Kiểm thử đăng nhập trực tiếp và đăng nhập qua popup đều xác minh thành công; phiên được kiểm tra bằng API, không phụ thuộc ô soạn của tab đăng nhập.
 - Kiểm tra phiên/API lỗi HTTP 503 hiển thị trạng thái không xác minh được; một ô soạn hiển thị không được dùng làm bằng chứng đăng nhập.
 - Bản nháp trong trang có ô soạn bị ẩn không bị xóa để cập nhật phiên. Kiểm tra không gửi chat hoặc render; số yêu cầu tạo nội dung giữ nguyên qua các bước xác minh.
-- Phản hồi kết nối hiển thị cố định ở bảng tài khoản. Ca UI mới kiểm tra trạng thái đã đăng nhập nhưng chưa có ô soạn và lỗi HTTP 503; nút tạo vẫn khóa. Đóng toast không làm mất thông báo tại bảng tài khoản.
+- Phản hồi kết nối hiển thị cố định ở bảng tài khoản. Ca UI kiểm tra phiên đã xác thực nhưng chưa có ô soạn ở tab đăng nhập vẫn gửi được yêu cầu; lỗi HTTP 503 chưa xác thực thì nút tạo khóa. Đóng toast không làm mất thông báo tại bảng tài khoản.
 
 ## Lỗi thực tế được tái hiện và sửa
 
@@ -26,7 +33,7 @@
 - Sau sửa, chọn editor hiển thị và loại bỏ textarea prehydration, ca hồi quy qua và đúng một yêu cầu được gửi bằng editor thật. Ô prehydration giữ rỗng.
 - Kiểm tra trang hydrate chậm: placeholder còn hiển thị nhưng không nhận prompt; timeout được đổi thành `MUSE_COMPOSER_NOT_READY`, không gửi yêu cầu. Khi editor thật sẵn sàng, gửi và nhận ảnh bình thường.
 - Kiểm thử Electron còn phát hiện view ẩn có viewport 0×0, khiến editor rich text rộng 0 px. Đã đặt viewport bố cục cho từng worker trước khi tải Muse; không thay đổi mức yêu cầu ảnh/video.
-- Cả nhóm Electron desktop chạy với textarea ẩn + editor rich text, gồm 10 ảnh đồng thời, 10 video từ ảnh, Stop và khôi phục phiên. Kiểm tra từng yêu cầu có viewport khác 0 và textarea prehydration vẫn rỗng.
+- Cả nhóm Electron desktop chạy với textarea ẩn + editor rich text Message ngoài khung Hatch cũ, gồm 10 ảnh đồng thời, 10 video từ ảnh, Stop và khôi phục phiên. Kiểm tra từng yêu cầu có viewport khác 0 và textarea prehydration vẫn rỗng.
 
 ## 10 luồng và đăng nhập nhúng đã chứng minh
 

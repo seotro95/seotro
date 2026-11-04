@@ -8,7 +8,12 @@ import { readMuseBalance } from './muse-balance.mjs';
 // Public UI selectors observed in community Muse clients, not an official SDK.
 // Muse retains a hidden prehydration textarea before its hydrated rich editor.
 // Filter before first(): waiting on the first unfiltered match never reaches it.
-const EDITOR = '[data-hatch-composer-root] textarea:not([data-hatch-composer-prehydration-input="true"]):visible, [data-hatch-composer-root] [contenteditable="true"]:visible, [data-hatch-composer-root] [contenteditable="plaintext-only"]:visible';
+const EDITOR = '[data-hatch-composer-root] textarea:not([data-hatch-composer-prehydration-input="true"]):not([readonly]):not([disabled]):visible, [data-hatch-composer-root] [contenteditable="true"]:visible, [data-hatch-composer-root] [contenteditable="plaintext-only"]:visible';
+const FIELD = 'textarea:not([data-hatch-composer-prehydration-input="true"]):not([readonly]):not([disabled]), [contenteditable="true"], [contenteditable="plaintext-only"]';
+const NAMED_EDITOR = ['Message', 'Message Muse', 'Tin nhắn', 'Nhập tin nhắn'].flatMap(label => FIELD.split(', ').flatMap(field =>
+  [`${field}[aria-label="${label}" i]:visible`, `${field}[placeholder="${label}" i]:visible`]
+)).concat('[data-lexical-editor="true"][contenteditable="true"]:visible').map(selector => `${selector}:not([data-message-item] *)`).join(', ');
+const NEW_CHAT = /^(new chat|new conversation|cuộc trò chuyện mới|trò chuyện mới|bắt đầu trò chuyện)$/i;
 const MESSAGES = '[data-message-item]';
 const STOP = '[data-testid="hatch-composer-stop-button"]';
 const NOTICE = '[data-testid="assistant-response-error-notice"]';
@@ -99,21 +104,8 @@ export class MuseBrowser {
     const page = await this.open(id);
     if (show) { if (this.active.showLogin) this.active.showLogin(); else await page.bringToFront(); }
     await this.refreshActive();
-    // An OAuth popup can update the session while the original page still shows
-    // its signed-out UI. Reconcile that page only after positive authentication.
-    if (!show && this.account(id).sessionAuthenticated && !this.account(id).composerReady) {
-      await page.locator(EDITOR).first().waitFor({ state: 'visible', timeout: 1200 }).catch(() => {});
-      await this.refreshActive();
-      const draft = await page.locator('[data-hatch-composer-root]').evaluateAll(roots => roots.some(root =>
-        [...root.querySelectorAll('textarea, [contenteditable="true"], [contenteditable="plaintext-only"]')].some(editor => (editor.tagName === 'TEXTAREA' ? editor.value : editor.textContent)?.trim())
-      ));
-      if (this.account(id).sessionAuthenticated && !this.account(id).composerReady && !draft) {
-        try { await page.reload({ waitUntil: 'domcontentloaded', timeout: 15000 }); }
-        catch { throw fail('MUSE_SESSION_REFRESH_FAILED', 'Đã nhận phiên đăng nhập nhưng chưa tải lại được trang Muse. Kiểm tra tab Muse rồi bấm Kiểm tra phiên.', 503); }
-        await page.locator(EDITOR).first().waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
-        await this.refreshActive();
-      }
-    }
+    // The login page may be a dashboard or a stale OAuth landing page. Its
+    // editor is not a prerequisite: every render opens and checks its own page.
     return this.snapshot();
   }
   async refreshActive() {
@@ -127,13 +119,13 @@ export class MuseBrowser {
     }
     // Only the owned browser uses its session. No cookie/token export or passwords.
     const probe = await this.inspectAuthentication(active.page);
-    const composerReady = await active.page.locator(EDITOR).first().isVisible().catch(() => false);
+    const composerReady = Boolean(await this.findComposer(active.page).catch(() => null));
     if (this.active !== active) return;
     account.sessionAuthenticated = probe.authenticated;
     account.composerReady = composerReady;
-    account.authenticated = Boolean(probe.authenticated && composerReady);
-    account.state = account.authenticated ? 'ready' : probe.authenticated ? 'composer_loading' : probe.state;
-    account.connectionMessage = account.authenticated ? 'Phiên Muse đã được xác minh. Có thể gửi yêu cầu tạo ảnh/video.' : probe.authenticated ? 'Đã xác minh đăng nhập, đang chờ trang Muse tải ô soạn. Bấm Kiểm tra phiên để cập nhật.' : probe.message;
+    account.authenticated = probe.authenticated;
+    account.state = probe.authenticated ? 'ready' : probe.state;
+    account.connectionMessage = probe.authenticated ? 'Phiên Muse đã được xác minh. Tool mở ô soạn riêng khi bạn bấm tạo từng cảnh hoặc cả bộ.' : probe.message;
     account.balance = account.authenticated ? await readMuseBalance(active.page) : null;
   }
   async authenticated(page) {
@@ -154,30 +146,55 @@ export class MuseBrowser {
       finally { clearTimeout(timer); }
     }).catch(() => ({ authenticated: false, state: 'check_failed', message: 'Chưa đọc được trang Muse để xác minh phiên. Mở tab Muse rồi kiểm tra lại.' }));
   }
-  async waitForComposer(page) {
-    try { await page.locator(EDITOR).first().waitFor({ state: 'visible', timeout: this.composerTimeoutMs }); }
-    catch (error) {
-      if (error.name !== 'TimeoutError') throw error;
-      throw fail('MUSE_COMPOSER_NOT_READY', 'Muse chưa hiển thị ô soạn đã tải xong. Chưa gửi prompt. Mở tab Muse kiểm tra trang, rồi thử lại cảnh lỗi.', 504);
+  async findComposer(page) {
+    for (const selector of [EDITOR, NAMED_EDITOR]) {
+      const candidates = page.locator(selector);
+      const count = await candidates.count();
+      if (count === 1) return candidates.first();
+      if (count > 1) throw fail('MUSE_COMPOSER_AMBIGUOUS', 'Có nhiều ô nhập phù hợp trong cuộc trò chuyện Muse. Chưa gửi prompt để tránh nhập nhầm ô.');
     }
+    return null;
+  }
+  newChatControl(page) {
+    return page.getByRole('button', { name: NEW_CHAT }).or(page.getByRole('link', { name: NEW_CHAT })).filter({ visible: true }).first();
+  }
+  async waitForComposer(page, { openConversation = false } = {}) {
+    const deadline = Date.now() + this.composerTimeoutMs;
+    let opened = false;
+    do {
+      const editor = await this.findComposer(page);
+      if (editor) return editor;
+      if (openConversation && !opened) {
+        const entry = this.newChatControl(page);
+        if (await entry.count()) { await entry.click(); opened = true; }
+      }
+      await pause(Math.min(100, Math.max(1, deadline - Date.now())));
+    } while (Date.now() < deadline);
+    throw fail('MUSE_COMPOSER_NOT_READY', 'Chưa mở được ô nhập trong cuộc trò chuyện Muse của cảnh này. Chưa gửi prompt. Mở tab Muse kiểm tra mục trò chuyện hoặc thử lại cảnh lỗi.', 504);
   }
   async prepareConversation(page) {
-    await this.waitForComposer(page);
+    await this.waitForComposer(page, { openConversation: true });
     const users = page.locator(`${MESSAGES}[data-message-role="user"]`);
     if (!await users.count()) return;
-    const newChat = page.getByRole('button', { name: /^(new chat|new conversation|cuộc trò chuyện mới|trò chuyện mới)$/i }).first();
+    const newChat = this.newChatControl(page);
     if (!await newChat.isVisible().catch(() => false)) throw fail('MUSE_NEW_CHAT_UNAVAILABLE', 'Không mở được cuộc trò chuyện riêng. Chưa gửi prompt; Muse cần hỗ trợ các cuộc trò chuyện độc lập để chạy đồng thời.');
     await newChat.click();
     await page.waitForFunction(selector => document.querySelectorAll(selector).length === 0, `${MESSAGES}[data-message-role="user"]`, { timeout: 15000 });
     await this.waitForComposer(page);
   }
   async attach(page, image) {
-    const input = page.locator('[data-hatch-composer-root] input[type="file"]').first();
+    const editor = await this.waitForComposer(page);
+    const hatch = editor.locator('xpath=ancestor::*[@data-hatch-composer-root][1]');
+    const form = editor.locator('xpath=ancestor::form[1]');
+    const area = await hatch.count() ? hatch : form;
+    const input = area.locator('input[type="file"]').first();
     if (!await input.count()) throw fail('MUSE_ATTACHMENT_UNAVAILABLE', 'Không tìm thấy ô tải ảnh trong Muse. Chưa gửi prompt. Mở cửa sổ Muse kiểm tra giao diện hoặc bỏ ảnh tham chiếu trước khi thử lại.');
     await input.setInputFiles({ name: `reference.${image.mimeType === 'image/jpeg' ? 'jpg' : image.mimeType.split('/')[1]}`, mimeType: image.mimeType, buffer: Buffer.from(image.base64, 'base64') });
+    const areaHandle = await area.elementHandle();
     try {
-      await page.waitForFunction(() => Array.from(document.querySelectorAll('[data-hatch-composer-root] img')).some(img => img.complete && img.naturalWidth > 0), null, { timeout: 30000 });
+      await page.waitForFunction(root => root && Array.from(root.querySelectorAll('img')).some(img => !img.closest('[data-message-item]') && img.complete && img.naturalWidth > 0), areaHandle, { timeout: 30000 });
     } catch { throw fail('MUSE_UPLOAD_NOT_READY', 'Ảnh chưa xuất hiện trong ô soạn Muse. Chưa gửi prompt; kiểm tra cửa sổ Muse rồi thử lại.'); }
+    finally { await areaHandle?.dispose(); }
   }
   async turn({ accountId, prompt, image, video, output = video ? 'video' : 'text', signal }) {
     this.requireSingleAccount(accountId);
@@ -194,7 +211,7 @@ export class MuseBrowser {
       await this.refreshActive();
       if (!this.account(accountId).authenticated) {
         const account = this.account(accountId);
-        const code = account.sessionAuthenticated ? 'MUSE_COMPOSER_NOT_READY' : account.state === 'check_failed' ? 'MUSE_SESSION_CHECK_FAILED' : 'MUSE_LOGIN_REQUIRED';
+        const code = account.state === 'check_failed' ? 'MUSE_SESSION_CHECK_FAILED' : 'MUSE_LOGIN_REQUIRED';
         throw fail(code, account.connectionMessage || 'Đăng nhập tài khoản Muse trong tool, rồi bấm Kiểm tra phiên.', code === 'MUSE_LOGIN_REQUIRED' ? 401 : 503);
       }
       signal.throwIfAborted();
@@ -204,30 +221,30 @@ export class MuseBrowser {
       await page.goto(this.serviceURL, { waitUntil: 'domcontentloaded', timeout: 45000 });
       const workerProbe = await this.inspectAuthentication(page);
       if (!workerProbe.authenticated) {
-        this.account(accountId).authenticated = false;
+        Object.assign(this.account(accountId), { authenticated: false, sessionAuthenticated: false, composerReady: false, state: workerProbe.state, connectionMessage: workerProbe.message });
         throw fail(workerProbe.state === 'check_failed' ? 'MUSE_SESSION_CHECK_FAILED' : 'MUSE_LOGIN_REQUIRED', workerProbe.message, workerProbe.state === 'check_failed' ? 503 : 401);
       }
       await this.prepareConversation(page);
       signal.throwIfAborted();
       if (await page.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
-      sending = true;
-      return await this.sendTurn({ page, prompt, image, output, signal });
+      return await this.sendTurn({ page, prompt, image, output, signal, onSubmit: () => { sending = true; } });
     } finally {
       signal.removeEventListener('abort', cancelled);
       if (page) await (owned?.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()).catch(() => {});
       this.workers.delete(key);
     }
   }
-  async sendTurn({ page, prompt, image, output, signal }) {
-    const editor = page.locator(EDITOR).first();
+  async sendTurn({ page, prompt, image, output, signal, onSubmit }) {
+    const editor = await this.waitForComposer(page);
     if ((await editor.innerText().catch(() => '')).trim() || (await editor.inputValue().catch(() => '')).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có nội dung chưa gửi. Gửi hoặc xóa bản nháp đó trước; tool không ghi đè.', 409);
-    if (await page.locator('[data-hatch-composer-root] img[src^="blob:"]').count()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có ảnh chưa gửi. Xử lý bản nháp đó trước; tool không gửi kèm ảnh cũ.', 409);
+    if (await editor.locator('xpath=ancestor::*[@data-hatch-composer-root or self::form][1]').locator('img[src^="blob:"]:not([data-message-item] *)').count()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có ảnh chưa gửi. Xử lý bản nháp đó trước; tool không gửi kèm ảnh cũ.', 409);
     if (image) await this.attach(page, image);
     signal.throwIfAborted();
     const marker = `studio-request-${randomUUID()}`;
     const message = `${prompt}\n\n[Request marker: ${marker}. Do not include this marker in your reply.]`;
     await editor.fill(message);
     signal.throwIfAborted();
+    onSubmit();
     await editor.press('Enter');
     const deadline = Date.now() + this.timeoutMs;
     let lastText = '';

@@ -30,16 +30,19 @@ test('owned browser bridge against local Muse-shaped pages (not live Muse)', asy
       await driver.refreshActive();
       assert.equal(driver.snapshot()[0].authenticated, true);
     });
-    await t.test('reconciles authenticated sessions with a stale signed-out page without sending a chat', async () => {
+    await t.test('a verified session stays usable while its login-page composer is absent', async () => {
       const count = state.submitted.length;
       await driver.active.page.locator('[data-hatch-composer-root]').evaluate(root => root.style.display = 'none');
       await driver.refreshActive();
       assert.equal(driver.snapshot()[0].sessionAuthenticated, true);
-      assert.equal(driver.snapshot()[0].authenticated, false);
-      assert.equal(driver.snapshot()[0].state, 'composer_loading');
+      assert.equal(driver.snapshot()[0].authenticated, true);
+      assert.equal(driver.snapshot()[0].composerReady, false);
+      assert.equal(driver.snapshot()[0].state, 'ready');
       await driver.connect(1, { show: false });
       assert.equal(driver.snapshot()[0].authenticated, true);
+      assert.equal(driver.snapshot()[0].composerReady, false);
       assert.equal(state.submitted.length, count);
+      await driver.active.page.locator('[data-hatch-composer-root]').evaluate(root => root.style.display = 'block');
     });
     await t.test('keeps drafts when a session check finds a hidden composer', async () => {
       const page = driver.active.page;
@@ -47,7 +50,7 @@ test('owned browser bridge against local Muse-shaped pages (not live Muse)', asy
       await page.locator('[data-hatch-composer-root]').evaluate(root => root.style.display = 'none');
       await driver.connect(1, { show: false });
       assert.equal(await page.locator('textarea').inputValue(), 'Keep this unsent fixture draft');
-      assert.equal(driver.snapshot()[0].state, 'composer_loading');
+      assert.equal(driver.snapshot()[0].state, 'ready');
       await page.locator('[data-hatch-composer-root]').evaluate(root => root.style.display = 'block');
       await page.locator('textarea').fill('');
       await driver.refreshActive();
@@ -63,6 +66,35 @@ test('owned browser bridge against local Muse-shaped pages (not live Muse)', asy
         await assert.rejects(driver.generateVideo(data, new AbortController().signal), /MUSE_SESSION_CHECK_FAILED/);
         assert.equal(state.submitted.length, count);
       } finally { state.authStatus = 200; await driver.refreshActive(); }
+    });
+    await t.test('opens a separate Message conversation from a verified account landing page', async () => {
+      state.composerLayout = 'semantic'; state.landingOnly = true; state.behavior = 'image';
+      const count = state.submitted.length;
+      await driver.active.page.locator('[data-hatch-composer-root]').evaluate(root => root.style.display = 'none');
+      try {
+        const result = await driver.generateImage({ accountId: 1, prompt: 'Render with a verified session and no login editor', aspectRatio: '16:9', resolution: '2k', characterLock: true, referenceImage: { base64: png, mimeType: 'image/png' } }, new AbortController().signal);
+        assert.equal(result.base64, image.toString('base64'));
+        assert.equal(state.submitted.length, count + 1);
+        assert.equal(state.submitted.at(-1).attached, 1);
+        state.landingOnly = false; state.newChat = false;
+        const direct = await driver.generateImage({ accountId: 1, prompt: 'Use the visible Message field directly', aspectRatio: '16:9', resolution: '2k', characterLock: false }, new AbortController().signal);
+        assert.equal(direct.base64, image.toString('base64'));
+        assert.equal(state.submitted.length, count + 2);
+      } finally {
+        state.composerLayout = 'hatch'; state.landingOnly = false; state.newChat = true;
+        await driver.active.page.locator('[data-hatch-composer-root]').evaluate(root => root.style.display = 'block');
+      }
+    });
+    await t.test('does not type into search fields or choose between ambiguous Message fields', async () => {
+      const count = state.submitted.length; const timeout = driver.composerTimeoutMs;
+      state.composerLayout = 'semantic'; state.editorLabel = 'Search'; state.newChat = false;
+      try {
+        driver.composerTimeoutMs = 150;
+        await assert.rejects(driver.generateText({ accountId: 1, prompt: 'Do not enter search' }, new AbortController().signal), /MUSE_COMPOSER_NOT_READY/);
+        state.composerLayout = 'ambiguous'; state.editorLabel = 'Message';
+        await assert.rejects(driver.generateText({ accountId: 1, prompt: 'Do not guess a target' }, new AbortController().signal), /MUSE_COMPOSER_AMBIGUOUS/);
+        assert.equal(state.submitted.length, count);
+      } finally { state.composerLayout = 'hatch'; state.editorLabel = 'Message'; state.newChat = true; driver.composerTimeoutMs = timeout; }
     });
     await t.test('submits the reference and returns the new playable video with observed metadata', async () => {
       state.behavior = 'video';

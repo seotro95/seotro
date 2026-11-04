@@ -1,7 +1,7 @@
 import http from 'node:http';
 
 export function createMuseFixture({ image, clip }) {
-const state = { behavior: 'video', submitted: [], stops: 0, hold: false, peak: 0, pending: new Map(), released: new Set(), outputs: new Map(), uniqueImages: false, oldConversation: false, newChat: true, prehydrationInput: false, richComposer: false, hydrationDelayMs: 0, authStatus: 200, loginInPopup: false };
+const state = { behavior: 'video', submitted: [], stops: 0, hold: false, peak: 0, pending: new Map(), released: new Set(), outputs: new Map(), uniqueImages: false, oldConversation: false, newChat: true, prehydrationInput: false, richComposer: false, hydrationDelayMs: 0, authStatus: 200, loginInPopup: false, composerLayout: 'hatch', landingOnly: false, editorLabel: 'Message' };
 const fixture = http.createServer(async (req, res) => {
   if (req.url === '/api/auth/check') { res.statusCode = state.authStatus; res.setHeader('Content-Type', 'application/json'); return res.end(JSON.stringify({ ok: /fixture_session=connected/.test(req.headers.cookie || '') })); }
   if (req.url === '/fixture-auth-popup') { res.setHeader('Content-Type', 'text/html; charset=utf-8'); return res.end(`<html><button id="finish">Finish fixture login</button><script>document.querySelector('#finish').onclick=()=>{document.cookie='fixture_session=connected; Max-Age=3600; SameSite=Strict';window.close()}</script></html>`); }
@@ -21,16 +21,18 @@ const fixture = http.createServer(async (req, res) => {
   if (req.url?.endsWith('.png')) { res.setHeader('Content-Type', 'image/png'); return res.end(image); }
   if (req.url?.endsWith('.mp4')) { res.setHeader('Content-Type', 'video/mp4'); return res.end(clip); }
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  const rootTag = state.composerLayout === 'hatch' ? 'div' : 'form';
   res.end(`<!doctype html><html><body>
   <header><span data-testid="token-balance">Tokens remaining: 1,234</span></header><button id="login">Fixture login</button>
   ${state.newChat ? '<button id="new-chat">New chat</button>' : ''}<div id="history">${state.oldConversation ? '<div data-message-item data-message-role="user">Old thread</div>' : ''}<div data-message-item data-message-role="assistant">OLD RESPONSE Tokens remaining: 999999<img src="/old.png"><video src="/old.mp4" preload="metadata"></video></div></div>
-  <div data-hatch-composer-root style="display:none">${state.prehydrationInput ? `<textarea rows="1" aria-label="Message" placeholder="Message" data-hatch-composer-prehydration-input="true" style="display:${state.hydrationDelayMs ? 'block' : 'none'}"></textarea>` : ''}${state.richComposer ? `<div id="fixture-editor" contenteditable="true" data-lexical-editor="true" role="textbox" aria-label="Message" style="display:${state.hydrationDelayMs ? 'none' : 'block'}"></div>` : '<textarea id="fixture-editor"></textarea>'}<input type="file" accept="image/*"><span id="attachments"></span></div>
+  <${rootTag} id="fixture-composer" ${state.composerLayout === 'hatch' ? 'data-hatch-composer-root' : ''} style="display:none">${state.prehydrationInput ? `<textarea rows="1" aria-label="Message" placeholder="Message" data-hatch-composer-prehydration-input="true" style="display:${state.hydrationDelayMs ? 'block' : 'none'}"></textarea>` : ''}${state.richComposer ? `<div id="fixture-editor" contenteditable="true" data-lexical-editor="true" role="textbox" aria-label="${state.editorLabel}" style="display:${state.hydrationDelayMs ? 'none' : 'block'}"></div>` : `<textarea id="fixture-editor" aria-label="${state.editorLabel}"></textarea>`}${state.composerLayout === 'ambiguous' ? '<textarea aria-label="Message" id="other-editor"></textarea>' : ''}<input type="file" accept="image/*"><span id="attachments"></span></${rootTag}>
   <button data-testid="hatch-composer-stop-button" style="display:none">Stop</button>
   <script>
-  const root=document.querySelector('[data-hatch-composer-root]');const editor=root.querySelector('#fixture-editor');const history=document.querySelector('#history');const stop=document.querySelector('[data-testid="hatch-composer-stop-button"]');
+  const root=document.querySelector('#fixture-composer');const editor=root.querySelector('#fixture-editor');const history=document.querySelector('#history');const stop=document.querySelector('[data-testid="hatch-composer-stop-button"]');
   if(${state.hydrationDelayMs})setTimeout(()=>{root.querySelector('[data-hatch-composer-prehydration-input]')?.style.setProperty('display','none');editor.style.display='block'},${state.hydrationDelayMs});
-  function ready(){root.style.display=document.cookie.includes('fixture_session=connected')?'block':'none'};ready();
-  document.querySelector('#new-chat')?.addEventListener('click',()=>history.replaceChildren());
+  let conversationOpen=${!state.landingOnly};
+  function ready(){root.style.display=document.cookie.includes('fixture_session=connected')&&conversationOpen?'block':'none'};ready();
+  document.querySelector('#new-chat')?.addEventListener('click',()=>{history.replaceChildren();conversationOpen=true;ready()});
   document.querySelector('#login').onclick=()=>{if(${state.loginInPopup}){window.open('/fixture-auth-popup');return}document.cookie='fixture_session=connected; Max-Age=3600; SameSite=Strict';ready()};
   root.querySelector('input').onchange=e=>{const img=new Image();img.src=URL.createObjectURL(e.target.files[0]);document.querySelector('#attachments').appendChild(img)};
   stop.onclick=()=>{stop.style.display='none';fetch('/stop')};

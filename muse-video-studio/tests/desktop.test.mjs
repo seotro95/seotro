@@ -27,6 +27,8 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
   const fixture = createMuseFixture({ image, clip });
   fixture.state.prehydrationInput = true;
   fixture.state.richComposer = true;
+  fixture.state.composerLayout = 'semantic';
+  fixture.state.landingOnly = true;
   await new Promise(resolve => fixture.server.listen(0, '127.0.0.1', resolve));
   const fixtureURL = `http://127.0.0.1:${fixture.server.address().port}/`;
   let desktop;
@@ -61,6 +63,8 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       assert.equal(status.maxConcurrency, 10);
       assert.equal(status.accounts.length, 1);
       assert.equal(status.accounts[0].authenticated, true);
+      assert.equal(status.accounts[0].composerReady, false);
+      assert.equal(await studio.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true }).isEnabled(), true);
       await assert.rejects(studio.evaluate(() => window.museTransport.request(crypto.randomUUID(), 'https://example.com', {})), /Invalid Studio request/);
     });
     await t.test('ten image jobs overlap before any response, share login, and keep scene outputs separate', async () => {
@@ -160,7 +164,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       assert.equal(fixture.state.submitted.length, count);
       const status = await studio.evaluate(async () => (await fetch('/api/status')).json());
       assert.equal(status.accounts[0].sessionAuthenticated, true);
-      assert.equal(status.accounts[0].composerReady, true);
+      assert.equal(status.accounts[0].composerReady, false);
     });
   } finally {
     fixture.releaseAll();
