@@ -1,4 +1,4 @@
-# Xác minh bản 1.4.0
+# Xác minh bản 1.4.1
 
 ## Kết quả trên Linux
 
@@ -6,10 +6,19 @@
 - `npm run build`: TypeScript và Vite thành công. Cảnh báo `use client` của bộ icon không ngăn build.
 - Lệnh `npm start` qua launcher phát hành đã mở ứng dụng trên Linux/Xorg với hồ sơ fixture mới, trả HTML/API đúng trạng thái và thoát sạch khi đóng cửa sổ. Không mở Chrome ngoài.
 - `npm test`: 7 bài parser/chuyển dự án cũ/kích thước/state, 7 bài máy chủ API trong một nhóm, 3 bài lệnh mở trình duyệt dự phòng và 2 bài phân tích số dư đã qua, không bỏ qua bài nào.
-- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge`: 11 kịch bản trong một nhóm đã qua, dùng Chromium thật với Muse giả lập trên loopback và hồ sơ tạm.
+- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge`: 13 kịch bản trong một nhóm đã qua, dùng Chromium thật với Muse giả lập trên loopback và hồ sơ tạm.
 - `DISPLAY=:97 MUSE_ELECTRON_TEST_NO_SANDBOX=1 npm run test:desktop`: 5 kịch bản trong một nhóm đã qua, dùng Electron thật trên màn hình Xorg dummy. Cờ tắt sandbox chỉ áp dụng cho fixture trong cloud; launcher phát hành không dùng cờ này.
 - `CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e`: **17/17** bài giao diện đã qua. Desktop 5 cột, mobile không tràn ngang.
 - Kiểm tra cú pháp Node cho server/cầu nối/desktop/launcher, `bash -n start.sh` và whitespace Git đã qua.
+
+## Lỗi thực tế được tái hiện và sửa
+
+- Log người dùng: `locator.waitFor: Timeout 15000ms exceeded`, locator đầu tiên trỏ vào textarea ẩn có `data-hatch-composer-prehydration-input="true"`.
+- Thêm fixture đặt textarea đó trước editor rich text đang hiển thị. Chạy với mã cũ tái hiện đúng timeout 15 giây; chỉ ca hồi quy này thất bại trong khi các ca cũ vẫn qua.
+- Sau sửa, chọn editor hiển thị và loại bỏ textarea prehydration, ca hồi quy qua và đúng một yêu cầu được gửi bằng editor thật. Ô prehydration giữ rỗng.
+- Kiểm tra trang hydrate chậm: placeholder còn hiển thị nhưng không nhận prompt; timeout được đổi thành `MUSE_COMPOSER_NOT_READY`, không gửi yêu cầu. Khi editor thật sẵn sàng, gửi và nhận ảnh bình thường.
+- Kiểm thử Electron còn phát hiện view ẩn có viewport 0×0, khiến editor rich text rộng 0 px. Đã đặt viewport bố cục cho từng worker trước khi tải Muse; không thay đổi mức yêu cầu ảnh/video.
+- Cả nhóm Electron desktop chạy với textarea ẩn + editor rich text, gồm 10 ảnh đồng thời, 10 video từ ảnh, Stop và khôi phục phiên. Kiểm tra từng yêu cầu có viewport khác 0 và textarea prehydration vẫn rỗng.
 
 ## 10 luồng và đăng nhập nhúng đã chứng minh
 

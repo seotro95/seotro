@@ -1,6 +1,8 @@
-# Muse AI Studio 1.4.0 · 10 luồng đồng thời
+# Muse AI Studio 1.4.1 · 10 luồng đồng thời
 
 [Tải ZIP mới](https://github.com/seotro95/seotro/raw/refs/heads/main/Muse-Video-Workstation.zip) · [Hướng dẫn đầy đủ](muse-video-studio/README.md)
+
+**Bản 1.4.1 sửa lỗi timeout 15 giây do chọn nhầm ô nhập Muse bị ẩn.** Tool chọn ô soạn đang hiển thị, sửa kích thước khung xử lý nền và đợi trang tải xong trước khi gửi. Đóng hẳn tool cũ rồi giải nén bản mới đè tệp chương trình; giữ nguyên `.data` và `.env`.
 
 **Một tài khoản Muse, tối đa 10 luồng ảnh/video chạy đồng thời trong các cuộc trò chuyện riêng. Đăng nhập ngay trong cửa sổ tool bằng tab Muse tích hợp; không cần cài hoặc mở Chrome riêng.**
 

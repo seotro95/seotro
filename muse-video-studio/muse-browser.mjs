@@ -6,7 +6,9 @@ import { randomUUID } from 'node:crypto';
 import { readMuseBalance } from './muse-balance.mjs';
 
 // Public UI selectors observed in community Muse clients, not an official SDK.
-const EDITOR = '[data-hatch-composer-root] textarea, [data-hatch-composer-root] [contenteditable="true"]';
+// Muse retains a hidden prehydration textarea before its hydrated rich editor.
+// Filter before first(): waiting on the first unfiltered match never reaches it.
+const EDITOR = '[data-hatch-composer-root] textarea:not([data-hatch-composer-prehydration-input="true"]):visible, [data-hatch-composer-root] [contenteditable="true"]:visible, [data-hatch-composer-root] [contenteditable="plaintext-only"]:visible';
 const MESSAGES = '[data-message-item]';
 const STOP = '[data-testid="hatch-composer-stop-button"]';
 const NOTICE = '[data-testid="assistant-response-error-notice"]';
@@ -20,7 +22,7 @@ const pause = (ms, signal) => new Promise((resolve, reject) => {
 });
 
 export class MuseBrowser {
-  constructor({ profileRoot, accountProfile, serviceURL = 'https://muse.ai/', launchOptions, sessionFactory, timeoutMs = 600000, pollMs = 500, quietMs = 1500 } = {}) {
+  constructor({ profileRoot, accountProfile, serviceURL = 'https://muse.ai/', launchOptions, sessionFactory, timeoutMs = 600000, pollMs = 500, quietMs = 1500, composerTimeoutMs = 45000 } = {}) {
     this.profileRoot = profileRoot;
     this.serviceURL = serviceURL;
     this.launchOptions = launchOptions;
@@ -30,6 +32,7 @@ export class MuseBrowser {
     this.timeoutMs = timeoutMs;
     this.pollMs = pollMs;
     this.quietMs = quietMs;
+    this.composerTimeoutMs = composerTimeoutMs;
     this.active = null;
     this.profilePath = accountProfile || path.join(this.profileRoot, 'slot-01');
     this.accounts = [{ id: 1, state: existsSync(this.profile(1)) ? 'saved' : 'disconnected', authenticated: false, checkedAt: null, balance: null }];
@@ -124,14 +127,22 @@ export class MuseBrowser {
       finally { clearTimeout(timer); }
     }).catch(() => false);
   }
+  async waitForComposer(page) {
+    try { await page.locator(EDITOR).first().waitFor({ state: 'visible', timeout: this.composerTimeoutMs }); }
+    catch (error) {
+      if (error.name !== 'TimeoutError') throw error;
+      throw fail('MUSE_COMPOSER_NOT_READY', 'Muse chưa hiển thị ô soạn đã tải xong. Chưa gửi prompt. Mở tab Muse kiểm tra trang, rồi thử lại cảnh lỗi.', 504);
+    }
+  }
   async prepareConversation(page) {
-    await page.locator(EDITOR).first().waitFor({ state: 'visible', timeout: 15000 });
+    await this.waitForComposer(page);
     const users = page.locator(`${MESSAGES}[data-message-role="user"]`);
     if (!await users.count()) return;
     const newChat = page.getByRole('button', { name: /^(new chat|new conversation|cuộc trò chuyện mới|trò chuyện mới)$/i }).first();
     if (!await newChat.isVisible().catch(() => false)) throw fail('MUSE_NEW_CHAT_UNAVAILABLE', 'Không mở được cuộc trò chuyện riêng. Chưa gửi prompt; Muse cần hỗ trợ các cuộc trò chuyện độc lập để chạy đồng thời.');
     await newChat.click();
     await page.waitForFunction(selector => document.querySelectorAll(selector).length === 0, `${MESSAGES}[data-message-role="user"]`, { timeout: 15000 });
+    await this.waitForComposer(page);
   }
   async attach(page, image) {
     const input = page.locator('[data-hatch-composer-root] input[type="file"]').first();

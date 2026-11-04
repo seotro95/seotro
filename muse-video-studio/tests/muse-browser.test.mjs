@@ -106,6 +106,38 @@ test('owned browser bridge against local Muse-shaped pages (not live Muse)', asy
       await assert.rejects(task, error => error.name === 'AbortError');
       assert.equal(state.stops, 1);
     });
+    await t.test('ignores the hidden prehydration textarea before the visible rich editor reported by the user', async () => {
+      state.prehydrationInput = true; state.richComposer = true; state.behavior = 'image';
+      try {
+        const probe = await driver.active.context.newPage();
+        try {
+          await probe.goto(driver.serviceURL);
+          assert.equal(await probe.locator('[data-hatch-composer-root] textarea, [data-hatch-composer-root] [contenteditable="true"]').first().isVisible(), false);
+          assert.equal(await probe.locator('[data-lexical-editor="true"]').isVisible(), true);
+        } finally { await probe.close(); }
+        const count = state.submitted.length;
+        const result = await driver.generateImage({ accountId: 1, prompt: 'Regression: use the visible composer', aspectRatio: '16:9', resolution: '2k', characterLock: false }, new AbortController().signal);
+        assert.equal(result.base64, image.toString('base64'));
+        assert.equal(state.submitted.length, count + 1);
+        assert.equal(state.submitted.at(-1).prehydrationValue, '');
+      } finally { state.prehydrationInput = false; state.richComposer = false; }
+    });
+    await t.test('waits for the hydrated editor and never submits to a visible prehydration placeholder', async () => {
+      state.prehydrationInput = true; state.richComposer = true; state.hydrationDelayMs = 600; state.behavior = 'image';
+      const originalTimeout = driver.composerTimeoutMs;
+      const count = state.submitted.length;
+      const request = { accountId: 1, prompt: 'Wait for Muse hydration', aspectRatio: '16:9', resolution: '2k', characterLock: false };
+      try {
+        driver.composerTimeoutMs = 100;
+        await assert.rejects(driver.generateImage(request, new AbortController().signal), /MUSE_COMPOSER_NOT_READY/);
+        assert.equal(state.submitted.length, count);
+        driver.composerTimeoutMs = 3000;
+        const result = await driver.generateImage(request, new AbortController().signal);
+        assert.equal(result.base64, image.toString('base64'));
+        assert.equal(state.submitted.length, count + 1);
+        assert.equal(state.submitted.at(-1).prehydrationValue, '');
+      } finally { driver.composerTimeoutMs = originalTimeout; state.prehydrationInput = false; state.richComposer = false; state.hydrationDelayMs = 0; }
+    });
     await t.test('runs ten isolated image conversations simultaneously with one session and maps each output correctly', async () => {
       state.behavior = 'image'; state.hold = true; state.uniqueImages = true; state.peak = 0;
       const first = state.submitted.length;

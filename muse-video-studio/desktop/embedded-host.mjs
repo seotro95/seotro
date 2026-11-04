@@ -36,7 +36,7 @@ export class EmbeddedMuseHost {
     this.browser = await chromium.connectOverCDP(`http://127.0.0.1:${port}`, { timeout: 15000 });
     return this.browser;
   }
-  async createView() {
+  async createView({ worker = false } = {}) {
     const browser = await this.attach();
     const view = new WebContentsView({ webPreferences: remotePreferences });
     this.secure(view.webContents);
@@ -52,6 +52,9 @@ export class EmbeddedMuseHost {
         await new Promise(resolve => setTimeout(resolve, 30));
       }
       if (!page) throw new Error('DESKTOP_VIEW_FAILED: Không khởi tạo được luồng Muse tích hợp.');
+      // Hidden Electron views may retain a 0×0 native viewport. Give workers a
+      // real layout so a full-width rich editor is measurable without showing it.
+      if (worker) await page.setViewportSize({ width: 1280, height: 900 });
       this.views.set(page, view);
       this.layout();
       return { page, view };
@@ -88,7 +91,7 @@ export class EmbeddedMuseHost {
     return {
       context: login.page.context(), page: login.page,
       showLogin: () => this.showLogin(),
-      createWorkerPage: async () => (await this.createView()).page,
+      createWorkerPage: async () => (await this.createView({ worker: true })).page,
       destroyWorkerPage: page => this.removePage(page),
       close: async () => {
         await Promise.all([...this.views.keys()].map(page => this.removePage(page)));

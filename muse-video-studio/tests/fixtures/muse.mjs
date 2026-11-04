@@ -1,7 +1,7 @@
 import http from 'node:http';
 
 export function createMuseFixture({ image, clip }) {
-const state = { behavior: 'video', submitted: [], stops: 0, hold: false, peak: 0, pending: new Map(), released: new Set(), outputs: new Map(), uniqueImages: false, oldConversation: false, newChat: true };
+const state = { behavior: 'video', submitted: [], stops: 0, hold: false, peak: 0, pending: new Map(), released: new Set(), outputs: new Map(), uniqueImages: false, oldConversation: false, newChat: true, prehydrationInput: false, richComposer: false, hydrationDelayMs: 0 };
 const fixture = http.createServer(async (req, res) => {
   if (req.url === '/api/auth/check') { res.setHeader('Content-Type', 'application/json'); return res.end(JSON.stringify({ ok: /fixture_session=connected/.test(req.headers.cookie || '') })); }
   if (req.url === '/turn') {
@@ -23,17 +23,18 @@ const fixture = http.createServer(async (req, res) => {
   res.end(`<!doctype html><html><body>
   <header><span data-testid="token-balance">Tokens remaining: 1,234</span></header><button id="login">Fixture login</button>
   ${state.newChat ? '<button id="new-chat">New chat</button>' : ''}<div id="history">${state.oldConversation ? '<div data-message-item data-message-role="user">Old thread</div>' : ''}<div data-message-item data-message-role="assistant">OLD RESPONSE Tokens remaining: 999999<img src="/old.png"><video src="/old.mp4" preload="metadata"></video></div></div>
-  <div data-hatch-composer-root style="display:none"><textarea></textarea><input type="file" accept="image/*"><span id="attachments"></span></div>
+  <div data-hatch-composer-root style="display:none">${state.prehydrationInput ? `<textarea rows="1" aria-label="Message" placeholder="Message" data-hatch-composer-prehydration-input="true" style="display:${state.hydrationDelayMs ? 'block' : 'none'}"></textarea>` : ''}${state.richComposer ? `<div id="fixture-editor" contenteditable="true" data-lexical-editor="true" role="textbox" aria-label="Message" style="display:${state.hydrationDelayMs ? 'none' : 'block'}"></div>` : '<textarea id="fixture-editor"></textarea>'}<input type="file" accept="image/*"><span id="attachments"></span></div>
   <button data-testid="hatch-composer-stop-button" style="display:none">Stop</button>
   <script>
-  const root=document.querySelector('[data-hatch-composer-root]');const editor=root.querySelector('textarea');const history=document.querySelector('#history');const stop=document.querySelector('[data-testid="hatch-composer-stop-button"]');
+  const root=document.querySelector('[data-hatch-composer-root]');const editor=root.querySelector('#fixture-editor');const history=document.querySelector('#history');const stop=document.querySelector('[data-testid="hatch-composer-stop-button"]');
+  if(${state.hydrationDelayMs})setTimeout(()=>{root.querySelector('[data-hatch-composer-prehydration-input]')?.style.setProperty('display','none');editor.style.display='block'},${state.hydrationDelayMs});
   function ready(){root.style.display=document.cookie.includes('fixture_session=connected')?'block':'none'};ready();
   document.querySelector('#new-chat')?.addEventListener('click',()=>history.replaceChildren());
   document.querySelector('#login').onclick=()=>{document.cookie='fixture_session=connected; Max-Age=3600; SameSite=Strict';ready()};
   root.querySelector('input').onchange=e=>{const img=new Image();img.src=URL.createObjectURL(e.target.files[0]);document.querySelector('#attachments').appendChild(img)};
   stop.onclick=()=>{stop.style.display='none';fetch('/stop')};
-  editor.onkeydown=async e=>{if(e.key!=='Enter')return;e.preventDefault();const prompt=editor.value;const user=document.createElement('div');user.setAttribute('data-message-item','');user.setAttribute('data-message-role','user');user.textContent=prompt;history.appendChild(user);editor.value='';const attached=root.querySelectorAll('img').length;document.querySelector('#attachments').replaceChildren();root.querySelector('input').value='';stop.style.display='block';
-    const mode=await(await fetch('/turn',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt,attached})})).json();
+  editor.onkeydown=async e=>{if(e.key!=='Enter')return;e.preventDefault();const prompt=editor.tagName==='TEXTAREA'?editor.value:editor.innerText;const user=document.createElement('div');user.setAttribute('data-message-item','');user.setAttribute('data-message-role','user');user.textContent=prompt;history.appendChild(user);if(editor.tagName==='TEXTAREA')editor.value='';else editor.replaceChildren();const attached=root.querySelectorAll('img').length;document.querySelector('#attachments').replaceChildren();root.querySelector('input').value='';stop.style.display='block';
+    const mode=await(await fetch('/turn',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt,attached,viewport:{width:innerWidth,height:innerHeight},prehydrationValue:root.querySelector('[data-hatch-composer-prehydration-input]')?.value||''})})).json();
     if(mode.held) while(!(await(await fetch('/ready?id='+mode.id)).json()).ready) await new Promise(resolve=>setTimeout(resolve,80));
     if(mode.behavior==='slow')return;
     setTimeout(()=>{const reply=document.createElement('div');reply.setAttribute('data-message-item','');reply.setAttribute('data-message-role','assistant');

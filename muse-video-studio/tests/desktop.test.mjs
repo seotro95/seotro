@@ -25,6 +25,8 @@ async function waitFor(predicate, label) {
 test('desktop embeds login and runs ten real Electron workers with one fixture session (not live Muse)', { timeout: 120000 }, async t => {
   const profile = await mkdtemp(path.join(os.tmpdir(), 'muse-desktop-test-'));
   const fixture = createMuseFixture({ image, clip });
+  fixture.state.prehydrationInput = true;
+  fixture.state.richComposer = true;
   await new Promise(resolve => fixture.server.listen(0, '127.0.0.1', resolve));
   const fixtureURL = `http://127.0.0.1:${fixture.server.address().port}/`;
   let desktop;
@@ -66,6 +68,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       await waitFor(() => fixture.state.pending.size === 10, 'ten concurrent embedded requests');
       assert.equal(fixture.state.peak, 10);
       assert.ok(fixture.state.submitted.every(request => request.authenticated));
+      assert.ok(fixture.state.submitted.every(request => request.viewport.width > 0 && request.viewport.height > 0 && request.prehydrationValue === ''));
       assert.equal(await studio.locator('.status-badge.running').count(), 10);
       assert.equal(await studio.locator('.generated-image').count(), 0);
       const activeStatus = await studio.evaluate(async () => (await fetch('/api/status')).json());

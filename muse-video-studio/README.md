@@ -1,8 +1,16 @@
-# Muse AI Studio 1.4.0 · Một tài khoản, 10 luồng đồng thời
+# Muse AI Studio 1.4.1 · Một tài khoản, 10 luồng đồng thời
 
 Ứng dụng desktop React/TypeScript và Electron cho 10 cảnh ảnh/video. **Bản 1.4 thay cách chạy tuần tự bằng 10 cuộc trò chuyện độc lập trên cùng một phiên Muse. Trang đăng nhập Muse nằm trong cửa sổ tool; không cần cài hoặc mở Chrome/Edge riêng.**
 
 Cầu nối giao diện này **không chính thức**. Đã kiểm thử đăng nhập, 10 luồng, tách kết quả và dừng tác vụ bằng Electron thật với dịch vụ Muse giả lập cục bộ. **Chưa đăng nhập, tạo ảnh/video hoặc đọc số dư trên Muse.ai thật**: cloud chưa có phiên người dùng và các lần truy cập muse.ai nhận CONNECT 403. Muse có thể giới hạn tác vụ đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các kiểm thử không chứng minh gói tài khoản thực tế hỗ trợ 10 render cùng lúc.
+
+## Sửa lỗi ô soạn Muse trong bản 1.4.1
+
+Khắc phục lỗi `locator.waitFor: Timeout 15000ms exceeded` khi Muse giữ `textarea[data-hatch-composer-prehydration-input="true"]` bị ẩn trước ô nhập thật. Tool lọc ô nhập đang hiển thị trước khi chọn, bỏ qua placeholder chưa hydrate và đợi ô soạn thật tải xong (tối đa 45 giây). Các khung xử lý nền được cấp kích thước bố cục để editor rich text không bị co về 0×0. Nếu trang vẫn chưa sẵn sàng, báo `MUSE_COMPOSER_NOT_READY` và chưa gửi prompt.
+
+Đã tái hiện đúng lỗi bằng fixture có textarea ẩn trước editor rich text; bản cũ timeout và bản sửa đã qua kiểm tra. Ca desktop 10 ảnh/10 video cũng dùng bố cục này. Đây là xác minh lỗi DOM được báo, không thay thế kiểm tra render trên Muse thật.
+
+Đóng hẳn tool cũ trước khi giải nén bản mới đè các tệp chương trình rồi chạy `start.bat`. ZIP không chứa `.data` hoặc `.env`, nên không xóa phiên/cấu hình hiện có. Không xóa hồ sơ đăng nhập để xử lý lỗi ô soạn này.
 
 ## Cài và chạy trên Windows
 
