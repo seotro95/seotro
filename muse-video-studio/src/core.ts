@@ -4,7 +4,7 @@ export type Mode = 'muse' | 'demo';
 export type Status = 'ready' | 'running' | 'done' | 'error' | 'cancelled';
 export type Reference = { id: string; name: string; url: string; base64?: string; mimeType?: string };
 export type Settings = { model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: '360p' | '720p'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
-export type VideoResult = { base64: string; mimeType: string; url: string; demo: boolean };
+export type VideoResult = { base64: string; mimeType: string; url: string; demo: boolean; metadata?: { duration: number; width: number; height: number } };
 export type Scene = { id: number; email: string; enabled: boolean; prompt: string; reference: Reference | null; status: Status; error?: string; video?: VideoResult; enhancing?: boolean };
 export const ADVENTURE = [
   'Một người thám hiểm bước vào ngôi đền cổ xưa trong rừng nhiệt đới, tia nắng vàng rọi xuyên qua tán lá, máy quay tiến chậm từ phía sau.',
@@ -62,7 +62,9 @@ export function normalizeSettings(settings: Settings): Settings {
 export function errorInfo(error: unknown): { raw: string; hint: string } {
   const raw = error instanceof Error ? error.message : String(error);
   let hint = 'Thử lại sau hoặc mở Chẩn đoán API để kiểm tra kết nối.';
-  if (/credit|quota|resource_exhausted|429|billing/i.test(raw)) hint = 'Kiểm tra hạn mức hoặc thanh toán trong tài khoản nhà cung cấp. Email phân công không thay đổi hạn mức.';
+  if (/MUSE_LOGIN_REQUIRED/i.test(raw)) hint = 'Mở 10 Tài khoản Muse, kết nối slot này rồi đăng nhập trong cửa sổ Chrome/Edge. Bấm Kiểm tra phiên sau khi đăng nhập.';
+  else if (/MUSE_BROWSER_UNAVAILABLE|MUSE_PROFILE_BUSY/i.test(raw)) hint = 'Kiểm tra Chrome/Edge trên máy chạy tool và cửa sổ hồ sơ Muse đang mở. Thông tin chi tiết ở mã lỗi gốc.';
+  else if (/credit|quota|resource_exhausted|429|billing/i.test(raw)) hint = 'Kiểm tra hạn mức hoặc thanh toán trong tài khoản nhà cung cấp. Email phân công không thay đổi hạn mức.';
   else if (/safety|filter|blocked|policy|rai|responsible/i.test(raw)) hint = 'Nội dung hoặc ảnh có thể bị bộ lọc từ chối. Chỉnh kịch bản, dùng ảnh phù hợp rồi thử lại.';
   else if (/overload|unavailable|503|502|gpu/i.test(raw)) hint = 'Dịch vụ đang bận hoặc tạm ngừng. Đợi một lúc rồi tạo lại cảnh lỗi.';
   else if (/401|403|key|permission|auth/i.test(raw)) hint = 'Kiểm tra quyền truy cập, API key và mô hình được cấp cho tài khoản.';

@@ -1,6 +1,6 @@
 import type { Mode, Reference, Settings, VideoResult } from './core.ts';
 
-type MuseVideo = { base64: string; mimeType?: string };
+type MuseVideo = { base64: string; mimeType?: string; metadata?: { duration: number; width: number; height: number } };
 async function api(path: string, data?: unknown, signal?: AbortSignal) {
   const response = await fetch(path, { method: data === undefined ? 'GET' : 'POST',
     headers: data === undefined ? undefined : { 'Content-Type': 'application/json' },
@@ -54,7 +54,7 @@ export async function generateVideo(prompt: string, reference: Reference | null,
   }
   signal.throwIfAborted();
   if (!result || typeof result.base64 !== 'string') throw new Error('MUSE_VIDEO_INVALID: Adapter chưa trả về {base64, mimeType}. Xem README để đối chiếu API thực tế.');
-  return videoResult(result.base64, result.mimeType, settings.mode === 'demo');
+  return { ...videoResult(result.base64, result.mimeType, settings.mode === 'demo'), ...(result.metadata ? { metadata: result.metadata } : {}) };
 }
 export async function enhancePrompt(prompt: string, mode: Mode, signal: AbortSignal, accountId: number): Promise<string> {
   if (mode === 'demo') throw new Error('Chế độ kiểm thử không có AI Enhance. Kết nối Muse AI để trau chuốt thật.');
@@ -71,3 +71,4 @@ export async function downloadVideo(video: VideoResult, id: number) {
   const a = document.createElement('a'); a.href = video.url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
 }
 export const providerStatus = () => api('/api/status');
+export const accountAction = (id: number, action: 'connect' | 'check' | 'close') => api(`/api/accounts/${id}/${action}`, {});

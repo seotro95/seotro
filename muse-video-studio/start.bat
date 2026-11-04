@@ -5,7 +5,9 @@ where node >nul 2>nul
 if errorlevel 1 goto missingnode
 node -e "if(Number(process.versions.node.split('.')[0])<24)process.exit(1)"
 if errorlevel 1 goto missingnode
-if exist node_modules\react\package.json goto build
+if not exist node_modules\react\package.json goto install
+if exist node_modules\playwright-core\package.json goto build
+:install
 call npm ci
 if errorlevel 1 goto failed
 :build

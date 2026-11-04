@@ -5,7 +5,7 @@ const video = (await readFile(new URL('../../public/demo.mp4', import.meta.url))
 const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aO1sAAAAASUVORK5CYII=', 'base64');
 test.beforeEach(async ({ page }) => { await page.goto('/'); });
 async function configureAdapter(page: Page) {
-  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, busy: false, credit: null, gpu: null } }));
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'adapter', accounts: [], busy: false, credit: null, gpu: null } }));
   await page.reload();
 }
 
@@ -119,14 +119,16 @@ test('demo batch can be stopped and resumed; test clips are labelled', async ({ 
 test('missing integration is explained before render and sends no doomed AI requests', async ({ page }) => {
   const requests: string[] = [];
   page.on('request', request => { if (/\/api\/(video|text)$/.test(request.url())) requests.push(request.url()); });
-  await expect(page.getByRole('region', { name: 'Cần kết nối tạo video' })).toContainText('Chưa có kết nối tạo video AI');
+  await expect(page.getByRole('region', { name: 'Cần kết nối tạo video' })).toContainText('Bấm Kết nối tài khoản Muse');
   await expect(page.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này' })).toBeDisabled();
   await expect(page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' })).toBeDisabled();
   await expect(page.getByTestId('scene-1').getByRole('button', { name: 'AI Enhance' })).toBeDisabled();
   await expect(page.locator('video')).toHaveCount(0);
-  await page.getByRole('button', { name: 'Xem cách kết nối' }).click();
-  await expect(page.getByRole('heading', { name: 'Cần gì để tạo video thật?' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Mở trang tài khoản Muse.ai' })).toHaveAttribute('href', 'https://muse.ai/');
+  await page.getByRole('button', { name: 'Kết nối tài khoản Muse', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Quản lý 10 tài khoản Muse' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Kết nối #1', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Hoàn tất', exact: true }).click();
+  await page.getByRole('button', { name: 'Chẩn đoán API', exact: true }).click();
   await expect(page.locator('#provider-mode option')).toHaveCount(2);
   expect(await page.locator('#provider-mode option').evaluateAll(options => options.map(option => (option as HTMLOptionElement).value))).toEqual(['muse', 'demo']);
   await expect(page.getByRole('button', { name: 'Kiểm tra render thực tế' })).toBeDisabled();
@@ -155,11 +157,39 @@ test('Enhance uses the scene account; diagnostic never renders without explicit 
 
 test('refreshing a newly configured adapter enables rendering without losing the script', async ({ page }) => {
   await page.getByLabel('Kịch bản cảnh 1', { exact: true }).fill('Keep this script while connecting.');
-  await page.getByRole('button', { name: 'Xem cách kết nối' }).click();
-  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, busy: false, credit: null, gpu: null } }));
+  await page.getByRole('button', { name: 'Chẩn đoán API', exact: true }).click();
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'adapter', accounts: [], busy: false, credit: null, gpu: null } }));
   await page.getByRole('button', { name: 'Đọc cấu hình', exact: true }).click();
   await expect(page.locator('.setup-help')).toHaveCount(0);
   await page.getByRole('button', { name: 'Đóng', exact: true }).last().click();
   await expect(page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' })).toBeEnabled();
   await expect(page.getByLabel('Kịch bản cảnh 1', { exact: true })).toHaveValue('Keep this script while connecting.');
+});
+
+test('connect/check account enables only its slot and reports observed video metadata', async ({ page }) => {
+  const accounts = Array.from({ length: 10 }, (_, i) => ({ id: i + 1, state: 'disconnected', authenticated: false, active: false, checkedAt: null as string | null }));
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', accounts, busy: false } }));
+  await page.route('**/api/accounts/1/connect', route => { accounts[0].state = 'login_open'; accounts[0].active = true; return route.fulfill({ json: { accounts } }); });
+  await page.route('**/api/accounts/1/check', route => { Object.assign(accounts[0], { state: 'ready', authenticated: true, checkedAt: new Date().toISOString() }); return route.fulfill({ json: { accounts } }); });
+  const calls: number[] = [];
+  await page.route('**/api/video', route => { calls.push(route.request().postDataJSON().accountId); return route.fulfill({ json: { base64: video, mimeType: 'video/mp4', metadata: { duration: 4, width: 640, height: 360 } } }); });
+  await page.reload();
+  await page.getByRole('button', { name: 'Kết nối tài khoản Muse', exact: true }).click();
+  await page.getByRole('button', { name: 'Kết nối #1', exact: true }).click();
+  await expect(page.locator('.account-session').first()).toContainText('Chờ đăng nhập');
+  await page.getByRole('button', { name: 'Kiểm tra phiên #1', exact: true }).click();
+  await expect(page.locator('.account-session').first()).toContainText('Đã xác minh');
+  await page.getByRole('button', { name: 'Hoàn tất', exact: true }).click();
+  await expect(page.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này' })).toBeEnabled();
+  await expect(page.getByTestId('scene-2').getByRole('button', { name: 'Tạo cảnh này' })).toBeDisabled();
+  await page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' }).click();
+  await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
+  expect(calls).toEqual([1]);
+  await expect(page.getByTestId('scene-1').locator('.video-metadata')).toHaveText('Muse trả về: 640×360 · 4.0 giây');
+  accounts[0].authenticated = false; accounts[0].state = 'login_open';
+  await page.getByRole('button', { name: 'Chẩn đoán API', exact: true }).click();
+  await page.getByRole('button', { name: 'Đọc cấu hình', exact: true }).click();
+  await page.getByRole('button', { name: 'Đóng', exact: true }).last().click();
+  await expect(page.getByTestId('scene-1').getByRole('button', { name: 'Tạo lại cảnh' })).toBeDisabled();
+  await expect(page.getByTestId('scene-1').locator('video')).toBeVisible();
 });

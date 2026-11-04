@@ -4,12 +4,16 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { openBrowser } from './browser.mjs';
+import { MuseBrowser } from './muse-browser.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 if (existsSync(path.join(ROOT, '.env'))) process.loadEnvFile(path.join(ROOT, '.env'));
 const dev = process.argv.includes('--dev');
 const port = Number(process.env.PORT || 8788);
 const host = '127.0.0.1';
+const transport = process.env.MUSE_TRANSPORT || (process.env.MUSE_ADAPTER_URL ? 'adapter' : 'browser');
+if (!['browser', 'adapter'].includes(transport)) throw new Error('MUSE_TRANSPORT must be browser or adapter.');
+const muse = transport === 'browser' ? new MuseBrowser({ profileRoot: path.resolve(process.env.MUSE_PROFILE_ROOT || path.join(ROOT, '.data', 'muse-accounts')) }) : null;
 const MAX_BODY = 12 * 1024 * 1024;
 let busy = false;
 const vite = dev ? await (await import('vite')).createServer({ root: ROOT, server: { middlewareMode: true, hmr: false } }) : null;
@@ -66,30 +70,45 @@ async function callAdapter(endpoint, data, signal) {
   return result;
 }
 async function api(req, res, pathname) {
-  if (req.method === 'GET' && pathname === '/api/status') return json(res, 200, { museConfigured: Boolean(process.env.MUSE_ADAPTER_URL), busy, credit: null, gpu: null });
+  if (req.method === 'GET' && pathname === '/api/status') {
+    if (muse && !busy) await muse.refreshActive();
+    return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy, credit: null, gpu: null });
+  }
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
   if (!req.headers['content-type']?.startsWith('application/json')) return json(res, 415, { error: 'Cần Content-Type application/json.' });
-  if (!['/api/video', '/api/text'].includes(pathname)) return json(res, 404, { error: 'API không tồn tại.' });
+  const accountRoute = pathname.match(/^\/api\/accounts\/(\d+)\/(connect|check|close)$/);
+  if (!['/api/video', '/api/text'].includes(pathname) && !accountRoute) return json(res, 404, { error: 'API không tồn tại.' });
   let acquired = false;
   const abort = new AbortController();
   res.on('close', () => abort.abort());
   const timeout = setTimeout(() => abort.abort(new Error('TIMEOUT: Hết 10 phút chờ. Yêu cầu đã gửi có thể vẫn được tính phí.')), 10 * 60 * 1000);
   try {
     const data = await body(req);
+    if (accountRoute) {
+      if (!muse) return json(res, 409, { error: 'Tài khoản đang do adapter riêng quản lý. Chọn MUSE_TRANSPORT=browser để đăng nhập bằng Chrome/Edge.' });
+      if (busy) return json(res, 409, { error: 'Đang có tác vụ. Đợi hoàn tất trước khi đổi cửa sổ tài khoản.' });
+      const accountId = Number(accountRoute[1]);
+      muse.account(accountId);
+      busy = acquired = true;
+      if (accountRoute[2] === 'close') { if (muse.active?.id === accountId) await muse.close(); }
+      else await muse.connect(accountId);
+      return json(res, 200, { accounts: muse.snapshot() });
+    }
     validate(data, pathname === '/api/video');
-    adapterURL(pathname === '/api/video' ? '/video' : '/text');
+    if (!muse) adapterURL(pathname === '/api/video' ? '/video' : '/text');
     if (busy) return json(res, 409, { error: 'Đang có một yêu cầu AI. Vui lòng đợi tác vụ hiện tại kết thúc.' });
     busy = acquired = true;
-    const result = await callAdapter(pathname === '/api/video' ? '/video' : '/text', {
+    const payload = {
       accountId: data.accountId, prompt: data.prompt,
       ...(pathname === '/api/video' ? { modelDisplayName: data.model, aspectRatio: data.aspectRatio,
         durationSeconds: data.duration, resolution: data.resolution,
         referenceImage: data.image ? { base64: data.image.imageBytes, mimeType: data.image.mimeType } : undefined } : {})
-    }, abort.signal);
+    };
+    const result = muse ? await (pathname === '/api/video' ? muse.generateVideo(payload, abort.signal) : muse.generateText(payload, abort.signal)) : await callAdapter(pathname === '/api/video' ? '/video' : '/text', payload, abort.signal);
     if (pathname === '/api/video' && (typeof result.base64 !== 'string' || !result.base64 || !/^[A-Za-z0-9+/\s]+={0,2}$/.test(result.base64) || !['video/mp4', 'video/webm', 'video/quicktime'].includes(result.mimeType))) throw new Error('MUSE_RESPONSE_INVALID: Cần {base64, mimeType} video hợp lệ từ adapter.');
     if (pathname === '/api/text' && (typeof result.text !== 'string' || !result.text.trim())) throw new Error('MUSE_RESPONSE_INVALID: Cần {text} không trống từ adapter.');
-    return json(res, 200, pathname === '/api/video' ? { base64: result.base64, mimeType: result.mimeType } : { text: result.text });
+    return json(res, 200, pathname === '/api/video' ? { base64: result.base64, mimeType: result.mimeType, ...(result.metadata ? { metadata: result.metadata } : {}) } : { text: result.text });
   } catch (error) { json(res, Number.isInteger(error.status) && error.status >= 400 && error.status <= 599 ? error.status : 502, { error: safeError(error) }); }
   finally { clearTimeout(timeout); if (acquired) busy = false; }
 }
@@ -118,11 +137,18 @@ server.listen(port, host, () => {
   const url = `http://${host}:${server.address().port}`;
   console.log(`Muse Studio: ${url} · ${dev ? 'development' : 'production'}`);
   console.log('Giu cua so nay mo khi su dung. Ctrl+C chi dung khi muon tat tool.');
-  if (!process.env.MUSE_ADAPTER_URL) console.log('Chua ket noi nguon tao video AI. Giao dien van hoat dong; xem muc Ket noi trong tool.');
+  console.log(transport === 'browser' ? 'Ket noi Muse: mo 10 Tai khoan Muse trong tool, bam Ket noi va dang nhap tren Chrome/Edge.' : 'Ket noi Muse qua adapter rieng.');
   if (process.argv.includes('--open')) openBrowser(url);
 });
 server.on('error', error => {
   console.error(error.code === 'EADDRINUSE' ? `Cong ${port} dang duoc su dung. Neu tool da mo, truy cap http://${host}:${port}; neu chua, dat PORT khac trong .env.` : error.message);
   process.exitCode = 1;
 });
-for (const name of ['SIGINT', 'SIGTERM']) process.on(name, () => { server.close(); vite?.close(); process.exit(0); });
+let stopping = false;
+for (const name of ['SIGINT', 'SIGTERM']) process.on(name, async () => {
+  if (stopping) return;
+  stopping = true;
+  server.close();
+  const timer = setTimeout(() => process.exit(0), 5000);
+  await muse?.close(); await vite?.close(); clearTimeout(timer); process.exit(0);
+});

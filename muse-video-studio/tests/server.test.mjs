@@ -21,7 +21,7 @@ const payload = { accountId: 7, prompt: 'A cinematic forest scene', model: 'Omni
 test('server adapter integration (local test server, not real Muse.ai)', async t => {
   await new Promise(resolve => adapter.listen(0, '127.0.0.1', resolve));
   const child = spawn(process.execPath, ['server.mjs'], { cwd: new URL('../', import.meta.url),
-    env: { ...process.env, PORT: '0', MUSE_ADAPTER_URL: `http://127.0.0.1:${adapter.address().port}`, MUSE_ADAPTER_TOKEN: 'test-bridge-secret' }, stdio: ['ignore', 'pipe', 'pipe'] });
+    env: { ...process.env, PORT: '0', MUSE_TRANSPORT: 'adapter', MUSE_ADAPTER_URL: `http://127.0.0.1:${adapter.address().port}`, MUSE_ADAPTER_TOKEN: 'test-bridge-secret' }, stdio: ['ignore', 'pipe', 'pipe'] });
   try {
     const base = await new Promise((resolve, reject) => {
       const timeout = setTimeout(() => reject(new Error('Server startup timed out')), 10000);
@@ -33,7 +33,7 @@ test('server adapter integration (local test server, not real Muse.ai)', async t
     await t.test('static app and honest status, no credential values', async () => {
       assert.equal((await fetch(base)).status, 200);
       const status = await (await fetch(base + '/api/status')).json();
-      assert.deepEqual(status, { museConfigured: true, busy: false, credit: null, gpu: null });
+      assert.deepEqual(status, { museConfigured: true, transport: 'adapter', accounts: [], busy: false, credit: null, gpu: null });
       assert.equal(JSON.stringify(status).includes('test-bridge-secret'), false);
       assert.equal((await fetch(base + '/.env')).status, 404);
     });
