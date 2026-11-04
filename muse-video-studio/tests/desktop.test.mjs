@@ -27,7 +27,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
   const fixture = createMuseFixture({ image, clip });
   fixture.state.prehydrationInput = true;
   fixture.state.richComposer = true;
-  fixture.state.hydrateOnFocus = true;
+  fixture.state.initialMode = 'input';
   fixture.state.landingOnly = true;
   await new Promise(resolve => fixture.server.listen(0, '127.0.0.1', resolve));
   const fixtureURL = `http://127.0.0.1:${fixture.server.address().port}/`;
@@ -82,17 +82,23 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       await waitFor(() => desktop.context().pages().length === 3, 'Message check worker disposed');
       assert.match(await studio.locator('.composer-feedback').innerText(), /Chưa gửi prompt/);
     });
+    let imagesReady = false;
     await t.test('ten image jobs overlap before any response, share login, and keep scene outputs separate', async () => {
       fixture.state.behavior = 'image'; fixture.state.hold = true; fixture.state.uniqueImages = true;
       for (let i = 1; i <= 10; i++) await studio.getByLabel(`Kịch bản cảnh ${i}`, { exact: true }).fill(`Desktop image ${i}`);
       await studio.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
       await studio.getByRole('button', { name: 'TẠO 10 ẢNH', exact: true }).click();
-      await waitFor(() => fixture.state.pending.size === 10, 'ten concurrent embedded requests');
+      try { await waitFor(() => fixture.state.pending.size === 10, 'ten concurrent embedded requests'); }
+      catch (error) {
+        console.error('Fixture batch details:', JSON.stringify({ submitted: fixture.state.submitted.length, pending: fixture.state.pending.size,
+          errors: await studio.locator('.scene-error pre').allTextContents() }));
+        throw error;
+      }
       assert.equal(fixture.state.peak, 10);
       assert.ok(fixture.state.submitted.every(request => request.path === '/composer-frame'));
       assert.ok(fixture.state.submitted.every(request => request.authenticated));
-      assert.ok(fixture.state.submitted.every(request => request.viewport.width > 0 && request.viewport.height > 0 && request.prehydrationValue === ''));
-      assert.ok(fixture.state.submitted.every(request => request.prehydrationFocus === 1 && request.prehydrationInputEvents === 0));
+      assert.ok(fixture.state.submitted.every(request => request.viewport.width > 0 && request.viewport.height > 0 && request.prehydrationValue === 'U'));
+      assert.ok(fixture.state.submitted.every(request => request.prehydrationInputEvents === 1 && request.initialMode === 'input'));
       assert.equal(await studio.locator('.status-badge.running').count(), 10);
       assert.equal(await studio.locator('.generated-image').count(), 0);
       const activeStatus = await studio.evaluate(async () => (await fetch('/api/status')).json());
@@ -111,7 +117,9 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       }
       await mkdir(path.join(root, 'test-results'), { recursive: true });
       await studio.screenshot({ path: path.join(root, 'test-results/desktop-app-studio.png') });
+      imagesReady = true;
     });
+    assert.ok(imagesReady, 'Image batch failed; stop dependent video tests.');
     await t.test('ten image-to-video workers overlap on the same session and clean up afterwards', async () => {
       await waitFor(async () => await studio.getByRole('button', { name: 'Chuyển bộ ảnh đã tạo sang video', exact: true }).isEnabled(), 'finished image batch');
       await studio.getByRole('button', { name: 'Chuyển bộ ảnh đã tạo sang video', exact: true }).click();

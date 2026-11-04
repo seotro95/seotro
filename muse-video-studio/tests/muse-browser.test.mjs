@@ -294,7 +294,41 @@ test('owned browser bridge against local Muse-shaped pages (not live Muse)', asy
         await probe.close(); state.hydrateOnFocus = false; state.prehydrationInput = false; state.richComposer = false; state.hydrationDelayMs = 0; driver.composerTimeoutMs = timeout;
       }
     });
-    await t.test('waits for the hydrated editor and never submits to a visible prehydration placeholder', async () => {
+    await t.test('uses a working Message textarea even when the prehydration attribute remains', async () => {
+      const count = state.submitted.length;
+      state.prehydrationInput = true; state.richComposer = true; state.initialMode = 'functional'; state.behavior = 'text';
+      try {
+        const result = await driver.generateText({ accountId: 1, prompt: '🌄 A new scene from the working Message textarea' }, new AbortController().signal);
+        assert.match(result.text, /A new cinematic prompt/);
+        assert.equal(state.submitted.length, count + 1);
+        assert.equal(state.submitted.at(-1).initialMode, 'functional');
+        assert.match(state.submitted.at(-1).prompt, /^🌄 A new scene/);
+      } finally { state.prehydrationInput = false; state.richComposer = false; state.initialMode = 'none'; }
+    });
+    await t.test('reselects Message after the first keystroke hands text to the real editor', async () => {
+      const count = state.submitted.length;
+      state.prehydrationInput = true; state.richComposer = true; state.initialMode = 'input'; state.behavior = 'image';
+      try {
+        const result = await driver.generateImage({ accountId: 1, prompt: 'Do not lose the first character during editor handoff', aspectRatio: '16:9', resolution: '2k', characterLock: false }, new AbortController().signal);
+        assert.equal(result.base64, image.toString('base64'));
+        assert.equal(state.submitted.length, count + 1);
+        assert.match(state.submitted.at(-1).prompt, /^Use your image-generation tool/);
+        assert.equal(state.submitted.at(-1).prehydrationValue, 'U');
+        assert.equal(state.submitted.at(-1).prehydrationInputEvents, 1);
+      } finally { state.prehydrationInput = false; state.richComposer = false; state.initialMode = 'none'; }
+    });
+    await t.test('an inert Message field reports an unacknowledged submit and never repeats Enter', async () => {
+      const count = state.submitted.length;
+      const original = driver.submitTimeoutMs;
+      state.prehydrationInput = true; state.richComposer = true; state.initialMode = 'inert'; state.initialEnterEvents = 0;
+      driver.submitTimeoutMs = 200;
+      try {
+        await assert.rejects(driver.generateText({ accountId: 1, prompt: 'An inert field must never pretend this request completed' }, new AbortController().signal), /MUSE_SUBMIT_NOT_ACKNOWLEDGED/);
+        assert.equal(state.submitted.length, count);
+        assert.equal(state.initialEnterEvents, 1);
+      } finally { driver.submitTimeoutMs = original; state.prehydrationInput = false; state.richComposer = false; state.initialMode = 'none'; }
+    });
+    await t.test('handles delayed hydration without losing the prompt and still respects a short composer timeout', async () => {
       state.prehydrationInput = true; state.richComposer = true; state.hydrationDelayMs = 600; state.behavior = 'image';
       const originalTimeout = driver.composerTimeoutMs;
       const count = state.submitted.length;
@@ -307,7 +341,9 @@ test('owned browser bridge against local Muse-shaped pages (not live Muse)', asy
         const result = await driver.generateImage(request, new AbortController().signal);
         assert.equal(result.base64, image.toString('base64'));
         assert.equal(state.submitted.length, count + 1);
-        assert.equal(state.submitted.at(-1).prehydrationValue, '');
+        assert.ok(['', 'U'].includes(state.submitted.at(-1).prehydrationValue));
+        assert.match(state.submitted.at(-1).prompt, /^Use your image-generation tool/);
+        assert.match(state.submitted.at(-1).prompt, /Wait for Muse hydration/);
       } finally { driver.composerTimeoutMs = originalTimeout; state.prehydrationInput = false; state.richComposer = false; state.hydrationDelayMs = 0; }
     });
     await t.test('runs ten isolated image conversations simultaneously with one session and maps each output correctly', async () => {

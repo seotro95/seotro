@@ -1,59 +1,28 @@
-# Muse AI Studio 1.4.5 · Một tài khoản, 10 luồng đồng thời
+# Muse AI Studio 1.4.6 · Một tài khoản, 10 luồng
 
-Ứng dụng desktop React/TypeScript và Electron cho 10 cảnh ảnh/video. **Bản 1.4 thay cách chạy tuần tự bằng 10 cuộc trò chuyện độc lập trên cùng một phiên Muse. Trang đăng nhập Muse nằm trong cửa sổ tool; không cần cài hoặc mở Chrome/Edge riêng.**
+Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đăng nhập Muse nằm trong cửa sổ tool. Các luồng dùng chung một phiên tài khoản.
 
-Cầu nối giao diện này **không chính thức**. Đã kiểm thử đăng nhập, 10 luồng, tách kết quả và dừng tác vụ bằng Electron thật với dịch vụ Muse giả lập cục bộ. **Chưa đăng nhập, tạo ảnh/video hoặc đọc số dư trên Muse.ai thật**: cloud chưa có phiên người dùng và các lần truy cập muse.ai nhận CONNECT 403. Muse có thể giới hạn tác vụ đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các kiểm thử không chứng minh gói tài khoản thực tế hỗ trợ 10 render cùng lúc.
+## Bản Windows đầy đủ — không cần bản cũ
 
-## Kích hoạt ô Message trong bản 1.4.5
+1. Giải nén **toàn bộ** ZIP Windows vào một thư mục mới, không chạy trong cửa sổ xem ZIP.
+2. Mở **Muse AI Studio.exe** hoặc **BAT_DAU.bat**. Runtime Electron/Node và thư viện đã có trong gói; không cần cài Node.js, npm hay Chrome riêng.
+3. Đăng nhập Muse trong tab tích hợp, quay **← Về Studio**, bấm **Kiểm tra phiên**.
+4. Có thể bấm **Kiểm tra ô Message** trước khi tạo. Bước này tìm ô nhập trong trang luồng, không gửi prompt hoặc render.
+5. Nhập 10 prompt hoặc TXT/SRT, chọn **Tạo ảnh hàng loạt** / **Tạo video**, bấm **TẠO 10 ẢNH / VIDEO**.
 
-Log thực tế cho thấy Muse tải xong ở `/`, viewport 1280×900, một khung soạn, một ô prehydration và một ô nhập đang hiện. Bộ chọn 1.4.4 loại bỏ ô prehydration và không bấm kích hoạt nó, nên có thể chờ hết thời gian dù Message hiện trên trang.
+Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.4.6** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
 
-Bản này đặt con trỏ vào ô Message ban đầu duy nhất đang hiện trong khung Muse, bấm nếu còn hiện, rồi đợi ô nhập thật. Focus trực tiếp giúp khởi tạo editor trong luồng desktop nền, nơi click có thể không đặt được con trỏ vào iframe. Chỉ gửi prompt sau khi tìm được editor đã khởi tạo; không nhập prompt hoặc Enter vào ô prehydration. Nếu ô ban đầu có bản nháp, nội dung được giữ nguyên và tool báo lỗi. Nếu editor không khởi tạo, tool giữ lỗi `MUSE_COMPOSER_NOT_READY`, kèm thông tin đã thử kích hoạt và số ô prehydration đang hiện. Không dùng click cưỡng bức.
+Cầu nối giao diện **không chính thức**. Kiểm thử dùng Chromium/Electron thật và dịch vụ giả lập cục bộ; chưa tự động tạo media hoặc đọc số dư trên Muse.ai thật. Người dùng xác nhận có thể gửi/nhận tin nhắn thủ công trong tab Muse của tool. Tài khoản thật có thể giới hạn render đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các lựa chọn model, độ nét và thời lượng là yêu cầu bằng prompt, cần xác nhận bằng kết quả thật.
 
-Đã tái hiện bằng fixture có các chỉ số giống log và cần focus để khởi tạo editor: bản 1.4.4 timeout. Đây là kiểm chứng điều kiện lỗi và cách khôi phục cục bộ; chưa xác nhận trang Muse thật dùng cùng cơ chế khởi tạo. Sau cập nhật, bấm **Kiểm tra ô Message** trước khi chạy cả bộ.
+## Sửa nhập Message trong bản 1.4.6
 
-## Trang luồng và kiểm tra ô Message trong bản 1.4.4
+Bản trước loại bỏ mọi ô mang nhãn `prehydration`, dù ô đó có thể đang hoạt động hoặc chỉ chuyển sang rich editor sau lần nhập đầu tiên. Bản này ưu tiên rich editor đang hiện; nếu chưa có, dùng ô Message duy nhất, đang hiện và cho nhập trong khung Muse đã xác minh. Không chọn ô Search, ô ẩn, readonly/disabled hoặc khung của miền khác.
 
-Mỗi luồng dùng đường dẫn trang Muse đã xác minh sau đăng nhập thay vì luôn mở lại trang gốc. Các tham số truy vấn và fragment không được sao chép từ URL đăng nhập. Nếu ô Message nằm trong iframe hiển thị cùng miền Muse, thao tác nhập, đính kèm ảnh, đọc phản hồi mới và Stop đều thực hiện trong khung đó. Không nhập vào khung của miền khác.
+Tool nhập ký tự đầu vào đúng element, tìm lại editor khi Muse chuyển ô, kiểm tra đủ nội dung rồi mới nhấn Enter. Giữ nguyên bản nháp không thuộc yêu cầu hiện tại. So sánh nội dung có chuẩn hóa dòng trống do Chromium hiển thị; văn bản gốc vẫn được nhập nguyên vẹn. Mỗi yêu cầu chỉ nhấn gửi một lần. Nếu chưa có dấu hiệu Muse nhận prompt thì báo `MUSE_SUBMIT_NOT_ACKNOWLEDGED`; kiểm tra lịch sử trước khi thử lại để tránh tạo trùng.
 
-Trước khi chạy cả bộ, bấm **Kiểm tra ô Message** ở bảng tài khoản hoặc hộp **Tài khoản Muse**. Tool mở trang luồng riêng, xác minh phiên và tìm ô nhập mà không gửi prompt hay yêu cầu tạo nội dung; trang kiểm tra được đóng sau đó. Kết quả giữ ở bảng tài khoản. Nếu lỗi, mở **Chi tiết trang luồng**: chẩn đoán gồm miền, đường dẫn đã che phần riêng tư, trạng thái tải/hiển thị, kích thước và số ô nhập. Không thu nội dung chat, bản nháp, mật khẩu, cookie, token hoặc tham số URL.
+## Chạy bản mã nguồn
 
-Đã tái hiện bằng fixture: tài khoản đang ở `/chat` nhưng luồng mở `/` không có editor; dùng lại đường dẫn trò chuyện và xử lý trong iframe thì nhận được kết quả. Đây là sửa lỗi được kiểm chứng cục bộ; chưa xác nhận đây là nguyên nhân duy nhất trên Muse thật của người dùng.
-
-## Sửa nút tạo bị khóa trong bản 1.4.3
-
-Phiên Muse được API xác minh sẽ mở nút tạo ảnh/video ngay cả khi tab đăng nhập chưa hiển thị ô soạn. Mỗi cảnh mở cuộc trò chuyện riêng và tìm ô **Message** ở đó trước khi gửi prompt. Bản này bỏ điều kiện chờ ô soạn trên tab đăng nhập làm khóa cả Studio.
-
-Bộ nhận ô nhập hỗ trợ textarea/ô rich text có nhãn Message và editor Lexical ngoài khung giao diện cũ. Khi trang đầu vào có nút/link New chat nhưng chưa có editor, luồng mở cuộc trò chuyện bằng nút đó. Không dùng ô tìm kiếm; nếu có nhiều ô phù hợp thì báo rõ và chưa gửi prompt. Ảnh tham chiếu được xác nhận ở đúng vùng soạn hoặc form trước khi gửi.
-
-## Nhận phiên đăng nhập trong bản 1.4.2
-
-Sửa trường hợp đã đăng nhập Muse nhưng Studio chưa nhận kết nối. Tab đăng nhập ẩn cũng được cấp kích thước bố cục; khi bấm **← Về Studio**, tool tự kiểm tra lại phiên. Đăng nhập qua popup cũng được xác minh khi quay về Studio. Tab đăng nhập và bản nháp được giữ nguyên; phần tạo nội dung dùng các cuộc trò chuyện riêng.
-
-Ngay cạnh nút **Kiểm tra phiên** luôn có kết quả: đang kiểm tra, đã xác minh, hoặc chưa đọc được trạng thái phiên. Lỗi mạng/HTTP không bị coi là đăng nhập thành công. Nút tạo bật sau khi phiên được xác thực. Mỗi luồng kiểm tra ô nhập của riêng mình trước khi gửi prompt. Việc kiểm tra không gửi prompt hoặc render.
-
-## Sửa lỗi ô soạn Muse trong bản 1.4.1
-
-Khắc phục lỗi `locator.waitFor: Timeout 15000ms exceeded` khi Muse giữ `textarea[data-hatch-composer-prehydration-input="true"]` bị ẩn trước ô nhập thật. Tool lọc ô nhập đang hiển thị trước khi chọn, bỏ qua placeholder chưa hydrate và đợi ô soạn thật tải xong (tối đa 45 giây). Các khung xử lý nền được cấp kích thước bố cục để editor rich text không bị co về 0×0. Nếu trang vẫn chưa sẵn sàng, báo `MUSE_COMPOSER_NOT_READY` và chưa gửi prompt.
-
-Đã tái hiện đúng lỗi bằng fixture có textarea ẩn trước editor rich text; bản cũ timeout và bản sửa đã qua kiểm tra. Ca desktop 10 ảnh/10 video cũng dùng bố cục này. Đây là xác minh lỗi DOM được báo, không thay thế kiểm tra render trên Muse thật.
-
-Đóng hẳn tool cũ trước khi giải nén bản mới đè các tệp chương trình rồi chạy `start.bat`. ZIP không chứa `.data` hoặc `.env`, nên không xóa phiên/cấu hình hiện có. Không xóa hồ sơ đăng nhập để xử lý lỗi ô soạn này.
-
-## Cài và chạy trên Windows
-
-1. Cài Node.js 24+ trên Windows 10/11. Không cần Chrome/Edge cho bản desktop.
-2. Đóng tool cũ. Giải nén ZIP mới vào một thư mục riêng, chạy `start.bat`.
-3. Lần đầu cần Internet để cài các gói và tải runtime Electron chính thức. Bộ cài Electron kiểm tra checksum. Không đổi chính sách PowerShell; nếu chạy lệnh thủ công, dùng `npm.cmd`.
-4. Bấm **Đăng nhập Muse trong tool**. Đăng nhập trực tiếp trên trang Muse/nhà cung cấp trong tab tích hợp. Nếu nhà cung cấp mở popup xác thực, popup vẫn thuộc ứng dụng.
-5. Bấm **← Về Studio** để tool tự xác minh phiên. Khi hiện **Đã xác minh**, cả 10 ô có thể dùng cùng phiên đó. Có thể bấm **Kiểm tra phiên** để cập nhật thủ công; kết quả luôn hiện ngay bên cạnh.
-6. Nhập 10 prompt hoặc nạp TXT/SRT. Chọn **Tạo ảnh hàng loạt** hoặc **Tạo video**, bấm **TẠO 10 ẢNH / TẠO 10 VIDEO**.
-
-Tool bắt đầu các cảnh đủ điều kiện đồng thời và trả mỗi kết quả về đúng ô. Số luồng đang chạy hiện cạnh tiến độ. Dùng **Dừng tất cả luồng** để ngừng nhận kết quả và gửi Stop tới từng cuộc trò chuyện đang chạy. Muse vẫn có thể tính phí hoặc tiếp tục tác vụ đã nhận. Bấm Tạo 10 lại chỉ chạy phần chưa xong; có thể tạo lại riêng một cảnh. Cảnh tắt, prompt trống, cảnh đã hoàn tất hoặc thiếu ảnh nguồn trong chế độ ảnh→video được bỏ qua.
-
-Các yêu cầu đều dùng tài khoản duy nhất, không có email/gán tài khoản từng cảnh. Khi mở dự án JSON cũ, các gán tài khoản được bỏ qua, prompt và bật/tắt vẫn giữ. Để chuyển kịch bản từ bản web cũ, xuất dự án JSON rồi mở trong bản desktop. Phiên đăng nhập Chrome của bản cũ không tự chuyển sang Electron: đăng nhập một lần trong bản mới. Thư mục phiên cũ không bị xóa.
-
-Trên Linux/macOS có desktop, dùng `bash start.sh`. Chạy bằng lệnh:
+Cần Node.js 24+. Giải nén mã nguồn vào thư mục mới, chạy `start.bat` trên Windows hoặc `bash start.sh` trên Linux/macOS có desktop. Lần đầu tải npm packages và runtime Electron chính thức, có kiểm tra checksum. PowerShell có thể dùng `npm.cmd` mà không đổi execution policy.
 
 ```sh
 npm ci
@@ -61,7 +30,16 @@ npm run build
 npm start
 ```
 
-`npm start` mở ứng dụng desktop. Đóng cửa sổ ứng dụng để dừng máy chủ và các luồng. Máy chủ chỉ lắng nghe 127.0.0.1, mặc định cổng 8788. Nếu cổng bị chiếm, đóng tool cũ hoặc đổi PORT trong `.env`.
+Máy chủ mã nguồn mặc định chỉ lắng nghe 127.0.0.1:8788. Bản desktop đóng gói dùng cổng trống. Đóng cửa sổ để dừng app. Giữ hoặc tải kết quả trước khi đóng; dự án JSON lưu kịch bản và thiết lập.
+
+## Đóng gói từ mã nguồn
+
+Môi trường build cần Node 24, `npm ci`, `npm run build` và Python 3. Windows ZIP dùng runtime Electron x64 chính thức, kiểm tra checksum từ package Electron đã khóa phiên bản. Chỉ sao chép app, bundle web, Playwright Core và giấy phép; không sao chép hồ sơ hoặc `.env`.
+
+```sh
+python3 scripts/package_portable.py --platform win32 --output /path/to/artifacts
+python3 scripts/package_portable.py --platform linux --output /path/to/portable-check --no-zip
+```
 
 ## Ảnh, video và đồng nhất nhân vật
 
@@ -81,7 +59,7 @@ Chỉnh prompt/ảnh/settings sẽ xóa kết quả liên quan để tránh dùn
 
 - Trang Muse chạy trong view Electron riêng, không nằm trong iframe. Mật khẩu được nhập trực tiếp trên trang nhà cung cấp; tool không có form mật khẩu tự chế và không xuất cookie/token.
 - Muse và các popup xác thực không được truy cập Node.js hoặc IPC của Studio. Context isolation, sandbox và web security được bật trong ứng dụng phát hành. Không tắt TLS verification.
-- Một partition `persist:muse` lưu phiên ở `.data/muse-desktop` trên máy bạn. Không chia sẻ thư mục này hoặc đưa lên Git, ZIP, ảnh chụp/chat. Không đọc hồ sơ Chrome cá nhân.
+- Một partition `persist:muse` lưu phiên ở `.data/muse-desktop` trong thư mục app trên máy bạn (Windows đầy đủ: `resources/app/.data/muse-desktop`). Không chia sẻ thư mục này hoặc đưa lên Git, ZIP, ảnh chụp/chat. Không đọc hồ sơ Chrome cá nhân.
 - Mỗi cảnh tạo một view/hội thoại riêng trong cùng phiên, đóng khi hoàn tất hoặc dừng. Tool chỉ nhận media sau tin nhắn mới có marker, không lấy ảnh/video cũ để giả thành công.
 - Trường hợp Muse tải lại một hội thoại cũ, tool thử nút New chat và yêu cầu hội thoại mới trước khi gửi. Không mở được thì báo `MUSE_NEW_CHAT_UNAVAILABLE`.
 - Đường gửi desktop đi qua IPC giới hạn endpoint và máy chủ cục bộ, tránh giới hạn 6 kết nối HTTP/1 của trang web. Máy chủ giữ tối đa 10 yêu cầu đang hoạt động; hoàn tất một yêu cầu chỉ giải phóng một chỗ.
@@ -94,6 +72,7 @@ Chỉnh prompt/ảnh/settings sẽ xóa kết quả liên quan để tránh dùn
 - Nếu Muse/nhà cung cấp từ chối trình đăng nhập nhúng, bản này chưa có API/OAuth chính thức thay thế. Không giả trạng thái đăng nhập; cần phương thức xác thực được dịch vụ hỗ trợ.
 - `MUSE_CONCURRENCY_LIMIT`: đã có 10 luồng cục bộ; đợi một luồng hoàn tất. Lỗi quota/429 do Muse trả được giữ ở đúng ô; không tự đổi tài khoản, tăng hạn mức hoặc retry hàng loạt.
 - `MUSE_NEW_CHAT_UNAVAILABLE`, `MUSE_COMPOSER_NOT_READY`, `MUSE_COMPOSER_AMBIGUOUS`, `MUSE_ATTACHMENT_UNAVAILABLE`, `MUSE_UPLOAD_NOT_READY`: giao diện Muse có thể đã đổi hoặc chưa nhận ảnh. Chưa gửi prompt khi thiếu điều kiện bắt buộc.
+- `MUSE_SUBMIT_NOT_ACKNOWLEDGED`: tool chưa xác nhận Muse nhận prompt sau Enter; không tự gửi lại. Kiểm tra cuộc trò chuyện trước khi thử lại.
 - `MUSE_TIMEOUT`, `MUSE_NO_IMAGE`, `MUSE_NO_VIDEO`, `MUSE_MEDIA_UNREADABLE`: mở lịch sử trong tab Muse kiểm tra trước khi thử lại để tránh tạo trùng hoặc tính phí hai lần.
 
 ## Chế độ web và adapter nâng cao
@@ -118,11 +97,13 @@ npm test
 CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge
 CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e
 npm run test:desktop
+# Sau khi chuẩn bị gói Linux, đặt MUSE_PORTABLE_EXECUTABLE rồi chạy:
+node tests/portable.test.mjs
 ```
 
 Test desktop cần màn hình/virtual display và runtime Electron (lần đầu: `node node_modules/electron/install.js`). Trên Linux cloud có thể dùng Xorg dummy/Xvfb. Môi trường kiểm thử không hỗ trợ sandbox có thể bật **riêng cho fixture** `MUSE_ELECTRON_TEST_NO_SANDBOX=1`; launcher phát hành không dùng cờ này.
 
-Fixture desktop dùng một phiên giả lập và chặn kết quả cho tới khi cả 10 yêu cầu đã được gửi, rồi trả ảnh khác nhau để xác minh ánh xạ từng ô; đồng thời kiểm tra video từ ảnh, hủy cả 10 và lưu phiên sau mở lại. Test không gửi yêu cầu đến Muse thật. Xem `VALIDATION.md`. Launcher Windows chưa được chạy trên Windows thật.
+Fixture desktop dùng một phiên giả lập và chặn kết quả cho tới khi cả 10 yêu cầu đã được gửi, rồi trả ảnh khác nhau để xác minh ánh xạ từng ô; đồng thời kiểm tra video từ ảnh, hủy cả 10 và lưu phiên sau mở lại. Test không gửi yêu cầu đến Muse thật. Xem `VALIDATION.md`. Runtime Windows được kiểm tra checksum và cấu trúc gói; cloud Linux không chạy được Windows EXE. Bản đóng gói Linux cùng bố cục được kiểm thử với hồ sơ mới.
 
 **Chẩn đoán API → Kiểm thử giao diện** dùng clip/ảnh 640×360 có nhãn TEST CLIP/TEST IMAGE, không tạo nội dung AI và không chứng minh đăng nhập/hạn mức/chất lượng.
 

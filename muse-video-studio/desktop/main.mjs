@@ -1,15 +1,21 @@
 import { app, BrowserWindow, WebContentsView, ipcMain, dialog, session } from 'electron';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { mkdirSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { startStudioServer } from '../server.mjs';
 import { MuseBrowser } from '../muse-browser.mjs';
 import { EmbeddedMuseHost } from './embedded-host.mjs';
 
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const root = path.dirname(directory);
+const version = JSON.parse(readFileSync(path.join(root, 'package.json'), 'utf8')).version;
 const userData = path.resolve(process.env.MUSE_DESKTOP_DATA || path.join(root, '.data', 'muse-desktop'));
 mkdirSync(userData, { recursive: true, mode: 0o700 });
+const portFile = path.join(userData, 'studio-port');
+function savedStudioPort() {
+  try { const port = Number(readFileSync(portFile, 'utf8')); return Number.isInteger(port) && port >= 1024 && port <= 65535 ? port : 0; }
+  catch { return 0; }
+}
 app.setPath('userData', userData);
 app.setName('Muse AI Studio');
 app.commandLine.appendSwitch('remote-debugging-port', '0');
@@ -38,12 +44,15 @@ async function start() {
   museSession.setPermissionRequestHandler((_contents, _permission, callback) => callback(false));
   const proxyServer = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
   if (proxyServer) await museSession.setProxy({ proxyRules: proxyServer, proxyBypassRules: 'localhost;127.0.0.1' });
-  window = new BrowserWindow({ width: 1480, height: 1000, minWidth: 850, minHeight: 650, title: 'Muse AI Studio · 1 tài khoản / 10 luồng', autoHideMenuBar: true,
+  window = new BrowserWindow({ width: 1480, height: 1000, minWidth: 850, minHeight: 650, title: `Muse AI Studio ${version} · 1 tài khoản / 10 luồng`, autoHideMenuBar: true,
     webPreferences: { preload: path.join(directory, 'preload.cjs'), sandbox: true, contextIsolation: true, nodeIntegration: false } });
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
   host = new EmbeddedMuseHost({ window, userData, serviceURL });
   const muse = new MuseBrowser({ profileRoot: userData, accountProfile: userData, serviceURL, sessionFactory: () => host.openSession() });
-  runtime = await startStudioServer({ museDriver: muse, embeddedLogin: true });
+  const rememberPort = app.isPackaged && !process.env.PORT;
+  runtime = await startStudioServer({ museDriver: muse, embeddedLogin: true, ...(rememberPort ? { port: savedStudioPort() } : {}) });
+  // Keep the localStorage origin stable on later launches of a portable app.
+  if (rememberPort) writeFileSync(portFile, new URL(runtime.url).port);
   const studio = new WebContentsView({ webPreferences: { preload: path.join(directory, 'renderer-preload.cjs'), partition: 'persist:studio', sandbox: true, contextIsolation: true, nodeIntegration: false, webSecurity: true, backgroundThrottling: false } });
   studio.webContents.setWindowOpenHandler(({ url }) => url.startsWith(`blob:${runtime.url}/`) ? {
     action: 'allow', overrideBrowserWindowOptions: { parent: window, width: 1000, height: 750, autoHideMenuBar: true,
@@ -83,6 +92,7 @@ async function start() {
     else throw new Error('Unknown view');
   });
   await window.loadFile(path.join(directory, 'shell.html'));
+  window.webContents.send('studio:version', version);
   await studio.webContents.loadURL(runtime.url);
   window.on('close', event => { if (!closing) { event.preventDefault(); void shutdown(); } });
   console.log('Muse desktop ready: dang nhap trong tool, mot phien / toi da 10 luong.');

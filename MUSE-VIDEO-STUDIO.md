@@ -1,20 +1,14 @@
-# Muse AI Studio 1.4.5 · 10 luồng đồng thời
+# Muse AI Studio 1.4.6 · Bản Windows đầy đủ
 
-[Tải ZIP mới](https://github.com/seotro95/seotro/raw/refs/heads/main/Muse-Video-Workstation.zip) · [Hướng dẫn đầy đủ](muse-video-studio/README.md)
+[Bản Windows x64 đầy đủ](Muse-AI-Studio-Windows-x64.zip) · [Mã nguồn đầy đủ](Muse-Video-Workstation.zip) · [Hướng dẫn](muse-video-studio/README.md)
 
-**Bản 1.4.5 bổ sung kích hoạt ô Message ban đầu.** Khi chỉ có ô Message mang nhãn `prehydration` đang hiện, tool đặt con trỏ vào ô đó, bấm nếu cần, rồi chờ ô nhập thật trước khi gửi prompt. Bản trước bỏ qua hoàn toàn ô này. Thao tác kiểm tra ở nút **Kiểm tra ô Message** cũng dùng bước kích hoạt; không gửi yêu cầu tạo nội dung. Nếu vẫn chưa khởi tạo được, mở **Chi tiết trang luồng** để xem kết quả. Đóng hẳn tool cũ trước khi giải nén bản mới đè các tệp chương trình; giữ nguyên `.data` và `.env`.
+1. Giải nén **toàn bộ** bản Windows vào một thư mục mới.
+2. Mở **Muse AI Studio.exe** hoặc **BAT_DAU.bat**. Không cần Node.js, npm, Chrome hoặc bản cũ.
+3. Đăng nhập Muse ngay trong tool, bấm **← Về Studio** rồi **Kiểm tra phiên**.
+4. Nhập prompt hoặc TXT/SRT, chọn ảnh/video, bấm **TẠO 10 ẢNH / VIDEO**.
 
-**Một tài khoản Muse, tối đa 10 luồng ảnh/video chạy đồng thời trong các cuộc trò chuyện riêng. Đăng nhập ngay trong cửa sổ tool bằng tab Muse tích hợp; không cần cài hoặc mở Chrome riêng.**
+Không chép `.data`, `.env`, `node_modules` hoặc tệp chương trình từ bản cũ. Gói mới có runtime và các thư viện cần thiết; tạo hồ sơ đăng nhập mới khi chạy. Thanh trên và tiêu đề cửa sổ hiện **1.4.6**.
 
-1. Đóng tool cũ, giải nén ZIP mới, chạy `start.bat` (cần Node.js 24+; lần đầu cần Internet để tải runtime Electron chính thức).
-2. Bấm **Đăng nhập Muse trong tool**, hoàn tất đăng nhập trực tiếp trên trang Muse.
-3. Bấm **← Về Studio**, đợi **Đã xác minh**; có thể bấm Kiểm tra phiên để cập nhật thủ công.
-4. Nhập 10 prompt hoặc TXT/SRT, chọn ảnh/video, bấm **TẠO 10 ẢNH / TẠO 10 VIDEO**.
+Bản này xử lý ô Message vẫn giữ nhãn `prehydration`, chuyển ô nhập sau ký tự đầu và kiểm tra giữ đủ prompt trước khi nhấn gửi. Rich editor đang hiện được ưu tiên. Nếu Muse chưa xác nhận nhận prompt, tool báo riêng và không tự gửi lại.
 
-Số luồng hiện tại được hiển thị. Có thể dừng toàn bộ, chạy lại phần chưa xong, tải từng kết quả hoặc cả bộ. Giữ các chức năng ảnh 2K/4K, đồng nhất nhân vật, video từ prompt/ảnh, yêu cầu độ nét 720p/1080p/2K/4K và bảng số dư đọc được từ Muse.
-
-Bản 1.3 chạy tuần tự; bản 1.4 thay cả giao diện, máy chủ và các cuộc trò chuyện xử lý song song. Kênh gửi desktop tránh giới hạn 6 kết nối HTTP/1 của trình duyệt tới localhost. Mọi luồng dùng cùng một phiên, không cần các tài khoản khác.
-
-**Kết nối không chính thức; đã xác minh trên Electron thật với dịch vụ giả lập, chưa xác minh đăng nhập hoặc tạo media trên Muse.ai thật.** Muse có thể giới hạn render đồng thời hoặc không chấp nhận đăng nhập nhúng. Độ nét/model là yêu cầu qua prompt, không phải cam kết khả năng của dịch vụ. Xem [kết quả kiểm thử](muse-video-studio/VALIDATION.md).
-
-Không có phiên người dùng trong ZIP/Git. Phiên desktop lưu cục bộ trong `.data/muse-desktop`; không chia sẻ thư mục đó. Đăng nhập Chrome của bản cũ không tự chuyển sang Electron; dữ liệu cũ không bị xóa. Launcher Windows chưa được chạy trên Windows thật.
+Một tài khoản, tối đa 10 luồng ảnh/video của tool; hạn mức thực tế, mô hình, độ nét và khả năng tạo media do Muse quyết định. Kết nối giao diện không chính thức. Kiểm thử dùng dịch vụ giả lập; chưa xác minh tự động trên tài khoản Muse thật. Xem [kết quả kiểm thử](muse-video-studio/VALIDATION.md).

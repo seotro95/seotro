@@ -1,4 +1,5 @@
 const message = document.querySelector('#message');
+window.studioDesktop.onVersion(version => { document.querySelector('nav strong').textContent = `MUSE AI STUDIO ${version}`; });
 for (const name of ['studio', 'muse']) document.getElementById(name).onclick = async () => {
   message.textContent = '';
   try { await window.studioDesktop.show(name); }

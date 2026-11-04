@@ -78,6 +78,8 @@ export function errorInfo(error: unknown): { raw: string; hint: string } {
   if (/MUSE_LOGIN_REQUIRED/i.test(raw)) hint = 'Mở Tài khoản Muse, đăng nhập trong tool rồi bấm Kiểm tra phiên. Cả 10 luồng sử dụng chung tài khoản.';
   else if (/MUSE_SESSION_REFRESH_FAILED|MUSE_SESSION_CHECK_FAILED/i.test(raw)) hint = 'Chưa cập nhật được phiên Muse. Kiểm tra kết nối và tab Muse rồi bấm Kiểm tra phiên; thông tin đăng nhập vẫn được giữ trên máy.';
   else if (/MUSE_WORKSPACE_ORIGIN/i.test(raw)) hint = 'Trang luồng chuyển sang miền khác Muse. Hoàn tất đăng nhập trong tab Muse rồi kiểm tra lại phiên; chưa có prompt được gửi.';
+  else if (/MUSE_SUBMIT_NOT_ACKNOWLEDGED/i.test(raw)) hint = 'Muse chưa xác nhận đã nhận prompt. Mở cuộc trò chuyện kiểm tra trước khi thử lại để tránh tạo trùng; tool không tự gửi lại.';
+  else if (/MUSE_DRAFT_CHANGED|MUSE_EDITOR_CHANGED/i.test(raw)) hint = 'Ô Message thay đổi khi đang nhập. Tool dừng trước khi gửi; kiểm tra bản nháp trong cuộc trò chuyện.';
   else if (/MUSE_COMPOSER_NOT_READY/i.test(raw)) hint = 'Chưa tìm được ô nhập Message cho cảnh này. Bấm Kiểm tra ô Message ở bảng tài khoản để xem chi tiết trang luồng; chưa có prompt được gửi.';
   else if (/MUSE_COMPOSER_AMBIGUOUS/i.test(raw)) hint = 'Có nhiều ô nhập Message phù hợp cho cảnh này. Tool chưa gửi prompt để tránh chọn nhầm ô.';
   else if (/MUSE_BROWSER_UNAVAILABLE|MUSE_PROFILE_BUSY/i.test(raw)) hint = 'Kiểm tra Chrome/Edge trên máy chạy tool và cửa sổ hồ sơ Muse đang mở. Thông tin chi tiết ở mã lỗi gốc.';

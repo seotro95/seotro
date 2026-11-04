@@ -7,7 +7,8 @@ import { readMuseBalance } from './muse-balance.mjs';
 
 // Public UI selectors observed in community Muse clients, not an official SDK.
 // Muse retains a prehydration textarea before its hydrated rich editor. It may
-// need focus/click to initialize that editor, but must never receive a prompt.
+// need focus or the first keystroke to initialize a rich editor. Some clients
+// retain that attribute on a working textarea, so it is a scoped fallback.
 const EDITOR = '[data-hatch-composer-root] textarea:not([data-hatch-composer-prehydration-input="true"]):not([readonly]):not([disabled]):visible, [data-hatch-composer-root] [contenteditable="true"]:visible, [data-hatch-composer-root] [contenteditable="plaintext-only"]:visible';
 const PREHYDRATION = '[data-hatch-composer-root] textarea[data-hatch-composer-prehydration-input="true"]:not([readonly]):not([disabled]):visible';
 const FIELD = 'textarea:not([data-hatch-composer-prehydration-input="true"]):not([readonly]):not([disabled]), [contenteditable="true"], [contenteditable="plaintext-only"]';
@@ -18,6 +19,9 @@ const NEW_CHAT = /^(new chat|new conversation|cuộc trò chuyện mới|trò ch
 const MESSAGES = '[data-message-item]';
 const STOP = '[data-testid="hatch-composer-stop-button"]';
 const NOTICE = '[data-testid="assistant-response-error-notice"]';
+// Chromium's rich editor can expose extra blank lines via innerText after fill.
+// Compare normalized layout whitespace; the original prompt is still entered.
+const comparableText = text => text.replace(/\r\n?/g, '\n').replace(/\u00a0/g, ' ').replace(/\n+/g, '\n').trim();
 const fail = (code, text, status = 502) => Object.assign(new Error(`${code}: ${text}`), { status });
 const pause = (ms, signal) => new Promise((resolve, reject) => {
   if (signal?.aborted) return reject(signal.reason);
@@ -28,7 +32,7 @@ const pause = (ms, signal) => new Promise((resolve, reject) => {
 });
 
 export class MuseBrowser {
-  constructor({ profileRoot, accountProfile, serviceURL = 'https://muse.ai/', launchOptions, sessionFactory, timeoutMs = 600000, pollMs = 500, quietMs = 1500, composerTimeoutMs = 45000 } = {}) {
+  constructor({ profileRoot, accountProfile, serviceURL = 'https://muse.ai/', launchOptions, sessionFactory, timeoutMs = 600000, pollMs = 500, quietMs = 1500, composerTimeoutMs = 45000, submitTimeoutMs = 15000 } = {}) {
     this.profileRoot = profileRoot;
     this.serviceURL = serviceURL;
     this.launchOptions = launchOptions;
@@ -39,6 +43,7 @@ export class MuseBrowser {
     this.pollMs = pollMs;
     this.quietMs = quietMs;
     this.composerTimeoutMs = composerTimeoutMs;
+    this.submitTimeoutMs = submitTimeoutMs;
     this.active = null;
     this.profilePath = accountProfile || path.join(this.profileRoot, 'slot-01');
     this.accounts = [{ id: 1, state: existsSync(this.profile(1)) ? 'saved' : 'disconnected', authenticated: false, sessionAuthenticated: false, composerReady: false, connectionMessage: '', checkedAt: null, balance: null }];
@@ -172,24 +177,23 @@ export class MuseBrowser {
     return frames;
   }
   async activateComposerPlaceholder(page, timeout) {
+    const placeholder = await this.initialComposer(page);
+    if (!placeholder) return false;
+    if ((await placeholder.inputValue()).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Ô Message ban đầu đang có bản nháp. Tool giữ nguyên nội dung và chưa gửi prompt.', 409);
+    try {
+      await placeholder.focus({ timeout: Math.min(1500, timeout) });
+      if (await placeholder.isVisible() && !await placeholder.evaluate(el => el === el.ownerDocument.activeElement)) await placeholder.click({ timeout: Math.min(1500, timeout) });
+    } catch (error) { if (error.name !== 'TimeoutError') throw error; }
+    return true;
+  }
+  async initialComposer(page) {
     const matches = [];
     for (const frame of await this.composerFrames(page)) {
       const candidates = frame.locator(PREHYDRATION);
       for (let index = 0, count = await candidates.count(); index < count; index++) matches.push(candidates.nth(index));
     }
     if (matches.length > 1) throw fail('MUSE_COMPOSER_AMBIGUOUS', 'Có nhiều ô Message ban đầu trong trang Muse. Chưa kích hoạt hoặc gửi prompt để tránh chọn nhầm ô.');
-    if (!matches.length) return false;
-    const placeholder = matches[0];
-    if ((await placeholder.inputValue()).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Ô Message ban đầu đang có bản nháp. Tool giữ nguyên nội dung và chưa gửi prompt.', 409);
-    try {
-      // A background Electron view can receive a click without focusing its
-      // iframe input. DOM focus initializes focus-driven editors there too.
-      await placeholder.focus({ timeout: Math.min(1500, timeout) });
-      if (await placeholder.isVisible()) await placeholder.click({ timeout: Math.min(1500, timeout) });
-    }
-    catch (error) { if (error.name !== 'TimeoutError') throw error; }
-    // Focus/click only. The hydrated editor must still pass findComposer().
-    return true;
+    return matches[0] || null;
   }
   async newChatControl(page) {
     for (const frame of await this.composerFrames(page)) {
@@ -227,10 +231,18 @@ export class MuseBrowser {
     const deadline = Date.now() + this.composerTimeoutMs;
     let opened = false;
     let activated = false;
+    let activatedAt = 0;
     do {
       const editor = await this.findComposer(page);
       if (editor) return editor;
-      if (!activated) activated = await this.activateComposerPlaceholder(page, Math.max(1, deadline - Date.now()));
+      if (!activated) {
+        activated = await this.activateComposerPlaceholder(page, Math.max(1, deadline - Date.now()));
+        if (activated) activatedAt = Date.now();
+      }
+      if (activated && Date.now() - activatedAt >= 500) {
+        const initial = await this.initialComposer(page);
+        if (initial) return initial;
+      }
       if (openConversation && !opened && !activated) {
         const entry = await this.newChatControl(page);
         if (entry) { await entry.click(); opened = true; }
@@ -256,7 +268,7 @@ export class MuseBrowser {
     return frame;
   }
   async attach(page, image) {
-    const editor = await this.waitForComposer(page);
+    const editor = await this.findComposer(page) || await this.initialComposer(page) || await this.waitForComposer(page);
     const hatch = editor.locator('xpath=ancestor::*[@data-hatch-composer-root][1]');
     const form = editor.locator('xpath=ancestor::form[1]');
     const area = await hatch.count() ? hatch : form;
@@ -310,19 +322,49 @@ export class MuseBrowser {
     }
   }
   async checkComposer(signal) { return this.turn({ accountId: 1, checkOnly: true, signal }); }
+  async editorText(editor) {
+    return comparableText(await editor.evaluate(el => el.tagName === 'TEXTAREA' ? el.value : el.innerText || el.textContent || ''));
+  }
+  async writeMessage(page, message, signal) {
+    let editor = await this.findComposer(page) || await this.initialComposer(page) || await this.waitForComposer(page);
+    if ((await this.editorText(editor)).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Ô Message đang có bản nháp. Tool chưa ghi đè hoặc gửi prompt.', 409);
+    let ownedText = '';
+    const prefix = Array.from(message)[0];
+    const expectedText = comparableText(message);
+    if (await editor.getAttribute('data-hatch-composer-prehydration-input') === 'true') {
+      // Enter the first character through the input element. It may replace the
+      // textarea and transfer only this prefix into a hydrated editor.
+      await editor.fill(prefix);
+      ownedText = comparableText(prefix);
+      await pause(100, signal);
+    }
+    for (let attempt = 0; attempt < 3; attempt++) {
+      signal.throwIfAborted();
+      editor = await this.findComposer(page) || await this.initialComposer(page) || await this.waitForComposer(page);
+      const text = await this.editorText(editor);
+      if (text && text !== ownedText && text !== expectedText && text !== comparableText(prefix)) throw fail('MUSE_DRAFT_CHANGED', 'Nội dung ô Message đã thay đổi trong lúc nhập. Chưa nhấn gửi để tránh ghi đè bản nháp.', 409);
+      if (text !== expectedText) await editor.fill(message);
+      ownedText = expectedText;
+      await pause(100, signal);
+      const current = await this.findComposer(page) || await this.initialComposer(page) || await this.waitForComposer(page);
+      if (await this.editorText(current) === expectedText) return current;
+    }
+    throw fail('MUSE_EDITOR_CHANGED', 'Muse đổi ô nhập nhưng chưa giữ đủ prompt. Chưa nhấn gửi. Kiểm tra cuộc trò chuyện rồi thử lại.', 409);
+  }
   async sendTurn({ page, prompt, image, output, signal, onSubmit }) {
-    const editor = await this.waitForComposer(page);
+    let editor = await this.findComposer(page) || await this.initialComposer(page) || await this.waitForComposer(page);
     if ((await editor.innerText().catch(() => '')).trim() || (await editor.inputValue().catch(() => '')).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có nội dung chưa gửi. Gửi hoặc xóa bản nháp đó trước; tool không ghi đè.', 409);
     if (await editor.locator('xpath=ancestor::*[@data-hatch-composer-root or self::form][1]').locator('img[src^="blob:"]:not([data-message-item] *)').count()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có ảnh chưa gửi. Xử lý bản nháp đó trước; tool không gửi kèm ảnh cũ.', 409);
     if (image) await this.attach(page, image);
     signal.throwIfAborted();
     const marker = `studio-request-${randomUUID()}`;
     const message = `${prompt}\n\n[Request marker: ${marker}. Do not include this marker in your reply.]`;
-    await editor.fill(message);
+    editor = await this.writeMessage(page, message, signal);
     signal.throwIfAborted();
     onSubmit();
     await editor.press('Enter');
     const deadline = Date.now() + this.timeoutMs;
+    const acknowledgementDeadline = Date.now() + Math.min(this.submitTimeoutMs, this.timeoutMs);
     let lastText = '';
     let stableSince = Date.now();
     try {
@@ -340,6 +382,7 @@ export class MuseBrowser {
             streaming: visible(document.querySelector(stop)), error: error?.innerText || '' };
         }, { messages: MESSAGES, stop: STOP, notice: NOTICE, marker });
         if (result.error) throw fail('MUSE_GENERATION_ERROR', result.error);
+        if (!result.anchored && !result.streaming && Date.now() >= acknowledgementDeadline) throw fail('MUSE_SUBMIT_NOT_ACKNOWLEDGED', 'Muse chưa xác nhận đã nhận prompt sau thao tác gửi. Tool không tự gửi lại. Mở cuộc trò chuyện kiểm tra trước khi thử lại để tránh tạo trùng.', 504);
         if (result.text !== lastText) { lastText = result.text; stableSince = Date.now(); }
         if (output === 'text' && result.anchored && result.text && !result.streaming && Date.now() - stableSince >= this.quietMs) return { text: result.text };
         const media = output === 'video' ? result.videos[0] : output === 'image' ? result.images[0] : null;

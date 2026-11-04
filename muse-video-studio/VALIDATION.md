@@ -1,4 +1,23 @@
-# Xác minh bản 1.4.5
+# Xác minh bản 1.4.6
+
+## Kết quả của bản hiện tại
+
+- Người dùng xác nhận gửi/nhận tin nhắn thủ công được trong tab Muse của tool. Log vẫn có một ô prehydration đang hiện. Bản này hỗ trợ textarea đang hoạt động dù còn nhãn đó và trường hợp chuyển sang rich editor sau ký tự đầu.
+- `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge`: **27/27 Node tests qua** (26 kịch bản và một nhóm). Có ca textarea giữ nhãn cũ, emoji, chuyển editor sau nhập đầu, bản nháp, dữ liệu tham chiếu, media mới và 10 yêu cầu đồng thời. Ô inert không tạo kết quả giả và chỉ nhận đúng một Enter; tool báo chưa có xác nhận.
+- `DISPLAY=:97 MUSE_ELECTRON_TEST_NO_SANDBOX=1 npm run test:desktop`: **8/8 Node tests qua** (7 kịch bản và một nhóm), với cả 10 luồng chỉ tạo rich editor sau input đầu tiên. Kiểm tra Message không render; 10 ảnh khác nhau, 10 video từ ảnh, Stop, lưu phiên và đăng nhập popup đều qua. Cờ tắt sandbox chỉ dùng trong fixture cloud.
+- `tests/portable.test.mjs`: **1/1 qua** với executable đóng gói Linux, hồ sơ tạm mới, `PATH` không có Node/npm, `NODE_PATH` rỗng và không cấu hình PORT. Xác nhận `app.isPackaged=true`, phiên bản 1.4.6, cổng tự chọn và giữ ổn định, đăng nhập mới và tạo một ảnh qua ô Message giữ nhãn prehydration. Sau đóng/mở lại, kịch bản ở cảnh 2 vẫn giữ nguyên trên cùng origin.
+- `npm test`: parser/state 7 ca, máy chủ 7 ca trong một nhóm, lệnh mở trình duyệt 3 ca, phân tích số dư 2 ca đều qua.
+- `npm run build`, kiểm tra cú pháp Node/Python và whitespace Git đã qua. Cảnh báo `use client` của thư viện icon không ngăn build.
+- Chromium có thể thêm dòng trống khi đọc `innerText` sau `fill`; đã đo trực tiếp. So sánh nội dung chuẩn hóa phần dòng trống hiển thị nhưng vẫn nhập văn bản gốc. Chưa đủ prompt hoặc nội dung đổi ngoài yêu cầu thì không Enter. Sau Enter chưa có xác nhận thì không tự gửi lại.
+
+## Gói đầy đủ
+
+- Runtime Windows x64 Electron 45.2.2 tải từ release chính thức và kiểm tra SHA-256 theo manifest của npm package đã khóa. App đã build, Playwright Core và giấy phép được sao chép vào `resources/app`; không cần npm install trên máy người dùng.
+- `scripts/package_portable.py` tạo gói Windows/Linux, kiểm tra đường dẫn khi giải nén runtime và CRC của ZIP. `BUILD-MANIFEST.json` ghi phiên bản và SHA-256 từng tệp app.
+- Không đưa `.data`, `.env`, phiên đăng nhập hoặc node_modules từ hồ sơ người dùng vào gói. Bản Windows tạo dữ liệu mới khi chạy và hiện phiên bản trong thanh ứng dụng.
+- Cloud Linux không thực thi được Windows EXE. Kiểm thử executable độc lập dùng Linux và cùng bố cục app/dependency. Chưa tự động tạo nội dung trên Muse thật; tài khoản, model, hạn mức đồng thời và độ nét thực tế vẫn do dịch vụ quyết định.
+
+## Các kết quả lịch sử trước 1.4.6
 
 ## Kích hoạt Message trong bản 1.4.5
 
