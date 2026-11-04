@@ -1,23 +1,18 @@
-# Muse AI Video Workstation 1.2.0
+# Muse AI Video Workstation 1.3.0 — một tài khoản
 
 [Tải ZIP Windows/Linux/macOS](https://github.com/seotro95/seotro/raw/refs/heads/main/Muse-Video-Workstation.zip) · [Mã nguồn và hướng dẫn](muse-video-studio/README.md)
 
-Bản 1.2.0 có cầu nối đăng nhập tài khoản Muse bằng Chrome/Edge riêng cho từng slot. Bạn tự đăng nhập trong cửa sổ do tool mở; tool dùng phiên đó để gửi prompt/ảnh và nhận video mới. Không cần tự dựng adapter cho phương án này.
+**Chỉ đăng nhập một tài khoản Muse. Bấm TẠO 10 VIDEO hoặc TẠO 10 ẢNH một lần, tool tự chạy cả bộ trên cùng phiên đó.** Không còn email từng ô, danh sách 10 tài khoản, gán riêng hoặc chọn tài khoản dùng chung.
 
-**Đây là kết nối trình duyệt không chính thức, đã kiểm thử với trang giả lập, chưa xác minh đăng nhập và render thật trên Muse.ai.** Mô hình/thời lượng/khung hình được gửi dưới dạng yêu cầu trong prompt; cần xem video trả về để kiểm tra khả năng thực tế của tài khoản.
+1. Đóng máy chủ của bản cũ, giải nén ZIP mới. Cần Node.js 24+ và Chrome hoặc Edge.
+2. Chạy `start.bat` trên Windows hoặc `bash start.sh` trên Linux/macOS có desktop.
+3. Bấm **Kết nối Muse**, đăng nhập trong cửa sổ được mở rồi **Kiểm tra phiên**.
+4. Nhập 10 prompt hoặc TXT/SRT, chọn ảnh/video, rồi bấm nút **Tạo 10** một lần.
 
-1. Cài Node.js 24+ và Google Chrome hoặc Microsoft Edge.
-2. Giải nén ZIP vào thư mục mới, chạy `start.bat` trên Windows hoặc `bash start.sh` trên Linux/macOS có giao diện đồ họa.
-3. Trong tool chọn **10 Tài khoản Muse → Kết nối #1**.
-4. Đăng nhập Muse trong cửa sổ được mở → quay lại tool bấm **Kiểm tra phiên #1**.
-5. Khi có **Đã xác minh**, bật **Tự dùng chung cho ô chưa gán tài khoản**. Các cảnh có thể tạo bằng một phiên này; không cần đăng nhập 10 lần. Có thể gán riêng từng cảnh nếu muốn.
+Các cảnh được xử lý lần lượt để không lẫn phản hồi trong cùng phiên. Đây không phải cam kết Muse xử lý đồng thời 10 tác vụ. Cảnh chờ được ghi rõ; có thể dừng và tiếp tục phần chưa xong. Cấu hình gán tài khoản của bản cũ được bỏ qua khi mở dự án.
 
-Phiên lưu cục bộ trong `.data/muse-accounts`, không nằm trong ZIP hoặc dự án JSON. Không chia sẻ thư mục này. Email trong bảng chỉ là nhãn, không thay thế đăng nhập. Giữ cửa sổ máy chủ chạy khi dùng tool.
+Giữ các chức năng: số dư token/credit có nhãn, ảnh hàng loạt 2K/4K, bật/tắt đồng nhất nhân vật, video từ prompt hoặc ảnh với mức 720p/1080p/2K/4K, chuyển bộ ảnh sang video, xem/tải kết quả và dự án JSON. Nếu Muse chưa hiển thị số dư hoặc trả tệp thấp hơn mức yêu cầu, tool báo rõ.
 
-Bản này có tab **Tạo ảnh hàng loạt** từ prompt/TXT/SRT, mức yêu cầu 2K/4K và tùy chọn giữ nhân vật. Video có chế độ **Từ prompt / Từ ảnh**, mức 720p/1080p/2K/4K. Bộ ảnh đã tạo có thể chuyển sang ảnh đầu vào video mà không mất kết quả ảnh.
+**Kết nối trình duyệt không chính thức; đã kiểm thử bằng trang giả lập, chưa xác minh trên tài khoản Muse thật.** Khả năng tạo media, tốc độ, hạn mức và đầu ra 4K do Muse quyết định. Không có dữ liệu phiên trong ZIP/Git. Thư mục phiên cũ trên máy bạn không bị tự xóa.
 
-Bảng token/credit chỉ hiển thị số đọc được từ vùng số dư Muse có nhãn và thời điểm đọc. Nếu không có số tin cậy sẽ ghi **Chưa đọc được**. Tệp trả thấp hơn độ phân giải yêu cầu được đánh dấu rõ; không tự gắn nhãn 4K khi chưa đạt kích thước.
-
-Nếu Muse đổi giao diện hoặc tài khoản không có khả năng tạo video, tool sẽ báo lỗi; không dùng clip mẫu để giả lập thành công. Chế độ kiểm thử riêng luôn có nhãn. Có thể dùng adapter API riêng ở cấu hình nâng cao.
-
-Xem [kết quả xác minh](muse-video-studio/VALIDATION.md). Launcher Windows chưa được chạy trên Windows thật.
+Xem [kết quả xác minh](muse-video-studio/VALIDATION.md). Launcher Windows chưa chạy trên máy Windows thật.

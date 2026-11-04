@@ -17,7 +17,7 @@ const adapter = http.createServer(async (req, res) => {
   if (adapterMode === 'error') { res.writeHead(429); return res.end(JSON.stringify({ error: '429 quota exhausted; Bearer test-bridge-secret' })); }
   res.end(JSON.stringify(req.url === '/text' ? { text: 'A cinematic scene in English.' } : req.url === '/image' ? { base64: image, mimeType: 'image/png' } : { base64: clip, mimeType: 'video/mp4' }));
 });
-const payload = { accountId: 7, prompt: 'A cinematic forest scene', model: 'Omni 1.1 Flash', aspectRatio: '9:16', duration: 6, resolution: '720p', image: { imageBytes: 'aGVsbG8=', mimeType: 'image/png' } };
+const payload = { accountId: 1, prompt: 'A cinematic forest scene', model: 'Omni 1.1 Flash', aspectRatio: '9:16', duration: 6, resolution: '720p', image: { imageBytes: 'aGVsbG8=', mimeType: 'image/png' } };
 
 test('server adapter integration (local test server, not real Muse.ai)', async t => {
   await new Promise(resolve => adapter.listen(0, '127.0.0.1', resolve));
@@ -38,17 +38,19 @@ test('server adapter integration (local test server, not real Muse.ai)', async t
       assert.equal(JSON.stringify(status).includes('test-bridge-secret'), false);
       assert.equal((await fetch(base + '/.env')).status, 404);
     });
-    await t.test('passes separate account routing, image and model to authenticated adapter', async () => {
+    await t.test('passes the single account, image and model to authenticated adapter', async () => {
       const result = await post('/api/video', payload);
       assert.equal(result.status, 200);
       assert.equal((await result.json()).base64, clip);
       const call = calls.at(-1);
       assert.equal(call.path, '/video'); assert.equal(call.auth, 'Bearer test-bridge-secret');
-      assert.deepEqual(call.body, { accountId: 7, prompt: payload.prompt, modelDisplayName: payload.model, aspectRatio: '9:16', durationSeconds: 6, resolution: '720p', characterLock: true, sourceMode: 'text', referenceImage: { base64: 'aGVsbG8=', mimeType: 'image/png' } });
+      assert.deepEqual(call.body, { accountId: 1, prompt: payload.prompt, modelDisplayName: payload.model, aspectRatio: '9:16', durationSeconds: 6, resolution: '720p', characterLock: true, sourceMode: 'text', referenceImage: { base64: 'aGVsbG8=', mimeType: 'image/png' } });
     });
     await t.test('rejects invalid account/model constraints and cross-origin writes before adapter', async () => {
       const count = calls.length;
       assert.equal((await post('/api/video', { ...payload, accountId: 11 })).status, 400);
+      assert.equal((await post('/api/video', { ...payload, accountId: 2 })).status, 400);
+      assert.equal((await post('/api/accounts/2/connect', {})).status, 400);
       assert.equal((await post('/api/video', { ...payload, model: 'Veo 3.1 - Fast', duration: 4 })).status, 400);
       assert.equal((await post('/api/video', payload, { Origin: 'https://other-site.example' })).status, 403);
       assert.equal(calls.length, count);
@@ -67,9 +69,9 @@ test('server adapter integration (local test server, not real Muse.ai)', async t
       assert.equal(fromImage.status, 200); assert.equal(calls.at(-1).body.referenceImage.base64, payload.image.imageBytes);
     });
     await t.test('routes enhancement to text endpoint', async () => {
-      const result = await post('/api/text', { accountId: 2, prompt: 'Enhance this scene' });
+      const result = await post('/api/text', { accountId: 1, prompt: 'Enhance this scene' });
       assert.equal((await result.json()).text, 'A cinematic scene in English.');
-      assert.equal(calls.at(-1).path, '/text'); assert.equal(calls.at(-1).body.accountId, 2);
+      assert.equal(calls.at(-1).path, '/text'); assert.equal(calls.at(-1).body.accountId, 1);
     });
     await t.test('preserves credit error code and redacts adapter secret', async () => {
       adapterMode = 'error';

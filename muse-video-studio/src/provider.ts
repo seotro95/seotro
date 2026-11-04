@@ -60,7 +60,7 @@ async function demoMedia(kind: Settings['output'], signal: AbortSignal): Promise
   let binary = ''; for (const byte of bytes) binary += String.fromCharCode(byte);
   return { base64: btoa(binary), mimeType: kind === 'image' ? 'image/png' : 'video/mp4' };
 }
-async function generate(kind: Settings['output'], prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, accountId: number) {
+async function generate(kind: Settings['output'], prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal) {
   signal.throwIfAborted();
   const fullPrompt = [prompt.trim(), settings.modifier.trim()].filter(Boolean).join('\n\n');
   if (!prompt.trim()) throw new Error('Hãy nhập prompt cho cảnh trước khi tạo.');
@@ -69,19 +69,19 @@ async function generate(kind: Settings['output'], prompt: string, reference: Ref
   if (sendReference && !reference.base64) throw new Error('Ảnh đầu vào chưa có dữ liệu để gửi đến Muse.');
   const prepared = sendReference && settings.mode !== 'demo' ? await referencePayload(reference, signal) : null;
   const result = settings.mode === 'demo' ? await demoMedia(kind, signal) : await api(`/api/${kind}`, {
-    accountId, prompt: fullPrompt, aspectRatio: settings.aspectRatio, resolution: kind === 'image' ? settings.imageResolution : settings.resolution,
+    accountId: 1, prompt: fullPrompt, aspectRatio: settings.aspectRatio, resolution: kind === 'image' ? settings.imageResolution : settings.resolution,
     characterLock: settings.r2v, ...(kind === 'video' ? { model: settings.model, duration: settings.duration, sourceMode: settings.videoInput } : {}),
     image: prepared ? { imageBytes: prepared.imageBytes, mimeType: prepared.mimeType } : undefined
   }, signal);
   signal.throwIfAborted();
   return { ...await mediaResult(kind, result, settings), referenceCompressed: prepared?.compressed || false };
 }
-export const generateVideo = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, accountId: number) => generate('video', prompt, reference, settings, signal, accountId);
-export const generateImage = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, accountId: number) => generate('image', prompt, reference, settings, signal, accountId);
-export async function enhancePrompt(prompt: string, mode: Mode, signal: AbortSignal, accountId: number): Promise<string> {
+export const generateVideo = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal) => generate('video', prompt, reference, settings, signal);
+export const generateImage = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal) => generate('image', prompt, reference, settings, signal);
+export async function enhancePrompt(prompt: string, mode: Mode, signal: AbortSignal): Promise<string> {
   if (mode === 'demo') throw new Error('Chế độ kiểm thử không có AI Enhance. Kết nối Muse AI để trau chuốt thật.');
   const instruction = `Rewrite this scene as one concise cinematic visual prompt in English. Preserve the characters, action and narrative. Add specific composition and lighting. Return only the rewritten prompt, no headings. Scene:\n${prompt}`;
-  const result = await api('/api/text', { prompt: instruction, accountId }, signal);
+  const result = await api('/api/text', { prompt: instruction, accountId: 1 }, signal);
   signal.throwIfAborted();
   if (typeof result.text !== 'string' || !result.text.trim()) throw new Error('AI không trả về prompt văn bản.');
   return result.text.trim().slice(0, 8000);
@@ -92,4 +92,4 @@ export async function downloadVideo(media: MediaResult, id: number) {
   const a = document.createElement('a'); a.href = media.url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
 }
 export const providerStatus = () => api('/api/status');
-export const accountAction = (id: number, action: 'connect' | 'check' | 'close') => api(`/api/accounts/${id}/${action}`, {});
+export const accountAction = (action: 'connect' | 'check' | 'close') => api(`/api/account/${action}`, {});

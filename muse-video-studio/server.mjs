@@ -13,7 +13,7 @@ const port = Number(process.env.PORT || 8788);
 const host = '127.0.0.1';
 const transport = process.env.MUSE_TRANSPORT || (process.env.MUSE_ADAPTER_URL ? 'adapter' : 'browser');
 if (!['browser', 'adapter'].includes(transport)) throw new Error('MUSE_TRANSPORT must be browser or adapter.');
-const muse = transport === 'browser' ? new MuseBrowser({ profileRoot: path.resolve(process.env.MUSE_PROFILE_ROOT || path.join(ROOT, '.data', 'muse-accounts')) }) : null;
+const muse = transport === 'browser' ? new MuseBrowser({ profileRoot: path.resolve(process.env.MUSE_PROFILE_ROOT || path.join(ROOT, '.data', 'muse-accounts')), accountProfile: process.env.MUSE_ACCOUNT_PROFILE }) : null;
 const MAX_BODY = 12 * 1024 * 1024;
 let busy = false;
 const vite = dev ? await (await import('vite')).createServer({ root: ROOT, server: { middlewareMode: true, hmr: false } }) : null;
@@ -31,7 +31,7 @@ async function body(req) {
 function validate(data, kind) {
   const invalid = message => { throw Object.assign(new Error(message), { status: 400 }); };
   if (!data || typeof data.prompt !== 'string' || !data.prompt.trim() || data.prompt.length > 12000) invalid('Prompt cần có 1–12.000 ký tự.');
-  if (!Number.isInteger(data.accountId) || data.accountId < 1 || data.accountId > 10) invalid('accountId cần nằm trong 1–10.');
+  if (data.accountId !== 1) invalid('ACCOUNT_INVALID: Chỉ sử dụng tài khoản Muse duy nhất (accountId=1).');
   if (kind === 'text') return;
   if (!['16:9', '9:16'].includes(data.aspectRatio)) invalid('Tỉ lệ khung hình không hợp lệ.');
   if (kind === 'video') {
@@ -84,21 +84,24 @@ async function api(req, res, pathname) {
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
   if (!req.headers['content-type']?.startsWith('application/json')) return json(res, 415, { error: 'Cần Content-Type application/json.' });
-  const accountRoute = pathname.match(/^\/api\/accounts\/(\d+)\/(connect|check|close)$/);
-  if (!['/api/video', '/api/image', '/api/text'].includes(pathname) && !accountRoute) return json(res, 404, { error: 'API không tồn tại.' });
+  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close)$/);
+  const legacyAccountRoute = pathname.match(/^\/api\/accounts\/(\d+)\/(connect|check|close)$/);
+  if (!['/api/video', '/api/image', '/api/text'].includes(pathname) && !accountRoute && !legacyAccountRoute) return json(res, 404, { error: 'API không tồn tại.' });
   let acquired = false;
   const abort = new AbortController();
   res.on('close', () => abort.abort());
   const timeout = setTimeout(() => abort.abort(new Error('TIMEOUT: Hết 10 phút chờ. Yêu cầu đã gửi có thể vẫn được tính phí.')), 10 * 60 * 1000);
   try {
     const data = await body(req);
-    if (accountRoute) {
+    if (accountRoute || legacyAccountRoute) {
+      const accountId = legacyAccountRoute ? Number(legacyAccountRoute[1]) : 1;
+      const action = accountRoute ? accountRoute[1] : legacyAccountRoute[2];
+      if (accountId !== 1) return json(res, 400, { error: 'ACCOUNT_INVALID: Bản này chỉ dùng một tài khoản Muse.' });
       if (!muse) return json(res, 409, { error: 'Tài khoản đang do adapter riêng quản lý. Chọn MUSE_TRANSPORT=browser để đăng nhập bằng Chrome/Edge.' });
       if (busy) return json(res, 409, { error: 'Đang có tác vụ. Đợi hoàn tất trước khi đổi cửa sổ tài khoản.' });
-      const accountId = Number(accountRoute[1]);
       muse.account(accountId);
       busy = acquired = true;
-      if (accountRoute[2] === 'close') { if (muse.active?.id === accountId) await muse.close(); }
+      if (action === 'close') { if (muse.active?.id === accountId) await muse.close(); }
       else await muse.connect(accountId);
       return json(res, 200, { accounts: muse.snapshot() });
     }
@@ -148,7 +151,7 @@ server.listen(port, host, () => {
   const url = `http://${host}:${server.address().port}`;
   console.log(`Muse Studio: ${url} · ${dev ? 'development' : 'production'}`);
   console.log('Giu cua so nay mo khi su dung. Ctrl+C chi dung khi muon tat tool.');
-  console.log(transport === 'browser' ? 'Ket noi Muse: mo 10 Tai khoan Muse trong tool, bam Ket noi va dang nhap tren Chrome/Edge.' : 'Ket noi Muse qua adapter rieng.');
+  console.log(transport === 'browser' ? 'Ket noi Muse: bam Tai khoan Muse va dang nhap mot lan de tao ca 10 anh/video.' : 'Ket noi Muse qua adapter rieng.');
   if (process.argv.includes('--open')) openBrowser(url);
 });
 server.on('error', error => {

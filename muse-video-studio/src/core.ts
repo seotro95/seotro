@@ -4,13 +4,13 @@ export type Model = typeof MUSE_MODELS[number];
 export type Resolution = typeof VIDEO_RESOLUTIONS[number];
 export type Mode = 'muse' | 'demo';
 export type Output = 'video' | 'image';
-export type Status = 'ready' | 'running' | 'done' | 'error' | 'cancelled';
+export type Status = 'ready' | 'queued' | 'running' | 'done' | 'error' | 'cancelled';
 export type Reference = { id: string; name: string; url: string; base64?: string; mimeType?: string };
-export type Settings = { model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode; shareUnassigned: boolean; sharedAccountId: number | null };
+export type Settings = { model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
 export type MediaResult = { kind: Output; base64: string; mimeType: string; url: string; demo: boolean; referenceCompressed?: boolean; metadata?: { duration?: number; width: number; height: number }; requestedResolution?: Resolution; aspectRatio?: Settings['aspectRatio'] };
 export type VideoResult = MediaResult;
 export type ImageResult = MediaResult;
-export type Scene = { id: number; email: string; enabled: boolean; accountId: number | null; prompt: string; reference: Reference | null; status: Status; error?: string; video?: VideoResult; image?: ImageResult; enhancing?: boolean };
+export type Scene = { id: number; enabled: boolean; prompt: string; reference: Reference | null; status: Status; error?: string; video?: VideoResult; image?: ImageResult; enhancing?: boolean };
 export const ADVENTURE = [
   'Một người thám hiểm bước vào ngôi đền cổ xưa trong rừng nhiệt đới, tia nắng vàng rọi xuyên qua tán lá, máy quay tiến chậm từ phía sau.',
   'Khám phá bức tường khắc cổ ngữ bí ẩn phát sáng ánh lân tinh xanh ngọc, máy quay lia chậm ngang qua các chi tiết.',
@@ -35,8 +35,8 @@ export const RUNWAY = [
   'Người mẫu ngoái nhìn qua vai với nụ cười nhẹ, camera chân dung 85mm.',
   'Người mẫu đứng giữa sân khấu trong ánh đèn cuối buổi, toàn cảnh runway sang trọng.'
 ];
-export const DEFAULT_SETTINGS: Settings = { model: 'Omni 1.1 Flash', aspectRatio: '16:9', duration: 4, resolution: '720p', imageResolution: '2k', output: 'video', videoInput: 'text', autoSync: true, r2v: true, modifier: '', mode: 'muse', shareUnassigned: true, sharedAccountId: null };
-export const createScenes = (): Scene[] => ADVENTURE.map((prompt, i) => ({ id: i + 1, email: `muse_slot_${String(i + 1).padStart(2, '0')}@muse.local`, enabled: true, accountId: null, prompt, reference: null, status: 'ready' }));
+export const DEFAULT_SETTINGS: Settings = { model: 'Omni 1.1 Flash', aspectRatio: '16:9', duration: 4, resolution: '720p', imageResolution: '2k', output: 'video', videoInput: 'text', autoSync: true, r2v: true, modifier: '', mode: 'muse' };
+export const createScenes = (): Scene[] => ADVENTURE.map((prompt, i) => ({ id: i + 1, enabled: true, prompt, reference: null, status: 'ready' }));
 
 // Subtitle blocks become scenes; TXT uses paragraphs, or one non-empty line per scene.
 export function parseScript(text: string): string[] {
@@ -60,16 +60,8 @@ export function parseScript(text: string): string[] {
   return (paragraphs.length > 1 ? paragraphs : normalized.split('\n'))
     .map(s => s.replace(/^\s*(?:#?\d+[.)\-:]|[-•])\s+/, '').trim()).filter(Boolean);
 }
-export const extractEmails = (text: string): string[] => [...new Set(text.match(/[A-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9](?:[A-Z0-9-]*[A-Z0-9])?(?:\.[A-Z0-9](?:[A-Z0-9-]*[A-Z0-9])?)+/gi) ?? [])].slice(0, 10);
 export function normalizeSettings(settings: Settings): Settings {
   return settings.model === 'Omni 1.1 Flash' ? settings : { ...settings, duration: 8 };
-}
-// Explicit assignments never silently fall back to a different paying account.
-export function resolveAccount(scene: Pick<Scene, 'id' | 'accountId'>, verifiedIds: number[], settings: Pick<Settings, 'shareUnassigned' | 'sharedAccountId'>): number | null {
-  if (scene.accountId !== null) return verifiedIds.includes(scene.accountId) ? scene.accountId : null;
-  if (settings.shareUnassigned && settings.sharedAccountId !== null) return verifiedIds.includes(settings.sharedAccountId) ? settings.sharedAccountId : null;
-  if (verifiedIds.includes(scene.id)) return scene.id;
-  return settings.shareUnassigned ? verifiedIds[0] ?? null : null;
 }
 export function requestedDimensions(resolution: Resolution, ratio: Settings['aspectRatio']): { width: number; height: number } {
   const [width, height] = ({ '360p': [640, 360], '720p': [1280, 720], '1080p': [1920, 1080], '2k': [2560, 1440], '4k': [3840, 2160] } as const)[resolution];
@@ -83,9 +75,9 @@ export function meetsResolution(media: MediaResult): boolean | null {
 export function errorInfo(error: unknown): { raw: string; hint: string } {
   const raw = error instanceof Error ? error.message : String(error);
   let hint = 'Thử lại sau hoặc mở Chẩn đoán API để kiểm tra kết nối.';
-  if (/MUSE_LOGIN_REQUIRED/i.test(raw)) hint = 'Mở 10 Tài khoản Muse, kết nối slot này rồi đăng nhập trong cửa sổ Chrome/Edge. Bấm Kiểm tra phiên sau khi đăng nhập.';
+  if (/MUSE_LOGIN_REQUIRED/i.test(raw)) hint = 'Mở Tài khoản Muse, đăng nhập một lần trong cửa sổ Chrome/Edge. Bấm Kiểm tra phiên sau khi đăng nhập.';
   else if (/MUSE_BROWSER_UNAVAILABLE|MUSE_PROFILE_BUSY/i.test(raw)) hint = 'Kiểm tra Chrome/Edge trên máy chạy tool và cửa sổ hồ sơ Muse đang mở. Thông tin chi tiết ở mã lỗi gốc.';
-  else if (/credit|quota|resource_exhausted|429|billing/i.test(raw)) hint = 'Kiểm tra hạn mức hoặc thanh toán trong tài khoản nhà cung cấp. Email phân công không thay đổi hạn mức.';
+  else if (/credit|quota|resource_exhausted|429|billing/i.test(raw)) hint = 'Kiểm tra hạn mức hoặc thanh toán trong tài khoản nhà cung cấp.';
   else if (/safety|filter|blocked|policy|rai|responsible/i.test(raw)) hint = 'Nội dung hoặc ảnh có thể bị bộ lọc từ chối. Chỉnh kịch bản, dùng ảnh phù hợp rồi thử lại.';
   else if (/overload|unavailable|503|502|gpu/i.test(raw)) hint = 'Dịch vụ đang bận hoặc tạm ngừng. Đợi một lúc rồi tạo lại cảnh lỗi.';
   else if (/401|403|key|permission|auth/i.test(raw)) hint = 'Kiểm tra quyền truy cập, API key và mô hình được cấp cho tài khoản.';
@@ -100,11 +92,9 @@ export function restoreWorkspace(raw: string | null): { scenes: Scene[]; setting
   try {
     const data = JSON.parse(raw);
     if (data.version !== 1 || !Array.isArray(data.scenes) || data.scenes.length !== 10) return fallback;
-    const accountId = (value: unknown) => typeof value === 'number' && Number.isInteger(value) && value >= 1 && value <= 10 ? value : null;
     fallback.scenes = fallback.scenes.map((scene, i) => ({ ...scene,
       prompt: typeof data.scenes[i]?.prompt === 'string' ? data.scenes[i].prompt.slice(0, 8000) : scene.prompt,
-      email: typeof data.scenes[i]?.email === 'string' && !/@muse\.local$/i.test(data.scenes[i].email) ? data.scenes[i].email.slice(0, 120) : scene.email,
-      accountId: accountId(data.scenes[i]?.accountId), enabled: data.scenes[i]?.enabled !== false
+      enabled: data.scenes[i]?.enabled !== false
     }));
     const s = data.settings ?? {};
     fallback.settings = normalizeSettings({ ...DEFAULT_SETTINGS,
@@ -114,7 +104,6 @@ export function restoreWorkspace(raw: string | null): { scenes: Scene[]; setting
       resolution: VIDEO_RESOLUTIONS.includes(s.resolution) ? s.resolution : '720p',
       imageResolution: s.imageResolution === '4k' ? '4k' : '2k', output: s.output === 'image' ? 'image' : 'video',
       videoInput: s.videoInput === 'image' ? 'image' : 'text', autoSync: s.autoSync !== false, r2v: s.r2v !== false,
-      shareUnassigned: s.shareUnassigned !== false, sharedAccountId: accountId(s.sharedAccountId),
       modifier: typeof s.modifier === 'string' ? s.modifier.slice(0, 2000) : '', mode: s.mode === 'demo' ? 'demo' : 'muse'
     });
     return fallback;

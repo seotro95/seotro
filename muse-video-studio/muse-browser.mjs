@@ -20,7 +20,7 @@ const pause = (ms, signal) => new Promise((resolve, reject) => {
 });
 
 export class MuseBrowser {
-  constructor({ profileRoot, serviceURL = 'https://muse.ai/', launchOptions, timeoutMs = 600000, pollMs = 500, quietMs = 1500 } = {}) {
+  constructor({ profileRoot, accountProfile, serviceURL = 'https://muse.ai/', launchOptions, timeoutMs = 600000, pollMs = 500, quietMs = 1500 } = {}) {
     this.profileRoot = profileRoot;
     this.serviceURL = serviceURL;
     this.launchOptions = launchOptions;
@@ -28,11 +28,13 @@ export class MuseBrowser {
     this.pollMs = pollMs;
     this.quietMs = quietMs;
     this.active = null;
-    this.accounts = Array.from({ length: 10 }, (_, i) => ({ id: i + 1, state: existsSync(this.profile(i + 1)) ? 'saved' : 'disconnected', authenticated: false, checkedAt: null, balance: null }));
+    this.profilePath = accountProfile || path.join(this.profileRoot, 'slot-01');
+    this.accounts = [{ id: 1, state: existsSync(this.profile(1)) ? 'saved' : 'disconnected', authenticated: false, checkedAt: null, balance: null }];
   }
-  profile(id) { return path.join(this.profileRoot, `slot-${String(id).padStart(2, '0')}`); }
+  profile(id = 1) { this.requireSingleAccount(id); return this.profilePath; }
+  requireSingleAccount(id) { if (id !== 1) throw fail('ACCOUNT_INVALID', 'Bản này chỉ sử dụng một tài khoản Muse duy nhất.', 400); }
   account(id) {
-    if (!Number.isInteger(id) || id < 1 || id > 10) throw fail('ACCOUNT_INVALID', 'Slot tài khoản phải từ 1 đến 10.', 400);
+    this.requireSingleAccount(id);
     return this.accounts[id - 1];
   }
   snapshot() { return this.accounts.map(a => ({ ...a, active: this.active?.id === a.id })); }
@@ -48,11 +50,6 @@ export class MuseBrowser {
   async open(id) {
     this.account(id);
     if (this.active?.id === id && !this.active.page.isClosed()) return this.active.page;
-    if (this.active && !this.active.page.isClosed()) {
-      const editor = this.active.page.locator(EDITOR).first();
-      if ((await editor.inputValue().catch(() => '')).trim() || (await editor.innerText().catch(() => '')).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Cửa sổ Muse hiện tại có bản nháp chưa gửi. Xử lý bản nháp trước khi chuyển slot tài khoản.', 409);
-      if (await this.active.page.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Muse vẫn đang xử lý trong cửa sổ hiện tại. Đợi hoàn tất trước khi chuyển tài khoản.', 409);
-    }
     await this.close();
     const profile = this.profile(id);
     await mkdir(profile, { recursive: true, mode: 0o700 });
@@ -81,7 +78,7 @@ export class MuseBrowser {
     catch { throw fail('MUSE_CONNECTION_FAILED', 'Không mở được muse.ai trong cửa sổ đăng nhập. Kiểm tra mạng, proxy hoặc trang đăng nhập trên cửa sổ Muse.', 503); }
     return page;
   }
-  async connect(id) {
+  async connect(id = 1) {
     const page = await this.open(id);
     await page.bringToFront();
     await this.refreshActive();
@@ -104,7 +101,7 @@ export class MuseBrowser {
       finally { clearTimeout(timer); }
     }).catch(() => false);
     const composerReady = await active.page.locator(EDITOR).first().isVisible().catch(() => false);
-    // Do not replace another account's state if its window was switched mid-check.
+    // Ignore a closed/replaced owned window.
     if (this.active !== active) return;
     account.authenticated = Boolean(authenticated && composerReady);
     account.state = account.authenticated ? 'ready' : 'login_open';
@@ -122,11 +119,11 @@ export class MuseBrowser {
   async turn({ accountId, prompt, image, video, output = video ? 'video' : 'text', signal }) {
     await this.open(accountId);
     await this.refreshActive();
-    if (!this.account(accountId).authenticated) throw fail('MUSE_LOGIN_REQUIRED', `Đăng nhập Muse cho slot ${accountId} trong cửa sổ Chrome/Edge, rồi bấm Kiểm tra phiên.`, 401);
+    if (!this.account(accountId).authenticated) throw fail('MUSE_LOGIN_REQUIRED', 'Đăng nhập tài khoản Muse trong cửa sổ Chrome/Edge, rồi bấm Kiểm tra phiên.', 401);
     const page = this.active.page;
     signal.throwIfAborted();
     if (await page.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Muse đang trả lời một yêu cầu khác. Đợi hoàn tất rồi thử lại.', 409);
-      const editor = page.locator(EDITOR).first();
+    const editor = page.locator(EDITOR).first();
     if ((await editor.innerText().catch(() => '')).trim() || (await editor.inputValue().catch(() => '')).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có nội dung chưa gửi. Gửi hoặc xóa bản nháp đó trước; tool không ghi đè.', 409);
     if (await page.locator('[data-hatch-composer-root] img[src^="blob:"]').count()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có ảnh chưa gửi. Xử lý bản nháp đó trước; tool không gửi kèm ảnh cũ.', 409);
     if (image) await this.attach(page, image);

@@ -65,12 +65,12 @@ test('Muse contract sends accountId, settings, R2V and modifier; video plays and
   await page.getByRole('button', { name: 'Tải ảnh nhân vật chung' }).click();
   await (await chooser).setFiles({ name: 'ref.png', mimeType: 'image/png', buffer: png });
   await expect(page.locator('.scene-image')).toHaveCount(10);
-  await page.getByRole('button', { name: '10 Tài khoản Muse', exact: true }).click();
+  await page.getByRole('button', { name: 'Tài khoản Muse', exact: true }).click();
   await page.getByLabel('Chỉ thị chất lượng toàn cục', { exact: false }).fill('cinematic lighting');
   await page.getByRole('button', { name: 'Hoàn tất', exact: true }).click();
   await page.getByTestId('scene-2').getByRole('button', { name: 'Tạo cảnh này' }).click();
   await expect(page.getByTestId('scene-2').locator('video')).toBeVisible();
-  expect(payload.accountId).toBe(2);
+  expect(payload.accountId).toBe(1);
   expect(payload.prompt).toContain('cinematic lighting');
   expect(payload.image.mimeType).toBe('image/png');
   expect(payload.model).toBe('Omni 1.1 Flash');
@@ -84,22 +84,20 @@ test('Muse contract sends accountId, settings, R2V and modifier; video plays and
   await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
 });
 
-test('batch respects disabled accounts, shows failures, and never overlaps render requests', async ({ page }) => {
+test('batch respects disabled scenes, shows failures, and never overlaps render requests', async ({ page }) => {
   test.setTimeout(60000);
   await configureAdapter(page);
   const calls: number[] = []; let active = 0; let peak = 0;
   await page.route('**/api/video', async route => {
     const id = route.request().postDataJSON().accountId; calls.push(id); active++; peak = Math.max(peak, active);
     await new Promise(r => setTimeout(r, 75)); active--;
-    await route.fulfill(id === 3 ? { status: 429, json: { error: '429 quota exceeded' } } : { json: { base64: video, mimeType: 'video/mp4' } });
+    await route.fulfill(calls.length === 2 ? { status: 429, json: { error: '429 quota exceeded' } } : { json: { base64: video, mimeType: 'video/mp4' } });
   });
-  await page.getByRole('button', { name: '10 Tài khoản Muse', exact: true }).click();
-  await page.locator('.account-list input[type=checkbox]').nth(1).uncheck();
-  await page.getByRole('button', { name: 'Hoàn tất', exact: true }).click();
-  await page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' }).click();
+  await page.getByRole('checkbox', { name: 'Bật cảnh 2', exact: true }).uncheck();
+  await page.getByRole('button', { name: 'TẠO 10 VIDEO' }).click();
   await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '8', { timeout: 20000 });
-  await expect(page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' })).toBeVisible({ timeout: 10000 });
-  expect(calls).toEqual([1, 3, 4, 5, 6, 7, 8, 9, 10]); expect(peak).toBe(1);
+  await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO' })).toBeVisible({ timeout: 10000 });
+  expect(calls).toEqual(Array(9).fill(1)); expect(peak).toBe(1);
   await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '8');
   await expect(page.getByTestId('scene-3').getByText('Kiểm tra hạn mức', { exact: false })).toBeVisible();
   await page.getByTestId('scene-3').getByText('Mã lỗi gốc').click();
@@ -110,28 +108,29 @@ test('demo batch can be stopped and resumed; test clips are labelled', async ({ 
   await page.getByRole('button', { name: 'Chẩn đoán API', exact: true }).click();
   await page.getByLabel('Kết nối tạo video', { exact: true }).selectOption('demo');
   await page.getByRole('button', { name: 'Đóng', exact: true }).last().click();
-  await page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' }).click();
+  await page.getByRole('button', { name: 'TẠO 10 VIDEO' }).click();
   await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
   await page.getByRole('button', { name: 'Dừng hàng đợi' }).click();
-  await expect(page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO' })).toBeVisible();
+  await expect(page.locator('.status-badge.queued')).toHaveCount(0);
   const count = await page.locator('.scene-card video').count();
   expect(count).toBeGreaterThan(0); expect(count).toBeLessThan(10);
   await expect(page.locator('.preview-label').first()).toHaveText('CLIP KIỂM THỬ');
-  await page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' }).click();
+  await page.getByRole('button', { name: 'TẠO 10 VIDEO' }).click();
   await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '10', { timeout: 15000 });
 });
 
 test('missing integration is explained before render and sends no doomed AI requests', async ({ page }) => {
   const requests: string[] = [];
   page.on('request', request => { if (/\/api\/(video|text)$/.test(request.url())) requests.push(request.url()); });
-  await expect(page.getByRole('region', { name: 'Cần kết nối tạo video' })).toContainText('Bấm Kết nối tài khoản Muse');
+  await expect(page.getByRole('region', { name: 'Cần kết nối tạo video' })).toContainText('Đăng nhập một tài khoản Muse');
   await expect(page.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này' })).toBeDisabled();
-  await expect(page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO' })).toBeDisabled();
   await expect(page.getByTestId('scene-1').getByRole('button', { name: 'AI Enhance' })).toBeDisabled();
   await expect(page.locator('video')).toHaveCount(0);
   await page.getByRole('button', { name: 'Kết nối tài khoản Muse', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Quản lý 10 tài khoản Muse' })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Kết nối #1', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Tài khoản Muse duy nhất' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Mở cửa sổ Muse', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Hoàn tất', exact: true }).click();
   await page.getByRole('button', { name: 'Chẩn đoán API', exact: true }).click();
   await expect(page.locator('#provider-mode option')).toHaveCount(2);
@@ -140,14 +139,14 @@ test('missing integration is explained before render and sends no doomed AI requ
   expect(requests).toEqual([]);
 });
 
-test('Enhance uses the scene account; diagnostic never renders without explicit consent', async ({ page }) => {
+test('Enhance uses the single Muse account; diagnostic never renders without explicit consent', async ({ page }) => {
   await configureAdapter(page);
   let textPayload: any; let renders = 0; let videoPayload: any;
   await page.route('**/api/text', async route => { textPayload = route.request().postDataJSON(); await route.fulfill({ json: { text: 'Cinematic tracking shot through an ancient temple at sunrise.' } }); });
   await page.route('**/api/video', async route => { renders++; videoPayload = route.request().postDataJSON(); await route.fulfill({ json: { base64: video, mimeType: 'video/mp4' } }); });
   await page.getByTestId('scene-4').getByRole('button', { name: 'AI Enhance' }).click();
   await expect(page.getByLabel('Kịch bản cảnh 4', { exact: true })).toHaveValue('Cinematic tracking shot through an ancient temple at sunrise.');
-  expect(textPayload.accountId).toBe(4);
+  expect(textPayload.accountId).toBe(1);
   expect(textPayload.prompt).toContain('Rewrite this scene');
   await page.getByRole('button', { name: 'Chẩn đoán API', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Kiểm tra render thực tế' })).toBeDisabled();
@@ -167,59 +166,62 @@ test('refreshing a newly configured adapter enables rendering without losing the
   await page.getByRole('button', { name: 'Đọc cấu hình', exact: true }).click();
   await expect(page.locator('.setup-help')).toHaveCount(0);
   await page.getByRole('button', { name: 'Đóng', exact: true }).last().click();
-  await expect(page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' })).toBeEnabled();
+  await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO' })).toBeEnabled();
   await expect(page.getByLabel('Kịch bản cảnh 1', { exact: true })).toHaveValue('Keep this script while connecting.');
 });
 
-test('connect/check one account enables unassigned slots and reports observed video metadata', async ({ page }) => {
-  const accounts = Array.from({ length: 10 }, (_, i) => ({ id: i + 1, state: 'disconnected', authenticated: false, active: false, checkedAt: null as string | null }));
-  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', accounts, busy: false } }));
-  await page.route('**/api/accounts/1/connect', route => { accounts[0].state = 'login_open'; accounts[0].active = true; return route.fulfill({ json: { accounts } }); });
-  await page.route('**/api/accounts/1/check', route => { Object.assign(accounts[0], { state: 'ready', authenticated: true, checkedAt: new Date().toISOString() }); return route.fulfill({ json: { accounts } }); });
+test('one login and one button create all ten videos using the same Muse account', async ({ page }) => {
+  const account = { id: 1, state: 'disconnected', authenticated: false, active: false, checkedAt: null as string | null };
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', accounts: [account], busy: false } }));
+  await page.route('**/api/account/connect', route => { account.state = 'login_open'; account.active = true; return route.fulfill({ json: { accounts: [account] } }); });
+  await page.route('**/api/account/check', route => { Object.assign(account, { state: 'ready', authenticated: true, checkedAt: new Date().toISOString() }); return route.fulfill({ json: { accounts: [account] } }); });
   const calls: number[] = [];
   await page.route('**/api/video', route => { calls.push(route.request().postDataJSON().accountId); return route.fulfill({ json: { base64: video, mimeType: 'video/mp4', metadata: { duration: 4, width: 640, height: 360 } } }); });
   await page.reload();
-  await page.getByRole('button', { name: 'Kết nối tài khoản Muse', exact: true }).click();
-  await page.getByRole('button', { name: 'Kết nối #1', exact: true }).click();
-  await expect(page.locator('.account-session').first()).toContainText('Chờ đăng nhập');
-  await page.getByRole('button', { name: 'Kiểm tra phiên #1', exact: true }).click();
-  await expect(page.locator('.account-session').first()).toContainText('Đã xác minh');
-  await page.getByRole('button', { name: 'Hoàn tất', exact: true }).click();
-  await expect(page.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này' })).toBeEnabled();
-  await expect(page.getByTestId('scene-2').getByRole('button', { name: 'Tạo cảnh này' })).toBeEnabled();
-  await page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO' }).click();
-  await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '10');
+  await page.getByRole('button', { name: 'Kết nối Muse', exact: true }).click();
+  await expect(page.locator('.single-account-controls')).toContainText('Chờ đăng nhập');
+  await page.getByRole('button', { name: 'Kiểm tra phiên', exact: true }).click();
+  await expect(page.locator('.single-account-controls')).toContainText('Đã xác minh');
+  await expect(page.locator('.scene-account-picker, .account-inline, .account-list')).toHaveCount(0);
+  await page.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true }).click();
+  await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '10', { timeout: 20000 });
   expect(calls).toEqual(Array(10).fill(1));
   await expect(page.getByTestId('scene-1').locator('.video-metadata')).toHaveText('Muse trả về: 640×360 · 4.0 giây');
-  accounts[0].authenticated = false; accounts[0].state = 'login_open';
+  account.authenticated = false; account.state = 'login_open';
   await page.getByRole('button', { name: 'Chẩn đoán API', exact: true }).click();
   await page.getByRole('button', { name: 'Đọc cấu hình', exact: true }).click();
   await page.getByRole('button', { name: 'Đóng', exact: true }).last().click();
   await expect(page.getByTestId('scene-1').getByRole('button', { name: 'Tạo lại cảnh' })).toBeDisabled();
-  await expect(page.getByTestId('scene-1').locator('video')).toBeVisible();
+  await expect(page.locator('.scene-card video')).toHaveCount(10);
 });
 
-test('shared account routing respects explicit assignments and survives reload', async ({ page }) => {
-  const accounts = Array.from({ length: 10 }, (_, i) => ({ id: i + 1, state: i < 2 ? 'ready' : 'disconnected', authenticated: i < 2, active: i === 0, checkedAt: null }));
-  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', accounts, busy: false } }));
+test('one click creates ten images using the single verified Muse session', async ({ page }) => {
+  const account = { id: 1, state: 'ready', authenticated: true, active: true, checkedAt: null };
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', accounts: [account], busy: false } }));
+  const calls: number[] = [];
+  await page.route('**/api/image', route => { calls.push(route.request().postDataJSON().accountId); return route.fulfill({ json: { base64: image, mimeType: 'image/png' } }); });
+  await page.reload();
+  await page.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
+  await page.getByRole('button', { name: 'TẠO 10 ẢNH', exact: true }).click();
+  await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '10', { timeout: 20000 });
+  await expect(page.locator('.generated-image')).toHaveCount(10);
+  expect(calls).toEqual(Array(10).fill(1));
+  await expect(page.locator('.scene-account-picker, #shared-account, #email-bulk')).toHaveCount(0);
+});
+
+test('legacy account choices cannot route any of the ten scenes to another account', async ({ page }) => {
+  await page.evaluate(() => localStorage.setItem('muse-workstation-v1', JSON.stringify({ version: 1, settings: { shareUnassigned: false, sharedAccountId: 8 }, scenes: Array.from({ length: 10 }, (_, i) => ({ prompt: `Legacy scene ${i + 1}`, accountId: i + 1, email: `old${i}@example.com`, enabled: true })) })));
+  await configureAdapter(page);
   const calls: number[] = [];
   await page.route('**/api/video', route => { calls.push(route.request().postDataJSON().accountId); return route.fulfill({ json: { base64: video, mimeType: 'video/mp4' } }); });
-  await page.reload();
-  await page.getByLabel('Tài khoản dùng chung', { exact: true }).selectOption('1');
-  await page.getByLabel('Gán tài khoản cảnh 3', { exact: true }).selectOption('2');
-  await page.getByLabel('Gán tài khoản cảnh 4', { exact: true }).selectOption('4');
-  await expect(page.getByTestId('scene-4').getByRole('button', { name: 'Tạo cảnh này' })).toBeDisabled();
-  await page.getByTestId('scene-3').getByRole('button', { name: 'Tạo cảnh này' }).click();
-  await expect(page.getByTestId('scene-3').locator('video')).toBeVisible();
-  await page.getByTestId('scene-5').getByRole('button', { name: 'Tạo cảnh này' }).click();
-  await expect(page.getByTestId('scene-5').locator('video')).toBeVisible();
-  expect(calls).toEqual([2, 1]);
-  await page.reload();
-  await expect(page.getByLabel('Gán tài khoản cảnh 4', { exact: true })).toHaveValue('4');
-  await expect(page.getByLabel('Tài khoản dùng chung', { exact: true })).toHaveValue('1');
-  await page.getByRole('checkbox', { name: 'Tự dùng chung cho ô chưa gán tài khoản' }).uncheck();
-  await expect(page.getByTestId('scene-5').getByRole('button', { name: 'Tạo cảnh này' })).toBeDisabled();
-  await expect(page.getByTestId('scene-3').getByRole('button', { name: 'Tạo cảnh này' })).toBeEnabled();
+  await expect(page.getByLabel('Kịch bản cảnh 10', { exact: true })).toHaveValue('Legacy scene 10');
+  await expect(page.locator('.scene-account-picker, #shared-account, #email-bulk')).toHaveCount(0);
+  await page.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true }).click();
+  await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '10', { timeout: 20000 });
+  expect(calls).toEqual(Array(10).fill(1));
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('muse-workstation-v1')!));
+  expect(saved.settings.sharedAccountId).toBeUndefined();
+  expect(saved.scenes.every((scene: any) => scene.accountId === undefined && scene.email === undefined)).toBe(true);
 });
 
 test('imports a 4K image batch from SRT, follows independent prompts, and converts the images to 1080p video requests', async ({ page }) => {
@@ -244,7 +246,7 @@ test('imports a 4K image batch from SRT, follows independent prompts, and conver
   await page.getByRole('button', { name: 'Chuyển bộ ảnh đã tạo sang video' }).click();
   await expect(page.getByRole('button', { name: 'Từ ảnh', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await page.getByLabel('Chất lượng', { exact: true }).selectOption('1080p');
-  await page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO', exact: true }).click();
+  await page.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true }).click();
   await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '2');
   expect(videoCalls).toHaveLength(2);
   expect(videoCalls.every(c => c.sourceMode === 'image' && c.image.imageBytes === image && c.characterLock === false && c.resolution === '1080p')).toBe(true);
@@ -277,7 +279,7 @@ test('character lock attaches the portrait; disabling it and editing the prompt 
 test('balance panel shows an observed zero and distinguishes an unreadable balance', async ({ page }) => {
   const account = { id: 1, state: 'ready', authenticated: true, active: true, checkedAt: null, balance: { valueText: '0', unit: 'token', label: 'Tokens remaining: 0', observedAt: new Date().toISOString(), source: 'muse-ui' } as any };
   await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', accounts: [account], busy: false } }));
-  await page.route('**/api/accounts/1/check', route => { account.balance = null; return route.fulfill({ json: { accounts: [account] } }); });
+  await page.route('**/api/account/check', route => { account.balance = null; return route.fulfill({ json: { accounts: [account] } }); });
   await page.reload();
   await expect(page.getByTestId('account-balance')).toContainText('0 token');
   await page.getByRole('button', { name: 'Cập nhật số dư', exact: true }).click();
@@ -309,12 +311,12 @@ test('image-to-video batch only sends scenes that have a source frame', async ({
   const calls: number[] = [];
   await page.route('**/api/video', route => { calls.push(route.request().postDataJSON().accountId); return route.fulfill({ json: { base64: video, mimeType: 'video/mp4' } }); });
   await page.getByRole('button', { name: 'Từ ảnh', exact: true }).click();
-  await expect(page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true })).toBeDisabled();
   const chooser = page.waitForEvent('filechooser');
   await page.getByTestId('scene-1').getByRole('button', { name: '+ Chọn ảnh nhân vật', exact: true }).click();
   await (await chooser).setFiles({ name: 'frame.png', mimeType: 'image/png', buffer: png });
-  await expect(page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO', exact: true })).toBeEnabled();
-  await page.getByRole('button', { name: 'CHẠY TOÀN BỘ 10 VIDEO', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true })).toBeEnabled();
+  await page.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true }).click();
   await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
   expect(calls).toEqual([1]);
   await expect(page.locator('.scene-error')).toHaveCount(0);

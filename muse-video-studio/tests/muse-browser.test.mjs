@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
+import { existsSync } from 'node:fs';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
@@ -103,19 +104,22 @@ test('owned browser bridge against local Muse-shaped pages (not live Muse)', asy
       await driver.active.page.locator('textarea').fill('My private unsent draft');
       const count = submitted.length;
       await assert.rejects(driver.generateText({ accountId: 1, prompt: 'Do not send' }, new AbortController().signal), /MUSE_DRAFT_EXISTS/);
-      await assert.rejects(driver.connect(2), /MUSE_DRAFT_EXISTS/);
+      await assert.rejects(driver.connect(2), /ACCOUNT_INVALID/);
       assert.equal(driver.active.id, 1);
       assert.equal(submitted.length, count);
       assert.equal(await driver.active.page.locator('textarea').inputValue(), 'My private unsent draft');
       await driver.active.page.locator('textarea').fill('');
     });
-    await t.test('keeps account profiles isolated and restores an explicitly verified session', async () => {
-      await driver.connect(2);
-      assert.equal(driver.snapshot()[1].authenticated, false);
+    await t.test('uses only one profile, rejects other accounts and reopens its saved session', async () => {
+      assert.equal(driver.snapshot().length, 1);
+      await assert.rejects(driver.connect(2), /ACCOUNT_INVALID/);
+      assert.equal(driver.active.id, 1);
+      assert.equal(existsSync(path.join(root, 'slot-02')), false);
+      await driver.close();
       assert.equal(driver.snapshot()[0].state, 'session_saved');
-      await driver.connect(1);
+      await driver.connect();
       assert.equal(driver.snapshot()[0].authenticated, true);
-      assert.equal(driver.snapshot()[1].authenticated, false);
+      assert.equal(driver.snapshot().length, 1);
     });
     await t.test('does not return old videos when the new response has no video', async () => {
       behavior = 'text'; driver.timeoutMs = 500;
