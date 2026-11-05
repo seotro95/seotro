@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Play, Download, FileText, Users, ShieldPlus, ImagePlus, ScanFace, WandSparkles, Clapperboard, X, Check, ChevronDown, RefreshCw, Square, Settings2, Activity, ArrowRight, Copy, Upload, CircleAlert, Video, Link2, Trash2, Film, FlaskConical, CheckCheck, LoaderCircle } from 'lucide-react';
 import { ADVENTURE, RUNWAY, MUSE_MODELS, normalizeSettings, restoreWorkspace, parseScript, errorInfo, meetsResolution } from './core.ts';
 import type { Scene, Settings, Reference, Status, Mode, Output, MediaResult } from './core.ts';
-import { generateVideo, generateImage, enhancePrompt, readImage, downloadVideo, releaseVideo, providerStatus, accountAction } from './provider.ts';
+import { generateVideo, generateImage, enhancePrompt, readImage, downloadVideo, downloadMediaBatch, releaseVideo, providerStatus, accountAction } from './provider.ts';
 import { loadMedia, saveMedia, deleteMedia } from './media-library.ts';
 import type { SavedMedia } from './media-library.ts';
 import './styles.css';
@@ -340,10 +340,13 @@ function App() {
     for (const id of [...renderJobs.current.keys()]) cancelScene(id);
   }
   async function downloadAll() {
+    if (downloading || locked) return;
     setDownloading(true);
-    try { for (const scene of scenesRef.current) if (scene[settings.output]) { await downloadVideo(scene[settings.output]!, scene.id); await new Promise(r => setTimeout(r, 250)); }
-      setNotice('Đã gửi các lệnh tải. Nếu trình duyệt hỏi, cho phép tải nhiều tệp.');
-    } catch (e) { setNotice(logError(e, 'Tải video').raw); }
+    try {
+      const items = scenesRef.current.filter(scene => scene[settings.output]).map(scene => ({ media: scene[settings.output]!, id: scene.id }));
+      await downloadMediaBatch(items, settings.output);
+      setNotice(`Đã gửi tệp ZIP gồm ${items.length} ${outputLabel}. Giải nén để xem toàn bộ kết quả.`);
+    } catch (e) { setNotice(logError(e, 'Tải bộ kết quả').raw); }
     finally { setDownloading(false); }
   }
   function importScenes(andRun: boolean) {
@@ -397,7 +400,7 @@ function App() {
       <div className="studio-tabs" aria-label="Loại nội dung"><button disabled={locked} aria-pressed={settings.output === 'video'} onClick={() => changeSettings({ output: 'video' })}><Video size={17}/>Tạo video</button><button disabled={locked} aria-pressed={settings.output === 'image'} onClick={() => changeSettings({ output: 'image' })}><ImagePlus size={17}/>Tạo ảnh hàng loạt</button><span>MUSE AI STUDIO · ẢNH / VIDEO</span></div>
       <div className="actions-row">
         {busy ? <button className="button danger" onClick={cancel} disabled={cancelling}><Square size={16}/>{cancelling ? 'Đang dừng…' : batch ? 'Dừng tất cả luồng' : 'Dừng tác vụ'}</button> : <button className="button primary" title={renderBlocked ? connectionProblem : `Tạo tối đa 10 cảnh · ${executionLanes} luồng xử lý`} disabled={locked || !enabled || renderBlocked || !scenes.some(s => s.enabled && accountReady() && sourceReady(s))} onClick={() => void run()}><Play size={17} fill="currentColor"/>TẠO 10 {outputLabel.toLocaleUpperCase('vi')}</button>}
-        <button className="button" disabled={!done || downloading || locked} onClick={() => void downloadAll()}><Download size={17}/>{downloading ? 'Đang tải…' : `Tải tất cả (${done}/10)`}</button>
+        <button className="button" title="Một lần bấm tải các kết quả đang chọn trong 10 ô thành một tệp ZIP" disabled={!done || downloading || locked} onClick={() => void downloadAll()}><Download size={17}/>{downloading ? 'Đang đóng gói ZIP…' : `Tải tất cả (${done}/10)`}</button>
         <button className="button" disabled={locked} onClick={() => setModal('import')}><FileText size={18}/>Nhập TXT / SRT</button>
         <button className="button" onClick={() => setModal('accounts')}><Users size={19}/>Tài khoản Muse</button>
         <button className="button diagnostic-button" onClick={() => setModal('diagnostics')}><ShieldPlus size={19}/>Chẩn đoán API</button>

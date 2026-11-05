@@ -1,4 +1,4 @@
-# Muse AI Studio 1.4.8 · Một tài khoản, 10 cảnh
+# Muse AI Studio 1.4.9 · Một tài khoản, 10 cảnh
 
 Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đăng nhập Muse nằm trong cửa sổ tool. Mười cảnh dùng chung một phiên tài khoản. Mỗi ô có nút Tạo/Dừng riêng và lịch sử ảnh/video lưu trên máy. Có thể kiểm tra để bật tối đa 10 hội thoại song song.
 
@@ -10,11 +10,17 @@ Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đă
 4. Có thể bấm **Kiểm tra ô Message** trước khi tạo. Bước này tìm ô nhập trong trang luồng, không gửi prompt hoặc render.
 5. Nhập 10 prompt hoặc TXT/SRT, chọn **Tạo ảnh hàng loạt** / **Tạo video**, bấm **TẠO 10 ẢNH / VIDEO**.
 
-Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.4.8** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
+Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.4.9** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
 
 Cầu nối giao diện **không chính thức**. Kiểm thử dùng Chromium/Electron thật và dịch vụ giả lập cục bộ; chưa tự động tạo media hoặc đọc số dư trên Muse.ai thật. Người dùng xác nhận có thể gửi/nhận tin nhắn thủ công trong tab Muse của tool. Tài khoản thật có thể giới hạn render đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các lựa chọn model, độ nét và thời lượng là yêu cầu bằng prompt, cần xác nhận bằng kết quả thật.
 
-## Tạo/Dừng từng ô, lưu kết quả và chọn số luồng trong bản 1.4.8
+## Một lần bấm tải toàn bộ trong bản 1.4.9
+
+Bấm **Tải tất cả (10/10)** để tải một tệp ZIP chứa đủ 10 kết quả đang chọn, mỗi ô một tệp. Giải nén để xem các tệp `image-01.png`…`image-10.png` hoặc `scene-01.mp4`…`scene-10.mp4` (video giữ đuôi định dạng thực). Không cần bấm tải từng ô hay cho phép 10 lượt tải riêng. Chưa đủ 10 kết quả thì nút vẫn tải các ô đã có kết quả và giữ đúng số cảnh, ví dụ `image-02.png`, `image-07.png`.
+
+Trong lúc chuẩn bị, nút hiện **Đang đóng gói ZIP…**. Ảnh được chuẩn hóa PNG thật, video giữ nguyên byte. ZIP dùng định dạng chuẩn, có CRC, không yêu cầu mật khẩu. Việc tải không gọi Muse, không tạo lại nội dung và không tự gửi lại prompt. Các nút tải riêng và tải một bản trong lịch sử vẫn còn.
+
+## Tạo/Dừng từng ô, lưu kết quả và chọn số luồng
 
 - Mỗi ô có **Tạo cảnh này / Tạo lại cảnh**. Có thể thêm cảnh khi các cảnh khác đang xử lý; không thêm trùng cảnh đang chạy hoặc đang chờ.
 - Khi chạy, nút của ô đổi thành **Dừng cảnh này**; khi chờ, nút là **Hủy cảnh chờ**. Chỉ hủy yêu cầu của ô đó, các ô khác tiếp tục. Nút Dừng tất cả vẫn giữ chức năng dừng cả bộ. Lệnh đã gửi tới Muse có thể vẫn tính phí dù đã yêu cầu dừng.
@@ -64,7 +70,7 @@ python3 scripts/package_portable.py --platform linux --output /path/to/portable-
 - Bật **Đồng nhất nhân vật** và chọn ảnh chân dung chung hoặc riêng từng ô để gửi ảnh tham chiếu. Tắt tùy chọn để theo prompt độc lập. Mỗi cảnh có prompt riêng; hội thoại có thể được dùng lại khi Muse không có New chat. Không có ảnh tham chiếu thì không bảo đảm cùng diện mạo nhân vật.
 - Video từ prompt hoặc ảnh, mức yêu cầu 360p/720p/1080p/2K/4K. Ở chế độ Từ ảnh, ảnh vẫn được gửi khi tắt khóa nhân vật; chỉ gửi các ô có ảnh nguồn.
 - **Chuyển bộ ảnh đã tạo sang video** giữ ảnh gốc và dùng đúng ảnh của từng cảnh. Đổi tab/chất lượng video giữ ảnh. Nếu ảnh tạo lớn hơn 8 MB, chỉ bản tham chiếu gửi đi được nén, giữ kích thước pixel; ảnh gốc vẫn tải được.
-- Tải từng kết quả hoặc cả bộ, xem ảnh lớn, phát video thật, mở/xuất dự án JSON, AI Enhance và modifier chung.
+- Tải từng kết quả hoặc một ZIP cho cả bộ bằng một lần bấm, xem ảnh lớn, phát video thật, mở/xuất dự án JSON, AI Enhance và modifier chung.
 - Bảng số dư đọc token/credit có nhãn từ giao diện Muse, gồm số 0 thực sự. Không đọc được thì ghi rõ; không đoán hoặc tự tính. Có thời điểm đọc và nút cập nhật.
 
 Mô hình, thời lượng, khung hình và độ phân giải là **yêu cầu bằng lời trong prompt**, không phải tham số API được Muse xác nhận. Danh sách Omni/Veo theo mô tả người dùng, chưa xác minh trên dịch vụ thật. Tool hiển thị kích thước quan sát được; tệp thấp hơn mức yêu cầu được ghi **Chưa đạt yêu cầu**, không phóng ảnh hoặc đổi nhãn để giả 4K gốc. Độ giống nhân vật và chất lượng AI cần kiểm tra bằng kết quả thực tế.

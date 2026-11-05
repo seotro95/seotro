@@ -1,3 +1,24 @@
+# Xác minh bản 1.4.9
+
+## Thay đổi
+
+Nút **Tải tất cả** tạo và tải đúng một tệp ZIP chứa bản ảnh/video đang chọn ở mỗi ô đã có kết quả. Không lặp lại mười lượt tải riêng. Chưa đủ 10 kết quả thì chỉ thêm các cảnh đã có tệp, giữ đúng số cảnh. Các nút tải riêng và tải một bản trong lịch sử giữ chức năng cũ.
+
+Ảnh được giải mã và xuất PNG thật; video giữ nguyên byte và đuôi đúng MIME. ZIP lưu các tệp không nén lại vì media đã nén, có CRC-32 và directory theo chuẩn ZIP. CRC đọc Blob theo từng chunk; không nối toàn bộ video thành một byte array lớn. Chỉ tạo một download sau khi chuẩn bị đủ các tệp; lỗi đọc/đóng gói không phát ra một bộ tải dở. Không gọi lại API Muse khi tải.
+
+## Kiểm thử
+
+- `npm run build`: qua TypeScript và Vite, không thêm dependency.
+- `npm run test:e2e`: **28/28 qua**. Hai ca mới tạo bộ 10 ảnh và 10 video, một lần bấm phát đúng một download. Đọc ZIP bằng `zipfile` chuẩn của Python, kiểm CRC và 10 tên tệp đúng số cảnh. So pixel cả 10 ảnh PNG với nguồn WebP và so byte cả 10 video (mỗi tệp hơn 256 KB để đọc CRC nhiều chunk). Ca tải phần đã xong xác nhận ZIP chỉ chứa cảnh 02 và 07. Các ca tải riêng, lưu lịch sử và điều khiển cũ vẫn qua.
+- `tests/portable.test.mjs`: **1/1 qua** trên executable Electron Linux đóng gói, hồ sơ mới và PATH không có Node/npm. Bấm tải riêng một ảnh rồi bấm Tải tất cả một lần: đúng hai download hoàn tất trên ổ đĩa, một PNG và một ZIP. Giải nén ZIP bằng thư viện chuẩn, kiểm CRC, đủ 10 ảnh 640×360 giải mã được, nội dung 10 ảnh khác nhau. Đóng/mở lại giữ đủ 10 kết quả trong thư viện và không render thêm.
+- `npm test`: qua parser/state, máy chủ adapter, lệnh mở trình duyệt và đọc số dư. Kiểm tra whitespace Git qua. Kiểm thử máy chủ chạy trong môi trường cho phép loopback.
+
+## Phạm vi
+
+Các ca tạo media dùng dịch vụ Muse giả lập, không xác minh thêm khả năng tạo media, quota hay số luồng của Muse thật. Windows dùng runtime Electron 45.2.2 x64 chính thức có checksum, kiểm manifest SHA-256, ZIP CRC và PE x64; cloud Linux không chạy Windows EXE. Giữ sandbox, context isolation và web security của bản phát hành.
+
+## Kết quả lịch sử trước 1.4.9
+
 # Xác minh bản 1.4.8
 
 ## Hành vi mới

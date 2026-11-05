@@ -1,4 +1,5 @@
 import type { Mode, Reference, Settings, MediaResult } from './core.ts';
+import { createZip } from './zip.ts';
 
 type ResponseMedia = { base64: string; mimeType: string; metadata?: { duration?: number; width: number; height: number } };
 type RequestContext = { batchId: string; sceneId: number };
@@ -103,20 +104,35 @@ export async function enhancePrompt(prompt: string, mode: Mode, signal: AbortSig
   if (typeof result.text !== 'string' || !result.text.trim()) throw new Error('AI không trả về prompt văn bản.');
   return result.text.trim().slice(0, 8000);
 }
-export async function downloadVideo(media: MediaResult, id: number) {
+async function mediaFile(media: MediaResult, id: number) {
   if (media.kind === 'image') {
     const image = await new Promise<HTMLImageElement>((resolve, reject) => { const value = new Image(); value.onload = () => resolve(value); value.onerror = () => reject(new Error('Không giải mã được ảnh để tải xuống.')); value.src = media.url; });
     const canvas = document.createElement('canvas'); canvas.width = image.naturalWidth; canvas.height = image.naturalHeight;
     canvas.getContext('2d')!.drawImage(image, 0, 0);
     const blob = await new Promise<Blob>((resolve, reject) => canvas.toBlob(value => value ? resolve(value) : reject(new Error('Không xuất được PNG.')), 'image/png'));
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = `${media.demo ? 'kiem-thu' : 'image'}-${String(id).padStart(2, '0')}.png`; document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 60000);
-    return;
+    return { name: `${media.demo ? 'kiem-thu' : 'image'}-${String(id).padStart(2, '0')}.png`, blob };
   }
   const ext = ({ 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'video/webm': 'webm', 'video/quicktime': 'mov' } as Record<string, string>)[media.mimeType] || 'mp4';
-  const filename = `${media.demo ? 'kiem-thu' : 'scene'}-${String(id).padStart(2, '0')}.${ext}`;
-  const a = document.createElement('a'); a.href = media.url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+  const name = `${media.demo ? 'kiem-thu' : 'scene'}-${String(id).padStart(2, '0')}.${ext}`;
+  const response = await fetch(media.url);
+  if (!response.ok) throw new Error(`Không đọc được kết quả cảnh ${id} để tải xuống.`);
+  return { name, blob: await response.blob() };
+}
+function downloadBlob(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 60000);
+}
+export async function downloadVideo(media: MediaResult, id: number) {
+  const file = await mediaFile(media, id); downloadBlob(file.blob, file.name);
+}
+export async function downloadMediaBatch(items: { media: MediaResult; id: number }[], kind: Settings['output']) {
+  if (!items.length) throw new Error('Chưa có kết quả để tải.');
+  const files = [];
+  for (const item of items) files.push(await mediaFile(item.media, item.id));
+  const archive = await createZip(files);
+  const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+  downloadBlob(archive, `Muse-${kind === 'image' ? 'Images' : 'Videos'}-${items.length}-${stamp}.zip`);
 }
 export const providerStatus = () => api('/api/status');
 export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer' | 'concurrency', data: Record<string, unknown> = {}) => api(`/api/account/${action}`, data);

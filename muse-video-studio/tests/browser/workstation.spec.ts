@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
+import { readZip } from '../fixtures/read-zip.mjs';
 const video = (await readFile(new URL('../../public/demo.mp4', import.meta.url))).toString('base64');
 const image = (await readFile(new URL('../../public/demo-image.png', import.meta.url))).toString('base64');
 const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aO1sAAAAASUVORK5CYII=', 'base64');
@@ -9,6 +10,64 @@ async function configureAdapter(page: Page) {
   await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'adapter', accounts: [], busy: false, credit: null, gpu: null } }));
   await page.reload();
 }
+
+for (const kind of ['image', 'video'] as const) {
+  test(`one click downloads all ten selected ${kind} results in one valid ZIP`, async ({ page }) => {
+    await configureAdapter(page);
+    const videoBytes = Buffer.concat([Buffer.from(video, 'base64'), Buffer.alloc(256 * 1024, 0x61)]);
+    const colors = await page.evaluate(() => Array.from({ length: 10 }, (_, index) => {
+      const canvas = document.createElement('canvas'); canvas.width=4; canvas.height=4;
+      const ctx = canvas.getContext('2d')!; ctx.fillStyle=`rgb(${index * 20},30,70)`; ctx.fillRect(0,0,4,4);
+      return canvas.toDataURL('image/webp').split(',')[1];
+    }));
+    await page.route(`**/api/${kind}`, route => {
+      const id = route.request().postDataJSON().sceneId;
+      return route.fulfill({ json: { base64: kind === 'image' ? colors[id - 1] : videoBytes.toString('base64'), mimeType: kind === 'image' ? 'image/webp' : 'video/mp4' } });
+    });
+    if (kind === 'image') await page.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
+    await page.getByRole('button', { name: kind === 'image' ? 'TẠO 10 ẢNH' : 'TẠO 10 VIDEO', exact: true }).click();
+    await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '10');
+    let downloads = 0; page.on('download', () => downloads++);
+    const event = page.waitForEvent('download');
+    await page.getByRole('button', { name: 'Tải tất cả (10/10)', exact: true }).click();
+    const download = await event;
+    expect(download.suggestedFilename()).toMatch(kind === 'image' ? /^Muse-Images-10-.*\.zip$/ : /^Muse-Videos-10-.*\.zip$/);
+    const files = readZip((await download.path())!);
+    expect(files.map((file: { name: string }) => file.name)).toEqual(Array.from({ length: 10 }, (_, index) => `${kind === 'image' ? 'image' : 'scene'}-${String(index+1).padStart(2,'0')}.${kind === 'image' ? 'png' : 'mp4'}`));
+    for (const [index, file] of files.entries()) {
+      if (kind === 'video') expect(file.bytes).toEqual(videoBytes);
+      else {
+        expect(file.bytes.subarray(0,8)).toEqual(Buffer.from([137,80,78,71,13,10,26,10]));
+        const equal = await page.evaluate(async ({ actual, source }) => {
+          async function pixels(src: string) {
+            const image = new Image(); await new Promise<void>((resolve,reject) => { image.onload=()=>resolve();image.onerror=reject;image.src=src; });
+            const canvas = document.createElement('canvas');canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;
+            const ctx=canvas.getContext('2d')!;ctx.drawImage(image,0,0);
+            return [image.naturalWidth,image.naturalHeight,...ctx.getImageData(0,0,image.naturalWidth,image.naturalHeight).data];
+          }
+          return JSON.stringify(await pixels('data:image/png;base64,'+actual))===JSON.stringify(await pixels('data:image/webp;base64,'+source));
+        }, { actual: file.bytes.toString('base64'), source: colors[index] });
+        expect(equal).toBe(true);
+      }
+    }
+    await expect(page.getByRole('button', { name: 'Tải tất cả (10/10)', exact: true })).toBeEnabled();
+    expect(downloads).toBe(1);
+  });
+}
+
+test('batch download includes only completed selected scenes and their real scene numbers', async ({ page }) => {
+  await configureAdapter(page);
+  await page.route('**/api/image', route => route.fulfill({ json: { base64: image, mimeType: 'image/png' } }));
+  await page.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
+  for (const id of [2,7]) {
+    await page.getByTestId(`scene-${id}`).getByRole('button', { name: 'Tạo cảnh này', exact: true }).click();
+    await expect(page.getByTestId(`scene-${id}`).locator('.generated-image')).toBeVisible();
+  }
+  const event = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Tải tất cả (2/10)', exact: true }).click();
+  const archive = await event;
+  expect(readZip((await archive.path())!).map((file: { name: string }) => file.name)).toEqual(['image-02.png','image-07.png']);
+});
 
 test('each scene can start during another render; stopping one leaves the other running', async ({ page }) => {
   await configureAdapter(page);

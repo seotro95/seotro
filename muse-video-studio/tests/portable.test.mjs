@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 import os from 'node:os';
 import { createMuseFixture } from './fixtures/muse.mjs';
+import { readZip } from './fixtures/read-zip.mjs';
 
 const executablePath = process.env.MUSE_PORTABLE_EXECUTABLE;
 if (!executablePath) throw new Error('Set MUSE_PORTABLE_EXECUTABLE to a prepared portable Linux executable.');
@@ -76,18 +77,24 @@ test('portable app queues ten scenes in one persistent conversation, exports rea
     await studio.getByRole('button', { name: 'Tải cảnh 1', exact: true }).click();
     await waitFor(async () => await desktop.evaluate(() => globalThis.fixtureDownloads.length) === 1);
     await studio.getByRole('button', { name: 'Tải tất cả (10/10)', exact: true }).click();
-    await waitFor(async () => await desktop.evaluate(() => globalThis.fixtureDownloads.length) === 11);
+    await waitFor(async () => await desktop.evaluate(() => globalThis.fixtureDownloads.length) === 2);
     const saved = await desktop.evaluate(() => globalThis.fixtureDownloads);
-    assert.ok(saved.every(file => file.state === 'completed' && file.filename.endsWith('.png')));
+    assert.ok(saved.every(file => file.state === 'completed'));
+    assert.ok(saved[0].filename.endsWith('.png'));
+    assert.ok(saved[1].filename.endsWith('.zip'));
     const hashes = new Set();
-    for (const filename of (await readdir(downloads)).sort()) {
-      const bytes = await readFile(path.join(downloads, filename));
+    const files = await readdir(downloads);
+    assert.equal(files.length, 2, 'One click on Tải tất cả must start exactly one download');
+    const archive = readZip(path.join(downloads, saved[1].filename));
+    assert.deepEqual(archive.map(file => file.name), Array.from({ length: 10 }, (_, index) => `image-${String(index+1).padStart(2,'0')}.png`));
+    const single = await readFile(path.join(downloads, saved[0].filename));
+    for (const { bytes, name } of [{ bytes: single, name: 'single.png' }, ...archive]) {
       assert.ok(bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])));
       const dimensions = await studio.evaluate(base64 => new Promise((resolve, reject) => {
         const image = new Image(); image.onload = () => resolve([image.naturalWidth, image.naturalHeight]); image.onerror = reject; image.src = 'data:image/png;base64,' + base64;
       }), bytes.toString('base64'));
       assert.deepEqual(dimensions, [640, 360]);
-      if (!filename.startsWith('01-')) hashes.add(createHash('sha256').update(bytes).digest('hex'));
+      if (name !== 'single.png') hashes.add(createHash('sha256').update(bytes).digest('hex'));
     }
     assert.equal(hashes.size, 10);
     const studioURL = studio.url();
