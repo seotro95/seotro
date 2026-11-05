@@ -1,4 +1,4 @@
-# Muse AI Studio 1.4.12 · Một tài khoản, 10 cảnh
+# Muse AI Studio 1.5.0 · Một tài khoản, 10 cảnh
 
 Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đăng nhập Muse nằm trong cửa sổ tool. Mười cảnh dùng chung một phiên tài khoản. Mỗi ô có nút Tạo/Dừng riêng và lịch sử ảnh/video lưu trên máy. Có thể kiểm tra để bật tối đa 10 hội thoại song song.
 
@@ -10,11 +10,20 @@ Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đă
 4. Có thể bấm **Kiểm tra ô Message** trước khi tạo. Bước này tìm ô nhập trong trang luồng, không gửi prompt hoặc render.
 5. Nhập 10 prompt hoặc TXT/SRT, chọn **Tạo ảnh hàng loạt** / **Tạo video**, bấm **TẠO 10 ẢNH / VIDEO**.
 
-Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.4.12** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
+Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.5.0** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
 
 Cầu nối giao diện **không chính thức**. Kiểm thử dùng Chromium/Electron thật và dịch vụ giả lập cục bộ; chưa tự động tạo media hoặc đọc số dư trên Muse.ai thật. Người dùng xác nhận có thể gửi/nhận tin nhắn thủ công trong tab Muse của tool. Tài khoản thật có thể giới hạn render đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các lựa chọn model, độ nét và thời lượng là yêu cầu bằng prompt, cần xác nhận bằng kết quả thật.
 
-## Đăng nhập bằng mã xác nhận email trong bản 1.4.12
+## Lưu thư mục, đa nhiệm và xem ảnh trong bản 1.5.0
+
+- **Tải tất cả** lưu các bản đang chọn trực tiếp vào một **thư mục thường** trên máy. Lần đầu chọn thư mục gốc; các lần sau tự nhớ trên bản desktop. Mỗi bộ có thư mục mới chứa PNG/MP4/WebM/MOV đã đánh số, mở bằng File Explorer, không cần giải nén kết quả. Nút **Thư mục lưu** đổi nơi lưu. Nút tải riêng từng ảnh/video vẫn còn.
+- Số thứ tự tăng liên tục cho tải riêng và lưu bộ; tên vẫn có số cảnh và mã bản cài. Ghi bằng chế độ tạo mới, không ghi đè; trùng thư mục thì tạo tên khác. Lỗi ghi giữ các tệp đã lưu, không xóa bộ cũ. Bản web dùng File System Access nếu trình duyệt hỗ trợ; nếu không, dùng executable desktop để lưu thư mục.
+- Trong lúc tạo có thể đổi tab ảnh/video, chỉnh prompt/thiết lập, nhập TXT/SRT, chọn ảnh, xem/tải kết quả đã có và thêm tác vụ vào ô trống. **Mỗi tác vụ giữ prompt, ảnh và thiết lập tại lúc bấm Tạo**. Thay đổi sau đó áp dụng cho lượt mới; kết quả của prompt cũ vẫn nằm trong lịch sử, không gán nhầm cho prompt mới.
+- AI Enhance dùng cùng hàng đợi, thực hiện được ở ô khác. Một ô có một tác vụ; mỗi tác vụ có Dừng riêng. Giới hạn tổng 10 tác vụ đồng thời, Muse còn tuân theo số luồng kết nối đã kiểm tra. Chỉ các thao tác thay đổi phiên/kết nối và render chẩn đoán bị khóa khi xung đột với yêu cầu đang chạy.
+- Bấm ảnh mở cửa sổ xem **ngay trong Studio**, có Vừa cửa sổ/Kích thước gốc và tải ảnh. Không mở popup Blob vốn có thể hiện trắng.
+- Chọn **Số luồng: 10** trước khi chạy để kiểm tra và bật mười hội thoại riêng. Tiến độ mới ghi số ô đang mở và số prompt đã hiển thị trên trang Muse, tách khỏi lúc kết quả hoàn tất. Mười yêu cầu được gửi đồng thời khi kết nối có khả năng đó; Muse vẫn có thể xếp hàng render theo tài khoản. Đây không phải cam kết mười GPU/render thật đồng thời.
+
+## Đăng nhập bằng mã xác nhận email trong bản 1.5.0
 
 1. Mở **Đăng nhập Muse trong tool**, nhập email và yêu cầu mã.
 2. Giữ trang Muse đang chờ mã. Nhập hoặc dán **mã mới nhất** vào chính ô mã xác nhận trên trang Muse, rồi bấm xác nhận.
@@ -43,19 +52,13 @@ Cửa sổ liên kết chỉ nhận HTTPS của Muse.ai hoặc miền phụ củ
 
 ## Tự đánh số liên tục, tránh trùng tệp
 
-Mỗi ảnh/video tải xuống có một số mới dùng chung giữa tải riêng, tải trong lịch sử và tải ZIP. Bộ đầu nhận 000001–000010, bộ sau nhận 000011–000020; tải một bản riêng tiếp theo nhận 000021. Số tiếp tục qua 001000 và lớn hơn, không quay lại 01 theo số ô và không cắt số khi dài hơn sáu chữ số.
+Mỗi ảnh/video tải xuống có một số mới dùng chung giữa tải riêng, tải trong lịch sử và lưu bộ vào thư mục. Bộ đầu nhận 000001–000010, bộ sau nhận 000011–000020; tải một bản riêng tiếp theo nhận 000021. Số tiếp tục qua 001000 và lớn hơn, không quay lại 01 theo số ô và không cắt số khi dài hơn sáu chữ số.
 
-Ví dụ tên `image-000001-scene-01-<mã-bản-cài>.png`, `video-001001-scene-03-<mã-bản-cài>.mp4`. Phần `scene-01` vẫn chỉ đúng ô của bạn; số đứng trước đó là số tải liên tục. ZIP cũng ghi dải số đã cấp và cùng mã bản cài, nên tải lại cùng bộ vẫn có tên ZIP và tên tệp bên trong mới.
+Ví dụ tên `image-000001-scene-01-<mã-bản-cài>.png`, `video-001001-scene-03-<mã-bản-cài>.mp4`. Phần `scene-01` vẫn chỉ đúng ô của bạn; số đứng trước đó là số tải liên tục. Thư mục cũng ghi dải số đã cấp và cùng mã bản cài, nên tải lại cùng bộ vẫn có tên thư mục và tên tệp bên trong mới.
 
 Bộ đếm lưu trên máy trong IndexedDB của cùng hồ sơ Studio, giữ khi đóng/mở lại. Transaction read/write cấp cả dải số một lần, tránh hai tab lấy trùng số. Dùng số nguyên BigInt lưu dưới dạng chuỗi, không mất chính xác ở số lớn. Mã ngẫu nhiên của hồ sơ phân biệt thư mục cài mới hoặc hồ sơ đã xóa dữ liệu; chúng bắt đầu bộ đếm riêng nhưng tránh dùng lại tên của bản cài khác. Nếu hủy tải, số đã cấp không được dùng lại.
 
-Không cần nhập số hay bấm xác nhận thêm. Nút Tải tất cả vẫn là một lần bấm tải một ZIP; thông báo hiện dải số của lượt vừa tải. Đổi tên không gọi lại Muse hoặc sửa nội dung tệp.
-
-## Một lần bấm tải toàn bộ
-
-Bấm **Tải tất cả (10/10)** để tải một tệp ZIP chứa đủ 10 kết quả đang chọn, mỗi ô một tệp. Giải nén để xem các tệp được đánh số liên tục, kèm số cảnh và mã bản cài (video giữ đuôi định dạng thực). Không cần bấm tải từng ô hay cho phép 10 lượt tải riêng. Chưa đủ 10 kết quả thì nút vẫn tải các ô đã có kết quả và giữ đúng số cảnh, ví dụ hai tệp mới có `scene-02` và `scene-07`, cùng hai số tải tiếp theo.
-
-Trong lúc chuẩn bị, nút hiện **Đang đóng gói ZIP…**. Ảnh được chuẩn hóa PNG thật, video giữ nguyên byte. ZIP dùng định dạng chuẩn, có CRC, không yêu cầu mật khẩu. Việc tải không gọi Muse, không tạo lại nội dung và không tự gửi lại prompt. Các nút tải riêng và tải một bản trong lịch sử vẫn còn.
+Không cần nhập số hay bấm xác nhận thêm. Nút Tải tất cả lưu một bộ vào thư mục thường; thông báo hiện dải số của lượt vừa tải. Đổi tên không gọi lại Muse hoặc sửa nội dung tệp.
 
 ## Tạo/Dừng từng ô, lưu kết quả và chọn số luồng
 
@@ -107,7 +110,7 @@ python3 scripts/package_portable.py --platform linux --output /path/to/portable-
 - Bật **Đồng nhất nhân vật** và chọn ảnh chân dung chung hoặc riêng từng ô để gửi ảnh tham chiếu. Tắt tùy chọn để theo prompt độc lập. Mỗi cảnh có prompt riêng; hội thoại có thể được dùng lại khi Muse không có New chat. Không có ảnh tham chiếu thì không bảo đảm cùng diện mạo nhân vật.
 - Video từ prompt hoặc ảnh, mức yêu cầu 360p/720p/1080p/2K/4K. Ở chế độ Từ ảnh, ảnh vẫn được gửi khi tắt khóa nhân vật; chỉ gửi các ô có ảnh nguồn.
 - **Chuyển bộ ảnh đã tạo sang video** giữ ảnh gốc và dùng đúng ảnh của từng cảnh. Đổi tab/chất lượng video giữ ảnh. Nếu ảnh tạo lớn hơn 8 MB, chỉ bản tham chiếu gửi đi được nén, giữ kích thước pixel; ảnh gốc vẫn tải được.
-- Tải từng kết quả hoặc một ZIP cho cả bộ bằng một lần bấm, xem ảnh lớn, phát video thật, mở/xuất dự án JSON, AI Enhance và modifier chung.
+- Tải từng kết quả hoặc một thư mục cho cả bộ bằng một lần bấm, xem ảnh lớn, phát video thật, mở/xuất dự án JSON, AI Enhance và modifier chung.
 - Bảng số dư đọc token/credit có nhãn từ giao diện Muse, gồm số 0 thực sự. Không đọc được thì ghi rõ; không đoán hoặc tự tính. Có thời điểm đọc và nút cập nhật.
 
 Mô hình, thời lượng, khung hình và độ phân giải là **yêu cầu bằng lời trong prompt**, không phải tham số API được Muse xác nhận. Danh sách Omni/Veo theo mô tả người dùng, chưa xác minh trên dịch vụ thật. Tool hiển thị kích thước quan sát được; tệp thấp hơn mức yêu cầu được ghi **Chưa đạt yêu cầu**, không phóng ảnh hoặc đổi nhãn để giả 4K gốc. Độ giống nhân vật và chất lượng AI cần kiểm tra bằng kết quả thực tế.
@@ -164,7 +167,7 @@ node tests/portable.test.mjs
 
 Test desktop cần màn hình/virtual display và runtime Electron (lần đầu: `node node_modules/electron/install.js`). Trên Linux cloud có thể dùng Xorg dummy/Xvfb. Môi trường kiểm thử không hỗ trợ sandbox có thể bật **riêng cho fixture** `MUSE_ELECTRON_TEST_NO_SANDBOX=1`; launcher phát hành không dùng cờ này.
 
-Fixture độc lập quảng bá khả năng chạy song song để kiểm tra nhánh đó; đây không phải bằng chứng Muse thật có 10 hội thoại riêng. Kiểm thử serial và gói độc lập dùng lịch sử chung, không có New chat, xác minh đủ 10 ảnh qua hàng đợi và các tệp PNG tải về; đồng thời kiểm tra video từ ảnh, hủy cả 10 và lưu phiên sau mở lại. Test không gửi yêu cầu đến Muse thật. Xem `VALIDATION.md`. Runtime Windows được kiểm tra checksum và cấu trúc gói; cloud Linux không chạy được Windows EXE. Bản đóng gói Linux cùng bố cục được kiểm thử với hồ sơ mới.
+Fixture độc lập quảng bá khả năng chạy song song để kiểm tra nhánh đó; đây không phải bằng chứng Muse thật có 10 hội thoại riêng. Kiểm thử serial dùng lịch sử chung, không có New chat, xác minh đủ 10 ảnh qua hàng đợi. Kiểm thử gói độc lập chọn 10 luồng qua giao diện, xác minh 10 yêu cầu chồng lấp trong mười đường dẫn riêng trước khi nhận kết quả, xem ảnh ngay trong Studio, lưu thư mục thật và giữ dữ liệu/số thứ tự sau mở lại. Test desktop còn kiểm tra video từ ảnh và hủy từng cảnh/cả bộ. Test không gửi yêu cầu đến Muse thật. Xem `VALIDATION.md`. Runtime Windows được kiểm tra checksum và cấu trúc gói; cloud Linux không chạy được Windows EXE. Bản đóng gói Linux cùng bố cục được kiểm thử với hồ sơ mới.
 
 **Chẩn đoán API → Kiểm thử giao diện** dùng clip/ảnh 640×360 có nhãn TEST CLIP/TEST IMAGE, không tạo nội dung AI và không chứng minh đăng nhập/hạn mức/chất lượng.
 

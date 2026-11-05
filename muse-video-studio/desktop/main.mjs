@@ -1,4 +1,4 @@
-import { app, BrowserWindow, WebContentsView, ipcMain, dialog, session, clipboard } from 'electron';
+import { app, BrowserWindow, WebContentsView, ipcMain, dialog, session, clipboard, shell } from 'electron';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -6,6 +6,7 @@ import { startStudioServer } from '../server.mjs';
 import { MuseBrowser } from '../muse-browser.mjs';
 import { EmbeddedMuseHost } from './embedded-host.mjs';
 import { loginRecorder } from './login-diagnostics.mjs';
+import { FolderExports } from './folder-export.mjs';
 
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const root = path.dirname(directory);
@@ -68,6 +69,21 @@ async function start() {
   });
   studio.webContents.on('will-navigate', (event, url) => { if (new URL(url).origin !== runtime.url) event.preventDefault(); });
   window.contentView.addChildView(studio);
+  const folderExports = new FolderExports({ userData,
+    chooseDirectory: async defaultPath => {
+      const result = await dialog.showOpenDialog(window, { title: 'Chọn nơi lưu các bộ ảnh/video', properties: ['openDirectory','createDirectory'], ...(defaultPath ? { defaultPath } : {}) });
+      return result.canceled ? null : result.filePaths[0];
+    }, openDirectory: directory => shell.openPath(directory) });
+  ipcMain.handle('studio:export', async (event, action, data) => {
+    if (event.sender !== studio.webContents) throw new Error('Untrusted export sender');
+    if (action === 'ensure') return folderExports.ensureDirectory();
+    if (action === 'choose') return folderExports.ensureDirectory(true);
+    if (action === 'begin') return folderExports.begin(data);
+    if (action === 'write') return folderExports.write(data);
+    if (action === 'finish') return folderExports.finish(data);
+    if (action === 'abort') return folderExports.abort(data);
+    throw new Error('Unknown export action');
+  });
   const layout = () => { const [width, height] = window.getContentSize(); studio.setBounds({ x: 0, y: 54, width, height: Math.max(1, height - 54) }); host.layout(); };
   window.on('resize', layout);
   layout();

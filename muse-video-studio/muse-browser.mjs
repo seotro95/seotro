@@ -44,6 +44,7 @@ export class MuseBrowser {
     this.launchOptions = launchOptions;
     this.sessionFactory = sessionFactory;
     this.workers = new Map();
+    this.workerStages = new Map();
     this.opening = null;
     this.timeoutMs = timeoutMs;
     this.pollMs = pollMs;
@@ -69,6 +70,7 @@ export class MuseBrowser {
     return this.accounts[id - 1];
   }
   snapshot() { return this.accounts.map(a => ({ ...a, active: this.active?.id === a.id })); }
+  progress() { return [...this.workerStages.values()].map(stage => ({ ...stage })); }
   async close() {
     const active = this.active;
     this.active = null;
@@ -448,6 +450,13 @@ export class MuseBrowser {
     if (this.workers.size >= 10) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã có 10 luồng đang chạy trên tài khoản Muse.', 429);
     const key = randomUUID();
     this.workers.set(key, null);
+    const progress = { batchId: batchId || null, sceneId: sceneId || null, output, phase: 'preparing', submitted: false, active: true, startedAt: Date.now() };
+    this.workerStages.set(key, progress);
+    while (this.workerStages.size > 64) {
+      const oldest = [...this.workerStages].find(([, stage]) => !stage.active);
+      if (!oldest) break;
+      this.workerStages.delete(oldest[0]);
+    }
     const lease = this.maxConcurrency > 1 ? this.parallelRoutes.find(route => !route.busy) : null;
     if (lease) lease.busy = true;
     let page; let owned; let sending = false;
@@ -482,7 +491,7 @@ export class MuseBrowser {
       signal.throwIfAborted();
       if (await conversation.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
       if (checkOnly) return { ready: true, message: 'Đã mở được ô Message trong trang luồng riêng. Chưa gửi prompt hoặc yêu cầu tạo nội dung.', details: await this.composerDiagnostics(page) };
-      const result = await this.sendTurn({ page: conversation, prompt, image, output, signal, onSubmit: () => { sending = true; } });
+      const result = await this.sendTurn({ page: conversation, prompt, image, output, signal, onSubmit: () => { sending = true; progress.phase = 'sending'; }, onStage: phase => { progress.phase = phase; if (phase === 'submitted') progress.submitted = true; } });
       if (output === 'image' && batchId && sceneId && result.fingerprint) {
         let batch = this.imageBatches.get(batchId);
         if (!batch) {
@@ -493,8 +502,11 @@ export class MuseBrowser {
         if (previous !== undefined && previous !== sceneId) throw fail('MUSE_DUPLICATE_MEDIA', `Kết quả ảnh trùng hoàn toàn với cảnh #${previous}. Tool chưa ghi nhận đây là ảnh mới và không tự gửi lại.`, 409);
         batch.set(result.fingerprint, sceneId);
       }
-      return result;
+      progress.phase = 'done'; return result;
+    } catch (error) {
+      progress.phase = signal.aborted ? 'cancelled' : 'error'; throw error;
     } finally {
+      progress.active = false;
       signal.removeEventListener('abort', cancelled);
       if (page) await (owned?.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()).catch(() => {});
       this.workers.delete(key);
@@ -531,7 +543,7 @@ export class MuseBrowser {
     }
     throw fail('MUSE_EDITOR_CHANGED', 'Muse đổi ô nhập nhưng chưa giữ đủ prompt. Chưa nhấn gửi. Kiểm tra cuộc trò chuyện rồi thử lại.', 409);
   }
-  async sendTurn({ page, prompt, image, output, signal, onSubmit }) {
+  async sendTurn({ page, prompt, image, output, signal, onSubmit, onStage = () => {} }) {
     let editor = await this.findComposer(page) || await this.initialComposer(page) || await this.waitForComposer(page);
     if ((await editor.innerText().catch(() => '')).trim() || (await editor.inputValue().catch(() => '')).trim()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có nội dung chưa gửi. Gửi hoặc xóa bản nháp đó trước; tool không ghi đè.', 409);
     if (await editor.locator('xpath=ancestor::*[@data-hatch-composer-root or self::form][1]').locator('img[src^="blob:"]:not([data-message-item] *)').count()) throw fail('MUSE_DRAFT_EXISTS', 'Ô soạn Muse đang có ảnh chưa gửi. Xử lý bản nháp đó trước; tool không gửi kèm ảnh cũ.', 409);
@@ -547,6 +559,7 @@ export class MuseBrowser {
     const acknowledgementDeadline = Date.now() + Math.min(this.submitTimeoutMs, this.timeoutMs);
     let lastText = '';
     let stableSince = Date.now();
+    let acknowledged = false;
     try {
       await editor.press('Enter');
       while (Date.now() < deadline) {
@@ -571,11 +584,13 @@ export class MuseBrowser {
           throw fail('MUSE_SHARED_CONVERSATION', 'Một hội thoại nhận nhiều yêu cầu xen kẽ. Tool dừng để tránh lấy nhầm ảnh; các lần sau sẽ xử lý lần lượt. Không tự gửi lại.', 409);
         }
         if (result.error) throw fail('MUSE_GENERATION_ERROR', result.error);
+        if (result.anchored && !acknowledged) { acknowledged = true; onStage('submitted'); }
         if (!result.anchored && !result.streaming && Date.now() >= acknowledgementDeadline) throw fail('MUSE_SUBMIT_NOT_ACKNOWLEDGED', 'Muse chưa xác nhận đã nhận prompt sau thao tác gửi. Tool không tự gửi lại. Mở cuộc trò chuyện kiểm tra trước khi thử lại để tránh tạo trùng.', 504);
         if (result.text !== lastText) { lastText = result.text; stableSince = Date.now(); }
         if (output === 'text' && result.anchored && result.text && !result.streaming && Date.now() - stableSince >= this.quietMs) return { text: result.text };
         const media = output === 'video' ? result.videos[0] : output === 'image' ? result.images[0] : null;
         if (media && !result.streaming) {
+          onStage('downloading');
           const base64 = await page.evaluate(async ({ src, output }) => {
             const url = new URL(src, location.href);
             if (!['https:', 'blob:', 'data:'].includes(url.protocol) && !(url.protocol === 'http:' && url.hostname === '127.0.0.1')) throw new Error('Unsupported media URL');
@@ -621,7 +636,7 @@ export class MuseBrowser {
   async generateVideo(data, signal) {
     const referenceInstruction = data.sourceMode === 'image' ? 'Animate the attached image as the starting frame.' : data.referenceImage ? 'Use the attached image as a character reference, not as an unrelated example.' : 'Create the video from the text prompt.';
     const prompt = `Use your video-generation tool to create exactly one new video, not a link to an existing example. Requested model: ${data.modelDisplayName}. Requested duration: ${data.durationSeconds} seconds, aspect ratio: ${data.aspectRatio}, resolution: ${data.resolution}. If these capabilities are unavailable, explain that clearly. ${referenceInstruction} ${data.characterLock !== false ? 'Preserve the referenced character identity and appearance across scenes.' : 'Follow this scene prompt independently; character consistency is not requested.'}\nScene:\n${data.prompt}`;
-    return this.turn({ accountId: data.accountId, prompt, image: data.referenceImage, video: true, signal });
+    return this.turn({ accountId: data.accountId, prompt, image: data.referenceImage, video: true, signal, batchId: data.batchId, sceneId: data.sceneId });
   }
   async generateImage(data, signal) {
     const longEdge = data.resolution === '4k' ? 3840 : 2560;
@@ -630,5 +645,5 @@ export class MuseBrowser {
     const prompt = `Use your image-generation tool to create exactly one new image for this scene. Requested native output: ${data.resolution.toUpperCase()} (${dimensions} pixels), aspect ratio ${data.aspectRatio}. Return the generated image, not a stock image or an old response. Do not claim a higher resolution than the image actually has. ${useReference ? 'Use the attached portrait as a character reference; preserve identity, face and appearance consistently.' : data.characterLock !== false ? 'Follow the character description in this prompt. No portrait is attached; cross-scene identity is not guaranteed without a reference.' : 'Follow this prompt independently. Do not reuse characters or appearance from earlier scenes unless the prompt explicitly requests them.'}\nScene:\n${data.prompt}`;
     return this.turn({ accountId: data.accountId, prompt, image: useReference || undefined, output: 'image', signal, batchId: data.batchId, sceneId: data.sceneId });
   }
-  async generateText(data, signal) { return this.turn({ accountId: data.accountId, prompt: data.prompt, video: false, signal }); }
+  async generateText(data, signal) { return this.turn({ accountId: data.accountId, prompt: data.prompt, video: false, signal, batchId: data.batchId, sceneId: data.sceneId }); }
 }

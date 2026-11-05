@@ -1,11 +1,18 @@
 import type { Mode, Reference, Settings, MediaResult } from './core.ts';
-import { createZip } from './zip.ts';
 import { reserveDownloadNumbers, formatDownloadNumber } from './download-sequence.ts';
 
 type ResponseMedia = { base64: string; mimeType: string; metadata?: { duration?: number; width: number; height: number } };
 type RequestContext = { batchId: string; sceneId: number };
 declare global {
-  interface Window { museTransport?: { request(id: string, endpoint: string, data: unknown): Promise<{ ok: boolean; body: any }>; cancel(id: string): void; onSessionRefresh?(callback: () => void): () => void } }
+  interface Window { museTransport?: { request(id: string, endpoint: string, data: unknown): Promise<{ ok: boolean; body: any }>; cancel(id: string): void; export?(action: string, data?: unknown): Promise<any>; onSessionRefresh?(callback: () => void): () => void }; showDirectoryPicker?: () => Promise<ExportDirectory> }
+}
+type ExportDirectory = { name: string; getDirectoryHandle(name: string, options?: { create?: boolean }): Promise<ExportDirectory>; getFileHandle(name: string, options?: { create?: boolean }): Promise<{ createWritable(): Promise<{ write(blob: Blob): Promise<void>; close(): Promise<void> }> }> };
+let webExportDirectory: ExportDirectory | null = null;
+export async function chooseExportDirectory() {
+  if (window.museTransport?.export) return window.museTransport.export('choose');
+  if (!window.showDirectoryPicker) throw new Error('Mở Muse AI Studio.exe để lưu cả bộ vào thư mục trên máy.');
+  try { webExportDirectory = await window.showDirectoryPicker(); return { cancelled: false, name: webExportDirectory.name }; }
+  catch (error) { if ((error as Error).name === 'AbortError') return { cancelled: true }; throw error; }
 }
 async function api(path: string, data?: unknown, signal?: AbortSignal) {
   const transport = window.museTransport;
@@ -97,10 +104,10 @@ async function generate(kind: Settings['output'], prompt: string, reference: Ref
 }
 export const generateVideo = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, context?: RequestContext) => generate('video', prompt, reference, settings, signal, context);
 export const generateImage = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, context?: RequestContext) => generate('image', prompt, reference, settings, signal, context);
-export async function enhancePrompt(prompt: string, mode: Mode, signal: AbortSignal): Promise<string> {
+export async function enhancePrompt(prompt: string, mode: Mode, signal: AbortSignal, context?: RequestContext): Promise<string> {
   if (mode === 'demo') throw new Error('Chế độ kiểm thử không có AI Enhance. Kết nối Muse AI để trau chuốt thật.');
   const instruction = `Rewrite this scene as one concise cinematic visual prompt in English. Preserve the characters, action and narrative. Add specific composition and lighting. Return only the rewritten prompt, no headings. Scene:\n${prompt}`;
-  const result = await api('/api/text', { prompt: instruction, accountId: 1 }, signal);
+  const result = await api('/api/text', { prompt: instruction, accountId: 1, ...context }, signal);
   signal.throwIfAborted();
   if (typeof result.text !== 'string' || !result.text.trim()) throw new Error('AI không trả về prompt văn bản.');
   return result.text.trim().slice(0, 8000);
@@ -133,13 +140,40 @@ export async function downloadVideo(media: MediaResult, id: number) {
 }
 export async function downloadMediaBatch(items: { media: MediaResult; id: number }[], kind: Settings['output']) {
   if (!items.length) throw new Error('Chưa có kết quả để tải.');
+  const native = window.museTransport?.export;
+  const destination = native ? await native('ensure') : webExportDirectory ? { cancelled: false } : await chooseExportDirectory();
+  if (destination.cancelled) return { cancelled: true as const };
   const files = [];
   for (const item of items) files.push(await mediaFile(item.media, item.id));
   const range = await reserveDownloadNumbers(items.length);
-  const archive = await createZip(files.map((file, index) => ({ blob: file.blob, name: numberedFilename(file, items[index].id, range.first + BigInt(index), range.namespace) })));
   const first = formatDownloadNumber(range.first); const last = formatDownloadNumber(range.last);
-  downloadBlob(archive, `Muse-${kind === 'image' ? 'Images' : 'Videos'}-${items.length}-${first}-${last}-${range.namespace}.zip`);
-  return { first, last };
+  const label = `Muse-${kind === 'image' ? 'Images' : 'Videos'}-${items.length}-${first}-${last}-${range.namespace}`;
+  let session: { id: string; name: string } | undefined;
+  try {
+    let directory: ExportDirectory | undefined;
+    if (native) session = await native('begin', { kind, count: items.length, first, last, namespace: range.namespace });
+    else {
+      for (let suffix=0;suffix<100;suffix++) {
+        const candidate=label+(suffix?`-${suffix+1}`:'');
+        try { await webExportDirectory!.getDirectoryHandle(candidate); }
+        catch (error) {
+          if ((error as Error).name!=='NotFoundError') throw error;
+          directory=await webExportDirectory!.getDirectoryHandle(candidate,{create:true});break;
+        }
+      }
+      if (!directory) throw new Error('Chưa tạo được thư mục mới cho bộ kết quả.');
+    }
+    for (const [index,file] of files.entries()) {
+      const name=numberedFilename(file,items[index].id,range.first+BigInt(index),range.namespace);
+      if (native) await native('write',{id:session!.id,name,bytes:await file.blob.arrayBuffer()});
+      else {
+        const handle=await directory!.getFileHandle(name,{create:true});
+        const stream=await handle.createWritable();await stream.write(file.blob);await stream.close();
+      }
+    }
+    const saved=native?await native('finish',session!.id):{directory:directory!.name,count:files.length};
+    return { cancelled:false as const,first,last,folder:saved.directory,count:saved.count };
+  } catch (error) { if (native&&session) await native('abort',session.id).catch(()=>{}); throw error; }
 }
 export const providerStatus = () => api('/api/status');
 export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer' | 'concurrency', data: Record<string, unknown> = {}) => api(`/api/account/${action}`, data);

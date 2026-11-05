@@ -1,15 +1,90 @@
 import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
-import { readZip } from '../fixtures/read-zip.mjs';
+import { mockFolderPicker, exportedFolders } from '../fixtures/folders.ts';
 const video = (await readFile(new URL('../../public/demo.mp4', import.meta.url))).toString('base64');
 const image = (await readFile(new URL('../../public/demo-image.png', import.meta.url))).toString('base64');
 const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aO1sAAAAASUVORK5CYII=', 'base64');
-test.beforeEach(async ({ page }) => { await page.goto('/'); });
+test.beforeEach(async ({ page }) => { await mockFolderPicker(page.context()); await page.goto('/'); });
 async function configureAdapter(page: Page) {
   await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'adapter', accounts: [], busy: false, credit: null, gpu: null } }));
   await page.reload();
 }
+
+test('clicking an image opens a decoded in-app viewer without a blank popup',async({page})=>{
+  await configureAdapter(page);
+  await page.route('**/api/image',route=>route.fulfill({json:{base64:image,mimeType:'image/png'}}));
+  await page.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();
+  await page.getByTestId('scene-1').getByRole('button',{name:'Tạo cảnh này',exact:true}).click();
+  await expect(page.getByTestId('scene-1').locator('.generated-image')).toBeVisible();
+  let popups=0;page.on('popup',()=>popups++);
+  await page.getByRole('button',{name:'Xem ảnh cảnh 1',exact:true}).click();
+  const viewer=page.getByRole('dialog',{name:'Xem ảnh cảnh 1',exact:true});
+  await expect(viewer.getByAltText('Ảnh lớn cảnh 1',{exact:true})).toBeVisible();
+  expect(await viewer.locator('img').evaluate((image:HTMLImageElement)=>[image.complete,image.naturalWidth>0,image.naturalHeight>0])).toEqual([true,true,true]);
+  await viewer.getByRole('button',{name:'Kích thước gốc',exact:true}).click();
+  await expect(viewer.locator('.viewer-canvas')).toHaveClass(/natural/);
+  const download=page.waitForEvent('download');await viewer.getByRole('button',{name:'Tải ảnh đang xem',exact:true}).click();
+  expect((await download).suggestedFilename()).toMatch(/^image-000001-scene-01-/);
+  await page.keyboard.press('Escape');await expect(viewer).toHaveCount(0);
+  expect(popups).toBe(0);
+});
+
+test('editing, importing, changing modes and exporting remain available while mixed jobs keep their own snapshots',async({page})=>{
+  await configureAdapter(page);
+  const requests:any[]=[];const pending=new Map<string,()=>Promise<void>>();
+  await page.route('**/api/image',async route=>{
+    const data=route.request().postDataJSON();requests.push({kind:'image',...data});
+    const finish=()=>route.fulfill({json:{base64:image,mimeType:'image/png'}});
+    if(data.sceneId===1)await new Promise<void>(resolve=>pending.set('image',async()=>{await finish();resolve()}));else await finish();
+  });
+  await page.route('**/api/video',async route=>{
+    requests.push({kind:'video',...route.request().postDataJSON()});
+    await new Promise<void>(resolve=>pending.set('video',async()=>{await route.fulfill({json:{base64:video,mimeType:'video/mp4'}});resolve()}));
+  });
+  await page.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();
+  await page.getByTestId('scene-3').getByRole('button',{name:'Tạo cảnh này',exact:true}).click();
+  await expect(page.getByTestId('scene-3').locator('.generated-image')).toBeVisible();
+  const original=await page.getByLabel('Kịch bản cảnh 1',{exact:true}).inputValue();
+  await page.getByTestId('scene-1').getByRole('button',{name:'Tạo cảnh này',exact:true}).click();
+  await expect.poll(()=>pending.has('image')).toBe(true);
+  await page.getByRole('button',{name:'Tạo video',exact:true}).click();
+  await page.getByLabel('Chất lượng',{exact:true}).selectOption('1080p');
+  await page.getByLabel('Kịch bản cảnh 2',{exact:true}).fill('A separate video while an image is running');
+  await page.getByTestId('scene-2').getByRole('button',{name:'Tạo cảnh này',exact:true}).click();
+  await expect.poll(()=>pending.has('video')).toBe(true);
+  expect(requests.find(data=>data.kind==='image'&&data.sceneId===1).resolution).toBe('2k');
+  expect(requests.find(data=>data.kind==='video').resolution).toBe('1080p');
+  await page.getByRole('button',{name:'Nhập TXT / SRT',exact:true}).click();
+  await page.getByLabel('Nội dung TXT / SRT').fill('New prompt one\nNew prompt two\nNew prompt three');
+  await page.getByRole('button',{name:'Nạp vào Studio',exact:true}).click();
+  await expect(page.locator('.status-badge.running')).toHaveCount(2);
+  await page.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();
+  const history=page.getByTestId('scene-3').locator('.media-history');await history.locator('summary').click();
+  await history.getByRole('button',{name:'Xem bản 1 cảnh 3',exact:true}).click();
+  await page.getByRole('button',{name:'Tải tất cả (1/10)',exact:true}).click();
+  await expect.poll(async()=>(await exportedFolders(page))[0]?.files.length).toBe(1);
+  await expect(page.locator('.status-badge.running')).toHaveCount(2);
+  await pending.get('video')!();await pending.get('image')!();
+  await expect(page.locator('.status-badge.running')).toHaveCount(0);
+  await expect(page.getByLabel('Kịch bản cảnh 1',{exact:true})).toHaveValue('New prompt one');
+  expect(requests.find(data=>data.kind==='image'&&data.sceneId===1).prompt).toBe(original);
+  await expect(page.getByTestId('scene-1').locator('.history-entry')).toHaveCount(1);
+  await expect(page.getByTestId('scene-1').locator('.generated-image')).toHaveCount(0);
+});
+
+test('AI Enhance can use another free scene while a video continues running',async({page})=>{
+  await configureAdapter(page);
+  let finishVideo:(()=>Promise<void>)|undefined;
+  await page.route('**/api/video',async route=>{await new Promise<void>(resolve=>{finishVideo=async()=>{await route.fulfill({json:{base64:video,mimeType:'video/mp4'}});resolve()}})});
+  await page.route('**/api/text',route=>route.fulfill({json:{text:'An enhanced second scene'}}));
+  await page.getByTestId('scene-1').getByRole('button',{name:'Tạo cảnh này',exact:true}).click();
+  await expect.poll(()=>Boolean(finishVideo)).toBe(true);
+  await page.getByTestId('scene-2').getByRole('button',{name:'AI Enhance',exact:true}).click();
+  await expect(page.getByLabel('Kịch bản cảnh 2',{exact:true})).toHaveValue('An enhanced second scene');
+  await expect(page.getByTestId('scene-1').locator('.status-badge')).toHaveText('Đang tạo');
+  await finishVideo!();await expect(page.getByTestId('scene-1').locator('video')).toBeVisible();
+});
 
 test('an account waiting for an email code stays unverified and cannot submit paid generation requests',async({page})=>{
   const account={id:1,state:'awaiting_code',authenticated:false,sessionAuthenticated:false,active:true,connectionMessage:'Đang chờ xác nhận mã trên trang Muse. Tool giữ nguyên phiên.'};
@@ -64,7 +139,7 @@ test('downloads reserve unique global numbers across image/video tabs, pass 1000
 });
 
 for (const kind of ['image', 'video'] as const) {
-  test(`one click downloads all ten selected ${kind} results in one valid ZIP`, async ({ page }) => {
+  test(`one click saves all ten selected ${kind} results in a normal folder`, async ({ page }) => {
     await configureAdapter(page);
     const videoBytes = Buffer.concat([Buffer.from(video, 'base64'), Buffer.alloc(256 * 1024, 0x61)]);
     const colors = await page.evaluate(() => Array.from({ length: 10 }, (_, index) => {
@@ -80,11 +155,11 @@ for (const kind of ['image', 'video'] as const) {
     await page.getByRole('button', { name: kind === 'image' ? 'TẠO 10 ẢNH' : 'TẠO 10 VIDEO', exact: true }).click();
     await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '10');
     let downloads = 0; page.on('download', () => downloads++);
-    const event = page.waitForEvent('download');
     await page.getByRole('button', { name: 'Tải tất cả (10/10)', exact: true }).click();
-    const download = await event;
-    expect(download.suggestedFilename()).toMatch(kind === 'image' ? /^Muse-Images-10-000001-000010-[a-f0-9]{32}\.zip$/ : /^Muse-Videos-10-000001-000010-[a-f0-9]{32}\.zip$/);
-    const files = readZip((await download.path())!);
+    await expect.poll(async()=> (await exportedFolders(page))[0]?.files.length).toBe(10);
+    const folder=(await exportedFolders(page))[0];
+    expect(folder.name).toMatch(kind==='image'?/^Muse-Images-10-000001-000010-[a-f0-9]{32}$/:/^Muse-Videos-10-000001-000010-[a-f0-9]{32}$/);
+    const files=folder.files;
     const namespace = files[0].name.match(/-([a-f0-9]{32})\.[a-z0-9]+$/)![1];
     const expectedNames = (first: number) => Array.from({ length: 10 }, (_, index) => `${kind === 'image' ? 'image' : 'video'}-${String(first+index).padStart(6,'0')}-scene-${String(index+1).padStart(2,'0')}-${namespace}.${kind === 'image' ? 'png' : 'mp4'}`);
     expect(files.map((file: { name: string }) => file.name)).toEqual(expectedNames(1));
@@ -105,21 +180,22 @@ for (const kind of ['image', 'video'] as const) {
       }
     }
     await expect(page.getByRole('button', { name: 'Tải tất cả (10/10)', exact: true })).toBeEnabled();
-    expect(downloads).toBe(1);
-    const archiveNames = new Set([download.suggestedFilename()]);
+    expect(downloads).toBe(0);
+    const archiveNames = new Set([folder.name]);
     const mediaNames = new Set(files.map((file: { name: string }) => file.name));
     for (const first of [11,21]) {
       if (first === 21) await page.reload();
-      const event = page.waitForEvent('download');
+      const count=(await exportedFolders(page)).length;
       await page.getByRole('button', { name: 'Tải tất cả (10/10)', exact: true }).click();
-      const next = await event;
-      expect(archiveNames.has(next.suggestedFilename())).toBe(false); archiveNames.add(next.suggestedFilename());
-      const exported = readZip((await next.path())!);
+      await expect.poll(async()=> (await exportedFolders(page))[count]?.files.length).toBe(10);
+      const next=(await exportedFolders(page))[count];
+      expect(archiveNames.has(next.name)).toBe(false); archiveNames.add(next.name);
+      const exported = next.files;
       expect(exported.map((file: { name: string }) => file.name)).toEqual(expectedNames(first));
       for (const file of exported) { expect(mediaNames.has(file.name)).toBe(false); mediaNames.add(file.name); }
     }
     expect(mediaNames.size).toBe(30);
-    expect(downloads).toBe(3);
+    expect(downloads).toBe(0);
   });
 }
 
@@ -131,10 +207,9 @@ test('batch download includes only completed selected scenes and their real scen
     await page.getByTestId(`scene-${id}`).getByRole('button', { name: 'Tạo cảnh này', exact: true }).click();
     await expect(page.getByTestId(`scene-${id}`).locator('.generated-image')).toBeVisible();
   }
-  const event = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Tải tất cả (2/10)', exact: true }).click();
-  const archive = await event;
-  const files = readZip((await archive.path())!);
+  await expect.poll(async()=> (await exportedFolders(page))[0]?.files.length).toBe(2);
+  const files=(await exportedFolders(page))[0].files;
   expect(files[0].name).toMatch(/^image-000001-scene-02-[a-f0-9]{32}\.png$/);
   expect(files[1].name).toMatch(/^image-000002-scene-07-[a-f0-9]{32}\.png$/);
 });
@@ -186,7 +261,7 @@ test('cancelling one queued scene sends no request and does not cancel the rest'
   expect(calls).toEqual([1]);
   await first!();
   await expect(page.getByRole('button', { name: 'TẠO 10 ẢNH', exact: true })).toBeVisible();
-  expect(calls).toEqual([1,2,3,4,6,7,8,9,10]);
+  await expect.poll(()=>calls).toEqual([1,2,3,4,6,7,8,9,10]);
   await expect(page.locator('.generated-image')).toHaveCount(9);
   await page.getByTestId('scene-5').getByRole('button', { name: 'Tạo cảnh này', exact: true }).click();
   await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '10');

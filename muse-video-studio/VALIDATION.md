@@ -1,3 +1,30 @@
+# Xác minh bản 1.5.0
+
+## Kết quả thay đổi
+
+- **Tải tất cả** ghi PNG/video trực tiếp vào thư mục thường thay cho ZIP media. Chọn thư mục gốc lần đầu, desktop nhớ lựa chọn sau khi khởi động lại; mỗi lượt tạo thư mục bộ mới, mở bằng File Explorer. Nút Thư mục lưu đổi nơi lưu. Cả tải riêng và lưu bộ dùng chung bộ đếm liên tục, không ghi đè tệp cũ.
+- **Đa nhiệm**: đổi tab ảnh/video, sửa prompt/thiết lập, nhập TXT/SRT, chọn ảnh/kết quả lịch sử, xem/tải media và thêm tác vụ ở ô trống trong lúc tạo. AI Enhance ở ô khác dùng cùng bộ điều phối. Mỗi tác vụ giữ bản chụp prompt/ảnh/thiết lập; kết quả luôn lưu lịch sử, chỉ tự chọn nếu còn khớp đầu vào hiện tại. Một ô có một tác vụ và nút Dừng riêng.
+- **Xem ảnh** trong dialog của Studio, có vừa cửa sổ/kích thước gốc/tải ảnh và Esc. Không dùng popup Blob vốn có thể hiện trắng trong Electron.
+- **Tiến độ Muse** ghi nhận số luồng đang mở và số prompt đã xuất hiện trong đúng hội thoại. Không nhận việc chọn 10 trong danh sách là bằng chứng đã gửi đủ 10 hoặc Muse đang render đồng thời.
+
+## Kiểm thử
+
+- `npm run build` và `npm test` qua. Thêm 2 ca ghi thư mục thật: nhớ nơi lưu, tạo thư mục khác khi trùng, từ chối đường dẫn tùy ý/tệp trùng, không ghi đè và xử lý hủy chọn thư mục.
+- Giao diện Playwright: **33/33 qua**. Xác nhận ảnh lớn giải mã được, đổi kích thước/đóng bằng Esc/tải trong trình xem, không mở popup. Giữ yêu cầu ảnh/video trong lúc đổi tab/chất lượng, nhập kịch bản mới, chọn lịch sử và lưu thư mục; yêu cầu ban đầu vẫn giữ dữ liệu đã chụp. AI Enhance ở ô khác chạy cùng yêu cầu video. Kiểm tra lưu các byte ảnh/video, bộ đếm qua reload, lịch sử và các lỗi cũ.
+- Cầu nối trình duyệt: **27/27 qua**; hàng đợi chung **6/6 qua**; chế độ hội thoại song song **5/5 qua**. Mười prompt được ghi nhận trước khi fixture trả bất kỳ kết quả nào, mười đường dẫn hội thoại khác nhau; hủy một cảnh không dừng chín cảnh khác. Tiến độ không chứa prompt hoặc URL.
+- Desktop Electron từ nguồn: **8/8 qua**. Mười yêu cầu ảnh và mười yêu cầu video từ ảnh thực sự chồng lấp trước khi nhận kết quả; kết quả riêng đúng từng cảnh, dừng riêng/cả bộ, giữ phiên khi khởi động lại, đăng nhập popup và kiểm tra ô Message.
+- Gói Linux độc lập: **1/1 qua**, hồ sơ mới, PATH không có Node/npm. Đăng nhập OTP fixture; chọn 10 qua giao diện và kiểm tra các đường dẫn riêng thật, không ép cờ song song. Đủ 10 yêu cầu hoạt động/chờ kết quả trước khi trả ảnh, 10 ảnh khác nhau. Đổi tab/chất lượng trong khi chạy, xem ảnh lớn không có cửa sổ mới. Lưu thư mục thật chứa 10 PNG giải mã được; không phát download ZIP. Khởi động lại giữ 10 bản lịch sử và thư mục gốc, tiếp tục đánh số 001011 rồi lưu bộ 9 ảnh vào thư mục mới; bộ cũ còn nguyên.
+- Đăng nhập email/OTP: **4/4 + 4/4 qua**, gồm giữ challenge khi đổi tab, chỉ mã mới nhất được chấp nhận, cookie HTTP-only, liên kết email và popup trống. Không gửi yêu cầu tạo nội dung khi kiểm tra đăng nhập.
+- Kiểm thử desktop được chạy riêng từng bộ. Khi chạy đồng thời nhiều bộ Electron/Chromium trong cloud, có lượt timeout; chạy tách riêng qua đầy đủ. Bước kiểm tra 10 hội thoại cần hơn 30 giây trên fixture có ô Message ban đầu, nên test gói chờ tối đa 90 giây cho bước này; không sửa hoặc bỏ qua kiểm tra hội thoại riêng trong sản phẩm.
+
+## Giới hạn xác minh
+
+Các ca tạo nội dung/xác thực là dịch vụ mô phỏng cục bộ, không phải tài khoản Muse thật. Đã chứng minh tool gửi 10 yêu cầu đồng thời khi có mười hội thoại riêng, chưa chứng minh Muse thật cho tài khoản người dùng chạy mười render cùng lúc. Không tăng hạn mức, tạo hội thoại giả, nhận ảnh cũ làm kết quả mới hoặc gửi lại tự động. Nếu Muse xếp hàng xử lý, tool vẫn phải chờ dịch vụ trả kết quả.
+
+Windows dùng Electron 45.2.2 x64 chính thức, kiểm checksum, manifest SHA-256, ZIP CRC và PE x64. Cloud Linux không chạy Windows EXE; gói Linux cùng mã/bố cục đã được chạy thật. Sandbox, context isolation và web security giữ nguyên trong bản phát hành; không thêm dependency.
+
+## Kết quả lịch sử trước 1.5.0
+
 # Xác minh bản 1.4.12
 
 ## Phạm vi sửa theo thông tin mới

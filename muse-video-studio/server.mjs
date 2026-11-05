@@ -83,7 +83,7 @@ async function callAdapter(endpoint, data, signal) {
 async function api(req, res, pathname) {
   if (req.method === 'GET' && pathname === '/api/status') {
     if (muse && !activeRequests && !accountBusy) await muse.refreshActive({ background: true });
-    return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, ...(muse ? { executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length } : {}), embeddedLogin, credit: null, gpu: null });
+    return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, ...(muse ? { executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), embeddedLogin, credit: null, gpu: null });
   }
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });

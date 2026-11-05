@@ -10,7 +10,7 @@ export type Settings = { model: Model; aspectRatio: '16:9' | '9:16'; duration: n
 export type MediaResult = { kind: Output; base64: string; mimeType: string; url: string; demo: boolean; savedId?: string; referenceCompressed?: boolean; metadata?: { duration?: number; width: number; height: number }; requestedResolution?: Resolution; aspectRatio?: Settings['aspectRatio'] };
 export type VideoResult = MediaResult;
 export type ImageResult = MediaResult;
-export type Scene = { id: number; enabled: boolean; prompt: string; reference: Reference | null; status: Status; error?: string; video?: VideoResult; image?: ImageResult; enhancing?: boolean; stopping?: boolean };
+export type Scene = { id: number; enabled: boolean; prompt: string; reference: Reference | null; status: Status; error?: string; video?: VideoResult; image?: ImageResult; enhancing?: boolean; stopping?: boolean; activeOutput?: Output };
 export const ADVENTURE = [
   'Một người thám hiểm bước vào ngôi đền cổ xưa trong rừng nhiệt đới, tia nắng vàng rọi xuyên qua tán lá, máy quay tiến chậm từ phía sau.',
   'Khám phá bức tường khắc cổ ngữ bí ẩn phát sáng ánh lân tinh xanh ngọc, máy quay lia chậm ngang qua các chi tiết.',

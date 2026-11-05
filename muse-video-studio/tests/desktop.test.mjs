@@ -105,7 +105,9 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       assert.equal(activeStatus.activeRequests, 10);
       assert.equal(activeStatus.accounts.length, 1);
       fixture.releaseAll(); fixture.state.hold = false;
-      await waitFor(async () => await studio.locator('.generated-image').count() === 10, 'ten image results');
+      try { await waitFor(async () => await studio.locator('.generated-image').count() === 10, 'ten image results'); } catch(error) {
+        console.error('Results diagnostic',JSON.stringify({images:await studio.locator('.generated-image').count(),history:await studio.locator('.history-entry').count(),errors:await studio.locator('.scene-error pre').allTextContents(),badges:await studio.locator('.status-badge').allTextContents(),status:await studio.evaluate(async()=>(await fetch('/api/status')).json())}));throw error;
+      }
       for (let i = 1; i <= 10; i++) {
         const request = fixture.state.submitted.find(request => request.prompt.includes(`Scene:\nDesktop image ${i}\n`));
         assert.ok(request);

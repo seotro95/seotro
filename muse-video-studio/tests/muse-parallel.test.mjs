@@ -61,6 +61,8 @@ test('parallel mode verifies service-created chat routes without rendering, and 
       const tasks = controls.map((control, index) => driver.generateImage({ accountId: 1, prompt: `Parallel scene ${index + 1}`, aspectRatio: '16:9', resolution: '2k', characterLock: false, batchId, sceneId: index + 1 }, control.signal));
       const settled = Promise.allSettled(tasks);
       await waitFor(() => fixture.state.submitted.length === 10);
+      await waitFor(() => driver.progress().filter(stage => stage.active && stage.submitted).length === 10);
+      assert.ok(driver.progress().every(stage => !('prompt' in stage) && !('url' in stage)));
       assert.equal(fixture.state.peak, 10);
       assert.equal(new Set(fixture.state.submitted.map(request => request.path)).size, 10);
       assert.equal((await change(1)).status, 409);
