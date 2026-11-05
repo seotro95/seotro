@@ -42,6 +42,18 @@ def main():
             from qwen_tts import Qwen3TTSModel
             suffix = 'Base' if engine == 'qwen_clone' else 'CustomVoice'
             model = Qwen3TTSModel.from_pretrained(f'Qwen/Qwen3-TTS-12Hz-0.6B-{suffix}', device_map='cpu', dtype=torch.float32, attn_implementation='sdpa')
+            # Exercise generation online so all tokenizer assets are cached too.
+            import soundfile as sf
+            reference_text = 'Hello, welcome to the local voice studio. This recording checks that every model is ready.'
+            if engine == 'qwen':
+                samples, rate = model.generate_custom_voice(text=reference_text, language='English', speaker='Ryan', max_new_tokens=256, do_sample=False, subtalker_dosample=False)
+                sf.write(str(DATA/'models/qwen-check.wav'), samples[0], rate)
+            else:
+                reference = DATA/'models/qwen-check.wav'
+                if reference.is_file():
+                    prompt = model.create_voice_clone_prompt(ref_audio=str(reference), ref_text=reference_text)
+                    samples, rate = model.generate_voice_clone(text='This is the offline voice cloning check.', language='English', voice_clone_prompt=prompt, max_new_tokens=256, do_sample=False, subtalker_dosample=False)
+                    sf.write(str(DATA/'models/qwen-clone-check.wav'), samples[0], rate)
         marker.write_text('Prepared locally\n', encoding='utf-8')
         del model
         print(f'{engine}: ready', flush=True)

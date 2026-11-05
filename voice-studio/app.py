@@ -102,7 +102,7 @@ async def lifespan(application):
                 writing.KEYS.clear()
 
 
-app = FastAPI(title='Voice Studio · Local AI', version='3.6.0', lifespan=lifespan)
+app = FastAPI(title='Voice Studio · Local AI', version='3.6.1', lifespan=lifespan)
 app.mount('/static', StaticFiles(directory=BASE / 'static'), name='static')
 @app.exception_handler(RequestValidationError)
 async def invalid_request(request, error):
@@ -248,6 +248,7 @@ def delete_voice(ident: str):
 
 
 class Speech(BaseModel):
+    target_seconds: float | None = Field(default=None, gt=0, le=10800, allow_inf_nan=False)
     max_cue_tempo: float = Field(default=1.5,ge=1,le=2)
     cue_fit: str = Field(default='strict',pattern='^(strict|gap)$')
     timeline_seconds: float = Field(default=10800,gt=0,le=10800)
@@ -407,6 +408,13 @@ def speech(body: Speech):
     if engine != 'system' and not (DATA / 'models' / f'{engine}.ready').exists():
         raise HTTPException(503, f'Mô hình {engine} chưa sẵn sàng. Chạy lệnh tải mô hình trong hướng dẫn cài đặt.')
     try:
+        if body.target_seconds is not None:
+            if body.target_seconds > body.max_minutes*60:
+                raise ValueError('Thời lượng đích vượt giới hạn bản thu đã chọn.')
+            if body.target_seconds < 1/24000:
+                raise ValueError('Thời lượng đích quá ngắn để tạo âm thanh.')
+            if body.video_id and body.target_seconds + body.video_offset > meta['duration'] + .001:
+                raise ValueError('Thời lượng đích cộng thời điểm bắt đầu vượt thời lượng video.')
         segment_plan = 'nano-packed-v1' if engine == 'vieneu_nano' and body.paragraph_pause == 0 else 'classic-v1'
         segments = plan_segments({**body.model_dump(), 'engine': engine, 'segment_plan': segment_plan})
         from narration import validate_voice_text
@@ -414,6 +422,8 @@ def speech(body: Speech):
             if segment.text:validate_voice_text(segment.text,engine,f'Câu SRT {segment.cue+1}' if body.input_format=='srt' else f'Đoạn {index+1}')
         if body.input_format == 'srt':
             cues = parse_srt(body.text)
+            if body.target_seconds is not None and (body.cue_fit != 'strict' or abs(body.target_seconds-cues[-1]['end']) > 1/24000):
+                raise ValueError('SRT lấy thời lượng từ mốc kết thúc cuối cùng và dùng chế độ bám mốc. TXT nhập cùng thời lượng này.')
             if body.cue_fit=='gap' and cues[-1]['end']>body.timeline_seconds+.001:
                 raise ValueError('Phụ đề vượt thời lượng video đã chọn.')
             if cues[-1]['end'] > body.max_minutes*60:
@@ -481,7 +491,11 @@ def export_voice(ident:str,extension:str):
         temporary=DATA/'audio'/f'{ident}-{uuid.uuid4().hex}.{extension}'
         try:
             subprocess.run(['ffmpeg','-nostdin','-v','error','-i',str(source),'-vn','-codec:a','libmp3lame' if extension=='mp3' else 'pcm_s16le',*(['-b:a','192k'] if extension=='mp3' else []),'-y',str(temporary)],check=True,timeout=600,capture_output=True)
+            if job.get('duration_verified'):
+                from duration_sync import verify_export
+                verify_export(temporary, DATA/'parts', job.get('duration_report', {}).get('expected_seconds'))
             temporary.replace(target)
+        except ValueError as exc:raise HTTPException(500,str(exc)) from None
         except (OSError,subprocess.SubprocessError):raise HTTPException(500,'Chưa chuyển được âm thanh. Kiểm tra FFmpeg và dung lượng trống.') from None
         finally:temporary.unlink(missing_ok=True)
     return FileResponse(target,media_type='audio/mpeg' if extension=='mp3' else 'audio/wav',filename=f'voice-studio.{extension}')
