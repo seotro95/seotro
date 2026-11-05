@@ -19,6 +19,12 @@ const NEW_CHAT = /^(new chat|new conversation|cuộc trò chuyện mới|trò ch
 const MESSAGES = '[data-message-item]';
 const STOP = '[data-testid="hatch-composer-stop-button"]';
 const NOTICE = '[data-testid="assistant-response-error-notice"]';
+const OTP_INPUT = [
+  'input[autocomplete~="one-time-code" i]', 'input[name="otp" i]',
+  'input[name="verificationCode" i]', 'input[name="verification_code" i]',
+  'input[aria-label="Verification code" i]', 'input[aria-label="Mã xác nhận" i]',
+  'input[aria-label="Mã xác minh" i]',
+].map(selector => `${selector}:visible:not([data-message-item] *)`).join(', ');
 // Chromium's rich editor can expose extra blank lines via innerText after fill.
 // Compare normalized layout whitespace; the original prompt is still entered.
 const comparableText = text => text.replace(/\r\n?/g, '\n').replace(/\u00a0/g, ' ').replace(/\n+/g, '\n').trim();
@@ -152,15 +158,37 @@ export class MuseBrowser {
     catch { throw fail('MUSE_EMAIL_LINK_FAILED', 'Chưa mở được liên kết trong phiên Muse. Kiểm tra Internet; nếu liên kết đã dùng hoặc hết hạn, yêu cầu email mới.', 503); }
     await this.refreshActive();
   }
-  async refreshActive() {
+  async pendingCode(page) {
+    const frames = page.frames ? page.frames() : [page];
+    for (const frame of frames.slice(0, 12)) {
+      try {
+        if (page.mainFrame && frame !== page.mainFrame()) {
+          const element = await frame.frameElement();
+          try { if (!await element.isVisible()) continue; } finally { await element.dispose(); }
+        }
+        if (await frame.locator(OTP_INPUT).count()) return true;
+      } catch { /* A navigating frame will be inspected on the next check. */ }
+    }
+    return false;
+  }
+  async refreshActive({ background = false } = {}) {
     const active = this.active;
     if (!active || active.page.isClosed()) return;
+    // The website owns the challenge. Background status polling must not send
+    // anonymous auth POSTs while the user is requesting/entering a code.
+    if (background && active.isLoginVisible?.()) return;
     const account = this.account(active.id);
-    account.checkedAt = new Date().toISOString();
     // The login page remains separate from the ten worker conversations.
     if (new URL(active.page.url()).origin !== new URL(this.serviceURL).origin) {
       Object.assign(account, { authenticated: false, sessionAuthenticated: false, composerReady: false, state: 'login_open', balance: null, connectionMessage: 'Hoàn tất đăng nhập để tab xác thực quay về Muse, rồi bấm Kiểm tra phiên.' }); return;
     }
+    if (await this.pendingCode(active.page)) {
+      if (this.active !== active) return;
+      Object.assign(account, { authenticated: false, sessionAuthenticated: false, composerReady: false, state: 'awaiting_code', balance: null,
+        connectionMessage: 'Đang chờ xác nhận mã trên trang Muse. Tool giữ nguyên phiên và tạm ngừng kiểm tra ngầm. Nhập mã mới nhất, xác nhận xong rồi quay về Studio.' });
+      return;
+    }
+    account.checkedAt = new Date().toISOString();
     // Only the owned browser uses its session. No cookie/token export or passwords.
     const probe = await this.inspectAuthentication(active.page);
     const composerReady = Boolean(await this.findComposer(active.page).catch(() => null));

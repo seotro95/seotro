@@ -82,7 +82,7 @@ async function callAdapter(endpoint, data, signal) {
 }
 async function api(req, res, pathname) {
   if (req.method === 'GET' && pathname === '/api/status') {
-    if (muse && !activeRequests && !accountBusy) await muse.refreshActive();
+    if (muse && !activeRequests && !accountBusy) await muse.refreshActive({ background: true });
     return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, ...(muse ? { executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length } : {}), embeddedLogin, credit: null, gpu: null });
   }
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });

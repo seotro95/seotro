@@ -1,4 +1,4 @@
-# Muse AI Studio 1.4.11 · Bản Windows đầy đủ
+# Muse AI Studio 1.4.12 · Bản Windows đầy đủ
 
 [Bản Windows x64 đầy đủ](Muse-AI-Studio-Windows-x64.zip) · [Mã nguồn đầy đủ](Muse-Video-Workstation.zip) · [Hướng dẫn](muse-video-studio/README.md)
 
@@ -7,9 +7,11 @@
 3. Đăng nhập Muse ngay trong tool, bấm **← Về Studio** rồi **Kiểm tra phiên**.
 4. Nhập prompt hoặc TXT/SRT, chọn ảnh/video, bấm **TẠO 10 ẢNH / VIDEO**.
 
-Không chép `.data`, `.env`, `node_modules` hoặc tệp chương trình từ bản cũ. Gói mới có runtime và các thư viện cần thiết; tạo hồ sơ đăng nhập mới khi chạy. Thanh trên và tiêu đề cửa sổ hiện **1.4.11**.
+Không chép `.data`, `.env`, `node_modules` hoặc tệp chương trình từ bản cũ. Gói mới có runtime và các thư viện cần thiết; tạo hồ sơ đăng nhập mới khi chạy. Thanh trên và tiêu đề cửa sổ hiện **1.4.12**.
 
-Bản 1.4.11 sửa cửa sổ đăng nhập trống bị chặn và thêm nút **Liên kết email**. Yêu cầu email đăng nhập mới trong tab Muse, sao chép liên kết từ email, bấm Liên kết email để mở trong cùng phiên của tool. Nếu link đã mở ở trình duyệt khác hoặc hết hạn, xin email mới. Mã xác nhận/mật khẩu vẫn nhập trực tiếp trên trang Muse. Nút **Tải lại Muse** giữ phiên và dữ liệu. Không gửi link/mã/mật khẩu vào chat.
+Bản 1.4.12 tập trung vào **mã xác nhận email**: nhập mã mới nhất trực tiếp trên trang Muse trong tool, xác nhận xong mới quay Về Studio và Kiểm tra phiên. Tool dừng kiểm tra ngầm khi đang ở tab Muse hoặc còn ô OTP, giữ challenge và không tự gửi lại mã. Nếu vẫn quay về nhập email, bấm **Chẩn đoán** trên thanh trên → **Sao chép chẩn đoán** để lấy trạng thái HTTP đã che thông tin nhạy cảm. Chưa xác minh nguyên nhân lỗi trên Muse thật.
+
+Giữ sửa cửa sổ đăng nhập trống bị chặn và nút **Liên kết email** cho phương thức dùng liên kết. Yêu cầu email đăng nhập mới trong tab Muse, sao chép liên kết từ email, bấm Liên kết email để mở trong cùng phiên của tool. Nếu link đã mở ở trình duyệt khác hoặc hết hạn, xin email mới. Mã xác nhận/mật khẩu vẫn nhập trực tiếp trên trang Muse. Nút **Tải lại Muse** giữ phiên và dữ liệu. Không gửi link/mã/mật khẩu vào chat.
 
 Giữ **số thứ tự tải tự tăng**, dùng chung cho tải riêng, lịch sử và các tệp trong ZIP. Bộ đầu 1–10, bộ sau 11–20; tiếp tục qua 1.000 và lớn hơn, giữ khi mở lại cùng hồ sơ. Tên ZIP cũng ghi dải số; mã riêng của bản cài tránh trùng với tệp từ hồ sơ khác. Không cần nhập số hoặc xác nhận thêm.
 

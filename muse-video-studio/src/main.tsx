@@ -18,7 +18,7 @@ type ProviderStatus = { museConfigured: boolean; busy: boolean; transport?: 'bro
 type RenderJob = { scene: Scene; control: AbortController; started: boolean };
 type RenderBatch = { control: AbortController; batchId: string; settings: Settings; lanes: number; completed: number; failed: number; cancelled: number; loginRequired: boolean };
 const hasVerifiedSession = (account?: AccountSession) => Boolean(account?.sessionAuthenticated ?? account?.authenticated);
-const accountStateName = (account?: AccountSession) => !account ? 'Chưa kết nối' : hasVerifiedSession(account) ? account.active ? 'Đã xác minh' : 'Phiên đã lưu' : account.state === 'check_failed' ? 'Chưa xác minh được phiên' : account.state === 'login_open' ? 'Chờ đăng nhập' : account.state === 'saved' || account.state === 'session_saved' ? 'Cần kiểm tra phiên' : 'Chưa kết nối';
+const accountStateName = (account?: AccountSession) => !account ? 'Chưa kết nối' : hasVerifiedSession(account) ? account.active ? 'Đã xác minh' : 'Phiên đã lưu' : account.state === 'awaiting_code' ? 'Đang chờ mã xác nhận' : account.state === 'check_failed' ? 'Chưa xác minh được phiên' : account.state === 'login_open' ? 'Chờ đăng nhập' : account.state === 'saved' || account.state === 'session_saved' ? 'Cần kiểm tra phiên' : 'Chưa kết nối';
 function load() { try { return restoreWorkspace(localStorage.getItem(STORAGE)); } catch { return restoreWorkspace(null); } }
 const initial = load();
 function referenceKey(scene: Scene, config: Settings) {

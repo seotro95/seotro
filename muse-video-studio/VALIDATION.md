@@ -1,3 +1,28 @@
+# Xác minh bản 1.4.12
+
+## Phạm vi sửa theo thông tin mới
+
+Người dùng xác nhận nhận mã OTP qua email và bị quay lại ô email sau nhập mã. Luồng này khác liên kết email ở 1.4.11. Kiểm thử OTP thông thường trên mã cũ qua 3/3; chưa có phản hồi HTTP từ Muse thật để kết luận nguyên nhân dịch vụ.
+
+Mã cũ vẫn gửi auth-check POST từ kiểm tra trạng thái trong lúc challenge đang mở. Fixture phát hiện một POST sau đổi tab; khi mô phỏng dịch vụ làm đổi cookie pending ở anonymous check, kiểm thử giữ/nhập mã thất bại. Bản này tạm ngừng kiểm tra nền khi view Muse đang mở; khi còn trường OTP/one-time-code nhìn thấy, cả kiểm tra trực tiếp cũng giữ trạng thái awaiting_code, không gửi thêm POST. Sau trang xác nhận xong và quay về Studio mới xác minh lại. Không đọc giá trị, lưu hoặc tự điền/gửi OTP.
+
+Thêm Chẩn đoán đăng nhập trên thanh trên. Bộ ghi thụ động chỉ giữ 24 sự kiện trong RAM: giờ, method đã giới hạn, route công khai hoặc [ẩn], status/lỗi mạng được lọc và boolean có Set-Cookie. Không đọc body, referrer hoặc giá trị header; bỏ query/fragment và che subdomain. Snapshot không có email, mã, cookie/token. Sao chép chỉ xảy ra khi người dùng bấm nút trong dialog; không gửi báo cáo ra ngoài và không tạo auth/render request.
+
+## Kiểm thử
+
+- `tests/otp.test.mjs`: **4/4 qua** sau sửa, với fixture từ chối challenge bị auth-check can thiệp. Đổi Studio/Muse giữ form và challenge, số auth-check khi đang pending bằng 0; chẩn đoán không phát thêm POST hoặc chứa email/mã/challenge; mã cũ bị từ chối, mã mới gõ/dán được, cookie HTTP-only xác minh thành công. Fixture dùng mã giả, không gửi email thật.
+- `tests/login-diagnostics.test.mjs`: **3/3 qua** và đưa vào `npm test`. Header cookie/body là getter cố ý ném lỗi nếu bị đọc; recorder chỉ đọc metadata cho phép. Kiểm loại query/email/mã/fragment/path riêng, che subdomain, bỏ service khác, giới hạn 24 sự kiện và whitelist lỗi mạng.
+- `npm run test:e2e`: **30/30 qua**, gồm awaiting_code không bật render, đầy đủ tải ZIP/số thứ tự/lịch sử và các chức năng cũ.
+- `tests/login.test.mjs`: **4/4 qua**; `npm run test:desktop`: **8/8 qua**; `npm run test:browser-bridge`: **27/27 qua**. Fixture popup đóng sau 50 ms để tránh đóng target trước khi nhận xong sự kiện click; không sửa sản phẩm để làm chậm popup.
+- `tests/portable.test.mjs`: **1/1 qua** trên executable Linux đóng gói, hồ sơ mới và PATH không có Node/npm. Đăng nhập bằng OTP thật trong trang fixture, không can thiệp challenge; tạo đủ 10 ảnh qua hàng đợi; ZIP CRC và ảnh giải mã được; mở lại giữ phiên/thư viện và bộ đếm tải tiếp 1011.
+- `npm test`, TypeScript/Vite/build và whitespace Git qua. Không thêm dependency. Sandbox, context isolation và web security vẫn bật ở bản phát hành.
+
+## Giới hạn xác minh
+
+Tất cả ca xác thực trên là dịch vụ mô phỏng, không phải tài khoản Muse thật của người dùng. Việc anonymous auth-check làm mất challenge là chế độ fixture để bảo vệ luồng OTP, chưa được xác nhận là nguyên nhân tại Muse. Nếu vẫn quay lại email, cần báo cáo chẩn đoán đã lọc để biết HTTP/service error thực tế. Không giả xác minh hoặc vượt quy định nhà cung cấp. Windows dùng Electron 45.2.2 x64 chính thức, kiểm checksum, manifest SHA-256, ZIP CRC và PE x64; cloud Linux không chạy Windows EXE.
+
+## Kết quả lịch sử trước 1.4.12
+
 # Xác minh bản 1.4.11
 
 ## Phát hiện và sửa

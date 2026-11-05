@@ -1,4 +1,4 @@
-# Muse AI Studio 1.4.11 · Một tài khoản, 10 cảnh
+# Muse AI Studio 1.4.12 · Một tài khoản, 10 cảnh
 
 Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đăng nhập Muse nằm trong cửa sổ tool. Mười cảnh dùng chung một phiên tài khoản. Mỗi ô có nút Tạo/Dừng riêng và lịch sử ảnh/video lưu trên máy. Có thể kiểm tra để bật tối đa 10 hội thoại song song.
 
@@ -10,11 +10,23 @@ Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đă
 4. Có thể bấm **Kiểm tra ô Message** trước khi tạo. Bước này tìm ô nhập trong trang luồng, không gửi prompt hoặc render.
 5. Nhập 10 prompt hoặc TXT/SRT, chọn **Tạo ảnh hàng loạt** / **Tạo video**, bấm **TẠO 10 ẢNH / VIDEO**.
 
-Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.4.11** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
+Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.4.12** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
 
 Cầu nối giao diện **không chính thức**. Kiểm thử dùng Chromium/Electron thật và dịch vụ giả lập cục bộ; chưa tự động tạo media hoặc đọc số dư trên Muse.ai thật. Người dùng xác nhận có thể gửi/nhận tin nhắn thủ công trong tab Muse của tool. Tài khoản thật có thể giới hạn render đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các lựa chọn model, độ nét và thời lượng là yêu cầu bằng prompt, cần xác nhận bằng kết quả thật.
 
-## Đăng nhập bằng email trong bản 1.4.11
+## Đăng nhập bằng mã xác nhận email trong bản 1.4.12
+
+1. Mở **Đăng nhập Muse trong tool**, nhập email và yêu cầu mã.
+2. Giữ trang Muse đang chờ mã. Nhập hoặc dán **mã mới nhất** vào chính ô mã xác nhận trên trang Muse, rồi bấm xác nhận.
+3. Sau khi trang Muse hoàn tất đăng nhập, bấm **← Về Studio → Kiểm tra phiên**. Trạng thái chờ mã không được dùng để chạy tạo nội dung.
+
+Tool tạm dừng kiểm tra phiên ngầm khi tab Muse đang mở. Nếu còn thấy ô `one-time-code`/OTP, kể cả sau đổi tab, tool giữ trạng thái **Đang chờ mã xác nhận** và không gửi thêm auth-check POST. Không đọc, lưu, điền thay hoặc gửi lại mã; challenge và phản hồi xác minh vẫn do trang Muse xử lý. Xin mã mới có thể làm mã cũ không còn dùng được.
+
+Nếu nhập mã mới vẫn quay lại ô email, bấm **Chẩn đoán** trên thanh trên cùng rồi **Sao chép chẩn đoán**. Báo cáo chỉ gồm phiên bản, trạng thái đã xác minh và các phản hồi HTTP/lỗi mạng gần đây của bước đăng nhập. Không chứa email, OTP, mật khẩu, query, fragment, cookie hoặc nội dung request/response; các đoạn đường dẫn không công khai được che. Chẩn đoán thụ động, không gửi thêm yêu cầu xác thực và không gọi render. Có thể dùng báo cáo này để kiểm tra lỗi dịch vụ thực tế.
+
+Kiểm thử mô phỏng đã xác nhận giữ được challenge, đổi tab, gõ/dán mã và xác minh cookie HTTP-only. Chưa có phiên Muse thật để khẳng định nguyên nhân mọi vòng lặp đăng nhập hoặc xác nhận tài khoản của người dùng.
+
+## Đăng nhập bằng liên kết email (khi Muse gửi liên kết)
 
 Bản này sửa trường hợp cửa sổ đăng nhập được mở trống (`about:blank`) rồi mới chuyển sang trang xác thực. Cửa sổ phụ vẫn chỉ dùng phiên Muse của tool, giữ sandbox và không có quyền Studio/Node.js. Trang đăng nhập hiện ngay khi mở, có nút **Tải lại Muse** để mở lại trang chính mà không xóa cookie, ảnh/video hay bộ đếm.
 

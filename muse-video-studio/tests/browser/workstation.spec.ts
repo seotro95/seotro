@@ -10,6 +10,18 @@ async function configureAdapter(page: Page) {
   await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'adapter', accounts: [], busy: false, credit: null, gpu: null } }));
   await page.reload();
 }
+
+test('an account waiting for an email code stays unverified and cannot submit paid generation requests',async({page})=>{
+  const account={id:1,state:'awaiting_code',authenticated:false,sessionAuthenticated:false,active:true,connectionMessage:'Đang chờ xác nhận mã trên trang Muse. Tool giữ nguyên phiên.'};
+  await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'browser',embeddedLogin:true,accounts:[account]}}));
+  const requests:string[]=[];
+  page.on('request',request=>{if(/\/api\/(image|video|text)$/.test(request.url()))requests.push(request.url())});
+  await page.reload();
+  await expect(page.locator('.single-account-controls')).toContainText('Đang chờ mã xác nhận');
+  await expect(page.getByRole('button',{name:'TẠO 10 VIDEO',exact:true})).toBeDisabled();
+  await expect(page.getByTestId('scene-1').getByRole('button',{name:'Tạo cảnh này',exact:true})).toBeDisabled();
+  expect(requests).toEqual([]);
+});
 async function seedDownloadSequence(page: Page, last: string) {
   await page.evaluate(last => new Promise<void>((resolve,reject) => {
     const request = indexedDB.open('muse-studio-downloads-v1',1);

@@ -14,6 +14,7 @@ export class EmbeddedMuseHost {
     this.views = new Map();
     this.login = null;
     this.browser = null;
+    this.loginVisible = false;
   }
   allowNavigation(url) {
     // OAuth/email clients commonly open an empty window and navigate it later.
@@ -77,6 +78,7 @@ export class EmbeddedMuseHost {
   }
   showLogin() {
     if (!this.login) return;
+    this.loginVisible = true;
     this.window.contentView.addChildView(this.login.view);
     this.login.view.setVisible(true);
     this.layout();
@@ -84,6 +86,7 @@ export class EmbeddedMuseHost {
     this.window.webContents.send('studio:view-changed', 'muse');
   }
   hideLogin() {
+    this.loginVisible = false;
     this.login?.view.setVisible(false);
     this.window.webContents.send('studio:view-changed', 'studio');
   }
@@ -101,6 +104,7 @@ export class EmbeddedMuseHost {
     return {
       context: login.page.context(), page: login.page,
       showLogin: () => this.showLogin(),
+      isLoginVisible: () => this.loginVisible,
       createWorkerPage: async () => (await this.createView({ worker: true })).page,
       destroyWorkerPage: page => this.removePage(page),
       close: async () => {

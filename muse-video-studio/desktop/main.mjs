@@ -1,10 +1,11 @@
-import { app, BrowserWindow, WebContentsView, ipcMain, dialog, session } from 'electron';
+import { app, BrowserWindow, WebContentsView, ipcMain, dialog, session, clipboard } from 'electron';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { startStudioServer } from '../server.mjs';
 import { MuseBrowser } from '../muse-browser.mjs';
 import { EmbeddedMuseHost } from './embedded-host.mjs';
+import { loginRecorder } from './login-diagnostics.mjs';
 
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const root = path.dirname(directory);
@@ -41,6 +42,9 @@ async function start() {
   if (fixture && (new URL(fixture).protocol !== 'http:' || new URL(fixture).hostname !== '127.0.0.1')) throw new Error('Fixture must use local HTTP.');
   const serviceURL = fixture || 'https://muse.ai/';
   const museSession = session.fromPartition('persist:muse');
+  const loginLog = loginRecorder(serviceURL);
+  museSession.webRequest.onCompleted(details => loginLog.completed(details));
+  museSession.webRequest.onErrorOccurred(details => loginLog.failed(details));
   museSession.setPermissionRequestHandler((_contents, _permission, callback) => callback(false));
   const proxyServer = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
   if (proxyServer) await museSession.setProxy({ proxyRules: proxyServer, proxyBypassRules: 'localhost;127.0.0.1' });
@@ -104,6 +108,16 @@ async function start() {
     }
     else if (name === 'muse') await muse.connect(1);
     else if (name === 'reload-muse') { await muse.reopenLogin(); studio.webContents.send('studio:session-refresh'); }
+    else if (name === 'login-diagnostics') {
+      const report = loginLog.snapshot({ version, loginVisible: host.loginVisible, account: muse.snapshot()[0] });
+      const lines = report.events.slice(-8).map(event => `${event.time.slice(11,19)} ${event.method} ${event.route} → ${event.status || event.error}${event.setCookie ? ' · Có Set-Cookie' : ''}`);
+      const result = await dialog.showMessageBox(window, { type: 'info', title: 'Chẩn đoán đăng nhập Muse',
+        message: report.state === 'awaiting_code' ? 'Đang chờ mã xác nhận trên trang Muse' : report.verified ? 'Phiên đã được xác minh' : 'Chưa xác minh được phiên Muse',
+        detail: `Bản ${version}. Báo cáo không chứa mã xác nhận, email, mật khẩu, cookie hoặc nội dung yêu cầu.\n${lines.length ? lines.join('\n') : 'Chưa ghi nhận phản hồi đăng nhập.'}`,
+        buttons: ['Đóng','Sao chép chẩn đoán'],defaultId:0,cancelId:0 });
+      if (result.response === 1) clipboard.writeText(JSON.stringify(report,null,2));
+      if (host.loginVisible) host.login?.view.webContents.focus();
+    }
     else if (name === 'email-link') {
       if (emailWindow && !emailWindow.isDestroyed()) { emailWindow.focus(); return; }
       emailWindow = new BrowserWindow({ parent: window, modal: true, width: 620, height: 430, resizable: false, autoHideMenuBar: true, title: 'Đăng nhập Muse từ email',
