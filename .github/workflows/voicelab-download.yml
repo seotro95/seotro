@@ -1,0 +1,32 @@
+name: Publish verified Hmoob VoiceLab download
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['codex/voicelab-complete-20261021']
+    paths: ['.github/workflows/voicelab-download.yml', '.github/scripts/publish_voicelab.py']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: voicelab-download-39603829839
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'seotro95/seotro' && github.ref == 'refs/heads/codex/voicelab-complete-20261021'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify and publish the unchanged tested ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_HOST: github.com
+        run: python3 .github/scripts/publish_voicelab.py --work-dir "$RUNNER_TEMP/voicelab-public-download"

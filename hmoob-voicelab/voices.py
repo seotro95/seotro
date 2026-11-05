@@ -45,6 +45,8 @@ class Voices:
         path = self.data / 'references' / f'{ident}.json'
         if path.is_file():
             reference = self.validate(ident, json.loads(path.read_text(encoding='utf-8')))
+        elif 'reference' in record:
+            reference = self.validate(ident, record['reference'])
         return {'id': ident, 'name': record['name'], 'duration': record['duration'],
                 'sample_url': f'/api/voices/{ident}/sample', 'reference': reference,
                 'reference_ready': bool(reference['text'].strip())}
