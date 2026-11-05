@@ -51,6 +51,7 @@ export class MuseBrowser {
     this.inFlightMarkers = new Set();
     this.unsafeMarkers = new Set();
     this.imageBatches = new Map();
+    this.parallelRoutes = [];
     this.active = null;
     this.profilePath = accountProfile || path.join(this.profileRoot, 'slot-01');
     this.accounts = [{ id: 1, state: existsSync(this.profile(1)) ? 'saved' : 'disconnected', authenticated: false, sessionAuthenticated: false, composerReady: false, connectionMessage: '', checkedAt: null, balance: null }];
@@ -66,6 +67,8 @@ export class MuseBrowser {
     const active = this.active;
     this.active = null;
     if (active) {
+      if (this.parallelRoutes.length) this.maxConcurrency = 1;
+      this.parallelRoutes = [];
       const account = this.account(active.id);
       account.state = account.authenticated ? 'session_saved' : 'saved';
       await (active.close ? active.close() : active.context.close()).catch(() => {});
@@ -217,6 +220,64 @@ export class MuseBrowser {
     return current.origin === service.origin && !/\/(?:auth|oauth|login|signin|callback)(?:\/|$)/i.test(current.pathname)
       ? new URL(current.pathname, service.origin).href : this.serviceURL;
   }
+  conversationURL(page) {
+    const url = new URL(page.url());
+    if (url.origin !== new URL(this.serviceURL).origin || url.username || url.password || /\/(?:auth|oauth|login|signin|callback)(?:\/|$)/i.test(url.pathname)) return null;
+    url.hash = '';
+    return url.href;
+  }
+  async setConcurrency(count, signal) {
+    if (![1, 2, 3, 5, 10].includes(count)) throw fail('MUSE_CONCURRENCY_INVALID', 'Chọn 1, 2, 3, 5 hoặc 10 luồng.', 400);
+    if (this.reserved || this.workers.size) throw fail('MUSE_CHAT_BUSY', 'Đợi các cảnh hoàn tất trước khi đổi số luồng.', 409);
+    this.maxConcurrency = 1; this.parallelRoutes = [];
+    if (count === 1) return { executionConcurrency: 1, message: 'Đã chọn một luồng. Các cảnh được xử lý lần lượt.' };
+    await this.open(); await this.refreshActive();
+    if (!this.account(1).authenticated) throw fail('MUSE_LOGIN_REQUIRED', 'Đăng nhập Muse và kiểm tra phiên trước khi bật song song.', 401);
+    const owned = this.active;
+    const pages = [];
+    const routes = new Set();
+    const stop = () => { for (const page of pages) void (owned.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()).catch(() => {}); };
+    signal.addEventListener('abort', stop, { once: true });
+    try {
+      for (let index = 0; index < count; index++) {
+        signal.throwIfAborted();
+        const page = owned.createWorkerPage ? await owned.createWorkerPage() : await owned.context.newPage();
+        pages.push(page); signal.throwIfAborted();
+        await page.goto(this.workerURL(), { waitUntil: 'domcontentloaded', timeout: 45000 });
+        if (!this.conversationURL(page) || !await this.authenticated(page)) throw fail('MUSE_LOGIN_REQUIRED', 'Chưa xác minh được phiên trong trang luồng riêng.', 401);
+        const before = this.conversationURL(page);
+        const entry = await this.newChatControl(page);
+        if (!entry) throw fail('MUSE_PARALLEL_UNVERIFIED', 'Muse hiện không có nút mở hội thoại riêng. Giữ một luồng để tránh trộn ảnh. Chưa gửi prompt tạo nội dung.', 409);
+        await entry.click({ timeout: 5000 });
+        await page.waitForURL(url => {
+          url.hash = ''; return url.origin === new URL(this.serviceURL).origin && url.href !== before;
+        }, { timeout: 5000 }).catch(() => { throw fail('MUSE_PARALLEL_UNVERIFIED', 'New chat chưa cung cấp địa chỉ hội thoại riêng. Chưa xác minh được chạy song song; giữ một luồng. Chưa gửi prompt tạo nội dung.', 409); });
+        const route = this.conversationURL(page);
+        const editor = await this.waitForComposer(page);
+        const handle = await editor.elementHandle();
+        let frame;
+        try { frame = await handle.ownerFrame(); } finally { await handle.dispose(); }
+        if (!route || routes.has(route) || (frame && await frame.locator(`${MESSAGES}[data-message-role="user"]`).count())) throw fail('MUSE_PARALLEL_UNVERIFIED', 'Các trang chưa có hội thoại trống độc lập. Giữ một luồng; chưa gửi prompt tạo nội dung.', 409);
+        routes.add(route);
+      }
+      // Reopen every service-created route: do not treat ten tabs of the same
+      // root page, or transient New chat placeholders, as independent chats.
+      for (const [index, route] of [...routes].entries()) {
+        signal.throwIfAborted();
+        const page = pages[index];
+        await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 45000 });
+        await this.waitForComposer(page);
+        if (this.conversationURL(page) !== route) throw fail('MUSE_PARALLEL_UNVERIFIED', 'Muse không giữ địa chỉ hội thoại riêng sau khi mở lại. Giữ một luồng; chưa gửi prompt tạo nội dung.', 409);
+      }
+      signal.throwIfAborted();
+      this.parallelRoutes = [...routes].map(url => ({ url, busy: false }));
+      this.maxConcurrency = count;
+      return { executionConcurrency: count, message: `Đã kiểm tra ${count} địa chỉ hội thoại riêng và bật tối đa ${count} luồng. Chưa render nội dung; Muse vẫn có thể giới hạn tác vụ theo tài khoản.` };
+    } finally {
+      signal.removeEventListener('abort', stop);
+      await Promise.allSettled(pages.map(page => owned.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()));
+    }
+  }
   async composerDiagnostics(page) {
     const frames = page.frames ? page.frames() : [page];
     const known = new Set(['app', 'chat', 'chats', 'new', 'home', 'workspace', 'studio', 'login', 'auth', 'signin', 'callback']);
@@ -259,7 +320,7 @@ export class MuseBrowser {
     const details = await this.composerDiagnostics(page);
     throw fail('MUSE_COMPOSER_NOT_READY', `Chưa mở được ô nhập trong cuộc trò chuyện Muse của cảnh này. Chưa gửi prompt. Đã thử kích hoạt ô Message ban đầu: ${activated ? 'có' : 'không'}. Chẩn đoán trang luồng (không chứa nội dung chat): ${JSON.stringify(details)}`, 504);
   }
-  async prepareConversation(page) {
+  async prepareConversation(page, { reuse = false } = {}) {
     const editor = await this.waitForComposer(page, { openConversation: true });
     const handle = await editor.elementHandle();
     let frame;
@@ -269,7 +330,7 @@ export class MuseBrowser {
     if (!await users.count()) return frame;
     // A Muse account may expose one persistent conversation. Serial requests
     // can safely append a new marked turn; a missing New chat must not block it.
-    if (this.maxConcurrency === 1) return frame;
+    if (reuse || this.maxConcurrency === 1) return frame;
     const newChat = await this.newChatControl(frame);
     if (!newChat) throw fail('MUSE_NEW_CHAT_UNAVAILABLE', 'Không mở được cuộc trò chuyện riêng. Chưa gửi prompt; Muse cần hỗ trợ các cuộc trò chuyện độc lập để chạy đồng thời.');
     await newChat.click();
@@ -331,6 +392,8 @@ export class MuseBrowser {
     if (this.workers.size >= 10) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã có 10 luồng đang chạy trên tài khoản Muse.', 429);
     const key = randomUUID();
     this.workers.set(key, null);
+    const lease = this.maxConcurrency > 1 ? this.parallelRoutes.find(route => !route.busy) : null;
+    if (lease) lease.busy = true;
     let page; let owned; let sending = false;
     const cancelled = () => { if (page && !sending) void (owned?.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()).catch(() => {}); };
     signal.addEventListener('abort', cancelled, { once: true });
@@ -348,14 +411,18 @@ export class MuseBrowser {
       page = owned.createWorkerPage ? await owned.createWorkerPage() : await owned.context.newPage();
       this.workers.set(key, page);
       signal.throwIfAborted();
-      await page.goto(this.workerURL(), { waitUntil: 'domcontentloaded', timeout: 45000 });
+      await page.goto(lease?.url || this.workerURL(), { waitUntil: 'domcontentloaded', timeout: 45000 });
+      if (lease && this.conversationURL(page) !== lease.url) {
+        this.maxConcurrency = 1; this.parallelRoutes = [];
+        throw fail('MUSE_PARALLEL_UNVERIFIED', 'Muse chuyển hội thoại sang địa chỉ khác. Đã về một luồng; chưa gửi prompt của cảnh này.', 409);
+      }
       if (new URL(page.url()).origin !== new URL(this.serviceURL).origin) throw fail('MUSE_WORKSPACE_ORIGIN', 'Trang luồng chuyển sang miền khác Muse. Chưa nhập hoặc gửi prompt. Hoàn tất đăng nhập trong tab Muse rồi kiểm tra lại phiên.', 409);
       const workerProbe = await this.inspectAuthentication(page);
       if (!workerProbe.authenticated) {
         Object.assign(this.account(accountId), { authenticated: false, sessionAuthenticated: false, composerReady: false, state: workerProbe.state, connectionMessage: workerProbe.message });
         throw fail(workerProbe.state === 'check_failed' ? 'MUSE_SESSION_CHECK_FAILED' : 'MUSE_LOGIN_REQUIRED', workerProbe.message, workerProbe.state === 'check_failed' ? 503 : 401);
       }
-      const conversation = await this.prepareConversation(page);
+      const conversation = await this.prepareConversation(page, { reuse: Boolean(lease) });
       signal.throwIfAborted();
       if (await conversation.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
       if (checkOnly) return { ready: true, message: 'Đã mở được ô Message trong trang luồng riêng. Chưa gửi prompt hoặc yêu cầu tạo nội dung.', details: await this.composerDiagnostics(page) };
@@ -375,6 +442,7 @@ export class MuseBrowser {
       signal.removeEventListener('abort', cancelled);
       if (page) await (owned?.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()).catch(() => {});
       this.workers.delete(key);
+      if (lease) lease.busy = false;
     }
   }
   async checkComposer(signal) { return this.turn({ accountId: 1, checkOnly: true, signal }); }

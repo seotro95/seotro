@@ -4,6 +4,8 @@ import { Play, Download, FileText, Users, ShieldPlus, ImagePlus, ScanFace, WandS
 import { ADVENTURE, RUNWAY, MUSE_MODELS, normalizeSettings, restoreWorkspace, parseScript, errorInfo, meetsResolution } from './core.ts';
 import type { Scene, Settings, Reference, Status, Mode, Output, MediaResult } from './core.ts';
 import { generateVideo, generateImage, enhancePrompt, readImage, downloadVideo, releaseVideo, providerStatus, accountAction } from './provider.ts';
+import { loadMedia, saveMedia, deleteMedia } from './media-library.ts';
+import type { SavedMedia } from './media-library.ts';
 import './styles.css';
 
 const STORAGE = 'muse-workstation-v1';
@@ -13,10 +15,21 @@ type ModalName = 'import' | 'accounts' | 'diagnostics' | null;
 type Balance = { valueText: string; unit: 'token' | 'credit'; label: string; observedAt: string; source: string };
 type AccountSession = { balance?: Balance | null; id: number; state: string; authenticated: boolean; sessionAuthenticated?: boolean; composerReady?: boolean; connectionMessage?: string; checkedAt: string | null; active: boolean };
 type ProviderStatus = { museConfigured: boolean; busy: boolean; transport?: 'browser' | 'adapter'; accounts?: AccountSession[]; embeddedLogin?: boolean; activeRequests?: number; maxConcurrency?: number; executionConcurrency?: number };
+type RenderJob = { scene: Scene; control: AbortController; started: boolean };
+type RenderBatch = { control: AbortController; batchId: string; settings: Settings; lanes: number; completed: number; failed: number; cancelled: number; loginRequired: boolean };
 const hasVerifiedSession = (account?: AccountSession) => Boolean(account?.sessionAuthenticated ?? account?.authenticated);
 const accountStateName = (account?: AccountSession) => !account ? 'Chưa kết nối' : hasVerifiedSession(account) ? account.active ? 'Đã xác minh' : 'Phiên đã lưu' : account.state === 'check_failed' ? 'Chưa xác minh được phiên' : account.state === 'login_open' ? 'Chờ đăng nhập' : account.state === 'saved' || account.state === 'session_saved' ? 'Cần kiểm tra phiên' : 'Chưa kết nối';
 function load() { try { return restoreWorkspace(localStorage.getItem(STORAGE)); } catch { return restoreWorkspace(null); } }
 const initial = load();
+function referenceKey(scene: Scene, config: Settings) {
+  return config.r2v || (config.output === 'video' && config.videoInput === 'image') ? scene.reference?.id || (config.output === 'video' && config.videoInput === 'image' ? scene.image?.savedId : undefined) : undefined;
+}
+function matchesRequest(entry: SavedMedia | undefined, scene: Scene, config: Settings) {
+  const previous = entry?.settings;
+  if (!entry || !previous || entry.prompt !== scene.prompt || entry.referenceId !== referenceKey(scene, config)) return false;
+  const keys: (keyof Settings)[] = ['mode', 'output', 'modifier', 'aspectRatio', 'r2v', ...(config.output === 'image' ? ['imageResolution'] as const : ['resolution', 'model', 'duration', 'videoInput'] as const)];
+  return keys.every(key => previous[key] === config[key]);
+}
 
 function Modal({ title, eyebrow, children, close }: { title: string; eyebrow: string; children: React.ReactNode; close: () => void }) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -34,6 +47,10 @@ function App() {
   const scenesRef = useRef(scenes);
   const [settings, setSettings] = useState(initial.settings);
   const [globalImage, setGlobalImage] = useState<Reference | null>(null);
+  const [library, setLibrary] = useState<SavedMedia[]>([]);
+  const libraryRef = useRef(library);
+  const [libraryLoading, setLibraryLoading] = useState(true);
+  const [deletingMedia, setDeletingMedia] = useState<string | null>(null);
   const [modal, setModal] = useState<ModalName>(null);
   const [busy, setBusy] = useState(false);
   const [batch, setBatch] = useState(false);
@@ -53,11 +70,14 @@ function App() {
   const [diagnostic, setDiagnostic] = useState<{ message: string; error?: string } | null>(null);
   const [diagnosticConsent, setDiagnosticConsent] = useState(false);
   const controller = useRef<AbortController | null>(null);
+  const renderJobs = useRef(new Map<number, RenderJob>());
+  const renderBatch = useRef<RenderBatch | null>(null);
   const statusPending = useRef(false);
   const imageInput = useRef<HTMLInputElement>(null);
   const imageTarget = useRef<number | 'global'>('global');
   const fileInput = useRef<HTMLInputElement>(null);
-  const locked = busy || diagnosticBusy || downloading || imageBusy || connectingId !== null;
+  const locked = busy || diagnosticBusy || downloading || imageBusy || connectingId !== null || libraryLoading || deletingMedia !== null;
+  const renderLocked = diagnosticBusy || downloading || imageBusy || connectingId !== null || libraryLoading || deletingMedia !== null || (busy && !renderBatch.current) || cancelling;
   const done = scenes.filter(s => s[settings.output]).length;
   const outputLabel = settings.output === 'image' ? 'ảnh' : 'video';
   const enabled = scenes.filter(s => s.enabled).length;
@@ -116,7 +136,44 @@ function App() {
     finally { setConnectingId(null); void refreshStatus(false); }
   }
 
+  async function changeConcurrency(count: number) {
+    if (locked || !usingBrowser || !sessionVerified) return;
+    setConnectingId(1);
+    setComposerCheck({ message: count === 1 ? 'Đang chuyển sang xử lý lần lượt…' : `Đang kiểm tra ${count} hội thoại riêng. Chưa gửi prompt tạo nội dung…` });
+    try {
+      const result = await accountAction('concurrency', { concurrency: count });
+      setStatus(current => current ? { ...current, executionConcurrency: result.executionConcurrency } : current);
+      setComposerCheck({ message: result.message });
+    } catch (e) {
+      const info = logError(e, 'Kiểm tra luồng song song');
+      setStatus(current => current ? { ...current, executionConcurrency: 1 } : current);
+      setComposerCheck({ message: info.hint, error: info.raw });
+    } finally { setConnectingId(null); void refreshStatus(false); }
+  }
+
   function updateScenes(fn: (current: Scene[]) => Scene[]) { const next = fn(scenesRef.current); scenesRef.current = next; setScenes(next); }
+  function updateLibrary(fn: (current: SavedMedia[]) => SavedMedia[]) { const next = fn(libraryRef.current); libraryRef.current = next; setLibrary(next); }
+  function selectResult(entry: SavedMedia) {
+    if (renderJobs.current.has(entry.sceneId) || deletingMedia !== null) return;
+    changeScene(entry.sceneId, { [entry.media.kind]: entry.media, status: 'done', error: undefined }, false);
+  }
+  async function removeResult(entry: SavedMedia) {
+    if (renderJobs.current.has(entry.sceneId) || deletingMedia !== null) return;
+    setDeletingMedia(entry.id);
+    try {
+      if (entry.persisted) await deleteMedia(entry.id);
+      const remaining = libraryRef.current.filter(item => item.id !== entry.id);
+      updateLibrary(() => remaining);
+      const kind = entry.media.kind;
+      updateScenes(all => all.map(scene => {
+        if (scene.id !== entry.sceneId || scene[kind]?.savedId !== entry.id) return scene;
+        const media = remaining.find(item => item.sceneId === scene.id && item.media.kind === kind)?.media;
+        return { ...scene, [kind]: media, status: settings.output === kind ? media ? 'done' : 'ready' : scene.status };
+      }));
+      URL.revokeObjectURL(entry.media.url);
+    } catch (e) { setNotice(logError(e, 'Xóa kết quả').raw); }
+    finally { setDeletingMedia(null); }
+  }
   function invalidate(scene: Scene, scope: Output | 'both' = 'both'): Scene {
     const next = { ...scene };
     if (scope !== 'image') { releaseVideo(next.video); next.video = undefined; }
@@ -147,6 +204,19 @@ function App() {
     return info;
   }
   useEffect(() => { void refreshStatus(); }, []);
+  useEffect(() => {
+    let mounted = true;
+    void loadMedia().then(entries => {
+      if (!mounted) { entries.forEach(entry => URL.revokeObjectURL(entry.media.url)); return; }
+      updateLibrary(() => entries);
+      updateScenes(all => all.map(scene => {
+        const image = entries.find(entry => entry.sceneId === scene.id && entry.media.kind === 'image' && matchesRequest(entry, scene, { ...settings, output: 'image' }))?.media;
+        const video = entries.find(entry => entry.sceneId === scene.id && entry.media.kind === 'video' && matchesRequest(entry, { ...scene, image }, { ...settings, output: 'video' }))?.media;
+        return { ...scene, image, video, status: (settings.output === 'image' ? image : video) ? 'done' : 'ready' };
+      }));
+    }).catch(e => { if (mounted) setNotice(`Chưa đọc được kho kết quả: ${errorInfo(e).raw}`); }).finally(() => { if (mounted) setLibraryLoading(false); });
+    return () => { mounted = false; libraryRef.current.forEach(entry => URL.revokeObjectURL(entry.media.url)); };
+  }, []);
   useEffect(() => window.museTransport?.onSessionRefresh?.(() => {
     if (usingBrowser && !locked) void connectAccount(true);
   }), [usingBrowser, locked]);
@@ -160,7 +230,7 @@ function App() {
     catch { setNotice('Trình duyệt không lưu được phiên. Hãy xuất dự án JSON để giữ kịch bản.'); }
   }, [scenes, settings]);
   useEffect(() => { if (!notice) return; const timer = setTimeout(() => setNotice(''), 7000); return () => clearTimeout(timer); }, [notice]);
-  useEffect(() => () => { controller.current?.abort(); scenesRef.current.forEach(s => { releaseVideo(s.video); releaseVideo(s.image); }); }, []);
+  useEffect(() => () => { controller.current?.abort(); renderJobs.current.forEach(job => job.control.abort()); scenesRef.current.forEach(s => { releaseVideo(s.video); releaseVideo(s.image); }); }, []);
 
   function applyImage(image: Reference, target: number | 'global') {
     if (target === 'global') {
@@ -181,44 +251,80 @@ function App() {
     catch (e) { setNotice(errorInfo(e).raw); }
     finally { setImageBusy(false); }
   }
-  async function run(ids?: number[], override?: Scene[]) {
-    if (controller.current || !requireProvider()) return;
-    const source = override || scenesRef.current;
-    const targets = source.filter(s => s.enabled && s.prompt.trim() && sourceReady(s) && accountReady() && (ids ? ids.includes(s.id) : !s[settings.output]));
-    if (!targets.length) return setNotice('Không có cảnh cần tạo với tài khoản đã sẵn sàng.');
-    const control = new AbortController(); controller.current = control;
-    setBusy(true); setBatch(targets.length > 1); setCancelling(false);
-    const queuedIds = new Set(targets.map(scene => scene.id));
-    updateScenes(all => all.map(scene => queuedIds.has(scene.id) ? { ...scene, status: 'queued', error: undefined } : scene));
-    setNotice(`Đang xử lý ${targets.length} cảnh ${outputLabel} trên cùng tài khoản · ${executionLanes} luồng. Các cảnh còn lại chờ trong hàng đợi.`);
-    const batchId = crypto.randomUUID();
-    let completed = 0; let failed = 0;
-    let loginRequired = false;
+  function pumpRenders() {
+    const batch = renderBatch.current;
+    if (!batch) return;
+    const jobs = renderJobs.current;
+    let running = [...jobs.values()].filter(job => job.started).length;
+    for (const job of jobs.values()) {
+      if (running >= batch.lanes || batch.control.signal.aborted) break;
+      if (job.started) continue;
+      job.started = true; running++;
+      void renderOne(job, batch);
+    }
+    if (jobs.size) return;
+    const label = batch.settings.output === 'image' ? 'ảnh' : 'video';
+    setNotice(batch.control.signal.aborted ? 'Đã dừng các cảnh. Yêu cầu Muse đã nhận có thể vẫn được tính phí.' : batch.loginRequired ? 'Có cảnh cần đăng nhập Muse lại. Kết nối lại rồi chạy phần chưa hoàn tất.' : `Đã xử lý ${label}: ${batch.completed} hoàn tất, ${batch.failed} lỗi, ${batch.cancelled} đã dừng${batch.settings.mode === 'demo' ? ' · Tệp kiểm thử, không phải AI.' : '.'}`);
+    renderBatch.current = null; controller.current = null;
+    setBusy(false); setBatch(false); setCancelling(false); void refreshStatus(false);
+  }
+  async function renderOne(job: RenderJob, batch: RenderBatch) {
+    const { scene, control } = job;
+    const config = batch.settings;
+    changeScene(scene.id, { status: 'running', stopping: false }, true, config.output);
     try {
-      const renderOne = async (scene: Scene) => {
-        if (control.signal.aborted) return;
-        changeScene(scene.id, { status: 'running' }, true, settings.output);
-        try {
-          const reference = scene.reference || (settings.output === 'video' && settings.videoInput === 'image' && scene.image ? imageReference(scene.image, scene.id) : null);
-          const generate = settings.output === 'image' ? generateImage : generateVideo;
-          const media = await generate(scene.prompt, reference, settings, control.signal, { batchId, sceneId: scene.id });
-          if (control.signal.aborted) { releaseVideo(media); throw new DOMException('Đã dừng', 'AbortError'); }
-          changeScene(scene.id, { status: 'done', ...(settings.output === 'image' ? { image: media } : { video: media }) }, false); completed++;
-        } catch (e) {
-          if (control.signal.aborted) { changeScene(scene.id, { status: 'cancelled' }, false); return; }
-          const info = logError(e, `Cảnh #${String(scene.id).padStart(2, '0')}`);
-          changeScene(scene.id, { status: 'error', error: info.raw }, false); failed++;
-          if (/MUSE_LOGIN_REQUIRED/.test(info.raw)) loginRequired = true;
+      control.signal.throwIfAborted();
+      const reference = scene.reference || (config.output === 'video' && config.videoInput === 'image' && scene.image ? imageReference(scene.image, scene.id) : null);
+      const generate = config.output === 'image' ? generateImage : generateVideo;
+      const media = await generate(scene.prompt, reference, config, control.signal, { batchId: batch.batchId, sceneId: scene.id });
+      if (control.signal.aborted) { releaseVideo(media); throw new DOMException('Đã dừng', 'AbortError'); }
+      const id = crypto.randomUUID();
+      const entry: SavedMedia = { id, sceneId: scene.id, prompt: scene.prompt, createdAt: new Date().toISOString(), persisted: true, media: { ...media, savedId: id }, settings: config, referenceId: referenceKey(scene, config) };
+      try { await saveMedia(entry); }
+      catch (e) { entry.persisted = false; logError(e, `Lưu kết quả #${scene.id}`); }
+      updateLibrary(all => [entry, ...all]);
+      changeScene(scene.id, { status: 'done', stopping: false, ...(config.output === 'image' ? { image: entry.media } : { video: entry.media }) }, false);
+      batch.completed++;
+    } catch (e) {
+      if (control.signal.aborted) { changeScene(scene.id, { status: 'cancelled', stopping: false }, false); batch.cancelled++; }
+      else {
+        const info = logError(e, `Cảnh #${String(scene.id).padStart(2, '0')}`);
+        changeScene(scene.id, { status: 'error', stopping: false, error: info.raw }, false); batch.failed++;
+        if (/MUSE_LOGIN_REQUIRED/.test(info.raw)) batch.loginRequired = true;
+        if (/MUSE_SHARED_CONVERSATION|MUSE_PARALLEL_UNVERIFIED/.test(info.raw)) {
+          batch.lanes = 1;
+          setStatus(current => current ? { ...current, executionConcurrency: 1 } : current);
         }
-      };
-      let cursor = 0;
-      await Promise.allSettled(Array.from({ length: Math.min(executionLanes, targets.length) }, async () => {
-        while (!control.signal.aborted && cursor < targets.length) await renderOne(targets[cursor++]);
-      }));
-      setNotice(control.signal.aborted ? 'Đã dừng các luồng. Yêu cầu Muse đã nhận có thể vẫn được tính phí.' : loginRequired ? 'Có luồng cần đăng nhập Muse lại. Kết nối lại rồi bấm Tạo 10 để chạy phần chưa hoàn tất.' : `Đã xử lý ${outputLabel}: ${completed} hoàn tất, ${failed} lỗi${settings.mode === 'demo' ? ' · Tệp kiểm thử, không phải AI.' : '.'}`);
-    } finally {
-      updateScenes(all => all.map(scene => scene.status === 'queued' ? { ...scene, status: control.signal.aborted ? 'cancelled' : scene[settings.output] ? 'done' : 'ready' } : scene));
-      controller.current = null; setBusy(false); setBatch(false); setCancelling(false); void refreshStatus(false);
+      }
+    } finally { renderJobs.current.delete(scene.id); pumpRenders(); }
+  }
+  async function run(ids?: number[], override?: Scene[]) {
+    if (renderLocked || (controller.current && !renderBatch.current) || renderBatch.current?.control.signal.aborted || !requireProvider()) return;
+    const source = override || scenesRef.current;
+    const targets = source.filter(s => !renderJobs.current.has(s.id) && s.enabled && s.prompt.trim() && sourceReady(s) && accountReady() && (ids ? ids.includes(s.id) : !s[settings.output] || !matchesRequest(libraryRef.current.find(entry => entry.id === s[settings.output]?.savedId), s, settings)));
+    if (!targets.length) return setNotice('Không có cảnh cần tạo với tài khoản đã sẵn sàng.');
+    if (!renderBatch.current) {
+      const control = new AbortController(); controller.current = control;
+      renderBatch.current = { control, batchId: crypto.randomUUID(), settings: { ...settings }, lanes: executionLanes, completed: 0, failed: 0, cancelled: 0, loginRequired: false };
+      setBusy(true); setCancelling(false);
+    }
+    for (const scene of targets) renderJobs.current.set(scene.id, { scene, control: new AbortController(), started: false });
+    setBatch(renderJobs.current.size > 1);
+    const queuedIds = new Set(targets.map(scene => scene.id));
+    updateScenes(all => all.map(scene => queuedIds.has(scene.id) ? { ...scene, status: 'queued', stopping: false, error: undefined } : scene));
+    setNotice(`Đã thêm ${targets.length} cảnh ${outputLabel} · ${renderBatch.current.lanes} luồng xử lý.`);
+    pumpRenders();
+  }
+  function cancelScene(id: number) {
+    const job = renderJobs.current.get(id);
+    const batch = renderBatch.current;
+    if (!job || !batch || job.control.signal.aborted) return;
+    job.control.abort();
+    if (job.started) changeScene(id, { stopping: true }, false);
+    else {
+      renderJobs.current.delete(id); batch.cancelled++;
+      changeScene(id, { status: 'cancelled', stopping: false }, false);
+      pumpRenders();
     }
   }
   async function enhance(scene: Scene) {
@@ -229,7 +335,10 @@ function App() {
     catch (e) { if (!control.signal.aborted) setNotice(logError(e, `Enhance #${scene.id}`).raw); }
     finally { changeScene(scene.id, { enhancing: false }, false); controller.current = null; setBusy(false); setCancelling(false); }
   }
-  function cancel() { setCancelling(true); controller.current?.abort(); }
+  function cancel() {
+    setCancelling(true); controller.current?.abort();
+    for (const id of [...renderJobs.current.keys()]) cancelScene(id);
+  }
   async function downloadAll() {
     setDownloading(true);
     try { for (const scene of scenesRef.current) if (scene[settings.output]) { await downloadVideo(scene[settings.output]!, scene.id); await new Promise(r => setTimeout(r, 250)); }
@@ -307,7 +416,7 @@ function App() {
       {usingBrowser && settings.mode === 'muse' && <p className="transport-note">Muse nhận mô hình, thời lượng và tỉ lệ dưới dạng yêu cầu trong prompt. Ảnh/video hiển thị kích thước thật; nếu Muse trả thấp hơn 2K/4K, tool sẽ ghi Chưa đạt yêu cầu.</p>}
       {settings.mode === 'demo' && <div className="demo-banner"><FlaskConical size={16}/>CHẾ ĐỘ KIỂM THỬ · Dùng tệp mẫu 640×360 có nhãn. Không tạo nội dung AI từ prompt hoặc ảnh.</div>}
       <section className="single-account-panel" aria-label="Một tài khoản Muse và số dư">
-        <div><span className="eyebrow">MỘT TÀI KHOẢN DUY NHẤT</span><h2>Một tài khoản · 10 cảnh</h2><p>Bấm Tạo 10 để chạy toàn bộ kịch bản. Hiện xử lý {executionLanes} cảnh mỗi lượt; các cảnh còn lại chờ trong hàng đợi. {executionLanes === 1 ? 'Gửi lần lượt để tránh trộn kết quả trong hội thoại chung.' : 'Xử lý song song theo khả năng của kết nối hiện tại.'}</p></div>
+        <div><span className="eyebrow">MỘT TÀI KHOẢN DUY NHẤT</span><h2>Một tài khoản · 10 cảnh</h2><p>Bấm Tạo 10 để chạy toàn bộ kịch bản. Hiện xử lý {executionLanes} cảnh mỗi lượt; các cảnh còn lại chờ trong hàng đợi. {executionLanes === 1 ? 'Gửi lần lượt để tránh trộn kết quả trong hội thoại chung.' : 'Xử lý song song theo khả năng của kết nối hiện tại.'}</p>{usingBrowser && settings.mode === 'muse' && <div className="concurrency-controls"><label htmlFor="muse-concurrency">Số luồng:</label><select id="muse-concurrency" disabled={locked || !sessionVerified} value={executionLanes} onChange={e => void changeConcurrency(Number(e.target.value))}>{[1,2,3,5,10].map(count => <option key={count} value={count}>{count === 1 ? '1 · Lần lượt' : `${count} · Kiểm tra và bật song song`}</option>)}</select><small>Chỉ bật khi tìm được hội thoại riêng. Hạn mức render do Muse quyết định.</small></div>}</div>
         <div className="single-account-controls"><strong className={providerReady ? 'mint' : 'muted'}>{usingBrowser ? accountStateName(museAccount) : connection}</strong><button className="button" disabled={locked || !usingBrowser} onClick={() => void connectAccount()}><Link2 size={15}/>{connectingId !== null ? 'Đang kết nối…' : embeddedLogin ? 'Đăng nhập Muse trong tool' : 'Kết nối Muse'}</button><button className="micro-button" disabled={locked || !usingBrowser} onClick={() => void connectAccount(true)}>Kiểm tra phiên</button><button className="micro-button" disabled={locked || !usingBrowser || !sessionVerified} onClick={() => void checkComposer()}>Kiểm tra ô Message</button><p className="connection-feedback" role="status">{connectingId !== null ? 'Đang kiểm tra phiên Muse…' : connectionError || museAccount?.connectionMessage || (hasVerifiedSession(museAccount) ? 'Phiên Muse đã được xác minh.' : 'Hoàn tất đăng nhập trong tab Muse rồi quay về Studio để tự kết nối.')}</p>{composerFeedback}</div>
         <div className="balance-card" data-testid="account-balance"><span>SỐ DƯ TÀI KHOẢN MUSE</span><strong>{settings.mode === 'demo' ? 'Chế độ kiểm thử' : balanceAccount?.balance ? `${balanceAccount.balance.valueText} ${balanceAccount.balance.unit}` : 'Chưa đọc được'}</strong><small>{balanceAccount?.balance ? `Đọc lúc ${new Date(balanceAccount.balance.observedAt).toLocaleTimeString('vi-VN')}` : 'Không tự suy đoán token hoặc credit'}</small><button className="micro-button" disabled={locked || !usingBrowser || !hasVerifiedSession(museAccount)} onClick={() => void connectAccount(true)}><RefreshCw size={12}/>Cập nhật số dư</button></div>
       </section>
@@ -328,12 +437,19 @@ function App() {
       {settings.output === 'image' && scenes.some(s => s.image) && <div className="image-batch-actions"><button className="button" disabled={locked} onClick={() => useImagesForVideo()}><Video size={16}/>Chuyển bộ ảnh đã tạo sang video</button><span>Giữ ảnh và prompt, dùng ảnh đã tạo làm khung hình đầu.</span></div>}
       <section className="scene-grid" aria-label="10 phân cảnh ảnh và video">{scenes.map(scene => {
         const media = scene[settings.output];
+        const history = library.filter(entry => entry.sceneId === scene.id && entry.media.kind === settings.output);
+        const sceneBusy = scene.status === 'running' || scene.status === 'queued';
         const needsSource = settings.output === 'video' && settings.videoInput === 'image' && !scene.reference && !scene.image;
         const quality = media ? meetsResolution(media) : null;
         return <article key={scene.id} className={`scene-card ${!scene.enabled ? 'disabled-card' : ''} status-${scene.status}`} data-testid={`scene-${scene.id}`}>
           <header className="scene-header"><span className="scene-number">#{String(scene.id).padStart(2, '0')}</span><span className={`status-badge ${scene.status}`}>{scene.status === 'running' && <LoaderCircle className="spin" size={10}/>}{statusNames[scene.status]}</span><label className="scene-enable"><input type="checkbox" aria-label={`Bật cảnh ${scene.id}`} checked={scene.enabled} disabled={locked} onChange={e => changeScene(scene.id, { enabled: e.target.checked }, false)}/>Bật</label><span className="same-account-tag">Muse</span></header>
           <div className="card-content">
             <div className="video-preview">{media ? <>{media.kind === 'image' ? <a href={media.url} target="_blank" rel="noopener noreferrer" aria-label={`Xem ảnh cảnh ${scene.id}`}><img className="generated-image" src={media.url} alt={`Ảnh kết quả cảnh ${scene.id}`}/></a> : <video src={media.url} controls playsInline preload="metadata" aria-label={`Video cảnh ${scene.id}`}/>} {media.demo && <span className="preview-label">{media.kind === 'image' ? 'ẢNH KIỂM THỬ' : 'CLIP KIỂM THỬ'}</span>}</> : <div className="empty-video">{scene.status === 'running' ? <LoaderCircle className="spin" size={25}/> : settings.output === 'image' ? <ImagePlus size={23}/> : <Clapperboard size={23}/>}<span>{scene.status === 'running' ? `Đang tạo ${outputLabel}…` : scene.status === 'queued' ? 'Đang chờ đến lượt…' : scene.status === 'error' ? `Tạo ${outputLabel} thất bại` : !scene.enabled ? 'Cảnh đã tắt' : `Chưa khởi tạo ${outputLabel}`}</span>{scene.status === 'running' && <small>Có thể mất vài phút</small>}</div>}</div>
+            {history.length > 0 && <details className="media-history" open={history.length > 1}><summary>Kết quả đã lưu ({history.length})</summary><div className="history-grid">{history.map((entry, index) => <div className={`history-entry ${entry.id === media?.savedId ? 'selected' : ''}`} key={entry.id}>
+              <button className="history-select" disabled={sceneBusy || deletingMedia !== null} aria-label={`Xem bản ${history.length - index} cảnh ${scene.id}`} aria-pressed={entry.id === media?.savedId} title={entry.prompt} onClick={() => selectResult(entry)}>{entry.media.kind === 'image' ? <img src={entry.media.url} alt={`Bản ${history.length - index} cảnh ${scene.id}`} loading="lazy"/> : <Film size={25}/>}<span>Bản {history.length - index}{entry.media.demo ? ' · Kiểm thử' : ''}</span></button>
+              <small>{new Date(entry.createdAt).toLocaleString('vi-VN')}</small>{!entry.persisted && <small className="red">Chưa lưu trên ổ đĩa · hãy tải ngay</small>}<p title={entry.prompt}>{entry.prompt}</p>
+              <div className="history-actions"><button aria-label={`Tải bản ${history.length - index} cảnh ${scene.id}`} onClick={() => void downloadVideo(entry.media, scene.id).catch(e => setNotice(logError(e, 'Tải kết quả').raw))}><Download size={12}/>Tải</button><button disabled={sceneBusy || deletingMedia !== null} aria-label={`Xóa bản ${history.length - index} cảnh ${scene.id}`} onClick={() => void removeResult(entry)}><Trash2 size={12}/>Xóa</button></div>
+            </div>)}</div></details>}
             {media?.metadata && <p className="video-metadata">Muse trả về: {media.metadata.width}×{media.metadata.height}{typeof media.metadata.duration === 'number' ? ` · ${media.metadata.duration.toFixed(1)} giây` : ''}</p>}
             {quality !== null && <p className={`quality-result ${quality ? 'mint' : 'red'}`}>{quality ? 'Kích thước đạt' : 'Chưa đạt yêu cầu'} {media?.requestedResolution?.toUpperCase()}</p>}
             {media?.referenceCompressed && <p className="source-note">Ảnh đầu vào đã nén dưới 8 MB; ảnh gốc được giữ.</p>}
@@ -348,10 +464,10 @@ function App() {
             <textarea id={`prompt-${scene.id}`} aria-label={`Kịch bản cảnh ${scene.id}`} disabled={locked} maxLength={8000} value={scene.prompt} onChange={e => changeScene(scene.id, { prompt: e.target.value })} placeholder="Nhập mô tả phân cảnh…"/>
             {scene.error && <div className="scene-error"><span><CircleAlert size={13}/>{errorInfo(scene.error).hint}</span><details><summary>Mã lỗi gốc</summary><pre>{scene.error}</pre></details></div>}
           </div>
-          <footer className="card-footer"><button className={`scene-run ${media ? 'has-result' : ''}`} disabled={locked || !accountReady() || !scene.enabled || !scene.prompt.trim() || needsSource} onClick={() => void run([scene.id])}>{media || scene.status === 'error' ? <RefreshCw size={15}/> : <Play size={15}/>} {media ? 'Tạo lại cảnh' : scene.status === 'error' ? 'Thử lại cảnh này' : 'Tạo cảnh này'}</button>{media && <button className="download-one" title={`Tải cảnh ${scene.id}`} aria-label={`Tải cảnh ${scene.id}`} onClick={() => void downloadVideo(media, scene.id).catch(e => setNotice(logError(e, 'Tải tệp').raw))}><Download size={16}/></button>}</footer>
+          <footer className="card-footer">{scene.status === 'running' || scene.status === 'queued' ? <button className="scene-run scene-stop" disabled={scene.stopping || cancelling} aria-label={`Dừng cảnh ${scene.id}`} onClick={() => cancelScene(scene.id)}>{scene.stopping ? <LoaderCircle className="spin" size={15}/> : <Square size={15}/>} {scene.stopping ? 'Đang dừng…' : scene.status === 'queued' ? 'Hủy cảnh chờ' : 'Dừng cảnh này'}</button> : <button className={`scene-run ${media ? 'has-result' : ''}`} disabled={renderLocked || !accountReady() || !scene.enabled || !scene.prompt.trim() || needsSource} onClick={() => void run([scene.id])}>{media || scene.status === 'error' ? <RefreshCw size={15}/> : <Play size={15}/>} {media ? 'Tạo lại cảnh' : scene.status === 'error' ? 'Thử lại cảnh này' : 'Tạo cảnh này'}</button>}{media && <button className="download-one" title={`Tải cảnh ${scene.id}`} aria-label={`Tải cảnh ${scene.id}`} onClick={() => void downloadVideo(media, scene.id).catch(e => setNotice(logError(e, 'Tải tệp').raw))}><Download size={16}/></button>}</footer>
         </article>;
       })}</section>
-      <footer className="workspace-footer"><span><i/>Tự lưu kịch bản trên trình duyệt <span className="footer-divider">/</span> Ảnh & video chỉ giữ trong phiên</span><div><label className={`footer-button ${locked ? 'muted' : ''}`}><Upload size={13}/>Mở dự án<input type="file" accept=".json" hidden disabled={locked} onChange={e => { void restoreProject(e.target.files?.[0]); e.target.value = ''; }}/></label><button onClick={exportProject}><Download size={13}/>Xuất dự án JSON</button></div></footer>
+      <footer className="workspace-footer"><span><i/>Tự lưu kịch bản trên trình duyệt <span className="footer-divider">/</span> Ảnh & video lưu trên máy trong từng ô</span><div><label className={`footer-button ${locked ? 'muted' : ''}`}><Upload size={13}/>Mở dự án<input type="file" accept=".json" hidden disabled={locked} onChange={e => { void restoreProject(e.target.files?.[0]); e.target.value = ''; }}/></label><button onClick={exportProject}><Download size={13}/>Xuất dự án JSON</button></div></footer>
     </main>
     {notice && <div className="toast" role="status"><CircleAlert size={17}/><span>{notice}</span><button aria-label="Đóng thông báo" onClick={() => setNotice('')}><X size={15}/></button></div>}
 
@@ -364,7 +480,7 @@ function App() {
     </Modal>}
 
     {modal === 'accounts' && <Modal title="Tài khoản Muse duy nhất" eyebrow="ONE ACCOUNT / 10 SCENES" close={() => setModal(null)}>
-      <div className="modal-body"><div className="info-note"><Users size={18}/><span>Một tài khoản Muse cho cả 10 cảnh. Tool xếp hàng đợi và xử lý lần lượt để không trộn kết quả trong hội thoại chung. Không cần gán thêm tài khoản.</span></div>
+      <div className="modal-body"><div className="info-note"><Users size={18}/><span>Một tài khoản Muse cho cả 10 cảnh. Chọn số luồng trên bảng chính; tool kiểm tra hội thoại riêng trước khi bật song song. Mỗi ô có nút Tạo/Dừng và lịch sử kết quả riêng.</span></div>
         <div className="single-account-dialog"><strong className={providerReady ? 'mint' : 'muted'}>{usingBrowser ? accountStateName(museAccount) : connection}</strong><p className="muted">Đăng nhập trên trang Muse trong {loginPlace}, bấm Về Studio rồi Kiểm tra phiên. Muse có thể giới hạn số tác vụ đồng thời hoặc hạn mức của tài khoản.</p>{usingBrowser && <div className="preset-row"><button className="button primary" disabled={locked} onClick={() => void connectAccount()}><Link2 size={16}/>{embeddedLogin ? 'Đăng nhập Muse trong tool' : 'Mở cửa sổ Muse'}</button><button className="button" disabled={locked} onClick={() => void connectAccount(true)}>Kiểm tra phiên Muse</button><button className="button" disabled={locked || !sessionVerified} onClick={() => void checkComposer()}>Kiểm tra ô Message</button></div>}{composerFeedback}</div>
         <label className="field-label" htmlFor="global-modifier">Chỉ thị chất lượng toàn cục <span className="tag">GLOBAL PROMPT MODIFIER</span></label><textarea id="global-modifier" className="bulk-text" disabled={locked} maxLength={2000} value={settings.modifier} onChange={e => changeSettings({ modifier: e.target.value })} placeholder="cinematic lighting, photorealistic, professional 35mm lens…"/><p className="small muted">Nối vào cuối mọi prompt tạo ảnh/video. Thay đổi chỉ thị sẽ xóa kết quả cũ để tránh dùng video không còn khớp kịch bản.</p>
       </div><footer className="modal-footer"><span className="small muted">{enabled}/10 cảnh đang bật · Tự lưu</span><button className="button primary" onClick={() => setModal(null)}><Check size={16}/>Hoàn tất</button></footer>
@@ -372,7 +488,7 @@ function App() {
 
     {modal === 'diagnostics' && <Modal title="Chẩn đoán & kết nối API" eyebrow="CONNECTION / HEALTH / ERROR LOG" close={() => setModal(null)}>
       <div className="modal-body"><label className="field-label" htmlFor="provider-mode">Kết nối tạo video</label><select id="provider-mode" className="provider-select" disabled={locked} value={settings.mode} onChange={e => { const mode = e.target.value as Mode; changeSettings({ mode }); setDiagnostic(null); setDiagnosticConsent(false); }}><option value="muse">{usingBrowser ? embeddedLogin ? 'Muse AI · Đăng nhập trong tool' : 'Muse AI · Trình duyệt ngoài (chế độ web)' : 'Muse AI · Adapter riêng'}</option><option value="demo">Kiểm thử giao diện · Không tạo video AI</option></select>
-        <div className="connection-details"><Link2 size={18}/><div><strong>{connection}</strong><p>{settings.mode === 'muse' ? usingBrowser ? 'Cầu nối trình duyệt không chính thức. Đăng nhập một phiên Muse. Tool xử lý lần lượt trên một tài khoản, dùng lại hội thoại nếu Muse không có New chat, và chỉ nhận ảnh/video trong lượt trả lời hiện tại. Mô hình/thời lượng là yêu cầu bằng lời, không bảo đảm Muse cung cấp đúng mọi thiết lập.' : 'Đang dùng adapter Muse riêng trong cấu hình máy chủ. Quyền tài khoản, mô hình và ảnh tham chiếu do adapter đó xử lý.' : 'Clip màu có nhãn TEST CLIP dùng để kiểm tra phát, tải và hàng đợi. Không đọc nội dung prompt, không thay cho video AI.'}</p></div></div>
+        <div className="connection-details"><Link2 size={18}/><div><strong>{connection}</strong><p>{settings.mode === 'muse' ? usingBrowser ? 'Cầu nối trình duyệt không chính thức. Đăng nhập một phiên Muse. Mặc định xử lý lần lượt; có thể chọn tối đa 10 luồng sau khi kiểm tra địa chỉ hội thoại riêng. Tool dùng lại hội thoại nếu Muse không có New chat và chỉ nhận ảnh/video trong lượt trả lời hiện tại. Mô hình/thời lượng là yêu cầu bằng lời, không bảo đảm Muse cung cấp đúng mọi thiết lập.' : 'Đang dùng adapter Muse riêng trong cấu hình máy chủ. Quyền tài khoản, mô hình và ảnh tham chiếu do adapter đó xử lý.' : 'Clip màu có nhãn TEST CLIP dùng để kiểm tra phát, tải và hàng đợi. Không đọc nội dung prompt, không thay cho video AI.'}</p></div></div>
         {renderBlocked && <div className="setup-help"><h3>Kết nối tài khoản để tạo ảnh/video</h3>{usingBrowser ? <><ol><li>{embeddedLogin ? 'Bấm Đăng nhập Muse trong tool; không cần cài Chrome riêng.' : 'Chạy start.bat để dùng bản desktop đăng nhập ngay trong tool. Chế độ web dùng Chrome/Edge ngoài.'}</li><li>Mở Tài khoản Muse, đăng nhập một lần cho cả 10 ô.</li><li>Đăng nhập Muse trong {loginPlace}. Quay lại Studio và bấm Kiểm tra phiên.</li><li>Khi phiên được xác minh, tạo thử một cảnh trước khi chạy hàng loạt.</li></ol><button className="button" onClick={() => setModal('accounts')}>Mở tài khoản Muse</button></> : <p>Chưa có adapter riêng. Để đăng nhập trực tiếp bằng trình duyệt, đặt MUSE_TRANSPORT=browser trong .env rồi khởi động lại máy chủ.</p>}<p className="small muted">Phiên lưu cục bộ trong hồ sơ riêng. Không gửi mật khẩu/cookie trong chat. Chế độ kiểm thử chỉ phát clip mẫu có nhãn.</p>{statusError && <pre>{statusError}</pre>}</div>}
         <div className="diagnostic-stats"><div><span>TRẠNG THÁI</span><b>{diagnosticBusy ? 'Đang kiểm tra…' : busy ? 'Đang có tác vụ' : 'Chờ kiểm tra'}</b></div><div><span>TOKEN / CREDIT</span><b>{balanceAccount?.balance ? `${balanceAccount.balance.valueText} ${balanceAccount.balance.unit}` : 'Chưa đọc được'}</b></div><div><span>GPU</span><b>Không được API cung cấp</b></div></div>
         <label className="checkbox-label consent"><input type="checkbox" checked={diagnosticConsent} disabled={locked} onChange={e => setDiagnosticConsent(e.target.checked)}/><span>{settings.mode === 'demo' ? 'Tôi muốn chạy clip kiểm thử giao diện.' : `Tôi đồng ý gửi một yêu cầu render thử (${settings.output === 'image' ? '1 ảnh 2K' : settings.model === 'Omni 1.1 Flash' ? '4s / 360p' : '8s / 360p'}), có thể tính phí theo tài khoản AI.`}</span></label>

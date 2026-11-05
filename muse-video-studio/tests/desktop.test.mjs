@@ -136,12 +136,16 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       assert.equal(status.activeRequests, 0);
       assert.equal(status.accounts.length, 1);
     });
-    await t.test('Stop aborts all ten IPC requests and sends Stop to each active Muse conversation', async () => {
+    await t.test('one scene Stop cancels only its IPC request; Stop all then cancels the remaining nine', async () => {
       fixture.state.behavior = 'slow'; fixture.state.hold = false;
       const count = fixture.state.submitted.length;
       for (let i = 1; i <= 10; i++) await studio.getByLabel(`Kịch bản cảnh ${i}`, { exact: true }).fill(`Cancel scene ${i}`);
       await studio.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true }).click();
       await waitFor(() => fixture.state.submitted.length === count + 10, 'ten cancellable workers');
+      await studio.getByRole('button', { name: 'Dừng cảnh 3', exact: true }).click();
+      await waitFor(() => fixture.state.stops === 1, 'single-scene Stop reached Muse');
+      await waitFor(async () => await studio.locator('.status-badge.cancelled').count() === 1, 'one client request cancelled');
+      assert.equal(await studio.locator('.status-badge.running').count(), 9, 'Other nine scenes must keep running');
       await studio.getByRole('button', { name: 'Dừng tất cả luồng', exact: true }).click();
       await waitFor(async () => await studio.locator('.status-badge.cancelled').count() === 10, 'all ten client requests cancelled');
       await waitFor(() => fixture.state.stops === 10, 'Stop reached each Muse conversation');

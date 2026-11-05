@@ -24,10 +24,11 @@ const fixture = http.createServer(async (req, res) => {
   if (req.url?.endsWith('.mp4')) { res.setHeader('Content-Type', 'video/mp4'); return res.end(clip); }
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   const requestPath = new URL(req.url, 'http://127.0.0.1').pathname;
+  if (state.redirectChats && requestPath.startsWith('/chat/')) { res.writeHead(302, { Location: '/' }); return res.end(); }
   if (state.chatPath && requestPath === '/') return res.end('<!doctype html><html><body><h1>Fixture dashboard without chat</h1></body></html>');
   if (state.frameComposer && requestPath !== '/composer-frame') return res.end('<!doctype html><html><body><iframe title="Muse chat" src="/composer-frame" style="width:100%;height:900px;border:0"></iframe></body></html>');
   const rootTag = state.composerLayout === 'hatch' ? 'div' : 'form';
-  const sharedHistory = state.sharedHistory ? state.submitted.map(request => `<div data-message-item data-message-role="user">${escapeHTML(request.prompt)}</div>${state.outputs.has(request.id) ? `<div data-message-item data-message-role="assistant"><img src="data:${state.imageEncoding || 'image/png'};base64,${state.outputs.get(request.id)}"></div>` : ''}`).join('') : '';
+  const sharedHistory = state.sharedHistory ? state.submitted.filter(request => !state.chatRoutes || request.path === requestPath).map(request => `<div data-message-item data-message-role="user">${escapeHTML(request.prompt)}</div>${state.outputs.has(request.id) ? `<div data-message-item data-message-role="assistant"><img src="data:${state.imageEncoding || 'image/png'};base64,${state.outputs.get(request.id)}"></div>` : ''}`).join('') : '';
   res.end(`<!doctype html><html><body>
   <header><span data-testid="token-balance">Tokens remaining: 1,234</span></header><button id="login">Fixture login</button>
   ${state.newChat ? '<button id="new-chat">New chat</button>' : ''}<div id="history">${state.oldConversation ? '<div data-message-item data-message-role="user">Old thread</div>' : ''}<div data-message-item data-message-role="assistant">OLD RESPONSE Tokens remaining: 999999<img src="/old.png"><video src="/old.mp4" preload="metadata"></video></div>${sharedHistory}</div>
@@ -42,7 +43,7 @@ const fixture = http.createServer(async (req, res) => {
   if(${!state.hydrateOnFocus && state.hydrationDelayMs > 0})setTimeout(hydrate,${state.hydrationDelayMs});
   let conversationOpen=${!state.landingOnly};
   function ready(){root.style.display=document.cookie.includes('fixture_session=connected')&&conversationOpen?'block':'none'};ready();
-  document.querySelector('#new-chat')?.addEventListener('click',()=>{history.replaceChildren();conversationOpen=true;ready()});
+  document.querySelector('#new-chat')?.addEventListener('click',()=>{if(${Boolean(state.chatRoutes)}){location.href='/chat/'+crypto.randomUUID();return}history.replaceChildren();conversationOpen=true;ready()});
   document.querySelector('#login').onclick=()=>{if(${state.loginInPopup}){window.open('/fixture-auth-popup');return}document.cookie='fixture_session=connected; Max-Age=3600; SameSite=Strict';ready()};
   root.querySelector('input').onchange=e=>{const img=new Image();img.src=URL.createObjectURL(e.target.files[0]);document.querySelector('#attachments').appendChild(img)};
   stop.onclick=()=>{stop.style.display='none';fetch('/stop')};

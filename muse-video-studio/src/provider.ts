@@ -48,7 +48,7 @@ async function mediaResult(kind: Settings['output'], result: ResponseMedia, sett
   return { kind, base64: clean, mimeType: result.mimeType, url, demo: settings.mode === 'demo', metadata,
     requestedResolution: kind === 'image' ? settings.imageResolution : settings.resolution, aspectRatio: settings.aspectRatio };
 }
-export function releaseVideo(media?: MediaResult) { if (media?.url.startsWith('blob:')) URL.revokeObjectURL(media.url); }
+export function releaseVideo(media?: MediaResult) { if (!media?.savedId && media?.url.startsWith('blob:')) URL.revokeObjectURL(media.url); }
 async function referencePayload(reference: Reference, signal: AbortSignal) {
   if ((reference.base64?.length || 0) <= 8 * 1024 * 1024 * 4 / 3) return { imageBytes: reference.base64, mimeType: reference.mimeType, compressed: false };
   const img = await new Promise<HTMLImageElement>((resolve, reject) => { const image = new Image(); image.onload = () => resolve(image); image.onerror = reject; image.src = reference.url; });
@@ -119,4 +119,4 @@ export async function downloadVideo(media: MediaResult, id: number) {
   const a = document.createElement('a'); a.href = media.url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
 }
 export const providerStatus = () => api('/api/status');
-export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer') => api(`/api/account/${action}`, {});
+export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer' | 'concurrency', data: Record<string, unknown> = {}) => api(`/api/account/${action}`, data);

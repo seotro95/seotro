@@ -88,7 +88,7 @@ async function api(req, res, pathname) {
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
   if (!req.headers['content-type']?.startsWith('application/json')) return json(res, 415, { error: 'Cần Content-Type application/json.' });
-  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close|composer)$/);
+  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close|composer|concurrency)$/);
   const legacyAccountRoute = pathname.match(/^\/api\/accounts\/(\d+)\/(connect|check|close)$/);
   if (!['/api/video', '/api/image', '/api/text'].includes(pathname) && !accountRoute && !legacyAccountRoute) return json(res, 404, { error: 'API không tồn tại.' });
   let acquired = false;
@@ -106,6 +106,7 @@ async function api(req, res, pathname) {
       if (activeRequests || accountBusy) return json(res, 409, { error: 'Đang có tác vụ. Đợi các luồng hoàn tất trước khi thay đổi phiên tài khoản.' });
       muse.account(accountId);
       accountBusy = accountAcquired = true;
+      if (action === 'concurrency') return json(res, 200, await muse.setConcurrency(data.concurrency, abort.signal));
       if (action === 'composer') { const composer = await muse.checkComposer(abort.signal); return json(res, 200, { accounts: muse.snapshot(), composer }); }
       if (action === 'close') { if (muse.active?.id === accountId) await muse.close(); }
       else await muse.connect(accountId, { show: action === 'connect' });
@@ -159,7 +160,7 @@ await new Promise((resolve, reject) => {
   server.listen(port, host, () => { server.removeListener('error', reject); resolve(); });
 });
 const url = `http://${host}:${server.address().port}`;
-console.log(`Muse Studio: ${url} · ${dev ? 'development' : 'production'} · 10 parallel streams`);
+console.log(`Muse Studio: ${url} · ${dev ? 'development' : 'production'} · ${muse ? muse.maxConcurrency : maxConcurrency} execution streams`);
 let closed = false;
 return { server, url, muse, close: async () => {
   if (closed) return;
@@ -172,7 +173,7 @@ return { server, url, muse, close: async () => {
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   startStudioServer({ dev: process.argv.includes('--dev') }).then(runtime => {
     console.log('Giu cua so nay mo khi su dung. Ctrl+C chi dung khi muon tat tool.');
-    console.log('Mot tai khoan Muse: toi da 10 luong dong thoi. Ban desktop cho phep dang nhap trong tool.');
+    console.log('Mot tai khoan Muse: 10 canh, kiem tra hoi thoai rieng truoc khi bat song song. Dang nhap trong tool.');
     if (process.argv.includes('--open')) openBrowser(runtime.url);
     let stopping = false;
     for (const name of ['SIGINT', 'SIGTERM']) process.on(name, async () => {

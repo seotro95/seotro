@@ -7,10 +7,10 @@ export type Output = 'video' | 'image';
 export type Status = 'ready' | 'queued' | 'running' | 'done' | 'error' | 'cancelled';
 export type Reference = { id: string; name: string; url: string; base64?: string; mimeType?: string };
 export type Settings = { model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
-export type MediaResult = { kind: Output; base64: string; mimeType: string; url: string; demo: boolean; referenceCompressed?: boolean; metadata?: { duration?: number; width: number; height: number }; requestedResolution?: Resolution; aspectRatio?: Settings['aspectRatio'] };
+export type MediaResult = { kind: Output; base64: string; mimeType: string; url: string; demo: boolean; savedId?: string; referenceCompressed?: boolean; metadata?: { duration?: number; width: number; height: number }; requestedResolution?: Resolution; aspectRatio?: Settings['aspectRatio'] };
 export type VideoResult = MediaResult;
 export type ImageResult = MediaResult;
-export type Scene = { id: number; enabled: boolean; prompt: string; reference: Reference | null; status: Status; error?: string; video?: VideoResult; image?: ImageResult; enhancing?: boolean };
+export type Scene = { id: number; enabled: boolean; prompt: string; reference: Reference | null; status: Status; error?: string; video?: VideoResult; image?: ImageResult; enhancing?: boolean; stopping?: boolean };
 export const ADVENTURE = [
   'Một người thám hiểm bước vào ngôi đền cổ xưa trong rừng nhiệt đới, tia nắng vàng rọi xuyên qua tán lá, máy quay tiến chậm từ phía sau.',
   'Khám phá bức tường khắc cổ ngữ bí ẩn phát sáng ánh lân tinh xanh ngọc, máy quay lia chậm ngang qua các chi tiết.',
@@ -77,6 +77,7 @@ export function errorInfo(error: unknown): { raw: string; hint: string } {
   let hint = 'Thử lại sau hoặc mở Chẩn đoán API để kiểm tra kết nối.';
   if (/MUSE_LOGIN_REQUIRED/i.test(raw)) hint = 'Mở Tài khoản Muse, đăng nhập trong tool rồi bấm Kiểm tra phiên. Cả 10 cảnh sử dụng chung tài khoản.';
   else if (/MUSE_SESSION_REFRESH_FAILED|MUSE_SESSION_CHECK_FAILED/i.test(raw)) hint = 'Chưa cập nhật được phiên Muse. Kiểm tra kết nối và tab Muse rồi bấm Kiểm tra phiên; thông tin đăng nhập vẫn được giữ trên máy.';
+  else if (/MUSE_PARALLEL_UNVERIFIED/i.test(raw)) hint = 'Chưa xác minh được các hội thoại Muse độc lập. Tool giữ một luồng để tránh trộn kết quả; kiểm tra này chưa gửi prompt tạo nội dung.';
   else if (/MUSE_WORKSPACE_ORIGIN/i.test(raw)) hint = 'Trang luồng chuyển sang miền khác Muse. Hoàn tất đăng nhập trong tab Muse rồi kiểm tra lại phiên; chưa có prompt được gửi.';
   else if (/MUSE_SUBMIT_NOT_ACKNOWLEDGED/i.test(raw)) hint = 'Muse chưa xác nhận đã nhận prompt. Mở cuộc trò chuyện kiểm tra trước khi thử lại để tránh tạo trùng; tool không tự gửi lại.';
   else if (/MUSE_NEW_CHAT_UNAVAILABLE/i.test(raw)) hint = 'Tool chưa mở được hội thoại riêng. Dùng chế độ hàng đợi một cảnh mỗi lượt; lỗi này không xác nhận Muse đang bận hoặc hết hạn mức.';

@@ -10,6 +10,131 @@ async function configureAdapter(page: Page) {
   await page.reload();
 }
 
+test('each scene can start during another render; stopping one leaves the other running', async ({ page }) => {
+  await configureAdapter(page);
+  const pending = new Map<number, () => Promise<void>>();
+  const calls: number[] = [];
+  await page.route('**/api/video', async route => {
+    const id = route.request().postDataJSON().sceneId;
+    calls.push(id);
+    await new Promise<void>(resolve => pending.set(id, async () => {
+      await route.fulfill({ json: { base64: video, mimeType: 'video/mp4' } }).catch(() => {}); resolve();
+    }));
+  });
+  await page.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này', exact: true }).click();
+  await expect.poll(() => calls).toEqual([1]);
+  await expect(page.getByTestId('scene-2').getByRole('button', { name: 'Tạo cảnh này', exact: true })).toBeEnabled();
+  await page.getByTestId('scene-2').getByRole('button', { name: 'Tạo cảnh này', exact: true }).click();
+  await expect.poll(() => calls).toEqual([1, 2]);
+  await page.getByRole('button', { name: 'Dừng cảnh 1', exact: true }).click();
+  await expect(page.getByTestId('scene-1').locator('.status-badge')).toHaveText('Đã dừng');
+  await expect(page.getByTestId('scene-2').locator('.status-badge')).toHaveText('Đang tạo');
+  await pending.get(2)!();
+  await expect(page.getByTestId('scene-2').locator('video')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO' })).toBeVisible();
+  await pending.get(1)!();
+  expect(calls).toEqual([1, 2]);
+});
+
+test('cancelling one queued scene sends no request and does not cancel the rest', async ({ page }) => {
+  const account = { id: 1, state: 'ready', authenticated: true, active: true };
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', executionConcurrency: 1, accounts: [account] } }));
+  const calls: number[] = [];
+  let first: (() => Promise<void>) | undefined;
+  await page.route('**/api/image', async route => {
+    const id = route.request().postDataJSON().sceneId; calls.push(id);
+    const finish = () => route.fulfill({ json: { base64: image, mimeType: 'image/png' } });
+    if (id === 1) await new Promise<void>(resolve => { first = async () => { await finish(); resolve(); }; });
+    else await finish();
+  });
+  await page.reload();
+  await page.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
+  await page.getByRole('button', { name: 'TẠO 10 ẢNH', exact: true }).click();
+  await expect(page.locator('.status-badge.running')).toHaveCount(1);
+  await expect(page.locator('.status-badge.queued')).toHaveCount(9);
+  await page.getByRole('button', { name: 'Dừng cảnh 5', exact: true }).click();
+  await expect(page.getByTestId('scene-5').locator('.status-badge')).toHaveText('Đã dừng');
+  expect(calls).toEqual([1]);
+  await first!();
+  await expect(page.getByRole('button', { name: 'TẠO 10 ẢNH', exact: true })).toBeVisible();
+  expect(calls).toEqual([1,2,3,4,6,7,8,9,10]);
+  await expect(page.locator('.generated-image')).toHaveCount(9);
+  await page.getByTestId('scene-5').getByRole('button', { name: 'Tạo cảnh này', exact: true }).click();
+  await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '10');
+  expect(calls.at(-1)).toBe(5);
+});
+
+test('parallel selection uses an explicit capability check and reports an unsupported shared conversation', async ({ page }) => {
+  const account = { id: 1, state: 'ready', authenticated: true, active: true };
+  let lanes = 1; const checks: number[] = []; let renders = 0;
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', executionConcurrency: lanes, accounts: [account] } }));
+  await page.route('**/api/account/concurrency', route => {
+    const count = route.request().postDataJSON().concurrency; checks.push(count);
+    if (count === 10) { lanes = 10; return route.fulfill({ json: { executionConcurrency: 10, message: 'Đã kiểm tra 10 địa chỉ hội thoại riêng. Chưa render nội dung.' } }); }
+    lanes = 1; return route.fulfill({ status: 409, json: { error: 'MUSE_PARALLEL_UNVERIFIED: Không có hội thoại riêng.' } });
+  });
+  await page.route('**/api/image', route => { renders++; return route.abort(); });
+  await page.reload();
+  await page.getByLabel('Số luồng:', { exact: true }).selectOption('10');
+  await expect(page.getByLabel('Số luồng:', { exact: true })).toHaveValue('10');
+  await expect(page.locator('.composer-feedback')).toContainText('10 địa chỉ');
+  await page.getByLabel('Số luồng:', { exact: true }).selectOption('2');
+  await expect(page.getByLabel('Số luồng:', { exact: true })).toHaveValue('1');
+  await expect(page.locator('.composer-feedback')).toContainText('Chưa xác minh');
+  expect(checks).toEqual([10, 2]); expect(renders).toBe(0);
+});
+
+test('each scene retains previous images and videos across reload, lets users select/download/delete a specific result', async ({ page }) => {
+  await configureAdapter(page);
+  const colors = await page.evaluate(() => ['red','blue','green'].map(color => { const canvas = document.createElement('canvas'); canvas.width = 4; canvas.height = 4; const ctx = canvas.getContext('2d')!; ctx.fillStyle = color; ctx.fillRect(0,0,4,4); return canvas.toDataURL('image/png').split(',')[1]; }));
+  let images = 0; let videos = 0;
+  await page.route('**/api/image', route => route.fulfill({ json: { base64: colors[images++], mimeType: 'image/png' } }));
+  await page.route('**/api/video', route => { videos++; return route.fulfill({ json: { base64: video, mimeType: 'video/mp4' } }); });
+  const scene = page.getByTestId('scene-1');
+  await page.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
+  await page.getByLabel('Kịch bản cảnh 1', { exact: true }).fill('First red image');
+  await scene.getByRole('button', { name: 'Tạo cảnh này', exact: true }).click();
+  await expect(scene.locator('.history-entry')).toHaveCount(1);
+  await page.getByLabel('Kịch bản cảnh 1', { exact: true }).fill('Second blue image');
+  await scene.getByRole('button', { name: 'Tạo cảnh này', exact: true }).click();
+  await expect(scene.locator('.history-entry')).toHaveCount(2);
+  await scene.screenshot({ path: 'test-results/scene-saved-history.png' });
+  await scene.getByRole('button', { name: 'Xem bản 1 cảnh 1', exact: true }).click();
+  const download = page.waitForEvent('download');
+  await scene.getByRole('button', { name: 'Tải bản 1 cảnh 1', exact: true }).click();
+  const file = await download;
+  const bytes = await readFile((await file.path())!);
+  expect(bytes.subarray(0,8)).toEqual(Buffer.from([137,80,78,71,13,10,26,10]));
+  const selectedPixel = () => scene.locator('.generated-image').evaluate((image: HTMLImageElement) => { const canvas = document.createElement('canvas'); canvas.width=4;canvas.height=4; const ctx=canvas.getContext('2d')!;ctx.drawImage(image,0,0);return [...ctx.getImageData(0,0,1,1).data]; });
+  expect(await selectedPixel()).toEqual([255,0,0,255]);
+  await page.reload();
+  await expect(scene.locator('.history-entry')).toHaveCount(2);
+  expect(await selectedPixel()).toEqual([0,0,255,255]);
+  await page.getByRole('button', { name: 'Tạo video', exact: true }).click();
+  await scene.getByRole('button', { name: 'Tạo cảnh này', exact: true }).click();
+  await expect(scene.locator('video')).toBeVisible();
+  await page.reload();
+  await expect(scene.locator('video')).toBeVisible();
+  await expect(scene.locator('.history-entry')).toHaveCount(1);
+  await page.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
+  await expect(scene.locator('.history-entry')).toHaveCount(2);
+  await scene.getByRole('button', { name: 'Xem bản 1 cảnh 1', exact: true }).click();
+  expect(await selectedPixel()).toEqual([255,0,0,255]);
+  await scene.getByRole('button', { name: 'Xóa bản 2 cảnh 1', exact: true }).click();
+  await expect(scene.locator('.history-entry')).toHaveCount(1);
+  await page.reload();
+  await expect(scene.locator('.history-entry')).toHaveCount(1);
+  await expect(scene.locator('.generated-image')).toHaveCount(0);
+  await scene.locator('.media-history summary').click();
+  await scene.getByRole('button', { name: 'Xem bản 1 cảnh 1', exact: true }).click();
+  expect(await selectedPixel()).toEqual([255,0,0,255]);
+  for (let id=2; id<=10; id++) await page.getByRole('checkbox', { name: `Bật cảnh ${id}`, exact: true }).uncheck();
+  await page.getByRole('button', { name: 'TẠO 10 ẢNH', exact: true }).click();
+  await expect(scene.locator('.history-entry')).toHaveCount(2);
+  expect(images).toBe(3); expect(videos).toBe(1);
+  expect(await selectedPixel()).toEqual([0,128,0,255]);
+});
+
 test('matches 10-slot layout on desktop and remains within mobile viewport', async ({ page }) => {
   await page.setViewportSize({ width: 1433, height: 1000 });
   await expect(page.locator('.scene-card')).toHaveCount(10);
@@ -223,7 +348,7 @@ test('a fixture advertising independent conversations can start ten image reques
 });
 
 test('legacy account choices cannot route any of the ten scenes to another account', async ({ page }) => {
-  await page.evaluate(() => localStorage.setItem('muse-workstation-v1', JSON.stringify({ version: 1, settings: { shareUnassigned: false, sharedAccountId: 8 }, scenes: Array.from({ length: 10 }, (_, i) => ({ prompt: `Legacy scene ${i + 1}`, accountId: i + 1, email: `old${i}@example.com`, enabled: true })) })));
+  await page.addInitScript(() => localStorage.setItem('muse-workstation-v1', JSON.stringify({ version: 1, settings: { shareUnassigned: false, sharedAccountId: 8 }, scenes: Array.from({ length: 10 }, (_, i) => ({ prompt: `Legacy scene ${i + 1}`, accountId: i + 1, email: `old${i}@example.com`, enabled: true })) })));
   await configureAdapter(page);
   const calls: number[] = [];
   await page.route('**/api/video', route => { calls.push(route.request().postDataJSON().accountId); return route.fulfill({ json: { base64: video, mimeType: 'video/mp4' } }); });

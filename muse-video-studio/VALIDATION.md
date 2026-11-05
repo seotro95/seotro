@@ -1,3 +1,27 @@
+# Xác minh bản 1.4.8
+
+## Hành vi mới
+
+- Tạo/Dừng riêng từng cảnh; có thể thêm cảnh khi cảnh khác đang xử lý. Hủy cảnh chờ không gửi prompt; dừng cảnh đang chạy chỉ hủy AbortController/IPC request của cảnh đó. Nút Dừng tất cả vẫn giữ chức năng.
+- Lịch sử ảnh và video riêng từng ô: thumbnail/biểu tượng, prompt, thời gian, chọn xem, tải đúng bản hoặc xóa từng bản. Kết quả mới được thêm, không ghi đè các bản trước. Lưu prompt, settings và ID ảnh tham chiếu để chỉ tự khôi phục kết quả còn khớp; chọn xem ảnh cũ không làm Tạo 10 bỏ qua prompt mới. IndexedDB lưu base64/MIME và thông tin media, tạo Blob URL mới khi mở lại. Không đóng gói hồ sơ hoặc dữ liệu người dùng vào ZIP.
+- Khi lưu thất bại, vẫn giữ kết quả trong phiên và ghi rõ chưa lưu trên ổ đĩa; không xóa tự động kết quả cũ. Xóa do người dùng chỉ được phản ánh sau khi transaction IndexedDB hoàn tất.
+- Chọn 1/2/3/5/10 luồng. Số lớn hơn 1 cần kiểm tra New chat bằng UI hiện có, các địa chỉ hội thoại phải khác nhau, có editor và mở lại đúng địa chỉ. Kiểm tra không gửi prompt tạo nội dung. Không tìm được thì giữ 1; không tự tạo route hoặc gửi 10 prompt vào hội thoại chung.
+- Các tác vụ thuê riêng địa chỉ trong pool đã kiểm tra. Redirect hoặc phát hiện hội thoại chung hạ về 1; giữ ranh giới marker/phản hồi và kiểm tra ảnh trùng của 1.4.7. Đóng phiên hủy xác minh các địa chỉ đã lưu. Không tuyên bố kiểm tra route xác nhận hạn mức render thật.
+
+## Kiểm thử thực hiện
+
+- `npm run test:e2e`: **25/25 qua trên bundle cuối** sau bổ sung đối chiếu prompt/settings và nạp dữ liệu legacy bằng init script trước app (tránh race với autosave). Bốn ca điều khiển/lưu mới cũng từng chạy riêng: **4/4 qua**. Gồm Tạo ô khác khi đang chạy; dừng một ô giữ ô khác; hủy cảnh chờ không gửi request; capability check không render; hai ảnh khác màu và một video giữ sau reload, chọn đúng ảnh cũ, tải PNG, xóa một bản rồi reload vẫn đúng và không render lại.
+- `tests/muse-parallel.test.mjs`: **5/5 Node tests qua** (bốn kịch bản và nhóm). Thiếu New chat, nút chỉ xóa root và số luồng không hợp lệ đều không render. Fixture 10 địa chỉ chat riêng chạy đủ 10 yêu cầu trước khi trả kết quả (peak=10), dừng một chỉ gửi một Stop, chín ảnh khác nhau còn lại hoàn tất. Redirect hạ về 1 trước khi gửi prompt mới. Bao gồm API account/concurrency và từ chối thay đổi lúc đang có tác vụ.
+- `npm run test:desktop`: **8/8 Node tests qua** trên Electron thật. Trong một bộ 10 yêu cầu qua IPC, dừng cảnh 3 chỉ hủy một yêu cầu và giữ chín cảnh chạy; Dừng tất cả sau đó gửi Stop tới chín cảnh còn lại. Gồm đăng nhập nhúng, ảnh, video từ ảnh, lưu phiên và popup cũ. Fixture độc lập dùng flag test, không chứng minh Muse thật hỗ trợ 10 render.
+- `tests/portable.test.mjs`: **1/1 qua**, executable Linux đóng gói, hồ sơ mới, PATH không có Node/npm. Tạo đủ 10 ảnh với peak=1 trên hội thoại chung không New chat; tải riêng một và tải bộ 10, cả 11 tệp PNG giải mã được và 10 ảnh của bộ khác nhau. Sau đóng/mở lại executable: giữ origin/cổng, kịch bản và đủ 10 kết quả trong thư viện; không gửi yêu cầu render mới. Chín ảnh còn khớp được tự hiện lại, cảnh 2 đã đổi prompt vẫn giữ ảnh cũ trong lịch sử và không đánh dấu đó là kết quả của prompt mới.
+- `tests/muse-serial.test.mjs`: **6/6 qua**; `npm run test:browser-bridge`: **27/27 qua** sau sửa giữ thiết lập fixture khi đóng/mở phiên. `npm test`, TypeScript/build, kiểm tra cú pháp và whitespace Git đều qua. Không thêm dependency.
+
+## Phạm vi
+
+Kiểm thử sử dụng Muse giả lập với Chromium/Electron thật. Chưa có tài khoản Muse thật trong môi trường cloud; chưa xác minh 10 render đồng thời, quota, model, độ nét hoặc credit của người dùng. Gói Windows dùng Electron 45.2.2 x64 chính thức, kiểm checksum runtime, manifest SHA-256 và cấu trúc EXE/ZIP; cloud Linux không chạy Windows EXE. Bản phát hành giữ sandbox, context isolation và web security; cờ no-sandbox chỉ dùng trong fixture cloud.
+
+## Kết quả lịch sử trước 1.4.8
+
 # Xác minh bản 1.4.7
 
 ## Lỗi được sửa

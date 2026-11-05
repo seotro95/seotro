@@ -1,6 +1,6 @@
-# Muse AI Studio 1.4.7 · Một tài khoản, 10 cảnh
+# Muse AI Studio 1.4.8 · Một tài khoản, 10 cảnh
 
-Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đăng nhập Muse nằm trong cửa sổ tool. Mười cảnh dùng chung một phiên tài khoản và được gửi lần lượt để tránh trộn hội thoại.
+Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đăng nhập Muse nằm trong cửa sổ tool. Mười cảnh dùng chung một phiên tài khoản. Mỗi ô có nút Tạo/Dừng riêng và lịch sử ảnh/video lưu trên máy. Có thể kiểm tra để bật tối đa 10 hội thoại song song.
 
 ## Bản Windows đầy đủ — không cần bản cũ
 
@@ -10,11 +10,21 @@ Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đă
 4. Có thể bấm **Kiểm tra ô Message** trước khi tạo. Bước này tìm ô nhập trong trang luồng, không gửi prompt hoặc render.
 5. Nhập 10 prompt hoặc TXT/SRT, chọn **Tạo ảnh hàng loạt** / **Tạo video**, bấm **TẠO 10 ẢNH / VIDEO**.
 
-Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.4.7** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
+Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.4.8** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
 
 Cầu nối giao diện **không chính thức**. Kiểm thử dùng Chromium/Electron thật và dịch vụ giả lập cục bộ; chưa tự động tạo media hoặc đọc số dư trên Muse.ai thật. Người dùng xác nhận có thể gửi/nhận tin nhắn thủ công trong tab Muse của tool. Tài khoản thật có thể giới hạn render đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các lựa chọn model, độ nét và thời lượng là yêu cầu bằng prompt, cần xác nhận bằng kết quả thật.
 
-## Hội thoại chung, hàng đợi và ảnh tải xuống trong bản 1.4.7
+## Tạo/Dừng từng ô, lưu kết quả và chọn số luồng trong bản 1.4.8
+
+- Mỗi ô có **Tạo cảnh này / Tạo lại cảnh**. Có thể thêm cảnh khi các cảnh khác đang xử lý; không thêm trùng cảnh đang chạy hoặc đang chờ.
+- Khi chạy, nút của ô đổi thành **Dừng cảnh này**; khi chờ, nút là **Hủy cảnh chờ**. Chỉ hủy yêu cầu của ô đó, các ô khác tiếp tục. Nút Dừng tất cả vẫn giữ chức năng dừng cả bộ. Lệnh đã gửi tới Muse có thể vẫn tính phí dù đã yêu cầu dừng.
+- Mỗi kết quả thành công được thêm vào **Kết quả đã lưu** trong đúng ô. Giữ cả các bản ảnh và video trước, có thời gian và prompt để phân biệt. Bấm thumbnail để xem, **Tải** để tải đúng bản, **Xóa** để xóa từng kết quả.
+- Kết quả lưu trong IndexedDB của Studio, trên máy và trong hồ sơ của ứng dụng. Đóng/mở lại cùng bản cài và thư mục dữ liệu vẫn giữ. JSON chỉ xuất kịch bản/settings, không chứa thư viện media. Xóa dữ liệu ứng dụng, hồ sơ hoặc thư mục cài portable cũng xóa kho kết quả; chuyển sang thư mục cài mới không tự nhập kho của bản cũ.
+- Khi không đủ dung lượng hoặc không ghi được IndexedDB, kết quả vẫn hiện trong phiên với nhãn **Chưa lưu trên ổ đĩa · hãy tải ngay**. Không tự xóa ảnh/video cũ để lấy chỗ.
+- Chọn **Số luồng: 1 / 2 / 3 / 5 / 10** trên bảng tài khoản. Với số lớn hơn 1, tool mở New chat bằng nút có thật của Muse, yêu cầu địa chỉ hội thoại khác nhau và mở lại được. Kiểm tra không gửi prompt tạo nội dung. Không tìm được các địa chỉ riêng thì giữ 1 và báo lý do, không gửi 10 prompt vào cùng hội thoại.
+- Các tác vụ song song dùng những địa chỉ đã kiểm tra, mỗi lượt giữ riêng một địa chỉ; không tự tạo đường dẫn Muse giả. Đổi route hoặc phát hiện prompt xen kẽ thì hạ xuống một luồng. Kiểm tra địa chỉ không chứng minh hạn mức render của tài khoản: Muse vẫn có thể giới hạn hoặc từ chối. Không tự lặp lại yêu cầu đã gửi và không bảo đảm 10 render thực sự đồng thời.
+
+## Hội thoại chung, hàng đợi và ảnh tải xuống
 
 Log `MUSE_NEW_CHAT_UNAVAILABLE` do tool tạo ra trước khi gửi prompt. Nó không chứng minh Muse từ chối tạo ảnh/video hoặc tài khoản hết hạn mức. Cầu nối đăng nhập hiện dùng một hàng đợi trên cùng tài khoản, mặc định một cảnh mỗi lượt, và có thể nối tiếp hội thoại hiện tại mà không yêu cầu New chat. Bấm Tạo 10 vẫn xử lý đủ các cảnh hợp lệ; giao diện phân biệt cảnh đang chạy với cảnh đang chờ. Dừng bộ cũng hủy các cảnh chưa được gửi.
 
@@ -22,7 +32,7 @@ Phản hồi chỉ được đọc sau marker của đúng yêu cầu và trư�
 
 Ảnh được giải mã ở kích thước thật, WebP/JPEG/AVIF được chuẩn hóa thành PNG khi cần. Nút tải ảnh luôn xuất tệp PNG thực sự, gồm cả ảnh từ adapter; không chỉ đổi đuôi tệp. Không phóng ảnh để giả độ nét. Nếu tệp không giải mã được thì báo lỗi, không xuất dữ liệu hỏng.
 
-Một tài khoản Muse vẫn có thể có giới hạn dịch vụ thực tế. Bản này không khẳng định 10 hội thoại của tài khoản Muse tách biệt hoặc 10 render cùng lúc được hỗ trợ. Adapter API có các yêu cầu độc lập vẫn có thể xử lý song song theo cấu hình kết nối.
+Một tài khoản Muse vẫn có thể có giới hạn dịch vụ thực tế. Kiểm tra route chỉ xác minh các địa chỉ hội thoại riêng mở được, không chứng minh tài khoản được phép render 10 tác vụ cùng lúc. Adapter API có các yêu cầu độc lập vẫn có thể xử lý song song theo cấu hình kết nối.
 
 Bản này cũng giữ sửa nhập Message: textarea hoạt động dù còn nhãn prehydration, chuyển editor sau ký tự đầu, giữ đủ prompt và chỉ nhấn gửi một lần. Rich editor hiển thị được ưu tiên; bản nháp ngoài yêu cầu được giữ nguyên.
 
@@ -36,7 +46,7 @@ npm run build
 npm start
 ```
 
-Máy chủ mã nguồn mặc định chỉ lắng nghe 127.0.0.1:8788. Bản desktop đóng gói dùng cổng trống. Đóng cửa sổ để dừng app. Giữ hoặc tải kết quả trước khi đóng; dự án JSON lưu kịch bản và thiết lập.
+Máy chủ mã nguồn mặc định chỉ lắng nghe 127.0.0.1:8788. Bản desktop đóng gói chọn và giữ cổng cục bộ. Đóng cửa sổ để dừng app; kết quả đã lưu sẽ có lại khi mở cùng hồ sơ. Dự án JSON lưu kịch bản và thiết lập.
 
 ## Đóng gói từ mã nguồn
 
@@ -59,7 +69,7 @@ python3 scripts/package_portable.py --platform linux --output /path/to/portable-
 
 Mô hình, thời lượng, khung hình và độ phân giải là **yêu cầu bằng lời trong prompt**, không phải tham số API được Muse xác nhận. Danh sách Omni/Veo theo mô tả người dùng, chưa xác minh trên dịch vụ thật. Tool hiển thị kích thước quan sát được; tệp thấp hơn mức yêu cầu được ghi **Chưa đạt yêu cầu**, không phóng ảnh hoặc đổi nhãn để giả 4K gốc. Độ giống nhân vật và chất lượng AI cần kiểm tra bằng kết quả thực tế.
 
-Chỉnh prompt/ảnh/settings sẽ xóa kết quả liên quan để tránh dùng lại tệp không khớp. Ảnh/video chỉ giữ trong phiên; dự án JSON và localStorage chỉ lưu prompt, bật/tắt và settings. Tải kết quả cần giữ trước khi đóng.
+Chỉnh prompt/ảnh/settings bỏ kết quả đang chọn khỏi ô để tránh coi tệp cũ là kết quả của prompt mới; các bản đã tạo vẫn còn trong Kết quả đã lưu để xem/tải. Khi mở lại, chỉ tự chọn kết quả còn khớp prompt, settings và ảnh tham chiếu. Chọn xem lại một bản cũ không làm Tạo 10 bỏ qua prompt mới. IndexedDB lưu media; dự án JSON và localStorage lưu prompt, bật/tắt và settings.
 
 ## Đăng nhập và dữ liệu
 
@@ -102,6 +112,7 @@ npm run build
 npm test
 CHROMIUM_PATH=/usr/bin/chromium npm run test:browser-bridge
 CHROMIUM_PATH=/usr/bin/chromium node tests/muse-serial.test.mjs
+CHROMIUM_PATH=/usr/bin/chromium node tests/muse-parallel.test.mjs
 CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e
 npm run test:desktop
 # Sau khi chuẩn bị gói Linux, đặt MUSE_PORTABLE_EXECUTABLE rồi chạy:
