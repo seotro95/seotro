@@ -1,4 +1,27 @@
-# Xác minh bản 1.4.6
+# Xác minh bản 1.4.7
+
+## Lỗi được sửa
+
+- Người dùng cung cấp `MUSE_NEW_CHAT_UNAVAILABLE` cho ảnh và video. Đây là lỗi do tool tạo ra trước khi gửi prompt, không phải phản hồi quota/capacity từ Muse. Bản cũ giả định nhiều tab là các hội thoại độc lập.
+- Mặc định cầu nối Muse dùng một hàng đợi FIFO, một cảnh mỗi lượt, tái sử dụng hội thoại đã có mà không bắt buộc New chat. Giao diện chạy bộ 10 cảnh và phân biệt đang chạy/đang chờ; hủy cảnh chờ không gửi prompt.
+- Chỉ nhận phản hồi giữa marker của yêu cầu và tin nhắn người dùng kế tiếp. Khi thấy luồng khác trong cùng hội thoại thì dừng nhận để tránh ghép sai, chuyển các yêu cầu sau sang một luồng và không tự gửi lại các yêu cầu đã gửi.
+- So SHA-256 các pixel đã giải mã, kèm kích thước: ảnh trùng cảnh khác trong các bộ gần đây không được tính hoàn tất. Có kiểm tra khi bấm chạy lại phần lỗi bằng batch mới.
+- Giải mã ảnh ở kích thước thật, chuẩn hóa ảnh không phải PNG thành PNG. PNG đã hợp lệ giữ byte gốc và MIME đúng. Ảnh WebP bị gắn `application/octet-stream` được trả bằng byte PNG thực sự. Nút tải ảnh cũng xuất PNG cho đường adapter.
+
+## Kiểm thử của bản hiện tại
+
+- `tests/muse-serial.test.mjs`: **6/6 Node tests qua** (5 kịch bản và một nhóm). Hội thoại chứa lịch sử, không có New chat; 10 lời gọi đồng thời được xếp hàng và trả 10 ảnh khác nhau, đỉnh render là 1. Gồm hủy cảnh chờ, ảnh trùng trong/cross-batch, WebP sai MIME và không nhận ảnh sau lượt người dùng khác.
+- `npm run test:browser-bridge`: **27/27 qua** với fixture độc lập quảng bá khả năng chạy song song. Đây là kiểm thử nhánh hỗ trợ nhiều hội thoại, không chứng minh Muse thật có khả năng đó.
+- `npm run test:desktop`: **8/8 Node tests qua** trên Electron thật với fixture độc lập bật riêng `MUSE_TEST_PARALLEL=1`. Đăng nhập, 10 ảnh/video, Stop, phiên lưu và popup đều qua. Flag chỉ có tác dụng với fixture loopback, không bật cho Muse thật.
+- `npm run test:e2e`: **21/21 qua**, gồm một cảnh chạy/chín cảnh chờ, định danh batch/scene, chế độ adapter/demo, import và các chức năng cũ. Ca WebP export chạy lại sau khi thêm đối chiếu pixel: **1/1 qua**, ảnh tải là PNG, kích thước 2×2 và các pixel khớp preview.
+- `tests/portable.test.mjs`: **1/1 qua** trên executable đóng gói Linux, hồ sơ mới và PATH không có Node/npm. Muse giả lập có hội thoại chung, không New chat, xuất WebP. App tạo đủ 10 ảnh với đỉnh render là 1; tải riêng một ảnh và tải bộ 10 ảnh. Cả **11 tệp trên ổ đĩa** hoàn tất, có chữ ký PNG, giải mã thành công 640×360; 10 tệp của bộ có nội dung khác nhau. Đóng/mở lại giữ kịch bản và cổng.
+- `npm test` và parser/core chạy lại đều qua; `npm run build`, kiểm tra cú pháp và whitespace Git qua. Gói phát hành vẫn bật sandbox; cờ no-sandbox chỉ dùng cho fixture cloud.
+
+## Phạm vi xác minh
+
+Windows dùng runtime Electron 45.2.2 x64 chính thức, đối chiếu checksum và cấu trúc PE; gói có app, bundle UI và Playwright Core. Không cần bản cũ, npm hay Node ngoài. Cloud Linux không chạy Windows EXE. Các kiểm thử dùng Muse giả lập và không có phiên Muse thật; số credit, chất lượng, quyền model và tốc độ thật phải xác minh trên tài khoản người dùng. Bản này không cam kết 10 render Muse đồng thời.
+
+## Kết quả lịch sử trước 1.4.7
 
 ## Kết quả của bản hiện tại
 

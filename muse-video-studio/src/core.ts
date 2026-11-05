@@ -75,10 +75,13 @@ export function meetsResolution(media: MediaResult): boolean | null {
 export function errorInfo(error: unknown): { raw: string; hint: string } {
   const raw = error instanceof Error ? error.message : String(error);
   let hint = 'Thử lại sau hoặc mở Chẩn đoán API để kiểm tra kết nối.';
-  if (/MUSE_LOGIN_REQUIRED/i.test(raw)) hint = 'Mở Tài khoản Muse, đăng nhập trong tool rồi bấm Kiểm tra phiên. Cả 10 luồng sử dụng chung tài khoản.';
+  if (/MUSE_LOGIN_REQUIRED/i.test(raw)) hint = 'Mở Tài khoản Muse, đăng nhập trong tool rồi bấm Kiểm tra phiên. Cả 10 cảnh sử dụng chung tài khoản.';
   else if (/MUSE_SESSION_REFRESH_FAILED|MUSE_SESSION_CHECK_FAILED/i.test(raw)) hint = 'Chưa cập nhật được phiên Muse. Kiểm tra kết nối và tab Muse rồi bấm Kiểm tra phiên; thông tin đăng nhập vẫn được giữ trên máy.';
   else if (/MUSE_WORKSPACE_ORIGIN/i.test(raw)) hint = 'Trang luồng chuyển sang miền khác Muse. Hoàn tất đăng nhập trong tab Muse rồi kiểm tra lại phiên; chưa có prompt được gửi.';
   else if (/MUSE_SUBMIT_NOT_ACKNOWLEDGED/i.test(raw)) hint = 'Muse chưa xác nhận đã nhận prompt. Mở cuộc trò chuyện kiểm tra trước khi thử lại để tránh tạo trùng; tool không tự gửi lại.';
+  else if (/MUSE_NEW_CHAT_UNAVAILABLE/i.test(raw)) hint = 'Tool chưa mở được hội thoại riêng. Dùng chế độ hàng đợi một cảnh mỗi lượt; lỗi này không xác nhận Muse đang bận hoặc hết hạn mức.';
+  else if (/MUSE_SHARED_CONVERSATION/i.test(raw)) hint = 'Hội thoại Muse nhận các yêu cầu xen kẽ. Tool dừng để tránh ghép nhầm ảnh; hãy chạy lại từng cảnh sau khi kiểm tra lịch sử.';
+  else if (/MUSE_DUPLICATE_MEDIA/i.test(raw)) hint = 'Ảnh nhận được trùng hoàn toàn với một cảnh khác. Tool chưa tính là ảnh mới; kiểm tra kết quả và lịch sử Muse trước khi tạo lại.';
   else if (/MUSE_DRAFT_CHANGED|MUSE_EDITOR_CHANGED/i.test(raw)) hint = 'Ô Message thay đổi khi đang nhập. Tool dừng trước khi gửi; kiểm tra bản nháp trong cuộc trò chuyện.';
   else if (/MUSE_COMPOSER_NOT_READY/i.test(raw)) hint = 'Chưa tìm được ô nhập Message cho cảnh này. Bấm Kiểm tra ô Message ở bảng tài khoản để xem chi tiết trang luồng; chưa có prompt được gửi.';
   else if (/MUSE_COMPOSER_AMBIGUOUS/i.test(raw)) hint = 'Có nhiều ô nhập Message phù hợp cho cảnh này. Tool chưa gửi prompt để tránh chọn nhầm ô.';

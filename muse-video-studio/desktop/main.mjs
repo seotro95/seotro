@@ -44,11 +44,11 @@ async function start() {
   museSession.setPermissionRequestHandler((_contents, _permission, callback) => callback(false));
   const proxyServer = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
   if (proxyServer) await museSession.setProxy({ proxyRules: proxyServer, proxyBypassRules: 'localhost;127.0.0.1' });
-  window = new BrowserWindow({ width: 1480, height: 1000, minWidth: 850, minHeight: 650, title: `Muse AI Studio ${version} · 1 tài khoản / 10 luồng`, autoHideMenuBar: true,
+  window = new BrowserWindow({ width: 1480, height: 1000, minWidth: 850, minHeight: 650, title: `Muse AI Studio ${version} · 1 tài khoản / 10 cảnh`, autoHideMenuBar: true,
     webPreferences: { preload: path.join(directory, 'preload.cjs'), sandbox: true, contextIsolation: true, nodeIntegration: false } });
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
   host = new EmbeddedMuseHost({ window, userData, serviceURL });
-  const muse = new MuseBrowser({ profileRoot: userData, accountProfile: userData, serviceURL, sessionFactory: () => host.openSession() });
+  const muse = new MuseBrowser({ profileRoot: userData, accountProfile: userData, serviceURL, maxConcurrency: fixture && process.env.MUSE_TEST_PARALLEL === '1' ? 10 : 1, sessionFactory: () => host.openSession() });
   const rememberPort = app.isPackaged && !process.env.PORT;
   runtime = await startStudioServer({ museDriver: muse, embeddedLogin: true, ...(rememberPort ? { port: savedStudioPort() } : {}) });
   // Keep the localStorage origin stable on later launches of a portable app.
@@ -95,7 +95,7 @@ async function start() {
   window.webContents.send('studio:version', version);
   await studio.webContents.loadURL(runtime.url);
   window.on('close', event => { if (!closing) { event.preventDefault(); void shutdown(); } });
-  console.log('Muse desktop ready: dang nhap trong tool, mot phien / toi da 10 luong.');
+  console.log('Muse desktop ready: dang nhap trong tool, mot phien / 10 canh, hang doi an toan.');
 }
 
 async function shutdown() {

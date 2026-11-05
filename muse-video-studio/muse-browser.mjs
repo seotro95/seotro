@@ -32,7 +32,7 @@ const pause = (ms, signal) => new Promise((resolve, reject) => {
 });
 
 export class MuseBrowser {
-  constructor({ profileRoot, accountProfile, serviceURL = 'https://muse.ai/', launchOptions, sessionFactory, timeoutMs = 600000, pollMs = 500, quietMs = 1500, composerTimeoutMs = 45000, submitTimeoutMs = 15000 } = {}) {
+  constructor({ profileRoot, accountProfile, serviceURL = 'https://muse.ai/', launchOptions, sessionFactory, timeoutMs = 600000, pollMs = 500, quietMs = 1500, composerTimeoutMs = 45000, submitTimeoutMs = 15000, maxConcurrency = 1 } = {}) {
     this.profileRoot = profileRoot;
     this.serviceURL = serviceURL;
     this.launchOptions = launchOptions;
@@ -44,6 +44,13 @@ export class MuseBrowser {
     this.quietMs = quietMs;
     this.composerTimeoutMs = composerTimeoutMs;
     this.submitTimeoutMs = submitTimeoutMs;
+    this.maxConcurrency = Math.max(1, Math.min(10, maxConcurrency));
+    this.reserved = 0;
+    this.executing = 0;
+    this.queue = [];
+    this.inFlightMarkers = new Set();
+    this.unsafeMarkers = new Set();
+    this.imageBatches = new Map();
     this.active = null;
     this.profilePath = accountProfile || path.join(this.profileRoot, 'slot-01');
     this.accounts = [{ id: 1, state: existsSync(this.profile(1)) ? 'saved' : 'disconnected', authenticated: false, sessionAuthenticated: false, composerReady: false, connectionMessage: '', checkedAt: null, balance: null }];
@@ -260,6 +267,9 @@ export class MuseBrowser {
     finally { await handle.dispose(); }
     const users = frame.locator(`${MESSAGES}[data-message-role="user"]`);
     if (!await users.count()) return frame;
+    // A Muse account may expose one persistent conversation. Serial requests
+    // can safely append a new marked turn; a missing New chat must not block it.
+    if (this.maxConcurrency === 1) return frame;
     const newChat = await this.newChatControl(frame);
     if (!newChat) throw fail('MUSE_NEW_CHAT_UNAVAILABLE', 'Không mở được cuộc trò chuyện riêng. Chưa gửi prompt; Muse cần hỗ trợ các cuộc trò chuyện độc lập để chạy đồng thời.');
     await newChat.click();
@@ -281,7 +291,42 @@ export class MuseBrowser {
     } catch { throw fail('MUSE_UPLOAD_NOT_READY', 'Ảnh chưa xuất hiện trong ô soạn Muse. Chưa gửi prompt; kiểm tra cửa sổ Muse rồi thử lại.'); }
     finally { await areaHandle?.dispose(); }
   }
-  async turn({ accountId, prompt, image, video, output = video ? 'video' : 'text', signal, checkOnly = false }) {
+  takeTurn(signal) {
+    signal.throwIfAborted();
+    return new Promise((resolve, reject) => {
+      const item = {
+        start: () => {
+          signal.removeEventListener('abort', cancelled);
+          this.executing++;
+          let released = false;
+          resolve(() => {
+            if (released) return;
+            released = true; this.executing--; this.pumpQueue();
+          });
+        },
+      };
+      const cancelled = () => {
+        const index = this.queue.indexOf(item);
+        if (index >= 0) this.queue.splice(index, 1);
+        signal.removeEventListener('abort', cancelled);
+        reject(signal.reason);
+      };
+      signal.addEventListener('abort', cancelled, { once: true });
+      this.queue.push(item); this.pumpQueue();
+    });
+  }
+  pumpQueue() {
+    while (this.executing < this.maxConcurrency && this.queue.length) this.queue.shift().start();
+  }
+  async turn(data) {
+    this.requireSingleAccount(data.accountId);
+    if (this.reserved >= 10) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã có 10 cảnh đang xử lý hoặc chờ.', 429);
+    this.reserved++;
+    let release;
+    try { release = await this.takeTurn(data.signal); return await this.executeTurn(data); }
+    finally { release?.(); this.reserved--; }
+  }
+  async executeTurn({ accountId, prompt, image, video, output = video ? 'video' : 'text', signal, checkOnly = false, batchId, sceneId }) {
     this.requireSingleAccount(accountId);
     if (this.workers.size >= 10) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã có 10 luồng đang chạy trên tài khoản Muse.', 429);
     const key = randomUUID();
@@ -314,7 +359,18 @@ export class MuseBrowser {
       signal.throwIfAborted();
       if (await conversation.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
       if (checkOnly) return { ready: true, message: 'Đã mở được ô Message trong trang luồng riêng. Chưa gửi prompt hoặc yêu cầu tạo nội dung.', details: await this.composerDiagnostics(page) };
-      return await this.sendTurn({ page: conversation, prompt, image, output, signal, onSubmit: () => { sending = true; } });
+      const result = await this.sendTurn({ page: conversation, prompt, image, output, signal, onSubmit: () => { sending = true; } });
+      if (output === 'image' && batchId && sceneId && result.fingerprint) {
+        let batch = this.imageBatches.get(batchId);
+        if (!batch) {
+          batch = new Map(); this.imageBatches.set(batchId, batch);
+          while (this.imageBatches.size > 16) this.imageBatches.delete(this.imageBatches.keys().next().value);
+        }
+        const previous = [...this.imageBatches.values()].map(value => value.get(result.fingerprint)).find(value => value !== undefined && value !== sceneId);
+        if (previous !== undefined && previous !== sceneId) throw fail('MUSE_DUPLICATE_MEDIA', `Kết quả ảnh trùng hoàn toàn với cảnh #${previous}. Tool chưa ghi nhận đây là ảnh mới và không tự gửi lại.`, 409);
+        batch.set(result.fingerprint, sceneId);
+      }
+      return result;
     } finally {
       signal.removeEventListener('abort', cancelled);
       if (page) await (owned?.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()).catch(() => {});
@@ -362,42 +418,67 @@ export class MuseBrowser {
     editor = await this.writeMessage(page, message, signal);
     signal.throwIfAborted();
     onSubmit();
-    await editor.press('Enter');
+    this.inFlightMarkers.add(marker);
     const deadline = Date.now() + this.timeoutMs;
     const acknowledgementDeadline = Date.now() + Math.min(this.submitTimeoutMs, this.timeoutMs);
     let lastText = '';
     let stableSince = Date.now();
     try {
+      await editor.press('Enter');
       while (Date.now() < deadline) {
         await pause(this.pollMs, signal);
-        const result = await page.evaluate(({ messages, stop, notice, marker }) => {
+        if (this.unsafeMarkers.has(marker)) throw fail('MUSE_SHARED_CONVERSATION', 'Các luồng Muse đang dùng chung hội thoại. Đã dừng nhận kết quả để tránh ghép nhầm; không tự gửi lại.', 409);
+        const result = await page.evaluate(({ messages, stop, notice, marker, otherMarkers }) => {
           const visible = el => Boolean(el && el.getClientRects().length);
           const nodes = Array.from(document.querySelectorAll(messages));
           const anchor = nodes.findLastIndex(node => node.getAttribute('data-message-role') === 'user' && node.textContent.includes(marker));
-          const replies = anchor < 0 ? [] : nodes.slice(anchor + 1).filter(node => node.getAttribute('data-message-role') === 'assistant');
+          const nextUser = anchor < 0 ? -1 : nodes.findIndex((node, index) => index > anchor && node.getAttribute('data-message-role') === 'user');
+          const replies = anchor < 0 ? [] : nodes.slice(anchor + 1, nextUser < 0 ? undefined : nextUser).filter(node => node.getAttribute('data-message-role') === 'assistant');
+          const shared = nodes.some(node => node.getAttribute('data-message-role') === 'user' && otherMarkers.some(other => node.textContent.includes(other)));
           const videos = replies.flatMap(node => Array.from(node.querySelectorAll('video'))).filter(el => el.readyState >= 1 && el.currentSrc).map(el => ({ src: el.currentSrc, duration: el.duration, width: el.videoWidth, height: el.videoHeight }));
           const images = replies.flatMap(node => Array.from(node.querySelectorAll('img'))).filter(el => !el.closest('video') && el.complete && el.naturalWidth >= 128 && el.naturalHeight >= 128).map(el => ({ src: el.currentSrc || el.src, width: el.naturalWidth, height: el.naturalHeight }));
           const error = replies.flatMap(node => Array.from(node.querySelectorAll(notice))).find(visible);
-          return { anchored: anchor >= 0, text: replies.map(node => node.innerText).join('\n\n').trim(), videos, images,
+          return { anchored: anchor >= 0, shared, interrupted: nextUser >= 0, text: replies.map(node => node.innerText).join('\n\n').trim(), videos, images,
             streaming: visible(document.querySelector(stop)), error: error?.innerText || '' };
-        }, { messages: MESSAGES, stop: STOP, notice: NOTICE, marker });
+        }, { messages: MESSAGES, stop: STOP, notice: NOTICE, marker, otherMarkers: [...this.inFlightMarkers].filter(other => other !== marker) });
+        if (result.shared || (result.interrupted && !result.images.length && !result.videos.length && !result.text)) {
+          for (const active of this.inFlightMarkers) this.unsafeMarkers.add(active);
+          this.maxConcurrency = 1;
+          throw fail('MUSE_SHARED_CONVERSATION', 'Một hội thoại nhận nhiều yêu cầu xen kẽ. Tool dừng để tránh lấy nhầm ảnh; các lần sau sẽ xử lý lần lượt. Không tự gửi lại.', 409);
+        }
         if (result.error) throw fail('MUSE_GENERATION_ERROR', result.error);
         if (!result.anchored && !result.streaming && Date.now() >= acknowledgementDeadline) throw fail('MUSE_SUBMIT_NOT_ACKNOWLEDGED', 'Muse chưa xác nhận đã nhận prompt sau thao tác gửi. Tool không tự gửi lại. Mở cuộc trò chuyện kiểm tra trước khi thử lại để tránh tạo trùng.', 504);
         if (result.text !== lastText) { lastText = result.text; stableSince = Date.now(); }
         if (output === 'text' && result.anchored && result.text && !result.streaming && Date.now() - stableSince >= this.quietMs) return { text: result.text };
         const media = output === 'video' ? result.videos[0] : output === 'image' ? result.images[0] : null;
         if (media && !result.streaming) {
-          const base64 = await page.evaluate(async ({ src }) => {
+          const base64 = await page.evaluate(async ({ src, output }) => {
             const url = new URL(src, location.href);
             if (!['https:', 'blob:', 'data:'].includes(url.protocol) && !(url.protocol === 'http:' && url.hostname === '127.0.0.1')) throw new Error('Unsupported media URL');
             const response = await fetch(url.href);
             if (!response.ok) throw new Error('Video download failed');
-            const blob = await response.blob();
+            let blob = await response.blob();
             if (!blob.size || blob.size > 100 * 1024 * 1024) throw new Error('Video must be between 1 byte and 100 MB');
-            return await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve({ base64: String(reader.result).split(',')[1], mimeType: blob.type }); reader.onerror = reject; reader.readAsDataURL(blob); });
-          }, { src: media.src }).catch(() => { throw fail('MUSE_MEDIA_UNREADABLE', 'Muse đã hiển thị kết quả nhưng tool chưa tải được dữ liệu. Mở lịch sử trò chuyện trong tab Muse để tải trực tiếp.'); });
+            let fingerprint, width, height;
+            if (output === 'image') {
+              const bitmap = await createImageBitmap(blob);
+              try {
+                width = bitmap.width; height = bitmap.height;
+                if (!width || !height || width * height > 33554432) throw new Error('Image dimensions exceed limit');
+                const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height;
+                const context = canvas.getContext('2d'); context.drawImage(bitmap, 0, 0);
+                const pixels = context.getImageData(0, 0, width, height).data;
+                const digest = await crypto.subtle.digest('SHA-256', pixels.buffer);
+                fingerprint = `${width}x${height}:` + [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, '0')).join('');
+                const signature = new Uint8Array(await blob.slice(0, 8).arrayBuffer());
+                const isPNG = [137,80,78,71,13,10,26,10].every((byte, index) => signature[index] === byte);
+                blob = isPNG ? new Blob([blob], { type: 'image/png' }) : await new Promise((resolve, reject) => canvas.toBlob(value => value ? resolve(value) : reject(new Error('PNG export failed')), 'image/png'));
+              } finally { bitmap.close(); }
+            }
+            return await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve({ base64: String(reader.result).split(',')[1], mimeType: blob.type, fingerprint, width, height }); reader.onerror = reject; reader.readAsDataURL(blob); });
+          }, { src: media.src, output }).catch(() => { throw fail('MUSE_MEDIA_UNREADABLE', 'Chưa tải hoặc giải mã được tệp Muse trả về. Tool không xuất tệp hỏng; mở lịch sử Muse để kiểm tra.', 502); });
           signal.throwIfAborted();
-          return { ...base64, mimeType: base64.mimeType?.startsWith(`${output}/`) ? base64.mimeType : output === 'image' ? 'image/png' : 'video/mp4', metadata: { ...(output === 'video' ? { duration: media.duration } : {}), width: media.width, height: media.height } };
+          return { ...base64, mimeType: base64.mimeType?.startsWith(`${output}/`) ? base64.mimeType : output === 'image' ? 'image/png' : 'video/mp4', metadata: { ...(output === 'video' ? { duration: media.duration } : {}), width: base64.width || media.width, height: base64.height || media.height } };
         }
         if (output !== 'text' && result.text && !media && !result.streaming && Date.now() - stableSince > 20000) throw fail(output === 'image' ? 'MUSE_NO_IMAGE' : 'MUSE_NO_VIDEO', `Muse chưa trả ${output === 'image' ? 'ảnh' : 'video'} cho yêu cầu này. Phản hồi: ${result.text.slice(0, 1000)}`);
       }
@@ -411,7 +492,7 @@ export class MuseBrowser {
         throw signal.reason;
       }
       throw error;
-    }
+    } finally { this.inFlightMarkers.delete(marker); this.unsafeMarkers.delete(marker); }
   }
   async generateVideo(data, signal) {
     const referenceInstruction = data.sourceMode === 'image' ? 'Animate the attached image as the starting frame.' : data.referenceImage ? 'Use the attached image as a character reference, not as an unrelated example.' : 'Create the video from the text prompt.';
@@ -423,7 +504,7 @@ export class MuseBrowser {
     const dimensions = data.aspectRatio === '9:16' ? `${Math.round(longEdge * 9 / 16)}x${longEdge}` : `${longEdge}x${Math.round(longEdge * 9 / 16)}`;
     const useReference = data.characterLock !== false && data.referenceImage;
     const prompt = `Use your image-generation tool to create exactly one new image for this scene. Requested native output: ${data.resolution.toUpperCase()} (${dimensions} pixels), aspect ratio ${data.aspectRatio}. Return the generated image, not a stock image or an old response. Do not claim a higher resolution than the image actually has. ${useReference ? 'Use the attached portrait as a character reference; preserve identity, face and appearance consistently.' : data.characterLock !== false ? 'Follow the character description in this prompt. No portrait is attached; cross-scene identity is not guaranteed without a reference.' : 'Follow this prompt independently. Do not reuse characters or appearance from earlier scenes unless the prompt explicitly requests them.'}\nScene:\n${data.prompt}`;
-    return this.turn({ accountId: data.accountId, prompt, image: useReference || undefined, output: 'image', signal });
+    return this.turn({ accountId: data.accountId, prompt, image: useReference || undefined, output: 'image', signal, batchId: data.batchId, sceneId: data.sceneId });
   }
   async generateText(data, signal) { return this.turn({ accountId: data.accountId, prompt: data.prompt, video: false, signal }); }
 }

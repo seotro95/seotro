@@ -1,6 +1,7 @@
 import type { Mode, Reference, Settings, MediaResult } from './core.ts';
 
 type ResponseMedia = { base64: string; mimeType: string; metadata?: { duration?: number; width: number; height: number } };
+type RequestContext = { batchId: string; sceneId: number };
 declare global {
   interface Window { museTransport?: { request(id: string, endpoint: string, data: unknown): Promise<{ ok: boolean; body: any }>; cancel(id: string): void; onSessionRefresh?(callback: () => void): () => void } }
 }
@@ -76,7 +77,7 @@ async function demoMedia(kind: Settings['output'], signal: AbortSignal): Promise
   let binary = ''; for (const byte of bytes) binary += String.fromCharCode(byte);
   return { base64: btoa(binary), mimeType: kind === 'image' ? 'image/png' : 'video/mp4' };
 }
-async function generate(kind: Settings['output'], prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal) {
+async function generate(kind: Settings['output'], prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, context?: RequestContext) {
   signal.throwIfAborted();
   const fullPrompt = [prompt.trim(), settings.modifier.trim()].filter(Boolean).join('\n\n');
   if (!prompt.trim()) throw new Error('Hãy nhập prompt cho cảnh trước khi tạo.');
@@ -85,15 +86,15 @@ async function generate(kind: Settings['output'], prompt: string, reference: Ref
   if (sendReference && !reference.base64) throw new Error('Ảnh đầu vào chưa có dữ liệu để gửi đến Muse.');
   const prepared = sendReference && settings.mode !== 'demo' ? await referencePayload(reference, signal) : null;
   const result = settings.mode === 'demo' ? await demoMedia(kind, signal) : await api(`/api/${kind}`, {
-    accountId: 1, prompt: fullPrompt, aspectRatio: settings.aspectRatio, resolution: kind === 'image' ? settings.imageResolution : settings.resolution,
+    accountId: 1, prompt: fullPrompt, ...context, aspectRatio: settings.aspectRatio, resolution: kind === 'image' ? settings.imageResolution : settings.resolution,
     characterLock: settings.r2v, ...(kind === 'video' ? { model: settings.model, duration: settings.duration, sourceMode: settings.videoInput } : {}),
     image: prepared ? { imageBytes: prepared.imageBytes, mimeType: prepared.mimeType } : undefined
   }, signal);
   signal.throwIfAborted();
   return { ...await mediaResult(kind, result, settings), referenceCompressed: prepared?.compressed || false };
 }
-export const generateVideo = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal) => generate('video', prompt, reference, settings, signal);
-export const generateImage = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal) => generate('image', prompt, reference, settings, signal);
+export const generateVideo = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, context?: RequestContext) => generate('video', prompt, reference, settings, signal, context);
+export const generateImage = (prompt: string, reference: Reference | null, settings: Settings, signal: AbortSignal, context?: RequestContext) => generate('image', prompt, reference, settings, signal, context);
 export async function enhancePrompt(prompt: string, mode: Mode, signal: AbortSignal): Promise<string> {
   if (mode === 'demo') throw new Error('Chế độ kiểm thử không có AI Enhance. Kết nối Muse AI để trau chuốt thật.');
   const instruction = `Rewrite this scene as one concise cinematic visual prompt in English. Preserve the characters, action and narrative. Add specific composition and lighting. Return only the rewritten prompt, no headings. Scene:\n${prompt}`;
@@ -103,8 +104,18 @@ export async function enhancePrompt(prompt: string, mode: Mode, signal: AbortSig
   return result.text.trim().slice(0, 8000);
 }
 export async function downloadVideo(media: MediaResult, id: number) {
+  if (media.kind === 'image') {
+    const image = await new Promise<HTMLImageElement>((resolve, reject) => { const value = new Image(); value.onload = () => resolve(value); value.onerror = () => reject(new Error('Không giải mã được ảnh để tải xuống.')); value.src = media.url; });
+    const canvas = document.createElement('canvas'); canvas.width = image.naturalWidth; canvas.height = image.naturalHeight;
+    canvas.getContext('2d')!.drawImage(image, 0, 0);
+    const blob = await new Promise<Blob>((resolve, reject) => canvas.toBlob(value => value ? resolve(value) : reject(new Error('Không xuất được PNG.')), 'image/png'));
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = `${media.demo ? 'kiem-thu' : 'image'}-${String(id).padStart(2, '0')}.png`; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+    return;
+  }
   const ext = ({ 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'video/webm': 'webm', 'video/quicktime': 'mov' } as Record<string, string>)[media.mimeType] || 'mp4';
-  const filename = `${media.demo ? 'kiem-thu' : media.kind === 'image' ? 'image' : 'scene'}-${String(id).padStart(2, '0')}.${ext}`;
+  const filename = `${media.demo ? 'kiem-thu' : 'scene'}-${String(id).padStart(2, '0')}.${ext}`;
   const a = document.createElement('a'); a.href = media.url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
 }
 export const providerStatus = () => api('/api/status');

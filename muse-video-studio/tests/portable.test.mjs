@@ -1,7 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { _electron } from 'playwright-core';
-import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, mkdir, readdir } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import os from 'node:os';
 import { createMuseFixture } from './fixtures/muse.mjs';
@@ -11,18 +12,18 @@ if (!executablePath) throw new Error('Set MUSE_PORTABLE_EXECUTABLE to a prepared
 const image = await readFile(new URL('../public/demo-image.png', import.meta.url));
 const clip = await readFile(new URL('../public/demo.mp4', import.meta.url));
 const version = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8')).version;
-async function waitFor(predicate) {
-  const deadline = Date.now() + 30000;
+async function waitFor(predicate, timeout = 30000) {
+  const deadline = Date.now() + timeout;
   while (!await predicate()) {
     if (Date.now() > deadline) throw new Error('Portable app did not reach the expected state.');
     await new Promise(resolve => setTimeout(resolve, 40));
   }
 }
 
-test('portable app launches with a fresh profile and no external Node/npm, then generates using the retained-label Message field', { timeout: 90000 }, async () => {
+test('portable app queues ten scenes in one persistent conversation, exports real PNG files and needs no old install', { timeout: 120000 }, async () => {
   const profile = await mkdtemp(path.join(os.tmpdir(), 'muse-portable-test-'));
   const fixture = createMuseFixture({ image, clip });
-  Object.assign(fixture.state, { prehydrationInput: true, richComposer: true, initialMode: 'functional', behavior: 'image' });
+  Object.assign(fixture.state, { prehydrationInput: true, richComposer: true, initialMode: 'functional', behavior: 'image', oldConversation: true, newChat: false, sharedHistory: true, uniqueImages: true, imageEncoding: 'image/webp' });
   await new Promise(resolve => fixture.server.listen(0, '127.0.0.1', resolve));
   const service = `http://127.0.0.1:${fixture.server.address().port}/`;
   const env = { ...process.env, PATH: '/no-external-runtime', NODE_PATH: '', MUSE_DESKTOP_TEST: '1', MUSE_FIXTURE_URL: service, MUSE_DESKTOP_DATA: profile, MUSE_TRANSPORT: 'browser' };
@@ -49,12 +50,46 @@ test('portable app launches with a fresh profile and no external Node/npm, then 
     await waitFor(async () => (await studio.locator('.connection-pill').innerText()).includes('Đã xác minh'));
     assert.equal(fixture.state.submitted.length, 0);
     await studio.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
-    await studio.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này', exact: true }).click();
-    await waitFor(async () => await studio.getByTestId('scene-1').locator('.generated-image').count() === 1);
-    assert.equal(fixture.state.submitted.length, 1);
+    await studio.getByRole('button', { name: 'TẠO 10 ẢNH', exact: true }).click();
+    await waitFor(async () => {
+      const errors = await studio.locator('.scene-error pre').allTextContents();
+      if (errors.length) throw new Error('Portable batch failed: ' + errors.join('\n'));
+      return await studio.locator('.generated-image').count() === 10;
+    }, 60000);
+    assert.equal(fixture.state.submitted.length, 10);
+    assert.equal(fixture.state.peak, 1);
+    assert.equal(await studio.locator('.scene-error').count(), 0);
     assert.equal(fixture.state.submitted[0].initialMode, 'functional');
     assert.equal(fixture.state.submitted[0].authenticated, true);
     assert.match(fixture.state.submitted[0].prompt, /studio-request-/);
+    const downloads = path.join(profile, 'downloads');
+    await mkdir(downloads);
+    await desktop.evaluate(({ session }, directory) => {
+      globalThis.fixtureDownloads = [];
+      let counter = 0;
+      session.fromPartition('persist:studio').on('will-download', (_event, item) => {
+        const filename = `${String(++counter).padStart(2, '0')}-${item.getFilename()}`;
+        item.setSavePath(`${directory}/${filename}`);
+        item.once('done', (_event, state) => globalThis.fixtureDownloads.push({ filename, state }));
+      });
+    }, downloads);
+    await studio.getByRole('button', { name: 'Tải cảnh 1', exact: true }).click();
+    await waitFor(async () => await desktop.evaluate(() => globalThis.fixtureDownloads.length) === 1);
+    await studio.getByRole('button', { name: 'Tải tất cả (10/10)', exact: true }).click();
+    await waitFor(async () => await desktop.evaluate(() => globalThis.fixtureDownloads.length) === 11);
+    const saved = await desktop.evaluate(() => globalThis.fixtureDownloads);
+    assert.ok(saved.every(file => file.state === 'completed' && file.filename.endsWith('.png')));
+    const hashes = new Set();
+    for (const filename of (await readdir(downloads)).sort()) {
+      const bytes = await readFile(path.join(downloads, filename));
+      assert.ok(bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])));
+      const dimensions = await studio.evaluate(base64 => new Promise((resolve, reject) => {
+        const image = new Image(); image.onload = () => resolve([image.naturalWidth, image.naturalHeight]); image.onerror = reject; image.src = 'data:image/png;base64,' + base64;
+      }), bytes.toString('base64'));
+      assert.deepEqual(dimensions, [640, 360]);
+      if (!filename.startsWith('01-')) hashes.add(createHash('sha256').update(bytes).digest('hex'));
+    }
+    assert.equal(hashes.size, 10);
     const studioURL = studio.url();
     const savedPrompt = 'A script saved by the complete portable app';
     await studio.getByLabel('Kịch bản cảnh 2', { exact: true }).fill(savedPrompt);

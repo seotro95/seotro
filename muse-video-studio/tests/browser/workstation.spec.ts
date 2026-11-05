@@ -203,9 +203,9 @@ test('one login and one button create all ten videos using the same Muse account
   await expect(page.locator('.scene-card video')).toHaveCount(10);
 });
 
-test('one click starts all ten image requests before any result on one verified session', async ({ page }) => {
+test('a fixture advertising independent conversations can start ten image requests', async ({ page }) => {
   const account = { id: 1, state: 'ready', authenticated: true, active: true, checkedAt: null };
-  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', accounts: [account], busy: false } }));
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', executionConcurrency: 10, accounts: [account], busy: false } }));
   const calls: number[] = [];
   const pending: (() => Promise<void>)[] = [];
   await page.route('**/api/image', async route => { calls.push(route.request().postDataJSON().accountId); await new Promise<void>(resolve => pending.push(async () => { await route.fulfill({ json: { base64: image, mimeType: 'image/png' } }); resolve(); })); });
@@ -377,4 +377,61 @@ test('Message diagnostics show a persistent failure without sending a render', a
   await expect(page.locator('.composer-feedback pre')).toBeVisible();
   expect(renderCalls).toEqual([]);
   await expect(page.locator('.status-badge.running')).toHaveCount(0);
+});
+
+test('Muse defaults to a queue: one scene runs, nine wait, and all ten use one batch', async ({ page }) => {
+  const account = { id: 1, state: 'ready', authenticated: true, active: true };
+  await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'browser', accounts: [account], busy: false } }));
+  const calls: { accountId: number; batchId: string; sceneId: number }[] = [];
+  const releases: (() => Promise<void>)[] = [];
+  await page.route('**/api/image', async route => {
+    calls.push(route.request().postDataJSON());
+    await new Promise<void>(resolve => releases.push(async () => { await route.fulfill({ json: { base64: image, mimeType: 'image/png' } }); resolve(); }));
+  });
+  await page.reload();
+  await page.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
+  await page.getByRole('button', { name: 'TẠO 10 ẢNH', exact: true }).click();
+  await expect.poll(() => calls.length).toBe(1);
+  await expect(page.locator('.status-badge.running')).toHaveCount(1);
+  await expect(page.locator('.status-badge.queued')).toHaveCount(9);
+  for (let index = 0; index < 10; index++) {
+    await expect.poll(() => releases.length).toBe(index + 1);
+    await releases[index]();
+    await expect(page.locator('.generated-image')).toHaveCount(index + 1);
+  }
+  expect(calls.map(call => call.accountId)).toEqual(Array(10).fill(1));
+  expect(calls.map(call => call.sceneId)).toEqual([1,2,3,4,5,6,7,8,9,10]);
+  expect(new Set(calls.map(call => call.batchId)).size).toBe(1);
+});
+
+test('downloading a WebP preview exports a decodable PNG file with the same pixels', async ({ page }) => {
+  await configureAdapter(page);
+  const webp = await page.evaluate(() => {
+    const canvas = document.createElement('canvas'); canvas.width = 2; canvas.height = 2;
+    const context = canvas.getContext('2d')!; context.fillStyle = '#123456'; context.fillRect(0,0,2,2);
+    return canvas.toDataURL('image/webp', 1).split(',')[1];
+  });
+  await page.route('**/api/image', route => route.fulfill({ json: { base64: webp, mimeType: 'image/webp' } }));
+  await page.getByRole('button', { name: 'Tạo ảnh hàng loạt', exact: true }).click();
+  await page.getByTestId('scene-1').getByRole('button', { name: 'Tạo cảnh này', exact: true }).click();
+  await expect(page.getByTestId('scene-1').locator('.generated-image')).toHaveCount(1);
+  const pixels = await page.getByTestId('scene-1').locator('.generated-image').evaluate(element => {
+    const canvas = document.createElement('canvas'); canvas.width = 2; canvas.height = 2;
+    const context = canvas.getContext('2d')!; context.drawImage(element as HTMLImageElement, 0, 0);
+    return [...context.getImageData(0,0,2,2).data];
+  });
+  const download = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Tải cảnh 1', exact: true }).click();
+  const result = await download;
+  expect(result.suggestedFilename()).toBe('image-01.png');
+  const bytes = await readFile((await result.path())!);
+  expect([...bytes.subarray(0,8)]).toEqual([137,80,78,71,13,10,26,10]);
+  const decoded = await page.evaluate(base64 => new Promise(resolve => {
+    const img = new Image(); img.onload = () => {
+      const canvas = document.createElement('canvas'); canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+      const context = canvas.getContext('2d')!; context.drawImage(img,0,0);
+      resolve({ dimensions: [img.naturalWidth, img.naturalHeight], pixels: [...context.getImageData(0,0,2,2).data] });
+    }; img.onerror = () => resolve(null); img.src = 'data:image/png;base64,' + base64;
+  }), bytes.toString('base64'));
+  expect(decoded).toEqual({ dimensions: [2,2], pixels });
 });

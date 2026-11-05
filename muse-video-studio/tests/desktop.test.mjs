@@ -36,7 +36,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
     desktop = await _electron.launch({ executablePath: require('electron'), args: [
       ...(process.env.MUSE_ELECTRON_TEST_NO_SANDBOX === '1' ? ['--no-sandbox', '--disable-gpu'] : []),
       path.join(root, 'desktop/main.mjs'),
-    ], env: { ...process.env, MUSE_DESKTOP_TEST: '1', MUSE_FIXTURE_URL: fixtureURL, MUSE_DESKTOP_DATA: profile, MUSE_TRANSPORT: 'browser', PORT: '0' }, timeout: 30000 });
+    ], env: { ...process.env, MUSE_DESKTOP_TEST: '1', MUSE_TEST_PARALLEL: '1', MUSE_FIXTURE_URL: fixtureURL, MUSE_DESKTOP_DATA: profile, MUSE_TRANSPORT: 'browser', PORT: '0' }, timeout: 30000 });
     await desktop.firstWindow();
     let shell;
     const shellURL = pathToFileURL(path.join(root, 'desktop/shell.html')).href;
@@ -154,7 +154,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       await desktop.close(); desktop = null;
       desktop = await _electron.launch({ executablePath: require('electron'), args: [
         ...(process.env.MUSE_ELECTRON_TEST_NO_SANDBOX === '1' ? ['--no-sandbox', '--disable-gpu'] : []), path.join(root, 'desktop/main.mjs'),
-      ], env: { ...process.env, MUSE_DESKTOP_TEST: '1', MUSE_FIXTURE_URL: fixtureURL, MUSE_DESKTOP_DATA: profile, MUSE_TRANSPORT: 'browser', PORT: '0' }, timeout: 30000 });
+      ], env: { ...process.env, MUSE_DESKTOP_TEST: '1', MUSE_TEST_PARALLEL: '1', MUSE_FIXTURE_URL: fixtureURL, MUSE_DESKTOP_DATA: profile, MUSE_TRANSPORT: 'browser', PORT: '0' }, timeout: 30000 });
       await desktop.firstWindow();
       await waitFor(() => { studio = desktop.context().pages().find(page => page.url().startsWith('http://127.0.0.1:') && !page.url().startsWith(fixtureURL)); return studio; }, 'reopened Studio');
       const checked = studio.waitForResponse(response => response.url().endsWith('/api/account/check'));

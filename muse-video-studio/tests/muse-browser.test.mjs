@@ -17,7 +17,7 @@ const { server: fixture, state, releaseAll } = createMuseFixture({ image, clip }
 test('owned browser bridge against local Muse-shaped pages (not live Muse)', async t => {
   const root = await mkdtemp(path.join(os.tmpdir(), 'muse-bridge-test-'));
   await new Promise(resolve => fixture.listen(0, '127.0.0.1', resolve));
-  const driver = new MuseBrowser({ profileRoot: root, serviceURL: `http://127.0.0.1:${fixture.address().port}/`, launchOptions: { executablePath, headless: true }, pollMs: 30, quietMs: 80, timeoutMs: 15000 });
+  const driver = new MuseBrowser({ profileRoot: root, serviceURL: `http://127.0.0.1:${fixture.address().port}/`, launchOptions: { executablePath, headless: true }, maxConcurrency: 10, pollMs: 30, quietMs: 80, timeoutMs: 15000 });
   const data = { accountId: 1, modelDisplayName: 'Omni 1.1 Flash', durationSeconds: 4, aspectRatio: '16:9', resolution: '360p', prompt: 'A forest at sunrise' };
   try {
     await t.test('does not infer authentication from the existence of a browser profile', async () => {

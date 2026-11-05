@@ -33,6 +33,9 @@ function validate(data, kind) {
   const invalid = message => { throw Object.assign(new Error(message), { status: 400 }); };
   if (!data || typeof data.prompt !== 'string' || !data.prompt.trim() || data.prompt.length > 12000) invalid('Prompt cần có 1–12.000 ký tự.');
   if (data.accountId !== 1) invalid('ACCOUNT_INVALID: Chỉ sử dụng tài khoản Muse duy nhất (accountId=1).');
+  if (data.batchId !== undefined || data.sceneId !== undefined) {
+    if (typeof data.batchId !== 'string' || !/^[a-f0-9-]{36}$/i.test(data.batchId) || !Number.isInteger(data.sceneId) || data.sceneId < 1 || data.sceneId > 10) invalid('Bộ yêu cầu hoặc số cảnh không hợp lệ.');
+  }
   if (kind === 'text') return;
   if (!['16:9', '9:16'].includes(data.aspectRatio)) invalid('Tỉ lệ khung hình không hợp lệ.');
   if (kind === 'video') {
@@ -80,7 +83,7 @@ async function callAdapter(endpoint, data, signal) {
 async function api(req, res, pathname) {
   if (req.method === 'GET' && pathname === '/api/status') {
     if (muse && !activeRequests && !accountBusy) await muse.refreshActive();
-    return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, embeddedLogin, credit: null, gpu: null });
+    return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, ...(muse ? { executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length } : {}), embeddedLogin, credit: null, gpu: null });
   }
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
@@ -116,7 +119,7 @@ async function api(req, res, pathname) {
     if (activeRequests >= maxConcurrency) return json(res, 429, { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 10 luồng AI đang chạy. Đợi một luồng hoàn tất.' });
     activeRequests++; acquired = true;
     const useImage = data.image && (data.characterLock !== false || (kind === 'video' && data.sourceMode === 'image'));
-    const payload = { accountId: data.accountId, prompt: data.prompt,
+    const payload = { accountId: data.accountId, prompt: data.prompt, ...(muse && data.batchId ? { batchId: data.batchId, sceneId: data.sceneId } : {}),
       ...(kind !== 'text' ? { aspectRatio: data.aspectRatio, resolution: data.resolution, characterLock: data.characterLock !== false,
         referenceImage: useImage ? { base64: data.image.imageBytes, mimeType: data.image.mimeType } : undefined } : {}),
       ...(kind === 'video' ? { modelDisplayName: data.model, durationSeconds: data.duration, sourceMode: data.sourceMode || 'text' } : {})

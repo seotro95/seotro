@@ -53,4 +53,6 @@ test('errors distinguish credit, filtering, service capacity and missing Muse in
   assert.match(errorInfo('MUSE_NOT_CONFIGURED').hint, /Muse AI/);
   assert.match(errorInfo('MUSE_COMPOSER_NOT_READY').hint, /Chưa tìm được ô nhập Message/);
   assert.match(errorInfo('MUSE_SESSION_CHECK_FAILED').hint, /Chưa cập nhật được phiên Muse/);
+  assert.match(errorInfo('MUSE_NEW_CHAT_UNAVAILABLE').hint, /hàng đợi/);
+  assert.doesNotMatch(errorInfo('MUSE_NEW_CHAT_UNAVAILABLE').hint, /^Dịch vụ đang bận/);
 });
