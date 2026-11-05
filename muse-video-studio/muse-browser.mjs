@@ -74,19 +74,21 @@ export class MuseBrowser {
       await (active.close ? active.close() : active.context.close()).catch(() => {});
     }
   }
-  async open(id = 1) {
+  async open(id = 1, { show = false } = {}) {
     this.account(id);
     if (this.active?.id === id && !this.active.page.isClosed()) return this.active.page;
-    if (!this.opening) this.opening = this.openSession(id).finally(() => { this.opening = null; });
+    if (!this.opening) this.opening = this.openSession(id, { show }).finally(() => { this.opening = null; });
     return this.opening;
   }
-  async openSession(id) {
+  async openSession(id, { show = false } = {}) {
     await this.close();
     if (this.sessionFactory) {
       const owned = await this.sessionFactory();
       this.active = { id, ...owned };
       this.account(id).state = 'login_open';
-      await owned.page.goto(this.serviceURL, { waitUntil: 'domcontentloaded', timeout: 45000 });
+      if (show) owned.showLogin?.();
+      try { await owned.page.goto(this.serviceURL, { waitUntil: 'domcontentloaded', timeout: 45000 }); }
+      catch { throw fail('MUSE_CONNECTION_FAILED', 'Không tải được trang Muse. Kiểm tra Internet rồi bấm Tải lại Muse; phiên cũ vẫn được giữ.', 503); }
       return owned.page;
     }
     const profile = this.profile(id);
@@ -117,12 +119,38 @@ export class MuseBrowser {
     return page;
   }
   async connect(id = 1, { show = true } = {}) {
-    const page = await this.open(id);
+    const page = await this.open(id, { show });
     if (show) { if (this.active.showLogin) this.active.showLogin(); else await page.bringToFront(); }
     await this.refreshActive();
     // The login page may be a dashboard or a stale OAuth landing page. Its
     // editor is not a prerequisite: every render opens and checks its own page.
     return this.snapshot();
+  }
+  async reopenLogin() {
+    const page = await this.open(1, { show: true });
+    this.active.showLogin?.();
+    try { await page.goto(this.serviceURL, { waitUntil: 'domcontentloaded', timeout: 45000 }); }
+    catch { throw fail('MUSE_CONNECTION_FAILED', 'Không tải được trang Muse. Kiểm tra Internet rồi bấm Tải lại Muse; không xóa phiên hoặc dữ liệu đã lưu.', 503); }
+    await this.refreshActive();
+  }
+  async openEmailLink(raw) {
+    let target;
+    try {
+      if (typeof raw !== 'string' || raw.length > 8192) throw new Error();
+      target = new URL(raw.trim());
+      const service = new URL(this.serviceURL);
+      const sameOrigin = target.origin === service.origin;
+      const museSubdomain = service.protocol === 'https:' && target.protocol === 'https:' && target.hostname.endsWith(`.${service.hostname}`);
+      if (target.username || target.password || !(sameOrigin || museSubdomain)) throw new Error();
+    } catch { throw fail('MUSE_EMAIL_LINK_INVALID', 'Chỉ mở liên kết Muse.ai hoặc miền phụ của Muse.ai. Hãy sao chép nguyên địa chỉ liên kết đăng nhập từ email.', 400); }
+    const page = await this.open(1, { show: true });
+    this.active.showLogin?.();
+    try {
+      const response = await page.goto(target.href, { waitUntil: 'domcontentloaded', timeout: 45000 });
+      if (response && response.status() >= 400) throw new Error('Email callback refused');
+    }
+    catch { throw fail('MUSE_EMAIL_LINK_FAILED', 'Chưa mở được liên kết trong phiên Muse. Kiểm tra Internet; nếu liên kết đã dùng hoặc hết hạn, yêu cầu email mới.', 503); }
+    await this.refreshActive();
   }
   async refreshActive() {
     const active = this.active;

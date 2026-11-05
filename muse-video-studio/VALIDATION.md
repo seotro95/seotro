@@ -1,3 +1,28 @@
+# Xác minh bản 1.4.11
+
+## Phát hiện và sửa
+
+Người dùng báo trang Muse mở nhưng đăng nhập lỗi/quay lại màn hình đăng nhập, chọn phương thức email hoặc liên kết email. Chưa có dòng lỗi từ dịch vụ thật nên không kết luận mọi vòng lặp đăng nhập đều do tool.
+
+Tái hiện riêng trên mã 1.4.10: fixture mở `about:blank` rồi chuyển đến trang xác thực; Electron chặn cửa sổ, test thất bại với `Popup blocked`. Bản này cho phép cửa sổ trống theo luồng trình duyệt bình thường, vẫn dùng partition Muse có sandbox/context isolation/web security, không cấp preload Studio hoặc Node. Không đổi user agent hay vượt quy định xác thực của nhà cung cấp.
+
+Thêm **Liên kết email**: người dùng yêu cầu email mới trên trang Muse, sao chép link và mở trong đúng phiên của tool. Form là cửa sổ cục bộ có IPC hẹp, che/xóa nội dung ô nhập, chỉ nhận Muse.ai/miền phụ qua HTTPS (fixture chỉ cùng origin loopback). Không gửi link qua Studio HTTP API, không ghi log URL hoặc query. HTTP lỗi hoặc link đã dùng báo cần kiểm tra/yêu cầu email mới; không giả trạng thái xác minh. Mã xác nhận/mật khẩu vẫn nhập trên trang Muse.
+
+Trang đăng nhập được hiện trước khi tải xong; nút **Tải lại Muse** mở lại trang chính, giữ cookie và dữ liệu. Không xóa phiên, ảnh/video, lịch sử hoặc bộ đếm tải.
+
+## Kiểm thử
+
+- `tests/login.test.mjs`: **4/4 Node tests qua** (ba trường hợp và nhóm) sau khi baseline trước sửa thất bại. Kiểm popup trống/chuyển hướng, popup không có require/Studio/email IPC; link email dùng đúng cookie pending trong phiên Muse; từ chối miền khác, xóa ô nhập, không đưa giá trị nhạy cảm vào thông báo; callback đã dùng bị báo lỗi và không xác minh; link hợp lệ xác minh được; Tải lại giữ phiên, vẫn chặn file URL và không gửi yêu cầu tạo nội dung.
+- `npm run test:desktop`: **8/8 qua** trên Electron thật, gồm đăng nhập nhúng, popup trực tiếp, kiểm tra Message, 10 ảnh/video fixture, dừng riêng và lưu phiên. `npm run test:browser-bridge`: **27/27 qua**; `tests/muse-serial.test.mjs`: **6/6 qua**. Không thay điều kiện xác minh tài khoản thành phỏng đoán từ editor/cookie profile.
+- `tests/portable.test.mjs`: **1/1 qua**, executable đóng gói Linux, hồ sơ mới, PATH không có Node/npm. Đăng nhập mới bằng form Liên kết email đóng gói và cookie pending cùng phiên, tạo đủ 10 ảnh qua hàng đợi, tải ZIP có CRC và 10 ảnh giải mã được. Mở lại giữ phiên, thư viện, kịch bản và tải tiếp số 1011 mà không ghi đè.
+- `npm test`, build TypeScript/Vite, kiểm cú pháp và whitespace Git qua. Không thêm dependency. Các cờ no-sandbox chỉ dùng ở fixture cloud, không ghi vào bản phát hành.
+
+## Phạm vi
+
+Các kiểm thử dùng Muse giả lập với Electron/Chromium thật. Chưa có phiên Muse thật để xác minh tài khoản người dùng hoặc lỗi dịch vụ cụ thể. Liên kết đã dùng/hết hạn phải yêu cầu mới; liên kết email qua miền ngoài Muse chưa được chấp nhận tự động. Không cam kết mọi cách xác thực hoạt động hoặc 10 render đồng thời. Windows dùng runtime Electron 45.2.2 x64 chính thức, đối chiếu checksum, manifest SHA-256 và CRC/PE x64; cloud Linux không chạy Windows EXE.
+
+## Kết quả lịch sử trước 1.4.11
+
 # Xác minh bản 1.4.10
 
 ## Thay đổi

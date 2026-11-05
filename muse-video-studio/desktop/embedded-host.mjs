@@ -16,6 +16,9 @@ export class EmbeddedMuseHost {
     this.browser = null;
   }
   allowNavigation(url) {
+    // OAuth/email clients commonly open an empty window and navigate it later.
+    // It keeps the same sandboxed Muse partition and never receives a preload.
+    if (!url || url === 'about:blank') return true;
     try { const target = new URL(url); return target.protocol === 'https:' || (target.origin === new URL(this.serviceURL).origin && target.hostname === '127.0.0.1'); }
     catch { return false; }
   }

@@ -34,7 +34,7 @@ async function collectDownloads(desktop, directory) {
 test('portable app queues ten scenes in one persistent conversation, exports real PNG files and needs no old install', { timeout: 120000 }, async () => {
   const profile = await mkdtemp(path.join(os.tmpdir(), 'muse-portable-test-'));
   const fixture = createMuseFixture({ image, clip });
-  Object.assign(fixture.state, { prehydrationInput: true, richComposer: true, initialMode: 'functional', behavior: 'image', oldConversation: true, newChat: false, sharedHistory: true, uniqueImages: true, imageEncoding: 'image/webp' });
+  Object.assign(fixture.state, { emailLogin: true, prehydrationInput: true, richComposer: true, initialMode: 'functional', behavior: 'image', oldConversation: true, newChat: false, sharedHistory: true, uniqueImages: true, imageEncoding: 'image/webp' });
   await new Promise(resolve => fixture.server.listen(0, '127.0.0.1', resolve));
   const service = `http://127.0.0.1:${fixture.server.address().port}/`;
   const env = { ...process.env, PATH: '/no-external-runtime', NODE_PATH: '', MUSE_DESKTOP_TEST: '1', MUSE_FIXTURE_URL: service, MUSE_DESKTOP_DATA: profile, MUSE_TRANSPORT: 'browser' };
@@ -57,6 +57,13 @@ test('portable app queues ten scenes in one persistent conversation, exports rea
     let login;
     await waitFor(() => { login = desktop.context().pages().find(page => page.url() === service); return login; });
     await login.getByRole('button', { name: 'Fixture login', exact: true }).click();
+    await shell.getByRole('button',{name:'Liên kết email',exact:true}).click();
+    let emailForm;
+    await waitFor(()=>{emailForm=desktop.context().pages().find(page=>page.url().endsWith('/desktop/email-login.html'));return emailForm});
+    await emailForm.getByLabel('Liên kết đăng nhập Muse',{exact:true}).fill(service+'fixture-email-verify?ticket=fixture-email-ticket');
+    await emailForm.getByRole('button',{name:'Mở trong tool',exact:true}).click();
+    await waitFor(()=>emailForm.isClosed());
+    assert.equal(fixture.state.emailUsed,true,'Packaged email helper must use the same Muse session');
     await shell.getByRole('button', { name: '← Về Studio', exact: true }).click();
     await waitFor(async () => (await studio.locator('.connection-pill').innerText()).includes('Đã xác minh'));
     assert.equal(fixture.state.submitted.length, 0);

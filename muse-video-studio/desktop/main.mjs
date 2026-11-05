@@ -21,7 +21,7 @@ app.setName('Muse AI Studio');
 app.commandLine.appendSwitch('remote-debugging-port', '0');
 app.commandLine.appendSwitch('remote-debugging-address', '127.0.0.1');
 app.commandLine.appendSwitch('disable-background-timer-throttling');
-let window; let runtime; let host; let closing = false;
+let window; let runtime; let host; let emailWindow; let emailNavigation = false; let closing = false;
 const requests = new Map();
 
 if (!app.requestSingleInstanceLock()) app.quit();
@@ -82,6 +82,20 @@ async function start() {
     finally { requests.delete(value.id); }
   });
   ipcMain.on('studio:cancel', (event, id) => { if (event.sender === studio.webContents) requests.get(id)?.abort(); });
+  ipcMain.handle('studio:email-submit', async (event, link) => {
+    if (!emailWindow || event.sender !== emailWindow.webContents) return { ok: false, message: 'Cửa sổ không được phép đăng nhập.' };
+    if (emailNavigation) return { ok: false, message: 'Đang mở một liên kết đăng nhập. Vui lòng đợi.' };
+    emailNavigation = true;
+    try {
+      await muse.openEmailLink(link);
+      studio.webContents.send('studio:session-refresh');
+      return { ok: true };
+    } catch (error) {
+      // Never print an email link, query parameters, or navigation error text.
+      return { ok: false, message: /^MUSE_EMAIL_LINK_(INVALID|FAILED):/.test(error.message) ? error.message : 'Chưa mở được liên kết đăng nhập. Kiểm tra tab Muse rồi yêu cầu email mới nếu liên kết đã dùng hoặc hết hạn.' };
+    } finally { emailNavigation = false; }
+  });
+  ipcMain.on('studio:email-close', event => { if (emailWindow && event.sender === emailWindow.webContents) emailWindow.close(); });
   ipcMain.handle('studio:view', async (event, name) => {
     if (event.sender !== window.webContents) throw new Error('Untrusted sender');
     if (name === 'studio') {
@@ -89,6 +103,16 @@ async function start() {
       studio.webContents.send('studio:session-refresh');
     }
     else if (name === 'muse') await muse.connect(1);
+    else if (name === 'reload-muse') { await muse.reopenLogin(); studio.webContents.send('studio:session-refresh'); }
+    else if (name === 'email-link') {
+      if (emailWindow && !emailWindow.isDestroyed()) { emailWindow.focus(); return; }
+      emailWindow = new BrowserWindow({ parent: window, modal: true, width: 620, height: 430, resizable: false, autoHideMenuBar: true, title: 'Đăng nhập Muse từ email',
+        webPreferences: { preload: path.join(directory, 'email-preload.cjs'), sandbox: true, contextIsolation: true, nodeIntegration: false, webSecurity: true } });
+      emailWindow.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
+      emailWindow.webContents.on('will-navigate', event => event.preventDefault());
+      emailWindow.once('closed', () => { emailWindow = null; });
+      await emailWindow.loadFile(path.join(directory, 'email-login.html'));
+    }
     else throw new Error('Unknown view');
   });
   await window.loadFile(path.join(directory, 'shell.html'));

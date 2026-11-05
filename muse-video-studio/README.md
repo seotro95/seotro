@@ -1,4 +1,4 @@
-# Muse AI Studio 1.4.10 · Một tài khoản, 10 cảnh
+# Muse AI Studio 1.4.11 · Một tài khoản, 10 cảnh
 
 Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đăng nhập Muse nằm trong cửa sổ tool. Mười cảnh dùng chung một phiên tài khoản. Mỗi ô có nút Tạo/Dừng riêng và lịch sử ảnh/video lưu trên máy. Có thể kiểm tra để bật tối đa 10 hội thoại song song.
 
@@ -10,11 +10,26 @@ Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đă
 4. Có thể bấm **Kiểm tra ô Message** trước khi tạo. Bước này tìm ô nhập trong trang luồng, không gửi prompt hoặc render.
 5. Nhập 10 prompt hoặc TXT/SRT, chọn **Tạo ảnh hàng loạt** / **Tạo video**, bấm **TẠO 10 ẢNH / VIDEO**.
 
-Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.4.10** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
+Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.4.11** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
 
 Cầu nối giao diện **không chính thức**. Kiểm thử dùng Chromium/Electron thật và dịch vụ giả lập cục bộ; chưa tự động tạo media hoặc đọc số dư trên Muse.ai thật. Người dùng xác nhận có thể gửi/nhận tin nhắn thủ công trong tab Muse của tool. Tài khoản thật có thể giới hạn render đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các lựa chọn model, độ nét và thời lượng là yêu cầu bằng prompt, cần xác nhận bằng kết quả thật.
 
-## Tự đánh số liên tục, tránh trùng tệp trong bản 1.4.10
+## Đăng nhập bằng email trong bản 1.4.11
+
+Bản này sửa trường hợp cửa sổ đăng nhập được mở trống (`about:blank`) rồi mới chuyển sang trang xác thực. Cửa sổ phụ vẫn chỉ dùng phiên Muse của tool, giữ sandbox và không có quyền Studio/Node.js. Trang đăng nhập hiện ngay khi mở, có nút **Tải lại Muse** để mở lại trang chính mà không xóa cookie, ảnh/video hay bộ đếm.
+
+Nếu Muse gửi **liên kết đăng nhập**:
+
+1. Trong tab Muse của tool, nhập email và yêu cầu một email đăng nhập mới.
+2. Trong email, sao chép địa chỉ liên kết đăng nhập. Không cần mở nó bằng trình duyệt khác.
+3. Trên thanh trên cùng của tool, bấm **Liên kết email**, dán liên kết vào cửa sổ trên máy rồi bấm **Mở trong tool**.
+4. Hoàn tất bước xác minh Muse yêu cầu, bấm **← Về Studio** và **Kiểm tra phiên**. Chỉ bật tạo nội dung sau khi xác minh phiên thành công.
+
+Liên kết có thể chỉ dùng một lần hoặc có thời hạn. Nếu đã mở ở trình duyệt khác hoặc báo hết hạn, yêu cầu email mới rồi làm lại. Nếu Muse gửi **mã xác nhận** hoặc yêu cầu mật khẩu, nhập trực tiếp trên trang Muse trong tool; không dán mã/mật khẩu vào ô Liên kết email.
+
+Cửa sổ liên kết chỉ nhận HTTPS của Muse.ai hoặc miền phụ của Muse.ai. Địa chỉ được che trong ô nhập, xóa khỏi ô khi gửi và không ghi vào log/Studio API. Không gửi liên kết, mã xác nhận hoặc mật khẩu vào chat. Không chuyển cookie/token giữa Chrome và tool và không giả trạng thái đăng nhập. Kiểm thử dùng dịch vụ mô phỏng; thay đổi này không xác nhận mọi phương thức đăng nhập trên Muse thật đã hoạt động.
+
+## Tự đánh số liên tục, tránh trùng tệp
 
 Mỗi ảnh/video tải xuống có một số mới dùng chung giữa tải riêng, tải trong lịch sử và tải ZIP. Bộ đầu nhận 000001–000010, bộ sau nhận 000011–000020; tải một bản riêng tiếp theo nhận 000021. Số tiếp tục qua 001000 và lớn hơn, không quay lại 01 theo số ô và không cắt số khi dài hơn sáu chữ số.
 
