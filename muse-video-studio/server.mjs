@@ -4,7 +4,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { openBrowser } from './browser.mjs';
-import { MuseBrowser } from './muse-browser.mjs';
+import { MuseAccounts } from './muse-accounts.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 if (existsSync(path.join(ROOT, '.env'))) process.loadEnvFile(path.join(ROOT, '.env'));
@@ -12,7 +12,7 @@ export async function startStudioServer({ museDriver, embeddedLogin = false, por
 const host = '127.0.0.1';
 const transport = process.env.MUSE_TRANSPORT || (process.env.MUSE_ADAPTER_URL ? 'adapter' : 'browser');
 if (!['browser', 'adapter'].includes(transport)) throw new Error('MUSE_TRANSPORT must be browser or adapter.');
-const muse = transport === 'browser' ? museDriver || new MuseBrowser({ profileRoot: path.resolve(process.env.MUSE_PROFILE_ROOT || path.join(ROOT, '.data', 'muse-accounts')), accountProfile: process.env.MUSE_ACCOUNT_PROFILE }) : null;
+const muse = transport === 'browser' ? museDriver || await new MuseAccounts({ accountProfile: process.env.MUSE_ACCOUNT_PROFILE, profileRoot: path.resolve(process.env.MUSE_PROFILE_ROOT || path.join(ROOT, '.data', 'muse-accounts')) }).load() : null;
 const MAX_BODY = 12 * 1024 * 1024;
 let activeRequests = 0;
 let accountBusy = false;
@@ -32,7 +32,8 @@ async function body(req) {
 function validate(data, kind) {
   const invalid = message => { throw Object.assign(new Error(message), { status: 400 }); };
   if (!data || typeof data.prompt !== 'string' || !data.prompt.trim() || data.prompt.length > 12000) invalid('Prompt cần có 1–12.000 ký tự.');
-  if (data.accountId !== 1) invalid('ACCOUNT_INVALID: Chỉ sử dụng tài khoản Muse duy nhất (accountId=1).');
+  if (data.accountMode !== undefined && !['single','multiple'].includes(data.accountMode)) invalid('Chế độ tài khoản không hợp lệ.');
+  if (data.accountMode === 'multiple' ? !muse?.supportsMultiAccount || !Number.isInteger(data.accountId) || data.accountId<1 || data.accountId>10 : data.accountId!==1) invalid('ACCOUNT_INVALID: Chọn tài khoản Muse phù hợp với chế độ đang dùng.');
   if (data.batchId !== undefined || data.sceneId !== undefined) {
     if (typeof data.batchId !== 'string' || !/^[a-f0-9-]{36}$/i.test(data.batchId) || !Number.isInteger(data.sceneId) || data.sceneId < 1 || data.sceneId > 10) invalid('Bộ yêu cầu hoặc số cảnh không hợp lệ.');
   }
@@ -83,12 +84,12 @@ async function callAdapter(endpoint, data, signal) {
 async function api(req, res, pathname) {
   if (req.method === 'GET' && pathname === '/api/status') {
     if (muse && !activeRequests && !accountBusy) await muse.refreshActive({ background: true });
-    return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, ...(muse ? { executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), embeddedLogin, credit: null, gpu: null });
+    return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, ...(muse ? { executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), ...(muse?.supportsMultiAccount ? {multiAccount:true} : {}), embeddedLogin, credit: null, gpu: null });
   }
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
   if (!req.headers['content-type']?.startsWith('application/json')) return json(res, 415, { error: 'Cần Content-Type application/json.' });
-  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close|composer|concurrency)$/);
+  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close|composer|concurrency|import|select)$/);
   const legacyAccountRoute = pathname.match(/^\/api\/accounts\/(\d+)\/(connect|check|close)$/);
   if (!['/api/video', '/api/image', '/api/text'].includes(pathname) && !accountRoute && !legacyAccountRoute) return json(res, 404, { error: 'API không tồn tại.' });
   let acquired = false;
@@ -99,16 +100,19 @@ async function api(req, res, pathname) {
   try {
     const data = await body(req);
     if (accountRoute || legacyAccountRoute) {
-      const accountId = legacyAccountRoute ? Number(legacyAccountRoute[1]) : 1;
+      const accountId = legacyAccountRoute ? Number(legacyAccountRoute[1]) : data.accountId ?? 1;
       const action = accountRoute ? accountRoute[1] : legacyAccountRoute[2];
-      if (accountId !== 1) return json(res, 400, { error: 'ACCOUNT_INVALID: Bản này chỉ dùng một tài khoản Muse.' });
+      if (!Number.isInteger(accountId) || accountId<1 || accountId>10 || (!muse?.supportsMultiAccount && accountId!==1)) return json(res,400,{error:'ACCOUNT_INVALID: Tài khoản không hợp lệ.'});
       if (!muse) return json(res, 409, { error: 'Tài khoản đang do adapter riêng quản lý. Chọn MUSE_TRANSPORT=browser để đăng nhập bằng Chrome/Edge.' });
       if (activeRequests || accountBusy) return json(res, 409, { error: 'Đang có tác vụ. Đợi các luồng hoàn tất trước khi thay đổi phiên tài khoản.' });
       muse.account(accountId);
       accountBusy = accountAcquired = true;
+      if (action === 'select') {if(muse.select)await muse.select(accountId);return json(res,200,{accounts:muse.snapshot()});}
+      if (action === 'import') { if (!muse.supportsMultiAccount) return json(res,409,{error:'Kết nối chưa hỗ trợ nhiều tài khoản.'}); return json(res,200,{accounts:await muse.importLabels(data.labels)}); }
+      if (action === 'concurrency' && accountId!==1) return json(res,400,{error:'Chỉ chọn số luồng cho tài khoản Muse 01 ở chế độ một tài khoản.'});
       if (action === 'concurrency') return json(res, 200, await muse.setConcurrency(data.concurrency, abort.signal));
-      if (action === 'composer') { const composer = await muse.checkComposer(abort.signal); return json(res, 200, { accounts: muse.snapshot(), composer }); }
-      if (action === 'close') { if (muse.active?.id === accountId) await muse.close(); }
+      if (action === 'composer') { const composer = await muse.checkComposer(abort.signal,accountId); return json(res, 200, { accounts: muse.snapshot(), composer }); }
+      if (action === 'close') { if (muse.closeAccount) await muse.closeAccount(accountId); else if (muse.active?.id === accountId) await muse.close(); }
       else await muse.connect(accountId, { show: action === 'connect' });
       return json(res, 200, { accounts: muse.snapshot() });
     }
@@ -120,7 +124,7 @@ async function api(req, res, pathname) {
     if (activeRequests >= maxConcurrency) return json(res, 429, { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 10 luồng AI đang chạy. Đợi một luồng hoàn tất.' });
     activeRequests++; acquired = true;
     const useImage = data.image && (data.characterLock !== false || (kind === 'video' && data.sourceMode === 'image'));
-    const payload = { accountId: data.accountId, prompt: data.prompt, ...(muse && data.batchId ? { batchId: data.batchId, sceneId: data.sceneId } : {}),
+    const payload = { accountId: data.accountId, ...(muse ? {accountMode: data.accountMode || 'single'} : {}), prompt: data.prompt, ...(muse && data.batchId ? { batchId: data.batchId, sceneId: data.sceneId } : {}),
       ...(kind !== 'text' ? { aspectRatio: data.aspectRatio, resolution: data.resolution, characterLock: data.characterLock !== false,
         referenceImage: useImage ? { base64: data.image.imageBytes, mimeType: data.image.mimeType } : undefined } : {}),
       ...(kind === 'video' ? { modelDisplayName: data.model, durationSeconds: data.duration, sourceMode: data.sourceMode || 'text' } : {})

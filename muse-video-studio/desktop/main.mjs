@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { startStudioServer } from '../server.mjs';
 import { MuseBrowser } from '../muse-browser.mjs';
+import { MuseAccounts } from '../muse-accounts.mjs';
 import { EmbeddedMuseHost } from './embedded-host.mjs';
 import { loginRecorder } from './login-diagnostics.mjs';
 import { FolderExports } from './folder-export.mjs';
@@ -25,6 +26,8 @@ app.commandLine.appendSwitch('remote-debugging-address', '127.0.0.1');
 app.commandLine.appendSwitch('disable-background-timer-throttling');
 let window; let runtime; let host; let emailWindow; let emailNavigation = false; let closing = false;
 const requests = new Map();
+const hosts = new Map(); const loginLogs = new Map();
+const partitionFor = id => id === 1 ? 'persist:muse' : `persist:muse-${String(id).padStart(2,'0')}`;
 
 if (!app.requestSingleInstanceLock()) app.quit();
 else {
@@ -42,18 +45,25 @@ async function start() {
   const fixture = process.env.MUSE_DESKTOP_TEST === '1' ? process.env.MUSE_FIXTURE_URL : null;
   if (fixture && (new URL(fixture).protocol !== 'http:' || new URL(fixture).hostname !== '127.0.0.1')) throw new Error('Fixture must use local HTTP.');
   const serviceURL = fixture || 'https://muse.ai/';
-  const museSession = session.fromPartition('persist:muse');
-  const loginLog = loginRecorder(serviceURL);
-  museSession.webRequest.onCompleted(details => loginLog.completed(details));
-  museSession.webRequest.onErrorOccurred(details => loginLog.failed(details));
-  museSession.setPermissionRequestHandler((_contents, _permission, callback) => callback(false));
-  const proxyServer = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
-  if (proxyServer) await museSession.setProxy({ proxyRules: proxyServer, proxyBypassRules: 'localhost;127.0.0.1' });
-  window = new BrowserWindow({ width: 1480, height: 1000, minWidth: 850, minHeight: 650, title: `Muse AI Studio ${version} · 1 tài khoản / 10 cảnh`, autoHideMenuBar: true,
+  window = new BrowserWindow({ width: 1480, height: 1000, minWidth: 850, minHeight: 650, title: `Muse AI Studio ${version} · 1 hoặc 10 tài khoản / 10 cảnh`, autoHideMenuBar: true,
     webPreferences: { preload: path.join(directory, 'preload.cjs'), sandbox: true, contextIsolation: true, nodeIntegration: false } });
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
-  host = new EmbeddedMuseHost({ window, userData, serviceURL });
-  const muse = new MuseBrowser({ profileRoot: userData, accountProfile: userData, serviceURL, maxConcurrency: fixture && process.env.MUSE_TEST_PARALLEL === '1' ? 10 : 1, sessionFactory: () => host.openSession() });
+  const muse = await new MuseAccounts({profileRoot:userData,
+    createDriver: id => {
+      const partition=partitionFor(id); const museSession=session.fromPartition(partition);
+      const log=loginRecorder(serviceURL); loginLogs.set(id,log);
+      museSession.webRequest.onCompleted(details=>log.completed(details));
+      museSession.webRequest.onErrorOccurred(details=>log.failed(details));
+      museSession.setPermissionRequestHandler((_contents,_permission,callback)=>callback(false));
+      const proxyServer=process.env.HTTPS_PROXY||process.env.HTTP_PROXY;
+      const configured=proxyServer?museSession.setProxy({proxyRules:proxyServer,proxyBypassRules:'localhost;127.0.0.1'}):Promise.resolve();
+      const ownedHost=new EmbeddedMuseHost({window,userData,serviceURL,partition});hosts.set(id,ownedHost);if(!host)host=ownedHost;
+      return new MuseBrowser({profileRoot:userData,accountProfile:id===1?userData:path.join(userData,`account-${id}`),serviceURL,
+        maxConcurrency:fixture&&id===1&&process.env.MUSE_TEST_PARALLEL==='1'?10:1,
+        sessionFactory:async()=>{await configured;return ownedHost.openSession()}});
+    },
+    onSelect: id=>{for(const owned of hosts.values())owned.hideLogin();host=hosts.get(id);window.webContents.send('studio:account',id);}
+  }).load();
   const rememberPort = app.isPackaged && !process.env.PORT;
   runtime = await startStudioServer({ museDriver: muse, embeddedLogin: true, ...(rememberPort ? { port: savedStudioPort() } : {}) });
   // Keep the localStorage origin stable on later launches of a portable app.
@@ -84,7 +94,7 @@ async function start() {
     if (action === 'abort') return folderExports.abort(data);
     throw new Error('Unknown export action');
   });
-  const layout = () => { const [width, height] = window.getContentSize(); studio.setBounds({ x: 0, y: 54, width, height: Math.max(1, height - 54) }); host.layout(); };
+  const layout = () => { const [width, height] = window.getContentSize(); studio.setBounds({ x: 0, y: 54, width, height: Math.max(1, height - 54) }); for (const owned of hosts.values()) owned.layout(); };
   window.on('resize', layout);
   layout();
   // Main-process requests avoid Chromium's six-connection HTTP/1 limit to localhost.
@@ -119,13 +129,13 @@ async function start() {
   ipcMain.handle('studio:view', async (event, name) => {
     if (event.sender !== window.webContents) throw new Error('Untrusted sender');
     if (name === 'studio') {
-      host.hideLogin(); studio.webContents.focus();
+      for (const owned of hosts.values()) owned.hideLogin(); studio.webContents.focus();
       studio.webContents.send('studio:session-refresh');
     }
-    else if (name === 'muse') await muse.connect(1);
+    else if (name === 'muse') await muse.connect(muse.selectedId);
     else if (name === 'reload-muse') { await muse.reopenLogin(); studio.webContents.send('studio:session-refresh'); }
     else if (name === 'login-diagnostics') {
-      const report = loginLog.snapshot({ version, loginVisible: host.loginVisible, account: muse.snapshot()[0] });
+      const report = loginLogs.get(muse.selectedId).snapshot({ version, loginVisible: host.loginVisible, account: muse.snapshot().find(account=>account.id===muse.selectedId) });
       const lines = report.events.slice(-8).map(event => `${event.time.slice(11,19)} ${event.method} ${event.route} → ${event.status || event.error}${event.setCookie ? ' · Có Set-Cookie' : ''}`);
       const result = await dialog.showMessageBox(window, { type: 'info', title: 'Chẩn đoán đăng nhập Muse',
         message: report.state === 'awaiting_code' ? 'Đang chờ mã xác nhận trên trang Muse' : report.verified ? 'Phiên đã được xác minh' : 'Chưa xác minh được phiên Muse',
@@ -156,8 +166,8 @@ async function shutdown() {
   closing = true;
   for (const control of requests.values()) control.abort();
   await runtime?.close();
-  await host?.close();
-  await session.fromPartition('persist:muse').cookies.flushStore();
+  for (const owned of hosts.values()) await owned.close();
+  for (const id of hosts.keys()) await session.fromPartition(partitionFor(id)).cookies.flushStore();
   app.quit();
 }
 app.on('window-all-closed', () => app.quit());

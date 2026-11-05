@@ -44,6 +44,7 @@ const fixture = http.createServer(async (req, res) => {
   if (req.url === '/turn') {
     let text = ''; for await (const chunk of req) text += chunk;
     const request = { ...JSON.parse(text), id: state.submitted.length + 1, authenticated: /fixture_session=connected/.test(req.headers.cookie || '') };
+    request.identity=req.headers.cookie?.split('; ').find(cookie=>cookie.startsWith('fixture_identity='))?.split('=')[1]||'';
     state.submitted.push(request);
     const release = () => { state.pending.delete(request.id); state.released.add(request.id); };
     state.pending.set(request.id, release); state.peak = Math.max(state.peak, state.pending.size);
@@ -62,7 +63,8 @@ const fixture = http.createServer(async (req, res) => {
   if (state.chatPath && requestPath === '/') return res.end('<!doctype html><html><body><h1>Fixture dashboard without chat</h1></body></html>');
   if (state.frameComposer && requestPath !== '/composer-frame') return res.end('<!doctype html><html><body><iframe title="Muse chat" src="/composer-frame" style="width:100%;height:900px;border:0"></iframe></body></html>');
   const rootTag = state.composerLayout === 'hatch' ? 'div' : 'form';
-  const sharedHistory = state.sharedHistory ? state.submitted.filter(request => !state.chatRoutes || request.path === requestPath).map(request => `<div data-message-item data-message-role="user">${escapeHTML(request.prompt)}</div>${state.outputs.has(request.id) ? `<div data-message-item data-message-role="assistant"><img src="data:${state.imageEncoding || 'image/png'};base64,${state.outputs.get(request.id)}"></div>` : ''}`).join('') : '';
+  const fixtureIdentity=req.headers.cookie?.split('; ').find(cookie=>cookie.startsWith('fixture_identity='))?.split('=')[1]||'';
+  const sharedHistory = state.sharedHistory ? state.submitted.filter(request => (!state.isolateAccounts||request.identity===fixtureIdentity)&& (!state.chatRoutes || request.path === requestPath)).map(request => `<div data-message-item data-message-role="user">${escapeHTML(request.prompt)}</div>${state.outputs.has(request.id) ? `<div data-message-item data-message-role="assistant"><img src="data:${state.imageEncoding || 'image/png'};base64,${state.outputs.get(request.id)}"></div>` : ''}`).join('') : '';
   res.end(`<!doctype html><html><body>
   <header><span data-testid="token-balance">Tokens remaining: 1,234</span></header><button id="login">Fixture login</button><p id="popup-feedback"></p>
   ${state.otpLogin ? `<section id="otp-panel"><form id="otp-request"><label>Email<input type="email" aria-label="Email đăng nhập" required></label><button>Gửi mã</button></form><form id="otp-verify" style="display:none"><label>Mã<input type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" aria-label="Mã xác nhận" required></label><button>Xác nhận mã</button></form><p id="otp-feedback" role="status"></p></section>` : ''}

@@ -1,14 +1,14 @@
-# Muse AI Studio 1.5.0 · Bản Windows đầy đủ
+# Muse AI Studio 1.6.0 · Hai chế độ tài khoản
 
 [Bản Windows x64 đầy đủ](Muse-AI-Studio-Windows-x64.zip) · [Mã nguồn](Muse-Video-Workstation.zip) · [Hướng dẫn](muse-video-studio/README.md)
 
-1. Giải nén toàn bộ gói chương trình vào thư mục mới, mở **Muse AI Studio.exe**. Không cần bản cũ, Node.js, npm hoặc Chrome riêng.
-2. Đăng nhập Muse trong tool; nếu dùng OTP, nhập mã mới nhất ngay trên trang Muse. Xác nhận xong bấm Về Studio rồi Kiểm tra phiên.
-3. Nhập prompt/TXT/SRT, chọn ảnh/video. Chọn số luồng trước khi tạo.
-4. **Tải tất cả** lưu kết quả vào thư mục thường: chọn nơi lưu lần đầu, các lần sau tự nhớ. Mỗi bộ tạo thư mục mới chứa các tệp được đánh số liên tục, không cần giải nén kết quả.
+Giải nén toàn bộ gói vào thư mục mới, mở **Muse AI Studio.exe**. Không cần bản cũ, Node.js, npm hoặc Chrome riêng.
 
-Bản 1.5.0 cho phép dùng các chức năng khác khi đang tạo: đổi tab, sửa kịch bản/thiết lập, nhập tệp, chọn ảnh, xem/tải kết quả và AI Enhance ở ô khác. Tác vụ đang chạy giữ bản chụp dữ liệu ban đầu, kết quả cũ vẫn có trong lịch sử. Mỗi ô có Dừng riêng. Bấm ảnh mở trình xem trong Studio, sửa trường hợp popup trắng.
+- **1 tài khoản · tối đa 10 luồng**: giữ chế độ cũ, cả 10 ô dùng Muse 01. Chọn số luồng và kiểm tra các hội thoại riêng trước khi bật song song.
+- **10 tài khoản · mỗi tài khoản 1 luồng**: Muse 01 cho ô 01, Muse 02 cho ô 02…; cookie và dữ liệu đăng nhập tách biệt. Bấm Tạo 10 để gửi đồng thời trên những tài khoản đã xác minh.
 
-Tool có thể gửi 10 yêu cầu đồng thời qua mười hội thoại riêng đã kiểm tra. Tiến độ báo số prompt đã hiển thị trên Muse; tốc độ và số render thật cùng lúc vẫn do dịch vụ quyết định. Chưa xác minh trên tài khoản Muse thật của người dùng. Xem [kiểm thử](muse-video-studio/VALIDATION.md).
+Bấm **Quản lý 10 tài khoản**, nhập danh sách email/tên (mỗi dòng một tài khoản) hoặc nhập TXT; đăng nhập từng tài khoản trong tool. Danh sách chỉ đặt nhãn, không thay thế xác thực. Khi mở lại, bấm **Kiểm tra 10 phiên** để đọc lại các phiên đã lưu. Không nhập mật khẩu, OTP, cookie/token vào danh sách.
 
-Gói mới hiện phiên bản 1.5.0. Không chép dữ liệu đăng nhập hoặc .env từ bản cũ vào gói chia sẻ. Thư viện và bộ đếm được giữ khi mở lại cùng hồ sơ; bản cài mới có mã riêng chống trùng tên tệp.
+Giữ nguyên xem ảnh trong Studio, lịch sử từng ô, Tạo/Dừng riêng, TXT/SRT, đồng nhất nhân vật, ảnh → video, lưu thư mục thường, đánh số tiếp và dùng các chức năng khác trong khi tạo. Không chuyển chế độ tài khoản giữa một tác vụ Muse đang chạy.
+
+Kiểm thử dùng dịch vụ mô phỏng cục bộ; Muse quyết định tốc độ và quyền tạo nội dung trên tài khoản thật. Không tự đổi tài khoản khi hết hạn mức hoặc gửi lại yêu cầu. Xem [kết quả kiểm thử](muse-video-studio/VALIDATION.md).

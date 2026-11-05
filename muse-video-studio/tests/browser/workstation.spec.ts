@@ -466,7 +466,7 @@ test('missing integration is explained before render and sends no doomed AI requ
   await expect(page.getByTestId('scene-1').getByRole('button', { name: 'AI Enhance' })).toBeDisabled();
   await expect(page.locator('video')).toHaveCount(0);
   await page.getByRole('button', { name: 'Kết nối tài khoản Muse', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Tài khoản Muse duy nhất' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Quản lý tài khoản Muse' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Mở cửa sổ Muse', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Hoàn tất', exact: true }).click();
   await page.getByRole('button', { name: 'Chẩn đoán API', exact: true }).click();
@@ -763,4 +763,31 @@ test('downloading a WebP preview exports a decodable PNG file with the same pixe
     }; img.onerror = () => resolve(null); img.src = 'data:image/png;base64,' + base64;
   }), bytes.toString('base64'));
   expect(decoded).toEqual({ dimensions: [2,2], pixels });
+});
+
+test('ten-account mode routes only verified slots, imports ten labels and preserves the shared-account option',async({page})=>{
+  const accounts=Array.from({length:10},(_,i)=>({id:i+1,label:`Muse ${i+1}`,authenticated:i<9,sessionAuthenticated:i<9,active:i<9,state:i<9?'ready':'disconnected',checkedAt:null}));
+  await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'browser',multiAccount:true,embeddedLogin:true,executionConcurrency:1,maxConcurrency:10,accounts}}));
+  await page.route('**/api/account/select',route=>route.fulfill({json:{accounts}}));
+  let imported:string[]=[];
+  await page.route('**/api/account/import',route=>{imported=route.request().postDataJSON().labels;return route.fulfill({json:{accounts:accounts.map((account,i)=>({...account,label:imported[i]}))}})});
+  await page.reload();
+  await page.getByRole('button',{name:'Quản lý 10 tài khoản',exact:true}).click();
+  const manager=page.getByRole('dialog',{name:'Quản lý tài khoản Muse',exact:true});
+  const labels=Array.from({length:10},(_,i)=>`owner${i+1}@example.invalid`);
+  await manager.locator('input[type=file][accept=".txt"]').setInputFiles({name:'accounts.txt',mimeType:'text/plain',buffer:Buffer.from(labels.join('\r\n'))});
+  await expect(manager.getByLabel('Danh sách 10 tài khoản',{exact:true})).toHaveValue(labels.join('\n'));
+  await manager.getByRole('button',{name:'Lưu danh sách',exact:true}).click();await expect.poll(()=>imported.length).toBe(10);expect(imported).toEqual(labels);
+  await manager.getByRole('button',{name:'Hoàn tất',exact:true}).click();
+  await page.getByLabel('Chế độ tài khoản',{exact:true}).selectOption('multiple');
+  await page.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();
+  const requests:any[]=[];const release:(()=>Promise<void>)[]=[];
+  await page.route('**/api/image',async route=>{requests.push(route.request().postDataJSON());await new Promise<void>(resolve=>release.push(async()=>{await route.fulfill({json:{base64:image,mimeType:'image/png'}});resolve()}))});
+  await page.getByRole('button',{name:'TẠO 10 ẢNH',exact:true}).click();await expect.poll(()=>requests.length).toBe(9);
+  expect(requests.map(data=>data.accountId).sort((a,b)=>a-b)).toEqual([1,2,3,4,5,6,7,8,9]);expect(requests.every(data=>data.accountMode==='multiple'&&data.sceneId===data.accountId)).toBe(true);
+  await expect(page.getByTestId('scene-10').getByText('Chưa xác minh Muse 10.',{exact:false})).toBeVisible();
+  await expect(page.getByLabel('Chế độ tài khoản',{exact:true})).toBeDisabled();await expect(page.getByLabel('Kịch bản cảnh 10',{exact:true})).toBeEditable();
+  for(const done of release)await done();await expect(page.locator('.generated-image')).toHaveCount(9);
+  await page.getByLabel('Chế độ tài khoản',{exact:true}).selectOption('single');await expect(page.getByLabel('Số luồng:',{exact:true})).toHaveValue('1');
+  await page.reload();await expect(page.getByLabel('Chế độ tài khoản',{exact:true})).toHaveValue('single');
 });

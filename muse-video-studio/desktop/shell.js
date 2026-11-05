@@ -8,3 +8,5 @@ for (const name of ['studio', 'muse', 'email-link', 'reload-muse', 'login-diagno
 window.studioDesktop.onViewChanged(name => {
   for (const key of ['studio', 'muse']) document.getElementById(key).setAttribute('aria-pressed', String(key === name));
 });
+
+window.studioDesktop.onAccount(id=>{document.querySelector('nav span').textContent=`Đăng nhập đang chọn: Muse ${String(id).padStart(2,'0')}`});

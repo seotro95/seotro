@@ -1,3 +1,28 @@
+# Xác minh bản 1.6.0
+
+## Hai chế độ tài khoản
+
+- Thêm `MuseAccounts`: mười driver Muse độc lập, mỗi driver có hồ sơ/partition cookie và trang đăng nhập riêng. Muse 01 giữ đúng partition `persist:muse` và đường dẫn dữ liệu cũ. Muse 02–10 dùng các partition riêng; popup đăng nhập kế thừa đúng partition của tài khoản mở nó.
+- Chế độ `multiple` gán ô N → tài khoản N, máy chủ giới hạn một tác vụ trên mỗi tài khoản; AI Enhance dùng cùng giới hạn. Không tự mượn tài khoản khác hoặc chuyển tài khoản khi lỗi/hết hạn mức. Mỗi yêu cầu giữ accountId/chế độ tại thời điểm bấm tạo. Chế độ `single` vẫn dùng tài khoản 01, giữ nguyên kiểm tra hội thoại riêng và tùy chọn tối đa 10 luồng cũ.
+- Quản lý 10 tài khoản: dán/nhập TXT email hoặc tên quản lý, trạng thái và số dư từng tài khoản, đăng nhập/kiểm tra từng phiên và Kiểm tra 10 phiên sau mở lại. Danh sách chỉ đặt nhãn, không xác thực hay đổi danh tính phiên. Không thu thập mật khẩu, OTP, cookie hoặc token trong form danh sách.
+- Chọn tài khoản trên bảng chính đồng bộ với tab Muse, liên kết email và chẩn đoán đăng nhập. Không thay đổi chế độ/phiên khi đang xử lý Muse. Các tính năng đa nhiệm, xem ảnh nội bộ, lịch sử, thư mục media và đánh số tiếp của 1.5.0 được giữ.
+
+## Kiểm thử đã hoàn tất
+
+- `npm run build`, `npm test` qua; không thêm dependency. Test pool xác nhận mười tài khoản nhận mười yêu cầu chồng lấp, từ chối yêu cầu thứ hai trên tài khoản bận, hủy một tài khoản giữ chín tài khoản khác, giải phóng lease và vẫn cho phép mười yêu cầu ở chế độ một tài khoản. Nhãn được lưu/đọc lại; tên trùng hoặc nội dung dạng email|password bị từ chối.
+- Giao diện Playwright **34/34 qua**. Test mới nhập TXT đủ 10 nhãn, chỉ gửi tới 9 ô có phiên xác minh, đúng accountId=sceneId, báo tài khoản còn thiếu, khóa chuyển chế độ trong khi tác vụ đang chạy và giữ tùy chọn chế độ cũ sau reload. Tất cả ca xem ảnh, lịch sử/tải, đa nhiệm và lỗi từ 1.5.0 qua lại.
+- Desktop từ nguồn **8/8 qua** cho chế độ một tài khoản: mười ảnh và mười video từ ảnh chồng lấp, dừng từng ô/cả bộ, giữ phiên và popup đăng nhập. Test mới nhiều tài khoản **1/1 qua**: mười cookie jar không kế thừa cookie của tài khoản trước, mười yêu cầu ảnh chồng lấp ở cùng route mà không cần New chat; byte ảnh khớp đúng tài khoản/cảnh. Chuyển chế độ cũ gửi video của ô 02 qua tài khoản 01. Khởi động lại và kiểm tra mười phiên giữ nhãn/cookie, không tạo thêm nội dung. Test nguồn cố định lại cổng local đã chọn để kiểm tra lưu thiết lập; bản đóng gói tự ghi nhớ cổng.
+- Gói Linux độc lập **2/2 kịch bản qua**, PATH không có Node/npm, hồ sơ mới. Kịch bản mới đăng nhập mười phiên riêng, nhận đồng thời mười ảnh rồi mười video, không cần New chat, kiểm đúng cookie/byte media, chuyển lại chế độ một tài khoản và khởi động lại giữ đủ mười phiên/nhãn/chế độ. Kịch bản cũ chọn mười hội thoại trên một tài khoản, kiểm đủ mười yêu cầu chồng lấp, xem ảnh không popup trắng, lưu thư mục thật đủ mười PNG khác nhau, giữ thư mục/bộ đếm/lịch sử sau mở lại.
+- Kiểm thử OTP **4/4** và liên kết email/popup **4/4 qua**: giữ challenge, chỉ mã mới nhất được chấp nhận, không xen auth-check khi đang nhập OTP và không đưa mã/email/cookie vào báo cáo chẩn đoán.
+
+## Giới hạn xác minh
+
+Các ca xác thực và tạo nội dung dùng dịch vụ mô phỏng cục bộ, không phải tài khoản Muse thật của người dùng. Kiểm thử chứng minh các phiên/cookie tách biệt và tool có thể gửi đồng thời mười yêu cầu; chưa xác minh Muse cho mười tài khoản thật xử lý nhanh hơn bao nhiêu. Muse vẫn quyết định quyền tạo nội dung, hạn mức, chất lượng và tốc độ của từng tài khoản.
+
+Windows dùng Electron 45.2.2 x64 chính thức. Cloud Linux kiểm cấu trúc PE x64, checksum, manifest và CRC của gói Windows; không chạy Windows EXE. Sandbox, context isolation và web security được giữ nguyên.
+
+## Kết quả lịch sử trước 1.6.0
+
 # Xác minh bản 1.5.0
 
 ## Kết quả thay đổi

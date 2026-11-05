@@ -1,6 +1,6 @@
-# Muse AI Studio 1.5.0 · Một tài khoản, 10 cảnh
+# Muse AI Studio 1.6.0 · Hai chế độ, 10 cảnh
 
-Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đăng nhập Muse nằm trong cửa sổ tool. Mười cảnh dùng chung một phiên tài khoản. Mỗi ô có nút Tạo/Dừng riêng và lịch sử ảnh/video lưu trên máy. Có thể kiểm tra để bật tối đa 10 hội thoại song song.
+Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đăng nhập Muse nằm trong cửa sổ tool. Chọn một tài khoản dùng chung 10 ô hoặc 10 tài khoản tách biệt, mỗi tài khoản một ô. Mỗi ô có nút Tạo/Dừng riêng và lịch sử ảnh/video lưu trên máy. Có thể kiểm tra để bật tối đa 10 hội thoại song song.
 
 ## Bản Windows đầy đủ — không cần bản cũ
 
@@ -10,20 +10,32 @@ Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đă
 4. Có thể bấm **Kiểm tra ô Message** trước khi tạo. Bước này tìm ô nhập trong trang luồng, không gửi prompt hoặc render.
 5. Nhập 10 prompt hoặc TXT/SRT, chọn **Tạo ảnh hàng loạt** / **Tạo video**, bấm **TẠO 10 ẢNH / VIDEO**.
 
-Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.5.0** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
+Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.6.0** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
 
 Cầu nối giao diện **không chính thức**. Kiểm thử dùng Chromium/Electron thật và dịch vụ giả lập cục bộ; chưa tự động tạo media hoặc đọc số dư trên Muse.ai thật. Người dùng xác nhận có thể gửi/nhận tin nhắn thủ công trong tab Muse của tool. Tài khoản thật có thể giới hạn render đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các lựa chọn model, độ nét và thời lượng là yêu cầu bằng prompt, cần xác nhận bằng kết quả thật.
 
-## Lưu thư mục, đa nhiệm và xem ảnh trong bản 1.5.0
+## Mới: 10 tài khoản, mỗi tài khoản một luồng
+
+1. Bấm **Quản lý 10 tài khoản**. Dán danh sách email/tên quản lý, mỗi dòng một tài khoản, hoặc **Nhập TXT** rồi **Lưu danh sách** (tối đa 10).
+2. Bấm **Đăng nhập** ở từng hàng Muse 01–10, hoàn tất email/OTP trên trang Muse trong tool, quay **Về Studio** và kiểm tra phiên. Nhập danh sách chỉ đặt nhãn, không tự xác thực; không nhập mật khẩu, mã OTP, cookie hoặc token vào danh sách.
+3. Chọn **Chế độ tài khoản → 10 tài khoản · mỗi tài khoản 1 luồng**. Ô 01 dùng Muse 01, ô 02 dùng Muse 02… Các ô chưa xác minh có thông báo riêng và không tự mượn tài khoản khác.
+4. Bấm **TẠO 10 ẢNH / VIDEO**. Tối đa 10 tác vụ đồng thời, mỗi tài khoản một tác vụ. Không cần kiểm tra New chat cho chế độ này. Khi mở lại, bấm **Kiểm tra 10 phiên** để đọc lại các phiên đã lưu.
+5. Chuyển về **1 tài khoản · tối đa 10 luồng** để dùng tính năng cũ: mọi ô dùng Muse 01 và giữ lựa chọn số hội thoại song song riêng. Chỉ đổi chế độ khi các tác vụ Muse đã kết thúc.
+
+Mỗi tài khoản có cookie, bộ nhớ trang, cửa sổ đăng nhập và luồng xử lý riêng. Nhãn/email trong danh sách không đổi danh tính phiên đã đăng nhập; muốn dùng tài khoản khác, đăng xuất/đăng nhập trực tiếp trong hàng tương ứng. Tool không kiểm chứng danh tính thật chỉ dựa vào nhãn.
+
+Chế độ nhiều tài khoản có thể giảm việc chờ chung một tài khoản, nhưng thời gian tạo còn phụ thuộc Muse và quyền của từng tài khoản. Không tự chuyển tài khoản khi lỗi/hết hạn mức và không tự gửi lại yêu cầu. Chỉ dùng các tài khoản bạn có quyền sử dụng.
+
+## Lưu thư mục, đa nhiệm và xem ảnh trong bản 1.6.0
 
 - **Tải tất cả** lưu các bản đang chọn trực tiếp vào một **thư mục thường** trên máy. Lần đầu chọn thư mục gốc; các lần sau tự nhớ trên bản desktop. Mỗi bộ có thư mục mới chứa PNG/MP4/WebM/MOV đã đánh số, mở bằng File Explorer, không cần giải nén kết quả. Nút **Thư mục lưu** đổi nơi lưu. Nút tải riêng từng ảnh/video vẫn còn.
 - Số thứ tự tăng liên tục cho tải riêng và lưu bộ; tên vẫn có số cảnh và mã bản cài. Ghi bằng chế độ tạo mới, không ghi đè; trùng thư mục thì tạo tên khác. Lỗi ghi giữ các tệp đã lưu, không xóa bộ cũ. Bản web dùng File System Access nếu trình duyệt hỗ trợ; nếu không, dùng executable desktop để lưu thư mục.
 - Trong lúc tạo có thể đổi tab ảnh/video, chỉnh prompt/thiết lập, nhập TXT/SRT, chọn ảnh, xem/tải kết quả đã có và thêm tác vụ vào ô trống. **Mỗi tác vụ giữ prompt, ảnh và thiết lập tại lúc bấm Tạo**. Thay đổi sau đó áp dụng cho lượt mới; kết quả của prompt cũ vẫn nằm trong lịch sử, không gán nhầm cho prompt mới.
 - AI Enhance dùng cùng hàng đợi, thực hiện được ở ô khác. Một ô có một tác vụ; mỗi tác vụ có Dừng riêng. Giới hạn tổng 10 tác vụ đồng thời, Muse còn tuân theo số luồng kết nối đã kiểm tra. Chỉ các thao tác thay đổi phiên/kết nối và render chẩn đoán bị khóa khi xung đột với yêu cầu đang chạy.
 - Bấm ảnh mở cửa sổ xem **ngay trong Studio**, có Vừa cửa sổ/Kích thước gốc và tải ảnh. Không mở popup Blob vốn có thể hiện trắng.
-- Chọn **Số luồng: 10** trước khi chạy để kiểm tra và bật mười hội thoại riêng. Tiến độ mới ghi số ô đang mở và số prompt đã hiển thị trên trang Muse, tách khỏi lúc kết quả hoàn tất. Mười yêu cầu được gửi đồng thời khi kết nối có khả năng đó; Muse vẫn có thể xếp hàng render theo tài khoản. Đây không phải cam kết mười GPU/render thật đồng thời.
+- Chọn **Số luồng: 10** trước khi chạy để kiểm tra và bật mười hội thoại riêng. Tiến độ mới ghi số ô đang mở và số prompt đã hiển thị trên trang Muse, tách khỏi lúc kết quả hoàn tất. Trong chế độ một tài khoản, mười yêu cầu được gửi đồng thời khi kết nối có khả năng đó; Muse vẫn có thể xếp hàng render theo tài khoản. Đây không phải cam kết mười GPU/render thật đồng thời.
 
-## Đăng nhập bằng mã xác nhận email trong bản 1.5.0
+## Đăng nhập bằng mã xác nhận email trong bản 1.6.0
 
 1. Mở **Đăng nhập Muse trong tool**, nhập email và yêu cầu mã.
 2. Giữ trang Muse đang chờ mã. Nhập hoặc dán **mã mới nhất** vào chính ô mã xác nhận trên trang Muse, rồi bấm xác nhận.
@@ -143,7 +155,7 @@ Chỉnh prompt/ảnh/settings bỏ kết quả đang chọn khỏi ô để trá
 
 `.env.example` mô tả các tùy chọn. `MUSE_DESKTOP_DATA` đổi thư mục dữ liệu Electron. `MUSE_BALANCE_SELECTOR` chỉ vùng số dư có nhãn, không dùng vùng chat. `MUSE_PROFILE_ROOT`, `MUSE_ACCOUNT_PROFILE`, `MUSE_BROWSER_CHANNEL` chỉ áp dụng cho đăng nhập trình duyệt ngoài của chế độ web. Không trỏ dữ liệu Electron vào hồ sơ Chrome cũ.
 
-Nếu đã có adapter tương thích, dùng `MUSE_TRANSPORT=adapter`, `MUSE_ADAPTER_URL`, `MUSE_ADAPTER_TOKEN` nếu cần. Adapter xác thực **một** tài khoản, accountId=1; mọi ID khác bị từ chối. Không trỏ URL adapter vào trang chủ Muse.ai. Adapter cũng có thể nhận 10 yêu cầu đồng thời và phải tuân thủ hạn mức của nhà cung cấp. Đây là hợp đồng của ứng dụng, không phải API chính thức của Muse:
+Nếu đã có adapter tương thích, dùng `MUSE_TRANSPORT=adapter`, `MUSE_ADAPTER_URL`, `MUSE_ADAPTER_TOKEN` nếu cần. Chế độ adapter giữ hợp đồng cũ với **một** tài khoản, accountId=1; chế độ 10 tài khoản dùng phiên Muse tích hợp/trình duyệt. Không trỏ URL adapter vào trang chủ Muse.ai. Adapter cũng có thể nhận 10 yêu cầu đồng thời và phải tuân thủ hạn mức của nhà cung cấp. Đây là hợp đồng của ứng dụng, không phải API chính thức của Muse:
 
 - `POST /video`: `{accountId:1,prompt,modelDisplayName,aspectRatio,durationSeconds,resolution,sourceMode,characterLock,referenceImage?}`. Kết quả `{base64,mimeType}` với MP4/WebM/QuickTime.
 - `POST /image`: `{accountId:1,prompt,aspectRatio,resolution,characterLock,referenceImage?}`. Kết quả `{base64,mimeType}` với PNG/JPEG/WebP.
@@ -161,6 +173,7 @@ CHROMIUM_PATH=/usr/bin/chromium node tests/muse-serial.test.mjs
 CHROMIUM_PATH=/usr/bin/chromium node tests/muse-parallel.test.mjs
 CHROMIUM_PATH=/usr/bin/chromium npm run test:e2e
 npm run test:desktop
+node tests/multi-account.test.mjs
 # Sau khi chuẩn bị gói Linux, đặt MUSE_PORTABLE_EXECUTABLE rồi chạy:
 node tests/portable.test.mjs
 ```

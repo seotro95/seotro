@@ -6,7 +6,7 @@ export type Mode = 'muse' | 'demo';
 export type Output = 'video' | 'image';
 export type Status = 'ready' | 'queued' | 'running' | 'done' | 'error' | 'cancelled';
 export type Reference = { id: string; name: string; url: string; base64?: string; mimeType?: string };
-export type Settings = { model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
+export type Settings = { accountMode: 'single' | 'multiple'; model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
 export type MediaResult = { kind: Output; base64: string; mimeType: string; url: string; demo: boolean; savedId?: string; referenceCompressed?: boolean; metadata?: { duration?: number; width: number; height: number }; requestedResolution?: Resolution; aspectRatio?: Settings['aspectRatio'] };
 export type VideoResult = MediaResult;
 export type ImageResult = MediaResult;
@@ -35,7 +35,7 @@ export const RUNWAY = [
   'Người mẫu ngoái nhìn qua vai với nụ cười nhẹ, camera chân dung 85mm.',
   'Người mẫu đứng giữa sân khấu trong ánh đèn cuối buổi, toàn cảnh runway sang trọng.'
 ];
-export const DEFAULT_SETTINGS: Settings = { model: 'Omni 1.1 Flash', aspectRatio: '16:9', duration: 4, resolution: '720p', imageResolution: '2k', output: 'video', videoInput: 'text', autoSync: true, r2v: true, modifier: '', mode: 'muse' };
+export const DEFAULT_SETTINGS: Settings = { accountMode: 'single', model: 'Omni 1.1 Flash', aspectRatio: '16:9', duration: 4, resolution: '720p', imageResolution: '2k', output: 'video', videoInput: 'text', autoSync: true, r2v: true, modifier: '', mode: 'muse' };
 export const createScenes = (): Scene[] => ADVENTURE.map((prompt, i) => ({ id: i + 1, enabled: true, prompt, reference: null, status: 'ready' }));
 
 // Subtitle blocks become scenes; TXT uses paragraphs, or one non-empty line per scene.
@@ -75,7 +75,7 @@ export function meetsResolution(media: MediaResult): boolean | null {
 export function errorInfo(error: unknown): { raw: string; hint: string } {
   const raw = error instanceof Error ? error.message : String(error);
   let hint = 'Thử lại sau hoặc mở Chẩn đoán API để kiểm tra kết nối.';
-  if (/MUSE_LOGIN_REQUIRED/i.test(raw)) hint = 'Mở Tài khoản Muse, đăng nhập trong tool rồi bấm Kiểm tra phiên. Cả 10 cảnh sử dụng chung tài khoản.';
+  if (/MUSE_LOGIN_REQUIRED/i.test(raw)) hint = 'Mở Tài khoản Muse, đăng nhập trong tool rồi bấm Kiểm tra phiên. Mỗi cảnh dùng tài khoản được ghi trên ô.';
   else if (/MUSE_SESSION_REFRESH_FAILED|MUSE_SESSION_CHECK_FAILED/i.test(raw)) hint = 'Chưa cập nhật được phiên Muse. Kiểm tra kết nối và tab Muse rồi bấm Kiểm tra phiên; thông tin đăng nhập vẫn được giữ trên máy.';
   else if (/MUSE_PARALLEL_UNVERIFIED/i.test(raw)) hint = 'Chưa xác minh được các hội thoại Muse độc lập. Tool giữ một luồng để tránh trộn kết quả; kiểm tra này chưa gửi prompt tạo nội dung.';
   else if (/MUSE_WORKSPACE_ORIGIN/i.test(raw)) hint = 'Trang luồng chuyển sang miền khác Muse. Hoàn tất đăng nhập trong tab Muse rồi kiểm tra lại phiên; chưa có prompt được gửi.';
@@ -108,6 +108,7 @@ export function restoreWorkspace(raw: string | null): { scenes: Scene[]; setting
     }));
     const s = data.settings ?? {};
     fallback.settings = normalizeSettings({ ...DEFAULT_SETTINGS,
+      accountMode: s.accountMode === 'multiple' ? 'multiple' : 'single',
       model: MUSE_MODELS.includes(s.model) ? s.model : DEFAULT_SETTINGS.model,
       aspectRatio: s.aspectRatio === '9:16' ? '9:16' : '16:9',
       duration: [4, 6, 8, 10].includes(s.duration) ? s.duration : 4,

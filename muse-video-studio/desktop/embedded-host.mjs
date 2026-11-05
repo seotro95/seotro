@@ -7,10 +7,11 @@ import { randomUUID } from 'node:crypto';
 export const remotePreferences = { partition: 'persist:muse', sandbox: true, contextIsolation: true, nodeIntegration: false, webSecurity: true, backgroundThrottling: false };
 
 export class EmbeddedMuseHost {
-  constructor({ window, userData, serviceURL }) {
+  constructor({ window, userData, serviceURL, partition = remotePreferences.partition }) {
     this.window = window;
     this.userData = userData;
     this.serviceURL = serviceURL;
+    this.preferences = {...remotePreferences, partition};
     this.views = new Map();
     this.login = null;
     this.browser = null;
@@ -25,7 +26,7 @@ export class EmbeddedMuseHost {
   }
   secure(contents) {
     contents.on('will-navigate', (event, url) => { if (!this.allowNavigation(url)) event.preventDefault(); });
-    contents.setWindowOpenHandler(({ url }) => this.allowNavigation(url) ? { action: 'allow', overrideBrowserWindowOptions: { parent: this.window, width: 760, height: 800, autoHideMenuBar: true, webPreferences: remotePreferences } } : { action: 'deny' });
+    contents.setWindowOpenHandler(({ url }) => this.allowNavigation(url) ? { action: 'allow', overrideBrowserWindowOptions: { parent: this.window, width: 760, height: 800, autoHideMenuBar: true, webPreferences: this.preferences } } : { action: 'deny' });
     contents.on('did-create-window', child => this.secure(child.webContents));
     contents.setAudioMuted(true);
   }
@@ -42,7 +43,7 @@ export class EmbeddedMuseHost {
   }
   async createView({ worker = false } = {}) {
     const browser = await this.attach();
-    const view = new WebContentsView({ webPreferences: remotePreferences });
+    const view = new WebContentsView({ webPreferences: this.preferences });
     this.secure(view.webContents);
     this.window.contentView.addChildView(view);
     view.setVisible(false);
