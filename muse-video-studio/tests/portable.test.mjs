@@ -20,6 +20,16 @@ async function waitFor(predicate, timeout = 30000) {
     await new Promise(resolve => setTimeout(resolve, 40));
   }
 }
+async function collectDownloads(desktop, directory) {
+  await desktop.evaluate(({ session }, directory) => {
+    globalThis.fixtureDownloads = [];
+    session.fromPartition('persist:studio').on('will-download', (_event, item) => {
+      const filename = item.getFilename();
+      item.setSavePath(`${directory}/${filename}`);
+      item.once('done', (_event, state) => globalThis.fixtureDownloads.push({ filename, state }));
+    });
+  }, directory);
+}
 
 test('portable app queues ten scenes in one persistent conversation, exports real PNG files and needs no old install', { timeout: 120000 }, async () => {
   const profile = await mkdtemp(path.join(os.tmpdir(), 'muse-portable-test-'));
@@ -65,15 +75,17 @@ test('portable app queues ten scenes in one persistent conversation, exports rea
     assert.match(fixture.state.submitted[0].prompt, /studio-request-/);
     const downloads = path.join(profile, 'downloads');
     await mkdir(downloads);
-    await desktop.evaluate(({ session }, directory) => {
-      globalThis.fixtureDownloads = [];
-      let counter = 0;
-      session.fromPartition('persist:studio').on('will-download', (_event, item) => {
-        const filename = `${String(++counter).padStart(2, '0')}-${item.getFilename()}`;
-        item.setSavePath(`${directory}/${filename}`);
-        item.once('done', (_event, state) => globalThis.fixtureDownloads.push({ filename, state }));
-      });
-    }, downloads);
+    await collectDownloads(desktop, downloads);
+    await studio.evaluate(() => new Promise((resolve,reject) => {
+      const request=indexedDB.open('muse-studio-downloads-v1',1);
+      request.onupgradeneeded=()=>request.result.createObjectStore('counters');
+      request.onerror=()=>reject(request.error);
+      request.onsuccess=()=>{
+        const db=request.result;const tx=db.transaction('counters','readwrite');
+        tx.objectStore('counters').put({last:'999',namespace:'b'.repeat(32)},'sequence');
+        tx.oncomplete=()=>{db.close();resolve()};tx.onerror=()=>{db.close();reject(tx.error)};
+      };
+    }));
     await studio.getByRole('button', { name: 'Tải cảnh 1', exact: true }).click();
     await waitFor(async () => await desktop.evaluate(() => globalThis.fixtureDownloads.length) === 1);
     await studio.getByRole('button', { name: 'Tải tất cả (10/10)', exact: true }).click();
@@ -82,11 +94,13 @@ test('portable app queues ten scenes in one persistent conversation, exports rea
     assert.ok(saved.every(file => file.state === 'completed'));
     assert.ok(saved[0].filename.endsWith('.png'));
     assert.ok(saved[1].filename.endsWith('.zip'));
+    assert.equal(saved[0].filename, `image-001000-scene-01-${'b'.repeat(32)}.png`);
+    assert.equal(saved[1].filename, `Muse-Images-10-001001-001010-${'b'.repeat(32)}.zip`);
     const hashes = new Set();
     const files = await readdir(downloads);
     assert.equal(files.length, 2, 'One click on Tải tất cả must start exactly one download');
     const archive = readZip(path.join(downloads, saved[1].filename));
-    assert.deepEqual(archive.map(file => file.name), Array.from({ length: 10 }, (_, index) => `image-${String(index+1).padStart(2,'0')}.png`));
+    assert.deepEqual(archive.map(file => file.name), Array.from({ length: 10 }, (_, index) => `image-${String(index+1001).padStart(6,'0')}-scene-${String(index+1).padStart(2,'0')}-${'b'.repeat(32)}.png`));
     const single = await readFile(path.join(downloads, saved[0].filename));
     for (const { bytes, name } of [{ bytes: single, name: 'single.png' }, ...archive]) {
       assert.ok(bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])));
@@ -108,6 +122,14 @@ test('portable app queues ten scenes in one persistent conversation, exports rea
     await waitFor(async () => await studio.locator('.generated-image').count() === 9);
     assert.equal(await studio.locator('.history-entry').count(), 10, 'Generated files must persist across a full executable restart');
     assert.equal(fixture.state.submitted.length, 10, 'Restoring saved results must not render again');
+    await collectDownloads(desktop, downloads);
+    await studio.getByRole('button',{name:'Tải cảnh 1',exact:true}).click();
+    await waitFor(async()=>await desktop.evaluate(()=>globalThis.fixtureDownloads.length)===1);
+    const resumed=await desktop.evaluate(()=>globalThis.fixtureDownloads[0]);
+    assert.equal(resumed.state,'completed');
+    assert.equal(resumed.filename,`image-001011-scene-01-${'b'.repeat(32)}.png`);
+    assert.equal((await readdir(downloads)).length,3,'Reopening must continue the counter without overwriting any file');
+    assert.equal(fixture.state.submitted.length,10);
   } finally {
     await desktop?.close();
     fixture.server.closeAllConnections();

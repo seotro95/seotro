@@ -1,5 +1,6 @@
 import type { Mode, Reference, Settings, MediaResult } from './core.ts';
 import { createZip } from './zip.ts';
+import { reserveDownloadNumbers, formatDownloadNumber } from './download-sequence.ts';
 
 type ResponseMedia = { base64: string; mimeType: string; metadata?: { duration?: number; width: number; height: number } };
 type RequestContext = { batchId: string; sceneId: number };
@@ -110,13 +111,15 @@ async function mediaFile(media: MediaResult, id: number) {
     const canvas = document.createElement('canvas'); canvas.width = image.naturalWidth; canvas.height = image.naturalHeight;
     canvas.getContext('2d')!.drawImage(image, 0, 0);
     const blob = await new Promise<Blob>((resolve, reject) => canvas.toBlob(value => value ? resolve(value) : reject(new Error('Không xuất được PNG.')), 'image/png'));
-    return { name: `${media.demo ? 'kiem-thu' : 'image'}-${String(id).padStart(2, '0')}.png`, blob };
+    return { prefix: `${media.demo ? 'kiem-thu-' : ''}image`, extension: 'png', blob };
   }
   const ext = ({ 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'video/webm': 'webm', 'video/quicktime': 'mov' } as Record<string, string>)[media.mimeType] || 'mp4';
-  const name = `${media.demo ? 'kiem-thu' : 'scene'}-${String(id).padStart(2, '0')}.${ext}`;
   const response = await fetch(media.url);
   if (!response.ok) throw new Error(`Không đọc được kết quả cảnh ${id} để tải xuống.`);
-  return { name, blob: await response.blob() };
+  return { prefix: `${media.demo ? 'kiem-thu-' : ''}video`, extension: ext, blob: await response.blob() };
+}
+function numberedFilename(file: { prefix: string; extension: string }, id: number, number: bigint, namespace: string) {
+  return `${file.prefix}-${formatDownloadNumber(number)}-scene-${String(id).padStart(2, '0')}-${namespace}.${file.extension}`;
 }
 function downloadBlob(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob);
@@ -124,15 +127,19 @@ function downloadBlob(blob: Blob, filename: string) {
   setTimeout(() => URL.revokeObjectURL(url), 60000);
 }
 export async function downloadVideo(media: MediaResult, id: number) {
-  const file = await mediaFile(media, id); downloadBlob(file.blob, file.name);
+  const file = await mediaFile(media, id);
+  const range = await reserveDownloadNumbers(1);
+  downloadBlob(file.blob, numberedFilename(file, id, range.first, range.namespace));
 }
 export async function downloadMediaBatch(items: { media: MediaResult; id: number }[], kind: Settings['output']) {
   if (!items.length) throw new Error('Chưa có kết quả để tải.');
   const files = [];
   for (const item of items) files.push(await mediaFile(item.media, item.id));
-  const archive = await createZip(files);
-  const stamp = new Date().toISOString().replace(/[:.]/g, '-');
-  downloadBlob(archive, `Muse-${kind === 'image' ? 'Images' : 'Videos'}-${items.length}-${stamp}.zip`);
+  const range = await reserveDownloadNumbers(items.length);
+  const archive = await createZip(files.map((file, index) => ({ blob: file.blob, name: numberedFilename(file, items[index].id, range.first + BigInt(index), range.namespace) })));
+  const first = formatDownloadNumber(range.first); const last = formatDownloadNumber(range.last);
+  downloadBlob(archive, `Muse-${kind === 'image' ? 'Images' : 'Videos'}-${items.length}-${first}-${last}-${range.namespace}.zip`);
+  return { first, last };
 }
 export const providerStatus = () => api('/api/status');
 export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer' | 'concurrency', data: Record<string, unknown> = {}) => api(`/api/account/${action}`, data);

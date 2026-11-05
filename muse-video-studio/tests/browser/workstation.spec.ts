@@ -10,6 +10,46 @@ async function configureAdapter(page: Page) {
   await page.route('**/api/status', route => route.fulfill({ json: { museConfigured: true, transport: 'adapter', accounts: [], busy: false, credit: null, gpu: null } }));
   await page.reload();
 }
+async function seedDownloadSequence(page: Page, last: string) {
+  await page.evaluate(last => new Promise<void>((resolve,reject) => {
+    const request = indexedDB.open('muse-studio-downloads-v1',1);
+    request.onupgradeneeded=()=>request.result.createObjectStore('counters');
+    request.onerror=()=>reject(request.error);
+    request.onsuccess=()=>{
+      const db=request.result; const tx=db.transaction('counters','readwrite');
+      tx.objectStore('counters').put({last,namespace:'a'.repeat(32)},'sequence');
+      tx.oncomplete=()=>{db.close();resolve()};tx.onerror=tx.onabort=()=>{db.close();reject(tx.error)};
+    };
+  }),last);
+}
+
+test('downloads reserve unique global numbers across image/video tabs, pass 1000 and preserve large integers exactly', async ({ page, context }) => {
+  await configureAdapter(page);
+  await page.route('**/api/image',route=>route.fulfill({json:{base64:image,mimeType:'image/png'}}));
+  await page.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();
+  await page.getByTestId('scene-1').getByRole('button',{name:'Tạo cảnh này',exact:true}).click();
+  await expect(page.getByTestId('scene-1').locator('.generated-image')).toBeVisible();
+  const other=await context.newPage();
+  await other.goto('/');await configureAdapter(other);
+  await other.route('**/api/video',route=>route.fulfill({json:{base64:video,mimeType:'video/mp4'}}));
+  await other.getByRole('button',{name:'Tạo video',exact:true}).click();
+  await other.getByTestId('scene-1').getByRole('button',{name:'Tạo cảnh này',exact:true}).click();
+  await expect(other.getByTestId('scene-1').locator('video')).toBeVisible();
+  await seedDownloadSequence(page,'999');
+  const take=async (target:Page)=>{
+    const event=target.waitForEvent('download');
+    await target.getByRole('button',{name:'Tải cảnh 1',exact:true}).click();
+    return await event;
+  };
+  const pair=await Promise.all([take(page),take(other)]);
+  const numbers=pair.map(file=>Number(file.suggestedFilename().match(/^(?:image|video)-(\d+)-scene-/)![1])).sort((a,b)=>a-b);
+  expect(numbers).toEqual([1000,1001]);
+  expect(pair[0].suggestedFilename()).toMatch(/^image-00100[01]-scene-01-a{32}\.png$/);
+  expect(pair[1].suggestedFilename()).toMatch(/^video-00100[01]-scene-01-a{32}\.mp4$/);
+  await seedDownloadSequence(page,'9007199254740991');
+  expect((await take(page)).suggestedFilename()).toBe(`image-9007199254740992-scene-01-${'a'.repeat(32)}.png`);
+  expect((await take(page)).suggestedFilename()).toBe(`image-9007199254740993-scene-01-${'a'.repeat(32)}.png`);
+});
 
 for (const kind of ['image', 'video'] as const) {
   test(`one click downloads all ten selected ${kind} results in one valid ZIP`, async ({ page }) => {
@@ -31,9 +71,11 @@ for (const kind of ['image', 'video'] as const) {
     const event = page.waitForEvent('download');
     await page.getByRole('button', { name: 'Tải tất cả (10/10)', exact: true }).click();
     const download = await event;
-    expect(download.suggestedFilename()).toMatch(kind === 'image' ? /^Muse-Images-10-.*\.zip$/ : /^Muse-Videos-10-.*\.zip$/);
+    expect(download.suggestedFilename()).toMatch(kind === 'image' ? /^Muse-Images-10-000001-000010-[a-f0-9]{32}\.zip$/ : /^Muse-Videos-10-000001-000010-[a-f0-9]{32}\.zip$/);
     const files = readZip((await download.path())!);
-    expect(files.map((file: { name: string }) => file.name)).toEqual(Array.from({ length: 10 }, (_, index) => `${kind === 'image' ? 'image' : 'scene'}-${String(index+1).padStart(2,'0')}.${kind === 'image' ? 'png' : 'mp4'}`));
+    const namespace = files[0].name.match(/-([a-f0-9]{32})\.[a-z0-9]+$/)![1];
+    const expectedNames = (first: number) => Array.from({ length: 10 }, (_, index) => `${kind === 'image' ? 'image' : 'video'}-${String(first+index).padStart(6,'0')}-scene-${String(index+1).padStart(2,'0')}-${namespace}.${kind === 'image' ? 'png' : 'mp4'}`);
+    expect(files.map((file: { name: string }) => file.name)).toEqual(expectedNames(1));
     for (const [index, file] of files.entries()) {
       if (kind === 'video') expect(file.bytes).toEqual(videoBytes);
       else {
@@ -52,6 +94,20 @@ for (const kind of ['image', 'video'] as const) {
     }
     await expect(page.getByRole('button', { name: 'Tải tất cả (10/10)', exact: true })).toBeEnabled();
     expect(downloads).toBe(1);
+    const archiveNames = new Set([download.suggestedFilename()]);
+    const mediaNames = new Set(files.map((file: { name: string }) => file.name));
+    for (const first of [11,21]) {
+      if (first === 21) await page.reload();
+      const event = page.waitForEvent('download');
+      await page.getByRole('button', { name: 'Tải tất cả (10/10)', exact: true }).click();
+      const next = await event;
+      expect(archiveNames.has(next.suggestedFilename())).toBe(false); archiveNames.add(next.suggestedFilename());
+      const exported = readZip((await next.path())!);
+      expect(exported.map((file: { name: string }) => file.name)).toEqual(expectedNames(first));
+      for (const file of exported) { expect(mediaNames.has(file.name)).toBe(false); mediaNames.add(file.name); }
+    }
+    expect(mediaNames.size).toBe(30);
+    expect(downloads).toBe(3);
   });
 }
 
@@ -66,7 +122,9 @@ test('batch download includes only completed selected scenes and their real scen
   const event = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Tải tất cả (2/10)', exact: true }).click();
   const archive = await event;
-  expect(readZip((await archive.path())!).map((file: { name: string }) => file.name)).toEqual(['image-02.png','image-07.png']);
+  const files = readZip((await archive.path())!);
+  expect(files[0].name).toMatch(/^image-000001-scene-02-[a-f0-9]{32}\.png$/);
+  expect(files[1].name).toMatch(/^image-000002-scene-07-[a-f0-9]{32}\.png$/);
 });
 
 test('each scene can start during another render; stopping one leaves the other running', async ({ page }) => {
@@ -262,7 +320,7 @@ test('Muse contract sends accountId, settings, R2V and modifier; video plays and
   expect(await page.getByTestId('scene-2').locator('video').evaluate((v: HTMLVideoElement) => v.duration)).toBeCloseTo(4, 0);
   const download = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Tải cảnh 2', exact: true }).click();
-  expect((await download).suggestedFilename()).toBe('scene-02.mp4');
+  expect((await download).suggestedFilename()).toMatch(/^video-000001-scene-02-[a-f0-9]{32}\.mp4$/);
   await page.getByLabel('Kịch bản cảnh 2', { exact: true }).fill('Changed prompt');
   await expect(page.getByTestId('scene-2').locator('video')).toHaveCount(0);
   await expect(page.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
@@ -439,7 +497,7 @@ test('imports a 4K image batch from SRT, follows independent prompts, and conver
   await expect(page.getByTestId('scene-1').locator('.quality-result')).toHaveText('Chưa đạt yêu cầu 4K');
   const download = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Tải cảnh 1', exact: true }).click();
-  expect((await download).suggestedFilename()).toBe('image-01.png');
+  expect((await download).suggestedFilename()).toMatch(/^image-000001-scene-01-[a-f0-9]{32}\.png$/);
   await page.getByRole('button', { name: 'Chuyển bộ ảnh đã tạo sang video' }).click();
   await expect(page.getByRole('button', { name: 'Từ ảnh', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await page.getByLabel('Chất lượng', { exact: true }).selectOption('1080p');
@@ -607,7 +665,7 @@ test('downloading a WebP preview exports a decodable PNG file with the same pixe
   const download = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Tải cảnh 1', exact: true }).click();
   const result = await download;
-  expect(result.suggestedFilename()).toBe('image-01.png');
+  expect(result.suggestedFilename()).toMatch(/^image-000001-scene-01-[a-f0-9]{32}\.png$/);
   const bytes = await readFile((await result.path())!);
   expect([...bytes.subarray(0,8)]).toEqual([137,80,78,71,13,10,26,10]);
   const decoded = await page.evaluate(base64 => new Promise(resolve => {

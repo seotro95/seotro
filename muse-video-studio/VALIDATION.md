@@ -1,3 +1,24 @@
+# Xác minh bản 1.4.10
+
+## Thay đổi
+
+Mỗi tệp tải riêng hoặc bên trong ZIP nhận một số tải mới dùng chung cho ảnh, video và lịch sử. Không đặt lại theo ô 01–10. Nút tải bộ vẫn phát một download ZIP, tên ZIP ghi dải số; thông báo ghi số đầu–cuối. Tên tệp vẫn giữ số cảnh. Mã 128 bit riêng của hồ sơ giúp phân biệt thư mục cài mới hoặc hồ sơ đã xóa dữ liệu.
+
+Bộ đếm IndexedDB cấp dải số bằng một transaction read/write, chỉ trả dải sau khi commit. Các tab dùng chung bộ đếm; đóng/mở app giữ số. Dùng BigInt và chuỗi thập phân nên không cắt ở 1.000, không mất chính xác trên Number.MAX_SAFE_INTEGER. Lỗi đọc/ghi hoặc dữ liệu không hợp lệ không tự reset về 1; số đã cấp không tái sử dụng nếu hủy tải.
+
+## Kiểm thử
+
+- `npm run build`: TypeScript/Vite qua, không thêm dependency.
+- `npm run test:e2e`: **29/29 qua**. Hai tab tải ảnh và video đồng thời với counter fixture 999 nhận đúng 1000 và 1001, không trùng. Counter fixture 9007199254740991 nhận đúng 9007199254740992 rồi 9007199254740993. Với từng loại ảnh/video, tải cùng bộ ba lần (có reload trước lần ba) nhận lần lượt 1–10, 11–20, 21–30: ba tên ZIP và 30 tên media khác nhau, namespace giữ nguyên. ZIP được kiểm CRC bằng zipfile chuẩn của Python; ảnh so pixel và video so byte như bản trước. Tải các ô 02/07 giữ đúng số cảnh với hai số tải mới.
+- `tests/portable.test.mjs`: **1/1 qua** trên executable Electron Linux đóng gói, hồ sơ mới, PATH không có Node/npm. Counter fixture đặt 999: tải riêng nhận 1000, ZIP nhận 1001–1010. Không thêm tiền tố chống trùng từ test harness: lưu bằng tên thật của app. Sau đóng/mở executable, tải riêng nhận 1011; cả ba tệp trên ổ đĩa còn nguyên, không ghi đè. Gồm kiểm CRC và giải mã đủ 10 PNG 640×360 khác nhau; giữ thư viện/kịch bản và không gọi render thêm khi mở/tải lại.
+- `npm test` và whitespace Git qua. Không thay đổi kết nối hay quyền tạo media của Muse.
+
+## Phạm vi
+
+Kiểm thử tạo nội dung dùng dịch vụ Muse giả lập. Gói Windows dùng Electron 45.2.2 x64 chính thức và kiểm checksum runtime, SHA-256 từng tệp app, CRC của ZIP và PE x64. Cloud Linux không thực thi Windows EXE. Giữ sandbox, context isolation và web security của bản phát hành. Bộ đếm thuộc cùng hồ sơ; cài vào thư mục/hồ sơ mới có bộ đếm và mã riêng.
+
+## Kết quả lịch sử trước 1.4.10
+
 # Xác minh bản 1.4.9
 
 ## Thay đổi

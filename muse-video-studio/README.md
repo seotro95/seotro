@@ -1,4 +1,4 @@
-# Muse AI Studio 1.4.9 · Một tài khoản, 10 cảnh
+# Muse AI Studio 1.4.10 · Một tài khoản, 10 cảnh
 
 Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đăng nhập Muse nằm trong cửa sổ tool. Mười cảnh dùng chung một phiên tài khoản. Mỗi ô có nút Tạo/Dừng riêng và lịch sử ảnh/video lưu trên máy. Có thể kiểm tra để bật tối đa 10 hội thoại song song.
 
@@ -10,13 +10,23 @@ Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đă
 4. Có thể bấm **Kiểm tra ô Message** trước khi tạo. Bước này tìm ô nhập trong trang luồng, không gửi prompt hoặc render.
 5. Nhập 10 prompt hoặc TXT/SRT, chọn **Tạo ảnh hàng loạt** / **Tạo video**, bấm **TẠO 10 ẢNH / VIDEO**.
 
-Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.4.9** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
+Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.4.10** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
 
 Cầu nối giao diện **không chính thức**. Kiểm thử dùng Chromium/Electron thật và dịch vụ giả lập cục bộ; chưa tự động tạo media hoặc đọc số dư trên Muse.ai thật. Người dùng xác nhận có thể gửi/nhận tin nhắn thủ công trong tab Muse của tool. Tài khoản thật có thể giới hạn render đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các lựa chọn model, độ nét và thời lượng là yêu cầu bằng prompt, cần xác nhận bằng kết quả thật.
 
-## Một lần bấm tải toàn bộ trong bản 1.4.9
+## Tự đánh số liên tục, tránh trùng tệp trong bản 1.4.10
 
-Bấm **Tải tất cả (10/10)** để tải một tệp ZIP chứa đủ 10 kết quả đang chọn, mỗi ô một tệp. Giải nén để xem các tệp `image-01.png`…`image-10.png` hoặc `scene-01.mp4`…`scene-10.mp4` (video giữ đuôi định dạng thực). Không cần bấm tải từng ô hay cho phép 10 lượt tải riêng. Chưa đủ 10 kết quả thì nút vẫn tải các ô đã có kết quả và giữ đúng số cảnh, ví dụ `image-02.png`, `image-07.png`.
+Mỗi ảnh/video tải xuống có một số mới dùng chung giữa tải riêng, tải trong lịch sử và tải ZIP. Bộ đầu nhận 000001–000010, bộ sau nhận 000011–000020; tải một bản riêng tiếp theo nhận 000021. Số tiếp tục qua 001000 và lớn hơn, không quay lại 01 theo số ô và không cắt số khi dài hơn sáu chữ số.
+
+Ví dụ tên `image-000001-scene-01-<mã-bản-cài>.png`, `video-001001-scene-03-<mã-bản-cài>.mp4`. Phần `scene-01` vẫn chỉ đúng ô của bạn; số đứng trước đó là số tải liên tục. ZIP cũng ghi dải số đã cấp và cùng mã bản cài, nên tải lại cùng bộ vẫn có tên ZIP và tên tệp bên trong mới.
+
+Bộ đếm lưu trên máy trong IndexedDB của cùng hồ sơ Studio, giữ khi đóng/mở lại. Transaction read/write cấp cả dải số một lần, tránh hai tab lấy trùng số. Dùng số nguyên BigInt lưu dưới dạng chuỗi, không mất chính xác ở số lớn. Mã ngẫu nhiên của hồ sơ phân biệt thư mục cài mới hoặc hồ sơ đã xóa dữ liệu; chúng bắt đầu bộ đếm riêng nhưng tránh dùng lại tên của bản cài khác. Nếu hủy tải, số đã cấp không được dùng lại.
+
+Không cần nhập số hay bấm xác nhận thêm. Nút Tải tất cả vẫn là một lần bấm tải một ZIP; thông báo hiện dải số của lượt vừa tải. Đổi tên không gọi lại Muse hoặc sửa nội dung tệp.
+
+## Một lần bấm tải toàn bộ
+
+Bấm **Tải tất cả (10/10)** để tải một tệp ZIP chứa đủ 10 kết quả đang chọn, mỗi ô một tệp. Giải nén để xem các tệp được đánh số liên tục, kèm số cảnh và mã bản cài (video giữ đuôi định dạng thực). Không cần bấm tải từng ô hay cho phép 10 lượt tải riêng. Chưa đủ 10 kết quả thì nút vẫn tải các ô đã có kết quả và giữ đúng số cảnh, ví dụ hai tệp mới có `scene-02` và `scene-07`, cùng hai số tải tiếp theo.
 
 Trong lúc chuẩn bị, nút hiện **Đang đóng gói ZIP…**. Ảnh được chuẩn hóa PNG thật, video giữ nguyên byte. ZIP dùng định dạng chuẩn, có CRC, không yêu cầu mật khẩu. Việc tải không gọi Muse, không tạo lại nội dung và không tự gửi lại prompt. Các nút tải riêng và tải một bản trong lịch sử vẫn còn.
 

@@ -1,4 +1,4 @@
-# Muse AI Studio 1.4.9 · Bản Windows đầy đủ
+# Muse AI Studio 1.4.10 · Bản Windows đầy đủ
 
 [Bản Windows x64 đầy đủ](Muse-AI-Studio-Windows-x64.zip) · [Mã nguồn đầy đủ](Muse-Video-Workstation.zip) · [Hướng dẫn](muse-video-studio/README.md)
 
@@ -7,9 +7,11 @@
 3. Đăng nhập Muse ngay trong tool, bấm **← Về Studio** rồi **Kiểm tra phiên**.
 4. Nhập prompt hoặc TXT/SRT, chọn ảnh/video, bấm **TẠO 10 ẢNH / VIDEO**.
 
-Không chép `.data`, `.env`, `node_modules` hoặc tệp chương trình từ bản cũ. Gói mới có runtime và các thư viện cần thiết; tạo hồ sơ đăng nhập mới khi chạy. Thanh trên và tiêu đề cửa sổ hiện **1.4.9**.
+Không chép `.data`, `.env`, `node_modules` hoặc tệp chương trình từ bản cũ. Gói mới có runtime và các thư viện cần thiết; tạo hồ sơ đăng nhập mới khi chạy. Thanh trên và tiêu đề cửa sổ hiện **1.4.10**.
 
-Bản 1.4.9 đổi **Tải tất cả** thành một lần bấm tải **một tệp ZIP** chứa các kết quả đang chọn trong các ô. Đủ 10 sẽ có đủ 10 tệp; chưa đủ thì tải phần đã hoàn tất với đúng số cảnh. Ảnh trong ZIP là PNG thật, video giữ nguyên định dạng. Không cần bấm tải từng ô.
+Bản 1.4.10 thêm **số thứ tự tải tự tăng**, dùng chung cho tải riêng, lịch sử và các tệp trong ZIP. Bộ đầu 1–10, bộ sau 11–20; tiếp tục qua 1.000 và lớn hơn, giữ khi mở lại cùng hồ sơ. Tên ZIP cũng ghi dải số; mã riêng của bản cài tránh trùng với tệp từ hồ sơ khác. Không cần nhập số hoặc xác nhận thêm.
+
+**Tải tất cả** vẫn là một lần bấm tải **một tệp ZIP** chứa các kết quả đang chọn trong các ô. Đủ 10 sẽ có đủ 10 tệp; chưa đủ thì tải phần đã hoàn tất với đúng số cảnh. Ảnh trong ZIP là PNG thật, video giữ nguyên định dạng. Không cần bấm tải từng ô.
 
 Giữ **Tạo/Dừng riêng từng ô**, cho phép thêm cảnh khi ô khác đang chạy. Phần **Kết quả đã lưu** giữ các ảnh/video trước trên máy, gồm thời gian và prompt; bấm chọn để xem, tải hoặc xóa từng bản. Đóng/mở lại cùng hồ sơ vẫn giữ kết quả.
 
