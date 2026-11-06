@@ -10,10 +10,7 @@ if code=='vi':
  rows=[{**c,'source_text':c['text'],'text':curation['vi'][str(c['id'])]} for c in master['cues']]
 else:
  cached=out/(code+'.json')
- result=subprocess.run(['gh','release','download','siberia-2536-production-v1','--repo',os.environ['GITHUB_REPOSITORY'],
-  '--pattern',code+'.json','--dir',str(out),'--clobber'],capture_output=True,text=True)
- if result.returncode:
-  subprocess.run([sys.executable,str(base/'translate_llm.py'),'--language',code,'--no-upload'],check=True)
+ subprocess.run([sys.executable,str(base/'translate_web.py'),code],check=True)
  rows=json.loads(cached.read_text())
  assert len(rows)==len(master['cues'])
  for source,row in zip(master['cues'],rows):
@@ -30,7 +27,7 @@ srt='\n\n'.join(str(c['id'])+'\n'+stamp(c['start_ms'])+' --> '+stamp(c['end_ms']
 meta={'master_timeline_sha256':hashlib.sha256((base/'master_timeline.json').read_bytes()).hexdigest(),
  'narration_srt_sha256':hashlib.sha256(srt.encode()).hexdigest(),'curation_sha256':hashlib.sha256((base/'curated_cues.json').read_bytes()).hexdigest(),
  'curated_cue_ids':list(curation.get(code,{})),
- 'translation_status':'Vietnamese wording revised in all 59 cues' if code=='vi' else 'Model-assisted translation with targeted scientific passage corrections; native-speaker review remains recommended',
+ 'translation_status':'Vietnamese wording revised in all 59 cues' if code=='vi' else 'Public web translation of the original script, with clarified technical English and targeted scientific passage corrections; native-speaker review remains recommended',
  'source_timeline_verified':True}
 (out/(code+'-text-review.json')).write_text(json.dumps(meta,ensure_ascii=False,indent=2),encoding='utf-8')
 print('Prepared',code,59,'timed paragraphs;',len(curation.get(code,{})),'reviewed cue replacements',flush=True)

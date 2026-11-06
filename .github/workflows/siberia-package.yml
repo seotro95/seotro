@@ -26,6 +26,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Install checksum-pinned FFmpeg for the integration checks
+        run: python siberia-production/install_ffmpeg.py
       - name: Check actual transition frames, timed audio and final mixing
         run: node siberia-production/test_production.mjs
       - name: Assemble and upload the production kit
