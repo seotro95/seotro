@@ -2,6 +2,7 @@
 from pathlib import Path
 from datetime import datetime,timezone
 import hashlib,json,os,shutil,subprocess,zipfile
+from verify_delivery import verify
 
 ROOT=Path(__file__).resolve().parent
 DEST=Path('delivery');DEST.mkdir(exist_ok=True)
@@ -18,6 +19,17 @@ run(['gh','release','download',release,'--repo',repo,'--pattern','en.wav','--pat
 report=json.loads((KIT/'audio'/'en-report.json').read_text())
 assert report['duration_verified'] and report['sync_ok'] and report['duration_report']['error_frames']==0
 assert hashlib.sha256((KIT/'audio'/'en.wav').read_bytes()).hexdigest()==report['audio_sha256']
+request=ROOT/'package-request.json'
+require_all=json.loads(request.read_text()).get('require_all_voices',False) if request.exists() else False
+verified=verify(DEST/'verification',required=require_all)
+for name in ['VOICE_TIMING_VERIFICATION.json','TAI_CAC_GIONG.md']:
+ shutil.copyfile(DEST/'verification'/name,KIT/name)
+ shutil.copyfile(DEST/'verification'/name,DEST/name)
+for track in verified['tracks']:
+ code=track['code']
+ for suffix in ['.srt','.txt','-report.json']:
+  source=DEST/'verification'/(code+suffix)
+  if source.exists():shutil.copyfile(source,KIT/'scripts'/source.name)
 paragraphs=[]
 def stamp(ms):
  s=ms//1000;m,s=divmod(s,60);return f'{m:02}:{s:02}'
@@ -29,6 +41,7 @@ for chapter in master['chapters']:
 status={'assembled_utc':datetime.now(timezone.utc).isoformat(),'reference_sha256':'ba8cf7542ee761b6073ab75167001f11bb86e4c60105ed3440c1581fcefb4cf2',
  'english_wav_sha256':report['audio_sha256'],'duration_seconds':1536,'shot_count':227,
  'muse_media_created_in_this_package':False,'finished_video_included':False,
+ 'verified_voice_languages':verified['verified_languages'],
  'next_step':'Open Muse 1.6.0 on the owner Windows computer, then launch BAT_DAU_VIDEO.cmd.'}
 (KIT/'STATUS.json').write_text(json.dumps(status,ensure_ascii=False,indent=2),encoding='utf-8')
 archive=DEST/'Siberia_25m36_Production_Kit.zip'
@@ -38,7 +51,7 @@ with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=
 for src,name in [(KIT/'PHAN_TICH_VA_QUY_TRINH.md','PHAN_TICH_VA_QUY_TRINH.md'),
  (KIT/'scripts'/'EN_KICH_BAN.md','EN_KICH_BAN.md'),(KIT/'scripts'/'VI_script.txt','VI_script.txt'),
  (KIT/'README_VI.md','HUONG_DAN_TAI_VA_CHAY.md'),(KIT/'SHOT_LIST.csv','SHOT_LIST.csv')]:shutil.copyfile(src,DEST/name)
-assets=[archive,*[DEST/n for n in ['PHAN_TICH_VA_QUY_TRINH.md','EN_KICH_BAN.md','VI_script.txt','HUONG_DAN_TAI_VA_CHAY.md','SHOT_LIST.csv']]]
+assets=[archive,*[DEST/n for n in ['PHAN_TICH_VA_QUY_TRINH.md','EN_KICH_BAN.md','VI_script.txt','HUONG_DAN_TAI_VA_CHAY.md','SHOT_LIST.csv','TAI_CAC_GIONG.md','VOICE_TIMING_VERIFICATION.json']]]
 run(['gh','release','upload',release,'--repo',repo,*map(str,assets),'--clobber'])
 data=json.loads(run(['gh','api','repos/'+repo+'/releases/436895553']))
 checks=[]
