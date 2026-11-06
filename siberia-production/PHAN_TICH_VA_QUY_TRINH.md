@@ -63,6 +63,8 @@ Các lời kể dân gian cần được dẫn bằng những cụm tương ứn
 
 Dò tự động ở ngưỡng chênh cảnh 0,28 cho 151 thời điểm ứng viên; gộp các thời điểm gần nhau còn 129 nhóm. Đây không phải số shot đã được đếm thủ công. Nhiều khoảng chuyển cảnh gần các bội số của 8 giây; một số vùng chuyển động mạnh tạo nhiều ứng viên giả. Nhịp dựng nhìn chung có thời gian để quan sát cảnh, phù hợp video dài.
 
+Đo trên âm thanh gốc: khoảng -15,4 LUFS integrated, LRA 3,3 LU, true peak -0,1 dBTP. Đây là số đo của bản tham chiếu, không phải thông số mặc định để sao chép; bản mới được phối và đo riêng.
+
 Màu sắc thiên về phong cảnh rõ chi tiết: trời xanh, đá tương phản, rừng xanh và cát ấm. Độ tương phản và màu không cần cực đoan để tạo cảm giác điện ảnh.
 
 ## 4. Quy trình tạo ảnh và video bằng Muse 1.6.0

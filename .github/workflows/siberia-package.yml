@@ -1,0 +1,34 @@
+name: Package the Muse production kit
+on:
+  push:
+    branches: [codex/siberia-2536-production]
+    paths:
+      - '.github/workflows/siberia-package.yml'
+      - 'siberia-production/kit/**'
+      - 'siberia-production/test_production.mjs'
+      - 'siberia-production/PHAN_TICH_VA_QUY_TRINH.md'
+      - 'siberia-production/build_delivery.py'
+      - 'siberia-production/package-request.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: siberia-production-package
+  cancel-in-progress: true
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check actual transition frames, timed audio and final mixing
+        run: node siberia-production/test_production.mjs
+      - name: Assemble and upload the production kit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python siberia-production/build_delivery.py
