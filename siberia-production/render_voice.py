@@ -34,24 +34,39 @@ out=Path('rendered')/args.language;out.mkdir(parents=True,exist_ok=True)
 studio=Studio(root,True)
 try:
  studio.settings(1)
- job=studio.start({'op':'render','engine':'local','language':lang,'local_provider':provider,'voice':voice['id'],
-  'threads':2 if engine=='piper' else 3,'chunk_workers':2 if engine=='piper' else 1,
-  'name':args.language+'_25m36.srt','text':(base/'voices'/(args.language+'.srt')).read_text(encoding='utf-8'),
-  'format':'srt','speed':1.0 if args.language=='en' else .95,'style':'narration','expressive':False,'emphasis':False,
-  'chunk_size':240,'use_cache':False,'timing_mode':'exact'})
- ident=job['id'];last=-1
- while True:
-  item=studio.jobs[ident];pct=int(item.get('progress',0)*100)
-  if pct//10!=last//10:print(args.language,item['status'],item.get('stage'),pct,'%',flush=True);last=pct
-  if item['status'] in {'done','error','cancelled','interrupted'}:break
-  time.sleep(1)
- if item['status']!='done':raise RuntimeError(item.get('error'))
- folder=root/'outputs'/ident
- with wave.open(str(folder/'part-0001.wav')) as wav:
-  assert wav.getnchannels()==1 and wav.getsampwidth()==2
-  assert wav.getframerate()==48000 and wav.getnframes()==73728000
- report=json.loads((folder/'report.json').read_text());assert report['duration_verified'] and report['sync_ok']
- assert report['sync_report']['error_frames']==0 and len(report['sync_report']['cues'])==59
+ speed=1.0 if args.language=='en' else .95
+ attempts=[]
+ for attempt in range(3):
+  job=studio.start({'op':'render','engine':'local','language':lang,'local_provider':provider,'voice':voice['id'],
+   'threads':2 if engine=='piper' else 3,'chunk_workers':2 if engine=='piper' else 1,
+   'name':args.language+'_25m36.srt','text':(base/'voices'/(args.language+'.srt')).read_text(encoding='utf-8'),
+   'format':'srt','speed':speed,'style':'narration','expressive':False,'emphasis':False,
+   'chunk_size':240,'use_cache':attempt>0,'timing_mode':'exact'})
+  ident=job['id'];last=-1
+  while True:
+   item=studio.jobs[ident];pct=int(item.get('progress',0)*100)
+   if pct//10!=last//10:print(args.language,item['status'],item.get('stage'),pct,'%',flush=True);last=pct
+   if item['status'] in {'done','error','cancelled','interrupted'}:break
+   time.sleep(1)
+  if item['status']!='done':raise RuntimeError(item.get('error'))
+  folder=root/'outputs'/ident
+  with wave.open(str(folder/'part-0001.wav')) as wav:
+   assert wav.getnchannels()==1 and wav.getsampwidth()==2
+   assert wav.getframerate()==48000 and wav.getnframes()==73728000
+  report=json.loads((folder/'report.json').read_text());assert report['duration_verified'] and report['sync_ok']
+  assert report['sync_report']['error_frames']==0 and len(report['sync_report']['cues'])==59
+  cues=report['sync_report']['cues']
+  padding=max(c['padding_frames']/48000 for c in cues)
+  attempts.append({'speed':speed,'maximum_end_padding_seconds':padding})
+  if padding<=2:break
+  minimum_fraction=min(c['speech_frames']/(c['end_frame']-c['start_frame']) for c in cues)
+  maximum_tempo=max(c['tempo'] for c in cues)
+  revised=max(.5,speed*minimum_fraction*.97,speed*maximum_tempo/1.96)
+  if revised>=speed*.98:break
+  speed=revised
+  print('Reducing avoidable cue-end silence; next base speed',speed,flush=True)
+ if padding>2:raise RuntimeError('Cue-end padding exceeds two seconds; the track needs a narration adjustment')
+ report['pacing_attempts']=attempts
  studio.exports.start(ident)
  while studio.jobs[ident].get('mp3_status') not in {'done','error','cancelled','interrupted'}:time.sleep(1)
  if studio.jobs[ident].get('mp3_status')!='done':raise RuntimeError(studio.jobs[ident].get('mp3_error'))

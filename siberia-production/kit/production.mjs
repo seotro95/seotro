@@ -100,27 +100,33 @@ export async function museStatus(raw) {
 }
 
 /** A request is recorded before submission. Ambiguous failures never auto-resubmit. */
-export async function generate(plan,{baseURL,limit=Infinity,retryShot}={}) {
+export async function generate(plan,{baseURL,limit=Infinity,retryShot,root=ROOT}={}) {
  const {base,value}=await museStatus(baseURL);
  if(value.busy)throw Error('Muse is busy. Finish its current request before starting this job.');
  if(value.transport==='browser'&&!value.accounts.find(a=>a.id===1)?.authenticated)throw Error('Open Muse 01, log in and click its session check first.');
  const {ffprobe}=await tools();
- const stateFile=path.join(ROOT,'generation-state.json');
+ const stateFile=path.join(root,'generation-state.json');
  const state=existsSync(stateFile)?await json(stateFile):{version:1,shots:{}};
- const media=path.join(ROOT,'media');await fs.mkdir(media,{recursive:true});
+ const media=path.join(root,'media');await fs.mkdir(media,{recursive:true});
  let created=0;
  for(let index=0;index<plan.shots.length;index++){
   const shot=plan.shots[index],key=idFile(shot.id),prior=state.shots[key];
-  if(prior?.status==='done'){
-   if(!prior.file||!existsSync(path.join(ROOT,prior.file)))throw Error('Completed file is missing for shot '+key);
-   if(await digest(path.join(ROOT,prior.file))!==prior.sha256)throw Error('Saved media changed for shot '+key+'; inspect it before continuing.');
+  const promptHash=createHash('sha256').update(shot.prompt).digest('hex');
+  if(prior?.status==='done'&&Number(retryShot)!==shot.id){
+   if(!prior.file||!existsSync(path.join(root,prior.file)))throw Error('Completed file is missing for shot '+key);
+   if(await digest(path.join(root,prior.file))!==prior.sha256)throw Error('Saved media changed for shot '+key+'; inspect it before continuing.');
+   if(prior.prompt_sha256!==promptHash)throw Error('The prompt changed for completed shot '+key+'. To deliberately replace it use --retry-shot '+shot.id);
    continue;
   }
   if(prior&&prior.status!=='done'&&Number(retryShot)!==shot.id)throw Error('Shot '+key+' has an unresolved submission. Check Muse history first. To deliberately resubmit only this shot use: generate --retry-shot '+shot.id);
   if(created>=limit)break;
   const request={accountId:1,accountMode:'single',batchId:randomUUID(),sceneId:((shot.id-1)%10)+1,prompt:shot.prompt,
    aspectRatio:'16:9',resolution:plan.requested_resolution,model:plan.requested_model,duration:10,sourceMode:'text',characterLock:true};
-  state.shots[key]={status:'submitting',submitted_at:new Date().toISOString(),prompt_sha256:createHash('sha256').update(shot.prompt).digest('hex')};
+  if(prior?.file&&existsSync(path.join(root,prior.file))){
+   const history=path.join(media,'history');await fs.mkdir(history,{recursive:true});
+   await fs.copyFile(path.join(root,prior.file),path.join(history,key+'-'+Date.now()+path.extname(prior.file)));
+  }
+  state.shots[key]={status:'submitting',submitted_at:new Date().toISOString(),prompt_sha256:promptHash};
   await save(stateFile,state);
   console.log('Muse shot '+shot.id+'/'+plan.shots.length+' — '+shot.chapter);
   try {
@@ -129,7 +135,7 @@ export async function generate(plan,{baseURL,limit=Infinity,retryShot}={}) {
    if(!response.ok)throw Error(String(result.error||('HTTP '+response.status)));
    const extension={'video/mp4':'.mp4','video/webm':'.webm','video/quicktime':'.mov'}[result.mimeType];
    if(!extension||typeof result.base64!=='string'||!result.base64.length)throw Error('No valid video file in Muse response.');
-   const relative='media/'+key+extension,file=path.join(ROOT,relative);
+   const relative='media/'+key+extension,file=path.join(root,relative);
    const bytes=Buffer.from(result.base64,'base64');if(bytes.length<1000)throw Error('Muse returned an unexpectedly small video.');
    await fs.writeFile(file+'.part',bytes);await fs.rename(file+'.part',file);
    // Record receipt before media verification, so failed validation cannot lose the result.
@@ -258,7 +264,7 @@ export async function mixAudio({voice,score,output,seconds,ffmpeg,root=ROOT}) {
  await fs.unlink(raw);return l;
 }
 
-export async function render(plan,{voiceCode='en'}={}) {
+export async function render(plan,{voiceCode='en',includeSubtitles=false}={}) {
  const {ffmpeg,ffprobe}=await tools();
  const voice=path.join(ROOT,'audio',voiceCode+'.wav');
  if(!existsSync(voice))throw Error('Download '+voiceCode+'.wav from the draft GitHub Release into the audio folder first.');
@@ -294,8 +300,8 @@ export async function render(plan,{voiceCode='en'}={}) {
  const inputLoudness=await mixAudio({voice,score,output:mix,seconds:plan.duration_seconds,ffmpeg});
  const subtitle=path.join(ROOT,'scripts',voiceCode+'.srt'),output=path.join(ROOT,'Siberia_'+voiceCode.toUpperCase()+'_25m36.mp4');
  const args=['-hide_banner','-loglevel','error','-y','-i',picture,'-i',mix];
- if(existsSync(subtitle))args.push('-i',subtitle);
- args.push('-map','0:v:0','-map','1:a:0');if(existsSync(subtitle))args.push('-map','2:0','-c:s','mov_text');
+ if(includeSubtitles&&existsSync(subtitle))args.push('-i',subtitle);
+ args.push('-map','0:v:0','-map','1:a:0');if(includeSubtitles&&existsSync(subtitle))args.push('-map','2:0','-c:s','mov_text','-disposition:s:0','0');
  args.push('-c:v','copy','-c:a','aac','-b:a','192k','-ar','48000','-t',String(plan.duration_seconds),'-movflags','+faststart',output);
  await command(ffmpeg,args);
  const info=await probe(output,ffprobe),video=info.streams.find(s=>s.codec_type==='video');
@@ -323,7 +329,7 @@ async function main(){
   await verifyWav(path.join(ROOT,'audio','en.wav'),plan.duration_seconds,t.ffprobe);console.log('English WAV has exactly 73,728,000 samples.');
  }else if(operation==='score')await createScore(path.join(ROOT,'audio','original-score.wav'),plan.duration_seconds,(await json(path.join(ROOT,'scripts','master_timeline.json'))).chapters);
  else if(operation==='generate')await generate(plan,{baseURL,limit:Number(argument('--limit',Infinity)),retryShot:argument('--retry-shot',undefined)});
- else if(operation==='render')await render(plan,{voiceCode:argument('--voice','en')});
+ else if(operation==='render')await render(plan,{voiceCode:argument('--voice','en'),includeSubtitles:process.argv.includes('--subtitles')});
  else if(operation==='all'){await generate(plan,{baseURL});await render(plan);}
  else throw Error('Unknown command: '+operation);
 }

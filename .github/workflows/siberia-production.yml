@@ -4,7 +4,6 @@ on:
     branches: [codex/siberia-2536-production]
     paths:
       - 'siberia-production/voices/*.srt'
-      - 'siberia-production/render_voice.py'
       - '.github/workflows/siberia-production.yml'
   workflow_dispatch:
 permissions:
@@ -67,8 +66,7 @@ jobs:
           cache: pip
           cache-dependency-path: melo-source/melo-viet-local/fast-lock.txt
       - run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg
+          python siberia-production/install_ffmpeg.py
           python -m pip install --disable-pip-version-check -r melo-source/melo-viet-local/fast-lock.txt
       - name: Render, measure and upload owner-visible draft files
         env:

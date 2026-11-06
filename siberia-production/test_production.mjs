@@ -4,7 +4,8 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {spawn} from 'node:child_process';
-import {validatePlan,localURL,command,tools,probe,renderClip,createScore,mixAudio,verifyWav} from './kit/production.mjs';
+import http from 'node:http';
+import {validatePlan,localURL,command,tools,probe,renderClip,createScore,mixAudio,verifyWav,generate} from './kit/production.mjs';
 const root=await fs.mkdtemp(path.join(os.tmpdir(),'siberia-integration-'));
 const {ffmpeg,ffprobe}=await tools();
 const colors=['red','blue','green'];
@@ -38,3 +39,32 @@ await assert.rejects(()=>verifyWav(voice,7,ffprobe));
 await mixAudio({voice,score,output:path.join(root,'mix.wav'),seconds:6,ffmpeg,root});
 const mix=await probe(path.join(root,'mix.wav'),ffprobe);assert.equal(mix.streams[0].duration_ts,288000);
 console.log('PASS: contiguous frames; actual dissolve pixels; light leak and labels; exact voice length; background mix. Test fixtures:',root);
+// Exercise receipt, byte verification and interruption without an actual paid Muse request.
+const media=await fs.readFile(path.join(root,'source0.mp4'));
+let submissions=0,fail=false;
+const server=http.createServer(async(req,res)=>{
+ res.setHeader('Content-Type','application/json');
+ if(req.url==='/api/status'){res.end(JSON.stringify({museConfigured:true,transport:'browser',accounts:[{id:1,authenticated:true}],busy:false}));return;}
+ assert.equal(req.method,'POST');assert.equal(req.url,'/api/video');
+ let body='';for await(const part of req)body+=part;
+ const data=JSON.parse(body);assert.equal(data.accountId,1);assert.equal(data.model,'Omni 1.1 Flash');
+ assert.equal(data.duration,10);assert.equal(data.sourceMode,'text');assert.equal(data.aspectRatio,'16:9');
+ assert.match(data.batchId,/^[a-f0-9-]{36}$/i);assert(data.sceneId>=1&&data.sceneId<=10);
+ submissions++;
+ if(fail){res.statusCode=502;res.end(JSON.stringify({error:'TEST ambiguous provider response'}));return;}
+ res.end(JSON.stringify({base64:media.toString('base64'),mimeType:'video/mp4',metadata:{width:320,height:180,duration:3}}));
+});
+await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+const baseURL='http://127.0.0.1:'+server.address().port;
+const p={fps:30,width:1920,height:1080,requested_model:'Omni 1.1 Flash',requested_resolution:'1080p',
+ shots:[{...shots[0],prompt:'TEST ONLY synthetic red sample',chapter:'TEST ONLY'}]};
+try{
+ const good=path.join(root,'generation-good');
+ await generate(p,{root:good,baseURL});await generate(p,{root:good,baseURL});
+ assert.equal(submissions,1,'Completed media must not be submitted twice');
+ fail=true;const bad=path.join(root,'generation-uncertain');
+ await assert.rejects(()=>generate(p,{root:bad,baseURL}));
+ await assert.rejects(()=>generate(p,{root:bad,baseURL}));assert.equal(submissions,2,'An ambiguous failure must not auto-resubmit');
+ fail=false;await generate(p,{root:bad,baseURL,retryShot:1});assert.equal(submissions,3);
+ console.log('PASS: Muse request contract, successful resume, ambiguous failure stop and explicit one-shot retry.');
+}finally{server.close();server.closeAllConnections();}

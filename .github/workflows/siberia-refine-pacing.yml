@@ -1,0 +1,68 @@
+name: Refine narration pacing without long cue-end pauses
+on:
+  push:
+    branches: [codex/siberia-2536-production]
+    paths:
+      - 'siberia-production/pacing-request.json'
+permissions:
+  contents: write
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      languages: ${{ steps.plan.outputs.languages }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - id: plan
+        run: |
+          python - <<'PY'
+          import json,os
+          r=json.load(open('siberia-production/pacing-request.json'))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('languages='+json.dumps(r['languages'])+'\n')
+          PY
+  refine:
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        language: ${{ fromJSON(needs.plan.outputs.languages) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reuse the finalized text with the common cue timestamps
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python siberia-production/load_existing_voice_script.py '${{ matrix.language }}'
+      - uses: actions/checkout@v4
+        with:
+          ref: 4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043
+          path: melo-source
+          sparse-checkout: melo-viet-local
+          persist-credentials: false
+      - name: Install the owner's pinned Melo backend and verified FFmpeg
+        run: |
+          python siberia-production/install_ffmpeg.py
+          python -m pip install --disable-pip-version-check --timeout 45 -r melo-source/melo-viet-local/fast-lock.txt
+      - name: Fit narration naturally across every paragraph slot
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONUTF8: '1'
+          OPENBLAS_NUM_THREADS: '1'
+          OMP_NUM_THREADS: '2'
+        run: python siberia-production/render_voice.py '${{ matrix.language }}'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pacing-${{ matrix.language }}
+          path: rendered/${{ matrix.language }}/
+          retention-days: 7
+          if-no-files-found: ignore
