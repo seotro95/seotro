@@ -27,8 +27,9 @@ else:
  candidates.sort(key=lambda v:({'Male':0,'Female':1,'Unknown':2}.get(v['gender'],3),0 if v['quality'] in {'medium','high'} else 1))
  voice=candidates[0];record=next(m for m in catalog() if m['id']==voice['id'].split(':')[1])
  ensure_model(record,False);engine='piper'
-envbin=root/'envs'/engine/'bin';envbin.mkdir(parents=True,exist_ok=True)
-(envbin/'python').symlink_to(sys.executable)
+for runtime_engine in {'piper','multi'}:
+ envbin=root/'envs'/runtime_engine/'bin';envbin.mkdir(parents=True,exist_ok=True)
+ if not (envbin/'python').exists():(envbin/'python').symlink_to(sys.executable)
 out=Path('rendered')/args.language;out.mkdir(parents=True,exist_ok=True)
 studio=Studio(root,True)
 try:
