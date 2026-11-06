@@ -60,6 +60,12 @@ try:
  report['selected_voice_metadata']=voice;report['source_commit']='4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043'
  report['script_status']='Original English narration / localized translation; not a source-video transcription'
  report['audio_sha256']=hashlib.sha256((out/(args.language+'.wav')).read_bytes()).hexdigest()
+ report['master_timeline_sha256']=hashlib.sha256((base/'master_timeline.json').read_bytes()).hexdigest()
+ report['narration_srt_sha256']=hashlib.sha256((base/'voices'/(args.language+'.srt')).read_bytes()).hexdigest()
+ review=Path('translated')/(args.language+'-text-review.json')
+ if review.exists():report['text_review']=json.loads(review.read_text())
+ for extra in [Path('translated')/(args.language+suffix) for suffix in ['.json','.txt','-text-review.json']]:
+  if extra.exists():shutil.copyfile(extra,out/extra.name)
  (out/(args.language+'-report.json')).write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
 finally:studio.close()
 subprocess.run(['gh','release','upload','siberia-2536-production-v1',*[str(f) for f in out.iterdir()],

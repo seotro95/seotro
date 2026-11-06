@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "settings": {
+    "accountMode": "single",
+    "model": "Omni 1.1 Flash",
+    "aspectRatio": "16:9",
+    "duration": 10,
+    "resolution": "1080p",
+    "imageResolution": "2k",
+    "output": "video",
+    "videoInput": "text",
+    "autoSync": true,
+    "r2v": true,
+    "modifier": "",
+    "mode": "muse"
+  },
+  "scenes": [
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. distant stepped plateau beside a lake. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. wide Putorana flat-topped basalt plateau. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. long dark cliff interrupted by a canyon. very slow forward dolly. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. waterfall dropping from plateau edge. gentle lateral camera move. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. aerial view of plateau blocks divided by valleys. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. close stacked basalt strata at a cliff. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. broad stepped plateau above a deep canyon. very slow forward dolly. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. cold blue elongated lake beneath basalt cliffs. gentle lateral camera move. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. river finding a route through a plateau valley. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. distant waterfall as a thin white line. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    }
+  ]
+}

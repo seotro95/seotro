@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "settings": {
+    "accountMode": "single",
+    "model": "Omni 1.1 Flash",
+    "aspectRatio": "16:9",
+    "duration": 10,
+    "resolution": "1080p",
+    "imageResolution": "2k",
+    "output": "image",
+    "videoInput": "text",
+    "autoSync": true,
+    "r2v": true,
+    "modifier": "",
+    "mode": "muse"
+  },
+  "scenes": [
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. Por-Bazhyn rectangular ruins on a lake island. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. high oblique Por-Bazhyn rectangular ruined enclosure on Tere-Khol island. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. low ruined earthen wall with mountains beyond. very slow forward dolly. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. overhead geometric layout surrounded by open water. gentle lateral camera move. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. wide island view emphasizing isolation. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. close aged timber and weathered earth wall at archaeological ruins. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. tree trunk cross-section with natural annual rings. very slow forward dolly. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. careful gloved hands examining wood without labels. gentle lateral camera move. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. Por-Bazhyn lake island in soft evening light. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. macro annual tree rings in an old timber sample. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    }
+  ]
+}

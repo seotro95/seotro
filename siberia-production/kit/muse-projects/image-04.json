@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "settings": {
+    "accountMode": "single",
+    "model": "Omni 1.1 Flash",
+    "aspectRatio": "16:9",
+    "duration": 10,
+    "resolution": "1080p",
+    "imageResolution": "2k",
+    "output": "image",
+    "videoInput": "text",
+    "autoSync": true,
+    "r2v": true,
+    "modifier": "",
+    "mode": "muse"
+  },
+  "scenes": [
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. high wide Lake Baikal winter plain. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. top-down immense dark ice ring surrounded by pale lake ice. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. close low view of cracked blue lake ice without people. very slow forward dolly. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. close low view of cracked blue lake ice without people. gentle lateral camera move. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. high view revealing the whole ring. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. dark ice ring from above. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. clear water seen through a small area of transparent ice. very slow forward dolly. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Clear restrained scientific schematic animation; no labels or numbers. DIAGRAM of a slow circulating underwater eddy beneath a flat ice sheet. gentle lateral camera move. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. high naturalistic view of ring and surrounding lake. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Clear restrained scientific schematic animation; no labels or numbers. DIAGRAM top view of an underwater eddy with a calm centre and faster outer circulation. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    }
+  ]
+}

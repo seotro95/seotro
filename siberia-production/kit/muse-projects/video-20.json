@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "settings": {
+    "accountMode": "single",
+    "model": "Omni 1.1 Flash",
+    "aspectRatio": "16:9",
+    "duration": 10,
+    "resolution": "1080p",
+    "imageResolution": "2k",
+    "output": "video",
+    "videoInput": "text",
+    "autoSync": true,
+    "r2v": true,
+    "modifier": "",
+    "mode": "muse"
+  },
+  "scenes": [
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. peatland horizon with low vegetation. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. close sedge and still dark water. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. close dark peat soil and shallow water. very slow forward dolly. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. open bog with low moss and sedge. gentle lateral camera move. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. groundwater-fed fen-like reeds and pools, generic ecological illustration. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. forested mire with scattered wet-tolerant trees. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. vast Vasyugan wetland with no UNESCO logo. very slow forward dolly. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. intricate pools and forest islands. gentle lateral camera move. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. low peatland horizon. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. wide quiet water and vegetation without signs or certificates. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    }
+  ]
+}

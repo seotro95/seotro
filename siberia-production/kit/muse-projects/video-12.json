@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "settings": {
+    "accountMode": "single",
+    "model": "Omni 1.1 Flash",
+    "aspectRatio": "16:9",
+    "duration": 10,
+    "resolution": "1080p",
+    "imageResolution": "2k",
+    "output": "video",
+    "videoInput": "text",
+    "autoSync": true,
+    "r2v": true,
+    "modifier": "",
+    "mode": "muse"
+  },
+  "scenes": [
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. forested slope with pale Patomskiy rock cone. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. wide Patomskiy pale rubble cone within dense taiga. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. aerial ring-like summit and central rise. very slow forward dolly. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. medium close pale fractured limestone debris. gentle lateral camera move. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. medium close pale fractured limestone debris. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. wide surrounding forest showing the localized cone. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. Patomskiy cone against forested hills. very slow forward dolly. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. generic geological field notebook beside rock samples, no readable writing. gentle lateral camera move. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. gloved hand inspecting pale angular rubble. slow aerial drift. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    },
+    {
+      "prompt": "Naturalistic cinematic geography illustration, restrained documentary colour, detailed rock and water textures, plausible terrain and vegetation, physically coherent perspective, 16:9 landscape composition. One continuous shot. No titles, captions, logos, watermarks, fabricated instruments, portals, aliens, or impossible geology. This is an illustrative visual, not proof of a particular scientific measurement. side view showing cone as a raised landform. locked camera with only natural environmental movement. Natural soft daylight; preserve the defining terrain rather than making a generic fantasy landscape.",
+      "enabled": true
+    }
+  ]
+}

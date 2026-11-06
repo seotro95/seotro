@@ -74,7 +74,7 @@ def stamp(ms):
  return f'{hours:02}:{minutes:02}:{seconds:02},{millis:03}'
 
 def main():
- parser=argparse.ArgumentParser();parser.add_argument('--language',choices=list(TARGETS));parser.add_argument('--probe',action='store_true');args=parser.parse_args()
+ parser=argparse.ArgumentParser();parser.add_argument('--language',choices=list(TARGETS));parser.add_argument('--probe',action='store_true');parser.add_argument('--no-upload',action='store_true');args=parser.parse_args()
  process,log=prepare();out=Path('translated');out.mkdir(exist_ok=True)
  try:
   if args.probe:
@@ -99,7 +99,8 @@ def main():
    (out/(args.language+'.txt')).write_text('\n\n'.join(c['text'] for c in rows),encoding='utf-8')
  finally:
   process.terminate();process.wait(timeout=30);log.close()
- subprocess.run(['gh','release','upload','siberia-2536-production-v1',*[str(f) for f in out.iterdir()],
-  '--repo',os.environ['GITHUB_REPOSITORY'],'--clobber'],check=True)
+ if not args.no_upload:
+  subprocess.run(['gh','release','upload','siberia-2536-production-v1',*[str(f) for f in out.iterdir()],
+   '--repo',os.environ['GITHUB_REPOSITORY'],'--clobber'],check=True)
 
 if __name__=='__main__':main()
