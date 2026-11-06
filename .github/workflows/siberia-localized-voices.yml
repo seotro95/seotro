@@ -1,0 +1,60 @@
+name: Translate and render 16 synchronized voice tracks
+on:
+  push:
+    branches: [codex/siberia-2536-production]
+    paths:
+      - '.github/workflows/siberia-localized-voices.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  localized:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        language: [vi, es, fr, ja, ko, de, it, pt, nl, pl, sv, da, fi, 'no', cs, hi]
+    concurrency:
+      group: siberia-localized-${{ matrix.language }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Translate original script with preserved paragraph IDs and scientific terminology
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONUTF8: '1'
+        run: python siberia-production/translate_llm.py --language '${{ matrix.language }}'
+      - uses: actions/checkout@v4
+        with:
+          ref: 4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043
+          path: melo-source
+          sparse-checkout: melo-viet-local
+          persist-credentials: false
+      - name: Install pinned Melo 1.3.1 CPU readers
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install --disable-pip-version-check -r melo-source/melo-viet-local/fast-lock.txt
+      - name: Create and verify the full 25m36s voice track
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONUTF8: '1'
+          OPENBLAS_NUM_THREADS: '1'
+          OMP_NUM_THREADS: '2'
+        run: python siberia-production/render_voice.py '${{ matrix.language }}'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: localized-siberia-${{ matrix.language }}
+          path: |
+            translated/
+            rendered/${{ matrix.language }}/
+          retention-days: 7
+          if-no-files-found: ignore
