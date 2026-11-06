@@ -8,6 +8,7 @@ on:
       - 'siberia-production/test_production.mjs'
       - 'siberia-production/PHAN_TICH_VA_QUY_TRINH.md'
       - 'siberia-production/build_delivery.py'
+      - 'siberia-production/verify_delivery.py'
       - 'siberia-production/package-request.json'
   workflow_dispatch:
 permissions:

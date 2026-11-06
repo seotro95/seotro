@@ -6,7 +6,7 @@ Kịch bản mới: **Siberia's Impossible Landscapes: Eleven Places That Defy F
 
 1. Đăng nhập tài khoản chủ kho `seotro95`, mở https://github.com/seotro95/seotro/releases và tìm **Siberia 25:36 — production assets**. Release đang là bản nháp riêng cho chủ kho.
 2. Trong Assets, tải `Siberia_25m36_Production_Kit.zip`, giải nén ra một thư mục bạn có quyền ghi, ví dụ `D:\Siberia`. Tải cả `SHA256SUMS.txt` để kiểm tra nếu cần.
-3. Bộ ZIP có giọng Anh, kịch bản, phân tích, shot list, các dự án Muse và chương trình dựng. Các giọng quốc gia nằm riêng ở Assets: `<mã>.wav`, `<mã>.mp3`, `<mã>.srt` và `<mã>-report.json`. Nếu chưa thấy một mã, bản đó chưa hoàn tất ở thời điểm tải; không coi danh sách dự kiến là tệp đã có.
+3. Bộ ZIP có giọng Anh, kịch bản, phân tích, shot list, các dự án Muse và chương trình dựng. Mở **TAI_CAC_GIONG.html** trong ZIP để có nút tải riêng từng ngôn ngữ. Các tệp cũng nằm ở Assets: `<mã>.wav`, `<mã>.mp3`, `<mã>.srt` và `<mã>-report.json`. Nếu chưa thấy một mã, bản đó chưa hoàn tất ở thời điểm tải; không coi danh sách dự kiến là tệp đã có.
 
 Mã: `en` Anh, `vi` Việt, `es` Tây Ban Nha, `fr` Pháp, `ja` Nhật, `ko` Hàn, `de` Đức, `it` Ý, `pt` Bồ Đào Nha, `nl` Hà Lan, `pl` Ba Lan, `sv` Thụy Điển, `da` Đan Mạch, `fi` Phần Lan, `no` Na Uy, `cs` Séc, `hi` Hindi.
 
