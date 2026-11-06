@@ -1,0 +1,22 @@
+name: Compare scientific translation wording
+on:
+  push:
+    branches: [codex/siberia-2536-production]
+    paths:
+      - '.github/workflows/siberia-service-probe.yml'
+permissions:
+  contents: write
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Translate nonprivate test paragraphs
+        run: python siberia-production/probe_translation_service.py
+      - name: Save comparison
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload siberia-2536-production-v1 service_probe.json --clobber
