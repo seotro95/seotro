@@ -1,1 +1,1 @@
-{"languages": ["da", "no", "pl", "pt", "vi"], "reason": "Reduce measured cue-end padding while preserving all shared cue boundaries"}
+{"languages": ["it"], "reason": "Use the available medium-quality Italian regional voice instead of the x-low preset, with the same final script and cue boundaries."}

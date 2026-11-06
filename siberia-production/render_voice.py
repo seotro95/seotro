@@ -24,7 +24,7 @@ else:
  locales={'es':'es-ES','fr':'fr-FR','de':'de-DE','pt':'pt-PT','it':'it-IT','nl':'nl-NL','pl':'pl-PL','sv':'sv-SE','da':'da-DK','fi':'fi-FI','no':'no-NO','cs':'cs-CZ','hi':'hi-IN','vi':'vi-VN'}
  candidates=[v for v in candidates if v['locale']==locales[args.language]]
  if not candidates:raise RuntimeError('No regional voice found')
- candidates.sort(key=lambda v:({'Male':0,'Female':1,'Unknown':2}.get(v['gender'],3),0 if v['quality'] in {'medium','high'} else 1))
+ candidates.sort(key=lambda v:(0 if v['quality'] in {'medium','high'} else 1,{'Male':0,'Female':1,'Unknown':2}.get(v['gender'],3)))
  voice=candidates[0];record=next(m for m in catalog() if m['id']==voice['id'].split(':')[1])
  ensure_model(record,False);engine='piper'
 for runtime_engine in {'piper','multi'}:
