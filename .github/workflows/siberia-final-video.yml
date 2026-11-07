@@ -1,0 +1,29 @@
+name: Deliver the completed Siberia English video 25m36
+on:
+  push:
+    branches: [codex/siberia-2536-production]
+    paths:
+      - '.github/workflows/siberia-final-video.yml'
+      - 'siberia-production/restore_final_video.py'
+      - 'siberia-production/final-video-export/encrypted-components.json'
+permissions:
+  contents: write
+jobs:
+  deliver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install the authenticated encryption dependency
+        run: python -m pip install cryptography==46.0.3
+      - name: Install checksum-pinned FFmpeg
+        run: python siberia-production/install_ffmpeg.py
+      - name: Restore the edit, verify complete playback, and deliver the MP4
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python siberia-production/restore_final_video.py

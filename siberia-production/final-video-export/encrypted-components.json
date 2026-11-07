@@ -1,0 +1,4079 @@
+{
+  "version": 1,
+  "repo": "seotro95/seotro",
+  "draft_release_id": 437693647,
+  "release_tag": "siberia-final-video-en-2536",
+  "encryption": "AES-256-GCM per component chunk; key held only in private draft release body",
+  "video_filename": "Siberia_EN_FINAL_25m36_720p.mp4",
+  "target_frames": 46080,
+  "fps": 30,
+  "seconds": 1536,
+  "files": [
+    {
+      "name": "audio/EN_FINAL_AAC.m4a",
+      "bytes": 37083183,
+      "sha256": "ec3735de573552da4943f11f62103f26918d6be0b2a0e71efd8921ba552e65d2",
+      "chunks": [
+        {
+          "blob_sha": "080c38e021b8dd11fde9887009bb404d50e10ec7",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "yqLd8sLTaR503YG2"
+        },
+        {
+          "blob_sha": "4707def309d8d8409563e8e926f9d5d0774247f3",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "JXmaX2gEvypD1nuj"
+        },
+        {
+          "blob_sha": "fbc1a65bd4605a12a50e79045787365b50d85fbc",
+          "offset": 4194304,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "u7IcmcUgM2iWUoRn"
+        },
+        {
+          "blob_sha": "90e90a190a00cee1737c42f8b76dc1b00649414d",
+          "offset": 6291456,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "UDQlw6cJaOCEyuDq"
+        },
+        {
+          "blob_sha": "26fbd4cf681f5cdbb04278e167951ffe60a4eb87",
+          "offset": 8388608,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "9Rb5rMWUWe5F1VAM"
+        },
+        {
+          "blob_sha": "9c3ee1ef188c4f8d6936557e639b51269ae0de8c",
+          "offset": 10485760,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "K/xWdsjey99S9xvJ"
+        },
+        {
+          "blob_sha": "6f6b6ab6c8cde12ae8d9a776f2fd70499d376a33",
+          "offset": 12582912,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "5C3Dm9uiG0huWB1j"
+        },
+        {
+          "blob_sha": "9df2bec98f0ccf4d0fca1f76e27a05aa29c7224c",
+          "offset": 14680064,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "U5JDVM4V/7zoF77Y"
+        },
+        {
+          "blob_sha": "2497b068d06ac798312116721307b4d5ee5c4c01",
+          "offset": 16777216,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "lw3DgIcTXm9zJkOQ"
+        },
+        {
+          "blob_sha": "27aad7e2119f438afca2a31e4c1922f494c655b2",
+          "offset": 18874368,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "Fg04ERJEVB8VOo27"
+        },
+        {
+          "blob_sha": "7175353a3b93b27b7e17457433ab9c4046fe9324",
+          "offset": 20971520,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "HqyAAzubipumbNfO"
+        },
+        {
+          "blob_sha": "0365c22dc7811865da60d6493b750f9d134184d4",
+          "offset": 23068672,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "KTPaoPSnM5aYBwUC"
+        },
+        {
+          "blob_sha": "19c046f8bbec843fd75343e67a2c1956f0f51584",
+          "offset": 25165824,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "8R6NOMNEzTy8fbqY"
+        },
+        {
+          "blob_sha": "a32f1de26030a317d4b67c550f147894593c1011",
+          "offset": 27262976,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "00IvGO96T5LntZK2"
+        },
+        {
+          "blob_sha": "37fa73482c516744824e59f6f12f09963e7c0ead",
+          "offset": 29360128,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "ivMl3mSMFD2O7bJN"
+        },
+        {
+          "blob_sha": "2977ceeb1ed5db2f5c10c9682669721d5c77a6db",
+          "offset": 31457280,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "ymZx0Fm4nIB2xqnS"
+        },
+        {
+          "blob_sha": "fd8781f4b7a3ac3d5b31187da266cf8c42ad28ba",
+          "offset": 33554432,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "xu0heBZEa1tUEMZ2"
+        },
+        {
+          "blob_sha": "2bb65c41e66f72073f8ff731c7c4355e992a5ace",
+          "offset": 35651584,
+          "plaintext_bytes": 1431599,
+          "nonce_base64": "vrYo5rSm7KdIHPsp"
+        }
+      ]
+    },
+    {
+      "name": "segments/0001.mp4",
+      "bytes": 1117294,
+      "sha256": "538ab84e3d4a786ad63cb5ff47f3839cc998dbc3ae791fd7556c1ed0f6b8b64b",
+      "chunks": [
+        {
+          "blob_sha": "4a9b46359daa793a0d5eaa475013cc8253fdd482",
+          "offset": 0,
+          "plaintext_bytes": 1117294,
+          "nonce_base64": "ikefDRbStamWwTsK"
+        }
+      ]
+    },
+    {
+      "name": "segments/0002.mp4",
+      "bytes": 1401008,
+      "sha256": "0143163f9c65549b1505ce6a78defbba2ff0bf1f9601b156de81dec485232c96",
+      "chunks": [
+        {
+          "blob_sha": "10c2c3d7778c7eb909fdd8a17685630ef09dc092",
+          "offset": 0,
+          "plaintext_bytes": 1401008,
+          "nonce_base64": "rXkpL9MmhiirMuoJ"
+        }
+      ]
+    },
+    {
+      "name": "segments/0003.mp4",
+      "bytes": 1645374,
+      "sha256": "8c3ddf900cffca08f52ef0a80157d6837763696d8296e333be400a61259899ed",
+      "chunks": [
+        {
+          "blob_sha": "d948fcdb781c7563b545fab99c85b3e2c7af6f67",
+          "offset": 0,
+          "plaintext_bytes": 1645374,
+          "nonce_base64": "QOJobowSMbmQniLJ"
+        }
+      ]
+    },
+    {
+      "name": "segments/0004.mp4",
+      "bytes": 1673963,
+      "sha256": "9f0e543f2497e05ef52b091a32ef5cd0294bb0e97c3a68abd7cb5aa92bc48ed9",
+      "chunks": [
+        {
+          "blob_sha": "9756f896f4342bde7de1aaee6b669f0074a137dd",
+          "offset": 0,
+          "plaintext_bytes": 1673963,
+          "nonce_base64": "sXggCaY46GbuYhsb"
+        }
+      ]
+    },
+    {
+      "name": "segments/0005.mp4",
+      "bytes": 2887286,
+      "sha256": "67aedec1a94333ef31d49c8e34dc3cc40635db9f568a0bad372a555b204301ca",
+      "chunks": [
+        {
+          "blob_sha": "febd5968ed6704d2d3cb0c59faa387792df57377",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "s4vOgcD7pMlev3H6"
+        },
+        {
+          "blob_sha": "27e240e5beba7bd53dea3a5005692a9af1923350",
+          "offset": 2097152,
+          "plaintext_bytes": 790134,
+          "nonce_base64": "dvYi870A3MBe4r96"
+        }
+      ]
+    },
+    {
+      "name": "segments/0006.mp4",
+      "bytes": 4274036,
+      "sha256": "d7cc60c3c60746f86385c9a5c59ae61d3ffc1a0055d19722d8943be510ab0968",
+      "chunks": [
+        {
+          "blob_sha": "3f350cde3e893a4976e0624b7265e0e6244274b4",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "5BA8sq00F+RfXLg/"
+        },
+        {
+          "blob_sha": "8b4820493aced5d1a49cbc7b0ecab1cd2a0f263a",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "RR0X5dWhQwuDL0dO"
+        },
+        {
+          "blob_sha": "56b6e45c82c199ea4d86de516b30248ecc670c31",
+          "offset": 4194304,
+          "plaintext_bytes": 79732,
+          "nonce_base64": "tlKsndPBSEW8U5sk"
+        }
+      ]
+    },
+    {
+      "name": "segments/0007.mp4",
+      "bytes": 2018254,
+      "sha256": "3a5aefe703360975baeca2b195d0ed4cdfc57f4011f48a640983761fd0916d8b",
+      "chunks": [
+        {
+          "blob_sha": "46be4343b7126ae21f1b4746bbbe8fd29b334f03",
+          "offset": 0,
+          "plaintext_bytes": 2018254,
+          "nonce_base64": "5zRjtvTXXWG7Jntg"
+        }
+      ]
+    },
+    {
+      "name": "segments/0008.mp4",
+      "bytes": 2923887,
+      "sha256": "d4b58446255a2da5f2ecc6ab1e3ce1da5632f661f7de5039e57bf3b07d6c6a70",
+      "chunks": [
+        {
+          "blob_sha": "2c430ddf5d14378986c8623055be08c8fbb0cb7f",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "m2DM6GGWj27Uy+H/"
+        },
+        {
+          "blob_sha": "edc448179d698c16b6d6576b5ecc6950d674cecf",
+          "offset": 2097152,
+          "plaintext_bytes": 826735,
+          "nonce_base64": "8VeZxljMUBVv+0jz"
+        }
+      ]
+    },
+    {
+      "name": "segments/0009.mp4",
+      "bytes": 2853988,
+      "sha256": "e4f0e5827e65c9cf9ab2b07402ca8d538344fea0489591ebc14681b075ecc981",
+      "chunks": [
+        {
+          "blob_sha": "6a8af6ad4e536db9a21c9754443ed166c84eae5c",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "XrtrjYdNB0SQL9Ph"
+        },
+        {
+          "blob_sha": "ec4f0097fe5a0fdf168aa9fa17feec982b6ead4e",
+          "offset": 2097152,
+          "plaintext_bytes": 756836,
+          "nonce_base64": "bqZ4BnHft8/19CRb"
+        }
+      ]
+    },
+    {
+      "name": "segments/0010.mp4",
+      "bytes": 2543186,
+      "sha256": "8d1181223d6a9dd09384d2c651be0b8825f9a94855a02caa18098601ad29de75",
+      "chunks": [
+        {
+          "blob_sha": "eb32113abd581e4cdef8af92837db524a21e0ce6",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "C+lgbV0e2e939pWT"
+        },
+        {
+          "blob_sha": "51e72e1d847d464c04b18e0934c50fb2fd30a2bf",
+          "offset": 2097152,
+          "plaintext_bytes": 446034,
+          "nonce_base64": "yaHHxleIjc7Q8DbG"
+        }
+      ]
+    },
+    {
+      "name": "segments/0011.mp4",
+      "bytes": 4168507,
+      "sha256": "95a61317ef61b9a2524a301270c01ad77000da7055cf688dfc70db1d4410b48c",
+      "chunks": [
+        {
+          "blob_sha": "13371307cf9c7f8c4c848023650730b60e256499",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "CM339RBqSzPsoke9"
+        },
+        {
+          "blob_sha": "dcfa1e181116dbbc6a40fccf04b950693a095c5e",
+          "offset": 2097152,
+          "plaintext_bytes": 2071355,
+          "nonce_base64": "wnEIwIBBC8c4/R4q"
+        }
+      ]
+    },
+    {
+      "name": "segments/0012.mp4",
+      "bytes": 2543186,
+      "sha256": "8d1181223d6a9dd09384d2c651be0b8825f9a94855a02caa18098601ad29de75",
+      "chunks": [
+        {
+          "blob_sha": "0b26261b3dbf3f793e71dcb82605043463d4df3c",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "zp2akHL96ws+a8YZ"
+        },
+        {
+          "blob_sha": "aa3194d5050213c075ca9607e67f3a17bd091105",
+          "offset": 2097152,
+          "plaintext_bytes": 446034,
+          "nonce_base64": "q8vU5O3cdRLEf+lG"
+        }
+      ]
+    },
+    {
+      "name": "segments/0013.mp4",
+      "bytes": 4229187,
+      "sha256": "125af064fa843067526ef90104c293ab1f63a0de35c4bb30ae315aead31e89b9",
+      "chunks": [
+        {
+          "blob_sha": "bc09df49720be1a60532510bbc852115b38ebda4",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "3rzT1tsZSsGNtfkk"
+        },
+        {
+          "blob_sha": "fb5d7995c0ae24565b99294d5ed4537b85573089",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "q4MdRWxi/Rx22cLL"
+        },
+        {
+          "blob_sha": "c0661fdac709e1ecc0fc8186f9d620a979086538",
+          "offset": 4194304,
+          "plaintext_bytes": 34883,
+          "nonce_base64": "LADWghh5uvEaZw+F"
+        }
+      ]
+    },
+    {
+      "name": "segments/0014.mp4",
+      "bytes": 1999967,
+      "sha256": "ae52a2716343a6a8392a7f374dd9eb7d1ff58b9c18ff8c5b1ed32a010f8079c6",
+      "chunks": [
+        {
+          "blob_sha": "c929f487f453b16d02a7565df334eaf62aecb5ea",
+          "offset": 0,
+          "plaintext_bytes": 1999967,
+          "nonce_base64": "vh1T0kKsVnjCDBeu"
+        }
+      ]
+    },
+    {
+      "name": "segments/0015.mp4",
+      "bytes": 4895477,
+      "sha256": "cf18ffd8e6a14512897381b301ae3dbb48155b7393fd21bc5db712de29abb06d",
+      "chunks": [
+        {
+          "blob_sha": "5d5df158e1844dc8cc054f5ca310a846faf2e231",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "wfvY4TeEkUnRe1QE"
+        },
+        {
+          "blob_sha": "eaaca0b81436c04c2e982db10de4c38ba2ee6724",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "a9Dy3Nywx5SbphKz"
+        },
+        {
+          "blob_sha": "7213bda173e942805332c8a19f95a539238f1a32",
+          "offset": 4194304,
+          "plaintext_bytes": 701173,
+          "nonce_base64": "R6ImWpnkWoL9erfz"
+        }
+      ]
+    },
+    {
+      "name": "segments/0016.mp4",
+      "bytes": 4632177,
+      "sha256": "48f60fd61ec53b1afb147d001bd20e582117a7ea924db1365f9813cb5ee7ca83",
+      "chunks": [
+        {
+          "blob_sha": "e63214406be2e18aa04292c219613f82a1340322",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "oDmWYG4kmLI5opDE"
+        },
+        {
+          "blob_sha": "7c6a4f2b4f1136e94917168b90b098b97b832f87",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "07mr1t5KxMggMvdI"
+        },
+        {
+          "blob_sha": "e561ae3e7c5c281cbf12064b199a0a996fd879e8",
+          "offset": 4194304,
+          "plaintext_bytes": 437873,
+          "nonce_base64": "a4hkiO38Wv1gd48c"
+        }
+      ]
+    },
+    {
+      "name": "segments/0017.mp4",
+      "bytes": 3909694,
+      "sha256": "3567d84bdb516dde8b9ebea50d3cb051558bb34fbdc2ca54c19ed0a3c25faf32",
+      "chunks": [
+        {
+          "blob_sha": "4692cab4fb9c2b6fd14df989f090f2ae28023fcc",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "XKPdqWrvPj8wJan4"
+        },
+        {
+          "blob_sha": "03b6127379f63ccb743e2c9f4796583c1e130bdf",
+          "offset": 2097152,
+          "plaintext_bytes": 1812542,
+          "nonce_base64": "xiI6XdtvzJXpoO65"
+        }
+      ]
+    },
+    {
+      "name": "segments/0018.mp4",
+      "bytes": 4794639,
+      "sha256": "7d42c29c3d189305620472f1c6974768a5b6efcca631f362ef77a57d2e89b6ff",
+      "chunks": [
+        {
+          "blob_sha": "b2a45c2e609b5a6f156017389bfddf3004e2d3a7",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "wW4jmZMD2t6mQtI8"
+        },
+        {
+          "blob_sha": "665eca320410d2ec54641478a1593c230ef928d5",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "gNfvnU+KlG//XFsM"
+        },
+        {
+          "blob_sha": "e7777aef525ca3f80a7af8dc90dd4ce6ccee26fa",
+          "offset": 4194304,
+          "plaintext_bytes": 600335,
+          "nonce_base64": "Qfx3nge3v5v9tzKn"
+        }
+      ]
+    },
+    {
+      "name": "segments/0019.mp4",
+      "bytes": 3065209,
+      "sha256": "b6593f058b710ea6552f0069968644b5a319093b9614718180bed57700880dc6",
+      "chunks": [
+        {
+          "blob_sha": "51feb12d9a351ea9476e7a871bd9279b1ff19753",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "dSOW1EAmZ6dwW9DF"
+        },
+        {
+          "blob_sha": "f1e03c68bc9a5d89d566b90602a3e7ac2ab0586e",
+          "offset": 2097152,
+          "plaintext_bytes": 968057,
+          "nonce_base64": "JEExhopIDZ06Rhjo"
+        }
+      ]
+    },
+    {
+      "name": "segments/0020.mp4",
+      "bytes": 4623449,
+      "sha256": "27100863273fd7e3a8cb61b716d502a9e7a58b67fa42682f2f3df4ab5be3bb22",
+      "chunks": [
+        {
+          "blob_sha": "49413b9295e7bb7e277175a280e42b3a571dd3bf",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "kSoNr/x3Mdadq+6B"
+        },
+        {
+          "blob_sha": "58fd2e4e9dce99eec5f25093faa8842ab9db2fa0",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "/+K4r9h3dzcOqnJc"
+        },
+        {
+          "blob_sha": "5a1729e8aa11b9f814ec0677b02ab47a40bf4529",
+          "offset": 4194304,
+          "plaintext_bytes": 429145,
+          "nonce_base64": "hUiV9EdD/dZ2mMn9"
+        }
+      ]
+    },
+    {
+      "name": "segments/0021.mp4",
+      "bytes": 4656187,
+      "sha256": "df8e49347a8f62ff1e43c1350c0bc589fcf9b23cdfc2813fea29e1adb1230e72",
+      "chunks": [
+        {
+          "blob_sha": "4eabf2f35e90e2f03553114dfd27749735ba27ca",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "IKC3qbjXAlE0URqV"
+        },
+        {
+          "blob_sha": "d06696f87425a1c329ab1eefe40de16098a22ebd",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "crj/GwusVHu6EbK8"
+        },
+        {
+          "blob_sha": "8be4c709ab3ec588347bc300105171164dd0e1cb",
+          "offset": 4194304,
+          "plaintext_bytes": 461883,
+          "nonce_base64": "DLPfMoWqT6Fc42EY"
+        }
+      ]
+    },
+    {
+      "name": "segments/0022.mp4",
+      "bytes": 3668614,
+      "sha256": "ec4d192d35bf67dccb7291b5f97153a9ee96896a89ea09313778dc0fc3ecc67b",
+      "chunks": [
+        {
+          "blob_sha": "65ec6dd07b999e5d5d4094932cec949d706dcf1c",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "4M4DMm8M0KImZ0eq"
+        },
+        {
+          "blob_sha": "0c5127102a96c77ec36869407e9902af81976dda",
+          "offset": 2097152,
+          "plaintext_bytes": 1571462,
+          "nonce_base64": "dLfdBpLdDEDCGftb"
+        }
+      ]
+    },
+    {
+      "name": "segments/0023.mp4",
+      "bytes": 4320823,
+      "sha256": "7bc7d3401cccbedd1a1250bb1b27f9b21be76f8688622f8b65d64d818d0cf7b2",
+      "chunks": [
+        {
+          "blob_sha": "cae5db3e3b3cdfcf5480d16dcf812e3767b8f2ef",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "hTvXPqZVUJdAgROr"
+        },
+        {
+          "blob_sha": "333432f9928cb598968e279dc6c05fdcb5e5ef30",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "/bU8tL1XR2Xci+h5"
+        },
+        {
+          "blob_sha": "1c2d47cc4a42bd9abf7bfd506fb703bceddaf8cb",
+          "offset": 4194304,
+          "plaintext_bytes": 126519,
+          "nonce_base64": "O94ipwjEmXh549Vg"
+        }
+      ]
+    },
+    {
+      "name": "segments/0024.mp4",
+      "bytes": 3939702,
+      "sha256": "48b1b7aedc33d99e94d2e19bf8e7c98c8e65c336a4c21d399fa6a7c263ac5348",
+      "chunks": [
+        {
+          "blob_sha": "8a8fe57859380b29b4c44f27b1bd5905b583d1ba",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "JCnoFydlDZ5c1tQr"
+        },
+        {
+          "blob_sha": "d172a2e67ffdba76cf15211665f083f2ff7135a3",
+          "offset": 2097152,
+          "plaintext_bytes": 1842550,
+          "nonce_base64": "WK55SSROhRhOkesl"
+        }
+      ]
+    },
+    {
+      "name": "segments/0025.mp4",
+      "bytes": 3422867,
+      "sha256": "2ac4746cb91db5f7aa524d111cdddd6821cbf8055037a6c0a24e2c1d16a60526",
+      "chunks": [
+        {
+          "blob_sha": "480a836eb6adf51367737cf331be8955028783a0",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "2pTNurACaj/xcuc2"
+        },
+        {
+          "blob_sha": "9cd6f21f4e7696c0c2c1be7ac4491cde00570be9",
+          "offset": 2097152,
+          "plaintext_bytes": 1325715,
+          "nonce_base64": "uQPQeOWgYulKflNd"
+        }
+      ]
+    },
+    {
+      "name": "segments/0026.mp4",
+      "bytes": 3736032,
+      "sha256": "79ded13c67aabe1c2ce5ab528fb146905cc048736ee4170a999aaa9321e3ede1",
+      "chunks": [
+        {
+          "blob_sha": "52f1ef00be0b2731645ec3849d18be45f2fb3d3b",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "Fcx36ibZ18hQPeg9"
+        },
+        {
+          "blob_sha": "8d567b2d12431b3a8c4225c8251312bd14a6bf19",
+          "offset": 2097152,
+          "plaintext_bytes": 1638880,
+          "nonce_base64": "pzejEOvL3GDSzG5x"
+        }
+      ]
+    },
+    {
+      "name": "segments/0027.mp4",
+      "bytes": 4071341,
+      "sha256": "76b2171f93582200a9cfdac920ba92fe3084de00eb2b29d2f956bd4ca2132ff9",
+      "chunks": [
+        {
+          "blob_sha": "e83752aa42c033f3f14dc3030eb3059f17c21b87",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "XPRpw8R8FztSnZTx"
+        },
+        {
+          "blob_sha": "92b7a007f958de1fc5ef3ebd710d4ddc835470ae",
+          "offset": 2097152,
+          "plaintext_bytes": 1974189,
+          "nonce_base64": "SUmv3dAW3o1Sgdrt"
+        }
+      ]
+    },
+    {
+      "name": "segments/0028.mp4",
+      "bytes": 3717396,
+      "sha256": "1fc3c80d6183aa645842fa8d63733a6d42b5ec6278d95ba73aca6acedd498d38",
+      "chunks": [
+        {
+          "blob_sha": "55b9c2c305abe34cb63b8a17080ac6e3f235735e",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "eapWOR1YKnY4uAmz"
+        },
+        {
+          "blob_sha": "c3485673af9de3c626cdce0c5803eb49b3d65091",
+          "offset": 2097152,
+          "plaintext_bytes": 1620244,
+          "nonce_base64": "ncp0Carn1GBpzSw7"
+        }
+      ]
+    },
+    {
+      "name": "segments/0029.mp4",
+      "bytes": 4245958,
+      "sha256": "df2d96930d171b6ebe73942bdf7fb85b55bb2cd4753c3f7784c6a1315ee5ea79",
+      "chunks": [
+        {
+          "blob_sha": "3861bd81812f7981ad10ae12a343c321ec437cc1",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "w/7fRTPrQiu823e0"
+        },
+        {
+          "blob_sha": "8b6c04c46ba6704a6743a4c34c7e03124c080f03",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "2gsfbJRr0+jRHI8j"
+        },
+        {
+          "blob_sha": "c5f5559e9ae2da8c0e1b43e1be39d36280bc8d51",
+          "offset": 4194304,
+          "plaintext_bytes": 51654,
+          "nonce_base64": "U2d3eYyLDZDRooWv"
+        }
+      ]
+    },
+    {
+      "name": "segments/0030.mp4",
+      "bytes": 65187,
+      "sha256": "0606874c9e1c1e74a200edc46c4358f0b8c29fc1b0416e5e1554b4b4fe049b5a",
+      "chunks": [
+        {
+          "blob_sha": "69ceaa461116f943550c95810a5ba2fa128a51b5",
+          "offset": 0,
+          "plaintext_bytes": 65187,
+          "nonce_base64": "/e5wOEi7yuCE7ETm"
+        }
+      ]
+    },
+    {
+      "name": "segments/0031.mp4",
+      "bytes": 4245958,
+      "sha256": "df2d96930d171b6ebe73942bdf7fb85b55bb2cd4753c3f7784c6a1315ee5ea79",
+      "chunks": [
+        {
+          "blob_sha": "e136b2fda7a9a8c6caf979e9bfedb26fe0cd70b4",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "LCAk6XaF/LfHRluL"
+        },
+        {
+          "blob_sha": "e928e2a7eafb90f8500d12763431649118c30ce7",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "F012UjEjJjsQJ0nk"
+        },
+        {
+          "blob_sha": "13682dbe31144204199ef4a01ce3550194564f45",
+          "offset": 4194304,
+          "plaintext_bytes": 51654,
+          "nonce_base64": "tdN6VZQgsMomtjIQ"
+        }
+      ]
+    },
+    {
+      "name": "segments/0032.mp4",
+      "bytes": 153534,
+      "sha256": "ac60097b431af30ad011a801299baab4700c58ea50269a62dcdd3df25fd3b1df",
+      "chunks": [
+        {
+          "blob_sha": "0cb40737b2267ac89b79cd6225fbafac8511882a",
+          "offset": 0,
+          "plaintext_bytes": 153534,
+          "nonce_base64": "YGACUB1S3NKwdiw/"
+        }
+      ]
+    },
+    {
+      "name": "segments/0033.mp4",
+      "bytes": 65632,
+      "sha256": "cd1aad63c021d5854c100bafb1e7dd846cc20e13b418bb9d75ecef52ece6d7c5",
+      "chunks": [
+        {
+          "blob_sha": "e2fbec1ac2133fe8d2f1b9de8b9e3cebcb0be804",
+          "offset": 0,
+          "plaintext_bytes": 65632,
+          "nonce_base64": "AS9aaT6mBCl5Pg+8"
+        }
+      ]
+    },
+    {
+      "name": "segments/0034.mp4",
+      "bytes": 4337122,
+      "sha256": "eb790cb90c1ec9284f1c045950b7f5f95a18fda305b08d18be4f4bdc81e10473",
+      "chunks": [
+        {
+          "blob_sha": "0dfad363fa1ce714887dbfd5c42c15a4eb1fa657",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "0yHSEWJ1mBMH4BY5"
+        },
+        {
+          "blob_sha": "7b07f12156874cfd5d64593a94541b8a8eb49ae2",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "R1j4/62riiuXc5GO"
+        },
+        {
+          "blob_sha": "42760701ab0e0c08a89129f13ab6f0a6578a9238",
+          "offset": 4194304,
+          "plaintext_bytes": 142818,
+          "nonce_base64": "eISzZpLszC2hJnl8"
+        }
+      ]
+    },
+    {
+      "name": "segments/0035.mp4",
+      "bytes": 4852710,
+      "sha256": "8a407d003035da371abc7c3a790bc7677c95b561a23d5cf72d5fab64ccb9edb0",
+      "chunks": [
+        {
+          "blob_sha": "ab6a20e0b7fbe30cbb39cab7409136e87cc01cdc",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "VvB35bmLlsBCSqZN"
+        },
+        {
+          "blob_sha": "6047fbdbf14fd05b9669949ebe388cc0303c7ec3",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "Jd5OCGokln55FNwG"
+        },
+        {
+          "blob_sha": "10fd1a129704171e01f52ff2687e6ef2609edb23",
+          "offset": 4194304,
+          "plaintext_bytes": 658406,
+          "nonce_base64": "Xco3uTEOddxs+zcA"
+        }
+      ]
+    },
+    {
+      "name": "segments/0036.mp4",
+      "bytes": 4179739,
+      "sha256": "2ceecd0d9142876e407e09ddf6a15a6c9709c5f36ef9b6607e941202d4324763",
+      "chunks": [
+        {
+          "blob_sha": "440480027a5fcf3237e333942794d0c2cab9c3f1",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "o0MqH8LP1OAtJLR0"
+        },
+        {
+          "blob_sha": "13ba7389f53204c5f142f16270aded943083a97d",
+          "offset": 2097152,
+          "plaintext_bytes": 2082587,
+          "nonce_base64": "bsseGXHGsvnFHYeQ"
+        }
+      ]
+    },
+    {
+      "name": "segments/0037.mp4",
+      "bytes": 4507299,
+      "sha256": "dcd95cb8de9888b42dfcf0ea2b07e04408af3a5d9d2009fd43d49ab74825517b",
+      "chunks": [
+        {
+          "blob_sha": "c40eb5805378c688e93f9b7fb04e9b722c5a08aa",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "sXseuoSrlP9Q6bPC"
+        },
+        {
+          "blob_sha": "a3d3db2ffdccee8ceddb9485bf45b774415f740e",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "Ue5Ka8rcUfvpnAgg"
+        },
+        {
+          "blob_sha": "09c5fa6adc6370139bd197ee9f20109a0bee6b78",
+          "offset": 4194304,
+          "plaintext_bytes": 312995,
+          "nonce_base64": "oikdqGCyDiQxnu1d"
+        }
+      ]
+    },
+    {
+      "name": "segments/0038.mp4",
+      "bytes": 4546697,
+      "sha256": "225f3c9eb092cd7259f268c8410e10c1aae6456ea95d814f4f536807b30e908a",
+      "chunks": [
+        {
+          "blob_sha": "f1f878120388f828d3a6802209172cd19b294378",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "9Aa4mjEFjVu3Oi7k"
+        },
+        {
+          "blob_sha": "a2784c0a9253b64051fd42d7f6f547ebf036e3ef",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "xlZOjKAJBYgjJhQH"
+        },
+        {
+          "blob_sha": "f78a4c1b130a18e773cc1376bb0edb3e57fa1882",
+          "offset": 4194304,
+          "plaintext_bytes": 352393,
+          "nonce_base64": "0RHdC7ljdCIBnnOK"
+        }
+      ]
+    },
+    {
+      "name": "segments/0039.mp4",
+      "bytes": 5282443,
+      "sha256": "6af0c53b9565da1dc75cdcdef930d75d40da8f38a18496c214d97c9625c418e7",
+      "chunks": [
+        {
+          "blob_sha": "ca716a911535dd451327281d6430651f7abd93de",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "5PoXIoJngvttA7Zd"
+        },
+        {
+          "blob_sha": "8681c69e4a63d0b36e1e326ddcb37824721c422b",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "ZwYZME0fujf/xMM9"
+        },
+        {
+          "blob_sha": "90da15fe437d92d51509061ebf7d0abda39f29f3",
+          "offset": 4194304,
+          "plaintext_bytes": 1088139,
+          "nonce_base64": "Jbm9hba/cIggIx7/"
+        }
+      ]
+    },
+    {
+      "name": "segments/0040.mp4",
+      "bytes": 3789361,
+      "sha256": "108fcd90465daa51753069572ec341fd4383bd3207b26711b6707df2929d505e",
+      "chunks": [
+        {
+          "blob_sha": "14a64cd89f2cfe9140e33231b9b791111fcc58da",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "Latyd4GNaCBaSS7D"
+        },
+        {
+          "blob_sha": "168dae454b401f35925e11a96bf53746d76d3797",
+          "offset": 2097152,
+          "plaintext_bytes": 1692209,
+          "nonce_base64": "YkCEz7U7b58vcm3z"
+        }
+      ]
+    },
+    {
+      "name": "segments/0041.mp4",
+      "bytes": 3699013,
+      "sha256": "1dad05e7d033cd7f384cef92ae35e4b1359065194679db52ba2066b3ae836c89",
+      "chunks": [
+        {
+          "blob_sha": "76d19397e13570b147f608362b5c2d7d7fc14026",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "lFMaqqjkdgxiVmT/"
+        },
+        {
+          "blob_sha": "68b5e6d0cbb44a82a438421aec7b2cc525f9a377",
+          "offset": 2097152,
+          "plaintext_bytes": 1601861,
+          "nonce_base64": "lA5OsOzoFh9Rl7gM"
+        }
+      ]
+    },
+    {
+      "name": "segments/0042.mp4",
+      "bytes": 4280368,
+      "sha256": "e6a8caf9268166127c53c22d03da540c0059decc8d8556127bbed3e544778a0a",
+      "chunks": [
+        {
+          "blob_sha": "6e9cc3d2f0bce84cb2b15eceec7f41e93353cbd9",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "GBr1y2okda7CrD8s"
+        },
+        {
+          "blob_sha": "336790e65340d0629dd640e73f09040f65b23145",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "Zhu+cyhpCejKj7ux"
+        },
+        {
+          "blob_sha": "6ed91b4a64cef78ffc998c8ccbb033962d8e5d73",
+          "offset": 4194304,
+          "plaintext_bytes": 86064,
+          "nonce_base64": "ixC3Va5kMiZECSW7"
+        }
+      ]
+    },
+    {
+      "name": "segments/0043.mp4",
+      "bytes": 4299924,
+      "sha256": "ccb2578df38ea100ed490473c68836e41f6154c1be07ad36f0a5291826e744ad",
+      "chunks": [
+        {
+          "blob_sha": "731efcdaf8cc708b11485fd8de22aca98b988340",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "YbzUzODmzFRl//sq"
+        },
+        {
+          "blob_sha": "d6b58af1cbb996593b6c1561dd8fd6089a41775f",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "x6hk0Io5JY+trHfz"
+        },
+        {
+          "blob_sha": "5fc6cea970d01b063704dcad200b29c0448e2677",
+          "offset": 4194304,
+          "plaintext_bytes": 105620,
+          "nonce_base64": "LGUEdNHSrft5zlXX"
+        }
+      ]
+    },
+    {
+      "name": "segments/0044.mp4",
+      "bytes": 4259275,
+      "sha256": "5a45d74fad1ca74f60a90b05cf019386c915b781ced639c8e928b499f48ef9db",
+      "chunks": [
+        {
+          "blob_sha": "229dc3e82343b89d6d1ff2576333123b33a6243a",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "BBl8TNb/DwgSw2Px"
+        },
+        {
+          "blob_sha": "98116edadf3cadb6d2fdf83ddf2b9dc8889d1142",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "J9tXzWDAVgm39052"
+        },
+        {
+          "blob_sha": "dea8a081f48781485417b74609a01d54e19ef879",
+          "offset": 4194304,
+          "plaintext_bytes": 64971,
+          "nonce_base64": "ElAIOLtQ+ZMnGN05"
+        }
+      ]
+    },
+    {
+      "name": "segments/0045.mp4",
+      "bytes": 3210713,
+      "sha256": "2e2572f48ea3dbffba89f771c63a461b1014e9bc70034cbbf842820713644b71",
+      "chunks": [
+        {
+          "blob_sha": "47fd80ba39d6f00ae7283cc0c3584331cbeaeed5",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "zWsjmnEV0ettB7cI"
+        },
+        {
+          "blob_sha": "fd45c7477d7f6f143b6595db403f512a9dfa7f91",
+          "offset": 2097152,
+          "plaintext_bytes": 1113561,
+          "nonce_base64": "pCvjrFEip94LLV2k"
+        }
+      ]
+    },
+    {
+      "name": "segments/0046.mp4",
+      "bytes": 4694649,
+      "sha256": "a3e3ab8bc11299b45c77b4bf241c43881b957aa8a453ac4a18879e51fe3ac541",
+      "chunks": [
+        {
+          "blob_sha": "01aa29b5136aceb9d84d3cc9fb2ca33bdce04fb9",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "zZN1BJS/5wC7GE9R"
+        },
+        {
+          "blob_sha": "42a9297ed2b8b96ab8200b3a4d6b92aeadb331f2",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "8hqOlnXxOV4/VDMS"
+        },
+        {
+          "blob_sha": "aac338a315d28f29edc2ffe521331f14682b414d",
+          "offset": 4194304,
+          "plaintext_bytes": 500345,
+          "nonce_base64": "bJV5pMPohP6QNO2R"
+        }
+      ]
+    },
+    {
+      "name": "segments/0047.mp4",
+      "bytes": 4203721,
+      "sha256": "d2f6dbf506f320d8ad720c27ae3395f27be155e3c0d47c2d4cf6708ef79c3d6c",
+      "chunks": [
+        {
+          "blob_sha": "5d142eae8f9e865e869e71d719574e8c991d186b",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "vPEjvmxkE5vf7pSY"
+        },
+        {
+          "blob_sha": "d6754ed68594eee3fed9a41549f84f80d1cb7285",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "6C2+yLLo7NpW8q6T"
+        },
+        {
+          "blob_sha": "28f0ac07b7ebbb069e6be4707ac6d1da1e5a3bae",
+          "offset": 4194304,
+          "plaintext_bytes": 9417,
+          "nonce_base64": "imx39HhTavt8yTLe"
+        }
+      ]
+    },
+    {
+      "name": "segments/0048.mp4",
+      "bytes": 4388277,
+      "sha256": "5c7dba106c40491569cfe43922c88262c3a8bf94db6e2bcfcbaadc6bc1610915",
+      "chunks": [
+        {
+          "blob_sha": "2668ba623090cff5ff15cbfba59427c9e6893b80",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "ADtFImmAISrs5L5d"
+        },
+        {
+          "blob_sha": "07d270201a5706d2b91d08acacded68c7feacfaa",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "nuHnOqKwqYRlJqIY"
+        },
+        {
+          "blob_sha": "8574d4d616baf3bf85571b1d76f5fc913903a176",
+          "offset": 4194304,
+          "plaintext_bytes": 193973,
+          "nonce_base64": "Rp5jzzDlVfRdY4jF"
+        }
+      ]
+    },
+    {
+      "name": "segments/0049.mp4",
+      "bytes": 2854518,
+      "sha256": "f7b54c4d20fce75287ebf67bffda40b267d84e3aee57e14838812b057a531a65",
+      "chunks": [
+        {
+          "blob_sha": "ccec1137f15af1a19341e4fb224035216323c041",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "ubXdBXO/wxGentQ4"
+        },
+        {
+          "blob_sha": "8fdd60e85d6ba599b913979a058f105fdcadc584",
+          "offset": 2097152,
+          "plaintext_bytes": 757366,
+          "nonce_base64": "Q3Xmp9PRR8RpnlYp"
+        }
+      ]
+    },
+    {
+      "name": "segments/0050.mp4",
+      "bytes": 1994320,
+      "sha256": "61a96c6b0339c1d3468ca26da365965b71e6410f78ca1e582a5138bd1d0dcdb8",
+      "chunks": [
+        {
+          "blob_sha": "4a4368637ace7b5ebd644c5365ad834a9ed5f8b4",
+          "offset": 0,
+          "plaintext_bytes": 1994320,
+          "nonce_base64": "LtX+A66+6mepjfdS"
+        }
+      ]
+    },
+    {
+      "name": "segments/0051.mp4",
+      "bytes": 4488939,
+      "sha256": "53dbe4dc0cc7b907b2f82e567a1c4b642a14e1eb41bf2dd09d7fa3049ed19c4b",
+      "chunks": [
+        {
+          "blob_sha": "2f85edc4cba7dbf2295a0bfae7583cea1dde5a2d",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "1joHp37YrzI68Nw0"
+        },
+        {
+          "blob_sha": "d5f055a34d69c2d8f5d50132de50bd72f749a8f0",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "1U4WQsTQGLWwo+O3"
+        },
+        {
+          "blob_sha": "e34ee516a145f23d545c8355947fcefaf67215cc",
+          "offset": 4194304,
+          "plaintext_bytes": 294635,
+          "nonce_base64": "AnMx57/RWYxgtQyE"
+        }
+      ]
+    },
+    {
+      "name": "segments/0052.mp4",
+      "bytes": 4805139,
+      "sha256": "03ff7364f1824bee6110142857e5efd1493eaea85e44137e59c7ec2074f30dbd",
+      "chunks": [
+        {
+          "blob_sha": "022a26de4cb219d531bdcba5d24c8350e8badd82",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "SC8heKM1WdcTAL7q"
+        },
+        {
+          "blob_sha": "3257e20666ab4b398f5b588c5952d5817ff388fa",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "kBZBEjDRYJrrcQcs"
+        },
+        {
+          "blob_sha": "d5fb5791001d632475ce3c4bba1b3472944c3342",
+          "offset": 4194304,
+          "plaintext_bytes": 610835,
+          "nonce_base64": "vG6irH/8vASf+x2/"
+        }
+      ]
+    },
+    {
+      "name": "segments/0053.mp4",
+      "bytes": 4771208,
+      "sha256": "f5f67ac4d20439bbe76d761e0b3a3c1cc78af8914ed7352c2c06d472089a36ff",
+      "chunks": [
+        {
+          "blob_sha": "343100bf849efec8a3d257b207b257a39ea1ec6f",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "XkwHJlK9m7fapL8j"
+        },
+        {
+          "blob_sha": "e39a9523b541c106788eed0a9909f4490e4f9996",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "eIkH+qSWWR6Rn5jD"
+        },
+        {
+          "blob_sha": "779b6b5ac7379cac239a37ed771c3e701b92fc2a",
+          "offset": 4194304,
+          "plaintext_bytes": 576904,
+          "nonce_base64": "IReVGABqwlT1Vzbj"
+        }
+      ]
+    },
+    {
+      "name": "segments/0054.mp4",
+      "bytes": 2272789,
+      "sha256": "7b266136fa756cf9efbe44e9a8dc489fcbd82f43ab57c37ca04847da757dd844",
+      "chunks": [
+        {
+          "blob_sha": "ee56b96c174e629d79b8afeeffee5a9840ab5195",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "uJBmJi/TSHUXKIXp"
+        },
+        {
+          "blob_sha": "985e588489a9efbf494c0cc2f96beb2ecf7ee89c",
+          "offset": 2097152,
+          "plaintext_bytes": 175637,
+          "nonce_base64": "jrPXsx/l/aJb3dnM"
+        }
+      ]
+    },
+    {
+      "name": "segments/0055.mp4",
+      "bytes": 4368652,
+      "sha256": "f40f97f2dd6c3242b4f8a7c4429c1dbe3505750dc6d33cd8ba397a9bccd456a5",
+      "chunks": [
+        {
+          "blob_sha": "1c5b59cdb4a56339faf702f9b93948d2fb9205e8",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "F2m+rfY/gHA7LzHG"
+        },
+        {
+          "blob_sha": "f5c82e8e46a11ca4a384a1a2dca2eef4abe3b000",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "SupMFjI3lMe5Z9bE"
+        },
+        {
+          "blob_sha": "f5b102e19aa57cd5f8c09c97e4147ed645d4ba59",
+          "offset": 4194304,
+          "plaintext_bytes": 174348,
+          "nonce_base64": "+Dx6FRD5Zxg9VQUQ"
+        }
+      ]
+    },
+    {
+      "name": "segments/0056.mp4",
+      "bytes": 1682502,
+      "sha256": "5d7a88ec802b76609732624ebb79a9e672465912d701ca41da7d76ed8b076ea7",
+      "chunks": [
+        {
+          "blob_sha": "14d81dfe8f97e43fbcbf864d02e7d7e1d6005db7",
+          "offset": 0,
+          "plaintext_bytes": 1682502,
+          "nonce_base64": "ND4Z/SH6TmgZ2xom"
+        }
+      ]
+    },
+    {
+      "name": "segments/0057.mp4",
+      "bytes": 2601449,
+      "sha256": "7f186128860b6a4c88c0bdef0fc27a6d55c67966ee3de1a06cf3939857f880c7",
+      "chunks": [
+        {
+          "blob_sha": "0f98187f7a5f1086e66883fd69a9611c165db89b",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "JHd1l8vPxdwxNscK"
+        },
+        {
+          "blob_sha": "05cf7e98671689a599c95b12b90cf43c3f7cdb91",
+          "offset": 2097152,
+          "plaintext_bytes": 504297,
+          "nonce_base64": "NXIT9a5awIy27ptY"
+        }
+      ]
+    },
+    {
+      "name": "segments/0058.mp4",
+      "bytes": 1634622,
+      "sha256": "5256dd9d0325185f5a563fbd05a1efdd11c95f65179278c4c0cb9c5d07fca2ea",
+      "chunks": [
+        {
+          "blob_sha": "4f6d4c20d53933d40d42eaae46572797e66de3b8",
+          "offset": 0,
+          "plaintext_bytes": 1634622,
+          "nonce_base64": "0t97cQjGziRaDP8Y"
+        }
+      ]
+    },
+    {
+      "name": "segments/0059.mp4",
+      "bytes": 4075443,
+      "sha256": "a0dc249376de589419da1ae49679bdbce8adf9e0deefb32ba3b6fbfe5099ebee",
+      "chunks": [
+        {
+          "blob_sha": "03ff46a91e16459d60f1118f1dc90626c01a2723",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "Q2ak7awlWU7hGEhp"
+        },
+        {
+          "blob_sha": "69c834426c4127fa159affd6f5cadc4bb63c2e2f",
+          "offset": 2097152,
+          "plaintext_bytes": 1978291,
+          "nonce_base64": "2WcZ6aeG15+7dhRA"
+        }
+      ]
+    },
+    {
+      "name": "segments/0060.mp4",
+      "bytes": 3478007,
+      "sha256": "5036d2fc5f3df0eae53b2dec31a85747f5ea37f479bebb6db1814e50bbf389bf",
+      "chunks": [
+        {
+          "blob_sha": "dcfe77c548e23dd19a879e78e2e0de8edc272feb",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "VSwgUED3QgL+vUIT"
+        },
+        {
+          "blob_sha": "b52171632aab4ce0c212e8109132d982361a8dee",
+          "offset": 2097152,
+          "plaintext_bytes": 1380855,
+          "nonce_base64": "0BmlVHsWtTNfYhj2"
+        }
+      ]
+    },
+    {
+      "name": "segments/0061.mp4",
+      "bytes": 4182630,
+      "sha256": "81a795a2880e2ff4f0543c0ccd7b8b7dc731728b75cbb32aa0b1f19ad0d9028d",
+      "chunks": [
+        {
+          "blob_sha": "d9ba1aa9fb5882a44067176d515a5ff72758171d",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "rocAyYnQI18sphqs"
+        },
+        {
+          "blob_sha": "3e6ad41aa671de7a35b6a7b241dd568b4ab27d8d",
+          "offset": 2097152,
+          "plaintext_bytes": 2085478,
+          "nonce_base64": "dMxnw0f+IhAkfKvw"
+        }
+      ]
+    },
+    {
+      "name": "segments/0062.mp4",
+      "bytes": 2042044,
+      "sha256": "ee0d68a8118d4a6ff5e49d74f6ad3ae6546c0b043e9bed930c3a8663ad5e9a00",
+      "chunks": [
+        {
+          "blob_sha": "d84dacf79a65700b1daa5b8ea6d96ae77f0a4211",
+          "offset": 0,
+          "plaintext_bytes": 2042044,
+          "nonce_base64": "mbdm6g7fsbztH3vX"
+        }
+      ]
+    },
+    {
+      "name": "segments/0063.mp4",
+      "bytes": 4210198,
+      "sha256": "ab40660d7f57bd698ce1f9f1d8e11ab5334b7fad4edadb6b3a64f637b2b35142",
+      "chunks": [
+        {
+          "blob_sha": "053a65961eacdde71fa7285e3dc275efa560aabf",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "zwjZRKlr4pEQIdnS"
+        },
+        {
+          "blob_sha": "2ca00c0e4017daca1cbcf88de1715b0e5d78a007",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "xZoQjWL8rQWorDeX"
+        },
+        {
+          "blob_sha": "79d93df9781efb181903ca7d6b96b790c36d5272",
+          "offset": 4194304,
+          "plaintext_bytes": 15894,
+          "nonce_base64": "1G+UZNT6DMOfDcdp"
+        }
+      ]
+    },
+    {
+      "name": "segments/0064.mp4",
+      "bytes": 4200844,
+      "sha256": "c6e2e090ef7adeb3a7dcb268353f37e11abe4bb78e54585ccf083c9df59e5032",
+      "chunks": [
+        {
+          "blob_sha": "820830de898b0dbaa0222f39c1cdf747d7bfa30b",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "jayIeLiyJDudmGBW"
+        },
+        {
+          "blob_sha": "9012faa06271d0ec2e71f37af67703f31a6e9e10",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "S7rVo3AfdgoBIWHH"
+        },
+        {
+          "blob_sha": "5e37eca38917e10b7f351024fbeb7d8e1d12b752",
+          "offset": 4194304,
+          "plaintext_bytes": 6540,
+          "nonce_base64": "tsm06IW48RGkDo9B"
+        }
+      ]
+    },
+    {
+      "name": "segments/0065.mp4",
+      "bytes": 3867952,
+      "sha256": "86c61efa279cc74f75e53795b56802847d1decfc6b8a8acfc078b7b8b964ddd4",
+      "chunks": [
+        {
+          "blob_sha": "a9fbdbef256fa53b5eef3d1c47ea807fb54262b9",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "vgBhjEl4G3NpDIAE"
+        },
+        {
+          "blob_sha": "4be078a46e29a9a46167bb6fe14e1af663ff6f66",
+          "offset": 2097152,
+          "plaintext_bytes": 1770800,
+          "nonce_base64": "KxT+sWCY3hArGh7r"
+        }
+      ]
+    },
+    {
+      "name": "segments/0066.mp4",
+      "bytes": 4232208,
+      "sha256": "d42e5856acbafd0fe562547cbfa7c9734d9cd5c6a6d3f51e14ac9b602157f0c9",
+      "chunks": [
+        {
+          "blob_sha": "53444a4ce08a5525a65d7ed7749482a4c2d3341c",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "cxh02RSrg080O+fn"
+        },
+        {
+          "blob_sha": "d8374f45e3c7a463f0cd6e20d1feb1cedd5c86fe",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "CUml1KXbCBe6fdKw"
+        },
+        {
+          "blob_sha": "6310e645973da08c40485e2d4ee9442ac88a3377",
+          "offset": 4194304,
+          "plaintext_bytes": 37904,
+          "nonce_base64": "JGFtvGz5f3ir3xk/"
+        }
+      ]
+    },
+    {
+      "name": "segments/0067.mp4",
+      "bytes": 3632621,
+      "sha256": "b11b56cec845a7896c5991f91b04f57b5d3fb670e16cc4f44510ee211e3636e5",
+      "chunks": [
+        {
+          "blob_sha": "246ea3d249f39b4961640cec86a5e9932ca7ba7b",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "uty+2C3AG4ECG3HY"
+        },
+        {
+          "blob_sha": "f62fb11595d596cb5107c59d590174135e434eb5",
+          "offset": 2097152,
+          "plaintext_bytes": 1535469,
+          "nonce_base64": "+Icpz6XLe6dqvJPs"
+        }
+      ]
+    },
+    {
+      "name": "segments/0068.mp4",
+      "bytes": 4845666,
+      "sha256": "b49789bb45b4d86e789ac8bf22df5ef7b8c70979269e924cfa5ea6d5ed85085f",
+      "chunks": [
+        {
+          "blob_sha": "27fbb67e19889684223f7627756758b33c34447d",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "CNz7uqtJl5Ra4bBx"
+        },
+        {
+          "blob_sha": "0241ec87648632cd67805c8dfc7652574c4f5e27",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "t6lpjzn1nFsw3k2Q"
+        },
+        {
+          "blob_sha": "532c7ee5975d1b9074288273d411edb02c36c13d",
+          "offset": 4194304,
+          "plaintext_bytes": 651362,
+          "nonce_base64": "weVZbggTKTQ1x81/"
+        }
+      ]
+    },
+    {
+      "name": "segments/0069.mp4",
+      "bytes": 4880892,
+      "sha256": "ad0ad320406beff53464711540efc61e9410c86b44d7990a959245f26a908235",
+      "chunks": [
+        {
+          "blob_sha": "3356e0bb56d53d5e24e15abe6a80bf4c61be8ee3",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "ZCHNBD//OLXxwU3Y"
+        },
+        {
+          "blob_sha": "97fb263177c3195ece2b6fb333ec49f851b03bf0",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "x4ZllYldVxodCJgJ"
+        },
+        {
+          "blob_sha": "861adba51c384614248ce44abb02f82fe880095d",
+          "offset": 4194304,
+          "plaintext_bytes": 686588,
+          "nonce_base64": "Cj0H63fhKkNpY1jL"
+        }
+      ]
+    },
+    {
+      "name": "segments/0070.mp4",
+      "bytes": 2024296,
+      "sha256": "d540d036a28d1b2beb272d1010919ed43da113d5560bb4e19dd39bf9d8be53cf",
+      "chunks": [
+        {
+          "blob_sha": "84848d1e1d09153adc4c4bf159083ffb87e16453",
+          "offset": 0,
+          "plaintext_bytes": 2024296,
+          "nonce_base64": "ysMt+2ZP1ykjXwwG"
+        }
+      ]
+    },
+    {
+      "name": "segments/0071.mp4",
+      "bytes": 3413932,
+      "sha256": "f3e4f7652a03263975d91df7f007c59a385630f1a6b904d84cdc4fd870734169",
+      "chunks": [
+        {
+          "blob_sha": "2b3a6744c320838082524ad2f9e7ca6aa2509780",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "kifqp8xWl78Y26+8"
+        },
+        {
+          "blob_sha": "10b27abce4cc9e161299087f2558ed79bac77fc4",
+          "offset": 2097152,
+          "plaintext_bytes": 1316780,
+          "nonce_base64": "tyGAa0+WU4HDdTjW"
+        }
+      ]
+    },
+    {
+      "name": "segments/0072.mp4",
+      "bytes": 2536463,
+      "sha256": "b31934dd25d2f7e2c2e883fae0b7a4c256dba78bc46a40d2ef7d2dd09fb1cf44",
+      "chunks": [
+        {
+          "blob_sha": "58f20438b94e3104927aab1f69c988fd0f1af488",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "d3ubr+ul8Gnjc5ku"
+        },
+        {
+          "blob_sha": "8bb874cc735b222e693cc8e3dd399e6b8bea0665",
+          "offset": 2097152,
+          "plaintext_bytes": 439311,
+          "nonce_base64": "E2emPyxUtmyQJ/UX"
+        }
+      ]
+    },
+    {
+      "name": "segments/0073.mp4",
+      "bytes": 3889558,
+      "sha256": "599c3e03fe5ed04b298e0dd78e5c60d0c5c93a440bea8e4fae754979c1bb3ab1",
+      "chunks": [
+        {
+          "blob_sha": "d4628d076303fdb55282b83b557aef7b619a3810",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "hYkKsr91RQuE1liJ"
+        },
+        {
+          "blob_sha": "b93a9c7becd58ae5a8ba0c6a2829d21262a09e95",
+          "offset": 2097152,
+          "plaintext_bytes": 1792406,
+          "nonce_base64": "thgsKXiDoeu7lJsU"
+        }
+      ]
+    },
+    {
+      "name": "segments/0074.mp4",
+      "bytes": 3046357,
+      "sha256": "930ddafd312e7a415f19b3de947af2806fba4d57cf0bbf3b7a70d2640e9e4d2d",
+      "chunks": [
+        {
+          "blob_sha": "40b060e7aba4fe86ce88dd93612674b059d9b876",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "8Ie76b7z7avOT+QB"
+        },
+        {
+          "blob_sha": "bdedfd1e30b1da9096c5779066ee2a35449f2009",
+          "offset": 2097152,
+          "plaintext_bytes": 949205,
+          "nonce_base64": "rrhDFjXqIRuhukmk"
+        }
+      ]
+    },
+    {
+      "name": "segments/0075.mp4",
+      "bytes": 5145000,
+      "sha256": "72caea7d61037006bda3d32e1b77ac680aadf6bf32831599aa66e7a5356a7a4c",
+      "chunks": [
+        {
+          "blob_sha": "0e69c13f4e010520cd2814cd93d453ad7a89e5eb",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "BKy1xQqIRJuS4ljg"
+        },
+        {
+          "blob_sha": "c92929b5c5403548d7b19c253ed60384adbad460",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "q9cceovR42toOA+R"
+        },
+        {
+          "blob_sha": "d165c496794cf3065bdaba9855e619664551638f",
+          "offset": 4194304,
+          "plaintext_bytes": 950696,
+          "nonce_base64": "hzfuiNX269gMgGq/"
+        }
+      ]
+    },
+    {
+      "name": "segments/0076.mp4",
+      "bytes": 5259251,
+      "sha256": "7244420eb4b31789bfc6fa0250edda5dbfc1ce6e50c04143ab6090a1d7baeaac",
+      "chunks": [
+        {
+          "blob_sha": "768891fca2909835b4a6808fb8ff4b6024cb1e1c",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "EE3+HGfSP69GOKvM"
+        },
+        {
+          "blob_sha": "1ad8142874c0991771b5491e83797cb98f4187e4",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "Jqxx1OozSbk0EJPi"
+        },
+        {
+          "blob_sha": "a8260527dd6bafcd8fd2ac509ec2a69ccb75aa49",
+          "offset": 4194304,
+          "plaintext_bytes": 1064947,
+          "nonce_base64": "UFUr8wlPky3DcnKi"
+        }
+      ]
+    },
+    {
+      "name": "segments/0077.mp4",
+      "bytes": 3956898,
+      "sha256": "ab43729bcf4e18ed204cb418e91620dda8fcb797872d2fe6e9720cb848f548f3",
+      "chunks": [
+        {
+          "blob_sha": "21f23f58b982a57c063e4e7712fc5ff35ee118ac",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "GtTfaHRi2Oc5Xbn8"
+        },
+        {
+          "blob_sha": "1d0dbb2a5be753daf2c097a73b435f15f4a012b5",
+          "offset": 2097152,
+          "plaintext_bytes": 1859746,
+          "nonce_base64": "gPhOgQYSRnf2Qequ"
+        }
+      ]
+    },
+    {
+      "name": "segments/0078.mp4",
+      "bytes": 4764799,
+      "sha256": "4b2b18248c4433c17b7fe96b556f5ec6adc35599f4964f3b45235e9449a26dd2",
+      "chunks": [
+        {
+          "blob_sha": "63d07715665f9d0bd22575a96935e1bdf65081e8",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "32rs/Vygo2oWpfzp"
+        },
+        {
+          "blob_sha": "eb6fb7721a08e08e65f308acd9a5726bce157572",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "IYJ0mNq2yqLuAt3v"
+        },
+        {
+          "blob_sha": "8cbb622ef4db1eb9383b5e6976c5403fe2a54c57",
+          "offset": 4194304,
+          "plaintext_bytes": 570495,
+          "nonce_base64": "TA6DLwkMtGpRGn4d"
+        }
+      ]
+    },
+    {
+      "name": "segments/0079.mp4",
+      "bytes": 4673410,
+      "sha256": "978747526bf332a8ca61ddfeb4c7137295f294ec2c906877766c5f87f638740e",
+      "chunks": [
+        {
+          "blob_sha": "35cc359cc156263e61ad695946cb34963f3176f3",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "ZgZf13/U/sgmDN+Z"
+        },
+        {
+          "blob_sha": "7ed9f6b61fc07e5c0ba52aa1d61f6fe2dd7ba838",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "tFk6LH0xlmToTeGZ"
+        },
+        {
+          "blob_sha": "fda7a72cdf7125df33b7727af15e66a7ba3b189f",
+          "offset": 4194304,
+          "plaintext_bytes": 479106,
+          "nonce_base64": "gYw9MkcnRcnCaaVe"
+        }
+      ]
+    },
+    {
+      "name": "segments/0080.mp4",
+      "bytes": 2450515,
+      "sha256": "274f705a6337997507714ebc56b7b486f9e4aa36e38270b4922f628cae8e8f6b",
+      "chunks": [
+        {
+          "blob_sha": "204413b2d8a3aee43700d43ceb3621b7055844ad",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "ld0S6K434PXR5zTl"
+        },
+        {
+          "blob_sha": "29cbbd945f82fff1d76b1e8d2d787ec346b8d1dd",
+          "offset": 2097152,
+          "plaintext_bytes": 353363,
+          "nonce_base64": "NHplJ1d5m8KXvR6s"
+        }
+      ]
+    },
+    {
+      "name": "segments/0081.mp4",
+      "bytes": 3303388,
+      "sha256": "8a1bce3897bbaaa503e5579c06b28d88e0353001e7e0c2a0127998d226165528",
+      "chunks": [
+        {
+          "blob_sha": "125ff3a3c20fd66bbc8f17d4d5e6a18881fae067",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "VFRYJHgz/KCP3xep"
+        },
+        {
+          "blob_sha": "f875025ab77eef9a47298c8c94c71503619fc4a6",
+          "offset": 2097152,
+          "plaintext_bytes": 1206236,
+          "nonce_base64": "ec6rC+Colyj3hMBv"
+        }
+      ]
+    },
+    {
+      "name": "segments/0082.mp4",
+      "bytes": 74913,
+      "sha256": "0f90f9a164b661b13240e71bc0854ac140a4382bd640fa080605c9ecaaf8b66f",
+      "chunks": [
+        {
+          "blob_sha": "8faab5deaf2521b91ebc5d660ae36e837689e5d1",
+          "offset": 0,
+          "plaintext_bytes": 74913,
+          "nonce_base64": "MCoubNFZP/q1b4XZ"
+        }
+      ]
+    },
+    {
+      "name": "segments/0083.mp4",
+      "bytes": 2927793,
+      "sha256": "b5220f09ff5a0ffa8d38ea6ee6c211a6dd3fd203ee0aa31f9c94875db407bab3",
+      "chunks": [
+        {
+          "blob_sha": "882b628385de448fb1a69267bd35cfe8ac73633f",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "jrj69c5zbWjuj8V2"
+        },
+        {
+          "blob_sha": "8aac9e5972ed26bf61408b97cf974e08d1246bcc",
+          "offset": 2097152,
+          "plaintext_bytes": 830641,
+          "nonce_base64": "E3kQZRKyPn6Si9pK"
+        }
+      ]
+    },
+    {
+      "name": "segments/0084.mp4",
+      "bytes": 4865137,
+      "sha256": "9232e8bc71d4c60490ea95dc9e72ee8a315a9f6f84dd9fdd93f8c36b2242c4b9",
+      "chunks": [
+        {
+          "blob_sha": "94a8a3dc3ba4fdc06a33429d01e9cbeb689792b3",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "gDJWxVdMETUDF9Nc"
+        },
+        {
+          "blob_sha": "ece8f2b756fdf2a13f6d5a23c6bc9948002e92b9",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "I+SmQMAIS8XCQqMv"
+        },
+        {
+          "blob_sha": "ad990e32f8ae7141284ee39803468374ec920a08",
+          "offset": 4194304,
+          "plaintext_bytes": 670833,
+          "nonce_base64": "iZuJGAO05uLuvNQ6"
+        }
+      ]
+    },
+    {
+      "name": "segments/0085.mp4",
+      "bytes": 4129277,
+      "sha256": "d227a554506e3040400e135d250f1f6b3961c673d5cb7837a9e85bedf291db6d",
+      "chunks": [
+        {
+          "blob_sha": "46fbfc919a8b8c9bf3560ad42527410b49a048d5",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "1fdI5kzl021djrxK"
+        },
+        {
+          "blob_sha": "a69b710c24d7ed04044f6bc830a0b6dfbaac754e",
+          "offset": 2097152,
+          "plaintext_bytes": 2032125,
+          "nonce_base64": "/VQI6KG3lwNA6mRd"
+        }
+      ]
+    },
+    {
+      "name": "segments/0086.mp4",
+      "bytes": 4818436,
+      "sha256": "23a2d7bfc928e60937c1a0705a69008246397dbd8827c2d2f33196eb1b73330e",
+      "chunks": [
+        {
+          "blob_sha": "8d6249987355a38aaf0fa023abfa0352826e95c6",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "GWsgXaPxhNcWcmaW"
+        },
+        {
+          "blob_sha": "a2e6906c80828f906396766bfdff9e117d3f1f63",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "etpa4+HPpdi2u0kv"
+        },
+        {
+          "blob_sha": "fc0ca1d87be8b874f9c7702ae3a28d7933d2d363",
+          "offset": 4194304,
+          "plaintext_bytes": 624132,
+          "nonce_base64": "iC+E8kWNORmcpB7G"
+        }
+      ]
+    },
+    {
+      "name": "segments/0087.mp4",
+      "bytes": 2370981,
+      "sha256": "6d4ff40e8dd95d1c7f97843b7f8bf2144d962d900ea2a65d49bbcc87b4da13bc",
+      "chunks": [
+        {
+          "blob_sha": "336b958b0155999ce085aba2c18aa33eab2edd4d",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "DAv5qkr+/YYRm4gc"
+        },
+        {
+          "blob_sha": "f1ff9bdd42efbcaa9d27eeab71a9c384ba6ecbd8",
+          "offset": 2097152,
+          "plaintext_bytes": 273829,
+          "nonce_base64": "Vhq52NcnlmnIKL/K"
+        }
+      ]
+    },
+    {
+      "name": "segments/0088.mp4",
+      "bytes": 4816252,
+      "sha256": "0c1ae3bad9965ee4eb79653b76906ee21628758e947101c35d42bde110ec7496",
+      "chunks": [
+        {
+          "blob_sha": "b073e06e400e35601d8c35c64aa3509518d68c61",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "EAaUQY+OolYzzCoS"
+        },
+        {
+          "blob_sha": "0143e7be91a4c1ef94d92c312866930fa5813a39",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "lTt44bP7ZuPafOcy"
+        },
+        {
+          "blob_sha": "e07959225a8d31a69e6006aa2aa97d4d909975d4",
+          "offset": 4194304,
+          "plaintext_bytes": 621948,
+          "nonce_base64": "YBEba8ygR8VryMN+"
+        }
+      ]
+    },
+    {
+      "name": "segments/0089.mp4",
+      "bytes": 4785727,
+      "sha256": "c87cca63b587c9ae13a02600880da8ea132b219bc5a14e4cf66cc02b17ad0a91",
+      "chunks": [
+        {
+          "blob_sha": "cf9a47f225a909f00603c723427378a34a45a449",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "+DzBN3qtDlhf5HN/"
+        },
+        {
+          "blob_sha": "44854896143be57e94068299bce6c73391f8e3a6",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "bits2EDH+IvDIrF2"
+        },
+        {
+          "blob_sha": "b1d8e8d64314670b564942a356eacaf756542e72",
+          "offset": 4194304,
+          "plaintext_bytes": 591423,
+          "nonce_base64": "O2Ws5Mdt9n3KJHM0"
+        }
+      ]
+    },
+    {
+      "name": "segments/0090.mp4",
+      "bytes": 4762812,
+      "sha256": "efdf2dc131f3d501a174178d2a21f596b630bb238b5f7a4bdaf79a33de9d95a1",
+      "chunks": [
+        {
+          "blob_sha": "ddefcacfbb9238b0a8a5c1a143a354d4373f6138",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "T4/ylvemG1Hj7uUi"
+        },
+        {
+          "blob_sha": "a8a030a5f89ce630c8e2a2acf087f776281c80e7",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "sYn+FBg60DgVvsHF"
+        },
+        {
+          "blob_sha": "4f6771e34b491f207de7d39191b16f22a3f99785",
+          "offset": 4194304,
+          "plaintext_bytes": 568508,
+          "nonce_base64": "KBMWuDIcF64vizX1"
+        }
+      ]
+    },
+    {
+      "name": "segments/0091.mp4",
+      "bytes": 4769294,
+      "sha256": "78b7486c2dbefe5245a0deee990dff59b03c36300b65388b188c5f9c27bda26a",
+      "chunks": [
+        {
+          "blob_sha": "1250dd656e8844395e2a00a00a6465aee7b7d6f8",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "0C5jA6yJ4+7gOQkq"
+        },
+        {
+          "blob_sha": "0733d584c130e6c321c7ecc37d9fd7cb397318a5",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "77nmYrpYLnitVJEr"
+        },
+        {
+          "blob_sha": "d29fc381934a50bcda1c08fea6fdbf1f41061dba",
+          "offset": 4194304,
+          "plaintext_bytes": 574990,
+          "nonce_base64": "MdWOSccffJT9Rk8Y"
+        }
+      ]
+    },
+    {
+      "name": "segments/0092.mp4",
+      "bytes": 4763959,
+      "sha256": "b5e738c2e1cbae750cbb135cd9a873b148aaeca1c51a123eba109c3dc9024ad2",
+      "chunks": [
+        {
+          "blob_sha": "fd528bceada64678e33218817c19f156a2910000",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "ABRESE/doIF/4NdR"
+        },
+        {
+          "blob_sha": "40a10e49149d3004e61db731eac6ff1ca64db1c3",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "44lDKgUSYIQZ+1CK"
+        },
+        {
+          "blob_sha": "3c6d406bda66137f4fab80135ebb1aa9e135fd8c",
+          "offset": 4194304,
+          "plaintext_bytes": 569655,
+          "nonce_base64": "f7/MZ+BWywa/U/UF"
+        }
+      ]
+    },
+    {
+      "name": "segments/0093.mp4",
+      "bytes": 4766885,
+      "sha256": "beb4ba9f6ae92cc02e9c9bd08808ad80a5365871420f75ed23c3a32db8326feb",
+      "chunks": [
+        {
+          "blob_sha": "6514895b43696056d0aabb381441688a5c80da54",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "srzDSc9Kv8uAEHhW"
+        },
+        {
+          "blob_sha": "98e07fdf89ff89e3be5615d5e272c33906181317",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "OYKT7cRENrzdWMZE"
+        },
+        {
+          "blob_sha": "8412141eef7bf31c631e020fc5a34e9e458b2290",
+          "offset": 4194304,
+          "plaintext_bytes": 572581,
+          "nonce_base64": "9mEt1BYtt5mclJD+"
+        }
+      ]
+    },
+    {
+      "name": "segments/0094.mp4",
+      "bytes": 4277019,
+      "sha256": "40c3fa0bec9c98746fe94b18241a32dae2dbcf507786495ad0da5738298f6e25",
+      "chunks": [
+        {
+          "blob_sha": "ad9d9069ad7d2793505878f1d9e8d6b0a6ae6924",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "PX/dbZjnEJnXC9hV"
+        },
+        {
+          "blob_sha": "376dfa8a066e412ac3bcbe58485d5aaa8768ecf1",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "AGNGuxlTFSxTp9Qe"
+        },
+        {
+          "blob_sha": "14fc4aeeaeeea248bd093db4c584d802d0f473cf",
+          "offset": 4194304,
+          "plaintext_bytes": 82715,
+          "nonce_base64": "22LHm/sYsYQWIo08"
+        }
+      ]
+    },
+    {
+      "name": "segments/0095.mp4",
+      "bytes": 4262144,
+      "sha256": "6f0ce2ca22a794d27cdc701b4c06d840eb09673324c2393b8bc341e094f38c8a",
+      "chunks": [
+        {
+          "blob_sha": "65a5b494a975221567a7a82e682f295ddca6fee4",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "6HVsf1rGqOkjZBdF"
+        },
+        {
+          "blob_sha": "ae6b58c9598fa6ef22f8aba4926e712cd71b6372",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "0D8DGxX7101obnut"
+        },
+        {
+          "blob_sha": "faf457785fcbbf485ed6ba1050d1d56b5ce40bb1",
+          "offset": 4194304,
+          "plaintext_bytes": 67840,
+          "nonce_base64": "sEH90DKmONcC+iUO"
+        }
+      ]
+    },
+    {
+      "name": "segments/0096.mp4",
+      "bytes": 4748517,
+      "sha256": "9438cf3266eba006d048a7c44f646aced3d4aedd88ac59803a40e413d8902352",
+      "chunks": [
+        {
+          "blob_sha": "0c11f49898ed91f9701c6d1394528277b440253a",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "ZZ5trdwswK5CAeLp"
+        },
+        {
+          "blob_sha": "12bfb5adcbc504fd0bf92d2d20564947e496b2da",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "SuRCz7EqQjStte4W"
+        },
+        {
+          "blob_sha": "2a939d1965876537d3dedc41b4a18a76e62e226f",
+          "offset": 4194304,
+          "plaintext_bytes": 554213,
+          "nonce_base64": "Pd4dLVKpnI3wrp31"
+        }
+      ]
+    },
+    {
+      "name": "segments/0097.mp4",
+      "bytes": 68248,
+      "sha256": "b46c223b328afe654400219ef6b8a2026049ce5c41c7321269296a4337a72965",
+      "chunks": [
+        {
+          "blob_sha": "93c4b2aa1aa334852d37bbefb7a24ea7d2a4c433",
+          "offset": 0,
+          "plaintext_bytes": 68248,
+          "nonce_base64": "/yYALrejK0RztAdN"
+        }
+      ]
+    },
+    {
+      "name": "segments/0098.mp4",
+      "bytes": 5216248,
+      "sha256": "20f1c3893a74e48759ebee81b9ace4e2fcf50421ec611c27585f2e0b70e7dd99",
+      "chunks": [
+        {
+          "blob_sha": "6da40dc3213f4add0c5d8aca695420d670274b08",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "IpKQ9h0Bu7AZ5Tmy"
+        },
+        {
+          "blob_sha": "97d2ee3b066fd3931da98805ba0f84e092e4240d",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "miWZ6jYPrAX55cgU"
+        },
+        {
+          "blob_sha": "46367fedb7401e315e41cbf3ee84aada252a9579",
+          "offset": 4194304,
+          "plaintext_bytes": 1021944,
+          "nonce_base64": "AC7zsesyHCh2QQYj"
+        }
+      ]
+    },
+    {
+      "name": "segments/0099.mp4",
+      "bytes": 68248,
+      "sha256": "b46c223b328afe654400219ef6b8a2026049ce5c41c7321269296a4337a72965",
+      "chunks": [
+        {
+          "blob_sha": "d025a6cb19c770b4b731ad7adb1315b34d6b5b39",
+          "offset": 0,
+          "plaintext_bytes": 68248,
+          "nonce_base64": "0DvMmQ6m0dzQvbk8"
+        }
+      ]
+    },
+    {
+      "name": "segments/0100.mp4",
+      "bytes": 3927524,
+      "sha256": "1ee2736277d15b6f71b7c92e341106cb1cd96e614eefedf8a83a5575497103f0",
+      "chunks": [
+        {
+          "blob_sha": "2cd199de8a3591b2fbaa232062371249ed8ac115",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "Aod93lFzOSEwaWcU"
+        },
+        {
+          "blob_sha": "346ac7d3a3ddaaaa3ad0033262299abd03221d12",
+          "offset": 2097152,
+          "plaintext_bytes": 1830372,
+          "nonce_base64": "qTsYfkbSjOowkAnL"
+        }
+      ]
+    },
+    {
+      "name": "segments/0101.mp4",
+      "bytes": 4280283,
+      "sha256": "85a55a168512942e39bf48b7b8fd7ece3d503ae8a30ed10f24ccfa717ce91f60",
+      "chunks": [
+        {
+          "blob_sha": "7058cc462adc72b2d27bc22a583b7283bf612291",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "udOiG9TkQm4yVaWo"
+        },
+        {
+          "blob_sha": "3b61393a007f4ffdea081fdbd97c6057675cd8fa",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "T1LbAKhIio3Dl+7u"
+        },
+        {
+          "blob_sha": "026c350bbb392e5acfdd6420cafdf2d56abff82a",
+          "offset": 4194304,
+          "plaintext_bytes": 85979,
+          "nonce_base64": "HzO53G560a4AyxgY"
+        }
+      ]
+    },
+    {
+      "name": "segments/0102.mp4",
+      "bytes": 4748437,
+      "sha256": "d35cdb5ad6833d516add12f91f1ec1f0f3bd72fa4880d175ecaa78dee029191e",
+      "chunks": [
+        {
+          "blob_sha": "fb3d3d9066b6bb11d2683b45496269b3e41a7ce2",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "JHA1rlBEFpFmz8Eq"
+        },
+        {
+          "blob_sha": "6552e8df01b5f880579ab911af81ef80491b5745",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "PoIHRiKlOPD+sM32"
+        },
+        {
+          "blob_sha": "435d36f0d7fe4c76c75b055a8efdafae10c67a07",
+          "offset": 4194304,
+          "plaintext_bytes": 554133,
+          "nonce_base64": "F23ySP9Bv4rDoYFe"
+        }
+      ]
+    },
+    {
+      "name": "segments/0103.mp4",
+      "bytes": 4823630,
+      "sha256": "c3ce9f1c18b28c1bd17e82512faed7e5da9eef5e71fa519d8eb5a6ce7d18763f",
+      "chunks": [
+        {
+          "blob_sha": "97a64fd6c81ef9d3d1867696831e8381a1ebcce7",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "ZkX1ue9ghH8o4llI"
+        },
+        {
+          "blob_sha": "8c85b4e723bbdd856d89f9a70f8961a0a5b17adf",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "bsOzxLTJXqnyPElN"
+        },
+        {
+          "blob_sha": "75a8d35568a3eaf0edb34fce7a89473ea29f72a9",
+          "offset": 4194304,
+          "plaintext_bytes": 629326,
+          "nonce_base64": "1WVMz5/23jqPPTZB"
+        }
+      ]
+    },
+    {
+      "name": "segments/0104.mp4",
+      "bytes": 4881312,
+      "sha256": "244a1cb7cf30ca54a652e389d1f5e367c5e98ebafcfd35111f5f5476ffbb564b",
+      "chunks": [
+        {
+          "blob_sha": "f86ef658447149a02eb7fb5f4b90a98f06037bdd",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "XO1SzIk/ASXTqbYv"
+        },
+        {
+          "blob_sha": "4eb29482f31527c08d8969c01f5ac7b92fe1eed7",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "haPeGe8TNJ8v4MNf"
+        },
+        {
+          "blob_sha": "da98f16c5202319b05214b9104732f7eec50c53c",
+          "offset": 4194304,
+          "plaintext_bytes": 687008,
+          "nonce_base64": "wQgJpQfU1rF/5bE8"
+        }
+      ]
+    },
+    {
+      "name": "segments/0105.mp4",
+      "bytes": 4840233,
+      "sha256": "e504833fb0158aff563b6f35fced620fa0f597777ff03cd2f323017fce5de1c8",
+      "chunks": [
+        {
+          "blob_sha": "be0bbadae213b05d91de0317a4df7524f12f272f",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "hPyhohPcah6Pe+82"
+        },
+        {
+          "blob_sha": "93ccfb0b6b107102bc5620383c0e82256e39407a",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "sWq3pgq/SUV1mDxx"
+        },
+        {
+          "blob_sha": "64da7dd6b6d2d83cf1d8e1885c5a823a03a723ce",
+          "offset": 4194304,
+          "plaintext_bytes": 645929,
+          "nonce_base64": "MtEVfaoCpkK23jmm"
+        }
+      ]
+    },
+    {
+      "name": "segments/0106.mp4",
+      "bytes": 5215591,
+      "sha256": "7fa0b26518ebe5e89b5f451a0c8bbf8ddd66b4add8b57fd0ffc7c989257f0498",
+      "chunks": [
+        {
+          "blob_sha": "19ce3af30001697818d844d5a49a476614320f3b",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "qekto2GpdveJtKSv"
+        },
+        {
+          "blob_sha": "57848e812bca9d5f386ed0376c35ee1ff9095355",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "nE2sfIPx9XBOBYcO"
+        },
+        {
+          "blob_sha": "f3a4036842a3b9ef580c9b8adcc03cea4592e5df",
+          "offset": 4194304,
+          "plaintext_bytes": 1021287,
+          "nonce_base64": "lJFimgdZ/D6rJNGx"
+        }
+      ]
+    },
+    {
+      "name": "segments/0107.mp4",
+      "bytes": 5219201,
+      "sha256": "479f9c5950f4454cb560a11effe26d6661cc1f1ea3a3c3f584f4a29bf38d0eff",
+      "chunks": [
+        {
+          "blob_sha": "533f7905b95aa48f8d0d0bb0a4c022fd9cca73b6",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "MDN96zkqIreJG2hQ"
+        },
+        {
+          "blob_sha": "e3e2aa31643b4a0eaba501d02433529489fc5bcf",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "hmWRq4XWcnX6QNyX"
+        },
+        {
+          "blob_sha": "e55cf380b0f11150e01e9d9b035789f12cdb926c",
+          "offset": 4194304,
+          "plaintext_bytes": 1024897,
+          "nonce_base64": "umuKK9HV4oSh5bTV"
+        }
+      ]
+    },
+    {
+      "name": "segments/0108.mp4",
+      "bytes": 5237963,
+      "sha256": "69878c711d13be8fabff4bacd900cb073a944c2d6dcbb0d5b6eaee6d072446c1",
+      "chunks": [
+        {
+          "blob_sha": "234ad66568d5a6bb5033b9b682ad4ed41e8b10f6",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "pYvjw+1lVaUCo+j/"
+        },
+        {
+          "blob_sha": "efa5214484765d1e413af2627946bfc259f12164",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "xW9hFfeEWTyFTJ+F"
+        },
+        {
+          "blob_sha": "ab516bd2fc6c85684ab9ffc3a372a788e654f661",
+          "offset": 4194304,
+          "plaintext_bytes": 1043659,
+          "nonce_base64": "1s3SMCFGIytGbjQz"
+        }
+      ]
+    },
+    {
+      "name": "segments/0109.mp4",
+      "bytes": 3175494,
+      "sha256": "2463f8c7ee8b87e8ef195e2a31180db8ef7ce659f35fd396003346ae76dcb82c",
+      "chunks": [
+        {
+          "blob_sha": "0c10432cc97b5c98efde58f90dbc85e53cd9d10b",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "R0pny4I/NVdk/vMe"
+        },
+        {
+          "blob_sha": "baed73b9283b1ca57e2333ad0cec836b1b98770a",
+          "offset": 2097152,
+          "plaintext_bytes": 1078342,
+          "nonce_base64": "2mnx/sGnu7OOilly"
+        }
+      ]
+    },
+    {
+      "name": "segments/0110.mp4",
+      "bytes": 4325645,
+      "sha256": "5d18c5449e9a399eba71b174d1e2fc2f0e0819aeae51efe6320da011911141c8",
+      "chunks": [
+        {
+          "blob_sha": "8381ec8319aca75a51962db00cdf1ad5d668424c",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "iZpcycTFjTQPVnyM"
+        },
+        {
+          "blob_sha": "dce258029b97e1e68c74d16832521250afaa8b90",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "Uvk2TbpmHjJn8wl0"
+        },
+        {
+          "blob_sha": "7f0dd4ace151bd73c7701a4ed393ddd1fc009be7",
+          "offset": 4194304,
+          "plaintext_bytes": 131341,
+          "nonce_base64": "9heQv+yA/2hGvM3Q"
+        }
+      ]
+    },
+    {
+      "name": "segments/0111.mp4",
+      "bytes": 4318415,
+      "sha256": "e121e2fb850c942991fb3d5a72fa438eb122af6420bdf9f5b02fe4cf93a0ec39",
+      "chunks": [
+        {
+          "blob_sha": "109410a3b2cce74c04dd3fad1eab904021377d1f",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "rynbaQg/XHyJJaJD"
+        },
+        {
+          "blob_sha": "6a383ea6f3727a46b08474c643cd6b4d0c7f9e8f",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "/8V372VRKyXttRMS"
+        },
+        {
+          "blob_sha": "10e261b2a3959fc84165d2550c2b513fecf92299",
+          "offset": 4194304,
+          "plaintext_bytes": 124111,
+          "nonce_base64": "LzQtCrBeF4Xwkudc"
+        }
+      ]
+    },
+    {
+      "name": "segments/0112.mp4",
+      "bytes": 1644720,
+      "sha256": "2cd2fbd8f365c806bd60e3b287d15aca1938c25267acbab50a4e12a0c541f616",
+      "chunks": [
+        {
+          "blob_sha": "40f33a741b6987965c5e8fb71b8d5d121839fafd",
+          "offset": 0,
+          "plaintext_bytes": 1644720,
+          "nonce_base64": "AESYJGu9/iJyq7/1"
+        }
+      ]
+    },
+    {
+      "name": "segments/0113.mp4",
+      "bytes": 4501145,
+      "sha256": "73aa88d706e24f2503102441761db0ac36734dbe71e1db47630dacfe86769960",
+      "chunks": [
+        {
+          "blob_sha": "689ad81dd1b649037b7bfaabb91882b8e202a8e8",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "r0l15hetzcKJmCpK"
+        },
+        {
+          "blob_sha": "301793dc35c06a15593cd18a6756fc213cc7223a",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "w5k6S+O9Xuih0tOw"
+        },
+        {
+          "blob_sha": "f13eddfa935d036f09cda9d336b9d68bb6c8bd1b",
+          "offset": 4194304,
+          "plaintext_bytes": 306841,
+          "nonce_base64": "chUeUynlKyYOc+jM"
+        }
+      ]
+    },
+    {
+      "name": "segments/0114.mp4",
+      "bytes": 4831872,
+      "sha256": "c94e8dcd9d29492f857403be65dfa2e0984bd7597097c645bc144d4935e060e8",
+      "chunks": [
+        {
+          "blob_sha": "114d5c692e05a5b94f7943a944c7dbdf5bf07cfe",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "DGOxX141x2kctKX5"
+        },
+        {
+          "blob_sha": "00ac9aeb696ae00dfff3f0c26b1549600deee307",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "D6mpu1hjkyRm108M"
+        },
+        {
+          "blob_sha": "0f8bfa610dcd90d89138abebe0d7455dd2cff18f",
+          "offset": 4194304,
+          "plaintext_bytes": 637568,
+          "nonce_base64": "1FE34PTzOWZeOQC+"
+        }
+      ]
+    },
+    {
+      "name": "segments/0115.mp4",
+      "bytes": 1623010,
+      "sha256": "4bdd052f79c338192d98547442e374f23e7aec62651f107708a15204cda41224",
+      "chunks": [
+        {
+          "blob_sha": "38e34bdb9ba3f9dfd493babe60a6706549c099d6",
+          "offset": 0,
+          "plaintext_bytes": 1623010,
+          "nonce_base64": "SJ/S+E8JXwphcycF"
+        }
+      ]
+    },
+    {
+      "name": "segments/0116.mp4",
+      "bytes": 3508362,
+      "sha256": "c72c4b7ee393ba6e79088e225b101d9709f7913750f938516cb528dd5e44e2c0",
+      "chunks": [
+        {
+          "blob_sha": "881082acfaf511c6487ab52705e22a13c734b23e",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "kruQqJfKHp2/D4cB"
+        },
+        {
+          "blob_sha": "4c2925f432c7a72020bf6e01da83f52336d47d91",
+          "offset": 2097152,
+          "plaintext_bytes": 1411210,
+          "nonce_base64": "6YHO00SHRCv4U3Yc"
+        }
+      ]
+    },
+    {
+      "name": "segments/0117.mp4",
+      "bytes": 4319210,
+      "sha256": "0dd0e2b44af10a90ca5f3ad181d32d354a48641558f28dd6d10088f509177d0e",
+      "chunks": [
+        {
+          "blob_sha": "9c6c4acd6a3016024753a5a93bd5f771fa45987a",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "G/wIu5y/p92YndqG"
+        },
+        {
+          "blob_sha": "c32c893f600213cd1ce30680e80209ed72cad2ed",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "9uIkpQgQLaSZS7fp"
+        },
+        {
+          "blob_sha": "34c40c0ba27d3ccb147b4f805958f023467ebe6f",
+          "offset": 4194304,
+          "plaintext_bytes": 124906,
+          "nonce_base64": "/A4+KMmjDfTIP/NU"
+        }
+      ]
+    },
+    {
+      "name": "segments/0118.mp4",
+      "bytes": 5209381,
+      "sha256": "4653bf630b5813f1b64c90ba65aa60693de4d43cc6db77a65cab3e0a34c55411",
+      "chunks": [
+        {
+          "blob_sha": "2e8116322a4896f7ef066fa369afb03d661b4697",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "yZtN7wH8v6L5p5OX"
+        },
+        {
+          "blob_sha": "e472ab276b57e1667779ab0f5c0c9da36e7c6cdb",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "C5C/YuCiTvQYNLco"
+        },
+        {
+          "blob_sha": "0f95b3771adf23992e3be1c5edf9de25047e247e",
+          "offset": 4194304,
+          "plaintext_bytes": 1015077,
+          "nonce_base64": "UVAazYYvPtbJ00tK"
+        }
+      ]
+    },
+    {
+      "name": "segments/0119.mp4",
+      "bytes": 5176966,
+      "sha256": "07f954ba5ab74bc3ddd6ea307527dd04b8210f8f053022d70e66d6e3d57e3d52",
+      "chunks": [
+        {
+          "blob_sha": "245ac1ea94e12fc0fa0a054e23b325f0fd5dc288",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "bO+dtWYfPqPayrkP"
+        },
+        {
+          "blob_sha": "c5948b8dd8796d1bf7d300e60bce3eb8b1c1902e",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "pEfKRROy8m04+sak"
+        },
+        {
+          "blob_sha": "17a62ce843ff4fbc95cd5cc24f5bc2797a1dd1b2",
+          "offset": 4194304,
+          "plaintext_bytes": 982662,
+          "nonce_base64": "7THUoe7K9BTU++ju"
+        }
+      ]
+    },
+    {
+      "name": "segments/0120.mp4",
+      "bytes": 4372818,
+      "sha256": "093b89673329ca78f71a86e4576ba5d619bc71b840ca31a598abab7d21481cfa",
+      "chunks": [
+        {
+          "blob_sha": "b75e5daca905a1b7e48f56adf6fdb5f934aa3b23",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "VNL7g6wsz7Axu4BJ"
+        },
+        {
+          "blob_sha": "4098826ccb749058fb7a4f5ebfa3f43a9295da30",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "N5TmEsLFA/ZF04og"
+        },
+        {
+          "blob_sha": "f693abc94a076cf5866abdba84794332308fe91b",
+          "offset": 4194304,
+          "plaintext_bytes": 178514,
+          "nonce_base64": "aQ49BuRPfE2hf2ru"
+        }
+      ]
+    },
+    {
+      "name": "segments/0121.mp4",
+      "bytes": 3925879,
+      "sha256": "ec5a42e1d88aa6713ed613ec7e3e135b9b67548407cc46946771f6a093154763",
+      "chunks": [
+        {
+          "blob_sha": "0b3eb14799aad04a2d302c8a8cefe628eb65f2fa",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "2vIly6Jk/1dmVCGD"
+        },
+        {
+          "blob_sha": "fa3ac5a2f9d4c741854d32d17c6e7ae678e9a4d7",
+          "offset": 2097152,
+          "plaintext_bytes": 1828727,
+          "nonce_base64": "0jcdm1MCD4WkAenN"
+        }
+      ]
+    },
+    {
+      "name": "segments/0122.mp4",
+      "bytes": 4397251,
+      "sha256": "f392d153a21927388acbd68a88cb14491fb548fe13e36592c60b196d8fda3c68",
+      "chunks": [
+        {
+          "blob_sha": "ecdb51634da16bd9640da9ae1844d1e4a2c8bd35",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "dwCLNMWVl3tmOTdf"
+        },
+        {
+          "blob_sha": "b3a3abb8fcee49661ae0dce762348cce3347e0c9",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "CE/K8KG9hT6aJngE"
+        },
+        {
+          "blob_sha": "8385f5c6c1fdf530d8447989b1bdd092130c85e0",
+          "offset": 4194304,
+          "plaintext_bytes": 202947,
+          "nonce_base64": "uPLGnvPHDizDiIJw"
+        }
+      ]
+    },
+    {
+      "name": "segments/0123.mp4",
+      "bytes": 4359236,
+      "sha256": "b8f0ee50ff69ec9a7c81493380f0c2a0244ca4a82f39cd94995586de5a3ea448",
+      "chunks": [
+        {
+          "blob_sha": "029ff622a8199f60dbd72612dae135949b27cb98",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "22QCZPceG9YzC6fD"
+        },
+        {
+          "blob_sha": "1d85a63e15ebbf99e2e6195abb87c656fbf9a43e",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "BZj0auH9NPFvzsmb"
+        },
+        {
+          "blob_sha": "dff6b0d32c55874b5f2ecaabe7ecdb40dfeadc0e",
+          "offset": 4194304,
+          "plaintext_bytes": 164932,
+          "nonce_base64": "IqoqjO6e1McED9r/"
+        }
+      ]
+    },
+    {
+      "name": "segments/0124.mp4",
+      "bytes": 4891678,
+      "sha256": "e4879e7d5f40613afa1fa9f3702ca0ba3eb1aec3df75cfb4cf427b1adb408c8d",
+      "chunks": [
+        {
+          "blob_sha": "c26383d6ffed0a00afb8bf156a3179975116d3d5",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "6YrHwGVFH3FB7gOv"
+        },
+        {
+          "blob_sha": "3300fbe9d3fe2c7e1cc39a46f81bdba03cc8823e",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "Ep5X/qBWNy8faN7W"
+        },
+        {
+          "blob_sha": "e2ced94f57e6c78dbc563d51ebbda7b8bfea4df0",
+          "offset": 4194304,
+          "plaintext_bytes": 697374,
+          "nonce_base64": "8NJRSVxAWRkZaCRW"
+        }
+      ]
+    },
+    {
+      "name": "segments/0125.mp4",
+      "bytes": 4761947,
+      "sha256": "bf26c3c3f05e1d8148cf4d917865690a09e23a1e7c2d44681e94394c9880ffa7",
+      "chunks": [
+        {
+          "blob_sha": "b654c344f318631425084f283050300122b70143",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "qAhVoHDL4PjYiE1G"
+        },
+        {
+          "blob_sha": "58a7fdc4ce4f341d49af5cfa2f95253c209d2519",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "MC9OJDomKQ+O8Q3f"
+        },
+        {
+          "blob_sha": "225758df2c75c12215f11d0214c176ddae64a252",
+          "offset": 4194304,
+          "plaintext_bytes": 567643,
+          "nonce_base64": "+gKHBVelcts13q2U"
+        }
+      ]
+    },
+    {
+      "name": "segments/0126.mp4",
+      "bytes": 1881249,
+      "sha256": "cc30c452e9e661b54d1450cc0e850545223f113d09f9e80593c74b0384b908a1",
+      "chunks": [
+        {
+          "blob_sha": "ba2af3ef2e1461a38599f42e7989e98a06ebdfcc",
+          "offset": 0,
+          "plaintext_bytes": 1881249,
+          "nonce_base64": "5YLPyrmiEdelytN0"
+        }
+      ]
+    },
+    {
+      "name": "segments/0127.mp4",
+      "bytes": 42232,
+      "sha256": "2730c44465e68c335984d4bdc832598ceda8c38e30affcb059340450db707f1b",
+      "chunks": [
+        {
+          "blob_sha": "06716af665f3637c74a609f9cdf3fb5f678f1e14",
+          "offset": 0,
+          "plaintext_bytes": 42232,
+          "nonce_base64": "BAbsrln9xauHg/oA"
+        }
+      ]
+    },
+    {
+      "name": "segments/0128.mp4",
+      "bytes": 4157249,
+      "sha256": "7848dec257cf9d4223c03b17c23053f8db3ff7ac812e2c81e4539288f8a3f997",
+      "chunks": [
+        {
+          "blob_sha": "7b374aff09592960a08ca0e12abde9e0b41a0d4c",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "39MKbjAACn5cKrZo"
+        },
+        {
+          "blob_sha": "f4cb8010882165b08cc94acc434effa897a249be",
+          "offset": 2097152,
+          "plaintext_bytes": 2060097,
+          "nonce_base64": "ZkRibfqW54OYY3WQ"
+        }
+      ]
+    },
+    {
+      "name": "segments/0129.mp4",
+      "bytes": 4200268,
+      "sha256": "112d7d9b29cbe42e11fef2898fd75bc153e0ea2cd08257fabf29164753214d25",
+      "chunks": [
+        {
+          "blob_sha": "ccdc9b343792e7cfd5c898283d3e82be49ed63e5",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "a0iXmAULFUqSKAuA"
+        },
+        {
+          "blob_sha": "a11cd6340564f5364989f109debd1bbc857cf8a8",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "TEJHiJ//Nf56FLj3"
+        },
+        {
+          "blob_sha": "64d7acd8b41601fde938d1c884d5ffad3bf050ac",
+          "offset": 4194304,
+          "plaintext_bytes": 5964,
+          "nonce_base64": "M7VgnDhvp0fLEHxQ"
+        }
+      ]
+    },
+    {
+      "name": "segments/0130.mp4",
+      "bytes": 4196513,
+      "sha256": "304592d16f28a342255b3635ae5af6849feaf1cf75cbcf7ce6ea724c1de03a08",
+      "chunks": [
+        {
+          "blob_sha": "edd7c342bec8196c672a137c8b19223d8680f243",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "ubIz7Tgu7+tYb2ur"
+        },
+        {
+          "blob_sha": "d7c22c08178f1e913deae2bcd6416131d85ca0a6",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "uO+QcupVJzKshPob"
+        },
+        {
+          "blob_sha": "e253f73c83d5555a2c1de9020382cdff8ac7c8d3",
+          "offset": 4194304,
+          "plaintext_bytes": 2209,
+          "nonce_base64": "C+IQXW/x5BpB53lh"
+        }
+      ]
+    },
+    {
+      "name": "segments/0131.mp4",
+      "bytes": 5001611,
+      "sha256": "852efc5133043865be1d57ccba09037e99df705c69025c9052b80b07de6a130e",
+      "chunks": [
+        {
+          "blob_sha": "54a69598282fc4fab03f5f6851cda8424157017c",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "ldtECjbTMp5SV+WJ"
+        },
+        {
+          "blob_sha": "1681bb638170e3cf9d8fea1257147603ce446780",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "V2i9PZCxHHZxuQ/v"
+        },
+        {
+          "blob_sha": "ba79d3da3fb6f6ac218b3d17eeb53617d24f9e58",
+          "offset": 4194304,
+          "plaintext_bytes": 807307,
+          "nonce_base64": "CapFIFTHOIPOtGoo"
+        }
+      ]
+    },
+    {
+      "name": "segments/0132.mp4",
+      "bytes": 3792138,
+      "sha256": "1186775934071117158882febf43f15c8fca03b8b9725bb30def764fbf0b1abb",
+      "chunks": [
+        {
+          "blob_sha": "845917b87ffe944e5cca8aeebebcd0e71b1d8db2",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "e/AA6biDOXM3cVOO"
+        },
+        {
+          "blob_sha": "0f87811a68cc2a6a56166fee407d82a90424ecaf",
+          "offset": 2097152,
+          "plaintext_bytes": 1694986,
+          "nonce_base64": "p1cEX5kWuWTO+nQi"
+        }
+      ]
+    },
+    {
+      "name": "segments/0133.mp4",
+      "bytes": 4991822,
+      "sha256": "23445a828de01f21bfa4410399dd116674a5951fb72e83ef4fc07c1c56e312c7",
+      "chunks": [
+        {
+          "blob_sha": "6aa228c1a86aa6de4fa096a6fe0cc07ed1bc1c4b",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "El1DxXnjq//BOR52"
+        },
+        {
+          "blob_sha": "9deec88b0c21bdbf5913ce6a2857d697fecbb2e0",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "vnQDFuX2PudFCZc0"
+        },
+        {
+          "blob_sha": "fb981229f62285a14d773684fc2410c8c9f502a6",
+          "offset": 4194304,
+          "plaintext_bytes": 797518,
+          "nonce_base64": "VnPvAcOpFSmzf1Gn"
+        }
+      ]
+    },
+    {
+      "name": "segments/0134.mp4",
+      "bytes": 3782677,
+      "sha256": "6e53c11255fc24d282e672cf95118d75387ec5bbb0c97f1853abfa0981360056",
+      "chunks": [
+        {
+          "blob_sha": "2a17d093126d0fe337131b5c56b3a682124d1fec",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "nwfoeBDQ2QOM2aQN"
+        },
+        {
+          "blob_sha": "3e75603aec6cf28a2113750989143ad4ea329b13",
+          "offset": 2097152,
+          "plaintext_bytes": 1685525,
+          "nonce_base64": "K74/8bKHlZwtc3Gc"
+        }
+      ]
+    },
+    {
+      "name": "segments/0135.mp4",
+      "bytes": 3266676,
+      "sha256": "0febfc51aa121933fe41db72cf5c504bf906bcefde5140f8d73d50e1f94f70b7",
+      "chunks": [
+        {
+          "blob_sha": "029504a572448fb7c16bee7ae50c8b4daa9e3396",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "p3JauqDl3lRjkqkj"
+        },
+        {
+          "blob_sha": "1d247b169110f2fb09e03f7f0e43648e65cf979f",
+          "offset": 2097152,
+          "plaintext_bytes": 1169524,
+          "nonce_base64": "HnucSKcMR2aK4dZC"
+        }
+      ]
+    },
+    {
+      "name": "segments/0136.mp4",
+      "bytes": 3446606,
+      "sha256": "512298f47234da36b9e3d734b3b0d641a497af6064f04ffef1fee68c2fb20dd8",
+      "chunks": [
+        {
+          "blob_sha": "1291f9962bf29442ffd135dc48e53bee8d4cdc0f",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "k3lqcG+kRYQoGwq3"
+        },
+        {
+          "blob_sha": "f49e27b707c6d36b0ce399bbd2ebed529ec1e21d",
+          "offset": 2097152,
+          "plaintext_bytes": 1349454,
+          "nonce_base64": "1FQE2QjhBc83E2uQ"
+        }
+      ]
+    },
+    {
+      "name": "segments/0137.mp4",
+      "bytes": 3195544,
+      "sha256": "08ac91ea2f2307cf853bc8c9770380e634880cc0557048e98a24b9f4bc4540b6",
+      "chunks": [
+        {
+          "blob_sha": "f7c1dd6fdeb802550beeb48eb2033fb3b7841696",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "o2t9bPmUU3PE5svL"
+        },
+        {
+          "blob_sha": "07182aac3b2820b8a6a81eeff235ab81784950a9",
+          "offset": 2097152,
+          "plaintext_bytes": 1098392,
+          "nonce_base64": "53DNQnPubwYbiKYV"
+        }
+      ]
+    },
+    {
+      "name": "segments/0138.mp4",
+      "bytes": 5139055,
+      "sha256": "bbee5630aca4e8ed7068d12ff9be31c044e56aa1bb2b5efe95b8f17f5bb8ccc2",
+      "chunks": [
+        {
+          "blob_sha": "6b8b6cfe217d4d6496d387f30c8bc5d274c1671f",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "DYbf7ePtmu3RBzCw"
+        },
+        {
+          "blob_sha": "9796b6f9952bb45340cbd5f360519fc831f16055",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "JHfTES+gkMX+HVNd"
+        },
+        {
+          "blob_sha": "7dea93fb9b50186f301dec2e5888e0e4a5764f71",
+          "offset": 4194304,
+          "plaintext_bytes": 944751,
+          "nonce_base64": "lbOu5y557fz7UnRX"
+        }
+      ]
+    },
+    {
+      "name": "segments/0139.mp4",
+      "bytes": 4458637,
+      "sha256": "a07fc9da9c7f20a2250d740681e0744bb6797e2a6fcd29cb62e17a6ad3adf12c",
+      "chunks": [
+        {
+          "blob_sha": "8cb24d04c74aed8ae7efe963dbd567dc3fc16332",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "4rS7ZjGGPX66di8a"
+        },
+        {
+          "blob_sha": "96bd6f8c6bdc6ba79a4d89ddf7136246d2ec7700",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "KFtGnnmeCryqB+4r"
+        },
+        {
+          "blob_sha": "c97fe980738cb3c278c8e0ee3a5073e1ecad0f5f",
+          "offset": 4194304,
+          "plaintext_bytes": 264333,
+          "nonce_base64": "bolD9l7ssiUhcSdS"
+        }
+      ]
+    },
+    {
+      "name": "segments/0140.mp4",
+      "bytes": 2975160,
+      "sha256": "0c85162357716ec398f7fb55fa46b5fe6fa91d3e5fc44b4fecd70fdcbf6b06f4",
+      "chunks": [
+        {
+          "blob_sha": "128108409c78036c93712a1585d852e9458382c1",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "pQIWhBO1J3cl7/QS"
+        },
+        {
+          "blob_sha": "665bdaed03565febd67247575e50334c2f421f41",
+          "offset": 2097152,
+          "plaintext_bytes": 878008,
+          "nonce_base64": "19qSFpmX4mMRr3Ku"
+        }
+      ]
+    },
+    {
+      "name": "segments/0141.mp4",
+      "bytes": 2746674,
+      "sha256": "62641a9d4943899d49b2e4073eba407317d03cad5bd7c21ccaa4735b95b9a3d3",
+      "chunks": [
+        {
+          "blob_sha": "4d5403bf303e0d73ab6a6079aeba60e2a5d95927",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "FFwvrNc8bcM4e9u8"
+        },
+        {
+          "blob_sha": "4f4ec92de9a19e00a0f1e2516fde4cd989db77fc",
+          "offset": 2097152,
+          "plaintext_bytes": 649522,
+          "nonce_base64": "ga629N73MG/yb1Js"
+        }
+      ]
+    },
+    {
+      "name": "segments/0142.mp4",
+      "bytes": 3319910,
+      "sha256": "71276fcdc5cf4792fdde4c8ffafe3f8665fd2c16a94b915a4f6782671cbdd5e7",
+      "chunks": [
+        {
+          "blob_sha": "e4ab0e47d060219182ac9a846f2ac82603036fe7",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "RN0wv3zWeG+AkSsc"
+        },
+        {
+          "blob_sha": "a9c056360b94d1db64fad440daf1b4c98aa5847d",
+          "offset": 2097152,
+          "plaintext_bytes": 1222758,
+          "nonce_base64": "0++pYVYgLdzPavSM"
+        }
+      ]
+    },
+    {
+      "name": "segments/0143.mp4",
+      "bytes": 2139588,
+      "sha256": "5baa84c0221e1d544d744d241f993bc784e24f010ff2a5f408e367629c4b4928",
+      "chunks": [
+        {
+          "blob_sha": "c29b1d24f5ebce520aceae38ae9edf6bf6e0d02a",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "Xe52W8cxINO6tD97"
+        },
+        {
+          "blob_sha": "d8e95dfa856ba6019ac43a61d5e21fe3b24ec567",
+          "offset": 2097152,
+          "plaintext_bytes": 42436,
+          "nonce_base64": "BcUi1jKsAw63Oizd"
+        }
+      ]
+    },
+    {
+      "name": "segments/0144.mp4",
+      "bytes": 4105987,
+      "sha256": "2e36cf1ca0a3e5cc972b40a8a859eae92db9fefa3cb908829ecc3adeb17654ba",
+      "chunks": [
+        {
+          "blob_sha": "abcea4f903c10d115de708c21f3cb623eb8d083e",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "xqmXIgaaPI47xeKD"
+        },
+        {
+          "blob_sha": "80a3b1836a06f8a6d5694776b8634a33421369d3",
+          "offset": 2097152,
+          "plaintext_bytes": 2008835,
+          "nonce_base64": "gRXbmMb2m6krggZH"
+        }
+      ]
+    },
+    {
+      "name": "segments/0145.mp4",
+      "bytes": 3740134,
+      "sha256": "5a3876192921f29bd9afca877fccd9c8342130c3fb5918a64f92711d1a21741e",
+      "chunks": [
+        {
+          "blob_sha": "37661b1f59716d969b1c6570c0f8c5afbb434558",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "R1sKKMTBhIQCVakJ"
+        },
+        {
+          "blob_sha": "2b402d49a16f53621482a5b1622da33268e31257",
+          "offset": 2097152,
+          "plaintext_bytes": 1642982,
+          "nonce_base64": "QqS8wA7WG1+h7iq8"
+        }
+      ]
+    },
+    {
+      "name": "segments/0146.mp4",
+      "bytes": 2924602,
+      "sha256": "1d7f302ffb77604ab0bfe0e12bb1b0a57600f46f874ff4a7bdd0903ed97fa4d6",
+      "chunks": [
+        {
+          "blob_sha": "d5a8a6f196b5d0365c11cdc0d5e6296bd1d61386",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "hFzhHY51d2pY2KhU"
+        },
+        {
+          "blob_sha": "bce472dbc570d56bf6e5356e79e89b07210f82b0",
+          "offset": 2097152,
+          "plaintext_bytes": 827450,
+          "nonce_base64": "FRViPN951AaOV5xk"
+        }
+      ]
+    },
+    {
+      "name": "segments/0147.mp4",
+      "bytes": 1355943,
+      "sha256": "fcf11e05994b5ebc6fb7aeafa1dec60cd4b4d350b9c619dd22bed4367804ae6a",
+      "chunks": [
+        {
+          "blob_sha": "af29cec61c903651806eafe0314e3c0021d787d0",
+          "offset": 0,
+          "plaintext_bytes": 1355943,
+          "nonce_base64": "0TlzSkH5J8JZAlOK"
+        }
+      ]
+    },
+    {
+      "name": "segments/0148.mp4",
+      "bytes": 3965600,
+      "sha256": "7db93c7439ea74ca960ef1176e15deba394b1aef09532ad98f75851476125b1f",
+      "chunks": [
+        {
+          "blob_sha": "cca182b7f35f51926e39c4d754bbba4a1668b520",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "6r4Yye3QoErxBBSn"
+        },
+        {
+          "blob_sha": "4008cf86eed3aac99abcf02429295eb7723a1b24",
+          "offset": 2097152,
+          "plaintext_bytes": 1868448,
+          "nonce_base64": "yrWBhH2AX+60qr/V"
+        }
+      ]
+    },
+    {
+      "name": "segments/0149.mp4",
+      "bytes": 4170925,
+      "sha256": "79a9ee4511bbd743c29b8cee8aacc29d697f6683a004b1508ac5efa164813d26",
+      "chunks": [
+        {
+          "blob_sha": "e7aad1c4d98baf2c19398ac868532c13313439cd",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "sCqPtZsTTXGpj8Lz"
+        },
+        {
+          "blob_sha": "581b7b9943f2cdfeb19d4cf79f7cbf8aee47b742",
+          "offset": 2097152,
+          "plaintext_bytes": 2073773,
+          "nonce_base64": "bKg1j6wZErPfh0yh"
+        }
+      ]
+    },
+    {
+      "name": "segments/0150.mp4",
+      "bytes": 4148007,
+      "sha256": "c7edfbe2907c66fba6943ac5e11fa6d9218856c58dab981b9bbbfa54af56f268",
+      "chunks": [
+        {
+          "blob_sha": "da295dd907577bf80ffc8b593b4b24adc45e5aef",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "CmuNrvOUWBhchpN1"
+        },
+        {
+          "blob_sha": "cee806d0aa0ccbe382a0e4a002862ae183f850ad",
+          "offset": 2097152,
+          "plaintext_bytes": 2050855,
+          "nonce_base64": "aCZ9/F07cj8DAN7J"
+        }
+      ]
+    },
+    {
+      "name": "segments/0151.mp4",
+      "bytes": 4158874,
+      "sha256": "274b33faf6887345d7efaa63c559410f4858b83657a5c28f49803b95642ff8f1",
+      "chunks": [
+        {
+          "blob_sha": "39d72240ee7613bc0c266518e9a005bdecc95c6e",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "m0c5i/+kGOBUYWg+"
+        },
+        {
+          "blob_sha": "4d72163d6b1717d98ecab3b617134387f7742024",
+          "offset": 2097152,
+          "plaintext_bytes": 2061722,
+          "nonce_base64": "txGtY46d4JnapIUd"
+        }
+      ]
+    },
+    {
+      "name": "segments/0152.mp4",
+      "bytes": 4257640,
+      "sha256": "f0e46b1637f9241f6e1e1721f9ad038f70dbed7c76d143596641401b13b86d3a",
+      "chunks": [
+        {
+          "blob_sha": "761cb9811a1e3b9a8865f70be3c44b6eaed886fd",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "wGdUBjfRS5SVCxe4"
+        },
+        {
+          "blob_sha": "0a16388f5423d24250d42e02f0242ffaae3527ad",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "WXg3ZvTpQvOPij3m"
+        },
+        {
+          "blob_sha": "59914da0db95ceecea4e0147721c16b9479b062c",
+          "offset": 4194304,
+          "plaintext_bytes": 63336,
+          "nonce_base64": "NiHtEBaUYIViHzNM"
+        }
+      ]
+    },
+    {
+      "name": "segments/0153.mp4",
+      "bytes": 4046146,
+      "sha256": "811cb44dbeca6afa5b1913e32ceebb2022720a24f2f10dad003b9925ef39f053",
+      "chunks": [
+        {
+          "blob_sha": "e0e3f77207c5ae5cbc7578f8232c42b618e7e522",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "S4CX5CuNTkyKTaOl"
+        },
+        {
+          "blob_sha": "87d09ab3dd543d5e7e04b2b1f658cfc827ee8f83",
+          "offset": 2097152,
+          "plaintext_bytes": 1948994,
+          "nonce_base64": "N4NjnRkCfbVhWziY"
+        }
+      ]
+    },
+    {
+      "name": "segments/0154.mp4",
+      "bytes": 4319772,
+      "sha256": "834bdb5f38f62f7e175ea62780e6fcab2f94590d9580101056cf3a0569ad38a4",
+      "chunks": [
+        {
+          "blob_sha": "83bd4ce144b89780d93557df460cfec10b3173a0",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "cPFInsqS9gbVmgii"
+        },
+        {
+          "blob_sha": "342e86965ea4d53a324bb7ab320548326a6a96ee",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "E6lFkPCqHNm2BjsT"
+        },
+        {
+          "blob_sha": "1a0347dd501d7084f6bba47dda4f5f5de491f403",
+          "offset": 4194304,
+          "plaintext_bytes": 125468,
+          "nonce_base64": "PIu6FV32+6gK9NKQ"
+        }
+      ]
+    },
+    {
+      "name": "segments/0155.mp4",
+      "bytes": 4271577,
+      "sha256": "800c8ab5ba461648d1dcd87ed1e5001e10ae09792dda99601fa98916be3f22b6",
+      "chunks": [
+        {
+          "blob_sha": "be061845f369d84210697df4d8ee62fbfd1124bd",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "NexiWmn5S3iHrTcu"
+        },
+        {
+          "blob_sha": "ee85a4bd5fd17a89b359bf95cf7adffcb41bd3a5",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "3x3xnW3T2mLZZfsT"
+        },
+        {
+          "blob_sha": "01bfc963e2747c9fa33869958e1c668cde607d03",
+          "offset": 4194304,
+          "plaintext_bytes": 77273,
+          "nonce_base64": "d/nUgzvN00nnKayl"
+        }
+      ]
+    },
+    {
+      "name": "segments/0156.mp4",
+      "bytes": 4529995,
+      "sha256": "ff3eae03a6181010627f6622c7d28520742d68f764405ca9a92c4b38e03bd373",
+      "chunks": [
+        {
+          "blob_sha": "aacd9d6e0b3e947671b11966c74962dddc4f74d1",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "RPZgjaJ2ozso05PA"
+        },
+        {
+          "blob_sha": "42e200f6e8b0969f3ba322c9173e99a37f55f66b",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "yfoWYmnMzVNAp8el"
+        },
+        {
+          "blob_sha": "f6b569eb229732aca86380ebda7aa98c43929d34",
+          "offset": 4194304,
+          "plaintext_bytes": 335691,
+          "nonce_base64": "KCiJLAsqOKvhW/G1"
+        }
+      ]
+    },
+    {
+      "name": "segments/0157.mp4",
+      "bytes": 2747390,
+      "sha256": "4ff524ad988ed58a1d2443b8897ecc8f88f1269504c9ced656fd570a603d019d",
+      "chunks": [
+        {
+          "blob_sha": "537f018adea75ca87cef337ce5a32db64e272aaa",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "9/rO3YxKek8nm3p/"
+        },
+        {
+          "blob_sha": "92664130ab43adf6745c48eab0f8c3bce03832c8",
+          "offset": 2097152,
+          "plaintext_bytes": 650238,
+          "nonce_base64": "4javqYXDLzST8bWz"
+        }
+      ]
+    },
+    {
+      "name": "segments/0158.mp4",
+      "bytes": 4444030,
+      "sha256": "675e3e33bd9e612df71c527b5da803d37cbca7239c608fbfb8a85f8d341464bb",
+      "chunks": [
+        {
+          "blob_sha": "cd93d83dd8c5a0b0c343d617de6281b08de3dc4f",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "gFop76awSSQ4BWvK"
+        },
+        {
+          "blob_sha": "a96abd50f49a86b5c110859580509dcb80ef9c65",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "Xw0Cfzn3/Udp8JqW"
+        },
+        {
+          "blob_sha": "cf33588762d55402de130ebd13e546e62dac9941",
+          "offset": 4194304,
+          "plaintext_bytes": 249726,
+          "nonce_base64": "YNz9+mFrGORkLJVF"
+        }
+      ]
+    },
+    {
+      "name": "segments/0159.mp4",
+      "bytes": 4248124,
+      "sha256": "9d74cf09987dbd96f3a90db53702d9c1517cbef314b0cacecaa0a24fca514ebf",
+      "chunks": [
+        {
+          "blob_sha": "741b3295f2ac50f9a5885d5790e58575656281b3",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "DiB5M1eSZ4SS4ITC"
+        },
+        {
+          "blob_sha": "9781f882cf8282470b8b0894bbdcbd2c6e273c01",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "fUKKQxEsLEPRqdJC"
+        },
+        {
+          "blob_sha": "5e91f1b75d68325273bdbfe306adc13286ecdf3b",
+          "offset": 4194304,
+          "plaintext_bytes": 53820,
+          "nonce_base64": "vuQgTMZo+wheEf2b"
+        }
+      ]
+    },
+    {
+      "name": "segments/0160.mp4",
+      "bytes": 4570727,
+      "sha256": "e7a584c84ae5f1731314bb47fac7d505846c11ccb4a6b5e17b33205dbcd40b69",
+      "chunks": [
+        {
+          "blob_sha": "5189fe9ac228d8ef1671a9eef59e7d858a31ce3e",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "0UHRigeavUFZOXE5"
+        },
+        {
+          "blob_sha": "916f1faad92eafbd165628ba20461382c4bc12d7",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "hUkwe31Pkkq78Lbc"
+        },
+        {
+          "blob_sha": "68dc6ed5f3fb993532e57d91f4e13095b089006b",
+          "offset": 4194304,
+          "plaintext_bytes": 376423,
+          "nonce_base64": "dPo2GqYZ3OHLBDaU"
+        }
+      ]
+    },
+    {
+      "name": "segments/0161.mp4",
+      "bytes": 4569998,
+      "sha256": "efdd2a9aed3c7ccccb0dcebc6875cb639141207222465672dd503976800dcf15",
+      "chunks": [
+        {
+          "blob_sha": "99a50e02098f67f9793290ff95b127b389c04526",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "TsJKZyZuw0BRpYGi"
+        },
+        {
+          "blob_sha": "375aebf3261880033ba3bac2c6d93629355ac649",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "P2wu6FS5zNkYPZCX"
+        },
+        {
+          "blob_sha": "27ebb68942e4e09f30a9b25ca4247efeb738d827",
+          "offset": 4194304,
+          "plaintext_bytes": 375694,
+          "nonce_base64": "IYKZLXMkVhOfvj9y"
+        }
+      ]
+    },
+    {
+      "name": "segments/0162.mp4",
+      "bytes": 4910470,
+      "sha256": "50b4d8a477c8a2a3d8e4da64f8dc3b75cd5ecd101f6a232c21d4c365fb5eae65",
+      "chunks": [
+        {
+          "blob_sha": "98e19615bdb2189b80493bc1176e01afe9b5faf8",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "lhqsNwNVTXR2inJ/"
+        },
+        {
+          "blob_sha": "49052af738984578528d93d94e69629972896f57",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "HkCPW38KrUA8wpW5"
+        },
+        {
+          "blob_sha": "7cc1f11d180716b70c98926343c966873fbc394d",
+          "offset": 4194304,
+          "plaintext_bytes": 716166,
+          "nonce_base64": "VFkJi2/ca/xT+x8b"
+        }
+      ]
+    },
+    {
+      "name": "segments/0163.mp4",
+      "bytes": 4889703,
+      "sha256": "7df44f7008d198c75aec36e2450591c728b48938696cb49c691a22f0ee351641",
+      "chunks": [
+        {
+          "blob_sha": "b30f848524165c41d49ae0a1e0d518dc56fe9bc9",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "Z0BH2Njga1H2PQLh"
+        },
+        {
+          "blob_sha": "42fe92db909a9bae1d92e69e17a6732891d55a3a",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "wMacncZIN+GcLGQ/"
+        },
+        {
+          "blob_sha": "c2cfb0b7c2745f5b100dde32579360a819a27ac5",
+          "offset": 4194304,
+          "plaintext_bytes": 695399,
+          "nonce_base64": "2hswdeDawDc7ftj0"
+        }
+      ]
+    },
+    {
+      "name": "segments/0164.mp4",
+      "bytes": 3262746,
+      "sha256": "02427101e7d89b69cc00525898d7dee19699eab2cc27b1e1ebabe1319cac88a3",
+      "chunks": [
+        {
+          "blob_sha": "e3536faa1083fca9c30e1fba1542a59a2aa49031",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "m1o0QXV3ksJWTdph"
+        },
+        {
+          "blob_sha": "4c44b09b87ccc5bcf4f5899dbdbecf51b2fa2bb3",
+          "offset": 2097152,
+          "plaintext_bytes": 1165594,
+          "nonce_base64": "1QEI/VMovSdj2Do2"
+        }
+      ]
+    },
+    {
+      "name": "segments/0165.mp4",
+      "bytes": 3654226,
+      "sha256": "c74737b835203036d3434c635ce3717f9d341684543eb8508f96fefa6c22f5e1",
+      "chunks": [
+        {
+          "blob_sha": "139bcc30160e24b983d40521a44d33d28f271db4",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "RwE35UEBGyFJ4ZBR"
+        },
+        {
+          "blob_sha": "c010d6e7c004308b9619525f7152bcdbbe9394d2",
+          "offset": 2097152,
+          "plaintext_bytes": 1557074,
+          "nonce_base64": "zQ0avyrXHU3tJ6Si"
+        }
+      ]
+    },
+    {
+      "name": "segments/0166.mp4",
+      "bytes": 4669275,
+      "sha256": "9a86485976b11eb9cc0c589703ca3319eb7b742dacf480b05eac4d18c2fb3d38",
+      "chunks": [
+        {
+          "blob_sha": "c7430db3facf2e403731d307273f177f6e12302e",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "oI17ULjXnySOpnAV"
+        },
+        {
+          "blob_sha": "7772be0029128d0bc8da00b9e3bcb14e7a11a4d4",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "lSWk9uNjvo++Pyf9"
+        },
+        {
+          "blob_sha": "76f70c0087300446ce94d76a46450c71b2622bdc",
+          "offset": 4194304,
+          "plaintext_bytes": 474971,
+          "nonce_base64": "9vYf0r+PukXUAjQk"
+        }
+      ]
+    },
+    {
+      "name": "segments/0167.mp4",
+      "bytes": 4640001,
+      "sha256": "1b2edd311d1268f4be4b32436ba636e9a1c93eced754c583597799b7c8b3d02e",
+      "chunks": [
+        {
+          "blob_sha": "160289f3ca1d51c23248baf06de137e4229b4628",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "JETZDsir+dFkrK/9"
+        },
+        {
+          "blob_sha": "52594fe19ff4544d1ce406c070be3c49df35f925",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "YejEj7el0YTjv6jB"
+        },
+        {
+          "blob_sha": "5a947ba74621ec8a9009cd065206dbb8b3e19096",
+          "offset": 4194304,
+          "plaintext_bytes": 445697,
+          "nonce_base64": "iSKi4RdA0kG/QKm6"
+        }
+      ]
+    },
+    {
+      "name": "segments/0168.mp4",
+      "bytes": 4888586,
+      "sha256": "95a3d57abfc484bb944724656492d57a0913e712d504553dfe98dd7f847d77bb",
+      "chunks": [
+        {
+          "blob_sha": "2dc810265cf1a5852ccc34cfa5eb97e45e6668c2",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "E0lHEWtybqlKCyD+"
+        },
+        {
+          "blob_sha": "f35f464777d818b93234ddf659ea10162b0099d9",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "pAu1IcQy8jmZYdZT"
+        },
+        {
+          "blob_sha": "73025eebb7eda0663d048b128bb5ff17d73cc5fa",
+          "offset": 4194304,
+          "plaintext_bytes": 694282,
+          "nonce_base64": "VykZHbePvJjJabTI"
+        }
+      ]
+    },
+    {
+      "name": "segments/0169.mp4",
+      "bytes": 2549744,
+      "sha256": "b6f66cf3c78db7ec6c04950b224213522ccc5be45f481a3b97079542ffc824cd",
+      "chunks": [
+        {
+          "blob_sha": "2d48e10185ccfcfd696f87768ce0af4a1f17b5ad",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "JJXcxmGPQD3/11C4"
+        },
+        {
+          "blob_sha": "ebc09691e62b0e50e8dabdb60f789bf47dc7d2ab",
+          "offset": 2097152,
+          "plaintext_bytes": 452592,
+          "nonce_base64": "R3TIebTDoar7bj7y"
+        }
+      ]
+    },
+    {
+      "name": "segments/0170.mp4",
+      "bytes": 4886341,
+      "sha256": "5351bc1936a72767f43273557f814cf41110d699b20e5efcf23b7ab59946c771",
+      "chunks": [
+        {
+          "blob_sha": "0dc09e8338aed66d9c7090131d6bf7ec5ed2c6da",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "kv4pTIbA8kMhEho2"
+        },
+        {
+          "blob_sha": "986bcda4f4321501ad3cb430fba205e25a3c0157",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "m805LTuQ5u/LTO8H"
+        },
+        {
+          "blob_sha": "7dc3bdec5e5eb834fd592282f7549265c777bec1",
+          "offset": 4194304,
+          "plaintext_bytes": 692037,
+          "nonce_base64": "R0VUt/nkYuvv/7yV"
+        }
+      ]
+    },
+    {
+      "name": "segments/0171.mp4",
+      "bytes": 353077,
+      "sha256": "e3ce7d464aaf946efa8a38daba7e2798bb10c4048c15d9c08de1f04e4592ea51",
+      "chunks": [
+        {
+          "blob_sha": "e81d30fa909b6ab0a4436b4223987b9f53690682",
+          "offset": 0,
+          "plaintext_bytes": 353077,
+          "nonce_base64": "n7qVlINrajgNDi/5"
+        }
+      ]
+    },
+    {
+      "name": "segments/0172.mp4",
+      "bytes": 531977,
+      "sha256": "8fd5489c1aec9235f04c345bc106d236effdff6b43977ccdd0f185e0870faf95",
+      "chunks": [
+        {
+          "blob_sha": "194bda7865f6c5d97b0e7bbc7b463353420465e3",
+          "offset": 0,
+          "plaintext_bytes": 531977,
+          "nonce_base64": "L8atyuGPJIBHEBxP"
+        }
+      ]
+    },
+    {
+      "name": "segments/0173.mp4",
+      "bytes": 4255943,
+      "sha256": "2f4c7477d1f8c197c183fd8fbf04354108d843349475e0e46f453d30705c2c03",
+      "chunks": [
+        {
+          "blob_sha": "9e066d274acb61938e9ff145c69eb6b59150858e",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "vBzIRpdbTXtg+7iE"
+        },
+        {
+          "blob_sha": "6d005a6f001c07da8d3d313ed74d22523f264372",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "av7l/Akb4MV3Zovu"
+        },
+        {
+          "blob_sha": "87dbe3004d656e03b370a2f57abf2af724e74937",
+          "offset": 4194304,
+          "plaintext_bytes": 61639,
+          "nonce_base64": "iOEm8bo5epWvrHlw"
+        }
+      ]
+    },
+    {
+      "name": "segments/0174.mp4",
+      "bytes": 4256926,
+      "sha256": "cd783d0fcb854780b80632bee69ae0fb5c805a7fd6c0c530697e9a8d8c824e99",
+      "chunks": [
+        {
+          "blob_sha": "043d511bcdf65eeda3be80a8f8664f80fe1e6349",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "5cxfeWE4HtdsCLU+"
+        },
+        {
+          "blob_sha": "486643c2cc31dcf5c33a7c98ba92f13efab880b2",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "/FZrM4vmMpwPOx5K"
+        },
+        {
+          "blob_sha": "a40da53ae2dd111fa7299ceb689b9395bda8e48e",
+          "offset": 4194304,
+          "plaintext_bytes": 62622,
+          "nonce_base64": "KBAtL3bjFg+ubQ5H"
+        }
+      ]
+    },
+    {
+      "name": "segments/0175.mp4",
+      "bytes": 42749,
+      "sha256": "4ba5a1a93b549f85bac593a8b075932bc59776e1c017bd367a3861dea1a9d905",
+      "chunks": [
+        {
+          "blob_sha": "93c8f7b6c0149a38f9f421d9771779eb8691b652",
+          "offset": 0,
+          "plaintext_bytes": 42749,
+          "nonce_base64": "N701aJY7IAY9B7Ec"
+        }
+      ]
+    },
+    {
+      "name": "segments/0176.mp4",
+      "bytes": 4249156,
+      "sha256": "f28eeb3a42b9690222ad2d079c9d5ba15ce255569f3e5cad90d29feb96dbd0e3",
+      "chunks": [
+        {
+          "blob_sha": "960a0b743f196417044118caf65c536d62efcec3",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "ZEnNSmjoqfJl2zot"
+        },
+        {
+          "blob_sha": "f2d362907735fd2e436b1fa263a0e356c1d1d268",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "EAxzCU+5/FOd1k5t"
+        },
+        {
+          "blob_sha": "cfbf23fe2575cefd2f90e9375f8f3a511cca8460",
+          "offset": 4194304,
+          "plaintext_bytes": 54852,
+          "nonce_base64": "pMxNIhvdnJ/h9nBa"
+        }
+      ]
+    },
+    {
+      "name": "segments/0177.mp4",
+      "bytes": 4486467,
+      "sha256": "6dda3186c64dbe3a1df9e92b4109a16e000e8fe322089dea2623b4c23155bca8",
+      "chunks": [
+        {
+          "blob_sha": "d5eb959ee798610fcdc9ab5d9ccb81cd1cc74f8d",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "5N/GAi7ceDkx+ilA"
+        },
+        {
+          "blob_sha": "13307d58c32d1cedc5ff2651cf10ef4e47138d48",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "FHOxEREJnluypOsu"
+        },
+        {
+          "blob_sha": "5df0d5fc458a109881abe3c38cea7751359dbf75",
+          "offset": 4194304,
+          "plaintext_bytes": 292163,
+          "nonce_base64": "pKlIbXJlVzGoklHE"
+        }
+      ]
+    },
+    {
+      "name": "segments/0178.mp4",
+      "bytes": 156742,
+      "sha256": "3d347b78007229650d380fbad3f4a511f5c1bf8cf7991bbc9d2120e0fd98b868",
+      "chunks": [
+        {
+          "blob_sha": "9bf666de90f230befa59e39d2439dbbed165afef",
+          "offset": 0,
+          "plaintext_bytes": 156742,
+          "nonce_base64": "vQ1uY2sqvGxri1Bv"
+        }
+      ]
+    },
+    {
+      "name": "segments/0179.mp4",
+      "bytes": 3052766,
+      "sha256": "bc92f5d1d965ed1efc4ffa91ec4f5ffe7eab284f891910a6a95e9200b902271a",
+      "chunks": [
+        {
+          "blob_sha": "34bc98b6f25a25dd4f1b021adc0b62eeb19f7a5d",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "b+enyP/K5y7AH8zS"
+        },
+        {
+          "blob_sha": "99bee24946bf98ebb0f00136ad11eeaccf37db86",
+          "offset": 2097152,
+          "plaintext_bytes": 955614,
+          "nonce_base64": "uFIFGZyBfRn/5vno"
+        }
+      ]
+    },
+    {
+      "name": "segments/0180.mp4",
+      "bytes": 4253503,
+      "sha256": "0aba53cd20057f428f44c575694c35f7d63c471c1a7809033aba400498e2d4d0",
+      "chunks": [
+        {
+          "blob_sha": "aec53715d9652695f1d8574a48fe820dd347964b",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "DjRlhyKY8RPZi2EC"
+        },
+        {
+          "blob_sha": "54232ee4200c79293eeae2a2cfcd4bba0420bb33",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "QIwIt5sk8N3qsNyK"
+        },
+        {
+          "blob_sha": "ed002ccd325efe40968d39d0bb15580e71860076",
+          "offset": 4194304,
+          "plaintext_bytes": 59199,
+          "nonce_base64": "oLKiuG7zeg46aIsd"
+        }
+      ]
+    },
+    {
+      "name": "segments/0181.mp4",
+      "bytes": 2786971,
+      "sha256": "05ff6912ea4acf5f88fbefd2a12018e86e6313fda1255f1dce3eada5293c58f4",
+      "chunks": [
+        {
+          "blob_sha": "b3d36bcd35edc8cdfe417cdf4f671c987f1a571f",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "W2oAsQkU0VIcOBxj"
+        },
+        {
+          "blob_sha": "e470a144bc25a9fa96adabc0e5b75ada847b92a2",
+          "offset": 2097152,
+          "plaintext_bytes": 689819,
+          "nonce_base64": "cxDIsx9aIeF0ZX0x"
+        }
+      ]
+    },
+    {
+      "name": "segments/0182.mp4",
+      "bytes": 4203963,
+      "sha256": "8c55998ae4e48ffed17ba670c8b80f9800ba680147ed9cebfe32c57e6b47fc5b",
+      "chunks": [
+        {
+          "blob_sha": "cb38a8db4b04f919b8d852695b4b01a841c23d69",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "xbdF5JH9ZiNrZXyE"
+        },
+        {
+          "blob_sha": "0a811301e8f3d80dc7c8c37ef41f1a5d1d8f6e49",
+          "offset": 2097152,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "0yhpZLZpYlX8hNXi"
+        },
+        {
+          "blob_sha": "7cb2ed6736296e96208a0fef928ece6049ac0913",
+          "offset": 4194304,
+          "plaintext_bytes": 9659,
+          "nonce_base64": "1SluN9/5kfQn6Xw0"
+        }
+      ]
+    },
+    {
+      "name": "segments/0183.mp4",
+      "bytes": 3936966,
+      "sha256": "6b2741fb4ddc5bdda6855874be431fb91086d44a36cc128c229cf7776149c40f",
+      "chunks": [
+        {
+          "blob_sha": "ff6212d47b185170b31dd167bbf45452c53c9ee2",
+          "offset": 0,
+          "plaintext_bytes": 2097152,
+          "nonce_base64": "0XQmu9v2mEjzg6Ix"
+        },
+        {
+          "blob_sha": "1d0d88af89f169f5c4d0f3da75c1b7b974f1f222",
+          "offset": 2097152,
+          "plaintext_bytes": 1839814,
+          "nonce_base64": "xWzXfGm/1cvw6vtI"
+        }
+      ]
+    },
+    {
+      "name": "segments/0184.mp4",
+      "bytes": 1373335,
+      "sha256": "ee8fb2923e86c26efb8507c808087cface74c1cbce2b56275800295de703cad2",
+      "chunks": [
+        {
+          "blob_sha": "93b4455ddd1af76ed74d11f7e480b6e7f3c3c709",
+          "offset": 0,
+          "plaintext_bytes": 1373335,
+          "nonce_base64": "NyW6L5B1bLP1FqZo"
+        }
+      ]
+    },
+    {
+      "name": "chapters.ffmeta",
+      "bytes": 1026,
+      "sha256": "52d485ca48fccb20cc9572224dcb9feff17a5b22450d45e883571caaffc3e37c",
+      "chunks": [
+        {
+          "blob_sha": "97d524153a131cf4d9393cd4737b19f40b1b121a",
+          "offset": 0,
+          "plaintext_bytes": 1026,
+          "nonce_base64": "jZT8BYIWeVsS5ekz"
+        }
+      ]
+    },
+    {
+      "name": "EN_SUBTITLES_25m36.srt",
+      "bytes": 21877,
+      "sha256": "c47778dc43dce753de37114dc1b5c94744920f9c0b136e3c26a0a4a8eaa6aafa",
+      "chunks": [
+        {
+          "blob_sha": "68508ad5b2aa5c2e18f01d19650cdcce4142889d",
+          "offset": 0,
+          "plaintext_bytes": 21877,
+          "nonce_base64": "D8OMh8DJfviWQbGi"
+        }
+      ]
+    },
+    {
+      "name": "FINAL_VIDEO_QA.json",
+      "bytes": 1808,
+      "sha256": "ead53c173238c94ea22de29f3b9ecd579bfd95de05f9e9d0c331bfab58429672",
+      "chunks": [
+        {
+          "blob_sha": "67848f8efcd700b68f9ccd771df6fa1ade6970a6",
+          "offset": 0,
+          "plaintext_bytes": 1808,
+          "nonce_base64": "/MYlaFbqOV8TU7K/"
+        }
+      ]
+    },
+    {
+      "name": "FINAL_EDIT_TIMELINE.csv",
+      "bytes": 11739,
+      "sha256": "0186434405e61a1c61cccd5ead90294144b9824ad794d251977c31a810001ebf",
+      "chunks": [
+        {
+          "blob_sha": "2138016f41e1469cf056c50d6ec6d972243ad28e",
+          "offset": 0,
+          "plaintext_bytes": 11739,
+          "nonce_base64": "OjIeLiypBr7CRwKE"
+        }
+      ]
+    },
+    {
+      "name": "VIDEO_README_VI.md",
+      "bytes": 2525,
+      "sha256": "5aa4af3af9ff233e09e980ae60a410b9ff5b42e4c89dba2641e88c9b63c82323",
+      "chunks": [
+        {
+          "blob_sha": "65d3b75b2271cbe6f96230d1f8d027422f7b191b",
+          "offset": 0,
+          "plaintext_bytes": 2525,
+          "nonce_base64": "p5CnEwb2VCfLNIFF"
+        }
+      ]
+    }
+  ]
+}
