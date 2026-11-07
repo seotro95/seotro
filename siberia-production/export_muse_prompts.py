@@ -55,6 +55,8 @@ archive=out/'MUSE_23_BATCHES.zip'
 with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6) as z:
  for p in sorted(folder.rglob('*')):
   if p.is_file():z.write(p,Path(folder.name)/p.relative_to(folder))
-checks=''.join(hashlib.sha256((out/name).read_bytes()).hexdigest()+'  '+name+'\n' for name in ['MUSE_227_PROMPTS.txt','MUSE_23_BATCHES.zip','MUSE_PROMPTS_README_VI.md'])
+from export_voice_storyboard import export_storyboard
+extra=export_storyboard(base,out,folder,plan)
+checks=''.join(hashlib.sha256((out/name).read_bytes()).hexdigest()+'  '+name+'\n' for name in ['MUSE_227_PROMPTS.txt','MUSE_23_BATCHES.zip','MUSE_PROMPTS_README_VI.md',*extra])
 (out/'MUSE_PROMPTS_SHA256SUMS.txt').write_text(checks,encoding='utf-8')
 print(json.dumps({'prompt_count':len(shots),'batches':23,'zip_bytes':archive.stat().st_size,'target_seconds':1536}))

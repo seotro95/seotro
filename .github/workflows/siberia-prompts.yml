@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/siberia-prompts.yml'
       - 'siberia-production/export_muse_prompts.py'
+      - 'siberia-production/export_voice_storyboard.py'
 permissions:
   contents: write
 jobs:
@@ -16,8 +17,10 @@ jobs:
         with:
           persist-credentials: false
       - name: Export all prompts and verify the 23 Muse project batches
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: python siberia-production/export_muse_prompts.py
       - name: Upload the prompt-only downloads to the owner draft
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload siberia-2536-production-v1 muse-prompt-delivery/MUSE_227_PROMPTS.txt muse-prompt-delivery/MUSE_23_BATCHES.zip muse-prompt-delivery/MUSE_PROMPTS_README_VI.md muse-prompt-delivery/MUSE_PROMPTS_SHA256SUMS.txt --clobber
+        run: gh release upload siberia-2536-production-v1 muse-prompt-delivery/MUSE_227_PROMPTS.txt muse-prompt-delivery/MUSE_23_BATCHES.zip muse-prompt-delivery/MUSE_PROMPTS_README_VI.md muse-prompt-delivery/MUSE_PROMPTS_SHA256SUMS.txt muse-prompt-delivery/MUSE_THEO_VOICE_25m36.txt muse-prompt-delivery/MUSE_THEO_VOICE_25m36.zip muse-prompt-delivery/VOICE_SHOT_TIMELINE.csv muse-prompt-delivery/VOICE_STORYBOARD_QA.json --clobber
