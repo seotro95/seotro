@@ -1,0 +1,27 @@
+name: Number all 184 Muse prompts in TXT
+on:
+  push:
+    branches: [codex/siberia-2536-production]
+    paths:
+      - '.github/workflows/siberia-numbered184.yml'
+      - 'siberia-production/number_silent184.py'
+permissions:
+  contents: write
+jobs:
+  number:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download the existing prompt TXT
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download siberia-184-silent-25m36 --repo seotro95/seotro --pattern MUSE_184_SILENT_PROMPTS.txt --dir numbered184
+      - name: Number 1 through 184 and verify unchanged prompt text
+        run: python siberia-production/number_silent184.py numbered184/MUSE_184_SILENT_PROMPTS.txt numbered184/MUSE_184_PROMPTS_DANH_SO_1-184.txt
+      - name: Upload numbered TXT to the same owner draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload siberia-184-silent-25m36 numbered184/MUSE_184_PROMPTS_DANH_SO_1-184.txt numbered184/MUSE_184_PROMPTS_DANH_SO_1-184.SHA256.txt --repo seotro95/seotro --clobber
