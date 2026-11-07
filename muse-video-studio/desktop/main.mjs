@@ -1,3 +1,4 @@
+import {MAX_SLOTS} from '../limits.mjs';
 import { app, BrowserWindow, WebContentsView, ipcMain, dialog, session, clipboard, shell } from 'electron';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -47,7 +48,7 @@ async function start() {
   const fixture = process.env.MUSE_DESKTOP_TEST === '1' ? process.env.MUSE_FIXTURE_URL : null;
   if (fixture && (new URL(fixture).protocol !== 'http:' || new URL(fixture).hostname !== '127.0.0.1')) throw new Error('Fixture must use local HTTP.');
   const serviceURL = fixture || 'https://muse.ai/';
-  window = new BrowserWindow({ width: 1480, height: 1000, minWidth: 850, minHeight: 650, title: `Muse AI Studio ${version} · 1 hoặc 10 tài khoản / 10 cảnh`, autoHideMenuBar: true,
+  window = new BrowserWindow({ width: 1480, height: 1000, minWidth: 850, minHeight: 650, title: `Muse AI Studio ${version} · 1 hoặc nhiều tài khoản / tối đa 40 ô`, autoHideMenuBar: true,
     webPreferences: { preload: path.join(directory, 'preload.cjs'), sandbox: true, contextIsolation: true, nodeIntegration: false } });
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
   const muse = await new MuseAccounts({profileRoot:userData,preferredConcurrency:fixture&&process.env.MUSE_TEST_PARALLEL==='1'?10:2,
@@ -103,7 +104,7 @@ async function start() {
   studio.webContents.on('destroyed',rejectAutomation);
   const dispatch=(action,data)=>new Promise((resolve,reject)=>{
     if(!automationReady||studio.webContents.isDestroyed())return reject(Object.assign(new Error('Studio chưa sẵn sàng. Mở Studio và đợi tải thư viện.'),{status:503}));
-    const id=randomUUID();const timer=setTimeout(()=>{pendingAutomation.delete(id);reject(Object.assign(new Error('Chưa nhận xác nhận từ Studio. Đọc tiến độ trước khi gửi lại; không tự chạy lại.'),{status:504}))},120000);
+    const id=randomUUID();const timer=setTimeout(()=>{pendingAutomation.delete(id);reject(Object.assign(new Error('Chưa nhận xác nhận từ Studio. Đọc tiến độ trước khi gửi lại; không tự chạy lại.'),{status:504}))},action==='save-media'?600000:120000);
     pendingAutomation.set(id,{resolve,reject,timer});studio.webContents.send('studio:automation-command',{id,action,data});
   });
   ipcMain.on('studio:automation-ready',(event,ready)=>{if(event.sender===studio.webContents)automationReady=ready===true});
@@ -127,7 +128,7 @@ async function start() {
   // Remote Muse views do not receive this preload or access to these handlers.
   ipcMain.handle('studio:api', async (event, value) => {
     if (event.sender !== studio.webContents || !value || !/^[a-z0-9-]{36}$/i.test(value.id) || !['/api/image', '/api/video', '/api/text'].includes(value.endpoint)) throw new Error('Invalid Studio request');
-    if (requests.size >= 10 || requests.has(value.id)) return { ok: false, body: { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 10 luồng đang chạy.' } };
+    if (requests.size >= MAX_SLOTS || requests.has(value.id)) return { ok: false, body: { error: 'MUSE_CONCURRENCY_LIMIT: Đã có 40 luồng đang chạy.' } };
     const body = JSON.stringify(value.data);
     if (Buffer.byteLength(body) > 12 * 1024 * 1024) return { ok: false, body: { error: 'Yêu cầu vượt giới hạn 12 MB.' } };
     const control = new AbortController(); requests.set(value.id, control);
@@ -185,7 +186,7 @@ async function start() {
   window.webContents.send('studio:version', version);
   await studio.webContents.loadURL(runtime.url);
   window.on('close', event => { if (!closing) { event.preventDefault(); void shutdown(); } });
-  console.log('Muse desktop ready: dang nhap trong tool, mot phien / 10 canh, hang doi an toan.');
+  console.log('Muse desktop ready: dang nhap trong tool, toi da 40 o, mot hoac nhieu tai khoan, hang doi an toan.');
 }
 
 async function shutdown() {

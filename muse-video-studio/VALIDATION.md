@@ -1,3 +1,34 @@
+# Xác minh bản 1.8.0
+
+## Kết quả thay đổi
+
+- Giới hạn thống nhất 40 trong `limits.mjs`: giao diện, bộ điều phối, tài khoản, bridge HTTP/IPC, API/MCP, nhập kịch bản, bộ đếm tải và ghi thư mục. Chọn Số luồng 20/30/40 hiện đúng số ô, đánh số liên tục; nút Tạo, progress và Tải tất cả theo số ô. Số ô có thể đổi riêng để chạy kịch bản dài với ít luồng hơn.
+- Giữ tối đa 40 bản nháp trong state/lưu dự án; thu nhỏ chỉ ẩn ô, không bỏ prompt/kết quả/lịch sử. Hỗ trợ đọc dự án v1 cũ 10 cảnh, mở lại bố cục đã chọn và tự mở thêm ô khi API/import có ID cao hơn.
+- Lựa chọn số luồng không bị trả về 1 khi Muse không có hội thoại riêng. Giữ yêu cầu và số ô, hiển thị số thực tế/cảnh báo, chạy hàng đợi bằng số luồng đã xác minh. Không giả 30/40 render khi chỉ có một hội thoại chung; lỗi đăng nhập/kết nối vẫn chặn gửi. Có nút Kiểm tra luồng để thử lại.
+- Kiểm tra hội thoại song song dùng tối đa bốn trang tạm mỗi lượt; từng URL do dịch vụ tạo vẫn được mở lại/xác minh, không dùng hai bản sao root làm hội thoại riêng. Đóng các trang tạm sau mỗi kiểm tra; chỉ giữ các worker cần khi tạo.
+- Phát hành mã nguồn ứng dụng theo MIT. Thêm MCP Streamable HTTP tại `/mcp` trên cùng cổng API/Bearer key. Chín công cụ đọc trạng thái, đổi bố cục, sửa ô, tạo bộ/chạy ô đã nhập, dừng, đọc thư viện, lưu kết quả và xóa thư viện có xác nhận. Có CODEX-MCP.toml, MCP-CODEX.md và nút sao chép cấu hình không chứa khóa. Không cấp quyền shell/JavaScript/tệp tùy ý hoặc đọc cookie/OTP.
+- MCP/API dùng chung idempotency cho tạo/chạy; MCP khai báo rõ công cụ chỉ đọc và công cụ xóa. Lệnh lưu dùng đúng exporter/thư mục đã chọn và bộ đếm của giao diện, có thể lọc batchId/output/sceneIds. API chỉ báo sẵn sàng sau khi thư viện và cấu hình đã tải, sửa trường hợp 409 ngay sau reload dù phiên Muse vẫn còn.
+
+## Kiểm thử
+
+- TypeScript/Vite build và `npm test` qua. Unit kiểm 40 yêu cầu trên server, chỉ giải phóng một chỗ khi một yêu cầu xong; 40 tài khoản độc lập mỗi tài khoản một lease; từ chối ID/count 41; nhập API 40 prompt/ID ô 40; lưu bản nháp ẩn; ghi đủ 40 tệp với số cảnh 20/30/40; giữ lựa chọn 30 và hàng đợi 1 khi private chat không hỗ trợ, không fallback khi hết phiên đăng nhập.
+- Giao diện Playwright **42/42 qua**. Chọn 20/30/40 hiện đủ ô, giảm/tăng giữ prompt, reload giữ bố cục, quản lý đúng 40 tài khoản; nhập/tạo/xuất 40 ảnh và 40 video với số tải 1–80 liên tục. Mẫu cấu hình Codex trỏ đúng cổng và không chứa khóa. Giữ các ca đa nhiệm, ảnh tham chiếu, lịch sử/xóa thư viện và viewport cũ.
+- Cầu nối Chromium **27/27**, hội thoại song song **5/5**, hàng đợi chung **6/6 qua**. Ca admission cũ được cập nhật đúng giới hạn 40: nhận 40 job, chạy 10 worker theo cấu hình test, từ chối job 41, giải phóng rồi nhận đủ 40 kết quả riêng. Không giữ giới hạn 10 giả trong test khiến chờ vô hạn.
+- Electron từ nguồn **8/8**, OTP **4/4**, email/popup **4/4 qua** cho tương thích cũ. Các ca mới high-capacity từ nguồn và gói độc lập đều qua: xác minh 40 route, đóng trang kiểm tra, gửi **40 yêu cầu ảnh chồng lấp trước bất kỳ kết quả nào**, byte ảnh khớp đúng ô 20/30/40.
+- Kiểm thử MCP trên executable Linux độc lập, PATH không có Node/npm: initialize, đọc trạng thái, đổi bố cục; `studio_create_batch` tạo **30 yêu cầu video chồng lấp**, tải byte MP4 đúng fixture; `studio_save_results` ghi đủ 30 tệp thật vào thư mục, tên đến scene-30, byte khớp. Sửa/chạy riêng ô 40 bằng MCP qua cùng các hàm giao diện. Bật thiếu New chat vẫn nhận bộ 20 ô và chạy ba prompt theo hàng đợi 1, không mất prompt ô 40 khi mở lại bố cục.
+- Unit HTTP/MCP kiểm Bearer/Origin, initialize/protocol negotiation, notifications 202, tools/list/call, unknown method/tool, schema, idempotency, destructive annotation, xác nhận xóa, media MIME/bytes, lưu/bật/tắt/đổi khóa và không đổi khóa hoạt động khi ghi thất bại.
+- Gói độc lập còn qua các ca tương thích 10 phiên riêng tạo ảnh/video, một phiên chọn 10 route và lưu thư mục/giữ số thứ tự, API tạo/dừng/xóa/reload/đổi khóa. Trên mã cuối, ca API sau reload qua lại; dữ liệu rỗng trong thư viện không còn bị hiểu là kết nối đã tải xong.
+
+## Khả năng thao tác thay người dùng
+
+Môi trường cloud của phiên này không có capability Desktop và không có công cụ cua_repl/open_in_codex; Companion snapshot không có trang. Thử HTTPS Muse.ai qua proxy được cấu hình trả HTTP 403 ở CONNECT; không bypass hoặc lấy cookie của người dùng. Không có kết nối tới cổng localhost trên máy Windows của người dùng, nên **chưa tạo/tải video Muse thật từ tài khoản của người dùng** trong phiên chat này.
+
+Các ca tạo nội dung/xác thực bên trên là dịch vụ mô phỏng cục bộ, không phải Muse thật. Chứng minh được số worker, phân ô, tệp MP4 giải mã được và kết nối MCP/HTTP hoạt động, không chứng minh Muse cho một tài khoản chạy 40 render hoặc đảm bảo tốc độ/nội dung/chất lượng thật. Codex trên cùng máy có thể dùng bộ MCP sau khi người dùng bật API, đặt biến khóa và thêm cấu hình; mã nguồn mở không tự đăng ký công cụ vào chat cloud hiện tại.
+
+Gói Windows dùng Electron 45.2.2 x64 chính thức, kiểm checksum, PE x64, manifest SHA-256 và CRC ZIP. Cloud Linux chạy gói Linux cùng mã; không chạy Windows EXE. Giữ sandbox, context isolation, web security; không thêm dependency.
+
+## Kết quả lịch sử trước 1.8.0
+
 # Xác minh bản 1.7.0
 
 ## Thay đổi

@@ -1,16 +1,14 @@
-# Muse AI Studio 1.7.0 · Hai chế độ tài khoản
+# Muse AI Studio 1.8.0 · Tối đa 40 ô / luồng yêu cầu
 
-[Bản Windows x64 đầy đủ](Muse-AI-Studio-Windows-x64.zip) · [Mã nguồn](Muse-Video-Workstation.zip) · [Hướng dẫn](muse-video-studio/README.md)
+[Bản Windows x64 đầy đủ](Muse-AI-Studio-Windows-x64.zip) · [Mã nguồn](Muse-Video-Workstation.zip) · [Hướng dẫn](muse-video-studio/README.md) · [API](muse-video-studio/API-AUTOMATION.md) · [Codex MCP](muse-video-studio/MCP-CODEX.md) · [MIT](muse-video-studio/LICENSE)
 
-Bản 1.7.0 thêm **Cổng API** để công cụ cùng máy điều khiển Studio, **Xóa toàn bộ** thư viện và mặc định **hai luồng** khi dùng một tài khoản (sau khi xác minh hai hội thoại riêng). Xem [hướng dẫn API](muse-video-studio/API-AUTOMATION.md).
+Giải nén toàn bộ vào thư mục mới rồi mở **Muse AI Studio.exe**. Không cần bản cũ, Node.js hoặc Chrome riêng.
 
-Giải nén toàn bộ gói vào thư mục mới, mở **Muse AI Studio.exe**. Không cần bản cũ, Node.js, npm hoặc Chrome riêng.
+- **Số luồng: 20 / 30 / 40** hiện đúng 20 / 30 / 40 ô theo thứ tự. Nút Tạo, tiến độ, nhập TXT/SRT và tải thư mục dùng đúng số ô.
+- Thu nhỏ rồi mở rộng giữ prompt/kết quả; lưu lại lựa chọn khi mở lại. Có thể thay đổi riêng Số ô để chạy một kịch bản dài bằng ít luồng hơn.
+- **Một tài khoản**: tối đa 40 hội thoại đã kiểm tra. Nếu Muse chưa hỗ trợ hội thoại độc lập, giữ lựa chọn và chạy hàng đợi theo số luồng thực sự dùng được, có cảnh báo rõ ràng.
+- **Nhiều tài khoản**: tối đa 40 tài khoản, mỗi tài khoản một ô/một luồng. Nhập danh sách email/tên rồi đăng nhập từng phiên trong tool.
+- **Mã nguồn mở MIT + MCP**: Codex trên cùng máy có thể đọc/sửa ô, tạo/dừng và lưu kết quả. Có nút sao chép cấu hình MCP, hướng dẫn và mẫu TOML.
+- Giữ cổng API cùng máy, Tạo/Dừng từng ô, lịch sử, xem ảnh trong Studio, xóa toàn bộ thư viện và tải thư mục với số thứ tự tăng tiếp.
 
-- **1 tài khoản · tối đa 10 luồng**: giữ chế độ cũ, cả 10 ô dùng Muse 01. Chọn số luồng và kiểm tra các hội thoại riêng trước khi bật song song.
-- **10 tài khoản · mỗi tài khoản 1 luồng**: Muse 01 cho ô 01, Muse 02 cho ô 02…; cookie và dữ liệu đăng nhập tách biệt. Bấm Tạo 10 để gửi đồng thời trên những tài khoản đã xác minh.
-
-Bấm **Quản lý 10 tài khoản**, nhập danh sách email/tên (mỗi dòng một tài khoản) hoặc nhập TXT; đăng nhập từng tài khoản trong tool. Danh sách chỉ đặt nhãn, không thay thế xác thực. Khi mở lại, bấm **Kiểm tra 10 phiên** để đọc lại các phiên đã lưu. Không nhập mật khẩu, OTP, cookie/token vào danh sách.
-
-Giữ nguyên xem ảnh trong Studio, lịch sử từng ô, Tạo/Dừng riêng, TXT/SRT, đồng nhất nhân vật, ảnh → video, lưu thư mục thường, đánh số tiếp và dùng các chức năng khác trong khi tạo. Không chuyển chế độ tài khoản giữa một tác vụ Muse đang chạy.
-
-Kiểm thử dùng dịch vụ mô phỏng cục bộ; Muse quyết định tốc độ và quyền tạo nội dung trên tài khoản thật. Không tự đổi tài khoản khi hết hạn mức hoặc gửi lại yêu cầu. Xem [kết quả kiểm thử](muse-video-studio/VALIDATION.md).
+Số render thực sự cùng lúc do Muse quyết định. Kiểm thử dùng dịch vụ mô phỏng; không khẳng định tài khoản thật có thể chạy 40 render. Phiên chat cloud không kết nối trực tiếp cổng 127.0.0.1 trên máy Windows của người dùng. Xem [xác minh](muse-video-studio/VALIDATION.md).

@@ -60,8 +60,8 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       assert.match(await studio.locator('.connection-feedback').innerText(), /đã được xác minh/);
       const status = await studio.evaluate(async () => (await fetch('/api/status')).json());
       assert.equal(status.embeddedLogin, true);
-      assert.equal(status.maxConcurrency, 10);
-      assert.equal(status.accounts.length, 10);
+      assert.equal(status.maxConcurrency, 40);
+      assert.equal(status.accounts.length, 40);
       assert.equal(status.accounts[0].authenticated, true);
       assert.equal(status.accounts[0].composerReady, false);
       assert.equal(await studio.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true }).isEnabled(), true);
@@ -103,7 +103,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       assert.equal(await studio.locator('.generated-image').count(), 0);
       const activeStatus = await studio.evaluate(async () => (await fetch('/api/status')).json());
       assert.equal(activeStatus.activeRequests, 10);
-      assert.equal(activeStatus.accounts.length, 10);
+      assert.equal(activeStatus.accounts.length, 40);
       assert.equal(activeStatus.accounts.filter(account=>account.authenticated).length,1);
       fixture.releaseAll(); fixture.state.hold = false;
       try { await waitFor(async () => await studio.locator('.generated-image').count() === 10, 'ten image results'); } catch(error) {
@@ -137,7 +137,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       await waitFor(() => desktop.context().pages().length === 3, 'worker views closed, login and Studio retained');
       const status = await studio.evaluate(async () => (await fetch('/api/status')).json());
       assert.equal(status.activeRequests, 0);
-      assert.equal(status.accounts.length, 10);
+      assert.equal(status.accounts.length, 40);
     });
     await t.test('one scene Stop cancels only its IPC request; Stop all then cancels the remaining nine', async () => {
       fixture.state.behavior = 'slow'; fixture.state.hold = false;
@@ -169,7 +169,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       const result = await (await checked).json();
       assert.equal(result.accounts[0].authenticated, true, 'A saved login must verify without displaying its view first');
       const status = await studio.evaluate(async () => (await fetch('/api/status')).json());
-      assert.equal(status.accounts.length, 10);
+      assert.equal(status.accounts.length, 40);
       assert.equal(status.accounts[0].authenticated, true);
     });
     await t.test('popup login is reconciled automatically on returning to Studio without sending a render', async () => {

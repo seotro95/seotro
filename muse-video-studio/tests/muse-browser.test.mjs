@@ -346,10 +346,10 @@ test('owned browser bridge against local Muse-shaped pages (not live Muse)', asy
         assert.match(state.submitted.at(-1).prompt, /Wait for Muse hydration/);
       } finally { driver.composerTimeoutMs = originalTimeout; state.prehydrationInput = false; state.richComposer = false; state.hydrationDelayMs = 0; }
     });
-    await t.test('runs ten isolated image conversations simultaneously with one session and maps each output correctly', async () => {
+    await t.test('queues forty image jobs, runs ten simultaneously and maps each output correctly', async () => {
       state.behavior = 'image'; state.hold = true; state.uniqueImages = true; state.peak = 0;
       const first = state.submitted.length;
-      const tasks = Array.from({ length: 10 }, (_, i) => driver.generateImage({ accountId: 1, prompt: `Concurrent scene ${i + 1}`, aspectRatio: '16:9', resolution: '2k', characterLock: false }, new AbortController().signal));
+      const tasks = Array.from({ length: 40 }, (_, i) => driver.generateImage({ accountId: 1, prompt: `Concurrent scene ${i + 1}`, aspectRatio: '16:9', resolution: '2k', characterLock: false }, new AbortController().signal));
       try {
         await waitFor(() => state.pending.size === 10);
         assert.equal(state.peak, 10);
@@ -357,8 +357,8 @@ test('owned browser bridge against local Muse-shaped pages (not live Muse)', asy
         await assert.rejects(driver.generateVideo(data, new AbortController().signal), /MUSE_CONCURRENCY_LIMIT/);
       } finally { releaseAll(); state.hold = false; }
       const results = await Promise.all(tasks);
-      assert.equal(new Set(results.map(result => result.base64)).size, 10);
-      for (let i = 0; i < 10; i++) {
+      assert.equal(new Set(results.map(result => result.base64)).size, 40);
+      for (let i = 0; i < 40; i++) {
         const request = state.submitted.slice(first).find(request => request.prompt.includes(`Scene:\nConcurrent scene ${i + 1}\n`));
         assert.ok(request?.authenticated);
         assert.equal(results[i].base64, state.outputs.get(request.id));

@@ -1,3 +1,4 @@
+import {MAX_SLOTS} from '../limits.mjs';
 import { mkdir, open, readFile, writeFile, stat, unlink } from 'node:fs/promises';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
@@ -24,7 +25,7 @@ export class FolderExports {
     return this.choosing;
   }
   async begin(data) {
-    if (!data || !['image','video'].includes(data.kind) || !/^[a-f0-9]{32}$/.test(data.namespace) || !/^\d{1,100}$/.test(data.first) || !/^\d{1,100}$/.test(data.last) || !Number.isInteger(data.count) || data.count < 1 || data.count > 10 || BigInt(data.last) - BigInt(data.first) + 1n !== BigInt(data.count)) throw new Error('Bộ tệp xuất không hợp lệ.');
+    if (!data || !['image','video'].includes(data.kind) || !/^[a-f0-9]{32}$/.test(data.namespace) || !/^\d{1,100}$/.test(data.first) || !/^\d{1,100}$/.test(data.last) || !Number.isInteger(data.count) || data.count < 1 || data.count > MAX_SLOTS || BigInt(data.last) - BigInt(data.first) + 1n !== BigInt(data.count)) throw new Error('Bộ tệp xuất không hợp lệ.');
     if (this.sessions.size >= 2 || !this.root) throw new Error('Chọn thư mục lưu và đợi lượt lưu hiện tại hoàn tất.');
     const label = `Muse-${data.kind === 'image' ? 'Images' : 'Videos'}-${data.count}-${data.first}-${data.last}-${data.namespace}`;
     let directory;
@@ -39,7 +40,7 @@ export class FolderExports {
   }
   async write({ id, name, bytes } = {}) {
     const task = this.sessions.get(id);
-    const match = typeof name === 'string' && name.match(/^(?:kiem-thu-)?(image|video)-(\d+)-scene-(0[1-9]|10)-([a-f0-9]{32})\.(png|mp4|webm|mov)$/);
+    const match = typeof name === 'string' && name.match(/^(?:kiem-thu-)?(image|video)-(\d+)-scene-(0[1-9]|[1-3][0-9]|40)-([a-f0-9]{32})\.(png|mp4|webm|mov)$/);
     if (!task || !match || match[1] !== task.kind || match[4] !== task.namespace || (task.kind === 'image' && match[5] !== 'png') || BigInt(match[2]) < BigInt(task.first) || BigInt(match[2]) > BigInt(task.last) || !(bytes instanceof ArrayBuffer) || !bytes.byteLength || bytes.byteLength > 150 * 1024 * 1024 || task.files.has(name) || task.pending.has(name) || task.files.size + task.pending.size >= task.count) throw new Error('Tệp xuất không hợp lệ hoặc bị trùng.');
     task.pending.add(name);
     const filename = path.join(task.directory, name);

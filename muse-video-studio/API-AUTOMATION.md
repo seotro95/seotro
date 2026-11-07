@@ -1,4 +1,4 @@
-# API điều khiển Muse AI Studio 1.7.0
+# API điều khiển Muse AI Studio 1.8.0
 
 Cổng này điều khiển cửa sổ Studio đang mở trên **cùng máy tính**. Không cần mở trang Muse, sao chép cookie hay cài Node.js để gọi API. Đăng nhập Muse trong Studio trước khi dùng chế độ tạo nội dung thật.
 
@@ -16,7 +16,8 @@ Cấu hình bật/tắt, cổng và khóa được giữ trên máy khi mở l�
 | Phương thức | Đường dẫn | Chức năng |
 | --- | --- | --- |
 | GET | `/v1/status` | Thiết lập, batchId hiện tại, tiến độ từng ô, tài khoản đã xác minh và danh sách media |
-| POST | `/v1/batches` | Nạp và bắt đầu một bộ 1–10 prompt/TXT/SRT |
+| POST | `/v1/batches` | Nạp và bắt đầu một bộ 1–40 prompt/TXT/SRT |
+| POST | `/v1/save` | Lưu bộ kết quả vào thư mục đã chọn trong Studio, có thể lọc batchId/output/sceneIds |
 | POST | `/v1/stop` | Dừng cả bộ (`{}`) hoặc một ô (`{"sceneId":2}`) |
 | GET | `/v1/media` | Danh sách ảnh/video đã lưu, ID và đường dẫn tải |
 | GET | `/v1/media/<id>` | Byte ảnh/video với MIME và phần mở rộng đúng |
@@ -45,10 +46,13 @@ Trả **202** với `{ "batchId": "...", "sceneIds": [1,2] }` sau khi Studio nh�
 
 Chỉ nhận bộ mới khi Studio không có tác vụ đang chạy. Bộ mới nạp prompt và thiết lập, bật những ô được yêu cầu, tắt các ô còn lại; kết quả trước vẫn có trong lịch sử. Mặc định prompt gán vào ô 1,2,…; có thể gửi `sceneIds`, ví dụ `[3,7]` với hai prompt. Ở chế độ `multiple`, ô 3 dùng tài khoản Muse 03 và ô 7 dùng Muse 07; tất cả tài khoản cần cho bộ phải đã xác minh.
 
-Thay `prompts` bằng `script` để gửi nguyên nội dung TXT/SRT UTF-8. TXT tách dòng/đoạn, SRT tự bỏ số thứ tự và mốc thời gian; tối đa 10 cảnh. Không gửi cả `prompts` và `script` cùng lúc.
+Thay `prompts` bằng `script` để gửi nguyên nội dung TXT/SRT UTF-8. TXT tách dòng/đoạn, SRT tự bỏ số thứ tự và mốc thời gian; tối đa 40 cảnh. Không gửi cả `prompts` và `script` cùng lúc.
+
+`GET /v1/status` trả thêm `slotCount`, `requestedConcurrency`, `executionConcurrency` và `concurrencyWarning` để phân biệt số ô/yêu cầu với khả năng thực tế. Bộ mới có ID ô cao hơn sẽ tự mở thêm ô, tối đa 40.
 
 `output`: `image` hoặc `video`. Các mục `settings` được phép:
 
+- `slotCount`: số ô từ 1–40; `requestedConcurrency`: số luồng yêu cầu từ 1–40.
 - `accountMode`: `single` hoặc `multiple`.
 - `mode`: `muse` (tạo thật qua phiên đã xác minh) hoặc `demo` (tệp mẫu có nhãn, không tạo AI).
 - `model`: `Omni 1.1 Flash`, `Veo 3.1 - Lite`, `Veo 3.1 - Fast`; Veo yêu cầu 8 giây.
@@ -113,4 +117,8 @@ with urllib.request.urlopen(request, timeout=130) as response:
 
 Nút **Xóa toàn bộ** trong Studio có bước xác nhận. API yêu cầu chuỗi xác nhận như bảng endpoint. Chỉ xóa kết quả/lịch sử trong thư viện tool; giữ prompt, tài khoản, ảnh tham chiếu và bộ đếm tải. Tệp đã xuất ra thư mục máy tính không bị xóa. Không cho xóa khi đang tạo hoặc tải bộ để tránh kết quả xuất hiện lại ngay sau khi xóa.
 
-Chế độ một tài khoản mặc định kiểm tra hai hội thoại riêng trước lần tạo đầu. Khi đủ khả năng, gửi hai yêu cầu cùng lúc và xếp những ô còn lại chờ hai chỗ trống. Nếu Muse không cung cấp hội thoại riêng, báo lỗi trước khi gửi prompt; có thể chủ động chọn 1 luồng trong Studio. Tốc độ render và khả năng thực tế do Muse quyết định. Chế độ 10 tài khoản vẫn giới hạn một yêu cầu trên mỗi tài khoản.
+Chế độ một tài khoản mặc định kiểm tra hai hội thoại riêng trước lần tạo đầu. Khi đủ khả năng, gửi hai yêu cầu cùng lúc và xếp những ô còn lại chờ hai chỗ trống. Nếu Muse không cung cấp hội thoại riêng, giữ đủ ô đã chọn và trả `executionConcurrency:1` kèm cảnh báo; bộ vẫn chạy hàng đợi một luồng. Chỉ lỗi đăng nhập/kết nối mới từ chối bộ. Có thể chủ động chọn 1 luồng trong Studio. Tốc độ render và khả năng thực tế do Muse quyết định. Chế độ nhiều tài khoản vẫn giới hạn một yêu cầu trên mỗi tài khoản.
+
+## Bộ kết nối MCP cho Codex cùng máy
+
+`POST /mcp` dùng cùng khóa Bearer, hỗ trợ initialize, tools/list và tools/call qua MCP Streamable HTTP. Có các công cụ studio_status/configure_layout/set_scene/create_batch/run/stop/list_media/save_results/clear_library. Xem MCP-CODEX.md để thêm vào Codex; mẫu cấu hình không chứa khóa. Lệnh tạo hỗ trợ requestId để tránh lặp; lệnh lưu trả thư mục/tệp, không đưa byte video lớn vào hội thoại.

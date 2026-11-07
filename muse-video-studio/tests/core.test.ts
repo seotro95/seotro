@@ -56,3 +56,11 @@ test('errors distinguish credit, filtering, service capacity and missing Muse in
   assert.match(errorInfo('MUSE_NEW_CHAT_UNAVAILABLE').hint, /hàng đợi/);
   assert.doesNotMatch(errorInfo('MUSE_NEW_CHAT_UNAVAILABLE').hint, /^Dịch vụ đang bận/);
 });
+
+test('dynamic layouts restore up to forty slots and preserve hidden prompts while shrinking',()=>{
+  const all=createScenes(40).map(scene=>({...scene,prompt:`Scene ${scene.id}`}));
+  const restored=restoreWorkspace(JSON.stringify({version:1,settings:{...DEFAULT_SETTINGS,slotCount:20,requestedConcurrency:30},scenes:all}));
+  assert.equal(restored.settings.slotCount,20);assert.equal(restored.settings.requestedConcurrency,30);assert.equal(restored.scenes.length,40);assert.equal(restored.scenes[39].prompt,'Scene 40');
+  assert.equal(createScenes(30).length,30);assert.equal(createScenes(41).length,10);
+  assert.equal(restoreWorkspace(JSON.stringify({version:1,scenes:Array(41).fill({prompt:'invalid'})})).scenes.length,10);
+});

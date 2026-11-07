@@ -64,14 +64,14 @@ app = resources / 'app'
 app.mkdir()
 for name in ['desktop', 'dist']:
     shutil.copytree(ROOT / name, app / name)
-for name in ['server.mjs', 'muse-browser.mjs', 'muse-accounts.mjs', 'muse-balance.mjs', 'browser.mjs', '.env.example', 'README.md', 'VALIDATION.md', 'API-AUTOMATION.md']:
+for name in ['limits.mjs', 'server.mjs', 'muse-browser.mjs', 'muse-accounts.mjs', 'muse-balance.mjs', 'browser.mjs', '.env.example', 'README.md', 'VALIDATION.md', 'API-AUTOMATION.md', 'MCP-CODEX.md', 'CODEX-MCP.toml', 'LICENSE']:
     shutil.copyfile(ROOT / name, app / name)
 modules = app / 'node_modules'
 modules.mkdir()
 shutil.copytree(ROOT / 'node_modules/playwright-core', modules / 'playwright-core')
 (app / 'package.json').write_text(json.dumps({
     'name': 'muse-ai-studio', 'productName': 'Muse AI Studio', 'version': version,
-    'private': True, 'type': 'module', 'main': 'desktop/main.mjs',
+    'private': True, 'license': manifest.get('license', 'UNLICENSED'), 'type': 'module', 'main': 'desktop/main.mjs',
     'dependencies': {'playwright-core': manifest['dependencies']['playwright-core']},
 }, indent=2) + '\n')
 
@@ -87,9 +87,9 @@ for name in ['react', 'react-dom', 'lucide-react']:
 1. Giai nen TOAN BO ZIP vao thu muc moi, vi du D:\\Muse-AI-Studio-{version}.
 2. Mo "{executable}". Khong chay ung dung ngay trong cua so xem ZIP.
 3. Dang nhap Muse trong tool, quay Ve Studio, bam Kiem tra phien.
-4. Chon 1 tai khoan / 10 luong, hoac 10 tai khoan / moi tai khoan 1 luong.
-5. Quan ly 10 tai khoan: nhap danh sach email/ten, dang nhap tung phien Muse.
-6. Nhap prompt hoac TXT/SRT, chon anh/video va Tao 10.
+4. Chon so o/luong 20, 30 hoac 40. Dung 1 tai khoan hoac nhieu tai khoan.
+5. Quan ly toi da 40 tai khoan: nhap danh sach email/ten, dang nhap tung phien Muse.
+6. Nhap prompt hoac TXT/SRT, chon anh/video va bam Tao theo so o da chon.
 
 Khong can ban cu, Node.js, npm hoac Chrome cai rieng.
 Can Internet va tai khoan Muse co quyen tao noi dung tuong ung.

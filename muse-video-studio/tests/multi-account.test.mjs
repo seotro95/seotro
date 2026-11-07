@@ -23,17 +23,17 @@ test('ten isolated Muse sessions each submit one concurrent request; single-acco
   try {
     const launch=async()=>{desktop=await _electron.launch({executablePath,args,env,timeout:30000});await desktop.firstWindow();let studio,shell;await waitFor(()=>{const pages=desktop.context().pages();studio=pages.find(page=>page.url().startsWith('http://127.0.0.1:')&&!page.url().startsWith(service));shell=pages.find(page=>page.url().endsWith('/desktop/shell.html'));return studio&&shell},'Studio');return {studio,shell}};
     let {studio,shell}=await launch();
-    await studio.getByRole('button',{name:'Quản lý 10 tài khoản',exact:true}).click();
+    await studio.getByRole('button',{name:'Quản lý tài khoản',exact:true}).click();
     const dialog=studio.getByRole('dialog',{name:'Quản lý tài khoản Muse',exact:true});
     const labels=Array.from({length:10},(_,i)=>`owner${i+1}@example.invalid`);
-    await dialog.getByLabel('Danh sách 10 tài khoản',{exact:true}).fill(labels.join('\n'));
+    await dialog.getByLabel('Danh sách tài khoản',{exact:true}).fill(labels.join('\n'));
     await dialog.getByRole('button',{name:'Lưu danh sách',exact:true}).click();
     await waitFor(async()=>(await studio.evaluate(async()=>(await fetch('/api/status')).json())).accounts[9].label===labels[9],'imported labels');
     assert.equal((await studio.evaluate(async()=>(await fetch('/api/status')).json())).accounts.filter(account=>account.authenticated).length,0,'Importing labels must never fake authentication');
     await dialog.getByRole('button',{name:'Hoàn tất',exact:true}).click();
     await studio.getByLabel('Chế độ tài khoản',{exact:true}).selectOption('multiple');
     assert.equal(await studio.getByRole('button',{name:'TẠO 10 VIDEO',exact:true}).isEnabled(),false);
-    await studio.getByRole('button',{name:'Quản lý 10 tài khoản',exact:true}).click();
+    await studio.getByRole('button',{name:'Quản lý tài khoản',exact:true}).click();
     for(let id=1;id<=10;id++){
       const before=new Set(desktop.context().pages());
       await dialog.getByRole('button',{name:`Đăng nhập Muse ${id}`,exact:true}).click();
@@ -55,7 +55,7 @@ test('ten isolated Muse sessions each submit one concurrent request; single-acco
     assert.ok(fixture.state.submitted.every(request=>request.authenticated&&request.prompt.includes(`Scene:\nAccount ${request.identity} landscape`)));
     const active=await studio.evaluate(async()=>(await fetch('/api/status')).json());
     assert.equal(active.executionConcurrency,1,'The shared-account setting stays at one; ten accounts do not need New chat');
-    assert.ok(active.accounts.every(account=>account.running===1));
+    assert.ok(active.accounts.slice(0,10).every(account=>account.running===1));
     const duplicate=await studio.evaluate(async()=>{const response=await fetch('/api/text',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accountId:4,accountMode:'multiple',prompt:'should not submit'})});return response.status});
     assert.ok([409,429].includes(duplicate));assert.equal(fixture.state.submitted.length,10);
     assert.equal(await studio.getByLabel('Chế độ tài khoản',{exact:true}).isEnabled(),false);
@@ -79,6 +79,7 @@ test('ten isolated Muse sessions each submit one concurrent request; single-acco
     await studio.getByLabel('Số luồng:',{exact:true}).selectOption('1');
     await waitFor(async()=>await studio.getByLabel('Số luồng:',{exact:true}).isEnabled(),'explicit serial compatibility choice');
     assert.equal(await studio.getByLabel('Số luồng:',{exact:true}).inputValue(),'1');
+    await studio.getByLabel('Số ô',{exact:true}).selectOption('10');
     fixture.state.behavior='video';await studio.getByRole('button',{name:'Tạo video',exact:true}).click();
     await studio.getByLabel('Kịch bản cảnh 2',{exact:true}).fill('Single account video on scene 2');
     await studio.getByTestId('scene-2').getByRole('button',{name:'Tạo cảnh này',exact:true}).click();
@@ -92,10 +93,10 @@ test('ten isolated Muse sessions each submit one concurrent request; single-acco
     await desktop.close();desktop=null;
     ({studio,shell}=await launch());
     assert.equal(await studio.getByLabel('Chế độ tài khoản',{exact:true}).inputValue(),'multiple');
-    await studio.getByRole('button',{name:'Quản lý 10 tài khoản',exact:true}).click();
+    await studio.getByRole('button',{name:'Quản lý tài khoản',exact:true}).click();
     await studio.getByRole('button',{name:'Kiểm tra 10 phiên',exact:true}).click();
-    await waitFor(async()=>(await studio.evaluate(async()=>(await fetch('/api/status')).json())).accounts.every(account=>account.authenticated),'ten persisted cookies',60000);
-    const saved=await studio.evaluate(async()=>(await fetch('/api/status')).json());assert.deepEqual(saved.accounts.map(account=>account.label),labels);
+    await waitFor(async()=>(await studio.evaluate(async()=>(await fetch('/api/status')).json())).accounts.slice(0,10).every(account=>account.authenticated),'ten persisted cookies',60000);
+    const saved=await studio.evaluate(async()=>(await fetch('/api/status')).json());assert.deepEqual(saved.accounts.slice(0,10).map(account=>account.label),labels);
     assert.equal(fixture.state.submitted.length,21,'Checking saved sessions must not generate media');
   } finally {fixture.releaseAll();await desktop?.close();fixture.server.closeAllConnections();await new Promise(resolve=>fixture.server.close(resolve));await rm(profile,{recursive:true,force:true})}
 });

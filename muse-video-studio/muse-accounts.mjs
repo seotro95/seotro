@@ -1,3 +1,4 @@
+import {MAX_SLOTS,isSlotCount} from './limits.mjs';
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import path from 'node:path';
 import { MuseBrowser } from './muse-browser.mjs';
@@ -5,20 +6,20 @@ import { MuseBrowser } from './muse-browser.mjs';
 const fail = (code, message, status = 409) => Object.assign(new Error(`${code}: ${message}`), { status });
 export class MuseAccounts {
   constructor({ profileRoot, accountProfile, createDriver, preferredConcurrency = 2, onSelect = () => {} }) {
-    this.profileRoot = profileRoot; this.preferredConcurrency=preferredConcurrency;
+    this.profileRoot = profileRoot; this.preferredConcurrency=preferredConcurrency;this.concurrencyWarning='';
     this.createDriver = createDriver || (id => new MuseBrowser({ profileRoot, ...(id === 1 ? {accountProfile} : { accountProfile: path.join(profileRoot, `slot-${String(id).padStart(2,'0')}`) }) }));
     this.onSelect = onSelect; this.selectedId = 1; this.drivers = new Map(); this.usage = new Map(); this.labels = [];
     this.supportsMultiAccount = true; this.images = new Map();
   }
   async load() {
     try { this.labels = this.validateLabels(JSON.parse(await readFile(path.join(this.profileRoot,'account-labels.json'),'utf8'))); } catch {}
-    try {const count=JSON.parse(await readFile(path.join(this.profileRoot,'single-concurrency.json'),'utf8'));if([1,2,3,5,10].includes(count))this.preferredConcurrency=count;}catch{}
+    try {const count=JSON.parse(await readFile(path.join(this.profileRoot,'single-concurrency.json'),'utf8'));if(isSlotCount(count))this.preferredConcurrency=count;}catch{}
     return this;
   }
-  validateId(id) { if (!Number.isInteger(id) || id < 1 || id > 10) throw fail('ACCOUNT_INVALID','Chọn tài khoản từ 1 đến 10.',400); }
+  validateId(id) { if (!Number.isInteger(id) || id < 1 || id > MAX_SLOTS) throw fail('ACCOUNT_INVALID','Chọn tài khoản từ 1 đến 40.',400); }
   driver(id) { this.validateId(id); if (!this.drivers.has(id)) this.drivers.set(id,this.createDriver(id)); return this.drivers.get(id); }
   account(id) { return { ...this.driver(id).account(1), id, label: this.labels[id-1] || `Muse ${String(id).padStart(2,'0')}` }; }
-  snapshot() { return Array.from({length:10},(_,i)=>({ ...this.account(i+1), active: Boolean(this.drivers.get(i+1)?.active), running: this.usage.get(i+1)?.count || 0 })); }
+  snapshot() { return Array.from({length:MAX_SLOTS},(_,i)=>{const id=i+1;const driver=this.drivers.get(id);return {...(driver?.snapshot?.()[0]||driver?.account(1)||{state:'disconnected',authenticated:false,sessionAuthenticated:false,checkedAt:null,balance:null}),id,label:this.labels[i]||`Muse ${String(id).padStart(2,'0')}`,active:Boolean(driver?.active),running:this.usage.get(id)?.count||0}}); }
   get maxConcurrency() { return this.driver(1).maxConcurrency; }
   get queue() { return [...this.drivers.values()].flatMap(driver=>driver.queue); }
   progress() { return [...this.drivers].flatMap(([accountId,driver])=>driver.progress().map(stage=>({...stage,accountId}))); }
@@ -29,15 +30,27 @@ export class MuseAccounts {
     if (options.show !== false) { await this.select(id); }
     return driver.connect(1,options);
   }
-  async setConcurrency(count,signal) { const result=await this.driver(1).setConcurrency(count,signal);await mkdir(this.profileRoot,{recursive:true,mode:0o700});await writeFile(path.join(this.profileRoot,'single-concurrency.json'),JSON.stringify(count),{mode:0o600});this.preferredConcurrency=count;return {...result,preferredConcurrency:count}; }
-  async prepareSingle(signal) {if(this.driver(1).maxConcurrency===this.preferredConcurrency)return {executionConcurrency:this.maxConcurrency,preferredConcurrency:this.preferredConcurrency};return this.setConcurrency(this.preferredConcurrency,signal);}
+  async requestConcurrency(count) {
+    if(!isSlotCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 40 luồng.',400);
+    await mkdir(this.profileRoot,{recursive:true,mode:0o700});const file=path.join(this.profileRoot,'single-concurrency.json');await writeFile(file+'.tmp',JSON.stringify(count),{mode:0o600});await rename(file+'.tmp',file);this.preferredConcurrency=count;
+  }
+  async setConcurrency(count,signal) {
+    await this.requestConcurrency(count);this.concurrencyWarning='';
+    try{return {...await this.driver(1).setConcurrency(count,signal),preferredConcurrency:count};}
+    catch(error){if(/MUSE_PARALLEL_UNVERIFIED|MUSE_NEW_CHAT_UNAVAILABLE|MUSE_COMPOSER_NOT_READY/.test(error.message))this.concurrencyWarning=error.message;throw error;}
+  }
+  async prepareSingle(signal,count=this.preferredConcurrency) {
+    if(!isSlotCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 40 luồng.',400);
+    if(this.driver(1).maxConcurrency===count){this.concurrencyWarning='';if(this.preferredConcurrency!==count)await this.requestConcurrency(count);return {executionConcurrency:this.maxConcurrency,preferredConcurrency:count,concurrencyWarning:''};}
+    try{return await this.setConcurrency(count,signal)}catch(error){if(!this.concurrencyWarning)throw error;return {executionConcurrency:this.maxConcurrency,preferredConcurrency:count,concurrencyWarning:this.concurrencyWarning,message:'Muse chưa xác minh được hội thoại riêng. Các ô sẽ chạy theo số luồng đã xác minh, không trộn kết quả.'};}
+  }
   async checkComposer(signal,id=1) { return this.driver(id).checkComposer(signal); }
   async closeAccount(id) { if (this.usage.has(id)) throw fail('MUSE_CHAT_BUSY','Tài khoản này đang có tác vụ.'); await this.driver(id).close(); }
   async close() { await Promise.allSettled([...this.drivers.values()].map(driver=>driver.close())); }
   async reopenLogin() { return this.driver(this.selectedId).reopenLogin(); }
   async openEmailLink(link) { return this.driver(this.selectedId).openEmailLink(link); }
   validateLabels(labels) {
-    if (!Array.isArray(labels) || !labels.length || labels.length>10 || labels.some(label=>typeof label!=='string' || !label.trim() || label.length>120 || /[\r\n\t|;:\x00-\x1f]/.test(label))) throw fail('ACCOUNT_LIST_INVALID','Nhập 1–10 email hoặc tên quản lý, mỗi dòng một tên; không nhập mật khẩu, mã hoặc token.',400);
+    if (!Array.isArray(labels) || !labels.length || labels.length>MAX_SLOTS || labels.some(label=>typeof label!=='string' || !label.trim() || label.length>120 || /[\r\n\t|;:\x00-\x1f]/.test(label))) throw fail('ACCOUNT_LIST_INVALID','Nhập 1–40 email hoặc tên quản lý, mỗi dòng một tên; không nhập mật khẩu, mã hoặc token.',400);
     const values=labels.map(label=>label.trim());
     if (new Set(values.map(value=>value.toLowerCase())).size!==values.length) throw fail('ACCOUNT_LIST_INVALID','Danh sách có tên hoặc email trùng nhau.',400);
     return values;

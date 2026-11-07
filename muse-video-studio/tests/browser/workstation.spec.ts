@@ -283,7 +283,8 @@ test('parallel selection uses an explicit capability check and reports an unsupp
   await expect(page.getByLabel('Số luồng:', { exact: true })).toHaveValue('10');
   await expect(page.locator('.composer-feedback')).toContainText('10 địa chỉ');
   await page.getByLabel('Số luồng:', { exact: true }).selectOption('2');
-  await expect(page.getByLabel('Số luồng:', { exact: true })).toHaveValue('1');
+  await expect(page.getByLabel('Số luồng:', { exact: true })).toHaveValue('2');
+  await expect(page.locator('.scene-card')).toHaveCount(2);
   await expect(page.locator('.composer-feedback')).toContainText('Chưa xác minh');
   expect(checks).toEqual([10, 2]); expect(renders).toBe(0);
 });
@@ -358,7 +359,7 @@ test('matches 10-slot layout on desktop and remains within mobile viewport', asy
 
 test('imports SRT, rejects overflow, preserves raw text, and persists prompts', async ({ page }) => {
   await page.getByRole('button', { name: 'Nhập TXT / SRT' }).click();
-  await page.getByLabel('Nội dung TXT / SRT').fill(Array.from({ length: 11 }, (_, i) => `Scene ${i}`).join('\n'));
+  await page.getByLabel('Nội dung TXT / SRT').fill(Array.from({ length: 41 }, (_, i) => `Scene ${i}`).join('\n'));
   await expect(page.getByRole('button', { name: 'Nạp vào Studio', exact: true })).toBeDisabled();
   await page.getByLabel('Nội dung TXT / SRT').fill('1\n00:00:00,000 --> 00:00:04,000\nCảnh một\n\n2\n00:00:04,000 --> 00:00:08,000\nCảnh hai');
   await page.getByRole('button', { name: 'Nạp vào Studio', exact: true }).click();
@@ -772,11 +773,11 @@ test('ten-account mode routes only verified slots, imports ten labels and preser
   let imported:string[]=[];
   await page.route('**/api/account/import',route=>{imported=route.request().postDataJSON().labels;return route.fulfill({json:{accounts:accounts.map((account,i)=>({...account,label:imported[i]}))}})});
   await page.reload();
-  await page.getByRole('button',{name:'Quản lý 10 tài khoản',exact:true}).click();
+  await page.getByRole('button',{name:'Quản lý tài khoản',exact:true}).click();
   const manager=page.getByRole('dialog',{name:'Quản lý tài khoản Muse',exact:true});
   const labels=Array.from({length:10},(_,i)=>`owner${i+1}@example.invalid`);
   await manager.locator('input[type=file][accept=".txt"]').setInputFiles({name:'accounts.txt',mimeType:'text/plain',buffer:Buffer.from(labels.join('\r\n'))});
-  await expect(manager.getByLabel('Danh sách 10 tài khoản',{exact:true})).toHaveValue(labels.join('\n'));
+  await expect(manager.getByLabel('Danh sách tài khoản',{exact:true})).toHaveValue(labels.join('\n'));
   await manager.getByRole('button',{name:'Lưu danh sách',exact:true}).click();await expect.poll(()=>imported.length).toBe(10);expect(imported).toEqual(labels);
   await manager.getByRole('button',{name:'Hoàn tất',exact:true}).click();
   await page.getByLabel('Chế độ tài khoản',{exact:true}).selectOption('multiple');

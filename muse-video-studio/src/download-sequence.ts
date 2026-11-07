@@ -1,10 +1,11 @@
+import {MAX_SLOTS} from '../limits.mjs';
 export type DownloadRange = { first: bigint; last: bigint; namespace: string };
 
 // A read/write transaction reserves the entire range atomically, including
 // across Studio tabs. Decimal strings keep numbering exact beyond 1,000 and
 // Number.MAX_SAFE_INTEGER. The profile ID distinguishes fresh installations.
 export async function reserveDownloadNumbers(count: number): Promise<DownloadRange> {
-  if (!Number.isInteger(count) || count < 1 || count > 10) throw new Error('Mỗi lượt tải cần từ 1 đến 10 tệp.');
+  if (!Number.isInteger(count) || count < 1 || count > MAX_SLOTS) throw new Error('Mỗi lượt tải cần từ 1 đến 40 tệp.');
   const db = await new Promise<IDBDatabase>((resolve, reject) => {
     const request = indexedDB.open('muse-studio-downloads-v1', 1);
     let abandoned = false;

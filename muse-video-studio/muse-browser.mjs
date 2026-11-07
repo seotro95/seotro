@@ -1,3 +1,4 @@
+import {MAX_SLOTS,isSlotCount} from './limits.mjs';
 import { chromium } from 'playwright-core';
 import { existsSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
@@ -51,7 +52,7 @@ export class MuseBrowser {
     this.quietMs = quietMs;
     this.composerTimeoutMs = composerTimeoutMs;
     this.submitTimeoutMs = submitTimeoutMs;
-    this.maxConcurrency = Math.max(1, Math.min(10, maxConcurrency));
+    this.maxConcurrency = Math.max(1, Math.min(MAX_SLOTS, maxConcurrency));
     this.reserved = 0;
     this.executing = 0;
     this.queue = [];
@@ -285,56 +286,35 @@ export class MuseBrowser {
     return url.href;
   }
   async setConcurrency(count, signal) {
-    if (![1, 2, 3, 5, 10].includes(count)) throw fail('MUSE_CONCURRENCY_INVALID', 'Chọn 1, 2, 3, 5 hoặc 10 luồng.', 400);
-    if (this.reserved || this.workers.size) throw fail('MUSE_CHAT_BUSY', 'Đợi các cảnh hoàn tất trước khi đổi số luồng.', 409);
-    this.maxConcurrency = 1; this.parallelRoutes = [];
-    if (count === 1) return { executionConcurrency: 1, message: 'Đã chọn một luồng. Các cảnh được xử lý lần lượt.' };
-    await this.open(); await this.refreshActive();
-    if (!this.account(1).authenticated) throw fail('MUSE_LOGIN_REQUIRED', 'Đăng nhập Muse và kiểm tra phiên trước khi bật song song.', 401);
-    const owned = this.active;
-    const pages = [];
-    const routes = new Set();
-    const stop = () => { for (const page of pages) void (owned.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()).catch(() => {}); };
-    signal.addEventListener('abort', stop, { once: true });
-    try {
-      for (let index = 0; index < count; index++) {
-        signal.throwIfAborted();
-        const page = owned.createWorkerPage ? await owned.createWorkerPage() : await owned.context.newPage();
-        pages.push(page); signal.throwIfAborted();
-        await page.goto(this.workerURL(), { waitUntil: 'domcontentloaded', timeout: 45000 });
-        if (!this.conversationURL(page) || !await this.authenticated(page)) throw fail('MUSE_LOGIN_REQUIRED', 'Chưa xác minh được phiên trong trang luồng riêng.', 401);
-        const before = this.conversationURL(page);
-        const entry = await this.newChatControl(page);
-        if (!entry) throw fail('MUSE_PARALLEL_UNVERIFIED', 'Muse hiện không có nút mở hội thoại riêng. Giữ một luồng để tránh trộn ảnh. Chưa gửi prompt tạo nội dung.', 409);
-        await entry.click({ timeout: 5000 });
-        await page.waitForURL(url => {
-          url.hash = ''; return url.origin === new URL(this.serviceURL).origin && url.href !== before;
-        }, { timeout: 5000 }).catch(() => { throw fail('MUSE_PARALLEL_UNVERIFIED', 'New chat chưa cung cấp địa chỉ hội thoại riêng. Chưa xác minh được chạy song song; giữ một luồng. Chưa gửi prompt tạo nội dung.', 409); });
-        const route = this.conversationURL(page);
-        const editor = await this.waitForComposer(page);
-        const handle = await editor.elementHandle();
-        let frame;
-        try { frame = await handle.ownerFrame(); } finally { await handle.dispose(); }
-        if (!route || routes.has(route) || (frame && await frame.locator(`${MESSAGES}[data-message-role="user"]`).count())) throw fail('MUSE_PARALLEL_UNVERIFIED', 'Các trang chưa có hội thoại trống độc lập. Giữ một luồng; chưa gửi prompt tạo nội dung.', 409);
-        routes.add(route);
-      }
-      // Reopen every service-created route: do not treat ten tabs of the same
-      // root page, or transient New chat placeholders, as independent chats.
-      for (const [index, route] of [...routes].entries()) {
-        signal.throwIfAborted();
-        const page = pages[index];
-        await page.goto(route, { waitUntil: 'domcontentloaded', timeout: 45000 });
-        await this.waitForComposer(page);
-        if (this.conversationURL(page) !== route) throw fail('MUSE_PARALLEL_UNVERIFIED', 'Muse không giữ địa chỉ hội thoại riêng sau khi mở lại. Giữ một luồng; chưa gửi prompt tạo nội dung.', 409);
-      }
-      signal.throwIfAborted();
-      this.parallelRoutes = [...routes].map(url => ({ url, busy: false }));
-      this.maxConcurrency = count;
-      return { executionConcurrency: count, message: `Đã kiểm tra ${count} địa chỉ hội thoại riêng và bật tối đa ${count} luồng. Chưa render nội dung; Muse vẫn có thể giới hạn tác vụ theo tài khoản.` };
-    } finally {
-      signal.removeEventListener('abort', stop);
-      await Promise.allSettled(pages.map(page => owned.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()));
-    }
+    if(!isSlotCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 40 luồng.',400);
+    if(this.reserved||this.workers.size)throw fail('MUSE_CHAT_BUSY','Đợi các cảnh hoàn tất trước khi đổi số luồng.',409);
+    this.maxConcurrency=1;this.parallelRoutes=[];this.concurrencyProbe={requested:count,checked:0,state:'checking'};
+    if(count===1){this.concurrencyProbe.state='ready';return {executionConcurrency:1,message:'Đã chọn một luồng. Các cảnh được xử lý lần lượt.'};}
+    await this.open();await this.refreshActive();
+    if(!this.account(1).authenticated)throw fail('MUSE_LOGIN_REQUIRED','Đăng nhập Muse và kiểm tra phiên trước khi bật song song.',401);
+    const owned=this.active;const pages=new Set();const routes=new Set();let next=0;let failure;
+    const stop=()=>{for(const page of pages)void(owned.destroyWorkerPage?owned.destroyWorkerPage(page):page.close()).catch(()=>{})};
+    signal.addEventListener('abort',stop,{once:true});
+    const probe=async()=>{while(!failure&&next<count){next++;let page;try{
+      signal.throwIfAborted();page=owned.createWorkerPage?await owned.createWorkerPage():await owned.context.newPage();pages.add(page);
+      await page.goto(this.workerURL(),{waitUntil:'domcontentloaded',timeout:45000});
+      if(!this.conversationURL(page)||!await this.authenticated(page))throw fail('MUSE_LOGIN_REQUIRED','Chưa xác minh được phiên trong trang luồng riêng.',401);
+      const before=this.conversationURL(page);const entry=await this.newChatControl(page);
+      if(!entry)throw fail('MUSE_PARALLEL_UNVERIFIED','Muse hiện không có nút mở hội thoại riêng. Chưa gửi prompt tạo nội dung.',409);
+      await entry.click({timeout:5000});
+      await page.waitForURL(url=>{url.hash='';return url.origin===new URL(this.serviceURL).origin&&url.href!==before},{timeout:5000}).catch(()=>{throw fail('MUSE_PARALLEL_UNVERIFIED','New chat chưa cung cấp địa chỉ hội thoại riêng. Chưa gửi prompt tạo nội dung.',409)});
+      const route=this.conversationURL(page);const editor=await this.waitForComposer(page);const handle=await editor.elementHandle();let frame;
+      try{frame=await handle.ownerFrame()}finally{await handle.dispose()}
+      if(!route||routes.has(route)||(frame&&await frame.locator(`${MESSAGES}[data-message-role="user"]`).count()))throw fail('MUSE_PARALLEL_UNVERIFIED','Các trang chưa có hội thoại trống độc lập. Chưa gửi prompt tạo nội dung.',409);
+      routes.add(route);await page.goto(route,{waitUntil:'domcontentloaded',timeout:45000});await this.waitForComposer(page);
+      if(this.conversationURL(page)!==route)throw fail('MUSE_PARALLEL_UNVERIFIED','Muse không giữ địa chỉ hội thoại riêng sau khi mở lại. Chưa gửi prompt tạo nội dung.',409);
+      this.concurrencyProbe.checked++;
+    }catch(error){if(!failure)failure=error;stop();}finally{if(page){await(owned.destroyWorkerPage?owned.destroyWorkerPage(page):page.close()).catch(()=>{});pages.delete(page)}}}};
+    try{
+      await Promise.all(Array.from({length:Math.min(4,count)},probe));if(failure)throw failure;signal.throwIfAborted();
+      this.parallelRoutes=[...routes].map(url=>({url,busy:false}));this.maxConcurrency=count;this.concurrencyProbe.state='ready';
+      return {executionConcurrency:count,message:`Đã kiểm tra ${count} địa chỉ hội thoại riêng và bật tối đa ${count} luồng. Muse vẫn quyết định hạn mức và thời gian xử lý.`};
+    }catch(error){this.concurrencyProbe.state='unavailable';throw error}finally{signal.removeEventListener('abort',stop);await Promise.allSettled([...pages].map(page=>owned.destroyWorkerPage?owned.destroyWorkerPage(page):page.close()))}
   }
   async composerDiagnostics(page) {
     const frames = page.frames ? page.frames() : [page];
@@ -439,7 +419,7 @@ export class MuseBrowser {
   }
   async turn(data) {
     this.requireSingleAccount(data.accountId);
-    if (this.reserved >= 10) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã có 10 cảnh đang xử lý hoặc chờ.', 429);
+    if (this.reserved >= MAX_SLOTS) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã có 40 cảnh đang xử lý hoặc chờ.', 429);
     this.reserved++;
     let release;
     try { release = await this.takeTurn(data.signal); return await this.executeTurn(data); }
@@ -447,7 +427,7 @@ export class MuseBrowser {
   }
   async executeTurn({ accountId, prompt, image, video, output = video ? 'video' : 'text', signal, checkOnly = false, batchId, sceneId, singleLane = false }) {
     this.requireSingleAccount(accountId);
-    if (this.workers.size >= 10) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã có 10 luồng đang chạy trên tài khoản Muse.', 429);
+    if (this.workers.size >= MAX_SLOTS) throw fail('MUSE_CONCURRENCY_LIMIT', 'Đã có 40 luồng đang chạy trên tài khoản Muse.', 429);
     const key = randomUUID();
     this.workers.set(key, null);
     const progress = { batchId: batchId || null, sceneId: sceneId || null, output, phase: 'preparing', submitted: false, active: true, startedAt: Date.now() };
