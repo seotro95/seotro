@@ -1,0 +1,37 @@
+name: Export 184 silent Muse prompts with camera directions
+on:
+  push:
+    branches: [codex/siberia-2536-production]
+    paths:
+      - '.github/workflows/siberia-silent184.yml'
+      - 'siberia-production/export_silent184.py'
+      - 'siberia-production/camera_directing_184.py'
+      - 'siberia-production/silent184_motifs.json'
+      - 'siberia-production/SILENT184_README_VI.md'
+      - 'siberia-production/silent184_helpers/**'
+      - 'siberia-production/test_silent184.mjs'
+permissions:
+  contents: write
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify published narration and export 184 shots
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python siberia-production/export_silent184.py
+      - name: Install checksum-pinned FFmpeg
+        run: python siberia-production/install_ffmpeg.py
+      - name: Verify sound removal preserves compressed video
+        run: node siberia-production/test_silent184.mjs silent184-delivery/MUSE_184_SILENT_25m36
+      - name: Upload complete downloads to the owner draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload siberia-184-silent-25m36 silent184-delivery/MUSE_184_SILENT_25m36.zip silent184-delivery/MUSE_184_SILENT_PROMPTS.txt silent184-delivery/MUSE_184_STORYBOARD_VI.txt silent184-delivery/MUSE_184_TIMELINE.csv silent184-delivery/MUSE_184_QA.json silent184-delivery/MUSE_184_README_VI.md silent184-delivery/MUSE_184_SHA256SUMS.txt --clobber
