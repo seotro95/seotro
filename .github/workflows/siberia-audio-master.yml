@@ -1,0 +1,37 @@
+name: Finish the English soundtrack and original music bed
+on:
+  push:
+    branches: [codex/siberia-2536-production]
+    paths:
+      - '.github/workflows/siberia-audio-master.yml'
+      - 'siberia-production/render_audio_master.mjs'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: siberia-audio-master
+  cancel-in-progress: false
+jobs:
+  mix:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install verified FFmpeg
+        run: python siberia-production/install_ffmpeg.py
+      - name: Compose, mix and measure the complete 25m36s soundtrack
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node siberia-production/render_audio_master.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: siberia-english-soundtrack
+          path: audio-master/
+          retention-days: 7
+          if-no-files-found: ignore
