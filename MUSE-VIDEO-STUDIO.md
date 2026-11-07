@@ -1,6 +1,8 @@
-# Muse AI Studio 1.6.0 · Hai chế độ tài khoản
+# Muse AI Studio 1.7.0 · Hai chế độ tài khoản
 
 [Bản Windows x64 đầy đủ](Muse-AI-Studio-Windows-x64.zip) · [Mã nguồn](Muse-Video-Workstation.zip) · [Hướng dẫn](muse-video-studio/README.md)
+
+Bản 1.7.0 thêm **Cổng API** để công cụ cùng máy điều khiển Studio, **Xóa toàn bộ** thư viện và mặc định **hai luồng** khi dùng một tài khoản (sau khi xác minh hai hội thoại riêng). Xem [hướng dẫn API](muse-video-studio/API-AUTOMATION.md).
 
 Giải nén toàn bộ gói vào thư mục mới, mở **Muse AI Studio.exe**. Không cần bản cũ, Node.js, npm hoặc Chrome riêng.
 

@@ -1,13 +1,13 @@
 {
   "name": "muse-video-studio",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "node --use-env-proxy server.mjs --dev",
     "build": "tsc --noEmit && vite build",
     "start": "node desktop-launcher.mjs",
-    "test": "node tests/core.test.ts && node tests/server.test.mjs && node tests/browser-launch.test.mjs && node tests/balance.test.mjs && node tests/login-diagnostics.test.mjs && node tests/folder-export.test.mjs && node tests/account-pool.test.mjs",
+    "test": "node tests/core.test.ts && node tests/server.test.mjs && node tests/browser-launch.test.mjs && node tests/balance.test.mjs && node tests/login-diagnostics.test.mjs && node tests/folder-export.test.mjs && node tests/account-pool.test.mjs && node tests/automation-input.test.ts && node tests/automation-server.test.mjs",
     "test:e2e": "playwright test",
     "test:browser-bridge": "node tests/muse-browser.test.mjs",
     "start:web": "node --use-env-proxy server.mjs",

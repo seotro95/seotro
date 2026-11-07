@@ -791,3 +791,34 @@ test('ten-account mode routes only verified slots, imports ten labels and preser
   await page.getByLabel('Chế độ tài khoản',{exact:true}).selectOption('single');await expect(page.getByLabel('Số luồng:',{exact:true})).toHaveValue('1');
   await page.reload();await expect(page.getByLabel('Chế độ tài khoản',{exact:true})).toHaveValue('single');
 });
+
+test('clear all removes both image and video history after confirmation and keeps prompts and downloads intact',async({page})=>{
+  await configureAdapter(page);
+  await page.route('**/api/image',route=>route.fulfill({json:{base64:image,mimeType:'image/png'}}));
+  await page.route('**/api/video',route=>route.fulfill({json:{base64:video,mimeType:'video/mp4'}}));
+  await page.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();await page.getByTestId('scene-1').getByRole('button',{name:'Tạo cảnh này',exact:true}).click();await expect(page.locator('.generated-image')).toHaveCount(1);
+  const prompt=await page.getByLabel('Kịch bản cảnh 1',{exact:true}).inputValue();
+  await page.getByRole('button',{name:'Tạo video',exact:true}).click();await page.getByTestId('scene-2').getByRole('button',{name:'Tạo cảnh này',exact:true}).click();await expect(page.locator('.scene-card video')).toHaveCount(1);
+  await page.getByRole('button',{name:'Xóa toàn bộ',exact:true}).click();const dialog=page.getByRole('dialog',{name:'Xóa toàn bộ ảnh/video đã lưu?',exact:true});await expect(dialog.getByText('Sẽ xóa 2 kết quả ảnh/video và lịch sử trong thư viện tool.',{exact:false})).toBeVisible();await dialog.getByRole('button',{name:'Hủy',exact:true}).click();await expect(page.locator('.scene-card video')).toHaveCount(1);
+  await page.getByRole('button',{name:'Xóa toàn bộ',exact:true}).click();await dialog.getByRole('button',{name:'Xác nhận xóa toàn bộ',exact:true}).click();await expect(dialog).toHaveCount(0);await expect(page.locator('.scene-card video')).toHaveCount(0);await expect(page.getByRole('button',{name:'Xóa toàn bộ',exact:true})).toBeDisabled();
+  await page.reload();await page.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();await expect(page.locator('.generated-image')).toHaveCount(0);await expect(page.locator('.history-entry')).toHaveCount(0);await expect(page.getByLabel('Kịch bản cảnh 1',{exact:true})).toHaveValue(prompt);
+});
+
+test('a failed library clear preserves selected media and saved history',async({page})=>{
+  await configureAdapter(page);await page.route('**/api/image',route=>route.fulfill({json:{base64:image,mimeType:'image/png'}}));await page.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();await page.getByTestId('scene-1').getByRole('button',{name:'Tạo cảnh này',exact:true}).click();await expect(page.locator('.generated-image')).toHaveCount(1);
+  await page.evaluate(()=>{IDBObjectStore.prototype.clear=function(){throw new Error('Fixture clear failure')}});
+  await page.getByRole('button',{name:'Xóa toàn bộ',exact:true}).click();const dialog=page.getByRole('dialog',{name:'Xóa toàn bộ ảnh/video đã lưu?',exact:true});await dialog.getByRole('button',{name:'Xác nhận xóa toàn bộ',exact:true}).click();await expect(page.getByText('Fixture clear failure',{exact:true})).toBeVisible();await expect(page.locator('.generated-image')).toHaveCount(1);await dialog.getByRole('button',{name:'Hủy',exact:true}).click();await page.reload();await expect(page.locator('.generated-image')).toHaveCount(1);
+});
+
+test('single-account rendering verifies its default two lanes and overlaps two requests before receiving a result',async({page})=>{
+  let lanes=1;const account={id:1,authenticated:true,sessionAuthenticated:true,active:true,state:'ready',checkedAt:null};
+  await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'browser',embeddedLogin:true,multiAccount:true,preferredConcurrency:2,executionConcurrency:lanes,accounts:[account]}}));
+  let preparations=0;await page.route('**/api/account/prepare',route=>{preparations++;lanes=2;return route.fulfill({json:{executionConcurrency:2,preferredConcurrency:2}})});await page.reload();
+  const calls:number[]=[];const pending:(()=>Promise<void>)[]=[];await page.route('**/api/image',async route=>{calls.push(route.request().postDataJSON().sceneId);await new Promise<void>(resolve=>pending.push(async()=>{await route.fulfill({json:{base64:image,mimeType:'image/png'}});resolve()}))});
+  await page.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();await page.getByRole('button',{name:'TẠO 10 ẢNH',exact:true}).click();await expect.poll(()=>calls.length).toBe(2);expect(preparations).toBe(1);await expect(page.locator('.status-badge.running')).toHaveCount(2);await expect(page.locator('.status-badge.queued')).toHaveCount(8);
+  await page.getByRole('button',{name:'Dừng tất cả luồng',exact:true}).click();for(const done of pending)await done().catch(()=>{});await expect(page.locator('.status-badge.cancelled')).toHaveCount(10);
+});
+
+test('an unavailable second Muse conversation prevents sending instead of pretending that two lanes are ready',async({page})=>{
+  const account={id:1,authenticated:true,sessionAuthenticated:true,active:true,state:'ready',checkedAt:null};await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'browser',preferredConcurrency:2,executionConcurrency:1,accounts:[account]}}));await page.route('**/api/account/prepare',route=>route.fulfill({status:409,json:{error:'MUSE_PARALLEL_UNVERIFIED: No separate chat'}}));let calls=0;await page.route('**/api/image',route=>{calls++;return route.fulfill({json:{base64:image,mimeType:'image/png'}})});await page.reload();await page.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();await page.getByRole('button',{name:'TẠO 10 ẢNH',exact:true}).click();await expect(page.getByText('MUSE_PARALLEL_UNVERIFIED: No separate chat',{exact:true})).toBeVisible();expect(calls).toBe(0);await expect(page.locator('.status-badge.running')).toHaveCount(0);
+});

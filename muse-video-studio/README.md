@@ -1,4 +1,4 @@
-# Muse AI Studio 1.6.0 · Hai chế độ, 10 cảnh
+# Muse AI Studio 1.7.0 · Hai chế độ, 10 cảnh
 
 Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đăng nhập Muse nằm trong cửa sổ tool. Chọn một tài khoản dùng chung 10 ô hoặc 10 tài khoản tách biệt, mỗi tài khoản một ô. Mỗi ô có nút Tạo/Dừng riêng và lịch sử ảnh/video lưu trên máy. Có thể kiểm tra để bật tối đa 10 hội thoại song song.
 
@@ -10,9 +10,16 @@ Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đă
 4. Có thể bấm **Kiểm tra ô Message** trước khi tạo. Bước này tìm ô nhập trong trang luồng, không gửi prompt hoặc render.
 5. Nhập 10 prompt hoặc TXT/SRT, chọn **Tạo ảnh hàng loạt** / **Tạo video**, bấm **TẠO 10 ẢNH / VIDEO**.
 
-Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.6.0** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
+Không chép `.data`, `.env`, `node_modules` hoặc các tệp từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.7.0** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
 
 Cầu nối giao diện **không chính thức**. Kiểm thử dùng Chromium/Electron thật và dịch vụ giả lập cục bộ; chưa tự động tạo media hoặc đọc số dư trên Muse.ai thật. Người dùng xác nhận có thể gửi/nhận tin nhắn thủ công trong tab Muse của tool. Tài khoản thật có thể giới hạn render đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các lựa chọn model, độ nét và thời lượng là yêu cầu bằng prompt, cần xác nhận bằng kết quả thật.
+
+## Mới trong 1.7.0: API tự động, xóa thư viện và mặc định hai luồng
+
+- **Cổng API**: bấm để bật cổng HTTP trên cùng máy (mặc định `127.0.0.1:8790`), lấy khóa và kết nối công cụ ngoài. API hỗ trợ gửi bộ prompt/TXT/SRT, ảnh tham chiếu/ảnh đã lưu cho video, đọc trạng thái, dừng từng ô/cả bộ, liệt kê và tải media, xóa thư viện. Có khóa Bearer, bật/tắt/đổi khóa, lưu cấu hình và `Idempotency-Key` tránh chạy trùng trong một phiên. Xem [API-AUTOMATION.md](API-AUTOMATION.md) có ví dụ Windows PowerShell/Python.
+- **Xóa toàn bộ**: xóa ảnh/video và lịch sử trong thư viện tool sau xác nhận, giữ prompt/tài khoản/ảnh tham chiếu và bộ đếm tải. Các tệp đã xuất ra thư mục ngoài vẫn còn. Không xóa giữa lượt tạo/tải đang chạy. Nếu ghi cơ sở dữ liệu thất bại, giữ kết quả để bạn thử lại.
+- **Một tài khoản mặc định hai luồng**: khi bấm tạo lần đầu, tự kiểm tra hai hội thoại riêng, rồi gửi hai yêu cầu đồng thời và xếp các ô còn lại chờ. Giữ lựa chọn 1/2/3/5/10 đã kiểm tra trên máy khi mở lại. Nếu không tìm được hai hội thoại riêng, báo trước khi gửi prompt; không giả trạng thái hai luồng hoặc tự lấy kết quả từ cùng hội thoại. Bạn vẫn có thể chủ động chọn một luồng.
+- Giữ nguyên **10 tài khoản · mỗi tài khoản một luồng**, giao diện 10 ô, xem ảnh trong Studio, đa nhiệm, lịch sử, lưu thư mục thường và đánh số tiếp.
 
 ## Mới: 10 tài khoản, mỗi tài khoản một luồng
 
@@ -26,7 +33,7 @@ Mỗi tài khoản có cookie, bộ nhớ trang, cửa sổ đăng nhập và lu
 
 Chế độ nhiều tài khoản có thể giảm việc chờ chung một tài khoản, nhưng thời gian tạo còn phụ thuộc Muse và quyền của từng tài khoản. Không tự chuyển tài khoản khi lỗi/hết hạn mức và không tự gửi lại yêu cầu. Chỉ dùng các tài khoản bạn có quyền sử dụng.
 
-## Lưu thư mục, đa nhiệm và xem ảnh trong bản 1.6.0
+## Lưu thư mục, đa nhiệm và xem ảnh trong bản 1.7.0
 
 - **Tải tất cả** lưu các bản đang chọn trực tiếp vào một **thư mục thường** trên máy. Lần đầu chọn thư mục gốc; các lần sau tự nhớ trên bản desktop. Mỗi bộ có thư mục mới chứa PNG/MP4/WebM/MOV đã đánh số, mở bằng File Explorer, không cần giải nén kết quả. Nút **Thư mục lưu** đổi nơi lưu. Nút tải riêng từng ảnh/video vẫn còn.
 - Số thứ tự tăng liên tục cho tải riêng và lưu bộ; tên vẫn có số cảnh và mã bản cài. Ghi bằng chế độ tạo mới, không ghi đè; trùng thư mục thì tạo tên khác. Lỗi ghi giữ các tệp đã lưu, không xóa bộ cũ. Bản web dùng File System Access nếu trình duyệt hỗ trợ; nếu không, dùng executable desktop để lưu thư mục.
@@ -35,7 +42,7 @@ Chế độ nhiều tài khoản có thể giảm việc chờ chung một tài 
 - Bấm ảnh mở cửa sổ xem **ngay trong Studio**, có Vừa cửa sổ/Kích thước gốc và tải ảnh. Không mở popup Blob vốn có thể hiện trắng.
 - Chọn **Số luồng: 10** trước khi chạy để kiểm tra và bật mười hội thoại riêng. Tiến độ mới ghi số ô đang mở và số prompt đã hiển thị trên trang Muse, tách khỏi lúc kết quả hoàn tất. Trong chế độ một tài khoản, mười yêu cầu được gửi đồng thời khi kết nối có khả năng đó; Muse vẫn có thể xếp hàng render theo tài khoản. Đây không phải cam kết mười GPU/render thật đồng thời.
 
-## Đăng nhập bằng mã xác nhận email trong bản 1.6.0
+## Đăng nhập bằng mã xác nhận email trong bản 1.7.0
 
 1. Mở **Đăng nhập Muse trong tool**, nhập email và yêu cầu mã.
 2. Giữ trang Muse đang chờ mã. Nhập hoặc dán **mã mới nhất** vào chính ô mã xác nhận trên trang Muse, rồi bấm xác nhận.

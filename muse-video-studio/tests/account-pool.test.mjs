@@ -26,5 +26,6 @@ test('account pool isolates routing, enforces one lane per account and preserves
     const shared=Array.from({length:10},()=>pool.generateImage({accountId:1,accountMode:'single'},new AbortController().signal));
     assert.equal(pool.usage.get(1).count,10);assert.ok(calls.slice(10).every(call=>call.id===1&&!call.singleLane));
     sharedPending.forEach(resolve=>resolve({}));await Promise.all(shared);assert.equal(pool.usage.size,0);
+    assert.equal(pool.preferredConcurrency,2);pool.driver(1).setConcurrency=async count=>({executionConcurrency:count});await pool.setConcurrency(1,new AbortController().signal);const preference=await new MuseAccounts({profileRoot:root}).load();assert.equal(preference.preferredConcurrency,1);assert.equal((await preference.prepareSingle(new AbortController().signal)).executionConcurrency,1);
   } finally {await rm(root,{recursive:true,force:true})}
 });

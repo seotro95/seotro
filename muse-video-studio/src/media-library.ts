@@ -1,6 +1,6 @@
 import type { MediaResult, Settings } from './core.ts';
 
-export type SavedMedia = { id: string; sceneId: number; prompt: string; createdAt: string; persisted: boolean; media: MediaResult; settings?: Settings; referenceId?: string };
+export type SavedMedia = { batchId?: string; id: string; sceneId: number; prompt: string; createdAt: string; persisted: boolean; media: MediaResult; settings?: Settings; referenceId?: string };
 type StoredMedia = Omit<SavedMedia, 'media'> & { media: Omit<MediaResult, 'url'> };
 
 async function database() {
@@ -46,3 +46,5 @@ export async function loadMedia(): Promise<SavedMedia[]> {
 }
 
 export const deleteMedia = (id: string) => write(store => store.delete(id));
+
+export const clearMedia = () => write(store => store.clear());

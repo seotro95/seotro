@@ -4,14 +4,15 @@ import { MuseBrowser } from './muse-browser.mjs';
 
 const fail = (code, message, status = 409) => Object.assign(new Error(`${code}: ${message}`), { status });
 export class MuseAccounts {
-  constructor({ profileRoot, accountProfile, createDriver, onSelect = () => {} }) {
-    this.profileRoot = profileRoot;
+  constructor({ profileRoot, accountProfile, createDriver, preferredConcurrency = 2, onSelect = () => {} }) {
+    this.profileRoot = profileRoot; this.preferredConcurrency=preferredConcurrency;
     this.createDriver = createDriver || (id => new MuseBrowser({ profileRoot, ...(id === 1 ? {accountProfile} : { accountProfile: path.join(profileRoot, `slot-${String(id).padStart(2,'0')}`) }) }));
     this.onSelect = onSelect; this.selectedId = 1; this.drivers = new Map(); this.usage = new Map(); this.labels = [];
     this.supportsMultiAccount = true; this.images = new Map();
   }
   async load() {
     try { this.labels = this.validateLabels(JSON.parse(await readFile(path.join(this.profileRoot,'account-labels.json'),'utf8'))); } catch {}
+    try {const count=JSON.parse(await readFile(path.join(this.profileRoot,'single-concurrency.json'),'utf8'));if([1,2,3,5,10].includes(count))this.preferredConcurrency=count;}catch{}
     return this;
   }
   validateId(id) { if (!Number.isInteger(id) || id < 1 || id > 10) throw fail('ACCOUNT_INVALID','Chọn tài khoản từ 1 đến 10.',400); }
@@ -28,7 +29,8 @@ export class MuseAccounts {
     if (options.show !== false) { await this.select(id); }
     return driver.connect(1,options);
   }
-  async setConcurrency(count,signal) { return this.driver(1).setConcurrency(count,signal); }
+  async setConcurrency(count,signal) { const result=await this.driver(1).setConcurrency(count,signal);await mkdir(this.profileRoot,{recursive:true,mode:0o700});await writeFile(path.join(this.profileRoot,'single-concurrency.json'),JSON.stringify(count),{mode:0o600});this.preferredConcurrency=count;return {...result,preferredConcurrency:count}; }
+  async prepareSingle(signal) {if(this.driver(1).maxConcurrency===this.preferredConcurrency)return {executionConcurrency:this.maxConcurrency,preferredConcurrency:this.preferredConcurrency};return this.setConcurrency(this.preferredConcurrency,signal);}
   async checkComposer(signal,id=1) { return this.driver(id).checkComposer(signal); }
   async closeAccount(id) { if (this.usage.has(id)) throw fail('MUSE_CHAT_BUSY','Tài khoản này đang có tác vụ.'); await this.driver(id).close(); }
   async close() { await Promise.allSettled([...this.drivers.values()].map(driver=>driver.close())); }

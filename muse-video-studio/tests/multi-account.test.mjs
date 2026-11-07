@@ -76,6 +76,8 @@ test('ten isolated Muse sessions each submit one concurrent request; single-acco
     await waitFor(async()=>await studio.locator('.scene-card video').count()===10,'ten account video results');
     await waitFor(async()=>await studio.getByLabel('Chế độ tài khoản',{exact:true}).isEnabled(),'video batch finished');
     await studio.getByLabel('Chế độ tài khoản',{exact:true}).selectOption('single');
+    await studio.getByLabel('Số luồng:',{exact:true}).selectOption('1');
+    await waitFor(async()=>await studio.getByLabel('Số luồng:',{exact:true}).isEnabled(),'explicit serial compatibility choice');
     assert.equal(await studio.getByLabel('Số luồng:',{exact:true}).inputValue(),'1');
     fixture.state.behavior='video';await studio.getByRole('button',{name:'Tạo video',exact:true}).click();
     await studio.getByLabel('Kịch bản cảnh 2',{exact:true}).fill('Single account video on scene 2');

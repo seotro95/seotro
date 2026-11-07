@@ -156,6 +156,7 @@ test('portable app submits ten independent scenes concurrently, views images and
     await waitFor(() => { studio = desktop.context().pages().find(page => page.url() === studioURL); return studio; });
     console.log('Portable stage: reopened');
     assert.equal(await studio.getByLabel('Kịch bản cảnh 2', { exact: true }).inputValue(), savedPrompt);
+    assert.equal(await studio.getByLabel('Số luồng:',{exact:true}).inputValue(),'10','The explicit concurrency preference must persist across an executable restart');
     await waitFor(async () => await studio.locator('.generated-image').count() === 9);
     assert.equal(await studio.locator('.history-entry').count(), 10, 'Generated files must persist across a full executable restart');
     assert.equal(fixture.state.submitted.length, 10, 'Restoring saved results must not render again');

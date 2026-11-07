@@ -1,3 +1,30 @@
+# Xác minh bản 1.7.0
+
+## Thay đổi
+
+- Thêm cổng HTTP độc lập, người dùng bật/tắt/đổi cổng/đổi khóa ngay trong Studio. Chỉ bind `127.0.0.1`, Bearer key sinh ngẫu nhiên, không nhận Origin/cross-site hoặc Host ngoài loopback. Cấu hình/khóa lưu trong dữ liệu riêng, không ghi log hoặc đóng gói. API gửi bộ prompt/TXT/SRT/ảnh tham chiếu, đọc trạng thái, tải media bằng byte gốc đúng MIME, dừng từng ô/cả bộ và xóa thư viện có chuỗi xác nhận.
+- Lệnh đi qua IPC chỉ nhận từ Studio; trang Muse không có preload này. Phản hồi có status/error rõ ràng qua đối tượng IPC, giữ đúng 400/409 khi đầu vào không hợp lệ/Studio bận. Không nhận mã JavaScript, đường dẫn tệp tùy ý hoặc đăng nhập Muse qua cổng API.
+- POST bộ có Idempotency-Key: cùng khóa/nội dung trả lại cùng batchId, không chạy thêm; khác nội dung bị từ chối. Giữ tối đa 128 mục trong RAM, không hứa lưu qua khởi động lại. Media mới giữ batchId để công cụ bên ngoài đối chiếu đúng bộ.
+- Nút Xóa toàn bộ dùng một transaction clear trong IndexedDB, chỉ thay giao diện/revoke URL sau commit. Giữ nguyên prompt, tài khoản, ảnh tham chiếu và bộ đếm tải; không xóa tệp đã xuất ra thư mục ngoài. Từ chối khi đang tạo/tải, có xác nhận trên giao diện và chuỗi xác nhận riêng trên API.
+- Một tài khoản mặc định yêu cầu 2 luồng: trước khi chạy lần đầu, tự kiểm tra hai đường dẫn hội thoại độc lập rồi mới gửi prompt. Nếu kiểm tra không được, trả lỗi trước khi gửi. Không mở hai bản sao cùng hội thoại và gọi là hai luồng. Giữ lựa chọn 1/2/3/5/10 trên máy; chế độ 10 tài khoản vẫn một luồng mỗi tài khoản.
+
+## Kiểm thử đã qua
+
+- `npm run build`, TypeScript/Vite và `npm test` qua. Test API thật trên loopback kiểm Bearer, Origin, loopback bind, URL không chứa khóa, idempotency khi hai client gửi chồng lấp, media bytes/MIME, xác nhận xóa, đổi khóa thu hồi khóa cũ, lưu cấu hình bật/tắt qua tạo lại server và JSON không phải object bị từ chối. Test đầu vào kiểm TXT/SRT, giới hạn 10 prompt, ID ô, whitelist settings, nguồn ảnh/video. Test pool kiểm lưu lựa chọn một luồng khi mặc định mới là hai.
+- Playwright giao diện **38/38 qua** trên build hiện tại. Thêm xóa cả ảnh/video sau xác nhận, hủy xóa giữ dữ liệu, lỗi transaction giữ kết quả và lịch sử, reload giữ thư viện rỗng. Kiểm hai yêu cầu chồng lấp và tám ô chờ; khi không có hội thoại thứ hai thì không gửi bất kỳ prompt nào. Các ca đa nhiệm, xem ảnh, lịch sử, thư mục và 10 tài khoản cũ đều qua.
+- Electron desktop từ nguồn **8/8**, OTP **4/4**, liên kết email/popup **4/4 qua**. Giữ khả năng mười hội thoại trên một tài khoản khi người dùng đã chọn/kiểm tra mười, video từ ảnh, dừng từng ô/cả bộ và đăng nhập không xen auth-check vào challenge OTP.
+- Kiểm thử HTTP → Electron → Studio → fixture Muse **1/1 qua**: bật cổng từ giao diện, không dùng cờ ép song song, mặc định 2; 4 prompt chạy theo hai đợt hai yêu cầu trước khi có kết quả. Gửi lại cùng Idempotency-Key không tạo trùng, tải byte ảnh khớp cảnh, đang chạy thì xóa trả 409. Xóa sau xác nhận giữ tệp ngoài và số tải tiếp 000002, reload giữ thư viện rỗng, dừng từng ô/cả bộ bằng HTTP, khởi động lại giữ cổng/khóa, đổi khóa thu hồi khóa cũ và tắt cổng ngừng nhận kết nối.
+
+- Gói Linux độc lập **3/3 kịch bản qua**, hồ sơ mới, PATH không có Node/npm: (1) API thật qua Electron trên mã cuối kiểm hai luồng, idempotency, batchId trên media, tải byte đúng, xóa/reload/bộ đếm và lưu/đổi/tắt khóa/cổng; (2) 10 phiên riêng chạy 10 ảnh rồi 10 video đồng thời, chuyển về một tài khoản khi người dùng chọn một luồng, khởi động lại giữ phiên; (3) một tài khoản chọn mười hội thoại, xem ảnh không popup trắng, lưu thư mục thật, giữ thư viện/số thứ tự và lựa chọn mười luồng sau mở lại. Unit API còn kiểm lỗi ghi khóa không làm thay đổi khóa đang hoạt động.
+
+## Giới hạn xác minh
+
+Các ca tạo nội dung/xác thực dùng dịch vụ mô phỏng cục bộ, không phải tài khoản Muse thật của người dùng. Đã chứng minh hai yêu cầu đồng thời trên hai hội thoại riêng; chưa chứng minh tài khoản thật của người dùng có hai hội thoại hoặc Muse xử lý render nhanh hơn bao nhiêu. Khi Muse không hỗ trợ thì báo lỗi, không giả kết quả hoặc tự gửi lại.
+
+Windows dùng Electron 45.2.2 x64 chính thức. Cloud Linux kiểm PE x64, checksum, manifest và CRC của gói Windows; không chạy Windows EXE. Sandbox, context isolation và web security giữ nguyên. Cổng tự động chỉ có trong bản desktop và dành cho công cụ trên cùng máy tính như người dùng đã chọn.
+
+## Kết quả lịch sử trước 1.7.0
+
 # Xác minh bản 1.6.0
 
 ## Hai chế độ tài khoản

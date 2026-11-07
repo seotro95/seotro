@@ -8,6 +8,8 @@ import { MuseAccounts } from '../muse-accounts.mjs';
 import { EmbeddedMuseHost } from './embedded-host.mjs';
 import { loginRecorder } from './login-diagnostics.mjs';
 import { FolderExports } from './folder-export.mjs';
+import { AutomationServer } from './automation-server.mjs';
+import { randomUUID } from 'node:crypto';
 
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const root = path.dirname(directory);
@@ -24,7 +26,7 @@ app.setName('Muse AI Studio');
 app.commandLine.appendSwitch('remote-debugging-port', '0');
 app.commandLine.appendSwitch('remote-debugging-address', '127.0.0.1');
 app.commandLine.appendSwitch('disable-background-timer-throttling');
-let window; let runtime; let host; let emailWindow; let emailNavigation = false; let closing = false;
+let automation; let window; let runtime; let host; let emailWindow; let emailNavigation = false; let closing = false;
 const requests = new Map();
 const hosts = new Map(); const loginLogs = new Map();
 const partitionFor = id => id === 1 ? 'persist:muse' : `persist:muse-${String(id).padStart(2,'0')}`;
@@ -48,7 +50,7 @@ async function start() {
   window = new BrowserWindow({ width: 1480, height: 1000, minWidth: 850, minHeight: 650, title: `Muse AI Studio ${version} · 1 hoặc 10 tài khoản / 10 cảnh`, autoHideMenuBar: true,
     webPreferences: { preload: path.join(directory, 'preload.cjs'), sandbox: true, contextIsolation: true, nodeIntegration: false } });
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
-  const muse = await new MuseAccounts({profileRoot:userData,
+  const muse = await new MuseAccounts({profileRoot:userData,preferredConcurrency:fixture&&process.env.MUSE_TEST_PARALLEL==='1'?10:2,
     createDriver: id => {
       const partition=partitionFor(id); const museSession=session.fromPartition(partition);
       const log=loginRecorder(serviceURL); loginLogs.set(id,log);
@@ -93,6 +95,30 @@ async function start() {
     if (action === 'finish') return folderExports.finish(data);
     if (action === 'abort') return folderExports.abort(data);
     throw new Error('Unknown export action');
+  });
+  let automationReady=false;
+  const pendingAutomation=new Map();
+  const rejectAutomation=()=>{automationReady=false;for(const task of pendingAutomation.values()){clearTimeout(task.timer);task.reject(Object.assign(new Error('Studio đang tải lại hoặc đóng. Kiểm tra tiến độ trước khi gửi lại bộ.'),{status:503}))}pendingAutomation.clear()};
+  studio.webContents.on('did-start-navigation',(_event,_url,_inPlace,isMainFrame)=>{if(isMainFrame)rejectAutomation()});
+  studio.webContents.on('destroyed',rejectAutomation);
+  const dispatch=(action,data)=>new Promise((resolve,reject)=>{
+    if(!automationReady||studio.webContents.isDestroyed())return reject(Object.assign(new Error('Studio chưa sẵn sàng. Mở Studio và đợi tải thư viện.'),{status:503}));
+    const id=randomUUID();const timer=setTimeout(()=>{pendingAutomation.delete(id);reject(Object.assign(new Error('Chưa nhận xác nhận từ Studio. Đọc tiến độ trước khi gửi lại; không tự chạy lại.'),{status:504}))},120000);
+    pendingAutomation.set(id,{resolve,reject,timer});studio.webContents.send('studio:automation-command',{id,action,data});
+  });
+  ipcMain.on('studio:automation-ready',(event,ready)=>{if(event.sender===studio.webContents)automationReady=ready===true});
+  ipcMain.on('studio:automation-reply',(event,value)=>{
+    if(event.sender!==studio.webContents||!value||typeof value.id!=='string')return;
+    const task=pendingAutomation.get(value.id);if(!task)return;pendingAutomation.delete(value.id);clearTimeout(task.timer);
+    if(value.ok)task.resolve(value.result);else task.reject(Object.assign(new Error(String(value.error||'STUDIO_ERROR').slice(0,1000)),{status:Number.isInteger(value.status)&&value.status>=400&&value.status<=599?value.status:500}));
+  });
+  automation=await new AutomationServer({userData,dispatch,version}).load();
+  ipcMain.handle('studio:automation-control',async(event,action,data)=>{
+    if(event.sender!==studio.webContents)throw new Error('Untrusted automation sender');
+    if(action==='config')return automation.snapshot();
+    if(action==='configure')return automation.configure(data||{});
+    if(action==='rotate')return automation.rotate();
+    throw new Error('Unknown automation control');
   });
   const layout = () => { const [width, height] = window.getContentSize(); studio.setBounds({ x: 0, y: 54, width, height: Math.max(1, height - 54) }); for (const owned of hosts.values()) owned.layout(); };
   window.on('resize', layout);
@@ -165,6 +191,7 @@ async function start() {
 async function shutdown() {
   closing = true;
   for (const control of requests.values()) control.abort();
+  await automation?.close();
   await runtime?.close();
   for (const owned of hosts.values()) await owned.close();
   for (const id of hosts.keys()) await session.fromPartition(partitionFor(id)).cookies.flushStore();
