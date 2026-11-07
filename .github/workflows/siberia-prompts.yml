@@ -1,0 +1,23 @@
+name: Export all 227 Muse prompts and 23 scene batches
+on:
+  push:
+    branches: [codex/siberia-2536-production]
+    paths:
+      - '.github/workflows/siberia-prompts.yml'
+      - 'siberia-production/export_muse_prompts.py'
+permissions:
+  contents: write
+jobs:
+  prompts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Export all prompts and verify the 23 Muse project batches
+        run: python siberia-production/export_muse_prompts.py
+      - name: Upload the prompt-only downloads to the owner draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload siberia-2536-production-v1 muse-prompt-delivery/MUSE_227_PROMPTS.txt muse-prompt-delivery/MUSE_23_BATCHES.zip muse-prompt-delivery/MUSE_PROMPTS_README_VI.md muse-prompt-delivery/MUSE_PROMPTS_SHA256SUMS.txt --clobber
