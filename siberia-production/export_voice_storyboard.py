@@ -81,6 +81,8 @@ Mỗi clip sinh 10 giây có phần dư để cắt và làm chuyển cảnh. Đ
  qa={'verified_voice_cues':59,'planned_shots':227,'batch_count':23,'fps':30,'total_frames':46080,'duration_seconds':1536,
   'published_english_wav_sha256':report['audio_sha256'],'uploaded_wav_digest_matches_report':True,
   'published_srt_text_and_times_match_master':True,'maximum_visual_boundary_rounding_ms':maximum_rounding,
+  'intro_edit_points_seconds':plan.get('intro_edit_points_seconds'),
+  'intro_visual_sequence':['Chara Sands','Por-Bazhyn','Lake Baikal ice ring','Siberian landscape'],
   'word_level_alignment_claimed':False,'muse_media_created':False,'completed_video_included':False}
  (out/'VOICE_STORYBOARD_QA.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2),encoding='utf-8')
  for src in [storyboard,csv_path,out/'VOICE_STORYBOARD_QA.json',proof/'en.srt',proof/'en-report.json']:

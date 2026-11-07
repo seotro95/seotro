@@ -6,7 +6,9 @@ base=Path(__file__).resolve().parent
 kit=base/'kit'
 plan=json.loads((kit/'shot_plan.json').read_text(encoding='utf-8'))
 out=Path('muse-prompt-delivery');out.mkdir(exist_ok=True)
-folder=out/'MUSE_23_BATCHES';(folder/'batches').mkdir(parents=True,exist_ok=True)
+folder=out/'MUSE_23_BATCHES'
+if folder.exists():shutil.rmtree(folder)
+(folder/'batches').mkdir(parents=True,exist_ok=True)
 shots=plan['shots'];assert len(shots)==227 and sum(s['frames'] for s in shots)==46080
 all_text='\n\n'.join(s['prompt'] for s in shots)+'\n'
 (out/'MUSE_227_PROMPTS.txt').write_text(all_text,encoding='utf-8')
