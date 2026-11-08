@@ -1,6 +1,6 @@
-# Muse AI Studio 1.8.0 · Tối đa 40 ô / luồng yêu cầu
+# Muse AI Studio 1.9.0 · Tối đa 40 ô / luồng yêu cầu
 
-[Bản Windows x64 đầy đủ](Muse-AI-Studio-Windows-x64.zip) · [Mã nguồn](Muse-Video-Workstation.zip) · [Hướng dẫn](muse-video-studio/README.md) · [API](muse-video-studio/API-AUTOMATION.md) · [Codex MCP](muse-video-studio/MCP-CODEX.md) · [MIT](muse-video-studio/LICENSE)
+[Cập nhật bản 1.8.0 → 1.9.0](Muse-AI-Studio-Update-1.9.0.zip) · [Cách cập nhật, giữ tài khoản](muse-video-studio/CAP-NHAT-1.9.md) · [Bản Windows x64 đầy đủ](Muse-AI-Studio-Windows-x64.zip) · [Mã nguồn](Muse-Video-Workstation.zip) · [Hướng dẫn](muse-video-studio/README.md) · [API](muse-video-studio/API-AUTOMATION.md) · [Codex MCP](muse-video-studio/MCP-CODEX.md) · [MIT](muse-video-studio/LICENSE)
 
 Giải nén toàn bộ vào thư mục mới rồi mở **Muse AI Studio.exe**. Không cần bản cũ, Node.js hoặc Chrome riêng.
 
@@ -12,3 +12,5 @@ Giải nén toàn bộ vào thư mục mới rồi mở **Muse AI Studio.exe**. 
 - Giữ cổng API cùng máy, Tạo/Dừng từng ô, lịch sử, xem ảnh trong Studio, xóa toàn bộ thư viện và tải thư mục với số thứ tự tăng tiếp.
 
 Số render thực sự cùng lúc do Muse quyết định. Kiểm thử dùng dịch vụ mô phỏng; không khẳng định tài khoản thật có thể chạy 40 render. Phiên chat cloud không kết nối trực tiếp cổng 127.0.0.1 trên máy Windows của người dùng. Xem [xác minh](muse-video-studio/VALIDATION.md).
+
+Bản 1.9: nút đồng bộ BẬT/TẮT và chọn từng ô, cài đặt/ảnh riêng; phiên lưu mã hóa và tự khôi phục; proxy HTTP/HTTPS hoặc SOCKS5 không mật khẩu tùy tài khoản. Mỗi tài khoản dùng lại tab Muse đã tải, giảm mở trang/xác minh thừa.

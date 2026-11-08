@@ -39,11 +39,12 @@ const pause = (ms, signal) => new Promise((resolve, reject) => {
 });
 
 export class MuseBrowser {
-  constructor({ profileRoot, accountProfile, serviceURL = 'https://muse.ai/', launchOptions, sessionFactory, timeoutMs = 600000, pollMs = 500, quietMs = 1500, composerTimeoutMs = 45000, submitTimeoutMs = 15000, maxConcurrency = 1 } = {}) {
+  constructor({ profileRoot, accountProfile, serviceURL = 'https://muse.ai/', launchOptions, sessionFactory, onVerified, timeoutMs = 600000, pollMs = 500, quietMs = 1500, composerTimeoutMs = 45000, submitTimeoutMs = 15000, maxConcurrency = 1 } = {}) {
     this.profileRoot = profileRoot;
     this.serviceURL = serviceURL;
     this.launchOptions = launchOptions;
     this.sessionFactory = sessionFactory;
+    this.onVerified=onVerified;
     this.workers = new Map();
     this.workerStages = new Map();
     this.opening = null;
@@ -98,6 +99,7 @@ export class MuseBrowser {
       if (show) owned.showLogin?.();
       try { await owned.page.goto(this.serviceURL, { waitUntil: 'domcontentloaded', timeout: 45000 }); }
       catch { throw fail('MUSE_CONNECTION_FAILED', 'Không tải được trang Muse. Kiểm tra Internet rồi bấm Tải lại Muse; phiên cũ vẫn được giữ.', 503); }
+      await owned.restoreStorage?.();
       return owned.page;
     }
     const profile = this.profile(id);
@@ -175,6 +177,13 @@ export class MuseBrowser {
     return false;
   }
   async refreshActive({ background = false } = {}) {
+    if(background&&this.active?.isLoginVisible?.())return;
+    const page=this.active?.page;
+    if(this.refreshing&&this.refreshingPage===page)return this.refreshing;
+    const pending=this.refreshSession({background});this.refreshing=pending;this.refreshingPage=page;
+    try{return await pending}finally{if(this.refreshing===pending){this.refreshing=null;this.refreshingPage=null}}
+  }
+  async refreshSession({ background = false } = {}) {
     const active = this.active;
     if (!active || active.page.isClosed()) return;
     // The website owns the challenge. Background status polling must not send
@@ -202,6 +211,7 @@ export class MuseBrowser {
     account.state = probe.authenticated ? 'ready' : probe.state;
     account.connectionMessage = probe.authenticated ? 'Phiên Muse đã được xác minh. Tool mở ô soạn riêng khi bạn bấm tạo từng cảnh hoặc cả bộ.' : probe.message;
     account.balance = account.authenticated ? await readMuseBalance(active.page) : null;
+    if(account.authenticated)await this.onVerified?.();
   }
   async authenticated(page) {
     return (await this.inspectAuthentication(page)).authenticated;
@@ -439,13 +449,14 @@ export class MuseBrowser {
     }
     const lease = this.maxConcurrency > 1 && !singleLane ? this.parallelRoutes.find(route => !route.busy) : null;
     if (lease) lease.busy = true;
-    let page; let owned; let sending = false;
-    const cancelled = () => { if (page && !sending) void (owned?.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()).catch(() => {}); };
+    let page; let owned; let sending = false;let reuseLogin=false;
+    const cancelled = () => { if (page && !sending&&!reuseLogin) void (owned?.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()).catch(() => {}); };
     signal.addEventListener('abort', cancelled, { once: true });
     try {
       signal.throwIfAborted();
       await this.open(accountId);
       owned = this.active;
+      progress.phase='checking-session';
       await this.refreshActive();
       if (!this.account(accountId).authenticated) {
         const account = this.account(accountId);
@@ -453,20 +464,26 @@ export class MuseBrowser {
         throw fail(code, account.connectionMessage || 'Đăng nhập tài khoản Muse trong tool, rồi bấm Kiểm tra phiên.', code === 'MUSE_LOGIN_REQUIRED' ? 401 : 503);
       }
       signal.throwIfAborted();
-      page = owned.createWorkerPage ? await owned.createWorkerPage() : await owned.context.newPage();
+      // In multiple-account mode the pool already grants exactly one lease per
+      // account. Reuse that account's hydrated tab and sessionStorage instead of
+      // booting another full Muse app and repeating auth for every render.
+      reuseLogin=singleLane&&!owned.page.isClosed()&&new URL(owned.page.url()).origin===new URL(this.serviceURL).origin;
+      progress.phase=reuseLogin?'waiting-editor':'opening-page';
+      page = reuseLogin?owned.page:owned.createWorkerPage ? await owned.createWorkerPage() : await owned.context.newPage();
       this.workers.set(key, page);
       signal.throwIfAborted();
-      await page.goto(lease?.url || this.workerURL(), { waitUntil: 'domcontentloaded', timeout: 45000 });
+      if(!reuseLogin)await page.goto(lease?.url || this.workerURL(), { waitUntil: 'domcontentloaded', timeout: 45000 });
       if (lease && this.conversationURL(page) !== lease.url) {
         this.maxConcurrency = 1; this.parallelRoutes = [];
         throw fail('MUSE_PARALLEL_UNVERIFIED', 'Muse chuyển hội thoại sang địa chỉ khác. Đã về một luồng; chưa gửi prompt của cảnh này.', 409);
       }
       if (new URL(page.url()).origin !== new URL(this.serviceURL).origin) throw fail('MUSE_WORKSPACE_ORIGIN', 'Trang luồng chuyển sang miền khác Muse. Chưa nhập hoặc gửi prompt. Hoàn tất đăng nhập trong tab Muse rồi kiểm tra lại phiên.', 409);
-      const workerProbe = await this.inspectAuthentication(page);
+      const workerProbe = reuseLogin?{authenticated:true}:await this.inspectAuthentication(page);
       if (!workerProbe.authenticated) {
         Object.assign(this.account(accountId), { authenticated: false, sessionAuthenticated: false, composerReady: false, state: workerProbe.state, connectionMessage: workerProbe.message });
         throw fail(workerProbe.state === 'check_failed' ? 'MUSE_SESSION_CHECK_FAILED' : 'MUSE_LOGIN_REQUIRED', workerProbe.message, workerProbe.state === 'check_failed' ? 503 : 401);
       }
+      progress.phase='waiting-editor';
       const conversation = await this.prepareConversation(page, { reuse: Boolean(lease) || singleLane });
       signal.throwIfAborted();
       if (await conversation.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
@@ -488,7 +505,7 @@ export class MuseBrowser {
     } finally {
       progress.active = false;
       signal.removeEventListener('abort', cancelled);
-      if (page) await (owned?.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()).catch(() => {});
+      if (page&&!reuseLogin) await (owned?.destroyWorkerPage ? owned.destroyWorkerPage(page) : page.close()).catch(() => {});
       this.workers.delete(key);
       if (lease) lease.busy = false;
     }
@@ -606,7 +623,11 @@ export class MuseBrowser {
       if (signal.aborted) {
         // A hidden worker still has a live DOM. Dispatch Stop there and give its
         // request time to finish before disposing the view, which aborts fetches.
-        await page.locator(STOP).first().evaluate(button => button.click(), undefined, { timeout: 1000 }).catch(() => {});
+        await page.locator(STOP).first().evaluate(button => button.click(), undefined, { timeout: 3000 }).catch(() => {});
+        // Let the website dispatch its Stop request before tearing down several
+        // views together. A previously idle frame may report networkidle before
+        // the click's new fetch has entered Playwright's network bookkeeping.
+        await pause(200);
         await page.waitForLoadState('networkidle', { timeout: 3000 }).catch(() => {});
         throw signal.reason;
       }

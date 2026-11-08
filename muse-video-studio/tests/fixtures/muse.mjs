@@ -59,6 +59,7 @@ const fixture = http.createServer(async (req, res) => {
   if (req.url?.endsWith('.mp4')) { res.setHeader('Content-Type', 'video/mp4'); return res.end(clip); }
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   const requestPath = new URL(req.url, 'http://127.0.0.1').pathname;
+  if(req.headers['sec-fetch-dest']==='document')state.pageLoads=(state.pageLoads||0)+1;
   if (state.redirectChats && requestPath.startsWith('/chat/')) { res.writeHead(302, { Location: '/' }); return res.end(); }
   if (state.chatPath && requestPath === '/') return res.end('<!doctype html><html><body><h1>Fixture dashboard without chat</h1></body></html>');
   if (state.frameComposer && requestPath !== '/composer-frame') return res.end('<!doctype html><html><body><iframe title="Muse chat" src="/composer-frame" style="width:100%;height:900px;border:0"></iframe></body></html>');

@@ -1,16 +1,18 @@
 import {MAX_SLOTS} from '../limits.mjs';
-import { app, BrowserWindow, WebContentsView, ipcMain, dialog, session, clipboard, shell } from 'electron';
+import { app, BrowserWindow, WebContentsView, ipcMain, dialog, session, clipboard, shell, safeStorage } from 'electron';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { startStudioServer } from '../server.mjs';
 import { MuseBrowser } from '../muse-browser.mjs';
 import { MuseAccounts } from '../muse-accounts.mjs';
-import { EmbeddedMuseHost } from './embedded-host.mjs';
+import { EmbeddedMuseHost,EmbeddedMuseConnection } from './embedded-host.mjs';
 import { loginRecorder } from './login-diagnostics.mjs';
 import { FolderExports } from './folder-export.mjs';
 import { AutomationServer } from './automation-server.mjs';
 import { randomUUID } from 'node:crypto';
+import {AccountStorage} from './account-storage.mjs';
+import {AccountProxies} from './account-proxy.mjs';
 
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const root = path.dirname(directory);
@@ -30,6 +32,7 @@ app.commandLine.appendSwitch('disable-background-timer-throttling');
 let automation; let window; let runtime; let host; let emailWindow; let emailNavigation = false; let closing = false;
 const requests = new Map();
 const hosts = new Map(); const loginLogs = new Map();
+const saveTimers=new Map();const saves=new Set();const savingSessions=new Map();const dirtySessions=new Set();let accountStorage;let muse;let museConnection;
 const partitionFor = id => id === 1 ? 'persist:muse' : `persist:muse-${String(id).padStart(2,'0')}`;
 
 if (!app.requestSingleInstanceLock()) app.quit();
@@ -48,22 +51,47 @@ async function start() {
   const fixture = process.env.MUSE_DESKTOP_TEST === '1' ? process.env.MUSE_FIXTURE_URL : null;
   if (fixture && (new URL(fixture).protocol !== 'http:' || new URL(fixture).hostname !== '127.0.0.1')) throw new Error('Fixture must use local HTTP.');
   const serviceURL = fixture || 'https://muse.ai/';
+  museConnection=new EmbeddedMuseConnection(userData);
+  // Use the asynchronous OS encryptor: opening a system keyring must never
+  // block all account tabs on Electron's main thread. Basic storage is confined
+  // to explicit local Linux fixtures, never enabled by a release launcher.
+  if(fixture&&process.platform==='linux')safeStorage.setUsePlainTextEncryption(true);
+  const encryptionReady=await safeStorage.isAsyncEncryptionAvailable();
+  const codec={isEncryptionAvailable:()=>encryptionReady,getSelectedStorageBackend:()=>safeStorage.getSelectedStorageBackend?.(),encryptString:value=>safeStorage.encryptStringAsync(value),decryptString:async bytes=>(await safeStorage.decryptStringAsync(bytes)).result};
+  accountStorage=new AccountStorage({userData,codec,serviceURL,allowBasic:Boolean(fixture)});
+  const savedAccountIds=await accountStorage.savedIds();
+  const proxies=await new AccountProxies({storage:accountStorage,inheritedProxy:process.env.HTTPS_PROXY||process.env.HTTP_PROXY}).load();
+  app.on('login',(event,contents,_details,info,callback)=>{const credentials=proxies.credentials(contents,info);if(credentials){event.preventDefault();callback(credentials.username,credentials.password)}});
+  const saveSession=(id,changed=false)=>{
+    if(savingSessions.has(id)){if(changed)dirtySessions.add(id);return savingSessions.get(id)}
+    const task=(async()=>{do{
+      dirtySessions.delete(id);const driver=muse?.drivers.get(id);
+      try{await accountStorage.capture(id,session.fromPartition(partitionFor(id)),driver?.active?.page);if(driver)driver.account(1).persistenceMessage=''}catch{if(driver)driver.account(1).persistenceMessage=accountStorage.available()?'Chưa ghi được phiên mã hóa. Kiểm tra quyền ghi thư mục .data.':'Kho mã hóa của hệ điều hành chưa sẵn sàng. Hồ sơ Chromium vẫn được giữ, nhưng cookie phiên chưa sao lưu được.'}
+    }while(dirtySessions.has(id))})();
+    savingSessions.set(id,task);saves.add(task);void task.finally(()=>{savingSessions.delete(id);saves.delete(task)});return task;
+  };
   window = new BrowserWindow({ width: 1480, height: 1000, minWidth: 850, minHeight: 650, title: `Muse AI Studio ${version} · 1 hoặc nhiều tài khoản / tối đa 40 ô`, autoHideMenuBar: true,
     webPreferences: { preload: path.join(directory, 'preload.cjs'), sandbox: true, contextIsolation: true, nodeIntegration: false } });
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
-  const muse = await new MuseAccounts({profileRoot:userData,preferredConcurrency:fixture&&process.env.MUSE_TEST_PARALLEL==='1'?10:2,
+  muse = await new MuseAccounts({profileRoot:userData,preferredConcurrency:fixture&&process.env.MUSE_TEST_PARALLEL==='1'?10:2,
+    proxyStatus:id=>proxies.snapshot(id),configureProxy:async(id,data)=>{await saveSession(id);await muse.closeAccount(id);return proxies.configure(id,data)},
     createDriver: id => {
       const partition=partitionFor(id); const museSession=session.fromPartition(partition);
       const log=loginRecorder(serviceURL); loginLogs.set(id,log);
       museSession.webRequest.onCompleted(details=>log.completed(details));
       museSession.webRequest.onErrorOccurred(details=>log.failed(details));
       museSession.setPermissionRequestHandler((_contents,_permission,callback)=>callback(false));
-      const proxyServer=process.env.HTTPS_PROXY||process.env.HTTP_PROXY;
-      const configured=proxyServer?museSession.setProxy({proxyRules:proxyServer,proxyBypassRules:'localhost;127.0.0.1'}):Promise.resolve();
-      const ownedHost=new EmbeddedMuseHost({window,userData,serviceURL,partition});hosts.set(id,ownedHost);if(!host)host=ownedHost;
+      const configured=proxies.apply(id,museSession);
+      const ownedHost=new EmbeddedMuseHost({window,userData,serviceURL,partition,connection:museConnection});hosts.set(id,ownedHost);if(!host)host=ownedHost;
       return new MuseBrowser({profileRoot:userData,accountProfile:id===1?userData:path.join(userData,`account-${id}`),serviceURL,
+        onVerified:()=>saveSession(id),
         maxConcurrency:fixture&&id===1&&process.env.MUSE_TEST_PARALLEL==='1'?10:1,
-        sessionFactory:async()=>{await configured;return ownedHost.openSession()}});
+        sessionFactory:async()=>{
+          await configured;const storage=await accountStorage.restore(id,museSession);
+          if(!museSession.studioSaveAttached){museSession.studioSaveAttached=true;museSession.cookies.on('changed',()=>{if(closing)return;clearTimeout(saveTimers.get(id));saveTimers.set(id,setTimeout(()=>{saveTimers.delete(id);void saveSession(id,true)},500))})}
+          const owned=await ownedHost.openSession();
+          return {...owned,restoreStorage:async()=>{if(!Object.keys(storage).length)return;const changed=await owned.page.evaluate(({origin,storage})=>{if(location.origin!==origin||sessionStorage.length)return false;for(const [key,value]of Object.entries(storage))if(typeof value==='string')sessionStorage.setItem(key,value);return true},{origin:new URL(serviceURL).origin,storage});if(changed)await owned.page.reload({waitUntil:'domcontentloaded',timeout:45000})}};
+        }});
     },
     onSelect: id=>{for(const owned of hosts.values())owned.hideLogin();host=hosts.get(id);window.webContents.send('studio:account',id);}
   }).load();
@@ -185,6 +213,7 @@ async function start() {
   await window.loadFile(path.join(directory, 'shell.html'));
   window.webContents.send('studio:version', version);
   await studio.webContents.loadURL(runtime.url);
+  void muse.restoreSessions(savedAccountIds).catch(()=>{});
   window.on('close', event => { if (!closing) { event.preventDefault(); void shutdown(); } });
   console.log('Muse desktop ready: dang nhap trong tool, toi da 40 o, mot hoac nhieu tai khoan, hang doi an toan.');
 }
@@ -193,8 +222,12 @@ async function shutdown() {
   closing = true;
   for (const control of requests.values()) control.abort();
   await automation?.close();
+  for(const timer of saveTimers.values())clearTimeout(timer);saveTimers.clear();
+  await Promise.allSettled([...hosts.keys()].map(id=>accountStorage?.available()?accountStorage.capture(id,session.fromPartition(partitionFor(id)),muse?.drivers.get(id)?.active?.page):Promise.resolve()));
+  await Promise.allSettled([...saves]);
   await runtime?.close();
   for (const owned of hosts.values()) await owned.close();
+  await museConnection?.close();
   for (const id of hosts.keys()) await session.fromPartition(partitionFor(id)).cookies.flushStore();
   app.quit();
 }

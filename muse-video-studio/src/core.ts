@@ -7,11 +7,15 @@ export type Mode = 'muse' | 'demo';
 export type Output = 'video' | 'image';
 export type Status = 'ready' | 'queued' | 'running' | 'done' | 'error' | 'cancelled';
 export type Reference = { id: string; name: string; url: string; base64?: string; mimeType?: string };
-export type Settings = { slotCount: number; requestedConcurrency?: number; accountMode: 'single' | 'multiple'; model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
+export type Settings = { slotCount: number; requestedConcurrency?: number; syncOperations: boolean; accountMode: 'single' | 'multiple'; model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
+export const RENDER_KEYS = ['model','aspectRatio','duration','resolution','imageResolution','videoInput','r2v','modifier'] as const;
+export type SceneSettings = Pick<Settings,typeof RENDER_KEYS[number]>;
+export function renderingSettings(settings:Settings):SceneSettings{return Object.fromEntries(RENDER_KEYS.map(key=>[key,settings[key]])) as SceneSettings}
+export function sceneSettings(settings:Settings,scene:Pick<Scene,'renderSettings'>):Settings{return normalizeSettings({...settings,...scene.renderSettings})}
 export type MediaResult = { kind: Output; base64: string; mimeType: string; url: string; demo: boolean; savedId?: string; referenceCompressed?: boolean; metadata?: { duration?: number; width: number; height: number }; requestedResolution?: Resolution; aspectRatio?: Settings['aspectRatio'] };
 export type VideoResult = MediaResult;
 export type ImageResult = MediaResult;
-export type Scene = { id: number; enabled: boolean; prompt: string; reference: Reference | null; status: Status; error?: string; video?: VideoResult; image?: ImageResult; enhancing?: boolean; stopping?: boolean; activeOutput?: Output };
+export type Scene = { id: number; enabled: boolean; syncSelected?: boolean; renderSettings?: SceneSettings; prompt: string; reference: Reference | null; status: Status; error?: string; video?: VideoResult; image?: ImageResult; enhancing?: boolean; stopping?: boolean; activeOutput?: Output };
 export const ADVENTURE = [
   'Một người thám hiểm bước vào ngôi đền cổ xưa trong rừng nhiệt đới, tia nắng vàng rọi xuyên qua tán lá, máy quay tiến chậm từ phía sau.',
   'Khám phá bức tường khắc cổ ngữ bí ẩn phát sáng ánh lân tinh xanh ngọc, máy quay lia chậm ngang qua các chi tiết.',
@@ -36,7 +40,7 @@ export const RUNWAY = [
   'Người mẫu ngoái nhìn qua vai với nụ cười nhẹ, camera chân dung 85mm.',
   'Người mẫu đứng giữa sân khấu trong ánh đèn cuối buổi, toàn cảnh runway sang trọng.'
 ];
-export const DEFAULT_SETTINGS: Settings = { slotCount: DEFAULT_SLOTS, accountMode: 'single', model: 'Omni 1.1 Flash', aspectRatio: '16:9', duration: 4, resolution: '720p', imageResolution: '2k', output: 'video', videoInput: 'text', autoSync: true, r2v: true, modifier: '', mode: 'muse' };
+export const DEFAULT_SETTINGS: Settings = { slotCount: DEFAULT_SLOTS, syncOperations:true, accountMode: 'single', model: 'Omni 1.1 Flash', aspectRatio: '16:9', duration: 4, resolution: '720p', imageResolution: '2k', output: 'video', videoInput: 'text', autoSync: true, r2v: true, modifier: '', mode: 'muse' };
 export const createScenes = (count: number = DEFAULT_SLOTS): Scene[] => Array.from({length:isSlotCount(count)?count:DEFAULT_SLOTS},(_,i)=>({id:i+1,enabled:true,prompt:ADVENTURE[i]||'',reference:null,status:'ready'}));
 
 // Subtitle blocks become scenes; TXT uses paragraphs, or one non-empty line per scene.
@@ -105,11 +109,12 @@ export function restoreWorkspace(raw: string | null): { scenes: Scene[]; setting
     if (data.version !== 1 || !Array.isArray(data.scenes) || !isSlotCount(data.scenes.length)) return fallback;
     fallback.scenes = createScenes(data.scenes.length).map((scene, i) => ({ ...scene,
       prompt: typeof data.scenes[i]?.prompt === 'string' ? data.scenes[i].prompt.slice(0, 8000) : scene.prompt,
-      enabled: data.scenes[i]?.enabled !== false
+      enabled: data.scenes[i]?.enabled !== false, syncSelected:data.scenes[i]?.syncSelected!==false,
+      renderSettings:validSceneSettings(data.scenes[i]?.renderSettings)
     }));
     const s = data.settings ?? {};
     fallback.settings = normalizeSettings({ ...DEFAULT_SETTINGS,
-      slotCount: isSlotCount(s.slotCount)?s.slotCount:data.scenes.length, requestedConcurrency:isSlotCount(s.requestedConcurrency)?s.requestedConcurrency:undefined,
+      slotCount: isSlotCount(s.slotCount)?s.slotCount:data.scenes.length, requestedConcurrency:isSlotCount(s.requestedConcurrency)?s.requestedConcurrency:undefined,syncOperations:s.syncOperations!==false,
       accountMode: s.accountMode === 'multiple' ? 'multiple' : 'single',
       model: MUSE_MODELS.includes(s.model) ? s.model : DEFAULT_SETTINGS.model,
       aspectRatio: s.aspectRatio === '9:16' ? '9:16' : '16:9',
@@ -121,4 +126,8 @@ export function restoreWorkspace(raw: string | null): { scenes: Scene[]; setting
     });
     return fallback;
   } catch { return fallback; }
+}
+function validSceneSettings(value:unknown):SceneSettings|undefined{
+  if(!value||typeof value!=='object')return undefined;const s=value as SceneSettings;
+  return renderingSettings(normalizeSettings({...DEFAULT_SETTINGS,model:MUSE_MODELS.includes(s.model)?s.model:DEFAULT_SETTINGS.model,aspectRatio:s.aspectRatio==='9:16'?'9:16':'16:9',duration:[4,6,8,10].includes(s.duration)?s.duration:4,resolution:VIDEO_RESOLUTIONS.includes(s.resolution)?s.resolution:'720p',imageResolution:s.imageResolution==='4k'?'4k':'2k',videoInput:s.videoInput==='image'?'image':'text',r2v:s.r2v!==false,modifier:typeof s.modifier==='string'?s.modifier.slice(0,2000):''}));
 }

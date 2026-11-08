@@ -2,7 +2,7 @@
 
 Ứng dụng Muse AI Studio được phát hành theo **MIT** tại `LICENSE`. Mã nguồn đầy đủ có trên GitHub và trong `Muse-Video-Workstation.zip`. Có thể đọc, sửa và tự build theo README. Electron, Playwright, React và các thư viện khác giữ giấy phép riêng đi kèm gói.
 
-Bản 1.8.0 có server **MCP Streamable HTTP** tại `http://127.0.0.1:8790/mcp`, cùng khóa Bearer với API. Trợ lý đọc các ô và gửi lệnh qua đúng chức năng Studio dùng, gồm sửa prompt, chọn số ô, tạo/dừng, đọc thư viện và lưu bộ kết quả vào thư mục. Không cần trợ lý bấm tọa độ chuột hoặc truy cập cookie/mật khẩu Muse.
+Bản 1.9.0 có server **MCP Streamable HTTP** tại `http://127.0.0.1:8790/mcp`, cùng khóa Bearer với API. Trợ lý đọc các ô và gửi lệnh qua đúng chức năng Studio dùng, gồm sửa prompt, chọn số ô, tạo/dừng, đọc thư viện và lưu bộ kết quả vào thư mục. Không cần trợ lý bấm tọa độ chuột hoặc truy cập cookie/mật khẩu Muse.
 
 ## Thiết lập trên máy Windows chạy Studio
 

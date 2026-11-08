@@ -15,7 +15,7 @@ if exist dist\index.html goto launch
 call npm run build
 if errorlevel 1 goto failed
 :launch
-echo Muse AI Studio: embedded login, one account, 10 scenes, queued generation.
+echo Muse AI Studio: embedded login, up to 40 scenes, synced settings and optional per-account proxies.
 node desktop-launcher.mjs
 if errorlevel 1 goto failed
 exit /b 0

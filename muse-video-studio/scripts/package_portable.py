@@ -64,7 +64,7 @@ app = resources / 'app'
 app.mkdir()
 for name in ['desktop', 'dist']:
     shutil.copytree(ROOT / name, app / name)
-for name in ['limits.mjs', 'server.mjs', 'muse-browser.mjs', 'muse-accounts.mjs', 'muse-balance.mjs', 'browser.mjs', '.env.example', 'README.md', 'VALIDATION.md', 'API-AUTOMATION.md', 'MCP-CODEX.md', 'CODEX-MCP.toml', 'LICENSE']:
+for name in ['limits.mjs', 'server.mjs', 'muse-browser.mjs', 'muse-accounts.mjs', 'muse-balance.mjs', 'browser.mjs', '.env.example', 'README.md', 'VALIDATION.md', 'API-AUTOMATION.md', 'MCP-CODEX.md', 'CODEX-MCP.toml', 'CAP-NHAT-1.9.md', 'LICENSE']:
     shutil.copyfile(ROOT / name, app / name)
 modules = app / 'node_modules'
 modules.mkdir()

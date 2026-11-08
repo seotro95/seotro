@@ -377,10 +377,13 @@ test('global image sync, per-scene override and manual reapply', async ({ page }
   };
   await upload('Tải ảnh nhân vật chung', 'global.png');
   await expect(page.locator('.scene-image')).toHaveCount(10);
+  await page.getByRole('button',{name:'Đồng bộ thao tác: BẬT',exact:true}).click();
   await upload('Đổi ảnh cảnh 1', 'private.png');
   await expect(page.getByTestId('scene-1').getByText('Ảnh riêng', { exact: false })).toBeVisible();
+  await page.getByRole('button',{name:'Đồng bộ thao tác: TẮT',exact:true}).click();
   await page.getByRole('button', { name: 'Áp dụng cho 10 cảnh' }).click();
   await expect(page.getByTestId('scene-1').getByText('Ảnh chung · đã đồng bộ')).toBeVisible();
+  await page.getByRole('button',{name:'Đồng bộ thao tác: BẬT',exact:true}).click();
   await page.getByRole('button', { name: 'Gỡ ảnh cảnh 2', exact: true }).click();
   await expect(page.getByTestId('scene-2').locator('.scene-image')).toHaveCount(0);
   await page.getByTestId('scene-2').getByRole('button', { name: 'Dùng ảnh chung' }).click();
@@ -655,6 +658,7 @@ test('image-to-video batch only sends scenes that have a source frame', async ({
   await page.route('**/api/video', route => { calls.push(route.request().postDataJSON().accountId); return route.fulfill({ json: { base64: video, mimeType: 'video/mp4' } }); });
   await page.getByRole('button', { name: 'Từ ảnh', exact: true }).click();
   await expect(page.getByRole('button', { name: 'TẠO 10 VIDEO', exact: true })).toBeDisabled();
+  await page.getByRole('button',{name:'Đồng bộ thao tác: BẬT',exact:true}).click();
   const chooser = page.waitForEvent('filechooser');
   await page.getByTestId('scene-1').getByRole('button', { name: '+ Chọn ảnh nhân vật', exact: true }).click();
   await (await chooser).setFiles({ name: 'frame.png', mimeType: 'image/png', buffer: png });

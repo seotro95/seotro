@@ -84,13 +84,13 @@ async function callAdapter(endpoint, data, signal) {
 }
 async function api(req, res, pathname) {
   if (req.method === 'GET' && pathname === '/api/status') {
-    if (muse && !activeRequests && !accountBusy) await muse.refreshActive({ background: true });
-    return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, ...(muse ? { executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), ...(muse?.supportsMultiAccount ? {multiAccount:true, preferredConcurrency:muse.preferredConcurrency,concurrencyWarning:muse.concurrencyWarning,concurrencyProbe:muse.driver?.(1).concurrencyProbe} : {}), embeddedLogin, credit: null, gpu: null });
+    if (muse && !activeRequests && !accountBusy&&!muse.restoring) await muse.refreshActive({ background: true });
+    return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, ...(muse ? {restoringSessions:Boolean(muse.restoring), executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), ...(muse?.supportsMultiAccount ? {multiAccount:true, preferredConcurrency:muse.preferredConcurrency,concurrencyWarning:muse.concurrencyWarning,concurrencyProbe:muse.driver?.(1).concurrencyProbe} : {}), embeddedLogin, credit: null, gpu: null });
   }
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
   if (!req.headers['content-type']?.startsWith('application/json')) return json(res, 415, { error: 'Cần Content-Type application/json.' });
-  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close|composer|concurrency|prepare|import|select)$/);
+  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close|composer|concurrency|prepare|import|select|proxy)$/);
   const legacyAccountRoute = pathname.match(/^\/api\/accounts\/(\d+)\/(connect|check|close)$/);
   if (!['/api/video', '/api/image', '/api/text'].includes(pathname) && !accountRoute && !legacyAccountRoute) return json(res, 404, { error: 'API không tồn tại.' });
   let acquired = false;
@@ -105,9 +105,10 @@ async function api(req, res, pathname) {
       const action = accountRoute ? accountRoute[1] : legacyAccountRoute[2];
       if (!Number.isInteger(accountId) || accountId<1 || accountId>MAX_SLOTS || (!muse?.supportsMultiAccount && accountId!==1)) return json(res,400,{error:'ACCOUNT_INVALID: Tài khoản không hợp lệ.'});
       if (!muse) return json(res, 409, { error: 'Tài khoản đang do adapter riêng quản lý. Chọn MUSE_TRANSPORT=browser để đăng nhập bằng Chrome/Edge.' });
-      if (activeRequests || accountBusy) return json(res, 409, { error: 'Đang có tác vụ. Đợi các luồng hoàn tất trước khi thay đổi phiên tài khoản.' });
+      if (activeRequests || accountBusy||muse.restoring) return json(res, 409, { error: 'Đang có tác vụ hoặc khôi phục phiên. Đợi hoàn tất trước khi thay đổi phiên tài khoản.' });
       muse.account(accountId);
       accountBusy = accountAcquired = true;
+      if(action==='proxy'){await muse.setProxy(accountId,data.proxy);return json(res,200,{accounts:muse.snapshot()})}
       if (action === 'prepare') {if(!muse.prepareSingle)return json(res,200,{executionConcurrency:muse.maxConcurrency});return json(res,200,await muse.prepareSingle(abort.signal,data.concurrency));}
       if (action === 'select') {if(muse.select)await muse.select(accountId);return json(res,200,{accounts:muse.snapshot()});}
       if (action === 'import') { if (!muse.supportsMultiAccount) return json(res,409,{error:'Kết nối chưa hỗ trợ nhiều tài khoản.'}); return json(res,200,{accounts:await muse.importLabels(data.labels)}); }

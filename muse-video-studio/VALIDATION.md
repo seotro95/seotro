@@ -1,3 +1,29 @@
+# Xác minh bản 1.9.0
+
+## Thay đổi và phạm vi
+
+- Nút Đồng bộ thao tác BẬT/TẮT, checkbox chọn từng ô, Ô đang chỉnh và các nút đồng bộ ngay / tạo nhóm / dừng nhóm. Cài đặt render riêng từng cảnh, ảnh tham chiếu theo nhóm hoặc một ô; lưu lựa chọn/cài đặt qua reload và JSON v1. Tác vụ đang chạy giữ bản chụp của mình.
+- Mỗi tài khoản trong chế độ nhiều tài khoản dùng lại tab Muse đã xác minh, không tải thêm ứng dụng và gọi auth lần hai cho từng render. Các host chia sẻ một kết nối CDP; partition/cookie vẫn tách. Các yêu cầu trùng thời điểm cùng tài khoản dùng chung lần xác minh/lưu phiên đang thực hiện, tránh ghi mã hóa và flush cookie lặp hàng chục lần.
+- Cookie/sessionStorage có bản lưu mã hóa qua API safeStorage bất đồng bộ (DPAPI trên Windows), giới hạn đúng origin; không kéo dài thời hạn cookie, không ghi đè cookie mới hơn, không phục hồi sang origin fixture khác. Bật khôi phục các profile đã có khi mở app, tối đa ba hồ sơ khởi tạo cùng lúc, không tự tạo nội dung. Không lưu plaintext nếu kho mã hóa không có sẵn.
+- Proxy tùy chọn cho từng tài khoản: HTTP/HTTPS với thông tin đăng nhập riêng, SOCKS5 không mật khẩu; chỉ cấp credential cho challenge proxy đúng host/port và đúng session. Cấu hình lưu mã hóa, snapshot API chỉ có địa chỉ/cờ, không có credential. Tắt proxy giữ nguyên profile. Chế độ một tài khoản dùng proxy Muse 01 cho toàn bộ ô.
+- Trình cập nhật Windows dành cho 1.8.0/1.9.0: kiểm SHA256 trước khi sửa, từ chối khi app đang mở, sao lưu/rollback mã, giữ nguyên `.data` và `.env`. Không đổi runtime Electron 45.2.2. Nút Stop cho trang có khoảng chờ gửi mạng trước khi tháo view, tránh mất Stop khi dừng hàng loạt.
+
+## Kiểm thử
+
+- TypeScript/Vite và `npm test` qua trên mã cuối; kiểm hợp đồng server, pool, HTTP/MCP/idempotency, thư mục/đánh số, mã hóa session-only cookie/sessionStorage theo origin, proxy độc lập, không lộ credential, không kéo dài cookie và không ghi plaintext khi mã hóa không sẵn sàng.
+- Playwright giao diện **45/45 qua**, cộng **4/4** ca đồng bộ/proxy/khôi phục trên build cuối, chạy riêng để tránh tranh tài nguyên GPU/CPU với nhiều fixture Electron. Bốn ca mới kiểm khôi phục vẫn polling sau tài khoản đầu tiên để tự mở khóa, và kiểm thay đổi cài đặt/ảnh đúng ô chọn, cài đặt riêng khi Tắt và reload; dừng nhóm giữ ô ngoài nhóm chạy; proxy tùy chọn không echo credential và không ghi vào localStorage.
+- Electron từ nguồn: **8/8** tương thích đăng nhập, ảnh/video từ ảnh, một tài khoản mười luồng, Stop riêng/cả bộ, mở lại và popup; OTP **4/4**. Dùng dịch vụ fixture, không có mã/tài khoản thật.
+- Ca mới nhiều tài khoản từ nguồn và gói Linux độc lập qua: mười profile có cookie/sessionStorage khác nhau; gửi **10 ảnh và 10 video đồng thời trước khi nhận bất kỳ kết quả nào**, không tăng số lần tải trang, chỉ giữ mười tab Muse. Byte kết quả khớp từng tài khoản/cảnh. Cookie phiên không Max-Age vẫn tự khôi phục cả mười tài khoản và sessionStorage sau mở lại, không bấm kiểm tra từng tài khoản. Proxy Muse 02 được áp dụng thật qua Electron resolveProxy, Muse 01 không đổi; mã hóa credential, mở lại giữ cấu hình và tắt trở về mạng ban đầu.
+- Ca 40 luồng trên gói Linux độc lập qua: 40 route riêng và 40 yêu cầu ảnh chồng lấp, MCP tạo/tải/lưu đủ 30 video, shared-chat vẫn chạy hàng đợi, sửa/chạy riêng ô 40. Chạy ca Electron nặng riêng để tránh tranh tài nguyên với các trình duyệt kiểm thử khác.
+- Ca API trên executable độc lập qua: hai luồng mặc định, không tạo trùng, tải byte đúng, clear/reload/thứ tự tải, dừng và lưu/đổi/tắt khóa. Gói thử có PATH không chứa Node/npm ngoài.
+- Trình updater được thực thi bằng **PowerShell 7.5.4 Linux chính thức, đã kiểm SHA256** trên thư mục giả có dấu cách: giữ byte của profile/media/API key/bộ đếm/.env; sao lưu mã cũ; sai hash bị từ chối trước sửa; lỗi chép phục hồi mã cũ và giữ dữ liệu. Đây không phải chạy Windows PowerShell 5.1/EXE trên Windows.
+
+## Giới hạn
+
+Cloud này không kết nối Windows hoặc các tài khoản Muse thật của người dùng. Các kết quả tạo/xác thực dùng fixture cục bộ; chứng minh điều phối, phân kết quả, tải tệp và lưu phiên, không chứng minh tốc độ/quyền render/hạn mức Muse thật. Windows dùng runtime chính thức, kiểm manifest/CRC/PE; thực thi tự động trên gói Linux có cùng mã. Phiên đã hết hạn/bị thu hồi hoặc mất trước khi cập nhật cần đăng nhập lại. Giữ đúng máy, tài khoản Windows và thư mục dữ liệu. Mở nhiều phiên Muse vẫn tiêu tốn RAM/CPU; không hứa nhiều tài khoản luôn nhanh hơn một tài khoản.
+
+## Kết quả lịch sử trước 1.9.0
+
 # Xác minh bản 1.8.0
 
 ## Kết quả thay đổi

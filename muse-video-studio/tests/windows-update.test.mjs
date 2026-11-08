@@ -1,0 +1,22 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';
+import {mkdtemp,mkdir,readFile,writeFile,cp,rm,readdir} from 'node:fs/promises';import path from 'node:path';import os from 'node:os';
+import {execFile} from 'node:child_process';import {promisify} from 'node:util';import {createHash} from 'node:crypto';
+const execute=promisify(execFile);const root=path.resolve(import.meta.dirname,'..');
+const powershell=process.env.MUSE_PWSH;if(!powershell)throw new Error('Set MUSE_PWSH to a trusted PowerShell executable.');
+
+test('the actual PowerShell updater preserves profiles/media/config, validates hashes and rolls code back on a copy error',async()=>{
+ const tmp=await mkdtemp(path.join(os.tmpdir(),'muse-update-'));const payload=path.join(tmp,'patch');await mkdir(path.join(payload,'app','dist','assets'),{recursive:true});
+ await cp(path.join(root,'scripts/update-windows.ps1'),path.join(payload,'update-windows.ps1'));
+ const files={'package.json':JSON.stringify({name:'muse-ai-studio',version:'1.9.0'}),'desktop/main.mjs':'// new application code','dist/assets/new.js':'// new build'};
+ const checksums={};for(const [name,content]of Object.entries(files)){await mkdir(path.dirname(path.join(payload,'app',name)),{recursive:true});await writeFile(path.join(payload,'app',name),content);checksums[name]=createHash('sha256').update(content).digest('hex')}
+ await writeFile(path.join(payload,'UPDATE-MANIFEST.json'),JSON.stringify({version:'1.9.0',appFiles:checksums}));
+ const prepare=async name=>{const target=path.join(tmp,name);const app=path.join(target,'resources','app');await mkdir(path.join(app,'.data','muse-desktop','Partitions','muse-02'),{recursive:true});await mkdir(path.join(app,'desktop'),{recursive:true});await writeFile(path.join(target,'Muse AI Studio.exe'),'fixture executable - not executed');await writeFile(path.join(app,'package.json'),JSON.stringify({name:'muse-ai-studio',version:'1.8.0'}));await writeFile(path.join(app,'desktop/main.mjs'),'// old application code');const privateFiles={'.data/muse-desktop/Partitions/muse-02/Cookies':'fixture-session-private','.data/media-library':'fixture-media-private','.data/muse-desktop/automation.json':'fixture-api-key','.data/counter':'1001','.env':'PRIVATE_SETTING=fixture'};for(const [name,content]of Object.entries(privateFiles)){await mkdir(path.dirname(path.join(app,name)),{recursive:true});await writeFile(path.join(app,name),content)}return {target,app,privateFiles}};
+ const run=target=>execute(powershell,['-NoLogo','-NoProfile','-File',path.join(payload,'update-windows.ps1'),'-Target',target],{timeout:30000,env:{...process.env,XDG_CACHE_HOME:path.join(tmp,'cache'),XDG_CONFIG_HOME:path.join(tmp,'config'),XDG_DATA_HOME:path.join(tmp,'data'),POWERSHELL_TELEMETRY_OPTOUT:'1'}});
+ try{
+   const good=await prepare('studio with spaces');await run(good.target);assert.equal(JSON.parse(await readFile(path.join(good.app,'package.json'))).version,'1.9.0');
+   for(const [name,content]of Object.entries(good.privateFiles))assert.equal(await readFile(path.join(good.app,name),'utf8'),content);
+   const backup=(await readdir(good.target)).find(name=>name.startsWith('backup-code-'));assert.ok(backup);assert.equal(await readFile(path.join(good.target,backup,'desktop/main.mjs'),'utf8'),'// old application code');assert.equal((await readdir(path.join(good.target,backup))).includes('.data'),false);
+   const damaged=await prepare('damaged');await writeFile(path.join(payload,'app','desktop/main.mjs'),'tampered');await assert.rejects(run(damaged.target));assert.equal(JSON.parse(await readFile(path.join(damaged.app,'package.json'))).version,'1.8.0');assert.equal((await readdir(damaged.target)).some(name=>name.startsWith('backup-code-')),false);await writeFile(path.join(payload,'app','desktop/main.mjs'),files['desktop/main.mjs']);
+   const blocked=await prepare('blocked');await mkdir(path.join(blocked.app,'dist'));await writeFile(path.join(blocked.app,'dist/assets'),'obstacle');await assert.rejects(run(blocked.target));assert.equal(JSON.parse(await readFile(path.join(blocked.app,'package.json'))).version,'1.8.0');assert.equal(await readFile(path.join(blocked.app,'desktop/main.mjs'),'utf8'),'// old application code');for(const [name,content]of Object.entries(blocked.privateFiles))assert.equal(await readFile(path.join(blocked.app,name),'utf8'),content);
+ }finally{await rm(tmp,{recursive:true,force:true})}
+});

@@ -5,11 +5,12 @@ import { MuseBrowser } from './muse-browser.mjs';
 
 const fail = (code, message, status = 409) => Object.assign(new Error(`${code}: ${message}`), { status });
 export class MuseAccounts {
-  constructor({ profileRoot, accountProfile, createDriver, preferredConcurrency = 2, onSelect = () => {} }) {
+  constructor({ profileRoot, accountProfile, createDriver, preferredConcurrency = 2, onSelect = () => {}, proxyStatus, configureProxy }) {
     this.profileRoot = profileRoot; this.preferredConcurrency=preferredConcurrency;this.concurrencyWarning='';
     this.createDriver = createDriver || (id => new MuseBrowser({ profileRoot, ...(id === 1 ? {accountProfile} : { accountProfile: path.join(profileRoot, `slot-${String(id).padStart(2,'0')}`) }) }));
     this.onSelect = onSelect; this.selectedId = 1; this.drivers = new Map(); this.usage = new Map(); this.labels = [];
     this.supportsMultiAccount = true; this.images = new Map();
+    this.proxyStatus=proxyStatus;this.configureProxy=configureProxy;this.restoring=false;
   }
   async load() {
     try { this.labels = this.validateLabels(JSON.parse(await readFile(path.join(this.profileRoot,'account-labels.json'),'utf8'))); } catch {}
@@ -19,7 +20,12 @@ export class MuseAccounts {
   validateId(id) { if (!Number.isInteger(id) || id < 1 || id > MAX_SLOTS) throw fail('ACCOUNT_INVALID','Chọn tài khoản từ 1 đến 40.',400); }
   driver(id) { this.validateId(id); if (!this.drivers.has(id)) this.drivers.set(id,this.createDriver(id)); return this.drivers.get(id); }
   account(id) { return { ...this.driver(id).account(1), id, label: this.labels[id-1] || `Muse ${String(id).padStart(2,'0')}` }; }
-  snapshot() { return Array.from({length:MAX_SLOTS},(_,i)=>{const id=i+1;const driver=this.drivers.get(id);return {...(driver?.snapshot?.()[0]||driver?.account(1)||{state:'disconnected',authenticated:false,sessionAuthenticated:false,checkedAt:null,balance:null}),id,label:this.labels[i]||`Muse ${String(id).padStart(2,'0')}`,active:Boolean(driver?.active),running:this.usage.get(id)?.count||0}}); }
+  snapshot() { return Array.from({length:MAX_SLOTS},(_,i)=>{const id=i+1;const driver=this.drivers.get(id);return {...(driver?.snapshot?.()[0]||driver?.account(1)||{state:'disconnected',authenticated:false,sessionAuthenticated:false,checkedAt:null,balance:null}),id,label:this.labels[i]||`Muse ${String(id).padStart(2,'0')}`,active:Boolean(driver?.active),running:this.usage.get(id)?.count||0,proxy:this.proxyStatus?.(id)||{supported:false}}}); }
+  async restoreSessions(ids){
+    this.restoring=true;let next=0;
+    try{await Promise.all(Array.from({length:Math.min(3,ids.length)},async()=>{while(next<ids.length){const id=ids[next++];try{await this.connect(id,{show:false})}catch{this.driver(id).account(1).state='check_failed'}}}))}finally{this.restoring=false}
+  }
+  async setProxy(id,data){this.validateId(id);if(!this.configureProxy)throw fail('MUSE_PROXY_UNSUPPORTED','Proxy từng tài khoản chỉ có trong bản desktop.',409);if(this.usage.size)throw fail('MUSE_CHAT_BUSY','Đợi hoặc dừng tác vụ trước khi đổi proxy.');return this.configureProxy(id,data)}
   get maxConcurrency() { return this.driver(1).maxConcurrency; }
   get queue() { return [...this.drivers.values()].flatMap(driver=>driver.queue); }
   progress() { return [...this.drivers].flatMap(([accountId,driver])=>driver.progress().map(stage=>({...stage,accountId}))); }

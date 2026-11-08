@@ -6,8 +6,22 @@ import { randomUUID } from 'node:crypto';
 
 export const remotePreferences = { partition: 'persist:muse', sandbox: true, contextIsolation: true, nodeIntegration: false, webSecurity: true, backgroundThrottling: false };
 
+export class EmbeddedMuseConnection {
+  constructor(userData){this.userData=userData;this.browser=null;this.opening=null}
+  async attach(){
+    if(this.browser?.isConnected())return this.browser;
+    if(!this.opening)this.opening=(async()=>{
+      let port;
+      for(let attempt=0;attempt<100;attempt++){try{port=Number((await readFile(path.join(this.userData,'DevToolsActivePort'),'utf8')).split('\n')[0]);if(port>0)break}catch{}await new Promise(resolve=>setTimeout(resolve,50))}
+      if(!port)throw new Error('DESKTOP_CONNECTION_FAILED: Không kết nối được trình đăng nhập tích hợp. Khởi động lại tool.');
+      this.browser=await chromium.connectOverCDP(`http://127.0.0.1:${port}`,{timeout:15000});return this.browser;
+    })().finally(()=>{this.opening=null});
+    return this.opening;
+  }
+  async close(){await this.browser?.close();this.browser=null}
+}
 export class EmbeddedMuseHost {
-  constructor({ window, userData, serviceURL, partition = remotePreferences.partition }) {
+  constructor({ window, userData, serviceURL, partition = remotePreferences.partition, connection }) {
     this.window = window;
     this.userData = userData;
     this.serviceURL = serviceURL;
@@ -16,6 +30,7 @@ export class EmbeddedMuseHost {
     this.login = null;
     this.browser = null;
     this.loginVisible = false;
+    this.connection=connection||new EmbeddedMuseConnection(userData);this.ownsConnection=!connection;
   }
   allowNavigation(url) {
     // OAuth/email clients commonly open an empty window and navigate it later.
@@ -32,13 +47,7 @@ export class EmbeddedMuseHost {
   }
   async attach() {
     if (this.browser?.isConnected()) return this.browser;
-    let port;
-    for (let attempt = 0; attempt < 100; attempt++) {
-      try { port = Number((await readFile(path.join(this.userData, 'DevToolsActivePort'), 'utf8')).split('\n')[0]); if (port > 0) break; } catch {}
-      await new Promise(resolve => setTimeout(resolve, 50));
-    }
-    if (!port) throw new Error('DESKTOP_CONNECTION_FAILED: Không kết nối được trình đăng nhập tích hợp. Khởi động lại tool.');
-    this.browser = await chromium.connectOverCDP(`http://127.0.0.1:${port}`, { timeout: 15000 });
+    this.browser=await this.connection.attach();
     return this.browser;
   }
   async createView({ worker = false } = {}) {
@@ -118,7 +127,7 @@ export class EmbeddedMuseHost {
   async close() {
     await Promise.all([...this.views.keys()].map(page => this.removePage(page)));
     this.login = null;
-    await this.browser?.close();
+    if(this.ownsConnection)await this.connection.close();
     this.browser = null;
   }
 }

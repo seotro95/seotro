@@ -25,3 +25,14 @@
 .account-mode-bar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:18px 0;padding:16px;border:1px solid #354268;border-radius:12px;background:#121a2b}.account-mode-bar label{display:flex;align-items:center;gap:12px;font-weight:700}.account-mode-bar select,.single-account-controls select{padding:8px;border:1px solid #394867;border-radius:6px;background:#0c1320;color:#dfe8ff;max-width:100%}.account-mode-bar span{font-size:12px;color:#9fb1d6}.single-account-controls label{display:grid;gap:6px;font-size:11px;margin-bottom:10px}.account-import{margin:18px 0}.account-import textarea{width:100%;min-height:150px;background:#0d1422;color:#e1e9ff;border:1px solid #384461;padding:12px;border-radius:8px;resize:vertical}.account-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}.account-item{display:flex;flex-direction:column;gap:7px;background:#0c1422;border:1px solid #303d5b;border-radius:9px;padding:12px;min-width:0}.account-item>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.account-item .button{font-size:11px;padding:7px;margin-right:8px}.account-item strong{font-size:12px}.account-item small{font-size:11px}@media(max-width:600px){.account-grid{grid-template-columns:1fr}.account-mode-bar label{flex-wrap:wrap}}
 
 .api-example{white-space:pre-wrap;overflow-wrap:anywhere;background:#090f1a;padding:14px;border:1px solid #34405b;border-radius:8px;font-size:12px}.field-label input{min-width:0;max-width:100%;padding:9px;border:1px solid #394867;border-radius:6px;background:#0c1320;color:#dfe8ff}.modal-body>.field-label{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.modal-body>.field-label input[readonly]{flex:1;min-width:200px}
+
+.sync-controls { display:flex; flex-wrap:wrap; align-items:center; gap:10px; padding:14px 16px; margin:16px 0; background:#111b2e; border:1px solid #3d3869; border-radius:12px; }
+.sync-controls label { display:flex; align-items:center; gap:8px; }
+.sync-controls span { font-size:12px; color:#abc0df; }
+.sync-controls select { padding:7px; background:#0d1423; color:#e5eaff; border:1px solid #40506b; border-radius:6px; }
+.scene-sync { display:flex; justify-content:space-between; align-items:center; gap:6px; }
+.scene-sync label { display:flex; gap:5px; align-items:center; font-size:11px; color:#b2afff; }
+.scene-config { color:#97adcc; font-size:10px; margin:8px 0; }
+.worker-phase { color:#67e8ce; font-size:11px; line-height:1.5; }
+.proxy-form { border:1px solid #6757a2; padding:16px; border-radius:10px; margin:16px 0; }
+.proxy-form input:not([type=checkbox]) { width:100%; padding:9px; background:#0c1320; color:#e3eaff; border:1px solid #36455e; border-radius:6px; }

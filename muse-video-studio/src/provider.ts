@@ -176,4 +176,4 @@ export async function downloadMediaBatch(items: { media: MediaResult; id: number
   } catch (error) { if (native&&session) await native('abort',session.id).catch(()=>{}); throw error; }
 }
 export const providerStatus = () => api('/api/status');
-export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer' | 'concurrency' | 'import' | 'select' | 'prepare', data: Record<string, unknown> = {}) => api(`/api/account/${action}`, data);
+export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer' | 'concurrency' | 'import' | 'select' | 'prepare' | 'proxy', data: Record<string, unknown> = {}) => api(`/api/account/${action}`, data);

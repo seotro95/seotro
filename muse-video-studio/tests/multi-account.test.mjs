@@ -15,7 +15,7 @@ test('ten isolated Muse sessions each submit one concurrent request; single-acco
   const fixture=createMuseFixture({image,clip});Object.assign(fixture.state,{behavior:'image',newChat:false,sharedHistory:true,isolateAccounts:true,uniqueImages:true});
   await new Promise(resolve=>fixture.server.listen(0,'127.0.0.1',resolve));const service=`http://127.0.0.1:${fixture.server.address().port}/`;
   const executablePath=process.env.MUSE_PORTABLE_EXECUTABLE||require('electron');
-  const args=[...(process.env.MUSE_ELECTRON_TEST_NO_SANDBOX==='1'?['--no-sandbox','--disable-gpu']:[]),...(!process.env.MUSE_PORTABLE_EXECUTABLE?[path.join(root,'desktop/main.mjs')]:[])];
+  const args=['--password-store=basic',...(process.env.MUSE_ELECTRON_TEST_NO_SANDBOX==='1'?['--no-sandbox','--disable-gpu']:[]),...(!process.env.MUSE_PORTABLE_EXECUTABLE?[path.join(root,'desktop/main.mjs')]:[])];
   const env={...process.env,MUSE_DESKTOP_TEST:'1',MUSE_FIXTURE_URL:service,MUSE_DESKTOP_DATA:profile,MUSE_TRANSPORT:'browser',PORT:'0'};
   delete env.MUSE_TEST_PARALLEL;
   if(process.env.MUSE_PORTABLE_EXECUTABLE){env.PATH='/no-external-runtime';env.NODE_PATH='';delete env.PORT}
@@ -23,6 +23,7 @@ test('ten isolated Muse sessions each submit one concurrent request; single-acco
   try {
     const launch=async()=>{desktop=await _electron.launch({executablePath,args,env,timeout:30000});await desktop.firstWindow();let studio,shell;await waitFor(()=>{const pages=desktop.context().pages();studio=pages.find(page=>page.url().startsWith('http://127.0.0.1:')&&!page.url().startsWith(service));shell=pages.find(page=>page.url().endsWith('/desktop/shell.html'));return studio&&shell},'Studio');return {studio,shell}};
     let {studio,shell}=await launch();
+    assert.equal(await desktop.evaluate(({safeStorage})=>safeStorage.isAsyncEncryptionAvailable()),true,'Fixture must have a working encryption codec');
     await studio.getByRole('button',{name:'Quản lý tài khoản',exact:true}).click();
     const dialog=studio.getByRole('dialog',{name:'Quản lý tài khoản Muse',exact:true});
     const labels=Array.from({length:10},(_,i)=>`owner${i+1}@example.invalid`);
@@ -41,16 +42,19 @@ test('ten isolated Muse sessions each submit one concurrent request; single-acco
       assert.equal(await login.evaluate(()=>document.cookie.includes('fixture_identity=')),false,'A new account partition must not inherit another account cookie');
       assert.equal(await login.evaluate(()=>typeof window.museTransport),'undefined');
       await login.getByRole('button',{name:'Fixture login',exact:true}).click();
-      await login.evaluate(id=>{document.cookie=`fixture_identity=${id}; Path=/; Max-Age=3600; SameSite=Strict`},id);
+      await login.evaluate(id=>{document.cookie=`fixture_identity=${id}; Path=/; SameSite=Strict`;document.cookie='fixture_session=connected; Path=/; SameSite=Strict';sessionStorage.setItem('fixture_scope',`scope-${id}`)},id);
       await shell.getByRole('button',{name:'← Về Studio',exact:true}).click();
       await waitFor(async()=>(await studio.evaluate(async()=>(await fetch('/api/status')).json())).accounts[id-1].authenticated,'verified '+id);
     }
     await dialog.getByRole('button',{name:'Hoàn tất',exact:true}).click();
     await studio.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();
     for(let id=1;id<=10;id++)await studio.getByLabel(`Kịch bản cảnh ${id}`,{exact:true}).fill(`Account ${id} landscape`);
+    const warmLoads=fixture.state.pageLoads;
     fixture.state.hold=true;
     await studio.getByRole('button',{name:'TẠO 10 ẢNH',exact:true}).click();
     await waitFor(()=>fixture.state.pending.size===10,'ten independent held requests');
+    assert.equal(fixture.state.pageLoads,warmLoads,'Warm multi-account requests must reuse the ten hydrated tabs without another navigation');
+    assert.equal(desktop.context().pages().filter(page=>page.url().startsWith(service)).length,10,'Only one Muse page per account is needed');
     assert.equal(fixture.state.peak,10);assert.deepEqual(fixture.state.submitted.map(request=>Number(request.identity)).sort((a,b)=>a-b),[1,2,3,4,5,6,7,8,9,10]);
     assert.ok(fixture.state.submitted.every(request=>request.authenticated&&request.prompt.includes(`Scene:\nAccount ${request.identity} landscape`)));
     const active=await studio.evaluate(async()=>(await fetch('/api/status')).json());
@@ -90,13 +94,30 @@ test('ten isolated Muse sessions each submit one concurrent request; single-acco
     await studio.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();
     await mkdir(path.join(root,'test-results'),{recursive:true});await studio.screenshot({path:path.join(root,'test-results/multi-account-studio.png')});
     if(!process.env.MUSE_PORTABLE_EXECUTABLE)env.PORT=new URL(studio.url()).port;
+    const vaultFile=await readFile(path.join(profile,'account-vault','session-10.bin'));assert.ok(vaultFile.length>0,'Verified sessions must have an encrypted snapshot before quitting');
     await desktop.close();desktop=null;
     ({studio,shell}=await launch());
     assert.equal(await studio.getByLabel('Chế độ tài khoản',{exact:true}).inputValue(),'multiple');
-    await studio.getByRole('button',{name:'Quản lý tài khoản',exact:true}).click();
-    await studio.getByRole('button',{name:'Kiểm tra 10 phiên',exact:true}).click();
-    await waitFor(async()=>(await studio.evaluate(async()=>(await fetch('/api/status')).json())).accounts.slice(0,10).every(account=>account.authenticated),'ten persisted cookies',60000);
+    // Opening the app restores all ten account sessions automatically. No
+    // per-account check/login action should be needed on the second launch.
+    try{await waitFor(async()=>(await studio.evaluate(async()=>(await fetch('/api/status')).json())).accounts.slice(0,10).every(account=>account.authenticated),'ten persisted cookies',30000)}catch(error){const report=await studio.evaluate(async()=>(await fetch('/api/status')).json());throw new Error(error.message+' '+JSON.stringify({restoring:report.restoringSessions,accounts:report.accounts.slice(0,10).map(({id,state,authenticated,connectionMessage,persistenceMessage})=>({id,state,authenticated,connectionMessage,persistenceMessage}))}))}
+    for(const page of desktop.context().pages().filter(page=>page.url().startsWith(service))){const scoped=await page.evaluate(()=>({identity:document.cookie.split('; ').find(value=>value.startsWith('fixture_identity='))?.split('=')[1],scope:sessionStorage.getItem('fixture_scope')}));assert.equal(scoped.scope,`scope-${scoped.identity}`)}
+    const encrypted=await readFile(path.join(profile,'account-vault','session-10.bin'));assert.equal(encrypted.includes(Buffer.from('scope-10')),false);assert.equal(encrypted.includes(Buffer.from('connected')),false);
     const saved=await studio.evaluate(async()=>(await fetch('/api/status')).json());assert.deepEqual(saved.accounts.slice(0,10).map(account=>account.label),labels);
     assert.equal(fixture.state.submitted.length,21,'Checking saved sessions must not generate media');
+    const beforeProxy=await desktop.evaluate(({session})=>session.fromPartition('persist:muse-02').resolveProxy('https://muse.ai'));
+    const otherProxy=await desktop.evaluate(({session})=>session.fromPartition('persist:muse').resolveProxy('https://muse.ai'));
+    await studio.getByRole('button',{name:'Quản lý tài khoản',exact:true}).click();await studio.getByRole('button',{name:'Proxy Muse 2',exact:true}).click();
+    await studio.getByLabel('Bật proxy',{exact:true}).check();await studio.getByLabel('Địa chỉ proxy',{exact:true}).fill('http://127.0.0.1:18123');await studio.getByLabel('Thay tài khoản proxy',{exact:true}).check();await studio.getByLabel('Tên đăng nhập proxy',{exact:true}).fill('fixture-proxy-user');await studio.getByLabel('Mật khẩu proxy',{exact:true}).fill('fixture-proxy-secret');await studio.getByRole('button',{name:'Lưu proxy',exact:true}).click();
+    await waitFor(async()=>await studio.getByRole('region',{name:'Proxy tài khoản 2',exact:true}).count()===0,'native proxy saved');
+    assert.equal(await desktop.evaluate(({session})=>session.fromPartition('persist:muse-02').resolveProxy('https://muse.ai')),'PROXY 127.0.0.1:18123');
+    assert.equal(await desktop.evaluate(({session})=>session.fromPartition('persist:muse').resolveProxy('https://muse.ai')),otherProxy);
+    const proxyBytes=await readFile(path.join(profile,'account-vault','proxy-2.bin'));assert.equal(proxyBytes.includes(Buffer.from('fixture-proxy-secret')),false);
+    await desktop.close();desktop=null;({studio,shell}=await launch());
+    await waitFor(async()=>(await studio.evaluate(async()=>(await fetch('/api/status')).json())).accounts.slice(0,10).every(account=>account.authenticated),'ten sessions after proxy update',60000);
+    const proxySaved=await studio.evaluate(async()=>(await fetch('/api/status')).json());assert.equal(proxySaved.accounts[1].proxy.hasPassword,true);assert.equal(JSON.stringify(proxySaved).includes('fixture-proxy-secret'),false);assert.equal(await desktop.evaluate(({session})=>session.fromPartition('persist:muse-02').resolveProxy('https://muse.ai')),'PROXY 127.0.0.1:18123');
+    await studio.getByRole('button',{name:'Quản lý tài khoản',exact:true}).click();await studio.getByRole('button',{name:'Proxy Muse 2',exact:true}).click();await studio.getByLabel('Bật proxy',{exact:true}).uncheck();await studio.getByRole('button',{name:'Lưu proxy',exact:true}).click();
+    await waitFor(async()=>await studio.getByRole('region',{name:'Proxy tài khoản 2',exact:true}).count()===0,'native proxy disabled');assert.equal(await desktop.evaluate(({session})=>session.fromPartition('persist:muse-02').resolveProxy('https://muse.ai')),beforeProxy);
+
   } finally {fixture.releaseAll();await desktop?.close();fixture.server.closeAllConnections();await new Promise(resolve=>fixture.server.close(resolve));await rm(profile,{recursive:true,force:true})}
 });
