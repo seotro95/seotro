@@ -36,3 +36,5 @@
 .worker-phase { color:#67e8ce; font-size:11px; line-height:1.5; }
 .proxy-form { border:1px solid #6757a2; padding:16px; border-radius:10px; margin:16px 0; }
 .proxy-form input:not([type=checkbox]) { width:100%; padding:9px; background:#0c1320; color:#e3eaff; border:1px solid #36455e; border-radius:6px; }
+.account-persistence { padding:16px; margin:16px 0; border:1px solid #3c586e; border-radius:10px; background:#111c2b; }
+.account-persistence p { overflow-wrap:anywhere; }

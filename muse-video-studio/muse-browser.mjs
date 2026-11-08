@@ -61,6 +61,7 @@ export class MuseBrowser {
     this.unsafeMarkers = new Set();
     this.imageBatches = new Map();
     this.parallelRoutes = [];
+    this.pendingCaptions=new Set();
     this.active = null;
     this.profilePath = accountProfile || path.join(this.profileRoot, 'slot-01');
     this.accounts = [{ id: 1, state: existsSync(this.profile(1)) ? 'saved' : 'disconnected', authenticated: false, sessionAuthenticated: false, composerReady: false, connectionMessage: '', checkedAt: null, balance: null }];
@@ -176,14 +177,14 @@ export class MuseBrowser {
     }
     return false;
   }
-  async refreshActive({ background = false } = {}) {
+  async refreshActive({ background = false,includeDetails=true } = {}) {
     if(background&&this.active?.isLoginVisible?.())return;
     const page=this.active?.page;
     if(this.refreshing&&this.refreshingPage===page)return this.refreshing;
-    const pending=this.refreshSession({background});this.refreshing=pending;this.refreshingPage=page;
+    const pending=this.refreshSession({background,includeDetails});this.refreshing=pending;this.refreshingPage=page;
     try{return await pending}finally{if(this.refreshing===pending){this.refreshing=null;this.refreshingPage=null}}
   }
-  async refreshSession({ background = false } = {}) {
+  async refreshSession({ background = false,includeDetails=true } = {}) {
     const active = this.active;
     if (!active || active.page.isClosed()) return;
     // The website owns the challenge. Background status polling must not send
@@ -210,8 +211,8 @@ export class MuseBrowser {
     account.authenticated = probe.authenticated;
     account.state = probe.authenticated ? 'ready' : probe.state;
     account.connectionMessage = probe.authenticated ? 'Phiên Muse đã được xác minh. Tool mở ô soạn riêng khi bạn bấm tạo từng cảnh hoặc cả bộ.' : probe.message;
-    account.balance = account.authenticated ? await readMuseBalance(active.page) : null;
-    if(account.authenticated)await this.onVerified?.();
+    if(includeDetails)account.balance = account.authenticated ? await readMuseBalance(active.page) : null;
+    if(account.authenticated){const saved=this.onVerified?.();if(includeDetails)await saved;else void saved?.catch(()=>{})}
   }
   async authenticated(page) {
     return (await this.inspectAuthentication(page)).authenticated;
@@ -457,7 +458,7 @@ export class MuseBrowser {
       await this.open(accountId);
       owned = this.active;
       progress.phase='checking-session';
-      await this.refreshActive();
+      await this.refreshActive({includeDetails:false});
       if (!this.account(accountId).authenticated) {
         const account = this.account(accountId);
         const code = account.state === 'check_failed' ? 'MUSE_SESSION_CHECK_FAILED' : 'MUSE_LOGIN_REQUIRED';
@@ -483,12 +484,19 @@ export class MuseBrowser {
         Object.assign(this.account(accountId), { authenticated: false, sessionAuthenticated: false, composerReady: false, state: workerProbe.state, connectionMessage: workerProbe.message });
         throw fail(workerProbe.state === 'check_failed' ? 'MUSE_SESSION_CHECK_FAILED' : 'MUSE_LOGIN_REQUIRED', workerProbe.message, workerProbe.state === 'check_failed' ? 503 : 401);
       }
+      const conversationKey=this.conversationURL(page)||this.workerURL();
+      if(this.pendingCaptions.has(conversationKey)){
+        progress.phase='waiting-provider';const deadline=Date.now()+this.timeoutMs;
+        for(;;){signal.throwIfAborted();let pending=false;for(const frame of await this.composerFrames(page))if(await frame.locator(STOP).first().isVisible().catch(()=>false)){pending=true;break}if(!pending)break;if(Date.now()>=deadline)throw fail('MUSE_CHAT_BUSY','Muse còn xử lý lượt trước. Video trước đã được lưu; chưa gửi prompt mới.',409);await pause(250,signal)}
+        this.pendingCaptions.delete(conversationKey);
+      }
       progress.phase='waiting-editor';
       const conversation = await this.prepareConversation(page, { reuse: Boolean(lease) || singleLane });
       signal.throwIfAborted();
       if (await conversation.locator(STOP).first().isVisible().catch(() => false)) throw fail('MUSE_CHAT_BUSY', 'Cuộc trò chuyện này đang xử lý yêu cầu khác. Chưa gửi prompt.', 409);
       if (checkOnly) return { ready: true, message: 'Đã mở được ô Message trong trang luồng riêng. Chưa gửi prompt hoặc yêu cầu tạo nội dung.', details: await this.composerDiagnostics(page) };
       const result = await this.sendTurn({ page: conversation, prompt, image, output, signal, onSubmit: () => { sending = true; progress.phase = 'sending'; }, onStage: phase => { progress.phase = phase; if (phase === 'submitted') progress.submitted = true; } });
+      if(result.captionPending)this.pendingCaptions.add(conversationKey);
       if (output === 'image' && batchId && sceneId && result.fingerprint) {
         let batch = this.imageBatches.get(batchId);
         if (!batch) {
@@ -569,7 +577,12 @@ export class MuseBrowser {
           const nextUser = anchor < 0 ? -1 : nodes.findIndex((node, index) => index > anchor && node.getAttribute('data-message-role') === 'user');
           const replies = anchor < 0 ? [] : nodes.slice(anchor + 1, nextUser < 0 ? undefined : nextUser).filter(node => node.getAttribute('data-message-role') === 'assistant');
           const shared = nodes.some(node => node.getAttribute('data-message-role') === 'user' && otherMarkers.some(other => node.textContent.includes(other)));
-          const videos = replies.flatMap(node => Array.from(node.querySelectorAll('video'))).filter(el => el.readyState >= 1 && el.currentSrc).map(el => ({ src: el.currentSrc, duration: el.duration, width: el.videoWidth, height: el.videoHeight }));
+          // A generated player often uses preload=none: currentSrc/readyState
+          // stay empty until a human presses Play. Read the file source instead
+          // of waiting for decoder metadata or for the remaining caption stream.
+          const links=replies.flatMap(node=>Array.from(node.querySelectorAll('a[href]'))).filter(el=>/\.(mp4|webm|mov)(?:$|[?#])/i.test(el.href)||/\.(mp4|webm|mov)$/i.test(el.download||'')||/^video\//i.test(el.type||'')).map(el=>({src:el.href,width:0,height:0}));
+          const players=replies.flatMap(node=>Array.from(node.querySelectorAll('video'))).map(el=>({src:el.currentSrc||el.getAttribute('src')||el.querySelector('source[src]')?.src,duration:Number.isFinite(el.duration)?el.duration:undefined,width:el.videoWidth,height:el.videoHeight})).filter(el=>el.src);
+          const videos=[...links,...players];
           const images = replies.flatMap(node => Array.from(node.querySelectorAll('img'))).filter(el => !el.closest('video') && el.complete && el.naturalWidth >= 128 && el.naturalHeight >= 128).map(el => ({ src: el.currentSrc || el.src, width: el.naturalWidth, height: el.naturalHeight }));
           const error = replies.flatMap(node => Array.from(node.querySelectorAll(notice))).find(visible);
           return { anchored: anchor >= 0, shared, interrupted: nextUser >= 0, text: replies.map(node => node.innerText).join('\n\n').trim(), videos, images,
@@ -586,16 +599,47 @@ export class MuseBrowser {
         if (result.text !== lastText) { lastText = result.text; stableSince = Date.now(); }
         if (output === 'text' && result.anchored && result.text && !result.streaming && Date.now() - stableSince >= this.quietMs) return { text: result.text };
         const media = output === 'video' ? result.videos[0] : output === 'image' ? result.images[0] : null;
-        if (media && !result.streaming) {
+        if (media && (!result.streaming||output==='video')) {
           onStage('downloading');
-          const base64 = await page.evaluate(async ({ src, output }) => {
+          const downloadKey=`__studio_download_${randomUUID().replaceAll('-','')}`;
+          signal.throwIfAborted();
+          const abortDownload=()=>{void page.evaluate(key=>{if(globalThis[key]?.abort)globalThis[key].abort();else globalThis[key]='aborted'},downloadKey).catch(()=>{})};
+          signal.addEventListener('abort',abortDownload,{once:true});
+          try{
+          const base64 = await page.evaluate(async ({ src, output,downloadKey }) => {
             const url = new URL(src, location.href);
             if (!['https:', 'blob:', 'data:'].includes(url.protocol) && !(url.protocol === 'http:' && url.hostname === '127.0.0.1')) throw new Error('Unsupported media URL');
-            const response = await fetch(url.href);
+            const cancelled=globalThis[downloadKey]==='aborted';const control=new AbortController();globalThis[downloadKey]=control;if(cancelled)control.abort();
+            const timer=setTimeout(()=>control.abort(),120000);
+            try{
+            const response = await fetch(url.href,{signal:control.signal});
             if (!response.ok) throw new Error('Video download failed');
             let blob = await response.blob();
             if (!blob.size || blob.size > 100 * 1024 * 1024) throw new Error('Video must be between 1 byte and 100 MB');
-            let fingerprint, width, height;
+            let fingerprint, width, height,duration;
+            if(output==='video'){
+              const head=new Uint8Array(await blob.slice(0,16).arrayBuffer());
+              if([0x1a,0x45,0xdf,0xa3].every((value,index)=>head[index]===value))blob=new Blob([blob],{type:'video/webm'});
+              else{
+                let offset=0,moov=false,mdat=false;
+                for(let boxes=0;offset+8<=blob.size&&boxes<256;boxes++){
+                  const bytes=new Uint8Array(await blob.slice(offset,offset+16).arrayBuffer());const view=new DataView(bytes.buffer);let size=view.getUint32(0),header=8;const type=String.fromCharCode(...bytes.slice(4,8));
+                  if(size===1){if(bytes.length<16)throw new Error('Incomplete video header');const large=view.getBigUint64(8);if(large>BigInt(Number.MAX_SAFE_INTEGER))throw new Error('Invalid video size');size=Number(large);header=16}else if(size===0)size=blob.size-offset;
+                  if(size<header||offset+size>blob.size)throw new Error('Incomplete video file');moov||=type==='moov';mdat||=type==='mdat';
+                  if(type==='moov'){
+                    const movie=new Uint8Array(await blob.slice(offset+header,offset+size).arrayBuffer());const details=new DataView(movie.buffer);
+                    const walk=(start,end,depth=0)=>{for(let at=start,boxes=0;at+8<=end&&boxes<256;boxes++){
+                      const length=details.getUint32(at);if(length<8||at+length>end)return;const kind=String.fromCharCode(...movie.slice(at+4,at+8));const data=at+8;
+                      if(kind==='mvhd'&&length>=32){const version=movie[data],scaleOffset=data+(version===1?20:12),durationOffset=scaleOffset+4;if(durationOffset+(version===1?8:4)<=at+length){const scale=details.getUint32(scaleOffset);const ticks=version===1?Number(details.getBigUint64(durationOffset)):details.getUint32(durationOffset);if(scale&&ticks>0)duration=ticks/scale}}
+                      if(kind==='tkhd'&&length>=84){const w=details.getUint32(at+length-8)/65536,h=details.getUint32(at+length-4)/65536;if(w>0&&h>0&&(!width||w*h>width*height)){width=Math.round(w);height=Math.round(h)}}
+                      if(depth<5&&['trak','mdia'].includes(kind))walk(data,at+length,depth+1);at+=length;
+                    }};walk(0,movie.length);
+                  }
+                  offset+=size;
+                }
+                if(!moov||!mdat)throw new Error('Not a complete MP4/MOV file');blob=new Blob([blob],{type:blob.type==='video/quicktime'?'video/quicktime':'video/mp4'});
+              }
+            }
             if (output === 'image') {
               const bitmap = await createImageBitmap(blob);
               try {
@@ -611,10 +655,12 @@ export class MuseBrowser {
                 blob = isPNG ? new Blob([blob], { type: 'image/png' }) : await new Promise((resolve, reject) => canvas.toBlob(value => value ? resolve(value) : reject(new Error('PNG export failed')), 'image/png'));
               } finally { bitmap.close(); }
             }
-            return await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve({ base64: String(reader.result).split(',')[1], mimeType: blob.type, fingerprint, width, height }); reader.onerror = reject; reader.readAsDataURL(blob); });
-          }, { src: media.src, output }).catch(() => { throw fail('MUSE_MEDIA_UNREADABLE', 'Chưa tải hoặc giải mã được tệp Muse trả về. Tool không xuất tệp hỏng; mở lịch sử Muse để kiểm tra.', 502); });
+            return await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve({ base64: String(reader.result).split(',')[1], mimeType: blob.type, fingerprint, width, height,duration }); reader.onerror = reject; reader.readAsDataURL(blob); });
+            }finally{clearTimeout(timer);delete globalThis[downloadKey]}
+          }, { src: media.src, output,downloadKey }).catch(() => { throw fail('MUSE_MEDIA_UNREADABLE', 'Chưa tải hoặc giải mã được tệp Muse trả về. Tool không xuất tệp hỏng; mở lịch sử Muse để kiểm tra.', 502); });
           signal.throwIfAborted();
-          return { ...base64, mimeType: base64.mimeType?.startsWith(`${output}/`) ? base64.mimeType : output === 'image' ? 'image/png' : 'video/mp4', metadata: { ...(output === 'video' ? { duration: media.duration } : {}), width: base64.width || media.width, height: base64.height || media.height } };
+          return { ...base64,captionPending:output==='video'&&result.streaming, mimeType: base64.mimeType?.startsWith(`${output}/`) ? base64.mimeType : output === 'image' ? 'image/png' : 'video/mp4', metadata: { ...(output === 'video' ? { duration: base64.duration||media.duration } : {}), width: base64.width || media.width, height: base64.height || media.height } };
+          }finally{signal.removeEventListener('abort',abortDownload);void page.evaluate(key=>{delete globalThis[key]},downloadKey).catch(()=>{})}
         }
         if (output !== 'text' && result.text && !media && !result.streaming && Date.now() - stableSince > 20000) throw fail(output === 'image' ? 'MUSE_NO_IMAGE' : 'MUSE_NO_VIDEO', `Muse chưa trả ${output === 'image' ? 'ảnh' : 'video'} cho yêu cầu này. Phản hồi: ${result.text.slice(0, 1000)}`);
       }

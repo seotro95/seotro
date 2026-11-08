@@ -4,7 +4,7 @@ import { reserveDownloadNumbers, formatDownloadNumber } from './download-sequenc
 type ResponseMedia = { base64: string; mimeType: string; metadata?: { duration?: number; width: number; height: number } };
 type RequestContext = { batchId: string; sceneId: number; accountId?: number; accountMode?: Settings['accountMode'] };
 declare global {
-  interface Window { museTransport?: { request(id: string, endpoint: string, data: unknown): Promise<{ ok: boolean; body: any }>; cancel(id: string): void; export?(action: string, data?: unknown): Promise<any>; automationControl?(action: string, data?: unknown): Promise<any>; onAutomation?(callback: (action: string, data: any) => Promise<any>): () => void; onSessionRefresh?(callback: () => void): () => void }; showDirectoryPicker?: () => Promise<ExportDirectory> }
+  interface Window { museTransport?: { dataControl?(action:string):Promise<any>; request(id: string, endpoint: string, data: unknown): Promise<{ ok: boolean; body: any }>; cancel(id: string): void; export?(action: string, data?: unknown): Promise<any>; automationControl?(action: string, data?: unknown): Promise<any>; onAutomation?(callback: (action: string, data: any) => Promise<any>): () => void; onSessionRefresh?(callback: () => void): () => void }; showDirectoryPicker?: () => Promise<ExportDirectory> }
 }
 type ExportDirectory = { name: string; getDirectoryHandle(name: string, options?: { create?: boolean }): Promise<ExportDirectory>; getFileHandle(name: string, options?: { create?: boolean }): Promise<{ createWritable(): Promise<{ write(blob: Blob): Promise<void>; close(): Promise<void> }> }> };
 let webExportDirectory: ExportDirectory | null = null;
@@ -176,4 +176,4 @@ export async function downloadMediaBatch(items: { media: MediaResult; id: number
   } catch (error) { if (native&&session) await native('abort',session.id).catch(()=>{}); throw error; }
 }
 export const providerStatus = () => api('/api/status');
-export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer' | 'concurrency' | 'import' | 'select' | 'prepare' | 'proxy', data: Record<string, unknown> = {}) => api(`/api/account/${action}`, data);
+export const accountAction = (action: 'connect' | 'check' | 'close' | 'composer' | 'concurrency' | 'import' | 'select' | 'prepare' | 'proxy' | 'save', data: Record<string, unknown> = {}) => api(`/api/account/${action}`, data);

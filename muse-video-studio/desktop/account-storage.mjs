@@ -7,10 +7,13 @@ export class AccountStorage {
   constructor({userData,codec,serviceURL,allowBasic=false}) {
     this.directory=path.join(userData,'account-vault');this.userData=userData;this.codec=codec;
     this.origin=new URL(serviceURL).origin;this.hostname=new URL(serviceURL).hostname;this.allowBasic=allowBasic;this.writes=new Map();
+    this.records=new Map();
   }
   available(){return this.codec.isEncryptionAvailable()&&(this.allowBasic||this.codec.getSelectedStorageBackend?.()!=='basic_text')}
   file(id,kind){if(!Number.isInteger(id)||id<1||id>40||!['session','proxy'].includes(kind))throw new Error('ACCOUNT_INVALID');return path.join(this.directory,`${kind}-${id}.bin`)}
-  async read(id,kind){try{return JSON.parse(await this.codec.decryptString(await readFile(this.file(id,kind))))}catch{return null}}
+  remember(id,value){if(value?.origin===this.origin)this.records.set(id,{savedAt:value.savedAt||null,hasSession:Boolean(value.cookies?.length||Object.keys(value.storage||{}).length)})}
+  metadata(id){return this.records.get(id)||{savedAt:null,hasSession:false}}
+  async read(id,kind){try{const value=JSON.parse(await this.codec.decryptString(await readFile(this.file(id,kind))));if(kind==='session')this.remember(id,value);return value}catch{return null}}
   async write(id,kind,value){
     if(!this.available())throw new Error('MUSE_SECURE_STORAGE_UNAVAILABLE: Không có kho mã hóa của hệ điều hành. Phiên Chromium vẫn được giữ; không lưu thông tin nhạy cảm dạng văn bản.');
     const file=this.file(id,kind);const previous=this.writes.get(file)||Promise.resolve();
@@ -26,7 +29,7 @@ export class AccountStorage {
     // encrypted storage snapshot, then replace it on the next verified save.
     if(storage===null||!page){const previous=await this.read(id,'session');storage=previous?.origin===this.origin?previous.storage||{}:{}}
     session.flushStorageData();await session.cookies.flushStore();
-    await this.write(id,'session',{version:1,origin:this.origin,cookies,storage,savedAt:Date.now()});
+    const value={version:1,origin:this.origin,cookies,storage,savedAt:Date.now()};await this.write(id,'session',value);this.remember(id,value);
   }
   async restore(id,session){
     const saved=await this.read(id,'session');if(!saved||saved.version!==1||saved.origin!==this.origin)return {};

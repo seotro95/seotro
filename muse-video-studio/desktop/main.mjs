@@ -13,11 +13,14 @@ import { AutomationServer } from './automation-server.mjs';
 import { randomUUID } from 'node:crypto';
 import {AccountStorage} from './account-storage.mjs';
 import {AccountProxies} from './account-proxy.mjs';
+import {storageCodec} from './storage-codec.mjs';
+import {dataLocation,importData} from './data-location.mjs';
 
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const root = path.dirname(directory);
 const version = JSON.parse(readFileSync(path.join(root, 'package.json'), 'utf8')).version;
-const userData = path.resolve(process.env.MUSE_DESKTOP_DATA || path.join(root, '.data', 'muse-desktop'));
+const location=dataLocation({root,platform:process.platform,isPackaged:app.isPackaged,localData:process.env.LOCALAPPDATA||app.getPath('appData'),override:process.env.MUSE_DESKTOP_DATA});
+const userData = location.directory;
 mkdirSync(userData, { recursive: true, mode: 0o700 });
 const portFile = path.join(userData, 'studio-port');
 function savedStudioPort() {
@@ -56,13 +59,13 @@ async function start() {
   // block all account tabs on Electron's main thread. Basic storage is confined
   // to explicit local Linux fixtures, never enabled by a release launcher.
   if(fixture&&process.platform==='linux')safeStorage.setUsePlainTextEncryption(true);
-  const encryptionReady=await safeStorage.isAsyncEncryptionAvailable();
-  const codec={isEncryptionAvailable:()=>encryptionReady,getSelectedStorageBackend:()=>safeStorage.getSelectedStorageBackend?.(),encryptString:value=>safeStorage.encryptStringAsync(value),decryptString:async bytes=>(await safeStorage.decryptStringAsync(bytes)).result};
+  const codec=await storageCodec(safeStorage);
   accountStorage=new AccountStorage({userData,codec,serviceURL,allowBasic:Boolean(fixture)});
   const savedAccountIds=await accountStorage.savedIds();
   const proxies=await new AccountProxies({storage:accountStorage,inheritedProxy:process.env.HTTPS_PROXY||process.env.HTTP_PROXY}).load();
   app.on('login',(event,contents,_details,info,callback)=>{const credentials=proxies.credentials(contents,info);if(credentials){event.preventDefault();callback(credentials.username,credentials.password)}});
   const saveSession=(id,changed=false)=>{
+    if(!muse?.drivers.get(id)?.active)return Promise.resolve();
     if(savingSessions.has(id)){if(changed)dirtySessions.add(id);return savingSessions.get(id)}
     const task=(async()=>{do{
       dirtySessions.delete(id);const driver=muse?.drivers.get(id);
@@ -74,6 +77,7 @@ async function start() {
     webPreferences: { preload: path.join(directory, 'preload.cjs'), sandbox: true, contextIsolation: true, nodeIntegration: false } });
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
   muse = await new MuseAccounts({profileRoot:userData,preferredConcurrency:fixture&&process.env.MUSE_TEST_PARALLEL==='1'?10:2,
+    persistenceStatus:id=>accountStorage.metadata(id),saveSessions:async()=>{const ids=[...new Set([...await accountStorage.savedIds(),...muse.drivers.keys()])];await Promise.all(ids.map(id=>saveSession(id)));return {accounts:muse.snapshot(),saved:ids.filter(id=>accountStorage.metadata(id).hasSession).length};},
     proxyStatus:id=>proxies.snapshot(id),configureProxy:async(id,data)=>{await saveSession(id);await muse.closeAccount(id);return proxies.configure(id,data)},
     createDriver: id => {
       const partition=partitionFor(id); const museSession=session.fromPartition(partition);
@@ -100,6 +104,19 @@ async function start() {
   // Keep the localStorage origin stable on later launches of a portable app.
   if (rememberPort) writeFileSync(portFile, new URL(runtime.url).port);
   const studio = new WebContentsView({ webPreferences: { preload: path.join(directory, 'renderer-preload.cjs'), partition: 'persist:studio', sandbox: true, contextIsolation: true, nodeIntegration: false, webSecurity: true, backgroundThrottling: false } });
+  const checkpoint=setInterval(()=>{if(!closing)for(const id of muse.drivers.keys())void saveSession(id)},30000);checkpoint.unref();
+  ipcMain.handle('studio:data-control',async(event,action)=>{
+    if(event.sender!==studio.webContents)throw new Error('Untrusted data sender');
+    if(action==='info')return {directory:userData,stable:Boolean(location.home),importSupported:Boolean(location.home)};
+    if(action==='open'){await shell.openPath(userData);return {opened:true}}
+    if(action==='import'){
+      if(requests.size||muse.restoring)throw new Error('Đợi các lượt tạo/khôi phục hoàn tất trước khi chuyển dữ liệu.');
+      const choice=await dialog.showOpenDialog(window,{title:'Đóng bản cũ, rồi chọn thư mục chứa EXE bản cũ hoặc hồ sơ Muse',properties:['openDirectory']});
+      if(choice.canceled)return {cancelled:true};await importData(location,choice.filePaths[0],userData);
+      setTimeout(()=>{app.relaunch();void shutdown()},300);return {restarting:true};
+    }
+    throw new Error('Unknown data action');
+  });
   studio.webContents.setWindowOpenHandler(({ url }) => url.startsWith(`blob:${runtime.url}/`) ? {
     action: 'allow', overrideBrowserWindowOptions: { parent: window, width: 1000, height: 750, autoHideMenuBar: true,
       webPreferences: { partition: 'persist:studio', sandbox: true, contextIsolation: true, nodeIntegration: false, webSecurity: true } },
@@ -223,7 +240,7 @@ async function shutdown() {
   for (const control of requests.values()) control.abort();
   await automation?.close();
   for(const timer of saveTimers.values())clearTimeout(timer);saveTimers.clear();
-  await Promise.allSettled([...hosts.keys()].map(id=>accountStorage?.available()?accountStorage.capture(id,session.fromPartition(partitionFor(id)),muse?.drivers.get(id)?.active?.page):Promise.resolve()));
+  await Promise.allSettled([...hosts.keys()].map(id=>accountStorage?.available()&&muse?.drivers.get(id)?.active?accountStorage.capture(id,session.fromPartition(partitionFor(id)),muse.drivers.get(id).active.page):Promise.resolve()));
   await Promise.allSettled([...saves]);
   await runtime?.close();
   for (const owned of hosts.values()) await owned.close();

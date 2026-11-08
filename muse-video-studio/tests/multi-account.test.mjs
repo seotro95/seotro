@@ -12,7 +12,7 @@ async function waitFor(predicate,label,timeout=45000){const end=Date.now()+timeo
 
 test('ten isolated Muse sessions each submit one concurrent request; single-account mode and saved sessions remain available (fixture)',{timeout:180000},async()=>{
   const profile=await mkdtemp(path.join(os.tmpdir(),'muse-multi-'));
-  const fixture=createMuseFixture({image,clip});Object.assign(fixture.state,{behavior:'image',newChat:false,sharedHistory:true,isolateAccounts:true,uniqueImages:true});
+  const fixture=createMuseFixture({image,clip});Object.assign(fixture.state,{behavior:'image',newChat:false,sharedHistory:true,isolateAccounts:true,uniqueImages:true,lazyVideo:true,videoSourceTag:true});
   await new Promise(resolve=>fixture.server.listen(0,'127.0.0.1',resolve));const service=`http://127.0.0.1:${fixture.server.address().port}/`;
   const executablePath=process.env.MUSE_PORTABLE_EXECUTABLE||require('electron');
   const args=['--password-store=basic',...(process.env.MUSE_ELECTRON_TEST_NO_SANDBOX==='1'?['--no-sandbox','--disable-gpu']:[]),...(!process.env.MUSE_PORTABLE_EXECUTABLE?[path.join(root,'desktop/main.mjs')]:[])];
@@ -94,6 +94,7 @@ test('ten isolated Muse sessions each submit one concurrent request; single-acco
     await studio.getByRole('button',{name:'Tạo ảnh hàng loạt',exact:true}).click();
     await mkdir(path.join(root,'test-results'),{recursive:true});await studio.screenshot({path:path.join(root,'test-results/multi-account-studio.png')});
     if(!process.env.MUSE_PORTABLE_EXECUTABLE)env.PORT=new URL(studio.url()).port;
+    const savedAll=await studio.evaluate(async()=>{const response=await fetch('/api/account/save',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});return response.json()});assert.equal(savedAll.saved,10);assert.ok(savedAll.accounts.slice(0,10).every(account=>account.persistence?.hasSession));
     const vaultFile=await readFile(path.join(profile,'account-vault','session-10.bin'));assert.ok(vaultFile.length>0,'Verified sessions must have an encrypted snapshot before quitting');
     await desktop.close();desktop=null;
     ({studio,shell}=await launch());

@@ -3,6 +3,15 @@ import {readFile} from 'node:fs/promises';
 const image=await readFile(new URL('../../public/demo-image.png',import.meta.url));
 const clip=(await readFile(new URL('../../public/demo.mp4',import.meta.url))).toString('base64');
 
+test('save-all reports every saved account and the full build can choose old data without exposing credentials',async({page})=>{
+ await page.addInitScript(()=>{(window as any).dataActions=[];(window as any).museTransport={dataControl:async(action:string)=>{(window as any).dataActions.push(action);return action==='info'?{directory:'C:\\Users\\Owner\\AppData\\Local\\Muse AI Studio',stable:true,importSupported:true}:{restarting:action==='import'}}}});
+ const accounts=Array.from({length:10},(_,index)=>({id:index+1,label:`owner${index+1}@example.invalid`,state:'ready',authenticated:true,sessionAuthenticated:true,active:true,persistence:{hasSession:true,savedAt:Date.now()}}));
+ await page.route('**/api/status',route=>route.fulfill({json:{museConfigured:true,transport:'browser',embeddedLogin:true,multiAccount:true,accounts}}));let saves=0;
+ await page.route('**/api/account/save',route=>{saves++;return route.fulfill({json:{accounts,saved:10}})});
+ await page.goto('/');await page.getByRole('button',{name:'Quản lý tài khoản',exact:true}).click();await expect(page.getByText('Hồ sơ đã lưu: 10',{exact:true})).toBeVisible();await expect(page.getByLabel('Danh sách tài khoản',{exact:true})).toHaveValue(accounts.map(account=>account.label).join('\n'));
+ await page.getByRole('button',{name:'Lưu tất cả tài khoản',exact:true}).click();await expect.poll(()=>saves).toBe(1);await expect(page.getByText('Đã ghi 10 hồ sơ có dữ liệu phiên trên máy.',{exact:false})).toBeVisible();await page.getByRole('button',{name:'Chuyển dữ liệu bản cũ',exact:true}).click();await expect.poll(()=>page.evaluate(()=>(window as any).dataActions.includes('import'))).toBe(true);
+});
+
 test('restoring accounts keeps polling after the first verified session and unlocks without opening the account dialog',async({page})=>{
  let restoring=true;let checks=0;
  await page.route('**/api/status',route=>{checks++;return route.fulfill({json:{museConfigured:true,transport:'browser',embeddedLogin:true,restoringSessions:restoring,accounts:[{id:1,state:'ready',authenticated:true,sessionAuthenticated:true,active:true}]}})});

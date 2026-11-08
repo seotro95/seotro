@@ -1,3 +1,26 @@
+# Xác minh bản 1.10.0
+
+## Phần sửa
+
+- Nhận video từ src, thẻ source và liên kết tải trong đúng lượt trả lời; không đợi readyState/metadata của player tải lười và không đợi caption ngừng streaming. Tải tệp có timeout/hủy, kiểm MP4/MOV có moov/mdat, nhận header WebM; đọc kích thước/thời lượng MP4 từ movie/track headers thay vì chờ decoder. Lỗi tải không xuất tệp giả hoặc tự gửi lại prompt.
+- Kiểm tra phiên trên đường render không đợi đọc số dư hoặc checkpoint ghi đĩa. Các checkpoint vẫn chạy sau xác minh, cookie thay đổi, định kỳ và khi thoát. Không ghi đè bản lưu của hồ sơ chưa được mở bằng cookie rỗng.
+- Sửa codec để Windows không gọi backend keyring Linux, ưu tiên crypto async và có fallback API mã hóa Windows khi async chưa sẵn sàng; không có fallback plaintext. Mỗi hồ sơ có metadata thời điểm lưu, nút Lưu tất cả và số hồ sơ có dữ liệu phiên. Khôi phục đủ danh sách nhãn vào màn hình quản lý.
+- Gói Windows đầy đủ dùng LocalAppData cố định, giữ cùng data khi đổi thư mục chương trình. Nếu legacy data nằm ngay trong gói cũ, chuyển sang nơi cố định; có nút chọn thư mục bản cũ để sao chép vào profile mới và relaunch. Không ghi đè nguồn hoặc hồ sơ hiện tại; giữ cổng/localStorage/IndexedDB/khóa API/bộ đếm. Override MUSE_DESKTOP_DATA và chế độ nguồn giữ cách dùng cũ.
+
+## Kết quả đã kiểm
+
+- TypeScript/Vite và npm test qua; thêm unit codec Windows với hàm backend Linux cố tình throw nhưng không được gọi, fallback mã hóa, data ổn định qua ba thư mục chương trình, chuyển đủ mười hồ sơ và giữ nguồn/current data.
+- Ba ca Chromium tái hiện lỗi người dùng qua: preload=none với src; preload=none với source; chỉ có link download. Caption vẫn streaming, checkpoint save vẫn pending, player chưa được Play/readyState=0; vẫn nhận đúng byte MP4. **5/5 ca video qua**, gồm từ chối tệp HTML giả video và lượt kế tiếp chờ caption cũ nhưng giữ video đã tải, không gửi trùng. Cầu nối Chromium đầy đủ **27/27** qua, metadata cũ vẫn đúng.
+- Electron mười tài khoản từ nguồn qua: mười yêu cầu ảnh và mười video tải lười chồng lấp, đúng byte/đúng tài khoản; Lưu tất cả báo đủ mười; restart tự xác minh cả mười cookie phiên và sessionStorage; nhãn và proxy giữ sau mở lại, không render thêm khi khôi phục.
+
+- Giao diện **47/47 qua**, thêm **5/5 ca tập trung** sau bổ sung khóa thao tác khi chuyển dữ liệu: Lưu tất cả báo đủ mười, nạp lại danh sách nhãn và chọn nhập hồ sơ cũ. Gói Electron Linux độc lập **hai kịch bản qua**: mười tài khoản/ảnh/video tải lười/lưu và mở lại; API điều khiển, byte media, dừng/xóa và giữ khóa. PATH của app thử không có Node/npm ngoài.
+
+## Giới hạn
+
+Kiểm thử xác thực/tạo video dùng fixture cục bộ, không phải tài khoản Muse thật của người dùng. Gói Windows dùng runtime Electron chính thức, kiểm checksum/PE/manifest/CRC; cloud thực thi Electron Linux cùng mã. Codec Windows/path dùng unit với tham số platform Windows, không phải chạy Windows EXE hoặc DPAPI thật. Chức năng sửa thời gian Studio nhận tệp đã sẵn có; thời gian render phía Muse vẫn do dịch vụ quyết định. Phiên đã hết hạn/bị thu hồi hoặc chưa từng được bản cũ lưu cần đăng nhập lại.
+
+## Kết quả trước 1.10.0
+
 # Xác minh bản 1.9.0
 
 ## Thay đổi và phạm vi

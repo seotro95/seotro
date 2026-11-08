@@ -1,8 +1,8 @@
-# Muse AI Studio 1.9.0 · Tối đa 40 ô / luồng yêu cầu
+# Muse AI Studio 1.10.0 · Tối đa 40 ô / luồng yêu cầu
 
-[Cập nhật bản 1.8.0 → 1.9.0](Muse-AI-Studio-Update-1.9.0.zip) · [Cách cập nhật, giữ tài khoản](muse-video-studio/CAP-NHAT-1.9.md) · [Bản Windows x64 đầy đủ](Muse-AI-Studio-Windows-x64.zip) · [Mã nguồn](Muse-Video-Workstation.zip) · [Hướng dẫn](muse-video-studio/README.md) · [API](muse-video-studio/API-AUTOMATION.md) · [Codex MCP](muse-video-studio/MCP-CODEX.md) · [MIT](muse-video-studio/LICENSE)
+[Hướng dẫn bản đầy đủ 1.10 và chuyển tài khoản](muse-video-studio/BAN-DAY-DU-1.10.md) · [Bản Windows x64 đầy đủ](Muse-AI-Studio-Windows-x64.zip) · [Mã nguồn](Muse-Video-Workstation.zip) · [Hướng dẫn](muse-video-studio/README.md) · [API](muse-video-studio/API-AUTOMATION.md) · [Codex MCP](muse-video-studio/MCP-CODEX.md) · [MIT](muse-video-studio/LICENSE)
 
-Giải nén toàn bộ vào thư mục mới rồi mở **Muse AI Studio.exe**. Không cần bản cũ, Node.js hoặc Chrome riêng.
+Giải nén toàn bộ vào thư mục mới rồi mở **Muse AI Studio.exe**. Nếu có dữ liệu bản cũ, đóng bản cũ rồi chọn **Tài khoản Muse → Chuyển dữ liệu bản cũ** trong bản mới. Không cần bản cũ, Node.js hoặc Chrome riêng.
 
 - **Số luồng: 20 / 30 / 40** hiện đúng 20 / 30 / 40 ô theo thứ tự. Nút Tạo, tiến độ, nhập TXT/SRT và tải thư mục dùng đúng số ô.
 - Thu nhỏ rồi mở rộng giữ prompt/kết quả; lưu lại lựa chọn khi mở lại. Có thể thay đổi riêng Số ô để chạy một kịch bản dài bằng ít luồng hơn.
@@ -14,3 +14,5 @@ Giải nén toàn bộ vào thư mục mới rồi mở **Muse AI Studio.exe**. 
 Số render thực sự cùng lúc do Muse quyết định. Kiểm thử dùng dịch vụ mô phỏng; không khẳng định tài khoản thật có thể chạy 40 render. Phiên chat cloud không kết nối trực tiếp cổng 127.0.0.1 trên máy Windows của người dùng. Xem [xác minh](muse-video-studio/VALIDATION.md).
 
 Bản 1.9: nút đồng bộ BẬT/TẮT và chọn từng ô, cài đặt/ảnh riêng; phiên lưu mã hóa và tự khôi phục; proxy HTTP/HTTPS hoặc SOCKS5 không mật khẩu tùy tài khoản. Mỗi tài khoản dùng lại tab Muse đã tải, giảm mở trang/xác minh thừa.
+
+Bản 1.10 nhận nguồn video tải lười và liên kết tệp đúng lượt trả lời, không chờ bấm Play hay caption kết thúc; kiểm tra tệp và đọc metadata MP4 từ byte. Nút Lưu tất cả và thời điểm lưu riêng từng hồ sơ; Windows dùng LocalAppData cố định để giữ tài khoản khi đổi thư mục EXE.

@@ -90,7 +90,7 @@ async function api(req, res, pathname) {
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
   if (!req.headers['content-type']?.startsWith('application/json')) return json(res, 415, { error: 'Cần Content-Type application/json.' });
-  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close|composer|concurrency|prepare|import|select|proxy)$/);
+  const accountRoute = pathname.match(/^\/api\/account\/(connect|check|close|composer|concurrency|prepare|import|select|proxy|save)$/);
   const legacyAccountRoute = pathname.match(/^\/api\/accounts\/(\d+)\/(connect|check|close)$/);
   if (!['/api/video', '/api/image', '/api/text'].includes(pathname) && !accountRoute && !legacyAccountRoute) return json(res, 404, { error: 'API không tồn tại.' });
   let acquired = false;
@@ -105,6 +105,7 @@ async function api(req, res, pathname) {
       const action = accountRoute ? accountRoute[1] : legacyAccountRoute[2];
       if (!Number.isInteger(accountId) || accountId<1 || accountId>MAX_SLOTS || (!muse?.supportsMultiAccount && accountId!==1)) return json(res,400,{error:'ACCOUNT_INVALID: Tài khoản không hợp lệ.'});
       if (!muse) return json(res, 409, { error: 'Tài khoản đang do adapter riêng quản lý. Chọn MUSE_TRANSPORT=browser để đăng nhập bằng Chrome/Edge.' });
+      if(action==='save'){if(!muse.saveSessions)return json(res,409,{error:'Lưu tất cả phiên có trong bản desktop.'});return json(res,200,await muse.saveSessions());}
       if (activeRequests || accountBusy||muse.restoring) return json(res, 409, { error: 'Đang có tác vụ hoặc khôi phục phiên. Đợi hoàn tất trước khi thay đổi phiên tài khoản.' });
       muse.account(accountId);
       accountBusy = accountAcquired = true;

@@ -56,7 +56,7 @@ const fixture = http.createServer(async (req, res) => {
   if (req.url === '/capture') { let text = ''; for await (const chunk of req) text += chunk; const result = JSON.parse(text); state.outputs.set(result.id, result.base64); return res.end('ok'); }
   if (req.url === '/stop') { state.stops++; return res.end('ok'); }
   if (req.url?.endsWith('.png')) { res.setHeader('Content-Type', state.assetImageMime || 'image/png'); return res.end(state.assetImageBytes || image); }
-  if (req.url?.endsWith('.mp4')) { res.setHeader('Content-Type', 'video/mp4'); return res.end(clip); }
+  if (req.url?.endsWith('.mp4')) { res.setHeader('Content-Type', 'video/mp4'); return res.end(state.assetVideoBytes||clip); }
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   const requestPath = new URL(req.url, 'http://127.0.0.1').pathname;
   if(req.headers['sec-fetch-dest']==='document')state.pageLoads=(state.pageLoads||0)+1;
@@ -89,17 +89,17 @@ const fixture = http.createServer(async (req, res) => {
   document.querySelector('#new-chat')?.addEventListener('click',()=>{if(${Boolean(state.chatRoutes)}){location.href='/chat/'+crypto.randomUUID();return}history.replaceChildren();conversationOpen=true;ready()});
   document.querySelector('#login').onclick=()=>{if(${Boolean(state.emailLogin)}){document.cookie='fixture_pending=sent; Max-Age=3600; SameSite=Strict';document.querySelector('#popup-feedback').textContent='Email sent';return}if(${state.loginInPopup === 'blank'}){const popup=window.open('about:blank');if(!popup){document.querySelector('#popup-feedback').textContent='Popup blocked';return}setTimeout(()=>{popup.location.href='/fixture-auth-popup'},50);return}if(${Boolean(state.loginInPopup)}){window.open('/fixture-auth-popup');return}document.cookie='fixture_session=connected; Max-Age=3600; SameSite=Strict';ready()};
   root.querySelector('input').onchange=e=>{const img=new Image();img.src=URL.createObjectURL(e.target.files[0]);document.querySelector('#attachments').appendChild(img)};
-  stop.onclick=()=>{stop.style.display='none';fetch('/stop')};
+  stop.onclick=()=>{stop.style.display=${JSON.stringify(state.keepStreamingAfterMedia?'block':'none')};fetch('/stop')};
   if(${state.initialMode !== 'inert'})editor.onkeydown=async e=>{if(e.key!=='Enter')return;e.preventDefault();const prompt=editor.tagName==='TEXTAREA'?editor.value:editor.innerText;const user=document.createElement('div');user.setAttribute('data-message-item','');user.setAttribute('data-message-role','user');user.textContent=prompt;history.appendChild(user);if(editor.tagName==='TEXTAREA')editor.value='';else editor.replaceChildren();const attached=root.querySelectorAll('img').length;document.querySelector('#attachments').replaceChildren();root.querySelector('input').value='';stop.style.display='block';
     const mode=await(await fetch('/turn',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt,attached,path:location.pathname,viewport:{width:innerWidth,height:innerHeight},prehydrationValue:prehydration?.value||'',prehydrationFocus,prehydrationInputEvents,initialMode:${JSON.stringify(state.initialMode)}})})).json();
     if(mode.held) while(!(await(await fetch('/ready?id='+mode.id)).json()).ready) await new Promise(resolve=>setTimeout(resolve,80));
     if(mode.behavior==='slow')return;
     setTimeout(()=>{if(${Boolean(state.foreignTurn)}){const foreign=document.createElement('div');foreign.setAttribute('data-message-item','');foreign.setAttribute('data-message-role','user');foreign.textContent='A different user request after the current prompt';history.appendChild(foreign)}const reply=document.createElement('div');reply.setAttribute('data-message-item','');reply.setAttribute('data-message-role','assistant');
-      if(mode.behavior==='video'){const video=document.createElement('video');video.src='/new.mp4';video.preload='metadata';reply.appendChild(video)}
+      if(mode.behavior==='video'){if(${Boolean(state.videoDownloadLink)}){const link=document.createElement('a');link.href='/new.mp4';link.download='generated.mp4';link.textContent='Download video';reply.appendChild(link)}else{const video=document.createElement('video');video.preload=${JSON.stringify(state.lazyVideo?'none':'metadata')};if(${Boolean(state.videoSourceTag)}){const source=document.createElement('source');source.src='/new.mp4';source.type='video/mp4';video.appendChild(source)}else video.src='/new.mp4';reply.appendChild(video)}}
       else if(mode.behavior==='image'){const img=document.createElement('img');if(mode.uniqueImages){const canvas=document.createElement('canvas');canvas.width=640;canvas.height=360;const ctx=canvas.getContext('2d');ctx.fillStyle='#172340';ctx.fillRect(0,0,640,360);ctx.fillStyle='#ffffff';ctx.font='32px sans-serif';ctx.fillText('FIXTURE IMAGE '+mode.id,30,180);img.src=canvas.toDataURL(${JSON.stringify(state.imageEncoding || 'image/png')});fetch('/capture',{method:'POST',body:JSON.stringify({id:mode.id,base64:img.src.split(',')[1]})})}else img.src='/new.png';reply.appendChild(img)}
       else if(mode.behavior==='error'){reply.innerHTML='<span data-testid="assistant-response-error-notice">429 quota exhausted</span>'}
       else reply.textContent='A new cinematic prompt, not old history.';
-      history.appendChild(reply);stop.style.display='none';},100);
+      history.appendChild(reply);stop.style.display=${JSON.stringify(state.keepStreamingAfterMedia?'block':'none')};},100);
   };
   </script></body></html>`);
 });

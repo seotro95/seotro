@@ -64,7 +64,7 @@ app = resources / 'app'
 app.mkdir()
 for name in ['desktop', 'dist']:
     shutil.copytree(ROOT / name, app / name)
-for name in ['limits.mjs', 'server.mjs', 'muse-browser.mjs', 'muse-accounts.mjs', 'muse-balance.mjs', 'browser.mjs', '.env.example', 'README.md', 'VALIDATION.md', 'API-AUTOMATION.md', 'MCP-CODEX.md', 'CODEX-MCP.toml', 'CAP-NHAT-1.9.md', 'LICENSE']:
+for name in ['limits.mjs', 'server.mjs', 'muse-browser.mjs', 'muse-accounts.mjs', 'muse-balance.mjs', 'browser.mjs', '.env.example', 'README.md', 'VALIDATION.md', 'API-AUTOMATION.md', 'MCP-CODEX.md', 'CODEX-MCP.toml', 'CAP-NHAT-1.9.md', 'BAN-DAY-DU-1.10.md', 'LICENSE']:
     shutil.copyfile(ROOT / name, app / name)
 modules = app / 'node_modules'
 modules.mkdir()
@@ -93,8 +93,11 @@ for name in ['react', 'react-dom', 'lucide-react']:
 
 Khong can ban cu, Node.js, npm hoac Chrome cai rieng.
 Can Internet va tai khoan Muse co quyen tao noi dung tuong ung.
-Phien dang nhap moi duoc luu trong resources/app/.data.
-Khong can sao chep .data, .env hoac node_modules tu ban cu.
+Ban Windows moi luu ho so tai %LOCALAPPDATA%\\Muse AI Studio.
+Neu da dung ban cu: dong ban cu; trong ban moi chon Tai khoan Muse -> Chuyen du lieu ban cu.
+Chon thu muc co EXE cu. Tool sao chep tat ca ho so, thu vien va tu mo lai.
+Bam Luu tat ca tai khoan de xem trang thai luu tung ho so.
+Phien con hieu luc duoc khoi phuc khi mo lai; phien Muse da het han can dang nhap lai.
 
 Cau noi Muse khong chinh thuc. Co the bi anh huong khi Muse doi giao dien,
 gioi han tai khoan, mo hinh hoac so tac vu dong thoi.

@@ -1,8 +1,10 @@
-# Muse AI Studio 1.9.0 · Đồng bộ, phiên lưu và proxy từng tài khoản
+# Muse AI Studio 1.10.0 · Nhận video nhanh và lưu đủ tài khoản
 
-**Đang dùng bản Windows 1.8.0?** Dùng [hướng dẫn cập nhật 1.9](CAP-NHAT-1.9.md) và gói `Muse-AI-Studio-Update-1.9.0.zip`: chạy CAP_NHAT.bat, chọn thư mục EXE cũ. Updater kiểm SHA256, sao lưu mã và giữ nguyên `.data` / `.env`, thư viện, tài khoản và cài đặt.
+Bản **Windows đầy đủ**, không cần Node/Chrome riêng hoặc bản cũ. Sửa lỗi Muse đã có video nhưng Studio vẫn chờ metadata/nút Stop. Lưu riêng toàn bộ hồ sơ, tự khôi phục khi mở lại; dữ liệu gói Windows mới ở `%LOCALAPPDATA%\Muse AI Studio`, không phụ thuộc thư mục giải nén EXE.
 
-Bản 1.9 thêm **Đồng bộ thao tác BẬT/TẮT** với lựa chọn từng ô, cài đặt/ảnh riêng hoặc theo nhóm; **Proxy luồng** tùy chọn; cookie phiên/sessionStorage lưu mã hóa qua Windows DPAPI và tự khôi phục khi mở lại. Chế độ nhiều tài khoản dùng lại tab đã tải và một kết nối điều khiển chung để giảm tải, vẫn tách hồ sơ từng tài khoản. Xem [chi tiết 1.9](CAP-NHAT-1.9.md).
+**Đã có dữ liệu bản cũ?** Đóng bản cũ, mở bản 1.10, chọn **Tài khoản Muse → Chuyển dữ liệu bản cũ**, chọn thư mục có EXE cũ. Tool sao chép dữ liệu sang hồ sơ riêng và tự mở lại, giữ nguyên nguồn và hồ sơ hiện có. Xem [hướng dẫn đầy đủ 1.10](BAN-DAY-DU-1.10.md).
+
+Có nút **Lưu tất cả tài khoản**, số hồ sơ đã lưu và thời điểm lưu từng tài khoản. Nhập danh sách email chỉ là đặt nhãn; từng tài khoản cần phiên Muse hợp lệ. Tool tự khôi phục phiên còn hiệu lực, không kéo dài thời hạn do Muse quyết định.
 
 Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đăng nhập Muse nằm trong cửa sổ tool. Chọn một tài khoản dùng chung 10 ô hoặc 10 tài khoản tách biệt, mỗi tài khoản một ô. Mỗi ô có nút Tạo/Dừng riêng và lịch sử ảnh/video lưu trên máy. Có thể kiểm tra để bật tối đa 40 hội thoại song song.
 
@@ -14,7 +16,7 @@ Có bản Windows x64 đóng gói đầy đủ và bản mã nguồn. Trang đă
 4. Có thể bấm **Kiểm tra ô Message** trước khi tạo. Bước này tìm ô nhập trong trang luồng, không gửi prompt hoặc render.
 5. Nhập 10 prompt hoặc TXT/SRT, chọn **Tạo ảnh hàng loạt** / **Tạo video**, bấm **TẠO 10 ẢNH / VIDEO**.
 
-Nếu muốn cập nhật và giữ dữ liệu bản cũ, dùng gói Update theo hướng dẫn phía trên. Khi cài mới độc lập, không chép `node_modules` từ bản cũ. Gói tạo hồ sơ mới trong `resources/app/.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.9.0** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
+Để giữ tài khoản/thư viện từ bản cũ, dùng chức năng Chuyển dữ liệu bản cũ theo hướng dẫn trên. Bản Windows đầy đủ dùng nơi lưu cố định trong LocalAppData; bản nguồn vẫn dùng `.data/muse-desktop`. Cần Internet và tài khoản Muse có quyền tạo nội dung tương ứng. Phiên bản **1.10.0** hiện trên thanh ứng dụng và tiêu đề cửa sổ. Bản đóng gói chọn cổng cục bộ trống lần đầu và giữ cổng đó khi mở lại để duy trì kịch bản đã lưu.
 
 Cầu nối giao diện **không chính thức**. Kiểm thử dùng Chromium/Electron thật và dịch vụ giả lập cục bộ; chưa tự động tạo media hoặc đọc số dư trên Muse.ai thật. Người dùng xác nhận có thể gửi/nhận tin nhắn thủ công trong tab Muse của tool. Tài khoản thật có thể giới hạn render đồng thời, từ chối đăng nhập nhúng hoặc thay đổi giao diện. Các lựa chọn model, độ nét và thời lượng là yêu cầu bằng prompt, cần xác nhận bằng kết quả thật.
 
