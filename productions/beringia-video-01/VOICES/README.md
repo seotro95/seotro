@@ -1,6 +1,6 @@
 # Voice — Beringia, video 01
 
-16 bản MP3 hoàn chỉnh, mỗi bản có 1.200 giây nội dung âm thanh theo phép đo sau giải mã.
+17 bản MP3 hoàn chỉnh, mỗi bản có 1.200 giây nội dung âm thanh theo phép đo sau giải mã.
 
 | Ngôn ngữ | Tệp tải | Giọng |
 |---|---|---|
@@ -20,11 +20,10 @@
 | Phần Lan | [Tải MP3](./BERINGIA_01_fi-FI.mp3?raw=1) | fi-FI-HarriNeural |
 | Na Uy (Bokmål) | [Tải MP3](./BERINGIA_01_nb-NO.mp3?raw=1) | nb-NO-FinnNeural |
 | Séc | [Tải MP3](./BERINGIA_01_cs-CZ.mp3?raw=1) | cs-CZ-AntoninNeural |
+| H’mông Trắng — bản nháp cần kiểm tra phương ngữ | [Tải MP3](./BERINGIA_01_mww_female.mp3?raw=1) | hmong-female-3 |
 
 Các tệp SCRIPTS chứa lời đã dùng; TIMING chứa mốc của bản đọc; REPORTS chứa báo cáo đo. Tiếng Anh căn 120 ô 10 giây. Các bản dịch căn 12 chương 100 giây và khớp tổng thời lượng; đây không phải căn từng từ hay cam kết mọi cảnh đổi đúng cùng một từ trong mọi ngôn ngữ.
 
 Kịch bản Việt đã được trợ lý biên tập. Các bản dịch còn lại cần được người bản ngữ nghe và đọc rà soát trước khi xuất bản. Bản Hmong nếu có là bản nháp do trợ lý biên tập và đọc bằng preset Hmong nữ 3; phương ngữ Hmong Trắng chưa được xác nhận độc lập bằng người nghe bản ngữ.
 
 VOICE_PROFILES_LOCKED.json lưu mã giọng và các dấu vân tay tham chiếu để tái sử dụng. Mã giọng cố định không ngăn được nhà cung cấp cập nhật mô hình.
-
-Bản Hmong đầy đủ đang được xử lý riêng bằng Voice-Studio-Hmong 1.6.6.

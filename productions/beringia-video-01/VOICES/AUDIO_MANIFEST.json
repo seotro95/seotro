@@ -1,5 +1,5 @@
 {
-  "full_voice_count": 16,
+  "full_voice_count": 17,
   "voices": [
     {
       "locale": "en-US",
@@ -144,6 +144,15 @@
       "bytes": 9600620,
       "sha256": "fa9fd0e4fe5460c93a76bf83f69752e3812f299a0cac91be25fe6d13702b74fd",
       "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    },
+    {
+      "locale": "mww",
+      "language": "H’mông Trắng — bản nháp cần kiểm tra phương ngữ",
+      "filename": "BERINGIA_01_mww_female.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "523580540cacbd5cce85023597f6eebbba03520e86166d5ff4710c559f4cb2cd",
+      "review_status": "Bản Hmong do trợ lý biên tập; cần người bản ngữ rà soát nội dung và phương ngữ"
     }
   ]
 }

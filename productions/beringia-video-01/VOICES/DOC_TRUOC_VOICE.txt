@@ -1,4 +1,12 @@
-BERINGIA — VOICE
-Bản tiếng Anh en-US-AndrewNeural đã tạo qua chế độ trực tuyến của Melo-Viet-Studio 1.3.1 sau khi bàn giao tài liệu.
-WAV đo được 1.200,000 giây, 57.600.000 mẫu ở 48 kHz. MP3 64 kbps mono, giải mã kiểm tra đúng 1.200 giây. Căn 120 ô 10 giây, không cắt lời.
-Các bản ngôn ngữ khác đang xử lý; thư mục này chỉ chứa các bản đã được đăng cùng báo cáo đo. Bản dịch tự động cần được rà soát ngôn ngữ và nghe trước khi xuất bản.
+VOICE BERINGIA — ĐÃ TẠO 17 BẢN
+
+Mỗi MP3 có đúng 1.200 giây nội dung âm thanh theo phép đo giải mã, cùng độ dài với bản Anh.
+16 giọng nam: Anh, Việt, Tây Ban Nha, Pháp, Nhật, Hàn, Đức, Ý, Bồ Đào Nha, Hà Lan, Ba Lan, Thụy Điển, Đan Mạch, Phần Lan, Na Uy, Séc.
+1 giọng nữ: Hmong nữ 3, tạo bằng Native VITS + OpenVoice V2 của Voice-Studio-Hmong-1.6.6.
+
+Đọc README.md để tải từng bản. VOICE_PROFILES_LOCKED.json là hồ sơ giọng cập nhật dùng cho các tập sau; hồ sơ dự kiến trong gói tài liệu ban đầu được lập trước khi người dùng bổ sung công cụ Hmong 1.6.6.
+
+Anh căn 120 ô 10 giây. Bản dịch căn 12 chương 100 giây; không phải căn chính xác từng từ giữa các ngôn ngữ.
+Bản Việt và Hmong đã được trợ lý biên tập. Các bản dịch cần được người bản ngữ nghe và đọc kiểm tra trước khi xuất bản; phương ngữ Hmong Trắng chưa được xác nhận độc lập bằng người nghe bản ngữ.
+
+SCRIPTS: lời dùng để tạo giọng. TIMING: SRT của bản đọc. REPORTS: phép đo thời lượng và dấu vân tay tệp.

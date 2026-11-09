@@ -136,6 +136,7 @@
   "locale": "fr-FR",
   "translation_status": "machine_translation_native_editorial_and_listening_review_pending",
   "master_wav_locally_retained": false,
+  "github_blob_sha": "bd829949664a5085074a67136e4b3affcd160345",
   "translation_review_status": "Bản dịch tự động; cần người bản ngữ rà soát",
   "verified_pcm_parts_at_render": [
     "part-0001.wav"

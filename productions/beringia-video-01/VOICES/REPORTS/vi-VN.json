@@ -134,8 +134,9 @@
   "mp3_sha256": "6815db528501780aefbd29dd33c3cdd0d12d457369f9a644fb0114210b6f2b4a",
   "voice_id": "vi-VN-NamMinhNeural",
   "locale": "vi-VN",
-  "translation_status": "machine_translation_native_editorial_and_listening_review_pending",
+  "translation_status": "assistant_edited_Vietnamese_translation_native_listening_review_pending",
   "master_wav_locally_retained": false,
+  "github_blob_sha": "54f88c1f6b9bf11f71c3b77664bf38724ef9a827",
   "translation_review_status": "Bản Việt do trợ lý biên tập; cần nghe rà soát",
   "verified_pcm_parts_at_render": [
     "part-0001.wav"

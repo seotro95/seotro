@@ -257,8 +257,27 @@
       "max_used_post_tempo": 1.10784,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts"
+    },
+    {
+      "locale": "mww",
+      "name": "H’mông Trắng — bản nháp cần kiểm tra phương ngữ",
+      "voice_id": "hmong-female-3",
+      "gender": "Female",
+      "engine": "Voice-Studio-Hmong 1.6.6 Native VITS + OpenVoice V2",
+      "rate": "native speed 1.0",
+      "pitch": "native reference, no pitch shift",
+      "duration_seconds": 1200,
+      "mp3_reference_sha256": "523580540cacbd5cce85023597f6eebbba03520e86166d5ff4710c559f4cb2cd",
+      "translation_review_status": "Bản Hmong do trợ lý biên tập; cần người bản ngữ rà soát nội dung và phương ngữ",
+      "alignment_granularity": "100_seconds",
+      "max_used_post_tempo": 1.0250454166666667,
+      "source_commit": "061430d958b8d5fc14d04209c6f0cd20492382c2",
+      "reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+      "reference_url": "https://raw.githubusercontent.com/seotro95/seotro/061430d958b8d5fc14d04209c6f0cd20492382c2/voice-studio/assets/hmong/female-3.wav",
+      "audio_profile": "clear-v1",
+      "dialect_independently_verified": false
     }
   ],
   "continuity_note": "Reuse the exact engine, voice ID, locale, reference hash and settings. Preserve the supplied recordings as timbre references; third-party provider updates can change a voice despite a stable ID.",
-  "hmong_status": "Native 1.6.6 preset hmong-female-3 selected; full rendering in progress"
+  "hmong_status": "delivered_draft_native_review_pending"
 }

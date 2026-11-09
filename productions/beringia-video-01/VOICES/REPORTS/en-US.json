@@ -999,6 +999,7 @@
   "voice_id": "en-US-AndrewNeural",
   "locale": "en-US",
   "translation_status": "original_English_script",
+  "github_blob_sha": "d3e405aec00fbca786e85b73f05797eef09d8e9f",
   "translation_review_status": "Kịch bản tiếng Anh gốc",
   "verified_pcm_parts_at_render": [
     "part-0001.wav"

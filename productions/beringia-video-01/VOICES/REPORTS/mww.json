@@ -1,0 +1,199 @@
+{
+  "audio_seconds": 1200.0,
+  "sample_rate": 48000,
+  "part_start_seconds": [
+    0.0
+  ],
+  "timing_mode": "exact",
+  "target_seconds": 1200,
+  "duration_verified": true,
+  "duration_report": {
+    "verified": true,
+    "sample_rate": 48000,
+    "sample_frames": 57600000,
+    "audio_seconds": 1200.0,
+    "target_seconds": 1200.0,
+    "error_frames": 0
+  },
+  "sync_ok": true,
+  "sync_report": {
+    "complete": true,
+    "cues": [
+      {
+        "cue": 1,
+        "start_frame": 0,
+        "end_frame": 4800000,
+        "speech_frames": 4799934,
+        "tempo": 1.02458125,
+        "padding_frames": 66
+      },
+      {
+        "cue": 2,
+        "start_frame": 4800000,
+        "end_frame": 9600000,
+        "speech_frames": 4799888,
+        "tempo": 0.9467941666666667,
+        "padding_frames": 112
+      },
+      {
+        "cue": 3,
+        "start_frame": 9600000,
+        "end_frame": 14400000,
+        "speech_frames": 4799919,
+        "tempo": 0.9926535416666666,
+        "padding_frames": 81
+      },
+      {
+        "cue": 4,
+        "start_frame": 14400000,
+        "end_frame": 19200000,
+        "speech_frames": 4799883,
+        "tempo": 0.9791860416666667,
+        "padding_frames": 117
+      },
+      {
+        "cue": 5,
+        "start_frame": 19200000,
+        "end_frame": 24000000,
+        "speech_frames": 4799750,
+        "tempo": 0.997878125,
+        "padding_frames": 250
+      },
+      {
+        "cue": 6,
+        "start_frame": 24000000,
+        "end_frame": 28800000,
+        "speech_frames": 4799790,
+        "tempo": 1.0250454166666667,
+        "padding_frames": 210
+      },
+      {
+        "cue": 7,
+        "start_frame": 28800000,
+        "end_frame": 33600000,
+        "speech_frames": 4799887,
+        "tempo": 0.9856877083333333,
+        "padding_frames": 113
+      },
+      {
+        "cue": 8,
+        "start_frame": 33600000,
+        "end_frame": 38400000,
+        "speech_frames": 4799888,
+        "tempo": 0.9664152083333334,
+        "padding_frames": 112
+      },
+      {
+        "cue": 9,
+        "start_frame": 38400000,
+        "end_frame": 43200000,
+        "speech_frames": 4799849,
+        "tempo": 0.9319335416666666,
+        "padding_frames": 151
+      },
+      {
+        "cue": 10,
+        "start_frame": 43200000,
+        "end_frame": 48000000,
+        "speech_frames": 4799747,
+        "tempo": 0.937158125,
+        "padding_frames": 253
+      },
+      {
+        "cue": 11,
+        "start_frame": 48000000,
+        "end_frame": 52800000,
+        "speech_frames": 4790484,
+        "tempo": 1.0209487893614158,
+        "padding_frames": 9516
+      },
+      {
+        "cue": 12,
+        "start_frame": 52800000,
+        "end_frame": 57600000,
+        "speech_frames": 4799849,
+        "tempo": 0.9739614583333334,
+        "padding_frames": 151
+      }
+    ],
+    "target_seconds": 1200,
+    "actual_seconds": 1200.0,
+    "error_frames": 0,
+    "sample_rate": 48000
+  },
+  "locale": "mww",
+  "voice_id": "hmong-female-3",
+  "voice_name": "Hmong nữ 3",
+  "gender": "Female",
+  "engine": "Voice-Studio-Hmong 1.6.6 Native VITS + OpenVoice V2",
+  "engine_source_commit": "061430d958b8d5fc14d04209c6f0cd20492382c2",
+  "audio_profile": "clear-v1",
+  "reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+  "reference_file": "voice-studio/assets/hmong/female-3.wav",
+  "model_records": {
+    "native-vits/G_60000.pth": {
+      "repository": "leejnus/HmongTTS",
+      "revision": "2e1a9f025e9df08990cb87e2851aeee5bc9f7268",
+      "remote": "G_60000.pth",
+      "url": "https://huggingface.co/spaces/leejnus/HmongTTS/resolve/2e1a9f025e9df08990cb87e2851aeee5bc9f7268/G_60000.pth",
+      "size": 436823999,
+      "sha256": "91fc48eb69e5a2eb574e867ba82fda7c2df08a3d3b521457549a706b83b8449c"
+    },
+    "native-vits/config.json": {
+      "repository": "leejnus/HmongTTS",
+      "revision": "2e1a9f025e9df08990cb87e2851aeee5bc9f7268",
+      "remote": "hmong.json",
+      "url": "https://huggingface.co/spaces/leejnus/HmongTTS/resolve/2e1a9f025e9df08990cb87e2851aeee5bc9f7268/hmong.json",
+      "size": 1503,
+      "sha256": "7866b4a6039fc51c237795822a489f2e20608ed6cf732c558d3a24715f7bec06"
+    },
+    "openvoice-v2/converter.pth": {
+      "repository": "myshell-ai/OpenVoiceV2",
+      "revision": "f36e7edfe1684461a8343844af60babc2efbb727",
+      "remote": "converter/checkpoint.pth",
+      "url": "https://huggingface.co/myshell-ai/OpenVoiceV2/resolve/f36e7edfe1684461a8343844af60babc2efbb727/converter/checkpoint.pth",
+      "size": 131320490,
+      "sha256": "9652c27e92b6b2a91632590ac9962ef7ae2b712e5c5b7f4c34ec55ee2b37ab9e"
+    },
+    "openvoice-v2/config.json": {
+      "repository": "myshell-ai/OpenVoiceV2",
+      "revision": "f36e7edfe1684461a8343844af60babc2efbb727",
+      "remote": "converter/config.json",
+      "url": "https://huggingface.co/myshell-ai/OpenVoiceV2/resolve/f36e7edfe1684461a8343844af60babc2efbb727/converter/config.json",
+      "size": 838,
+      "sha256": "9dfff60350b8c63f2c664efd92a61b2516efb22671466960f0e5dfebd881fa47"
+    },
+    "wavmark/model.pth": {
+      "repository": "M4869/WavMark",
+      "revision": "0ad3c7b74f641bddb61f6b85cdf2de0d93a5bfef",
+      "remote": "step59000_snr39.99_pesq4.35_BERP_none0.30_mean1.81_std1.81.model.pkl",
+      "url": "https://huggingface.co/M4869/WavMark/resolve/0ad3c7b74f641bddb61f6b85cdf2de0d93a5bfef/step59000_snr39.99_pesq4.35_BERP_none0.30_mean1.81_std1.81.model.pkl",
+      "size": 10019039,
+      "sha256": "7a3d873d115c2c644685fb4cf109bdb299718296b88c871d3cf1c8e4cbc13144"
+    }
+  },
+  "alignment_granularity": "100_seconds",
+  "translation_status": "assistant_edited_Hmong_draft_native_linguistic_and_dialect_review_pending",
+  "white_hmong_dialect_independently_verified": false,
+  "mp3_file": "BERINGIA_01_mww_female.mp3",
+  "mp3_bytes": 9600620,
+  "mp3_sha256": "523580540cacbd5cce85023597f6eebbba03520e86166d5ff4710c559f4cb2cd",
+  "mp3_decoded_duration": {
+    "verified": true,
+    "sample_frames": 57600000,
+    "sample_rate": 48000,
+    "audio_seconds": 1200.0,
+    "error_frames": 0
+  },
+  "github_blob_sha": "217cfca362974acd77a0030bafc6c56ab677a8ef",
+  "translation_review_status": "Bản Hmong do trợ lý biên tập; cần người bản ngữ rà soát nội dung và phương ngữ",
+  "verified_pcm_parts_at_render": [
+    "part-0001.wav"
+  ],
+  "wav_download_included": false,
+  "delivery_files": [
+    "BERINGIA_01_mww_female.mp3",
+    "SCRIPTS/mww.txt",
+    "TIMING/mww.srt"
+  ]
+}
