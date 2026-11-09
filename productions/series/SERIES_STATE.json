@@ -1,0 +1,569 @@
+{
+  "schema_version": 1,
+  "repository": "seotro95/seotro",
+  "branch": "codex/beringia-video-01",
+  "resume_file": "productions/TIEP_TUC_TU_DAY.md",
+  "topic_index": "productions/series/TOPICS_001_100.csv",
+  "shared_voice_profiles": "productions/series/VOICE_PROFILES_LOCKED.json",
+  "active_topic": null,
+  "next_topic_id": 2,
+  "user_preferences": {
+    "language_for_collaboration": "Vietnamese",
+    "process_one_topic_at_a_time": true,
+    "primary_video_language": "English",
+    "target_duration_seconds": 1200,
+    "video_clip_seconds": 10,
+    "scene_count": 120,
+    "prompt_files": 12,
+    "prompts_per_txt": 10,
+    "generated_clips_audio": "silent",
+    "voice_count": 17,
+    "gender_rule": "Male for 16 languages; Female for White Hmong",
+    "delivery_order": [
+      "research and write topic script",
+      "deliver TXT script, prompt TXT files, shotlist and planned SRT",
+      "then generate voice and deliver separate language audio"
+    ],
+    "reuse_saved_voice_ids": true
+  },
+  "reference_video": {
+    "release_url": "https://github.com/seotro95/seotro/releases/tag/video",
+    "filename": "video.c.a.toi.mp4",
+    "sha256": "f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c",
+    "duration_seconds": 1262.933333,
+    "narration_language": "Russian",
+    "analysis": "productions/beringia-video-01/PHAN_TICH_VIDEO_NGUON_VA_QUY_TRINH.txt"
+  },
+  "completed_topic_1": {
+    "id": 1,
+    "title": "Beringia: vùng đất từng nối châu Á với châu Mỹ đã biến mất thế nào?",
+    "path": "productions/beringia-video-01",
+    "delivery_commit": "ff183d33b3c81467e43d45421bbd6682a7fdc3c0",
+    "documents_delivered": true,
+    "english_script_words": 2962,
+    "prompts_delivered": 120,
+    "voice_files_delivered": 17,
+    "verified_seconds_per_voice": 1200,
+    "video_rendered": false,
+    "translation_native_review_pending": true,
+    "white_hmong_dialect_independently_verified": false
+  },
+  "next_topics": [
+    {
+      "id": 2,
+      "title": "White Sands: những dấu chân cổ đã thay đổi mốc thời gian con người ở châu Mỹ.",
+      "status": "next",
+      "planned_path": "productions/video-02-white-sands",
+      "created": false
+    },
+    {
+      "id": 3,
+      "title": "Đứa trẻ Mal'ta và mối liên hệ bất ngờ giữa Siberia với tổ tiên người châu Mỹ.",
+      "status": "queued",
+      "planned_path": "productions/video-03-malta",
+      "created": false
+    }
+  ],
+  "topics": [
+    {
+      "id": 1,
+      "title": "Beringia: vùng đất từng nối châu Á với châu Mỹ đã biến mất thế nào?",
+      "status": "documents_and_17_voices_delivered_review_pending"
+    },
+    {
+      "id": 2,
+      "title": "White Sands: những dấu chân cổ đã thay đổi mốc thời gian con người ở châu Mỹ.",
+      "status": "next"
+    },
+    {
+      "id": 3,
+      "title": "Đứa trẻ Mal'ta và mối liên hệ bất ngờ giữa Siberia với tổ tiên người châu Mỹ.",
+      "status": "queued"
+    },
+    {
+      "id": 4,
+      "title": "Yana: hai chiếc răng nhỏ hé lộ một quần thể người tiền sử.",
+      "status": "queued"
+    },
+    {
+      "id": 5,
+      "title": "Upward Sun River: bộ gene từ Alaska làm bức tranh tổ tiên phức tạp hơn.",
+      "status": "queued"
+    },
+    {
+      "id": 6,
+      "title": "Denisova: nhận diện một nhóm người từ những mảnh xương rất nhỏ.",
+      "status": "queued"
+    },
+    {
+      "id": 7,
+      "title": "Denny: cô gái có mẹ Neanderthal và cha Denisova.",
+      "status": "queued"
+    },
+    {
+      "id": 8,
+      "title": "Baishiya: con người cổ đã sống trên cao nguyên khắc nghiệt ra sao?",
+      "status": "queued"
+    },
+    {
+      "id": 9,
+      "title": "Tianyuan: bộ xương cổ giúp nghiên cứu lịch sử cư dân Đông Á.",
+      "status": "queued"
+    },
+    {
+      "id": 10,
+      "title": "Ust'-Ishim: bộ gene cổ lưu giữ dấu vết gặp gỡ với Neanderthal.",
+      "status": "queued"
+    },
+    {
+      "id": 11,
+      "title": "Chiếc kim khâu bằng xương đã mở rộng thế giới sống của con người thế nào?",
+      "status": "queued"
+    },
+    {
+      "id": 12,
+      "title": "Một bộ quần áo giữ ấm bằng cách nào: giải thích vật lý qua tư liệu trang phục truyền thống.",
+      "status": "queued"
+    },
+    {
+      "id": 13,
+      "title": "Sợi gân động vật: công nghệ nhỏ phía sau đường khâu bền chắc.",
+      "status": "queued"
+    },
+    {
+      "id": 14,
+      "title": "Vì sao chất béo có vai trò lớn trong nhiều hệ thống sinh kế vùng lạnh?",
+      "status": "queued"
+    },
+    {
+      "id": 15,
+      "title": "Nấu ăn trước nồi đất: những bằng chứng về vật chứa và đá gia nhiệt.",
+      "status": "queued"
+    },
+    {
+      "id": 16,
+      "title": "Những bộ xương bị đập vỡ kể gì về việc khai thác tủy và mỡ?",
+      "status": "queued"
+    },
+    {
+      "id": 17,
+      "title": "Khi nhiều thịt chưa có nghĩa đủ năng lượng: bài toán dinh dưỡng của thợ săn.",
+      "status": "queued"
+    },
+    {
+      "id": 18,
+      "title": "Gió và hơi ẩm: hai đối thủ ít được chú ý trong câu chuyện giữ ấm.",
+      "status": "queued"
+    },
+    {
+      "id": 19,
+      "title": "Nhà bằng xương voi ma mút: kiến trúc, nguyên liệu và những điều còn tranh luận.",
+      "status": "queued"
+    },
+    {
+      "id": 20,
+      "title": "Một nơi trú nhỏ giúp tiết kiệm nhiệt như thế nào?",
+      "status": "queued"
+    },
+    {
+      "id": 21,
+      "title": "Ötzi: tái dựng những giờ cuối đời bằng khảo cổ và pháp y.",
+      "status": "queued"
+    },
+    {
+      "id": 22,
+      "title": "Sungir: hàng nghìn hạt trang trí cho thấy gì về quần áo và lao động?",
+      "status": "queued"
+    },
+    {
+      "id": 23,
+      "title": "Dolní Věstonice: người săn bắt đã thử nghiệm với đất nung ra sao?",
+      "status": "queued"
+    },
+    {
+      "id": 24,
+      "title": "Tượng gỗ Shigir: một vật liệu dễ mất đi đã tồn tại qua hàng thiên niên kỷ.",
+      "status": "queued"
+    },
+    {
+      "id": 25,
+      "title": "Bacho Kiro: những bộ gene cổ làm phức tạp hành trình của con người tại châu Âu.",
+      "status": "queued"
+    },
+    {
+      "id": 26,
+      "title": "Dấu chân Neanderthal: khoảnh khắc đời thường được giữ lại trong trầm tích.",
+      "status": "queued"
+    },
+    {
+      "id": 27,
+      "title": "El Sidrón: đọc đời sống của một nhóm Neanderthal qua xương và răng.",
+      "status": "queued"
+    },
+    {
+      "id": 28,
+      "title": "Chagyrskaya: bằng chứng di truyền về quan hệ gia đình thời tiền sử.",
+      "status": "queued"
+    },
+    {
+      "id": 29,
+      "title": "Cao răng cổ: kho dữ liệu nhỏ về thức ăn, môi trường và vi sinh vật.",
+      "status": "queued"
+    },
+    {
+      "id": 30,
+      "title": "Vỏ sò, sắc tố và đồ trang sức: nhận diện hành vi biểu tượng bằng cách nào?",
+      "status": "queued"
+    },
+    {
+      "id": 31,
+      "title": "Sunda và Sahul: khi bản đồ Đông Nam Á và Australia khác xa ngày nay.",
+      "status": "queued"
+    },
+    {
+      "id": 32,
+      "title": "Wallacea: vì sao hạ mực biển vẫn không xóa hết các đoạn phải vượt nước?",
+      "status": "queued"
+    },
+    {
+      "id": 33,
+      "title": "Madjedbebe: xác định tuổi một di chỉ quan trọng và các câu hỏi về cư trú sớm.",
+      "status": "queued"
+    },
+    {
+      "id": 34,
+      "title": "Monte Verde: một địa điểm ở Chile thách thức mô hình đến châu Mỹ muộn.",
+      "status": "queued"
+    },
+    {
+      "id": 35,
+      "title": "Mũi nhọn Clovis: công nghệ đá và giới hạn của việc suy ra danh tính người sử dụng.",
+      "status": "queued"
+    },
+    {
+      "id": 36,
+      "title": "Giả thuyết tuyến ven Thái Bình Dương: nguồn thức ăn và những bằng chứng cần tìm.",
+      "status": "queued"
+    },
+    {
+      "id": 37,
+      "title": "Hành lang không băng: mở đường địa lý chưa chắc đã có đường sống.",
+      "status": "queued"
+    },
+    {
+      "id": 38,
+      "title": "Các cây cầu đất xuất hiện và biến mất qua những chu kỳ băng hà.",
+      "status": "queued"
+    },
+    {
+      "id": 39,
+      "title": "Doggerland: vùng đất dưới Biển Bắc từng có thể nuôi sống những cộng đồng nào?",
+      "status": "queued"
+    },
+    {
+      "id": 40,
+      "title": "Tìm dấu người ở đáy biển: khảo cổ dưới nước khác săn kho báu thế nào?",
+      "status": "queued"
+    },
+    {
+      "id": 41,
+      "title": "Hạt tinh bột trên công cụ đá: bằng chứng về thực vật trong khẩu phần cổ.",
+      "status": "queued"
+    },
+    {
+      "id": 42,
+      "title": "Con người bắt đầu nấu chín thức ăn khi nào: phân biệt dấu lửa với bằng chứng nấu ăn.",
+      "status": "queued"
+    },
+    {
+      "id": 43,
+      "title": "Bánh mì trước nông nghiệp: những vụn cháy làm đảo lộn một câu chuyện quen thuộc.",
+      "status": "queued"
+    },
+    {
+      "id": 44,
+      "title": "Cối nghiền và cuộc sống trước đồng ruộng: thực vật hoang được chế biến thế nào?",
+      "status": "queued"
+    },
+    {
+      "id": 45,
+      "title": "Làm khô, hun khói, làm lạnh: tìm bằng chứng bảo quản thức ăn thời tiền sử.",
+      "status": "queued"
+    },
+    {
+      "id": 46,
+      "title": "Hố chứa dưới đất: kho dự trữ hay chỉ là một hố rác?",
+      "status": "queued"
+    },
+    {
+      "id": 47,
+      "title": "Nhuyễn thể và vùng triều: những bữa ăn nhỏ có thể giúp duy trì một cộng đồng.",
+      "status": "queued"
+    },
+    {
+      "id": 48,
+      "title": "Lưỡi câu và lao cá: biến đổi công nghệ khi con người khai thác môi trường nước.",
+      "status": "queued"
+    },
+    {
+      "id": 49,
+      "title": "Tại sao một mảnh xương cá có thể quan trọng hơn một bộ xương khổng lồ?",
+      "status": "queued"
+    },
+    {
+      "id": 50,
+      "title": "Băng hà lạnh nhưng không trống rỗng: đọc lại hệ sinh thái đồng cỏ voi ma mút.",
+      "status": "queued"
+    },
+    {
+      "id": 51,
+      "title": "Một chiếc răng voi ma mút có thể lưu hành trình di chuyển ra sao?",
+      "status": "queued"
+    },
+    {
+      "id": 52,
+      "title": "ADN môi trường: nhận diện hệ sinh thái từ đất thay vì từ bộ xương.",
+      "status": "queued"
+    },
+    {
+      "id": 53,
+      "title": "Phấn hoa cổ: dựng lại thảm thực vật từ những hạt cực nhỏ.",
+      "status": "queued"
+    },
+    {
+      "id": 54,
+      "title": "Trầm tích hồ: một cuốn biên niên sử không được viết bằng chữ.",
+      "status": "queued"
+    },
+    {
+      "id": 55,
+      "title": "Than trong đất nói gì về lửa tự nhiên và lửa do con người tạo ra?",
+      "status": "queued"
+    },
+    {
+      "id": 56,
+      "title": "Hóa thạch không phải lúc nào cũng hóa đá: những cách bảo tồn khác nhau.",
+      "status": "queued"
+    },
+    {
+      "id": 57,
+      "title": "Đông lạnh không bảo tồn mọi thứ: vì sao hồ sơ vùng cực vẫn đầy khoảng trống?",
+      "status": "queued"
+    },
+    {
+      "id": 58,
+      "title": "Móng, răng và xương: nhận diện dấu thú ăn thịt trước khi kết luận có người săn.",
+      "status": "queued"
+    },
+    {
+      "id": 59,
+      "title": "Tái dựng một cuộc săn: bằng chứng nào hỗ trợ, hình ảnh nào chỉ là minh họa?",
+      "status": "queued"
+    },
+    {
+      "id": 60,
+      "title": "Một khối băng tan có thể làm xuất hiện và phá hủy bằng chứng cùng lúc.",
+      "status": "queued"
+    },
+    {
+      "id": 61,
+      "title": "Săn bắt và hợp tác: vì sao đơn vị sống quan trọng hơn hình tượng người hùng đơn độc?",
+      "status": "queued"
+    },
+    {
+      "id": 62,
+      "title": "Chia sẻ thức ăn: khảo cổ học tìm dấu vết quan hệ xã hội bằng cách nào?",
+      "status": "queued"
+    },
+    {
+      "id": 63,
+      "title": "Hôn phối xa và trao đổi vật liệu: các mạng lưới có thể để lại dấu vết gì?",
+      "status": "queued"
+    },
+    {
+      "id": 64,
+      "title": "Đá obsidian: truy nguồn một công cụ để nhìn thấy khoảng cách trao đổi.",
+      "status": "queued"
+    },
+    {
+      "id": 65,
+      "title": "Vỏ sò ở sâu trong đất liền: vật nhỏ đã đi xa theo cách nào?",
+      "status": "queued"
+    },
+    {
+      "id": 66,
+      "title": "Trẻ em học chế tác đá: những dấu hiệu có thể tìm trong bãi công cụ.",
+      "status": "queued"
+    },
+    {
+      "id": 67,
+      "title": "Tuổi già thời tiền sử: chăm sóc và kinh nghiệm được nhận diện từ bằng chứng nào?",
+      "status": "queued"
+    },
+    {
+      "id": 68,
+      "title": "Mộ táng phong phú có chứng minh bất bình đẳng xã hội không?",
+      "status": "queued"
+    },
+    {
+      "id": 69,
+      "title": "Khi quần thể nhỏ bị cô lập: di truyền học giúp nghiên cứu điều gì?",
+      "status": "queued"
+    },
+    {
+      "id": 70,
+      "title": "Con người nhiều lần rời một vùng đất rồi quay lại: tránh kể di cư như đường thẳng.",
+      "status": "queued"
+    },
+    {
+      "id": 71,
+      "title": "Người Neanderthal dùng lửa thế nào, và vì sao bằng chứng phân bố không đều?",
+      "status": "queued"
+    },
+    {
+      "id": 72,
+      "title": "Nhựa hắc ín bạch dương: vật liệu kết dính và kỹ năng chế biến cổ.",
+      "status": "queued"
+    },
+    {
+      "id": 73,
+      "title": "Một công cụ ghép đòi hỏi bao nhiêu bước mà đá đơn lẻ không cho thấy?",
+      "status": "queued"
+    },
+    {
+      "id": 74,
+      "title": "Dây và nút buộc: công nghệ khó bảo tồn nhưng có thể làm thay đổi đời sống.",
+      "status": "queued"
+    },
+    {
+      "id": 75,
+      "title": "Dệt sợi trước quần áo hiện đại: những dấu tích mỏng manh của kỹ thuật mềm.",
+      "status": "queued"
+    },
+    {
+      "id": 76,
+      "title": "Hang động từng là nhà ở, nơi hoạt động hay điểm ghé thăm: xác định bằng cách nào?",
+      "status": "queued"
+    },
+    {
+      "id": 77,
+      "title": "Đèn mỡ và nghệ thuật hang động: bài toán mang ánh sáng vào bóng tối.",
+      "status": "queued"
+    },
+    {
+      "id": 78,
+      "title": "Sắc tố đất son: làm sao phân biệt ứng dụng thực tế với biểu tượng?",
+      "status": "queued"
+    },
+    {
+      "id": 79,
+      "title": "Bẫy và lưới thời tiền sử: bằng chứng gián tiếp về các công nghệ đã mục.",
+      "status": "queued"
+    },
+    {
+      "id": 80,
+      "title": "Trang phục, giày và túi đựng: những thứ mất đi đã khiến ta đánh giá thấp kỹ năng cổ thế nào?",
+      "status": "queued"
+    },
+    {
+      "id": 81,
+      "title": "Sahara xanh: những hồ nước và tuyến di chuyển trên một sa mạc khác ngày nay.",
+      "status": "queued"
+    },
+    {
+      "id": 82,
+      "title": "Arabia cổ: dấu chân, hồ nước và những cửa sổ khí hậu thuận lợi.",
+      "status": "queued"
+    },
+    {
+      "id": 83,
+      "title": "Levant: vùng cửa ngõ của nhiều đợt dịch chuyển con người.",
+      "status": "queued"
+    },
+    {
+      "id": 84,
+      "title": "Homo floresiensis: cuộc sống và tiến hóa trên đảo đặt ra câu hỏi gì?",
+      "status": "queued"
+    },
+    {
+      "id": 85,
+      "title": "Homo luzonensis: những mảnh xương mở rộng bản đồ họ hàng của chúng ta.",
+      "status": "queued"
+    },
+    {
+      "id": 86,
+      "title": "Dấu chân Laetoli: hiểu một hành vi từ vài giây được bảo tồn.",
+      "status": "queued"
+    },
+    {
+      "id": 87,
+      "title": "Schöningen: vũ khí gỗ làm thay đổi cách nhìn về kỹ năng săn bắt cổ.",
+      "status": "queued"
+    },
+    {
+      "id": 88,
+      "title": "Kalambo: gỗ cổ và câu hỏi con người đã tổ chức không gian sống đến đâu.",
+      "status": "queued"
+    },
+    {
+      "id": 89,
+      "title": "Shanidar: đánh giá lại câu chuyện ngôi mộ có hoa.",
+      "status": "queued"
+    },
+    {
+      "id": 90,
+      "title": "Hang Niah: sống trong môi trường nhiệt đới đặt ra những bài toán khác vùng băng hà.",
+      "status": "queued"
+    },
+    {
+      "id": 91,
+      "title": "ADN trong mái tóc cổ: một vật nhỏ giữ lại lịch sử cư dân Bắc Cực.",
+      "status": "queued"
+    },
+    {
+      "id": 92,
+      "title": "Đảo Greenland được con người đến ở qua những đợt dịch chuyển nào?",
+      "status": "queued"
+    },
+    {
+      "id": 93,
+      "title": "Thule và kỹ thuật sống tại Bắc Cực: giữ rõ niên đại khi so sánh với thời đồ đá cũ.",
+      "status": "queued"
+    },
+    {
+      "id": 94,
+      "title": "Thuyền da và tri thức biển: tìm hiểu kỹ thuật truyền thống qua đúng bối cảnh văn hóa.",
+      "status": "queued"
+    },
+    {
+      "id": 95,
+      "title": "Kính tuyết khe hẹp: giải pháp quang học từ vật liệu tự nhiên.",
+      "status": "queued"
+    },
+    {
+      "id": 96,
+      "title": "Những chiếc áo trở thành hồ sơ môi trường: vật liệu được lựa chọn cho từng chức năng.",
+      "status": "queued"
+    },
+    {
+      "id": 97,
+      "title": "Từ một mẫu vật đến công bố khoa học: dữ kiện thay đổi qua các vòng kiểm chứng thế nào?",
+      "status": "queued"
+    },
+    {
+      "id": 98,
+      "title": "Vì sao một niên đại quá đẹp vẫn cần được thử lại bằng phương pháp khác?",
+      "status": "queued"
+    },
+    {
+      "id": 99,
+      "title": "Khi phát hiện mới làm lịch sử phức tạp hơn: cách đọc một tuyên bố thay đổi mọi thứ.",
+      "status": "queued"
+    },
+    {
+      "id": 100,
+      "title": "Bản đồ loài người vẫn đang được vẽ lại: ghép khí hậu, khảo cổ và di truyền mà không làm mất con người.",
+      "status": "queued"
+    }
+  ]
+}
