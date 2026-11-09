@@ -1,0 +1,179 @@
+{
+  "topic": 2,
+  "seconds_per_voice": 1320,
+  "sample_frames_at_48000": 63360000,
+  "voice_count": 17,
+  "voices": [
+    {
+      "locale": "en-US",
+      "name": "Anh (Mỹ)",
+      "gender": "Male",
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "WHITE_SANDS_02_en-US.mp3",
+      "bytes": 10560620,
+      "sha256": "0746d9175c956ff15e27121945fc15438c93c20456a3bc4ee711af273f4b3a06",
+      "seconds": 1320
+    },
+    {
+      "locale": "vi-VN",
+      "name": "Việt Nam",
+      "gender": "Male",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "WHITE_SANDS_02_vi-VN.mp3",
+      "bytes": 10560620,
+      "sha256": "267db5fc90f3f326182fda1f4597f45a475bf2f46813039e9a2bc973666c3ceb",
+      "seconds": 1320
+    },
+    {
+      "locale": "es-ES",
+      "name": "Tây Ban Nha",
+      "gender": "Male",
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "WHITE_SANDS_02_es-ES.mp3",
+      "bytes": 10560620,
+      "sha256": "b7c57bb851632adb3eb9f8db7fbec7538aba43802edd9f0caaaba3c778233b86",
+      "seconds": 1320
+    },
+    {
+      "locale": "fr-FR",
+      "name": "Pháp",
+      "gender": "Male",
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "WHITE_SANDS_02_fr-FR.mp3",
+      "bytes": 10560620,
+      "sha256": "c3851f96496a6c70aa7c74030e85e67d723c5dc6d4ff5573698fc52b51762387",
+      "seconds": 1320
+    },
+    {
+      "locale": "ja-JP",
+      "name": "Nhật Bản",
+      "gender": "Male",
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "WHITE_SANDS_02_ja-JP.mp3",
+      "bytes": 10560620,
+      "sha256": "115494fd12c3cae5de7a6938dba20f14ea217566c2d09f3c975f8926cc8fa6a4",
+      "seconds": 1320
+    },
+    {
+      "locale": "ko-KR",
+      "name": "Hàn Quốc",
+      "gender": "Male",
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "WHITE_SANDS_02_ko-KR.mp3",
+      "bytes": 10560620,
+      "sha256": "c3aab75e9e34702cf36ebfd39df03b12d0fa509bb3ae8db366c56416d0ad1b6e",
+      "seconds": 1320
+    },
+    {
+      "locale": "de-DE",
+      "name": "Đức",
+      "gender": "Male",
+      "voice_id": "de-DE-ConradNeural",
+      "filename": "WHITE_SANDS_02_de-DE.mp3",
+      "bytes": 10560620,
+      "sha256": "8382602808b73e15c7b3caeff354a9d436b1bd595c052b271278b188eab7070e",
+      "seconds": 1320
+    },
+    {
+      "locale": "it-IT",
+      "name": "Ý",
+      "gender": "Male",
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "WHITE_SANDS_02_it-IT.mp3",
+      "bytes": 10560620,
+      "sha256": "9ff6a762ce0489598b1f58cf7cab0bd7b1912e51a862b88cb0e1a4f6728dd7d8",
+      "seconds": 1320
+    },
+    {
+      "locale": "pt-PT",
+      "name": "Bồ Đào Nha",
+      "gender": "Male",
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "WHITE_SANDS_02_pt-PT.mp3",
+      "bytes": 10560620,
+      "sha256": "58b42fcdc4cf7a43fb12fae8d9193545ba18e6d35259aa531614dafac1031e33",
+      "seconds": 1320
+    },
+    {
+      "locale": "nl-NL",
+      "name": "Hà Lan",
+      "gender": "Male",
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "WHITE_SANDS_02_nl-NL.mp3",
+      "bytes": 10560620,
+      "sha256": "6ac03589d58771eadee5e6db6736fb8a05125ed60b46332def915601cfb45aee",
+      "seconds": 1320
+    },
+    {
+      "locale": "pl-PL",
+      "name": "Ba Lan",
+      "gender": "Male",
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "WHITE_SANDS_02_pl-PL.mp3",
+      "bytes": 10560620,
+      "sha256": "36a86f2df97a3b57707616784af9fc4ba6ea6f55dbe13df4d3dc45d6a755af10",
+      "seconds": 1320
+    },
+    {
+      "locale": "sv-SE",
+      "name": "Thụy Điển",
+      "gender": "Male",
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "WHITE_SANDS_02_sv-SE.mp3",
+      "bytes": 10560620,
+      "sha256": "f289535d56114708574311120503aab7d1ad5f607a3dd720d8e961b4f28ef662",
+      "seconds": 1320
+    },
+    {
+      "locale": "da-DK",
+      "name": "Đan Mạch",
+      "gender": "Male",
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "WHITE_SANDS_02_da-DK.mp3",
+      "bytes": 10560620,
+      "sha256": "80076ddc8222e3de3bc99ce72b85a2ac83bd4bc7e85ce51220109824a98469b7",
+      "seconds": 1320
+    },
+    {
+      "locale": "fi-FI",
+      "name": "Phần Lan",
+      "gender": "Male",
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "WHITE_SANDS_02_fi-FI.mp3",
+      "bytes": 10560620,
+      "sha256": "d98be5f53c8ff1f7489b174f34f9f72dcae29065bdc94bfec96da19cd97cc592",
+      "seconds": 1320
+    },
+    {
+      "locale": "nb-NO",
+      "name": "Na Uy (Bokmål)",
+      "gender": "Male",
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "WHITE_SANDS_02_nb-NO.mp3",
+      "bytes": 10560620,
+      "sha256": "feaab448fce9f67d93e3c2340853ab87b1f3ded345e70bf6b306a79c80ba7b04",
+      "seconds": 1320
+    },
+    {
+      "locale": "cs-CZ",
+      "name": "Séc",
+      "gender": "Male",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "WHITE_SANDS_02_cs-CZ.mp3",
+      "bytes": 10560620,
+      "sha256": "ead5a361bb517e95e3ade6cbdd5761bb5ab7f4a4ca5636d674fc12cf4b52fdbe",
+      "seconds": 1320
+    },
+    {
+      "locale": "mww",
+      "name": "H’mông Trắng — bản nháp cần kiểm tra phương ngữ",
+      "gender": "Female",
+      "voice_id": "hmong-female-3",
+      "filename": "WHITE_SANDS_02_mww_female.mp3",
+      "bytes": 10560620,
+      "sha256": "d94b93aea0fffc227c04e0361e807f8e7178eec8ff1afa885b2e3acd043bf52b",
+      "seconds": 1320
+    }
+  ],
+  "native_review_pending": true
+}

@@ -5,8 +5,8 @@
   "resume_file": "productions/TIEP_TUC_TU_DAY.md",
   "topic_index": "productions/series/TOPICS_001_100.csv",
   "shared_voice_profiles": "productions/series/VOICE_PROFILES_LOCKED.json",
-  "active_topic": 2,
-  "next_topic_id": 2,
+  "active_topic": null,
+  "next_topic_id": 3,
   "user_preferences": {
     "language_for_collaboration": "Vietnamese",
     "process_one_topic_at_a_time": true,
@@ -38,7 +38,9 @@
         "5_matching_thumbnail_prompts"
       ],
       "when": "After the user supplies the generated clips."
-    }
+    },
+    "deduplicate_repeated_visual_contexts": true,
+    "prompt_files_follow_unique_prompt_count": true
   },
   "reference_video": {
     "release_url": "https://github.com/seotro95/seotro/releases/tag/video",
@@ -76,14 +78,14 @@
     {
       "id": 2,
       "title": "White Sands: những dấu chân cổ đã thay đổi mốc thời gian con người ở châu Mỹ.",
-      "status": "next",
+      "status": "documents_and_17_voices_delivered",
       "planned_path": "productions/video-02-white-sands",
       "created": true
     },
     {
       "id": 3,
       "title": "Đứa trẻ Mal'ta và mối liên hệ bất ngờ giữa Siberia với tổ tiên người châu Mỹ.",
-      "status": "queued",
+      "status": "next",
       "planned_path": "productions/video-03-malta",
       "created": false
     }
@@ -97,7 +99,7 @@
     {
       "id": 2,
       "title": "White Sands: những dấu chân cổ đã thay đổi mốc thời gian con người ở châu Mỹ.",
-      "status": "documents_delivered_12_voices_verified_5_in_repair"
+      "status": "documents_and_17_voices_delivered_native_review_pending"
     },
     {
       "id": 3,
@@ -590,7 +592,7 @@
       "status": "queued"
     }
   ],
-  "current_topic_2": {
+  "completed_topic_2": {
     "id": 2,
     "path": "productions/video-02-white-sands",
     "target_seconds": 1320,
@@ -601,7 +603,7 @@
     "prompt_txt_files": 10,
     "voice_count_expected": 17,
     "voice_profile_set_id": "science-prehistory-17-v1",
-    "voice_status": "12_verified_5_short_chunk_repairs_in_progress",
+    "voice_status": "17_delivered_technical_qa_passed_native_review_pending",
     "video_rendered": false,
     "reference_video_sha256": "f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c",
     "documents_zip_sha256": "10d87092d4559d4bb379115572e5fadfe1b7341e7486cd197188fab9790ab23d",
@@ -621,26 +623,34 @@
     "native_hmong_verified": true,
     "native_hmong_sha256": "d94b93aea0fffc227c04e0361e807f8e7178eec8ff1afa885b2e3acd043bf52b",
     "verified_voice_locales": [
-      "es-ES",
-      "cs-CZ",
-      "it-IT",
       "en-US",
-      "ko-KR",
+      "vi-VN",
+      "es-ES",
       "fr-FR",
       "ja-JP",
-      "pl-PL",
+      "ko-KR",
       "de-DE",
+      "it-IT",
       "pt-PT",
-      "vi-VN",
-      "mww"
-    ],
-    "repair_voice_locales": [
       "nl-NL",
+      "pl-PL",
       "sv-SE",
       "da-DK",
       "fi-FI",
-      "nb-NO"
+      "nb-NO",
+      "cs-CZ",
+      "mww"
     ],
-    "repair_chunk_characters": 480
+    "repair_voice_locales": [],
+    "repair_chunk_characters": 480,
+    "documents_delivered": true,
+    "voice_files_delivered": 17,
+    "verified_seconds_per_voice": 1320,
+    "voice_archive_url": "https://github.com/seotro95/seotro/releases/download/white-sands-video-02-22min/WHITE_SANDS_02_17_VOICES_22m.zip",
+    "voice_downloads_url": "https://github.com/seotro95/seotro/releases/tag/white-sands-video-02-22min",
+    "translation_native_review_pending": true,
+    "white_hmong_dialect_independently_verified": false,
+    "voice_asset_digests_verified": true,
+    "voice_release_published_at": "2026-11-09T21:10:48Z"
   }
 }

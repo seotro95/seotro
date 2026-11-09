@@ -2,18 +2,29 @@
 
 **White Sands: The Footprints That Changed America's Timeline**
 
-Kịch bản tiếng Anh gốc: 3.320 từ, 132 đoạn 10 giây, 12 chương. Mục tiêu 22:00. Kịch bản, mốc và prompt ở giai đoạn bàn giao tài liệu; chưa tuyên bố đã tạo voice hoặc có video dựng hoàn chỉnh.
+Đã bàn giao kịch bản tiếng Anh gốc 3.320 từ và 17 audio riêng, mỗi bản đo đúng 22:00 sau giải mã. Video chính chỉ dùng voice tiếng Anh. Chưa có bản dựng video chủ đề 2: chờ các clip tạo theo bộ prompt của tập này.
 
-- KICH_BAN_EN_22_PHUT.txt: lời đọc liên tục, không kèm chú thích để tránh đọc nhầm vào voice.
-- KICH_BAN_EN_CO_MOC.txt và LOI_DAN_EN_132_CANH.srt: 132 mốc lời dẫn.
-- PROMPTS/: 10 TXT, mỗi TXT đúng 10 prompt riêng, đánh số 001–100. Mỗi clip 10 giây, im lặng.
-- TIMELINE_132_CANH.csv: tra clip nào ứng với đoạn lời nào; cột NEW / REUSE phân biệt cảnh cần tạo và cảnh dùng lại.
-- CANH_DUNG_LAI_KHONG_TAO_MOI.csv: 32 vị trí dùng lại, có clip_id, mốc và cảnh nguồn. Không tạo thêm 32 prompt trùng.
-- HOOK_30_GIAY_8_SHOT.csv: 8 shot mở đầu từ chính kho clip; thay cách đặt hình 3 ô đầu, không nối thêm 30 giây vào voice.
-- PHAN_TICH_NGUON_VA_QUY_TRINH.txt: phân tích video nguồn và quy trình áp dụng.
-- NGUON_KIEM_CHUNG: nguồn khoa học, gồm các nghiên cứu 2021, 2023, 2025 và 2026.
-- VOICE_PROFILES_LOCKED_EXPECTED.json: giữ đúng 17 giọng tập 1. 16 nam; Hmong nữ 3. Target mới 1.320 giây.
+## Tải tài liệu và voice
 
-Đặt tên clip WS02_001.mp4 tới WS02_100.mp4. Số clip khác số cảnh timeline 001–132. Nhãn địa danh, năm, tuổi mẫu và số liệu phải thêm trong phần mềm dựng. Hình tạo sinh và sơ đồ là minh họa; không ghi hình đó thành ảnh khai quật hoặc dữ liệu gốc.
+- [ZIP kịch bản, prompt và hướng dẫn](https://github.com/seotro95/seotro/releases/download/white-sands-video-02-22min/WHITE_SANDS_VIDEO_02_TAI_LIEU_22_PHUT.zip)
+- [Kịch bản tiếng Anh](KICH_BAN_EN_22_PHUT.txt) · [132 mốc lời](KICH_BAN_EN_CO_MOC.txt)
+- [100 prompt: 10 TXT, đúng 10 prompt mỗi tệp](PROMPTS/)
+- [Timeline 132 cảnh](TIMELINE_132_CANH.csv) · [32 vị trí REUSE, không tạo clip mới](CANH_DUNG_LAI_KHONG_TAO_MOI.csv)
+- [Kế hoạch 8 shot trong 30 giây mở đầu](HOOK_30_GIAY_8_SHOT.csv)
+- [Một ZIP đủ 17 voice](https://github.com/seotro95/seotro/releases/download/white-sands-video-02-22min/WHITE_SANDS_02_17_VOICES_22m.zip)
+- [Bảng tải riêng từng voice](VOICES/README.md) · [Báo cáo và bản dịch](https://github.com/seotro95/seotro/releases/download/white-sands-video-02-22min/WHITE_SANDS_02_VOICE_DETAILS.zip)
+- [Hồ sơ 17 giọng cố định](VOICES/VOICE_PROFILES_LOCKED.json) · [Mã kiểm tra audio](VOICES/AUDIO_MANIFEST.json)
 
-Video chính chỉ có voice tiếng Anh. Các ngôn ngữ khác sẽ là audio tải riêng. Khi tạo audio, phải đo độ dài thực; bản dịch căn theo 12 chương 110 giây, không tuyên bố căn mọi từ theo tiếng Anh. Các bản dịch và phương ngữ Hmong Trắng cần rà soát bản ngữ trước khi xuất bản.
+## Dựng hình
+
+132 ô timeline, mỗi ô 10 giây, dùng 100 clip riêng. Đặt tên clip WS02_001.mp4 đến WS02_100.mp4; số clip khác số cảnh timeline. 32 ô REUSE đã ghi rõ clip nguồn. Mỗi prompt tạo một cảnh liên tục 10 giây, không âm thanh; loại bỏ mọi âm thanh clip khi dựng. Kế hoạch hook thay cách đặt hình trong 30 giây đầu, không nối thêm thời gian vào voice.
+
+Tham khảo [phân tích cách kể và dựng video nguồn](PHAN_TICH_NGUON_VA_QUY_TRINH.txt). Nhãn địa danh, niên đại và chú thích khoa học thêm khi edit. Hình tạo sinh là minh họa, không trình bày như ảnh khai quật gốc. [Bản đồ tham chiếu](REFERENCES/MAP_REFERENCE_NORTH_AMERICA.png) dùng đường bờ hiện đại để định hướng, không phải bờ biển cổ được tái dựng chính xác.
+
+## Kiểm tra voice
+
+16 giọng nam dùng backend online của Melo-Viet-Studio 1.3.1, giữ đúng ID tập 1. Hmong nữ 3 được tạo bằng Voice-Studio-Hmong 1.6.6 Native VITS + OpenVoice V2 với mẫu tham chiếu đã khóa. Từng MP3 được đo đúng 1.320 giây sau giải mã, tương ứng 63.360.000 mẫu ở 48 kHz. Tiếng Anh căn 132 ô 10 giây; bản dịch căn 12 chương 110 giây, không căn từng từ với tiếng Anh. Tốc độ hậu kỳ được tính lại cho từng tập.
+
+Bản dịch đã sửa những lỗi thuật ngữ được phát hiện nhưng vẫn cần người bản ngữ đọc/nghe rà soát. Phương ngữ Hmong Trắng chưa được xác nhận độc lập. ZIP tài liệu gốc là bản chụp thời điểm bàn giao trước khi tạo voice; hồ sơ voice hoàn tất nằm trong VOICES và release.
+
+Đã lưu trạng thái để lần sau tiếp tục chủ đề 3, không bắt đầu chủ đề 3 trong lượt này. Mục tiêu 22 phút là yêu cầu riêng của tập 2.

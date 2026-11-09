@@ -1,0 +1,149 @@
+{
+  "audio_seconds": 1320.0,
+  "sample_rate": 48000,
+  "parts": [
+    "part-0001.wav"
+  ],
+  "part_start_seconds": [
+    0.0
+  ],
+  "timing_mode": "exact",
+  "target_seconds": 1320,
+  "duration_verified": true,
+  "duration_report": {
+    "verified": true,
+    "sample_rate": 48000,
+    "sample_frames": 63360000,
+    "audio_seconds": 1320.0,
+    "target_seconds": 1320.0,
+    "error_frames": 0
+  },
+  "sync_ok": true,
+  "sync_report": {
+    "complete": true,
+    "cues": [
+      {
+        "cue": 1,
+        "start_frame": 0,
+        "end_frame": 5280000,
+        "speech_frames": 5279140,
+        "tempo": 1.1282181818181818,
+        "padding_frames": 860
+      },
+      {
+        "cue": 2,
+        "start_frame": 5280000,
+        "end_frame": 10560000,
+        "speech_frames": 5279423,
+        "tempo": 1.348581818181818,
+        "padding_frames": 577
+      },
+      {
+        "cue": 3,
+        "start_frame": 10560000,
+        "end_frame": 15840000,
+        "speech_frames": 5279312,
+        "tempo": 1.2628363636363635,
+        "padding_frames": 688
+      },
+      {
+        "cue": 4,
+        "start_frame": 15840000,
+        "end_frame": 21120000,
+        "speech_frames": 5279454,
+        "tempo": 1.374109090909091,
+        "padding_frames": 546
+      },
+      {
+        "cue": 5,
+        "start_frame": 21120000,
+        "end_frame": 26400000,
+        "speech_frames": 5279360,
+        "tempo": 1.3001454545454545,
+        "padding_frames": 640
+      },
+      {
+        "cue": 6,
+        "start_frame": 26400000,
+        "end_frame": 31680000,
+        "speech_frames": 5279602,
+        "tempo": 1.4895272727272728,
+        "padding_frames": 398
+      },
+      {
+        "cue": 7,
+        "start_frame": 31680000,
+        "end_frame": 36960000,
+        "speech_frames": 5279389,
+        "tempo": 1.3232727272727274,
+        "padding_frames": 611
+      },
+      {
+        "cue": 8,
+        "start_frame": 36960000,
+        "end_frame": 42240000,
+        "speech_frames": 5279412,
+        "tempo": 1.3409454545454544,
+        "padding_frames": 588
+      },
+      {
+        "cue": 9,
+        "start_frame": 42240000,
+        "end_frame": 47520000,
+        "speech_frames": 5279346,
+        "tempo": 1.2890181818181818,
+        "padding_frames": 654
+      },
+      {
+        "cue": 10,
+        "start_frame": 47520000,
+        "end_frame": 52800000,
+        "speech_frames": 5279286,
+        "tempo": 1.2423272727272727,
+        "padding_frames": 714
+      },
+      {
+        "cue": 11,
+        "start_frame": 52800000,
+        "end_frame": 58080000,
+        "speech_frames": 5279456,
+        "tempo": 1.3747636363636364,
+        "padding_frames": 544
+      },
+      {
+        "cue": 12,
+        "start_frame": 58080000,
+        "end_frame": 63360000,
+        "speech_frames": 5279295,
+        "tempo": 1.2495272727272728,
+        "padding_frames": 705
+      }
+    ],
+    "target_seconds": 1320,
+    "actual_seconds": 1320.0,
+    "error_frames": 0,
+    "sample_rate": 48000
+  },
+  "locale": "sv-SE",
+  "voice_id": "sv-SE-MattiasNeural",
+  "gender": "Male",
+  "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "alignment_granularity": "110_seconds",
+  "expected_pcm_frames_48000": 63360000,
+  "mp3_decoded_duration": {
+    "verified": true,
+    "sample_frames": 63360000,
+    "sample_rate": 48000,
+    "audio_seconds": 1320.0,
+    "error_frames": 0
+  },
+  "mp3_file": "WHITE_SANDS_02_sv-SE.mp3",
+  "mp3_bytes": 10560620,
+  "mp3_sha256": "f289535d56114708574311120503aab7d1ad5f607a3dd720d8e961b4f28ef662",
+  "max_used_post_tempo": 1.4895272727272728,
+  "min_used_post_tempo": 1.1282181818181818,
+  "max_cue_padding_seconds": 0.017916666666666668,
+  "translation_review_status": "machine draft; native editorial and listening review pending",
+  "numeric_speech_handling": "Original English numerals preserved; translated grouped integers normalized before sentence splitting; Hmong uses native number-word normalization."
+}
