@@ -78,7 +78,7 @@
       "title": "White Sands: những dấu chân cổ đã thay đổi mốc thời gian con người ở châu Mỹ.",
       "status": "next",
       "planned_path": "productions/video-02-white-sands",
-      "created": false
+      "created": true
     },
     {
       "id": 3,
@@ -97,7 +97,7 @@
     {
       "id": 2,
       "title": "White Sands: những dấu chân cổ đã thay đổi mốc thời gian con người ở châu Mỹ.",
-      "status": "documents_delivered_voice_generation_pending"
+      "status": "documents_delivered_voice_generation_in_progress"
     },
     {
       "id": 3,
@@ -601,9 +601,18 @@
     "prompt_txt_files": 10,
     "voice_count_expected": 17,
     "voice_profile_set_id": "science-prehistory-17-v1",
-    "voice_status": "not_generated_at_document_delivery",
+    "voice_status": "generating",
     "video_rendered": false,
     "reference_video_sha256": "f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c",
-    "documents_zip_sha256": "10d87092d4559d4bb379115572e5fadfe1b7341e7486cd197188fab9790ab23d"
+    "documents_zip_sha256": "10d87092d4559d4bb379115572e5fadfe1b7341e7486cd197188fab9790ab23d",
+    "documents_commit": "61c16890e0d8ed7bcc153bd193efab747fcaa954",
+    "voice_workflow_run_id": 42685972541,
+    "voice_workflow_url": "https://github.com/seotro95/seotro/actions/runs/42685972541",
+    "voice_build_branch": "codex/white-sands-voice-build-20261110",
+    "main_video_audio_language": "en-US",
+    "voice_translation_status": "Scientific meanings disambiguated; known Vietnamese and Hmong term errors edited; native review pending",
+    "native_hmong_engine": "Voice-Studio-Hmong 1.6.6 Native VITS + OpenVoice V2",
+    "native_hmong_reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+    "voice_release_tag": "white-sands-video-02-22min"
   }
 }
