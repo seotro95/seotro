@@ -24,7 +24,21 @@
       "deliver TXT script, prompt TXT files, shotlist and planned SRT",
       "then generate voice and deliver separate language audio"
     ],
-    "reuse_saved_voice_ids": true
+    "reuse_saved_voice_ids": true,
+    "video_editing": {
+      "match_original_english_voice": true,
+      "remove_all_original_clip_audio": true,
+      "opening_30_seconds": "Select the strongest relevant shots and cut faster to establish the story.",
+      "preserve_input_resolution": true,
+      "documentary_reference": "Use the inspected source video narrative rhythm, restrained cuts, short motivated dissolves, cold exterior and warm human scenes.",
+      "final_delivery": [
+        "finished_video_download",
+        "17_language_voice_downloads",
+        "5_titles",
+        "5_matching_thumbnail_prompts"
+      ],
+      "when": "After the user supplies the generated clips."
+    }
   },
   "reference_video": {
     "release_url": "https://github.com/seotro95/seotro/releases/tag/video",
@@ -44,9 +58,19 @@
     "prompts_delivered": 120,
     "voice_files_delivered": 17,
     "verified_seconds_per_voice": 1200,
-    "video_rendered": false,
+    "video_rendered": true,
     "translation_native_review_pending": true,
-    "white_hmong_dialect_independently_verified": false
+    "white_hmong_dialect_independently_verified": false,
+    "video_qa_status": "passed",
+    "video_duration_seconds": 1200,
+    "video_resolution": "1280x720",
+    "video_fps": 24,
+    "video_release_tag": "beringia-video-01-final-20min",
+    "video_url": "https://github.com/seotro95/seotro/releases/download/beringia-video-01-final-20min/BERINGIA_01_EN_FINAL_20m_720p.mp4",
+    "voice_archive_url": "https://github.com/seotro95/seotro/releases/download/beringia-video-01-final-20min/BERINGIA_01_17_VOICES.zip",
+    "edit_project_url": "https://github.com/seotro95/seotro/releases/download/beringia-video-01-final-20min/BERINGIA_01_EDIT_PROJECT.zip",
+    "edit_documentation_path": "productions/beringia-video-01/EDITING",
+    "opening_30_seconds_shots": 8
   },
   "next_topics": [
     {
@@ -68,7 +92,7 @@
     {
       "id": 1,
       "title": "Beringia: vùng đất từng nối châu Á với châu Mỹ đã biến mất thế nào?",
-      "status": "documents_and_17_voices_delivered_review_pending"
+      "status": "video_and_17_voices_delivered_native_review_pending"
     },
     {
       "id": 2,

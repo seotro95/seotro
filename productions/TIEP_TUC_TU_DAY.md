@@ -4,11 +4,13 @@ Dự án đã lưu trong repository **seotro95/seotro**, nhánh **codex/beringia
 
 ## Điểm tiếp tục
 
-- Chủ đề 1, **Beringia**, đã bàn giao tài liệu và 17 tệp voice, mỗi tệp có 1.200 giây nội dung âm thanh đã kiểm tra.
+- Chủ đề 1, **Beringia**, đã bàn giao tài liệu, 17 tệp voice và video tiếng Anh hoàn chỉnh **20:00**; bản dựng đã vượt qua kiểm tra kỹ thuật.
 - Tiếp theo: **Chủ đề 2 — White Sands: những dấu chân cổ đã thay đổi mốc thời gian con người ở châu Mỹ.**
 - Sau đó: **Chủ đề 3 — Đứa trẻ Mal'ta và mối liên hệ bất ngờ giữa Siberia với tổ tiên người châu Mỹ.**
 - Chưa bắt đầu viết hoặc tạo voice cho chủ đề 2 và 3 trong lần lưu này.
-- Chưa tạo hoặc dựng các clip video thành phẩm; chủ đề 1 đã bàn giao prompt và hướng dẫn dựng.
+- [Tải video hoàn chỉnh](https://github.com/seotro95/seotro/releases/download/beringia-video-01-final-20min/BERINGIA_01_EN_FINAL_20m_720p.mp4) · [Tải một ZIP đủ 17 giọng](https://github.com/seotro95/seotro/releases/download/beringia-video-01-final-20min/BERINGIA_01_17_VOICES.zip) · [Hồ sơ dựng, tiêu đề và prompt thumbnail](beringia-video-01/EDITING/README.md).
+- Bản dựng: 720p/24 fps, 190 đoạn hình, 6 chuyển cảnh hòa ngắn; 30 giây đầu gồm 8 cảnh. Âm thanh clip đầu vào đã được bỏ, giữ voice tiếng Anh, có phụ đề tùy chọn và 12 chương.
+- Mỗi lần có clip cho tập mới: ưu tiên dựng kỹ 30 giây đầu, khớp voice tiếng Anh, bỏ âm thanh clip, rồi bàn giao link video/voice và 5 tiêu đề với 5 prompt thumbnail.
 - Các bản dịch vẫn cần được người bản ngữ rà soát. Phương ngữ Hmong Trắng chưa được xác nhận độc lập; giữ đúng trạng thái này khi báo cáo.
 
 ## Đọc trước khi làm tiếp
