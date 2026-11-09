@@ -1,0 +1,149 @@
+{
+  "full_voice_count": 16,
+  "voices": [
+    {
+      "locale": "en-US",
+      "language": "Anh (Mỹ)",
+      "filename": "BERINGIA_01_en-US.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "7af2e283b1c16c048592aceb773f2762283301b1f127731e0cda5b4842f9bbe0",
+      "review_status": "Kịch bản tiếng Anh gốc"
+    },
+    {
+      "locale": "vi-VN",
+      "language": "Việt Nam",
+      "filename": "BERINGIA_01_vi-VN.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "6815db528501780aefbd29dd33c3cdd0d12d457369f9a644fb0114210b6f2b4a",
+      "review_status": "Bản Việt do trợ lý biên tập; cần nghe rà soát"
+    },
+    {
+      "locale": "es-ES",
+      "language": "Tây Ban Nha",
+      "filename": "BERINGIA_01_es-ES.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "a350ce6a968558493f2ccc8e96d3c95dfe1c6e85bd0ea7736f076bfe76c6ce6f",
+      "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    },
+    {
+      "locale": "fr-FR",
+      "language": "Pháp",
+      "filename": "BERINGIA_01_fr-FR.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "6c6401ba7c81dda9c68605eda94395d6425fb95b33a7059b98fa1916bdaf91e5",
+      "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    },
+    {
+      "locale": "ja-JP",
+      "language": "Nhật Bản",
+      "filename": "BERINGIA_01_ja-JP.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "f1752426c8fb29ae3ae5a03967850d4af13fb9c5312ed74b882d2e77108d079b",
+      "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    },
+    {
+      "locale": "ko-KR",
+      "language": "Hàn Quốc",
+      "filename": "BERINGIA_01_ko-KR.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "ad8ddc20db113055a78f5f6a06813b406662baf098d03f2d543381d7df08c1db",
+      "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    },
+    {
+      "locale": "de-DE",
+      "language": "Đức",
+      "filename": "BERINGIA_01_de-DE.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "534252269f06ec265ee9feebcbdedc6ec1da2002cca76d95e8d4e42b63d7d3ce",
+      "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    },
+    {
+      "locale": "it-IT",
+      "language": "Ý",
+      "filename": "BERINGIA_01_it-IT.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "0b7902be6685247b2cc481a364ac2aae3eaf41d173e2d3c5f6f8483b81b363f4",
+      "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    },
+    {
+      "locale": "pt-PT",
+      "language": "Bồ Đào Nha",
+      "filename": "BERINGIA_01_pt-PT.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "b4f421a5280cd05852a92a3f38c6ba1280e3f48d0f1a18c47c563da07232f3b0",
+      "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    },
+    {
+      "locale": "nl-NL",
+      "language": "Hà Lan",
+      "filename": "BERINGIA_01_nl-NL.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "0a31562ae6f82e39310049fc9ad86c9e888deb687795fdf2e524bdea63102eb7",
+      "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    },
+    {
+      "locale": "pl-PL",
+      "language": "Ba Lan",
+      "filename": "BERINGIA_01_pl-PL.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "c8e6501c6cbea758b29a8bdfdcb7fa0f5346ec6928f8009d6eb184c7109993e8",
+      "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    },
+    {
+      "locale": "sv-SE",
+      "language": "Thụy Điển",
+      "filename": "BERINGIA_01_sv-SE.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "02d1ec30509d0920fa5a67ac02bd1e391ff7db61c448845616f1b3f9687b8f50",
+      "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    },
+    {
+      "locale": "da-DK",
+      "language": "Đan Mạch",
+      "filename": "BERINGIA_01_da-DK.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "fe3d7ffa816ebb76fe5704d53c2630856dd716ed58be8f3df960e4f175fa05a6",
+      "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    },
+    {
+      "locale": "fi-FI",
+      "language": "Phần Lan",
+      "filename": "BERINGIA_01_fi-FI.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "8798e5bc2c2059f3697eda732a44fad24112eba8f5a39699178e77514d020e47",
+      "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    },
+    {
+      "locale": "nb-NO",
+      "language": "Na Uy (Bokmål)",
+      "filename": "BERINGIA_01_nb-NO.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "1f9730242ca6d503896ee472cef35c5325b4fb96cd2c1366bdb67066f2041cc8",
+      "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    },
+    {
+      "locale": "cs-CZ",
+      "language": "Séc",
+      "filename": "BERINGIA_01_cs-CZ.mp3",
+      "seconds": 1200,
+      "bytes": 9600620,
+      "sha256": "fa9fd0e4fe5460c93a76bf83f69752e3812f299a0cac91be25fe6d13702b74fd",
+      "review_status": "Bản dịch tự động; cần người bản ngữ rà soát"
+    }
+  ]
+}

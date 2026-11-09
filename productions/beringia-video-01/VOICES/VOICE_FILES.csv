@@ -1,0 +1,17 @@
+locale,language,filename,seconds,bytes,sha256,review_status
+en-US,Anh (Mỹ),BERINGIA_01_en-US.mp3,1200,9600620,7af2e283b1c16c048592aceb773f2762283301b1f127731e0cda5b4842f9bbe0,Kịch bản tiếng Anh gốc
+vi-VN,Việt Nam,BERINGIA_01_vi-VN.mp3,1200,9600620,6815db528501780aefbd29dd33c3cdd0d12d457369f9a644fb0114210b6f2b4a,Bản Việt do trợ lý biên tập; cần nghe rà soát
+es-ES,Tây Ban Nha,BERINGIA_01_es-ES.mp3,1200,9600620,a350ce6a968558493f2ccc8e96d3c95dfe1c6e85bd0ea7736f076bfe76c6ce6f,Bản dịch tự động; cần người bản ngữ rà soát
+fr-FR,Pháp,BERINGIA_01_fr-FR.mp3,1200,9600620,6c6401ba7c81dda9c68605eda94395d6425fb95b33a7059b98fa1916bdaf91e5,Bản dịch tự động; cần người bản ngữ rà soát
+ja-JP,Nhật Bản,BERINGIA_01_ja-JP.mp3,1200,9600620,f1752426c8fb29ae3ae5a03967850d4af13fb9c5312ed74b882d2e77108d079b,Bản dịch tự động; cần người bản ngữ rà soát
+ko-KR,Hàn Quốc,BERINGIA_01_ko-KR.mp3,1200,9600620,ad8ddc20db113055a78f5f6a06813b406662baf098d03f2d543381d7df08c1db,Bản dịch tự động; cần người bản ngữ rà soát
+de-DE,Đức,BERINGIA_01_de-DE.mp3,1200,9600620,534252269f06ec265ee9feebcbdedc6ec1da2002cca76d95e8d4e42b63d7d3ce,Bản dịch tự động; cần người bản ngữ rà soát
+it-IT,Ý,BERINGIA_01_it-IT.mp3,1200,9600620,0b7902be6685247b2cc481a364ac2aae3eaf41d173e2d3c5f6f8483b81b363f4,Bản dịch tự động; cần người bản ngữ rà soát
+pt-PT,Bồ Đào Nha,BERINGIA_01_pt-PT.mp3,1200,9600620,b4f421a5280cd05852a92a3f38c6ba1280e3f48d0f1a18c47c563da07232f3b0,Bản dịch tự động; cần người bản ngữ rà soát
+nl-NL,Hà Lan,BERINGIA_01_nl-NL.mp3,1200,9600620,0a31562ae6f82e39310049fc9ad86c9e888deb687795fdf2e524bdea63102eb7,Bản dịch tự động; cần người bản ngữ rà soát
+pl-PL,Ba Lan,BERINGIA_01_pl-PL.mp3,1200,9600620,c8e6501c6cbea758b29a8bdfdcb7fa0f5346ec6928f8009d6eb184c7109993e8,Bản dịch tự động; cần người bản ngữ rà soát
+sv-SE,Thụy Điển,BERINGIA_01_sv-SE.mp3,1200,9600620,02d1ec30509d0920fa5a67ac02bd1e391ff7db61c448845616f1b3f9687b8f50,Bản dịch tự động; cần người bản ngữ rà soát
+da-DK,Đan Mạch,BERINGIA_01_da-DK.mp3,1200,9600620,fe3d7ffa816ebb76fe5704d53c2630856dd716ed58be8f3df960e4f175fa05a6,Bản dịch tự động; cần người bản ngữ rà soát
+fi-FI,Phần Lan,BERINGIA_01_fi-FI.mp3,1200,9600620,8798e5bc2c2059f3697eda732a44fad24112eba8f5a39699178e77514d020e47,Bản dịch tự động; cần người bản ngữ rà soát
+nb-NO,Na Uy (Bokmål),BERINGIA_01_nb-NO.mp3,1200,9600620,1f9730242ca6d503896ee472cef35c5325b4fb96cd2c1366bdb67066f2041cc8,Bản dịch tự động; cần người bản ngữ rà soát
+cs-CZ,Séc,BERINGIA_01_cs-CZ.mp3,1200,9600620,fa9fd0e4fe5460c93a76bf83f69752e3812f299a0cac91be25fe6d13702b74fd,Bản dịch tự động; cần người bản ngữ rà soát

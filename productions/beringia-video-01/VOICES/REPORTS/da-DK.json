@@ -1,0 +1,149 @@
+{
+  "audio_seconds": 1200.0,
+  "sample_rate": 48000,
+  "part_start_seconds": [
+    0.0
+  ],
+  "timing_mode": "exact",
+  "target_seconds": 1200,
+  "duration_verified": true,
+  "duration_report": {
+    "verified": true,
+    "sample_rate": 48000,
+    "sample_frames": 57600000,
+    "audio_seconds": 1200.0,
+    "target_seconds": 1200.0,
+    "error_frames": 0
+  },
+  "sync_ok": true,
+  "sync_report": {
+    "complete": true,
+    "cues": [
+      {
+        "cue": 1,
+        "start_frame": 0,
+        "end_frame": 4800000,
+        "speech_frames": 4798965,
+        "tempo": 0.99264,
+        "padding_frames": 1035
+      },
+      {
+        "cue": 2,
+        "start_frame": 4800000,
+        "end_frame": 9600000,
+        "speech_frames": 4799048,
+        "tempo": 1.04712,
+        "padding_frames": 952
+      },
+      {
+        "cue": 3,
+        "start_frame": 9600000,
+        "end_frame": 14400000,
+        "speech_frames": 4799111,
+        "tempo": 1.08768,
+        "padding_frames": 889
+      },
+      {
+        "cue": 4,
+        "start_frame": 14400000,
+        "end_frame": 19200000,
+        "speech_frames": 4799081,
+        "tempo": 1.06848,
+        "padding_frames": 919
+      },
+      {
+        "cue": 5,
+        "start_frame": 19200000,
+        "end_frame": 24000000,
+        "speech_frames": 4799168,
+        "tempo": 1.12512,
+        "padding_frames": 832
+      },
+      {
+        "cue": 6,
+        "start_frame": 24000000,
+        "end_frame": 28800000,
+        "speech_frames": 4799262,
+        "tempo": 1.18632,
+        "padding_frames": 738
+      },
+      {
+        "cue": 7,
+        "start_frame": 28800000,
+        "end_frame": 33600000,
+        "speech_frames": 4799076,
+        "tempo": 1.06512,
+        "padding_frames": 924
+      },
+      {
+        "cue": 8,
+        "start_frame": 33600000,
+        "end_frame": 38400000,
+        "speech_frames": 4799168,
+        "tempo": 1.12488,
+        "padding_frames": 832
+      },
+      {
+        "cue": 9,
+        "start_frame": 38400000,
+        "end_frame": 43200000,
+        "speech_frames": 4799121,
+        "tempo": 1.09488,
+        "padding_frames": 879
+      },
+      {
+        "cue": 10,
+        "start_frame": 43200000,
+        "end_frame": 48000000,
+        "speech_frames": 4799198,
+        "tempo": 1.14432,
+        "padding_frames": 802
+      },
+      {
+        "cue": 11,
+        "start_frame": 48000000,
+        "end_frame": 52800000,
+        "speech_frames": 4799150,
+        "tempo": 1.11336,
+        "padding_frames": 850
+      },
+      {
+        "cue": 12,
+        "start_frame": 52800000,
+        "end_frame": 57600000,
+        "speech_frames": 4799086,
+        "tempo": 1.07184,
+        "padding_frames": 914
+      }
+    ],
+    "target_seconds": 1200,
+    "actual_seconds": 1200.0,
+    "error_frames": 0,
+    "sample_rate": 48000
+  },
+  "alignment_granularity": "100_seconds",
+  "mp3_decoded_duration": {
+    "verified": true,
+    "sample_frames": 57600000,
+    "sample_rate": 48000,
+    "audio_seconds": 1200.0,
+    "error_frames": 0
+  },
+  "mp3_file": "BERINGIA_01_da-DK.mp3",
+  "mp3_bytes": 9600620,
+  "mp3_sha256": "fe3d7ffa816ebb76fe5704d53c2630856dd716ed58be8f3df960e4f175fa05a6",
+  "voice_id": "da-DK-JeppeNeural",
+  "locale": "da-DK",
+  "translation_status": "machine_translation_native_editorial_and_listening_review_pending",
+  "master_wav_locally_retained": false,
+  "translation_review_status": "Bản dịch tự động; cần người bản ngữ rà soát",
+  "verified_pcm_parts_at_render": [
+    "part-0001.wav"
+  ],
+  "wav_download_included": false,
+  "delivery_files": [
+    "BERINGIA_01_da-DK.mp3",
+    "SCRIPTS/da-DK.txt",
+    "TIMING/da-DK.srt"
+  ]
+}
