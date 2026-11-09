@@ -97,7 +97,7 @@
     {
       "id": 2,
       "title": "White Sands: những dấu chân cổ đã thay đổi mốc thời gian con người ở châu Mỹ.",
-      "status": "documents_delivered_voice_generation_in_progress"
+      "status": "documents_delivered_12_voices_verified_5_in_repair"
     },
     {
       "id": 3,
@@ -601,18 +601,46 @@
     "prompt_txt_files": 10,
     "voice_count_expected": 17,
     "voice_profile_set_id": "science-prehistory-17-v1",
-    "voice_status": "generating",
+    "voice_status": "12_verified_5_short_chunk_repairs_in_progress",
     "video_rendered": false,
     "reference_video_sha256": "f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c",
     "documents_zip_sha256": "10d87092d4559d4bb379115572e5fadfe1b7341e7486cd197188fab9790ab23d",
     "documents_commit": "61c16890e0d8ed7bcc153bd193efab747fcaa954",
-    "voice_workflow_run_id": 42685972541,
-    "voice_workflow_url": "https://github.com/seotro95/seotro/actions/runs/42685972541",
+    "voice_workflow_run_id": 42691960841,
+    "voice_workflow_url": "https://github.com/seotro95/seotro/actions/runs/42691960841",
     "voice_build_branch": "codex/white-sands-voice-build-20261110",
     "main_video_audio_language": "en-US",
     "voice_translation_status": "Scientific meanings disambiguated; known Vietnamese and Hmong term errors edited; native review pending",
     "native_hmong_engine": "Voice-Studio-Hmong 1.6.6 Native VITS + OpenVoice V2",
     "native_hmong_reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
-    "voice_release_tag": "white-sands-video-02-22min"
+    "voice_release_tag": "white-sands-video-02-22min",
+    "preserved_voice_workflow_run_id": 42688207969,
+    "numeric_speech_handling": "Integer thousands preserved before splitting; original English unchanged; native Hmong numbers converted to words by tool.",
+    "english_voice_verified": true,
+    "english_voice_sha256": "0746d9175c956ff15e27121945fc15438c93c20456a3bc4ee711af273f4b3a06",
+    "native_hmong_verified": true,
+    "native_hmong_sha256": "d94b93aea0fffc227c04e0361e807f8e7178eec8ff1afa885b2e3acd043bf52b",
+    "verified_voice_locales": [
+      "es-ES",
+      "cs-CZ",
+      "it-IT",
+      "en-US",
+      "ko-KR",
+      "fr-FR",
+      "ja-JP",
+      "pl-PL",
+      "de-DE",
+      "pt-PT",
+      "vi-VN",
+      "mww"
+    ],
+    "repair_voice_locales": [
+      "nl-NL",
+      "sv-SE",
+      "da-DK",
+      "fi-FI",
+      "nb-NO"
+    ],
+    "repair_chunk_characters": 480
   }
 }

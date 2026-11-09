@@ -5,7 +5,7 @@ Dự án đã lưu trong repository **seotro95/seotro**, nhánh **codex/beringia
 ## Điểm tiếp tục
 
 - Chủ đề 1, **Beringia**, đã bàn giao tài liệu, 17 tệp voice và video tiếng Anh hoàn chỉnh **20:00**; bản dựng đã vượt qua kiểm tra kỹ thuật.
-- Đang thực hiện: **Chủ đề 2 — White Sands**, theo yêu cầu mới dài **22 phút**. [Kịch bản, 100 prompt và 32 cảnh dùng lại](video-02-white-sands/README.md) đã bàn giao. [Tạo 16 giọng nam trên GitHub](https://github.com/seotro95/seotro/actions/runs/42685972541) đang chạy; Hmong nữ 3 được tạo bằng tool Native riêng.
+- Đang thực hiện: **Chủ đề 2 — White Sands**, dài **22 phút**. Tài liệu đã bàn giao; 11 giọng nam và Hmong đã đo đủ 22:00. [Hoàn tất 5 giọng còn lại](https://github.com/seotro95/seotro/actions/runs/42691960841) bằng đoạn 480 ký tự, giữ nguyên ID giọng. [Voice Anh và Hmong tải trước](video-02-white-sands/VOICES/README.md).
 - Sau đó: **Chủ đề 3 — Đứa trẻ Mal'ta và mối liên hệ bất ngờ giữa Siberia với tổ tiên người châu Mỹ.**
 - Chủ đề 2 đã có 3.320 từ tiếng Anh, 132 ô lời 10 giây, 12 chương 110 giây và mục tiêu 17 audio riêng, mỗi bản 1.320 giây. Giữ đúng profile giọng tập 1. Chủ đề 3 chưa bắt đầu.
 - [Tải video hoàn chỉnh](https://github.com/seotro95/seotro/releases/download/beringia-video-01-final-20min/BERINGIA_01_EN_FINAL_20m_720p.mp4) · [Tải một ZIP đủ 17 giọng](https://github.com/seotro95/seotro/releases/download/beringia-video-01-final-20min/BERINGIA_01_17_VOICES.zip) · [Hồ sơ dựng, tiêu đề và prompt thumbnail](beringia-video-01/EDITING/README.md).
