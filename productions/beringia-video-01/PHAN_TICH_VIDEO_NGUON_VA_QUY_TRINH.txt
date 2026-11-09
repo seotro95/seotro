@@ -1,0 +1,87 @@
+PHÂN TÍCH VIDEO NGUỒN VÀ QUY TRÌNH SẢN XUẤT
+
+1. PHẠM VI ĐÃ KIỂM TRA
+Nguồn người dùng cung cấp: https://github.com/seotro95/seotro/releases/tag/video
+Tệp: video.c.a.toi.mp4
+SHA-256 đã tính trên tệp tải về và khớp: f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c.
+Thời lượng: 1.262,933 giây, khoảng 21 phút 03 giây. Hình: 1280 x 720, tệp mã hóa 60 fps. Tiếng: AAC, 44,1 kHz, stereo. Lời dẫn là tiếng Nga. Đây là thông số tệp nguồn, không phải yêu cầu bắt buộc cho video mới.
+Đã xem chuỗi hình mở đầu, các khung hình lấy mẫu xuyên suốt video, đọc bản nhận dạng lời dẫn có mốc thời gian và kiểm tra các điểm đổi hình nổi bật. Nhận dạng tự động có lỗi tên riêng và từ ngữ; phần dưới là phân tích biên tập, không phải bản chép đã hiệu đính để phát hành.
+Các nhận định ở đây áp dụng cho video được cung cấp, không phải kết luận thống kê về toàn bộ kênh. Không xác định được chính xác phần mềm, mô hình AI, prompt hay quy trình hậu kỳ của tác giả gốc chỉ từ tệp thành phẩm.
+
+2. ĐÚNG DẠNG NỘI DUNG LÀ GÌ?
+Phim tài liệu khoa học phổ thông về sinh tồn thời tiền sử, giao thoa khảo cổ, di truyền học, sinh lý học và kỹ thuật đời sống. Không có người dẫn xuất hiện nói trước máy quay. Lời kể dẫn dắt; hình ảnh tái hiện và đồ họa giải thích lần lượt hỗ trợ từng ý.
+ADN cổ và hai chiếc răng ở Yana tạo lối vào câu chuyện. Chủ đề trung tâm của phần lớn video là hệ thống giữ ấm: thức ăn, cơ thể, quần áo, chỗ trú, vật liệu, dự trữ và quan hệ cộng đồng.
+Nên học cấu trúc đặt câu hỏi, mở rộng quy mô và kết nối các bằng chứng. Không cần lấy lại câu chữ, logo, hình cụ thể hoặc kết luận tu từ độc đáo của bản gốc.
+
+3. VÌ SAO CÁCH KỂ CUỐN?
+Mở từ chi tiết nhỏ có con người: hai trẻ em và hai chiếc răng. Tiếp theo là độ sâu thời gian, môi trường khắc nghiệt và công bố khoa học. Người xem được đặt một câu hỏi lớn sau khi đã có vật để hình dung.
+Khoảng 01:04, câu chuyện chuyển từ phát hiện ADN sang lời giải quen thuộc về lửa. Khoảng 01:49, nó đưa ra cách nhìn khác: kiểm soát mất nhiệt qua nhiều lớp. Đây là luận điểm giữ các phần sau liên kết với nhau.
+Mỗi phần giải một bài toán cụ thể rồi dẫn sang bài toán tiếp theo: thức ăn tạo năng lượng; cơ thể chuyển hóa; quần áo giữ nhiệt; nơi trú làm lớp ngoài; vật liệu và quan hệ xã hội giúp cả hệ thống tiếp tục hoạt động.
+Phần cuối quay lại luận điểm mở đầu, rồi so với nhà tiết kiệm năng lượng và công nghệ hiện đại. Người xem nhận được ý nghĩa hiện tại của một câu chuyện xa xưa.
+Các con số, di chỉ, năm nghiên cứu và vật cụ thể làm lời dẫn có điểm tựa. Chúng cần được kiểm chứng độc lập trước khi đưa sang nội dung mới.
+
+4. BẢN ĐỒ NỘI DUNG VIDEO NGUỒN, MỐC XẤP XỈ
+00:00–01:04: hai chiếc răng Yana, ADN cổ, bối cảnh di truyền và vùng cực.
+01:04–02:44: vấn đề nhiên liệu, nguyên lý giữ nhiệt nhiều lớp, nhiệt từ cơ thể.
+02:44–04:14: thức ăn, chất béo, xương và năng lượng.
+04:14–05:19: chuyển hóa và di truyền liên quan thích nghi lạnh.
+05:19–09:05: trang phục, kim khâu, Sungir, vật liệu và điều tiết hơi ẩm.
+09:05–12:03: các cấu trúc bằng xương, nhiên liệu, dự trữ và thể tích nơi trú.
+12:03–13:47: tư liệu nhà tuyết và đèn mỡ trong bối cảnh Inuit về sau.
+13:47–15:20: Ötzi, giày, vật liệu và việc mang theo than hồng.
+15:20–16:38: tài nguyên từ động vật và vật liệu chế tác.
+16:38–17:34: quan hệ giữa các nhóm người và trao đổi.
+17:34–19:20: tổng hợp hệ thống, biến đổi khí hậu và lịch sử quần thể.
+19:20–21:03: liên hệ hiện đại và đoạn kết quay về luận điểm trung tâm.
+
+5. CÁCH VIẾT KỊCH BẢN MỚI
+Chọn một câu hỏi đủ cụ thể để giải trong 20 phút. Viết một câu trả lời làm trục; mọi chương phải làm trục ấy rõ hơn.
+Mở 30–60 giây bằng vật chứng hoặc cảnh có thể hình dung. Đặt địa điểm và mốc thời gian khi có căn cứ. Nêu điều gây tò mò, rồi cho người xem biết họ sẽ hiểu điều gì ở cuối video.
+Trong mỗi chương: đặt một bài toán; đưa dữ kiện hoặc vật chứng; giải thích bằng một hình ảnh đời thường; nói rõ điều dữ kiện thực sự cho phép kết luận; mở câu hỏi tiếp theo.
+Cứ khoảng một đến hai phút nên có thông tin làm thay đổi cách hiểu, một bằng chứng mới hoặc một chuyển đổi quy mô. Đây là nhịp biên tập đề xuất, không phải quy luật tuyệt đối.
+Dùng động từ và đồ vật cụ thể. Chuyển câu nhiều mệnh đề thành hai câu dễ đọc. Đọc thử tên riêng, con số và từ chuyên môn; giải thích từ lạ ngay khi cần dùng.
+Tạo sức hấp dẫn từ vấn đề thật và cách giải thích rõ. Tránh tự thêm âm mưu, khẳng định tất cả lịch sử đều sai, hoặc biến giả thuyết thành phát hiện đã xác nhận.
+Đoạn kết phải trả lời câu hỏi đầu, nhắc lại hình ảnh mở bằng một ý nghĩa mới và để ngỏ đúng câu hỏi nghiên cứu còn lại.
+
+6. PHONG CÁCH HÌNH ẢNH VÀ CHUYỂN ĐỘNG
+Video nguồn luân phiên tái hiện người tiền sử, cảnh quan, vật chứng cận cảnh, khai quật, phòng thí nghiệm, bản đồ và đồ họa khoa học. Chuỗi đầu có chuyển động nhân vật và môi trường thực trong khung hình, không chỉ là ảnh tĩnh được phóng to.
+Tông ngoài trời thường lạnh, xanh xám và nâu đất; lửa hoặc nội thất tạo điểm ấm. Chuyển động chủ yếu vừa đủ để đọc rõ hành động và cảm nhận không gian.
+Học cách thay đổi quy mô: toàn cảnh đặt nơi chốn; trung cảnh cho thấy hoạt động; cận cảnh cho thấy vật liệu; đồ họa giải thích quan hệ không nhìn thấy trực tiếp.
+Mỗi clip tạo sinh nên có một hành động chính và một chuyển động máy rõ. Tránh yêu cầu nhiều biến cố, nhiều thời đại hoặc đổi ba góc máy trong cùng một clip 10 giây.
+Tạo ảnh tham chiếu nhân vật và bối cảnh trước nếu công cụ hỗ trợ. Dùng lại các ảnh này để giữ khuôn mặt, trang phục, mùa, vật liệu và thời đại. Với sơ đồ, bản đồ, chữ và số, ưu tiên tài sản đã kiểm tra và thêm đồ họa trong phần mềm dựng.
+
+7. NHỊP EDIT QUAN SÁT ĐƯỢC VÀ CÁCH ÁP DỤNG
+Một lượt tìm điểm đổi hình bằng FFmpeg, lấy mẫu 6 fps và ngưỡng scene 0,28, cho khoảng 191 ứng viên trên video nguồn. Trung vị khoảng cách giữa các ứng viên khoảng 5,7 giây. Đây không phải số shot được gán nhãn thủ công: đồ họa có thể tạo ứng viên giả và fade có thể bị bỏ sót.
+Quan sát trực tiếp cho thấy nhiều đoạn đổi hình sau vài giây; một số toàn cảnh giữ lâu hơn. Vì vậy, không nên suy rằng video mẫu đổi hình đúng mỗi 10 giây.
+Yêu cầu của dự án mới là 120 clip nguồn, mỗi clip 10 giây, tổng 1.200 giây. Các clip này là nguyên liệu dựng. Có thể giữ một số clip trọn 10 giây và chia khoảng một nửa clip thành hai phần 6+4 hoặc 5+5 giây bằng cắt dựng và đổi khung số có chủ đích. Như vậy có thể đạt khoảng 180 đoạn hình mà vẫn giữ tổng thời lượng.
+Đổi khung số là crop/phóng khung từ cùng một góc, không phải một góc quay thật mới. Chỉ dùng khi có chi tiết phù hợp và độ phân giải đủ. Khi cần góc cận khác thực sự, tạo thêm ảnh/clip bổ trợ tương ứng, thay vì coi crop là bằng chứng đã có góc quay mới.
+Ưu tiên hard cut tại chỗ đổi ý. Dùng dissolve ngắn khi chuyển thời gian, không gian hoặc từ hình minh họa sang bản đồ nếu cần. Không có yêu cầu phải thêm hiệu ứng chuyển cảnh ở mọi lần cắt.
+Nguồn có chữ năm, nhãn quốc gia và yếu tố kêu gọi tương tác. Với video mới, thêm chữ đã kiểm tra trong phần mềm dựng; prompt tạo video để sạch chữ. Dùng nhận diện thương hiệu riêng.
+
+8. QUY TRÌNH TỪ ĐỀ TÀI ĐẾN BẢN DỰNG
+Bước 1: lập câu hỏi, luận điểm và bảng nguồn; phân biệt dữ kiện, mô hình và cảnh tái hiện.
+Bước 2: viết kịch bản tiếng Anh chính, chia 120 đoạn có ID 001–120 và mốc 10 giây. Hiệu đính nội dung trước khi tạo voice.
+Bước 3: tạo shotlist từ ý chính từng đoạn lời dẫn; chọn quy mô khung hình và chuyển động phù hợp. Chuẩn bị bản đồ, bảng số và tư liệu thật riêng.
+Bước 4: khóa bộ ảnh tham chiếu cho cảnh tái hiện. Tạo 120 clip im lặng từ 12 tệp prompt; đặt tên 001.mp4 đến 120.mp4.
+Bước 5: xem lại lỗi giải phẫu, bàn tay, vật liệu, thời đại, địa hình, hình dáng công cụ và tính liên tục. Cảnh đẹp nhưng sai ý phải tạo lại hoặc thay.
+Bước 6: nhập timeline 20 phút; dùng SRT và shotlist để đặt cảnh theo lời. Khi đã có voice thật, kiểm tra lại từng mốc, không chỉ dựa vào số từ dự tính.
+Bước 7: thêm nhãn thời gian, địa danh, chú thích minh họa và trích nguồn ở nơi phù hợp. Không để đồ họa tạo sinh giả làm kết quả xét nghiệm hay ảnh cổ vật thật.
+Bước 8: xử lý voice và cân mức nghe sau khi tạo; chỉ giữ phần âm thanh được lựa chọn cho bản cuối. Các clip tạo sinh của bộ này không cần tiếng, nhạc hoặc hiệu ứng.
+Bước 9: kiểm tra bản xuất: đủ 20 phút, đúng thứ tự cảnh, đúng chữ và số, không còn âm thanh ngoài ý muốn, không thiếu câu hoặc cắt đuôi lời.
+
+9. ĐẶC TẢ CHỦ ĐỀ 1
+Tiêu đề EN: Before There Was a Sea: The Lost Land of Beringia.
+Tiêu đề VI: Trước khi nơi này thành biển: vùng đất Beringia đã mất.
+Luận điểm: cần nhìn Beringia như một vùng sinh thái gắn với đời sống nhiều thế hệ, đồng thời phân biệt phần đất bị ngập với toàn bộ khu vực Beringia rộng lớn.
+Kịch bản tiếng Anh chính gồm 2.962 từ, 120 đoạn. Mục tiêu là 20 phút ở nhịp trung bình khoảng 148 từ/phút. Các mốc SRT hiện là kế hoạch, chưa phải thời gian đo từ voice mới.
+120 prompt, 12 TXT, đúng 10 prompt mỗi tệp, đánh số liên tục. Mỗi prompt tạo một clip im lặng 10 giây. Đã chọn hành động, góc nhìn và chuyển động cho từng cảnh.
+Không tạo voice mới cho bản Beringia trong giai đoạn bàn giao tài liệu này. Bước voice bắt đầu sau khi đã bàn giao các tệp theo thứ tự người dùng yêu cầu.
+
+10. NHỮNG ĐIỂM CẦN GIỮ CHÍNH XÁC
+Không gọi toàn bộ Beringia là vùng đã chìm; nhiều phần trên Siberia, Alaska và Yukon vẫn ở trên cạn.
+Không vẽ cầu đất như cầu gỗ, dải băng hẹp hoặc con đường được xây sẵn.
+Không khẳng định có một tuyến, một ngày đến hay một làng trên thềm biển nếu nguồn không chứng minh.
+Không gắn quốc tịch hiện đại cho quần thể tiền sử hoặc dùng gene để khẳng định toàn bộ bản sắc cộng đồng hiện nay.
+Các tuyến ven biển, thời điểm và mô hình cô lập quần thể cần được trình bày đúng mức chứng cứ. Phân biệt tuyến giả thuyết với tuyến đã được xác lập.
+White Sands cung cấp bằng chứng người ở xa về phía nam, không tự xác định họ đã qua Beringia bằng tuyến nào.
+Các cảnh con người trên thềm đất cổ là tái hiện minh họa; nhân vật không phải chân dung phục dựng từ một bộ gene cụ thể.

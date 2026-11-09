@@ -1,0 +1,58 @@
+NGUỒN VÀ RANH GIỚI CHỨNG CỨ — VIDEO 01 BERINGIA
+
+Video tham chiếu do người dùng cung cấp:
+https://github.com/seotro95/seotro/releases/tag/video
+Chỉ dùng để phân tích cách kể chuyện và dựng hình. Các phát biểu khoa học trong nội dung mới được đối chiếu với nguồn riêng dưới đây.
+
+1. National Park Service — About Beringia
+https://www.nps.gov/subjects/beringia/about.htm
+Khái niệm khu vực Beringia rộng hơn cầu đất; bối cảnh băng hà, nước biển thấp và sự dịch chuyển sinh vật.
+
+2. National Park Service — Nature and Science: Beringia
+https://www.nps.gov/subjects/beringia/nature.htm
+Môi trường, địa chất, sự đa dạng sinh thái; không nên hình dung toàn vùng là một hoang mạc tuyết đồng nhất.
+
+3. National Park Service — Beringia: Lost World of the Ice Age
+https://www.nps.gov/articles/aps-v12-i2-c8.htm
+Đặc điểm vùng ít băng phủ, khí hậu và hệ sinh thái. Cần đọc các nhận định trong đúng phạm vi không gian và niên đại của bài.
+
+4. National Park Service — Pleistocene Megafauna in Beringia
+https://www.nps.gov/articles/aps-17-1-4.htm
+Động vật, vật liệu được bảo tồn và cách môi trường thay đổi. Các loài không hiện diện đồng nhất ở mọi phần của Beringia; ví dụ tê giác lông mượt thuộc phía Siberia trong mô tả được dẫn.
+
+5. National Park Service — The Bering Land Bridge Theory
+https://www.nps.gov/bela/learn/historyculture/the-bering-land-bridge-theory.htm
+Lịch sử nghiên cứu và bối cảnh các mô hình di cư. Một sơ đồ tuyến đường không thay thế bằng chứng niên đại và môi trường.
+
+6. National Park Service — Standstill theory article
+https://www.nps.gov/subjects/beringia/standstill-theory-article.htm
+Mô hình cô lập tương đối và vấn đề sinh thái nơi cư trú. Một số chứng cứ, chẳng hạn cách đọc dấu cắt và niên đại tại Bluefish Caves, có tranh luận. Kịch bản không dùng chúng như mốc đã giải quyết dứt điểm.
+
+7. Moreno-Mayar và cộng sự, Nature, 2018
+Terminal Pleistocene Alaskan genome reveals first founding population of Native Americans.
+DOI: 10.1038/nature25173
+https://www.nature.com/articles/nature25173
+Ví dụ Upward Sun River và quần thể Ancient Beringians. Các phân nhánh, thời điểm và vị trí địa lý là kết quả của mô hình trên dữ liệu; bộ gene không cho biết trực tiếp một tuyến đi chính xác. Nhãn quần thể nghiên cứu không đồng nghĩa quốc tịch hoặc toàn bộ bản sắc của cộng đồng hiện đại.
+
+8. Pigati và cộng sự, Science, 2023; trang công bố USGS
+Independent age estimates resolve the controversy of ancient human footprints at White Sands.
+DOI: 10.1126/science.adh5007
+https://www.usgs.gov/publications/independent-age-estimates-resolve-controversy-ancient-human-footprints-white-sands
+Kiểm tra tuổi các lớp dấu chân bằng phấn hoa trên cạn và phép đo phát quang, hỗ trợ khoảng tuổi đã báo cáo xấp xỉ 23.000–21.000 năm. Đây là bằng chứng có người tại White Sands; không tự chứng minh một tuyến đi cụ thể qua Beringia.
+
+9. USGS — Study confirms age of oldest fossil human footprints in North America
+https://www.usgs.gov/news/national-news-release/study-confirms-age-oldest-fossil-human-footprints-north-america
+Giải thích dễ tiếp cận hơn về vấn đề carbon cũ trong vật liệu thủy sinh và các cách kiểm tra độc lập.
+
+10. USGS — Humans experienced abrupt environmental changes at White Sands during the Last Glacial Maximum, 2026
+https://pubs.usgs.gov/publication/70283320
+Nguồn cập nhật được tìm thấy khi chuẩn bị bộ tài liệu: trình bày khoảng niên đại tinh chỉnh xấp xỉ 23,5–21,7 nghìn năm. Kịch bản nhắc kết quả kiểm tra năm 2023 và dùng khoảng tuổi làm tròn của công bố đó, không gọi khoảng làm tròn là phép đo mới nhất.
+
+PHÂN LOẠI HÌNH ẢNH
+- Phim tái hiện gia đình, hoạt động, trang phục và điểm cắm trại là minh họa khả năng; không phải cảnh được chứng minh từng chi tiết từ một di chỉ trên thềm biển.
+- Sơ đồ ADN, quần thể, hạ mực nước, hành lang và tuyến ven biển là mô hình giải thích. Nhãn giả thuyết, nguồn dữ liệu và niên đại được thêm trong edit.
+- Các cảnh phòng thí nghiệm tạo sinh không phải video ghi lại nhóm tác giả nghiên cứu thực tế.
+- Không tạo giấy công bố giả, ảnh xét nghiệm giả hoặc thành phố chìm để đóng vai bằng chứng.
+- Trước khi xuất bản, đối chiếu bản đồ và dữ kiện trọng yếu với nguồn gốc. Việc một trang được đọc công khai không tự cấp quyền tái sử dụng mọi hình ảnh trên trang; ưu tiên tài sản có quyền sử dụng rõ hoặc tự tạo sơ đồ từ dữ kiện đã kiểm tra.
+
+Các đề tài trong tệp 100 chủ đề chưa phải 100 hồ sơ nghiên cứu hoàn chỉnh. Chúng là danh sách ý tưởng để tiếp tục làm từng tập.
