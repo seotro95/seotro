@@ -5,7 +5,7 @@
   "resume_file": "productions/TIEP_TUC_TU_DAY.md",
   "topic_index": "productions/series/TOPICS_001_100.csv",
   "shared_voice_profiles": "productions/series/VOICE_PROFILES_LOCKED.json",
-  "active_topic": null,
+  "active_topic": 2,
   "next_topic_id": 2,
   "user_preferences": {
     "language_for_collaboration": "Vietnamese",
@@ -97,7 +97,7 @@
     {
       "id": 2,
       "title": "White Sands: những dấu chân cổ đã thay đổi mốc thời gian con người ở châu Mỹ.",
-      "status": "next"
+      "status": "documents_delivered_voice_generation_pending"
     },
     {
       "id": 3,
@@ -589,5 +589,21 @@
       "title": "Bản đồ loài người vẫn đang được vẽ lại: ghép khí hậu, khảo cổ và di truyền mà không làm mất con người.",
       "status": "queued"
     }
-  ]
+  ],
+  "current_topic_2": {
+    "id": 2,
+    "path": "productions/video-02-white-sands",
+    "target_seconds": 1320,
+    "english_words": 3320,
+    "timeline_cues": 132,
+    "unique_prompts": 100,
+    "reused_timeline_slots": 32,
+    "prompt_txt_files": 10,
+    "voice_count_expected": 17,
+    "voice_profile_set_id": "science-prehistory-17-v1",
+    "voice_status": "not_generated_at_document_delivery",
+    "video_rendered": false,
+    "reference_video_sha256": "f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c",
+    "documents_zip_sha256": "10d87092d4559d4bb379115572e5fadfe1b7341e7486cd197188fab9790ab23d"
+  }
 }

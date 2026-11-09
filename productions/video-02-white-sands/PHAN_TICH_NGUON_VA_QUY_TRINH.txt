@@ -1,0 +1,40 @@
+PHÂN TÍCH VIDEO NGUỒN VÀ ÁP DỤNG CHO CHỦ ĐỀ 2
+
+Video nguồn: https://github.com/seotro95/seotro/releases/tag/video
+Tệp video.c.a.toi.mp4; SHA-256 f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c.
+Digest trên release đã được đối chiếu lại với tệp đã phân tích ở chủ đề 1. Thời lượng nguồn khoảng 21:03, 1280x720, lời dẫn tiếng Nga. Đã đọc lại transcript, xem lại bảng hình mở đầu và các hình lấy mẫu xuyên suốt. Đây là phân tích của tệp được cung cấp, không phải thống kê toàn bộ kênh hay xác định chính xác phần mềm của tác giả.
+
+DẠNG NỘI DUNG
+Phim tài liệu khoa học phổ thông có lời kể dẫn dắt, kết hợp tái hiện đời sống, vật chứng, thực địa, phòng thí nghiệm và đồ họa giải thích. Video mẫu mở bằng trẻ em và hai chiếc răng tại Yana, rồi mở rộng sang ADN, môi trường và các bài toán sinh tồn. Các phần nối nhau bằng một câu hỏi hoặc một lỗ hổng trong cách giải thích trước đó.
+
+CÁCH KỂ CHUYỆN ĐƯỢC ÁP DỤNG
+Mở từ một hành động nhỏ có con người: bàn chân đặt xuống bùn. Chuyển ngay sang điều đáng ngạc nhiên: dấu chân tồn tại rất lâu và được dùng để kiểm tra niên đại con người ở châu Mỹ. Câu hỏi giữ người xem là: làm sao biết tuổi của một bước chân khi người bước và đường bờ cũ đã mất?
+Mỗi chương đưa ra một vấn đề thật, một cách kiểm tra và câu hỏi tiếp theo. Hạt cây cho số tuổi; môi trường nước đặt ra bài toán carbon cũ; phấn hoa và quartz kiểm tra lại; địa tầng rộng hơn bổ sung bối cảnh; nghiên cứu mới làm rõ môi trường thay đổi. Đoạn kết trở lại dấu chân ban đầu với ý nghĩa đã khác.
+Không sao chép lời dẫn, watermark, nhân vật hoặc kết luận tu từ của nguồn. Sức cuốn đến từ câu hỏi có thật và việc giải thích rõ, không dựng âm mưu hoặc nói rằng mọi nhà khảo cổ đều sai.
+
+KHÁC BIỆT QUAN TRỌNG VỀ BỐI CẢNH
+Nguồn kể về vùng cực và giữ ấm; White Sands là một bồn địa ở miền nam New Mexico. Không chuyển igloo, băng phủ toàn cảnh, trang phục nghi lễ Bắc Cực hoặc rừng nhiệt đới sang Lake Otero. Dùng đúng Columbian mammoth khi có cảnh voi ma mút; không tự đổi thành mammoth lông dày.
+Các cảnh đời sống đều là tái hiện vô danh. Không gán tên, dân tộc, giới tính, quan hệ gia đình hoặc một cuộc săn cụ thể cho người để lại dấu chân nếu chứng cứ không cho phép. Không trộn câu chuyện trackway khác trong công viên thành chính những lớp 23.000 năm đang bàn.
+
+NHỊP HÌNH VÀ EDIT
+Clip tạo sinh dài 10 giây là nguyên liệu, không bắt buộc một shot dựng luôn giữ nguyên 10 giây. Mẫu dùng nhiều cắt trực tiếp khi đổi ý, xen toàn cảnh, trung cảnh và cận cảnh, với chuyển động máy vừa đủ. Chỉ dùng dissolve ngắn lúc đổi thời gian hoặc chuyển cảnh quan hiện tại sang tái hiện; không dùng transition phô trương ở mọi lần cắt.
+Giữ nhịp nhanh hơn trong 30 giây đầu. HOOK_30_GIAY_8_SHOT.csv chỉ định 8 đoạn lấy từ các clip vốn đã nằm trong 100 prompt, phủ đúng 00:00–00:30. Không thêm intro làm kéo dài voice. Từ cảnh 4 theo TIMELINE_132_CANH.csv; về sau có thể chia một số cảnh 6+4 giây bằng cận cảnh bổ trợ đã có hoặc đổi khung số nhẹ. Crop không phải một góc quay thật mới.
+Tông hình tự nhiên: xanh xám nhẹ ở phòng thí nghiệm và hiện tại, nâu đất và ánh ấm vừa phải ở bờ hồ cổ. Tránh làm cả White Sands thành vùng tuyết. Ưu tiên hành động và vật liệu đọc rõ hơn hiệu ứng.
+
+PROMPT VÀ CẢNH DÙNG LẠI
+132 ô timeline x 10 giây = 1.320 giây = 22 phút. Chỉ có 100 prompt tạo clip mới, chia đúng 10 TXT, mỗi TXT 10 prompt, số 001–100. 32 ô còn lại được đánh dấu REUSE và skip_new_generation=true; tra CANH_DUNG_LAI_KHONG_TAO_MOI.csv để biết clip nguồn. Không gửi các dòng REUSE vào công cụ tạo video.
+Số cảnh timeline 001–132 khác số clip 001–100; dùng cột clip_id và filename, không tự coi chúng là một dãy. Một cảnh cùng địa điểm nhưng cần vật liệu, thao tác hoặc góc nhìn khoa học khác vẫn được giữ nếu nó truyền đạt ý mới; các cảnh thực sự lặp thiết lập đã được gom lại.
+EDITOR_GRAPHIC là nền/sơ đồ minh họa cần dựng đồ họa chính xác. Có thể làm trực tiếp trong phần mềm dựng thay vì trả phí tạo sinh. Bản đồ phải dùng ảnh tham chiếu địa lý đã kiểm tra; thêm chữ và số ở hậu kỳ. Không để AI tự vẽ đường di cư hoặc xuất số liệu rồi coi đó là kết quả nghiên cứu.
+Mỗi prompt quy định một clip 10 giây liên tục, một hành động chính, một chuyển động máy, không có audio track. Nếu công cụ vẫn xuất âm thanh, bỏ toàn bộ tiếng clip khi dựng. Video chính chỉ ghép voice tiếng Anh.
+
+ĐỘ DÀI VÀ VOICE
+Kịch bản tiếng Anh gốc có 3.320 từ, 132 đoạn, trung bình khoảng 151 từ/phút. Mốc 10 giây là kế hoạch căn voice; độ dài thực phải kiểm tra sau khi tạo. Mục tiêu mỗi bản audio là đúng 1.320 giây PCM: 63.360.000 mẫu ở 48.000 Hz.
+Giữ nguyên 17 ID giọng của chủ đề 1: 16 nam và Hmong nữ 3. Không chọn lại chỉ vì đang làm tập mới. Tiếng Anh căn từng ô 10 giây; bản dịch dự kiến căn 12 chương 110 giây để không phải bóp mọi ngôn ngữ vào cùng số từ. Khớp tổng và chương không có nghĩa mọi từ dịch đổi cảnh đúng cùng từ tiếng Anh.
+Tạo tài liệu và gửi link trước khi bắt đầu tạo voice. Sau khi tạo, phải đo WAV và MP3 đã giải mã, kiểm tra không cắt mất lời, lưu báo cáo thời lượng và khóa ID giọng. Tốc độ căn của tập 1 không phải một hệ số toàn cục áp dụng cho tập 2.
+
+NHỮNG ĐIỂM PHẢI KIỂM CHỨNG TRONG HẬU KỲ
+2021: công bố tuổi xấp xỉ 23.000–21.000 năm cho chuỗi dấu chân.
+2023: phấn hoa trên cạn và luminescence hỗ trợ khung niên đại cũ; phấn hoa và hạt vẫn cùng nguyên lý radiocarbon, quartz dùng nguyên lý khác.
+2025: khoảng >23.600 tới khoảng 17.000 năm nói về hồ sơ trầm tích rộng hơn, không gán cả khoảng này cho mọi dấu chân.
+2026: nghiên cứu mở rộng công bố 20 lớp chứa dấu vết và khung khoảng 23.500–21.700 năm; sự kiện khô hơn khoảng 23.200 năm được trình bày là liên hệ nghiên cứu, không phải cảnh thảm họa biết chính xác ngày.
+Dấu chân ở White Sands không tự xác định ngày đầu con người tới châu Mỹ hay tuyến vượt Beringia. Không tuyên bố một phát hiện xóa bỏ toàn bộ tranh luận. Chú thích minh họa ở nơi phù hợp; không dùng hình tái hiện làm ảnh vật chứng thật.
