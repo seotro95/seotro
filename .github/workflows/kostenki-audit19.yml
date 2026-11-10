@@ -1,4 +1,4 @@
-name: Kostenki19 audit all122 English provider word sequences
+name: Kostenki19 audit122 English cues including faithful fallback pieces
 on:
   push:
     branches: [codex/kostenki-voice-build-20261111]

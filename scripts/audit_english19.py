@@ -5,8 +5,9 @@ tokens=lambda s:re.findall(r'[a-z]+',s.lower())
 results=[]
 for cue,row in enumerate(rows,1):
     p=Path('checkpoint')/f'raw-{cue:03d}-01.words.jsonl'
-    assert p.exists(),str(p)
-    events=[json.loads(x) for x in p.read_text().splitlines()]
+    paths=[p] if p.exists() else sorted(Path('checkpoint').glob(f'raw-{cue:03d}-*.words.jsonl'))
+    assert paths,str(p)
+    events=[json.loads(x) for q in paths for x in q.read_text().splitlines()]
     spoken=' '.join(e['text'] for e in events if e.get('type')=='WordBoundary')
     results.append({'cue':cue,'tokens_match':tokens(spoken)==tokens(row['voice']),'expected_tokens':len(tokens(row['voice'])),'provider_tokens':len(tokens(spoken))})
 bad=[r['cue'] for r in results if not r['tokens_match']]
