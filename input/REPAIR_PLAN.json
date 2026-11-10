@@ -1,0 +1,33 @@
+{
+  "locales": [
+    "en-US",
+    "ja-JP",
+    "ko-KR"
+  ],
+  "source_runs": {
+    "en-US": 42826768097,
+    "ja-JP": 42830399069,
+    "ko-KR": 42830399069
+  },
+  "changed_chapters": {
+    "ja-JP": [
+      3,
+      4,
+      8,
+      11
+    ],
+    "ko-KR": [
+      3,
+      5,
+      7,
+      9,
+      10
+    ]
+  },
+  "reasons": {
+    "en-US": "OriginalNoAudioReceived;restorecompletecuepieces,whole-cuecontextforincompletecues,oneworker,samevoiceandwords",
+    "ja-JP": "Scientificlocalizationcaprinetaxonomy,altitudebiology,notpoliticalsuperpower",
+    "ko-KR": "Scientificlocalizationstonecuttingedge,equidtooth,taxonomy,screening"
+  },
+  "all_english_words_unchanged": 3162
+}

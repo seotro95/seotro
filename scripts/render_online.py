@@ -53,6 +53,8 @@ def render_locale(locale):
     def synth(record):
         cue,text,path=record
         if not path.exists():
+            path.with_suffix('.style.json').unlink(missing_ok=True)
+            path.with_suffix('.words.jsonl').unlink(missing_ok=True)
             if stop.is_set():raise RuntimeError('Stopped after repeated provider failure; preserve completed pieces.')
             for attempt in range(2):
                 try:
@@ -69,7 +71,7 @@ def render_locale(locale):
             style_wav(path,locale,cfg)
         return path
     if locale=='en-US':
-        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=int(os.environ.get('TTS_EN_WORKERS','2'))) as pool:
             for index,path in enumerate(pool.map(synth,records),1):
                 if index%11==0:print(json.dumps({'synthesis':locale,'parts':index,'total':len(records)}),flush=True)
     else:
