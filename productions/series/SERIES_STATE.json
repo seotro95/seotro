@@ -1131,11 +1131,15 @@
     ],
     "no_children_in_visuals": true,
     "all_prompts_end_with": "không có âm thanh",
-    "documents_status": "publishing",
-    "voice_status": "not_generated",
+    "documents_status": "delivered",
+    "voice_status": "english_verified_other_locales_and_native_hmong_rendering",
     "voice_profile_set_id": "science-prehistory-17-v1",
     "narration_style_id": "science-documentary-expressive-v1",
     "voice_count_expected": 17,
-    "video_rendered": false
+    "video_rendered": false,
+    "documents_delivered": true,
+    "voice_build_branch": "codex/kostenki-voice-build-20261111",
+    "english_run_id": 42877199490,
+    "locales_run_id": 42881197623
   }
 }

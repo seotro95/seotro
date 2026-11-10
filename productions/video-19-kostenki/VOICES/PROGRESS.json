@@ -1,0 +1,21 @@
+{
+  "topic": 19,
+  "target_seconds": 1215,
+  "english_status": "completed_success",
+  "english_run": 42877199490,
+  "localized_run": 42881197623,
+  "build_branch": "codex/kostenki-voice-build-20261111",
+  "build_head": "cbf36ea983ccf17eabf08f4fd725152b4fac4aa5",
+  "known_completed_locales": [
+    "en-US",
+    "fr-FR",
+    "ja-JP"
+  ],
+  "native_hmong_local_workdir": "/workspace/work/kostenki",
+  "native_hmong_status": "rendering;inspect local render_report before claiming completion",
+  "documents_delivered_before_voice": true,
+  "voice_identity_fields_preserved": true,
+  "old_episode_timing_metadata_removed": true,
+  "notes": "Resume existing artifacts/checkpoints;do not resynthesize successful locales or change17voice IDs. Publish17voices only after all reports and native reference checks pass.",
+  "recorded_utc": "2026-11-10T19:08:33.149653+00:00"
+}
