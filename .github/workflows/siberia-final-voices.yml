@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        locale: [sv-SE, ja-JP]
+        locale: [de-DE]
     steps:
       - uses: actions/download-artifact@v4
         with:
