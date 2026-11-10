@@ -1,0 +1,28 @@
+{
+  "modern_base_data": "Natural Earth110m land and lakes, generalised modern geometry; not topographic elevation or a paleocoast reconstruction",
+  "land_source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_land.geojson",
+  "lakes_source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_lakes.geojson",
+  "license": "Natural Earth public domain",
+  "markers_are_generalised_orientation_only": true,
+  "approximate_regions": {
+    "Malta": [
+      103.5,
+      52.85
+    ],
+    "Lake_Baikal": [
+      108,
+      53.5
+    ],
+    "Yana": [
+      135.4,
+      70.7
+    ],
+    "Ust_Kyahta": [
+      106.5,
+      50.35
+    ]
+  },
+  "nps_reference_url": "https://www.nps.gov/subjects/beringia/images/Beringia-Map_Bathymetry_web72_final_50_1.png?autorotate=false&maxwidth=1300",
+  "nps_source_page": "https://www.nps.gov/subjects/beringia/about.htm",
+  "nps_note": "Unmodified regional bathymetry map; preserve source credit. The NPS image labels a21,000BP shoreline/ice reconstruction and modern shore. Preserve those labels. It is orientation context, not a precise24,000BP reconstruction or the child’s route."
+}

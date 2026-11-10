@@ -6,7 +6,8 @@ Repository **seotro95/seotro**, nhánh **codex/beringia-video-01**.
 
 - Chủ đề 1 — Beringia: đã bàn giao tài liệu, 17 voice và video tiếng Anh hoàn chỉnh 20:00. [Video](https://github.com/seotro95/seotro/releases/download/beringia-video-01-final-20min/BERINGIA_01_EN_FINAL_20m_720p.mp4).
 - Chủ đề 2 — White Sands: đã bàn giao kịch bản tiếng Anh 3.320 từ, 100 prompt trong 10 TXT, 32 ô dùng lại, 132 ô timeline và 17 voice riêng đúng 22:00. [Tài liệu](video-02-white-sands/README.md) · [17 voice](video-02-white-sands/VOICES/README.md). Chưa dựng video tập 2 vì chưa có clip mới của tập này.
-- Chủ đề tiếp theo: **3 — Đứa trẻ Mal'ta và mối liên hệ bất ngờ giữa Siberia với tổ tiên người châu Mỹ.** Chưa bắt đầu.
+- Đang làm chủ đề **3 — Đứa trẻ Mal’ta**, 20 phút: kịch bản gốc 3.087 từ, 100 prompt mới trong 10 TXT, 20 ô dùng lại, 120 ô timeline. Tài liệu đã bàn giao; tiếp theo tạo 17 voice đúng hồ sơ giọng tập 1. [Tài liệu tập 3](video-03-malta/README.md).
+- Chủ đề sau đó: **4 — Yana: hai chiếc răng nhỏ hé lộ một quần thể người tiền sử.** Chưa bắt đầu.
 - Giữ profile science-prehistory-17-v1: 16 nam, Hmong nữ 3; không chọn lại ID hoặc mẫu tham chiếu. Bản dịch và phương ngữ Hmong Trắng vẫn cần rà soát bản ngữ.
 
 ## Đọc trước khi làm tiếp

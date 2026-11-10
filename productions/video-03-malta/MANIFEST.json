@@ -1,0 +1,172 @@
+{
+  "topic_id": 3,
+  "title_en": "Malta: The Child Who Revealed a Missing Ancestry",
+  "target_seconds": 1200,
+  "narration_words": 3087,
+  "timeline_cues": 120,
+  "cue_seconds": 10,
+  "chapters": 12,
+  "chapter_seconds": 100,
+  "unique_prompts": 100,
+  "reused_timeline_slots": 20,
+  "prompt_txt_files": 10,
+  "prompts_per_txt": 10,
+  "voice_status": "not_generated_at_document_delivery",
+  "files": [
+    {
+      "path": "CANH_DUNG_LAI_KHONG_TAO_MOI.csv",
+      "bytes": 5173,
+      "sha256": "c7ccf1a49b1a0ab7ebd6ba403209bd50b7fbeee55b075ade8fdda58db4b4d504"
+    },
+    {
+      "path": "CHAPTERS_12.csv",
+      "bytes": 1032,
+      "sha256": "23c7160b49be5f1a7e5985901f1d77598211eb49d70bd69a999578f2d0c53081"
+    },
+    {
+      "path": "DOI_CHIEU_KHOA_HOC.csv",
+      "bytes": 1081,
+      "sha256": "42679c6505fa35eb0f43f1a66f1a545efd814835061ae9f873ba9ea1932824e3"
+    },
+    {
+      "path": "HOOK_30_GIAY_8_SHOT.csv",
+      "bytes": 1234,
+      "sha256": "0d0ff7dda1b4eb8e96a8f33f4540c6f5f0c7024b5175226c7a7fc66ff85848e1"
+    },
+    {
+      "path": "KICH_BAN_EN_20_PHUT.txt",
+      "bytes": 20301,
+      "sha256": "547e04669f21107dc42acc8d1776d92d9a5ba4b6a65b28d1bbc1e32835072ff5"
+    },
+    {
+      "path": "KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 27303,
+      "sha256": "4e11f7cb2c58c4d98babdbba1a9a50068b30dd4a6fb1e2255436a48727c5da44"
+    },
+    {
+      "path": "LOI_DAN_EN_120_CANH.srt",
+      "bytes": 24274,
+      "sha256": "6409273d0be5b61cd0d2234b0e4e01a115aef0100e78f628b116a91945d4aa7c"
+    },
+    {
+      "path": "NGUON_KIEM_CHUNG.csv",
+      "bytes": 4050,
+      "sha256": "076b35c6aa12a872e3a7e6c382b0c48122b4fc596a1ac8bbdd78b920dbf15c23"
+    },
+    {
+      "path": "NGUON_KIEM_CHUNG.md",
+      "bytes": 4485,
+      "sha256": "815b38c56494e681be3750355a0b11114cd834816f5de87a6ac4c7e058543e35"
+    },
+    {
+      "path": "PHAN_TICH_NGUON_VA_QUY_TRINH.txt",
+      "bytes": 4838,
+      "sha256": "f7585ce8f9e407f51861b7767a19cc14a91f0f41aaf5b48d5b980a5098f5c63f"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_01_001_010.txt",
+      "bytes": 11719,
+      "sha256": "f3de3cab28b41773ba36cfc72ee18308873bce977e2907fc9a00c88ab8b2f0fb"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_02_011_020.txt",
+      "bytes": 11520,
+      "sha256": "b8a3c7f03781d0d238a1df12a7895a0d02bb725b013be2166fe72a12181d0f6d"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_03_021_030.txt",
+      "bytes": 11585,
+      "sha256": "b64a8d65c338c3c40ae220baf39eb3e7ba59c7bcf7fd337125e3be8e7f711f6b"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_04_031_040.txt",
+      "bytes": 11446,
+      "sha256": "0b3202b8a207d2e177d2dd03fdd7e0146348518e79d157aba4e0eb62cde65870"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_05_041_050.txt",
+      "bytes": 11496,
+      "sha256": "da7a454b31b1b205f94bc9e1d93d2725369d8f7c3bbaf826ed5af8e7d09bc946"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_06_051_060.txt",
+      "bytes": 11346,
+      "sha256": "001463468808282418e0c4793ed55991e5fd0ee19cf90961f63637ecb30365e3"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_07_061_070.txt",
+      "bytes": 11781,
+      "sha256": "ea1fcc3e0ccf9c190598b1e6aedf98f273ac33615ef8aa6dd90f5459474f8c8a"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_08_071_080.txt",
+      "bytes": 11437,
+      "sha256": "56fc4c4a82ea3c9fb3edb409ac7f7fa32a6d54f6216287636257d389aa9308d2"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_09_081_090.txt",
+      "bytes": 11530,
+      "sha256": "772c2940372f6ef70860a1d0589558f4c96d80fc1a3f95ea369620c8f7af6e9b"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_10_091_100.txt",
+      "bytes": 11502,
+      "sha256": "6787e7c71f97ca7d920b9bd2fec126c07cb925d6c814b0cef3478b4ca72495eb"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1711,
+      "sha256": "2e65bd821992cd3d7bcaf077baa52c8de1ca820626607a16ee270678da1d7c59"
+    },
+    {
+      "path": "REFERENCES/BAIKAL_MODERN_BASE.png",
+      "bytes": 22830,
+      "sha256": "5e141f468114450e7fd85038a69417ab72fbd4992decbd1cfae0dddc782ad5ce"
+    },
+    {
+      "path": "REFERENCES/NORTH_PACIFIC_MODERN_BASE.png",
+      "bytes": 223474,
+      "sha256": "9eb87ad502da50b8c74ea65fc13cd6e333bae7c79d5efb11b951fb22ad861e3f"
+    },
+    {
+      "path": "REFERENCES/NPS_BERINGIA_BATHYMETRY_REFERENCE.png",
+      "bytes": 1153277,
+      "sha256": "0f334a626177375d5605ea7497fc4d3b1f0e4ad0152bc95c4fff308a5fbc0647"
+    },
+    {
+      "path": "REFERENCES/README.md",
+      "bytes": 1217,
+      "sha256": "d67a596b4d5a567828b22f1246f6b1a663c456c0e10368b5c4b5c68e971dc915"
+    },
+    {
+      "path": "REFERENCES/REFERENCE_GUIDE.json",
+      "bytes": 1193,
+      "sha256": "c6aca8248bcbd7cc942df2f24e66b66b128d1a7c0f5ced89203d02dc7417acbd"
+    },
+    {
+      "path": "REFERENCES/YANA_MODERN_BASE.png",
+      "bytes": 88588,
+      "sha256": "ff04194128abe985078e0d6337252f112e3f32c84250c03a21caaa2c00eb2a45"
+    },
+    {
+      "path": "SCENES_AND_PROMPTS.json",
+      "bytes": 223605,
+      "sha256": "79d5f1cb049b94a5fb104ff2b22d798e2a8890ac63bd4967fd4e422dca28878c"
+    },
+    {
+      "path": "TIMELINE_120_CANH.csv",
+      "bytes": 57094,
+      "sha256": "37fec9dfd96780a0fef0adda1a36bcea952af77c5577a9d3751e63042fb4bc57"
+    },
+    {
+      "path": "UNIQUE_PROMPTS_100.json",
+      "bytes": 145374,
+      "sha256": "529984e55aff7ac96c233672327c36b663602ad5b675df11830003ca0de8ba5f"
+    },
+    {
+      "path": "VOICE_PROFILES_LOCKED_EXPECTED.json",
+      "bytes": 10996,
+      "sha256": "03ca514b09516471961ed3752ef0e46dcec6f8910ba113377d149923cd40c480"
+    }
+  ]
+}

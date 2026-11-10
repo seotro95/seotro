@@ -1,0 +1,23 @@
+CHỦ ĐỀ3 — MALTA / 20 PHÚT
+
+VIDEO THAM CHIẾU
+Nguồn https://github.com/seotro95/seotro/releases/tag/video, tệp video.c.a.toi.mp4, SHA256 f1 a8659 dbccd4 db12 a79 e3 c18 ea2 e1 fe08 f46 f7 a03 c42 bc2250 f454 f69 eff70 c. Tệp đã phân tích ở tập 1, khoảng21:03, lời Nga. Tập 3 đọc lại hồ sơ, xem lại bảng hình: cận vật chứng/con người, bản đồ, tái hiện đời sống, cảnh quan và phòng lab. Đây là phân tích tệp được cung cấp, không tuyên bố đã thống kê toàn kênh hoặc biết phần mềm của tác giả.
+
+CÁCH KỂ
+Kịch bản mới mở bằng hạt trang sức: vật nhỏ, có dấu tay người. Đưa ra điều gây tò mò ngay: một đứa trẻ ở Siberia giúp tìm quan hệ tổ tiên với người châu Mỹ. Câu hỏi xuyên suốt là làm sao các mảnh ADN cho biết một mối liên hệ khi không có nhật ký hành trình. Trình tự: con người và thung lũng → phân tử hư hại → cách so sánh di truyền → kết quả bất ngờ → quan hệ khác đường di cư → mạng lưới quần thể → địa lý Beringia → mẫu cổ bổ sung → quay về đời sống và hạt trang sức.
+Lời kể gốc, không chép câu chữ hoặc gán phát hiện sai. Dùng ví dụ sách rách, người họ hàng, sợi chỉ để làm rõ ý; mỗi ví dụ phải được hiểu là minh hoạ, không phải dữ liệu gốc. Không dựng câu chuyện người châu Âu hiện đại phát hiện châu Mỹ trước ai đó, không gán sắc tộc/diện mạo hiện đại cho đứa trẻ24 ka.
+
+HÌNH VÀ NHỊP DỰNG
+120 ô lời10 s =20 phút.100 prompt mới/10 TXT/10 prompt mỗi tệp;20 ôREUSE ghi clip nguồn. Cùng địa điểm nhưng thao tác hoặc thông tin hình khác vẫn có thể cần cảnh riêng; thiết lập lặp thật được đánh dấu dùng lại. Số cảnh001–120 khác số clip001–100.
+30 giây đầu dùng8 shot ở HOOK_30_GIAY_8_SHOT.csv: hạt trang sức → vòng hạt → thung lũng → bố trí đồ vật → tube → mẫu nghiên cứu minh hoạ → sequence → bản đồ. Giữ nguyên lời00:00–00:30, không cộng intro. Cắt trực tiếp theo ý và ánh nhìn; hoà cảnh ngắn khi đổi thời đại, không transition ở mọi câu. Tông cảnh cổ nâu đất/ánh lửa vừa phải, hiện tại và lab trung tính; tránh xanh lạnh phủ kín mọi thứ.
+Clip tạo10 s là nguyên liệu, có thể lấy3–6 s xen cận cảnh đã có; crop không phải góc quay thật mới. Video chính chỉ dùng voice tiếng Anh, bỏ mọi audio của clip nguồn. Chữ, năm, tên mẫuMA-1 và nhãn khoa học thêm bằng editor, không giao AI tự sinh.
+
+BẢN ĐỒ VÀ VẬT CHỨNG
+REFERENCES chứa nền bờ biển/hồ hiện đại từ Natural Earth, các vùng định hướng tổng quát và bản NPS bathymetry nguyên trạng. Bản hiện đại không phải bờ biển24 ka; NPS bathymetry không phải bản vẽ chính xác một ngày cổ. Không dùng đường nối trên bản đồ như chuyến đi đã chứng minh của đứa trẻ. Nếu công cụ không khoá đúng ảnh tham chiếu, dựng map pan/zoom trong editor để giữ địa lý.
+Hiện vật và mẫu quay bằng prompt đều là replica/sơ đồ/tái hiện, không gọi là ảnh thật của MA-1. Không lộ di hài trẻ, không xác định chân dung hay quan hệ cha mẹ bằng hình AI. Không giả bìa tạp chí, số liệu hoặc chuỗi gene thật.
+
+VOICE
+3087 từ tiếng Anh,120 cue10 s,12 chương100 s;154 từ/phút là ước tính văn bản, chưa phải phép đo audio. Bàn giao tài liệu trước rồi mới tạo17 voice. Giữ16 nam và H’Mông nữ3, đúng mã/engine/mẫu tham chiếu tập 1. Sau render cần giải mã kiểm tra57.600.000 mẫu ở48 kHz=1200 s; không cắt mất lời để đủ phút. Bản dịch căn chương100 s, không tuyên bố đồng bộ từng từ giữa mọi ngôn ngữ. Bản dịch và phương ngữ H’Mông Trắng cần người bản ngữ rà soát.
+
+KIỂM CHỨNG QUAN TRỌNG
+Khoảng24 ka là tuổi mẫu, không phải năm2013/2014 công bố. Malta không phải đảoMalta. MA-1 lấy ADN từ xương cánh tay; Yana và Ust-Kyahta là các mẫu khác. Đứa trẻ không được trình bày là tổ tiên trực tiếp của mọi người châu Mỹ, không gán một phần trăm chung. Tên Ancient North Eurasian là nhãn quan hệ di truyền, không phải tên bộ tộc có quốc kỳ. Các mô hình được cập nhật bằng mẫu mới; không coi một kết quả là câu trả lời cho mọi tuyến và ngày đến châu Mỹ.
