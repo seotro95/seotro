@@ -1,0 +1,23 @@
+{
+  "build_head": "29e104eef78f694e9bfa0a3a71d986ea87697568",
+  "build_tree": "d146a28a37ddbc317884a20fe31b6c5d81b9770c",
+  "documents_head": "705eb9241c9ba969c7a9b6726bdfe5eb07dc8e34",
+  "documents_tree": "739a47562e8602bf847abf2e3ccc063beb819598",
+  "english_run": 42826768097,
+  "locales_run": 42830399069,
+  "documents_run": 42826270908,
+  "delivery_workflow_run_id": 42832242206,
+  "voice_workflow_run_ids": [
+    42826768097,
+    42830399069,
+    42832242206
+  ],
+  "repair_run": 42832242206,
+  "native_head": "d09624bf6aaa49825f943e24e73b228549296211",
+  "native_audio_sha256": "a7a76c3eea367c786397f789ccf250d557dd18a38c129d0c86f693c4d7e34894",
+  "native_seconds": 1340,
+  "native_frames_48k": 64320000,
+  "native_max_tempo": 1.1671467803030302,
+  "original_locales_status": "15of15passed;originalpublisherstoppedbecauseEnglishartifactabsent",
+  "final_remaining_voice": "en-US"
+}

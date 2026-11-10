@@ -1,0 +1,137 @@
+{
+  "voice_count": 16,
+  "english_pending": true,
+  "voices": [
+    {
+      "locale": "fr-FR",
+      "filename": "BAISHIYA_08_Phap.mp3",
+      "sha256": "146f70fa35999c47918713166a9b1608f3526268805731644c94f37a7d043461",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Phap.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "pl-PL",
+      "filename": "BAISHIYA_08_Ba_Lan.mp3",
+      "sha256": "01d51c6085b5dd20fa02ae9e0af90f24c96a893a8d58de023c480906e20bfa70",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Ba_Lan.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "nl-NL",
+      "filename": "BAISHIYA_08_Ha_Lan.mp3",
+      "sha256": "9ea3fd8a594c26c77de778bf1fc0cd45283439e3f416bd04d6ec30156f848caa",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Ha_Lan.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "it-IT",
+      "filename": "BAISHIYA_08_Y.mp3",
+      "sha256": "13d79439d5ea45458b9560dde38012b68be7d445e45e4f66548ec88123a0f7d2",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Y.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "pt-PT",
+      "filename": "BAISHIYA_08_Bo_Dao_Nha.mp3",
+      "sha256": "26894ae0f819e5b5b4f3e69bb9a41c3b41892170396d6548337f8556235989cc",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Bo_Dao_Nha.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "nb-NO",
+      "filename": "BAISHIYA_08_Na_Uy.mp3",
+      "sha256": "0de941ce85e2a11dc351be70928bad4049d543cd8002e7d9f9a975c5d9d737f0",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Na_Uy.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "de-DE",
+      "filename": "BAISHIYA_08_Duc.mp3",
+      "sha256": "4e4fdeb2e2a8f7fd2127ef90ab6a3c6796608f4bc4457a837e24e2544d8d8ad7",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Duc.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "es-ES",
+      "filename": "BAISHIYA_08_Tay_Ban_Nha.mp3",
+      "sha256": "2042c4f537579637fac2008dc2edea1d2911a078725599c3497b247b4b989845",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Tay_Ban_Nha.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "fi-FI",
+      "filename": "BAISHIYA_08_Phan_Lan.mp3",
+      "sha256": "5486d2b6f4fec64ea644e1f191241909d84b19827ae33596d5b060a90d773a78",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Phan_Lan.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "sv-SE",
+      "filename": "BAISHIYA_08_Thuy_Dien.mp3",
+      "sha256": "fbeeebb89fb249282bcdfcaa92897f17dd7e5433de175e7683288c3fdfa7b340",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Thuy_Dien.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "da-DK",
+      "filename": "BAISHIYA_08_Dan_Mach.mp3",
+      "sha256": "8a7fed97fbce180e924459630182df766f198d4e5f8e03c69be13e1b79f23700",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Dan_Mach.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "vi-VN",
+      "filename": "BAISHIYA_08_Viet_Nam.mp3",
+      "sha256": "b37276933ddf7f72377902ebc719cac0d9eefe843a76f5723c5d38a781aa6a19",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Viet_Nam.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "cs-CZ",
+      "filename": "BAISHIYA_08_Sec.mp3",
+      "sha256": "ef4c4f6df85fc00c7f353ad0d9815e5e596cc978ed6391303fa162c98fd3dc7a",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Sec.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "ja-JP",
+      "filename": "BAISHIYA_08_Nhat_Ban.mp3",
+      "sha256": "10a127a709265ef6b255b27024eb03f268f86d3dfe83c708fa1c7dc7a3e550aa",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Nhat_Ban.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "ko-KR",
+      "filename": "BAISHIYA_08_Han_Quoc.mp3",
+      "sha256": "747c707c1b48fd0751b80ed9523889a42feecddcbf396766e912d3a39adf930e",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Han_Quoc.mp3",
+      "bytes": 10720748
+    },
+    {
+      "locale": "mww",
+      "filename": "BAISHIYA_08_Hmong_Trang_Nu.mp3",
+      "sha256": "a7a76c3eea367c786397f789ccf250d557dd18a38c129d0c86f693c4d7e34894",
+      "seconds": 1340,
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Hmong_Trang_Nu.mp3",
+      "bytes": 10720748
+    }
+  ],
+  "public_server_digests_verified": true,
+  "run_id": 42837217955,
+  "snapshot_status": "Historical partial delivery while English continued;the final completion record supersedes this snapshot."
+}
