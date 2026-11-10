@@ -1,0 +1,2624 @@
+[
+  {
+    "cue": 1,
+    "start": 0,
+    "end": 10,
+    "voice_en": "A small bead catches the light. Someone shaped it by hand, long before writing, cities, or the borders on our maps existed.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V402",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V385",
+        "duration": 3,
+        "source_in": 1,
+        "crop": 1
+      },
+      {
+        "label": "V315",
+        "duration": 3,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter": 1,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 2,
+    "start": 10,
+    "end": 20,
+    "voice_en": "At Mal'ta in Siberia, a young child's burial preserved objects like these. But another kind of inheritance survived where nobody could see it.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "M002",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V328",
+        "duration": 3,
+        "source_in": 1,
+        "crop": 1
+      },
+      {
+        "label": "V330",
+        "duration": 3,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter": 1,
+    "chapter_overlay": "/workspace/work/malta/edit/overlays/002.png",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 3,
+    "start": 20,
+    "end": 30,
+    "voice_en": "Inside ancient bone, researchers recovered fragments of DNA. Those fragments connected this distant place with part of the ancestry of Indigenous peoples in the Americas.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V314",
+        "duration": 5,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@pacific_fixed",
+        "duration": 5,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 1,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 4,
+    "start": 30,
+    "end": 40,
+    "voice_en": "The child lived around twenty four thousand years ago. He never crossed an ocean to announce a discovery, and he left no written account.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V315",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V327",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 1,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_004.png"
+  },
+  {
+    "cue": 5,
+    "start": 40,
+    "end": 50,
+    "voice_en": "Yet his remains helped expose a missing relationship in human history. The surprise was not simply where people travelled, but who had already met before them.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V316",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@network",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 1,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 6,
+    "start": 50,
+    "end": 60,
+    "voice_en": "How can a child who died in Siberia tell us anything about people thousands of kilometres away, across the other side of the world?",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@pacific_fixed",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V315",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 1,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 7,
+    "start": 60,
+    "end": 70,
+    "voice_en": "The answer begins with a distinction we will keep throughout this story. A genetic relative is not necessarily a direct ancestor, and a relationship is not a route.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V318",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@related",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 1,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 8,
+    "start": 70,
+    "end": 80,
+    "voice_en": "We will follow one investigation from a burial and a museum collection into damaged molecules, inherited patterns, and a much larger network of ancient populations.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V319",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "M042",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 1,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 9,
+    "start": 80,
+    "end": 90,
+    "voice_en": "Along the way, a familiar picture of separate branches will become something messier: branches that divide, exchange ancestry, and continue in different directions afterward.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V320",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 1,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 10,
+    "start": 90,
+    "end": 100,
+    "voice_en": "But first, put the laboratory aside. Before this child became a scientific sample, he belonged to a living community in a very demanding landscape.",
+    "transition": "dissolve",
+    "segments": [
+      {
+        "label": "V315",
+        "duration": 5.3,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V321",
+        "duration": 5.3,
+        "source_in": 4.7,
+        "crop": 1
+      }
+    ],
+    "chapter": 1,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_010.png"
+  },
+  {
+    "cue": 11,
+    "start": 100,
+    "end": 110,
+    "voice_en": "Mal'ta lies in south central Siberia, near the Belaya River, west of Lake Baikal. This is the Siberian archaeological site, not the Mediterranean island.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@baikal_fixed",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 2,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 12,
+    "start": 110,
+    "end": 120,
+    "voice_en": "A river valley can concentrate water, animal movement, useful stone, and places to stop. For mobile communities, geography could make some locations especially valuable.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "M012",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 2,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 13,
+    "start": 120,
+    "end": 130,
+    "voice_en": "Around twenty four thousand years ago, northern climates were approaching the coldest part of the last ice age. Local conditions still varied across enormous distances.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V323",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V371",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 2,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 14,
+    "start": 130,
+    "end": 140,
+    "voice_en": "Imagine wind moving over open ground, a sheltered fire, and hands repairing equipment before another journey. This is an illustration of practical problems, not a recorded day.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V324",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V325",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 2,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 15,
+    "start": 140,
+    "end": 150,
+    "voice_en": "Warmth required work. Fuel had to be found, hides prepared, seams maintained, and food shared. A small child depended on other people doing many things well.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V325",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 2,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 16,
+    "start": 150,
+    "end": 160,
+    "voice_en": "Archaeological investigations at Mal'ta began in nineteen twenty eight. Decades of excavation and study gradually built a picture from objects that survived unevenly.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V326",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V337",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 2,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_016.png"
+  },
+  {
+    "cue": 17,
+    "start": 160,
+    "end": 170,
+    "voice_en": "The child is commonly discussed as about three to four years old. That estimate describes a short human life, not the full history represented in his genes.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V327",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V398",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 2,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_017.png"
+  },
+  {
+    "cue": 18,
+    "start": 170,
+    "end": 180,
+    "voice_en": "Ornaments and other objects accompanied the burial. They show that people invested effort in what they placed there, although their exact meanings remain debated.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V328",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V329",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 2,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_018.png"
+  },
+  {
+    "cue": 19,
+    "start": 180,
+    "end": 190,
+    "voice_en": "An object can survive without its explanation. We can examine how it was made more confidently than we can reconstruct what somebody believed while holding it.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V329",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 2,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 20,
+    "start": 190,
+    "end": 200,
+    "voice_en": "The burial therefore raised human questions first. Much later, molecular methods made it possible to ask a different question about relationships far beyond the valley.",
+    "transition": "dissolve",
+    "segments": [
+      {
+        "label": "V328",
+        "duration": 5.3,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V314",
+        "duration": 5.3,
+        "source_in": 4.7,
+        "crop": 1
+      }
+    ],
+    "chapter": 2,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 21,
+    "start": 200,
+    "end": 210,
+    "voice_en": "Bones do not keep DNA as a neatly sealed message. After death, molecules break, microbes enter, and chemical changes gradually damage what remains.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@damage",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V332",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 3,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 22,
+    "start": 210,
+    "end": 220,
+    "voice_en": "Think of a book reduced to scattered scraps. Some scraps belong to the original book. Others arrive later, and many passages are missing completely.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "M022",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V345",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 3,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 23,
+    "start": 220,
+    "end": 230,
+    "voice_en": "Ancient DNA researchers work with that kind of difficulty, except their fragments are molecular sequences. Recovering material is only the beginning of deciding what it means.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V332",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 3,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 24,
+    "start": 230,
+    "end": 240,
+    "voice_en": "A modern person's DNA can enter a sample through handling. Because both sequences are human, contamination may look plausible unless researchers actively test for it.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@damage",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V332",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 3,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 25,
+    "start": 240,
+    "end": 250,
+    "voice_en": "Dedicated clean facilities, protective clothing, and control samples help reduce that problem. Computers then assist with identifying, comparing, and filtering the sequences that were recovered.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V334",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V314",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 3,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 26,
+    "start": 250,
+    "end": 260,
+    "voice_en": "Characteristic damage near fragment ends can help researchers assess ancient material. Such patterns contribute to authentication; no single visual clue makes a sample automatically trustworthy.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@damage",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V334",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 3,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 27,
+    "start": 260,
+    "end": 270,
+    "voice_en": "For the Mal'ta study, researchers sampled an upper arm bone held in the Hermitage collection. Scientific analysis connected an old excavation with newer laboratory techniques.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V330",
+        "duration": 5,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "M042",
+        "duration": 5,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 3,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_027.png"
+  },
+  {
+    "cue": 28,
+    "start": 270,
+    "end": 280,
+    "voice_en": "The individual received the research label M A one. It is a sample identifier, a convenient way of referring to someone whose personal name is unknown.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V314",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V334",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 3,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_028.png"
+  },
+  {
+    "cue": 29,
+    "start": 280,
+    "end": 290,
+    "voice_en": "The genetic findings appeared online in twenty thirteen, in a paper later included in a twenty fourteen issue of Nature. Publication dates are not the child's age.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V337",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@publication",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 3,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 30,
+    "start": 290,
+    "end": 300,
+    "voice_en": "Now the investigation had recovered something far more useful than a mysterious glow inside bone: many small observations that could be compared with other genomes.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V338",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@variants",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 3,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_030.png"
+  },
+  {
+    "cue": 31,
+    "start": 300,
+    "end": 310,
+    "voice_en": "To understand the comparison, begin with inheritance. Most of our chromosomes come in pairs, with one copy inherited from each parent in each generation.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@inheritance",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 4,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 32,
+    "start": 310,
+    "end": 320,
+    "voice_en": "During the formation of eggs and sperm, inherited material is reshuffled. Over many generations, that process produces a complicated patchwork of genetic relationships among people.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V340",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@inheritance",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 4,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 33,
+    "start": 320,
+    "end": 330,
+    "voice_en": "Mitochondrial DNA follows a different pattern, normally passing from mothers to their children. It can illuminate one maternal line, but that line is only part of anyone's ancestry.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "M032",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@lineages",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 4,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_033.png"
+  },
+  {
+    "cue": 34,
+    "start": 330,
+    "end": 340,
+    "voice_en": "The Y chromosome can trace another narrow line in many male individuals. Neither a maternal branch nor a paternal branch represents the entire family network.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@lineages",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V342",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 4,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_034.png"
+  },
+  {
+    "cue": 35,
+    "start": 340,
+    "end": 350,
+    "voice_en": "Imagine tracing only your mother's mother, while leaving all the other branches unexamined. You would learn something real, but miss most of the surrounding picture.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V342",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 4,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 36,
+    "start": 350,
+    "end": 360,
+    "voice_en": "Researchers therefore also compare variation across the autosomes: the numbered chromosomes. These comparisons can reveal relationships that a single inherited lineage would never capture alone.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@inheritance",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@lineages",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 4,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 37,
+    "start": 360,
+    "end": 370,
+    "voice_en": "A useful clue is not that two people possess DNA. All humans do. The question is how particular inherited variants are shared across many positions.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@variants",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V344",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 4,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 38,
+    "start": 370,
+    "end": 380,
+    "voice_en": "One matching position might be uninformative. Repeated patterns, tested against alternative relationships and suitable comparisons, can provide much stronger evidence about shared population history.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V344",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@variants",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 4,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 39,
+    "start": 380,
+    "end": 390,
+    "voice_en": "The result is not a list of remembered journeys inside a chromosome. It is a statistical account of inheritance, assembled from many imperfect observations.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V345",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 4,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 40,
+    "start": 390,
+    "end": 400,
+    "voice_en": "With those tools, the Mal'ta genome could be placed beside other ancient and present day genomes. That comparison produced the central surprise of this story.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V338",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@variants",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 4,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 41,
+    "start": 400,
+    "end": 410,
+    "voice_en": "M A one showed genetic connections with western Eurasian populations, despite having lived deep inside Siberia. Ancient relationships did not stop at modern continental labels.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@pacific_fixed",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V319",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 5,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 42,
+    "start": 410,
+    "end": 420,
+    "voice_en": "The same genome also shared a significant relationship with Native American ancestry. A population related to this Siberian child had contributed to that larger ancestral history.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V338",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      },
+      {
+        "label": "@network",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 5,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 43,
+    "start": 420,
+    "end": 430,
+    "voice_en": "These findings helped explain an ancestry connection that could not simply be assigned to recent contact after Europeans reached the Americas. The relevant history was much older.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@publication",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 5,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 44,
+    "start": 430,
+    "end": 440,
+    "voice_en": "The important word is related. The results concerned populations connected to M A one, not a claim that this single child personally founded another population.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V318",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@related",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 5,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_044.png"
+  },
+  {
+    "cue": 45,
+    "start": 440,
+    "end": 450,
+    "voice_en": "Picture a family photograph containing a distant cousin. That cousin may reveal a branch missing from your records without being the person from whom you descend.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V349",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V342",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 5,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 46,
+    "start": 450,
+    "end": 460,
+    "voice_en": "An ancient genome can play a similar role across a much deeper timescale. It provides evidence about relatives and shared histories that are otherwise difficult to sample.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "M042",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "M072",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 5,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 47,
+    "start": 460,
+    "end": 470,
+    "voice_en": "This does not turn a Siberian child into a modern European, or place him inside a present day nationality. Those categories belong to much later histories.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@model_limits",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 5,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 48,
+    "start": 470,
+    "end": 480,
+    "voice_en": "Nor does it make Indigenous Americans newcomers in some modern political sense. Genetic relationships over thousands of generations do not decide cultural belonging or sovereignty.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V351",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 5,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_048.png"
+  },
+  {
+    "cue": 49,
+    "start": 480,
+    "end": 490,
+    "voice_en": "What changed was the scientific picture of ancestral connections. Some people living far apart today inherit relationships that were formed long before those present day populations existed.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@network",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 5,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 50,
+    "start": 490,
+    "end": 500,
+    "voice_en": "The discovery widened the map. But widening a map also creates a temptation: drawing a bold arrow where the evidence actually supports something less precise.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@pacific_fixed",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 5,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 51,
+    "start": 500,
+    "end": 510,
+    "voice_en": "Suppose two communities share ancestry from a third population. Their descendants can retain related genetic patterns even if nobody travelled directly between the later communities.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V354",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V342",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 6,
+    "chapter_overlay": "/workspace/work/malta/edit/overlays/051.png",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 52,
+    "start": 510,
+    "end": 520,
+    "voice_en": "That is why a line joining two places on a documentary map must be explained. Does it represent a demonstrated journey, a possible connection, or a statistical relationship?",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@connections",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 6,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 53,
+    "start": 520,
+    "end": 530,
+    "voice_en": "For Mal'ta, we cannot follow the child's footsteps across Siberia into Alaska. The genome does not contain a personal itinerary or proof of his family's exact movements.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V356",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 6,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 54,
+    "start": 530,
+    "end": 540,
+    "voice_en": "Instead, it helps identify an ancestry component often discussed under the label Ancient North Eurasian. That label groups a reconstructed genetic relationship; it is not a tribal name.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@network",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V363",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 6,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 55,
+    "start": 540,
+    "end": 550,
+    "voice_en": "A related ancient individual can stand in for an unsampled population in a model. The stand in helps test relationships without becoming a perfect copy of that population.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@comparison",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "M042",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 6,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 56,
+    "start": 550,
+    "end": 560,
+    "voice_en": "Imagine hearing a fragment of a melody in two later compositions. The resemblance suggests a shared history, but it does not identify every musician involved.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V354",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V360",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 6,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_056.png"
+  },
+  {
+    "cue": 57,
+    "start": 560,
+    "end": 570,
+    "voice_en": "The comparison is only an illustration. DNA inheritance follows biological processes, and researchers need explicit statistical tests rather than an appealing resemblance to make their case.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V359",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 6,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 58,
+    "start": 570,
+    "end": 580,
+    "voice_en": "Different models may represent the same incomplete evidence in different ways. Additional ancient genomes can reveal missing relationships and change estimates that once looked fairly simple.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V360",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@comparison",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 6,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 59,
+    "start": 580,
+    "end": 590,
+    "voice_en": "So we should ask two questions separately. Is there evidence for a genetic connection? And how precisely can we locate and time the events behind it?",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V361",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 6,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 60,
+    "start": 590,
+    "end": 600,
+    "voice_en": "Mal'ta offered a powerful answer to the first question. The second requires a wider set of samples, archaeological evidence, and careful treatment of uncertainty.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@network",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V342",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 6,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 61,
+    "start": 600,
+    "end": 610,
+    "voice_en": "A family tree is useful when branches only split. Human populations also meet, and their descendants may inherit material from more than one earlier population.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V362",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V318",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 7,
+    "chapter_overlay": "/workspace/work/malta/edit/overlays/061.png",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 62,
+    "start": 610,
+    "end": 620,
+    "voice_en": "To describe that process, researchers use models with both branching and exchanges of ancestry. A tidy diagram becomes a network, although the real history was more complicated still.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V363",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@network",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 7,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 63,
+    "start": 620,
+    "end": 630,
+    "voice_en": "The deep ancestry of Indigenous peoples in the Americas includes relationships associated with ancient East Asian populations and with ancient northern Eurasian populations related to Mal'ta.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@network",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 7,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_063.png"
+  },
+  {
+    "cue": 64,
+    "start": 630,
+    "end": 640,
+    "voice_en": "Those relationships developed through events involving populations, over generations. They should not be imagined as two modern nations arriving fully formed and combining at one documented campfire.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V365",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 7,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_064.png"
+  },
+  {
+    "cue": 65,
+    "start": 640,
+    "end": 650,
+    "voice_en": "A statistical proportion is also not a permanent measure stamped on every person. It depends on which populations, reference samples, and historical models are being compared.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@model_limits",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 7,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 66,
+    "start": 650,
+    "end": 660,
+    "voice_en": "That is why an early estimate should not become a universal pie chart for all Native American communities. Later movements and different histories add further complexity.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@model_limits",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 7,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 67,
+    "start": 660,
+    "end": 670,
+    "voice_en": "There is another trap here. Two populations can share ancestry without sharing a language, a tool tradition, or every aspect of their culture across the same period.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "M062",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V368",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 7,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_067.png"
+  },
+  {
+    "cue": 68,
+    "start": 670,
+    "end": 680,
+    "voice_en": "A tool can spread through teaching or exchange. A language can spread through social processes. DNA follows biological inheritance, and those histories may intersect without matching exactly.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V368",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V385",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 7,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 69,
+    "start": 680,
+    "end": 690,
+    "voice_en": "The strongest explanation therefore combines different kinds of evidence while respecting what each kind measures. One attractive diagram cannot substitute for all of archaeology and genetics.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V369",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 7,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 70,
+    "start": 690,
+    "end": 700,
+    "voice_en": "Once that is clear, we can return to the geographical problem. What kind of world allowed ancient northern populations to become connected across such enormous distances?",
+    "transition": "dissolve",
+    "segments": [
+      {
+        "label": "V369",
+        "duration": 5.3,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V371",
+        "duration": 5.3,
+        "source_in": 4.7,
+        "crop": 1
+      }
+    ],
+    "chapter": 7,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 71,
+    "start": 700,
+    "end": 710,
+    "voice_en": "At low sea levels during the ice age, land connected northeastern Asia with Alaska. Beringia included broad landscapes, not just a narrow bridge between two present coastlines.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@beringia",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 8,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 72,
+    "start": 710,
+    "end": 720,
+    "voice_en": "This geography made movements possible, but possibility is not a complete account of migration. People also needed resources, practical knowledge, and routes they could actually use.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V371",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 8,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 73,
+    "start": 720,
+    "end": 730,
+    "voice_en": "A line that looks short on a globe can cross many local environments. Rivers, seasonal food, snow conditions, and neighbouring communities matter to people on the ground.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V372",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V356",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 8,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_073.png"
+  },
+  {
+    "cue": 74,
+    "start": 730,
+    "end": 740,
+    "voice_en": "Imagine a journey built from ordinary decisions: where to camp, when to move, and which direction still offers a workable next season. No single generation sees the whole map.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V373",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 8,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 75,
+    "start": 740,
+    "end": 750,
+    "voice_en": "Over many generations, small movements and contacts can create a large geographical pattern. That is different from imagining one heroic expedition carrying an entire population's history.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V374",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 8,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_075.png"
+  },
+  {
+    "cue": 76,
+    "start": 750,
+    "end": 760,
+    "voice_en": "The Mal'ta child helps illuminate ancestral relationships within that larger northern world. He does not establish the first arrival date for every part of the Americas.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@pacific_fixed",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V315",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 8,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 77,
+    "start": 760,
+    "end": 770,
+    "voice_en": "Archaeological sites in the Americas ask different questions about human presence at particular places. Genetics investigates population relationships, often through estimates covering broad periods of time.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V375",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 8,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 78,
+    "start": 770,
+    "end": 780,
+    "voice_en": "Those records need to be compared carefully. A genetic divergence estimate is not automatically the day somebody crossed a coastline or left a footprint in mud.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@event_time",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 8,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 79,
+    "start": 780,
+    "end": 790,
+    "voice_en": "The route, timing, and sequence of events still depend on evidence beyond this one Siberian genome. That remaining uncertainty is a research problem, not an empty detail.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V356",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 8,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 80,
+    "start": 790,
+    "end": 800,
+    "voice_en": "To see why, consider what happened when researchers recovered more ancient genomes. The larger the sample, the harder it became to tell the story as one simple line.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "M072",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V330",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 8,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 81,
+    "start": 800,
+    "end": 810,
+    "voice_en": "A study published in twenty nineteen examined people from Yana, far north in Siberia, dating to around thirty one thousand six hundred years ago.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@yana_fixed",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@timeline",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 9,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_081.png"
+  },
+  {
+    "cue": 82,
+    "start": 810,
+    "end": 820,
+    "voice_en": "Their genomes documented a northern population older than the Mal'ta child. Comparisons linked these histories, while also showing that the ancient groups were not simply interchangeable.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@network",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 9,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 83,
+    "start": 820,
+    "end": 830,
+    "voice_en": "This matters because one early sample can seem to represent an entire vanished world. New samples reveal that the world contained its own relationships and differences.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "M072",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 9,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 84,
+    "start": 830,
+    "end": 840,
+    "voice_en": "In twenty twenty, researchers reported another important genome from near Lake Baikal. It came from a fragmented tooth at a site called Ust Kyahta three.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V379",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@baikal_fixed",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 9,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_084.png"
+  },
+  {
+    "cue": 85,
+    "start": 840,
+    "end": 850,
+    "voice_en": "That individual lived around fourteen thousand years ago and carried a mixture of ancestry related to ancient northern Eurasian and northeastern Asian populations, also relevant to Native American origins.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@network",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V338",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 9,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_085.png"
+  },
+  {
+    "cue": 86,
+    "start": 850,
+    "end": 860,
+    "voice_en": "The finding extended the geographical evidence for those connections. It did not transform this younger person into the missing parent of every later population in the Americas.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@baikal_fixed",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 9,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 87,
+    "start": 860,
+    "end": 870,
+    "voice_en": "Put these individuals on a timeline, and the gaps become visible. Their lives were separated by thousands of years, not by a few steps within one household.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@timeline",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 9,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 88,
+    "start": 870,
+    "end": 880,
+    "voice_en": "A model must explain both the connections and the gaps. Treating every related genome as the same population would erase the very history researchers are trying to reconstruct.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V360",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 9,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 89,
+    "start": 880,
+    "end": 890,
+    "voice_en": "The picture is therefore getting richer, not merely acquiring more arrows. We can test older explanations against evidence that was unavailable when they were first proposed.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V383",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V319",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 9,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 90,
+    "start": 890,
+    "end": 900,
+    "voice_en": "And each new molecular result sends us back to a familiar question. What were these people doing in the places where their remains survived?",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "M012",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 9,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 91,
+    "start": 900,
+    "end": 910,
+    "voice_en": "At Mal'ta, objects made from ivory, bone, and stone belong to a wider archaeological record of skilled work. A genome cannot explain that craftsmanship on its own.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V384",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 10,
+    "chapter_overlay": "/workspace/work/malta/edit/overlays/091.png",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 92,
+    "start": 910,
+    "end": 920,
+    "voice_en": "Shaping a bead requires a sequence of decisions: choosing material, forming it, making a hole, and finishing a surface that somebody may eventually touch or wear.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V385",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "M082",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 10,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 93,
+    "start": 920,
+    "end": 930,
+    "voice_en": "A finished object hides most of that labour. Failed attempts, broken pieces, and the time spent learning are harder to see when a camera shows only the beautiful result.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "M082",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V329",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 10,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 94,
+    "start": 930,
+    "end": 940,
+    "voice_en": "Imagine a child watching an experienced hand repeat a task. The scene is reconstructed, but the need to learn practical skills is a very human part of the question.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V386",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V385",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 10,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_094.png"
+  },
+  {
+    "cue": 95,
+    "start": 940,
+    "end": 950,
+    "voice_en": "Food, equipment, and care connected people long before scientists could describe their genetic connections. In daily life, those immediate relationships mattered more than distant ancestry categories.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V387",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 10,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 96,
+    "start": 950,
+    "end": 960,
+    "voice_en": "The burial objects make this particular child harder to reduce to a point on a chart. Somebody knew him in ways that no sequence analysis can recover.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V388",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V328",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 10,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 97,
+    "start": 960,
+    "end": 970,
+    "voice_en": "We cannot infer a complete belief system from those objects, or decide his social position from a single appealing explanation. Several interpretations remain possible.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V389",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V384",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 10,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 98,
+    "start": 970,
+    "end": 980,
+    "voice_en": "But we can notice the contrast between the two records. Objects preserve traces of actions and choices; inherited molecules preserve some relationships across generations.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V390",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V314",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 10,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 99,
+    "start": 980,
+    "end": 990,
+    "voice_en": "Neither record is complete. Together, they let us ask better questions than either could answer alone, provided we resist making one supply the other's missing details.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V369",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 10,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 100,
+    "start": 990,
+    "end": 1000,
+    "voice_en": "That is the real value of returning from the graph to the object. A population history is ultimately a history of people living particular, limited lives.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V328",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V402",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 10,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 101,
+    "start": 1000,
+    "end": 1010,
+    "voice_en": "What, then, do we actually know? A young child lived at Mal'ta around twenty four thousand years ago, and some of his genetic material survived.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V327",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 11,
+    "chapter_overlay": "/workspace/work/malta/edit/overlays/101.png",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 102,
+    "start": 1010,
+    "end": 1020,
+    "voice_en": "Researchers recovered and compared that material, finding relationships that helped connect ancient northern Eurasian populations with part of Native American ancestry. Later studies expanded the picture.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@pacific_fixed",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@network",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 11,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 103,
+    "start": 1020,
+    "end": 1030,
+    "voice_en": "We do not know his name, the language he heard, or the stories told around him. A genome cannot restore those missing parts of a biography.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V315",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 11,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 104,
+    "start": 1030,
+    "end": 1040,
+    "voice_en": "Nor should a cinematic face be mistaken for a scientific portrait. Any person shown in our reconstruction represents a possibility, not a verified likeness of this child.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@unknown_person",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 11,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_104.png"
+  },
+  {
+    "cue": 105,
+    "start": 1040,
+    "end": 1050,
+    "voice_en": "Ancient DNA research also uses human remains and can concern living communities. Responsible work requires care about sampling, permissions, and how results are communicated and understood.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V393",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "M042",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 11,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_105.png"
+  },
+  {
+    "cue": 106,
+    "start": 1050,
+    "end": 1060,
+    "voice_en": "That care improves the history we tell. A dramatic discovery should not turn people into props, or suggest that a genetic result can assign someone else's identity.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V313",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V402",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 11,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 107,
+    "start": 1060,
+    "end": 1070,
+    "voice_en": "There will be further revisions as more evidence appears. A future genome may clarify a connection, separate histories previously grouped together, or expose a model's weak point.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "M092",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 11,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 108,
+    "start": 1070,
+    "end": 1080,
+    "voice_en": "This does not make today's findings meaningless. It makes clear which parts rest on repeated observations and which parts still depend on the available comparisons.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@comparison",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V383",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 11,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 109,
+    "start": 1080,
+    "end": 1090,
+    "voice_en": "The useful question is not whether one discovery explains everything. It is whether the discovery changes what explanations must now account for, and how we can test them.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V396",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 11,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 110,
+    "start": 1090,
+    "end": 1100,
+    "voice_en": "Mal'ta did exactly that. A child in a Siberian burial made a much larger ancestral story impossible to describe as neatly as before.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V363",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@network",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 11,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 111,
+    "start": 1100,
+    "end": 1110,
+    "voice_en": "Return to the small bead. Light moves across its surface, and the work of an unknown person briefly becomes easier for us to see.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V402",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V313",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 12,
+    "chapter_overlay": "/workspace/work/malta/edit/overlays/111.png",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 112,
+    "start": 1110,
+    "end": 1120,
+    "voice_en": "Its maker could not have imagined a laboratory comparing genetic sequences, or strangers discussing this valley on a map twenty four thousand years later.",
+    "transition": "dissolve",
+    "segments": [
+      {
+        "label": "V397",
+        "duration": 5.3,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V385",
+        "duration": 5.3,
+        "source_in": 4.7,
+        "crop": 1
+      }
+    ],
+    "chapter": 12,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 113,
+    "start": 1120,
+    "end": 1130,
+    "voice_en": "The child could not have known that a relationship carried in his cells would help researchers investigate the ancestors of people living across another continent.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V398",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 12,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 114,
+    "start": 1130,
+    "end": 1140,
+    "voice_en": "Yet that connection endured through inheritance, while many ordinary details of his life disappeared. The survival of evidence is selective, and sometimes deeply surprising.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V399",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V330",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 12,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 115,
+    "start": 1140,
+    "end": 1150,
+    "voice_en": "We began with a question about distance. How could someone in Siberia tell us anything about the deep ancestry of people in the Americas?",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@pacific_fixed",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V315",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 12,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 116,
+    "start": 1150,
+    "end": 1160,
+    "voice_en": "The answer is not that he travelled everywhere, or that all later people descended from him. It is that he belonged to a population with a wider history.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V318",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@related",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 12,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 117,
+    "start": 1160,
+    "end": 1170,
+    "voice_en": "His genome preserved one view of that history. Other genomes supplied different views, and the comparison revealed connections that a single excavation could never show alone.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@variants",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@comparison",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 12,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 118,
+    "start": 1170,
+    "end": 1180,
+    "voice_en": "The map remains unfinished. But its lines now represent generations of relationships more carefully, rather than a simple collection of arrows moving between modern labels.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@network",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@connections",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter": 12,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 119,
+    "start": 1180,
+    "end": 1190,
+    "voice_en": "And behind those lines are people who made objects, learned skills, cared for children, and lived without knowing which fragments of their world would survive.",
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "V401",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V325",
+        "duration": 4,
+        "source_in": 2,
+        "crop": 1
+      }
+    ],
+    "chapter": 12,
+    "chapter_overlay": "",
+    "lower_overlay": "/workspace/work/malta/edit/overlays/lower_119.png"
+  },
+  {
+    "cue": 120,
+    "start": 1190,
+    "end": 1200,
+    "voice_en": "One short life did not contain the whole story of the first Americans. It helped us see how much of that story had been missing.",
+    "transition": "dissolve",
+    "segments": [
+      {
+        "label": "V401",
+        "duration": 5.3,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "V402",
+        "duration": 5.3,
+        "source_in": 4.7,
+        "crop": 1
+      }
+    ],
+    "chapter": 12,
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  }
+]

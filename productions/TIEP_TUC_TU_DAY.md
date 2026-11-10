@@ -6,7 +6,7 @@ Repository **seotro95/seotro**, nhánh **codex/beringia-video-01**.
 
 - Chủ đề1—Beringia: đã bàn giao tài liệu,17 voice và video tiếng Anh hoàn chỉnh20:00. [Video](https://github.com/seotro95/seotro/releases/download/beringia-video-01-final-20min/BERINGIA_01_EN_FINAL_20m_720p.mp4).
 - Chủ đề2—White Sands: đã bàn giao kịch bản3.320 từ,100 prompt/10 TXT,32 ô dùng lại,132 ô timeline và17 voice riêng22:00. [Tài liệu](video-02-white-sands/README.md). Đã bàn giao [video tiếng Anh hoàn chỉnh22:00](https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/WHITE_SANDS_02_EN_FINAL_22m_720p.mp4), [project dựng](https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/WHITE_SANDS_02_EDIT_PROJECT.zip),5 tiêu đề và5 promptthumbnail. Chỉ voice Anh, đã bỏ mọi tiếng clip; mở đầu8shot/30giây.
-- Chủ đề3—Mal’ta: đã bàn giao kịch bản3.087 từ,100 prompt/10 TXT,20 ô dùng lại,120 ô timeline và17 voice có nhấn nhá, mỗi bản20:00. [Tài liệu](video-03-malta/README.md) · [17 voice](video-03-malta/VOICES/README.md). Chưa dựng video tập3 vì chưa có clip mới của tập này.
+- Chủ đề3—Mal’ta: đã bàn giao kịch bản3.087 từ,100 prompt/10 TXT,20 ô dùng lại,120 ô timeline và17 voice có nhấn nhá, mỗi bản20:00. [Tài liệu](video-03-malta/README.md) · [17 voice](video-03-malta/VOICES/README.md). Đã bàn giao [video tiếng Anh có nhấn nhá hoàn chỉnh20:00](https://github.com/seotro95/seotro/releases/download/malta-video-03-final-20min/MALTA_03_EN_FINAL_20m_720p.mp4), [project dựng](https://github.com/seotro95/seotro/releases/download/malta-video-03-final-20min/MALTA_03_EDIT_PROJECT.zip),5tiêu đề và5promptthumbnail. Chỉ voice Anh, bỏ mọi tiếng clip; mở đầu8shot/30giây.
 - Tiếp theo: **Chủ đề4—Yana: hai chiếc răng nhỏ hé lộ một quần thể người tiền sử.** Chưa bắt đầu.
 
 ## Đọc trước khi tiếp tục
@@ -36,4 +36,5 @@ Nếu người dùng muốn dựng tập2 hoặc3 trước, dùng timeline/voice
 ## Mẫu làm việc đã lưu theo yêu cầu mới
 
 Áp dụng [quy trình tập3](series/QUY_TRINH_AP_DUNG_TU_CHU_DE_03.md) và [cấu hình mặc định](series/PRODUCTION_DEFAULTS.json) cho các chủ đề sau. Khi bàn giao voice, dùng [tên quốc gia](series/VOICE_FILE_NAMING.json), giữ mã giọng bên trong hồ sơ. Đổi tên không tạo lại tiếng; giữ đúng17giọng và phong cách nhấn nhá. Trạng thái tập3 đã hoàn tất tài liệu/voice, tiếp theo là tập4.
+
 

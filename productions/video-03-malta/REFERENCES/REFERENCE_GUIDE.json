@@ -24,5 +24,7 @@
   },
   "nps_reference_url": "https://www.nps.gov/subjects/beringia/images/Beringia-Map_Bathymetry_web72_final_50_1.png?autorotate=false&maxwidth=1300",
   "nps_source_page": "https://www.nps.gov/subjects/beringia/about.htm",
-  "nps_note": "Unmodified regional bathymetry map; preserve source credit. The NPS image labels a21,000BP shoreline/ice reconstruction and modern shore. Preserve those labels. It is orientation context, not a precise24,000BP reconstruction or the child’s route."
+  "nps_note": "Unmodified regional bathymetry map; preserve source credit. The NPS image labels a21,000BP shoreline/ice reconstruction and modern shore. Preserve those labels. It is orientation context, not a precise24,000BP reconstruction or the child’s route.",
+  "map_rendering_version": "whole-ring-longitude-copies-v2",
+  "dateline_note": "Preserve complete polygon rings, draw longitude-shifted whole-ring copies and clip to the view. Do not close separately wrapped ring fragments across Siberia."
 }
