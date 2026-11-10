@@ -1,0 +1,81 @@
+import hashlib
+import json
+import subprocess
+from pathlib import Path
+import numpy as np
+
+ROOT=Path('/workspace/work/white-sands/edit');OUT=ROOT/'delivery'
+video=OUT/'WHITE_SANDS_02_EN_FINAL_22m_720p.mp4'
+probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-show_chapters','-of','json',str(video)]))
+v=[s for s in probe['streams'] if s['codec_type']=='video'];a=[s for s in probe['streams'] if s['codec_type']=='audio']
+assert len(v)==1 and len(a)==1
+assert v[0]['width']==1280 and v[0]['height']==720 and v[0]['avg_frame_rate']=='24/1'
+assert int(v[0]['nb_frames'])==31680
+assert abs(float(v[0]['duration'])-1320)<1/24
+assert abs(float(a[0]['duration'])-1320)<.05
+assert a[0]['tags'].get('language')=='eng'
+assert len(probe['chapters'])==12
+subtitles=[s for s in probe['streams'] if s['codec_type']=='subtitle']
+assert len(subtitles)==1 and subtitles[0]['tags'].get('language')=='eng'
+srt=(OUT/'WHITE_SANDS_02_EN_SUBTITLES.srt').read_text()
+assert srt.count(' --> ')==132 and '00:22:00,000' in srt
+assert hashlib.sha256(Path('/workspace/work/white-sands/voice/verified-en/WHITE_SANDS_02_en-US.mp3').read_bytes()).hexdigest()=='0746d9175c956ff15e27121945fc15438c93c20456a3bc4ee711af273f4b3a06'
+
+def pcm(path):
+    b=subprocess.check_output(['ffmpeg','-v','error','-i',str(path),'-map','0:a:0','-ac','1','-ar','8000','-f','s16le','-'])
+    return np.frombuffer(b,dtype='<i2').astype(np.float32)
+reference=pcm('/workspace/work/white-sands/voice/verified-en/WHITE_SANDS_02_en-US.mp3')
+actual=pcm(video)
+comparisons=[]
+for second in [5,115,225,335,445,555,665,775,885,995,1105,1215,1315]:
+    c=second*8000;n=16000;pad=400
+    r=reference[c:c+n].copy();r-=r.mean()
+    x=actual[c-pad:c+n+pad].copy();x-=x.mean()
+    corr=np.correlate(x,r,mode='valid');k=int(np.argmax(corr));match=x[k:k+n]
+    similarity=float(np.dot(match,r)/(np.linalg.norm(match)*np.linalg.norm(r)+1e-12))
+    lag=(k-pad)/8000
+    assert abs(lag)<=.025,(second,lag)
+    assert similarity>.92,(second,similarity)
+    comparisons.append({'reference_seconds':second,'lag_seconds':lag,'waveform_correlation':round(similarity,6)})
+
+log=ROOT/'full_decode_qa.log'
+cmd=['ffmpeg','-hide_banner','-nostats','-threads','1','-i',str(video),'-map','0:v:0','-map','0:a:0',
+     '-vf','blackdetect=d=0.5:pix_th=0.05:pic_th=0.98',
+     '-af','loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json','-f','null','-']
+with log.open('w') as f:subprocess.run(cmd,stdout=f,stderr=subprocess.STDOUT,check=True)
+raw=log.read_text();last=raw[raw.rfind('{'):raw.rfind('}')+1];loudness=json.loads(last)
+assert float(loudness['input_tp'])<=-1.0
+assert -17<float(loudness['input_i'])<-15
+black=[line for line in raw.splitlines() if 'black_start:' in line]
+assert not black,black
+errors=[line for line in raw.splitlines() if any(t in line.lower() for t in ['error while decoding','corrupt decoded frame','invalid nal unit','non monotonically increasing'])]
+assert not errors,errors
+
+plan=json.loads((ROOT/'EDIT_PLAN.json').read_text())
+downloads=json.loads((ROOT/'DOWNLOADED_CLIPS.json').read_text())
+inventory=json.loads((ROOT/'inventory.json').read_text())
+result={
+ 'status':'passed','final_file':video.name,'video_duration_seconds':float(v[0]['duration']),
+ 'container_duration_seconds':float(probe['format']['duration']),'audio_duration_seconds':float(a[0]['duration']),
+ 'video_frames':int(v[0]['nb_frames']),'width':1280,'height':720,'fps':24,
+ 'video_codec':v[0]['codec_name'],'audio_codec':a[0]['codec_name'],'audio_stream_count':1,
+ 'audio_language':'English','original_clip_audio_included':False,'music_added':False,
+ 'audio_input':'Original WHITE_SANDS_02_en-US.mp3, unchanged pitch and timing; loudness processing only',
+ 'reference_voice_duration_seconds':len(reference)/8000,'reference_voice_sha256':hashlib.sha256(Path('/workspace/work/white-sands/voice/verified-en/WHITE_SANDS_02_en-US.mp3').read_bytes()).hexdigest(),'decoded_final_audio_seconds':len(actual)/8000,
+ 'waveform_alignment_checks':comparisons,'measured_loudness_lufs':float(loudness['input_i']),
+ 'measured_true_peak_dbtp':float(loudness['input_tp']),'measured_loudness_range_lu':float(loudness['input_lra']),
+ 'chapter_count':12,'subtitle_cues':132,'subtitle_mode':'Embedded optional English subtitles and separate SRT',
+ 'timeline_cues':132,'planned_shots':sum(len(p['segments']) for p in plan),'opening_30s_shots':8,
+ 'short_dissolves':sum(p['transition']=='dissolve' for p in plan),
+ 'source_uploads':len(downloads),'downloaded_uploads':len([d for d in downloads if 'path' in d]),
+ 'unique_downloaded_clips':len(inventory),'unique_source_clips_used':len({s['label'] for p in plan for s in p['segments'] if not s['label'].startswith('@')}),'science_graphic_count':len(list((ROOT/'graphics').glob('*.png'))),'exact_duplicate_files_removed':len([d for d in downloads if 'path' in d])-len(inventory),
+ 'source_transfer_limits':[d for d in downloads if 'error' in d],
+ 'source_note':'All 98 uploaded episode-2 clips transferred successfully. Selection followed content review, rather than embedded file numbering.',
+ 'science_graphics':'Natural Earth 1:110m modern coastline; explanatory dating/layer/environment diagrams are explicitly schematic. No exact unverified migration route is plotted.',
+ 'full_decode_exit_code':0,'black_gaps_detected':black,'decode_errors_detected':errors,
+ 'visual_review':'All 98 source clips inspected using contact sheets. Opening montage, graphics, chapter headings and ending sampled from rendered frames. No claim of real-time manual review of all 22 minutes.',
+ 'sha256':hashlib.sha256(video.read_bytes()).hexdigest(),'bytes':video.stat().st_size,
+ 'voices':'Existing separate-language voice assets are retained in release white-sands-video-02-22min. Only the existing English reference is included in this video.'
+}
+(OUT/'FINAL_VIDEO_QA.json').write_text(json.dumps(result,ensure_ascii=False,indent=2))
+print(json.dumps({'status':'passed','seconds':result['video_duration_seconds'],'bytes':result['bytes'],'lufs':result['measured_loudness_lufs'],'true_peak':result['measured_true_peak_dbtp'],'alignment_checks':len(comparisons),'sha256':result['sha256']}),flush=True)

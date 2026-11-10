@@ -1,0 +1,77 @@
+{
+  "status": "passed",
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/white-sands-video-02-final-22min",
+  "tag": "white-sands-video-02-final-22min",
+  "published_at": "2026-11-10T01:37:52Z",
+  "asset_count": 11,
+  "assets": [
+    {
+      "name": "EDITOR_DECISIONS.json",
+      "bytes": 714,
+      "sha256": "f05152f101f0451af75c2dd6cafe03a296c495b00a2b9f068b40bf08a7450448",
+      "url": "https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/EDITOR_DECISIONS.json"
+    },
+    {
+      "name": "EDIT_TIMELINE.csv",
+      "bytes": 53114,
+      "sha256": "06fd9ab8880a6745b8b12b0320074f5e46501ab2090212a154a145e5600e69f0",
+      "url": "https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/EDIT_TIMELINE.csv"
+    },
+    {
+      "name": "FINAL_VIDEO_QA.json",
+      "bytes": 3655,
+      "sha256": "3b88715f43c844eeaef84607a78453f391bfcb31c827877e11f2660dcac91c9e",
+      "url": "https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/FINAL_VIDEO_QA.json"
+    },
+    {
+      "name": "README.md",
+      "bytes": 2669,
+      "sha256": "b10b79c8b3aa82b02ade3777a51a33bbde0f59f6b6d260b5a5751cd5faf2d1e1",
+      "url": "https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/README.md"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 920,
+      "sha256": "5e4a7e8f0e71f745b6f4fc6c336f90073245ae550ff723f581ee403cab12c592",
+      "url": "https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/SHA256SUMS.txt"
+    },
+    {
+      "name": "SOURCE_CLIP_MANIFEST.csv",
+      "bytes": 16090,
+      "sha256": "70444bec0e80cd2cacfd7f2c44878911e28943f916583b86360714c99aa47072",
+      "url": "https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/SOURCE_CLIP_MANIFEST.csv"
+    },
+    {
+      "name": "TITLES_AND_THUMBNAIL_PROMPTS.txt",
+      "bytes": 4636,
+      "sha256": "991d4139fe4805b4ab27ec87798fb5a97663e74a39dd6fcf3f501f6b24284bf4",
+      "url": "https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/TITLES_AND_THUMBNAIL_PROMPTS.txt"
+    },
+    {
+      "name": "WHITE_SANDS_02_EDIT_PROJECT.zip",
+      "bytes": 16394539,
+      "sha256": "6555d39f506f11c5a49fdfd3fae3edd83bba5f94412bb02b14d44f8c32603dd5",
+      "url": "https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/WHITE_SANDS_02_EDIT_PROJECT.zip"
+    },
+    {
+      "name": "WHITE_SANDS_02_EN_FINAL_22m_720p.mp4",
+      "bytes": 523263358,
+      "sha256": "5d4af6d7dd87bd29e83585c651fd56359882a9d8d3669571fd03752e417593f5",
+      "url": "https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/WHITE_SANDS_02_EN_FINAL_22m_720p.mp4"
+    },
+    {
+      "name": "WHITE_SANDS_02_EN_SUBTITLES.srt",
+      "bytes": 26644,
+      "sha256": "8711592bd036833a063643abb9d1fe38c52ec5e5c5b69b4213ea9cc30666f05d",
+      "url": "https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/WHITE_SANDS_02_EN_SUBTITLES.srt"
+    },
+    {
+      "name": "WHITE_SANDS_02_OPENING_30s.mp4",
+      "bytes": 15854939,
+      "sha256": "9523556b450122bd83a760fe08885ddd6e187ec446f37c6ff8dc66216b9adbb0",
+      "url": "https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/WHITE_SANDS_02_OPENING_30s.mp4"
+    }
+  ],
+  "public_video_head_status": 200,
+  "verification": "Public release asset sizes and server SHA256 digests match local finished files; final MP4 download returns HTTP 200."
+}

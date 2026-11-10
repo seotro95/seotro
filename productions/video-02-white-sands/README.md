@@ -2,7 +2,7 @@
 
 **White Sands: The Footprints That Changed America's Timeline**
 
-Đã bàn giao kịch bản tiếng Anh gốc 3.320 từ và 17 audio riêng, mỗi bản đo đúng 22:00 sau giải mã. Video chính chỉ dùng voice tiếng Anh. Chưa có bản dựng video chủ đề 2: chờ các clip tạo theo bộ prompt của tập này.
+Đã bàn giao kịch bản tiếng Anh gốc 3.320 từ và 17 audio riêng, mỗi bản đo đúng 22:00 sau giải mã. Video chính chỉ dùng voice tiếng Anh. Đã xuất và kiểm tra bản dựng hoàn chỉnh 22:00 từ 98 clip người dùng cung cấp; chỉ giữ giọng đọc tiếng Anh gốc.
 
 ## Tải tài liệu và voice
 
@@ -17,7 +17,7 @@
 
 ## Dựng hình
 
-132 ô timeline, mỗi ô 10 giây, dùng 100 clip riêng. Đặt tên clip WS02_001.mp4 đến WS02_100.mp4; số clip khác số cảnh timeline. 32 ô REUSE đã ghi rõ clip nguồn. Mỗi prompt tạo một cảnh liên tục 10 giây, không âm thanh; loại bỏ mọi âm thanh clip khi dựng. Kế hoạch hook thay cách đặt hình trong 30 giây đầu, không nối thêm thời gian vào voice.
+Kế hoạch prompt gốc gồm 132 ô timeline, mỗi ô 10 giây, dự kiến 100 clip riêng. Bản dựng hoàn chỉnh chọn 66 clip phù hợp từ 98 clip đã nhận và bổ sung 15 sơ đồ; các vị trí sử dụng thực tế nằm trong EDIT/EDIT_TIMELINE.csv. Đặt tên clip WS02_001.mp4 đến WS02_100.mp4; số clip khác số cảnh timeline. 32 ô REUSE đã ghi rõ clip nguồn. Mỗi prompt tạo một cảnh liên tục 10 giây, không âm thanh; loại bỏ mọi âm thanh clip khi dựng. Kế hoạch hook thay cách đặt hình trong 30 giây đầu, không nối thêm thời gian vào voice.
 
 Tham khảo [phân tích cách kể và dựng video nguồn](PHAN_TICH_NGUON_VA_QUY_TRINH.txt). Nhãn địa danh, niên đại và chú thích khoa học thêm khi edit. Hình tạo sinh là minh họa, không trình bày như ảnh khai quật gốc. [Bản đồ tham chiếu](REFERENCES/MAP_REFERENCE_NORTH_AMERICA.png) dùng đường bờ hiện đại để định hướng, không phải bờ biển cổ được tái dựng chính xác.
 
@@ -27,4 +27,15 @@ Tham khảo [phân tích cách kể và dựng video nguồn](PHAN_TICH_NGUON_VA
 
 Bản dịch đã sửa những lỗi thuật ngữ được phát hiện nhưng vẫn cần người bản ngữ đọc/nghe rà soát. Phương ngữ Hmong Trắng chưa được xác nhận độc lập. ZIP tài liệu gốc là bản chụp thời điểm bàn giao trước khi tạo voice; hồ sơ voice hoàn tất nằm trong VOICES và release.
 
-Đã lưu trạng thái để lần sau tiếp tục chủ đề 3, không bắt đầu chủ đề 3 trong lượt này. Mục tiêu 22 phút là yêu cầu riêng của tập 2.
+Tập 3 đã hoàn tất tài liệu và voice; hàng đợi tiếp theo vẫn là chủ đề 4. Lượt này chỉ dựng video tập 2. Mục tiêu 22 phút là yêu cầu riêng của tập 2.
+
+
+## Video hoàn chỉnh
+
+- [Tải video 22:00, 720p/24fps](https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/WHITE_SANDS_02_EN_FINAL_22m_720p.mp4)
+- [Xem đoạn mở đầu 30 giây](https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/WHITE_SANDS_02_OPENING_30s.mp4)
+- [Project dựng, code, đồ hoạ và hồ sơ nguồn](https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/WHITE_SANDS_02_EDIT_PROJECT.zip)
+- [5 tiêu đề và 5 prompt thumbnail](https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/TITLES_AND_THUMBNAIL_PROMPTS.txt)
+- [Báo cáo QA](https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/FINAL_VIDEO_QA.json) · [Timeline dựng](EDIT/EDIT_TIMELINE.csv)
+
+Đoạn mở đầu dùng 8 shot trong đúng 30 giây của voice. Không nhạc, không hiệu ứng âm thanh, không tiếng gốc của clip. Phụ đề tiếng Anh có thể bật/tắt. Sơ đồ định tuổi và bản đồ được biên tập riêng khi hình tạo sinh sai hoặc không phù hợp. Mọi hình tái dựng đều là minh hoạ. Chi tiết kỹ thuật và SHA256 nằm trong project/QA.

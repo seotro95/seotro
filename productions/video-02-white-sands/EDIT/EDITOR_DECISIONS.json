@@ -1,0 +1,27 @@
+{
+  "uploaded_unique_clips": 98,
+  "rejected_generated_maps_or_misleading_visuals": [
+    "V242",
+    "V227",
+    "V257",
+    "V258",
+    "V265",
+    "V267",
+    "V272",
+    "V287",
+    "V288",
+    "V291",
+    "V292",
+    "V294",
+    "V296",
+    "V302",
+    "V309",
+    "V311",
+    "M032",
+    "M082"
+  ],
+  "reason": "Inaccurate geography, invented charts, inconsistent intended scene, implausible representations, or distracting generated labels; use inspected alternatives and explicit explanatory schematics.",
+  "opening_shots": 8,
+  "english_reference_sha256": "0746d9175c956ff15e27121945fc15438c93c20456a3bc4ee711af273f4b3a06",
+  "audio": "Original English narration only; all source clip audio excluded."
+}
