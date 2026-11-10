@@ -1,0 +1,10 @@
+{
+  "documents_delivered": true,
+  "topic": 3,
+  "target_seconds": 1200,
+  "commit": "ca4e72ec2d5e0db299a203d8e4ce6f52c939dc73",
+  "tree": "85ba0879e6ee69642571951feb770126f070e3f0",
+  "zip_sha256": "e8406c627595cda691bf1859a57739da0d996639f0fcc67fb3cf48676a9ef6ec",
+  "zip_bytes": 1587343,
+  "voice_started": false
+}

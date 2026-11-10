@@ -1,0 +1,92 @@
+name: Malta episode 3 - expressive narration, 17 locked voices
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install the pinned online client
+        run: python -m pip install edge-tts==7.3.1
+      - name: Verify expressive first 30 seconds before full synthesis
+        run: python -u scripts/job_init.py en-US preview
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ma03-expressive-preview-30s
+          path: build/voice/audio/en-US
+          retention-days: 7
+  voices:
+    needs: preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        locale: [nl-NL, sv-SE, da-DK, fi-FI, nb-NO, en-US, vi-VN, es-ES, fr-FR, ja-JP, ko-KR, de-DE, it-IT, pt-PT, pl-PL, cs-CZ]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install the pinned online client
+        run: python -m pip install edge-tts==7.3.1
+      - name: Restore partial audio when retrying a failed locale
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ github.run_id }}
+          name: ma03-checkpoint-${{ matrix.locale }}
+          path: build/voice/audio/${{ matrix.locale }}
+      - name: Render expressive narration with the original voice ID
+        timeout-minutes: 55
+        env:
+          TTS_CHUNK_LIMIT: '480'
+          TTS_LOCALE_WORKERS: '2'
+        run: python -u scripts/job_init.py ${{ matrix.locale }} full
+      - name: Preserve recoverable partial work
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ma03-checkpoint-${{ matrix.locale }}
+          overwrite: true
+          path: |
+            build/voice/audio/${{ matrix.locale }}/raw-*.wav
+            build/voice/audio/${{ matrix.locale }}/raw-*.json
+            build/voice/audio/${{ matrix.locale }}/raw-*.jsonl
+          if-no-files-found: ignore
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ma03-voice-${{ matrix.locale }}
+          path: |
+            build/voice/audio/${{ matrix.locale }}/MALTA_03_*.mp3
+            build/voice/audio/${{ matrix.locale }}/render_report.json
+            build/voice/audio/${{ matrix.locale }}/subtitles.srt
+          if-no-files-found: error
+          retention-days: 7
+  publish:
+    needs: voices
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: ma03-voice-*
+          path: artifacts
+      - name: Verify all17 durations and identities, add native Hmong, publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u scripts/publish_voices_job.py
