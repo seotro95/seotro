@@ -1,0 +1,180 @@
+{
+  "status": "passed",
+  "voices": 17,
+  "english_words": 2816,
+  "english_cues": 122,
+  "english_last_cue_seconds": 5,
+  "seconds": 1215,
+  "frames_48k": 58320000,
+  "translated_chapter_seconds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    115
+  ],
+  "profiles_preserved": true,
+  "native_editorial_listening_review_pending": true,
+  "locales": [
+    {
+      "locale": "en-US",
+      "cues": 122,
+      "seconds": 1215,
+      "input_sha256": "eab06ade0dbe19b20cd28b6e998c77226578d004a29e2d082d936459ed5ba324",
+      "critical_values_preserved": true,
+      "voice_id": "en-US-AndrewNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "vi-VN",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "101e0634c410a0d636b1d3c18e86413bf1a4dfc9f7a8c124a4b1f97d3622638b",
+      "critical_values_preserved": true,
+      "voice_id": "vi-VN-NamMinhNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "es-ES",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "2a6aa621254b42c70b72826741674330c568e7643eb721d6ff8a0f92bf8896c5",
+      "critical_values_preserved": true,
+      "voice_id": "es-ES-AlvaroNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "fr-FR",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "6c12016674e33560d0123f9cc0d55037faea106ac4b0bcead73079a7de17258a",
+      "critical_values_preserved": true,
+      "voice_id": "fr-FR-HenriNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "ja-JP",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "b92b327473e41e689a2ab5999d7cd5962643808d9390ee92b2db9fd0fcaea01f",
+      "critical_values_preserved": true,
+      "voice_id": "ja-JP-KeitaNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "ko-KR",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "7ab00c24cb485f189db476bd4811ad99f3b947dabb034df4829dd79eede58696",
+      "critical_values_preserved": true,
+      "voice_id": "ko-KR-InJoonNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "de-DE",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "18956f3df0568f8c940c20b1e051b18e7d27a697461841360e63f96bc466d161",
+      "critical_values_preserved": true,
+      "voice_id": "de-DE-ConradNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "it-IT",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "f27d1750e53968e423cdaf7233f719d77abae38ca86cb0642f529521bee6039c",
+      "critical_values_preserved": true,
+      "voice_id": "it-IT-DiegoNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "pt-PT",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "9fd00b90cf05165cfd42360d52b64bb7b25161d520047e46c8435009434e5186",
+      "critical_values_preserved": true,
+      "voice_id": "pt-PT-DuarteNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "nl-NL",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "6802eee3cc24bf87e8bf11815d47c021e8b302289ba92e243ee7f8d4a8938fe3",
+      "critical_values_preserved": true,
+      "voice_id": "nl-NL-MaartenNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "pl-PL",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "edd37353f358285065681918ca8c1cb73d40181a92c6cff8d200ea06b2d7be38",
+      "critical_values_preserved": true,
+      "voice_id": "pl-PL-MarekNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "sv-SE",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "b14e40a1a05fefccc780fcaaae9bbdf60d5e6cf6830a40a2d75da98a9bebb4c4",
+      "critical_values_preserved": true,
+      "voice_id": "sv-SE-MattiasNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "da-DK",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "4fee9ee7cd4535cb828cc3418a26ec25c3d8ed65d7d4c10d791af59dc955aaa7",
+      "critical_values_preserved": true,
+      "voice_id": "da-DK-JeppeNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "fi-FI",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "1dd7419a8968469f62b79432d1728b2e59978f1e517aaada8b8a2d454ac70518",
+      "critical_values_preserved": true,
+      "voice_id": "fi-FI-HarriNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "nb-NO",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "fa46075586f14ecbd6e211ed92d3f42f6ac7332287c07618a6dd2084c576ffd6",
+      "critical_values_preserved": true,
+      "voice_id": "nb-NO-FinnNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "cs-CZ",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "6a9cba50379dc006bbd7b31fd503cad03ac68ca3944a072a68ee386a0e65968b",
+      "critical_values_preserved": true,
+      "voice_id": "cs-CZ-AntoninNeural",
+      "gender": "Male"
+    },
+    {
+      "locale": "mww",
+      "cues": 12,
+      "seconds": 1215,
+      "input_sha256": "9b3c65dc59dbf332ce4ca4bbccf2305cd86373d56698d59aa62149ef8283d8e0",
+      "critical_values_preserved": true,
+      "voice_id": "hmong-female-3",
+      "gender": "Female"
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "topic": 19,
+  "reviewed_by": "assistant",
+  "white_hmong_dialect_independently_verified": false,
+  "native_review_pending": true,
+  "notes": "Vietnamese and Hmong separately edited;other locales translated with chapter context and targeted semantic repairs. Not a certification of native fluency.",
+  "locales": [
+    {
+      "locale": "ja-JP",
+      "chapters": 12,
+      "source_ambiguities_clarified": [
+        "bone ring versus jewellery",
+        "animal killing versus human murder",
+        "occupation versus job",
+        "sediment versus financial deposit",
+        "tree growth layer versus bone circle",
+        "animal sex versus human gender",
+        "counts versus illustrations"
+      ],
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "ko-KR",
+      "chapters": 12,
+      "source_ambiguities_clarified": [
+        "bone ring versus jewellery",
+        "animal killing versus human murder",
+        "occupation versus job",
+        "sediment versus financial deposit",
+        "tree growth layer versus bone circle",
+        "animal sex versus human gender",
+        "counts versus illustrations"
+      ],
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "pt-PT",
+      "chapters": 12,
+      "source_ambiguities_clarified": [
+        "bone ring versus jewellery",
+        "animal killing versus human murder",
+        "occupation versus job",
+        "sediment versus financial deposit",
+        "tree growth layer versus bone circle",
+        "animal sex versus human gender",
+        "counts versus illustrations"
+      ],
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "es-ES",
+      "chapters": 12,
+      "source_ambiguities_clarified": [
+        "bone ring versus jewellery",
+        "animal killing versus human murder",
+        "occupation versus job",
+        "sediment versus financial deposit",
+        "tree growth layer versus bone circle",
+        "animal sex versus human gender",
+        "counts versus illustrations"
+      ],
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "fr-FR",
+      "chapters": 12,
+      "source_ambiguities_clarified": [
+        "bone ring versus jewellery",
+        "animal killing versus human murder",
+        "occupation versus job",
+        "sediment versus financial deposit",
+        "tree growth layer versus bone circle",
+        "animal sex versus human gender",
+        "counts versus illustrations"
+      ],
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "de-DE",
+      "chapters": 12,
+      "source_ambiguities_clarified": [
+        "bone ring versus jewellery",
+        "animal killing versus human murder",
+        "occupation versus job",
+        "sediment versus financial deposit",
+        "tree growth layer versus bone circle",
+        "animal sex versus human gender",
+        "counts versus illustrations"
+      ],
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "it-IT",
+      "chapters": 12,
+      "source_ambiguities_clarified": [
+        "bone ring versus jewellery",
+        "animal killing versus human murder",
+        "occupation versus job",
+        "sediment versus financial deposit",
+        "tree growth layer versus bone circle",
+        "animal sex versus human gender",
+        "counts versus illustrations"
+      ],
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "nl-NL",
+      "chapters": 12,
+      "source_ambiguities_clarified": [
+        "bone ring versus jewellery",
+        "animal killing versus human murder",
+        "occupation versus job",
+        "sediment versus financial deposit",
+        "tree growth layer versus bone circle",
+        "animal sex versus human gender",
+        "counts versus illustrations"
+      ],
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "pl-PL",
+      "chapters": 12,
+      "source_ambiguities_clarified": [
+        "bone ring versus jewellery",
+        "animal killing versus human murder",
+        "occupation versus job",
+        "sediment versus financial deposit",
+        "tree growth layer versus bone circle",
+        "animal sex versus human gender",
+        "counts versus illustrations"
+      ],
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "sv-SE",
+      "chapters": 12,
+      "source_ambiguities_clarified": [
+        "bone ring versus jewellery",
+        "animal killing versus human murder",
+        "occupation versus job",
+        "sediment versus financial deposit",
+        "tree growth layer versus bone circle",
+        "animal sex versus human gender",
+        "counts versus illustrations"
+      ],
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "da-DK",
+      "chapters": 12,
+      "source_ambiguities_clarified": [
+        "bone ring versus jewellery",
+        "animal killing versus human murder",
+        "occupation versus job",
+        "sediment versus financial deposit",
+        "tree growth layer versus bone circle",
+        "animal sex versus human gender",
+        "counts versus illustrations"
+      ],
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "fi-FI",
+      "chapters": 12,
+      "source_ambiguities_clarified": [
+        "bone ring versus jewellery",
+        "animal killing versus human murder",
+        "occupation versus job",
+        "sediment versus financial deposit",
+        "tree growth layer versus bone circle",
+        "animal sex versus human gender",
+        "counts versus illustrations"
+      ],
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "nb-NO",
+      "chapters": 12,
+      "source_ambiguities_clarified": [
+        "bone ring versus jewellery",
+        "animal killing versus human murder",
+        "occupation versus job",
+        "sediment versus financial deposit",
+        "tree growth layer versus bone circle",
+        "animal sex versus human gender",
+        "counts versus illustrations"
+      ],
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "cs-CZ",
+      "chapters": 12,
+      "source_ambiguities_clarified": [
+        "bone ring versus jewellery",
+        "animal killing versus human murder",
+        "occupation versus job",
+        "sediment versus financial deposit",
+        "tree growth layer versus bone circle",
+        "animal sex versus human gender",
+        "counts versus illustrations"
+      ],
+      "native_editorial_listening_review_pending": true
+    }
+  ]
+}
