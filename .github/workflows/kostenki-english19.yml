@@ -1,0 +1,75 @@
+name: Kostenki19 English preview and full1215seconds
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/kostenki-voice-build-20261111]
+    paths: [.github/workflows/kostenki-english19.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts
+            input
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install edge-tts==7.3.1
+      - name: Verify expressive30second preview before full synthesis
+        run: python -u scripts/job_init.py en-US preview
+      - uses: actions/upload-artifact@v4
+        with:
+          name: k19-expressive-preview-30s
+          path: build/voice/audio/en-US
+          retention-days: 7
+  english:
+    needs: preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts
+            input
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install edge-tts==7.3.1
+      - name: Restore recoverable English checkpoint
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ github.run_id }}
+          name: k19-checkpoint-en-US
+          path: build/voice/audio/en-US
+      - name: Render121ten-second cues and final5second cue
+        run: python -u scripts/job_init.py en-US full
+      - name: Preserve English pieces on retry
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: k19-checkpoint-en-US
+          overwrite: true
+          path: |
+            build/voice/audio/en-US/raw-*.wav
+            build/voice/audio/en-US/raw-*.json
+            build/voice/audio/en-US/raw-*.jsonl
+          if-no-files-found: ignore
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: k19-voice-en-US
+          path: |
+            build/voice/audio/en-US/KOSTENKI_19_*.mp3
+            build/voice/audio/en-US/render_report.json
+            build/voice/audio/en-US/subtitles.srt
+          if-no-files-found: error
+          retention-days: 7
