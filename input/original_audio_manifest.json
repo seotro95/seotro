@@ -1,0 +1,179 @@
+{
+  "topic": 3,
+  "seconds_per_voice": 1200,
+  "sample_frames_at_48000": 57600000,
+  "voice_count": 17,
+  "voices": [
+    {
+      "locale": "en-US",
+      "name": "Anh (Mỹ)",
+      "gender": "Male",
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "MALTA_03_en-US.mp3",
+      "bytes": 9600620,
+      "sha256": "60d7bb588b483a57c543c16173d4006e1728d347f6e26fc284ada48d75394136",
+      "seconds": 1200
+    },
+    {
+      "locale": "vi-VN",
+      "name": "Việt Nam",
+      "gender": "Male",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "MALTA_03_vi-VN.mp3",
+      "bytes": 9600620,
+      "sha256": "7ef1275eeedf6dc2421a3d61c50ff0accefd6128cb38e919dc0d582667a46ad1",
+      "seconds": 1200
+    },
+    {
+      "locale": "es-ES",
+      "name": "Tây Ban Nha",
+      "gender": "Male",
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "MALTA_03_es-ES.mp3",
+      "bytes": 9600620,
+      "sha256": "4b8533bd1fac1e5ddbe0d42727fb2ca7f0fe72bb478fce7482557de24c4fb1c6",
+      "seconds": 1200
+    },
+    {
+      "locale": "fr-FR",
+      "name": "Pháp",
+      "gender": "Male",
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "MALTA_03_fr-FR.mp3",
+      "bytes": 9600620,
+      "sha256": "00c8dc0a7474b2c92cc0a5d08e0cf0338106903198529c9471e22e86ee3229b5",
+      "seconds": 1200
+    },
+    {
+      "locale": "ja-JP",
+      "name": "Nhật Bản",
+      "gender": "Male",
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "MALTA_03_ja-JP.mp3",
+      "bytes": 9600620,
+      "sha256": "de4c2415183005271ff55d5ac05a756c3d7ad87a33ffd4bbbf6f096a22485c02",
+      "seconds": 1200
+    },
+    {
+      "locale": "ko-KR",
+      "name": "Hàn Quốc",
+      "gender": "Male",
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "MALTA_03_ko-KR.mp3",
+      "bytes": 9600620,
+      "sha256": "ed2074343302bc7afd49837694c5ef4a7d9218c05a72b59c88da346089131472",
+      "seconds": 1200
+    },
+    {
+      "locale": "de-DE",
+      "name": "Đức",
+      "gender": "Male",
+      "voice_id": "de-DE-ConradNeural",
+      "filename": "MALTA_03_de-DE.mp3",
+      "bytes": 9600620,
+      "sha256": "0e5b5fb46c0456c03d708a3ba6c5416c8eff66329a747e75ad575205d80a9324",
+      "seconds": 1200
+    },
+    {
+      "locale": "it-IT",
+      "name": "Ý",
+      "gender": "Male",
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "MALTA_03_it-IT.mp3",
+      "bytes": 9600620,
+      "sha256": "385366ffce84f15e621e0a101a03b27a2dfff663b3218ab663aa0acf491f73b1",
+      "seconds": 1200
+    },
+    {
+      "locale": "pt-PT",
+      "name": "Bồ Đào Nha",
+      "gender": "Male",
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "MALTA_03_pt-PT.mp3",
+      "bytes": 9600620,
+      "sha256": "f950fb627c96f3d5fd0ed7ce5286babca91d2ddc5e59affe8dc00a8eac02c30b",
+      "seconds": 1200
+    },
+    {
+      "locale": "nl-NL",
+      "name": "Hà Lan",
+      "gender": "Male",
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "MALTA_03_nl-NL.mp3",
+      "bytes": 9600620,
+      "sha256": "6156edaaeb772f263a75878c5a6028e1f81add3870fd45f068e6dd719014ac20",
+      "seconds": 1200
+    },
+    {
+      "locale": "pl-PL",
+      "name": "Ba Lan",
+      "gender": "Male",
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "MALTA_03_pl-PL.mp3",
+      "bytes": 9600620,
+      "sha256": "044e4459b59b8d9971d911481a59e44f9d0bf85259761def7c7e7adb9561a33f",
+      "seconds": 1200
+    },
+    {
+      "locale": "sv-SE",
+      "name": "Thụy Điển",
+      "gender": "Male",
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "MALTA_03_sv-SE.mp3",
+      "bytes": 9600620,
+      "sha256": "910307e57b8490eab6c7202b29f3d89c6b2f9387db8192b3f051be2da7d5520a",
+      "seconds": 1200
+    },
+    {
+      "locale": "da-DK",
+      "name": "Đan Mạch",
+      "gender": "Male",
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "MALTA_03_da-DK.mp3",
+      "bytes": 9600620,
+      "sha256": "48b52e207dba2b57cd45ab2643d884241a575acda3fdfcbed5c400165c1084ba",
+      "seconds": 1200
+    },
+    {
+      "locale": "fi-FI",
+      "name": "Phần Lan",
+      "gender": "Male",
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "MALTA_03_fi-FI.mp3",
+      "bytes": 9600620,
+      "sha256": "a92fe5e98881abf6b531280a1eac403f4e59fd220fb9e238c51fa43f6c6247f3",
+      "seconds": 1200
+    },
+    {
+      "locale": "nb-NO",
+      "name": "Na Uy (Bokmål)",
+      "gender": "Male",
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "MALTA_03_nb-NO.mp3",
+      "bytes": 9600620,
+      "sha256": "3823e08725351c908f763b5c8faca76fab14e5bbf2ffac5920eaece6031f4e33",
+      "seconds": 1200
+    },
+    {
+      "locale": "cs-CZ",
+      "name": "Séc",
+      "gender": "Male",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "MALTA_03_cs-CZ.mp3",
+      "bytes": 9600620,
+      "sha256": "7f40b934f44c789fb4e497cc8cca366713aaf5aaf97bd2cfd0422ee27a660f72",
+      "seconds": 1200
+    },
+    {
+      "locale": "mww",
+      "name": "H’mông Trắng — bản nháp cần kiểm tra phương ngữ",
+      "gender": "Female",
+      "voice_id": "hmong-female-3",
+      "filename": "MALTA_03_mww_female.mp3",
+      "bytes": 9600620,
+      "sha256": "0c645a2e2010693634831f4a92ed897efe7b970d7f3230fecbf296ebf80a2b7b",
+      "seconds": 1200
+    }
+  ],
+  "native_review_pending": true
+}
