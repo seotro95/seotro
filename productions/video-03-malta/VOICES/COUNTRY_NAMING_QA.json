@@ -1,0 +1,144 @@
+{
+  "voice_count": 17,
+  "naming_profile_id": "country-filenames-vi-v1",
+  "all_audio_bytes_unchanged": true,
+  "verified_seconds_per_voice": 1200,
+  "voices": [
+    {
+      "locale": "en-US",
+      "filename": "MALTA_03_My_Tieng_Anh.mp3",
+      "legacy_filename": "MALTA_03_en-US.mp3",
+      "sha256": "60d7bb588b483a57c543c16173d4006e1728d347f6e26fc284ada48d75394136",
+      "voice_id": "en-US-AndrewNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "vi-VN",
+      "filename": "MALTA_03_Viet_Nam.mp3",
+      "legacy_filename": "MALTA_03_vi-VN.mp3",
+      "sha256": "7ef1275eeedf6dc2421a3d61c50ff0accefd6128cb38e919dc0d582667a46ad1",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "es-ES",
+      "filename": "MALTA_03_Tay_Ban_Nha.mp3",
+      "legacy_filename": "MALTA_03_es-ES.mp3",
+      "sha256": "4b8533bd1fac1e5ddbe0d42727fb2ca7f0fe72bb478fce7482557de24c4fb1c6",
+      "voice_id": "es-ES-AlvaroNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "fr-FR",
+      "filename": "MALTA_03_Phap.mp3",
+      "legacy_filename": "MALTA_03_fr-FR.mp3",
+      "sha256": "00c8dc0a7474b2c92cc0a5d08e0cf0338106903198529c9471e22e86ee3229b5",
+      "voice_id": "fr-FR-HenriNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "ja-JP",
+      "filename": "MALTA_03_Nhat_Ban.mp3",
+      "legacy_filename": "MALTA_03_ja-JP.mp3",
+      "sha256": "de4c2415183005271ff55d5ac05a756c3d7ad87a33ffd4bbbf6f096a22485c02",
+      "voice_id": "ja-JP-KeitaNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "ko-KR",
+      "filename": "MALTA_03_Han_Quoc.mp3",
+      "legacy_filename": "MALTA_03_ko-KR.mp3",
+      "sha256": "ed2074343302bc7afd49837694c5ef4a7d9218c05a72b59c88da346089131472",
+      "voice_id": "ko-KR-InJoonNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "de-DE",
+      "filename": "MALTA_03_Duc.mp3",
+      "legacy_filename": "MALTA_03_de-DE.mp3",
+      "sha256": "0e5b5fb46c0456c03d708a3ba6c5416c8eff66329a747e75ad575205d80a9324",
+      "voice_id": "de-DE-ConradNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "it-IT",
+      "filename": "MALTA_03_Y.mp3",
+      "legacy_filename": "MALTA_03_it-IT.mp3",
+      "sha256": "385366ffce84f15e621e0a101a03b27a2dfff663b3218ab663aa0acf491f73b1",
+      "voice_id": "it-IT-DiegoNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "pt-PT",
+      "filename": "MALTA_03_Bo_Dao_Nha.mp3",
+      "legacy_filename": "MALTA_03_pt-PT.mp3",
+      "sha256": "f950fb627c96f3d5fd0ed7ce5286babca91d2ddc5e59affe8dc00a8eac02c30b",
+      "voice_id": "pt-PT-DuarteNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "nl-NL",
+      "filename": "MALTA_03_Ha_Lan.mp3",
+      "legacy_filename": "MALTA_03_nl-NL.mp3",
+      "sha256": "6156edaaeb772f263a75878c5a6028e1f81add3870fd45f068e6dd719014ac20",
+      "voice_id": "nl-NL-MaartenNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "pl-PL",
+      "filename": "MALTA_03_Ba_Lan.mp3",
+      "legacy_filename": "MALTA_03_pl-PL.mp3",
+      "sha256": "044e4459b59b8d9971d911481a59e44f9d0bf85259761def7c7e7adb9561a33f",
+      "voice_id": "pl-PL-MarekNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "sv-SE",
+      "filename": "MALTA_03_Thuy_Dien.mp3",
+      "legacy_filename": "MALTA_03_sv-SE.mp3",
+      "sha256": "910307e57b8490eab6c7202b29f3d89c6b2f9387db8192b3f051be2da7d5520a",
+      "voice_id": "sv-SE-MattiasNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "da-DK",
+      "filename": "MALTA_03_Dan_Mach.mp3",
+      "legacy_filename": "MALTA_03_da-DK.mp3",
+      "sha256": "48b52e207dba2b57cd45ab2643d884241a575acda3fdfcbed5c400165c1084ba",
+      "voice_id": "da-DK-JeppeNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "fi-FI",
+      "filename": "MALTA_03_Phan_Lan.mp3",
+      "legacy_filename": "MALTA_03_fi-FI.mp3",
+      "sha256": "a92fe5e98881abf6b531280a1eac403f4e59fd220fb9e238c51fa43f6c6247f3",
+      "voice_id": "fi-FI-HarriNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "nb-NO",
+      "filename": "MALTA_03_Na_Uy.mp3",
+      "legacy_filename": "MALTA_03_nb-NO.mp3",
+      "sha256": "3823e08725351c908f763b5c8faca76fab14e5bbf2ffac5920eaece6031f4e33",
+      "voice_id": "nb-NO-FinnNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "cs-CZ",
+      "filename": "MALTA_03_Sec.mp3",
+      "legacy_filename": "MALTA_03_cs-CZ.mp3",
+      "sha256": "7f40b934f44c789fb4e497cc8cca366713aaf5aaf97bd2cfd0422ee27a660f72",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "seconds": 1200
+    },
+    {
+      "locale": "mww",
+      "filename": "MALTA_03_Hmong_Trang_Nu.mp3",
+      "legacy_filename": "MALTA_03_mww_female.mp3",
+      "sha256": "0c645a2e2010693634831f4a92ed897efe7b970d7f3230fecbf296ebf80a2b7b",
+      "voice_id": "hmong-female-3",
+      "seconds": 1200
+    }
+  ]
+}

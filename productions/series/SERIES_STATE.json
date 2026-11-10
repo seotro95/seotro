@@ -5,8 +5,8 @@
   "resume_file": "productions/TIEP_TUC_TU_DAY.md",
   "topic_index": "productions/series/TOPICS_001_100.csv",
   "shared_voice_profiles": "productions/series/VOICE_PROFILES_LOCKED.json",
-  "active_topic": 3,
-  "next_topic_id": 3,
+  "active_topic": null,
+  "next_topic_id": 4,
   "user_preferences": {
     "language_for_collaboration": "Vietnamese",
     "process_one_topic_at_a_time": true,
@@ -14,7 +14,7 @@
     "target_duration_seconds": 1200,
     "video_clip_seconds": 10,
     "scene_count": 120,
-    "prompt_files": 12,
+    "prompt_files": 10,
     "prompts_per_txt": 10,
     "generated_clips_audio": "silent",
     "voice_count": 17,
@@ -43,7 +43,19 @@
     "prompt_files_follow_unique_prompt_count": true,
     "expressive_narration": true,
     "narration_style_id": "science-documentary-expressive-v1",
-    "narration_style_profile": "productions/series/NARRATION_STYLE_LOCKED.json"
+    "narration_style_profile": "productions/series/NARRATION_STYLE_LOCKED.json",
+    "voice_filename_style": "Vietnamese country names; ASCII filename, accented display table",
+    "voice_naming_profile_id": "country-filenames-vi-v1",
+    "voice_naming_profile": "productions/series/VOICE_FILE_NAMING.json",
+    "production_workflow_profile_id": "science-series-topic03-workflow-v1",
+    "production_workflow_profile": "productions/series/PRODUCTION_DEFAULTS.json",
+    "production_workflow_document": "productions/series/QUY_TRINH_AP_DUNG_TU_CHU_DE_03.md",
+    "default_visual_plan": {
+      "unique_clips": 100,
+      "reused_slots": 20,
+      "prompt_txt_files": 10,
+      "adapt_to_real_contexts": true
+    }
   },
   "reference_video": {
     "release_url": "https://github.com/seotro95/seotro/releases/tag/video",
@@ -88,9 +100,16 @@
     {
       "id": 3,
       "title": "Đứa trẻ Mal'ta và mối liên hệ bất ngờ giữa Siberia với tổ tiên người châu Mỹ.",
-      "status": "in_progress",
+      "status": "documents_and_17_expressive_voices_delivered",
       "planned_path": "productions/video-03-malta",
       "created": true
+    },
+    {
+      "id": 4,
+      "title": "Yana: hai chiếc răng nhỏ hé lộ một quần thể người tiền sử.",
+      "status": "next",
+      "planned_path": "productions/video-04-yana",
+      "created": false
     }
   ],
   "topics": [
@@ -107,7 +126,7 @@
     {
       "id": 3,
       "title": "Đứa trẻ Mal'ta và mối liên hệ bất ngờ giữa Siberia với tổ tiên người châu Mỹ.",
-      "status": "documents_delivered_expressive_voice_in_progress"
+      "status": "documents_and_17_expressive_voices_delivered_native_review_pending"
     },
     {
       "id": 4,
@@ -656,7 +675,7 @@
     "voice_asset_digests_verified": true,
     "voice_release_published_at": "2026-11-09T21:10:48Z"
   },
-  "current_topic_3": {
+  "completed_topic_3": {
     "id": 3,
     "title": "Đứa trẻ Mal'ta và mối liên hệ bất ngờ giữa Siberia với tổ tiên người châu Mỹ.",
     "path": "productions/video-03-malta",
@@ -669,7 +688,7 @@
     "documents_delivered": true,
     "documents_zip_sha256": "e8406c627595cda691bf1859a57739da0d996639f0fcc67fb3cf48676a9ef6ec",
     "voice_count_expected": 17,
-    "voice_status": "expressive_preview_then_full_synthesis",
+    "voice_status": "17_expressive_voices_delivered_technical_qa_passed_native_review_pending",
     "voice_profile_set_id": "science-prehistory-17-v1",
     "video_rendered": false,
     "main_video_audio_language": "en-US",
@@ -677,6 +696,43 @@
     "voice_workflow_url": "https://github.com/seotro95/seotro/actions/runs/42727239753",
     "voice_build_branch": "codex/malta-voice-build-20261110",
     "narration_style_id": "science-documentary-expressive-v1",
-    "voice_translation_status": "All17 scripts ready; Vietnamese and Hmong rewritten by assistant, independent native/dialect review pending"
+    "voice_translation_status": "All17 scripts ready; Vietnamese and Hmong rewritten by assistant, independent native/dialect review pending",
+    "voice_files_delivered": 17,
+    "verified_seconds_per_voice": 1200,
+    "voice_archive_url": "https://github.com/seotro95/seotro/releases/download/malta-video-03-20min/MALTA_03_17_VOICES_TEN_QUOC_GIA.zip",
+    "voice_release_url": "https://github.com/seotro95/seotro/releases/tag/malta-video-03-20min",
+    "voice_release_tag": "malta-video-03-20min",
+    "voice_release_published_at": "2026-11-10T00:37:21Z",
+    "voice_asset_digests_verified": true,
+    "voice_generation_source_path": "productions/video-03-malta/VOICES/PRODUCTION_SCRIPTS",
+    "translation_native_review_pending": true,
+    "white_hmong_dialect_independently_verified": false,
+    "verified_voice_locales": [
+      "en-US",
+      "vi-VN",
+      "es-ES",
+      "fr-FR",
+      "ja-JP",
+      "ko-KR",
+      "de-DE",
+      "it-IT",
+      "pt-PT",
+      "nl-NL",
+      "pl-PL",
+      "sv-SE",
+      "da-DK",
+      "fi-FI",
+      "nb-NO",
+      "cs-CZ",
+      "mww"
+    ],
+    "voice_archive_sha256": "5a1dab5f9ce776e1284a79cf79481978c6145fdbd67caca72285b453406fd6a5",
+    "voice_details_url": "https://github.com/seotro95/seotro/releases/download/malta-video-03-20min/MALTA_03_HO_SO_GIONG_TEN_QUOC_GIA.zip",
+    "voice_naming_profile_id": "country-filenames-vi-v1",
+    "voice_country_names_delivered": true,
+    "audio_content_unchanged_after_naming": true,
+    "naming_workflow_run_id": 42731972604,
+    "production_steps_document": "productions/video-03-malta/PRODUCTION_STEPS_APPLIED.md",
+    "detailed_reports_storage": "Public country-named details ZIP; scripts, timing and reports remain archived there"
   }
 }

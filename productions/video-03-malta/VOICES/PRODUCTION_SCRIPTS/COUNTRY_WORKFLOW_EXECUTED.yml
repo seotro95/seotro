@@ -1,0 +1,26 @@
+name: Package Malta voices using country names
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify original hashes, package country names and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u scripts/package_voice_delivery.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ma03-country-delivery-metadata
+          path: |
+            delivery-country/COUNTRY_DELIVERY_QA.json
+            delivery-country/TEN_VOICE_THEO_QUOC_GIA.csv
+            delivery-country/README.md
+          retention-days: 7

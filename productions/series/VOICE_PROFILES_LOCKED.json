@@ -5,7 +5,7 @@
   "profiles": [
     {
       "locale": "en-US",
-      "name": "Anh (Mỹ)",
+      "name": "Mỹ — tiếng Anh",
       "voice_id": "en-US-AndrewNeural",
       "gender": "Male",
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
@@ -17,7 +17,11 @@
       "alignment_granularity": "10_seconds",
       "max_used_post_tempo": 1.3776,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Mỹ",
+      "language_vi": "Tiếng Anh",
+      "delivery_slug": "My_Tieng_Anh",
+      "delivery_filename_template": "{topic_prefix}_My_Tieng_Anh.mp3"
     },
     {
       "locale": "vi-VN",
@@ -33,7 +37,11 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 0.93864,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Việt Nam",
+      "language_vi": "Tiếng Việt",
+      "delivery_slug": "Viet_Nam",
+      "delivery_filename_template": "{topic_prefix}_Viet_Nam.mp3"
     },
     {
       "locale": "es-ES",
@@ -49,7 +57,11 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 1.26144,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Tây Ban Nha",
+      "language_vi": "Tiếng Tây Ban Nha",
+      "delivery_slug": "Tay_Ban_Nha",
+      "delivery_filename_template": "{topic_prefix}_Tay_Ban_Nha.mp3"
     },
     {
       "locale": "fr-FR",
@@ -65,7 +77,11 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 1.1088,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Pháp",
+      "language_vi": "Tiếng Pháp",
+      "delivery_slug": "Phap",
+      "delivery_filename_template": "{topic_prefix}_Phap.mp3"
     },
     {
       "locale": "ja-JP",
@@ -81,7 +97,11 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 1.41624,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Nhật Bản",
+      "language_vi": "Tiếng Nhật",
+      "delivery_slug": "Nhat_Ban",
+      "delivery_filename_template": "{topic_prefix}_Nhat_Ban.mp3"
     },
     {
       "locale": "ko-KR",
@@ -97,7 +117,11 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 1.34016,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Hàn Quốc",
+      "language_vi": "Tiếng Hàn",
+      "delivery_slug": "Han_Quoc",
+      "delivery_filename_template": "{topic_prefix}_Han_Quoc.mp3"
     },
     {
       "locale": "de-DE",
@@ -113,7 +137,11 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 1.31016,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Đức",
+      "language_vi": "Tiếng Đức",
+      "delivery_slug": "Duc",
+      "delivery_filename_template": "{topic_prefix}_Duc.mp3"
     },
     {
       "locale": "it-IT",
@@ -129,7 +157,11 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 1.31928,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Ý",
+      "language_vi": "Tiếng Ý",
+      "delivery_slug": "Y",
+      "delivery_filename_template": "{topic_prefix}_Y.mp3"
     },
     {
       "locale": "pt-PT",
@@ -145,7 +177,11 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 1.0668,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Bồ Đào Nha",
+      "language_vi": "Tiếng Bồ Đào Nha",
+      "delivery_slug": "Bo_Dao_Nha",
+      "delivery_filename_template": "{topic_prefix}_Bo_Dao_Nha.mp3"
     },
     {
       "locale": "nl-NL",
@@ -161,7 +197,11 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 1.21224,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Hà Lan",
+      "language_vi": "Tiếng Hà Lan",
+      "delivery_slug": "Ha_Lan",
+      "delivery_filename_template": "{topic_prefix}_Ha_Lan.mp3"
     },
     {
       "locale": "pl-PL",
@@ -177,7 +217,11 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 1.13856,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Ba Lan",
+      "language_vi": "Tiếng Ba Lan",
+      "delivery_slug": "Ba_Lan",
+      "delivery_filename_template": "{topic_prefix}_Ba_Lan.mp3"
     },
     {
       "locale": "sv-SE",
@@ -193,7 +237,11 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 1.37592,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Thụy Điển",
+      "language_vi": "Tiếng Thụy Điển",
+      "delivery_slug": "Thuy_Dien",
+      "delivery_filename_template": "{topic_prefix}_Thuy_Dien.mp3"
     },
     {
       "locale": "da-DK",
@@ -209,7 +257,11 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 1.18632,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Đan Mạch",
+      "language_vi": "Tiếng Đan Mạch",
+      "delivery_slug": "Dan_Mach",
+      "delivery_filename_template": "{topic_prefix}_Dan_Mach.mp3"
     },
     {
       "locale": "fi-FI",
@@ -225,11 +277,15 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 1.25352,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Phần Lan",
+      "language_vi": "Tiếng Phần Lan",
+      "delivery_slug": "Phan_Lan",
+      "delivery_filename_template": "{topic_prefix}_Phan_Lan.mp3"
     },
     {
       "locale": "nb-NO",
-      "name": "Na Uy (Bokmål)",
+      "name": "Na Uy",
       "voice_id": "nb-NO-FinnNeural",
       "gender": "Male",
       "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
@@ -241,7 +297,11 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 1.12752,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Na Uy",
+      "language_vi": "Tiếng Na Uy Bokmål",
+      "delivery_slug": "Na_Uy",
+      "delivery_filename_template": "{topic_prefix}_Na_Uy.mp3"
     },
     {
       "locale": "cs-CZ",
@@ -257,11 +317,15 @@
       "alignment_granularity": "100_seconds",
       "max_used_post_tempo": 1.10784,
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
-      "provider": "Microsoft Edge via edge-tts"
+      "provider": "Microsoft Edge via edge-tts",
+      "country_vi": "Séc",
+      "language_vi": "Tiếng Séc",
+      "delivery_slug": "Sec",
+      "delivery_filename_template": "{topic_prefix}_Sec.mp3"
     },
     {
       "locale": "mww",
-      "name": "H’mông Trắng — bản nháp cần kiểm tra phương ngữ",
+      "name": "H’Mông Trắng — nữ",
       "voice_id": "hmong-female-3",
       "gender": "Female",
       "engine": "Voice-Studio-Hmong 1.6.6 Native VITS + OpenVoice V2",
@@ -276,7 +340,11 @@
       "reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
       "reference_url": "https://raw.githubusercontent.com/seotro95/seotro/061430d958b8d5fc14d04209c6f0cd20492382c2/voice-studio/assets/hmong/female-3.wav",
       "audio_profile": "clear-v1",
-      "dialect_independently_verified": false
+      "dialect_independently_verified": false,
+      "country_vi": null,
+      "language_vi": "H’Mông Trắng — nữ, bản nháp cần rà soát phương ngữ",
+      "delivery_slug": "Hmong_Trang_Nu",
+      "delivery_filename_template": "{topic_prefix}_Hmong_Trang_Nu.mp3"
     }
   ],
   "continuity_note": "Reuse the exact engine, voice ID, locale, reference hash and settings. Preserve the supplied recordings as timbre references; third-party provider updates can change a voice despite a stable ID. User later requested expressive narration: preserve voice identity and apply the separately saved narration-style profile; original neutral rates are baseline settings.",
@@ -285,5 +353,7 @@
   "hmong_preset": "hmong-female-3",
   "native_language_review_pending": true,
   "active_narration_style_id": "science-documentary-expressive-v1",
-  "narration_style_profile": "productions/series/NARRATION_STYLE_LOCKED.json"
+  "narration_style_profile": "productions/series/NARRATION_STYLE_LOCKED.json",
+  "voice_naming_profile_id": "country-filenames-vi-v1",
+  "voice_naming_profile": "productions/series/VOICE_FILE_NAMING.json"
 }

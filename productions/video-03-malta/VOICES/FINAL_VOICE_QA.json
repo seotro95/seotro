@@ -1,0 +1,291 @@
+{
+  "voices": [
+    {
+      "locale": "en-US",
+      "max_tempo": 1.3198,
+      "max_padding_seconds": 0.028958333333333332,
+      "prosody": {
+        "pieces": 234,
+        "word_boundaries": 3087,
+        "word_accents": 133,
+        "settings_used": [
+          "+0%",
+          "+1%",
+          "+3%",
+          "-1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "vi-VN",
+      "max_tempo": 0.99988,
+      "max_padding_seconds": 0.0265625,
+      "prosody": {
+        "pieces": 48,
+        "word_boundaries": 3992,
+        "word_accents": 69,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "es-ES",
+      "max_tempo": 1.26914,
+      "max_padding_seconds": 0.019208333333333334,
+      "prosody": {
+        "pieces": 60,
+        "word_boundaries": 3486,
+        "word_accents": 88,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "fr-FR",
+      "max_tempo": 1.14986,
+      "max_padding_seconds": 0.021041666666666667,
+      "prosody": {
+        "pieces": 60,
+        "word_boundaries": 3591,
+        "word_accents": 81,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "ja-JP",
+      "max_tempo": 1.43678,
+      "max_padding_seconds": 0.017541666666666667,
+      "prosody": {
+        "pieces": 24,
+        "word_boundaries": 5109,
+        "word_accents": 45,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "ko-KR",
+      "max_tempo": 1.36334,
+      "max_padding_seconds": 0.017708333333333333,
+      "prosody": {
+        "pieces": 24,
+        "word_boundaries": 2504,
+        "word_accents": 14,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "de-DE",
+      "max_tempo": 1.32702,
+      "max_padding_seconds": 0.015541666666666667,
+      "prosody": {
+        "pieces": 62,
+        "word_boundaries": 3269,
+        "word_accents": 90,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "it-IT",
+      "max_tempo": 1.33964,
+      "max_padding_seconds": 0.017708333333333333,
+      "prosody": {
+        "pieces": 60,
+        "word_boundaries": 3361,
+        "word_accents": 88,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "pt-PT",
+      "max_tempo": 1.0829,
+      "max_padding_seconds": 0.0241875,
+      "prosody": {
+        "pieces": 56,
+        "word_boundaries": 3325,
+        "word_accents": 83,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "nl-NL",
+      "max_tempo": 1.22954,
+      "max_padding_seconds": 0.01975,
+      "prosody": {
+        "pieces": 60,
+        "word_boundaries": 3337,
+        "word_accents": 90,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "pl-PL",
+      "max_tempo": 1.14674,
+      "max_padding_seconds": 0.021208333333333333,
+      "prosody": {
+        "pieces": 54,
+        "word_boundaries": 2823,
+        "word_accents": 86,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "sv-SE",
+      "max_tempo": 1.37788,
+      "max_padding_seconds": 0.0176875,
+      "prosody": {
+        "pieces": 51,
+        "word_boundaries": 3005,
+        "word_accents": 82,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "da-DK",
+      "max_tempo": 1.19026,
+      "max_padding_seconds": 0.020729166666666667,
+      "prosody": {
+        "pieces": 52,
+        "word_boundaries": 3068,
+        "word_accents": 80,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "fi-FI",
+      "max_tempo": 1.27108,
+      "max_padding_seconds": 0.019208333333333334,
+      "prosody": {
+        "pieces": 52,
+        "word_boundaries": 2427,
+        "word_accents": 80,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "nb-NO",
+      "max_tempo": 1.13476,
+      "max_padding_seconds": 0.0219375,
+      "prosody": {
+        "pieces": 50,
+        "word_boundaries": 3051,
+        "word_accents": 82,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "cs-CZ",
+      "max_tempo": 1.12504,
+      "max_padding_seconds": 0.023645833333333335,
+      "prosody": {
+        "pieces": 47,
+        "word_boundaries": 2685,
+        "word_accents": 63,
+        "settings_used": [
+          "+1%",
+          "-2%",
+          "-3%",
+          "-4%"
+        ]
+      },
+      "seconds": 1200.0
+    },
+    {
+      "locale": "mww",
+      "max_tempo": 0.9915725,
+      "max_padding_seconds": 0.04070833333333333,
+      "prosody": null,
+      "seconds": 1200.0
+    }
+  ],
+  "asset_digests_verified": true,
+  "profiles_verified": true,
+  "target_seconds": 1200,
+  "narration_style_id": "science-documentary-expressive-v1",
+  "native_language_review_pending": true
+}
