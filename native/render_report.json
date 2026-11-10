@@ -1,0 +1,178 @@
+{
+  "audio_seconds": 1200.0,
+  "sample_rate": 48000,
+  "parts": [
+    "part-0001.wav"
+  ],
+  "part_start_seconds": [
+    0.0
+  ],
+  "timing_mode": "exact",
+  "target_seconds": 1200,
+  "duration_verified": true,
+  "duration_report": {
+    "verified": true,
+    "sample_rate": 48000,
+    "sample_frames": 57600000,
+    "audio_seconds": 1200.0,
+    "target_seconds": 1200.0,
+    "error_frames": 0
+  },
+  "sync_ok": true,
+  "sync_report": {
+    "complete": true,
+    "cues": [
+      {
+        "cue": 1,
+        "start_frame": 0,
+        "end_frame": 4800000,
+        "speech_frames": 4798876,
+        "tempo": 0.9349664583333334,
+        "padding_frames": 1124
+      },
+      {
+        "cue": 2,
+        "start_frame": 4800000,
+        "end_frame": 9600000,
+        "speech_frames": 4798891,
+        "tempo": 0.9442654166666666,
+        "padding_frames": 1109
+      },
+      {
+        "cue": 3,
+        "start_frame": 9600000,
+        "end_frame": 14400000,
+        "speech_frames": 4798881,
+        "tempo": 0.9385727083333333,
+        "padding_frames": 1119
+      },
+      {
+        "cue": 4,
+        "start_frame": 14400000,
+        "end_frame": 19200000,
+        "speech_frames": 4798903,
+        "tempo": 0.952620625,
+        "padding_frames": 1097
+      },
+      {
+        "cue": 5,
+        "start_frame": 19200000,
+        "end_frame": 24000000,
+        "speech_frames": 4798046,
+        "tempo": 0.9667854166666666,
+        "padding_frames": 1954
+      },
+      {
+        "cue": 6,
+        "start_frame": 24000000,
+        "end_frame": 28800000,
+        "speech_frames": 4798963,
+        "tempo": 0.9915725,
+        "padding_frames": 1037
+      },
+      {
+        "cue": 7,
+        "start_frame": 28800000,
+        "end_frame": 33600000,
+        "speech_frames": 4798908,
+        "tempo": 0.9562202083333333,
+        "padding_frames": 1092
+      },
+      {
+        "cue": 8,
+        "start_frame": 33600000,
+        "end_frame": 38400000,
+        "speech_frames": 4798907,
+        "tempo": 0.9550589583333333,
+        "padding_frames": 1093
+      },
+      {
+        "cue": 9,
+        "start_frame": 38400000,
+        "end_frame": 43200000,
+        "speech_frames": 4798943,
+        "tempo": 0.97825,
+        "padding_frames": 1057
+      },
+      {
+        "cue": 10,
+        "start_frame": 43200000,
+        "end_frame": 48000000,
+        "speech_frames": 4798889,
+        "tempo": 0.9434454166666667,
+        "padding_frames": 1111
+      },
+      {
+        "cue": 11,
+        "start_frame": 48000000,
+        "end_frame": 52800000,
+        "speech_frames": 4798881,
+        "tempo": 0.9386602083333333,
+        "padding_frames": 1119
+      },
+      {
+        "cue": 12,
+        "start_frame": 52800000,
+        "end_frame": 57600000,
+        "speech_frames": 4798938,
+        "tempo": 0.9752404166666667,
+        "padding_frames": 1062
+      }
+    ],
+    "target_seconds": 1200,
+    "actual_seconds": 1200.0,
+    "error_frames": 0,
+    "sample_rate": 48000
+  },
+  "locale": "mww",
+  "voice_id": "hmong-female-3",
+  "gender": "Female",
+  "engine": "Voice-Studio-Hmong 1.6.6 Native VITS + OpenVoice V2",
+  "source_commit": "061430d958b8d5fc14d04209c6f0cd20492382c2",
+  "alignment_granularity": "100_seconds",
+  "expected_pcm_frames_48000": 57600000,
+  "mp3_decoded_duration": {
+    "verified": true,
+    "sample_frames": 57600000,
+    "sample_rate": 48000,
+    "audio_seconds": 1200.0,
+    "error_frames": 0
+  },
+  "mp3_file": "MALTA_03_mww_female.mp3",
+  "mp3_bytes": 9600620,
+  "mp3_sha256": "0c645a2e2010693634831f4a92ed897efe7b970d7f3230fecbf296ebf80a2b7b",
+  "max_used_post_tempo": 0.9915725,
+  "min_used_post_tempo": 0.9349664583333334,
+  "max_cue_padding_seconds": 0.04070833333333333,
+  "translation_review_status": "Hmong localisation rewritten by assistant; independent native editorial, listening and White Hmong dialect review pending",
+  "numeric_speech_handling": "Original English numerals preserved; translated grouped integers normalized before sentence splitting; Hmong uses native number-word normalization.",
+  "reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+  "reference_url": "https://raw.githubusercontent.com/seotro95/seotro/061430d958b8d5fc14d04209c6f0cd20492382c2/voice-studio/assets/hmong/female-3.wav",
+  "audio_profile": "clear-v1",
+  "white_hmong_dialect_independently_verified": false,
+  "native_speed": "varied by phrase",
+  "native_quality": "fast",
+  "native_precision": "fp32",
+  "native_device": "cpu",
+  "narration_style_id": "science-documentary-expressive-v1",
+  "prosody_method": "Native phrase speed/gain/pause controls; no word timing",
+  "voice_identity_preserved": true,
+  "pitch_shift_applied": false,
+  "native_speed_nominal": 1.0,
+  "native_speed_range": [
+    0.97,
+    1.03
+  ],
+  "native_phrase_gain_db_range": [
+    -0.3,
+    0.6
+  ],
+  "native_pause_seconds_range": [
+    0.07,
+    0.16
+  ],
+  "sample_identifier_spoken_form": {
+    "MA-1": "em a ib"
+  },
+  "native_word_alignment_available": false
+}
