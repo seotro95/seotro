@@ -1,8 +1,10 @@
-# Lượt hiện tại — chủ đề6 Denisova,21:00
+# Tiếp tục từ đây — chủ đề 6 đã bàn giao tài liệu và 17 voice
 
-Người dùng yêu cầu làm chủ đề6 trong danh sách đã lưu. Đã bàn giao tài liệu trước voice:3425từAnh,126mốc10s,110prompt/11TXT và16ôREUSE. Đang chuẩn bị17voice có nhấn nhá, giữ16nam/H’Môngnữ3 và mã giọng đã khóa. Không có hình trẻ em, kể cả nền/bóng/ảnh/màn hình; không tái hiện chủ mẫuDenisova3/Denisova11.
+Denisova: 21:00, 3425 từ Anh, 126 ô 10 giây, 110 prompt mới/11 TXT và 16 ô REUSE. [Tải voice](video-06-denisova/VOICES/DOWNLOAD_LINKS.md) · [Quy trình](video-06-denisova/PRODUCTION_STEPS_APPLIED.md).
 
-Đọc [tài liệu tập6](video-06-denisova/README.md), [trạng thái](series/SERIES_STATE.json) và cấu hình chuỗi trước khi làm tiếp.21phút là ngoại lệ riêng tập6:60.480.000mẫu48kHz,Anh126ô10s, bản dịch sáu chương110s rồi sáu chương100s. Không dùng ranh chương hoặc thời lượng tập4. Tập5 vẫn chưa thực hiện và được giữ queued; không tự chuyển sang tập7. Tập1–4 đã bàn giao video, không tạo lại chúng.
+Giữ 16 giọng nam và H’Mông trắng nữ 3 đúng ID/mẫu/style đã khóa, tên file theo quốc gia. Không có hình trẻ em. Voice đã qua QA kỹ thuật; bản dịch/nghe/phương ngữ còn cần rà soát bản ngữ độc lập. Video tập 6 chờ clip của chính tập này; khi có, chỉ dùng voice Anh, bỏ âm thanh clip và mở đầu 12 shot/30 giây trong tổng 21 phút.
+
+Tập 1–4 đã bàn giao video, không tạo lại. Tập 5 vẫn queued vì người dùng chọn làm tập 6 trước. Chưa bắt đầu tập 7; không tự bắt đầu tập khác. Đọc SERIES_STATE và PRODUCTION_DEFAULTS trước khi làm tiếp. Mặc định chuỗi vẫn 20 phút; 21 phút là ngoại lệ riêng tập 6.
 
 ---
 

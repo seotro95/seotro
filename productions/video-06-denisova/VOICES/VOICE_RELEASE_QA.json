@@ -1,0 +1,170 @@
+{
+  "status": "passed",
+  "voices": 17,
+  "seconds_per_voice": 1260,
+  "decoded_frames_at_48k_per_voice": 60480000,
+  "english_words_preserved": 3425,
+  "english_cues": 126,
+  "english_public_file_independently_decoded": true,
+  "all17_github_asset_digests_match_reports": true,
+  "country_named": true,
+  "male_voices": 16,
+  "female_hmong_voices": 1,
+  "native_review_pending": true,
+  "white_hmong_dialect_independently_verified": false,
+  "no_children_in_visuals": true,
+  "release_tag": "denisova-video-06-21min",
+  "release_published_at": "2026-11-10T10:12:52Z",
+  "assets": [
+    {
+      "name": "AUDIO_MANIFEST.json",
+      "bytes": 6688,
+      "digest": "sha256:1630379cc6a0984d244b378060fb357ee9ba8cc43813049bf5c0aac5534de7d5",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/AUDIO_MANIFEST.json"
+    },
+    {
+      "name": "DENISOVA_06_17_VOICES_TEN_QUOC_GIA.zip",
+      "bytes": 172416095,
+      "digest": "sha256:84925bc8ea2ff77f4d07a231dacc44539332a5473b2c020eabbf001df1d3dd16",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_17_VOICES_TEN_QUOC_GIA.zip"
+    },
+    {
+      "name": "DENISOVA_06_Ba_Lan.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:21706c85ba0c4070f24f3652b3d786ce09daa07540a151fb5ea7dd585692b9b2",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Ba_Lan.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Bo_Dao_Nha.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:be958a65f6e977038ef271abc24e3034368ae7e588af1bc7d1c4216d34fbd3ee",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Bo_Dao_Nha.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Dan_Mach.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:1228b8977ecb1d568f63223ab4475e8769d86fa1cfe3d07b3e95d6eb95c04762",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Dan_Mach.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Duc.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:41526ae5b36f5d0e5eb9b44d169648bae2dd6822b29bbabd538d0707b1b1d76b",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Duc.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Han_Quoc.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:fb59a31f1148bff60feb6886cb2eabe9a3828003ab4ea4a1dc013e0ca3d220f7",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Han_Quoc.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Ha_Lan.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:6d302c4964f0e3d10c5c3ca5b7f7cfab5b4797c02bbecb450963055541ed9cef",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Ha_Lan.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Hmong_Trang_Nu.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:b417f56e3f01eec494677deae0eb1fc4f434b3e8ac017cb96f0b89fcb608accc",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Hmong_Trang_Nu.mp3"
+    },
+    {
+      "name": "DENISOVA_06_HO_SO_GIONG_TEN_QUOC_GIA.zip",
+      "bytes": 362903,
+      "digest": "sha256:78c01bf2d127fb5693c7ea3c7214c080e8ecf50ae38635fe3efe28d6f6ee30e0",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_HO_SO_GIONG_TEN_QUOC_GIA.zip"
+    },
+    {
+      "name": "DENISOVA_06_My_Tieng_Anh.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:d733faf7cb437ff9db733a7f5f9f527aa177a3e688abdd270f313af2ab3605ad",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_My_Tieng_Anh.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Na_Uy.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:1d6c1065fc965d1a652ea5dfc28b56904c933dfb47d0952ea522f74727ed8f56",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Na_Uy.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Nhat_Ban.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:bcf2ac180a12a7d6378201e168e344ccebf83b7ab33cddd85d324e8d401fd8c1",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Nhat_Ban.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Phan_Lan.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:e83a645c7e7ff57e52d34664de23ff69223ceed205c8afcc5b5b4282c9d15e1f",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Phan_Lan.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Phap.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:7f368481228469841cd0cc85a2b92d0ab0d069e3914766da7653726f84900208",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Phap.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Sec.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:b56e2f472ec53d0ea13f291a9c196b6d1ff577f87cf3a793f8dafa6838073277",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Sec.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Tay_Ban_Nha.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:7f888ff04706588b83da076c437bc7e1b734b39fa8eb14ecea181fbb752a4f83",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Tay_Ban_Nha.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Thuy_Dien.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:64a5509b5d20a063401cb59eefa2030d319c042f3aa609a77ea315dd24459241",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Thuy_Dien.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Viet_Nam.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:0fc4a64d43bb39c4e6be0318e845ff6379a9e4ef93c2cf1f5003f820035df8a8",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Viet_Nam.mp3"
+    },
+    {
+      "name": "DENISOVA_06_Y.mp3",
+      "bytes": 10080620,
+      "digest": "sha256:8c3c84f6c8a70b5b2dea9eaf467ab6732678b63ea64af0ac3330f4882fd1e3f1",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_Y.mp3"
+    },
+    {
+      "name": "DENISOVA_VIDEO_06_TAI_LIEU_21_PHUT.zip",
+      "bytes": 342921,
+      "digest": "sha256:632fb1efbb88d245cd2a673295398bb4b04f7cfbd80d9ad58ba9783d23f21124",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_VIDEO_06_TAI_LIEU_21_PHUT.zip"
+    },
+    {
+      "name": "NARRATION_STYLE_LOCKED.json",
+      "bytes": 1245,
+      "digest": "sha256:3a95d19fe15335ba53dbf743ca5d9ca3bbbe0572b1acc4b9465901d0d2cd3297",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/NARRATION_STYLE_LOCKED.json"
+    },
+    {
+      "name": "README.md",
+      "bytes": 4245,
+      "digest": "sha256:d77672b971579125d79dbde162be8875fe1d99333a899e92072ae028a61acbc0",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/README.md"
+    },
+    {
+      "name": "VOICE_FILE_NAMING.json",
+      "bytes": 2821,
+      "digest": "sha256:86a72485007e41d19e4f828ccd7d4e31657a3d035640eda8500abfbd80cd2060",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/VOICE_FILE_NAMING.json"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED.json",
+      "bytes": 15636,
+      "digest": "sha256:f947bfb473b8738624d68281024aed89e0bced4efc3140527fb8861e0aaa4371",
+      "url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/VOICE_PROFILES_LOCKED.json"
+    }
+  ]
+}

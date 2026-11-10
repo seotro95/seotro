@@ -1,0 +1,167 @@
+{
+  "audio_seconds": 1260.0,
+  "sample_rate": 48000,
+  "parts": [
+    "part-0001.wav"
+  ],
+  "part_start_seconds": [
+    0.0
+  ],
+  "timing_mode": "exact",
+  "target_seconds": 1260,
+  "duration_verified": true,
+  "duration_report": {
+    "verified": true,
+    "sample_rate": 48000,
+    "sample_frames": 60480000,
+    "audio_seconds": 1260.0,
+    "target_seconds": 1260.0,
+    "error_frames": 0
+  },
+  "sync_ok": true,
+  "sync_report": {
+    "complete": true,
+    "cues": [
+      {
+        "cue": 1,
+        "start_frame": 0,
+        "end_frame": 5280000,
+        "speech_frames": 5279316,
+        "tempo": 1.2652545454545454,
+        "padding_frames": 684
+      },
+      {
+        "cue": 2,
+        "start_frame": 5280000,
+        "end_frame": 10560000,
+        "speech_frames": 5279471,
+        "tempo": 1.3866727272727273,
+        "padding_frames": 529
+      },
+      {
+        "cue": 3,
+        "start_frame": 10560000,
+        "end_frame": 15840000,
+        "speech_frames": 5279521,
+        "tempo": 1.425890909090909,
+        "padding_frames": 479
+      },
+      {
+        "cue": 4,
+        "start_frame": 15840000,
+        "end_frame": 21120000,
+        "speech_frames": 5279465,
+        "tempo": 1.3820727272727273,
+        "padding_frames": 535
+      },
+      {
+        "cue": 5,
+        "start_frame": 21120000,
+        "end_frame": 26400000,
+        "speech_frames": 5279420,
+        "tempo": 1.3469636363636364,
+        "padding_frames": 580
+      },
+      {
+        "cue": 6,
+        "start_frame": 26400000,
+        "end_frame": 31680000,
+        "speech_frames": 5279610,
+        "tempo": 1.494890909090909,
+        "padding_frames": 390
+      },
+      {
+        "cue": 7,
+        "start_frame": 31680000,
+        "end_frame": 36480000,
+        "speech_frames": 4799159,
+        "tempo": 1.3564,
+        "padding_frames": 841
+      },
+      {
+        "cue": 8,
+        "start_frame": 36480000,
+        "end_frame": 41280000,
+        "speech_frames": 4799227,
+        "tempo": 1.49126,
+        "padding_frames": 773
+      },
+      {
+        "cue": 9,
+        "start_frame": 41280000,
+        "end_frame": 46080000,
+        "speech_frames": 4799221,
+        "tempo": 1.47902,
+        "padding_frames": 779
+      },
+      {
+        "cue": 10,
+        "start_frame": 46080000,
+        "end_frame": 50880000,
+        "speech_frames": 4799215,
+        "tempo": 1.46726,
+        "padding_frames": 785
+      },
+      {
+        "cue": 11,
+        "start_frame": 50880000,
+        "end_frame": 55680000,
+        "speech_frames": 4799482,
+        "tempo": 1.32952,
+        "padding_frames": 518
+      },
+      {
+        "cue": 12,
+        "start_frame": 55680000,
+        "end_frame": 60480000,
+        "speech_frames": 4799162,
+        "tempo": 1.36392,
+        "padding_frames": 838
+      }
+    ],
+    "target_seconds": 1260,
+    "actual_seconds": 1260.0,
+    "error_frames": 0,
+    "sample_rate": 48000
+  },
+  "locale": "sv-SE",
+  "voice_id": "sv-SE-MattiasNeural",
+  "gender": "Male",
+  "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "alignment_granularity": "12_chapters_110_100_seconds",
+  "expected_pcm_frames_48000": 60480000,
+  "mp3_decoded_duration": {
+    "verified": true,
+    "sample_frames": 60480000,
+    "sample_rate": 48000,
+    "audio_seconds": 1260.0,
+    "error_frames": 0
+  },
+  "mp3_file": "DENISOVA_06_Thuy_Dien.mp3",
+  "mp3_bytes": 10080620,
+  "mp3_sha256": "64a5509b5d20a063401cb59eefa2030d319c042f3aa609a77ea315dd24459241",
+  "max_used_post_tempo": 1.494890909090909,
+  "min_used_post_tempo": 1.2652545454545454,
+  "max_cue_padding_seconds": 0.017520833333333333,
+  "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
+  "numeric_speech_handling": "Original English numerals preserved; translated grouped integers normalized before sentence splitting; Hmong uses native number-word normalization.",
+  "narration_style_id": "science-documentary-expressive-v1",
+  "prosody_method": "Melo online backend with Edge rate/word-boundary adapter and gentle1.2dB word accents",
+  "voice_identity_preserved": true,
+  "pitch_shift_applied": false,
+  "prosody_summary": {
+    "pieces": 58,
+    "word_boundaries": 3271,
+    "word_accents": 89,
+    "settings_used": [
+      "+1%",
+      "-2%",
+      "-3%",
+      "-4%"
+    ]
+  },
+  "source_filename": "DENISOVA_06_sv-SE.mp3",
+  "delivery_country_vi": "Thụy Điển",
+  "delivery_display_name": "Thụy Điển"
+}

@@ -5,8 +5,8 @@
   "resume_file": "productions/TIEP_TUC_TU_DAY.md",
   "topic_index": "productions/series/TOPICS_001_100.csv",
   "shared_voice_profiles": "productions/series/VOICE_PROFILES_LOCKED.json",
-  "active_topic": 6,
-  "next_topic_id": 6,
+  "active_topic": null,
+  "next_topic_id": 5,
   "user_preferences": {
     "language_for_collaboration": "Vietnamese",
     "process_one_topic_at_a_time": true,
@@ -145,8 +145,9 @@
     {
       "id": 6,
       "title": "Denisova: nhận diện một nhóm người từ những mảnh xương rất nhỏ.",
-      "status": "documents_delivered_voice_pending",
-      "target_seconds": 1260
+      "status": "documents_and_17_expressive_voices_delivered_video_pending_native_review_pending",
+      "target_seconds": 1260,
+      "created": true
     },
     {
       "id": 7,
@@ -889,7 +890,7 @@
   },
   "last_requested_topic_id": 6,
   "topic5_explicitly_left_queued": true,
-  "in_progress_topic_6": {
+  "completed_topic_6": {
     "id": 6,
     "title": "Denisova: The People Hidden in a Fragment",
     "path": "productions/video-06-denisova",
@@ -919,9 +920,54 @@
     "narration_style_id": "science-documentary-expressive-v1",
     "voice_naming_profile_id": "country-filenames-vi-v1",
     "voice_count_expected": 17,
-    "voice_status": "not_generated_at_document_delivery",
+    "voice_status": "17_expressive_voices_delivered_technical_qa_passed_native_review_pending",
     "documents_delivered": true,
     "video_rendered": false,
-    "documents_zip_sha256": "632fb1efbb88d245cd2a673295398bb4b04f7cfbd80d9ad58ba9783d23f21124"
+    "documents_zip_sha256": "632fb1efbb88d245cd2a673295398bb4b04f7cfbd80d9ad58ba9783d23f21124",
+    "voice_files_delivered": 17,
+    "verified_seconds_per_voice": 1260,
+    "voice_release_tag": "denisova-video-06-21min",
+    "voice_release_url": "https://github.com/seotro95/seotro/releases/tag/denisova-video-06-21min",
+    "voice_release_published_at": "2026-11-10T10:12:52Z",
+    "voice_archive_url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_17_VOICES_TEN_QUOC_GIA.zip",
+    "voice_archive_sha256": "84925bc8ea2ff77f4d07a231dacc44539332a5473b2c020eabbf001df1d3dd16",
+    "voice_details_url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-21min/DENISOVA_06_HO_SO_GIONG_TEN_QUOC_GIA.zip",
+    "voice_asset_digests_verified": true,
+    "voice_country_names_delivered": true,
+    "voice_workflow_run_id": 42796184258,
+    "voice_workflow_url": "https://github.com/seotro95/seotro/actions/runs/42796184258",
+    "voice_workflow_run_ids": [
+      42791520378,
+      42796184258
+    ],
+    "voice_build_branch": "codex/denisova-voice-build-20261110",
+    "translation_native_review_pending": true,
+    "white_hmong_dialect_independently_verified": false,
+    "verified_voice_locales": [
+      "en-US",
+      "vi-VN",
+      "es-ES",
+      "fr-FR",
+      "ja-JP",
+      "ko-KR",
+      "de-DE",
+      "it-IT",
+      "pt-PT",
+      "nl-NL",
+      "pl-PL",
+      "sv-SE",
+      "da-DK",
+      "fi-FI",
+      "nb-NO",
+      "cs-CZ",
+      "mww"
+    ],
+    "english_voice_sha256": "d733faf7cb437ff9db733a7f5f9f527aa177a3e688abdd270f313af2ab3605ad",
+    "native_hmong_sha256": "b417f56e3f01eec494677deae0eb1fc4f434b3e8ac017cb96f0b89fcb608accc",
+    "native_hmong_reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+    "main_video_audio_language": "en-US",
+    "production_steps_document": "productions/video-06-denisova/PRODUCTION_STEPS_APPLIED.md",
+    "voice_generation_source_path": "productions/video-06-denisova/VOICES/PRODUCTION_SCRIPTS",
+    "video_status": "awaiting_episode6_generated_clips"
   }
 }

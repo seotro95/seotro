@@ -2,7 +2,7 @@
 
 **Denisova: The People Hidden in a Fragment**
 
-Kịch bảnAnh mới3425từ,126mốc10s;110prompt mới trong11TXT và16ôREUSE có đánh dấu. Bộ này được bàn giao trước khi tạo voice; thời lượng âm thanh thực phải được đo sau render.
+Kịch bảnAnh mới3425từ,126mốc10s;110prompt mới trong11TXT và16ôREUSE có đánh dấu. Tài liệu đã được bàn giao trước voice; nay đã có 17 MP3 được kiểm tra đúng 21:00 sau giải mã.
 
 - KICH_BAN_EN_21_PHUT.txt: lời đọc sạch.
 - KICH_BAN_EN_CO_MOC.txt vàLOI_DAN_EN_126_CANH.srt: lời theo mốc.
@@ -17,4 +17,7 @@ Kịch bảnAnh mới3425từ,126mốc10s;110prompt mới trong11TXT và16ôREUS
 
 Tên clipDE06_001.mp4–DE06_110.mp4 khác sốcảnhtimeline001–126. Mọi clip10s không có âm thanh. Thêm toàn bộ chữ và dữ kiện đã đối chiếu trongeditor. Không đặt đồ hiện đại vào bối cảnh cổ.
 
-17voice riêng sẽ giữ đúng mã giọng và nhấn nhá đã lưu;16nam vàH’MôngTrắngnữ3. Mục tiêu mỗi bản21:00/60.480.000mẫu tại48kHz; khớp chương và tổng, không khớp từng từ giữa các ngôn ngữ. Video chính chỉ dùngAnh.21phút là ngoại lệ riêng tập6; không đổi mặc định20phút của chuỗi. Tập5 vẫn xếp hàng, tập7 chưa bắt đầu.
+17voice riêng đã giữ đúng mã giọng và nhấn nhá đã lưu;16nam vàH’MôngTrắngnữ3. Mục tiêu mỗi bản21:00/60.480.000mẫu tại48kHz; khớp chương và tổng, không khớp từng từ giữa các ngôn ngữ. Video chính chỉ dùngAnh.21phút là ngoại lệ riêng tập6; không đổi mặc định20phút của chuỗi. Tập5 vẫn xếp hàng, tập7 chưa bắt đầu.
+
+
+Đã hoàn tất 17 voice, mỗi bản đã kiểm tra 21:00 sau giải mã. [Tải từng voice](VOICES/DOWNLOAD_LINKS.md) · [Quy trình đã lưu](PRODUCTION_STEPS_APPLIED.md) · [QA âm thanh](VOICES/VOICE_RELEASE_QA.json). ZIP tài liệu bàn giao trước voice được giữ bất biến. Bản dịch/nghe và phương ngữ H’Mông Trắng còn cần người bản ngữ rà soát độc lập. Chưa dựng video tập 6.

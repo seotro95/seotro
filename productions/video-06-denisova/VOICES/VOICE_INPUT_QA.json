@@ -1,0 +1,162 @@
+{
+  "topic": 6,
+  "target_seconds": 1260,
+  "review": "Assistant scientific/context review including machine backtranslation of chapters2,4,5,10 for14 locales, followed by direct assistant review of concise timing rewrites; independent native editorial/listening review pending.",
+  "voices": [
+    {
+      "locale": "en-US",
+      "voice_id": "en-US-AndrewNeural",
+      "gender": "Male",
+      "segments": 126,
+      "seconds": 1260,
+      "script_json_sha256": "a573155a2058617fdece1bd283ba2a8b3a6a7d84f174231905ffd84bb9a42832",
+      "voice_text_sha256": "234938172963b668050a13c385f675dd99ff6ce9497d5e6d58541dfe5ef1977c"
+    },
+    {
+      "locale": "vi-VN",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "28bfdf20843808bf3f0028cc1476a8278b07c9d4970ab5e4f73d9197f1173495",
+      "voice_text_sha256": "6dddaa32b3e23c872fc31d1011e25db99ee07e98e9e8091aade76e1fe2013195"
+    },
+    {
+      "locale": "es-ES",
+      "voice_id": "es-ES-AlvaroNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "ded271a90d0b6aedbc79777a3af2b5721bbc1ec35a6045a83bea864391291c4e",
+      "voice_text_sha256": "d34c7a0ff3276959b22eb1bca6a62fc49659a0ac0d5b6ee52ad4869e17bcf094"
+    },
+    {
+      "locale": "fr-FR",
+      "voice_id": "fr-FR-HenriNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "89f0451b10ffbb08ea1a83b4d21f0db2d70bfcc2c19b14e9bfa4996808adfbb3",
+      "voice_text_sha256": "abc35f28169d55880a124b62f61c7dae719da73dad57138c2df53c5c3cb94f75"
+    },
+    {
+      "locale": "ja-JP",
+      "voice_id": "ja-JP-KeitaNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "e45e8ec53898118a4b92258c67d7de864d550248c92ad091be77e4add33d34a3",
+      "voice_text_sha256": "9113f489c210bdeab26cfa909e75814619a340fa69522b356c4a19eaf9872746"
+    },
+    {
+      "locale": "ko-KR",
+      "voice_id": "ko-KR-InJoonNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "55cbc8104f10e8ef0c9171e7e7e4fc00edbbf7c4c1fd482fbc4dcfdba2ac714a",
+      "voice_text_sha256": "f4cd759437ea3158a05c7abd78d0e0681a9e0e1a42ace77a3ef1368cd8de6235"
+    },
+    {
+      "locale": "de-DE",
+      "voice_id": "de-DE-ConradNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "ec8b38789373d791d06278e72fd1ab13cdc8388676eef0077a1055dd05f0895d",
+      "voice_text_sha256": "d2af6db7f53c47037f153bf1522ba6a3e49aeb9b31aab46f10ca5c82bcedda2b"
+    },
+    {
+      "locale": "it-IT",
+      "voice_id": "it-IT-DiegoNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "63510dc4acde45076ee156b62d5a13f88a30de9882963019de0ae526de084636",
+      "voice_text_sha256": "8693510881aaf3d083704d964f16baa724f3aacd7f1415455b8bb027eede646b"
+    },
+    {
+      "locale": "pt-PT",
+      "voice_id": "pt-PT-DuarteNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "b096c191f5fb32b5a28b6588f743c395fca31587f639969b89c6d00013390702",
+      "voice_text_sha256": "2a6f24b11d5d8dee1ea6b67e7ecd8ade19f577b3c6806fbbaaa19cee4f5b1bf1"
+    },
+    {
+      "locale": "nl-NL",
+      "voice_id": "nl-NL-MaartenNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "4f2a018b9485c1d8c1a1a86ddb87e83bbf3d9614e4c0dd8da6657c13649891ad",
+      "voice_text_sha256": "71c5ebac1378dcbad66e1409f169f7b88e794a3eac9d8c1fd7d947559dc00893"
+    },
+    {
+      "locale": "pl-PL",
+      "voice_id": "pl-PL-MarekNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "64e5def67f6e50da724d491fb50285d92f257d49ee6dd21892bb334d78e1f9b6",
+      "voice_text_sha256": "a4fa5fafbfc627ab2a36ab3c20ebf23b7004ee09efe5bd1f786721a2e718a57d"
+    },
+    {
+      "locale": "sv-SE",
+      "voice_id": "sv-SE-MattiasNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "cb25842bac968be46eaee45346964076e5b8b361ac74fb7223cfc5e9fdd7b553",
+      "voice_text_sha256": "99e28c2fef0748f37557b7b4f902333fc950d13f09fa05586cd5b05a9c141196"
+    },
+    {
+      "locale": "da-DK",
+      "voice_id": "da-DK-JeppeNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "967821027f0eea76628f6dd053bc1084c31ae7c635068e86b03b33763827ce6b",
+      "voice_text_sha256": "c240447e3612813f989891a09a0f80825d676beec1bcf8deb3c0de689867382e"
+    },
+    {
+      "locale": "fi-FI",
+      "voice_id": "fi-FI-HarriNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "0c35a80ff380d5623a78d8ce4ba0358dfae6a7b406f49aabec87ef998b462206",
+      "voice_text_sha256": "b8189c5dea146ae4352a2f40fcd9ee4ddd440aa1ea19d01be58bc9fdf39d6b99"
+    },
+    {
+      "locale": "nb-NO",
+      "voice_id": "nb-NO-FinnNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "72c3525df60971786e69c857275d303437dd2df1b0be41f9294e4c904b99aeaa",
+      "voice_text_sha256": "1fad7bd006dbd76592cc68e2099cbb39fc5cf82526fe069fdb7c7956d06bfe56"
+    },
+    {
+      "locale": "cs-CZ",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "gender": "Male",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "93f495e2bddb7d854c2a5427abea5d3b65047ca211bd50599c7babde86d006a1",
+      "voice_text_sha256": "0b855b9e12dc72f5712dee2dc448e25158a66e92fb47cee684e3a4f9b5ddbbd4"
+    },
+    {
+      "locale": "mww",
+      "voice_id": "hmong-female-3",
+      "gender": "Female",
+      "segments": 12,
+      "seconds": 1260,
+      "script_json_sha256": "ba0b7674516de113a0ae84287594761ea1ef3455fb6b7e6f645fc35048fecb03",
+      "voice_text_sha256": "792ca630284b5da1f8b0089ed176b2efa80c579a1312b19249641cd04e224fb3"
+    }
+  ],
+  "native_reference_verified": true,
+  "passed": true
+}
