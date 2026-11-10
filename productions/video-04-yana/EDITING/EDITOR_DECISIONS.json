@@ -1,0 +1,64 @@
+{
+  "uploaded_files": 133,
+  "unique_clips": 115,
+  "exact_duplicates": 18,
+  "source_bytes": 588803492,
+  "audio_sources": 36,
+  "resolutions": [
+    [
+      1280,
+      720
+    ]
+  ],
+  "durations": [
+    10.0
+  ],
+  "missing_candidate_prompt_ids": [
+    49,
+    85,
+    86,
+    99,
+    119
+  ],
+  "rejected_source_labels": [
+    "V415",
+    "V418",
+    "V467",
+    "V404",
+    "V414",
+    "V417",
+    "V421",
+    "V436",
+    "V440",
+    "V442",
+    "V445",
+    "V448",
+    "V450",
+    "V452",
+    "V458",
+    "V459",
+    "V465",
+    "V471",
+    "V472",
+    "V478",
+    "V479",
+    "V486",
+    "V488",
+    "V489",
+    "V492",
+    "V494",
+    "V497",
+    "V498",
+    "V503",
+    "V515"
+  ],
+  "opening_shots": 12,
+  "planned_shots": 281,
+  "graphic_count": 22,
+  "used_source_clips": 80,
+  "no_children_policy": "Only inspected adult scenes; ambiguous small figures and modern-camp scene V515 excluded.",
+  "english_reference_sha256": "7014702fdb86744e8ddbf8a74eb7ef176bbb4cb9865aaf4e0e7931e27ae0047c",
+  "audio": "Original English narration only; no source audio, music or SFX.",
+  "source_selection": "All115 unique sources inspected via contact sheets;13 adult group scenes additionally sampled at0.6,4.5,8.8seconds; no continuous manual viewing claim.",
+  "reason": "Generated geography, invented measured charts, embedded logos/text, small background figures in river panorama V415, modern notebooks/magnifiers in ancient camp scenes, modern camp equipment or ambiguous small figures are excluded; five missing prompt contexts covered by inspected alternatives and explanatory graphics."
+}

@@ -1,0 +1,127 @@
+{
+  "status": "passed",
+  "final_file": "YANA_04_EN_FINAL_23m_720p.mp4",
+  "video_duration_seconds": 1380.0,
+  "container_duration_seconds": 1380.0,
+  "audio_duration_seconds": 1380.0,
+  "video_frames": 33120,
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "audio_stream_count": 1,
+  "audio_language": "English",
+  "original_clip_audio_included": false,
+  "music_added": false,
+  "audio_input": "Original expressive YANA_04_My_Tieng_Anh.mp3, unchanged pitch and timing; loudness processing only",
+  "narration_style_id": "science-documentary-expressive-v1",
+  "reference_voice_duration_seconds": 1380.0,
+  "reference_voice_sha256": "7014702fdb86744e8ddbf8a74eb7ef176bbb4cb9865aaf4e0e7931e27ae0047c",
+  "decoded_final_audio_seconds": 1380.01075,
+  "waveform_alignment_checks": [
+    {
+      "reference_seconds": 5,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999059
+    },
+    {
+      "reference_seconds": 105,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999986
+    },
+    {
+      "reference_seconds": 205,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999221
+    },
+    {
+      "reference_seconds": 305,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999536
+    },
+    {
+      "reference_seconds": 405,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.997468
+    },
+    {
+      "reference_seconds": 505,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999997
+    },
+    {
+      "reference_seconds": 605,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.990926
+    },
+    {
+      "reference_seconds": 705,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999037
+    },
+    {
+      "reference_seconds": 805,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.99834
+    },
+    {
+      "reference_seconds": 905,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999999
+    },
+    {
+      "reference_seconds": 1005,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.99965
+    },
+    {
+      "reference_seconds": 1105,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999979
+    },
+    {
+      "reference_seconds": 1205,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.996291
+    },
+    {
+      "reference_seconds": 1305,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.998804
+    },
+    {
+      "reference_seconds": 1375,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999798
+    }
+  ],
+  "measured_loudness_lufs": -16.04,
+  "measured_true_peak_dbtp": -1.37,
+  "measured_loudness_range_lu": 2.6,
+  "chapter_count": 12,
+  "subtitle_cues": 138,
+  "subtitle_mode": "Embedded optional English subtitles and separate SRT",
+  "timeline_cues": 138,
+  "planned_shots": 281,
+  "opening_30s_shots": 12,
+  "short_dissolves": 6,
+  "source_uploads": 133,
+  "downloaded_uploads": 133,
+  "unique_downloaded_clips": 115,
+  "unique_source_clips_used": 80,
+  "science_graphic_count": 22,
+  "exact_duplicate_files_removed": 18,
+  "source_transfer_limits": [],
+  "no_children_in_final_selected_scenes": true,
+  "manual_visual_scope": "Sampling and scene selection, not continuous viewing.",
+  "source_note": "All133 uploads transferred;18 exact duplicates identified;115 unique sources inspected. Five missing prompt contexts covered by appropriate alternatives and explanatory graphics.",
+  "science_graphics": "Natural Earth 1:110m modern coastlines/lakes, whole polygon rings preserved across the dateline; original NPS bathymetry context labels about 21,000 BP retained. Genetics graphics are explanatory schematics, not measured data, exact migration routes or universal ancestry proportions.",
+  "full_decode_exit_code": 0,
+  "black_gaps_detected": [],
+  "decode_errors_detected": [],
+  "visual_review": "All115 unique sources inspected using contact sheets;13 adult-group sources sampled at three times. Opening, graphics, chapters and ending sampled from rendered frames. No claim of continuous manual review of all23minutes.",
+  "sha256": "204d06d182bec6f1fa377c0695b6beeb3ab9e8a7e4b83c9681756fe57a17cbf7",
+  "bytes": 336638075,
+  "voices": "Existing separate-language voice assets are retained in release yana-video-04-23min. Only the existing English reference is included in this video."
+}

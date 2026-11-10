@@ -21,4 +21,10 @@ Tên clip YA04_001.mp4 đến YA04_120.mp4; số clip khác số cảnh 001–13
 Video chính chỉ dùng voice Anh.17 voice tạo riêng, mục tiêu mỗi bản23:00,66.240.000 mẫu tại48 kHz sau giải mã. Giữ16nam,H’Mông nữ3, đúngengine và mẫu tham chiếu; không thay giọng. Khớp tổng và chương, không tuyên bố khớp từng từ giữa mọi ngôn ngữ.23 phút là yêu cầu riêng của tập 4; không đổi mặc định20 phút của cả chuỗi.
 
 
-[Quy trình đã áp dụng](PRODUCTION_STEPS_APPLIED.md) · [QAvoice](VOICES/VOICE_RELEASE_QA.json). Bản dịch, nghe và phương ngữH’Mông Trắng vẫn cần người bản ngữ rà soát độc lập. Chưa dựng video tập4 vì chưa có clip của tập này.
+[Quy trình đã áp dụng](PRODUCTION_STEPS_APPLIED.md) · [QAvoice](VOICES/VOICE_RELEASE_QA.json). Bản dịch, nghe và phương ngữH’Mông Trắng vẫn cần người bản ngữ rà soát độc lập. Đã dựng xong video tập4; xem liên kết bên dưới.
+
+
+
+## Video hoàn chỉnh
+
+[Tải video23:00](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Mở đầu30s](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_OPENING_30s.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề và5promptthumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Chỉ voiceAnh gốc; đã loại tiếngclip.12shot/30s, không thêm intro. Không có hình trẻ em trong cảnh được chọn. [Hồ sơ dựng và kiểm tra](EDITING/README.md).

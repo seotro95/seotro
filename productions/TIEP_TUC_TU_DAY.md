@@ -7,7 +7,7 @@ Repository **seotro95/seotro**, nhánh **codex/beringia-video-01**.
 - Chủ đề1—Beringia: đã bàn giao tài liệu,17 voice và video tiếng Anh hoàn chỉnh20:00. [Video](https://github.com/seotro95/seotro/releases/download/beringia-video-01-final-20min/BERINGIA_01_EN_FINAL_20m_720p.mp4).
 - Chủ đề2—White Sands: đã bàn giao kịch bản3.320 từ,100 prompt/10 TXT,32 ô dùng lại,132 ô timeline và17 voice riêng22:00. [Tài liệu](video-02-white-sands/README.md). Đã bàn giao [video tiếng Anh hoàn chỉnh22:00](https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/WHITE_SANDS_02_EN_FINAL_22m_720p.mp4), [project dựng](https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/WHITE_SANDS_02_EDIT_PROJECT.zip),5 tiêu đề và5 promptthumbnail. Chỉ voice Anh, đã bỏ mọi tiếng clip; mở đầu8shot/30giây.
 - Chủ đề3—Mal’ta: đã bàn giao kịch bản3.087 từ,100 prompt/10 TXT,20 ô dùng lại,120 ô timeline và17 voice có nhấn nhá, mỗi bản20:00. [Tài liệu](video-03-malta/README.md) · [17 voice](video-03-malta/VOICES/README.md). Đã bàn giao [video tiếng Anh có nhấn nhá hoàn chỉnh20:00](https://github.com/seotro95/seotro/releases/download/malta-video-03-final-20min/MALTA_03_EN_FINAL_20m_720p.mp4), [project dựng](https://github.com/seotro95/seotro/releases/download/malta-video-03-final-20min/MALTA_03_EDIT_PROJECT.zip),5tiêu đề và5promptthumbnail. Chỉ voice Anh, bỏ mọi tiếng clip; mở đầu8shot/30giây.
-- Chủ đề4—Yana: đã bàn giao tài liệu23phút và17voice riêng có nhấn nhá, mỗi bản23:00; [linktải](video-04-yana/VOICES/DOWNLOAD_LINKS.md).120prompt/12TXT,18ôREUSE,138mốc10s. Không có hình trẻ em. Chờcliptập4 để dựng; chủ đề tiếp theo5—UpwardSunRiver, chưa bắt đầu.
+- Chủ đề4—Yana: đã bàn giao tài liệu23phút và17voice riêng có nhấn nhá, mỗi bản23:00; [linktải](video-04-yana/VOICES/DOWNLOAD_LINKS.md).120prompt/12TXT,18ôREUSE,138mốc10s. Không có hình trẻ em. Đã bàn giao [videoAnh23:00](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4), mở đầu12shot/30s, chỉ voiceAnh và bỏmọitiếngclip. Chủ đề tiếp theo5—UpwardSunRiver, chưa bắt đầu.
 
 ## Đọc trước khi tiếp tục
 
@@ -43,8 +43,14 @@ Nếu người dùng muốn dựng tập2 hoặc3 trước, dùng timeline/voice
 
 ## Chủ đề4 đã bàn giao tài liệu và17voice
 
-Đọc [tài liệu Yana](video-04-yana/README.md).23phút là ngoại lệ riêng tập4, giữ mặc định20phút của chuỗi. Chỉ tạo hình người trưởng thành rõ25–60tuổi; cấm cả bóng, phản chiếu, người nền, ảnh và màn hình có trẻ em. Không tái hiện chủ mẫu răng sữa. Bản Anh138ô10s; bản dịch12chương: sáu chương120s rồi sáu chương110s. Mọi voice phải giải mã đúng66.240.000mẫu tại48kHz. Giữ17ID,nhấn nhá và tên quốc gia đã khóa.
+Đọc [tài liệu Yana](video-04-yana/README.md).23phút là ngoại lệ riêng tập4, giữ mặc định20phút của chuỗi. Chỉ tạo hình người trưởng thành rõ25–60tuổi; cấm cả bóng, phản chiếu, người nền, ảnh và màn hình có trẻ em. Không tái hiện chủ mẫu răng sữa. Bản Anh138ô10s; bản dịch12chương: sáu chương120s rồi sáu chương110s. Mọi voice phải giải mã đúng66.240.000mẫu tại48kHz. Giữ17ID,nhấn nhá và tên quốc gia đã khóa. Video tập4 đã xong23:00,1280×720/24fps,12shot mở đầu30s; xem EDITING/README.md.
 
 
 
-Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ ởVOICES, quy trìnhởPRODUCTION_STEPS_APPLIED.md. Chưa cóvideohoànchỉnhtập4. Nếu người dùng gửiclipYana, dựngtập4 theo voiceAnh đã khóa trước khi chuyển việc khác. Không tự bắt đầu tập5.
+Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ ởVOICES, quy trìnhởPRODUCTION_STEPS_APPLIED.md. Đã có video hoàn chỉnh tập4. Tập4 đã dựng xong theo voiceAnh đã khóa. Không tự bắt đầu tập5.
+
+
+
+## Bàn giao video chủ đề4
+
+Đã dựng và xuất bản23:00, chỉ voiceAnh gốc có nhấn nhá.133upload/115clipkhácnhau/18bảntrùng; chọn cảnh người trưởng thành, bỏ mọi tiếngclip và cảnh không phù hợp.12shot trong30giây đầu; các chương theo ranh120/110s. [Video](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Tập5 vẫn chưa bắt đầu.

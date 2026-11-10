@@ -108,7 +108,7 @@
     {
       "id": 4,
       "title": "Yana: hai chiếc răng nhỏ hé lộ một quần thể người tiền sử.",
-      "status": "documents_and_17_expressive_voices_delivered_video_pending_native_review_pending",
+      "status": "video_and_17_expressive_voices_delivered_native_review_pending",
       "planned_path": "productions/video-04-yana",
       "created": true,
       "target_seconds": 1380
@@ -133,7 +133,7 @@
     {
       "id": 4,
       "title": "Yana: hai chiếc răng nhỏ hé lộ một quần thể người tiền sử.",
-      "status": "documents_and_17_expressive_voices_delivered_video_pending_native_review_pending",
+      "status": "video_and_17_expressive_voices_delivered_native_review_pending",
       "target_seconds": 1380,
       "created": true
     },
@@ -815,7 +815,7 @@
     "voice_count_expected": 17,
     "voice_status": "17_expressive_voices_delivered_technical_qa_passed_native_review_pending",
     "documents_delivered": true,
-    "video_rendered": false,
+    "video_rendered": true,
     "document_zip_sha256": "f3c81268c70cdd8c23ab3587ad9bd56e84605a1c6aa5c9c5e24d2c8c0e65af88",
     "documents_zip_sha256": "f3c81268c70cdd8c23ab3587ad9bd56e84605a1c6aa5c9c5e24d2c8c0e65af88",
     "voice_files_delivered": 17,
@@ -858,6 +858,32 @@
     "main_video_audio_language": "en-US",
     "production_steps_document": "productions/video-04-yana/PRODUCTION_STEPS_APPLIED.md",
     "voice_generation_source_path": "productions/video-04-yana/VOICES/PRODUCTION_SCRIPTS",
-    "video_status": "awaiting_episode4_generated_clips"
+    "video_status": "final_english_video_qa_passed_and_published",
+    "video_release_tag": "yana-video-04-final-23min",
+    "video_url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4",
+    "video_duration_seconds": 1380,
+    "video_width": 1280,
+    "video_height": 720,
+    "video_fps": 24,
+    "video_sha256": "204d06d182bec6f1fa377c0695b6beeb3ab9e8a7e4b83c9681756fe57a17cbf7",
+    "video_bytes": 336638075,
+    "video_audio_streams": 1,
+    "video_audio_language": "English",
+    "video_source_audio_removed": true,
+    "video_music_added": false,
+    "video_opening_shots": 12,
+    "video_source_upload_count": 133,
+    "video_unique_uploaded_clips": 115,
+    "video_exact_duplicates": 18,
+    "video_unique_source_clips_used": 80,
+    "video_science_graphic_count": 22,
+    "video_no_children_policy": true,
+    "video_english_voice_sha256": "7014702fdb86744e8ddbf8a74eb7ef176bbb4cb9865aaf4e0e7931e27ae0047c",
+    "video_main_voice_narration_style_id": "science-documentary-expressive-v1",
+    "video_edit_project_url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip",
+    "video_qa_url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/FINAL_VIDEO_QA.json",
+    "video_publish_workflow_run_id": 42782366886,
+    "video_release_published_at": "2026-11-10T08:25:05Z",
+    "video_download_verified": true
   }
 }
