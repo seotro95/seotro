@@ -1,0 +1,18 @@
+{
+  "site": "Baishiya Karst Cave, Ganjia Basin, northeastern Tibetan Plateau, Gansu;3280m;35.45N102.57E",
+  "main2024_doi": "10.1038/s41586-024-07612-9",
+  "main2024_license": "CCBY4.0;author attribution and DOI must accompany source notes; narrative and prompts newly written. No original figure copied.",
+  "main2024_n": {
+    "faunal_specimens": 2567,
+    "zooms_screened": 1857,
+    "identified_morphology_plus_zooms": 2005
+  },
+  "food": "Caprinae,mostlybharal,dominant;cut/percussion traces support meat,marrow,hides;bone tool rawmaterial. Counts are specimens,not animals or people.",
+  "tools": "Three expedient bone tools;one possible equid-tooth retoucher;do not illustrate metal,bows,tailoredparkas or needles as demonstratedfinds.",
+  "fire": "Burnt bones limited;anthropogenic versusnatural burning notresolved. No prehistoric fire/hearth scene as established fact.",
+  "dates": "Xiahe1 minimum160ka fromcarbonatecrust,notdeathdate;sedimentmtDNA around100ka60ka andpossibly45ka;Xiahe2ribfromlayer3dated48–32ka,notindividualdirectexactage.",
+  "earliest_layers": "Chronologicalframework~190–30ka;oldestlayers10/11richbutnohomofossil/mtDNAidentityconfirmedthere,notDenisovannameforalldeposits.",
+  "physiology": "Oxygenfractionremains~21%;barometricandpartialoxygenpressurefallwithaltitude. No exactdailycaloriesorweather reconstructed.",
+  "epas1": "2014Denisovan-relatedintrogressioninmodernTibetans;notgenotypeofXiaheindividual,notsingle-genefulladaptation,notproofpersonalAltai-toTibetjourney.",
+  "visual": "Onlymatureadultanonymousdemonstrators25–60;nochildren/reflections/photos/screens/shadows. Noactualspecimenownersdepicted. Nochildanatomy;genericadultteachingjawonly. Animalbonesdistinctfromhumanribspecimen."
+}

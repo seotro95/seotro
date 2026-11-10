@@ -1,0 +1,21 @@
+{
+  "topic": 8,
+  "seconds": 1340,
+  "frames_at_48000": 64320000,
+  "english_cues": 134,
+  "translated_chapter_seconds": [
+    120,
+    120,
+    110,
+    110,
+    110,
+    110,
+    110,
+    110,
+    110,
+    110,
+    110,
+    110
+  ],
+  "note": "Preserve17 voice identities/style;historical baseline durations do not apply to8."
+}

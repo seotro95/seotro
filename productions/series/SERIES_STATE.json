@@ -5,8 +5,8 @@
   "resume_file": "productions/TIEP_TUC_TU_DAY.md",
   "topic_index": "productions/series/TOPICS_001_100.csv",
   "shared_voice_profiles": "productions/series/VOICE_PROFILES_LOCKED.json",
-  "active_topic": null,
-  "next_topic_id": 5,
+  "active_topic": 8,
+  "next_topic_id": 8,
   "user_preferences": {
     "language_for_collaboration": "Vietnamese",
     "process_one_topic_at_a_time": true,
@@ -157,7 +157,8 @@
     {
       "id": 8,
       "title": "Baishiya: con người cổ đã sống trên cao nguyên khắc nghiệt ra sao?",
-      "status": "queued"
+      "status": "documents_ready_voice_pending",
+      "target_seconds": 1340
     },
     {
       "id": 9,
@@ -888,7 +889,7 @@
     "video_release_published_at": "2026-11-10T08:25:05Z",
     "video_download_verified": true
   },
-  "last_requested_topic_id": 6,
+  "last_requested_topic_id": 8,
   "topic5_explicitly_left_queued": true,
   "completed_topic_6": {
     "id": 6,
@@ -1001,5 +1002,39 @@
     "video_titles_thumbnail_txt_url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_TITLES_THUMBNAILS.txt",
     "video_titles_thumbnail_zip_url": "https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_TITLES_THUMBNAILS.zip",
     "video_visual_review_scope": "104 sources sampled at3times and44final frames reviewed; not continuous manual viewing."
+  },
+  "topic7_explicitly_left_queued": true,
+  "in_progress_topic_8": {
+    "id": 8,
+    "title": "Baishiya: The Survival Story Hidden in Broken Bones",
+    "path": "productions/video-08-baishiya",
+    "target_seconds": 1340,
+    "english_words": 3162,
+    "timeline_cues": 134,
+    "unique_prompts": 120,
+    "reused_timeline_slots": 14,
+    "prompt_txt_files": 12,
+    "prompts_per_txt": 10,
+    "translated_chapter_seconds": [
+      120,
+      120,
+      110,
+      110,
+      110,
+      110,
+      110,
+      110,
+      110,
+      110,
+      110,
+      110
+    ],
+    "no_children_in_visuals": true,
+    "voice_count_expected": 17,
+    "voice_status": "not_generated",
+    "documents_status": "publishing",
+    "video_rendered": false,
+    "voice_profile_set_id": "science-prehistory-17-v1",
+    "narration_style_id": "science-documentary-expressive-v1"
   }
 }

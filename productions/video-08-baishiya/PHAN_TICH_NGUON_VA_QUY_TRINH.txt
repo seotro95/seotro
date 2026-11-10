@@ -1,0 +1,17 @@
+﻿CHỦ ĐỀ8 — BAISHIYA /22:20
+
+Nguồn tham khảo: https://github.com/seotro95/seotro/releases/tag/video . CùngvideoSHA256f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c, khoảng21:03,1280×720,60fpsmãhóa,lờiNga. Đã xem contact sheet/phân tích lời mở đầu. Tác giả không công bố phần mềm/prompt,không khẳng định biết chúng.
+
+Dạng nội dung: tài liệu khoa học phổ thông có lời dẫn,hìnhminhhọa,vật nhỏ mở câu hỏi lớn. Cách kể nguồn: manhmối→địađiểm/niênđại→pháthiện→kiểmchứnglab→sinhtồn→callback. Luânphiênmacro,cảnhquan,thao tác,bảnđồ;cắt theo đổi ý,dissolve ngắn đổi thời gian/quy mô. Học nhịp kể và dựng,không dịch lời hoặc dùngcảnhtrẻem/cờcủanguồn. Baishiya dùng nguồn khoa học riêng.
+
+Kịch bản mới3162từAnh,134ô10s.12chương:2chương120s,10chương110s. Mở bằng sức ép độ cao,nhá mảnh xương người giữa xương động vật;rồi làm rõ danh tính sớm,đưa ra từng lời giải thực tế:địa hình→dấu cắt→tủy→da/côngcụ→đa dạng nguồn→khoảngtrốngthờigian→mảnhsườn→di truyền→callback. Mỗi chương giải một câu hỏi rồi mở câu kế. Không hư cấu hội thoại,cảnh săn cụ thể,cá nhân,cơ thể,gene của chủ mẫu. Nhịp22–26từ/10s có chỗ nghỉ/nhấn;thời lượng phải đo sau render.
+
+120promptmới/12TXT,đúng10prompt/tệp,đánhsố001–120.14ôREUSE đã chỉ nguồn trongCSV:không tạo clip mới. Timeline001–134 khácclipBS08_001–120. Cảnh một hành động,một chuyểnđộngmáy,chuyển đổi18–35mmrộng,50mmtrung,85mmthao tác,100mmmacro. Phần lớn cảnhquan/độngvật/vậtmẫu/kỹnăng;labchỉcầnnơiđưa bằng chứng. Chỉ người trưởngthành rõ25–60tuổi. Khôngtrẻem kể cả nền,bóng,ảnh,mànhình,tượng/sơđồ;không táihiệnchủhóa thạch. Vật xương minh họa là mô hình động vật khôngphảingười;hàmgiảnggiải chỉrăngvĩnhviễntrưởngthành. Khôngsẹo,blood/gore/cảnhgiếtsăn. Độngvậtlớntrưởngthành,khôngconnon.
+
+Không dùngAIvẽbảnđồ,chữ,số,dữliệugene. Thêmtrongeditor từnguồnđãđốichiếu. Địađiểm35.45N102.57E,3280m,tâybắcTrungQuốc/đôngbắcTâyTạng;Denisova51.40N84.68Echỉlàmđiểmso sánh,khôngvẽtuyếnđiđãchứngminh. Mọi táihiệnkỹnăngđềughiminhhọa,bối cảnhcổchỉđá/gỗ/da/sợi,khôngkimloại,bút,sổ,kínhlúp,solarpanel,zippers. KhôngdựngbếplửacổởBaishiyanhưsựkiệnđãchắcchắn.
+
+Hook30s:12shot×2.5s,theoCSV,từcảnhquan→ngườitrưởngthànhđingược dốc→bharal→hang→dấucắt→thao tác→khayxương→lab→mẫuđóngkín→hang. Nằmtrongvoice,khôngintrothêm. Dựngfullhardcuttheoý;chỉdissolve0.35–0.65skhiđổiđịađiểm/quymô,khôngtransitiontrànlan. Ánhsángngoàitrờitựnhiên,labtrungtính,macroấmnhẹ;khôngrung/zoomgiậtliêntục. Chữrõngắn,nguồnnhoởgóchiệntheomốc,khônggiảsốliệu. Xóatiếngclipgốc,toànbộclipyêucầukhôngâmthanh;videochínhsauchỉvoiceAnh,khôngnhạc/SFX.
+
+Voice:16namcùngIDđãlưu,H’MôngTrắngnữ3cùngpresetnativeVITS+OpenVoiceV2. Nhấnnhánhẹtheocâuhỏi/bằngchứng/kếtluận,khôngthaycaođộhayID. Anh134ô10s;bảndịch12chương120/110s. Mỗifilegiảimã64.320.000mẫutại48kHz=1340s;khớpchương/tổng,khôngtuyênbốkhớptừngtừgiữangônngữ. Têntệptheoquốcgia;giữengine/sourcecommit/presetSHA256/kiểuđọctronghồsơ. Bảndịch/giọngcầnbảnngữràsoátđộ tựnhiên,đặcbiệtphươngngữH’MôngTrắng.
+
+Lưutiếntrìnhtập8,danhmụcclip/script/prompt/nguồn/voice/QAtrongGitHub. Giữkếtquả1–4,6;tập5,7vẫnqueued,khôngtựlàmtập9. Chưa cóclipmớiđểdựngvideo8;khôngtạolinktảivideogiả.

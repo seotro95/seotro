@@ -1,3 +1,11 @@
+# Lượt hiện tại — chủ đề 8 Baishiya,22:20
+
+Tài liệu tập8:3162từAnh,134mốc10s,120prompt mới/12TXT,14ôREUSE. Đang xuất bản tài liệu trước khi tạo17voice cùngID/styleđãlưu. Hai chương đầu120s,mười chương sau110s;đích64.320.000mẫu48kHz. Không trẻ em ở bất kỳ cảnh nào,cliphoàntoànimlặng;chỉ người trưởng thành25–60tuổi.
+
+Đọc [tài liệu tập8](video-08-baishiya/README.md),[trạng thái](series/SERIES_STATE.json). Giữ nguyên kết quả tập1–4,6;tập5và7vẫnqueued. Chưa nhậnclip8,chưa dựngvideo8. Không đăng video tham khảo hoặc clip nguồn thô.
+
+---
+
 # Chủ đề 6 Denisova đã hoàn tất video và 17 voice
 
 [Video Anh21:00](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_EN_FINAL_21m_720p.mp4) · [Mở đầu30s](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_OPENING_30s.mp4) · [Dự án](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail TXT](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_TITLES_THUMBNAILS.txt) · [ZIP dự phòng](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_TITLES_THUMBNAILS.zip).
@@ -80,5 +88,6 @@ Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ 
 ## Bàn giao video chủ đề4
 
 Đã dựng và xuất bản23:00, chỉ voiceAnh gốc có nhấn nhá.133upload/115clipkhácnhau/18bảntrùng; chọn cảnh người trưởng thành, bỏ mọi tiếngclip và cảnh không phù hợp.12shot trong30giây đầu; các chương theo ranh120/110s. [Video](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Tập5 vẫn chưa bắt đầu.
+
 
 

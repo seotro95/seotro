@@ -1,0 +1,161 @@
+{
+  "topic": 8,
+  "seconds": 1340,
+  "files": [
+    {
+      "path": "CANH_DUNG_LAI_KHONG_TAO_MOI.csv",
+      "bytes": 3602,
+      "sha256": "872968dca293ca3a95c1a24a072af4c5d76afbc5e4fafd68ac7d4243a84eabf0"
+    },
+    {
+      "path": "CHAPTERS_12.csv",
+      "bytes": 1064,
+      "sha256": "d556e39751b8210006c1e9efe0d3cc68e519d30a3256674283990c926be02456"
+    },
+    {
+      "path": "DOCUMENT_QA.json",
+      "bytes": 460,
+      "sha256": "891706e808f71870654e2f1350d241d1c25c88e7eb7944b69cc78b01b41c05b6"
+    },
+    {
+      "path": "DOI_CHIEU_KHOA_HOC.csv",
+      "bytes": 32075,
+      "sha256": "737aea4c1b7696baf5de4ed5fc6e97da65f6deab89321175e99c83114e2faf5c"
+    },
+    {
+      "path": "HOOK_30_GIAY_12_SHOT.csv",
+      "bytes": 1754,
+      "sha256": "a72ee984be86cd6e5cecc2fe89adc2b9ef76358ce99b47b66706127bf0230370"
+    },
+    {
+      "path": "KICH_BAN_EN_22m20s.txt",
+      "bytes": 20644,
+      "sha256": "b295fa775e79a02222faf0f4f3ae9b52b8330f0ca50fc03cc59b01955932dd81"
+    },
+    {
+      "path": "KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 29332,
+      "sha256": "0bcdd66cc0bd68b0f0efe15bd2cbb2d403307a2fc49fe058b4927339030ea0a9"
+    },
+    {
+      "path": "LOI_DAN_EN_134_CANH.srt",
+      "bytes": 25090,
+      "sha256": "93fd1f373592306a5b13bcd335283d3c0f316e0263d352c5643c68b265a76211"
+    },
+    {
+      "path": "NARRATION_STYLE_LOCKED.json",
+      "bytes": 1245,
+      "sha256": "3a95d19fe15335ba53dbf743ca5d9ca3bbbe0572b1acc4b9465901d0d2cd3297"
+    },
+    {
+      "path": "NGUON_KIEM_CHUNG.csv",
+      "bytes": 3576,
+      "sha256": "53faa503853a617f7687bf89260983e9f6b96144c96acf4ab5bdc0f1c429cfc6"
+    },
+    {
+      "path": "NGUON_KIEM_CHUNG.md",
+      "bytes": 3638,
+      "sha256": "09c2000da7bad7ed17ada73a8f1e3da1cc30e2f9bfc059dc20e7cb7628be9f99"
+    },
+    {
+      "path": "PHAN_TICH_NGUON_VA_QUY_TRINH.txt",
+      "bytes": 4044,
+      "sha256": "64f1db08aa623c79773ef217b40cf7677ef0c819edf61e195cb070260b6e5da0"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_01_001_010.txt",
+      "bytes": 18963,
+      "sha256": "ff62d744a82633361acc27c66d372fcf7fa0601385b872fa8f5985a6b9d19ad6"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_02_011_020.txt",
+      "bytes": 18948,
+      "sha256": "0ce61e6381f03b0e42607f1c42c90839d165349905a6c3bf07b6b6141313fbb3"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_03_021_030.txt",
+      "bytes": 18950,
+      "sha256": "0032d1fc38040dd0f5680d4e852ec5ceaf8ab21d9c2699a3337c04c762b527d6"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_04_031_040.txt",
+      "bytes": 18901,
+      "sha256": "81571754df2c66be7ac8117444fe2b2f46fdf3874d40bb5daedba1d7b7b98be0"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_05_041_050.txt",
+      "bytes": 19027,
+      "sha256": "1cb28923e921d6b5ccc5ca55d26c59ff297a2c5b404659cd1fec11ebce0f264a"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_06_051_060.txt",
+      "bytes": 19053,
+      "sha256": "298369fc35fae191b08b645b862871b803836a02a46998eb25cda8bc4b63b6c1"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_07_061_070.txt",
+      "bytes": 18954,
+      "sha256": "c165a683b36e48a9774d4ca7f1d5e12330afd0e03937a89327ae9f6f5853beb1"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_08_071_080.txt",
+      "bytes": 19010,
+      "sha256": "0b0932eb7bab8881f93d81134761ece19c9dc3bc50c46092fb301b1236480de6"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_09_081_090.txt",
+      "bytes": 18918,
+      "sha256": "506c97aeaced1f893b7a3ae05b56d51a874582df6672d4a857a08e84d6e88926"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_10_091_100.txt",
+      "bytes": 18991,
+      "sha256": "5668ddbc1d237b2b2fc6c4429daa85122da67896b79605d2d55023f49c79ebe6"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_11_101_110.txt",
+      "bytes": 19059,
+      "sha256": "3243704a42036646f62f4289858c26653bc7770c6ea7a5949107254adcf49d23"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_12_111_120.txt",
+      "bytes": 18949,
+      "sha256": "3c8eba7c63b303436e253f3bcae22ddc6c1f2f796411de6dbfdf6219913a6965"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1358,
+      "sha256": "587d6b05fb476a9e69afe328cfa8d9ff6467e5dc039842cf46c3e0d32559298b"
+    },
+    {
+      "path": "SCENES_AND_PROMPTS.json",
+      "bytes": 352428,
+      "sha256": "77fee26b1874a188b89e920ef71ad736ed3c7ed0995834af85baf340694b31be"
+    },
+    {
+      "path": "TIMELINE_134_CANH.csv",
+      "bytes": 61206,
+      "sha256": "1e5ee79847ee17c5e19e3ed6a7aa33883c49b7921cb5ee18f272717067e6def6"
+    },
+    {
+      "path": "UNIQUE_PROMPTS_120.json",
+      "bytes": 264949,
+      "sha256": "6d9536c7385b76f0cfbc61e9e81a814c862ca12948f44f5eddfbebf20549a863"
+    },
+    {
+      "path": "VOICE_FILE_NAMING.json",
+      "bytes": 2821,
+      "sha256": "86a72485007e41d19e4f828ccd7d4e31657a3d035640eda8500abfbd80cd2060"
+    },
+    {
+      "path": "VOICE_PROFILES_LOCKED_EXPECTED.json",
+      "bytes": 12597,
+      "sha256": "698dd588cedc9dd3824275d36921ae49b525ecd1af29be740615a650154509f5"
+    },
+    {
+      "path": "VOICE_TIMING_THIS_EPISODE.json",
+      "bytes": 330,
+      "sha256": "972d9177e034d3e52b402c79282938a2e7bdab1318f8d8cb7e4b67664d6fddab"
+    }
+  ]
+}

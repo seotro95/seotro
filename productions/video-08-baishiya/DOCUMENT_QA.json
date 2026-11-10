@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "english_words": 3162,
+  "minimum_words_per_cue": 22,
+  "maximum_words_per_cue": 26,
+  "timeline_seconds": 1340,
+  "timeline_cues": 134,
+  "new_prompts": 120,
+  "reuse_slots": 14,
+  "prompt_txt_files": 12,
+  "prompts_per_txt": 10,
+  "hook_shots": 12,
+  "no_children_policy_in_every_prompt": true,
+  "silent_policy_in_every_prompt": true,
+  "source_count": 13,
+  "audio_status": "not_yet_generated",
+  "target_frames_48000": 64320000
+}
