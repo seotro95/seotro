@@ -74,4 +74,11 @@ jobs:
           python -u publish.py
 '''
 entries.extend([{'path':'transfer/manifest.json','mode':'100644','type':'blob','content':json.dumps(manifest,indent=2)},{'path':'transfer/publish.py','mode':'100644','type':'blob','content':publisher},{'path':'.github/workflows/baishiya-final08.yml','mode':'100644','type':'blob','content':workflow}])
-(R/'FINAL_MEDIA_TREE_ENTRIES.json').write_text(json.dumps(entries,ensure_ascii=False));(R/'FINAL_MEDIA_MANIFEST.json').write_text(json.dumps(manifest,indent=2));(R/'FINAL_SMALL_BINARIES.json').write_text(json.dumps(small));print(json.dumps({'completed_output_tree_entries':len(entries),'small_binaries':len(small),'tree_characters':len((R/'FINAL_MEDIA_TREE_ENTRIES.json').read_text())}),flush=True)
+private_pattern=re.compile(r'file_[0-9a-f]{32}|/workspace/attachments/[0-9a-f]{8}-')
+for entry in entries:assert not private_pattern.search(entry.get('content','')),entry['path']
+with zipfile.ZipFile(O/'BAISHIYA_08_EDIT_PROJECT.zip') as archive:
+ for name in archive.namelist():
+  if archive.getinfo(name).file_size<5000000:assert not private_pattern.search(archive.read(name).decode('utf-8',errors='ignore')),name
+for name in ['PUBLICATION_DESTINATION_PROOF.json','PUBLICATION_PRIVACY_SCAN.json']:
+ entries.append({'path':'transfer/'+name,'mode':'100644','type':'blob','content':(R/name).read_text()})
+(R/'FINAL_MEDIA_TREE_ENTRIES.json').write_text(json.dumps(entries,ensure_ascii=False));(R/'FINAL_MEDIA_MANIFEST.json').write_text(json.dumps(manifest,indent=2));(R/'FINAL_SMALL_BINARIES.json').write_text(json.dumps(small));print(json.dumps({'completed_output_tree_entries':len(entries),'small_binaries':len(small),'tree_characters':len((R/'FINAL_MEDIA_TREE_ENTRIES.json').read_text()),'private_upload_references':0,'destination_owner_verified':True}),flush=True)

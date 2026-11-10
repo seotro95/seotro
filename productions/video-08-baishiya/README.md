@@ -8,4 +8,10 @@
 
 [Tải từng voice](VOICES/DOWNLOAD_LINKS.md) · [Quy trình đã áp dụng](PRODUCTION_STEPS_APPLIED.md) · [QA âm thanh](VOICES/VOICE_RELEASE_QA.json)
 
-Kịch bản sạch/có mốc,SRT,timeline,12TXTprompt,hook30giây và nguồn có trong ZIP tài liệu đã phát hành trước voice. ZIP gốc được giữ bất biến. Quy trình phía trên ghi rõ giới hạn bằng chứng và cách áp dụng cho tập sau. Kiểm tra kỹ thuật đã đạt; bản dịch/nghe và phương ngữH’MôngTrắng còn cần người bản ngữ rà soát độc lập. Chưa cóclip8,chưa dựngvideo8.
+Kịch bản sạch/có mốc,SRT,timeline,12TXTprompt,hook30giây và nguồn có trong ZIP tài liệu đã phát hành trước voice. ZIP gốc được giữ bất biến. Quy trình phía trên ghi rõ giới hạn bằng chứng và cách áp dụng cho tập sau. Kiểm tra kỹ thuật đã đạt; bản dịch/nghe và phương ngữH’MôngTrắng còn cần người bản ngữ rà soát độc lập. Video 8 đã dựng xong và kiểm tra; xem liên kết dưới đây.
+
+
+
+## Video hoàn chỉnh
+
+[Tải video 22:20](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4) · [Mở đầu 30 giây](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_OPENING_30s.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_EDIT_PROJECT.zip) · [5 tiêu đề và 5 prompt thumbnail TXT](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_TITLES_THUMBNAILS.txt) · [ZIP dự phòng](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_TITLES_THUMBNAILS.zip). Chỉ voice Anh gốc, bỏ mọi tiếng clip; mở đầu 12 cảnh/30 giây trong tổng 22:20. [Hồ sơ và QA](EDITING/README.md). Các bản tải lên nguồn giữ nguyên; không kèm footage gốc trong bản tải.

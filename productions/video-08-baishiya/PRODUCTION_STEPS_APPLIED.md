@@ -13,6 +13,17 @@
 11. Căn Anh theo 134 ô 10 giây, bản dịch theo 12 chương 120/110 giây. Giới hạn tempo hậu kỳ Anh 1,4 và các bản khác 1,5; không cắt mất lời. Mỗi bản phải giải mã đúng 64.320.000 mẫu ở48kHz =22:20. Khớp chương và tổng không có nghĩa khớp từng từ giữa mọi ngôn ngữ.
 12. Đổi tên theo quốc gia bằng sao chép nguyên byte, kiểm SHA256. Phát hành17MP3 riêng, ZIP tổng và ZIP hồ sơ. Đối chiếu digest máy chủ với báo cáo từng giọng, ID/giới tính/style/thời lượng; đối chiếu đầy đủ3.162 từ/134mốcAnh và giải mã độc lập fileAnh công khai. Lưu script, báo cáo, SRT, preset, mã nguồn, link và trạng thái để tiếp tục.
 
-Chưa dựng video8 vì chưa có clip của tập này. Khi nhận clip: chỉ dùng đúng voiceAnh đã khóa, loại mọi tiếng nguồn, không nhạc/SFX; mở đầu12shot trong30giây voice theoCSV, không thêm intro ngoài22:20. Cắt theo ý, dissolve ngắn khi đổi bối cảnh hoặc quy mô; ưu tiên sự rõ ràng của câu chuyện. Trước dựng cần xem contact sheet tất cả clip, loại cảnh có trẻ em, đồ hiện đại trong cảnh cổ hoặc chữ/số liệu AI bịa. Trước bàn giao video cần kiểm toàn bộ giải mã, frame, một đường tiếng và đồng bộ nhiều điểm.
+Video 8 đã dựng xong theo phần cập nhật dưới đây. Nguyên tắc áp dụng: chỉ dùng đúng voiceAnh đã khóa, loại mọi tiếng nguồn, không nhạc/SFX; mở đầu12shot trong30giây voice theoCSV, không thêm intro ngoài22:20. Cắt theo ý, dissolve ngắn khi đổi bối cảnh hoặc quy mô; ưu tiên sự rõ ràng của câu chuyện. Trước dựng cần xem contact sheet tất cả clip, loại cảnh có trẻ em, đồ hiện đại trong cảnh cổ hoặc chữ/số liệu AI bịa. Trước bàn giao video cần kiểm toàn bộ giải mã, frame, một đường tiếng và đồng bộ nhiều điểm.
 
 Ở tập sau, lấy chủ đề/thời lượng/số mốc/ranh chương từ yêu cầu mới. Giữ ID, mẫu giọng, style, tên quốc gia và chính sách không có trẻ em. Không chạy nguyên hằng số của tập8 cho tập khác.
+
+
+
+## Cập nhật dựng video chủ đề 8
+
+13. Nhận 114 clip mới 622–735, kiểm SHA256/stream và lấy mẫu đầu, giữa, gần cuối. 35 clip có tiếng gốc. Không công khai raw footage hoặc ảnh contact từ nguồn. Sáu mã BS08_002,014,027,072,075,116 thiếu được thay bằng cảnh phù hợp/đồ họa.
+14. Chọn 91 clip. Loại toàn bộ cảnh có logo/chữ phát sinh, trang phục hoặc vật chứng dễ gây nhầm, người nền không rõ tuổi; không cắt watermark để tái sử dụng. Chỉ lấy chi tiết thân/chân ở hai clip động vật có sừng không khớp. Các mô hình hàm/dấu vết được ghi rõ là mẫu giảng giải.
+15. Dựng 275 shot trong 134 ô 10 giây, 12 shot/30 giây đầu và 7 dissolve ngắn. 19 đồ họa gốc giải thích mốc tuổi, ZooMS, tài nguyên, giới hạn bằng chứng và EPAS1. Bản đồ hiện đại không có tuyến di cư khẳng định.
+16. Tải lại nguồn riêng tư theo nhu cầu và xác minh hash; thu hồi chỉ cache cục bộ để tránh đầy đĩa. Các bản tải lên chuẩn vẫn nguyên vẹn. Render loại mọi audio clip bằng -an và map hình; ghép cuối chỉ map voice Anh đã khóa. Không retime hoặc đổi cao độ voice khi dựng; chỉ chuẩn hóa độ lớn.
+17. Kiểm 32.160 frame/1.340 giây, 1 audio Anh, 12 chương, 134 cue/3.162 từ Anh, giải mã toàn bộ, khoảng đen, độ lớn/true peak và 15 điểm đồng bộ sóng âm. Rà mẫu mở đầu, chuyển chương, đồ họa và kết; ghi rõ phạm vi kiểm hình.
+18. Tạo project không footage gốc, 5 cặp tiêu đề/prompt thumbnail trong TXT UTF-8 BOM và ZIP dự phòng. Dùng workflow riêng baishiya-final08.yml trên nhánh chuyển chỉ sản phẩm cuối; không ghi đè workflow tập cũ. Đối chiếu hash toàn bộ asset và tải kiểm đầy đủ MP4 công khai, rồi cập nhật trạng thái chuỗi. Giữ 17 voice và mọi tập trước; không tự bắt đầu tập mới.

@@ -1,0 +1,13 @@
+{
+  "topic": 8,
+  "render_location": "local",
+  "publish_branch": "codex/baishiya-final-transfer-20261110",
+  "publish_commit": "291817c003e12fb60d02795b0a543a28528099a3",
+  "publish_run_id": 42872541371,
+  "publish_workflow_url": "https://github.com/seotro95/seotro/actions/runs/42872541371",
+  "release_tag": "baishiya-video-08-final-22m20s",
+  "workflow_file": ".github/workflows/baishiya-final08.yml",
+  "destination_owner_matches_connected_user": true,
+  "project_private_upload_references_removed": true,
+  "canonical_base": "5455aaaca83972f867f5bd5ebe4116cd63683875"
+}

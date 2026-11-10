@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "scope": "Source-sample selection;final movie review still required",
+  "excluded_clips": [
+    "BS08_006",
+    "BS08_034",
+    "BS08_041",
+    "BS08_048",
+    "BS08_058",
+    "BS08_061",
+    "BS08_078",
+    "BS08_081",
+    "BS08_087",
+    "BS08_093",
+    "BS08_094",
+    "BS08_099",
+    "BS08_100",
+    "BS08_104",
+    "BS08_108",
+    "BS08_111"
+  ],
+  "no_children_in_selected_sampled_frames": true,
+  "not_continuous_manual_viewing": true,
+  "final_movie_review_status": "passed",
+  "final_movie_review_scope": "114 source clips sampled at three times; 71 unique final-movie timepoints across five contact pages, including opening, chapters, scientific cards and ending. Not continuous manual viewing.",
+  "final_sampled_unique_timepoints": 71,
+  "final_review_pages": 5,
+  "chapter_heading_overlap_corrected": true,
+  "hide_context_corrected": true
+}

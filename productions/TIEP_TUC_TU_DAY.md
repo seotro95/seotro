@@ -1,3 +1,23 @@
+# Chủ đề 8 Baishiya đã hoàn tất video và 17 voice
+
+[Video Anh 22:20](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4) · [Mở đầu 30 giây](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_OPENING_30s.mp4) · [Dự án](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_EDIT_PROJECT.zip) · [5 tiêu đề và 5 prompt thumbnail TXT](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_TITLES_THUMBNAILS.txt) · [ZIP dự phòng](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_TITLES_THUMBNAILS.zip).
+
+Video 1280×720/24 fps, 32.160 khung hình, chỉ voice Anh đã khóa. Không tiếng clip, nhạc hoặc SFX. 12 cảnh mở đầu trong 30 giây, tổng 22:20, 275 shot và 7 chuyển cảnh hòa hình ngắn. Đã đối chiếu 114 clip, chọn 91 clip cùng 19 đồ họa. Sáu mã prompt thiếu được giải quyết bằng cảnh cùng nội dung và đồ họa phù hợp. Không hình trẻ em trong các mẫu cảnh đã chọn.
+
+Voice Anh SHA256 14131b625739f903c4f165a02ffc60c5d54b9f09dd628cf92a13f64477e222c4; giữ nguyên lời, nhịp và cao độ. 17 voice đã bàn giao được giữ nguyên ID, mẫu, style và tên quốc gia. Bản dịch/nghe và phương ngữ H’Mông Trắng vẫn cần người bản ngữ rà soát độc lập.
+
+Chỉ phát hành bản dựng và tài liệu. Không kèm clip gốc, proxy hoặc ảnh contact từ nguồn. Các bản tải lên Sediment vẫn nguyên vẹn; chỉ bộ nhớ đệm tải về và scene dựng đã ghép được thu hồi để tiết kiệm dung lượng. Tệp nguồn được đối chiếu mã băm trước khi dựng. Project có script link_sources.py để dùng lại bản gốc người dùng giữ.
+
+Giới hạn bằng chứng được giữ: tuổi tối thiểu của hàm, tuổi lớp chứa Xiahe 2, nguồn gốc vết đốt chưa rõ, không khẳng định cư trú liên tục hoặc bộ gene Xiahe hoàn chỉnh. Đồ họa có chú thích; bản đồ chỉ định hướng địa lý hiện đại.
+
+Đã kiểm toàn bộ giải mã, thời lượng, một đường tiếng Anh, 12 chương, 134 cue phụ đề và 15 điểm đồng bộ âm thanh. Rà mẫu bản dựng mở đầu, chương, đồ họa và kết; không tuyên bố xem tay liên tục cả phim. Xem [hồ sơ dựng](video-08-baishiya/EDITING/README.md) và SERIES_STATE.
+
+Giữ kết quả tập 1–4 và 6; tập 5 và 7 vẫn queued. Không tự bắt đầu 9 hoặc tạo lại voice đã chốt. Mặc định chuỗi vẫn 20 phút; 22:20 là ngoại lệ riêng tập 8.
+
+---
+
+Nhật ký trước đó; trạng thái hiện tại nằm ở đầu trang.
+
 # Tiếp tục từ đây — chủ đề 8 đã có tài liệu và 17 voice
 
 Baishiya, 22:20: 3.162 từ Anh, 134 mốc 10 giây, 120 prompt mới trong 12 TXT và 14 mốc REUSE. [Tải voice](video-08-baishiya/VOICES/DOWNLOAD_LINKS.md) · [Quy trình](video-08-baishiya/PRODUCTION_STEPS_APPLIED.md).
@@ -90,6 +110,7 @@ Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ 
 ## Bàn giao video chủ đề4
 
 Đã dựng và xuất bản23:00, chỉ voiceAnh gốc có nhấn nhá.133upload/115clipkhácnhau/18bảntrùng; chọn cảnh người trưởng thành, bỏ mọi tiếngclip và cảnh không phù hợp.12shot trong30giây đầu; các chương theo ranh120/110s. [Video](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Tập5 vẫn chưa bắt đầu.
+
 
 
 

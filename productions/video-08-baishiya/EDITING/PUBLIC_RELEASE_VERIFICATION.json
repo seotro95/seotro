@@ -1,0 +1,123 @@
+{
+  "status": "passed",
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/baishiya-video-08-final-22m20s",
+  "tag": "baishiya-video-08-final-22m20s",
+  "published_at": "2026-11-10T18:11:55Z",
+  "asset_count": 18,
+  "assets": [
+    {
+      "name": "BAISHIYA_08_EDIT_PROJECT.zip",
+      "bytes": 11580472,
+      "sha256": "c3a309f88e7e441872d9e625fb535e4bca3f5af3e0c9a9fefae2956466136cbe",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_EDIT_PROJECT.zip"
+    },
+    {
+      "name": "BAISHIYA_08_EN_FINAL_22m20s_720p.mp4",
+      "bytes": 316452083,
+      "sha256": "475de49f32e6d7cb064721986b4018eadce1dd81ec69bfaf9160f637cddca08e",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4"
+    },
+    {
+      "name": "BAISHIYA_08_EN_SUBTITLES.srt",
+      "bytes": 25090,
+      "sha256": "93fd1f373592306a5b13bcd335283d3c0f316e0263d352c5643c68b265a76211",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_EN_SUBTITLES.srt"
+    },
+    {
+      "name": "BAISHIYA_08_OPENING_30s.mp4",
+      "bytes": 8454419,
+      "sha256": "9908975155e6e3f59ed5e17d91e80a7a1fc2fedee05d5be4cc570294c107b306",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_OPENING_30s.mp4"
+    },
+    {
+      "name": "BAISHIYA_08_TITLES_THUMBNAILS.txt",
+      "bytes": 5718,
+      "sha256": "efafad25d14445ae1225324e07171de9bcfab7719fe6d1086471c9ff7b8b2320",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_TITLES_THUMBNAILS.txt"
+    },
+    {
+      "name": "BAISHIYA_08_TITLES_THUMBNAILS.zip",
+      "bytes": 2865,
+      "sha256": "6fd38e7d5335a5c25d51ae7740ec2e701185d5ff5676c7f5bface4b4938b5b14",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_TITLES_THUMBNAILS.zip"
+    },
+    {
+      "name": "EDITOR_DECISIONS.json",
+      "bytes": 3267,
+      "sha256": "8c87e0502c7f6539e4bf880b59c66eb8eb89c1907cb82c2b02afc3f4b3a60060",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/EDITOR_DECISIONS.json"
+    },
+    {
+      "name": "EDIT_TIMELINE.csv",
+      "bytes": 25782,
+      "sha256": "882be0ca4911484b420ce17b077a24de82a53cae2eea9976848fa6d117d4e498",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/EDIT_TIMELINE.csv"
+    },
+    {
+      "name": "FINAL_EXPORT_COMMAND.json",
+      "bytes": 1150,
+      "sha256": "3dde01eb824cd801bfd460b2b22fbd26517a94a5f57eded70d5c3f7b55d6c8d9",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/FINAL_EXPORT_COMMAND.json"
+    },
+    {
+      "name": "FINAL_VIDEO_QA.json",
+      "bytes": 4618,
+      "sha256": "2be82f06dd794bd04a51d127565857ca665c344237d1650420941e8559175f3b",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/FINAL_VIDEO_QA.json"
+    },
+    {
+      "name": "HUONG_DAN_DUNG_LAI.txt",
+      "bytes": 1509,
+      "sha256": "62c510e68970133ec4a8960ad921826111764efeba84d7e6b5d4c19a96869cfd",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/HUONG_DAN_DUNG_LAI.txt"
+    },
+    {
+      "name": "README.md",
+      "bytes": 3235,
+      "sha256": "59dae7ed23262f3765e096053a9b021a67ef1292b4579f10e5e110a8d636861f",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/README.md"
+    },
+    {
+      "name": "SCENE_VERIFICATION.json",
+      "bytes": 11418,
+      "sha256": "0b15b50268c56b3d263ab551bbda03ca7a0ee0e8c363b4632425fba97cbf99d4",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/SCENE_VERIFICATION.json"
+    },
+    {
+      "name": "SOURCE_CLIP_MANIFEST.csv",
+      "bytes": 16912,
+      "sha256": "66d079bcb481b10d24dd39982c65443b958076a14a4f36f89bf357dc9502f291",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/SOURCE_CLIP_MANIFEST.csv"
+    },
+    {
+      "name": "SOURCE_MANIFEST.json",
+      "bytes": 29627,
+      "sha256": "b3289e0727da4258c80b39fc0aa0b93cd5a5c8d9100fcfd1460e4d72eb36a27e",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/SOURCE_MANIFEST.json"
+    },
+    {
+      "name": "VISUAL_REVIEW_APPROVED.json",
+      "bytes": 880,
+      "sha256": "d30738558dad45d92ebd5f9e31e004b0ee2106095e3827b2936e68349b33ed59",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/VISUAL_REVIEW_APPROVED.json"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1464,
+      "sha256": "d2e95dd4f42880a07df5ee6b63d5e0b927fea5ac7c0698799e2e497bbab93aeb",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/SHA256SUMS.txt"
+    },
+    {
+      "name": "RELEASE_ASSET_MANIFEST.json",
+      "bytes": 2728,
+      "sha256": "fada327fa373fc3531f4204050478b04da1a6cb0e3c42b53f2c18087c86624fb",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/RELEASE_ASSET_MANIFEST.json"
+    }
+  ],
+  "public_video_head_status": 200,
+  "public_video_full_stream_sha256_verified": true,
+  "txt_download_content_verified": true,
+  "txt_content_disposition": "attachment; filename=BAISHIYA_08_TITLES_THUMBNAILS.txt",
+  "raw_source_clips_published": false,
+  "verification": "All published output sizes and serverSHA256digests match local completed files; complete public MP4 stream hash verified; TXT downloaded and its five title/prompt pairs checked."
+}
