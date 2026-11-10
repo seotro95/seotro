@@ -1,0 +1,13 @@
+{
+  "repository": "seotro95/seotro",
+  "visibility": "public",
+  "connected_user_id": "212990612",
+  "repository_owner_id": "212990612",
+  "connected_user_matches_repository_owner": true,
+  "connected_user_push_and_admin_permissions_verified": true,
+  "user_supplied_repository_url": "https://github.com/seotro95/seotro/releases/tag/video",
+  "user_instruction_to_save": "lưu lại trong gihub cho tôi để lần sau tiếp tục các chủ đề 2.3..... tiếp theo..",
+  "current_user_request": "Edit topic8 to existing English narration and provide final video download, five titles and five matching thumbnail prompts.",
+  "publication_scope": "Completed edited video and requested delivery documents only. No raw uploaded videos, private upload IDs/URIs or attachment paths.",
+  "safer_revision": "Remove private upload IDs/URIs from every newly published manifest and from project inventory. Verified by scanning every ZIP member and staged UTF-8 payload. Same repository explicitly supplied by the user and owned by the connected user."
+}

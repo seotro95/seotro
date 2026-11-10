@@ -1,0 +1,136 @@
+{
+  "status": "passed",
+  "final_file": "BAISHIYA_08_EN_FINAL_22m20s_720p.mp4",
+  "video_duration_seconds": 1340.0,
+  "container_duration_seconds": 1340.0,
+  "audio_duration_seconds": 1340.0,
+  "video_frames": 32160,
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "audio_stream_count": 1,
+  "audio_language": "English",
+  "original_clip_audio_included": false,
+  "music_added": false,
+  "audio_input": "Original expressive BAISHIYA_08_My_Tieng_Anh.mp3, unchanged pitch and timing; loudness processing only",
+  "narration_style_id": "science-documentary-expressive-v1",
+  "reference_voice_duration_seconds": 1340.0,
+  "reference_voice_sha256": "14131b625739f903c4f165a02ffc60c5d54b9f09dd628cf92a13f64477e222c4",
+  "decoded_final_audio_seconds": 1340.01075,
+  "waveform_alignment_checks": [
+    {
+      "reference_seconds": 5,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999018
+    },
+    {
+      "reference_seconds": 115,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999873
+    },
+    {
+      "reference_seconds": 235,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999608
+    },
+    {
+      "reference_seconds": 345,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999783
+    },
+    {
+      "reference_seconds": 455,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999993
+    },
+    {
+      "reference_seconds": 565,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999973
+    },
+    {
+      "reference_seconds": 675,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999979
+    },
+    {
+      "reference_seconds": 785,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999642
+    },
+    {
+      "reference_seconds": 895,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999137
+    },
+    {
+      "reference_seconds": 1005,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999997
+    },
+    {
+      "reference_seconds": 1115,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999996
+    },
+    {
+      "reference_seconds": 1225,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.995182
+    },
+    {
+      "reference_seconds": 1305,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999583
+    },
+    {
+      "reference_seconds": 1325,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.99704
+    },
+    {
+      "reference_seconds": 1335,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.99999
+    }
+  ],
+  "measured_loudness_lufs": -16.07,
+  "measured_true_peak_dbtp": -1.29,
+  "measured_loudness_range_lu": 2.9,
+  "chapter_count": 12,
+  "subtitle_cues": 134,
+  "subtitle_mode": "Embedded optional English subtitles and separate SRT",
+  "timeline_cues": 134,
+  "planned_shots": 275,
+  "opening_30s_shots": 12,
+  "short_dissolves": 7,
+  "source_uploads": 114,
+  "downloaded_uploads": 114,
+  "unique_downloaded_clips": 114,
+  "unique_source_clips_used": 91,
+  "science_graphic_count": 19,
+  "exact_duplicate_files_removed": 0,
+  "source_transfer_limits": [],
+  "no_children_in_final_selected_scenes": true,
+  "manual_visual_scope": "Sampling and scene selection, not continuous viewing.",
+  "source_note": "114 uploaded clips reviewed;35 contain audio, all excluded. Six missing prompt contexts covered by evidence graphics and inspected alternatives.",
+  "science_graphics": "Natural Earth 1:110m modern geographic orientation; evidence, chronology and physiology teaching cards. No measured ancient genome, exact migration routes or confirmed Denisovan faces.",
+  "full_decode_exit_code": 0,
+  "black_gaps_detected": [],
+  "decode_errors_detected": [],
+  "visual_review": "All 114 source clips sampled at 0.8s, midpoint and near end; selected scenes show mature adults or non-human graphics. Finished movie opening, chapter changes, graphics and ending sampled separately. No claim of continuous manual viewing.",
+  "sha256": "475de49f32e6d7cb064721986b4018eadce1dd81ec69bfaf9160f637cddca08e",
+  "bytes": 316452083,
+  "voices": "Existing separate-language voice assets are retained in release baishiya-video-08-22m20s. Only the existing English reference is included in this video.",
+  "final_visual_review": {
+    "status": "passed",
+    "scope": "114 source clips sampled at three times; 71 unique final-movie timepoints across five contact pages, including opening, chapters, scientific cards and ending. Not continuous manual viewing.",
+    "unique_timepoints": 71,
+    "sample_extractions": 72,
+    "review_pages": 5,
+    "no_children_in_sampled_selected_scenes": true,
+    "chapter_heading_overlap_corrected": true
+  }
+}

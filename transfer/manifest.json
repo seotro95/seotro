@@ -1,0 +1,315 @@
+{
+  "topic": 8,
+  "repository": "seotro95/seotro",
+  "release_tag": "baishiya-video-08-final-22m20s",
+  "contents": "Only the completed edited video, opening, approved delivery project, subtitles, titles/thumbnail prompts and technical metadata. No raw source video clips or raw-source Git blob references.",
+  "raw_source_clips_included": false,
+  "assets": [
+    {
+      "name": "BAISHIYA_08_EDIT_PROJECT.zip",
+      "bytes": 11580472,
+      "sha256": "c3a309f88e7e441872d9e625fb535e4bca3f5af3e0c9a9fefae2956466136cbe",
+      "parts": [
+        {
+          "path": "transfer/parts/BAISHIYA_08_EDIT_PROJECT.zip.000.part",
+          "bytes": 11580472,
+          "sha256": "c3a309f88e7e441872d9e625fb535e4bca3f5af3e0c9a9fefae2956466136cbe"
+        }
+      ]
+    },
+    {
+      "name": "BAISHIYA_08_EN_FINAL_22m20s_720p.mp4",
+      "bytes": 316452083,
+      "sha256": "475de49f32e6d7cb064721986b4018eadce1dd81ec69bfaf9160f637cddca08e",
+      "parts": [
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.000.part",
+          "bytes": 16777216,
+          "sha256": "08b1f3d080de4d0c375e8e280a64178be8116cbd764bc1a69f6d942bca072a60"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.001.part",
+          "bytes": 16777216,
+          "sha256": "fe7a587ada46053523bf64d9addcebc83a36dc99799c660a09e94b43c7db3474"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.002.part",
+          "bytes": 16777216,
+          "sha256": "2e820c503b62794a52703a4e8e6b03f4b2504260888db3474945529cecf4f80e"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.003.part",
+          "bytes": 16777216,
+          "sha256": "68ff8455bedd94ee9e28cb059e8baf79c109350f84bde6c4318e5053eb67935f"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.004.part",
+          "bytes": 16777216,
+          "sha256": "946ec866056ba5501da77b6e5048e9704f7fb0db5c4dfe6223e9ec1cea1d3337"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.005.part",
+          "bytes": 16777216,
+          "sha256": "5cca85c3d05b53059cc8dd51f2651e2a9c74d1db373c7144d4a707d071818be9"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.006.part",
+          "bytes": 16777216,
+          "sha256": "01d6feb8e5a1603891033fe094d8a703f6d1502c28a2bfe7af81f969e941ec1e"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.007.part",
+          "bytes": 16777216,
+          "sha256": "5e580dc320589198184e8950e7a9c80a0f1017f01bb07c8c23986ed6a13a9c65"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.008.part",
+          "bytes": 16777216,
+          "sha256": "986e8383ab00fed96f9a353d119e6fab895105bced2aeb5d97749600cdd71150"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.009.part",
+          "bytes": 16777216,
+          "sha256": "e2898baa05b3a5b78f703f9b70bb56ef00ca7ca5d8434d0f467cf3566129482f"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.010.part",
+          "bytes": 16777216,
+          "sha256": "5ece821216003fbdbda9774fc5e3eeb5ecb3bc88df864bb0c1f6ca354d910a84"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.011.part",
+          "bytes": 16777216,
+          "sha256": "637998b2f401a4b07a5c06125e42fc3ba3158e2e01ea8297373a6bb24e7caab8"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.012.part",
+          "bytes": 16777216,
+          "sha256": "7baa44fe60b6e9c71e50d59f022cf7f74f8e0bf26ef445a15f2e5e8729af3fc5"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.013.part",
+          "bytes": 16777216,
+          "sha256": "6e972c4b4ee36a50df355d448528f9e6795525a04f6bc1efb598d7c2717bf83e"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.014.part",
+          "bytes": 16777216,
+          "sha256": "fd8651e929dbd732420c914cfb6cfe4b2f8f36daea87a0f041a1b19739cb459a"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.015.part",
+          "bytes": 16777216,
+          "sha256": "42b62db7b973c40feda89f22fb58306ecac84c95a4f7f95fac655fdd4cc5375a"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.016.part",
+          "bytes": 16777216,
+          "sha256": "a2ef3dad2e306a8aa3e15723c8915c5478b76784fe2c6239f4d7f83293fd6ca7"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.017.part",
+          "bytes": 16777216,
+          "sha256": "7c0cd24cdd55e6cc6630997c8521d97f5fe88e917efc0c8d9825aa79af68b4f0"
+        },
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4.018.part",
+          "bytes": 14462195,
+          "sha256": "f9a9c855898c80dbc9cab93535a5b0d44f905640593e23137d1ed1ad2b14df04"
+        }
+      ]
+    },
+    {
+      "name": "BAISHIYA_08_EN_SUBTITLES.srt",
+      "bytes": 25090,
+      "sha256": "93fd1f373592306a5b13bcd335283d3c0f316e0263d352c5643c68b265a76211",
+      "parts": [
+        {
+          "path": "transfer/parts/BAISHIYA_08_EN_SUBTITLES.srt.000.part",
+          "bytes": 25090,
+          "sha256": "93fd1f373592306a5b13bcd335283d3c0f316e0263d352c5643c68b265a76211"
+        }
+      ]
+    },
+    {
+      "name": "BAISHIYA_08_OPENING_30s.mp4",
+      "bytes": 8454419,
+      "sha256": "9908975155e6e3f59ed5e17d91e80a7a1fc2fedee05d5be4cc570294c107b306",
+      "parts": [
+        {
+          "path": "transfer/parts/BAISHIYA_08_OPENING_30s.mp4.000.part",
+          "bytes": 8454419,
+          "sha256": "9908975155e6e3f59ed5e17d91e80a7a1fc2fedee05d5be4cc570294c107b306"
+        }
+      ]
+    },
+    {
+      "name": "BAISHIYA_08_TITLES_THUMBNAILS.txt",
+      "bytes": 5718,
+      "sha256": "efafad25d14445ae1225324e07171de9bcfab7719fe6d1086471c9ff7b8b2320",
+      "parts": [
+        {
+          "path": "transfer/parts/BAISHIYA_08_TITLES_THUMBNAILS.txt.000.part",
+          "bytes": 5718,
+          "sha256": "efafad25d14445ae1225324e07171de9bcfab7719fe6d1086471c9ff7b8b2320"
+        }
+      ]
+    },
+    {
+      "name": "BAISHIYA_08_TITLES_THUMBNAILS.zip",
+      "bytes": 2865,
+      "sha256": "6fd38e7d5335a5c25d51ae7740ec2e701185d5ff5676c7f5bface4b4938b5b14",
+      "parts": [
+        {
+          "path": "transfer/parts/BAISHIYA_08_TITLES_THUMBNAILS.zip.000.part",
+          "bytes": 2865,
+          "sha256": "6fd38e7d5335a5c25d51ae7740ec2e701185d5ff5676c7f5bface4b4938b5b14"
+        }
+      ]
+    },
+    {
+      "name": "EDITOR_DECISIONS.json",
+      "bytes": 3267,
+      "sha256": "8c87e0502c7f6539e4bf880b59c66eb8eb89c1907cb82c2b02afc3f4b3a60060",
+      "parts": [
+        {
+          "path": "transfer/parts/EDITOR_DECISIONS.json.000.part",
+          "bytes": 3267,
+          "sha256": "8c87e0502c7f6539e4bf880b59c66eb8eb89c1907cb82c2b02afc3f4b3a60060"
+        }
+      ]
+    },
+    {
+      "name": "EDIT_TIMELINE.csv",
+      "bytes": 25782,
+      "sha256": "882be0ca4911484b420ce17b077a24de82a53cae2eea9976848fa6d117d4e498",
+      "parts": [
+        {
+          "path": "transfer/parts/EDIT_TIMELINE.csv.000.part",
+          "bytes": 25782,
+          "sha256": "882be0ca4911484b420ce17b077a24de82a53cae2eea9976848fa6d117d4e498"
+        }
+      ]
+    },
+    {
+      "name": "FINAL_EXPORT_COMMAND.json",
+      "bytes": 1150,
+      "sha256": "3dde01eb824cd801bfd460b2b22fbd26517a94a5f57eded70d5c3f7b55d6c8d9",
+      "parts": [
+        {
+          "path": "transfer/parts/FINAL_EXPORT_COMMAND.json.000.part",
+          "bytes": 1150,
+          "sha256": "3dde01eb824cd801bfd460b2b22fbd26517a94a5f57eded70d5c3f7b55d6c8d9"
+        }
+      ]
+    },
+    {
+      "name": "FINAL_VIDEO_QA.json",
+      "bytes": 4618,
+      "sha256": "2be82f06dd794bd04a51d127565857ca665c344237d1650420941e8559175f3b",
+      "parts": [
+        {
+          "path": "transfer/parts/FINAL_VIDEO_QA.json.000.part",
+          "bytes": 4618,
+          "sha256": "2be82f06dd794bd04a51d127565857ca665c344237d1650420941e8559175f3b"
+        }
+      ]
+    },
+    {
+      "name": "HUONG_DAN_DUNG_LAI.txt",
+      "bytes": 1509,
+      "sha256": "62c510e68970133ec4a8960ad921826111764efeba84d7e6b5d4c19a96869cfd",
+      "parts": [
+        {
+          "path": "transfer/parts/HUONG_DAN_DUNG_LAI.txt.000.part",
+          "bytes": 1509,
+          "sha256": "62c510e68970133ec4a8960ad921826111764efeba84d7e6b5d4c19a96869cfd"
+        }
+      ]
+    },
+    {
+      "name": "README.md",
+      "bytes": 3235,
+      "sha256": "59dae7ed23262f3765e096053a9b021a67ef1292b4579f10e5e110a8d636861f",
+      "parts": [
+        {
+          "path": "transfer/parts/README.md.000.part",
+          "bytes": 3235,
+          "sha256": "59dae7ed23262f3765e096053a9b021a67ef1292b4579f10e5e110a8d636861f"
+        }
+      ]
+    },
+    {
+      "name": "SCENE_VERIFICATION.json",
+      "bytes": 11418,
+      "sha256": "0b15b50268c56b3d263ab551bbda03ca7a0ee0e8c363b4632425fba97cbf99d4",
+      "parts": [
+        {
+          "path": "transfer/parts/SCENE_VERIFICATION.json.000.part",
+          "bytes": 11418,
+          "sha256": "0b15b50268c56b3d263ab551bbda03ca7a0ee0e8c363b4632425fba97cbf99d4"
+        }
+      ]
+    },
+    {
+      "name": "SOURCE_CLIP_MANIFEST.csv",
+      "bytes": 16912,
+      "sha256": "66d079bcb481b10d24dd39982c65443b958076a14a4f36f89bf357dc9502f291",
+      "parts": [
+        {
+          "path": "transfer/parts/SOURCE_CLIP_MANIFEST.csv.000.part",
+          "bytes": 16912,
+          "sha256": "66d079bcb481b10d24dd39982c65443b958076a14a4f36f89bf357dc9502f291"
+        }
+      ]
+    },
+    {
+      "name": "SOURCE_MANIFEST.json",
+      "bytes": 29627,
+      "sha256": "b3289e0727da4258c80b39fc0aa0b93cd5a5c8d9100fcfd1460e4d72eb36a27e",
+      "parts": [
+        {
+          "path": "transfer/parts/SOURCE_MANIFEST.json.000.part",
+          "bytes": 29627,
+          "sha256": "b3289e0727da4258c80b39fc0aa0b93cd5a5c8d9100fcfd1460e4d72eb36a27e"
+        }
+      ]
+    },
+    {
+      "name": "VISUAL_REVIEW_APPROVED.json",
+      "bytes": 880,
+      "sha256": "d30738558dad45d92ebd5f9e31e004b0ee2106095e3827b2936e68349b33ed59",
+      "parts": [
+        {
+          "path": "transfer/parts/VISUAL_REVIEW_APPROVED.json.000.part",
+          "bytes": 880,
+          "sha256": "d30738558dad45d92ebd5f9e31e004b0ee2106095e3827b2936e68349b33ed59"
+        }
+      ]
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1464,
+      "sha256": "d2e95dd4f42880a07df5ee6b63d5e0b927fea5ac7c0698799e2e497bbab93aeb",
+      "parts": [
+        {
+          "path": "transfer/parts/SHA256SUMS.txt.000.part",
+          "bytes": 1464,
+          "sha256": "d2e95dd4f42880a07df5ee6b63d5e0b927fea5ac7c0698799e2e497bbab93aeb"
+        }
+      ]
+    },
+    {
+      "name": "RELEASE_ASSET_MANIFEST.json",
+      "bytes": 2728,
+      "sha256": "fada327fa373fc3531f4204050478b04da1a6cb0e3c42b53f2c18087c86624fb",
+      "parts": [
+        {
+          "path": "transfer/parts/RELEASE_ASSET_MANIFEST.json.000.part",
+          "bytes": 2728,
+          "sha256": "fada327fa373fc3531f4204050478b04da1a6cb0e3c42b53f2c18087c86624fb"
+        }
+      ]
+    }
+  ]
+}

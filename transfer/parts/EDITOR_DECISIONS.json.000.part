@@ -1,0 +1,70 @@
+{
+  "topic": 8,
+  "seconds": 1340,
+  "opening_shots": 12,
+  "opening_seconds": 30,
+  "english_voice_sha256": "14131b625739f903c4f165a02ffc60c5d54b9f09dd628cf92a13f64477e222c4",
+  "english_words": 3162,
+  "original_audio_tracks_excluded": 35,
+  "no_music_or_SFX": true,
+  "source_review": "114clips sampled at0.8s,midpoint,andend;not continuous manual viewing",
+  "exclusions": {
+    "BS08_006": "Apparatus depiction is inconsistent;use a clear physiology schematic.",
+    "BS08_034": "Full spiral ram horns do not identify bharal.",
+    "BS08_041": "Highly engraved geometric marks risk being mistaken for ancient symbols.",
+    "BS08_048": "Prominent reconstructed skull is unnecessary and taxonomically ambiguous.",
+    "BS08_058": "Modern fenced pit does not illustrate the intended sediment-context point.",
+    "BS08_061": "Background figures have uncertain ages;omit whole clip.",
+    "BS08_078": "Strong geometric engravings could imply an unsupported symbol claim.",
+    "BS08_081": "Contains broadcaster-style logo;use unbranded inspected alternatives.",
+    "BS08_087": "Contains broadcaster-style logo and an unnecessary full skeleton.",
+    "BS08_093": "Stitched pouch could imply unestablished clothing/sewing details.",
+    "BS08_094": "Avoid prominent mixed skeletal displays when discussing the human rib.",
+    "BS08_099": "Animal skull does not illustrate the high-altitude body question.",
+    "BS08_100": "Generated display implies specific genetic results not shown by the research.",
+    "BS08_104": "Jaw imagery would confuse the distinction between fossils and modern genetic evidence.",
+    "BS08_108": "Mixed skull/table reconstruction adds no clear support to the narrated actions.",
+    "BS08_111": "Contains generated broadcaster-like subtitles;use clean cave alternatives."
+  },
+  "detail_only_crops": {
+    "BS08_028": [
+      0,
+      200,
+      720,
+      405
+    ],
+    "BS08_032": [
+      0,
+      310,
+      640,
+      360
+    ]
+  },
+  "crop_reason": "Only body/hooves are used;full spiral-horn animals are not presented as verified bharal images.",
+  "missing_prompts": [
+    2,
+    14,
+    27,
+    72,
+    75,
+    116
+  ],
+  "missing_contexts_resolved_in_plan": true,
+  "no_children_in_selected_samples": true,
+  "scientific_limits": [
+    "Xiahejaw minimumage,not exactdeathdate",
+    "Xiahe2layercontext48–32ka,not exactdeathdate",
+    "Burningoriginsunresolved;noestablishedhearth",
+    "ModernTibetanEPAS1evidence,notrecoveredXiahegenome",
+    "Noassertedcontinuousoccupation",
+    "Noassertedmigrationroute"
+  ],
+  "render_source": "Original upload bytes re-downloaded with checksums;analysis download caches only are evicted.",
+  "audio": "Existing Englishreferenceonly;loudnessnormalizationwithoutretimingorpitchshift",
+  "context_refinements": {
+    "70": "Hide-preparation illustration and a garment-evidence limits card replace an unrelated tools card.",
+    "71": "Anonymous mature adult illustrative reconstruction and matching garment-evidence limits card; no identified ancient portrait or asserted sewing technique."
+  },
+  "science_graphics": 19,
+  "chapter_layer_correction": "Chapter banners finish fading before the second five-second shot; chapter11 banner moved into empty lower space on the EPAS1 card."
+}

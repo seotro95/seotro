@@ -1,0 +1,15 @@
+﻿DỰNG LẠI CHỦ ĐỀ 8 — BAISHIYA 22:20
+
+Yêu cầu Python 3.11+, ffmpeg/ffprobe có libx264, Pillow, numpy; font DejaVu Sans. Script render mặc định dùng font Linux /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf; nếu dựng trên Windows, chép DejaVuSans.ttf vào thư mục edit và đặt font_path trong render_edit.py thành ./DejaVuSans.ttf để tránh dấu hai chấm của đường dẫn ổ đĩa trong bộ lọc ffmpeg.
+
+1. Giải nén, mở terminal trong thư mục edit.
+2. python link_sources.py /thu-muc-chua-cac-clip-goc
+   Script chỉ sao chép clip cần dùng, kiểm tra SHA-256; không di chuyển hoặc sửa bản gốc.
+3. python render_edit.py --start 1 --end 134 --workers 2
+4. python assemble_final.py
+5. python qa_final.py
+
+Giữ nguyên EDIT_PLAN.json, graphics, overlays và input để tái lập bản đã giao. assemble_final.py xóa các bản scene xuất trung gian có thể tạo lại sau khi đã ghép, có khoảng đệm an toàn 60 giây; không xóa clip nguồn. Cần khoảng 2 GB trống để dựng lại thoải mái. Không chạy build_plan.py nếu chỉ muốn tái lập: đồ họa đã được đóng gói sẵn, không cần tải thêm dữ liệu bản đồ.
+
+Input voice: BAISHIYA_08_My_Tieng_Anh.mp3, SHA-256 14131b625739f903c4f165a02ffc60c5d54b9f09dd628cf92a13f64477e222c4.
+Khung thời gian: 134 đoạn × 10 giây, 22:20; tiếng clip bị loại ngay trong render, chỉ map voice tiếng Anh khi ghép cuối.
