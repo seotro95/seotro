@@ -1,7 +1,7 @@
 CHỦ ĐỀ3 — MALTA / 20 PHÚT
 
 VIDEO THAM CHIẾU
-Nguồn https://github.com/seotro95/seotro/releases/tag/video, tệp video.c.a.toi.mp4, SHA256 f1 a8659 dbccd4 db12 a79 e3 c18 ea2 e1 fe08 f46 f7 a03 c42 bc2250 f454 f69 eff70 c. Tệp đã phân tích ở tập 1, khoảng21:03, lời Nga. Tập 3 đọc lại hồ sơ, xem lại bảng hình: cận vật chứng/con người, bản đồ, tái hiện đời sống, cảnh quan và phòng lab. Đây là phân tích tệp được cung cấp, không tuyên bố đã thống kê toàn kênh hoặc biết phần mềm của tác giả.
+Nguồn https://github.com/seotro95/seotro/releases/tag/video, tệp video.c.a.toi.mp4, SHA-256: f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c. Tệp đã phân tích ở tập 1, khoảng21:03, lời Nga. Tập 3 đọc lại hồ sơ, xem lại bảng hình: cận vật chứng/con người, bản đồ, tái hiện đời sống, cảnh quan và phòng lab. Đây là phân tích tệp được cung cấp, không tuyên bố đã thống kê toàn kênh hoặc biết phần mềm của tác giả.
 
 CÁCH KỂ
 Kịch bản mới mở bằng hạt trang sức: vật nhỏ, có dấu tay người. Đưa ra điều gây tò mò ngay: một đứa trẻ ở Siberia giúp tìm quan hệ tổ tiên với người châu Mỹ. Câu hỏi xuyên suốt là làm sao các mảnh ADN cho biết một mối liên hệ khi không có nhật ký hành trình. Trình tự: con người và thung lũng → phân tử hư hại → cách so sánh di truyền → kết quả bất ngờ → quan hệ khác đường di cư → mạng lưới quần thể → địa lý Beringia → mẫu cổ bổ sung → quay về đời sống và hạt trang sức.
