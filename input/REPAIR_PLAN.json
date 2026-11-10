@@ -1,0 +1,50 @@
+{
+  "original_run_id": 42791520378,
+  "original_preview_verified": true,
+  "failed_locales": [
+    "ko-KR",
+    "it-IT",
+    "en-US",
+    "de-DE",
+    "sv-SE",
+    "ja-JP"
+  ],
+  "invalidate_chapters": {
+    "sv-SE": [
+      5,
+      11,
+      12
+    ],
+    "ja-JP": [
+      5,
+      8,
+      11,
+      12
+    ],
+    "de-DE": [
+      11,
+      12
+    ],
+    "ko-KR": [
+      5,
+      11,
+      12
+    ],
+    "it-IT": [
+      11
+    ],
+    "en-US": [
+      52,
+      57,
+      61,
+      64,
+      68,
+      83,
+      109,
+      110,
+      111,
+      119,
+      122
+    ]
+  }
+}

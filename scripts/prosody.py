@@ -7,6 +7,7 @@ native Hmong uses phrase speed/level variation because it has no word timings.
 import array,json,math,re,threading,unicodedata,wave
 from pathlib import Path
 LOCAL=threading.local();STYLE_ID='science-documentary-expressive-v1'
+EN_PACING_REPAIRS={52,57,61,64,68,83,109,110,111,119,122}
 EN_INTENTS={**{i:'question' for i in [3,4,11,22,31,44,55,66,76,86,95,96,116]},**{i:'evidence' for i in [2,15,17,23,24,25,28,34,35,37,38,39,45,46,48,56,57,60,62,63,67,68,69,70,71,72,77,78,80,81,87,88,97,98,100,101,107,108,109,111]},**{i:'reflective' for i in [7,8,9,10,18,20,26,30,32,36,40,43,47,49,50,51,52,53,58,61,64,65,73,74,75,79,83,84,85,89,91,92,93,94,99,102,103,104,105,106,110,112,113,114,115,*range(117,127)]}}
 KEYWORDS={
  'en-US':['related','relationship','ancestry','fragment','not','DNA','evidence','context','missing','Denisova','Denisovan','protein','genome'],
@@ -37,7 +38,9 @@ def settings(locale,cue,text,part):
  rate={'question':-2,'evidence':-3,'reflective':-4,'explain':1}[name]
  # Alternating short English sentences retain some local pacing after cue fit.
  if locale=='en-US' and part%2 and name!='reflective':rate+=2
- return dict(intent=name,rate=f'{rate:+d}%',pitch='+0Hz',volume='+0%',pause_seconds=.16 if name=='question' else .12 if name=='reflective' else .07)
+ repair=locale=='en-US' and cue+1 in EN_PACING_REPAIRS
+ if repair:rate=3  # Existing style range; preserve the immutable English wording.
+ return dict(intent=name,rate=f'{rate:+d}%',pitch='+0Hz',volume='+0%',pause_seconds=.07 if repair else .16 if name=='question' else .12 if name=='reflective' else .07,trim_only_digital_zero_boundaries=repair)
 def install_edge_adapter():
  import edge_tts
  if getattr(edge_tts.Communicate,'_science_prosody',False):return
@@ -83,10 +86,20 @@ def style_wav(path,locale,cfg):
    w=min(1,(j-a)/ramp,(b-1-j)/ramp);samples[j]=max(-32760,min(32760,round(samples[j]*(1+(gain-1)*max(0,w)))))
  peak=max((abs(x) for x in samples),default=0)
  if peak>32112:samples=array.array('h',(round(x*32112/peak) for x in samples))
+ removed_leading=removed_trailing=0
+ if cfg.get('trim_only_digital_zero_boundaries'):
+  guard=round(rate*.03);a=0;b=len(samples)
+  while a<b and samples[a]==0:a+=1
+  while b>a and samples[b-1]==0:b-=1
+  removed_leading=max(0,a-guard);removed_trailing=max(0,len(samples)-b-guard)
+  if removed_leading or removed_trailing:
+   samples=samples[removed_leading:len(samples)-removed_trailing if removed_trailing else len(samples)]
+   for accent in chosen:
+    accent['start_frame']-=removed_leading;accent['end_frame']-=removed_leading
  samples.extend(array.array('h',[0])*round(rate*cfg['pause_seconds']))
  tmp=path.with_suffix('.styled.wav')
  with wave.open(str(tmp),'wb') as f:f.setnchannels(1);f.setsampwidth(2);f.setframerate(rate);f.writeframes(samples.tobytes())
  tmp.replace(path)
- note=dict(style_id=STYLE_ID,locale=locale,settings=cfg,word_boundary_count=len(events),word_accents=chosen,pitch_shift_applied=False)
+ note=dict(style_id=STYLE_ID,locale=locale,settings=cfg,word_boundary_count=len(events),word_accents=chosen,pitch_shift_applied=False,removed_leading_digital_zero_frames=removed_leading,removed_trailing_digital_zero_frames=removed_trailing,digital_silence_guard_seconds=.03)
  path.with_suffix('.style.json').write_text(json.dumps(note,ensure_ascii=False))
  return note

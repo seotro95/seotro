@@ -19,6 +19,17 @@ for p in Path('input/scripts').glob('*'):
 env=os.environ.copy();env['PRODUCTION_WORK_DIR']=str(work);env['MELO_TOOL_DIR']=str(tool)
 env['MELO_VIET_ROOT']=str(work/'melo-data')
 locale=sys.argv[1];mode=sys.argv[2]
+repair=Path('input/REPAIR_PLAN.json')
+if repair.exists() and mode=='full':
+    plan=json.loads(repair.read_text());out=work/'voice/audio'/locale;out.mkdir(parents=True,exist_ok=True)
+    rows=json.loads((dest/f'{locale}.json').read_text());marker=out/'raw-repair-applied.json';text_hash=hashlib.sha256(json.dumps(rows,ensure_ascii=False).encode()).hexdigest()
+    previous=json.loads(marker.read_text()) if marker.exists() else {}
+    if previous.get('script_hash')!=text_hash:
+        for chapter in plan['invalidate_chapters'].get(locale,[]):
+            for p in out.glob(f'raw-{chapter:03d}-*'):
+                if p.is_file():p.unlink()
+            print('Regenerating only revised chapter:',locale,chapter,flush=True)
+        marker.write_text(json.dumps({'script_hash':text_hash,'original_run_id':plan['original_run_id']}))
 if mode=='smoke':
     code="""import json,sys,wave
 from pathlib import Path

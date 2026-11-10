@@ -9,7 +9,7 @@ for module in [edge_tts.voices,edge_tts.communicate]:
     if os.environ.get('SSL_CERT_FILE'):module._SSL_CTX.load_verify_locations(cafile=os.environ['SSL_CERT_FILE'])
 from render_common import AUDIO,BASE,PROFILES,chunks,finalize
 import online_backend
-from prosody import begin,style_wav,install_edge_adapter
+from prosody import begin,style_wav,install_edge_adapter,EN_PACING_REPAIRS
 install_edge_adapter()
 
 def render_locale(locale):
@@ -24,7 +24,7 @@ def render_locale(locale):
     records=[]
     stop=threading.Event()
     for cue,row in enumerate(rows):
-        texts=re.split(r'(?<=[.!?])\s+',row['voice'].strip()) if locale=='en-US' else chunks(row['voice'],limit=int(os.environ.get('TTS_CHUNK_LIMIT','480')))
+        texts=([row['voice'].strip()] if cue+1 in EN_PACING_REPAIRS else re.split(r'(?<=[.!?])\s+',row['voice'].strip())) if locale=='en-US' else chunks(row['voice'],limit=int(os.environ.get('TTS_CHUNK_LIMIT','480')))
         for n,text in enumerate(texts):records.append((cue,text,out/f'raw-{cue+1:03d}-{n+1:02d}.wav'))
     def render_piece(text,path,depth=0):
         if path.exists():return
