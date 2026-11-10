@@ -50,6 +50,7 @@ def finalize(locale,rows,records,out):
             assembler.append(prepared,text,cue=cue)
         result=assembler.finish()
     except Exception:assembler.close();raise
+    assert max(c['padding_frames'] for c in result['sync_report']['cues'])/48000<.1, 'Incomplete synthesis: excessive cue padding; preserve checkpoints for repair.'
     suffix='mww_female' if locale=='mww' else locale
     mp3=out/f'KOSTENKI_19_{suffix}.mp3'
     subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-threads','1','-y','-i',str(out/'part-0001.wav'),
