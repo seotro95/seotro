@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "english_words": 3648,
+  "timeline_seconds": 1380,
+  "timeline_cues": 138,
+  "unique_prompts": 120,
+  "reuse_slots": 18,
+  "prompt_txt_files": 12,
+  "prompts_per_txt": 10,
+  "opening_shots": 8,
+  "no_child_positive_scene_descriptions": true,
+  "all_visible_humans_adult_policy": true,
+  "audio_status": "not_generated_at_document_delivery",
+  "target_frames_at_48000": 66240000,
+  "translated_chapter_durations": [
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    110,
+    110,
+    110,
+    110,
+    110,
+    110
+  ]
+}

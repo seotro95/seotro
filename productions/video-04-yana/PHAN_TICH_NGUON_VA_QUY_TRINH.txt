@@ -1,0 +1,24 @@
+PHÂN TÍCH VIDEO NGUỒN VÀ ÁP DỤNG CHO TẬP4 — YANA
+
+Nguồn: https://github.com/seotro95/seotro/releases/tag/video — video.c.a.toi.mp4, SHA-256: f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c. Khớp nguồn đã tải và phân tích trong chuỗi: khoảng21:03,1280×720,60 fps mã hoá, voice Nga. Đã kiểm tra ảnh lấy mẫu, chuỗi mở đầu, điểm đổi hình và bản nhận dạng lời dẫn; không tuyên bố biết phần mềm hay prompt thực tế của tác giả.
+
+DẠNG NỘI DUNG
+Phim tài liệu khoa học phổ thông không có người dẫn nói trước máy quay: lời kể dẫn, hình tái hiện/hiện vật/đồ hoạ minh hoạ theo ý. Nguồn dùng hai răng Yana làm cửa vào, sau đó phần lớn nói về sinh tồn và hệ thống giữ ấm. Tập4 viết mới về cách hồ sơ khảo cổ và gene mở rộng lịch sử cư dân phương Bắc; không dịch hay đọc lại lời nguồn.
+
+CÁCH KỂ
+Vật nhỏ→độ sâu thời gian→câu hỏi lớn→từng lớp bằng chứng→cơ chế qua ví dụ dễ hiểu→kết quả và giới hạn→quay lại vật ban đầu. Mỗi chương giải một vấn đề và đặt câu hỏi cho chương sau. Bám vật liệu, thao tác và ý nghĩa con người; không dựng tiểu sử hay chuyến đi chính xác khi bằng chứng không có.
+
+CÁCH DỰNG
+Luân phiên macro mẫu, bàn tay người lớn, cảnh quan toàn, thao tác lab, bản đồ và sơ đồ. Một hành động chính/một chuyển động máy chậm mỗi clip10s. Hook8shot/30s lấy từ các clip trong bộ, không thêm thời gian vào voice. Dùng cắt thẳng theo đổi ý; dissolve ngắn khoảng0,4–0,7s khi đổi bối cảnh. Crop nhẹ chỉ đổi khung, không được gọi là một góc máy quay mới. Giữ cổ vật ấm trung tính, cảnh quan lạnh tự nhiên, lab trung tính; chữ, niên đại, tên nhóm và nguồn thêm trong editor.
+
+KHÁC BIỆT BẮT BUỘC CỦA TẬP4
+Không có trẻ em trong bất kỳ prompt hình nào: chỉ người trưởng thành rõ25–60 tuổi, kể cả bóng người, phản chiếu, ảnh/đồ hoạ trên màn hình và nền xa. Không tạo chân dung chủ răng, không biến diễn viên trưởng thành thành chủ mẫu răng sữa. Răng là vật/mô hình giảng giải tách rời, không có miệng, hàm, cơ thể hoặc thủ thuật nha khoa. Lời kể có thể nói đúng nguồn gốc răng sữa; không minh hoạ người trẻ.
+
+THÔNG SỐ
+23:00=1380 giây;138 ô 10s.120 clip mới trong12 TXT, mỗi TXT10 prompt đánh số001–120;18vị trí REUSE ghi nguồn và bỏ tạo mới.12 chương: sáu chương đầu120s/chương, sáu chương sau110s/chương. Số clip khác số mốc timeline. Mọi clip sinh không có audio, nhạc, thoại hay tiếng động.
+
+VOICE
+Bàn giao tài liệu trước, rồi dịch và tạo17 voice. Dùng đúng16giọng nam đã khóa và H’Mông nữ3 từ tool riêng; giữ science-documentary-expressive-v1. Tiếng Anh căn138 ô 10s;16bản dịch căn12 chương theo ranh thật120/110s. Mỗi audio phải giải mã đúng66.240.000 mẫu ở48 kHz=1380s, giữ cao độ và không cắt lời. Khớp chương/tổng không phải căn từng từ giữa các ngôn ngữ. Giữ tên quốc gia bằng ASCII tương thích Windows. Bản dịch và phương ngữ H’Mông Trắng vẫn cần rà soát bản ngữ.
+
+BẢN ĐỒ/SỐ LIỆU
+REFERENCES là bờ/hồ hiện đại tổng quát có nguồn; không phải cao độ hay bờ31,6ka. Bản NPS có nhãn21ka chỉ là bối cảnh, giữ credit. Bản đồ phải khóa nguyên nền hoặc dựng pan/zoom trực tiếp trong editor. Sơ đồ gene là minh hoạ, không phải dữ liệu Yana thật, tỷ lệ gene phổ quát, quốc tịch hay tuyến đi. Mẫu xấp xỉ31,6ka; đừng dùng số đó làm ngày đầu tiên vào châu Mỹ.

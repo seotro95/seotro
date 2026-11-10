@@ -3,29 +3,72 @@
   "basis_topic": 3,
   "process_one_topic_at_a_time": true,
   "default_target_seconds": 1200,
-  "episode_specific_overrides": {"2": {"target_seconds":1320,"reason":"Explicit user request for episode2 only"}},
+  "episode_specific_overrides": {
+    "2": {
+      "target_seconds": 1320,
+      "reason": "Explicit user request for episode2 only"
+    },
+    "4": {
+      "target_seconds": 1380,
+      "english_cues": 138,
+      "translated_chapter_seconds": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "reason": "Explicit user request for episode4 only"
+    }
+  },
   "primary_video_language": "en-US",
   "target_sample_rate": 48000,
   "english_cue_seconds": 10,
   "translated_chapters": 12,
   "default_english_cues": 120,
   "default_translated_chapter_seconds": 100,
-  "topic3_visual_example": {"unique_clips":100,"reused_slots":20,"prompt_txt_files":10},
+  "topic3_visual_example": {
+    "unique_clips": 100,
+    "reused_slots": 20,
+    "prompt_txt_files": 10
+  },
   "visual_counts_follow_actual_contexts": true,
   "prompts_per_txt": 10,
   "generated_clip_seconds": 10,
   "generated_clips_audio": "silent",
-  "opening_edit_example": {"seconds":30,"shots":8,"adds_runtime":false},
+  "opening_edit_example": {
+    "seconds": 30,
+    "shots": 8,
+    "adds_runtime": false
+  },
   "voice_count": 17,
   "voice_profile_set_id": "science-prehistory-17-v1",
   "narration_style_id": "science-documentary-expressive-v1",
   "voice_naming_profile_id": "country-filenames-vi-v1",
   "voice_filename_template": "{topic_prefix}_{delivery_slug}.mp3",
   "voice_gender_rule": "16 male; female White Hmong draft using hmong-female-3",
-  "delivery_order": ["research and original script","publish documents and prompts","translate and edit","validate inputs and30s preview","generate17 voices with checkpoints","verify decoded duration and complete English script","package by country names and publish","save handoff and next topic"],
+  "delivery_order": [
+    "research and original script",
+    "publish documents and prompts",
+    "translate and edit",
+    "validate inputs and30s preview",
+    "generate17 voices with checkpoints",
+    "verify decoded duration and complete English script",
+    "package by country names and publish",
+    "save handoff and next topic"
+  ],
   "rename_audio_policy": "Byte-preserving copies; verify identical SHA256; do not resynthesize",
   "retry_policy": "Bounded retries, retain checkpoints, rerun only failed jobs after completion; respect service limits",
   "language_review_status_separate_from_file_completion": true,
   "white_hmong_dialect_independently_verified": false,
-  "render_video_only_after_episode_clips_supplied": true
+  "render_video_only_after_episode_clips_supplied": true,
+  "generated_visuals_exclude_minors_from_topic_4": true,
+  "visible_human_age_policy": "Unmistakably mature adults aged25–60; no minors in background, reflections, silhouettes, images or screens; no reconstruction of owners of juvenile specimens."
 }

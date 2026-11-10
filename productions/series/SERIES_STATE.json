@@ -5,7 +5,7 @@
   "resume_file": "productions/TIEP_TUC_TU_DAY.md",
   "topic_index": "productions/series/TOPICS_001_100.csv",
   "shared_voice_profiles": "productions/series/VOICE_PROFILES_LOCKED.json",
-  "active_topic": null,
+  "active_topic": 4,
   "next_topic_id": 4,
   "user_preferences": {
     "language_for_collaboration": "Vietnamese",
@@ -55,7 +55,8 @@
       "reused_slots": 20,
       "prompt_txt_files": 10,
       "adapt_to_real_contexts": true
-    }
+    },
+    "generated_visuals_exclude_minors_from_topic_4": true
   },
   "reference_video": {
     "release_url": "https://github.com/seotro95/seotro/releases/tag/video",
@@ -107,9 +108,10 @@
     {
       "id": 4,
       "title": "Yana: hai chiếc răng nhỏ hé lộ một quần thể người tiền sử.",
-      "status": "next",
+      "status": "documents_delivered_voice_pending",
       "planned_path": "productions/video-04-yana",
-      "created": false
+      "created": false,
+      "target_seconds": 1380
     }
   ],
   "topics": [
@@ -131,7 +133,8 @@
     {
       "id": 4,
       "title": "Yana: hai chiếc răng nhỏ hé lộ một quần thể người tiền sử.",
-      "status": "queued"
+      "status": "documents_delivered_voice_pending",
+      "target_seconds": 1380
     },
     {
       "id": 5,
@@ -778,5 +781,40 @@
     "video_publish_workflow_run_id": 42742068558,
     "video_publish_workflow_url": "https://github.com/seotro95/seotro/actions/runs/42742068558",
     "modern_reference_map_dateline_rendering_corrected": true
+  },
+  "in_progress_topic_4": {
+    "id": 4,
+    "title": "Yana: Two Teeth and the Ancient Northern World",
+    "path": "productions/video-04-yana",
+    "target_seconds": 1380,
+    "english_words": 3648,
+    "timeline_cues": 138,
+    "unique_prompts": 120,
+    "reused_timeline_slots": 18,
+    "prompt_txt_files": 12,
+    "prompts_per_txt": 10,
+    "translated_chapter_seconds": [
+      120,
+      120,
+      120,
+      120,
+      120,
+      120,
+      110,
+      110,
+      110,
+      110,
+      110,
+      110
+    ],
+    "no_children_in_visuals": true,
+    "voice_profile_set_id": "science-prehistory-17-v1",
+    "narration_style_id": "science-documentary-expressive-v1",
+    "voice_naming_profile_id": "country-filenames-vi-v1",
+    "voice_count_expected": 17,
+    "voice_status": "not_generated_at_document_delivery",
+    "documents_delivered": true,
+    "video_rendered": false,
+    "document_zip_sha256": "f3c81268c70cdd8c23ab3587ad9bd56e84605a1c6aa5c9c5e24d2c8c0e65af88"
   }
 }
