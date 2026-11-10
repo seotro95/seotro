@@ -1,0 +1,44 @@
+name: Baishiya08 - deliver16 verified secondary voices while English recovers
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/baishiya-voice-build-20261110]
+    paths: [.github/workflows/baishiya-available08.yml]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  available:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts
+            input
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: '42830399069'
+          pattern: bs08-voice-*
+          path: artifacts/original
+      - name: Remove superseded JapaneseKorean originals
+        run: |
+          python - <<'PY'
+          import json,shutil
+          from pathlib import Path
+          for p in list(Path('artifacts/original').rglob('render_report.json')):
+              if json.loads(p.read_text())['locale'] in ['ja-JP','ko-KR']:
+                  shutil.rmtree(p.parent)
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: '42832242206'
+          pattern: bs08-reviewed-voice-*
+          path: artifacts/reviewed
+      - name: Verify16secondaryvoices and publish only individualMP3s
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u scripts/publish_available_voices.py
