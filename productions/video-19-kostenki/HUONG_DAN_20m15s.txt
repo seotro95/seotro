@@ -1,0 +1,5 @@
+﻿Tạo lần lượt12TXT trongPROMPTS,mỗiTXT10prompt;đặt tênK19_001.mp4–K19_120.mp4. Mỗi clip10giây,hoàn toàn im lặng,không hình trẻ em.
+
+DùngTIMELINE_122_CANH.csv để gắn clip với lờiAnh. Hai mốc61và122 dùng lạiclip,bỏ tạo mới. Mốc122 chỉ dùng5giây của clip10giây;không kéo voice thành20:20. Tổng1.215giây=20:15.
+
+Bản chính chỉvoiceAnh,các nước cóaudio riêng. Khi cóclip,sẽ dựng theovoice vàhook30giây. Ghi nhãn mô hình/minh họa;không coi mái che giả thuyết là kiến trúc đã được xác nhận.

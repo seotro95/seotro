@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "topic": 19,
+  "target_seconds": 1215,
+  "english_words": 2816,
+  "timeline_cues": 122,
+  "full_ten_second_cues": 121,
+  "last_cue_seconds": 5,
+  "translated_chapter_seconds": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    115
+  ],
+  "unique_prompts": 120,
+  "reused_slots": 2,
+  "prompt_txt_files": 12,
+  "prompts_per_txt": 10,
+  "all_prompts_end_with_required_phrase": true,
+  "all_prompts_have_no_minors_instruction": true,
+  "source_video_hash_verified": true,
+  "voice_not_yet_generated": true,
+  "no_private_upload_identifiers": true
+}

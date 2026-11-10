@@ -5,7 +5,7 @@
   "resume_file": "productions/TIEP_TUC_TU_DAY.md",
   "topic_index": "productions/series/TOPICS_001_100.csv",
   "shared_voice_profiles": "productions/series/VOICE_PROFILES_LOCKED.json",
-  "active_topic": null,
+  "active_topic": 19,
   "next_topic_id": 5,
   "user_preferences": {
     "language_for_collaboration": "Vietnamese",
@@ -214,7 +214,9 @@
     {
       "id": 19,
       "title": "Nhà bằng xương voi ma mút: kiến trúc, nguyên liệu và những điều còn tranh luận.",
-      "status": "queued"
+      "status": "documents_ready_voice_pending",
+      "target_seconds": 1215,
+      "created": true
     },
     {
       "id": 20,
@@ -890,7 +892,7 @@
     "video_release_published_at": "2026-11-10T08:25:05Z",
     "video_download_verified": true
   },
-  "last_requested_topic_id": 8,
+  "last_requested_topic_id": 19,
   "topic5_explicitly_left_queued": true,
   "completed_topic_6": {
     "id": 6,
@@ -1100,5 +1102,40 @@
     "video_visual_review_scope": "114 source clips sampled at three times; 71 unique final-movie timepoints across five contact pages, including opening, chapters, scientific cards and ending. Not continuous manual viewing.",
     "video_original_uploads_preserved": true,
     "video_local_download_caches_evicted": true
+  },
+  "in_progress_topic_19": {
+    "id": 19,
+    "title": "Kostenki: The House That Remains a Question",
+    "path": "productions/video-19-kostenki",
+    "target_seconds": 1215,
+    "english_words": 2816,
+    "timeline_cues": 122,
+    "last_cue_seconds": 5,
+    "unique_prompts": 120,
+    "reused_timeline_slots": 2,
+    "prompt_txt_files": 12,
+    "prompts_per_txt": 10,
+    "translated_chapter_seconds": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      115
+    ],
+    "no_children_in_visuals": true,
+    "all_prompts_end_with": "không có âm thanh",
+    "documents_status": "publishing",
+    "voice_status": "not_generated",
+    "voice_profile_set_id": "science-prehistory-17-v1",
+    "narration_style_id": "science-documentary-expressive-v1",
+    "voice_count_expected": 17,
+    "video_rendered": false
   }
 }

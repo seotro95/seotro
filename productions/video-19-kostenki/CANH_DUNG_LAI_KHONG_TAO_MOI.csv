@@ -1,0 +1,3 @@
+﻿timeline_scene,start_seconds,end_seconds,clip_id,source_scene,filename,skip_new_generation,edit_note,trim_to_seconds
+61,600,610,7,7,K19_007.mp4,True,"REUSE the earlier sediment-and-small-traces teaching-tray shot as a visual callback; the narration now lowers attention from the ring to smaller evidence, no new generation.",10
+122,1210,1215,1,1,K19_001.mp4,True,"REUSE the opening ground-level ring reveal as a final visual callback; generate no additional clip and trim a clean five-second subsection to end the20:15 timeline, add the final fade only in the editor.",5

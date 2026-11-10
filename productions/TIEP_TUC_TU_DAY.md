@@ -1,3 +1,13 @@
+# Lượt hiện tại — chủ đề19 Kostenki,20:15
+
+Đang bàn giao tài liệu trướcvoice. Kịch bản2.816từAnh,122mốc gồm121×10giây+5giây cuối;120prompt mới/12TXT,10prompt/tệp,2mốcREUSE. Mỗi prompt kết thúc bằng“không có âm thanh”,không hình trẻ em.11chương100giây,chương cuối115giây;đích58.320.000mẫu48kHz.
+
+Giữ16giọng nam,H’MôngTrắngnữ3,cùngID/style/mẫu đã khóa. Đọc [tài liệu tập19](video-19-kostenki/README.md) và [trạng thái](series/SERIES_STATE.json). Giữ kết quả1–4,6,8 và mọi tập khác;không tự làm chủ đề kế tiếp. Chưa cóclip19,chưa dựngvideo19. Không phát hành ảnh/footage nguồn hoặc mã tệp tải lên nội bộ.
+
+---
+
+Nhật ký cũ;trạng thái hiện tại nằm ở đầu trang.
+
 # Chủ đề 8 Baishiya đã hoàn tất video và 17 voice
 
 [Video Anh 22:20](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_EN_FINAL_22m20s_720p.mp4) · [Mở đầu 30 giây](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_OPENING_30s.mp4) · [Dự án](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_EDIT_PROJECT.zip) · [5 tiêu đề và 5 prompt thumbnail TXT](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_TITLES_THUMBNAILS.txt) · [ZIP dự phòng](https://github.com/seotro95/seotro/releases/download/baishiya-video-08-final-22m20s/BAISHIYA_08_TITLES_THUMBNAILS.zip).
@@ -110,6 +120,7 @@ Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ 
 ## Bàn giao video chủ đề4
 
 Đã dựng và xuất bản23:00, chỉ voiceAnh gốc có nhấn nhá.133upload/115clipkhácnhau/18bảntrùng; chọn cảnh người trưởng thành, bỏ mọi tiếngclip và cảnh không phù hợp.12shot trong30giây đầu; các chương theo ranh120/110s. [Video](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Tập5 vẫn chưa bắt đầu.
+
 
 
 

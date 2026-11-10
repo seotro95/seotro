@@ -1,0 +1,20 @@
+name: Kostenki19 documents before voice
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/beringia-video-01]
+    paths: [.github/workflows/kostenki-documents19.yml]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: productions/video-19-kostenki
+      - name: Publish original script and silent prompts only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python productions/video-19-kostenki/PRODUCTION_SCRIPTS/publish_documents.py

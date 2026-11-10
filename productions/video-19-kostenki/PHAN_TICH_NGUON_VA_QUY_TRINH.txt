@@ -1,0 +1,20 @@
+﻿CHỦ ĐỀ 19 — KOSTENKI /20:15
+
+Nguồn người dùng: https://github.com/seotro95/seotro/releases/tag/video
+Đã đối chiếu asset video.c.a.toi.mp4:340.611.128byte,SHA256f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c; cùng bản đã phân tích bằng lời dẫn,contact sheet mở đầu và các đoạn đại diện. Khoảng21:03,1280×720,60fps mã hóa,lời Nga. Không khẳng định biết phần mềm,prompt hoặc thông số dựng nội bộ của tác giả; không tuyên bố xem tay liên tục toàn bộ nguồn.
+
+Dạng nội dung:phim tài liệu khoa học phổ thông có lời dẫn,đan xen vật chứng,cảnh quan,thao tác,minh họa cổ và phòng thí nghiệm. Nguồn mở bằng vật nhỏ và địa điểm/niên đại,rồi mở ra phát hiện,cách kiểm chứng và bài toán sinh tồn. Nhịp dựng đổi cỡ cảnh theo ý:toàn cảnh định vị,cận vật liệu,thao tác,công cụ khoa học,quay lại câu hỏi mở đầu. Có nhãn thông tin/bản đồ do editor thêm. Học cấu trúc và nhịp; không dịch lời,không sao chép footage,không dùng cảnh trẻ em/cờ/ảnh minh họa nguồn.
+
+Áp dụng mới:Khoảng trống giữa vòng xương là câu hỏi dẫn đường. Mở bằng vòng xương và gánh nặng vật liệu; lần lượt xét nơi chốn,cấu trúc,mái che,tuổi xương,đặc điểm con vật,lửa,tần suất hoạt động,đối chiếu di chỉ và sự kiện được đo niên đại. Mỗi chương giải một phần rồi đặt câu hỏi kế. Tiết lộ xương cũ hơn đời người xây ở giữa phim để đổi cách hiểu nguồn vật liệu; cuối phim quay lại hàm xương và khoảng trống ở giữa.
+
+Kịch bản2.816từ Anh,122mốc:121×10giây+1×5giây=1.215giây=20:15.11chương đầu100giây,chương cuối115giây. Thời lượng chính thức phải đo trên file voice,không suy ra chỉ từ số từ. Giọng thân thiện,có nhấn ở câu hỏi,vật chứng mới và kết; giữ16giọng nam đã khóa,H’MôngTrắngnữ3. Không đổi ID,engine,mẫu tham chiếu hoặc cao độ. Các bản dịch căn theo12chương,khớp tổng20:15; không khẳng định khớp từng từ giữa mọi ngôn ngữ.
+
+120prompt mới trong12TXT,đúng10prompt/tệp,số001–120;2mốc dùng lại được đánh dấu trongCSV,timeline khác số clip. Tất cả prompt tạo clip10giây,clip cuối dùng5giây khi dựng. Mỗi prompt một shot liên tục,một hành động chính,một chuyển động máy có chủ đích. Xen24–35mmrộng,40–65mmngười/thao tác,75–100mmcận/macro. Vary vật liệu,quy mô và câu hỏi thay vì camera quay liên tục một vòng xương. Cảnh mô hình phải thấy bối cảnh giảng giải đương đại,mái che là giả thuyết. Mọi prompt kết thúc cùng đoạn bằng cụm ‘không có âm thanh’.
+
+Không có trẻ em,thiếu niên hoặc người dưới18tuổi ở bất cứ đâu,kể cả nền,bóng,phản chiếu,ảnh,màn hình,tượng và sơ đồ. Người hiện rõ trưởng thành35–60tuổi,động vật trưởng thành; không trẻ động vật. Xương là mẫu/mô hình động vật không phải người. Không dựng săn giết,xác động vật còn mô,máu,nghi thức hay chân dung nhân vật cổ đã biết. Bối cảnh kỹ năng cổ dùng da/gỗ/đá/sợi đơn giản,không kim loại,zippers,máy tính hoặc vật hiện đại.
+
+Hình tái dựng không thay thế bằng chứng. Không ghép mái Mezhyrich thành mái Kostenki,không đặt toàn bộ các di chỉ cùng niên đại. Vòng xương,nhà ở,kho chứa,không gian hoạt động là những câu hỏi/chức năng cần đối chiếu,không kết luận chung cho mọi cấu trúc. Mẫu được định tuổi không tự cho thời điểm xây; khoảng tuổi không chứng minh cư trú liên tục.17nữ/13nam là30cá thể xét được trong nghiên cứu39cá thể,không phải số người xây hay một đợt săn.
+
+Khi dựng sau này:hook12cảnh×2,5giây trong30giây voice đầu,theoCSV; không cộng intro ngoài20:15. Cắt theo chuyển ý,dissolve0,35–0,65giây khi đổi bối cảnh/quy mô. Chữ ngắn,rõ,không chồng tiêu đề đồ họa; thông tin khoa học/bản đồ làm trongeditor,từ nguồn đã đối chiếu,không choAIbịa chữ/số/bản đồ. Giữ độ phân giải nguồn,phối màu tự nhiên,tương phản vừa; chỉvoiceAnh,loại toàn bộ tiếngclip,không nhạc/SFX. Mô hình/diễn viên có nhãn minh họa. Kiểm giải mã,frame,một đường tiếng và đồng bộ nhiều điểm trước bàn giao.
+
+Lưu tài liệu trước,tạo17voice sau. Mỗi MP3 phải giải mã đúng58.320.000mẫu tại48kHz=1.215giây. Dịch theo ngữ cảnh và thuật ngữ địa phương; giữ tên quốc gia theo preset. Rà kỹ thuật không thay cho người bản ngữ nghe/biên tập,đặc biệt H’MôngTrắng. Giữ kết quả các tập trước và chỉ làm tập19 theo yêu cầu; chưa dựng video19 khi chưa có clip do người dùng tạo.
