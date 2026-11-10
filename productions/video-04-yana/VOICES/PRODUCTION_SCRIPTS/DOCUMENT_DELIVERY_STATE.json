@@ -1,0 +1,15 @@
+{
+  "topic": 4,
+  "documents_delivered": true,
+  "production_head": "7cefbd1bd246860957516e7f1dad6da62fe1b05e",
+  "production_tree": "bf0b1326a15864766e7d0d2c8db0cfbfe6eb3f47",
+  "target_seconds": 1380,
+  "english_words": 3648,
+  "timeline_cues": 138,
+  "unique_prompts": 120,
+  "reuse_slots": 18,
+  "prompt_txt_files": 12,
+  "zip_sha256": "f3c81268c70cdd8c23ab3587ad9bd56e84605a1c6aa5c9c5e24d2c8c0e65af88",
+  "no_children_in_visuals": true,
+  "voice_status": "not_generated_yet"
+}

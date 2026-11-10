@@ -2,7 +2,7 @@
 
 **Yana: Two Teeth and the Ancient Northern World**
 
-Kịch bản tiếng Anh mới3648từ,138mốc10s,120 prompt mới trong12 TXT và18 ô dùng lại có đánh dấu. Đây là bản bàn giao tài liệu trước khi tạo voice; thời lượng thực phải đo sau render.
+Kịch bản tiếng Anh mới3648từ,138mốc10s,120 prompt mới trong12 TXT và18 ô dùng lại có đánh dấu. Tài liệu đã bàn giao trước khi tạo voice. Nay đủ17MP3, mỗi bản đã kiểm tra23:00 sau giải mã; xem [voice và linktải](VOICES/DOWNLOAD_LINKS.md). ZIPtài liệu gốc được giữ bất biến.
 
 - KICH_BAN_EN_23_PHUT.txt: lời đọc sạch.
 - KICH_BAN_EN_CO_MOC.txt, LOI_DAN_EN_138_CANH.srt: lời theo mốc.
@@ -19,3 +19,6 @@ Kịch bản tiếng Anh mới3648từ,138mốc10s,120 prompt mới trong12 TXT 
 Tên clip YA04_001.mp4 đến YA04_120.mp4; số clip khác số cảnh 001–138. Chỉ một hành động và chuyển động máy mỗi clip10s, tuyệt đối không tiếng. Chữ và số liệu thêm khi edit. Nếu AI không giữ được bản đồ, dùng nền tham chiếu dựng pan/zoom trực tiếp.
 
 Video chính chỉ dùng voice Anh.17 voice tạo riêng, mục tiêu mỗi bản23:00,66.240.000 mẫu tại48 kHz sau giải mã. Giữ16nam,H’Mông nữ3, đúngengine và mẫu tham chiếu; không thay giọng. Khớp tổng và chương, không tuyên bố khớp từng từ giữa mọi ngôn ngữ.23 phút là yêu cầu riêng của tập 4; không đổi mặc định20 phút của cả chuỗi.
+
+
+[Quy trình đã áp dụng](PRODUCTION_STEPS_APPLIED.md) · [QAvoice](VOICES/VOICE_RELEASE_QA.json). Bản dịch, nghe và phương ngữH’Mông Trắng vẫn cần người bản ngữ rà soát độc lập. Chưa dựng video tập4 vì chưa có clip của tập này.

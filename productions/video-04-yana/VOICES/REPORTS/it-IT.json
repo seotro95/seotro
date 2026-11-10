@@ -1,0 +1,167 @@
+{
+  "audio_seconds": 1380.0,
+  "sample_rate": 48000,
+  "parts": [
+    "part-0001.wav"
+  ],
+  "part_start_seconds": [
+    0.0
+  ],
+  "timing_mode": "exact",
+  "target_seconds": 1380,
+  "duration_verified": true,
+  "duration_report": {
+    "verified": true,
+    "sample_rate": 48000,
+    "sample_frames": 66240000,
+    "audio_seconds": 1380.0,
+    "target_seconds": 1380.0,
+    "error_frames": 0
+  },
+  "sync_ok": true,
+  "sync_report": {
+    "complete": true,
+    "cues": [
+      {
+        "cue": 1,
+        "start_frame": 0,
+        "end_frame": 5760000,
+        "speech_frames": 5759153,
+        "tempo": 1.173,
+        "padding_frames": 847
+      },
+      {
+        "cue": 2,
+        "start_frame": 5760000,
+        "end_frame": 11520000,
+        "speech_frames": 5759262,
+        "tempo": 1.27945,
+        "padding_frames": 738
+      },
+      {
+        "cue": 3,
+        "start_frame": 11520000,
+        "end_frame": 17280000,
+        "speech_frames": 5758830,
+        "tempo": 1.3203,
+        "padding_frames": 1170
+      },
+      {
+        "cue": 4,
+        "start_frame": 17280000,
+        "end_frame": 23040000,
+        "speech_frames": 5759302,
+        "tempo": 1.3181,
+        "padding_frames": 698
+      },
+      {
+        "cue": 5,
+        "start_frame": 23040000,
+        "end_frame": 28800000,
+        "speech_frames": 5759257,
+        "tempo": 1.2749,
+        "padding_frames": 743
+      },
+      {
+        "cue": 6,
+        "start_frame": 28800000,
+        "end_frame": 34560000,
+        "speech_frames": 5759289,
+        "tempo": 1.30585,
+        "padding_frames": 711
+      },
+      {
+        "cue": 7,
+        "start_frame": 34560000,
+        "end_frame": 39840000,
+        "speech_frames": 5279438,
+        "tempo": 1.3613454545454546,
+        "padding_frames": 562
+      },
+      {
+        "cue": 8,
+        "start_frame": 39840000,
+        "end_frame": 45120000,
+        "speech_frames": 5279320,
+        "tempo": 1.2690545454545454,
+        "padding_frames": 680
+      },
+      {
+        "cue": 9,
+        "start_frame": 45120000,
+        "end_frame": 50400000,
+        "speech_frames": 5279540,
+        "tempo": 1.4401272727272727,
+        "padding_frames": 460
+      },
+      {
+        "cue": 10,
+        "start_frame": 50400000,
+        "end_frame": 55680000,
+        "speech_frames": 5279366,
+        "tempo": 1.3046363636363636,
+        "padding_frames": 634
+      },
+      {
+        "cue": 11,
+        "start_frame": 55680000,
+        "end_frame": 60960000,
+        "speech_frames": 5279060,
+        "tempo": 1.328618181818182,
+        "padding_frames": 940
+      },
+      {
+        "cue": 12,
+        "start_frame": 60960000,
+        "end_frame": 66240000,
+        "speech_frames": 5279403,
+        "tempo": 1.3337454545454546,
+        "padding_frames": 597
+      }
+    ],
+    "target_seconds": 1380,
+    "actual_seconds": 1380.0,
+    "error_frames": 0,
+    "sample_rate": 48000
+  },
+  "locale": "it-IT",
+  "voice_id": "it-IT-DiegoNeural",
+  "gender": "Male",
+  "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "alignment_granularity": "12_chapters_120_110_seconds",
+  "expected_pcm_frames_48000": 66240000,
+  "mp3_decoded_duration": {
+    "verified": true,
+    "sample_frames": 66240000,
+    "sample_rate": 48000,
+    "audio_seconds": 1380.0,
+    "error_frames": 0
+  },
+  "mp3_file": "YANA_04_Y.mp3",
+  "mp3_bytes": 11040620,
+  "mp3_sha256": "1ffcdf24467ec4b964e34bacaf5390ccd31032828ebf94bae5aebd71f2303bd2",
+  "max_used_post_tempo": 1.4401272727272727,
+  "min_used_post_tempo": 1.173,
+  "max_cue_padding_seconds": 0.024375,
+  "translation_review_status": "machine draft; native editorial and listening review pending",
+  "numeric_speech_handling": "Original English numerals preserved; translated grouped integers normalized before sentence splitting; Hmong uses native number-word normalization.",
+  "narration_style_id": "science-documentary-expressive-v1",
+  "prosody_method": "Melo online backend with Edge rate/word-boundary adapter and gentle1.2dB word accents",
+  "voice_identity_preserved": true,
+  "pitch_shift_applied": false,
+  "prosody_summary": {
+    "pieces": 70,
+    "word_boundaries": 3941,
+    "word_accents": 88,
+    "settings_used": [
+      "+1%",
+      "-2%",
+      "-3%",
+      "-4%"
+    ]
+  },
+  "source_filename": "YANA_04_it-IT.mp3",
+  "delivery_country_vi": "Ý",
+  "delivery_display_name": "Ý"
+}

@@ -1,0 +1,66 @@
+{
+  "all12_chapters_validated": true,
+  "native_numeral_conversion": true,
+  "chapters": [
+    {
+      "chapter": 1,
+      "characters": 2124,
+      "validated": true
+    },
+    {
+      "chapter": 2,
+      "characters": 2176,
+      "validated": true
+    },
+    {
+      "chapter": 3,
+      "characters": 2202,
+      "validated": true
+    },
+    {
+      "chapter": 4,
+      "characters": 2078,
+      "validated": true
+    },
+    {
+      "chapter": 5,
+      "characters": 2159,
+      "validated": true
+    },
+    {
+      "chapter": 6,
+      "characters": 2174,
+      "validated": true
+    },
+    {
+      "chapter": 7,
+      "characters": 2178,
+      "validated": true
+    },
+    {
+      "chapter": 8,
+      "characters": 2125,
+      "validated": true
+    },
+    {
+      "chapter": 9,
+      "characters": 2164,
+      "validated": true
+    },
+    {
+      "chapter": 10,
+      "characters": 2203,
+      "validated": true
+    },
+    {
+      "chapter": 11,
+      "characters": 2080,
+      "validated": true
+    },
+    {
+      "chapter": 12,
+      "characters": 2141,
+      "validated": true
+    }
+  ]
+}

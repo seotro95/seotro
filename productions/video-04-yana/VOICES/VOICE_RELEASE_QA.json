@@ -1,0 +1,170 @@
+{
+  "status": "passed",
+  "voices": 17,
+  "seconds_per_voice": 1380,
+  "decoded_frames_at_48k_per_voice": 66240000,
+  "english_words_preserved": 3648,
+  "english_cues": 138,
+  "english_public_file_independently_decoded": true,
+  "all17_github_asset_digests_match_reports": true,
+  "country_named": true,
+  "male_voices": 16,
+  "female_hmong_voices": 1,
+  "native_review_pending": true,
+  "white_hmong_dialect_independently_verified": false,
+  "no_children_in_visuals": true,
+  "release_tag": "yana-video-04-23min",
+  "release_published_at": "2026-11-10T07:44:51Z",
+  "assets": [
+    {
+      "name": "AUDIO_MANIFEST.json",
+      "bytes": 6620,
+      "digest": "sha256:1a82cdac71ef8f25c31821b5ae0a56b8225b6ad9a6d91b9abc2a42966f84fd8c",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/AUDIO_MANIFEST.json"
+    },
+    {
+      "name": "NARRATION_STYLE_LOCKED.json",
+      "bytes": 1245,
+      "digest": "sha256:3a95d19fe15335ba53dbf743ca5d9ca3bbbe0572b1acc4b9465901d0d2cd3297",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/NARRATION_STYLE_LOCKED.json"
+    },
+    {
+      "name": "README.md",
+      "bytes": 4089,
+      "digest": "sha256:70a7d5ae86ef255b8de03641d820563e35efb83a68d3d6d093a0e41ee2ec0347",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/README.md"
+    },
+    {
+      "name": "VOICE_FILE_NAMING.json",
+      "bytes": 2821,
+      "digest": "sha256:86a72485007e41d19e4f828ccd7d4e31657a3d035640eda8500abfbd80cd2060",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/VOICE_FILE_NAMING.json"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED.json",
+      "bytes": 14803,
+      "digest": "sha256:c3f53958a4afbc9015d7ca6d550a5b36e12268a38300dc2c4241ee7ff0a4e307",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/VOICE_PROFILES_LOCKED.json"
+    },
+    {
+      "name": "YANA_04_17_VOICES_TEN_QUOC_GIA.zip",
+      "bytes": 188779061,
+      "digest": "sha256:e65cd355d03f55b7a032dac5f9f48ef68d6af81d3cc778401a6400db2c4844af",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_17_VOICES_TEN_QUOC_GIA.zip"
+    },
+    {
+      "name": "YANA_04_Ba_Lan.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:37bfa021dcc10b46f9876f849d58233523b1997d78f7f40a68d765d41597ae04",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Ba_Lan.mp3"
+    },
+    {
+      "name": "YANA_04_Bo_Dao_Nha.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:47b09ba821204dc3591e925994f4421a9b1ac1c8e4eb763de6ccc328ed5a6bec",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Bo_Dao_Nha.mp3"
+    },
+    {
+      "name": "YANA_04_Dan_Mach.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:55fcc9148c0d023601c6a55cc2a58e5de1e6beb0234d195b9fc22e3e5296be7b",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Dan_Mach.mp3"
+    },
+    {
+      "name": "YANA_04_Duc.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:8d0eb7c561da9817f0385c7721b7e2384a1bebd7e29315c87ea9e39a91391541",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Duc.mp3"
+    },
+    {
+      "name": "YANA_04_Han_Quoc.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:94e82869dfdd2e345dee33991f7154ce449a99bc0c44d2e732e18c70224990f0",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Han_Quoc.mp3"
+    },
+    {
+      "name": "YANA_04_Ha_Lan.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:cd297b9720c5cd0e82ed8ab373df076246bb57f620d5318427911475619326e1",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Ha_Lan.mp3"
+    },
+    {
+      "name": "YANA_04_Hmong_Trang_Nu.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:7da35db02b14dcd659fe25e2e44185564beb3f21474a02c1a43d28ec77dba908",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Hmong_Trang_Nu.mp3"
+    },
+    {
+      "name": "YANA_04_HO_SO_GIONG_TEN_QUOC_GIA.zip",
+      "bytes": 379430,
+      "digest": "sha256:194864703a62e899a30b4228cee773dbd8b34a18043b54d1a130450b2dbf175c",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_HO_SO_GIONG_TEN_QUOC_GIA.zip"
+    },
+    {
+      "name": "YANA_04_My_Tieng_Anh.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:7014702fdb86744e8ddbf8a74eb7ef176bbb4cb9865aaf4e0e7931e27ae0047c",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_My_Tieng_Anh.mp3"
+    },
+    {
+      "name": "YANA_04_Na_Uy.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:d70ab5301067a0fb0a3be2642cd80635acb1ddca57085756d9f2686f6916910a",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Na_Uy.mp3"
+    },
+    {
+      "name": "YANA_04_Nhat_Ban.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:6e0d7f144716c08c2fbdb418d21d5e01019e2e5817af4e29ce87326ad65eb108",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Nhat_Ban.mp3"
+    },
+    {
+      "name": "YANA_04_Phan_Lan.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:28868be5c3e1c24b057a6457c7fb970bde7b93e177f999873bb9070e89497207",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Phan_Lan.mp3"
+    },
+    {
+      "name": "YANA_04_Phap.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:d38329a43d2c82f07143a87eedb2b5c0580a1301ee9aca4065948a6db355c371",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Phap.mp3"
+    },
+    {
+      "name": "YANA_04_Sec.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:7e6ced9f8c061a749963e61240b42667fdeca0496b43d0f2c021826bd6a9df1f",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Sec.mp3"
+    },
+    {
+      "name": "YANA_04_Tay_Ban_Nha.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:9f305b17a8f88187fa4179e4302f49de03e166c7baaed359c15ac12481ab4ab0",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Tay_Ban_Nha.mp3"
+    },
+    {
+      "name": "YANA_04_Thuy_Dien.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:f0b2a73dc7357c6ebd1396f630d537141c4c14272d66f0a738a1f3133e1ae75c",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Thuy_Dien.mp3"
+    },
+    {
+      "name": "YANA_04_Viet_Nam.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:2ad67060f38e41e4b65cc759b521b4a9dd26d32e9a59fc52ee7312d3f2b3b4b4",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Viet_Nam.mp3"
+    },
+    {
+      "name": "YANA_04_Y.mp3",
+      "bytes": 11040620,
+      "digest": "sha256:1ffcdf24467ec4b964e34bacaf5390ccd31032828ebf94bae5aebd71f2303bd2",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_04_Y.mp3"
+    },
+    {
+      "name": "YANA_VIDEO_04_TAI_LIEU_23_PHUT.zip",
+      "bytes": 1560481,
+      "digest": "sha256:f3c81268c70cdd8c23ab3587ad9bd56e84605a1c6aa5c9c5e24d2c8c0e65af88",
+      "url": "https://github.com/seotro95/seotro/releases/download/yana-video-04-23min/YANA_VIDEO_04_TAI_LIEU_23_PHUT.zip"
+    }
+  ]
+}
