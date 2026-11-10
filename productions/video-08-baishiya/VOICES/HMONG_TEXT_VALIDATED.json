@@ -1,0 +1,62 @@
+[
+  {
+    "chapter": 1,
+    "source_chars": 2083,
+    "normalized_chars": 2106
+  },
+  {
+    "chapter": 2,
+    "source_chars": 2155,
+    "normalized_chars": 2211
+  },
+  {
+    "chapter": 3,
+    "source_chars": 1916,
+    "normalized_chars": 1994
+  },
+  {
+    "chapter": 4,
+    "source_chars": 2009,
+    "normalized_chars": 2009
+  },
+  {
+    "chapter": 5,
+    "source_chars": 1871,
+    "normalized_chars": 1871
+  },
+  {
+    "chapter": 6,
+    "source_chars": 1929,
+    "normalized_chars": 1929
+  },
+  {
+    "chapter": 7,
+    "source_chars": 1942,
+    "normalized_chars": 1942
+  },
+  {
+    "chapter": 8,
+    "source_chars": 1943,
+    "normalized_chars": 1943
+  },
+  {
+    "chapter": 9,
+    "source_chars": 1969,
+    "normalized_chars": 1997
+  },
+  {
+    "chapter": 10,
+    "source_chars": 1848,
+    "normalized_chars": 1877
+  },
+  {
+    "chapter": 11,
+    "source_chars": 2059,
+    "normalized_chars": 2059
+  },
+  {
+    "chapter": 12,
+    "source_chars": 1998,
+    "normalized_chars": 1998
+  }
+]

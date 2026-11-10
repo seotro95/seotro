@@ -1,0 +1,106 @@
+name: Baishiya08 - recover English and review JapaneseKorean
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/baishiya-voice-build-20261110]
+    paths: [.github/workflows/baishiya-repair08.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - locale: en-US
+            source_run: '42826768097'
+          - locale: ja-JP
+            source_run: '42830399069'
+          - locale: ko-KR
+            source_run: '42830399069'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts
+            input
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install edge-tts==7.3.1
+      - name: Restore own recovery checkpoint if this is a retry
+        id: own
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ github.run_id }}
+          name: bs08-reviewed-checkpoint-${{ matrix.locale }}
+          path: build/voice/audio/${{ matrix.locale }}
+      - name: Restore original verified partial pieces when available
+        if: steps.own.outcome != 'success'
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ matrix.source_run }}
+          name: bs08-checkpoint-${{ matrix.locale }}
+          path: build/voice/audio/${{ matrix.locale }}
+      - name: Regenerate only missing or superseded material
+        env:
+          TTS_CHUNK_LIMIT: '480'
+          TTS_LOCALE_WORKERS: '1'
+          TTS_EN_WORKERS: '1'
+        run: python -u scripts/job_init_repair.py ${{ matrix.locale }}
+      - name: Preserve recoverable pieces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bs08-reviewed-checkpoint-${{ matrix.locale }}
+          overwrite: true
+          path: |
+            build/voice/audio/${{ matrix.locale }}/raw-*.wav
+            build/voice/audio/${{ matrix.locale }}/raw-*.json
+            build/voice/audio/${{ matrix.locale }}/raw-*.jsonl
+            build/voice/audio/${{ matrix.locale }}/REPAIR_RUNTIME_PLAN.json
+          if-no-files-found: ignore
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bs08-reviewed-voice-${{ matrix.locale }}
+          path: |
+            build/voice/audio/${{ matrix.locale }}/BAISHIYA_08_*.mp3
+            build/voice/audio/${{ matrix.locale }}/render_report.json
+            build/voice/audio/${{ matrix.locale }}/subtitles.srt
+            build/voice/audio/${{ matrix.locale }}/REPAIR_RUNTIME_PLAN.json
+          if-no-files-found: error
+          retention-days: 7
+  publish:
+    needs: repair
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts
+            input
+      - name: Collect the unchanged successful locales from the original run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u scripts/collect_original_voices.py
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: bs08-reviewed-voice-*
+          path: artifacts/reviewed
+      - name: Verify all17,durations,voiceIDs,Englishwords and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u scripts/publish_voices_job.py

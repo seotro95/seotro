@@ -1,7 +1,7 @@
 {
   "profile_set_id": "science-prehistory-17-v1",
-  "topic_id": 6,
-  "target_seconds": 1260,
+  "topic_id": 8,
+  "target_seconds": 1340,
   "profiles": [
     {
       "locale": "en-US",
@@ -15,11 +15,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "d733faf7cb437ff9db733a7f5f9f527aa177a3e688abdd270f313af2ab3605ad",
+      "duration_seconds": 1340,
+      "mp3_sha256": "14131b625739f903c4f165a02ffc60c5d54b9f09dd628cf92a13f64477e222c4",
       "alignment_granularity": "10_seconds",
       "translation_review_status": "original English script",
-      "delivery_filename": "DENISOVA_06_My_Tieng_Anh.mp3"
+      "delivery_filename": "BAISHIYA_08_My_Tieng_Anh.mp3"
     },
     {
       "locale": "vi-VN",
@@ -33,11 +33,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "0fc4a64d43bb39c4e6be0318e845ff6379a9e4ef93c2cf1f5003f820035df8a8",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "b37276933ddf7f72377902ebc719cac0d9eefe843a76f5723c5d38a781aa6a19",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Viet_Nam.mp3"
+      "delivery_filename": "BAISHIYA_08_Viet_Nam.mp3"
     },
     {
       "locale": "es-ES",
@@ -51,11 +51,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "7f888ff04706588b83da076c437bc7e1b734b39fa8eb14ecea181fbb752a4f83",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "2042c4f537579637fac2008dc2edea1d2911a078725599c3497b247b4b989845",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Tay_Ban_Nha.mp3"
+      "delivery_filename": "BAISHIYA_08_Tay_Ban_Nha.mp3"
     },
     {
       "locale": "fr-FR",
@@ -69,11 +69,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "7f368481228469841cd0cc85a2b92d0ab0d069e3914766da7653726f84900208",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "146f70fa35999c47918713166a9b1608f3526268805731644c94f37a7d043461",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Phap.mp3"
+      "delivery_filename": "BAISHIYA_08_Phap.mp3"
     },
     {
       "locale": "ja-JP",
@@ -87,11 +87,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "bcf2ac180a12a7d6378201e168e344ccebf83b7ab33cddd85d324e8d401fd8c1",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "10a127a709265ef6b255b27024eb03f268f86d3dfe83c708fa1c7dc7a3e550aa",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Nhat_Ban.mp3"
+      "delivery_filename": "BAISHIYA_08_Nhat_Ban.mp3"
     },
     {
       "locale": "ko-KR",
@@ -105,11 +105,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "fb59a31f1148bff60feb6886cb2eabe9a3828003ab4ea4a1dc013e0ca3d220f7",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "747c707c1b48fd0751b80ed9523889a42feecddcbf396766e912d3a39adf930e",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Han_Quoc.mp3"
+      "delivery_filename": "BAISHIYA_08_Han_Quoc.mp3"
     },
     {
       "locale": "de-DE",
@@ -123,11 +123,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "41526ae5b36f5d0e5eb9b44d169648bae2dd6822b29bbabd538d0707b1b1d76b",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "4e4fdeb2e2a8f7fd2127ef90ab6a3c6796608f4bc4457a837e24e2544d8d8ad7",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Duc.mp3"
+      "delivery_filename": "BAISHIYA_08_Duc.mp3"
     },
     {
       "locale": "it-IT",
@@ -141,11 +141,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "8c3c84f6c8a70b5b2dea9eaf467ab6732678b63ea64af0ac3330f4882fd1e3f1",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "13d79439d5ea45458b9560dde38012b68be7d445e45e4f66548ec88123a0f7d2",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Y.mp3"
+      "delivery_filename": "BAISHIYA_08_Y.mp3"
     },
     {
       "locale": "pt-PT",
@@ -159,11 +159,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "be958a65f6e977038ef271abc24e3034368ae7e588af1bc7d1c4216d34fbd3ee",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "26894ae0f819e5b5b4f3e69bb9a41c3b41892170396d6548337f8556235989cc",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Bo_Dao_Nha.mp3"
+      "delivery_filename": "BAISHIYA_08_Bo_Dao_Nha.mp3"
     },
     {
       "locale": "nl-NL",
@@ -177,11 +177,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "6d302c4964f0e3d10c5c3ca5b7f7cfab5b4797c02bbecb450963055541ed9cef",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "9ea3fd8a594c26c77de778bf1fc0cd45283439e3f416bd04d6ec30156f848caa",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Ha_Lan.mp3"
+      "delivery_filename": "BAISHIYA_08_Ha_Lan.mp3"
     },
     {
       "locale": "pl-PL",
@@ -195,11 +195,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "21706c85ba0c4070f24f3652b3d786ce09daa07540a151fb5ea7dd585692b9b2",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "01d51c6085b5dd20fa02ae9e0af90f24c96a893a8d58de023c480906e20bfa70",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Ba_Lan.mp3"
+      "delivery_filename": "BAISHIYA_08_Ba_Lan.mp3"
     },
     {
       "locale": "sv-SE",
@@ -213,11 +213,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "64a5509b5d20a063401cb59eefa2030d319c042f3aa609a77ea315dd24459241",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "fbeeebb89fb249282bcdfcaa92897f17dd7e5433de175e7683288c3fdfa7b340",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Thuy_Dien.mp3"
+      "delivery_filename": "BAISHIYA_08_Thuy_Dien.mp3"
     },
     {
       "locale": "da-DK",
@@ -231,11 +231,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "1228b8977ecb1d568f63223ab4475e8769d86fa1cfe3d07b3e95d6eb95c04762",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "8a7fed97fbce180e924459630182df766f198d4e5f8e03c69be13e1b79f23700",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Dan_Mach.mp3"
+      "delivery_filename": "BAISHIYA_08_Dan_Mach.mp3"
     },
     {
       "locale": "fi-FI",
@@ -249,11 +249,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "e83a645c7e7ff57e52d34664de23ff69223ceed205c8afcc5b5b4282c9d15e1f",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "5486d2b6f4fec64ea644e1f191241909d84b19827ae33596d5b060a90d773a78",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Phan_Lan.mp3"
+      "delivery_filename": "BAISHIYA_08_Phan_Lan.mp3"
     },
     {
       "locale": "nb-NO",
@@ -267,11 +267,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "1d6c1065fc965d1a652ea5dfc28b56904c933dfb47d0952ea522f74727ed8f56",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "0de941ce85e2a11dc351be70928bad4049d543cd8002e7d9f9a975c5d9d737f0",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Na_Uy.mp3"
+      "delivery_filename": "BAISHIYA_08_Na_Uy.mp3"
     },
     {
       "locale": "cs-CZ",
@@ -285,11 +285,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "+0%",
-      "duration_seconds": 1260,
-      "mp3_sha256": "b56e2f472ec53d0ea13f291a9c196b6d1ff577f87cf3a793f8dafa6838073277",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "ef4c4f6df85fc00c7f353ad0d9815e5e596cc978ed6391303fa162c98fd3dc7a",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
-      "delivery_filename": "DENISOVA_06_Sec.mp3"
+      "delivery_filename": "BAISHIYA_08_Sec.mp3"
     },
     {
       "locale": "mww",
@@ -306,12 +306,12 @@
       "dialect_independently_verified": false,
       "narration_style_id": "science-documentary-expressive-v1",
       "base_rate": "native speed 1.0",
-      "duration_seconds": 1260,
-      "mp3_sha256": "b417f56e3f01eec494677deae0eb1fc4f434b3e8ac017cb96f0b89fcb608accc",
-      "alignment_granularity": "12_chapters_110_100_seconds",
+      "duration_seconds": 1340,
+      "mp3_sha256": "a7a76c3eea367c786397f789ccf250d557dd18a38c129d0c86f693c4d7e34894",
+      "alignment_granularity": "12_chapters_120_110_seconds",
       "translation_review_status": "Hmong localisation rewritten by assistant; independent native editorial, listening and White Hmong dialect review pending",
-      "delivery_filename": "DENISOVA_06_Hmong_Trang_Nu.mp3"
+      "delivery_filename": "BAISHIYA_08_Hmong_Trang_Nu.mp3"
     }
   ],
-  "note": "Original17 voice IDs and female-3 native reference retained. Timing recalculated for21minutes. Backend provider models may evolve; native language/listening review remains pending."
+  "note": "Original17 voice IDs and female-3 native reference retained. Timing recalculated for22m20s. Backend provider models may evolve; native language/listening review remains pending."
 }

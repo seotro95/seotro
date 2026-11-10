@@ -1,0 +1,179 @@
+{
+  "audio_seconds": 1340.0,
+  "sample_rate": 48000,
+  "parts": [
+    "part-0001.wav"
+  ],
+  "part_start_seconds": [
+    0.0
+  ],
+  "timing_mode": "exact",
+  "target_seconds": 1340,
+  "duration_verified": true,
+  "duration_report": {
+    "verified": true,
+    "sample_rate": 48000,
+    "sample_frames": 64320000,
+    "audio_seconds": 1340.0,
+    "target_seconds": 1340.0,
+    "error_frames": 0
+  },
+  "sync_ok": true,
+  "sync_report": {
+    "complete": true,
+    "cues": [
+      {
+        "cue": 1,
+        "start_frame": 0,
+        "end_frame": 5760000,
+        "speech_frames": 5759086,
+        "tempo": 1.1070786458333333,
+        "padding_frames": 914
+      },
+      {
+        "cue": 2,
+        "start_frame": 5760000,
+        "end_frame": 11520000,
+        "speech_frames": 5759077,
+        "tempo": 1.0986220486111111,
+        "padding_frames": 923
+      },
+      {
+        "cue": 3,
+        "start_frame": 11520000,
+        "end_frame": 16800000,
+        "speech_frames": 5279090,
+        "tempo": 1.0890132575757576,
+        "padding_frames": 910
+      },
+      {
+        "cue": 4,
+        "start_frame": 16800000,
+        "end_frame": 22080000,
+        "speech_frames": 5278109,
+        "tempo": 1.1140541666666666,
+        "padding_frames": 1891
+      },
+      {
+        "cue": 5,
+        "start_frame": 22080000,
+        "end_frame": 27360000,
+        "speech_frames": 5279015,
+        "tempo": 1.0305676136363637,
+        "padding_frames": 985
+      },
+      {
+        "cue": 6,
+        "start_frame": 27360000,
+        "end_frame": 32640000,
+        "speech_frames": 5279054,
+        "tempo": 1.061179356060606,
+        "padding_frames": 946
+      },
+      {
+        "cue": 7,
+        "start_frame": 32640000,
+        "end_frame": 37920000,
+        "speech_frames": 5278085,
+        "tempo": 1.0621255681818182,
+        "padding_frames": 1915
+      },
+      {
+        "cue": 8,
+        "start_frame": 37920000,
+        "end_frame": 43200000,
+        "speech_frames": 5278443,
+        "tempo": 1.0687255681818182,
+        "padding_frames": 1557
+      },
+      {
+        "cue": 9,
+        "start_frame": 43200000,
+        "end_frame": 48480000,
+        "speech_frames": 5278091,
+        "tempo": 1.1006530303030304,
+        "padding_frames": 1909
+      },
+      {
+        "cue": 10,
+        "start_frame": 48480000,
+        "end_frame": 53760000,
+        "speech_frames": 5279055,
+        "tempo": 1.0617857954545455,
+        "padding_frames": 945
+      },
+      {
+        "cue": 11,
+        "start_frame": 53760000,
+        "end_frame": 59040000,
+        "speech_frames": 5278185,
+        "tempo": 1.1671467803030302,
+        "padding_frames": 1815
+      },
+      {
+        "cue": 12,
+        "start_frame": 59040000,
+        "end_frame": 64320000,
+        "speech_frames": 5279167,
+        "tempo": 1.1492382575757576,
+        "padding_frames": 833
+      }
+    ],
+    "target_seconds": 1340,
+    "actual_seconds": 1340.0,
+    "error_frames": 0,
+    "sample_rate": 48000
+  },
+  "locale": "mww",
+  "voice_id": "hmong-female-3",
+  "gender": "Female",
+  "engine": "Voice-Studio-Hmong 1.6.6 Native VITS + OpenVoice V2",
+  "source_commit": "061430d958b8d5fc14d04209c6f0cd20492382c2",
+  "alignment_granularity": "12_chapters_120_110_seconds",
+  "expected_pcm_frames_48000": 64320000,
+  "mp3_decoded_duration": {
+    "verified": true,
+    "sample_frames": 64320000,
+    "sample_rate": 48000,
+    "audio_seconds": 1340.0,
+    "error_frames": 0
+  },
+  "mp3_file": "BAISHIYA_08_Hmong_Trang_Nu.mp3",
+  "mp3_bytes": 10720748,
+  "mp3_sha256": "a7a76c3eea367c786397f789ccf250d557dd18a38c129d0c86f693c4d7e34894",
+  "max_used_post_tempo": 1.1671467803030302,
+  "min_used_post_tempo": 1.0305676136363637,
+  "max_cue_padding_seconds": 0.03989583333333333,
+  "translation_review_status": "Hmong localisation rewritten by assistant; independent native editorial, listening and White Hmong dialect review pending",
+  "numeric_speech_handling": "Original English numerals preserved; translated grouped integers normalized before sentence splitting; Hmong uses native number-word normalization.",
+  "reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+  "reference_url": "https://raw.githubusercontent.com/seotro95/seotro/061430d958b8d5fc14d04209c6f0cd20492382c2/voice-studio/assets/hmong/female-3.wav",
+  "audio_profile": "clear-v1",
+  "white_hmong_dialect_independently_verified": false,
+  "native_speed": "varied by phrase",
+  "native_quality": "fast",
+  "native_precision": "fp32",
+  "native_device": "cpu",
+  "narration_style_id": "science-documentary-expressive-v1",
+  "prosody_method": "Native phrase speed/gain/pause controls; no word timing",
+  "voice_identity_preserved": true,
+  "pitch_shift_applied": false,
+  "native_speed_nominal": 1.0,
+  "native_speed_range": [
+    0.97,
+    1.03
+  ],
+  "native_phrase_gain_db_range": [
+    -0.3,
+    0.6
+  ],
+  "native_pause_seconds_range": [
+    0.07,
+    0.16
+  ],
+  "sample_identifier_spoken_form": {},
+  "native_word_alignment_available": false,
+  "source_filename": "BAISHIYA_08_mww_female.mp3",
+  "delivery_country_vi": null,
+  "delivery_display_name": "H’Mông Trắng — nữ"
+}

@@ -1,0 +1,89 @@
+{
+  "status": "passed",
+  "public_release": "https://github.com/seotro95/seotro/releases/tag/baishiya-video-08-22m20s",
+  "original_document_assets": 16,
+  "prompt_txt_files": 12,
+  "server_digests_all_match": true,
+  "assets": [
+    {
+      "name": "BAISHIYA_VIDEO_08_TAI_LIEU_22m20s.zip",
+      "sha256": "1d49eade5314221f470a1c0a0e84e5d22c0df181f9d670eea9920481f4811254",
+      "bytes": 141060
+    },
+    {
+      "name": "BAISHIYA_08_KICH_BAN_EN_22m20s.txt",
+      "sha256": "b295fa775e79a02222faf0f4f3ae9b52b8330f0ca50fc03cc59b01955932dd81",
+      "bytes": 20644
+    },
+    {
+      "name": "BAISHIYA_08_KICH_BAN_EN_CO_MOC.txt",
+      "sha256": "0bcdd66cc0bd68b0f0efe15bd2cbb2d403307a2fc49fe058b4927339030ea0a9",
+      "bytes": 29332
+    },
+    {
+      "name": "BAISHIYA_08_PHAN_TICH_NGUON_VA_QUY_TRINH.txt",
+      "sha256": "64f1db08aa623c79773ef217b40cf7677ef0c819edf61e195cb070260b6e5da0",
+      "bytes": 4044
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_01_001_010.txt",
+      "sha256": "ff62d744a82633361acc27c66d372fcf7fa0601385b872fa8f5985a6b9d19ad6",
+      "bytes": 18963
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_02_011_020.txt",
+      "sha256": "0ce61e6381f03b0e42607f1c42c90839d165349905a6c3bf07b6b6141313fbb3",
+      "bytes": 18948
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_03_021_030.txt",
+      "sha256": "0032d1fc38040dd0f5680d4e852ec5ceaf8ab21d9c2699a3337c04c762b527d6",
+      "bytes": 18950
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_04_031_040.txt",
+      "sha256": "81571754df2c66be7ac8117444fe2b2f46fdf3874d40bb5daedba1d7b7b98be0",
+      "bytes": 18901
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_05_041_050.txt",
+      "sha256": "1cb28923e921d6b5ccc5ca55d26c59ff297a2c5b404659cd1fec11ebce0f264a",
+      "bytes": 19027
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_06_051_060.txt",
+      "sha256": "298369fc35fae191b08b645b862871b803836a02a46998eb25cda8bc4b63b6c1",
+      "bytes": 19053
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_07_061_070.txt",
+      "sha256": "c165a683b36e48a9774d4ca7f1d5e12330afd0e03937a89327ae9f6f5853beb1",
+      "bytes": 18954
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_08_071_080.txt",
+      "sha256": "0b0932eb7bab8881f93d81134761ece19c9dc3bc50c46092fb301b1236480de6",
+      "bytes": 19010
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_09_081_090.txt",
+      "sha256": "506c97aeaced1f893b7a3ae05b56d51a874582df6672d4a857a08e84d6e88926",
+      "bytes": 18918
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_10_091_100.txt",
+      "sha256": "5668ddbc1d237b2b2fc6c4429daa85122da67896b79605d2d55023f49c79ebe6",
+      "bytes": 18991
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_11_101_110.txt",
+      "sha256": "3243704a42036646f62f4289858c26653bc7770c6ea7a5949107254adcf49d23",
+      "bytes": 19059
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_12_111_120.txt",
+      "sha256": "3c8eba7c63b303436e253f3bcae22ddc6c1f2f796411de6dbfdf6219913a6965",
+      "bytes": 18949
+    }
+  ]
+}

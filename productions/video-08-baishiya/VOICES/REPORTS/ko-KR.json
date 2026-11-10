@@ -1,0 +1,167 @@
+{
+  "audio_seconds": 1340.0,
+  "sample_rate": 48000,
+  "parts": [
+    "part-0001.wav"
+  ],
+  "part_start_seconds": [
+    0.0
+  ],
+  "timing_mode": "exact",
+  "target_seconds": 1340,
+  "duration_verified": true,
+  "duration_report": {
+    "verified": true,
+    "sample_rate": 48000,
+    "sample_frames": 64320000,
+    "audio_seconds": 1340.0,
+    "target_seconds": 1340.0,
+    "error_frames": 0
+  },
+  "sync_ok": true,
+  "sync_report": {
+    "complete": true,
+    "cues": [
+      {
+        "cue": 1,
+        "start_frame": 0,
+        "end_frame": 5760000,
+        "speech_frames": 5759194,
+        "tempo": 1.21335,
+        "padding_frames": 806
+      },
+      {
+        "cue": 2,
+        "start_frame": 5760000,
+        "end_frame": 11520000,
+        "speech_frames": 5759178,
+        "tempo": 1.19775,
+        "padding_frames": 822
+      },
+      {
+        "cue": 3,
+        "start_frame": 11520000,
+        "end_frame": 16800000,
+        "speech_frames": 5279074,
+        "tempo": 1.0760363636363637,
+        "padding_frames": 926
+      },
+      {
+        "cue": 4,
+        "start_frame": 16800000,
+        "end_frame": 22080000,
+        "speech_frames": 5279262,
+        "tempo": 1.223090909090909,
+        "padding_frames": 738
+      },
+      {
+        "cue": 5,
+        "start_frame": 22080000,
+        "end_frame": 27360000,
+        "speech_frames": 5279195,
+        "tempo": 1.1711636363636364,
+        "padding_frames": 805
+      },
+      {
+        "cue": 6,
+        "start_frame": 27360000,
+        "end_frame": 32640000,
+        "speech_frames": 5279368,
+        "tempo": 1.3066545454545455,
+        "padding_frames": 632
+      },
+      {
+        "cue": 7,
+        "start_frame": 32640000,
+        "end_frame": 37920000,
+        "speech_frames": 5279135,
+        "tempo": 1.1242545454545454,
+        "padding_frames": 865
+      },
+      {
+        "cue": 8,
+        "start_frame": 37920000,
+        "end_frame": 43200000,
+        "speech_frames": 5279323,
+        "tempo": 1.2715272727272726,
+        "padding_frames": 677
+      },
+      {
+        "cue": 9,
+        "start_frame": 43200000,
+        "end_frame": 48480000,
+        "speech_frames": 5279313,
+        "tempo": 1.2634545454545454,
+        "padding_frames": 687
+      },
+      {
+        "cue": 10,
+        "start_frame": 48480000,
+        "end_frame": 53760000,
+        "speech_frames": 5279047,
+        "tempo": 1.0552545454545454,
+        "padding_frames": 953
+      },
+      {
+        "cue": 11,
+        "start_frame": 53760000,
+        "end_frame": 59040000,
+        "speech_frames": 5279420,
+        "tempo": 1.3468,
+        "padding_frames": 580
+      },
+      {
+        "cue": 12,
+        "start_frame": 59040000,
+        "end_frame": 64320000,
+        "speech_frames": 5279442,
+        "tempo": 1.364290909090909,
+        "padding_frames": 558
+      }
+    ],
+    "target_seconds": 1340,
+    "actual_seconds": 1340.0,
+    "error_frames": 0,
+    "sample_rate": 48000
+  },
+  "locale": "ko-KR",
+  "voice_id": "ko-KR-InJoonNeural",
+  "gender": "Male",
+  "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "alignment_granularity": "12_chapters_120_110_seconds",
+  "expected_pcm_frames_48000": 64320000,
+  "mp3_decoded_duration": {
+    "verified": true,
+    "sample_frames": 64320000,
+    "sample_rate": 48000,
+    "audio_seconds": 1340.0,
+    "error_frames": 0
+  },
+  "mp3_file": "BAISHIYA_08_Han_Quoc.mp3",
+  "mp3_bytes": 10720748,
+  "mp3_sha256": "747c707c1b48fd0751b80ed9523889a42feecddcbf396766e912d3a39adf930e",
+  "max_used_post_tempo": 1.364290909090909,
+  "min_used_post_tempo": 1.0552545454545454,
+  "max_cue_padding_seconds": 0.019854166666666666,
+  "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
+  "numeric_speech_handling": "Original English numerals preserved; translated grouped integers normalized before sentence splitting; Hmong uses native number-word normalization.",
+  "narration_style_id": "science-documentary-expressive-v1",
+  "prosody_method": "Melo online backend with Edge rate/word-boundary adapter and gentle1.2dB word accents",
+  "voice_identity_preserved": true,
+  "pitch_shift_applied": false,
+  "prosody_summary": {
+    "pieces": 26,
+    "word_boundaries": 2490,
+    "word_accents": 3,
+    "settings_used": [
+      "+1%",
+      "-2%",
+      "-3%",
+      "-4%"
+    ]
+  },
+  "source_filename": "BAISHIYA_08_ko-KR.mp3",
+  "delivery_country_vi": "Hàn Quốc",
+  "delivery_display_name": "Hàn Quốc"
+}

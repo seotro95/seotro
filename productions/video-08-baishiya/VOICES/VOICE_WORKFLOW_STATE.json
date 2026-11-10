@@ -1,0 +1,31 @@
+{
+  "build_head": "4dca5c9f7541df125615bc2c80a97bc275283c58",
+  "build_tree": "f77ce653c3365d86e4ef679358b5e4d4780f7700",
+  "documents_head": "705eb9241c9ba969c7a9b6726bdfe5eb07dc8e34",
+  "documents_tree": "739a47562e8602bf847abf2e3ccc063beb819598",
+  "english_run": 42826768097,
+  "locales_run": 42830399069,
+  "documents_run": 42826270908,
+  "delivery_workflow_run_id": 42832242206,
+  "voice_workflow_run_ids": [
+    42826768097,
+    42830399069,
+    42832242206,
+    42837217955
+  ],
+  "repair_run": 42832242206,
+  "native_head": "d09624bf6aaa49825f943e24e73b228549296211",
+  "native_audio_sha256": "a7a76c3eea367c786397f789ccf250d557dd18a38c129d0c86f693c4d7e34894",
+  "native_seconds": 1340,
+  "native_frames_48k": 64320000,
+  "native_max_tempo": 1.1671467803030302,
+  "original_locales_status": "15of15passed;originalpublisherstoppedbecauseEnglishartifactabsent",
+  "final_remaining_voice": "en-US",
+  "english_status": "recovered1340secondsdecodedverified",
+  "english_complete_cached_cues": 53,
+  "english_new_whole_cues": 81,
+  "partial_delivery_run": 42837217955,
+  "all17_rendered": true,
+  "delivery_workflow_conclusion": "success",
+  "all17_public_technical_qa": "passed"
+}

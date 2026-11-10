@@ -1,0 +1,140 @@
+[
+  {
+    "locale": "es-ES",
+    "chapters": 12,
+    "english_spans_repaired": [],
+    "manual_scientific_patches": true,
+    "japanese_chapters_rewritten": [],
+    "independent_native_review_pending": true
+  },
+  {
+    "locale": "fr-FR",
+    "chapters": 12,
+    "english_spans_repaired": [
+      {
+        "chapter": 5,
+        "english": "A blow produces a different record.",
+        "localized": "Un coup produit un disque différent."
+      },
+      {
+        "chapter": 5,
+        "english": "But bones can break without people.",
+        "localized": "Mais les os peuvent se briser sans personne."
+      },
+      {
+        "chapter": 5,
+        "english": "It also changes the question.",
+        "localized": "Cela change également la question."
+      },
+      {
+        "chapter": 6,
+        "english": "It is one part of the survival story, rather than the whole answer.",
+        "localized": "C’est une partie de l’histoire de la survie, plutôt que la réponse complète."
+      }
+    ],
+    "manual_scientific_patches": true,
+    "japanese_chapters_rewritten": [],
+    "independent_native_review_pending": true
+  },
+  {
+    "locale": "ja-JP",
+    "chapters": 12,
+    "english_spans_repaired": [],
+    "manual_scientific_patches": true,
+    "japanese_chapters_rewritten": [
+      5,
+      7,
+      9,
+      10
+    ],
+    "independent_native_review_pending": true
+  },
+  {
+    "locale": "ko-KR",
+    "chapters": 12,
+    "english_spans_repaired": [],
+    "manual_scientific_patches": true,
+    "japanese_chapters_rewritten": [],
+    "independent_native_review_pending": true
+  },
+  {
+    "locale": "de-DE",
+    "chapters": 12,
+    "english_spans_repaired": [],
+    "manual_scientific_patches": false,
+    "japanese_chapters_rewritten": [],
+    "independent_native_review_pending": true
+  },
+  {
+    "locale": "it-IT",
+    "chapters": 12,
+    "english_spans_repaired": [],
+    "manual_scientific_patches": false,
+    "japanese_chapters_rewritten": [],
+    "independent_native_review_pending": true
+  },
+  {
+    "locale": "pt-PT",
+    "chapters": 12,
+    "english_spans_repaired": [],
+    "manual_scientific_patches": true,
+    "japanese_chapters_rewritten": [],
+    "independent_native_review_pending": true
+  },
+  {
+    "locale": "nl-NL",
+    "chapters": 12,
+    "english_spans_repaired": [],
+    "manual_scientific_patches": false,
+    "japanese_chapters_rewritten": [],
+    "independent_native_review_pending": true
+  },
+  {
+    "locale": "pl-PL",
+    "chapters": 12,
+    "english_spans_repaired": [],
+    "manual_scientific_patches": false,
+    "japanese_chapters_rewritten": [],
+    "independent_native_review_pending": true
+  },
+  {
+    "locale": "sv-SE",
+    "chapters": 12,
+    "english_spans_repaired": [],
+    "manual_scientific_patches": false,
+    "japanese_chapters_rewritten": [],
+    "independent_native_review_pending": true
+  },
+  {
+    "locale": "da-DK",
+    "chapters": 12,
+    "english_spans_repaired": [],
+    "manual_scientific_patches": false,
+    "japanese_chapters_rewritten": [],
+    "independent_native_review_pending": true
+  },
+  {
+    "locale": "fi-FI",
+    "chapters": 12,
+    "english_spans_repaired": [],
+    "manual_scientific_patches": false,
+    "japanese_chapters_rewritten": [],
+    "independent_native_review_pending": true
+  },
+  {
+    "locale": "nb-NO",
+    "chapters": 12,
+    "english_spans_repaired": [],
+    "manual_scientific_patches": false,
+    "japanese_chapters_rewritten": [],
+    "independent_native_review_pending": true
+  },
+  {
+    "locale": "cs-CZ",
+    "chapters": 12,
+    "english_spans_repaired": [],
+    "manual_scientific_patches": false,
+    "japanese_chapters_rewritten": [],
+    "independent_native_review_pending": true
+  }
+]

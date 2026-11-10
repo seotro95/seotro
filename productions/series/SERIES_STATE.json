@@ -5,8 +5,8 @@
   "resume_file": "productions/TIEP_TUC_TU_DAY.md",
   "topic_index": "productions/series/TOPICS_001_100.csv",
   "shared_voice_profiles": "productions/series/VOICE_PROFILES_LOCKED.json",
-  "active_topic": 8,
-  "next_topic_id": 8,
+  "active_topic": null,
+  "next_topic_id": 5,
   "user_preferences": {
     "language_for_collaboration": "Vietnamese",
     "process_one_topic_at_a_time": true,
@@ -157,8 +157,9 @@
     {
       "id": 8,
       "title": "Baishiya: con người cổ đã sống trên cao nguyên khắc nghiệt ra sao?",
-      "status": "documents_ready_voice_pending",
-      "target_seconds": 1340
+      "status": "documents_and_17_expressive_voices_delivered_video_pending_native_review_pending",
+      "target_seconds": 1340,
+      "created": true
     },
     {
       "id": 9,
@@ -1004,7 +1005,7 @@
     "video_visual_review_scope": "104 sources sampled at3times and44final frames reviewed; not continuous manual viewing."
   },
   "topic7_explicitly_left_queued": true,
-  "in_progress_topic_8": {
+  "completed_topic_8": {
     "id": 8,
     "title": "Baishiya: The Survival Story Hidden in Broken Bones",
     "path": "productions/video-08-baishiya",
@@ -1031,150 +1032,39 @@
     ],
     "no_children_in_visuals": true,
     "voice_count_expected": 17,
-    "voice_status": "16_secondary_voices_public_English_recovering_from_checkpoint",
+    "voice_status": "17_expressive_voices_delivered_technical_qa_passed_native_review_pending",
     "documents_status": "delivered",
     "video_rendered": false,
     "voice_profile_set_id": "science-prehistory-17-v1",
     "narration_style_id": "science-documentary-expressive-v1",
-    "voice_files_delivered": 16,
-    "english_voice_status": "recovery_running_sameAndrewvoice_same3162words",
-    "secondary_voice_technical_qa_passed": true,
-    "secondary_voice_public_assets_verified": true,
-    "available_voices": [
-      {
-        "locale": "fr-FR",
-        "filename": "BAISHIYA_08_Phap.mp3",
-        "sha256": "146f70fa35999c47918713166a9b1608f3526268805731644c94f37a7d043461",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Phap.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "pl-PL",
-        "filename": "BAISHIYA_08_Ba_Lan.mp3",
-        "sha256": "01d51c6085b5dd20fa02ae9e0af90f24c96a893a8d58de023c480906e20bfa70",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Ba_Lan.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "nl-NL",
-        "filename": "BAISHIYA_08_Ha_Lan.mp3",
-        "sha256": "9ea3fd8a594c26c77de778bf1fc0cd45283439e3f416bd04d6ec30156f848caa",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Ha_Lan.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "it-IT",
-        "filename": "BAISHIYA_08_Y.mp3",
-        "sha256": "13d79439d5ea45458b9560dde38012b68be7d445e45e4f66548ec88123a0f7d2",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Y.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "pt-PT",
-        "filename": "BAISHIYA_08_Bo_Dao_Nha.mp3",
-        "sha256": "26894ae0f819e5b5b4f3e69bb9a41c3b41892170396d6548337f8556235989cc",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Bo_Dao_Nha.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "nb-NO",
-        "filename": "BAISHIYA_08_Na_Uy.mp3",
-        "sha256": "0de941ce85e2a11dc351be70928bad4049d543cd8002e7d9f9a975c5d9d737f0",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Na_Uy.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "de-DE",
-        "filename": "BAISHIYA_08_Duc.mp3",
-        "sha256": "4e4fdeb2e2a8f7fd2127ef90ab6a3c6796608f4bc4457a837e24e2544d8d8ad7",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Duc.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "es-ES",
-        "filename": "BAISHIYA_08_Tay_Ban_Nha.mp3",
-        "sha256": "2042c4f537579637fac2008dc2edea1d2911a078725599c3497b247b4b989845",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Tay_Ban_Nha.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "fi-FI",
-        "filename": "BAISHIYA_08_Phan_Lan.mp3",
-        "sha256": "5486d2b6f4fec64ea644e1f191241909d84b19827ae33596d5b060a90d773a78",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Phan_Lan.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "sv-SE",
-        "filename": "BAISHIYA_08_Thuy_Dien.mp3",
-        "sha256": "fbeeebb89fb249282bcdfcaa92897f17dd7e5433de175e7683288c3fdfa7b340",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Thuy_Dien.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "da-DK",
-        "filename": "BAISHIYA_08_Dan_Mach.mp3",
-        "sha256": "8a7fed97fbce180e924459630182df766f198d4e5f8e03c69be13e1b79f23700",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Dan_Mach.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "vi-VN",
-        "filename": "BAISHIYA_08_Viet_Nam.mp3",
-        "sha256": "b37276933ddf7f72377902ebc719cac0d9eefe843a76f5723c5d38a781aa6a19",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Viet_Nam.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "cs-CZ",
-        "filename": "BAISHIYA_08_Sec.mp3",
-        "sha256": "ef4c4f6df85fc00c7f353ad0d9815e5e596cc978ed6391303fa162c98fd3dc7a",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Sec.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "ja-JP",
-        "filename": "BAISHIYA_08_Nhat_Ban.mp3",
-        "sha256": "10a127a709265ef6b255b27024eb03f268f86d3dfe83c708fa1c7dc7a3e550aa",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Nhat_Ban.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "ko-KR",
-        "filename": "BAISHIYA_08_Han_Quoc.mp3",
-        "sha256": "747c707c1b48fd0751b80ed9523889a42feecddcbf396766e912d3a39adf930e",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Han_Quoc.mp3",
-        "bytes": 10720748
-      },
-      {
-        "locale": "mww",
-        "filename": "BAISHIYA_08_Hmong_Trang_Nu.mp3",
-        "sha256": "a7a76c3eea367c786397f789ccf250d557dd18a38c129d0c86f693c4d7e34894",
-        "seconds": 1340,
-        "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Hmong_Trang_Nu.mp3",
-        "bytes": 10720748
-      }
-    ],
-    "english_recovery_run": 42832242206,
-    "english_recovery_job": 129885023802,
-    "partial_delivery_run": 42837217955,
+    "voice_files_delivered": 17,
+    "verified_seconds_per_voice": 1340,
+    "voice_release_tag": "baishiya-video-08-22m20s",
     "voice_release_url": "https://github.com/seotro95/seotro/releases/tag/baishiya-video-08-22m20s",
+    "voice_archive_url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_17_VOICES_TEN_QUOC_GIA.zip",
+    "voice_archive_sha256": "70017bea0e02aa9919f4faa2cb4c25e31d2af6dd01a2ff9f54eb0942db4e55c8",
+    "voice_details_url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_HO_SO_GIONG_TEN_QUOC_GIA.zip",
+    "voice_asset_digests_verified": true,
+    "voice_archive_members_verified": true,
+    "voice_country_names_delivered": true,
+    "voice_workflow_run_ids": [
+      42826768097,
+      42830399069,
+      42832242206,
+      42837217955
+    ],
+    "voice_workflow_run_id": 42832242206,
+    "voice_workflow_url": "https://github.com/seotro95/seotro/actions/runs/42832242206",
     "voice_build_branch": "codex/baishiya-voice-build-20261110",
-    "native_hmong_sha256": "a7a76c3eea367c786397f789ccf250d557dd18a38c129d0c86f693c4d7e34894"
+    "translation_native_review_pending": true,
+    "white_hmong_dialect_independently_verified": false,
+    "english_voice_sha256": "14131b625739f903c4f165a02ffc60c5d54b9f09dd628cf92a13f64477e222c4",
+    "native_hmong_sha256": "a7a76c3eea367c786397f789ccf250d557dd18a38c129d0c86f693c4d7e34894",
+    "native_hmong_reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+    "production_steps_document": "productions/video-08-baishiya/PRODUCTION_STEPS_APPLIED.md",
+    "voice_generation_source_path": "productions/video-08-baishiya/VOICES/PRODUCTION_SCRIPTS",
+    "main_video_audio_language": "en-US",
+    "video_status": "awaiting_episode8_generated_clips",
+    "documents_delivered": true
   }
 }

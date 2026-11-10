@@ -1,0 +1,29 @@
+[
+  {
+    "locale": "ja-JP",
+    "chapters_changed": [
+      3,
+      4,
+      8,
+      11
+    ],
+    "input_before_sha256": "9c17ef8d41dd44a57cc2de9785b7aedb3c773da9c7e1e397b32a47ac3709cfba",
+    "input_after_sha256": "4186ebace77082816d1407466f247558ac2a3a7e7b57232995947fe1e5a8d7dc",
+    "reason": "Scientific translation review:caprine taxonomy,stonecuttingedge,equidtooth,screeningmeaning,altitudebiologynotpolitics;regenerateonlyaffectedlocale,retainothers",
+    "wording_en_unchanged": true
+  },
+  {
+    "locale": "ko-KR",
+    "chapters_changed": [
+      3,
+      5,
+      7,
+      9,
+      10
+    ],
+    "input_before_sha256": "97f15bcba379b63ae15ad28a6f02f35d06ea345db1f16df6e0552f0cfdf5b50b",
+    "input_after_sha256": "9522960df23256f1392fb25e22812e713f7a5252e5158e290d518b11bc17ae1a",
+    "reason": "Scientific translation review:caprine taxonomy,stonecuttingedge,equidtooth,screeningmeaning,altitudebiologynotpolitics;regenerateonlyaffectedlocale,retainothers",
+    "wording_en_unchanged": true
+  }
+]

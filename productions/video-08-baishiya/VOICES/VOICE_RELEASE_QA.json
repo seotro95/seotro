@@ -1,0 +1,260 @@
+{
+  "status": "passed",
+  "voices": 17,
+  "seconds_per_voice": 1340,
+  "decoded_frames_at_48k_per_voice": 64320000,
+  "english_words_preserved": 3162,
+  "english_cues": 134,
+  "english_public_file_independently_decoded": true,
+  "all17_github_asset_digests_match_reports": true,
+  "country_named": true,
+  "male_voices": 16,
+  "female_hmong_voices": 1,
+  "native_review_pending": true,
+  "white_hmong_dialect_independently_verified": false,
+  "no_children_in_visuals": true,
+  "release_tag": "baishiya-video-08-22m20s",
+  "release_published_at": "2026-11-10T13:38:23Z",
+  "assets": [
+    {
+      "name": "AUDIO_MANIFEST.json",
+      "bytes": 6688,
+      "digest": "sha256:f27197902f5504bb3c1cd3afaadb765a662744ba6e599dff1b02d67907de7872",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/AUDIO_MANIFEST.json"
+    },
+    {
+      "name": "BAISHIYA_08_17_VOICES_TEN_QUOC_GIA.zip",
+      "bytes": 183210434,
+      "digest": "sha256:70017bea0e02aa9919f4faa2cb4c25e31d2af6dd01a2ff9f54eb0942db4e55c8",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_17_VOICES_TEN_QUOC_GIA.zip"
+    },
+    {
+      "name": "BAISHIYA_08_Ba_Lan.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:01d51c6085b5dd20fa02ae9e0af90f24c96a893a8d58de023c480906e20bfa70",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Ba_Lan.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_Bo_Dao_Nha.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:26894ae0f819e5b5b4f3e69bb9a41c3b41892170396d6548337f8556235989cc",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Bo_Dao_Nha.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_Dan_Mach.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:8a7fed97fbce180e924459630182df766f198d4e5f8e03c69be13e1b79f23700",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Dan_Mach.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_Duc.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:4e4fdeb2e2a8f7fd2127ef90ab6a3c6796608f4bc4457a837e24e2544d8d8ad7",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Duc.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_Han_Quoc.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:747c707c1b48fd0751b80ed9523889a42feecddcbf396766e912d3a39adf930e",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Han_Quoc.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_Ha_Lan.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:9ea3fd8a594c26c77de778bf1fc0cd45283439e3f416bd04d6ec30156f848caa",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Ha_Lan.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_Hmong_Trang_Nu.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:a7a76c3eea367c786397f789ccf250d557dd18a38c129d0c86f693c4d7e34894",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Hmong_Trang_Nu.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_HO_SO_GIONG_TEN_QUOC_GIA.zip",
+      "bytes": 348202,
+      "digest": "sha256:22049ac985949cf43cbc4a140f66b6461e72db112ea28c5b9036771c0b6adb3b",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_HO_SO_GIONG_TEN_QUOC_GIA.zip"
+    },
+    {
+      "name": "BAISHIYA_08_KICH_BAN_EN_22m20s.txt",
+      "bytes": 20644,
+      "digest": "sha256:b295fa775e79a02222faf0f4f3ae9b52b8330f0ca50fc03cc59b01955932dd81",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_KICH_BAN_EN_22m20s.txt"
+    },
+    {
+      "name": "BAISHIYA_08_KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 29332,
+      "digest": "sha256:0bcdd66cc0bd68b0f0efe15bd2cbb2d403307a2fc49fe058b4927339030ea0a9",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_KICH_BAN_EN_CO_MOC.txt"
+    },
+    {
+      "name": "BAISHIYA_08_My_Tieng_Anh.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:14131b625739f903c4f165a02ffc60c5d54b9f09dd628cf92a13f64477e222c4",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_My_Tieng_Anh.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_Na_Uy.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:0de941ce85e2a11dc351be70928bad4049d543cd8002e7d9f9a975c5d9d737f0",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Na_Uy.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_Nhat_Ban.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:10a127a709265ef6b255b27024eb03f268f86d3dfe83c708fa1c7dc7a3e550aa",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Nhat_Ban.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_Phan_Lan.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:5486d2b6f4fec64ea644e1f191241909d84b19827ae33596d5b060a90d773a78",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Phan_Lan.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_PHAN_TICH_NGUON_VA_QUY_TRINH.txt",
+      "bytes": 4044,
+      "digest": "sha256:64f1db08aa623c79773ef217b40cf7677ef0c819edf61e195cb070260b6e5da0",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_PHAN_TICH_NGUON_VA_QUY_TRINH.txt"
+    },
+    {
+      "name": "BAISHIYA_08_Phap.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:146f70fa35999c47918713166a9b1608f3526268805731644c94f37a7d043461",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Phap.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_01_001_010.txt",
+      "bytes": 18963,
+      "digest": "sha256:ff62d744a82633361acc27c66d372fcf7fa0601385b872fa8f5985a6b9d19ad6",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_PROMPTS_01_001_010.txt"
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_02_011_020.txt",
+      "bytes": 18948,
+      "digest": "sha256:0ce61e6381f03b0e42607f1c42c90839d165349905a6c3bf07b6b6141313fbb3",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_PROMPTS_02_011_020.txt"
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_03_021_030.txt",
+      "bytes": 18950,
+      "digest": "sha256:0032d1fc38040dd0f5680d4e852ec5ceaf8ab21d9c2699a3337c04c762b527d6",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_PROMPTS_03_021_030.txt"
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_04_031_040.txt",
+      "bytes": 18901,
+      "digest": "sha256:81571754df2c66be7ac8117444fe2b2f46fdf3874d40bb5daedba1d7b7b98be0",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_PROMPTS_04_031_040.txt"
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_05_041_050.txt",
+      "bytes": 19027,
+      "digest": "sha256:1cb28923e921d6b5ccc5ca55d26c59ff297a2c5b404659cd1fec11ebce0f264a",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_PROMPTS_05_041_050.txt"
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_06_051_060.txt",
+      "bytes": 19053,
+      "digest": "sha256:298369fc35fae191b08b645b862871b803836a02a46998eb25cda8bc4b63b6c1",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_PROMPTS_06_051_060.txt"
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_07_061_070.txt",
+      "bytes": 18954,
+      "digest": "sha256:c165a683b36e48a9774d4ca7f1d5e12330afd0e03937a89327ae9f6f5853beb1",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_PROMPTS_07_061_070.txt"
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_08_071_080.txt",
+      "bytes": 19010,
+      "digest": "sha256:0b0932eb7bab8881f93d81134761ece19c9dc3bc50c46092fb301b1236480de6",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_PROMPTS_08_071_080.txt"
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_09_081_090.txt",
+      "bytes": 18918,
+      "digest": "sha256:506c97aeaced1f893b7a3ae05b56d51a874582df6672d4a857a08e84d6e88926",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_PROMPTS_09_081_090.txt"
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_10_091_100.txt",
+      "bytes": 18991,
+      "digest": "sha256:5668ddbc1d237b2b2fc6c4429daa85122da67896b79605d2d55023f49c79ebe6",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_PROMPTS_10_091_100.txt"
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_11_101_110.txt",
+      "bytes": 19059,
+      "digest": "sha256:3243704a42036646f62f4289858c26653bc7770c6ea7a5949107254adcf49d23",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_PROMPTS_11_101_110.txt"
+    },
+    {
+      "name": "BAISHIYA_08_PROMPTS_12_111_120.txt",
+      "bytes": 18949,
+      "digest": "sha256:3c8eba7c63b303436e253f3bcae22ddc6c1f2f796411de6dbfdf6219913a6965",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_PROMPTS_12_111_120.txt"
+    },
+    {
+      "name": "BAISHIYA_08_Sec.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:ef4c4f6df85fc00c7f353ad0d9815e5e596cc978ed6391303fa162c98fd3dc7a",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Sec.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_Tay_Ban_Nha.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:2042c4f537579637fac2008dc2edea1d2911a078725599c3497b247b4b989845",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Tay_Ban_Nha.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_Thuy_Dien.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:fbeeebb89fb249282bcdfcaa92897f17dd7e5433de175e7683288c3fdfa7b340",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Thuy_Dien.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_Viet_Nam.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:b37276933ddf7f72377902ebc719cac0d9eefe843a76f5723c5d38a781aa6a19",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Viet_Nam.mp3"
+    },
+    {
+      "name": "BAISHIYA_08_Y.mp3",
+      "bytes": 10720748,
+      "digest": "sha256:13d79439d5ea45458b9560dde38012b68be7d445e45e4f66548ec88123a0f7d2",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_08_Y.mp3"
+    },
+    {
+      "name": "BAISHIYA_VIDEO_08_TAI_LIEU_22m20s.zip",
+      "bytes": 141060,
+      "digest": "sha256:1d49eade5314221f470a1c0a0e84e5d22c0df181f9d670eea9920481f4811254",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/BAISHIYA_VIDEO_08_TAI_LIEU_22m20s.zip"
+    },
+    {
+      "name": "NARRATION_STYLE_LOCKED.json",
+      "bytes": 1245,
+      "digest": "sha256:3a95d19fe15335ba53dbf743ca5d9ca3bbbe0572b1acc4b9465901d0d2cd3297",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/NARRATION_STYLE_LOCKED.json"
+    },
+    {
+      "name": "README.md",
+      "bytes": 4272,
+      "digest": "sha256:ae5b118003b9a51f91f180c65c3f57064d27c8e488ad8153a7dd0425c5882e54",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/README.md"
+    },
+    {
+      "name": "VOICE_FILE_NAMING.json",
+      "bytes": 2821,
+      "digest": "sha256:86a72485007e41d19e4f828ccd7d4e31657a3d035640eda8500abfbd80cd2060",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/VOICE_FILE_NAMING.json"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED.json",
+      "bytes": 15633,
+      "digest": "sha256:1c11126b44fcb3a6f9fa6d8ed59fd85869ddd0e86b236cf0ced55cf7c67f5045",
+      "url": "https://github.com/seotro95/seotro/releases/download/baishiya-video-08-22m20s/VOICE_PROFILES_LOCKED.json"
+    }
+  ]
+}

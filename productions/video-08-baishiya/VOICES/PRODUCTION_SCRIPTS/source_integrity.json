@@ -1,0 +1,14 @@
+{
+  "online_backend.py": {
+    "url": "https://raw.githubusercontent.com/seotro95/seotro/4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043/melo-viet-local/online_backend.py",
+    "sha256": "bd21a00f93124a4dcc27850c42817bd4823445d4d44882d26cd1503fe2ab568b"
+  },
+  "documents.py": {
+    "url": "https://raw.githubusercontent.com/seotro95/seotro/4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043/melo-viet-local/documents.py",
+    "sha256": "ab3f0263f85f7fab3a8e8fa04ff4bc67b3edc5a89a8951f37c180981859cacee"
+  },
+  "timing.py": {
+    "url": "https://raw.githubusercontent.com/seotro95/seotro/4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043/melo-viet-local/timing.py",
+    "sha256": "02ac3b4c649d5577a183a47cbc3409c6ab559ebb72df9919aa347071e82b9376"
+  }
+}

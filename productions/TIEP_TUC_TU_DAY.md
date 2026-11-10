@@ -1,10 +1,10 @@
-# Đang hoàn tất chủ đề 8 — Baishiya,22:20
+# Tiếp tục từ đây — chủ đề 8 đã có tài liệu và 17 voice
 
-Tài liệu đã tải được:3.162 từ Anh /134 mốc 10 giây,120 prompt /12 TXT,14 mốc REUSE. Đã bàn giao16 voice phụ,đúng22:20 và kiểm digest máy chủ. [Tải16 voice phụ](https://github.com/seotro95/seotro/releases/tag/baishiya-video-08-22m20s).
+Baishiya, 22:20: 3.162 từ Anh, 134 mốc 10 giây, 120 prompt mới trong 12 TXT và 14 mốc REUSE. [Tải voice](video-08-baishiya/VOICES/DOWNLOAD_LINKS.md) · [Quy trình](video-08-baishiya/PRODUCTION_STEPS_APPLIED.md).
 
-BảnAnh đang khôi phục ở Actions run42832242206,job129885023802,giữen-US-AndrewNeural và toàn bộ3.162từ. GiọngNhật/Hàn đã sửa thuật ngữ và tạo lại thành công trong run đó. Chỉ hoàn tất17 voice khi bảnAnh quaQA và ZIP17 được phát hành. Workflow publisher sẽ tự dùng13 bản nam không đổi,hai bản Nhật/Hàn đã sửa,AnhđãkhôiphụcvàH’Môngnữ3đãkiểmtra. Không cần tạo lại16 bản đạt.
+Giữ 16 giọng nam và H’Mông Trắng nữ3 đúng ID, mẫu và style đã khóa; tên tệp theo quốc gia. Mỗi voice 22:20 đã được giải mã và kiểm tra kỹ thuật. Biên tập, nghe và phương ngữ vẫn cần người bản ngữ rà soát độc lập. Không có hình trẻ em.
 
-Branch dựng:codex/baishiya-voice-build-20261110. Tài liệu/voice/hồsơ trongproductions/video-08-baishiya. Đọc trạng thái chuỗi trước khi làm tiếp. Chưa có clip8, chưa dựng video8. Giữkếtquả1–4,6;tập5,7vẫnqueued. Không tự bắt đầu9.
+Video8 chờ clip của chính tập này. Khi nhận clip, chỉ dùng voice Anh, loại tiếng nguồn; hook12shot trong30giây nằm trong22:20, không cộng intro. Giữ kết quả tập1–4 và6. Tập5 và7 vẫn queued; không tự bắt đầu tập9. Đọc trạng thái và cấu hình trước khi làm tiếp. Mặc định chuỗi vẫn20phút;22:20 là ngoại lệ riêng tập8.
 
 ---
 
@@ -14,7 +14,7 @@ Branch dựng:codex/baishiya-voice-build-20261110. Tài liệu/voice/hồsơ tro
 
 Video1280×720/24fps, chỉ voiceAnh đã khóa, không tiếngclip/nhạc/SFX. 12shot mở đầu30s, tổng21:00,224shot và9dissolve; đã kiểm toàn bộ30240frame,15điểm đồng bộ và44khung hình cuối.104clip được đối chiếu, chọn63clip cùng30đồ họa. Chỉ người trưởng thành trong cảnh đã chọn; không dựng chủ mẫu trẻ. Sáu ô thiếu clip được xử lý bằng bản đồ và cảnh phù hợp.
 
-17 voice riêng giữ nguyên ID/style/tên quốc gia; bản dịch/nghe và phương ngữH’MôngTrắng còn cần rà soát bản ngữ. Không tạo lại tập1–4 hoặc tập6. Tập5 vẫn queued vì người dùng chọn6 trước; chưa bắt đầu7, không tự làm tập khác.
+17voice riêng giữ nguyên ID/style/tên quốc gia; bản dịch/nghe và phương ngữH’MôngTrắng còn cần rà soát bản ngữ. Không tạo lại tập1–4 hoặc tập6. Tập5 vẫn queued vì người dùng chọn6 trước; chưa bắt đầu7, không tự làm tập khác.
 
 Dựng tại phiên, giữ mọi clip gốc. Chỉ công bố bản dựng và tài liệu; không kèm video nguồn trong project hay nhánh công khai. Việc tạo nhánh công khai104clip gốc đã bị duyệt tự động từ chối, nên không tiếp tục cách đó. Các file trung gian dựng được xóa sau khi ghép để tiết kiệm dung lượng; có thể tái tạo từ nguồn cục bộ và project. Không xóa clip người dùng đã gửi.
 
@@ -43,7 +43,7 @@ Repository **seotro95/seotro**, nhánh **codex/beringia-video-01**.
 - Chủ đề1—Beringia: đã bàn giao tài liệu,17 voice và video tiếng Anh hoàn chỉnh20:00. [Video](https://github.com/seotro95/seotro/releases/download/beringia-video-01-final-20min/BERINGIA_01_EN_FINAL_20m_720p.mp4).
 - Chủ đề2—White Sands: đã bàn giao kịch bản3.320 từ,100 prompt/10 TXT,32 ô dùng lại,132 ô timeline và17 voice riêng22:00. [Tài liệu](video-02-white-sands/README.md). Đã bàn giao [video tiếng Anh hoàn chỉnh22:00](https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/WHITE_SANDS_02_EN_FINAL_22m_720p.mp4), [project dựng](https://github.com/seotro95/seotro/releases/download/white-sands-video-02-final-22min/WHITE_SANDS_02_EDIT_PROJECT.zip),5 tiêu đề và5 promptthumbnail. Chỉ voice Anh, đã bỏ mọi tiếng clip; mở đầu8shot/30giây.
 - Chủ đề3—Mal’ta: đã bàn giao kịch bản3.087 từ,100 prompt/10 TXT,20 ô dùng lại,120 ô timeline và17 voice có nhấn nhá, mỗi bản20:00. [Tài liệu](video-03-malta/README.md) · [17 voice](video-03-malta/VOICES/README.md). Đã bàn giao [video tiếng Anh có nhấn nhá hoàn chỉnh20:00](https://github.com/seotro95/seotro/releases/download/malta-video-03-final-20min/MALTA_03_EN_FINAL_20m_720p.mp4), [project dựng](https://github.com/seotro95/seotro/releases/download/malta-video-03-final-20min/MALTA_03_EDIT_PROJECT.zip),5tiêu đề và5promptthumbnail. Chỉ voice Anh, bỏ mọi tiếng clip; mở đầu8shot/30giây.
-- Chủ đề4—Yana: đã bàn giao tài liệu23phút và17 voice riêng có nhấn nhá, mỗi bản23:00; [linktải](video-04-yana/VOICES/DOWNLOAD_LINKS.md).120 prompt /12 TXT,18ôREUSE,138mốc10s. Không có hình trẻ em. Đã bàn giao [videoAnh23:00](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4), mở đầu12shot/30s, chỉ voiceAnh và bỏmọitiếngclip. Chủ đề tiếp theo5—UpwardSunRiver, chưa bắt đầu.
+- Chủ đề4—Yana: đã bàn giao tài liệu23phút và17voice riêng có nhấn nhá, mỗi bản23:00; [linktải](video-04-yana/VOICES/DOWNLOAD_LINKS.md).120prompt/12TXT,18ôREUSE,138mốc10s. Không có hình trẻ em. Đã bàn giao [videoAnh23:00](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4), mở đầu12shot/30s, chỉ voiceAnh và bỏmọitiếngclip. Chủ đề tiếp theo5—UpwardSunRiver, chưa bắt đầu.
 
 ## Đọc trước khi tiếp tục
 
@@ -77,7 +77,7 @@ Nếu người dùng muốn dựng tập2 hoặc3 trước, dùng timeline/voice
 
 
 
-## Chủ đề4 đã bàn giao tài liệu và17 voice
+## Chủ đề4 đã bàn giao tài liệu và17voice
 
 Đọc [tài liệu Yana](video-04-yana/README.md).23phút là ngoại lệ riêng tập4, giữ mặc định20phút của chuỗi. Chỉ tạo hình người trưởng thành rõ25–60tuổi; cấm cả bóng, phản chiếu, người nền, ảnh và màn hình có trẻ em. Không tái hiện chủ mẫu răng sữa. Bản Anh138ô10s; bản dịch12chương: sáu chương120s rồi sáu chương110s. Mọi voice phải giải mã đúng66.240.000mẫu tại48kHz. Giữ17ID,nhấn nhá và tên quốc gia đã khóa. Video tập4 đã xong23:00,1280×720/24fps,12shot mở đầu30s; xem EDITING/README.md.
 

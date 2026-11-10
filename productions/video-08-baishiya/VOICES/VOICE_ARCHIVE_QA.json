@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "archive": "BAISHIYA_08_17_VOICES_TEN_QUOC_GIA.zip",
+  "bytes": 183210434,
+  "sha256": "70017bea0e02aa9919f4faa2cb4c25e31d2af6dd01a2ff9f54eb0942db4e55c8",
+  "public_server_digest_matches": true,
+  "zip_crc_all_entries_passed": true,
+  "mp3_count": 17,
+  "all17_members_match_individual_voice_manifest": true,
+  "verified_filenames": [
+    "BAISHIYA_08_My_Tieng_Anh.mp3",
+    "BAISHIYA_08_Viet_Nam.mp3",
+    "BAISHIYA_08_Tay_Ban_Nha.mp3",
+    "BAISHIYA_08_Phap.mp3",
+    "BAISHIYA_08_Nhat_Ban.mp3",
+    "BAISHIYA_08_Han_Quoc.mp3",
+    "BAISHIYA_08_Duc.mp3",
+    "BAISHIYA_08_Y.mp3",
+    "BAISHIYA_08_Bo_Dao_Nha.mp3",
+    "BAISHIYA_08_Ha_Lan.mp3",
+    "BAISHIYA_08_Ba_Lan.mp3",
+    "BAISHIYA_08_Thuy_Dien.mp3",
+    "BAISHIYA_08_Dan_Mach.mp3",
+    "BAISHIYA_08_Phan_Lan.mp3",
+    "BAISHIYA_08_Na_Uy.mp3",
+    "BAISHIYA_08_Sec.mp3",
+    "BAISHIYA_08_Hmong_Trang_Nu.mp3"
+  ],
+  "derived_download_cache_deleted_after_verification": true
+}

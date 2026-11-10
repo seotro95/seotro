@@ -1,0 +1,137 @@
+{
+  "status": "passed",
+  "voices": 17,
+  "english_words": 3162,
+  "english_cues": 134,
+  "translated_chapter_seconds": [
+    120,
+    120,
+    110,
+    110,
+    110,
+    110,
+    110,
+    110,
+    110,
+    110,
+    110,
+    110
+  ],
+  "seconds": 1340,
+  "source_integrity_unchanged": true,
+  "profiles_preserved": true,
+  "reviewed_locales": [
+    {
+      "locale": "vi-VN",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "es-ES",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "fr-FR",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "ja-JP",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "ko-KR",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "de-DE",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "it-IT",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "pt-PT",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "nl-NL",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "pl-PL",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "sv-SE",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "da-DK",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "fi-FI",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "nb-NO",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "cs-CZ",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    },
+    {
+      "locale": "mww",
+      "chapters": 12,
+      "numerical_evidence_values_preserved": true,
+      "assistant_review_completed": true,
+      "native_editorial_listening_review_pending": true
+    }
+  ]
+}
