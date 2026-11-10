@@ -279,9 +279,11 @@
       "dialect_independently_verified": false
     }
   ],
-  "continuity_note": "Reuse the exact engine, voice ID, locale, reference hash and settings. Preserve the supplied recordings as timbre references; third-party provider updates can change a voice despite a stable ID.",
+  "continuity_note": "Reuse the exact engine, voice ID, locale, reference hash and settings. Preserve the supplied recordings as timbre references; third-party provider updates can change a voice despite a stable ID. User later requested expressive narration: preserve voice identity and apply the separately saved narration-style profile; original neutral rates are baseline settings.",
   "timing_note": "Recalculate timing for every new script. max_used_post_tempo describes the topic-1 recording and must not be reused as a fixed global speed.",
   "hmong_tool": "Voice-Studio-Hmong-1.6.6",
   "hmong_preset": "hmong-female-3",
-  "native_language_review_pending": true
+  "native_language_review_pending": true,
+  "active_narration_style_id": "science-documentary-expressive-v1",
+  "narration_style_profile": "productions/series/NARRATION_STYLE_LOCKED.json"
 }

@@ -40,7 +40,10 @@
       "when": "After the user supplies the generated clips."
     },
     "deduplicate_repeated_visual_contexts": true,
-    "prompt_files_follow_unique_prompt_count": true
+    "prompt_files_follow_unique_prompt_count": true,
+    "expressive_narration": true,
+    "narration_style_id": "science-documentary-expressive-v1",
+    "narration_style_profile": "productions/series/NARRATION_STYLE_LOCKED.json"
   },
   "reference_video": {
     "release_url": "https://github.com/seotro95/seotro/releases/tag/video",
@@ -104,7 +107,7 @@
     {
       "id": 3,
       "title": "Đứa trẻ Mal'ta và mối liên hệ bất ngờ giữa Siberia với tổ tiên người châu Mỹ.",
-      "status": "documents_delivered_voice_not_started"
+      "status": "documents_delivered_expressive_voice_in_progress"
     },
     {
       "id": 4,
@@ -666,9 +669,14 @@
     "documents_delivered": true,
     "documents_zip_sha256": "e8406c627595cda691bf1859a57739da0d996639f0fcc67fb3cf48676a9ef6ec",
     "voice_count_expected": 17,
-    "voice_status": "documents_delivered_voice_not_started",
+    "voice_status": "expressive_preview_then_full_synthesis",
     "voice_profile_set_id": "science-prehistory-17-v1",
     "video_rendered": false,
-    "main_video_audio_language": "en-US"
+    "main_video_audio_language": "en-US",
+    "voice_workflow_run_id": 42727239753,
+    "voice_workflow_url": "https://github.com/seotro95/seotro/actions/runs/42727239753",
+    "voice_build_branch": "codex/malta-voice-build-20261110",
+    "narration_style_id": "science-documentary-expressive-v1",
+    "voice_translation_status": "All17 scripts ready; Vietnamese and Hmong rewritten by assistant, independent native/dialect review pending"
   }
 }

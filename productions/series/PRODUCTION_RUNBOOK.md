@@ -43,3 +43,8 @@ Tạo thư mục riêng cho mỗi tập; gợi ý productions/video-02-white-san
 Cập nhật trạng thái chủ đề vừa làm và next_topic_id sau khi bàn giao. Giữ trạng thái rà soát bản dịch/phương ngữ tách biệt với việc đã tạo tệp. Không ghi nhận video thành phẩm nếu chỉ mới có prompt và audio.
 
 Lưu lại đường dẫn GitHub để người dùng có thể tiếp tục ở cuộc trò chuyện mới, kể cả khi môi trường chạy cũ không còn.
+
+
+## Yêu cầu bổ sung từ chủ đề 3: voice đọc có nhấn nhá
+
+Áp dụng science-documentary-expressive-v1 trong NARRATION_STYLE_LOCKED.json. Giữ nguyên 17 mã giọng và mẫu Hmong nữ 3; thêm nhịp nghỉ, tốc độ nhẹ theo cụm/câu và nhấn vừa phải. Không đổi cao độ để giả một giọng mới. Melo có adapter prosody quanh backend gốc và mốc từ khi dịch vụ trả về; Hmong dùng tốc độ/âm lượng/nghỉ theo cụm vì không có mốc từng từ. Không nói đã có mô hình cảm xúc hoặc kiểm định tự nhiên khi chưa nghe rà soát. Đo lại đủ thời lượng sau chỉnh nhịp, không cắt lời. Đây là cập nhật phong cách theo yêu cầu mới, được ưu tiên hơn tốc độ trung tính mặc định trước đó.
