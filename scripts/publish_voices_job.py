@@ -6,6 +6,7 @@ profiles=json.load(open('input/BASELINE_VOICE_PROFILES.json'));expected={x['loca
 reports={}
 for p in Path('artifacts').rglob('render_report.json'):
  j=json.loads(p.read_text());locale=j['locale'];assert locale not in reports
+ assert j['max_cue_padding_seconds']<.1
  assert j['audio_seconds']==1215 and j['duration_verified'] and j['mp3_decoded_duration']['verified']
  assert j['mp3_decoded_duration']['sample_frames']==58320000 and j['voice_id']==expected[locale]['voice_id'] and j['gender']=='Male'
  assert j['narration_style_id']=='science-documentary-expressive-v1' and j['voice_identity_preserved'] and not j['pitch_shift_applied']
