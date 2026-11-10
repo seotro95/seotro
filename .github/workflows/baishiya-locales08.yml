@@ -1,0 +1,90 @@
+name: Baishiya08 - fifteen localized male voices and17voice delivery
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/baishiya-voice-build-20261110]
+    paths: [.github/workflows/baishiya-locales08.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  voices:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        locale: [vi-VN, es-ES, fr-FR, ja-JP, ko-KR, de-DE, it-IT, pt-PT, nl-NL, pl-PL, sv-SE, da-DK, fi-FI, nb-NO, cs-CZ]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts
+            input
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install edge-tts==7.3.1
+      - name: Restore checkpoint on failed-locale retry
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ github.run_id }}
+          name: bs08-checkpoint-${{ matrix.locale }}
+          path: build/voice/audio/${{ matrix.locale }}
+      - name: Render localized expressive narration with locked voiceID
+        env:
+          TTS_CHUNK_LIMIT: '480'
+          TTS_LOCALE_WORKERS: '2'
+        run: python -u scripts/job_init.py ${{ matrix.locale }} full
+      - name: Preserve recoverable partial work
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bs08-checkpoint-${{ matrix.locale }}
+          overwrite: true
+          path: |
+            build/voice/audio/${{ matrix.locale }}/raw-*.wav
+            build/voice/audio/${{ matrix.locale }}/raw-*.json
+            build/voice/audio/${{ matrix.locale }}/raw-*.jsonl
+          if-no-files-found: ignore
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bs08-voice-${{ matrix.locale }}
+          path: |
+            build/voice/audio/${{ matrix.locale }}/BAISHIYA_08_*.mp3
+            build/voice/audio/${{ matrix.locale }}/render_report.json
+            build/voice/audio/${{ matrix.locale }}/subtitles.srt
+          if-no-files-found: error
+          retention-days: 7
+  publish:
+    needs: voices
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts
+            input
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: bs08-voice-*
+          path: artifacts
+      - name: Reuse verified English from the dedicated English run
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: '42826768097'
+          name: bs08-voice-en-US
+          path: artifacts/bs08-voice-en-US
+      - name: Verify all17,add native Hmong,publish separate country files
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u scripts/publish_voices_job.py
