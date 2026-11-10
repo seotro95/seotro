@@ -1,0 +1,30 @@
+name: Kostenki19 audit all122 English provider word sequences
+on:
+  push:
+    branches: [codex/kostenki-voice-build-20261111]
+    paths: [.github/workflows/kostenki-audit19.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts
+            input
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: '42877199490'
+          name: k19-checkpoint-en-US
+          path: checkpoint
+      - run: python scripts/audit_english19.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: k19-English-word-audit
+          path: ENGLISH_WORD_AUDIT.json
+          if-no-files-found: error
