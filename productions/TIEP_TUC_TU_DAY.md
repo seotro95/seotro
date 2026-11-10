@@ -1,8 +1,24 @@
+# Chủ đề 6 Denisova đã hoàn tất video và 17 voice
+
+[Video Anh21:00](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_EN_FINAL_21m_720p.mp4) · [Mở đầu30s](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_OPENING_30s.mp4) · [Dự án](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail TXT](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_TITLES_THUMBNAILS.txt) · [ZIP dự phòng](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_TITLES_THUMBNAILS.zip).
+
+Video1280×720/24fps, chỉ voiceAnh đã khóa, không tiếngclip/nhạc/SFX. 12shot mở đầu30s, tổng21:00,224shot và9dissolve; đã kiểm toàn bộ30240frame,15điểm đồng bộ và44khung hình cuối.104clip được đối chiếu, chọn63clip cùng30đồ họa. Chỉ người trưởng thành trong cảnh đã chọn; không dựng chủ mẫu trẻ. Sáu ô thiếu clip được xử lý bằng bản đồ và cảnh phù hợp.
+
+17voice riêng giữ nguyên ID/style/tên quốc gia; bản dịch/nghe và phương ngữH’MôngTrắng còn cần rà soát bản ngữ. Không tạo lại tập1–4 hoặc tập6. Tập5 vẫn queued vì người dùng chọn6 trước; chưa bắt đầu7, không tự làm tập khác.
+
+Dựng tại phiên, giữ mọi clip gốc. Chỉ công bố bản dựng và tài liệu; không kèm video nguồn trong project hay nhánh công khai. Việc tạo nhánh công khai104clip gốc đã bị duyệt tự động từ chối, nên không tiếp tục cách đó. Các file trung gian dựng được xóa sau khi ghép để tiết kiệm dung lượng; có thể tái tạo từ nguồn cục bộ và project. Không xóa clip người dùng đã gửi.
+
+Đọc [hồ sơ dựng](video-06-denisova/EDITING/README.md), trạng thái chuỗi và cấu hình trước khi làm tiếp.
+
+---
+
+Nhật ký bàn giao trước đó; trạng thái hiện tại nằm ở đầu trang.
+
 # Tiếp tục từ đây — chủ đề 6 đã bàn giao tài liệu và 17 voice
 
 Denisova: 21:00, 3425 từ Anh, 126 ô 10 giây, 110 prompt mới/11 TXT và 16 ô REUSE. [Tải voice](video-06-denisova/VOICES/DOWNLOAD_LINKS.md) · [Quy trình](video-06-denisova/PRODUCTION_STEPS_APPLIED.md).
 
-Giữ 16 giọng nam và H’Mông trắng nữ 3 đúng ID/mẫu/style đã khóa, tên file theo quốc gia. Không có hình trẻ em. Voice đã qua QA kỹ thuật; bản dịch/nghe/phương ngữ còn cần rà soát bản ngữ độc lập. Video tập 6 chờ clip của chính tập này; khi có, chỉ dùng voice Anh, bỏ âm thanh clip và mở đầu 12 shot/30 giây trong tổng 21 phút.
+Giữ 16 giọng nam và H’Mông trắng nữ 3 đúng ID/mẫu/style đã khóa, tên file theo quốc gia. Không có hình trẻ em. Voice đã qua QA kỹ thuật; bản dịch/nghe/phương ngữ còn cần rà soát bản ngữ độc lập. Video tập 6 đã dựng xong theo voice Anh, bỏ âm thanh clip và mở đầu 12 shot/30 giây trong tổng 21 phút.
 
 Tập 1–4 đã bàn giao video, không tạo lại. Tập 5 vẫn queued vì người dùng chọn làm tập 6 trước. Chưa bắt đầu tập 7; không tự bắt đầu tập khác. Đọc SERIES_STATE và PRODUCTION_DEFAULTS trước khi làm tiếp. Mặc định chuỗi vẫn 20 phút; 21 phút là ngoại lệ riêng tập 6.
 
@@ -64,4 +80,5 @@ Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ 
 ## Bàn giao video chủ đề4
 
 Đã dựng và xuất bản23:00, chỉ voiceAnh gốc có nhấn nhá.133upload/115clipkhácnhau/18bảntrùng; chọn cảnh người trưởng thành, bỏ mọi tiếngclip và cảnh không phù hợp.12shot trong30giây đầu; các chương theo ranh120/110s. [Video](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Tập5 vẫn chưa bắt đầu.
+
 

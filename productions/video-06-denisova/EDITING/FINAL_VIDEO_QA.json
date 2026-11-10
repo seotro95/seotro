@@ -1,0 +1,138 @@
+{
+  "status": "passed",
+  "final_file": "DENISOVA_06_EN_FINAL_21m_720p.mp4",
+  "video_duration_seconds": 1260.0,
+  "container_duration_seconds": 1260.0,
+  "audio_duration_seconds": 1260.0,
+  "video_frames": 30240,
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "audio_stream_count": 1,
+  "audio_language": "English",
+  "original_clip_audio_included": false,
+  "music_added": false,
+  "audio_input": "Original expressive DENISOVA_06_My_Tieng_Anh.mp3, unchanged pitch and timing; loudness processing only",
+  "narration_style_id": "science-documentary-expressive-v1",
+  "reference_voice_duration_seconds": 1260.0,
+  "reference_voice_sha256": "d733faf7cb437ff9db733a7f5f9f527aa177a3e688abdd270f313af2ab3605ad",
+  "decoded_final_audio_seconds": 1260.01075,
+  "waveform_alignment_checks": [
+    {
+      "reference_seconds": 5,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.998962
+    },
+    {
+      "reference_seconds": 115,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.998038
+    },
+    {
+      "reference_seconds": 225,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.993465
+    },
+    {
+      "reference_seconds": 335,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999122
+    },
+    {
+      "reference_seconds": 445,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999995
+    },
+    {
+      "reference_seconds": 555,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999997
+    },
+    {
+      "reference_seconds": 665,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999993
+    },
+    {
+      "reference_seconds": 765,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.994651
+    },
+    {
+      "reference_seconds": 865,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999982
+    },
+    {
+      "reference_seconds": 965,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.999093
+    },
+    {
+      "reference_seconds": 1065,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.988974
+    },
+    {
+      "reference_seconds": 1165,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.995563
+    },
+    {
+      "reference_seconds": 1225,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.997676
+    },
+    {
+      "reference_seconds": 1245,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.998146
+    },
+    {
+      "reference_seconds": 1255,
+      "lag_seconds": 0.0,
+      "waveform_correlation": 0.989818
+    }
+  ],
+  "measured_loudness_lufs": -16.06,
+  "measured_true_peak_dbtp": -1.25,
+  "measured_loudness_range_lu": 2.5,
+  "chapter_count": 12,
+  "subtitle_cues": 126,
+  "subtitle_mode": "Embedded optional English subtitles and separate SRT",
+  "timeline_cues": 126,
+  "planned_shots": 224,
+  "opening_30s_shots": 12,
+  "short_dissolves": 9,
+  "source_uploads": 104,
+  "downloaded_uploads": 104,
+  "unique_downloaded_clips": 104,
+  "unique_source_clips_used": 63,
+  "science_graphic_count": 30,
+  "exact_duplicate_files_removed": 0,
+  "source_transfer_limits": [],
+  "no_children_in_final_selected_scenes": true,
+  "manual_visual_scope": "Sampling and scene selection, not continuous viewing.",
+  "source_note": "All104 uploads are10seconds,720p24fps;33contain audio which is excluded. Six missing prompt contexts covered by verified maps and inspected alternatives.",
+  "science_graphics": "Natural Earth1:110m modern geographic orientation; schematic genetics and evidence cards. No measured genome data, exact migration routes, reconstructed faces or universal ancestry proportions.",
+  "full_decode_exit_code": 0,
+  "black_gaps_detected": [],
+  "decode_errors_detected": [],
+  "visual_review": "All104 source clips sampled at0.8,4.9,9.1seconds; selected scenes show mature adults or non-human graphics. Final opening, graphics, chapters and ending sampled separately. No claim of continuous manual viewing.",
+  "sha256": "9f50dca12541fc54c6b0b00a36db53ec7b39830cbc7c694733b32cb4d3a1d68f",
+  "bytes": 193553665,
+  "voices": "Existing separate-language voice assets are retained in release yana-video-04-21min. Only the existing English reference is included in this video.",
+  "final_visual_review": {
+    "status": "passed",
+    "final_contact_sheets_reviewed": 3,
+    "final_sampled_frames": 44,
+    "source_clips_sampled": 104,
+    "source_sampled_frames": 312,
+    "opening_shots": 12,
+    "findings": "Opening headlines readable; maps and scientific labels correspond to narration; mature adults in selected reconstructions; no children observed in sampled selected visuals; transitions and ending checked.",
+    "scope": "Sampled visual review, not continuous manual viewing."
+  },
+  "raw_source_clips_in_delivery": false
+}

@@ -20,4 +20,10 @@ Tên clipDE06_001.mp4–DE06_110.mp4 khác sốcảnhtimeline001–126. Mọi cl
 17voice riêng đã giữ đúng mã giọng và nhấn nhá đã lưu;16nam vàH’MôngTrắngnữ3. Mục tiêu mỗi bản21:00/60.480.000mẫu tại48kHz; khớp chương và tổng, không khớp từng từ giữa các ngôn ngữ. Video chính chỉ dùngAnh.21phút là ngoại lệ riêng tập6; không đổi mặc định20phút của chuỗi. Tập5 vẫn xếp hàng, tập7 chưa bắt đầu.
 
 
-Đã hoàn tất 17 voice, mỗi bản đã kiểm tra 21:00 sau giải mã. [Tải từng voice](VOICES/DOWNLOAD_LINKS.md) · [Quy trình đã lưu](PRODUCTION_STEPS_APPLIED.md) · [QA âm thanh](VOICES/VOICE_RELEASE_QA.json). ZIP tài liệu bàn giao trước voice được giữ bất biến. Bản dịch/nghe và phương ngữ H’Mông Trắng còn cần người bản ngữ rà soát độc lập. Chưa dựng video tập 6.
+Đã hoàn tất 17 voice, mỗi bản đã kiểm tra 21:00 sau giải mã. [Tải từng voice](VOICES/DOWNLOAD_LINKS.md) · [Quy trình đã lưu](PRODUCTION_STEPS_APPLIED.md) · [QA âm thanh](VOICES/VOICE_RELEASE_QA.json). ZIP tài liệu bàn giao trước voice được giữ bất biến. Bản dịch/nghe và phương ngữ H’Mông Trắng còn cần người bản ngữ rà soát độc lập. Đã dựng xong video tập 6; xem liên kết dưới đây.
+
+
+
+## Video hoàn chỉnh
+
+[Tải video21:00](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_EN_FINAL_21m_720p.mp4) · [Mở đầu30s](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_OPENING_30s.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_EDIT_PROJECT.zip) · [5tiêu đề và5promptthumbnail TXT](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_TITLES_THUMBNAILS.txt) · [ZIP dự phòng cho TXT](https://github.com/seotro95/seotro/releases/download/denisova-video-06-final-21min/DENISOVA_06_TITLES_THUMBNAILS.zip). Chỉ voiceAnh gốc, bỏmọitiếngclip; mở đầu12shot/30s trong21phút. [Hồ sơ và QA](EDITING/README.md). Clip gốc được giữ tại phiên, không kèm trong bản tải.

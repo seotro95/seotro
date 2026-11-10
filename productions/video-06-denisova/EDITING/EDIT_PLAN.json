@@ -1,0 +1,2861 @@
+[
+  {
+    "cue": 1,
+    "start": 0,
+    "end": 10,
+    "voice_en": "No face. No complete skeleton. Just a tiny piece of bone from a Siberian cave, carrying a question nobody could answer simply by looking at it.",
+    "chapter": 1,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_001",
+        "duration": 2,
+        "source_in": 0.2,
+        "crop": 1.14
+      },
+      {
+        "label": "DE06_004",
+        "duration": 2,
+        "source_in": 0.5,
+        "crop": 1
+      },
+      {
+        "label": "DE06_010",
+        "duration": 2.5,
+        "source_in": 5,
+        "crop": 1
+      },
+      {
+        "label": "DE06_001",
+        "duration": 3.5,
+        "source_in": 0.6,
+        "crop": 1.2
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_001.png",
+    "lower_hold": 8.2
+  },
+  {
+    "cue": 2,
+    "start": 10,
+    "end": 20,
+    "voice_en": "In two thousand ten, DNA from that fragment helped reveal an ancient human lineage that researchers had not recognised from the familiar fossil record alone.",
+    "chapter": 1,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_002",
+        "duration": 2.25,
+        "source_in": 0.5,
+        "crop": 1
+      },
+      {
+        "label": "DE06_026",
+        "duration": 2.75,
+        "source_in": 0.6,
+        "crop": 1
+      },
+      {
+        "label": "DE06_090",
+        "duration": 2.5,
+        "source_in": 5,
+        "crop": 1
+      },
+      {
+        "label": "DE06_044",
+        "duration": 2.5,
+        "source_in": 4,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_002.png",
+    "lower_hold": 7.2
+  },
+  {
+    "cue": 3,
+    "start": 20,
+    "end": 30,
+    "voice_en": "The name was Denisovan. But a name was only the beginning. How could something so small change a story stretching across much of ancient Asia?",
+    "chapter": 1,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_020",
+        "duration": 2,
+        "source_in": 5,
+        "crop": 1
+      },
+      {
+        "label": "DE06_001",
+        "duration": 2,
+        "source_in": 0.3,
+        "crop": 1.12
+      },
+      {
+        "label": "DE06_110",
+        "duration": 2,
+        "source_in": 6,
+        "crop": 1
+      },
+      {
+        "label": "@asia",
+        "duration": 4,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_003.png",
+    "lower_hold": 5.5
+  },
+  {
+    "cue": 4,
+    "start": 30,
+    "end": 40,
+    "voice_en": "And how do we tell the difference between discovering a real relationship and building an impressive picture around information that a damaged sample never contained?",
+    "chapter": 1,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_004",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_002",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 5,
+    "start": 40,
+    "end": 50,
+    "voice_en": "Our first clue is a cave in the Altai Mountains. Our last will reach beyond that cave, into other fossils and traces surviving in living people.",
+    "chapter": 1,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@asia",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_010",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 6,
+    "start": 50,
+    "end": 60,
+    "voice_en": "Between them lies a detective story with several kinds of evidence: archaeological context, inherited DNA, ancient proteins, and comparisons that can overturn earlier expectations about people.",
+    "chapter": 1,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@methods",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 7,
+    "start": 60,
+    "end": 70,
+    "voice_en": "There is an important rule before we begin. A laboratory result can reveal something remarkable without restoring a person's face, language, memories, or complete daily life.",
+    "chapter": 1,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@identity",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 8,
+    "start": 70,
+    "end": 80,
+    "voice_en": "The fragment that opened this investigation belonged to a young individual. We will examine objects and evidence, rather than inventing a portrait of that person.",
+    "chapter": 1,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_014",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_008.png"
+  },
+  {
+    "cue": 9,
+    "start": 80,
+    "end": 90,
+    "voice_en": "Nor should the adults in an illustrative camp be mistaken for identified Denisovans. Their work helps us imagine practical questions, not recognise particular ancient individuals.",
+    "chapter": 1,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_076",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_009.png"
+  },
+  {
+    "cue": 10,
+    "start": 90,
+    "end": 100,
+    "voice_en": "So keep the small fragment in view. Each new test will answer one question, expose another, and make the apparently simple word Denisovan more interesting.",
+    "chapter": 1,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_001",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_014",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 11,
+    "start": 100,
+    "end": 110,
+    "voice_en": "To understand why the result mattered, we must first enter the place where the evidence survived, and ask what a cave can actually preserve about people.",
+    "chapter": 1,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@altai",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_020",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 12,
+    "start": 110,
+    "end": 120,
+    "voice_en": "Denisova Cave lies in southern Siberia, in the Altai region. This is a different setting from the far northern Yana landscape explored earlier in our series.",
+    "chapter": 2,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "label": "@altai",
+        "duration": 5.25,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_010",
+        "duration": 5.25,
+        "source_in": 4.75,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 13,
+    "start": 120,
+    "end": 130,
+    "voice_en": "A cave is not a sealed room waiting unchanged through time. Sediment accumulates, animals enter, people return, and objects can move after their original deposition.",
+    "chapter": 2,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_069",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_019",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 14,
+    "start": 130,
+    "end": 140,
+    "voice_en": "Archaeologists therefore record where a find sits within layers and surrounding material. The location is evidence, rather than an inconvenient detail attached to an attractive object.",
+    "chapter": 2,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_013",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_069",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 15,
+    "start": 140,
+    "end": 150,
+    "voice_en": "The famous finger bone fragment was recovered during excavations in two thousand eight. That modern discovery date must remain separate from the much older life it represents.",
+    "chapter": 2,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_020",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_015.png"
+  },
+  {
+    "cue": 16,
+    "start": 150,
+    "end": 160,
+    "voice_en": "Dating work at Denisova combines different observations and models. Researchers investigate sediment ages, dated materials, and relationships between deposits instead of assigning every find one convenient birthday.",
+    "chapter": 2,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@time",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 17,
+    "start": 160,
+    "end": 170,
+    "voice_en": "Studies published in two thousand nineteen revised the cave's chronology and fossil age estimates. Different layers and different specimens belong to different intervals within a long record.",
+    "chapter": 2,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@time",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_019",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 18,
+    "start": 170,
+    "end": 180,
+    "voice_en": "An age interval expresses uncertainty. It should not become an exact meeting date simply because a film can put two people together beside one fire.",
+    "chapter": 2,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@time",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_069",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 19,
+    "start": 180,
+    "end": 190,
+    "voice_en": "The cave also contains tools and other traces of activity. Their presence does not automatically identify which ancient group made every object or occupied every layer.",
+    "chapter": 2,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_018",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_020",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_019.png"
+  },
+  {
+    "cue": 20,
+    "start": 190,
+    "end": 200,
+    "voice_en": "An object and a bone can raise related questions without answering the same question. The maker of a tool needs evidence of association, not just proximity.",
+    "chapter": 2,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@association",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_013",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 21,
+    "start": 200,
+    "end": 210,
+    "voice_en": "Imagine an adult field researcher lifting a small fragment from a recorded square. The careful notes may ultimately matter as much as the fragment's visible shape.",
+    "chapter": 2,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_013",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_019",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_021.png"
+  },
+  {
+    "cue": 22,
+    "start": 210,
+    "end": 220,
+    "voice_en": "Yet shape alone was not enough for the discovery that followed. The next evidence required a very different journey, from sediment and storage into molecular analysis.",
+    "chapter": 2,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "label": "DE06_013",
+        "duration": 5.25,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_024",
+        "duration": 5.25,
+        "source_in": 4.75,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 23,
+    "start": 220,
+    "end": 230,
+    "voice_en": "Ancient DNA is surviving material, not an untouched recording. After death, molecules break and change, while material from microbes and later handling may join the mixture.",
+    "chapter": 3,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@damage",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_027",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 24,
+    "start": 230,
+    "end": 240,
+    "voice_en": "The challenge is not merely finding a sequence that looks human. Researchers must investigate whether it belongs to the ancient individual and whether it supports the question asked.",
+    "chapter": 3,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_022",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_029",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 25,
+    "start": 240,
+    "end": 250,
+    "voice_en": "Short fragments and characteristic chemical damage can help that investigation. They contribute evidence alongside controls and comparisons, rather than acting as an infallible stamp of authenticity.",
+    "chapter": 3,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@damage",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_022",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 26,
+    "start": 250,
+    "end": 260,
+    "voice_en": "Modern contamination is especially difficult when both the ancient sample and the people handling it are human. A plausible result can still demand careful checking and revision.",
+    "chapter": 3,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_024",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 27,
+    "start": 260,
+    "end": 270,
+    "voice_en": "A laboratory scene can show gloves, instruments, and controlled working conditions. It cannot, by appearance alone, demonstrate that an ancient genetic result has passed its scientific tests.",
+    "chapter": 3,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_022",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_026",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_027.png"
+  },
+  {
+    "cue": 28,
+    "start": 270,
+    "end": 280,
+    "voice_en": "DNA sequencing determines the order of molecular building blocks. Researchers then compare the recovered information with other sequences, asking which relationships explain the observed patterns best.",
+    "chapter": 3,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_026",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_027",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 29,
+    "start": 280,
+    "end": 290,
+    "voice_en": "Think of damaged pages with many missing passages. Recognising a familiar word is different from establishing how whole documents are related, especially when some pages were mixed.",
+    "chapter": 3,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_027",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_029",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_029.png"
+  },
+  {
+    "cue": 30,
+    "start": 290,
+    "end": 300,
+    "voice_en": "The analogy has limits. DNA is inherited biological material, not a book with intentions, and statistical comparisons do not work by simply matching attractive coloured strips.",
+    "chapter": 3,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@methods",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_022",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 31,
+    "start": 300,
+    "end": 310,
+    "voice_en": "A useful scientific claim must survive alternatives. Could contamination, a reading error, or an incomplete comparison produce something similar to the pattern that first caught attention?",
+    "chapter": 3,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@auth",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 32,
+    "start": 310,
+    "end": 320,
+    "voice_en": "That is why the quiet work matters. A dramatic image of a glowing fossil may attract us, but it does not explain how competing possibilities were tested.",
+    "chapter": 3,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_030",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_026",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 33,
+    "start": 320,
+    "end": 330,
+    "voice_en": "With those limits in place, we can return to the discovery. In two thousand ten, the first molecular result did not yet tell the whole genetic story.",
+    "chapter": 3,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@mt_nuclear",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_027",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 34,
+    "start": 330,
+    "end": 340,
+    "voice_en": "The initial report analysed mitochondrial DNA from the fragment. Mitochondria contain a small separate genome that is usually inherited through the maternal line in human families.",
+    "chapter": 4,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@mt_nuclear",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 35,
+    "start": 340,
+    "end": 350,
+    "voice_en": "That record differed strikingly from the mitochondrial sequences then available for modern humans and Neanderthals. The small bone had become evidence of an unexpected ancient lineage.",
+    "chapter": 4,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_028",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 36,
+    "start": 350,
+    "end": 360,
+    "voice_en": "But one inherited lineage is not an entire ancestry. Following a maternal line gives a narrower view than comparing variation across the much larger nuclear genome.",
+    "chapter": 4,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@mt_nuclear",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 37,
+    "start": 360,
+    "end": 370,
+    "voice_en": "Later in the same year, researchers reported a nuclear genome analysis. It changed the scale of comparison and helped place the Denisovan evidence beside other ancient humans.",
+    "chapter": 4,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_026",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_034",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 38,
+    "start": 370,
+    "end": 380,
+    "voice_en": "The nuclear results indicated a population history closely related to that of Neanderthals, while still distinguishable from the Neanderthal genomes available for comparison at the time.",
+    "chapter": 4,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@missing",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_036",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 39,
+    "start": 380,
+    "end": 390,
+    "voice_en": "A tooth from the cave provided another molecular connection. Its mitochondrial evidence resembled that from the finger bone, bringing a separate specimen into the developing picture.",
+    "chapter": 4,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_036",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_040",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_039.png"
+  },
+  {
+    "cue": 40,
+    "start": 390,
+    "end": 400,
+    "voice_en": "These findings did not recover a tribe's own name. Denisovan was a research label drawn from the cave, used to discuss a particular part of ancient human diversity.",
+    "chapter": 4,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@labels",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_028",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 41,
+    "start": 400,
+    "end": 410,
+    "voice_en": "The important move was from an unusual sample to testable relationships. A surprising sequence became more informative when other evidence constrained what it could reasonably mean.",
+    "chapter": 4,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_038",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_030",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 42,
+    "start": 410,
+    "end": 420,
+    "voice_en": "Even then, the cave's occupants did not collapse into one identity. Neanderthals and Denisovans both belonged to the wider history investigated at this remarkable archaeological site.",
+    "chapter": 4,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@altai",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_034",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 43,
+    "start": 420,
+    "end": 430,
+    "voice_en": "The story therefore resisted a simple portrait. Several kinds of human history could overlap within one region, while each surviving sample still represented only a particular individual.",
+    "chapter": 4,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@methods",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_036",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 44,
+    "start": 430,
+    "end": 440,
+    "voice_en": "To test those relationships more clearly, the researchers needed better information from the fragment itself. That requirement led to another major step, published two years later.",
+    "chapter": 4,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "label": "DE06_034",
+        "duration": 5.25,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_026",
+        "duration": 5.25,
+        "source_in": 4.75,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 45,
+    "start": 440,
+    "end": 450,
+    "voice_en": "In two thousand twelve, a high coverage Denisovan genome became available. Improved laboratory methods recovered enough information to examine the inherited record in much greater detail.",
+    "chapter": 5,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@coverage",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 46,
+    "start": 450,
+    "end": 460,
+    "voice_en": "Researchers described average coverage of about thirty times. That means positions were read repeatedly in the sequencing data, not that thirty ancient people had been sampled.",
+    "chapter": 5,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@coverage",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 47,
+    "start": 460,
+    "end": 470,
+    "voice_en": "Repeated observations can help distinguish reliable information from noise. They do not mean every position is equally certain, or that all missing historical evidence has been recovered.",
+    "chapter": 5,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@coverage",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 48,
+    "start": 470,
+    "end": 480,
+    "voice_en": "The achievement depended on extracting information from very little material. It showed how a small surviving piece could support comparisons far beyond what its size might suggest.",
+    "chapter": 5,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_001",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_052",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 49,
+    "start": 480,
+    "end": 490,
+    "voice_en": "Still, a high coverage genome remains a genome from one individual. More detail about that sample does not turn it into a census of an ancient population.",
+    "chapter": 5,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@one_genome",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 50,
+    "start": 490,
+    "end": 500,
+    "voice_en": "Nor does a genome contain a ready made photograph. Reconstructing appearance introduces additional evidence, assumptions, and uncertainties that should not disappear behind a confident looking illustration.",
+    "chapter": 5,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_046",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_043",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_050.png"
+  },
+  {
+    "cue": 51,
+    "start": 500,
+    "end": 510,
+    "voice_en": "Imagine a map becoming sharper while large regions remain unexplored. Better resolution at one place is valuable, but it does not tell us everything elsewhere on the map.",
+    "chapter": 5,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@asia",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_046",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 52,
+    "start": 510,
+    "end": 520,
+    "voice_en": "Ancient genetics faces a similar distinction. Better information can sharpen relationships among sampled individuals while leaving other populations, locations, and generations represented only indirectly or not at all.",
+    "chapter": 5,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@missing",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_049",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 53,
+    "start": 520,
+    "end": 530,
+    "voice_en": "A model may therefore change when another fossil yields useful evidence. That change is not a failure of the original fragment; it is a consequence of improved comparison.",
+    "chapter": 5,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_049",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_052",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 54,
+    "start": 530,
+    "end": 540,
+    "voice_en": "The deeper surprise was that comparisons did not stop with extinct people. Some of the most informative traces were found in genomes of people living much later.",
+    "chapter": 5,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_050",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_054",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 55,
+    "start": 540,
+    "end": 550,
+    "voice_en": "To follow that clue, we must distinguish an ancient population disappearing as a separate group from every piece of its inherited contribution disappearing from human history.",
+    "chapter": 5,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@inheritance",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_043",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 56,
+    "start": 550,
+    "end": 560,
+    "voice_en": "Genetic studies identified Denisovan related ancestry in present day populations, with substantial differences between regions and communities. There is no single percentage that describes every person everywhere.",
+    "chapter": 6,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@oceania",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_052",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 57,
+    "start": 560,
+    "end": 570,
+    "voice_en": "The interpretation involves interbreeding between ancestral populations. Over later generations, inherited segments were recombined and passed on within histories that included many other relationships and demographic changes.",
+    "chapter": 6,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@inheritance",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_055",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 58,
+    "start": 570,
+    "end": 580,
+    "voice_en": "A surviving segment is not a complete Denisovan genome, and it is not a certificate of cultural identity. Biological inheritance answers a particular set of historical questions.",
+    "chapter": 6,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@identity",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_056",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_058.png"
+  },
+  {
+    "cue": 59,
+    "start": 580,
+    "end": 590,
+    "voice_en": "Researchers compare how such segments resemble available ancient references. The results can suggest contacts and population structure without identifying every meeting place or reconstructing one exact journey.",
+    "chapter": 6,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_054",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_058",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 60,
+    "start": 590,
+    "end": 600,
+    "voice_en": "Studies have also found evidence for more than one Denisovan related contribution. A single Siberian reference cannot be assumed to represent every group involved in those contacts.",
+    "chapter": 6,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@missing",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_052",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 61,
+    "start": 600,
+    "end": 610,
+    "voice_en": "This makes the cave both essential and incomplete. Its samples anchor comparisons, while the inherited record elsewhere points toward a wider diversity still needing direct evidence from fossils.",
+    "chapter": 6,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@asia",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_055",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 62,
+    "start": 610,
+    "end": 620,
+    "voice_en": "One famous example concerns a region around a gene called E P A S one, involved in the body's response to low oxygen conditions at high altitude.",
+    "chapter": 6,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@epas",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 63,
+    "start": 620,
+    "end": 630,
+    "voice_en": "Research published in two thousand fourteen linked a distinctive Tibetan version of this region with Denisovan or closely related ancestry, and with adaptation in a demanding environment.",
+    "chapter": 6,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@plateau",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_058",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 64,
+    "start": 630,
+    "end": 640,
+    "voice_en": "That finding is not a claim that one gene explains an entire population's abilities. Biological function, inherited variants, natural selection, and environmental conditions remain different parts of the explanation.",
+    "chapter": 6,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@epas",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 65,
+    "start": 640,
+    "end": 650,
+    "voice_en": "Nor does a useful inherited variant prove that the individual from the Siberian cave personally lived on the Tibetan Plateau. An ancestral connection is not an individual biography.",
+    "chapter": 6,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@epas",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_055",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_065.png"
+  },
+  {
+    "cue": 66,
+    "start": 650,
+    "end": 660,
+    "voice_en": "A direct fossil connection with the plateau would require another kind of evidence. That is where the story turns from DNA toward a different set of surviving molecules.",
+    "chapter": 6,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "label": "DE06_060",
+        "duration": 5.25,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_062",
+        "duration": 5.25,
+        "source_in": 4.75,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 67,
+    "start": 660,
+    "end": 670,
+    "voice_en": "Proteins are made from chains of amino acids. Some ancient protein sequences can survive where useful DNA is difficult to recover, offering a different window into relationships.",
+    "chapter": 7,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_060",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_068",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "overlays/chapter_067.png",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 68,
+    "start": 670,
+    "end": 680,
+    "voice_en": "Researchers can screen unidentified bone fragments using collagen fingerprints. Such screening helps find promising material, but identifying a human fragment is not automatically identifying a Denisovan one.",
+    "chapter": 7,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@proteins",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 69,
+    "start": 680,
+    "end": 690,
+    "voice_en": "Further protein sequence comparisons can investigate that narrower question. The power comes from diagnostic evidence and appropriate references, rather than merely finding a molecule inside old bone.",
+    "chapter": 7,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@proteins",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_062",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 70,
+    "start": 690,
+    "end": 700,
+    "voice_en": "In two thousand nineteen, researchers reported a Denisovan connection for the Xiahe mandible from Baishiya Karst Cave, on the Tibetan Plateau, using ancient protein evidence for comparison.",
+    "chapter": 7,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@plateau",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_066",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_070.png"
+  },
+  {
+    "cue": 71,
+    "start": 700,
+    "end": 710,
+    "voice_en": "A carbonate crust on the mandible provided a minimum age of about one hundred sixty thousand years. That is a lower age bound, not an exact death date.",
+    "chapter": 7,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@minimum_age",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 72,
+    "start": 710,
+    "end": 720,
+    "voice_en": "The fossil expanded the directly documented record beyond the Altai. It connected molecular identification with an anatomical specimen in a very different high altitude setting on the plateau.",
+    "chapter": 7,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@asia",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_044",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 73,
+    "start": 720,
+    "end": 730,
+    "voice_en": "Yet a protein result is not a replacement for every kind of genetic information. Different molecules preserve different amounts of detail and support different strengths of inference.",
+    "chapter": 7,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@methods",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_062",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 74,
+    "start": 730,
+    "end": 740,
+    "voice_en": "A useful comparison therefore states what was measured and how it relates to the claim. More dramatic imagery cannot compensate for a missing explanation of the actual evidence.",
+    "chapter": 7,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_067",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_066",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 75,
+    "start": 740,
+    "end": 750,
+    "voice_en": "The lesson is larger than one mandible. Old collections and small fragments may hold clues that were not accessible when researchers first described or stored them decades earlier.",
+    "chapter": 7,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_068",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_075.png"
+  },
+  {
+    "cue": 76,
+    "start": 750,
+    "end": 760,
+    "voice_en": "And sometimes the next clue is not a recognisable fossil at all. It can survive in the surrounding sediment, mixed into the material beneath our feet.",
+    "chapter": 7,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "label": "DE06_069",
+        "duration": 5.25,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_071",
+        "duration": 5.25,
+        "source_in": 4.75,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 77,
+    "start": 760,
+    "end": 770,
+    "voice_en": "Studies at Denisova Cave recovered ancient human mitochondrial DNA from sediments. The record helped investigate changes in which human groups were represented at different times within the cave.",
+    "chapter": 8,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_071",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_076",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "overlays/chapter_077.png",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 78,
+    "start": 770,
+    "end": 780,
+    "voice_en": "A major analysis published in two thousand twenty one combined that molecular record with the cave's chronology. It provided a wider perspective than the scarce identified bones alone.",
+    "chapter": 8,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@sediment",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_069",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 79,
+    "start": 780,
+    "end": 790,
+    "voice_en": "Sediment DNA does not automatically identify one person or recover that person's complete genome. Depositional processes, sampling, and dating still matter when interpreting what the molecules represent.",
+    "chapter": 8,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@sediment",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 80,
+    "start": 790,
+    "end": 800,
+    "voice_en": "Related work reported Denisovan DNA in sediments from Baishiya Karst Cave. Together with the mandible, this gave independent support for a Denisovan history on the Tibetan Plateau.",
+    "chapter": 8,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@plateau",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_072",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 81,
+    "start": 800,
+    "end": 810,
+    "voice_en": "In two thousand twenty four, another study identified a Denisovan rib fragment at Baishiya through protein analysis, adding a different skeletal element to the known molecularly identified record.",
+    "chapter": 8,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@baishiya",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 82,
+    "start": 810,
+    "end": 820,
+    "voice_en": "The researchers also investigated animal remains and how they had been used. Such evidence helps move the story toward resources and activity, rather than ancestry alone.",
+    "chapter": 8,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_074",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_075",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 83,
+    "start": 820,
+    "end": 830,
+    "voice_en": "Food and work become archaeological questions through surviving traces. Animal species, cut marks, broken bones, and their contexts can constrain explanations without preserving the original conversations around them.",
+    "chapter": 8,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_075",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_076",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_083.png"
+  },
+  {
+    "cue": 84,
+    "start": 830,
+    "end": 840,
+    "voice_en": "Picture experienced adults working with a useful material near a shelter. It is an illustration of practical activity, not a recovered scene of named people beside a particular fire.",
+    "chapter": 8,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_076",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_069",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_084.png"
+  },
+  {
+    "cue": 85,
+    "start": 840,
+    "end": 850,
+    "voice_en": "Their daily lives cannot be reduced to the molecules that happened to survive. Genetics, proteins, archaeology, and environmental evidence become stronger when each keeps its proper task.",
+    "chapter": 8,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@methods",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_071",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 86,
+    "start": 850,
+    "end": 860,
+    "voice_en": "Those tasks also help us examine contact between ancient groups. At Denisova, another small fragment produced unusually direct evidence of a relationship crossing the categories used by researchers.",
+    "chapter": 8,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_081",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_072",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 87,
+    "start": 860,
+    "end": 870,
+    "voice_en": "A study published in two thousand eighteen analysed Denisova eleven. The genome indicated a Neanderthal mother and a Denisovan father, rather than distant mixed ancestry alone.",
+    "chapter": 9,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@parentage",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 88,
+    "start": 870,
+    "end": 880,
+    "voice_en": "This was evidence of first generation parentage across those groups. It does not tell us what the parents called themselves, how they met, or what their family believed.",
+    "chapter": 9,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@parentage",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_083",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_088.png"
+  },
+  {
+    "cue": 89,
+    "start": 880,
+    "end": 890,
+    "voice_en": "The importance lies in a tested relationship, not an imagined romance. We can show a simple inheritance diagram without inventing faces, dialogue, or a childhood scene for the individual.",
+    "chapter": 9,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@parentage",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 90,
+    "start": 890,
+    "end": 900,
+    "voice_en": "At the same time, population comparisons indicate that Denisovan related histories were not uniform. Different ancestral groups contributed to different later populations, within a geographically widespread and complex record.",
+    "chapter": 9,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@inheritance",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_078",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 91,
+    "start": 900,
+    "end": 910,
+    "voice_en": "That complexity is why one label must not become one costume, one facial type, or one uninterrupted community living unchanged for an enormous span of time.",
+    "chapter": 9,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@labels",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_079",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 92,
+    "start": 910,
+    "end": 920,
+    "voice_en": "A boundary in a genetic comparison also differs from a modern border. Ancient relationships developed before present countries, and their evidence does not assign modern nationality to a fossil.",
+    "chapter": 9,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@asia",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_080",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 93,
+    "start": 920,
+    "end": 930,
+    "voice_en": "The same caution applies to maps. A connecting line may illustrate a research comparison, a proposed movement, or a documented journey. Those are different claims with different requirements.",
+    "chapter": 9,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@map_key",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 94,
+    "start": 930,
+    "end": 940,
+    "voice_en": "A fossil's location anchors one observation. It cannot, by itself, identify every route taken by related people or explain where all later inherited segments entered their ancestors' histories.",
+    "chapter": 9,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@asia",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_084",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 95,
+    "start": 940,
+    "end": 950,
+    "voice_en": "To narrow those questions, researchers need samples from more places and periods. Recent discoveries have begun linking molecular evidence with a much broader range of anatomical material.",
+    "chapter": 9,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_094",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_078",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 96,
+    "start": 950,
+    "end": 960,
+    "voice_en": "This is where the older image of Denisovans as almost entirely invisible becomes incomplete. New evidence does not erase the fragment's importance; it changes the questions surrounding it.",
+    "chapter": 9,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "label": "DE06_091",
+        "duration": 5.25,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_081",
+        "duration": 5.25,
+        "source_in": 4.75,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 97,
+    "start": 960,
+    "end": 970,
+    "voice_en": "In two thousand twenty five, protein analysis linked the Penghu mandible from the Taiwan Strait with a male Denisovan. The identification added another region to the molecularly supported record.",
+    "chapter": 10,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_088",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_090",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "overlays/chapter_097.png",
+    "lower_overlay": "overlays/lower_097.png"
+  },
+  {
+    "cue": 98,
+    "start": 970,
+    "end": 980,
+    "voice_en": "Its recovery history complicates dating. Researchers discussed alternative age intervals rather than one precise age, so a responsible map should not give the specimen an invented exact birthday.",
+    "chapter": 10,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@penghu",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 99,
+    "start": 980,
+    "end": 990,
+    "voice_en": "The value is still considerable: a jaw once difficult to place could be compared through molecular evidence, connecting anatomy with a wider history than appearance alone could establish.",
+    "chapter": 10,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@penghu",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_092",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 100,
+    "start": 990,
+    "end": 1000,
+    "voice_en": "Two studies in the same year investigated the Harbin cranium from northeastern China. One reported ancient proteins; another recovered mitochondrial DNA from material called dental calculus on the specimen.",
+    "chapter": 10,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@harbin_map",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_093",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 101,
+    "start": 1000,
+    "end": 1010,
+    "voice_en": "The cranium was dated to at least one hundred forty six thousand years ago. Both molecular approaches supported a Denisovan connection, bringing a comparatively complete skull into the discussion.",
+    "chapter": 10,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@harbin",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 102,
+    "start": 1010,
+    "end": 1020,
+    "voice_en": "This did not create a universal Denisovan portrait. One cranium represents an individual within a diverse history, and its relationships must be considered alongside other samples and their uncertainties.",
+    "chapter": 10,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@identity",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_088",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_102.png"
+  },
+  {
+    "cue": 103,
+    "start": 1020,
+    "end": 1030,
+    "voice_en": "Names such as Homo longi belong to taxonomic discussions about that diversity. A molecular connection does not automatically settle every question about naming ancient human groups and species.",
+    "chapter": 10,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@taxonomy",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 104,
+    "start": 1030,
+    "end": 1040,
+    "voice_en": "What changed was the range of evidence that could be compared. Genomes and proteins were increasingly helping researchers reassess fossils whose shapes had already prompted different interpretations.",
+    "chapter": 10,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_090",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_091",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 105,
+    "start": 1040,
+    "end": 1050,
+    "voice_en": "This is a powerful reversal. Instead of asking a fragment to resemble a known face, researchers can use molecular relationships to investigate which anatomical comparisons deserve closer examination.",
+    "chapter": 10,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_093",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_092",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 106,
+    "start": 1050,
+    "end": 1060,
+    "voice_en": "And the record continued to grow. Research published in two thousand twenty six brought more fragments into the investigation, while reminding us that discovery often begins inside existing collections.",
+    "chapter": 10,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@new2026",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 107,
+    "start": 1060,
+    "end": 1070,
+    "voice_en": "At Bianfu Cave in southwestern China, researchers screened a large bone collection and identified additional human fragments. Protein analysis connected those remains with the Denisovan lineage.",
+    "chapter": 11,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@new2026",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_102",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 108,
+    "start": 1070,
+    "end": 1080,
+    "voice_en": "These included fragments from the skull and a forearm bone, alongside teeth analysed in the same research. They offered different anatomical clues from the original finger fragment.",
+    "chapter": 11,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_096",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_108.png"
+  },
+  {
+    "cue": 109,
+    "start": 1080,
+    "end": 1090,
+    "voice_en": "A companion study investigated the site's environment, animals, tools, and subsistence. The findings brought molecular identification into conversation with practical questions about life in a particular landscape through time.",
+    "chapter": 11,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_097",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 110,
+    "start": 1090,
+    "end": 1100,
+    "voice_en": "They did not turn every object nearby into a personal possession of an identified fossil individual. Archaeological association and individual ownership remain questions requiring different kinds of supporting evidence.",
+    "chapter": 11,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@association",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_098",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 111,
+    "start": 1100,
+    "end": 1110,
+    "voice_en": "Another study, published in October two thousand twenty six, investigated proteins from Xujiayao remains in northern China. Its results supported a Denisovan affiliation and encouraged broader anatomical comparisons.",
+    "chapter": 11,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@xujiayao",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 112,
+    "start": 1110,
+    "end": 1120,
+    "voice_en": "Such findings can strengthen a proposed relationship while opening new debates about variation. Shared features do not require every related individual to look identical across geography and deep time.",
+    "chapter": 11,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_098",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_101",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 113,
+    "start": 1120,
+    "end": 1130,
+    "voice_en": "The expanding record therefore changes a useful metaphor. Denisovans are no longer only a genetic shadow known from one tiny object, even though major gaps remain in their history.",
+    "chapter": 11,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@asia",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_102",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 114,
+    "start": 1130,
+    "end": 1140,
+    "voice_en": "New molecular identifications also make older collections worth revisiting. A fragment that once lacked distinctive features may become informative when a different analytical method becomes available to investigators.",
+    "chapter": 11,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_101",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_096",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 115,
+    "start": 1140,
+    "end": 1150,
+    "voice_en": "But not every fragment will preserve useful molecules. The strength of a result depends on what survived, how it was analysed, and which alternatives the comparison can meaningfully test.",
+    "chapter": 11,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_102",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_097",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 116,
+    "start": 1150,
+    "end": 1160,
+    "voice_en": "The expanding evidence brings us back to our first rule. More knowledge should sharpen the distinction between what researchers can demonstrate and what a storyteller can make visually convincing.",
+    "chapter": 11,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "label": "DE06_102",
+        "duration": 5.25,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_106",
+        "duration": 5.25,
+        "source_in": 4.75,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 117,
+    "start": 1160,
+    "end": 1170,
+    "voice_en": "A reconstruction can help us picture competent adults using materials and familiar places. It cannot recover a verified face, an exact conversation, or a particular person's unrecorded intentions.",
+    "chapter": 12,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_104",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_108",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "overlays/chapter_117.png",
+    "lower_overlay": "overlays/lower_117.png"
+  },
+  {
+    "cue": 118,
+    "start": 1170,
+    "end": 1180,
+    "voice_en": "Nor should a genetic grouping become a measure of human worth. These were people with relationships and practical lives, not merely labels waiting to be arranged on a diagram.",
+    "chapter": 12,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_076",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_109",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 119,
+    "start": 1180,
+    "end": 1190,
+    "voice_en": "The surviving material is also finite. Sampling decisions, documentation, and careful stewardship matter because a useful test changes the physical evidence available for later questions and future investigators.",
+    "chapter": 12,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_106",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_110",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_119.png"
+  },
+  {
+    "cue": 120,
+    "start": 1190,
+    "end": 1200,
+    "voice_en": "The most engaging story is not always the most certain looking one. Sometimes the honest gap is exactly what makes a new comparison or discovery worth following.",
+    "chapter": 12,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_109",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_104",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 121,
+    "start": 1200,
+    "end": 1210,
+    "voice_en": "Return now to the small bone fragment. It never contained a complete history of Asia. It preserved a limited molecular record that became powerful through careful questions and comparisons.",
+    "chapter": 12,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_001",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_106",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": "overlays/lower_121.png"
+  },
+  {
+    "cue": 122,
+    "start": 1210,
+    "end": 1220,
+    "voice_en": "The cave supplied context. DNA revealed unexpected relationships. Proteins helped connect other fossils, and the wider archaeological record brought landscapes, resources, and practical activity back into the picture.",
+    "chapter": 12,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "label": "DE06_110",
+        "duration": 5.25,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "@methods",
+        "duration": 5.25,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 123,
+    "start": 1220,
+    "end": 1230,
+    "voice_en": "Each step changed the scale of the investigation. A specimen became a comparison, comparisons widened into population history, and new sites challenged what one reference sample could represent.",
+    "chapter": 12,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@asia",
+        "duration": 6,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_108",
+        "duration": 4,
+        "source_in": 1,
+        "crop": 1.035
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 124,
+    "start": 1230,
+    "end": 1240,
+    "voice_en": "We still cannot name every person or follow every journey. But we can separate an inherited relationship from a portrait, an archaeological observation from a cinematic reconstruction of events.",
+    "chapter": 12,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "@identity",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 125,
+    "start": 1240,
+    "end": 1250,
+    "voice_en": "That separation does not diminish the wonder. It explains why a small damaged object, studied carefully, can reshape a much larger history without pretending to preserve all of it.",
+    "chapter": 12,
+    "transition": "cut",
+    "segments": [
+      {
+        "label": "DE06_110",
+        "duration": 10,
+        "source_in": 0,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  },
+  {
+    "cue": 126,
+    "start": 1250,
+    "end": 1260,
+    "voice_en": "The Denisovan story began with evidence too small to announce its own importance. What made it extraordinary was the growing set of questions that researchers learned to ask.",
+    "chapter": 12,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "label": "DE06_001",
+        "duration": 5.25,
+        "source_in": 0,
+        "crop": 1
+      },
+      {
+        "label": "DE06_110",
+        "duration": 5.25,
+        "source_in": 4.75,
+        "crop": 1
+      }
+    ],
+    "chapter_overlay": "",
+    "lower_overlay": ""
+  }
+]

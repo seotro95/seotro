@@ -11,6 +11,18 @@
 9. Preview Anh 30 giây, rồi chạy 16 locale trên GitHub Actions có checkpoint; H’Mông native chạy riêng. Dùng nhịp, nghỉ và nhấn âm lượng nhẹ; không đổi cao độ. Chỉ xử lý lại phần lỗi nếu có; giữ đầu vào đã rà soát.
 10. Khi đo thực tế, giữ các locale/chương đã đạt và chỉ sửa phần vượt thời lượng. Đo checkpoint trước khi sửa; Nhật chương 8 được viết lại hoàn toàn vì còn lẫn tiếng Anh. Giữ nguyên 3425 từ Anh: riêng 11 ô dùng một yêu cầu trọn ô, tốc độ trong khoảng style cũ và chỉ bỏ khoảng lặng bằng số 0 ở mép, chừa 30 ms; không cắt mẫu tiếng nói. Căn Anh theo 126 ô 10 giây; bản dịch theo 12 chương 110/100 giây. Giới hạn tempo sau tổng hợp: Anh 1,4, các bản khác 1,5. Không cắt lời. Mỗi bản giải mã đúng 60.480.000 mẫu tại 48 kHz = 21:00. Khớp chương/tổng không có nghĩa khớp từng từ giữa mọi ngôn ngữ.
 11. Đổi tên theo quốc gia bằng sao chép nguyên byte, kiểm SHA256, phát hành 17 MP3 riêng và ZIP tổng/hồ sơ. Kiểm 17 digest từ máy chủ với báo cáo, đúng ID/giới tính/style/thời lượng, toàn bộ 3425 từ/126 cue Anh và giải mã độc lập file Anh công khai.
-12. Lưu script 17 locale, timing, báo cáo, hồ sơ giọng, link tải, mã nguồn và trạng thái để tiếp tục. Chưa dựng video tập 6 vì chưa có clip của tập này. Khi có clip: dùng đúng voice Anh đã khóa, bỏ mọi âm thanh clip, mở đầu 12 shot/30 giây nằm trong 21 phút, không cộng intro.
+12. Lưu script 17 locale, timing, báo cáo, hồ sơ giọng, link tải, mã nguồn và trạng thái để tiếp tục. Video tập 6 nay đã dựng xong; xem phần cập nhật dưới đây. Khi có clip: dùng đúng voice Anh đã khóa, bỏ mọi âm thanh clip, mở đầu 12 shot/30 giây nằm trong 21 phút, không cộng intro.
 
 Khi làm tập sau, lấy thời lượng/chủ đề/số cảnh/ranh chương từ yêu cầu mới và trạng thái; giữ hồ sơ giọng, style, tên quốc gia và nguyên tắc không có trẻ em. Không chạy nguyên script tập 6 cho tập khác.
+
+
+
+## Cập nhật dựng video chủ đề6
+
+1. Nhận104clip518–621, kiểmSHA256/metadata và lấy mẫu0,8/4,9/9,1giây. Tất cả10giây,720p24fps;33clip có tiếng. Đối chiếu với110prompt, xử lý6ô thiếu bằng bản đồ và cảnh phù hợp.
+2. Chọn63clip phù hợp, thay bản đồ và dữ liệu doAIvẽ lại bằng30đồ họa có chú thích; bỏclip025 đổi danh tính chủ thể. Không có hình trẻ em trong cảnh được chọn qua kiểm tra mẫu.
+3. Dựng224shot trong126ô10giây, mở đầu12shot/30s và9dissolve ngắn nằm trong tổng21:00. Chữ mở đầu nhấn vật chứng/năm2010/Denisovans.
+4. Giữ nguyên voiceAnhSHA256d733faf7cb437ff9db733a7f5f9f527aa177a3e688abdd270f313af2ab3605ad. Bỏmọi tiếngclip bằng-mapvà-an; chỉ chuẩn hóa độ lớn khi xuất, không đổi nhịp hoặc cao độ.
+5. Dựng trực tiếp sau khi duyệt tự động từ chối công khai clip nguồn. Không tạo nhánh chứa video gốc; chỉ phát hành bản dựng và tài liệu. Giữ toàn bộ nguồn người dùng; giải phóng file dựng trung gian đã ghép với khoảng an toàn60giây để đủ chỗ.
+6. Kiểm30240frame,1260giây,1audioAnh,12chương,126cueSRT,3425từAnh,giải mãtoànbộ,không khoảng đen dài và15điểm đồng bộ sóng âm. Rà44khung hình từbản cuối; không tuyên bố xem tay liên tục21phút.
+7. Đưa chỉ sản phẩm hoàn chỉnh lênGitHubRelease, xác minhSHA256từngasset và tải kiểmtoànbộMP4côngkhai; tệpTXT/ZIP dùng linkAsset để tải trực tiếp. Lưu kế hoạch,code,báocáo,hồsơvàlinktrongEDITING. Giữ17voice đã bàn giao vàtập5queued.
