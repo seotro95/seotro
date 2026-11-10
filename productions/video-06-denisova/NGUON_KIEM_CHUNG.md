@@ -1,0 +1,84 @@
+# Nguồn kiểm chứng — Denisova
+
+Đối chiếu ngày10/11/2026.27nguồn nghiên cứu, phương pháp và dự án gốc. Bài năm2026 có ngày công bố09/09 hoặc21/10 trước ngày lập tài liệu. Không sao chép lời video nguồn.
+
+- **S01 — Krause et al., The complete mitochondrial DNA genome of an unknown hominin from southern Siberia (2010)**: https://www.nature.com/articles/nature08976
+  DOI: 10.1038/nature08976. Mitochondrial evidence from the fragment excavated in2008; the initial report is not the entire later nuclear-genome history.
+
+- **S02 — Reich et al., Genetic history of an archaic hominin group from Denisova Cave in Siberia (2010)**: https://www.nature.com/articles/nature09710
+  DOI: 10.1038/nature09710. Nuclear comparisons, Neanderthal-related population history, another tooth and genetic contributions to later people; no recovered tribal name or exact journey.
+
+- **S03 — Meyer et al., A high-coverage genome sequence from an archaic Denisovan individual (2012)**: https://pmc.ncbi.nlm.nih.gov/articles/PMC3617501/
+  DOI: 10.1126/science.1224344. Approximately30fold coverage; high coverage is not thirty sampled individuals or an entire population census.
+
+- **S04 — Dabney, Meyer and Paabo, Ancient DNA damage (2013)**: https://pmc.ncbi.nlm.nih.gov/articles/PMC3685887/
+  DOI: 10.1101/cshperspect.a012567. Fragmentation and chemical changes; authentication uses multiple observations, not a visual glow or an infallible single stamp.
+
+- **S05 — NHGRI, DNA Sequencing Fact Sheet (undated)**: https://www.genome.gov/about-genomics/fact-sheets/DNA-Sequencing-Fact-Sheet
+  DOI: không áp dụng. Sequencing as reading the order of molecular bases; a sequence is not a recording of memories or ancient events.
+
+- **S06 — NHGRI, Mitochondrial DNA glossary (undated)**: https://www.genome.gov/genetics-glossary/Mitochondrial-DNA
+  DOI: không áp dụng. Separate mitochondrial genome, generally maternal inheritance; not the whole nuclear ancestry record.
+
+- **S07 — NHGRI, Homologous Recombination glossary (undated)**: https://www.genome.gov/genetics-glossary/homologous-recombination
+  DOI: không áp dụng. General recombination concept; teaching strips are not actual measured Denisovan sequences.
+
+- **S08 — Douka et al., Age estimates for hominin fossils and the onset of the Upper Palaeolithic at Denisova Cave (2019)**: https://www.nature.com/articles/s41586-018-0870-z
+  DOI: 10.1038/s41586-018-0870-z. Fossil age models and ranges; distinguish discovery date, sample age, sediments and publication date. Do not reuse the oldest2010 age estimate as a settled exact age.
+
+- **S09 — Jacobs et al., Timing of archaic hominin occupation of Denisova Cave in southern Siberia (2019)**: https://www.nature.com/articles/s41586-018-0843-2
+  DOI: 10.1038/s41586-018-0843-2. Stratigraphy and optical-dating framework; context and chronological uncertainty matter for attribution of activity.
+
+- **S10 — Browning et al., Analysis of human sequence data reveals two pulses of archaic Denisovan admixture (2018)**: https://www.sciencedirect.com/science/article/pii/S0092867418301752
+  DOI: 10.1016/j.cell.2018.02.031. Evidence for complexity of contributions to later populations; no universal ancestry percentage or precise route.
+
+- **S11 — Jacobs et al., Multiple deeply divergent Denisovan ancestries in Papuans (2019)**: https://pubmed.ncbi.nlm.nih.gov/30981557/
+  DOI: 10.1016/j.cell.2019.02.035. Diverse Denisovan-related histories; one Altai reference is not all Denisovan populations everywhere.
+
+- **S12 — Huerta-Sanchez et al., Altitude adaptation in Tibetans caused by introgression of Denisovan-like DNA (2014)**: https://www.nature.com/articles/nature13408
+  DOI: 10.1038/nature13408. EPAS1-region ancestry and high-altitude adaptation; not a whole-population ability determined by one gene and not a biography of the Altai individual.
+
+- **S13 — Brown et al., Identification of a new hominin bone from Denisova Cave using collagen fingerprinting and mitochondrial DNA analysis (2016)**: https://www.nature.com/articles/srep23559
+  DOI: 10.1038/srep23559. ZooMS as screening for hominin material; screening alone must not be presented as final Denisovan identification.
+
+- **S14 — Chen et al., A late Middle Pleistocene Denisovan mandible from the Tibetan Plateau (2019)**: https://www.nature.com/articles/s41586-019-1139-x
+  DOI: 10.1038/s41586-019-1139-x. Xiahe mandible, ancient proteins, minimum age approximately160ka from carbonate crust; not an exact death date or complete genome.
+
+- **S15 — Zavala et al., Pleistocene sediment DNA reveals hominin and faunal turnovers at Denisova Cave (2021)**: https://www.nature.com/articles/s41586-021-03675-0
+  DOI: 10.1038/s41586-021-03675-0. Sediment mtDNA and changing representation of ancient groups; no exact personal identity from soil or assumed simultaneous occupation.
+
+- **S16 — Zhang et al., Denisovan DNA in Late Pleistocene sediments from Baishiya Karst Cave on the Tibetan Plateau (2020)**: https://www.science.org/doi/10.1126/science.abb6320
+  DOI: 10.1126/science.abb6320. Independent sediment molecular evidence at Baishiya; remains distinct from the mandible protein study.
+
+- **S17 — Xia et al., Middle and Late Pleistocene Denisovan subsistence at Baishiya Karst Cave (2024)**: https://pmc.ncbi.nlm.nih.gov/articles/PMC11291277/
+  DOI: 10.1038/s41586-024-07612-9. Rib molecular identification and faunal/archaeological evidence; specimen photos are not copied into generated prompts.
+
+- **S18 — Slon et al., The genome of the offspring of a Neanderthal mother and a Denisovan father (2018)**: https://www.nature.com/articles/s41586-018-0455-x
+  DOI: 10.1038/s41586-018-0455-x. Denisova11 first-generation parentage. Only abstract diagrams/objects: no portrait or youthful owner, no fictional meeting or family biography. This is a brief example; savedtopic7 is not produced here.
+
+- **S19 — Tsutaya et al., A male Denisovan mandible from Pleistocene Taiwan (2025)**: https://www.science.org/doi/10.1126/science.ads3888
+  DOI: 10.1126/science.ads3888. Penghu1 molecular identification; alternative broad dating intervals and recovery history prohibit an invented exact age.
+
+- **S20 — Fu et al., Denisovan mitochondrial DNA from dental calculus of the >146000-year-old Harbin cranium (2025)**: https://www.sciencedirect.com/science/article/pii/S0092867425006270
+  DOI: 10.1016/j.cell.2025.05.040. Mitochondrial evidence from dental calculus; minimum age146ka. Distinguish this from the protein study and from a complete universal portrait.
+
+- **S21 — Fu et al., The proteome of the late Middle Pleistocene Harbin individual (2025)**: https://www.science.org/doi/10.1126/science.adu9677
+  DOI: 10.1126/science.adu9677. Protein evidence for Harbin Denisovan affinity; molecular affiliation does not settle all formal taxonomic naming.
+
+- **S22 — Rao et al., Ancient proteins identify various Denisovan remains from Southwest China (2026-09-09)**: https://www.nature.com/articles/s41586-026-10976-9
+  DOI: 10.1038/s41586-026-10976-9. Bianfu identification of additional cranial/radial fragments and teeth; published before this document date, not an unverified future claim.
+
+- **S23 — Denisovans from southwestern China and their subsistence strategies (2026-09-09)**: https://www.nature.com/articles/s41586-026-10997-4
+  DOI: 10.1038/s41586-026-10997-4. Companion Bianfu environment, fauna, tools and subsistence; association is not ownership by one identified individual.
+
+- **S24 — The proteome of Middle Pleistocene Xujiayao and common Denisovan morphology (2026-10-21)**: https://www.nature.com/articles/s41586-026-11132-z
+  DOI: 10.1038/s41586-026-11132-z. Verified publisher/Crossmark online date21October2026. Protein-supported affiliation and broader comparisons; do not present every East Asian archaic fossil as definitively Denisovan.
+
+- **S25 — Ethics of DNA research on human remains: five globally applicable guidelines (2021)**: https://pmc.ncbi.nlm.nih.gov/articles/PMC7612683/
+  DOI: 10.1038/s41586-021-04008-x. Finite samples, documentation and stewardship; not an instruction to seek approval for this fictional/educational production.
+
+- **S26 — Max Planck Institute for Evolutionary Anthropology, Denisovan Genome project (undated)**: https://www.eva.mpg.de/genetics/genome-projects/denisova/
+  DOI: không áp dụng. Primary project overview linking2008 fragment and genome resources; not an additional independent confirmation of the same papers.
+
+- **S27 — Orlando et al., Ancient DNA analysis (2021)**: https://www.nature.com/articles/s43586-020-00011-0
+  DOI: 10.1038/s43586-020-00011-0. General ancient-DNA methodological framework, contamination, analytical interpretation and limitations.

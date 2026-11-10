@@ -1,0 +1,210 @@
+{
+  "topic_id": 6,
+  "title_en": "Denisova: The People Hidden in a Fragment",
+  "target_seconds": 1260,
+  "english_words": 3425,
+  "timeline_cues": 126,
+  "unique_prompts": 110,
+  "reused_timeline_slots": 16,
+  "prompt_txt_files": 11,
+  "prompts_per_txt": 10,
+  "no_children_in_visuals": true,
+  "voice_status": "not_generated_at_document_delivery",
+  "files": [
+    {
+      "path": "CANH_DUNG_LAI_KHONG_TAO_MOI.csv",
+      "bytes": 4856,
+      "sha256": "9c48ea9856e8525bcc95f98335a97450a01994bcd1bd835985b07449832679e8"
+    },
+    {
+      "path": "CHAPTERS_12.csv",
+      "bytes": 1202,
+      "sha256": "7239bff6a491464783e15a7d294c68e41567c82ffe6657997f40c3f619f08cd3"
+    },
+    {
+      "path": "DOCUMENT_QA.json",
+      "bytes": 607,
+      "sha256": "60f962bcd8f8b387c20087983bcbd3471a38afe2f8c55e2ea2b4d6d8a2eaab8d"
+    },
+    {
+      "path": "DOI_CHIEU_KHOA_HOC.csv",
+      "bytes": 32445,
+      "sha256": "e7a69deafb8b1a13a646a8e6028584482f3e32e6c34a6a2313995adb003889d8"
+    },
+    {
+      "path": "HOOK_30_GIAY_12_SHOT.csv",
+      "bytes": 2239,
+      "sha256": "90bb9ecfa9deb5981479ffcd51b5f8119c07970742b752bed48c3ba8ab26fa5f"
+    },
+    {
+      "path": "KICH_BAN_EN_21_PHUT.txt",
+      "bytes": 23409,
+      "sha256": "1258521958b62e3ae6ccdede635040f2b6964e432fbaa4c9aad2008ced398ade"
+    },
+    {
+      "path": "KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 30645,
+      "sha256": "711c7ee2d7af03152dfe0d162cb16fbb04c6b122e535d033545c0978be112ae0"
+    },
+    {
+      "path": "LOI_DAN_EN_126_CANH.srt",
+      "bytes": 27586,
+      "sha256": "2ccf638302f938feb77be4a2f786b49d81a9a79b72f767799bfbf5a83666e716"
+    },
+    {
+      "path": "NARRATION_STYLE_LOCKED.json",
+      "bytes": 1245,
+      "sha256": "3a95d19fe15335ba53dbf743ca5d9ca3bbbe0572b1acc4b9465901d0d2cd3297"
+    },
+    {
+      "path": "NGUON_KIEM_CHUNG.csv",
+      "bytes": 8006,
+      "sha256": "6f34ff77473d58a86569311b13fb4de5a47c9a52150a13746b98ca8b8f20b696"
+    },
+    {
+      "path": "NGUON_KIEM_CHUNG.md",
+      "bytes": 8798,
+      "sha256": "07a061c7a1569a757067318524f984a47ff5c0caac63d13de2bbe403b0513e25"
+    },
+    {
+      "path": "PHAN_TICH_NGUON_VA_QUY_TRINH.txt",
+      "bytes": 5368,
+      "sha256": "4cabb8ea36fba88976347725907eff8fe91dd9458a74bd3a6c973c79efa3ff06"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_01_001_010.txt",
+      "bytes": 22831,
+      "sha256": "d8dcf7a612b8d33cad24eca3f21502a5876ab98f0bc940d8de72d23578e0843a"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_02_011_020.txt",
+      "bytes": 23005,
+      "sha256": "c928685d97e9451388ff6ffd8e1e54a87eb838519a5ad8cf0a7b632347f88937"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_03_021_030.txt",
+      "bytes": 22974,
+      "sha256": "ee7404bff5522ae775015fcd8e731224ed207b089468c0aa6799df8a4e3c6153"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_04_031_040.txt",
+      "bytes": 22972,
+      "sha256": "32523297d4b36d4f217c99018d1b3abeaa11a83c9210f2a3eda76715aaac7151"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_05_041_050.txt",
+      "bytes": 22959,
+      "sha256": "3bd1b18159724f16276229d7436464f2f27125babda3276e58da8183af002b7a"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_06_051_060.txt",
+      "bytes": 23018,
+      "sha256": "342ee942df98c1929bbbaf7bc6cf795d94b1efb7c7fa8cd78a0d9f4115b1a2a0"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_07_061_070.txt",
+      "bytes": 23071,
+      "sha256": "0b624b552418a20ac80ae57f02fe5820fc7f2af0b9dcb7cd4a63278d4d35e5ed"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_08_071_080.txt",
+      "bytes": 23100,
+      "sha256": "f500055080ed772ea3360fbde661e43ee2d9dced02324773d035b1f324893386"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_09_081_090.txt",
+      "bytes": 23058,
+      "sha256": "10c41185958b447c2636b690d119d2553a40b762c370bb43be16bc838076cd78"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_10_091_100.txt",
+      "bytes": 23032,
+      "sha256": "2193016f20012dee5ca330f10075ca99a190692f0d4b85010e5dfe59e1b19a21"
+    },
+    {
+      "path": "PROMPTS/PROMPTS_11_101_110.txt",
+      "bytes": 23061,
+      "sha256": "e0c5b61187f696d5789d4038905c8d88338fd119853f6d8e04a615a3da84eb0f"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2066,
+      "sha256": "9c4a4dd489f3b05c7c5e439bc8d22f92d014d5d8bf5b55d32a75f505441a3bda"
+    },
+    {
+      "path": "REFERENCES/ABSTRACT_PARENTAGE.png",
+      "bytes": 5735,
+      "sha256": "b89dc5e59d1afe5b032f982b909766404f05512c96543208e446df2a6cd9c06b"
+    },
+    {
+      "path": "REFERENCES/ALTAI_MODERN_BASE.png",
+      "bytes": 11674,
+      "sha256": "d46fdab837f4fefc79cc34487497469fdead5a1e9bcf4d520fe41e0c7676322a"
+    },
+    {
+      "path": "REFERENCES/ASIA_MODERN_BASE.png",
+      "bytes": 70035,
+      "sha256": "ddd51591d80ceae8edfa1601197d2075ffc613678a5dfb4f7c18d57635b95526"
+    },
+    {
+      "path": "REFERENCES/ASIA_OCEANIA_MODERN_BASE.png",
+      "bytes": 94684,
+      "sha256": "e12d0cbf98642f59405c42df1e7202579ccf8122a0abcb00f53513f07a3b77d4"
+    },
+    {
+      "path": "REFERENCES/COMPARISON_BLOCKS.png",
+      "bytes": 4563,
+      "sha256": "f7eabd3cf92f1928bdbdca914d4a2d383cdc7ac8f394fd533affb31ec8e23a80"
+    },
+    {
+      "path": "REFERENCES/README.md",
+      "bytes": 1020,
+      "sha256": "83b9bbdaf6cfb8a7ef030d86ec10e9460df0f99579ad358372c0d83ceace3dfc"
+    },
+    {
+      "path": "REFERENCES/REFERENCE_GUIDE.json",
+      "bytes": 1332,
+      "sha256": "62b6e9e36a78911b358d102a2d2ccadfea11e7d3977e0199c13c10cb4a3b6aaa"
+    },
+    {
+      "path": "REFERENCES/RESEARCH_AND_ANCIENT_TIME.png",
+      "bytes": 4701,
+      "sha256": "35b5d42b1d6a6e8b7a9943b271b9d6c798b1df3b62789b3f9ccc862abfa68ae1"
+    },
+    {
+      "path": "REFERENCES/TIBETAN_PLATEAU_MODERN_BASE.png",
+      "bytes": 31119,
+      "sha256": "ef8aecc9c7d5e73a2390991fda82115799285ff66d42aaf5c11e6bbe6cf55dd8"
+    },
+    {
+      "path": "SCENES_AND_PROMPTS.json",
+      "bytes": 385751,
+      "sha256": "12306ee9251591a4f1eeaeadb8f6fb2942bd587f3695a3dcd91431788dde268f"
+    },
+    {
+      "path": "TIMELINE_126_CANH.csv",
+      "bytes": 61803,
+      "sha256": "f9e33d49a30c111327969677896de5b8b2da0eba99d287a965b283c54b4a49d3"
+    },
+    {
+      "path": "UNIQUE_PROMPTS_110.json",
+      "bytes": 291220,
+      "sha256": "77b8ef2f5d376de0bb0bf07aaec57f008770f5c2cccc62479ad51536dde7d9a6"
+    },
+    {
+      "path": "VOICE_FILE_NAMING.json",
+      "bytes": 2821,
+      "sha256": "86a72485007e41d19e4f828ccd7d4e31657a3d035640eda8500abfbd80cd2060"
+    },
+    {
+      "path": "VOICE_PROFILES_LOCKED_EXPECTED.json",
+      "bytes": 12597,
+      "sha256": "698dd588cedc9dd3824275d36921ae49b525ecd1af29be740615a650154509f5"
+    },
+    {
+      "path": "VOICE_TIMING_THIS_EPISODE.json",
+      "bytes": 379,
+      "sha256": "2f4b224cdf7a77a1f4f03dd92456d87880b4b2b0c3078107011a92f051dbd968"
+    }
+  ]
+}

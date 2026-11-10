@@ -1,0 +1,26 @@
+PHÂN TÍCH NGUỒN VÀ QUY TRÌNH — CHỦ ĐỀ6 DENISOVA
+
+Nguồn: https://github.com/seotro95/seotro/releases/tag/video / video.c.a.toi.mp4. SHA256:f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c; cùng tệp đã phân tích trong chuỗi, khoảng21:03,1280×720,60fps mã hóa, voiceNga. Đã đối chiếu release hiện tại, contact sheet mở đầu và bản nhận dạng lời dẫn lưu. Không biết phần mềm/prompt thực tế tác giả đã dùng.
+
+NỘI DUNG VÀ KỂ CHUYỆN
+Phim tài liệu khoa học phổ thông, lời kể dẫn và hình minh họa, không có người dẫn nói trước máy quay xuyên suốt. Video nguồn mở bằng vật nhỏ và niên đại, đưa ra phát hiện bất ngờ, mở rộng sang cảnh quan, phòng thí nghiệm và câu hỏi lớn; phần nhiều nội dung sau là sinh tồn vùng lạnh. Tập6 học cấu trúc và nhịp dựng, viết lời mới về Denisova, không dịch hoặc lấy giả thuyết Yana thành sự kiện Denisova.
+
+Khung tập6: mảnh xương nhỏ → hồ sơ hang động → kiểm chứng phân tử →2010mtDNA/nuclearDNA →2012genome → dấu vết ở người ngày nay → protein/cao nguyên → trầm tích và sinh kế → giao thoa quần thể → phát hiện2025/2026 → trở lại mảnh xương. Mỗi chương trả lời một câu hỏi rồi đặt vấn đề cho chương sau. Dùng câu hỏi ngắn, động từ rõ, bằng chứng cụ thể và phép so sánh có giới hạn; không hư cấu hội thoại hay tiểu sử.
+
+CÁCH LÀM KỊCH BẢN
+3425từAnh mới,126ô10s, tổng1260s.12chương: sáu chương110s rồi sáu chương100s. Không dùng lại ranh120/110s của tập4. Mỗi ô có một ý chính, tối đa29từ; khi tạo voice phải đo thực tế, không coi số từ là chứng nhận thời lượng. Phân biệt năm phát hiện/công bố, tuổi mẫu, khoảng tuổi và tuổi tối thiểu. Một genome không phải cả quần thể; một hình minh họa không phải chân dung thật. Ba ví dụDenisova11 chỉ phục vụ tập6, không tự làm chủ đề7.
+
+TẠO HÌNH VÀ PROMPT
+110prompt mới trong11TXT, đúng10prompt/tệp và đánh số001–110.16ôREUSE có nguồn cụ thể trongCSV, không tạo clip mới. Mỗi prompt: một shot liên tục10s, một hành động, một chuyển động máy, hoàn toàn im lặng. Luân phiênmacro vật mẫu, bàn tay trưởng thành, cảnh hang/rừng, thao tác hiện đại, bản đồ và mô hình. ClipDE06_001 không nhất thiết là cảnhtimeline001 khi dùng lại; dựaCSV thay vì tự suy từ tênfile.
+
+Không có hình trẻ em ở bất kỳ nơi nào, kể cả nền, bóng, ảnh, màn hình, tượng và sơ đồ. Người hiện rõ trưởng thành25–60tuổi. Không dựng chủ mẫuDenisova3/Denisova11. Mảnh xương là mô hình giảng giải tách rời; mô hình hàm/răng chỉ có giải phẫu răng vĩnh viễn trưởng thành và không có cơ thể/chân dung. Cảnh kỹ năng cổ dùng diễn viên trưởng thành vô danh, không gán diện mạo/căn tínhDenisovan xác thực. Đồ hiện đại chỉ ở cảnh hiện đại; không đặt bút, sổ, kính lúp hay tấm năng lượng vào cảnh cổ.
+
+DỰNG VIDEO KHI ĐÃ CÓ CLIP
+Mở đầu12shot trong30s của voice, không thêm intro. Dựng theo lời: mảnh xương → ghi nhận mẫu/hang →lab/so sánh → phạm vi châu Á. Cắt thẳng theo đổi ý, dissolve ngắn0,4–0,7s khi đổi bối cảnh/quy mô. Hình ngoài trời lạnh tự nhiên, vật mẫuấm trung tính, labtrung tính. Chữ, niên đại và nguồn thêm ởeditor, không yêu cầuAI vẽ chữ hoặc số. Bản đồ dùngPNG khóa nguyên nền; nếuAI làm sai thì pan/zoomPNG trực tiếp. Không dùng cờ, biên giới sắc tộc, tuyến đi chính xác hoặc biểu đồ gene giả.
+
+Video chính sau này chỉ có voiceAnh: loại mọi tiếngclip nguồn, không thêm nhạc/SFX. Dựng đúng1260s; có thể bật/tắt phụ đềAnh. Trước bàn giao, kiểm tra frame/thời lượng, một đường tiếng, đồng bộ nhiều điểm, khoảng đen và giải mã toàn bộ. Bây giờ chỉ bàn giao tài liệu vàvoice, chưa dựngvideo vì chưa cócliptập6.
+
+VOICE VÀ LƯU HỒ SƠ
+Bàn giao tài liệu trước, rồi dịch16ngôn ngữ và tạo17voice. Giữ science-prehistory-17-v1:16nam, H’Mông nữ3 từVITS+OpenVoiceV2 củaVoice-Studio-Hmong1.6.6;16bản còn lại dùng backend gốcMelo-Viet-Studio1.3.1. Giữ science-documentary-expressive-v1, điều chỉnh nhịp/nghỉ/nhấn nhẹ trong khả năngengine, không thayID hoặc cao độ. Mỗi voice phải giải mã đúng60.480.000mẫu tại48kHz=1260s. Anh căn126ô10s; bản dịch căn12chương110/100s, không tuyên bố khớp từng từ giữa mọi ngôn ngữ. Dùng tên tệp quốc gia đã khóa, lưuscript/engine/ID/tốc độ/SHA256 và báo cáo cho tập sau. Chất lượng ngôn ngữ và phương ngữH’Mông Trắng vẫn cần người bản ngữ rà soát độc lập.
+
+Chủ đề5 giữ nguyên trong hàng đợi; tập6 được làm theo yêu cầu mới. Không tự chuyển sang tập7.

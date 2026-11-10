@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "naming_profile_id": "country-filenames-vi-v1",
+  "filename_template": "{topic_prefix}_{delivery_slug}.mp3",
+  "country_names_language": "Vietnamese",
+  "filename_characters": "ASCII Vietnamese transliteration for Windows and URL compatibility",
+  "keep_locale_and_voice_id_in_metadata": true,
+  "hmong_note": "Hmong is a language, not a country; the requested female White Hmong draft is labelled by language and gender.",
+  "voices": [
+    {"locale":"en-US","country_vi":"Mỹ","language_vi":"Tiếng Anh","display_name":"Mỹ — tiếng Anh","delivery_slug":"My_Tieng_Anh"},
+    {"locale":"vi-VN","country_vi":"Việt Nam","language_vi":"Tiếng Việt","display_name":"Việt Nam","delivery_slug":"Viet_Nam"},
+    {"locale":"es-ES","country_vi":"Tây Ban Nha","language_vi":"Tiếng Tây Ban Nha","display_name":"Tây Ban Nha","delivery_slug":"Tay_Ban_Nha"},
+    {"locale":"fr-FR","country_vi":"Pháp","language_vi":"Tiếng Pháp","display_name":"Pháp","delivery_slug":"Phap"},
+    {"locale":"ja-JP","country_vi":"Nhật Bản","language_vi":"Tiếng Nhật","display_name":"Nhật Bản","delivery_slug":"Nhat_Ban"},
+    {"locale":"ko-KR","country_vi":"Hàn Quốc","language_vi":"Tiếng Hàn","display_name":"Hàn Quốc","delivery_slug":"Han_Quoc"},
+    {"locale":"de-DE","country_vi":"Đức","language_vi":"Tiếng Đức","display_name":"Đức","delivery_slug":"Duc"},
+    {"locale":"it-IT","country_vi":"Ý","language_vi":"Tiếng Ý","display_name":"Ý","delivery_slug":"Y"},
+    {"locale":"pt-PT","country_vi":"Bồ Đào Nha","language_vi":"Tiếng Bồ Đào Nha","display_name":"Bồ Đào Nha","delivery_slug":"Bo_Dao_Nha"},
+    {"locale":"nl-NL","country_vi":"Hà Lan","language_vi":"Tiếng Hà Lan","display_name":"Hà Lan","delivery_slug":"Ha_Lan"},
+    {"locale":"pl-PL","country_vi":"Ba Lan","language_vi":"Tiếng Ba Lan","display_name":"Ba Lan","delivery_slug":"Ba_Lan"},
+    {"locale":"sv-SE","country_vi":"Thụy Điển","language_vi":"Tiếng Thụy Điển","display_name":"Thụy Điển","delivery_slug":"Thuy_Dien"},
+    {"locale":"da-DK","country_vi":"Đan Mạch","language_vi":"Tiếng Đan Mạch","display_name":"Đan Mạch","delivery_slug":"Dan_Mach"},
+    {"locale":"fi-FI","country_vi":"Phần Lan","language_vi":"Tiếng Phần Lan","display_name":"Phần Lan","delivery_slug":"Phan_Lan"},
+    {"locale":"nb-NO","country_vi":"Na Uy","language_vi":"Tiếng Na Uy Bokmål","display_name":"Na Uy","delivery_slug":"Na_Uy"},
+    {"locale":"cs-CZ","country_vi":"Séc","language_vi":"Tiếng Séc","display_name":"Séc","delivery_slug":"Sec"},
+    {"locale":"mww","country_vi":null,"language_vi":"H’Mông Trắng — nữ, bản nháp cần rà soát phương ngữ","display_name":"H’Mông Trắng — nữ","delivery_slug":"Hmong_Trang_Nu"}
+  ]
+}

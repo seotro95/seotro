@@ -1,3 +1,11 @@
+# Lượt hiện tại — chủ đề6 Denisova,21:00
+
+Người dùng yêu cầu làm chủ đề6 trong danh sách đã lưu. Đã bàn giao tài liệu trước voice:3425từAnh,126mốc10s,110prompt/11TXT và16ôREUSE. Đang chuẩn bị17voice có nhấn nhá, giữ16nam/H’Môngnữ3 và mã giọng đã khóa. Không có hình trẻ em, kể cả nền/bóng/ảnh/màn hình; không tái hiện chủ mẫuDenisova3/Denisova11.
+
+Đọc [tài liệu tập6](video-06-denisova/README.md), [trạng thái](series/SERIES_STATE.json) và cấu hình chuỗi trước khi làm tiếp.21phút là ngoại lệ riêng tập6:60.480.000mẫu48kHz,Anh126ô10s, bản dịch sáu chương110s rồi sáu chương100s. Không dùng ranh chương hoặc thời lượng tập4. Tập5 vẫn chưa thực hiện và được giữ queued; không tự chuyển sang tập7. Tập1–4 đã bàn giao video, không tạo lại chúng.
+
+---
+
 # Tiếp tục chuỗi video khoa học tiền sử
 
 Repository **seotro95/seotro**, nhánh **codex/beringia-video-01**.
@@ -54,3 +62,4 @@ Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ 
 ## Bàn giao video chủ đề4
 
 Đã dựng và xuất bản23:00, chỉ voiceAnh gốc có nhấn nhá.133upload/115clipkhácnhau/18bảntrùng; chọn cảnh người trưởng thành, bỏ mọi tiếngclip và cảnh không phù hợp.12shot trong30giây đầu; các chương theo ranh120/110s. [Video](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Tập5 vẫn chưa bắt đầu.
+

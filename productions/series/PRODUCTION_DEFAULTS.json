@@ -26,6 +26,25 @@
         110
       ],
       "reason": "Explicit user request for episode4 only"
+    },
+    "6": {
+      "target_seconds": 1260,
+      "english_cues": 126,
+      "translated_chapter_seconds": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "reason": "Explicit user request for topic6 only; topic5 remains queued"
     }
   },
   "primary_video_language": "en-US",
@@ -72,4 +91,3 @@
   "generated_visuals_exclude_minors_from_topic_4": true,
   "visible_human_age_policy": "Unmistakably mature adults aged25–60; no minors in background, reflections, silhouettes, images or screens; no reconstruction of owners of juvenile specimens."
 }
-

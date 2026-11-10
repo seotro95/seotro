@@ -1,0 +1,52 @@
+{
+  "modern_geometry": "Natural Earth1:110m land and lakes, public domain; modern general geographic orientation, not elevation, dated palaeoshore or surveyed site coordinates",
+  "rendering": "Whole polygon rings and whole-ring longitude shifts; never modulo individual vertices and close cut fragments",
+  "map_bounds": {
+    "ALTAI_MODERN_BASE": [
+      60,
+      115,
+      30,
+      65
+    ],
+    "ASIA_MODERN_BASE": [
+      45,
+      155,
+      5,
+      65
+    ],
+    "ASIA_OCEANIA_MODERN_BASE": [
+      45,
+      180,
+      -20,
+      70
+    ],
+    "TIBETAN_PLATEAU_MODERN_BASE": [
+      65,
+      115,
+      10,
+      45
+    ]
+  },
+  "approximate_regional_markers": {
+    "Denisova_Altai_region": [
+      84.7,
+      51.4
+    ],
+    "Baishiya_Gansu_region": [
+      102.6,
+      35.5
+    ],
+    "Harbin_region": [
+      126.6,
+      45.8
+    ],
+    "Taiwan_Strait_region": [
+      120,
+      23.5
+    ],
+    "Bianfu": "Use a broad Yunnan regional label, not an unverified exact site coordinate",
+    "Xujiayao": "Use a broad Nihewan Basin regional label, not an exact surveyed coordinate"
+  },
+  "diagram_policy": "The three abstract plates are conceptual teaching diagrams, no actual genetic data, exact genealogy, measured time scale or human figures. Add all verified text in editing.",
+  "no_children_in_visuals": true
+}

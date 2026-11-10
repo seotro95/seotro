@@ -1,0 +1,13 @@
+timeline_start,timeline_end,source_scene,clip_id,filename,source_in,source_out,note_vi
+0.0,2.5,1,1,DE06_001.mp4,0,2.5,"12shot trong30giây đầu, không thêm intro, giữ nguyên voice. Mẫu và sơ đồ đều minh họa; chỉ người trưởng thành."
+2.5,5.0,21,20,DE06_020.mp4,0.3,2.8,"12shot trong30giây đầu, không thêm intro, giữ nguyên voice. Mẫu và sơ đồ đều minh họa; chỉ người trưởng thành."
+5.0,7.5,11,10,DE06_010.mp4,0.5,3.0,"12shot trong30giây đầu, không thêm intro, giữ nguyên voice. Mẫu và sơ đồ đều minh họa; chỉ người trưởng thành."
+7.5,10.0,4,4,DE06_004.mp4,0.5,3.0,"12shot trong30giây đầu, không thêm intro, giữ nguyên voice. Mẫu và sơ đồ đều minh họa; chỉ người trưởng thành."
+10.0,12.5,2,2,DE06_002.mp4,0.5,3.0,"12shot trong30giây đầu, không thêm intro, giữ nguyên voice. Mẫu và sơ đồ đều minh họa; chỉ người trưởng thành."
+12.5,15.0,28,26,DE06_026.mp4,0.5,3.0,"12shot trong30giây đầu, không thêm intro, giữ nguyên voice. Mẫu và sơ đồ đều minh họa; chỉ người trưởng thành."
+15.0,17.5,35,32,DE06_032.mp4,0,2.5,"12shot trong30giây đầu, không thêm intro, giữ nguyên voice. Mẫu và sơ đồ đều minh họa; chỉ người trưởng thành."
+17.5,20.0,43,40,DE06_040.mp4,0.5,3.0,"12shot trong30giây đầu, không thêm intro, giữ nguyên voice. Mẫu và sơ đồ đều minh họa; chỉ người trưởng thành."
+20.0,22.5,40,37,DE06_037.mp4,0.5,3.0,"12shot trong30giây đầu, không thêm intro, giữ nguyên voice. Mẫu và sơ đồ đều minh họa; chỉ người trưởng thành."
+22.5,25.0,39,36,DE06_036.mp4,0.5,3.0,"12shot trong30giây đầu, không thêm intro, giữ nguyên voice. Mẫu và sơ đồ đều minh họa; chỉ người trưởng thành."
+25.0,27.5,5,5,DE06_005.mp4,0,2.5,"12shot trong30giây đầu, không thêm intro, giữ nguyên voice. Mẫu và sơ đồ đều minh họa; chỉ người trưởng thành."
+27.5,30.0,52,48,DE06_048.mp4,0.5,3.0,"12shot trong30giây đầu, không thêm intro, giữ nguyên voice. Mẫu và sơ đồ đều minh họa; chỉ người trưởng thành."

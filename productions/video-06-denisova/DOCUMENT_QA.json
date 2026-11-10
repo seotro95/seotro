@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "english_words": 3425,
+  "max_words_per_10s_cue": 29,
+  "timeline_seconds": 1260,
+  "timeline_cues": 126,
+  "unique_prompts": 110,
+  "reuse_slots": 16,
+  "prompt_txt_files": 11,
+  "prompts_per_txt": 10,
+  "opening_shots": 12,
+  "no_child_positive_scene_descriptions": true,
+  "all_visible_humans_adult_policy": true,
+  "audio_status": "not_generated_at_document_delivery",
+  "target_frames_at_48000": 60480000,
+  "translated_chapter_durations": [
+    110,
+    110,
+    110,
+    110,
+    110,
+    110,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "source_count": 27
+}
