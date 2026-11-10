@@ -1,4 +1,4 @@
-name: Kostenki19 audit122 English cues including faithful fallback pieces
+name: Kostenki19 audit available English metadata and record fallback gaps
 on:
   push:
     branches: [codex/kostenki-voice-build-20261111]
