@@ -1,0 +1,65 @@
+{
+  "uploaded_files": 104,
+  "unique_checksums": 104,
+  "exact_duplicates": [],
+  "source_bytes": 398304151,
+  "audio_sources": 33,
+  "resolutions": [
+    [
+      1280,
+      720
+    ]
+  ],
+  "durations": [
+    10.0
+  ],
+  "missing_prompt_ids": [
+    59,
+    82,
+    86,
+    89,
+    99,
+    105
+  ],
+  "topic": 6,
+  "target_seconds": 1260,
+  "opening_shots": 12,
+  "planned_shots": 224,
+  "graphic_count": 30,
+  "used_source_clips": 63,
+  "short_dissolves": 9,
+  "missing_context_solution": {
+    "59": "verified plateau map",
+    "82": "verified Asia map",
+    "86": "verified Taiwan Strait map",
+    "89": "inspected archive alternative DE06_081",
+    "99": "Xujiayao context graphic",
+    "105": "inspected mature adult demonstration DE06_076"
+  },
+  "source_review": "All104 clips sampled at0.8,4.9,9.1seconds; no claim of continuous manual viewing.",
+  "no_children_in_selected_visuals": true,
+  "rejected_source_labels": [
+    "DE06_025"
+  ],
+  "replaced_reference_prompt_ids": [
+    3,
+    5,
+    11,
+    16,
+    32,
+    47,
+    51,
+    57,
+    59,
+    63,
+    77,
+    82,
+    85,
+    86,
+    95,
+    99
+  ],
+  "english_reference_sha256": "d733faf7cb437ff9db733a7f5f9f527aa177a3e688abdd270f313af2ab3605ad",
+  "audio": "Existing English voice only; all source audio omitted; no music or SFX.",
+  "graphics": "Modern Natural Earth geography and explicit explanatory schematics; not original fossils, measured Denisovan data, reconstructed faces or proven routes."
+}

@@ -1,0 +1,256 @@
+{
+  "topic": 6,
+  "repository": "seotro95/seotro",
+  "release_tag": "denisova-video-06-final-21min",
+  "contents": "Only the completed edited video, opening, approved delivery project, subtitles, titles/thumbnail prompts and technical metadata. No raw source video clips or raw-source Git blob references.",
+  "raw_source_clips_included": false,
+  "assets": [
+    {
+      "name": "DENISOVA_06_EDIT_PROJECT.zip",
+      "bytes": 11966149,
+      "sha256": "d0a987e3e90f33dc1fa2e0939d0cdeb0b7aa4abd3de5d7f4729361a7f2d70d51",
+      "parts": [
+        {
+          "path": "transfer/parts/DENISOVA_06_EDIT_PROJECT.zip.000.part",
+          "bytes": 11966149,
+          "sha256": "d0a987e3e90f33dc1fa2e0939d0cdeb0b7aa4abd3de5d7f4729361a7f2d70d51"
+        }
+      ]
+    },
+    {
+      "name": "DENISOVA_06_EN_FINAL_21m_720p.mp4",
+      "bytes": 193553665,
+      "sha256": "9f50dca12541fc54c6b0b00a36db53ec7b39830cbc7c694733b32cb4d3a1d68f",
+      "parts": [
+        {
+          "path": "transfer/parts/DENISOVA_06_EN_FINAL_21m_720p.mp4.000.part",
+          "bytes": 16777216,
+          "sha256": "02ca769c34190e49a2fbaf7eea6accf32525ac44114004dc43a2815021d745be"
+        },
+        {
+          "path": "transfer/parts/DENISOVA_06_EN_FINAL_21m_720p.mp4.001.part",
+          "bytes": 16777216,
+          "sha256": "6b07d97671be7877eacaca754722a5a85d729b40e0178c33917439afd5717743"
+        },
+        {
+          "path": "transfer/parts/DENISOVA_06_EN_FINAL_21m_720p.mp4.002.part",
+          "bytes": 16777216,
+          "sha256": "d056109b44fd7471ed2681fbac082cffce08cbb318c64c8e9c65e76f4e2ddbe0"
+        },
+        {
+          "path": "transfer/parts/DENISOVA_06_EN_FINAL_21m_720p.mp4.003.part",
+          "bytes": 16777216,
+          "sha256": "c20296148477bb1c607dc2c0c1120ae472e2a6b319ee84a307538643fa3257b1"
+        },
+        {
+          "path": "transfer/parts/DENISOVA_06_EN_FINAL_21m_720p.mp4.004.part",
+          "bytes": 16777216,
+          "sha256": "7d53d7c5a785ce0ce9fd7dfd2a7c49355804726f2b08b307162fd5e1269593f8"
+        },
+        {
+          "path": "transfer/parts/DENISOVA_06_EN_FINAL_21m_720p.mp4.005.part",
+          "bytes": 16777216,
+          "sha256": "23017d62dab3678fefef8a86c2493032ed3078510d6f74d429c7d398dbf63037"
+        },
+        {
+          "path": "transfer/parts/DENISOVA_06_EN_FINAL_21m_720p.mp4.006.part",
+          "bytes": 16777216,
+          "sha256": "2145723c773b9aea5f36766badae028a233613b539be182be3c43bd4b406fd1b"
+        },
+        {
+          "path": "transfer/parts/DENISOVA_06_EN_FINAL_21m_720p.mp4.007.part",
+          "bytes": 16777216,
+          "sha256": "5bab0332e2329f4a3c1515ac2a471f47fcba14f805a77250d34e7e478d79e511"
+        },
+        {
+          "path": "transfer/parts/DENISOVA_06_EN_FINAL_21m_720p.mp4.008.part",
+          "bytes": 16777216,
+          "sha256": "915d56942b427136ef306f7fbc5eab4d74e497744057a4d925e1d6ccae7ee2c6"
+        },
+        {
+          "path": "transfer/parts/DENISOVA_06_EN_FINAL_21m_720p.mp4.009.part",
+          "bytes": 16777216,
+          "sha256": "e4c1ba3b9a1f48814728ea635f2de105d0ae823cc1d0c73b6dfd87530d2effdf"
+        },
+        {
+          "path": "transfer/parts/DENISOVA_06_EN_FINAL_21m_720p.mp4.010.part",
+          "bytes": 16777216,
+          "sha256": "2a5c1aa95cdf6670a2ef3d1aba4145da513f8c244347a7513908420ac9713957"
+        },
+        {
+          "path": "transfer/parts/DENISOVA_06_EN_FINAL_21m_720p.mp4.011.part",
+          "bytes": 9004289,
+          "sha256": "fd99f6795dd9ce7d83e4e9f91f1510fd47692980e78ff020a21401b296e9835b"
+        }
+      ]
+    },
+    {
+      "name": "DENISOVA_06_EN_SUBTITLES.srt",
+      "bytes": 27586,
+      "sha256": "2ccf638302f938feb77be4a2f786b49d81a9a79b72f767799bfbf5a83666e716",
+      "parts": [
+        {
+          "path": "transfer/parts/DENISOVA_06_EN_SUBTITLES.srt.000.part",
+          "bytes": 27586,
+          "sha256": "2ccf638302f938feb77be4a2f786b49d81a9a79b72f767799bfbf5a83666e716"
+        }
+      ]
+    },
+    {
+      "name": "DENISOVA_06_OPENING_30s.mp4",
+      "bytes": 7157554,
+      "sha256": "301e9eaf1381055ade45dc0a2e2873df74fbb9c822e43937925883cbee1b8bed",
+      "parts": [
+        {
+          "path": "transfer/parts/DENISOVA_06_OPENING_30s.mp4.000.part",
+          "bytes": 7157554,
+          "sha256": "301e9eaf1381055ade45dc0a2e2873df74fbb9c822e43937925883cbee1b8bed"
+        }
+      ]
+    },
+    {
+      "name": "DENISOVA_06_TITLES_THUMBNAILS.txt",
+      "bytes": 10983,
+      "sha256": "ed29c13a80b386a834b7c4127158197d7a1fed513eae730971b2d138f8fa1016",
+      "parts": [
+        {
+          "path": "transfer/parts/DENISOVA_06_TITLES_THUMBNAILS.txt.000.part",
+          "bytes": 10983,
+          "sha256": "ed29c13a80b386a834b7c4127158197d7a1fed513eae730971b2d138f8fa1016"
+        }
+      ]
+    },
+    {
+      "name": "DENISOVA_06_TITLES_THUMBNAILS.zip",
+      "bytes": 4776,
+      "sha256": "8a1e558a498b3a9fae5fb41efb82068bb1e67857174bfa401f82ae9966d9cd0a",
+      "parts": [
+        {
+          "path": "transfer/parts/DENISOVA_06_TITLES_THUMBNAILS.zip.000.part",
+          "bytes": 4776,
+          "sha256": "8a1e558a498b3a9fae5fb41efb82068bb1e67857174bfa401f82ae9966d9cd0a"
+        }
+      ]
+    },
+    {
+      "name": "EDITOR_DECISIONS.json",
+      "bytes": 1470,
+      "sha256": "e3ab6b4ab6b7ca64e5ecefcb1dbbf6b5976b8fe4b37dd3c0fce35ec5d1a7fab7",
+      "parts": [
+        {
+          "path": "transfer/parts/EDITOR_DECISIONS.json.000.part",
+          "bytes": 1470,
+          "sha256": "e3ab6b4ab6b7ca64e5ecefcb1dbbf6b5976b8fe4b37dd3c0fce35ec5d1a7fab7"
+        }
+      ]
+    },
+    {
+      "name": "EDIT_TIMELINE.csv",
+      "bytes": 49361,
+      "sha256": "3f84557a33bd62c557332e604c4bea4ab4763723d691e1bbabb514c5f95f40bf",
+      "parts": [
+        {
+          "path": "transfer/parts/EDIT_TIMELINE.csv.000.part",
+          "bytes": 49361,
+          "sha256": "3f84557a33bd62c557332e604c4bea4ab4763723d691e1bbabb514c5f95f40bf"
+        }
+      ]
+    },
+    {
+      "name": "FINAL_EXPORT_COMMAND.json",
+      "bytes": 1147,
+      "sha256": "ebc0dbb58c4f45926264f08ef26828a91b1602b673e7087f0070824d0a55a409",
+      "parts": [
+        {
+          "path": "transfer/parts/FINAL_EXPORT_COMMAND.json.000.part",
+          "bytes": 1147,
+          "sha256": "ebc0dbb58c4f45926264f08ef26828a91b1602b673e7087f0070824d0a55a409"
+        }
+      ]
+    },
+    {
+      "name": "FINAL_VIDEO_QA.json",
+      "bytes": 4714,
+      "sha256": "3d8d6a3252907036418a6bb77171596bf4953281586fddb82904769a8dbb31a1",
+      "parts": [
+        {
+          "path": "transfer/parts/FINAL_VIDEO_QA.json.000.part",
+          "bytes": 4714,
+          "sha256": "3d8d6a3252907036418a6bb77171596bf4953281586fddb82904769a8dbb31a1"
+        }
+      ]
+    },
+    {
+      "name": "README.md",
+      "bytes": 2501,
+      "sha256": "89fc32a4d8c1e4711d4596c6640b18d36c190bbf925e7b65a191f617586cf870",
+      "parts": [
+        {
+          "path": "transfer/parts/README.md.000.part",
+          "bytes": 2501,
+          "sha256": "89fc32a4d8c1e4711d4596c6640b18d36c190bbf925e7b65a191f617586cf870"
+        }
+      ]
+    },
+    {
+      "name": "SCENE_VERIFICATION.json",
+      "bytes": 10730,
+      "sha256": "8786921f5e77ea5cecdcee6a18a9b7918dcdb356ecbaef60972dc383564bd6dd",
+      "parts": [
+        {
+          "path": "transfer/parts/SCENE_VERIFICATION.json.000.part",
+          "bytes": 10730,
+          "sha256": "8786921f5e77ea5cecdcee6a18a9b7918dcdb356ecbaef60972dc383564bd6dd"
+        }
+      ]
+    },
+    {
+      "name": "SOURCE_CLIP_MANIFEST.csv",
+      "bytes": 15420,
+      "sha256": "17ce288c4c85e87fc89d8bbb4c4ee4359b126da9424d91c4c6509e455da94c83",
+      "parts": [
+        {
+          "path": "transfer/parts/SOURCE_CLIP_MANIFEST.csv.000.part",
+          "bytes": 15420,
+          "sha256": "17ce288c4c85e87fc89d8bbb4c4ee4359b126da9424d91c4c6509e455da94c83"
+        }
+      ]
+    },
+    {
+      "name": "SOURCE_MANIFEST.json",
+      "bytes": 29188,
+      "sha256": "7067e0021b2dd57f2c0149d30132b8aa6ae1e6ab2a082aef1c3fa539283061d9",
+      "parts": [
+        {
+          "path": "transfer/parts/SOURCE_MANIFEST.json.000.part",
+          "bytes": 29188,
+          "sha256": "7067e0021b2dd57f2c0149d30132b8aa6ae1e6ab2a082aef1c3fa539283061d9"
+        }
+      ]
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1278,
+      "sha256": "4ff8d85e991a680d3b87bcc1eedd1893ff61f5d674c9ca23d7405fe6b994d257",
+      "parts": [
+        {
+          "path": "transfer/parts/SHA256SUMS.txt.000.part",
+          "bytes": 1278,
+          "sha256": "4ff8d85e991a680d3b87bcc1eedd1893ff61f5d674c9ca23d7405fe6b994d257"
+        }
+      ]
+    },
+    {
+      "name": "RELEASE_ASSET_MANIFEST.json",
+      "bytes": 2408,
+      "sha256": "3806fc194319d86c4c78f4fa6bde69bb303a0a20ea2b4ea3c7d144e97dad7e78",
+      "parts": [
+        {
+          "path": "transfer/parts/RELEASE_ASSET_MANIFEST.json.000.part",
+          "bytes": 2408,
+          "sha256": "3806fc194319d86c4c78f4fa6bde69bb303a0a20ea2b4ea3c7d144e97dad7e78"
+        }
+      ]
+    }
+  ]
+}

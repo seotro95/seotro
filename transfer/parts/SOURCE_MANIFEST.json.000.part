@@ -1,0 +1,839 @@
+{
+  "topic": 6,
+  "upload_count": 104,
+  "source_audio_removed_on_render": true,
+  "clips": [
+    {
+      "label": "DE06_001",
+      "clip_id": 1,
+      "source_name": "video-000518-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2229532,
+      "sha256": "3ca6e29a7f9928b50b418285cf640e8ff0d9b490d19e4c904e31504cfcdb9cd8",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_002",
+      "clip_id": 2,
+      "source_name": "video-000519-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2874198,
+      "sha256": "54460449d975175528167b020d6e8b76f44bfdb0d50b1fb6242a920847f0c9d4",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_003",
+      "clip_id": 3,
+      "source_name": "video-000520-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 4149497,
+      "sha256": "1bf9e13a68d3de9fc082feef6947babd93a48bf93fddada0c047ee24ebe7e382",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_004",
+      "clip_id": 4,
+      "source_name": "video-000521-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2029608,
+      "sha256": "5733c05d8a14f877652fa9c6a2a2efe73179722ef54c5b589b5e6f17ab9a6420",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_005",
+      "clip_id": 5,
+      "source_name": "video-000522-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 4213497,
+      "sha256": "20d974e597d939c9891d7da877ebb9eef554a5b0b42c92bf46d843adfb11d5ea",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_006",
+      "clip_id": 6,
+      "source_name": "video-000523-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2977059,
+      "sha256": "ee5ff1d935f9430f4e979d53664cb0983d178e0a778cc5ede75bb69b970c720d",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_007",
+      "clip_id": 7,
+      "source_name": "video-000524-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2603238,
+      "sha256": "1eb804dfed5156413fac1a21dffd8394b28f62df1afb2ffb6dbc5e1a25c5d2df",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_008",
+      "clip_id": 8,
+      "source_name": "video-000525-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2076203,
+      "sha256": "52b0f382373e9d571d5a54ca9297ab3383b49cd833f7ff875870041e2230385d",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_009",
+      "clip_id": 9,
+      "source_name": "video-000526-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 5560096,
+      "sha256": "9fc6b5b234c6245a4396ca72468f65b834508756041d8da81890a65afcd04309",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_010",
+      "clip_id": 10,
+      "source_name": "video-000527-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 30449269,
+      "sha256": "48ca8ec2a6600b408f8cf80e252785c396cfe823e4455b14241547b3cd942f3b",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_011",
+      "clip_id": 11,
+      "source_name": "video-000528-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 4103068,
+      "sha256": "fbfb9ed2ec44fcfeeadf7835b4f354f1fe4bc7509347b649a357a2c484e0c70a",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_012",
+      "clip_id": 12,
+      "source_name": "video-000529-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 6096378,
+      "sha256": "4ae29602a2457258dcb932b7d8bc4d0ba390c7d855424d19c23988f7626b766f",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_013",
+      "clip_id": 13,
+      "source_name": "video-000530-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 7762932,
+      "sha256": "67562a910125acefb2bf05ab99a080b4cb409b9c381e978436aa80e20f37d710",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_014",
+      "clip_id": 14,
+      "source_name": "video-000531-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2779721,
+      "sha256": "664f4897a36c4330904e62e69dee563850af8ed7adeddece9b4d70956b9fb9b6",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_015",
+      "clip_id": 15,
+      "source_name": "video-000532-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3524121,
+      "sha256": "73206bdfa77dc3d1a2c620a191ee295d6b2a014d8111c1a33d9e0d9e032fbcc9",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_016",
+      "clip_id": 16,
+      "source_name": "video-000533-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 4596160,
+      "sha256": "ed903d537252e112f5984d11f4d184681d723b53c224789c5169b0f83f50f1f4",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_017",
+      "clip_id": 17,
+      "source_name": "video-000534-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2687171,
+      "sha256": "0c8199f03ce27ed63cce772d734149a9e96cfd87117eef48067c137398a3ad6f",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_018",
+      "clip_id": 18,
+      "source_name": "video-000535-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2980212,
+      "sha256": "2a023f1cb9475a410678dbefccf586f5a37a361695123154a14ea4d141f08cb4",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_019",
+      "clip_id": 19,
+      "source_name": "video-000536-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 5347079,
+      "sha256": "374f797498c82a9b36af1e4ba78e4da587269bf3e337225420e21373d74ed4b1",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_020",
+      "clip_id": 20,
+      "source_name": "video-000537-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2840461,
+      "sha256": "886634877badff4997be52370751229503ffabfe575867258858293c9af7a68d",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_021",
+      "clip_id": 21,
+      "source_name": "video-000538-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2781914,
+      "sha256": "bb18c5dd9ec81e3bbcb1c02720bf2083ac7785571a5dc4e90d8bdca9c155a103",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_022",
+      "clip_id": 22,
+      "source_name": "video-000539-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3341830,
+      "sha256": "41a12b8b130595ceba46ccb4530227a6d81bc577b2a69eef22a7696116761ab8",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_023",
+      "clip_id": 23,
+      "source_name": "video-000540-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2157843,
+      "sha256": "89a2b6c2f019401a853fe1b2037e1b9d4d2d6dce5bc16807ce20d33b76d3fbf1",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_024",
+      "clip_id": 24,
+      "source_name": "video-000541-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 4141402,
+      "sha256": "6f7d73fd4eb40dfe5b05e1be418f844ac674e7cf0c8724f8ccfefea563e07bb3",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_025",
+      "clip_id": 25,
+      "source_name": "video-000542-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2359878,
+      "sha256": "e161c5d8056415fbdbc1c6fc6be06b5fa6e7590ec743ef80670ab1f5e0ddf0a2",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_026",
+      "clip_id": 26,
+      "source_name": "video-000543-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3302110,
+      "sha256": "b8f2ab46d8eda837a4a4574f5cdd543e635e667672b3a8a560a5d411e9aae18e",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_027",
+      "clip_id": 27,
+      "source_name": "video-000544-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 4415289,
+      "sha256": "d6f8fb07715aba4153c34719a9932ec5ba6b2fdd6f21ef2dcc4961a92cb76a81",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_028",
+      "clip_id": 28,
+      "source_name": "video-000545-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 5135300,
+      "sha256": "7330a8b44e36856e9d730237a264497f14d83253c0c788f80d4f423275865695",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_029",
+      "clip_id": 29,
+      "source_name": "video-000546-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2193749,
+      "sha256": "7d2834e954babfc909ee44a495844faa81f3bfea9b4a555c6867243690c16523",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_030",
+      "clip_id": 30,
+      "source_name": "video-000547-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2383509,
+      "sha256": "d0b1550a278b2858f67d466bca1cce4c1bc973d93e55757463df2bf907880c9f",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_031",
+      "clip_id": 31,
+      "source_name": "video-000548-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 5324823,
+      "sha256": "981cceddb48d393ae9ff7cc15ed9c7e593792b7032509edf8db8ae4ebbd3aeb9",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_032",
+      "clip_id": 32,
+      "source_name": "video-000549-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3724721,
+      "sha256": "3c25db1446150e6a43fadefcac51b72eab6a7703258e69fb0bf58b6c5cb2d242",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_033",
+      "clip_id": 33,
+      "source_name": "video-000550-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2259266,
+      "sha256": "55a974d78a1594a2bb4518e1ed085ced66734cc48b579e3908d13583b42ade90",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_034",
+      "clip_id": 34,
+      "source_name": "video-000551-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2726265,
+      "sha256": "1a80341d7f30e8cf7185ccfd641b0bf2e8bffd09c397b27d14ec6a92253fd2e0",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_035",
+      "clip_id": 35,
+      "source_name": "video-000552-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2623032,
+      "sha256": "077443ccbdcf02aec6ef2f2643e1f2d53203b068ab60c3a9ee5336a3b1aa44cb",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_036",
+      "clip_id": 36,
+      "source_name": "video-000553-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2612661,
+      "sha256": "474ea152b30af49ac56fafaafcd0593dd9267e22b5051846763b8c54cf74c3fd",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_037",
+      "clip_id": 37,
+      "source_name": "video-000554-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 4163707,
+      "sha256": "f1f2341932741f2ea0762f84e88e114fee7ab73b534ece42cdb71ca1b4f4cb0c",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_038",
+      "clip_id": 38,
+      "source_name": "video-000555-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3623193,
+      "sha256": "23517716caa21d63e695ad40aed328930841687d6977fb7bc59b1b7b716f0199",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_039",
+      "clip_id": 39,
+      "source_name": "video-000556-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 6936463,
+      "sha256": "4a416bd939f08f1511768f4f38f7ed5ff78eca4a63c551c8efb5c417e63a065b",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_040",
+      "clip_id": 40,
+      "source_name": "video-000557-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2840508,
+      "sha256": "2677fc060de7b5e5cc437362171766d65b19d0ff86b2cc158e23aa076c1f37f2",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_041",
+      "clip_id": 41,
+      "source_name": "video-000558-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3378884,
+      "sha256": "42cc025764f2528a3889e8bb2e714b81563c3afe0dd9f73fce0bb8aa2659a4ce",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_042",
+      "clip_id": 42,
+      "source_name": "video-000559-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 4378554,
+      "sha256": "77c31a51886e40f5c387761f3bbd37938e025005f1f928e168b02bfe67e39615",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_043",
+      "clip_id": 43,
+      "source_name": "video-000560-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2160952,
+      "sha256": "1a99178621041e7f2d08ef2fae290a4cdc622cea3ed1734cc17a23468ee2daf2",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_044",
+      "clip_id": 44,
+      "source_name": "video-000561-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2134792,
+      "sha256": "df2bcd592c2303192005c02433d2ddac8743e52e0b72b85cab34d924639de73c",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_045",
+      "clip_id": 45,
+      "source_name": "video-000562-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 1812553,
+      "sha256": "2c6362ac552f589044d1281d3c1f5f31d105b17bb7ba2d134ad4fe8bf385c3d6",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_046",
+      "clip_id": 46,
+      "source_name": "video-000563-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2242654,
+      "sha256": "be798f56891055c3d8a2af6cdded1ac5948559633e630f9783931089a1aa4e24",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_047",
+      "clip_id": 47,
+      "source_name": "video-000564-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3635884,
+      "sha256": "0ef39d52a21ab3cc76dbef96ea5221c16c12fdb471d269bee195085915f1cec2",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_048",
+      "clip_id": 48,
+      "source_name": "video-000565-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2293633,
+      "sha256": "ee1e92d817fafa357861d1dde60bb4b2121f5a9a21e4e1146db4dee1eacf0f81",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_049",
+      "clip_id": 49,
+      "source_name": "video-000566-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3135550,
+      "sha256": "475ad8450167f1ef6ed7005b0fbec353d79d0862c69fc6ee5211eb7f4af7a4c1",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_050",
+      "clip_id": 50,
+      "source_name": "video-000567-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2860177,
+      "sha256": "793db9b34e303af00d08b35c333b5c5742e9e4ea7429eb1c7bb7f1eb779d4be2",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_051",
+      "clip_id": 51,
+      "source_name": "video-000568-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3333673,
+      "sha256": "4e40f5530573628c59c64726c2581d32d392f04bfaff563ee56d02af38175d0d",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_052",
+      "clip_id": 52,
+      "source_name": "video-000569-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 1877316,
+      "sha256": "cb7e3273bad27a19c96e9dcd7c49688688ecb32ce2bd9a7396cdccd4a9af7a3c",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_053",
+      "clip_id": 53,
+      "source_name": "video-000570-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3441336,
+      "sha256": "ea4fdfae46ed3e96f8657733bf535b22d4c11fdcaeda03333318746818f79ae1",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_054",
+      "clip_id": 54,
+      "source_name": "video-000571-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3527815,
+      "sha256": "fdba2c6166179ce88433909daadac80b0c731ac0489750aa275930ff6689aab3",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_055",
+      "clip_id": 55,
+      "source_name": "video-000572-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3464813,
+      "sha256": "a25d6b895104df1b4196f965916c36feb1e57f36427742d3a48b61090e329524",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_056",
+      "clip_id": 56,
+      "source_name": "video-000573-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2848116,
+      "sha256": "4e0a765ac2aa6d347642f86c27ec66b9a5e49069771a11353d07e7a8e405b203",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_057",
+      "clip_id": 57,
+      "source_name": "video-000574-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 4477636,
+      "sha256": "2e148e1669f47a57c8b0a30136b49bb2fbd7b25f764ff162b6bf3360dd221ce7",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_058",
+      "clip_id": 58,
+      "source_name": "video-000575-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3689246,
+      "sha256": "0948cdf778042472e96dcda14df0fd5730d770941e2064877085e5a21d9686e1",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_060",
+      "clip_id": 60,
+      "source_name": "video-000576-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 4621024,
+      "sha256": "363e390db8674dba078f2b14b512420b94d39cc9a8db2ca1977da4f7ea49a206",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_061",
+      "clip_id": 61,
+      "source_name": "video-000577-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 4203945,
+      "sha256": "359648455bd51ec9d5ca31e16318d9743931cb2c579383b93a6549286c8a747e",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_062",
+      "clip_id": 62,
+      "source_name": "video-000578-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2947671,
+      "sha256": "c0708c08aac7c1198950e9f1f071ab694aa85df0264ab71f6c9ec855993f4042",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_063",
+      "clip_id": 63,
+      "source_name": "video-000579-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 12169354,
+      "sha256": "b267e43e1fdf48073f67bc941b3dd74f10206515898e4b66c36bcd0c2e58222d",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_064",
+      "clip_id": 64,
+      "source_name": "video-000580-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3781575,
+      "sha256": "31502b607ec4561a1dfa38d2249dba218789d41bbf2cace36e63cba65a4847e9",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_065",
+      "clip_id": 65,
+      "source_name": "video-000581-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 9633357,
+      "sha256": "cb6a8c2ce030782d06e93d1e6d0c73990c538ea9f84a95b687f509fa230c3c50",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_066",
+      "clip_id": 66,
+      "source_name": "video-000582-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2624123,
+      "sha256": "15d09bd78cd6532156b08f3a390bb03e4ba5ea5926045d58ec4c073b9419ec4d",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_067",
+      "clip_id": 67,
+      "source_name": "video-000583-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2310165,
+      "sha256": "2ecfa534a472ab27aebddba2e0fd22c1ec7df82901088dc6631f907c4006d307",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_068",
+      "clip_id": 68,
+      "source_name": "video-000584-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3566237,
+      "sha256": "b3dd4b915e9782a56250f96bd66034932bed577bf85135601636b5bc463d0a92",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_069",
+      "clip_id": 69,
+      "source_name": "video-000585-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 5117207,
+      "sha256": "604bb7d9dd8d781f5806b85423c0c2fbad6aace69b9bcd3ba2333fa643b581b8",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_070",
+      "clip_id": 70,
+      "source_name": "video-000586-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 7807580,
+      "sha256": "049ce1c3e2309e17194a3ba136abb1c811128a185607106d5c9e5efe7f57e7f8",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_071",
+      "clip_id": 71,
+      "source_name": "video-000587-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2974980,
+      "sha256": "a70e246abcdc94c5d0410371ac2ad79f87695da847eaad4606000b1bf3ff14ae",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_072",
+      "clip_id": 72,
+      "source_name": "video-000588-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 5465859,
+      "sha256": "8732638949682bfce597b3479bdd06e59007ff2011d2a3829c17be4a23d7e981",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_073",
+      "clip_id": 73,
+      "source_name": "video-000589-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2237274,
+      "sha256": "89a842e78038fd2f699561ff3203bbb92ca6a8709582f057cb29002a5ccdb22a",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_074",
+      "clip_id": 74,
+      "source_name": "video-000590-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2497669,
+      "sha256": "da05477cc7e703f13a2b1f3b2d028d7ccdd66e78832a378e3c9ef7228ce52e44",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_075",
+      "clip_id": 75,
+      "source_name": "video-000591-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 4381681,
+      "sha256": "c7fb879cc95c33525c948e33e0cc5e5f8adf227a74c3ff5a79785f32543c50a1",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_076",
+      "clip_id": 76,
+      "source_name": "video-000592-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 6910686,
+      "sha256": "58548614cd0f18041cce76188ca43ece476e1369696ce826addb5fbf3ba96baf",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_077",
+      "clip_id": 77,
+      "source_name": "video-000593-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3402398,
+      "sha256": "c453b861f20f6f88ab1a792437c0a0815d296f48665ec1b62820ab935de800cc",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_078",
+      "clip_id": 78,
+      "source_name": "video-000594-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3412145,
+      "sha256": "c4be369bb8eead541a26916ff681df5c4f873533f664f79572cad09b5ae46998",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_079",
+      "clip_id": 79,
+      "source_name": "video-000595-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2232510,
+      "sha256": "e23972084012289251cc71eba273ab870dc30bdc811a8d28f67fc9ade5161c6a",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_080",
+      "clip_id": 80,
+      "source_name": "video-000596-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2494850,
+      "sha256": "c184d2a2a7b1a4b1ee08ed2ac8764bc059c81773f590e7f0bb907e95dc9a4da5",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_081",
+      "clip_id": 81,
+      "source_name": "video-000597-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2594532,
+      "sha256": "442016843699e343b796c00a0eabfc0483a0013cc3dd7ae2d69e593eb6c6be3b",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_083",
+      "clip_id": 83,
+      "source_name": "video-000598-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3085598,
+      "sha256": "b700aa2f1e2d4c1e9519f3ebad56b498848e459133e3d18c25d1254309e73955",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_084",
+      "clip_id": 84,
+      "source_name": "video-000599-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2237200,
+      "sha256": "b2f0b07e379bb646b23284363a1df8b31b0bfa40e20dbf6f860186e31e65addc",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_085",
+      "clip_id": 85,
+      "source_name": "video-000600-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3516375,
+      "sha256": "6531a924a4f2ad6a61e799cfdf0e10f812756a99cd9f04284618f23a4dde6be4",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_087",
+      "clip_id": 87,
+      "source_name": "video-000601-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2137860,
+      "sha256": "48c57c1d09344c523c70a4ecbf7effac7c10dda7883d6f02f8c10437fb42bc83",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_088",
+      "clip_id": 88,
+      "source_name": "video-000602-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2852644,
+      "sha256": "2fe9cce5315705335f3ac928e19542de29ef6f47fbe363f029b5dac0fd5953f6",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_090",
+      "clip_id": 90,
+      "source_name": "video-000603-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3160873,
+      "sha256": "429a2832bf7c85526c708257b5520fee653df7e0ff2676ce51699f16b8889708",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_091",
+      "clip_id": 91,
+      "source_name": "video-000604-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 1960778,
+      "sha256": "5115771ea88e1d00e3105020810253ff4d88dad48d9302de9d971d6a1207cfbf",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_092",
+      "clip_id": 92,
+      "source_name": "video-000605-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2389973,
+      "sha256": "7baa4db6476465eddf3f17876a229afb32603e9f10e4995c89cbd080042ad29e",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_093",
+      "clip_id": 93,
+      "source_name": "video-000606-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2954721,
+      "sha256": "6ba40b471e5babc084e0c544525cbd92d809e71c309580e2c300e59998c3fa27",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_094",
+      "clip_id": 94,
+      "source_name": "video-000607-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3088294,
+      "sha256": "e6674795335c31916a700ec45901b4a1e43d6b615e9f86ffee135548d77b0993",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_095",
+      "clip_id": 95,
+      "source_name": "video-000608-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 4097853,
+      "sha256": "d49dbbb2b9826f2a7afae11d1966854faca03ee5e6f715e050b514dc4aa51975",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_096",
+      "clip_id": 96,
+      "source_name": "video-000609-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2624614,
+      "sha256": "79afe9161c2fd65218f6b33695e454ee698e41dcfddc091e6a9b3eae6c2f9311",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_097",
+      "clip_id": 97,
+      "source_name": "video-000610-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2679136,
+      "sha256": "b6f07f78322e55c7630735fd326d2f23fa6c8d4bf470dd64a4e49c13c083ff2b",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_098",
+      "clip_id": 98,
+      "source_name": "video-000611-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2354101,
+      "sha256": "57e4d7bcc54d504c96ee3ccd4775fe917eea682d4c2402eac6e72dfac35696f8",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_100",
+      "clip_id": 100,
+      "source_name": "video-000612-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2318659,
+      "sha256": "6e4c9b1f1003be9fe7156319fb705c5173d26d6c80ab7d8924c30026208bf62c",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_101",
+      "clip_id": 101,
+      "source_name": "video-000613-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2708486,
+      "sha256": "35ac9f4186770b220706404702413db6292084066a6814009abca5bcdd09f6b0",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_102",
+      "clip_id": 102,
+      "source_name": "video-000614-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2580671,
+      "sha256": "63282915e43a48fe42de74d28f743db0931187d662139413ad329ffe3ad2298f",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_103",
+      "clip_id": 103,
+      "source_name": "video-000615-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2735031,
+      "sha256": "5306ed3e39fea23a2bb253ca3943e41771a966e59e3a80dfc70182ab62df98f9",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_104",
+      "clip_id": 104,
+      "source_name": "video-000616-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3303214,
+      "sha256": "f59f8db0a95c2d6597093991fe76cb5701a8c9110ede22a611c9b29d5ca97de8",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_106",
+      "clip_id": 106,
+      "source_name": "video-000617-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3470370,
+      "sha256": "ec300535c3a5ac671a701c09edc7dec03c18a5d8ae09a66bff0d61c91b3d1b21",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_107",
+      "clip_id": 107,
+      "source_name": "video-000618-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 2565299,
+      "sha256": "3536e81b96029304a21bde98d0f93ece63d1f588366ce8eb505af704fec0dc1e",
+      "source_audio": true
+    },
+    {
+      "label": "DE06_108",
+      "clip_id": 108,
+      "source_name": "video-000619-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3031719,
+      "sha256": "05cbaf8a89ac098b0307fc56c9085b1f07fd2d7ac60d93067a6c23a85da67641",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_109",
+      "clip_id": 109,
+      "source_name": "video-000620-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 3866660,
+      "sha256": "de7dc03330e1bf22f74858480bcdec7a34f9e14eadf6fa13da5fd25361142aeb",
+      "source_audio": false
+    },
+    {
+      "label": "DE06_110",
+      "clip_id": 110,
+      "source_name": "video-000621-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "bytes": 9576653,
+      "sha256": "6a4ddd87f7ccf827650c9b8289a7ad9dbfd8733c418a45bb3d0be797c40821f3",
+      "source_audio": true
+    }
+  ]
+}

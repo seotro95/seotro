@@ -1,0 +1,77 @@
+{
+  "topic": 6,
+  "render_location": "local",
+  "render_pipeline_sha256": "b25093eea6bb4f356a743f03950f33b64ca84de8f3a0f4d9be119913897cc37f",
+  "assets": [
+    {
+      "name": "DENISOVA_06_EDIT_PROJECT.zip",
+      "bytes": 11966149,
+      "sha256": "d0a987e3e90f33dc1fa2e0939d0cdeb0b7aa4abd3de5d7f4729361a7f2d70d51"
+    },
+    {
+      "name": "DENISOVA_06_EN_FINAL_21m_720p.mp4",
+      "bytes": 193553665,
+      "sha256": "9f50dca12541fc54c6b0b00a36db53ec7b39830cbc7c694733b32cb4d3a1d68f"
+    },
+    {
+      "name": "DENISOVA_06_EN_SUBTITLES.srt",
+      "bytes": 27586,
+      "sha256": "2ccf638302f938feb77be4a2f786b49d81a9a79b72f767799bfbf5a83666e716"
+    },
+    {
+      "name": "DENISOVA_06_OPENING_30s.mp4",
+      "bytes": 7157554,
+      "sha256": "301e9eaf1381055ade45dc0a2e2873df74fbb9c822e43937925883cbee1b8bed"
+    },
+    {
+      "name": "DENISOVA_06_TITLES_THUMBNAILS.txt",
+      "bytes": 10983,
+      "sha256": "ed29c13a80b386a834b7c4127158197d7a1fed513eae730971b2d138f8fa1016"
+    },
+    {
+      "name": "DENISOVA_06_TITLES_THUMBNAILS.zip",
+      "bytes": 4776,
+      "sha256": "8a1e558a498b3a9fae5fb41efb82068bb1e67857174bfa401f82ae9966d9cd0a"
+    },
+    {
+      "name": "EDITOR_DECISIONS.json",
+      "bytes": 1470,
+      "sha256": "e3ab6b4ab6b7ca64e5ecefcb1dbbf6b5976b8fe4b37dd3c0fce35ec5d1a7fab7"
+    },
+    {
+      "name": "EDIT_TIMELINE.csv",
+      "bytes": 49361,
+      "sha256": "3f84557a33bd62c557332e604c4bea4ab4763723d691e1bbabb514c5f95f40bf"
+    },
+    {
+      "name": "FINAL_EXPORT_COMMAND.json",
+      "bytes": 1147,
+      "sha256": "ebc0dbb58c4f45926264f08ef26828a91b1602b673e7087f0070824d0a55a409"
+    },
+    {
+      "name": "FINAL_VIDEO_QA.json",
+      "bytes": 4714,
+      "sha256": "3d8d6a3252907036418a6bb77171596bf4953281586fddb82904769a8dbb31a1"
+    },
+    {
+      "name": "README.md",
+      "bytes": 2501,
+      "sha256": "89fc32a4d8c1e4711d4596c6640b18d36c190bbf925e7b65a191f617586cf870"
+    },
+    {
+      "name": "SCENE_VERIFICATION.json",
+      "bytes": 10730,
+      "sha256": "8786921f5e77ea5cecdcee6a18a9b7918dcdb356ecbaef60972dc383564bd6dd"
+    },
+    {
+      "name": "SOURCE_CLIP_MANIFEST.csv",
+      "bytes": 15420,
+      "sha256": "17ce288c4c85e87fc89d8bbb4c4ee4359b126da9424d91c4c6509e455da94c83"
+    },
+    {
+      "name": "SOURCE_MANIFEST.json",
+      "bytes": 29188,
+      "sha256": "7067e0021b2dd57f2c0149d30132b8aa6ae1e6ab2a082aef1c3fa539283061d9"
+    }
+  ]
+}
