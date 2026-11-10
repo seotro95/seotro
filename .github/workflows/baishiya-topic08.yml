@@ -1,0 +1,21 @@
+name: Baishiya topic8 - documents first
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/baishiya-voice-build-20261110]
+    paths: [.github/workflows/baishiya-topic08.yml]
+permissions:
+  contents: write
+jobs:
+  documents:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Publish original script and silent adult-only video prompts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u scripts/publish_baishiya_documents.py
