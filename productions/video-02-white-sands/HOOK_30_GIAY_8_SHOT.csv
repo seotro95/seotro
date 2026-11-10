@@ -1,9 +1,0 @@
-timeline_start,timeline_end,source_scene_reference,clip_id,source_in,source_out,note
-0,4,1,1,0,4,"Dùng bảng này thay cách đặt 3 clip đầu; voice 00:00–00:30 giữ nguyên, không cộng thêm thời lượng."
-4,7,2,2,3,6,"Dùng bảng này thay cách đặt 3 clip đầu; voice 00:00–00:30 giữ nguyên, không cộng thêm thời lượng."
-7,10,4,4,0,3,"Dùng bảng này thay cách đặt 3 clip đầu; voice 00:00–00:30 giữ nguyên, không cộng thêm thời lượng."
-10,14,5,5,1,5,"Dùng bảng này thay cách đặt 3 clip đầu; voice 00:00–00:30 giữ nguyên, không cộng thêm thời lượng."
-14,20,43,36,2,8,"Dùng bảng này thay cách đặt 3 clip đầu; voice 00:00–00:30 giữ nguyên, không cộng thêm thời lượng."
-20,24,3,3,0,4,"Dùng bảng này thay cách đặt 3 clip đầu; voice 00:00–00:30 giữ nguyên, không cộng thêm thời lượng."
-24,27,15,14,1,4,"Dùng bảng này thay cách đặt 3 clip đầu; voice 00:00–00:30 giữ nguyên, không cộng thêm thời lượng."
-27,30,14,13,4,7,"Dùng bảng này thay cách đặt 3 clip đầu; voice 00:00–00:30 giữ nguyên, không cộng thêm thời lượng."
