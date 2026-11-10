@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "archive": "KOSTENKI_19_17_VOICES_TEN_QUOC_GIA.zip",
+  "bytes": 175840350,
+  "sha256": "0eda0b586785e38b59cb26d26f7952947c2ad96e83fb61ae1104239c9a7ead92",
+  "public_server_digest_matches": true,
+  "zip_crc_all_entries_passed": true,
+  "mp3_count": 17,
+  "all17_members_match_individual_voice_manifest": true,
+  "verified_filenames": [
+    "KOSTENKI_19_My_Tieng_Anh.mp3",
+    "KOSTENKI_19_Viet_Nam.mp3",
+    "KOSTENKI_19_Tay_Ban_Nha.mp3",
+    "KOSTENKI_19_Phap.mp3",
+    "KOSTENKI_19_Nhat_Ban.mp3",
+    "KOSTENKI_19_Han_Quoc.mp3",
+    "KOSTENKI_19_Duc.mp3",
+    "KOSTENKI_19_Y.mp3",
+    "KOSTENKI_19_Bo_Dao_Nha.mp3",
+    "KOSTENKI_19_Ha_Lan.mp3",
+    "KOSTENKI_19_Ba_Lan.mp3",
+    "KOSTENKI_19_Thuy_Dien.mp3",
+    "KOSTENKI_19_Dan_Mach.mp3",
+    "KOSTENKI_19_Phan_Lan.mp3",
+    "KOSTENKI_19_Na_Uy.mp3",
+    "KOSTENKI_19_Sec.mp3",
+    "KOSTENKI_19_Hmong_Trang_Nu.mp3"
+  ],
+  "derived_download_cache_deleted_after_verification": true
+}

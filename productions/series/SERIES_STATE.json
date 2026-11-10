@@ -5,7 +5,7 @@
   "resume_file": "productions/TIEP_TUC_TU_DAY.md",
   "topic_index": "productions/series/TOPICS_001_100.csv",
   "shared_voice_profiles": "productions/series/VOICE_PROFILES_LOCKED.json",
-  "active_topic": 19,
+  "active_topic": null,
   "next_topic_id": 5,
   "user_preferences": {
     "language_for_collaboration": "Vietnamese",
@@ -214,7 +214,7 @@
     {
       "id": 19,
       "title": "Nhà bằng xương voi ma mút: kiến trúc, nguyên liệu và những điều còn tranh luận.",
-      "status": "documents_ready_voice_pending",
+      "status": "documents_and_17_expressive_voices_delivered_video_pending_native_review_pending",
       "target_seconds": 1215,
       "created": true
     },
@@ -1103,7 +1103,7 @@
     "video_original_uploads_preserved": true,
     "video_local_download_caches_evicted": true
   },
-  "in_progress_topic_19": {
+  "completed_topic_19": {
     "id": 19,
     "title": "Kostenki: The House That Remains a Question",
     "path": "productions/video-19-kostenki",
@@ -1132,14 +1132,38 @@
     "no_children_in_visuals": true,
     "all_prompts_end_with": "không có âm thanh",
     "documents_status": "delivered",
-    "voice_status": "english_verified_other_locales_and_native_hmong_rendering",
+    "voice_status": "17_expressive_voices_delivered_technical_qa_passed_native_review_pending",
     "voice_profile_set_id": "science-prehistory-17-v1",
     "narration_style_id": "science-documentary-expressive-v1",
     "voice_count_expected": 17,
     "video_rendered": false,
-    "documents_delivered": true,
+    "voice_files_delivered": 17,
+    "verified_seconds_per_voice": 1215,
+    "voice_release_tag": "kostenki-video-19-20m15s",
+    "voice_release_url": "https://github.com/seotro95/seotro/releases/tag/kostenki-video-19-20m15s",
+    "voice_archive_url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_17_VOICES_TEN_QUOC_GIA.zip",
+    "voice_archive_sha256": "0eda0b586785e38b59cb26d26f7952947c2ad96e83fb61ae1104239c9a7ead92",
+    "voice_details_url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_HO_SO_GIONG_TEN_QUOC_GIA.zip",
+    "voice_asset_digests_verified": true,
+    "voice_archive_members_verified": true,
+    "voice_country_names_delivered": true,
+    "voice_workflow_run_ids": [
+      42877199490,
+      42881197623,
+      42886044359
+    ],
+    "voice_workflow_run_id": 42881197623,
+    "voice_workflow_url": "https://github.com/seotro95/seotro/actions/runs/42881197623",
     "voice_build_branch": "codex/kostenki-voice-build-20261111",
-    "english_run_id": 42877199490,
-    "locales_run_id": 42881197623
+    "translation_native_review_pending": true,
+    "white_hmong_dialect_independently_verified": false,
+    "english_voice_sha256": "84efbd7b1f7fa1a08940d793d9fdac88a645ee8267643280ba7240a781f16c5a",
+    "native_hmong_sha256": "dcf502e2b1f17a4582e0b4a2a8b991d80db63a964d557b4a9ad4981fb702cfda",
+    "native_hmong_reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+    "production_steps_document": "productions/video-19-kostenki/PRODUCTION_STEPS_APPLIED.md",
+    "voice_generation_source_path": "productions/video-19-kostenki/VOICES/PRODUCTION_SCRIPTS",
+    "main_video_audio_language": "en-US",
+    "video_status": "awaiting_episode19_generated_clips",
+    "documents_delivered": true
   }
 }

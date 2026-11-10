@@ -1,0 +1,167 @@
+{
+  "audio_seconds": 1215.0,
+  "sample_rate": 48000,
+  "parts": [
+    "part-0001.wav"
+  ],
+  "part_start_seconds": [
+    0.0
+  ],
+  "timing_mode": "exact",
+  "target_seconds": 1215,
+  "duration_verified": true,
+  "duration_report": {
+    "verified": true,
+    "sample_rate": 48000,
+    "sample_frames": 58320000,
+    "audio_seconds": 1215.0,
+    "target_seconds": 1215.0,
+    "error_frames": 0
+  },
+  "sync_ok": true,
+  "sync_report": {
+    "complete": true,
+    "cues": [
+      {
+        "cue": 1,
+        "start_frame": 0,
+        "end_frame": 4800000,
+        "speech_frames": 4798770,
+        "tempo": 0.8657,
+        "padding_frames": 1230
+      },
+      {
+        "cue": 2,
+        "start_frame": 4800000,
+        "end_frame": 9600000,
+        "speech_frames": 4798753,
+        "tempo": 0.85474,
+        "padding_frames": 1247
+      },
+      {
+        "cue": 3,
+        "start_frame": 9600000,
+        "end_frame": 14400000,
+        "speech_frames": 4798728,
+        "tempo": 0.83896,
+        "padding_frames": 1272
+      },
+      {
+        "cue": 4,
+        "start_frame": 14400000,
+        "end_frame": 19200000,
+        "speech_frames": 4798771,
+        "tempo": 0.86608,
+        "padding_frames": 1229
+      },
+      {
+        "cue": 5,
+        "start_frame": 19200000,
+        "end_frame": 24000000,
+        "speech_frames": 4798795,
+        "tempo": 0.88216,
+        "padding_frames": 1205
+      },
+      {
+        "cue": 6,
+        "start_frame": 24000000,
+        "end_frame": 28800000,
+        "speech_frames": 4798940,
+        "tempo": 0.97694,
+        "padding_frames": 1060
+      },
+      {
+        "cue": 7,
+        "start_frame": 28800000,
+        "end_frame": 33600000,
+        "speech_frames": 4798802,
+        "tempo": 0.88696,
+        "padding_frames": 1198
+      },
+      {
+        "cue": 8,
+        "start_frame": 33600000,
+        "end_frame": 38400000,
+        "speech_frames": 4798974,
+        "tempo": 0.99854,
+        "padding_frames": 1026
+      },
+      {
+        "cue": 9,
+        "start_frame": 38400000,
+        "end_frame": 43200000,
+        "speech_frames": 4798999,
+        "tempo": 1.01522,
+        "padding_frames": 1001
+      },
+      {
+        "cue": 10,
+        "start_frame": 43200000,
+        "end_frame": 48000000,
+        "speech_frames": 4799039,
+        "tempo": 1.04072,
+        "padding_frames": 961
+      },
+      {
+        "cue": 11,
+        "start_frame": 48000000,
+        "end_frame": 52800000,
+        "speech_frames": 4798922,
+        "tempo": 0.96494,
+        "padding_frames": 1078
+      },
+      {
+        "cue": 12,
+        "start_frame": 52800000,
+        "end_frame": 58320000,
+        "speech_frames": 5518909,
+        "tempo": 0.96,
+        "padding_frames": 1091
+      }
+    ],
+    "target_seconds": 1215,
+    "actual_seconds": 1215.0,
+    "error_frames": 0,
+    "sample_rate": 48000
+  },
+  "locale": "vi-VN",
+  "voice_id": "vi-VN-NamMinhNeural",
+  "gender": "Male",
+  "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "alignment_granularity": "11chapters100_seconds_plus_final115_seconds",
+  "expected_pcm_frames_48000": 58320000,
+  "mp3_decoded_duration": {
+    "verified": true,
+    "sample_frames": 58320000,
+    "sample_rate": 48000,
+    "audio_seconds": 1215.0,
+    "error_frames": 0
+  },
+  "mp3_file": "KOSTENKI_19_Viet_Nam.mp3",
+  "mp3_bytes": 9720620,
+  "mp3_sha256": "0505f2f5a43b73cca133ac796de9a61f84610ada0f4374c97016184afaaeac9b",
+  "max_used_post_tempo": 1.04072,
+  "min_used_post_tempo": 0.83896,
+  "max_cue_padding_seconds": 0.0265,
+  "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
+  "numeric_speech_handling": "Original English numerals preserved; translated grouped integers normalized before sentence splitting; Hmong uses native number-word normalization.",
+  "narration_style_id": "science-documentary-expressive-v1",
+  "prosody_method": "Melo online backend with Edge rate/word-boundary adapter and gentle1.2dB word accents",
+  "voice_identity_preserved": true,
+  "pitch_shift_applied": false,
+  "prosody_summary": {
+    "pieces": 56,
+    "word_boundaries": 4579,
+    "word_accents": 64,
+    "settings_used": [
+      "+1%",
+      "-2%",
+      "-3%",
+      "-4%"
+    ]
+  },
+  "source_filename": "KOSTENKI_19_vi-VN.mp3",
+  "delivery_country_vi": "Việt Nam",
+  "delivery_display_name": "Việt Nam"
+}

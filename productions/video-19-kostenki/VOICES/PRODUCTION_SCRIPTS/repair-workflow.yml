@@ -1,0 +1,51 @@
+name: Kostenki19 repair only English cue113 and republish17 voices
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/kostenki-voice-build-20261111]
+    paths: [.github/workflows/kostenki-repair19.yml]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts
+            input
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install edge-tts==7.3.1
+      - name: Install required audio decoder
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y ffmpeg
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: '42881197623'
+          pattern: k19-voice-*
+          path: artifacts
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: '42877199490'
+          name: k19-voice-en-US
+          path: artifacts/k19-voice-en-US
+      - name: Replace failed sentence with same locked English voice and validate every word
+        run: python -u scripts/repair_english19.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: k19-repaired-voice-en-US
+          path: artifacts/k19-voice-en-US
+          if-no-files-found: error
+          retention-days: 7
+      - name: Publish corrected17voice package preserving other16 voices
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u scripts/publish_voices_job.py

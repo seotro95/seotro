@@ -1,12 +1,14 @@
-# Lượt hiện tại — chủ đề19 Kostenki,20:15
+# Tiếp tục từ đây — chủ đề19 đã có tài liệu và17voice
 
-Đang bàn giao tài liệu trướcvoice. Kịch bản2.816từAnh,122mốc gồm121×10giây+5giây cuối;120prompt mới/12TXT,10prompt/tệp,2mốcREUSE. Mỗi prompt kết thúc bằng“không có âm thanh”,không hình trẻ em.11chương100giây,chương cuối115giây;đích58.320.000mẫu48kHz.
+Kostenki,20:15:2.816từAnh,122mốc gồm121×10giây+5giây cuối;120promptmới/12TXT,10prompt/tệp,2mốcREUSE. Mỗi prompt kết thúc“không có âm thanh”,không có hìnhtrẻem. [Tải voice](video-19-kostenki/VOICES/DOWNLOAD_LINKS.md) · [Quy trình](video-19-kostenki/PRODUCTION_STEPS_APPLIED.md).
 
-Giữ16giọng nam,H’MôngTrắngnữ3,cùngID/style/mẫu đã khóa. Đọc [tài liệu tập19](video-19-kostenki/README.md) và [trạng thái](series/SERIES_STATE.json). Giữ kết quả1–4,6,8 và mọi tập khác;không tự làm chủ đề kế tiếp. Chưa cóclip19,chưa dựngvideo19. Không phát hành ảnh/footage nguồn hoặc mã tệp tải lên nội bộ.
+17MP3 riêng đã giảimã đúng58.320.000mẫu48kHz;giữ16nam,H’MôngTrắngnữ3 vàID/engine/style/mẫu. Tênfiletheoquốcgia. Anhcăn121ô10s+5s,cácbảndịch11chương100s+115s cuối;không cam kết khớp từngtừgiữangônngữ. Bản dịch/nghe/phươngngữ còn cần ràsoát bảnngữ.
+
+Video19chờclip người dùngtạo. Khi nhận:chỉvoiceAnh,bỏmọitiếngclip,hook12shot/30s nằm trong20:15,không thêm intro. Giữcáctập1–4,6,8 và trạngtháimọitậpkhác;khôngtựbắtđầu20. ĐọcSERIES_STATEvàcấuhình trước khilàmtiếp. Mặc địnhchuỗi20phút;20:15làngoạilệriêng19.
 
 ---
 
-Nhật ký cũ;trạng thái hiện tại nằm ở đầu trang.
+Nhật ký trước đó;trạng thái hiện tại nằm ở đầu trang.
 
 # Chủ đề 8 Baishiya đã hoàn tất video và 17 voice
 

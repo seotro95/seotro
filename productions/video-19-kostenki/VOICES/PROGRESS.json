@@ -1,21 +1,31 @@
 {
   "topic": 19,
+  "status": "completed17voices_verified_and_published",
   "target_seconds": 1215,
-  "english_status": "completed_success",
-  "english_run": 42877199490,
-  "localized_run": 42881197623,
-  "build_branch": "codex/kostenki-voice-build-20261111",
-  "build_head": "cbf36ea983ccf17eabf08f4fd725152b4fac4aa5",
-  "known_completed_locales": [
+  "voice_count": 17,
+  "locales": [
     "en-US",
+    "vi-VN",
+    "es-ES",
     "fr-FR",
-    "ja-JP"
+    "ja-JP",
+    "ko-KR",
+    "de-DE",
+    "it-IT",
+    "pt-PT",
+    "nl-NL",
+    "pl-PL",
+    "sv-SE",
+    "da-DK",
+    "fi-FI",
+    "nb-NO",
+    "cs-CZ",
+    "mww"
   ],
-  "native_hmong_local_workdir": "/workspace/work/kostenki",
-  "native_hmong_status": "rendering;inspect local render_report before claiming completion",
-  "documents_delivered_before_voice": true,
-  "voice_identity_fields_preserved": true,
-  "old_episode_timing_metadata_removed": true,
-  "notes": "Resume existing artifacts/checkpoints;do not resynthesize successful locales or change17voice IDs. Publish17voices only after all reports and native reference checks pass.",
-  "recorded_utc": "2026-11-10T19:08:33.149653+00:00"
+  "english_run": 42886044359,
+  "localized_run": 42881197623,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/kostenki-video-19-20m15s",
+  "public_asset_digests_verified": true,
+  "public_voice_archive_members_verified": true,
+  "independent_native_editorial_listening_review_pending": true
 }

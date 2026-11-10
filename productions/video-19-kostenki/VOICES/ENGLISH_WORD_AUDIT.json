@@ -1,0 +1,22 @@
+{
+  "status": "passed_available_metadata_with_documented_gaps",
+  "topic": 19,
+  "audited_cues": 122,
+  "original_mismatched_cues": [
+    113
+  ],
+  "repaired_cue113_tokens_match": true,
+  "metadata_unavailable_cues": [
+    33,
+    54,
+    67,
+    72,
+    82
+  ],
+  "all_available_unrepaired_cues_match_provider_word_metadata": true,
+  "all_cue_padding_seconds_below": 0.1,
+  "independent_listening_review_pending": true,
+  "workflow_run_id": 42926766328,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/42926766328",
+  "note": "Joined fallback audio has no trustworthy joined word offsets; these five cues are not claimed word-verified. Public integrity/duration and cue113 repair are separately verified."
+}

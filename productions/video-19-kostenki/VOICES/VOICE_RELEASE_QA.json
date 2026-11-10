@@ -1,0 +1,266 @@
+{
+  "status": "passed",
+  "voices": 17,
+  "seconds_per_voice": 1215,
+  "decoded_frames_at_48k_per_voice": 58320000,
+  "english_words_preserved": 2816,
+  "english_cues": 122,
+  "english_public_file_independently_decoded": true,
+  "all17_github_asset_digests_match_reports": true,
+  "country_named": true,
+  "male_voices": 16,
+  "female_hmong_voices": 1,
+  "native_review_pending": true,
+  "white_hmong_dialect_independently_verified": false,
+  "no_children_in_visuals": true,
+  "release_tag": "kostenki-video-19-20m15s",
+  "release_published_at": "2026-11-10T18:36:29Z",
+  "assets": [
+    {
+      "name": "AUDIO_MANIFEST.json",
+      "bytes": 6673,
+      "digest": "sha256:5eced75d788afe0818e93852105308fea4fab343b4b6299a307d780b0ffbbdda",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/AUDIO_MANIFEST.json"
+    },
+    {
+      "name": "KOSTENKI_19_17_VOICES_TEN_QUOC_GIA.zip",
+      "bytes": 175840350,
+      "digest": "sha256:0eda0b586785e38b59cb26d26f7952947c2ad96e83fb61ae1104239c9a7ead92",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_17_VOICES_TEN_QUOC_GIA.zip"
+    },
+    {
+      "name": "KOSTENKI_19_Ba_Lan.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:949b0d1c3fddaae5179f6fe5bd6847d64dd9488924666a8cdbcbbaf97a2ab99d",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Ba_Lan.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_Bo_Dao_Nha.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:3cc030834332868f98b5bdc494ea28928bcba6cbdb337800496542e355548a28",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Bo_Dao_Nha.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_Dan_Mach.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:b9ebaea1480d6ead3386975f50d904d844264b0eded5db0231e1077a57de2f5b",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Dan_Mach.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_Duc.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:251b058891e92254290dd6dda46ee6e87cd8ea280da6cb379ce1e67e80d10916",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Duc.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_Han_Quoc.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:90866abcf776c9e2b82e2f439d84bf2a69f2932895e6e9cd4d3db76f592ee28d",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Han_Quoc.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_Ha_Lan.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:6093d307650f0d4790c0e3fe9f1a6e9d13e787a90a44d5f28fc4898e54deaa52",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Ha_Lan.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_Hmong_Trang_Nu.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:dcf502e2b1f17a4582e0b4a2a8b991d80db63a964d557b4a9ad4981fb702cfda",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Hmong_Trang_Nu.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_HO_SO_GIONG_TEN_QUOC_GIA.zip",
+      "bytes": 317365,
+      "digest": "sha256:7b2db621eee51951fa8ef6ee950eee8d090042b172ae0a7ee6a1ac4c46baa499",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_HO_SO_GIONG_TEN_QUOC_GIA.zip"
+    },
+    {
+      "name": "KOSTENKI_19_HUONG_DAN_20m15s.txt",
+      "bytes": 590,
+      "digest": "sha256:b95d3ff8821ff54cfa156d1479f6ffbfc592b2a1e281e3a538bbc63f98a71212",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_HUONG_DAN_20m15s.txt"
+    },
+    {
+      "name": "KOSTENKI_19_KICH_BAN_EN_20m15s.txt",
+      "bytes": 18226,
+      "digest": "sha256:53f8ba59ef554d4fa2c104be1a8bd511ac1c43aff66a0ecf1b3725baa81610dd",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_KICH_BAN_EN_20m15s.txt"
+    },
+    {
+      "name": "KOSTENKI_19_KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 26370,
+      "digest": "sha256:21d4b4e4ee1fb91d37f1deb51e3fb8f787aece1cf91f71c95d1b4812175b4d5f",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_KICH_BAN_EN_CO_MOC.txt"
+    },
+    {
+      "name": "KOSTENKI_19_My_Tieng_Anh.mp3",
+      "bytes": 19441196,
+      "digest": "sha256:84efbd7b1f7fa1a08940d793d9fdac88a645ee8267643280ba7240a781f16c5a",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_My_Tieng_Anh.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_Na_Uy.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:874b1d8017abee38af7cb0503cae5fed85f9415832bd9d0a2de34fe01ceeadee",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Na_Uy.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_Nhat_Ban.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:c496bc11f5e2fcc71d4dc07a6b047d12fc004d79c601edee3fc2abe8e725a305",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Nhat_Ban.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_Phan_Lan.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:a871e17090ca5ab22ed8e634f6afab6faf381f823b2d06de8d9255a61be49be7",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Phan_Lan.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_PHAN_TICH_NGUON_VA_QUY_TRINH.txt",
+      "bytes": 5298,
+      "digest": "sha256:f25548e89b82146dc7d9bfba1773453be569e15da03a6349f9b9d40d4244f5a5",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_PHAN_TICH_NGUON_VA_QUY_TRINH.txt"
+    },
+    {
+      "name": "KOSTENKI_19_Phap.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:a407c96c1c41819ce5abb513b792de0d7a7f6c21556a93e1368f40bc7bc5cb01",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Phap.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_PROMPTS_01_001_010.txt",
+      "bytes": 21992,
+      "digest": "sha256:76306a8d2cdb3348ab7a96e53bc12d52ec25658f958ee2b7edec4e6d087fdbef",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_PROMPTS_01_001_010.txt"
+    },
+    {
+      "name": "KOSTENKI_19_PROMPTS_02_011_020.txt",
+      "bytes": 21985,
+      "digest": "sha256:12a8e26cbd33860d7e19575974d08f9a6d4215407b0a7c26b04570300d80f2f7",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_PROMPTS_02_011_020.txt"
+    },
+    {
+      "name": "KOSTENKI_19_PROMPTS_03_021_030.txt",
+      "bytes": 22037,
+      "digest": "sha256:58985f2a386e8bb8530cfffd1a821ecc1c9753d6b76a96d4e169bfa2139ba40b",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_PROMPTS_03_021_030.txt"
+    },
+    {
+      "name": "KOSTENKI_19_PROMPTS_04_031_040.txt",
+      "bytes": 22031,
+      "digest": "sha256:9eb38e282f15ddd5946c8002852b6f6436b29e4a28c6ab893944f4ab06acceb2",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_PROMPTS_04_031_040.txt"
+    },
+    {
+      "name": "KOSTENKI_19_PROMPTS_05_041_050.txt",
+      "bytes": 22086,
+      "digest": "sha256:cef668c3dada9e7717e9523c1a1b050bae33073864d5e23406760e63e2d1e9ac",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_PROMPTS_05_041_050.txt"
+    },
+    {
+      "name": "KOSTENKI_19_PROMPTS_06_051_060.txt",
+      "bytes": 22112,
+      "digest": "sha256:9e03e9a53a221611249b65a1a119edc53057e4955296ff24789b346590b5f2fd",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_PROMPTS_06_051_060.txt"
+    },
+    {
+      "name": "KOSTENKI_19_PROMPTS_07_061_070.txt",
+      "bytes": 22199,
+      "digest": "sha256:b4c148754b3154a69f612590cc93cd6b71bf813591bd37929732ef15c6b7faa3",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_PROMPTS_07_061_070.txt"
+    },
+    {
+      "name": "KOSTENKI_19_PROMPTS_08_071_080.txt",
+      "bytes": 22235,
+      "digest": "sha256:f3a30786cf9ce49e06ea5695c552980f11d49859408d52ad04e5619c058688ab",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_PROMPTS_08_071_080.txt"
+    },
+    {
+      "name": "KOSTENKI_19_PROMPTS_09_081_090.txt",
+      "bytes": 22163,
+      "digest": "sha256:259afc2a8b39508191bebb305619524ba80e61847bab2eaf8ffa5ad609317f5f",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_PROMPTS_09_081_090.txt"
+    },
+    {
+      "name": "KOSTENKI_19_PROMPTS_10_091_100.txt",
+      "bytes": 22349,
+      "digest": "sha256:8979933d12ca9b897bc0f96bc0341f196146eff7bb4bd595d87988153243a02e",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_PROMPTS_10_091_100.txt"
+    },
+    {
+      "name": "KOSTENKI_19_PROMPTS_11_101_110.txt",
+      "bytes": 22119,
+      "digest": "sha256:2a92bbfc326b077a73be2d5bb7925d136ddfdebd260ec41f3845a1108283f158",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_PROMPTS_11_101_110.txt"
+    },
+    {
+      "name": "KOSTENKI_19_PROMPTS_12_111_120.txt",
+      "bytes": 22177,
+      "digest": "sha256:d09f68d51915af319d0e43808ba7794dbd87d3f0512b552b172fc65c4e271e68",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_PROMPTS_12_111_120.txt"
+    },
+    {
+      "name": "KOSTENKI_19_Sec.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:7f8a1b4dc4338cc4c0e54cd16e10dff022fade8f05e02d4a09cb00b309105b06",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Sec.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_Tay_Ban_Nha.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:875660594d5da76b349072d5f8a6449549317a7c05d5a344418ce1280a448a97",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Tay_Ban_Nha.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_Thuy_Dien.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:fa5d5cce72efe31002fc3cda930f9c3a5b5900a039e6aa5fbcb8aeff1e3e6855",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Thuy_Dien.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_Viet_Nam.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:0505f2f5a43b73cca133ac796de9a61f84610ada0f4374c97016184afaaeac9b",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Viet_Nam.mp3"
+    },
+    {
+      "name": "KOSTENKI_19_Y.mp3",
+      "bytes": 9720620,
+      "digest": "sha256:a5a30eeb505955fcec32c351fdd582b6732c24a07617659256389711d87ce746",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_Y.mp3"
+    },
+    {
+      "name": "KOSTENKI_VIDEO_19_TAI_LIEU_20m15s.zip",
+      "bytes": 141487,
+      "digest": "sha256:1c08af370717dfb79b7fb47f20639ffb05a7f1dd62b539dd1f9770bf88ba7ed9",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_VIDEO_19_TAI_LIEU_20m15s.zip"
+    },
+    {
+      "name": "NARRATION_STYLE_LOCKED.json",
+      "bytes": 1404,
+      "digest": "sha256:4a2dbb3dd72e8f166e0452e01fac6275725e1073a4961230458d98e831bcfede",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/NARRATION_STYLE_LOCKED.json"
+    },
+    {
+      "name": "README.md",
+      "bytes": 4298,
+      "digest": "sha256:ff4eaa95e819ad3f2f4697340c4fa794a6cc01672a4b406f1c8df869d9d7631d",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/README.md"
+    },
+    {
+      "name": "VOICE_FILE_NAMING.json",
+      "bytes": 2822,
+      "digest": "sha256:a94359e30be3c7055ac575715b1f880b4bea2e672def83b2a910290dd5444822",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/VOICE_FILE_NAMING.json"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED.json",
+      "bytes": 15914,
+      "digest": "sha256:362b69027ad732cd2e0b406769f469e4656000d98c60c76bea21bff61fde16f7",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/VOICE_PROFILES_LOCKED.json"
+    }
+  ]
+}

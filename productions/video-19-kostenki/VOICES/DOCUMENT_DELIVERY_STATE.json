@@ -1,0 +1,30 @@
+{
+  "status": "documents_delivered_before_voice",
+  "production_head": "a0657ab1de396c3ffcf7f1be7f20095b31bb3be8",
+  "target_seconds": 1215,
+  "zip_sha256": "1c08af370717dfb79b7fb47f20639ffb05a7f1dd62b539dd1f9770bf88ba7ed9",
+  "release": "kostenki-video-19-20m15s",
+  "receipts": [
+    {
+      "filename": "KOSTENKI_VIDEO_19_TAI_LIEU_20m15s.zip",
+      "bytes": 141487,
+      "sha256": "1c08af370717dfb79b7fb47f20639ffb05a7f1dd62b539dd1f9770bf88ba7ed9",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_VIDEO_19_TAI_LIEU_20m15s.zip",
+      "content_disposition": "attachment; filename=KOSTENKI_VIDEO_19_TAI_LIEU_20m15s.zip"
+    },
+    {
+      "filename": "KOSTENKI_19_KICH_BAN_EN_20m15s.txt",
+      "bytes": 18226,
+      "sha256": "53f8ba59ef554d4fa2c104be1a8bd511ac1c43aff66a0ecf1b3725baa81610dd",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_KICH_BAN_EN_20m15s.txt",
+      "content_disposition": "attachment; filename=KOSTENKI_19_KICH_BAN_EN_20m15s.txt"
+    },
+    {
+      "filename": "KOSTENKI_19_PROMPTS_01_001_010.txt",
+      "bytes": 21992,
+      "sha256": "76306a8d2cdb3348ab7a96e53bc12d52ec25658f958ee2b7edec4e6d087fdbef",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_19_PROMPTS_01_001_010.txt",
+      "content_disposition": "attachment; filename=KOSTENKI_19_PROMPTS_01_001_010.txt"
+    }
+  ]
+}
