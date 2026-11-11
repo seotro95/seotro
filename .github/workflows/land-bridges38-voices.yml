@@ -19,13 +19,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Ensure FFmpeg audio runtime is installed
+      - name: Prepare verified portable FFmpeg without system package installation
         run: |
-          if ! command -v ffmpeg >/dev/null 2>&1; then
-            sudo apt-get update
-            sudo apt-get install --no-install-recommends -y ffmpeg
-          fi
-          ffmpeg -version | head -n 1
+          python -m pip install imageio-ffmpeg==0.6.0
+          python episode38/ensure_ffmpeg.py
       - run: python -m pip install edge-tts==7.3.1
       - run: python episode38/bootstrap_tool.py online
       - run: python -u episode38/preflight38.py
@@ -54,13 +51,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Ensure FFmpeg audio runtime is installed
+      - name: Prepare verified portable FFmpeg without system package installation
         run: |
-          if ! command -v ffmpeg >/dev/null 2>&1; then
-            sudo apt-get update
-            sudo apt-get install --no-install-recommends -y ffmpeg
-          fi
-          ffmpeg -version | head -n 1
+          python -m pip install imageio-ffmpeg==0.6.0
+          python episode38/ensure_ffmpeg.py
       - run: python -m pip install edge-tts==7.3.1
       - run: python episode38/bootstrap_tool.py online
       - name: Restore same-run checkpoints when a failed locale is rerun
@@ -109,13 +103,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Ensure FFmpeg audio runtime is installed
+      - name: Prepare verified portable FFmpeg without system package installation
         run: |
-          if ! command -v ffmpeg >/dev/null 2>&1; then
-            sudo apt-get update
-            sudo apt-get install --no-install-recommends -y ffmpeg
-          fi
-          ffmpeg -version | head -n 1
+          python -m pip install imageio-ffmpeg==0.6.0
+          python episode38/ensure_ffmpeg.py
       - run: python -m pip install torch==2.8.0+cpu --index-url https://download.pytorch.org/whl/cpu
       - run: python -m pip install numpy==2.2.6 soundfile==0.13.1 scipy==1.15.3 librosa==0.11.0 soxr==1.0.0
       - run: python -u episode38/bootstrap_tool.py native
@@ -151,13 +142,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Ensure FFmpeg audio runtime is installed
+      - name: Prepare verified portable FFmpeg without system package installation
         run: |
-          if ! command -v ffmpeg >/dev/null 2>&1; then
-            sudo apt-get update
-            sudo apt-get install --no-install-recommends -y ffmpeg
-          fi
-          ffmpeg -version | head -n 1
+          python -m pip install imageio-ffmpeg==0.6.0
+          python episode38/ensure_ffmpeg.py
       - uses: actions/download-artifact@v4
         with:
           pattern: land38-native-checkpoint-*
@@ -187,13 +175,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Ensure FFmpeg audio runtime is installed
+      - name: Prepare verified portable FFmpeg without system package installation
         run: |
-          if ! command -v ffmpeg >/dev/null 2>&1; then
-            sudo apt-get update
-            sudo apt-get install --no-install-recommends -y ffmpeg
-          fi
-          ffmpeg -version | head -n 1
+          python -m pip install imageio-ffmpeg==0.6.0
+          python episode38/ensure_ffmpeg.py
       - uses: actions/download-artifact@v4
         with:
           pattern: land38-voice-*
