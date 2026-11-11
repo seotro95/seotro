@@ -128,8 +128,22 @@ def online(locale,preview=False):
    if attempt==2:raise RuntimeError(f'Incomplete spoken text:{locale}/{i+1}/{j+1}')
   accents=accent(path,words,locale);meta.write_text(json.dumps({'request_signature':signature,'coverage':coverage,'voice_id':profile['voice_id'],'rate':LOCAL.rate,'accents':accents,'source_words':len(words)}))
   time.sleep(.25);return path
- with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
-  for i,path in enumerate(pool.map(synth,records),1):
-   if i%10==0:print('SYNTH',locale,i,len(records),flush=True)
+ pending=[];completed=0
+ with concurrent.futures.ThreadPoolExecutor(max_workers=1 if locale in ['en-US','vi-VN'] else 2) as pool:
+  futures={pool.submit(synth,item):item for item in records}
+  for future in concurrent.futures.as_completed(futures):
+   item=futures[future]
+   try:future.result();completed+=1
+   except edge_tts.exceptions.NoAudioReceived:
+    pending.append({'cue_index':item[0],'part_index':item[1],'filename':item[3].name,'reason':'NoAudioReceived after five bounded attempts'})
+    print('TTS_PENDING',locale,item[0]+1,item[1]+1,flush=True)
+   except Exception:
+    for other in futures:other.cancel()
+    raise
+   if completed and completed%10==0:print('SYNTH',locale,completed,len(records),flush=True)
+ if pending:
+  (out/'pending_speech.json').write_text(json.dumps(pending,indent=2))
+  raise RuntimeError(f'{locale}: {len(pending)}parts remain unavailable; all successful speech retained; retry only pending parts later')
+ (out/'pending_speech.json').unlink(missing_ok=True)
  return finish(locale,rows,raws,out=out,target=target)
 if __name__=='__main__':online(sys.argv[1],preview='--preview' in sys.argv)

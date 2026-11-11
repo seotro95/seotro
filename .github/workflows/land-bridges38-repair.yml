@@ -1,0 +1,134 @@
+name: Land bridges38 resume failed voices only
+on:
+  push:
+    branches: [codex/land-bridges38-production-20261111]
+    paths: [.github/workflows/land-bridges38-repair.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    outputs:
+      locales: ${{ steps.find.outputs.locales }}
+    steps:
+      - name: Confirm original run finished and select only failed online voices
+        id: find
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 -u - <<'PY'
+          import json,os,re,subprocess,time
+          for poll in range(60):
+           run=json.loads(subprocess.check_output(['gh','api','repos/seotro95/seotro/actions/runs/43050614061']))
+           if run['status']=='completed':break
+           print('Waiting for original active run to finish before repair',poll+1,flush=True);time.sleep(30)
+          else:raise RuntimeError('Original run is still active; no repair voice requests started')
+          jobs=json.loads(subprocess.check_output(['gh','api','repos/seotro95/seotro/actions/runs/43050614061/jobs?per_page=100']))['jobs']
+          assert any(j['name']=='native_final' and j['conclusion']=='success' for j in jobs),'Native final needs separate repair'
+          locales=[]
+          for j in jobs:
+           m=re.fullmatch(r'online \(([^)]+)\)',j['name'])
+           if m and j['conclusion']!='success':locales.append(m[1])
+          assert locales,'No failed locale to repair'
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('locales='+json.dumps(locales)+'\n')
+          print('Only failed locales:',locales)
+          PY
+  repair:
+    needs: discover
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        locale: ${{ fromJSON(needs.discover.outputs.locales) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: episode38
+      - run: python3 episode38/extract_inputs.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python episode38/ensure_ffmpeg.py
+          python episode38/bootstrap_tool.py online
+      - name: Restore all successful original speech
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 43050614061
+          name: land38-checkpoint-${{ matrix.locale }}
+          path: episode38/voice/audio/${{ matrix.locale }}
+      - name: Restore additional speech from a same-run repair attempt
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ github.run_id }}
+          name: land38-repair-checkpoint-${{ matrix.locale }}
+          path: episode38/voice/audio/${{ matrix.locale }}
+      - name: Continue unchanged voice and script with bounded requests
+        run: python -u episode38/render_episode.py ${{ matrix.locale }}
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: land38-repair-checkpoint-${{ matrix.locale }}
+          overwrite: true
+          path: |
+            episode38/voice/audio/${{ matrix.locale }}/raw-*.wav
+            episode38/voice/audio/${{ matrix.locale }}/raw-*.json
+            episode38/voice/audio/${{ matrix.locale }}/pending_speech.json
+          if-no-files-found: error
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        with:
+          name: land38-voice-${{ matrix.locale }}
+          path: |
+            episode38/voice/audio/${{ matrix.locale }}/LAND_BRIDGES_38_*.mp3
+            episode38/voice/audio/${{ matrix.locale }}/render_report.json
+          if-no-files-found: error
+          retention-days: 14
+  publish:
+    needs: repair
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: episode38
+      - run: python3 episode38/extract_inputs.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m pip install imageio-ffmpeg==0.6.0
+          python episode38/ensure_ffmpeg.py
+      - name: Retrieve successful original country voices
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 43050614061
+          pattern: land38-voice-*
+          path: voice_artifacts
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: land38-voice-*
+          path: voice_artifacts
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 43050614061
+          name: land38-preflight
+          path: preflight_artifact
+      - name: Check all17 voices and publish complete delivery
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u episode38/publish_voices38.py

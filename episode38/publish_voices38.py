@@ -42,20 +42,25 @@ style={'narration_style_id':'science-documentary-expressive-v1','voice_ids_uncha
 docqa=json.loads((D/'DOCUMENT_QA.json').read_text());docqa.update(voices_generated=True,voice_count_verified=17,audio_sample_frames_verified=FRAMES);(D/'DOCUMENT_QA.json').write_text(json.dumps(docqa,indent=2))
 readme=f'''# Chủ đề 38 — Cầu đất qua các chu kỳ băng hà — 22:32
 
-[Kịch bản,12TXTprompt vàtimeline]({base}LAND_BRIDGES_38_TAI_LIEU_22m32s.zip) · [17voice trong mộtZIP]({base}LAND_BRIDGES_38_17_VOICES_22m32s.zip)
+[Tải kịch bản, 12 TXT prompt và timeline]({base}LAND_BRIDGES_38_TAI_LIEU_22m32s.zip) · [Tải 17 voice trong một ZIP]({base}LAND_BRIDGES_38_17_VOICES_22m32s.zip)
 
-Kịch bản Anh gốc When the Sea Was Land: Earth's Vanishing Bridges,3.581từ.136mốc lời =135×10giây+2giây.120prompt mới trong12TXT,10prompt/TXT.16mốc dùng lại có đánh dấu trong timeline. Prompt tạo clip10giây, im lặng, không có trẻ em hoặc thiếu niên, kể cả nền, ảnh, màn hình vàphản chiếu. Bộ này chưa tạofootage hoặcMP4hoàn chỉnh.
+Kịch bản Anh gốc: **When the Sea Was Land: Earth's Vanishing Bridges**, gồm 3.581 từ. Timeline có 136 mốc lời: 135 mốc 10 giây và mốc cuối 2 giây. Có 120 prompt mới trong 12 TXT, đúng 10 prompt/TXT; 16 mốc dùng lại được đánh dấu rõ. Mỗi prompt tạo clip chuyển động 10 giây, im lặng, không có trẻ em hoặc thiếu niên, kể cả trong nền, ảnh, màn hình và phản chiếu. Bộ này chưa có footage được tạo hoặc MP4 đã dựng.
 
-Đã tạo17voice riêng:16nam vàH'môngnữfemale-3. Tênfiletheoquốc gia; tiếng Anh làbản chính. Mọi fileđãgiải mã kiểm tra đúng1.352giây,64.896.000mẫu ở48kHz. Tiếng Anh có136mốc; các bản dịch giữ14mốc chương, không đồng nghĩa từng từ hoặc từng10giây trùng nhau. Không đổi voiceIDhoặc pitch. Nhấn nhá bằng nhịp đọc, câu hỏi, khoảng nghỉ vànhấn từ nhẹ; báo cáo ghi tempođã dùng.
+Đã tạo 17 voice riêng: 16 nam và nữ H'mông `female-3`. Tên tệp theo quốc gia; tiếng Anh là bản chính. Mỗi MP3 đã được giải mã kiểm tra đúng **1.352 giây**, tương đương **64.896.000 mẫu ở 48 kHz**. Tiếng Anh giữ 136 mốc; các bản dịch giữ 14 ranh giới chương. Điều này không có nghĩa từng từ hoặc từng câu ở mỗi ngôn ngữ trùng thời điểm. SRT bản dịch là mốc chương, cần chia nhỏ trước khi dùng làm phụ đề hiển thị.
 
-Các bản dịch đãsửa thuật ngữ địa khoa học vàcác ý chính từ bản nguồn rõnghĩa hơn; phần mở/kết Việt vàtoàn bộ14chươngHmongđược viết lại. Đây không phải chứng nhận biên tập/nghe bản ngữ. Riêng H'môngdùngtoolnative1.6.6 vàtham chiếu nữđãkhóa, nhưng phương ngữH'môngTrắng chưađược người bản ngữxác nhận độc lập.
+Giữ nguyên mã giọng và không đổi pitch. Nhấn nhá bằng nhịp câu hỏi, câu suy ngẫm, khoảng nghỉ và nhấn từ nhẹ; báo cáo riêng ghi tốc độ đã dùng. Bản chính chỉ có lời đọc Anh, không có nhạc hoặc tiếng hiệu ứng.
 
-| Giọng | TảiMP3 | Thời lượng |
+Các bản dịch đã được sửa thuật ngữ địa khoa học và các ý dễ hiểu nhầm; phần mở/kết Việt và toàn bộ 14 chương H'mông được viết lại. Kiểm tra kỹ thuật không thay thế việc nghe và biên tập bản ngữ. Riêng H'mông dùng tool native 1.6.6 với tham chiếu nữ đã khóa; phương ngữ H'mông Trắng chưa được người bản ngữ xác nhận độc lập.
+
+| Quốc gia / ngôn ngữ | Tải MP3 | Thời lượng |
 |---|---|---|
 '''
 for v in voices:readme+=f"| {v['name']} | [{v['filename']}]({v['url']}) | 22:32 |\n"
-readme+='\nKhông thêm nhạc hoặc tiếng hiệu ứng vào voice. Khi có clip, dùng timelineđểdựngkhớp bản Anh; đoạn cuối chỉ lấy2giây. Bản đồvànhãn khoa học cầnkiểm trước khi thêm trong edit.\n'
+readme+='\nKhi có clip, dùng timeline để dựng theo bản Anh; đoạn cuối chỉ lấy 2 giây. Kế hoạch 30 giây đầu gồm 10 cảnh khác nhau, nằm trong tổng 22:32. Bản đồ và nhãn khoa học cần được kiểm tra trước khi thêm trong phần dựng.\n'
 (D/'README.md').write_text(readme)
+if (R/'PRODUCTION_STEPS_APPLIED.md').exists():shutil.copyfile(R/'PRODUCTION_STEPS_APPLIED.md',D/'PRODUCTION_STEPS_APPLIED.md')
+guide=D/'HUONG_DAN_SU_DUNG.txt'
+guide.write_text(guide.read_text(encoding='utf-8-sig').replace('SRT sẽ khớp các mốc này khi voice đã được dựng/kiểm tra; hiện là kế hoạch.','Voice tiếng Anh đã được dựng theo các mốc này và kiểm tra thời lượng giải mã.').replace('Bộ này gồm kịch bản, prompt và hồ sơ chuẩn bị; không phải footage đã tạo hay MP4đã edit.','Bộ này gồm kịch bản, prompt, 17 voice và hồ sơ kiểm tra; chưa có footage hoặc MP4 đã edit.'),encoding='utf-8-sig')
 with zipfile.ZipFile(O/'LAND_BRIDGES_38_17_VOICES_22m32s.zip','w',zipfile.ZIP_STORED) as z:
  for p in sorted(O.glob('*.mp3')):z.write(p,p.name)
  for n in ['AUDIO_MANIFEST.json','VOICE_PROFILES_LOCKED.json','VOICE_RELEASE_QA.json']:z.write(O/n,n)
