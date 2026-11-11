@@ -87,7 +87,7 @@ jobs:
           if-no-files-found: error
           retention-days: 14
   hmong:
-    needs: preflight
+    # Native inference has its own input/reference checks; an online outage must not block it.
     runs-on: ubuntu-latest
     timeout-minutes: 60
     strategy:

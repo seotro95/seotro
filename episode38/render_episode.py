@@ -89,18 +89,22 @@ def online(locale,preview=False):
   if data['target_seconds']==target and data['script_sha256']==digest(S/f'{locale}.json') and data['sha256']==digest(out/data['filename']):return data
  async def download(text,voice,output):
   err=None
-  for attempt in range(3):
+  for attempt in range(5):
    try:
-    words=[];stream=edge_tts.Communicate(text,voice,rate=LOCAL.rate,volume='+0%',pitch='+0Hz',boundary='WordBoundary',proxy=os.environ.get('HTTPS_PROXY'),connect_timeout=20,receive_timeout=60)
-    with Path(output).open('wb') as f:
-     async for chunk in stream.stream():
-      if chunk['type']=='audio':f.write(chunk['data'])
-      elif chunk['type']=='WordBoundary':words.append(chunk)
-    assert Path(output).stat().st_size>0;Path(output).with_suffix('.words.json').write_text(json.dumps(words,ensure_ascii=False));return
+    async def receive():
+     words=[];stream=edge_tts.Communicate(text,voice,rate=LOCAL.rate,volume='+0%',pitch='+0Hz',boundary='WordBoundary',proxy=os.environ.get('HTTPS_PROXY'),connect_timeout=20,receive_timeout=60)
+     with Path(output).open('wb') as f:
+      async for chunk in stream.stream():
+       if chunk['type']=='audio':f.write(chunk['data'])
+       elif chunk['type']=='WordBoundary':words.append(chunk)
+     assert Path(output).stat().st_size>0
+     Path(output).with_suffix('.words.json').write_text(json.dumps(words,ensure_ascii=False))
+    await asyncio.wait_for(receive(),timeout=150);return
    except Exception as e:
     err=e
     if getattr(e,'status',None) in [401,403,429]:raise
-    if attempt<2:await asyncio.sleep(2*(attempt+1))
+    print('TTS_TRANSIENT',locale,type(e).__name__,'attempt',attempt+1,'of5',flush=True)
+    if attempt<4:await asyncio.sleep([5,15,30,60][attempt])
   raise err
  online_backend.download_audio=download;records=[];raws=[]
  for i,row in enumerate(rows):
