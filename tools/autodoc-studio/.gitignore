@@ -13,3 +13,5 @@ GITHUB_STATE.json
 *.log
 *.spec
 *_result.json
+
+delivery test/

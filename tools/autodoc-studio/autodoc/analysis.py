@@ -73,6 +73,8 @@ def transcribe(wav: Path,job: Path,ctx: Context,model_name='base',language='en',
     marker=signature({'wav_sha':digest(wav),'model':str(model_path or model_name),'language':language,'fast':fast,'task':task,'version':3})
     cache=job/('transcript_visual_en.json' if task=='translate' else 'transcript.json')
     if cache.exists() and json.loads(cache.read_text(encoding='utf-8-sig')).get('signature')==marker:return json.loads(cache.read_text(encoding='utf-8-sig'))['cues']
+    from .resources import check_vad
+    check_vad()
     from faster_whisper import WhisperModel
     ctx.emit(3,'Dịch lời sang tiếng Anh theo mốc để chọn hình; giữ nguyên voice.' if task=='translate' else 'Nhận dạng ngôn ngữ và lời voice; lần đầu có thể cần tải model Whisper.')
     model=WhisperModel(str(model_path or model_name),device='cpu',compute_type='int8',cpu_threads=threads,num_workers=1,download_root=str(data_dir()/'models/whisper'))

@@ -50,3 +50,8 @@ python multilingual_smoke.py $exe (Join-Path $PSScriptRoot 'windows test\Nguồn
 if ($LASTEXITCODE -ne 0) { throw 'Frozen multilingual narration edit failed' }
 python package_release.py
 if ($LASTEXITCODE -ne 0) { throw 'Packaging failed' }
+python verify_delivery.py
+if ($LASTEXITCODE -ne 0) {
+ Get-Content "$env:LOCALAPPDATA\AutoDocStudio\application.log" -Tail 100 -ErrorAction SilentlyContinue
+ throw 'Delivered ZIP or original-app repair acceptance failed'
+}

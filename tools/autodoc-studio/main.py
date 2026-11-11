@@ -15,10 +15,12 @@ def main():
             from autodoc.qa import run
             run(args.gui_qa_config,args.gui_report);return
         if args.doctor:
+            from autodoc.resources import check_vad
+            vad_status=check_vad()
             from autodoc.bootstrap import ensure_ffmpeg
             from autodoc.common import Context,binary
             ensure_ffmpeg(Context(lambda *_:None));import av,ctranslate2,faster_whisper,numpy,onnxruntime,tokenizers,tkinter,langid
-            result={'status':'ready','version':'2.2.0','ffmpeg':binary('ffmpeg'),'ffprobe':binary('ffprobe'),'tk_version':tkinter.TkVersion,'onnx':onnxruntime.__version__}
+            result={'status':'ready','version':'2.2.1','ffmpeg':binary('ffmpeg'),'ffprobe':binary('ffprobe'),'tk_version':tkinter.TkVersion,'onnx':onnxruntime.__version__,'vad':vad_status}
             if args.doctor_output:Path(args.doctor_output).write_text(json.dumps(result),encoding='utf-8')
         elif args.gui_smoke:
             from autodoc.gui import App

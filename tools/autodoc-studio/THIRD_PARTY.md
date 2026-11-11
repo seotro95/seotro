@@ -6,6 +6,6 @@
 - FFmpeg/ffprobe bản Windows từ FFmpeg-Builds: https://github.com/FFmpeg-Builds/FFmpeg-Builds. Bản gpl dùng libx264;Tool tải trực tiếp về máy người dùng ở lần đầu,kiểm SHA256và giữ LICENSE/NOTICE,không tái đóng gói FFmpeg trong ZIP phần mềm. Nguồn FFmpeg https://ffmpeg.org/download.html và script build tương ứng https://github.com/BtbN/FFmpeg-Builds. Công cụ gọi FFmpeg bằng tiến trình riêng,không sửa mã FFmpeg.
 - Giao diện dùng Tkinter/Tcl/Tk của Python. Bản Windows đóng gói bằng PyInstaller;điều khoản ngoại lệ bootloader cho phép đóng gói ứng dụng,giữ giấy phép thành phần bên thứ ba.
 
-Model/cache hoặc media của người dùng không được đóng gói chung vào bản phát hành phần mềm.
+Model Whisper/CLIP lớn, cache và media của người dùng không đóng gói trong bản phát hành. Model VAD nhỏ silero_vad_v6.onnx là tài nguyên runtime bắt buộc, được đóng gói kèm giấy phép Silero VAD/faster-whisper.
 
 - langid.py 1.1.6: https://github.com/saffsd/langid.py (BSD). Ước lượng ngôn ngữ phụ đề khi đã có SRT; không thay thế nhận dạng voice của Whisper.

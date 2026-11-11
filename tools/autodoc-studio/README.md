@@ -1,5 +1,13 @@
 # AutoDoc Studio 2.2 — tự động edit đa ngôn ngữ
 
+## Bản sửa 2.2.1: model VAD đi kèm bộ ZIP
+
+Bản 2.2.0 đã loại nhầm `silero_vad_v6.onnx` ở bước đóng gói, sau khi kiểm thử EXE. Bản 2.2.1 chỉ bỏ các model ví dụ không dùng của ONNX Runtime và luôn giữ model VAD bắt buộc của faster-whisper. Bộ kiểm tra xác minh hash, khởi tạo ONNX và chạy suy luận VAD.
+
+CI còn giải nén **đúng ZIP giao cho người dùng**, vô hiệu thư mục build gốc, chạy nhận dạng và xuất video Anh/Việt rồi mở GUI preview từ bản giải nén. Bộ ZIP 2.2.0 gốc được tải lại để tái hiện lỗi; bản vá nhỏ phải làm quy trình tự động chạy lại được mà không đổi EXE cũ. Xem `POST_PACKAGE_TEST_REPORT.json` trong release cho kết quả và hash ZIP đã thử.
+
+Người đang dùng 2.2.0 có thể giải nén `SUA_LOI_VAD_2.2.0.zip` vào thư mục chứa `AutoDocStudio.exe`, hoặc dùng bộ Full 2.2.1. Không cần xóa cache/model đã tải hoặc các dự án. Model VAD nhỏ đã kèm trong ZIP; model Whisper/CLIP lớn và FFmpeg vẫn được tải riêng lần đầu.
+
 Ngôn ngữ mặc định **auto**. Nhận lời theo ngôn ngữ gốc, giữ nguyên file voice làm âm thanh chính và giữ phụ đề gốc. Với voice ngoại ngữ, tool tạo bản lời **tiếng Anh cùng mốc** để CLIP so khớp hình; không dùng trực tiếp văn bản Việt/Nhật/Hàn với bộ so khớp tiếng Anh. Có thể cung cấp **Tham chiếu Anh** TXT/SRT để kiểm soát nội dung cần minh họa; SRT phải khớp thời gian voice.
 
 Hỗ trợ các ngôn ngữ của Whisper, gồm Anh, Việt, Tây Ban Nha, Pháp, Nhật, Hàn, Đức, Ý, Bồ Đào Nha, Hà Lan, Ba Lan, Thụy Điển, Đan Mạch, Phần Lan, Na Uy và Séc. Có lựa chọn ngôn ngữ cụ thể khi tự nhận diện sai. Mặc định Whisper **base** để cải thiện lời ngoại ngữ; tiny nhanh hơn, small thường chính xác hơn nhưng chậm hơn. Tên khoa học/tên riêng vẫn có thể sai.
