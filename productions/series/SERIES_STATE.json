@@ -23,7 +23,11 @@
     "english_preview_30_seconds_passed": true,
     "repair_workflow_run_id": 43055537796,
     "repair_workflow_url": "https://github.com/seotro95/seotro/actions/runs/43055537796",
-    "voice_files_generated_known": 16
+    "voice_files_generated_known": 16,
+    "titles_thumbnail_pairs": 5,
+    "titles_thumbnail_txt_url": "https://github.com/seotro95/seotro/releases/download/land-bridges-video-38-22m32s/LAND_BRIDGES_38_5_TIEU_DE_5_PROMPT_THUMBNAIL.txt",
+    "titles_thumbnail_zip_url": "https://github.com/seotro95/seotro/releases/download/land-bridges-video-38-22m32s/LAND_BRIDGES_38_5_TIEU_DE_5_PROMPT_THUMBNAIL.zip",
+    "titles_download_tested": true
   },
   "next_topic_id": 5,
   "user_preferences": {

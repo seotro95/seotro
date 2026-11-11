@@ -1,0 +1,64 @@
+CHỦ ĐỀ 38 — 5 TIÊU ĐỀ VÀ 5 PROMPT THUMBNAIL
+Nội dung: Các cây cầu đất xuất hiện và biến mất qua những chu kỳ băng hà.
+Kịch bản: When the Sea Was Land: Earth's Vanishing Bridges — 22:32.
+Ngôn ngữ video chính: tiếng Anh.
+
+GỢI Ý CHỌN: Cặp 1 dễ hiểu và thể hiện đúng câu hỏi trung tâm của tập phim.
+Mỗi prompt bên dưới tương ứng với tiêu đề ngay phía trên. Tạo ảnh không chữ; thêm dòng chữ gợi ý sau trong phần mềm thiết kế để tránh chữ AI bị lỗi. Thumbnail không có trẻ em, thiếu niên, hình trẻ em trong nền, phản chiếu, ảnh hoặc màn hình.
+
+============================================================
+1. TIÊU ĐỀ
+You Could Once Walk Here. Now It's Under the Sea.
+Nghĩa: Bạn từng có thể đi bộ qua đây. Giờ nơi này nằm dưới biển.
+
+CHỮ THUMBNAIL GỢI Ý: THIS WAS LAND
+
+PROMPT THUMBNAIL 1:
+Create a striking 16:9 YouTube science-documentary thumbnail, 1280x720, photorealistic cinematic composite. From an elevated oblique aerial viewpoint, show one wide, gently sloping coastal landscape with a winding river valley. Use a clean diagonal editorial comparison: the left portion reveals the same valley as exposed grassland during an ice-age low sea level; the right portion shows it covered by deep blue seawater today, with the corresponding river channel subtly visible beneath clear shallows. Preserve a consistent terrain silhouette and camera viewpoint across both halves. This is an illustrative before-and-after comparison across different times, never a literal wall of water or instantaneous flood. Make the exposed valley the single dominant visual clue. Strong warm ochre versus cold teal contrast, realistic geology, restrained atmospheric haze, simple shapes readable on a phone. Keep the upper-left quarter visually quiet for text to be added later. No people, children, infants, adolescents, child-like figures, buildings, ancient cities, constructed bridges, migration arrows, invented archaeological finds, readable text, numbers, logos, borders or watermarks.
+
+============================================================
+2. TIÊU ĐỀ
+How Ice Revealed Land Now Hidden Beneath the Sea
+Nghĩa: Băng đã làm lộ những vùng đất nay nằm dưới biển như thế nào?
+
+CHỮ THUMBNAIL GỢI Ý: WHERE DID THE SEA GO?
+
+PROMPT THUMBNAIL 2:
+Create a visually clear 16:9 YouTube science-documentary thumbnail, 1280x720, cinematic photorealistic scientific illustration. Show a vast land-based ice sheet dominating the upper-right background and an exposed continental shelf filling the foreground. A broad natural river meanders across the shelf toward a distant, visibly lower ocean shoreline. The visual story is that water stored in ice on land lowers global sea level and exposes shallow coastal ground. Show the glacier resting on continental land, never floating like an iceberg; do not show the glacier physically pushing the sea away. Use a low oblique aerial viewpoint, luminous white and blue ice, dark navy ocean, golden-brown exposed earth, crisp directional light and strong depth separation. Make the ice mass and newly exposed plain the two immediately readable elements. Leave the upper-left area uncluttered for later text. No humans, minors, silhouettes, buildings, giant arrows, impossible vertical ocean edges, literal measurement graphics, readable text, numbers, logos or watermarks. Illustrative geography only, not an authenticated reconstruction of a named site.
+
+============================================================
+3. TIÊU ĐỀ
+The Lost Land Beneath the North Sea
+Nghĩa: Vùng đất đã biến mất dưới Biển Bắc.
+
+CHỮ THUMBNAIL GỢI Ý: DOGGERLAND
+
+PROMPT THUMBNAIL 3:
+Create an atmospheric 16:9 YouTube documentary thumbnail, 1280x720, photorealistic cinematic editorial composite about Doggerland. Use an oblique aerial viewpoint over a dark, windswept North Sea surface. Reveal a broad area beneath the surface through a soft, transparent editorial window: an illustrative former lowland with a branching river, marshes, reeds and gently rolling ground. Align the submerged river valley with the outline of the former river below. The revealed landscape represents an earlier period, not a preserved green forest still growing underwater. Use a strong contrast between the cold blue-grey present-day sea and muted amber light on the reconstructed land. One clear river valley should lead the eye toward the horizon; keep the composition bold and simple at small size. Leave clean dark sky in the upper-left for text added later. No tsunami wall, single-day apocalypse, Atlantis, ruins, houses, staged archaeological treasures, people, children, adolescents, readable text, labels, numbers, logos or watermarks. Do not present the landscape as an exact recovered settlement or surveyed map.
+
+============================================================
+4. TIÊU ĐỀ
+The Ice Age Land Bridge Between Asia and America
+Nghĩa: Vùng đất thời băng hà từng nối châu Á và châu Mỹ.
+
+CHỮ THUMBNAIL GỢI Ý: BERINGIA
+
+PROMPT THUMBNAIL 4:
+Create a bold 16:9 YouTube science-documentary thumbnail, 1280x720, high-end realistic 3D geographic illustration of the Bering Strait region from a high oblique viewpoint centered on eastern Siberia, the Bering Strait and Alaska. Base the orientation and modern continental outlines on a verified public-domain geographic reference. Suggest Beringia as a broad exposed tundra lowland joining the two landmasses at a lower sea level, not a narrow engineered bridge. Treat the precise ancient shoreline as a simplified schematic rather than an authenticated dated reconstruction. Use cold slate-blue surrounding seas, pale distant snow and one warm, sunlit band across the broad lowland so the connection is immediately visible on a phone. Keep the composition tightly focused on the connection, with clear spatial depth and uncluttered dark ocean in the upper-left for later text. No migration arrows, single proven travel route, fabricated coastlines claimed as exact data, roads, built bridges, cities, people, children, adolescents, text, numbers, flags, logos or watermarks.
+
+============================================================
+5. TIÊU ĐỀ
+Why the Ice Age Never Made a Land Road to Australia
+Nghĩa: Vì sao thời băng hà vẫn không tạo ra đường đi bộ hoàn toàn tới Australia?
+
+CHỮ THUMBNAIL GỢI Ý: WATER STILL REMAINED
+
+PROMPT THUMBNAIL 5:
+Create an intriguing 16:9 YouTube science-documentary thumbnail, 1280x720, realistic cinematic terrain-model illustration explaining a natural barrier that remained during low sea level. Use a close oblique aerial view across two broad exposed continental shelves separated by a deep, unmistakably open blue channel containing several rugged islands. The composition must show that expanded land on both sides still does not form one continuous walking route. Represent the principle behind Sunda, Wallacea and Sahul schematically; do not imply a precise proven migration route or exact surveyed ancient coastline. Emphasize the deep blue gap as the main focal point, using warm earth on the near shelf, cooler distant land, sharp island silhouettes and a restrained shaft of sunlight across the water. Leave the upper-left area quiet for later text. No giant ocean chasm with vertical walls, fantasy terrain, arrows, boats of an asserted ancient design, human travelers, children, adolescents, silhouettes, readable text, numbers, logos or watermarks. The image must communicate an enduring water crossing, not a complete land connection from Asia to Australia.
+
+============================================================
+HẬU KỲ THUMBNAIL
+- Chỉ chọn một cặp tiêu đề–thumbnail cho mỗi lần thử; giữ đúng nội dung đã kể.
+- Thêm chữ sau khi tạo ảnh: 2–5 từ, cỡ lớn, tương phản rõ; ưu tiên khả năng đọc trên màn hình điện thoại.
+- Kiểm tra hướng và hình dạng địa lý nếu dùng cặp 4. Không đăng bản đồ AI sai hướng hoặc sai vị trí.
+- Bối cảnh trước–sau và cửa sổ nhìn xuống đáy biển là minh họa biên tập, không phải cảnh quay hiện vật hay bằng chứng khảo cổ thật.

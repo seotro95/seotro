@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "topic_id": 38,
+  "title_count": 5,
+  "matching_thumbnail_prompts": 5,
+  "public_download_tested": true,
+  "assets": {
+    ".txt": {
+      "url": "https://github.com/seotro95/seotro/releases/download/land-bridges-video-38-22m32s/LAND_BRIDGES_38_5_TIEU_DE_5_PROMPT_THUMBNAIL.txt",
+      "bytes": 8389,
+      "sha256": "21b226f88a0aacd3c9e7a68980c1b289f1a286d56dca7b1c8235a3afb04e1683"
+    },
+    ".zip": {
+      "url": "https://github.com/seotro95/seotro/releases/download/land-bridges-video-38-22m32s/LAND_BRIDGES_38_5_TIEU_DE_5_PROMPT_THUMBNAIL.zip",
+      "bytes": 3877,
+      "sha256": "0baa34267e0e523333c1a5a13dcfd321eb23adf4527f5a8ca3636d163e499c0b"
+    }
+  },
+  "publish_workflow_run_id": 43057368409
+}
