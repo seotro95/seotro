@@ -1,12 +1,16 @@
-# AutoDoc Studio 2.2 — tự động edit đa ngôn ngữ
+# AutoDoc Studio 2.3 — chọn khung ngang 16:9 hoặc dọc 9:16
 
-## Bản sửa 2.2.1: model VAD đi kèm bộ ZIP
+Chọn **Tỷ lệ video** ngay dưới các ô đầu vào, hoặc trong **AI / xuất** và cửa sổ **Xuất video**. Chế độ tự động dùng đúng tỷ lệ đã chọn. 720 là cạnh ngắn: 16:9 xuất 1280×720, 9:16 xuất 720×1280; 1080 xuất 1920×1080 hoặc 1080×1920. Preview giữ đúng tỷ lệ, logo và phụ đề tính theo khung xuất. Cỡ chữ/viền tính theo cạnh ngắn để chữ không quá lớn ở video dọc.
 
-Bản 2.2.0 đã loại nhầm `silero_vad_v6.onnx` ở bước đóng gói, sau khi kiểm thử EXE. Bản 2.2.1 chỉ bỏ các model ví dụ không dùng của ONNX Runtime và luôn giữ model VAD bắt buộc của faster-whisper. Bộ kiểm tra xác minh hash, khởi tạo ONNX và chạy suy luận VAD.
+`fill` cắt kín khung, có thể chỉnh tâm cắt từng cảnh; `contain` giữ toàn bộ hình và thêm viền đen. Cả hai giữ tỷ lệ hình, không kéo méo. Đổi tỷ lệ không đổi thời lượng voice. Dự án cũ mặc định 16:9; lưu lại dự án sẽ giữ lựa chọn mới.
+
+## Bản sửa VAD 2.2.1 được giữ trong 2.3
+
+Bản 2.2.0 đã loại nhầm `silero_vad_v6.onnx` ở bước đóng gói, sau khi kiểm thử EXE. Từ 2.2.1, chỉ bỏ các model ví dụ không dùng của ONNX Runtime và luôn giữ model VAD bắt buộc của faster-whisper. Bộ kiểm tra xác minh hash, khởi tạo ONNX và chạy suy luận VAD.
 
 CI còn giải nén **đúng ZIP giao cho người dùng**, vô hiệu thư mục build gốc, chạy nhận dạng và xuất video Anh/Việt rồi mở GUI preview từ bản giải nén. Bộ ZIP 2.2.0 gốc được tải lại để tái hiện lỗi; bản vá nhỏ phải làm quy trình tự động chạy lại được mà không đổi EXE cũ. Xem `POST_PACKAGE_TEST_REPORT.json` trong release cho kết quả và hash ZIP đã thử.
 
-Người đang dùng 2.2.0 có thể giải nén `SUA_LOI_VAD_2.2.0.zip` vào thư mục chứa `AutoDocStudio.exe`, hoặc dùng bộ Full 2.2.1. Không cần xóa cache/model đã tải hoặc các dự án. Model VAD nhỏ đã kèm trong ZIP; model Whisper/CLIP lớn và FFmpeg vẫn được tải riêng lần đầu.
+Người đang dùng 2.2.0 có thể giải nén `SUA_LOI_VAD_2.2.0.zip` vào thư mục chứa `AutoDocStudio.exe`, hoặc dùng bộ Full 2.3.0. Không cần xóa cache/model đã tải hoặc các dự án. Model VAD nhỏ đã kèm trong ZIP; model Whisper/CLIP lớn và FFmpeg vẫn được tải riêng lần đầu.
 
 Ngôn ngữ mặc định **auto**. Nhận lời theo ngôn ngữ gốc, giữ nguyên file voice làm âm thanh chính và giữ phụ đề gốc. Với voice ngoại ngữ, tool tạo bản lời **tiếng Anh cùng mốc** để CLIP so khớp hình; không dùng trực tiếp văn bản Việt/Nhật/Hàn với bộ so khớp tiếng Anh. Có thể cung cấp **Tham chiếu Anh** TXT/SRT để kiểm soát nội dung cần minh họa; SRT phải khớp thời gian voice.
 

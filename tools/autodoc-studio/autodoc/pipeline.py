@@ -16,7 +16,7 @@ def prepare(voice,media,output,settings=None,ctx=None):
     ensure_ffmpeg(ctx);output.mkdir(parents=True,exist_ok=True);start=time.monotonic()
     key=signature({'voice':digest(voice),'media':str(media),'subtitles':digest(Path(settings['subtitle_path'])) if settings['subtitle_path'] else '', 'visual_script':digest(Path(settings['visual_script_path'])) if settings['visual_script_path'] else '', 'quality':settings['quality'],'model':settings['whisper_model'],'language':settings['language'],'screen_minors':settings['screen_minors'],'multilingual_matching':1})[:12]
     job=output/f'AutoDoc2_{key}';job.mkdir(exist_ok=True)
-    save_json(job/'PROJECT.json',{'app':'AutoDocStudio','version':'2.2.1','originals_modified':False})
+    save_json(job/'PROJECT.json',{'app':'AutoDocStudio','version':'2.3.0','originals_modified':False})
     wav,duration,voice_sha=decode_voice(voice,job,ctx);sub=Path(settings['subtitle_path']) if settings['subtitle_path'] else None
     hmong_reference_only=settings['language']=='hmn' and not sub and settings.get('visual_script_path') and Path(settings['visual_script_path']).suffix.lower()=='.srt'
     skipped_asr=bool(sub and sub.suffix.lower()=='.srt') or bool(hmong_reference_only);ratio=None
@@ -42,7 +42,7 @@ def prepare(voice,media,output,settings=None,ctx=None):
         s['visual_text']=s['text'];s['text']=words_for(cues,s['start_frame']/plan['fps'],s['end_frame']/plan['fps'])
         if not settings['auto_transitions']:s['transition']='cut'
     if ratio is not None and ratio<.55:plan['warnings'].append(f'TXT chỉ khớp {ratio:.0%} từ nhận dạng; hãy sửa mốc phụ đề trên tool.')
-    p={'schema':'autodoc-project-2','version':'2.2.1','job':str(job),'project_file':str(job/'project.autodoc.json'),'voice_source':str(voice),'voice_sha256':voice_sha,'voice_wav':str(wav),'media_folder':str(media),'settings':settings,'files':files,'cues':validate(cues,duration),'plan':plan,'skipped_files':skipped,'asr_skipped':skipped_asr,'txt_alignment_ratio':ratio,'prepare_seconds':round(time.monotonic()-start,3)}
+    p={'schema':'autodoc-project-2','version':'2.3.0','job':str(job),'project_file':str(job/'project.autodoc.json'),'voice_source':str(voice),'voice_sha256':voice_sha,'voice_wav':str(wav),'media_folder':str(media),'settings':settings,'files':files,'cues':validate(cues,duration),'plan':plan,'skipped_files':skipped,'asr_skipped':skipped_asr,'txt_alignment_ratio':ratio,'prepare_seconds':round(time.monotonic()-start,3)}
     p.update(language_info,visual_cues=validate(visual_cues,duration))
     reindex(p);save(p);export(p['cues'],job/'LOI_DOC.srt');save_json(job/'EDIT_PLAN.json',plan);ctx.emit(54,'Dự án sẵn sàng: chọn cảnh để xem/sửa, sau đó bấm Xuất video.');return p
 

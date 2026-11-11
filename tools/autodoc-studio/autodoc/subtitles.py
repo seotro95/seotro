@@ -80,7 +80,7 @@ def escape(text):
     return text.replace('\\','\\\\').replace('{',r'\{').replace('}',r'\}').replace('\r','').replace('\n',r'\N')
 
 def write_ass(path,cues,width,height,settings=None,offset=0,duration=None):
-    d=style(settings);size=d['size']*height/720
+    d=style(settings);font_scale=min(width,height)/720;size=d['size']*font_scale
     color=lambda h:'&H00'+h[5:7]+h[3:5]+h[1:3]
     def stamp(t):
         n=max(0,round(t*100));h,n=divmod(n,360000);m,n=divmod(n,6000);s,n=divmod(n,100);return f'{h}:{m:02}:{s:02}.{n:02}'
@@ -92,7 +92,7 @@ PlayResY: {height}
 WrapStyle: 0
 [V4+ Styles]
 Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
-Style: Default,{d['font']},{size},{color(d['color'])},{color(d['color'])},{color(d['background_color'] if d['background'] else d['outline_color'])},{color(d['background_color'])},{-1 if d['bold'] else 0},{-1 if d['italic'] else 0},0,0,100,100,0,0,{3 if d['background'] else 1},{d['outline']*height/720},0,{alignment},{round(width*.04)},{round(width*.04)},{round(height*.055)},1
+Style: Default,{d['font']},{size},{color(d['color'])},{color(d['color'])},{color(d['background_color'] if d['background'] else d['outline_color'])},{color(d['background_color'])},{-1 if d['bold'] else 0},{-1 if d['italic'] else 0},0,0,100,100,0,0,{3 if d['background'] else 1},{d['outline']*font_scale},0,{alignment},{round(width*.04)},{round(width*.04)},{round(height*.055)},1
 [Events]
 Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
 '''

@@ -9,6 +9,7 @@ DEFAULTS={'resolution':720,'fps':24,'quality':'fast','encoder':'auto','threads':
 
 def options(value=None):
     d={**copy.deepcopy(DEFAULTS),**(value or {})};d['subtitle_style']=style(d['subtitle_style'])
+    if d['aspect_ratio'] not in ['16:9','9:16']:raise ValueError('Chọn 16:9 ngang hoặc 9:16 dọc.')
     d.setdefault('export_format','mp4');d.setdefault('auto_filename','VIDEO_HOAN_CHINH')
     d['auto_filename']=str(d['auto_filename']).strip()
     if d['export_format'] not in ['mp4','mkv']:raise ValueError('Định dạng xuất cần MP4 hoặc MKV.')
@@ -24,7 +25,7 @@ def options(value=None):
     if d['logo_position'] not in ['top_left','top_right','bottom_left','bottom_right','center']:raise ValueError('Vị trí logo không hợp lệ.')
     return d
 
-DEFAULTS.update(export_format='mp4',auto_filename='VIDEO_HOAN_CHINH',language='auto',visual_script_path='',whisper_model='base')
+DEFAULTS.update(export_format='mp4',auto_filename='VIDEO_HOAN_CHINH',language='auto',visual_script_path='',whisper_model='base',aspect_ratio='16:9')
 
 def reindex(project):
     plan=project['plan'];cursor=0

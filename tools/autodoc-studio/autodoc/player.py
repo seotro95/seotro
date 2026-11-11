@@ -5,6 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 from PIL import Image,ImageTk,ImageOps
 from .common import Context,binary,signature
+from .framing import pointer_in_image
 
 def scene_preview(p,index,ctx):
     from .render import render_shot,source_audio
@@ -25,6 +26,7 @@ class Player(ttk.Frame):
     def __init__(self,master,on_focus=None):
         super().__init__(master);self.on_focus=on_focus;self.path=None;self.audio=None;self.duration=0.;self.position=0.;self.active=False;self.generation=0;self.q=queue.Queue(maxsize=3);self._photo=None;self.alias=f'autodoc{id(self)}'
         self.canvas=tk.Canvas(self,bg='#111823',height=300,highlightthickness=0);self.canvas.pack(fill='both',expand=True);self.canvas.create_text(300,140,text='Chọn cảnh để xem trước',fill='white');self.canvas.bind('<Button-1>',self.focus_at)
+        self._image_box=None;self.video_width=0;self.video_height=0
         bar=ttk.Frame(self);bar.pack(fill='x');ttk.Button(bar,text='▶ Phát / ⏸ Dừng',command=self.toggle).pack(side='left');self.caption=ttk.Label(bar,text='0.00 / 0.00s');self.caption.pack(side='right')
         self.scale=ttk.Scale(self,from_=0,to=1);self.scale.pack(fill='x');self.scale.bind('<ButtonPress-1>',lambda e:self.stop());self.scale.bind('<ButtonRelease-1>',lambda e:self.seek(float(self.scale.get())))
         self.after(30,self.poll);self.bind('<Destroy>',self.cleanup,add='+')
@@ -32,15 +34,17 @@ class Player(ttk.Frame):
         if os.name=='nt':return ctypes.windll.winmm.mciSendStringW(command,None,0,None)
         return 0
     def focus_at(self,event):
-        if self.on_focus:self.on_focus(max(0,min(1,event.x/max(1,self.canvas.winfo_width()))),max(0,min(1,event.y/max(1,self.canvas.winfo_height()))))
+        point=pointer_in_image(event.x,event.y,self._image_box)
+        if self.on_focus and point:self.on_focus(*point)
     def cleanup(self,event=None):
         if event is None or event.widget is self:self.stop();self.mci(f'close {self.alias}')
     def stop(self):
         self.active=False;self.generation+=1;self.mci(f'stop {self.alias}')
     def load(self,path,audio=None,duration=None):
-        self.stop();self.mci(f'close {self.alias}');self.path=str(path);self.audio=audio
+        self.stop();self.mci(f'close {self.alias}');self.path=str(path);self.audio=audio;self._image_box=None
         import av
-        with av.open(self.path) as c:self.duration=float(duration or (c.duration/1000000 if c.duration else c.streams.video[0].duration*c.streams.video[0].time_base))
+        with av.open(self.path) as c:
+            stream=c.streams.video[0];self.video_width=stream.width;self.video_height=stream.height;self.duration=float(duration or (c.duration/1000000 if c.duration else stream.duration*stream.time_base))
         if audio:self.mci(f'open "{audio}" type waveaudio alias {self.alias}')
         self.scale.configure(to=max(.01,self.duration));self.seek(0)
     def seek(self,value):
@@ -86,7 +90,7 @@ class Player(ttk.Frame):
                 g,kind,t,im=self.q.get_nowait()
                 if g!=self.generation:continue
                 if kind=='frame':
-                    self.position=t;w=max(2,self.canvas.winfo_width());h=max(2,self.canvas.winfo_height());im=ImageOps.contain(im,(w,h));self._photo=ImageTk.PhotoImage(im);self.canvas.delete('all');self.canvas.create_image(w/2,h/2,image=self._photo);self.scale.set(t);self.caption.configure(text=f'{t:.2f} / {self.duration:.2f}s')
+                    self.position=t;w=max(2,self.canvas.winfo_width());h=max(2,self.canvas.winfo_height());im=ImageOps.contain(im,(w,h));self._image_box=((w-im.width)/2,(h-im.height)/2,im.width,im.height);self._photo=ImageTk.PhotoImage(im);self.canvas.delete('all');self.canvas.create_image(w/2,h/2,image=self._photo);self.scale.set(t);self.caption.configure(text=f'{t:.2f} / {self.duration:.2f}s')
                 elif kind=='end':self.active=False;self.position=self.duration;self.mci(f'stop {self.alias}')
                 elif kind=='error':self.caption.configure(text='Không đọc được preview: '+im[:80])
         except queue.Empty:pass

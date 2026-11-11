@@ -5,6 +5,7 @@ from PIL import Image,ImageOps
 from .common import Context,binary,data_dir,digest,probe,save_json,signature
 from .effects import FILTERS,MOTIONS,TRANSITIONS
 from .subtitles import write_ass
+from .framing import dimensions
 
 _ENCODERS={}
 def source_offset(asset,offset):
@@ -65,7 +66,7 @@ def _scale(label,duration,shot,asset,w,h,fps,fit):
     return f'{label}{vf},setsar=1,format=yuv420p,setparams=range=tv:color_primaries=bt709:color_trc=bt709:colorspace=bt709,settb=AVTB'
 
 def render_shot(p,item,previous,ctx,resolution=None,preview=False,codec='libx264'):
-    job=Path(p['job']);settings=p['settings'];fps=p['plan']['fps'];h=resolution or settings['resolution'];w=round(h*16/9)//2*2;sec=item['frames']/fps
+    job=Path(p['job']);settings=p['settings'];fps=p['plan']['fps'];w,h=dimensions(resolution or settings['resolution'],settings.get('aspect_ratio','16:9'));sec=item['frames']/fps
     asset=p['files'][item['source_id']];prev=p['files'][previous['source_id']] if previous else None
     logo=normalize_logo(settings,job);local_cues=[c for c in p['cues'] if c['end']>item['start_frame']/fps and c['start']<item['end_frame']/fps]
     visual_settings={k:settings[k] for k in ['fit','subtitle_mode','subtitle_style','logo_position','logo_size','logo_opacity']}
@@ -181,6 +182,6 @@ def export_movie(p,out,ctx):
     ctx.run(cmd+[candidate],log=job/'export.log')
     from .validation import validate_output
     report=validate_output(candidate,voice,p,ctx)
-    candidate.replace(out);report.update(file=out.name,output=str(out),codec_requested=settings['encoder'],encoder_selected=codec,source_audio_kept=mixed,source_volume=settings['source_volume'] if mixed else 0,logo_applied=bool(settings.get('logo_path')),subtitle_mode=settings['subtitle_mode'],version='2.2.1')
-    report.update(detected_language=p.get('detected_language','unknown'),visual_matching=p.get('visual_matching','original_en'),scenes_needing_review=[s['index']+1 for s in shots if s.get('semantic_score',0)<.19])
+    candidate.replace(out);report.update(file=out.name,output=str(out),codec_requested=settings['encoder'],encoder_selected=codec,source_audio_kept=mixed,source_volume=settings['source_volume'] if mixed else 0,logo_applied=bool(settings.get('logo_path')),subtitle_mode=settings['subtitle_mode'],version='2.3.0')
+    report.update(aspect_ratio=settings['aspect_ratio'],detected_language=p.get('detected_language','unknown'),visual_matching=p.get('visual_matching','original_en'),scenes_needing_review=[s['index']+1 for s in shots if s.get('semantic_score',0)<.19])
     save_json(out.with_suffix('.qa.json'),report);save_json(job/'KIEM_TRA_VIDEO.json',report);ctx.emit(100,'Đã lưu video và báo cáo kiểm tra.');return {'output':str(out),'project':p['project_file'],'report':report}

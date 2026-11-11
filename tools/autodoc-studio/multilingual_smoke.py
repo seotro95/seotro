@@ -34,5 +34,5 @@ for code,country in samples:
     if code=='vi':export(p['visual_cues'],reference)
     results.append({'language':code,'status':'passed','mode':p['visual_matching'],'native_caption_language':subtitle_language(p['cues'])[0],'original_audio_alignment':r['report']['audio_alignment'],'voice_seconds':r['report']['voice_seconds'],'video_seconds':r['report']['video_seconds'],'mean_semantic_score':round(sum(s['semantic_score'] for s in p['plan']['shots'])/len(p['plan']['shots']),4)})
     print('MULTILINGUAL_PASS',code,p['visual_matching'],flush=True)
-report={'status':'passed','version':'2.2.1','frozen_exe_tested':bool(exe),'results':results,'automatic_language_detection_tested':['vi','es','ja'],'hmong_is_timed_english_reference_mode_not_speech_recognition':True,'original_voice_preserved':True,'english_visual_queries_and_native_subtitles_separate':True,'semantic_score_is_similarity_not_verified_factual_accuracy':True}
+report={'status':'passed','version':'2.3.0','frozen_exe_tested':bool(exe),'results':results,'automatic_language_detection_tested':['vi','es','ja'],'hmong_is_timed_english_reference_mode_not_speech_recognition':True,'original_voice_preserved':True,'english_visual_queries_and_native_subtitles_separate':True,'semantic_score_is_similarity_not_verified_factual_accuracy':True}
 save_json(root/'MULTILINGUAL_TEST_REPORT.json',report)

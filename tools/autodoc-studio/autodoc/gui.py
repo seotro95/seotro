@@ -12,7 +12,7 @@ from .languages import LABELS
 
 class App(tk.Tk):
     def __init__(self):
-        super().__init__();self.title('AutoDoc Studio 2.2 — Tự động edit đa ngôn ngữ');self.geometry('1360x930');self.minsize(1080,790);self.p=None;self.busy=False;self.cancel=threading.Event();self.queue=queue.Queue();self.last_export='';self.last_auto_result=None;self.selected=0;self.preview_pending=None
+        super().__init__();self.title('AutoDoc Studio 2.3 — Edit ngang 16:9 / dọc 9:16');screen_w=max(800,self.winfo_screenwidth()-60);screen_h=max(600,self.winfo_screenheight()-80);self.geometry(f'{min(1360,screen_w)}x{min(950,screen_h)}');self.minsize(min(1080,screen_w),min(720,screen_h));self.p=None;self.busy=False;self.cancel=threading.Event();self.queue=queue.Queue();self.last_export='';self.last_auto_result=None;self.selected=0;self.preview_pending=None
         self.vars={};self.edit={};self.cuevars={};self.preferences=data_dir()/'preferences_v2.json'
         self.voice=tk.StringVar();self.media=tk.StringVar();self.output=tk.StringVar(value=str(Path.home()/'Videos'/'AutoDocStudio'));self.subpath=tk.StringVar();self.visualpath=tk.StringVar();self.status=tk.StringVar(value='Chọn voice và thư mục ảnh/video → TỰ ĐỘNG EDIT & XUẤT. Hoặc Tự xếp cảnh để sửa trước khi xuất.')
         self.stylevars={k:(tk.BooleanVar(value=v) if isinstance(v,bool) else tk.StringVar(value=str(v))) for k,v in DEFAULTS['subtitle_style'].items()}
@@ -39,6 +39,7 @@ class App(tk.Tk):
         top=ttk.LabelFrame(self,text='Đầu vào');top.pack(fill='x',padx=10,pady=5)
         self.file_row(top,'Voice chính',self.voice,types=[('Âm thanh','*.wav *.mp3 *.m4a *.flac *.aac *.ogg'),('Tất cả','*.*')]);self.file_row(top,'Ảnh / video',self.media,'dir');self.file_row(top,'Nơi lưu dự án',self.output,'dir');self.file_row(top,'Phụ đề (tùy chọn)',self.subpath,types=[('TXT / SRT','*.txt *.srt')])
         self.file_row(top,'Tham chiếu Anh',self.visualpath,types=[('English TXT / SRT (tùy chọn)','*.txt *.srt')])
+        ratio_row=ttk.Frame(top);ratio_row.pack(fill='x',pady=3);ttk.Label(ratio_row,text='Tỷ lệ video',width=16).pack(side='left');ratio_box=ttk.Combobox(ratio_row,textvariable=self.vars['aspect_ratio'],values=['16:9','9:16'],state='readonly',width=9);ratio_box.pack(side='left');ttk.Label(ratio_row,text=' 16:9 ngang • 9:16 dọc. Chọn trước khi tự động edit hoặc xuất.').pack(side='left');ratio_box.bind('<<ComboboxSelected>>',lambda e:self.apply_settings() if self.p and not self.busy else None)
         auto=ttk.Frame(self);auto.pack(fill='x',padx=10,pady=3);ttk.Style(self).configure('Auto.TButton',font=('Segoe UI',10,'bold'),padding=(10,6))
         self.auto_button=ttk.Button(auto,text='TỰ ĐỘNG EDIT & XUẤT',style='Auto.TButton',command=lambda:self.safe(self.auto_edit));self.auto_button.pack(side='left')
         ttk.Label(auto,text='Một lần bấm: tự xếp cảnh, ghép voice, áp dụng logo/phụ đề và lưu video.').pack(side='left',padx=10)
@@ -83,7 +84,8 @@ class App(tk.Tk):
         self.file_row(brand,'Logo PNG/JPG',self.vars['logo_path'],types=[('Ảnh','*.png *.jpg *.webp *.bmp')]);self.combo(brand,'Vị trí logo',self.vars['logo_position'],['top_left','top_right','bottom_left','bottom_right','center']);self.entry(brand,'Rộng logo (% hình)',self.vars['logo_size']);self.entry(brand,'Độ hiện (0–1)',self.vars['logo_opacity'])
         ttk.Label(brand,text='Để trống đường dẫn để bỏ logo. PNG hỗ trợ nền trong suốt.',wraplength=370).pack(anchor='w',pady=5)
         ttk.Checkbutton(brand,text='Tắt âm thanh clip gốc (chỉ giữ voice)',variable=self.vars['mute_source']).pack(anchor='w',pady=8);self.entry(brand,'Âm lượng clip (0–1)',self.vars['source_volume']);ttk.Label(brand,text='Bỏ chọn để trộn tiếng clip với voice. Ảnh tự có tiếng nền im lặng.',wraplength=380).pack(anchor='w');self.button(brand,'Áp dụng logo / tiếng',self.apply_settings).pack(fill='x',pady=8)
-        self.combo(config,'Độ phân giải xuất',self.vars['resolution'],[720,1080]);self.combo(config,'Khung/giây',self.vars['fps'],[24,25,30,60]);self.combo(config,'Mã hóa',self.vars['encoder'],['auto','cpu','nvenc','qsv','amf']);self.combo(config,'Định dạng tự động',self.vars['export_format'],['mp4','mkv']);self.entry(config,'Tên video tự động',self.vars['auto_filename'])
+        self.combo(config,'Tỷ lệ video',self.vars['aspect_ratio'],['16:9','9:16']);self.combo(config,'Độ nét (cạnh ngắn)',self.vars['resolution'],[720,1080]);self.combo(config,'Khung/giây',self.vars['fps'],[24,25,30,60]);self.combo(config,'Mã hóa',self.vars['encoder'],['auto','cpu','nvenc','qsv','amf']);self.combo(config,'Định dạng tự động',self.vars['export_format'],['mp4','mkv']);self.entry(config,'Tên video tự động',self.vars['auto_filename'])
+        ttk.Label(config,text='720: ngang 1280×720 / dọc 720×1280. 1080: ngang 1920×1080 / dọc 1080×1920. fill cắt kín khung; contain giữ toàn cảnh và thêm viền đen. Không kéo méo hình.',wraplength=370).pack(anchor='w',pady=6)
         self.combo(config,'Chế độ tốc độ',self.vars['quality'],['fast','balanced','quality']);self.combo(config,'Whisper',self.vars['whisper_model'],['tiny','base','small']);self.combo(config,'Ngôn ngữ voice',self.vars['language'],[f'{code} | {name}' for code,name in LABELS.items()]);self.combo(config,'CPU nhận dạng',self.vars['threads'],['1','2','4','8']);self.combo(config,'Khung hình',self.vars['fit'],['fill','contain'])
         ttk.Label(config,text='auto nhận diện ngôn ngữ. Lời ngoại ngữ được dịch theo mốc sang Anh để chọn hình; giữ nguyên voice/phụ đề gốc. Có thể cung cấp Tham chiếu Anh. H’Mông cần SRT tham chiếu đúng mốc. Cảnh nền vàng cần xem lại.',wraplength=370).pack(anchor='w',pady=6)
         for k,t in [('auto_effects','Tự tạo chuyển động cho ảnh'),('auto_transitions','Tự chọn chuyển cảnh nhẹ'),('screen_minors','Lọc trẻ em ước lượng bằng AI'),('full_verify','Kiểm tra giải mã toàn phim sau xuất')]:ttk.Checkbutton(config,text=t,variable=self.vars[k]).pack(anchor='w',pady=4)
@@ -236,8 +238,8 @@ class App(tk.Tk):
     def refresh_effects(self):self.effectbox['values']=[f'{k} | {NAMES.get(k,k)}' for k in installed_effects()]
     def get_pack(self):self.worker(lambda ctx:install_pack(ctx),lambda result:(self.refresh_effects(),self.status.set('Đã cài gói hiệu ứng bổ sung; chọn tại tab Cảnh.')))
     def export_dialog(self):
-        self.require();self.p['settings']=self.settings();win=tk.Toplevel(self);win.title('Xuất video');win.transient(self);win.grab_set();win.geometry('510x410')
-        for k,label,values in [('resolution','Độ phân giải',[720,1080]),('fps','Khung/giây',[24,25,30,60]),('quality','Tốc độ / chất lượng',['fast','balanced','quality']),('encoder','Bộ mã hóa',['auto','cpu','nvenc','qsv','amf'])]:self.combo(win,label,self.vars[k],values)
+        self.require();self.p['settings']=self.settings();win=tk.Toplevel(self);win.title('Xuất video');win.transient(self);win.grab_set();win.geometry('530x460')
+        for k,label,values in [('aspect_ratio','Tỷ lệ video',['16:9','9:16']),('resolution','Độ nét (cạnh ngắn)',[720,1080]),('fps','Khung/giây',[24,25,30,60]),('quality','Tốc độ / chất lượng',['fast','balanced','quality']),('encoder','Bộ mã hóa',['auto','cpu','nvenc','qsv','amf'])]:self.combo(win,label,self.vars[k],values)
         ttk.Checkbutton(win,text='Giải mã kiểm tra toàn bộ phim (tốn thêm thời gian)',variable=self.vars['full_verify']).pack(anchor='w',padx=15,pady=10)
         ttk.Label(win,text='auto: thử GPU thực tế, quay về CPU nếu không hỗ trợ.\nMP4 tương thích rộng; MKV hỗ trợ phụ đề mềm.\nKiểu màu/phông dùng chế độ burn. Mọi bản đều lưu vào đường dẫn bạn chọn.',wraplength=470).pack(padx=15,pady=10)
         def begin():
@@ -249,7 +251,7 @@ class App(tk.Tk):
                 self.worker(lambda ctx:export_movie(p,path,ctx),self.exported)
             except Exception as e:messagebox.showerror('Xuất video',str(e),parent=win)
         ttk.Button(win,text='Chọn nơi lưu và xuất',command=begin).pack(fill='x',padx=20,pady=5);ttk.Button(win,text='Hủy',command=win.destroy).pack(pady=4)
-    def exported(self,r):self.last_export=r['output'];self.status.set('Đã lưu video: '+self.last_export);messagebox.showinfo('Hoàn tất','Video đã lưu:\n'+self.last_export)
+    def exported(self,r):self.last_export=r['output'];self.status.set('Đã lưu video: '+self.last_export);self.request_preview();messagebox.showinfo('Hoàn tất','Video đã lưu:\n'+self.last_export)
     def open_result(self):
         if not self.last_export or not Path(self.last_export).is_file():raise ValueError('Chưa có video xuất trong phiên này.')
         if os.name=='nt':os.startfile(self.last_export)

@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "portrait_frame_360x640": true,
+  "portrait_logo_pixels": true,
+  "portrait_subtitle_pixels": true,
+  "contain_keeps_content_with_black_bars": true
+}

@@ -1,8 +1,8 @@
 name: Build and test AutoDocStudio Windows portable
 on:
   push:
-    branches: [codex/autodoc-studio-v221-20261111]
-    paths: [tools/autodoc-studio/**, .github/workflows/autodoc-studio-v221.yml]
+    branches: [codex/autodoc-studio-v23-20261111]
+    paths: [tools/autodoc-studio/**, .github/workflows/autodoc-studio-v23.yml]
   workflow_dispatch:
 permissions:
   contents: write
@@ -34,10 +34,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           $ErrorActionPreference='Stop'
-          $tag='autodoc-studio-v2.2.1'
+          $tag='autodoc-studio-v2.3.0'
           gh release view $tag --repo $env:GITHUB_REPOSITORY 2>$null
           if ($LASTEXITCODE -ne 0) {
-            gh release create $tag --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --title 'AutoDoc Studio 2.2.1 — Sửa lỗi thiếu VAD, có bản vá nhỏ' --draft --notes 'Sửa lỗi thiếu silero_vad_v6.onnx trong ZIP 2.2.0. Có SUA_LOI_VAD_2.2.0.zip nhỏ để bổ sung model vào thư mục chứa EXE. Đã thử bộ Full sau giải nén và thử bản vá trên chính ZIP 2.2.0 gốc. Bản đầy đủ chức năng Windows 10/11 x64. Nút TỰ ĐỘNG EDIT & XUẤT chạy trọn quy trình từ voice và ảnh/video. Nhận diện ngôn ngữ, giữ voice/phụ đề gốc, dùng bản lời Anh theo mốc để chọn hình; Hmong dùng SRT tham chiếu Anh. Đã thử các thao tác trên GUI frozen EXE và xuất phim thực tế. Xem KIEM_TRA_CHUC_NANG.txt. Nhận ảnh và video, xem trước và sửa cảnh, tắt/giữ tiếng clip, logo PNG, nhập/xuất TXT/SRT, kiểu phụ đề, lưu dự án và xuất MP4/MKV tùy chọn. Cache dùng lại, thử GPU rồi tự quay về CPU. Lần đầu tự tải FFmpeg và model; không cần API trả phí. Xem hướng dẫn và báo cáo thử exe trong bản tải.'
+            gh release create $tag --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --title 'AutoDoc Studio 2.3 — Ngang 16:9 / Dọc 9:16, đã sửa VAD' --draft --notes 'Có chọn 16:9 ngang hoặc 9:16 dọc trong chế độ tự động và xuất thủ công. Preview, logo và phụ đề theo đúng tỷ lệ. Bao gồm sửa lỗi thiếu silero_vad_v6.onnx của ZIP 2.2.0. Có SUA_LOI_VAD_2.2.0.zip nhỏ để bổ sung model vào thư mục chứa EXE. Đã thử bộ Full sau giải nén và thử bản vá trên chính ZIP 2.2.0 gốc. Bản đầy đủ chức năng Windows 10/11 x64. Nút TỰ ĐỘNG EDIT & XUẤT chạy trọn quy trình từ voice và ảnh/video. Nhận diện ngôn ngữ, giữ voice/phụ đề gốc, dùng bản lời Anh theo mốc để chọn hình; Hmong dùng SRT tham chiếu Anh. Đã thử các thao tác trên GUI frozen EXE và xuất phim thực tế. Xem KIEM_TRA_CHUC_NANG.txt. Nhận ảnh và video, xem trước và sửa cảnh, tắt/giữ tiếng clip, logo PNG, nhập/xuất TXT/SRT, kiểu phụ đề, lưu dự án và xuất MP4/MKV tùy chọn. Cache dùng lại, thử GPU rồi tự quay về CPU. Lần đầu tự tải FFmpeg và model; không cần API trả phí. Xem hướng dẫn và báo cáo thử exe trong bản tải.'
             if ($LASTEXITCODE -ne 0) { throw 'Cannot create release' }
           }
           Get-ChildItem release -File | ForEach-Object {

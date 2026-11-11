@@ -69,11 +69,11 @@ def run(config_path,report_path):
         opened=[];gui.os.startfile=lambda path:opened.append(path);app.open_result();assert opened==[app.last_export];checks['open_exported_video_action']=True
         # Invoke the same visible button a user clicks, with no subtitle file.
         app.voice.set(cfg['auto_voice']);app.media.set(cfg['media']);app.output.set(cfg['auto_output']);app.subpath.set('')
-        fields({'resolution':720,'fps':24,'quality':'fast','encoder':'auto','whisper_model':'tiny','logo_path':'','mute_source':True,'subtitle_mode':'none','full_verify':True,'screen_minors':False,'auto_filename':'AUTO_GUI_Đã dựng','export_format':'mp4'})
+        fields({'aspect_ratio':'9:16','resolution':720,'fps':24,'quality':'fast','encoder':'auto','whisper_model':'tiny','logo_path':'','mute_source':True,'subtitle_mode':'none','full_verify':True,'screen_minors':False,'auto_filename':'AUTO_GUI_Đã dựng','export_format':'mp4'})
         app.auto_button.invoke()
         yield wait(lambda:ready() and app.last_auto_result is not None,'automatic GUI edit with actual ASR',300)
         result=app.last_auto_result;movie=Path(result['output']);assert movie.is_file() and result['workflow']=='automatic' and not result['asr_skipped'];p=load(result['project']);assert p['plan']['opening_shots']==10 and p['plan']['opening_seconds']==30 and p['plan']['opening_distinct_files']==10
-        assert result['report']['audio_alignment'] and not result['report']['source_audio_kept'];checks['one_click_automatic_gui_without_subtitles']=True;checks['automatic_ten_scene_30_second_opening']=True;checks['automatic_video_and_reopenable_project_saved']=True
+        assert result['report']['audio_alignment'] and not result['report']['source_audio_kept'];assert result['report']['width']==720 and result['report']['height']==1280 and p['settings']['aspect_ratio']=='9:16';checks['one_click_automatic_gui_without_subtitles']=True;checks['automatic_ten_scene_30_second_opening']=True;checks['automatic_video_and_reopenable_project_saved']=True;checks['automatic_portrait_9_16_720x1280']=True
         sha=digest(movie);app.auto_button.invoke();app.cancel.set()
         yield wait(ready,'cancel automatic edit',60)
         assert app.last_auto_result is None and digest(movie)==sha;checks['cancel_keeps_completed_video']=True
@@ -81,6 +81,7 @@ def run(config_path,report_path):
         yield wait(lambda:ready() and app.last_auto_result is not None,'resume automatic workflow',300)
         second=app.last_auto_result;assert second['output']!=str(movie) and digest(movie)==sha;checks['repeat_auto_keeps_previous_export']=True
         yield wait(frame_ready,'preview automatically generated project')
+        assert app.player.video_height>app.player.video_width;checks['portrait_preview_orientation_correct']=True
         checks['automatic_result_editable_in_gui']=True
     generator=steps()
     def finish(ok,detail=None):

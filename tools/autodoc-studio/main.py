@@ -20,7 +20,7 @@ def main():
             from autodoc.bootstrap import ensure_ffmpeg
             from autodoc.common import Context,binary
             ensure_ffmpeg(Context(lambda *_:None));import av,ctranslate2,faster_whisper,numpy,onnxruntime,tokenizers,tkinter,langid
-            result={'status':'ready','version':'2.2.1','ffmpeg':binary('ffmpeg'),'ffprobe':binary('ffprobe'),'tk_version':tkinter.TkVersion,'onnx':onnxruntime.__version__,'vad':vad_status}
+            result={'status':'ready','version':'2.3.0','ffmpeg':binary('ffmpeg'),'ffprobe':binary('ffprobe'),'tk_version':tkinter.TkVersion,'onnx':onnxruntime.__version__,'vad':vad_status}
             if args.doctor_output:Path(args.doctor_output).write_text(json.dumps(result),encoding='utf-8')
         elif args.gui_smoke:
             from autodoc.gui import App
@@ -31,7 +31,7 @@ def main():
             def finish():
                 ticks[0]+=1
                 if (app.busy or app.preview_pending or (args.project and app.player._photo is None)) and ticks[0]<100:app.after(200,finish);return
-                payload={'status':'passed','widgets':len(app.winfo_children()),'project_loaded':bool(app.p),'preview_loaded':bool(app.player.path),'preview_frame_displayed':app.player._photo is not None,'scene_count':len(app.p['plan']['shots']) if app.p else 0}
+                payload={'status':'passed','widgets':len(app.winfo_children()),'project_loaded':bool(app.p),'preview_loaded':bool(app.player.path),'preview_frame_displayed':app.player._photo is not None,'preview_size':[app.player.video_width,app.player.video_height],'scene_count':len(app.p['plan']['shots']) if app.p else 0}
                 if args.project and (not app.player.path or app.player._photo is None):payload['status']='failed'
                 if args.gui_report:Path(args.gui_report).write_text(json.dumps(payload),encoding='utf-8')
                 app.player.cleanup();app.destroy()
