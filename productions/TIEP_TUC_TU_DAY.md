@@ -1,3 +1,15 @@
+# Chủ đề19 Kostenki — đã hoàn thành video20:15
+
+[Tải video](https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4) · [10cảnh mở đầu30giây](https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_OPENING_30s.mp4) · [5tiêu đề và prompt thumbnail](https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_TITLES_THUMBNAILS.txt).
+
+Video1280×720,24fps,29.160khung hình. Chỉ voiceAnhAndrew đã lưu,đúng20:15;không tiếngclip,nhạc hoặcSFX. Đã giải mã toàn bộ,kiểm15điểm sóng âm không lệch thời gian,kiểmhashlinktảicôngkhai. Các cảnh thiếu dùng video liên quan,không ảnh đứng/bảng chữ. 100clip nguồn khác nhau,84clip được chọn;kiểmhình bằng mẫu,không xem tay liên tục. Hồ sơ ở video-19-kostenki/EDITING.
+
+Bộ17voice,tài liệu,kịchbản,prompt và cấu hình giọng đã lưu vẫn giữ nguyên. Các giới hạn ràsoát bảnngữ đã nêu trong hồ sơvoice vẫn áp dụng. Không tự bắt đầu chủ đề tiếp theo. Giữ trạng thái các tập khác.
+
+---
+
+Nhật ký trước đó;trạng thái hiện tại ở đầu trang.
+
 # Tiếp tục từ đây — chủ đề19 đã có tài liệu và17voice
 
 Kostenki,20:15:2.816từAnh,122mốc gồm121×10giây+5giây cuối;120promptmới/12TXT,10prompt/tệp,2mốcREUSE. Mỗi prompt kết thúc“không có âm thanh”,không có hìnhtrẻem. [Tải voice](video-19-kostenki/VOICES/DOWNLOAD_LINKS.md) · [Quy trình](video-19-kostenki/PRODUCTION_STEPS_APPLIED.md).
@@ -122,6 +134,7 @@ Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ 
 ## Bàn giao video chủ đề4
 
 Đã dựng và xuất bản23:00, chỉ voiceAnh gốc có nhấn nhá.133upload/115clipkhácnhau/18bảntrùng; chọn cảnh người trưởng thành, bỏ mọi tiếngclip và cảnh không phù hợp.12shot trong30giây đầu; các chương theo ranh120/110s. [Video](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Tập5 vẫn chưa bắt đầu.
+
 
 
 

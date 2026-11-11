@@ -1,12 +1,20 @@
-# Chủ đề19 — Nhà bằng xương voi ma mút /20:15
+# Kostenki — chủ đề 19 — bản dựng hoàn chỉnh 20:15
 
-**Kostenki:The House That Remains a Question**
+[Tải video hoàn chỉnh](https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4) · [Mở đầu 30 giây](https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_OPENING_30s.mp4)
 
-Kịch bản Anh2.816từ,122mốc(121×10s+5s),12chương(11×100s+115s).120prompt mới/12TXT,đúng10prompt/tệp;2mốc dùng lại. Prompt10giây và kết thúc bằng“không có âm thanh”. Không hình trẻ em;chỉ người trưởng thành35–60tuổi.
+[5 tiêu đề và 5 prompt thumbnail — TXT](https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_TITLES_THUMBNAILS.txt) · [ZIP dự phòng cho TXT](https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_TITLES_THUMBNAILS.zip) · [Dự án dựng](https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_EDIT_PROJECT.zip)
 
-Tài liệu đã bàn giao trướcvoice.17MP3 riêng đã được kiểm tra đúng20:15 sau giải mã;16nam,H’MôngTrắngnữ3,cùngID/style/mẫu đã lưu. Chưa cóclip,chưa dựngvideo19. Các tập trước giữ nguyên.
+1280×720, 24 fps, 29.160 khung hình, đúng 20:15. Chỉ một đường voice tiếng Anh đã lưu: en-US-AndrewNeural. Bỏ toàn bộ tiếng gốc của clip; không nhạc hoặc hiệu ứng âm thanh. Giữ lời, cao độ và thời gian voice; chỉ chuẩn hóa độ lớn khi xuất.
 
-[Xem nguồn](NGUON_KIEM_CHUNG.md) vàPHAN_TICH_NGUON_VA_QUY_TRINH.txt để đọc giới hạn bằng chứng,cách viết và dựng. Không tái xuất bảnvideo/ảnh/bài báo nguồn; lời và prompt mới.
+Đúng 10 cảnh khác nhau trong 30 giây đầu, nằm trong tổng 20:15. Cắt theo câu chuyện và dùng chín chuyển cảnh hòa hình 0,4 giây có bù thời gian. Phần kết trở lại hàm và vòng xương. Có phụ đề Anh tùy chọn, mặc định tắt, SRT riêng và 12 chương.
+
+Đã kiểm tra mẫu hình ở ba thời điểm trong 100 clip khác nhau; dùng 84 clip trong bản cuối. Hai mươi mã prompt chưa có clip được bù bằng video liên quan. Các clip khác không phù hợp hình/bối cảnh cũng được thay; xem SUBSTITUTIONS.csv và EDIT_PLAN.json. Không dùng ảnh đứng hoặc bảng chữ để bù cảnh. Không có hình trẻ em được phát hiện trong những mẫu hình đã duyệt. Đây là kiểm tra bằng mẫu hình, không phải xem tay liên tục toàn bộ video.
+
+Hình là minh họa và mô hình giảng giải. Mái che và chức năng cấu trúc Kostenki còn được tranh luận; không coi hình tái dựng là chứng minh thiết kế thật. Các mẫu vật hiển thị không được tuyên bố là đúng những mẫu đã phân tích trong nghiên cứu. Các cấu trúc xương quá cao, cảnh có chữ lớn hoặc bối cảnh không phù hợp đã được lọc/cắt khung/thay thế.
+
+Đã giải mã toàn bộ video, kiểm tra số khung hình, thời lượng, khoảng đen, độ lớn/đỉnh âm và 15 điểm đồng bộ sóng âm với voice Anh. FINAL_VIDEO_QA.json ghi số đo. Bộ 17 voice riêng vẫn ở [release lời đọc](https://github.com/seotro95/seotro/releases/tag/kostenki-video-19-20m15s).
+
+Dự án không kèm video nguồn, proxy, ảnh trích nguồn hay mã tải lên riêng tư. Bản tải lên gốc trong cuộc trò chuyện được giữ; chỉ thu hồi cache tải về sau khi đã tạo bản video im lặng và lưu hash. Dùng SOURCE_CLIP_MANIFEST.csv và link_sources.py để nối lại các clip bạn đã tải.
 
 
-[Tải từng voice](VOICES/DOWNLOAD_LINKS.md) · [Quy trình đã áp dụng](PRODUCTION_STEPS_APPLIED.md) · [QA giọng](VOICES/VOICE_RELEASE_QA.json). Các bản dịch và phương ngữH’MôngTrắng vẫn cần người bản ngữ nghe/biên tập độc lập.
+[Kịch bản và12TXTprompt](https://github.com/seotro95/seotro/releases/download/kostenki-video-19-20m15s/KOSTENKI_VIDEO_19_TAI_LIEU_20m15s.zip) · [Quy trình đã lưu](PRODUCTION_STEPS_APPLIED.md) · [QA video](EDITING/FINAL_VIDEO_QA.json).

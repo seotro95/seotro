@@ -1,0 +1,2440 @@
+[
+  {
+    "cue": 1,
+    "start": 0,
+    "end": 10,
+    "duration": 10,
+    "chapter": 1,
+    "voice": "Beneath an ordinary patch of Russian soil, dozens of mammoths lay in a circle, their enormous bones arranged around an empty centre.",
+    "requested_clip_id": 1,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 1,
+        "label": "K19_001",
+        "source_in": 0.5,
+        "duration": 3,
+        "crop": 1
+      },
+      {
+        "clip_id": 4,
+        "label": "K19_004",
+        "source_in": 2,
+        "duration": 3,
+        "crop": 1
+      },
+      {
+        "clip_id": 5,
+        "label": "K19_005",
+        "source_in": 1,
+        "duration": 4,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 2,
+    "start": 10,
+    "end": 20,
+    "duration": 10,
+    "chapter": 1,
+    "voice": "Someone had carried them here, but the familiar picture of an Ice Age house leaves a much stranger question unanswered.",
+    "requested_clip_id": 2,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 26,
+        "label": "K19_026",
+        "source_in": 2,
+        "duration": 3,
+        "crop": 1
+      },
+      {
+        "clip_id": 23,
+        "label": "K19_023",
+        "source_in": 3,
+        "duration": 3,
+        "crop": 1
+      },
+      {
+        "clip_id": 2,
+        "label": "K19_002",
+        "source_in": 1,
+        "duration": 4,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 3,
+    "start": 20,
+    "end": 30,
+    "duration": 10,
+    "chapter": 1,
+    "voice": "Why build something this large, using animals that did not all die together, and leave so little of ordinary domestic life?",
+    "requested_clip_id": 3,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 40,
+        "label": "K19_040",
+        "source_in": 1,
+        "duration": 3,
+        "crop": 1
+      },
+      {
+        "clip_id": 7,
+        "label": "K19_007",
+        "source_in": 2,
+        "duration": 3,
+        "crop": 1
+      },
+      {
+        "clip_id": 21,
+        "label": "K19_021",
+        "source_in": 4,
+        "duration": 2,
+        "crop": 1
+      },
+      {
+        "clip_id": 8,
+        "label": "K19_008",
+        "source_in": 5,
+        "duration": 2,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 4,
+    "start": 30,
+    "end": 40,
+    "duration": 10,
+    "chapter": 1,
+    "voice": "This is Kostenki eleven, where a ring of bones has survived for roughly twenty five thousand years while its purpose remains debated.",
+    "requested_clip_id": 4,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 4,
+        "label": "K19_004",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 5,
+    "start": 40,
+    "end": 50,
+    "duration": 10,
+    "chapter": 1,
+    "voice": "Look closely at one heavy jaw resting beside another, and the question becomes physical: who moved these objects, and what made the effort worthwhile?",
+    "requested_clip_id": 5,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 5,
+        "label": "K19_005",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 6,
+    "start": 50,
+    "end": 60,
+    "duration": 10,
+    "chapter": 1,
+    "voice": "A drawing can finish the walls, stretch a roof overhead, and place a warm fire inside before you have questioned a single detail.",
+    "requested_clip_id": 6,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 6,
+        "label": "K19_006",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 7,
+    "start": 60,
+    "end": 70,
+    "duration": 10,
+    "chapter": 1,
+    "voice": "The ground offers a different kind of story, assembled from positions, fragments, charcoal, and gaps that a beautiful reconstruction can quietly conceal.",
+    "requested_clip_id": 7,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 7,
+        "label": "K19_007",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 8,
+    "start": 70,
+    "end": 80,
+    "duration": 10,
+    "chapter": 1,
+    "voice": "We are going to follow that story from the weight of one bone to a puzzle that reaches across an entire frozen landscape.",
+    "requested_clip_id": 8,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 8,
+        "label": "K19_008",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 9,
+    "start": 80,
+    "end": 90,
+    "duration": 10,
+    "chapter": 1,
+    "voice": "Along the way, a dark speck will reveal fire, a laboratory will separate different animal lives, and an old jaw will disrupt the timeline.",
+    "requested_clip_id": 9,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 9,
+        "label": "K19_009",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 10,
+    "start": 90,
+    "end": 100,
+    "duration": 10,
+    "chapter": 1,
+    "voice": "By the end, the most revealing feature of this extraordinary structure may be the space where our imagined house ought to stand.",
+    "requested_clip_id": 10,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 1,
+        "label": "K19_001",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 11,
+    "start": 100,
+    "end": 110,
+    "duration": 10,
+    "chapter": 2,
+    "voice": "The site lies near the Don River in western Russia, within a region containing many important traces of Upper Palaeolithic activity.",
+    "requested_clip_id": 11,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 11,
+        "label": "K19_011",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 12,
+    "start": 110,
+    "end": 120,
+    "duration": 10,
+    "chapter": 2,
+    "voice": "Today, roads and buildings make this landscape familiar, but remove them in your imagination and the practical questions change immediately.",
+    "requested_clip_id": 12,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 12,
+        "label": "K19_012",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 13,
+    "start": 120,
+    "end": 130,
+    "duration": 10,
+    "chapter": 2,
+    "voice": "Where could people find water, useful fuel, workable stone, and animals, while keeping the cost of moving between them within reach?",
+    "requested_clip_id": 13,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 13,
+        "label": "K19_013",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 14,
+    "start": 130,
+    "end": 140,
+    "duration": 10,
+    "chapter": 2,
+    "voice": "Winter would sharpen those questions, although no surviving bone can tell us the weather on the particular morning someone carried it here.",
+    "requested_clip_id": 14,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 14,
+        "label": "K19_014",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 15,
+    "start": 140,
+    "end": 150,
+    "duration": 10,
+    "chapter": 2,
+    "voice": "Think of the landscape as a set of opportunities separated by effort, rather than one featureless expanse of white stretching in every direction.",
+    "requested_clip_id": 15,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 15,
+        "label": "K19_015",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 16,
+    "start": 150,
+    "end": 160,
+    "duration": 10,
+    "chapter": 2,
+    "voice": "A sheltered hollow, a patch of woody vegetation, or a reliable water source could make one small area unusually valuable within that wider world.",
+    "requested_clip_id": 16,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 16,
+        "label": "K19_016",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 17,
+    "start": 160,
+    "end": 170,
+    "duration": 10,
+    "chapter": 2,
+    "voice": "Researchers have considered a local spring among the possibilities that might help explain the attraction, while its precise role remains uncertain.",
+    "requested_clip_id": 17,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 17,
+        "label": "K19_017",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 18,
+    "start": 170,
+    "end": 180,
+    "duration": 10,
+    "chapter": 2,
+    "voice": "The important point is the relationship between resources: a useful place had to offer reasons to arrive, remain, return, or invest work.",
+    "requested_clip_id": 18,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 18,
+        "label": "K19_018",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 19,
+    "start": 180,
+    "end": 190,
+    "duration": 10,
+    "chapter": 2,
+    "voice": "A bone circle is a visible investment, but its meaning depends on everything that people could do around it and beyond its edge.",
+    "requested_clip_id": 19,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 4,
+        "label": "K19_004",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 20,
+    "start": 190,
+    "end": 200,
+    "duration": 10,
+    "chapter": 2,
+    "voice": "To understand that investment, we need to stop seeing a pile of remains and begin asking how individual objects became parts of an arrangement.",
+    "requested_clip_id": 20,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 20,
+        "label": "K19_020",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 21,
+    "start": 200,
+    "end": 210,
+    "duration": 10,
+    "chapter": 3,
+    "voice": "From ground level, an enormous skull can dominate the view; from above, the relationship between many such pieces becomes the more striking feature.",
+    "requested_clip_id": 21,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 21,
+        "label": "K19_021",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 22,
+    "start": 210,
+    "end": 220,
+    "duration": 10,
+    "chapter": 3,
+    "voice": "The central arrangement spans roughly twelve metres, large enough that a person walking across it would experience a substantial change of scale.",
+    "requested_clip_id": 22,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 4,
+        "label": "K19_004",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 23,
+    "start": 220,
+    "end": 230,
+    "duration": 10,
+    "chapter": 3,
+    "voice": "More than sixty mammoths are represented in the complex, a count inferred from their remains rather than a record of one spectacular hunt.",
+    "requested_clip_id": 23,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 23,
+        "label": "K19_023",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 24,
+    "start": 230,
+    "end": 240,
+    "duration": 10,
+    "chapter": 3,
+    "voice": "A single animal supplies many bones, so the number of fragments and the minimum number of individuals answer entirely different questions.",
+    "requested_clip_id": 24,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 7,
+        "label": "K19_007",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 25,
+    "start": 240,
+    "end": 250,
+    "duration": 10,
+    "chapter": 3,
+    "voice": "Now picture a heavy, awkward object on uneven ground, with projections that make gripping and balancing it harder than its outline suggests.",
+    "requested_clip_id": 25,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 25,
+        "label": "K19_025",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 26,
+    "start": 250,
+    "end": 260,
+    "duration": 10,
+    "chapter": 3,
+    "voice": "Moving it requires decisions about where to hold, how to turn, which route to take, and where to set it down safely.",
+    "requested_clip_id": 26,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 26,
+        "label": "K19_026",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 27,
+    "start": 260,
+    "end": 270,
+    "duration": 10,
+    "chapter": 3,
+    "voice": "For our demonstration, mature adults handle a lightweight teaching replica, allowing the mechanics to be visible without pretending to recover an ancient event.",
+    "requested_clip_id": 27,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 27,
+        "label": "K19_027",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 28,
+    "start": 270,
+    "end": 280,
+    "duration": 10,
+    "chapter": 3,
+    "voice": "Its shape matters as well as its mass: a broad base, a curve, or a hollow can change how one piece meets another.",
+    "requested_clip_id": 28,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 28,
+        "label": "K19_028",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 29,
+    "start": 280,
+    "end": 290,
+    "duration": 10,
+    "chapter": 3,
+    "voice": "Repeated choices can create a boundary, yet a boundary alone does not reveal everything that once rose above it or happened inside it.",
+    "requested_clip_id": 29,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 1,
+        "label": "K19_001",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 30,
+    "start": 290,
+    "end": 300,
+    "duration": 10,
+    "chapter": 3,
+    "voice": "That is where the most familiar reconstruction makes its biggest leap, because a circle on the ground almost invites us to imagine a roof.",
+    "requested_clip_id": 30,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 30,
+        "label": "K19_030",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 31,
+    "start": 300,
+    "end": 310,
+    "duration": 10,
+    "chapter": 4,
+    "voice": "Hold a small model at eye level, and the temptation is immediate: complete the ring, add supporting members, then cover the open space.",
+    "requested_clip_id": 31,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "clip_id": 31,
+        "label": "K19_031",
+        "source_in": 1,
+        "duration": 5.2,
+        "crop": 1
+      },
+      {
+        "clip_id": 32,
+        "label": "K19_032",
+        "source_in": 3,
+        "duration": 5.2,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 32,
+    "start": 310,
+    "end": 320,
+    "duration": 10,
+    "chapter": 4,
+    "voice": "At the scale of a real structure, every imagined surface acquires weight, every unsupported span needs a solution, and wind becomes a force.",
+    "requested_clip_id": 32,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 32,
+        "label": "K19_032",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 33,
+    "start": 320,
+    "end": 330,
+    "duration": 10,
+    "chapter": 4,
+    "voice": "A covering has to be held, joined, maintained, and kept from collecting more water or snow than its supporting system can bear.",
+    "requested_clip_id": 33,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 33,
+        "label": "K19_033",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 34,
+    "start": 330,
+    "end": 340,
+    "duration": 10,
+    "chapter": 4,
+    "voice": "These are ordinary mechanical constraints, whether someone works with modern materials or with the wood, hide, fibre, and bone available in another age.",
+    "requested_clip_id": 34,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 34,
+        "label": "K19_034",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 35,
+    "start": 340,
+    "end": 350,
+    "duration": 10,
+    "chapter": 4,
+    "voice": "A row of bones might help define an edge or hold material in place, without serving as the entire frame of a building.",
+    "requested_clip_id": 35,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 35,
+        "label": "K19_035",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 36,
+    "start": 350,
+    "end": 360,
+    "duration": 10,
+    "chapter": 4,
+    "voice": "A model can explore such possibilities, but an elegant model remains an experiment until surviving evidence connects its details with the archaeological feature.",
+    "requested_clip_id": 36,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 36,
+        "label": "K19_036",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 37,
+    "start": 360,
+    "end": 370,
+    "duration": 10,
+    "chapter": 4,
+    "voice": "Wood and hide can disappear while bone remains conspicuous, creating an uneven view of a construction whose original materials had different chances of survival.",
+    "requested_clip_id": 37,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 37,
+        "label": "K19_037",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 38,
+    "start": 370,
+    "end": 380,
+    "duration": 10,
+    "chapter": 4,
+    "voice": "At the same time, missing organic material cannot support every design we invent; a plausible roof still needs an argument about its size and supports.",
+    "requested_clip_id": 38,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 38,
+        "label": "K19_038",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 39,
+    "start": 380,
+    "end": 390,
+    "duration": 10,
+    "chapter": 4,
+    "voice": "The useful question is how a proposed design works, what evidence it predicts, and whether those traces occur where the design would require them.",
+    "requested_clip_id": 39,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 39,
+        "label": "K19_039",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 40,
+    "start": 390,
+    "end": 400,
+    "duration": 10,
+    "chapter": 4,
+    "voice": "Before we put that roof in place, another difficulty appears: the building material may already have carried a history much older than its builders.",
+    "requested_clip_id": 40,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 40,
+        "label": "K19_040",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 41,
+    "start": 400,
+    "end": 410,
+    "duration": 10,
+    "chapter": 5,
+    "voice": "An animal can die, its soft tissues disappear, its skeleton become scattered, and only later can someone decide that a particular bone is useful.",
+    "requested_clip_id": 41,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "clip_id": 41,
+        "label": "K19_041",
+        "source_in": 1,
+        "duration": 5.2,
+        "crop": 1
+      },
+      {
+        "clip_id": 40,
+        "label": "K19_040",
+        "source_in": 3,
+        "duration": 5.2,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 42,
+    "start": 410,
+    "end": 420,
+    "duration": 10,
+    "chapter": 5,
+    "voice": "That sequence separates the age of the animal from the moment of collection, a distinction that changes the entire picture of construction.",
+    "requested_clip_id": 42,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 42,
+        "label": "K19_042",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 43,
+    "start": 420,
+    "end": 430,
+    "duration": 10,
+    "chapter": 5,
+    "voice": "Imagine finding an already weathered jaw during a journey through familiar ground, then recognising its shape as something worth bringing to a chosen place.",
+    "requested_clip_id": 43,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 43,
+        "label": "K19_043",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 44,
+    "start": 430,
+    "end": 440,
+    "duration": 10,
+    "chapter": 5,
+    "voice": "This is an illustration of material selection, not a claim that we can identify the actual person, route, or journey that brought it there.",
+    "requested_clip_id": 44,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 44,
+        "label": "K19_044",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 45,
+    "start": 440,
+    "end": 450,
+    "duration": 10,
+    "chapter": 5,
+    "voice": "A study published in two thousand twenty five found two mammoth jaws older than the main dated material associated with the Kostenki complex.",
+    "requested_clip_id": 45,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 45,
+        "label": "K19_045",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 46,
+    "start": 450,
+    "end": 460,
+    "duration": 10,
+    "chapter": 5,
+    "voice": "The difference amounted to hundreds of years, supporting the interpretation that people collected some bones from animals whose lives had ended long before.",
+    "requested_clip_id": 46,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 46,
+        "label": "K19_046",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 47,
+    "start": 460,
+    "end": 470,
+    "duration": 10,
+    "chapter": 5,
+    "voice": "Suddenly, a single dramatic killing event is a poor explanation for the whole collection, and the landscape begins to look like a source of materials.",
+    "requested_clip_id": 47,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 47,
+        "label": "K19_047",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 48,
+    "start": 470,
+    "end": 480,
+    "duration": 10,
+    "chapter": 5,
+    "voice": "Hunting, collecting old remains, and reusing useful pieces are different activities, and a complicated assemblage can preserve traces of more than one process.",
+    "requested_clip_id": 48,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 48,
+        "label": "K19_048",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 49,
+    "start": 480,
+    "end": 490,
+    "duration": 10,
+    "chapter": 5,
+    "voice": "We should also distinguish collecting bones from scavenging meat, because a long dead animal can offer building material after food has disappeared.",
+    "requested_clip_id": 49,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 49,
+        "label": "K19_049",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 50,
+    "start": 490,
+    "end": 500,
+    "duration": 10,
+    "chapter": 5,
+    "voice": "The jaws have opened a gap in time; the next investigation asks whether the animals themselves can tell us more about how this collection formed.",
+    "requested_clip_id": 50,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 50,
+        "label": "K19_050",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 51,
+    "start": 500,
+    "end": 510,
+    "duration": 10,
+    "chapter": 6,
+    "voice": "In a modern laboratory, a tiny sample can preserve information that the size and shape of the whole object fail to reveal confidently.",
+    "requested_clip_id": 51,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "clip_id": 41,
+        "label": "K19_041",
+        "source_in": 1,
+        "duration": 5.2,
+        "crop": 1
+      },
+      {
+        "clip_id": 52,
+        "label": "K19_052",
+        "source_in": 3,
+        "duration": 5.2,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 52,
+    "start": 510,
+    "end": 520,
+    "duration": 10,
+    "chapter": 6,
+    "voice": "Ancient DNA and surviving tooth proteins offer different routes to biological sex, with preservation determining which approach can work for a particular specimen.",
+    "requested_clip_id": 52,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 52,
+        "label": "K19_052",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 53,
+    "start": 520,
+    "end": 530,
+    "duration": 10,
+    "chapter": 6,
+    "voice": "The two thousand twenty five study investigated material from thirty nine mammoths and obtained confident sex estimates for thirty of those individuals.",
+    "requested_clip_id": 53,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 53,
+        "label": "K19_053",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 54,
+    "start": 530,
+    "end": 540,
+    "duration": 10,
+    "chapter": 6,
+    "voice": "Seventeen were female and thirteen were male, a pattern the researchers considered consistent with access to herds rather than only isolated males.",
+    "requested_clip_id": 54,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 54,
+        "label": "K19_054",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 55,
+    "start": 540,
+    "end": 550,
+    "duration": 10,
+    "chapter": 6,
+    "voice": "Those figures describe the tested sample; they do not identify a particular hunting party, prove one hunting technique, or reveal the builders' personal lives.",
+    "requested_clip_id": 55,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 55,
+        "label": "K19_055",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 56,
+    "start": 550,
+    "end": 560,
+    "duration": 10,
+    "chapter": 6,
+    "voice": "Additional molecular work found different maternal lineages, further complicating any picture of the entire collection coming from one family group dying together.",
+    "requested_clip_id": 56,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 56,
+        "label": "K19_056",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 57,
+    "start": 560,
+    "end": 570,
+    "duration": 10,
+    "chapter": 6,
+    "voice": "Now hold two ideas beside each other: people selected substantial animal remains, and the resulting collection drew on more than one animal history.",
+    "requested_clip_id": 57,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 55,
+        "label": "K19_055",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 58,
+    "start": 570,
+    "end": 580,
+    "duration": 10,
+    "chapter": 6,
+    "voice": "The laboratory adds relationships and distinctions, while the excavation supplies positions and associations; each becomes more informative when the other keeps it grounded.",
+    "requested_clip_id": 58,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 52,
+        "label": "K19_052",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 59,
+    "start": 580,
+    "end": 590,
+    "duration": 10,
+    "chapter": 6,
+    "voice": "A bone on a screen can look like an answer, yet its real value often lies in the better question it makes possible.",
+    "requested_clip_id": 59,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 59,
+        "label": "K19_059",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 60,
+    "start": 590,
+    "end": 600,
+    "duration": 10,
+    "chapter": 6,
+    "voice": "For the builders' activities, that question leads away from the largest objects and toward something small enough to float on water.",
+    "requested_clip_id": 60,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 60,
+        "label": "K19_060",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 61,
+    "start": 600,
+    "end": 610,
+    "duration": 10,
+    "chapter": 7,
+    "voice": "Return to the circle, then lower your attention to a handful of dark sediment, where the most revealing trace may be almost invisible.",
+    "requested_clip_id": 7,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 7,
+        "label": "K19_007",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 62,
+    "start": 610,
+    "end": 620,
+    "duration": 10,
+    "chapter": 7,
+    "voice": "Archaeological flotation uses water to separate light material from heavier sediment, allowing small charred remains to be recovered instead of disappearing with discarded soil.",
+    "requested_clip_id": 61,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 62,
+        "label": "K19_062",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 63,
+    "start": 620,
+    "end": 630,
+    "duration": 10,
+    "chapter": 7,
+    "voice": "A fragment of charcoal can preserve part of a woody plant, carrying evidence of burning into a record otherwise dominated by enormous animal bones.",
+    "requested_clip_id": 62,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 63,
+        "label": "K19_063",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 64,
+    "start": 630,
+    "end": 640,
+    "duration": 10,
+    "chapter": 7,
+    "voice": "At Kostenki, investigators recovered charred wood, burnt bone, and other plant remains, widening the resource story beyond the objects that formed the circle.",
+    "requested_clip_id": 63,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 63,
+        "label": "K19_063",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 65,
+    "start": 640,
+    "end": 650,
+    "duration": 10,
+    "chapter": 7,
+    "voice": "The people using this place had access to combustible materials, and the combination invites questions about fuel choices, local vegetation, and different kinds of work.",
+    "requested_clip_id": 64,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 64,
+        "label": "K19_064",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 66,
+    "start": 650,
+    "end": 660,
+    "duration": 10,
+    "chapter": 7,
+    "voice": "Burning a material, however, does not tell us every purpose of a fire; warmth, preparation, and other activities can leave partially overlapping traces.",
+    "requested_clip_id": 65,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 65,
+        "label": "K19_065",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 67,
+    "start": 660,
+    "end": 670,
+    "duration": 10,
+    "chapter": 7,
+    "voice": "Small charred seeds add another thread, though their survival does not provide a complete recipe, a harvested crop, or a daily menu.",
+    "requested_clip_id": 66,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 66,
+        "label": "K19_066",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 68,
+    "start": 670,
+    "end": 680,
+    "duration": 10,
+    "chapter": 7,
+    "voice": "Picture an adult researcher separating a tiny black fragment from a tray, with the bone circle now reduced to an indistinct background.",
+    "requested_clip_id": 67,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 67,
+        "label": "K19_067",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 69,
+    "start": 680,
+    "end": 690,
+    "duration": 10,
+    "chapter": 7,
+    "voice": "The change of scale matters: the most visible objects can dominate our imagination while smaller traces carry a different part of the explanation.",
+    "requested_clip_id": 68,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "clip_id": 7,
+        "label": "K19_007",
+        "source_in": 1,
+        "duration": 5.2,
+        "crop": 1
+      },
+      {
+        "clip_id": 70,
+        "label": "K19_070",
+        "source_in": 3,
+        "duration": 5.2,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 70,
+    "start": 690,
+    "end": 700,
+    "duration": 10,
+    "chapter": 7,
+    "voice": "And when those traces are examined together, the comfortable image of a densely occupied house begins to encounter a new set of questions.",
+    "requested_clip_id": 69,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 7,
+        "label": "K19_007",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 71,
+    "start": 700,
+    "end": 710,
+    "duration": 10,
+    "chapter": 8,
+    "voice": "A place used repeatedly for everyday living can accumulate debris from toolmaking, food preparation, maintenance, and the countless small actions that fill ordinary time.",
+    "requested_clip_id": 70,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 70,
+        "label": "K19_070",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 72,
+    "start": 710,
+    "end": 720,
+    "duration": 10,
+    "chapter": 8,
+    "voice": "At this Kostenki structure, the two thousand twenty study found activity traces that appeared less intensive than expected for a long term residential base.",
+    "requested_clip_id": 71,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 7,
+        "label": "K19_007",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 73,
+    "start": 720,
+    "end": 730,
+    "duration": 10,
+    "chapter": 8,
+    "voice": "That observation challenged an easy assumption, while leaving several possibilities open about the duration, frequency, and particular purposes of visits to the site.",
+    "requested_clip_id": 72,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 72,
+        "label": "K19_072",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 74,
+    "start": 730,
+    "end": 740,
+    "duration": 10,
+    "chapter": 8,
+    "voice": "Stoneworking debris was present, including tiny chips recovered through careful sampling, so the question concerns the pattern of activity rather than an empty record.",
+    "requested_clip_id": 73,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 67,
+        "label": "K19_067",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 75,
+    "start": 740,
+    "end": 750,
+    "duration": 10,
+    "chapter": 8,
+    "voice": "Imagine sweeping the same workspace after one brief task and after many weeks of work; the resulting deposits could be very different.",
+    "requested_clip_id": 74,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 74,
+        "label": "K19_074",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 76,
+    "start": 750,
+    "end": 760,
+    "duration": 10,
+    "chapter": 8,
+    "voice": "Our demonstration illustrates that principle, although preservation, cleaning, excavation coverage, and earlier disturbance can all change what an archaeologist eventually finds.",
+    "requested_clip_id": 75,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 75,
+        "label": "K19_075",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 77,
+    "start": 760,
+    "end": 770,
+    "duration": 10,
+    "chapter": 8,
+    "voice": "Nearby pits add more possibilities: storage, material handling, disposal, and other functions require investigation through their contents, shapes, and relationships with surrounding features.",
+    "requested_clip_id": 76,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 76,
+        "label": "K19_076",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 78,
+    "start": 770,
+    "end": 780,
+    "duration": 10,
+    "chapter": 8,
+    "voice": "Calling the complex a pantry may produce a vivid picture, but the picture still has to account for the evidence of food storage.",
+    "requested_clip_id": 77,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 77,
+        "label": "K19_077",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 79,
+    "start": 780,
+    "end": 790,
+    "duration": 10,
+    "chapter": 8,
+    "voice": "Calling it a dwelling creates another set of predictions, while a place with several functions could combine activities that our modern labels separate.",
+    "requested_clip_id": 78,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 78,
+        "label": "K19_078",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 80,
+    "start": 790,
+    "end": 800,
+    "duration": 10,
+    "chapter": 8,
+    "voice": "To see why a single label can mislead, we need to leave this circle briefly and look at other places where mammoth bones became architecture.",
+    "requested_clip_id": 79,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "clip_id": 79,
+        "label": "K19_079",
+        "source_in": 1,
+        "duration": 5.2,
+        "crop": 1
+      },
+      {
+        "clip_id": 82,
+        "label": "K19_082",
+        "source_in": 3,
+        "duration": 5.2,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 81,
+    "start": 800,
+    "end": 810,
+    "duration": 10,
+    "chapter": 9,
+    "voice": "Across parts of Ukraine and western Russia, archaeologists have investigated other mammoth bone structures, with arrangements, associated features, and dates that deserve individual treatment.",
+    "requested_clip_id": 80,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 82,
+        "label": "K19_082",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 82,
+    "start": 810,
+    "end": 820,
+    "duration": 10,
+    "chapter": 9,
+    "voice": "Their resemblance makes comparison valuable, but resemblance alone cannot turn every ring into the same building, used by the same kind of community.",
+    "requested_clip_id": 81,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 91,
+        "label": "K19_091",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 83,
+    "start": 820,
+    "end": 830,
+    "duration": 10,
+    "chapter": 9,
+    "voice": "At Gontsy in Ukraine, research examines bone structures alongside pits, hearths, working areas, and other traces distributed through a larger settlement landscape.",
+    "requested_clip_id": 82,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 82,
+        "label": "K19_082",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 84,
+    "start": 830,
+    "end": 840,
+    "duration": 10,
+    "chapter": 9,
+    "voice": "That wider view changes the unit of investigation, encouraging us to ask how activities connected across a place rather than inside one outline.",
+    "requested_clip_id": 83,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 82,
+        "label": "K19_082",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 85,
+    "start": 840,
+    "end": 850,
+    "duration": 10,
+    "chapter": 9,
+    "voice": "At Mezhyrich, another Ukrainian site, research has revisited the chronology of a mammoth bone structure using dated remains from smaller animals in associated deposits.",
+    "requested_clip_id": 84,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 84,
+        "label": "K19_084",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 86,
+    "start": 850,
+    "end": 860,
+    "duration": 10,
+    "chapter": 9,
+    "voice": "The resulting estimates place that studied context around eighteen thousand years ago, thousands of years later than the Kostenki circle at the centre of our story.",
+    "requested_clip_id": 85,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 85,
+        "label": "K19_085",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 87,
+    "start": 860,
+    "end": 870,
+    "duration": 10,
+    "chapter": 9,
+    "voice": "These are separate archaeological situations, so a reconstructed shelter from one site cannot quietly become a photograph of what another site once contained.",
+    "requested_clip_id": 86,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 86,
+        "label": "K19_086",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 88,
+    "start": 870,
+    "end": 880,
+    "duration": 10,
+    "chapter": 9,
+    "voice": "Comparison works best when we carry questions between sites: where are the hearths, how are pits arranged, and which activities left the clearest traces?",
+    "requested_clip_id": 87,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 87,
+        "label": "K19_087",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 89,
+    "start": 880,
+    "end": 890,
+    "duration": 10,
+    "chapter": 9,
+    "voice": "Different answers may reveal different uses of similar materials, just as people can build very different structures from the same kind of stone today.",
+    "requested_clip_id": 88,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 88,
+        "label": "K19_088",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 90,
+    "start": 890,
+    "end": 900,
+    "duration": 10,
+    "chapter": 9,
+    "voice": "The comparison also returns us to a deceptively simple problem: when we say a structure is ancient, which event have we actually dated?",
+    "requested_clip_id": 89,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "clip_id": 89,
+        "label": "K19_089",
+        "source_in": 1,
+        "duration": 5.2,
+        "crop": 1
+      },
+      {
+        "clip_id": 90,
+        "label": "K19_090",
+        "source_in": 3,
+        "duration": 5.2,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 91,
+    "start": 900,
+    "end": 910,
+    "duration": 10,
+    "chapter": 10,
+    "voice": "A radiocarbon measurement on bone concerns carbon incorporated during an animal's life, while a measurement on wood can concern growth long before burning.",
+    "requested_clip_id": 90,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 90,
+        "label": "K19_090",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 92,
+    "start": 910,
+    "end": 920,
+    "duration": 10,
+    "chapter": 10,
+    "voice": "Between that biological history and an archaeological action, time can pass, which is why the context of a sample matters alongside its measured result.",
+    "requested_clip_id": 91,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 91,
+        "label": "K19_091",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 93,
+    "start": 920,
+    "end": 930,
+    "duration": 10,
+    "chapter": 10,
+    "voice": "An old piece of wood can enter a younger fire, and an old bone can become part of a later arrangement of collected material.",
+    "requested_clip_id": 92,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 92,
+        "label": "K19_092",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 94,
+    "start": 930,
+    "end": 940,
+    "duration": 10,
+    "chapter": 10,
+    "voice": "Researchers therefore compare samples, evaluate contamination, and study how the objects sit within layers, rather than allowing one attractive date to organise everything.",
+    "requested_clip_id": 93,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 93,
+        "label": "K19_093",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 95,
+    "start": 940,
+    "end": 950,
+    "duration": 10,
+    "chapter": 10,
+    "voice": "Calendar calibration adds another step, helping translate radiocarbon measurements into estimates that can be compared within an archaeological timescale, with uncertainty still attached.",
+    "requested_clip_id": 94,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 94,
+        "label": "K19_094",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 96,
+    "start": 950,
+    "end": 960,
+    "duration": 10,
+    "chapter": 10,
+    "voice": "Even a narrow estimated interval does not automatically establish continuous residence, because separate visits can contribute material to a deposit that preserves them together.",
+    "requested_clip_id": 95,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 95,
+        "label": "K19_095",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 97,
+    "start": 960,
+    "end": 970,
+    "duration": 10,
+    "chapter": 10,
+    "voice": "At Mezhyrich, the revised chronology constrains possibilities about occupation; its range should not be turned into an exact number of uninterrupted years inside a house.",
+    "requested_clip_id": 96,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 96,
+        "label": "K19_096",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 98,
+    "start": 970,
+    "end": 980,
+    "duration": 10,
+    "chapter": 10,
+    "voice": "At Kostenki, the older jaws remind us that objects can bring earlier histories into a place whose later activity created the arrangement we recognise.",
+    "requested_clip_id": 97,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 40,
+        "label": "K19_040",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 99,
+    "start": 980,
+    "end": 990,
+    "duration": 10,
+    "chapter": 10,
+    "voice": "The circle is therefore more like a meeting point of timelines, with animal lives, human decisions, burial, discovery, and analysis each adding another event.",
+    "requested_clip_id": 98,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 45,
+        "label": "K19_045",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 100,
+    "start": 990,
+    "end": 1000,
+    "duration": 10,
+    "chapter": 10,
+    "voice": "Once those timelines are separated, we can return to reconstruction with a sharper question: which parts of our imagined building are actually doing explanatory work?",
+    "requested_clip_id": 99,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "clip_id": 100,
+        "label": "K19_100",
+        "source_in": 1,
+        "duration": 5.2,
+        "crop": 1
+      },
+      {
+        "clip_id": 38,
+        "label": "K19_038",
+        "source_in": 3,
+        "duration": 5.2,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 101,
+    "start": 1000,
+    "end": 1010,
+    "duration": 10,
+    "chapter": 11,
+    "voice": "Set several modest models on a table, each beginning with a similar low boundary but exploring different amounts of covering and different supporting arrangements.",
+    "requested_clip_id": 100,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 100,
+        "label": "K19_100",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 102,
+    "start": 1010,
+    "end": 1020,
+    "duration": 10,
+    "chapter": 11,
+    "voice": "One version might shelter a smaller space within a larger circle, while another treats the boundary as part of an open activity area.",
+    "requested_clip_id": 101,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 85,
+        "label": "K19_085",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 103,
+    "start": 1020,
+    "end": 1030,
+    "duration": 10,
+    "chapter": 11,
+    "voice": "These models are hypotheses for comparison, not a catalogue of proven Kostenki buildings, and their most useful feature is the differences they make visible.",
+    "requested_clip_id": 102,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 38,
+        "label": "K19_038",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 104,
+    "start": 1030,
+    "end": 1040,
+    "duration": 10,
+    "chapter": 11,
+    "voice": "A covering that catches wind needs restraint; a heavily loaded support needs stability; a working space needs access for the people and materials using it.",
+    "requested_clip_id": 103,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 32,
+        "label": "K19_032",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 105,
+    "start": 1040,
+    "end": 1050,
+    "duration": 10,
+    "chapter": 11,
+    "voice": "A gap can be an entrance in one interpretation and a consequence of preservation in another, so its significance depends on more than appearance.",
+    "requested_clip_id": 104,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 1,
+        "label": "K19_001",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 106,
+    "start": 1050,
+    "end": 1060,
+    "duration": 10,
+    "chapter": 11,
+    "voice": "Let a model fail under a gentle test, and it can teach us something valuable about the assumptions hidden inside its appealing silhouette.",
+    "requested_clip_id": 105,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 33,
+        "label": "K19_033",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 107,
+    "start": 1060,
+    "end": 1070,
+    "duration": 10,
+    "chapter": 11,
+    "voice": "An experiment establishes what happened under its own conditions; connecting that result with prehistory requires a separate argument using the archaeological evidence.",
+    "requested_clip_id": 106,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 36,
+        "label": "K19_036",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 108,
+    "start": 1070,
+    "end": 1080,
+    "duration": 10,
+    "chapter": 11,
+    "voice": "That distinction leaves room for ingenuity, because uncertainty about a roof does not erase the practical knowledge involved in selecting and arranging difficult materials.",
+    "requested_clip_id": 107,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 26,
+        "label": "K19_026",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 109,
+    "start": 1080,
+    "end": 1090,
+    "duration": 10,
+    "chapter": 11,
+    "voice": "The surviving bones record some decisions, while the missing materials and incomplete deposits keep other decisions beyond our reach, at least for now.",
+    "requested_clip_id": 108,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 4,
+        "label": "K19_004",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 110,
+    "start": 1090,
+    "end": 1100,
+    "duration": 10,
+    "chapter": 11,
+    "voice": "We can respect both parts of that record and still ask the question that made this circle so compelling at the beginning.",
+    "requested_clip_id": 109,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 1,
+        "label": "K19_001",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 111,
+    "start": 1100,
+    "end": 1110,
+    "duration": 10,
+    "chapter": 12,
+    "voice": "Why would people invest effort here, carrying and positioning the remains of huge animals across a landscape where every useful resource had a cost?",
+    "requested_clip_id": 110,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "clip_id": 34,
+        "label": "K19_034",
+        "source_in": 1,
+        "duration": 5.2,
+        "crop": 1
+      },
+      {
+        "clip_id": 7,
+        "label": "K19_007",
+        "source_in": 3,
+        "duration": 5.2,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 112,
+    "start": 1110,
+    "end": 1120,
+    "duration": 10,
+    "chapter": 12,
+    "voice": "The answer may involve shelter, materials, fire, food handling, repeated gatherings, or combinations of activities that changed as people returned and conditions shifted.",
+    "requested_clip_id": 111,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 111,
+        "label": "K19_111",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 113,
+    "start": 1120,
+    "end": 1130,
+    "duration": 10,
+    "chapter": 12,
+    "voice": "What the circle establishes most clearly is an organised relationship with a place, made visible through objects selected from the world beyond its edge.",
+    "requested_clip_id": 112,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 4,
+        "label": "K19_004",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 114,
+    "start": 1130,
+    "end": 1140,
+    "duration": 10,
+    "chapter": 12,
+    "voice": "An animal's body became a source of possibilities, and a bone could remain useful long after the life that had originally shaped it ended.",
+    "requested_clip_id": 113,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 5,
+        "label": "K19_005",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 115,
+    "start": 1140,
+    "end": 1150,
+    "duration": 10,
+    "chapter": 12,
+    "voice": "A small piece of charcoal brings vegetation and fire into view; a tiny stone chip introduces work; a dated sample opens a gap in time.",
+    "requested_clip_id": 114,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 115,
+        "label": "K19_115",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 116,
+    "start": 1150,
+    "end": 1160,
+    "duration": 10,
+    "chapter": 12,
+    "voice": "None of those clues needs to look spectacular on its own, because their connections make the larger structure something more informative than an astonishing photograph.",
+    "requested_clip_id": 115,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 117,
+        "label": "K19_117",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 117,
+    "start": 1160,
+    "end": 1170,
+    "duration": 10,
+    "chapter": 12,
+    "voice": "Return now to the heavy jaw at the edge, and imagine the practical decision required to recognise it as useful material and move it somewhere else.",
+    "requested_clip_id": 116,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 44,
+        "label": "K19_044",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 118,
+    "start": 1170,
+    "end": 1180,
+    "duration": 10,
+    "chapter": 12,
+    "voice": "We cannot recover that person's exact thought, but we can investigate the resulting position, compare its age, and ask what those relationships imply.",
+    "requested_clip_id": 117,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 117,
+        "label": "K19_117",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 119,
+    "start": 1180,
+    "end": 1190,
+    "duration": 10,
+    "chapter": 12,
+    "voice": "The roof in a finished illustration can make the ancient world seem complete; the unfinished evidence offers a more demanding and more interesting invitation.",
+    "requested_clip_id": 118,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 36,
+        "label": "K19_036",
+        "source_in": 0,
+        "duration": 10,
+        "crop": 1.055
+      }
+    ]
+  },
+  {
+    "cue": 120,
+    "start": 1190,
+    "end": 1200,
+    "duration": 10,
+    "chapter": 12,
+    "voice": "It asks us to follow the work, question the easy picture, and recognise intelligence in choices whose full purpose may never survive with them.",
+    "requested_clip_id": 119,
+    "transition": "dissolve",
+    "segments": [
+      {
+        "clip_id": 119,
+        "label": "K19_119",
+        "source_in": 1,
+        "duration": 5.2,
+        "crop": 1
+      },
+      {
+        "clip_id": 1,
+        "label": "K19_001",
+        "source_in": 3,
+        "duration": 5.2,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 121,
+    "start": 1200,
+    "end": 1210,
+    "duration": 10,
+    "chapter": 12,
+    "voice": "At Kostenki, a circle of mammoth bones still holds that invitation, turning an empty centre into one of prehistory's most absorbing spaces to investigate.",
+    "requested_clip_id": 120,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 1,
+        "label": "K19_001",
+        "source_in": 0,
+        "duration": 5,
+        "crop": 1
+      },
+      {
+        "clip_id": 5,
+        "label": "K19_005",
+        "source_in": 4,
+        "duration": 5,
+        "crop": 1
+      }
+    ]
+  },
+  {
+    "cue": 122,
+    "start": 1210,
+    "end": 1215,
+    "duration": 5,
+    "chapter": 12,
+    "voice": "The bones remain, and the house is still a question worth asking.",
+    "requested_clip_id": 1,
+    "transition": "cut",
+    "segments": [
+      {
+        "clip_id": 1,
+        "label": "K19_001",
+        "source_in": 4,
+        "duration": 5,
+        "crop": 1
+      }
+    ],
+    "fade_out_seconds": 0.7
+  }
+]

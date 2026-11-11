@@ -214,7 +214,7 @@
     {
       "id": 19,
       "title": "Nhà bằng xương voi ma mút: kiến trúc, nguyên liệu và những điều còn tranh luận.",
-      "status": "documents_and_17_expressive_voices_delivered_video_pending_native_review_pending",
+      "status": "video_completed_english20m15s_documents_and17voices_delivered_native_review_pending",
       "target_seconds": 1215,
       "created": true
     },
@@ -1163,7 +1163,30 @@
     "production_steps_document": "productions/video-19-kostenki/PRODUCTION_STEPS_APPLIED.md",
     "voice_generation_source_path": "productions/video-19-kostenki/VOICES/PRODUCTION_SCRIPTS",
     "main_video_audio_language": "en-US",
-    "video_status": "awaiting_episode19_generated_clips",
-    "documents_delivered": true
+    "video_status": "completed_published_english_only20m15s",
+    "documents_delivered": true,
+    "video_delivered": true,
+    "video_duration_seconds": 1215,
+    "video_frames": 29160,
+    "video_width": 1280,
+    "video_height": 720,
+    "video_fps": 24,
+    "video_audio_language": "en-US",
+    "video_audio_stream_count": 1,
+    "video_publish_workflow_run_id": 42951543679,
+    "video_release_tag": "kostenki-video-19-final-20m15s",
+    "video_release_url": "https://github.com/seotro95/seotro/releases/tag/kostenki-video-19-final-20m15s",
+    "video_download_url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4",
+    "video_sha256": "9097bce34878a4361c9a46e026694a539e2a958c067f5a022caa7cc1f760e8bd",
+    "video_bytes": 355760692,
+    "opening_shots": 10,
+    "opening_seconds": 30,
+    "source_audio_removed": true,
+    "music_added": false,
+    "replacement_stills_or_text_cards": 0,
+    "video_qa_path": "productions/video-19-kostenki/EDITING/FINAL_VIDEO_QA.json",
+    "public_video_stream_hash_verified": true,
+    "thumbnail_title_pairs": 5,
+    "editing_steps_saved": true
   }
 }

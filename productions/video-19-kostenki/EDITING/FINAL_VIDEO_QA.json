@@ -1,0 +1,109 @@
+{
+  "status": "passed",
+  "topic": 19,
+  "file": "KOSTENKI_19_EN_FINAL_20m15s_720p.mp4",
+  "video_duration_seconds": 1215.0,
+  "audio_duration_seconds": 1215.0,
+  "video_frames": 29160,
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "audio_stream_count": 1,
+  "audio_language": "English",
+  "voice_id": "en-US-AndrewNeural",
+  "reference_sha256": "84efbd7b1f7fa1a08940d793d9fdac88a645ee8267643280ba7240a781f16c5a",
+  "reference_audio_unchanged_timing_and_pitch": true,
+  "original_clip_audio_included": false,
+  "music_or_sfx_added": false,
+  "alignment_checks": [
+    {
+      "seconds": 5,
+      "correlation": 0.999597,
+      "lag_seconds": 0.0
+    },
+    {
+      "seconds": 25,
+      "correlation": 0.999997,
+      "lag_seconds": 0.0
+    },
+    {
+      "seconds": 95,
+      "correlation": 0.999988,
+      "lag_seconds": 0.0
+    },
+    {
+      "seconds": 195,
+      "correlation": 0.99962,
+      "lag_seconds": 0.0
+    },
+    {
+      "seconds": 295,
+      "correlation": 0.999452,
+      "lag_seconds": 0.0
+    },
+    {
+      "seconds": 395,
+      "correlation": 0.998,
+      "lag_seconds": 0.0
+    },
+    {
+      "seconds": 495,
+      "correlation": 0.999879,
+      "lag_seconds": 0.0
+    },
+    {
+      "seconds": 595,
+      "correlation": 0.999738,
+      "lag_seconds": 0.0
+    },
+    {
+      "seconds": 695,
+      "correlation": 0.999993,
+      "lag_seconds": 0.0
+    },
+    {
+      "seconds": 795,
+      "correlation": 0.999979,
+      "lag_seconds": 0.0
+    },
+    {
+      "seconds": 895,
+      "correlation": 0.99987,
+      "lag_seconds": 0.0
+    },
+    {
+      "seconds": 995,
+      "correlation": 0.998901,
+      "lag_seconds": 0.0
+    },
+    {
+      "seconds": 1095,
+      "correlation": 0.994121,
+      "lag_seconds": 0.0
+    },
+    {
+      "seconds": 1125,
+      "correlation": 0.999339,
+      "lag_seconds": 0.0
+    },
+    {
+      "seconds": 1205,
+      "correlation": 0.998791,
+      "lag_seconds": 0.0
+    }
+  ],
+  "loudness_lufs": -16.05,
+  "true_peak_dbtp": -1.22,
+  "opening_shots": 10,
+  "opening_seconds": 30,
+  "short_dissolves": 9,
+  "replacement_stills_or_text_cards": 0,
+  "chapters": 12,
+  "optional_english_subtitle_cues": 122,
+  "full_decode_exit_code": 0,
+  "decode_errors": [],
+  "black_gaps": [],
+  "visual_review_scope": "Three sampled frames per supplied clip and sampled finished-movie frames; not continuous manual viewing.",
+  "sha256": "9097bce34878a4361c9a46e026694a539e2a958c067f5a022caa7cc1f760e8bd",
+  "bytes": 355760692
+}

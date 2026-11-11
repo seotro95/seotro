@@ -1,0 +1,16 @@
+{
+  "topic": 19,
+  "requested_action": "Edit supplied topic19 clips to existing English1215second narration;10different scenes in first30seconds;remove all clip sound;fill missing scenes with related moving video;deliver finalvideo link and5titles/thumbnail prompts.",
+  "destination": "seotro95/seotro",
+  "repository_owner": "seotro95",
+  "verified_owner_id": 212990612,
+  "connected_repository_permissions": {
+    "push": true,
+    "admin": true
+  },
+  "authorization": "User has explicitly requested saving this production series in their GitHub and downloading completed videos there; current request supplies clips and asks for final video link.",
+  "release_tag": "kostenki-video-19-final-20m15s",
+  "outputs_only": true,
+  "raw_source_clips_published": false,
+  "private_upload_ids_published": false
+}

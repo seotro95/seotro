@@ -1,0 +1,86 @@
+{
+  "topic": 19,
+  "raw_source_clips_included": false,
+  "assets": [
+    {
+      "name": "EDITOR_DECISIONS.json",
+      "bytes": 9320,
+      "sha256": "6e7e863ee36a77ddaf95327b55cc62ee84c92dac25d04821c273f8a9ccf90d3b"
+    },
+    {
+      "name": "FINAL_EXPORT_COMMAND.json",
+      "bytes": 1137,
+      "sha256": "6f4cba7778d21ca5b46b0e964bc44bd4b8458dce974c86cb23c65c2f0d6c7956"
+    },
+    {
+      "name": "FINAL_VIDEO_QA.json",
+      "bytes": 2464,
+      "sha256": "d30c83753f219edfbd58a85b164712e26cdfd385ef09daa54681d3ebfa0c94a7"
+    },
+    {
+      "name": "HUONG_DAN_DUNG_LAI.txt",
+      "bytes": 880,
+      "sha256": "9209b3765cae52ece06d45e121ca9882c71f1181a86284c33c97cd649a18c88e"
+    },
+    {
+      "name": "KOSTENKI_19_EDIT_PROJECT.zip",
+      "bytes": 18233588,
+      "sha256": "7b2db7480647e2c0c0f2797217ea4f86dd1cda9945584b19950718ea74343d4b"
+    },
+    {
+      "name": "KOSTENKI_19_EN_FINAL_20m15s_720p.mp4",
+      "bytes": 355760692,
+      "sha256": "9097bce34878a4361c9a46e026694a539e2a958c067f5a022caa7cc1f760e8bd"
+    },
+    {
+      "name": "KOSTENKI_19_EN_SUBTITLES.srt",
+      "bytes": 22264,
+      "sha256": "4ca6f50f9bc9b8e48bd8c114a385e20b6f361db5d6ce5e241d9ab27ec45b52ec"
+    },
+    {
+      "name": "KOSTENKI_19_OPENING_30s.mp4",
+      "bytes": 8924544,
+      "sha256": "cdad83d48208a80f8f5b9eaea5fdb59ccfa30aa45772df8ebe9650195dcaa0fd"
+    },
+    {
+      "name": "KOSTENKI_19_TITLES_THUMBNAILS.txt",
+      "bytes": 5067,
+      "sha256": "b564da366d5dbaac56fcb9904618ac88c9828674f441da73ffc91bf57a192037"
+    },
+    {
+      "name": "KOSTENKI_19_TITLES_THUMBNAILS.zip",
+      "bytes": 2633,
+      "sha256": "cbee5460d9a32dc31001cdcc3c2ddbe0f6762d32354858fe131deee19b841803"
+    },
+    {
+      "name": "README.md",
+      "bytes": 3106,
+      "sha256": "4cf2b377e267cf9ab1486dac8bced8a95f1e855e073fb95ced943b3bd1785bad"
+    },
+    {
+      "name": "SCENE_VERIFICATION.json",
+      "bytes": 8068,
+      "sha256": "b940d6e9d04a42ebf04cffaeaec59d32631d5da7fcdcdb74cbd76e9b57604334"
+    },
+    {
+      "name": "SOURCE_CLIP_MANIFEST.csv",
+      "bytes": 15143,
+      "sha256": "eab61a4a4db789ef266c60689023449f3dd425835a1711384ad7e4dfddf60187"
+    },
+    {
+      "name": "SOURCE_MANIFEST.json",
+      "bytes": 32674,
+      "sha256": "f253652e99985d488c08444a48c230c3e5154a3995329dd8c5c728ae5c4d2fdb"
+    },
+    {
+      "name": "SUBSTITUTIONS.csv",
+      "bytes": 3604,
+      "sha256": "7867bf94b742b52b1829fddd682de6c370a411f6b79d471ee0bbdae3f95f3ba6"
+    },
+    {
+      "name": "VISUAL_REVIEW_APPROVED.json",
+      "bytes": 1064,
+      "sha256": "e437dbfd8bc60004df9d066089afa89bc5a0a795bef0618bcfc3e83943600801"
+    }
+  ]
+}

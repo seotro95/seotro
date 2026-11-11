@@ -1,0 +1,300 @@
+{
+  "topic": 19,
+  "seconds": 1215,
+  "fps": 24,
+  "frames": 29160,
+  "opening_shots": 10,
+  "opening_seconds": 30,
+  "unique_supplied_clips": 100,
+  "unique_clips_used": 84,
+  "missing_prompt_clip_ids": [
+    24,
+    58,
+    71,
+    83,
+    97,
+    98,
+    99,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    112,
+    113,
+    116
+  ],
+  "context_substitutions": [
+    {
+      "cue": 3,
+      "requested_clip_id": 3,
+      "used_clip_id": 1,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 10,
+      "requested_clip_id": 10,
+      "used_clip_id": 1,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 19,
+      "requested_clip_id": 19,
+      "used_clip_id": 4,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 22,
+      "requested_clip_id": 22,
+      "used_clip_id": 4,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 24,
+      "requested_clip_id": 24,
+      "used_clip_id": 7,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 29,
+      "requested_clip_id": 29,
+      "used_clip_id": 1,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 51,
+      "requested_clip_id": 51,
+      "used_clip_id": 41,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 57,
+      "requested_clip_id": 57,
+      "used_clip_id": 55,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 58,
+      "requested_clip_id": 58,
+      "used_clip_id": 52,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 62,
+      "requested_clip_id": 61,
+      "used_clip_id": 62,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 63,
+      "requested_clip_id": 62,
+      "used_clip_id": 63,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 70,
+      "requested_clip_id": 69,
+      "used_clip_id": 7,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 72,
+      "requested_clip_id": 71,
+      "used_clip_id": 7,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 74,
+      "requested_clip_id": 73,
+      "used_clip_id": 67,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 81,
+      "requested_clip_id": 80,
+      "used_clip_id": 82,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 82,
+      "requested_clip_id": 81,
+      "used_clip_id": 91,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 84,
+      "requested_clip_id": 83,
+      "used_clip_id": 82,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 98,
+      "requested_clip_id": 97,
+      "used_clip_id": 40,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 99,
+      "requested_clip_id": 98,
+      "used_clip_id": 45,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 100,
+      "requested_clip_id": 99,
+      "used_clip_id": 38,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 102,
+      "requested_clip_id": 101,
+      "used_clip_id": 85,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 103,
+      "requested_clip_id": 102,
+      "used_clip_id": 38,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 104,
+      "requested_clip_id": 103,
+      "used_clip_id": 32,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 105,
+      "requested_clip_id": 104,
+      "used_clip_id": 1,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 106,
+      "requested_clip_id": 105,
+      "used_clip_id": 33,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 107,
+      "requested_clip_id": 106,
+      "used_clip_id": 36,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 108,
+      "requested_clip_id": 107,
+      "used_clip_id": 26,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 109,
+      "requested_clip_id": 108,
+      "used_clip_id": 4,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 110,
+      "requested_clip_id": 109,
+      "used_clip_id": 1,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 111,
+      "requested_clip_id": 110,
+      "used_clip_id": 26,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 113,
+      "requested_clip_id": 112,
+      "used_clip_id": 4,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 114,
+      "requested_clip_id": 113,
+      "used_clip_id": 5,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 115,
+      "requested_clip_id": 114,
+      "used_clip_id": 115,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 116,
+      "requested_clip_id": 115,
+      "used_clip_id": 117,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 117,
+      "requested_clip_id": 116,
+      "used_clip_id": 44,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 119,
+      "requested_clip_id": 118,
+      "used_clip_id": 36,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    },
+    {
+      "cue": 121,
+      "requested_clip_id": 120,
+      "used_clip_id": 1,
+      "reason": "Related inspected moving footage; unavailable or unsuitable requested context.",
+      "still_image_or_text_card": false
+    }
+  ],
+  "moving_video_only": true,
+  "replacement_still_images": 0,
+  "replacement_text_cards": 0,
+  "audio": "Saved mainEnglish only; every source audio stream discarded before editing. No music orSFX.",
+  "reference_style": "Clue-to-question, physical scale, demonstrator action, laboratory detail, return to empty centre. Cut by idea and use nine restrained compensated0.4second dissolves.",
+  "visual_review": "Three sampled frames per supplied clip; selected-source and final-frame review. Not continuous manual viewing.",
+  "source_uploads_preserved": true
+}

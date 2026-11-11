@@ -1,0 +1,907 @@
+{
+  "topic": 19,
+  "raw_source_media_included": false,
+  "private_upload_identifiers_included": false,
+  "clips": [
+    {
+      "label": "K19_002",
+      "clip_id": 2,
+      "source_name": "Hands_lifting_model_house_eebe9050.mp4",
+      "source_bytes": 3182264,
+      "source_sha256": "e4ecaff47b25765720c3b78aa0aa7af3eb63b83196ae921c39d92310944f2967",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_034",
+      "clip_id": 34,
+      "source_name": "Workbench_items_arranged_on_table_695a0e89.mp4",
+      "source_bytes": 3718138,
+      "source_sha256": "71274cd152a1e407f3851892eb54947097c979f60ca520a303301ced5658e8bc",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_035",
+      "clip_id": 35,
+      "source_name": "Bones_holding_hide_edge_daaeff76.mp4",
+      "source_bytes": 3806609,
+      "source_sha256": "4d98cc2ae49fb675752bdf8dbf53c0f86c310ca6c14ae3602f8a709c7f9fbcd8",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_007",
+      "clip_id": 7,
+      "source_name": "Bones_and_fragments_on_tray_9ac46705.mp4",
+      "source_bytes": 5659977,
+      "source_sha256": "d53835ac45fd3a31da0e6db6b486f749810e0e401a4b8fcc654257825288afda",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_001",
+      "clip_id": 1,
+      "source_name": "video-000737-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 8183782,
+      "source_sha256": "9233fdb880957687108944396d93bb9facab2793f89bf89f4a53d76f167013c8",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_003",
+      "clip_id": 3,
+      "source_name": "video-000738-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 24312465,
+      "source_sha256": "1c9fcf35fae9fbb4306bc9a616a79be4f5f3d3f1c05c56d2b5beeb859686d63c",
+      "source_audio_streams": 0,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_004",
+      "clip_id": 4,
+      "source_name": "video-000739-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 7043720,
+      "source_sha256": "c0ed77ecd04429c52ba81f88ae06e559a9bdd192fcacdd36fed3c4460813c254",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_005",
+      "clip_id": 5,
+      "source_name": "video-000740-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4311303,
+      "source_sha256": "250b49b83f6cec1f32b971e255a4eaa9d9bb3b0204075b3984e56f88dbbf0484",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_006",
+      "clip_id": 6,
+      "source_name": "video-000741-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3543956,
+      "source_sha256": "6fd1438baa406421c43ba9214d14e8fd995e1b7125eb8475c4f71623158d0793",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_008",
+      "clip_id": 8,
+      "source_name": "video-000742-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 6865641,
+      "source_sha256": "62717637d6d3ba3c5ec90688ca9e8381b51ac9270089e7f68c1db4aa4eccdb90",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_009",
+      "clip_id": 9,
+      "source_name": "video-000743-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2149339,
+      "source_sha256": "08f3a0d1c0d296de80b1e7d24a94993856c65bae62615dd4569ade0f31d1f1da",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_010",
+      "clip_id": 10,
+      "source_name": "video-000744-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 12108592,
+      "source_sha256": "fb74e6230add4225224e048276679e5fa87492609ecb574e78b2c091a695aefb",
+      "source_audio_streams": 1,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_011",
+      "clip_id": 11,
+      "source_name": "video-000745-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4451749,
+      "source_sha256": "188c88f9fa1b2a7e4299724498c53994ca5b37f58bc59827bf9ccd8fa5228d4a",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_012",
+      "clip_id": 12,
+      "source_name": "video-000746-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 5394438,
+      "source_sha256": "265fd543507037df1826ecc6a12801abcc980ef784d6746b01d571c46d252a11",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_013",
+      "clip_id": 13,
+      "source_name": "video-000747-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2718167,
+      "source_sha256": "d58e8214c348dfdeb1290edf1e6166d52e310db3fccc6e50366a80ea72e8ad35",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_014",
+      "clip_id": 14,
+      "source_name": "video-000748-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 7861952,
+      "source_sha256": "75895cb244410649900e1cb52e6775f7c635916a531e40ba1c8e99cd86505000",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_015",
+      "clip_id": 15,
+      "source_name": "video-000749-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4314456,
+      "source_sha256": "189acf9c3008e4d5c4530445f0b1fb0be785baac5fff3f00829a7b78e4ba35bc",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_016",
+      "clip_id": 16,
+      "source_name": "video-000750-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 19423966,
+      "source_sha256": "4465ca0fb15cdad97e06c091628f635079d56fe30e7ad22569c14d90e3fb8db7",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_017",
+      "clip_id": 17,
+      "source_name": "video-000751-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 12790110,
+      "source_sha256": "801c2d7f3cc2728028608931dec6e370c0ed41283bdcd639b21c0157c596de34",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_018",
+      "clip_id": 18,
+      "source_name": "video-000752-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 6555782,
+      "source_sha256": "4db14eb0da3dcd219d7314e0ecb7c129ed4b238093f044dc1c0e1f312d73d5ca",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_019",
+      "clip_id": 19,
+      "source_name": "video-000753-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 7579172,
+      "source_sha256": "5eca97f1c70b73c3a2f7ec4f2aaf5a0cdb5b5d3e68ff1d44c9eacbc25f50b300",
+      "source_audio_streams": 0,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_020",
+      "clip_id": 20,
+      "source_name": "video-000754-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4036854,
+      "source_sha256": "02572d408a1666187c6ee48ccc17178589fa225d01876a45a22e418fa4dbedeb",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_021",
+      "clip_id": 21,
+      "source_name": "video-000755-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 8714192,
+      "source_sha256": "f2b1176d0542400d8a0a648b9d54e529c2a0a0b6ad56dcdbcc73699f9b96cd32",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_022",
+      "clip_id": 22,
+      "source_name": "video-000756-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 5338840,
+      "source_sha256": "e6aca61e126dd8b6550bd71a59e811a4ae5d50f2b92de92a51ac26c2502d146c",
+      "source_audio_streams": 0,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_023",
+      "clip_id": 23,
+      "source_name": "video-000757-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2351644,
+      "source_sha256": "0d4557221f49d18479599356e54ea7074b1622c28432d6714a38bdb1d9c93490",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_025",
+      "clip_id": 25,
+      "source_name": "video-000758-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 8878409,
+      "source_sha256": "22c22858904d9ec7c385cdf587f7588c65b540bc2b73f12765d200b25cc9e523",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_026",
+      "clip_id": 26,
+      "source_name": "video-000759-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 5942829,
+      "source_sha256": "fc070adc5ef00fc75a8d861defb221c642596f880980fc034b6e7348ba34c931",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_027",
+      "clip_id": 27,
+      "source_name": "video-000760-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4016697,
+      "source_sha256": "f11b18288e90f59244532671ab02cffcca159ec74331345403ade3e2b020bdf4",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_028",
+      "clip_id": 28,
+      "source_name": "video-000761-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 5184461,
+      "source_sha256": "0547ecc90ed8f22f6a0883008652cd6edd02320e4cc812ad07129452b5e1f6ec",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_029",
+      "clip_id": 29,
+      "source_name": "video-000762-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4257634,
+      "source_sha256": "974b176120b535a3a04de748db792f250fb8ab219071b078163829b17284e850",
+      "source_audio_streams": 0,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_030",
+      "clip_id": 30,
+      "source_name": "video-000763-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 6343959,
+      "source_sha256": "26fd3a32988a0927fc82602566d140bbe2964dbb9fe0d7375ff6eecce362f346",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_031",
+      "clip_id": 31,
+      "source_name": "video-000764-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3750333,
+      "source_sha256": "ecec99b8ce57c341ce51a33f042d8e877841d68ab5b5a71215bcba9ee171a883",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_032",
+      "clip_id": 32,
+      "source_name": "video-000765-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4594735,
+      "source_sha256": "3999811e06d4150c88d6ada07f47b208cba031d189f96eba77e39ece7c1e4f25",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_033",
+      "clip_id": 33,
+      "source_name": "video-000766-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 5318075,
+      "source_sha256": "bc3f6bc638b47b0c50512d32767dcdfc40ce8e2ef6cf73de219b618c52886fc9",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_036",
+      "clip_id": 36,
+      "source_name": "video-000767-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2688733,
+      "source_sha256": "7e48cff277393b605816a5b23552caa8e272abfef301e4762b44f814dcfa2937",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_037",
+      "clip_id": 37,
+      "source_name": "video-000768-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2982410,
+      "source_sha256": "ebe263f9d5f6f25e47fccb59d07dc6f4995f2007e3b8bfa06c6c32f6c4a25f89",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_038",
+      "clip_id": 38,
+      "source_name": "video-000769-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 6110083,
+      "source_sha256": "6ada1cb7602720dab51665aee93485c2f8a3ce3bf235f45d1f132f45988767b7",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_039",
+      "clip_id": 39,
+      "source_name": "video-000770-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4082243,
+      "source_sha256": "c7dfb6756534d68870961558d6e6889a2987d79e8af05d69047ba74120607e07",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_040",
+      "clip_id": 40,
+      "source_name": "video-000771-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 6349013,
+      "source_sha256": "10ceb1e04a91f1fb9363656238456ebb8fbbec1d34cb6cc3598ecbf825dd9b68",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_041",
+      "clip_id": 41,
+      "source_name": "video-000772-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 11386197,
+      "source_sha256": "dafc3a9b291edc16322189ff448a3dc4831a8d78a07449c0b312ba7e07d80c28",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_042",
+      "clip_id": 42,
+      "source_name": "video-000773-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 13278108,
+      "source_sha256": "7969c75a37ba34d5f03d9bffd34b9862b8ce9d710d5415e02b525c60c11f9921",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_043",
+      "clip_id": 43,
+      "source_name": "video-000774-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2833006,
+      "source_sha256": "a5c5fd96ccea1461f1cf07dd7d4fe730172c3741bdc26d7a148c45f208e47a2b",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_044",
+      "clip_id": 44,
+      "source_name": "video-000775-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3745888,
+      "source_sha256": "190f5862c7a76f171486beea010a6e294c3abb1441253f0c983c50acdab67a7f",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_045",
+      "clip_id": 45,
+      "source_name": "video-000776-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3881107,
+      "source_sha256": "9815b0260ad39c3cf9b935e86cbf6402ba7c581862d1d52b5f4a7691da4925c6",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_046",
+      "clip_id": 46,
+      "source_name": "video-000777-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4649702,
+      "source_sha256": "d70d7cc7eb17845558774d7f90f01c1a08177bda23ad7fc39f30961a7dc01a84",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_047",
+      "clip_id": 47,
+      "source_name": "video-000778-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2842549,
+      "source_sha256": "e90f17ed9616a835e5411a780c5c423218a5189d15967dbb421280b885264045",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_048",
+      "clip_id": 48,
+      "source_name": "video-000779-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 7633249,
+      "source_sha256": "1c3fd2d3978e26eab1f897125866c29fb7c4a6291811bbf709075ced89fe353f",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_049",
+      "clip_id": 49,
+      "source_name": "video-000780-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3359236,
+      "source_sha256": "f58884e9d57ddf44e2ad00de3994f074fc3d59af39d9d13416a3374cb1d613d2",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_050",
+      "clip_id": 50,
+      "source_name": "video-000781-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4560796,
+      "source_sha256": "7b2bcaba29b35912a21fc8874b20a1beddfc1824793959f3479873545ae0f8f1",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_051",
+      "clip_id": 51,
+      "source_name": "video-000782-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 18424267,
+      "source_sha256": "9bc5e35202fdba05b4c835b44b0833b4db72ddf253491190a634b382cfca2a04",
+      "source_audio_streams": 1,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_052",
+      "clip_id": 52,
+      "source_name": "video-000783-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2439322,
+      "source_sha256": "9e9d7d6c317d703037476ca13edb541af9ed22b511ef771f4de15d9919390a4a",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_053",
+      "clip_id": 53,
+      "source_name": "video-000784-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2532859,
+      "source_sha256": "a2ec96b7dd31b525297e7152fb9149e97c130cd6aedd6da9a704f5c52318e9cc",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_054",
+      "clip_id": 54,
+      "source_name": "video-000785-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3073196,
+      "source_sha256": "cc3714efb6288379b247247b534fd44b1f9b0762696e1517b2e435bdd88e7c17",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_055",
+      "clip_id": 55,
+      "source_name": "video-000786-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 8142238,
+      "source_sha256": "69dd3ee897f6cdd368cf1076c9379980e62f383921fedde94280dcd3568c132d",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_056",
+      "clip_id": 56,
+      "source_name": "video-000787-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3318055,
+      "source_sha256": "23bfdc308e0d3559ea0d3141b9df1df09efd371ca7e43e897be2366e3de39bf7",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_057",
+      "clip_id": 57,
+      "source_name": "video-000788-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3378816,
+      "source_sha256": "344829c4b0d4772e0170a3b46b19a919540c50adf2f95e86ae33bc3d9267692d",
+      "source_audio_streams": 1,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_059",
+      "clip_id": 59,
+      "source_name": "video-000789-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4664442,
+      "source_sha256": "a88145959b8e7b9baf8c5bd784a9e7627be4734cbeb85037c511c945520d179e",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_060",
+      "clip_id": 60,
+      "source_name": "video-000790-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2810475,
+      "source_sha256": "ca26111d0788ee6ca308a5e8f48ace92903d4dd6dfa17f492231dc15ceba511d",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_061",
+      "clip_id": 61,
+      "source_name": "video-000791-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 10184991,
+      "source_sha256": "eeec0632c907235d71fc446de96ddc6447721be0cacfdb9bd5d7a8eb5c4c8ab7",
+      "source_audio_streams": 1,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_062",
+      "clip_id": 62,
+      "source_name": "video-000792-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4511371,
+      "source_sha256": "ea70b86dcf4266d99ad9884d41ce51431a2ac1592ba9d51ee2381336abd51977",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_063",
+      "clip_id": 63,
+      "source_name": "video-000793-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2815731,
+      "source_sha256": "8b0eb13ae886caf6f8685925a20965e7bb69fd920856a6098c9a7192d17a10fd",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_064",
+      "clip_id": 64,
+      "source_name": "video-000794-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3273545,
+      "source_sha256": "a3ea98e7640f9ccbcece91632e2936bb83aaa8a284d63abd0897f1f2d4fe3415",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_065",
+      "clip_id": 65,
+      "source_name": "video-000795-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4487882,
+      "source_sha256": "0592d0ea2ff0d0f0b2349149826745e44deb57e6b00d007c540945365d368fef",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_066",
+      "clip_id": 66,
+      "source_name": "video-000796-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4512319,
+      "source_sha256": "95671cf42dcefe18e86877127c698ed4c6aa0a2da1d1fba4456b04d137978570",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_067",
+      "clip_id": 67,
+      "source_name": "video-000797-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2342802,
+      "source_sha256": "73fcd96df098b1b2fa3447adc37adb2977657699ece4edf44ea2fdf3ea4dab56",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_068",
+      "clip_id": 68,
+      "source_name": "video-000798-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2718371,
+      "source_sha256": "026f5d786c1d33230c057f61a0f025a604060ea3b7b1b313110730a30a13b145",
+      "source_audio_streams": 0,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_069",
+      "clip_id": 69,
+      "source_name": "video-000799-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4294487,
+      "source_sha256": "41cb5389e0db3a38f0b62d10c1ff043dfedfe2aecf55a5b485fa3ba151392ca8",
+      "source_audio_streams": 0,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_070",
+      "clip_id": 70,
+      "source_name": "video-000800-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3700804,
+      "source_sha256": "f7bc4c4bff6d6a11da026d7d7135f9959a80814946b7f12da563e7d2e0c0e6a6",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_072",
+      "clip_id": 72,
+      "source_name": "video-000802-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4370836,
+      "source_sha256": "c59b1613f0aca49003590a8fd46d9fe1dbbd483cfa9609780be572cd8afe7f57",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_073",
+      "clip_id": 73,
+      "source_name": "video-000803-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 7977490,
+      "source_sha256": "6270e4c6cba5bbef3d5e91e0123aa167c4630e33aea246e2679b4e5737b543a8",
+      "source_audio_streams": 0,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_074",
+      "clip_id": 74,
+      "source_name": "video-000804-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3020263,
+      "source_sha256": "5a9d4164c9c9752788c2613f5c4069c0ce7f732d8b5f9980ecdb1a943e9c3aa4",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_075",
+      "clip_id": 75,
+      "source_name": "video-000805-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3751848,
+      "source_sha256": "361019d2ce57850c70d011007c0f14d4d9bb2f36612af323b84869760a00dd21",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_076",
+      "clip_id": 76,
+      "source_name": "video-000806-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4982160,
+      "source_sha256": "637086a0c653d1ea59edfa4db5fdcd38a1a60fa6a77510f9e752f6c922ab2af4",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_077",
+      "clip_id": 77,
+      "source_name": "video-000807-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 6913712,
+      "source_sha256": "1e908a6ec9e40eb513688dc564d58dc0b814625de2e414b710b620c24db56112",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_078",
+      "clip_id": 78,
+      "source_name": "video-000808-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3632338,
+      "source_sha256": "9e8f3a57975c435b6120e5d2d2e94beedeb44ec9573bf16a0578d31081b930b8",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_079",
+      "clip_id": 79,
+      "source_name": "video-000809-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 5249448,
+      "source_sha256": "90ea0fffc3643ed7d0ad18a953efedb05e88f4fd7586d8a2158d16adb336de15",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_080",
+      "clip_id": 80,
+      "source_name": "video-000810-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 7307041,
+      "source_sha256": "9d9c69bebfcde290390efc577fd8d792363fee0eceb01864a1ccfa8f3cd70272",
+      "source_audio_streams": 1,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_081",
+      "clip_id": 81,
+      "source_name": "video-000811-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 18484110,
+      "source_sha256": "bf084be943a5fbd051c5a4c44d6bfa093aeae28d9d8f7d3ee685edd16f056fc7",
+      "source_audio_streams": 1,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_082",
+      "clip_id": 82,
+      "source_name": "video-000812-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4099990,
+      "source_sha256": "0b7575bd64fd4b260386725e40867d8bf4f3905a19bf2ad8b9a7273fcb2f8eb5",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_084",
+      "clip_id": 84,
+      "source_name": "video-000813-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 7387209,
+      "source_sha256": "b90cc82c05846aab062349f76a83d52e1c52ebb0b78aba475a8ddd695110a016",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_085",
+      "clip_id": 85,
+      "source_name": "video-000814-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4036862,
+      "source_sha256": "c977100cf979ad08e7f3384fde029929371e916d60127c28dfab292a7674a3fc",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_086",
+      "clip_id": 86,
+      "source_name": "video-000815-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2936196,
+      "source_sha256": "8164b3be7ff3adde1cc2c11cd226f33f591937ada7acee47bc93cec29baf0510",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_087",
+      "clip_id": 87,
+      "source_name": "video-000816-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 5383938,
+      "source_sha256": "2557edc15556b73ff9e32a288e7480c362d14539617571ab70cc03fd8be8303e",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_088",
+      "clip_id": 88,
+      "source_name": "video-000817-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3902428,
+      "source_sha256": "6407f1753e3b50cc40c2fb0ebd3a21545c481388551ad2db23395c8aa11170fc",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_089",
+      "clip_id": 89,
+      "source_name": "video-000818-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3167943,
+      "source_sha256": "9c68367514e1048d7c2c1c9065103754d44b74fde5a51d9b93093d1000ce4d62",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_090",
+      "clip_id": 90,
+      "source_name": "video-000819-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3349841,
+      "source_sha256": "5a2d6c425a5d11f557e83b7c890acf1f7b24624e8ddf13b23b7f59756589805a",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_091",
+      "clip_id": 91,
+      "source_name": "video-000820-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 22687977,
+      "source_sha256": "fbabe4c3012dd83a716eb3bddc3a1bae44a7949726fefda37f35f909fd14ac9c",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_092",
+      "clip_id": 92,
+      "source_name": "video-000821-scene-02-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 7699991,
+      "source_sha256": "1a80e41ff3e923406cf28585f8a2bb4f66cc49c88a4ab689a63e6ff4ab21ce1d",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_093",
+      "clip_id": 93,
+      "source_name": "video-000822-scene-03-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3014334,
+      "source_sha256": "f0c3351608d3da4d727afc8bc79d8ecec47cdf9ab3de6df99074c8e0b513052d",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_094",
+      "clip_id": 94,
+      "source_name": "video-000823-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3130287,
+      "source_sha256": "0b53eba238eda1d0d7b6b02dcc021f8f0d33b64f7c36ff29daf55a86e931762c",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_095",
+      "clip_id": 95,
+      "source_name": "video-000824-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2529568,
+      "source_sha256": "b3f674e6972a275a70ead1c8d13507e42767f89cb2ba1ca75337ad91b42c581b",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_096",
+      "clip_id": 96,
+      "source_name": "video-000825-scene-06-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 5811834,
+      "source_sha256": "cb78894fd8353c9171b94bfe93583114c868a5acf9edffef12422a582e4647d7",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_100",
+      "clip_id": 100,
+      "source_name": "video-000826-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4482951,
+      "source_sha256": "4f56457c1917aa0fcd68a906eb1c03c444c70c1449b607f1b7cc753b65c6b7d2",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_111",
+      "clip_id": 111,
+      "source_name": "video-000837-scene-01-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 10769288,
+      "source_sha256": "e67380c094b0b37b237a316d5859cae2c5290fec8ed572f64d5f9ef3bc99fdf0",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_114",
+      "clip_id": 114,
+      "source_name": "video-000838-scene-04-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4186375,
+      "source_sha256": "cc2d73aeff4d29ca7305152893a1e82d1d0fa813bb73bcc9093f424f2b93e7f1",
+      "source_audio_streams": 0,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_115",
+      "clip_id": 115,
+      "source_name": "video-000839-scene-05-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 2487779,
+      "source_sha256": "9e1011b4fe753dacf3cd3020fb56aa8210fe35cdd7653eaf43c6b5a7c283c6c0",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_117",
+      "clip_id": 117,
+      "source_name": "video-000840-scene-07-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4522498,
+      "source_sha256": "039c6861498c6af7d8e354c560660274e4f4c88c34ff01830b7b9e93e51265a7",
+      "source_audio_streams": 1,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_118",
+      "clip_id": 118,
+      "source_name": "video-000841-scene-08-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3211328,
+      "source_sha256": "2909a5abd997bf2b972b72909dbdc4f394fbe31feb724281a90cbe9cf788f8c3",
+      "source_audio_streams": 0,
+      "used_in_final": false
+    },
+    {
+      "label": "K19_119",
+      "clip_id": 119,
+      "source_name": "video-000842-scene-09-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 3883554,
+      "source_sha256": "bee70bf2c1a46bd0f9a8c54936b02380be516359b7a123cd428bd7789193d622",
+      "source_audio_streams": 0,
+      "used_in_final": true
+    },
+    {
+      "label": "K19_120",
+      "clip_id": 120,
+      "source_name": "video-000843-scene-10-b2a1aeecf97e4418a733014886b4bc98.mp4",
+      "source_bytes": 4012289,
+      "source_sha256": "112f39279fe6a2612d19f4bd7b34206192e221d3decfec4d7f904f39f41fba72",
+      "source_audio_streams": 1,
+      "used_in_final": false
+    }
+  ]
+}

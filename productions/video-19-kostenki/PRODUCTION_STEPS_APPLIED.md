@@ -14,6 +14,17 @@
 12. Căn Anh theo 122 mốc; căn các bản dịch theo 12 chương. Hậu kỳ giữ cao độ, không cắt mất lời; giới hạn tempo Anh 1,4 và các bản khác 1,5. Mỗi MP3 phải giải mã thành 58.320.000 mẫu ở 48 kHz = 20:15. Khớp tổng thời lượng và ranh chương không có nghĩa khớp từng từ giữa các ngôn ngữ.
 13. Đổi tên quốc gia bằng sao chép nguyên byte. Kiểm đủ 16 giọng nam và một giọng H’Mông nữ, SHA256, ID và báo cáo thời lượng. Phát hành 17 MP3 riêng, ZIP tổng và ZIP hồ sơ. Chặn mọi câu có phần đệm sau lời lớn hơn 0,1 giây. Câu Anh 113 từng bị provider trả về âm thanh quá ngắn; chỉ tạo lại câu đó bằng cùng ID, kiểm đủ từng từ trong metadata, thay đúng khoảng 18:40–18:50 và giữ các câu còn lại. Bản Anh cuối mã hóa 128 kbps để hạn chế mất chất lượng khi ghép từ bản MP3 đã giải mã. Tải kiểm bản Anh và toàn bộ ZIP, đối chiếu hash 17 thành viên với manifest. Lưu lời dịch, timing, báo cáo, công cụ và preset để tiếp tục.
 
-Khi nhận clip tập 19, dựng phần mở đầu 12 cảnh trong 30 giây voice đầu, không cộng intro ngoài 20:15. Cắt theo chuyển ý, dùng dissolve ngắn khi có lý do chuyển bối cảnh. Bỏ toàn bộ âm thanh clip; bản chính chỉ có voice Anh, không nhạc hay hiệu ứng âm thanh. Nhãn khoa học và bản đồ được thêm trong editor từ dữ liệu đã kiểm chứng. Kiểm hình không có trẻ em, giải mã, đồng bộ và đường âm thanh trước khi bàn giao. Hiện chưa có video hoàn chỉnh cho tập 19.
+Khi nhận clip tập 19, dựng phần mở đầu 12 cảnh trong 30 giây voice đầu, không cộng intro ngoài 20:15. Cắt theo chuyển ý, dùng dissolve ngắn khi có lý do chuyển bối cảnh. Bỏ toàn bộ âm thanh clip; bản chính chỉ có voice Anh, không nhạc hay hiệu ứng âm thanh. Nhãn khoa học và bản đồ được thêm trong editor từ dữ liệu đã kiểm chứng. Kiểm hình không có trẻ em, giải mã, đồng bộ và đường âm thanh trước khi bàn giao. Video tập19 đã được dựng hoàn chỉnh theo yêu cầu mới; phần mở đầu dùng10cảnh trong30giây, thay kế hoạch12cảnh trước đó.
 
 Tập sau phải đọc lại chủ đề, thời lượng và ranh chương từ yêu cầu mới; không dùng 1.215 giây làm mặc định cho cả chuỗi.
+
+
+
+## Bản dựng đã hoàn thành theo yêu cầu mới
+
+1. Đối chiếu 100 video khác nhau sau khi bỏ các tên tải lên lặp. Lưu hash gốc và kiểm mẫu hình ở0,7/4,8/9,1giây mỗi clip. Tạo bản video im lặng720p24fps; chỉ thu hồi cache tải lại được, không xóa bản tải lên trong cuộc trò chuyện.
+2. Đổi ánh xạ clip workbench thành prompt34. Hai mươi mã prompt thiếu được bù bằng cảnh động liên quan; lọc thêm cảnh vòng xương quá cao, chữ lớn hoặc sai bối cảnh. Bản cuối dùng84clip. Không dùng ảnh đứng hoặc bảng chữ thay cảnh.
+3. Chốt10cảnh khác nhau cho30giây đầu, cắt theo ba câu đầu của voice. Dựng122mốc,121mốc10giây và5giây cuối. Chín dissolve0,4giây được bù phần chồng để tổng luôn20:15. Không cộng intro/outro ngoài voice.
+4. Chỉ map video im lặng và voiceAnhAndrew đã bàn giao. Giữ lời,cao độ,timing; chuẩn hóa loudness hai lượt khi mã hóaAAC. Thêm12chương và phụ đềAnh tùy chọn,mặc định tắt.
+5. Kiểm29.160khung hình,20:15,một đường tiếngAnh; giải mã toàn bộ,kiểm khoảng đen và15điểm đồng bộ sóng âm. Xem số đo trong FINAL_VIDEO_QA.json. Duyệt mẫu hình bản xuất ở mở đầu,chuyển chương,đoạn đã thay và phần kết.
+6. Phát hành MP4 hoàn chỉnh,mở đầu30giây,TXT/ZIP năm cặp tiêu đề-thumbnail,dự án và hồ sơ. Không đưa clipnguồn,proxy,ảnh trích hoặc mã tải lên riêng tư vào dự án/GitHub. Kiểm digest máy chủ và hash toàn bộ MP4 tải công khai trước bàn giao.

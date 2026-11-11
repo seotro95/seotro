@@ -1,0 +1,123 @@
+{
+  "status": "passed",
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/kostenki-video-19-final-20m15s",
+  "tag": "kostenki-video-19-final-20m15s",
+  "published_at": "2026-11-11T03:16:21Z",
+  "asset_count": 18,
+  "assets": [
+    {
+      "name": "EDITOR_DECISIONS.json",
+      "bytes": 9320,
+      "sha256": "6e7e863ee36a77ddaf95327b55cc62ee84c92dac25d04821c273f8a9ccf90d3b",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/EDITOR_DECISIONS.json"
+    },
+    {
+      "name": "FINAL_EXPORT_COMMAND.json",
+      "bytes": 1137,
+      "sha256": "6f4cba7778d21ca5b46b0e964bc44bd4b8458dce974c86cb23c65c2f0d6c7956",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/FINAL_EXPORT_COMMAND.json"
+    },
+    {
+      "name": "FINAL_VIDEO_QA.json",
+      "bytes": 2464,
+      "sha256": "d30c83753f219edfbd58a85b164712e26cdfd385ef09daa54681d3ebfa0c94a7",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/FINAL_VIDEO_QA.json"
+    },
+    {
+      "name": "HUONG_DAN_DUNG_LAI.txt",
+      "bytes": 880,
+      "sha256": "9209b3765cae52ece06d45e121ca9882c71f1181a86284c33c97cd649a18c88e",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/HUONG_DAN_DUNG_LAI.txt"
+    },
+    {
+      "name": "KOSTENKI_19_EDIT_PROJECT.zip",
+      "bytes": 18233588,
+      "sha256": "7b2db7480647e2c0c0f2797217ea4f86dd1cda9945584b19950718ea74343d4b",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_EDIT_PROJECT.zip"
+    },
+    {
+      "name": "KOSTENKI_19_EN_FINAL_20m15s_720p.mp4",
+      "bytes": 355760692,
+      "sha256": "9097bce34878a4361c9a46e026694a539e2a958c067f5a022caa7cc1f760e8bd",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4"
+    },
+    {
+      "name": "KOSTENKI_19_EN_SUBTITLES.srt",
+      "bytes": 22264,
+      "sha256": "4ca6f50f9bc9b8e48bd8c114a385e20b6f361db5d6ce5e241d9ab27ec45b52ec",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_EN_SUBTITLES.srt"
+    },
+    {
+      "name": "KOSTENKI_19_OPENING_30s.mp4",
+      "bytes": 8924544,
+      "sha256": "cdad83d48208a80f8f5b9eaea5fdb59ccfa30aa45772df8ebe9650195dcaa0fd",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_OPENING_30s.mp4"
+    },
+    {
+      "name": "KOSTENKI_19_TITLES_THUMBNAILS.txt",
+      "bytes": 5067,
+      "sha256": "b564da366d5dbaac56fcb9904618ac88c9828674f441da73ffc91bf57a192037",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_TITLES_THUMBNAILS.txt"
+    },
+    {
+      "name": "KOSTENKI_19_TITLES_THUMBNAILS.zip",
+      "bytes": 2633,
+      "sha256": "cbee5460d9a32dc31001cdcc3c2ddbe0f6762d32354858fe131deee19b841803",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_TITLES_THUMBNAILS.zip"
+    },
+    {
+      "name": "README.md",
+      "bytes": 3106,
+      "sha256": "4cf2b377e267cf9ab1486dac8bced8a95f1e855e073fb95ced943b3bd1785bad",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/README.md"
+    },
+    {
+      "name": "SCENE_VERIFICATION.json",
+      "bytes": 8068,
+      "sha256": "b940d6e9d04a42ebf04cffaeaec59d32631d5da7fcdcdb74cbd76e9b57604334",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/SCENE_VERIFICATION.json"
+    },
+    {
+      "name": "SOURCE_CLIP_MANIFEST.csv",
+      "bytes": 15143,
+      "sha256": "eab61a4a4db789ef266c60689023449f3dd425835a1711384ad7e4dfddf60187",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/SOURCE_CLIP_MANIFEST.csv"
+    },
+    {
+      "name": "SOURCE_MANIFEST.json",
+      "bytes": 32674,
+      "sha256": "f253652e99985d488c08444a48c230c3e5154a3995329dd8c5c728ae5c4d2fdb",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/SOURCE_MANIFEST.json"
+    },
+    {
+      "name": "SUBSTITUTIONS.csv",
+      "bytes": 3604,
+      "sha256": "7867bf94b742b52b1829fddd682de6c370a411f6b79d471ee0bbdae3f95f3ba6",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/SUBSTITUTIONS.csv"
+    },
+    {
+      "name": "VISUAL_REVIEW_APPROVED.json",
+      "bytes": 1064,
+      "sha256": "e437dbfd8bc60004df9d066089afa89bc5a0a795bef0618bcfc3e83943600801",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/VISUAL_REVIEW_APPROVED.json"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1464,
+      "sha256": "c51006bb573157c28062506b33334c49878784c91fec4cc56d6fcdc0daeaf2cc",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/SHA256SUMS.txt"
+    },
+    {
+      "name": "RELEASE_ASSET_MANIFEST.json",
+      "bytes": 2639,
+      "sha256": "f062dc450fd38df671bb4bb11101792a39bb61ed26f8dbde6db258da4aeae6ca",
+      "url": "https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/RELEASE_ASSET_MANIFEST.json"
+    }
+  ],
+  "public_video_head_status": 200,
+  "public_video_full_stream_sha256_verified": true,
+  "txt_download_content_verified": true,
+  "txt_content_disposition": "attachment; filename=KOSTENKI_19_TITLES_THUMBNAILS.txt",
+  "raw_source_clips_published": false,
+  "verification": "All published output sizes and serverSHA256digests match local completed files; complete public MP4 stream hash verified; TXT downloaded and its five title/prompt pairs checked."
+}

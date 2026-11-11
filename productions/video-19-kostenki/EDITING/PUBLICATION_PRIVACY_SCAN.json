@@ -1,0 +1,11 @@
+{
+  "topic": 19,
+  "status": "passed",
+  "completed_outputs_only": true,
+  "raw_source_clips_included": false,
+  "source_frames_or_proxies_included": false,
+  "private_upload_identifiers_included": false,
+  "project_zip_scanned": true,
+  "text_outputs_scanned": true,
+  "no_direct_raw_source_git_references": true
+}
