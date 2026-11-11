@@ -1,0 +1,46 @@
+ÖTZI — CHỦ ĐỀ 21
+5 TIÊU ĐỀ VÀ 5 PROMPT THUMBNAIL
+
+Đề xuất ưu tiên: phương án 1.
+Khung ảnh: 16:9, 1280×720. Thêm chữ bằng phần mềm thiết kế sau khi tạo ảnh; giữ khoảng 3–5 từ lớn, rõ trên điện thoại.
+Tất cả hình Ötzi là tái dựng minh họa, không phải chân dung đã xác minh. Không có trẻ em trong bất kỳ ảnh nào.
+
+============================================================
+1. Ötzi’s Last Hours: What the Arrow Reveals
+Tiếng Việt: Những giờ cuối của Ötzi: Mũi tên hé lộ điều gì?
+Chữ gợi ý trên thumbnail: THE LAST HOURS
+
+PROMPT:
+Create a compelling YouTube documentary thumbnail, 16:9, 1280x720. On the right, a close-up interpretive reconstruction of Ötzi, a clearly adult man around 45, lean face, medium-to-dark brown skin, brown eyes, sparse thinning dark hair beneath a bearskin cap, short beard, patched brown hide clothing. He looks back over his left shoulder with a wary, restrained expression. On the left foreground, a large, sharply detailed replica triangular flint arrowhead, visibly presented as a separate archaeological object, not embedded in his body. Distant rocky Alpine ridge and patchy snow behind him. Cold blue-grey background, warm directional light on his face and the stone point, strong contrast, two clear focal elements, readable at mobile size. Leave clean upper-left space for editor-added text. Photorealistic historical documentary style, no blood, no graphic wounds, no attacker, no children or minors anywhere, including background figures, photographs, screens, silhouettes and reflections. No text, no logos, no watermark.
+
+============================================================
+2. A 5,300-Year-Old Mystery: Who Shot Ötzi?
+Tiếng Việt: Bí ẩn 5.300 năm: Ai đã bắn Ötzi?
+Chữ gợi ý trên thumbnail: WHO SHOT HIM?
+
+PROMPT:
+Create a striking YouTube archaeology mystery thumbnail, 16:9, 1280x720. A clearly adult Copper Age traveller, interpretive reconstruction of Ötzi around age 45, medium-to-dark brown skin, sparse dark hair, short beard, bearskin cap and stitched hide coat, occupies the left half in a tight three-quarter portrait. His expression is alert and questioning rather than theatrical. On the right, an empty Alpine pass disappears behind a dark rock ridge, suggesting an unanswered question without depicting an attacker. A small replica flint arrowhead is prominently isolated in the lower-right foreground, razor-sharp focus. Dramatic natural side lighting, muted icy blues and earthy browns, simple bold composition, strong subject separation, mobile-readable. Leave clear space above the empty pass for editor-added text. No invented suspect, no hooded villain, no modern weapons, no blood, no exposed remains, no children or minors anywhere, including background figures, photographs, screens, silhouettes and reflections. No generated lettering, no watermark.
+
+============================================================
+3. Ötzi Ate Before He Died. What Happened Next?
+Tiếng Việt: Ötzi đã ăn trước khi chết. Chuyện gì xảy ra tiếp theo?
+Chữ gợi ý trên thumbnail: HIS LAST MEAL
+
+PROMPT:
+Create an intriguing YouTube science-documentary thumbnail, 16:9, 1280x720. Extreme foreground close-up of a modest reconstructed Copper Age meal on birch bark: prepared game meat, pale animal fat and a few einkorn grains, realistic food rather than a lavish feast. Behind it on the right, a clearly adult Ötzi reconstruction around 45 sits beside an Alpine rock shelter, wearing a bearskin cap and patched hide clothing, medium-to-dark brown skin, short beard, thoughtful neutral expression. Rocky mountains and old snow patches in the distance. Warm light draws attention to the meal while the mountain background remains cold blue-grey. Strong depth, three simple visual layers, food and adult face both identifiable at small size. Present the scene as an illustrative meal before death, without implying whether it occurred before or after the arrow injury. Leave uncluttered upper-left space for editor-added text. No eating gore, no fresh carcasses, no visible injuries, no children or minors anywhere, including background figures, photographs, screens, silhouettes and reflections. No modern utensils, no text or logos, no watermark.
+
+============================================================
+4. Did Ötzi Die Immediately? The Evidence Reconsidered
+Tiếng Việt: Ötzi có chết ngay lập tức? Nhìn lại bằng chứng
+Chữ gợi ý trên thumbnail: DID HE DIE AT ONCE?
+
+PROMPT:
+Create a high-impact YouTube forensic archaeology thumbnail, 16:9, 1280x720. On the left, a photorealistic interpretive portrait of Ötzi, clearly adult around 45, brown skin, thinning dark hair, short beard and hide clothing. On the right, a clean translucent adult shoulder teaching model showing the left scapula and the position of a small flint arrowhead, visibly a schematic museum model rather than an authentic CT scan. No blood, no penetration scene, no invented diagnostic markings. Ötzi’s face is warmly lit; the shoulder model has cool cyan edge lighting against a dark navy background. Minimal composition with two large focal elements, strong contrast, serious investigative mood, excellent mobile readability. Leave clear upper-centre space for editor-added text. Do not depict instant death or prolonged survival as established fact. No children or minors anywhere, including background figures, photographs, screens, silhouettes and reflections. No exposed human remains, fake medical interface, generated text, logos or watermark.
+
+============================================================
+5. Ötzi: The Last Journey We Still Can’t Fully Explain
+Tiếng Việt: Ötzi: Hành trình cuối chúng ta vẫn chưa giải thích trọn vẹn
+Chữ gợi ý trên thumbnail: THE UNFINISHED JOURNEY
+
+PROMPT:
+Create a cinematic YouTube historical mystery thumbnail, 16:9, 1280x720. A clearly adult Ötzi reconstruction around 45 dominates the right foreground, shown from waist up in three-quarter rear view with his face partly visible, medium-to-dark brown skin, short dark beard, bearskin cap, patched hide coat, closed quiver and an unstrung wooden bow stave. He pauses before a vast rocky Alpine saddle with scattered old snow, looking toward a narrow route disappearing behind the ridge. Late-spring mountain conditions, dramatic cloud opening, a restrained shaft of warm light on the traveller against cold blue-grey mountains. Make the adult figure large enough for mobile viewing; simplify the background and emphasize the uncertain path ahead. Leave clean left-side space for editor-added title text. Interpretive reconstruction, no pursuers, no invented battle, no falling figure, no blizzard, no children or minors anywhere, including background figures, photographs, screens, silhouettes and reflections. No modern gear, no generated text, logos or watermark.
