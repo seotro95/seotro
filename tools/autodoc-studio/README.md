@@ -1,3 +1,9 @@
+# Tải AutoDoc Studio1.0
+
+[Windows x64 portable —109MB](https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/AutoDocStudio-1.0.0-Windows-x64.zip) · [Hướng dẫn](https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/HUONG_DAN_SU_DUNG.txt) · [Mã nguồn](https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/AutoDocStudio-1.0.0-Source.zip).
+
+Đã kiểm thử fileexe thực trênWindows,Whisper/CLIP thực,tự dựng MP4,loại tiếng clip,giữ đồng bộ,phụ đề tùy chọn và chạy tiếp bằng cache. Báo cáo trong QA/WINDOWS_TEST_REPORT.json. Lần đầu tự tải FFmpeg và model;không cần API trả phí. AI chọn cảnh theo tương đồng,không thay kiểm tra nội dung khoa học/độ tuổi bằng mắt.
+
 # AutoDoc Studio1.0
 
 Ứng dụng Windows tự dựng phim tài liệu từ một voice và thư mục video. Giao diện tiếng Việt, chạy cục bộ, không cần API trả phí. Chọn voice, thư mục video, nơi lưu rồi bấm **TỰ DỰNG VIDEO**.

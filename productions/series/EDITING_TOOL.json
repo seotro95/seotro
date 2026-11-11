@@ -1,0 +1,25 @@
+{
+  "id": "autodoc-studio",
+  "version": "1.0.0",
+  "source_path": "tools/autodoc-studio",
+  "platform": "Windows10/11x64",
+  "release_tag": "autodoc-studio-v1.0.0",
+  "download_url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/AutoDocStudio-1.0.0-Windows-x64.zip",
+  "source_download_url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/AutoDocStudio-1.0.0-Source.zip",
+  "inputs": [
+    "existing English narration audio",
+    "folder of source videos"
+  ],
+  "main_output": "VIDEO_HOAN_CHINH.mp4",
+  "automatic_transcription": "Whisper local",
+  "automatic_visual_matching": "CLIPONNX local",
+  "main_audio": "Input narration only;sourceclip audio removed",
+  "opening": "10scenes in first30seconds when enough sourcefootage",
+  "still_or_textcard_substitutes": false,
+  "first_use_requires_internet_for_runtime_and_models": true,
+  "api_key_required": false,
+  "frozen_windows_exe_acceptance_test_passed": true,
+  "build_run_id": 42957479510,
+  "reference_voice_generation_tools_and17saved_profiles_unchanged": true,
+  "limitations": "Semantic similarity and approximate child/text screening;review output before publishing. Source duration/quality and available clips constrain results."
+}

@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "intentionally_wrong_offset_seconds": 0.5,
+  "misalignment_correctly_rejected": true,
+  "error": "Đồng bộ voice chưa đạt tại5.980s: lệch-0.040s,tương quan0.083."
+}

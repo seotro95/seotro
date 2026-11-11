@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "platform": "Windows x64",
+  "frozen_exe_tested": true,
+  "real_whisper_and_clip_models_used": true,
+  "voice_seconds": 45.34866666666667,
+  "video_seconds": 45.375,
+  "video_frames": 1089,
+  "opening_shots": 10,
+  "opening_distinct_files": 10,
+  "original_video_audio_removed": true,
+  "source_files_unchanged": true,
+  "resume_cache_verified": true,
+  "optional_subtitles_tested": true,
+  "full_decode_passed": true,
+  "alignment_checks": [
+    {
+      "at_seconds": 3.378,
+      "lag_seconds": 0.0,
+      "correlation": 0.999975,
+      "reference_rms": 6582.04
+    },
+    {
+      "at_seconds": 10.337,
+      "lag_seconds": 0.0,
+      "correlation": 0.999636,
+      "reference_rms": 8051.13
+    },
+    {
+      "at_seconds": 22.424,
+      "lag_seconds": 0.0,
+      "correlation": 0.999154,
+      "reference_rms": 8513.84
+    },
+    {
+      "at_seconds": 35.511,
+      "lag_seconds": 0.0,
+      "correlation": 0.999999,
+      "reference_rms": 6908.68
+    },
+    {
+      "at_seconds": 40.221,
+      "lag_seconds": 0.0,
+      "correlation": 0.999162,
+      "reference_rms": 7559.82
+    }
+  ],
+  "media_fixtures_not_included_in_release": true
+}

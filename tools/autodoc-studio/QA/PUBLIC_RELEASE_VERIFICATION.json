@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/autodoc-studio-v1.0.0",
+  "release_tag": "autodoc-studio-v1.0.0",
+  "build_run_id": 42957479510,
+  "all_public_assets_stream_hash_verified": true,
+  "frozen_windows_automatic_edit_test": "passed",
+  "assets": [
+    {
+      "name": "AutoDocStudio-1.0.0-Source.zip",
+      "bytes": 35868,
+      "sha256": "5756c07071d1e8a26a8cb11b5e459abbef108b02d2d3607db465865acd1223b8",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/AutoDocStudio-1.0.0-Source.zip"
+    },
+    {
+      "name": "AutoDocStudio-1.0.0-Windows-x64.zip",
+      "bytes": 109312887,
+      "sha256": "17295e380a6bf42c87705ca848fc46ebb12fd66b7dc02c0107bc813b2289679f",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/AutoDocStudio-1.0.0-Windows-x64.zip"
+    },
+    {
+      "name": "HUONG_DAN_SU_DUNG.txt",
+      "bytes": 1823,
+      "sha256": "c856f9b6088b7fc0daebdf35b55db07850486f303fb1b27afdb37aae4bc350d0",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/HUONG_DAN_SU_DUNG.txt"
+    },
+    {
+      "name": "RELEASE_MANIFEST.json",
+      "bytes": 865,
+      "sha256": "2f5605e8ddc0d8c4578cc26599f3852486bde52dc70baedc18957f5567dc3c92",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/RELEASE_MANIFEST.json"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 382,
+      "sha256": "3eff4cfff956a27e4b36d11976796ce088fd26ecc0bfc00a4d5f0afd86673a16",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/SHA256SUMS.txt"
+    },
+    {
+      "name": "WINDOWS_TEST_REPORT.json",
+      "bytes": 1215,
+      "sha256": "e7d46a94b2395c3489a6a8bac9a00c1a2a6bfea33f6910e1f6c4263a54c2ffed",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/WINDOWS_TEST_REPORT.json"
+    }
+  ]
+}
