@@ -20,10 +20,10 @@ for folder in artifacts.iterdir():
  print('DECODED_VERIFIED',locale,FRAMES,flush=True)
 assert set(reports)==set(PROFILES) and len({r['sha256'] for r in reports.values()})==17
 assert sum(r['gender']=='Male' for r in reports.values())==16
-voices=[];profiles=json.loads((R/'BASELINE_VOICE_PROFILES.json').read_text());profiles['topic_id']=38;profiles['target_seconds']=TARGET
+voices=[];profiles=json.loads((R/'BASELINE_VOICE_PROFILES.json').read_text());profiles['topic_id']=38;profiles['target_seconds']=TARGET;profiles['note']='Original 17 voice IDs and female-3 native reference retained. Timing recalculated for 22:32. Provider models may evolve; independent native listening and White Hmong dialect review remain pending.'
 base=f'https://github.com/{repo}/releases/download/{tag}/'
 for p in profiles['profiles']:
- j=reports[p['locale']];p.update(duration_seconds=TARGET,delivery_filename=j['filename'],mp3_sha256=j['sha256'],alignment_granularity=j['timing_alignment'],narration_style_id='science-documentary-expressive-v1')
+ j=reports[p['locale']];p.update(base_rate='native phrase speed 0.98–1.02' if p['locale']=='mww' else '-8%' if p['locale']=='en-US' else '-1%',duration_seconds=TARGET,delivery_filename=j['filename'],mp3_sha256=j['sha256'],alignment_granularity=j['timing_alignment'],narration_style_id='science-documentary-expressive-v1')
  voices.append({'locale':p['locale'],'name':p['name'] if p['locale']!='mww' else "H'mông Trắng (nữ)",'voice_id':p['voice_id'],'gender':p['gender'],'filename':j['filename'],'seconds':TARGET,'frames_at_48000':FRAMES,'sha256':j['sha256'],'bytes':j['bytes'],'url':base+j['filename']})
 manifest={'topic_id':38,'target_seconds':TARGET,'main_video_locale':'en-US','voices':voices}
 (O/'AUDIO_MANIFEST.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2));(O/'VOICE_PROFILES_LOCKED.json').write_text(json.dumps(profiles,ensure_ascii=False,indent=2))

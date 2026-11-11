@@ -1,4 +1,4 @@
-name: Land bridges38 resume failed voices only
+name: Land bridges38 resume failed voices only v2
 on:
   push:
     branches: [codex/land-bridges38-production-20261111]
