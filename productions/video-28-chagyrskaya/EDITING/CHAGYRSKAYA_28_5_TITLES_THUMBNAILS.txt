@@ -1,0 +1,46 @@
+CHAGYRSKAYA — CHỦ ĐỀ 28
+5 TIÊU ĐỀ VÀ 5 PROMPT THUMBNAIL
+
+Ưu tiên phương án 1 hoặc 2. Tiêu đề chính bằng tiếng Anh để dùng cùng voice Anh.
+Khung ảnh16:9,1280×720. Tạo ảnh sạch chữ; thêm3–5từ lớn bằng phần mềm thiết kế sau. Các hình người đều là tái dựng minh họa, không phải chân dung nhận diện từ ADN.
+Không có trẻ em hoặc vị thành niên trong bất kỳ ảnh nào, kể cả hình nền, màn hình, bóng, phản chiếu hoặc biểu tượng hình người. Quan hệ cha–con chỉ biểu diễn bằng mẫu và nút trừu tượng cùng kích thước.
+
+============================================================
+1. A Neanderthal Father and Daughter, Found in Ancient DNA
+Tiếng Việt: Cha và con gái Neanderthal được nhận ra từ ADN cổ
+Chữ gợi ý: A FAMILY IN DNA
+
+PROMPT:
+Create a compelling YouTube science-documentary thumbnail,16:9,1280x720. On the left, an interpretive portrait of one clearly adult Neanderthal man around45, robust human features, broad nose, pronounced but realistic brow, thoughtful brown eyes, short dark hair and practical fully covering hide clothing. On the right foreground, one small replica bone fragment on a neutral conservation support, large and sharply focused. Behind the fragment, two identical abstract circular sample markers joined by one luminous line, clearly a schematic relationship motif, not human figures or authentic genomic data. A dark limestone cave opening provides a simple atmospheric background. Warm light on the face and fragment, restrained cool-blue background, strong separation, readable at mobile size, only three main elements. Leave clean upper-right space for editor-added text. Do not portray the daughter, do not use an adult woman as her stand-in. No children, adolescents, babies or minors anywhere, including photographs, screens, icons, silhouettes and reflections. No copper axe, bows, metal weapons, Alps snow scene, ape-like caricature, skull pile, gore, generated text, logos or watermark.
+
+============================================================
+2. Chagyrskaya: The Family Hidden in Bone
+Tiếng Việt: Chagyrskaya: Gia đình ẩn trong những mảnh xương
+Chữ gợi ý: THE HIDDEN FAMILY
+
+PROMPT:
+Create a cinematic archaeology-mystery YouTube thumbnail,16:9,1280x720. A single small replica ancient bone fragment dominates the lower-right foreground on dark stone, showing realistic pores and weathered texture. In the left background, a limestone cave entrance overlooks an open southern Siberian river valley. One clearly adult Neanderthal aged40–50 stands small beside the cave, fully clothed in practical hide garments, realistic robust human anatomy. A subtle abstract network of identical circular nodes appears only in the dark negative space behind the fragment, suggesting genetic relationships without pretending to be an authentic family tree. Dramatic natural light, earth browns and cool blue-grey shadows, simple composition, high contrast and strong mobile readability. Leave clear upper-left space for editor-added text. No family tableau, no children or adolescents in any form, no child-shaped icons, no actual human remains, no funeral or massacre, no copper tools, no modern objects in the ancient landscape, no generated lettering, logos or watermark.
+
+============================================================
+3. What 13 Neanderthals Reveal About Ancient Life
+Tiếng Việt:13người Neanderthal hé lộ điều gì về đời sống cổ?
+Chữ gợi ý:13LIVES.CONNECTED.
+
+PROMPT:
+Create an eye-catching YouTube genetics-documentary thumbnail,16:9,1280x720. Close-up of a modern clearly adult ancient-DNA scientist in clean protective laboratory clothing, eyes sharply visible, holding a sealed sample tube beside a generic sequencing instrument. On the opposite side, a large interpretive portrait of one clearly adult Neanderthal around40, natural human expression and robust facial features. Separate the two subjects with a small sharply lit replica bone fragment in the lower centre, visually connecting past and research. A faint abstract strand motif may appear behind the tube, never as fabricated readable scientific results. Restrained cyan laboratory light, warm light on the ancient portrait, bold clean composition, strong mobile readability. Leave uncluttered upper-centre space for editor-added text. Do not imply all13individuals came from one cave; no group portrait or13human figures. No children or minors anywhere, no copper axe, no ape-like face, no gore, no fake data labels, generated text, logos or watermark.
+
+============================================================
+4. How DNA Rebuilt Part of a Neanderthal Family Tree
+Tiếng Việt:ADN giúp tái dựng một phần phả hệ Neanderthal ra sao?
+Chữ gợi ý: FOLLOW THE CONNECTIONS
+
+PROMPT:
+Create a striking YouTube archaeology-investigation thumbnail,16:9,1280x720. A macro replica bone fragment on the left foreground and two sealed generic specimen tubes on the right, all sharply lit against a dark neutral research background. Above them, a bold schematic network made only of equal-sized plain circular nodes, with just a few clear solid connections and several separated unconnected nodes, visibly incomplete. The diagram is an abstract visual metaphor, not a claimed accurate pedigree or authentic analysis output. One adult gloved hand may gently position a tube at the frame edge. Warm side light highlights bone texture; cool restrained blue light defines the tubes and network. Simple uncluttered composition, strong contrast, highly readable at mobile size. Leave clean upper-left space for editor-added text. No people-shaped icons, child-sized markers, portraits, children or minors anywhere, no complete invented family tree, no skulls, gore, generated lettering, logos or watermark.
+
+============================================================
+5. Were Neanderthals Really Isolated? The Chagyrskaya Clues
+Tiếng Việt:Người Neanderthal có thực sự biệt lập? Manh mối Chagyrskaya
+Chữ gợi ý: SMALL GROUPS.BIG CONNECTIONS.
+
+PROMPT:
+Create an intriguing cinematic YouTube science-documentary thumbnail,16:9,1280x720. A clearly adult female Neanderthal around40 occupies the right foreground in three-quarter view, realistic robust human anatomy, natural brown eyes, practical fully covering hide clothing, looking across a southern Siberian river valley. Limestone hills and an open valley route fill the left background. A small isolated replica flint tool sits in the lower-left foreground. Use a very subtle abstract connection motif between distant landscape areas, suggesting a hypothesis of contact rather than a proven exact migration route. Dramatic soft daylight, earthy colours, cool distant atmosphere, the adult face large enough for mobile viewing, minimal background detail. Leave clean upper-left space for editor-added text. This is a generic interpretive adult, not a portrait of an identified sample or proof of an individual's journey. No wedding, coercion, family group, children, adolescents or minors anywhere, no child-shaped icons, copper axe, metal equipment, modern buildings, Alps-specific scenery, generated text, logos or watermark.
