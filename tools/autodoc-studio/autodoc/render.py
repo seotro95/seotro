@@ -160,9 +160,9 @@ def export_movie(p,out,ctx):
     listfile.write_text(''.join("file '"+quote(x)+"'\n" for x in paths),encoding='utf-8')
     ctx.emit(87,'Ghép video,logo,phụ đề và âm thanh đã chọn…')
     log=job/'loudness_v2.log';voice=Path(p['voice_wav']);key=signature(_file_key(voice));measure=job/'loudness_measure.json'
-    if not measure.exists() or json.loads(measure.read_text()).get('key')!=key:
-        ctx.run([binary('ffmpeg'),'-nostdin','-hide_banner','-nostats','-i',voice,'-af','loudnorm=I=-16:TP=-2:LRA=11:print_format=json','-f','null','-'],log=log);text=log.read_text(errors='replace');m=json.loads(text[text.rfind('{'):text.rfind('}')+1]);save_json(measure,{'key':key,'measurement':m})
-    m=json.loads(measure.read_text())['measurement']
+    if not measure.exists() or json.loads(measure.read_text(encoding='utf-8-sig')).get('key')!=key:
+        ctx.run([binary('ffmpeg'),'-nostdin','-hide_banner','-nostats','-i',voice,'-af','loudnorm=I=-16:TP=-2:LRA=11:print_format=json','-f','null','-'],log=log);text=log.read_text(encoding='utf-8',errors='replace');m=json.loads(text[text.rfind('{'):text.rfind('}')+1]);save_json(measure,{'key':key,'measurement':m})
+    m=json.loads(measure.read_text(encoding='utf-8-sig'))['measurement']
     if not math.isfinite(float(m['input_i'])):raise ValueError('Voice không có mức âm thanh hợp lệ.')
     af=f"loudnorm=I=-16:TP=-2:LRA=11:measured_I={m['input_i']}:measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true,aresample=48000,atrim=duration={p['plan']['voice_seconds']},asetpts=PTS-STARTPTS"
     cmd=[binary('ffmpeg'),'-nostdin','-hide_banner','-loglevel','error','-y','-f','concat','-safe','0','-i',listfile,'-i',voice];audio_index=2

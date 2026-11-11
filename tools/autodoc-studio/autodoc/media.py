@@ -74,7 +74,7 @@ def index(files,job,model,ctx,samples=1):
         key=signature({'source':asset['sha256'],'samples':samples,'clip':CLIP_REVISION,'kind':asset['kind'],'version':3});folder=root/key;folder.mkdir(exist_ok=True);meta=folder/'index.json';cache=folder/'features.npz'
         if meta.exists() and cache.exists():
             try:
-                candidates=json.loads(meta.read_text())['candidates']
+                candidates=json.loads(meta.read_text(encoding='utf-8-sig'))['candidates']
                 with np.load(cache,allow_pickle=False) as z:features=z['features'];scores=z['scores']
                 if len(features)!=len(candidates):raise ValueError('cache')
                 hits+=1

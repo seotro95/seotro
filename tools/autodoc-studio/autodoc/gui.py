@@ -21,7 +21,7 @@ class App(tk.Tk):
         self.build();self.protocol('WM_DELETE_WINDOW',self.close);self.after(60,self.poll)
         if self.preferences.exists():
             try:
-                pref=json.loads(self.preferences.read_text());self.output.set(pref.get('output',self.output.get()));self.last_project=pref.get('last_project','')
+                pref=json.loads(self.preferences.read_text(encoding='utf-8-sig'));self.output.set(pref.get('output',self.output.get()));self.last_project=pref.get('last_project','')
             except Exception:self.last_project=''
     def file_row(self,parent,label,var,kind='file',types=None):
         row=ttk.Frame(parent);row.pack(fill='x',pady=2);ttk.Label(row,text=label,width=16).pack(side='left');ttk.Entry(row,textvariable=var).pack(side='left',fill='x',expand=True)

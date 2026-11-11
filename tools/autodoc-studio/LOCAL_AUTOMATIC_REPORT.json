@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "real_asr_without_subtitles": true,
+  "automatic_complete_movie_exported": true,
+  "automatic_project_reopened": true,
+  "opening_shots": 10,
+  "opening_seconds": 30,
+  "previous_output_preserved": true,
+  "voice_alignment": [
+    {
+      "at_seconds": 3.328,
+      "lag_seconds": 0.0,
+      "correlation": 0.999974
+    },
+    {
+      "at_seconds": 10.337,
+      "lag_seconds": 0.0,
+      "correlation": 0.999528
+    },
+    {
+      "at_seconds": 17.174,
+      "lag_seconds": 0.0,
+      "correlation": 0.999201
+    },
+    {
+      "at_seconds": 26.012,
+      "lag_seconds": 0.0,
+      "correlation": 0.999945
+    },
+    {
+      "at_seconds": 33.271,
+      "lag_seconds": 0.0,
+      "correlation": 0.999994
+    }
+  ],
+  "video_seconds": 35.375
+}

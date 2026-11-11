@@ -1,8 +1,8 @@
 import hashlib,importlib.metadata,json,os,shutil,zipfile
 from pathlib import Path
 R=Path(__file__).resolve().parent;O=R/'release';O.mkdir(exist_ok=True);app=R/'dist/AutoDocStudio'
-report=json.loads((R/'WINDOWS_TEST_REPORT.json').read_text());assert report['status']=='passed' and report['frozen_exe_tested'] and report['frozen_gui_preview_tested']
-gui_report=json.loads((R/'GUI_FEATURE_REPORT.json').read_text());assert gui_report['status']=='passed' and all(gui_report['checks'].values())
+report=json.loads((R/'WINDOWS_TEST_REPORT.json').read_text(encoding='utf-8-sig'));assert report['status']=='passed' and report['frozen_exe_tested'] and report['frozen_gui_preview_tested']
+gui_report=json.loads((R/'GUI_FEATURE_REPORT.json').read_text(encoding='utf-8-sig'));assert gui_report['status']=='passed' and all(gui_report['checks'].values())
 for name in ['README.md','THIRD_PARTY.md','LICENSE','MO_TOOL.bat','WINDOWS_TEST_REPORT.json','GUI_FEATURE_REPORT.json']:shutil.copyfile(R/name,app/name)
 guide='''AUTODOC STUDIO 2.1 FULL — WINDOWS 10/11 X64
 
@@ -60,7 +60,7 @@ for p in (R/'effect_packs').glob('*.json'):
     # Git on Windows may check text out as CRLF. The manifest hashes canonical
     # UTF-8/LF bytes, so preserve those exact bytes in both deliveries.
     data=p.read_text(encoding='utf-8').encode('utf-8');dest=app/'effect_packs'/p.name;dest.parent.mkdir(exist_ok=True);dest.write_bytes(data);(O/p.name).write_bytes(data)
-pack_manifest=json.loads((O/'manifest.json').read_text());assert hashlib.sha256((O/'cinematic-extras.json').read_bytes()).hexdigest()==pack_manifest['sha256']
+pack_manifest=json.loads((O/'manifest.json').read_text(encoding='utf-8-sig'));assert hashlib.sha256((O/'cinematic-extras.json').read_bytes()).hexdigest()==pack_manifest['sha256']
 with zipfile.ZipFile(O/'AutoDocStudio-2.1.0-Full-Windows-x64.zip','w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
     for p in sorted(app.rglob('*')):
         if p.is_file():z.write(p,'AutoDocStudio/'+p.relative_to(app).as_posix())

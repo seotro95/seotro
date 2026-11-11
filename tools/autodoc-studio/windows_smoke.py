@@ -11,7 +11,7 @@ from autodoc.render import render_shot
 from autodoc.effects import FILTERS,MOTIONS,TRANSITIONS
 
 root=Path(__file__).resolve().parent;exe=Path(sys.argv[1]).resolve() if len(sys.argv)>1 else None
-work=Path(os.environ.get('AUTODOC_TEST_WORK',str(root/('windows test' if exe else 'local test')/'Nguon thu nghiem')));work.mkdir(parents=True,exist_ok=True)
+work=Path(os.environ.get('AUTODOC_TEST_WORK',str(root/('windows test' if exe else 'local test')/'Nguồn thử nghiệm')));work.mkdir(parents=True,exist_ok=True)
 ensure_ffmpeg(Context());ff=binary('ffmpeg');ctx=Context();frozen=bool(exe)
 def command(args):subprocess.run([str(x) for x in args],check=True)
 def app(args,result):
@@ -19,10 +19,10 @@ def app(args,result):
 opening=work/'reference_opening.mp4'
 if not opening.exists():
     with urllib.request.urlopen('https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_OPENING_30s.mp4',timeout=120) as f:opening.write_bytes(f.read())
-voice=work/'voice 21.wav'
+voice=work/'Giọng Anh 21.wav'
 command([ff,'-v','error','-i',opening,'-t','21.37','-vn','-ac','1','-ar','48000','-y',voice])
 with wave.open(str(voice)) as w:duration=w.getnframes()/w.getframerate()
-clips=work/'clips';clips.mkdir(exist_ok=True)
+clips=work/'Ảnh và video';clips.mkdir(exist_ok=True)
 for i in range(10):
     args=[ff,'-v','error','-ss',str(i*2.7),'-i',opening]
     if i==0:args+=['-f','lavfi','-i','sine=frequency=1379:sample_rate=48000:duration=2.5','-map','0:v:0','-map','1:a:0','-c:a','aac']
@@ -57,7 +57,7 @@ assert float(np.mean((actual-expected)**2))<120,'Looped source in-point did not 
 stamps={str(x):x.stat().st_mtime_ns for x in Path(p['job']).glob('renders/*/scene.mp4')}
 app(['--project',project_file,'--export-to',work/'Cached export.mp4'],result);assert all(Path(x).stat().st_mtime_ns==mtime for x,mtime in stamps.items())
 # A second job reuses cross-project CLIP features, even with a different output folder.
-second=app(['--voice',voice,'--media',clips,'--output',work/'second project','--settings',config,'--prepare-only'],result);metrics=json.loads((Path(second['project']).parent/'analysis_metrics.json').read_text());assert metrics['shared_cache_hits']==11
+second=app(['--voice',voice,'--media',clips,'--output',work/'second project','--settings',config,'--prepare-only'],result);metrics=json.loads((Path(second['project']).parent/'analysis_metrics.json').read_text(encoding='utf-8-sig'));assert metrics['shared_cache_hits']==11
 mix={'mute_source':False,'source_volume':.4,'subtitle_mode':'soft','fps':30};save_json(work/'mix.json',mix)
 mixed=work/'Mixed export.mp4';d2=app(['--project',project_file,'--settings',work/'mix.json','--export-to',mixed],result);assert d2['report']['source_audio_kept'] and d2['report']['fps']==30
 assert len([s for s in probe(mixed,ctx)['streams'] if s['codec_type']=='subtitle'])==1
@@ -67,7 +67,7 @@ assert tone(mixed)>tone(out)*2
 preview=scene_preview(p,1,ctx);assert Path(preview[0]).is_file() and Path(preview[1]).is_file()
 app(['--project',project_file,'--settings',work/'mix.json','--export-to',work/'Mixed export.mkv'],result)
 if exe:
-    gui=work/'gui.json';command([exe,'--gui-smoke','--project',project_file,'--gui-report',gui]);g=json.loads(gui.read_text());assert g['status']=='passed' and g['preview_loaded'] and g['preview_frame_displayed']
+    gui=work/'gui.json';command([exe,'--gui-smoke','--project',project_file,'--gui-report',gui]);g=json.loads(gui.read_text(encoding='utf-8-sig'));assert g['status']=='passed' and g['preview_loaded'] and g['preview_frame_displayed']
 # Render every named built-in preset rather than merely checking UI labels.
 fx=copy.deepcopy(p);fx['settings'].update(logo_path='',subtitle_mode='none');item=copy.deepcopy(p['plan']['shots'][0]);item.update(frames=24,start_frame=0,end_frame=24,last=False,effect='none',transition='cut',speed=1.,crop=1.)
 for effect in list(FILTERS)+list(MOTIONS):render_shot(fx,{**item,'effect':effect},None,ctx,resolution=360,preview=True)
@@ -78,7 +78,7 @@ if exe:
     auto_voice=work/'voice 35.wav';command([ff,'-v','error','-stream_loop','-1','-i',opening,'-t','35.37','-vn','-ac','1','-ar','48000','-y',auto_voice])
     qa_config=work/'gui config.json';gui_report=root/'GUI_FEATURE_REPORT.json'
     save_json(qa_config,{'project':str(project_file),'logo':str(clips/'logo.png'),'media':str(clips),'work':str(work/'gui checks'),'auto_voice':str(auto_voice),'auto_output':str(work/'gui auto outputs')})
-    command([exe,'--gui-qa-config',qa_config,'--gui-report',gui_report]);gui_features=json.loads(gui_report.read_text());assert gui_features['status']=='passed'
+    command([exe,'--gui-qa-config',qa_config,'--gui-report',gui_report]);gui_features=json.loads(gui_report.read_text(encoding='utf-8-sig'));assert gui_features['status']=='passed'
 assert all(digest(clips/name)==h for name,h in before.items())
 qa={'status':'passed','version':'2.1.0','platform':'Windows x64' if exe else 'Linux','frozen_exe_tested':frozen,'real_clip_model_used':True,'srt_skips_asr_verified':True,'mixed_image_video_import':True,'source_files_unchanged':True,'logo_pixels_verified':True,'burn_subtitle_pixels_verified':True,'soft_subtitle_track_verified':True,'mute_and_keep_source_audio_verified':True,'source_tone_verified':True,'manual_scene_split_merge_verified':True,'export_24_and_30fps_verified':True,'mp4_and_mkv_verified':True,'embedded_preview_rendered':True,'frozen_gui_preview_tested':frozen,'scene_cache_reused':True,'shared_feature_cache_hits':metrics['shared_cache_hits'],'full_decode_passed':True,'voice_alignment':r['audio_alignment'],'video_seconds':r['video_seconds'],'test_seconds':round(time.monotonic()-t,2),'media_fixtures_not_included_in_release':True}
 qa.update(all_20_effects_rendered=True,all_19_transitions_rendered=True,short_scene_60fps_rendered=True,gui_feature_checks=gui_features['checks'] if gui_features else {},gpu_hardware_encoding_not_exercised=True)

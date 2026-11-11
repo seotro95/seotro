@@ -51,7 +51,7 @@ class Context:
                     raise Cancelled('Đã dừng tiến trình.')
                 time.sleep(.15)
         if p.returncode:
-            detail = log.read_text(errors='replace')[-2500:] if log != Path(os.devnull) else ''
+            detail = log.read_text(encoding='utf-8',errors='replace')[-2500:] if log != Path(os.devnull) else ''
             raise RuntimeError(f'Lệnh thất bại ({Path(str(args[0])).name}): {detail}')
 
 def root_dir():

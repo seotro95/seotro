@@ -61,7 +61,7 @@ class SemanticModel:
 
 def decode_voice(voice: Path,job: Path,ctx: Context):
     out=job/'voice.wav';mark=job/'voice_fingerprint.json';sha=digest(voice)
-    if not out.exists() or not mark.exists() or json.loads(mark.read_text())['sha256']!=sha:
+    if not out.exists() or not mark.exists() or json.loads(mark.read_text(encoding='utf-8-sig'))['sha256']!=sha:
         ctx.run([binary('ffmpeg'),'-nostdin','-v','error','-y','-i',voice,'-map','0:a:0','-vn','-ac','1','-ar','48000','-c:a','pcm_s16le',out],log=job/'decode_voice.log')
         save_json(mark,{'sha256':sha,'source':str(voice)})
     with wave.open(str(out)) as w:duration=w.getnframes()/w.getframerate()
@@ -71,7 +71,7 @@ def decode_voice(voice: Path,job: Path,ctx: Context):
 def transcribe(wav: Path,job: Path,ctx: Context,model_name='base',language='en',model_path=None,threads=2,fast=False):
     marker=signature({'wav_sha':digest(wav),'model':str(model_path or model_name),'language':language,'fast':fast,'version':2})
     cache=job/'transcript.json'
-    if cache.exists() and json.loads(cache.read_text()).get('signature')==marker:return json.loads(cache.read_text())['cues']
+    if cache.exists() and json.loads(cache.read_text(encoding='utf-8-sig')).get('signature')==marker:return json.loads(cache.read_text(encoding='utf-8-sig'))['cues']
     from faster_whisper import WhisperModel
     ctx.emit(3,'Nhận dạng lời voice; lần đầu có thể cần tải model Whisper.')
     model=WhisperModel(str(model_path or model_name),device='cpu',compute_type='int8',cpu_threads=threads,num_workers=1,download_root=str(data_dir()/'models/whisper'))

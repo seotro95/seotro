@@ -15,10 +15,10 @@ def installed_effects():
     if not p.exists():
         bundled=root_dir()/'effect_packs';pack=bundled/'cinematic-extras.json';manifest=bundled/'manifest.json'
         try:
-            if hashlib.sha256(pack.read_text(encoding="utf-8").encode("utf-8")).hexdigest()==json.loads(manifest.read_text())['sha256']:p=pack
+            if hashlib.sha256(pack.read_text(encoding="utf-8").encode("utf-8")).hexdigest()==json.loads(manifest.read_text(encoding='utf-8-sig'))['sha256']:p=pack
             else:return BASE_EFFECTS
         except (OSError,ValueError,KeyError):return BASE_EFFECTS
-    try:d=json.loads(p.read_text());return list(dict.fromkeys(BASE_EFFECTS+[x for x in d['effects'] if x in NAMES]))
+    try:d=json.loads(p.read_text(encoding='utf-8-sig'));return list(dict.fromkeys(BASE_EFFECTS+[x for x in d['effects'] if x in NAMES]))
     except (OSError,ValueError,KeyError):return BASE_EFFECTS
 
 def install_pack(ctx,url=PACK_URL):

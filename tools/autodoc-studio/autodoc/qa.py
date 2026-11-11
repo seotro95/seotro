@@ -65,11 +65,11 @@ def run(config_path,report_path):
         fields({'resolution':1080,'fps':25,'quality':'fast','encoder':'cpu','full_verify':True});manual=work/'GUI manual export.mp4';gui.filedialog.asksaveasfilename=lambda **kwargs:str(manual);app.export_dialog()
         windows=[x for x in app.winfo_children() if isinstance(x,gui.tk.Toplevel)];win=windows[-1];next(x for x in win.winfo_children() if isinstance(x,gui.ttk.Button) and x.cget('text')=='Chọn nơi lưu và xuất').invoke()
         yield wait(lambda:ready() and app.last_export==str(manual.resolve()),'manual export dialog',240)
-        q=json.loads(manual.with_suffix('.qa.json').read_text());assert q['width']==1920 and q['fps']==25 and q['source_audio_kept'];checks['manual_export_dialog_1080p_25fps']=True
+        q=json.loads(manual.with_suffix('.qa.json').read_text(encoding='utf-8-sig'));assert q['width']==1920 and q['fps']==25 and q['source_audio_kept'];checks['manual_export_dialog_1080p_25fps']=True
         opened=[];gui.os.startfile=lambda path:opened.append(path);app.open_result();assert opened==[app.last_export];checks['open_exported_video_action']=True
         # Invoke the same visible button a user clicks, with no subtitle file.
         app.voice.set(cfg['auto_voice']);app.media.set(cfg['media']);app.output.set(cfg['auto_output']);app.subpath.set('')
-        fields({'resolution':720,'fps':24,'quality':'fast','encoder':'auto','whisper_model':'tiny','logo_path':'','mute_source':True,'subtitle_mode':'none','full_verify':True,'screen_minors':False,'auto_filename':'AUTO_GUI','export_format':'mp4'})
+        fields({'resolution':720,'fps':24,'quality':'fast','encoder':'auto','whisper_model':'tiny','logo_path':'','mute_source':True,'subtitle_mode':'none','full_verify':True,'screen_minors':False,'auto_filename':'AUTO_GUI_Đã dựng','export_format':'mp4'})
         app.auto_button.invoke()
         yield wait(lambda:ready() and app.last_auto_result is not None,'automatic GUI edit with actual ASR',300)
         result=app.last_auto_result;movie=Path(result['output']);assert movie.is_file() and result['workflow']=='automatic' and not result['asr_skipped'];p=load(result['project']);assert p['plan']['opening_shots']==10 and p['plan']['opening_seconds']==30 and p['plan']['opening_distinct_files']==10
@@ -100,4 +100,4 @@ def run(config_path,report_path):
             import traceback
             finish(False,traceback.format_exc())
     app.after(250,advance);app.mainloop()
-    if json.loads(report.read_text())['status']!='passed':raise RuntimeError('Kiểm thử giao diện chưa đạt. Xem GUI_FEATURE_REPORT.json.')
+    if json.loads(report.read_text(encoding='utf-8-sig'))['status']!='passed':raise RuntimeError('Kiểm thử giao diện chưa đạt. Xem GUI_FEATURE_REPORT.json.')
