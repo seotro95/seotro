@@ -46,6 +46,12 @@ jobs:
           }
           gh release edit $tag --repo $env:GITHUB_REPOSITORY --draft=false --latest=false
           if ($LASTEXITCODE -ne 0) { throw 'Publish failed' }
+      - name: Gather diagnostic logs
+        if: failure()
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force tools/autodoc-studio/diagnostics | Out-Null
+          Copy-Item "$env:LOCALAPPDATA/AutoDocStudio/application.log" tools/autodoc-studio/diagnostics/application.log -ErrorAction SilentlyContinue
       - name: Retain diagnostic logs on failure
         if: failure()
         uses: actions/upload-artifact@v4
@@ -56,6 +62,6 @@ jobs:
             tools/autodoc-studio/WINDOWS_TEST_REPORT.json
             tools/autodoc-studio/windows test/**/STATUS.json
             tools/autodoc-studio/windows test/**/KIEM_TRA_VIDEO.json
-            C:/Users/runneradmin/AppData/Local/AutoDocStudio/application.log
+            tools/autodoc-studio/diagnostics/*
           if-no-files-found: ignore
           retention-days: 7

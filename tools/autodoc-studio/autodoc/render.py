@@ -67,17 +67,27 @@ def validate_output(output,voice,plan,job,ctx):
     ctx.run([binary('ffmpeg'),'-nostdin','-v','error','-xerror','-threads','1','-i',output,'-map','0:v:0','-map','0:a:0','-f','null','-'],log=job/'full_decode.log')
     # Compare actual audio, rather than trusting a matching subtitle or filename.
     lags=[];duration=plan['voice_seconds']
-    for second in sorted(set(round(duration*x,3) for x in [.08,.25,.5,.75,.92] if duration*x>1)):
-        def pcm(path,extra=0):
-            data=ctx.run([binary('ffmpeg'),'-nostdin','-v','error','-ss',str(second-extra),'-i',path,'-t',str(1+extra*2),'-map','0:a:0','-ac','1','-ar','8000','-f','s16le','-'],capture=True)
-            return np.frombuffer(data,dtype='<i2').astype(np.float32)
-        ref=pcm(voice);test=pcm(output,.05)
-        if len(ref)<4000 or len(test)<len(ref):continue
-        ref-=ref.mean();test-=test.mean()
-        if np.linalg.norm(ref)<1:continue
-        k=int(np.argmax(np.correlate(test,ref,mode='valid')));matched=test[k:k+len(ref)]
-        corr=float(np.dot(matched,ref)/(np.linalg.norm(matched)*np.linalg.norm(ref)+1e-8));lag=(k-400)/8000
-        if abs(lag)>.025 or corr<.9:raise RuntimeError(f'Đồng bộ voice chưa đạt tại{second}s: lệch{lag:.3f}s.')
-        lags.append({'at_seconds':second,'lag_seconds':lag,'correlation':round(corr,6)})
+    def full_pcm(path):
+        data=ctx.run([binary('ffmpeg'),'-nostdin','-v','error','-i',path,'-map','0:a:0','-ac','1','-ar','8000','-f','s16le','-'],capture=True)
+        return np.frombuffer(data,dtype='<i2').astype(np.float32)
+    reference=full_pcm(voice);actual=full_pcm(output);n=8000;pad=400;selected=set()
+    # Decode once, then compare sample indices. Seeking AAC separately can reset
+    # its overlap/filter state and gives unreliable correlations near quiet words.
+    for fraction in [.08,.25,.5,.75,.92]:
+        target=round(duration*fraction*8000)
+        lo=max(pad,target-12000);hi=min(len(reference)-n-pad,target+12000)
+        candidates=list(range(lo,max(lo+1,hi+1),2000))
+        candidates=[c for c in candidates if c+n<=len(reference) and c-pad>=0 and c+n+pad<=len(actual)]
+        if not candidates:continue
+        c=max(candidates,key=lambda t:float(np.mean(reference[t:t+n]**2)))
+        if c in selected:continue
+        selected.add(c);ref=reference[c:c+n].copy();test=actual[c-pad:c+n+pad].copy();ref-=ref.mean();test-=test.mean()
+        rms=float(np.sqrt(np.mean(ref**2)))
+        if rms<40:continue  # Quiet noise is not a trustworthy speech alignment anchor.
+        k=int(np.argmax(np.correlate(test,ref,mode='valid')));matched=test[k:k+n]
+        corr=float(np.dot(matched,ref)/(np.linalg.norm(matched)*np.linalg.norm(ref)+1e-8));lag=(k-pad)/8000
+        if abs(lag)>.025 or corr<.9:raise RuntimeError(f'Đồng bộ voice chưa đạt tại{c/8000:.3f}s: lệch{lag:.3f}s,tương quan{corr:.3f}.')
+        lags.append({'at_seconds':round(c/8000,3),'lag_seconds':lag,'correlation':round(corr,6),'reference_rms':round(rms,2)})
+    if not lags:raise RuntimeError('Voice quá nhỏ/ít tiếng để xác minh đồng bộ đáng tin cậy.')
     result={'status':'passed','file':output.name,'voice_seconds':duration,'video_seconds':float(v['duration']),'audio_seconds':float(a['duration']),'frames':int(v['nb_frames']),'fps':plan['fps'],'width':v['width'],'height':v['height'],'audio_streams':1,'clip_audio_included':False,'music_added':False,'original_voice_timing_and_pitch_preserved':True,'audio_alignment':lags,'full_decode_exit_code':0,'opening_shots':plan['opening_shots'],'opening_distinct_source_files':plan['opening_distinct_files'],'substitution_still_images':0,'warnings':plan['warnings'],'bytes':output.stat().st_size,'sha256':hashlib.file_digest(output.open('rb'),'sha256').hexdigest()}
     save_json(job/'KIEM_TRA_VIDEO.json',result);return result
