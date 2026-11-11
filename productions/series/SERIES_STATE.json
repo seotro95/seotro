@@ -5,7 +5,21 @@
   "resume_file": "productions/TIEP_TUC_TU_DAY.md",
   "topic_index": "productions/series/TOPICS_001_100.csv",
   "shared_voice_profiles": "productions/series/VOICE_PROFILES_LOCKED.json",
-  "active_topic": null,
+  "active_topic": {
+    "id": 38,
+    "title": "Các cây cầu đất xuất hiện và biến mất qua những chu kỳ băng hà",
+    "phase": "documents_published_voice_preflight_running",
+    "target_seconds": 1352,
+    "work_branch": "codex/land-bridges38-production-20261111",
+    "documents_release": "https://github.com/seotro95/seotro/releases/tag/land-bridges-video-38-22m32s",
+    "voice_workflow_run_id": 43048673122,
+    "voice_workflow_url": "https://github.com/seotro95/seotro/actions/runs/43048673122",
+    "english_script_words": 3581,
+    "english_cues": 136,
+    "unique_prompts": 120,
+    "prompt_txt_files": 12,
+    "reused_slots": 16
+  },
   "next_topic_id": 5,
   "user_preferences": {
     "language_for_collaboration": "Vietnamese",
@@ -320,7 +334,7 @@
     {
       "id": 38,
       "title": "Các cây cầu đất xuất hiện và biến mất qua những chu kỳ băng hà.",
-      "status": "queued"
+      "status": "documents_delivered_voices_in_progress"
     },
     {
       "id": 39,
@@ -901,7 +915,7 @@
     "video_release_published_at": "2026-11-10T08:25:05Z",
     "video_download_verified": true
   },
-  "last_requested_topic_id": 28,
+  "last_requested_topic_id": 38,
   "topic5_explicitly_left_queued": true,
   "completed_topic_6": {
     "id": 6,
@@ -1200,7 +1214,7 @@
   },
   "latest_completed_topic_id": 28,
   "auto_start_next_topic": false,
-  "handoff_next_action": "Read completed_topic_28, its editing workflow, and EDITING_TOOL.json. Wait for a specific next user request; do not auto-start queued topic5 or topic29.",
+  "handoff_next_action": "Continue topic38 currently running: inspect Actions43048673122 and work branch codex/land-bridges38-production-20261111. Documents are public;17voices not yet declared complete. Preserve locked voice IDs. Do not auto-start any other topic.",
   "completed_topic_28": {
     "id": 28,
     "title": "Chagyrskaya: bằng chứng di truyền về quan hệ gia đình thời tiền sử.",

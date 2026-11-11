@@ -1,0 +1,22 @@
+{
+  "id": 38,
+  "title": "Các cây cầu đất xuất hiện và biến mất qua những chu kỳ băng hà",
+  "phase": "documents_published_voice_preflight_running",
+  "target_seconds": 1352,
+  "work_branch": "codex/land-bridges38-production-20261111",
+  "documents_release": "https://github.com/seotro95/seotro/releases/tag/land-bridges-video-38-22m32s",
+  "voice_workflow_run_id": 43048673122,
+  "voice_workflow_url": "https://github.com/seotro95/seotro/actions/runs/43048673122",
+  "english_script_words": 3581,
+  "english_cues": 136,
+  "unique_prompts": 120,
+  "prompt_txt_files": 12,
+  "reused_slots": 16,
+  "voice_count_requested": 17,
+  "gender_rule": "16male;Hmongfemale3",
+  "all_voice_ids_preserved": true,
+  "documents_workflow_run_id": 43014124764,
+  "target_pcm_frames_48000": 64896000,
+  "script_profile_source": "productions/series/VOICE_PROFILES_LOCKED.json",
+  "voice_dialect_native_review_pending": true
+}
