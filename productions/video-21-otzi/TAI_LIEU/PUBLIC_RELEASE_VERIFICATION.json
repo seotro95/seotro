@@ -1,0 +1,16 @@
+{
+  "release": "https://github.com/seotro95/seotro/releases/tag/otzi-video-21-20m42s",
+  "public": true,
+  "asset_count": 41,
+  "all_asset_sizes_and_github_sha256_digests_matched": true,
+  "individual_mp3_public_head200_count": 17,
+  "full_voice_archive_redownload_verified": true,
+  "voice_archive_sha256": "cc9e9549752c1ce01be722d05ef25a5ece32f7601a37033ba8ae8ec18a20ab21",
+  "voice_archive_bytes": 253420695,
+  "all17_archived_mp3_sha256_matched": true,
+  "full_document_archive_redownload_verified": true,
+  "native_workflow_run": 42957590549,
+  "publication_workflow_run": 42959221483,
+  "voice_decoded_seconds": 1242,
+  "native_linguistic_review_pending": true
+}
