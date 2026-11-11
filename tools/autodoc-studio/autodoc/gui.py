@@ -11,9 +11,9 @@ from .player import Player,scene_preview
 
 class App(tk.Tk):
     def __init__(self):
-        super().__init__();self.title('AutoDoc Studio 2.0 — Voice • Ảnh • Video');self.geometry('1360x860');self.minsize(1080,720);self.p=None;self.busy=False;self.cancel=threading.Event();self.queue=queue.Queue();self.last_export='';self.selected=0;self.preview_pending=None
+        super().__init__();self.title('AutoDoc Studio 2.1 — Tự động edit đầy đủ');self.geometry('1360x900');self.minsize(1080,760);self.p=None;self.busy=False;self.cancel=threading.Event();self.queue=queue.Queue();self.last_export='';self.last_auto_result=None;self.selected=0;self.preview_pending=None
         self.vars={};self.edit={};self.cuevars={};self.preferences=data_dir()/'preferences_v2.json'
-        self.voice=tk.StringVar();self.media=tk.StringVar();self.output=tk.StringVar(value=str(Path.home()/'Videos'/'AutoDocStudio'));self.subpath=tk.StringVar();self.status=tk.StringVar(value='Chọn voice và thư mục ảnh/video → Tự xếp cảnh → Xem/sửa → Xuất video.')
+        self.voice=tk.StringVar();self.media=tk.StringVar();self.output=tk.StringVar(value=str(Path.home()/'Videos'/'AutoDocStudio'));self.subpath=tk.StringVar();self.status=tk.StringVar(value='Chọn voice và thư mục ảnh/video → TỰ ĐỘNG EDIT & XUẤT. Hoặc Tự xếp cảnh để sửa trước khi xuất.')
         self.stylevars={k:(tk.BooleanVar(value=v) if isinstance(v,bool) else tk.StringVar(value=str(v))) for k,v in DEFAULTS['subtitle_style'].items()}
         for k,v in DEFAULTS.items():
             if k in ['subtitle_style','clip_model_path','whisper_model_path','subtitle_path']:continue
@@ -37,9 +37,12 @@ class App(tk.Tk):
     def build(self):
         top=ttk.LabelFrame(self,text='Đầu vào');top.pack(fill='x',padx=10,pady=5)
         self.file_row(top,'Voice chính',self.voice,types=[('Âm thanh','*.wav *.mp3 *.m4a *.flac *.aac *.ogg'),('Tất cả','*.*')]);self.file_row(top,'Ảnh / video',self.media,'dir');self.file_row(top,'Nơi lưu dự án',self.output,'dir');self.file_row(top,'Phụ đề (tùy chọn)',self.subpath,types=[('TXT / SRT','*.txt *.srt')])
+        auto=ttk.Frame(self);auto.pack(fill='x',padx=10,pady=3);ttk.Style(self).configure('Auto.TButton',font=('Segoe UI',10,'bold'),padding=(10,6))
+        self.auto_button=ttk.Button(auto,text='TỰ ĐỘNG EDIT & XUẤT',style='Auto.TButton',command=lambda:self.safe(self.auto_edit));self.auto_button.pack(side='left')
+        ttk.Label(auto,text='Một lần bấm: tự xếp cảnh, ghép voice, áp dụng logo/phụ đề và lưu video.').pack(side='left',padx=10)
+        ttk.Button(auto,text='Dừng tác vụ',command=lambda:self.cancel.set()).pack(side='right')
         bar=ttk.Frame(self);bar.pack(fill='x',padx=10)
         for text,fn in [('① Tự xếp cảnh',self.analyze),('Mở dự án',self.open_project),('Lưu dự án',self.save_project),('② Xuất video…',self.export_dialog),('Mở video đã xuất',self.open_result)]:self.button(bar,text,fn).pack(side='left',padx=3,pady=4)
-        ttk.Button(bar,text='Dừng tác vụ',command=lambda:self.cancel.set()).pack(side='right')
         area=ttk.Panedwindow(self,orient='horizontal');area.pack(fill='both',expand=True,padx=10,pady=5)
         left=ttk.Frame(area);right=ttk.Frame(area,width=405);area.add(left,weight=3);area.add(right,weight=2)
         self.player=Player(left,on_focus=self.set_focus);self.player.pack(fill='both',expand=True)
@@ -77,6 +80,7 @@ class App(tk.Tk):
         self.file_row(brand,'Logo PNG/JPG',self.vars['logo_path'],types=[('Ảnh','*.png *.jpg *.webp *.bmp')]);self.combo(brand,'Vị trí logo',self.vars['logo_position'],['top_left','top_right','bottom_left','bottom_right','center']);self.entry(brand,'Rộng logo (% hình)',self.vars['logo_size']);self.entry(brand,'Độ hiện (0–1)',self.vars['logo_opacity'])
         ttk.Label(brand,text='Để trống đường dẫn để bỏ logo. PNG hỗ trợ nền trong suốt.',wraplength=370).pack(anchor='w',pady=5)
         ttk.Checkbutton(brand,text='Tắt âm thanh clip gốc (chỉ giữ voice)',variable=self.vars['mute_source']).pack(anchor='w',pady=8);self.entry(brand,'Âm lượng clip (0–1)',self.vars['source_volume']);ttk.Label(brand,text='Bỏ chọn để trộn tiếng clip với voice. Ảnh tự có tiếng nền im lặng.',wraplength=380).pack(anchor='w');self.button(brand,'Áp dụng logo / tiếng',self.apply_settings).pack(fill='x',pady=8)
+        self.combo(config,'Độ phân giải xuất',self.vars['resolution'],[720,1080]);self.combo(config,'Khung/giây',self.vars['fps'],[24,25,30,60]);self.combo(config,'Mã hóa',self.vars['encoder'],['auto','cpu','nvenc','qsv','amf']);self.combo(config,'Định dạng tự động',self.vars['export_format'],['mp4','mkv']);self.entry(config,'Tên video tự động',self.vars['auto_filename'])
         self.combo(config,'Chế độ tốc độ',self.vars['quality'],['fast','balanced','quality']);self.combo(config,'Whisper',self.vars['whisper_model'],['tiny','base','small']);self.entry(config,'Ngôn ngữ voice',self.vars['language']);self.combo(config,'CPU nhận dạng',self.vars['threads'],['1','2','4','8']);self.combo(config,'Khung hình',self.vars['fit'],['fill','contain'])
         for k,t in [('auto_effects','Tự tạo chuyển động cho ảnh'),('auto_transitions','Tự chọn chuyển cảnh nhẹ'),('screen_minors','Lọc trẻ em ước lượng bằng AI'),('full_verify','Kiểm tra giải mã toàn phim sau xuất')]:ttk.Checkbutton(config,text=t,variable=self.vars[k]).pack(anchor='w',pady=4)
         ttk.Label(config,text='fast: 1 mẫu/cảnh + Whisper nhanh. balanced/quality: 3 mẫu/cảnh. Có SRT đúng mốc thì bỏ qua Whisper. Cache AI dùng lại giữa dự án. Các tùy chọn AI áp dụng khi Tự xếp cảnh lại.',wraplength=370).pack(anchor='w',pady=10)
@@ -124,6 +128,18 @@ class App(tk.Tk):
         voice,media,out=self.voice.get().strip(),self.media.get().strip(),self.output.get().strip();settings=self.settings()
         if self.p and not messagebox.askyesno('Xếp lại cảnh','Tạo bản xếp cảnh mới? Hãy lưu các chỉnh sửa muốn giữ trước.'):return
         self.worker(lambda ctx:prepare(voice,media,out,settings,ctx),self.accept_project)
+    def auto_edit(self):
+        from .pipeline import automatic
+        voice,media,out=self.voice.get().strip(),self.media.get().strip(),self.output.get().strip();settings=self.settings()
+        if not voice or not media or not out:raise ValueError('Chọn voice, thư mục ảnh/video và nơi lưu trước.')
+        # Preserve the current editable project before a separate automatic job.
+        if self.p:
+            import time
+            snapshot=copy.deepcopy(self.p);history=Path(snapshot['job'])/'history'/f'before_auto_{time.time_ns()}.json';save(snapshot,history)
+        self.last_auto_result=None
+        self.worker(lambda ctx:automatic(voice,media,out,settings,ctx),self.auto_finished)
+    def auto_finished(self,result):
+        self.last_auto_result=result;self.accept_project(load(result['project']));self.exported(result)
     def accept_project(self,p):
         self.p=p;self.selected=0;self.restore_settings();self.voice.set(p['voice_source']);self.media.set(p['media_folder']);self.refresh();self.status.set(f'Đã xếp {len(p["plan"]["shots"])} cảnh. Chọn cảnh để sửa và xem trước.');self.select_index(0)
     def require(self):
@@ -160,7 +176,9 @@ class App(tk.Tk):
         except Exception:self.p['plan']['shots'][self.selected]=s;raise
         self.refresh();self.select_index(self.selected)
     def apply_settings(self):
-        self.require();self.p['settings']=self.settings();self.request_preview()
+        settings=self.settings()
+        if self.p:self.p['settings']=settings;self.request_preview()
+        else:self.status.set('Đã chọn cài đặt. Bấm TỰ ĐỘNG EDIT & XUẤT để bắt đầu.')
     def set_focus(self,x,y):
         if self.busy or not self.p:return
         self.edit['focus_x'].set(f'{x:.3f}');self.edit['focus_y'].set(f'{y:.3f}');self.safe(self.apply_scene)

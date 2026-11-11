@@ -1,4 +1,10 @@
-# AutoDoc Studio 2.0
+# AutoDoc Studio 2.1 — bản đầy đủ chức năng
+
+**TỰ ĐỘNG EDIT & XUẤT**: chọn voice, thư mục ảnh/video và nơi lưu rồi bấm một lần. Tool nhận lời (hoặc dùng TXT/SRT), chọn cảnh, dựng mở đầu, ghép voice, áp dụng logo/phụ đề theo cài đặt, xuất video và lưu dự án. Không dừng để yêu cầu bấm Xuất lần nữa. Các lần xuất trùng tên được đánh số để giữ bản trước. Có thể mở dự án đi kèm để sửa tiếp.
+
+Tab **AI / xuất** chọn độ phân giải, FPS, chất lượng, CPU/GPU, MP4/MKV và tên video tự động trước khi bắt đầu. Mặc định 720p/24 FPS, chỉ giữ voice. Thư mục `TU_DONG_EDIT` chứa các dự án tự động; file `.autodoc.json` cùng tên video là bản dự án của đúng lần xuất đó.
+
+Bản Full chứa toàn bộ chức năng và 20 preset hiệu ứng sẵn có, không cần mua thêm hoặc cài Python. Lần đầu vẫn cần Internet để tool tự tải FFmpeg và model AI vào cache; ZIP không kèm các tệp lớn này. Những lần sau dùng lại cache.
 
 Tool Windows dựng phim từ voice và thư mục **ảnh + video**, có xem trước và chỉnh cảnh. Voice quyết định thời lượng. Các tệp nguồn được giữ nguyên.
 
@@ -31,7 +37,8 @@ AI chọn cảnh theo tương đồng, không đảm bảo hiểu đúng mọi c
 Python 3.12 x64: chạy `CAI_DAT.bat`, sau đó `MO_TOOL.bat`. Linux cần FFmpeg trong PATH và thư viện Tk; giọng preview dùng MCI trên Windows, trên Linux preview hình vẫn hoạt động.
 
 ```text
-python main.py --voice narration.wav --media media_folder --output projects --settings settings.json --prepare-only --result-json result.json
+python main.py --auto-edit --voice narration.wav --media media_folder --output projects --settings settings.json --result-json result.json
+python main.py --voice narration.wav --media media_folder --output projects --prepare-only --result-json result.json
 python main.py --project project.autodoc.json --export-to finished.mp4 --result-json result.json
 ```
 

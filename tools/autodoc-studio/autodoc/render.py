@@ -181,5 +181,5 @@ def export_movie(p,out,ctx):
     ctx.run(cmd+[candidate],log=job/'export.log')
     from .validation import validate_output
     report=validate_output(candidate,voice,p,ctx)
-    candidate.replace(out);report.update(file=out.name,output=str(out),codec_requested=settings['encoder'],encoder_selected=codec,source_audio_kept=mixed,source_volume=settings['source_volume'] if mixed else 0,logo_applied=bool(settings.get('logo_path')),subtitle_mode=settings['subtitle_mode'],version='2.0.1')
+    candidate.replace(out);report.update(file=out.name,output=str(out),codec_requested=settings['encoder'],encoder_selected=codec,source_audio_kept=mixed,source_volume=settings['source_volume'] if mixed else 0,logo_applied=bool(settings.get('logo_path')),subtitle_mode=settings['subtitle_mode'],version='2.1.0')
     save_json(out.with_suffix('.qa.json'),report);save_json(job/'KIEM_TRA_VIDEO.json',report);ctx.emit(100,'Đã lưu video và báo cáo kiểm tra.');return {'output':str(out),'project':p['project_file'],'report':report}

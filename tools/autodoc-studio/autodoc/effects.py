@@ -1,6 +1,6 @@
 import hashlib,json,urllib.request
 from pathlib import Path
-from .common import data_dir,save_json
+from .common import data_dir,root_dir,save_json
 
 TRANSITIONS={'cut':'Cắt thẳng','dissolve':'Hòa hình','fade':'Mờ chuyển','wipeleft':'Lau trái','wiperight':'Lau phải','slideleft':'Trượt trái','slideright':'Trượt phải','smoothleft':'Trượt mượt trái','smoothright':'Trượt mượt phải','circleopen':'Mở tròn','circleclose':'Đóng tròn','fadeblack':'Qua nền đen','fadewhite':'Qua nền trắng','pixelize':'Điểm ảnh','radial':'Tỏa tròn','diagtl':'Chéo góc','hlslice':'Lát ngang','vertopen':'Mở dọc','squeezeh':'Ép ngang'}
 TRANSITION_NAMES=TRANSITIONS
@@ -12,7 +12,12 @@ PACK_URL='https://raw.githubusercontent.com/seotro95/seotro/codex/beringia-video
 
 def installed_effects():
     p=data_dir()/'effects/installed.json'
-    if not p.exists():return BASE_EFFECTS
+    if not p.exists():
+        bundled=root_dir()/'effect_packs';pack=bundled/'cinematic-extras.json';manifest=bundled/'manifest.json'
+        try:
+            if hashlib.sha256(pack.read_text(encoding="utf-8").encode("utf-8")).hexdigest()==json.loads(manifest.read_text())['sha256']:p=pack
+            else:return BASE_EFFECTS
+        except (OSError,ValueError,KeyError):return BASE_EFFECTS
     try:d=json.loads(p.read_text());return list(dict.fromkeys(BASE_EFFECTS+[x for x in d['effects'] if x in NAMES]))
     except (OSError,ValueError,KeyError):return BASE_EFFECTS
 

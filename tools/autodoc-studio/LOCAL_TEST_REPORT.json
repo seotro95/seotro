@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "platform": "Linux",
   "frozen_exe_tested": false,
   "real_clip_model_used": true,
@@ -48,6 +48,11 @@
     }
   ],
   "video_seconds": 21.375,
-  "test_seconds": 18.17,
-  "media_fixtures_not_included_in_release": true
+  "test_seconds": 26.59,
+  "media_fixtures_not_included_in_release": true,
+  "all_20_effects_rendered": true,
+  "all_19_transitions_rendered": true,
+  "short_scene_60fps_rendered": true,
+  "gui_feature_checks": {},
+  "gpu_hardware_encoding_not_exercised": true
 }

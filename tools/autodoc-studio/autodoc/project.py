@@ -1,5 +1,5 @@
 from __future__ import annotations
-import copy,json,math
+import copy,json,math,re
 from pathlib import Path
 from .common import save_json
 from .subtitles import DEFAULT_STYLE,style,validate
@@ -9,6 +9,11 @@ DEFAULTS={'resolution':720,'fps':24,'quality':'fast','encoder':'auto','threads':
 
 def options(value=None):
     d={**copy.deepcopy(DEFAULTS),**(value or {})};d['subtitle_style']=style(d['subtitle_style'])
+    d.setdefault('export_format','mp4');d.setdefault('auto_filename','VIDEO_HOAN_CHINH')
+    d['auto_filename']=str(d['auto_filename']).strip()
+    if d['export_format'] not in ['mp4','mkv']:raise ValueError('Định dạng xuất cần MP4 hoặc MKV.')
+    name=d['auto_filename']
+    if not name or len(name)>100 or re.search(r'[<>:"/\\|?*\x00-\x1f]',name) or name.endswith(('.', ' ')) or name.split('.')[0].upper() in ['CON','PRN','AUX','NUL']+[f'{p}{i}' for p in ['COM','LPT'] for i in range(1,10)]:raise ValueError('Tên video tự động không hợp lệ; chỉ nhập tên, không nhập đường dẫn.')
     d['threads']=int(d['threads']);d['fps']=int(d['fps']);d['resolution']=int(d['resolution'])
     for k in ['source_volume','logo_size','logo_opacity']:d[k]=float(d[k])
     if not 1<=d['threads']<=16:raise ValueError('CPU nhận dạng cần từ 1 đến 16 luồng.')
@@ -18,6 +23,8 @@ def options(value=None):
     if d['subtitle_mode'] not in ['none','soft','burn'] or d['fit'] not in ['fill','contain']:raise ValueError('Tùy chọn hiển thị không hợp lệ.')
     if d['logo_position'] not in ['top_left','top_right','bottom_left','bottom_right','center']:raise ValueError('Vị trí logo không hợp lệ.')
     return d
+
+DEFAULTS.update(export_format='mp4',auto_filename='VIDEO_HOAN_CHINH')
 
 def reindex(project):
     plan=project['plan'];cursor=0

@@ -1,5 +1,5 @@
 from __future__ import annotations
-import json,time
+import copy,json,time
 from pathlib import Path
 from .common import Context,digest,signature,save_json,valid_input
 from .project import options,reindex,save,validate_project,change_fps
@@ -15,7 +15,7 @@ def prepare(voice,media,output,settings=None,ctx=None):
     ensure_ffmpeg(ctx);output.mkdir(parents=True,exist_ok=True);start=time.monotonic()
     key=signature({'voice':digest(voice),'media':str(media),'subtitles':digest(Path(settings['subtitle_path'])) if settings['subtitle_path'] else '', 'quality':settings['quality'],'model':settings['whisper_model'],'language':settings['language'],'screen_minors':settings['screen_minors']})[:12]
     job=output/f'AutoDoc2_{key}';job.mkdir(exist_ok=True)
-    save_json(job/'PROJECT.json',{'app':'AutoDocStudio','version':'2.0.1','originals_modified':False})
+    save_json(job/'PROJECT.json',{'app':'AutoDocStudio','version':'2.1.0','originals_modified':False})
     wav,duration,voice_sha=decode_voice(voice,job,ctx);sub=Path(settings['subtitle_path']) if settings['subtitle_path'] else None
     skipped_asr=bool(sub and sub.suffix.lower()=='.srt');ratio=None
     if skipped_asr:cues=read_srt(sub,duration);ctx.emit(13,'Dùng mốc SRT: bỏ qua nhận dạng voice.')
@@ -34,11 +34,32 @@ def prepare(voice,media,output,settings=None,ctx=None):
         s.update(effect='zoom_in' if image and settings['auto_effects'] else 'none',speed=1.,focus_x=.5,focus_y=.5)
         if not settings['auto_transitions']:s['transition']='cut'
     if ratio is not None and ratio<.55:plan['warnings'].append(f'TXT chỉ khớp {ratio:.0%} từ nhận dạng; hãy sửa mốc phụ đề trên tool.')
-    p={'schema':'autodoc-project-2','version':'2.0.1','job':str(job),'project_file':str(job/'project.autodoc.json'),'voice_source':str(voice),'voice_sha256':voice_sha,'voice_wav':str(wav),'media_folder':str(media),'settings':settings,'files':files,'cues':validate(cues,duration),'plan':plan,'skipped_files':skipped,'asr_skipped':skipped_asr,'txt_alignment_ratio':ratio,'prepare_seconds':round(time.monotonic()-start,3)}
+    p={'schema':'autodoc-project-2','version':'2.1.0','job':str(job),'project_file':str(job/'project.autodoc.json'),'voice_source':str(voice),'voice_sha256':voice_sha,'voice_wav':str(wav),'media_folder':str(media),'settings':settings,'files':files,'cues':validate(cues,duration),'plan':plan,'skipped_files':skipped,'asr_skipped':skipped_asr,'txt_alignment_ratio':ratio,'prepare_seconds':round(time.monotonic()-start,3)}
     reindex(p);save(p);export(p['cues'],job/'LOI_DOC.srt');save_json(job/'EDIT_PLAN.json',plan);ctx.emit(54,'Dự án sẵn sàng: chọn cảnh để xem/sửa, sau đó bấm Xuất video.');return p
 
 def run(voice,media,output,settings=None,ctx=None,prepare_only=False):
-    p=prepare(voice,media,output,settings,ctx)
-    if prepare_only:return {'project':p['project_file'],'prepared':True,'asr_skipped':p['asr_skipped']}
+    if prepare_only:
+        p=prepare(voice,media,output,settings,ctx)
+        return {'project':p['project_file'],'prepared':True,'asr_skipped':p['asr_skipped']}
+    return automatic(voice,media,output,settings,ctx)
+
+def next_output(folder,name,extension):
+    folder=Path(folder)
+    for number in range(1,100000):
+        stem=name if number==1 else f'{name}_{number:03d}'
+        path=folder/f'{stem}.{extension}'
+        if not any(x.exists() for x in [path,path.with_name(stem+'.checking.'+extension),path.with_suffix('.qa.json'),path.with_suffix('.autodoc.json')]):return path
+    raise ValueError('Quá nhiều bản xuất trùng tên. Chọn tên video khác.')
+
+def automatic(voice,media,output,settings=None,ctx=None):
+    """One uninterrupted workflow, also used by the actual GUI button."""
     from .render import export_movie
-    return export_movie(p,Path(p['job'])/'VIDEO_HOAN_CHINH.mp4',ctx or Context())
+    ctx=ctx or Context();settings=options(settings);ctx.emit(0,'Tự động edit: nhận lời → chọn cảnh → dựng → xuất và lưu dự án.')
+    p=prepare(voice,media,Path(output)/'TU_DONG_EDIT',settings,ctx)
+    out=next_output(p['job'],settings['auto_filename'],settings['export_format'])
+    ctx.emit(54,'Đã xếp cảnh; tự động xuất ngay, không cần thao tác thêm.')
+    result=export_movie(p,out,ctx)
+    snapshot=copy.deepcopy(p);project_path=out.with_suffix('.autodoc.json');save(snapshot,project_path)
+    result.update(project=str(project_path),workflow='automatic',asr_skipped=p['asr_skipped'])
+    save_json(Path(p['job'])/'AUTO_LAST_RESULT.json',result);ctx.emit(100,'Tự động edit hoàn tất. Đã lưu video, phụ đề, dự án và báo cáo kiểm tra.')
+    return result

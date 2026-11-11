@@ -7,15 +7,18 @@ if getattr(sys,'frozen',False) and sys.stdout is None:
 
 def main():
     parser=argparse.ArgumentParser(description='AutoDoc Studio 2 — local voice/image/video editor')
-    for name in ['voice','videos','media','output','project','export-to','settings','result-json','doctor-output','gui-report']:parser.add_argument('--'+name)
-    parser.add_argument('--prepare-only',action='store_true');parser.add_argument('--doctor',action='store_true');parser.add_argument('--gui-smoke',action='store_true')
+    for name in ['voice','videos','media','output','project','export-to','settings','result-json','doctor-output','gui-report','gui-qa-config']:parser.add_argument('--'+name)
+    parser.add_argument('--prepare-only',action='store_true');parser.add_argument('--auto-edit',action='store_true',help='Tự xếp cảnh và xuất hoàn chỉnh.');parser.add_argument('--doctor',action='store_true');parser.add_argument('--gui-smoke',action='store_true')
     args=parser.parse_args()
     try:
+        if args.gui_qa_config:
+            from autodoc.qa import run
+            run(args.gui_qa_config,args.gui_report);return
         if args.doctor:
             from autodoc.bootstrap import ensure_ffmpeg
             from autodoc.common import Context,binary
             ensure_ffmpeg(Context(lambda *_:None));import av,ctranslate2,faster_whisper,numpy,onnxruntime,tokenizers,tkinter
-            result={'status':'ready','version':'2.0.1','ffmpeg':binary('ffmpeg'),'ffprobe':binary('ffprobe'),'tk_version':tkinter.TkVersion,'onnx':onnxruntime.__version__}
+            result={'status':'ready','version':'2.1.0','ffmpeg':binary('ffmpeg'),'ffprobe':binary('ffprobe'),'tk_version':tkinter.TkVersion,'onnx':onnxruntime.__version__}
             if args.doctor_output:Path(args.doctor_output).write_text(json.dumps(result),encoding='utf-8')
         elif args.gui_smoke:
             from autodoc.gui import App

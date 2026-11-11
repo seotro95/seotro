@@ -32,6 +32,12 @@ class EditorTests(unittest.TestCase):
         d=options();self.assertTrue(d['mute_source']);self.assertEqual(d['encoder'],'auto')
         with self.assertRaises(ValueError):options({'source_volume':-1})
         with self.assertRaises(ValueError):options({'threads':999})
+    def test_automatic_export_keeps_previous_results_and_rejects_paths(self):
+        from autodoc.pipeline import next_output
+        with tempfile.TemporaryDirectory() as tmp:
+            folder=Path(tmp);first=folder/'My film.mp4';first.write_bytes(b'completed video');second=next_output(folder,'My film','mp4');self.assertEqual(second.name,'My film_002.mp4');second.with_suffix('.autodoc.json').write_text('{}');self.assertEqual(next_output(folder,'My film','mp4').name,'My film_003.mp4');self.assertEqual(first.read_bytes(),b'completed video')
+        for name in ['../film','CON','x:y','name.']:
+            with self.assertRaises(ValueError):options({'auto_filename':name})
     def test_export_temporary_path_cannot_overwrite_source(self):
         from autodoc.render import export_movie
         from autodoc.common import Context

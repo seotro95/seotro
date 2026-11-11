@@ -7,9 +7,11 @@ from autodoc.common import Context,binary,digest,probe,save_json
 from autodoc.bootstrap import ensure_ffmpeg
 from autodoc.project import load,save,split,merge_previous
 from autodoc.player import scene_preview
+from autodoc.render import render_shot
+from autodoc.effects import FILTERS,MOTIONS,TRANSITIONS
 
 root=Path(__file__).resolve().parent;exe=Path(sys.argv[1]).resolve() if len(sys.argv)>1 else None
-work=root/('windows test' if exe else 'local test')/'Nguon thu nghiem';work.mkdir(parents=True,exist_ok=True)
+work=Path(os.environ.get('AUTODOC_TEST_WORK',str(root/('windows test' if exe else 'local test')/'Nguon thu nghiem')));work.mkdir(parents=True,exist_ok=True)
 ensure_ffmpeg(Context());ff=binary('ffmpeg');ctx=Context();frozen=bool(exe)
 def command(args):subprocess.run([str(x) for x in args],check=True)
 def app(args,result):
@@ -66,6 +68,18 @@ preview=scene_preview(p,1,ctx);assert Path(preview[0]).is_file() and Path(previe
 app(['--project',project_file,'--settings',work/'mix.json','--export-to',work/'Mixed export.mkv'],result)
 if exe:
     gui=work/'gui.json';command([exe,'--gui-smoke','--project',project_file,'--gui-report',gui]);g=json.loads(gui.read_text());assert g['status']=='passed' and g['preview_loaded'] and g['preview_frame_displayed']
+# Render every named built-in preset rather than merely checking UI labels.
+fx=copy.deepcopy(p);fx['settings'].update(logo_path='',subtitle_mode='none');item=copy.deepcopy(p['plan']['shots'][0]);item.update(frames=24,start_frame=0,end_frame=24,last=False,effect='none',transition='cut',speed=1.,crop=1.)
+for effect in list(FILTERS)+list(MOTIONS):render_shot(fx,{**item,'effect':effect},None,ctx,resolution=360,preview=True)
+for transition in TRANSITIONS:render_shot(fx,{**item,'transition':transition},item,ctx,resolution=360,preview=True)
+fx['plan']['fps']=60;render_shot(fx,{**item,'frames':60,'end_frame':60},None,ctx,resolution=360,preview=True)
+gui_features=None
+if exe:
+    auto_voice=work/'voice 35.wav';command([ff,'-v','error','-stream_loop','-1','-i',opening,'-t','35.37','-vn','-ac','1','-ar','48000','-y',auto_voice])
+    qa_config=work/'gui config.json';gui_report=root/'GUI_FEATURE_REPORT.json'
+    save_json(qa_config,{'project':str(project_file),'logo':str(clips/'logo.png'),'media':str(clips),'work':str(work/'gui checks'),'auto_voice':str(auto_voice),'auto_output':str(work/'gui auto outputs')})
+    command([exe,'--gui-qa-config',qa_config,'--gui-report',gui_report]);gui_features=json.loads(gui_report.read_text());assert gui_features['status']=='passed'
 assert all(digest(clips/name)==h for name,h in before.items())
-qa={'status':'passed','version':'2.0.1','platform':'Windows x64' if exe else 'Linux','frozen_exe_tested':frozen,'real_clip_model_used':True,'srt_skips_asr_verified':True,'mixed_image_video_import':True,'source_files_unchanged':True,'logo_pixels_verified':True,'burn_subtitle_pixels_verified':True,'soft_subtitle_track_verified':True,'mute_and_keep_source_audio_verified':True,'source_tone_verified':True,'manual_scene_split_merge_verified':True,'export_24_and_30fps_verified':True,'mp4_and_mkv_verified':True,'embedded_preview_rendered':True,'frozen_gui_preview_tested':frozen,'scene_cache_reused':True,'shared_feature_cache_hits':metrics['shared_cache_hits'],'full_decode_passed':True,'voice_alignment':r['audio_alignment'],'video_seconds':r['video_seconds'],'test_seconds':round(time.monotonic()-t,2),'media_fixtures_not_included_in_release':True}
+qa={'status':'passed','version':'2.1.0','platform':'Windows x64' if exe else 'Linux','frozen_exe_tested':frozen,'real_clip_model_used':True,'srt_skips_asr_verified':True,'mixed_image_video_import':True,'source_files_unchanged':True,'logo_pixels_verified':True,'burn_subtitle_pixels_verified':True,'soft_subtitle_track_verified':True,'mute_and_keep_source_audio_verified':True,'source_tone_verified':True,'manual_scene_split_merge_verified':True,'export_24_and_30fps_verified':True,'mp4_and_mkv_verified':True,'embedded_preview_rendered':True,'frozen_gui_preview_tested':frozen,'scene_cache_reused':True,'shared_feature_cache_hits':metrics['shared_cache_hits'],'full_decode_passed':True,'voice_alignment':r['audio_alignment'],'video_seconds':r['video_seconds'],'test_seconds':round(time.monotonic()-t,2),'media_fixtures_not_included_in_release':True}
+qa.update(all_20_effects_rendered=True,all_19_transitions_rendered=True,short_scene_60fps_rendered=True,gui_feature_checks=gui_features['checks'] if gui_features else {},gpu_hardware_encoding_not_exercised=True)
 (root/('WINDOWS_TEST_REPORT.json' if exe else 'LOCAL_TEST_REPORT.json')).write_text(json.dumps(qa,indent=2),encoding='utf-8');print(json.dumps(qa),flush=True)
