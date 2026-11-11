@@ -32,7 +32,7 @@ def words_for(cues,start,end):
         closest=min(cues,key=lambda x:abs((x['start']+x['end'])/2-(start+end)/2));texts=[closest['text']]
     return ' '.join(texts).strip()
 
-def make_plan(cues,files,candidates,features,screen_scores,model,duration,fps=24,screen_minors=True):
+def make_plan(cues,files,candidates,features,screen_scores,model,duration,fps=24,screen_minors=True,screen_cards=False):
     total=math.ceil(duration*fps-1e-7);windows=time_windows(total,fps,cues)
     stop={'the','and','that','this','from','with','were','have','what','they','their','into','than','there','which','when','would','could','about','some','these','those','does','only','more','been','them','each','will','where','while','because','before','after','through','between','under','over','most','other','your','our','but','for','not','was','are','had','its','you','one','can','how','all','has','may','who','why','still'}
     counts=Counter(w.lower() for w in re.findall(r'[A-Za-z]{3,}',' '.join(x['text'] for x in cues)) if w.lower() not in stop)
@@ -40,11 +40,11 @@ def make_plan(cues,files,candidates,features,screen_scores,model,duration,fps=24
     queries=[]
     for w in windows:
         a,b=w['start_frame']/fps,w['end_frame']/fps
-        local=words_for(cues,max(0,a-2),min(duration,b+2))
+        local=words_for(cues,max(0,a-(8 if w['opening'] else 2)),min(duration,b+(8 if w['opening'] else 2)))
         queries.append(f'A documentary scene about {theme}. {local}')
     query_features=model.text(queries)
     minor_mask=(screen_scores[:,1]>.23)&((screen_scores[:,1]-screen_scores[:,0])>.045) if screen_minors else np.zeros(len(candidates),dtype=bool)
-    card_mask=(screen_scores[:,2]>.24)&((screen_scores[:,2]-screen_scores[:,3])>.055)
+    card_mask=(screen_scores[:,2]>.24)&((screen_scores[:,2]-screen_scores[:,3])>.055) if screen_cards else np.zeros(len(candidates),dtype=bool)
     eligible=np.asarray([c['quality']>.012 for c in candidates])&~minor_mask&~card_mask
     if not eligible.any():raise ValueError('Không có cảnh phù hợp sau lọc hình. Bổ sung video cảnh vật/người trưởng thành rõ ràng, không bảng chữ.')
     source_count=Counter();recent=[];selected=[];plan=[];warnings=[]

@@ -1,0 +1,26 @@
+{
+  "schema": "autodoc-effect-pack-1",
+  "version": "1.0.0",
+  "name": "Cinematic Extras",
+  "effects": [
+    "bright",
+    "sepia",
+    "soft",
+    "contrast",
+    "faded",
+    "grain",
+    "denoise",
+    "mirror",
+    "negative"
+  ],
+  "transitions": [
+    "fadeblack",
+    "fadewhite",
+    "pixelize",
+    "radial",
+    "diagtl",
+    "hlslice",
+    "vertopen",
+    "squeezeh"
+  ]
+}

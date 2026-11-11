@@ -20,7 +20,7 @@ class Context:
         if self.cancel.is_set(): raise Cancelled('Đã dừng; giữ cache để tiếp tục lần sau.')
     def emit(self, pct, msg):
         self.check(); self.notify(float(pct), str(msg))
-    def run(self, args, *, log: Path | None = None, capture=False):
+    def run(self, args, *, log: Path | None = None, capture=False, cwd=None):
         self.check()
         # No shell: filenames are always arguments, never executable expressions.
         flags = subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
@@ -28,7 +28,7 @@ class Context:
             import tempfile
             with tempfile.TemporaryFile() as stream:
                 p = subprocess.Popen([str(x) for x in args], stdout=stream, stderr=subprocess.PIPE,
-                                     creationflags=flags)
+                                     creationflags=flags,cwd=cwd)
                 while True:
                     try: _, error = p.communicate(timeout=.25); break
                     except subprocess.TimeoutExpired:
@@ -42,7 +42,7 @@ class Context:
         log = log or Path(os.devnull)
         with log.open('wb') as stream:
             p = subprocess.Popen([str(x) for x in args], stdout=stream, stderr=subprocess.STDOUT,
-                                 stdin=subprocess.DEVNULL, creationflags=flags)
+                                 stdin=subprocess.DEVNULL, creationflags=flags,cwd=cwd)
             while p.poll() is None:
                 if self.cancel.is_set():
                     p.terminate()

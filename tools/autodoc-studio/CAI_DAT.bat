@@ -21,7 +21,7 @@ if errorlevel 1 goto failed
 ".venv\Scripts\python.exe" main.py --doctor
 if errorlevel 1 (
  echo Can ffmpeg.exe va ffprobe.exe trong thu muc bin hoac PATH.
- echo Dung ban Windows portable da kem FFmpeg de de cai nhat.
+ echo Tool tu tai FFmpeg lan dau; kiem tra ket noi mang.
  pause
  exit /b 1
 )

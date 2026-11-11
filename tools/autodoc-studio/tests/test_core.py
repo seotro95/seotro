@@ -26,13 +26,13 @@ class PlanningTests(unittest.TestCase):
         screen[0]=[.1,.4,.1,.3] # likely minor
         screen[1]=[.1,.1,.5,.1] # likely card
         cues=[{'start':0,'end':60,'text':'mammoth bone circle landscape evidence'}]
-        p=make_plan(cues,files,cand,features,screen,DummyModel(),60)
+        p=make_plan(cues,files,cand,features,screen,DummyModel(),60,screen_cards=True)
         self.assertEqual(p['opening_shots'],10);self.assertEqual(p['opening_distinct_files'],10)
         self.assertTrue(all(x['source_id'] not in [0,1] for x in p['shots']))
         self.assertEqual(sum(x['frames'] for x in p['shots']),1440)
     def test_reject_all_filtered_sources(self):
         files=[{'id':0,'name':'a.mp4','seconds':10}];cand=[{'id':0,'file_id':0,'source_duration':10,'quality':.1,'source_start':0,'motion':.1}]
-        with self.assertRaises(ValueError):make_plan([{'start':0,'end':60,'text':'a'}],files,cand,np.zeros((1,16)),np.array([[.1,.5,.1,.2]]),DummyModel(),60)
+        with self.assertRaises(ValueError):make_plan([{'start':0,'end':60,'text':'a'}],files,cand,np.zeros((1,16)),np.array([[.1,.5,.1,.2]]),DummyModel(),60,screen_cards=True)
     def test_srt_and_context_during_pause(self):
         cues=[{'start':1,'end':3,'text':'one'},{'start':9,'end':12,'text':'two'}]
         self.assertIn('00:00:01,000 --> 00:00:03,000',srt(cues))

@@ -1,97 +1,238 @@
 from __future__ import annotations
-import json,os,queue,subprocess,sys,threading,traceback
+import copy,json,os,queue,threading,traceback
 from pathlib import Path
 import tkinter as tk
-from tkinter import filedialog,messagebox,ttk
-from .common import Cancelled,Context,data_dir
-from .pipeline import Settings,run
+from tkinter import ttk,filedialog,messagebox,colorchooser,font
+from .common import Context,Cancelled,data_dir,save_json
+from .project import DEFAULTS,options,load,save,split,merge_previous,swap_sources
+from .subtitles import export,read_srt,read_txt,align_txt,validate,seconds
+from .effects import NAMES,TRANSITION_NAMES,TRANSITIONS,installed_effects,install_pack
+from .player import Player,scene_preview
 
 class App(tk.Tk):
     def __init__(self):
-        super().__init__();self.title('AutoDoc Studio1.0 — Tự dựng theo voice');self.geometry('960x720');self.minsize(790,630)
-        self.configure(bg='#111827');self.events=queue.Queue();self.stop=threading.Event();self.worker=None;self.result=None
-        self.vars={k:tk.StringVar(value=v) for k,v in {'voice':'','videos':'','output':str(Path.home()/'Videos'/'AutoDoc_Output'),'resolution':'720p — nhanh,nhẹ','language':'English','model':'base'}.items()}
-        self.subs=tk.BooleanVar(value=False);self.minors=tk.BooleanVar(value=True)
-        style=ttk.Style(self);style.theme_use('clam');style.configure('TFrame',background='#111827');style.configure('TLabel',background='#111827',foreground='#e5e7eb',font=('Segoe UI',10));style.configure('TButton',font=('Segoe UI',10),padding=(12,8));style.configure('TCheckbutton',background='#111827',foreground='#e5e7eb',font=('Segoe UI',10));style.map('TCheckbutton',background=[('active','#1f2937')]);style.configure('Accent.TButton',background='#38bdf8',foreground='#082f49',font=('Segoe UI',11,'bold'));style.configure('TProgressbar',background='#38bdf8',troughcolor='#263244',bordercolor='#263244')
-        main=ttk.Frame(self,padding=24);main.pack(fill='both',expand=True)
-        tk.Label(main,text='AUTODOC STUDIO',bg='#111827',fg='#7dd3fc',font=('Segoe UI',10,'bold')).pack(anchor='w')
-        tk.Label(main,text='Voice + video → Phim hoàn chỉnh',bg='#111827',fg='white',font=('Segoe UI',23,'bold')).pack(anchor='w',pady=(5,6))
-        ttk.Label(main,text='Tự đọc lời • AI chọn cảnh •10cảnh/30giây đầu • Chỉ tiếng từ voice',wraplength=850).pack(anchor='w',pady=(0,20))
-        for key,label,kind in [('voice','1. Chọn voice','file'),('videos','2. Thư mục video','folder'),('output','3. Nơi lưu kết quả','folder')]:
-            row=ttk.Frame(main);row.pack(fill='x',pady=5);ttk.Label(row,text=label,width=23).pack(side='left')
-            entry=ttk.Entry(row,textvariable=self.vars[key]);entry.pack(side='left',fill='x',expand=True,padx=(0,8))
-            ttk.Button(row,text='Chọn…',command=lambda k=key,t=kind:self.browse(k,t)).pack(side='right')
-        options=ttk.Frame(main);options.pack(fill='x',pady=(16,8))
-        ttk.Label(options,text='Chất lượng').pack(side='left');ttk.Combobox(options,textvariable=self.vars['resolution'],values=['720p — nhanh,nhẹ','1080p — rõ hơn'],state='readonly',width=22).pack(side='left',padx=(8,20))
-        ttk.Label(options,text='Lời đọc').pack(side='left');ttk.Combobox(options,textvariable=self.vars['language'],values=['English','Tự nhận ngôn ngữ'],state='readonly',width=20).pack(side='left',padx=8)
-        ttk.Checkbutton(main,text='Kèm phụ đề tùy chọn trong MP4 (không đốt chữ lên hình)',variable=self.subs).pack(anchor='w',pady=4)
-        ttk.Checkbutton(main,text='Hạn chế cảnh có trẻ em bằng AI (ước lượng,không bảo đảm tuyệt đối)',variable=self.minors).pack(anchor='w',pady=4)
-        buttons=ttk.Frame(main);buttons.pack(fill='x',pady=(16,12))
-        self.start_button=ttk.Button(buttons,text='TỰ DỰNG VIDEO',style='Accent.TButton',command=self.start);self.start_button.pack(side='left')
-        self.cancel_button=ttk.Button(buttons,text='Dừng',command=self.cancel,state='disabled');self.cancel_button.pack(side='left',padx=8)
-        self.open_button=ttk.Button(buttons,text='Mở kết quả',command=self.open_result,state='disabled');self.open_button.pack(side='right')
-        self.progress=ttk.Progressbar(main,maximum=100);self.progress.pack(fill='x',pady=(0,6));self.status=ttk.Label(main,text='Sẵn sàng. Lần đầu cần mạng để tải model;không cần APItrả phí.',wraplength=850);self.status.pack(anchor='w')
-        self.log=tk.Text(main,height=9,bg='#0b1220',fg='#cbd5e1',insertbackground='white',relief='flat',font=('Consolas',9),state='disabled');self.log.pack(fill='both',expand=True,pady=(12,8))
-        ttk.Label(main,text='Nguồn được giữ nguyên. Cảnh thiếu dùng video liên quan,không tạo ảnh/bảng chữ để bù.\nAI xếp cảnh theo tương đồng;hãy xem bản dựng trước khi đăng.',wraplength=850).pack(anchor='w')
-        self.load_preferences();self.after(100,self.poll);self.protocol('WM_DELETE_WINDOW',self.close)
-
-    def browse(self,key,kind):
-        if self.worker and self.worker.is_alive():return
-        value=filedialog.askopenfilename(title='Chọn tệp voice',filetypes=[('Audio','*.mp3 *.wav *.m4a *.aac *.flac *.ogg *.opus *.wma'),('Tất cả','*.*')]) if kind=='file' else filedialog.askdirectory(title='Chọn thư mục')
-        if value:self.vars[key].set(value)
-
-    def load_preferences(self):
-        p=data_dir()/'preferences.json'
-        if p.exists():
+        super().__init__();self.title('AutoDoc Studio 2.0 — Voice • Ảnh • Video');self.geometry('1360x860');self.minsize(1080,720);self.p=None;self.busy=False;self.cancel=threading.Event();self.queue=queue.Queue();self.last_export='';self.selected=0;self.preview_pending=None
+        self.vars={};self.edit={};self.cuevars={};self.preferences=data_dir()/'preferences_v2.json'
+        self.voice=tk.StringVar();self.media=tk.StringVar();self.output=tk.StringVar(value=str(Path.home()/'Videos'/'AutoDocStudio'));self.subpath=tk.StringVar();self.status=tk.StringVar(value='Chọn voice và thư mục ảnh/video → Tự xếp cảnh → Xem/sửa → Xuất video.')
+        self.stylevars={k:(tk.BooleanVar(value=v) if isinstance(v,bool) else tk.StringVar(value=str(v))) for k,v in DEFAULTS['subtitle_style'].items()}
+        for k,v in DEFAULTS.items():
+            if k in ['subtitle_style','clip_model_path','whisper_model_path','subtitle_path']:continue
+            self.vars[k]=tk.BooleanVar(value=v) if isinstance(v,bool) else tk.StringVar(value=str(v))
+        self.build();self.protocol('WM_DELETE_WINDOW',self.close);self.after(60,self.poll)
+        if self.preferences.exists():
             try:
-                d=json.loads(p.read_text())
-                for k,v in d.items():
-                    if k in self.vars:self.vars[k].set(v)
-            except (OSError,ValueError):pass
-
-    def start(self):
-        if self.worker and self.worker.is_alive():return
-        settings=Settings(voice=self.vars['voice'].get(),videos=self.vars['videos'].get(),output=self.vars['output'].get(),resolution=1080 if self.vars['resolution'].get().startswith('1080') else 720,language='en' if self.vars['language'].get()=='English' else 'auto',embed_subtitles=self.subs.get(),screen_minors=self.minors.get())
-        if not settings.voice or not settings.videos or not settings.output:messagebox.showwarning('Thiếu đầu vào','Chọn voice,thư mục video và nơi lưu kết quả.');return
-        (data_dir()/'preferences.json').write_text(json.dumps({k:v.get() for k,v in self.vars.items()},ensure_ascii=False),encoding='utf-8')
-        self.stop.clear();self.result=None;self.start_button.configure(state='disabled');self.cancel_button.configure(state='normal');self.open_button.configure(state='disabled');self.progress['value']=0
+                pref=json.loads(self.preferences.read_text());self.output.set(pref.get('output',self.output.get()));self.last_project=pref.get('last_project','')
+            except Exception:self.last_project=''
+    def file_row(self,parent,label,var,kind='file',types=None):
+        row=ttk.Frame(parent);row.pack(fill='x',pady=2);ttk.Label(row,text=label,width=16).pack(side='left');ttk.Entry(row,textvariable=var).pack(side='left',fill='x',expand=True)
+        def choose():
+            path=filedialog.askdirectory() if kind=='dir' else filedialog.askopenfilename(filetypes=types or [('Tất cả','*.*')])
+            if path:var.set(path)
+        ttk.Button(row,text='Chọn…',width=8,command=choose).pack(side='left',padx=4)
+    def combo(self,parent,label,var,values,width=21):
+        row=ttk.Frame(parent);row.pack(fill='x',pady=3);ttk.Label(row,text=label,width=20).pack(side='left');box=ttk.Combobox(row,textvariable=var,values=values,state='readonly',width=width);box.pack(side='left',fill='x',expand=True);return box
+    def entry(self,parent,label,var,width=20):
+        row=ttk.Frame(parent);row.pack(fill='x',pady=3);ttk.Label(row,text=label,width=20).pack(side='left');ttk.Entry(row,textvariable=var,width=width).pack(side='left',fill='x',expand=True)
+    def button(self,parent,text,command):return ttk.Button(parent,text=text,command=lambda:self.safe(command))
+    def build(self):
+        top=ttk.LabelFrame(self,text='Đầu vào');top.pack(fill='x',padx=10,pady=5)
+        self.file_row(top,'Voice chính',self.voice,types=[('Âm thanh','*.wav *.mp3 *.m4a *.flac *.aac *.ogg'),('Tất cả','*.*')]);self.file_row(top,'Ảnh / video',self.media,'dir');self.file_row(top,'Nơi lưu dự án',self.output,'dir');self.file_row(top,'Phụ đề (tùy chọn)',self.subpath,types=[('TXT / SRT','*.txt *.srt')])
+        bar=ttk.Frame(self);bar.pack(fill='x',padx=10)
+        for text,fn in [('① Tự xếp cảnh',self.analyze),('Mở dự án',self.open_project),('Lưu dự án',self.save_project),('② Xuất video…',self.export_dialog),('Mở video đã xuất',self.open_result)]:self.button(bar,text,fn).pack(side='left',padx=3,pady=4)
+        ttk.Button(bar,text='Dừng tác vụ',command=lambda:self.cancel.set()).pack(side='right')
+        area=ttk.Panedwindow(self,orient='horizontal');area.pack(fill='both',expand=True,padx=10,pady=5)
+        left=ttk.Frame(area);right=ttk.Frame(area,width=405);area.add(left,weight=3);area.add(right,weight=2)
+        self.player=Player(left,on_focus=self.set_focus);self.player.pack(fill='both',expand=True)
+        ttk.Label(left,text='Bấm lên hình để đặt tâm cắt. Preview phát cảnh đang chọn, kèm đúng đoạn voice.',foreground='#526171').pack(anchor='w')
+        treeframe=ttk.Frame(left);treeframe.pack(fill='both',expand=True)
+        self.timeline=ttk.Treeview(treeframe,columns=('time','source','effect','score'),show='headings',height=7)
+        for k,title,w in [('time','Mốc / giây',120),('source','Ảnh / video',280),('effect','Hiệu ứng',100),('score','AI',50)]:self.timeline.heading(k,text=title);self.timeline.column(k,width=w,minwidth=40)
+        scroll=ttk.Scrollbar(treeframe,orient='vertical',command=self.timeline.yview);self.timeline.configure(yscrollcommand=scroll.set);self.timeline.pack(side='left',fill='both',expand=True);scroll.pack(side='right',fill='y');self.timeline.bind('<<TreeviewSelect>>',self.select_scene)
+        notebook=ttk.Notebook(right);notebook.pack(fill='both',expand=True)
+        def tab(title):
+            shell=ttk.Frame(notebook);notebook.add(shell,text=title);canvas=tk.Canvas(shell,highlightthickness=0);scroll=ttk.Scrollbar(shell,orient='vertical',command=canvas.yview);canvas.configure(yscrollcommand=scroll.set);scroll.pack(side='right',fill='y');canvas.pack(side='left',fill='both',expand=True);body=ttk.Frame(canvas,padding=8);item=canvas.create_window((0,0),window=body,anchor='nw');body.bind('<Configure>',lambda e:canvas.configure(scrollregion=canvas.bbox('all')));canvas.bind('<Configure>',lambda e:canvas.itemconfigure(item,width=e.width));return body
+        edit=tab('Cảnh');subs=tab('Phụ đề');brand=tab('Logo / tiếng');config=tab('AI / xuất')
+        for k,v in [('source_id',''),('source_in','0'),('speed','1'),('crop','1'),('focus_x','.5'),('focus_y','.5'),('effect','none'),('transition','cut')]:self.edit[k]=tk.StringVar(value=v)
+        self.sourcebox=self.combo(edit,'Nguồn cảnh',self.edit['source_id'],[])
+        self.entry(edit,'Lấy từ giây',self.edit['source_in']);self.entry(edit,'Tốc độ (0.25–3)',self.edit['speed']);self.entry(edit,'Phóng/cắt (1–2)',self.edit['crop']);self.entry(edit,'Tâm ngang (0–1)',self.edit['focus_x']);self.entry(edit,'Tâm dọc (0–1)',self.edit['focus_y'])
+        self.effectbox=self.combo(edit,'Hiệu ứng',self.edit['effect'],[]);self.transitionbox=self.combo(edit,'Chuyển cảnh vào',self.edit['transition'],[f'{k} | {TRANSITION_NAMES[k]}' for k in TRANSITIONS])
+        self.refresh_effects();self.button(edit,'Áp dụng và xem trước',self.apply_scene).pack(fill='x',pady=5)
+        row=ttk.Frame(edit);row.pack(fill='x')
+        for t,fn in [('↑ Đổi nguồn',lambda:self.move(-1)),('↓ Đổi nguồn',lambda:self.move(1)),('Chia tại con trỏ',self.split_scene),('Gộp cảnh trước',self.merge_scene)]:self.button(row,t,fn).pack(fill='x',pady=2)
+        self.scene_text=tk.Text(edit,height=3,wrap='word');self.scene_text.pack(fill='x',pady=6)
+        self.button(edit,'Tải gói hiệu ứng bổ sung',self.get_pack).pack(fill='x')
+        self.cuetree=ttk.Treeview(subs,columns=('time','text'),show='headings',height=5);self.cuetree.heading('time',text='Thời gian');self.cuetree.heading('text',text='Lời');self.cuetree.column('time',width=100);self.cuetree.column('text',width=210);self.cuetree.pack(fill='both',expand=True);self.cuetree.bind('<<TreeviewSelect>>',self.select_cue)
+        for k in ['start','end']:self.cuevars[k]=tk.StringVar(value='0');self.entry(subs,'Bắt đầu (s)' if k=='start' else 'Kết thúc (s)',self.cuevars[k])
+        self.cuetext=tk.Text(subs,height=3,wrap='word');self.cuetext.pack(fill='x');row=ttk.Frame(subs);row.pack(fill='x')
+        for t,fn in [('Sửa lời',self.apply_cue),('Thêm',self.add_cue),('Xóa',self.delete_cue),('Nhập',self.import_subs),('Xuất',self.export_subs)]:self.button(row,t,fn).pack(side='left',padx=1,pady=4)
+        self.combo(subs,'Hiện phụ đề',self.vars['subtitle_mode'],['none','burn','soft']);ttk.Label(subs,text='burn: màu/phông ghi vào hình • soft: bật/tắt trong trình phát',wraplength=390).pack(anchor='w')
+        fonts=sorted(set(font.families()))
+        row=ttk.Frame(subs);row.pack(fill='x');ttk.Label(row,text='Phông chữ',width=20).pack(side='left');ttk.Combobox(row,textvariable=self.stylevars['font'],values=fonts,width=21).pack(fill='x',expand=True)
+        self.entry(subs,'Cỡ chữ (ở 720p)',self.stylevars['size']);self.entry(subs,'Độ dày viền',self.stylevars['outline']);self.combo(subs,'Vị trí',self.stylevars['position'],['bottom','middle','top'])
+        colors=ttk.Frame(subs);colors.pack(fill='x')
+        for k,t in [('color','Màu chữ'),('outline_color','Màu viền'),('background_color','Màu nền')]:self.button(colors,t,lambda key=k:self.pick_color(key)).pack(side='left',padx=3)
+        row=ttk.Frame(subs);row.pack(fill='x')
+        for k,t in [('bold','Đậm'),('italic','Nghiêng'),('background','Hộp nền')]:ttk.Checkbutton(row,text=t,variable=self.stylevars[k]).pack(side='left')
+        self.button(subs,'Áp dụng kiểu / xem trước',self.apply_settings).pack(fill='x',pady=5)
+        self.file_row(brand,'Logo PNG/JPG',self.vars['logo_path'],types=[('Ảnh','*.png *.jpg *.webp *.bmp')]);self.combo(brand,'Vị trí logo',self.vars['logo_position'],['top_left','top_right','bottom_left','bottom_right','center']);self.entry(brand,'Rộng logo (% hình)',self.vars['logo_size']);self.entry(brand,'Độ hiện (0–1)',self.vars['logo_opacity'])
+        ttk.Label(brand,text='Để trống đường dẫn để bỏ logo. PNG hỗ trợ nền trong suốt.',wraplength=370).pack(anchor='w',pady=5)
+        ttk.Checkbutton(brand,text='Tắt âm thanh clip gốc (chỉ giữ voice)',variable=self.vars['mute_source']).pack(anchor='w',pady=8);self.entry(brand,'Âm lượng clip (0–1)',self.vars['source_volume']);ttk.Label(brand,text='Bỏ chọn để trộn tiếng clip với voice. Ảnh tự có tiếng nền im lặng.',wraplength=380).pack(anchor='w');self.button(brand,'Áp dụng logo / tiếng',self.apply_settings).pack(fill='x',pady=8)
+        self.combo(config,'Chế độ tốc độ',self.vars['quality'],['fast','balanced','quality']);self.combo(config,'Whisper',self.vars['whisper_model'],['tiny','base','small']);self.entry(config,'Ngôn ngữ voice',self.vars['language']);self.combo(config,'CPU nhận dạng',self.vars['threads'],['1','2','4','8']);self.combo(config,'Khung hình',self.vars['fit'],['fill','contain'])
+        for k,t in [('auto_effects','Tự tạo chuyển động cho ảnh'),('auto_transitions','Tự chọn chuyển cảnh nhẹ'),('screen_minors','Lọc trẻ em ước lượng bằng AI'),('full_verify','Kiểm tra giải mã toàn phim sau xuất')]:ttk.Checkbutton(config,text=t,variable=self.vars[k]).pack(anchor='w',pady=4)
+        ttk.Label(config,text='fast: 1 mẫu/cảnh + Whisper nhanh. balanced/quality: 3 mẫu/cảnh. Có SRT đúng mốc thì bỏ qua Whisper. Cache AI dùng lại giữa dự án. Các tùy chọn AI áp dụng khi Tự xếp cảnh lại.',wraplength=370).pack(anchor='w',pady=10)
+        self.button(config,'Áp dụng cài đặt',self.apply_settings).pack(fill='x')
+        foot=ttk.Frame(self);foot.pack(fill='x',padx=10,pady=4);self.progress=ttk.Progressbar(foot,maximum=100);self.progress.pack(fill='x');ttk.Label(foot,textvariable=self.status,wraplength=1300).pack(anchor='w');self.log=tk.Text(self,height=3,wrap='word');self.log.pack(fill='x',padx=10,pady=(0,6))
+    def safe(self,fn):
+        try:
+            if self.busy:raise ValueError('Đang xử lý. Chờ xong hoặc bấm Dừng tác vụ trước khi sửa.')
+            fn()
+        except Exception as e:messagebox.showerror('AutoDoc Studio',str(e))
+    def settings(self):
+        d={k:v.get() for k,v in self.vars.items()};d.update(subtitle_path=self.subpath.get().strip(),subtitle_style={k:v.get() for k,v in self.stylevars.items()})
+        for k in ['resolution','fps','threads']:d[k]=int(d[k])
+        for k in ['logo_size','logo_opacity','source_volume']:d[k]=float(d[k])
+        return options(d)
+    def restore_settings(self):
+        d=self.p['settings']
+        for k,var in self.vars.items():var.set(d[k])
+        for k,var in self.stylevars.items():var.set(d['subtitle_style'][k])
+        self.subpath.set(d.get('subtitle_path',''))
+    def worker(self,fn,callback):
+        self.player.stop();self.busy=True;self.cancel.clear();ctx=Context(lambda pct,msg:self.queue.put(('progress',pct,msg)),self.cancel)
         def task():
-            try:
-                result=run(settings,Context(lambda pct,msg:self.events.put(('progress',pct,msg)),self.stop));self.events.put(('done',result))
-            except Cancelled as e:self.events.put(('cancelled',str(e)))
+            try:self.queue.put(('done',callback,fn(ctx)))
+            except Cancelled as e:self.queue.put(('cancelled',None,str(e)))
             except Exception as e:
-                details=traceback.format_exc();(data_dir()/'last_error.log').write_text(details,encoding='utf-8');self.events.put(('error',str(e)))
-        self.worker=threading.Thread(target=task,daemon=True);self.worker.start()
-
+                (data_dir()/'last_error.log').write_text(traceback.format_exc(),encoding='utf-8');self.queue.put(('error',None,str(e)))
+        threading.Thread(target=task,daemon=True).start()
     def poll(self):
         try:
             while True:
-                event=self.events.get_nowait();kind=event[0]
-                if kind=='progress':
-                    self.progress['value']=max(float(self.progress['value']),event[1]);self.status.configure(text=event[2]);self.add_log(event[2])
+                kind,a,b=self.queue.get_nowait()
+                if kind=='progress':self.progress['value']=a;self.status.set(b);self.log.insert('end',b+'\n');self.log.see('end')
+                elif kind=='done':
+                    self.busy=False
+                    try:a(b)
+                    except Exception as e:messagebox.showerror('AutoDoc Studio',str(e))
                 else:
-                    self.start_button.configure(state='normal');self.cancel_button.configure(state='disabled')
-                    if kind=='done':
-                        self.result=event[1];self.open_button.configure(state='normal');self.status.configure(text='Hoàn tất — '+self.result['output']);self.add_log('Đã kiểm tra file xuất. '+str(len(self.result['report']['warnings']))+'ghi chú trong KIEM_TRA_VIDEO.json.');messagebox.showinfo('Đã dựng xong','Video đã xuất và kiểm tra.\n\n'+self.result['output']+'\n\nXem bản dựng trước khi đăng.')
-                    elif kind=='cancelled':self.status.configure(text=event[1]);self.add_log(event[1])
-                    else:self.status.configure(text='Chưa hoàn tất. Xem lỗi bên dưới.');self.add_log(event[1]);messagebox.showerror('Không hoàn tất',event[1])
+                    self.busy=False;self.status.set(b)
+                    if kind=='error':messagebox.showerror('AutoDoc Studio',b)
         except queue.Empty:pass
-        self.after(100,self.poll)
-
-    def add_log(self,text):
-        self.log.configure(state='normal');self.log.insert('end',text+'\n');self.log.see('end');self.log.configure(state='disabled')
-
-    def cancel(self):self.stop.set();self.status.configure(text='Đang dừng an toàn… tải model/nhận dạng có thể cần kết thúc khối hiện tại.')
+        self.after(70,self.poll)
+    def analyze(self):
+        from .pipeline import prepare
+        voice,media,out=self.voice.get().strip(),self.media.get().strip(),self.output.get().strip();settings=self.settings()
+        if self.p and not messagebox.askyesno('Xếp lại cảnh','Tạo bản xếp cảnh mới? Hãy lưu các chỉnh sửa muốn giữ trước.'):return
+        self.worker(lambda ctx:prepare(voice,media,out,settings,ctx),self.accept_project)
+    def accept_project(self,p):
+        self.p=p;self.selected=0;self.restore_settings();self.voice.set(p['voice_source']);self.media.set(p['media_folder']);self.refresh();self.status.set(f'Đã xếp {len(p["plan"]["shots"])} cảnh. Chọn cảnh để sửa và xem trước.');self.select_index(0)
+    def require(self):
+        if not self.p:raise ValueError('Hãy Tự xếp cảnh hoặc Mở dự án trước.')
+    def refresh(self):
+        self.timeline.delete(*self.timeline.get_children());fps=self.p['plan']['fps']
+        for i,s in enumerate(self.p['plan']['shots']):self.timeline.insert('', 'end',iid=str(i),values=(f'{s["start_frame"]/fps:.2f}–{s["end_frame"]/fps:.2f}',s['source_name'],NAMES.get(s.get('effect','none'),s.get('effect')),s.get('semantic_score','')))
+        self.sourcebox['values']=[f'{f["id"]} | {f["name"]}' for f in self.p['files']];self.refresh_cues()
+    def select_index(self,i):
+        self.timeline.selection_set(str(i));self.timeline.see(str(i))
+    def select_scene(self,event=None):
+        if not self.p or self.busy or not self.timeline.selection():return
+        self.selected=int(self.timeline.selection()[0]);s=self.p['plan']['shots'][self.selected]
+        for k,v in self.edit.items():
+            value=s.get(k,'none' if k=='effect' else 'cut' if k=='transition' else 0)
+            if k=='source_id':value=f'{value} | {self.p["files"][value]["name"]}'
+            elif k=='effect':value=f'{value} | {NAMES.get(value,value)}'
+            elif k=='transition':value=f'{value} | {TRANSITION_NAMES[value]}'
+            v.set(value)
+        self.scene_text.delete('1.0','end');self.scene_text.insert('1.0',s.get('text',''));self.request_preview()
+    def request_preview(self):
+        if self.preview_pending:self.after_cancel(self.preview_pending)
+        self.preview_pending=self.after(220,self.preview)
+    def preview(self):
+        self.preview_pending=None
+        if self.busy or not self.p:return
+        p=copy.deepcopy(self.p);i=self.selected
+        self.worker(lambda ctx:scene_preview(p,i,ctx),lambda result:(self.player.load(*result),self.status.set(f'Xem trước cảnh {i+1}. Bấm Phát để nghe đoạn voice tương ứng.')))
+    def apply_scene(self):
+        self.require();s=self.p['plan']['shots'][self.selected];new=copy.deepcopy(s)
+        for k,var in self.edit.items():new[k]=int(var.get().split(' | ')[0]) if k=='source_id' else var.get().split(' | ')[0] if k in ['effect','transition'] else float(var.get())
+        new['source_name']=self.p['files'][new['source_id']]['name'];self.p['plan']['shots'][self.selected]=new
+        try:from .project import validate_project;validate_project(self.p)
+        except Exception:self.p['plan']['shots'][self.selected]=s;raise
+        self.refresh();self.select_index(self.selected)
+    def apply_settings(self):
+        self.require();self.p['settings']=self.settings();self.request_preview()
+    def set_focus(self,x,y):
+        if self.busy or not self.p:return
+        self.edit['focus_x'].set(f'{x:.3f}');self.edit['focus_y'].set(f'{y:.3f}');self.safe(self.apply_scene)
+    def move(self,delta):
+        self.require();i=self.selected;swap_sources(self.p,i,i+delta);self.refresh();self.select_index(i)
+    def split_scene(self):
+        self.require();split(self.p,self.selected,self.player.position);self.refresh();self.select_index(self.selected)
+    def merge_scene(self):
+        self.require();merge_previous(self.p,self.selected);self.selected=max(0,self.selected-1);self.refresh();self.select_index(self.selected)
+    def open_project(self):
+        path=filedialog.askopenfilename(filetypes=[('Dự án AutoDoc','*.json')])
+        if path:self.accept_project(load(path))
+    def save_project(self):
+        self.require();self.p['settings']=self.settings();path=filedialog.asksaveasfilename(defaultextension='.json',initialfile=Path(self.p['project_file']).name,filetypes=[('Dự án AutoDoc','*.json')])
+        if path:save(self.p,path);self.status.set('Đã lưu dự án: '+path)
+    def refresh_cues(self):
+        self.cuetree.delete(*self.cuetree.get_children())
+        for i,c in enumerate(self.p['cues']):self.cuetree.insert('','end',iid=str(i),values=(f'{c["start"]:.2f}–{c["end"]:.2f}',c['text'][:160]))
+    def select_cue(self,event=None):
+        if not self.p or not self.cuetree.selection():return
+        c=self.p['cues'][int(self.cuetree.selection()[0])]
+        for k,v in self.cuevars.items():v.set(c[k])
+        self.cuetext.delete('1.0','end');self.cuetext.insert('1.0',c['text'])
+    def apply_cue(self):
+        self.require()
+        if not self.cuetree.selection():raise ValueError('Chọn một câu phụ đề.')
+        index=int(self.cuetree.selection()[0]);c={k:seconds(v.get()) for k,v in self.cuevars.items()};c['text']=self.cuetext.get('1.0','end').strip();new=copy.deepcopy(self.p['cues']);new[index]=c;self.p['cues']=validate(new,self.p['plan']['voice_seconds']);self.refresh_cues();self.request_preview()
+    def add_cue(self):
+        self.require();start=self.p['plan']['shots'][self.selected]['start_frame']/self.p['plan']['fps'];self.p['cues']=validate(self.p['cues']+[{'start':start,'end':min(start+2,self.p['plan']['voice_seconds']),'text':'New subtitle'}],self.p['plan']['voice_seconds']);self.refresh_cues()
+    def delete_cue(self):
+        self.require()
+        if not self.cuetree.selection():return
+        if len(self.p['cues'])<=1:raise ValueError('Giữ ít nhất một câu lời để xếp cảnh.')
+        del self.p['cues'][int(self.cuetree.selection()[0])];self.refresh_cues();self.request_preview()
+    def import_subs(self):
+        self.require();path=filedialog.askopenfilename(filetypes=[('TXT/SRT','*.txt *.srt')])
+        if not path:return
+        if Path(path).suffix.lower()=='.srt':self.p['cues']=read_srt(path,self.p['plan']['voice_seconds'])
+        else:
+            cues,ratio=align_txt(read_txt(path),self.p['cues'],self.p['plan']['voice_seconds']);self.p['cues']=cues;self.status.set(f'TXT căn theo lời hiện tại: khớp {ratio:.0%}. Kiểm tra lại các mốc.')
+        self.subpath.set(path);self.p['settings']['subtitle_path']=path;self.refresh_cues();self.request_preview()
+    def export_subs(self):
+        self.require();path=filedialog.asksaveasfilename(defaultextension='.srt',filetypes=[('SRT có mốc','*.srt'),('TXT lời','*.txt')])
+        if path:
+            if Path(path).resolve() in {Path(f['path']).resolve() for f in self.p['files']}|{Path(self.p['voice_source']).resolve()}:raise ValueError('Không ghi đè nguồn.')
+            export(self.p['cues'],path);self.status.set('Đã xuất phụ đề: '+path)
+    def pick_color(self,key):
+        value=colorchooser.askcolor(self.stylevars[key].get())[1]
+        if value:self.stylevars[key].set(value)
+    def refresh_effects(self):self.effectbox['values']=[f'{k} | {NAMES.get(k,k)}' for k in installed_effects()]
+    def get_pack(self):self.worker(lambda ctx:install_pack(ctx),lambda result:(self.refresh_effects(),self.status.set('Đã cài gói hiệu ứng bổ sung; chọn tại tab Cảnh.')))
+    def export_dialog(self):
+        self.require();self.p['settings']=self.settings();win=tk.Toplevel(self);win.title('Xuất video');win.transient(self);win.grab_set();win.geometry('510x410')
+        for k,label,values in [('resolution','Độ phân giải',[720,1080]),('fps','Khung/giây',[24,25,30,60]),('quality','Tốc độ / chất lượng',['fast','balanced','quality']),('encoder','Bộ mã hóa',['auto','cpu','nvenc','qsv','amf'])]:self.combo(win,label,self.vars[k],values)
+        ttk.Checkbutton(win,text='Giải mã kiểm tra toàn bộ phim (tốn thêm thời gian)',variable=self.vars['full_verify']).pack(anchor='w',padx=15,pady=10)
+        ttk.Label(win,text='auto: thử GPU thực tế, quay về CPU nếu không hỗ trợ.\nMP4 tương thích rộng; MKV hỗ trợ phụ đề mềm.\nKiểu màu/phông dùng chế độ burn. Mọi bản đều lưu vào đường dẫn bạn chọn.',wraplength=470).pack(padx=15,pady=10)
+        def begin():
+            try:
+                settings=self.settings();path=filedialog.asksaveasfilename(defaultextension='.mp4',initialdir=self.p['job'],initialfile='VIDEO_HOAN_CHINH.mp4',filetypes=[('MP4','*.mp4'),('MKV','*.mkv')],parent=win)
+                if not path:return
+                self.p['settings']=settings;save(self.p);p=copy.deepcopy(self.p);win.destroy()
+                from .render import export_movie
+                self.worker(lambda ctx:export_movie(p,path,ctx),self.exported)
+            except Exception as e:messagebox.showerror('Xuất video',str(e),parent=win)
+        ttk.Button(win,text='Chọn nơi lưu và xuất',command=begin).pack(fill='x',padx=20,pady=5);ttk.Button(win,text='Hủy',command=win.destroy).pack(pady=4)
+    def exported(self,r):self.last_export=r['output'];self.status.set('Đã lưu video: '+self.last_export);messagebox.showinfo('Hoàn tất','Video đã lưu:\n'+self.last_export)
     def open_result(self):
-        if not self.result:return
-        p=self.result['project']
-        if os.name=='nt':os.startfile(p)
-        elif sys.platform=='darwin':subprocess.Popen(['open',p])
-        else:subprocess.Popen(['xdg-open',p])
+        if not self.last_export or not Path(self.last_export).is_file():raise ValueError('Chưa có video xuất trong phiên này.')
+        if os.name=='nt':os.startfile(self.last_export)
+        else:__import__('subprocess').Popen(['xdg-open',self.last_export])
     def close(self):
-        if self.worker and self.worker.is_alive():
-            if not messagebox.askyesno('Đang dựng','Dừng và đóng ứng dụng? Cache sẽ được giữ.'):return
-            self.stop.set();self.after(300,self.destroy)
-        else:self.destroy()
+        if self.busy and not messagebox.askyesno('Đang xử lý','Dừng tác vụ và đóng tool? Cache đã xong sẽ được giữ.'):return
+        self.cancel.set();self.player.cleanup();save_json(self.preferences,{'output':self.output.get(),'last_project':self.p['project_file'] if self.p else ''});self.destroy()
 
 def main():App().mainloop()

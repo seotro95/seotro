@@ -1,43 +1,42 @@
-# Tải AutoDoc Studio1.0
+# AutoDoc Studio 2.0
 
-[Windows x64 portable —109MB](https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/AutoDocStudio-1.0.0-Windows-x64.zip) · [Hướng dẫn](https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/HUONG_DAN_SU_DUNG.txt) · [Mã nguồn](https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/AutoDocStudio-1.0.0-Source.zip).
+Tool Windows dựng phim từ voice và thư mục **ảnh + video**, có xem trước và chỉnh cảnh. Voice quyết định thời lượng. Các tệp nguồn được giữ nguyên.
 
-Đã kiểm thử fileexe thực trênWindows,Whisper/CLIP thực,tự dựng MP4,loại tiếng clip,giữ đồng bộ,phụ đề tùy chọn và chạy tiếp bằng cache. Báo cáo trong QA/WINDOWS_TEST_REPORT.json. Lần đầu tự tải FFmpeg và model;không cần API trả phí. AI chọn cảnh theo tương đồng,không thay kiểm tra nội dung khoa học/độ tuổi bằng mắt.
+## Dùng bản Windows
 
-# AutoDoc Studio1.0
+1. Giải nén ZIP, giữ thư mục `_internal` cạnh `AutoDocStudio.exe`, rồi mở EXE. Windows 10/11 x64, khuyến nghị RAM 8 GB trở lên.
+2. Chọn voice, thư mục ảnh/video, nơi lưu dự án. Có thể thêm TXT/SRT. Bấm **Tự xếp cảnh**. Lần đầu cần mạng tải FFmpeg và model từ nguồn chính thức; các lần sau dùng cache. Không cần API trả phí.
+3. Chọn cảnh trên timeline để phát hình + đoạn voice tương ứng. Chọn nguồn, điểm lấy, tốc độ, phóng/cắt, tâm cắt, hiệu ứng và chuyển cảnh. Bấm **Áp dụng và xem trước**. Có chia cảnh tại con trỏ, gộp cảnh trước, đổi nguồn lên/xuống; tổng thời lượng lời không đổi. Bấm lên khung hình để đặt tâm cắt, không phải di chuyển logo.
+4. Tab **Logo / tiếng**: chọn logo (PNG giữ alpha), vị trí, cỡ %, độ hiện. Mặc định **tắt tiếng clip gốc**. Bỏ chọn để trộn tiếng clip cùng voice theo âm lượng 0–1. Ảnh không sinh âm thanh.
+5. Tab **Phụ đề**: nhập/xuất TXT/SRT, sửa từng câu và mốc giây, chọn phông đã cài trên máy, màu, cỡ, đậm/nghiêng, viền, nền và vị trí. Chọn `burn` để ghi kiểu chữ vào hình; `soft` để có đường phụ đề bật/tắt trong trình phát (kiểu hiển thị phụ thuộc trình phát, preview tích hợp không hiện đường mềm); `none` để xuất hình không phụ đề. Cỡ chữ tính ở 720p và tự tăng theo độ phân giải.
+6. **Lưu dự án** lưu JSON để mở sửa lần sau. Giữ voice, media gốc và thư mục cache của dự án đúng vị trí; JSON không gói media vào bên trong. Việc xếp cảnh lưu dự án ban đầu tự động. Video hoàn chỉnh chỉ xuất khi bấm **Xuất video…**: chọn 720/1080p, 24/25/30/60 FPS, MP4/MKV, chất lượng, bộ mã hóa và tên/nơi lưu.
+7. Tab Cảnh có **Tải gói hiệu ứng bổ sung**. Tool tự tìm manifest chính thức, kiểm SHA256, cài danh sách preset tương thích. Có sẵn các hiệu ứng cơ bản và chuyển cảnh khi không có mạng. Không tự tải DLL/plugin lạ hoặc cài driver GPU.
 
-Ứng dụng Windows tự dựng phim tài liệu từ một voice và thư mục video. Giao diện tiếng Việt, chạy cục bộ, không cần API trả phí. Chọn voice, thư mục video, nơi lưu rồi bấm **TỰ DỰNG VIDEO**.
+## Tăng tốc
 
-Tool dùng Whisper để nhận dạng lời và CLIP ONNX để so khớp lời với ba mẫu hình của từng đoạn video. Chọn10cảnh trong30giây đầu khi đủ nguồn, xếp các cảnh sau theo nội dung/ranh câu và giảm lặp. Voice giữ nguyên thời gian/cao độ, chỉ chuẩn hóa độ lớn; toàn bộ tiếng clip gốc bị loại. Thiếu nguồn thì tái dùng video chuyển động liên quan; không tạo ảnh đứng/bảng chữ để bù. Có cắt cảnh, hòa hình ngắn, crop nhẹ khi dùng lại và fade cuối.
+- `fast`: Whisper tiny mặc định, beam 1, một ảnh mẫu cho mỗi đoạn nguồn 10 giây. `balanced/quality`: lấy ba mẫu và beam 5; có thể chọn Whisper base/small để tăng độ chính xác, tốn thêm thời gian/RAM.
+- **SRT đúng mốc bỏ qua hoàn toàn bước nhận dạng voice**. TXT chỉ có lời, không có mốc: tool căn theo Whisper khi xếp lần đầu; nhập TXT vào dự án có sẵn sẽ căn theo mốc lời hiện có. Tỷ lệ khớp thấp được báo để sửa lại.
+- Đọc khung hình video qua PyAV, dùng cache đặc trưng CLIP theo nội dung tệp giữa nhiều dự án. Xuất hai cảnh song song, cache riêng từng cảnh và từng phiên bản cài đặt. Chỉnh cảnh nào chỉ dựng lại phần bị ảnh hưởng; đổi logo/kiểu phụ đề burn tác động mọi cảnh.
+- `auto` thử mã hóa thật với NVIDIA / Intel / AMD, rồi dùng CPU nếu không khả dụng. Có thể chọn CPU/GPU thủ công; nếu GPU lỗi lúc dựng sẽ thử lại CPU. Tốc độ thực tế tùy máy, nguồn, độ phân giải và hiệu ứng, không cam kết số lần nhanh hơn.
+- Không cần bật **giải mã toàn phim** cho mỗi bản nháp. Khi tắt, tool vẫn kiểm thời lượng, số khung và đối chiếu mẫu voice nếu chỉ giữ tiếng voice. Khi chủ động trộn tiếng clip, bỏ kiểm tương quan mẫu vì âm thanh đã trộn; vẫn kiểm luồng/thời lượng và giải mã nếu được chọn.
 
-## Chạy bản Windows portable
+## Quy trình tự động
 
-1. Giải nén ZIP vào thư mục có quyền ghi. Giữ nguyên thư mục `_internal` cạnh `AutoDocStudio.exe`.
-2. Mở AutoDocStudio.exe hoặc MO_TOOL.bat. Không cần cài Python cho bản portable.
-3. Chọn voiceAnh,thư mục video và thư mục xuất. Chọn720p để dựng nhanh hơn hoặc1080p. Bấm TỰ DỰNG VIDEO.
-4. Lần đầu cần Internet tải FFmpeg khoảng80–100MBnén,model Whisper khoảng145MB và CLIP khoảng156MB. Những lần sau dùng model đã lưu trong `%LOCALAPPDATA%\AutoDocStudio\models`. Không cần tải model mỗi tập.
-5. Kết quả ở thư mục `AutoDoc_<mã dự án>`: VIDEO_HOAN_CHINH.mp4,LOI_DOC.srt,TIMELINE.csv,EDIT_PLAN.json và KIEM_TRA_VIDEO.json. Phụ đề mặc định không chèn vào hình; có thể chọn kèm đường phụ đề tùy chọn.
+Whisper/SRT → CLIP nhận diện ảnh và video → xếp cảnh theo đoạn lời, mở đầu 10 cảnh/30 giây khi đủ nguồn → chỉnh tay/xem trước → logo, phụ đề, chuyển cảnh → xuất → kiểm tra → lưu video và báo cáo `.qa.json`.
 
-Windows10/11 64-bit, khuyến nghị8GBRAM và CPU4luồng trở lên. Không bắt buộc GPU. Tốc độ phụ thuộc CPU,số đoạn nguồn,độ phân giải và độ dài voice; tool không cam kết dựng tức thì. Chọn ổ xuất đủ dung lượng cho cache và video. Model cần mạng ở lần đầu; phiên hoàn toàn ngoại tuyến chỉ chạy được khi model đã tải đủ.
+AI chọn cảnh theo tương đồng, không đảm bảo hiểu đúng mọi chi tiết. Lọc trẻ em cũng là ước lượng; nên chỉ đưa nguồn phù hợp và xem lại trước đăng. Tool không tự tải cảnh bên ngoài hoặc tạo bảng chữ để bù clip thiếu. Nó có thể dùng lại nguồn liên quan, lặp video ngắn hoặc tạo chuyển động cho ảnh người dùng đã cung cấp.
 
-Nguồn được giữ nguyên. Dừng giữ các đoạn đã làm để lần sau tiếp tục khi cùng đầu vào/cài đặt. Không sửa/xóa file gốc. Cache và đường dẫn nguồn chỉ nằm trên máy,không tự upload lên server hoặc GitHub. Khi chia sẻ project JSON,kiểm tra đường dẫn cục bộ trước.
+## Cài từ mã nguồn / CLI
 
-## Phạm vi và giới hạn
+Python 3.12 x64: chạy `CAI_DAT.bat`, sau đó `MO_TOOL.bat`. Linux cần FFmpeg trong PATH và thư viện Tk; giọng preview dùng MCI trên Windows, trên Linux preview hình vẫn hoạt động.
 
-Đây là tự động xếp hình theo tương đồng,không phải người biên tập hiểu chắc mọi kết luận khảo cổ. Lời mơ hồ,đại từ hoặc clip không có cảnh liên quan sẽ giảm độ khớp. Cần xem kết quả trước khi đăng,nhất là khoa học/niên đại/giả thuyết. Lọc trẻ em/bảng chữ bằng CLIP là ước lượng và có thể sót hoặc loại nhầm;không phải bộ xác nhận độ tuổi/OCR. Hãy cung cấp bộ nguồn đã kiểm tra không có trẻ em khi yêu cầu đó là bắt buộc.
+```text
+python main.py --voice narration.wav --media media_folder --output projects --settings settings.json --prepare-only --result-json result.json
+python main.py --project project.autodoc.json --export-to finished.mp4 --result-json result.json
+```
 
-Nếu ít hơn10nguồn hợp lệ,tool có thể dùng những đoạn khác nhau từ cùng video và ghi trong báo cáo;không tuyên bố có10nguồn khác nhau khi không đủ. Nếu mọi nguồn bị lọc hoặc hỏng,tool báo lỗi rõ thay vì tự thêm ảnh/bảng chữ. Clip ngắn có thể lặp chuyển động; các mốc đó được ghi trong timeline.
+Không có `--prepare-only`, CLI tự xếp và xuất. `--videos` là tên thay thế của `--media`. JSON cài đặt tùy chọn gồm `subtitle_path`, `subtitle_mode`, `logo_path`, `mute_source`, `resolution`, `fps`, `quality`, `encoder`; xem `autodoc/project.py` cho giá trị mặc định. Build Windows bằng `build_windows.ps1`; script kiểm EXE thật trước đóng gói.
 
-Whisper nhận dạng tốt nhất với voiceAnh rõ. Ngôn ngữ tự động vẫn nhận lời nhưng CLIP này chủ yếu so khớp tiếngAnh;videoAnh là cấu hình được khuyến nghị. Không cần đưa kịch bản,SRT,prompt hoặc APIkey. Có thể lưu SRT và timeline để người dùng kiểm tra nhưng chúng không phải đầu vào bắt buộc.
+Model/FFmpeg dùng chung cache v1 tại `%LOCALAPPDATA%/AutoDocStudio`; không cần tải CLIP lại nếu đã có. Dự án v2 dùng schema mới, không nhập trực tiếp project v1. Không xóa dữ liệu v1.
 
-## Chạy mã nguồn
-
-Python3.12 + FFmpeg/ffprobe + `pip install -r requirements.txt`. Windows có thể dùng CAI_DAT.bat rồi MO_TOOL.bat. Nếu không có FFmpeg trong PATH,đặt ffmpeg.exe và ffprobe.exe vào `bin`.
-
-`python main.py --doctor`
-
-`python main.py --voice "D:\voice.mp3" --videos "D:\clips" --output "D:\ket_qua" --resolution 720`
-
-Chạy không tham số để mở giao diện. `python -m unittest discover -s tests` chạy kiểm tra quy hoạch/cancel. Có thể dùng `--clip-model-path` và `--whisper-model-path` để trỏ model đã lưu,không cần tải lại.
-
-Mã nguồn tách khỏi nội dung người dùng;không kèm video/voice cá nhân hoặc clip nguồn trong bản phần mềm. Xem THIRD_PARTY.md về model và FFmpeg.
+Lỗi xem trong khung nhật ký và `%LOCALAPPDATA%/AutoDocStudio/last_error.log`, `application.log`. Có thể dừng tác vụ; cache cảnh đã xong được giữ. Không sửa/xóa nguồn để khắc phục lỗi. Dự án phim dài cần ổ đủ chỗ cho file xuất, voice PCM và cache cảnh; thường nên dành vài GB.

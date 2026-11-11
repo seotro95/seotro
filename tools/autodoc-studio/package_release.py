@@ -1,22 +1,25 @@
-import hashlib,importlib.metadata,json,re,shutil,zipfile
+import hashlib,importlib.metadata,json,shutil,zipfile
 from pathlib import Path
-R=Path(__file__).parent;O=R/'release';O.mkdir(exist_ok=True);app=R/'dist/AutoDocStudio'
-report=json.loads((R/'WINDOWS_TEST_REPORT.json').read_text());assert report['status']=='passed' and report['frozen_exe_tested']
+R=Path(__file__).resolve().parent;O=R/'release';O.mkdir(exist_ok=True);app=R/'dist/AutoDocStudio'
+report=json.loads((R/'WINDOWS_TEST_REPORT.json').read_text());assert report['status']=='passed' and report['frozen_exe_tested'] and report['frozen_gui_preview_tested']
 for name in ['README.md','THIRD_PARTY.md','LICENSE','MO_TOOL.bat','WINDOWS_TEST_REPORT.json']:shutil.copyfile(R/name,app/name)
-guide='''AUTODOC STUDIO1.0 — TỰ DỰNG VIDEO TRÊN WINDOWS
+guide='''AUTODOC STUDIO 2.0 — WINDOWS 10/11 X64
 
-1. Giải nén AutoDocStudio-1.0.0-Windows-x64.zip. Giữ _internal cạnh AutoDocStudio.exe.
-2. Mở AutoDocStudio.exe. Chọn tệp voiceAnh và thư mục video. Chọn nơi lưu hoặc dùng mặc định.
-3. Bấm TỰ DỰNG VIDEO. Lần đầu cần Internet để tự tải FFmpeg và modelAI;không cần APIkey hoặc cài Python.
-4. Khi xong,bấm Mở kết quả. VIDEO_HOAN_CHINH.mp4 là phim đã ghép và kiểm tra;TIMELINE.csv,SRTvà KIEM_TRA_VIDEO.json giúp xem lại.
+Giải nén ZIP, giữ _internal cạnh AutoDocStudio.exe, mở EXE.
+1. Chọn voice + thư mục ảnh/video + nơi lưu. TXT/SRT là tùy chọn.
+2. Bấm Tự xếp cảnh. Chọn cảnh để xem hình, phát voice và chỉnh nguồn, cắt/phóng, tốc độ, hiệu ứng, chuyển cảnh. Chia tại con trỏ hoặc gộp cảnh trước; tổng thời lượng voice không đổi.
+3. Tab Logo / tiếng: chèn logo, vị trí/cỡ/độ hiện; mặc định TẮT tiếng clip gốc. Bỏ chọn để giữ/trộn tiếng clip cùng voice.
+4. Tab Phụ đề: sửa câu/mốc, nhập/xuất TXT/SRT, chọn phông/màu/cỡ/đậm/nghiêng/viền/nền. burn ghi kiểu chữ vào hình; soft bật/tắt ở trình phát, kiểu phụ thuộc trình phát; none không phụ đề.
+5. Lưu dự án để mở sửa lần sau. Giữ media gốc và thư mục dự án/cache đúng vị trí. Bấm Xuất video để chọn tên/nơi lưu, MP4/MKV,720/1080p,FPS,chất lượng và CPU/GPU. Video được lưu khi xuất xong; báo cáo .qa.json nằm cạnh video.
+6. Tải gói hiệu ứng bổ sung trong tab Cảnh: tool tìm và kiểm gói chính thức rồi cài preset. Không cần cài tay.
 
-Nguồn không bị sửa/xóa. Tiếng clip gốc bị loại;chỉ dùng tiếng từ filevoice.10cảnh/30giây đầu khi đủ nguồn. Cảnh thiếu dùng lại video liên quan;không tạo ảnh/bảng chữ để bù. Có720p/1080p,giảm cảnh lặp,chuyển cảnh ngắn,fadecuối,dừng và dùng lại cache.
+Nhanh hơn nhờ cache nhận diện dùng lại giữa dự án, đọc khung hình bằng PyAV, hai cảnh dựng song song và cache từng cảnh. Có SRT đúng mốc sẽ bỏ qua nhận dạng voice. fast lấy một mẫu/cảnh; balanced/quality lấy ba mẫu. auto thử GPU thật rồi quay về CPU khi cần. Tốc độ tùy máy; không có cam kết số lần tăng tốc.
 
-Windows10/11 x64,khuyến nghị8GBRAM. CPU chạy được,không bắt buộc GPU. Lần đầu tải khoảng400MBcông cụ/model;một số bản FFmpeg/model có thể thay đổi kích thước. Thời gian dựng tùy cấu hình máy và độ dài phim.
+Lần đầu cần mạng tải FFmpeg/model,không cần API trả phí hoặc Python với bản EXE. Cache dùng chung v1. Windows x64,khuyến nghị RAM8GB+. Dự án dài nên có vài GB trống. Model/cache/media người dùng không nằm trong ZIP.
 
-AI so khớp theo tương đồng,có thể chọn sai ý hoặc sót trẻ em/chữ trong hình. Hãy dùng nguồn đã kiểm tra và xem kết quả trước khi đăng. Không cam kết biên tập chính xác như người hiểu nội dung khoa học. Model Whisperbase là mặc định;CLI có thể đổi --whisper-model small nếu muốn thử nhận dạng chính xác hơn.
+AI khớp hình và lọc trẻ em chỉ là ước lượng; hãy xem lại trước đăng. Nguồn không bị sửa. Đổi logo/phụ đề burn sẽ dựng lại mọi cảnh có thay đổi. Soft subtitle không hiển thị trong preview tích hợp.
 
-Nếu lỗi:xem khung nhật ký,KIEM_TRA_VIDEO/STATUStrong dự án và %LOCALAPPDATA%\\AutoDocStudio\\last_error.log hoặc application.log. Đừng xóa clip gốc. Chạy lại cùng đầu vào/cài đặt dùng các đoạn đã hoàn thành;model chỉ tải một lần.
+Xem README.md để biết đủ chức năng,CLI và giới hạn. Lỗi:khung nhật ký hoặc %LOCALAPPDATA%/AutoDocStudio/last_error.log,application.log. Dừng tác vụ giữ cache đã hoàn thành.
 '''
 (O/'HUONG_DAN_SU_DUNG.txt').write_text(guide,encoding='utf-8-sig');shutil.copyfile(O/'HUONG_DAN_SU_DUNG.txt',app/'HUONG_DAN_SU_DUNG.txt')
 licenses=app/'THIRD_PARTY_LICENSES';licenses.mkdir(exist_ok=True);versions={}
@@ -26,28 +29,25 @@ for name in ['numpy','Pillow','onnxruntime','tokenizers','huggingface-hub','fast
         if any(x in item.name.lower() for x in ['license','copying','notice']):
             src=Path(dist.locate_file(item))
             if src.is_file():
-                # Normalize package-local paths; no upward path components in archive.
-                dest=licenses/name/(str(item).replace('..','_').replace('/','__').replace('\\','__'))
-                dest.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(src,dest)
+                dest=licenses/name/(str(item).replace('..','_').replace('/','__').replace('\\','__'));dest.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(src,dest)
 (app/'DEPENDENCY_VERSIONS.json').write_text(json.dumps(versions,indent=2))
-with zipfile.ZipFile(O/'AutoDocStudio-1.0.0-Windows-x64.zip','w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+for p in (R/'effect_packs').glob('*.json'):
+    dest=app/'effect_packs'/p.name;dest.parent.mkdir(exist_ok=True);shutil.copyfile(p,dest);shutil.copyfile(p,O/p.name)
+with zipfile.ZipFile(O/'AutoDocStudio-2.0.0-Windows-x64.zip','w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
     for p in sorted(app.rglob('*')):
         if p.is_file():z.write(p,'AutoDocStudio/'+p.relative_to(app).as_posix())
-source_names=['main.py','requirements.txt','CAI_DAT.bat','MO_TOOL.bat','README.md','THIRD_PARTY.md','LICENSE','build_windows.ps1','package_release.py','windows_smoke.py']
-with zipfile.ZipFile(O/'AutoDocStudio-1.0.0-Source.zip','w',zipfile.ZIP_DEFLATED) as z:
-    for name in source_names:z.write(R/name,'AutoDocStudio-Source/'+name)
-    for folder in ['autodoc','tests']:
-        for p in (R/folder).rglob('*.py'):z.write(p,'AutoDocStudio-Source/'+p.relative_to(R).as_posix())
+names=['main.py','requirements.txt','CAI_DAT.bat','MO_TOOL.bat','README.md','THIRD_PARTY.md','LICENSE','build_windows.ps1','package_release.py','windows_smoke.py','windows-workflow.yml']
+with zipfile.ZipFile(O/'AutoDocStudio-2.0.0-Source.zip','w',zipfile.ZIP_DEFLATED) as z:
+    for name in names:z.write(R/name,'AutoDocStudio-Source/'+name)
+    for folder,pattern in [('autodoc','*.py'),('tests','*.py'),('effect_packs','*.json')]:
+        for p in (R/folder).rglob(pattern):z.write(p,'AutoDocStudio-Source/'+p.relative_to(R).as_posix())
     for name in ['WINDOWS_TEST_REPORT.json','LOCAL_TEST_REPORT.json']:
         if (R/name).exists():z.write(R/name,'AutoDocStudio-Source/'+name)
-shutil.copyfile(R/'WINDOWS_TEST_REPORT.json',O/'WINDOWS_TEST_REPORT.json')
-assets=[]
+shutil.copyfile(R/'WINDOWS_TEST_REPORT.json',O/'WINDOWS_TEST_REPORT.json');assets=[]
 for p in sorted(O.iterdir()):
     if p.is_file() and p.name not in ['SHA256SUMS.txt','RELEASE_MANIFEST.json']:assets.append({'name':p.name,'bytes':p.stat().st_size,'sha256':hashlib.file_digest(p.open('rb'),'sha256').hexdigest()})
-(O/'SHA256SUMS.txt').write_text(''.join(x['sha256']+'  '+x['name']+'\n' for x in assets))
-(O/'RELEASE_MANIFEST.json').write_text(json.dumps({'version':'1.0.0','model_weights_bundled':False,'ffmpeg_binaries_bundled':False,'user_media_bundled':False,'tested_frozen_windows_edit':True,'assets':assets},indent=2))
+(O/'SHA256SUMS.txt').write_text(''.join(x['sha256']+'  '+x['name']+'\n' for x in assets));(O/'RELEASE_MANIFEST.json').write_text(json.dumps({'version':'2.0.0','model_weights_bundled':False,'ffmpeg_binaries_bundled':False,'user_media_bundled':False,'tested_frozen_windows_edit_and_preview':True,'assets':assets},indent=2))
 for p in O.glob('*.zip'):
     with zipfile.ZipFile(p) as z:
-        assert z.testzip() is None
-        assert not any('test-inputs/' in n or 'test-models/' in n or n.endswith(('.mp4','.mp3','.wav')) for n in z.namelist())
-print(json.dumps({'status':'packaged','assets':assets},ensure_ascii=False),flush=True)
+        assert z.testzip() is None;assert not any(n.endswith(('.mp4','.mp3','.wav','.jpg','.png','.onnx')) or 'windows test/' in n or 'local test/' in n for n in z.namelist())
+print(json.dumps({'status':'packaged','assets':assets}),flush=True)

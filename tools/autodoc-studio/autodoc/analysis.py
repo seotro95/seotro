@@ -68,15 +68,15 @@ def decode_voice(voice: Path,job: Path,ctx: Context):
     if duration<4:raise ValueError('Voice cần dài ít nhất4giây.')
     return out,duration,sha
 
-def transcribe(wav: Path,job: Path,ctx: Context,model_name='base',language='en',model_path=None,threads=2):
-    marker=signature({'wav_sha':digest(wav),'model':str(model_path or model_name),'language':language,'version':1})
+def transcribe(wav: Path,job: Path,ctx: Context,model_name='base',language='en',model_path=None,threads=2,fast=False):
+    marker=signature({'wav_sha':digest(wav),'model':str(model_path or model_name),'language':language,'fast':fast,'version':2})
     cache=job/'transcript.json'
     if cache.exists() and json.loads(cache.read_text()).get('signature')==marker:return json.loads(cache.read_text())['cues']
     from faster_whisper import WhisperModel
     ctx.emit(3,'Nhận dạng lời voice; lần đầu có thể cần tải model Whisper.')
     model=WhisperModel(str(model_path or model_name),device='cpu',compute_type='int8',cpu_threads=threads,num_workers=1,download_root=str(data_dir()/'models/whisper'))
     audio=np.frombuffer(ctx.run([binary('ffmpeg'),'-nostdin','-v','error','-i',wav,'-ac','1','-ar','16000','-f','f32le','-'],capture=True),dtype='<f4').copy()
-    segments,info=model.transcribe(audio,language=None if language=='auto' else language,beam_size=5,word_timestamps=True,vad_filter=True,condition_on_previous_text=False)
+    segments,info=model.transcribe(audio,language=None if language=='auto' else language,beam_size=1 if fast else 5,word_timestamps=True,vad_filter=True,condition_on_previous_text=False)
     cues=[]
     with wave.open(str(wav)) as w:duration=w.getnframes()/w.getframerate()
     for seg in segments:
@@ -89,60 +89,3 @@ def transcribe(wav: Path,job: Path,ctx: Context,model_name='base',language='en',
     if sum(x['end']-x['start'] for x in cues)<duration*.2:raise RuntimeError('Quá ít lời nói được nhận dạng. Kiểm tra voice trước khi tự dựng.')
     save_json(cache,{'signature':marker,'language':info.language,'cues':cues});return cues
 
-def inspect_videos(folder: Path,job: Path,ctx: Context):
-    paths=sorted(p for p in folder.rglob('*') if p.is_file() and p.suffix.lower() in VIDEO_SUFFIXES and not p.is_relative_to(job) and not any(q.name.startswith('AutoDoc_') and (q/'PROJECT.json').is_file() for q in p.parents))
-    # Output nested inside the input folder is excluded by path, never by a broad name match.
-    if not paths:raise ValueError('Thư mục không có video hỗ trợ, hoặc thư mục xuất trùng thư mục đầu vào.')
-    files=[];skipped=[];seen_hashes=set()
-    for i,p in enumerate(paths):
-        ctx.emit(17+3*i/len(paths),f'Kiểm tra video {i+1}/{len(paths)}')
-        try:
-            j=probe(p,ctx);v=next(x for x in j['streams'] if x['codec_type']=='video');seconds=float(v.get('duration') or j['format']['duration'])
-            if seconds<.6:raise ValueError('clip quá ngắn')
-            sha=digest(p)
-            if sha in seen_hashes:
-                skipped.append({'name':p.name,'reason':'Duplicate SHA256;đã có clip giống hệt.'});continue
-            seen_hashes.add(sha)
-            files.append({'id':len(files),'path':str(p.resolve()),'name':p.name,'sha256':sha,'seconds':seconds,'width':v['width'],'height':v['height'],'audio_streams':sum(x['codec_type']=='audio' for x in j['streams'])})
-        except Exception as e:
-            from .common import Cancelled
-            if isinstance(e,Cancelled):raise
-            skipped.append({'name':p.name,'reason':str(e)[:300]})
-    if not files:raise RuntimeError('Không đọc được video nào. '+str(skipped[:2]))
-    save_json(job/'source_manifest.json',{'files':files,'skipped':skipped,'originals_modified':False});return files,skipped
-
-def visual_index(files,job: Path,model: SemanticModel,ctx: Context):
-    cache=job/'visual_index.npz';manifest=job/'visual_index.json'
-    key=signature({'files':[(f['sha256'],f['seconds']) for f in files],'model':CLIP_REVISION,'version':2})
-    if cache.exists() and manifest.exists():
-        m=json.loads(manifest.read_text())
-        if m.get('signature')==key:
-            with np.load(cache,allow_pickle=False) as z:return m['candidates'],z['features'],z['screen_scores']
-    candidates=[];features=[];screen=[]
-    screens=model.text(['a photograph of an adult man or woman','a photograph of a young child, baby or teenager','a full screen title card with large text and letters','documentary photography of a landscape, objects, science, architecture or adult people'])
-    # Each window is analyzed at three points, not assumed to match its filename.
-    windows=[]
-    for f in files:
-        count=max(1,math.ceil(f['seconds']/10))
-        for n in range(count):
-            start=n*10;length=min(10,f['seconds']-start)
-            if length<.6:continue
-            windows.append((f,start,length))
-    if len(windows)>4000:raise ValueError('Quá nhiều đoạn nguồn (>4000). Chia thư mục thành các dự án nhỏ hơn.')
-    frame_dir=job/'frames';frame_dir.mkdir(exist_ok=True)
-    for i,(f,start,length) in enumerate(windows):
-        ctx.emit(20+30*i/len(windows),f'AI xem hình {i+1}/{len(windows)}')
-        paths=[]
-        for k,fraction in enumerate([.12,.5,.87]):
-            path=frame_dir/f'{i:05d}_{k}.jpg';paths.append(path)
-            if not path.exists():ctx.run([binary('ffmpeg'),'-nostdin','-v','error','-threads','1','-ss',str(start+length*fraction),'-i',f['path'],'-frames:v','1','-vf','scale=320:320:force_original_aspect_ratio=decrease','-threads','1','-y',path],log=job/'extract.log')
-        emb=model.images(paths);vector=normalized(emb.mean(axis=0))
-        pixels=[np.asarray(Image.open(p).convert('RGB').resize((32,32)),dtype=np.float32) for p in paths]
-        motion=float((np.abs(pixels[0]-pixels[1]).mean()+np.abs(pixels[1]-pixels[2]).mean())/2/255)
-        quality=float(np.std(pixels[1])/255)
-        # Screening is a relative CLIP estimate, not a certified age/OCR detector.
-        screen.append((emb@screens.T).max(axis=0));features.append(vector)
-        candidates.append({'id':i,'file_id':f['id'],'source_start':start,'source_duration':length,'motion':motion,'quality':quality})
-    fts=np.asarray(features,dtype=np.float32);sc=np.asarray(screen,dtype=np.float32)
-    np.savez_compressed(cache,features=fts,screen_scores=sc);save_json(manifest,{'signature':key,'candidates':candidates})
-    return candidates,fts,sc
