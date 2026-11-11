@@ -1,0 +1,5 @@
+120 prompt mới = 12 TXT × 10. Mỗi clip tạo dài 10 giây.
+Cảnh 121: 20:00–20:10, dùng lại clip 003 (bối cảnh quanh bình).
+Cảnh 122: 20:10–20:20, dùng lại clip 001 (bình mở đầu).
+Cảnh 123: 20:20–20:22, dùng lại 2 giây ổn định của clip 001.
+Tổng 122 × 10 + 2 = 1222 giây = 20:22. Không tạo clip mới chỉ để lấp đầy TXT.

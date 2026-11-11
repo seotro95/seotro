@@ -1,0 +1,21 @@
+name: Publish topic40 documentary deliverables
+on:
+  push:
+    branches: [codex/topic40-underwater-20m22s]
+    paths: ['productions/video-40-underwater/READY.json']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: /productions/video-40-underwater/
+      - name: Verify and publish completed requested deliverables
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python productions/video-40-underwater/publish_release.py

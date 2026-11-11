@@ -1,0 +1,51 @@
+CHỦ ĐỀ 40 — TÌM DẤU NGƯỜI Ở ĐÁY BIỂN
+5 tiêu đề tiếng Anh và 5 prompt thumbnail tương ứng.
+
+Ưu tiên phương án 1 cho nội dung toàn tập. Phương án 2 hợp nếu muốn nhấn mạnh câu hỏi gây tò mò về việc để xác tàu dưới nước. Phương án 4 tập trung vào một phần trong phim, không phải toàn bộ mọi di chỉ.
+
+Chung: thumbnail 16:9, 3840x2160 hoặc1920x1080. Chủ thể lớn, đọc rõ ở kích thước nhỏ. Chữ ngắn, cách mép ít nhất8%, tránh góc dưới phải. Mọi hình là minh họa, không giả ảnh hiện vật nghiên cứu thật. Không có trẻ em ở nền, ảnh, bóng, màn hình hoặc phản chiếu. Nếu công cụ sinh chữ sai, tạo nền không chữ rồi thêm đúng câu trong editor.
+
+==================================================
+1. TITLE: What Lies on the Seabed Is More Than Treasure
+Nghĩa: Những gì nằm dưới đáy biển còn hơn cả kho báu.
+Chữ thumbnail: MORE THAN TREASURE
+
+PROMPT THUMBNAIL 01:
+Create a compelling YouTube thumbnail for the archaeology documentary "What Lies on the Seabed Is More Than Treasure". Landscape16:9,3840x2160. One large plain terracotta transport jar lies half-buried in sand at the lower left, photographed from a low underwater three-quarter angle with a35mm lens. Its worn handle is the main focal point. A clearly adult professional diver, small in the distant middle background, directs a restrained survey light toward the jar without touching it. A few degraded wooden ribs and two separated pottery fragments provide archaeological context; do not show an intact grand ship. Natural dark blue-green water, soft suspended particles, a narrow warm lamp highlight on the terracotta, strong separation between subject and background. Reserve the upper-right35% as quiet dark space for the exact huge bold uppercase words "MORE THAN TREASURE", white with TREASURE in amber. One focal object, simple silhouette, immediately readable on mobile. The jar is a hypothetical illustration, not a named excavated specimen. No gold coins, treasure chest, gemstones, glowing relic, readable inscriptions, dramatic danger, sharks, skulls, human remains, children or youthful-looking humans anywhere. No extra text, logos, arrows or watermark.
+
+==================================================
+2. TITLE: Why Archaeologists Leave Shipwrecks Underwater
+Nghĩa: Vì sao các nhà khảo cổ để xác tàu ở lại dưới nước?
+Chữ thumbnail: WHY LEAVE IT?
+
+PROMPT THUMBNAIL 02:
+Design an intriguing science-documentary YouTube thumbnail for "Why Archaeologists Leave Shipwrecks Underwater".16:9,3840x2160. A modest, visibly incomplete wooden wreck occupies the left two-thirds of the frame, seen obliquely from above in clear blue-green water. Show weathered ribs, a few collapsed planks and natural sediment, not a perfectly intact sailing ship. One unmistakably mature adult scientific diver hovers well above the remains with a compact survey camera, looking down and documenting rather than recovering anything. Use a clean diagonal composition leading from the diver to the fragile ribs. Restrained sunlight fades into deep navy behind the subject, with realistic underwater scale and buoyancy. Keep the upper right uncluttered for the exact large bold text "WHY LEAVE IT?" in white, with LEAVE accented yellow. Communicate a scientific choice about preservation in place, without implying recovery is always prohibited. No lifting cables, gold, chests, dramatic wreck destruction, pirates, fantasy architecture, visible sonar waves, skulls, corpses, injured divers, children, teenagers, child imagery, readable labels, extra typography, logos or watermark.
+
+==================================================
+3. TITLE: One Ancient Jar. A Whole Lost Story.
+Nghĩa: Một chiếc bình cổ. Cả một câu chuyện thất lạc.
+Chữ thumbnail: CONTEXT IS EVERYTHING
+
+PROMPT THUMBNAIL 03:
+Create a visually simple editorial-comparison thumbnail for "One Ancient Jar. A Whole Lost Story." Landscape16:9,3840x2160. Use two clearly separated photographic panels divided by a narrow vertical gap. Left panel: one plain worn terracotta transport jar isolated on an anonymous dark museum support. Right panel: an illustrative view of the same jar half-buried in seabed sand beside degraded timber and a ceramic sherd, showing its surroundings. Use the same jar shape, handle and surface wear in both panels. The comparison is conceptual, not an authentic documented before-and-after from a specific excavation. The underwater panel should feel visually richer through its spatial relationships, not through added treasure. Photorealistic materials, restrained blue-green water and neutral warm museum light, high contrast, no busy inset circles. Leave a clean dark band across the upper area for the exact bold uppercase words "CONTEXT IS EVERYTHING", white with CONTEXT in amber. Large forms, mobile readability, no literal floating historical memories. No gold, imaginary writing, complete scenes inside the jar, price tags, named historical owner, faces, children anywhere, skeletons, blood, extra labels, logos, arrows or watermark.
+
+==================================================
+4. TITLE: The Hardest Work Starts After a Shipwreck Is Raised
+Nghĩa: Công việc khó khăn bắt đầu sau khi xác tàu được nâng lên.
+Chữ thumbnail: SAVING IT TAKES YEARS
+
+PROMPT THUMBNAIL 04:
+Create a premium maritime archaeology thumbnail for "The Hardest Work Starts After a Shipwreck Is Raised".16:9,3840x2160. Inside a spacious conservation hall, a large partial wooden Tudor-style hull rests securely in a fitted modern steel support cradle on the left. Show incomplete weathered timber and a discreet fine treatment spray, presented as an illustrative conservation scene inspired by the Mary Rose case, not claimed archival photography. One clearly mature adult conservator in plain work clothing stands small beside a lower support, adding scale without obscuring the hull. Wide35mm photographic viewpoint, strong diagonal lines of the ribs, neutral cool hall lighting with a gentle amber side highlight on wet wood. Right-side negative space for the exact large uppercase text "SAVING IT TAKES YEARS", stacked in short lines, white with YEARS in amber. Make ongoing care the visual story, rather than a dramatic lift. No suspended unstable hull, crane accident, cracking transformation, hazardous chemical demonstration, readable chemical labels, invented instrument data, children or youthful-looking people, human remains, gold, pirates, additional text, logos or watermark.
+
+==================================================
+5. TITLE: Shipwrecks, Lost Streets, and the Stories Beneath the Sea
+Nghĩa: Xác tàu, những con đường chìm và câu chuyện dưới biển.
+Chữ thumbnail: NOT JUST SHIPWRECKS
+
+PROMPT THUMBNAIL 05:
+Design a striking archaeology-documentary YouTube thumbnail for "Shipwrecks, Lost Streets, and the Stories Beneath the Sea". Landscape16:9,3840x2160. An oblique underwater view of modest ancient stone foundations in shallow clear seawater, inspired by the type of settlement evidence investigated at Pavlopetri. Two low parallel wall foundations form a clearly visible narrow passage leading from the foreground toward the center; adjacent foundations suggest rooms without inventing a complete town plan. These are anonymous illustrative remains, not an asserted accurate map of the named site. No people are necessary. Use gentle refracted sunlight on natural stone, pale sand, and a deep blue background with strong separation around the central passage. Keep the upper-right35% clean and darker for the exact bold uppercase words "NOT JUST SHIPWRECKS", white with SHIPWRECKS in warm yellow. A grounded mystery about ordinary human places beneath water, not fantasy lost-civilization imagery. No Atlantis, giant temples, complete standing palace, gold, glowing doorways, statues of children, human figures, skeletons, readable inscriptions, coordinates, inaccurate maps, extra text, logos or watermark.
+
+GỢI Ý DÙNG:
+- Tạo thử phương án1 và2 cho cùng video; đánh giá tỷ lệ nhấp cùng mức giữ người xem, không chỉ độ bắt mắt.
+- Giữ lời hứa của tiêu đề đúng nội dung; không quảng bá đây là phát hiện mới của đoàn phim.
+- Prompt là chỉ dẫn, không bảo đảm ảnh sinh đúng. Kiểm tra kỹ hình người, hình trẻ em ở nền và chữ trước khi sử dụng.

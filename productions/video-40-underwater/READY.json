@@ -1,0 +1,241 @@
+{
+  "topic": 40,
+  "target_seconds": 1222,
+  "expected_samples_48000": 58656000,
+  "release_tag": "underwater-video-40-20m22s",
+  "voices_complete": false,
+  "documents_inventory": [
+    {
+      "path": "documents/5_TIEU_DE_5_PROMPT_THUMBNAIL.txt",
+      "bytes": 8590,
+      "sha256": "706962fc94130204d9aa8c4d37e767b2104c2ac7a8c29b873209f0208f7f8b44"
+    },
+    {
+      "path": "documents/CANH_DUNG_LAI.txt",
+      "bytes": 383,
+      "sha256": "07959944943bce883565ff47aba787aebdfa07f269af27179823171ef03ddf48"
+    },
+    {
+      "path": "documents/DOCUMENT_QA.json",
+      "bytes": 505,
+      "sha256": "76c41196879f125974796f83b6f5192681f5826460106f011988ec5a44c0ec4f"
+    },
+    {
+      "path": "documents/GIONG_DA_LUU.md",
+      "bytes": 1052,
+      "sha256": "3aab1209f0d32e5587e5fd6c1ad3174c49f6726a0f5a1e10cd677f9f7c46b1a9"
+    },
+    {
+      "path": "documents/HOOK_30_GIAY_10_SHOT.csv",
+      "bytes": 1270,
+      "sha256": "97238b78cf6db6d88cd2424982078bbeab9829d2341537a81f6e3b3db1b6092f"
+    },
+    {
+      "path": "documents/KICH_BAN_EN_20m22s.txt",
+      "bytes": 20179,
+      "sha256": "7a401a3d2ba5d3fe5564a915aa2e000153a1bde04af216c1b4587648b0aaf04f"
+    },
+    {
+      "path": "documents/KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 24730,
+      "sha256": "32710372fca28c685b6e49c6b6985b2ccbaa3cd0ff090f2c9d764f188b5bf9de"
+    },
+    {
+      "path": "documents/LOI_DAN_EN_123_CANH.srt",
+      "bytes": 24253,
+      "sha256": "b3d9ccac79f6fb4b7e2b8727a045984df03a8c021fcf9a028492f5d1e592cb28"
+    },
+    {
+      "path": "documents/NARRATION_STYLE_LOCKED.json",
+      "bytes": 1352,
+      "sha256": "5255f07cbe82192efcf047f851a97277b4744e2c9b62abf2f34bb6315a54a149"
+    },
+    {
+      "path": "documents/NGUON_KIEM_CHUNG.md",
+      "bytes": 6803,
+      "sha256": "70279352c8d59c943e60e46ad0ee80cd5449f0a0bc9718c54099b7609a4f79b9"
+    },
+    {
+      "path": "documents/PHAN_TICH_VIDEO_NGUON.md",
+      "bytes": 4471,
+      "sha256": "db4362451618ed9c7e2a46abc030e2d1280adbf4a1421c698fa69724e9fd6138"
+    },
+    {
+      "path": "documents/PROMPTS/UNDERWATER_40_PROMPTS_01_001_010.txt",
+      "bytes": 16408,
+      "sha256": "ff0bb17ad13355524a53266d6fb6df675d324790baf63af0b745539937b998bf"
+    },
+    {
+      "path": "documents/PROMPTS/UNDERWATER_40_PROMPTS_02_011_020.txt",
+      "bytes": 16406,
+      "sha256": "1073620e87e591b9875eb6abfa634f2239549a52ec0e7ec3086d09a9ac1ab524"
+    },
+    {
+      "path": "documents/PROMPTS/UNDERWATER_40_PROMPTS_03_021_030.txt",
+      "bytes": 16424,
+      "sha256": "a07f0fb0b3166974255f2fb972832f1062c849357a1dc087fdac3d5881a3fb82"
+    },
+    {
+      "path": "documents/PROMPTS/UNDERWATER_40_PROMPTS_04_031_040.txt",
+      "bytes": 16392,
+      "sha256": "354057a4640635e4804ece8d88976800397252d378f69759b7385dc4ff6eb7f2"
+    },
+    {
+      "path": "documents/PROMPTS/UNDERWATER_40_PROMPTS_05_041_050.txt",
+      "bytes": 16375,
+      "sha256": "138e1f1c403c333e9045c703f69889cca5bab249018e57f28ff3ec07a9c5a53a"
+    },
+    {
+      "path": "documents/PROMPTS/UNDERWATER_40_PROMPTS_06_051_060.txt",
+      "bytes": 16437,
+      "sha256": "76493a9230f4b31c1856a0cab2503fd7579f9e40aca2c028e66fca2ab59b7272"
+    },
+    {
+      "path": "documents/PROMPTS/UNDERWATER_40_PROMPTS_07_061_070.txt",
+      "bytes": 16425,
+      "sha256": "5c28dc89d29019635af42e0bf00ed5d1ecd17a391178072f83385d4f3d6ff6d2"
+    },
+    {
+      "path": "documents/PROMPTS/UNDERWATER_40_PROMPTS_08_071_080.txt",
+      "bytes": 16412,
+      "sha256": "b015a97fff8482ce9eb88b8ce3577f00dee0fa75553c6b264bac765ccc6a4ff2"
+    },
+    {
+      "path": "documents/PROMPTS/UNDERWATER_40_PROMPTS_09_081_090.txt",
+      "bytes": 16466,
+      "sha256": "2f1a78a4a5e8347b2e9a41c312e430b6dd3043f335c3dcdf9734508e8149e3e5"
+    },
+    {
+      "path": "documents/PROMPTS/UNDERWATER_40_PROMPTS_10_091_100.txt",
+      "bytes": 16432,
+      "sha256": "5bdb6e15618bcfb9f6602879a9c21ea941f0916e969df20c4d9f2d6437eaaf49"
+    },
+    {
+      "path": "documents/PROMPTS/UNDERWATER_40_PROMPTS_11_101_110.txt",
+      "bytes": 16467,
+      "sha256": "8400aa4ddbdf58a96c8a1fbcfb671c5c146bd6a376630814ef557afaf7476bff"
+    },
+    {
+      "path": "documents/PROMPTS/UNDERWATER_40_PROMPTS_12_111_120.txt",
+      "bytes": 16450,
+      "sha256": "fbce6fc9f3cec2bd71d92c9fc0df03d25e18ea86808e8e486d1727db5f18fb5e"
+    },
+    {
+      "path": "documents/PROVIDER_TEXT_METADATA_AUDIT.json",
+      "bytes": 5996,
+      "sha256": "c8eb8a40d03548487f99668fb2e01d6895e063d157fa7fba64054c8978e6b2ce"
+    },
+    {
+      "path": "documents/README.md",
+      "bytes": 2324,
+      "sha256": "3b657cb1ace50268bd97e11b86b958cdeaa7663da148fb6b7a2cbb523b706096"
+    },
+    {
+      "path": "documents/TIMELINE_123_CANH.csv",
+      "bytes": 41100,
+      "sha256": "d106bcae335c4e1587e6572fde311565c965aa95d060851b471cc73a8b96a306"
+    },
+    {
+      "path": "documents/TRANSLATION_REVIEW.json",
+      "bytes": 488,
+      "sha256": "fb86e9ce21d2098ebc8e2797a98a00873d4c66158868c7fc24ecefac409ebedd"
+    },
+    {
+      "path": "documents/VOICE_FILE_NAMING.json",
+      "bytes": 2822,
+      "sha256": "a94359e30be3c7055ac575715b1f880b4bea2e672def83b2a910290dd5444822"
+    },
+    {
+      "path": "documents/VOICE_PROFILES_LOCKED.json",
+      "bytes": 12987,
+      "sha256": "c4fc8c8fb3ebc50068536893c35f03a40e9810dcc34e3ce3886bdb69ceeac195"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/cs-CZ.txt",
+      "bytes": 22219,
+      "sha256": "23a1bef2b0e0e85d42320cb31e0f348f1707d6aa923081600572a0b213e440f5"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/da-DK.txt",
+      "bytes": 22243,
+      "sha256": "aec4b29dbf760730c36df038ba56ffee9d39f5784506333353a6cf926ab62b91"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/de-DE.txt",
+      "bytes": 25398,
+      "sha256": "d4c9efd289287beb29fd51cb24d99cb4b78f3b4dce6002c1d7be194fc5d9a0c9"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/en-US.txt",
+      "bytes": 21559,
+      "sha256": "ffc71be2cb333b3a71592d849e682a8ecc3f1127c6a4e7c0280ade44f6446a26"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/es-ES.txt",
+      "bytes": 24508,
+      "sha256": "7cf8a053f965f3ce3fc4ffdb54b11b59ed38d662548b2fd154c0c3fad57000b7"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/fi-FI.txt",
+      "bytes": 22496,
+      "sha256": "8438f38d485f237943e1fe7a9b955b2c23fa4ef80c78223c87d28b73c96eb1c6"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/fr-FR.txt",
+      "bytes": 25991,
+      "sha256": "867f5c625abbbc5ba3f95d1ba6f492227b52547d20c36ae8114832ed31cf823f"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/it-IT.txt",
+      "bytes": 24031,
+      "sha256": "4f81f3f98145786aa87f7c8daa1baf23a866539e21cc1cf56339c74033ef26da"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/ja-JP.txt",
+      "bytes": 28080,
+      "sha256": "85d9381d2058e6d0ad67eba20935ba21782cb0be9a0e482b9c940a4d51661430"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/ko-KR.txt",
+      "bytes": 26007,
+      "sha256": "89a37353930f9ef0042f3dc693c8569b199620d7e21a1d8267012c256de03182"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/mww.txt",
+      "bytes": 16613,
+      "sha256": "3baf61203f881d6df5f76073f6096d7f0c02d8706a887135e82c59cd872dca54"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/nb-NO.txt",
+      "bytes": 21503,
+      "sha256": "a5c2d2fcd06936fa08fdc230fab40d3ea01389b16dafcb7ff6736de52f302267"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/nl-NL.txt",
+      "bytes": 24299,
+      "sha256": "f7b1712dd71a8a924a3cc0a86e507b40e7f7045b0dae65be4b3c2040a1913c66"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/pl-PL.txt",
+      "bytes": 23181,
+      "sha256": "c70131c31700efd3f8a67bd8dc3a1a432b9330a584a74d9bac19f3747c127e08"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/pt-PT.txt",
+      "bytes": 23714,
+      "sha256": "2df998c42e85e51ab595b00e5bd576d45193f41bfc5f1f43927709988ad4a696"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/sv-SE.txt",
+      "bytes": 22143,
+      "sha256": "f65e33e914684f4169819464a0e517fe7b80d879e902fee148db1903eb887dae"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/vi-VN.txt",
+      "bytes": 31410,
+      "sha256": "d22d50a423c8ea752eaef38379503e6c76be0e0968428106912f95908887f702"
+    }
+  ],
+  "scope": "Only requested topic40 generated scripts,120prompts,5titles/thumbnailprompts,voiceprofiles,translationtext,timing andQA;no source media,models,reference audio,credentials or other topics",
+  "export_only_no_voice_generation": true
+}

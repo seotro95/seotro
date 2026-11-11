@@ -1,0 +1,21 @@
+{
+  "topic": 40,
+  "target_seconds": 1222,
+  "english_words": 3006,
+  "unique_prompts": 120,
+  "prompt_txt_files": 12,
+  "prompts_each_txt": 10,
+  "numbering": "1-120",
+  "timeline_slots": 123,
+  "duration_math": "122x10+2=1222",
+  "reuse": {
+    "121": 3,
+    "122": 1,
+    "123": "1:last2seconds"
+  },
+  "prompt_no_children_and_silent_in_every_prompt": true,
+  "actual_generated_footage_checked": false,
+  "title_thumbnail_pairs": 5,
+  "language_script_count": 17,
+  "independent_native_review": false
+}
