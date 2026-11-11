@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "checks": {
+    "open_project_and_preview_frame": true,
+    "scene_edit_controls": true,
+    "click_crop_focus": true,
+    "play_pause_seek_preview": true,
+    "split_merge_preserves_voice_duration": true,
+    "move_source_controls": true,
+    "subtitle_edit_add_delete": true,
+    "import_export_txt_and_srt": true,
+    "logo_audio_and_subtitle_style_controls": true,
+    "save_and_reopen_project": true,
+    "download_install_effect_pack": true,
+    "manual_export_dialog_1080p_25fps": true,
+    "open_exported_video_action": true,
+    "one_click_automatic_gui_without_subtitles": true,
+    "automatic_ten_scene_30_second_opening": true,
+    "automatic_video_and_reopenable_project_saved": true,
+    "automatic_portrait_9_16_720x1280": true,
+    "cancel_keeps_completed_video": true,
+    "repeat_auto_keeps_previous_export": true,
+    "portrait_preview_orientation_correct": true,
+    "automatic_result_editable_in_gui": true
+  },
+  "error": null,
+  "frozen_gui_actions_tested": true,
+  "tests_do_not_prove_aesthetic_or_factually_exact_AI_selection": true
+}

@@ -31,3 +31,14 @@ Nút TỰ ĐỘNG EDIT & XUẤT chạy từ voice + ảnh/video đến phim hoà
 Ngôn ngữ auto dùng Whisper, giữ lời/voice gốc, dùng lời Anh theo cùng mốc để chọn hình. Có ô Tham chiếu Anh TXT/SRT. H’Mông chọn hmn và cần SRT tham chiếu Anh đúng mốc; thêm SRT H’Mông nếu muốn phụ đề H’Mông. Không giả định có ASR H’Mông đáng tin cậy. Cảnh khớp ý thấp được đánh dấu để xem lại; không cam kết AI chọn đúng mọi chi tiết khoa học.
 
 Full không cần Python/API trả phí; lần đầu cần mạng tải FFmpeg/model. Hồ sơ 17 giọng và công cụ tạo voice không đổi. Giữ nguồn/cache đúng đường dẫn. Kiểm thử Windows gồm thao tác GUI, voice Anh/Việt/Tây Ban Nha/Nhật và H’Mông với tham chiếu. GPU vật lý chưa được kiểm thử.
+
+
+## AutoDoc Studio 2.3.0 — 2026-11-11
+
+Bản đầy đủ: https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.3.0/AutoDocStudio-2.3.0-Full-Windows-x64.zip
+
+Chọn 16:9 hoặc 9:16 tại đầu cửa sổ hoặc hộp xuất; 720 là cạnh ngắn. Có 1280×720 / 720×1280 và 1920×1080 / 1080×1920. Preview, crop, logo và phụ đề theo khung đã chọn. Dự án cũ mặc định 16:9.
+
+Đã sửa quy tắc đóng gói xóa nhầm silero_vad_v6.onnx trong 2.2.0. Nếu chỉ cần vá 2.2.0, giải nén SUA_LOI_VAD_2.2.0.zip vào thư mục chứa AutoDocStudio.exe và gộp _internal. Không thay EXE. Bản 2.3.0 đã có model này.
+
+CI 43001605728 thành công. Kiểm thử sau giải nén ZIP thực tế, vô hiệu thư mục build gốc: VAD ONNX inference, tự edit Anh, nhận dạng/dịch Việt, GUI preview, xuất cả ngang và dọc, pixel logo/phụ đề dọc. Kiểm tra tải công khai khớp SHA-256 7ffbb35d2b7d476fd2c01b2e7c21eca7182b1cb7d63d001a02b6eb270ad6e0ea. Báo cáo ở tools/autodoc-studio/QA/. Không khẳng định mọi lựa chọn hình AI là chính xác về nội dung; người dùng cần xem lại timeline. 17 profile voice giữ nguyên.

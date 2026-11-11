@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "version": "2.3.0",
+  "tested_archive": "AutoDocStudio-2.3.0-Full-Windows-x64.zip",
+  "tested_archive_sha256": "7ffbb35d2b7d476fd2c01b2e7c21eca7182b1cb7d63d001a02b6eb270ad6e0ea",
+  "zip_checks": {
+    "required_vad_present": true,
+    "required_vad_sha256": "4cbf549b8326f60f80f2536d9eefeb450a9abe83365a098031c89719f1be17d2",
+    "zip_crc_passed": true
+  },
+  "original_dist_tree_disabled_during_test": true,
+  "vad_loaded_from_extracted_archive": true,
+  "vad_onnx_inference_passed": true,
+  "english_auto_edit_after_extraction_passed": true,
+  "vietnamese_transcription_translation_export_after_extraction_passed": true,
+  "extracted_app_gui_preview_passed": true,
+  "old_release_missing_vad_reproduced": true,
+  "small_patch_restored_original_2_2_0_auto_edit": true,
+  "patch_did_not_modify_original_exe": true,
+  "repair_archive": "SUA_LOI_VAD_2.2.0.zip",
+  "repair_archive_sha256": "724969af8e21dc0541cbc497a962aa72e2387ffe8295db1a5c0ad29c32aae0f7",
+  "source_audio_timing_verified": true,
+  "landscape_16_9_1280x720_verified": true,
+  "portrait_9_16_720x1280_verified": true,
+  "portrait_logo_and_subtitle_pixels_verified": true,
+  "portrait_preview_360x640_verified": true
+}
