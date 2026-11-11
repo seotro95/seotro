@@ -27,8 +27,8 @@
     },
     {
       "path": "documents/HOOK_30_GIAY_10_SHOT.csv",
-      "bytes": 1270,
-      "sha256": "97238b78cf6db6d88cd2424982078bbeab9829d2341537a81f6e3b3db1b6092f"
+      "bytes": 1259,
+      "sha256": "4c8192bceb705bc503811204ded3db40dae12be88beb893aa6cc72f66969a3af"
     },
     {
       "path": "documents/KICH_BAN_EN_20m22s.txt",
@@ -132,8 +132,8 @@
     },
     {
       "path": "documents/TIMELINE_123_CANH.csv",
-      "bytes": 41100,
-      "sha256": "d106bcae335c4e1587e6572fde311565c965aa95d060851b471cc73a8b96a306"
+      "bytes": 40976,
+      "sha256": "7b85f210e36a736572b7cbb8bdab80796e44ac9224185be0da394862af617086"
     },
     {
       "path": "documents/TRANSLATION_REVIEW.json",

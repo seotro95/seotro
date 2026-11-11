@@ -12,7 +12,7 @@ for item in inventory:
  assert item['path'].startswith('documents/') and '..' not in item['path']
  file=P/item['path'];assert file.suffix in {'.txt','.md','.csv','.srt','.json'}
  data=file.read_bytes();data.decode('utf-8')
- assert len(data)==item['bytes'] and hashlib.sha256(data).hexdigest()==item['sha256']
+ assert len(data)==item['bytes'] and hashlib.sha256(data).hexdigest()==item['sha256'], item['path']
 doczip=P/'UNDERWATER_40_TAI_LIEU_20m22s.zip'
 with zipfile.ZipFile(doczip,'w',zipfile.ZIP_DEFLATED) as z:
  for item in inventory:z.write(P/item['path'],str(Path(item['path']).relative_to('documents')))
