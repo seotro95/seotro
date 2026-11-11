@@ -1,0 +1,11 @@
+﻿shot,timeline_in,timeline_out,prompt_id,source_in,source_out,note
+1,0,3,1,2,5,Alternative opening montage; preserve original voice0-30s; do not add runtime
+2,3,6,2,2,5,Alternative opening montage; preserve original voice0-30s; do not add runtime
+3,6,9,3,2,5,Alternative opening montage; preserve original voice0-30s; do not add runtime
+4,9,12,4,2,5,Alternative opening montage; preserve original voice0-30s; do not add runtime
+5,12,15,5,2,5,Alternative opening montage; preserve original voice0-30s; do not add runtime
+6,15,18,6,2,5,Alternative opening montage; preserve original voice0-30s; do not add runtime
+7,18,21,29,2,5,Alternative opening montage; preserve original voice0-30s; do not add runtime
+8,21,24,50,2,5,Alternative opening montage; preserve original voice0-30s; do not add runtime
+9,24,27,63,2,5,Alternative opening montage; preserve original voice0-30s; do not add runtime
+10,27,30,71,2,5,Alternative opening montage; preserve original voice0-30s; do not add runtime

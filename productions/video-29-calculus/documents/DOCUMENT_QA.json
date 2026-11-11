@@ -1,0 +1,17 @@
+{
+  "topic": 29,
+  "title": "Dental Calculus: The Smallest Archive",
+  "target_seconds": 1302,
+  "target_pcm_frames_48000": 62496000,
+  "english_words": 3344,
+  "timeline_scenes": 131,
+  "unique_prompts": 130,
+  "txt_files": 13,
+  "prompts_per_txt": 10,
+  "reuse_slots": 1,
+  "children_in_prompts": false,
+  "silent_prompts": true,
+  "footage_generated": false,
+  "voices_generated": false,
+  "native_language_review": false
+}

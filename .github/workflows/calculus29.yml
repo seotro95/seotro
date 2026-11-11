@@ -1,0 +1,20 @@
+name: Dental calculus topic29 production
+on:
+  push:
+    branches: [codex/topic29-calculus-21m42s]
+    paths: ['productions/video-29-calculus/**', '.github/workflows/calculus29.yml']
+permissions:
+  contents: write
+jobs:
+  documents:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: productions/video-29-calculus
+      - name: Validate and publish document package
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        run: python productions/video-29-calculus/publish_documents.py
