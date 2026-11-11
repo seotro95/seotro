@@ -59,6 +59,8 @@ for v in voices:readme+=f"| {v['name']} | [{v['filename']}]({v['url']}) | 22:32 
 readme+='\nKhi có clip, dùng timeline để dựng theo bản Anh; đoạn cuối chỉ lấy 2 giây. Kế hoạch 30 giây đầu gồm 10 cảnh khác nhau, nằm trong tổng 22:32. Bản đồ và nhãn khoa học cần được kiểm tra trước khi thêm trong phần dựng.\n'
 (D/'README.md').write_text(readme)
 if (R/'PRODUCTION_STEPS_APPLIED.md').exists():shutil.copyfile(R/'PRODUCTION_STEPS_APPLIED.md',D/'PRODUCTION_STEPS_APPLIED.md')
+title_file=R/'LAND_BRIDGES_38_5_TIEU_DE_5_PROMPT_THUMBNAIL.txt'
+if title_file.exists():shutil.copyfile(title_file,D/title_file.name)
 guide=D/'HUONG_DAN_SU_DUNG.txt'
 guide.write_text(guide.read_text(encoding='utf-8-sig').replace('SRT sẽ khớp các mốc này khi voice đã được dựng/kiểm tra; hiện là kế hoạch.','Voice tiếng Anh đã được dựng theo các mốc này và kiểm tra thời lượng giải mã.').replace('Bộ này gồm kịch bản, prompt và hồ sơ chuẩn bị; không phải footage đã tạo hay MP4đã edit.','Bộ này gồm kịch bản, prompt, 17 voice và hồ sơ kiểm tra; chưa có footage hoặc MP4 đã edit.'),encoding='utf-8-sig')
 with zipfile.ZipFile(O/'LAND_BRIDGES_38_17_VOICES_22m32s.zip','w',zipfile.ZIP_STORED) as z:

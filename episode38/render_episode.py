@@ -72,7 +72,7 @@ def accent(path,words,locale):
    weight=max(0,min(1,(j-a)/ramp,(b-1-j)/ramp));samples[j]=round(samples[j]*(1+(gain-1)*weight))
  with wave.open(str(path),'wb') as w:w.setnchannels(1);w.setsampwidth(2);w.setframerate(rate);w.writeframes(samples.tobytes())
  return len(selected)
-def online(locale,preview=False):
+def online(locale,preview=False,synthesis_range=None,synthesis_only=False):
  assert json.loads((R/'DOCUMENT_DELIVERY_STATE.json').read_text())['documents_published']
  if locale!='en-US':assert (S/f'{locale}.reviewed38').exists(),'Localized context review marker missing'
  import edge_tts,edge_tts.communicate,edge_tts.voices
@@ -128,6 +128,7 @@ def online(locale,preview=False):
    if attempt==2:raise RuntimeError(f'Incomplete spoken text:{locale}/{i+1}/{j+1}')
   accents=accent(path,words,locale);meta.write_text(json.dumps({'request_signature':signature,'coverage':coverage,'voice_id':profile['voice_id'],'rate':LOCAL.rate,'accents':accents,'source_words':len(words)}))
   time.sleep(.25);return path
+ if synthesis_range is not None:records=[item for item in records if synthesis_range[0]<=item[0]<synthesis_range[1]]
  pending=[];completed=0
  with concurrent.futures.ThreadPoolExecutor(max_workers=1 if locale in ['en-US','vi-VN'] else 2) as pool:
   futures={pool.submit(synth,item):item for item in records}
@@ -145,5 +146,6 @@ def online(locale,preview=False):
   (out/'pending_speech.json').write_text(json.dumps(pending,indent=2))
   raise RuntimeError(f'{locale}: {len(pending)}parts remain unavailable; all successful speech retained; retry only pending parts later')
  (out/'pending_speech.json').unlink(missing_ok=True)
+ if synthesis_only:return {'status':'parts_ready','locale':locale,'records':len(records),'synthesis_range':synthesis_range}
  return finish(locale,rows,raws,out=out,target=target)
 if __name__=='__main__':online(sys.argv[1],preview='--preview' in sys.argv)
