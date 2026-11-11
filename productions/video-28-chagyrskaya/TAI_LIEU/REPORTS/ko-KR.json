@@ -1,0 +1,145 @@
+{
+  "locale": "ko-KR",
+  "voice_id": "ko-KR-InJoonNeural",
+  "gender": "Male",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "target_seconds": 1362,
+  "decoded_frames_48000": 65376000,
+  "decoded_seconds": 1362.0,
+  "sha256": "75c4d031e6372da47b1a71066734d8d701f9b755ff7c87fbe380516df16843a3",
+  "filename": "CHAGYRSKAYA_28_ko-KR.mp3",
+  "bytes": 16344620,
+  "cues": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 100,
+      "raw_seconds": 131.544,
+      "tempo": 1.317548076923077,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 2,
+      "start": 100,
+      "end": 200,
+      "raw_seconds": 133.464,
+      "tempo": 1.3367788461538461,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 3,
+      "start": 200,
+      "end": 300,
+      "raw_seconds": 133.56,
+      "tempo": 1.3377403846153846,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 4,
+      "start": 300,
+      "end": 400,
+      "raw_seconds": 141.48,
+      "tempo": 1.4170673076923075,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 5,
+      "start": 400,
+      "end": 500,
+      "raw_seconds": 132.792,
+      "tempo": 1.330048076923077,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 6,
+      "start": 500,
+      "end": 600,
+      "raw_seconds": 136.656,
+      "tempo": 1.36875,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 7,
+      "start": 600,
+      "end": 700,
+      "raw_seconds": 137.856,
+      "tempo": 1.3807692307692307,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 8,
+      "start": 700,
+      "end": 800,
+      "raw_seconds": 135.024,
+      "tempo": 1.3524038461538461,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 9,
+      "start": 800,
+      "end": 900,
+      "raw_seconds": 135.792,
+      "tempo": 1.3600961538461538,
+      "trailing_pause_target": 0.16,
+      "parts": 4
+    },
+    {
+      "id": 10,
+      "start": 900,
+      "end": 1000,
+      "raw_seconds": 136.08,
+      "tempo": 1.3629807692307694,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 11,
+      "start": 1000,
+      "end": 1100,
+      "raw_seconds": 131.232,
+      "tempo": 1.314423076923077,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 12,
+      "start": 1100,
+      "end": 1200,
+      "raw_seconds": 126.768,
+      "tempo": 1.2697115384615385,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 13,
+      "start": 1200,
+      "end": 1300,
+      "raw_seconds": 142.056,
+      "tempo": 1.4228365384615385,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 14,
+      "start": 1300,
+      "end": 1362,
+      "raw_seconds": 85.368,
+      "tempo": 1.3804657179818887,
+      "trailing_pause_target": 0.16,
+      "parts": 1
+    }
+  ],
+  "pitch_shift": false,
+  "technical_qa_passed": true,
+  "independent_native_listening_review": false,
+  "translation_method": "Google automated draft; assistant context checks; independent native editorial review pending",
+  "delivery_filename": "CHAGYRSKAYA_28_Han_Quoc.mp3"
+}

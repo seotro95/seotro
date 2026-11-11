@@ -1,0 +1,13 @@
+{
+  "topic_id": 28,
+  "target_seconds": 1362,
+  "english_words": 3548,
+  "main_scenes": 137,
+  "optional_replacements": 3,
+  "txt_files": 14,
+  "prompts_per_txt": 10,
+  "total_prompts": 140,
+  "final_clip_use_seconds": 2,
+  "voice_status": "17MP3 decoded exactly1362seconds; native language review pending",
+  "footage_generated": false
+}

@@ -1,0 +1,107 @@
+{
+  "locales": [
+    {
+      "locale": "cs-CZ",
+      "cues": 14,
+      "source": "automated draft with dates normalized and contextual/terminology checks",
+      "independent_native_review": false
+    },
+    {
+      "locale": "da-DK",
+      "cues": 14,
+      "source": "automated draft with dates normalized and contextual/terminology checks",
+      "independent_native_review": false
+    },
+    {
+      "locale": "de-DE",
+      "cues": 14,
+      "source": "automated draft with dates normalized and contextual/terminology checks",
+      "independent_native_review": false
+    },
+    {
+      "locale": "en-US",
+      "cues": 137,
+      "source": "English original",
+      "independent_native_review": false
+    },
+    {
+      "locale": "es-ES",
+      "cues": 14,
+      "source": "automated draft with dates normalized and contextual/terminology checks",
+      "independent_native_review": false
+    },
+    {
+      "locale": "fi-FI",
+      "cues": 14,
+      "source": "automated draft with dates normalized and contextual/terminology checks",
+      "independent_native_review": false
+    },
+    {
+      "locale": "fr-FR",
+      "cues": 14,
+      "source": "automated draft with dates normalized and contextual/terminology checks",
+      "independent_native_review": false
+    },
+    {
+      "locale": "it-IT",
+      "cues": 14,
+      "source": "automated draft with dates normalized and contextual/terminology checks",
+      "independent_native_review": false
+    },
+    {
+      "locale": "ja-JP",
+      "cues": 14,
+      "source": "automated draft with dates normalized and contextual/terminology checks",
+      "independent_native_review": false
+    },
+    {
+      "locale": "ko-KR",
+      "cues": 14,
+      "source": "automated draft with dates normalized and contextual/terminology checks",
+      "independent_native_review": false
+    },
+    {
+      "locale": "mww",
+      "cues": 14,
+      "source": "assistant contextual rewrite",
+      "independent_native_review": false
+    },
+    {
+      "locale": "nb-NO",
+      "cues": 14,
+      "source": "automated draft with dates normalized and contextual/terminology checks",
+      "independent_native_review": false
+    },
+    {
+      "locale": "nl-NL",
+      "cues": 14,
+      "source": "automated draft with dates normalized and contextual/terminology checks",
+      "independent_native_review": false
+    },
+    {
+      "locale": "pl-PL",
+      "cues": 14,
+      "source": "automated draft with dates normalized and contextual/terminology checks",
+      "independent_native_review": false
+    },
+    {
+      "locale": "pt-PT",
+      "cues": 14,
+      "source": "automated draft with dates normalized and contextual/terminology checks",
+      "independent_native_review": false
+    },
+    {
+      "locale": "sv-SE",
+      "cues": 14,
+      "source": "automated draft with dates normalized and contextual/terminology checks",
+      "independent_native_review": false
+    },
+    {
+      "locale": "vi-VN",
+      "cues": 14,
+      "source": "assistant contextual rewrite",
+      "independent_native_review": false
+    }
+  ],
+  "white_hmong_dialect_independently_verified": false
+}

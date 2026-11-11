@@ -1,0 +1,13 @@
+{
+  "topic_id": 28,
+  "title": "Chagyrskaya: The Connections That Remain",
+  "target_seconds": 1362,
+  "status": "script_prompts_and17voices_ready_for_release_native_review_pending",
+  "main_scenes": 137,
+  "optional_replacements": 3,
+  "prompt_txt_files": 14,
+  "voice_count": 17,
+  "video_rendered": false,
+  "release": "https://github.com/seotro95/seotro/releases/tag/chagyrskaya-video-28-22m42s",
+  "native_run": 42971383014
+}

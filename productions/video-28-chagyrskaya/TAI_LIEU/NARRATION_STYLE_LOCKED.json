@@ -1,0 +1,17 @@
+{
+  "id": "chagyrskaya-documentary-natural-v1",
+  "online_tool": "Melo-Viet-Studio1.3.1 online_backend",
+  "online_source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "hmong_tool": "Voice-Studio-Hmong1.6.6 native VITS/OpenVoiceV2",
+  "hmong_source_commit": "061430d958b8d5fc14d04209c6f0cd20492382c2",
+  "hmong_reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+  "pitch_shift": false,
+  "english_native_rate": "-12%",
+  "other_online_native_rate": "+0%",
+  "hmong_native_rates": [
+    0.98,
+    1.02
+  ],
+  "processing": "native punctuation intonation, cue/chapter atempo, short closing pause, loudnorm target-19LUFS/-2dBTP, mono48kHz MP3 96k",
+  "same_voice_identity_as_episode21": true
+}

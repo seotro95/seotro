@@ -1,0 +1,145 @@
+{
+  "locale": "ja-JP",
+  "voice_id": "ja-JP-KeitaNeural",
+  "gender": "Male",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "target_seconds": 1362,
+  "decoded_frames_48000": 65376000,
+  "decoded_seconds": 1362.0,
+  "sha256": "5a02b81da2e93eff6adaec539737b0f55c9818bebb2af18ce1da60dad9c7ce00",
+  "filename": "CHAGYRSKAYA_28_ja-JP.mp3",
+  "bytes": 16344620,
+  "cues": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 100,
+      "raw_seconds": 128.76,
+      "tempo": 1.2896634615384615,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 2,
+      "start": 100,
+      "end": 200,
+      "raw_seconds": 135.672,
+      "tempo": 1.3588942307692307,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 3,
+      "start": 200,
+      "end": 300,
+      "raw_seconds": 139.656,
+      "tempo": 1.398798076923077,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 4,
+      "start": 300,
+      "end": 400,
+      "raw_seconds": 150.12,
+      "tempo": 1.5036057692307692,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 5,
+      "start": 400,
+      "end": 500,
+      "raw_seconds": 132.456,
+      "tempo": 1.3266826923076922,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 6,
+      "start": 500,
+      "end": 600,
+      "raw_seconds": 143.904,
+      "tempo": 1.4413461538461538,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 7,
+      "start": 600,
+      "end": 700,
+      "raw_seconds": 142.512,
+      "tempo": 1.427403846153846,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 8,
+      "start": 700,
+      "end": 800,
+      "raw_seconds": 139.392,
+      "tempo": 1.396153846153846,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 9,
+      "start": 800,
+      "end": 900,
+      "raw_seconds": 135.312,
+      "tempo": 1.3552884615384617,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 10,
+      "start": 900,
+      "end": 1000,
+      "raw_seconds": 143.808,
+      "tempo": 1.4403846153846152,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 11,
+      "start": 1000,
+      "end": 1100,
+      "raw_seconds": 139.224,
+      "tempo": 1.3944711538461536,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 12,
+      "start": 1100,
+      "end": 1200,
+      "raw_seconds": 134.856,
+      "tempo": 1.3507211538461537,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 13,
+      "start": 1200,
+      "end": 1300,
+      "raw_seconds": 152.4,
+      "tempo": 1.5264423076923077,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 14,
+      "start": 1300,
+      "end": 1362,
+      "raw_seconds": 81.744,
+      "tempo": 1.321862871927555,
+      "trailing_pause_target": 0.16,
+      "parts": 1
+    }
+  ],
+  "pitch_shift": false,
+  "technical_qa_passed": true,
+  "independent_native_listening_review": false,
+  "translation_method": "Google automated draft; assistant context checks; independent native editorial review pending",
+  "delivery_filename": "CHAGYRSKAYA_28_Nhat_Ban.mp3"
+}

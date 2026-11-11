@@ -1,0 +1,147 @@
+{
+  "locale": "mww",
+  "voice_id": "hmong-female-3",
+  "gender": "Female",
+  "source_commit": "061430d958b8d5fc14d04209c6f0cd20492382c2",
+  "target_seconds": 1362,
+  "decoded_frames_48000": 65376000,
+  "decoded_seconds": 1362.0,
+  "sha256": "c5af6ec2029b08a9ac55b55b65b4efb7b6fcb54414c964a33ff79af81b41cd02",
+  "filename": "CHAGYRSKAYA_28_mww.mp3",
+  "bytes": 16344620,
+  "cues": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 100,
+      "raw_seconds": 98.0154375,
+      "tempo": 0.9817251352163462,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 2,
+      "start": 100,
+      "end": 200,
+      "raw_seconds": 94.58014583333333,
+      "tempo": 0.947317165798611,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 3,
+      "start": 200,
+      "end": 300,
+      "raw_seconds": 92.38585416666666,
+      "tempo": 0.9253390842013888,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 4,
+      "start": 300,
+      "end": 400,
+      "raw_seconds": 95.04327083333334,
+      "tempo": 0.9519558376736111,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 5,
+      "start": 400,
+      "end": 500,
+      "raw_seconds": 95.25352083333334,
+      "tempo": 0.9540617070646368,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 6,
+      "start": 500,
+      "end": 600,
+      "raw_seconds": 95.5889375,
+      "tempo": 0.9574212489983974,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 7,
+      "start": 600,
+      "end": 700,
+      "raw_seconds": 94.6381875,
+      "tempo": 0.9478985126201923,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 8,
+      "start": 700,
+      "end": 800,
+      "raw_seconds": 96.40291666666667,
+      "tempo": 0.9655740852029915,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 9,
+      "start": 800,
+      "end": 900,
+      "raw_seconds": 98.94422916666667,
+      "tempo": 0.9910279363648504,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 10,
+      "start": 900,
+      "end": 1000,
+      "raw_seconds": 97.93416666666667,
+      "tempo": 0.980911124465812,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 11,
+      "start": 1000,
+      "end": 1100,
+      "raw_seconds": 93.27983333333333,
+      "tempo": 0.9342932024572649,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 12,
+      "start": 1100,
+      "end": 1200,
+      "raw_seconds": 95.5425,
+      "tempo": 0.9569561298076923,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 13,
+      "start": 1200,
+      "end": 1300,
+      "raw_seconds": 100.5231875,
+      "tempo": 1.0068428235176283,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 14,
+      "start": 1300,
+      "end": 1362,
+      "raw_seconds": 61.63229166666667,
+      "tempo": 0.9966411977145321,
+      "trailing_pause_target": 0.16,
+      "parts": 4
+    }
+  ],
+  "pitch_shift": false,
+  "technical_qa_passed": true,
+  "independent_native_listening_review": false,
+  "translation_method": "Assistant rewritten contextual translation; independent native editorial and listening review pending",
+  "reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+  "white_hmong_dialect_independently_verified": false,
+  "delivery_filename": "CHAGYRSKAYA_28_Hmong_Trang_Nu.mp3"
+}

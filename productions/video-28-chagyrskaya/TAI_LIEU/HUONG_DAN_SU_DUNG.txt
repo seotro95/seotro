@@ -1,0 +1,15 @@
+CHAGYRSKAYA28 — 22:42
+
+1. Kịch bản chính tiếngAnh,137mốc hình. Đọc phân tích nguồn và bảng nguồn khoa học trước khi dựng.
+2. Có14TXT, mỗiTXT10prompt, đánh số1–140. Tạo137clip chính dài10giây. Prompt138–140là thay thế tùy chọn, không nối vào cuối.
+3. Timeline:136clip×10giây+2giây của clip137=1.362giây, đúng22:42. Mọi dissolve/đổi nhịp phải giữ tổng này.
+4. Sao chép phầnVIDEO PROMPTvào generator;VOICE CONTEXTchỉ giúp người dựng hiểu cảnh. Không yêu cầu generator đọc voice.
+5. Hình chỉ người trưởng thành rõ35–60tuổi. Không hình trẻ em, thiếu niên, hình trên màn hình, bóng hoặc phản chiếu. Quan hệ cha–con chỉ dùng ký hiệu mẫu/nút trừu tượng cùng kích thước; không chân dung, không người lớn đóng thay người con.
+6. Clip không âm thanh/lời nói. Kiểm và xóa đường tiếng khi nhập nếugenerator vẫn tạo tiếng. VoiceAnh là đường kể chính;16voicekhác là bản thay thế, không chồng chúng lên nhau.
+7. Cácvoicecùng thời lượng22:42. Anh căn137mốc; bản khác căn14chương:13chương100giây+62giây cuối. Đây không phải đồng bộ từng từ giữa ngôn ngữ.
+8. en-US.srtlà mốc cảnh. CácSRTkhác là mốc chương, cần chia câu ngắn nếu làm phụ đề hiển thị.
+9. Không dùng hình tạo sinh như dữ liệu gene/ảnh khai quật thật. Thêm nhãn, số liệu, địa danh và đường nối đã kiểm trong hậu kỳ. Ghi rõ mô hình/tái dựng.
+10. GiữVOICE_PROFILES_LOCKED.jsoncho tập sau, không đổiVoiceIDhoặc mẫuH’mông. Tốc độ phải tính lại theo kịch bản mới. Provideronlinecó thể đổi mô hình dùIDkhông đổi.
+11. BảnViệt/H’mông được viết lại theo ngữ cảnh;14bản dịch khác dựa trên dịch tự động có kiểm thuật ngữ/năm và một số cách dùng địa phương. Chưa có rà soát/nghe độc lập bởi người bản ngữ; H’môngTrắng cần kiểm phương ngữ. QAđủ phút không phải chứng nhận ngôn ngữ.
+
+Chưa tạo footage hoặc dựngMP4của tập28.

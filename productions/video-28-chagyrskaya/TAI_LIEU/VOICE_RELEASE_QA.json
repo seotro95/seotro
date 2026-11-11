@@ -1,0 +1,243 @@
+{
+  "target_seconds": 1362,
+  "voices_checked": 17,
+  "audio": [
+    {
+      "locale": "cs-CZ",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.4953798469475883,
+      "longest_interval_below_minus50dB_seconds": 1.5,
+      "complete_decode": true,
+      "sha256": "f74865828310548ce8956b93dc9729130ec5e8e6fa26f864793a677d649644c7"
+    },
+    {
+      "locale": "da-DK",
+      "seconds": 1362.0,
+      "peak_dbfs": -3.234219427756834,
+      "longest_interval_below_minus50dB_seconds": 1.1,
+      "complete_decode": true,
+      "sha256": "89d10ac0945508a21e1453b057166065f7cdc69d3f57426493dd46c9e2607618"
+    },
+    {
+      "locale": "de-DE",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.2051994743720993,
+      "longest_interval_below_minus50dB_seconds": 1.0,
+      "complete_decode": true,
+      "sha256": "c3b8c9fb2132254666c4e16a0083865124a14187ed3a05916558fbc589f89f8d"
+    },
+    {
+      "locale": "en-US",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.35103051096543,
+      "longest_interval_below_minus50dB_seconds": 0.8,
+      "complete_decode": true,
+      "sha256": "984bb351cf932276cebf2f823bb0c3286e07355c551bc7a93778c6ac69fdeace"
+    },
+    {
+      "locale": "es-ES",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.3414539310245055,
+      "longest_interval_below_minus50dB_seconds": 1.1,
+      "complete_decode": true,
+      "sha256": "d7e6c8c2d46c7e81273b9e05ac9e6ea651ec00a997fde255fb6744be1cd9b712"
+    },
+    {
+      "locale": "fi-FI",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.27074648040833,
+      "longest_interval_below_minus50dB_seconds": 1.1,
+      "complete_decode": true,
+      "sha256": "cdcda594b45e29293b4053c1729516086c54e0d69e880a86424d4834d6b86abe"
+    },
+    {
+      "locale": "fr-FR",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.3422735535751698,
+      "longest_interval_below_minus50dB_seconds": 1.1,
+      "complete_decode": true,
+      "sha256": "74c4f69fbe303973ccf301bdd05dd9f37a2e27e42d834f47f9030a9ff2374c3c"
+    },
+    {
+      "locale": "it-IT",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.349610212371948,
+      "longest_interval_below_minus50dB_seconds": 1.0,
+      "complete_decode": true,
+      "sha256": "3032acd1e82704f8e4194cfad68b59882695c202207ac1147e6d9220710c72ed"
+    },
+    {
+      "locale": "ja-JP",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.267286966935943,
+      "longest_interval_below_minus50dB_seconds": 0.9,
+      "complete_decode": true,
+      "sha256": "5a02b81da2e93eff6adaec539737b0f55c9818bebb2af18ce1da60dad9c7ce00"
+    },
+    {
+      "locale": "ko-KR",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.6172756681307625,
+      "longest_interval_below_minus50dB_seconds": 1.4,
+      "complete_decode": true,
+      "sha256": "75c4d031e6372da47b1a71066734d8d701f9b755ff7c87fbe380516df16843a3"
+    },
+    {
+      "locale": "mww",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.3279023945114026,
+      "longest_interval_below_minus50dB_seconds": 0.5,
+      "complete_decode": true,
+      "sha256": "c5af6ec2029b08a9ac55b55b65b4efb7b6fcb54414c964a33ff79af81b41cd02"
+    },
+    {
+      "locale": "nb-NO",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.1455619715296983,
+      "longest_interval_below_minus50dB_seconds": 1.2,
+      "complete_decode": true,
+      "sha256": "5ee3f1526cfe91aae1e9a7e2ace25caa78f422345e4f2dd9d4268d810645550d"
+    },
+    {
+      "locale": "nl-NL",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.5993617291404263,
+      "longest_interval_below_minus50dB_seconds": 1.2,
+      "complete_decode": true,
+      "sha256": "4685780518e7be8bd236a4c8eba622e9a8b3145b45016da2cfb654a3eda4ec05"
+    },
+    {
+      "locale": "pl-PL",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.724343386563233,
+      "longest_interval_below_minus50dB_seconds": 1.2,
+      "complete_decode": true,
+      "sha256": "8beee1fa6bcef975018f015cc03d5f1d88928ee0a16fe9d22b78b420554b7299"
+    },
+    {
+      "locale": "pt-PT",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.2341385937703127,
+      "longest_interval_below_minus50dB_seconds": 1.1,
+      "complete_decode": true,
+      "sha256": "fe72195f5489963bae442e792887621e994a0c67d1098cc10b89d90522a0d74b"
+    },
+    {
+      "locale": "sv-SE",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.4293115999932287,
+      "longest_interval_below_minus50dB_seconds": 1.1,
+      "complete_decode": true,
+      "sha256": "41bbd3953131f82034a265c3c23271432d253484756a631c67a042730918c6dd"
+    },
+    {
+      "locale": "vi-VN",
+      "seconds": 1362.0,
+      "peak_dbfs": -2.475905103038902,
+      "longest_interval_below_minus50dB_seconds": 1.4,
+      "complete_decode": true,
+      "sha256": "cbc56077c0e8236052dd2ba8bff25d84d2481dfaa468211ec03fb0ee78b8a8a8"
+    }
+  ],
+  "online_provider_metadata_checks": [
+    {
+      "locale": "cs-CZ",
+      "pieces": 40,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    },
+    {
+      "locale": "da-DK",
+      "pieces": 41,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    },
+    {
+      "locale": "de-DE",
+      "pieces": 47,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    },
+    {
+      "locale": "en-US",
+      "pieces": 137,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    },
+    {
+      "locale": "es-ES",
+      "pieces": 42,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    },
+    {
+      "locale": "fi-FI",
+      "pieces": 41,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    },
+    {
+      "locale": "fr-FR",
+      "pieces": 47,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    },
+    {
+      "locale": "it-IT",
+      "pieces": 42,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    },
+    {
+      "locale": "ja-JP",
+      "pieces": 27,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    },
+    {
+      "locale": "ko-KR",
+      "pieces": 29,
+      "minimum_normalized_metadata_text_similarity": 0.9981132075471698,
+      "threshold": 0.995
+    },
+    {
+      "locale": "nb-NO",
+      "pieces": 41,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    },
+    {
+      "locale": "nl-NL",
+      "pieces": 44,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    },
+    {
+      "locale": "pl-PL",
+      "pieces": 41,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    },
+    {
+      "locale": "pt-PT",
+      "pieces": 41,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    },
+    {
+      "locale": "sv-SE",
+      "pieces": 41,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    },
+    {
+      "locale": "vi-VN",
+      "pieces": 37,
+      "minimum_normalized_metadata_text_similarity": 1.0,
+      "threshold": 0.995
+    }
+  ],
+  "metadata_is_not_independent_ASR_or_listening": true,
+  "hmong_word_level_verification": false,
+  "independent_native_language_review": false
+}

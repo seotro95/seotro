@@ -77,7 +77,7 @@ def online(locale):
     records=[]
     for idx,row in enumerate(rows):
         paths=[]
-        for part,text in enumerate(split(row['voice'])):
+        for part,text in enumerate(split(row['voice'],limit=row.get('tts_chunk_limit',750))):
             dest=out/f'raw-{idx+1:03}-{part+1:02}.wav';paths.append(dest);records.append((text,dest))
         raws.append(paths)
     def synth(item):
@@ -93,7 +93,7 @@ def online(locale):
             dest.unlink();meta.unlink();print('REPAIR_INCOMPLETE',locale,dest.name,ratio,flush=True)
             if attempt==2:raise RuntimeError('Provider repeatedly omitted words: '+str(dest))
         return dest
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=int(os.environ.get("TTS_WORKERS","2"))) as pool:
         for idx,dest in enumerate(pool.map(synth,records),1):
             if idx%10==0:print('SYNTH',locale,idx,len(records),flush=True)
     final(locale,rows,raws);return locale
