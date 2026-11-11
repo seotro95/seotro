@@ -3,11 +3,18 @@ import hashlib,json,os,shutil,subprocess,sys,threading,time
 from pathlib import Path
 from typing import Callable
 
+def console_notify(pct,msg):
+    text=f'{pct:5.1f}% {msg}'
+    try:print(text,flush=True)
+    except UnicodeEncodeError:
+        encoding=getattr(sys.stdout,'encoding',None) or 'utf-8'
+        print(text.encode(encoding,errors='backslashreplace').decode(encoding),flush=True)
+
 class Cancelled(Exception): pass
 
 class Context:
     def __init__(self, notify: Callable | None = None, cancel: threading.Event | None = None):
-        self.notify = notify or (lambda pct, msg: print(f'{pct:5.1f}% {msg}', flush=True))
+        self.notify = notify or console_notify
         self.cancel = cancel or threading.Event()
     def check(self):
         if self.cancel.is_set(): raise Cancelled('Đã dừng; giữ cache để tiếp tục lần sau.')

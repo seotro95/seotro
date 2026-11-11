@@ -1,4 +1,6 @@
 $ErrorActionPreference = 'Stop'
+$env:PYTHONUTF8 = '1'
+$env:PYTHONIOENCODING = 'utf-8'
 Set-Location $PSScriptRoot
 python -m pip install --upgrade pip
 if ($LASTEXITCODE -ne 0) { throw 'pip update failed' }
