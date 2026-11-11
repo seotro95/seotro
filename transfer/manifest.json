@@ -1,0 +1,335 @@
+{
+  "topic": 19,
+  "repository": "seotro95/seotro",
+  "release_tag": "kostenki-video-19-final-20m15s",
+  "contents": "Only the completed edited video, opening, approved delivery project, subtitles, titles/thumbnail prompts and technical metadata. No raw source video clips or raw-source Git blob references.",
+  "raw_source_clips_included": false,
+  "assets": [
+    {
+      "name": "EDITOR_DECISIONS.json",
+      "bytes": 9320,
+      "sha256": "6e7e863ee36a77ddaf95327b55cc62ee84c92dac25d04821c273f8a9ccf90d3b",
+      "parts": [
+        {
+          "path": "transfer/parts/EDITOR_DECISIONS.json.000.part",
+          "bytes": 9320,
+          "sha256": "6e7e863ee36a77ddaf95327b55cc62ee84c92dac25d04821c273f8a9ccf90d3b"
+        }
+      ]
+    },
+    {
+      "name": "FINAL_EXPORT_COMMAND.json",
+      "bytes": 1137,
+      "sha256": "6f4cba7778d21ca5b46b0e964bc44bd4b8458dce974c86cb23c65c2f0d6c7956",
+      "parts": [
+        {
+          "path": "transfer/parts/FINAL_EXPORT_COMMAND.json.000.part",
+          "bytes": 1137,
+          "sha256": "6f4cba7778d21ca5b46b0e964bc44bd4b8458dce974c86cb23c65c2f0d6c7956"
+        }
+      ]
+    },
+    {
+      "name": "FINAL_VIDEO_QA.json",
+      "bytes": 2464,
+      "sha256": "d30c83753f219edfbd58a85b164712e26cdfd385ef09daa54681d3ebfa0c94a7",
+      "parts": [
+        {
+          "path": "transfer/parts/FINAL_VIDEO_QA.json.000.part",
+          "bytes": 2464,
+          "sha256": "d30c83753f219edfbd58a85b164712e26cdfd385ef09daa54681d3ebfa0c94a7"
+        }
+      ]
+    },
+    {
+      "name": "HUONG_DAN_DUNG_LAI.txt",
+      "bytes": 880,
+      "sha256": "9209b3765cae52ece06d45e121ca9882c71f1181a86284c33c97cd649a18c88e",
+      "parts": [
+        {
+          "path": "transfer/parts/HUONG_DAN_DUNG_LAI.txt.000.part",
+          "bytes": 880,
+          "sha256": "9209b3765cae52ece06d45e121ca9882c71f1181a86284c33c97cd649a18c88e"
+        }
+      ]
+    },
+    {
+      "name": "KOSTENKI_19_EDIT_PROJECT.zip",
+      "bytes": 18233588,
+      "sha256": "7b2db7480647e2c0c0f2797217ea4f86dd1cda9945584b19950718ea74343d4b",
+      "parts": [
+        {
+          "path": "transfer/parts/KOSTENKI_19_EDIT_PROJECT.zip.000.part",
+          "bytes": 16777216,
+          "sha256": "e8b5d6288f9739f793d78e4186371742794b740922cf09c14255d7d4eabbc367"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EDIT_PROJECT.zip.001.part",
+          "bytes": 1456372,
+          "sha256": "10674e5c7b4bf18751646718c61a982e912326b214dc2b5a9d68d6954815eb97"
+        }
+      ]
+    },
+    {
+      "name": "KOSTENKI_19_EN_FINAL_20m15s_720p.mp4",
+      "bytes": 355760692,
+      "sha256": "9097bce34878a4361c9a46e026694a539e2a958c067f5a022caa7cc1f760e8bd",
+      "parts": [
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.000.part",
+          "bytes": 16777216,
+          "sha256": "5889698db0d1eb0d2ec93f244d06801061bb0d3b91cd622e34b3ed0229fe8c33"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.001.part",
+          "bytes": 16777216,
+          "sha256": "286bc46ace9518fcf8c070317b848e3ac8387ab01768c1818b6d24240e209d4f"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.002.part",
+          "bytes": 16777216,
+          "sha256": "b6dde400e684930b2056e5b711ff595dc6138290180569604488be437e15337d"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.003.part",
+          "bytes": 16777216,
+          "sha256": "8536ba8c40c7d651d8200c45e0c59f8849dd5ddc7d9a018395d812e62b0520ba"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.004.part",
+          "bytes": 16777216,
+          "sha256": "d4be38191d5752707b153bbeef4a07f0980888351f2b91923df60961d771dee6"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.005.part",
+          "bytes": 16777216,
+          "sha256": "8d18eeff5640e1063a3e9e7877ba9551489d420b6bd1602269c3855df3a5b51a"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.006.part",
+          "bytes": 16777216,
+          "sha256": "7a1aa9c334c40af3ae48ef06bbb97bb283adac959ebd90f7e0fa12d45e5ae7b6"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.007.part",
+          "bytes": 16777216,
+          "sha256": "b25053afc1884685026cde30f519083b595f7a10945afc19b6b73387ddef5e12"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.008.part",
+          "bytes": 16777216,
+          "sha256": "d77985bbff14586b213fd25db345341581e9dae48f272635c578eb9da6f60730"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.009.part",
+          "bytes": 16777216,
+          "sha256": "6c35eb2483954e787fd39d0feec5bf261b071156a9d74ed53452d3f116d451e6"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.010.part",
+          "bytes": 16777216,
+          "sha256": "3e88b46af290f0b4588bc29974eae3f464c5bc5e30d84848afe7f9b2cf00470c"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.011.part",
+          "bytes": 16777216,
+          "sha256": "4206bf90ef902ce60223eb8183669457f04b2e72cb8d31a58f72643baeb91aa8"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.012.part",
+          "bytes": 16777216,
+          "sha256": "3cc68acd9dfaca23731d296ad2a72a28207a9e9554321dc79d004d796b934308"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.013.part",
+          "bytes": 16777216,
+          "sha256": "c72c49f4d0ec398329cb214c06ab33dd3bb5d275bf97ed35220ae6d0197b9ad8"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.014.part",
+          "bytes": 16777216,
+          "sha256": "0c0bf9b05b3a8d6db5113353547b92051554325abd76e204b770a03556fa9ba2"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.015.part",
+          "bytes": 16777216,
+          "sha256": "4fa1781636ffbaeaf3573eece29ae0fe33675e988a21e15b2adbe96534a3b94e"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.016.part",
+          "bytes": 16777216,
+          "sha256": "e81268ca839658dedf480003cc7a98dcfa6be4156a029f133371a23061f56ad8"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.017.part",
+          "bytes": 16777216,
+          "sha256": "42c3ad21959efb3d557364e315925c3c4297e8e371854f115e14212571efc4cb"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.018.part",
+          "bytes": 16777216,
+          "sha256": "415fb3a0f138a301ca88482178e4f9af024cbf4d21f2c78c0047fbcd81ca73e8"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.019.part",
+          "bytes": 16777216,
+          "sha256": "cf757e39169c4740df6807ac1acab8d46f8605711999c528aad2d76c44420436"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.020.part",
+          "bytes": 16777216,
+          "sha256": "bfd3418a33c0917e9bcdd60088d60a09d03c6037c127f4a2354257c2eaad8de0"
+        },
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4.021.part",
+          "bytes": 3439156,
+          "sha256": "d50f1702f18d9b1a17a24be1ba39a22562fd1a2ef415c4c14f1e412972da7ae5"
+        }
+      ]
+    },
+    {
+      "name": "KOSTENKI_19_EN_SUBTITLES.srt",
+      "bytes": 22264,
+      "sha256": "4ca6f50f9bc9b8e48bd8c114a385e20b6f361db5d6ce5e241d9ab27ec45b52ec",
+      "parts": [
+        {
+          "path": "transfer/parts/KOSTENKI_19_EN_SUBTITLES.srt.000.part",
+          "bytes": 22264,
+          "sha256": "4ca6f50f9bc9b8e48bd8c114a385e20b6f361db5d6ce5e241d9ab27ec45b52ec"
+        }
+      ]
+    },
+    {
+      "name": "KOSTENKI_19_OPENING_30s.mp4",
+      "bytes": 8924544,
+      "sha256": "cdad83d48208a80f8f5b9eaea5fdb59ccfa30aa45772df8ebe9650195dcaa0fd",
+      "parts": [
+        {
+          "path": "transfer/parts/KOSTENKI_19_OPENING_30s.mp4.000.part",
+          "bytes": 8924544,
+          "sha256": "cdad83d48208a80f8f5b9eaea5fdb59ccfa30aa45772df8ebe9650195dcaa0fd"
+        }
+      ]
+    },
+    {
+      "name": "KOSTENKI_19_TITLES_THUMBNAILS.txt",
+      "bytes": 5067,
+      "sha256": "b564da366d5dbaac56fcb9904618ac88c9828674f441da73ffc91bf57a192037",
+      "parts": [
+        {
+          "path": "transfer/parts/KOSTENKI_19_TITLES_THUMBNAILS.txt.000.part",
+          "bytes": 5067,
+          "sha256": "b564da366d5dbaac56fcb9904618ac88c9828674f441da73ffc91bf57a192037"
+        }
+      ]
+    },
+    {
+      "name": "KOSTENKI_19_TITLES_THUMBNAILS.zip",
+      "bytes": 2633,
+      "sha256": "cbee5460d9a32dc31001cdcc3c2ddbe0f6762d32354858fe131deee19b841803",
+      "parts": [
+        {
+          "path": "transfer/parts/KOSTENKI_19_TITLES_THUMBNAILS.zip.000.part",
+          "bytes": 2633,
+          "sha256": "cbee5460d9a32dc31001cdcc3c2ddbe0f6762d32354858fe131deee19b841803"
+        }
+      ]
+    },
+    {
+      "name": "README.md",
+      "bytes": 3106,
+      "sha256": "4cf2b377e267cf9ab1486dac8bced8a95f1e855e073fb95ced943b3bd1785bad",
+      "parts": [
+        {
+          "path": "transfer/parts/README.md.000.part",
+          "bytes": 3106,
+          "sha256": "4cf2b377e267cf9ab1486dac8bced8a95f1e855e073fb95ced943b3bd1785bad"
+        }
+      ]
+    },
+    {
+      "name": "SCENE_VERIFICATION.json",
+      "bytes": 8068,
+      "sha256": "b940d6e9d04a42ebf04cffaeaec59d32631d5da7fcdcdb74cbd76e9b57604334",
+      "parts": [
+        {
+          "path": "transfer/parts/SCENE_VERIFICATION.json.000.part",
+          "bytes": 8068,
+          "sha256": "b940d6e9d04a42ebf04cffaeaec59d32631d5da7fcdcdb74cbd76e9b57604334"
+        }
+      ]
+    },
+    {
+      "name": "SOURCE_CLIP_MANIFEST.csv",
+      "bytes": 15143,
+      "sha256": "eab61a4a4db789ef266c60689023449f3dd425835a1711384ad7e4dfddf60187",
+      "parts": [
+        {
+          "path": "transfer/parts/SOURCE_CLIP_MANIFEST.csv.000.part",
+          "bytes": 15143,
+          "sha256": "eab61a4a4db789ef266c60689023449f3dd425835a1711384ad7e4dfddf60187"
+        }
+      ]
+    },
+    {
+      "name": "SOURCE_MANIFEST.json",
+      "bytes": 32674,
+      "sha256": "f253652e99985d488c08444a48c230c3e5154a3995329dd8c5c728ae5c4d2fdb",
+      "parts": [
+        {
+          "path": "transfer/parts/SOURCE_MANIFEST.json.000.part",
+          "bytes": 32674,
+          "sha256": "f253652e99985d488c08444a48c230c3e5154a3995329dd8c5c728ae5c4d2fdb"
+        }
+      ]
+    },
+    {
+      "name": "SUBSTITUTIONS.csv",
+      "bytes": 3604,
+      "sha256": "7867bf94b742b52b1829fddd682de6c370a411f6b79d471ee0bbdae3f95f3ba6",
+      "parts": [
+        {
+          "path": "transfer/parts/SUBSTITUTIONS.csv.000.part",
+          "bytes": 3604,
+          "sha256": "7867bf94b742b52b1829fddd682de6c370a411f6b79d471ee0bbdae3f95f3ba6"
+        }
+      ]
+    },
+    {
+      "name": "VISUAL_REVIEW_APPROVED.json",
+      "bytes": 1064,
+      "sha256": "e437dbfd8bc60004df9d066089afa89bc5a0a795bef0618bcfc3e83943600801",
+      "parts": [
+        {
+          "path": "transfer/parts/VISUAL_REVIEW_APPROVED.json.000.part",
+          "bytes": 1064,
+          "sha256": "e437dbfd8bc60004df9d066089afa89bc5a0a795bef0618bcfc3e83943600801"
+        }
+      ]
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 1464,
+      "sha256": "c51006bb573157c28062506b33334c49878784c91fec4cc56d6fcdc0daeaf2cc",
+      "parts": [
+        {
+          "path": "transfer/parts/SHA256SUMS.txt.000.part",
+          "bytes": 1464,
+          "sha256": "c51006bb573157c28062506b33334c49878784c91fec4cc56d6fcdc0daeaf2cc"
+        }
+      ]
+    },
+    {
+      "name": "RELEASE_ASSET_MANIFEST.json",
+      "bytes": 2639,
+      "sha256": "f062dc450fd38df671bb4bb11101792a39bb61ed26f8dbde6db258da4aeae6ca",
+      "parts": [
+        {
+          "path": "transfer/parts/RELEASE_ASSET_MANIFEST.json.000.part",
+          "bytes": 2639,
+          "sha256": "f062dc450fd38df671bb4bb11101792a39bb61ed26f8dbde6db258da4aeae6ca"
+        }
+      ]
+    }
+  ]
+}

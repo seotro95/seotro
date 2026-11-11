@@ -1,0 +1,47 @@
+{
+  "topic": 19,
+  "source_review_status": "passed_selected_sources_with_documented_substitutions",
+  "source_clips_sampled": 100,
+  "sample_seconds_per_clip": [
+    0.7,
+    4.8,
+    9.1
+  ],
+  "opening_review_status": "passed10different_scenes_inside30seconds",
+  "opening_sample_seconds": [
+    1.5,
+    4.5,
+    8,
+    11.5,
+    14.5,
+    18,
+    21.5,
+    24.5,
+    27,
+    29
+  ],
+  "no_children_detected_in_selected_source_samples": true,
+  "moving_video_replacements_only": true,
+  "replacement_stills_or_text_cards": 0,
+  "full_continuous_manual_viewing_performed": false,
+  "final_movie_review_status": "passed",
+  "notes": "Selected source and completed movie frames reviewed. Excessive bone walls and context mismatches substituted. Clip51 excluded for generated caption; lower caption areas cropped from11and60. Related moving video only; no still/text cards.",
+  "final_movie_sample_seconds": [
+    4.5,
+    105,
+    305,
+    405,
+    503,
+    605,
+    705,
+    805,
+    905,
+    1005,
+    1105,
+    1125,
+    1185,
+    1195,
+    1205,
+    1213
+  ]
+}

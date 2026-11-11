@@ -1,0 +1,11 @@
+﻿DỰNG LẠI CHỦ ĐỀ 19 — KOSTENKI 20:15
+
+Yêu cầu Python 3.11+, ffmpeg/ffprobe có libx264 và drawtext, numpy cho QA. Font mặc định /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf; trên Windows đặt đường dẫn font trong render_edit.py thành đường dẫn tương đối tới một bản font đã cài.
+
+1. Giải nén và mở terminal ở thư mục edit. Cần khoảng 1,5 GB trống.
+2. python link_sources.py /thu-muc-chua-video-goc
+3. python render_edit.py --workers 2
+4. python assemble_final.py
+5. python qa_final.py
+
+Giữ EDIT_PLAN.json đã duyệt; không cần tạo lại storyboard. Voice và bảng đo loudness được kèm để dựng lại. link_sources.py xác minh hash nguồn và tạo video im lặng 720p; không di chuyển/xóa bản gốc. Các phiên bản ffmpeg khác nhau có thể tạo byte mã hóa khác nhau.
