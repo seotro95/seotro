@@ -1,0 +1,15 @@
+CHỦ ĐỀ21 — ÖTZI — 20PHÚT42GIÂY
+
+1. Đọc PHAN_TICH_VIDEO_NGUON.md và NGUON_KIEM_CHUNG.md. Đây là kịch bản mới theo cấu trúc kể/nhịp hình tham khảo, không chép lời hoặc footage nguồn.
+2. Mở13TXT theo thứ tự. MỗiTXTcó10prompt. Khi đưa vào công cụ tạo video, sao chép phần VIDEO PROMPT; VOICE CONTEXT chỉ giúp người dựng hiểu lời dẫn tương ứng.
+3. Tạo clip001.mp4 đến125.mp4, mỗi clip10giây. Cảnh126–130 là lựa chọn thay thế, không bắt buộc tạo và không nối thêm vào bản dựng.
+4. Dựng124cảnh×10giây +2giây đầu của cảnh125 =1.242giây, đúng20:42. Nếu chọn2giây khác trong clip125, bảo đảm chuyển động ổn định và vẫn giữ2giây. Dissolve hoặc thay đổi nhịp phải bù thời gian.
+5. Dùng OTZI_21_My_Tieng_Anh.mp3 làm voice chính. CácMP3khác là bản thay thế theo ngôn ngữ, không chồng17giọng lên nhau. Chúng cùng thời lượng và khớp ranh13chương, không đồng bộ từng từ với tiếngAnh.
+6. Fileen-US.srt là125mốc cảnh. CácSRTngôn ngữkhác là13mốc chương phục vụ căn dựng, chưa phải phụ đề đã chia câu ngắn để hiển thị.
+7. Kiểm footage thực tế sau khi tạo: không trẻ em kể cả nền/ảnh/màn hình/phản chiếu; không sai thời đại, bàn tay, công cụ, trang phục hoặc cảnh bạo lực giả định. Chỉ người trưởng thành rõ ràng. Clip phải có chuyển động thật trong hình, không chỉ phóng ảnh đứng.
+8. Prompt yêu cầu im lặng, nhưng vẫn kiểm từng file và xóa/tắt audio stream khi nhập dựng. Không lấy lời nói, nhạc hoặc hiệu ứng do generator tự thêm.
+9. Hình nghiên cứu tạo sinh chỉ là minh họa. VớiCT, bản đồ, số liệu và ảnh cổ vật thật, dùng dữ liệu đã kiểm, ghi nguồn/credit và thêm chữ trong phần mềm dựng. Không giả ảnh xét nghiệm thật.
+10. Giữ VOICE_PROFILES_LOCKED.json và NARRATION_STYLE_LOCKED.json cho tập sau. Giữ đúngvoiceID/committool/mẫuH’mông; tính lại tốc độ theo kịch bản mới. Nhà cung cấp online có thể thay mô hình.
+11. BảnViệt vàH’mông đã được viết lại; các bản khác dùng dịch tự động có rà ngữ cảnh. Vẫn cần người bản ngữ kiểm/nghe. H’mông Trắng chưa được xác nhận phương ngữ độc lập. Không nhầmQAđủ phút/phát được với chứng nhận ngôn ngữ.
+
+Đã giao tài liệu, prompt và voice; chưa tạo footage và chưa dựngMP4của tập21.

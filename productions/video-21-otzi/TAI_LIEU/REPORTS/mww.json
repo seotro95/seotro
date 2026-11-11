@@ -1,0 +1,138 @@
+{
+  "locale": "mww",
+  "voice_id": "hmong-female-3",
+  "gender": "Female",
+  "source_commit": "061430d958b8d5fc14d04209c6f0cd20492382c2",
+  "target_seconds": 1242,
+  "decoded_frames_48000": 59616000,
+  "decoded_seconds": 1242.0,
+  "sha256": "6075138a57526062536a44137fc70e05aea6b548a2a749183c002a6fb1889490",
+  "filename": "OTZI_21_mww.mp3",
+  "bytes": 14904620,
+  "cues": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 100,
+      "raw_seconds": 101.55647916666666,
+      "tempo": 1.0171922993456195,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 2,
+      "start": 100,
+      "end": 200,
+      "raw_seconds": 93.16372916666667,
+      "tempo": 0.9331303001469017,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 3,
+      "start": 200,
+      "end": 300,
+      "raw_seconds": 95.46122916666667,
+      "tempo": 0.9561421190571581,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 4,
+      "start": 300,
+      "end": 400,
+      "raw_seconds": 101.84672916666666,
+      "tempo": 1.0200994507879273,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 5,
+      "start": 400,
+      "end": 500,
+      "raw_seconds": 97.49297916666667,
+      "tempo": 0.976492179153312,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 6,
+      "start": 500,
+      "end": 600,
+      "raw_seconds": 94.22022916666667,
+      "tempo": 0.9437122312366453,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 7,
+      "start": 600,
+      "end": 700,
+      "raw_seconds": 103.1238125,
+      "tempo": 1.0328907502003204,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 8,
+      "start": 700,
+      "end": 800,
+      "raw_seconds": 100.02395833333334,
+      "tempo": 1.001842531383547,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 9,
+      "start": 800,
+      "end": 900,
+      "raw_seconds": 100.62766666666667,
+      "tempo": 1.0078892895299145,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 10,
+      "start": 900,
+      "end": 1000,
+      "raw_seconds": 99.606,
+      "tempo": 0.9976562499999999,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 11,
+      "start": 1000,
+      "end": 1100,
+      "raw_seconds": 96.19266666666667,
+      "tempo": 0.9634682158119657,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 12,
+      "start": 1100,
+      "end": 1200,
+      "raw_seconds": 96.94858333333333,
+      "tempo": 0.9710394965277778,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 13,
+      "start": 1200,
+      "end": 1242,
+      "raw_seconds": 41.897875,
+      "tempo": 1.0013832456978966,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    }
+  ],
+  "pitch_shift": false,
+  "technical_qa_passed": true,
+  "independent_native_listening_review": false,
+  "translation_method": "Google automated draft; assistant context checks; independent native editorial review pending",
+  "reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+  "white_hmong_dialect_independently_verified": false,
+  "delivery_filename": "OTZI_21_Hmong_Trang_Nu.mp3"
+}

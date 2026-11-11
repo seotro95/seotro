@@ -1,0 +1,136 @@
+{
+  "locale": "es-ES",
+  "voice_id": "es-ES-AlvaroNeural",
+  "gender": "Male",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "target_seconds": 1242,
+  "decoded_frames_48000": 59616000,
+  "decoded_seconds": 1242.0,
+  "sha256": "afe801bc6aea00b0689dfd05d65cade4442231fef8d2ef0028dba0ad43b4477d",
+  "filename": "OTZI_21_es-ES.mp3",
+  "bytes": 14904620,
+  "cues": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 100,
+      "raw_seconds": 100.704,
+      "tempo": 1.0086538461538461,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 2,
+      "start": 100,
+      "end": 200,
+      "raw_seconds": 116.52,
+      "tempo": 1.1670673076923077,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 3,
+      "start": 200,
+      "end": 300,
+      "raw_seconds": 111.768,
+      "tempo": 1.119471153846154,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 4,
+      "start": 300,
+      "end": 400,
+      "raw_seconds": 107.016,
+      "tempo": 1.071875,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 5,
+      "start": 400,
+      "end": 500,
+      "raw_seconds": 123.192,
+      "tempo": 1.2338942307692307,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 6,
+      "start": 500,
+      "end": 600,
+      "raw_seconds": 117.12,
+      "tempo": 1.1730769230769231,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 7,
+      "start": 600,
+      "end": 700,
+      "raw_seconds": 119.64,
+      "tempo": 1.1983173076923077,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 8,
+      "start": 700,
+      "end": 800,
+      "raw_seconds": 122.472,
+      "tempo": 1.2266826923076921,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 9,
+      "start": 800,
+      "end": 900,
+      "raw_seconds": 118.704,
+      "tempo": 1.1889423076923076,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 10,
+      "start": 900,
+      "end": 1000,
+      "raw_seconds": 128.112,
+      "tempo": 1.283173076923077,
+      "trailing_pause_target": 0.16,
+      "parts": 4
+    },
+    {
+      "id": 11,
+      "start": 1000,
+      "end": 1100,
+      "raw_seconds": 122.016,
+      "tempo": 1.2221153846153847,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 12,
+      "start": 1100,
+      "end": 1200,
+      "raw_seconds": 124.992,
+      "tempo": 1.251923076923077,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 13,
+      "start": 1200,
+      "end": 1242,
+      "raw_seconds": 47.424,
+      "tempo": 1.1334608030592732,
+      "trailing_pause_target": 0.16,
+      "parts": 1
+    }
+  ],
+  "pitch_shift": false,
+  "technical_qa_passed": true,
+  "independent_native_listening_review": false,
+  "translation_method": "Google automated draft; assistant context checks; independent native editorial review pending",
+  "delivery_filename": "OTZI_21_Tay_Ban_Nha.mp3"
+}

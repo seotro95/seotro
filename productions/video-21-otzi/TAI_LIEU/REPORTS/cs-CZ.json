@@ -1,0 +1,136 @@
+{
+  "locale": "cs-CZ",
+  "voice_id": "cs-CZ-AntoninNeural",
+  "gender": "Male",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "target_seconds": 1242,
+  "decoded_frames_48000": 59616000,
+  "decoded_seconds": 1242.0,
+  "sha256": "b2adb06e6033407fd4357ef055ce76cc281d3f12008d2bae798771c0d4c38968",
+  "filename": "OTZI_21_cs-CZ.mp3",
+  "bytes": 14904620,
+  "cues": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 100,
+      "raw_seconds": 94.224,
+      "tempo": 0.94375,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 2,
+      "start": 100,
+      "end": 200,
+      "raw_seconds": 107.112,
+      "tempo": 1.0728365384615384,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 3,
+      "start": 200,
+      "end": 300,
+      "raw_seconds": 97.296,
+      "tempo": 0.9745192307692307,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 4,
+      "start": 300,
+      "end": 400,
+      "raw_seconds": 97.992,
+      "tempo": 0.9814903846153846,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 5,
+      "start": 400,
+      "end": 500,
+      "raw_seconds": 109.416,
+      "tempo": 1.0959134615384614,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 6,
+      "start": 500,
+      "end": 600,
+      "raw_seconds": 102.816,
+      "tempo": 1.0298076923076922,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    },
+    {
+      "id": 7,
+      "start": 600,
+      "end": 700,
+      "raw_seconds": 102.96,
+      "tempo": 1.03125,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 8,
+      "start": 700,
+      "end": 800,
+      "raw_seconds": 109.896,
+      "tempo": 1.1007211538461539,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 9,
+      "start": 800,
+      "end": 900,
+      "raw_seconds": 111.072,
+      "tempo": 1.1125,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 10,
+      "start": 900,
+      "end": 1000,
+      "raw_seconds": 113.568,
+      "tempo": 1.1375,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 11,
+      "start": 1000,
+      "end": 1100,
+      "raw_seconds": 110.16,
+      "tempo": 1.1033653846153846,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 12,
+      "start": 1100,
+      "end": 1200,
+      "raw_seconds": 112.752,
+      "tempo": 1.129326923076923,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 13,
+      "start": 1200,
+      "end": 1242,
+      "raw_seconds": 41.904,
+      "tempo": 1.0015296367112811,
+      "trailing_pause_target": 0.16,
+      "parts": 1
+    }
+  ],
+  "pitch_shift": false,
+  "technical_qa_passed": true,
+  "independent_native_listening_review": false,
+  "translation_method": "Google automated draft; assistant context checks; independent native editorial review pending",
+  "delivery_filename": "OTZI_21_Sec.mp3"
+}

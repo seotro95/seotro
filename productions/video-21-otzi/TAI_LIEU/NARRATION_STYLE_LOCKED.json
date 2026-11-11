@@ -1,0 +1,16 @@
+{
+  "id": "otzi-documentary-natural-v1",
+  "voice_identity": "same IDs and Hmong reference as episode19",
+  "online_backend_source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "hmong_backend_source_commit": "061430d958b8d5fc14d04209c6f0cd20492382c2",
+  "native_hmong_reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+  "english_native_rate": "-12%",
+  "other_online_native_rate": "+0%",
+  "hmong_native_rates": [
+    0.98,
+    1.02
+  ],
+  "pitch_shift": false,
+  "processing": "per-cue or per-chapter atempo; 160ms closing pause; 80ms for final English2s; loudnorm target-19LUFS and-2dBTP; mono48kHz MP3 96k",
+  "intonation": "provider natural sentence intonation from punctuation; no SSML emotional style or word-gain emphasis applied"
+}

@@ -1,0 +1,13 @@
+{
+  "topic_id": 21,
+  "title": "Ötzi: The Last Journey, Still Unfinished",
+  "status": "script_prompts_and17voices_delivered_native_review_pending",
+  "target_seconds": 1242,
+  "video_rendered": false,
+  "main_scenes": 125,
+  "optional_replacements": 5,
+  "voice_count": 17,
+  "release": "https://github.com/seotro95/seotro/releases/tag/otzi-video-21-20m42s",
+  "voice_profile": "TAI_LIEU/VOICE_PROFILES_LOCKED.json",
+  "native_render_run": 42957590549
+}

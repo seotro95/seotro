@@ -152,6 +152,21 @@
       "independent_native_review": false
     },
     {
+      "locale": "mww",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": false,
+        "2001": false,
+        "2022": false,
+        "2023": false,
+        "2025": false,
+        "2026": false
+      },
+      "word_count": 4248,
+      "independent_native_review": false
+    },
+    {
       "locale": "pl-PL",
       "chapters": 13,
       "nonempty": true,
