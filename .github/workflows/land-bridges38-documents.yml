@@ -1,0 +1,23 @@
+name: Land bridges38 documents before voice
+on:
+  push:
+    branches: [codex/land-bridges38-production-20261111]
+    paths: [.github/workflows/land-bridges38-documents.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  documents:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: episode38
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate and publish script and prompt TXT files before synthesis
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u episode38/publish_documents.py

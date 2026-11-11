@@ -1,0 +1,16 @@
+{
+  "topic_id": 38,
+  "title": "Các cây cầu đất xuất hiện và biến mất qua những chu kỳ băng hà",
+  "target_seconds": 1352,
+  "english_timeline_cues": 136,
+  "last_cue_seconds": 2,
+  "planned_unique_prompts": 120,
+  "prompts_per_txt": 10,
+  "voice_count": 17,
+  "profile_set_id": "science-prehistory-17-v1",
+  "source_release": "https://github.com/seotro95/seotro/releases/tag/video",
+  "phase": "research_and_script",
+  "documents_before_voice": true,
+  "voice_scripts_source": "Melo pinned4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043;Hmong pinned061430d958b8d5fc14d04209c6f0cd20492382c2",
+  "notes": "Use only this episode. No children in generated images, including screens and background. All generated clips10seconds and silent. Keep prior17voice IDs and female-3 Hmong reference. Publish documents before synthesis; preserve timing and validate decoded sample counts."
+}
