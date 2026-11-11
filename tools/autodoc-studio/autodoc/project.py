@@ -24,7 +24,7 @@ def options(value=None):
     if d['logo_position'] not in ['top_left','top_right','bottom_left','bottom_right','center']:raise ValueError('Vị trí logo không hợp lệ.')
     return d
 
-DEFAULTS.update(export_format='mp4',auto_filename='VIDEO_HOAN_CHINH')
+DEFAULTS.update(export_format='mp4',auto_filename='VIDEO_HOAN_CHINH',language='auto',visual_script_path='',whisper_model='base')
 
 def reindex(project):
     plan=project['plan'];cursor=0
@@ -58,7 +58,7 @@ def validate_project(p):
 
 def save(p,path=None):
     validate_project(p);path=Path(path or p['project_file']).resolve();protected={Path(p['voice_source']).resolve()}|{Path(x['path']).resolve() for x in p['files']}
-    protected|={Path(p['settings'][k]).resolve() for k in ['logo_path','subtitle_path'] if p['settings'].get(k)}
+    protected|={Path(p['settings'][k]).resolve() for k in ['logo_path','subtitle_path','visual_script_path'] if p['settings'].get(k)}
     if path in protected:raise ValueError('Không ghi dự án đè lên nguồn.')
     p['project_file']=str(path);save_json(path,p);return path
 

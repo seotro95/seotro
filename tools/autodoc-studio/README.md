@@ -1,4 +1,12 @@
-# AutoDoc Studio 2.1 — bản đầy đủ chức năng
+# AutoDoc Studio 2.2 — tự động edit đa ngôn ngữ
+
+Ngôn ngữ mặc định **auto**. Nhận lời theo ngôn ngữ gốc, giữ nguyên file voice làm âm thanh chính và giữ phụ đề gốc. Với voice ngoại ngữ, tool tạo bản lời **tiếng Anh cùng mốc** để CLIP so khớp hình; không dùng trực tiếp văn bản Việt/Nhật/Hàn với bộ so khớp tiếng Anh. Có thể cung cấp **Tham chiếu Anh** TXT/SRT để kiểm soát nội dung cần minh họa; SRT phải khớp thời gian voice.
+
+Hỗ trợ các ngôn ngữ của Whisper, gồm Anh, Việt, Tây Ban Nha, Pháp, Nhật, Hàn, Đức, Ý, Bồ Đào Nha, Hà Lan, Ba Lan, Thụy Điển, Đan Mạch, Phần Lan, Na Uy và Séc. Có lựa chọn ngôn ngữ cụ thể khi tự nhận diện sai. Mặc định Whisper **base** để cải thiện lời ngoại ngữ; tiny nhanh hơn, small thường chính xác hơn nhưng chậm hơn. Tên khoa học/tên riêng vẫn có thể sai.
+
+**H’Mông không có ASR đáng tin cậy trong Whisper.** Chọn `hmn`, nhập SRT tiếng Anh đúng mốc ở Tham chiếu Anh. Có thể thêm SRT H’Mông ở ô Phụ đề để giữ phụ đề H’Mông; nếu không, lời hiển thị sẽ lấy từ tham chiếu Anh. Tool giữ nguyên audio H’Mông, không giả lập việc nhận dạng H’Mông.
+
+Cảnh có điểm khớp ý thấp được tô nền vàng trên timeline và ghi trong báo cáo. AI chọn cảnh gần nghĩa nhất trong nguồn bạn cung cấp, không bảo đảm từng chi tiết khoa học hay cảnh thiếu nguồn đều đúng. Hãy xem các cảnh được đánh dấu trước khi đăng. SRT gốc tiếng Anh hoặc tham chiếu Anh đúng mốc có thể bỏ bước dịch; SRT ngoại ngữ không có tham chiếu Anh vẫn cần dịch voice để chọn hình. Nhật/Hàn cần phông có bộ chữ tương ứng nếu ghi phụ đề vào hình.
 
 **TỰ ĐỘNG EDIT & XUẤT**: chọn voice, thư mục ảnh/video và nơi lưu rồi bấm một lần. Tool nhận lời (hoặc dùng TXT/SRT), chọn cảnh, dựng mở đầu, ghép voice, áp dụng logo/phụ đề theo cài đặt, xuất video và lưu dự án. Không dừng để yêu cầu bấm Xuất lần nữa. Các lần xuất trùng tên được đánh số để giữ bản trước. Có thể mở dự án đi kèm để sửa tiếp.
 
@@ -20,8 +28,8 @@ Tool Windows dựng phim từ voice và thư mục **ảnh + video**, có xem tr
 
 ## Tăng tốc
 
-- `fast`: Whisper tiny mặc định, beam 1, một ảnh mẫu cho mỗi đoạn nguồn 10 giây. `balanced/quality`: lấy ba mẫu và beam 5; có thể chọn Whisper base/small để tăng độ chính xác, tốn thêm thời gian/RAM.
-- **SRT đúng mốc bỏ qua hoàn toàn bước nhận dạng voice**. TXT chỉ có lời, không có mốc: tool căn theo Whisper khi xếp lần đầu; nhập TXT vào dự án có sẵn sẽ căn theo mốc lời hiện có. Tỷ lệ khớp thấp được báo để sửa lại.
+- `fast`: beam 1, một ảnh mẫu cho mỗi đoạn nguồn 10 giây. `balanced/quality`: lấy ba mẫu và beam 5; có thể chọn Whisper base/small để tăng độ chính xác, tốn thêm thời gian/RAM.
+- **SRT đúng mốc bỏ qua bước chép lời gốc**. SRT tiếng Anh hoặc tham chiếu Anh đúng mốc không cần dịch; SRT ngoại ngữ có thể cần dịch voice sang Anh để chọn hình. TXT chỉ có lời, không có mốc: tool căn theo Whisper khi xếp lần đầu; nhập TXT vào dự án có sẵn sẽ căn theo mốc lời hiện có. Tỷ lệ khớp thấp được báo để sửa lại.
 - Đọc khung hình video qua PyAV, dùng cache đặc trưng CLIP theo nội dung tệp giữa nhiều dự án. Xuất hai cảnh song song, cache riêng từng cảnh và từng phiên bản cài đặt. Chỉnh cảnh nào chỉ dựng lại phần bị ảnh hưởng; đổi logo/kiểu phụ đề burn tác động mọi cảnh.
 - `auto` thử mã hóa thật với NVIDIA / Intel / AMD, rồi dùng CPU nếu không khả dụng. Có thể chọn CPU/GPU thủ công; nếu GPU lỗi lúc dựng sẽ thử lại CPU. Tốc độ thực tế tùy máy, nguồn, độ phân giải và hiệu ứng, không cam kết số lần nhanh hơn.
 - Không cần bật **giải mã toàn phim** cho mỗi bản nháp. Khi tắt, tool vẫn kiểm thời lượng, số khung và đối chiếu mẫu voice nếu chỉ giữ tiếng voice. Khi chủ động trộn tiếng clip, bỏ kiểm tương quan mẫu vì âm thanh đã trộn; vẫn kiểm luồng/thời lượng và giải mã nếu được chọn.

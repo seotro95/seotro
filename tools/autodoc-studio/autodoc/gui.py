@@ -8,15 +8,16 @@ from .project import DEFAULTS,options,load,save,split,merge_previous,swap_source
 from .subtitles import export,read_srt,read_txt,align_txt,validate,seconds
 from .effects import NAMES,TRANSITION_NAMES,TRANSITIONS,installed_effects,install_pack
 from .player import Player,scene_preview
+from .languages import LABELS
 
 class App(tk.Tk):
     def __init__(self):
-        super().__init__();self.title('AutoDoc Studio 2.1 — Tự động edit đầy đủ');self.geometry('1360x900');self.minsize(1080,760);self.p=None;self.busy=False;self.cancel=threading.Event();self.queue=queue.Queue();self.last_export='';self.last_auto_result=None;self.selected=0;self.preview_pending=None
+        super().__init__();self.title('AutoDoc Studio 2.2 — Tự động edit đa ngôn ngữ');self.geometry('1360x930');self.minsize(1080,790);self.p=None;self.busy=False;self.cancel=threading.Event();self.queue=queue.Queue();self.last_export='';self.last_auto_result=None;self.selected=0;self.preview_pending=None
         self.vars={};self.edit={};self.cuevars={};self.preferences=data_dir()/'preferences_v2.json'
-        self.voice=tk.StringVar();self.media=tk.StringVar();self.output=tk.StringVar(value=str(Path.home()/'Videos'/'AutoDocStudio'));self.subpath=tk.StringVar();self.status=tk.StringVar(value='Chọn voice và thư mục ảnh/video → TỰ ĐỘNG EDIT & XUẤT. Hoặc Tự xếp cảnh để sửa trước khi xuất.')
+        self.voice=tk.StringVar();self.media=tk.StringVar();self.output=tk.StringVar(value=str(Path.home()/'Videos'/'AutoDocStudio'));self.subpath=tk.StringVar();self.visualpath=tk.StringVar();self.status=tk.StringVar(value='Chọn voice và thư mục ảnh/video → TỰ ĐỘNG EDIT & XUẤT. Hoặc Tự xếp cảnh để sửa trước khi xuất.')
         self.stylevars={k:(tk.BooleanVar(value=v) if isinstance(v,bool) else tk.StringVar(value=str(v))) for k,v in DEFAULTS['subtitle_style'].items()}
         for k,v in DEFAULTS.items():
-            if k in ['subtitle_style','clip_model_path','whisper_model_path','subtitle_path']:continue
+            if k in ['subtitle_style','clip_model_path','whisper_model_path','subtitle_path','visual_script_path']:continue
             self.vars[k]=tk.BooleanVar(value=v) if isinstance(v,bool) else tk.StringVar(value=str(v))
         self.build();self.protocol('WM_DELETE_WINDOW',self.close);self.after(60,self.poll)
         if self.preferences.exists():
@@ -37,6 +38,7 @@ class App(tk.Tk):
     def build(self):
         top=ttk.LabelFrame(self,text='Đầu vào');top.pack(fill='x',padx=10,pady=5)
         self.file_row(top,'Voice chính',self.voice,types=[('Âm thanh','*.wav *.mp3 *.m4a *.flac *.aac *.ogg'),('Tất cả','*.*')]);self.file_row(top,'Ảnh / video',self.media,'dir');self.file_row(top,'Nơi lưu dự án',self.output,'dir');self.file_row(top,'Phụ đề (tùy chọn)',self.subpath,types=[('TXT / SRT','*.txt *.srt')])
+        self.file_row(top,'Tham chiếu Anh',self.visualpath,types=[('English TXT / SRT (tùy chọn)','*.txt *.srt')])
         auto=ttk.Frame(self);auto.pack(fill='x',padx=10,pady=3);ttk.Style(self).configure('Auto.TButton',font=('Segoe UI',10,'bold'),padding=(10,6))
         self.auto_button=ttk.Button(auto,text='TỰ ĐỘNG EDIT & XUẤT',style='Auto.TButton',command=lambda:self.safe(self.auto_edit));self.auto_button.pack(side='left')
         ttk.Label(auto,text='Một lần bấm: tự xếp cảnh, ghép voice, áp dụng logo/phụ đề và lưu video.').pack(side='left',padx=10)
@@ -51,6 +53,7 @@ class App(tk.Tk):
         self.timeline=ttk.Treeview(treeframe,columns=('time','source','effect','score'),show='headings',height=7)
         for k,title,w in [('time','Mốc / giây',120),('source','Ảnh / video',280),('effect','Hiệu ứng',100),('score','AI',50)]:self.timeline.heading(k,text=title);self.timeline.column(k,width=w,minwidth=40)
         scroll=ttk.Scrollbar(treeframe,orient='vertical',command=self.timeline.yview);self.timeline.configure(yscrollcommand=scroll.set);self.timeline.pack(side='left',fill='both',expand=True);scroll.pack(side='right',fill='y');self.timeline.bind('<<TreeviewSelect>>',self.select_scene)
+        self.timeline.tag_configure('review',background='#fff1cc',foreground='#714100')
         notebook=ttk.Notebook(right);notebook.pack(fill='both',expand=True)
         def tab(title):
             shell=ttk.Frame(notebook);notebook.add(shell,text=title);canvas=tk.Canvas(shell,highlightthickness=0);scroll=ttk.Scrollbar(shell,orient='vertical',command=canvas.yview);canvas.configure(yscrollcommand=scroll.set);scroll.pack(side='right',fill='y');canvas.pack(side='left',fill='both',expand=True);body=ttk.Frame(canvas,padding=8);item=canvas.create_window((0,0),window=body,anchor='nw');body.bind('<Configure>',lambda e:canvas.configure(scrollregion=canvas.bbox('all')));canvas.bind('<Configure>',lambda e:canvas.itemconfigure(item,width=e.width));return body
@@ -81,7 +84,8 @@ class App(tk.Tk):
         ttk.Label(brand,text='Để trống đường dẫn để bỏ logo. PNG hỗ trợ nền trong suốt.',wraplength=370).pack(anchor='w',pady=5)
         ttk.Checkbutton(brand,text='Tắt âm thanh clip gốc (chỉ giữ voice)',variable=self.vars['mute_source']).pack(anchor='w',pady=8);self.entry(brand,'Âm lượng clip (0–1)',self.vars['source_volume']);ttk.Label(brand,text='Bỏ chọn để trộn tiếng clip với voice. Ảnh tự có tiếng nền im lặng.',wraplength=380).pack(anchor='w');self.button(brand,'Áp dụng logo / tiếng',self.apply_settings).pack(fill='x',pady=8)
         self.combo(config,'Độ phân giải xuất',self.vars['resolution'],[720,1080]);self.combo(config,'Khung/giây',self.vars['fps'],[24,25,30,60]);self.combo(config,'Mã hóa',self.vars['encoder'],['auto','cpu','nvenc','qsv','amf']);self.combo(config,'Định dạng tự động',self.vars['export_format'],['mp4','mkv']);self.entry(config,'Tên video tự động',self.vars['auto_filename'])
-        self.combo(config,'Chế độ tốc độ',self.vars['quality'],['fast','balanced','quality']);self.combo(config,'Whisper',self.vars['whisper_model'],['tiny','base','small']);self.entry(config,'Ngôn ngữ voice',self.vars['language']);self.combo(config,'CPU nhận dạng',self.vars['threads'],['1','2','4','8']);self.combo(config,'Khung hình',self.vars['fit'],['fill','contain'])
+        self.combo(config,'Chế độ tốc độ',self.vars['quality'],['fast','balanced','quality']);self.combo(config,'Whisper',self.vars['whisper_model'],['tiny','base','small']);self.combo(config,'Ngôn ngữ voice',self.vars['language'],[f'{code} | {name}' for code,name in LABELS.items()]);self.combo(config,'CPU nhận dạng',self.vars['threads'],['1','2','4','8']);self.combo(config,'Khung hình',self.vars['fit'],['fill','contain'])
+        ttk.Label(config,text='auto nhận diện ngôn ngữ. Lời ngoại ngữ được dịch theo mốc sang Anh để chọn hình; giữ nguyên voice/phụ đề gốc. Có thể cung cấp Tham chiếu Anh. H’Mông cần SRT tham chiếu đúng mốc. Cảnh nền vàng cần xem lại.',wraplength=370).pack(anchor='w',pady=6)
         for k,t in [('auto_effects','Tự tạo chuyển động cho ảnh'),('auto_transitions','Tự chọn chuyển cảnh nhẹ'),('screen_minors','Lọc trẻ em ước lượng bằng AI'),('full_verify','Kiểm tra giải mã toàn phim sau xuất')]:ttk.Checkbutton(config,text=t,variable=self.vars[k]).pack(anchor='w',pady=4)
         ttk.Label(config,text='fast: 1 mẫu/cảnh + Whisper nhanh. balanced/quality: 3 mẫu/cảnh. Có SRT đúng mốc thì bỏ qua Whisper. Cache AI dùng lại giữa dự án. Các tùy chọn AI áp dụng khi Tự xếp cảnh lại.',wraplength=370).pack(anchor='w',pady=10)
         self.button(config,'Áp dụng cài đặt',self.apply_settings).pack(fill='x')
@@ -92,7 +96,7 @@ class App(tk.Tk):
             fn()
         except Exception as e:messagebox.showerror('AutoDoc Studio',str(e))
     def settings(self):
-        d={k:v.get() for k,v in self.vars.items()};d.update(subtitle_path=self.subpath.get().strip(),subtitle_style={k:v.get() for k,v in self.stylevars.items()})
+        d={k:v.get() for k,v in self.vars.items()};d.update(subtitle_path=self.subpath.get().strip(),visual_script_path=self.visualpath.get().strip(),subtitle_style={k:v.get() for k,v in self.stylevars.items()});d['language']=d['language'].split(' | ')[0]
         for k in ['resolution','fps','threads']:d[k]=int(d[k])
         for k in ['logo_size','logo_opacity','source_volume']:d[k]=float(d[k])
         return options(d)
@@ -101,6 +105,7 @@ class App(tk.Tk):
         for k,var in self.vars.items():var.set(d[k])
         for k,var in self.stylevars.items():var.set(d['subtitle_style'][k])
         self.subpath.set(d.get('subtitle_path',''))
+        self.visualpath.set(d.get('visual_script_path',''))
     def worker(self,fn,callback):
         self.player.stop();self.busy=True;self.cancel.clear();ctx=Context(lambda pct,msg:self.queue.put(('progress',pct,msg)),self.cancel)
         def task():
@@ -141,12 +146,12 @@ class App(tk.Tk):
     def auto_finished(self,result):
         self.last_auto_result=result;self.accept_project(load(result['project']));self.exported(result)
     def accept_project(self,p):
-        self.p=p;self.selected=0;self.restore_settings();self.voice.set(p['voice_source']);self.media.set(p['media_folder']);self.refresh();self.status.set(f'Đã xếp {len(p["plan"]["shots"])} cảnh. Chọn cảnh để sửa và xem trước.');self.select_index(0)
+        self.p=p;self.selected=0;self.restore_settings();self.voice.set(p['voice_source']);self.media.set(p['media_folder']);self.refresh();low=sum(s.get('semantic_score',0)<.19 for s in p['plan']['shots']);language=LABELS.get(p.get('detected_language'),p.get('detected_language',''));self.status.set(f'Đã xếp {len(p["plan"]["shots"])} cảnh. Ngôn ngữ: {language}. {low} cảnh nền vàng cần xem lại.');self.select_index(0)
     def require(self):
         if not self.p:raise ValueError('Hãy Tự xếp cảnh hoặc Mở dự án trước.')
     def refresh(self):
         self.timeline.delete(*self.timeline.get_children());fps=self.p['plan']['fps']
-        for i,s in enumerate(self.p['plan']['shots']):self.timeline.insert('', 'end',iid=str(i),values=(f'{s["start_frame"]/fps:.2f}–{s["end_frame"]/fps:.2f}',s['source_name'],NAMES.get(s.get('effect','none'),s.get('effect')),s.get('semantic_score','')))
+        for i,s in enumerate(self.p['plan']['shots']):self.timeline.insert('', 'end',iid=str(i),values=(f'{s["start_frame"]/fps:.2f}–{s["end_frame"]/fps:.2f}',s['source_name'],NAMES.get(s.get('effect','none'),s.get('effect')),s.get('semantic_score','')),tags=('review',) if s.get('semantic_score',0)<.19 else ())
         self.sourcebox['values']=[f'{f["id"]} | {f["name"]}' for f in self.p['files']];self.refresh_cues()
     def select_index(self,i):
         self.timeline.selection_set(str(i));self.timeline.see(str(i))

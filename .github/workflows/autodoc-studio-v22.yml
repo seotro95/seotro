@@ -1,0 +1,69 @@
+name: Build and test AutoDocStudio Windows portable
+on:
+  push:
+    branches: [codex/autodoc-studio-v22-20261111]
+    paths: [tools/autodoc-studio/**, .github/workflows/autodoc-studio-v22.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: tools/autodoc-studio
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build frozen app and test actual automatic edit
+        shell: pwsh
+        working-directory: tools/autodoc-studio
+        run: ./build_windows.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AutoDocStudio-Windows-release
+          path: tools/autodoc-studio/release/*
+          if-no-files-found: error
+          retention-days: 14
+      - name: Publish verified Windows tool
+        shell: pwsh
+        working-directory: tools/autodoc-studio
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference='Stop'
+          $tag='autodoc-studio-v2.2.0'
+          gh release view $tag --repo $env:GITHUB_REPOSITORY 2>$null
+          if ($LASTEXITCODE -ne 0) {
+            gh release create $tag --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --title 'AutoDoc Studio 2.2 Full — Tự động edit đa ngôn ngữ' --draft --notes 'Bản đầy đủ chức năng Windows 10/11 x64. Nút TỰ ĐỘNG EDIT & XUẤT chạy trọn quy trình từ voice và ảnh/video. Nhận diện ngôn ngữ, giữ voice/phụ đề gốc, dùng bản lời Anh theo mốc để chọn hình; Hmong dùng SRT tham chiếu Anh. Đã thử các thao tác trên GUI frozen EXE và xuất phim thực tế. Xem KIEM_TRA_CHUC_NANG.txt. Nhận ảnh và video, xem trước và sửa cảnh, tắt/giữ tiếng clip, logo PNG, nhập/xuất TXT/SRT, kiểu phụ đề, lưu dự án và xuất MP4/MKV tùy chọn. Cache dùng lại, thử GPU rồi tự quay về CPU. Lần đầu tự tải FFmpeg và model; không cần API trả phí. Xem hướng dẫn và báo cáo thử exe trong bản tải.'
+            if ($LASTEXITCODE -ne 0) { throw 'Cannot create release' }
+          }
+          Get-ChildItem release -File | ForEach-Object {
+            gh release upload $tag $_.FullName --repo $env:GITHUB_REPOSITORY --clobber
+            if ($LASTEXITCODE -ne 0) { throw 'Upload failed' }
+          }
+          gh release edit $tag --repo $env:GITHUB_REPOSITORY --draft=false --latest=false
+          if ($LASTEXITCODE -ne 0) { throw 'Publish failed' }
+      - name: Gather diagnostic logs
+        if: failure()
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force tools/autodoc-studio/diagnostics | Out-Null
+          Copy-Item "$env:LOCALAPPDATA/AutoDocStudio/application.log" tools/autodoc-studio/diagnostics/application.log -ErrorAction SilentlyContinue
+      - name: Retain diagnostic logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: AutoDocStudio-Windows-diagnostics
+          path: |
+            tools/autodoc-studio/build/AutoDocStudio/warn-AutoDocStudio.txt
+            tools/autodoc-studio/WINDOWS_TEST_REPORT.json
+            tools/autodoc-studio/GUI_FEATURE_REPORT.json
+            tools/autodoc-studio/MULTILINGUAL_TEST_REPORT.json
+            tools/autodoc-studio/windows test/**/STATUS.json
+            tools/autodoc-studio/windows test/**/KIEM_TRA_VIDEO.json
+            tools/autodoc-studio/diagnostics/*
+          if-no-files-found: ignore
+          retention-days: 7

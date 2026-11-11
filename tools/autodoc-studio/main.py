@@ -17,8 +17,8 @@ def main():
         if args.doctor:
             from autodoc.bootstrap import ensure_ffmpeg
             from autodoc.common import Context,binary
-            ensure_ffmpeg(Context(lambda *_:None));import av,ctranslate2,faster_whisper,numpy,onnxruntime,tokenizers,tkinter
-            result={'status':'ready','version':'2.1.0','ffmpeg':binary('ffmpeg'),'ffprobe':binary('ffprobe'),'tk_version':tkinter.TkVersion,'onnx':onnxruntime.__version__}
+            ensure_ffmpeg(Context(lambda *_:None));import av,ctranslate2,faster_whisper,numpy,onnxruntime,tokenizers,tkinter,langid
+            result={'status':'ready','version':'2.2.0','ffmpeg':binary('ffmpeg'),'ffprobe':binary('ffprobe'),'tk_version':tkinter.TkVersion,'onnx':onnxruntime.__version__}
             if args.doctor_output:Path(args.doctor_output).write_text(json.dumps(result),encoding='utf-8')
         elif args.gui_smoke:
             from autodoc.gui import App

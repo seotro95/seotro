@@ -68,24 +68,25 @@ def decode_voice(voice: Path,job: Path,ctx: Context):
     if duration<4:raise ValueError('Voice cần dài ít nhất4giây.')
     return out,duration,sha
 
-def transcribe(wav: Path,job: Path,ctx: Context,model_name='base',language='en',model_path=None,threads=2,fast=False):
-    marker=signature({'wav_sha':digest(wav),'model':str(model_path or model_name),'language':language,'fast':fast,'version':2})
-    cache=job/'transcript.json'
+def transcribe(wav: Path,job: Path,ctx: Context,model_name='base',language='en',model_path=None,threads=2,fast=False,task='transcribe'):
+    if task not in ['transcribe','translate']:raise ValueError('Tác vụ nhận dạng không hợp lệ.')
+    marker=signature({'wav_sha':digest(wav),'model':str(model_path or model_name),'language':language,'fast':fast,'task':task,'version':3})
+    cache=job/('transcript_visual_en.json' if task=='translate' else 'transcript.json')
     if cache.exists() and json.loads(cache.read_text(encoding='utf-8-sig')).get('signature')==marker:return json.loads(cache.read_text(encoding='utf-8-sig'))['cues']
     from faster_whisper import WhisperModel
-    ctx.emit(3,'Nhận dạng lời voice; lần đầu có thể cần tải model Whisper.')
+    ctx.emit(3,'Dịch lời sang tiếng Anh theo mốc để chọn hình; giữ nguyên voice.' if task=='translate' else 'Nhận dạng ngôn ngữ và lời voice; lần đầu có thể cần tải model Whisper.')
     model=WhisperModel(str(model_path or model_name),device='cpu',compute_type='int8',cpu_threads=threads,num_workers=1,download_root=str(data_dir()/'models/whisper'))
     audio=np.frombuffer(ctx.run([binary('ffmpeg'),'-nostdin','-v','error','-i',wav,'-ac','1','-ar','16000','-f','f32le','-'],capture=True),dtype='<f4').copy()
-    segments,info=model.transcribe(audio,language=None if language=='auto' else language,beam_size=1 if fast else 5,word_timestamps=True,vad_filter=True,condition_on_previous_text=False)
+    segments,info=model.transcribe(audio,language=None if language=='auto' else language,task=task,beam_size=1 if fast else 5,word_timestamps=task=='transcribe',vad_filter=True,condition_on_previous_text=False)
     cues=[]
     with wave.open(str(wav)) as w:duration=w.getnframes()/w.getframerate()
     for seg in segments:
         ctx.check();text=seg.text.strip()
         if text and seg.end>seg.start:
             cues.append({'start':max(0,seg.start),'end':min(duration,seg.end),'text':text,'words':[{'start':w.start,'end':w.end,'text':w.word.strip()} for w in (seg.words or [])]})
-        ctx.emit(min(13,3+10*seg.end/duration),f'Nhận dạng lời: {min(100,round(100*seg.end/duration))}%')
+        ctx.emit(min(13,3+10*seg.end/duration),f'{"Dịch để chọn hình" if task=="translate" else "Nhận dạng lời"}: {min(100,round(100*seg.end/duration))}%')
     del model
     if not cues:raise RuntimeError('Không nhận dạng được lời trong voice. Kiểm tra tệp có giọng nói rõ và đúng ngôn ngữ.')
     if sum(x['end']-x['start'] for x in cues)<duration*.2:raise RuntimeError('Quá ít lời nói được nhận dạng. Kiểm tra voice trước khi tự dựng.')
-    save_json(cache,{'signature':marker,'language':info.language,'cues':cues});return cues
+    save_json(cache,{'signature':marker,'language':info.language,'task':task,'cues':cues});return cues
 

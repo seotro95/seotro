@@ -7,3 +7,5 @@
 - Giao diện dùng Tkinter/Tcl/Tk của Python. Bản Windows đóng gói bằng PyInstaller;điều khoản ngoại lệ bootloader cho phép đóng gói ứng dụng,giữ giấy phép thành phần bên thứ ba.
 
 Model/cache hoặc media của người dùng không được đóng gói chung vào bản phát hành phần mềm.
+
+- langid.py 1.1.6: https://github.com/saffsd/langid.py (BSD). Ước lượng ngôn ngữ phụ đề khi đã có SRT; không thay thế nhận dạng voice của Whisper.

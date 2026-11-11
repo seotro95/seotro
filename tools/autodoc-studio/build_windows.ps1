@@ -27,10 +27,10 @@ if ($LASTEXITCODE -ne 0) { throw 'FFmpeg first-install test failed' }
 
 $argsBuild = @('--noconfirm','--clean','--onedir','--windowed','--name','AutoDocStudio',
  '--collect-all','ctranslate2','--collect-all','faster_whisper','--collect-all','onnxruntime',
- '--collect-all','tokenizers','--collect-all','av','--collect-all','huggingface_hub',
+ '--collect-all','tokenizers','--collect-all','av','--collect-all','huggingface_hub','--collect-all','langid',
  '--copy-metadata','numpy','--copy-metadata','Pillow','--copy-metadata','onnxruntime',
  '--copy-metadata','tokenizers','--copy-metadata','huggingface-hub','--copy-metadata','faster-whisper',
- '--copy-metadata','ctranslate2','--copy-metadata','av','main.py')
+ '--copy-metadata','ctranslate2','--copy-metadata','av','--copy-metadata','langid','main.py')
 python -m PyInstaller @argsBuild
 if ($LASTEXITCODE -ne 0) { throw 'PyInstaller failed' }
 $exe = Join-Path $PSScriptRoot 'dist\AutoDocStudio\AutoDocStudio.exe'
@@ -46,5 +46,7 @@ if ($LASTEXITCODE -ne 0) {
  Get-Content "$env:LOCALAPPDATA\AutoDocStudio\application.log" -Tail 100 -ErrorAction SilentlyContinue
  throw 'Frozen full automatic edit test failed'
 }
+python multilingual_smoke.py $exe (Join-Path $PSScriptRoot 'windows test\Nguồn thử nghiệm\Ảnh và video')
+if ($LASTEXITCODE -ne 0) { throw 'Frozen multilingual narration edit failed' }
 python package_release.py
 if ($LASTEXITCODE -ne 0) { throw 'Packaging failed' }
