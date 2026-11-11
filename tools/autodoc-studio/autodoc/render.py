@@ -7,6 +7,11 @@ from .effects import FILTERS,MOTIONS,TRANSITIONS
 from .subtitles import write_ass
 
 _ENCODERS={}
+def source_offset(asset,offset):
+    # Splitting a looped scene must continue at the same source frame, including
+    # when the split point falls after one or more complete source loops.
+    return max(0,float(offset))%asset['seconds'] if asset['kind']=='video' else 0
+
 def choose_encoder(requested,ctx):
     if requested=='cpu':return 'libx264'
     key=(binary('ffmpeg'),requested)
@@ -64,7 +69,7 @@ def render_shot(p,item,previous,ctx,resolution=None,preview=False,codec='libx264
     asset=p['files'][item['source_id']];prev=p['files'][previous['source_id']] if previous else None
     logo=normalize_logo(settings,job);local_cues=[c for c in p['cues'] if c['end']>item['start_frame']/fps and c['start']<item['end_frame']/fps]
     visual_settings={k:settings[k] for k in ['fit','subtitle_mode','subtitle_style','logo_position','logo_size','logo_opacity']}
-    sig=signature({'renderer':20,'item':item,'previous':previous if item['transition']!='cut' else None,'source':asset['sha256'],'prev_source':prev['sha256'] if prev else None,'size':[w,h,fps],'settings':visual_settings,'logo':_file_key(logo) if logo else None,'cues':local_cues if settings['subtitle_mode']=='burn' else None,'codec':codec,'quality':'fast' if preview else settings['quality']})
+    sig=signature({'renderer':21,'item':item,'previous':previous if item['transition']!='cut' else None,'source':asset['sha256'],'prev_source':prev['sha256'] if prev else None,'size':[w,h,fps],'settings':visual_settings,'logo':_file_key(logo) if logo else None,'cues':local_cues if settings['subtitle_mode']=='burn' else None,'codec':codec,'quality':'fast' if preview else settings['quality']})
     folder=job/('preview_cache' if preview else 'renders')/sig[:18];folder.mkdir(parents=True,exist_ok=True);out=folder/'scene.mp4'
     if out.exists():return out
     cmd=[binary('ffmpeg'),'-nostdin','-hide_banner','-loglevel','error','-filter_complex_threads','1','-y'];filters=[];ninputs=0
@@ -72,12 +77,11 @@ def render_shot(p,item,previous,ctx,resolution=None,preview=False,codec='libx264
         nonlocal ninputs
         if not Path(a['path']).is_file():raise ValueError(f'Thiếu nguồn: {a["path"]}')
         if a['kind']=='image':cmd.extend(['-loop','1','-framerate',str(fps),'-i',a['path']])
-        else:cmd.extend(['-threads','1','-stream_loop','-1','-ss',str(min(max(0,offset),max(0,a['seconds']-.05))),'-i',a['path']])
+        else:cmd.extend(['-threads','1','-stream_loop','-1','-ss',str(source_offset(a,offset)),'-i',a['path']])
         idx=ninputs;ninputs+=1;return idx
     add_input(asset,item['source_in']);filters.append(_scale('[0:v]',sec,item,asset,w,h,fps,settings['fit'])+'[current]');stage='current'
     if previous and item['transition']!='cut':
         handle=min(.35,sec*.25);offset=previous['source_in']+previous['frames']/fps*previous.get('speed',1)
-        if prev['kind']=='video':offset=min(offset,max(0,prev['seconds']-handle))
         idx=add_input(prev,offset);filters.append(_scale(f'[{idx}:v]',handle,previous,prev,w,h,fps,settings['fit'])+'[old]')
         trans='fade' if item['transition']=='dissolve' else item['transition']
         filters.append(f'[old][current]xfade=transition={trans}:duration={handle}:offset=0[mixed]');stage='mixed'
@@ -105,7 +109,7 @@ def render_shot(p,item,previous,ctx,resolution=None,preview=False,codec='libx264
 
 def source_audio(p,item,ctx):
     job=Path(p['job']);asset=p['files'][item['source_id']];fps=p['plan']['fps'];sec=item['frames']/fps;speed=item.get('speed',1)
-    key=signature({'source':asset['sha256'],'start':item['source_in'],'frames':item['frames'],'fps':fps,'speed':speed});folder=job/'source_audio';folder.mkdir(exist_ok=True);out=folder/f'{key[:20]}.wav'
+    key=signature({'version':2,'source':asset['sha256'],'start':item['source_in'],'frames':item['frames'],'fps':fps,'speed':speed});folder=job/'source_audio';folder.mkdir(exist_ok=True);out=folder/f'{key[:20]}.wav'
     if out.exists():return out
     if asset['kind']=='image' or not asset['audio_streams']:
         with wave.open(str(out),'wb') as w:
@@ -116,7 +120,7 @@ def source_audio(p,item,ctx):
         while t<.5:tempos.append(.5);t/=.5
         while t>2:tempos.append(2);t/=2
         tempos.append(t);af=','.join(f'atempo={x}' for x in tempos)+f',aresample=48000,apad,atrim=duration={sec},afade=t=in:d=0.06,afade=t=out:st={max(0,sec-.06)}:d=0.06'
-        temp=out.with_suffix('.pending.wav');ctx.run([binary('ffmpeg'),'-nostdin','-v','error','-stream_loop','-1','-ss',str(min(item['source_in'],max(0,asset['seconds']-.05))),'-i',asset['path'],'-map','0:a:0','-vn','-af',af,'-ac','1','-ar','48000','-c:a','pcm_s16le','-t',str(sec),'-y',temp],log=folder/'extract.log');temp.replace(out)
+        temp=out.with_suffix('.pending.wav');ctx.run([binary('ffmpeg'),'-nostdin','-v','error','-stream_loop','-1','-ss',str(source_offset(asset,item['source_in'])),'-i',asset['path'],'-map','0:a:0','-vn','-af',af,'-ac','1','-ar','48000','-c:a','pcm_s16le','-t',str(sec),'-y',temp],log=folder/'extract.log');temp.replace(out)
     return out
 
 def concatenate_audio(paths,out):
@@ -137,12 +141,14 @@ def export_movie(p,out,ctx):
     job=Path(p['job']);settings=p['settings'];shots=p['plan']['shots'];out=Path(out).resolve();out.parent.mkdir(parents=True,exist_ok=True)
     protected={Path(p['voice_source']).resolve()}|{Path(x['path']).resolve() for x in p['files']}
     protected|={Path(settings[k]).resolve() for k in ['logo_path','subtitle_path'] if settings.get(k)}
-    if out in protected or out.suffix.lower() not in ['.mp4','.mkv']:raise ValueError('Chọn tên MP4/MKV mới,không ghi đè nguồn.')
+    candidate=out.with_name(out.stem+'.checking'+out.suffix)
+    if out in protected or candidate in protected or out.suffix.lower() not in ['.mp4','.mkv']:raise ValueError('Chọn tên MP4/MKV mới,không ghi đè nguồn hoặc trùng đường dẫn tạm với nguồn.')
     for source in p['files']:
         source_path=Path(source['path'])
         if not source_path.is_file():raise ValueError(f'Thiếu nguồn: {source_path}')
         st=source_path.stat()
         if (st.st_size!=source.get('bytes') or st.st_mtime_ns!=source.get('mtime_ns')) and digest(source_path)!=source['sha256']:raise ValueError(f'Nguồn đã đổi sau khi phân tích: {source_path.name}. Hãy Tự xếp cảnh lại.')
+    normalize_logo(settings,job)
     codec=choose_encoder(settings['encoder'],ctx);workers=2 if len(shots)>1 else 1
     paths=[None]*len(shots);done=0
     def task(i):return i,render_shot(p,shots[i],shots[i-1] if i else None,ctx,codec=codec)

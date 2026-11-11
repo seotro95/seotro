@@ -32,5 +32,13 @@ class EditorTests(unittest.TestCase):
         d=options();self.assertTrue(d['mute_source']);self.assertEqual(d['encoder'],'auto')
         with self.assertRaises(ValueError):options({'source_volume':-1})
         with self.assertRaises(ValueError):options({'threads':999})
+    def test_export_temporary_path_cannot_overwrite_source(self):
+        from autodoc.render import export_movie
+        from autodoc.common import Context
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);p=project(root);p['job']=str(root);p['files'][0]['path']=str(root/'movie.checking.mp4');p['files'][0]['kind']='video'
+            source=root/'movie.checking.mp4';source.write_bytes(b'original clip content')
+            with self.assertRaises(ValueError):export_movie(p,root/'movie.mp4',Context(lambda *_:None))
+            self.assertEqual(source.read_bytes(),b'original clip content')
 
 if __name__=='__main__':unittest.main()

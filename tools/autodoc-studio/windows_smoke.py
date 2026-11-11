@@ -40,10 +40,18 @@ assert p['plan']['opening_distinct_files']==10
 p['plan']['shots'][0].update(source_id=0,source_name=p['files'][0]['name'],source_in=0,effect='cinema')
 image=next(f for f in p['files'] if f['kind']=='image');p['plan']['shots'][1].update(source_id=image['id'],source_name=image['name'],source_in=0,effect='zoom_in',transition='wipeleft')
 p['plan']['shots'][2]['transition']='dissolve';split(p,3,.75);merge_previous(p,4);save(p);project_file=Path(p['project_file'])
+p['plan']['shots'][3].update(source_id=0,source_name=p['files'][0]['name'],source_in=4.,effect='none',transition='cut',crop=1.);save(p)
 out=work/'Custom export.mp4';d=app(['--project',project_file,'--export-to',out],result);r=d['report'];assert r['status']=='passed' and r['image_scenes']>=1 and not r['source_audio_kept'] and r['logo_applied'] and r['subtitle_mode']=='burn' and r['audio_alignment']
 # Look at actual output pixels, not just settings metadata.
 raw=ctx.run([ff,'-v','error','-ss','0.7','-i',out,'-frames:v','1','-f','rawvideo','-pix_fmt','rgb24','-threads','1','-'],capture=True);pix=np.frombuffer(raw,dtype=np.uint8).reshape(r['height'],r['width'],3)
 pink=((pix[:,:,0]>180)&(pix[:,:,1]<70)&(pix[:,:,2]>160));green=((pix[:,:,1]>150)&(pix[:,:,1].astype(float)>pix[:,:,0]*1.4)&(pix[:,:,1].astype(float)>pix[:,:,2]*1.4));assert pink[:r['height']//3,:r['width']//3].sum()>100;assert green[r['height']//2:].sum()>20
+# A split/in-point beyond a short clip's duration must wrap to the same moving
+# source frame rather than freeze or jump to the clip's last frame.
+def thumbnail(path,at):
+    raw=ctx.run([ff,'-v','error','-ss',str(at),'-i',path,'-frames:v','1','-vf','scale=320:180','-f','rawvideo','-pix_fmt','rgb24','-threads','1','-'],capture=True)
+    return np.frombuffer(raw,dtype=np.uint8).reshape(180,320,3).astype(float)[50:125,60:270]
+at=p['plan']['shots'][3]['start_frame']/24+.5;actual=thumbnail(out,at);expected=thumbnail(clips/'clip 000.mp4',2.)
+assert float(np.mean((actual-expected)**2))<120,'Looped source in-point did not continue at the expected frame.'
 stamps={str(x):x.stat().st_mtime_ns for x in Path(p['job']).glob('renders/*/scene.mp4')}
 app(['--project',project_file,'--export-to',work/'Cached export.mp4'],result);assert all(Path(x).stat().st_mtime_ns==mtime for x,mtime in stamps.items())
 # A second job reuses cross-project CLIP features, even with a different output folder.

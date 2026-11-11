@@ -10,7 +10,7 @@ def scene_preview(p,index,ctx):
     from .render import render_shot,source_audio
     shots=p['plan']['shots'];s=shots[index];video=render_shot(p,s,shots[index-1] if index else None,ctx,resolution=360,preview=True)
     fps=p['plan']['fps'];a=s['start_frame']/fps;d=s['frames']/fps
-    key=signature({'voice':p['voice_sha256'],'a':a,'d':d,'mute':p['settings']['mute_source'],'volume':p['settings']['source_volume'],'shot':s})[:18];audio=Path(p['job'])/'preview_cache'/f'audio_{key}.wav'
+    key=signature({'version':2,'voice':p['voice_sha256'],'a':a,'d':d,'mute':p['settings']['mute_source'],'volume':p['settings']['source_volume'],'shot':s})[:18];audio=Path(p['job'])/'preview_cache'/f'audio_{key}.wav'
     if not audio.exists():
         cmd=[binary('ffmpeg'),'-nostdin','-v','error','-y','-ss',str(a),'-i',p['voice_wav']]
         mixed=not p['settings']['mute_source'] and p['settings']['source_volume']>0

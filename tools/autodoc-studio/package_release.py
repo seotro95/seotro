@@ -1,4 +1,4 @@
-import hashlib,importlib.metadata,json,shutil,zipfile
+import hashlib,importlib.metadata,json,os,shutil,zipfile
 from pathlib import Path
 R=Path(__file__).resolve().parent;O=R/'release';O.mkdir(exist_ok=True);app=R/'dist/AutoDocStudio'
 report=json.loads((R/'WINDOWS_TEST_REPORT.json').read_text());assert report['status']=='passed' and report['frozen_exe_tested'] and report['frozen_gui_preview_tested']
@@ -52,7 +52,7 @@ with zipfile.ZipFile(O/'AutoDocStudio-2.0.0-Source.zip','w',zipfile.ZIP_DEFLATED
 shutil.copyfile(R/'WINDOWS_TEST_REPORT.json',O/'WINDOWS_TEST_REPORT.json');assets=[]
 for p in sorted(O.iterdir()):
     if p.is_file() and p.name not in ['SHA256SUMS.txt','RELEASE_MANIFEST.json']:assets.append({'name':p.name,'bytes':p.stat().st_size,'sha256':hashlib.file_digest(p.open('rb'),'sha256').hexdigest()})
-(O/'SHA256SUMS.txt').write_text(''.join(x['sha256']+'  '+x['name']+'\n' for x in assets));(O/'RELEASE_MANIFEST.json').write_text(json.dumps({'version':'2.0.0','model_weights_bundled':False,'ffmpeg_binaries_bundled':False,'user_media_bundled':False,'tested_frozen_windows_edit_and_preview':True,'assets':assets},indent=2))
+(O/'SHA256SUMS.txt').write_text(''.join(x['sha256']+'  '+x['name']+'\n' for x in assets));(O/'RELEASE_MANIFEST.json').write_text(json.dumps({'version':'2.0.0','build_commit':os.environ.get('GITHUB_SHA'),'build_run_id':os.environ.get('GITHUB_RUN_ID'),'model_weights_bundled':False,'ffmpeg_binaries_bundled':False,'user_media_bundled':False,'tested_frozen_windows_edit_and_preview':True,'assets':assets},indent=2))
 for p in O.glob('*.zip'):
     with zipfile.ZipFile(p) as z:
         assert z.testzip() is None
