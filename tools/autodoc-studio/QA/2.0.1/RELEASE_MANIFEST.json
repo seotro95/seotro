@@ -1,0 +1,41 @@
+{
+  "version": "2.0.1",
+  "build_commit": "9db3047d71929b046cb6da425a600635b5dc9a15",
+  "build_run_id": "42967312000",
+  "model_weights_bundled": false,
+  "ffmpeg_binaries_bundled": false,
+  "user_media_bundled": false,
+  "tested_frozen_windows_edit_and_preview": true,
+  "assets": [
+    {
+      "name": "AutoDocStudio-2.0.1-Source.zip",
+      "bytes": 62846,
+      "sha256": "65ce3d79d888782dd21a759ac311fe6947aee15808fd887772f707b3bc9608c3"
+    },
+    {
+      "name": "AutoDocStudio-2.0.1-Windows-x64.zip",
+      "bytes": 108294756,
+      "sha256": "f9aeac0386f23f2668e0b7ea594116d6c0be6c16f2ca7bc7fa175c758eec87f7"
+    },
+    {
+      "name": "cinematic-extras.json",
+      "bytes": 384,
+      "sha256": "42d4a3403160b0e1c486a0df785b1d5dcd4e9e17a617e4469ef452b999cf5188"
+    },
+    {
+      "name": "HUONG_DAN_SU_DUNG.txt",
+      "bytes": 2405,
+      "sha256": "4be53f505f19a9c0969fc944127e1a24ee2e7127a03006362de7c5dd9219db43"
+    },
+    {
+      "name": "manifest.json",
+      "bytes": 213,
+      "sha256": "1cfc0d08ba6f1231a0b2396ebf076875c87fae62d13e84e14c564369bf30ef9d"
+    },
+    {
+      "name": "WINDOWS_TEST_REPORT.json",
+      "bytes": 1379,
+      "sha256": "2e2c1362989f0d07fec07fcba7ed1ed8cc0945d1037bd4c13d89d435336112cd"
+    }
+  ]
+}

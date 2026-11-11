@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "version": "2.0.1",
+  "platform": "Windows x64",
+  "frozen_exe_tested": true,
+  "real_clip_model_used": true,
+  "srt_skips_asr_verified": true,
+  "mixed_image_video_import": true,
+  "source_files_unchanged": true,
+  "logo_pixels_verified": true,
+  "burn_subtitle_pixels_verified": true,
+  "soft_subtitle_track_verified": true,
+  "mute_and_keep_source_audio_verified": true,
+  "source_tone_verified": true,
+  "manual_scene_split_merge_verified": true,
+  "export_24_and_30fps_verified": true,
+  "mp4_and_mkv_verified": true,
+  "embedded_preview_rendered": true,
+  "frozen_gui_preview_tested": true,
+  "scene_cache_reused": true,
+  "shared_feature_cache_hits": 11,
+  "full_decode_passed": true,
+  "voice_alignment": [
+    {
+      "at_seconds": 0.21,
+      "lag_seconds": 0.0,
+      "correlation": 0.998843
+    },
+    {
+      "at_seconds": 6.093,
+      "lag_seconds": 0.0,
+      "correlation": 0.999854
+    },
+    {
+      "at_seconds": 10.435,
+      "lag_seconds": 0.0,
+      "correlation": 0.998825
+    },
+    {
+      "at_seconds": 17.277,
+      "lag_seconds": 0.0,
+      "correlation": 0.998565
+    },
+    {
+      "at_seconds": 20.16,
+      "lag_seconds": 0.0,
+      "correlation": 0.998605
+    }
+  ],
+  "video_seconds": 21.375,
+  "test_seconds": 28.5,
+  "media_fixtures_not_included_in_release": true
+}

@@ -13,3 +13,11 @@ Các script được đính kèm để tham khảo và tái lập có kiểm so�
 File movie, MP3 và dự án dựng tập19 được tải từ release công khai trong TIEN_DO_VA_LINK_TAI.md. Dự án dựng có voiceAnh và chỉ dẫn nối lại clip bằng hash, không có rawclip. File đính kèm cũ của cuộc trò chuyện không tự xuất hiện ở chat mới: người dùng giữ nguồn đã tải và gửi lại clip khi muốn dựng/sửa từ nguồn.
 
 Khi không có công cụ: có thể đọc hồ sơ, lên kịch bản/prompt và cung cấp script chạy được; phải nói rõ chưa chạy tổng hợp/render và không dựng link giả. Không gửi mật khẩu, token hoặc cookie trong chat hay đóng gói vào ZIP.
+
+## Tool edit đã nâng cấp: AutoDoc Studio 2.0.1
+
+Windows portable: https://github.com/seotro95/seotro/releases/tag/autodoc-studio-v2.0.1 . Mã nguồn hiện hành tại `tools/autodoc-studio`; cấu hình và link tải tại `productions/series/EDITING_TOOL.json`. Báo cáo kiểm tra EXE, preview và hash file tải tại `tools/autodoc-studio/QA/2.0.1/`.
+
+Đầu vào: voice chính, thư mục ảnh/video, TXT/SRT tùy chọn và logo tùy chọn. Tự xếp cảnh, chọn từng cảnh để xem hình và nghe đúng đoạn voice; sửa nguồn, điểm lấy, tốc độ, cắt/phóng, tâm cắt, chia/gộp, chuyển cảnh và hiệu ứng. Lưu dự án JSON rồi bấm Xuất để chọn MP4/MKV,720/1080p,FPS,chất lượng,CPU/GPU và nơi lưu. Mặc định chỉ có voice; có thể bỏ chọn tắt tiếng clip để trộn tiếng nguồn. Có kiểu phụ đề burn, phụ đề mềm hoặc không phụ đề. Gói preset bổ sung tự tải theo manifest chính thức và kiểm SHA256.
+
+Có SRT đúng mốc thì bỏ qua nhận dạng voice. Cache AI dùng lại giữa dự án; cache từng cảnh giảm dựng lại. Giữ các nguồn và cache đúng đường dẫn để mở lại JSON. Dự án v1 không nhập trực tiếp vào schema v2; bản v1 và hồ sơ 17 giọng vẫn được giữ. Không sửa các voiceID/preset đã khóa khi chỉ nâng cấp tool edit. Lọc trẻ em và chọn hình theo lời vẫn là ước lượng, cần xem lại trước đăng.

@@ -1,25 +1,80 @@
 {
   "id": "autodoc-studio",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "source_path": "tools/autodoc-studio",
-  "platform": "Windows10/11x64",
-  "release_tag": "autodoc-studio-v1.0.0",
-  "download_url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/AutoDocStudio-1.0.0-Windows-x64.zip",
-  "source_download_url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v1.0.0/AutoDocStudio-1.0.0-Source.zip",
+  "platform": "Windows 10/11 x64",
+  "release_tag": "autodoc-studio-v2.0.1",
+  "download_url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.0.1/AutoDocStudio-2.0.1-Windows-x64.zip",
+  "source_download_url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.0.1/AutoDocStudio-2.0.1-Source.zip",
+  "guide_url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.0.1/HUONG_DAN_SU_DUNG.txt",
   "inputs": [
-    "existing English narration audio",
-    "folder of source videos"
+    "existing narration audio",
+    "folder of images and videos",
+    "optional timed SRT or plain TXT",
+    "optional logo image"
   ],
-  "main_output": "VIDEO_HOAN_CHINH.mp4",
-  "automatic_transcription": "Whisper local",
-  "automatic_visual_matching": "CLIPONNX local",
-  "main_audio": "Input narration only;sourceclip audio removed",
-  "opening": "10scenes in first30seconds when enough sourcefootage",
-  "still_or_textcard_substitutes": false,
+  "default_audio": "Input narration only; source clip audio muted by default",
+  "optional_source_audio_mix": true,
+  "opening": "10 scenes in first 30 seconds when enough sources",
+  "provided_still_images_supported": true,
+  "generated_text_card_substitutes": false,
+  "subtitles": {
+    "import_export": [
+      "UTF-8 TXT",
+      "UTF-8 SRT"
+    ],
+    "modes": [
+      "none",
+      "burn",
+      "soft"
+    ],
+    "burn_style": [
+      "font family",
+      "size",
+      "color",
+      "outline",
+      "bold",
+      "italic",
+      "background",
+      "position"
+    ]
+  },
+  "embedded_preview": "Selected scene video and matching voice, local playback and seek",
+  "scene_editing": [
+    "source replacement",
+    "source in point",
+    "speed",
+    "crop and focus",
+    "split",
+    "merge",
+    "effects",
+    "transitions"
+  ],
+  "project_save": "JSON with source paths, timing and settings; keep original media and cache in place",
+  "export_options": [
+    "MP4/MKV",
+    "720/1080p",
+    "24/25/30/60 FPS",
+    "quality",
+    "GPU/CPU",
+    "custom output path"
+  ],
+  "speed_features": [
+    "shared CLIP feature cache",
+    "PyAV frame extraction",
+    "SRT skips ASR",
+    "per-scene render cache",
+    "two scene workers",
+    "tested hardware encoder probe with CPU fallback"
+  ],
+  "effect_pack": "Hash-verified declarative preset pack from official repository",
   "first_use_requires_internet_for_runtime_and_models": true,
   "api_key_required": false,
+  "build_run_id": 42967312000,
   "frozen_windows_exe_acceptance_test_passed": true,
-  "build_run_id": 42957479510,
   "reference_voice_generation_tools_and17saved_profiles_unchanged": true,
-  "limitations": "Semantic similarity and approximate child/text screening;review output before publishing. Source duration/quality and available clips constrain results."
+  "previous_release": "https://github.com/seotro95/seotro/releases/tag/autodoc-studio-v1.0.0",
+  "limitations": "AI semantic selection and child screening are approximate; review before posting. Speed depends on hardware and source media. Soft subtitle styles depend on external player.",
+  "build_commit": "9db3047d71929b046cb6da425a600635b5dc9a15",
+  "windows_zip_sha256": "f9aeac0386f23f2668e0b7ea594116d6c0be6c16f2ca7bc7fa175c758eec87f7"
 }
