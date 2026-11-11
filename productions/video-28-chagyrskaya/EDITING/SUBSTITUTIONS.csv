@@ -1,0 +1,18 @@
+scene_id,start,replacement_source_number,reason
+21,200,1020,unreliable generated specimen-count board and editorial screen
+22,210,1039,human skeletal display
+23,220,1043,missing original prompt
+31,300,1009,irrelevant illustrated paper collage
+34,330,1081,visible third-party watermark
+35,340,1030,editorial screen and reconstruction dominate
+40,390,1008,family illustration embedded in chart
+44,430,1024,brain model does not illustrate mitochondrial inheritance
+61,600,1033,unverified quantitative chart and reconstruction screen
+75,740,1058,visible third-party watermark
+77,760,989,distant figures with uncertain apparent ages
+84,830,1058,miniature human figures with uncertain apparent ages
+101,1000,1069,missing original prompt
+107,1060,1051,missing original prompt
+108,1070,1039,human skull display instead of fragment
+117,1160,1036,ancient/modern hybrid setting
+119,1180,1039,human jaw display

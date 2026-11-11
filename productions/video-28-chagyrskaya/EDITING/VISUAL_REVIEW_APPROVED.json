@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "topic_id": 28,
+  "method": "Sampled visual review with manual exclusions, source trims and final edit refinements",
+  "provided_clips_reviewed_at_three_times_each": 137,
+  "additional_short_source_interval_endpoints_reviewed": 82,
+  "edited_movie_samples_reviewed": 28,
+  "additional_final_closing_samples_reviewed": 3,
+  "opening": "Ten distinct clips in exactly thirty seconds; fragment, cave, excavation, clean laboratory, DNA, neutral kinship nodes, sample containers and generic adult cooperation",
+  "daughter_reference": "Scene43 remains on neutral laboratory samples; no adult is used as her portrait",
+  "closing": "Refined the last landscape cutaway to a clean moving river-valley view",
+  "raw_source_audio_in_edit": false,
+  "still_images_or_text_cards_inserted_for_missing_footage": false,
+  "watermarked_sources_excluded": [1004, 1045, 1107],
+  "uncertain_small_figures_excluded": [1047, 1054],
+  "minors_identified_in_reviewed_selected_samples": false,
+  "interpretation": "Reenactments, laboratory views, physical models and genetic graphics are illustrative, not authenticated records or identified-person portraits",
+  "limits": "This is a sample-frame review, not an uninterrupted manual viewing of every frame or a guarantee of factual accuracy for generated visual details"
+}

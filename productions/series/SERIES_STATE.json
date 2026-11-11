@@ -269,7 +269,8 @@
     {
       "id": 28,
       "title": "Chagyrskaya: bằng chứng di truyền về quan hệ gia đình thời tiền sử.",
-      "status": "queued"
+      "status": "completed",
+      "video_release_url": "https://github.com/seotro95/seotro/releases/tag/chagyrskaya-video-28-final-22m42s"
     },
     {
       "id": 29,
@@ -900,7 +901,7 @@
     "video_release_published_at": "2026-11-10T08:25:05Z",
     "video_download_verified": true
   },
-  "last_requested_topic_id": 19,
+  "last_requested_topic_id": 28,
   "topic5_explicitly_left_queued": true,
   "completed_topic_6": {
     "id": 6,
@@ -1197,7 +1198,45 @@
     "thumbnail_title_pairs": 5,
     "editing_steps_saved": true
   },
-  "latest_completed_topic_id": 19,
+  "latest_completed_topic_id": 28,
   "auto_start_next_topic": false,
-  "handoff_next_action": "Read context and wait for a specific new request;do not auto-start backlog5or topic20."
+  "handoff_next_action": "Read completed_topic_28, its editing workflow, and EDITING_TOOL.json. Wait for a specific next user request; do not auto-start queued topic5 or topic29.",
+  "completed_topic_28": {
+    "id": 28,
+    "title": "Chagyrskaya: bằng chứng di truyền về quan hệ gia đình thời tiền sử.",
+    "path": "productions/video-28-chagyrskaya",
+    "target_seconds": 1362,
+    "video_rendered": true,
+    "video_delivered": true,
+    "video_status": "completed_and_public_download_hash_verified",
+    "video_duration_seconds": 1362,
+    "video_frames": 32688,
+    "video_width": 1280,
+    "video_height": 720,
+    "video_fps": 24,
+    "video_audio_language": "en-US",
+    "video_audio_stream_count": 1,
+    "english_voice_sha256": "984bb351cf932276cebf2f823bb0c3286e07355c551bc7a93778c6ac69fdeace",
+    "voice_status": "Existing 17-voice preparation release; user-supplied English file matched its manifest; other voices and saved profiles unchanged",
+    "voice_release_url": "https://github.com/seotro95/seotro/releases/tag/chagyrskaya-video-28-22m42s",
+    "video_release_tag": "chagyrskaya-video-28-final-22m42s",
+    "video_release_url": "https://github.com/seotro95/seotro/releases/tag/chagyrskaya-video-28-final-22m42s",
+    "video_download_url": "https://github.com/seotro95/seotro/releases/download/chagyrskaya-video-28-final-22m42s/CHAGYRSKAYA_28_EN_FINAL_22m42s_720p.mp4",
+    "video_sha256": "5014db6102d5cf3055d38e8e1c2e2e7668a8a466debead62cf5fa1d18d1deedb",
+    "video_bytes": 394862901,
+    "opening_shots": 10,
+    "opening_seconds": 30,
+    "opening_download_url": "https://github.com/seotro95/seotro/releases/download/chagyrskaya-video-28-final-22m42s/CHAGYRSKAYA_28_OPENING_30s.mp4",
+    "source_audio_removed": true,
+    "music_added": false,
+    "replacement_stills_or_text_cards": false,
+    "video_qa_path": "productions/video-28-chagyrskaya/EDITING/FINAL_VIDEO_QA.json",
+    "public_video_stream_hash_verified": true,
+    "thumbnail_title_pairs": 5,
+    "editing_steps_saved": true,
+    "editing_steps_document": "productions/video-28-chagyrskaya/EDITING/PRODUCTION_STEPS.md",
+    "no_raw_source_clips_published": true,
+    "visual_review_limit": "Sample-frame review, not uninterrupted manual viewing",
+    "minors_identified_in_reviewed_selected_samples": false
+  }
 }

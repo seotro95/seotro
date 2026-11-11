@@ -1,0 +1,990 @@
+{
+  "review_method": "Three sampled frames per provided clip at 1, 4.6 and 8.2 seconds; manual exclusions and trimmed usable intervals; local CLIP used only to rank secondary cutaways within manually assigned categories. Additional selected-interval frame review follows.",
+  "original_clips": 137,
+  "original_audio_clips": 40,
+  "original_missing_prompt_ids": [
+    23,
+    101,
+    107
+  ],
+  "excluded_source_numbers": {
+    "992": "unreliable generated specimen-count board and editorial screen",
+    "993": "human skeletal display",
+    "1001": "irrelevant illustrated paper collage",
+    "1004": "visible third-party watermark",
+    "1005": "editorial screen and reconstruction dominate",
+    "1010": "family illustration embedded in chart",
+    "1014": "brain model does not illustrate mitochondrial inheritance",
+    "1031": "unverified quantitative chart and reconstruction screen",
+    "1045": "visible third-party watermark",
+    "1047": "distant figures with uncertain apparent ages",
+    "1054": "miniature human figures with uncertain apparent ages",
+    "1076": "human skull display instead of fragment",
+    "1085": "ancient/modern hybrid setting",
+    "1087": "human jaw display",
+    "1107": "visible third-party watermark"
+  },
+  "approved_intervals": [
+    {
+      "number": 972,
+      "prompt_id": 1,
+      "in": 0.05,
+      "out": 2.6,
+      "category": "artifact"
+    },
+    {
+      "number": 973,
+      "prompt_id": 2,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 974,
+      "prompt_id": 3,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 975,
+      "prompt_id": 4,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "landscape"
+    },
+    {
+      "number": 976,
+      "prompt_id": 5,
+      "in": 6.7,
+      "out": 9.75,
+      "category": "landscape"
+    },
+    {
+      "number": 977,
+      "prompt_id": 6,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "excavation"
+    },
+    {
+      "number": 978,
+      "prompt_id": 7,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "craft"
+    },
+    {
+      "number": 979,
+      "prompt_id": 8,
+      "in": 0.05,
+      "out": 2.8,
+      "category": "artifact"
+    },
+    {
+      "number": 980,
+      "prompt_id": 9,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 981,
+      "prompt_id": 10,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "excavation"
+    },
+    {
+      "number": 982,
+      "prompt_id": 11,
+      "in": 6.5,
+      "out": 9.7,
+      "category": "landscape"
+    },
+    {
+      "number": 983,
+      "prompt_id": 12,
+      "in": 0.1,
+      "out": 3.5,
+      "category": "landscape"
+    },
+    {
+      "number": 984,
+      "prompt_id": 13,
+      "in": 0.1,
+      "out": 5.1,
+      "category": "landscape"
+    },
+    {
+      "number": 985,
+      "prompt_id": 14,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 986,
+      "prompt_id": 15,
+      "in": 0.1,
+      "out": 3.8,
+      "category": "landscape"
+    },
+    {
+      "number": 987,
+      "prompt_id": 16,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "excavation"
+    },
+    {
+      "number": 988,
+      "prompt_id": 17,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "artifact"
+    },
+    {
+      "number": 989,
+      "prompt_id": 18,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "craft"
+    },
+    {
+      "number": 990,
+      "prompt_id": 19,
+      "in": 6.2,
+      "out": 9.7,
+      "category": "landscape"
+    },
+    {
+      "number": 991,
+      "prompt_id": 20,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 994,
+      "prompt_id": 24,
+      "in": 0.1,
+      "out": 2.9,
+      "category": "laboratory"
+    },
+    {
+      "number": 995,
+      "prompt_id": 25,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 996,
+      "prompt_id": 26,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 997,
+      "prompt_id": 27,
+      "in": 0.05,
+      "out": 2.7,
+      "category": "genetics"
+    },
+    {
+      "number": 998,
+      "prompt_id": 28,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 999,
+      "prompt_id": 29,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1000,
+      "prompt_id": 30,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1002,
+      "prompt_id": 32,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1003,
+      "prompt_id": 33,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1006,
+      "prompt_id": 36,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1007,
+      "prompt_id": 37,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1008,
+      "prompt_id": 38,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1009,
+      "prompt_id": 39,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1011,
+      "prompt_id": 41,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1012,
+      "prompt_id": 42,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1013,
+      "prompt_id": 43,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1015,
+      "prompt_id": 45,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1016,
+      "prompt_id": 46,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1017,
+      "prompt_id": 47,
+      "in": 0.1,
+      "out": 2.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1018,
+      "prompt_id": 48,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "landscape"
+    },
+    {
+      "number": 1019,
+      "prompt_id": 49,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1020,
+      "prompt_id": 50,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1021,
+      "prompt_id": 51,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1022,
+      "prompt_id": 52,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1023,
+      "prompt_id": 53,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1024,
+      "prompt_id": 54,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1025,
+      "prompt_id": 55,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1026,
+      "prompt_id": 56,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1027,
+      "prompt_id": 57,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1028,
+      "prompt_id": 58,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1029,
+      "prompt_id": 59,
+      "in": 0.1,
+      "out": 2.9,
+      "category": "genetics"
+    },
+    {
+      "number": 1030,
+      "prompt_id": 60,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1032,
+      "prompt_id": 62,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "landscape"
+    },
+    {
+      "number": 1033,
+      "prompt_id": 63,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "excavation"
+    },
+    {
+      "number": 1034,
+      "prompt_id": 64,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "excavation"
+    },
+    {
+      "number": 1035,
+      "prompt_id": 65,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "craft"
+    },
+    {
+      "number": 1036,
+      "prompt_id": 66,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "craft"
+    },
+    {
+      "number": 1037,
+      "prompt_id": 67,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1038,
+      "prompt_id": 68,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1039,
+      "prompt_id": 69,
+      "in": 0.1,
+      "out": 3.5,
+      "category": "artifact"
+    },
+    {
+      "number": 1040,
+      "prompt_id": 70,
+      "in": 0.1,
+      "out": 2.7,
+      "category": "genetics"
+    },
+    {
+      "number": 1041,
+      "prompt_id": 71,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1042,
+      "prompt_id": 72,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1043,
+      "prompt_id": 73,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "landscape"
+    },
+    {
+      "number": 1044,
+      "prompt_id": 74,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1046,
+      "prompt_id": 76,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "craft"
+    },
+    {
+      "number": 1048,
+      "prompt_id": 78,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "craft"
+    },
+    {
+      "number": 1049,
+      "prompt_id": 79,
+      "in": 0.2,
+      "out": 6.2,
+      "category": "landscape"
+    },
+    {
+      "number": 1050,
+      "prompt_id": 80,
+      "in": 0.1,
+      "out": 3.4,
+      "category": "genetics"
+    },
+    {
+      "number": 1051,
+      "prompt_id": 81,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1052,
+      "prompt_id": 82,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1053,
+      "prompt_id": 83,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1055,
+      "prompt_id": 85,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1056,
+      "prompt_id": 86,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "craft"
+    },
+    {
+      "number": 1057,
+      "prompt_id": 87,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "craft"
+    },
+    {
+      "number": 1058,
+      "prompt_id": 88,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "landscape"
+    },
+    {
+      "number": 1059,
+      "prompt_id": 89,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "landscape"
+    },
+    {
+      "number": 1060,
+      "prompt_id": 90,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "craft"
+    },
+    {
+      "number": 1061,
+      "prompt_id": 91,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "artifact"
+    },
+    {
+      "number": 1062,
+      "prompt_id": 92,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "wildlife"
+    },
+    {
+      "number": 1063,
+      "prompt_id": 93,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "artifact"
+    },
+    {
+      "number": 1064,
+      "prompt_id": 94,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "craft"
+    },
+    {
+      "number": 1065,
+      "prompt_id": 95,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "craft"
+    },
+    {
+      "number": 1066,
+      "prompt_id": 96,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "artifact"
+    },
+    {
+      "number": 1067,
+      "prompt_id": 97,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "craft"
+    },
+    {
+      "number": 1068,
+      "prompt_id": 98,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1069,
+      "prompt_id": 99,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "landscape"
+    },
+    {
+      "number": 1070,
+      "prompt_id": 100,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "landscape"
+    },
+    {
+      "number": 1071,
+      "prompt_id": 102,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1072,
+      "prompt_id": 103,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1073,
+      "prompt_id": 104,
+      "in": 0.1,
+      "out": 3.7,
+      "category": "landscape"
+    },
+    {
+      "number": 1074,
+      "prompt_id": 105,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1075,
+      "prompt_id": 106,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1077,
+      "prompt_id": 109,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "craft"
+    },
+    {
+      "number": 1078,
+      "prompt_id": 110,
+      "in": 6.6,
+      "out": 9.8,
+      "category": "landscape"
+    },
+    {
+      "number": 1079,
+      "prompt_id": 111,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1080,
+      "prompt_id": 112,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "craft"
+    },
+    {
+      "number": 1081,
+      "prompt_id": 113,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1082,
+      "prompt_id": 114,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1083,
+      "prompt_id": 115,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1084,
+      "prompt_id": 116,
+      "in": 0.1,
+      "out": 3.2,
+      "category": "artifact"
+    },
+    {
+      "number": 1086,
+      "prompt_id": 118,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1088,
+      "prompt_id": 120,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1089,
+      "prompt_id": 121,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1090,
+      "prompt_id": 122,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1091,
+      "prompt_id": 123,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "excavation"
+    },
+    {
+      "number": 1092,
+      "prompt_id": 124,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "artifact"
+    },
+    {
+      "number": 1093,
+      "prompt_id": 125,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1094,
+      "prompt_id": 126,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1095,
+      "prompt_id": 127,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "landscape"
+    },
+    {
+      "number": 1096,
+      "prompt_id": 128,
+      "in": 0.1,
+      "out": 5.0,
+      "category": "laboratory"
+    },
+    {
+      "number": 1097,
+      "prompt_id": 129,
+      "in": 0.1,
+      "out": 2.9,
+      "category": "laboratory"
+    },
+    {
+      "number": 1098,
+      "prompt_id": 130,
+      "in": 0.1,
+      "out": 3.5,
+      "category": "artifact"
+    },
+    {
+      "number": 1099,
+      "prompt_id": 131,
+      "in": 0.1,
+      "out": 2.8,
+      "category": "artifact"
+    },
+    {
+      "number": 1100,
+      "prompt_id": 132,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1101,
+      "prompt_id": 133,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "genetics"
+    },
+    {
+      "number": 1102,
+      "prompt_id": 134,
+      "in": 0.2,
+      "out": 9.6,
+      "category": "landscape"
+    },
+    {
+      "number": 1103,
+      "prompt_id": 135,
+      "in": 0.15,
+      "out": 3.6,
+      "category": "laboratory"
+    },
+    {
+      "number": 1104,
+      "prompt_id": 136,
+      "in": 7.0,
+      "out": 9.8,
+      "category": "landscape"
+    },
+    {
+      "number": 1105,
+      "prompt_id": 137,
+      "in": 0.1,
+      "out": 3.6,
+      "category": "landscape"
+    },
+    {
+      "number": 1106,
+      "prompt_id": 138,
+      "in": 0.05,
+      "out": 2.8,
+      "category": "artifact"
+    },
+    {
+      "number": 1108,
+      "prompt_id": 140,
+      "in": 0.1,
+      "out": 2.8,
+      "category": "laboratory"
+    }
+  ],
+  "substitutions": [
+    {
+      "scene_id": 21,
+      "start": 200,
+      "replacement_source_number": 1020,
+      "reason": "unreliable generated specimen-count board and editorial screen"
+    },
+    {
+      "scene_id": 22,
+      "start": 210,
+      "replacement_source_number": 1039,
+      "reason": "human skeletal display"
+    },
+    {
+      "scene_id": 23,
+      "start": 220,
+      "replacement_source_number": 1043,
+      "reason": "missing original prompt"
+    },
+    {
+      "scene_id": 31,
+      "start": 300,
+      "replacement_source_number": 1009,
+      "reason": "irrelevant illustrated paper collage"
+    },
+    {
+      "scene_id": 34,
+      "start": 330,
+      "replacement_source_number": 1081,
+      "reason": "visible third-party watermark"
+    },
+    {
+      "scene_id": 35,
+      "start": 340,
+      "replacement_source_number": 1030,
+      "reason": "editorial screen and reconstruction dominate"
+    },
+    {
+      "scene_id": 40,
+      "start": 390,
+      "replacement_source_number": 1008,
+      "reason": "family illustration embedded in chart"
+    },
+    {
+      "scene_id": 44,
+      "start": 430,
+      "replacement_source_number": 1024,
+      "reason": "brain model does not illustrate mitochondrial inheritance"
+    },
+    {
+      "scene_id": 61,
+      "start": 600,
+      "replacement_source_number": 1033,
+      "reason": "unverified quantitative chart and reconstruction screen"
+    },
+    {
+      "scene_id": 75,
+      "start": 740,
+      "replacement_source_number": 1058,
+      "reason": "visible third-party watermark"
+    },
+    {
+      "scene_id": 77,
+      "start": 760,
+      "replacement_source_number": 989,
+      "reason": "distant figures with uncertain apparent ages"
+    },
+    {
+      "scene_id": 84,
+      "start": 830,
+      "replacement_source_number": 1058,
+      "reason": "miniature human figures with uncertain apparent ages"
+    },
+    {
+      "scene_id": 101,
+      "start": 1000,
+      "replacement_source_number": 1069,
+      "reason": "missing original prompt"
+    },
+    {
+      "scene_id": 107,
+      "start": 1060,
+      "replacement_source_number": 1051,
+      "reason": "missing original prompt"
+    },
+    {
+      "scene_id": 108,
+      "start": 1070,
+      "replacement_source_number": 1039,
+      "reason": "human skull display instead of fragment"
+    },
+    {
+      "scene_id": 117,
+      "start": 1160,
+      "replacement_source_number": 1036,
+      "reason": "ancient/modern hybrid setting"
+    },
+    {
+      "scene_id": 119,
+      "start": 1180,
+      "replacement_source_number": 1039,
+      "reason": "human jaw display"
+    }
+  ],
+  "used_sources": 121,
+  "repeated_source_maximum_uses": 4,
+  "interpretation": "All reenactments, laboratory actions, genetic graphics and landscape models are illustrative, not authentic specimen records or recovered portraits."
+}

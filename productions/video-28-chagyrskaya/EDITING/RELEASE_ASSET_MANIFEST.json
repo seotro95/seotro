@@ -1,0 +1,77 @@
+{
+  "topic_id": 28,
+  "release_tag": "chagyrskaya-video-28-final-22m42s",
+  "raw_source_clips_included": false,
+  "assets": [
+    {
+      "name": "CHAGYRSKAYA_28_EDIT_RECORD.zip",
+      "bytes": 42677,
+      "sha256": "cc1224ec40fc356bb49812071f72de01da75f3e46dea121337ab0b2e386f2716"
+    },
+    {
+      "name": "CHAGYRSKAYA_28_EN.srt",
+      "bytes": 28876,
+      "sha256": "c1d33f8f9bbba3312410ca5a45350e493c0b9eeaef8ae8b99f9f65d03d7f1d17"
+    },
+    {
+      "name": "CHAGYRSKAYA_28_EN_FINAL_22m42s_720p.mp4",
+      "bytes": 394862901,
+      "sha256": "5014db6102d5cf3055d38e8e1c2e2e7668a8a466debead62cf5fa1d18d1deedb"
+    },
+    {
+      "name": "CHAGYRSKAYA_28_OPENING_30s.mp4",
+      "bytes": 10081192,
+      "sha256": "22969b5b2cc91afafe8886f3c2f88c752a129a0467569c2ded390f4827726e46"
+    },
+    {
+      "name": "CHAGYRSKAYA_28_TITLES_THUMBNAILS.txt",
+      "bytes": 3630,
+      "sha256": "0d8b2c14def89067b4f1a1e8ba197f0797554c1d1c84d8b705657fdc1f15665b"
+    },
+    {
+      "name": "CHAGYRSKAYA_28_TITLES_THUMBNAILS.zip",
+      "bytes": 1917,
+      "sha256": "85ea2c47e8d603a819f2f33005b7236dc89b58a291846d958ba4fb304878244a"
+    },
+    {
+      "name": "EDIT_PLAN.json",
+      "bytes": 118941,
+      "sha256": "3d257c2dd217a45c76a2d92c2f5ef5365b5edea60a0bd3bae65c62d52bb45f9d"
+    },
+    {
+      "name": "FINAL_VIDEO_QA.json",
+      "bytes": 3119,
+      "sha256": "dba26646aa3a6e52a0ec0e34dc9bdb66ff8b40db8dac775d1133bd972afca779"
+    },
+    {
+      "name": "README.md",
+      "bytes": 3489,
+      "sha256": "315381febcb67a4f7b03b55c83b72be333237982734513943edf86876400489d"
+    },
+    {
+      "name": "REFINEMENTS.json",
+      "bytes": 206,
+      "sha256": "84e4577d087bbb16db08a759dc3b39ef27f5e54b01e6182afb4e4122736a0540"
+    },
+    {
+      "name": "SOURCE_MANIFEST.json",
+      "bytes": 47967,
+      "sha256": "5f459d8e0d32b1f6d3b47e2e463c7384285d6b424dfd8e97ddb2566c42bca32e"
+    },
+    {
+      "name": "SUBSTITUTIONS.csv",
+      "bytes": 917,
+      "sha256": "7516eb5ab44cfe3d2fb8d8e68a8babe2f1d1d46ebddca3e71e30515ceae754a5"
+    },
+    {
+      "name": "VISUAL_REVIEW_APPROVED.json",
+      "bytes": 1324,
+      "sha256": "514702c29614328af82990d20699cdbd92b07f867b0f80adc42f66b8b0aa35ca"
+    },
+    {
+      "name": "VISUAL_SELECTION.json",
+      "bytes": 19121,
+      "sha256": "846447574b9612f371bf5be63020e01d66e22a9a2f0cd3d098fdf13b5c93fe87"
+    }
+  ]
+}

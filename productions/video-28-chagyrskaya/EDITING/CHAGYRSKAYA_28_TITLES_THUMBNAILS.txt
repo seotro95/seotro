@@ -1,0 +1,19 @@
+CHAGYRSKAYA 28 — 5 TITLES AND MATCHED THUMBNAIL PROMPTS
+English main video, 22:42. The images are illustrative; never present generated graphics as actual genetic evidence. No children or adolescents, including background figures, screens, portraits, icons or reflections. Do not depict the identified daughter using an adult substitute.
+
+1. TITLE: Ancient DNA Revealed a Neanderthal Father and Daughter
+PROMPT: Create a cinematic 16:9 YouTube thumbnail, 1280x720. Extreme close-up of a small weathered replica bone fragment, warm side lighting, deep charcoal background. Behind it, two identical plain sample markers joined by one fine luminous line, a restrained symbolic DNA motif in cool blue. Strong simple composition, visible at phone size. No faces, human figures, children, skeletons, logos or watermarks. Reserve clear space for editor-added text: FAMILY IN DNA. The markers are illustrative, not actual genomic results.
+
+2. TITLE: A Neanderthal Family Hidden in Siberian DNA
+PROMPT: Create a realistic science-documentary YouTube thumbnail, 16:9, 1280x720. An immense Altai limestone cave above a winding Siberian river valley at cold dawn; in the foreground, a sharply lit closed specimen tube and a small replica fragment. Warm amber light at the cave mouth contrasts with slate-blue mountains. One clear focal point and powerful depth, no fantasy architecture. No people, children, bodies, logos, watermarks or invented archaeological inscriptions. Leave room for editor-added text: HIDDEN CONNECTIONS.
+
+3. TITLE: 13 Neanderthals. Two Caves. One Remarkable Connection.
+PROMPT: Design a striking 16:9 documentary thumbnail, 1280x720. Two distinct limestone cave entrances across a rugged Altai valley, subtly connected in the foreground by a modern research bench with separate sealed sample trays. Cool scientific light meets natural earth tones. Suggest comparison and investigation through composition, not a fabricated family portrait or data chart. No people, minors, skeletons, brand marks or watermarks. Leave one uncluttered area for verified editor-added text: TWO CAVES. ONE CLUE. Do not imply all thirteen people came from one cave.
+
+4. TITLE: What DNA Revealed About Neanderthal Life 54,000 Years Ago
+PROMPT: Create a photorealistic 16:9 YouTube thumbnail, 1280x720. Two clearly adult Neanderthal craftspeople aged 40–60 quietly work with stone tools near a limestone cave entrance, dressed in practical fully covering hide clothing. Tight readable composition, warm reflected firelight, distant cool river valley. A small neutral molecular teaching model appears as a subtle graphic accent. They are generic adults, not portraits of identified genetic individuals. No children, adolescents, family tableau, weapons attacking anyone, logos or watermarks. Space for editor-added text: ~54,000 YEARS AGO.
+
+5. TITLE: The Bone Fragments That Revealed a Neanderthal Community
+PROMPT: Make a cinematic 16:9 thumbnail, 1280x720. One small replica fragment in crisp macro detail on a dark conservation support, with several identical closed sample tubes softly visible behind it. A few thin symbolic links connect equal plain circular markers, leading the eye toward a softly blurred cave entrance. Warm gold against deep teal, realistic materials and controlled contrast. The diagram is an illustrative motif, not recovered data. No human faces, children, silhouettes, bodies, skulls, logos or watermarks. Leave space for editor-added text: A COMMUNITY FOUND.
+
+Recommended pairing: title 1 and prompt 1. Add lettering in the image editor after generation so spelling and scientific claims remain controlled.
