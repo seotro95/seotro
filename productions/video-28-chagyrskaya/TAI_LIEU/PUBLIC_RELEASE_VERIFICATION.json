@@ -1,0 +1,29 @@
+{
+  "topic_id": 28,
+  "release": "https://github.com/seotro95/seotro/releases/tag/chagyrskaya-video-28-22m42s",
+  "public": true,
+  "asset_count": 42,
+  "all_asset_sizes_and_digests_match": true,
+  "individual_public_mp3_head200_count": 17,
+  "archives": [
+    {
+      "filename": "CHAGYRSKAYA_28_TAI_LIEU_22m42s.zip",
+      "bytes": 863104,
+      "sha256": "392731f1671e4f682b9fef732849ca8274bd58a78ed527a3db9f2217567dcab7",
+      "full_public_download_verified": true
+    },
+    {
+      "filename": "CHAGYRSKAYA_28_17_VOICES_22m42s.zip",
+      "bytes": 277901599,
+      "sha256": "5a38aab9d071e82cd69b47c01e015f2e8ae7576c493c992c85c22dbd579bb0a5",
+      "full_public_download_verified": true
+    }
+  ],
+  "all17_archived_mp3_hashes_verified_locally": true,
+  "all_voice_decoded_seconds": 1362,
+  "decoded_frames_at48000": 65376000,
+  "native_run": 42971383014,
+  "publication_run": 42974307859,
+  "independent_native_language_review_pending": true,
+  "white_hmong_dialect_independently_verified": false
+}
