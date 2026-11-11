@@ -8,7 +8,7 @@
   "active_topic": {
     "id": 38,
     "title": "Các cây cầu đất xuất hiện và biến mất qua những chu kỳ băng hà",
-    "phase": "16_voices_complete_only_english_repair_running",
+    "phase": "16_voices_complete_english_four_groups_running",
     "target_seconds": 1352,
     "work_branch": "codex/land-bridges38-production-20261111",
     "documents_release": "https://github.com/seotro95/seotro/releases/tag/land-bridges-video-38-22m32s",
@@ -19,7 +19,7 @@
     "unique_prompts": 120,
     "prompt_txt_files": 12,
     "reused_slots": 16,
-    "voice_source_commit": "bdd91db2a8509a32df1befa51e3ae83a3cbb7b77",
+    "voice_source_commit": "bd7beb663499a70279d0103f79b7682a41a8f561",
     "english_preview_30_seconds_passed": true,
     "repair_workflow_run_id": 43055537796,
     "repair_workflow_url": "https://github.com/seotro95/seotro/actions/runs/43055537796",
@@ -27,7 +27,11 @@
     "titles_thumbnail_pairs": 5,
     "titles_thumbnail_txt_url": "https://github.com/seotro95/seotro/releases/download/land-bridges-video-38-22m32s/LAND_BRIDGES_38_5_TIEU_DE_5_PROMPT_THUMBNAIL.txt",
     "titles_thumbnail_zip_url": "https://github.com/seotro95/seotro/releases/download/land-bridges-video-38-22m32s/LAND_BRIDGES_38_5_TIEU_DE_5_PROMPT_THUMBNAIL.zip",
-    "titles_download_tested": true
+    "titles_download_tested": true,
+    "english_workflow_run_id": 43059788576,
+    "english_workflow_url": "https://github.com/seotro95/seotro/actions/runs/43059788576",
+    "english_checkpoint_source_run_id": 43055537796,
+    "english_completed_cues_at_least": 50
   },
   "next_topic_id": 5,
   "user_preferences": {
@@ -1223,7 +1227,7 @@
   },
   "latest_completed_topic_id": 28,
   "auto_start_next_topic": false,
-  "handoff_next_action": "Continue topic38 English repair Actions43055537796. Original run43050614061 completed16voices, onlyEnglish failed transient NoAudioReceived. NativeHmong is complete. Verify17 public release assets before declaring delivery complete. Do not start any other topic.",
+  "handoff_next_action": "Continue topic38 English groups Actions43059788576. Original43050614061 contains16 complete country voices. SavedEnglish checkpoint from cancelled43055537796 contains at least50successfulcues; newrun splits136cues into4disjointgroups, max2concurrent. Verify17publicvoiceassets and decoded1352seconds before markingcomplete. Do not auto-start another topic.",
   "completed_topic_28": {
     "id": 28,
     "title": "Chagyrskaya: bằng chứng di truyền về quan hệ gia đình thời tiền sử.",

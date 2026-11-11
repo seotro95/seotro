@@ -1,9 +1,9 @@
 <!-- topic38-current -->
-# Đang tiếp tục chủ đề 38 — 22:32
+# Chủ đề 38 — đang hoàn tất voice Anh 22:32
 
-Kịch bản và 120 prompt trong 12 TXT đã [phát hành](https://github.com/seotro95/seotro/releases/tag/land-bridges-video-38-22m32s). Đã tạo 16/17 voice, còn bản Anh đang sửa từ checkpoint. Xem [lượt sửa](https://github.com/seotro95/seotro/actions/runs/43055537796), nhánh `codex/land-bridges38-production-20261111`. Chưa tuyên bố đã giao đủ 17 voice. Chưa có footage hoặc MP4 tập 38.
+Đã có 16 voice hoàn chỉnh. Bản Anh còn thiếu, đang [xử lý theo 4 nhóm](https://github.com/seotro95/seotro/actions/runs/43059788576), tối đa 2 nhóm cùng lúc. Lượt trước 43055537796 đã dừng có lưu checkpoint `land38-repair-checkpoint-en-US` với ít nhất 50/136 đoạn đọc thành công. Không tạo lại những đoạn đã có và khớp chữ ký nội dung.
 
-Đọc `productions/series/SERIES_STATE.json` trước khi tiếp tục. Giữ nguyên 17 ID giọng và tham chiếu nữ H'mông. Không tự bắt đầu chủ đề khác; không dùng các clip đã tải của tập 28 hoặc tập cũ cho tập này.
+[Kịch bản và prompt](https://github.com/seotro95/seotro/releases/tag/land-bridges-video-38-22m32s) · [5 tiêu đề và prompt thumbnail TXT](https://github.com/seotro95/seotro/releases/download/land-bridges-video-38-22m32s/LAND_BRIDGES_38_5_TIEU_DE_5_PROMPT_THUMBNAIL.txt). Đọc SERIES_STATE.json trước khi tiếp tục. Giữ 17 mã giọng, nữ H'mông female-3, không đổi pitch. Chỉ đánh dấu đủ 17 voice sau khi kiểm tra bản tải công khai. Tập 38 chưa có footage hoặc MP4; không tự bắt đầu tập khác.
 <!-- /topic38-current -->
 
 ---
