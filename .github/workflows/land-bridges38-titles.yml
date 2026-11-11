@@ -1,0 +1,33 @@
+name: Land bridges38 publish five title-thumbnail pairs
+on:
+  push:
+    branches: [codex/land-bridges38-production-20261111]
+    paths: [.github/workflows/land-bridges38-titles.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: episode38
+      - name: Validate and package five matched title-thumbnail pairs
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,zipfile
+          p=Path('episode38/LAND_BRIDGES_38_5_TIEU_DE_5_PROMPT_THUMBNAIL.txt')
+          s=p.read_text(encoding='utf-8-sig')
+          assert len(re.findall(r'^\d\. TIÊU ĐỀ$',s,re.M))==5
+          assert len(re.findall(r'^PROMPT THUMBNAIL \d:$',s,re.M))==5
+          with zipfile.ZipFile(p.with_suffix('.zip'),'w',zipfile.ZIP_DEFLATED) as z:z.write(p,p.name)
+          print('Verified five titles and five matching thumbnail prompts')
+          PY
+      - name: Add TXT and fallback ZIP without changing other release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload land-bridges-video-38-22m32s episode38/LAND_BRIDGES_38_5_TIEU_DE_5_PROMPT_THUMBNAIL.txt episode38/LAND_BRIDGES_38_5_TIEU_DE_5_PROMPT_THUMBNAIL.zip --repo seotro95/seotro --clobber
