@@ -1,0 +1,79 @@
+{
+  "status": "passed",
+  "version": "2.2.0",
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/autodoc-studio-v2.2.0",
+  "build_run_id": 42973715050,
+  "build_commit": "89535657d1e36abf96c901ee100ceada08831124",
+  "verification_method": "Successful Windows CI GUI and multilingual checks, package ZIP CRC checks, and GitHub uploaded-asset metadata",
+  "public_asset_metadata_verified": true,
+  "all_assets_uploaded": true,
+  "local_post_download_stream_check": "Interrupted when execution environment became unavailable; no claim of completed local stream verification.",
+  "assets": [
+    {
+      "name": "AutoDocStudio-2.2.0-Full-Windows-x64.zip",
+      "bytes": 112230758,
+      "sha256": "4eeff285ec4983db3482a0eaeba1ee309c804038a035a935b77cc27cd6834faa",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.2.0/AutoDocStudio-2.2.0-Full-Windows-x64.zip"
+    },
+    {
+      "name": "AutoDocStudio-2.2.0-Source.zip",
+      "bytes": 79667,
+      "sha256": "d6baf853fa48274ac0b7d32a2fe27366ec4120f6cb42a41997125c1758ca16df",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.2.0/AutoDocStudio-2.2.0-Source.zip"
+    },
+    {
+      "name": "cinematic-extras.json",
+      "bytes": 384,
+      "sha256": "42d4a3403160b0e1c486a0df785b1d5dcd4e9e17a617e4469ef452b999cf5188",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.2.0/cinematic-extras.json"
+    },
+    {
+      "name": "GUI_FEATURE_REPORT.json",
+      "bytes": 1015,
+      "sha256": "1bb3262728a709e04dacb3cdb0aab4cb5f2532067c5a09d34de01b0d350942ff",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.2.0/GUI_FEATURE_REPORT.json"
+    },
+    {
+      "name": "HUONG_DAN_SU_DUNG.txt",
+      "bytes": 3391,
+      "sha256": "c52ca3adba35fe46cb4c3e0a8074b81a6ce17f7a5496e3e7db028b06dee1acac",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.2.0/HUONG_DAN_SU_DUNG.txt"
+    },
+    {
+      "name": "KIEM_TRA_CHUC_NANG.txt",
+      "bytes": 1805,
+      "sha256": "54e5be8b150ca6e241879cc1b7265d509828df27ba40d9e3884750829c284b9b",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.2.0/KIEM_TRA_CHUC_NANG.txt"
+    },
+    {
+      "name": "manifest.json",
+      "bytes": 213,
+      "sha256": "855087cdfaa5fb6fdfb4c2540b20b42bd45a576e2c28a7518533354c7bfc2802",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.2.0/manifest.json"
+    },
+    {
+      "name": "MULTILINGUAL_TEST_REPORT.json",
+      "bytes": 3965,
+      "sha256": "d9d9ad22614abeabfa6e03edb9014d7edf32695daf5b44db5dbe0ba9ad20f122",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.2.0/MULTILINGUAL_TEST_REPORT.json"
+    },
+    {
+      "name": "RELEASE_MANIFEST.json",
+      "bytes": 1785,
+      "sha256": "fbc1413fda29e24611b256184d4ee5793630ad8aa885509264e64f5ca6411923",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.2.0/RELEASE_MANIFEST.json"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 835,
+      "sha256": "eb9dbd301eb340bdffcd9f4e09db2310be1902869c15b050d4e8db011a5cad7d",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.2.0/SHA256SUMS.txt"
+    },
+    {
+      "name": "WINDOWS_TEST_REPORT.json",
+      "bytes": 2415,
+      "sha256": "ecb116b3c742651c2626ee0c1a782dc5e372c215b23c56e176bcf1313b6b1c36",
+      "url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.2.0/WINDOWS_TEST_REPORT.json"
+    }
+  ]
+}

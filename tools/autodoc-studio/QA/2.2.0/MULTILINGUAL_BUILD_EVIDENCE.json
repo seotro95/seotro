@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "results": [
+    {
+      "language": "vi",
+      "mode": "translated_en",
+      "status": "passed",
+      "original_audio_alignment_asserted": true,
+      "duration_match_asserted": true,
+      "native_subtitle_language_asserted": true
+    },
+    {
+      "language": "es",
+      "mode": "translated_en",
+      "status": "passed",
+      "original_audio_alignment_asserted": true,
+      "duration_match_asserted": true,
+      "native_subtitle_language_asserted": true
+    },
+    {
+      "language": "ja",
+      "mode": "translated_en",
+      "status": "passed",
+      "original_audio_alignment_asserted": true,
+      "duration_match_asserted": true,
+      "native_subtitle_language_asserted": true
+    },
+    {
+      "language": "hmn",
+      "mode": "reference_en_srt",
+      "status": "passed",
+      "original_audio_alignment_asserted": true,
+      "duration_match_asserted": true,
+      "native_subtitle_language_asserted": false
+    }
+  ],
+  "actual_release_report_url": "https://github.com/seotro95/seotro/releases/download/autodoc-studio-v2.2.0/MULTILINGUAL_TEST_REPORT.json",
+  "source": "MULTILINGUAL_PASS assertions from successful frozen Windows workflow",
+  "hmong_is_reference_mode_not_ASR": true
+}

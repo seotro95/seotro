@@ -21,3 +21,13 @@ Windows portable: https://github.com/seotro95/seotro/releases/tag/autodoc-studio
 Đầu vào: voice chính, thư mục ảnh/video, TXT/SRT tùy chọn và logo tùy chọn. Tự xếp cảnh, chọn từng cảnh để xem hình và nghe đúng đoạn voice; sửa nguồn, điểm lấy, tốc độ, cắt/phóng, tâm cắt, chia/gộp, chuyển cảnh và hiệu ứng. Lưu dự án JSON rồi bấm Xuất để chọn MP4/MKV,720/1080p,FPS,chất lượng,CPU/GPU và nơi lưu. Mặc định chỉ có voice; có thể bỏ chọn tắt tiếng clip để trộn tiếng nguồn. Có kiểu phụ đề burn, phụ đề mềm hoặc không phụ đề. Gói preset bổ sung tự tải theo manifest chính thức và kiểm SHA256.
 
 Có SRT đúng mốc thì bỏ qua nhận dạng voice. Cache AI dùng lại giữa dự án; cache từng cảnh giảm dựng lại. Giữ các nguồn và cache đúng đường dẫn để mở lại JSON. Dự án v1 không nhập trực tiếp vào schema v2; bản v1 và hồ sơ 17 giọng vẫn được giữ. Không sửa các voiceID/preset đã khóa khi chỉ nâng cấp tool edit. Lọc trẻ em và chọn hình theo lời vẫn là ước lượng, cần xem lại trước đăng.
+
+## Bản hiện hành: AutoDoc Studio 2.2 Full đa ngôn ngữ
+
+Tải: https://github.com/seotro95/seotro/releases/tag/autodoc-studio-v2.2.0 . Nguồn: tools/autodoc-studio. Cấu hình: productions/series/EDITING_TOOL.json. Bằng chứng kiểm thử: tools/autodoc-studio/QA/2.2.0/ và JSON/TXT trong release.
+
+Nút TỰ ĐỘNG EDIT & XUẤT chạy từ voice + ảnh/video đến phim hoàn chỉnh, phụ đề và dự án mở lại được. Bản sau có số thứ tự, giữ bản cũ; có dừng/chạy lại và sửa qua preview. Logo, TXT/SRT, kiểu phụ đề, tiếng clip, chuyển cảnh/hiệu ứng, cache và MP4/MKV tiếp tục được giữ.
+
+Ngôn ngữ auto dùng Whisper, giữ lời/voice gốc, dùng lời Anh theo cùng mốc để chọn hình. Có ô Tham chiếu Anh TXT/SRT. H’Mông chọn hmn và cần SRT tham chiếu Anh đúng mốc; thêm SRT H’Mông nếu muốn phụ đề H’Mông. Không giả định có ASR H’Mông đáng tin cậy. Cảnh khớp ý thấp được đánh dấu để xem lại; không cam kết AI chọn đúng mọi chi tiết khoa học.
+
+Full không cần Python/API trả phí; lần đầu cần mạng tải FFmpeg/model. Hồ sơ 17 giọng và công cụ tạo voice không đổi. Giữ nguồn/cache đúng đường dẫn. Kiểm thử Windows gồm thao tác GUI, voice Anh/Việt/Tây Ban Nha/Nhật và H’Mông với tham chiếu. GPU vật lý chưa được kiểm thử.

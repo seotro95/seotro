@@ -1,0 +1,78 @@
+{
+  "status": "passed",
+  "version": "2.2.0",
+  "platform": "Windows x64",
+  "frozen_exe_tested": true,
+  "real_clip_model_used": true,
+  "srt_skips_asr_verified": true,
+  "mixed_image_video_import": true,
+  "source_files_unchanged": true,
+  "logo_pixels_verified": true,
+  "burn_subtitle_pixels_verified": true,
+  "soft_subtitle_track_verified": true,
+  "mute_and_keep_source_audio_verified": true,
+  "source_tone_verified": true,
+  "manual_scene_split_merge_verified": true,
+  "export_24_and_30fps_verified": true,
+  "mp4_and_mkv_verified": true,
+  "embedded_preview_rendered": true,
+  "frozen_gui_preview_tested": true,
+  "scene_cache_reused": true,
+  "shared_feature_cache_hits": 11,
+  "full_decode_passed": true,
+  "voice_alignment": [
+    {
+      "at_seconds": 0.21,
+      "lag_seconds": 0,
+      "correlation": 0.998843
+    },
+    {
+      "at_seconds": 6.093,
+      "lag_seconds": 0,
+      "correlation": 0.999854
+    },
+    {
+      "at_seconds": 10.435,
+      "lag_seconds": 0,
+      "correlation": 0.998824
+    },
+    {
+      "at_seconds": 17.277,
+      "lag_seconds": 0,
+      "correlation": 0.998565
+    },
+    {
+      "at_seconds": 20.16,
+      "lag_seconds": 0,
+      "correlation": 0.998605
+    }
+  ],
+  "video_seconds": 21.375,
+  "test_seconds": 77.74,
+  "media_fixtures_not_included_in_release": true,
+  "all_20_effects_rendered": true,
+  "all_19_transitions_rendered": true,
+  "short_scene_60fps_rendered": true,
+  "gui_feature_checks": {
+    "open_project_and_preview_frame": true,
+    "scene_edit_controls": true,
+    "click_crop_focus": true,
+    "play_pause_seek_preview": true,
+    "split_merge_preserves_voice_duration": true,
+    "move_source_controls": true,
+    "subtitle_edit_add_delete": true,
+    "import_export_txt_and_srt": true,
+    "logo_audio_and_subtitle_style_controls": true,
+    "save_and_reopen_project": true,
+    "download_install_effect_pack": true,
+    "manual_export_dialog_1080p_25fps": true,
+    "open_exported_video_action": true,
+    "one_click_automatic_gui_without_subtitles": true,
+    "automatic_ten_scene_30_second_opening": true,
+    "automatic_video_and_reopenable_project_saved": true,
+    "cancel_keeps_completed_video": true,
+    "repeat_auto_keeps_previous_export": true,
+    "automatic_result_editable_in_gui": true
+  },
+  "gpu_hardware_encoding_not_exercised": true
+}
