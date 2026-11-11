@@ -8,7 +8,7 @@
   "active_topic": {
     "id": 38,
     "title": "Các cây cầu đất xuất hiện và biến mất qua những chu kỳ băng hà",
-    "phase": "documents_public_full_voice_jobs_running",
+    "phase": "16_voices_complete_only_english_repair_running",
     "target_seconds": 1352,
     "work_branch": "codex/land-bridges38-production-20261111",
     "documents_release": "https://github.com/seotro95/seotro/releases/tag/land-bridges-video-38-22m32s",
@@ -19,8 +19,11 @@
     "unique_prompts": 120,
     "prompt_txt_files": 12,
     "reused_slots": 16,
-    "voice_source_commit": "b1926cb6c898864895105e74a2d17069910d7906",
-    "english_preview_30_seconds_passed": true
+    "voice_source_commit": "bdd91db2a8509a32df1befa51e3ae83a3cbb7b77",
+    "english_preview_30_seconds_passed": true,
+    "repair_workflow_run_id": 43055537796,
+    "repair_workflow_url": "https://github.com/seotro95/seotro/actions/runs/43055537796",
+    "voice_files_generated_known": 16
   },
   "next_topic_id": 5,
   "user_preferences": {
@@ -1216,7 +1219,7 @@
   },
   "latest_completed_topic_id": 28,
   "auto_start_next_topic": false,
-  "handoff_next_action": "Continue topic38 Actions43050614061 on codex/land-bridges38-production-20261111. Documents are public; full17voice jobs are running with unchanged voice IDs. Do not declare all voices delivered until release assets and decoded durations are verified. Do not auto-start another topic.",
+  "handoff_next_action": "Continue topic38 English repair Actions43055537796. Original run43050614061 completed16voices, onlyEnglish failed transient NoAudioReceived. NativeHmong is complete. Verify17 public release assets before declaring delivery complete. Do not start any other topic.",
   "completed_topic_28": {
     "id": 28,
     "title": "Chagyrskaya: bằng chứng di truyền về quan hệ gia đình thời tiền sử.",

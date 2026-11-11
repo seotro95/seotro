@@ -1,3 +1,13 @@
+<!-- topic38-current -->
+# Đang tiếp tục chủ đề 38 — 22:32
+
+Kịch bản và 120 prompt trong 12 TXT đã [phát hành](https://github.com/seotro95/seotro/releases/tag/land-bridges-video-38-22m32s). Đã tạo 16/17 voice, còn bản Anh đang sửa từ checkpoint. Xem [lượt sửa](https://github.com/seotro95/seotro/actions/runs/43055537796), nhánh `codex/land-bridges38-production-20261111`. Chưa tuyên bố đã giao đủ 17 voice. Chưa có footage hoặc MP4 tập 38.
+
+Đọc `productions/series/SERIES_STATE.json` trước khi tiếp tục. Giữ nguyên 17 ID giọng và tham chiếu nữ H'mông. Không tự bắt đầu chủ đề khác; không dùng các clip đã tải của tập 28 hoặc tập cũ cho tập này.
+<!-- /topic38-current -->
+
+---
+
 # Chuyển tài khoản ChatGPT — hồ sơ bàn giao sẵn sàng
 
 [Tải ZIP](https://github.com/seotro95/seotro/releases/download/science-series-handoff-20261111/BAN_GIAO_DU_AN_VIDEO_100_CHU_DE_2026-11-11.zip) · [Prompt dán vào chat mới](https://github.com/seotro95/seotro/releases/download/science-series-handoff-20261111/PROMPT_DAN_VAO_CHATGPT_MOI.txt). Đọc productions/HANDOFF/README.md. Chủ đề19đã hoàn thành20:15,10cảnh mở đầu30giây;giữ17IDgiọng. Không tự khởi chạy tập kế tiếp.
