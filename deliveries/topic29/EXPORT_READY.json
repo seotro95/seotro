@@ -1,0 +1,127 @@
+{
+  "topic": 29,
+  "target_seconds": 1302,
+  "expected_samples_48000": 62496000,
+  "release_tag": "dental-calculus-video-29-21m42s",
+  "export_only_no_voice_generation": true,
+  "assets": [
+    {
+      "name": "AUDIO_MANIFEST.json",
+      "bytes": 5325,
+      "sha256": "db6e22e91163ee93d20f1edf191b0cd4e3d3783bd5db1f0deffb68a0f5151dca"
+    },
+    {
+      "name": "CALCULUS_29_Ba_Lan.mp3",
+      "bytes": 10416620,
+      "sha256": "a3d2b47a2176f7233341b87c0dc6908e099ca0180c4ba383631655ed6930b275"
+    },
+    {
+      "name": "CALCULUS_29_Bo_Dao_Nha.mp3",
+      "bytes": 10416620,
+      "sha256": "964a74e2112e00f8270f4a014c3313a66fc4441c16fbabb31b7941dc9a4e62ed"
+    },
+    {
+      "name": "CALCULUS_29_Dan_Mach.mp3",
+      "bytes": 10416620,
+      "sha256": "b4b57828b97e49544bce886135f964fde60d09f7d2cbc6344ab9e0ebd208b00d"
+    },
+    {
+      "name": "CALCULUS_29_Duc.mp3",
+      "bytes": 10416620,
+      "sha256": "2752687b77406e0da35fcf98e79fc32159ad6f09643c9132649ce2d187c23c85"
+    },
+    {
+      "name": "CALCULUS_29_Ha_Lan.mp3",
+      "bytes": 10416620,
+      "sha256": "97274b51e66495afdcd742844cc0880247f646349ea60532af2ebb091ac3c646"
+    },
+    {
+      "name": "CALCULUS_29_Han_Quoc.mp3",
+      "bytes": 10416620,
+      "sha256": "a9556be3fca926c62dd7d6287211010426a6e5dc84e021d98f73f7e1df11ed7a"
+    },
+    {
+      "name": "CALCULUS_29_Hmong_Trang_Nu.mp3",
+      "bytes": 10416620,
+      "sha256": "a8305aee77acea2eaf82b244de9b5f8f73780eaf4106ed159e8b8640205f5e22"
+    },
+    {
+      "name": "CALCULUS_29_My_Tieng_Anh.mp3",
+      "bytes": 10416620,
+      "sha256": "401793b1d2511cff696d070ab476556ec035879f06ee5de3703c9ce5211c16c2"
+    },
+    {
+      "name": "CALCULUS_29_Na_Uy.mp3",
+      "bytes": 10416620,
+      "sha256": "2c2a9b5dde8e6cb72f80c0b6e06702776adddb01a7994103581a0b9a83d69c2f"
+    },
+    {
+      "name": "CALCULUS_29_Nhat_Ban.mp3",
+      "bytes": 10416620,
+      "sha256": "5f8a7c861f6f11d921f5094229ae4a8270332e91bcc4760bb0510f09c711ae49"
+    },
+    {
+      "name": "CALCULUS_29_Phan_Lan.mp3",
+      "bytes": 10416620,
+      "sha256": "326fb6a3132ae2bfde9e8915401531a889b29fbf110247e53fca0884bdcfb600"
+    },
+    {
+      "name": "CALCULUS_29_Phap.mp3",
+      "bytes": 10416620,
+      "sha256": "2b02711d72fb8258af79510b20e225891613e735f0eb6a49b4c42b4a710aa24d"
+    },
+    {
+      "name": "CALCULUS_29_Sec.mp3",
+      "bytes": 10416620,
+      "sha256": "2291219eb4f86eab12c70ece0c031d717ab3102ead31a6881ef03816f5a143b8"
+    },
+    {
+      "name": "CALCULUS_29_Tay_Ban_Nha.mp3",
+      "bytes": 10416620,
+      "sha256": "8d9889ee68564978d068f901fa0cbea7aa204e6c81c8a42063eca77ca858717b"
+    },
+    {
+      "name": "CALCULUS_29_Thuy_Dien.mp3",
+      "bytes": 10416620,
+      "sha256": "f624bbf0af2e04de1ed9c8a4cee41bdf6694b108eb0129ddb245e24c2c04fd09"
+    },
+    {
+      "name": "CALCULUS_29_Viet_Nam.mp3",
+      "bytes": 10416620,
+      "sha256": "090fe730f741b44af72a38d0a0046c743f43012c8e5153b4f29ae9f26e1a7a02"
+    },
+    {
+      "name": "CALCULUS_29_Y.mp3",
+      "bytes": 10416620,
+      "sha256": "81d125b278f9f5f5e7ef39f6574b0a77bcbbde2e339bfb2100fbaf32b2ac4c79"
+    },
+    {
+      "name": "NARRATION_STYLE_LOCKED.json",
+      "bytes": 1352,
+      "sha256": "5255f07cbe82192efcf047f851a97277b4744e2c9b62abf2f34bb6315a54a149"
+    },
+    {
+      "name": "README.md",
+      "bytes": 5657,
+      "sha256": "bf8c7bea1daebd5f56b0dfb7e636b716e47b252d72aa4eb1928fdff6e4011057"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED.json",
+      "bytes": 18009,
+      "sha256": "fe961e651d1474fb31193bff7d5ce376016eefd503b0cbf051d8a698f5da7784"
+    },
+    {
+      "name": "VOICE_RELEASE_QA.json",
+      "bytes": 205,
+      "sha256": "8f92081e1fbc6d5e7a58c7b249553b7f8ac08f790fe2d7dc5ad242bde1632e2b"
+    },
+    {
+      "name": "GIONG_DA_LUU.md",
+      "bytes": 2075,
+      "sha256": "33fe5ac3205b470766914ed5e80a160fc80d1b9c73193140dc8ed46cec97a194"
+    }
+  ],
+  "transport": [],
+  "publication_scope": "17 completed narration MP3 files and saved voice profiles; existing document ZIP remains unchanged",
+  "transport_mode": "full verified voice Git blobs; no document archive in this export"
+}

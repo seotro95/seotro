@@ -1,0 +1,172 @@
+[
+  {
+    "locale": "en-US",
+    "country": "Mỹ — tiếng Anh",
+    "voice_id": "en-US-AndrewNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_My_Tieng_Anh.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "401793b1d2511cff696d070ab476556ec035879f06ee5de3703c9ce5211c16c2"
+  },
+  {
+    "locale": "vi-VN",
+    "country": "Việt Nam",
+    "voice_id": "vi-VN-NamMinhNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Viet_Nam.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "090fe730f741b44af72a38d0a0046c743f43012c8e5153b4f29ae9f26e1a7a02"
+  },
+  {
+    "locale": "es-ES",
+    "country": "Tây Ban Nha",
+    "voice_id": "es-ES-AlvaroNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Tay_Ban_Nha.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "8d9889ee68564978d068f901fa0cbea7aa204e6c81c8a42063eca77ca858717b"
+  },
+  {
+    "locale": "fr-FR",
+    "country": "Pháp",
+    "voice_id": "fr-FR-HenriNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Phap.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "2b02711d72fb8258af79510b20e225891613e735f0eb6a49b4c42b4a710aa24d"
+  },
+  {
+    "locale": "ja-JP",
+    "country": "Nhật Bản",
+    "voice_id": "ja-JP-KeitaNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Nhat_Ban.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "5f8a7c861f6f11d921f5094229ae4a8270332e91bcc4760bb0510f09c711ae49"
+  },
+  {
+    "locale": "ko-KR",
+    "country": "Hàn Quốc",
+    "voice_id": "ko-KR-InJoonNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Han_Quoc.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "a9556be3fca926c62dd7d6287211010426a6e5dc84e021d98f73f7e1df11ed7a"
+  },
+  {
+    "locale": "de-DE",
+    "country": "Đức",
+    "voice_id": "de-DE-ConradNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Duc.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "2752687b77406e0da35fcf98e79fc32159ad6f09643c9132649ce2d187c23c85"
+  },
+  {
+    "locale": "it-IT",
+    "country": "Ý",
+    "voice_id": "it-IT-DiegoNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Y.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "81d125b278f9f5f5e7ef39f6574b0a77bcbbde2e339bfb2100fbaf32b2ac4c79"
+  },
+  {
+    "locale": "pt-PT",
+    "country": "Bồ Đào Nha",
+    "voice_id": "pt-PT-DuarteNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Bo_Dao_Nha.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "964a74e2112e00f8270f4a014c3313a66fc4441c16fbabb31b7941dc9a4e62ed"
+  },
+  {
+    "locale": "nl-NL",
+    "country": "Hà Lan",
+    "voice_id": "nl-NL-MaartenNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Ha_Lan.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "97274b51e66495afdcd742844cc0880247f646349ea60532af2ebb091ac3c646"
+  },
+  {
+    "locale": "pl-PL",
+    "country": "Ba Lan",
+    "voice_id": "pl-PL-MarekNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Ba_Lan.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "a3d2b47a2176f7233341b87c0dc6908e099ca0180c4ba383631655ed6930b275"
+  },
+  {
+    "locale": "sv-SE",
+    "country": "Thụy Điển",
+    "voice_id": "sv-SE-MattiasNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Thuy_Dien.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "f624bbf0af2e04de1ed9c8a4cee41bdf6694b108eb0129ddb245e24c2c04fd09"
+  },
+  {
+    "locale": "da-DK",
+    "country": "Đan Mạch",
+    "voice_id": "da-DK-JeppeNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Dan_Mach.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "b4b57828b97e49544bce886135f964fde60d09f7d2cbc6344ab9e0ebd208b00d"
+  },
+  {
+    "locale": "fi-FI",
+    "country": "Phần Lan",
+    "voice_id": "fi-FI-HarriNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Phan_Lan.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "326fb6a3132ae2bfde9e8915401531a889b29fbf110247e53fca0884bdcfb600"
+  },
+  {
+    "locale": "nb-NO",
+    "country": "Na Uy",
+    "voice_id": "nb-NO-FinnNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Na_Uy.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "2c2a9b5dde8e6cb72f80c0b6e06702776adddb01a7994103581a0b9a83d69c2f"
+  },
+  {
+    "locale": "cs-CZ",
+    "country": "Séc",
+    "voice_id": "cs-CZ-AntoninNeural",
+    "gender": "Male",
+    "filename": "CALCULUS_29_Sec.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "2291219eb4f86eab12c70ece0c031d717ab3102ead31a6881ef03816f5a143b8"
+  },
+  {
+    "locale": "mww",
+    "country": "H’Mông Trắng — nữ",
+    "voice_id": "hmong-female-3",
+    "gender": "Female",
+    "filename": "CALCULUS_29_Hmong_Trang_Nu.mp3",
+    "decoded_seconds": 1302,
+    "decoded_samples_48000": 62496000,
+    "sha256": "a8305aee77acea2eaf82b244de9b5f8f73780eaf4106ed159e8b8640205f5e22"
+  }
+]
