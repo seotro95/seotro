@@ -1,0 +1,27 @@
+{
+  "release_tag": "science-series-handoff-20261111",
+  "source_commit": "228cc70255fd86ec0bd61248d4f23316dc13d829",
+  "files_in_zip": 186,
+  "assets": [
+    {
+      "name": "BAN_GIAO_DU_AN_VIDEO_100_CHU_DE_2026-11-11.zip",
+      "bytes": 926672,
+      "sha256": "901681b2bd1897339481242f5a35c6c5d713263a9a24bb89651c66b856205c61"
+    },
+    {
+      "name": "BAT_DAU_O_DAY.md",
+      "bytes": 2530,
+      "sha256": "cfd72f0a519fcf5b639401875473742337cc554651031f1899ec2fbee222dd39"
+    },
+    {
+      "name": "HANDOFF_QA.json",
+      "bytes": 546,
+      "sha256": "6dd51c3baebb0c06a332b884be6e4963abd1bf90b722eb932910da1cf8457a40"
+    },
+    {
+      "name": "PROMPT_DAN_VAO_CHATGPT_MOI.txt",
+      "bytes": 4163,
+      "sha256": "4dc7698d89a7ba96c4788cb43ef68d173a209f91fa382e6b9e442f910e25f5a2"
+    }
+  ]
+}

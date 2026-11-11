@@ -1,3 +1,11 @@
+# Chuyển tài khoản ChatGPT — hồ sơ bàn giao sẵn sàng
+
+[Tải ZIP](https://github.com/seotro95/seotro/releases/download/science-series-handoff-20261111/BAN_GIAO_DU_AN_VIDEO_100_CHU_DE_2026-11-11.zip) · [Prompt dán vào chat mới](https://github.com/seotro95/seotro/releases/download/science-series-handoff-20261111/PROMPT_DAN_VAO_CHATGPT_MOI.txt). Đọc productions/HANDOFF/README.md. Chủ đề19đã hoàn thành20:15,10cảnh mở đầu30giây;giữ17IDgiọng. Không tự khởi chạy tập kế tiếp.
+
+---
+
+Nhật ký sản xuất trước đó:
+
 # Chủ đề19 Kostenki — đã hoàn thành video20:15
 
 [Tải video](https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_EN_FINAL_20m15s_720p.mp4) · [10cảnh mở đầu30giây](https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_OPENING_30s.mp4) · [5tiêu đề và prompt thumbnail](https://github.com/seotro95/seotro/releases/download/kostenki-video-19-final-20m15s/KOSTENKI_19_TITLES_THUMBNAILS.txt).

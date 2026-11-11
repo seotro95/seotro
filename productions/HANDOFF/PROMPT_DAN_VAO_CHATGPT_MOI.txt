@@ -1,0 +1,17 @@
+Tôi chuyển dự án từ một tài khoản ChatGPT khác sang đây. Hãy đọc ZIP bàn giao tôi đính kèm để tiếp tục đúng công việc, không làm lại từ đầu.
+
+Tôi sản xuất chuỗi phim tài liệu khoa học về khảo cổ, tiền sử và thời Băng hà. Trao đổi với tôi bằng tiếng Việt; video chính dùng lời đọc tiếng Anh. Kho dự án: https://github.com/seotro95/seotro, nhánh làm việc codex/beringia-video-01. Video tham khảo: https://github.com/seotro95/seotro/releases/tag/video. Học nhịp kể và dựng, viết lời mới, kiểm chứng khoa học, phân biệt bằng chứng với giả thuyết.
+
+Đọc theo thứ tự: BAT_DAU_O_DAY.md → TOM_TAT_DU_AN.md → SERIES/SERIES_STATE.json → CAU_HINH ba tệp giọng/nhấn nhá/tên file → QUY_TRINH_LAM_VIEC.md → TIEN_DO_VA_LINK_TAI.md. Yêu cầu mới nhất của tôi quyết định chủ đề và thời lượng; không dùng số phút/số cảnh cũ làm hằng số.
+
+Đã có kết quả lưu cho các chủ đề 1, 2, 3, 4, 6, 8 và 19. Chủ đề gần nhất đã hoàn tất là 19 — Kostenki, 20:15: kịch bản Anh 2.816 từ, 120 prompt mới trong 12 TXT, hai mốc dùng lại, 17 voice riêng và video hoàn chỉnh chỉ voice Anh. Phần đầu video19 có 10 cảnh trong 30 giây. Đọc trạng thái cụ thể trong hồ sơ; không suy đoán các tập khác đã hoàn thành, không tự bắt đầu chủ đề20 hoặc tập5 còn trong hàng đợi.
+
+Khi tôi yêu cầu tập mới: làm từng chủ đề; chọn đúng tên đã lưu; nghiên cứu và viết kịch bản tò mò, cuốn hút, có dẫn chứng. Mỗi prompt tạo video10giây, chia đúng10prompt/TXT, đánh số tuần tự, bám lời voice, tự chọn góc quay. Không có hình trẻ em. Cảnh trùng được đánh dấu dùng lại, không tạo lặp vô ích. Cuối từng prompt, cùng đoạn, phải có đúng cụm “không có âm thanh”. Bàn giao kịch bản và các TXT trước, rồi mới tạo voice.
+
+Giữ bộ17 giọng và preset đã lưu:16giọng nam, riêng H’Mông Trắng là nữ hmong-female-3. Anh chính en-US-AndrewNeural; đọc đủ các ID còn lại từ VOICE_PROFILES_LOCKED.json. Dùng backend của Melo-Viet-Studio-1.3.1-Them-Giong-Windows và công cụ riêng Voice-Studio-Hmong-1.6.6; giữ engine, mẫu tham chiếu và nhấn nhá, không tùy tiện đổi giọng hoặc cao độ. Tên file theo quốc gia. Dịch tự nhiên theo từng ngôn ngữ; mỗi voice riêng phải bằng thời lượng Anh, căn chương và kiểm file thật, không cắt mất lời hoặc kéo im lặng để đủ phút. Không khẳng định đã được người bản ngữ duyệt khi chưa có.
+
+Khi tôi gửi clip để dựng: dùng đúng voice Anh đã duyệt, bỏ toàn bộ âm thanh clip, không nhạc/SFX; cắt10cảnh nổi bật trong30giây đầu, nằm trong tổng thời lượng voice. Thiếu cảnh thì dùng video liên quan, không dùng ảnh đứng hoặc bảng chữ để bù. Kiểm đồng bộ, giải mã và đường tiếng; giao link video,5tiêu đề và5prompt thumbnail tương ứng, kèm TXT dễ tải.
+
+Giữ nguyên kết quả các tập trước, lưu quy trình và trạng thái sau khi xong. Chỉ dùng quyền truy cập của phiên hiện tại; kết nối GitHub lại khi cần ghi hoặc chạy Actions. ZIP không chuyển được đăng nhập, kết nối ứng dụng, bộ nhớ tài khoản hay clip đính kèm cũ. Nếu cần sửa video bằng clip gốc mà phiên mới chưa có, nói rõ cần tôi gửi lại clip. Đừng báo đã chạy công cụ, tạo voice, dựng hoặc lưu file khi chưa thực hiện và kiểm chứng được.
+
+Ngay bây giờ, chỉ đọc hồ sơ, tóm tắt ngắn tiến độ, quy tắc giọng và bước tiếp theo. Nếu tôi đã kèm yêu cầu mới thì thực hiện yêu cầu đó; nếu chưa, chờ tôi chỉ định chủ đề hoặc việc cần sửa. Không tự chạy lại các workflow lịch sử.

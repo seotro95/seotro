@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "topic_count": 100,
+  "saved_completed_topic_ids": [
+    1,
+    2,
+    3,
+    4,
+    6,
+    8,
+    19
+  ],
+  "last_completed_topic": 19,
+  "voice_count": 17,
+  "male_voices": 16,
+  "female_hmong_voices": 1,
+  "source_media_or_frames_included": false,
+  "private_upload_ids_or_credentials_detected": false,
+  "raw_clip_access_transfers_automatically": false,
+  "file_checksums_included": true,
+  "complete19_script_prompts_and_voice_texts_included": true,
+  "code_is_reference_requires_path_and_capability_review": true
+}

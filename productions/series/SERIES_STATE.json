@@ -13,8 +13,6 @@
     "primary_video_language": "English",
     "target_duration_seconds": 1200,
     "video_clip_seconds": 10,
-    "scene_count": 120,
-    "prompt_files": 10,
     "prompts_per_txt": 10,
     "generated_clips_audio": "silent",
     "voice_count": 17,
@@ -28,7 +26,7 @@
     "video_editing": {
       "match_original_english_voice": true,
       "remove_all_original_clip_audio": true,
-      "opening_30_seconds": "Select the strongest relevant shots and cut faster to establish the story.",
+      "opening_30_seconds": "Exactly10different strong relevant scenes inside the original first30seconds of voice, unless the user changes this in a newer request.",
       "preserve_input_resolution": true,
       "documentary_reference": "Use the inspected source video narrative rhythm, restrained cuts, short motivated dissolves, cold exterior and warm human scenes.",
       "final_delivery": [
@@ -37,7 +35,9 @@
         "5_titles",
         "5_matching_thumbnail_prompts"
       ],
-      "when": "After the user supplies the generated clips."
+      "when": "After the user supplies the generated clips.",
+      "missing_scene_policy": "Use related moving video; never substitute still images or text cards.",
+      "music_and_sfx": "None when main video is requested to contain English narration only."
     },
     "deduplicate_repeated_visual_contexts": true,
     "prompt_files_follow_unique_prompt_count": true,
@@ -50,13 +50,21 @@
     "production_workflow_profile_id": "science-series-topic03-workflow-v1",
     "production_workflow_profile": "productions/series/PRODUCTION_DEFAULTS.json",
     "production_workflow_document": "productions/series/QUY_TRINH_AP_DUNG_TU_CHU_DE_03.md",
-    "default_visual_plan": {
-      "unique_clips": 100,
-      "reused_slots": 20,
-      "prompt_txt_files": 10,
-      "adapt_to_real_contexts": true
+    "generated_visuals_exclude_minors_from_topic_4": true,
+    "historical_episode_plan_defaults": {
+      "scene_count": 120,
+      "prompt_files": 10,
+      "default_visual_plan": {
+        "unique_clips": 100,
+        "reused_slots": 20,
+        "prompt_txt_files": 10,
+        "adapt_to_real_contexts": true
+      }
     },
-    "generated_visuals_exclude_minors_from_topic_4": true
+    "duration_policy": "Use the latest explicit duration request;1200seconds is a fallback, not a fixed duration for every episode.",
+    "prompt_count_policy": "Compute from real timeline and unique contexts;10prompts perTXT, markreuse; finalTXTmay containfewer than10.",
+    "prompt_silence_suffix": "không có âm thanh",
+    "generated_visuals_exclude_minors": true
   },
   "reference_video": {
     "release_url": "https://github.com/seotro95/seotro/releases/tag/video",
@@ -1136,7 +1144,7 @@
     "voice_profile_set_id": "science-prehistory-17-v1",
     "narration_style_id": "science-documentary-expressive-v1",
     "voice_count_expected": 17,
-    "video_rendered": false,
+    "video_rendered": true,
     "voice_files_delivered": 17,
     "verified_seconds_per_voice": 1215,
     "voice_release_tag": "kostenki-video-19-20m15s",
@@ -1188,5 +1196,8 @@
     "public_video_stream_hash_verified": true,
     "thumbnail_title_pairs": 5,
     "editing_steps_saved": true
-  }
+  },
+  "latest_completed_topic_id": 19,
+  "auto_start_next_topic": false,
+  "handoff_next_action": "Read context and wait for a specific new request;do not auto-start backlog5or topic20."
 }

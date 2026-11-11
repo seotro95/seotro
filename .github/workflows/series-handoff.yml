@@ -1,0 +1,18 @@
+name: Publish portable science-series handoff and startup prompt
+on:
+  push:
+    branches: [codex/series-handoff-20261111]
+    paths: [productions/HANDOFF/**, .github/workflows/series-handoff.yml]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Verify bundle hashes and publish handoff files
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl --fail --silent --show-error --location "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$GITHUB_SHA/productions/HANDOFF/publish_handoff.py" -o publish_handoff.py
+          python -u publish_handoff.py
