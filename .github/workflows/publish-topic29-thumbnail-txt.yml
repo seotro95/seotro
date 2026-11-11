@@ -1,0 +1,23 @@
+name: Publish topic29 title and thumbnail TXT
+on:
+  push:
+    branches: [codex/topic29-audio-delivery]
+    paths: ['.github/workflows/publish-topic29-thumbnail-txt.yml']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: /deliveries/topic29/CHU_DE_29_5_TIEU_DE_5_PROMPT_THUMBNAIL.txt
+      - name: Upload requested title and thumbnail text file
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test -s deliveries/topic29/CHU_DE_29_5_TIEU_DE_5_PROMPT_THUMBNAIL.txt
+          gh release upload dental-calculus-video-29-21m42s deliveries/topic29/CHU_DE_29_5_TIEU_DE_5_PROMPT_THUMBNAIL.txt --repo "$GITHUB_REPOSITORY" --clobber
