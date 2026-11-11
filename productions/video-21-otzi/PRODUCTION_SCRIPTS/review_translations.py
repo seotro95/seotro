@@ -3,6 +3,7 @@ from pathlib import Path
 R=Path(__file__).resolve().parent;D=R/'documents';S=R/'voice/scripts'
 chapters=json.loads((D/'CHAPTERS_13.json').read_text())
 def save(locale,texts,method):
+    S.mkdir(parents=True,exist_ok=True);D.mkdir(parents=True,exist_ok=True)
     assert len(texts)==13
     rows=[dict(c,voice=t,source_voice=c['voice'],translation_method=method) for c,t in zip(chapters,texts)]
     (S/f'{locale}.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2))
