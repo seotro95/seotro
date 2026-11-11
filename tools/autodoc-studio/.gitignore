@@ -1,0 +1,12 @@
+__pycache__/
+.venv/
+build/
+dist/
+release/
+test-inputs/
+test-output/
+test-models/
+windows test/
+*.log
+*.spec
+*_result.json

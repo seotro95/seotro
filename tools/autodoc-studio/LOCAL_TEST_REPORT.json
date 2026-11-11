@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "voice_seconds": 65.37,
+  "video_seconds": 65.375,
+  "frames": 1569,
+  "opening_shots": 10,
+  "opening_distinct_source_files": 10,
+  "source_audio_streams_removed": 1,
+  "audio_streams": 1,
+  "clip_audio_included": false,
+  "full_decode_exit_code": 0,
+  "audio_alignment": [
+    {
+      "at_seconds": 5.23,
+      "lag_seconds": 0.0,
+      "correlation": 0.999808
+    },
+    {
+      "at_seconds": 16.343,
+      "lag_seconds": 0.0,
+      "correlation": 0.999988
+    },
+    {
+      "at_seconds": 32.685,
+      "lag_seconds": 0.0,
+      "correlation": 0.999724
+    },
+    {
+      "at_seconds": 49.028,
+      "lag_seconds": 0.0,
+      "correlation": 0.999865
+    },
+    {
+      "at_seconds": 60.14,
+      "lag_seconds": 0.0,
+      "correlation": 0.993081
+    }
+  ],
+  "platform": "Linux",
+  "real_models_used": true,
+  "corrupt_and_duplicate_inputs_skipped": true,
+  "unit_tests": 5,
+  "fixture_media_not_distributed": true
+}
