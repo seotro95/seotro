@@ -34,7 +34,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           $ErrorActionPreference='Stop'
-          $tag='autodoc-studio-v2.0.0'
+          $tag='autodoc-studio-v2.0.1'
           gh release view $tag --repo $env:GITHUB_REPOSITORY 2>$null
           if ($LASTEXITCODE -ne 0) {
             gh release create $tag --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --title 'AutoDoc Studio 2.0 — Ảnh, video, logo và phụ đề' --draft --notes 'Windows 10/11 x64 portable. Nhận ảnh và video, xem trước và sửa cảnh, tắt/giữ tiếng clip, logo PNG, nhập/xuất TXT/SRT, kiểu phụ đề, lưu dự án và xuất MP4/MKV tùy chọn. Cache dùng lại, thử GPU rồi tự quay về CPU. Lần đầu tự tải FFmpeg và model; không cần API trả phí. Xem hướng dẫn và báo cáo thử exe trong bản tải.'

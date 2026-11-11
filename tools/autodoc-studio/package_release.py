@@ -39,11 +39,11 @@ for p in (R/'effect_packs').glob('*.json'):
     # UTF-8/LF bytes, so preserve those exact bytes in both deliveries.
     data=p.read_text(encoding='utf-8').encode('utf-8');dest=app/'effect_packs'/p.name;dest.parent.mkdir(exist_ok=True);dest.write_bytes(data);(O/p.name).write_bytes(data)
 pack_manifest=json.loads((O/'manifest.json').read_text());assert hashlib.sha256((O/'cinematic-extras.json').read_bytes()).hexdigest()==pack_manifest['sha256']
-with zipfile.ZipFile(O/'AutoDocStudio-2.0.0-Windows-x64.zip','w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+with zipfile.ZipFile(O/'AutoDocStudio-2.0.1-Windows-x64.zip','w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
     for p in sorted(app.rglob('*')):
         if p.is_file():z.write(p,'AutoDocStudio/'+p.relative_to(app).as_posix())
 names=['main.py','requirements.txt','CAI_DAT.bat','MO_TOOL.bat','README.md','THIRD_PARTY.md','LICENSE','build_windows.ps1','package_release.py','windows_smoke.py','windows-workflow.yml']
-with zipfile.ZipFile(O/'AutoDocStudio-2.0.0-Source.zip','w',zipfile.ZIP_DEFLATED) as z:
+with zipfile.ZipFile(O/'AutoDocStudio-2.0.1-Source.zip','w',zipfile.ZIP_DEFLATED) as z:
     for name in names:z.write(R/name,'AutoDocStudio-Source/'+name)
     for folder,pattern in [('autodoc','*.py'),('tests','*.py'),('effect_packs','*.json')]:
         for p in (R/folder).rglob(pattern):z.write(p,'AutoDocStudio-Source/'+p.relative_to(R).as_posix())
@@ -52,7 +52,7 @@ with zipfile.ZipFile(O/'AutoDocStudio-2.0.0-Source.zip','w',zipfile.ZIP_DEFLATED
 shutil.copyfile(R/'WINDOWS_TEST_REPORT.json',O/'WINDOWS_TEST_REPORT.json');assets=[]
 for p in sorted(O.iterdir()):
     if p.is_file() and p.name not in ['SHA256SUMS.txt','RELEASE_MANIFEST.json']:assets.append({'name':p.name,'bytes':p.stat().st_size,'sha256':hashlib.file_digest(p.open('rb'),'sha256').hexdigest()})
-(O/'SHA256SUMS.txt').write_text(''.join(x['sha256']+'  '+x['name']+'\n' for x in assets));(O/'RELEASE_MANIFEST.json').write_text(json.dumps({'version':'2.0.0','build_commit':os.environ.get('GITHUB_SHA'),'build_run_id':os.environ.get('GITHUB_RUN_ID'),'model_weights_bundled':False,'ffmpeg_binaries_bundled':False,'user_media_bundled':False,'tested_frozen_windows_edit_and_preview':True,'assets':assets},indent=2))
+(O/'SHA256SUMS.txt').write_text(''.join(x['sha256']+'  '+x['name']+'\n' for x in assets));(O/'RELEASE_MANIFEST.json').write_text(json.dumps({'version':'2.0.1','build_commit':os.environ.get('GITHUB_SHA'),'build_run_id':os.environ.get('GITHUB_RUN_ID'),'model_weights_bundled':False,'ffmpeg_binaries_bundled':False,'user_media_bundled':False,'tested_frozen_windows_edit_and_preview':True,'assets':assets},indent=2))
 for p in O.glob('*.zip'):
     with zipfile.ZipFile(p) as z:
         assert z.testzip() is None
