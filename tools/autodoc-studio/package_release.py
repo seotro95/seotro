@@ -35,7 +35,10 @@ for name in ['numpy','Pillow','onnxruntime','tokenizers','huggingface-hub','fast
                 dest=licenses/name/(str(item).replace('..','_').replace('/','__').replace('\\','__'));dest.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(src,dest)
 (app/'DEPENDENCY_VERSIONS.json').write_text(json.dumps(versions,indent=2))
 for p in (R/'effect_packs').glob('*.json'):
-    dest=app/'effect_packs'/p.name;dest.parent.mkdir(exist_ok=True);shutil.copyfile(p,dest);shutil.copyfile(p,O/p.name)
+    # Git on Windows may check text out as CRLF. The manifest hashes canonical
+    # UTF-8/LF bytes, so preserve those exact bytes in both deliveries.
+    data=p.read_text(encoding='utf-8').encode('utf-8');dest=app/'effect_packs'/p.name;dest.parent.mkdir(exist_ok=True);dest.write_bytes(data);(O/p.name).write_bytes(data)
+pack_manifest=json.loads((O/'manifest.json').read_text());assert hashlib.sha256((O/'cinematic-extras.json').read_bytes()).hexdigest()==pack_manifest['sha256']
 with zipfile.ZipFile(O/'AutoDocStudio-2.0.0-Windows-x64.zip','w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
     for p in sorted(app.rglob('*')):
         if p.is_file():z.write(p,'AutoDocStudio/'+p.relative_to(app).as_posix())
