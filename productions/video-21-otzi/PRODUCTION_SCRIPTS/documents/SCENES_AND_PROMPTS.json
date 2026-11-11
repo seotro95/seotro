@@ -1,0 +1,877 @@
+[
+  {
+    "id": 1,
+    "start": 0,
+    "end": 10,
+    "voice": "A stone point, smaller than a finger, remained inside a man's shoulder for more than five thousand years. It changed his story.",
+    "visual": "Extreme macro of a replica triangular flint arrowhead on dark stone; slow lateral slider reveals chipped edges."
+  },
+  {
+    "id": 2,
+    "start": 10,
+    "end": 20,
+    "voice": "The man had climbed into the Alps carrying food, tools, and a wounded hand. Someone shot him from behind. What happened next?",
+    "visual": "Rear medium view of the clothed adult traveller climbing a rocky slope; slow tracking behind him, no attacker or impact shown."
+  },
+  {
+    "id": 3,
+    "start": 20,
+    "end": 30,
+    "voice": "We can investigate his final journey. But the closer we look, the more important one question becomes: which parts can we actually know?",
+    "visual": "High wide view of an empty alpine saddle; gentle forward aerial movement across exposed rock and scattered snow."
+  },
+  {
+    "id": 4,
+    "start": 30,
+    "end": 40,
+    "voice": "His modern name is Ötzi. His own name, his reasons for travelling, and the identity of the person who attacked him remain unknown.",
+    "visual": "Close side view of the adult traveller looking toward a mountain ridge; slow push in, mouth closed."
+  },
+  {
+    "id": 5,
+    "start": 40,
+    "end": 50,
+    "voice": "This is a reconstruction built from a body, a meal, damaged equipment, and microscopic traces. Each clue has a different kind of clock.",
+    "visual": "Overhead view of replica food, hide shoe, stone dagger and arrow shafts on a neutral bench; slow descending camera."
+  },
+  {
+    "id": 6,
+    "start": 50,
+    "end": 60,
+    "voice": "Our task is to put those clocks together without pretending they all tell the same time, or turning a possibility into a memory.",
+    "visual": "Macro of an adult laboratory worker arranging sealed sample tubes beside a blank notebook; locked camera, careful hand movement."
+  },
+  {
+    "id": 7,
+    "start": 60,
+    "end": 70,
+    "voice": "The modern story begins on September nineteenth, nineteen ninety-one. Two hikers noticed a body emerging from ice near the border of Italy and Austria.",
+    "visual": "Wide reconstruction of two adult hikers in early 1990s mountain clothing stopping on a rocky ice margin; slow pan, body out of frame."
+  },
+  {
+    "id": 8,
+    "start": 70,
+    "end": 80,
+    "voice": "At first, a recent mountain accident seemed plausible. Recovering ancient evidence was not the original plan, and the earliest rescue attempts caused damage.",
+    "visual": "Close view of an empty early-1990s rescue equipment bag beside melting ice; slow dolly, no reenacted damage to remains."
+  },
+  {
+    "id": 9,
+    "start": 80,
+    "end": 90,
+    "voice": "Then the objects changed the question. A copper axe, plant-fibre cord, and unfamiliar clothing belonged to a world far older than expected.",
+    "visual": "Low close view of replica copper axe with yew haft and leather bindings; slow arc, natural copper colour rather than bronze fantasy."
+  },
+  {
+    "id": 10,
+    "start": 90,
+    "end": 100,
+    "voice": "Radiocarbon dating placed him in the Copper Age, roughly around thirty-three hundred BCE. The ice had preserved a person, not an anonymous legend.",
+    "visual": "Wide view of the adult traveller crossing a treeless slope in Copper Age clothing; restrained lateral tracking."
+  },
+  {
+    "id": 11,
+    "start": 100,
+    "end": 110,
+    "voice": "He was an adult man, probably in his forties. His preserved body offers unusually intimate evidence, but preservation also changes what investigators can measure.",
+    "visual": "Medium view of a covered adult-sized conservation support inside a generic cold laboratory; slow push, no exposed remains."
+  },
+  {
+    "id": 12,
+    "start": 110,
+    "end": 120,
+    "voice": "Drying, compression, recovery damage, and later storage must be separated from injuries he suffered while alive. Even a remarkably complete body is an altered archive.",
+    "visual": "Macro of layered ice pressing around an empty hide fragment in an illustrative model; slow focus shift from ice to leather."
+  },
+  {
+    "id": 13,
+    "start": 120,
+    "end": 130,
+    "voice": "Place the discovery on the landscape: the Tisenjoch area, more than three thousand metres above sea level, in the high Ötztal Alps.",
+    "visual": "Wide aerial of an Eastern Alpine saddle with rock outcrops and patchy snow; slow ascent, leave clear space for verified editor-added map label."
+  },
+  {
+    "id": 14,
+    "start": 130,
+    "end": 140,
+    "voice": "The modern border is useful for finding the site. It cannot tell us his nationality. He lived thousands of years before these countries existed.",
+    "visual": "Overhead physical relief model of the Alps without political boundaries; camera glides from southern valleys toward the main ridge."
+  },
+  {
+    "id": 15,
+    "start": 140,
+    "end": 150,
+    "voice": "Nor should we imagine an empty wilderness below him. Copper Age communities farmed, kept animals, made tools, and maintained contacts across difficult terrain.",
+    "visual": "Wide reconstruction of a small southern Alpine farming settlement with only clearly adult inhabitants tending goats; slow lateral dolly."
+  },
+  {
+    "id": 16,
+    "start": 150,
+    "end": 160,
+    "voice": "Ötzi carried products of that skilled world. His journey connects valley life with mountain routes, although the purpose of this particular crossing remains uncertain.",
+    "visual": "Medium rear view of the adult traveller leaving the edge of a timber-and-wattle settlement; slow tracking, all people adult."
+  },
+  {
+    "id": 17,
+    "start": 160,
+    "end": 170,
+    "voice": "Was he escaping trouble, travelling between communities, or doing something more ordinary before violence intervened? The equipment cannot choose one explanation by itself.",
+    "visual": "Long-lens view of a solitary adult figure pausing where two natural paths divide; fixed camera, breeze moving his hide coat."
+  },
+  {
+    "id": 18,
+    "start": 170,
+    "end": 180,
+    "voice": "Start with what the landscape can record. A traveller passes through different plant communities as elevation changes. Some of their traces enter the body.",
+    "visual": "Low tracking shot through valley grasses toward conifer woodland and distant high slopes; light wind moves leaves."
+  },
+  {
+    "id": 19,
+    "start": 180,
+    "end": 190,
+    "voice": "Pollen grains are tiny, durable structures. Under a microscope, their shapes can help specialists identify the plants that produced them, sometimes very precisely.",
+    "visual": "Macro scientific illustration of several distinct pollen grains suspended in clear fluid; slow single-axis rotation, no invented labels."
+  },
+  {
+    "id": 20,
+    "start": 190,
+    "end": 200,
+    "voice": "But pollen is not a location tracker. Wind moves it. Food and water carry it. A useful interpretation needs ecology, context, and independent evidence.",
+    "visual": "Close view of pollen-bearing water running beneath flowering branches; locked low camera, natural flow and drifting grains."
+  },
+  {
+    "id": 21,
+    "start": 200,
+    "end": 210,
+    "voice": "Investigators studied plant remains in different parts of Ötzi's digestive tract. Those samples offered a sequence of environments rather than a continuous recording.",
+    "visual": "Medium view of adult botanist comparing microscope fields with dried reference plants; slow over-shoulder dolly, no legible fabricated results."
+  },
+  {
+    "id": 22,
+    "start": 210,
+    "end": 220,
+    "voice": "Published reconstructions suggest movement between lower, wooded terrain and higher alpine ground during his final days. They do not establish every turn he took.",
+    "visual": "Oblique unlabelled terrain model with separate broad translucent elevation bands; slow orbit, route left for verified editorial graphics."
+  },
+  {
+    "id": 23,
+    "start": 220,
+    "end": 230,
+    "voice": "Hop-hornbeam pollen helped connect part of that journey to woodland south of the main ridge. Seasonal plant evidence points toward the warmer part of the year.",
+    "visual": "Close view of flowering hop-hornbeam branches on a southern Alpine wooded slope; slow tilt through foliage."
+  },
+  {
+    "id": 24,
+    "start": 230,
+    "end": 240,
+    "voice": "That matters because the ice can mislead our imagination. A body found in snow did not necessarily die during a midwinter blizzard on a frozen continent.",
+    "visual": "Wide view of a sunlit alpine meadow below lingering snow patches; slow pan from flowers to distant snow."
+  },
+  {
+    "id": 25,
+    "start": 240,
+    "end": 250,
+    "voice": "Spring or early-summer conditions can still be dangerous high in the mountains. Sunshine in a valley says little about wind and exposure on a ridge.",
+    "visual": "Wide high-angle view of cloud shadows sweeping a rocky pass above green valleys; very slow aerial drift."
+  },
+  {
+    "id": 26,
+    "start": 250,
+    "end": 260,
+    "voice": "The itinerary is therefore a working reconstruction. It gives us plausible movement through ecological zones, not a schedule with verified departure and arrival times.",
+    "visual": "Adult researcher moves separate transparent terrain layers on a light table; overhead camera, tentative positions without continuous route line."
+  },
+  {
+    "id": 27,
+    "start": 260,
+    "end": 270,
+    "voice": "Now add the clue that makes this more than a story of difficult travel: a deep injury between the thumb and index finger of his right hand.",
+    "visual": "Close view of the adult traveller's right hand resting on hide, wound area obscured by a loose illustrative covering; slow push, no blood."
+  },
+  {
+    "id": 28,
+    "start": 270,
+    "end": 280,
+    "voice": "The wound was sustained while he was alive, before the arrow injury. Researchers commonly place it in the preceding days, although exact timing remains approximate.",
+    "visual": "Close side view of a neutral adult hand model with a small removable marker near the right thumb web; slow arc, intact skin."
+  },
+  {
+    "id": 29,
+    "start": 280,
+    "end": 290,
+    "voice": "A defensive injury is one interpretation. But an injury's position cannot tell us the words exchanged, the number of people present, or who began a confrontation.",
+    "visual": "Wide view of two distant adult silhouettes separated on a wooded path; fixed frame, no fight, gestures or asserted historical encounter."
+  },
+  {
+    "id": 30,
+    "start": 290,
+    "end": 300,
+    "voice": "Picture the practical consequence instead. Climbing, gripping a shaft, preparing food, and repairing equipment all become harder when the dominant hand is painful or impaired.",
+    "visual": "Tight view of the adult traveller carefully adjusting a shoulder strap with his left hand; restrained handheld camera, right hand kept still."
+  },
+  {
+    "id": 31,
+    "start": 300,
+    "end": 310,
+    "voice": "That does not make every damaged tool evidence of a chase. Objects wear out in ordinary life, and some changes can happen after death.",
+    "visual": "Macro of worn replica flint edge beneath raking light; slow slider shows use wear without dramatic sparks or breakage."
+  },
+  {
+    "id": 32,
+    "start": 310,
+    "end": 320,
+    "voice": "Ötzi's kit included a small stone dagger, a tool for retouching stone edges, a copper axe, a quiver, and an unfinished wooden bow stave.",
+    "visual": "Overhead arrangement of accurately proportioned Copper Age replica tools including unstrung bow stave; slow camera drift across the objects."
+  },
+  {
+    "id": 33,
+    "start": 320,
+    "end": 330,
+    "voice": "Several arrow shafts were unfinished. A bow stave is not automatically a ready weapon, and a quiver's contents do not guarantee immediate hunting or defence.",
+    "visual": "Close tracking along unfinished wooden arrow shafts beside two completed replica arrows; no modern metal arrowheads."
+  },
+  {
+    "id": 34,
+    "start": 330,
+    "end": 340,
+    "voice": "Studies of the stone toolkit identified heavily used edges and a limited supply of workable material. Skilled maintenance mattered when fresh stone was not readily available.",
+    "visual": "Macro of adult craftsperson examining a short flint dagger edge without cutting; slow focus pull from fingers to edge."
+  },
+  {
+    "id": 35,
+    "start": 340,
+    "end": 350,
+    "voice": "A wounded hand and incomplete equipment make a difficult combination. Together they support questions about his situation, but they still do not prove a pursuit.",
+    "visual": "Medium rear view of the traveller sitting beside his unstrung stave and closed quiver; slow dolly back, no approaching figures."
+  },
+  {
+    "id": 36,
+    "start": 350,
+    "end": 360,
+    "voice": "The axe adds another scale to the story. Analyses of its copper connect the metal with sources in what is now Tuscany, far to the south.",
+    "visual": "Macro of copper replica axe blade on black support; slow rotation with warm reflected light, no map invented by model."
+  },
+  {
+    "id": 37,
+    "start": 360,
+    "end": 370,
+    "voice": "That result indicates long-distance connections. It does not mean Ötzi personally travelled to the mine, or that we know every exchange along the way.",
+    "visual": "Wide unlabelled relief of central and northern Italian terrain with mountain ridges; slow northward camera movement, editor adds verified locations later."
+  },
+  {
+    "id": 38,
+    "start": 370,
+    "end": 380,
+    "voice": "An object can move through many hands. Its materials may reveal a network while leaving the owner's status, occupation, and personal itinerary unresolved.",
+    "visual": "Close view of adult hands setting a wrapped copper axe onto a neutral wooden surface; fixed camera, no asserted ancient transaction."
+  },
+  {
+    "id": 39,
+    "start": 380,
+    "end": 390,
+    "voice": "Why was such a valuable object still nearby? Robbery seems an incomplete explanation. Yet possessions left behind cannot establish the attacker's motive or identity.",
+    "visual": "Medium low view of replica axe resting beside rocks and hide bundle on a mountain slope; slow lateral slider, no attacker."
+  },
+  {
+    "id": 40,
+    "start": 390,
+    "end": 400,
+    "voice": "The temptation is to turn every object into a plot point. A better question is simpler: what could this equipment actually help a traveller do?",
+    "visual": "Overhead view of the travel kit arranged on a hide mat; adult hand selects a shoe, slow descending camera."
+  },
+  {
+    "id": 41,
+    "start": 400,
+    "end": 410,
+    "voice": "His clothing answers part of that. Hides, fur, plant fibres, and carefully worked seams formed a practical system, assembled from different materials for different jobs.",
+    "visual": "Macro tracking across a reconstructed patched goat-and-sheep-hide coat seam, coarse sinew stitches visibly flexing under an adult hand."
+  },
+  {
+    "id": 42,
+    "start": 410,
+    "end": 420,
+    "voice": "Genetic work on the surviving garments identified several animal sources. This was not a uniform costume made from one convenient hide, but a collection of choices.",
+    "visual": "Close view of distinct fur and hide replica swatches on conservation supports; slow rack focus across textures."
+  },
+  {
+    "id": 43,
+    "start": 420,
+    "end": 430,
+    "voice": "The shoes combined an outer structure, an inner net, and insulating grass. Their exact performance cannot be read from appearance alone, but the design is sophisticated.",
+    "visual": "Cutaway replica shoe on a bench showing leather exterior, plant-fibre net and loose grass insulation; slow orbit around a stable model."
+  },
+  {
+    "id": 44,
+    "start": 430,
+    "end": 440,
+    "voice": "Insulation works by slowing heat loss. Dry material holds pockets of air; wet material behaves differently. A mountain traveller must manage both warmth and moisture.",
+    "visual": "Macro of dry grass fibres held loosely inside a hide shoe replica; slow push in, no glowing heat effects."
+  },
+  {
+    "id": 45,
+    "start": 440,
+    "end": 450,
+    "voice": "Walking produces heat, but it also demands energy. Stop moving, add wind, or become injured, and equipment that seemed adequate can face a different problem.",
+    "visual": "Medium side view of the adult traveller stopping on an exposed ledge, hide coat moving in wind; slow camera drift."
+  },
+  {
+    "id": 46,
+    "start": 450,
+    "end": 460,
+    "voice": "His birch-bark containers carried another clever possibility: transporting embers. Charcoal and plant remains connect a fragile container with the practical management of fire.",
+    "visual": "Close view of replica birch-bark container holding insulated charcoal and fresh leaves on stone; slow tilt, only a faint ember glow."
+  },
+  {
+    "id": 47,
+    "start": 460,
+    "end": 470,
+    "voice": "That evidence does not prove a fire was burning beside him at the moment of attack. Capability and action are different claims, even when a reconstruction looks convincing.",
+    "visual": "Wide shot of an empty rocky resting place with closed bark container and no active fire; locked frame, cloud shadow passes."
+  },
+  {
+    "id": 48,
+    "start": 470,
+    "end": 480,
+    "voice": "These objects make him recognisably human: prepared in some ways, vulnerable in others. To approach the final hours, however, we need a more immediate record.",
+    "visual": "Rear medium tracking view of the traveller lowering his travel bundle beside sheltered rocks; deliberate movement, no dialogue."
+  },
+  {
+    "id": 49,
+    "start": 480,
+    "end": 490,
+    "voice": "The next clue was inside his stomach. Its unusual position in the preserved body delayed recognition, reminding researchers that ancient anatomy can be difficult to read.",
+    "visual": "Medium view of adult radiologist studying a generic non-diagnostic torso model beside a scanner; slow over-shoulder move, no fake CT evidence."
+  },
+  {
+    "id": 50,
+    "start": 490,
+    "end": 500,
+    "voice": "When investigators finally studied the contents, they found a substantial last meal. The dying traveller had eaten, rather than simply reaching the mountain in empty-handed desperation.",
+    "visual": "Overhead illustrative meal of cooked game meat, pale animal fat and einkorn grains on clean bark; slow push in, no modern cutlery."
+  },
+  {
+    "id": 51,
+    "start": 500,
+    "end": 510,
+    "voice": "Microscopy and molecular analyses identified ibex, red deer, cereals associated with einkorn, and traces of bracken. Different methods contributed different pieces to that reconstruction.",
+    "visual": "Macro view of separate prepared research dishes containing tiny food samples; gloved adult hand moves one dish beneath a microscope."
+  },
+  {
+    "id": 52,
+    "start": 510,
+    "end": 520,
+    "voice": "The high proportion of fat was especially striking. In an active traveller's food, fat provides concentrated energy without requiring the weight of an equally energetic low-fat meal.",
+    "visual": "Close view of cooked game and fat being wrapped in hide by adult hands; slow side slider, non-graphic food preparation."
+  },
+  {
+    "id": 53,
+    "start": 520,
+    "end": 530,
+    "voice": "This is evidence about a meal, not a complete dietary biography. One stomach sample cannot tell us what every Copper Age household ate throughout the year.",
+    "visual": "Close view of a single sealed food sample dish isolated on a large research table; slow pull back reveals surrounding empty workspace."
+  },
+  {
+    "id": 54,
+    "start": 530,
+    "end": 540,
+    "voice": "Nor do the bracken traces settle their own purpose. Food wrapping, accidental ingestion, and possible medicinal use have been discussed. Deliberate treatment remains a hypothesis.",
+    "visual": "Close botanical shot of bracken fronds beside an unwrapped food parcel, kept visibly separate; slow pan, no eating or medical preparation."
+  },
+  {
+    "id": 55,
+    "start": 540,
+    "end": 550,
+    "voice": "The degree of digestion suggests he ate relatively shortly before death. But digestion depends on physiology and food, so it is not an exact stopwatch.",
+    "visual": "Medium close view of adult researcher comparing two generic digestion models on a bench; slow dolly, editor supplies cautious timing label."
+  },
+  {
+    "id": 56,
+    "start": 550,
+    "end": 560,
+    "voice": "A substantial meal can suggest a pause. It cannot tell us that he felt safe. People under pressure still eat, rest, and make practical decisions.",
+    "visual": "Medium profile of the adult traveller seated behind a windbreak rock eating a small piece of prepared food; slow push, no speech."
+  },
+  {
+    "id": 57,
+    "start": 560,
+    "end": 570,
+    "voice": "Here is the first version of our timeline: earlier movement through wooded environments, an injured right hand, a climb, and food eaten before the end.",
+    "visual": "Overhead arrangement of four separate unlabelled evidence cards with woodland, hand model, terrain and meal images; adult hand spaces them apart."
+  },
+  {
+    "id": 58,
+    "start": 570,
+    "end": 580,
+    "voice": "The order is meaningful, but the gaps are large. We do not yet know whether the meal came before the arrow wound, or how far he moved afterward.",
+    "visual": "Wide view of empty broken terrain between a sheltered rock and distant ridge; slow forward drift, no exact route shown."
+  },
+  {
+    "id": 59,
+    "start": 580,
+    "end": 590,
+    "voice": "To reduce that uncertainty, investigators turned to the shoulder. In two thousand and one, an arrowhead was identified in the body, transforming interpretations of his death.",
+    "visual": "Close view of replica arrowhead beside a generic shoulder skeleton on a dark bench; slow focus shift, not an authentic scan."
+  },
+  {
+    "id": 60,
+    "start": 590,
+    "end": 600,
+    "voice": "An entry wound lay on the upper left side of his back. The point had penetrated the shoulder region. This was clear evidence of an arrow injury.",
+    "visual": "Rear view of clothed adult anatomical mannequin with a small neutral marker over left upper back; slow orbit, no penetration or blood."
+  },
+  {
+    "id": 61,
+    "start": 600,
+    "end": 610,
+    "voice": "Later imaging linked the wound to damage near the left subclavian artery, a major blood vessel. The injury was serious; its consequences required closer interpretation.",
+    "visual": "Clean simplified anatomical illustration of adult left shoulder bones and subclavian vessel; slow rotation, no blood, labels added in editing."
+  },
+  {
+    "id": 62,
+    "start": 610,
+    "end": 620,
+    "voice": "For years, a familiar explanation followed: a shot from behind caused rapid fatal bleeding. It was compelling, and it gave the case a dramatic final scene.",
+    "visual": "Wide illustrative mountain scene with solitary adult traveller seen from behind, camera remains still; no shot, fall or asserted death sequence."
+  },
+  {
+    "id": 63,
+    "start": 620,
+    "end": 630,
+    "voice": "But a plausible mechanism is not the same as a measured survival time. New analyses have returned to the scans and asked what the tissues actually show.",
+    "visual": "Close view of adult radiologist adjusting generic image slices on a workstation, screens blurred beyond recognition; slow over-shoulder move."
+  },
+  {
+    "id": 64,
+    "start": 630,
+    "end": 640,
+    "voice": "A twenty twenty-five forensic study created three-dimensional models from earlier CT data. It examined the wound, surrounding structures, and a preserved collection of blood.",
+    "visual": "Adult specialist rotates a generic segmented shoulder model on a neutral monitor; fixed over-shoulder framing, actual study figures reserved for editorial insertion."
+  },
+  {
+    "id": 65,
+    "start": 640,
+    "end": 650,
+    "voice": "The authors estimated roughly one hundred and ten millilitres for that reconstructed collection. Crucially, this was not a direct measurement of all blood he ever lost.",
+    "visual": "Close view of a sealed transparent laboratory cylinder holding a small amount of neutral amber fluid; slow slider, editor adds qualified value and citation."
+  },
+  {
+    "id": 66,
+    "start": 650,
+    "end": 660,
+    "voice": "They cautioned that external bleeding could not be excluded. Drying and compression also complicate reconstruction. The result challenged certainty about immediate death without solving the entire case.",
+    "visual": "Macro of compressed dry sponge beside a larger hydrated reference sponge as an explicit physical analogy; slow push, no medical claim encoded as real data."
+  },
+  {
+    "id": 67,
+    "start": 660,
+    "end": 670,
+    "voice": "A separate clinical reassessment published later in twenty twenty-five considered how the wound channel would behave in a living shoulder, before the tissues shrank.",
+    "visual": "Close view of adult researcher flexing a layered transparent shoulder teaching model; slow arc, non-graphic mechanical demonstration."
+  },
+  {
+    "id": 68,
+    "start": 670,
+    "end": 680,
+    "voice": "It argued that movement of muscle could limit external bleeding and that survival for hours was possible. Exertion, altitude, and cold might then become important.",
+    "visual": "Medium rear view of the traveller moving slowly across a rocky incline beneath a cold sky; gentle tracking, no visible wound or explicit post-shot chronology."
+  },
+  {
+    "id": 69,
+    "start": 680,
+    "end": 690,
+    "voice": "These are research interpretations, not recovered footage. We should neither declare that he died instantly nor replace that certainty with a claim that he definitely walked for hours.",
+    "visual": "Wide view of two empty possible paths across alpine rocks; slow rising camera, no route highlighted as proven."
+  },
+  {
+    "id": 70,
+    "start": 690,
+    "end": 700,
+    "voice": "The distinction changes the geography of the story. If he survived and moved, the place where the body was found might not be where the arrow struck.",
+    "visual": "High wide view of several separated rock shelves surrounding an alpine saddle; slow lateral aerial reveals distance between them."
+  },
+  {
+    "id": 71,
+    "start": 700,
+    "end": 710,
+    "voice": "The arrow's direction also needs care. The position of a dried, compressed body is not automatically its posture when an injury occurred thousands of years earlier.",
+    "visual": "Clean adult skeletal shoulder model rotating from forward arm posture to relaxed arm posture; locked camera, simple teaching illustration."
+  },
+  {
+    "id": 72,
+    "start": 710,
+    "end": 720,
+    "voice": "Forensic modelling can reposition bones and test alignment. It can suggest compatible postures, but it cannot recover every movement, slope angle, or position of the shooter.",
+    "visual": "Adult modeller adjusts a neutral wooden adult mannequin beside a sloped terrain model; slow overhead arc, no shooter represented."
+  },
+  {
+    "id": 73,
+    "start": 720,
+    "end": 730,
+    "voice": "The attacker remains absent from the surviving evidence. A flint point has no signature that names its owner, and a direction of travel does not identify a motive.",
+    "visual": "Extreme macro of a replica flint point turning slowly against matte black background; no markings, text or hands."
+  },
+  {
+    "id": 74,
+    "start": 730,
+    "end": 740,
+    "voice": "Even the missing arrow shaft invites competing explanations. Removal, breakage, body movement, and later processes must be considered before assigning a deliberate act to someone.",
+    "visual": "Close view of an intact replica arrow shaft beside an unrelated broken wood sample on a neutral bench; slow focus pull, no reenacted removal."
+  },
+  {
+    "id": 75,
+    "start": 740,
+    "end": 750,
+    "voice": "A confident murder scene would be easy to film. A scientifically honest scene leaves room around the evidence, because the missing information is part of this case.",
+    "visual": "Wide stationary view of an empty alpine ledge framed by rocks; wind moves sparse grass, no assault performed."
+  },
+  {
+    "id": 76,
+    "start": 750,
+    "end": 760,
+    "voice": "What about a final blow to the head? Earlier studies discussed head trauma, raising the possibility of a fall or further violence after the arrow wound.",
+    "visual": "Close side view of a neutral adult skull teaching model on a padded bench; slow slider, no fracture added."
+  },
+  {
+    "id": 77,
+    "start": 760,
+    "end": 770,
+    "voice": "The later twenty twenty-five clinical paper questioned whether clear evidence established a traumatic brain injury during life. That disagreement belongs in any current reconstruction of the ending.",
+    "visual": "Medium view of two adult researchers independently comparing generic cranial models and notes; slow dolly, mouths closed, no staged argument."
+  },
+  {
+    "id": 78,
+    "start": 770,
+    "end": 780,
+    "voice": "We therefore cannot present a pursuer striking him as a confirmed event. Nor can we confidently choose a fall. Both would add actions the evidence does not settle.",
+    "visual": "Wide view of the traveller standing beside a stable rock outcrop, motion limited to breathing and fabric; slow pull back, no fall or pursuer."
+  },
+  {
+    "id": 79,
+    "start": 780,
+    "end": 790,
+    "voice": "The right hand deserves the same caution. A proposed bandage might help explain its preserved position, but the original wrapping and its application are not directly witnessed.",
+    "visual": "Close view of adult right-hand teaching model next to separate plant-fibre strip; slow arc, do not show an authenticated bandage."
+  },
+  {
+    "id": 80,
+    "start": 790,
+    "end": 800,
+    "voice": "A useful reconstruction separates three levels: the object or injury observed, the mechanism proposed, and the human story imagined around it. Those levels should remain visible.",
+    "visual": "Overhead view of three separate neutral trays holding replica point, shoulder model and blank story cards; slow lateral movement."
+  },
+  {
+    "id": 81,
+    "start": 800,
+    "end": 810,
+    "voice": "Let us test the popular escape story. A hand wound suggests earlier trouble. Incomplete equipment suggests practical limitations. The arrow provides direct evidence of violent injury.",
+    "visual": "Medium view of adult researcher arranging hand model, unfinished stave and flint point on three independent supports; locked camera."
+  },
+  {
+    "id": 82,
+    "start": 810,
+    "end": 820,
+    "voice": "Together, these clues make conflict a reasonable line of investigation. They do not reveal a continuous chase from a village to the mountain pass.",
+    "visual": "Wide reconstruction of a quiet Copper Age village path leading toward distant mountains, only adult figures doing daily work; slow pan."
+  },
+  {
+    "id": 83,
+    "start": 820,
+    "end": 830,
+    "voice": "The axe still lying nearby does not rule out every form of robbery. An attacker might leave quickly, overlook an object, or have another purpose altogether.",
+    "visual": "Close view of replica axe partly obscured by a hide bundle among rocks; slow tilt, no staged robber."
+  },
+  {
+    "id": 84,
+    "start": 830,
+    "end": 840,
+    "voice": "A full stomach does not rule out danger either. And an unfinished bow does not prove that he expected none. Everyday decisions rarely fit one tidy explanation.",
+    "visual": "Overhead close view of a food parcel beside an unstrung bow stave and closed quiver; slow drift, no new action invented."
+  },
+  {
+    "id": 85,
+    "start": 840,
+    "end": 850,
+    "voice": "The harder question is whether several independent clues support the same sequence, and whether another sequence could also fit them without inventing new evidence.",
+    "visual": "Adult analyst slides two alternative sequences of unlabelled evidence cards across a table; overhead fixed frame, both sequences visibly tentative."
+  },
+  {
+    "id": 86,
+    "start": 850,
+    "end": 860,
+    "voice": "One possibility places a rapid fatal attack near the final resting place. Another allows injury elsewhere followed by further movement. Current evidence does not give us a complete route.",
+    "visual": "Wide aerial of an empty pass and an adjacent descending slope in one continuous frame; slow rise, no route lines."
+  },
+  {
+    "id": 87,
+    "start": 860,
+    "end": 870,
+    "voice": "What survives is a bounded history: he travelled, ate, carried specialised equipment, suffered injuries, and died in the high Alps. The links are less certain than the points.",
+    "visual": "Slow close tracking across replica travel equipment laid beside a relief terrain model; soft neutral laboratory lighting."
+  },
+  {
+    "id": 88,
+    "start": 870,
+    "end": 880,
+    "voice": "That uncertainty does not make the science weak. It tells us where an observation ends, where a model begins, and which discoveries could still change the account.",
+    "visual": "Adult scientist carefully closes a sample box and places it beside a microscope; medium static frame, deliberate movement."
+  },
+  {
+    "id": 89,
+    "start": 880,
+    "end": 890,
+    "voice": "There is another complication. The mountain continued acting on the evidence long after the traveller died. Ice preserved him, but preservation need not mean perfect stillness.",
+    "visual": "Macro of meltwater flowing through clear ice beside dark rock; slow low slider, continuous natural water movement."
+  },
+  {
+    "id": 90,
+    "start": 890,
+    "end": 900,
+    "voice": "An influential early account imagined a protected hollow that kept the body safe beneath ice for millennia. Later work has re-examined that simple time-capsule picture.",
+    "visual": "Wide close landscape view of a shallow rock hollow with patchy snow and water; slow descending camera, no body."
+  },
+  {
+    "id": 91,
+    "start": 900,
+    "end": 910,
+    "voice": "A twenty twenty-two reappraisal argued that melting, exposure, refreezing, and movement could help explain the body's surroundings and the distribution of objects found nearby.",
+    "visual": "Illustrative tabletop rock-and-ice model with water flowing gently between shallow depressions; slow overhead move, explicitly a model."
+  },
+  {
+    "id": 92,
+    "start": 910,
+    "end": 920,
+    "voice": "That interpretation concerns what happened after death. It does not erase the arrow injury, but it warns against treating every object's final position as a frozen photograph of an attack.",
+    "visual": "Overhead neutral reconstruction of replica items spaced around a rocky model, no human remains; slow orbit, avoid exact forensic site layout."
+  },
+  {
+    "id": 93,
+    "start": 920,
+    "end": 930,
+    "voice": "A tool's position may reflect a traveller's action, later environmental movement, recovery, or several processes combined. Archaeology must investigate those alternatives rather than choose the most cinematic one.",
+    "visual": "Close view of adult archaeologist recording replica object locations on a training grid; slow side dolly, no authentic find coordinates."
+  },
+  {
+    "id": 94,
+    "start": 930,
+    "end": 940,
+    "voice": "This is why documentation matters. Early photographs, excavation records, material studies, and new imaging can answer different questions about the same small patch of mountain.",
+    "visual": "Close view of adult archivist placing facsimile blank-backed field photographs into sleeves; slow push, actual archival images added separately with permissions."
+  },
+  {
+    "id": 95,
+    "start": 940,
+    "end": 950,
+    "voice": "The site is not just a backdrop. It is part of the evidence, and part of the uncertainty, connecting the final journey with thousands of years of environmental change.",
+    "visual": "High wide view of weathered rock, meltwater and old snow in an alpine basin; slow forward aerial, no accelerated climate claim."
+  },
+  {
+    "id": 96,
+    "start": 950,
+    "end": 960,
+    "voice": "Now return to the living man. Reconstructions often give him thick flowing hair and a familiar rugged appearance. Even that image has needed revision as methods improved.",
+    "visual": "Rear medium view of the traveller removing his bearskin cap, revealing markedly thinning dark hair; slow lateral move, consistent adult face."
+  },
+  {
+    "id": 97,
+    "start": 960,
+    "end": 970,
+    "voice": "A higher-quality genome published in twenty twenty-three supported darker skin and a genetic tendency toward male-pattern baldness, along with strong ancestry related to early Anatolian farmers.",
+    "visual": "Close profile of the adult traveller with brown skin, brown eyes and sparse dark hair; soft daylight, slow push, interpretive portrait."
+  },
+  {
+    "id": 98,
+    "start": 970,
+    "end": 980,
+    "voice": "Genes do not deliver a complete portrait. They inform probabilities and ancestry, while hairstyle, expression, individual experience, and much of personal identity remain beyond their reach.",
+    "visual": "Adult laboratory worker places a tiny bone-sample container beside a generic DNA model; macro slider, no actual sampling of human remains."
+  },
+  {
+    "id": 99,
+    "start": 980,
+    "end": 990,
+    "voice": "He also carried evidence of an active, physically demanding life and health problems. Such findings add context, but no single diagnosis can stand in for his final experience.",
+    "visual": "Medium side view of the traveller carefully stepping over rough stones, slight deliberate pace without invented disability; slow tracking."
+  },
+  {
+    "id": 100,
+    "start": 990,
+    "end": 1000,
+    "voice": "His tattoos have inspired discussion about treatment and pain. Their presence is observable; their exact meaning and the intentions behind each mark are harder to recover.",
+    "visual": "Close view of simple dark linear markings on an adult lower-leg teaching replica beside cloth; slow focus pull, no tattooing procedure."
+  },
+  {
+    "id": 101,
+    "start": 1000,
+    "end": 1010,
+    "voice": "A copper axe does not make him a chief. A bow does not make him a full-time hunter. A mountain death does not make his whole life an escape.",
+    "visual": "Wide profile of adult traveller beside grazing goats at a settlement edge; slow dolly, illustrative everyday context without assigning occupation."
+  },
+  {
+    "id": 102,
+    "start": 1010,
+    "end": 1020,
+    "voice": "The more personal the evidence becomes, the more carefully we should resist giving him an invented biography. A person was larger than the objects that happened to survive.",
+    "visual": "Close view of the traveller's adult face, contemplative and silent, neutral expression; slow camera pull back to show surrounding landscape."
+  },
+  {
+    "id": 103,
+    "start": 1020,
+    "end": 1030,
+    "voice": "Imagine assembling the case on a table. The hand injury belongs before death. The stomach contents preserve food. The arrow point preserves an event of bodily harm.",
+    "visual": "Overhead evidence table showing hand teaching model, sealed food dish and flint replica on separate supports; slow drift."
+  },
+  {
+    "id": 104,
+    "start": 1030,
+    "end": 1040,
+    "voice": "Each item is concrete. The spaces between them contain the difficult questions: when, where, how quickly, and under what circumstances did one event follow another?",
+    "visual": "Close view of empty spaces separating three evidence supports; slow lateral move, adult hand hovers without drawing connections."
+  },
+  {
+    "id": 105,
+    "start": 1040,
+    "end": 1050,
+    "voice": "The pollen sequence may constrain an itinerary. Digestion may constrain a meal's timing. Wound analysis may constrain survival. None supplies an exact shared clock.",
+    "visual": "Adult researcher aligns three transparent unlabelled timing strips with deliberately overlapping intervals; overhead static camera."
+  },
+  {
+    "id": 106,
+    "start": 1050,
+    "end": 1060,
+    "voice": "A strong account looks for agreement across these methods. It also records their assumptions, because apparent precision can disappear when a model's starting conditions change.",
+    "visual": "Medium view of adult researcher adjusting one physical model while another remains fixed; slow over-shoulder move, no fabricated numerical display."
+  },
+  {
+    "id": 107,
+    "start": 1060,
+    "end": 1070,
+    "voice": "For example, a blood-volume estimate from a dried mummy requires reconstruction. The result matters, but its uncertainty must travel with the number whenever we explain it.",
+    "visual": "Macro of small transparent vessel beside compressed and expanded teaching models; slow focus shift, no new measurement claim."
+  },
+  {
+    "id": 108,
+    "start": 1070,
+    "end": 1080,
+    "voice": "And a landscape route inferred from plants relies on where those plants grew, how their traces entered the body, and how digestion moved them through it.",
+    "visual": "Low tracking shot beside a stream beneath woodland flowering branches with high mountains visible beyond; natural water and leaf movement."
+  },
+  {
+    "id": 109,
+    "start": 1080,
+    "end": 1090,
+    "voice": "This is not a contest between a dramatic story and no story. The evidence itself offers a powerful narrative: repeated attempts to ask better questions of the same material.",
+    "visual": "Medium view of adult researcher replacing an older generic magnifier with a microscope beside replica artefact; slow dolly, no discarded evidence."
+  },
+  {
+    "id": 110,
+    "start": 1090,
+    "end": 1100,
+    "voice": "In nineteen ninety-one, an ancient traveller emerged from the ice. A decade later, the arrowhead changed the case. New imaging keeps changing what investigators can test.",
+    "visual": "Close view of a replica flint point beside a modern scanner's exterior; slow arc, avoid chronological text generated in frame."
+  },
+  {
+    "id": 111,
+    "start": 1100,
+    "end": 1110,
+    "voice": "In twenty twenty-six, a museum-led project brought detailed surface documentation and internal CT information together in a digital twin, extending opportunities for study without repeatedly handling the mummy.",
+    "visual": "Adult imaging specialist photographs a covered adult-sized conservation support using polarised studio lights; slow pan, no assertion of actual project footage."
+  },
+  {
+    "id": 112,
+    "start": 1110,
+    "end": 1120,
+    "voice": "A digital twin is a research tool, not a resurrection. It can preserve dimensions and relationships while still leaving motive, memory, and final thoughts beyond measurement.",
+    "visual": "Generic layered adult anatomical digital model represented as a physical translucent sculpture; slow orbit, no authentic dataset implied."
+  },
+  {
+    "id": 113,
+    "start": 1120,
+    "end": 1130,
+    "voice": "Better documentation can reveal new relationships and monitor fragile material. It also lets future researchers revisit today's interpretations with techniques that do not yet exist.",
+    "visual": "Close view of adult conservator checking a stable replica hide fragment with a camera on a copy stand; slow slider, no exposed remains."
+  },
+  {
+    "id": 114,
+    "start": 1130,
+    "end": 1140,
+    "voice": "That makes the ending open in a specific way. We may learn more about his wounds or preservation, while some questions about the attacker may remain permanently unanswered.",
+    "visual": "Wide view of empty mountain trail disappearing behind a rock ridge; slow forward tracking stops before the bend."
+  },
+  {
+    "id": 115,
+    "start": 1140,
+    "end": 1150,
+    "voice": "We should not fill those gaps with a child's face, a grieving family, or a named enemy. None of those images is needed to understand the surviving evidence.",
+    "visual": "Wide shot of a solitary clearly adult traveller framed small beneath an immense alpine ridge; slow pull back, no other people."
+  },
+  {
+    "id": 116,
+    "start": 1150,
+    "end": 1160,
+    "voice": "What we can show is the material world around an adult life: stitched hides, grass inside shoes, sharpened stone, food carried uphill, and a carefully hafted axe.",
+    "visual": "Close tracking along replica hide seam, grass-filled shoe and hafted copper axe on a neutral mat; one continuous slow camera move."
+  },
+  {
+    "id": 117,
+    "start": 1160,
+    "end": 1170,
+    "voice": "These details are not decoration. They explain capability, effort, and vulnerability. They make the journey tangible without requiring us to pretend that we witnessed the final confrontation.",
+    "visual": "Low close view of the traveller's reconstructed hide shoes taking careful steps on uneven stone; steady tracking, no slipping or collapse."
+  },
+  {
+    "id": 118,
+    "start": 1170,
+    "end": 1180,
+    "voice": "So what happened in Ötzi's final hours? We can place food, movement, injury, and a high-mountain death within a limited sequence, supported by different kinds of evidence.",
+    "visual": "Wide rear view of the traveller pausing below a high saddle, slow rising camera reveals landscape rather than any attack."
+  },
+  {
+    "id": 119,
+    "start": 1180,
+    "end": 1190,
+    "voice": "We can say that an arrow entered from behind and seriously injured his left shoulder region. We cannot give a verified minute-by-minute account of what followed.",
+    "visual": "Clean simplified adult left-shoulder model with a stationary neutral wound-path rod; slow orbit, no moving projectile or blood."
+  },
+  {
+    "id": 120,
+    "start": 1190,
+    "end": 1200,
+    "voice": "We cannot name the person who fired it. We cannot establish every motive. And current debate cautions against treating either instant death or prolonged survival as settled fact.",
+    "visual": "Long stationary view of an empty ridge under moving clouds; no attacker, weapon or reenacted death."
+  },
+  {
+    "id": 121,
+    "start": 1200,
+    "end": 1210,
+    "voice": "The most responsible reconstruction therefore ends with a boundary. Here is the evidence. Here are the interpretations it supports. Beyond that, the mountain keeps its silence.",
+    "visual": "Adult researcher places a clear protective lid over a replica flint point; close static framing, gentle hand movement."
+  },
+  {
+    "id": 122,
+    "start": 1210,
+    "end": 1220,
+    "voice": "Return to that small stone point. It transformed an apparent mountain accident into a case of violence, but it did not transform uncertainty into complete knowledge.",
+    "visual": "Extreme macro returns to the same chipped replica point as scene one; slow reverse slider, matched lighting and orientation."
+  },
+  {
+    "id": 123,
+    "start": 1220,
+    "end": 1230,
+    "voice": "Ötzi's story is compelling because one human life left so many traces, and because each generation of researchers has had to reconsider what those traces can mean.",
+    "visual": "Medium view of adult conservator and adult scientist observing a closed conservation cabinet; slow pull back, silent respectful posture."
+  },
+  {
+    "id": 124,
+    "start": 1230,
+    "end": 1240,
+    "voice": "The last journey is unfinished in our understanding. That is where this investigation ends today: with a person, a mountain, and questions still worth asking.",
+    "visual": "Wide aerial slowly retreats from an empty alpine saddle in soft evening light; rock and patchy snow, no body or sunset fantasy."
+  },
+  {
+    "id": 125,
+    "start": 1240,
+    "end": 1242,
+    "voice": "The evidence remains.",
+    "visual": "Final wide mountain composition held steady with gently moving clouds; match scene124 geography and light, ten-second source clip with only first two seconds used."
+  }
+]

@@ -1,0 +1,230 @@
+{
+  "method": "Automated country-language drafts with explicit numeric years, assistant contextual/terminology checks; vi and mww rewritten separately. No independent native editorial or listening certification.",
+  "locales": [
+    {
+      "locale": "vi-VN",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": false,
+        "2001": false,
+        "2022": false,
+        "2023": false,
+        "2025": false,
+        "2026": false
+      },
+      "word_count": 4062,
+      "independent_native_review": false
+    },
+    {
+      "locale": "fi-FI",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": true,
+        "2001": true,
+        "2022": true,
+        "2023": true,
+        "2025": true,
+        "2026": true
+      },
+      "word_count": 2494,
+      "independent_native_review": false
+    },
+    {
+      "locale": "ja-JP",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": true,
+        "2001": true,
+        "2022": true,
+        "2023": true,
+        "2025": true,
+        "2026": true
+      },
+      "word_count": 56,
+      "independent_native_review": false
+    },
+    {
+      "locale": "sv-SE",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": true,
+        "2001": true,
+        "2022": true,
+        "2023": true,
+        "2025": true,
+        "2026": true
+      },
+      "word_count": 3049,
+      "independent_native_review": false
+    },
+    {
+      "locale": "ko-KR",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": true,
+        "2001": true,
+        "2022": true,
+        "2023": true,
+        "2025": true,
+        "2026": true
+      },
+      "word_count": 2538,
+      "independent_native_review": false
+    },
+    {
+      "locale": "it-IT",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": true,
+        "2001": true,
+        "2022": true,
+        "2023": true,
+        "2025": true,
+        "2026": true
+      },
+      "word_count": 3469,
+      "independent_native_review": false
+    },
+    {
+      "locale": "pt-PT",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": true,
+        "2001": true,
+        "2022": true,
+        "2023": true,
+        "2025": true,
+        "2026": true
+      },
+      "word_count": 3467,
+      "independent_native_review": false
+    },
+    {
+      "locale": "nl-NL",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": true,
+        "2001": true,
+        "2022": true,
+        "2023": true,
+        "2025": true,
+        "2026": true
+      },
+      "word_count": 3373,
+      "independent_native_review": false
+    },
+    {
+      "locale": "nb-NO",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": true,
+        "2001": true,
+        "2022": true,
+        "2023": true,
+        "2025": true,
+        "2026": true
+      },
+      "word_count": 3067,
+      "independent_native_review": false
+    },
+    {
+      "locale": "da-DK",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": true,
+        "2001": true,
+        "2022": true,
+        "2023": true,
+        "2025": true,
+        "2026": true
+      },
+      "word_count": 3115,
+      "independent_native_review": false
+    },
+    {
+      "locale": "pl-PL",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": true,
+        "2001": true,
+        "2022": true,
+        "2023": true,
+        "2025": true,
+        "2026": true
+      },
+      "word_count": 2887,
+      "independent_native_review": false
+    },
+    {
+      "locale": "cs-CZ",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": true,
+        "2001": true,
+        "2022": true,
+        "2023": true,
+        "2025": true,
+        "2026": true
+      },
+      "word_count": 2741,
+      "independent_native_review": false
+    },
+    {
+      "locale": "es-ES",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": true,
+        "2001": true,
+        "2022": true,
+        "2023": true,
+        "2025": true,
+        "2026": true
+      },
+      "word_count": 3601,
+      "independent_native_review": false
+    },
+    {
+      "locale": "fr-FR",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": true,
+        "2001": true,
+        "2022": true,
+        "2023": true,
+        "2025": true,
+        "2026": true
+      },
+      "word_count": 3802,
+      "independent_native_review": false
+    },
+    {
+      "locale": "de-DE",
+      "chapters": 13,
+      "nonempty": true,
+      "dates_in_numerals": {
+        "1991": true,
+        "2001": true,
+        "2022": true,
+        "2023": true,
+        "2025": true,
+        "2026": true
+      },
+      "word_count": 3344,
+      "independent_native_review": false
+    }
+  ]
+}

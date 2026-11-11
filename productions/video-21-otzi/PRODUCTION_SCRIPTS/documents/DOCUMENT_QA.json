@@ -1,0 +1,16 @@
+{
+  "topic_id": 21,
+  "target_seconds": 1242,
+  "main_scenes": 125,
+  "optional_replacements": 5,
+  "txt_files": 13,
+  "prompts_per_txt": 10,
+  "total_prompts": 130,
+  "main_source_clip_seconds": 1250,
+  "final_clip_use_seconds": 2,
+  "english_word_count": 3172,
+  "english_average_wpm": 153.23671497584542,
+  "visuals_generated": false,
+  "voice_status": "pending",
+  "subtitles": "planned scene cue boundaries; not word-level alignment"
+}
