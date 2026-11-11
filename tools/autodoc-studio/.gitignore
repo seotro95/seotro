@@ -7,6 +7,9 @@ test-inputs/
 test-output/
 test-models/
 windows test/
+local test/
+stage.json
+GITHUB_STATE.json
 *.log
 *.spec
 *_result.json

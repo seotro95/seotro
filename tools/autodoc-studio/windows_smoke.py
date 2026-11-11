@@ -57,7 +57,7 @@ assert tone(mixed)>tone(out)*2
 preview=scene_preview(p,1,ctx);assert Path(preview[0]).is_file() and Path(preview[1]).is_file()
 app(['--project',project_file,'--settings',work/'mix.json','--export-to',work/'Mixed export.mkv'],result)
 if exe:
-    gui=work/'gui.json';command([exe,'--gui-smoke','--project',project_file,'--gui-report',gui]);g=json.loads(gui.read_text());assert g['status']=='passed' and g['preview_loaded']
+    gui=work/'gui.json';command([exe,'--gui-smoke','--project',project_file,'--gui-report',gui]);g=json.loads(gui.read_text());assert g['status']=='passed' and g['preview_loaded'] and g['preview_frame_displayed']
 assert all(digest(clips/name)==h for name,h in before.items())
 qa={'status':'passed','version':'2.0.0','platform':'Windows x64' if exe else 'Linux','frozen_exe_tested':frozen,'real_clip_model_used':True,'srt_skips_asr_verified':True,'mixed_image_video_import':True,'source_files_unchanged':True,'logo_pixels_verified':True,'burn_subtitle_pixels_verified':True,'soft_subtitle_track_verified':True,'mute_and_keep_source_audio_verified':True,'source_tone_verified':True,'manual_scene_split_merge_verified':True,'export_24_and_30fps_verified':True,'mp4_and_mkv_verified':True,'embedded_preview_rendered':True,'frozen_gui_preview_tested':frozen,'scene_cache_reused':True,'shared_feature_cache_hits':metrics['shared_cache_hits'],'full_decode_passed':True,'voice_alignment':r['audio_alignment'],'video_seconds':r['video_seconds'],'test_seconds':round(time.monotonic()-t,2),'media_fixtures_not_included_in_release':True}
 (root/('WINDOWS_TEST_REPORT.json' if exe else 'LOCAL_TEST_REPORT.json')).write_text(json.dumps(qa,indent=2),encoding='utf-8');print(json.dumps(qa),flush=True)

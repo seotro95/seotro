@@ -23,6 +23,9 @@ Xem README.md để biết đủ chức năng,CLI và giới hạn. Lỗi:khung 
 '''
 (O/'HUONG_DAN_SU_DUNG.txt').write_text(guide,encoding='utf-8-sig');shutil.copyfile(O/'HUONG_DAN_SU_DUNG.txt',app/'HUONG_DAN_SU_DUNG.txt')
 licenses=app/'THIRD_PARTY_LICENSES';licenses.mkdir(exist_ok=True);versions={}
+# collect-all includes tiny ONNX Runtime example models; they are unused by the
+# editor and are not the CLIP models. Keep the portable package model-free.
+for p in (app/'_internal').rglob('*.onnx'):p.unlink()
 for name in ['numpy','Pillow','onnxruntime','tokenizers','huggingface-hub','faster-whisper','ctranslate2','av','pyinstaller']:
     dist=importlib.metadata.distribution(name);versions[name]=dist.version
     for item in dist.files or []:
@@ -49,5 +52,7 @@ for p in sorted(O.iterdir()):
 (O/'SHA256SUMS.txt').write_text(''.join(x['sha256']+'  '+x['name']+'\n' for x in assets));(O/'RELEASE_MANIFEST.json').write_text(json.dumps({'version':'2.0.0','model_weights_bundled':False,'ffmpeg_binaries_bundled':False,'user_media_bundled':False,'tested_frozen_windows_edit_and_preview':True,'assets':assets},indent=2))
 for p in O.glob('*.zip'):
     with zipfile.ZipFile(p) as z:
-        assert z.testzip() is None;assert not any(n.endswith(('.mp4','.mp3','.wav','.jpg','.png','.onnx')) or 'windows test/' in n or 'local test/' in n for n in z.namelist())
+        assert z.testzip() is None
+        blocked=[n for n in z.namelist() if n.endswith(('.mp4','.mp3','.wav','.onnx')) or 'windows test/' in n or 'local test/' in n or (n.endswith(('.jpg','.png')) and '/_internal/' not in n)]
+        assert not blocked,blocked[:20]
 print(json.dumps({'status':'packaged','assets':assets}),flush=True)

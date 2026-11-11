@@ -233,6 +233,10 @@ class App(tk.Tk):
         else:__import__('subprocess').Popen(['xdg-open',self.last_export])
     def close(self):
         if self.busy and not messagebox.askyesno('Đang xử lý','Dừng tác vụ và đóng tool? Cache đã xong sẽ được giữ.'):return
-        self.cancel.set();self.player.cleanup();save_json(self.preferences,{'output':self.output.get(),'last_project':self.p['project_file'] if self.p else ''});self.destroy()
+        self.cancel.set();self.player.cleanup();save_json(self.preferences,{'output':self.output.get(),'last_project':self.p['project_file'] if self.p else ''})
+        def finish():
+            if self.busy:self.after(150,finish)
+            else:self.destroy()
+        self.status.set('Đang dừng tiến trình trước khi đóng…');finish()
 
 def main():App().mainloop()

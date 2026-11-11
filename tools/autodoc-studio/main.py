@@ -25,9 +25,9 @@ def main():
                 app.accept_project(load(args.project))
             def finish():
                 ticks[0]+=1
-                if (app.busy or app.preview_pending) and ticks[0]<100:app.after(200,finish);return
-                payload={'status':'passed','widgets':len(app.winfo_children()),'project_loaded':bool(app.p),'preview_loaded':bool(app.player.path),'scene_count':len(app.p['plan']['shots']) if app.p else 0}
-                if args.project and not app.player.path:payload['status']='failed'
+                if (app.busy or app.preview_pending or (args.project and app.player._photo is None)) and ticks[0]<100:app.after(200,finish);return
+                payload={'status':'passed','widgets':len(app.winfo_children()),'project_loaded':bool(app.p),'preview_loaded':bool(app.player.path),'preview_frame_displayed':app.player._photo is not None,'scene_count':len(app.p['plan']['shots']) if app.p else 0}
+                if args.project and (not app.player.path or app.player._photo is None):payload['status']='failed'
                 if args.gui_report:Path(args.gui_report).write_text(json.dumps(payload),encoding='utf-8')
                 app.player.cleanup();app.destroy()
             app.after(1000,finish);app.mainloop();return

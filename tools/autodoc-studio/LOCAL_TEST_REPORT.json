@@ -14,6 +14,7 @@
   "source_tone_verified": true,
   "manual_scene_split_merge_verified": true,
   "export_24_and_30fps_verified": true,
+  "mp4_and_mkv_verified": true,
   "embedded_preview_rendered": true,
   "frozen_gui_preview_tested": false,
   "scene_cache_reused": true,
@@ -47,6 +48,6 @@
     }
   ],
   "video_seconds": 21.375,
-  "test_seconds": 15.3,
+  "test_seconds": 17.93,
   "media_fixtures_not_included_in_release": true
 }
