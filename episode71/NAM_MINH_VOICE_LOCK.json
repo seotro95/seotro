@@ -1,0 +1,13 @@
+{
+  "voice_id": "vi-VN-NamMinhNeural",
+  "display_name": "Nam Minh",
+  "locale": "vi-VN",
+  "gender": "Male",
+  "provider": "Microsoft Edge via pinned Melo-Viet-Studio1.3.1 online_backend",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "verified_against_current_catalogue": true,
+  "verification_date": "2026-11-12",
+  "applies_from_requested_topic": 71,
+  "replaces_for_future_vietnamese": "Adam",
+  "old_episode_audio_unchanged": true
+}

@@ -1,0 +1,23 @@
+name: Neanderthal fire71 publish script and130silent prompts
+on:
+  push:
+    branches: [codex/neanderthal-fire71-production-20261112]
+    paths: [.github/workflows/neanderthal-fire71-documents.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: episode71
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate136cues,130prompts and public document release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u episode71/publish_documents.py
