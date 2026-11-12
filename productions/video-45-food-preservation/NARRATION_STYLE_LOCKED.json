@@ -1,0 +1,12 @@
+{
+  "id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+  "english": "NativeAndrew0% groupedrequests; exactwordboundarycuecuts; atmosttwo1.2dBaccentspercue; pitchpreservingcuefit",
+  "other_online": "SavedmaleIDs; smallphrase/questionratevariations; boundedwordaccents; pitchpreservingchapterfit",
+  "vietnamese": "ActualnativeAdam preset inVieNeu3.8.3 throughMelo1.3.1worker, punctuation andsmallpauses,FP32ONNX, modelandpresethasheslocked",
+  "hmong": "Nativefemale3reference clear-v1,speed0.98–1.02,no pitchshift",
+  "output_loudness_target_lufs": -19,
+  "output_true_peak_target_db": -2,
+  "target_seconds": 1242,
+  "english_cues": 125,
+  "other_language_chapters": 13
+}

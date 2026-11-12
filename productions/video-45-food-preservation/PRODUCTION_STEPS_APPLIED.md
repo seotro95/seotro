@@ -13,3 +13,5 @@ Chủ đề được lấy từ catalogue GitHub: làm khô, hun khói, làm l�
 9. Phát hành từng tệp theo tên quốc gia, gói 17 MP3, tài liệu, manifest và báo cáo; tải lại liên kết công khai để kiểm độc lập. Lưu trạng thái và hồ sơ nhận diện cho tập sau; không tự bắt đầu tập khác.
 
 Khi có footage tập 45: dùng 10 cảnh liên quan trong 30 giây đầu nằm trong tổng thời lượng; chỉ voice Anh, tắt âm thanh clip. Cảnh thiếu dùng video chuyển động có liên quan; không thay bằng ảnh có chữ. Chưa có MP4 hoàn chỉnh ở giai đoạn tài liệu và voice này.
+
+Kết quả tập 45: đã tải lại ZIP công khai, kiểm hash và ZIP CRC, kiểm 17 link MP3 riêng trả HTTP 200 và giải mã đủ 59.616.000 mẫu cho từng giọng. SHA256 gói voice: 41ace61b46cc6b74c24a2b91aaefc2678558d3a1ea11d68c1428a45b68bdde75. Báo cáo PUBLIC_DOWNLOAD_QA.json ghi từng giọng; chưa có MP4 hoặc kiểm nghe bản ngữ độc lập.

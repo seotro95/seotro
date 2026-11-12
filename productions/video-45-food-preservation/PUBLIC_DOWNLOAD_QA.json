@@ -1,0 +1,152 @@
+{
+  "status": "passed",
+  "topic_id": 45,
+  "public_voice_archive_sha256": "41ace61b46cc6b74c24a2b91aaefc2678558d3a1ea11d68c1428a45b68bdde75",
+  "voice_count": 17,
+  "target_seconds": 1242,
+  "decoded_frames_per_voice_48000": 59616000,
+  "all_country_asset_digests_match": true,
+  "episode45_locked_voice_ids_match": true,
+  "vietnamese_native_preset": "Adam",
+  "zip_crc_passed": true,
+  "voices": [
+    {
+      "locale": "en-US",
+      "filename": "FOOD_PRESERVATION_45_My_Tieng_Anh.mp3",
+      "sha256": "192b8faf70d1a37aa8bc7a48ab614cdb114d75fe86bd6967e325fdfeaae7b2f0",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "vi-VN",
+      "filename": "FOOD_PRESERVATION_45_Viet_Nam_Adam.mp3",
+      "sha256": "7a89b1c5f168e77edb980e194f72bb1bba9d7b877b98fca0eeca2f428416ff52",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "es-ES",
+      "filename": "FOOD_PRESERVATION_45_Tay_Ban_Nha.mp3",
+      "sha256": "03199bf713c39bc623a9a3826eef8b7cacf294a19c5e7c3207055fe450135ee6",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "fr-FR",
+      "filename": "FOOD_PRESERVATION_45_Phap.mp3",
+      "sha256": "cf28caa12b90f1f8ebdfeff67478d38ef5db69c506103e5d3a9bdb6c9496cf08",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "ja-JP",
+      "filename": "FOOD_PRESERVATION_45_Nhat_Ban.mp3",
+      "sha256": "b726dc736f4f523a64d1380ff9880ee2827a2a182ceb2ec849ff3369223e5a15",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "ko-KR",
+      "filename": "FOOD_PRESERVATION_45_Han_Quoc.mp3",
+      "sha256": "6d733b301922f3fca1c47b6adfaf4ce313677102783e0cb46653c192717b05dd",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "de-DE",
+      "filename": "FOOD_PRESERVATION_45_Duc.mp3",
+      "sha256": "ed40ef15eeb153fa6167a023bf6a716112f356ec821dd320f17ff99906264a80",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "it-IT",
+      "filename": "FOOD_PRESERVATION_45_Y.mp3",
+      "sha256": "f5be377bde01a285ea8a596c617d202e8d333c723f33cd420fc73ca9486778ae",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "pt-PT",
+      "filename": "FOOD_PRESERVATION_45_Bo_Dao_Nha.mp3",
+      "sha256": "cfdd5ef9f8ca156a25da5137d70c38cf573692aae00d6a19f78f7ee8670cde8c",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "nl-NL",
+      "filename": "FOOD_PRESERVATION_45_Ha_Lan.mp3",
+      "sha256": "463a5950a0de99a91411ea0f89314d039a1f4abf603067185ceec60f655cd0a3",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "pl-PL",
+      "filename": "FOOD_PRESERVATION_45_Ba_Lan.mp3",
+      "sha256": "7d21be50e473436fa3ae33bd7f48325fa4dbd040c3ec689b267f12d2c4f63747",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "sv-SE",
+      "filename": "FOOD_PRESERVATION_45_Thuy_Dien.mp3",
+      "sha256": "7869ca3f77f7f9c5b59a390d2bc79d0f022e6cf2fd17fc8db972d202f8785e19",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "da-DK",
+      "filename": "FOOD_PRESERVATION_45_Dan_Mach.mp3",
+      "sha256": "6de520abd30c85cf6660e67d9e609eef307eb808692c154ccef7c007dd7d5ce6",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "fi-FI",
+      "filename": "FOOD_PRESERVATION_45_Phan_Lan.mp3",
+      "sha256": "ea0d998957d2549cd9435f74f49a0cad16dfce13ab6ea944622429bab4287518",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "nb-NO",
+      "filename": "FOOD_PRESERVATION_45_Na_Uy.mp3",
+      "sha256": "8e2bec1fdbc67bf0f4c7b1481d6013980b191e657be5ad68419d828cf3b68f4e",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "cs-CZ",
+      "filename": "FOOD_PRESERVATION_45_Sec.mp3",
+      "sha256": "c022fc30d8aa2b092b3a9270ff9e26d442052b6b54d158ca3b8b3d8a37144131",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "mww",
+      "filename": "FOOD_PRESERVATION_45_Hmong_Trang_Nu.mp3",
+      "sha256": "7e94052ed156c3e89373599f76c1bde47283be5901ed5fd56bf9d090c8bc4a85",
+      "decoded_frames_48000": 59616000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    }
+  ],
+  "independent_native_listening_review": false,
+  "white_hmong_dialect_independently_verified": false
+}

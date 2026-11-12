@@ -1,0 +1,162 @@
+{
+  "status": "passed",
+  "topic_id": 45,
+  "voices": 17,
+  "male_voices": 16,
+  "female_voice": "hmong-female-3",
+  "native_voices": 2,
+  "online_voices": 15,
+  "vietnamese_voice_id": "Adam",
+  "all_decoded_seconds": 1242,
+  "all_decoded_frames_48000": 59616000,
+  "all_ids_match_episode45_profile": true,
+  "other16saved_voice_ids_retained": true,
+  "native_hmong_reference_matches": true,
+  "native_adam_preset_matches": true,
+  "unique_audio_hashes": 17,
+  "pitch_shift_applied": false,
+  "english_cue_count": 125,
+  "other_language_chapter_count": 13,
+  "online_word_metadata_checked": true,
+  "english_word_boundary_cue_split_checked": true,
+  "independent_native_listening_review": false,
+  "white_hmong_dialect_independently_verified": false,
+  "reports": {
+    "fr-FR": {
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "FOOD_PRESERVATION_45_Phap.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.0382211538461539,
+      "max_tempo": 1.1454326923076923,
+      "word_accents": 56
+    },
+    "fi-FI": {
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "FOOD_PRESERVATION_45_Phan_Lan.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.1036057692307693,
+      "max_tempo": 1.2625,
+      "word_accents": 53
+    },
+    "mww": {
+      "voice_id": "hmong-female-3",
+      "filename": "FOOD_PRESERVATION_45_Hmong_Trang_Nu.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.0219599275507478,
+      "max_tempo": 1.1911528043339707,
+      "word_accents": 0
+    },
+    "sv-SE": {
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "FOOD_PRESERVATION_45_Thuy_Dien.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.1959134615384615,
+      "max_tempo": 1.3795673076923076,
+      "word_accents": 65
+    },
+    "nl-NL": {
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "FOOD_PRESERVATION_45_Ha_Lan.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.0670673076923076,
+      "max_tempo": 1.230048076923077,
+      "word_accents": 66
+    },
+    "pl-PL": {
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "FOOD_PRESERVATION_45_Ba_Lan.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.0228365384615385,
+      "max_tempo": 1.1798076923076923,
+      "word_accents": 31
+    },
+    "es-ES": {
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "FOOD_PRESERVATION_45_Tay_Ban_Nha.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.121875,
+      "max_tempo": 1.3076923076923077,
+      "word_accents": 62
+    },
+    "de-DE": {
+      "voice_id": "de-DE-ConradNeural",
+      "filename": "FOOD_PRESERVATION_45_Duc.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.1723557692307691,
+      "max_tempo": 1.3439903846153844,
+      "word_accents": 27
+    },
+    "nb-NO": {
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "FOOD_PRESERVATION_45_Na_Uy.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.990625,
+      "max_tempo": 1.1298076923076923,
+      "word_accents": 62
+    },
+    "ja-JP": {
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "FOOD_PRESERVATION_45_Nhat_Ban.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.2108986615678776,
+      "max_tempo": 1.3901442307692307,
+      "word_accents": 38
+    },
+    "ko-KR": {
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "FOOD_PRESERVATION_45_Han_Quoc.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.220673076923077,
+      "max_tempo": 1.3298076923076922,
+      "word_accents": 43
+    },
+    "en-US": {
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "FOOD_PRESERVATION_45_My_Tieng_Anh.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.7513973577235772,
+      "max_tempo": 1.2367123983739838,
+      "word_accents": 85
+    },
+    "it-IT": {
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "FOOD_PRESERVATION_45_Y.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.1882211538461538,
+      "max_tempo": 1.3865384615384613,
+      "word_accents": 60
+    },
+    "da-DK": {
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "FOOD_PRESERVATION_45_Dan_Mach.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 1.022753346080306,
+      "max_tempo": 1.161778846153846,
+      "word_accents": 56
+    },
+    "vi-VN": {
+      "voice_id": "Adam",
+      "filename": "FOOD_PRESERVATION_45_Viet_Nam_Adam.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.7662259615384616,
+      "max_tempo": 0.9071514423076922,
+      "word_accents": 0
+    },
+    "pt-PT": {
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "FOOD_PRESERVATION_45_Bo_Dao_Nha.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.9659655831739961,
+      "max_tempo": 1.1069711538461537,
+      "word_accents": 61
+    },
+    "cs-CZ": {
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "FOOD_PRESERVATION_45_Sec.mp3",
+      "decoded_seconds": 1242.0,
+      "min_tempo": 0.9790865384615384,
+      "max_tempo": 1.1264423076923076,
+      "word_accents": 44
+    }
+  }
+}

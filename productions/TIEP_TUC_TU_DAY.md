@@ -1,9 +1,29 @@
 <!-- active-production -->
-# Chủ đề 45 — đã có tài liệu, đang tạo 17 voice — 20:42
+# Chủ đề 45 — đã có tài liệu và đủ 17 voice 20:42
 
-[Tải kịch bản và 11 TXT prompt](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_TAI_LIEU_20m42s.zip). Có 125 mốc Anh, 110 prompt mới và 15 mốc dùng lại; mọi prompt không có trẻ em, lời nói hoặc âm thanh. Bản Việt dùng đúng preset Adam native, nam miền Nam; 16 nhận diện khác giữ nguyên. [Theo dõi tạo 17 voice](https://github.com/seotro95/seotro/actions/runs/43183842762). Chỉ phát hành voice sau khi giải mã kiểm đủ 59.616.000 mẫu ở 48 kHz cho từng tệp. Chưa có footage hoặc MP4 tập45.
+[Tải đủ 17 giọng ZIP](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_17_VOICES_20m42s.zip) · [Tài liệu và 11 TXT prompt](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_TAI_LIEU_20m42s.zip) · [5 tiêu đề và 5 prompt thumbnail](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/5_TIEU_DE_VA_THUMBNAIL.txt)
 
-Mã nguồn và hồ sơ nằm ở nhánh codex/food-preservation45-production-20261112, thư mục episode45. Không tạo lại phần đã thành công; không tự khởi chạy chủ đề khác. Chủ đề38 đã có đủ 17 voice công khai. Đọc SERIES_STATE.json trước khi tiếp tục.
+- [Anh (Mỹ)](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_My_Tieng_Anh.mp3) — 20:42
+- [Việt Nam — Adam](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Viet_Nam_Adam.mp3) — 20:42
+- [Tây Ban Nha](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Tay_Ban_Nha.mp3) — 20:42
+- [Pháp](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Phap.mp3) — 20:42
+- [Nhật Bản](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Nhat_Ban.mp3) — 20:42
+- [Hàn Quốc](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Han_Quoc.mp3) — 20:42
+- [Đức](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Duc.mp3) — 20:42
+- [Ý](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Y.mp3) — 20:42
+- [Bồ Đào Nha](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Bo_Dao_Nha.mp3) — 20:42
+- [Hà Lan](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Ha_Lan.mp3) — 20:42
+- [Ba Lan](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Ba_Lan.mp3) — 20:42
+- [Thụy Điển](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Thuy_Dien.mp3) — 20:42
+- [Đan Mạch](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Dan_Mach.mp3) — 20:42
+- [Phần Lan](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Phan_Lan.mp3) — 20:42
+- [Na Uy (Bokmål)](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Na_Uy.mp3) — 20:42
+- [Séc](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Sec.mp3) — 20:42
+- [H'mông Trắng (nữ)](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_Hmong_Trang_Nu.mp3) — 20:42
+
+Bản Việt dùng Adam thật; H’mông dùng female-3. Kỹ thuật giải mã, hash và thời lượng đã kiểm; biên tập/nghe bản ngữ và xác minh phương ngữ H’mông Trắng chưa được thực hiện độc lập.
+
+Chưa có footage hoặc MP4 tập 45. Khi có clip: chỉ voice Anh, bỏ toàn bộ tiếng clip,10 cảnh liên quan trong 30 giây đầu nằm trong 20:42. Cảnh thiếu dùng video chuyển động liên quan, không ảnh tĩnh/thẻ chữ. Giữ Adam cho bản Việt các tập sau và 16 nhận diện khác. Không tạo lại voice đã xong hoặc tự bắt đầu tập khác. Hồ sơ: productions/video-45-food-preservation; mã nguồn: nhánh codex/food-preservation45-production-20261112, thư mục episode45.
 <!-- /active-production -->
 
 ---
@@ -152,6 +172,7 @@ Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ 
 ## Bàn giao video chủ đề4
 
 Đã dựng và xuất bản23:00, chỉ voiceAnh gốc có nhấn nhá.133upload/115clipkhácnhau/18bảntrùng; chọn cảnh người trưởng thành, bỏ mọi tiếngclip và cảnh không phù hợp.12shot trong30giây đầu; các chương theo ranh120/110s. [Video](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Tập5 vẫn chưa bắt đầu.
+
 
 
 
