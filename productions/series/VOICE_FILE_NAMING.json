@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "naming_profile_id": "country-filenames-vi-v2-adam",
+  "naming_profile_id": "country-filenames-vi-v3-nam-minh",
   "filename_template": "{topic_prefix}_{delivery_slug}.mp3",
   "country_names_language": "Vietnamese",
   "filename_characters": "ASCII Vietnamese transliteration for Windows and URL compatibility",
@@ -18,8 +18,8 @@
       "locale": "vi-VN",
       "country_vi": "Việt Nam",
       "language_vi": "Tiếng Việt",
-      "display_name": "Việt Nam — Adam",
-      "delivery_slug": "Viet_Nam_Adam"
+      "display_name": "Việt Nam — Nam Minh",
+      "delivery_slug": "Viet_Nam_Nam_Minh"
     },
     {
       "locale": "es-ES",
@@ -127,5 +127,5 @@
       "delivery_slug": "Hmong_Trang_Nu"
     }
   ],
-  "revision_note": "Vietnamese changes to native Adam from requested topic45; prior episode filenames stay unchanged."
+  "revision_note": "Explicit new request from topic71: Vietnamese changes to actual male Nam Minh. All prior audio and filenames remain unchanged."
 }

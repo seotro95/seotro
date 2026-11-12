@@ -1,0 +1,8 @@
+﻿6 MỐC DÙNG LẠI — KHÔNG TẠO LẠI CLIP
+
+Mốc 011 00:01:40,000–00:01:50,000: dùng clip 001.mp4, bối cảnh của mốc 001; lấy 10 giây.
+Mốc 033 00:05:20,000–00:05:30,000: dùng clip 012.mp4, bối cảnh của mốc 013; lấy 10 giây.
+Mốc 055 00:09:00,000–00:09:10,000: dùng clip 002.mp4, bối cảnh của mốc 002; lấy 10 giây.
+Mốc 077 00:12:40,000–00:12:50,000: dùng clip 008.mp4, bối cảnh của mốc 008; lấy 10 giây.
+Mốc 110 00:18:10,000–00:18:20,000: dùng clip 004.mp4, bối cảnh của mốc 004; lấy 10 giây.
+Mốc 136 00:22:30,000–00:22:38,000: dùng clip 001.mp4, bối cảnh của mốc 001; lấy 8 giây.

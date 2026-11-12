@@ -1,8 +1,8 @@
 {
-  "style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
-  "applies_to": "Topic45 and later unless explicitly changed",
+  "style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+  "applies_to": "Requested topic71 and subsequent new episodes unless explicitly changed",
   "user_request": "Tất cả voice đọc có nhấn nhá",
-  "identity": "Native Vietnamese Adam from topic45; the other16 saved voice identities and Hmong female-3 reference retained",
+  "identity": "Actual male vi-VN-NamMinhNeural from topic71; other16 saved identities and native Hmong female-3 reference retained",
   "delivery": "Friendly documentary narration, clear questions, measured evidence, warmer reflective ending",
   "online": {
     "pitch": "+0Hz",
@@ -33,7 +33,7 @@
     ],
     "method": "Same native VITS and OpenVoice reference; phrase-level controls, no invented word alignment or emotion model"
   },
-  "timing": "Use the latest explicit episode duration. Topic58:1362seconds, English137cues and other languages13shared chapters. No cross-language word-alignment claim.",
+  "timing": "Use latest explicit episode duration. Topic71:1358seconds, English136cues and other languages13shared chapters. No cross-language word-alignment claim.",
   "limits": "Controls depend on each engine. Naturalness,names,native language and WhiteHmong dialect need independent listening review. Prior completed topics are preserved.",
   "english": {
     "request_group_max_cues": 3,
@@ -45,10 +45,12 @@
     "pitch_shift": false
   },
   "vietnamese": {
-    "voice_id": "Adam",
-    "region": "Southern Vietnam",
-    "engine": "Melo1.3.1worker / VieNeu3.8.3 native ONNX FP32",
-    "preset_sha256": "bd7946906704514d47b228b9dbfc76c5538276b3cf6661cb308f8687906849f6",
-    "method": "Native punctuation, small phrase pauses and pitch-preserving chapter fit"
+    "voice_id": "vi-VN-NamMinhNeural",
+    "gender": "Male",
+    "locale": "vi-VN",
+    "engine": "Melo1.3.1 online_backend / Microsoft Edge",
+    "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+    "method": "Native phrase/question pacing, bounded word accents and pitch-preserving chapter fit",
+    "catalogue_and_audio_preflight_run_id": 43237046060
   }
 }

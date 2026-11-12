@@ -1,0 +1,72 @@
+[
+  {
+    "start": 0,
+    "end": 3,
+    "source_cue": 1,
+    "prompt_id": 1,
+    "note": "Planned only; choose actual footage to match first30seconds of English narration. No attack or hunt reenactment."
+  },
+  {
+    "start": 3,
+    "end": 6,
+    "source_cue": 2,
+    "prompt_id": 2,
+    "note": "Planned only; choose actual footage to match first30seconds of English narration. No attack or hunt reenactment."
+  },
+  {
+    "start": 6,
+    "end": 9,
+    "source_cue": 4,
+    "prompt_id": 4,
+    "note": "Planned only; choose actual footage to match first30seconds of English narration. No attack or hunt reenactment."
+  },
+  {
+    "start": 9,
+    "end": 12,
+    "source_cue": 5,
+    "prompt_id": 5,
+    "note": "Planned only; choose actual footage to match first30seconds of English narration. No attack or hunt reenactment."
+  },
+  {
+    "start": 12,
+    "end": 14,
+    "source_cue": 6,
+    "prompt_id": 6,
+    "note": "Planned only; choose actual footage to match first30seconds of English narration. No attack or hunt reenactment."
+  },
+  {
+    "start": 14,
+    "end": 17,
+    "source_cue": 8,
+    "prompt_id": 8,
+    "note": "Planned only; choose actual footage to match first30seconds of English narration. No attack or hunt reenactment."
+  },
+  {
+    "start": 17,
+    "end": 20,
+    "source_cue": 13,
+    "prompt_id": 12,
+    "note": "Planned only; choose actual footage to match first30seconds of English narration. No attack or hunt reenactment."
+  },
+  {
+    "start": 20,
+    "end": 23,
+    "source_cue": 26,
+    "prompt_id": 25,
+    "note": "Planned only; choose actual footage to match first30seconds of English narration. No attack or hunt reenactment."
+  },
+  {
+    "start": 23,
+    "end": 26,
+    "source_cue": 44,
+    "prompt_id": 42,
+    "note": "Planned only; choose actual footage to match first30seconds of English narration. No attack or hunt reenactment."
+  },
+  {
+    "start": 26,
+    "end": 30,
+    "source_cue": 7,
+    "prompt_id": 7,
+    "note": "Planned only; choose actual footage to match first30seconds of English narration. No attack or hunt reenactment."
+  }
+]
