@@ -4,6 +4,6 @@
 
 Kịch bảnAnh3205từ;128mốc hình=127×10giây+2giây.120prompt mới,12TXT×10, số1–120;8mốc dùng lại được chỉ rõ trongtimeline. Mỗi prompt ghi không tiếng,không lời,không hình trẻ em. Có góc máy/chuyển động và bối cảnh bám lời. Kèm phương án10shot trong30giây mở đầu và5tiêu đề/5promptthumbnail. Chưa tạo footage hoặc dựngMP4.
 
-VoiceAnh chia128mốc;16bản địa hóa chia13chương,12×100+72giây. Đồng bộ chương/tổng thời lượng không bảo đảm từng câu khớp từngclip10giây giữa các ngôn ngữ.16giọng nam,trừH’môngTrắng nữfemale-3. Việt Nam đổi sangAdam theo yêu cầu;16định danh khác giữ bộ đã lưu. Các voice đang được tạo và kiểm tra, link sẽ bổ sung khi hoàn tất.
+VoiceAnh chia128mốc;16bản địa hóa chia13chương,12×100+72giây. Đồng bộ chương/tổng thời lượng không bảo đảm từng câu khớp từngclip10giây giữa các ngôn ngữ.16giọng nam,trừH’môngTrắng nữfemale-3. Việt Nam đổi sangAdam theo yêu cầu;16định danh khác giữ bộ đã lưu. 17voice được tải riêng ở phần liên kết trên trangrelease khi hoàn tất kiểm tra.
 
-Bản dịch được kiểm thuật ngữ/bối cảnh; cần duyệt nghe độc lập bằng người bản ngữ trước phát hành, đặc biệt phương ngữH’mông. SRTdịch là mốc chương, cần chia câu nếu dùng hiển thị phụ đề.
+Lời Việt và Nhật được biên tập lại; lời H’mông chuyển thể theo ngữ cảnh; các bản khác dựa trên dịch tự động có sửa thuật ngữ/bối cảnh. cần duyệt nghe độc lập bằng người bản ngữ trước phát hành, đặc biệt phương ngữH’mông. SRTdịch là mốc chương, cần chia câu nếu dùng hiển thị phụ đề.

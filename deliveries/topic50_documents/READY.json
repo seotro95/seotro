@@ -1,5 +1,5 @@
 {
-  "transport_revision": 2,
+  "transport_revision": 3,
   "topic": 50,
   "target_seconds": 1272,
   "expected_samples_48000": 61056000,
@@ -10,9 +10,24 @@
       "sha256": "fe32697141329280522c6fdff83f72090cd8e3c16eb71593961208773784a96c"
     },
     {
+      "path": "documents/ADAM_ENGINE_LOCK.json",
+      "bytes": 5228,
+      "sha256": "c8ac7fe17a35c19e3f0315efb4fa70ef8b308737df5634bb64ba1d996245c4b7"
+    },
+    {
       "path": "documents/ADAM_PRESET_LOCKED.json",
       "bytes": 4429,
       "sha256": "bd7946906704514d47b228b9dbfc76c5538276b3cf6661cb308f8687906849f6"
+    },
+    {
+      "path": "documents/AUDIO_MANIFEST.json",
+      "bytes": 6954,
+      "sha256": "6635ddc5c643904f53969b93fc560b7beb448428432917d9eba79f9449abb5e0"
+    },
+    {
+      "path": "documents/AUDIO_SIGNAL_CHECK.json",
+      "bytes": 7006,
+      "sha256": "20ce5791e390f6a734fcec836340ace4a15907084854fb953e8dc038f80cc199"
     },
     {
       "path": "documents/CANH_DUNG_LAI.txt",
@@ -50,9 +65,19 @@
       "sha256": "d45c623ecf0ac773b3a811d5bea1d370c7d859e354a8ab6fb30aaa6172193a0d"
     },
     {
+      "path": "documents/NARRATION_DELIVERY_PROFILE.json",
+      "bytes": 10796,
+      "sha256": "9cbabe1cd13b8ee29778bd83fa232ec3ad22b62a32e53db6be96f15b73392a2f"
+    },
+    {
       "path": "documents/NARRATION_STYLE_LOCKED.json",
       "bytes": 1592,
       "sha256": "e8112fba8b4d18abacc3727659fe10cb603e94ac6d1d7d1f99de6b7d38fc2a28"
+    },
+    {
+      "path": "documents/NATIVE_ENGINE_INPUT_PROVENANCE.json",
+      "bytes": 382,
+      "sha256": "1dc6e139f3f10c9556d0545bcd6e8fda86337ab2e0f563bff2bcce0ceb4137d7"
     },
     {
       "path": "documents/NGUON_KIEM_CHUNG.md",
@@ -126,13 +151,13 @@
     },
     {
       "path": "documents/PROVIDER_TEXT_METADATA_AUDIT.json",
-      "bytes": 5998,
-      "sha256": "cccdb3047925ba141a72a95af0e22041eb28de4a9eb79f6cd1bb2fda6955786a"
+      "bytes": 69358,
+      "sha256": "36424d8e7bc68c1b0af1a118d777381befc31a5d49d128ed04a43aed347b4fe6"
     },
     {
       "path": "documents/README.md",
-      "bytes": 1345,
-      "sha256": "9aeff495f7e936ad7e90a0d3834c765aa11592ccbfb226c1f813f21f0d89fbb3"
+      "bytes": 1492,
+      "sha256": "85d53bdff154ff55a09b287dfbe6155bb75df35b54b718e8c0e97dcf4c447e4b"
     },
     {
       "path": "documents/TIMELINE_128_CANH.csv",
@@ -141,8 +166,8 @@
     },
     {
       "path": "documents/TRANSLATION_REVIEW.json",
-      "bytes": 1171,
-      "sha256": "d2ea2e0941c544ae7caab641539674a89bfd9a58a660d660cffa39103ee44bdd"
+      "bytes": 1358,
+      "sha256": "daf0c1dbc6e739620e89e5f3e87099492f695e8d4bf57b5c0628395fda6bbb84"
     },
     {
       "path": "documents/VOICE_FILE_NAMING.json",
@@ -151,8 +176,8 @@
     },
     {
       "path": "documents/VOICE_PROFILES_LOCKED.json",
-      "bytes": 13309,
-      "sha256": "5b75c9b5edf5ee77d6a653f04af1b6e387a958dd1d0d51e28b1c966440a7e7b6"
+      "bytes": 13788,
+      "sha256": "dc87c0db454fe85b2146384c42bc07da6a2b3d5f1ab22619fd6cd98c984bb17d"
     },
     {
       "path": "documents/VOICE_SCRIPTS/cs-CZ.txt",
@@ -201,8 +226,8 @@
     },
     {
       "path": "documents/VOICE_SCRIPTS/ko-KR.txt",
-      "bytes": 27091,
-      "sha256": "92643fdf2675b1a4d360ddc252756a81770533aa76c7e7fb5da042fd2ca6835b"
+      "bytes": 26578,
+      "sha256": "401bce5b99463d98b7cedab75659126e2f5b1055ec1ddaa703af7d915826e3b5"
     },
     {
       "path": "documents/VOICE_SCRIPTS/mww.txt",

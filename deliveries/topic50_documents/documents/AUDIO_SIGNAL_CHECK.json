@@ -1,0 +1,172 @@
+[
+  {
+    "locale": "cs-CZ",
+    "filename": "MAMMOTH_STEPPE_50_Sec.mp3",
+    "sha256": "017232afc0c5c7268c2cca86277bf45fc76f2ee5b0f73e1a8b1a1630aad472a8",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09534334993944747,
+    "peak": 0.5736759901046753,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "MAMMOTH_STEPPE_50_Dan_Mach.mp3",
+    "sha256": "aea58a2b1fb1f5432f32c0bdc5b6ae2a3aaca40218d4f18b80f3a96e65fcab6d",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09225669175141203,
+    "peak": 0.5031250715255737,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "MAMMOTH_STEPPE_50_Duc.mp3",
+    "sha256": "5e1c6b74067975d38a43fc287c19ebd5737ea604796e23215f489a665d8270a8",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08033669044241776,
+    "peak": 0.5875942707061768,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "en-US",
+    "filename": "MAMMOTH_STEPPE_50_My_Tieng_Anh.mp3",
+    "sha256": "08030a7dd88f4b2c1065125310cf7931cd74b73e7216025cbee2b208ff738503",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.102537833630345,
+    "peak": 0.5490946769714355,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "MAMMOTH_STEPPE_50_Tay_Ban_Nha.mp3",
+    "sha256": "b629f57ee79339ce4842662add0caef8df3577c77429174bc823797ef50fa6a1",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08667459737432479,
+    "peak": 0.502116322517395,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "MAMMOTH_STEPPE_50_Phan_Lan.mp3",
+    "sha256": "06c36cfee064d68a7252d599f4f69a1836ac1f1ceb11bfa0794f78943fc0874f",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.057120244205729705,
+    "peak": 0.4366395175457001,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "MAMMOTH_STEPPE_50_Phap.mp3",
+    "sha256": "91f2cfd7e194e8c7f2f7ee6a95247ed146da3571d958ce4c3212de76f32bab9b",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06330970836992927,
+    "peak": 0.44389477372169495,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "MAMMOTH_STEPPE_50_Y.mp3",
+    "sha256": "de63e3108daf6a60602a4f6a51f430eac5adaa09a8b5bad7bf4db7fcc08c8eb3",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0867745813407943,
+    "peak": 0.5619552135467529,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "MAMMOTH_STEPPE_50_Nhat_Ban.mp3",
+    "sha256": "fde1a22915511a71b84ee5fe9fed75f81271feede322c3122af430398c94a672",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0770024731224133,
+    "peak": 0.5326769351959229,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "MAMMOTH_STEPPE_50_Han_Quoc.mp3",
+    "sha256": "039bb8f7bdfe49d623895c940b0153c7fa3a8b828fd593ad00de1630c1a1ef8f",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09474351305014242,
+    "peak": 0.5697214007377625,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "mww",
+    "filename": "MAMMOTH_STEPPE_50_Hmong_Trang_Nu.mp3",
+    "sha256": "c5a862188001d84955f3c22d56b2e157c1ea4caf11d92d92a9aac805733b6630",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.11692657994170459,
+    "peak": 0.5615888833999634,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "MAMMOTH_STEPPE_50_Na_Uy.mp3",
+    "sha256": "dd5e1e27c82cdca56d1d94f5f9008ea998dd6469a11293a9893db248f57efa08",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07898533037425574,
+    "peak": 0.5076436400413513,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "MAMMOTH_STEPPE_50_Ha_Lan.mp3",
+    "sha256": "c1874bfd270fb54ed02ac6e1fcedc617b91078835058c0a2d2c12efbf8855038",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09269454648334084,
+    "peak": 0.6577339172363281,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "MAMMOTH_STEPPE_50_Ba_Lan.mp3",
+    "sha256": "6198a7400a9f556df8e1024ab24d35d8ba9704c75d133812d21a0a3392d7f189",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09172975182193394,
+    "peak": 0.5193302631378174,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "MAMMOTH_STEPPE_50_Bo_Dao_Nha.mp3",
+    "sha256": "16bf794ff51acc204e151f8e5ab7f9a746af96e7abc01170f67b6c06ae719638",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08121377103004694,
+    "peak": 0.4923931956291199,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "MAMMOTH_STEPPE_50_Thuy_Dien.mp3",
+    "sha256": "6eba3829972cb59c21e477ad3054edd04f81b12072acb348af6ff61542adf246",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07618635747820386,
+    "peak": 0.5048589706420898,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "MAMMOTH_STEPPE_50_Viet_Nam.mp3",
+    "sha256": "16fff3eef5e8de2fed6ba909cd4055029beb8fc176a76244f47ee5ce1d611043",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.10892710228137176,
+    "peak": 0.7765729427337646,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  }
+]

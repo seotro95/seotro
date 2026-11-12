@@ -19,5 +19,6 @@
   "white_hmong_dialect_independently_verified": false,
   "portuguese_locale": "pt-PT; European Portuguese vocabulary corrections",
   "japanese": "Assistant-rewritten concise Japanese adaptation to fit chapters and correct technical meanings",
-  "other13": "Machine translation from context-clarified source plus targeted terminology/locale review"
+  "other13": "Machine translation from context-clarified source plus targeted terminology/locale review",
+  "korean_targeted_revision": "Natural imperative endings, forb definition, grazing mouth and concisechapter11; faithful sentence-level provider retry for duplicated boundary metadata."
 }

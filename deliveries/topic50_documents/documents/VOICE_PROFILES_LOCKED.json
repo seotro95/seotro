@@ -40,7 +40,21 @@
       "preset_region": "Nam",
       "sdk_version": "3.8.3",
       "model_repository": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
-      "model_subfolder": "onnx_update"
+      "model_subfolder": "onnx_update",
+      "model_lock_file": "ADAM_ENGINE_LOCK.json",
+      "model_revision": "61b85e3d937fbbacb387714180e8182823512523",
+      "codec_revision": "ceff0d0749bfb3fa2d61149794ec6feef0d1e1ae",
+      "runtime_versions": {
+        "python": "3.12",
+        "onnxruntime": "1.23.2",
+        "numpy": "2.2.6",
+        "sea-g2p": "0.10.0",
+        "kaldi-native-fbank": "1.22.5",
+        "backend": "onnx",
+        "device": "cpu",
+        "precision": "fp32",
+        "threads": 2
+      }
     },
     {
       "locale": "es-ES",
