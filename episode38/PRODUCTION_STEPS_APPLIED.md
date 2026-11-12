@@ -10,7 +10,7 @@ Thời lượng yêu cầu: **22:32 = 1.352 giây**.
 - Nhánh sản xuất: `codex/land-bridges38-production-20261111`, thư mục `episode38/`.
 - Hồ sơ chung của chuỗi: nhánh `codex/beringia-video-01`, thư mục `productions/series/`.
 - Bản phát hành: https://github.com/seotro95/seotro/releases/tag/land-bridges-video-38-22m32s
-- Lượt tạo voice hiện tại: https://github.com/seotro95/seotro/actions/runs/43050614061
+- Lượt tạo voice chính: https://github.com/seotro95/seotro/actions/runs/43050614061
 - Không tự chuyển sang một chủ đề khác. Chỉ đánh dấu hoàn tất khi các tệp tải công khai đã qua kiểm tra.
 
 ## Nội dung và cách kể
@@ -65,3 +65,11 @@ Tập này hiện chưa có footage được cung cấp và chưa có MP4 hoàn 
 4. Xóa toàn bộ âm thanh clip gốc. Phim chính chỉ có voice tiếng Anh, không thêm nhạc hoặc tiếng hiệu ứng.
 5. Cảnh thiếu được thay bằng **video chuyển động liên quan**, không dùng ảnh tĩnh hoặc thẻ chữ để lấp chỗ trống.
 6. Giữ đúng thời lượng của voice, kiểm tra đầu/cuối và các ranh giới chương, xuất video và xác minh bản tải công khai.
+
+## Hoàn tất tiếng Anh theo nhóm
+
+Lượt sửa tuần tự 43055537796 đã dừng có lưu checkpoint với ít nhất 50/136 đoạn Anh. Quy trình 43059788576 chia 136 mốc thành bốn nhóm liên tiếp, mỗi nhóm 34 mốc, tối đa hai nhóm đồng thời. Mỗi nhóm chỉ tải lại đoạn thiếu hoặc sai chữ ký; các nhóm lưu cache riêng, không ghi đè nhau. Bước ghép cuối kiểm tra chữ ký nội dung, giọng và nhịp đọc trước khi dựng đủ 136 mốc rồi kiểm tra 64.896.000 mẫu ở 48 kHz.
+
+## Kết quả cuối
+
+Đã đủ 17 MP3. Bản ZIP công khai có SHA-256 `6a97dfb056e5736172e62aa8f791cf854b3a0e6fd8194fa43267aa153bacf627`. Kiểm tra lại bản tải xuống kết thúc bằng `ALL_17_PUBLIC_VOICES_VERIFIED`: CRC của ZIP đúng, 17 mã giọng giữ nguyên, 17 mã băm khác nhau và mỗi MP3 giải mã đúng 64.896.000 mẫu mono 48 kHz. Tập 38 chưa có footage hoặc MP4.

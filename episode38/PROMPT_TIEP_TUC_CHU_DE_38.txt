@@ -1,0 +1,11 @@
+﻿Tiếp tục dự án video khoa học tiền sử của tôi tại https://github.com/seotro95/seotro . Nhánh hồ sơ chính là codex/beringia-video-01. Đọc productions/TIEP_TUC_TU_DAY.md và productions/series/SERIES_STATE.json trước; dùng trạng thái mới nhất trong hai tệp này, không suy đoán từ nhật ký cũ.
+
+Chủ đề 38 là Các cây cầu đất xuất hiện và biến mất qua những chu kỳ băng hà, kịch bản Anh When the Sea Was Land: Earth's Vanishing Bridges, đúng 22:32. Nhánh mã nguồn là codex/land-bridges38-production-20261111, thư mục episode38. Bản phát hành là https://github.com/seotro95/seotro/releases/tag/land-bridges-video-38-22m32s .
+
+Kịch bản có 3.581 từ, 136 mốc lời gồm 135 mốc 10 giây và mốc cuối 2 giây. Có 120 prompt mới trong 12 TXT, 10 prompt/TXT; 16 mốc REUSE đã đánh dấu. Clip đặt tên theo ID prompt, không theo ID mốc lời. Mọi prompt cấm trẻ em, thiếu niên, hình trẻ em trong nền, tranh, màn hình và phản chiếu; không có lời nói, nhạc hoặc âm thanh, kết thúc bằng không có âm thanh.
+
+Bộ giọng science-prehistory-17-v1 phải giữ nguyên 16 mã giọng nam và nữ H'mông hmong-female-3, tham chiếu SHA-256 ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17. Dùng Melo-Viet-Studio 1.3.1 và tool native Voice-Studio-Hmong 1.6.6 đã ghim commit; không tự đổi voiceID. Tên MP3 theo quốc gia. Mọi voice phải giải mã thành 64.896.000 mẫu mono 48 kHz, đúng 1.352 giây. Anh bám 136 mốc; bản dịch giữ 14 ranh giới chương. Kiểm kỹ thuật không được gọi là xác nhận nghe bản ngữ; phương ngữ H'mông Trắng còn cần rà soát độc lập.
+
+Đã có đủ 17 voice hoàn chỉnh. Lượt chính 43050614061 tạo 16 giọng; lượt 43059788576 hoàn tất bản Anh sau khi dùng checkpoint của lượt 43055537796. Gói ZIP công khai đã kiểm CRC, từng mã băm, mã giọng và giải mã đủ 64.896.000 mẫu cho mỗi tệp. Không tạo lại các giọng đã hoàn tất. Bản Việt của tập 38 vẫn là Nam Minh; yêu cầu đổi sang Adam áp dụng từ tập 45.
+
+Tập 38 chưa có footage hoặc MP4 tại thời điểm cập nhật hồ sơ này. Chủ đề đang làm hiện tại là 45; chỉ quay lại dựng tập 38 khi người dùng yêu cầu. Nếu đã có clip mới, hãy xem và đối chiếu đúng tập 38: 10 cảnh mạnh trong 30 giây đầu, nằm trong tổng 22:32; phim chính chỉ có voice Anh, xóa hết tiếng clip gốc, không nhạc/SFX. Cảnh thiếu dùng video chuyển động liên quan, không ảnh tĩnh hoặc thẻ chữ. Không lấy clip tập cũ để mặc nhiên coi là tập 38. Không tự khởi chạy tập khác.

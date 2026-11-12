@@ -1,0 +1,20 @@
+name: Land bridges38 refresh verified delivery documents
+on:
+  push:
+    branches: [codex/land-bridges38-production-20261111]
+    paths: [.github/workflows/land-bridges38-refresh-delivery.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: episode38
+      - name: Refresh documents only after all17publicaudio hashes match
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -u episode38/refresh_delivery_metadata.py
