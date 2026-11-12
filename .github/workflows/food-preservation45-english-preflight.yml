@@ -1,0 +1,38 @@
+name: Food preservation45 groupedEnglish timing preflight
+on:
+  push:
+    branches: [codex/food-preservation45-production-20261112]
+    paths: [.github/workflows/food-preservation45-english-preflight.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  english:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: episode45
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python episode45/build_documents.py
+      - run: |
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python episode45/ensure_ffmpeg.py
+          python episode45/bootstrap_tool.py online
+      - name: Validate exact text boundaries and30second English preview
+        run: python -u episode45/render_english_groups.py --preview
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: food45-english-preflight
+          path: |
+            episode45/voice/en_preview/FOOD_PRESERVATION_45_EN_PREVIEW_30s.mp3
+            episode45/voice/en_preview/render_report.json
+            episode45/voice/en_preview/group-*.wav
+            episode45/voice/en_preview/group-*.json
+            episode45/voice/en_preview/raw-*.json
+          if-no-files-found: ignore
+          retention-days: 14

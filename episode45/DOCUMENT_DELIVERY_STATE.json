@@ -1,0 +1,13 @@
+{
+  "topic_id": 45,
+  "documents_published": true,
+  "target_seconds": 1242,
+  "release_tag": "food-preservation-video-45-20m42s",
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/food-preservation-video-45-20m42s",
+  "archive_url": "https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_TAI_LIEU_20m42s.zip",
+  "archive_sha256": "2737c66a9287624f75f845f3d5030148c0630c92ff68a377055c5b0e38f33a48",
+  "archive_bytes": 118770,
+  "public_download_verified": true,
+  "document_workflow_run_id": 43156155740,
+  "source_commit": "1c90eb58bfb421298abccea8ab518d003a4bbd36"
+}
