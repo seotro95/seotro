@@ -1,0 +1,22 @@
+{
+  "topic": 50,
+  "languages": 17,
+  "english": "Original English3205words",
+  "vietnamese": "Assistant-rewritten Vietnamese narration; local Adam male preset",
+  "hmong": "Assistant-written contextual adaptation with simpler language; female-3 native engine",
+  "other14": "Machine translation from context-clarified source plus targeted terminology/locale review",
+  "source_clarifications": [
+    "mammoth is an animal rather than an adjective meaning giant",
+    "forbs and herbaceous plants do not mean medicinal herbs",
+    "human populations remain human",
+    "leave behind an image means stop imagining it",
+    "food processing in teeth means chewing, not cooking",
+    "waterlogging means water-saturated soil",
+    "2014 and2021are publication years",
+    "diet samples are not species-wide menus",
+    "extinction DNA interpretation remains disputed"
+  ],
+  "independent_native_editorial_listening_review": false,
+  "white_hmong_dialect_independently_verified": false,
+  "portuguese_locale": "pt-PT; European Portuguese vocabulary corrections"
+}

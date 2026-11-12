@@ -1,0 +1,239 @@
+{
+  "topic": 50,
+  "target_seconds": 1272,
+  "expected_samples_48000": 61056000,
+  "documents_inventory": [
+    {
+      "path": "documents/5_TIEU_DE_5_PROMPT_THUMBNAIL.txt",
+      "bytes": 3175,
+      "sha256": "fe32697141329280522c6fdff83f72090cd8e3c16eb71593961208773784a96c"
+    },
+    {
+      "path": "documents/ADAM_PRESET_LOCKED.json",
+      "bytes": 4429,
+      "sha256": "bd7946906704514d47b228b9dbfc76c5538276b3cf6661cb308f8687906849f6"
+    },
+    {
+      "path": "documents/CANH_DUNG_LAI.txt",
+      "bytes": 1102,
+      "sha256": "56833fdbf8716dff7fde6166b28a7fc4ba1e57f915d6a6972bc7b5607bb54f24"
+    },
+    {
+      "path": "documents/DOCUMENT_QA.json",
+      "bytes": 390,
+      "sha256": "7e5c8a739268f64cdfc7ab30ac516d8bb5fe743957b5086d6c6ff07852ca7800"
+    },
+    {
+      "path": "documents/GIONG_DA_LUU.md",
+      "bytes": 1309,
+      "sha256": "8b5ebb3bdac4aad1218315ed450cf59c7017e3046b768bd0bca1f390792089d5"
+    },
+    {
+      "path": "documents/HOOK_30_GIAY_10_SHOT.csv",
+      "bytes": 1381,
+      "sha256": "f037bb122bbef0001289d24f36dd24ec6996b49b9cb2d9e98157e0023444173d"
+    },
+    {
+      "path": "documents/KICH_BAN_EN_21m12s.txt",
+      "bytes": 20608,
+      "sha256": "ddb989d9aac291f43e1296d833af1270b1befe7f9d8f1fc81631df422172e20e"
+    },
+    {
+      "path": "documents/KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 26240,
+      "sha256": "b07e820baa6e0d11d32af6a26cd9846508af0f466269a8fd9a4cf1b2978a2867"
+    },
+    {
+      "path": "documents/LOI_DAN_EN_128_CANH.srt",
+      "bytes": 24852,
+      "sha256": "d45c623ecf0ac773b3a811d5bea1d370c7d859e354a8ab6fb30aaa6172193a0d"
+    },
+    {
+      "path": "documents/NARRATION_STYLE_LOCKED.json",
+      "bytes": 1592,
+      "sha256": "e8112fba8b4d18abacc3727659fe10cb603e94ac6d1d7d1f99de6b7d38fc2a28"
+    },
+    {
+      "path": "documents/NGUON_KIEM_CHUNG.md",
+      "bytes": 3502,
+      "sha256": "527f330d51825f08548f27e48d403384409b56a766b53d96a91c1590b13232e1"
+    },
+    {
+      "path": "documents/PHAN_TICH_VIDEO_NGUON.md",
+      "bytes": 4086,
+      "sha256": "ff835b8696b2a4b39be0626d7fa202544664ad51866948f2975a73e8d320e058"
+    },
+    {
+      "path": "documents/PROMPTS/01_PROMPT_001_010.txt",
+      "bytes": 18455,
+      "sha256": "b00e57521caa6d3d35d17dd126d8ef43bad9359037026f32f07eae755be4afbb"
+    },
+    {
+      "path": "documents/PROMPTS/02_PROMPT_011_020.txt",
+      "bytes": 18509,
+      "sha256": "2d5822ab4928b4cbb92670f95cb7b9f8614014bdf48cb756a5aaf149d3c230f8"
+    },
+    {
+      "path": "documents/PROMPTS/03_PROMPT_021_030.txt",
+      "bytes": 18529,
+      "sha256": "c3c110f138e977dce55a9e6728189da006a2d110f9c2509ef2ea1b8abec5722d"
+    },
+    {
+      "path": "documents/PROMPTS/04_PROMPT_031_040.txt",
+      "bytes": 18679,
+      "sha256": "84342143f8389f9de142ce08b46c896b1669a5ef04231e459cfe0c562a2ee35e"
+    },
+    {
+      "path": "documents/PROMPTS/05_PROMPT_041_050.txt",
+      "bytes": 18517,
+      "sha256": "dc3718e10dbb29a0eb26f7366e65ad2b69cc36e070ce4242dbfab51abeab46e7"
+    },
+    {
+      "path": "documents/PROMPTS/06_PROMPT_051_060.txt",
+      "bytes": 18554,
+      "sha256": "2a1eca5454b1ccd8718728658ecfbca4a5c7e2c7d0a9f1b6065bf442f53c5fc2"
+    },
+    {
+      "path": "documents/PROMPTS/07_PROMPT_061_070.txt",
+      "bytes": 18732,
+      "sha256": "231f305358f979aa03c20997cd614f630b3dcdaeb4d035818dcb847e2b05f046"
+    },
+    {
+      "path": "documents/PROMPTS/08_PROMPT_071_080.txt",
+      "bytes": 18660,
+      "sha256": "addc5428e64b60ceded46ee144a39b3490bb89b7bb45e4a7ace4ed922f0dbb28"
+    },
+    {
+      "path": "documents/PROMPTS/09_PROMPT_081_090.txt",
+      "bytes": 18792,
+      "sha256": "fd38695e6eb5738fdd0f3d902d9027469a6abdfb1a6117380144cecc1325ce4e"
+    },
+    {
+      "path": "documents/PROMPTS/10_PROMPT_091_100.txt",
+      "bytes": 18577,
+      "sha256": "c9737736e75fa8556be4f143380ec7383ce715cfbf6417591089fb0618ad6f58"
+    },
+    {
+      "path": "documents/PROMPTS/11_PROMPT_101_110.txt",
+      "bytes": 18572,
+      "sha256": "84c07c3f1d74504ecc4e7db5b32126b3ef907d263524faa1822f568d6b1e2ba3"
+    },
+    {
+      "path": "documents/PROMPTS/12_PROMPT_111_120.txt",
+      "bytes": 18394,
+      "sha256": "cfc31dcee45868567456acedff0eb52593f4f341344f9a126823d5c8c91d62a4"
+    },
+    {
+      "path": "documents/README.md",
+      "bytes": 1345,
+      "sha256": "9aeff495f7e936ad7e90a0d3834c765aa11592ccbfb226c1f813f21f0d89fbb3"
+    },
+    {
+      "path": "documents/TIMELINE_128_CANH.csv",
+      "bytes": 43647,
+      "sha256": "89c6e4e145a911e0244fe577105e8f4b934ccb44381dae3a59ec8c80eb07c8db"
+    },
+    {
+      "path": "documents/TRANSLATION_REVIEW.json",
+      "bytes": 1059,
+      "sha256": "02b28810feb0147ff1ae88d7e29ca256c79ce4fc1b41e411feec70dcee9688da"
+    },
+    {
+      "path": "documents/VOICE_FILE_NAMING.json",
+      "bytes": 2822,
+      "sha256": "a94359e30be3c7055ac575715b1f880b4bea2e672def83b2a910290dd5444822"
+    },
+    {
+      "path": "documents/VOICE_PROFILES_LOCKED.json",
+      "bytes": 13309,
+      "sha256": "5b75c9b5edf5ee77d6a653f04af1b6e387a958dd1d0d51e28b1c966440a7e7b6"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/cs-CZ.txt",
+      "bytes": 22592,
+      "sha256": "38b0231807e6bfd6d85ca326dd2307ae6780fb85bcfbceb678be930e6f52ac55"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/da-DK.txt",
+      "bytes": 22336,
+      "sha256": "fa3ebf51e6f81d6f3f3de96ed99cdbbfca0bd3dd8c70482e0379264243f6e3bc"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/de-DE.txt",
+      "bytes": 25921,
+      "sha256": "92618cb41f93d4300a526cc2127b817dd69f7aec057574631d0165f16439273a"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/en-US.txt",
+      "bytes": 22053,
+      "sha256": "d92a94a902960b5cdf3825428e12ca7bb9bd9dfa4d64d5a23fb3ad11e27b7909"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/es-ES.txt",
+      "bytes": 24871,
+      "sha256": "2cfeb6c5cb7a11836bc028256cfc346299dd224e6b295524f8ef27509c8a1f51"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/fi-FI.txt",
+      "bytes": 23505,
+      "sha256": "a7ddac2952b572b441e1966e8cc34567cf9dfc6162582e0308a24067d9ab2d74"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/fr-FR.txt",
+      "bytes": 27221,
+      "sha256": "9cece1c6c3c8981ec6827768bbb9bee50991514346f644518bc08a41df942f51"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/it-IT.txt",
+      "bytes": 24528,
+      "sha256": "2db6b2a7b8c5dfad272801c8a41294d7f1a4b7a58dd0d35bf656c1c859d8e7a7"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/ja-JP.txt",
+      "bytes": 29562,
+      "sha256": "ed3769eac79ed0daeffaae5705e6a8719615d239f7052c61bc8a1a363e4d6882"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/ko-KR.txt",
+      "bytes": 27091,
+      "sha256": "92643fdf2675b1a4d360ddc252756a81770533aa76c7e7fb5da042fd2ca6835b"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/mww.txt",
+      "bytes": 16322,
+      "sha256": "dee9e9100d411a438dc11388eabd4ee52daa9ea6f0148ada7eab652319fe18d3"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/nb-NO.txt",
+      "bytes": 21576,
+      "sha256": "f34f1bc03a7cc1692b3dbea447b0bd4059b649a0df90f3a50c97b87d1cd3718f"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/nl-NL.txt",
+      "bytes": 24648,
+      "sha256": "05a5d3436a53761d8809b48b291b7c144f2c868a902943e7a3f51cf5bb67169d"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/pl-PL.txt",
+      "bytes": 24509,
+      "sha256": "301623bbdff3b14aa63d1cb8f18d6ce74027eef21ad835038379990f473b8e18"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/pt-PT.txt",
+      "bytes": 24096,
+      "sha256": "5af9902788a3120d38c9b113ba8877188092d5854c6f7a852c60e791c1334c91"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/sv-SE.txt",
+      "bytes": 22306,
+      "sha256": "9d26315d93ccda31fe1389e8c231b48e0ae4364978386881c74e0c03639d0d1d"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/vi-VN.txt",
+      "bytes": 26582,
+      "sha256": "e57e8628fe99162f5116674d85029b10bc21b22b23cb0f014d7ad4ff7d4a6709"
+    }
+  ],
+  "release_tag": "mammoth-steppe-video-50-21m12s",
+  "scope": "New user-requested topic50 original English script,120silent no-children prompts in12TXT,timeline,source analysis,scientific references,17localized narration texts,saved voice identities including requested Vietnamese Adam,5title/thumbnail prompt suggestions;document export only;no audio yet,source video,models,credentials,other topics or private messages"
+}

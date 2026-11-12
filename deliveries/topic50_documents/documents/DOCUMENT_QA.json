@@ -1,0 +1,15 @@
+{
+  "topic": 50,
+  "target_seconds": 1272,
+  "english_words": 3205,
+  "timeline_slots": 128,
+  "duration_math": "127x10+2=1272",
+  "unique_prompts": 120,
+  "prompt_txt_count": 12,
+  "prompts_per_txt": 10,
+  "numbering": "1-120",
+  "reused_slots": 8,
+  "prompt_no_children_and_silent_every_prompt": true,
+  "generated_footage_checked": false,
+  "independent_native_listening_review": false
+}
