@@ -1,0 +1,189 @@
+[
+  {
+    "locale": "en-US",
+    "filename": "MAMMOTH_STEPPE_50_My_Tieng_Anh.mp3",
+    "voice_id": "en-US-AndrewNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "08030a7dd88f4b2c1065125310cf7931cd74b73e7216025cbee2b208ff738503",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "9f6ba8ad489f0c76860dd3b1f9fd23e711445174d1867d3ee42ddb9c3cf9d0f6"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "MAMMOTH_STEPPE_50_Viet_Nam.mp3",
+    "voice_id": "Adam",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "16fff3eef5e8de2fed6ba909cd4055029beb8fc176a76244f47ee5ce1d611043",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "73111f3df94a0d824a5e7874e84319f1c70d09342f021de1c3f06752fb054750"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "MAMMOTH_STEPPE_50_Tay_Ban_Nha.mp3",
+    "voice_id": "es-ES-AlvaroNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "b629f57ee79339ce4842662add0caef8df3577c77429174bc823797ef50fa6a1",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "e4f683353a9afbfdad328979e491f3d0f7887d3edd46682e25314a356ab356fe"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "MAMMOTH_STEPPE_50_Phap.mp3",
+    "voice_id": "fr-FR-HenriNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "91f2cfd7e194e8c7f2f7ee6a95247ed146da3571d958ce4c3212de76f32bab9b",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "8e48223c2ce8b03a746550817a57f67b1863f3db4cd45fe576e318fc19d030cc"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "MAMMOTH_STEPPE_50_Nhat_Ban.mp3",
+    "voice_id": "ja-JP-KeitaNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "fde1a22915511a71b84ee5fe9fed75f81271feede322c3122af430398c94a672",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "37a4e8dd2467c89c3df51ce77f76640323f30347c0931a70149278bda70f4af3"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "MAMMOTH_STEPPE_50_Han_Quoc.mp3",
+    "voice_id": "ko-KR-InJoonNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "039bb8f7bdfe49d623895c940b0153c7fa3a8b828fd593ad00de1630c1a1ef8f",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "0960ec7a773aad48a54d94e9bf86805e32ff9eaf40d167c31ca2fe9c76d8b27a"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "MAMMOTH_STEPPE_50_Duc.mp3",
+    "voice_id": "de-DE-ConradNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "5e1c6b74067975d38a43fc287c19ebd5737ea604796e23215f489a665d8270a8",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "0a389550b5add09b461668cafe440307690c63b10c19367f95b47ded585e7eed"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "MAMMOTH_STEPPE_50_Y.mp3",
+    "voice_id": "it-IT-DiegoNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "de63e3108daf6a60602a4f6a51f430eac5adaa09a8b5bad7bf4db7fcc08c8eb3",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "2be952edafd9ffddf33d6449bce7a3444090cc0cfbdd35f8cdb67b9abeafe686"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "MAMMOTH_STEPPE_50_Bo_Dao_Nha.mp3",
+    "voice_id": "pt-PT-DuarteNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "16bf794ff51acc204e151f8e5ab7f9a746af96e7abc01170f67b6c06ae719638",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "9115170936c75def1cd9afa28494312021cf582845f0056f6e6495bc3a58e692"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "MAMMOTH_STEPPE_50_Ha_Lan.mp3",
+    "voice_id": "nl-NL-MaartenNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "c1874bfd270fb54ed02ac6e1fcedc617b91078835058c0a2d2c12efbf8855038",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "1b62013779014454453b0119f0b860e88cf5a95ecb922f4ae41b65a602b5d9ad"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "MAMMOTH_STEPPE_50_Ba_Lan.mp3",
+    "voice_id": "pl-PL-MarekNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "6198a7400a9f556df8e1024ab24d35d8ba9704c75d133812d21a0a3392d7f189",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "a520f5d1663c8d75c8b386aa1891de713d7c910bc80bfbb6c8054794686856c1"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "MAMMOTH_STEPPE_50_Thuy_Dien.mp3",
+    "voice_id": "sv-SE-MattiasNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "6eba3829972cb59c21e477ad3054edd04f81b12072acb348af6ff61542adf246",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "d410f8d66ef781d155303a8fe488dcab27716f857cfa13f31ac6defce2d3e65e"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "MAMMOTH_STEPPE_50_Dan_Mach.mp3",
+    "voice_id": "da-DK-JeppeNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "aea58a2b1fb1f5432f32c0bdc5b6ae2a3aaca40218d4f18b80f3a96e65fcab6d",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "1a3171df712e3d6164fd1d8b67529dc35245a1826a80eecb661f9db791ab3186"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "MAMMOTH_STEPPE_50_Phan_Lan.mp3",
+    "voice_id": "fi-FI-HarriNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "06c36cfee064d68a7252d599f4f69a1836ac1f1ceb11bfa0794f78943fc0874f",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "43a4653ab0e9ada0f8d5c34b16b808fc8939ebe90fbb17da75cc691b6b141c1a"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "MAMMOTH_STEPPE_50_Na_Uy.mp3",
+    "voice_id": "nb-NO-FinnNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "dd5e1e27c82cdca56d1d94f5f9008ea998dd6469a11293a9893db248f57efa08",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "7798b582ded4595de6101b735b5028f9742c9b2076be4e1c006fc1faa96236b8"
+  },
+  {
+    "locale": "cs-CZ",
+    "filename": "MAMMOTH_STEPPE_50_Sec.mp3",
+    "voice_id": "cs-CZ-AntoninNeural",
+    "gender": "Male",
+    "bytes": 10176620,
+    "sha256": "017232afc0c5c7268c2cca86277bf45fc76f2ee5b0f73e1a8b1a1630aad472a8",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "65e7a4355b02ded11d860f59734505b96bf65f4cb9b1d3cb55f14135965016f5"
+  },
+  {
+    "locale": "mww",
+    "filename": "MAMMOTH_STEPPE_50_Hmong_Trang_Nu.mp3",
+    "voice_id": "hmong-female-3",
+    "gender": "Female",
+    "bytes": 10176620,
+    "sha256": "c5a862188001d84955f3c22d56b2e157c1ea4caf11d92d92a9aac805733b6630",
+    "decoded_seconds": 1272,
+    "decoded_samples_48000": 61056000,
+    "narration_text_sha256": "d6f9993484d780e7da240fd66856b4f609ed0b00c250dbc9494c346803718717"
+  }
+]

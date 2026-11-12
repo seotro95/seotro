@@ -1,0 +1,35 @@
+{
+  "topic": 50,
+  "target_seconds": 1272,
+  "expected_samples_48000": 61056000,
+  "export_scope": "17 completed MP3 voices, saved voice profiles and audio verification only",
+  "existing_document_zip_preserved": true,
+  "profile_files": {
+    "VOICE_PROFILES_LOCKED.json": {
+      "sha256": "dc87c0db454fe85b2146384c42bc07da6a2b3d5f1ab22619fd6cd98c984bb17d",
+      "bytes": 13788
+    },
+    "VOICE_FILE_NAMING.json": {
+      "sha256": "a94359e30be3c7055ac575715b1f880b4bea2e672def83b2a910290dd5444822",
+      "bytes": 2822
+    },
+    "NARRATION_STYLE_LOCKED.json": {
+      "sha256": "e8112fba8b4d18abacc3727659fe10cb603e94ac6d1d7d1f99de6b7d38fc2a28",
+      "bytes": 1592
+    },
+    "ADAM_PRESET_LOCKED.json": {
+      "sha256": "bd7946906704514d47b228b9dbfc76c5538276b3cf6661cb308f8687906849f6",
+      "bytes": 4429
+    },
+    "ADAM_ENGINE_LOCK.json": {
+      "sha256": "c8ac7fe17a35c19e3f0315efb4fa70ef8b308737df5634bb64ba1d996245c4b7",
+      "bytes": 5228
+    },
+    "NARRATION_DELIVERY_PROFILE.json": {
+      "sha256": "9cbabe1cd13b8ee29778bd83fa232ec3ad22b62a32e53db6be96f15b73392a2f",
+      "bytes": 10796
+    }
+  },
+  "audio_count": 17,
+  "no_voice_generation_in_export": true
+}

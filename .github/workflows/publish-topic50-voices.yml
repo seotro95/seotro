@@ -1,0 +1,21 @@
+name: Publish requested topic50 voices and saved profiles
+on:
+  push:
+    branches: [codex/topic50-mammoth-steppe-21m12s]
+    paths: ['deliveries/topic50_voices/VOICE_EXPORT_READY.json']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: /deliveries/topic50_voices/
+      - name: Verify and upload completed narration files
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python deliveries/topic50_voices/publish_voices.py

@@ -1,0 +1,128 @@
+{
+  "sdk": "vieneu3.8.3",
+  "runtime": {
+    "python": "3.12",
+    "onnxruntime": "1.23.2",
+    "numpy": "2.2.6",
+    "sea-g2p": "0.10.0",
+    "kaldi-native-fbank": "1.22.5",
+    "backend": "onnx",
+    "device": "cpu",
+    "precision": "fp32",
+    "threads": 2
+  },
+  "preset": "Adam",
+  "preset_sha256": "bd7946906704514d47b228b9dbfc76c5538276b3cf6661cb308f8687906849f6",
+  "revisions": {
+    "models--pnnbao-ump--VieNeu-TTS-v3-Turbo": "61b85e3d937fbbacb387714180e8182823512523",
+    "models--OpenMOSS-Team--MOSS-Audio-Tokenizer-Nano-ONNX": "ceff0d0749bfb3fa2d61149794ec6feef0d1e1ae"
+  },
+  "files": [
+    {
+      "repository": "models--pnnbao-ump--VieNeu-TTS-v3-Turbo",
+      "revision": "61b85e3d937fbbacb387714180e8182823512523",
+      "path": "config.json",
+      "bytes": 1553,
+      "sha256": "eee8e032cb936a60312f594a8156c086173a9c0255a545bd11a448f22a7c77ae"
+    },
+    {
+      "repository": "models--pnnbao-ump--VieNeu-TTS-v3-Turbo",
+      "revision": "61b85e3d937fbbacb387714180e8182823512523",
+      "path": "denoiser.onnx",
+      "bytes": 42661414,
+      "sha256": "b7621953291cfe05e695a9c0ff4255aa2f93239fc17c26627e18b7b6b8f72f0b"
+    },
+    {
+      "repository": "models--pnnbao-ump--VieNeu-TTS-v3-Turbo",
+      "revision": "61b85e3d937fbbacb387714180e8182823512523",
+      "path": "onnx_update/config.json",
+      "bytes": 2152,
+      "sha256": "17d89d414ee302a82db7b330bf57b4cdf8541569392119c81f552178cafcb79b"
+    },
+    {
+      "repository": "models--pnnbao-ump--VieNeu-TTS-v3-Turbo",
+      "revision": "61b85e3d937fbbacb387714180e8182823512523",
+      "path": "onnx_update/tokenizer.json",
+      "bytes": 22320,
+      "sha256": "6cc6bcbe380b8c37bd9f2514e37c5dfa3e00e122c6e3125dae5c4afe48e39158"
+    },
+    {
+      "repository": "models--pnnbao-ump--VieNeu-TTS-v3-Turbo",
+      "revision": "61b85e3d937fbbacb387714180e8182823512523",
+      "path": "onnx_update/vieneu_acoustic_cached.onnx",
+      "bytes": 7207223,
+      "sha256": "f631e3387c788c3d8b9a5ac5df94952af5bc4c4d1049ff8a751e76a246fff2d4"
+    },
+    {
+      "repository": "models--pnnbao-ump--VieNeu-TTS-v3-Turbo",
+      "revision": "61b85e3d937fbbacb387714180e8182823512523",
+      "path": "onnx_update/vieneu_backbone_shared.data",
+      "bytes": 415319040,
+      "sha256": "c7c072193db33d0542457e2612c7272c44c4279d1cafaf0aa4c379964911db2f"
+    },
+    {
+      "repository": "models--pnnbao-ump--VieNeu-TTS-v3-Turbo",
+      "revision": "61b85e3d937fbbacb387714180e8182823512523",
+      "path": "onnx_update/vieneu_decode_step.onnx",
+      "bytes": 306134,
+      "sha256": "bedc379cea61ea5d616312750d95ad3924e055856662d19187a889a5edc24ceb"
+    },
+    {
+      "repository": "models--pnnbao-ump--VieNeu-TTS-v3-Turbo",
+      "revision": "61b85e3d937fbbacb387714180e8182823512523",
+      "path": "onnx_update/vieneu_prefill.onnx",
+      "bytes": 324499,
+      "sha256": "27f8b064f6b57b5448e95d095f1959588c005d614678045c2b97ecccf3b7a0f7"
+    },
+    {
+      "repository": "models--pnnbao-ump--VieNeu-TTS-v3-Turbo",
+      "revision": "61b85e3d937fbbacb387714180e8182823512523",
+      "path": "onnx_update/vieneu_v3_heads.npz",
+      "bytes": 52219622,
+      "sha256": "fb22484baa424bbb775133a6e5f0d00d6299b2b256fbe3312a864b85b9aed01e"
+    },
+    {
+      "repository": "models--OpenMOSS-Team--MOSS-Audio-Tokenizer-Nano-ONNX",
+      "revision": "ceff0d0749bfb3fa2d61149794ec6feef0d1e1ae",
+      "path": "codec_browser_onnx_meta.json",
+      "bytes": 17036,
+      "sha256": "3e291c883bb7d11ff2fe8e964e3e495519760358859f35c951254c7741592731"
+    },
+    {
+      "repository": "models--OpenMOSS-Team--MOSS-Audio-Tokenizer-Nano-ONNX",
+      "revision": "ceff0d0749bfb3fa2d61149794ec6feef0d1e1ae",
+      "path": "moss_audio_tokenizer_decode_full.onnx",
+      "bytes": 681902,
+      "sha256": "0fbbafe3fd4afa2a019af5c5ced204af6e2d1db044fa40f021525d2aee95b4ac"
+    },
+    {
+      "repository": "models--OpenMOSS-Team--MOSS-Audio-Tokenizer-Nano-ONNX",
+      "revision": "ceff0d0749bfb3fa2d61149794ec6feef0d1e1ae",
+      "path": "moss_audio_tokenizer_decode_shared.data",
+      "bytes": 44198912,
+      "sha256": "e69d52e0f4e84ca27850557ee54face46632d3a5a16c89bd246c7c408466dcad"
+    },
+    {
+      "repository": "models--OpenMOSS-Team--MOSS-Audio-Tokenizer-Nano-ONNX",
+      "revision": "ceff0d0749bfb3fa2d61149794ec6feef0d1e1ae",
+      "path": "moss_audio_tokenizer_decode_step.onnx",
+      "bytes": 351400,
+      "sha256": "9527c86a29e1837edec1f74db57d5eeaadb3a715af3382703566460afed25855"
+    },
+    {
+      "repository": "models--OpenMOSS-Team--MOSS-Audio-Tokenizer-Nano-ONNX",
+      "revision": "ceff0d0749bfb3fa2d61149794ec6feef0d1e1ae",
+      "path": "moss_audio_tokenizer_encode.data",
+      "bytes": 44507136,
+      "sha256": "aa751265b2bab2887eac224484546b194875aa7494b607115439b3dc6b228a2c"
+    },
+    {
+      "repository": "models--OpenMOSS-Team--MOSS-Audio-Tokenizer-Nano-ONNX",
+      "revision": "ceff0d0749bfb3fa2d61149794ec6feef0d1e1ae",
+      "path": "moss_audio_tokenizer_encode.onnx",
+      "bytes": 815775,
+      "sha256": "eadea4a645abdcf98714c7aead122ee2ce7da6e080f9f80b977cd1ca8e19473a"
+    }
+  ],
+  "note": "Preserve revisions,weight hashes,SDK and preset for future voice consistency;online service model versions are controlled by provider."
+}
