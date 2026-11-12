@@ -1,7 +1,7 @@
 {
   "id": 45,
   "title": "Làm khô, hun khói, làm lạnh: tìm bằng chứng bảo quản thức ăn thời tiền sử.",
-  "phase": "script_and_prompts_ready_documents_not_yet_published",
+  "phase": "documents_delivered_17voices_generating",
   "target_seconds": 1242,
   "english_script_words": 3134,
   "english_cues": 125,
@@ -11,5 +11,11 @@
   "work_branch": "codex/food-preservation45-production-20261112",
   "vietnamese_voice_id": "Adam",
   "vietnamese_backend": "Melo + Viet1.3.1 / VieNeu3.8.3 native ONNXFP32",
-  "voices_generated": false
+  "voices_generated": false,
+  "documents_delivered": true,
+  "public_documents_verified": true,
+  "release_tag": "food-preservation-video-45-20m42s",
+  "documents_url": "https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_TAI_LIEU_20m42s.zip",
+  "voice_source_commit": "0ab176d99628a5f095eea2fb46ba0e2a2207bc3c",
+  "voice_workflow_run_id": 43183842762
 }

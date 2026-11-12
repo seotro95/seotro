@@ -8,7 +8,7 @@
   "active_topic": {
     "id": 45,
     "title": "Làm khô, hun khói, làm lạnh: tìm bằng chứng bảo quản thức ăn thời tiền sử.",
-    "phase": "script_and_prompts_ready_documents_not_yet_published",
+    "phase": "documents_delivered_17voices_generating",
     "target_seconds": 1242,
     "english_script_words": 3134,
     "english_cues": 125,
@@ -18,7 +18,13 @@
     "work_branch": "codex/food-preservation45-production-20261112",
     "vietnamese_voice_id": "Adam",
     "vietnamese_backend": "Melo + Viet1.3.1 / VieNeu3.8.3 native ONNXFP32",
-    "voices_generated": false
+    "voices_generated": false,
+    "documents_delivered": true,
+    "public_documents_verified": true,
+    "release_tag": "food-preservation-video-45-20m42s",
+    "documents_url": "https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_TAI_LIEU_20m42s.zip",
+    "voice_source_commit": "0ab176d99628a5f095eea2fb46ba0e2a2207bc3c",
+    "voice_workflow_run_id": 43183842762
   },
   "next_topic_id": 5,
   "user_preferences": {
@@ -371,7 +377,8 @@
     {
       "id": 45,
       "title": "Làm khô, hun khói, làm lạnh: tìm bằng chứng bảo quản thức ăn thời tiền sử.",
-      "status": "script_prompts_ready_documents_publish_pending"
+      "status": "documents_delivered_17voices_generating",
+      "target_seconds": 1242
     },
     {
       "id": 46,
@@ -1216,7 +1223,7 @@
   },
   "latest_completed_topic_id": 38,
   "auto_start_next_topic": false,
-  "handoff_next_action": "Continue user-requested topic45, food preservation20:42. English3134words/125cues,110prompts/11TXT and15reuse ready locally; publish docs before17voice synthesis. NativeVietnamese presetAdam confirmed in VieNeu3.8.3; do not relabel NamMinh asAdam. Topic38all17voices are public and download-redecoded64896000frames. Preserve previous episodes; do not auto-start other topics.",
+  "handoff_next_action": "Continue topic45 full17voice run43183842762; retain successful checkpoints. Do not regenerate completed topic38 or start another topic.",
   "completed_topic_28": {
     "id": 28,
     "title": "Chagyrskaya: bằng chứng di truyền về quan hệ gia đình thời tiền sử.",

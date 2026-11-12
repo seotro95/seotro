@@ -1,9 +1,9 @@
 <!-- active-production -->
-# Đang làm chủ đề 45 — Bảo quản thức ăn thời tiền sử — 20:42
+# Chủ đề 45 — đã có tài liệu, đang tạo 17 voice — 20:42
 
-Dùng chủ đề 45 trong TOPICS_001_100.csv trên nhánh này: làm khô, hun khói, làm lạnh và bằng chứng khảo cổ. Bản nháp cũ trên máy có số thứ tự khác; không dùng nó để chọn đề tài. Kịch bản Anh 3.134 từ/125 mốc, 110 prompt trong 11 TXT và 15 mốc dùng lại đã chuẩn bị. Chưa phát hành tài liệu hoặc tạo voice tập 45. Bản Việt phải dùng đúng preset Adam (nam miền Nam) trong VieNeu3.8.3 của Melo + Việt1.3.1; 16 nhận diện giọng còn lại giữ nguyên. Xem SERIES_STATE.json trước khi tiếp tục.
+[Tải kịch bản và 11 TXT prompt](https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/FOOD_PRESERVATION_45_TAI_LIEU_20m42s.zip). Có 125 mốc Anh, 110 prompt mới và 15 mốc dùng lại; mọi prompt không có trẻ em, lời nói hoặc âm thanh. Bản Việt dùng đúng preset Adam native, nam miền Nam; 16 nhận diện khác giữ nguyên. [Theo dõi tạo 17 voice](https://github.com/seotro95/seotro/actions/runs/43183842762). Chỉ phát hành voice sau khi giải mã kiểm đủ 59.616.000 mẫu ở 48 kHz cho từng tệp. Chưa có footage hoặc MP4 tập45.
 
-Chủ đề 38 đã có đủ 17 voice, mỗi tệp 22:32; bản tải công khai đã kiểm hash, ZIP CRC và giải mã đúng 64.896.000 mẫu ở 48kHz. [Tải đủ 17 giọng tập38](https://github.com/seotro95/seotro/releases/download/land-bridges-video-38-22m32s/LAND_BRIDGES_38_17_VOICES_22m32s.zip). Tập38 chưa có footage/MP4. Không tạo lại các voice đã xong hoặc tự khởi chạy chủ đề khác.
+Mã nguồn và hồ sơ nằm ở nhánh codex/food-preservation45-production-20261112, thư mục episode45. Không tạo lại phần đã thành công; không tự khởi chạy chủ đề khác. Chủ đề38 đã có đủ 17 voice công khai. Đọc SERIES_STATE.json trước khi tiếp tục.
 <!-- /active-production -->
 
 ---
