@@ -1,13 +1,13 @@
 {
-  "transport_revision": 1,
+  "transport_revision": 2,
   "topic": 67,
   "target_seconds": 1332,
   "expected_samples_48000": 63936000,
   "documents_inventory": [
     {
       "path": "documents/5_TIEU_DE_5_PROMPT_THUMBNAIL.txt",
-      "bytes": 4769,
-      "sha256": "28fbf192d42d70c12b599314f922aeb0c12615d2ed9c99c427a1dd8161efc148"
+      "bytes": 4780,
+      "sha256": "68e711febdb0e25864090979ac4c28a9d2d89e6e0a34c7a223731ac199a12681"
     },
     {
       "path": "documents/CANH_DUNG_LAI.txt",
@@ -26,8 +26,8 @@
     },
     {
       "path": "documents/GIONG_DA_LUU.md",
-      "bytes": 1389,
-      "sha256": "02e7934d85c9cc83faab624a3dc4d3d9b70112b8c23dba20fe94548562a0fcd6"
+      "bytes": 1570,
+      "sha256": "1174d12be6ab57ef09f33165dc6e075cc754c65f41b39a0ad1f2ad30e134dbb8"
     },
     {
       "path": "documents/HOOK_30_GIAY_10_SHOT.csv",
@@ -61,8 +61,8 @@
     },
     {
       "path": "documents/PHAN_TICH_VIDEO_NGUON.md",
-      "bytes": 4363,
-      "sha256": "dae2be800a38e1088f6338a29591e0b6b229cdf8a2b6d54d391e1fdb74b7da8d"
+      "bytes": 4675,
+      "sha256": "3bba3d7c1e57c83cac9af8c578e1a889e44ed93004540a87a3714c4bb9b59692"
     },
     {
       "path": "documents/PROMPTS/01_PROMPT_001_010.txt",
@@ -126,8 +126,8 @@
     },
     {
       "path": "documents/README.md",
-      "bytes": 2025,
-      "sha256": "0577fdebad7f85ff56e44a204770a1e0f3cae5a785c8522ba94cda44a8b74b1f"
+      "bytes": 2638,
+      "sha256": "9db4e4a3ad2f6cda7f6c93082bca62b59a559f9a77e2632190e6dfef551005c3"
     },
     {
       "path": "documents/TIMELINE_134_CANH.csv",
