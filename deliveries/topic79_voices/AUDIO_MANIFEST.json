@@ -1,0 +1,189 @@
+[
+  {
+    "locale": "en-US",
+    "filename": "PREHISTORIC_NETS_79_My_Tieng_Anh.mp3",
+    "voice_id": "en-US-AndrewNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "2a19236d4edf5c0d084f8abeabf27084ca45fb3691a5ac094b9442990da5ed2a",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "e8d89802abbf44ee017449968a2407747002ac17cff9fefd97aa0ed0ce713a40"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "PREHISTORIC_NETS_79_Viet_Nam.mp3",
+    "voice_id": "vi-VN-NamMinhNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "8c96029ba781c9047f981b6dced1fe5a3e4e5a0adc8b065f8834e4b51b4a50df",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "82a4a07f4c62155dadcdb56efe77c4d75acaeba80fab012edb9e9df1869e9f45"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "PREHISTORIC_NETS_79_Tay_Ban_Nha.mp3",
+    "voice_id": "es-ES-AlvaroNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "59dfdef239189362f72b5ca2ece058f5954b64d9216916693ae9d3bb917fb459",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "d432c2fb1cf1a5181af172ed0dc1b84fd693a98638050ad1e265f03b75a6f4dc"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "PREHISTORIC_NETS_79_Phap.mp3",
+    "voice_id": "fr-FR-HenriNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "43261336ce088c2926e2141d90d94801e5e151d615216e7fc577cc1bf3417ea0",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "22926d3efc724147cf1eb1dac87ce855e0588ca345962e2e02a0ff7dffd74006"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "PREHISTORIC_NETS_79_Nhat_Ban.mp3",
+    "voice_id": "ja-JP-KeitaNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "c67bd7d3168bead0ae1505296b66856461ccbdb3df130d5862a80b60ff373802",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "7653964f13a6a8593cf1239a83ef437367f35778128dec7f4e19821bc0fb5778"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "PREHISTORIC_NETS_79_Han_Quoc.mp3",
+    "voice_id": "ko-KR-InJoonNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "b2b55fa443b7ac0a82078d733c958519c7ee57a93552387c0b3c081dc5573bf2",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "ee97bcf3fcbce23e34fba202d1f3d14104a307e73757539197c3a64197d44976"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "PREHISTORIC_NETS_79_Duc.mp3",
+    "voice_id": "de-DE-ConradNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "e8aafd0c64a645f88fbb3258e5b1e9ef0407c2bdb546dbe78b334a2031fb8060",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "6a9abf405def98147e4ec2481e9ae88587ffa740a445013255389d7b34d6669c"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "PREHISTORIC_NETS_79_Y.mp3",
+    "voice_id": "it-IT-DiegoNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "b82dc6677ab3fce699a34b4221e22de3c04fe1b38b14eb99191df84cbb314474",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "d2c19ccfc4cbee2a174c312b08a8bc725aeb8cf0592be5f342fbbe1838d5340e"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "PREHISTORIC_NETS_79_Bo_Dao_Nha.mp3",
+    "voice_id": "pt-PT-DuarteNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "c734c5b059f60d4ac747c25380e94677238bd001e2d6eb94029e134c94a00a37",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "83e1267489fc93eb93d92ef85c60f592e280d4cbb55c5bda938320e2cc4ad58b"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "PREHISTORIC_NETS_79_Ha_Lan.mp3",
+    "voice_id": "nl-NL-MaartenNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "d76e538be0e737c3372e0ba7627d797256ac6dd5569671ad64e670ecbc733d3f",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "43279a6cf6660ea84f14fd47575687f861d9ca1953e8713087ad3abaeab158c2"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "PREHISTORIC_NETS_79_Ba_Lan.mp3",
+    "voice_id": "pl-PL-MarekNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "1ea83629ef10ce4d9282866c6e167c93d314e49df8cf905205f683b43104c4e9",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "19121454fe172e5b1e54f5eeee0797d36253349e7b74b59a8d9c7ed7d2f9a1f3"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "PREHISTORIC_NETS_79_Thuy_Dien.mp3",
+    "voice_id": "sv-SE-MattiasNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "6797f50fc4a48c7df255172459678b04143c225a213f766e3df2996201d0d50b",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "3cffafabe67b1a9f84819e4ae0c7fe280f0b37267f6b38a11e3e49fb14602822"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "PREHISTORIC_NETS_79_Dan_Mach.mp3",
+    "voice_id": "da-DK-JeppeNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "c263d6ff173aff939b51f35aedbef9c8371b61af7cd2b77c89487fb63072b066",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "1d1fa27cc76ac1994858117724d6da6ab6264992731ebec3497bed1110db91bd"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "PREHISTORIC_NETS_79_Phan_Lan.mp3",
+    "voice_id": "fi-FI-HarriNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "d62cac581af77e400a8750687dc39eccdb6ec49609cdf21b1b26afa70d3f315b",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "ea424bee0607aed5153d417b450e65ffecc20d5b6d492433bb82949a2972f6de"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "PREHISTORIC_NETS_79_Na_Uy.mp3",
+    "voice_id": "nb-NO-FinnNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "26dcdd4f216bd496446f98f184522993604c76a8eac4911c6dd53d43e02dbd33",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "9681938797ad7a4f55175202cb1f937c04bf29848526ee7de19b75fa775aa471"
+  },
+  {
+    "locale": "cs-CZ",
+    "filename": "PREHISTORIC_NETS_79_Sec.mp3",
+    "voice_id": "cs-CZ-AntoninNeural",
+    "gender": "Male",
+    "bytes": 10896620,
+    "sha256": "f60e74ff0bbaf685418ba4538d5f3eac50eef25735cfccacd02fe016c3d881d0",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "3afb7d4d123c0b94bb4272113176ac95fb636f9951034b48c60871e271ddfc5c"
+  },
+  {
+    "locale": "mww",
+    "filename": "PREHISTORIC_NETS_79_Hmong_Trang_Nu.mp3",
+    "voice_id": "hmong-female-3",
+    "gender": "Female",
+    "bytes": 10896620,
+    "sha256": "e3b5862f8f9a6c9d00d1c8531dc8b9a97b0f654754781eebf8c3ec27ff591f8a",
+    "decoded_seconds": 1362,
+    "decoded_samples_48000": 65376000,
+    "narration_text_sha256": "6277fe6ab5733941af26eebef89f7b4fa9a76e7c7938e2d54b66c97a1982a3a3"
+  }
+]

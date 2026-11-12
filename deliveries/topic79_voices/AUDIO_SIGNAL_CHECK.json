@@ -1,0 +1,172 @@
+[
+  {
+    "locale": "da-DK",
+    "filename": "PREHISTORIC_NETS_79_Dan_Mach.mp3",
+    "sha256": "c263d6ff173aff939b51f35aedbef9c8371b61af7cd2b77c89487fb63072b066",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08418018754191889,
+    "peak": 0.45143330097198486,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "PREHISTORIC_NETS_79_Duc.mp3",
+    "sha256": "e8aafd0c64a645f88fbb3258e5b1e9ef0407c2bdb546dbe78b334a2031fb8060",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07898812333698364,
+    "peak": 0.6684921979904175,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "en-US",
+    "filename": "PREHISTORIC_NETS_79_My_Tieng_Anh.mp3",
+    "sha256": "2a19236d4edf5c0d084f8abeabf27084ca45fb3691a5ac094b9442990da5ed2a",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08941740079771243,
+    "peak": 0.5562074780464172,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "PREHISTORIC_NETS_79_Tay_Ban_Nha.mp3",
+    "sha256": "59dfdef239189362f72b5ca2ece058f5954b64d9216916693ae9d3bb917fb459",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07381051012672227,
+    "peak": 0.44663795828819275,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "PREHISTORIC_NETS_79_Phap.mp3",
+    "sha256": "43261336ce088c2926e2141d90d94801e5e151d615216e7fc577cc1bf3417ea0",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07101816005259262,
+    "peak": 0.4540022313594818,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "PREHISTORIC_NETS_79_Y.mp3",
+    "sha256": "b82dc6677ab3fce699a34b4221e22de3c04fe1b38b14eb99191df84cbb314474",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0768577058798991,
+    "peak": 0.5080291032791138,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "mww",
+    "filename": "PREHISTORIC_NETS_79_Hmong_Trang_Nu.mp3",
+    "sha256": "e3b5862f8f9a6c9d00d1c8531dc8b9a97b0f654754781eebf8c3ec27ff591f8a",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0767025904625027,
+    "peak": 0.40252965688705444,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "PREHISTORIC_NETS_79_Ha_Lan.mp3",
+    "sha256": "d76e538be0e737c3372e0ba7627d797256ac6dd5569671ad64e670ecbc733d3f",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09751019954881768,
+    "peak": 0.6026248931884766,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "PREHISTORIC_NETS_79_Ba_Lan.mp3",
+    "sha256": "1ea83629ef10ce4d9282866c6e167c93d314e49df8cf905205f683b43104c4e9",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08991539368716309,
+    "peak": 0.5484905242919922,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "PREHISTORIC_NETS_79_Bo_Dao_Nha.mp3",
+    "sha256": "c734c5b059f60d4ac747c25380e94677238bd001e2d6eb94029e134c94a00a37",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07206396632083413,
+    "peak": 0.4835537075996399,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "PREHISTORIC_NETS_79_Thuy_Dien.mp3",
+    "sha256": "6797f50fc4a48c7df255172459678b04143c225a213f766e3df2996201d0d50b",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07589844713855992,
+    "peak": 0.582748293876648,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "PREHISTORIC_NETS_79_Viet_Nam.mp3",
+    "sha256": "8c96029ba781c9047f981b6dced1fe5a3e4e5a0adc8b065f8834e4b51b4a50df",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08800220769398918,
+    "peak": 0.5979626178741455,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "cs-CZ",
+    "filename": "PREHISTORIC_NETS_79_Sec.mp3",
+    "sha256": "f60e74ff0bbaf685418ba4538d5f3eac50eef25735cfccacd02fe016c3d881d0",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08188089096830692,
+    "peak": 0.600492537021637,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "PREHISTORIC_NETS_79_Phan_Lan.mp3",
+    "sha256": "d62cac581af77e400a8750687dc39eccdb6ec49609cdf21b1b26afa70d3f315b",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.05253210012410704,
+    "peak": 0.47138160467147827,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "PREHISTORIC_NETS_79_Nhat_Ban.mp3",
+    "sha256": "c67bd7d3168bead0ae1505296b66856461ccbdb3df130d5862a80b60ff373802",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08103632999176147,
+    "peak": 0.7699211835861206,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "PREHISTORIC_NETS_79_Han_Quoc.mp3",
+    "sha256": "b2b55fa443b7ac0a82078d733c958519c7ee57a93552387c0b3c081dc5573bf2",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08364462792398888,
+    "peak": 0.5275281667709351,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "PREHISTORIC_NETS_79_Na_Uy.mp3",
+    "sha256": "26dcdd4f216bd496446f98f184522993604c76a8eac4911c6dd53d43e02dbd33",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07378684952860684,
+    "peak": 0.5404656529426575,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  }
+]
