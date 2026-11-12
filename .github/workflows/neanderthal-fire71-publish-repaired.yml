@@ -1,0 +1,53 @@
+name: Neanderthal fire71 verify all17 voices and publish repaired delivery
+'on':
+  push:
+    branches:
+    - codex/neanderthal-fire71-production-20261112
+    paths:
+    - .github/workflows/neanderthal-fire71-publish-repaired.yml
+  workflow_dispatch: null
+permissions:
+  contents: write
+  actions: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    permissions:
+      contents: write
+      actions: read
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: episode71
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: python episode71/extract_inputs.py
+    - run: "python -m pip install imageio-ffmpeg==0.6.0 \npython episode71/ensure_ffmpeg.py"
+    - uses: actions/download-artifact@v4
+      with:
+        pattern: fire71-voice-*
+        path: voice_artifacts
+        merge-multiple: false
+        run-id: 43241559543
+        github-token: ${{ github.token }}
+    - uses: actions/download-artifact@v4
+      with:
+        name: fire71-repair-voice-da-DK
+        path: voice_artifacts/fire71-voice-da-DK
+        run-id: 43243793604
+        github-token: ${{ github.token }}
+    - name: Verify all seventeen full waveforms and publish country files
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: python -u episode71/publish_voices.py
+    - uses: actions/upload-artifact@v4
+      with:
+        name: fire71-final-release-reports
+        path: 'episode71/voice_delivery/*.json
+
+          episode71/voice_delivery/SHA256SUMS.txt'
+        if-no-files-found: error
+        retention-days: 14
+        overwrite: true

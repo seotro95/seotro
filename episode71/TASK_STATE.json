@@ -33,6 +33,28 @@
   "other16_saved_ids_retained": true,
   "documents_delivered": true,
   "voices_generated": false,
-  "phase": "generating17voices",
-  "translations_ready": true
+  "phase": "16voices_rendered_english_pending",
+  "translations_ready": true,
+  "completed_voice_count": 16,
+  "completed_voice_locales": [
+    "vi-VN",
+    "es-ES",
+    "fr-FR",
+    "ja-JP",
+    "ko-KR",
+    "de-DE",
+    "it-IT",
+    "pt-PT",
+    "nl-NL",
+    "pl-PL",
+    "sv-SE",
+    "da-DK",
+    "fi-FI",
+    "nb-NO",
+    "cs-CZ",
+    "mww"
+  ],
+  "voice_repair_workflow_run_ids": [
+    43243793604
+  ]
 }
