@@ -1,4 +1,5 @@
 {
+  "transport_revision": 2,
   "topic": 50,
   "target_seconds": 1272,
   "expected_samples_48000": 61056000,
@@ -124,6 +125,11 @@
       "sha256": "cfc31dcee45868567456acedff0eb52593f4f341344f9a126823d5c8c91d62a4"
     },
     {
+      "path": "documents/PROVIDER_TEXT_METADATA_AUDIT.json",
+      "bytes": 5998,
+      "sha256": "cccdb3047925ba141a72a95af0e22041eb28de4a9eb79f6cd1bb2fda6955786a"
+    },
+    {
       "path": "documents/README.md",
       "bytes": 1345,
       "sha256": "9aeff495f7e936ad7e90a0d3834c765aa11592ccbfb226c1f813f21f0d89fbb3"
@@ -135,8 +141,8 @@
     },
     {
       "path": "documents/TRANSLATION_REVIEW.json",
-      "bytes": 1059,
-      "sha256": "02b28810feb0147ff1ae88d7e29ca256c79ce4fc1b41e411feec70dcee9688da"
+      "bytes": 1171,
+      "sha256": "d2ea2e0941c544ae7caab641539674a89bfd9a58a660d660cffa39103ee44bdd"
     },
     {
       "path": "documents/VOICE_FILE_NAMING.json",
@@ -190,8 +196,8 @@
     },
     {
       "path": "documents/VOICE_SCRIPTS/ja-JP.txt",
-      "bytes": 29562,
-      "sha256": "ed3769eac79ed0daeffaae5705e6a8719615d239f7052c61bc8a1a363e4d6882"
+      "bytes": 18923,
+      "sha256": "2d08fc1082532170aed6bf5628410b8b1a8679850bfe73104da33205624b6b76"
     },
     {
       "path": "documents/VOICE_SCRIPTS/ko-KR.txt",

@@ -4,7 +4,7 @@ P=Path(__file__).resolve().parent;D=P/'documents';ready=json.loads((P/'READY.jso
 repo=os.environ['GITHUB_REPOSITORY'];tag=ready['release_tag'];files=[]
 for item in ready['documents_inventory']:
  p=P/item['path'];assert p.is_relative_to(D) and p.suffix in {'.txt','.md','.csv','.srt','.json'}
- data=p.read_bytes();assert len(data)==item['bytes'] and hashlib.sha256(data).hexdigest()==item['sha256'];data.decode('utf-8');files.append(p)
+ data=p.read_bytes();assert len(data)==item['bytes'] and hashlib.sha256(data).hexdigest()==item['sha256'],item['path'];data.decode('utf-8');files.append(p)
 zpath=P/'MAMMOTH_STEPPE_50_TAI_LIEU_21m12s.zip'
 with zipfile.ZipFile(zpath,'w',zipfile.ZIP_DEFLATED) as z:
  for p in files:z.write(p,str(p.relative_to(D)))

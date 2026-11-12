@@ -4,7 +4,6 @@
   "english": "Original English3205words",
   "vietnamese": "Assistant-rewritten Vietnamese narration; local Adam male preset",
   "hmong": "Assistant-written contextual adaptation with simpler language; female-3 native engine",
-  "other14": "Machine translation from context-clarified source plus targeted terminology/locale review",
   "source_clarifications": [
     "mammoth is an animal rather than an adjective meaning giant",
     "forbs and herbaceous plants do not mean medicinal herbs",
@@ -18,5 +17,7 @@
   ],
   "independent_native_editorial_listening_review": false,
   "white_hmong_dialect_independently_verified": false,
-  "portuguese_locale": "pt-PT; European Portuguese vocabulary corrections"
+  "portuguese_locale": "pt-PT; European Portuguese vocabulary corrections",
+  "japanese": "Assistant-rewritten concise Japanese adaptation to fit chapters and correct technical meanings",
+  "other13": "Machine translation from context-clarified source plus targeted terminology/locale review"
 }
