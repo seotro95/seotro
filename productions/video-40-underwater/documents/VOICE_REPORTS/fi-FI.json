@@ -1,0 +1,173 @@
+{
+  "audio_seconds": 1222.0,
+  "sample_rate": 48000,
+  "parts": [
+    "part-0001.wav"
+  ],
+  "part_start_seconds": [
+    0.0
+  ],
+  "timing_mode": "exact",
+  "target_seconds": 1222,
+  "duration_verified": true,
+  "duration_report": {
+    "verified": true,
+    "sample_rate": 48000,
+    "sample_frames": 58656000,
+    "audio_seconds": 1222.0,
+    "target_seconds": 1222.0,
+    "error_frames": 0
+  },
+  "sync_ok": true,
+  "sync_report": {
+    "complete": true,
+    "cues": [
+      {
+        "cue": 1,
+        "start_frame": 0,
+        "end_frame": 4800000,
+        "speech_frames": 4799171,
+        "tempo": 1.12664,
+        "padding_frames": 829
+      },
+      {
+        "cue": 2,
+        "start_frame": 4800000,
+        "end_frame": 9600000,
+        "speech_frames": 4799283,
+        "tempo": 1.20038,
+        "padding_frames": 717
+      },
+      {
+        "cue": 3,
+        "start_frame": 9600000,
+        "end_frame": 14400000,
+        "speech_frames": 4799274,
+        "tempo": 1.19438,
+        "padding_frames": 726
+      },
+      {
+        "cue": 4,
+        "start_frame": 14400000,
+        "end_frame": 19200000,
+        "speech_frames": 4799356,
+        "tempo": 1.24692,
+        "padding_frames": 644
+      },
+      {
+        "cue": 5,
+        "start_frame": 19200000,
+        "end_frame": 24000000,
+        "speech_frames": 4799378,
+        "tempo": 1.26158,
+        "padding_frames": 622
+      },
+      {
+        "cue": 6,
+        "start_frame": 24000000,
+        "end_frame": 28800000,
+        "speech_frames": 4799377,
+        "tempo": 1.26114,
+        "padding_frames": 623
+      },
+      {
+        "cue": 7,
+        "start_frame": 28800000,
+        "end_frame": 33600000,
+        "speech_frames": 4799323,
+        "tempo": 1.22586,
+        "padding_frames": 677
+      },
+      {
+        "cue": 8,
+        "start_frame": 33600000,
+        "end_frame": 38400000,
+        "speech_frames": 4799251,
+        "tempo": 1.17906,
+        "padding_frames": 749
+      },
+      {
+        "cue": 9,
+        "start_frame": 38400000,
+        "end_frame": 43200000,
+        "speech_frames": 4799369,
+        "tempo": 1.25586,
+        "padding_frames": 631
+      },
+      {
+        "cue": 10,
+        "start_frame": 43200000,
+        "end_frame": 48000000,
+        "speech_frames": 4799176,
+        "tempo": 1.39188,
+        "padding_frames": 824
+      },
+      {
+        "cue": 11,
+        "start_frame": 48000000,
+        "end_frame": 52800000,
+        "speech_frames": 4799290,
+        "tempo": 1.20452,
+        "padding_frames": 710
+      },
+      {
+        "cue": 12,
+        "start_frame": 52800000,
+        "end_frame": 57600000,
+        "speech_frames": 4799300,
+        "tempo": 1.211,
+        "padding_frames": 700
+      },
+      {
+        "cue": 13,
+        "start_frame": 57600000,
+        "end_frame": 58656000,
+        "speech_frames": 1055126,
+        "tempo": 1.1170909090909091,
+        "padding_frames": 874
+      }
+    ],
+    "target_seconds": 1222,
+    "actual_seconds": 1222.0,
+    "error_frames": 0,
+    "sample_rate": 48000
+  },
+  "locale": "fi-FI",
+  "voice_id": "fi-FI-HarriNeural",
+  "gender": "Male",
+  "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "alignment_granularity": "12chapters100_seconds_plus_final22_seconds",
+  "expected_pcm_frames_48000": 58656000,
+  "mp3_decoded_duration": {
+    "verified": true,
+    "sample_frames": 58656000,
+    "sample_rate": 48000,
+    "audio_seconds": 1222.0,
+    "error_frames": 0
+  },
+  "mp3_file": "UNDERWATER_40_Phan_Lan.mp3",
+  "mp3_bytes": 9776684,
+  "mp3_sha256": "42615b9bdc7f7d03141c6afa278a0d3ee86d4ae964d6f92ce96c2228d4383f01",
+  "max_used_post_tempo": 1.39188,
+  "min_used_post_tempo": 1.1170909090909091,
+  "max_cue_padding_seconds": 0.018208333333333333,
+  "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
+  "numeric_speech_handling": "Original English numerals preserved; translated grouped integers normalized before sentence splitting; Hmong uses native number-word normalization.",
+  "narration_style_id": "science-documentary-expressive-v1",
+  "prosody_method": "Melo online backend with Edge rate/word-boundary adapter and gentle1.2dB word accents",
+  "voice_identity_preserved": true,
+  "pitch_shift_applied": false,
+  "prosody_summary": {
+    "pieces": 31,
+    "word_boundaries": 2488,
+    "word_accents": 45,
+    "settings_used": [
+      "+1%",
+      "-2%",
+      "-3%",
+      "-4%"
+    ]
+  },
+  "source_filename": "UNDERWATER_40_fi-FI.mp3"
+}

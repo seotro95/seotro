@@ -1,0 +1,155 @@
+[
+  {
+    "locale": "en-US",
+    "filename": "UNDERWATER_40_My_Tieng_Anh.mp3",
+    "sha256": "82aa7c8079f3fe67f542d2ee0930dccd19c02df52ed89c938614eab83475a165",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "en-US-AndrewNeural"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "UNDERWATER_40_Viet_Nam.mp3",
+    "sha256": "3ee86b5f53f4833e39f555f4565835611e1b20e7d4dcef4a299d71c7b8b742d1",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "vi-VN-NamMinhNeural"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "UNDERWATER_40_Tay_Ban_Nha.mp3",
+    "sha256": "d7127c5381b74444c1af3529ed47dec058ed2b5ddc1b72626ca04334c4e8f706",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "es-ES-AlvaroNeural"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "UNDERWATER_40_Phap.mp3",
+    "sha256": "039b9bb7d019c2d569e921cf8b9ea66a1a93fb3c2585e5525fef37d29dbb4cb6",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "fr-FR-HenriNeural"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "UNDERWATER_40_Nhat_Ban.mp3",
+    "sha256": "c9cb9002624e9268cdedf1ac5de037dbd7f6968815be5f37c52bce28ace8d754",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "ja-JP-KeitaNeural"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "UNDERWATER_40_Han_Quoc.mp3",
+    "sha256": "408ba79113a5b7e813819df2596dd6e1013fefc28bdf18bb0286cdce11fa27b0",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "ko-KR-InJoonNeural"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "UNDERWATER_40_Duc.mp3",
+    "sha256": "8d2c4591bca869d8185ecdadcdd3ff095c737b1dc2f5ed1d16d0f835b182572f",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "de-DE-ConradNeural"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "UNDERWATER_40_Y.mp3",
+    "sha256": "2eafc807159b05e359a33410e2e11cb5c9e216d9e29fde1aaa9ab626b33e8833",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "it-IT-DiegoNeural"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "UNDERWATER_40_Bo_Dao_Nha.mp3",
+    "sha256": "83051632a7eac9560f858a74987139e99b7bb2b860f86cfd9ce8131792a8c0b2",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "pt-PT-DuarteNeural"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "UNDERWATER_40_Ha_Lan.mp3",
+    "sha256": "0408ded1c2b554cbc2ded10ba42b8088dd5862b0e0ca206929660c1db2a0fb70",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "nl-NL-MaartenNeural"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "UNDERWATER_40_Ba_Lan.mp3",
+    "sha256": "4fc234916e32ed1ca41bcac4d240cca3123e12a2f8b90f551e9bda8b617cc457",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "pl-PL-MarekNeural"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "UNDERWATER_40_Thuy_Dien.mp3",
+    "sha256": "fb77c9505584185875bf4c7b59a8682e3e3dced0e78803468c40e0f443217f8d",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "sv-SE-MattiasNeural"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "UNDERWATER_40_Dan_Mach.mp3",
+    "sha256": "c49248b0e39624d14c021b0e5d8b506261a5580b570704bbfdf24a713d756433",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "da-DK-JeppeNeural"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "UNDERWATER_40_Phan_Lan.mp3",
+    "sha256": "42615b9bdc7f7d03141c6afa278a0d3ee86d4ae964d6f92ce96c2228d4383f01",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "fi-FI-HarriNeural"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "UNDERWATER_40_Na_Uy.mp3",
+    "sha256": "622eb9c630dae436b030a605fa6fd368ee5942331089d8d3f2bf5a098660c774",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "nb-NO-FinnNeural"
+  },
+  {
+    "locale": "cs-CZ",
+    "filename": "UNDERWATER_40_Sec.mp3",
+    "sha256": "4ea92733022a65327d0c46b61d0bb1bbf4428a09a60bd4ef462ffa24e5cb208a",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "cs-CZ-AntoninNeural"
+  },
+  {
+    "locale": "mww",
+    "filename": "UNDERWATER_40_Hmong_Trang_Nu.mp3",
+    "sha256": "c7d59c57f5de2fb88b87547d88825fd579ab840626bb044a41c793c20cc7f13f",
+    "bytes": 9776684,
+    "decoded_seconds": 1222,
+    "decoded_samples_48000": 58656000,
+    "voice_id": "hmong-female-3"
+  }
+]

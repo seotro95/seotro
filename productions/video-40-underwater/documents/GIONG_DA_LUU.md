@@ -2,22 +2,22 @@
 
 | Ngôn ngữ | Voice ID | Giới tính |
 |---|---|---|
-| en-US | en-US-AndrewNeural | Male |
-| vi-VN | vi-VN-NamMinhNeural | Male |
-| es-ES | es-ES-AlvaroNeural | Male |
-| fr-FR | fr-FR-HenriNeural | Male |
-| ja-JP | ja-JP-KeitaNeural | Male |
-| ko-KR | ko-KR-InJoonNeural | Male |
-| de-DE | de-DE-ConradNeural | Male |
-| it-IT | it-IT-DiegoNeural | Male |
-| pt-PT | pt-PT-DuarteNeural | Male |
-| nl-NL | nl-NL-MaartenNeural | Male |
-| pl-PL | pl-PL-MarekNeural | Male |
-| sv-SE | sv-SE-MattiasNeural | Male |
-| da-DK | da-DK-JeppeNeural | Male |
-| fi-FI | fi-FI-HarriNeural | Male |
-| nb-NO | nb-NO-FinnNeural | Male |
-| cs-CZ | cs-CZ-AntoninNeural | Male |
-| mww | hmong-female-3 | Female |
+| Mỹ — tiếng Anh | en-US-AndrewNeural | Male |
+| Việt Nam | vi-VN-NamMinhNeural | Male |
+| Tây Ban Nha | es-ES-AlvaroNeural | Male |
+| Pháp | fr-FR-HenriNeural | Male |
+| Nhật Bản | ja-JP-KeitaNeural | Male |
+| Hàn Quốc | ko-KR-InJoonNeural | Male |
+| Đức | de-DE-ConradNeural | Male |
+| Ý | it-IT-DiegoNeural | Male |
+| Bồ Đào Nha | pt-PT-DuarteNeural | Male |
+| Hà Lan | nl-NL-MaartenNeural | Male |
+| Ba Lan | pl-PL-MarekNeural | Male |
+| Thụy Điển | sv-SE-MattiasNeural | Male |
+| Đan Mạch | da-DK-JeppeNeural | Male |
+| Phần Lan | fi-FI-HarriNeural | Male |
+| Na Uy | nb-NO-FinnNeural | Male |
+| Séc | cs-CZ-AntoninNeural | Male |
+| H’Mông Trắng — nữ | hmong-female-3 | Female |
 
-Giữ nguyên bộ17giọng đã dùng trong tập29. H’mông dùng nữfemale-3,16ngôn ngữ khác dùng nam. Hồ sơ JSON lưu engine, VoiceID, commit nguồn và hash mẫu tham chiếu H’mông. Giọng từ dịch vụ có thể thay đổi mô hình dù vẫn giữ cùngID. Không đổi cao độ để giả giọng.
+Giữ nguyên bộ 17 giọng đã dùng trong tập 29. H’mông dùng nữ female-3, 16 ngôn ngữ khác dùng nam. Hồ sơ JSON lưu engine, Voice ID, commit nguồn và hash mẫu tham chiếu H’mông. Giọng từ dịch vụ có thể thay đổi mô hình dù vẫn giữ cùng ID. Không đổi cao độ để giả giọng.

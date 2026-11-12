@@ -15,4 +15,26 @@ Giữ 16 giọng nam và H’mông Trắng nữ female-3, cùng bộ ID đã lư
 
 Bản H’mông được viết lại theo ngữ cảnh bằng cách diễn đạt đơn giản hơn. 15 bản khác dựa trên dịch tự động từ tiếng Anh đã làm rõ ngữ cảnh, có sửa thuật ngữ và một số cách dùng địa phương. Chưa được người bản ngữ biên tập/nghe duyệt độc lập; phương ngữ H’mông Trắng cần kiểm tra riêng. Đối chiếu metadata từ dịch vụ không phải ASR hay nghe duyệt độc lập.
 
-Voice đang được tạo và kiểm tra; chưa công bố link MP3 chưa tồn tại.
+[Tải ZIP đủ 17 voice](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_17_VOICES_20m22s.zip)
+
+Cả 17 MP3 đã giải mã đủ 58.656.000 mẫu ở 48 kHz, đúng 20:22.
+
+| Ngôn ngữ | VoiceID | Tải riêng |
+|---|---|---|
+| Mỹ — tiếng Anh | en-US-AndrewNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_My_Tieng_Anh.mp3) |
+| Việt Nam | vi-VN-NamMinhNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Viet_Nam.mp3) |
+| Tây Ban Nha | es-ES-AlvaroNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Tay_Ban_Nha.mp3) |
+| Pháp | fr-FR-HenriNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Phap.mp3) |
+| Nhật Bản | ja-JP-KeitaNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Nhat_Ban.mp3) |
+| Hàn Quốc | ko-KR-InJoonNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Han_Quoc.mp3) |
+| Đức | de-DE-ConradNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Duc.mp3) |
+| Ý | it-IT-DiegoNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Y.mp3) |
+| Bồ Đào Nha | pt-PT-DuarteNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Bo_Dao_Nha.mp3) |
+| Hà Lan | nl-NL-MaartenNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Ha_Lan.mp3) |
+| Ba Lan | pl-PL-MarekNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Ba_Lan.mp3) |
+| Thụy Điển | sv-SE-MattiasNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Thuy_Dien.mp3) |
+| Đan Mạch | da-DK-JeppeNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Dan_Mach.mp3) |
+| Phần Lan | fi-FI-HarriNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Phan_Lan.mp3) |
+| Na Uy | nb-NO-FinnNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Na_Uy.mp3) |
+| Séc | cs-CZ-AntoninNeural | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Sec.mp3) |
+| H’Mông Trắng — nữ | hmong-female-3 | [MP3](https://github.com/seotro95/seotro/releases/download/underwater-video-40-20m22s/UNDERWATER_40_Hmong_Trang_Nu.mp3) |

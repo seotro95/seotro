@@ -1,0 +1,170 @@
+{
+  "audio_seconds": 1222.0,
+  "sample_rate": 48000,
+  "parts": [
+    "part-0001.wav"
+  ],
+  "part_start_seconds": [
+    0.0
+  ],
+  "timing_mode": "exact",
+  "target_seconds": 1222,
+  "duration_verified": true,
+  "duration_report": {
+    "verified": true,
+    "sample_rate": 48000,
+    "sample_frames": 58656000,
+    "audio_seconds": 1222.0,
+    "target_seconds": 1222.0,
+    "error_frames": 0
+  },
+  "sync_ok": true,
+  "sync_report": {
+    "complete": true,
+    "cues": [
+      {
+        "cue": 1,
+        "start_frame": 0,
+        "end_frame": 4800000,
+        "speech_frames": 4798423,
+        "tempo": 0.7838047916666666,
+        "padding_frames": 1577
+      },
+      {
+        "cue": 2,
+        "start_frame": 4800000,
+        "end_frame": 9600000,
+        "speech_frames": 4797772,
+        "tempo": 0.7838083333333333,
+        "padding_frames": 2228
+      },
+      {
+        "cue": 3,
+        "start_frame": 9600000,
+        "end_frame": 14400000,
+        "speech_frames": 4798680,
+        "tempo": 0.807811875,
+        "padding_frames": 1320
+      },
+      {
+        "cue": 4,
+        "start_frame": 14400000,
+        "end_frame": 19200000,
+        "speech_frames": 4798458,
+        "tempo": 0.7979435416666667,
+        "padding_frames": 1542
+      },
+      {
+        "cue": 5,
+        "start_frame": 19200000,
+        "end_frame": 24000000,
+        "speech_frames": 4798709,
+        "tempo": 0.8260395833333334,
+        "padding_frames": 1291
+      },
+      {
+        "cue": 6,
+        "start_frame": 24000000,
+        "end_frame": 28800000,
+        "speech_frames": 4798692,
+        "tempo": 0.8150391666666666,
+        "padding_frames": 1308
+      },
+      {
+        "cue": 7,
+        "start_frame": 28800000,
+        "end_frame": 33600000,
+        "speech_frames": 4798768,
+        "tempo": 0.864149375,
+        "padding_frames": 1232
+      },
+      {
+        "cue": 8,
+        "start_frame": 33600000,
+        "end_frame": 38400000,
+        "speech_frames": 4798735,
+        "tempo": 0.8426416666666666,
+        "padding_frames": 1265
+      },
+      {
+        "cue": 9,
+        "start_frame": 38400000,
+        "end_frame": 43200000,
+        "speech_frames": 4798718,
+        "tempo": 0.8322216666666666,
+        "padding_frames": 1282
+      },
+      {
+        "cue": 10,
+        "start_frame": 43200000,
+        "end_frame": 48000000,
+        "speech_frames": 4798783,
+        "tempo": 0.874573125,
+        "padding_frames": 1217
+      },
+      {
+        "cue": 11,
+        "start_frame": 48000000,
+        "end_frame": 52800000,
+        "speech_frames": 4798718,
+        "tempo": 0.8321929166666666,
+        "padding_frames": 1282
+      },
+      {
+        "cue": 12,
+        "start_frame": 52800000,
+        "end_frame": 57600000,
+        "speech_frames": 4798708,
+        "tempo": 0.8251397916666666,
+        "padding_frames": 1292
+      },
+      {
+        "cue": 13,
+        "start_frame": 57600000,
+        "end_frame": 58656000,
+        "speech_frames": 1054519,
+        "tempo": 0.8017935606060606,
+        "padding_frames": 1481
+      }
+    ],
+    "target_seconds": 1222,
+    "actual_seconds": 1222.0,
+    "error_frames": 0,
+    "sample_rate": 48000
+  },
+  "locale": "mww",
+  "voice_id": "hmong-female-3",
+  "gender": "Female",
+  "engine": "Voice-Studio-Hmong 1.6.6 Native VITS + OpenVoice V2",
+  "source_commit": "061430d958b8d5fc14d04209c6f0cd20492382c2",
+  "alignment_granularity": "12chapters100_seconds_plus_final22_seconds",
+  "expected_pcm_frames_48000": 58656000,
+  "mp3_decoded_duration": {
+    "verified": true,
+    "sample_frames": 58656000,
+    "sample_rate": 48000,
+    "audio_seconds": 1222.0,
+    "error_frames": 0
+  },
+  "mp3_file": "UNDERWATER_40_Hmong_Trang_Nu.mp3",
+  "mp3_bytes": 9776684,
+  "mp3_sha256": "c7d59c57f5de2fb88b87547d88825fd579ab840626bb044a41c793c20cc7f13f",
+  "max_used_post_tempo": 0.874573125,
+  "min_used_post_tempo": 0.7838047916666666,
+  "max_cue_padding_seconds": 0.04641666666666667,
+  "translation_review_status": "Translated and terminology/context reviewed by assistant; independent native editorial/listening review pending",
+  "numeric_speech_handling": "Original English numerals preserved; translated grouped integers normalized before sentence splitting; Hmong uses native number-word normalization.",
+  "reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+  "reference_url": "https://raw.githubusercontent.com/seotro95/seotro/061430d958b8d5fc14d04209c6f0cd20492382c2/voice-studio/assets/hmong/female-3.wav",
+  "audio_profile": "clear-v1",
+  "white_hmong_dialect_independently_verified": false,
+  "native_speed": 1.0,
+  "native_quality": "fast",
+  "native_precision": "fp32",
+  "native_device": "cpu",
+  "narration_style_id": "science-documentary-expressive-v1",
+  "prosody_method": "Native phrase speed/gain/pause controls; no word timing",
+  "voice_identity_preserved": true,
+  "pitch_shift_applied": false,
+  "source_filename": "UNDERWATER_40_mww_female.mp3"
+}
