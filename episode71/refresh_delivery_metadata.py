@@ -32,6 +32,7 @@ readme=D/'README.md';s=readme.read_text()
 if '5_TIEU_DE_VA_THUMBNAIL.txt' not in s:s+='\n[Tải 5 tiêu đề và 5 prompt thumbnail TXT]('+BASE+'5_TIEU_DE_VA_THUMBNAIL.txt)\n'
 
 for a,b in [('Anh,137','Anh, 137'),('mốc10giây','mốc 10 giây'),('Có130','Có 130'),('riêng,16 nam','riêng, 16 nam'),('=65.184.000','= 65.184.000'),('VieNeu3.8.3 ONNXFP32','VieNeu 3.8.3 ONNX FP32'),('đủ13 chương','đủ 13 chương'),('voice Anh,không','voice Anh, không')]:s=s.replace(a,b)
+s=s.replace('cuối2025','cuối 2025').replace('Romaní2026','Romaní 2026').replace('Hmong1.6.6','Hmong 1.6.6')
 readme.write_text(s)
 with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
     for p in sorted(D.rglob('*')):

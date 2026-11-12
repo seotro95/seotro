@@ -1,0 +1,24 @@
+name: Neanderthal fire71 refresh verified delivery records
+'on':
+  push:
+    branches:
+    - codex/neanderthal-fire71-production-20261112
+    paths:
+    - .github/workflows/neanderthal-fire71-refresh-delivery.yml
+  workflow_dispatch: null
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: episode71
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - env:
+        GH_TOKEN: ${{ github.token }}
+      run: python -u episode71/refresh_delivery_metadata.py
