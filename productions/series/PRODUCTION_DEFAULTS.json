@@ -108,6 +108,30 @@
       "reused_slots": 15,
       "vietnamese_voice": "Adam",
       "reason": "Explicit topic45 request; all other completed episodes and queued topics preserved"
+    },
+    "58": {
+      "target_seconds": 1362,
+      "english_cues": 137,
+      "last_cue_seconds": 2,
+      "translated_chapter_seconds": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        42
+      ],
+      "unique_prompts": 130,
+      "reused_slots": 7,
+      "vietnamese_voice": "Adam",
+      "reason": "Explicit topic58 request; preserve all other episodes and queued topics"
     }
   },
   "primary_video_language": "en-US",

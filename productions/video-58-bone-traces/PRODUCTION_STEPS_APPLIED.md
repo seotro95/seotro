@@ -10,3 +10,5 @@
 8. Lưu từng phần đã tạo,chỉ làm lại phần thiếu khi dịch vụ tạm lỗi; không vượt từ chối truy cập/giới hạn dịch vụ. Giữ cao độ,nhịp và khoảng nghỉ; nhấn nhẹ có kiểm soát. Không lấy im lặng thay lời thiếu.
 9. Chỉ phát hành đủ17MP3 khi kiểm hash,ID,giới tính,nội dung metadata online và từng phần native; giải mã mỗi tệp đúng65.376.000mẫu48kHz. Tải lại gói công khai,kiểm17URLriêng,ZIP CRC và giải mã lại.
 10. Lưu cấu hình và trạng thái vào GitHub. Chưa có footage/MP4;không tự khởi chạy tập khác. Khi có clip:chỉ voiceAnh,tắt tiếngclip,10cảnh liên quan trong30giây đầu có sẵn;thiếu cảnh dùng video chuyển động liên quan,không ảnh tĩnh/thẻ chữ.
+
+Kết quả đã kiểm: tải lại ZIP công khai, kiểm SHA256 và ZIP CRC; 17 link MP3 riêng trả HTTP200; từng tệp giải mã đúng65.376.000mẫu48kHz. SHA256 gói voice: 77169590596cf96150a2148bbd3371e13b8c371e6ace0dd00d6334083cd122b0. Chưa có footage hoặc MP4; chưa có kiểm nghe bản ngữ độc lập.

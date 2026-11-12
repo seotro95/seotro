@@ -1,7 +1,7 @@
 {
   "id": 58,
   "title": "Móng, răng và xương: nhận diện dấu thú ăn thịt trước khi kết luận có người săn.",
-  "phase": "documents_delivered_17voices_generating",
+  "phase": "documents_and17voices_delivered_awaiting_footage",
   "target_seconds": 1362,
   "english_script_words": 3647,
   "english_cues": 137,
@@ -19,5 +19,18 @@
   "voice_source_commit": "0b04de95aa1b9d6c250c81fc8ccee0378019ce5b",
   "voice_workflow_run_id": 43193496483,
   "english_preflight_run_id": 43190713802,
-  "voices_generated": false
+  "voices_generated": true,
+  "voice_files_delivered": 17,
+  "verified_seconds_per_voice": 1362,
+  "decoded_frames_per_voice_48000": 65376000,
+  "public_download_verified": true,
+  "documents_zip_sha256": "af2d3ff25ff0e38150eef69a7dee5bdeb96417a2a051c3aea1d0581b3ee33918",
+  "voice_archive_sha256": "77169590596cf96150a2148bbd3371e13b8c371e6ace0dd00d6334083cd122b0",
+  "voice_archive_url": "https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_17_VOICES_22m42s.zip",
+  "titles_thumbnail_url": "https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/5_TIEU_DE_VA_THUMBNAIL.txt",
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/bone-traces-video-58-22m42s",
+  "footage_generated": false,
+  "video_rendered": false,
+  "translation_native_review_pending": true,
+  "white_hmong_dialect_independently_verified": false
 }

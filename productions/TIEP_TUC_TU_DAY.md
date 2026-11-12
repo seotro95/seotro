@@ -1,9 +1,29 @@
 <!-- active-production -->
-# Chủ đề 58 — tài liệu đã phát hành, đang tạo 17 giọng — 22:42
+# Chủ đề 58 — đã có tài liệu và đủ 17 voice 22:42
 
-[Tải kịch bản và 13 TXT prompt](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_TAI_LIEU_22m42s.zip). Có 137 mốc Anh,130 prompt mới và7mốc dùng lại được đánh dấu; mọi prompt không có trẻ em, lời nói hoặc âm thanh. Chủ đề là nhận diện dấu thú ăn thịt trên xương trước khi kết luận có người săn. Việt giữ Adam native,16nhận diện khác giữ như tập45; H’mông dùng female-3 nữ.
+[Tải đủ 17 giọng ZIP](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_17_VOICES_22m42s.zip) · [Kịch bản và 13 TXT prompt](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_TAI_LIEU_22m42s.zip) · [5 tiêu đề và 5 prompt thumbnail](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/5_TIEU_DE_VA_THUMBNAIL.txt)
 
-[Theo dõi 17 voice](https://github.com/seotro95/seotro/actions/runs/43193496483). Chỉ phát hành sau khi giải mã từng tệp đúng65.376.000mẫu48kHz, tương đương22:42. Mẫu Anh30giây đã đạt. Chưa có footage hoặcMP4tập58. Mã nguồn ở nhánh codex/bone-traces58-production-20261112, thư mục episode58. Không tạo lại phần đã thành công hoặc tự bắt đầu tập khác. Chủ đề45 đã hoàn thành tài liệu và17voice;giữ mọi tập cũ.
+- [Anh (Mỹ)](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_My_Tieng_Anh.mp3) — 22:42
+- [Việt Nam — Adam](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Viet_Nam_Adam.mp3) — 22:42
+- [Tây Ban Nha](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Tay_Ban_Nha.mp3) — 22:42
+- [Pháp](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Phap.mp3) — 22:42
+- [Nhật Bản](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Nhat_Ban.mp3) — 22:42
+- [Hàn Quốc](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Han_Quoc.mp3) — 22:42
+- [Đức](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Duc.mp3) — 22:42
+- [Ý](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Y.mp3) — 22:42
+- [Bồ Đào Nha](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Bo_Dao_Nha.mp3) — 22:42
+- [Hà Lan](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Ha_Lan.mp3) — 22:42
+- [Ba Lan](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Ba_Lan.mp3) — 22:42
+- [Thụy Điển](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Thuy_Dien.mp3) — 22:42
+- [Đan Mạch](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Dan_Mach.mp3) — 22:42
+- [Phần Lan](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Phan_Lan.mp3) — 22:42
+- [Na Uy (Bokmål)](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Na_Uy.mp3) — 22:42
+- [Séc](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Sec.mp3) — 22:42
+- [H'mông Trắng (nữ)](https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_Hmong_Trang_Nu.mp3) — 22:42
+
+Mỗi MP3 đã được tải lại, kiểm hash và giải mã đúng 65.376.000 mẫu ở 48 kHz. Việt dùng Adam thật; H’mông dùng reference female-3. Chưa có kiểm nghe/biên tập bản ngữ độc lập hoặc xác minh phương ngữ H’mông Trắng độc lập.
+
+Chủ đề: nhận diện dấu thú ăn thịt trên xương trước khi kết luận có người săn. Có 137 mốc Anh, 130 prompt mới trong 13 TXT, 7 mốc dùng lại; mọi prompt không có trẻ em, lời nói hoặc âm thanh. Chưa có footage hoặc MP4 tập58. Khi có clip: chỉ voice Anh, bỏ toàn bộ tiếng clip, 10 cảnh liên quan trong 30 giây đầu nằm trong 22:42. Cảnh thiếu dùng video chuyển động liên quan, không ảnh tĩnh hoặc thẻ chữ. Giữ 17 nhận diện như tập45, không tạo lại voice đã xong hoặc tự bắt đầu tập khác. Hồ sơ: productions/video-58-bone-traces; mã nguồn: nhánh codex/bone-traces58-production-20261112, thư mục episode58.
 <!-- /active-production -->
 
 ---
@@ -152,6 +172,7 @@ Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ 
 ## Bàn giao video chủ đề4
 
 Đã dựng và xuất bản23:00, chỉ voiceAnh gốc có nhấn nhá.133upload/115clipkhácnhau/18bảntrùng; chọn cảnh người trưởng thành, bỏ mọi tiếngclip và cảnh không phù hợp.12shot trong30giây đầu; các chương theo ranh120/110s. [Video](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Tập5 vẫn chưa bắt đầu.
+
 
 
 

@@ -1,7 +1,7 @@
 {
   "profile_set_id": "science-prehistory-17-v2-adam-vi",
-  "topic_id": 45,
-  "target_seconds": 1242,
+  "topic_id": 58,
+  "target_seconds": 1362,
   "profiles": [
     {
       "locale": "en-US",
@@ -12,11 +12,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_My_Tieng_Anh.mp3",
-      "mp3_sha256": "192b8faf70d1a37aa8bc7a48ab614cdb114d75fe86bd6967e325fdfeaae7b2f0",
-      "alignment_granularity": "125Englishcues",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_My_Tieng_Anh.mp3",
+      "mp3_sha256": "e0cc977082ed29edd469d43b36831754dbb353e18f1a3267a130e73c559fea55",
+      "alignment_granularity": "137Englishcues"
     },
     {
       "locale": "vi-VN",
@@ -33,11 +33,11 @@
       "model_repo": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
       "model_revision": "61b85e3d937fbbacb387714180e8182823512523",
       "base_rate": "native punctuation and phrase pauses",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Viet_Nam_Adam.mp3",
-      "mp3_sha256": "7a89b1c5f168e77edb980e194f72bb1bba9d7b877b98fca0eeca2f428416ff52",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Viet_Nam_Adam.mp3",
+      "mp3_sha256": "86ade4f80b84e404c6dc83ef0c01b44f4881866a2393c7611616d849ed90c4c0",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "es-ES",
@@ -48,11 +48,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Tay_Ban_Nha.mp3",
-      "mp3_sha256": "03199bf713c39bc623a9a3826eef8b7cacf294a19c5e7c3207055fe450135ee6",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Tay_Ban_Nha.mp3",
+      "mp3_sha256": "f735412bd65dc6a416479b035d392023456ab8cd2d8d124ec5dfc27b469ea643",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "fr-FR",
@@ -63,11 +63,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Phap.mp3",
-      "mp3_sha256": "cf28caa12b90f1f8ebdfeff67478d38ef5db69c506103e5d3a9bdb6c9496cf08",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Phap.mp3",
+      "mp3_sha256": "548f8947be92956172ff68cf10a550111cac784c61e5feecac57f641e8aa5254",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "ja-JP",
@@ -78,11 +78,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Nhat_Ban.mp3",
-      "mp3_sha256": "b726dc736f4f523a64d1380ff9880ee2827a2a182ceb2ec849ff3369223e5a15",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Nhat_Ban.mp3",
+      "mp3_sha256": "4334cadd9d34af2a16c07183ec83f7c47f8d0eca43fe5c5dbbea249900e89ffb",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "ko-KR",
@@ -93,11 +93,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Han_Quoc.mp3",
-      "mp3_sha256": "6d733b301922f3fca1c47b6adfaf4ce313677102783e0cb46653c192717b05dd",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Han_Quoc.mp3",
+      "mp3_sha256": "5bb9365c9181c5f1f2e04c5cb485e22a4707a479b6e5d48db36d091e22132f17",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "de-DE",
@@ -108,11 +108,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Duc.mp3",
-      "mp3_sha256": "ed40ef15eeb153fa6167a023bf6a716112f356ec821dd320f17ff99906264a80",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Duc.mp3",
+      "mp3_sha256": "3680d849cadb017f2c7b5c1a7464ddc032a736df1b9259569a584938c89e229c",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "it-IT",
@@ -123,11 +123,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Y.mp3",
-      "mp3_sha256": "f5be377bde01a285ea8a596c617d202e8d333c723f33cd420fc73ca9486778ae",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Y.mp3",
+      "mp3_sha256": "d45bfa16ccaf57144bb12f2e17af2a8ab10da737b52af90df12f37c6c3a6f722",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "pt-PT",
@@ -138,11 +138,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Bo_Dao_Nha.mp3",
-      "mp3_sha256": "cfdd5ef9f8ca156a25da5137d70c38cf573692aae00d6a19f78f7ee8670cde8c",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Bo_Dao_Nha.mp3",
+      "mp3_sha256": "05e19ad539711e1fb1fd59faa04032c4b8f8b0f6badfa37ff92639a60a93407b",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "nl-NL",
@@ -153,11 +153,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Ha_Lan.mp3",
-      "mp3_sha256": "463a5950a0de99a91411ea0f89314d039a1f4abf603067185ceec60f655cd0a3",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Ha_Lan.mp3",
+      "mp3_sha256": "970569560748cf77ca257ad7ed026dea916a4485845f8c3a0ef0db2fbb3ae222",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "pl-PL",
@@ -168,11 +168,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Ba_Lan.mp3",
-      "mp3_sha256": "7d21be50e473436fa3ae33bd7f48325fa4dbd040c3ec689b267f12d2c4f63747",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Ba_Lan.mp3",
+      "mp3_sha256": "ab4f45cc7a32557db6babc7cbdfd6df3b8f348b5692a8ff1f690b12cbcbb17b5",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "sv-SE",
@@ -183,11 +183,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Thuy_Dien.mp3",
-      "mp3_sha256": "7869ca3f77f7f9c5b59a390d2bc79d0f022e6cf2fd17fc8db972d202f8785e19",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Thuy_Dien.mp3",
+      "mp3_sha256": "2ccdeb68cf524743c36c21e880a9b0e9b146df7cb34eec623959c049a93d9750",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "da-DK",
@@ -198,11 +198,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Dan_Mach.mp3",
-      "mp3_sha256": "6de520abd30c85cf6660e67d9e609eef307eb808692c154ccef7c007dd7d5ce6",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Dan_Mach.mp3",
+      "mp3_sha256": "db034bd91f9b5094f591de2a7a30e941c4b6a18e6597576239675f6c78aca07e",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "fi-FI",
@@ -213,11 +213,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Phan_Lan.mp3",
-      "mp3_sha256": "ea0d998957d2549cd9435f74f49a0cad16dfce13ab6ea944622429bab4287518",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Phan_Lan.mp3",
+      "mp3_sha256": "e06978b22dda708e3dc252795dc7175193c6c5b71f13e070bc58dbb2bd06a085",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "nb-NO",
@@ -228,11 +228,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Na_Uy.mp3",
-      "mp3_sha256": "8e2bec1fdbc67bf0f4c7b1481d6013980b191e657be5ad68419d828cf3b68f4e",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Na_Uy.mp3",
+      "mp3_sha256": "f5d81fc5b03c41632a3ad9473616328c9ded8005d269cd5f624b2621a279dc90",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "cs-CZ",
@@ -243,11 +243,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Sec.mp3",
-      "mp3_sha256": "c022fc30d8aa2b092b3a9270ff9e26d442052b6b54d158ca3b8b3d8a37144131",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Sec.mp3",
+      "mp3_sha256": "f22ee61b164e89e51d0a9660e42638bdd1d4504457c56dc00afb60ff18e4241e",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "mww",
@@ -261,12 +261,12 @@
       "reference_url": "https://raw.githubusercontent.com/seotro95/seotro/061430d958b8d5fc14d04209c6f0cd20492382c2/voice-studio/assets/hmong/female-3.wav",
       "audio_profile": "clear-v1",
       "dialect_independently_verified": false,
-      "duration_seconds": 1242,
-      "delivery_filename": "FOOD_PRESERVATION_45_Hmong_Trang_Nu.mp3",
-      "mp3_sha256": "7e94052ed156c3e89373599f76c1bde47283be5901ed5fd56bf9d090c8bc4a85",
-      "alignment_granularity": "13 shared chapter boundaries",
-      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI"
+      "narration_style_id": "science-documentary-expressive-v2-grouped-English-Adam-VI",
+      "duration_seconds": 1362,
+      "delivery_filename": "BONE_TRACES_58_Hmong_Trang_Nu.mp3",
+      "mp3_sha256": "2e87bd3f0ae3bd1de6c16e8879cac2434dd86bb7cc4bdcee336053785a6c0d22",
+      "alignment_granularity": "13 shared chapter boundaries"
     }
   ],
-  "note": "All17episode45voices complete and decoded to1242seconds. Vietnameseexplicitly changed to nativeAdam; other16savedidentities retained. Independent native listening and WhiteHmongdialect review pending."
+  "note": "All17episode58voices complete and decoded to1362seconds. Vietnameseexplicitly changed to nativeAdam; other16savedidentities retained. Independent native listening and WhiteHmongdialect review pending."
 }

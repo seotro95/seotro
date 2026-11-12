@@ -1,0 +1,162 @@
+{
+  "status": "passed",
+  "topic_id": 58,
+  "voices": 17,
+  "male_voices": 16,
+  "female_voice": "hmong-female-3",
+  "native_voices": 2,
+  "online_voices": 15,
+  "vietnamese_voice_id": "Adam",
+  "all_decoded_seconds": 1362,
+  "all_decoded_frames_48000": 65376000,
+  "all_ids_match_episode58_profile": true,
+  "other16saved_voice_ids_retained": true,
+  "native_hmong_reference_matches": true,
+  "native_adam_preset_matches": true,
+  "unique_audio_hashes": 17,
+  "pitch_shift_applied": false,
+  "english_cue_count": 137,
+  "other_language_chapter_count": 13,
+  "online_word_metadata_checked": true,
+  "english_word_boundary_cue_split_checked": true,
+  "independent_native_listening_review": false,
+  "white_hmong_dialect_independently_verified": false,
+  "reports": {
+    "nb-NO": {
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "BONE_TRACES_58_Na_Uy.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.060160233066278,
+      "max_tempo": 1.2015294974508375,
+      "word_accents": 52
+    },
+    "ko-KR": {
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "BONE_TRACES_58_Han_Quoc.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.2428259286234522,
+      "max_tempo": 1.481646030589949,
+      "word_accents": 47
+    },
+    "fr-FR": {
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "BONE_TRACES_58_Phap.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.0695557174071377,
+      "max_tempo": 1.1989075018208302,
+      "word_accents": 53
+    },
+    "pl-PL": {
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "BONE_TRACES_58_Ba_Lan.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.0468317552804078,
+      "max_tempo": 1.268827385287691,
+      "word_accents": 38
+    },
+    "ja-JP": {
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "BONE_TRACES_58_Nhat_Ban.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.2852148579752367,
+      "max_tempo": 1.5478514202476328,
+      "word_accents": 39
+    },
+    "vi-VN": {
+      "voice_id": "Adam",
+      "filename": "BONE_TRACES_58_Viet_Nam_Adam.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 0.8376729788783686,
+      "max_tempo": 0.9399126001456664,
+      "word_accents": 0
+    },
+    "cs-CZ": {
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "BONE_TRACES_58_Sec.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.057538237436271,
+      "max_tempo": 1.2157319737800436,
+      "word_accents": 38
+    },
+    "sv-SE": {
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "BONE_TRACES_58_Thuy_Dien.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.269045884923525,
+      "max_tempo": 1.4466860888565185,
+      "word_accents": 52
+    },
+    "da-DK": {
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "BONE_TRACES_58_Dan_Mach.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.0933721777130372,
+      "max_tempo": 1.259213401310998,
+      "word_accents": 33
+    },
+    "fi-FI": {
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "BONE_TRACES_58_Phan_Lan.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.1777130371449382,
+      "max_tempo": 1.422869628550619,
+      "word_accents": 54
+    },
+    "pt-PT": {
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "BONE_TRACES_58_Bo_Dao_Nha.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.0055353241077931,
+      "max_tempo": 1.1427530954115075,
+      "word_accents": 47
+    },
+    "mww": {
+      "voice_id": "hmong-female-3",
+      "filename": "BONE_TRACES_58_Hmong_Trang_Nu.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.0754180322893907,
+      "max_tempo": 1.2065673176134986,
+      "word_accents": 0
+    },
+    "it-IT": {
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "BONE_TRACES_58_Y.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.213983976693372,
+      "max_tempo": 1.4180626365622722,
+      "word_accents": 41
+    },
+    "de-DE": {
+      "voice_id": "de-DE-ConradNeural",
+      "filename": "BONE_TRACES_58_Duc.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.2563729060451565,
+      "max_tempo": 1.448652585579024,
+      "word_accents": 38
+    },
+    "es-ES": {
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "BONE_TRACES_58_Tay_Ban_Nha.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.1659140568099051,
+      "max_tempo": 1.3431172614712308,
+      "word_accents": 44
+    },
+    "nl-NL": {
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "BONE_TRACES_58_Ha_Lan.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.1482155863073562,
+      "max_tempo": 1.294610342316096,
+      "word_accents": 64
+    },
+    "en-US": {
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "BONE_TRACES_58_My_Tieng_Anh.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 0.7748983739837398,
+      "max_tempo": 1.431732723577236,
+      "word_accents": 54
+    }
+  }
+}

@@ -1,0 +1,491 @@
+{
+  "topic_id": 58,
+  "status": "context_and_key_claims_reviewed",
+  "source_revision": "explicit-bone-trace-context-v2",
+  "original_english_unchanged": true,
+  "vietnamese_all13chapters_rewritten": true,
+  "hmong_all13chapters_rewritten": true,
+  "white_hmong_dialect_independently_verified": false,
+  "locales": [
+    {
+      "locale": "vi-VN",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "terminology_edits": 0,
+      "publication_years_checked": "Dates spelled out and checked in rewrite",
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "es-ES",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [],
+      "terminology_edits": 0,
+      "publication_years_checked": {
+        "3": [
+          "2006",
+          "2017"
+        ],
+        "5": [
+          "2013"
+        ],
+        "6": [
+          "1988"
+        ],
+        "7": [
+          "2010",
+          "2015"
+        ],
+        "9": [
+          "2012",
+          "2021"
+        ],
+        "10": [
+          "1996"
+        ]
+      },
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "fr-FR",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [],
+      "terminology_edits": 0,
+      "publication_years_checked": {
+        "3": [
+          "2006",
+          "2017"
+        ],
+        "5": [
+          "2013"
+        ],
+        "6": [
+          "1988"
+        ],
+        "7": [
+          "2010",
+          "2015"
+        ],
+        "9": [
+          "2012",
+          "2021"
+        ],
+        "10": [
+          "1996"
+        ]
+      },
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "ja-JP",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [],
+      "terminology_edits": 3,
+      "publication_years_checked": {
+        "3": [
+          "2006",
+          "2017"
+        ],
+        "5": [
+          "2013"
+        ],
+        "6": [
+          "1988"
+        ],
+        "7": [
+          "2010",
+          "2015"
+        ],
+        "9": [
+          "2012",
+          "2021"
+        ],
+        "10": [
+          "1996"
+        ]
+      },
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "ko-KR",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [],
+      "terminology_edits": 2,
+      "publication_years_checked": {
+        "3": [
+          "2006",
+          "2017"
+        ],
+        "5": [
+          "2013"
+        ],
+        "6": [
+          "1988"
+        ],
+        "7": [
+          "2010",
+          "2015"
+        ],
+        "9": [
+          "2012",
+          "2021"
+        ],
+        "10": [
+          "1996"
+        ]
+      },
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "de-DE",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [],
+      "terminology_edits": 0,
+      "publication_years_checked": {
+        "3": [
+          "2006",
+          "2017"
+        ],
+        "5": [
+          "2013"
+        ],
+        "6": [
+          "1988"
+        ],
+        "7": [
+          "2010",
+          "2015"
+        ],
+        "9": [
+          "2012",
+          "2021"
+        ],
+        "10": [
+          "1996"
+        ]
+      },
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "it-IT",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [],
+      "terminology_edits": 0,
+      "publication_years_checked": {
+        "3": [
+          "2006",
+          "2017"
+        ],
+        "5": [
+          "2013"
+        ],
+        "6": [
+          "1988"
+        ],
+        "7": [
+          "2010",
+          "2015"
+        ],
+        "9": [
+          "2012",
+          "2021"
+        ],
+        "10": [
+          "1996"
+        ]
+      },
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "pt-PT",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [],
+      "terminology_edits": 0,
+      "publication_years_checked": {
+        "3": [
+          "2006",
+          "2017"
+        ],
+        "5": [
+          "2013"
+        ],
+        "6": [
+          "1988"
+        ],
+        "7": [
+          "2010",
+          "2015"
+        ],
+        "9": [
+          "2012",
+          "2021"
+        ],
+        "10": [
+          "1996"
+        ]
+      },
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "nl-NL",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [],
+      "terminology_edits": 0,
+      "publication_years_checked": {
+        "3": [
+          "2006",
+          "2017"
+        ],
+        "5": [
+          "2013"
+        ],
+        "6": [
+          "1988"
+        ],
+        "7": [
+          "2010",
+          "2015"
+        ],
+        "9": [
+          "2012",
+          "2021"
+        ],
+        "10": [
+          "1996"
+        ]
+      },
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "pl-PL",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [],
+      "terminology_edits": 0,
+      "publication_years_checked": {
+        "3": [
+          "2006",
+          "2017"
+        ],
+        "5": [
+          "2013"
+        ],
+        "6": [
+          "1988"
+        ],
+        "7": [
+          "2010",
+          "2015"
+        ],
+        "9": [
+          "2012",
+          "2021"
+        ],
+        "10": [
+          "1996"
+        ]
+      },
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "sv-SE",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [],
+      "terminology_edits": 0,
+      "publication_years_checked": {
+        "3": [
+          "2006",
+          "2017"
+        ],
+        "5": [
+          "2013"
+        ],
+        "6": [
+          "1988"
+        ],
+        "7": [
+          "2010",
+          "2015"
+        ],
+        "9": [
+          "2012",
+          "2021"
+        ],
+        "10": [
+          "1996"
+        ]
+      },
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "da-DK",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [],
+      "terminology_edits": 0,
+      "publication_years_checked": {
+        "3": [
+          "2006",
+          "2017"
+        ],
+        "5": [
+          "2013"
+        ],
+        "6": [
+          "1988"
+        ],
+        "7": [
+          "2010",
+          "2015"
+        ],
+        "9": [
+          "2012",
+          "2021"
+        ],
+        "10": [
+          "1996"
+        ]
+      },
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "fi-FI",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [],
+      "terminology_edits": 0,
+      "publication_years_checked": {
+        "3": [
+          "2006",
+          "2017"
+        ],
+        "5": [
+          "2013"
+        ],
+        "6": [
+          "1988"
+        ],
+        "7": [
+          "2010",
+          "2015"
+        ],
+        "9": [
+          "2012",
+          "2021"
+        ],
+        "10": [
+          "1996"
+        ]
+      },
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "nb-NO",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [],
+      "terminology_edits": 0,
+      "publication_years_checked": {
+        "3": [
+          "2006",
+          "2017"
+        ],
+        "5": [
+          "2013"
+        ],
+        "6": [
+          "1988"
+        ],
+        "7": [
+          "2010",
+          "2015"
+        ],
+        "9": [
+          "2012",
+          "2021"
+        ],
+        "10": [
+          "1996"
+        ]
+      },
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "cs-CZ",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [],
+      "terminology_edits": 0,
+      "publication_years_checked": {
+        "3": [
+          "2006",
+          "2017"
+        ],
+        "5": [
+          "2013"
+        ],
+        "6": [
+          "1988"
+        ],
+        "7": [
+          "2010",
+          "2015"
+        ],
+        "9": [
+          "2012",
+          "2021"
+        ],
+        "10": [
+          "1996"
+        ]
+      },
+      "independent_native_editorial_or_listening_review": false
+    },
+    {
+      "locale": "mww",
+      "chapters": 13,
+      "target_seconds": 1362,
+      "assistant_rewritten_chapters": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "terminology_edits": 0,
+      "publication_years_checked": "Dates spelled out and checked in rewrite",
+      "independent_native_editorial_or_listening_review": false
+    }
+  ]
+}

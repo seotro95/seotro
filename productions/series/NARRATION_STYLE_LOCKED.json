@@ -33,7 +33,7 @@
     ],
     "method": "Same native VITS and OpenVoice reference; phrase-level controls, no invented word alignment or emotion model"
   },
-  "timing": "Use latest explicitly requested episode duration. Topic45:1242seconds, English125cues and other languages13shared chapters. No cross-language word alignment claim.",
+  "timing": "Use the latest explicit episode duration. Topic58:1362seconds, English137cues and other languages13shared chapters. No cross-language word-alignment claim.",
   "limits": "Controls depend on each engine. Naturalness,names,native language and WhiteHmong dialect need independent listening review. Prior completed topics are preserved.",
   "english": {
     "request_group_max_cues": 3,
