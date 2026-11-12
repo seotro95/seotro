@@ -1,0 +1,23 @@
+name: Food preservation45 publish script and110silent prompts
+on:
+  push:
+    branches: [codex/food-preservation45-production-20261112]
+    paths: [.github/workflows/food-preservation45-documents.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: episode45
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate125cues,110prompts and public document release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u episode45/publish_documents.py
