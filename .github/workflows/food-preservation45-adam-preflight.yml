@@ -1,0 +1,41 @@
+name: Food preservation45 nativeVietnameseAdam preflight
+on:
+  push:
+    branches: [codex/food-preservation45-production-20261112]
+    paths: [.github/workflows/food-preservation45-adam-preflight.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  adam:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: episode45
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify episode documents were published first
+        run: |
+          python - <<'PY'
+          import json,urllib.request
+          q=json.load(urllib.request.urlopen('https://github.com/seotro95/seotro/releases/download/food-preservation-video-45-20m42s/DOCUMENT_QA.json',timeout=45))
+          assert q['status']=='passed' and q['target_seconds']==1242 and q['vietnamese_voice_id']=='Adam'
+          PY
+      - run: |
+          python -m pip install imageio-ffmpeg==0.6.0 vieneu==3.8.3 onnxruntime==1.23.2 numpy==2.2.6
+          python episode45/ensure_ffmpeg.py
+      - run: python -u episode45/bootstrap_tool.py adam
+      - name: Synthesize actual pinned maleAdam via userMelo worker
+        run: python -u episode45/preflight_adam.py
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: food45-adam-preflight
+          path: |
+            episode45/ADAM_PREFLIGHT_QA.json
+            episode45/ADAM_NATIVE_PREVIEW.wav
+          if-no-files-found: ignore
+          retention-days: 14
