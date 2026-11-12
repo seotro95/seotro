@@ -31,7 +31,8 @@
   "primary_video_locale": "en-US",
   "vietnamese_voice": "vi-VN-NamMinhNeural",
   "other16_saved_ids_retained": true,
-  "documents_delivered": false,
+  "documents_delivered": true,
   "voices_generated": false,
-  "phase": "documents_ready"
+  "phase": "generating17voices",
+  "translations_ready": true
 }
