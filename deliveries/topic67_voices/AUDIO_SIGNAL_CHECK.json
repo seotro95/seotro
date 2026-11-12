@@ -1,0 +1,172 @@
+[
+  {
+    "locale": "cs-CZ",
+    "filename": "PREHISTORIC_AGE_67_Sec.mp3",
+    "sha256": "3f6cfa3362e11e9bd317e928c4ec84b69def5fc70ef9e7bc14864c1de061ee44",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0755128627202436,
+    "peak": 0.5329942107200623,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "PREHISTORIC_AGE_67_Dan_Mach.mp3",
+    "sha256": "1037e41160f31714045c55741b01bf2412bf00e015f31d9724f5ec4d907d3910",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08396706906775082,
+    "peak": 0.4998742938041687,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "PREHISTORIC_AGE_67_Duc.mp3",
+    "sha256": "35ca42b99cb1b1b7be226266132a99f67ac66bf10c5f700def0222d9ac9f4dea",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07845690942208197,
+    "peak": 0.5779762268066406,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "en-US",
+    "filename": "PREHISTORIC_AGE_67_My_Tieng_Anh.mp3",
+    "sha256": "be4b722779bcbbb7243958745a366055070bd1afe2458b0c52dc62e868b01373",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09334481811434545,
+    "peak": 0.6719703674316406,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "PREHISTORIC_AGE_67_Tay_Ban_Nha.mp3",
+    "sha256": "3f3b0a5ed1bd0854ae95eaf2bfe359d480a74e2f295bd7bc2a71f9153a8f2130",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07243529749331537,
+    "peak": 0.5843960642814636,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "PREHISTORIC_AGE_67_Phan_Lan.mp3",
+    "sha256": "cb36bb71cac41511aca73e6bf3df0fb0dc7ef51386a300e50e573a71241c10fc",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.057344979699441925,
+    "peak": 0.4593746066093445,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "PREHISTORIC_AGE_67_Phap.mp3",
+    "sha256": "45366201858e6b52f774271fc924b9824e2b4df935244633f2977584cbf8216c",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06677844998056799,
+    "peak": 0.5301200151443481,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "PREHISTORIC_AGE_67_Y.mp3",
+    "sha256": "d6e2347b5bb34dccd1170caa15d3c2dcbce32f3f40062456eafcb12e1dde20c6",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08166937486153068,
+    "peak": 0.513952910900116,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "PREHISTORIC_AGE_67_Nhat_Ban.mp3",
+    "sha256": "20695443c1bb6067977449ecb255de1447d1e87e4694c3608b79347a76c77ed1",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09025928382853247,
+    "peak": 0.6791963577270508,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "PREHISTORIC_AGE_67_Han_Quoc.mp3",
+    "sha256": "efd385faab5b93eb073d5252e37766de7459fd01d2a51610671afeca6d24a53f",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08070191136045615,
+    "peak": 0.502172589302063,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "mww",
+    "filename": "PREHISTORIC_AGE_67_Hmong_Trang_Nu.mp3",
+    "sha256": "cee3022c2b0252a232bbf7a936466fd2a64b7aa959cc7ced36182ecee9f48b0a",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08152076978815624,
+    "peak": 0.5324418544769287,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "PREHISTORIC_AGE_67_Na_Uy.mp3",
+    "sha256": "f568d39748a75946d9e5989652fb1f2725be83a1e5d518b7facdafd9ec19fcde",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07685539564844295,
+    "peak": 0.5581784248352051,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "PREHISTORIC_AGE_67_Ha_Lan.mp3",
+    "sha256": "f8de2842bad518f6c8e3c8fd30d21c5b0a477c4c0f77ee55e80fd06783cbccd1",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09285040431092129,
+    "peak": 0.5623365640640259,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "PREHISTORIC_AGE_67_Ba_Lan.mp3",
+    "sha256": "2601f2d88ea88b6c9b52724b23f043d010b9078825739fe3e20b7a758e768882",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08462305932047869,
+    "peak": 0.6162188649177551,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "PREHISTORIC_AGE_67_Bo_Dao_Nha.mp3",
+    "sha256": "0e8c030424e0bbef128048bc0e473cab4fc8b471cc42aa295b5682c290608427",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06517973062574657,
+    "peak": 0.5891590118408203,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "PREHISTORIC_AGE_67_Thuy_Dien.mp3",
+    "sha256": "587988ccf97073b733ece8624de809075fefd04b11f2968bb24f56b0ebce1a1e",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08584061246416906,
+    "peak": 0.49421146512031555,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "PREHISTORIC_AGE_67_Viet_Nam.mp3",
+    "sha256": "b327d27e4ded5aff69bce4775607fc5b6d70ac602c31e9b8bd3061780527a2f5",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08946756815286719,
+    "peak": 0.5073362588882446,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  }
+]

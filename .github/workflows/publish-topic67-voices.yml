@@ -1,0 +1,21 @@
+name: Publish requested topic67 voices and saved profiles
+on:
+  push:
+    branches: [codex/topic67-prehistoric-age-22m12s]
+    paths: ['deliveries/topic67_voices/VOICE_EXPORT_READY.json']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: /deliveries/topic67_voices/
+      - name: Verify and upload completed narration files
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python deliveries/topic67_voices/publish_voices.py
