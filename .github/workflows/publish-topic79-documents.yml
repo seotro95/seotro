@@ -1,0 +1,21 @@
+name: Publish requested topic79 documents
+on:
+  push:
+    branches: [codex/topic79-prehistoric-nets-22m42s]
+    paths: ['deliveries/topic79_documents/READY.json']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: /deliveries/topic79_documents/
+      - name: Verify and upload requested text deliverables
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python deliveries/topic79_documents/publish_documents.py

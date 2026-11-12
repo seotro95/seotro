@@ -1,0 +1,11 @@
+shot,start,end,clip_id,source_in,source_out,instruction
+1,0,3,1,2,5,Keep original English voice 0–30s; replace opening pictures only; no additional intro; remove all clip audio
+2,3,6,9,2,5,Keep original English voice 0–30s; replace opening pictures only; no additional intro; remove all clip audio
+3,6,9,21,2,5,Keep original English voice 0–30s; replace opening pictures only; no additional intro; remove all clip audio
+4,9,12,2,2,5,Keep original English voice 0–30s; replace opening pictures only; no additional intro; remove all clip audio
+5,12,15,3,2,5,Keep original English voice 0–30s; replace opening pictures only; no additional intro; remove all clip audio
+6,15,18,4,2,5,Keep original English voice 0–30s; replace opening pictures only; no additional intro; remove all clip audio
+7,18,21,6,2,5,Keep original English voice 0–30s; replace opening pictures only; no additional intro; remove all clip audio
+8,21,24,8,2,5,Keep original English voice 0–30s; replace opening pictures only; no additional intro; remove all clip audio
+9,24,27,11,2,5,Keep original English voice 0–30s; replace opening pictures only; no additional intro; remove all clip audio
+10,27,30,15,2,5,Keep original English voice 0–30s; replace opening pictures only; no additional intro; remove all clip audio

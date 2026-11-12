@@ -1,0 +1,21 @@
+# Bộ giọng đã lưu — chủ đề 79
+
+- Mỹ — tiếng Anh: `en-US-AndrewNeural` (Male).
+- Việt Nam: `vi-VN-NamMinhNeural` (Male).
+- Tây Ban Nha: `es-ES-AlvaroNeural` (Male).
+- Pháp: `fr-FR-HenriNeural` (Male).
+- Nhật Bản: `ja-JP-KeitaNeural` (Male).
+- Hàn Quốc: `ko-KR-InJoonNeural` (Male).
+- Đức: `de-DE-ConradNeural` (Male).
+- Ý: `it-IT-DiegoNeural` (Male).
+- Bồ Đào Nha: `pt-PT-DuarteNeural` (Male).
+- Hà Lan: `nl-NL-MaartenNeural` (Male).
+- Ba Lan: `pl-PL-MarekNeural` (Male).
+- Thụy Điển: `sv-SE-MattiasNeural` (Male).
+- Đan Mạch: `da-DK-JeppeNeural` (Male).
+- Phần Lan: `fi-FI-HarriNeural` (Male).
+- Na Uy: `nb-NO-FinnNeural` (Male).
+- Séc: `cs-CZ-AntoninNeural` (Male).
+- H’Mông Trắng — nữ: `hmong-female-3` (Female).
+
+Tiếng Việt dùng Nam Minh theo lựa chọn mới nhất; không dùng Adam. 16 giọng nam dùng backend online của Melo-Viet-Studio 1.3.1, commit 4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043. H’mông nữ female-3 dùng Native VITS + OpenVoice V2 của Voice-Studio-Hmong 1.6.6, commit 061430d958b8d5fc14d04209c6f0cd20492382c2; mẫu SHA256 ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17. Chạy backend trên Linux, không phải GUI Windows. Giữ Voice ID, nguồn mã, mẫu tham chiếu và thông số để dùng lại; nhà cung cấp online vẫn có thể cập nhật mô hình. Cần nghe duyệt bản ngữ độc lập, đặc biệt phương ngữ H’mông Trắng.
