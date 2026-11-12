@@ -1,0 +1,38 @@
+name: Bone traces58 groupedEnglish timing preflight
+on:
+  push:
+    branches: [codex/bone-traces58-production-20261112]
+    paths: [.github/workflows/bone-traces58-english-preflight.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  english:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: episode58
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python episode58/build_documents.py
+      - run: |
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python episode58/ensure_ffmpeg.py
+          python episode58/bootstrap_tool.py online
+      - name: Validate exact text boundaries and30second English preview
+        run: python -u episode58/render_english_groups.py --preview
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bone58-english-preflight
+          path: |
+            episode58/voice/en_preview/BONE_TRACES_58_EN_PREVIEW_30s.mp3
+            episode58/voice/en_preview/render_report.json
+            episode58/voice/en_preview/group-*.wav
+            episode58/voice/en_preview/group-*.json
+            episode58/voice/en_preview/raw-*.json
+          if-no-files-found: ignore
+          retention-days: 14

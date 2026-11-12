@@ -1,0 +1,13 @@
+{
+  "topic_id": 58,
+  "documents_published": true,
+  "target_seconds": 1362,
+  "release_tag": "bone-traces-video-58-22m42s",
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/bone-traces-video-58-22m42s",
+  "archive_url": "https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_TAI_LIEU_22m42s.zip",
+  "archive_sha256": "4b013f3981327b68ed265394b09bd5af8b4a26d71757c35ff8b6337def59584f",
+  "archive_bytes": 143000,
+  "public_download_verified": true,
+  "document_workflow_run_id": 43190447823,
+  "source_commit": "d1676f5aaa3aa638a0b3c7e02f6d01f0d927d5a0"
+}
