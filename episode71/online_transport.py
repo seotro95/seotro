@@ -1,7 +1,11 @@
-import asyncio,hashlib,json,os,sys,threading
+import asyncio,difflib,hashlib,json,os,sys,threading
 from pathlib import Path
-from render_common import R,PROFILES,digest
+from render_common import R,PROFILES,digest,normalized
 LOCAL=threading.local()
+class IncompleteSpeechError(RuntimeError):pass
+def complete_words(locale,text,words):
+ expected=normalized(text);observed=normalized(''.join(w['text'] for w in words))
+ return observed==expected if locale=='en-US' else difflib.SequenceMatcher(None,expected,observed,autojunk=False).ratio()>=.97
 def configure(locale):
  import edge_tts,edge_tts.communicate,edge_tts.voices
  for module in [edge_tts.communicate,edge_tts.voices]:
@@ -18,7 +22,9 @@ def configure(locale):
       async for chunk in stream.stream():
        if chunk['type']=='audio':f.write(chunk['data'])
        elif chunk['type']=='WordBoundary':words.append(chunk)
-     assert Path(output).stat().st_size>0 and words;Path(output).with_suffix('.words.json').write_text(json.dumps(words,ensure_ascii=False))
+     assert Path(output).stat().st_size>0 and words
+     if not complete_words(locale,text,words):raise IncompleteSpeechError('Provider returned incomplete word metadata; partial output is not accepted')
+     Path(output).with_suffix('.words.json').write_text(json.dumps(words,ensure_ascii=False))
     await asyncio.wait_for(receive(),timeout=150);return
    except Exception as e:
     if getattr(e,'status',None) in [401,403,429]:raise
@@ -34,7 +40,11 @@ def request(locale,text,path,rate):
  LOCAL.rate=rate;voice=PROFILES[locale]['voice_id'];sig=hashlib.sha256((text+'\0'+voice+'\0'+rate).encode()).hexdigest();meta=path.with_suffix('.request.json')
  if path.exists() and meta.exists():
   j=json.loads(meta.read_text())
-  if j['request_signature']==sig and j['sha256']==digest(path):return json.loads(path.with_suffix('.edge.words.json').read_text())
+  if j['request_signature']==sig and j['sha256']==digest(path):
+   words=json.loads(path.with_suffix('.edge.words.json').read_text())
+   if complete_words(locale,text,words):return words
+   print('INVALIDATE_INCOMPLETE_GENERATED_CHECKPOINT',locale,path.name,flush=True)
+   meta.unlink()
  BACKENDS[locale].handle({'op':'render','language':locale,'voice':voice,'text':text,'output':str(path)})
  words=json.loads(path.with_suffix('.edge.words.json').read_text());meta.write_text(json.dumps({'request_signature':sig,'sha256':digest(path),'voice_id':voice,'rate':rate}))
  return words

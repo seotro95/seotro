@@ -1,0 +1,64 @@
+name: Neanderthal fire71 repair incomplete Danish narration
+'on':
+  push:
+    branches:
+    - codex/neanderthal-fire71-production-20261112
+    paths:
+    - .github/workflows/neanderthal-fire71-repair-online.yml
+  workflow_dispatch: null
+permissions:
+  contents: read
+  actions: read
+jobs:
+  online:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        locale:
+        - da-DK
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: episode71
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: python episode71/extract_inputs.py
+    - run: 'python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+
+        python episode71/ensure_ffmpeg.py'
+    - run: python episode71/bootstrap_tool.py online
+    - uses: actions/download-artifact@v4
+      with:
+        name: fire71-checkpoint-${{ matrix.locale }}
+        path: episode71/voice/audio/${{ matrix.locale }}
+        run-id: 43241559543
+        github-token: ${{ github.token }}
+      continue-on-error: true
+    - name: Generate narration and retain successful parts
+      shell: bash
+      run: "set +e\npython -u episode71/render_online.py \"${{ matrix.locale }}\"\n\
+        code=$?\nif [ \"$code\" = 75 ]; then\n  sleep 30\n  python -u episode71/render_online.py\
+        \ \"${{ matrix.locale }}\"\n  code=$?\nfi\nexit \"$code\""
+    - uses: actions/upload-artifact@v4
+      with:
+        name: fire71-repair-checkpoint-${{ matrix.locale }}
+        path: 'episode71/voice/audio/${{ matrix.locale }}/raw-*
+
+          episode71/voice/audio/${{ matrix.locale }}/pending_*.json'
+        if-no-files-found: ignore
+        retention-days: 14
+        overwrite: true
+      if: always()
+    - uses: actions/upload-artifact@v4
+      with:
+        name: fire71-repair-voice-${{ matrix.locale }}
+        path: 'episode71/voice/audio/${{ matrix.locale }}/*.mp3
+
+          episode71/voice/audio/${{ matrix.locale }}/render_report.json'
+        if-no-files-found: error
+        retention-days: 14
+        overwrite: true
