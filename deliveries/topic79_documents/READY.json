@@ -51,8 +51,8 @@
     },
     {
       "path": "documents/NARRATION_STYLE_LOCKED.json",
-      "bytes": 1460,
-      "sha256": "7e3ccfb317e719af5c0783e66f07f97659956771c130074bfc8de9cfa314339c"
+      "bytes": 1717,
+      "sha256": "7e8864e9e200555d2fb3837a01035f84fc5c5f90498bc82949f65962eb3ed210"
     },
     {
       "path": "documents/NGUON_KIEM_CHUNG.md",
@@ -126,8 +126,8 @@
     },
     {
       "path": "documents/README.md",
-      "bytes": 2418,
-      "sha256": "406c0eb01a67772adec35178cea75f461fabfa2fcdf311e457206146e8e910a2"
+      "bytes": 2679,
+      "sha256": "21253afdd267d44fd13fe332f4aca0149433504bbd549b92fdf64cecf35c678f"
     },
     {
       "path": "documents/TIMELINE_137_CANH.csv",
@@ -136,8 +136,8 @@
     },
     {
       "path": "documents/TRANSLATION_REVIEW.json",
-      "bytes": 1142,
-      "sha256": "49f565f31845bd85c2f68da2a35e4681f7edc8484540778ca8ccde6a7fc93648"
+      "bytes": 1219,
+      "sha256": "5863f8ac03c5f673d1845ee042fc6ba1239d254ec76c3b79dc560349ae3ab1af"
     },
     {
       "path": "documents/VOICE_FILE_NAMING.json",
@@ -176,8 +176,8 @@
     },
     {
       "path": "documents/VOICE_SCRIPTS/fi-FI.txt",
-      "bytes": 26230,
-      "sha256": "fdf810a51285ec3ac663bedd5a24c1a553753ade19a3c2029b5220f55f68b1ab"
+      "bytes": 26233,
+      "sha256": "97bf06af80d242ea07fa3daf85be1927062da86adc9e0149e4efd1102107b029"
     },
     {
       "path": "documents/VOICE_SCRIPTS/fr-FR.txt",
@@ -221,8 +221,8 @@
     },
     {
       "path": "documents/VOICE_SCRIPTS/pt-PT.txt",
-      "bytes": 27375,
-      "sha256": "408041278b1fcaab4b5a988460dedd167e8a7e4764bef69c652fb0b4d219a05c"
+      "bytes": 27371,
+      "sha256": "6f3fa2e0c04f9b948460f52cae8edd8d025b02191be2b13f96a445ad72649c40"
     },
     {
       "path": "documents/VOICE_SCRIPTS/sv-SE.txt",

@@ -14,4 +14,8 @@ Voice Anh 137 mốc; 16 bản địa hóa chia 14 chương, 13×100 + 62 giây. 
 
 Lời Việt, Nhật, Hàn được biên tập lại; H’mông chuyển thể theo ngữ cảnh. 12 bản khác dựa trên dịch tự động có sửa thuật ngữ và cách dùng địa phương. Cần nghe duyệt bản ngữ độc lập, đặc biệt phương ngữ H’mông. Metadata dịch vụ không thay thế nghe duyệt.
 
-Voice đang được tạo và kiểm tra; các MP3 riêng và ZIP giọng sẽ được bổ sung tại release khi hoàn tất.
+[Tải ZIP đủ 17 voice](https://github.com/seotro95/seotro/releases/download/prehistoric-nets-video-79-22m42s/PREHISTORIC_NETS_79_17_VOICES_22m42s.zip)
+
+[Tải riêng tiếng Việt Nam Minh](https://github.com/seotro95/seotro/releases/download/prehistoric-nets-video-79-22m42s/PREHISTORIC_NETS_79_Viet_Nam.mp3)
+
+Các MP3 riêng và hồ sơ giọng có trong mục Assets của release.

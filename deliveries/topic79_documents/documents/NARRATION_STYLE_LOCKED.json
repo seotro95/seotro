@@ -35,5 +35,15 @@
   },
   "timing": "Topic79:1362seconds;English136x10+2;14localizedchapters13x100+62",
   "limits": "Controls depend on each engine. Naturalness,names,native language and WhiteHmong dialect need independent listening review. Prior completed topics are preserved.",
-  "english_cue_strategy": "Onecompleteutterance per10secondscue;pitchpreserving fit;providerfull-inputmetadata audit"
+  "english_cue_strategy": "Onecompleteutterance per10secondscue;pitchpreserving fit;providerfull-inputmetadata audit",
+  "topic79_english_pacing_repairs": {
+    "cue_ids": [
+      13
+    ],
+    "provider_rate": "+3%",
+    "trailing_pause_seconds": 0.07,
+    "trim_only_digital_zero_boundaries": true,
+    "immutable_english_words": true,
+    "pitch_shift_applied": false
+  }
 }
