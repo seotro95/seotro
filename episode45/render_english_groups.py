@@ -50,8 +50,8 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
     for f in futures:f.cancel()
     raise
 if pending:
- (out/'pending_groups.json').write_text(json.dumps(pending));raise RuntimeError(f'{len(pending)}English groups remain unavailable; successful group speech saved')
+ (out/'pending_groups.json').write_text(json.dumps(pending));print('Transient English parts pending; successful speech retained',flush=True);sys.exit(75)
 raws=[[out/f'raw-{r["id"]:03}-01.wav'] for r in rows]
 result=finish('en-US',rows,raws,out=out,target=30 if preview else 1242)
-result.update(grouped_requests=len(groups),word_metadata_exact_script_match=True,word_boundary_cue_split=True,transport_base_rate='+0%')
+result.update(grouped_requests=len(groups),word_metadata_exact_script_match=True,word_boundary_cue_split=True,transport_base_rate='+0%',prosody_method='Native0%groupedEnglish with originalpunctuation, atmosttwo1.2dBwordaccentspercue andpitch-preservingfinalfit')
 (out/'render_report.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));print('ENGLISH_COMPLETE',result['decoded_frames_48000'],flush=True)
