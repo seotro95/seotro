@@ -1,0 +1,11 @@
+shot,start,end,clip_id,source_in,source_out,instruction
+1,0,3,1,2,5,"Keep original English voice0–30s; replace only opening pictures, do not add intro duration; all clip audio removed"
+2,3,6,20,2,5,"Keep original English voice0–30s; replace only opening pictures, do not add intro duration; all clip audio removed"
+3,6,9,21,2,5,"Keep original English voice0–30s; replace only opening pictures, do not add intro duration; all clip audio removed"
+4,9,12,2,2,5,"Keep original English voice0–30s; replace only opening pictures, do not add intro duration; all clip audio removed"
+5,12,15,33,2,5,"Keep original English voice0–30s; replace only opening pictures, do not add intro duration; all clip audio removed"
+6,15,18,34,2,5,"Keep original English voice0–30s; replace only opening pictures, do not add intro duration; all clip audio removed"
+7,18,21,36,2,5,"Keep original English voice0–30s; replace only opening pictures, do not add intro duration; all clip audio removed"
+8,21,24,3,2,5,"Keep original English voice0–30s; replace only opening pictures, do not add intro duration; all clip audio removed"
+9,24,27,5,2,5,"Keep original English voice0–30s; replace only opening pictures, do not add intro duration; all clip audio removed"
+10,27,30,7,2,5,"Keep original English voice0–30s; replace only opening pictures, do not add intro duration; all clip audio removed"

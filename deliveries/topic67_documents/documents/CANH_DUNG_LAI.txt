@@ -1,0 +1,17 @@
+Các prompt001–120đều tạo clip10giây. Timeline133×10+2=1332giây.
+14mốc dùng lại hình để nối ý/khép vòng; không tạo prompt trùng.
+Mốc020: 00:03:10,000–00:03:20,000; dùng lại clip002 (xuất hiện lần đầu ở mốc002); dùng10giây.
+Mốc040: 00:06:30,000–00:06:40,000; dùng lại clip007 (xuất hiện lần đầu ở mốc007); dùng10giây.
+Mốc050: 00:08:10,000–00:08:20,000; dùng lại clip006 (xuất hiện lần đầu ở mốc006); dùng10giây.
+Mốc060: 00:09:50,000–00:10:00,000; dùng lại clip056 (xuất hiện lần đầu ở mốc059); dùng10giây.
+Mốc070: 00:11:30,000–00:11:40,000; dùng lại clip007 (xuất hiện lần đầu ở mốc007); dùng10giây.
+Mốc080: 00:13:10,000–00:13:20,000; dùng lại clip008 (xuất hiện lần đầu ở mốc008); dùng10giây.
+Mốc090: 00:14:50,000–00:15:00,000; dùng lại clip077 (xuất hiện lần đầu ở mốc083); dùng10giây.
+Mốc110: 00:18:10,000–00:18:20,000; dùng lại clip001 (xuất hiện lần đầu ở mốc001); dùng10giây.
+Mốc120: 00:19:50,000–00:20:00,000; dùng lại clip007 (xuất hiện lần đầu ở mốc007); dùng10giây.
+Mốc130: 00:21:30,000–00:21:40,000; dùng lại clip001 (xuất hiện lần đầu ở mốc001); dùng10giây.
+Mốc131: 00:21:40,000–00:21:50,000; dùng lại clip006 (xuất hiện lần đầu ở mốc006); dùng10giây.
+Mốc132: 00:21:50,000–00:22:00,000; dùng lại clip005 (xuất hiện lần đầu ở mốc005); dùng10giây.
+Mốc133: 00:22:00,000–00:22:10,000; dùng lại clip002 (xuất hiện lần đầu ở mốc002); dùng10giây.
+Mốc134: 00:22:10,000–00:22:12,000; dùng lại clip001 (xuất hiện lần đầu ở mốc001); chỉ dùng2giây ổn định.
+Mốc134: lấy phầnổnđịnh8.0–10.0giây của clip001;khôngchènintro/đuôithêm. EDL_134_CANH.csv chỉrõin/out.

@@ -1,0 +1,21 @@
+name: Publish requested topic67 documents
+on:
+  push:
+    branches: [codex/topic67-prehistoric-age-22m12s]
+    paths: ['deliveries/topic67_documents/READY.json']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: /deliveries/topic67_documents/
+      - name: Verify and upload requested text deliverables
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python deliveries/topic67_documents/publish_documents.py

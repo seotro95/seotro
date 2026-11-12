@@ -1,0 +1,19 @@
+{
+  "topic": 67,
+  "languages": 17,
+  "original_english_words": 3476,
+  "vietnamese": "Assistant-rewritten contextual narration;restored maleNamMinh",
+  "japanese_korean": "Assistant-rewritten concise natural narration with consistent case evidence and uncertainty",
+  "hmong": "Assistant-written contextual adaptation;female3native engine;independent dialectreviewpending",
+  "other12": "Machine draft of context-clarified English plus targeted terminology,numerals,publicationyears andregional vocabulary corrections",
+  "independent_native_editorial_or_listening_review": false,
+  "source_context_clarifications": [
+    "DmanisiGeorgia is country",
+    "1800000years approximate fossilantiquity vs personalage",
+    "2004/2005/2017/2019/2025are publicationyears",
+    "remodeled toothsockets indicate survival,not named helpers",
+    "diagnosis,functional limitation anddependence are separate",
+    "modern BaYaka research is comparison,not fossilbiography"
+  ],
+  "alignment": "English134cues;16localized14chapters13x100+32seconds"
+}

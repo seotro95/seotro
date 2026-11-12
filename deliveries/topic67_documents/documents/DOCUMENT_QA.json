@@ -1,0 +1,17 @@
+{
+  "topic": 67,
+  "target_seconds": 1332,
+  "english_words": 3476,
+  "timeline_slots": 134,
+  "duration_math": "133x10+2=1332",
+  "unique_prompts": 120,
+  "prompt_txt_count": 12,
+  "prompts_each_txt": 10,
+  "numbering": "1-120",
+  "reused_slots": 14,
+  "prompt_no_children_and_silent_every_prompt": true,
+  "generated_footage_checked": false,
+  "title_thumbnail_pairs": 5,
+  "narration_text_languages": 17,
+  "independent_native_listening_review": false
+}
