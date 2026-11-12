@@ -1,5 +1,5 @@
 {
-  "transport_revision": 2,
+  "transport_revision": 3,
   "topic": 67,
   "target_seconds": 1332,
   "expected_samples_48000": 63936000,
@@ -136,8 +136,8 @@
     },
     {
       "path": "documents/TRANSLATION_REVIEW.json",
-      "bytes": 1038,
-      "sha256": "8245f33b81b4a230dafa6cd880f812b3965874df82fa02b5bf5661a9aa8611ad"
+      "bytes": 1161,
+      "sha256": "296f30d9610d12fcda29dc0ec94a191e588bd4d00df2c9a7b287f58b04cc1618"
     },
     {
       "path": "documents/VOICE_FILE_NAMING.json",
@@ -226,8 +226,8 @@
     },
     {
       "path": "documents/VOICE_SCRIPTS/sv-SE.txt",
-      "bytes": 24331,
-      "sha256": "a61c958c122d5b85005b03f383ee52182bcf2cf3ecdd1841eb9499afcf220c9f"
+      "bytes": 24251,
+      "sha256": "d4e7c1904b2f19558b4b4d7b0c7c1a2ad1cbf17f7e224d0281d0117ea4052b63"
     },
     {
       "path": "documents/VOICE_SCRIPTS/vi-VN.txt",
