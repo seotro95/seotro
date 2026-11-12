@@ -1,10 +1,10 @@
-<!-- topic38-current -->
-# Chủ đề 38 — đang hoàn tất voice Anh 22:32
+<!-- active-production -->
+# Đang làm chủ đề 45 — Bảo quản thức ăn thời tiền sử — 20:42
 
-Đã có 16 voice hoàn chỉnh. Bản Anh còn thiếu, đang [xử lý theo 4 nhóm](https://github.com/seotro95/seotro/actions/runs/43059788576), tối đa 2 nhóm cùng lúc. Lượt trước 43055537796 đã dừng có lưu checkpoint `land38-repair-checkpoint-en-US` với ít nhất 50/136 đoạn đọc thành công. Không tạo lại những đoạn đã có và khớp chữ ký nội dung.
+Dùng chủ đề 45 trong TOPICS_001_100.csv trên nhánh này: làm khô, hun khói, làm lạnh và bằng chứng khảo cổ. Bản nháp cũ trên máy có số thứ tự khác; không dùng nó để chọn đề tài. Kịch bản Anh 3.134 từ/125 mốc, 110 prompt trong 11 TXT và 15 mốc dùng lại đã chuẩn bị. Chưa phát hành tài liệu hoặc tạo voice tập 45. Bản Việt phải dùng đúng preset Adam (nam miền Nam) trong VieNeu3.8.3 của Melo + Việt1.3.1; 16 nhận diện giọng còn lại giữ nguyên. Xem SERIES_STATE.json trước khi tiếp tục.
 
-[Kịch bản và prompt](https://github.com/seotro95/seotro/releases/tag/land-bridges-video-38-22m32s) · [5 tiêu đề và prompt thumbnail TXT](https://github.com/seotro95/seotro/releases/download/land-bridges-video-38-22m32s/LAND_BRIDGES_38_5_TIEU_DE_5_PROMPT_THUMBNAIL.txt). Đọc SERIES_STATE.json trước khi tiếp tục. Giữ 17 mã giọng, nữ H'mông female-3, không đổi pitch. Chỉ đánh dấu đủ 17 voice sau khi kiểm tra bản tải công khai. Tập 38 chưa có footage hoặc MP4; không tự bắt đầu tập khác.
-<!-- /topic38-current -->
+Chủ đề 38 đã có đủ 17 voice, mỗi tệp 22:32; bản tải công khai đã kiểm hash, ZIP CRC và giải mã đúng 64.896.000 mẫu ở 48kHz. [Tải đủ 17 giọng tập38](https://github.com/seotro95/seotro/releases/download/land-bridges-video-38-22m32s/LAND_BRIDGES_38_17_VOICES_22m32s.zip). Tập38 chưa có footage/MP4. Không tạo lại các voice đã xong hoặc tự khởi chạy chủ đề khác.
+<!-- /active-production -->
 
 ---
 

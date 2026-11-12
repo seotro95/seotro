@@ -1,0 +1,156 @@
+{
+  "status": "passed",
+  "topic_id": 38,
+  "voices": 17,
+  "male_voices": 16,
+  "female_voice": "hmong-female-3",
+  "all_decoded_seconds": 1352,
+  "all_decoded_frames_48000": 64896000,
+  "all_voice_ids_match_locked_profiles": true,
+  "native_hmong_reference_matches": true,
+  "unique_audio_hashes": 17,
+  "pitch_shift_applied": false,
+  "english_cue_count": 136,
+  "other_language_chapter_count": 14,
+  "online_complete_word_metadata_checked": true,
+  "independent_native_listening_review": false,
+  "white_hmong_dialect_independently_verified": false,
+  "reports": {
+    "da-DK": {
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "LAND_BRIDGES_38_Dan_Mach.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.0663461538461538,
+      "max_tempo": 1.3057692307692306,
+      "word_accents": 79
+    },
+    "fi-FI": {
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "LAND_BRIDGES_38_Phan_Lan.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.1331730769230768,
+      "max_tempo": 1.3747596153846153,
+      "word_accents": 71
+    },
+    "nl-NL": {
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "LAND_BRIDGES_38_Ha_Lan.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.1509615384615386,
+      "max_tempo": 1.3319711538461538,
+      "word_accents": 94
+    },
+    "vi-VN": {
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "LAND_BRIDGES_38_Viet_Nam.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.0391826923076923,
+      "max_tempo": 1.2384615384615383,
+      "word_accents": 89
+    },
+    "ko-KR": {
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "LAND_BRIDGES_38_Han_Quoc.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.2334134615384615,
+      "max_tempo": 1.4527777777777777,
+      "word_accents": 43
+    },
+    "pt-PT": {
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "LAND_BRIDGES_38_Bo_Dao_Nha.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.0423076923076922,
+      "max_tempo": 1.1740384615384614,
+      "word_accents": 77
+    },
+    "sv-SE": {
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "LAND_BRIDGES_38_Thuy_Dien.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.2927884615384615,
+      "max_tempo": 1.5314903846153844,
+      "word_accents": 79
+    },
+    "fr-FR": {
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "LAND_BRIDGES_38_Phap.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.083653846153846,
+      "max_tempo": 1.2334134615384615,
+      "word_accents": 85
+    },
+    "de-DE": {
+      "voice_id": "de-DE-ConradNeural",
+      "filename": "LAND_BRIDGES_38_Duc.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.2189903846153844,
+      "max_tempo": 1.4206730769230769,
+      "word_accents": 86
+    },
+    "cs-CZ": {
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "LAND_BRIDGES_38_Sec.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.046153846153846,
+      "max_tempo": 1.2334134615384615,
+      "word_accents": 60
+    },
+    "mww": {
+      "voice_id": "hmong-female-3",
+      "filename": "LAND_BRIDGES_38_Hmong_Trang_Nu.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 0.9614913027510683,
+      "max_tempo": 1.2592174639917695,
+      "word_accents": 0
+    },
+    "en-US": {
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "LAND_BRIDGES_38_My_Tieng_Anh.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 0.8853658536585366,
+      "max_tempo": 1.5439024390243903,
+      "word_accents": 159
+    },
+    "pl-PL": {
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "LAND_BRIDGES_38_Ba_Lan.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.0867788461538461,
+      "max_tempo": 1.263701923076923,
+      "word_accents": 63
+    },
+    "nb-NO": {
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "LAND_BRIDGES_38_Na_Uy.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.0552884615384615,
+      "max_tempo": 1.2716346153846152,
+      "word_accents": 78
+    },
+    "ja-JP": {
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "LAND_BRIDGES_38_Nhat_Ban.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.2134615384615384,
+      "max_tempo": 1.5322115384615385,
+      "word_accents": 48
+    },
+    "es-ES": {
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "LAND_BRIDGES_38_Tay_Ban_Nha.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.2365384615384616,
+      "max_tempo": 1.3466346153846154,
+      "word_accents": 73
+    },
+    "it-IT": {
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "LAND_BRIDGES_38_Y.mp3",
+      "decoded_seconds": 1352.0,
+      "min_tempo": 1.2968749999999998,
+      "max_tempo": 1.473076923076923,
+      "word_accents": 76
+    }
+  }
+}

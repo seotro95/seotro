@@ -1,0 +1,134 @@
+{
+  "status": "passed",
+  "topic_id": 38,
+  "public_voice_archive_sha256": "6a97dfb056e5736172e62aa8f791cf854b3a0e6fd8194fa43267aa153bacf627",
+  "voice_count": 17,
+  "target_seconds": 1352,
+  "decoded_frames_per_voice_48000": 64896000,
+  "all_country_asset_digests_match": true,
+  "locked_voice_ids_unchanged": true,
+  "zip_crc_passed": true,
+  "voices": [
+    {
+      "locale": "en-US",
+      "filename": "LAND_BRIDGES_38_My_Tieng_Anh.mp3",
+      "sha256": "b852d27453ab1b03a9ba13ceb415b43b6702971131260e78aea3fb3755c4c07e",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "vi-VN",
+      "filename": "LAND_BRIDGES_38_Viet_Nam.mp3",
+      "sha256": "bc611860239c00fede23d37d046400e44eec2e0fb9dfc8f2ffabe90a2bdaeba2",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "es-ES",
+      "filename": "LAND_BRIDGES_38_Tay_Ban_Nha.mp3",
+      "sha256": "0a64e5fcd0c0146aba246a0c8c18a6d9fe00c48eb271c339ddf9a91c4d9063a9",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "fr-FR",
+      "filename": "LAND_BRIDGES_38_Phap.mp3",
+      "sha256": "8e1c7a650c823bc70c8ae6d12470218bbf4b4df42dc6c3335b94cdb99dc76e62",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "ja-JP",
+      "filename": "LAND_BRIDGES_38_Nhat_Ban.mp3",
+      "sha256": "371d1371570b6cbdc1c7c8b72548d58b190dbdf7a6480da09de3e7606ad93df2",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "ko-KR",
+      "filename": "LAND_BRIDGES_38_Han_Quoc.mp3",
+      "sha256": "d2938a24f77d67dd45a8b2a5669113b7877ea2c3141a8aff81b11af0ab818efd",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "de-DE",
+      "filename": "LAND_BRIDGES_38_Duc.mp3",
+      "sha256": "cf1ceb5e9ba840e0d51b5b881f78376b5fa0d6606ef8b9b9a355cb4fb83364ce",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "it-IT",
+      "filename": "LAND_BRIDGES_38_Y.mp3",
+      "sha256": "55ede10988ec1862528857a96bd9ab36ccc6a1c44e373c13f5f8e0ac92db4ce1",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "pt-PT",
+      "filename": "LAND_BRIDGES_38_Bo_Dao_Nha.mp3",
+      "sha256": "4ddb931f4b7d49dcf6263617fc0d031b6a7e92b263b3bde826c207f6d94fb4e9",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "nl-NL",
+      "filename": "LAND_BRIDGES_38_Ha_Lan.mp3",
+      "sha256": "715c7e524f3fcabb153df10390fa1845aa50b8925689655f81f33eb3112161d8",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "pl-PL",
+      "filename": "LAND_BRIDGES_38_Ba_Lan.mp3",
+      "sha256": "3dee6e5f35b85225ce9929f6c9f45ec9297d413aad1860817d77e529552497ba",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "sv-SE",
+      "filename": "LAND_BRIDGES_38_Thuy_Dien.mp3",
+      "sha256": "e23bb189497f3eb4289790f97f644ccfd594d28c2d807d250a2e36cc08499eda",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "da-DK",
+      "filename": "LAND_BRIDGES_38_Dan_Mach.mp3",
+      "sha256": "2c85c9eea039e46214ee248490051c2eec535bfdff73e7aca2e7e10565cb2c20",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "fi-FI",
+      "filename": "LAND_BRIDGES_38_Phan_Lan.mp3",
+      "sha256": "d5c5b1d8acb68c462914ba0321a5da4f31dd1082f652d46f3d647c54f793e6d4",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "nb-NO",
+      "filename": "LAND_BRIDGES_38_Na_Uy.mp3",
+      "sha256": "3403cc21777b9fee40ca23c216113eb0319ed8ad744412df9cb48c3c791a88bb",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "cs-CZ",
+      "filename": "LAND_BRIDGES_38_Sec.mp3",
+      "sha256": "d0ab651dd43b98ab28e763d586d4175e21035d51d8663cece83a0cc4f4a35ae0",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    },
+    {
+      "locale": "mww",
+      "filename": "LAND_BRIDGES_38_Hmong_Trang_Nu.mp3",
+      "sha256": "45ffec97c654f28792511887d02bd69d8e0363eee811c13c58e6ba84bd098c43",
+      "decoded_frames_48000": 64896000,
+      "public_asset_digest_matches": true
+    }
+  ],
+  "independent_native_listening_review": false,
+  "white_hmong_dialect_independently_verified": false
+}

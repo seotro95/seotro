@@ -6,32 +6,19 @@
   "topic_index": "productions/series/TOPICS_001_100.csv",
   "shared_voice_profiles": "productions/series/VOICE_PROFILES_LOCKED.json",
   "active_topic": {
-    "id": 38,
-    "title": "Các cây cầu đất xuất hiện và biến mất qua những chu kỳ băng hà",
-    "phase": "16_voices_complete_english_four_groups_running",
-    "target_seconds": 1352,
-    "work_branch": "codex/land-bridges38-production-20261111",
-    "documents_release": "https://github.com/seotro95/seotro/releases/tag/land-bridges-video-38-22m32s",
-    "voice_workflow_run_id": 43050614061,
-    "voice_workflow_url": "https://github.com/seotro95/seotro/actions/runs/43050614061",
-    "english_script_words": 3581,
-    "english_cues": 136,
-    "unique_prompts": 120,
-    "prompt_txt_files": 12,
-    "reused_slots": 16,
-    "voice_source_commit": "bd7beb663499a70279d0103f79b7682a41a8f561",
-    "english_preview_30_seconds_passed": true,
-    "repair_workflow_run_id": 43055537796,
-    "repair_workflow_url": "https://github.com/seotro95/seotro/actions/runs/43055537796",
-    "voice_files_generated_known": 16,
-    "titles_thumbnail_pairs": 5,
-    "titles_thumbnail_txt_url": "https://github.com/seotro95/seotro/releases/download/land-bridges-video-38-22m32s/LAND_BRIDGES_38_5_TIEU_DE_5_PROMPT_THUMBNAIL.txt",
-    "titles_thumbnail_zip_url": "https://github.com/seotro95/seotro/releases/download/land-bridges-video-38-22m32s/LAND_BRIDGES_38_5_TIEU_DE_5_PROMPT_THUMBNAIL.zip",
-    "titles_download_tested": true,
-    "english_workflow_run_id": 43059788576,
-    "english_workflow_url": "https://github.com/seotro95/seotro/actions/runs/43059788576",
-    "english_checkpoint_source_run_id": 43055537796,
-    "english_completed_cues_at_least": 50
+    "id": 45,
+    "title": "Làm khô, hun khói, làm lạnh: tìm bằng chứng bảo quản thức ăn thời tiền sử.",
+    "phase": "script_and_prompts_ready_documents_not_yet_published",
+    "target_seconds": 1242,
+    "english_script_words": 3134,
+    "english_cues": 125,
+    "unique_prompts": 110,
+    "prompt_txt_files": 11,
+    "reused_slots": 15,
+    "work_branch": "codex/food-preservation45-production-20261112",
+    "vietnamese_voice_id": "Adam",
+    "vietnamese_backend": "Melo + Viet1.3.1 / VieNeu3.8.3 native ONNXFP32",
+    "voices_generated": false
   },
   "next_topic_id": 5,
   "user_preferences": {
@@ -91,7 +78,9 @@
     "duration_policy": "Use the latest explicit duration request;1200seconds is a fallback, not a fixed duration for every episode.",
     "prompt_count_policy": "Compute from real timeline and unique contexts;10prompts perTXT, markreuse; finalTXTmay containfewer than10.",
     "prompt_silence_suffix": "không có âm thanh",
-    "generated_visuals_exclude_minors": true
+    "generated_visuals_exclude_minors": true,
+    "vietnamese_requested_voice": "Adam",
+    "vietnamese_voice_change_applies_from_topic": 45
   },
   "reference_video": {
     "release_url": "https://github.com/seotro95/seotro/releases/tag/video",
@@ -347,7 +336,7 @@
     {
       "id": 38,
       "title": "Các cây cầu đất xuất hiện và biến mất qua những chu kỳ băng hà.",
-      "status": "documents_delivered_voices_in_progress"
+      "status": "documents_and17voices_delivered_public_download_verified_native_review_pending"
     },
     {
       "id": 39,
@@ -382,7 +371,7 @@
     {
       "id": 45,
       "title": "Làm khô, hun khói, làm lạnh: tìm bằng chứng bảo quản thức ăn thời tiền sử.",
-      "status": "queued"
+      "status": "script_prompts_ready_documents_publish_pending"
     },
     {
       "id": 46,
@@ -928,7 +917,7 @@
     "video_release_published_at": "2026-11-10T08:25:05Z",
     "video_download_verified": true
   },
-  "last_requested_topic_id": 38,
+  "last_requested_topic_id": 45,
   "topic5_explicitly_left_queued": true,
   "completed_topic_6": {
     "id": 6,
@@ -1225,9 +1214,9 @@
     "thumbnail_title_pairs": 5,
     "editing_steps_saved": true
   },
-  "latest_completed_topic_id": 28,
+  "latest_completed_topic_id": 38,
   "auto_start_next_topic": false,
-  "handoff_next_action": "Continue topic38 English groups Actions43059788576. Original43050614061 contains16 complete country voices. SavedEnglish checkpoint from cancelled43055537796 contains at least50successfulcues; newrun splits136cues into4disjointgroups, max2concurrent. Verify17publicvoiceassets and decoded1352seconds before markingcomplete. Do not auto-start another topic.",
+  "handoff_next_action": "Continue user-requested topic45, food preservation20:42. English3134words/125cues,110prompts/11TXT and15reuse ready locally; publish docs before17voice synthesis. NativeVietnamese presetAdam confirmed in VieNeu3.8.3; do not relabel NamMinh asAdam. Topic38all17voices are public and download-redecoded64896000frames. Preserve previous episodes; do not auto-start other topics.",
   "completed_topic_28": {
     "id": 28,
     "title": "Chagyrskaya: bằng chứng di truyền về quan hệ gia đình thời tiền sử.",
@@ -1265,5 +1254,32 @@
     "no_raw_source_clips_published": true,
     "visual_review_limit": "Sample-frame review, not uninterrupted manual viewing",
     "minors_identified_in_reviewed_selected_samples": false
+  },
+  "completed_topic_38": {
+    "id": 38,
+    "title": "Các cây cầu đất xuất hiện và biến mất qua những chu kỳ băng hà.",
+    "path": "productions/video-38-land-bridges",
+    "target_seconds": 1352,
+    "english_words": 3581,
+    "timeline_cues": 136,
+    "unique_prompts": 120,
+    "reused_timeline_slots": 16,
+    "prompt_txt_files": 12,
+    "documents_delivered": true,
+    "voice_files_delivered": 17,
+    "voice_status": "17_complete_technical_and_public_download_QA_passed_native_review_pending",
+    "verified_seconds_per_voice": 1352,
+    "verified_decoded_frames_48000": 64896000,
+    "voice_profile_set_id": "science-prehistory-17-v1",
+    "voice_ids_unchanged": true,
+    "voice_archive_url": "https://github.com/seotro95/seotro/releases/download/land-bridges-video-38-22m32s/LAND_BRIDGES_38_17_VOICES_22m32s.zip",
+    "voice_archive_sha256": "6a97dfb056e5736172e62aa8f791cf854b3a0e6fd8194fa43267aa153bacf627",
+    "voice_release_url": "https://github.com/seotro95/seotro/releases/tag/land-bridges-video-38-22m32s",
+    "voice_workflow_run_id": 43059788576,
+    "public_download_verified": true,
+    "video_rendered": false,
+    "footage_generated": false,
+    "translation_native_review_pending": true,
+    "white_hmong_dialect_independently_verified": false
   }
 }
