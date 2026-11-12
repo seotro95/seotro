@@ -1,0 +1,21 @@
+name: Export only completed topic42 voices and profiles
+on:
+  push:
+    branches: [codex/topic42-cooking-20m42s]
+    paths: ['deliveries/topic42_voices/VOICE_EXPORT_READY.json']
+permissions:
+  contents: write
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: /deliveries/topic42_voices/
+      - name: Verify and publish17voices and saved voice profiles only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python deliveries/topic42_voices/publish_voices.py

@@ -1,0 +1,19 @@
+{
+  "topic": 42,
+  "target_seconds": 1242,
+  "export_scope": "17 completed MP3 voices and saved voice profiles only",
+  "profile_files": {
+    "VOICE_PROFILES_LOCKED.json": {
+      "sha256": "c4fc8c8fb3ebc50068536893c35f03a40e9810dcc34e3ce3886bdb69ceeac195"
+    },
+    "NARRATION_STYLE_LOCKED.json": {
+      "sha256": "5255f07cbe82192efcf047f851a97277b4744e2c9b62abf2f34bb6315a54a149"
+    },
+    "NARRATION_DELIVERY_PROFILE.json": {
+      "sha256": "32b87b1fd569b7c6c434ad2e6b3a6327f5aa292c3fb6f67ad4b306c9a1ed820d"
+    },
+    "VOICE_FILE_NAMING.json": {
+      "sha256": "a94359e30be3c7055ac575715b1f880b4bea2e672def83b2a910290dd5444822"
+    }
+  }
+}

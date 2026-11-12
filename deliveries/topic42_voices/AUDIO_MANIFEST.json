@@ -1,0 +1,155 @@
+[
+  {
+    "locale": "en-US",
+    "filename": "COOKING_42_My_Tieng_Anh.mp3",
+    "sha256": "f8ee55b2de4eec5c5d2dc7397f3525efdd80a5b25499090216041c8fd3f9b251",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "en-US-AndrewNeural"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "COOKING_42_Viet_Nam.mp3",
+    "sha256": "fd2be78c256b3c93dd44d69c4f48285c1e1a85598a67175a8602be0245b5d049",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "vi-VN-NamMinhNeural"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "COOKING_42_Tay_Ban_Nha.mp3",
+    "sha256": "d6f54ee36e57b06fd672ace5d2c6729d027cdfcfafd0a16f1a17263cb57cf669",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "es-ES-AlvaroNeural"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "COOKING_42_Phap.mp3",
+    "sha256": "2b3fecf3aca89a00f95b3d37ad246a577cb2ff3e86113b38afcd3f7873ff3304",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "fr-FR-HenriNeural"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "COOKING_42_Nhat_Ban.mp3",
+    "sha256": "208d9c7fb4ae3ae51273da2812af177f148333b89364064617b032936b6ff3c2",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "ja-JP-KeitaNeural"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "COOKING_42_Han_Quoc.mp3",
+    "sha256": "616dea6e393cd1fcb6c551b1177adf4d41651709e4fb86f3f4830ff722a87ab2",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "ko-KR-InJoonNeural"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "COOKING_42_Duc.mp3",
+    "sha256": "664e02ebdbeaad4b56e7695196e405e09ab2fe36c0ae4c150021e8a35c625e59",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "de-DE-ConradNeural"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "COOKING_42_Y.mp3",
+    "sha256": "37217d609239856553730161a87b87b2a2005c7b5733d929d0936d9e49fb5768",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "it-IT-DiegoNeural"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "COOKING_42_Bo_Dao_Nha.mp3",
+    "sha256": "a0f43a56c6d73229dd551a2e816ad188be397f68fe6ecb8bf15db8e3b0f87e16",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "pt-PT-DuarteNeural"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "COOKING_42_Ha_Lan.mp3",
+    "sha256": "bcd94ddbf697106df801a7a67215e2d8fc99de0ddbaa77fadadf6801873cdd21",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "nl-NL-MaartenNeural"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "COOKING_42_Ba_Lan.mp3",
+    "sha256": "67836dc7ea3caf20e664004b6b9a9d53f79810121aa3edaf30d860294e124ae8",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "pl-PL-MarekNeural"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "COOKING_42_Thuy_Dien.mp3",
+    "sha256": "b0b15f0aee26769c4f4fb10123cd6bb6bca86695493873b73e51af26e06c58a0",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "sv-SE-MattiasNeural"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "COOKING_42_Dan_Mach.mp3",
+    "sha256": "ed1c662d69f8f7c78e730a789ac169ee67cd76209de88115c74833ddef98d9f3",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "da-DK-JeppeNeural"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "COOKING_42_Phan_Lan.mp3",
+    "sha256": "ca56449f9c690b845b2b3c7ae8bb135bdf4f1306c189d51bae150344038b58f1",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "fi-FI-HarriNeural"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "COOKING_42_Na_Uy.mp3",
+    "sha256": "afdf4b7e4c263f76a68951e05cd19452b1b5c3b97a8be3667adb1c078f4f9ec4",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "nb-NO-FinnNeural"
+  },
+  {
+    "locale": "cs-CZ",
+    "filename": "COOKING_42_Sec.mp3",
+    "sha256": "a60934f2ea4dcc58ececd350d7ba914c9d88861373b401237b9870d77d454a5d",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "cs-CZ-AntoninNeural"
+  },
+  {
+    "locale": "mww",
+    "filename": "COOKING_42_Hmong_Trang_Nu.mp3",
+    "sha256": "2fd3a308e41a46dfc7aea710f52ecdea9d97771c5b04bf2d3b865869da606004",
+    "bytes": 9936620,
+    "decoded_seconds": 1242,
+    "decoded_samples_48000": 59616000,
+    "voice_id": "hmong-female-3"
+  }
+]
