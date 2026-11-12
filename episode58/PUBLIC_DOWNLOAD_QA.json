@@ -1,0 +1,152 @@
+{
+  "status": "passed",
+  "topic_id": 58,
+  "public_voice_archive_sha256": "77169590596cf96150a2148bbd3371e13b8c371e6ace0dd00d6334083cd122b0",
+  "voice_count": 17,
+  "target_seconds": 1362,
+  "decoded_frames_per_voice_48000": 65376000,
+  "all_country_asset_digests_match": true,
+  "episode58_locked_voice_ids_match": true,
+  "vietnamese_native_preset": "Adam",
+  "zip_crc_passed": true,
+  "voices": [
+    {
+      "locale": "en-US",
+      "filename": "BONE_TRACES_58_My_Tieng_Anh.mp3",
+      "sha256": "e0cc977082ed29edd469d43b36831754dbb353e18f1a3267a130e73c559fea55",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "vi-VN",
+      "filename": "BONE_TRACES_58_Viet_Nam_Adam.mp3",
+      "sha256": "86ade4f80b84e404c6dc83ef0c01b44f4881866a2393c7611616d849ed90c4c0",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "es-ES",
+      "filename": "BONE_TRACES_58_Tay_Ban_Nha.mp3",
+      "sha256": "f735412bd65dc6a416479b035d392023456ab8cd2d8d124ec5dfc27b469ea643",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "fr-FR",
+      "filename": "BONE_TRACES_58_Phap.mp3",
+      "sha256": "548f8947be92956172ff68cf10a550111cac784c61e5feecac57f641e8aa5254",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "ja-JP",
+      "filename": "BONE_TRACES_58_Nhat_Ban.mp3",
+      "sha256": "4334cadd9d34af2a16c07183ec83f7c47f8d0eca43fe5c5dbbea249900e89ffb",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "ko-KR",
+      "filename": "BONE_TRACES_58_Han_Quoc.mp3",
+      "sha256": "5bb9365c9181c5f1f2e04c5cb485e22a4707a479b6e5d48db36d091e22132f17",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "de-DE",
+      "filename": "BONE_TRACES_58_Duc.mp3",
+      "sha256": "3680d849cadb017f2c7b5c1a7464ddc032a736df1b9259569a584938c89e229c",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "it-IT",
+      "filename": "BONE_TRACES_58_Y.mp3",
+      "sha256": "d45bfa16ccaf57144bb12f2e17af2a8ab10da737b52af90df12f37c6c3a6f722",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "pt-PT",
+      "filename": "BONE_TRACES_58_Bo_Dao_Nha.mp3",
+      "sha256": "05e19ad539711e1fb1fd59faa04032c4b8f8b0f6badfa37ff92639a60a93407b",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "nl-NL",
+      "filename": "BONE_TRACES_58_Ha_Lan.mp3",
+      "sha256": "970569560748cf77ca257ad7ed026dea916a4485845f8c3a0ef0db2fbb3ae222",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "pl-PL",
+      "filename": "BONE_TRACES_58_Ba_Lan.mp3",
+      "sha256": "ab4f45cc7a32557db6babc7cbdfd6df3b8f348b5692a8ff1f690b12cbcbb17b5",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "sv-SE",
+      "filename": "BONE_TRACES_58_Thuy_Dien.mp3",
+      "sha256": "2ccdeb68cf524743c36c21e880a9b0e9b146df7cb34eec623959c049a93d9750",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "da-DK",
+      "filename": "BONE_TRACES_58_Dan_Mach.mp3",
+      "sha256": "db034bd91f9b5094f591de2a7a30e941c4b6a18e6597576239675f6c78aca07e",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "fi-FI",
+      "filename": "BONE_TRACES_58_Phan_Lan.mp3",
+      "sha256": "e06978b22dda708e3dc252795dc7175193c6c5b71f13e070bc58dbb2bd06a085",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "nb-NO",
+      "filename": "BONE_TRACES_58_Na_Uy.mp3",
+      "sha256": "f5d81fc5b03c41632a3ad9473616328c9ded8005d269cd5f624b2621a279dc90",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "cs-CZ",
+      "filename": "BONE_TRACES_58_Sec.mp3",
+      "sha256": "f22ee61b164e89e51d0a9660e42638bdd1d4504457c56dc00afb60ff18e4241e",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "mww",
+      "filename": "BONE_TRACES_58_Hmong_Trang_Nu.mp3",
+      "sha256": "2e87bd3f0ae3bd1de6c16e8879cac2434dd86bb7cc4bdcee336053785a6c0d22",
+      "decoded_frames_48000": 65376000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    }
+  ],
+  "independent_native_listening_review": false,
+  "white_hmong_dialect_independently_verified": false
+}

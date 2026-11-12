@@ -1,0 +1,24 @@
+name: Bone traces58 refresh verified delivery records
+'on':
+  push:
+    branches:
+    - codex/bone-traces58-production-20261112
+    paths:
+    - .github/workflows/bone-traces58-refresh-delivery.yml
+  workflow_dispatch: null
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: episode58
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - env:
+        GH_TOKEN: ${{ github.token }}
+      run: python -u episode58/refresh_delivery_metadata.py
