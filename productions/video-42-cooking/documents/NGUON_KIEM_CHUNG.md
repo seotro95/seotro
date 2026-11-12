@@ -1,0 +1,25 @@
+# Chủ đề42 — nguồn kiểm chứng
+
+Tên đã lưu: Con người bắt đầu nấu chín thức ăn khi nào: phân biệt dấu lửa với bằng chứng nấu ăn.
+Tên phim tiếng Anh: Fire Was There. Was Dinner? Kịch bản gốc khoảng3.185từ,20:42.
+
+Các ca là những địa điểm, vật liệu và nghiên cứu khác nhau. Mảnh cháy mở đầu là tình huống minh họa, không phải mẫu có tên từ một ca nghiên cứu. Không suy một mốc chung cho bữa ăn chín đầu tiên của toàn nhân loại.
+
+| Nguồn | Nội dung được dùng | Giới hạn diễn giải |
+|---|---|---|
+| [Berna etal.2012, PNAS](https://doi.org/10.1073/pnas.1117620109), [bản toàn văn](https://pmc.ncbi.nlm.nih.gov/articles/PMC3356665/) | Wonderwerk: xương cháy, tro thực vật, vi địa tầng và khoáng vật trong lớp khoảng1triệu năm | Cháy tại chỗ không tự chứng minh món ăn, người nhóm lửa, khả năng tự tạo lửa hoặc tần suất nấu |
+| [University of Toronto — nghiên cứu Wonderwerk](https://www.utoronto.ca/news/humans-used-fire-million-years-ago) | Giải thích bối cảnh và vấn đề vật liệu bị vận chuyển | Không dùng một tiêu đề báo chí thay cho các mức suy luận riêng |
+| [Marin-Monfort etal.2026, PLOS One](https://doi.org/10.1371/journal.pone.0347480) | Nghiên cứu tiếp tục kiểm tra dấu cháy Wonderwerk bằng luminescence và FTIR | Kịch bản chỉ nói nghiên cứu tiếp tục; không gán thêm ngày đầu tiên nấu ăn từ kết quả mới |
+| [Zohar etal.2022, Nature Ecology & Evolution](https://doi.org/10.1038/s41559-022-01910-z), [PubMed](https://pubmed.ncbi.nlm.nih.gov/36376603/) | GBY: cá nước ngọt, vật liệu răng, so sánh biến đổi khoáng với mẫu gia nhiệt; khoảng780.000năm | Diễn đạt là cách giải thích của nghiên cứu. Không bịa đầu bếp, công thức, lò hoặc coi một phép đo là nhiệt kế của bữa ăn |
+| [Johannes Gutenberg University Mainz — nhóm tác giả giải thích nghiên cứu cá](https://press.uni-mainz.de/hominins-were-cooking-fish-already-in-the-early-paleolithic-period-about-780000-years-ago/) | Đối chiếu bối cảnh, mẫu hiện đại và diễn giải gia nhiệt | Không nói mọi nhóm người thời đó có cùng món hay kỹ thuật |
+| [Author Correction2023](https://doi.org/10.1038/s41559-023-02270-y) | Ghi nhận có bản đính chính đi kèm nghiên cứu GBY | Trang toàn văn Nature yêu cầu xác thực trong phiên; dựa vào abstract và hồ sơ nghiên cứu/nhóm tác giả truy cập được. Không trích nhiệt độ hay chi tiết bổ sung chưa kiểm |
+| [Shahack-Gross etal.2014, Journal of Archaeological Science](https://www.sciencedirect.com/science/article/pii/S0305440313004068), [hồ sơ tác giả](https://cris.tau.ac.il/en/publications/evidence-for-the-repeated-use-of-a-central-hearth-at-middle-pleis/) | Qesem: bếp trung tâm dùng nhiều lần khoảng300.000năm, vi địa tầng và hoạt động quanh bếp | Bếp dùng lặp lại khác với chứng minh mọi mảnh thức ăn được nấu tại vị trí tìm thấy; không bịa phân vai gia đình |
+| [Henry etal.2011, PNAS](https://doi.org/10.1073/pnas.1016868108), [PubMed](https://pubmed.ncbi.nlm.nih.gov/21187393/) | Shanidar/Spy: vi hóa thạch thực vật, một số hạt tinh bột có tổn thương phù hợp nấu | Không suy công thức, nhiệt độ chính xác hoặc tỷ lệ thức ăn chín từ số hạt; xem xét bảo tồn và đường tiếp xúc |
+| [Smithsonian Human Origins — Neanderthals Ate Plants, Too](https://humanorigins.si.edu/research/whats-hot-human-origins/neanderthals-ate-plants-too) | Tóm lược nhóm nghiên cứu về thức ăn thực vật và chế biến | Không áp thực đơn chung cho mọi người Neanderthal |
+| [More than what we eat,2023](https://pubmed.ncbi.nlm.nih.gov/37089909/) | Đường tiếp xúc tinh bột ngoài việc ăn, đối chiếu diễn giải hạt trong cao răng | Không đánh đồng trực tiếp kết quả thực nghiệm với toàn bộ quá trình tạo cao răng cổ |
+| [Investigating Biases Associated With Dietary Starch Incorporation and Retention With an Oral Biofilm Model,2022](https://doi.org/10.3389/feart.2022.886512) | Thiên lệch hạt được giữ lại trong biofilm, giới hạn suy tỷ lệ thức ăn | Không lấy số hạt làm phần trăm khẩu phần |
+| [Arranz-Otaegui etal.2018, PNAS](https://doi.org/10.1073/pnas.1801071115), [PubMed](https://pubmed.ncbi.nlm.nih.gov/30012614/) | Shubayqa1: mảnh thức ăn cháy, sản phẩm giống bánh khoảng14.400năm trong bối cảnh săn bắt-hái lượm | Không phải chứng cứ của bữa chín đầu tiên, không tự gán bánh mì hiện đại hoặc người làm có tên |
+| [University of Copenhagen — công bố Shubayqa](https://humanities.ku.dk/news/2018/archaeologists-discover-bread-that-predates-agriculture-by-4000-years) | Đối chiếu nguồn nhóm tác giả về người săn bắt-hái lượm và thời điểm trước nông nghiệp định hình | Không đồng nhất làm bánh với đã có đồng ruộng cây trồng thuần hóa |
+| [Carmody etal.2011, PNAS](https://doi.org/10.1073/pnas.1112128108), [PubMed](https://pubmed.ncbi.nlm.nih.gov/22065771/) | Thí nghiệm về xử lý nhiệt/không dùng nhiệt và năng lượng từ thực phẩm cụ thể | Lợi ích sinh học không định niên đại được hành vi thời tiền sử; không khái quát mọi thức ăn hay đưa khuyến nghị dinh dưỡng |
+
+Đối chiếu nguồn ngày12/11/2026. Không sao chép lời hay hình của nghiên cứu. Những giải thích về suy luận, mẫu giả định và phương án hình được viết mới. Khi dựng, thêm nhãn minh họa và năm đã kiểm riêng; không coi ảnh AI là mẫu hiển vi, phổ, số liệu, niên đại hoặc hiện vật thật.

@@ -1,0 +1,35 @@
+CHỦ ĐỀ42 — 5 TIÊU ĐỀ VÀ 5 PROMPT THUMBNAIL BỔ SUNG
+Video chính tiếng Anh. Ưu tiên phương án1 cho toàn tập; phương án3 nhấn vào một nghiên cứu trong phim.
+Tỷ lệ16:9,1920x1080 hoặc3840x2160. Chữ ngắn, cách mép ít nhất8%, tránh góc dưới phải. Hình là minh họa, không giả ảnh hiện vật nghiên cứu thật. Nếu generator sinh chữ sai, tạo nền trống và thêm chữ trong editor.
+
+1. TITLE: When Did Humans Start Cooking? Follow the Evidence
+Nghĩa: Con người bắt đầu nấu ăn khi nào? Hãy lần theo bằng chứng.
+CHỮ THUMBNAIL: FIRE… BUT DINNER?
+PROMPT01:
+Create a striking YouTube archaeology thumbnail,16:9,3840x2160. A tiny rough blackened fragment replica on a pale laboratory tray fills the left foreground, photographed with a100mm macro lens. A small out-of-focus natural-looking flame occupies the far left background as a clearly conceptual juxtaposition, not a claim that the fragment was found inside that fire. Strong dark charcoal background, restrained amber rim light on the fragment, cool neutral laboratory highlights. Reserve the upper-right40% for the exact huge bold words "FIRE… BUT DINNER?", white with DINNER in amber. One dominant specimen silhouette, readable at mobile size. Communicate an investigation into whether a burned trace supports cooking. No plates, complete meal, named ancient cook, gold, dates, invented microscope data, children, adolescents, youthful humans, child images or reflections, human remains, gore, extra text, logos or watermark.
+
+2. TITLE: Burned Does Not Always Mean Cooked
+Nghĩa: Bị cháy chưa chắc có nghĩa là đã được nấu để ăn.
+CHỮ THUMBNAIL: BURNED OR COOKED?
+PROMPT02:
+Design a clean editorial-comparison YouTube thumbnail,16:9,3840x2160. Two clearly separate modern reference plant-food samples rest on identical plain supports: one strongly charred at left, one lightly heated with intact pale texture at center. These are conceptual experimental references, not authentic archaeological specimens or a claim of one exact recipe. Tight85mm photographic viewpoint, crisp texture, charcoal backdrop, one controlled warm edge light and neutral fill. Keep the right35% uncluttered for the exact bold uppercase text "BURNED OR COOKED?" in white and amber. Emphasize that visible blackening and deliberate cooking are different questions. No medical symbols, complete prehistoric meal, invented graphs, temperatures, children anywhere including backgrounds or artwork, faces, bodies, blood, skulls, extra typography, logos or watermark.
+
+3. TITLE: 780,000-Year-Old Fish and the Mystery of Cooking
+Nghĩa: Cá780.000năm tuổi và câu hỏi về nấu chín thức ăn.
+CHỮ THUMBNAIL: AN ANCIENT DINNER?
+PROMPT03:
+Create an intriguing science-documentary thumbnail,16:9,3840x2160. One small rounded crushing-tooth replica from a freshwater cyprinid fish sits in a neutral specimen holder at left, greatly magnified with a100mm macro photographic view. It is NOT a shark fang or a human tooth. In the soft distant background, show a modest freshwater lake and reeds as conceptual context, without pretending to reconstruct the exact ancient site. Restrained blue-green background, pale mineral texture, small amber highlight. Reserve upper-right space for the exact large bold text "AN ANCIENT DINNER?" in white and warm yellow. The image should ask about the Gesher Benot Ya'aqov study's cooking interpretation, not promise an eyewitness image or the first cook. No huge fish, open jaws, gore, fishing violence, invented oven, readable data, children, child silhouettes or photographs, extra labels, logos or watermark.
+
+4. TITLE: The Tiny Clues to Cooking's Ancient Past
+Nghĩa: Những dấu vết nhỏ giúp tìm hiểu quá khứ của việc nấu ăn.
+CHỮ THUMBNAIL: TRACES OF A MEAL?
+PROMPT04:
+Create a premium archaeology thumbnail,16:9,3840x2160. An isolated ADULT molar replica occupies the left half, its modest external tan calculus deposit clearly distinct from smooth enamel. Include one large circular conceptual magnification inset showing just a few translucent starch-like granules, static and unlabelled. Make the inset visibly illustrative, not a claimed authentic microscope image of an identified individual. Dark navy backdrop, precise neutral macro light, restrained amber accent on the calculus. Leave upper-right35% for exact huge uppercase text "TRACES OF A MEAL?" in white and amber. Suggest investigation of food contact and processing, not a complete diet or certain recipe. No mouths, dental surgery, juvenile tooth specimens, child imagery anywhere, human remains beyond the adult replica, blood, human DNA helix, invented percentages, food inside enamel, extra text, logos or watermark.
+
+5. TITLE: Before Bread: Searching for the Origins of Cooking
+Nghĩa: Trước những dấu bánh cổ: tìm hiểu nguồn gốc nấu ăn.
+CHỮ THUMBNAIL: BEFORE FARMING
+PROMPT05:
+Design a compelling historical science thumbnail,16:9,3840x2160. A few tiny irregular porous charred food-fragment replicas sit prominently on a pale museum support at left-center, photographed in85mm close view. A softly blurred wild cereal head and plain grinding-stone replica provide background context outside the specimen tray. Inspired by the type of evidence studied at Shubayqa1, with no claim to show actual excavated pieces or their exact recipe. Warm earth palette, strong charcoal negative space on the right, controlled side light revealing pores. Add only the exact large bold words "BEFORE FARMING", white with FARMING in amber. No modern loaf, baguette, cultivated wheat field, modern flour packaging, invented oven, named maker, children or juvenile figures in any form, human remains, blood, invented dates, logos or watermark.
+
+Không tiêu đề nào khẳng định đã tìm ra bữa ăn chín đầu tiên của toàn nhân loại. Có thể thử phương án1và3, đánh giá tỷ lệ nhấp cùng mức giữ người xem; không có bảo đảm về lượt xem.

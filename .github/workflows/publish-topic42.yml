@@ -1,0 +1,21 @@
+name: Publish topic42 documentary deliverables
+on:
+  push:
+    branches: [codex/topic42-cooking-20m42s]
+    paths: ['productions/video-42-cooking/READY.json']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: /productions/video-42-cooking/
+      - name: Verify and publish completed requested deliverables
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python productions/video-42-cooking/publish_release.py

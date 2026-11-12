@@ -1,0 +1,178 @@
+{
+  "style_id": "science-documentary-expressive-v1",
+  "voice_ids_reused": true,
+  "pitch_shift": false,
+  "online_word_accent_db": 1.2,
+  "online_rate_range_percent": [
+    -4,
+    3
+  ],
+  "phrase_pauses_seconds": [
+    0.07,
+    0.12,
+    0.16
+  ],
+  "native_hmong_speed_range": [
+    0.97,
+    1.03
+  ],
+  "native_hmong_gain_db_range": [
+    -0.3,
+    0.6
+  ],
+  "topic42_keyword_accents": {
+    "en-US": [
+      "fire",
+      "cooking",
+      "heat",
+      "evidence",
+      "not",
+      "context",
+      "meal",
+      "fish",
+      "ash",
+      "first",
+      "starch",
+      "bread",
+      "uncertainty"
+    ],
+    "vi-VN": [
+      "lửa",
+      "nấu",
+      "nhiệt",
+      "bằng chứng",
+      "bối cảnh",
+      "cá",
+      "tro",
+      "tinh bột"
+    ],
+    "es-ES": [
+      "fuego",
+      "cocina",
+      "cocción",
+      "calor",
+      "prueba",
+      "evidencia",
+      "contexto",
+      "pescado",
+      "ceniza"
+    ],
+    "fr-FR": [
+      "feu",
+      "cuisson",
+      "chaleur",
+      "preuve",
+      "contexte",
+      "poisson",
+      "cendre"
+    ],
+    "ja-JP": [
+      "火",
+      "調理",
+      "加熱",
+      "証拠",
+      "魚",
+      "灰",
+      "デンプン",
+      "パン"
+    ],
+    "ko-KR": [
+      "불",
+      "조리",
+      "가열",
+      "증거",
+      "물고기",
+      "전분"
+    ],
+    "de-DE": [
+      "Feuer",
+      "Kochen",
+      "Erhitzen",
+      "Beweis",
+      "Kontext",
+      "Fisch",
+      "Asche"
+    ],
+    "it-IT": [
+      "fuoco",
+      "cottura",
+      "calore",
+      "prove",
+      "contesto",
+      "pesce",
+      "cenere"
+    ],
+    "pt-PT": [
+      "fogo",
+      "cozedura",
+      "cozinhar",
+      "calor",
+      "prova",
+      "contexto",
+      "peixe",
+      "cinza"
+    ],
+    "nl-NL": [
+      "vuur",
+      "koken",
+      "hitte",
+      "bewijs",
+      "context",
+      "vis"
+    ],
+    "pl-PL": [
+      "ogień",
+      "gotowanie",
+      "ciepło",
+      "dowód",
+      "kontekst",
+      "ryb",
+      "popiół"
+    ],
+    "sv-SE": [
+      "eld",
+      "matlagning",
+      "värme",
+      "bevis",
+      "sammanhang",
+      "fisk",
+      "aska"
+    ],
+    "da-DK": [
+      "ild",
+      "madlavning",
+      "varme",
+      "bevis",
+      "kontekst",
+      "fisk",
+      "aske"
+    ],
+    "fi-FI": [
+      "tuli",
+      "ruoanlaitto",
+      "lämpö",
+      "todiste",
+      "kala",
+      "tuhka"
+    ],
+    "nb-NO": [
+      "ild",
+      "matlaging",
+      "varme",
+      "bevis",
+      "sammenheng",
+      "fisk",
+      "aske"
+    ],
+    "cs-CZ": [
+      "oheň",
+      "vaření",
+      "teplo",
+      "důkaz",
+      "souvislost",
+      "ryb",
+      "popel"
+    ]
+  },
+  "duration_alignment": "English125cues;other16languages13chapters;all1242seconds"
+}

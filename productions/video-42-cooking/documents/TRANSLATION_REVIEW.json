@@ -1,0 +1,12 @@
+{
+  "topic": 42,
+  "languages": 17,
+  "original_english": true,
+  "hmong": "Assistant-written contextual adaptation with simpler phrasing; not a literal sentence-by-sentence translation",
+  "other15": "Automatic draft from disambiguated source plus targeted terminology and locale corrections",
+  "vietnamese_targeted_corrections": 36,
+  "portuguese_locale": "pt-PT; European vocabulary corrections",
+  "independent_native_review": false,
+  "white_hmong_dialect_listening_review": false,
+  "key_qualifier_check": "Cooking-compatible damage versus demonstrated cooking cause checked in15translated first sentences; DE,FI,JA,KO corrected explicitly"
+}

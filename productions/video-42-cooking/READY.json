@@ -1,0 +1,246 @@
+{
+  "topic": 42,
+  "target_seconds": 1242,
+  "expected_samples_48000": 59616000,
+  "release_tag": "cooking-video-42-20m42s",
+  "voices_complete": false,
+  "documents_inventory": [
+    {
+      "path": "documents/5_TIEU_DE_5_PROMPT_THUMBNAIL.txt",
+      "bytes": 6080,
+      "sha256": "7d4201eded98ed166ce96f5ec9aad36f034b5fbb1e1eb75c7171c6979084e277"
+    },
+    {
+      "path": "documents/CANH_DUNG_LAI.txt",
+      "bytes": 380,
+      "sha256": "14acfe84ea48dea8f47802108d7dd50ad8a37aedabb985f743a21c0f37741305"
+    },
+    {
+      "path": "documents/DOCUMENT_QA.json",
+      "bytes": 534,
+      "sha256": "7cc403076ce1735eddf7c36946cbf2c16cd1685095dcb732431a0b4456d97aae"
+    },
+    {
+      "path": "documents/GIONG_DA_LUU.md",
+      "bytes": 1152,
+      "sha256": "309bda426a146b27aae07a79dbff97810b11f1296baf13cd5f502f2bab7ee731"
+    },
+    {
+      "path": "documents/HOOK_30_GIAY_10_SHOT.csv",
+      "bytes": 1259,
+      "sha256": "fc9539c04b0dc25d9e3a37be4eff948b783e036b9c58dd265451cdf62b69cbde"
+    },
+    {
+      "path": "documents/KICH_BAN_EN_20m42s.txt",
+      "bytes": 21359,
+      "sha256": "27c9884ab8a6ffcc77f561b4492b912d8c1eba90041bd6baad16b212a2684130"
+    },
+    {
+      "path": "documents/KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 26859,
+      "sha256": "8e58ed08bf6e4b6d66701aed393a2a46fd747ba3e6bffc6fc8f58298930dfddf"
+    },
+    {
+      "path": "documents/LOI_DAN_EN_125_CANH.srt",
+      "bytes": 25501,
+      "sha256": "5912e9f56fbee42877553754406c9a5cb971f132193b62c0428f40f79213fa42"
+    },
+    {
+      "path": "documents/NARRATION_DELIVERY_PROFILE.json",
+      "bytes": 2745,
+      "sha256": "32b87b1fd569b7c6c434ad2e6b3a6327f5aa292c3fb6f67ad4b306c9a1ed820d"
+    },
+    {
+      "path": "documents/NARRATION_STYLE_LOCKED.json",
+      "bytes": 1352,
+      "sha256": "5255f07cbe82192efcf047f851a97277b4744e2c9b62abf2f34bb6315a54a149"
+    },
+    {
+      "path": "documents/NGUON_KIEM_CHUNG.md",
+      "bytes": 6137,
+      "sha256": "fac0e66fb9c98c729b4240acd1e7dad25feb8300f7b05809d1f1f8306bad3e8e"
+    },
+    {
+      "path": "documents/PHAN_TICH_VIDEO_NGUON.md",
+      "bytes": 4613,
+      "sha256": "cedbe662af837970b3bdd7590a9c6ef11cbce7edf1afdfcd6e1c88b784addff1"
+    },
+    {
+      "path": "documents/PROMPTS/COOKING_42_PROMPTS_01_001_010.txt",
+      "bytes": 16973,
+      "sha256": "29e9d570881b9c5f21eeb160a832f9a6a10a4cc37f048029943d7b559e91158d"
+    },
+    {
+      "path": "documents/PROMPTS/COOKING_42_PROMPTS_02_011_020.txt",
+      "bytes": 17037,
+      "sha256": "df1696afcc7731b8e609402f520738c494fe6ea1fb38b749c4349ccc14785b1c"
+    },
+    {
+      "path": "documents/PROMPTS/COOKING_42_PROMPTS_03_021_030.txt",
+      "bytes": 17021,
+      "sha256": "a4346a486de9b284f6d91aa5fd2b765df456855e9f50f834c15c459f3e7695b8"
+    },
+    {
+      "path": "documents/PROMPTS/COOKING_42_PROMPTS_04_031_040.txt",
+      "bytes": 16986,
+      "sha256": "1f621fdc0853a58a7e22220a8817d69fdf219d271b8a4e51402d679d1f1062fe"
+    },
+    {
+      "path": "documents/PROMPTS/COOKING_42_PROMPTS_05_041_050.txt",
+      "bytes": 17103,
+      "sha256": "ee6c987d89159384a46621602cfbb2c6f0561f57862ff489d51ff26242d92453"
+    },
+    {
+      "path": "documents/PROMPTS/COOKING_42_PROMPTS_06_051_060.txt",
+      "bytes": 17064,
+      "sha256": "4eeaff5bcccd62b44ead1c0ed4c1d8194a9f6da1532932e086ce0f725c7b2281"
+    },
+    {
+      "path": "documents/PROMPTS/COOKING_42_PROMPTS_07_061_070.txt",
+      "bytes": 17121,
+      "sha256": "ba19255f2042d9876205d7b3562b6d99bafd3b92ca060bd51fb6e570fca83ffd"
+    },
+    {
+      "path": "documents/PROMPTS/COOKING_42_PROMPTS_08_071_080.txt",
+      "bytes": 17099,
+      "sha256": "3fb905910960902e65a2693c7bb08d1b7ea74a3adcd98eb6e794f65a4656b283"
+    },
+    {
+      "path": "documents/PROMPTS/COOKING_42_PROMPTS_09_081_090.txt",
+      "bytes": 17130,
+      "sha256": "bbac529ed6feafc43fac431a1a83db035c6881408cf165af3a39566c3d49f237"
+    },
+    {
+      "path": "documents/PROMPTS/COOKING_42_PROMPTS_10_091_100.txt",
+      "bytes": 17159,
+      "sha256": "7258266e5bf1afcec3189595ed706a11d6282913c8b8426d97749268c333ad56"
+    },
+    {
+      "path": "documents/PROMPTS/COOKING_42_PROMPTS_11_101_110.txt",
+      "bytes": 17003,
+      "sha256": "22b80b956e41eaeb4b384f7db582c7b9eec174bd5d7553485ad51ff28fcff659"
+    },
+    {
+      "path": "documents/PROMPTS/COOKING_42_PROMPTS_12_111_120.txt",
+      "bytes": 17088,
+      "sha256": "c22f81afba2d9fe330af4d1a40d5061efda82ca195bdc559ceecaca49cfe1f02"
+    },
+    {
+      "path": "documents/PROVIDER_TEXT_METADATA_AUDIT.json",
+      "bytes": 5996,
+      "sha256": "0efc4ebf17cee5732efe5647e2b4aed9ccce5fd57dbccf2b9a92aa14090c6627"
+    },
+    {
+      "path": "documents/README.md",
+      "bytes": 2824,
+      "sha256": "b1234d56f4c09a54b24fc06b052211e6f31083dc59885065d064e2817b08c7ae"
+    },
+    {
+      "path": "documents/TIMELINE_125_CANH.csv",
+      "bytes": 42452,
+      "sha256": "92087ddd4f2ec6f059b8e65a26caa46d8a1e50ae7c24432a2c1f676e162c52df"
+    },
+    {
+      "path": "documents/TRANSLATION_REVIEW.json",
+      "bytes": 649,
+      "sha256": "61db65503d8215c6d52eff18ec9a82bbf52541c2f650290c3bdbda8af2958fb5"
+    },
+    {
+      "path": "documents/VOICE_FILE_NAMING.json",
+      "bytes": 2822,
+      "sha256": "a94359e30be3c7055ac575715b1f880b4bea2e672def83b2a910290dd5444822"
+    },
+    {
+      "path": "documents/VOICE_PROFILES_LOCKED.json",
+      "bytes": 12987,
+      "sha256": "c4fc8c8fb3ebc50068536893c35f03a40e9810dcc34e3ce3886bdb69ceeac195"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/cs-CZ.txt",
+      "bytes": 23781,
+      "sha256": "b2bd0dbfe6d0907fcdaa9df9838bf70c157ffb729c9ef151a21870d5e606dd9f"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/da-DK.txt",
+      "bytes": 23520,
+      "sha256": "0d35c32e60c1cccf93ba1e6b3532db9a4497f5dabf8689f783f8dea7cd79090e"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/de-DE.txt",
+      "bytes": 27181,
+      "sha256": "5f437ad804743bf5faf65a6c4766a1be455adc052a2f25b0e1c777dd02c0bda7"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/en-US.txt",
+      "bytes": 22765,
+      "sha256": "718a4448654837536b6f7fa3de800f26e887521bd2571e496f3b89e6f457cc3f"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/es-ES.txt",
+      "bytes": 25985,
+      "sha256": "9ea8a403550a8e1f6ee40fb1e57e5dc56c6b184d9fff780de0833bc404d768b2"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/fi-FI.txt",
+      "bytes": 24330,
+      "sha256": "967e0fd8805ddad082ad67e832159a502888fa58b22b84dbdccf5cde4dff7797"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/fr-FR.txt",
+      "bytes": 27886,
+      "sha256": "cc0c1c72f8fc5c0235683ad64170be2d7e96f5dad08220729eee8546e1d40956"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/it-IT.txt",
+      "bytes": 25721,
+      "sha256": "9b429fdc1272b04349f4797039ecdb1f53e473304cc3bee64e0394b579a9988e"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/ja-JP.txt",
+      "bytes": 30091,
+      "sha256": "27952e6a0f0350f0c7a71e8289a4c31f88c3ef3df07e8cda712ee2e6c508a0c4"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/ko-KR.txt",
+      "bytes": 27010,
+      "sha256": "bea051f587a358b286b6e4a72b4705b76588dd997993270c3716ec280427ae12"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/mww.txt",
+      "bytes": 16498,
+      "sha256": "7366876d8f530a3941aa219a9d3dbaa28405b1b98ba3150f0ccef9678bb21a1a"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/nb-NO.txt",
+      "bytes": 22617,
+      "sha256": "f5bf210e7f136682d7f199ca63d00c0a4ada2d2ec41f8e224bef4bfe3f1bb404"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/nl-NL.txt",
+      "bytes": 26046,
+      "sha256": "a3c57113d6866a10040a8d44d16b7dbd23b891522e2040d02bdb711a218a96fc"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/pl-PL.txt",
+      "bytes": 25198,
+      "sha256": "42cdfcb29e6de293977083a3583dd338f59c7c8a3f26b899f825083e27a2ec1d"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/pt-PT.txt",
+      "bytes": 25278,
+      "sha256": "09cb1a7dc3dab094ae86ee86a57758c1482540d36a954a777083753cf3c1c21f"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/sv-SE.txt",
+      "bytes": 23449,
+      "sha256": "e24c136e3943bf9b7407d24d85c79b716c02c69fb74f8a59ac54d306c3208fd8"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/vi-VN.txt",
+      "bytes": 33678,
+      "sha256": "0ec39f7b2cbc9c851d95e3eec8165bbfa8325e30fbf04f871194176c5c7b1e6a"
+    }
+  ],
+  "scope": "Only requested topic42 generated scripts,120prompts,5titles/thumbnailprompts,voiceprofiles,translationtext,timing andQA;no source media,models,reference audio,credentials or other topics",
+  "export_only_no_voice_generation": true
+}
