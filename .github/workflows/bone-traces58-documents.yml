@@ -1,0 +1,23 @@
+name: Bone traces58 publish script and130silent prompts
+on:
+  push:
+    branches: [codex/bone-traces58-production-20261112]
+    paths: [.github/workflows/bone-traces58-documents.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: episode58
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate137cues,130prompts and public document release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u episode58/publish_documents.py
