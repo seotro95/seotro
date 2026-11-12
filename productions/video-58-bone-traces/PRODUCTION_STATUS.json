@@ -1,0 +1,23 @@
+{
+  "id": 58,
+  "title": "Móng, răng và xương: nhận diện dấu thú ăn thịt trước khi kết luận có người săn.",
+  "phase": "documents_delivered_17voices_generating",
+  "target_seconds": 1362,
+  "english_script_words": 3647,
+  "english_cues": 137,
+  "unique_prompts": 130,
+  "prompt_txt_files": 13,
+  "reused_slots": 7,
+  "work_branch": "codex/bone-traces58-production-20261112",
+  "vietnamese_voice_id": "Adam",
+  "vietnamese_backend": "Melo + Viet1.3.1 / VieNeu3.8.3 native ONNXFP32",
+  "other16_saved_voice_ids_retained": true,
+  "documents_delivered": true,
+  "public_documents_verified": true,
+  "documents_url": "https://github.com/seotro95/seotro/releases/download/bone-traces-video-58-22m42s/BONE_TRACES_58_TAI_LIEU_22m42s.zip",
+  "release_tag": "bone-traces-video-58-22m42s",
+  "voice_source_commit": "0b04de95aa1b9d6c250c81fc8ccee0378019ce5b",
+  "voice_workflow_run_id": 43193496483,
+  "english_preflight_run_id": 43190713802,
+  "voices_generated": false
+}

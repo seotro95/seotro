@@ -1,0 +1,13 @@
+{
+  "name": "Adam",
+  "gender": "Male",
+  "region": "Nam",
+  "sdk_version": "3.8.3",
+  "preset_sha256": "bd7946906704514d47b228b9dbfc76c5538276b3cf6661cb308f8687906849f6",
+  "voices_json_sha256": "e1f13cd2c2e0d29fdab5e15bfd7a30f3d7b768e6132bb43dd2b853f8efefdce9",
+  "package": {
+    "version": "3.8.3",
+    "wheel_url": "https://files.pythonhosted.org/packages/fc/9c/e7b624412b8a734d6b1cd8ca6209f88a309464b05393c40f2e316ec90885/vieneu-3.8.3-py3-none-any.whl",
+    "wheel_sha256": "7388d166e65746f5bb075bf8094d324f8131a82393680b712260d6f2f983ef06"
+  }
+}
