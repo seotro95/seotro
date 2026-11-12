@@ -1,0 +1,73 @@
+name: Neanderthal fire71 English and NamMinh timing preflight
+permissions:
+  contents: read
+jobs:
+  english:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: episode71
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: python episode71/build_documents.py
+    - run: 'python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+
+        python episode71/ensure_ffmpeg.py
+
+        python episode71/bootstrap_tool.py online
+
+        '
+    - name: Validate exact text boundaries and30second English preview
+      run: python -u episode71/render_english_groups.py --preview
+    - if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: fire71-english-preflight
+        path: 'episode71/voice/en_preview/NEANDERTHAL_FIRE_71_EN_PREVIEW_30s.mp3
+
+          episode71/voice/en_preview/render_report.json
+
+          episode71/voice/en_preview/group-*.wav
+
+          episode71/voice/en_preview/group-*.json
+
+          episode71/voice/en_preview/raw-*.json
+
+          '
+        if-no-files-found: ignore
+        retention-days: 14
+  namminh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: episode71
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: 'python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+
+        python episode71/ensure_ffmpeg.py
+
+        python episode71/bootstrap_tool.py online'
+    - run: python -u episode71/preflight_namminh.py
+    - if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: fire71-namminh-preflight
+        path: 'episode71/NAM_MINH_PREFLIGHT_QA.json
+
+          episode71/voice/vi_preview/*.mp3'
+        if-no-files-found: ignore
+        retention-days: 14
+'on':
+  push:
+    branches:
+    - codex/neanderthal-fire71-production-20261112
+    paths:
+    - .github/workflows/neanderthal-fire71-preflight.yml
+  workflow_dispatch: null

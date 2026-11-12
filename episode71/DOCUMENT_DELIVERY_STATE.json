@@ -1,0 +1,13 @@
+{
+  "topic_id": 71,
+  "documents_published": true,
+  "target_seconds": 1358,
+  "release_tag": "neanderthal-fire-video-71-22m38s",
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/neanderthal-fire-video-71-22m38s",
+  "archive_url": "https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_TAI_LIEU_22m38s.zip",
+  "archive_sha256": "2106373bbf2b46680c2277eff468a47cdc2ba5fd0bfccdf5de46de44c18419b6",
+  "archive_bytes": 139763,
+  "public_download_verified": true,
+  "document_workflow_run_id": 43236331459,
+  "source_commit": "26b7ea60e47d8b48a3dc2da7a829f690e64f05e6"
+}
