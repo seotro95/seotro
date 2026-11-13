@@ -1,31 +1,13 @@
 <!-- active-production -->
-# Chủ đề 87 — đủ tài liệu và 17 voice 20:22 đã kiểm tải
+# Chủ đề 91 — tài liệu đã có, đang tạo 17 voice 22:12
 
-[Tải đủ 17 giọng ZIP](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_17_VOICES_20m22s.zip) · [Kịch bản và 11 TXT prompt](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_TAI_LIEU_20m22s.zip?v=5ff465e296863d5567b846a0ece597ec308706f8b2c896b4baac7eaa8b41ed21) · [5 tiêu đề và 5 prompt thumbnail](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/5_TIEU_DE_VA_THUMBNAIL.txt)
+[Kịch bản và 12 TXT prompt](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_TAI_LIEU_22m12s.zip) · [5 tiêu đề và 5 prompt thumbnail](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/5_TIEU_DE_VA_THUMBNAIL.txt) · [Tiến trình voice](https://github.com/seotro95/seotro/actions/runs/43458603631)
 
-- [Anh (Mỹ)](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_My_Tieng_Anh.mp3) — 20:22
-- [Việt Nam — Nam Minh](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Viet_Nam_Nam_Minh.mp3) — 20:22
-- [Tây Ban Nha](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Tay_Ban_Nha.mp3) — 20:22
-- [Pháp](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Phap.mp3) — 20:22
-- [Nhật Bản](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Nhat_Ban.mp3) — 20:22
-- [Hàn Quốc](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Han_Quoc.mp3) — 20:22
-- [Đức](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Duc.mp3) — 20:22
-- [Ý](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Y.mp3) — 20:22
-- [Bồ Đào Nha](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Bo_Dao_Nha.mp3) — 20:22
-- [Hà Lan](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Ha_Lan.mp3) — 20:22
-- [Ba Lan](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Ba_Lan.mp3) — 20:22
-- [Thụy Điển](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Thuy_Dien.mp3) — 20:22
-- [Đan Mạch](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Dan_Mach.mp3) — 20:22
-- [Phần Lan](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Phan_Lan.mp3) — 20:22
-- [Na Uy (Bokmål)](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Na_Uy.mp3) — 20:22
-- [Séc](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Sec.mp3) — 20:22
-- [H'mông Trắng (nữ)](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Hmong_Trang_Nu.mp3) — 20:22
+Chủ đề: tóc Saqqaq, ADN và lịch sử cư dân Bắc Cực. 3.703 từ Anh, 134 mốc, 120 prompt mới trong 12 TXT, 14 mốc dùng lại. Tất cả prompt cấm trẻ em, thiếu niên, lời nói và âm thanh. Tóc/mô hình là minh họa, không mẫu thật, chân dung, tuyến di cư hoặc dữ liệu đo đã xác nhận.
 
-Đã tải lại, kiểm hash và giải mã từng MP3 đúng 58.656.000 mẫu ở 48 kHz. Giữ đủ 17 ID từ tập 71; Việt dùng Nam Minh thật, H’mông dùng reference female-3. Chưa có kiểm nghe/biên tập bản ngữ độc lập hoặc xác minh phương ngữ H’mông Trắng độc lập.
+Giữ 17 ID từ tập 71: NamMinhNeural nam và H’mông female-3 nữ qua công cụ riêng 1.6.6. Hai bản thử Anh 30 giây, Nam Minh 10 giây đạt. Việt/H’mông viết lại 14 chương; 14 bản khác địa phương hóa phần nội dung chính và rà ý khoa học. Chưa có kiểm nghe/biên tập bản ngữ độc lập hoặc xác minh phương ngữ H’mông Trắng độc lập.
 
-Chủ đề: Schöningen, vũ khí gỗ và kỹ năng săn bắt cổ. Có 3.249 từ Anh, 123 mốc, 110 prompt mới trong 11 TXT, 13 mốc dùng lại. Mỗi prompt cấm trẻ em, thiếu niên, lời nói và âm thanh; đồ gỗ và mô hình là bản sao minh họa, không dữ liệu đo thật. Niên đại cập nhật theo nghiên cứu năm 2025 về khoảng 200 nghìn năm; không nhầm 187 hiện vật thành 187 cây giáo.
-
-Chưa có footage hoặc MP4 tập87. Khi có clip: chỉ voice Anh, xóa tiếng clip,10 cảnh trong30 giây đầu nằm trong20:22. Thiếu cảnh dùng video chuyển động liên quan, không ảnh tĩnh/thẻ chữ. Giữ hồ sơ v3 Nam Minh từ tập71; không tự tạo lại voice hoặc bắt đầu tập khác. Hồ sơ: productions/video-87-schoeningen. Mã nguồn: nhánh codex/schoeningen87-production-20261113, thư mục episode87. Tập85 và toàn bộ các tập trước được giữ nguyên.
+Tiếp tục workflow hiện tại, giữ phần thành công. Anh có tách request nhỏ cùng giọng/backend nếu gặp NoAudio sau số lần thử giới hạn,không đổi backend vượt 401/403/429. Chỉ phát hành khi đủ 17 voice, đúng ID và mỗi bản giải mã đúng 63.936.000 mẫu ở48kHz. Chưa có footage/MP4 tập91. Khi có clip: chỉ voice Anh, 10 cảnh/30 giây đầu nằm trong22:12; thiếu cảnh dùng video liên quan, không ảnh tĩnh/thẻ chữ. Không tự bắt đầu tập khác. Tập87 và toàn bộ tập trước được giữ nguyên.
 <!-- /active-production -->
 
 ---
@@ -174,6 +156,7 @@ Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ 
 ## Bàn giao video chủ đề4
 
 Đã dựng và xuất bản23:00, chỉ voiceAnh gốc có nhấn nhá.133upload/115clipkhácnhau/18bảntrùng; chọn cảnh người trưởng thành, bỏ mọi tiếngclip và cảnh không phù hợp.12shot trong30giây đầu; các chương theo ranh120/110s. [Video](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Tập5 vẫn chưa bắt đầu.
+
 
 
 

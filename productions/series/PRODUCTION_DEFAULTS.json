@@ -207,6 +207,32 @@
       "vietnamese_voice": "Nam Minh",
       "vietnamese_voice_id": "vi-VN-NamMinhNeural",
       "reason": "Latest explicit topic87 request; all17saved identities and prior episodes preserved"
+    },
+    "91": {
+      "target_seconds": 1332,
+      "english_cues": 134,
+      "last_cue_seconds": 2,
+      "translated_chapter_seconds": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        32
+      ],
+      "unique_prompts": 120,
+      "reused_slots": 14,
+      "vietnamese_voice": "Nam Minh",
+      "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+      "reason": "Latest explicit topic91request; all17savedidentities and prior productions retained"
     }
   },
   "primary_video_language": "en-US",
