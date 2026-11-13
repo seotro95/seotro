@@ -1,3 +1,3 @@
 # Angkor — tập 85 — 21:32
 
-Đang tải lên: **6/17 MP3**. Trang tải đầy đủ sẽ xuất hiện khi hoàn tất.
+Đang tải lên: **8/17 MP3**. Trang tải đầy đủ sẽ xuất hiện khi hoàn tất.
