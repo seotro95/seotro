@@ -21,6 +21,29 @@ def sha(path):
 def gh(*args):
     return subprocess.run(['gh',*map(str,args)],check=True,text=True,capture_output=True).stdout
 
+if os.environ.get('ALULA_METADATA_ONLY')=='1':
+    release=json.loads(gh('api',f'repos/{REPO}/releases/{RELEASE_ID}'))
+    assets={x['name']:x for x in release['assets']}
+    for row in qa['voices']:
+        assert assets[row['file']]['size']==row['bytes']
+        assert assets[row['file']]['digest']=='sha256:'+row['mp3_sha256']
+    assert assets[manifest['file']]['digest']=='sha256:'+manifest['sha256']
+    with zipfile.ZipFile('ALULA_095_13_TXT_PROMPTS.zip','w',zipfile.ZIP_DEFLATED) as z:
+        for q in sorted((ROOT/'prompts').glob('*.txt')):z.write(q,q.name)
+    status=json.loads((ROOT/'DELIVERY_MANIFEST.json').read_text())
+    status.update(status='uploaded_to_github_draft_release',github_audio_upload_status='complete',github_release_id=RELEASE_ID,github_release_url=release['html_url'],documents_repacked_on_github=True)
+    status['packages']=[{'file':manifest['file'],'bytes':manifest['bytes'],'sha256':manifest['sha256']},{'file':'ALULA_095_13_TXT_PROMPTS.zip','bytes':Path('ALULA_095_13_TXT_PROMPTS.zip').stat().st_size,'sha256':sha('ALULA_095_13_TXT_PROMPTS.zip')}]
+    (ROOT/'DELIVERY_MANIFEST.json').write_text(json.dumps(status,ensure_ascii=False,indent=2))
+    upload_qa={'status':'all_17_uploaded_and_server_sha256_verified','repository':REPO,'release_id':RELEASE_ID,'release_url':release['html_url'],'workflow_run_id':os.environ['GITHUB_RUN_ID'],'target_seconds':1242,'audio_count':17,'audio_zip_sha256':manifest['sha256'],'audio':[{'file':r['file'],'bytes':r['bytes'],'sha256':r['mp3_sha256'],'server_digest':assets[r['file']]['digest']} for r in qa['voices']]}
+    (ROOT/'GITHUB_UPLOAD_QA.json').write_text(json.dumps(upload_qa,ensure_ascii=False,indent=2))
+    documents=[q for q in ROOT.rglob('*') if q.is_file() and q.name not in {'audio-transfer.json','finish_audio_delivery.py','SHA256SUMS.txt'}]
+    (ROOT/'SHA256SUMS.txt').write_text(''.join(f'{sha(q)}  {q.relative_to(ROOT).as_posix()}\n' for q in sorted(documents)))
+    with zipfile.ZipFile('ALULA_095_TAI_LIEU_20m42s.zip','w',zipfile.ZIP_DEFLATED) as z:
+        for q in sorted(documents+[ROOT/'SHA256SUMS.txt']):z.write(q,q.relative_to(ROOT))
+    gh('release','upload',TAG,'ALULA_095_TAI_LIEU_20m42s.zip','ALULA_095_13_TXT_PROMPTS.zip',ROOT/'GITHUB_UPLOAD_QA.json','--clobber')
+    print('Refreshed final download metadata:',release['html_url'],flush=True)
+    raise SystemExit(0)
+
 partdir=Path('verified-audio-parts');partdir.mkdir(exist_ok=True)
 def download(part):
     assert len(part['blob_sha'])==40 and all(x in '0123456789abcdef' for x in part['blob_sha'])

@@ -1,4 +1,4 @@
-name: AlUla 095 verified audio delivery
+name: AlUla 095 final delivery metadata
 on:
   push:
     branches: ["codex/alula-095-20m42s"]
@@ -9,11 +9,11 @@ permissions:
 jobs:
   delivery:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - name: Verify and save the 17 synthetic narration files
+      - name: Verify server digests and refresh final document links
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
+          ALULA_METADATA_ONLY: "1"
         run: python episodes/alula-095/finish_audio_delivery.py
