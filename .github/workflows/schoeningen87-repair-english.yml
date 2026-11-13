@@ -1,0 +1,93 @@
+name: Schoeningen87 recover English group5 and publish17voices
+on:
+  push:
+    branches: [codex/schoeningen87-production-20261113]
+    paths: [.github/workflows/schoeningen87-repair-english.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  english:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: episode87
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python episode87/extract_inputs.py
+      - run: |
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python episode87/ensure_ffmpeg.py
+          python episode87/bootstrap_tool.py online
+      - uses: actions/download-artifact@v4
+        with:
+          name: schoen87-checkpoint-en-US
+          path: episode87/voice/audio/en-US
+          run-id: 43442771145
+          github-token: ${{ github.token }}
+      - run: python -u episode87/repair_english_group5.py
+      - run: python -u episode87/render_english_groups.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: schoen87-recovered-English-checkpoint
+          path: |
+            episode87/voice/audio/en-US/group-*
+            episode87/voice/audio/en-US/recovery-*
+            episode87/voice/audio/en-US/ENGLISH_RECOVERY.json
+          if-no-files-found: ignore
+          retention-days: 14
+          overwrite: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: schoen87-voice-en-US
+          path: |
+            episode87/voice/audio/en-US/*.mp3
+            episode87/voice/audio/en-US/render_report.json
+          if-no-files-found: error
+          retention-days: 14
+          overwrite: true
+  publish:
+    needs: english
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: episode87
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python episode87/extract_inputs.py
+          python -m pip install imageio-ffmpeg==0.6.0
+          python episode87/ensure_ffmpeg.py
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: schoen87-voice-*
+          path: voice_artifacts
+          run-id: 43442771145
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: schoen87-voice-en-US
+          path: voice_artifacts/schoen87-voice-en-US
+      - name: Verify17full waveforms and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u episode87/publish_voices.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: schoen87-release-reports
+          path: |
+            episode87/voice_delivery/*.json
+            episode87/voice_delivery/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14
