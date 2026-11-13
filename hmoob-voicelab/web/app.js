@@ -163,6 +163,7 @@ function renderCurrent(job) {
   $('current-job').hidden = false;
   const progress = Math.min(100, Math.max(0, Number(job.progress) || 0));
   $('current-title').textContent = {queued: 'Bản thu đang trong hàng đợi', running: 'Đang biến kịch bản thành lời kể', cancelling: 'Đang dừng và giữ tiến độ', cancelled: 'Đã dừng · Có thể tiếp tục', error: 'Chưa hoàn tất bản thu', done: 'Câu chuyện đã thành lời'}[job.status] || 'Bản thu của bạn';
+  if (job.status === 'running' && job.phase) $('current-title').textContent = job.phase;
   $('current-caption').textContent = `${job.voice === 'male' ? 'Giọng nam' : 'Giọng nữ'} · ${number.format(job.characters || 0)} ký tự · ${qualityNames[job.quality] || job.quality || ''}`;
   $('current-percent').textContent = Math.floor(progress) + '%';
   $('current-progress').value = progress;
