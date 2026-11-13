@@ -36,14 +36,17 @@
   "all17_saved_ids_retained": true,
   "native_voices_expected": 1,
   "online_voices_expected": 16,
-  "voices_generated": false,
+  "voices_generated": true,
   "footage_generated": false,
   "video_edited": false,
   "title": "Homo luzonensis: những mảnh xương mở rộng bản đồ họ hàng của chúng ta.",
-  "phase": "generating17voices",
+  "phase": "17voices_publicly_verified_refreshing_documents",
   "documents_delivered": true,
   "primary_video_locale": "en-US",
   "translations_ready": true,
   "voice_count_expected": 17,
-  "english_and_namminh_preflight_run_id": 43395946902
+  "english_and_namminh_preflight_run_id": 43395946902,
+  "voice_files_delivered": 17,
+  "public_download_verified": true,
+  "voice_archive_sha256": "acd927c0c82a6ff13d9530b50d0965820ae7e2ff67e265be25eca535fb3893d5"
 }

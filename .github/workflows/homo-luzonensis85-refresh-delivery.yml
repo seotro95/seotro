@@ -1,0 +1,24 @@
+name: Homo luzonensis85 refresh verified delivery records
+'on':
+  push:
+    branches:
+    - codex/homo-luzonensis85-production-20261113
+    paths:
+    - .github/workflows/homo-luzonensis85-refresh-delivery.yml
+  workflow_dispatch: null
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: episode85
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - env:
+        GH_TOKEN: ${{ github.token }}
+      run: python -u episode85/refresh_delivery_metadata.py

@@ -1,0 +1,152 @@
+{
+  "status": "passed",
+  "topic_id": 85,
+  "public_voice_archive_sha256": "acd927c0c82a6ff13d9530b50d0965820ae7e2ff67e265be25eca535fb3893d5",
+  "voice_count": 17,
+  "target_seconds": 1282,
+  "decoded_frames_per_voice_48000": 61536000,
+  "all_country_asset_digests_match": true,
+  "episode85_locked_voice_ids_match": true,
+  "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+  "zip_crc_passed": true,
+  "voices": [
+    {
+      "locale": "en-US",
+      "filename": "HOMO_LUZONENSIS_85_My_Tieng_Anh.mp3",
+      "sha256": "3e8a2e6f825e4d4f9327a879cd16e8f929b6a99f40e5fa89b52547f84bfa1c73",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "vi-VN",
+      "filename": "HOMO_LUZONENSIS_85_Viet_Nam_Nam_Minh.mp3",
+      "sha256": "b843bd9fcb23fdf0c475367d2d4d57de3648146592badc7fce839e5daf9f6bdc",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "es-ES",
+      "filename": "HOMO_LUZONENSIS_85_Tay_Ban_Nha.mp3",
+      "sha256": "08bdec0c2db4b1e8673ced5db301bd795ee62f1b92ca3e697a25c886eb4efd87",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "fr-FR",
+      "filename": "HOMO_LUZONENSIS_85_Phap.mp3",
+      "sha256": "bad596729c33a704192176200f008154d806624c847c47148328c7d2c7518a2b",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "ja-JP",
+      "filename": "HOMO_LUZONENSIS_85_Nhat_Ban.mp3",
+      "sha256": "a13d4050ebaf4c46be62def0938496d348212da2e1295024f1f21a4da068ede0",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "ko-KR",
+      "filename": "HOMO_LUZONENSIS_85_Han_Quoc.mp3",
+      "sha256": "b62d60c19bedd892ecce0bdf5dbe7b51c925632cfb37c2b2b6132e50c656dcc4",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "de-DE",
+      "filename": "HOMO_LUZONENSIS_85_Duc.mp3",
+      "sha256": "153f50d4a50f90c1595fd9f96cf2953d78e456cad05ab4abf8649e3b4da5ffc8",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "it-IT",
+      "filename": "HOMO_LUZONENSIS_85_Y.mp3",
+      "sha256": "5bcc3a13f7efa34e6299be07cf04c5c5365972a8eb590e08a2ca929a7f4cb678",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "pt-PT",
+      "filename": "HOMO_LUZONENSIS_85_Bo_Dao_Nha.mp3",
+      "sha256": "3b35e3f6e16251379c03c0504f7708debb044e5f65225be701804fe19a95acf5",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "nl-NL",
+      "filename": "HOMO_LUZONENSIS_85_Ha_Lan.mp3",
+      "sha256": "62b50a1cd1a5a061789360aedf5fefc4682e4f1215e039af67608dbbc89d0448",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "pl-PL",
+      "filename": "HOMO_LUZONENSIS_85_Ba_Lan.mp3",
+      "sha256": "006a2e68bd2339f92f4ad398533ebd9217ded70fa35dcf3711e1affe3d70d078",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "sv-SE",
+      "filename": "HOMO_LUZONENSIS_85_Thuy_Dien.mp3",
+      "sha256": "883ff2b95903f9ddd9b4cf023eeb118a78619d85027050bb7561173e12e8c0aa",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "da-DK",
+      "filename": "HOMO_LUZONENSIS_85_Dan_Mach.mp3",
+      "sha256": "e4bda23cda44b3cf41f8276fef392ecf6f1c0ffabd9adad8b8dc3e11cb0b90d0",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "fi-FI",
+      "filename": "HOMO_LUZONENSIS_85_Phan_Lan.mp3",
+      "sha256": "e60cdad1ef20c0e8904d99d8ad3e2bc75b4e7817bb910acc73aa6b4a5c17f622",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "nb-NO",
+      "filename": "HOMO_LUZONENSIS_85_Na_Uy.mp3",
+      "sha256": "cf793f0dcaa4f6e7b4a82c0ce0f702ecae75ba698785cdf54022fd2049922645",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "cs-CZ",
+      "filename": "HOMO_LUZONENSIS_85_Sec.mp3",
+      "sha256": "99b1cbdf803fa2e617348d9ce0625ecf4e71c71241d0aa67db86570ce200db63",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "mww",
+      "filename": "HOMO_LUZONENSIS_85_Hmong_Trang_Nu.mp3",
+      "sha256": "2b611030c13631489490667f25246afb63930bd235fc9f6b8afe1a47e84e46ec",
+      "decoded_frames_48000": 61536000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    }
+  ],
+  "independent_native_listening_review": false,
+  "white_hmong_dialect_independently_verified": false
+}
