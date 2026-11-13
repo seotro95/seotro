@@ -666,9 +666,9 @@
       "translation_method": "assistant_prepared_separately_no_full_native_review"
     }
   ],
-  "title": "Flores: Caves, Volcanoes, and an Unexpected Past",
-  "scope": "episode-040-selected-voices",
+  "title": "Angkor: The City and Its Water Network",
+  "scope": "episode-085-selected-voices",
   "source_episode": "040-flores",
-  "selection_updated_at_utc": "2026-11-12T15:16:34.437442+00:00",
+  "selection_updated_at_utc": "2026-11-13T18:03:42.712284+00:00",
   "selection_note": "Same 17 locked voice IDs and pinned model/reference hashes as episode 40; new episode target 1292 seconds."
 }
