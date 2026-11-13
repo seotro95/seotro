@@ -17,7 +17,7 @@ def prose_spacing(s):
   x=re.sub(r'(?<=[a-zà-ỹ])(?=[A-ZÀ-Ỹ])',' ',x)
   x=re.sub(r',(?=\S)',', ',x);x=re.sub(r';(?=\S)','; ',x)
   pieces[i]=x
- return ''.join(pieces)
+ return ''.join(pieces).replace('.mp 4','.mp4').replace('MP 4','MP4').replace('k Hz','kHz').replace('4, 000','4,000')
 rows=[];prompts=[]
 for line in (R/'SCENES_DRAFT.tsv').read_text().splitlines():
  ident,voice,visual=line.split('|',2);sid=int(ident);assert sid==len(rows)+1;start=(sid-1)*10;end=min(start+10,TARGET)
