@@ -1,0 +1,12 @@
+{
+  "topic_id": 85,
+  "documents_published": true,
+  "public_download_verified": true,
+  "document_workflow_run_id": 43395386801,
+  "documents_url": "https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_TAI_LIEU_21m22s.zip",
+  "documents_zip_sha256": "790a02be0f8936f3d5ca4742eb66deb29d8155313e8ef0b354a8fe68669e5685",
+  "documents_zip_bytes": 140666,
+  "script_cues": 129,
+  "unique_prompts": 120,
+  "prompt_txt_files": 12
+}

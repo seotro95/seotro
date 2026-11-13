@@ -40,7 +40,7 @@
   "footage_generated": false,
   "video_edited": false,
   "title": "Homo luzonensis: những mảnh xương mở rộng bản đồ họ hàng của chúng ta.",
-  "phase": "documents_ready",
-  "documents_delivered": false,
+  "phase": "documents_delivered_preflight",
+  "documents_delivered": true,
   "primary_video_locale": "en-US"
 }
