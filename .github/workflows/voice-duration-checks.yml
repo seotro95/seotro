@@ -1,0 +1,69 @@
+name: Voice duration regression
+on:
+  push:
+    branches: [main, 'codex/voice-duration-sync-*']
+    paths:
+      - 'voice-studio/**'
+      - '.github/workflows/voice-duration-checks.yml'
+permissions:
+  contents: read
+concurrency:
+  group: voice-duration-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  regression:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    env:
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install FFmpeg on Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+      - name: Install verified FFmpeg on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          python -c "import sys;sys.path.insert(0,'voice-studio/packaging');from build_windows import download_verified_ffmpeg;from pathlib import Path;download_verified_ffmpeg(Path(r'${{ runner.temp }}/tools/ffmpeg'),Path(r'${{ runner.temp }}/downloads'))"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Add-Content -Path $env:GITHUB_PATH -Value "${{ runner.temp }}/tools/ffmpeg/bin"
+      - name: Install regression dependencies
+        run: python -m pip install fastapi==0.143.1 uvicorn==0.54.0 httpx==0.28.1 python-multipart==0.0.32 pydantic==2.11.10 faster-whisper==1.2.1 av==16.1.0 ctranslate2==4.8.3 numpy soundfile soxr psutil pytest
+      - name: Check JavaScript syntax and duration input
+        working-directory: voice-studio
+        run: |
+          python -c "import glob,subprocess;[subprocess.run(['node','--check',p],check=True) for p in glob.glob('static/*.js')]"
+          node --test tests/test_duration_ui.cjs
+      - name: Run regression tests with real FFmpeg and deterministic synthesis
+        env:
+          VOICE_STUDIO_SPEECH_PROOF: ${{ runner.temp }}/voice-duration-proof
+        working-directory: voice-studio
+        run: python -m pytest -q -ra --junitxml=duration-regression.xml
+      - name: Package source from the tested commit
+        run: git archive --format=zip --output=Voice-Studio-3.6.1-source.zip HEAD voice-studio
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: Voice-Studio-3.6.1-tested-source-${{ runner.os }}
+          path: |
+            Voice-Studio-3.6.1-source.zip
+            voice-studio/duration-regression.xml
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: runner.os == 'Windows' && success()
+        with:
+          name: Voice-Studio-3.6.1-real-Windows-speech
+          path: |
+            ${{ runner.temp }}/voice-duration-proof/audio/real-*
+            ${{ runner.temp }}/voice-duration-proof/proof.json
+          retention-days: 14
