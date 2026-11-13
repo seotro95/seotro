@@ -1,0 +1,161 @@
+{
+  "status": "passed",
+  "topic_id": 85,
+  "voices": 17,
+  "male_voices": 16,
+  "female_voice": "hmong-female-3",
+  "native_voices": 1,
+  "online_voices": 16,
+  "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+  "all_decoded_seconds": 1282,
+  "all_decoded_frames_48000": 61536000,
+  "all_ids_match_episode85_profile": true,
+  "all17saved_voice_ids_retained": true,
+  "native_hmong_reference_matches": true,
+  "unique_audio_hashes": 17,
+  "pitch_shift_applied": false,
+  "english_cue_count": 129,
+  "other_language_chapter_count": 13,
+  "online_word_metadata_checked": true,
+  "english_word_boundary_cue_split_checked": true,
+  "independent_native_listening_review": false,
+  "white_hmong_dialect_independently_verified": false,
+  "reports": {
+    "sv-SE": {
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "HOMO_LUZONENSIS_85_Thuy_Dien.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.255528846153846,
+      "max_tempo": 1.4526442307692309,
+      "word_accents": 29
+    },
+    "nb-NO": {
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "HOMO_LUZONENSIS_85_Na_Uy.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.0526442307692307,
+      "max_tempo": 1.2060096153846154,
+      "word_accents": 28
+    },
+    "fr-FR": {
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "HOMO_LUZONENSIS_85_Phap.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.0396634615384615,
+      "max_tempo": 1.1978365384615384,
+      "word_accents": 39
+    },
+    "it-IT": {
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "HOMO_LUZONENSIS_85_Y.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.2122596153846152,
+      "max_tempo": 1.3951923076923076,
+      "word_accents": 20
+    },
+    "es-ES": {
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "HOMO_LUZONENSIS_85_Tay_Ban_Nha.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.1283653846153847,
+      "max_tempo": 1.3194711538461537,
+      "word_accents": 46
+    },
+    "pl-PL": {
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "HOMO_LUZONENSIS_85_Ba_Lan.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.0550480769230768,
+      "max_tempo": 1.2259615384615385,
+      "word_accents": 18
+    },
+    "de-DE": {
+      "voice_id": "de-DE-ConradNeural",
+      "filename": "HOMO_LUZONENSIS_85_Duc.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.2430288461538461,
+      "max_tempo": 1.4182692307692306,
+      "word_accents": 38
+    },
+    "nl-NL": {
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "HOMO_LUZONENSIS_85_Ha_Lan.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.1288461538461538,
+      "max_tempo": 1.282451923076923,
+      "word_accents": 43
+    },
+    "ko-KR": {
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "HOMO_LUZONENSIS_85_Han_Quoc.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.2408653846153845,
+      "max_tempo": 1.4800480769230768,
+      "word_accents": 42
+    },
+    "ja-JP": {
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "HOMO_LUZONENSIS_85_Nhat_Ban.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.2740384615384615,
+      "max_tempo": 1.4978365384615384,
+      "word_accents": 41
+    },
+    "mww": {
+      "voice_id": "hmong-female-3",
+      "filename": "HOMO_LUZONENSIS_85_Hmong_Trang_Nu.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 0.9969434771098077,
+      "max_tempo": 1.1277800731169871,
+      "word_accents": 0
+    },
+    "cs-CZ": {
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "HOMO_LUZONENSIS_85_Sec.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.0170673076923076,
+      "max_tempo": 1.1447115384615383,
+      "word_accents": 46
+    },
+    "en-US": {
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "HOMO_LUZONENSIS_85_My_Tieng_Anh.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 0.8797002032520326,
+      "max_tempo": 1.4164126016260163,
+      "word_accents": 76
+    },
+    "vi-VN": {
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "HOMO_LUZONENSIS_85_Viet_Nam_Nam_Minh.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 0.9471153846153846,
+      "max_tempo": 1.0447115384615384,
+      "word_accents": 47
+    },
+    "da-DK": {
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "HOMO_LUZONENSIS_85_Dan_Mach.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.0824519230769232,
+      "max_tempo": 1.2538461538461538,
+      "word_accents": 33
+    },
+    "fi-FI": {
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "HOMO_LUZONENSIS_85_Phan_Lan.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.1961538461538461,
+      "max_tempo": 1.3516826923076923,
+      "word_accents": 30
+    },
+    "pt-PT": {
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "HOMO_LUZONENSIS_85_Bo_Dao_Nha.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 0.9829326923076922,
+      "max_tempo": 1.1411057692307691,
+      "word_accents": 45
+    }
+  }
+}

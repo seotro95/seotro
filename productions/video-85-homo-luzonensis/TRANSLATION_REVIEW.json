@@ -1,0 +1,301 @@
+{
+  "topic_id": 85,
+  "status": "assistant_key_claim_and_terminology_review_complete_native_review_pending",
+  "full_manual_rewrite_languages": [
+    "vi-VN",
+    "mww"
+  ],
+  "machine_draft_with_assistant_review_languages": 14,
+  "independent_native_editorial_or_listening_review": false,
+  "white_hmong_dialect_independently_verified": false,
+  "key_checks": [
+    "original dates versus2023 revised minimum age with uncertainty",
+    "atleastthree individuals not proven family",
+    "Kalinga not taxonomically identified H.luzonensis",
+    "curvature not proof of direct ancestry or daily climbing",
+    "2026 preferred phylogenetic hypothesis not definitive",
+    "modern Denisovan ancestry does not identify unsequenced Callao fossils"
+  ],
+  "stats": {
+    "es-ES": {
+      "chapters": 13,
+      "characters": 25652,
+      "full_manual_rewrite": false
+    },
+    "fr-FR": {
+      "chapters": 13,
+      "characters": 26764,
+      "full_manual_rewrite": false
+    },
+    "it-IT": {
+      "chapters": 13,
+      "characters": 25616,
+      "full_manual_rewrite": false
+    },
+    "pt-PT": {
+      "chapters": 13,
+      "characters": 24839,
+      "full_manual_rewrite": false
+    },
+    "de-DE": {
+      "chapters": 13,
+      "characters": 27104,
+      "full_manual_rewrite": false
+    },
+    "nl-NL": {
+      "chapters": 13,
+      "characters": 25740,
+      "full_manual_rewrite": false
+    },
+    "sv-SE": {
+      "chapters": 13,
+      "characters": 22729,
+      "full_manual_rewrite": false
+    },
+    "da-DK": {
+      "chapters": 13,
+      "characters": 23262,
+      "full_manual_rewrite": false
+    },
+    "nb-NO": {
+      "chapters": 13,
+      "characters": 22712,
+      "full_manual_rewrite": false
+    },
+    "fi-FI": {
+      "chapters": 13,
+      "characters": 23199,
+      "full_manual_rewrite": false
+    },
+    "pl-PL": {
+      "chapters": 13,
+      "characters": 23369,
+      "full_manual_rewrite": false
+    },
+    "cs-CZ": {
+      "chapters": 13,
+      "characters": 20950,
+      "full_manual_rewrite": false
+    },
+    "ja-JP": {
+      "chapters": 13,
+      "characters": 10347,
+      "full_manual_rewrite": false
+    },
+    "ko-KR": {
+      "chapters": 13,
+      "characters": 11503,
+      "full_manual_rewrite": false
+    },
+    "vi-VN": {
+      "chapters": 13,
+      "characters": 21108,
+      "full_manual_rewrite": true
+    },
+    "mww": {
+      "chapters": 13,
+      "characters": 22647,
+      "full_manual_rewrite": true
+    }
+  },
+  "edits": {
+    "es-ES": [
+      {
+        "chapter": 6,
+        "original_uranium_sentence": "La historia del uranio en los restos enterrados es importante porque el material puede entrar o moverse después del entierro.",
+        "replacement": "La historia del uranio en los restos enterrados importa porque, después del enterramiento, pueden entrar materiales o desplazarse en ellos.",
+        "duplicate_minimum_age_definition_removed": "La edad mínima es un límite inferior según la interpretación de la datación."
+      },
+      {
+        "chapter": 10,
+        "original_character_sentence": "Por lo tanto, un personaje de apariencia mayor no necesita registrar un viaje directo desde esa población anterior.",
+        "replacement": "Por tanto, un rasgo anatómico de aspecto más arcaico no demuestra una descendencia directa de aquella población anterior.",
+        "postcranial_sentence_rewritten": true
+      }
+    ],
+    "fr-FR": [
+      {
+        "chapter": 6,
+        "original_uranium_sentence": "L’histoire de l’uranium dans les restes enfouis est importante car la matière peut pénétrer ou se déplacer après l’enfouissement.",
+        "replacement": "L’histoire de l’uranium dans les vestiges enfouis est importante, car des matières peuvent y pénétrer ou s’y déplacer après l’enfouissement.",
+        "duplicate_minimum_age_definition_removed": "Un âge minimum est une limite inférieure selon l’interprétation de la datation."
+      },
+      {
+        "chapter": 10,
+        "original_character_sentence": "Un personnage d’apparence plus âgée n’a donc pas besoin d’enregistrer un voyage direct à partir de cette population antérieure.",
+        "replacement": "Un caractère anatomique d’aspect plus archaïque ne prouve donc pas une descendance directe depuis cette population ancienne.",
+        "postcranial_sentence_rewritten": true
+      }
+    ],
+    "it-IT": [
+      {
+        "chapter": 6,
+        "original_uranium_sentence": "La storia dell'uranio sepolto è importante perché il materiale può entrare o spostarsi dopo la sepoltura.",
+        "replacement": "La storia dell'uranio nei resti sepolti conta perché, dopo il seppellimento, i materiali possono penetrare nei resti o spostarsi al loro interno.",
+        "duplicate_minimum_age_definition_removed": "L'età minima è un limite inferiore secondo l'interpretazione della datazione."
+      },
+      {
+        "chapter": 10,
+        "original_character_sentence": "Un personaggio dall'aspetto più anziano quindi non ha bisogno di registrare un viaggio diretto da quella popolazione precedente.",
+        "replacement": "Un tratto anatomico dall'aspetto più arcaico non dimostra quindi una discendenza diretta da quella popolazione più antica.",
+        "postcranial_sentence_rewritten": true
+      }
+    ],
+    "pt-PT": [
+      {
+        "chapter": 6,
+        "original_uranium_sentence": "A história do urânio nos restos enterrados é importante porque o material pode entrar ou mover-se após o enterro.",
+        "replacement": "A história do urânio nos restos soterrados é importante, pois os materiais podem entrar ou deslocar-se depois do soterramento.",
+        "duplicate_minimum_age_definition_removed": "A idade mínima é um limite inferior na interpretação do namoro."
+      },
+      {
+        "chapter": 10,
+        "original_character_sentence": "Portanto, uma personagem com um aspeto mais velho não precisa de registar uma viagem direta daquela população anterior.",
+        "replacement": "Assim, uma característica anatómica de aspeto mais arcaico não prova uma descendência direta dessa população antiga.",
+        "postcranial_sentence_rewritten": true
+      }
+    ],
+    "de-DE": [
+      {
+        "chapter": 6,
+        "original_uranium_sentence": "Die Geschichte des Urans in vergrabenen Überresten ist von Bedeutung, da Material nach der Bestattung eindringen oder sich bewegen kann.",
+        "replacement": "Die Geschichte des Urans in den eingebetteten Fossilien ist wichtig, weil nach der Einbettung Stoffe eindringen oder sich im Material verlagern können.",
+        "duplicate_minimum_age_definition_removed": "Ein Mindestalter ist nach der Datierungsinterpretation eine Untergrenze."
+      },
+      {
+        "chapter": 10,
+        "original_character_sentence": "Ein älter aussehender Charakter muss daher keine direkte Reise aus dieser früheren Population aufzeichnen.",
+        "replacement": "Ein archaisch wirkendes anatomisches Merkmal belegt daher keine direkte Abstammung von jener früheren Population.",
+        "postcranial_sentence_rewritten": true
+      }
+    ],
+    "nl-NL": [
+      {
+        "chapter": 6,
+        "original_uranium_sentence": "De geschiedenis van begraven uranium blijft van belang omdat materiaal na de begrafenis kan binnendringen of bewegen.",
+        "replacement": "De geschiedenis van uranium in begraven resten is belangrijk, omdat stoffen na de begraving kunnen binnendringen of zich verplaatsen.",
+        "duplicate_minimum_age_definition_removed": "Een minimumleeftijd is een ondergrens onder de dateringsinterpretatie."
+      },
+      {
+        "chapter": 10,
+        "original_character_sentence": "Een ouder uitziend personage hoeft daarom geen directe reis van die eerdere populatie vast te leggen.",
+        "replacement": "Een archaïsch ogend anatomisch kenmerk bewijst dus geen directe afstamming van die vroegere populatie.",
+        "postcranial_sentence_rewritten": true
+      }
+    ],
+    "sv-SE": [
+      {
+        "chapter": 6,
+        "original_uranium_sentence": "Historien om uran i begravda är fortfarande viktiga eftersom material kan komma in eller flytta efter begravning.",
+        "replacement": "Uranets historia i de begravda lämningarna är viktig, eftersom ämnen kan tränga in eller förflyttas efter begravningen.",
+        "duplicate_minimum_age_definition_removed": "En minimiålder är en nedre gräns under dejtingtolkningen."
+      },
+      {
+        "chapter": 10,
+        "original_character_sentence": "En karaktär som ser äldre ut behöver därför inte registrera en direkt resa från den tidigare befolkningen.",
+        "replacement": "Ett anatomiskt drag som ser mer ursprungligt ut bevisar därför inte en direkt härstamning från den tidigare populationen.",
+        "postcranial_sentence_rewritten": true
+      }
+    ],
+    "da-DK": [
+      {
+        "chapter": 6,
+        "original_uranium_sentence": "Historien om uran i begravet er stadig spørgsmål, fordi materiale kan trænge ind eller bevæge sig efter begravelse.",
+        "replacement": "Uranets historie i de begravede rester er vigtig, fordi stof kan trænge ind i eller bevæge sig i materialet efter begravelsen.",
+        "duplicate_minimum_age_definition_removed": "En minimumsalder er en nedre grænse under datingfortolkningen."
+      },
+      {
+        "chapter": 10,
+        "original_character_sentence": "En karakter, der ser ældre ud, behøver derfor ikke registrere en direkte rejse fra den tidligere befolkning.",
+        "replacement": "Et anatomisk træk, der ligner en ældre tilstand, beviser derfor ikke en direkte afstamning fra den tidligere population.",
+        "postcranial_sentence_rewritten": true
+      }
+    ],
+    "nb-NO": [
+      {
+        "chapter": 6,
+        "original_uranium_sentence": "Historien om uran i gravlagt er fortsatt viktig fordi materiale kan komme inn eller flytte etter begravelse.",
+        "replacement": "Uranets historie i de begravde fossilene er viktig, fordi stoffer kan trenge inn i eller bevege seg i materialet etter at det er begravd.",
+        "duplicate_minimum_age_definition_removed": "En minimumsalder er en nedre grense under dateringstolkningen."
+      },
+      {
+        "chapter": 10,
+        "original_character_sentence": "En karakter som ser eldre ut trenger derfor ikke registrere en direkte reise fra den tidligere befolkningen.",
+        "replacement": "Et anatomisk trekk som ligner en eldre tilstand, beviser derfor ikke direkte avstamning fra den tidligere populasjonen.",
+        "postcranial_sentence_rewritten": true
+      }
+    ],
+    "fi-FI": [
+      {
+        "chapter": 6,
+        "original_uranium_sentence": "Haudatun uraanin historialla on merkitystä, koska materiaalia voi tulla sisään tai liikkua hautauksen jälkeen.",
+        "replacement": "Haudattujen fossiilien uraanihistoria on tärkeä, koska aineita voi kulkeutua niihin tai liikkua niissä hautautumisen jälkeen.",
+        "duplicate_minimum_age_definition_removed": "Vähimmäisikä on alaraja deittitulkinnan mukaan."
+      },
+      {
+        "chapter": 10,
+        "original_character_sentence": "Vanhemman näköisen hahmon ei siis tarvitse tallentaa suoraa matkaa tuosta aikaisemmasta populaatiosta.",
+        "replacement": "Varhaisempaa muotoa muistuttava anatominen piirre ei siis osoita suoraa polveutumista tuosta aiemmasta populaatiosta.",
+        "postcranial_sentence_rewritten": true
+      }
+    ],
+    "pl-PL": [
+      {
+        "chapter": 6,
+        "original_uranium_sentence": "Historia uranu w zakopanych szczątkach ma znaczenie, ponieważ materiał może przedostać się do wnętrza lub przemieścić po zakopaniu.",
+        "replacement": "Historia uranu w skamieniałościach ma znaczenie, ponieważ po pogrzebaniu w osadach substancje mogą do nich przenikać lub się w nich przemieszczać.",
+        "duplicate_minimum_age_definition_removed": "Wiek minimalny stanowi dolną granicę zgodnie z interpretacją datowania."
+      },
+      {
+        "chapter": 10,
+        "original_character_sentence": "Dlatego też starsza postać nie musi rejestrować bezpośredniej podróży z wcześniejszej populacji.",
+        "replacement": "Cecha anatomiczna przypominająca wcześniejszy stan nie dowodzi więc bezpośredniego pochodzenia od tamtej dawnej populacji.",
+        "postcranial_sentence_rewritten": true
+      }
+    ],
+    "cs-CZ": [
+      {
+        "chapter": 6,
+        "original_uranium_sentence": "Historie uranu v pohřbených pozůstatcích je důležitá, protože materiál může vstoupit nebo se po pohřbu pohybovat.",
+        "replacement": "Historie uranu v pohřbených fosiliích je důležitá, protože látky do nich mohou pronikat nebo se v nich pohybovat i po uložení v sedimentech.",
+        "duplicate_minimum_age_definition_removed": "Minimální věk je spodní hranicí podle datování."
+      },
+      {
+        "chapter": 10,
+        "original_character_sentence": "Postava staršího vzhledu proto nemusí zaznamenávat přímou cestu z této dřívější populace.",
+        "replacement": "Anatomický znak připomínající starší stav tedy nedokazuje přímý původ z oné dřívější populace.",
+        "postcranial_sentence_rewritten": true
+      }
+    ],
+    "ja-JP": [
+      {
+        "chapter": 6,
+        "original_uranium_sentence": "埋葬後に物質が侵入したり移動したりする可能性があるため、埋葬された遺骨内のウランの歴史は重要です。",
+        "replacement": "埋没した化石内のウランの履歴が重要なのは、埋没後にも物質が入り込んだり移動したりするためです。",
+        "duplicate_minimum_age_definition_removed": "最低年齢は、年代の解釈の下限です。"
+      },
+      {
+        "chapter": 10,
+        "original_character_sentence": "したがって、年老いて見えるキャラクターは、その初期の人々からの直接の旅を記録する必要はありません。",
+        "replacement": "したがって、より古い状態に似た解剖学的特徴があっても、その初期集団から直接受け継いだことの証明にはなりません。",
+        "postcranial_sentence_rewritten": true
+      }
+    ],
+    "ko-KR": [
+      {
+        "chapter": 6,
+        "original_uranium_sentence": "매몰된 우라늄의 역사는 매몰 후에도 물질이 들어가거나 이동할 수 있기 때문에 여전히 중요합니다.",
+        "replacement": "매몰된 화석 속 우라늄의 변화 과정이 중요한 이유는 매몰 후에도 물질이 유입되거나 내부에서 이동할 수 있기 때문입니다.",
+        "duplicate_minimum_age_definition_removed": "최소 연령은 연대 해석에 따른 하한입니다."
+      },
+      {
+        "chapter": 10,
+        "original_character_sentence": "따라서 나이가 많아 보이는 캐릭터는 이전 인구의 직접적인 여정을 기록할 필요가 없습니다.",
+        "replacement": "따라서 더 오래된 형태와 비슷한 해부학적 특징이 있다고 해서 그 초기 집단에서 직접 이어졌다는 증거가 되는 것은 아닙니다.",
+        "postcranial_sentence_rewritten": true
+      }
+    ],
+    "vi-VN": [],
+    "mww": []
+  }
+}

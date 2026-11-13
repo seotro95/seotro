@@ -1,0 +1,12 @@
+{
+  "id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+  "english": "Saved male Andrew 0% grouped requests; exact word-boundary cue cuts; at most two 1.2dB accents per cue; pitch-preserving cue fit",
+  "other_online": "Saved male IDs; small phrase/question rate variations; bounded word accents; pitch-preserving chapter fit",
+  "vietnamese": "Actual male vi-VN-NamMinhNeural through pinned Melo1.3.1 online backend; live catalogue identity and audio preflight verified; no identity relabel",
+  "hmong": "Native female-3 reference clear-v1, speed0.98–1.02, no pitch shift",
+  "output_loudness_target_lufs": -19,
+  "output_true_peak_target_db": -2,
+  "target_seconds": 1282,
+  "english_cues": 129,
+  "other_language_chapters": 13
+}
