@@ -1,0 +1,1209 @@
+{
+  "locale": "fi",
+  "voice_id": "piper:fi_FI-harri-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1320,
+  "spoken_cues": 132,
+  "closing_silence_seconds": 0,
+  "config_hash": "d82b94b22f78d47e395da3e9144b0c9c9ccfbeae3e11c114165ea938906d6d5d",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "Luolan suulla päivänvalo levittäytyy vaalealle kivelle ja pysähtyy. Syvemmällä maa säilyttää toisenlaista valoa, joka auttaa meitä ymmärtämään mennyttä.",
+      "raw_seconds": 10.054240362811791,
+      "speech_window_seconds": 10.054240362811791,
+      "tempo": 1.0418901930374913,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Se syntyy todisteista: tarkasti kirjatusta maakerroksesta, kivityökalusta ja kysymyksestä, jota kukaan ei osannut etukäteen esittää.",
+      "raw_seconds": 10.50702947845805,
+      "speech_window_seconds": 10.50702947845805,
+      "tempo": 1.0888113449179326,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Floresilla yksi luola muutti kertomustamme ihmisen evoluutiosta. Ymmärtääksemme syyn meidän täytyy tutustua myös sitä ympäröivään saareen.",
+      "raw_seconds": 9.729160997732427,
+      "speech_window_seconds": 9.729160997732427,
+      "tempo": 1.0082032122002513,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Flores sijaitsee Itä-Indonesiassa, Itäisen Nusa Tenggaran alueella. Jyrkkä maasto, tulivuoret ja merialueet muovaavat kulkemista ja elämisen mahdollisuuksia.",
+      "raw_seconds": 11.3081179138322,
+      "speech_window_seconds": 11.3081179138322,
+      "tempo": 1.1718256905525595,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Rannikko näyttää saaren, jota voimme katsella. Kivet ja kerrostumat näyttävät saaren, jota voimme lukea, jos opimme niiden kielen.",
+      "raw_seconds": 8.533333333333333,
+      "speech_window_seconds": 8.533333333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Tuo lukeminen vie kalkkikiven pimeydestä tuliperäisille järville, muinaisista saapumisista nykyisiin yhteisöihin samojen muuttuvien kukkuloiden keskellä.",
+      "raw_seconds": 9.752380952380953,
+      "speech_window_seconds": 9.752380952380953,
+      "tempo": 1.010609425117197,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Keskeinen kysymyksemme on yksinkertainen: miten saari säilytti ihmisen menneisyydestä luvun, joka vaikutti löytyessään niin odottamattomalta?",
+      "raw_seconds": 9.438911564625851,
+      "speech_window_seconds": 9.438911564625851,
+      "tempo": 0.9781255507384301,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Vastaamiseen tarvitaan maantiedettä, geologiaa, biologiaa ja kärsivällisiä kaivauksia. Mikään niistä ei yksin pysty kertomaan koko tarinaa.",
+      "raw_seconds": 10.89015873015873,
+      "speech_window_seconds": 10.89015873015873,
+      "tempo": 1.1285138580475367,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Seuraamme todisteita eri mittakaavoissa: merensalmea, vuorta, luolan suuaukkoa ja pieniä yksityiskohtia yhdessä maakerroksessa.",
+      "raw_seconds": 9.671111111111111,
+      "speech_window_seconds": 9.671111111111111,
+      "tempo": 1.002187679907887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Erotamme myös löydöt niistä tehdyistä päätelmistä. Vakuuttavan rekonstruktion kuuluu tehdä tämä raja helpommaksi havaita.",
+      "raw_seconds": 8.417233560090702,
+      "speech_window_seconds": 8.417233560090702,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Reittimme tunnetuin paikka on Liang Bua, kalkkikiviluola Floresin länsiosassa, Rutengin seudun lähellä.",
+      "raw_seconds": 7.500045351473923,
+      "speech_window_seconds": 7.500045351473923,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Sen merkitys ei johdu pimeyden salaperäisyydestä. Sinne kertyi aineistoa, joka säilyi ja jota tutkittiin alkuperäisessä yhteydessään.",
+      "raw_seconds": 10.356099773242631,
+      "speech_window_seconds": 10.356099773242631,
+      "tempo": 1.0731709609577855,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Irrallinen esine voi vihjata tarinasta. Kun sijainti, ympäristö ja kerrostumishistoria tunnetaan, kertomukselle syntyy paljon vahvempi perusta.",
+      "raw_seconds": 10.054240362811791,
+      "speech_window_seconds": 10.054240362811791,
+      "tempo": 1.0418901930374913,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Aloitetaan siis maasta jalkojemme alla. Ennen muinaisen elämän kuvittelemista on kysyttävä, miten sen jäljet päätyivät juuri tänne.",
+      "raw_seconds": 8.486893424036282,
+      "speech_window_seconds": 8.486893424036282,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Osa syntyi ihmistoiminnasta. Toisia kuljettivat vesi, eläimet ja painovoima, tai myöhemmät häiriöt. Näiden prosessien erottaminen kuuluu tutkimukseen.",
+      "raw_seconds": 10.832108843537416,
+      "speech_window_seconds": 10.832108843537416,
+      "tempo": 1.1224983257551726,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Luola on yhtä aikaa paikka ja arkisto. Sen sivuja kirjoittivat monet voimat, joskus aiempien merkintöjen päälle.",
+      "raw_seconds": 8.02249433106576,
+      "speech_window_seconds": 8.02249433106576,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Astu ensin ulos. Flores kuuluu alueeseen, jossa mannerlaattojen vuorovaikutus on auttanut synnyttämään pitkän ketjun tuliperäisiä maisemia.",
+      "raw_seconds": 9.833650793650794,
+      "speech_window_seconds": 9.833650793650794,
+      "tempo": 1.0190311703265071,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Kartalla pysyvältä näyttävä saari on väliaikainen pinta. Sitä muovaavat prosessit toimivat paljon ihmiselämää pidemmillä aikaväleillä.",
+      "raw_seconds": 9.183492063492064,
+      "speech_window_seconds": 9.183492063492064,
+      "tempo": 0.9516572086520273,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Tulivuoritoiminta luo kiveä ja korkeuseroja. Rapautuminen, vesi ja painovoima muuttavat niitä ja kuljettavat ainesta laaksoihin sekä alemmaksi.",
+      "raw_seconds": 10.170340136054422,
+      "speech_window_seconds": 10.170340136054422,
+      "tempo": 1.0539212576222199,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Kaikki ei tapahdu samalla nopeudella. Hiljainen rinne, myrskysateiden täyttämä puro ja tuliperäinen tapahtuma jättävät hyvin erilaiset jäljet.",
+      "raw_seconds": 9.752380952380953,
+      "speech_window_seconds": 9.752380952380953,
+      "tempo": 1.010609425117197,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Jyrkkyys vaikuttaa myös kulkemiseen. Kartan lyhyt välimatka voi tarkoittaa vaikeaa reittiä harjanteiden ja laaksojen poikki.",
+      "raw_seconds": 8.602993197278911,
+      "speech_window_seconds": 8.602993197278911,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Reitit, viljelyolot ja asutus muotoutuvat näiden erojen puitteissa. Maantiede tarjoaa mahdollisuuksia ja rajoitteita, ei yhtä väistämätöntä kohtaloa.",
+      "raw_seconds": 11.633197278911565,
+      "speech_window_seconds": 11.633197278911565,
+      "tempo": 1.2055126713897995,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Tuliperäinen saari ei silti koostu kokonaan nuoresta laavasta. Floresilla on myös kalkkikiveä, kuten Liang Buan ympäristössä.",
+      "raw_seconds": 8.626213151927438,
+      "speech_window_seconds": 8.626213151927438,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Kalkkikivellä on oma historiansa, joka liittyy karbonaattiainekseen ja aiempiin ympäristöihin. Maisemassa on siis useita geologisia lukuja.",
+      "raw_seconds": 9.775600907029478,
+      "speech_window_seconds": 9.775600907029478,
+      "tempo": 1.0130156380341429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Hiilidioksidia sisältävä vesi voi laajentaa kalkkikiven rakoja hitaiden kemiallisten muutosten kautta. Ajan myötä muodostuu onkaloita ja luolastoja.",
+      "raw_seconds": 10.460589569160998,
+      "speech_window_seconds": 10.460589569160998,
+      "tempo": 1.0839989190840411,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Tämä selittää yleisen prosessin. Se ei tarkoita, että kaikki kammiot syntyivät samoin tai että yksinkertainen kaavio kartoittaa todellisen luolan.",
+      "raw_seconds": 9.775600907029478,
+      "speech_window_seconds": 9.775600907029478,
+      "tempo": 1.0130156380341429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Kiven ikä, luolan muodostuminen ja myöhempien kerrostumien ikä ovat eri kysymyksiä. Niiden sekoittaminen tekee menneisyydestä harhaanjohtavan yksinkertaisen.",
+      "raw_seconds": 10.367709750566894,
+      "speech_window_seconds": 10.367709750566894,
+      "tempo": 1.0743740674162583,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Vanha luola voi sisältää paljon nuorempia kerrostumia. Nuorelta näyttävän pinnan alla tai vieressä voi puolestaan olla vanhempaa ainesta.",
+      "raw_seconds": 8.045714285714286,
+      "speech_window_seconds": 8.045714285714286,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Tämä ero on ratkaiseva, kun tutkimme arkeologisia ajoituksia. Ympäröivä geologia opettaa jo nyt lukemaan jälkiä tarkasti.",
+      "raw_seconds": 10.08907029478458,
+      "speech_window_seconds": 10.08907029478458,
+      "tempo": 1.0454995124129098,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Huomaa vastakohta: tulivuoret piirtävät näyttävän taivaanrannan, kun kalkkikivessä kulkeva vesi luo hiljaisempia tiloja menneisyyden säilymiselle.",
+      "raw_seconds": 10.27482993197279,
+      "speech_window_seconds": 10.27482993197279,
+      "tempo": 1.0647492157484755,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Molemmat kuuluvat Floresiin. Kumpikaan ei tarvitse fantasiamaisemaa, eikä kumpikaan yksin selitä saaren historiaa ilman muita yhteyksiä.",
+      "raw_seconds": 10.042630385487529,
+      "speech_window_seconds": 10.042630385487529,
+      "tempo": 1.0406870865790185,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Maa antaa arkistolle ympäristön. Seuraavaksi tarkastelemme estettä, joka vaikutti saaren elämän omaleimaisuuteen: merta.",
+      "raw_seconds": 10.263219954648527,
+      "speech_window_seconds": 10.263219954648527,
+      "tempo": 1.0635461092900027,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Flores kuuluu Wallaceaan, saaristoalueeseen Kaakkois-Aasian ja Australian suurten mannerjalustojen välissä.",
+      "raw_seconds": 7.999274376417233,
+      "speech_window_seconds": 7.999274376417233,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Matalan merenpinnan aikana rannikot ja yhteydet muuttuivat monin paikoin. Syvät merikanavat erottivat Floresin silti Aasian mantereesta.",
+      "raw_seconds": 9.58984126984127,
+      "speech_window_seconds": 9.58984126984127,
+      "tempo": 0.9937659346985771,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Saavuttaessa veden yli olosuhteet ovat toiset kuin yhtenäistä maata pitkin. Meri vaikuttaa siihen, mitkä eliöt saapuvat ja säilyvät.",
+      "raw_seconds": 9.682721088435374,
+      "speech_window_seconds": 9.682721088435374,
+      "tempo": 1.00339078636636,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Saapuminen ei siis ollut mahdotonta. Onnistuneilla ylityksillä saattoi kuitenkin olla poikkeuksellisen suuri vaikutus, tapahtuivatpa ne miten tahansa.",
+      "raw_seconds": 9.85687074829932,
+      "speech_window_seconds": 9.85687074829932,
+      "tempo": 1.021437383243453,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Eläimet leviävät joskus harvinaisten tapahtumien kautta monin eri tavoin. Muinaisten hominiinien saapumisen tarkat olosuhteet ovat yhä tutkimuskysymys.",
+      "raw_seconds": 10.193560090702947,
+      "speech_window_seconds": 10.193560090702947,
+      "tempo": 1.0563274705391654,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Ehdotettu lautta, reitti tai myrskyn kuljettama ylitys on hypoteesi ilman tapahtumaan yhdistäviä todisteita. Mahdollisuus ei ole palautettu muisto.",
+      "raw_seconds": 10.309659863945578,
+      "speech_window_seconds": 10.309659863945578,
+      "tempo": 1.068358535123894,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Saarten ravinto, kilpailijat, pedot ja tila luovat erityiset olot. Sukupolvien kuluessa ne voivat muovata populaatioiden evoluutiota.",
+      "raw_seconds": 9.961360544217687,
+      "speech_window_seconds": 9.961360544217687,
+      "tempo": 1.0322653413697085,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Jotkin saarten eläimet pienenevät, toiset suurenevat. Monien kehitys on mutkikkaampaa. Kaikkien saarella elävien eläinten kutistumisesta ei ole sääntöä.",
+      "raw_seconds": 11.366167800453514,
+      "speech_window_seconds": 11.366167800453514,
+      "tempo": 1.1778412228449238,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Floresin fossiileihin kuuluu sukupuuttoon kuolleita eläimiä, kuten pienikokoisia stegodontteja, norsujen sukulaisia, osana omaleimaista eliöyhteisöä.",
+      "raw_seconds": 11.72607709750567,
+      "speech_window_seconds": 11.72607709750567,
+      "tempo": 1.2151375230575823,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Fossiilit auttavat kuvaamaan aiempia ympäristöjä. Ne eivät esitä täydellistä elävää näkymää, jossa kaikki eläimet olisivat yhtä aikaa samassa paikassa.",
+      "raw_seconds": 9.97297052154195,
+      "speech_window_seconds": 9.97297052154195,
+      "tempo": 1.0334684478281813,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Rekonstruktion on kunnioitettava sekä aikaa että tilaa. Eri kerroksista löydetyt kohteet eivät automaattisesti kuulu samaan dramaattiseen näkymään.",
+      "raw_seconds": 9.659501133786849,
+      "speech_window_seconds": 9.659501133786849,
+      "tempo": 1.0009845734494143,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Sama koskee evoluutiota. Pieni koko houkuttelee selittämään, mutta historia vaatii anatomiaa, ajoituksia, vertailua ja useampia löytöjä.",
+      "raw_seconds": 10.692789115646258,
+      "speech_window_seconds": 10.692789115646258,
+      "tempo": 1.1080610482534983,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Meri ei määrännyt yhtä varmaa lopputulosta. Se loi olosuhteita, joissa populaatioiden historia saattoi erota muualla elävien historiasta.",
+      "raw_seconds": 9.868480725623582,
+      "speech_window_seconds": 9.868480725623582,
+      "tempo": 1.0226404897019257,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Tämä on kertomuksen toinen avain: eristyneisyys voi muuttaa kysymyksiämme, mutta vastaukset vaativat silti todisteita.",
+      "raw_seconds": 9.009342403628118,
+      "speech_window_seconds": 9.009342403628118,
+      "tempo": 0.9336106117749344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Palataan luolaan. Saaren ympäristö on valmistanut meidät odottamaan monimutkaista arkistoa, ei pelkkää mantereen tapahtumien kopiota.",
+      "raw_seconds": 8.614603174603175,
+      "speech_window_seconds": 8.614603174603175,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Liang Buassa tämän arkiston kärsivällinen tutkiminen paljastaisi jotakin, joka haastoi tutut käsitykset omasta evolutiivisesta suvustamme.",
+      "raw_seconds": 9.241541950113378,
+      "speech_window_seconds": 9.241541950113378,
+      "tempo": 0.9576727409443915,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Vuonna kaksituhatta kolme Liang Buasta löydettiin jäännöksiä, joista tuli seuraavana vuonna kuvatun Homo floresiensiksen keskeistä aineistoa.",
+      "raw_seconds": 9.694331065759638,
+      "speech_window_seconds": 9.694331065759638,
+      "tempo": 1.0045938928248328,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Nimi tarkoittaa Floresiin liittyvää sukupuuttoon kuollutta hominiinia. Pieni ruumis ja poikkeava anatomisten piirteiden yhdistelmä tekivät löydöstä huomattavan.",
+      "raw_seconds": 10.948208616780045,
+      "speech_window_seconds": 10.948208616780045,
+      "tempo": 1.134529390339901,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Kuuluisa pienikokoinen yksilö oli aikuinen. Pelkkä lyhytkasvuisuus ei osoita, että löydetty yksilö olisi ollut lapsi.",
+      "raw_seconds": 8.370793650793651,
+      "speech_window_seconds": 8.370793650793651,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Ero on tieteellisesti tärkeä. Tutkijat tarkastelevat useita anatomisia piirteitä eivätkä päättele elämänvaihetta ainoastaan pituuden perusteella.",
+      "raw_seconds": 10.112290249433107,
+      "speech_window_seconds": 10.112290249433107,
+      "tempo": 1.0479057253298556,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Huolellinen anatominen tutkimus yhdistää havaintoja. Se kysyy, miten piirteet sopivat yhteen, eikä anna pienen koon selittää kaikkea.",
+      "raw_seconds": 9.079002267573696,
+      "speech_window_seconds": 9.079002267573696,
+      "tempo": 0.9408292505257715,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Tutkittuihin piirteisiin kuuluivat kehon mittasuhteet ja kallon muoto. Olennaista oli niiden yhdistelmä, ei yksi yllättävä mitta.",
+      "raw_seconds": 9.926530612244898,
+      "speech_window_seconds": 9.926530612244898,
+      "tempo": 1.02865602199429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Vertailu muihin hominiineihin auttoi arvioimaan luokittelua ja sitä, miksi jäännökset poikkesivat nykyihmisistä muodostetuista tutuista odotuksista.",
+      "raw_seconds": 9.729160997732427,
+      "speech_window_seconds": 9.729160997732427,
+      "tempo": 1.0082032122002513,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Löytöä seurasi tieteellinen keskustelu. Vaihtoehtoisten tulkintojen piti selittää koko aineisto, myös lisälöydöt ja ensivaikutelmaa tarkemmat yksityiskohdat.",
+      "raw_seconds": 10.541859410430838,
+      "speech_window_seconds": 10.541859410430838,
+      "tempo": 1.0924206642933512,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Tämä on tärkeää. Lajin nimeäminen ei lopeta kysymyksiä dramaattisesti, vaan luo tutkittavan ja tarkennettavan viitekehyksen.",
+      "raw_seconds": 10.147120181405896,
+      "speech_window_seconds": 10.147120181405896,
+      "tempo": 1.0515150447052741,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Pieni aivokoko ei myöskään kerro automaattisesti kaikkea käyttäytymisestä. Näiden hominiinien kykyjä koskevien väitteiden täytyy perustua aineellisiin jälkiin.",
+      "raw_seconds": 10.948208616780045,
+      "speech_window_seconds": 10.948208616780045,
+      "tempo": 1.134529390339901,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Kiviesineet avaavat toisen tutkimussuunnan. Muoto ja löytöyhteys kertovat toiminnasta, mutta eivät automaattisesti tunnista jokaista työkalun valmistajaa.",
+      "raw_seconds": 10.80888888888889,
+      "speech_window_seconds": 10.80888888888889,
+      "tempo": 1.1200921128382268,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Fossiilin läheltä löytynyt työkalu saa merkityksen asiayhteydestään. Yhteys pitää tutkia eikä vain olettaa fyysisen läheisyyden perusteella.",
+      "raw_seconds": 9.659501133786849,
+      "speech_window_seconds": 9.659501133786849,
+      "tempo": 1.0009845734494143,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Saavutus oli muutakin kuin erikoisen kohteen löytäminen. Tutkijat kokosivat yhteyksiä jäännösten, työkalujen, kerrostumien ja vertailuaineiston välille.",
+      "raw_seconds": 10.843718820861678,
+      "speech_window_seconds": 10.843718820861678,
+      "tempo": 1.1237014322136454,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Siksi rauhallinen kaivauskuva voi kertoa enemmän kuin näyttävä keksitty tapahtuma. Dokumentoidut havainnot voidaan tutkia uudelleen.",
+      "raw_seconds": 8.916462585034013,
+      "speech_window_seconds": 8.916462585034013,
+      "tempo": 0.9239857601071516,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Suositut lempinimet herättävät huomiota. Tieteellinen kertomus käsittelee kuitenkin todellisia eliöitä ja testattavaa näyttöä, ei fantasiasta lainattua olentoa.",
+      "raw_seconds": 11.702857142857143,
+      "speech_window_seconds": 11.702857142857143,
+      "tempo": 1.2127313101406365,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Seuraava kysymys on väistämätön: milloin nämä hominiinit elivät, ja kuinka varmasti luola voi kertoa heidän ajastaan?",
+      "raw_seconds": 8.417233560090702,
+      "speech_window_seconds": 8.417233560090702,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Maakerrokset saattavat näyttää siistiltä pinolta, jossa ylempi on alempaa nuorempi. Todelliset kerrostumat voivat olla paljon mutkikkaampia.",
+      "raw_seconds": 9.125442176870749,
+      "speech_window_seconds": 9.125442176870749,
+      "tempo": 0.945641676359663,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Eroosio voi poistaa osan kerrostumista. Uudempi aines voi kerääntyä vanhan viereen ja johtaa harhaan, jos rakennetta ei ymmärretä.",
+      "raw_seconds": 9.299591836734693,
+      "speech_window_seconds": 9.299591836734693,
+      "tempo": 0.9636882732367558,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Tutkijoiden täytyy seurata yhteyksiä koko kaivausalueella. Yksi pystysuora leikkaus ei yksin kerro täydellistä historiaa.",
+      "raw_seconds": 8.382403628117913,
+      "speech_window_seconds": 8.382403628117913,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Eri ajoitusmenetelmät tutkivat erilaisia materiaaleja ja prosesseja. Luku auttaa vasta, kun tiedämme, mitä mitattiin ja miksi se on olennaista.",
+      "raw_seconds": 10.530249433106576,
+      "speech_window_seconds": 10.530249433106576,
+      "tempo": 1.0912175578348784,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Kerrostuman ikä ei automaattisesti ole luun ikä. Näytteen ja arkeologisen tapahtuman välinen yhteys on osoitettava.",
+      "raw_seconds": 8.045714285714286,
+      "speech_window_seconds": 8.045714285714286,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Liang Buan ajoitus tarkentui jatkotutkimuksissa. Muutos seurasi kerrostumien paremmasta ymmärtämisestä eikä osoittanut ajoittamisen olevan merkityksetöntä.",
+      "raw_seconds": 10.158730158730158,
+      "speech_window_seconds": 10.158730158730158,
+      "tempo": 1.052718151163747,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Uudistettu ajoitus sijoittaa tunnetut Homo floresiensiksen luustojäännökset karkeasti sadantuhannen ja kuudenkymmenentuhannen vuoden taakse.",
+      "raw_seconds": 9.47374149659864,
+      "speech_window_seconds": 9.47374149659864,
+      "tempo": 0.9817348701138486,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Asianomaiseen kerrostumajaksoon liittyviä kiviesineitä tunnetaan myöhemmältäkin ajalta, noin viidenkymmenentuhannen vuoden takaa. Fossiilit ja työkalut eivät ole sama kello.",
+      "raw_seconds": 12.10920634920635,
+      "speech_window_seconds": 12.10920634920635,
+      "tempo": 1.2548400361871865,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Nämä ovat tulkitun aineiston likimääräisiä ajanjaksoja. Niistä ei pidä tehdä koko lajin täsmällistä syntymäpäivää tai viimeistä elinpäivää.",
+      "raw_seconds": 9.659501133786849,
+      "speech_window_seconds": 9.659501133786849,
+      "tempo": 1.0009845734494143,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Viimeinen säilynyt jälki osoittaa, mihin nykyinen aineistomme päättyy. Se ei automaattisesti paljasta populaation katoamishetkeä koko saarella.",
+      "raw_seconds": 10.251609977324263,
+      "speech_window_seconds": 10.251609977324263,
+      "tempo": 1.0623430028315297,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Tämä ero ehkäisee houkuttelevaa virhettä: yhden lopullisen katastrofin keksimistä vain siksi, että aikajana kaipaa dramaattista loppukuvaa.",
+      "raw_seconds": 10.646349206349207,
+      "speech_window_seconds": 10.646349206349207,
+      "tempo": 1.103248622419607,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Ympäristön muutos, ekologia, tulivuoret ja kohtaamiset muiden populaatioiden kanssa synnyttävät tutkimuskysymyksiä. Niiden merkitys vaatii näyttöä, ei sopivaa loppua.",
+      "raw_seconds": 12.45750566893424,
+      "speech_window_seconds": 12.45750566893424,
+      "tempo": 1.290933229941372,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Tieteellinen ymmärrys vahvistuu, kun löydöt voidaan arvioida uudelleen. Muuttunut ajoitus voi korjata kertomusta ja samalla vahvistaa tutkimusmenetelmää.",
+      "raw_seconds": 10.379319727891156,
+      "speech_window_seconds": 10.379319727891156,
+      "tempo": 1.075577173874731,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Luola ei ole yksiviisarinen kello. Se on yhteyksien kokoelma, jossa erilaiset todisteet rajaavat toistensa tulkintaa.",
+      "raw_seconds": 8.579773242630386,
+      "speech_window_seconds": 8.579773242630386,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Näiden yhteyksien lukeminen vie meidät takaisin saarelle. Liang Buan ulkopuolella muut paikat säilyttävät vielä varhaisemman menneisyyden jälkiä.",
+      "raw_seconds": 9.02095238095238,
+      "speech_window_seconds": 9.02095238095238,
+      "tempo": 0.9348137182334072,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Kysymys laajenee luolan asukkaista siihen, kuinka kauan hominiinit olivat jo kuuluneet Floresin muuttuvaan maailmaan.",
+      "raw_seconds": 7.546485260770975,
+      "speech_window_seconds": 7.546485260770975,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Soan altaan Mata Mengessä paljon vanhemmat fossiilit lisäävät uuden luvun, joka ulottuu noin seitsemänsadan tuhannen vuoden taakse.",
+      "raw_seconds": 8.417233560090702,
+      "speech_window_seconds": 8.417233560090702,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Löydöt ovat hajanaisia. Niiden tulkinta vaatii tarkkaa anatomista tutkimusta ja löytöyhteyttä. Vanha ikä ei anna täydellistä esi-isän muotokuvaa.",
+      "raw_seconds": 10.39092970521542,
+      "speech_window_seconds": 10.39092970521542,
+      "tempo": 1.076780280333204,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Yksi asia korostuu silti: saaren hominiinihistoria ulottuu paljon kauemmas kuin kuuluisien Liang Buan jäännösten edustama ajanjakso.",
+      "raw_seconds": 10.019410430839002,
+      "speech_window_seconds": 10.019410430839002,
+      "tempo": 1.0382808736620728,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Floresin vielä vanhemmat kivityökalut laajentavat näkökulmaa. Esine voi osoittaa toimintaa ratkaisematta kaikkia tekijän biologiseen identiteettiin liittyviä kysymyksiä.",
+      "raw_seconds": 11.679637188208616,
+      "speech_window_seconds": 11.679637188208616,
+      "tempo": 1.2103250972236907,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Populaatioiden suhteet, piirteiden kehittymisen ajankohdat ja mukana olleet esi-isäryhmät ovat yhä vertailun ja jatkuvan tutkimuksen aiheita.",
+      "raw_seconds": 9.845260770975056,
+      "speech_window_seconds": 9.845260770975056,
+      "tempo": 1.02023427678498,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Homo erectus esiintyy polveutumishypoteeseissa. Houkuttelevaa sukupuuta ei silti pidä esittää niin kuin jokainen haara olisi suoraan havaittu.",
+      "raw_seconds": 10.24,
+      "speech_window_seconds": 10.24,
+      "tempo": 1.061139896373057,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Rehellinen kaavio jättää avoimia kohtia. Se erottaa löydöt ehdotetuista yhteyksistä ja sallii uuden aineiston muuttaa kokonaiskuvaa.",
+      "raw_seconds": 9.93814058956916,
+      "speech_window_seconds": 9.93814058956916,
+      "tempo": 1.0298591284527627,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Se ei vähennä Floresin merkitystä. Päinvastoin se selittää, miksi yksi saari voi olla niin tärkeä ihmisen evoluution laajassa kertomuksessa.",
+      "raw_seconds": 9.369251700680271,
+      "speech_window_seconds": 9.369251700680271,
+      "tempo": 0.9709069119875928,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Mantereelta saadut odotukset ovat hyödyllisiä vertailukohtia. Ne eivät olleet ohjeita, joita kaikkien saaripopulaatioiden oli pakko noudattaa.",
+      "raw_seconds": 10.077460317460318,
+      "speech_window_seconds": 10.077460317460318,
+      "tempo": 1.044296405954437,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Syvät merialueet, omaleimainen ekologia ja pitkä aineisto kutsuvat yhdessä näkemään ihmisen menneisyyden aiempaa monimuotoisempana.",
+      "raw_seconds": 10.181950113378685,
+      "speech_window_seconds": 10.181950113378685,
+      "tempo": 1.0551243640806927,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Ennen muinaisuuden jättämistä muistetaan nykyhetki. Floresin nykyisillä asukkailla on omat historiansa ja tämän päivän elämänsä.",
+      "raw_seconds": 9.276371882086167,
+      "speech_window_seconds": 9.276371882086167,
+      "tempo": 0.96128206031981,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "He eivät ole sukupuuttoon kuolleen lajin näyttelykappaleita. Arkeologisen aineiston kunnioittaminen kuuluu yhteen nykyisten ihmisten kunnioittamisen kanssa.",
+      "raw_seconds": 10.437369614512471,
+      "speech_window_seconds": 10.437369614512471,
+      "tempo": 1.0815927061670954,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Siirrytään kertomuksessa itään, kohti toista tunnettua Floresin näkymää: tuliperäisiä järviä, joiden värit voivat yllättää kävijän.",
+      "raw_seconds": 9.682721088435374,
+      "speech_window_seconds": 9.682721088435374,
+      "tempo": 1.00339078636636,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Kelimutulla kolme kraatterijärveä sijaitsee vierekkäisissä tuliperäisissä altaissa. Niiden muuttuva ulkonäkö on tehnyt maisemasta yhden saaren tunnetuimmista.",
+      "raw_seconds": 10.820498866213152,
+      "speech_window_seconds": 10.820498866213152,
+      "tempo": 1.1212952192966996,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Veden kemia, kaasut, mineraalireaktiot, sää ja katseluolosuhteet vaikuttavat näkymään. Vierekkäiset järvet eivät välttämättä käyttäydy samalla tavalla.",
+      "raw_seconds": 11.644807256235827,
+      "speech_window_seconds": 11.644807256235827,
+      "tempo": 1.2067157778482722,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Valokuva pysäyttää yhden ulkonäön. Se ei lupaa samoja kolmea väriä jokaiselle kävijälle kaikkina tulevina päivinä.",
+      "raw_seconds": 8.068934240362811,
+      "speech_window_seconds": 8.068934240362811,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Luotu kuva ei myöskään saa muuttaa kemiaa välittömäksi taikuudeksi. Uskottava selitys kunnioittaa muutosten aikajännettä ja näytön rajoja.",
+      "raw_seconds": 10.054240362811791,
+      "speech_window_seconds": 10.054240362811791,
+      "tempo": 1.0418901930374913,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Järvet yhdistävät saaren vedet tuliperäiseen rakenteeseen. Samalla ne muistuttavat, että kauniin pinnan alla toimii aktiivisia prosesseja.",
+      "raw_seconds": 10.147120181405896,
+      "speech_window_seconds": 10.147120181405896,
+      "tempo": 1.0515150447052741,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Bajawan lähellä Inerien silmiinpistävä kartio näyttää toisen puolen Floresin tuliperäisyydestä. Vuoren ympärillä ihmiset elävät ja tekevät työtä.",
+      "raw_seconds": 10.599909297052154,
+      "speech_window_seconds": 10.599909297052154,
+      "tempo": 1.0984361965857155,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Vuori ei ole tyhjä näyttämö eikä lupaus turvallisesta pääsystä. Olosuhteet, paikallinen opastus ja ajantasaiset viranomaisohjeet merkitsevät todellisella matkalla.",
+      "raw_seconds": 11.72607709750567,
+      "speech_window_seconds": 11.72607709750567,
+      "tempo": 1.2151375230575823,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Metsät, puutarhat, tiet ja asutus yhdistävät nähtävyyksiä. Saari jatkuu tunnettujen näköalojen välissä ja matkakuvan rajauksen ulkopuolella.",
+      "raw_seconds": 10.576689342403627,
+      "speech_window_seconds": 10.576689342403627,
+      "tempo": 1.0960299836687697,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Sateet, jyrkät rinteet ja veden kulku vaikuttavat viljelyyn, rakentamiseen ja liikkumiseen. Ne muokkaavat myös tutkimiamme aineellisia jälkiä.",
+      "raw_seconds": 10.716009070294785,
+      "speech_window_seconds": 10.716009070294785,
+      "tempo": 1.110467261170444,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Elävät perinteet tuovat lisää syvyyttä. Floresin yhteisöillä on eri kieliä, historioita ja käytäntöjä. Yksi kylä ei edusta kaikkia.",
+      "raw_seconds": 9.775600907029478,
+      "speech_window_seconds": 9.775600907029478,
+      "tempo": 1.0130156380341429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Länsi-Floresin Wae Rebo tunnetaan kartiomaisista taloistaan. Niiden merkitys kuuluu elävälle yhteisölle eikä ole vain kuvauksellinen kattolinja.",
+      "raw_seconds": 10.518639455782314,
+      "speech_window_seconds": 10.518639455782314,
+      "tempo": 1.0900144513764054,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Arkkitehtuuria katsellessa tulisi huomata myös ylläpito, vieraanvaraisuus ja paikalliset päätökset siitä, mitä saa kuvata tai mihin astua.",
+      "raw_seconds": 8.25469387755102,
+      "speech_window_seconds": 8.25469387755102,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Kunnioittava elokuva voi näyttää aikuisten arkea ja sallittuja ulkotiloja keksimättä pyhiä esityksiä tai vaatimatta yhteisöä näyttelemään sopivaa menneisyyttä.",
+      "raw_seconds": 10.541859410430838,
+      "speech_window_seconds": 10.541859410430838,
+      "tempo": 1.0924206642933512,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Pääsy perustuu suhteisiin, ei pelkkään paikan löytämiseen verkosta. Paikalliset järjestelyt ja suojelualueiden säännöt kuuluvat matkaan.",
+      "raw_seconds": 9.984580498866213,
+      "speech_window_seconds": 9.984580498866213,
+      "tempo": 1.0346715542866542,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Sama huolellisuus koskee luolia. Vaikuttava kuvakulma ei saa edellyttää kerrostumien häiritsemistä, löytöjen koskettamista tai suljetulle alueelle kulkemista.",
+      "raw_seconds": 10.866938775510205,
+      "speech_window_seconds": 10.866938775510205,
+      "tempo": 1.1261076451305911,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Kerrostumat ovat rajallisia arkistoja. Kun asiayhteys tuhoutuu, kaunis esine voi menettää tietoa, jota uusi valokuva ei palauta.",
+      "raw_seconds": 9.85687074829932,
+      "speech_window_seconds": 9.85687074829932,
+      "tempo": 1.021437383243453,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Dokumentointi, suojelu ja paikallinen osallistuminen turvaavat sekä fyysisiä todisteita että paikkoja, joissa niillä on merkitystä.",
+      "raw_seconds": 9.508571428571429,
+      "speech_window_seconds": 9.508571428571429,
+      "tempo": 0.9853441894892672,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Rekonstruktiomme selittävät näitä yhteyksiä. Ne eivät esitä todellista kaivaustapahtumaa, täydellistä muinaista ekosysteemiä tai ratkaistua saapumisreittiä.",
+      "raw_seconds": 10.843718820861678,
+      "speech_window_seconds": 10.843718820861678,
+      "tempo": 1.1237014322136454,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Ero on tärkeä etenkin realistisissa kuvissa. Kameralla kuvatulta näyttävä näkymä voi olla kuvitusta, ja yleisön kuuluu tietää sen tehtävä.",
+      "raw_seconds": 9.775600907029478,
+      "speech_window_seconds": 9.775600907029478,
+      "tempo": 1.0130156380341429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Rehellisyys ei vie ihmetystä. Luola, järvi tai tuliperäinen kallio kiinnostaa enemmän, kun ymmärrämme, mihin kysymyksiin se voi vastata.",
+      "raw_seconds": 9.636281179138322,
+      "speech_window_seconds": 9.636281179138322,
+      "tempo": 0.9985783605324686,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Kysymykset liittyvät yhteen: mikä muovasi maan, mikä ylitti veden, mikä muuttui ajassa ja mikä säilyi tutkittavaksemme?",
+      "raw_seconds": 8.486893424036282,
+      "speech_window_seconds": 8.486893424036282,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Seurataan perusteluja takaisin luolaan. Meri vaikutti saapumisen ja eristymisen mahdollisuuksiin, ja saari tarjosi muuttuvan ekologisen ympäristön.",
+      "raw_seconds": 10.599909297052154,
+      "speech_window_seconds": 10.599909297052154,
+      "tempo": 1.0984361965857155,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Geologiset prosessit loivat elinympäristöjä ja paikkoja jälkien kertymiselle. Ihmistoiminta lisäsi oman osuutensa luonnon tapahtumien lomaan.",
+      "raw_seconds": 10.08907029478458,
+      "speech_window_seconds": 10.08907029478458,
+      "tempo": 1.0454995124129098,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Kaivaukset palauttivat yhteyksiä, eivät vain esineitä. Anatominen vertailu ja ajoitus muuttivat nämä yhteydet kysymyksiksi evoluutiohistoriastamme.",
+      "raw_seconds": 10.65795918367347,
+      "speech_window_seconds": 10.65795918367347,
+      "tempo": 1.1044517288780797,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Asiayhteys ratkaisi joka vaiheessa. Näyte ilman paikkaa, ajoitus ilman näytehistoriaa tai kuva ilman selitystä olisi kertonut vähemmän.",
+      "raw_seconds": 9.810430839002267,
+      "speech_window_seconds": 9.810430839002267,
+      "tempo": 1.0166249574095614,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Flores tarjoaa siis enemmän kuin yllättävän fossiilin. Se näyttää, miten eri tieteenalat vahvistuvat tehdessään yhteistyötä.",
+      "raw_seconds": 8.347573696145124,
+      "speech_window_seconds": 8.347573696145124,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Poikkeuksellinen menneisyys jakaa saaren nykyihmisten, maisemien ja vastuiden kanssa. Yhdestä osasta huolehtiessa on muistettava myös muut.",
+      "raw_seconds": 9.392471655328798,
+      "speech_window_seconds": 9.392471655328798,
+      "tempo": 0.9733131249045386,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Polveutumisesta, saapumisesta, käyttäytymisestä ja populaatioiden katoamisesta tunnetusta aineistosta riittää vielä paljon opittavaa.",
+      "raw_seconds": 9.682721088435374,
+      "speech_window_seconds": 9.682721088435374,
+      "tempo": 1.00339078636636,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Tulevat löydöt voivat tarkentaa kysymyksiä tai korvata tutun vastauksen. Siksi todisteita kannattaa suojella eikä pakottaa varmuutta tähän päivään.",
+      "raw_seconds": 9.659501133786849,
+      "speech_window_seconds": 9.659501133786849,
+      "tempo": 1.0009845734494143,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Jos vierailet saarella, yhdistä uteliaisuus huolenpitoon. Seuraa sallittuja reittejä ja paikallisia neuvoja sekä jätä perintö ja elinympäristöt rauhaan.",
+      "raw_seconds": 11.54031746031746,
+      "speech_window_seconds": 11.54031746031746,
+      "tempo": 1.1958878197220166,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Jos kerrot tarinan, pidä löydön, päätelmän ja kuvituksen ero näkyvissä, vaikka yksinkertaisempi versio kuulostaisi dramaattisemmalta.",
+      "raw_seconds": 9.85687074829932,
+      "speech_window_seconds": 9.85687074829932,
+      "tempo": 1.021437383243453,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Nyt luolan suuaukko ilmestyy jälleen näkyviin. Päivänvalo levittäytyy yhä vaalealle kivelle, ja lattia näyttää taas tavalliselta.",
+      "raw_seconds": 9.287981859410431,
+      "speech_window_seconds": 9.287981859410431,
+      "tempo": 0.962485166778283,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Olemme kuitenkin oppineet näkemään monta historiaa: kiven synnyn, veden liikkeen, aineksen saapumisen ja tulkintaan tarvittavan työn.",
+      "raw_seconds": 9.740770975056689,
+      "speech_window_seconds": 9.740770975056689,
+      "tempo": 1.0094063186587243,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Ulkona Flores jatkuu vihreinä kukkuloina, tulivuorenhuippuina, viljelyksinä ja merenä, joka sekä erottaa että yhdistää naapureita.",
+      "raw_seconds": 9.798820861678005,
+      "speech_window_seconds": 9.798820861678005,
+      "tempo": 1.0154218509510886,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Saari ei ole yksi arvoitus, johon sopii yksi salainen avain. Se yhdistää kysymyksiä, joita huolellinen näyttö auttaa selventämään.",
+      "raw_seconds": 9.55501133786848,
+      "speech_window_seconds": 9.55501133786848,
+      "tempo": 0.9901566153231586,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Pieni jälki voi muuttaa suuren kertomuksen, kun löytöyhteys säilyy. Siksi kärsivällinen tutkimus on keksittyä spektaakkelia voimakkaampaa.",
+      "raw_seconds": 9.520181405895691,
+      "speech_window_seconds": 9.520181405895691,
+      "tempo": 0.98654729594774,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "Tärkein matka voi kulkea katsomisesta ymmärtämiseen: siihen, mitä paikka antaa meidän sanoa ja mitkä kysymykset jäävät avoimiksi.",
+      "raw_seconds": 8.846802721088435,
+      "speech_window_seconds": 8.846802721088435,
+      "tempo": 0.9167671213563146,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "Flores pitää molemmat mahdollisuudet yhdessä. Se antaa poikkeuksellisia todisteita ja vastuun säilyttää seuraava luku myöhemmin tuleville.",
+      "raw_seconds": 8.916462585034013,
+      "speech_window_seconds": 8.916462585034013,
+      "tempo": 0.9239857601071516,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "Luolan suulla valo päättyy. Kysymykset jatkuvat yhdeltä saarelta kohti paljon laajempaa ihmisen menneisyyttä.",
+      "raw_seconds": 7.500045351473923,
+      "speech_window_seconds": 7.500045351473923,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1320,
+  "decoded_samples": 31680000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-fi-22m00s.mp3",
+  "flac": "voice-fi-22m00s.flac",
+  "mp3_sha256": "cb7044af8a9b56be198d8899172eb80528bad9d4c02a47d61334ad1b1b076559",
+  "flac_sha256": "dfc16b51b6c0cea65a6e3e99cb60472d177c0c649843655a49d782e651ab99bc"
+}

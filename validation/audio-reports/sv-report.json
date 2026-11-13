@@ -1,0 +1,1209 @@
+{
+  "locale": "sv",
+  "voice_id": "piper:sv_SE-nst-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1320,
+  "spoken_cues": 132,
+  "closing_silence_seconds": 0,
+  "config_hash": "9211660f74a209fda2b5e1ce43b8d7298b23693deb3907a8ab5b2b31769e2115",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "Vid en grottmynning faller dagsljuset över ljus sten och stannar. Längre in bevarar marken ett annat slags ljus.",
+      "raw_seconds": 8.103764172335602,
+      "speech_window_seconds": 8.103764172335602,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Det är kunskapens ljus: ett noggrant dokumenterat lager, ett stenredskap och en fråga ingen väntade sig.",
+      "raw_seconds": 6.965986394557823,
+      "speech_window_seconds": 6.965986394557823,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "På Flores bidrog en grotta till att förändra berättelsen om människans utveckling. Vi behöver också förstå ön runt omkring.",
+      "raw_seconds": 7.952834467120182,
+      "speech_window_seconds": 7.952834467120182,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Flores ligger i östra Indonesien, i Östra Nusa Tenggara, där branter, vulkaner och hav påverkar vägar och möjligheter.",
+      "raw_seconds": 9.613061224489796,
+      "speech_window_seconds": 9.613061224489796,
+      "tempo": 0.9961721476155229,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Kusten erbjuder en ö att betrakta. Bergarter och sediment erbjuder en ö att läsa, om vi lär oss språket.",
+      "raw_seconds": 8.324353741496598,
+      "speech_window_seconds": 8.324353741496598,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Vi färdas från kalkstensgrottor till vulkansjöar, från tidiga ankomster till samhällen som lever bland kullarna i dag.",
+      "raw_seconds": 7.999274376417233,
+      "speech_window_seconds": 7.999274376417233,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Hur kunde en ö bevara ett kapitel ur människans förflutna som verkade så oväntat när det upptäcktes?",
+      "raw_seconds": 7.22140589569161,
+      "speech_window_seconds": 7.22140589569161,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Svaret kräver geografi, geologi, biologi och tålmodig utgrävning. Inget ämne berättar allt på egen hand.",
+      "raw_seconds": 7.825124716553288,
+      "speech_window_seconds": 7.825124716553288,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Vi följer olika skalor: ett havssund, ett berg, en grottmynning och små detaljer i ett sedimentlager.",
+      "raw_seconds": 8.103764172335602,
+      "speech_window_seconds": 8.103764172335602,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Vi skiljer fynd från slutsatser. En bra rekonstruktion gör gränsen tydligare i stället för att dölja den.",
+      "raw_seconds": 7.7090249433106575,
+      "speech_window_seconds": 7.7090249433106575,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Den mest kända platsen är Liang Bua, en kalkstensgrotta på västra Flores, nära Rutengområdet.",
+      "raw_seconds": 6.5712471655328795,
+      "speech_window_seconds": 6.5712471655328795,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Betydelsen kommer från material som samlats, bevarats och undersökts i sitt sammanhang, inte bara från mörker.",
+      "raw_seconds": 8.161814058956915,
+      "speech_window_seconds": 8.161814058956915,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Ett ensamt föremål väcker en historia. Dokumenterat läge, omgivning och förlopp ger en starkare förklaring.",
+      "raw_seconds": 8.649433106575964,
+      "speech_window_seconds": 8.649433106575964,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Börja med marken under fötterna. Innan vi föreställer oss gamla liv måste vi fråga hur spåren hamnade här.",
+      "raw_seconds": 7.476825396825397,
+      "speech_window_seconds": 7.476825396825397,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Somliga kom genom människor, andra genom vatten, djur, gravitation eller senare störningar. Att skilja processerna åt ingår i arbetet.",
+      "raw_seconds": 9.253151927437642,
+      "speech_window_seconds": 9.253151927437642,
+      "tempo": 0.9588758474028645,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Grottan är både plats och arkiv. Flera författare skrev dess sidor, ibland ovanpå varandra.",
+      "raw_seconds": 7.3723356009070296,
+      "speech_window_seconds": 7.3723356009070296,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Gå först utanför. Flores hör till en region där plattornas rörelser bidragit till en lång vulkanisk kedja.",
+      "raw_seconds": 8.52172335600907,
+      "speech_window_seconds": 8.52172335600907,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "En ö ser beständig ut på kartan, men är en tillfällig yta av processer mycket längre än ett människoliv.",
+      "raw_seconds": 7.801904761904762,
+      "speech_window_seconds": 7.801904761904762,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Vulkanism skapar berg och höjder. Vittring, vatten och gravitation öppnar sedan dalar och flyttar material nedåt.",
+      "raw_seconds": 9.578231292517007,
+      "speech_window_seconds": 9.578231292517007,
+      "tempo": 0.9925628282401043,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Hastigheten varierar. En lugn sluttning, en regnfylld bäck och en vulkanisk händelse lämnar olika spår.",
+      "raw_seconds": 8.185034013605442,
+      "speech_window_seconds": 8.185034013605442,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Branthet påverkar även resor. En kort kartsträcka kan innebära en besvärlig passage över ryggar och dalar.",
+      "raw_seconds": 8.440453514739229,
+      "speech_window_seconds": 8.440453514739229,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Vägar, odlingar och bosättningar utvecklas i skillnaderna. Geografin ger möjligheter och begränsningar, inte ett enda bestämt öde.",
+      "raw_seconds": 9.671111111111111,
+      "speech_window_seconds": 9.671111111111111,
+      "tempo": 1.002187679907887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "En vulkanö består inte bara av ung lava. Flores har också kalksten, däribland berget vid Liang Bua.",
+      "raw_seconds": 8.52172335600907,
+      "speech_window_seconds": 8.52172335600907,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Kalksten berättar om karbonatmaterial och äldre miljöer. Landskapet rymmer flera geologiska kapitel.",
+      "raw_seconds": 7.546485260770975,
+      "speech_window_seconds": 7.546485260770975,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Vatten med löst koldioxid kan långsamt vidga kalkstenssprickor. Med tiden kan hålrum och grottor utvecklas.",
+      "raw_seconds": 8.928072562358278,
+      "speech_window_seconds": 8.928072562358278,
+      "tempo": 0.9251888665656246,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Det är en allmän process, inte samma förklaring för varje rum eller en exakt karta över grottan.",
+      "raw_seconds": 6.594467120181406,
+      "speech_window_seconds": 6.594467120181406,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Bergens ålder, grottans utveckling och senare avlagringars ålder är olika frågor. Att blanda dem gör platsen alltför enkel.",
+      "raw_seconds": 8.70748299319728,
+      "speech_window_seconds": 8.70748299319728,
+      "tempo": 0.9023298438546403,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "En gammal grotta kan innehålla unga avlagringar. En ny yta kan dölja äldre material under eller bredvid sig.",
+      "raw_seconds": 8.544943310657596,
+      "speech_window_seconds": 8.544943310657596,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Skillnaden blir viktig för arkeologiska dateringar. Geologin lär oss redan att läsa varsamt.",
+      "raw_seconds": 7.360725623582766,
+      "speech_window_seconds": 7.360725623582766,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Vulkantoppar tecknar dramatiska horisonter; vatten i kalksten skapar stilla rum som kan bevara bevis.",
+      "raw_seconds": 8.25469387755102,
+      "speech_window_seconds": 8.25469387755102,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Båda hör till Flores och behöver omgivande samband. Ingen av dem ska bli ett fantasisceneri.",
+      "raw_seconds": 6.710566893424036,
+      "speech_window_seconds": 6.710566893424036,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Marken placerar vårt arkiv. Nu kommer barriären som bidrog till öns särskilda liv: havet.",
+      "raw_seconds": 6.745396825396825,
+      "speech_window_seconds": 6.745396825396825,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Flores ligger i Wallacea, mellan Sydostasiens och Australiens stora kontinentalsocklar.",
+      "raw_seconds": 7.360725623582766,
+      "speech_window_seconds": 7.360725623582766,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Vid lägre hav förändrades många kuster och förbindelser. Djupa sund skilde ändå Flores från det asiatiska fastlandet.",
+      "raw_seconds": 8.394013605442177,
+      "speech_window_seconds": 8.394013605442177,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Att korsa vatten skiljer sig från att följa sammanhängande land. Barriären påverkar vilka organismer som kommer fram och stannar.",
+      "raw_seconds": 8.78875283446712,
+      "speech_window_seconds": 8.78875283446712,
+      "tempo": 0.9107515890639503,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Ankomst var inte omöjlig. Lyckade överfarter kunde däremot få ovanligt betydelsefulla följder.",
+      "raw_seconds": 6.594467120181406,
+      "speech_window_seconds": 6.594467120181406,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Djur sprids genom flera mekanismer och sällsynta händelser. Hur forntida homininer kom hit undersöks fortfarande.",
+      "raw_seconds": 9.032562358276644,
+      "speech_window_seconds": 9.032562358276644,
+      "tempo": 0.9360168246918802,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Flotte, väg eller stormdriven färd är hypoteser utan belägg. En möjlighet är inte ett återvunnet minne.",
+      "raw_seconds": 7.662585034013605,
+      "speech_window_seconds": 7.662585034013605,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Öpopulationer möter särskilda resurser, konkurrenter, rovdjur och utrymmen. Det kan forma evolutionära förändringar över generationer.",
+      "raw_seconds": 10.031020408163265,
+      "speech_window_seconds": 10.031020408163265,
+      "tempo": 1.0394839801205455,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Vissa ödjur blir mindre, andra större. Det finns ingen regel att varje organism krymper på en ö.",
+      "raw_seconds": 7.697414965986394,
+      "speech_window_seconds": 7.697414965986394,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Flores bevarar små utdöda stegodontdjur, släktingar till elefanter, tillsammans med andra delar av ett särskilt ekosystem.",
+      "raw_seconds": 8.544943310657596,
+      "speech_window_seconds": 8.544943310657596,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Fossilen beskriver tidigare miljöer, men visar inte alla djur tillsammans på samma plats vid samma tid.",
+      "raw_seconds": 6.710566893424036,
+      "speech_window_seconds": 6.710566893424036,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Rekonstruktioner måste respektera tid och rum. Föremål ur olika lager blir inte automatiskt grannar i samma scen.",
+      "raw_seconds": 9.137052154195011,
+      "speech_window_seconds": 9.137052154195011,
+      "tempo": 0.9468447828181359,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Evolution kräver samma försiktighet: anatomi, åldrar, jämförelser och fler exemplar för att förklara en liten kropp.",
+      "raw_seconds": 8.498503401360544,
+      "speech_window_seconds": 8.498503401360544,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Havet garanterade inget resultat. Det bidrog till omständigheter där andra historier kunde utvecklas än på fastlandet.",
+      "raw_seconds": 8.17342403628118,
+      "speech_window_seconds": 8.17342403628118,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Vår andra nyckel: isolering ändrar frågorna, men besvarar dem inte utan belägg.",
+      "raw_seconds": 5.5147392290249435,
+      "speech_window_seconds": 5.5147392290249435,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Tillbaka till grottan. Ön förbereder oss på ett komplicerat arkiv, inte en enkel kopia av fastlandet.",
+      "raw_seconds": 6.989206349206349,
+      "speech_window_seconds": 6.989206349206349,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "I Liang Bua avslöjade tålmodigt arbete något som utmanade välbekanta förväntningar på vår evolutionära familj.",
+      "raw_seconds": 8.486893424036282,
+      "speech_window_seconds": 8.486893424036282,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "År tvåtusentre hittades lämningar som blev centrala när Homo floresiensis beskrevs året därpå.",
+      "raw_seconds": 7.743854875283446,
+      "speech_window_seconds": 7.743854875283446,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Namnet avser en utdöd hominin från Flores. Den lilla kroppen och ovanliga egenskapskombinationen gjorde fyndet anmärkningsvärt.",
+      "raw_seconds": 10.158730158730158,
+      "speech_window_seconds": 10.158730158730158,
+      "tempo": 1.052718151163747,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Den berömda lilla individen var vuxen. Kort kroppslängd visar inte ensam att ett exemplar var ett barn.",
+      "raw_seconds": 7.22140589569161,
+      "speech_window_seconds": 7.22140589569161,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Forskarna undersöker flera anatomiska tecken, i stället för att bedöma livsstadiet enbart utifrån längd.",
+      "raw_seconds": 7.3723356009070296,
+      "speech_window_seconds": 7.3723356009070296,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "En noggrann studie förenar observationer och frågar hur egenskaper hänger ihop, utan att låta litenhet förklara allt.",
+      "raw_seconds": 7.9412244897959186,
+      "speech_window_seconds": 7.9412244897959186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Kroppsproportioner och skallform studerades. Kombinationen var viktigare än ett enda överraskande mått.",
+      "raw_seconds": 7.7090249433106575,
+      "speech_window_seconds": 7.7090249433106575,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Jämförelser med andra homininer hjälpte klassificering och förståelse av skillnader gentemot förväntningar från moderna människor.",
+      "raw_seconds": 8.684263038548753,
+      "speech_window_seconds": 8.684263038548753,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Vetenskaplig debatt följde. Alternativen måste möta alla belägg, även nya fynd och mindre uppenbara detaljer.",
+      "raw_seconds": 8.185034013605442,
+      "speech_window_seconds": 8.185034013605442,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Att namnge en art avslutar inte frågorna. Det skapar en ram att pröva och förfina.",
+      "raw_seconds": 6.072018140589569,
+      "speech_window_seconds": 6.072018140589569,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Ett litet hjärnmått förklarar inte allt beteende. Påståenden om förmågor måste följa materiella belägg.",
+      "raw_seconds": 6.907936507936508,
+      "speech_window_seconds": 6.907936507936508,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Stenredskap öppnar en annan undersökning. Form och sammanhang visar aktiviteter, men identifierar inte automatiskt varje tillverkare.",
+      "raw_seconds": 9.97297052154195,
+      "speech_window_seconds": 9.97297052154195,
+      "tempo": 1.0334684478281813,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Ett redskap nära ett fossil kräver att sambandet undersöks. Närhet ensam bevisar det inte.",
+      "raw_seconds": 7.523265306122449,
+      "speech_window_seconds": 7.523265306122449,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Bedriften var att förbinda lämningar, föremål, lager och jämförelser, utöver att hitta något ovanligt.",
+      "raw_seconds": 6.501587301587302,
+      "speech_window_seconds": 6.501587301587302,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Därför kan ett stilla utgrävningsfoto säga mer än ett påhittat skådespel. Dokumentationen kan granskas på nytt.",
+      "raw_seconds": 8.045714285714286,
+      "speech_window_seconds": 8.045714285714286,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Smeknamn lockar uppmärksamhet. Vetenskap handlar om verkliga organismer och prövbara belägg, inte fantasifigurer.",
+      "raw_seconds": 8.765532879818593,
+      "speech_window_seconds": 8.765532879818593,
+      "tempo": 0.9083453761470045,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Nästa fråga är ofrånkomlig: när levde de, och hur säkert kan grottan berätta deras tid?",
+      "raw_seconds": 6.176507936507937,
+      "speech_window_seconds": 6.176507936507937,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Sediment liknar först en prydlig stapel, yngre upptill. Verkliga avlagringar kan vara betydligt mer komplicerade.",
+      "raw_seconds": 8.115374149659864,
+      "speech_window_seconds": 8.115374149659864,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Erosion tar bort delar. Yngre material kan samlas bredvid äldre och vilseleda om geometrin missförstås.",
+      "raw_seconds": 8.974512471655329,
+      "speech_window_seconds": 8.974512471655329,
+      "tempo": 0.9300012923995159,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Sambanden måste följas genom utgrävningen. En enda lodrät linje är ingen fullständig historia.",
+      "raw_seconds": 7.894784580498866,
+      "speech_window_seconds": 7.894784580498866,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Dateringsmetoder mäter olika material och processer. Ett tal hjälper när vi vet exakt vad som mättes.",
+      "raw_seconds": 7.430385487528345,
+      "speech_window_seconds": 7.430385487528345,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Sedimentets ålder är inte automatiskt ett bens ålder. Kopplingen till den arkeologiska händelsen måste visas.",
+      "raw_seconds": 7.778684807256236,
+      "speech_window_seconds": 7.778684807256236,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Mer forskning ändrade Liang Buas kronologi genom bättre förståelse av lagren. Den gjorde inte datering meningslös.",
+      "raw_seconds": 8.765532879818593,
+      "speech_window_seconds": 8.765532879818593,
+      "tempo": 0.9083453761470045,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Den reviderade ramen placerar kända Homo-floresiensis-lämningar ungefär mellan hundratusen och sextiotusen år tillbaka.",
+      "raw_seconds": 10.193560090702947,
+      "speech_window_seconds": 10.193560090702947,
+      "tempo": 1.0563274705391654,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Den tillhörande redskapsföljden når senare, till omkring femtiotusen år. Fossil och redskap är inte identiska klockor.",
+      "raw_seconds": 9.404081632653062,
+      "speech_window_seconds": 9.404081632653062,
+      "tempo": 0.9745162313630116,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Det är ungefärliga tolkade intervall, inte en arts exakta födelsedag eller sista dag.",
+      "raw_seconds": 6.095238095238095,
+      "speech_window_seconds": 6.095238095238095,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Det sista bevarade spåret visar var dagens belägg slutar. Det daterar inte automatiskt försvinnandet över hela ön.",
+      "raw_seconds": 8.010884353741497,
+      "speech_window_seconds": 8.010884353741497,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Skillnaden hindrar en påhittad slutkatastrof, bara för att berättelsen önskar ett dramatiskt avslut.",
+      "raw_seconds": 7.430385487528345,
+      "speech_window_seconds": 7.430385487528345,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Miljö, ekologi, vulkanism och möten med andra grupper väcker frågor. Deras roller kräver belägg, inte ett bekvämt slut.",
+      "raw_seconds": 8.6378231292517,
+      "speech_window_seconds": 8.6378231292517,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Omprövning förbättrar kunskap. En ändrad ålder kan förändra berättelsen och samtidigt stärka metoden.",
+      "raw_seconds": 7.627755102040816,
+      "speech_window_seconds": 7.627755102040816,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Grottan är ingen klocka med en visare. Flera slags belägg begränsar och kontrollerar varandra.",
+      "raw_seconds": 7.720634920634921,
+      "speech_window_seconds": 7.720634920634921,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Sambanden tar oss bortom Liang Bua, till platser som bevarar ett ännu tidigare förflutet.",
+      "raw_seconds": 6.15328798185941,
+      "speech_window_seconds": 6.15328798185941,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Frågan växer: hur länge hade homininer redan varit del av Flores föränderliga värld?",
+      "raw_seconds": 5.77015873015873,
+      "speech_window_seconds": 5.77015873015873,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Vid Mata Menge i Soabäckenet når äldre fossilbelägg ungefär sjuhundratusen år tillbaka.",
+      "raw_seconds": 6.222947845804988,
+      "speech_window_seconds": 6.222947845804988,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Fynden är fragmentariska och kräver anatomi samt sammanhang. En tidig datering ger inget fullständigt förfädersporträtt.",
+      "raw_seconds": 9.496961451247165,
+      "speech_window_seconds": 9.496961451247165,
+      "tempo": 0.9841410830307943,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "De visar ändå en mycket längre öhistoria än perioden för de berömda fynden i Liang Bua.",
+      "raw_seconds": 7.337505668934241,
+      "speech_window_seconds": 7.337505668934241,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Ännu äldre stenredskap på andra håll breddar bilden. De visar aktivitet utan att lösa varje biologisk identitet.",
+      "raw_seconds": 8.742312925170069,
+      "speech_window_seconds": 8.742312925170069,
+      "tempo": 0.9059391632300589,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Gruppers relationer, egenskapernas utveckling och inblandade förfäder kräver fortsatt jämförelse och forskning.",
+      "raw_seconds": 7.569705215419501,
+      "speech_window_seconds": 7.569705215419501,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Homo erectus diskuteras i ursprungshypoteser. Varje gren i ett släktträd har inte observerats direkt.",
+      "raw_seconds": 8.881632653061224,
+      "speech_window_seconds": 8.881632653061224,
+      "tempo": 0.9203764407317331,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Ett ärligt schema lämnar luckor, skiljer fastställda fynd från föreslagna samband och välkomnar nya belägg.",
+      "raw_seconds": 7.732244897959184,
+      "speech_window_seconds": 7.732244897959184,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Det förklarar Flores betydelse för en mycket större historia om människans evolution.",
+      "raw_seconds": 5.7004988662131515,
+      "speech_window_seconds": 5.7004988662131515,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Fastlandet ger användbara jämförelser, inte instruktioner som varje öpopulation måste följa exakt.",
+      "raw_seconds": 7.267845804988662,
+      "speech_window_seconds": 7.267845804988662,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Djupa sund, särskild ekologi och långa arkiv visar hur varierat människans förflutna kunde vara.",
+      "raw_seconds": 7.128526077097506,
+      "speech_window_seconds": 7.128526077097506,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Innan vi lämnar den tiden: dagens invånare har egna historier och samtida liv.",
+      "raw_seconds": 5.746938775510204,
+      "speech_window_seconds": 5.746938775510204,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "De är inga utställningsföremål för en utdöd art. Respekt för belägg hör ihop med respekt för nuet.",
+      "raw_seconds": 7.22140589569161,
+      "speech_window_seconds": 7.22140589569161,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Berättelsen går österut mot en annan känd bild: vulkansjöar med färger som kan överraska besökare.",
+      "raw_seconds": 7.047256235827664,
+      "speech_window_seconds": 7.047256235827664,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Vid Kelimutu ligger tre kratersjöar i närliggande bassänger. Deras växlande utseende gjorde platsen berömd.",
+      "raw_seconds": 8.034104308390022,
+      "speech_window_seconds": 8.034104308390022,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Vattenkemi, gaser, mineraler, väder och betraktande påverkar färgerna. Sjöar nära varandra behöver inte bete sig likadant.",
+      "raw_seconds": 9.798820861678005,
+      "speech_window_seconds": 9.798820861678005,
+      "tempo": 1.0154218509510886,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Ett foto fryser ett tillstånd. Det lovar inte varje framtida besökare samma tre färger.",
+      "raw_seconds": 6.5712471655328795,
+      "speech_window_seconds": 6.5712471655328795,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Genererade bilder får inte göra kemi till omedelbar magi. Förklaringen måste respektera tidsförlopp och bevisgränser.",
+      "raw_seconds": 7.987664399092971,
+      "speech_window_seconds": 7.987664399092971,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Sjöarna förenar vatten och vulkanisk grund. Vackra ytor kan dölja fortfarande aktiva processer.",
+      "raw_seconds": 7.314285714285714,
+      "speech_window_seconds": 7.314285714285714,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "På annat håll reser sig Ineries tydliga kon nära Bajawa över landskap där människor bor och arbetar.",
+      "raw_seconds": 8.289523809523809,
+      "speech_window_seconds": 8.289523809523809,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Berget garanterar ingen säker tillgång. Ett verkligt besök kräver aktuella förhållanden, lokal vägledning och officiell information.",
+      "raw_seconds": 10.448979591836734,
+      "speech_window_seconds": 10.448979591836734,
+      "tempo": 1.0827958126255683,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Skogar, odlingar, vägar och samhällen förbinder platserna. Ön fortsätter mellan berömda utsikter.",
+      "raw_seconds": 7.151746031746032,
+      "speech_window_seconds": 7.151746031746032,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Regn, sluttningar och avrinning påverkar odling, byggande och rörelse, liksom det materiella arkiv vi undersöker.",
+      "raw_seconds": 7.836734693877551,
+      "speech_window_seconds": 7.836734693877551,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Levande traditioner ger djup. Språk, historia och bruk skiljer sig; en by representerar inte hela ön.",
+      "raw_seconds": 7.964444444444444,
+      "speech_window_seconds": 7.964444444444444,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Wae Rebo i väster är känt för koniska hus. Betydelsen tillhör ett levande samhälle, inte bara vackra tak.",
+      "raw_seconds": 7.999274376417233,
+      "speech_window_seconds": 7.999274376417233,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Att se arkitektur innebär också underhåll, mottagande och beslut om fotografering och tillträde.",
+      "raw_seconds": 6.896326530612245,
+      "speech_window_seconds": 6.896326530612245,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "En respektfull film visar vuxnas vardag och tillåtna exteriörer, utan påhittade ceremonier eller beställd historieteater.",
+      "raw_seconds": 10.716009070294785,
+      "speech_window_seconds": 10.716009070294785,
+      "tempo": 1.110467261170444,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Tillträde är en relation. En plats på nätet ersätter inte lokala överenskommelser och skyddsregler.",
+      "raw_seconds": 6.849886621315193,
+      "speech_window_seconds": 6.849886621315193,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Även i grottor rättfärdigar en bild inte störda lager, berörda fynd eller passerade avspärrningar.",
+      "raw_seconds": 6.640907029478458,
+      "speech_window_seconds": 6.640907029478458,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Avlagringarna är ändliga arkiv. Skadat sammanhang kan radera kunskap som inget nytt fotografi återskapar.",
+      "raw_seconds": 8.196643990929704,
+      "speech_window_seconds": 8.196643990929704,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Dokumentation, bevarande och lokalt deltagande skyddar både belägg och platserna där de har mening.",
+      "raw_seconds": 7.058866213151927,
+      "speech_window_seconds": 7.058866213151927,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Modeller förklarar samband. De föreställer inte en faktisk upptäckt, ett fullständigt ekosystem eller en slutgiltigt löst ankomst.",
+      "raw_seconds": 8.870022675736962,
+      "speech_window_seconds": 8.870022675736962,
+      "tempo": 0.9191733342732603,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Skillnaden är viktig när bilder verkar verkliga. Ett fotografiskt utseende kan fortfarande vara en illustration.",
+      "raw_seconds": 7.476825396825397,
+      "speech_window_seconds": 7.476825396825397,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Ärlighet bevarar förundran. Grottor, sjöar och vulkaner blir intressantare när deras besvarbara frågor förstås.",
+      "raw_seconds": 8.870022675736962,
+      "speech_window_seconds": 8.870022675736962,
+      "tempo": 0.9191733342732603,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Frågorna kopplas samman: landets bildning, havspassager, förändringar och vad som bevarades för forskning.",
+      "raw_seconds": 6.257777777777778,
+      "speech_window_seconds": 6.257777777777778,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Tillbaka till grottan. Havet påverkade ankomst och isolering; ön gav en föränderlig ekologisk miljö.",
+      "raw_seconds": 7.383945578231293,
+      "speech_window_seconds": 7.383945578231293,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Geologi skapade livsmiljöer och arkiv. Mänskliga aktiviteter tillförde spår bland naturliga händelser.",
+      "raw_seconds": 7.87156462585034,
+      "speech_window_seconds": 7.87156462585034,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Utgrävning återfann relationer, inte bara föremål. Anatomi och dateringar gjorde dem till frågor om evolution.",
+      "raw_seconds": 7.894784580498866,
+      "speech_window_seconds": 7.894784580498866,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Varje steg behövde sammanhang. Fynd utan ursprung, datum utan provhistoria och bilder utan förklaring säger mindre.",
+      "raw_seconds": 10.50702947845805,
+      "speech_window_seconds": 10.50702947845805,
+      "tempo": 1.0888113449179326,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Flores ger mer än ett överraskande fossil: olika kunskapsområden blir starkare tillsammans.",
+      "raw_seconds": 7.767074829931973,
+      "speech_window_seconds": 7.767074829931973,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Det förflutna delar ön med dagens människor, landskap och ansvar. Omsorg om en del behöver se de andra.",
+      "raw_seconds": 7.534875283446712,
+      "speech_window_seconds": 7.534875283446712,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Mycket återstår om förfäder, ankomst, beteende och populationers försvinnande ur det kända materialet.",
+      "raw_seconds": 7.1053061224489795,
+      "speech_window_seconds": 7.1053061224489795,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Nya fynd kan ändra frågor eller svar. Därför bör belägg skyddas i stället för att säkerhet tvingas fram.",
+      "raw_seconds": 7.7090249433106575,
+      "speech_window_seconds": 7.7090249433106575,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Res med nyfikenhet och omsorg: tillåtna vägar, lokala råd och ostört kulturarv och livsmiljöer.",
+      "raw_seconds": 8.161814058956915,
+      "speech_window_seconds": 8.161814058956915,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Skilj upptäckt, slutsats och illustration när du berättar, även om en enklare version låter mer dramatisk.",
+      "raw_seconds": 9.044172335600907,
+      "speech_window_seconds": 9.044172335600907,
+      "tempo": 0.937219931150353,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Grottmynningen återkommer. Dagsljuset ligger kvar på ljus sten och marken ser vanlig ut igen.",
+      "raw_seconds": 7.918004535147392,
+      "speech_window_seconds": 7.918004535147392,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Nu ser vi flera historier: bergets bildning, vattnets rörelse, materialets ankomst och tolkningens arbete.",
+      "raw_seconds": 8.475283446712018,
+      "speech_window_seconds": 8.475283446712018,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Utanför fortsätter gröna kullar, vulkaner, odlingar och havet som både skiljer och förenar grannar.",
+      "raw_seconds": 7.000816326530612,
+      "speech_window_seconds": 7.000816326530612,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Flores väntar inte på en enda hemlig nyckel. Noggranna belägg gör de mötande frågorna tydligare.",
+      "raw_seconds": 6.791836734693877,
+      "speech_window_seconds": 6.791836734693877,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Ett litet spår förändrar en stor historia när sammanhanget bevaras. Där ligger den tålmodiga forskningens kraft.",
+      "raw_seconds": 8.045714285714286,
+      "speech_window_seconds": 8.045714285714286,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "Den viktigaste resan går från att se till att förstå: vad platsen låter oss säga och vad som förblir öppet.",
+      "raw_seconds": 6.907936507936508,
+      "speech_window_seconds": 6.907936507936508,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "Flores ger märkliga belägg och ansvaret att lämna nästa kapitel till dem som följer efter.",
+      "raw_seconds": 6.1184580498866215,
+      "speech_window_seconds": 6.1184580498866215,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "Vid grottmynningen slutar ljuset. Frågorna fortsätter från en ö mot ett mycket större mänskligt förflutet.",
+      "raw_seconds": 7.012426303854875,
+      "speech_window_seconds": 7.012426303854875,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1320,
+  "decoded_samples": 31680000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-sv-22m00s.mp3",
+  "flac": "voice-sv-22m00s.flac",
+  "mp3_sha256": "2f6a7d1582fc16d3e31189f97b738d0f380686477ee358287b2441ce0f1eea3a",
+  "flac_sha256": "19c44663289d00a426a0b5e0c37eaad7c6f6df27d4cf8d13ecd755f1a2569805"
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "url": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-floresiensis",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://doi.org/10.1038/nature17179",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  }
+]

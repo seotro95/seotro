@@ -1,0 +1,1209 @@
+{
+  "locale": "ja",
+  "voice_id": "supertonic:5",
+  "engine": "Supertonic 3 CPU INT8",
+  "target_seconds": 1320,
+  "spoken_cues": 132,
+  "closing_silence_seconds": 0,
+  "config_hash": "dd25530685775e39e4a72f14145942b66549d15e4b86ceb6c07b66d59af77b33",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "洞窟の入口で、日の光は白い岩を照らして止まります。奥の地面には、別の光があります。",
+      "raw_seconds": 7.333764172335601,
+      "speech_window_seconds": 7.333764172335601,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "それは知ることの光です。記録された地層、石器、そして誰も予想しなかった問いが、その光を生みます。",
+      "raw_seconds": 8.431995464852609,
+      "speech_window_seconds": 8.431995464852609,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "フローレスでは、一つの洞窟が人類進化の物語を変えました。理解するには、周りの島も知る必要があります。",
+      "raw_seconds": 8.779433106575963,
+      "speech_window_seconds": 8.779433106575963,
+      "tempo": 0.9097858141529496,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "フローレスはインドネシア東部、東ヌサトゥンガラ州にあります。急な地形、火山、海が移動と可能性を形づくります。",
+      "raw_seconds": 8.815510204081633,
+      "speech_window_seconds": 8.815510204081633,
+      "tempo": 0.913524373479962,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "海岸は眺める島を見せます。岩と堆積物は、言葉を学べば読める島を見せてくれます。",
+      "raw_seconds": 7.152199546485261,
+      "speech_window_seconds": 7.152199546485261,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "石灰岩の洞窟から火山湖へ、古い到来から、同じ丘で暮らす今の共同体へ旅をしましょう。",
+      "raw_seconds": 8.053537414965986,
+      "speech_window_seconds": 8.053537414965986,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "なぜこの島は、発見時に人々を驚かせた人類史の一章を残せたのでしょう。",
+      "raw_seconds": 6.582947845804989,
+      "speech_window_seconds": 6.582947845804989,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "答えには地理、地質、生物学、丁寧な発掘が要ります。一つの分野だけでは語りきれません。",
+      "raw_seconds": 7.395850340136055,
+      "speech_window_seconds": 7.395850340136055,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "海の通路、山、洞窟の入口、地層の細部。異なる大きさの証拠をたどります。",
+      "raw_seconds": 6.834104308390023,
+      "speech_window_seconds": 6.834104308390023,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "見つかったものと推測したことも区別します。よい復元は、その境界を見えやすくするものです。",
+      "raw_seconds": 7.3034467120181406,
+      "speech_window_seconds": 7.3034467120181406,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "最も有名なのは、島の西部、ルテン地方近くにある石灰岩の洞窟リアンブアです。",
+      "raw_seconds": 6.456235827664399,
+      "speech_window_seconds": 6.456235827664399,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "重要なのは暗さではありません。物が積もり、残り、その位置関係を含めて調べられたことです。",
+      "raw_seconds": 7.823333333333333,
+      "speech_window_seconds": 7.823333333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "物が一つあれば物語を想像できます。位置、周囲、来歴が分かれば、もっと確かな説明ができます。",
+      "raw_seconds": 8.519297052154196,
+      "speech_window_seconds": 8.519297052154196,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "足元の床から始めましょう。昔の暮らしを思い描く前に、痕跡がどう届いたかを問います。",
+      "raw_seconds": 6.441746031746032,
+      "speech_window_seconds": 6.441746031746032,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "人が運んだものも、水、動物、重力、後の攪乱で来たものもあります。その区別が仕事の一部です。",
+      "raw_seconds": 8.334988662131519,
+      "speech_window_seconds": 8.334988662131519,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "洞窟は場所であり、記録庫です。何人もの書き手が、ときには重ねてページを書きました。",
+      "raw_seconds": 6.9058049886621315,
+      "speech_window_seconds": 6.9058049886621315,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "まず外へ出ましょう。フローレスは、プレートの相互作用が長い火山列を生んだ地域にあります。",
+      "raw_seconds": 7.5128117913832195,
+      "speech_window_seconds": 7.5128117913832195,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "地図で動かない島も、人の一生よりはるかに長い過程の、仮の表面にすぎません。",
+      "raw_seconds": 6.260544217687075,
+      "speech_window_seconds": 6.260544217687075,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "火山が岩と起伏を造り、その後、風化、水、重力が谷を開き、物質を下へ動かします。",
+      "raw_seconds": 7.588412698412698,
+      "speech_window_seconds": 7.588412698412698,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "速さは同じではありません。穏やかな斜面、豪雨の川、火山活動は、それぞれ違う痕跡を残します。",
+      "raw_seconds": 8.268707482993197,
+      "speech_window_seconds": 8.268707482993197,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "急斜面は人の移動にも関わります。地図では近くても、尾根と谷を越える難しい道かもしれません。",
+      "raw_seconds": 8.324648526077098,
+      "speech_window_seconds": 8.324648526077098,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "道、栽培、集落はその違いの中で育ちます。地理は機会と制約を与えますが、運命を一つに決めません。",
+      "raw_seconds": 9.049863945578231,
+      "speech_window_seconds": 9.049863945578231,
+      "tempo": 0.9378097352930809,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "火山の島でも、すべてが若い溶岩ではありません。リアンブアに関わる石灰岩も、フローレスにはあります。",
+      "raw_seconds": 8.509251700680272,
+      "speech_window_seconds": 8.509251700680272,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "石灰岩は炭酸塩の物質や昔の環境を語ります。島の風景には複数の地質の章があるのです。",
+      "raw_seconds": 7.7004535147392295,
+      "speech_window_seconds": 7.7004535147392295,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "二酸化炭素を溶かした水が石灰岩の割れ目に入り、ゆっくり広げれば、長い時間で空洞が育ちます。",
+      "raw_seconds": 8.223492063492063,
+      "speech_window_seconds": 8.223492063492063,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "これは一般的な仕組みです。全室の成り立ちが同じとも、模型が正確な洞窟地図だとも言っていません。",
+      "raw_seconds": 8.296303854875283,
+      "speech_window_seconds": 8.296303854875283,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "岩の年齢、洞窟の発達、後に積もる物の年代は別問題です。混同すると場所を単純化してしまいます。",
+      "raw_seconds": 8.082403628117914,
+      "speech_window_seconds": 8.082403628117914,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "古い洞窟にも若い堆積物があります。新しく見える表面の下や隣に、古い物が隠れることもあります。",
+      "raw_seconds": 8.380045351473923,
+      "speech_window_seconds": 8.380045351473923,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "この区別が、考古学の年代で重要になります。地質は既に、慎重な読み方を教えています。",
+      "raw_seconds": 7.329501133786848,
+      "speech_window_seconds": 7.329501133786848,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "火山の頂は壮大な輪郭を造り、石灰岩を通る水は、証拠を残す静かな空間を造ります。",
+      "raw_seconds": 7.752086167800454,
+      "speech_window_seconds": 7.752086167800454,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "どちらも島の一部です。空想の風景にせず、周囲とのつながりの中で理解しなければなりません。",
+      "raw_seconds": 7.706757369614513,
+      "speech_window_seconds": 7.706757369614513,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "陸が記録庫の舞台を与えました。次は、島の生命を特徴づけた障壁、海です。",
+      "raw_seconds": 6.496757369614513,
+      "speech_window_seconds": 6.496757369614513,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "フローレスは、東南アジアとオーストラリアの大きな大陸棚の間、ウォーレシアにあります。",
+      "raw_seconds": 6.499795918367347,
+      "speech_window_seconds": 6.499795918367347,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "海面が低い時代、各地の岸や陸続きは変わりました。それでも深い海峡が、島をアジア本土から隔てました。",
+      "raw_seconds": 9.46219954648526,
+      "speech_window_seconds": 9.46219954648526,
+      "tempo": 0.9805388131072809,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "水を越える到来は、連続した陸を歩くのとは違います。何が届いて残るかを、海が選び分けます。",
+      "raw_seconds": 7.276893424036281,
+      "speech_window_seconds": 7.276893424036281,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "到来が不可能だったわけではありません。成功した横断が、とても大きな結果を持ち得るということです。",
+      "raw_seconds": 8.01922902494331,
+      "speech_window_seconds": 8.01922902494331,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "動物は珍しい出来事や複数の仕組みで広がります。古い人類がどう来たか、その詳細は研究中です。",
+      "raw_seconds": 8.0737641723356,
+      "speech_window_seconds": 8.0737641723356,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "いかだ、経路、嵐による漂流は、証拠がなければ仮説です。可能性は、取り戻した記憶ではありません。",
+      "raw_seconds": 8.828730158730158,
+      "speech_window_seconds": 8.828730158730158,
+      "tempo": 0.9148943169668557,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "島の集団は、特有の資源、競争相手、捕食者、空間に向き合います。それが世代を越えた進化を促し得ます。",
+      "raw_seconds": 9.630748299319729,
+      "speech_window_seconds": 9.630748299319729,
+      "tempo": 0.9980050051108527,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "小さくなる島の動物も、大きくなるものもいます。すべてが小型化するという決まりはありません。",
+      "raw_seconds": 7.526258503401361,
+      "speech_window_seconds": 7.526258503401361,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "フローレスには、小型の絶滅ステゴドンなどの化石が残ります。ゾウの仲間で、独特な生態系の一員でした。",
+      "raw_seconds": 8.81562358276644,
+      "speech_window_seconds": 8.81562358276644,
+      "tempo": 0.9135361225664704,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "化石は昔の環境を教えますが、すべての動物が同じ場所、同じ時刻にいた場面を示しません。",
+      "raw_seconds": 8.012585034013606,
+      "speech_window_seconds": 8.012585034013606,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "復元には空間と時間の尊重が要ります。別々の層の物を、一つの劇的な場面へ自動的に集めてはいけません。",
+      "raw_seconds": 9.055986394557824,
+      "speech_window_seconds": 9.055986394557824,
+      "tempo": 0.9384441859645413,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "進化も同じです。小さな体の説明には、解剖、年代、比較、そして複数の標本が必要です。",
+      "raw_seconds": 7.220294784580499,
+      "speech_window_seconds": 7.220294784580499,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "海は結果を約束しませんでした。他所と違う歴史が育つ条件を、形づくったのです。",
+      "raw_seconds": 6.961519274376418,
+      "speech_window_seconds": 6.961519274376418,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "二つ目の鍵です。隔離は問いを変えますが、証拠なしに答えを与えません。",
+      "raw_seconds": 6.043492063492064,
+      "speech_window_seconds": 6.043492063492064,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "洞窟へ戻りましょう。島の背景を知ると、本土の単純な写しではない記録を予想できます。",
+      "raw_seconds": 7.281655328798186,
+      "speech_window_seconds": 7.281655328798186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "リアンブアの丁寧な仕事は、私たちの進化の家族について、なじみの期待を覆すものを明らかにしました。",
+      "raw_seconds": 8.755238095238095,
+      "speech_window_seconds": 8.755238095238095,
+      "tempo": 0.9072785590920306,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "二〇〇三年、重要な遺骨が見つかりました。翌年のホモ・フロレシエンシスの記載につながります。",
+      "raw_seconds": 7.40578231292517,
+      "speech_window_seconds": 7.40578231292517,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "これはフローレスに関わる絶滅した人類の名です。小さい体と特徴の組み合わせが、発見を際立たせました。",
+      "raw_seconds": 8.436099773242631,
+      "speech_window_seconds": 8.436099773242631,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "有名な小柄の個体は成人でした。身長が低いだけで、その標本が子どもだったとは言えません。",
+      "raw_seconds": 8.359637188208616,
+      "speech_window_seconds": 8.359637188208616,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "研究者は複数の解剖学的な手がかりを見ます。高さだけで成長段階を決めるわけではありません。",
+      "raw_seconds": 8.151904761904762,
+      "speech_window_seconds": 8.151904761904762,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "丁寧な研究は観察を組み合わせます。小ささだけで説明せず、特徴がどう結びつくかを問います。",
+      "raw_seconds": 7.666077097505669,
+      "speech_window_seconds": 7.666077097505669,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "体の比率や頭蓋の形も調べられました。驚く数値一つより、特徴全体の組み合わせが重要でした。",
+      "raw_seconds": 8.026938775510205,
+      "speech_window_seconds": 8.026938775510205,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "他の人類との比較は分類を考え、現代人を基準とする予想との違いを理解する助けになりました。",
+      "raw_seconds": 7.95140589569161,
+      "speech_window_seconds": 7.95140589569161,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "科学的な議論が続きました。別の説も、追加の発見や細部を含め、すべての証拠に向き合う必要がありました。",
+      "raw_seconds": 9.220589569160998,
+      "speech_window_seconds": 9.220589569160998,
+      "tempo": 0.9555015097576163,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "種に名を付けても、疑問は消えません。検証し、精密にする枠組みができるのです。",
+      "raw_seconds": 6.197709750566894,
+      "speech_window_seconds": 6.197709750566894,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "小さな脳の測定値だけで、行動のすべては分かりません。能力の主張は物的な証拠に従います。",
+      "raw_seconds": 7.657324263038549,
+      "speech_window_seconds": 7.657324263038549,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "石器は別の調査を開きます。形と出土状況は活動を示しても、作り手全員の身元を自動的には決めません。",
+      "raw_seconds": 9.598344671201813,
+      "speech_window_seconds": 9.598344671201813,
+      "tempo": 0.9946471161867163,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "化石のそばの石器も、関係を調べる必要があります。近さだけで関連を証明できません。",
+      "raw_seconds": 7.556802721088435,
+      "speech_window_seconds": 7.556802721088435,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "成果は珍しい物の発見だけではありません。遺骨、石器、地層、比較をつなぐことでした。",
+      "raw_seconds": 7.613492063492063,
+      "speech_window_seconds": 7.613492063492063,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "だから静かな発掘写真は、作られた大場面より多くを語れます。記録は後から検討できるからです。",
+      "raw_seconds": 7.217460317460318,
+      "speech_window_seconds": 7.217460317460318,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "愛称は関心を呼びます。でも科学が扱うのは、空想の登場人物ではなく、実在の生物と検証できる証拠です。",
+      "raw_seconds": 9.513945578231292,
+      "speech_window_seconds": 9.513945578231292,
+      "tempo": 0.9859010961897712,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "次の問いは避けられません。いつ生き、洞窟はどれほど確かにその時を語れるのでしょう。",
+      "raw_seconds": 6.691746031746032,
+      "speech_window_seconds": 6.691746031746032,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "地層は、下より上が若い整った積み重ねに見えます。実際の堆積は、もっと複雑なことがあります。",
+      "raw_seconds": 7.796938775510204,
+      "speech_window_seconds": 7.796938775510204,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "侵食が一部を除き、後の物が古い層の隣を埋めます。形を誤解すれば、近い位置が判断を惑わせます。",
+      "raw_seconds": 8.719478458049887,
+      "speech_window_seconds": 8.719478458049887,
+      "tempo": 0.9035728972072421,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "発掘全体で関係を追う必要があります。一本の縦線だけが、すべての歴史ではありません。",
+      "raw_seconds": 7.113242630385487,
+      "speech_window_seconds": 7.113242630385487,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "年代測定は、方法ごとに異なる物や過程を測ります。何を測った数値かが分かって初めて役立ちます。",
+      "raw_seconds": 8.116848072562359,
+      "speech_window_seconds": 8.116848072562359,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "地層の年代が、自動的に骨の年代になるわけではありません。考古学的な出来事との関係を確かめます。",
+      "raw_seconds": 9.561541950113378,
+      "speech_window_seconds": 9.561541950113378,
+      "tempo": 0.9908333627060495,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "リアンブアでは、地層の理解が進み、年代が改められました。年代測定が無意味だという話ではありません。",
+      "raw_seconds": 8.823537414965987,
+      "speech_window_seconds": 8.823537414965987,
+      "tempo": 0.9143562088047654,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "改訂された枠組みでは、知られるホモ・フロレシエンシスの遺骨は、およそ十万年から六万年前に置かれます。",
+      "raw_seconds": 8.690453514739229,
+      "speech_window_seconds": 8.690453514739229,
+      "tempo": 0.90056513106106,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "関連する石器の記録は、より後の約五万年前まで続きます。骨と石器は同じ時計ではありません。",
+      "raw_seconds": 8.500272108843538,
+      "speech_window_seconds": 8.500272108843538,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "これは解釈されたおおよその範囲です。種全体の誕生日や最後の日を正確に表すものではありません。",
+      "raw_seconds": 8.512789115646259,
+      "speech_window_seconds": 8.512789115646259,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "最後に残る痕跡は、今の証拠の終わりです。島中で集団が消えた瞬間を、そのまま示すわけではありません。",
+      "raw_seconds": 8.261496598639456,
+      "speech_window_seconds": 8.261496598639456,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "その区別は、物語を盛り上げるためだけに最後の災害を作る間違いを防ぎます。",
+      "raw_seconds": 6.645124716553288,
+      "speech_window_seconds": 6.645124716553288,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "環境、生態、火山、他集団との出会いは研究の問いになります。それぞれの役割には証拠が必要です。",
+      "raw_seconds": 7.947732426303855,
+      "speech_window_seconds": 7.947732426303855,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "結果を見直せるから知識は進みます。修正された年代は物語を変え、同時に方法を強めることがあります。",
+      "raw_seconds": 8.603741496598639,
+      "speech_window_seconds": 8.603741496598639,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "洞窟は針一本の時計ではありません。複数の証拠が、互いの解釈を制約し確かめる関係です。",
+      "raw_seconds": 7.260090702947846,
+      "speech_window_seconds": 7.260090702947846,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "その関係を読むと、リアンブアの外、もっと古い過去を残す場所へ向かいます。",
+      "raw_seconds": 5.610702947845805,
+      "speech_window_seconds": 5.610702947845805,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "問いは広がります。この洞窟の住人だけでなく、人類はいつから島の世界にいたのでしょう。",
+      "raw_seconds": 7.290634920634921,
+      "speech_window_seconds": 7.290634920634921,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "ソア盆地のマタメンゲには、約七十万年前へさかのぼる、はるかに古い化石の証拠があります。",
+      "raw_seconds": 7.661768707482993,
+      "speech_window_seconds": 7.661768707482993,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "断片的な発見には、解剖学と文脈の検討が必要です。古い日付だけでは、祖先の全身像は得られません。",
+      "raw_seconds": 9.058163265306122,
+      "speech_window_seconds": 9.058163265306122,
+      "tempo": 0.9386697684255049,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "それでも、島の人類史が有名なリアンブアの遺骨よりずっと前から続くことを示します。",
+      "raw_seconds": 6.906235827664399,
+      "speech_window_seconds": 6.906235827664399,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "別の場所のさらに古い石器も視野を広げます。活動を証明しても、生物学的な身元をすべて解くわけではありません。",
+      "raw_seconds": 10.390136054421768,
+      "speech_window_seconds": 10.390136054421768,
+      "tempo": 1.0766980367276444,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "集団間の関係、特徴が現れた時期、関わる祖先は、今も比較と研究の課題です。",
+      "raw_seconds": 6.625170068027211,
+      "speech_window_seconds": 6.625170068027211,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "祖先の仮説にはホモ・エレクトスも登場します。でも家系図の全枝を、直接見たように描くべきではありません。",
+      "raw_seconds": 8.4702947845805,
+      "speech_window_seconds": 8.4702947845805,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "誠実な図には空白があります。確認された発見と提案された関係を分け、新しい証拠が変える余地を残します。",
+      "raw_seconds": 8.545850340136054,
+      "speech_window_seconds": 8.545850340136054,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "それは島の価値を下げません。なぜフローレスが人類進化の大きな物語に重要なのかを説明します。",
+      "raw_seconds": 8.122244897959183,
+      "speech_window_seconds": 8.122244897959183,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "本土の知識は比較に役立ちますが、すべての島の集団が同じ道を歩む命令ではありません。",
+      "raw_seconds": 7.531995464852607,
+      "speech_window_seconds": 7.531995464852607,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "深い海、独特な生態、長い記録が、人類の過去の多様さを見せてくれます。",
+      "raw_seconds": 6.27968253968254,
+      "speech_window_seconds": 6.27968253968254,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "遠い時代を離れる前に、今の島の人々には自分たちの歴史と現代の暮らしがあると覚えておきましょう。",
+      "raw_seconds": 8.57705215419501,
+      "speech_window_seconds": 8.57705215419501,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "彼らは絶滅種を説明する展示品ではありません。証拠への敬意は、現在への敬意と共にあります。",
+      "raw_seconds": 7.5574149659863945,
+      "speech_window_seconds": 7.5574149659863945,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "物語は東へ進み、もう一つの有名な景色へ向かいます。色に驚かされる火山湖です。",
+      "raw_seconds": 7.506077097505669,
+      "speech_window_seconds": 7.506077097505669,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "クリムトゥには、隣り合う盆地に三つの火口湖があります。変わる姿が、島を代表する景色にしました。",
+      "raw_seconds": 8.355850340136055,
+      "speech_window_seconds": 8.355850340136055,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "水の化学、ガス、鉱物、天気、見る条件が色に関わります。近い湖でも同じようには振る舞いません。",
+      "raw_seconds": 7.893197278911565,
+      "speech_window_seconds": 7.893197278911565,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "写真は一度の姿を止めます。将来の訪問者全員に、同じ三色を約束するものではありません。",
+      "raw_seconds": 8.971111111111112,
+      "speech_window_seconds": 8.971111111111112,
+      "tempo": 0.9296488198042603,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "生成画像も、化学変化を一瞬の魔法にしてはいけません。説明には時間と証拠の限界が必要です。",
+      "raw_seconds": 8.08482993197279,
+      "speech_window_seconds": 8.08482993197279,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "湖は水と火山の仕組みを結びます。美しい表面の下に、動く過程が隠れることもあります。",
+      "raw_seconds": 7.557573696145124,
+      "speech_window_seconds": 7.557573696145124,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "別の場所では、バジャワ近くのイネリエの円すい形が、人々の暮らす土地の上にそびえます。",
+      "raw_seconds": 7.459931972789116,
+      "speech_window_seconds": 7.459931972789116,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "山が安全な立入りを保証するわけではありません。実際の訪問では、現状、地域の案内、公式情報が重要です。",
+      "raw_seconds": 9.836031746031747,
+      "speech_window_seconds": 9.836031746031747,
+      "tempo": 1.019277901143186,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "森、畑、道、集落が名所をつなぎます。有名な眺めと眺めの間にも、島は続いています。",
+      "raw_seconds": 6.967596371882086,
+      "speech_window_seconds": 6.967596371882086,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "雨、斜面、排水は、栽培、建設、移動を左右します。私たちが読む物的記録にも関わります。",
+      "raw_seconds": 7.711791383219954,
+      "speech_window_seconds": 7.711791383219954,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "生きた伝統が深みを加えます。言語、歴史、習慣はさまざまで、一つの村が島全体を代表しません。",
+      "raw_seconds": 8.92342403628118,
+      "speech_window_seconds": 8.92342403628118,
+      "tempo": 0.924707154018775,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "西部のワエレボは、円すい形の家で知られます。その意味は、美しい屋根だけでなく、生きた共同体にあります。",
+      "raw_seconds": 9.052086167800454,
+      "speech_window_seconds": 9.052086167800454,
+      "tempo": 0.9380400173886481,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "建築を見るなら、維持、客の迎え方、撮影や立入りを誰が決めるかも考える必要があります。",
+      "raw_seconds": 7.035419501133787,
+      "speech_window_seconds": 7.035419501133787,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "敬意ある映像は、成人の日常と許可された外観を示せます。儀式や都合のよい過去の演技は作りません。",
+      "raw_seconds": 8.867142857142857,
+      "speech_window_seconds": 8.867142857142857,
+      "tempo": 0.9188749074759437,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "立入りは関係の一部です。ネットで見つけたことは、地域の合意や保護規則に代わりません。",
+      "raw_seconds": 7.222358276643991,
+      "speech_window_seconds": 7.222358276643991,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "洞窟でも同じです。よい角度のために、地層を乱し、物に触れ、閉鎖区域へ入るべきではありません。",
+      "raw_seconds": 8.39671201814059,
+      "speech_window_seconds": 8.39671201814059,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "堆積物は有限の記録です。文脈が失われると、写真を増やしても戻せない情報があります。",
+      "raw_seconds": 7.221519274376417,
+      "speech_window_seconds": 7.221519274376417,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "記録、保全、地域の参加が、証拠と、それに意味を与える場所を守ります。",
+      "raw_seconds": 5.967142857142857,
+      "speech_window_seconds": 5.967142857142857,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "復元は関係を説明する道具です。実際の発掘、古い生態系の全体、解決済みの到来経路を示すものではありません。",
+      "raw_seconds": 9.688956916099773,
+      "speech_window_seconds": 9.688956916099773,
+      "tempo": 1.0040369861243288,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "本物らしい画像ほど、この区別が重要です。カメラで撮ったように見えても、説明用の図であり得ます。",
+      "raw_seconds": 7.828934240362812,
+      "speech_window_seconds": 7.828934240362812,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "誠実さは驚きを奪いません。洞窟、湖、火山岩が何に答えられるか知ると、さらに興味深くなります。",
+      "raw_seconds": 7.9707709750566895,
+      "speech_window_seconds": 7.9707709750566895,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "土地の形成、海を越えたもの、時間の変化、研究できる痕跡。問いはつながっています。",
+      "raw_seconds": 6.456961451247166,
+      "speech_window_seconds": 6.456961451247166,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "洞窟へ戻りましょう。海が到来と隔離を左右し、島が変わる生態の環境を与えました。",
+      "raw_seconds": 7.264331065759637,
+      "speech_window_seconds": 7.264331065759637,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "地質は生息地と痕跡のたまる場を造りました。人の活動は、自然の出来事と混じる記録を加えました。",
+      "raw_seconds": 8.206643990929706,
+      "speech_window_seconds": 8.206643990929706,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "発掘が取り戻したのは物だけでなく関係です。解剖学と年代が、それを進化の問いへ変えました。",
+      "raw_seconds": 7.62875283446712,
+      "speech_window_seconds": 7.62875283446712,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "すべての段階で文脈が大切でした。出所のない標本、履歴のない年代、説明のない画像は、語ることが少なくなります。",
+      "raw_seconds": 9.839455782312925,
+      "speech_window_seconds": 9.839455782312925,
+      "tempo": 1.0196327235557434,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "フローレスは、驚く化石以上を示します。違う知識は、一緒に働くと強くなるのです。",
+      "raw_seconds": 6.397165532879819,
+      "speech_window_seconds": 6.397165532879819,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "その過去は、今の人々、景観、責任と島を共有します。一部分を守るときも、ほかへの目が必要です。",
+      "raw_seconds": 8.176462585034013,
+      "speech_window_seconds": 8.176462585034013,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "祖先、到来、行動、知られる記録から集団が消えることには、まだ多くの問いがあります。",
+      "raw_seconds": 6.301020408163265,
+      "speech_window_seconds": 6.301020408163265,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "将来の発見が問いや答えを変えるかもしれません。今すぐ確実にするより、証拠を守る理由になります。",
+      "raw_seconds": 8.246598639455783,
+      "speech_window_seconds": 8.246598639455783,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "訪問するなら、好奇心と注意を共に。許可された道と地域の案内に従い、遺産と生息地を乱さないでください。",
+      "raw_seconds": 8.995102040816327,
+      "speech_window_seconds": 8.995102040816327,
+      "tempo": 0.932134926509464,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "語るなら、発見、推論、説明図を分けましょう。単純な方が劇的でも、その区別を残します。",
+      "raw_seconds": 6.592448979591837,
+      "speech_window_seconds": 6.592448979591837,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "洞窟の入口が戻ってきます。日が白い岩を照らし、地面はまた普通に見えます。",
+      "raw_seconds": 6.507392290249433,
+      "speech_window_seconds": 6.507392290249433,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "今は複数の歴史が見えます。岩の形成、水の移動、物の到来、そして解釈の仕事です。",
+      "raw_seconds": 7.428888888888889,
+      "speech_window_seconds": 7.428888888888889,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "外では、緑の丘、火山、畑、隣を隔てながら結ぶ海へと島が続きます。",
+      "raw_seconds": 5.6538775510204085,
+      "speech_window_seconds": 5.6538775510204085,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "フローレスは、一つの秘密の鍵を待つ謎ではありません。丁寧な証拠で明確になる、問いの出会う場所です。",
+      "raw_seconds": 8.274399092970521,
+      "speech_window_seconds": 8.274399092970521,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "小さな痕跡も、文脈が残れば大きな物語を変えます。忍耐強い研究の力は、そこにあります。",
+      "raw_seconds": 7.63124716553288,
+      "speech_window_seconds": 7.63124716553288,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "大切な旅は、見ることから理解へ進むことです。言えることと、開いたままの問いを知る旅です。",
+      "raw_seconds": 7.180657596371882,
+      "speech_window_seconds": 7.180657596371882,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "島は、素晴らしい証拠と、次の章を後の人々へ残す責任を共に与えます。",
+      "raw_seconds": 6.344421768707483,
+      "speech_window_seconds": 6.344421768707483,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "洞窟の口で、光は終わります。問いは続き、一つの島から、もっと広い人類の過去へ私たちを導きます。",
+      "raw_seconds": 8.298820861678005,
+      "speech_window_seconds": 8.298820861678005,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1320,
+  "decoded_samples": 31680000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-ja-22m00s.mp3",
+  "flac": "voice-ja-22m00s.flac",
+  "mp3_sha256": "b1169f236eabc35599091b9e997f68ae99bb6184689abc54d10562a22e964e2a",
+  "flac_sha256": "eb8db67d7c70affb1e3e926b0766e55e4145bf965593e96eb95b3f5e5b6ef3d6"
+}

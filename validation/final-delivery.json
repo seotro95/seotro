@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "decoded_samples_per_mp3": 31680000,
+  "seconds_per_track": 1320,
+  "tracks": 17,
+  "matched_scripts": 17,
+  "non_silent_cues_per_track": 132,
+  "prompt_guards_passed": 60,
+  "timeline_slots": 132,
+  "reuse_slots": 72,
+  "limitations": [
+    "No full native-speaker review; localizations were prepared separately by the assistant.",
+    "External factual pages blocked; see research notes."
+  ]
+}

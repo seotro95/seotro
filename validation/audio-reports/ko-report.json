@@ -1,0 +1,1209 @@
+{
+  "locale": "ko",
+  "voice_id": "supertonic:5",
+  "engine": "Supertonic 3 CPU INT8",
+  "target_seconds": 1320,
+  "spoken_cues": 132,
+  "closing_silence_seconds": 0,
+  "config_hash": "4140a0a7c3f930eddd1f8030113d87e1642de3bd02ad3d78c27920ba6addebda",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "동굴 입구에서 햇빛은 밝은 바위를 비추다 멈춥니다. 더 안쪽의 땅에는 다른 종류의 빛이 남아 있습니다.",
+      "raw_seconds": 9.021451247165533,
+      "speech_window_seconds": 9.021451247165533,
+      "tempo": 0.9348654142140449,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "그것은 앎의 빛입니다. 정성껏 기록한 지층, 석기 하나, 누구도 예상하지 못했던 질문에서 나옵니다.",
+      "raw_seconds": 8.643061224489795,
+      "speech_window_seconds": 8.643061224489795,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "플로레스의 한 동굴은 인간 진화 이야기를 바꾸는 데 기여했습니다. 이해하려면 주변 섬도 알아야 합니다.",
+      "raw_seconds": 8.308185941043083,
+      "speech_window_seconds": 8.308185941043083,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "플로레스는 인도네시아 동부, 동누사틍가라에 있습니다. 가파른 지형과 화산, 바다가 이동과 기회를 빚습니다.",
+      "raw_seconds": 8.557800453514739,
+      "speech_window_seconds": 8.557800453514739,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "해안은 바라볼 섬을 보여줍니다. 바위와 퇴적물은 그 언어를 배우면 읽을 수 있는 섬을 보여줍니다.",
+      "raw_seconds": 8.007709750566894,
+      "speech_window_seconds": 8.007709750566894,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "석회암 동굴에서 화산호로, 오래전 도착에서 오늘도 언덕 사이에 사는 공동체로 여행하겠습니다.",
+      "raw_seconds": 7.883990929705216,
+      "speech_window_seconds": 7.883990929705216,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "어떻게 이 섬은 발견 당시 그토록 뜻밖이었던 인간 과거의 한 장을 보존했을까요?",
+      "raw_seconds": 6.618888888888889,
+      "speech_window_seconds": 6.618888888888889,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "답에는 지리와 지질, 생물학, 인내심 있는 발굴이 필요합니다. 한 분야만으로 전체를 설명할 수 없습니다.",
+      "raw_seconds": 8.69532879818594,
+      "speech_window_seconds": 8.69532879818594,
+      "tempo": 0.9010703417809265,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "바닷길, 산, 동굴 입구, 지층 속 작은 흔적처럼 서로 다른 규모의 증거를 따라가겠습니다.",
+      "raw_seconds": 7.372879818594105,
+      "speech_window_seconds": 7.372879818594105,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "발견한 것과 추론한 것도 구분합니다. 좋은 재현은 그 경계를 더 명확하게 보여줍니다.",
+      "raw_seconds": 7.195124716553288,
+      "speech_window_seconds": 7.195124716553288,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "가장 유명한 곳은 플로레스 서부, 루텡 지역 가까이에 있는 석회암 동굴 리앙부아입니다.",
+      "raw_seconds": 7.167052154195011,
+      "speech_window_seconds": 7.167052154195011,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "중요한 이유는 어둠 자체가 아닙니다. 물질이 쌓이고 살아남아 주변 맥락과 함께 조사되었다는 점입니다.",
+      "raw_seconds": 8.89077097505669,
+      "speech_window_seconds": 8.89077097505669,
+      "tempo": 0.9213234171043201,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "물건 하나도 이야기를 떠올리게 합니다. 위치와 환경, 이력이 기록되면 더 강한 설명을 지지할 수 있습니다.",
+      "raw_seconds": 8.668956916099773,
+      "speech_window_seconds": 8.668956916099773,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "발밑의 바닥부터 시작하겠습니다. 옛 삶을 상상하기 전에 흔적이 여기까지 어떻게 왔는지 물어야 합니다.",
+      "raw_seconds": 8.572018140589568,
+      "speech_window_seconds": 8.572018140589568,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "사람의 활동도 있고 물과 동물, 중력이나 나중의 교란도 있습니다. 이 과정을 구분하는 것이 연구입니다.",
+      "raw_seconds": 8.940113378684806,
+      "speech_window_seconds": 8.940113378684806,
+      "tempo": 0.9264366195528296,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "동굴은 장소이자 기록 보관소입니다. 여러 작성자가 때로는 서로의 글 위에 페이지를 써 왔습니다.",
+      "raw_seconds": 8.099750566893425,
+      "speech_window_seconds": 8.099750566893425,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "먼저 밖으로 나가겠습니다. 플로레스는 판의 상호작용이 긴 화산 지형을 만든 지역에 속합니다.",
+      "raw_seconds": 7.770975056689342,
+      "speech_window_seconds": 7.770975056689342,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "지도에서 영구적으로 보이는 섬도 인간의 수명보다 훨씬 긴 과정이 만든 잠정적인 표면입니다.",
+      "raw_seconds": 7.761111111111111,
+      "speech_window_seconds": 7.761111111111111,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "화산은 바위와 기복을 만듭니다. 그다음 풍화와 물, 중력이 계곡을 열고 물질을 낮은 곳으로 옮깁니다.",
+      "raw_seconds": 8.88249433106576,
+      "speech_window_seconds": 8.88249433106576,
+      "tempo": 0.9204657337891978,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "속도는 같지 않습니다. 조용한 비탈과 폭우 뒤 하천, 화산 사건은 서로 다른 흔적을 남깁니다.",
+      "raw_seconds": 7.670136054421769,
+      "speech_window_seconds": 7.670136054421769,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "경사는 이동에도 중요합니다. 지도에서는 짧아도 능선과 골짜기를 건너는 힘든 길일 수 있습니다.",
+      "raw_seconds": 7.757392290249433,
+      "speech_window_seconds": 7.757392290249433,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "길과 농사, 정착은 그런 차이 속에서 자랍니다. 지리는 기회와 한계를 주지만 하나의 운명을 강요하지 않습니다.",
+      "raw_seconds": 8.983492063492063,
+      "speech_window_seconds": 8.983492063492063,
+      "tempo": 0.930931820050991,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "화산섬이라고 모두 젊은 용암은 아닙니다. 플로레스에는 리앙부아와 연결된 석회암도 있습니다.",
+      "raw_seconds": 8.076122448979591,
+      "speech_window_seconds": 8.076122448979591,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "석회암은 탄산염 물질과 오래된 환경의 다른 역사를 가집니다. 풍경에는 여러 지질학적 장이 겹칩니다.",
+      "raw_seconds": 8.73936507936508,
+      "speech_window_seconds": 8.73936507936508,
+      "tempo": 0.9056336869808372,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "이산화탄소가 녹은 물이 석회암 균열에 들어가면 길을 서서히 넓혀, 오랜 시간 뒤 빈 공간을 만들 수 있습니다.",
+      "raw_seconds": 8.603083900226757,
+      "speech_window_seconds": 8.603083900226757,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "일반적인 원리 설명입니다. 모든 방이 똑같이 생겼다거나 단순한 모형이 실제 동굴 지도라는 뜻은 아닙니다.",
+      "raw_seconds": 8.757573696145124,
+      "speech_window_seconds": 8.757573696145124,
+      "tempo": 0.9075205902741061,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "바위의 나이, 동굴의 발달, 나중에 쌓인 물질의 나이는 다른 질문입니다. 섞으면 장소를 지나치게 단순하게 만듭니다.",
+      "raw_seconds": 9.831292517006803,
+      "speech_window_seconds": 9.831292517006803,
+      "tempo": 1.0187867893271298,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "오래된 동굴에 훨씬 젊은 퇴적물이 있을 수 있습니다. 새 표면 아래나 옆에 오래된 물질도 숨습니다.",
+      "raw_seconds": 8.445850340136055,
+      "speech_window_seconds": 8.445850340136055,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "이 구분은 고고학적 연대에서 중요해집니다. 주변 지질은 이미 신중하게 읽는 법을 가르칩니다.",
+      "raw_seconds": 7.721768707482993,
+      "speech_window_seconds": 7.721768707482993,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "화산 봉우리는 극적인 윤곽을 만들고, 석회암 속 물은 증거를 보존할 조용한 공간을 만듭니다.",
+      "raw_seconds": 7.65328798185941,
+      "speech_window_seconds": 7.65328798185941,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "둘 다 플로레스에 속합니다. 환상적인 배경으로 바꾸기보다 주변 관계 속에서 이해해야 합니다.",
+      "raw_seconds": 7.855668934240363,
+      "speech_window_seconds": 7.855668934240363,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "땅이 기록 보관소의 배경을 주었습니다. 다음은 섬의 생명을 특별하게 만든 장벽, 바다입니다.",
+      "raw_seconds": 7.805079365079365,
+      "speech_window_seconds": 7.805079365079365,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "플로레스는 동남아시아와 호주의 큰 대륙붕 사이, 월레이시아 지역에 있습니다.",
+      "raw_seconds": 6.406848072562358,
+      "speech_window_seconds": 6.406848072562358,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "해수면이 낮을 때 여러 해안과 연결이 바뀌었습니다. 그래도 깊은 해협은 섬과 아시아 본토를 갈랐습니다.",
+      "raw_seconds": 8.567006802721089,
+      "speech_window_seconds": 8.567006802721089,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "물을 건너 섬에 닿는 일은 이어진 육지를 걷는 것과 다릅니다. 바다는 도착하고 남는 생물을 가려냅니다.",
+      "raw_seconds": 8.447845804988662,
+      "speech_window_seconds": 8.447845804988662,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "도착이 불가능했다는 뜻은 아닙니다. 성공한 횡단이 특히 중요한 결과를 가질 수 있었다는 뜻입니다.",
+      "raw_seconds": 7.696145124716553,
+      "speech_window_seconds": 7.696145124716553,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "동물은 드문 사건과 여러 방식으로 퍼집니다. 옛 인류가 정확히 어떻게 왔는지는 여전히 연구 대상입니다.",
+      "raw_seconds": 8.254943310657596,
+      "speech_window_seconds": 8.254943310657596,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "뗏목이나 경로, 폭풍에 따른 표류는 증거가 없으면 가설입니다. 가능한 일은 되찾은 기억과 다릅니다.",
+      "raw_seconds": 8.34204081632653,
+      "speech_window_seconds": 8.34204081632653,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "섬의 집단은 독특한 자원과 경쟁자, 포식자, 공간을 만납니다. 그런 조건이 여러 세대의 진화를 이끌 수 있습니다.",
+      "raw_seconds": 9.536213151927438,
+      "speech_window_seconds": 9.536213151927438,
+      "tempo": 0.9882086167800453,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "작아지는 동물도, 커지는 동물도 있습니다. 섬의 모든 생물이 반드시 작아진다는 규칙은 없습니다.",
+      "raw_seconds": 8.166077097505669,
+      "speech_window_seconds": 8.166077097505669,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "플로레스에는 코끼리의 친척인 작은 멸종 스테고돈 등 독특한 생태 공동체의 화석이 남아 있습니다.",
+      "raw_seconds": 8.126009070294785,
+      "speech_window_seconds": 8.126009070294785,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "화석은 옛 환경을 설명하지만, 모든 동물이 같은 장소와 순간에 있던 완전한 장면을 주지는 않습니다.",
+      "raw_seconds": 8.286598639455782,
+      "speech_window_seconds": 8.286598639455782,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "재현은 공간과 시간을 존중해야 합니다. 다른 층의 물건이 자동으로 같은 장면의 이웃이 되는 것은 아닙니다.",
+      "raw_seconds": 8.86732426303855,
+      "speech_window_seconds": 8.86732426303855,
+      "tempo": 0.9188937060143574,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "진화도 마찬가지입니다. 작은 몸을 설명하려면 해부와 연대, 비교, 그리고 하나 이상의 표본이 필요합니다.",
+      "raw_seconds": 8.66015873015873,
+      "speech_window_seconds": 8.66015873015873,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "바다는 결과를 보장하지 않았습니다. 다른 곳과 다른 역사가 생길 조건을 만드는 데 기여했습니다.",
+      "raw_seconds": 7.802086167800454,
+      "speech_window_seconds": 7.802086167800454,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "두 번째 열쇠입니다. 고립은 질문을 바꾸지만 증거 없이 답해 주지는 않습니다.",
+      "raw_seconds": 6.509115646258503,
+      "speech_window_seconds": 6.509115646258503,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "동굴로 돌아갑니다. 주변 섬은 본토의 단순한 복사본이 아닌 복잡한 기록을 예상하게 합니다.",
+      "raw_seconds": 7.645759637188209,
+      "speech_window_seconds": 7.645759637188209,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "리앙부아의 꾸준한 연구는 우리의 진화적 가족에 관한 익숙한 기대를 흔드는 것을 드러냈습니다.",
+      "raw_seconds": 7.416394557823129,
+      "speech_window_seconds": 7.416394557823129,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "이천삼 년, 중요한 유해가 발견되었습니다. 다음 해 호모 플로레시엔시스의 기재로 이어졌습니다.",
+      "raw_seconds": 7.685600907029478,
+      "speech_window_seconds": 7.685600907029478,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "플로레스와 연결된 멸종 인류의 이름입니다. 작은 몸과 특이한 해부학적 조합이 발견을 놀랍게 했습니다.",
+      "raw_seconds": 8.620113378684808,
+      "speech_window_seconds": 8.620113378684808,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "유명한 작은 개체는 성인이었습니다. 키가 작다는 것만으로 표본이 어린아이였다고 판단할 수 없습니다.",
+      "raw_seconds": 8.205034013605442,
+      "speech_window_seconds": 8.205034013605442,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "연구자는 여러 해부학적 단서를 살핍니다. 키 하나로 생애 단계를 정하지 않습니다.",
+      "raw_seconds": 7.055986394557823,
+      "speech_window_seconds": 7.055986394557823,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "신중한 연구는 관찰을 결합합니다. 작은 크기만으로 설명하지 않고 특징들이 어떻게 맞물리는지 묻습니다.",
+      "raw_seconds": 8.540226757369615,
+      "speech_window_seconds": 8.540226757369615,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "몸의 비율과 두개골 형태도 조사했습니다. 중요한 것은 하나의 놀라운 수치보다 특징의 조합이었습니다.",
+      "raw_seconds": 8.283265306122448,
+      "speech_window_seconds": 8.283265306122448,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "다른 인류와의 비교는 분류를 검토하고 현대인을 기준으로 한 기대와의 차이를 이해하게 했습니다.",
+      "raw_seconds": 7.284285714285715,
+      "speech_window_seconds": 7.284285714285715,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "과학적 논쟁이 이어졌습니다. 다른 해석도 추가 발견과 세부를 포함한 전체 증거에 답해야 했습니다.",
+      "raw_seconds": 7.989047619047619,
+      "speech_window_seconds": 7.989047619047619,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "종에 이름을 붙여도 질문이 사라지지 않습니다. 검증하고 다듬을 틀이 만들어집니다.",
+      "raw_seconds": 6.84702947845805,
+      "speech_window_seconds": 6.84702947845805,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "작은 뇌의 측정치가 모든 행동을 말해 주지도 않습니다. 능력에 관한 주장은 물질적 증거를 따라야 합니다.",
+      "raw_seconds": 8.681746031746032,
+      "speech_window_seconds": 8.681746031746032,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "석기는 또 다른 조사입니다. 형태와 맥락은 활동을 보여주지만 모든 제작자의 정체를 저절로 정하지 않습니다.",
+      "raw_seconds": 9.122086167800454,
+      "speech_window_seconds": 9.122086167800454,
+      "tempo": 0.9452939033990108,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "화석 가까이 있는 도구도 관계를 조사해야 합니다. 가까운 거리만으로 관련성을 증명하지 못합니다.",
+      "raw_seconds": 8.124557823129251,
+      "speech_window_seconds": 8.124557823129251,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "성과는 특이한 물건 발견만이 아니었습니다. 유해와 도구, 퇴적물과 비교를 연결한 것이었습니다.",
+      "raw_seconds": 8.01546485260771,
+      "speech_window_seconds": 8.01546485260771,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "그래서 조용한 발굴 사진이 꾸민 장면보다 많은 정보를 줍니다. 기록은 다시 검토할 수 있기 때문입니다.",
+      "raw_seconds": 8.343560090702947,
+      "speech_window_seconds": 8.343560090702947,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "별명은 관심을 모읍니다. 하지만 과학은 환상 속 등장인물이 아니라 실제 생물과 검증 가능한 증거를 다룹니다.",
+      "raw_seconds": 9.324784580498866,
+      "speech_window_seconds": 9.324784580498866,
+      "tempo": 0.9662989202589498,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "다음 질문은 피할 수 없습니다. 언제 살았으며 동굴은 그 시간을 얼마나 확실히 말할 수 있을까요?",
+      "raw_seconds": 7.937414965986394,
+      "speech_window_seconds": 7.937414965986394,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "지층은 위가 아래보다 젊은 가지런한 더미처럼 보입니다. 실제 퇴적은 훨씬 복잡할 수 있습니다.",
+      "raw_seconds": 7.891269841269842,
+      "speech_window_seconds": 7.891269841269842,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "침식이 일부를 지우고 나중 물질이 오래된 층 옆을 메웁니다. 형태를 오해하면 가까운 위치도 판단을 흐립니다.",
+      "raw_seconds": 9.030204081632654,
+      "speech_window_seconds": 9.030204081632654,
+      "tempo": 0.935772443692503,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "발굴 구역 전체에서 관계를 따라야 합니다. 하나의 수직선만으로 전체 역사를 읽을 수 없습니다.",
+      "raw_seconds": 8.054331065759637,
+      "speech_window_seconds": 8.054331065759637,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "연대 측정법마다 재료와 과정이 다릅니다. 정확히 무엇을 측정했는지 알아야 숫자가 유용해집니다.",
+      "raw_seconds": 8.271950113378685,
+      "speech_window_seconds": 8.271950113378685,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "퇴적물의 나이가 자동으로 뼈의 나이는 아닙니다. 시료와 고고학적 사건의 관계를 확인해야 합니다.",
+      "raw_seconds": 8.034195011337868,
+      "speech_window_seconds": 8.034195011337868,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "리앙부아에서는 지층을 더 잘 이해하면서 연대를 수정했습니다. 연대 측정 자체가 무의미하다는 이야기는 아닙니다.",
+      "raw_seconds": 8.83718820861678,
+      "speech_window_seconds": 8.83718820861678,
+      "tempo": 0.9157707988203917,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "수정된 틀에서 알려진 호모 플로레시엔시스 유해는 대략 십만 년에서 육만 년 전으로 놓입니다.",
+      "raw_seconds": 7.605578231292517,
+      "speech_window_seconds": 7.605578231292517,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "관련 석기 기록은 더 뒤인 약 오만 년 전까지 이어집니다. 유해와 도구는 똑같은 시계가 아닙니다.",
+      "raw_seconds": 7.934512471655329,
+      "speech_window_seconds": 7.934512471655329,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "이는 해석된 대략의 범위입니다. 한 종 전체의 정확한 생일이나 마지막 날을 뜻하지 않습니다.",
+      "raw_seconds": 7.86140589569161,
+      "speech_window_seconds": 7.86140589569161,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "마지막으로 보존된 흔적은 현재 증거가 끝나는 지점입니다. 섬 전체에서 사라진 순간을 바로 말해 주지는 않습니다.",
+      "raw_seconds": 9.615034013605442,
+      "speech_window_seconds": 9.615034013605442,
+      "tempo": 0.9963765817207711,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "이 구분은 이야기를 극적으로 끝내려고 마지막 재앙을 지어내는 실수를 막습니다.",
+      "raw_seconds": 6.580022675736961,
+      "speech_window_seconds": 6.580022675736961,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "환경과 생태, 화산 활동, 다른 집단과의 만남은 연구 질문입니다. 각각의 역할에는 증거가 필요합니다.",
+      "raw_seconds": 8.857437641723356,
+      "speech_window_seconds": 8.857437641723356,
+      "tempo": 0.9178691856708141,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "결과를 다시 살필 수 있어 지식이 발전합니다. 수정된 연대는 이야기를 바꾸며 연구 방법을 강화할 수 있습니다.",
+      "raw_seconds": 8.676938775510203,
+      "speech_window_seconds": 8.676938775510203,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "동굴은 바늘 하나짜리 시계가 아닙니다. 여러 증거가 서로 해석을 제한하고 확인하는 관계망입니다.",
+      "raw_seconds": 7.966077097505669,
+      "speech_window_seconds": 7.966077097505669,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "그 관계를 읽으면 리앙부아 밖, 더 오래된 과거를 남긴 곳으로 나아갑니다.",
+      "raw_seconds": 6.167074829931972,
+      "speech_window_seconds": 6.167074829931972,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "질문이 커집니다. 이 동굴의 거주자뿐 아니라, 인류는 얼마나 오래 섬의 세계에 속해 있었을까요?",
+      "raw_seconds": 8.199637188208618,
+      "speech_window_seconds": 8.199637188208618,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "소아 분지의 마타멩게에는 약 칠십만 년 전까지 거슬러 올라가는 훨씬 오래된 화석 증거가 있습니다.",
+      "raw_seconds": 8.154036281179138,
+      "speech_window_seconds": 8.154036281179138,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "발견은 단편적이며 해부와 맥락의 검토가 필요합니다. 오래된 날짜만으로 완전한 조상 초상은 얻지 못합니다.",
+      "raw_seconds": 9.295419501133788,
+      "speech_window_seconds": 9.295419501133788,
+      "tempo": 0.9632559068532422,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "그래도 섬의 인류 역사가 유명한 리앙부아 유해보다 훨씬 이전부터 이어졌음을 보여줍니다.",
+      "raw_seconds": 7.214489795918367,
+      "speech_window_seconds": 7.214489795918367,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "다른 곳의 더 오래된 석기도 시야를 넓힙니다. 활동을 입증하지만 모든 생물학적 정체를 풀지는 않습니다.",
+      "raw_seconds": 8.671632653061225,
+      "speech_window_seconds": 8.671632653061225,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "집단의 관계와 특징이 생긴 시기, 관련된 조상은 여전히 비교와 연구의 질문입니다.",
+      "raw_seconds": 7.016870748299319,
+      "speech_window_seconds": 7.016870748299319,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "조상 가설에는 호모 에렉투스도 등장합니다. 하지만 계보의 모든 가지를 직접 본 것처럼 그려서는 안 됩니다.",
+      "raw_seconds": 8.682108843537415,
+      "speech_window_seconds": 8.682108843537415,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "정직한 도표에는 빈칸이 있습니다. 확인된 발견과 제안된 연결을 나누고 새로운 증거의 자리를 남깁니다.",
+      "raw_seconds": 8.679455782312925,
+      "speech_window_seconds": 8.679455782312925,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "이는 섬의 의미를 줄이지 않습니다. 플로레스가 인류 진화의 큰 이야기에 중요한 이유를 설명합니다.",
+      "raw_seconds": 7.982426303854876,
+      "speech_window_seconds": 7.982426303854876,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "본토의 지식은 비교에 유용하지만 모든 섬 집단이 똑같이 따라야 했던 지침은 아닙니다.",
+      "raw_seconds": 6.787868480725623,
+      "speech_window_seconds": 6.787868480725623,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "깊은 바다와 특별한 생태, 긴 기록이 인간 과거의 다양성을 보여줍니다.",
+      "raw_seconds": 5.932834467120181,
+      "speech_window_seconds": 5.932834467120181,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "먼 시간을 떠나기 전에 기억합시다. 오늘의 주민에게는 자신들의 역사와 현대의 삶이 있습니다.",
+      "raw_seconds": 8.125238095238096,
+      "speech_window_seconds": 8.125238095238096,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "그들은 멸종종을 설명하는 전시물이 아닙니다. 증거에 대한 존중은 현재에 대한 존중과 함께해야 합니다.",
+      "raw_seconds": 8.569274376417233,
+      "speech_window_seconds": 8.569274376417233,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "이야기는 동쪽으로 갑니다. 또 다른 유명한 풍경, 색으로 방문객을 놀라게 하는 화산호입니다.",
+      "raw_seconds": 7.68390022675737,
+      "speech_window_seconds": 7.68390022675737,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "켈리무투에는 이웃한 분지에 세 화구호가 있습니다. 바뀌는 모습이 섬의 대표 풍경이 되었습니다.",
+      "raw_seconds": 7.849705215419501,
+      "speech_window_seconds": 7.849705215419501,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "물의 화학과 가스, 광물, 날씨, 보는 조건이 색에 영향을 줍니다. 가까운 호수도 똑같이 움직이지 않습니다.",
+      "raw_seconds": 9.283877551020408,
+      "speech_window_seconds": 9.283877551020408,
+      "tempo": 0.9620598498466744,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "사진은 한순간의 모습입니다. 미래의 모든 방문객에게 똑같은 세 색을 약속하지 않습니다.",
+      "raw_seconds": 7.587414965986395,
+      "speech_window_seconds": 7.587414965986395,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "생성 영상도 화학 변화를 순간적인 마법으로 만들면 안 됩니다. 설명은 시간과 증거의 한계를 존중해야 합니다.",
+      "raw_seconds": 9.232585034013605,
+      "speech_window_seconds": 9.232585034013605,
+      "tempo": 0.956744563110218,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "호수는 물과 화산의 틀을 연결합니다. 아름다운 표면 아래에 계속 움직이는 과정이 숨어 있을 수 있습니다.",
+      "raw_seconds": 8.473378684807257,
+      "speech_window_seconds": 8.473378684807257,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "다른 곳에서는 바자와 근처 이네리에의 뾰족한 산체가 사람 사는 땅 위로 솟습니다.",
+      "raw_seconds": 7.0541269841269845,
+      "speech_window_seconds": 7.0541269841269845,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "산이 안전한 접근을 보장하지는 않습니다. 실제 방문에는 현재 상황과 지역 안내, 공식 정보가 중요합니다.",
+      "raw_seconds": 8.89092970521542,
+      "speech_window_seconds": 8.89092970521542,
+      "tempo": 0.9213398658254321,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "숲과 밭, 길과 마을이 명소를 잇습니다. 유명한 전망 사이에도 섬은 계속됩니다.",
+      "raw_seconds": 7.0068707482993196,
+      "speech_window_seconds": 7.0068707482993196,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "비와 경사, 배수는 농사와 건축, 이동을 좌우합니다. 우리가 연구하는 물질 기록에도 영향을 줍니다.",
+      "raw_seconds": 8.402789115646259,
+      "speech_window_seconds": 8.402789115646259,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "살아 있는 전통이 깊이를 더합니다. 언어와 역사, 관습이 다양하므로 마을 하나가 섬 전체를 대표하지 않습니다.",
+      "raw_seconds": 9.143469387755102,
+      "speech_window_seconds": 9.143469387755102,
+      "tempo": 0.9475097811145183,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "서부의 와에레보는 원뿔형 집으로 알려져 있습니다. 그 의미는 예쁜 지붕보다 살아 있는 공동체에 있습니다.",
+      "raw_seconds": 9.130839002267575,
+      "speech_window_seconds": 9.130839002267575,
+      "tempo": 0.9462009328774689,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "건축을 본다면 관리와 손님맞이, 촬영과 출입을 누가 결정하는지도 생각해야 합니다.",
+      "raw_seconds": 7.3073922902494335,
+      "speech_window_seconds": 7.3073922902494335,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "존중하는 영화는 성인의 일상과 허용된 외관을 담습니다. 의식을 꾸미거나 편리한 과거의 연기를 요구하지 않습니다.",
+      "raw_seconds": 9.534875283446713,
+      "speech_window_seconds": 9.534875283446713,
+      "tempo": 0.9880699775592449,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "출입은 관계의 일부입니다. 온라인에서 발견했다는 사실은 지역의 합의와 보호 규칙을 대신하지 않습니다.",
+      "raw_seconds": 8.69734693877551,
+      "speech_window_seconds": 8.69734693877551,
+      "tempo": 0.9012794755207783,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "동굴에서도 같습니다. 좋은 각도를 위해 지층을 흐트러뜨리고 유물을 만지거나 폐쇄 구역을 넘으면 안 됩니다.",
+      "raw_seconds": 8.635192743764172,
+      "speech_window_seconds": 8.635192743764172,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "퇴적물은 유한한 기록입니다. 맥락이 사라지면 사진을 더 찍어도 되찾지 못하는 정보가 있습니다.",
+      "raw_seconds": 7.739455782312925,
+      "speech_window_seconds": 7.739455782312925,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "기록과 보존, 지역 참여는 증거와 그것에 의미를 주는 장소를 지킵니다.",
+      "raw_seconds": 6.104285714285714,
+      "speech_window_seconds": 6.104285714285714,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "재현은 관계를 설명하는 도구입니다. 실제 발굴이나 완전한 옛 생태계, 해결된 도착 경로를 보여준다는 뜻은 아닙니다.",
+      "raw_seconds": 9.80859410430839,
+      "speech_window_seconds": 9.80859410430839,
+      "tempo": 1.0164346222081233,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "영상이 실제처럼 보일수록 구분이 중요합니다. 카메라로 찍은 듯 보여도 설명용 모형일 수 있습니다.",
+      "raw_seconds": 8.292766439909297,
+      "speech_window_seconds": 8.292766439909297,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "정직함은 경이로움을 지우지 않습니다. 동굴과 호수, 화산암이 어떤 질문에 답하는지 알면 더 흥미로워집니다.",
+      "raw_seconds": 9.099365079365079,
+      "speech_window_seconds": 9.099365079365079,
+      "tempo": 0.9429393864627024,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "땅의 형성, 바다를 넘은 것, 시간의 변화, 남은 증거. 이 질문들은 연결됩니다.",
+      "raw_seconds": 7.047256235827664,
+      "speech_window_seconds": 7.047256235827664,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "동굴로 돌아갑니다. 바다는 도착과 고립을 좌우했고 섬은 변화하는 생태 환경을 제공했습니다.",
+      "raw_seconds": 7.635759637188209,
+      "speech_window_seconds": 7.635759637188209,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "지질은 서식지와 흔적이 쌓일 곳을 만들었습니다. 인간 활동은 자연 사건과 섞이는 기록을 더했습니다.",
+      "raw_seconds": 8.289092970521542,
+      "speech_window_seconds": 8.289092970521542,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "발굴이 되찾은 것은 물건만이 아니라 관계였습니다. 해부와 연대는 그것을 진화의 질문으로 바꿨습니다.",
+      "raw_seconds": 8.522448979591836,
+      "speech_window_seconds": 8.522448979591836,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "모든 단계에서 맥락이 중요했습니다. 출처 없는 표본, 이력 없는 날짜, 설명 없는 그림은 적게 말해 줍니다.",
+      "raw_seconds": 8.940929705215419,
+      "speech_window_seconds": 8.940929705215419,
+      "tempo": 0.926521212975691,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "플로레스는 놀라운 화석 이상을 줍니다. 서로 다른 지식은 함께 일할 때 더 강해집니다.",
+      "raw_seconds": 7.215170068027211,
+      "speech_window_seconds": 7.215170068027211,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "그 과거는 현재 사람과 경관, 책임과 섬을 공유합니다. 한 부분을 지킬 때 다른 부분도 봐야 합니다.",
+      "raw_seconds": 8.298163265306123,
+      "speech_window_seconds": 8.298163265306123,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "조상과 도착, 행동, 알려진 기록에서 집단이 사라지는 일에는 여전히 많은 질문이 있습니다.",
+      "raw_seconds": 7.447256235827664,
+      "speech_window_seconds": 7.447256235827664,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "미래의 발견이 질문이나 답을 바꿀 수 있습니다. 지금 확실함을 강요하기보다 증거를 지켜야 하는 이유입니다.",
+      "raw_seconds": 8.703628117913832,
+      "speech_window_seconds": 8.703628117913832,
+      "tempo": 0.9019303749133504,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "방문한다면 호기심과 주의를 함께 가지세요. 허용된 길과 지역 안내를 따르고 유산과 서식지를 그대로 두세요.",
+      "raw_seconds": 9.014489795918367,
+      "speech_window_seconds": 9.014489795918367,
+      "tempo": 0.9341440203024214,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "이야기한다면 발견과 추론, 재현을 구분하세요. 단순한 쪽이 더 극적이어도 그 경계를 지키세요.",
+      "raw_seconds": 8.02156462585034,
+      "speech_window_seconds": 8.02156462585034,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "동굴 입구가 돌아옵니다. 햇빛은 밝은 바위를 비추고 땅은 다시 평범해 보입니다.",
+      "raw_seconds": 6.764285714285714,
+      "speech_window_seconds": 6.764285714285714,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "이제는 여러 역사가 보입니다. 바위의 형성, 물의 이동, 물질의 도착, 해석하는 작업입니다.",
+      "raw_seconds": 7.788140589569161,
+      "speech_window_seconds": 7.788140589569161,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "밖에는 푸른 언덕과 화산, 경작지, 이웃을 가르면서 잇는 바다가 이어집니다.",
+      "raw_seconds": 6.45297052154195,
+      "speech_window_seconds": 6.45297052154195,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "플로레스는 하나의 비밀 열쇠를 기다리는 수수께끼가 아닙니다. 신중한 증거로 선명해지는 질문들의 만남입니다.",
+      "raw_seconds": 9.421473922902495,
+      "speech_window_seconds": 9.421473922902495,
+      "tempo": 0.9763185412334191,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "작은 흔적도 맥락이 남으면 큰 이야기를 바꿉니다. 꾸민 장관보다 인내심 있는 연구가 강한 이유입니다.",
+      "raw_seconds": 8.637256235827664,
+      "speech_window_seconds": 8.637256235827664,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "중요한 여행은 보는 것에서 이해로 가는 일입니다. 장소가 말하게 하는 것과 열린 질문을 배우는 길입니다.",
+      "raw_seconds": 8.569274376417233,
+      "speech_window_seconds": 8.569274376417233,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "섬은 놀라운 증거와 다음 장을 후대에 남길 책임을 함께 줍니다.",
+      "raw_seconds": 5.774172335600907,
+      "speech_window_seconds": 5.774172335600907,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "동굴 입구에서 빛은 끝납니다. 질문은 계속되어, 하나의 섬에서 더 넓은 인간의 과거로 우리를 이끕니다.",
+      "raw_seconds": 8.802766439909297,
+      "speech_window_seconds": 8.802766439909297,
+      "tempo": 0.9122037761564038,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1320,
+  "decoded_samples": 31680000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-ko-22m00s.mp3",
+  "flac": "voice-ko-22m00s.flac",
+  "mp3_sha256": "1a8a1b020389b428d4a84daf40210e726ae7c97ae0d19429ad8db5e03ac6b055",
+  "flac_sha256": "2c3d376e6139b8f4176ffbbb8e7d090f3de8218b1e27c7c6cfb30bb989481e7e"
+}

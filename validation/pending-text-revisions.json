@@ -1,0 +1,36 @@
+{
+  "status": "resolved",
+  "revised_cues": {
+    "en": [
+      53
+    ],
+    "vi": [
+      53
+    ],
+    "da": [
+      112
+    ],
+    "pl": [
+      71
+    ],
+    "fi": [
+      39
+    ],
+    "cs": [
+      27,
+      30,
+      37,
+      39,
+      41,
+      44,
+      53,
+      56,
+      59,
+      76,
+      100,
+      106,
+      108
+    ]
+  },
+  "verification": "Current scripts must match all 17 audio config hashes in final validator."
+}

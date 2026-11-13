@@ -1,0 +1,1209 @@
+{
+  "locale": "da",
+  "voice_id": "piper:da_DK-talesyntese-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1320,
+  "spoken_cues": 132,
+  "closing_silence_seconds": 0,
+  "config_hash": "852caf44ea7c101b258caf483f4930a95a403c6d976fcef2bec5c663b904e792",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "Ved en hules åbning falder dagslyset over den lyse sten og standser. Længere inde gemmer jorden på en anden slags lys.",
+      "raw_seconds": 6.768616780045352,
+      "speech_window_seconds": 6.768616780045352,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Det er forståelsens lys: et omhyggeligt registreret jordlag, et stenredskab og et spørgsmål, ingen havde ventet at stille.",
+      "raw_seconds": 6.362267573696145,
+      "speech_window_seconds": 6.362267573696145,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "På Flores ændrede en hule vores fortælling om menneskets udvikling. For at forstå hvorfor må vi også forstå selve øen.",
+      "raw_seconds": 6.373877551020408,
+      "speech_window_seconds": 6.373877551020408,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Flores ligger i det østlige Indonesien, i Østnusa Tenggara. Stejlt terræn, vulkaner og hav former mulighederne for at komme omkring.",
+      "raw_seconds": 7.163356009070295,
+      "speech_window_seconds": 7.163356009070295,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Kysten viser os en ø, vi kan betragte. Klipper og aflejringer viser os en ø, vi kan læse.",
+      "raw_seconds": 5.445079365079365,
+      "speech_window_seconds": 5.445079365079365,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Den læsning fører fra kalkstensmørke til vulkanske søer, fra fortidens ankomster til nutidens samfund mellem de foranderlige bakker.",
+      "raw_seconds": 7.441995464852607,
+      "speech_window_seconds": 7.441995464852607,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Vores spørgsmål er enkelt: Hvordan bevarede denne ø et kapitel af menneskets fortid, der virkede så uventet, da det blev fundet?",
+      "raw_seconds": 6.826666666666667,
+      "speech_window_seconds": 6.826666666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Svaret kræver geografi, geologi, biologi og tålmodige udgravninger. Intet af disse fag kan forklare hele historien alene.",
+      "raw_seconds": 7.883174603174603,
+      "speech_window_seconds": 7.883174603174603,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Vi følger spor i forskellige størrelser: et havstræde, et bjerg, en huleåbning og små detaljer i et lag jord.",
+      "raw_seconds": 6.373877551020408,
+      "speech_window_seconds": 6.373877551020408,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Vi skelner også mellem fund og fortolkning. En god rekonstruktion gør grænsen tydeligere, selv når billederne virker overbevisende.",
+      "raw_seconds": 7.047256235827664,
+      "speech_window_seconds": 7.047256235827664,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Det kendteste sted på ruten er Liang Bua, en kalkstenshule på det vestlige Flores, nær området omkring Ruteng.",
+      "raw_seconds": 6.884716553287982,
+      "speech_window_seconds": 6.884716553287982,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Hulen er ikke vigtig, blot fordi mørke virker gådefuldt. Materiale samlede sig her, blev bevaret og kunne undersøges i sammenhæng.",
+      "raw_seconds": 7.093696145124716,
+      "speech_window_seconds": 7.093696145124716,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "En løs genstand kan antyde en historie. Når dens placering, omgivelser og aflejringshistorie kendes, bliver fortællingens grundlag langt stærkere.",
+      "raw_seconds": 8.881632653061224,
+      "speech_window_seconds": 8.881632653061224,
+      "tempo": 0.9203764407317331,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Vi begynder derfor med jorden under fødderne. Før vi forestiller os fortidens liv, må vi spørge, hvordan sporene kom hertil.",
+      "raw_seconds": 6.617687074829932,
+      "speech_window_seconds": 6.617687074829932,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Nogle skyldes menneskelig aktivitet. Andre kom med vand, dyr eller tyngdekraft, eller blev senere forstyrret. Det kræver arbejde at skelne dem.",
+      "raw_seconds": 8.219863945578231,
+      "speech_window_seconds": 8.219863945578231,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Hulen er både et sted og et arkiv. Dens sider blev skrevet af flere kræfter, som undertiden skrev oven i hinanden.",
+      "raw_seconds": 6.942766439909297,
+      "speech_window_seconds": 6.942766439909297,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Først går vi udenfor. Flores ligger i en region, hvor tektoniske pladers samspil har været med til at skabe lange vulkanske landskaber.",
+      "raw_seconds": 7.209795918367347,
+      "speech_window_seconds": 7.209795918367347,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "På et kort virker øen uforanderlig. I virkeligheden er den en midlertidig overflade skabt af processer langt ældre end et menneskeliv.",
+      "raw_seconds": 7.035646258503402,
+      "speech_window_seconds": 7.035646258503402,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Vulkanisme danner sten og højdeforskelle. Forvitring, vand og tyngdekraft ændrer dem og flytter materiale gennem dale mod lavere områder.",
+      "raw_seconds": 7.9760544217687075,
+      "speech_window_seconds": 7.9760544217687075,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Processerne foregår ikke lige hurtigt. En rolig skråning, en regnfyldt bæk og en vulkansk hændelse efterlader meget forskellige spor.",
+      "raw_seconds": 7.616145124716553,
+      "speech_window_seconds": 7.616145124716553,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Stejlheden betyder også noget for mennesker. En kort afstand på kortet kan kræve en vanskelig vej over højderygge og dale.",
+      "raw_seconds": 7.22140589569161,
+      "speech_window_seconds": 7.22140589569161,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Ruter, dyrkning og bosættelser udvikles inden for disse forskelle. Geografien giver muligheder og begrænsninger, uden at bestemme én uundgåelig skæbne.",
+      "raw_seconds": 8.40562358276644,
+      "speech_window_seconds": 8.40562358276644,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Men en vulkanø består ikke nødvendigvis kun af ung lava. Flores har også kalksten, blandt andet den omkring Liang Bua.",
+      "raw_seconds": 6.977596371882086,
+      "speech_window_seconds": 6.977596371882086,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Kalkstenen har en anden historie, knyttet til karbonatmateriale og ældre miljøer. Landskabet rummer altså flere geologiske kapitler.",
+      "raw_seconds": 7.883174603174603,
+      "speech_window_seconds": 7.883174603174603,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Når vand med opløst kuldioxid trænger ind i sprækker, kan kemiske processer langsomt udvide dem og efterhånden danne hulrum i kalksten.",
+      "raw_seconds": 7.813514739229025,
+      "speech_window_seconds": 7.813514739229025,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Det forklarer en almindelig proces. Det betyder ikke, at alle kamre blev dannet ens, eller at diagrammet viser den virkelige hule.",
+      "raw_seconds": 6.733786848072563,
+      "speech_window_seconds": 6.733786848072563,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Klippealder, huldannelse og alderen på senere aflejringer er forskellige spørgsmål. Blandes de sammen, virker fortidens landskab enklere, end det var.",
+      "raw_seconds": 8.544943310657596,
+      "speech_window_seconds": 8.544943310657596,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "En gammel hule kan rumme langt yngre jordlag. En overflade, der ser ung ud, kan skjule ældre materiale nedenunder eller ved siden af.",
+      "raw_seconds": 7.883174603174603,
+      "speech_window_seconds": 7.883174603174603,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Forskellen bliver afgørende, når vi når til arkæologiske dateringer. Geologien lærer os allerede at læse sporene med større omtanke.",
+      "raw_seconds": 7.441995464852607,
+      "speech_window_seconds": 7.441995464852607,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Læg mærke til kontrasten: Vulkaner tegner dramatiske horisonter, mens vand i kalksten kan skabe stille rum, hvor fortidens spor bevares.",
+      "raw_seconds": 8.231473922902495,
+      "speech_window_seconds": 8.231473922902495,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Begge dele hører til Flores. Ingen af dem kræver fantasikulisser, og øens historie afhænger af deres forbindelser til andre processer.",
+      "raw_seconds": 7.024036281179138,
+      "speech_window_seconds": 7.024036281179138,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Landskabet giver arkivet dets ramme. Nu kommer barrieren, som var med til at gøre øens liv særligt: havet.",
+      "raw_seconds": 5.88625850340136,
+      "speech_window_seconds": 5.88625850340136,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Flores ligger i Wallacea, øregionen mellem de store kontinentalsokler ved Sydøstasien og Australien.",
+      "raw_seconds": 5.5147392290249435,
+      "speech_window_seconds": 5.5147392290249435,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Da havniveauet var lavere, ændredes kyster og forbindelser mange steder. Dybe havkanaler adskilte stadig Flores fra det asiatiske fastland.",
+      "raw_seconds": 7.918004535147392,
+      "speech_window_seconds": 7.918004535147392,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "At nå en ø over vand er noget andet end at følge sammenhængende land. Havet påvirker, hvilke organismer der ankommer og bliver.",
+      "raw_seconds": 6.780226757369615,
+      "speech_window_seconds": 6.780226757369615,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Det betyder ikke, at ankomst var umulig. Det betyder, at vellykkede overfarter kunne få usædvanligt stor betydning.",
+      "raw_seconds": 6.246167800453515,
+      "speech_window_seconds": 6.246167800453515,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Dyr kan spredes gennem sjældne hændelser på flere måder. Hvordan fortidens homininer præcist nåede Flores, undersøges stadig.",
+      "raw_seconds": 7.233015873015873,
+      "speech_window_seconds": 7.233015873015873,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "En foreslået tømmerflåde, rute eller stormrejse er en hypotese, indtil spor forbinder den med hændelsen. Mulighed er ikke erindring.",
+      "raw_seconds": 7.697414965986394,
+      "speech_window_seconds": 7.697414965986394,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "På øer møder bestande særlige kombinationer af føde, konkurrenter, rovdyr og plads. Gennem generationer kan det påvirke udviklingen.",
+      "raw_seconds": 7.9412244897959186,
+      "speech_window_seconds": 7.9412244897959186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Nogle ødyr bliver mindre, andre større. Mange følger mere sammensatte veje. Der findes ingen regel om, at alle dyr skrumper.",
+      "raw_seconds": 7.476825396825397,
+      "speech_window_seconds": 7.476825396825397,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Flores har fossiler af uddøde dyr, blandt andet små stegodonter, der var beslægtet med elefanter, i et særligt økologisk samfund.",
+      "raw_seconds": 7.000816326530612,
+      "speech_window_seconds": 7.000816326530612,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Fossilerne fortæller om tidligere miljøer. De viser ikke nødvendigvis alle dyrene levende på samme sted og på samme tidspunkt.",
+      "raw_seconds": 7.047256235827664,
+      "speech_window_seconds": 7.047256235827664,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "En rekonstruktion skal respektere både tid og rum. Genstande fra forskellige lag bliver ikke automatisk naboer i én dramatisk scene.",
+      "raw_seconds": 7.848344671201814,
+      "speech_window_seconds": 7.848344671201814,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Det gælder også evolution. En lille krop kan foreslå en forklaring, men historien kræver anatomi, dateringer, sammenligninger og flere fund.",
+      "raw_seconds": 7.790294784580499,
+      "speech_window_seconds": 7.790294784580499,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Havet fastlagde ikke ét bestemt resultat. Det skabte betingelser, hvor bestande kunne udvikle historier, som adskilte sig fra andre steders.",
+      "raw_seconds": 8.057324263038549,
+      "speech_window_seconds": 8.057324263038549,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Her er fortællingens anden nøgle: Isolation kan ændre vores spørgsmål, men kan ikke besvare dem uden dokumentation.",
+      "raw_seconds": 6.013968253968254,
+      "speech_window_seconds": 6.013968253968254,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Nu vender vi tilbage til hulen. Øens omgivelser har forberedt os på et sammensat arkiv, ikke blot en kopi af fastlandet.",
+      "raw_seconds": 6.710566893424036,
+      "speech_window_seconds": 6.710566893424036,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "I Liang Bua skulle tålmodigt arbejde i dette arkiv udfordre velkendte forestillinger om vores egen evolutionære familie.",
+      "raw_seconds": 7.000816326530612,
+      "speech_window_seconds": 7.000816326530612,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "I to tusind og tre fandt forskere rester i Liang Bua, som året efter blev centrale i beskrivelsen af Homo floresiensis.",
+      "raw_seconds": 7.859954648526077,
+      "speech_window_seconds": 7.859954648526077,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Navnet betegner en uddød hominin fra Flores. Den lille krop og en usædvanlig kombination af anatomiske træk gjorde fundet bemærkelsesværdigt.",
+      "raw_seconds": 8.928072562358278,
+      "speech_window_seconds": 8.928072562358278,
+      "tempo": 0.9251888665656246,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Det berømte lille individ var voksent. Lav højde er ikke i sig selv bevis for, at et fund stammer fra et barn.",
+      "raw_seconds": 5.793378684807256,
+      "speech_window_seconds": 5.793378684807256,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Det har videnskabelig betydning. Forskere undersøger flere anatomiske tegn i stedet for at afgøre alderstrin ud fra højden alene.",
+      "raw_seconds": 7.209795918367347,
+      "speech_window_seconds": 7.209795918367347,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "En omhyggelig anatomisk undersøgelse samler flere observationer. Den spørger, hvordan trækkene hænger sammen, frem for at lade størrelsen forklare alt.",
+      "raw_seconds": 7.848344671201814,
+      "speech_window_seconds": 7.848344671201814,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Blandt de undersøgte træk var kropsproportioner og kraniets form. Spørgsmålet gjaldt kombinationen, ikke blot ét overraskende mål.",
+      "raw_seconds": 7.349115646258503,
+      "speech_window_seconds": 7.349115646258503,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Sammenligninger med andre homininer hjalp med at klassificere resterne og forstå, hvorfor de afveg fra velkendte moderne menneskers anatomi.",
+      "raw_seconds": 7.767074829931973,
+      "speech_window_seconds": 7.767074829931973,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Der fulgte videnskabelig debat. Andre fortolkninger måtte forholde sig til hele materialet, også senere fund og detaljer ud over førsteindtrykket.",
+      "raw_seconds": 7.918004535147392,
+      "speech_window_seconds": 7.918004535147392,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Det er vigtigt: Et artsnavn afslutter ikke alle spørgsmål. Det skaber en ramme, som kan afprøves og forbedres.",
+      "raw_seconds": 6.3854875283446715,
+      "speech_window_seconds": 6.3854875283446715,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Et lille hjernemål fortæller heller ikke automatisk alt om adfærd. Påstande om evner må bygge på materielle spor.",
+      "raw_seconds": 6.408707482993197,
+      "speech_window_seconds": 6.408707482993197,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Stenredskaber giver en anden undersøgelsesvej. Form og arkæologisk sammenhæng kan vise aktiviteter, men identificerer ikke automatisk hver enkelt redskabsmager.",
+      "raw_seconds": 9.520181405895691,
+      "speech_window_seconds": 9.520181405895691,
+      "tempo": 0.98654729594774,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Et redskab nær et fossil får betydning gennem sammenhængen. En forbindelse skal undersøges, ikke blot antages på grund af nærhed.",
+      "raw_seconds": 7.093696145124716,
+      "speech_window_seconds": 7.093696145124716,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Bedriften var mere end at finde noget usædvanligt. Man samlede forbindelser mellem rester, redskaber, aflejringer og anatomiske sammenligninger.",
+      "raw_seconds": 7.453605442176871,
+      "speech_window_seconds": 7.453605442176871,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Derfor kan et stille udgravningsfoto fortælle mere end en storslået opdigtet scene. Dokumentationen kan undersøges igen af andre.",
+      "raw_seconds": 6.942766439909297,
+      "speech_window_seconds": 6.942766439909297,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Populære kælenavne kan vække interesse. Videnskaben handler dog om virkelige organismer og efterprøvelige spor, ikke figurer hentet fra fantasien.",
+      "raw_seconds": 8.196643990929704,
+      "speech_window_seconds": 8.196643990929704,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Det næste spørgsmål er uundgåeligt: Hvornår levede disse homininer, og hvor sikkert kan en hule fortælle om deres tid?",
+      "raw_seconds": 6.373877551020408,
+      "speech_window_seconds": 6.373877551020408,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Jordlag kan ligne en ordnet stak, hvor hvert lag er yngre end laget nedenunder. Virkelige aflejringer er ofte mere indviklede.",
+      "raw_seconds": 7.070476190476191,
+      "speech_window_seconds": 7.070476190476191,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Erosion kan fjerne dele af en lagfølge. Yngre materiale kan samle sig ved siden af ældre og gøre nærliggende positioner misvisende.",
+      "raw_seconds": 7.244625850340136,
+      "speech_window_seconds": 7.244625850340136,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Forskere må følge forbindelser gennem hele udgravningen. En enkelt lodret linje kan ikke uden videre fortælle hele historien.",
+      "raw_seconds": 6.710566893424036,
+      "speech_window_seconds": 6.710566893424036,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Forskellige dateringsmetoder undersøger forskellige materialer og processer. Et tal bliver nyttigt, når vi ved, hvad der faktisk blev målt.",
+      "raw_seconds": 7.662585034013605,
+      "speech_window_seconds": 7.662585034013605,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Et jordlags alder er ikke automatisk en knogles alder. Forbindelsen mellem prøven og den arkæologiske hændelse skal dokumenteres.",
+      "raw_seconds": 7.569705215419501,
+      "speech_window_seconds": 7.569705215419501,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Ved Liang Bua ændrede nye undersøgelser tidsrammen. Det skyldtes bedre forståelse af aflejringerne og viste ikke, at datering var meningsløs.",
+      "raw_seconds": 7.825124716553288,
+      "speech_window_seconds": 7.825124716553288,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Den reviderede tidsramme placerer de kendte skeletrester af Homo floresiensis omtrent mellem hundrede tusind og tres tusind år tilbage.",
+      "raw_seconds": 7.6741950113378685,
+      "speech_window_seconds": 7.6741950113378685,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Stenredskaber i den relevante arkæologiske lagfølge fortsætter senere, til cirka halvtreds tusind år tilbage. Fossiler og redskaber er forskellige tidsmarkører.",
+      "raw_seconds": 9.137052154195011,
+      "speech_window_seconds": 9.137052154195011,
+      "tempo": 0.9468447828181359,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Det er omtrentlige intervaller i et fortolket arkiv. De angiver ikke en hel arts præcise fødselsdag eller sidste levedag.",
+      "raw_seconds": 6.548027210884354,
+      "speech_window_seconds": 6.548027210884354,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Det sidste bevarede spor viser, hvor vores dokumentation foreløbig ender. Det viser ikke automatisk, hvornår bestanden forsvandt fra hele øen.",
+      "raw_seconds": 8.208253968253969,
+      "speech_window_seconds": 8.208253968253969,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Den forskel forhindrer en fristende fejl: at opfinde én afsluttende katastrofe, fordi en tidslinje mangler en dramatisk slutscene.",
+      "raw_seconds": 7.233015873015873,
+      "speech_window_seconds": 7.233015873015873,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Miljøændringer, økologiske forhold, vulkanisme og møder med andre bestande rejser forskningsspørgsmål. Deres betydning kræver spor, ikke en bekvem afslutning.",
+      "raw_seconds": 8.974512471655329,
+      "speech_window_seconds": 8.974512471655329,
+      "tempo": 0.9300012923995159,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Videnskaben udvikles, når fund kan vurderes igen. En ny alder kan ændre fortællingen og samtidig styrke undersøgelsens metode.",
+      "raw_seconds": 7.558095238095238,
+      "speech_window_seconds": 7.558095238095238,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Hulen er ikke et ur med én viser. Den rummer forbindelser, hvor forskellige slags dokumentation afgrænser og belyser hinanden.",
+      "raw_seconds": 7.360725623582766,
+      "speech_window_seconds": 7.360725623582766,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Disse forbindelser fører os tilbage ud på øen. Uden for Liang Bua findes spor af en endnu ældre fortid.",
+      "raw_seconds": 6.0836281179138325,
+      "speech_window_seconds": 6.0836281179138325,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Spørgsmålet bliver større end livet i denne hule: Hvor længe havde homininer allerede været en del af Flores' foranderlige verden?",
+      "raw_seconds": 6.106848072562358,
+      "speech_window_seconds": 6.106848072562358,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Ved Mata Menge i Soabassinet tilføjer langt ældre fossiler et kapitel, som rækker omtrent syv hundrede tusind år tilbage.",
+      "raw_seconds": 6.722176870748299,
+      "speech_window_seconds": 6.722176870748299,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Fundene er fragmentariske og kræver nøje anatomisk undersøgelse og kontekst. En høj alder giver ikke et fuldstændigt portræt af forfædrene.",
+      "raw_seconds": 7.6741950113378685,
+      "speech_window_seconds": 7.6741950113378685,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Alligevel står én ting tydeligt: Øens homininhistorie rækker langt længere tilbage end de berømte rester fra Liang Bua.",
+      "raw_seconds": 6.606077097505669,
+      "speech_window_seconds": 6.606077097505669,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Ældre stenredskaber andre steder på Flores udvider perspektivet yderligere. Et redskab kan vise aktivitet uden at afgøre ophavets biologiske identitet.",
+      "raw_seconds": 9.671111111111111,
+      "speech_window_seconds": 9.671111111111111,
+      "tempo": 1.002187679907887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Hvordan bestandene var beslægtede, hvornår bestemte træk opstod, og hvilke forfædre der var involveret, er fortsat spørgsmål for forskningen.",
+      "raw_seconds": 7.743854875283446,
+      "speech_window_seconds": 7.743854875283446,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Homo erectus indgår i hypoteser om afstamningen. Et tiltalende stamtræ bør dog ikke fremstilles, som om alle grene var direkte observeret.",
+      "raw_seconds": 8.544943310657596,
+      "speech_window_seconds": 8.544943310657596,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Det mest ærlige diagram har åbne felter. Det skelner mellem sikre fund og foreslåede forbindelser og giver plads til nye spor.",
+      "raw_seconds": 6.5364172335600905,
+      "speech_window_seconds": 6.5364172335600905,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Det gør ikke Flores mindre vigtig. Det forklarer, hvorfor én ø kan få så stor betydning for historien om menneskets udvikling.",
+      "raw_seconds": 6.478367346938776,
+      "speech_window_seconds": 6.478367346938776,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Forventninger fra fastlandet giver nyttige sammenligninger. De er ikke en opskrift, som alle øbestande var nødt til at følge.",
+      "raw_seconds": 6.176507936507937,
+      "speech_window_seconds": 6.176507936507937,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Dybt vand, særegen økologi og et langt arkiv inviterer tilsammen til et bredere syn på variationen i menneskets fortid.",
+      "raw_seconds": 6.989206349206349,
+      "speech_window_seconds": 6.989206349206349,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Før vi forlader den fjerne fortid, skal vi huske nutiden. Mennesker på Flores i dag har deres egne historier og liv.",
+      "raw_seconds": 6.5364172335600905,
+      "speech_window_seconds": 6.5364172335600905,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "De skal ikke bruges som udstillingsfigurer for en uddød art. Respekt for arkæologien hører sammen med respekt for nutidens mennesker.",
+      "raw_seconds": 7.058866213151927,
+      "speech_window_seconds": 7.058866213151927,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Nu bevæger fortællingen sig mod øst, til et andet berømt billede af Flores: vulkanske søer med overraskende farver.",
+      "raw_seconds": 6.15328798185941,
+      "speech_window_seconds": 6.15328798185941,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Ved Kelimutu ligger tre kratersøer i nærliggende vulkanske bassiner. Deres skiftende udseende har gjort dem til et af øens kendteste landskaber.",
+      "raw_seconds": 7.883174603174603,
+      "speech_window_seconds": 7.883174603174603,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Vandkemi, gasser, mineralreaktioner, vejr og lysforhold påvirker det, vi ser. Søer ved siden af hinanden behøver ikke opføre sig ens.",
+      "raw_seconds": 7.9760544217687075,
+      "speech_window_seconds": 7.9760544217687075,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Et fotografi fastholder ét udseende. Det lover ikke, at de samme tre farver møder enhver besøgende hver eneste dag.",
+      "raw_seconds": 6.582857142857143,
+      "speech_window_seconds": 6.582857142857143,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "En genereret illustration bør heller ikke gøre kemi til øjeblikkelig magi. En troværdig forklaring respekterer processernes tid og dokumentationens grænser.",
+      "raw_seconds": 8.208253968253969,
+      "speech_window_seconds": 8.208253968253969,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Søerne forbinder øens vand med dens vulkanske struktur. Deres smukke overflader minder os om aktive processer, som foregår nedenunder.",
+      "raw_seconds": 7.767074829931973,
+      "speech_window_seconds": 7.767074829931973,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Ved Bajawa viser Ineries markante kegle en anden side af Flores' vulkaner. Rundt om bjerget lever og arbejder mennesker.",
+      "raw_seconds": 7.558095238095238,
+      "speech_window_seconds": 7.558095238095238,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Bjerget er hverken en tom scene eller et løfte om sikker adgang. Forhold, lokale vejledere og aktuelle officielle råd har betydning.",
+      "raw_seconds": 7.325895691609977,
+      "speech_window_seconds": 7.325895691609977,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Skove, haver, veje og bebyggelser forbinder seværdighederne. Øen fortsætter mellem udsigtspunkterne og uden for rejsefotografiets udvalgte ramme.",
+      "raw_seconds": 8.347573696145124,
+      "speech_window_seconds": 8.347573696145124,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Regn, stejle skråninger og afvanding påvirker dyrkning, byggeri og rejser. De former også de materielle spor, vi undersøger.",
+      "raw_seconds": 7.093696145124716,
+      "speech_window_seconds": 7.093696145124716,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Levende traditioner tilføjer dybde. Flores' samfund har forskellige sprog, historier og skikke. Én landsby kan ikke repræsentere dem alle.",
+      "raw_seconds": 8.40562358276644,
+      "speech_window_seconds": 8.40562358276644,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "I vest er Wae Rebo kendt for sine kegleformede huse. De tilhører et levende samfund og er mere end smukke taglinjer.",
+      "raw_seconds": 6.989206349206349,
+      "speech_window_seconds": 6.989206349206349,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Når vi betragter arkitekturen, bør vi også se vedligeholdelse, værtskab og lokalsamfundets beslutninger om, hvad besøgende må fotografere og gå ind i.",
+      "raw_seconds": 9.044172335600907,
+      "speech_window_seconds": 9.044172335600907,
+      "tempo": 0.937219931150353,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "En respektfuld film kan vise voksnes hverdag og tilladte ydre områder uden at opfinde hellige ritualer eller kræve iscenesat fortid.",
+      "raw_seconds": 7.558095238095238,
+      "speech_window_seconds": 7.558095238095238,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Adgang opstår gennem relationer, ikke automatisk ved at finde et sted på nettet. Lokale aftaler og beskyttelsesregler er del af rejsen.",
+      "raw_seconds": 7.662585034013605,
+      "speech_window_seconds": 7.662585034013605,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Det samme gælder huler. En dramatisk kameravinkel bør ikke kræve, at man forstyrrer jordlag, rører fund eller går ind i lukkede områder.",
+      "raw_seconds": 7.790294784580499,
+      "speech_window_seconds": 7.790294784580499,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Aflejringerne er begrænsede arkiver. Ødelægges sammenhængen, kan en smuk genstand miste oplysninger, som endnu et fotografi aldrig genskaber.",
+      "raw_seconds": 8.52172335600907,
+      "speech_window_seconds": 8.52172335600907,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Dokumentation, bevaring og lokal deltagelse beskytter både de fysiske spor og de steder, hvor sporene har betydning.",
+      "raw_seconds": 6.9543764172335605,
+      "speech_window_seconds": 6.9543764172335605,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Vores rekonstruktioner forklarer forbindelser. De viser ikke en dokumenteret udgravningshændelse, et fuldstændigt fortidigt økosystem eller en bevist ankomstrute.",
+      "raw_seconds": 9.845260770975056,
+      "speech_window_seconds": 9.845260770975056,
+      "tempo": 1.02023427678498,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Det er særlig vigtigt ved realistiske billeder. Selv noget, der ligner en kameraoptagelse, kan være en illustration, og publikum bør vide det.",
+      "raw_seconds": 7.2562358276643995,
+      "speech_window_seconds": 7.2562358276643995,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Ærlig formidling bevarer undren. En hule, en sø eller en klippevæg bliver mere interessant, når vi forstår dens faktiske svarmuligheder.",
+      "raw_seconds": 7.500045351473923,
+      "speech_window_seconds": 7.500045351473923,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Spørgsmålene hænger sammen: Hvad formede landet, hvad krydsede vandet, hvad ændredes gennem tiden, og hvad blev bevaret til undersøgelse?",
+      "raw_seconds": 6.849886621315193,
+      "speech_window_seconds": 6.849886621315193,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Lad os følge tankegangen tilbage til hulen. Havet formede muligheder for ankomst og isolation, mens øen gav et foranderligt økologisk miljø.",
+      "raw_seconds": 8.324353741496598,
+      "speech_window_seconds": 8.324353741496598,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Geologiske processer skabte levesteder og steder, hvor spor samledes. Menneskelig aktivitet bidrog til et arkiv, som også blev formet af naturen.",
+      "raw_seconds": 9.032562358276644,
+      "speech_window_seconds": 9.032562358276644,
+      "tempo": 0.9360168246918802,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Udgravninger fandt forbindelser, ikke blot genstande. Anatomi og datering omsatte dem til spørgsmål om vores evolutionære historie.",
+      "raw_seconds": 7.743854875283446,
+      "speech_window_seconds": 7.743854875283446,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Sammenhængen var afgørende hele vejen. Et fund uden sted, en dato uden prøvehistorie eller et uforklaret billede ville fortælle mindre.",
+      "raw_seconds": 7.22140589569161,
+      "speech_window_seconds": 7.22140589569161,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Flores giver os mere end et overraskende fossil. Øen viser, hvordan vidensområder bliver stærkere, når de arbejder sammen.",
+      "raw_seconds": 6.884716553287982,
+      "speech_window_seconds": 6.884716553287982,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Den usædvanlige fortid deler ø med nutidens mennesker, landskaber og ansvar. Omsorg for én del bør også omfatte de andre.",
+      "raw_seconds": 6.907936507936508,
+      "speech_window_seconds": 6.907936507936508,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Der er stadig meget at lære om afstamning, ankomst, adfærd og bestandenes forsvinden fra det kendte arkæologiske materiale.",
+      "raw_seconds": 6.443537414965986,
+      "speech_window_seconds": 6.443537414965986,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Nye fund kan præcisere spørgsmål eller erstatte velkendte svar. Derfor bør vi beskytte sporene frem for at kræve sikkerhed allerede nu.",
+      "raw_seconds": 7.314285714285714,
+      "speech_window_seconds": 7.314285714285714,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Besøger du Flores, så følg godkendte ruter og lokale råd. Lad nysgerrigheden følges med omsorg for kulturarv og levesteder.",
+      "raw_seconds": 7.999274376417233,
+      "speech_window_seconds": 7.999274376417233,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Fortæller du historien, så gør forskellen mellem fund, fortolkning og illustration tydelig, også når en enklere version ville lyde mere dramatisk.",
+      "raw_seconds": 7.291065759637188,
+      "speech_window_seconds": 7.291065759637188,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Huleåbningen kommer igen til syne. Dagslyset falder stadig over den lyse sten, og gulvet virker atter ganske almindeligt.",
+      "raw_seconds": 6.826666666666667,
+      "speech_window_seconds": 6.826666666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Nu ser vi flere historier: klippens dannelse, vandets bevægelse, materialets ankomst og arbejdet med at forstå det hele.",
+      "raw_seconds": 6.606077097505669,
+      "speech_window_seconds": 6.606077097505669,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Udenfor fortsætter Flores mod grønne bakker, vulkanske toppe, dyrket jord og havet, som både adskiller og forbinder øens naboer.",
+      "raw_seconds": 8.70748299319728,
+      "speech_window_seconds": 8.70748299319728,
+      "tempo": 0.9023298438546403,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Øen er ikke én gåde med én hemmelig nøgle. Den er et mødested for spørgsmål, som omhyggelige undersøgelser gør tydeligere.",
+      "raw_seconds": 6.942766439909297,
+      "speech_window_seconds": 6.942766439909297,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Et lille spor kan ændre en stor fortælling, når sammenhængen bevares. Derfor er tålmodig forskning stærkere end opdigtede spektakulære scener.",
+      "raw_seconds": 7.697414965986394,
+      "speech_window_seconds": 7.697414965986394,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "Den vigtigste rejse går måske fra at se til at forstå: at lære, hvad stedet lader os sige, og hvad der forbliver åbent.",
+      "raw_seconds": 6.362267573696145,
+      "speech_window_seconds": 6.362267573696145,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "Flores rummer begge muligheder. Øen giver os enestående spor og ansvaret for at bevare næste kapitel til dem, der kommer efter os.",
+      "raw_seconds": 6.931156462585034,
+      "speech_window_seconds": 6.931156462585034,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "Ved hulens munding slutter lyset. Spørgsmålene fortsætter fra denne ene ø ud mod en langt større menneskelig fortid.",
+      "raw_seconds": 6.3854875283446715,
+      "speech_window_seconds": 6.3854875283446715,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1320,
+  "decoded_samples": 31680000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-da-22m00s.mp3",
+  "flac": "voice-da-22m00s.flac",
+  "mp3_sha256": "7acf1b5111eb464c7dd19ec5ef5006f4609de1d63d3cd14e5c40d7bb20db42bc",
+  "flac_sha256": "ee1c6ab3899fcaaa5f820749e14c868b057d900121c7b1aabe482dfac500c6e0"
+}

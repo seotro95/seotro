@@ -1,0 +1,1209 @@
+{
+  "locale": "nl",
+  "voice_id": "piper:nl_NL-ronnie-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1320,
+  "spoken_cues": 132,
+  "closing_silence_seconds": 0,
+  "config_hash": "83f3a6231a0c262f4a27a30c18e67f58db547c95b4d11b1beafbac606e1b40ec",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "Bij een grot valt daglicht over bleke steen en stopt. Verder binnen bewaart de grond een ander soort licht.",
+      "raw_seconds": 8.196643990929704,
+      "speech_window_seconds": 8.196643990929704,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Het licht van kennis: een zorgvuldig vastgelegde laag, een stenen werktuig en een onverwachte vraag.",
+      "raw_seconds": 7.418775510204082,
+      "speech_window_seconds": 7.418775510204082,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Op Flores hielp een grot het verhaal van menselijke evolutie veranderen. Daarvoor moeten we ook het eiland begrijpen.",
+      "raw_seconds": 8.684263038548753,
+      "speech_window_seconds": 8.684263038548753,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Flores ligt in Oost-Indonesië, in Oost-Nusa Tenggara. Steile hellingen, vulkanen en zeestraten bepalen routes en mogelijkheden.",
+      "raw_seconds": 10.483809523809525,
+      "speech_window_seconds": 10.483809523809525,
+      "tempo": 1.0864051320009869,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "De kust biedt een eiland om te bekijken. Gesteente en sediment bieden een eiland om te lezen.",
+      "raw_seconds": 8.057324263038549,
+      "speech_window_seconds": 8.057324263038549,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "We reizen van kalksteengrotten naar vulkaanmeren, van oude aankomsten naar gemeenschappen die hier tegenwoordig wonen.",
+      "raw_seconds": 8.161814058956915,
+      "speech_window_seconds": 8.161814058956915,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Hoe kon dit eiland een hoofdstuk van het menselijke verleden bewaren dat bij ontdekking zo onverwacht bleek?",
+      "raw_seconds": 6.9543764172335605,
+      "speech_window_seconds": 6.9543764172335605,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Het antwoord vraagt geografie, geologie, biologie en geduldig opgraven. Geen vak vertelt alleen het hele verhaal.",
+      "raw_seconds": 9.380861678004536,
+      "speech_window_seconds": 9.380861678004536,
+      "tempo": 0.9721100184460658,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "We volgen verschillende schalen: een zeepassage, een berg, een grotingang en details in een sedimentlaag.",
+      "raw_seconds": 8.208253968253969,
+      "speech_window_seconds": 8.208253968253969,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "We onderscheiden vondsten van gevolgtrekkingen. Een goede reconstructie maakt die grens duidelijker.",
+      "raw_seconds": 8.208253968253969,
+      "speech_window_seconds": 8.208253968253969,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Het bekendste punt is Liang Bua, een kalksteengrot op westelijk Flores, bij de streek rond Ruteng.",
+      "raw_seconds": 7.047256235827664,
+      "speech_window_seconds": 7.047256235827664,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Ze is belangrijk doordat materiaal zich ophoopte, bewaard bleef en in samenhang onderzocht werd, niet alleen door duisternis.",
+      "raw_seconds": 8.394013605442177,
+      "speech_window_seconds": 8.394013605442177,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Een los voorwerp suggereert een verhaal. Vastgelegde positie, omgeving en geschiedenis ondersteunen een sterkere verklaring.",
+      "raw_seconds": 10.112290249433107,
+      "speech_window_seconds": 10.112290249433107,
+      "tempo": 1.0479057253298556,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Begin bij de bodem. Voordat we oude levens voorstellen, vragen we hoe hun sporen hier terechtkwamen.",
+      "raw_seconds": 7.9412244897959186,
+      "speech_window_seconds": 7.9412244897959186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Sommige kwamen door mensen, andere door water, dieren, zwaartekracht of latere verstoring. Die processen moeten onderscheiden worden.",
+      "raw_seconds": 10.47219954648526,
+      "speech_window_seconds": 10.47219954648526,
+      "tempo": 1.0852020255425139,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "De grot is een plek en een archief. Verschillende schrijvers beschreven haar bladzijden, soms over elkaar heen.",
+      "raw_seconds": 8.40562358276644,
+      "speech_window_seconds": 8.40562358276644,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Laten we eerst naar buiten gaan. Plaatbewegingen droegen hier bij aan een lange keten vulkanische landschappen.",
+      "raw_seconds": 8.243083900226758,
+      "speech_window_seconds": 8.243083900226758,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Een eiland lijkt vast op een kaart, maar is een tijdelijke oppervlakte van veel langere processen.",
+      "raw_seconds": 6.548027210884354,
+      "speech_window_seconds": 6.548027210884354,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Vulkanisme maakt gesteente en reliëf. Verwering, water en zwaartekracht openen vervolgens dalen en verplaatsen materiaal omlaag.",
+      "raw_seconds": 10.936598639455783,
+      "speech_window_seconds": 10.936598639455783,
+      "tempo": 1.1333262838814282,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Dat gebeurt met verschillende snelheden. Een rustige helling, een regenbeek en een vulkanische gebeurtenis laten andere sporen na.",
+      "raw_seconds": 9.984580498866213,
+      "speech_window_seconds": 9.984580498866213,
+      "tempo": 1.0346715542866542,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Steilheid beïnvloedt ook reizen. Een korte kaartafstand kan een moeilijke tocht over ruggen en door dalen zijn.",
+      "raw_seconds": 8.544943310657596,
+      "speech_window_seconds": 8.544943310657596,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Routes, landbouw en nederzettingen groeien tussen die verschillen. Geografie biedt kansen en grenzen, geen vaststaande bestemming.",
+      "raw_seconds": 10.530249433106576,
+      "speech_window_seconds": 10.530249433106576,
+      "tempo": 1.0912175578348784,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Een vulkanisch eiland bestaat niet alleen uit jonge lava. Flores heeft ook kalksteen, waaronder het gesteente bij Liang Bua.",
+      "raw_seconds": 9.206712018140589,
+      "speech_window_seconds": 9.206712018140589,
+      "tempo": 0.954063421568973,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Kalksteen heeft een andere geschiedenis van carbonaatmateriaal en oudere milieus. Het landschap bevat meerdere geologische hoofdstukken.",
+      "raw_seconds": 9.613061224489796,
+      "speech_window_seconds": 9.613061224489796,
+      "tempo": 0.9961721476155229,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Water met opgelost koolstofdioxide kan kalksteenspleten langzaam verbreden. Zo kunnen uiteindelijk holtes en grotten ontstaan.",
+      "raw_seconds": 10.216780045351474,
+      "speech_window_seconds": 10.216780045351474,
+      "tempo": 1.0587336834561112,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Dit verklaart een algemeen proces, niet iedere kamer afzonderlijk of een schema als exacte grotkaart.",
+      "raw_seconds": 7.267845804988662,
+      "speech_window_seconds": 7.267845804988662,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Gesteenteleeftijd, grotvorming en ouderdom van latere afzettingen zijn verschillende vragen. Verwarring maakt de plek te eenvoudig.",
+      "raw_seconds": 10.553469387755102,
+      "speech_window_seconds": 10.553469387755102,
+      "tempo": 1.0936237707518242,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Een oude grot kan jonge afzettingen bevatten. Onder of naast een jong oppervlak kan oud materiaal liggen.",
+      "raw_seconds": 7.952834467120182,
+      "speech_window_seconds": 7.952834467120182,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Dat verschil wordt belangrijk bij archeologische dateringen. De geologie leert ons nu al zorgvuldig lezen.",
+      "raw_seconds": 8.335963718820862,
+      "speech_window_seconds": 8.335963718820862,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Vulkaanpieken vormen spectaculaire horizonnen; water in kalksteen maakt stillere ruimtes die bewijsmateriaal bewaren.",
+      "raw_seconds": 8.544943310657596,
+      "speech_window_seconds": 8.544943310657596,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Beide horen bij Flores en bij hun omgeving. Geen van beide is een fantasiedecor.",
+      "raw_seconds": 7.1401360544217685,
+      "speech_window_seconds": 7.1401360544217685,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Het land geeft ons archief een plaats. Nu komt de barrière die het eilandleven bijzonder maakte: de zee.",
+      "raw_seconds": 8.312743764172335,
+      "speech_window_seconds": 8.312743764172335,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Flores ligt in Wallacea, tussen de grote continentale platten van Zuidoost-Azië en Australië.",
+      "raw_seconds": 7.48843537414966,
+      "speech_window_seconds": 7.48843537414966,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Bij lagere zeespiegel veranderden veel kusten en verbindingen. Diepe zeestraten bleven Flores van Azië scheiden.",
+      "raw_seconds": 9.671111111111111,
+      "speech_window_seconds": 9.671111111111111,
+      "tempo": 1.002187679907887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Water oversteken verschilt van doorlopend land volgen. Die barrière filtert welke organismen aankomen en blijven.",
+      "raw_seconds": 8.846802721088435,
+      "speech_window_seconds": 8.846802721088435,
+      "tempo": 0.9167671213563146,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Aankomst was niet onmogelijk. Een geslaagde oversteek kon juist bijzonder grote gevolgen hebben.",
+      "raw_seconds": 7.465215419501134,
+      "speech_window_seconds": 7.465215419501134,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Dieren verspreiden zich via meerdere mechanismen en zeldzame gebeurtenissen. Hoe oude mensachtigen precies aankwamen, wordt nog onderzocht.",
+      "raw_seconds": 10.669569160997732,
+      "speech_window_seconds": 10.669569160997732,
+      "tempo": 1.1056548353365525,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Een vlot, route of stormgedreven reis blijft zonder bewijs een hypothese. Mogelijkheid is geen teruggevonden herinnering.",
+      "raw_seconds": 9.845260770975056,
+      "speech_window_seconds": 9.845260770975056,
+      "tempo": 1.02023427678498,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Eilandpopulaties ontmoeten bijzondere hulpbronnen, concurrenten, roofdieren en ruimte. Dat kan evolutionaire veranderingen over generaties sturen.",
+      "raw_seconds": 11.80734693877551,
+      "speech_window_seconds": 11.80734693877551,
+      "tempo": 1.223559268266892,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Sommige eilanddieren worden kleiner, andere groter. Er bestaat geen regel dat elk eilandorganisme krimpt.",
+      "raw_seconds": 8.6378231292517,
+      "speech_window_seconds": 8.6378231292517,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Flores bewaart kleine uitgestorven stegodonten, verwanten van olifanten, naast andere leden van een bijzondere levensgemeenschap.",
+      "raw_seconds": 9.404081632653062,
+      "speech_window_seconds": 9.404081632653062,
+      "tempo": 0.9745162313630116,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Fossielen beschrijven vroegere milieus, maar tonen niet alle dieren op dezelfde plek en hetzelfde moment.",
+      "raw_seconds": 7.48843537414966,
+      "speech_window_seconds": 7.48843537414966,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Reconstructies moeten tijd en ruimte respecteren. Voorwerpen uit verschillende lagen worden niet vanzelf buren in één tafereel.",
+      "raw_seconds": 10.100680272108843,
+      "speech_window_seconds": 10.100680272108843,
+      "tempo": 1.0467026188713826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Ook evolutie vraagt voorzichtigheid: anatomie, dateringen, vergelijkingen en meerdere exemplaren om een klein lichaam te verklaren.",
+      "raw_seconds": 9.694331065759638,
+      "speech_window_seconds": 9.694331065759638,
+      "tempo": 1.0045938928248328,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "De zee garandeerde geen uitkomst. Ze hielp omstandigheden vormen waarin andere geschiedenissen konden ontstaan.",
+      "raw_seconds": 9.32281179138322,
+      "speech_window_seconds": 9.32281179138322,
+      "tempo": 0.9660944861537015,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Onze tweede sleutel: afzondering verandert vragen, maar geeft zonder bewijs geen antwoorden.",
+      "raw_seconds": 6.896326530612245,
+      "speech_window_seconds": 6.896326530612245,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Terug naar de grot. Het eiland bereidt ons voor op een ingewikkeld archief, geen eenvoudige kopie van het vasteland.",
+      "raw_seconds": 8.93968253968254,
+      "speech_window_seconds": 8.93968253968254,
+      "tempo": 0.9263919730240974,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Geduldig werk in Liang Bua onthulde iets dat vertrouwde verwachtingen over onze evolutionaire familie uitdaagde.",
+      "raw_seconds": 8.196643990929704,
+      "speech_window_seconds": 8.196643990929704,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "In tweeduizend drie werden resten gevonden die belangrijk werden voor de beschrijving van Homo floresiensis een jaar later.",
+      "raw_seconds": 8.463673469387755,
+      "speech_window_seconds": 8.463673469387755,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "De naam betreft een uitgestorven mensachtige van Flores. Klein lichaam en bijzondere kenmerken maakten de ontdekking opvallend.",
+      "raw_seconds": 10.031020408163265,
+      "speech_window_seconds": 10.031020408163265,
+      "tempo": 1.0394839801205455,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Het beroemde kleine individu was volwassen. Een geringe lengte bewijst op zichzelf niet dat een exemplaar een kind was.",
+      "raw_seconds": 8.997732426303855,
+      "speech_window_seconds": 8.997732426303855,
+      "tempo": 0.9324075053164617,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Onderzoekers bekijken meerdere anatomische aanwijzingen en bepalen de levensfase niet alleen op basis van hoogte.",
+      "raw_seconds": 8.196643990929704,
+      "speech_window_seconds": 8.196643990929704,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Een zorgvuldige studie combineert waarnemingen en onderzoekt hoe kenmerken samenpassen, zonder kleinheid alles te laten verklaren.",
+      "raw_seconds": 8.893242630385487,
+      "speech_window_seconds": 8.893242630385487,
+      "tempo": 0.9215795471902058,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Lichaamsverhoudingen en schedelvorm werden onderzocht. De combinatie telde, niet één verrassend meetgetal.",
+      "raw_seconds": 8.904852607709751,
+      "speech_window_seconds": 8.904852607709751,
+      "tempo": 0.9227826536486788,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Vergelijkingen met andere mensachtigen hielpen bij classificatie en verschillen tegenover verwachtingen op basis van moderne mensen.",
+      "raw_seconds": 9.206712018140589,
+      "speech_window_seconds": 9.206712018140589,
+      "tempo": 0.954063421568973,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Wetenschappelijk debat volgde. Alternatieven moesten alle aanwijzingen verklaren, ook extra vondsten en minder opvallende details.",
+      "raw_seconds": 10.437369614512471,
+      "speech_window_seconds": 10.437369614512471,
+      "tempo": 1.0815927061670954,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Een soort benoemen beëindigt de vragen niet. Het schept een raamwerk om te toetsen en verfijnen.",
+      "raw_seconds": 7.430385487528345,
+      "speech_window_seconds": 7.430385487528345,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Een klein hersenvolume vertelt niet alles over gedrag. Uitspraken over mogelijkheden vragen materiële aanwijzingen.",
+      "raw_seconds": 9.05578231292517,
+      "speech_window_seconds": 9.05578231292517,
+      "tempo": 0.938423037608826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Stenen werktuigen openen ander onderzoek. Vorm en vindplaats tonen activiteiten, maar identificeren niet automatisch iedere maker.",
+      "raw_seconds": 10.495419501133787,
+      "speech_window_seconds": 10.495419501133787,
+      "tempo": 1.0876082384594596,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Een werktuig naast een fossiel vraagt onderzoek naar de samenhang. Alleen nabijheid bewijst die niet.",
+      "raw_seconds": 7.383945578231293,
+      "speech_window_seconds": 7.383945578231293,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "De prestatie was resten, voorwerpen, afzettingen en vergelijkingen verbinden, naast het vinden van iets ongewoons.",
+      "raw_seconds": 8.695873015873016,
+      "speech_window_seconds": 8.695873015873016,
+      "tempo": 0.9011267373961673,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Daarom kan een rustige opgravingsfoto meer uitleggen dan een verzonnen spektakel. De documentatie laat heronderzoek toe.",
+      "raw_seconds": 9.450521541950113,
+      "speech_window_seconds": 9.450521541950113,
+      "tempo": 0.9793286571969029,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Bijnamen trekken aandacht. Wetenschap gaat over werkelijke organismen en toetsbare aanwijzingen, niet over fantasiefiguren.",
+      "raw_seconds": 9.740770975056689,
+      "speech_window_seconds": 9.740770975056689,
+      "tempo": 1.0094063186587243,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "De volgende vraag is onvermijdelijk: wanneer leefden ze, en hoe betrouwbaar vertelt de grot hun tijd?",
+      "raw_seconds": 7.035646258503402,
+      "speech_window_seconds": 7.035646258503402,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Sediment lijkt een nette stapel, boven jonger dan onder. Werkelijke afzettingen kunnen ingewikkelder zijn.",
+      "raw_seconds": 8.370793650793651,
+      "speech_window_seconds": 8.370793650793651,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Erosie verwijdert delen. Jong materiaal kan naast oud sediment liggen en misleiden wanneer de geometrie verkeerd begrepen wordt.",
+      "raw_seconds": 9.984580498866213,
+      "speech_window_seconds": 9.984580498866213,
+      "tempo": 1.0346715542866542,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Die relaties moeten door de opgraving gevolgd worden. Eén verticale lijn is geen volledige geschiedenis.",
+      "raw_seconds": 8.417233560090702,
+      "speech_window_seconds": 8.417233560090702,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Dateringsmethoden meten verschillende materialen en processen. Een getal helpt pas wanneer duidelijk is wat precies gemeten werd.",
+      "raw_seconds": 9.810430839002267,
+      "speech_window_seconds": 9.810430839002267,
+      "tempo": 1.0166249574095614,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Sedimentouderdom is niet automatisch botouderdom. De verbinding met de archeologische gebeurtenis moet worden aangetoond.",
+      "raw_seconds": 9.032562358276644,
+      "speech_window_seconds": 9.032562358276644,
+      "tempo": 0.9360168246918802,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Meer onderzoek herzag Liang Bua's chronologie door beter begrip van de afzettingen. Dat maakte dateren niet nutteloos.",
+      "raw_seconds": 9.241541950113378,
+      "speech_window_seconds": 9.241541950113378,
+      "tempo": 0.9576727409443915,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Het herziene kader plaatst de bekende Homo-floresiensis-resten ongeveer tussen honderdduizend en zestigduizend jaar geleden.",
+      "raw_seconds": 8.614603174603175,
+      "speech_window_seconds": 8.614603174603175,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "De bijbehorende werktuigreeks loopt later door, tot ongeveer vijftigduizend jaar. Fossielen en werktuigen zijn geen identieke klokken.",
+      "raw_seconds": 10.39092970521542,
+      "speech_window_seconds": 10.39092970521542,
+      "tempo": 1.076780280333204,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Het zijn benaderende tijdvakken, geen precieze verjaardag of laatste dag van een hele soort.",
+      "raw_seconds": 6.362267573696145,
+      "speech_window_seconds": 6.362267573696145,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Het laatste bewaarde spoor toont waar de huidige aanwijzingen eindigen. Het dateert niet automatisch verdwijning op het hele eiland.",
+      "raw_seconds": 9.137052154195011,
+      "speech_window_seconds": 9.137052154195011,
+      "tempo": 0.9468447828181359,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Dat onderscheid voorkomt een verzonnen slotramp, alleen omdat het verhaal een dramatisch einde verlangt.",
+      "raw_seconds": 7.1401360544217685,
+      "speech_window_seconds": 7.1401360544217685,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Milieu, ecologie, vulkanisme en ontmoetingen met andere groepen leveren onderzoeksvragen. Hun rol vereist bewijs, geen gemakkelijk slot.",
+      "raw_seconds": 10.913378684807256,
+      "speech_window_seconds": 10.913378684807256,
+      "tempo": 1.1309200709644824,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Heronderzoek verbetert kennis. Een aangepaste ouderdom kan het verhaal veranderen en de methode tegelijk versterken.",
+      "raw_seconds": 9.1718820861678,
+      "speech_window_seconds": 9.1718820861678,
+      "tempo": 0.9504541021935544,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "De grot is geen klok met één wijzer. Verschillende aanwijzingen beperken en controleren elkaar.",
+      "raw_seconds": 8.034104308390022,
+      "speech_window_seconds": 8.034104308390022,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Die samenhang brengt ons buiten Liang Bua, naar plaatsen met een nog ouder verleden.",
+      "raw_seconds": 6.2345578231292516,
+      "speech_window_seconds": 6.2345578231292516,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "De vraag groeit: hoelang maakten mensachtigen al deel uit van de veranderende wereld van Flores?",
+      "raw_seconds": 6.977596371882086,
+      "speech_window_seconds": 6.977596371882086,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Bij Mata Menge in het Soa-bekken reiken oudere fossiele aanwijzingen ongeveer zevenhonderdduizend jaar terug.",
+      "raw_seconds": 7.3723356009070296,
+      "speech_window_seconds": 7.3723356009070296,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "De resten zijn fragmentarisch en vragen anatomisch onderzoek en context. Een vroege datum levert geen volledig voorouderportret.",
+      "raw_seconds": 10.646349206349207,
+      "speech_window_seconds": 10.646349206349207,
+      "tempo": 1.103248622419607,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Ze tonen wel dat de eilandgeschiedenis veel verder teruggaat dan de beroemde resten van Liang Bua.",
+      "raw_seconds": 7.337505668934241,
+      "speech_window_seconds": 7.337505668934241,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Nog oudere werktuigen elders verbreden het beeld. Ze bewijzen activiteit zonder alle biologische identiteiten vast te leggen.",
+      "raw_seconds": 10.147120181405896,
+      "speech_window_seconds": 10.147120181405896,
+      "tempo": 1.0515150447052741,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Relaties tussen groepen, ontwikkeling van kenmerken en betrokken voorouders vragen verdere vergelijking en onderzoek.",
+      "raw_seconds": 8.626213151927438,
+      "speech_window_seconds": 8.626213151927438,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Homo erectus wordt genoemd in afstammingshypothesen. Niet iedere tak van een stamboom is rechtstreeks waargenomen.",
+      "raw_seconds": 8.986122448979591,
+      "speech_window_seconds": 8.986122448979591,
+      "tempo": 0.9312043988579887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Een eerlijk schema laat ruimte, scheidt vastgestelde vondsten van voorgestelde relaties en kan door nieuw bewijs veranderen.",
+      "raw_seconds": 8.78875283446712,
+      "speech_window_seconds": 8.78875283446712,
+      "tempo": 0.9107515890639503,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Dat verklaart Flores' betekenis voor een veel groter verhaal over menselijke evolutie.",
+      "raw_seconds": 6.188117913832199,
+      "speech_window_seconds": 6.188117913832199,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Verwachtingen van het vasteland helpen vergelijken, maar schrijven niet iedere eilandpopulatie dezelfde weg voor.",
+      "raw_seconds": 7.697414965986394,
+      "speech_window_seconds": 7.697414965986394,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Diepe zeestraten, bijzondere ecologie en lange overlevering tonen hoe gevarieerd het menselijke verleden kon zijn.",
+      "raw_seconds": 8.510113378684807,
+      "speech_window_seconds": 8.510113378684807,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Voordat we die tijd verlaten: huidige bewoners hebben eigen geschiedenissen en hedendaagse levens.",
+      "raw_seconds": 7.546485260770975,
+      "speech_window_seconds": 7.546485260770975,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Ze zijn geen tentoonstelling van een uitgestorven soort. Respect voor bewijs hoort samen met respect voor het heden.",
+      "raw_seconds": 8.777142857142858,
+      "speech_window_seconds": 8.777142857142858,
+      "tempo": 0.9095484826054774,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Ons verhaal gaat oostwaarts naar een ander bekend beeld: vulkaanmeren met kleuren die bezoekers kunnen verrassen.",
+      "raw_seconds": 7.743854875283446,
+      "speech_window_seconds": 7.743854875283446,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Bij Kelimutu liggen drie kratermeren in naburige bekkens. Hun veranderlijke uiterlijk maakte ze beroemd.",
+      "raw_seconds": 7.360725623582766,
+      "speech_window_seconds": 7.360725623582766,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Waterchemie, gassen, mineralen, weer en kijkomstandigheden beïnvloeden het zichtbare. Naburige meren gedragen zich niet noodzakelijk gelijk.",
+      "raw_seconds": 10.994648526077098,
+      "speech_window_seconds": 10.994648526077098,
+      "tempo": 1.1393418161737925,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Een foto bevriest één toestand. Ze belooft niet iedere toekomstige bezoeker dezelfde drie kleuren.",
+      "raw_seconds": 7.883174603174603,
+      "speech_window_seconds": 7.883174603174603,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Gegenereerde beelden mogen chemie niet in onmiddellijke magie veranderen. Uitleg moet tijdschalen en grenzen respecteren.",
+      "raw_seconds": 9.763990929705216,
+      "speech_window_seconds": 9.763990929705216,
+      "tempo": 1.01181253157567,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "De meren verbinden water en vulkanisme. Achter mooie oppervlakken kunnen processen actief blijven.",
+      "raw_seconds": 8.359183673469389,
+      "speech_window_seconds": 8.359183673469389,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Elders rijst Ineries kenmerkende kegel bij Bajawa op boven land waar mensen wonen en werken.",
+      "raw_seconds": 7.035646258503402,
+      "speech_window_seconds": 7.035646258503402,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "De berg garandeert geen veilige toegang. Een echte reis vraagt actuele omstandigheden, plaatselijke begeleiding en officiële informatie.",
+      "raw_seconds": 10.669569160997732,
+      "speech_window_seconds": 10.669569160997732,
+      "tempo": 1.1056548353365525,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Bossen, tuinen, wegen en nederzettingen verbinden herkenningspunten. Het eiland gaat tussen beroemde uitzichten door.",
+      "raw_seconds": 9.624671201814058,
+      "speech_window_seconds": 9.624671201814058,
+      "tempo": 0.9973752540739956,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Regen, hellingen en afwatering beïnvloeden landbouw, bouwen en verkeer, evenals het materiaal dat onderzoekers bestuderen.",
+      "raw_seconds": 9.822040816326531,
+      "speech_window_seconds": 9.822040816326531,
+      "tempo": 1.0178280638680344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Levende tradities geven diepte. Talen, geschiedenissen en gebruiken verschillen; één dorp vertegenwoordigt niet het hele eiland.",
+      "raw_seconds": 10.85532879818594,
+      "speech_window_seconds": 10.85532879818594,
+      "tempo": 1.1249045386721181,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Wae Rebo in het westen staat bekend om kegelvormige huizen. Hun betekenis behoort aan een levende gemeenschap.",
+      "raw_seconds": 8.742312925170069,
+      "speech_window_seconds": 8.742312925170069,
+      "tempo": 0.9059391632300589,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Architectuur bekijken vraagt aandacht voor onderhoud, ontvangst en beslissingen over fotografie en toegang.",
+      "raw_seconds": 7.894784580498866,
+      "speech_window_seconds": 7.894784580498866,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Een respectvolle film toont volwassen dagelijks leven en toegestane buitenruimtes, zonder verzonnen ceremonies of bestelde historische opvoeringen.",
+      "raw_seconds": 10.692789115646258,
+      "speech_window_seconds": 10.692789115646258,
+      "tempo": 1.1080610482534983,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Toegang is een relatie. Een online gevonden plek vervangt geen plaatselijke afspraken en beschermingsregels.",
+      "raw_seconds": 8.962902494331066,
+      "speech_window_seconds": 8.962902494331066,
+      "tempo": 0.9287981859410431,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Ook in grotten rechtvaardigt een opname geen verstoord sediment, aangeraakte vondsten of overschreden afsluitingen.",
+      "raw_seconds": 8.231473922902495,
+      "speech_window_seconds": 8.231473922902495,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Afzettingen zijn eindige archieven. Beschadigde context kan informatie wissen die geen nieuwe foto terugbrengt.",
+      "raw_seconds": 9.311201814058958,
+      "speech_window_seconds": 9.311201814058958,
+      "tempo": 0.9648913796952288,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Documentatie, behoud en plaatselijke deelname beschermen aanwijzingen en de plekken die hun betekenis geven.",
+      "raw_seconds": 8.289523809523809,
+      "speech_window_seconds": 8.289523809523809,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Modellen leggen relaties uit, zonder een echte opgraving, volledig oud ecosysteem of opgeloste aankomstroute te claimen.",
+      "raw_seconds": 9.009342403628118,
+      "speech_window_seconds": 9.009342403628118,
+      "tempo": 0.9336106117749344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Dat onderscheid telt juist bij levensechte beelden. Een camerabeeld kan nog steeds een illustratie zijn.",
+      "raw_seconds": 8.196643990929704,
+      "speech_window_seconds": 8.196643990929704,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Eerlijkheid laat verwondering bestaan. Grotten, meren en vulkanen boeien meer wanneer hun beantwoordbare vragen duidelijk zijn.",
+      "raw_seconds": 9.543401360544218,
+      "speech_window_seconds": 9.543401360544218,
+      "tempo": 0.9889535088646858,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "De vragen verbinden zich: landvorming, oversteek, verandering en wat voor onderzoek bewaard bleef.",
+      "raw_seconds": 7.836734693877551,
+      "speech_window_seconds": 7.836734693877551,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Terug naar de grot. De zee beïnvloedde aankomst en afzondering; het eiland bood een veranderende ecologische omgeving.",
+      "raw_seconds": 10.00780045351474,
+      "speech_window_seconds": 10.00780045351474,
+      "tempo": 1.0370777672036,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Geologie schiep leefgebieden en verzamelplaatsen. Menselijke activiteit voegde sporen toe tussen natuurlijke gebeurtenissen.",
+      "raw_seconds": 9.845260770975056,
+      "speech_window_seconds": 9.845260770975056,
+      "tempo": 1.02023427678498,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Opgraving herstelde relaties, niet alleen objecten. Anatomie en dateringen maakten daar evolutievragen van.",
+      "raw_seconds": 9.810430839002267,
+      "speech_window_seconds": 9.810430839002267,
+      "tempo": 1.0166249574095614,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Iedere stap vroeg context. Een stuk zonder herkomst, datum zonder voorgeschiedenis of beeld zonder uitleg vertelt minder.",
+      "raw_seconds": 9.845260770975056,
+      "speech_window_seconds": 9.845260770975056,
+      "tempo": 1.02023427678498,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Flores biedt meer dan een verrassend fossiel: verschillende kennisgebieden worden samen sterker.",
+      "raw_seconds": 6.826666666666667,
+      "speech_window_seconds": 6.826666666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Dat verleden deelt een eiland met huidige mensen, landschappen en verantwoordelijkheden. Eén deel vraagt aandacht voor de andere.",
+      "raw_seconds": 9.763990929705216,
+      "speech_window_seconds": 9.763990929705216,
+      "tempo": 1.01181253157567,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Veel blijft open over voorouders, aankomst, gedrag en het verdwijnen van groepen uit het bekende materiaal.",
+      "raw_seconds": 7.662585034013605,
+      "speech_window_seconds": 7.662585034013605,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Nieuwe vondsten kunnen vragen en antwoorden wijzigen. Dat rechtvaardigt bescherming in plaats van afgedwongen zekerheid.",
+      "raw_seconds": 9.311201814058958,
+      "speech_window_seconds": 9.311201814058958,
+      "tempo": 0.9648913796952288,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Verbind nieuwsgierigheid met zorg: toegestane routes, plaatselijke aanwijzingen en ongestoord erfgoed en leefgebied.",
+      "raw_seconds": 8.753922902494331,
+      "speech_window_seconds": 8.753922902494331,
+      "tempo": 0.9071422696885317,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Scheid ontdekking, afleiding en illustratie bij het vertellen, ook wanneer een eenvoudiger versie dramatischer klinkt.",
+      "raw_seconds": 8.347573696145124,
+      "speech_window_seconds": 8.347573696145124,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "De grotingang komt terug. Daglicht valt over bleke steen en de bodem lijkt weer gewoon.",
+      "raw_seconds": 7.1053061224489795,
+      "speech_window_seconds": 7.1053061224489795,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Nu zien we meerdere geschiedenissen: gesteentevorming, waterbeweging, aangevoerd materiaal en interpretatie.",
+      "raw_seconds": 8.52172335600907,
+      "speech_window_seconds": 8.52172335600907,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Buiten volgen groene heuvels, vulkanen, akkers en een zee die buren tegelijk scheidt en verbindt.",
+      "raw_seconds": 7.627755102040816,
+      "speech_window_seconds": 7.627755102040816,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Flores wacht niet op één geheime sleutel. Zorgvuldig bewijs maakt de samenkomende vragen helderder.",
+      "raw_seconds": 8.057324263038549,
+      "speech_window_seconds": 8.057324263038549,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Een klein spoor verandert een groot verhaal wanneer zijn context blijft. Daarin schuilt de kracht van geduldig onderzoek.",
+      "raw_seconds": 8.370793650793651,
+      "speech_window_seconds": 8.370793650793651,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "De belangrijkste reis gaat van kijken naar begrijpen: weten wat een plek laat zeggen en wat openblijft.",
+      "raw_seconds": 7.465215419501134,
+      "speech_window_seconds": 7.465215419501134,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "Flores geeft bijzondere aanwijzingen en de verantwoordelijkheid het volgende hoofdstuk voor latere bezoekers te bewaren.",
+      "raw_seconds": 7.918004535147392,
+      "speech_window_seconds": 7.918004535147392,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "Bij de grotingang eindigt het licht. De vragen reizen verder, van één eiland naar een veel groter menselijk verleden.",
+      "raw_seconds": 9.113832199546485,
+      "speech_window_seconds": 9.113832199546485,
+      "tempo": 0.9444385699011901,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1320,
+  "decoded_samples": 31680000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-nl-22m00s.mp3",
+  "flac": "voice-nl-22m00s.flac",
+  "mp3_sha256": "3f6e71d9add181e3b258be450648b28b657792f5c320789fac6902e12de94079",
+  "flac_sha256": "e5a89618f1081d8392b8c527c5aa599f99b1228fefcf693afac8972dc685db73"
+}

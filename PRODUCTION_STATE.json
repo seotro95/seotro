@@ -1,0 +1,17 @@
+{
+  "episode": 40,
+  "topic": "Flores: Caves, Volcanoes, and an Unexpected Past",
+  "target_seconds": 1320,
+  "languages": 17,
+  "generated_clip_seconds": 10,
+  "timeline_slots": 132,
+  "status": "complete_pending_native_review",
+  "github_delivery_authorized": true,
+  "cloud_environment_publishing_authorized": false,
+  "prompt_count": 60,
+  "prompt_files": 6,
+  "main_scenes": 132,
+  "reused_slots": 72,
+  "unique_generated_clips": 60,
+  "mp3_count": 17
+}

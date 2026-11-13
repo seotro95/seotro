@@ -1,0 +1,1209 @@
+{
+  "locale": "de",
+  "voice_id": "piper:de_DE-thorsten-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1320,
+  "spoken_cues": 132,
+  "closing_silence_seconds": 0,
+  "config_hash": "0e2bf2a8e2ae9422d91c54c60823ad99435782e67b8428d1557317c7789f1ce9",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "Am Höhleneingang streicht Tageslicht über hellen Stein und endet. Weiter innen bewahrt der Boden eine andere Art von Licht.",
+      "raw_seconds": 6.617687074829932,
+      "speech_window_seconds": 6.617687074829932,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Es ist das Licht der Erkenntnis: eine sorgfältig dokumentierte Schicht, ein Steinwerkzeug, eine unerwartete Frage.",
+      "raw_seconds": 6.606077097505669,
+      "speech_window_seconds": 6.606077097505669,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Auf Flores half eine Höhle, die Geschichte menschlicher Evolution zu verändern. Dafür müssen wir auch die Insel verstehen.",
+      "raw_seconds": 6.060408163265306,
+      "speech_window_seconds": 6.060408163265306,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Flores liegt im Osten Indonesiens, in Ost-Nusa-Tenggara. Steiles Gelände, Vulkanlandschaften und Meeresstrecken prägen Wege und Möglichkeiten.",
+      "raw_seconds": 8.742312925170069,
+      "speech_window_seconds": 8.742312925170069,
+      "tempo": 0.9059391632300589,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Die Küste bietet eine Insel zum Betrachten. Gestein und Sedimente bieten eine Insel zum Lesen, wenn wir ihre Sprache verstehen.",
+      "raw_seconds": 6.397097505668934,
+      "speech_window_seconds": 6.397097505668934,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Unsere Reise führt von Kalksteinhöhlen zu Vulkanseen, von frühen Ankünften zu Gemeinschaften, die heute zwischen diesen Hügeln leben.",
+      "raw_seconds": 7.035646258503402,
+      "speech_window_seconds": 7.035646258503402,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Wie konnte eine Insel ein Kapitel menschlicher Vergangenheit bewahren, das bei seiner Entdeckung so unerwartet wirkte?",
+      "raw_seconds": 5.6656689342403626,
+      "speech_window_seconds": 5.6656689342403626,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Die Antwort braucht Geografie, Geologie, Biologie und geduldige Ausgrabung. Kein Fach erzählt allein die ganze Geschichte.",
+      "raw_seconds": 7.047256235827664,
+      "speech_window_seconds": 7.047256235827664,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Wir verfolgen Belege verschiedener Größen: Meerespassage, Berg, Höhleneingang und kleine Einzelheiten einer Sedimentschicht.",
+      "raw_seconds": 6.768616780045352,
+      "speech_window_seconds": 6.768616780045352,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Dabei unterscheiden wir Fund und Schlussfolgerung. Eine gute Rekonstruktion macht diese Grenze deutlicher, statt sie zu verdecken.",
+      "raw_seconds": 6.362267573696145,
+      "speech_window_seconds": 6.362267573696145,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Der bekannteste Ort ist Liang Bua, eine Kalksteinhöhle im westlichen Flores, nahe der Region Ruteng.",
+      "raw_seconds": 6.060408163265306,
+      "speech_window_seconds": 6.060408163265306,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Wichtig ist sie wegen angesammelten, erhaltenen und im Zusammenhang untersuchten Materials. Dunkelheit allein erklärt ihren Wert nicht.",
+      "raw_seconds": 7.650975056689342,
+      "speech_window_seconds": 7.650975056689342,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Ein einzelnes Objekt regt eine Geschichte an. Mit dokumentierter Lage, Umgebung und Vorgeschichte trägt es eine belastbarere Erklärung.",
+      "raw_seconds": 7.592925170068027,
+      "speech_window_seconds": 7.592925170068027,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Beginnen wir beim Boden. Bevor wir alte Lebensweisen vorstellen, müssen wir fragen, wie ihre Spuren hierher gelangten.",
+      "raw_seconds": 6.629297052154195,
+      "speech_window_seconds": 6.629297052154195,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Manche stammen von Menschen, andere von Wasser, Tieren, Schwerkraft oder späteren Störungen. Diese Vorgänge auseinanderzuhalten gehört zur Arbeit.",
+      "raw_seconds": 7.894784580498866,
+      "speech_window_seconds": 7.894784580498866,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Die Höhle ist Ort und Archiv. Ihre Seiten schrieben mehrere Verfasser, manchmal übereinander.",
+      "raw_seconds": 5.178049886621316,
+      "speech_window_seconds": 5.178049886621316,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Gehen wir zunächst hinaus. Flores gehört zu einer Region, in der Plattenbewegungen zur Entstehung einer langen Vulkankette beitrugen.",
+      "raw_seconds": 6.501587301587302,
+      "speech_window_seconds": 6.501587301587302,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Auf Karten wirkt die Insel dauerhaft. Doch sie ist die vorläufige Oberfläche von Vorgängen, die Menschenleben weit überdauern.",
+      "raw_seconds": 6.780226757369615,
+      "speech_window_seconds": 6.780226757369615,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Vulkanismus schafft Gestein und Relief. Verwitterung, Wasser und Schwerkraft öffnen anschließend Täler und bewegen Material abwärts.",
+      "raw_seconds": 7.3723356009070296,
+      "speech_window_seconds": 7.3723356009070296,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Das geschieht nicht gleich schnell. Ruhiger Hang, Regenbach und Vulkanereignis hinterlassen ganz unterschiedliche Spuren.",
+      "raw_seconds": 6.443537414965986,
+      "speech_window_seconds": 6.443537414965986,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Steilheit beeinflusst auch Reisen. Eine kurze Kartenstrecke kann einen mühsamen Übergang zwischen Graten und Tälern bedeuten.",
+      "raw_seconds": 6.849886621315193,
+      "speech_window_seconds": 6.849886621315193,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Wege, Anbau und Siedlungen entwickeln sich darin. Geografie bietet Möglichkeiten und Grenzen, aber kein einziges vorgeschriebenes Schicksal.",
+      "raw_seconds": 8.034104308390022,
+      "speech_window_seconds": 8.034104308390022,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Eine Vulkaninsel besteht nicht nur aus junger Lava. Flores besitzt auch Kalkstein, darunter das Gestein bei Liang Bua.",
+      "raw_seconds": 6.246167800453515,
+      "speech_window_seconds": 6.246167800453515,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Kalkstein erzählt von Karbonatmaterial und früheren Umwelten. Die Landschaft vereint mehrere geologische Kapitel.",
+      "raw_seconds": 6.722176870748299,
+      "speech_window_seconds": 6.722176870748299,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Wasser mit gelöstem Kohlendioxid kann Kalksteinspalten langsam erweitern. Über lange Zeit entstehen Hohlräume und Höhlensysteme.",
+      "raw_seconds": 7.082086167800454,
+      "speech_window_seconds": 7.082086167800454,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Das erklärt einen allgemeinen Vorgang, nicht jede Kammer gleich und keine einfache Skizze als genaue Höhlenkarte.",
+      "raw_seconds": 6.072018140589569,
+      "speech_window_seconds": 6.072018140589569,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Gesteinsalter, Höhlenentwicklung und Alter späterer Ablagerungen sind verschiedene Fragen. Ihre Vermischung macht den Ort zu einfach.",
+      "raw_seconds": 7.383945578231293,
+      "speech_window_seconds": 7.383945578231293,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Eine alte Höhle kann viel jüngere Ablagerungen enthalten. Eine junge Oberfläche kann älteres Material darunter oder daneben verbergen.",
+      "raw_seconds": 7.314285714285714,
+      "speech_window_seconds": 7.314285714285714,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Diese Unterscheidung wird bei den archäologischen Daten wichtig. Die Geologie lehrt uns schon jetzt genaues Lesen.",
+      "raw_seconds": 5.746938775510204,
+      "speech_window_seconds": 5.746938775510204,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Vulkangipfel prägen den Horizont. Wasser im Kalkstein schafft dagegen stille Räume, die Spuren bewahren können.",
+      "raw_seconds": 6.246167800453515,
+      "speech_window_seconds": 6.246167800453515,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Beides gehört zu Flores und braucht die umgebenden Beziehungen. Beides sollte keine Fantasiekulisse werden.",
+      "raw_seconds": 5.201269841269841,
+      "speech_window_seconds": 5.201269841269841,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Das Land liefert den Rahmen unseres Archivs. Nun folgt die Barriere, die Inselleben besonders machte: das Meer.",
+      "raw_seconds": 5.746938775510204,
+      "speech_window_seconds": 5.746938775510204,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Flores liegt in Wallacea, zwischen den großen Kontinentalschelfen Südostasiens und Australiens.",
+      "raw_seconds": 5.61922902494331,
+      "speech_window_seconds": 5.61922902494331,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Bei tieferem Meeresspiegel änderten sich viele Küsten und Verbindungen. Tiefe Wasserstraßen trennten Flores dennoch vom asiatischen Festland.",
+      "raw_seconds": 8.080544217687075,
+      "speech_window_seconds": 8.080544217687075,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Über Wasser anzukommen unterscheidet sich vom Weg über zusammenhängendes Land. Die Barriere filtert, welche Organismen eintreffen und bleiben.",
+      "raw_seconds": 7.604535147392291,
+      "speech_window_seconds": 7.604535147392291,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Das macht Ankunft nicht unmöglich. Erfolgreiche Überquerungen konnten aber besonders weitreichende Folgen haben.",
+      "raw_seconds": 6.15328798185941,
+      "speech_window_seconds": 6.15328798185941,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Tiere verbreiten sich durch verschiedene Mechanismen und seltene Ereignisse. Wie frühe Homininen genau ankamen, bleibt Gegenstand der Forschung.",
+      "raw_seconds": 8.661043083900227,
+      "speech_window_seconds": 8.661043083900227,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Floß, Route oder sturmbedingte Drift sind ohne Belege Hypothesen. Eine Möglichkeit ist keine wiedergewonnene Erinnerung.",
+      "raw_seconds": 6.582857142857143,
+      "speech_window_seconds": 6.582857142857143,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Inselpopulationen treffen besondere Ressourcen, Konkurrenten, Fressfeinde und Räume an. Diese Bedingungen können evolutionäre Veränderungen prägen.",
+      "raw_seconds": 8.591383219954649,
+      "speech_window_seconds": 8.591383219954649,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Manche Inseltiere werden kleiner, andere größer. Es gibt keine Regel, nach der alle Lebewesen auf Inseln schrumpfen.",
+      "raw_seconds": 6.339047619047619,
+      "speech_window_seconds": 6.339047619047619,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Flores bewahrt unter anderem ausgestorbene kleine Stegodonten, Verwandte der Elefanten, als Teil einer besonderen Lebensgemeinschaft.",
+      "raw_seconds": 6.989206349206349,
+      "speech_window_seconds": 6.989206349206349,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Die Fossilien beschreiben frühere Umwelten, aber keine vollständige Szene mit allen Tieren am selben Ort zur selben Zeit.",
+      "raw_seconds": 6.501587301587302,
+      "speech_window_seconds": 6.501587301587302,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Rekonstruktionen müssen Raum und Zeit achten. Objekte verschiedener Schichten gehören nicht automatisch zusammen in ein Bild.",
+      "raw_seconds": 6.896326530612245,
+      "speech_window_seconds": 6.896326530612245,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Auch Evolution verlangt Vorsicht. Ein kleiner Körper braucht Anatomie, Datierung, Vergleiche und mehr als ein Exemplar als Erklärung.",
+      "raw_seconds": 7.349115646258503,
+      "speech_window_seconds": 7.349115646258503,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Das Meer garantierte kein Ergebnis. Es schuf mit die Umstände für Geschichten, die sich anderswo nicht genauso entwickelten.",
+      "raw_seconds": 6.246167800453515,
+      "speech_window_seconds": 6.246167800453515,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Unser zweiter Schlüssel: Isolation verändert Fragen, beantwortet sie aber nicht ohne Belege.",
+      "raw_seconds": 5.131609977324263,
+      "speech_window_seconds": 5.131609977324263,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Zurück zur Höhle. Die Insel lässt uns eine komplizierte Überlieferung erwarten, keine einfache Kopie des Festlands.",
+      "raw_seconds": 6.478367346938776,
+      "speech_window_seconds": 6.478367346938776,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "In Liang Bua brachte geduldige Arbeit etwas hervor, das vertraute Erwartungen an unsere evolutionäre Familie herausforderte.",
+      "raw_seconds": 6.8034467120181406,
+      "speech_window_seconds": 6.8034467120181406,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Zweitausenddrei wurden dort Überreste geborgen, die für die Beschreibung von Homo floresiensis im Folgejahr wesentlich waren.",
+      "raw_seconds": 6.443537414965986,
+      "speech_window_seconds": 6.443537414965986,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Der Name bezeichnet einen ausgestorbenen Homininen von Flores. Kleiner Körper und ungewöhnliche Merkmalskombination machten den Fund bemerkenswert.",
+      "raw_seconds": 8.55655328798186,
+      "speech_window_seconds": 8.55655328798186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Das berühmte kleine Individuum war erwachsen. Geringe Körperhöhe beweist für sich genommen kein Kindesalter.",
+      "raw_seconds": 5.944308390022676,
+      "speech_window_seconds": 5.944308390022676,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Forschende prüfen mehrere anatomische Hinweise, statt den Lebensabschnitt allein anhand der Größe zu bestimmen.",
+      "raw_seconds": 5.979138321995465,
+      "speech_window_seconds": 5.979138321995465,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Eine sorgfältige Studie verbindet Beobachtungen und fragt nach dem Zusammenspiel der Merkmale, ohne Kleinheit zur ganzen Erklärung zu machen.",
+      "raw_seconds": 7.151746031746032,
+      "speech_window_seconds": 7.151746031746032,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Körperproportionen und Schädelform wurden untersucht. Entscheidend war die Kombination, nicht nur ein überraschender Messwert.",
+      "raw_seconds": 6.524807256235827,
+      "speech_window_seconds": 6.524807256235827,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Vergleiche mit anderen Homininen halfen bei Klassifikation und Unterschieden gegenüber Erwartungen, die sich an heutigen Menschen orientierten.",
+      "raw_seconds": 6.989206349206349,
+      "speech_window_seconds": 6.989206349206349,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Es folgten Debatten. Andere Deutungen mussten sämtliche Belege berücksichtigen, einschließlich weiterer Funde und weniger auffälliger Einzelheiten.",
+      "raw_seconds": 7.732244897959184,
+      "speech_window_seconds": 7.732244897959184,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Eine Art zu benennen beendet die Fragen nicht. Es schafft einen Rahmen, der geprüft und verfeinert werden muss.",
+      "raw_seconds": 5.630839002267574,
+      "speech_window_seconds": 5.630839002267574,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Ein kleines Gehirnmaß erklärt nicht das gesamte Verhalten. Aussagen über Fähigkeiten müssen materiellen Belegen folgen.",
+      "raw_seconds": 6.478367346938776,
+      "speech_window_seconds": 6.478367346938776,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Steinwerkzeuge eröffnen eine weitere Untersuchung. Form und Fundzusammenhang zeigen Aktivitäten, bestimmen aber nicht automatisch jeden Hersteller.",
+      "raw_seconds": 8.417233560090702,
+      "speech_window_seconds": 8.417233560090702,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Ein Werkzeug neben einem Fossil verlangt Prüfung ihrer Verbindung. Nähe allein beweist keine Zusammengehörigkeit.",
+      "raw_seconds": 6.455147392290249,
+      "speech_window_seconds": 6.455147392290249,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Die Leistung lag im Verknüpfen von Überresten, Artefakten, Schichten und Vergleichen, nicht nur im ungewöhnlichen Fund.",
+      "raw_seconds": 7.000816326530612,
+      "speech_window_seconds": 7.000816326530612,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Darum kann ein stilles Grabungsfoto mehr erklären als ein erfundenes Spektakel. Der dokumentierte Befund lässt sich erneut prüfen.",
+      "raw_seconds": 7.151746031746032,
+      "speech_window_seconds": 7.151746031746032,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Spitznamen wecken Aufmerksamkeit. Wissenschaft handelt von wirklichen Organismen und prüfbaren Belegen, nicht von Fantasiegestalten.",
+      "raw_seconds": 7.883174603174603,
+      "speech_window_seconds": 7.883174603174603,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Jetzt drängt sich die Frage auf: Wann lebten sie, und wie zuverlässig erzählt die Höhle ihre Zeit?",
+      "raw_seconds": 5.085170068027211,
+      "speech_window_seconds": 5.085170068027211,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Sedimente wirken zunächst wie sauber gestapelte Schichten, oben jünger als unten. Wirkliche Ablagerungen sind oft komplizierter.",
+      "raw_seconds": 6.6873469387755105,
+      "speech_window_seconds": 6.6873469387755105,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Erosion kann Teile entfernen. Jüngeres Material sammelt sich neben älterem und täuscht, wenn seine räumliche Anordnung missverstanden wird.",
+      "raw_seconds": 7.63936507936508,
+      "speech_window_seconds": 7.63936507936508,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Diese Beziehungen müssen durch die Grabung verfolgt werden. Eine einzige senkrechte Linie ist keine vollständige Geschichte.",
+      "raw_seconds": 6.629297052154195,
+      "speech_window_seconds": 6.629297052154195,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Datierungsmethoden untersuchen unterschiedliche Materialien und Vorgänge. Ein Wert hilft erst, wenn wir wissen, was er tatsächlich misst.",
+      "raw_seconds": 7.349115646258503,
+      "speech_window_seconds": 7.349115646258503,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Das Alter von Sediment ist nicht automatisch das eines Knochens. Die Verbindung zum archäologischen Ereignis muss belegt werden.",
+      "raw_seconds": 6.501587301587302,
+      "speech_window_seconds": 6.501587301587302,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Weitere Arbeit korrigierte die Chronologie von Liang Bua durch besseres Verständnis der Ablagerungen. Das macht Datierung nicht sinnlos.",
+      "raw_seconds": 7.500045351473923,
+      "speech_window_seconds": 7.500045351473923,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Die überarbeitete Einordnung setzt die bekannten Homo-floresiensis-Skelettreste ungefähr zwischen hunderttausend und sechzigtausend Jahre vor heute.",
+      "raw_seconds": 8.301133786848073,
+      "speech_window_seconds": 8.301133786848073,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Die zugehörige Werkzeugsequenz reicht später, bis ungefähr fünfzigtausend Jahre. Fossilien und Werkzeuge sind keine identischen Uhren.",
+      "raw_seconds": 8.17342403628118,
+      "speech_window_seconds": 8.17342403628118,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Das sind ungefähre Zeiträume einer Deutung, kein genauer Geburtstag oder letzter Tag einer ganzen Art.",
+      "raw_seconds": 5.88625850340136,
+      "speech_window_seconds": 5.88625850340136,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Die letzte erhaltene Spur zeigt, wo die heutigen Belege enden. Sie datiert nicht automatisch das Verschwinden auf der ganzen Insel.",
+      "raw_seconds": 7.1401360544217685,
+      "speech_window_seconds": 7.1401360544217685,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Diese Trennung verhindert eine erfundene Schlusskatastrophe, nur weil unsere Erzählung ein dramatisches Ende verlangt.",
+      "raw_seconds": 6.095238095238095,
+      "speech_window_seconds": 6.095238095238095,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Umwelt, Ökologie, Vulkanismus und Begegnungen mit anderen Gruppen eröffnen Forschungsfragen. Ihre Rolle verlangt Belege statt eines bequemen Schlusses.",
+      "raw_seconds": 8.742312925170069,
+      "speech_window_seconds": 8.742312925170069,
+      "tempo": 0.9059391632300589,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Erkenntnis wächst durch erneute Prüfung. Ein korrigiertes Alter kann die Geschichte ändern und zugleich die Methode stärken.",
+      "raw_seconds": 6.315827664399093,
+      "speech_window_seconds": 6.315827664399093,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Die Höhle ist keine Uhr mit einem einzigen Zeiger. Mehrere Belegarten begrenzen und prüfen einander.",
+      "raw_seconds": 5.2128798185941045,
+      "speech_window_seconds": 5.2128798185941045,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Diese Beziehungen führen uns hinaus zu Orten, die eine noch frühere Vergangenheit von Flores bewahren.",
+      "raw_seconds": 5.178049886621316,
+      "speech_window_seconds": 5.178049886621316,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Die Frage wächst: Seit wann gehörten Homininen überhaupt zur sich wandelnden Welt dieser Insel?",
+      "raw_seconds": 4.527891156462585,
+      "speech_window_seconds": 4.527891156462585,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Bei Mata Menge im Soa-Becken reicht wesentlich älteres Fossilmaterial ungefähr siebenhunderttausend Jahre zurück.",
+      "raw_seconds": 6.5364172335600905,
+      "speech_window_seconds": 6.5364172335600905,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Die Funde sind bruchstückhaft und verlangen anatomische Prüfung sowie Kontext. Ein frühes Datum liefert kein vollständiges Ahnenporträt.",
+      "raw_seconds": 7.198185941043084,
+      "speech_window_seconds": 7.198185941043084,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Sie zeigen dennoch, dass die Homininengeschichte der Insel weit vor den berühmten Liang-Bua-Resten beginnt.",
+      "raw_seconds": 5.468299319727891,
+      "speech_window_seconds": 5.468299319727891,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Noch ältere Steinwerkzeuge andernorts erweitern den Blick. Ein Artefakt belegt Tätigkeit, klärt aber nicht jede biologische Identität.",
+      "raw_seconds": 7.569705215419501,
+      "speech_window_seconds": 7.569705215419501,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Verwandtschaft der Gruppen, Entwicklung bestimmter Merkmale und beteiligte Vorfahren verlangen weiterhin Vergleich und Forschung.",
+      "raw_seconds": 6.548027210884354,
+      "speech_window_seconds": 6.548027210884354,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Homo erectus wird in Abstammungshypothesen diskutiert. Doch nicht jeder Ast eines Stammbaums wurde direkt beobachtet.",
+      "raw_seconds": 6.664126984126984,
+      "speech_window_seconds": 6.664126984126984,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Ein ehrliches Diagramm lässt Lücken, trennt gesicherte Funde von vorgeschlagenen Verbindungen und bleibt für neue Belege offen.",
+      "raw_seconds": 6.594467120181406,
+      "speech_window_seconds": 6.594467120181406,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Gerade das erklärt Flores' Bedeutung für eine größere Geschichte menschlicher Evolution.",
+      "raw_seconds": 4.690430839002268,
+      "speech_window_seconds": 4.690430839002268,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Festlandserwartungen sind nützliche Vergleiche, aber keine Vorgaben, denen jede Inselpopulation genau folgen musste.",
+      "raw_seconds": 6.617687074829932,
+      "speech_window_seconds": 6.617687074829932,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Tiefe Meeresstraßen, besondere Ökologie und lange Überlieferung zeigen, wie vielfältig menschliche Vergangenheit sein konnte.",
+      "raw_seconds": 7.093696145124716,
+      "speech_window_seconds": 7.093696145124716,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Bevor wir diese Zeit verlassen: Die heutigen Menschen auf Flores besitzen eigene Geschichten und gegenwärtige Lebenswelten.",
+      "raw_seconds": 6.30421768707483,
+      "speech_window_seconds": 6.30421768707483,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Sie sind keine Ausstellungsstücke für eine ausgestorbene Art. Respekt vor Befunden gehört zum Respekt vor der Gegenwart.",
+      "raw_seconds": 6.164897959183674,
+      "speech_window_seconds": 6.164897959183674,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Unsere Erzählung zieht ostwärts zu einem weiteren bekannten Bild: Vulkanseen, deren Farben Besucher überraschen.",
+      "raw_seconds": 5.828208616780046,
+      "speech_window_seconds": 5.828208616780046,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Am Kelimutu liegen drei Kraterseen in benachbarten Becken. Ihre wechselnde Erscheinung machte sie berühmt.",
+      "raw_seconds": 5.526349206349207,
+      "speech_window_seconds": 5.526349206349207,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Wasserchemie, Gase, Mineralreaktionen, Wetter und Betrachtung beeinflussen das Sichtbare. Nachbarseen müssen sich nicht gleich verhalten.",
+      "raw_seconds": 8.498503401360544,
+      "speech_window_seconds": 8.498503401360544,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Ein Foto friert einen Zustand ein. Es verspricht künftigen Besuchern nicht dieselben drei Farben.",
+      "raw_seconds": 5.12,
+      "speech_window_seconds": 5.12,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Generierte Bilder dürfen Chemie nicht zu augenblicklicher Magie machen. Erklärungen müssen Zeitmaßstab und Beleggrenzen beachten.",
+      "raw_seconds": 6.884716553287982,
+      "speech_window_seconds": 6.884716553287982,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Die Seen verbinden Wasser mit dem vulkanischen Rahmen. Schöne Oberflächen können fortdauernde Prozesse verbergen.",
+      "raw_seconds": 5.839818594104308,
+      "speech_window_seconds": 5.839818594104308,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Andernorts erhebt sich Ineries markanter Kegel bei Bajawa über einer Landschaft, in der Menschen leben und arbeiten.",
+      "raw_seconds": 6.130068027210885,
+      "speech_window_seconds": 6.130068027210885,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Der Berg garantiert keinen sicheren Zugang. Reale Besuche verlangen aktuelle Bedingungen, örtliche Hinweise und offizielle Informationen.",
+      "raw_seconds": 8.068934240362811,
+      "speech_window_seconds": 8.068934240362811,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Wälder, Gärten, Straßen und Siedlungen verbinden diese Orte. Die Insel geht zwischen berühmten Aussichtspunkten weiter.",
+      "raw_seconds": 6.710566893424036,
+      "speech_window_seconds": 6.710566893424036,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Regen, Hangneigung und Entwässerung beeinflussen Anbau, Bauen und Wege, ebenso wie den untersuchten materiellen Befund.",
+      "raw_seconds": 7.244625850340136,
+      "speech_window_seconds": 7.244625850340136,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Lebendige Traditionen vertiefen das Bild. Sprache, Geschichte und Praktiken unterscheiden sich; ein Dorf steht nicht für die ganze Insel.",
+      "raw_seconds": 7.302675736961452,
+      "speech_window_seconds": 7.302675736961452,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Wae Rebo im Westen ist für kegelförmige Häuser bekannt. Ihre Bedeutung gehört einer lebenden Gemeinschaft, nicht bloß einer schönen Dachlinie.",
+      "raw_seconds": 7.604535147392291,
+      "speech_window_seconds": 7.604535147392291,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Architektur betrachten heißt auch Pflege, Gastempfang und Entscheidungen über Bilder sowie Zugang berücksichtigen.",
+      "raw_seconds": 5.88625850340136,
+      "speech_window_seconds": 5.88625850340136,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Ein respektvoller Film zeigt erwachsenen Alltag und erlaubte Außenansichten, ohne erfundene Zeremonien oder bestellte Vergangenheitsaufführungen.",
+      "raw_seconds": 8.150204081632653,
+      "speech_window_seconds": 8.150204081632653,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Zugang ist eine Beziehung. Ein Onlinefund ersetzt keine örtlichen Absprachen und Schutzregeln.",
+      "raw_seconds": 5.363809523809524,
+      "speech_window_seconds": 5.363809523809524,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Auch in Höhlen rechtfertigt ein Bild weder gestörte Schichten noch berührte Funde oder überschrittene Sperren.",
+      "raw_seconds": 5.5495691609977325,
+      "speech_window_seconds": 5.5495691609977325,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Ablagerungen sind endliche Archive. Beschädigter Kontext kann Informationen vernichten, die kein weiteres Foto wiederherstellt.",
+      "raw_seconds": 6.942766439909297,
+      "speech_window_seconds": 6.942766439909297,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Dokumentation, Schutz und örtliche Beteiligung bewahren Belege und die Orte, an denen sie Bedeutung tragen.",
+      "raw_seconds": 6.060408163265306,
+      "speech_window_seconds": 6.060408163265306,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Modelle erklären Beziehungen. Sie zeigen keine behauptete echte Grabung, kein vollständiges altes Ökosystem und keine endgültig geklärte Ankunft.",
+      "raw_seconds": 8.17342403628118,
+      "speech_window_seconds": 8.17342403628118,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Das zählt besonders bei realistisch wirkenden Bildern. Ein kamerahaftes Bild kann weiterhin eine Illustration sein.",
+      "raw_seconds": 6.501587301587302,
+      "speech_window_seconds": 6.501587301587302,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Ehrlichkeit bewahrt Staunen. Höhlen, Seen und Vulkangestein interessieren mehr, wenn ihre beantwortbaren Fragen klar werden.",
+      "raw_seconds": 6.965986394557823,
+      "speech_window_seconds": 6.965986394557823,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Die Fragen verbinden sich: Was formte Land, was überquerte Wasser, was veränderte sich und was blieb erhalten?",
+      "raw_seconds": 5.944308390022676,
+      "speech_window_seconds": 5.944308390022676,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Zurück zur Höhle: Das Meer prägte Ankunft und Isolation, die Insel bot eine wandelbare ökologische Umwelt.",
+      "raw_seconds": 6.443537414965986,
+      "speech_window_seconds": 6.443537414965986,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Geologie schuf Lebensräume und Sammelorte. Menschliche Tätigkeit ergänzte die Überlieferung zwischen natürlichen Vorgängen.",
+      "raw_seconds": 6.698956916099773,
+      "speech_window_seconds": 6.698956916099773,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Ausgrabung gewann Beziehungen zurück, nicht nur Objekte. Anatomie und Datierung machten daraus Fragen unserer Evolutionsgeschichte.",
+      "raw_seconds": 7.732244897959184,
+      "speech_window_seconds": 7.732244897959184,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Jeder Schritt brauchte Kontext. Ein Stück ohne Herkunft, ein Datum ohne Probengeschichte oder ein Bild ohne Erklärung sagt weniger.",
+      "raw_seconds": 7.534875283446712,
+      "speech_window_seconds": 7.534875283446712,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Flores bietet mehr als ein überraschendes Fossil: Wissensgebiete werden gemeinsam stärker.",
+      "raw_seconds": 4.794920634920635,
+      "speech_window_seconds": 4.794920634920635,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Die außergewöhnliche Vergangenheit teilt die Insel mit heutigen Menschen, Landschaften und Verantwortung. Eine Seite braucht den Blick auf die anderen.",
+      "raw_seconds": 7.778684807256236,
+      "speech_window_seconds": 7.778684807256236,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Viel bleibt offen zu Vorfahren, Ankunft, Verhalten und dem Verschwinden von Populationen aus dem bekannten Befund.",
+      "raw_seconds": 6.211337868480726,
+      "speech_window_seconds": 6.211337868480726,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Neue Entdeckungen können Fragen oder vertraute Antworten ändern. Das begründet Schutz statt erzwungener Gewissheit.",
+      "raw_seconds": 6.327437641723356,
+      "speech_window_seconds": 6.327437641723356,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Verbinden Sie Neugier mit Sorgfalt: erlaubte Wege, örtliche Hinweise und ungestörtes Kultur- sowie Naturerbe.",
+      "raw_seconds": 6.280997732426304,
+      "speech_window_seconds": 6.280997732426304,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Trennen Sie Entdeckung, Schlussfolgerung und Illustration beim Erzählen, auch wenn Einfachheit dramatischer klingt.",
+      "raw_seconds": 5.630839002267574,
+      "speech_window_seconds": 5.630839002267574,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Der Höhleneingang erscheint wieder. Tageslicht liegt auf hellem Stein, der Boden wirkt erneut gewöhnlich.",
+      "raw_seconds": 5.445079365079365,
+      "speech_window_seconds": 5.445079365079365,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Nun erkennen wir mehrere Geschichten: Gesteinsbildung, Wasserbewegung, Materialeintrag und die Arbeit der Deutung.",
+      "raw_seconds": 6.257777777777778,
+      "speech_window_seconds": 6.257777777777778,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Draußen folgen grüne Hügel, Vulkane, Felder und das Meer, das Nachbarn zugleich trennt und verbindet.",
+      "raw_seconds": 5.874648526077097,
+      "speech_window_seconds": 5.874648526077097,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Flores wartet nicht auf einen einzigen geheimen Schlüssel. Sorgfältige Belege machen seine zusammenkommenden Fragen verständlicher.",
+      "raw_seconds": 6.664126984126984,
+      "speech_window_seconds": 6.664126984126984,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Eine kleine Spur verändert eine große Geschichte, wenn ihr Zusammenhang erhalten bleibt. Darin liegt die Kraft geduldiger Forschung.",
+      "raw_seconds": 6.606077097505669,
+      "speech_window_seconds": 6.606077097505669,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "Die wichtigste Reise führt vom Sehen zum Verstehen: erkennen, was ein Ort aussagen lässt und was offenbleibt.",
+      "raw_seconds": 5.77015873015873,
+      "speech_window_seconds": 5.77015873015873,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "Flores gibt uns bemerkenswerte Belege und die Verantwortung, das nächste Kapitel für die Nachfolgenden zu bewahren.",
+      "raw_seconds": 6.048798185941043,
+      "speech_window_seconds": 6.048798185941043,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "Am Höhleneingang endet das Licht. Die Fragen führen weiter, von einer Insel in eine viel größere menschliche Vergangenheit.",
+      "raw_seconds": 6.6873469387755105,
+      "speech_window_seconds": 6.6873469387755105,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1320,
+  "decoded_samples": 31680000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-de-22m00s.mp3",
+  "flac": "voice-de-22m00s.flac",
+  "mp3_sha256": "592662e286d702ebeb94f1cb69eaf87dde896059cb05cea31f5e258aa231b163",
+  "flac_sha256": "8f9cfd12f2f601027ee6e8246d77f3e3c5b1ea8203790cfc973e3e516747af9a"
+}

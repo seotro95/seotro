@@ -1,0 +1,1209 @@
+{
+  "locale": "cs",
+  "voice_id": "piper:cs_CZ-jirka-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1320,
+  "spoken_cues": 132,
+  "closing_silence_seconds": 0,
+  "config_hash": "9f3e283623607395a925920c1fb57021bff3bd2dd1e83e87cab5d80d22e6b178",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "U vchodu do jeskyně dopadá denní světlo na světlý kámen a končí. Hlouběji uvnitř země uchovává jiný druh světla.",
+      "raw_seconds": 9.810430839002267,
+      "speech_window_seconds": 9.810430839002267,
+      "tempo": 1.0166249574095614,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Je to světlo poznání: pečlivě zaznamenaná vrstva, kamenný nástroj a otázka, kterou si nikdo předem nepředstavoval.",
+      "raw_seconds": 10.077460317460318,
+      "speech_window_seconds": 10.077460317460318,
+      "tempo": 1.044296405954437,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Na Floresu pomohla jedna jeskyně změnit příběh lidské evoluce. Abychom pochopili proč, musíme porozumět také okolnímu ostrovu.",
+      "raw_seconds": 11.250068027210885,
+      "speech_window_seconds": 11.250068027210885,
+      "tempo": 1.1658101582601952,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Flores leží ve východní Indonésii, v provincii Východní Nusa Tenggara. Strmý terén, sopky a moře zde utvářejí pohyb i možnosti života.",
+      "raw_seconds": 11.877006802721088,
+      "speech_window_seconds": 11.877006802721088,
+      "tempo": 1.2307779070177292,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Pobřeží ukazuje ostrov, na který se můžeme dívat. Horniny a sedimenty nabízejí ostrov, ve kterém můžeme číst.",
+      "raw_seconds": 10.298049886621316,
+      "speech_window_seconds": 10.298049886621316,
+      "tempo": 1.0671554286654212,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Toto čtení vede od vápencové tmy k sopečným jezerům, od dávných příchodů k dnešním komunitám mezi stále se měnícími kopci.",
+      "raw_seconds": 10.65795918367347,
+      "speech_window_seconds": 10.65795918367347,
+      "tempo": 1.1044517288780797,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Naše hlavní otázka je jednoduchá: Jak ostrov uchoval kapitolu lidské minulosti, která po objevení působila tak nečekaně?",
+      "raw_seconds": 10.460589569160998,
+      "speech_window_seconds": 10.460589569160998,
+      "tempo": 1.0839989190840411,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Odpověď potřebuje zeměpis, geologii, biologii a trpělivý archeologický výzkum. Žádný z těchto oborů nevypráví celý příběh sám.",
+      "raw_seconds": 11.842176870748299,
+      "speech_window_seconds": 11.842176870748299,
+      "tempo": 1.2271685876423106,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Budeme sledovat doklady různých měřítek: mořský průliv, horu, jeskynní vstup i drobné podrobnosti v jediné vrstvě sedimentu.",
+      "raw_seconds": 10.65795918367347,
+      "speech_window_seconds": 10.65795918367347,
+      "tempo": 1.1044517288780797,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Také rozlišíme nálezy od závěrů, které z nich vyvozujeme. Přesvědčivá rekonstrukce má tuto hranici zpřehlednit.",
+      "raw_seconds": 9.32281179138322,
+      "speech_window_seconds": 9.32281179138322,
+      "tempo": 0.9660944861537015,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Nejznámějším místem naší cesty je Liang Bua, vápencová jeskyně v západní části Floresu, poblíž oblasti Rutengu.",
+      "raw_seconds": 10.866938775510205,
+      "speech_window_seconds": 10.866938775510205,
+      "tempo": 1.1261076451305911,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Není významná proto, že tma sama vytváří tajemství. Hromadil se tu materiál, zachoval se a mohl být zkoumán v souvislostech.",
+      "raw_seconds": 11.087528344671203,
+      "speech_window_seconds": 11.087528344671203,
+      "tempo": 1.1489666678415753,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Samostatný předmět může naznačit příběh. Se zaznamenanou polohou, okolím a historií uložení však poskytuje mnohem silnější oporu.",
+      "raw_seconds": 11.633197278911565,
+      "speech_window_seconds": 11.633197278911565,
+      "tempo": 1.2055126713897995,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Začněme proto podlahou pod nohama. Než si představíme dávný život, musíme se ptát, jak se jeho stopy dostaly právě sem.",
+      "raw_seconds": 10.147120181405896,
+      "speech_window_seconds": 10.147120181405896,
+      "tempo": 1.0515150447052741,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Některé vznikly lidskou činností. Jiné přinesla voda, zvířata či gravitace nebo je změnily pozdější zásahy. Rozlišit tyto procesy vyžaduje práci.",
+      "raw_seconds": 12.515555555555556,
+      "speech_window_seconds": 12.515555555555556,
+      "tempo": 1.2969487622337363,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Jeskyně je tedy místem i archivem. Její stránky psalo více sil, někdy dokonce přes sebe navzájem.",
+      "raw_seconds": 8.428843537414966,
+      "speech_window_seconds": 8.428843537414966,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Nejprve vyjděme ven. Flores patří do oblasti, kde vzájemné působení tektonických desek pomohlo vytvořit dlouhý řetězec sopečných krajin.",
+      "raw_seconds": 11.261678004535147,
+      "speech_window_seconds": 11.261678004535147,
+      "tempo": 1.167013264718668,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Ostrov se na mapě zdá trvalý. Ve skutečnosti je dočasným povrchem procesů, které probíhají mnohem déle než lidský život.",
+      "raw_seconds": 9.833650793650794,
+      "speech_window_seconds": 9.833650793650794,
+      "tempo": 1.0190311703265071,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Sopečná činnost vytváří horniny a reliéf. Zvětrávání, voda a gravitace je pak mění a přesouvají materiál údolími do nižších poloh.",
+      "raw_seconds": 11.842176870748299,
+      "speech_window_seconds": 11.842176870748299,
+      "tempo": 1.2271685876423106,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Tyto síly nepůsobí stejně rychle. Klidný svah, potok naplněný přívalovým deštěm a sopečná událost zanechávají velmi odlišné stopy.",
+      "raw_seconds": 11.633197278911565,
+      "speech_window_seconds": 11.633197278911565,
+      "tempo": 1.2055126713897995,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Strmost ovlivňuje i lidský pohyb. Krátká vzdálenost na mapě může znamenat obtížný přechod mezi hřebeny a údolími.",
+      "raw_seconds": 9.7059410430839,
+      "speech_window_seconds": 9.7059410430839,
+      "tempo": 1.0057969992833056,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Cesty, podmínky pěstování a sídla vznikají v rámci těchto rozdílů. Zeměpis nabízí možnosti a omezení, nikoli jediný nevyhnutelný osud.",
+      "raw_seconds": 12.120816326530612,
+      "speech_window_seconds": 12.120816326530612,
+      "tempo": 1.2560431426456593,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Sopečný ostrov však nemusí být celý z mladé lávy. Flores obsahuje také vápenec, včetně hornin spojených s Liang Bua.",
+      "raw_seconds": 10.576689342403627,
+      "speech_window_seconds": 10.576689342403627,
+      "tempo": 1.0960299836687697,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Vápenec má jinou historii, spojenou s uhličitanovým materiálem a staršími prostředími. Krajina tak obsahuje několik geologických kapitol.",
+      "raw_seconds": 11.981496598639456,
+      "speech_window_seconds": 11.981496598639456,
+      "tempo": 1.241605865143985,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Voda s rozpuštěným oxidem uhličitým proniká do vápencových puklin a pomalu je chemicky rozšiřuje. Časem mohou vznikat dutiny a jeskyně.",
+      "raw_seconds": 11.644807256235827,
+      "speech_window_seconds": 11.644807256235827,
+      "tempo": 1.2067157778482722,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "To vysvětluje obecný proces. Neznamená to, že všechny prostory vznikly stejně nebo že jednoduchý diagram mapuje skutečnou jeskyni.",
+      "raw_seconds": 10.924988662131518,
+      "speech_window_seconds": 10.924988662131518,
+      "tempo": 1.1321231774229552,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Stáří horniny, vznik jeskyně a stáří usazenin jsou různé věci. Záměna vytváří falešně jednoduchý obraz minulosti.",
+      "raw_seconds": 10.820498866213152,
+      "speech_window_seconds": 10.820498866213152,
+      "tempo": 1.1212952192966996,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Stará jeskyně může obsahovat mnohem mladší vrstvy. Pod zdánlivě mladým povrchem nebo vedle něj může ležet starší materiál.",
+      "raw_seconds": 10.553469387755102,
+      "speech_window_seconds": 10.553469387755102,
+      "tempo": 1.0936237707518242,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Tento rozdíl bude zásadní u archeologického datování. Okolní geologie nás už nyní učí číst záznam pozorněji.",
+      "raw_seconds": 10.298049886621316,
+      "speech_window_seconds": 10.298049886621316,
+      "tempo": 1.0671554286654212,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Sopky tvoří dramatické obzory. Voda ve vápenci vytváří tichá místa, kde se zachovávají stopy minulosti.",
+      "raw_seconds": 9.067392290249433,
+      "speech_window_seconds": 9.067392290249433,
+      "tempo": 0.9396261440672987,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Obojí patří k Floresu. Ani jedno nepotřebuje fantastické kulisy a historii ostrova nelze vysvětlit bez dalších souvislostí.",
+      "raw_seconds": 10.634739229024943,
+      "speech_window_seconds": 10.634739229024943,
+      "tempo": 1.102045515961134,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Země poskytuje archivu prostředí. Teď přichází bariéra, která pomohla utvářet osobitost ostrovního života: moře.",
+      "raw_seconds": 10.112290249433107,
+      "speech_window_seconds": 10.112290249433107,
+      "tempo": 1.0479057253298556,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Flores leží ve Wallacee, ostrovní oblasti mezi rozsáhlými kontinentálními šelfy jihovýchodní Asie a Austrálie.",
+      "raw_seconds": 10.100680272108843,
+      "speech_window_seconds": 10.100680272108843,
+      "tempo": 1.0467026188713826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Při nižší hladině moře se mnohá pobřeží a spojení změnila. Hluboké mořské kanály však Flores dál oddělovaly od asijské pevniny.",
+      "raw_seconds": 11.029478458049887,
+      "speech_window_seconds": 11.029478458049887,
+      "tempo": 1.142951135549211,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Dostat se na ostrov přes vodu není stejné jako jít po souvislé souši. Bariéra ovlivňuje, které organismy dorazí a zůstanou.",
+      "raw_seconds": 10.50702947845805,
+      "speech_window_seconds": 10.50702947845805,
+      "tempo": 1.0888113449179326,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Příchod tedy nebyl nemožný. Úspěšná překročení vody ale mohla mít neobyčejně důležité následky, ať už k nim došlo jakkoli.",
+      "raw_seconds": 10.692789115646258,
+      "speech_window_seconds": 10.692789115646258,
+      "tempo": 1.1080610482534983,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Živočichové se šíří různými cestami, někdy vzácnou událostí. Jak na Flores přišli dávní hominini, se stále zkoumá.",
+      "raw_seconds": 10.170340136054422,
+      "speech_window_seconds": 10.170340136054422,
+      "tempo": 1.0539212576222199,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Navržený vor, trasa či cesta hnaná bouří je hypotézou, dokud ji s událostí nespojí důkazy. Možnost není obnovená vzpomínka.",
+      "raw_seconds": 11.447437641723356,
+      "speech_window_seconds": 11.447437641723356,
+      "tempo": 1.1862629680542338,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Zdroje, konkurenti, predátoři a prostor tvoří na ostrovech zvláštní podmínky. Během generací mohou ovlivňovat evoluci.",
+      "raw_seconds": 10.367709750566894,
+      "speech_window_seconds": 10.367709750566894,
+      "tempo": 1.0743740674162583,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Někteří ostrovní živočichové se zmenšují, jiní zvětšují. Mnozí se vyvíjejí složitěji. Neplatí pravidlo, že každý tvor na ostrově zakrní.",
+      "raw_seconds": 11.80734693877551,
+      "speech_window_seconds": 11.80734693877551,
+      "tempo": 1.223559268266892,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Fosilie Floresu zahrnují malé stegodonty, vyhynulé příbuzné slonů. Byli součástí osobitého ekologického společenstva.",
+      "raw_seconds": 10.843718820861678,
+      "speech_window_seconds": 10.843718820861678,
+      "tempo": 1.1237014322136454,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Fosilie pomáhají popsat minulá prostředí. Neposkytují však úplný živý výjev se všemi zvířaty na jednom místě v jeden okamžik.",
+      "raw_seconds": 11.505487528344672,
+      "speech_window_seconds": 11.505487528344672,
+      "tempo": 1.192278500346598,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Rekonstrukce proto musí respektovat čas i prostor. Předměty z různých vrstev se automaticky nestávají sousedy v jedné dramatické scéně.",
+      "raw_seconds": 12.329795918367347,
+      "speech_window_seconds": 12.329795918367347,
+      "tempo": 1.2776990588981707,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Malá postava vybízí k vysvětlení. Evoluční příběh ale potřebuje anatomii, datování, srovnání a více než jediný nález.",
+      "raw_seconds": 11.064308390022676,
+      "speech_window_seconds": 11.064308390022676,
+      "tempo": 1.1465604549246295,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Moře nepředepsalo jediný jistý výsledek. Pomáhalo vytvářet podmínky, v nichž se historie populací mohla lišit od vývoje jinde.",
+      "raw_seconds": 10.820498866213152,
+      "speech_window_seconds": 10.820498866213152,
+      "tempo": 1.1212952192966996,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "To je druhý klíč našeho příběhu: Izolace mění otázky, které klademe, ale bez dokladů je sama nezodpoví.",
+      "raw_seconds": 9.009342403628118,
+      "speech_window_seconds": 9.009342403628118,
+      "tempo": 0.9336106117749344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Vraťme se nyní do jeskyně. Okolní ostrov nás připravil na složitý záznam, nikoli jednoduchou kopii pevninské minulosti.",
+      "raw_seconds": 10.599909297052154,
+      "speech_window_seconds": 10.599909297052154,
+      "tempo": 1.0984361965857155,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Trpělivý výzkum tohoto záznamu v Liang Bua odhalil něco, co zpochybnilo známá očekávání o naší vlastní evoluční rodině.",
+      "raw_seconds": 11.366167800453514,
+      "speech_window_seconds": 11.366167800453514,
+      "tempo": 1.1778412228449238,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "V roce dva tisíce tři badatelé v Liang Bua našli pozůstatky, které se další rok staly základem popisu Homo floresiensis.",
+      "raw_seconds": 10.193560090702947,
+      "speech_window_seconds": 10.193560090702947,
+      "tempo": 1.0563274705391654,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Jméno označuje vyhynulého hominina spojeného s Floresem. Malé tělo a neobvyklá kombinace anatomických znaků učinily objev pozoruhodným.",
+      "raw_seconds": 11.34294784580499,
+      "speech_window_seconds": 11.34294784580499,
+      "tempo": 1.1754350099279782,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Známý drobný jedinec byl dospělý. Samotná malá výška nedokazuje, že nalezené pozůstatky patří dítěti.",
+      "raw_seconds": 8.626213151927438,
+      "speech_window_seconds": 8.626213151927438,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Tento rozdíl je vědecky důležitý. Badatelé zkoumají různé anatomické informace a neurčují životní fázi jen podle výšky.",
+      "raw_seconds": 10.669569160997732,
+      "speech_window_seconds": 10.669569160997732,
+      "tempo": 1.1056548353365525,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Anatomická studie spojuje pozorování a zkoumá vztahy mezi znaky. Malou velikost nepovažuje za celé vysvětlení.",
+      "raw_seconds": 9.659501133786849,
+      "speech_window_seconds": 9.659501133786849,
+      "tempo": 1.0009845734494143,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Zkoumány byly například tělesné proporce a tvar lebky. Šlo o kombinaci znaků, nikoli o jediné překvapivé měření.",
+      "raw_seconds": 10.298049886621316,
+      "speech_window_seconds": 10.298049886621316,
+      "tempo": 1.0671554286654212,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Srovnání s jinými homininy pomáhalo při klasifikaci pozůstatků a vysvětlování jejich odlišnosti od obvyklých představ o moderních lidech.",
+      "raw_seconds": 11.737687074829932,
+      "speech_window_seconds": 11.737687074829932,
+      "tempo": 1.216340629516055,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Následovala vědecká debata. Jiné výklady musely vysvětlit všechny doklady, také pozdější nálezy a podrobnosti přesahující první dojem.",
+      "raw_seconds": 11.261678004535147,
+      "speech_window_seconds": 11.261678004535147,
+      "tempo": 1.167013264718668,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "To je podstatné. Pojmenování druhu není dramatický konec všech otázek. Vytváří rámec, který lze ověřovat a zpřesňovat.",
+      "raw_seconds": 10.739229024943311,
+      "speech_window_seconds": 10.739229024943311,
+      "tempo": 1.1128734740873898,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Ani malý objem mozku automaticky nevysvětluje veškeré chování. Tvrzení o schopnostech těchto homininů se musí opírat o hmotné doklady.",
+      "raw_seconds": 11.760907029478458,
+      "speech_window_seconds": 11.760907029478458,
+      "tempo": 1.2187468424330008,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Kamenné artefakty otevírají další otázky. Tvar a kontext ukazují činnosti, ale neurčují automaticky každého výrobce.",
+      "raw_seconds": 10.692789115646258,
+      "speech_window_seconds": 10.692789115646258,
+      "tempo": 1.1080610482534983,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Nástroj nalezený poblíž fosilie má význam díky kontextu. Spojení je třeba prozkoumat, ne je předpokládat jen z blízkosti.",
+      "raw_seconds": 11.250068027210885,
+      "speech_window_seconds": 11.250068027210885,
+      "tempo": 1.1658101582601952,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Úspěchem nebyl pouze neobvyklý předmět. Šlo o skládání vztahů mezi pozůstatky, artefakty, usazeninami a anatomickými srovnáními.",
+      "raw_seconds": 11.6215873015873,
+      "speech_window_seconds": 11.6215873015873,
+      "tempo": 1.2043095649313265,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Tichá fotografie výzkumu tak může říci víc než velkolepá vymyšlená scéna. Zaznamenané doklady lze zkoumat znovu.",
+      "raw_seconds": 9.97297052154195,
+      "speech_window_seconds": 9.97297052154195,
+      "tempo": 1.0334684478281813,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Populární přezdívky přitahují pozornost. Vědecký příběh ale pojednává o skutečných organismech a ověřitelných dokladech, ne o bytosti z fantazie.",
+      "raw_seconds": 12.411065759637188,
+      "speech_window_seconds": 12.411065759637188,
+      "tempo": 1.2861208041074805,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Další otázce se nevyhneme: Kdy tito hominini žili a jak spolehlivě může jeskyně určit jejich dobu?",
+      "raw_seconds": 8.25469387755102,
+      "speech_window_seconds": 8.25469387755102,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Sedimenty mohou vypadat jako úhledný stoh, kde je každá vrstva mladší než spodní. Skutečné usazeniny bývají mnohem složitější.",
+      "raw_seconds": 10.7740589569161,
+      "speech_window_seconds": 10.7740589569161,
+      "tempo": 1.1164827934628083,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Eroze může část souvrství odstranit. Pozdější materiál se může uložit vedle staršího a mást nás, pokud nepochopíme jejich geometrii.",
+      "raw_seconds": 12.167256235827665,
+      "speech_window_seconds": 12.167256235827665,
+      "tempo": 1.2608555684795508,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Badatelé musí sledovat vztahy napříč výzkumem. Jediný svislý řez nemůže automaticky představovat celou historii naleziště.",
+      "raw_seconds": 10.983038548752834,
+      "speech_window_seconds": 10.983038548752834,
+      "tempo": 1.1381387097153195,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Různé datovací metody zkoumají různé materiály a procesy. Číslo pomáhá, když víme, co přesně se měřilo a proč.",
+      "raw_seconds": 10.588299319727891,
+      "speech_window_seconds": 10.588299319727891,
+      "tempo": 1.0972330901272427,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Stáří sedimentu není automaticky stářím kosti. Vztah mezi vzorkem a archeologickou událostí musí být doložen.",
+      "raw_seconds": 10.379319727891156,
+      "speech_window_seconds": 10.379319727891156,
+      "tempo": 1.075577173874731,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Další výzkum v Liang Bua upravil chronologii. Změna vyplynula z lepšího pochopení usazenin, nikoli z nesmyslnosti samotného datování.",
+      "raw_seconds": 11.749297052154194,
+      "speech_window_seconds": 11.749297052154194,
+      "tempo": 1.2175437359745278,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Upravená chronologie klade známé kosterní pozůstatky Homo floresiensis přibližně do doby před sto tisíci až šedesáti tisíci lety.",
+      "raw_seconds": 11.099138321995465,
+      "speech_window_seconds": 11.099138321995465,
+      "tempo": 1.150169774300048,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Kamenné artefakty příslušné archeologické posloupnosti sahají později, asi před padesát tisíc let. Fosilie a nástroje nejsou totožné hodiny.",
+      "raw_seconds": 12.167256235827665,
+      "speech_window_seconds": 12.167256235827665,
+      "tempo": 1.2608555684795508,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Jde o přibližná rozmezí v interpretovaném záznamu. Nesmíme z nich dělat přesné datum vzniku nebo posledního dne celého druhu.",
+      "raw_seconds": 10.170340136054422,
+      "speech_window_seconds": 10.170340136054422,
+      "tempo": 1.0539212576222199,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Poslední zachovaná stopa ukazuje, kde současné doklady končí. Automaticky neprozrazuje okamžik, kdy populace zmizela ze všech částí ostrova.",
+      "raw_seconds": 11.737687074829932,
+      "speech_window_seconds": 11.737687074829932,
+      "tempo": 1.216340629516055,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Tento rozdíl brání lákavé chybě: vymyslet jednu závěrečnou katastrofu jen proto, že časová osa potřebuje dramatickou poslední scénu.",
+      "raw_seconds": 12.503945578231292,
+      "speech_window_seconds": 12.503945578231292,
+      "tempo": 1.2957456557752633,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Změny prostředí, sopky a setkání populací otevírají otázky. Jejich význam potřebuje důkazy, ne pohodlný konec.",
+      "raw_seconds": 10.65795918367347,
+      "speech_window_seconds": 10.65795918367347,
+      "tempo": 1.1044517288780797,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Vědecké poznání roste, když lze nálezy přehodnotit. Upravené stáří může změnit příběh a současně posílit metodu jeho zkoumání.",
+      "raw_seconds": 11.598367346938776,
+      "speech_window_seconds": 11.598367346938776,
+      "tempo": 1.201903352014381,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Jeskyně není hodinami s jedinou ručičkou. Je souborem vztahů, v nichž různé druhy dokladů vzájemně omezují své výklady.",
+      "raw_seconds": 9.833650793650794,
+      "speech_window_seconds": 9.833650793650794,
+      "tempo": 1.0190311703265071,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Čtení těchto vztahů nás vrací na ostrov. Další místa mimo Liang Bua uchovávají stopy ještě starší minulosti.",
+      "raw_seconds": 9.427301587301587,
+      "speech_window_seconds": 9.427301587301587,
+      "tempo": 0.9769224442799571,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Otázka se rozšiřuje od obyvatel jedné jeskyně k tomu, jak dlouho už hominini patřili do měnícího se světa Floresu.",
+      "raw_seconds": 9.85687074829932,
+      "speech_window_seconds": 9.85687074829932,
+      "tempo": 1.021437383243453,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "V Mata Menge v pánvi Soa přidávají mnohem starší fosilie další kapitolu, sahající přibližně sedm set tisíc let zpět.",
+      "raw_seconds": 11.052698412698414,
+      "speech_window_seconds": 11.052698412698414,
+      "tempo": 1.1453573484661568,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Nálezy jsou zlomkovité a potřebují pečlivé anatomické zkoumání i souvislosti. Vysoké stáří neposkytuje úplný portrét dávného předka.",
+      "raw_seconds": 11.842176870748299,
+      "speech_window_seconds": 11.842176870748299,
+      "tempo": 1.2271685876423106,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Přesto zdůrazňují jednu skutečnost: Homininní historie ostrova sahá daleko před období představované známými pozůstatky z Liang Bua.",
+      "raw_seconds": 11.935056689342403,
+      "speech_window_seconds": 11.935056689342403,
+      "tempo": 1.2367934393100934,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Starší kamenné nástroje jinde na Floresu tento pohled rozšiřují. Artefakt dokládá činnost, aniž vyřeší všechny otázky biologické identity výrobce.",
+      "raw_seconds": 12.515555555555556,
+      "speech_window_seconds": 12.515555555555556,
+      "tempo": 1.2969487622337363,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Vztahy populací, doba vzniku určitých znaků a zapojené skupiny předků zůstávají otázkami pro srovnávání a pokračující výzkum.",
+      "raw_seconds": 12.353015873015874,
+      "speech_window_seconds": 12.353015873015874,
+      "tempo": 1.2801052718151165,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Homo erectus se objevuje v hypotézách o původu. Působivý rodokmen ale nelze prezentovat, jako bychom přímo pozorovali každou větev.",
+      "raw_seconds": 11.04108843537415,
+      "speech_window_seconds": 11.04108843537415,
+      "tempo": 1.1441542420076838,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Nejpoctivější diagram má prázdná místa. Rozlišuje doložené nálezy od navržených vztahů a nechává prostor novým důkazům.",
+      "raw_seconds": 10.936598639455783,
+      "speech_window_seconds": 10.936598639455783,
+      "tempo": 1.1333262838814282,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "To význam Floresu nesnižuje. Vysvětluje to, proč jediný ostrov může tolik znamenat pro širší vyprávění o lidské evoluci.",
+      "raw_seconds": 11.110748299319727,
+      "speech_window_seconds": 11.110748299319727,
+      "tempo": 1.1513728807585208,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Pevninské zkušenosti poskytují užitečné srovnání. Nejsou však pokynem, který musela každá ostrovní populace přesně následovat.",
+      "raw_seconds": 10.913378684807256,
+      "speech_window_seconds": 10.913378684807256,
+      "tempo": 1.1309200709644824,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Hluboké moře, osobitá ekologie a dlouhý záznam společně nabízejí širší pohled na rozmanitost lidské minulosti.",
+      "raw_seconds": 10.054240362811791,
+      "speech_window_seconds": 10.054240362811791,
+      "tempo": 1.0418901930374913,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Než opustíme vzdálené věky, připomeňme si současnost. Dnešní obyvatelé Floresu mají vlastní dějiny i současné životy.",
+      "raw_seconds": 10.843718820861678,
+      "speech_window_seconds": 10.843718820861678,
+      "tempo": 1.1237014322136454,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Nemají být výstavními figurami představujícími vyhynulý druh. Úcta k archeologickým dokladům patří k úctě k dnešním lidem.",
+      "raw_seconds": 10.414149659863945,
+      "speech_window_seconds": 10.414149659863945,
+      "tempo": 1.0791864932501496,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Příběh se nyní posouvá na východ, k dalšímu známému obrazu Floresu: sopečným jezerům, jejichž barvy mohou návštěvníky překvapit.",
+      "raw_seconds": 11.702857142857143,
+      "speech_window_seconds": 11.702857142857143,
+      "tempo": 1.2127313101406365,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Na Kelimutu leží tři kráterová jezera v sousedních sopečných pánvích. Proměnlivý vzhled z nich učinil jednu z nejznámějších krajin ostrova.",
+      "raw_seconds": 11.853786848072563,
+      "speech_window_seconds": 11.853786848072563,
+      "tempo": 1.2283716941007836,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Vzhled ovlivňuje chemie vody, plyny, reakce minerálů, počasí i podmínky pozorování. Sousední jezera se nemusí chovat stejně.",
+      "raw_seconds": 11.19201814058957,
+      "speech_window_seconds": 11.19201814058957,
+      "tempo": 1.159794625967831,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Fotografie zachytí jedinou podobu. Neslibuje, že každého návštěvníka ve všech příštích dnech přivítají stejné tři barvy.",
+      "raw_seconds": 9.566621315192744,
+      "speech_window_seconds": 9.566621315192744,
+      "tempo": 0.9913597217816315,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Ani generovaný obraz nemá měnit chemii v okamžitou magii. Věrohodné vysvětlení respektuje časové měřítko změn a hranice důkazů.",
+      "raw_seconds": 11.110748299319727,
+      "speech_window_seconds": 11.110748299319727,
+      "tempo": 1.1513728807585208,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Jezera propojují příběh vody se sopečnou stavbou ostrova. Připomínají také, že krásný povrch může skrývat aktivní procesy.",
+      "raw_seconds": 11.319727891156463,
+      "speech_window_seconds": 11.319727891156463,
+      "tempo": 1.1730287970110325,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Výrazný kužel Inerie u Bajawy ukazuje další stránku sopečného Floresu. Pod horou žijí a pracují lidé.",
+      "raw_seconds": 9.148662131519274,
+      "speech_window_seconds": 9.148662131519274,
+      "tempo": 0.9480478892766087,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Hora není prázdná scéna ani záruka bezpečné cesty. Záleží na podmínkách, místních radách a aktuálních úředních pokynech.",
+      "raw_seconds": 11.087528344671203,
+      "speech_window_seconds": 11.087528344671203,
+      "tempo": 1.1489666678415753,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Lesy, zahrady, cesty a sídla spojují známá místa. Ostrov pokračuje mezi vyhlídkami i mimo rám vybraný pro cestovatelský snímek.",
+      "raw_seconds": 11.656417233560092,
+      "speech_window_seconds": 11.656417233560092,
+      "tempo": 1.2079188843067452,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Déšť, strmé svahy a odtok vody ovlivňují pěstování, stavění a pohyb. Stejně tak formují hmotný záznam, který studujeme.",
+      "raw_seconds": 10.762448979591836,
+      "speech_window_seconds": 10.762448979591836,
+      "tempo": 1.1152796870043353,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Živé tradice přidávají další hloubku. Komunity Floresu mají odlišné jazyky, dějiny a zvyklosti. Jedna vesnice nemůže zastoupit všechny.",
+      "raw_seconds": 11.877006802721088,
+      "speech_window_seconds": 11.877006802721088,
+      "tempo": 1.2307779070177292,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Západofloreské Wae Rebo proslulo kuželovitými domy. Jejich význam náleží živému společenství, nikoli jen malebným obrysům střech.",
+      "raw_seconds": 11.877006802721088,
+      "speech_window_seconds": 11.877006802721088,
+      "tempo": 1.2307779070177292,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Pohled na architekturu má zahrnovat i údržbu, přijímání hostů a místní rozhodování o tom, co lze fotografovat nebo navštívit.",
+      "raw_seconds": 11.784126984126985,
+      "speech_window_seconds": 11.784126984126985,
+      "tempo": 1.2211530553499466,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Ohleduplný film ukazuje život dospělých a povolené exteriéry. Nevymýšlí posvátné obřady ani nenutí komunitu přehrávat minulost.",
+      "raw_seconds": 10.936598639455783,
+      "speech_window_seconds": 10.936598639455783,
+      "tempo": 1.1333262838814282,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Přístup je založen na vztazích, ne automaticky na nalezení místa online. Místní dohody a pravidla ochrany patří k cestě.",
+      "raw_seconds": 10.298049886621316,
+      "speech_window_seconds": 10.298049886621316,
+      "tempo": 1.0671554286654212,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Také v jeskyních buďme opatrní. Dramatický záběr nesmí vyžadovat narušení vrstev, dotýkání nálezů ani vstup do uzavřených prostor.",
+      "raw_seconds": 12.236916099773243,
+      "speech_window_seconds": 12.236916099773243,
+      "tempo": 1.2680742072303879,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Usazeniny jsou konečným archivem. Poškozený kontext může připravit krásný předmět o informace, které další fotografie nedokáže obnovit.",
+      "raw_seconds": 12.26013605442177,
+      "speech_window_seconds": 12.26013605442177,
+      "tempo": 1.2704804201473336,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Dokumentace, ochrana a místní účast chrání fyzické doklady i místa, kde mají svůj význam.",
+      "raw_seconds": 8.486893424036282,
+      "speech_window_seconds": 8.486893424036282,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Naše rekonstrukce vysvětlují vztahy. Netvrdí, že ukazují skutečnou událost výzkumu, úplný dávný ekosystém nebo vyřešenou trasu příchodu.",
+      "raw_seconds": 12.283356009070294,
+      "speech_window_seconds": 12.283356009070294,
+      "tempo": 1.2728866330642792,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "To je důležité zejména u realistických obrazů. I zdánlivý kamerový záběr může být ilustrací a diváci mají znát jeho úlohu.",
+      "raw_seconds": 11.168798185941043,
+      "speech_window_seconds": 11.168798185941043,
+      "tempo": 1.1573884130508851,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Poctivost zachovává úžas. Jeskyně, jezero či sopečná stěna jsou zajímavější, když chápeme, na které otázky opravdu mohou odpovědět.",
+      "raw_seconds": 11.830566893424036,
+      "speech_window_seconds": 11.830566893424036,
+      "tempo": 1.2259654811838379,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Otázky se propojují: Co utvářelo zemi, co překročilo vodu, co se měnilo v čase a co se zachovalo pro výzkum?",
+      "raw_seconds": 10.077460317460318,
+      "speech_window_seconds": 10.077460317460318,
+      "tempo": 1.044296405954437,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Sledujme úvahu zpět k jeskyni. Moře ovlivňovalo příchody a izolaci, zatímco ostrov poskytoval proměnlivé ekologické prostředí.",
+      "raw_seconds": 11.377777777777778,
+      "speech_window_seconds": 11.377777777777778,
+      "tempo": 1.1790443293033968,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Geologické procesy vytvořily prostředí k životu i místa hromadění stop. Lidská činnost přispěla do záznamu promíšeného s přírodními ději.",
+      "raw_seconds": 11.737687074829932,
+      "speech_window_seconds": 11.737687074829932,
+      "tempo": 1.216340629516055,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Výzkum obnovil vztahy, ne jen předměty. Anatomické srovnání a datování je proměnily v otázky naší evoluční historie.",
+      "raw_seconds": 10.762448979591836,
+      "speech_window_seconds": 10.762448979591836,
+      "tempo": 1.1152796870043353,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "V každém kroku záleželo na souvislostech. Nález bez místa, datum bez historie vzorku nebo nevysvětlený obraz by řekly méně.",
+      "raw_seconds": 11.296507936507936,
+      "speech_window_seconds": 11.296507936507936,
+      "tempo": 1.1706225840940867,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Flores tedy nabízí víc než překvapivou fosilii. Ukazuje, jak se různé oblasti poznání posilují, když spolupracují.",
+      "raw_seconds": 10.425759637188209,
+      "speech_window_seconds": 10.425759637188209,
+      "tempo": 1.0803895997086226,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Mimořádná minulost sdílí ostrov s dnešními lidmi, krajinou a povinnostmi. Péče o jednu část má brát v úvahu ostatní.",
+      "raw_seconds": 10.681179138321996,
+      "speech_window_seconds": 10.681179138321996,
+      "tempo": 1.1068579417950255,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "O původu, příchodu, chování a vymizení populací ze známého záznamu se stále máme mnoho co učit.",
+      "raw_seconds": 8.742312925170069,
+      "speech_window_seconds": 8.742312925170069,
+      "tempo": 0.9059391632300589,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Budoucí objevy mohou zpřesnit otázky nebo nahradit známé odpovědi. Proto je třeba chránit doklady a nevynucovat jistotu už dnes.",
+      "raw_seconds": 11.586757369614512,
+      "speech_window_seconds": 11.586757369614512,
+      "tempo": 1.200700245555908,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Při návštěvě spojte zvědavost s ohleduplností. Držte se povolených cest, poslouchejte místní rady a nenarušujte dědictví ani přírodní prostředí.",
+      "raw_seconds": 11.412607709750567,
+      "speech_window_seconds": 11.412607709750567,
+      "tempo": 1.1826536486788153,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Při vyprávění udržujte zřetelný rozdíl mezi objevem, závěrem a ilustrací, i když by jednodušší verze zněla dramatičtěji.",
+      "raw_seconds": 10.832108843537416,
+      "speech_window_seconds": 10.832108843537416,
+      "tempo": 1.1224983257551726,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Do zorného pole se vrací vchod do jeskyně. Světlo stále dopadá na světlý kámen a podlaha opět působí obyčejně.",
+      "raw_seconds": 9.926530612244898,
+      "speech_window_seconds": 9.926530612244898,
+      "tempo": 1.02865602199429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Naučili jsme se však vidět více historií: vznik horniny, pohyb vody, příchod materiálu i práci potřebnou k interpretaci.",
+      "raw_seconds": 10.181950113378685,
+      "speech_window_seconds": 10.181950113378685,
+      "tempo": 1.0551243640806927,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Venku Flores pokračuje zelenými kopci, sopečnými vrcholy, obdělávanou půdou a mořem, které sousedy zároveň odděluje i spojuje.",
+      "raw_seconds": 11.261678004535147,
+      "speech_window_seconds": 11.261678004535147,
+      "tempo": 1.167013264718668,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Ostrov není jedinou záhadou s jedním tajným klíčem. Je místem setkávání otázek, které pečlivé důkazy pomáhají objasňovat.",
+      "raw_seconds": 10.948208616780045,
+      "speech_window_seconds": 10.948208616780045,
+      "tempo": 1.134529390339901,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Malá stopa může změnit velký příběh, pokud se zachová její kontext. Proto je trpělivý výzkum silnější než vymyšlená podívaná.",
+      "raw_seconds": 11.180408163265307,
+      "speech_window_seconds": 11.180408163265307,
+      "tempo": 1.1585915195093581,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "Nejdůležitější cesta možná vede od pohledu k porozumění: poznat, co nám místo dovoluje říci a co zůstává otevřené.",
+      "raw_seconds": 10.228390022675738,
+      "speech_window_seconds": 10.228390022675738,
+      "tempo": 1.0599367899145842,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "Flores uchovává obě možnosti. Dává nám mimořádné doklady i odpovědnost ponechat další kapitolu těm, kteří přijdou po nás.",
+      "raw_seconds": 10.832108843537416,
+      "speech_window_seconds": 10.832108843537416,
+      "tempo": 1.1224983257551726,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "U ústí jeskyně světlo končí. Otázky pokračují od jednoho ostrova k mnohem širší lidské minulosti.",
+      "raw_seconds": 8.579773242630386,
+      "speech_window_seconds": 8.579773242630386,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1320,
+  "decoded_samples": 31680000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-cs-22m00s.mp3",
+  "flac": "voice-cs-22m00s.flac",
+  "mp3_sha256": "2a3ad472db46f968292d0b2d60c3a4539d28c9ec33d4b0a17cd70bdbfeec6cea",
+  "flac_sha256": "d8efc0631aa0014ba00b221ef11f3709e733cb6df3acf78119ac7f45eeed92e1"
+}
