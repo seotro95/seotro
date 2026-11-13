@@ -1,29 +1,13 @@
 <!-- active-production -->
-# Chủ đề 85 — tài liệu và đủ 17 voice 21:22 đã kiểm tải
+# Chủ đề 87 — tài liệu đã có, đang tạo 17 voice 20:22
 
-[Tải đủ 17 giọng ZIP](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_17_VOICES_21m22s.zip) · [Kịch bản và 12 TXT prompt](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_TAI_LIEU_21m22s.zip) · [5 tiêu đề và 5 prompt thumbnail](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/5_TIEU_DE_VA_THUMBNAIL.txt)
+[Kịch bản và 11 TXT prompt](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_TAI_LIEU_20m22s.zip) · [5 tiêu đề và 5 prompt thumbnail](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/5_TIEU_DE_VA_THUMBNAIL.txt) · [Tiến trình voice](https://github.com/seotro95/seotro/actions/runs/43442771145)
 
-- [Anh (Mỹ)](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_My_Tieng_Anh.mp3) — 21:22
-- [Việt Nam — Nam Minh](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Viet_Nam_Nam_Minh.mp3) — 21:22
-- [Tây Ban Nha](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Tay_Ban_Nha.mp3) — 21:22
-- [Pháp](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Phap.mp3) — 21:22
-- [Nhật Bản](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Nhat_Ban.mp3) — 21:22
-- [Hàn Quốc](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Han_Quoc.mp3) — 21:22
-- [Đức](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Duc.mp3) — 21:22
-- [Ý](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Y.mp3) — 21:22
-- [Bồ Đào Nha](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Bo_Dao_Nha.mp3) — 21:22
-- [Hà Lan](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Ha_Lan.mp3) — 21:22
-- [Ba Lan](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Ba_Lan.mp3) — 21:22
-- [Thụy Điển](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Thuy_Dien.mp3) — 21:22
-- [Đan Mạch](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Dan_Mach.mp3) — 21:22
-- [Phần Lan](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Phan_Lan.mp3) — 21:22
-- [Na Uy (Bokmål)](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Na_Uy.mp3) — 21:22
-- [Séc](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Sec.mp3) — 21:22
-- [H'mông Trắng (nữ)](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_Hmong_Trang_Nu.mp3) — 21:22
+Chủ đề: Schöningen, vũ khí gỗ và kỹ năng săn bắt cổ. Có 3.249 từ Anh, 123 mốc, 110 prompt mới trong 11 TXT, 13 mốc dùng lại. Mỗi prompt cấm trẻ em, thiếu niên, lời nói và âm thanh; chỉ bản sao gỗ và giáo cụ trưởng thành, không cảnh săn giết hoặc chân dung người chế tác.
 
-Đã tải lại, kiểm hash và giải mã từng MP3 đúng 61.536.000 mẫu ở 48 kHz. Giữ đủ 17 nhận diện từ tập 71; Việt dùng Nam Minh thật, H’mông dùng reference female-3. Chưa có kiểm nghe/biên tập bản ngữ độc lập hoặc xác minh phương ngữ H’mông Trắng độc lập.
+Giữ đủ 17 ID từ tập 71: Việt dùng Nam Minh thật vi-VN-NamMinhNeural, nam; H’mông female-3 nữ qua công cụ riêng 1.6.6. Hai bản thử Anh 30 giây và Nam Minh 10 giây đã qua kiểm. Bản dịch được rà ý chính, niên đại và thuật ngữ; chưa có kiểm nghe/biên tập bản ngữ độc lập.
 
-Chủ đề: Homo luzonensis, những mảnh xương mở rộng bản đồ họ hàng của chúng ta. Có 3.501 từ Anh, 129 mốc, 120 prompt mới trong 12 TXT, 9 mốc dùng lại. Mỗi prompt cấm trẻ em, thiếu niên, mẫu chưa trưởng thành, lời nói và âm thanh; chỉ dùng giáo cụ trưởng thành có dấu chế tạo rõ. Không phục dựng mặt, sọ, chiều cao hoặc cơ thể hoàn chỉnh của loài. Chưa có footage hoặc MP4 tập 85. Khi có clip: chỉ voice Anh, xóa toàn bộ tiếng clip, 10 cảnh trong 30 giây đầu nằm trong 21:22. Thiếu cảnh dùng video chuyển động liên quan, không ảnh tĩnh hoặc thẻ chữ. Giữ hồ sơ v3 Nam Minh từ tập 71, không tạo lại voice đã xong hoặc tự bắt đầu tập khác. Hồ sơ: productions/video-85-homo-luzonensis; mã nguồn: nhánh codex/homo-luzonensis85-production-20261113, thư mục episode85.
+Tiếp tục workflow hiện tại, giữ checkpoint thành công. Chỉ phát hành khi đủ 17 voice, đúng ID, giải mã mỗi bản đúng 58.656.000 mẫu ở 48 kHz. Chưa có footage hoặc MP4 tập 87. Khi có clip: chỉ voice Anh, 10 cảnh trong 30 giây đầu nằm trong 20:22; cảnh thiếu dùng video liên quan, không ảnh tĩnh/thẻ chữ. Không tự bắt đầu tập khác. Tập 85 và mọi bản trước được giữ nguyên.
 <!-- /active-production -->
 
 ---
@@ -172,6 +156,7 @@ Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ 
 ## Bàn giao video chủ đề4
 
 Đã dựng và xuất bản23:00, chỉ voiceAnh gốc có nhấn nhá.133upload/115clipkhácnhau/18bảntrùng; chọn cảnh người trưởng thành, bỏ mọi tiếngclip và cảnh không phù hợp.12shot trong30giây đầu; các chương theo ranh120/110s. [Video](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Tập5 vẫn chưa bắt đầu.
+
 
 
 
