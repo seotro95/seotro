@@ -1,0 +1,52 @@
+import asyncio,difflib,hashlib,json,os,sys,threading
+from pathlib import Path
+from render_common import R,PROFILES,digest,normalized
+LOCAL=threading.local()
+class IncompleteSpeechError(RuntimeError):pass
+def complete_words(locale,text,words):
+ expected=normalized(text);observed=normalized(''.join(w['text'] for w in words))
+ return observed==expected if locale=='en-US' else difflib.SequenceMatcher(None,expected,observed,autojunk=False).ratio()>=.97
+def configure(locale):
+ import edge_tts,edge_tts.communicate,edge_tts.voices
+ for module in [edge_tts.communicate,edge_tts.voices]:
+  if os.environ.get('SSL_CERT_FILE'):module._SSL_CTX.load_verify_locations(cafile=os.environ['SSL_CERT_FILE'])
+ sys.path.insert(0,str(R.parent/'melo91'));import online_backend
+ voice=PROFILES[locale]['voice_id'];catalog={v['ShortName']:v for v in online_backend.get_catalog()}
+ assert catalog[voice]['Locale']==locale and catalog[voice]['Gender']=='Male'
+ async def download(text,voice,output):
+  limit=getattr(LOCAL,'attempt_limit',5)
+  for attempt in range(limit):
+   try:
+    async def receive():
+     words=[];stream=edge_tts.Communicate(text,voice,rate=LOCAL.rate,volume='+0%',pitch='+0Hz',boundary='WordBoundary',proxy=os.environ.get('HTTPS_PROXY'),connect_timeout=20,receive_timeout=60)
+     with Path(output).open('wb') as f:
+      async for chunk in stream.stream():
+       if chunk['type']=='audio':f.write(chunk['data'])
+       elif chunk['type']=='WordBoundary':words.append(chunk)
+     assert Path(output).stat().st_size>0 and words
+     if not complete_words(locale,text,words):raise IncompleteSpeechError('Provider returned incomplete word metadata; partial output is not accepted')
+     Path(output).with_suffix('.words.json').write_text(json.dumps(words,ensure_ascii=False))
+    await asyncio.wait_for(receive(),timeout=150);return
+   except Exception as e:
+    if getattr(e,'status',None) in [401,403,429]:raise
+    print('TTS_TRANSIENT',locale,type(e).__name__,attempt+1,'of',limit,flush=True)
+    if attempt==limit-1:raise
+    await asyncio.sleep([5,15,30,60][attempt])
+ online_backend.download_audio=download
+ return online_backend
+BACKENDS={}
+def request(locale,text,path,rate,attempts=5):
+ if locale not in BACKENDS:BACKENDS[locale]=configure(locale)
+ assert 0<len(text)<=1200
+ assert 1<=attempts<=5
+ LOCAL.attempt_limit=attempts;LOCAL.rate=rate;voice=PROFILES[locale]['voice_id'];sig=hashlib.sha256((text+'\0'+voice+'\0'+rate).encode()).hexdigest();meta=path.with_suffix('.request.json')
+ if path.exists() and meta.exists():
+  j=json.loads(meta.read_text())
+  if j['request_signature']==sig and j['sha256']==digest(path):
+   words=json.loads(path.with_suffix('.edge.words.json').read_text())
+   if complete_words(locale,text,words):return words
+   print('INVALIDATE_INCOMPLETE_GENERATED_CHECKPOINT',locale,path.name,flush=True)
+   meta.unlink()
+ BACKENDS[locale].handle({'op':'render','language':locale,'voice':voice,'text':text,'output':str(path)})
+ words=json.loads(path.with_suffix('.edge.words.json').read_text());meta.write_text(json.dumps({'request_signature':sig,'sha256':digest(path),'voice_id':voice,'rate':rate}))
+ return words

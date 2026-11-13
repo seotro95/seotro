@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "topic_id": 91,
+  "documents_published": true,
+  "stage": "documents_published_before_voice_synthesis",
+  "target_seconds": 1332,
+  "zip_crc": true,
+  "zip_bytes": 141766,
+  "zip_sha256": "a0989e0a2d89a4650b595da912e79a217fd25932ec59d88f76b8dcb8601068e3",
+  "documents_workflow_run": 43455815609,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/saqqaq-hair-video-91-22m12s"
+}

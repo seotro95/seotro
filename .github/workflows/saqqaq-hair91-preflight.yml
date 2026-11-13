@@ -1,0 +1,73 @@
+name: SaqqaqHair91 English and NamMinh timing preflight
+permissions:
+  contents: read
+jobs:
+  english:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: episode91
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: python episode91/build_documents.py
+    - run: 'python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+
+        python episode91/ensure_ffmpeg.py
+
+        python episode91/bootstrap_tool.py online
+
+        '
+    - name: Validate exact text boundaries and30second English preview
+      run: python -u episode91/render_english_groups.py --preview
+    - if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: saqqaq91-english-preflight
+        path: 'episode91/voice/en_preview/SAQQAQ_HAIR_91_EN_PREVIEW_30s.mp3
+
+          episode91/voice/en_preview/render_report.json
+
+          episode91/voice/en_preview/group-*.wav
+
+          episode91/voice/en_preview/group-*.json
+
+          episode91/voice/en_preview/raw-*.json
+
+          '
+        if-no-files-found: ignore
+        retention-days: 14
+  namminh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: episode91
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: 'python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+
+        python episode91/ensure_ffmpeg.py
+
+        python episode91/bootstrap_tool.py online'
+    - run: python -u episode91/preflight_namminh.py
+    - if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: saqqaq91-namminh-preflight
+        path: 'episode91/NAM_MINH_PREFLIGHT_QA.json
+
+          episode91/voice/vi_preview/*.mp3'
+        if-no-files-found: ignore
+        retention-days: 14
+'on':
+  push:
+    branches:
+    - codex/saqqaq-hair91-production-20261113
+    paths:
+    - .github/workflows/saqqaq-hair91-preflight.yml
+  workflow_dispatch: null
