@@ -1,0 +1,11 @@
+{
+  "topic_id": 87,
+  "stage": "documents_published_before_voice_synthesis",
+  "target_seconds": 1222,
+  "status": "passed",
+  "zip_crc": true,
+  "zip_sha256": "acac3dbb81d03e7a4ebb00beeb6318d1277d4878bcbd2d1fd7d4efe757982535",
+  "zip_bytes": 132722,
+  "release_url": "https://github.com/seotro95/seotro/releases/tag/schoeningen-video-87-20m22s",
+  "documents_workflow_run": 43440540374
+}
