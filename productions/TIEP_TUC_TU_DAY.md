@@ -1,29 +1,15 @@
 <!-- active-production -->
-# Chủ đề 71 — đã có tài liệu và đủ 17 voice 22:38
+# Chủ đề 85 — tài liệu đã có, đang tạo 17 voice 21:22
 
-[Tải đủ 17 giọng ZIP](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_17_VOICES_22m38s.zip) · [Kịch bản và 13 TXT prompt](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_TAI_LIEU_22m38s.zip) · [5 tiêu đề và 5 prompt thumbnail](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/5_TIEU_DE_VA_THUMBNAIL.txt)
+[Tải kịch bản và 12 TXT prompt](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/HOMO_LUZONENSIS_85_TAI_LIEU_21m22s.zip) · [5 tiêu đề và 5 prompt thumbnail](https://github.com/seotro95/seotro/releases/download/homo-luzonensis-video-85-21m22s/5_TIEU_DE_VA_THUMBNAIL.txt) · [Theo dõi tạo voice](https://github.com/seotro95/seotro/actions/runs/43398388344)
 
-- [Anh (Mỹ)](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_My_Tieng_Anh.mp3) — 22:38
-- [Việt Nam — Nam Minh](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Viet_Nam_Nam_Minh.mp3) — 22:38
-- [Tây Ban Nha](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Tay_Ban_Nha.mp3) — 22:38
-- [Pháp](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Phap.mp3) — 22:38
-- [Nhật Bản](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Nhat_Ban.mp3) — 22:38
-- [Hàn Quốc](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Han_Quoc.mp3) — 22:38
-- [Đức](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Duc.mp3) — 22:38
-- [Ý](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Y.mp3) — 22:38
-- [Bồ Đào Nha](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Bo_Dao_Nha.mp3) — 22:38
-- [Hà Lan](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Ha_Lan.mp3) — 22:38
-- [Ba Lan](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Ba_Lan.mp3) — 22:38
-- [Thụy Điển](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Thuy_Dien.mp3) — 22:38
-- [Đan Mạch](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Dan_Mach.mp3) — 22:38
-- [Phần Lan](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Phan_Lan.mp3) — 22:38
-- [Na Uy (Bokmål)](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Na_Uy.mp3) — 22:38
-- [Séc](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Sec.mp3) — 22:38
-- [H'mông Trắng (nữ)](https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_Hmong_Trang_Nu.mp3) — 22:38
+Chủ đề: Homo luzonensis, những mảnh xương mở rộng bản đồ họ hàng của chúng ta. Kịch bản 3.501 từ Anh, 129 mốc, 120 prompt mới trong 12 TXT, 9 mốc dùng lại. Mỗi prompt cấm trẻ em, thiếu niên, mẫu chưa trưởng thành, lời nói và âm thanh. Chỉ dùng giáo cụ trưởng thành có dấu chế tạo rõ; không phục dựng khuôn mặt, sọ, chiều cao hoặc cơ thể hoàn chỉnh của loài.
 
-Mỗi MP3 đã tải lại, kiểm hash và giải mã đúng 65.184.000 mẫu ở 48 kHz. Việt dùng NamMinhNeural thật; H’mông dùng reference female-3. Chưa có kiểm nghe/biên tập bản ngữ độc lập hoặc xác minh phương ngữ H’mông Trắng độc lập.
+Giữ đủ 17 ID từ tập 71: Việt Nam Minh thật vi-VN-NamMinhNeural, nam; H’mông female-3 nữ dùng công cụ riêng 1.6.6. Các bản dịch được rà ý chính và thuật ngữ, chưa có kiểm nghe bản ngữ độc lập. Mẫu thử Anh 30 giây và Nam Minh 10 giây đã qua kiểm.
 
-Chủ đề: Người Neanderthal dùng lửa thế nào, và vì sao bằng chứng phân bố không đều? Có 136 mốc Anh, 130 prompt mới trong 13 TXT, 6 mốc dùng lại. Mỗi prompt cấm trẻ em, lời nói và âm thanh. Chưa có footage hoặc MP4 tập 71. Khi có clip: chỉ voice Anh, bỏ toàn bộ tiếng clip, 10 cảnh liên quan trong 30 giây đầu nằm trong 22:38. Cảnh thiếu dùng video chuyển động liên quan, không ảnh tĩnh hoặc thẻ chữ. Giữ cấu hình v3 NamMinh cho tập mới và 16 ID khác; audio Adam của tập 45/58 không đổi. Không tạo lại voice đã xong hoặc tự bắt đầu tập khác. Hồ sơ: productions/video-71-neanderthal-fire; mã nguồn: nhánh codex/neanderthal-fire71-production-20261112, thư mục episode71.
+Tiếp tục workflow đang chạy, giữ checkpoint thành công. Chỉ phát hành sau khi đủ 17 voice, đúng ID và giải mã mỗi bản đúng 61.536.000 mẫu ở 48 kHz. Tập 85 chưa có footage hoặc MP4. Khi có clip: chỉ voice Anh, 10 cảnh trong 30 giây đầu nằm trong 21:22; thiếu cảnh dùng video liên quan không ảnh đứng/thẻ chữ. Không tự bắt đầu tập khác.
+
+Tập 71 đã hoàn tất và giữ tại [bản phát hành trước](https://github.com/seotro95/seotro/releases/tag/neanderthal-fire-video-71-22m38s). Các tập 45/58 vẫn giữ audio Adam.
 <!-- /active-production -->
 
 ---
@@ -172,6 +158,7 @@ Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ 
 ## Bàn giao video chủ đề4
 
 Đã dựng và xuất bản23:00, chỉ voiceAnh gốc có nhấn nhá.133upload/115clipkhácnhau/18bảntrùng; chọn cảnh người trưởng thành, bỏ mọi tiếngclip và cảnh không phù hợp.12shot trong30giây đầu; các chương theo ranh120/110s. [Video](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Tập5 vẫn chưa bắt đầu.
+
 
 
 
