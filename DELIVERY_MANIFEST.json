@@ -13,7 +13,7 @@
   "closing_hold_seconds": 2,
   "prompt_txt_files": 10,
   "full_native_speaker_review": false,
-  "published": false,
+  "published": true,
   "files": [
     {
       "language": "en",
@@ -30,7 +30,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 1.1822279792746113
+      "max_tempo": 1.1822279792746113,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/United-States-English-Andrew-21m32s.mp3"
     },
     {
       "language": "vi",
@@ -47,7 +48,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 1.0296373056994819
+      "max_tempo": 1.0296373056994819,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/Viet-Nam-Tieng-Viet-Nam-Minh-21m32s.mp3"
     },
     {
       "language": "es",
@@ -64,7 +66,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 1.0418901930374913
+      "max_tempo": 1.0418901930374913,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/Spain-Espanol-Davefx-21m32s.mp3"
     },
     {
       "language": "fr",
@@ -81,7 +84,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 1.0376793204328363
+      "max_tempo": 1.0376793204328363,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/France-Francais-Tom-21m32s.mp3"
     },
     {
       "language": "ja",
@@ -98,7 +102,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 1.1191451364656397
+      "max_tempo": 1.1191451364656397,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/Japan-Nihongo-M1-21m32s.mp3"
     },
     {
       "language": "ko",
@@ -115,7 +120,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 1.1281120392889452
+      "max_tempo": 1.1281120392889452,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/South-Korea-Hangugeo-M1-21m32s.mp3"
     },
     {
       "language": "de",
@@ -132,7 +138,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 1.0551243640806927
+      "max_tempo": 1.0551243640806927,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/Germany-Deutsch-Thorsten-21m32s.mp3"
     },
     {
       "language": "it",
@@ -149,7 +156,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 1.2561159869820122
+      "max_tempo": 1.2561159869820122,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/Italy-Italiano-M1-21m32s.mp3"
     },
     {
       "language": "pt",
@@ -166,7 +174,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 0.9
+      "max_tempo": 0.9,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/Portugal-Portugues-Tugao-21m32s.mp3"
     },
     {
       "language": "nl",
@@ -183,7 +192,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 1.266871100771915
+      "max_tempo": 1.266871100771915,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/Netherlands-Nederlands-Ronnie-21m32s.mp3"
     },
     {
       "language": "pl",
@@ -200,7 +210,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 0.9492509957350815
+      "max_tempo": 0.9492509957350815,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/Poland-Polski-MC-Speech-21m32s.mp3"
     },
     {
       "language": "sv",
@@ -217,7 +228,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 1.1706225840940867
+      "max_tempo": 1.1706225840940867,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/Sweden-Svenska-NST-21m32s.mp3"
     },
     {
       "language": "da",
@@ -234,7 +246,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 0.96128206031981
+      "max_tempo": 0.96128206031981,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/Denmark-Dansk-Talesyntese-21m32s.mp3"
     },
     {
       "language": "fi",
@@ -251,7 +264,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 1.1393418161737925
+      "max_tempo": 1.1393418161737925,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/Finland-Suomi-Harri-21m32s.mp3"
     },
     {
       "language": "no",
@@ -268,7 +282,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 0.9
+      "max_tempo": 0.9,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/Norway-Norsk-Talesyntese-21m32s.mp3"
     },
     {
       "language": "cs",
@@ -285,7 +300,8 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 1.2789021653566435
+      "max_tempo": 1.2789021653566435,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/Czechia-Cestina-Jirka-21m32s.mp3"
     },
     {
       "language": "hmn",
@@ -302,7 +318,11 @@
       "narration_cues": 129,
       "non_silent_cues": 129,
       "closing_silence_seconds": 2,
-      "max_tempo": 0.9961721476155229
+      "max_tempo": 0.9961721476155229,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/downloads/Tieng-Hmong-Trang-Nu-female-3-21m32s.mp3"
     }
-  ]
+  ],
+  "delivery_channel": "GitHub",
+  "repository": "seotro95/seotro",
+  "branch": "angkor-085-21m32s"
 }
