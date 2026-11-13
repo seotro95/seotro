@@ -1,0 +1,256 @@
+name: Schoeningen87 full17 voices NamMinh and Hmong
+'on':
+  push:
+    branches:
+    - codex/schoeningen87-production-20261113
+    paths:
+    - .github/workflows/schoeningen87-voices.yml
+  workflow_dispatch: null
+permissions:
+  contents: read
+  actions: read
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+    - &id001
+      uses: actions/checkout@v4
+      with:
+        sparse-checkout: episode87
+    - &id002
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - &id003
+      run: python episode87/extract_inputs.py
+    - uses: actions/download-artifact@v4
+      with:
+        name: schoen87-english-preflight
+        path: preflight_english
+        run-id: 43441225668
+        github-token: ${{ github.token }}
+    - uses: actions/download-artifact@v4
+      with:
+        name: schoen87-namminh-preflight
+        path: preflight_namminh
+        run-id: 43441225668
+        github-token: ${{ github.token }}
+    - run: python episode87/preflight87.py
+    - uses: actions/upload-artifact@v4
+      with:
+        name: schoen87-input-preflight
+        path: episode87/VOICE_PREFLIGHT_QA.json
+        if-no-files-found: error
+        retention-days: 14
+        overwrite: true
+  english:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+    - *id001
+    - *id002
+    - *id003
+    - run: 'python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+
+        python episode87/ensure_ffmpeg.py'
+    - run: python episode87/bootstrap_tool.py online
+    - uses: actions/download-artifact@v4
+      with:
+        name: schoen87-english-preflight
+        path: episode87/voice/audio/en-US
+        run-id: 43441225668
+        github-token: ${{ github.token }}
+    - uses: actions/download-artifact@v4
+      with:
+        name: schoen87-checkpoint-en-US
+        path: episode87/voice/audio/en-US
+      continue-on-error: true
+    - name: Generate narration and retain successful parts
+      shell: bash
+      run: "set +e\npython -u episode87/render_english_groups.py\ncode=$?\nif [ \"\
+        $code\" = 75 ]; then\n  sleep 30\n  python -u episode87/render_english_groups.py\n\
+        \  code=$?\nfi\nexit \"$code\""
+    - uses: actions/upload-artifact@v4
+      with:
+        name: schoen87-checkpoint-en-US
+        path: 'episode87/voice/audio/en-US/group-*
+
+          episode87/voice/audio/en-US/raw-*
+
+          episode87/voice/audio/en-US/pending_*.json'
+        if-no-files-found: ignore
+        retention-days: 14
+        overwrite: true
+      if: always()
+    - uses: actions/upload-artifact@v4
+      with:
+        name: schoen87-voice-en-US
+        path: 'episode87/voice/audio/en-US/*.mp3
+
+          episode87/voice/audio/en-US/render_report.json'
+        if-no-files-found: error
+        retention-days: 14
+        overwrite: true
+  online:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        locale:
+        - vi-VN
+        - es-ES
+        - fr-FR
+        - ja-JP
+        - ko-KR
+        - de-DE
+        - it-IT
+        - pt-PT
+        - nl-NL
+        - pl-PL
+        - sv-SE
+        - da-DK
+        - fi-FI
+        - nb-NO
+        - cs-CZ
+    steps:
+    - *id001
+    - *id002
+    - *id003
+    - run: 'python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+
+        python episode87/ensure_ffmpeg.py'
+    - run: python episode87/bootstrap_tool.py online
+    - uses: actions/download-artifact@v4
+      with:
+        name: schoen87-checkpoint-${{ matrix.locale }}
+        path: episode87/voice/audio/${{ matrix.locale }}
+      continue-on-error: true
+    - name: Generate narration and retain successful parts
+      shell: bash
+      run: "set +e\npython -u episode87/render_online.py \"${{ matrix.locale }}\"\n\
+        code=$?\nif [ \"$code\" = 75 ]; then\n  sleep 30\n  python -u episode87/render_online.py\
+        \ \"${{ matrix.locale }}\"\n  code=$?\nfi\nexit \"$code\""
+    - uses: actions/upload-artifact@v4
+      with:
+        name: schoen87-checkpoint-${{ matrix.locale }}
+        path: 'episode87/voice/audio/${{ matrix.locale }}/raw-*
+
+          episode87/voice/audio/${{ matrix.locale }}/pending_*.json'
+        if-no-files-found: ignore
+        retention-days: 14
+        overwrite: true
+      if: always()
+    - uses: actions/upload-artifact@v4
+      with:
+        name: schoen87-voice-${{ matrix.locale }}
+        path: 'episode87/voice/audio/${{ matrix.locale }}/*.mp3
+
+          episode87/voice/audio/${{ matrix.locale }}/render_report.json'
+        if-no-files-found: error
+        retention-days: 14
+        overwrite: true
+  hmong:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        shard:
+        - 0
+        - 1
+    steps:
+    - *id001
+    - *id002
+    - *id003
+    - run: 'python -m pip install torch==2.8.0+cpu --index-url https://download.pytorch.org/whl/cpu
+
+        python -m pip install imageio-ffmpeg==0.6.0 numpy==2.2.6 soundfile==0.13.1
+        scipy==1.15.3 librosa==0.11.0 soxr==1.0.0
+
+        python episode87/ensure_ffmpeg.py'
+    - run: python -u episode87/bootstrap_tool.py hmong
+    - uses: actions/download-artifact@v4
+      with:
+        name: schoen87-checkpoint-hmong-${{ matrix.shard }}
+        path: episode87/voice/audio/mww
+      continue-on-error: true
+    - run: python -u episode87/render_hmong.py "${{ matrix.shard }}"
+    - uses: actions/upload-artifact@v4
+      with:
+        name: schoen87-checkpoint-hmong-${{ matrix.shard }}
+        path: episode87/voice/audio/mww/raw-*
+        if-no-files-found: ignore
+        retention-days: 14
+        overwrite: true
+      if: always()
+  native_final:
+    needs:
+    - hmong
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - locale: mww
+          backend: hmong
+    steps:
+    - *id001
+    - *id002
+    - *id003
+    - run: "python -m pip install imageio-ffmpeg==0.6.0 \npython episode87/ensure_ffmpeg.py"
+    - uses: actions/download-artifact@v4
+      with:
+        pattern: schoen87-checkpoint-${{ matrix.backend }}-*
+        path: episode87/voice/audio/${{ matrix.locale }}
+        merge-multiple: true
+    - run: python -u episode87/finalize_native.py "${{ matrix.locale }}"
+    - uses: actions/upload-artifact@v4
+      with:
+        name: schoen87-voice-${{ matrix.locale }}
+        path: 'episode87/voice/audio/${{ matrix.locale }}/*.mp3
+
+          episode87/voice/audio/${{ matrix.locale }}/render_report.json'
+        if-no-files-found: error
+        retention-days: 14
+        overwrite: true
+  publish:
+    needs:
+    - english
+    - online
+    - native_final
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    permissions:
+      contents: write
+      actions: read
+    steps:
+    - *id001
+    - *id002
+    - *id003
+    - run: "python -m pip install imageio-ffmpeg==0.6.0 \npython episode87/ensure_ffmpeg.py"
+    - uses: actions/download-artifact@v4
+      with:
+        pattern: schoen87-voice-*
+        path: voice_artifacts
+        merge-multiple: false
+    - name: Verify all seventeen full waveforms and publish country files
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: python -u episode87/publish_voices.py
+    - uses: actions/upload-artifact@v4
+      with:
+        name: schoen87-release-reports
+        path: 'episode87/voice_delivery/*.json
+
+          episode87/voice_delivery/SHA256SUMS.txt'
+        if-no-files-found: error
+        retention-days: 14
+        overwrite: true
