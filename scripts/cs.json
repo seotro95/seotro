@@ -1,0 +1,722 @@
+[
+  {
+    "scene": 1,
+    "start_seconds": 0,
+    "duration_seconds": 10,
+    "text": "Z moře vypadá Pohnpei jako tmavozelená stěna. Mraky skryjí vrchol ještě před naším příchodem k pobřeží."
+  },
+  {
+    "scene": 2,
+    "start_seconds": 10,
+    "duration_seconds": 10,
+    "text": "Voda se sbírá na listech, vstupuje do půdy a začíná cestu až ke korálovému útesu."
+  },
+  {
+    "scene": 3,
+    "start_seconds": 20,
+    "duration_seconds": 10,
+    "text": "Prochází sopečnou horninou, lesy, poli a krajinou změněnou rozhodnutími mnoha generací."
+  },
+  {
+    "scene": 4,
+    "start_seconds": 30,
+    "duration_seconds": 10,
+    "text": "Pohnpei je vysoký ostrov Federativních států Mikronésie v západním Tichomoří, kousek severně od rovníku."
+  },
+  {
+    "scene": 5,
+    "start_seconds": 40,
+    "duration_seconds": 10,
+    "text": "Jméno připomíná starobylé kamenné Nan Madol na pobřeží. To je ale pouze jedna kapitola."
+  },
+  {
+    "scene": 6,
+    "start_seconds": 50,
+    "duration_seconds": 10,
+    "text": "Pochopení ostrova vyžaduje sledovat spojení za hranicemi památky, která umožňují fungování celé krajiny."
+  },
+  {
+    "scene": 7,
+    "start_seconds": 60,
+    "duration_seconds": 10,
+    "text": "Proč tolik prší? Co s vodou dělá les? Jak může svah ovlivnit korály na moři?"
+  },
+  {
+    "scene": 8,
+    "start_seconds": 70,
+    "duration_seconds": 10,
+    "text": "Otázky patří dohromady. Voda nepřestává téct na hranicích přírody, zemědělství, historie a každodennosti."
+  },
+  {
+    "scene": 9,
+    "start_seconds": 80,
+    "duration_seconds": 10,
+    "text": "Hřebeny krajinu dělí, potoky ji spojují. Déšť rozdělený mezi povodí propojuje hory s mořem."
+  },
+  {
+    "scene": 10,
+    "start_seconds": 90,
+    "duration_seconds": 10,
+    "text": "Fotografie zachytí vodopád, ale ne celý les, půdu, počasí a rozhodnutí, která udržují jeho vodu."
+  },
+  {
+    "scene": 11,
+    "start_seconds": 100,
+    "duration_seconds": 10,
+    "text": "Začneme nad korunami, projdeme ostrovem a skončíme za pobřežím, kde se stále projevuje pevnina."
+  },
+  {
+    "scene": 12,
+    "start_seconds": 110,
+    "duration_seconds": 10,
+    "text": "Modely vysvětlují podzemní procesy. Nejde o nově objevené chodby ani přesné zaměření."
+  },
+  {
+    "scene": 13,
+    "start_seconds": 120,
+    "duration_seconds": 10,
+    "text": "K příběhu patří obyvatelé. Zelený ostrov není prázdná divočina ani zastavená minulost."
+  },
+  {
+    "scene": 14,
+    "start_seconds": 130,
+    "duration_seconds": 10,
+    "text": "Místa nesou znalosti, zvykové vztahy, současné instituce a vzpomínky, které panorama samo nevysvětlí."
+  },
+  {
+    "scene": 15,
+    "start_seconds": 140,
+    "duration_seconds": 10,
+    "text": "Zapamatujte si hřeben v mracích. Na konci bude znamenat více než hezký výhled."
+  },
+  {
+    "scene": 16,
+    "start_seconds": 150,
+    "duration_seconds": 10,
+    "text": "Základ ostrova je sopečný. Erupce vytvořily horniny, které později přetvářely zvětrávání a eroze."
+  },
+  {
+    "scene": 17,
+    "start_seconds": 160,
+    "duration_seconds": 10,
+    "text": "To neznamená současnou erupci. Starou sopečnou krajinu dnes mění jiné síly."
+  },
+  {
+    "scene": 18,
+    "start_seconds": 170,
+    "duration_seconds": 10,
+    "text": "Déšť vstupuje do puklin, voda hloubí koryta, minerály se mění. Gravitace odnáší uvolněný materiál dolů."
+  },
+  {
+    "scene": 19,
+    "start_seconds": 180,
+    "duration_seconds": 10,
+    "text": "Za dlouhou dobu vznikají ze sopečné hmoty hřebeny, údolí a rozmanité svahy pod vegetací."
+  },
+  {
+    "scene": 20,
+    "start_seconds": 190,
+    "duration_seconds": 10,
+    "text": "Les změkčuje jejich viditelné tvary. Složité podloží může působit hladce a jednotně."
+  },
+  {
+    "scene": 21,
+    "start_seconds": 200,
+    "duration_seconds": 10,
+    "text": "Známým bodem je Sokehs Rock na severozápadě, výrazný skalní hřbet nad pobřežní krajinou."
+  },
+  {
+    "scene": 22,
+    "start_seconds": 210,
+    "duration_seconds": 10,
+    "text": "Z dálky působí jako jediný kamenný celek. Voda a vegetace kolem ukazují složitější souvislosti."
+  },
+  {
+    "scene": 23,
+    "start_seconds": 220,
+    "duration_seconds": 10,
+    "text": "Některé horniny odolávají déle, zatímco pukliny a slabší zóny otevírají vodě cesty."
+  },
+  {
+    "scene": 24,
+    "start_seconds": 230,
+    "duration_seconds": 10,
+    "text": "Vzhled neurčuje přesné stáří. Věk horniny se liší od stáří údolí."
+  },
+  {
+    "scene": 25,
+    "start_seconds": 240,
+    "duration_seconds": 10,
+    "text": "Každá strmá stěna nemá stejný původ. Potřebujeme souvislosti, nejen dramatické vysvětlení."
+  },
+  {
+    "scene": 26,
+    "start_seconds": 250,
+    "duration_seconds": 10,
+    "text": "I malá puklina vede vlhkost, mění minerály a uvolňuje zrno k pohybu."
+  },
+  {
+    "scene": 27,
+    "start_seconds": 260,
+    "duration_seconds": 10,
+    "text": "Ostrov se nerozrušuje stejnou rychlostí. Rozhodují počasí, skála, sklon, porost i narušení."
+  },
+  {
+    "scene": 28,
+    "start_seconds": 270,
+    "duration_seconds": 10,
+    "text": "Chráněné údolí a otevřený hřeben mohou vyprávět jinak, přestože leží blízko sebe."
+  },
+  {
+    "scene": 29,
+    "start_seconds": 280,
+    "duration_seconds": 10,
+    "text": "Rozdíly ovlivňují hromadění vody, schůdné cesty i volbu míst pro pěstování a stavění."
+  },
+  {
+    "scene": 30,
+    "start_seconds": 290,
+    "duration_seconds": 10,
+    "text": "Už před prvním domem nabízela půda možnosti a omezení. Lidská historie rostla v měnícím se světě."
+  },
+  {
+    "scene": 31,
+    "start_seconds": 300,
+    "duration_seconds": 10,
+    "text": "Teplý oceánský vzduch nese vlhkost. Reliéf ostrova ho může nutit stoupat."
+  },
+  {
+    "scene": 32,
+    "start_seconds": 310,
+    "duration_seconds": 10,
+    "text": "Při ochlazení může pára kondenzovat. Vznikají mraky a za vhodných podmínek déšť."
+  },
+  {
+    "scene": 33,
+    "start_seconds": 320,
+    "duration_seconds": 10,
+    "text": "Záleží také na místním ohřevu a počasí Pacifiku. Hory samy nejsou celou předpovědí."
+  },
+  {
+    "scene": 34,
+    "start_seconds": 330,
+    "duration_seconds": 10,
+    "text": "Pohnpei je známé vlhkostí, především uvnitř ostrova. Srážky se však mění podle místa a času."
+  },
+  {
+    "scene": 35,
+    "start_seconds": 340,
+    "duration_seconds": 10,
+    "text": "Slunné pobřeží a skrytý vrchol mohou být v jednom záběru. Počasí není jednotné."
+  },
+  {
+    "scene": 36,
+    "start_seconds": 350,
+    "duration_seconds": 10,
+    "text": "Déšť zastíní jedno údolí, jinde svítí slunce. Rozdíl pocítí rostliny, půda i denní plány lidí."
+  },
+  {
+    "scene": 37,
+    "start_seconds": 360,
+    "duration_seconds": 10,
+    "text": "Hřeben chybějící na fotografii nezmizel. Mraky ovlivňují poznání při krátké návštěvě."
+  },
+  {
+    "scene": 38,
+    "start_seconds": 370,
+    "duration_seconds": 10,
+    "text": "Fotografie zachycuje okamžité podmínky, nikoli trvalé uspořádání krajiny."
+  },
+  {
+    "scene": 39,
+    "start_seconds": 380,
+    "duration_seconds": 10,
+    "text": "V korunách se voda rozděluje. Zůstává na listech, odpařuje se nebo kape k zemi."
+  },
+  {
+    "scene": 40,
+    "start_seconds": 390,
+    "duration_seconds": 10,
+    "text": "Jiná voda sleduje větve a kmeny. Les rozděluje přeháňku mezi mnoho malých cest."
+  },
+  {
+    "scene": 41,
+    "start_seconds": 400,
+    "duration_seconds": 10,
+    "text": "Mění rozložení a čas, ale déšť neruší a nezaručuje ochranu před každou povodní."
+  },
+  {
+    "scene": 42,
+    "start_seconds": 410,
+    "duration_seconds": 10,
+    "text": "Silný nebo dlouhý déšť může nasytit půdu a rychle zvednout potoky."
+  },
+  {
+    "scene": 43,
+    "start_seconds": 420,
+    "duration_seconds": 10,
+    "text": "Průměr nestačí. Důležité jsou trvání, intenzita, poloha i předchozí srážky."
+  },
+  {
+    "scene": 44,
+    "start_seconds": 430,
+    "duration_seconds": 10,
+    "text": "Klidná tůň nepopisuje potok během silného deště výše, mimo náš dohled."
+  },
+  {
+    "scene": 45,
+    "start_seconds": 440,
+    "duration_seconds": 10,
+    "text": "Počasí jednoho místa může změnit jiné ještě dříve, než tam lidé uvidí déšť."
+  },
+  {
+    "scene": 46,
+    "start_seconds": 450,
+    "duration_seconds": 10,
+    "text": "Pod korunami vznikají vrstvy světla, listů, lián, kapradin, kořenů a mokrých povrchů."
+  },
+  {
+    "scene": 47,
+    "start_seconds": 460,
+    "duration_seconds": 10,
+    "text": "Stín, vlhkost, oslunění a prostor se liší mezi zemí, kmenem a vysokými větvemi."
+  },
+  {
+    "scene": 48,
+    "start_seconds": 470,
+    "duration_seconds": 10,
+    "text": "Rostlina na jiné rostlině může používat jen oporu. Nemusí ji paraziticky napadat."
+  },
+  {
+    "scene": 49,
+    "start_seconds": 480,
+    "duration_seconds": 10,
+    "text": "Mechy a kapradiny vypadají prastaře, ale vzhled nevysvětluje historii každého porostu."
+  },
+  {
+    "scene": 50,
+    "start_seconds": 490,
+    "duration_seconds": 10,
+    "text": "Některá místa odrážejí dlouhé procesy, jiná pěstování, využití, obnovu nebo skryté narušení."
+  },
+  {
+    "scene": 51,
+    "start_seconds": 500,
+    "duration_seconds": 10,
+    "text": "Izolace podporuje zvláštní ostrovní život, ale může zvyšovat zranitelnost při změnách prostředí."
+  },
+  {
+    "scene": 52,
+    "start_seconds": 510,
+    "duration_seconds": 10,
+    "text": "Není třeba vymýšlet vzácná zvířata. Obyčejný list ukazuje úkryt, potravu a pohyb vody."
+  },
+  {
+    "scene": 53,
+    "start_seconds": 520,
+    "duration_seconds": 10,
+    "text": "Rozkladači zpracovávají opadanou organickou hmotu a pomáhají vracet živiny do živého systému."
+  },
+  {
+    "scene": 54,
+    "start_seconds": 530,
+    "duration_seconds": 10,
+    "text": "Kořeny a organismy mění půdu. Voda může vsakovat, protékat póry nebo pokračovat po povrchu."
+  },
+  {
+    "scene": 55,
+    "start_seconds": 540,
+    "duration_seconds": 10,
+    "text": "Cesta závisí na půdě, sklonu a předchozím dešti. Celý ostrov neodvodňuje jediná podzemní trubka."
+  },
+  {
+    "scene": 56,
+    "start_seconds": 550,
+    "duration_seconds": 10,
+    "text": "Řezový model vysvětluje možnosti, ale skutečné cesty se liší místo od místa."
+  },
+  {
+    "scene": 57,
+    "start_seconds": 560,
+    "duration_seconds": 10,
+    "text": "Chlebovník, kokos a taro spojují domácnosti se znalostí země a ročních období."
+  },
+  {
+    "scene": 58,
+    "start_seconds": 570,
+    "duration_seconds": 10,
+    "text": "Zahrada se stromy připomíná z dálky les. Účely i historie však mohou být různé."
+  },
+  {
+    "scene": 59,
+    "start_seconds": 580,
+    "duration_seconds": 10,
+    "text": "Zeleň sama neříká, kdo místo spravuje, co roste ani co se změnilo."
+  },
+  {
+    "scene": 60,
+    "start_seconds": 590,
+    "duration_seconds": 10,
+    "text": "Les je živý systém a lidská krajina zároveň. Jednu stránku pochopíme s pozorností k druhé."
+  },
+  {
+    "scene": 61,
+    "start_seconds": 600,
+    "duration_seconds": 10,
+    "text": "Níže se stružky spojují v potoky nesoucí vlivy celého povodí."
+  },
+  {
+    "scene": 62,
+    "start_seconds": 610,
+    "duration_seconds": 10,
+    "text": "Povodí dodává vodu jednomu odtoku. Hřebeny oddělují oblasti, koryta propojují jejich části."
+  },
+  {
+    "scene": 63,
+    "start_seconds": 620,
+    "duration_seconds": 10,
+    "text": "Silnice, mýtiny, zahrady a břehy mohou být vodou propojeny se vzdálenými místy dole."
+  },
+  {
+    "scene": 64,
+    "start_seconds": 630,
+    "duration_seconds": 10,
+    "text": "Vodopády ukazují tato spojení působivě a patří k nezapomenutelným obrazům Pohnpei."
+  },
+  {
+    "scene": 65,
+    "start_seconds": 640,
+    "duration_seconds": 10,
+    "text": "Kepirohi u jihovýchodního pobřeží je známý příklad, součást příběhu deště a odvodnění."
+  },
+  {
+    "scene": 66,
+    "start_seconds": 650,
+    "duration_seconds": 10,
+    "text": "Vodopád nevytváří nekonečnou vodu. Závisí na zásobujícím systému a proměnlivých podmínkách."
+  },
+  {
+    "scene": 67,
+    "start_seconds": 660,
+    "duration_seconds": 10,
+    "text": "Skalní stupeň dává vodě scénu. Gravitace ji pohybuje a koryto směřuje pád i spršku."
+  },
+  {
+    "scene": 68,
+    "start_seconds": 670,
+    "duration_seconds": 10,
+    "text": "Tůň působí klidně, voda však prochází dál. Nehybnost fotografie není zastavení systému."
+  },
+  {
+    "scene": 69,
+    "start_seconds": 680,
+    "duration_seconds": 10,
+    "text": "Proud unáší drobné částice, listy, rozpuštěné látky a někdy větší úlomky."
+  },
+  {
+    "scene": 70,
+    "start_seconds": 690,
+    "duration_seconds": 10,
+    "text": "Část přepravy je přirozená. Více sedimentu samo nedokazuje konkrétní lidskou příčinu."
+  },
+  {
+    "scene": 71,
+    "start_seconds": 700,
+    "duration_seconds": 10,
+    "text": "Odkrytá půda a narušené odvodnění však mohou přidat materiál. Místo a čas ovlivní důsledky dole."
+  },
+  {
+    "scene": 72,
+    "start_seconds": 710,
+    "duration_seconds": 10,
+    "text": "Zakalený potok vyžaduje opakovaná pozorování, znalost deště i porovnání s obvyklým stavem."
+  },
+  {
+    "scene": 73,
+    "start_seconds": 720,
+    "duration_seconds": 10,
+    "text": "Hnědý pruh nepopisuje zdraví celého ostrova; čisté odpoledne nezaručuje bezproblémové povodí."
+  },
+  {
+    "scene": 74,
+    "start_seconds": 730,
+    "duration_seconds": 10,
+    "text": "Respektujte místní rady a přístupová pravidla. Při měnícím se počasí se vyhněte nebezpečným korytům."
+  },
+  {
+    "scene": 75,
+    "start_seconds": 740,
+    "duration_seconds": 10,
+    "text": "Řeka je nepřetržitým rozhovorem mezi vyšší zemí a pobřežím."
+  },
+  {
+    "scene": 76,
+    "start_seconds": 750,
+    "duration_seconds": 10,
+    "text": "Sladká voda se setkává se slanou. Hranice se mění s přílivem, průtokem a tvarem břehu."
+  },
+  {
+    "scene": 77,
+    "start_seconds": 760,
+    "duration_seconds": 10,
+    "text": "Mangrovy rostou na vhodných chráněných okrajích. Jejich kořeny a bahno tvoří jiný svět než horský les."
+  },
+  {
+    "scene": 78,
+    "start_seconds": 770,
+    "duration_seconds": 10,
+    "text": "Mohou zpomalit vodu, zachytit část sedimentu a nabídnout úkryt podle místních podmínek."
+  },
+  {
+    "scene": 79,
+    "start_seconds": 780,
+    "duration_seconds": 10,
+    "text": "Nejsou neomezeným filtrem. Záleží na jejich stavu a zatížení může překročit kapacitu."
+  },
+  {
+    "scene": 80,
+    "start_seconds": 790,
+    "duration_seconds": 10,
+    "text": "Mladé ryby a další živočichové využívají chráněné pobřežní prostředí po část života."
+  },
+  {
+    "scene": 81,
+    "start_seconds": 800,
+    "duration_seconds": 10,
+    "text": "Útesy pomáhají utvářet lagunu a přístupy. Voda stále propojuje rozdílná prostředí."
+  },
+  {
+    "scene": 82,
+    "start_seconds": 810,
+    "duration_seconds": 10,
+    "text": "Koráli jsou živočichové, mnozí spojení s mikroskopickými řasami. Útes je živé společenství."
+  },
+  {
+    "scene": 83,
+    "start_seconds": 820,
+    "duration_seconds": 10,
+    "text": "Světlo, teplota, proudění a kvalita vody se pojí s vlivy z pevniny i oceánu."
+  },
+  {
+    "scene": 84,
+    "start_seconds": 830,
+    "duration_seconds": 10,
+    "text": "Jemný sediment kalí vodu nebo se usazuje. Někdy ovlivní světlo a prostor pro organismy."
+  },
+  {
+    "scene": 85,
+    "start_seconds": 840,
+    "duration_seconds": 10,
+    "text": "Ne každá přeháňka poškodí útes. Záleží na množství, trvání, místě a načasování."
+  },
+  {
+    "scene": 86,
+    "start_seconds": 850,
+    "duration_seconds": 10,
+    "text": "Krásný letecký snímek není posouzení zdraví. Barva a průhlednost nestačí."
+  },
+  {
+    "scene": 87,
+    "start_seconds": 860,
+    "duration_seconds": 10,
+    "text": "Změny vyžadují dlouhodobá pozorování, vhodná měření a místní znalosti."
+  },
+  {
+    "scene": 88,
+    "start_seconds": 870,
+    "duration_seconds": 10,
+    "text": "Pobřeží není zeď zastavující vliv pevniny."
+  },
+  {
+    "scene": 89,
+    "start_seconds": 880,
+    "duration_seconds": 10,
+    "text": "Volba na svahu může spustit řetězec vlivů dosahující mangrovů, laguny nebo vzdáleného útesu."
+  },
+  {
+    "scene": 90,
+    "start_seconds": 890,
+    "duration_seconds": 10,
+    "text": "Sledování vody mění oddělené pohlednice v části společně fungujícího ostrova."
+  },
+  {
+    "scene": 91,
+    "start_seconds": 900,
+    "duration_seconds": 10,
+    "text": "Lidé v těchto vztazích dlouho cestují, pěstují potravu, stavějí a dávají krajině význam."
+  },
+  {
+    "scene": 92,
+    "start_seconds": 910,
+    "duration_seconds": 10,
+    "text": "Pohnpei má silnice, školy, úřady a obchody. Historie pokračuje v běžném současném životě."
+  },
+  {
+    "scene": 93,
+    "start_seconds": 920,
+    "duration_seconds": 10,
+    "text": "Palikir je hlavní město Federativních států Mikronésie. Moderní vláda doplňuje zvykový život ostrova."
+  },
+  {
+    "scene": 94,
+    "start_seconds": 930,
+    "duration_seconds": 10,
+    "text": "Kolonia na severním pobřeží je důležité centrum. Přístav připomíná spojení ostrova s okolním světem."
+  },
+  {
+    "scene": 95,
+    "start_seconds": 940,
+    "duration_seconds": 10,
+    "text": "Venkov, zahrady, lesy, pobřeží a tradiční vztahy jsou důležité i mimo města."
+  },
+  {
+    "scene": 96,
+    "start_seconds": 950,
+    "duration_seconds": 10,
+    "text": "Na jihovýchodě Nan Madol přidává umělé ostrůvky, přílivové kanály a těžké sopečné zdi."
+  },
+  {
+    "scene": 97,
+    "start_seconds": 960,
+    "duration_seconds": 10,
+    "text": "Areál je spojen s mocí Saudeleur a obřady. Zdivo ukazuje organizovanou práci v náročném prostředí."
+  },
+  {
+    "scene": 98,
+    "start_seconds": 970,
+    "duration_seconds": 10,
+    "text": "Déšť a rostliny nečekaly na ruiny. Stavby vždy potřebovaly péči o vodu a růst."
+  },
+  {
+    "scene": 99,
+    "start_seconds": 980,
+    "duration_seconds": 10,
+    "text": "Péče o zdi zahrnuje okolí i kulturní vztahy. Areál není oddělený od ostrova."
+  },
+  {
+    "scene": 100,
+    "start_seconds": 990,
+    "duration_seconds": 10,
+    "text": "Cesta, zahrada nebo pojmenovaný břeh uchovávají znalosti i bez velkého monumentu."
+  },
+  {
+    "scene": 101,
+    "start_seconds": 1000,
+    "duration_seconds": 10,
+    "text": "Místní historie zasluhuje respekt v praktikách, vztazích a zapamatovaných místech."
+  },
+  {
+    "scene": 102,
+    "start_seconds": 1010,
+    "duration_seconds": 10,
+    "text": "Nevymýšlejme obřady. Respekt může znamenat zůstat na dohodnutém místě a sklopit kameru."
+  },
+  {
+    "scene": 103,
+    "start_seconds": 1020,
+    "duration_seconds": 10,
+    "text": "Ptejte se správných místních kontaktů. Krásný výhled nedává automatické právo vstoupit."
+  },
+  {
+    "scene": 104,
+    "start_seconds": 1030,
+    "duration_seconds": 10,
+    "text": "Modely a krajinné záběry vysvětlují procesy bez předstírání přesné rekonstrukce historické události."
+  },
+  {
+    "scene": 105,
+    "start_seconds": 1040,
+    "duration_seconds": 10,
+    "text": "Starobylá místa chápeme v živé krajině, spojená s lidmi a tekoucí vodou."
+  },
+  {
+    "scene": 106,
+    "start_seconds": 1050,
+    "duration_seconds": 10,
+    "text": "Péče začíná poznáním vztahů mezi vysočinou, potoky, pobřežím a útesem."
+  },
+  {
+    "scene": 107,
+    "start_seconds": 1060,
+    "duration_seconds": 10,
+    "text": "Vegetace, odkrytá půda a odvodnění patří dohromady. Řešení musí zohlednit následky po proudu."
+  },
+  {
+    "scene": 108,
+    "start_seconds": 1070,
+    "duration_seconds": 10,
+    "text": "Jedna oprava neplatí všude. Potřebujeme místní podmínky, účast komunity a důkazy skutečných účinků."
+  },
+  {
+    "scene": 109,
+    "start_seconds": 1080,
+    "duration_seconds": 10,
+    "text": "Opakované fotografie, záznamy deště, měření a zkušenosti obyvatel ukazují změny v čase."
+  },
+  {
+    "scene": 110,
+    "start_seconds": 1090,
+    "duration_seconds": 10,
+    "text": "Klima a extrémní počasí přidávají tlak. Nepředpovídáme datum katastrofy, hledáme porozumění a péči."
+  },
+  {
+    "scene": 111,
+    "start_seconds": 1100,
+    "duration_seconds": 10,
+    "text": "Návštěvníci pomohou povolenými cestami, respektem k přírodě a památkám a nasloucháním místním správcům."
+  },
+  {
+    "scene": 112,
+    "start_seconds": 1110,
+    "duration_seconds": 10,
+    "text": "Také natáčení vyžaduje opatrnost. Žádné poškození ani nebezpečný vstup kvůli dramatickému úhlu."
+  },
+  {
+    "scene": 113,
+    "start_seconds": 1120,
+    "duration_seconds": 10,
+    "text": "Dobrý obraz přitáhne pozornost; vysvětlení ji obrátí ke vztahům, které krajinu umožňují."
+  },
+  {
+    "scene": 114,
+    "start_seconds": 1130,
+    "duration_seconds": 10,
+    "text": "Vraťme se po trase: útes přijímá pobřežní vlivy a voda nese příběh vnitrozemí."
+  },
+  {
+    "scene": 115,
+    "start_seconds": 1140,
+    "duration_seconds": 10,
+    "text": "Potoky jej sbírají ze svahů, půd, zahrad a lesů ovlivněných deštěm a lidskými rozhodnutími."
+  },
+  {
+    "scene": 116,
+    "start_seconds": 1150,
+    "duration_seconds": 10,
+    "text": "Mrak, zeď u přílivového kanálu a živý korál patří do stejného řetězce."
+  },
+  {
+    "scene": 117,
+    "start_seconds": 1160,
+    "duration_seconds": 10,
+    "text": "Jsou spojeny, ale liší se. Každé místo má vlastní podmínky, historii a hranice."
+  },
+  {
+    "scene": 118,
+    "start_seconds": 1170,
+    "duration_seconds": 10,
+    "text": "Spojení činí ostrov zajímavějším. Ptáme se nejen co vidíme, ale co udržuje jeho fungování."
+  },
+  {
+    "scene": 119,
+    "start_seconds": 1180,
+    "duration_seconds": 10,
+    "text": "Z moře se vrací zelená stěna. Skrytý vrchol už nevypadá jako konec našeho pohledu."
+  },
+  {
+    "scene": 120,
+    "start_seconds": 1190,
+    "duration_seconds": 10,
+    "text": "Začíná další cesta: mrak, les, řeka, pobřeží, útes. Voda nese spojení ostrova dál."
+  }
+]

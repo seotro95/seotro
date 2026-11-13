@@ -1,0 +1,722 @@
+[
+  {
+    "scene": 1,
+    "start_seconds": 0,
+    "duration_seconds": 10,
+    "text": "海から見るポンペイは、濃い緑の壁のようです。岸へ着く前に、雲が頂を隠します。"
+  },
+  {
+    "scene": 2,
+    "start_seconds": 10,
+    "duration_seconds": 10,
+    "text": "その雲の中で、水は葉に集まり、土へ入り、やがてサンゴ礁へ届く旅を始めます。"
+  },
+  {
+    "scene": 3,
+    "start_seconds": 20,
+    "duration_seconds": 10,
+    "text": "途中には火山岩、森、畑、そして何世代もの人々の選択が形づくった景観があります。"
+  },
+  {
+    "scene": 4,
+    "start_seconds": 30,
+    "duration_seconds": 10,
+    "text": "ここはポンペイ。西太平洋、赤道の少し北にある、ミクロネシア連邦の標高の高い島です。"
+  },
+  {
+    "scene": 5,
+    "start_seconds": 40,
+    "duration_seconds": 10,
+    "text": "名前から、海辺の石造遺跡ナンマドールを思い浮かべる人もいるでしょう。しかし、それは一つの章にすぎません。"
+  },
+  {
+    "scene": 6,
+    "start_seconds": 50,
+    "duration_seconds": 10,
+    "text": "島を理解するには、建造物の先に目を向け、景観全体を動かすつながりを追う必要があります。"
+  },
+  {
+    "scene": 7,
+    "start_seconds": 60,
+    "duration_seconds": 10,
+    "text": "なぜ雨が多いのでしょう。森は水をどう扱い、山の斜面は沖のサンゴにどう影響するのでしょう。"
+  },
+  {
+    "scene": 8,
+    "start_seconds": 70,
+    "duration_seconds": 10,
+    "text": "これらは一続きの問いです。水は、自然、農業、歴史、暮らしの間に私たちが引いた境界では止まりません。"
+  },
+  {
+    "scene": 9,
+    "start_seconds": 80,
+    "duration_seconds": 10,
+    "text": "上では尾根が土地を分け、下では川がつなぎます。雨は流域に分かれながら、山と海を結びます。"
+  },
+  {
+    "scene": 10,
+    "start_seconds": 90,
+    "duration_seconds": 10,
+    "text": "写真は美しい滝を写せます。でも、その水を支える森、土、天気、人の選択までは写しきれません。"
+  },
+  {
+    "scene": 11,
+    "start_seconds": 100,
+    "duration_seconds": 10,
+    "text": "旅は木々の上から始まり、島を下り、陸の影響がまだ届く沖合で終わります。"
+  },
+  {
+    "scene": 12,
+    "start_seconds": 110,
+    "duration_seconds": 10,
+    "text": "地下を直接見られない部分には説明模型を使います。新発見の通路や正確な測量図という意味ではありません。"
+  },
+  {
+    "scene": 13,
+    "start_seconds": 120,
+    "duration_seconds": 10,
+    "text": "暮らす人々にも目を向けます。緑の島は、無人の荒野でも、止まった過去でもありません。"
+  },
+  {
+    "scene": 14,
+    "start_seconds": 130,
+    "duration_seconds": 10,
+    "text": "場所には生活の知恵、慣習の関係、現代の制度、そして一枚の遠景では語れない記憶があります。"
+  },
+  {
+    "scene": 15,
+    "start_seconds": 140,
+    "duration_seconds": 10,
+    "text": "雲に包まれた尾根を覚えておいてください。最後には、その輪郭が風景以上の物語につながります。"
+  },
+  {
+    "scene": 16,
+    "start_seconds": 150,
+    "duration_seconds": 10,
+    "text": "島の骨格は火山に由来します。今の森より前に噴火が岩を造り、その後も風化と侵食が変え続けました。"
+  },
+  {
+    "scene": 17,
+    "start_seconds": 160,
+    "duration_seconds": 10,
+    "text": "現在噴火しているという意味ではありません。古い火山地形は、別の力に変えられながら雄大さを保ちます。"
+  },
+  {
+    "scene": 18,
+    "start_seconds": 170,
+    "duration_seconds": 10,
+    "text": "雨は割れ目へ入り、川は溝を削り、鉱物は変わります。緩んだ物質を重力が下へ動かします。"
+  },
+  {
+    "scene": 19,
+    "start_seconds": 180,
+    "duration_seconds": 10,
+    "text": "長い時間の中で、こうした働きが火山の塊を尾根や谷、植生の下の複雑な斜面に変えていきます。"
+  },
+  {
+    "scene": 20,
+    "start_seconds": 190,
+    "duration_seconds": 10,
+    "text": "森はその形を柔らかく見せます。緑の表面によって、複雑な地形が滑らかで均一に見えるのです。"
+  },
+  {
+    "scene": 21,
+    "start_seconds": 200,
+    "duration_seconds": 10,
+    "text": "北西部近くのソケースロックは、よく知られる目印です。特徴的な岩の尾根が沿岸風景の上に立ちます。"
+  },
+  {
+    "scene": 22,
+    "start_seconds": 210,
+    "duration_seconds": 10,
+    "text": "遠くからは、石の一塊がすべてを語るようです。でも周りの水と植物は、もっと複雑な背景を示します。"
+  },
+  {
+    "scene": 23,
+    "start_seconds": 220,
+    "duration_seconds": 10,
+    "text": "岩壁には違いが残ります。長く耐える部分もあれば、水の通り道となる割れ目や弱い部分もあります。"
+  },
+  {
+    "scene": 24,
+    "start_seconds": 230,
+    "duration_seconds": 10,
+    "text": "見た目だけで表面の正確な年代は決められません。岩の年齢と谷ができた時期は別です。"
+  },
+  {
+    "scene": 25,
+    "start_seconds": 240,
+    "duration_seconds": 10,
+    "text": "すべての急な岩壁が同じ起源を持つわけでもありません。地形を読むには、派手な説明より背景が必要です。"
+  },
+  {
+    "scene": 26,
+    "start_seconds": 250,
+    "duration_seconds": 10,
+    "text": "小さな尺度でも物語は続きます。割れ目が水分を導き、鉱物が変わり、粒が動ける状態になります。"
+  },
+  {
+    "scene": 27,
+    "start_seconds": 260,
+    "duration_seconds": 10,
+    "text": "島は一律の速さで削れるわけではありません。天気、岩、傾斜、植物、攪乱によって反応が違います。"
+  },
+  {
+    "scene": 28,
+    "start_seconds": 270,
+    "duration_seconds": 10,
+    "text": "風を避ける谷と露出した尾根は、地図で近くても、違う物語を持つのです。"
+  },
+  {
+    "scene": 29,
+    "start_seconds": 280,
+    "duration_seconds": 10,
+    "text": "その違いは、水が集まる場所、歩きやすい道、栽培や建設、移動の場所を左右します。"
+  },
+  {
+    "scene": 30,
+    "start_seconds": 290,
+    "duration_seconds": 10,
+    "text": "最初の家より前から、土地には可能性と制約がありました。人の歴史は、その変わる世界の中で育ちました。"
+  },
+  {
+    "scene": 31,
+    "start_seconds": 300,
+    "duration_seconds": 10,
+    "text": "空を見上げましょう。暖かな海の空気は湿気を運び、島の地形によって上へ押し上げられます。"
+  },
+  {
+    "scene": 32,
+    "start_seconds": 310,
+    "duration_seconds": 10,
+    "text": "上昇して冷えると、水蒸気は小さな水滴になれます。雲ができ、条件が整えば雨になります。"
+  },
+  {
+    "scene": 33,
+    "start_seconds": 320,
+    "duration_seconds": 10,
+    "text": "地域の加熱や太平洋の広い気象も関わります。山は説明の一部であり、それだけで天気予報はできません。"
+  },
+  {
+    "scene": 34,
+    "start_seconds": 330,
+    "duration_seconds": 10,
+    "text": "ポンペイは、特に内陸の湿潤さで知られます。ただし雨は場所や時期で変わり、毎日同じではありません。"
+  },
+  {
+    "scene": 35,
+    "start_seconds": 340,
+    "duration_seconds": 10,
+    "text": "晴れた海岸と雲に隠れた頂が、同じ景色に入ります。島の天気は一様ではないのです。"
+  },
+  {
+    "scene": 36,
+    "start_seconds": 350,
+    "duration_seconds": 10,
+    "text": "一つの谷が雨で暗くても、隣には日が差します。この違いは川や土、植物、人の予定にも大切です。"
+  },
+  {
+    "scene": 37,
+    "start_seconds": 360,
+    "duration_seconds": 10,
+    "text": "雲は訪問者の知識にも影響します。写真に写らない尾根が、島から消えたわけではありません。"
+  },
+  {
+    "scene": 38,
+    "start_seconds": 370,
+    "duration_seconds": 10,
+    "text": "当たり前に聞こえますが、写真は一瞬の条件を切り取ります。変わらない配置を示すわけではないのです。"
+  },
+  {
+    "scene": 39,
+    "start_seconds": 380,
+    "duration_seconds": 10,
+    "text": "雨が樹冠へ届くと、旅は分かれます。葉に残る水、蒸発する水、地面へ落ちる水があります。"
+  },
+  {
+    "scene": 40,
+    "start_seconds": 390,
+    "duration_seconds": 10,
+    "text": "枝や幹を伝う水も、空いた場所へ直接落ちる水もあります。森は一つの雨を多くの道へ分けます。"
+  },
+  {
+    "scene": 41,
+    "start_seconds": 400,
+    "duration_seconds": 10,
+    "text": "これらは水の分布と到着時刻を変えます。しかし雨を消したり、あらゆる洪水を防いだりはしません。"
+  },
+  {
+    "scene": 42,
+    "start_seconds": 410,
+    "duration_seconds": 10,
+    "text": "強い雨や長雨では、土が飽和し、川が急に増水することがあります。見慣れた場所も違う振る舞いをします。"
+  },
+  {
+    "scene": 43,
+    "start_seconds": 420,
+    "duration_seconds": 10,
+    "text": "雨の理解には平均以上の情報が要ります。長さ、強さ、位置、そして先行する雨が結果を変えます。"
+  },
+  {
+    "scene": 44,
+    "start_seconds": 430,
+    "duration_seconds": 10,
+    "text": "晴れた後の穏やかな淵は、見えない上流で大雨が降るときの川を説明してはくれません。"
+  },
+  {
+    "scene": 45,
+    "start_seconds": 440,
+    "duration_seconds": 10,
+    "text": "最初のつながりです。別の場所の天気は、こちらで雨を見る前に、こちらの状況を変え得ます。"
+  },
+  {
+    "scene": 46,
+    "start_seconds": 450,
+    "duration_seconds": 10,
+    "text": "樹冠の下は、重なる光の世界です。葉の上に葉、つる、シダ、根、湿った表面が続きます。"
+  },
+  {
+    "scene": 47,
+    "start_seconds": 460,
+    "duration_seconds": 10,
+    "text": "層ごとに小さな環境が生まれます。日陰、湿度、露出、空間は、地面と幹と高い枝で違います。"
+  },
+  {
+    "scene": 48,
+    "start_seconds": 470,
+    "duration_seconds": 10,
+    "text": "別の植物の上で育っても、単に支えとして使っている場合があります。枝の植物が必ず寄生するわけではありません。"
+  },
+  {
+    "scene": 49,
+    "start_seconds": 480,
+    "duration_seconds": 10,
+    "text": "コケとシダは、森を古く見せます。しかし外見だけで、すべての区画の歴史や状態は分かりません。"
+  },
+  {
+    "scene": 50,
+    "start_seconds": 490,
+    "duration_seconds": 10,
+    "text": "長い生態の過程を示す場所も、栽培、利用、回復、攪乱の歴史を持つ場所もあります。"
+  },
+  {
+    "scene": 51,
+    "start_seconds": 500,
+    "duration_seconds": 10,
+    "text": "ポンペイの森は、島特有の生き物を支えます。隔離は独自の適応を促す一方、環境変化への弱さも生みます。"
+  },
+  {
+    "scene": 52,
+    "start_seconds": 510,
+    "duration_seconds": 10,
+    "text": "毎回珍しい動物を作る必要はありません。普通の葉にも、隠れ場所や食物の関係、水の動きが見えます。"
+  },
+  {
+    "scene": 53,
+    "start_seconds": 520,
+    "duration_seconds": 10,
+    "text": "地面では、落ちた物質が別の網に入ります。分解者が有機物を処理し、栄養を生きた仕組みへ戻します。"
+  },
+  {
+    "scene": 54,
+    "start_seconds": 530,
+    "duration_seconds": 10,
+    "text": "根と土の生物は、土の構造に関わります。水は隙間へ入り、中を動くか、表面を流れ続けます。"
+  },
+  {
+    "scene": 55,
+    "start_seconds": 540,
+    "duration_seconds": 10,
+    "text": "どの経路が主かは、土、傾斜、先行雨、攪乱次第です。島全体を排水する一本の地下管はありません。"
+  },
+  {
+    "scene": 56,
+    "start_seconds": 550,
+    "duration_seconds": 10,
+    "text": "断面模型なら、その選択肢を説明できます。でも実際の経路は場所ごとに変わり、模型そのものではありません。"
+  },
+  {
+    "scene": 57,
+    "start_seconds": 560,
+    "duration_seconds": 10,
+    "text": "食料の畑も、この景観の一部です。パンノキ、ココヤシ、タロなどが、家庭を土地と季節の知恵につなぎます。"
+  },
+  {
+    "scene": 58,
+    "start_seconds": 570,
+    "duration_seconds": 10,
+    "text": "木のある畑と森は、遠くから似て見えます。生態の働きが重なっても、目的と歴史は違い得ます。"
+  },
+  {
+    "scene": 59,
+    "start_seconds": 580,
+    "duration_seconds": 10,
+    "text": "だから観察が大切です。緑だけでは、誰が管理し、何が育ち、どう変わったかは分かりません。"
+  },
+  {
+    "scene": 60,
+    "start_seconds": 590,
+    "duration_seconds": 10,
+    "text": "森は生きた仕組みであり、人間の景観の一部でもあります。どちらを知るにも、もう一方への注意が必要です。"
+  },
+  {
+    "scene": 61,
+    "start_seconds": 600,
+    "duration_seconds": 10,
+    "text": "下ると水は、はっきりした川になります。小さな流れが合流し、一つの流域全体の影響を運びます。"
+  },
+  {
+    "scene": 62,
+    "start_seconds": 610,
+    "duration_seconds": 10,
+    "text": "流域とは、一つの出口へ水を集める土地です。尾根が分け、川筋が内部の各部分をつなぎます。"
+  },
+  {
+    "scene": 63,
+    "start_seconds": 620,
+    "duration_seconds": 10,
+    "text": "これが景色の下の地図です。道、開けた土地、畑、川岸は、水を通じてずっと低い場所につながります。"
+  },
+  {
+    "scene": 64,
+    "start_seconds": 630,
+    "duration_seconds": 10,
+    "text": "滝は、そのつながりを印象的に見せます。ポンペイでは、落ちる水が忘れがたい景色になります。"
+  },
+  {
+    "scene": 65,
+    "start_seconds": 640,
+    "duration_seconds": 10,
+    "text": "南東の海岸近くのケピロイは、有名な例です。雨、排水、地域の場所という大きな話の中にあります。"
+  },
+  {
+    "scene": 66,
+    "start_seconds": 650,
+    "duration_seconds": 10,
+    "text": "滝が無限の水を生むわけではありません。流量は供給する仕組みに依存し、条件は変わります。"
+  },
+  {
+    "scene": 67,
+    "start_seconds": 660,
+    "duration_seconds": 10,
+    "text": "岩の段差が舞台を作り、重力が水を動かします。流路の形が、落下と飛沫の方向を決めます。"
+  },
+  {
+    "scene": 68,
+    "start_seconds": 670,
+    "duration_seconds": 10,
+    "text": "下の淵は静かに見えても、水は通過します。写真の静止は、仕組みの停止ではありません。"
+  },
+  {
+    "scene": 69,
+    "start_seconds": 680,
+    "duration_seconds": 10,
+    "text": "流れは細かな粒、葉、溶けた物質を運びます。条件によっては、より大きな破片も運びます。"
+  },
+  {
+    "scene": 70,
+    "start_seconds": 690,
+    "duration_seconds": 10,
+    "text": "一部の運搬は普通の地形変化です。堆積物が増えただけで、特定の人為的原因は証明できません。"
+  },
+  {
+    "scene": 71,
+    "start_seconds": 700,
+    "duration_seconds": 10,
+    "text": "ただし、露出した土や変えられた排水は、動ける物質を増やし得ます。場所と時期が下流への影響を左右します。"
+  },
+  {
+    "scene": 72,
+    "start_seconds": 710,
+    "duration_seconds": 10,
+    "text": "濁った川を調べるには、最近の雨、上流の状態、繰り返す観察、普段との比較が必要です。"
+  },
+  {
+    "scene": 73,
+    "start_seconds": 720,
+    "duration_seconds": 10,
+    "text": "一筋の茶色い水で島全体の健康は語れません。透明な午後も、流域に問題がない証明にはなりません。"
+  },
+  {
+    "scene": 74,
+    "start_seconds": 730,
+    "duration_seconds": 10,
+    "text": "訪問者の教訓は身近です。地域の案内と立入り条件を守り、天気が変わるときは危険な川筋を避けましょう。"
+  },
+  {
+    "scene": 75,
+    "start_seconds": 740,
+    "duration_seconds": 10,
+    "text": "大きな物語の教訓は、つながりです。川は、高地と海岸の間で続く対話のような存在です。"
+  },
+  {
+    "scene": 76,
+    "start_seconds": 750,
+    "duration_seconds": 10,
+    "text": "海岸では淡水と海水が出会います。境界は潮、流量、岸の形によって動き、混ざります。"
+  },
+  {
+    "scene": 77,
+    "start_seconds": 760,
+    "duration_seconds": 10,
+    "text": "適した穏やかな岸にはマングローブがあります。根と泥の地面が、山の森とは違う風景を作ります。"
+  },
+  {
+    "scene": 78,
+    "start_seconds": 770,
+    "duration_seconds": 10,
+    "text": "マングローブは水を緩め、一部の土をとどめ、すみかを与えます。その強さは地域と全体の条件次第です。"
+  },
+  {
+    "scene": 79,
+    "start_seconds": 780,
+    "duration_seconds": 10,
+    "text": "上流の問題をすべて消す無限のフィルターではありません。自身の状態も大切で、負荷が能力を超えることもあります。"
+  },
+  {
+    "scene": 80,
+    "start_seconds": 790,
+    "duration_seconds": 10,
+    "text": "若い魚などは、一生の一部を穏やかな沿岸で過ごします。関係は、見える木の列の外まで続きます。"
+  },
+  {
+    "scene": 81,
+    "start_seconds": 800,
+    "duration_seconds": 10,
+    "text": "沖の礁は、礁湖と島への近づき方を形づくります。違う環境をつなぐのは、ここでも水です。"
+  },
+  {
+    "scene": 82,
+    "start_seconds": 810,
+    "duration_seconds": 10,
+    "text": "サンゴは生きた動物で、多くは微細な藻類と共生します。サンゴ礁は飾り石ではなく、生物の共同体です。"
+  },
+  {
+    "scene": 83,
+    "start_seconds": 820,
+    "duration_seconds": 10,
+    "text": "光、温度、流れ、水質が礁の生き物に影響します。海からの負荷と並んで、陸の条件も関係します。"
+  },
+  {
+    "scene": 84,
+    "start_seconds": 830,
+    "duration_seconds": 10,
+    "text": "細かな土は水を濁らせ、表面に積もります。条件によって、生物が使える光や空間を変えます。"
+  },
+  {
+    "scene": 85,
+    "start_seconds": 840,
+    "duration_seconds": 10,
+    "text": "すべての雨が礁を傷めるという意味ではありません。量、時期、長さ、さらされる場所が結果を左右します。"
+  },
+  {
+    "scene": 86,
+    "start_seconds": 850,
+    "duration_seconds": 10,
+    "text": "美しい空撮だけで礁の健康は評価できません。色と透明さだけでは、生態の全体像は分からないのです。"
+  },
+  {
+    "scene": 87,
+    "start_seconds": 860,
+    "duration_seconds": 10,
+    "text": "変化を知るには、長期の観察、適切な測定、短い滞在では得にくい地域の知識が必要です。"
+  },
+  {
+    "scene": 88,
+    "start_seconds": 870,
+    "duration_seconds": 10,
+    "text": "大切な考えが見えてきました。海岸は、陸の影響を止める壁ではありません。"
+  },
+  {
+    "scene": 89,
+    "start_seconds": 880,
+    "duration_seconds": 10,
+    "text": "山の斜面の選択が、マングローブ、礁湖、遠い礁まで届く影響の鎖につながり得ます。"
+  },
+  {
+    "scene": 90,
+    "start_seconds": 890,
+    "duration_seconds": 10,
+    "text": "水を追うと、その鎖が想像しやすくなります。別々の絵はがきが、動いている一つの島の部分になります。"
+  },
+  {
+    "scene": 91,
+    "start_seconds": 900,
+    "duration_seconds": 10,
+    "text": "人々は長く、この関係の中で暮らしました。移動し、食料を育て、場所を造り、景観に意味を与えてきました。"
+  },
+  {
+    "scene": 92,
+    "start_seconds": 910,
+    "duration_seconds": 10,
+    "text": "今のポンペイには道、学校、公共機関、店、変わる需要があります。歴史は現代の日常でも続いています。"
+  },
+  {
+    "scene": 93,
+    "start_seconds": 920,
+    "duration_seconds": 10,
+    "text": "島にあるパリキールはミクロネシア連邦の首都です。島の物語には慣習の生活と現代の政府が共にあります。"
+  },
+  {
+    "scene": 94,
+    "start_seconds": 930,
+    "duration_seconds": 10,
+    "text": "北岸のコロニアも重要な中心です。港町は、海が島を外の世界へ結ぶことを思い出させます。"
+  },
+  {
+    "scene": 95,
+    "start_seconds": 940,
+    "duration_seconds": 10,
+    "text": "町だけでは島全体を説明できません。農村、畑、森、海岸、慣習の関係も欠かせません。"
+  },
+  {
+    "scene": 96,
+    "start_seconds": 950,
+    "duration_seconds": 10,
+    "text": "南東のナンマドールは、別の時間の厚みを加えます。人工島、潮の水路、重い火山岩の壁が残ります。"
+  },
+  {
+    "scene": 97,
+    "start_seconds": 960,
+    "duration_seconds": 10,
+    "text": "遺跡はサウデロールの権威と祭祀に結びつきます。石積みは、難しい沿岸で組織された人の努力を記録します。"
+  },
+  {
+    "scene": 98,
+    "start_seconds": 970,
+    "duration_seconds": 10,
+    "text": "雨と植物は、廃墟になるまで待っていません。建てた場所は常に、水、成長、維持への注意を必要としました。"
+  },
+  {
+    "scene": 99,
+    "start_seconds": 980,
+    "duration_seconds": 10,
+    "text": "古い壁を守ることには、環境と文化の関係も含まれます。囲いは、島から切り離された物ではありません。"
+  },
+  {
+    "scene": 100,
+    "start_seconds": 990,
+    "duration_seconds": 10,
+    "text": "大切な場所は巨大とは限りません。道、畑、名前のある海岸にも、外から見えない知識があります。"
+  },
+  {
+    "scene": 101,
+    "start_seconds": 1000,
+    "duration_seconds": 10,
+    "text": "大遺跡がなくても、地域の歴史を尊重できます。意味は営み、関係、記憶された場所に残ります。"
+  },
+  {
+    "scene": 102,
+    "start_seconds": 1010,
+    "duration_seconds": 10,
+    "text": "本物らしさのために儀式を作るべきでもありません。合意した場所で見ることや、カメラを下げることも敬意です。"
+  },
+  {
+    "scene": 103,
+    "start_seconds": 1020,
+    "duration_seconds": 10,
+    "text": "立入りは関係の一部です。適切な地域の窓口へ尋ね、案内に従いましょう。美しい景色は自動的な許可ではありません。"
+  },
+  {
+    "scene": 104,
+    "start_seconds": 1030,
+    "duration_seconds": 10,
+    "text": "本作では模型や景色で過程を説明します。歴史の一場面を、そのまま再現したとは主張しません。"
+  },
+  {
+    "scene": 105,
+    "start_seconds": 1040,
+    "duration_seconds": 10,
+    "text": "古い場所は、生きた景観の中で見ると明確になります。人々と、同じ動く水につながっているのです。"
+  },
+  {
+    "scene": 106,
+    "start_seconds": 1050,
+    "duration_seconds": 10,
+    "text": "ポンペイを守るとは何でしょう。まず、高地、川、岸、礁が普段の境界を越えてつながると気づくことです。"
+  },
+  {
+    "scene": 107,
+    "start_seconds": 1060,
+    "duration_seconds": 10,
+    "text": "植生、露出土、排水計画は共に関わります。一地点の解決は、その先で何が起こるかも考える必要があります。"
+  },
+  {
+    "scene": 108,
+    "start_seconds": 1070,
+    "duration_seconds": 10,
+    "text": "すべての斜面に同じ修理は使えません。よい判断には地域の条件、住民の参加、実際の効果の証拠が要ります。"
+  },
+  {
+    "scene": 109,
+    "start_seconds": 1080,
+    "duration_seconds": 10,
+    "text": "長い観察は貴重です。写真、雨量記録、水の測定、住民の経験が、短い訪問で逃す変化を示します。"
+  },
+  {
+    "scene": 110,
+    "start_seconds": 1090,
+    "duration_seconds": 10,
+    "text": "気候や極端な天候も負荷を増やします。災害の日を予言せず、つながる仕組みをどう理解し守るかを問います。"
+  },
+  {
+    "scene": 111,
+    "start_seconds": 1100,
+    "duration_seconds": 10,
+    "text": "訪問者も小さな選択で協力できます。許可された道を使い、生息地と遺産を乱さず、担当する人の話を聞きましょう。"
+  },
+  {
+    "scene": 112,
+    "start_seconds": 1110,
+    "duration_seconds": 10,
+    "text": "撮影も同じです。劇的な角度のために、滝、尾根、囲いを傷めたり危険に入ったりすべきではありません。"
+  },
+  {
+    "scene": 113,
+    "start_seconds": 1120,
+    "duration_seconds": 10,
+    "text": "よい画像は関心を呼びます。よい説明は、その画像を成り立たせる関係へ関心を向けます。"
+  },
+  {
+    "scene": 114,
+    "start_seconds": 1130,
+    "duration_seconds": 10,
+    "text": "旅を逆にたどりましょう。礁は沿岸水の影響を受け、沿岸水は島の内側の物語を運びます。"
+  },
+  {
+    "scene": 115,
+    "start_seconds": 1140,
+    "duration_seconds": 10,
+    "text": "川は、斜面、土、畑、森からそれを集めます。それらは雨、岩、人の選択に応えます。"
+  },
+  {
+    "scene": 116,
+    "start_seconds": 1150,
+    "duration_seconds": 10,
+    "text": "尾根の雲も、潮の水路沿いの壁も、沖の生きたサンゴも、同じつながりの中にあります。"
+  },
+  {
+    "scene": 117,
+    "start_seconds": 1160,
+    "duration_seconds": 10,
+    "text": "つながっていても、同じではありません。各場所の条件、歴史、限界を、丁寧な観察が理解へ導きます。"
+  },
+  {
+    "scene": 118,
+    "start_seconds": 1170,
+    "duration_seconds": 10,
+    "text": "つながりが見えるほど、島は面白くなります。問いは、何を見ているかから、何が働きを支えるかへ広がります。"
+  },
+  {
+    "scene": 119,
+    "start_seconds": 1180,
+    "duration_seconds": 10,
+    "text": "海から、また濃い緑の壁が見えます。今度は、隠れた頂が視界の終わりには感じられません。"
+  },
+  {
+    "scene": 120,
+    "start_seconds": 1190,
+    "duration_seconds": 10,
+    "text": "そこからまた始まります。雲、森、川、岸、礁。一つの島を、水がつなぎ続けます。"
+  }
+]

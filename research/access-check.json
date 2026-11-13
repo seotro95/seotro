@@ -1,0 +1,12 @@
+[
+  {
+    "url": "https://www.fsmgov.org/",
+    "accessible": false,
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://coralreef.noaa.gov/",
+    "accessible": false,
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  }
+]
