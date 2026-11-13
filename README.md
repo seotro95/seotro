@@ -1,3 +1,3 @@
 # Nan Madol — tập 36 — 22:18
 
-Bộ tệp đang được tải lên. Trang này sẽ cập nhật link khi đủ 17 MP3.
+Đang tải lên: **2/17 MP3**. Trang tải đầy đủ sẽ xuất hiện khi hoàn tất.
