@@ -1,0 +1,806 @@
+[
+  {
+    "scene": 1,
+    "start_seconds": 0,
+    "duration_seconds": 10,
+    "text": "Au début, une pierre sombre, une ligne d'eau et la marée qui modifie doucement leur relation."
+  },
+  {
+    "scene": 2,
+    "start_seconds": 10,
+    "duration_seconds": 10,
+    "text": "Puis la caméra s'élève. Cette pierre appartient à un mur, et ce mur appartient à une ville extraordinaire."
+  },
+  {
+    "scene": 3,
+    "start_seconds": 20,
+    "duration_seconds": 10,
+    "text": "Des canaux séparent de petits îlots. De lourdes colonnes se croisent. Au-delà, le Pacifique s'étend jusqu'à l'horizon."
+  },
+  {
+    "scene": 4,
+    "start_seconds": 30,
+    "duration_seconds": 10,
+    "text": "Voici Nan Madol, près de Pohnpei, dans les États fédérés de Micronésie, au cœur du Pacifique occidental."
+  },
+  {
+    "scene": 5,
+    "start_seconds": 40,
+    "duration_seconds": 10,
+    "text": "On parle souvent d'une ville bâtie sur l'eau. Pourtant, les pierres ne flottent pas. Cette distinction change tout."
+  },
+  {
+    "scene": 6,
+    "start_seconds": 50,
+    "duration_seconds": 10,
+    "text": "Les bâtisseurs ont créé des terrains dans une lagune côtière peu profonde, puis les ont transformés en paysage de pouvoir."
+  },
+  {
+    "scene": 7,
+    "start_seconds": 60,
+    "duration_seconds": 10,
+    "text": "Une première question s'impose : comment acheminer autant de lourdes pierres sans les machines que nous connaissons aujourd'hui ?"
+  },
+  {
+    "scene": 8,
+    "start_seconds": 70,
+    "duration_seconds": 10,
+    "text": "Mais pourquoi installer un centre politique là où terre, eau, travail et entretien doivent constamment trouver leur équilibre ?"
+  },
+  {
+    "scene": 9,
+    "start_seconds": 80,
+    "duration_seconds": 10,
+    "text": "Inventer une réponse spectaculaire serait facile. Une réponse utile commence par le littoral, les matériaux et les êtres humains."
+  },
+  {
+    "scene": 10,
+    "start_seconds": 90,
+    "duration_seconds": 10,
+    "text": "Nan Madol fut l'œuvre de communautés connaissant leur monde océanique. Leur éloignement par rapport à nous ne signifie pas impossibilité."
+  },
+  {
+    "scene": 11,
+    "start_seconds": 100,
+    "duration_seconds": 10,
+    "text": "Bien des détails du transport et de la construction restent inconnus. Cette incertitude invite à enquêter, pas à inventer."
+  },
+  {
+    "scene": 12,
+    "start_seconds": 110,
+    "duration_seconds": 10,
+    "text": "Nous suivrons l'eau entre les murs, puis remonterons le parcours des pierres vers le travail qui leur donna leur sens."
+  },
+  {
+    "scene": 13,
+    "start_seconds": 120,
+    "duration_seconds": 10,
+    "text": "Distinguons trois récits : les vestiges matériels, la mémoire des communautés et les déductions raisonnablement permises par la recherche."
+  },
+  {
+    "scene": 14,
+    "start_seconds": 130,
+    "duration_seconds": 10,
+    "text": "Aucune perspective ne rend les autres inutiles. Ensemble, elles expliquent davantage que l'image d'une ruine prétendument inexplicable."
+  },
+  {
+    "scene": 15,
+    "start_seconds": 140,
+    "duration_seconds": 10,
+    "text": "Gardez cette première pierre en mémoire. À la fin du voyage, sa surface sombre nous posera une autre question."
+  },
+  {
+    "scene": 16,
+    "start_seconds": 150,
+    "duration_seconds": 10,
+    "text": "Pohnpei est une île volcanique élevée. Ses montagnes retiennent l'humidité ; récifs et eaux peu profondes dessinent un autre univers autour d'elle."
+  },
+  {
+    "scene": 17,
+    "start_seconds": 160,
+    "duration_seconds": 10,
+    "text": "Nan Madol se trouve près de Temwen, au large de la côte sud-est de Pohnpei. Ce contexte compte davantage que son apparent isolement."
+  },
+  {
+    "scene": 18,
+    "start_seconds": 170,
+    "duration_seconds": 10,
+    "text": "L'eau sépare, mais elle relie aussi. Pour des navigateurs expérimentés, un littoral constitue un réseau de chemins possibles."
+  },
+  {
+    "scene": 19,
+    "start_seconds": 180,
+    "duration_seconds": 10,
+    "text": "Le basalte est une roche volcanique. En refroidissant, certaines laves se fracturent naturellement en longues colonnes aux formes anguleuses."
+  },
+  {
+    "scene": 20,
+    "start_seconds": 190,
+    "duration_seconds": 10,
+    "text": "Cette géométrie convient aux murs. La nature fournit des formes ; les bâtisseurs doivent encore choisir, déplacer et assembler les pierres."
+  },
+  {
+    "scene": 21,
+    "start_seconds": 200,
+    "duration_seconds": 10,
+    "text": "L'origine d'une pierre n'explique pas un bâtiment. Une forêt fournit du bois, mais elle ne livre pas une maison terminée."
+  },
+  {
+    "scene": 22,
+    "start_seconds": 210,
+    "duration_seconds": 10,
+    "text": "Ces colonnes pouvaient se croiser d'une assise à l'autre, formant des murs denses évoquant d'immenses pièces de bois sombre."
+  },
+  {
+    "scene": 23,
+    "start_seconds": 220,
+    "duration_seconds": 10,
+    "text": "Derrière les murs de soutènement, débris coralliens et autres remblais créaient un sol artificiel. Les fondations furent construites, pas suspendues magiquement."
+  },
+  {
+    "scene": 24,
+    "start_seconds": 230,
+    "duration_seconds": 10,
+    "text": "Les descriptions comptent généralement environ quatre-vingt-dix-neuf îlots artificiels. Ils forment un réseau, plutôt qu'une seule plateforme gigantesque."
+  },
+  {
+    "scene": 25,
+    "start_seconds": 240,
+    "duration_seconds": 10,
+    "text": "L'ensemble occupe une importante zone côtière. Depuis un canal, il reste pourtant difficile d'en saisir toute l'étendue."
+  },
+  {
+    "scene": 26,
+    "start_seconds": 250,
+    "duration_seconds": 10,
+    "text": "Un tournant cache une autre enceinte. Un mur coupe la vue. La ville se découvre par seuils successifs, pas par une grande avenue."
+  },
+  {
+    "scene": 27,
+    "start_seconds": 260,
+    "duration_seconds": 10,
+    "text": "L'eau participe donc à l'architecture. Elle organise les déplacements, trace des limites et modifie ce que chaque position permet de voir."
+  },
+  {
+    "scene": 28,
+    "start_seconds": 270,
+    "duration_seconds": 10,
+    "text": "Le même passage change avec la marée. Le parcourir dépend aussi de la profondeur, des appuis et du moment choisi."
+  },
+  {
+    "scene": 29,
+    "start_seconds": 280,
+    "duration_seconds": 10,
+    "text": "On surnomme souvent Nan Madol la Venise du Pacifique. La comparaison frappe l'esprit, mais cette ville mérite sa propre explication."
+  },
+  {
+    "scene": 30,
+    "start_seconds": 290,
+    "duration_seconds": 10,
+    "text": "Ses matériaux, traditions, histoire politique et écologie appartiennent à ce lieu. Pour comprendre, il faut regarder depuis ce contexte."
+  },
+  {
+    "scene": 31,
+    "start_seconds": 300,
+    "duration_seconds": 10,
+    "text": "Revenons au transport des pierres. Séparons deux trajets : atteindre le littoral, puis atteindre l'emplacement définitif du mur."
+  },
+  {
+    "scene": 32,
+    "start_seconds": 310,
+    "duration_seconds": 10,
+    "text": "Les obstacles diffèrent. Pentes, rivages, profondeur de l'eau et forme du chargement modifient chacun le problème."
+  },
+  {
+    "scene": 33,
+    "start_seconds": 320,
+    "duration_seconds": 10,
+    "text": "Une technique possible n'est pas forcément la technique historique. L'archéologie exige des indices qui la relient à ce lieu précis."
+  },
+  {
+    "scene": 34,
+    "start_seconds": 330,
+    "duration_seconds": 10,
+    "text": "Le transport par eau fait partie des possibilités discutées. Mais une solution flottante demande préparation, coordination et discernement."
+  },
+  {
+    "scene": 35,
+    "start_seconds": 340,
+    "duration_seconds": 10,
+    "text": "Charger peut être aussi difficile que voyager. Une pierre lourde peut déséquilibrer l'ensemble avant même le début du trajet."
+  },
+  {
+    "scene": 36,
+    "start_seconds": 350,
+    "duration_seconds": 10,
+    "text": "L'approche finale compte également. Un chenal adapté à une petite pirogue impose d'autres contraintes à une charge lourde."
+  },
+  {
+    "scene": 37,
+    "start_seconds": 360,
+    "duration_seconds": 10,
+    "text": "À terre, leviers, supports et efforts coordonnés rendent de grandes tâches possibles. Aucun de ces principes n'exige un moteur industriel."
+  },
+  {
+    "scene": 38,
+    "start_seconds": 370,
+    "duration_seconds": 10,
+    "text": "Cela ne prouve aucune méthode précise. Cela montre pourquoi la capacité humaine doit constituer notre point de départ."
+  },
+  {
+    "scene": 39,
+    "start_seconds": 380,
+    "duration_seconds": 10,
+    "text": "Nous imaginons souvent un monument comme un levage impossible. Construire relève plutôt d'une longue suite de petites décisions répétables."
+  },
+  {
+    "scene": 40,
+    "start_seconds": 390,
+    "duration_seconds": 10,
+    "text": "Quelle pierre vient ensuite ? Où se placer ? Quel appui porte le poids ? Quelle partie doit être stable avant de poursuivre ?"
+  },
+  {
+    "scene": 41,
+    "start_seconds": 400,
+    "duration_seconds": 10,
+    "text": "Le mur achevé cache beaucoup de ces décisions. Sa simplicité apparente vient aussi d'une planification devenue difficile à voir."
+  },
+  {
+    "scene": 42,
+    "start_seconds": 410,
+    "duration_seconds": 10,
+    "text": "D'autres travaux ont laissé moins de traces : préparer les repas, entretenir les bateaux, trouver des matériaux et organiser durablement les équipes."
+  },
+  {
+    "scene": 43,
+    "start_seconds": 420,
+    "duration_seconds": 10,
+    "text": "Une ville n'est donc pas une accumulation d'objets lourds. C'est le résultat visible de relations permettant au travail d'exister."
+  },
+  {
+    "scene": 44,
+    "start_seconds": 430,
+    "duration_seconds": 10,
+    "text": "L'exploit grandit lorsque nous intégrons ces relations. Nous ne comparons plus une pierre mystérieuse à la force d'une seule personne."
+  },
+  {
+    "scene": 45,
+    "start_seconds": 440,
+    "duration_seconds": 10,
+    "text": "Nous observons une société capable de mobiliser savoirs, ressources et efforts répétés autour d'un lieu qu'elle jugeait important."
+  },
+  {
+    "scene": 46,
+    "start_seconds": 450,
+    "duration_seconds": 10,
+    "text": "Pourquoi choisir l'eau ? Le littoral offre routes et ressources, mais impose aussi des besoins d'entretien qui ne disparaissent jamais complètement."
+  },
+  {
+    "scene": 47,
+    "start_seconds": 460,
+    "duration_seconds": 10,
+    "text": "L'eau douce en est un. Être entouré d'eau ne signifie pas disposer d'eau potable en toute sécurité."
+  },
+  {
+    "scene": 48,
+    "start_seconds": 470,
+    "duration_seconds": 10,
+    "text": "La nourriture en est un autre. Les occupants dépendaient de systèmes plus vastes de production, d'échange et de soutien."
+  },
+  {
+    "scene": 49,
+    "start_seconds": 480,
+    "duration_seconds": 10,
+    "text": "Les enceintes ne racontent pas tout. Il faut regarder au-delà, vers les cultures, les zones de pêche et les communautés voisines."
+  },
+  {
+    "scene": 50,
+    "start_seconds": 490,
+    "duration_seconds": 10,
+    "text": "Cette dépendance change notre lecture du pouvoir. Un centre semble autonome tout en reposant sur de nombreux lieux hors du cadre."
+  },
+  {
+    "scene": 51,
+    "start_seconds": 500,
+    "duration_seconds": 10,
+    "text": "Les canaux pouvaient organiser circulation et accès. Ils donnaient aussi une valeur particulière à la connaissance de l'environnement local."
+  },
+  {
+    "scene": 52,
+    "start_seconds": 510,
+    "duration_seconds": 10,
+    "text": "Connaître un débarcadère, une fenêtre de marée ou une approche abritée constitue un savoir qu'une photographie ne peut transmettre."
+  },
+  {
+    "scene": 53,
+    "start_seconds": 520,
+    "duration_seconds": 10,
+    "text": "Évitons d'attribuer une fonction unique à chaque mur. Les limites peuvent remplir plusieurs rôles pratiques et sociaux simultanément."
+  },
+  {
+    "scene": 54,
+    "start_seconds": 530,
+    "duration_seconds": 10,
+    "text": "Un mur soutient du terrain, délimite un espace, dirige un parcours ou signale une importance. Sa forme ne révèle pas toutes les intentions."
+  },
+  {
+    "scene": 55,
+    "start_seconds": 540,
+    "duration_seconds": 10,
+    "text": "Même prudence pour les espaces vides. Un lieu désert aujourd'hui pouvait accueillir des structures et des activités mal conservées."
+  },
+  {
+    "scene": 56,
+    "start_seconds": 550,
+    "duration_seconds": 10,
+    "text": "Bois, couvertures végétales et objets quotidiens ne durent pas comme le basalte. Les vestiges peuvent exagérer la place de la pierre."
+  },
+  {
+    "scene": 57,
+    "start_seconds": 560,
+    "duration_seconds": 10,
+    "text": "Voilà pourquoi les ruines nous trompent parfois. Elles montrent le squelette durable d'un lieu, pas le lieu tout entier."
+  },
+  {
+    "scene": 58,
+    "start_seconds": 570,
+    "duration_seconds": 10,
+    "text": "Imaginez une maison privée de toit, de mobilier, de nourriture et de routines. Les fondations ne répondraient qu'à certaines questions."
+  },
+  {
+    "scene": 59,
+    "start_seconds": 580,
+    "duration_seconds": 10,
+    "text": "À Nan Madol, les éléments manquants invitent à reconstruire prudemment, en précisant où s'arrête la preuve et où commence l'illustration."
+  },
+  {
+    "scene": 60,
+    "start_seconds": 590,
+    "duration_seconds": 10,
+    "text": "La ville n'était pas seulement un problème de poids. Il fallait aussi entretenir la vie, contrôler les accès et exprimer l'autorité."
+  },
+  {
+    "scene": 61,
+    "start_seconds": 600,
+    "duration_seconds": 10,
+    "text": "Nan Madol est étroitement associé aux souverains Saudeleur. Leur centre politique et cérémoniel s'est développé ici pendant plusieurs siècles."
+  },
+  {
+    "scene": 62,
+    "start_seconds": 610,
+    "duration_seconds": 10,
+    "text": "Le grand ensemble de pierre est généralement situé, dans ses grandes lignes, entre mille deux cents et mille cinq cents de notre ère."
+  },
+  {
+    "scene": 63,
+    "start_seconds": 620,
+    "duration_seconds": 10,
+    "text": "Cet intervalle ne date pas chaque structure. Les différentes parties furent construites, utilisées, réparées et transformées à des moments distincts."
+  },
+  {
+    "scene": 64,
+    "start_seconds": 630,
+    "duration_seconds": 10,
+    "text": "Un centre politique ne loge pas seulement des personnages importants. Il peut mettre en scène des différences et organiser les déplacements."
+  },
+  {
+    "scene": 65,
+    "start_seconds": 640,
+    "duration_seconds": 10,
+    "text": "L'approche par l'eau crée de l'attente. Un seuil concentre le regard. La masse du mur modifie notre perception des dimensions."
+  },
+  {
+    "scene": 66,
+    "start_seconds": 650,
+    "duration_seconds": 10,
+    "text": "Les sentiments des visiteurs anciens restent inaccessibles. Mais l'architecture révèle comment l'espace sépare et met certaines destinations en valeur."
+  },
+  {
+    "scene": 67,
+    "start_seconds": 660,
+    "duration_seconds": 10,
+    "text": "L'impressionnante enceinte de Nandowas est associée aux sépultures de l'élite et aux cérémonies, plutôt qu'à un simple quartier résidentiel."
+  },
+  {
+    "scene": 68,
+    "start_seconds": 670,
+    "duration_seconds": 10,
+    "text": "Ses murs massifs comptent parmi les éléments les plus reconnaissables. Leur ampleur frappe avant même de demander qui pouvait entrer."
+  },
+  {
+    "scene": 69,
+    "start_seconds": 680,
+    "duration_seconds": 10,
+    "text": "Un lieu funéraire relie également autorité et mémoire. L'importance d'un souverain peut continuer à marquer le paysage après sa mort."
+  },
+  {
+    "scene": 70,
+    "start_seconds": 690,
+    "duration_seconds": 10,
+    "text": "Inutile d'inventer une cérémonie. Parfois, un accès vide observé avec respect exprime davantage qu'une représentation fabriquée."
+  },
+  {
+    "scene": 71,
+    "start_seconds": 700,
+    "duration_seconds": 10,
+    "text": "La construction monumentale concentre attention et travail. Sa permanence peut donner à un ordre politique l'apparence d'un enracinement durable."
+  },
+  {
+    "scene": 72,
+    "start_seconds": 710,
+    "duration_seconds": 10,
+    "text": "Mais la permanence de la pierre n'est pas celle du pouvoir. Une enceinte peut survivre au système qui l'a bâtie."
+  },
+  {
+    "scene": 73,
+    "start_seconds": 720,
+    "duration_seconds": 10,
+    "text": "Le mystère change alors de forme. La question difficile concerne peut-être autorité et dépendance, plutôt que possibilité physique de construire."
+  },
+  {
+    "scene": 74,
+    "start_seconds": 730,
+    "duration_seconds": 10,
+    "text": "Qui mobilisait le travail ? Qui fournissait les vivres ? Quelles obligations reliaient les communautés au centre ? Les vestiges répondent partiellement."
+  },
+  {
+    "scene": 75,
+    "start_seconds": 740,
+    "duration_seconds": 10,
+    "text": "Pour continuer, il faut une autre source : les histoires transmises par les communautés de Pohnpei de génération en génération."
+  },
+  {
+    "scene": 76,
+    "start_seconds": 750,
+    "duration_seconds": 10,
+    "text": "Les traditions orales ne décorent pas un site archéologique. Elles expriment identité, lieu, autorité et relations avec le passé."
+  },
+  {
+    "scene": 77,
+    "start_seconds": 760,
+    "duration_seconds": 10,
+    "text": "Parmi les récits célèbres figurent deux frères associés à la fondation de la ville et des pierres déplacées par des pouvoirs extraordinaires."
+  },
+  {
+    "scene": 78,
+    "start_seconds": 770,
+    "duration_seconds": 10,
+    "text": "Reconnaître ces récits n'oblige pas à présenter le surnaturel comme une technique démontrée. Leur sens culturel ne dépend pas de cette confusion."
+  },
+  {
+    "scene": 79,
+    "start_seconds": 780,
+    "duration_seconds": 10,
+    "text": "L'archéologie pose d'autres questions. Elle étudie matériaux, séquences de construction, traces environnementales et objets dont le contexte permet comparaisons et datations."
+  },
+  {
+    "scene": 80,
+    "start_seconds": 790,
+    "duration_seconds": 10,
+    "text": "Les datations scientifiques sont précieuses, mais demandent une interprétation. L'âge d'un échantillon n'est pas automatiquement celui d'un bâtiment entier."
+  },
+  {
+    "scene": 81,
+    "start_seconds": 800,
+    "duration_seconds": 10,
+    "text": "D'où vient l'échantillon ? Comment est-il entré dans la structure ? Une perturbation ultérieure a-t-elle modifié son rapport au mur ?"
+  },
+  {
+    "scene": 82,
+    "start_seconds": 810,
+    "duration_seconds": 10,
+    "text": "Plusieurs indices se renforcent quand ils concordent. Leurs désaccords les rendent plus intéressants, plutôt qu'automatiquement inutiles."
+  },
+  {
+    "scene": 83,
+    "start_seconds": 820,
+    "duration_seconds": 10,
+    "text": "La mémoire peut organiser l'histoire autour d'un personnage. Le laboratoire décrit parfois un matériau. Leurs catégories ne sont pas identiques."
+  },
+  {
+    "scene": 84,
+    "start_seconds": 830,
+    "duration_seconds": 10,
+    "text": "Une narration responsable évite donc de transformer chaque lacune en duel entre science et tradition. Leurs questions sont souvent différentes."
+  },
+  {
+    "scene": 85,
+    "start_seconds": 840,
+    "duration_seconds": 10,
+    "text": "Les traditions racontent aussi la fin du pouvoir Saudeleur et l'arrivée d'Isokelekel, figure centrale de la mémoire historique de Pohnpei."
+  },
+  {
+    "scene": 86,
+    "start_seconds": 850,
+    "duration_seconds": 10,
+    "text": "Les détails et la chronologie de cette transition exigent de la prudence. Un récit saisissant ne rend pas chaque scène certaine."
+  },
+  {
+    "scene": 87,
+    "start_seconds": 860,
+    "duration_seconds": 10,
+    "text": "Une arrivée n'explique pas non plus tous les changements ultérieurs. Les villes se transforment rarement pour une seule raison."
+  },
+  {
+    "scene": 88,
+    "start_seconds": 870,
+    "duration_seconds": 10,
+    "text": "Ici, les vestiges sont des preuves, les reconstructions des explications et les traditions sont présentées clairement comme telles."
+  },
+  {
+    "scene": 89,
+    "start_seconds": 880,
+    "duration_seconds": 10,
+    "text": "L'émerveillement reste possible. Nous le plaçons simplement dans l'histoire humaine, plutôt qu'en dehors des capacités humaines."
+  },
+  {
+    "scene": 90,
+    "start_seconds": 890,
+    "duration_seconds": 10,
+    "text": "Un lieu peut ainsi garder son importance après la transformation des institutions qui y concentraient autrefois le pouvoir."
+  },
+  {
+    "scene": 91,
+    "start_seconds": 900,
+    "duration_seconds": 10,
+    "text": "Les visiteurs disent souvent abandonné. Ce mot peut décrire une fonction disparue, mais aussi effacer des relations toujours présentes."
+  },
+  {
+    "scene": 92,
+    "start_seconds": 910,
+    "duration_seconds": 10,
+    "text": "Nan Madol n'a pas quitté l'histoire en perdant son rôle politique. Ses significations ont continué dans les savoirs locaux et la mémoire culturelle."
+  },
+  {
+    "scene": 93,
+    "start_seconds": 920,
+    "duration_seconds": 10,
+    "text": "Une ruine n'est pas automatiquement un héritage sans propriétaire. Accès et interprétation concernent des personnes dont le lien dépasse le tourisme."
+  },
+  {
+    "scene": 94,
+    "start_seconds": 930,
+    "duration_seconds": 10,
+    "text": "Un paysage bâti dans une lagune demande aussi un soin continu. L'eau transporte des sédiments, les plantes poussent, les matériaux vieillissent."
+  },
+  {
+    "scene": 95,
+    "start_seconds": 940,
+    "duration_seconds": 10,
+    "text": "De petits changements modifient la circulation. Un passage auparavant libre peut progressivement fonctionner autrement lorsque ses conditions évoluent."
+  },
+  {
+    "scene": 96,
+    "start_seconds": 950,
+    "duration_seconds": 10,
+    "text": "La végétation protège certaines surfaces, mais les racines peuvent aussi déranger les maçonneries. Conserver demande davantage que supprimer tout le vert."
+  },
+  {
+    "scene": 97,
+    "start_seconds": 960,
+    "duration_seconds": 10,
+    "text": "Le paysage n'est pas une machine arrêtée au départ des bâtisseurs. Architecture, écologie et météo continuent d'y interagir."
+  },
+  {
+    "scene": 98,
+    "start_seconds": 970,
+    "duration_seconds": 10,
+    "text": "Une photographie reste donc incomplète. Elle cache les processus qui se poursuivent entre les visites, au fil des saisons et des années."
+  },
+  {
+    "scene": 99,
+    "start_seconds": 980,
+    "duration_seconds": 10,
+    "text": "Il ne s'agit pas de choisir entre nature et culture. Toutes deux sont mêlées aux conditions qui maintiennent le site debout."
+  },
+  {
+    "scene": 100,
+    "start_seconds": 990,
+    "duration_seconds": 10,
+    "text": "Le visiteur voit une végétation pittoresque ; le conservateur peut aussi voir un canal obstrué, un matériau instable ou un suivi nécessaire."
+  },
+  {
+    "scene": 101,
+    "start_seconds": 1000,
+    "duration_seconds": 10,
+    "text": "Ces regards peuvent se compléter. La beauté attire l'attention ; un savoir attentif indique ce que cette attention devrait protéger."
+  },
+  {
+    "scene": 102,
+    "start_seconds": 1010,
+    "duration_seconds": 10,
+    "text": "Les ruines contestent l'image de sociétés du Pacifique dispersées et incapables d'organiser de grandes constructions."
+  },
+  {
+    "scene": 103,
+    "start_seconds": 1020,
+    "duration_seconds": 10,
+    "text": "Elles prouvent une planification durable et des efforts concentrés. Comprendre leur contexte exige de ne pas diminuer leurs créateurs."
+  },
+  {
+    "scene": 104,
+    "start_seconds": 1030,
+    "duration_seconds": 10,
+    "text": "Déclarer les bâtisseurs incapables rend le lieu plus étrange, mais explique moins. Le respect commence par prendre leurs réalisations au sérieux."
+  },
+  {
+    "scene": 105,
+    "start_seconds": 1040,
+    "duration_seconds": 10,
+    "text": "Cela implique aussi de considérer leur conservation comme une responsabilité concrète, et pas seulement une belle histoire."
+  },
+  {
+    "scene": 106,
+    "start_seconds": 1050,
+    "duration_seconds": 10,
+    "text": "En deux mille seize, Nan Madol entre au patrimoine mondial et figure également sur la Liste du patrimoine mondial en péril."
+  },
+  {
+    "scene": 107,
+    "start_seconds": 1060,
+    "duration_seconds": 10,
+    "text": "Cela ne signifie pas une disparition du jour au lendemain. Cela signale des valeurs importantes nécessitant une attention durable."
+  },
+  {
+    "scene": 108,
+    "start_seconds": 1070,
+    "duration_seconds": 10,
+    "text": "Les préoccupations comprennent l'envasement des voies d'eau et la végétation incontrôlée. Toutes deux relient la conservation à la circulation de l'eau."
+  },
+  {
+    "scene": 109,
+    "start_seconds": 1080,
+    "duration_seconds": 10,
+    "text": "Protéger un mur peut donc exiger de comprendre tout le système environnant. Un symptôme local peut avoir des causes éloignées."
+  },
+  {
+    "scene": 110,
+    "start_seconds": 1090,
+    "duration_seconds": 10,
+    "text": "La documentation révèle les changements. Photographies répétées, relevés d'état et archives soignées montrent ce que la mémoire seule mesure mal."
+  },
+  {
+    "scene": 111,
+    "start_seconds": 1100,
+    "duration_seconds": 10,
+    "text": "Restaurer soulève aussi des questions : que stabiliser, que laisser intact, comment intervenir sans effacer des indices utiles ?"
+  },
+  {
+    "scene": 112,
+    "start_seconds": 1110,
+    "duration_seconds": 10,
+    "text": "Une spectaculaire image avant-après ne remplace pas ces choix. Une ruine plus nette peut raconter son passé moins fidèlement."
+  },
+  {
+    "scene": 113,
+    "start_seconds": 1120,
+    "duration_seconds": 10,
+    "text": "La participation locale compte : c'est aussi un paysage culturel vivant. Les plans techniques nécessitent accords, relations et confiance durable."
+  },
+  {
+    "scene": 114,
+    "start_seconds": 1130,
+    "duration_seconds": 10,
+    "text": "Le tourisme apporte ressources et attention, mais crée des pressions si les visiteurs ignorent les limites ou grimpent sur les surfaces fragiles."
+  },
+  {
+    "scene": 115,
+    "start_seconds": 1140,
+    "duration_seconds": 10,
+    "text": "Une visite respectueuse suit les itinéraires autorisés et les conseils locaux, sans déranger pierres, objets, plantes ni espaces protégés."
+  },
+  {
+    "scene": 116,
+    "start_seconds": 1150,
+    "duration_seconds": 10,
+    "text": "La caméra a aussi des responsabilités. Un bel angle ne justifie ni accès interdit, ni pierre déplacée, ni tradition jouée sur commande."
+  },
+  {
+    "scene": 117,
+    "start_seconds": 1160,
+    "duration_seconds": 10,
+    "text": "Les images aériennes expliquent la géographie, mais demandent une autorisation adaptée. Pouvoir voir d'en haut ne donne pas automatiquement le droit de voler."
+  },
+  {
+    "scene": 118,
+    "start_seconds": 1170,
+    "duration_seconds": 10,
+    "text": "Nos modèles explicatifs parlent de construction sans prétendre montrer une découverte archéologique ou un instant historique parfaitement retrouvé."
+  },
+  {
+    "scene": 119,
+    "start_seconds": 1180,
+    "duration_seconds": 10,
+    "text": "Ce choix laisse l'incertitude visible. Il explique des mécanismes possibles sans imposer trajet et séquence lorsque les preuves manquent."
+  },
+  {
+    "scene": 120,
+    "start_seconds": 1190,
+    "duration_seconds": 10,
+    "text": "Le but n'est pas de supprimer le mystère, mais de remplacer l'impossibilité vague par des questions utiles et des indices à préserver."
+  },
+  {
+    "scene": 121,
+    "start_seconds": 1200,
+    "duration_seconds": 10,
+    "text": "Reprenons maintenant le raisonnement à rebours, depuis les murs visibles jusqu'aux systèmes que nous ne pouvons plus observer directement."
+  },
+  {
+    "scene": 122,
+    "start_seconds": 1210,
+    "duration_seconds": 10,
+    "text": "Les murs demandaient des matériaux choisis ; les matériaux, du transport ; le transport, savoir, préparation, bon moment et coopération."
+  },
+  {
+    "scene": 123,
+    "start_seconds": 1220,
+    "duration_seconds": 10,
+    "text": "Ces personnes avaient besoin de nourriture, d'eau, d'outils et de relations. Le monument dépendait d'un paysage plus vaste que ses contours."
+  },
+  {
+    "scene": 124,
+    "start_seconds": 1230,
+    "duration_seconds": 10,
+    "text": "Les fonctions politiques et cérémonielles orientaient l'effort. L'architecture rendait l'autorité visible ; l'eau organisait chemins, seuils et séparations."
+  },
+  {
+    "scene": 125,
+    "start_seconds": 1240,
+    "duration_seconds": 10,
+    "text": "Les relations politiques ont changé. La pierre demeure, mais son sens ne s'est figé ni à la construction ni à la fin d'un pouvoir."
+  },
+  {
+    "scene": 126,
+    "start_seconds": 1250,
+    "duration_seconds": 10,
+    "text": "Les traditions ont transmis l'histoire, les chercheurs ajouté des méthodes, les communautés continué de choisir comment comprendre et soigner ce lieu hérité."
+  },
+  {
+    "scene": 127,
+    "start_seconds": 1260,
+    "duration_seconds": 10,
+    "text": "Voilà un récit plus riche qu'une ville hors de l'histoire : géographie, savoir-faire, ambition, dépendance, mémoire et questions ouvertes."
+  },
+  {
+    "scene": 128,
+    "start_seconds": 1270,
+    "duration_seconds": 10,
+    "text": "Les détails inconnus comptent. De futurs travaux pourront préciser les dates, les sources des matériaux ou le développement de certaines parties."
+  },
+  {
+    "scene": 129,
+    "start_seconds": 1280,
+    "duration_seconds": 10,
+    "text": "Mais toutes les réponses ne sont pas nécessaires pour reconnaître l'essentiel : des communautés humaines ont créé ce lieu extraordinaire."
+  },
+  {
+    "scene": 130,
+    "start_seconds": 1290,
+    "duration_seconds": 10,
+    "text": "Nos décisions influencent désormais les preuves, le cadre et le sens culturel qui resteront accessibles aux générations suivantes."
+  },
+  {
+    "scene": 131,
+    "start_seconds": 1300,
+    "duration_seconds": 10,
+    "text": "Revenons à la première pierre. Sa forme volcanique appartient à une histoire ; sa place dans le mur appartient à une autre."
+  },
+  {
+    "scene": 132,
+    "start_seconds": 1310,
+    "duration_seconds": 10,
+    "text": "L'eau n'est ni un ennemi vaincu définitivement ni un simple décor. Elle participe à la vie toujours active de la ville."
+  },
+  {
+    "scene": 133,
+    "start_seconds": 1320,
+    "duration_seconds": 10,
+    "text": "Nan Madol demande comment bâtir avec un littoral difficile, et comment prendre soin du monde laissé par ce travail."
+  },
+  {
+    "scene": 134,
+    "start_seconds": 1330,
+    "duration_seconds": 8,
+    "text": "La marée continue. La pierre demeure. Notre compréhension doit, elle aussi, poursuivre son chemin."
+  }
+]

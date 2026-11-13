@@ -1,0 +1,806 @@
+[
+  {
+    "scene": 1,
+    "start_seconds": 0,
+    "duration_seconds": 10,
+    "text": "Aluksi näemme vain tumman kiven, vesirajan ja vuoroveden, joka muuttaa niiden suhdetta hiljalleen."
+  },
+  {
+    "scene": 2,
+    "start_seconds": 10,
+    "duration_seconds": 10,
+    "text": "Sitten kamera kohoaa. Kivi kuuluu muuriin, ja muuri kuuluu poikkeukselliseen kaupunkiin."
+  },
+  {
+    "scene": 3,
+    "start_seconds": 20,
+    "duration_seconds": 10,
+    "text": "Kanavat erottavat pieniä saaria. Raskaat pylväät lepäävät ristikkäin. Niiden takana Tyynimeri ulottuu horisonttiin asti."
+  },
+  {
+    "scene": 4,
+    "start_seconds": 30,
+    "duration_seconds": 10,
+    "text": "Tämä on Nan Madol Pohnpein vieressä, Mikronesian liittovaltiossa, läntisellä Tyynellämerellä."
+  },
+  {
+    "scene": 5,
+    "start_seconds": 40,
+    "duration_seconds": 10,
+    "text": "Paikkaa kuvataan usein veden päälle rakennetuksi kaupungiksi. Kivet eivät kuitenkaan kellu, ja tämä ero muuttaa tulkintamme."
+  },
+  {
+    "scene": 6,
+    "start_seconds": 50,
+    "duration_seconds": 10,
+    "text": "Rakentajat loivat kiinteää maata matalaan rannikkolaguuniin ja muuttivat nämä paikat poliittisen vallan maisemaksi."
+  },
+  {
+    "scene": 7,
+    "start_seconds": 60,
+    "duration_seconds": 10,
+    "text": "Ensimmäinen kysymys on ilmeinen: miten niin paljon raskasta kiveä tuotiin tänne ilman nykyisiä koneita?"
+  },
+  {
+    "scene": 8,
+    "start_seconds": 70,
+    "duration_seconds": 10,
+    "text": "Vaikeampi kysymys kuuluu: miksi vallan keskus rakennettiin paikkaan, jossa maa, vesi, työ ja ylläpito vaativat jatkuvaa yhteensovittamista?"
+  },
+  {
+    "scene": 9,
+    "start_seconds": 80,
+    "duration_seconds": 10,
+    "text": "Näyttävä vastaus olisi helppo keksiä. Hyödyllinen vastaus alkaa rannikosta, materiaaleista ja ihmisistä."
+  },
+  {
+    "scene": 10,
+    "start_seconds": 90,
+    "duration_seconds": 10,
+    "text": "Nan Madolin rakensivat yhteisöt, jotka tunsivat valtamerimaailmansa. Etäisyys meistä ei tee heidän saavutuksestaan mahdotonta."
+  },
+  {
+    "scene": 11,
+    "start_seconds": 100,
+    "duration_seconds": 10,
+    "text": "Kuljetuksen ja rakentamisen yksityiskohdissa on epävarmuutta. Epävarmuus kutsuu tutkimaan, ei keksimään tarinoita."
+  },
+  {
+    "scene": 12,
+    "start_seconds": 110,
+    "duration_seconds": 10,
+    "text": "Seuraamme vettä muurien välissä ja sitten kivien reittiä taaksepäin, kohti työtä, joka antoi paikalle merkityksen."
+  },
+  {
+    "scene": 13,
+    "start_seconds": 120,
+    "duration_seconds": 10,
+    "text": "Erotamme kolme kertomusta: säilyneet aineelliset jäljet, yhteisöjen muistitiedon ja tutkimuksen perustellusti tukemat päätelmät."
+  },
+  {
+    "scene": 14,
+    "start_seconds": 130,
+    "duration_seconds": 10,
+    "text": "Mikään näkökulma ei tee muita tarpeettomiksi. Yhdessä ne selittävät enemmän kuin mielikuva selittämättömästä rauniosta."
+  },
+  {
+    "scene": 15,
+    "start_seconds": 140,
+    "duration_seconds": 10,
+    "text": "Muistakaa ensimmäinen kivi. Matkan lopussa sama tumma pinta esittää meille toisenlaisen kysymyksen."
+  },
+  {
+    "scene": 16,
+    "start_seconds": 150,
+    "duration_seconds": 10,
+    "text": "Pohnpei on korkea tuliperäinen saari. Vuoret keräävät kosteutta, ja riutat sekä matalat rannikkovedet muodostavat toisen maailman sen ympärille."
+  },
+  {
+    "scene": 17,
+    "start_seconds": 160,
+    "duration_seconds": 10,
+    "text": "Nan Madol sijaitsee Temwenin vieressä Pohnpein kaakkoisrannikolla. Sijainti merkitsee enemmän kuin romanttinen vaikutelma täydellisestä eristyneisyydestä."
+  },
+  {
+    "scene": 18,
+    "start_seconds": 170,
+    "duration_seconds": 10,
+    "text": "Vesi erottaa paikkoja mutta myös yhdistää niitä. Taitaville merenkulkijoille rannikko on mahdollisten reittien verkosto."
+  },
+  {
+    "scene": 19,
+    "start_seconds": 180,
+    "duration_seconds": 10,
+    "text": "Basaltti on tuliperäistä kiveä. Jäähtyessään osa laavasta rakoili luonnostaan pitkiksi, kulmikkaiksi pylväiksi."
+  },
+  {
+    "scene": 20,
+    "start_seconds": 190,
+    "duration_seconds": 10,
+    "text": "Tällainen muoto sopii muuriin. Luonto tarjosi muodot, mutta rakentajien piti valita, siirtää ja järjestää kivet."
+  },
+  {
+    "scene": 21,
+    "start_seconds": 200,
+    "duration_seconds": 10,
+    "text": "Kiven alkuperä ei yksin selitä rakennusta. Metsä tarjoaa puuta, mutta ei valmista taloa."
+  },
+  {
+    "scene": 22,
+    "start_seconds": 210,
+    "duration_seconds": 10,
+    "text": "Pylväsmäiset lohkareet voitiin asettaa kerroksittain ristikkäin. Tiiviit muurit muistuttavat rytmiltään valtavia tummia hirsiä."
+  },
+  {
+    "scene": 23,
+    "start_seconds": 220,
+    "duration_seconds": 10,
+    "text": "Tukimuurien taakse kasattiin korallimurskaa ja muuta täytettä keinotekoiseksi maaksi. Perustukset rakennettiin, niitä ei ripustettu taianomaisesti veden ylle."
+  },
+  {
+    "scene": 24,
+    "start_seconds": 230,
+    "duration_seconds": 10,
+    "text": "Kuvauksissa mainitaan tavallisesti noin yhdeksänkymmentäyhdeksän keinotekoista saarta. Ne muodostavat verkoston, eivät yhtä valtavaa alustaa."
+  },
+  {
+    "scene": 25,
+    "start_seconds": 240,
+    "duration_seconds": 10,
+    "text": "Kokonaisuus kattaa huomattavan rannikkoalueen. Yhdestä kanavasta sen koko laajuutta voi silti olla vaikea hahmottaa."
+  },
+  {
+    "scene": 26,
+    "start_seconds": 250,
+    "duration_seconds": 10,
+    "text": "Mutka kätkee uuden muurialueen. Seinä katkaisee näkymän. Kaupunki avautuu peräkkäisten kynnysten kautta, ei yhtä suurta katua pitkin."
+  },
+  {
+    "scene": 27,
+    "start_seconds": 260,
+    "duration_seconds": 10,
+    "text": "Vesi on siis osa arkkitehtuuria. Se järjestää liikkumista, luo rajoja ja muuttaa eri paikoista avautuvia näkymiä."
+  },
+  {
+    "scene": 28,
+    "start_seconds": 270,
+    "duration_seconds": 10,
+    "text": "Sama kulkuväylä muuttuu vuoroveden mukana. Liikkuminen riippuu myös syvyydestä, jalansijasta ja oikeasta ajankohdasta."
+  },
+  {
+    "scene": 29,
+    "start_seconds": 280,
+    "duration_seconds": 10,
+    "text": "Nan Madolia kutsutaan usein Tyynenmeren Venetsiaksi. Vertaus jää mieleen, mutta tämä kaupunki ansaitsee oman selityksensä."
+  },
+  {
+    "scene": 30,
+    "start_seconds": 290,
+    "duration_seconds": 10,
+    "text": "Materiaalit, perinteet, poliittinen historia ja ekologia kuuluvat tänne. Ymmärtäminen vaatii tämän paikan omista lähtökohdista katsomista."
+  },
+  {
+    "scene": 31,
+    "start_seconds": 300,
+    "duration_seconds": 10,
+    "text": "Palataan kivien kuljetukseen. Erotetaan ensin kaksi matkaa: rannikolle pääseminen ja lopulliseen muuripaikkaan pääseminen."
+  },
+  {
+    "scene": 32,
+    "start_seconds": 310,
+    "duration_seconds": 10,
+    "text": "Matkoilla on erilaiset esteet. Rinteet, rannan olosuhteet, veden syvyys ja kuorman muoto muuttavat kukin ongelmaa."
+  },
+  {
+    "scene": 33,
+    "start_seconds": 320,
+    "duration_seconds": 10,
+    "text": "Teknisesti mahdollinen menetelmä ei automaattisesti ole historiallinen menetelmä. Arkeologia tarvitsee näyttöä, joka yhdistää sen juuri tähän paikkaan."
+  },
+  {
+    "scene": 34,
+    "start_seconds": 330,
+    "duration_seconds": 10,
+    "text": "Vesikuljetus kuuluu keskusteltuihin mahdollisuuksiin. Kelluva ratkaisukin vaatii valmistelua, yhteistyötä ja harkintaa."
+  },
+  {
+    "scene": 35,
+    "start_seconds": 340,
+    "duration_seconds": 10,
+    "text": "Lastaaminen voi olla yhtä vaativaa kuin kulkeminen. Raskas kivi voi horjuttaa tasapainoa ennen matkan alkamista."
+  },
+  {
+    "scene": 36,
+    "start_seconds": 350,
+    "duration_seconds": 10,
+    "text": "Myös viimeinen lähestyminen ratkaisee. Pienelle kanootille sopiva kanava voi asettaa raskaalle kuormalle aivan toiset rajat."
+  },
+  {
+    "scene": 37,
+    "start_seconds": 360,
+    "duration_seconds": 10,
+    "text": "Maalla vivut, tuet ja yhteinen voimankäyttö mahdollistavat suuria tehtäviä. Mikään näistä periaatteista ei vaadi teollisuusmoottoria."
+  },
+  {
+    "scene": 38,
+    "start_seconds": 370,
+    "duration_seconds": 10,
+    "text": "Se ei todista mitään tiettyä tekniikkaa. Se osoittaa, miksi ihmisten kyvykkyyden pitäisi olla lähtökohtamme."
+  },
+  {
+    "scene": 39,
+    "start_seconds": 380,
+    "duration_seconds": 10,
+    "text": "Kuvittelemme monumentin usein yhdeksi mahdottomaksi nostoksi. Rakentaminen on yleensä pitkä sarja pieniä, toistettavia päätöksiä."
+  },
+  {
+    "scene": 40,
+    "start_seconds": 390,
+    "duration_seconds": 10,
+    "text": "Mikä kivi tulee seuraavaksi? Missä työntekijät seisovat? Mikä kantaa painon? Minkä osan pitää ensin olla vakaa?"
+  },
+  {
+    "scene": 41,
+    "start_seconds": 400,
+    "duration_seconds": 10,
+    "text": "Valmis muuri peittää monet päätökset. Näennäinen yksinkertaisuus johtuu osittain onnistuneesta suunnittelusta, jota emme enää näe."
+  },
+  {
+    "scene": 42,
+    "start_seconds": 410,
+    "duration_seconds": 10,
+    "text": "Muu työ jätti vähemmän monumentaalisia jälkiä: ruoan valmistaminen, veneiden huolto, materiaalien hankinta ja ihmisten pitkäjänteinen järjestäminen."
+  },
+  {
+    "scene": 43,
+    "start_seconds": 420,
+    "duration_seconds": 10,
+    "text": "Kaupunki ei siis ole vain raskaiden esineiden kasa. Se on näkyvä tulos suhteista, jotka mahdollistivat työn."
+  },
+  {
+    "scene": 44,
+    "start_seconds": 430,
+    "duration_seconds": 10,
+    "text": "Saavutus kasvaa, kun suhteet lasketaan mukaan. Emme enää vertaa arvoituksellista kiveä yhden ihmisen voimaan."
+  },
+  {
+    "scene": 45,
+    "start_seconds": 440,
+    "duration_seconds": 10,
+    "text": "Näemme yhteiskunnan, joka pystyi suuntaamaan tietoa, resursseja ja toistuvaa työtä tärkeäksi kokemaansa paikkaan."
+  },
+  {
+    "scene": 46,
+    "start_seconds": 450,
+    "duration_seconds": 10,
+    "text": "Miksi valita vesi? Rannikko tarjoaa reittejä ja resursseja mutta synnyttää myös ylläpitotarpeita, jotka eivät kokonaan katoa."
+  },
+  {
+    "scene": 47,
+    "start_seconds": 460,
+    "duration_seconds": 10,
+    "text": "Makea vesi on yksi niistä. Veden ympäröimänä eläminen ei tarkoita turvallisen juomaveden ympäröimänä elämistä."
+  },
+  {
+    "scene": 48,
+    "start_seconds": 470,
+    "duration_seconds": 10,
+    "text": "Ruoka on toinen. Asukkaat kuuluivat laajempiin tuotannon, vaihdon ja tuen järjestelmiin."
+  },
+  {
+    "scene": 49,
+    "start_seconds": 480,
+    "duration_seconds": 10,
+    "text": "Kivimuurit eivät kerro koko tarinaa. On katsottava niiden yli viljelyksille, kalavesille ja naapuriyhteisöihin."
+  },
+  {
+    "scene": 50,
+    "start_seconds": 490,
+    "duration_seconds": 10,
+    "text": "Riippuvuus muuttaa vallan merkitystä. Keskus voi näyttää itsenäiseltä ja silti nojata lukuisiin kuvan ulkopuolisiin paikkoihin."
+  },
+  {
+    "scene": 51,
+    "start_seconds": 500,
+    "duration_seconds": 10,
+    "text": "Kanavat saattoivat järjestää liikkumista ja pääsyä. Ne tekivät paikallisen ympäristön tuntemuksesta erityisen arvokasta."
+  },
+  {
+    "scene": 52,
+    "start_seconds": 510,
+    "duration_seconds": 10,
+    "text": "Rantautumispaikan, sopivan vuorovesihetken tai suojaisan lähestymisen tunteminen on tietoa, jota valokuva ei voi välittää."
+  },
+  {
+    "scene": 53,
+    "start_seconds": 520,
+    "duration_seconds": 10,
+    "text": "Älkäämme antako jokaiselle muurille vain yhtä tarkoitusta. Rajoilla voi olla useita käytännöllisiä ja yhteiskunnallisia tehtäviä yhtä aikaa."
+  },
+  {
+    "scene": 54,
+    "start_seconds": 530,
+    "duration_seconds": 10,
+    "text": "Muuri tukee maata, merkitsee tilaa, ohjaa kulkua tai viestii tärkeydestä. Säilynyt muoto ei paljasta jokaista aikomusta."
+  },
+  {
+    "scene": 55,
+    "start_seconds": 540,
+    "duration_seconds": 10,
+    "text": "Sama varovaisuus koskee tyhjiä tiloja. Nykyinen tyhjyys voi peittää huonosti säilyneitä rakennuksia ja toimintoja."
+  },
+  {
+    "scene": 56,
+    "start_seconds": 550,
+    "duration_seconds": 10,
+    "text": "Puu, kasvikatot ja arkiesineet eivät kestä kuten basaltti. Säilyneet jäljet voivat korostaa kiveä ja peittää tavallisen elämän."
+  },
+  {
+    "scene": 57,
+    "start_seconds": 560,
+    "duration_seconds": 10,
+    "text": "Siksi rauniot voivat johtaa harhaan. Ne näyttävät paikan kestävän luurangon, eivät koko paikkaa."
+  },
+  {
+    "scene": 58,
+    "start_seconds": 570,
+    "duration_seconds": 10,
+    "text": "Kuvitelkaa talo ilman kattoa, huonekaluja, ruokaa ja arkisia tapoja. Perustukset vastaavat vain osaan kysymyksistä."
+  },
+  {
+    "scene": 59,
+    "start_seconds": 580,
+    "duration_seconds": 10,
+    "text": "Nan Madolin puuttuvat yksityiskohdat vaativat varovaista rekonstruointia. On kerrottava, missä näyttö päättyy ja havainnollistus alkaa."
+  },
+  {
+    "scene": 60,
+    "start_seconds": 590,
+    "duration_seconds": 10,
+    "text": "Kaupunki ei koskaan ollut vain painon arvoitus. Se merkitsi myös elämän ylläpitämistä, pääsyn hallintaa ja auktoriteetin ilmaisemista."
+  },
+  {
+    "scene": 61,
+    "start_seconds": 600,
+    "duration_seconds": 10,
+    "text": "Nan Madol liittyy läheisesti Saudeleur-hallitsijoihin. Heidän poliittinen ja seremoniallinen keskuksensa muotoutui täällä useiden vuosisatojen aikana."
+  },
+  {
+    "scene": 62,
+    "start_seconds": 610,
+    "duration_seconds": 10,
+    "text": "Suuri kivikokonaisuus ajoitetaan yleisesti noin tuhannen kahdensadan ja tuhannen viidensadan väliseen aikaan ajanlaskumme alun jälkeen."
+  },
+  {
+    "scene": 63,
+    "start_seconds": 620,
+    "duration_seconds": 10,
+    "text": "Laaja aikaväli ei ajoita jokaista rakennusta. Eri osia rakennettiin, käytettiin, korjattiin ja muutettiin eri hetkinä."
+  },
+  {
+    "scene": 64,
+    "start_seconds": 630,
+    "duration_seconds": 10,
+    "text": "Poliittinen keskus ei vain majoita tärkeitä ihmisiä. Se voi esittää eroja ja tehdä joistakin liikkeistä helpompia kuin toisista."
+  },
+  {
+    "scene": 65,
+    "start_seconds": 640,
+    "duration_seconds": 10,
+    "text": "Vettä pitkin lähestyminen luo odotusta. Kynnys keskittää huomion. Muurin korkeus ja massa muuttavat kävijän mittakaavan tajua."
+  },
+  {
+    "scene": 66,
+    "start_seconds": 650,
+    "duration_seconds": 10,
+    "text": "Emme tavoita jokaisen historiallisen vierailijan tunteita. Arkkitehtuuri silti näyttää, miten tila erottaa ja korostaa tiettyjä päämääriä."
+  },
+  {
+    "scene": 67,
+    "start_seconds": 660,
+    "duration_seconds": 10,
+    "text": "Vaikuttava Nandowasin muurialue yhdistetään eliitin hautauksiin ja seremonialliseen tärkeyteen, ei vain tavalliseen asuinalueeseen."
+  },
+  {
+    "scene": 68,
+    "start_seconds": 670,
+    "duration_seconds": 10,
+    "text": "Sen jykevät muurit ovat paikan tunnetuimpia piirteitä. Mittakaava vaikuttaa jo ennen kysymystä siitä, kuka pääsi sisään."
+  },
+  {
+    "scene": 69,
+    "start_seconds": 680,
+    "duration_seconds": 10,
+    "text": "Hautapaikka yhdistää myös auktoriteetin muistiin. Hallitsijan merkitys voi muovata maisemaa hänen kuolemansa jälkeenkin."
+  },
+  {
+    "scene": 70,
+    "start_seconds": 690,
+    "duration_seconds": 10,
+    "text": "Tämä ei vaadi keksittyä seremoniaa. Joskus tyhjä lähestymisreitti kertoo kunnioittavasti katsottuna enemmän kuin lavastettu esitys."
+  },
+  {
+    "scene": 71,
+    "start_seconds": 700,
+    "duration_seconds": 10,
+    "text": "Monumentaalinen rakentaminen kokoaa huomiota ja työtä keskukseen. Sen pysyvyys voi saada poliittisen järjestyksen näyttämään syvästi juurtuneelta."
+  },
+  {
+    "scene": 72,
+    "start_seconds": 710,
+    "duration_seconds": 10,
+    "text": "Pysyvä kivi ei kuitenkaan tarkoita pysyvää valtaa. Muurialue voi säilyä kauemmin kuin sen rakentanut järjestelmä."
+  },
+  {
+    "scene": 73,
+    "start_seconds": 720,
+    "duration_seconds": 10,
+    "text": "Tässä arvoituksen muoto muuttuu. Vaikein kysymys saattaa koskea auktoriteettia ja riippuvuutta, ei rakentamisen fyysistä mahdollisuutta."
+  },
+  {
+    "scene": 74,
+    "start_seconds": 730,
+    "duration_seconds": 10,
+    "text": "Kuka pyysi työtä? Kuka toimitti ruoan? Mitkä velvollisuudet yhdistivät yhteisöt keskukseen? Aineelliset jäljet vastaavat vain osittain."
+  },
+  {
+    "scene": 75,
+    "start_seconds": 740,
+    "duration_seconds": 10,
+    "text": "Jatkamiseen tarvitaan toinen lähde: Pohnpein yhteisöjen sukupolvelta toiselle välittämät kertomukset."
+  },
+  {
+    "scene": 76,
+    "start_seconds": 750,
+    "duration_seconds": 10,
+    "text": "Suulliset perinteet eivät ole arkeologisen kohteen koristeita. Ne ilmaisevat identiteettiä, paikkaa, auktoriteettia ja suhdetta menneisyyteen."
+  },
+  {
+    "scene": 77,
+    "start_seconds": 760,
+    "duration_seconds": 10,
+    "text": "Tunnettuihin kertomuksiin kuuluvat kaupungin perustamiseen yhdistetyt kaksi veljestä sekä poikkeuksellisten voimien liikuttamat kivet."
+  },
+  {
+    "scene": 78,
+    "start_seconds": 770,
+    "duration_seconds": 10,
+    "text": "Voimme tunnustaa kertomukset esittämättä yliluonnollista liikettä todistettuna rakennusmenetelmänä. Niiden kulttuurinen merkitys ei tarvitse tällaista sekoitusta."
+  },
+  {
+    "scene": 79,
+    "start_seconds": 780,
+    "duration_seconds": 10,
+    "text": "Arkeologia kysyy toisin. Se tutkii materiaaleja, rakennusjärjestystä, ympäristöjälkiä ja esineitä, joiden yhteys mahdollistaa vertailun ja ajoittamisen."
+  },
+  {
+    "scene": 80,
+    "start_seconds": 790,
+    "duration_seconds": 10,
+    "text": "Tieteelliset ajoitukset ovat arvokkaita mutta vaativat tulkintaa. Näytteen ikä ei automaattisesti ole koko rakennuksen ikä."
+  },
+  {
+    "scene": 81,
+    "start_seconds": 800,
+    "duration_seconds": 10,
+    "text": "Mistä näyte tuli? Miten se päätyi rakenteeseen? Muuttiko myöhempi häiriö sen suhdetta muuriin?"
+  },
+  {
+    "scene": 82,
+    "start_seconds": 810,
+    "duration_seconds": 10,
+    "text": "Useat todistelinjat vahvistuvat yhtäpitävinä. Ristiriidat tekevät niistä kiinnostavampia, eivät automaattisesti hyödyttömiä."
+  },
+  {
+    "scene": 83,
+    "start_seconds": 820,
+    "duration_seconds": 10,
+    "text": "Muisti voi järjestää historiaa henkilön ympärille. Laboratorio kuvaa materiaalia. Ne eivät välttämättä käytä samoja luokkia."
+  },
+  {
+    "scene": 84,
+    "start_seconds": 830,
+    "duration_seconds": 10,
+    "text": "Vastuullinen kerronta ei siis muuta jokaista aukkoa tieteen ja perinteen kilpailuksi. Niiden kysymykset ovat usein erilaisia."
+  },
+  {
+    "scene": 85,
+    "start_seconds": 840,
+    "duration_seconds": 10,
+    "text": "Perinteet kertovat myös Saudeleur-vallan päättymisestä ja Isokelekelin saapumisesta. Hän on keskeinen hahmo Pohnpein historiallisessa muistissa."
+  },
+  {
+    "scene": 86,
+    "start_seconds": 850,
+    "duration_seconds": 10,
+    "text": "Siirtymän yksityiskohdat ja ajoitus vaativat varovaisuutta. Dramaattinen tarina ei tee jokaisesta kuvitellusta kohtauksesta varmaa."
+  },
+  {
+    "scene": 87,
+    "start_seconds": 860,
+    "duration_seconds": 10,
+    "text": "Yksi saapuminen ei myöskään selitä kaikkia myöhempiä muutoksia. Kaupungit muuttuvat harvoin vain yhdestä syystä."
+  },
+  {
+    "scene": 88,
+    "start_seconds": 870,
+    "duration_seconds": 10,
+    "text": "Tässä elokuvassa jäännökset ovat näyttöä, rekonstruktiot selityksiä ja perinteet nimetään selvästi perinteiksi."
+  },
+  {
+    "scene": 89,
+    "start_seconds": 880,
+    "duration_seconds": 10,
+    "text": "Ihmetykselle jää tilaa. Sijoitamme sen vain ihmisen historian sisään, emme ihmisen mahdollisuuksien ulkopuolelle."
+  },
+  {
+    "scene": 90,
+    "start_seconds": 890,
+    "duration_seconds": 10,
+    "text": "Paikka voi siis säilyttää tärkeytensä senkin jälkeen, kun valtaa siellä keskittäneet instituutiot ovat muuttuneet."
+  },
+  {
+    "scene": 91,
+    "start_seconds": 900,
+    "duration_seconds": 10,
+    "text": "Vierailijat sanovat usein hylätty. Sana voi kuvata menetettyä tehtävää mutta myös pyyhkiä pois yhä eläviä suhteita."
+  },
+  {
+    "scene": 92,
+    "start_seconds": 910,
+    "duration_seconds": 10,
+    "text": "Nan Madol ei poistunut historiasta poliittisen roolin heikentyessä. Merkitykset jatkuivat paikallisessa tiedossa, tapaan perustuvissa suhteissa ja kulttuurisessa muistissa."
+  },
+  {
+    "scene": 93,
+    "start_seconds": 920,
+    "duration_seconds": 10,
+    "text": "Raunio ei muutu automaattisesti omistajattomaksi perinnöksi. Pääsy ja tulkinta koskevat ihmisiä, joiden suhde ylittää matkailun."
+  },
+  {
+    "scene": 94,
+    "start_seconds": 930,
+    "duration_seconds": 10,
+    "text": "Rakennettu laguunimaisema tarvitsee jatkuvaa hoitoa. Vesi kuljettaa sedimenttiä, kasvit kasvavat ja materiaalit rapautuvat sekä liikkuvat."
+  },
+  {
+    "scene": 95,
+    "start_seconds": 940,
+    "duration_seconds": 10,
+    "text": "Pienet muutokset vaikuttavat kiertoon. Aiemmin avoin väylä voi vähitellen toimia eri tavalla olosuhteiden muuttuessa."
+  },
+  {
+    "scene": 96,
+    "start_seconds": 950,
+    "duration_seconds": 10,
+    "text": "Kasvillisuus voi suojata pintoja, mutta juuret voivat myös häiritä kivirakenteita. Suojelu vaatii enemmän harkintaa kuin kaiken vihreän poistamisen."
+  },
+  {
+    "scene": 97,
+    "start_seconds": 960,
+    "duration_seconds": 10,
+    "text": "Maisema ei ole rakentajien lähtiessä pysäytetty kone. Arkkitehtuuri, ekologia ja sää vaikuttavat siellä edelleen toisiinsa."
+  },
+  {
+    "scene": 98,
+    "start_seconds": 970,
+    "duration_seconds": 10,
+    "text": "Valokuva on siksi toisellakin tavalla vajaa. Se kätkee prosessit vierailujen välillä, vuodenaikojen yli ja monien vuosien aikana."
+  },
+  {
+    "scene": 99,
+    "start_seconds": 980,
+    "duration_seconds": 10,
+    "text": "Ei tarvitse valita luonnon ja kulttuurin väliltä. Molemmat kietoutuvat olosuhteisiin, jotka pitävät kohteen pystyssä."
+  },
+  {
+    "scene": 100,
+    "start_seconds": 990,
+    "duration_seconds": 10,
+    "text": "Vierailija näkee viehättävää kasvillisuutta. Konservaattori voi nähdä myös tukkeutuneen kanavan, epävakaan materiaalin tai seurattavan kohdan."
+  },
+  {
+    "scene": 101,
+    "start_seconds": 1000,
+    "duration_seconds": 10,
+    "text": "Näkökulmat voivat täydentää toisiaan. Kauneus herättää huomion, ja huolellinen tieto osoittaa, mitä huomion pitäisi suojella."
+  },
+  {
+    "scene": 102,
+    "start_seconds": 1010,
+    "duration_seconds": 10,
+    "text": "Rauniot haastavat mielikuvan hajanaisista Tyynenmeren yhteiskunnista, jotka eivät muka pystyneet järjestämään suuria rakennushankkeita."
+  },
+  {
+    "scene": 103,
+    "start_seconds": 1020,
+    "duration_seconds": 10,
+    "text": "Tässä on näyttöä pitkästä suunnittelusta ja keskitetystä työstä. Yhteyksien ymmärtäminen ei saa vähätellä tekijöitä."
+  },
+  {
+    "scene": 104,
+    "start_seconds": 1030,
+    "duration_seconds": 10,
+    "text": "Rakentajien kutsuminen kyvyttömiksi tekee paikasta oudomman mutta selittää vähemmän. Kunnioitus alkaa saavutusten vakavasti ottamisesta."
+  },
+  {
+    "scene": 105,
+    "start_seconds": 1040,
+    "duration_seconds": 10,
+    "text": "Se tarkoittaa myös säilymisen näkemistä käytännön vastuuna, ei vain hyvänä kerrottavana tarinana."
+  },
+  {
+    "scene": 106,
+    "start_seconds": 1050,
+    "duration_seconds": 10,
+    "text": "Vuonna kaksituhattakuusitoista Nan Madol kirjattiin maailmanperintöluetteloon ja samalla vaarantuneen maailmanperinnön luetteloon."
+  },
+  {
+    "scene": 107,
+    "start_seconds": 1060,
+    "duration_seconds": 10,
+    "text": "Se ei tarkoita kaupungin katoamista yhdessä yössä. Se osoittaa tärkeitä arvoja, jotka tarvitsevat jatkuvaa huomiota."
+  },
+  {
+    "scene": 108,
+    "start_seconds": 1070,
+    "duration_seconds": 10,
+    "text": "Huolia ovat vesireittien liettyminen ja hallitsematon kasvillisuus. Molemmat yhdistävät suojelun suoraan veden liikkumiseen."
+  },
+  {
+    "scene": 109,
+    "start_seconds": 1080,
+    "duration_seconds": 10,
+    "text": "Yhden muurin suojaaminen saattaa siis vaatia koko ympäristön ymmärtämistä. Paikallisen oireen syy voi olla näkyvän kiven ulkopuolella."
+  },
+  {
+    "scene": 110,
+    "start_seconds": 1090,
+    "duration_seconds": 10,
+    "text": "Dokumentointi paljastaa muutoksia. Toistetut kuvat, kuntotutkimukset ja tarkat muistiinpanot näyttävät, mitä muisti yksin ei mittaa luotettavasti."
+  },
+  {
+    "scene": 111,
+    "start_seconds": 1100,
+    "duration_seconds": 10,
+    "text": "Restaurointi esittää vaikeita kysymyksiä: mitä vakautetaan, mihin ei kosketa ja miten vältetään hyödyllisten jälkien hävittäminen?"
+  },
+  {
+    "scene": 112,
+    "start_seconds": 1110,
+    "duration_seconds": 10,
+    "text": "Näyttävä ennen ja jälkeen -kuva ei korvaa päätöksiä. Siistimpi raunio voi kertoa menneisyydestään vähemmän totuudenmukaisesti."
+  },
+  {
+    "scene": 113,
+    "start_seconds": 1120,
+    "duration_seconds": 10,
+    "text": "Paikallinen osallistuminen on tärkeää: kyseessä on myös elävä kulttuurimaisema. Tekniset suunnitelmat tarvitsevat sopimuksia, suhteita ja kestävää luottamusta."
+  },
+  {
+    "scene": 114,
+    "start_seconds": 1130,
+    "duration_seconds": 10,
+    "text": "Matkailu tuo resursseja ja huomiota mutta myös painetta, jos rajoja sivuutetaan tai herkkiä pintoja käytetään kuvausalustoina."
+  },
+  {
+    "scene": 115,
+    "start_seconds": 1140,
+    "duration_seconds": 10,
+    "text": "Kunnioittava vierailu seuraa sallittuja reittejä ja paikallisia ohjeita sekä jättää muurit, esineet, kasvit ja suojatut tilat rauhaan."
+  },
+  {
+    "scene": 116,
+    "start_seconds": 1150,
+    "duration_seconds": 10,
+    "text": "Kamerallakin on vastuunsa. Hyvä kuvakulma ei oikeuta kiellettyä pääsyä, siirrettyjä kiviä tai tilattuja perinne-esityksiä."
+  },
+  {
+    "scene": 117,
+    "start_seconds": 1160,
+    "duration_seconds": 10,
+    "text": "Ilmakuvat selittävät maantiedettä mutta vaativat asianmukaisen luvan. Ylhäältä näkeminen ei anna automaattista oikeutta lentää."
+  },
+  {
+    "scene": 118,
+    "start_seconds": 1170,
+    "duration_seconds": 10,
+    "text": "Mallimme selittävät rakentamista väittämättä näyttävänsä arkeologista löytöä tai täydellisesti palautettua historiallista hetkeä."
+  },
+  {
+    "scene": 119,
+    "start_seconds": 1180,
+    "duration_seconds": 10,
+    "text": "Näin epävarmuus pysyy näkyvissä. Kuvaamme mahdollisia mekanismeja ja jätämme reitit sekä järjestyksen avoimiksi, kun näyttö puuttuu."
+  },
+  {
+    "scene": 120,
+    "start_seconds": 1190,
+    "duration_seconds": 10,
+    "text": "Tavoitteena ei ole poistaa arvoitusta vaan korvata epämääräinen mahdottomuus mielekkäillä kysymyksillä ja säilyttämisen arvoisilla jäljillä."
+  },
+  {
+    "scene": 121,
+    "start_seconds": 1200,
+    "duration_seconds": 10,
+    "text": "Kuljetaan päättely taaksepäin: näkyvistä muureista järjestelmiin, joita emme voi enää suoraan havainnoida."
+  },
+  {
+    "scene": 122,
+    "start_seconds": 1210,
+    "duration_seconds": 10,
+    "text": "Muurit vaativat valittuja materiaaleja. Materiaalit vaativat kuljetusta. Kuljetus vaati tietoa, valmistelua, ajoitusta ja yhteistyökykyisiä ihmisiä."
+  },
+  {
+    "scene": 123,
+    "start_seconds": 1220,
+    "duration_seconds": 10,
+    "text": "Ihmiset tarvitsivat ruokaa, vettä, työkaluja ja sosiaalisia suhteita. Monumentti nojasi laajempaan maisemaan kuin sen säilynyt ääriviiva näyttää."
+  },
+  {
+    "scene": 124,
+    "start_seconds": 1230,
+    "duration_seconds": 10,
+    "text": "Poliittiset ja seremonialliset tarkoitukset ohjasivat työtä. Arkkitehtuuri näytti auktoriteetin, ja vesi järjesti reitit, kynnykset ja erot."
+  },
+  {
+    "scene": 125,
+    "start_seconds": 1240,
+    "duration_seconds": 10,
+    "text": "Poliittiset suhteet muuttuivat. Kivi jäi, mutta merkitys ei jäätynyt rakennushetkeen tai hallinnon päättymiseen."
+  },
+  {
+    "scene": 126,
+    "start_seconds": 1250,
+    "duration_seconds": 10,
+    "text": "Perinteet välittivät historiaa, tutkimus lisäsi menetelmiä ja yhteisöt jatkoivat perityn paikan ymmärtämisestä ja hoidosta sopimista."
+  },
+  {
+    "scene": 127,
+    "start_seconds": 1260,
+    "duration_seconds": 10,
+    "text": "Se on rikkaampi kertomus kuin historian ulkopuolinen kaupunki: maantiedettä, taitoa, pyrkimyksiä, riippuvuutta, muutosta, muistia ja avoimia kysymyksiä."
+  },
+  {
+    "scene": 128,
+    "start_seconds": 1270,
+    "duration_seconds": 10,
+    "text": "Ratkaisemattomat yksityiskohdat merkitsevät. Tuleva tutkimus voi tarkentaa ajoituksia, tunnistaa materiaalilähteitä ja selvittää eri osien kehitystä."
+  },
+  {
+    "scene": 129,
+    "start_seconds": 1280,
+    "duration_seconds": 10,
+    "text": "Kaikkia vastauksia ei silti tarvita selvän asian tunnustamiseen: ihmisyhteisöt loivat tämän poikkeuksellisen paikan."
+  },
+  {
+    "scene": 130,
+    "start_seconds": 1290,
+    "duration_seconds": 10,
+    "text": "Päätöksemme vaikuttavat nyt siihen, paljonko näyttöä, ympäristöä ja kulttuurista merkitystä jää tuleville sukupolville."
+  },
+  {
+    "scene": 131,
+    "start_seconds": 1300,
+    "duration_seconds": 10,
+    "text": "Palataan ensimmäiseen kiveen. Sen tuliperäinen muoto kuuluu yhteen tarinaan, paikka muurissa toiseen."
+  },
+  {
+    "scene": 132,
+    "start_seconds": 1310,
+    "duration_seconds": 10,
+    "text": "Vesi ei ole ikuisesti voitettu vihollinen eikä pelkkä tausta. Se kuuluu kaupungin jatkuvaan elämään."
+  },
+  {
+    "scene": 133,
+    "start_seconds": 1320,
+    "duration_seconds": 10,
+    "text": "Nan Madol kysyy, miten ihmiset rakensivat vaikean rannikon kanssa ja miten voimme hoitaa heidän jättämäänsä maailmaa."
+  },
+  {
+    "scene": 134,
+    "start_seconds": 1330,
+    "duration_seconds": 8,
+    "text": "Vuorovesi jatkaa liikettään. Kivi pysyy. Myös ymmärryksemme on kuljettava eteenpäin."
+  }
+]

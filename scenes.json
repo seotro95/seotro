@@ -1,0 +1,903 @@
+[
+  {
+    "prompt": 1,
+    "reserve_only": false,
+    "start_seconds": 0,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      1,
+      2
+    ],
+    "narration_en": "At first, there is only a dark stone, a line of water, and the tide quietly changing their relationship. Then the camera rises. That single stone belongs to a wall, and the wall belongs to an extraordinary city.",
+    "camera": "Extreme low 85mm close-up of a wet horizontal basalt beam at the tidal waterline; slowly crane upward to reveal the interlocking wall it belongs to, completing the reveal by second sixteen and settling."
+  },
+  {
+    "prompt": 2,
+    "reserve_only": false,
+    "start_seconds": 20,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      3,
+      4
+    ],
+    "narration_en": "Channels separate small islands. Heavy columns lie across one another. Beyond them, the Pacific stretches toward a seemingly endless horizon. This is Nan Madol, on the edge of Pohnpei, in the Federated States of Micronesia, in the western Pacific.",
+    "camera": "High oblique coastal reveal of Nan Madol's stone islets, narrow channels, neighboring Temwen and the green Pohnpei coast; slow sideways movement, geographically plausible scale, no invented surveyed plan."
+  },
+  {
+    "prompt": 3,
+    "reserve_only": false,
+    "start_seconds": 40,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      5,
+      6
+    ],
+    "narration_en": "The familiar description is a city built on water. But the stones are not floating, and that distinction changes everything. Its builders created places to stand within a shallow coastal lagoon, then turned those places into a powerful political landscape.",
+    "camera": "Clearly illustrative museum cutaway of an artificial islet on shallow reef substrate: basalt retaining margin, coral-rubble fill and a stable walking surface; one slow continuous orbit, nothing floating."
+  },
+  {
+    "prompt": 4,
+    "reserve_only": false,
+    "start_seconds": 60,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      7,
+      8
+    ],
+    "narration_en": "The first question seems obvious. How did people bring so much heavy stone here without the machinery we recognize today? Yet another question is harder. Why build a center of authority where land, water, labor, and maintenance must constantly negotiate?",
+    "camera": "Eye-level slow approach along a broad channel toward a massive basalt enclosure; irregular stone ends gradually dominate the frame while water and humid vegetation remain visible."
+  },
+  {
+    "prompt": 5,
+    "reserve_only": false,
+    "start_seconds": 80,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      9,
+      10
+    ],
+    "narration_en": "A dramatic answer would be easy to invent. A useful answer begins with the coast, the materials, and the people. Nan Madol was made by human communities whose knowledge belonged to this ocean world. Distance from us does not imply impossibility.",
+    "camera": "Three-depth documentary composition with basalt foreground, channel middle distance and forested island background; gently rack focus toward two clearly adult Pohnpeian guides in a modest distant canoe."
+  },
+  {
+    "prompt": 6,
+    "reserve_only": false,
+    "start_seconds": 100,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      11,
+      12
+    ],
+    "narration_en": "Much remains uncertain, including details of transport and construction. Uncertainty is an invitation to investigate, rather than permission to invent. Our route follows the water between the walls, then follows the stones backward, toward the work that made them meaningful.",
+    "camera": "From a safe authorized viewpoint, track beside a clearly adult researcher photographing wall details, then let the focus move past the camera to the water route between enclosures; no readable device screens."
+  },
+  {
+    "prompt": 7,
+    "reserve_only": false,
+    "start_seconds": 120,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      13,
+      14
+    ],
+    "narration_en": "We will also distinguish three kinds of story: what survives physically, what communities remember, and what researchers can reasonably infer. None of those perspectives makes the others disposable. Together, they reveal more than the idea of an inexplicable ruin ever could.",
+    "camera": "One continuous studio-table slide past an unmarked basalt sample, a simple architectural model and a woven mat; natural side light, no fake inscriptions or claims that these are recovered artifacts."
+  },
+  {
+    "prompt": 8,
+    "reserve_only": false,
+    "start_seconds": 140,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      15,
+      16
+    ],
+    "narration_en": "So keep that first stone in mind. Before this journey ends, the same dark surface will ask a very different question. Pohnpei is a high volcanic island. Its mountainous interior catches moisture, while reefs and coastal shallows shape another world around it.",
+    "camera": "Begin on the wet basalt face from the opening, then tilt slowly toward a high volcanic island landscape beyond the coast; green ridges, low clouds and reef shallows, no fantasy geography."
+  },
+  {
+    "prompt": 9,
+    "reserve_only": false,
+    "start_seconds": 160,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      17,
+      18
+    ],
+    "narration_en": "Nan Madol lies beside Temwen, off Pohnpei's southeastern coast. This setting matters more than the romantic image of isolation suggests. Water can divide places, but it can also connect them. For skilled navigators, a coast is a network of possible routes.",
+    "camera": "Wide restrained view beside Temwen toward southeastern Pohnpei; a small canoe with clearly adult occupants travels parallel to the sheltered shore, camera fixed on land, no heroic ocean crossing."
+  },
+  {
+    "prompt": 10,
+    "reserve_only": false,
+    "start_seconds": 180,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      19,
+      20
+    ],
+    "narration_en": "The basalt itself began as volcanic rock. Some of it fractured naturally into long, angular columns as the lava cooled. That geometry looks remarkably convenient in a wall. Nature supplied useful shapes; builders still had to select, move, and arrange them.",
+    "camera": "An explicitly illustrative cooling-basalt model transitions by continuous camera travel from naturally prismatic columns to a small stacked-wall model; show geology supplying shapes and human arrangement as separate ideas."
+  },
+  {
+    "prompt": 11,
+    "reserve_only": false,
+    "start_seconds": 200,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      21,
+      22
+    ],
+    "narration_en": "A stone's origin does not explain a building by itself. A forest supplies timber, but it does not supply a finished house. Here, those column-like pieces could overlap across courses, making dense walls whose visual rhythm resembles enormous lengths of dark timber.",
+    "camera": "Slow close lateral move along irregular basalt ends and alternating crosswise wall courses; raking natural light clarifies contact points and log-like geometry without exaggerating dimensions."
+  },
+  {
+    "prompt": 12,
+    "reserve_only": false,
+    "start_seconds": 220,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      23,
+      24
+    ],
+    "narration_en": "Between and behind retaining walls, coral rubble and other fill helped establish artificial ground. The foundations were engineered, not magically suspended. Descriptions commonly count about ninety-nine artificial islets. Their arrangement forms a network, rather than a single enormous platform above the sea.",
+    "camera": "Clearly illustrative architectural model combining a cutaway artificial-islet edge with an unlabeled cluster of many small channel-separated enclosures; slow pullback, no precise survey or exact islet-count claim in imagery."
+  },
+  {
+    "prompt": 13,
+    "reserve_only": false,
+    "start_seconds": 240,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      25,
+      26
+    ],
+    "narration_en": "The surviving complex covers a substantial coastal area. From a single channel, however, its full scale can remain surprisingly difficult to grasp. A turn hides another enclosure. A wall interrupts the view. The city reveals itself through successive thresholds, rather than one grand avenue.",
+    "camera": "Eye-level continuous dolly along a channel bend; the foreground wall initially hides another enclosure, which is gradually revealed, emphasizing sequential thresholds rather than a straight avenue."
+  },
+  {
+    "prompt": 14,
+    "reserve_only": false,
+    "start_seconds": 260,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      27,
+      28
+    ],
+    "narration_en": "This makes water part of the architecture. It organizes movement, creates edges, and changes what can be seen from each position. Even the same passage looks different as the tide changes. A route is also a relationship with depth, footing, and time.",
+    "camera": "Locked near-overhead view of a shallow channel junction beside stone margins; use a subtle illustrative tidal change during the shot to show altered depth, no sudden flooding or damage."
+  },
+  {
+    "prompt": 15,
+    "reserve_only": false,
+    "start_seconds": 280,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      29,
+      30
+    ],
+    "narration_en": "The site is often called the Venice of the Pacific. The comparison is memorable, but Nan Madol deserves its own explanation. Its materials, traditions, political history, and coastal ecology belong here. To understand the city, we must stop borrowing somebody else's map.",
+    "camera": "Documentary wide view through a basalt threshold toward tropical palms and lagoon shallows; slow lateral motion, entirely Micronesian setting, no European architecture or imported monumental styles."
+  },
+  {
+    "prompt": 16,
+    "reserve_only": false,
+    "start_seconds": 300,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      31,
+      32
+    ],
+    "narration_en": "Now return to the problem of moving stone. We should first separate two journeys: reaching the coast, and reaching the final wall. Those journeys involve different obstacles. Slopes, shore conditions, water depth, and the shape of a load can each change the problem.",
+    "camera": "An unlabeled explanatory terrain model shows three adjacent zones: irregular inland basalt terrain, shoreline and a coastal stone enclosure; one slow camera traverse, no asserted transport route."
+  },
+  {
+    "prompt": 17,
+    "reserve_only": false,
+    "start_seconds": 320,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      33,
+      34
+    ],
+    "narration_en": "A technically possible method is not automatically the historical method. Archaeology needs evidence that connects a proposal to this particular place. Water transport is among the possibilities discussed for parts of the work. But a floating solution still requires preparation, coordination, and judgment.",
+    "camera": "Clearly adult researcher studies a stone photograph beside a safe small-scale timber-float experiment in a shallow demonstration tank; slow lateral reveal, explicitly a feasibility model rather than historical proof."
+  },
+  {
+    "prompt": 18,
+    "reserve_only": false,
+    "start_seconds": 340,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      35,
+      36
+    ],
+    "narration_en": "Loading may be as demanding as traveling. A heavy piece can shift balance before any useful journey has even begun. The final approach matters too. Shallow channels that welcome a small canoe may present very different constraints for a heavy load.",
+    "camera": "Close oblique view of a small model float carrying a basalt piece beside a shallow landing margin; extremely gentle model movement exposes balance and depth constraints, no dangerous lifting or full-scale reenactment."
+  },
+  {
+    "prompt": 19,
+    "reserve_only": false,
+    "start_seconds": 360,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      37,
+      38
+    ],
+    "narration_en": "On land, leverage, supports, and coordinated effort can make large tasks manageable. None of those principles requires an industrial engine. That does not prove one specific technique was used here. It shows why human capability should be our starting point, not our exception.",
+    "camera": "Safe tabletop demonstration of a wooden lever, stable fulcrum and small stone; adult hands apply light controlled force, then pause beside an unfinished wall model; no claim of a proven Nan Madol technique."
+  },
+  {
+    "prompt": 20,
+    "reserve_only": false,
+    "start_seconds": 380,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      39,
+      40
+    ],
+    "narration_en": "We often picture a monument as one impossible lift. In practice, building is usually a long sequence of smaller, repeatable decisions. Which stone goes next? Where can workers stand? What supports the weight? Which part must be stable before another part rises?",
+    "camera": "Slow macro glide around a physical stacked-basalt model; show one stable piece placed by adult hands, then reveal bearing surfaces and available working space, no miraculous full-scale assembly."
+  },
+  {
+    "prompt": 21,
+    "reserve_only": false,
+    "start_seconds": 400,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      41,
+      42
+    ],
+    "narration_en": "The finished wall hides many of those decisions. Its apparent simplicity is partly the result of successful planning becoming difficult to see. There was also work that left fewer monumental traces: preparing food, maintaining boats, finding materials, and organizing people over time.",
+    "camera": "One slow observational move from a wall's complex contact points to a contemporary adult repairing a canoe paddle at an authorized shore work area; no invented ancient costume, scene is illustrative of supporting work."
+  },
+  {
+    "prompt": 22,
+    "reserve_only": false,
+    "start_seconds": 420,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      43,
+      44
+    ],
+    "narration_en": "A city is therefore not just an accumulation of heavy objects. It is the visible outcome of relationships that kept work possible. The real achievement grows larger when we include those relationships. We are no longer measuring a mysterious stone against a single person's strength.",
+    "camera": "High restrained pullback across several adjacent stone compounds and sheltered shore access; a single modest canoe gives scale, no crowds, no imagined city traffic or labor hierarchy."
+  },
+  {
+    "prompt": 23,
+    "reserve_only": false,
+    "start_seconds": 440,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      45,
+      46
+    ],
+    "narration_en": "We are looking at a society able to direct knowledge, resources, and repeated effort toward a place it considered important. Why choose water at all? A coastal setting can offer routes and resources, while also creating expensive demands that never completely disappear.",
+    "camera": "Long-lens view of a monumental enclosure beyond tidal water, slowly widening to show reef shallows and mangrove fringe; cloudy tropical light, calm thoughtful camera movement."
+  },
+  {
+    "prompt": 24,
+    "reserve_only": false,
+    "start_seconds": 460,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      47,
+      48
+    ],
+    "narration_en": "Fresh water is one of those demands. Being surrounded by water does not mean being surrounded by water people can safely drink. Food is another. Whatever activities took place within the complex, its occupants belonged to wider systems of production, exchange, and support.",
+    "camera": "Close raindrop on a broad tropical leaf, then a gentle focus shift to contemporary adult hands arranging breadfruit, taro and coconut in a simple open island kitchen; no claim that this is archaeological evidence."
+  },
+  {
+    "prompt": 25,
+    "reserve_only": false,
+    "start_seconds": 480,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      49,
+      50
+    ],
+    "narration_en": "Stone enclosures cannot tell that whole story alone. We need to think beyond their edges, toward farms, fishing grounds, and neighboring communities. This dependence also changes the meaning of power. A center may look self-contained while relying on many places that lie outside the frame.",
+    "camera": "Slow elevated retreat from Nan Madol's enclosure margins toward living coastal vegetation and cultivated land beyond; emphasize connections without reconstructing an exact ancient agricultural plan."
+  },
+  {
+    "prompt": 26,
+    "reserve_only": false,
+    "start_seconds": 500,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      51,
+      52
+    ],
+    "narration_en": "The channels could help organize movement and access. They also made practical knowledge of the local environment especially valuable. A person who knows a landing place, a tidal window, or a sheltered approach possesses knowledge that a photograph cannot provide.",
+    "camera": "Respectful rear view of a clearly adult Pohnpeian guide observing a narrow channel from a safe authorized path; slow pan follows the water toward a sheltered landing, no dialogue or pointing performance."
+  },
+  {
+    "prompt": 27,
+    "reserve_only": false,
+    "start_seconds": 520,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      53,
+      54
+    ],
+    "narration_en": "We should be careful about assigning a single purpose to every wall. Boundaries can serve several practical and social functions at once. A wall can support ground, mark a space, direct a route, or signal importance. Surviving form does not always reveal every intention.",
+    "camera": "Medium-low lateral move around a robust basalt enclosure corner, showing outer retaining face, inner ground and threshold within one coherent view; soft light separates practical and spatial functions."
+  },
+  {
+    "prompt": 28,
+    "reserve_only": false,
+    "start_seconds": 540,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      55,
+      56
+    ],
+    "narration_en": "The same caution applies to empty spaces. A place that appears vacant today may once have included structures and activities that survived poorly. Timber, thatch, and everyday objects do not endure like basalt. What remains can overemphasize stone and understate ordinary life.",
+    "camera": "Quiet slow wide glide across the inside of an empty vegetated stone enclosure; retain only surviving masonry and present-day plants, leave absent timber structures absent rather than inventing them."
+  },
+  {
+    "prompt": 29,
+    "reserve_only": false,
+    "start_seconds": 560,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      57,
+      58
+    ],
+    "narration_en": "That is one reason ruins can mislead us. They show the durable skeleton of a place, not the complete place itself. Imagine reading a house after its roof, furniture, food, voices, and routines have vanished. The foundations answer only some of your questions.",
+    "camera": "Neutral museum tabletop model of a stone foundation beside a detached lightweight timber roof and ordinary unmarked household props; one slow overhead slide communicates what preservation leaves out."
+  },
+  {
+    "prompt": 30,
+    "reserve_only": false,
+    "start_seconds": 580,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      59,
+      60
+    ],
+    "narration_en": "At Nan Madol, the missing details invite careful reconstruction. They also require us to say clearly where evidence ends and illustration begins. The city was never only a puzzle about weight. It was also a problem of sustaining life, controlling access, and expressing authority.",
+    "camera": "Clearly adult archaeological illustrator studies site photographs beside a simple unfinished architectural model; close hands and paper, unreadable marks, continuous gentle push toward the model's open spaces."
+  },
+  {
+    "prompt": 31,
+    "reserve_only": false,
+    "start_seconds": 600,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      61,
+      62
+    ],
+    "narration_en": "Nan Madol is closely associated with the Saudeleur rulers, whose political and ceremonial center took shape here over several centuries. The large stone complex is commonly dated broadly to the period from around twelve hundred to fifteen hundred of the common era.",
+    "camera": "Large restrained studio model of a Nan Madol-style ceremonial complex with an out-of-focus blank chronology strip; slow orbit, no royal portraits, no readable dates, no invented crowns or regalia."
+  },
+  {
+    "prompt": 32,
+    "reserve_only": false,
+    "start_seconds": 620,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      63,
+      64
+    ],
+    "narration_en": "That broad range is not a timetable for every structure. Different parts were built, used, repaired, and changed at different moments. A political center does more than house important people. It can stage distinctions, making some movements easy and other movements deliberate.",
+    "camera": "Clearly illustrative phased model of the stone complex, portions rendered in subtly different neutral material tones; continuous move toward a narrow entry, no assertion that these colors are an excavated chronology."
+  },
+  {
+    "prompt": 33,
+    "reserve_only": false,
+    "start_seconds": 640,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      65,
+      66
+    ],
+    "narration_en": "An approach across water creates anticipation. A threshold narrows attention. The height and mass of a wall alter the visitor's sense of scale. We cannot recover every historical visitor's feelings. But architecture can still show how space creates separation and emphasizes particular destinations.",
+    "camera": "Eye-level slow forward move from open tidal water toward a narrow monumental basalt entrance; mass and restricted sightlines become apparent, stop outside the threshold, no guards or gate invented."
+  },
+  {
+    "prompt": 34,
+    "reserve_only": false,
+    "start_seconds": 660,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      67,
+      68
+    ],
+    "narration_en": "The impressive enclosure known as Nandowas is associated with elite burial and ceremonial importance, not simply with an ordinary residential neighborhood. Its massive walls are among the site's most recognizable features. Their scale is striking even before we ask who could enter.",
+    "camera": "Respectful exterior view of Nandowas-style double enclosure walls; low corner angle and gradual tilt reveal interlocking courses and imposing but realistic scale; no interior access, graves, bodies or burial artifacts."
+  },
+  {
+    "prompt": 35,
+    "reserve_only": false,
+    "start_seconds": 680,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      69,
+      70
+    ],
+    "narration_en": "A burial place also connects authority with memory. The importance of a ruler may continue to shape a landscape beyond that person's lifetime. That connection does not require us to invent a ceremony. Sometimes an empty approach, respectfully observed, communicates more than a fabricated performance.",
+    "camera": "Locked distant view of an empty protected stone approach framed by foliage and shallow water; moving leaves and reflections only, respectfully evocative, no ceremony or funeral reenactment."
+  },
+  {
+    "prompt": 36,
+    "reserve_only": false,
+    "start_seconds": 700,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      71,
+      72
+    ],
+    "narration_en": "Monumental building can gather attention and labor around a center. Its very permanence can make a political order appear rooted in the world. Yet stone is not the same thing as political permanence. The survival of an enclosure does not mean the survival of the system that built it.",
+    "camera": "Strong weathered basalt corner against passing cloud shadows, then a slow pullback reveals new growth around enduring masonry; no collapse, time-machine effects or invented historical events."
+  },
+  {
+    "prompt": 37,
+    "reserve_only": false,
+    "start_seconds": 720,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      73,
+      74
+    ],
+    "narration_en": "This is where the familiar mystery changes shape. The hardest question may concern authority and dependence, rather than the physical possibility of construction. Who could request labor? Who supplied food? What obligations connected outlying communities with the center? Material remains provide only part of those answers.",
+    "camera": "Unlabeled schematic architectural model on a researcher’s plain table beside ordinary food baskets and a closed notebook; slow lateral movement, all human hands clearly adult, no unsupported social network diagram."
+  },
+  {
+    "prompt": 38,
+    "reserve_only": false,
+    "start_seconds": 740,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      75,
+      76
+    ],
+    "narration_en": "To keep following the story, we need another kind of evidence: the histories that Pohnpeian communities have carried across generations. Oral traditions are not decorative extras attached to an archaeological site. They help express identity, place, authority, and relationships with the past.",
+    "camera": "Respectful contemporary meeting-place view of a clearly adult Pohnpeian cultural practitioner seated silently on a woven mat; gentle drift from a rear three-quarter view toward relaxed hands, no sacred performance."
+  },
+  {
+    "prompt": 39,
+    "reserve_only": false,
+    "start_seconds": 760,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      77,
+      78
+    ],
+    "narration_en": "Among the best-known traditions are stories of two brothers associated with the city's founding, and stones moved through extraordinary powers. We can acknowledge those accounts without presenting supernatural movement as a demonstrated construction method. Their cultural meaning does not depend on that confusion.",
+    "camera": "Two empty adult-sized canoe paddles rest in foreground, distant Nan Madol wall beyond calm water; slow rack focus to the firmly resting basalt, evoke founding traditions without literal magic or flying stones."
+  },
+  {
+    "prompt": 40,
+    "reserve_only": false,
+    "start_seconds": 780,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      79,
+      80
+    ],
+    "narration_en": "Archaeology asks different questions. It examines materials, construction sequences, environmental traces, and objects whose contexts can support comparisons and dates. Scientific dates are powerful, but they need interpretation. A sample's age and the date of an entire building are not automatically identical.",
+    "camera": "Clearly adult archaeologist documents a wall from a safe viewpoint; one gentle camera move reveals a sample container and small coral piece on a separate work table, no excavation or newly discovered artifact claim."
+  },
+  {
+    "prompt": 41,
+    "reserve_only": false,
+    "start_seconds": 800,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      81,
+      82
+    ],
+    "narration_en": "Researchers must ask where a sample came from, how it entered a structure, and whether later disturbance changed its relationship with the wall. Several lines of evidence become stronger when they agree. They become more interesting, rather than useless, when they seem to disagree.",
+    "camera": "Museum-style explanatory section model with a small coral fragment within coarse artificial-islet fill, wall photographs beside it; slow continuous orbit, no exact recovered sample or laboratory result claimed."
+  },
+  {
+    "prompt": 42,
+    "reserve_only": false,
+    "start_seconds": 820,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      83,
+      84
+    ],
+    "narration_en": "A remembered event may organize history around a person. A laboratory date may describe material. Neither automatically speaks in the other's categories. This is why responsible storytelling must resist turning every gap into a contest between science and tradition. The questions are often different.",
+    "camera": "Contemporary shaded desk with a woven mat, closed field notebook and indistinct architectural photographs; respectful soft light and slow sideways camera, no visual battle between science and tradition."
+  },
+  {
+    "prompt": 43,
+    "reserve_only": false,
+    "start_seconds": 840,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      85,
+      86
+    ],
+    "narration_en": "Traditions also recount the end of Saudeleur rule and the arrival of Isokelekel, a central figure in Pohnpeian historical memory. The details and chronology of that transition require care. A dramatic story is not a license to assign certainty to every scene.",
+    "camera": "Distant canoe with clearly adult occupants on a calm tropical coast at dusk; restrained evocative illustration of journeys remembered in tradition, no battle, dated event, ancient costume or identified historical character."
+  },
+  {
+    "prompt": 44,
+    "reserve_only": false,
+    "start_seconds": 860,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      87,
+      88
+    ],
+    "narration_en": "Nor should one arrival be made to explain every later change across the whole complex. Cities rarely transform for only one reason. For our film, the honest distinction is simple: physical remains are evidence; reconstructions are explanations; traditions are identified as traditions.",
+    "camera": "Slow overhead camera above a neutral architectural model of multiple enclosures, a stone sample and closed notebook at its edge; no destruction, no single-event explanation, clearly an interpretive model."
+  },
+  {
+    "prompt": 45,
+    "reserve_only": false,
+    "start_seconds": 880,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      89,
+      90
+    ],
+    "narration_en": "That approach leaves room for wonder. It simply places wonder where it belongs, alongside human history rather than outside human possibility. And it prepares us for a difficult fact: a place can remain important even after the institutions that concentrated power there have changed.",
+    "camera": "Water-level gentle reveal of a heavy basalt corner in light morning mist, grounded realistic gravity, rich texture without glowing relics or fantasy symbols; the living palm canopy remains visible beyond."
+  },
+  {
+    "prompt": 46,
+    "reserve_only": false,
+    "start_seconds": 900,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      91,
+      92
+    ],
+    "narration_en": "Visitors often use the word abandoned. It can describe the loss of an earlier function, but it can also erase continuing relationships. Nan Madol did not leave history when its political role diminished. Its meanings continued through local knowledge, customary relationships, and cultural memory.",
+    "camera": "Contemporary wide view of a permitted path beside the ruins, one clearly adult local guide and one adult visitor observing quietly; slow observational pan, no suggestion of an ownerless landscape."
+  },
+  {
+    "prompt": 47,
+    "reserve_only": false,
+    "start_seconds": 920,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      93,
+      94
+    ],
+    "narration_en": "A ruin is not automatically an empty inheritance available to anyone. Access and interpretation involve people whose connection is more than touristic. From a practical perspective, a built lagoon landscape also requires continuing care. Water carries sediment; plants grow; materials weather and shift.",
+    "camera": "Close-wide view follows a safe path toward a stone-lined channel with plausible accumulated sediment and vegetation; no access to restricted enclosures, no fabricated crisis or newly measured damage."
+  },
+  {
+    "prompt": 48,
+    "reserve_only": false,
+    "start_seconds": 940,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      95,
+      96
+    ],
+    "narration_en": "Small changes can alter circulation. A passage that carries water freely under one set of conditions may gradually behave differently under another. Vegetation can shelter surfaces, but roots can also disturb masonry. Conservation decisions require more judgment than simply removing every green thing.",
+    "camera": "Clearly illustrative shallow-channel model with modest sediment and nearby roots; show small changes in flow around stable masonry using neutral materials, no precise hydraulic forecast or live destructive root growth."
+  },
+  {
+    "prompt": 49,
+    "reserve_only": false,
+    "start_seconds": 960,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      97,
+      98
+    ],
+    "narration_en": "The landscape is not a machine paused at the moment its builders left. It is an active meeting of architecture, ecology, and weather. That makes a single photograph incomplete in another way. It hides the processes that unfold between visits, across seasons, and over many years.",
+    "camera": "Fixed wide composition of basalt, mangrove fringe and tidal water in light rain; slow natural ripples, changing leaf shadows and subtle sky movement show a living landscape without accelerated historic reconstruction."
+  },
+  {
+    "prompt": 50,
+    "reserve_only": false,
+    "start_seconds": 980,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      99,
+      100
+    ],
+    "narration_en": "The question is not whether nature or culture owns the site. Both are already intertwined in the conditions that keep it standing. A visitor sees picturesque growth against dark stone. A conservator may also see a blocked route, unstable material, or a place needing monitoring.",
+    "camera": "Close lateral move along basalt texture, lichen, small water paths and a vegetated channel margin; an adult conservator observes from a safe distance in background, no contact or removal of plants."
+  },
+  {
+    "prompt": 51,
+    "reserve_only": false,
+    "start_seconds": 1000,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      101,
+      102
+    ],
+    "narration_en": "Neither view has to cancel the other. Beauty can invite attention, while careful knowledge tells us what that attention should protect. The ruins also challenge an easy image of Pacific history as scattered small societies without the ability to organize major construction.",
+    "camera": "Slow elevated reveal from tropical foliage to the broad spread of stone compounds across the coast; balanced natural color, emphasize organized scale rather than spectacle or comparisons to foreign monuments."
+  },
+  {
+    "prompt": 52,
+    "reserve_only": false,
+    "start_seconds": 1020,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      103,
+      104
+    ],
+    "narration_en": "Here is physical evidence of sustained planning and concentrated effort. The challenge is to understand its setting without minimizing its makers. Calling the builders incapable makes the place seem stranger, but it explains less. Respect begins by taking their achievements seriously.",
+    "camera": "Close-low tracking along well-weighted interlocking basalt courses; distant clearly adult local cultural workers review photographs at a permitted work area, modern clothing, no speech or reenactment."
+  },
+  {
+    "prompt": 53,
+    "reserve_only": false,
+    "start_seconds": 1040,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      105,
+      106
+    ],
+    "narration_en": "And taking an achievement seriously includes recognizing that its survival is now a practical responsibility, not merely a good story to tell. In twenty sixteen, Nan Madol was inscribed on UNESCO's World Heritage List and also placed on the List of World Heritage in Danger.",
+    "camera": "Long stable view of an intact wall and authorized path in dawn light; a clearly adult guide walks with one adult visitor, no UNESCO logo, official plaque, generated writing or invented inscription ceremony."
+  },
+  {
+    "prompt": 54,
+    "reserve_only": false,
+    "start_seconds": 1060,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      107,
+      108
+    ],
+    "narration_en": "The recognition does not mean the city is about to vanish overnight. It signals that important values face conditions requiring sustained attention. Concerns have included silting of waterways and uncontrolled vegetation growth. Both connect conservation directly with the movement of water through the site.",
+    "camera": "Low slow tracking along a partly narrowed stone-lined waterway, showing plausible sediment and vegetation beside standing masonry; no sudden catastrophe, no predicted collapse or unsupported current survey result."
+  },
+  {
+    "prompt": 55,
+    "reserve_only": false,
+    "start_seconds": 1080,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      109,
+      110
+    ],
+    "narration_en": "Protecting an individual wall may therefore depend on understanding an entire surrounding system. A local symptom can have causes beyond one visible stone. Good documentation helps reveal change. Repeated photographs, condition surveys, and careful records can show what memory alone may fail to measure reliably.",
+    "camera": "Clearly illustrative model shows adjacent enclosures connected by channels; gradual pullback reveals how one wall belongs to a larger system, a plain tripod photograph nearby suggests repeat documentation."
+  },
+  {
+    "prompt": 56,
+    "reserve_only": false,
+    "start_seconds": 1100,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      111,
+      112
+    ],
+    "narration_en": "Restoration also raises difficult questions. What should be stabilized? What should remain untouched? How can intervention avoid erasing useful evidence? Those decisions should not be replaced by a spectacular before-and-after image. A ruin can look tidier while becoming less truthful about its past.",
+    "camera": "Adult conservator inspects a detached stone sample at a work table beside a worn architectural model; gentle close slide, no repair of original masonry, no digital transformation into pristine ruins."
+  },
+  {
+    "prompt": 57,
+    "reserve_only": false,
+    "start_seconds": 1120,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      113,
+      114
+    ],
+    "narration_en": "Local participation matters because a heritage place is also a lived cultural landscape. Technical plans need relationships, access agreements, and continuing trust. Tourism can bring resources and attention. It can also create pressure when visitors treat boundaries as obstacles or fragile surfaces as photo platforms.",
+    "camera": "Contemporary adults meet silently around a simple table in an open island shelter; safe visitor path and stone ruins visible beyond, no lip movement, documents unreadable, no staged traditional ceremony."
+  },
+  {
+    "prompt": 58,
+    "reserve_only": false,
+    "start_seconds": 1140,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      115,
+      116
+    ],
+    "narration_en": "A useful visitor keeps to authorized routes, follows local guidance, and leaves masonry, objects, plants, and protected spaces undisturbed. The camera has responsibilities too. A compelling angle should not require entering a restricted enclosure, moving a stone, or asking someone to perform tradition.",
+    "camera": "Slow respectful tracking behind a clearly adult photographer and local guide staying on a stable permitted path; camera is lowered before a protected enclosure, no climbing, boundary crossing or touching stone."
+  },
+  {
+    "prompt": 59,
+    "reserve_only": false,
+    "start_seconds": 1160,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      117,
+      118
+    ],
+    "narration_en": "Aerial imagery can explain geography, but it requires appropriate permission. The ability to see from above does not automatically create a right to fly. For this production, explanatory models help us discuss construction without pretending to show an archaeological discovery or a perfectly recovered historical moment.",
+    "camera": "Museum-style model supplies an overhead perspective of basalt courses, coral fill and channels; one smooth orbit becomes a closer sectional view, visibly illustrative, no drone flight or archaeological discovery claim."
+  },
+  {
+    "prompt": 60,
+    "reserve_only": false,
+    "start_seconds": 1180,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      119,
+      120
+    ],
+    "narration_en": "That choice also keeps the uncertainty visible. We can describe plausible mechanics while leaving the exact route and sequence open where evidence is incomplete. The aim is not to drain the city of mystery. It is to replace vague impossibility with questions worth asking and evidence worth preserving.",
+    "camera": "Unfinished experimental wall model beside loose basalt prisms on a neutral table; gentle push through an open model threshold toward softly lit water-colored background, no definitive solution asserted."
+  },
+  {
+    "prompt": 61,
+    "reserve_only": false,
+    "start_seconds": 1200,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      121,
+      122
+    ],
+    "narration_en": "So let us walk the argument backward, from the walls we see to the systems we can no longer observe directly. The walls required chosen materials. The materials required movement. Movement required knowledge, timing, preparation, and people who could work together.",
+    "camera": "Single slow studio-camera move along an explanatory sequence: loose basalt, a modest transport feasibility model and stable stacked courses; physical models stay stationary, adult hands only if needed for scale."
+  },
+  {
+    "prompt": 62,
+    "reserve_only": false,
+    "start_seconds": 1220,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      123,
+      124
+    ],
+    "narration_en": "Those people required food, water, tools, and social relationships. The monument depended on a much wider landscape than its surviving outline suggests. Its political and ceremonial uses gave that effort direction. Architecture made authority visible, while water helped organize routes, thresholds, and separation.",
+    "camera": "Elevated coastal view widens from monumental threshold toward stone islets, shore vegetation, ordinary boats and distant cultivated land; controlled motion links architecture with supporting landscape, no invented ancient map."
+  },
+  {
+    "prompt": 63,
+    "reserve_only": false,
+    "start_seconds": 1240,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      125,
+      126
+    ],
+    "narration_en": "Over time, political relationships changed. The stone remained, but its meaning did not freeze at the moment of construction or the end of rule. Traditions carried histories forward. Researchers brought additional methods. Contemporary communities continued to negotiate how this inherited place should be understood and cared for.",
+    "camera": "Quiet contemporary view of two clearly adult people, a local guide and researcher, looking silently across water toward weathered walls and mature palms; no acted historical transition or dialogue."
+  },
+  {
+    "prompt": 64,
+    "reserve_only": false,
+    "start_seconds": 1260,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      127,
+      128
+    ],
+    "narration_en": "That is a richer story than a city outside history. It has geography, skill, ambition, dependence, change, memory, and unresolved questions. The unresolved details still matter. Future work may refine dates, identify material sources, or clarify how particular parts of the complex developed.",
+    "camera": "Broad coastal panorama slowly settles on a clearly adult researcher photographing a wall corner from an authorized position; no samples removed, no discovery revealed, soft realistic tropical light."
+  },
+  {
+    "prompt": 65,
+    "reserve_only": false,
+    "start_seconds": 1280,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      129,
+      130
+    ],
+    "narration_en": "But we do not need to wait for every answer before recognizing what is already clear: human communities made this extraordinary place. And human decisions now influence how much of its evidence, its setting, and its cultural meaning will remain available to the next generation.",
+    "camera": "Low-angle view of interlocking basalt beams with a distant clearly adult guide for scale; gradual lateral reveal includes channel, intact walls and forest, no contact with masonry or staged restoration."
+  },
+  {
+    "prompt": 66,
+    "reserve_only": false,
+    "start_seconds": 1300,
+    "used_seconds": 20,
+    "generated_seconds": 20,
+    "voice_cues": [
+      131,
+      132
+    ],
+    "narration_en": "Return to the first stone. Its volcanic shape is part of one story; its position in a wall is part of another. The water beside it is neither an enemy defeated forever nor a decorative backdrop. It is part of the city's continuing life.",
+    "camera": "Match the opening basalt waterline close-up, then gently follow one small tidal ripple around the stone foot; natural late-day reflection, grounded weight and calm movement, no symbolic fantasy effects."
+  },
+  {
+    "prompt": 67,
+    "reserve_only": false,
+    "start_seconds": 1320,
+    "used_seconds": 18,
+    "generated_seconds": 20,
+    "voice_cues": [
+      133,
+      134
+    ],
+    "narration_en": "Nan Madol asks how people built with a difficult coast, and how we can care for the world their work left behind. The tide keeps moving. The stone remains. Our understanding must keep moving too.",
+    "camera": "Slow crane outward from the opening stone to a quiet channel, neighboring enclosure and living coastline at dusk; complete the main movement by second fourteen and hold a settled final composition through second twenty."
+  },
+  {
+    "prompt": 68,
+    "reserve_only": true,
+    "start_seconds": null,
+    "used_seconds": 0,
+    "generated_seconds": 20,
+    "voice_cues": [],
+    "narration_en": "",
+    "camera": "RESERVE: close lateral view of irregular basalt beam ends and stable crosswise courses in soft sidelight; no people, no new historical claim, calm motion suitable to replace a masonry explanation scene."
+  },
+  {
+    "prompt": 69,
+    "reserve_only": true,
+    "start_seconds": null,
+    "used_seconds": 0,
+    "generated_seconds": 20,
+    "voice_cues": [],
+    "narration_en": "",
+    "camera": "RESERVE: fixed wide sheltered-channel view bordered by stone and palms, subtle changing reflections, no people or boats; suitable to replace a water-route or conservation scene."
+  },
+  {
+    "prompt": 70,
+    "reserve_only": true,
+    "start_seconds": null,
+    "used_seconds": 0,
+    "generated_seconds": 20,
+    "voice_cues": [],
+    "narration_en": "",
+    "camera": "RESERVE: clearly illustrative physical cutaway model of an artificial islet, basalt margin and coral-rubble fill; slow museum-table orbit, no precise surveyed strata or asserted transport technique."
+  }
+]
