@@ -32,7 +32,34 @@
   "vietnamese_voice": "vi-VN-NamMinhNeural",
   "other16_saved_ids_retained": true,
   "documents_delivered": true,
-  "voices_generated": false,
-  "phase": "generating17voices",
-  "translations_ready": true
+  "voices_generated": true,
+  "phase": "documents_and17voices_delivered_awaiting_footage",
+  "translations_ready": true,
+  "completed_voice_count": 17,
+  "completed_voice_locales": [
+    "en-US",
+    "vi-VN",
+    "es-ES",
+    "fr-FR",
+    "ja-JP",
+    "ko-KR",
+    "de-DE",
+    "it-IT",
+    "pt-PT",
+    "nl-NL",
+    "pl-PL",
+    "sv-SE",
+    "da-DK",
+    "fi-FI",
+    "nb-NO",
+    "cs-CZ",
+    "mww"
+  ],
+  "voice_repair_workflow_run_ids": [
+    43243793604
+  ],
+  "voice_files_delivered": 17,
+  "public_download_verified": true,
+  "voice_archive_sha256": "643e1095fa0bd430077ea8d7f3bc5988ba7c72d39f6e6b53fdbce1b21ae3c697",
+  "documents_archive_sha256": "c37bfa0c0fcfe163ed0252854c1e1642a9c700556c6ea3cc00697c19d1d00939"
 }

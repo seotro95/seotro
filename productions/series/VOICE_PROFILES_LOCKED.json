@@ -1,5 +1,7 @@
 {
   "profile_set_id": "science-prehistory-17-v3-nam-minh-vi",
+  "topic_id": 71,
+  "target_seconds": 1358,
   "profiles": [
     {
       "locale": "en-US",
@@ -10,7 +12,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_My_Tieng_Anh.mp3",
+      "mp3_sha256": "661526bb572a2f7954a8dc91f76c436eb9c7dcd78d1a4e0564f64326a34ef439",
+      "alignment_granularity": "136Englishcues"
     },
     {
       "locale": "vi-VN",
@@ -23,7 +29,11 @@
       "provider": "Microsoft Edge via edge-tts",
       "base_rate": "phrase-dependent",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "rate": "phrase-dependent; no pitch shift"
+      "rate": "phrase-dependent; no pitch shift",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Viet_Nam_Nam_Minh.mp3",
+      "mp3_sha256": "227391183b1005cc715a8fde7f23c9d03933796e3414ccb39d6577ceca6d8a4f",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "es-ES",
@@ -34,7 +44,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Tay_Ban_Nha.mp3",
+      "mp3_sha256": "e9d459b4def8fa8b53b32bb75e523699a77a8bf595b69da143265bb43f65d0bb",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "fr-FR",
@@ -45,7 +59,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Phap.mp3",
+      "mp3_sha256": "3be90ba9184068338f93f1d58a3572996730c4b9f98febaeda70daeadff01048",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "ja-JP",
@@ -56,7 +74,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Nhat_Ban.mp3",
+      "mp3_sha256": "84266432a0fb38d1baa2112b6b1bee918ddf392ffd6f51e9f070701797df344d",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "ko-KR",
@@ -67,7 +89,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Han_Quoc.mp3",
+      "mp3_sha256": "aca938fce234b1b369aa824b36ce5187982bfdd2047b16eda0278301e249737c",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "de-DE",
@@ -78,7 +104,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Duc.mp3",
+      "mp3_sha256": "3fa91af99453def702c724052b7319f04c5f367351efd1c6f4c60b8f6fab211f",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "it-IT",
@@ -89,7 +119,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Y.mp3",
+      "mp3_sha256": "14b2fe567d7a66c11aaa77631e039b8c1732901652aa0d9dfc0362f0e208c715",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "pt-PT",
@@ -100,7 +134,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Bo_Dao_Nha.mp3",
+      "mp3_sha256": "21195ab694dbaa08865761eafa06978d087cf85335e4c0b1a13197a81d1deec0",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "nl-NL",
@@ -111,7 +149,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Ha_Lan.mp3",
+      "mp3_sha256": "54305685660346c95dd7f2cf317cf52f4ea95f29b42a6a31fb4b349eb7d2c490",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "pl-PL",
@@ -122,7 +164,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Ba_Lan.mp3",
+      "mp3_sha256": "158921c2f736dee55db5bb19a4d081763ad89c34d28230be32101dc32585fa9e",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "sv-SE",
@@ -133,7 +179,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Thuy_Dien.mp3",
+      "mp3_sha256": "aa8d5cfed7c071d0d5460409a35654e5650bdd9ab4cf90af94805bdab5976773",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "da-DK",
@@ -144,7 +194,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Dan_Mach.mp3",
+      "mp3_sha256": "dc701fed3c0a799202921786d02c371637448f43fa06eac8800ee1305d5e1a0a",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "fi-FI",
@@ -155,7 +209,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Phan_Lan.mp3",
+      "mp3_sha256": "6afd6374b1b52111024f32646da10b401dd0a373b4b89bc9f7e8d4481b63242b",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "nb-NO",
@@ -166,7 +224,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Na_Uy.mp3",
+      "mp3_sha256": "6458a1531a9b66e258a57a94e5c9a859b6f3533b5ac62d09f72ac9673e6314d2",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "cs-CZ",
@@ -177,7 +239,11 @@
       "pitch": "+0Hz",
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Sec.mp3",
+      "mp3_sha256": "148a0b1ba410ef8219d965280ae8404d7d1397013332626a8d369dad9683cca5",
+      "alignment_granularity": "13 shared chapter boundaries"
     },
     {
       "locale": "mww",
@@ -191,10 +257,12 @@
       "reference_url": "https://raw.githubusercontent.com/seotro95/seotro/061430d958b8d5fc14d04209c6f0cd20492382c2/voice-studio/assets/hmong/female-3.wav",
       "audio_profile": "clear-v1",
       "dialect_independently_verified": false,
-      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI"
+      "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+      "duration_seconds": 1358,
+      "delivery_filename": "NEANDERTHAL_FIRE_71_Hmong_Trang_Nu.mp3",
+      "mp3_sha256": "26cfff26cfdc7c0a7d9423fea22f23069b1aa4b988c013ce650ba68ede773867",
+      "alignment_granularity": "13 shared chapter boundaries"
     }
   ],
-  "note": "Vietnamese explicitly changes from nativeAdam to saved maleNamMinhNeural from requestedtopic71. Other16savedidentities retained. Newduration andscript; past episodes unchanged.",
-  "applies_from_requested_topic": 71,
-  "prior_episodes_preserved": true
+  "note": "All 17 episode71 voices complete, each decoded to 1358 seconds. Vietnamese explicitly uses actual male NamMinhNeural. Other 16 saved identities retained. Independent native listening and White Hmong dialect review pending."
 }

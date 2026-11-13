@@ -8,7 +8,7 @@
   "active_topic": {
     "id": 71,
     "title": "Người Neanderthal dùng lửa thế nào, và vì sao bằng chứng phân bố không đều?",
-    "phase": "documents_delivered_generating17voices",
+    "phase": "documents_and17voices_delivered_awaiting_footage",
     "target_seconds": 1358,
     "english_script_words": 3500,
     "english_cues": 136,
@@ -26,12 +26,27 @@
     "voice_source_commit": "4903920b73edfba43fc6ea2f9c3178c2921c168e",
     "voice_workflow_run_id": 43241559543,
     "english_and_namminh_preflight_run_id": 43237046060,
-    "voices_generated": false,
-    "voice_files_delivered": 0,
+    "voices_generated": true,
+    "voice_files_delivered": 17,
     "footage_generated": false,
     "video_rendered": false,
     "translation_native_review_pending": true,
-    "white_hmong_dialect_independently_verified": false
+    "white_hmong_dialect_independently_verified": false,
+    "verified_seconds_per_voice": 1358,
+    "decoded_frames_per_voice_48000": 65184000,
+    "public_download_verified": true,
+    "voice_repair_workflow_run_ids": [
+      43243793604
+    ],
+    "voice_publish_workflow_run_id": 43246249189,
+    "voice_publish_source_commit": "888cea48a212a9b318d8184d8ae6b736e2966ee3",
+    "delivery_metadata_source_commit": "886a21ab3ca1bfb1c45d7f87dbf7688b7c904f6f",
+    "documents_zip_sha256": "c37bfa0c0fcfe163ed0252854c1e1642a9c700556c6ea3cc00697c19d1d00939",
+    "voice_archive_sha256": "643e1095fa0bd430077ea8d7f3bc5988ba7c72d39f6e6b53fdbce1b21ae3c697",
+    "voice_archive_url": "https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_17_VOICES_22m38s.zip",
+    "titles_thumbnail_url": "https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/5_TIEU_DE_VA_THUMBNAIL.txt",
+    "release_url": "https://github.com/seotro95/seotro/releases/tag/neanderthal-fire-video-71-22m38s",
+    "delivery_metadata_refresh_workflow_run_id": 43246970737
   },
   "next_topic_id": 5,
   "user_preferences": {
@@ -520,7 +535,7 @@
     {
       "id": 71,
       "title": "Người Neanderthal dùng lửa thế nào, và vì sao bằng chứng phân bố không đều?",
-      "status": "documents_delivered_17voices_generating",
+      "status": "documents_and17voices_delivered_public_download_verified_native_review_pending",
       "target_seconds": 1358,
       "planned_path": "productions/video-71-neanderthal-fire",
       "created": true
@@ -1236,9 +1251,9 @@
     "thumbnail_title_pairs": 5,
     "editing_steps_saved": true
   },
-  "latest_completed_topic_id": 58,
+  "latest_completed_topic_id": 71,
   "auto_start_next_topic": false,
-  "handoff_next_action": "Continue existing topic71 full17 voice workflow43241559543; retain successful checkpoints. English and actual Nam Minh previews passed. Generate all 17, verify each decoded1358seconds, publish and publicly verify. Preserve all prior completed productions and queued topics. No topic71 footage or movie yet.",
+  "handoff_next_action": "Topic71 documents and17voices complete and publicly reverified. Wait for topic71 clips before editing. Use actual male Vietnamese Nam Minh from the new v3 profile; retain other16 identities including Hmong female-3. Older episode45/58 Adam files preserved. Main video English only,10 relevant shots inside original first30seconds within22:38. No still/text-card substitutes. Do not auto-start another topic or regenerate completed voices.",
   "completed_topic_28": {
     "id": 28,
     "title": "Chagyrskaya: bằng chứng di truyền về quan hệ gia đình thời tiền sử.",
@@ -1373,5 +1388,48 @@
     "video_rendered": false,
     "translation_native_review_pending": true,
     "white_hmong_dialect_independently_verified": false
+  },
+  "completed_topic_71": {
+    "id": 71,
+    "title": "Người Neanderthal dùng lửa thế nào, và vì sao bằng chứng phân bố không đều?",
+    "phase": "documents_and17voices_delivered_awaiting_footage",
+    "target_seconds": 1358,
+    "english_script_words": 3500,
+    "english_cues": 136,
+    "unique_prompts": 130,
+    "prompt_txt_files": 13,
+    "reused_slots": 6,
+    "work_branch": "codex/neanderthal-fire71-production-20261112",
+    "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+    "vietnamese_backend": "Melo + Viet1.3.1 online_backend / Microsoft Edge",
+    "other16_saved_voice_ids_retained": true,
+    "documents_delivered": true,
+    "public_documents_verified": true,
+    "documents_url": "https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_TAI_LIEU_22m38s.zip",
+    "release_tag": "neanderthal-fire-video-71-22m38s",
+    "voice_source_commit": "4903920b73edfba43fc6ea2f9c3178c2921c168e",
+    "voice_workflow_run_id": 43241559543,
+    "english_and_namminh_preflight_run_id": 43237046060,
+    "voices_generated": true,
+    "voice_files_delivered": 17,
+    "footage_generated": false,
+    "video_rendered": false,
+    "translation_native_review_pending": true,
+    "white_hmong_dialect_independently_verified": false,
+    "verified_seconds_per_voice": 1358,
+    "decoded_frames_per_voice_48000": 65184000,
+    "public_download_verified": true,
+    "voice_repair_workflow_run_ids": [
+      43243793604
+    ],
+    "voice_publish_workflow_run_id": 43246249189,
+    "voice_publish_source_commit": "888cea48a212a9b318d8184d8ae6b736e2966ee3",
+    "delivery_metadata_source_commit": "886a21ab3ca1bfb1c45d7f87dbf7688b7c904f6f",
+    "documents_zip_sha256": "c37bfa0c0fcfe163ed0252854c1e1642a9c700556c6ea3cc00697c19d1d00939",
+    "voice_archive_sha256": "643e1095fa0bd430077ea8d7f3bc5988ba7c72d39f6e6b53fdbce1b21ae3c697",
+    "voice_archive_url": "https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/NEANDERTHAL_FIRE_71_17_VOICES_22m38s.zip",
+    "titles_thumbnail_url": "https://github.com/seotro95/seotro/releases/download/neanderthal-fire-video-71-22m38s/5_TIEU_DE_VA_THUMBNAIL.txt",
+    "release_url": "https://github.com/seotro95/seotro/releases/tag/neanderthal-fire-video-71-22m38s",
+    "delivery_metadata_refresh_workflow_run_id": 43246970737
   }
 }

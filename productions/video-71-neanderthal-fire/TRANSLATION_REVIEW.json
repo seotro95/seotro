@@ -1,0 +1,546 @@
+{
+  "topic_id": 71,
+  "status": "assistant_key_claim_review_complete_native_review_pending",
+  "source": "English 3500 words; 53 source clarifications for machine translation; no change to main English narration",
+  "full_chapter_manual_rewrites": [
+    "vi-VN",
+    "mww"
+  ],
+  "machine_translation_with_assistant_terminology_and_date_review": 14,
+  "scope": [
+    "separate burning/control/ignition/regular use",
+    "French warm/cold sequence is local and conditional",
+    "Sorensen tool wear is interpretation",
+    "Lusakert chemical signal is not a specific ignition event",
+    "Barnham attribution probable not identified individuals",
+    "Abric Romani spatial roles inferred not rooms or occupants",
+    "cultural-loss model conditional not proof"
+  ],
+  "independent_native_editorial_review": false,
+  "independent_white_hmong_dialect_verification": false,
+  "stats": {
+    "cs-CZ": {
+      "chapters": 13,
+      "characters": 21373,
+      "manual_rewrite": false,
+      "year_spotcheck": true
+    },
+    "da-DK": {
+      "chapters": 13,
+      "characters": 22868,
+      "manual_rewrite": false,
+      "year_spotcheck": true
+    },
+    "de-DE": {
+      "chapters": 13,
+      "characters": 27101,
+      "manual_rewrite": false,
+      "year_spotcheck": true
+    },
+    "es-ES": {
+      "chapters": 13,
+      "characters": 25524,
+      "manual_rewrite": false,
+      "year_spotcheck": true
+    },
+    "fi-FI": {
+      "chapters": 13,
+      "characters": 23389,
+      "manual_rewrite": false,
+      "year_spotcheck": true
+    },
+    "fr-FR": {
+      "chapters": 13,
+      "characters": 26486,
+      "manual_rewrite": false,
+      "year_spotcheck": true
+    },
+    "it-IT": {
+      "chapters": 13,
+      "characters": 25268,
+      "manual_rewrite": false,
+      "year_spotcheck": true
+    },
+    "ja-JP": {
+      "chapters": 13,
+      "characters": 10233,
+      "manual_rewrite": false,
+      "year_spotcheck": true
+    },
+    "ko-KR": {
+      "chapters": 13,
+      "characters": 11252,
+      "manual_rewrite": false,
+      "year_spotcheck": true
+    },
+    "mww": {
+      "chapters": 13,
+      "characters": 23971,
+      "manual_rewrite": true,
+      "year_spotcheck": false
+    },
+    "nb-NO": {
+      "chapters": 13,
+      "characters": 22034,
+      "manual_rewrite": false,
+      "year_spotcheck": true
+    },
+    "nl-NL": {
+      "chapters": 13,
+      "characters": 25853,
+      "manual_rewrite": false,
+      "year_spotcheck": true
+    },
+    "pl-PL": {
+      "chapters": 13,
+      "characters": 23600,
+      "manual_rewrite": false,
+      "year_spotcheck": true
+    },
+    "pt-PT": {
+      "chapters": 13,
+      "characters": 24721,
+      "manual_rewrite": false,
+      "year_spotcheck": true
+    },
+    "sv-SE": {
+      "chapters": 13,
+      "characters": 22243,
+      "manual_rewrite": false,
+      "year_spotcheck": true
+    },
+    "vi-VN": {
+      "chapters": 13,
+      "characters": 21223,
+      "manual_rewrite": true,
+      "year_spotcheck": false
+    }
+  },
+  "terminology_edits": {
+    "cs-CZ": [
+      {
+        "chapter": 1,
+        "from": "obsazenou jeskynní vrstvu",
+        "to": "jeskynní vrstvu se stopami osídlení",
+        "count": 1
+      },
+      {
+        "chapter": 1,
+        "from": "obsazené vrstvy",
+        "to": "vrstvy se stopami osídlení",
+        "count": 1
+      },
+      {
+        "chapter": 1,
+        "from": "širší obsazení",
+        "to": "rozsáhlejší osídlení",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "obsazenými vrstvami",
+        "to": "vrstvami se stopami osídlení",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "obsazených vrstvách",
+        "to": "vrstvách se stopami osídlení",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "požární technologie",
+        "to": "technologie využívání ohně",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "pozůstatky pozůstatků zvířat",
+        "to": "upravené zvířecí pozůstatky",
+        "count": 1
+      }
+    ],
+    "da-DK": [
+      {
+        "chapter": 1,
+        "from": "besatte lag",
+        "to": "beboede lag",
+        "count": 1
+      },
+      {
+        "chapter": 2,
+        "from": "besættelseslag",
+        "to": "bosættelseslag",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "besatte lag",
+        "to": "beboede lag",
+        "count": 2
+      },
+      {
+        "chapter": 4,
+        "from": "brandteknologi",
+        "to": "teknologi til at bruge og frembringe ild",
+        "count": 1
+      },
+      {
+        "chapter": 7,
+        "from": "besættelseshistorie",
+        "to": "bosættelseshistorie",
+        "count": 1
+      }
+    ],
+    "de-DE": [
+      {
+        "chapter": 1,
+        "from": "Besetzung",
+        "to": "Besiedlung",
+        "count": 1
+      },
+      {
+        "chapter": 7,
+        "from": "Besetzungen",
+        "to": "Besiedlungen",
+        "count": 1
+      }
+    ],
+    "es-ES": [],
+    "fi-FI": [
+      {
+        "chapter": 1,
+        "from": "miehitetty luolakerros",
+        "to": "asutettu luolakerros",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "miehitettyjä kerroksia",
+        "to": "asutettuja kerroksia",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "miehitetyissä kerroksissa",
+        "to": "asutetuissa kerroksissa",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "palotekniikka",
+        "to": "tulenkäyttötekniikka",
+        "count": 1
+      }
+    ],
+    "fr-FR": [
+      {
+        "chapter": 4,
+        "from": "technologie des incendies",
+        "to": "technologie du feu",
+        "count": 1
+      }
+    ],
+    "it-IT": [
+      {
+        "chapter": 4,
+        "from": "tecnologia antincendio",
+        "to": "tecnologia del fuoco",
+        "count": 1
+      },
+      {
+        "chapter": 8,
+        "from": "attrezzature antincendio",
+        "to": "strumenti per accendere il fuoco",
+        "count": 1
+      }
+    ],
+    "ja-JP": [
+      {
+        "chapter": 1,
+        "from": "占拠された",
+        "to": "人が居住した",
+        "count": 1
+      },
+      {
+        "chapter": 1,
+        "from": "占拠を",
+        "to": "居住を",
+        "count": 1
+      },
+      {
+        "chapter": 1,
+        "from": "占有層",
+        "to": "居住層",
+        "count": 1
+      },
+      {
+        "chapter": 2,
+        "from": "サイト",
+        "to": "遺跡",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "サイト",
+        "to": "遺跡",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "占拠された",
+        "to": "人が居住した",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "占有層",
+        "to": "居住層",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "火災技術",
+        "to": "火の利用技術",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "改造された動物の遺体",
+        "to": "加工痕のある動物遺体",
+        "count": 1
+      },
+      {
+        "chapter": 8,
+        "from": "中期後期旧石器時代",
+        "to": "中期旧石器時代後期",
+        "count": 1
+      },
+      {
+        "chapter": 9,
+        "from": "サイト",
+        "to": "遺跡",
+        "count": 1
+      },
+      {
+        "chapter": 10,
+        "from": "2 つの鉄と黄鉄鉱の破片",
+        "to": "二つの黄鉄鉱片",
+        "count": 1
+      },
+      {
+        "chapter": 10,
+        "from": "道具着用",
+        "to": "道具の使用痕",
+        "count": 1
+      },
+      {
+        "chapter": 11,
+        "from": "サイト",
+        "to": "遺跡",
+        "count": 1
+      },
+      {
+        "chapter": 12,
+        "from": "サイト",
+        "to": "遺跡",
+        "count": 1
+      }
+    ],
+    "ko-KR": [
+      {
+        "chapter": 1,
+        "from": "점령",
+        "to": "거주",
+        "count": 1
+      },
+      {
+        "chapter": 2,
+        "from": "사이트",
+        "to": "유적",
+        "count": 1
+      },
+      {
+        "chapter": 2,
+        "from": "보증금",
+        "to": "퇴적물",
+        "count": 2
+      },
+      {
+        "chapter": 4,
+        "from": "화재 기술",
+        "to": "불의 이용 기술",
+        "count": 1
+      },
+      {
+        "chapter": 8,
+        "from": "화재 발생 장비",
+        "to": "불을 피우는 도구",
+        "count": 1
+      },
+      {
+        "chapter": 9,
+        "from": "사이트",
+        "to": "유적",
+        "count": 1
+      },
+      {
+        "chapter": 10,
+        "from": "두 개의 철-황철석 조각",
+        "to": "황철석 조각 두 개",
+        "count": 1
+      },
+      {
+        "chapter": 12,
+        "from": "사이트",
+        "to": "유적",
+        "count": 1
+      }
+    ],
+    "mww": [],
+    "nb-NO": [
+      {
+        "chapter": 1,
+        "from": "okkupert hulelag",
+        "to": "bebodd hulelag",
+        "count": 1
+      },
+      {
+        "chapter": 1,
+        "from": "okkuperte lag",
+        "to": "bebodde lag",
+        "count": 1
+      },
+      {
+        "chapter": 1,
+        "from": "okkupasjonen",
+        "to": "bosetningen",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "okkuperte lag",
+        "to": "bebodde lag",
+        "count": 2
+      },
+      {
+        "chapter": 4,
+        "from": "brannteknologi",
+        "to": "teknologi for å bruke og lage ild",
+        "count": 1
+      }
+    ],
+    "nl-NL": [
+      {
+        "chapter": 1,
+        "from": "bezette grotlaag",
+        "to": "bewoonde grotlaag",
+        "count": 1
+      },
+      {
+        "chapter": 1,
+        "from": "bezette lagen",
+        "to": "bewoonde lagen",
+        "count": 1
+      },
+      {
+        "chapter": 1,
+        "from": "bezetting",
+        "to": "bewoning",
+        "count": 1
+      },
+      {
+        "chapter": 2,
+        "from": "bezetting",
+        "to": "bewoning",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "bezette lagen",
+        "to": "bewoonde lagen",
+        "count": 2
+      },
+      {
+        "chapter": 7,
+        "from": "bezetting",
+        "to": "bewoning",
+        "count": 1
+      }
+    ],
+    "pl-PL": [
+      {
+        "chapter": 1,
+        "from": "rytuału przeciwpożarowego",
+        "to": "rytuału związanego z ogniem",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "technologii przeciwpożarowej",
+        "to": "technologii rozniecania i wykorzystywania ognia",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "zajętymi warstwami",
+        "to": "warstwami ze śladami zasiedlenia",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "zajętych warstwach",
+        "to": "warstwach ze śladami zasiedlenia",
+        "count": 1
+      }
+    ],
+    "pt-PT": [
+      {
+        "chapter": 4,
+        "from": "características de foco bem preservadas",
+        "to": "estruturas de combustão bem preservadas",
+        "count": 1
+      }
+    ],
+    "sv-SE": [
+      {
+        "chapter": 1,
+        "from": "ockuperat grottlager",
+        "to": "bebott grottlager",
+        "count": 1
+      },
+      {
+        "chapter": 1,
+        "from": "ockuperade lager",
+        "to": "bebodda lager",
+        "count": 1
+      },
+      {
+        "chapter": 2,
+        "from": "ockupationslager",
+        "to": "bosättningslager",
+        "count": 1
+      },
+      {
+        "chapter": 4,
+        "from": "ockuperade lager",
+        "to": "bebodda lager",
+        "count": 2
+      },
+      {
+        "chapter": 4,
+        "from": "brandteknik",
+        "to": "teknik för att använda och framställa eld",
+        "count": 1
+      },
+      {
+        "chapter": 8,
+        "from": "eldsvåda",
+        "to": "eldframställning",
+        "count": 1
+      }
+    ],
+    "vi-VN": []
+  }
+}

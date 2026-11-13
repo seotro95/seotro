@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "topic_id": 71,
+  "target_seconds": 1358,
+  "voice_count": 17,
+  "prompt_txt_files": 13,
+  "unique_prompts_verified": 130,
+  "each_prompt_excludes_minors_and_audio": true,
+  "zip_crc_passed": true,
+  "all_published_document_asset_digests_match": true,
+  "all_published_asset_checksums_match": true,
+  "documents_zip_sha256": "c37bfa0c0fcfe163ed0252854c1e1642a9c700556c6ea3cc00697c19d1d00939",
+  "documents_zip_bytes": 484702,
+  "title_thumbnail_txt_public_download_verified": true
+}

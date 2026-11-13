@@ -34,7 +34,9 @@
   "vietnamese_voice_id": "vi-VN-NamMinhNeural",
   "native_voices_expected": 1,
   "online_voices_expected": 16,
-  "voices_generated": false,
+  "voices_generated": true,
   "footage_generated": false,
-  "video_edited": false
+  "video_edited": false,
+  "voice_count_verified": 17,
+  "audio_sample_frames_verified": 65184000
 }
