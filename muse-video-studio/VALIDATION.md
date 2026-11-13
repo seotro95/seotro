@@ -1,3 +1,17 @@
+# Validation for 1.11.0
+
+Validated in Linux cloud on 2026-11-13:
+
+- `npm run build`: TypeScript and production bundle passed.
+- `npm test`: 39 tests passed, including new workspace-assignment and chosen shared-account routing checks; encrypted proxy/session and stable data-location regressions passed.
+- Browser suite: 47/49 initially passed. One old assertion required updating because account assignments are now intentionally retained. Another test navigated during a concurrent rebuild and received the temporary missing-dist response. After completing the build, both affected tests and both new account-selection tests passed (4/4). All 49 distinct browser checks have passed; the complete suite was not rerun after those targeted corrections.
+- `DISPLAY=:99 MUSE_ELECTRON_TEST_NO_SANDBOX=1 npm run test:desktop`: 8 tests passed using Electron and a local provider fixture.
+- `DISPLAY=:99 node tests/multi-account.test.mjs`: passed, including isolated accounts and saved sessions after restart.
+- Packaged Linux application: `tests/portable.test.mjs` passed with the external runtime removed from PATH, exercising ten concurrent requests, media and folder export, and persistence across restart.
+- Full Windows x64 ZIP: official Electron 45.2.2 runtime checksum verified; ZIP integrity and all 158 application manifest entries verified; packaged server and web bundle match current source/build. No profiles or `.env` secrets included.
+
+Linux does not execute Windows EXEs. `.github/workflows/muse-windows.yml` runs the build, tests, Electron desktop test, and full-package smoke test on Windows before publishing a versioned release. Saving this workflow or pushing it does not prove a Windows run or release completed. No live Muse generation, quota, authentication, or proxy connectivity is claimed by fixture tests.
+
 # Xác minh bản 1.10.0
 
 ## Phần sửa

@@ -1,0 +1,58 @@
+name: Muse AI Studio Windows
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'muse-video-studio/**'
+      - '.github/workflows/muse-windows.yml'
+permissions:
+  contents: write
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: muse-video-studio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: muse-video-studio/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npm run test:desktop
+      - run: python scripts/package_portable.py --platform win32 --output "${{ runner.temp }}/muse-artifacts"
+      - name: Test the full Windows bundle
+        shell: pwsh
+        run: |
+          $version = (Get-Content package.json | ConvertFrom-Json).version
+          $env:MUSE_PORTABLE_EXECUTABLE = "${{ runner.temp }}/muse-artifacts/Muse-AI-Studio-$version-Windows-x64/Muse AI Studio.exe"
+          node tests/portable.test.mjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Muse-AI-Studio-Windows-x64
+          path: ${{ runner.temp }}/muse-artifacts/*.zip
+          if-no-files-found: error
+      - name: Publish full Windows package
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $version = (Get-Content package.json | ConvertFrom-Json).version
+          $tag = "muse-v$version"
+          gh release view $tag --repo "${{ github.repository }}" *> $null
+          if ($LASTEXITCODE -eq 0) { Write-Output "Release already exists; new build retained as workflow artifact."; exit 0 }
+          $notes = "Muse AI Studio $version. Per-slot Muse account selection and matching account proxy; any signed-in account can run shared lanes. Choices persist; existing data and login profiles retain their existing locations. Full Windows x64 ZIP includes Electron and dependencies. Build, unit/integration tests and Electron desktop fixture tests passed on Windows; this does not verify live Muse rendering."
+          $notes | Set-Content -Encoding utf8 "${{ runner.temp }}/muse-release-notes.txt"
+          $zip = Get-ChildItem "${{ runner.temp }}/muse-artifacts/*.zip"
+          gh release create $tag $zip.FullName --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Muse AI Studio $version - Windows x64" --notes-file "${{ runner.temp }}/muse-release-notes.txt" --latest=false
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

@@ -41,3 +41,9 @@ test('unsupported parallel conversations preserve the requested thirty lanes but
     driver.setConcurrency=async()=>{throw Object.assign(new Error('MUSE_LOGIN_REQUIRED: Expired'),{status:401})};await assert.rejects(pool.prepareSingle(new AbortController().signal,40),/MUSE_LOGIN_REQUIRED/);
   }finally{await rm(root,{recursive:true,force:true})}
 });
+
+test('shared concurrency and generation use the explicitly chosen account, not Muse 01',async()=>{
+ const root=await mkdtemp(path.join(os.tmpdir(),'muse-selected-'));const calls=[];
+ const pool=new MuseAccounts({profileRoot:root,createDriver:id=>({maxConcurrency:1,account:()=>({authenticated:true}),queue:[],setConcurrency:async count=>{calls.push(['prepare',id,count]);return {executionConcurrency:count}},generateText:async data=>{calls.push(['generate',id,data.accountId,data.singleLane]);return {text:'ok'}}})});
+ try {await pool.prepareSingle(new AbortController().signal,10,27);await pool.generateText({accountId:27,accountMode:'single'},new AbortController().signal);assert.deepEqual(calls,[['prepare',27,10],['generate',27,1,false]]);assert.equal(pool.singleId,27);assert.equal(pool.drivers.has(1),false);}finally{await rm(root,{recursive:true,force:true})}
+});

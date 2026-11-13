@@ -38,3 +38,5 @@
 .proxy-form input:not([type=checkbox]) { width:100%; padding:9px; background:#0c1320; color:#e3eaff; border:1px solid #36455e; border-radius:6px; }
 .account-persistence { padding:16px; margin:16px 0; border:1px solid #3c586e; border-radius:10px; background:#111c2b; }
 .account-persistence p { overflow-wrap:anywhere; }
+
+.scene-account-selector{display:grid;gap:5px;margin:8px 0;font-size:11px;min-width:0}.scene-account-selector select{width:100%;min-width:0;padding:7px;border:1px solid #394867;border-radius:6px;background:#0c1320;color:#dfe8ff}

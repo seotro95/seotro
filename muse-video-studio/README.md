@@ -1,4 +1,11 @@
-# Muse AI Studio 1.10.0 · Nhận video nhanh và lưu đủ tài khoản
+# Muse AI Studio 1.11.0 · Chọn tài khoản cho từng ô
+
+- Chế độ nhiều tài khoản: chọn **Tài khoản Muse** ngay trong từng ô, rồi bấm **Proxy** để nhập proxy của đúng tài khoản đó. Hai ô dùng cùng tài khoản sẽ chạy lần lượt; proxy thuộc tài khoản nên được dùng chung giữa các ô chọn tài khoản đó.
+- Chế độ một tài khoản: chọn **Tài khoản chạy mọi ô** từ bất kỳ phiên đã đăng nhập, rồi chọn **Số luồng: 10**. Kiểm tra hội thoại và mọi yêu cầu tạo nội dung dùng đúng tài khoản đã chọn; số luồng thực tế còn phụ thuộc Muse.
+- Lựa chọn từng ô và tài khoản chạy chung được lưu khi mở lại, thu nhỏ/mở rộng số ô và xuất/nhập dự án. Dự án cũ mặc định ô N dùng Muse N, tài khoản chung là Muse 01.
+- Giữ nguyên nơi lưu dữ liệu, thư viện, cookie, hồ sơ và proxy mã hóa hiện có. Giải nén toàn bộ gói Windows vào thư mục mới; không xóa `%LOCALAPPDATA%\Muse AI Studio`. Nếu dùng bản cũ lưu dữ liệu cạnh EXE, dùng **Chuyển dữ liệu bản cũ** như hướng dẫn bên dưới.
+
+## Hướng dẫn nền tảng và dữ liệu từ bản 1.10
 
 Bản **Windows đầy đủ**, không cần Node/Chrome riêng hoặc bản cũ. Sửa lỗi Muse đã có video nhưng Studio vẫn chờ metadata/nút Stop. Lưu riêng toàn bộ hồ sơ, tự khôi phục khi mở lại; dữ liệu gói Windows mới ở `%LOCALAPPDATA%\Muse AI Studio`, không phụ thuộc thư mục giải nén EXE.
 
@@ -48,7 +55,7 @@ Bấm **Cổng API → Sao chép cấu hình Codex MCP**, đặt biến môi tr�
 2. Bấm **Đăng nhập** ở từng hàng Muse 01–10, hoàn tất email/OTP trên trang Muse trong tool, quay **Về Studio** và kiểm tra phiên. Nhập danh sách chỉ đặt nhãn, không tự xác thực; không nhập mật khẩu, mã OTP, cookie hoặc token vào danh sách.
 3. Chọn **Chế độ tài khoản → 10 tài khoản · mỗi tài khoản 1 luồng**. Ô 01 dùng Muse 01, ô 02 dùng Muse 02… Các ô chưa xác minh có thông báo riêng và không tự mượn tài khoản khác.
 4. Bấm **TẠO 10 ẢNH / VIDEO**. Tối đa 10 tác vụ đồng thời, mỗi tài khoản một tác vụ. Không cần kiểm tra New chat cho chế độ này. Khi mở lại, bấm **Kiểm tra 10 phiên** để đọc lại các phiên đã lưu.
-5. Chuyển về **1 tài khoản · tối đa 40 luồng** để dùng tính năng cũ: mọi ô dùng Muse 01 và giữ lựa chọn số hội thoại song song riêng. Chỉ đổi chế độ khi các tác vụ Muse đã kết thúc.
+5. Chuyển về **1 tài khoản · tối đa 40 luồng** để dùng tính năng cũ: mọi ô dùng tài khoản chạy chung đã chọn và giữ lựa chọn số hội thoại song song riêng. Chỉ đổi chế độ khi các tác vụ Muse đã kết thúc.
 
 Mỗi tài khoản có cookie, bộ nhớ trang, cửa sổ đăng nhập và luồng xử lý riêng. Nhãn/email trong danh sách không đổi danh tính phiên đã đăng nhập; muốn dùng tài khoản khác, đăng xuất/đăng nhập trực tiếp trong hàng tương ứng. Tool không kiểm chứng danh tính thật chỉ dựa vào nhãn.
 

@@ -555,7 +555,7 @@ test('a fixture advertising independent conversations can start ten image reques
   await expect(page.locator('.scene-account-picker, #shared-account, #email-bulk')).toHaveCount(0);
 });
 
-test('legacy account choices cannot route any of the ten scenes to another account', async ({ page }) => {
+test('adapter keeps its single account while retaining per-slot choices for Muse browser mode', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('muse-workstation-v1', JSON.stringify({ version: 1, settings: { shareUnassigned: false, sharedAccountId: 8 }, scenes: Array.from({ length: 10 }, (_, i) => ({ prompt: `Legacy scene ${i + 1}`, accountId: i + 1, email: `old${i}@example.com`, enabled: true })) })));
   await configureAdapter(page);
   const calls: number[] = [];
@@ -567,7 +567,7 @@ test('legacy account choices cannot route any of the ten scenes to another accou
   expect(calls).toEqual(Array(10).fill(1));
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('muse-workstation-v1')!));
   expect(saved.settings.sharedAccountId).toBeUndefined();
-  expect(saved.scenes.every((scene: any) => scene.accountId === undefined && scene.email === undefined)).toBe(true);
+  expect(saved.scenes.slice(0,10).every((scene: any,index:number) => scene.accountId === index+1 && scene.email === undefined)).toBe(true);
 });
 
 test('imports a 4K image batch from SRT, follows independent prompts, and converts the images to 1080p video requests', async ({ page }) => {

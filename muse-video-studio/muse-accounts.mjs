@@ -8,7 +8,7 @@ export class MuseAccounts {
   constructor({ profileRoot, accountProfile, createDriver, preferredConcurrency = 2, onSelect = () => {}, proxyStatus, configureProxy, persistenceStatus,saveSessions }) {
     this.profileRoot = profileRoot; this.preferredConcurrency=preferredConcurrency;this.concurrencyWarning='';
     this.createDriver = createDriver || (id => new MuseBrowser({ profileRoot, ...(id === 1 ? {accountProfile} : { accountProfile: path.join(profileRoot, `slot-${String(id).padStart(2,'0')}`) }) }));
-    this.onSelect = onSelect; this.selectedId = 1; this.drivers = new Map(); this.usage = new Map(); this.labels = [];
+    this.onSelect = onSelect; this.selectedId = 1; this.singleId = 1; this.drivers = new Map(); this.usage = new Map(); this.labels = [];
     this.supportsMultiAccount = true; this.images = new Map();
     this.proxyStatus=proxyStatus;this.configureProxy=configureProxy;this.restoring=false;
     this.persistenceStatus=persistenceStatus;this.saveSessions=saveSessions;
@@ -27,7 +27,7 @@ export class MuseAccounts {
     try{await Promise.all(Array.from({length:Math.min(3,ids.length)},async()=>{while(next<ids.length){const id=ids[next++];try{await this.connect(id,{show:false})}catch{this.driver(id).account(1).state='check_failed'}}}))}finally{this.restoring=false}
   }
   async setProxy(id,data){this.validateId(id);if(!this.configureProxy)throw fail('MUSE_PROXY_UNSUPPORTED','Proxy từng tài khoản chỉ có trong bản desktop.',409);if(this.usage.size)throw fail('MUSE_CHAT_BUSY','Đợi hoặc dừng tác vụ trước khi đổi proxy.');return this.configureProxy(id,data)}
-  get maxConcurrency() { return this.driver(1).maxConcurrency; }
+  get maxConcurrency() { return this.driver(this.singleId).maxConcurrency; }
   get queue() { return [...this.drivers.values()].flatMap(driver=>driver.queue); }
   progress() { return [...this.drivers].flatMap(([accountId,driver])=>driver.progress().map(stage=>({...stage,accountId}))); }
   async refreshActive(options) { await this.drivers.get(this.selectedId)?.refreshActive(options); }
@@ -41,15 +41,17 @@ export class MuseAccounts {
     if(!isSlotCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 40 luồng.',400);
     await mkdir(this.profileRoot,{recursive:true,mode:0o700});const file=path.join(this.profileRoot,'single-concurrency.json');await writeFile(file+'.tmp',JSON.stringify(count),{mode:0o600});await rename(file+'.tmp',file);this.preferredConcurrency=count;
   }
-  async setConcurrency(count,signal) {
+  async setConcurrency(count,signal,id=1) {
+    this.validateId(id);this.singleId=id;
     await this.requestConcurrency(count);this.concurrencyWarning='';
-    try{return {...await this.driver(1).setConcurrency(count,signal),preferredConcurrency:count};}
+    try{return {...await this.driver(id).setConcurrency(count,signal),preferredConcurrency:count};}
     catch(error){if(/MUSE_PARALLEL_UNVERIFIED|MUSE_NEW_CHAT_UNAVAILABLE|MUSE_COMPOSER_NOT_READY/.test(error.message))this.concurrencyWarning=error.message;throw error;}
   }
-  async prepareSingle(signal,count=this.preferredConcurrency) {
+  async prepareSingle(signal,count=this.preferredConcurrency,id=1) {
+    this.validateId(id);this.singleId=id;
     if(!isSlotCount(count))throw fail('MUSE_CONCURRENCY_INVALID','Chọn từ 1 đến 40 luồng.',400);
-    if(this.driver(1).maxConcurrency===count){this.concurrencyWarning='';if(this.preferredConcurrency!==count)await this.requestConcurrency(count);return {executionConcurrency:this.maxConcurrency,preferredConcurrency:count,concurrencyWarning:''};}
-    try{return await this.setConcurrency(count,signal)}catch(error){if(!this.concurrencyWarning)throw error;return {executionConcurrency:this.maxConcurrency,preferredConcurrency:count,concurrencyWarning:this.concurrencyWarning,message:'Muse chưa xác minh được hội thoại riêng. Các ô sẽ chạy theo số luồng đã xác minh, không trộn kết quả.'};}
+    if(this.driver(id).maxConcurrency===count){this.concurrencyWarning='';if(this.preferredConcurrency!==count)await this.requestConcurrency(count);return {executionConcurrency:this.maxConcurrency,preferredConcurrency:count,concurrencyWarning:''};}
+    try{return await this.setConcurrency(count,signal,id)}catch(error){if(!this.concurrencyWarning)throw error;return {executionConcurrency:this.maxConcurrency,preferredConcurrency:count,concurrencyWarning:this.concurrencyWarning,message:'Muse chưa xác minh được hội thoại riêng. Các ô sẽ chạy theo số luồng đã xác minh, không trộn kết quả.'};}
   }
   async checkComposer(signal,id=1) { return this.driver(id).checkComposer(signal); }
   async closeAccount(id) { if (this.usage.has(id)) throw fail('MUSE_CHAT_BUSY','Tài khoản này đang có tác vụ.'); await this.driver(id).close(); }
@@ -72,7 +74,6 @@ export class MuseAccounts {
   async generate(method,data,signal) {
     const id=data.accountId; this.validateId(id);
     const multiple=data.accountMode==='multiple';
-    if (!multiple && id!==1) throw fail('ACCOUNT_INVALID','Chế độ một tài khoản chỉ dùng Muse 01.',400);
     const usage=this.usage.get(id);
     if (usage && (multiple || usage.multiple)) throw fail('MUSE_ACCOUNT_BUSY',`Muse ${id} đang chạy một luồng. Đợi hoặc dừng tác vụ đó trước.`);
     this.usage.set(id,{count:(usage?.count||0)+1,multiple});

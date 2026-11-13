@@ -34,7 +34,7 @@ function validate(data, kind) {
   const invalid = message => { throw Object.assign(new Error(message), { status: 400 }); };
   if (!data || typeof data.prompt !== 'string' || !data.prompt.trim() || data.prompt.length > 12000) invalid('Prompt cần có 1–12.000 ký tự.');
   if (data.accountMode !== undefined && !['single','multiple'].includes(data.accountMode)) invalid('Chế độ tài khoản không hợp lệ.');
-  if (data.accountMode === 'multiple' ? !muse?.supportsMultiAccount || !Number.isInteger(data.accountId) || data.accountId<1 || data.accountId>MAX_SLOTS : data.accountId!==1) invalid('ACCOUNT_INVALID: Chọn tài khoản Muse phù hợp với chế độ đang dùng.');
+  if (!Number.isInteger(data.accountId) || data.accountId<1 || data.accountId>MAX_SLOTS || (!muse?.supportsMultiAccount && (data.accountId!==1 || data.accountMode==='multiple'))) invalid('ACCOUNT_INVALID: Chọn tài khoản Muse phù hợp với chế độ đang dùng.');
   if (data.batchId !== undefined || data.sceneId !== undefined) {
     if (typeof data.batchId !== 'string' || !/^[a-f0-9-]{36}$/i.test(data.batchId) || !Number.isInteger(data.sceneId) || data.sceneId < 1 || data.sceneId > MAX_SLOTS) invalid('Bộ yêu cầu hoặc số cảnh không hợp lệ.');
   }
@@ -85,7 +85,7 @@ async function callAdapter(endpoint, data, signal) {
 async function api(req, res, pathname) {
   if (req.method === 'GET' && pathname === '/api/status') {
     if (muse && !activeRequests && !accountBusy&&!muse.restoring) await muse.refreshActive({ background: true });
-    return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, ...(muse ? {restoringSessions:Boolean(muse.restoring), executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), ...(muse?.supportsMultiAccount ? {multiAccount:true, preferredConcurrency:muse.preferredConcurrency,concurrencyWarning:muse.concurrencyWarning,concurrencyProbe:muse.driver?.(1).concurrencyProbe} : {}), embeddedLogin, credit: null, gpu: null });
+    return json(res, 200, { museConfigured: Boolean(muse || process.env.MUSE_ADAPTER_URL), transport, accounts: muse?.snapshot() || [], busy: activeRequests > 0 || accountBusy, activeRequests, maxConcurrency, ...(muse ? {restoringSessions:Boolean(muse.restoring), executionConcurrency: muse.maxConcurrency, queuedRequests: muse.queue.length, workerProgress: muse.progress() } : {}), ...(muse?.supportsMultiAccount ? {multiAccount:true, executionAccountId:muse.singleId??1, preferredConcurrency:muse.preferredConcurrency,concurrencyWarning:muse.concurrencyWarning,concurrencyProbe:muse.driver?.(muse.singleId??1).concurrencyProbe} : {}), embeddedLogin, credit: null, gpu: null });
   }
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (req.headers.origin && req.headers.origin !== `http://${req.headers.host}`) return json(res, 403, { error: 'Origin không được phép.' });
@@ -110,11 +110,10 @@ async function api(req, res, pathname) {
       muse.account(accountId);
       accountBusy = accountAcquired = true;
       if(action==='proxy'){await muse.setProxy(accountId,data.proxy);return json(res,200,{accounts:muse.snapshot()})}
-      if (action === 'prepare') {if(!muse.prepareSingle)return json(res,200,{executionConcurrency:muse.maxConcurrency});return json(res,200,await muse.prepareSingle(abort.signal,data.concurrency));}
+      if (action === 'prepare') {if(!muse.prepareSingle)return json(res,200,{executionConcurrency:muse.maxConcurrency});return json(res,200,await muse.prepareSingle(abort.signal,data.concurrency,accountId));}
       if (action === 'select') {if(muse.select)await muse.select(accountId);return json(res,200,{accounts:muse.snapshot()});}
       if (action === 'import') { if (!muse.supportsMultiAccount) return json(res,409,{error:'Kết nối chưa hỗ trợ nhiều tài khoản.'}); return json(res,200,{accounts:await muse.importLabels(data.labels)}); }
-      if (action === 'concurrency' && accountId!==1) return json(res,400,{error:'Chỉ chọn số luồng cho tài khoản Muse 01 ở chế độ một tài khoản.'});
-      if (action === 'concurrency') return json(res, 200, await muse.setConcurrency(data.concurrency, abort.signal));
+      if (action === 'concurrency') return json(res, 200, await muse.setConcurrency(data.concurrency, abort.signal,accountId));
       if (action === 'composer') { const composer = await muse.checkComposer(abort.signal,accountId); return json(res, 200, { accounts: muse.snapshot(), composer }); }
       if (action === 'close') { if (muse.closeAccount) await muse.closeAccount(accountId); else if (muse.active?.id === accountId) await muse.close(); }
       else await muse.connect(accountId, { show: action === 'connect' });

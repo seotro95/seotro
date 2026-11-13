@@ -17,12 +17,12 @@ test('Veo keeps 8s while preserving requested HD/QHD/4K quality', () => {
   assert.equal(normalizeSettings({ ...DEFAULT_SETTINGS, model: 'Veo 3.1 - Fast', resolution: '4k' }).resolution, '4k');
   assert.equal(normalizeSettings({ ...DEFAULT_SETTINGS, duration: 10 }).duration, 10);
 });
-test('legacy multi-account assignments are ignored while all ten prompts are retained', () => {
+test('account assignments and prompts are retained while legacy identity fields are ignored', () => {
   const scenes = createScenes().map((scene, i) => ({ ...scene, accountId: i + 1, email: `old${i}@example.com`, prompt: `Prompt ${i + 1}` }));
   const restored = restoreWorkspace(JSON.stringify({ version: 1, scenes, settings: { shareUnassigned: false, sharedAccountId: 8 } }));
   assert.equal(restored.scenes.length, 10);
   assert.equal(restored.scenes[9].prompt, 'Prompt 10');
-  assert.equal('accountId' in restored.scenes[9], false);
+  assert.equal(restored.scenes[9].accountId, 10);
   assert.equal('email' in restored.scenes[9], false);
   assert.equal('sharedAccountId' in restored.settings, false);
   assert.equal('shareUnassigned' in restored.settings, false);
@@ -63,4 +63,10 @@ test('dynamic layouts restore up to forty slots and preserve hidden prompts whil
   assert.equal(restored.settings.slotCount,20);assert.equal(restored.settings.requestedConcurrency,30);assert.equal(restored.scenes.length,40);assert.equal(restored.scenes[39].prompt,'Scene 40');
   assert.equal(createScenes(30).length,30);assert.equal(createScenes(41).length,10);
   assert.equal(restoreWorkspace(JSON.stringify({version:1,scenes:Array(41).fill({prompt:'invalid'})})).scenes.length,10);
+});
+
+test('chosen shared account and per-slot assignments restore safely',()=>{
+ const saved={version:1,scenes:createScenes().map((scene,i)=>({...scene,accountId:i===0?27:999})),settings:{singleAccountId:27,accountMode:'multiple'}};
+ const restored=restoreWorkspace(JSON.stringify(saved));assert.equal(restored.settings.singleAccountId,27);assert.equal(restored.scenes[0].accountId,27);assert.equal(restored.scenes[1].accountId,2);
+ saved.settings.singleAccountId=-1;assert.equal(restoreWorkspace(JSON.stringify(saved)).settings.singleAccountId,1);
 });
