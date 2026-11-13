@@ -1,0 +1,1155 @@
+{
+  "episode": 85,
+  "generated_clip_seconds": 10,
+  "unique_prompts": 100,
+  "reused_slots": 30,
+  "timeline_slots": 130,
+  "spoken_cues": 129,
+  "closing_hold_seconds": 2,
+  "total_seconds": 1292,
+  "canonical_cues": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    92,
+    93,
+    95,
+    97,
+    98,
+    100,
+    102,
+    104,
+    106,
+    113,
+    116
+  ],
+  "timeline": [
+    {
+      "slot": 1,
+      "start_seconds": 0,
+      "duration_seconds": 10,
+      "prompt": 1,
+      "first_use_cue": 1,
+      "reuse": false
+    },
+    {
+      "slot": 2,
+      "start_seconds": 10,
+      "duration_seconds": 10,
+      "prompt": 2,
+      "first_use_cue": 2,
+      "reuse": false
+    },
+    {
+      "slot": 3,
+      "start_seconds": 20,
+      "duration_seconds": 10,
+      "prompt": 3,
+      "first_use_cue": 3,
+      "reuse": false
+    },
+    {
+      "slot": 4,
+      "start_seconds": 30,
+      "duration_seconds": 10,
+      "prompt": 4,
+      "first_use_cue": 4,
+      "reuse": false
+    },
+    {
+      "slot": 5,
+      "start_seconds": 40,
+      "duration_seconds": 10,
+      "prompt": 5,
+      "first_use_cue": 5,
+      "reuse": false
+    },
+    {
+      "slot": 6,
+      "start_seconds": 50,
+      "duration_seconds": 10,
+      "prompt": 6,
+      "first_use_cue": 6,
+      "reuse": false
+    },
+    {
+      "slot": 7,
+      "start_seconds": 60,
+      "duration_seconds": 10,
+      "prompt": 7,
+      "first_use_cue": 7,
+      "reuse": false
+    },
+    {
+      "slot": 8,
+      "start_seconds": 70,
+      "duration_seconds": 10,
+      "prompt": 8,
+      "first_use_cue": 8,
+      "reuse": false
+    },
+    {
+      "slot": 9,
+      "start_seconds": 80,
+      "duration_seconds": 10,
+      "prompt": 9,
+      "first_use_cue": 9,
+      "reuse": false
+    },
+    {
+      "slot": 10,
+      "start_seconds": 90,
+      "duration_seconds": 10,
+      "prompt": 10,
+      "first_use_cue": 10,
+      "reuse": false
+    },
+    {
+      "slot": 11,
+      "start_seconds": 100,
+      "duration_seconds": 10,
+      "prompt": 11,
+      "first_use_cue": 11,
+      "reuse": false
+    },
+    {
+      "slot": 12,
+      "start_seconds": 110,
+      "duration_seconds": 10,
+      "prompt": 12,
+      "first_use_cue": 12,
+      "reuse": false
+    },
+    {
+      "slot": 13,
+      "start_seconds": 120,
+      "duration_seconds": 10,
+      "prompt": 13,
+      "first_use_cue": 13,
+      "reuse": false
+    },
+    {
+      "slot": 14,
+      "start_seconds": 130,
+      "duration_seconds": 10,
+      "prompt": 14,
+      "first_use_cue": 14,
+      "reuse": false
+    },
+    {
+      "slot": 15,
+      "start_seconds": 140,
+      "duration_seconds": 10,
+      "prompt": 15,
+      "first_use_cue": 15,
+      "reuse": false
+    },
+    {
+      "slot": 16,
+      "start_seconds": 150,
+      "duration_seconds": 10,
+      "prompt": 16,
+      "first_use_cue": 16,
+      "reuse": false
+    },
+    {
+      "slot": 17,
+      "start_seconds": 160,
+      "duration_seconds": 10,
+      "prompt": 17,
+      "first_use_cue": 17,
+      "reuse": false
+    },
+    {
+      "slot": 18,
+      "start_seconds": 170,
+      "duration_seconds": 10,
+      "prompt": 18,
+      "first_use_cue": 18,
+      "reuse": false
+    },
+    {
+      "slot": 19,
+      "start_seconds": 180,
+      "duration_seconds": 10,
+      "prompt": 19,
+      "first_use_cue": 19,
+      "reuse": false
+    },
+    {
+      "slot": 20,
+      "start_seconds": 190,
+      "duration_seconds": 10,
+      "prompt": 20,
+      "first_use_cue": 20,
+      "reuse": false
+    },
+    {
+      "slot": 21,
+      "start_seconds": 200,
+      "duration_seconds": 10,
+      "prompt": 21,
+      "first_use_cue": 21,
+      "reuse": false
+    },
+    {
+      "slot": 22,
+      "start_seconds": 210,
+      "duration_seconds": 10,
+      "prompt": 22,
+      "first_use_cue": 22,
+      "reuse": false
+    },
+    {
+      "slot": 23,
+      "start_seconds": 220,
+      "duration_seconds": 10,
+      "prompt": 23,
+      "first_use_cue": 23,
+      "reuse": false
+    },
+    {
+      "slot": 24,
+      "start_seconds": 230,
+      "duration_seconds": 10,
+      "prompt": 24,
+      "first_use_cue": 24,
+      "reuse": false
+    },
+    {
+      "slot": 25,
+      "start_seconds": 240,
+      "duration_seconds": 10,
+      "prompt": 25,
+      "first_use_cue": 25,
+      "reuse": false
+    },
+    {
+      "slot": 26,
+      "start_seconds": 250,
+      "duration_seconds": 10,
+      "prompt": 26,
+      "first_use_cue": 26,
+      "reuse": false
+    },
+    {
+      "slot": 27,
+      "start_seconds": 260,
+      "duration_seconds": 10,
+      "prompt": 27,
+      "first_use_cue": 27,
+      "reuse": false
+    },
+    {
+      "slot": 28,
+      "start_seconds": 270,
+      "duration_seconds": 10,
+      "prompt": 28,
+      "first_use_cue": 28,
+      "reuse": false
+    },
+    {
+      "slot": 29,
+      "start_seconds": 280,
+      "duration_seconds": 10,
+      "prompt": 29,
+      "first_use_cue": 29,
+      "reuse": false
+    },
+    {
+      "slot": 30,
+      "start_seconds": 290,
+      "duration_seconds": 10,
+      "prompt": 28,
+      "first_use_cue": 28,
+      "reuse": true
+    },
+    {
+      "slot": 31,
+      "start_seconds": 300,
+      "duration_seconds": 10,
+      "prompt": 30,
+      "first_use_cue": 31,
+      "reuse": false
+    },
+    {
+      "slot": 32,
+      "start_seconds": 310,
+      "duration_seconds": 10,
+      "prompt": 31,
+      "first_use_cue": 32,
+      "reuse": false
+    },
+    {
+      "slot": 33,
+      "start_seconds": 320,
+      "duration_seconds": 10,
+      "prompt": 32,
+      "first_use_cue": 33,
+      "reuse": false
+    },
+    {
+      "slot": 34,
+      "start_seconds": 330,
+      "duration_seconds": 10,
+      "prompt": 33,
+      "first_use_cue": 34,
+      "reuse": false
+    },
+    {
+      "slot": 35,
+      "start_seconds": 340,
+      "duration_seconds": 10,
+      "prompt": 34,
+      "first_use_cue": 35,
+      "reuse": false
+    },
+    {
+      "slot": 36,
+      "start_seconds": 350,
+      "duration_seconds": 10,
+      "prompt": 35,
+      "first_use_cue": 36,
+      "reuse": false
+    },
+    {
+      "slot": 37,
+      "start_seconds": 360,
+      "duration_seconds": 10,
+      "prompt": 36,
+      "first_use_cue": 37,
+      "reuse": false
+    },
+    {
+      "slot": 38,
+      "start_seconds": 370,
+      "duration_seconds": 10,
+      "prompt": 37,
+      "first_use_cue": 38,
+      "reuse": false
+    },
+    {
+      "slot": 39,
+      "start_seconds": 380,
+      "duration_seconds": 10,
+      "prompt": 38,
+      "first_use_cue": 39,
+      "reuse": false
+    },
+    {
+      "slot": 40,
+      "start_seconds": 390,
+      "duration_seconds": 10,
+      "prompt": 39,
+      "first_use_cue": 40,
+      "reuse": false
+    },
+    {
+      "slot": 41,
+      "start_seconds": 400,
+      "duration_seconds": 10,
+      "prompt": 40,
+      "first_use_cue": 41,
+      "reuse": false
+    },
+    {
+      "slot": 42,
+      "start_seconds": 410,
+      "duration_seconds": 10,
+      "prompt": 41,
+      "first_use_cue": 42,
+      "reuse": false
+    },
+    {
+      "slot": 43,
+      "start_seconds": 420,
+      "duration_seconds": 10,
+      "prompt": 42,
+      "first_use_cue": 43,
+      "reuse": false
+    },
+    {
+      "slot": 44,
+      "start_seconds": 430,
+      "duration_seconds": 10,
+      "prompt": 43,
+      "first_use_cue": 44,
+      "reuse": false
+    },
+    {
+      "slot": 45,
+      "start_seconds": 440,
+      "duration_seconds": 10,
+      "prompt": 44,
+      "first_use_cue": 45,
+      "reuse": false
+    },
+    {
+      "slot": 46,
+      "start_seconds": 450,
+      "duration_seconds": 10,
+      "prompt": 45,
+      "first_use_cue": 46,
+      "reuse": false
+    },
+    {
+      "slot": 47,
+      "start_seconds": 460,
+      "duration_seconds": 10,
+      "prompt": 46,
+      "first_use_cue": 47,
+      "reuse": false
+    },
+    {
+      "slot": 48,
+      "start_seconds": 470,
+      "duration_seconds": 10,
+      "prompt": 47,
+      "first_use_cue": 48,
+      "reuse": false
+    },
+    {
+      "slot": 49,
+      "start_seconds": 480,
+      "duration_seconds": 10,
+      "prompt": 48,
+      "first_use_cue": 49,
+      "reuse": false
+    },
+    {
+      "slot": 50,
+      "start_seconds": 490,
+      "duration_seconds": 10,
+      "prompt": 49,
+      "first_use_cue": 50,
+      "reuse": false
+    },
+    {
+      "slot": 51,
+      "start_seconds": 500,
+      "duration_seconds": 10,
+      "prompt": 50,
+      "first_use_cue": 51,
+      "reuse": false
+    },
+    {
+      "slot": 52,
+      "start_seconds": 510,
+      "duration_seconds": 10,
+      "prompt": 51,
+      "first_use_cue": 52,
+      "reuse": false
+    },
+    {
+      "slot": 53,
+      "start_seconds": 520,
+      "duration_seconds": 10,
+      "prompt": 52,
+      "first_use_cue": 53,
+      "reuse": false
+    },
+    {
+      "slot": 54,
+      "start_seconds": 530,
+      "duration_seconds": 10,
+      "prompt": 53,
+      "first_use_cue": 54,
+      "reuse": false
+    },
+    {
+      "slot": 55,
+      "start_seconds": 540,
+      "duration_seconds": 10,
+      "prompt": 54,
+      "first_use_cue": 55,
+      "reuse": false
+    },
+    {
+      "slot": 56,
+      "start_seconds": 550,
+      "duration_seconds": 10,
+      "prompt": 55,
+      "first_use_cue": 56,
+      "reuse": false
+    },
+    {
+      "slot": 57,
+      "start_seconds": 560,
+      "duration_seconds": 10,
+      "prompt": 56,
+      "first_use_cue": 57,
+      "reuse": false
+    },
+    {
+      "slot": 58,
+      "start_seconds": 570,
+      "duration_seconds": 10,
+      "prompt": 57,
+      "first_use_cue": 58,
+      "reuse": false
+    },
+    {
+      "slot": 59,
+      "start_seconds": 580,
+      "duration_seconds": 10,
+      "prompt": 58,
+      "first_use_cue": 59,
+      "reuse": false
+    },
+    {
+      "slot": 60,
+      "start_seconds": 590,
+      "duration_seconds": 10,
+      "prompt": 59,
+      "first_use_cue": 60,
+      "reuse": false
+    },
+    {
+      "slot": 61,
+      "start_seconds": 600,
+      "duration_seconds": 10,
+      "prompt": 60,
+      "first_use_cue": 61,
+      "reuse": false
+    },
+    {
+      "slot": 62,
+      "start_seconds": 610,
+      "duration_seconds": 10,
+      "prompt": 61,
+      "first_use_cue": 62,
+      "reuse": false
+    },
+    {
+      "slot": 63,
+      "start_seconds": 620,
+      "duration_seconds": 10,
+      "prompt": 62,
+      "first_use_cue": 63,
+      "reuse": false
+    },
+    {
+      "slot": 64,
+      "start_seconds": 630,
+      "duration_seconds": 10,
+      "prompt": 63,
+      "first_use_cue": 64,
+      "reuse": false
+    },
+    {
+      "slot": 65,
+      "start_seconds": 640,
+      "duration_seconds": 10,
+      "prompt": 64,
+      "first_use_cue": 65,
+      "reuse": false
+    },
+    {
+      "slot": 66,
+      "start_seconds": 650,
+      "duration_seconds": 10,
+      "prompt": 65,
+      "first_use_cue": 66,
+      "reuse": false
+    },
+    {
+      "slot": 67,
+      "start_seconds": 660,
+      "duration_seconds": 10,
+      "prompt": 66,
+      "first_use_cue": 67,
+      "reuse": false
+    },
+    {
+      "slot": 68,
+      "start_seconds": 670,
+      "duration_seconds": 10,
+      "prompt": 67,
+      "first_use_cue": 68,
+      "reuse": false
+    },
+    {
+      "slot": 69,
+      "start_seconds": 680,
+      "duration_seconds": 10,
+      "prompt": 68,
+      "first_use_cue": 69,
+      "reuse": false
+    },
+    {
+      "slot": 70,
+      "start_seconds": 690,
+      "duration_seconds": 10,
+      "prompt": 69,
+      "first_use_cue": 70,
+      "reuse": false
+    },
+    {
+      "slot": 71,
+      "start_seconds": 700,
+      "duration_seconds": 10,
+      "prompt": 70,
+      "first_use_cue": 71,
+      "reuse": false
+    },
+    {
+      "slot": 72,
+      "start_seconds": 710,
+      "duration_seconds": 10,
+      "prompt": 71,
+      "first_use_cue": 72,
+      "reuse": false
+    },
+    {
+      "slot": 73,
+      "start_seconds": 720,
+      "duration_seconds": 10,
+      "prompt": 72,
+      "first_use_cue": 73,
+      "reuse": false
+    },
+    {
+      "slot": 74,
+      "start_seconds": 730,
+      "duration_seconds": 10,
+      "prompt": 73,
+      "first_use_cue": 74,
+      "reuse": false
+    },
+    {
+      "slot": 75,
+      "start_seconds": 740,
+      "duration_seconds": 10,
+      "prompt": 74,
+      "first_use_cue": 75,
+      "reuse": false
+    },
+    {
+      "slot": 76,
+      "start_seconds": 750,
+      "duration_seconds": 10,
+      "prompt": 75,
+      "first_use_cue": 76,
+      "reuse": false
+    },
+    {
+      "slot": 77,
+      "start_seconds": 760,
+      "duration_seconds": 10,
+      "prompt": 76,
+      "first_use_cue": 77,
+      "reuse": false
+    },
+    {
+      "slot": 78,
+      "start_seconds": 770,
+      "duration_seconds": 10,
+      "prompt": 77,
+      "first_use_cue": 78,
+      "reuse": false
+    },
+    {
+      "slot": 79,
+      "start_seconds": 780,
+      "duration_seconds": 10,
+      "prompt": 78,
+      "first_use_cue": 79,
+      "reuse": false
+    },
+    {
+      "slot": 80,
+      "start_seconds": 790,
+      "duration_seconds": 10,
+      "prompt": 79,
+      "first_use_cue": 80,
+      "reuse": false
+    },
+    {
+      "slot": 81,
+      "start_seconds": 800,
+      "duration_seconds": 10,
+      "prompt": 80,
+      "first_use_cue": 81,
+      "reuse": false
+    },
+    {
+      "slot": 82,
+      "start_seconds": 810,
+      "duration_seconds": 10,
+      "prompt": 81,
+      "first_use_cue": 82,
+      "reuse": false
+    },
+    {
+      "slot": 83,
+      "start_seconds": 820,
+      "duration_seconds": 10,
+      "prompt": 82,
+      "first_use_cue": 83,
+      "reuse": false
+    },
+    {
+      "slot": 84,
+      "start_seconds": 830,
+      "duration_seconds": 10,
+      "prompt": 83,
+      "first_use_cue": 84,
+      "reuse": false
+    },
+    {
+      "slot": 85,
+      "start_seconds": 840,
+      "duration_seconds": 10,
+      "prompt": 84,
+      "first_use_cue": 85,
+      "reuse": false
+    },
+    {
+      "slot": 86,
+      "start_seconds": 850,
+      "duration_seconds": 10,
+      "prompt": 85,
+      "first_use_cue": 86,
+      "reuse": false
+    },
+    {
+      "slot": 87,
+      "start_seconds": 860,
+      "duration_seconds": 10,
+      "prompt": 86,
+      "first_use_cue": 87,
+      "reuse": false
+    },
+    {
+      "slot": 88,
+      "start_seconds": 870,
+      "duration_seconds": 10,
+      "prompt": 87,
+      "first_use_cue": 88,
+      "reuse": false
+    },
+    {
+      "slot": 89,
+      "start_seconds": 880,
+      "duration_seconds": 10,
+      "prompt": 88,
+      "first_use_cue": 89,
+      "reuse": false
+    },
+    {
+      "slot": 90,
+      "start_seconds": 890,
+      "duration_seconds": 10,
+      "prompt": 89,
+      "first_use_cue": 90,
+      "reuse": false
+    },
+    {
+      "slot": 91,
+      "start_seconds": 900,
+      "duration_seconds": 10,
+      "prompt": 64,
+      "first_use_cue": 65,
+      "reuse": true
+    },
+    {
+      "slot": 92,
+      "start_seconds": 910,
+      "duration_seconds": 10,
+      "prompt": 90,
+      "first_use_cue": 92,
+      "reuse": false
+    },
+    {
+      "slot": 93,
+      "start_seconds": 920,
+      "duration_seconds": 10,
+      "prompt": 91,
+      "first_use_cue": 93,
+      "reuse": false
+    },
+    {
+      "slot": 94,
+      "start_seconds": 930,
+      "duration_seconds": 10,
+      "prompt": 88,
+      "first_use_cue": 89,
+      "reuse": true
+    },
+    {
+      "slot": 95,
+      "start_seconds": 940,
+      "duration_seconds": 10,
+      "prompt": 92,
+      "first_use_cue": 95,
+      "reuse": false
+    },
+    {
+      "slot": 96,
+      "start_seconds": 950,
+      "duration_seconds": 10,
+      "prompt": 92,
+      "first_use_cue": 95,
+      "reuse": true
+    },
+    {
+      "slot": 97,
+      "start_seconds": 960,
+      "duration_seconds": 10,
+      "prompt": 93,
+      "first_use_cue": 97,
+      "reuse": false
+    },
+    {
+      "slot": 98,
+      "start_seconds": 970,
+      "duration_seconds": 10,
+      "prompt": 94,
+      "first_use_cue": 98,
+      "reuse": false
+    },
+    {
+      "slot": 99,
+      "start_seconds": 980,
+      "duration_seconds": 10,
+      "prompt": 93,
+      "first_use_cue": 97,
+      "reuse": true
+    },
+    {
+      "slot": 100,
+      "start_seconds": 990,
+      "duration_seconds": 10,
+      "prompt": 95,
+      "first_use_cue": 100,
+      "reuse": false
+    },
+    {
+      "slot": 101,
+      "start_seconds": 1000,
+      "duration_seconds": 10,
+      "prompt": 40,
+      "first_use_cue": 41,
+      "reuse": true
+    },
+    {
+      "slot": 102,
+      "start_seconds": 1010,
+      "duration_seconds": 10,
+      "prompt": 96,
+      "first_use_cue": 102,
+      "reuse": false
+    },
+    {
+      "slot": 103,
+      "start_seconds": 1020,
+      "duration_seconds": 10,
+      "prompt": 95,
+      "first_use_cue": 100,
+      "reuse": true
+    },
+    {
+      "slot": 104,
+      "start_seconds": 1030,
+      "duration_seconds": 10,
+      "prompt": 97,
+      "first_use_cue": 104,
+      "reuse": false
+    },
+    {
+      "slot": 105,
+      "start_seconds": 1040,
+      "duration_seconds": 10,
+      "prompt": 97,
+      "first_use_cue": 104,
+      "reuse": true
+    },
+    {
+      "slot": 106,
+      "start_seconds": 1050,
+      "duration_seconds": 10,
+      "prompt": 98,
+      "first_use_cue": 106,
+      "reuse": false
+    },
+    {
+      "slot": 107,
+      "start_seconds": 1060,
+      "duration_seconds": 10,
+      "prompt": 98,
+      "first_use_cue": 106,
+      "reuse": true
+    },
+    {
+      "slot": 108,
+      "start_seconds": 1070,
+      "duration_seconds": 10,
+      "prompt": 77,
+      "first_use_cue": 78,
+      "reuse": true
+    },
+    {
+      "slot": 109,
+      "start_seconds": 1080,
+      "duration_seconds": 10,
+      "prompt": 47,
+      "first_use_cue": 48,
+      "reuse": true
+    },
+    {
+      "slot": 110,
+      "start_seconds": 1090,
+      "duration_seconds": 10,
+      "prompt": 40,
+      "first_use_cue": 41,
+      "reuse": true
+    },
+    {
+      "slot": 111,
+      "start_seconds": 1100,
+      "duration_seconds": 10,
+      "prompt": 35,
+      "first_use_cue": 36,
+      "reuse": true
+    },
+    {
+      "slot": 112,
+      "start_seconds": 1110,
+      "duration_seconds": 10,
+      "prompt": 98,
+      "first_use_cue": 106,
+      "reuse": true
+    },
+    {
+      "slot": 113,
+      "start_seconds": 1120,
+      "duration_seconds": 10,
+      "prompt": 99,
+      "first_use_cue": 113,
+      "reuse": false
+    },
+    {
+      "slot": 114,
+      "start_seconds": 1130,
+      "duration_seconds": 10,
+      "prompt": 48,
+      "first_use_cue": 49,
+      "reuse": true
+    },
+    {
+      "slot": 115,
+      "start_seconds": 1140,
+      "duration_seconds": 10,
+      "prompt": 99,
+      "first_use_cue": 113,
+      "reuse": true
+    },
+    {
+      "slot": 116,
+      "start_seconds": 1150,
+      "duration_seconds": 10,
+      "prompt": 100,
+      "first_use_cue": 116,
+      "reuse": false
+    },
+    {
+      "slot": 117,
+      "start_seconds": 1160,
+      "duration_seconds": 10,
+      "prompt": 98,
+      "first_use_cue": 106,
+      "reuse": true
+    },
+    {
+      "slot": 118,
+      "start_seconds": 1170,
+      "duration_seconds": 10,
+      "prompt": 98,
+      "first_use_cue": 106,
+      "reuse": true
+    },
+    {
+      "slot": 119,
+      "start_seconds": 1180,
+      "duration_seconds": 10,
+      "prompt": 1,
+      "first_use_cue": 1,
+      "reuse": true
+    },
+    {
+      "slot": 120,
+      "start_seconds": 1190,
+      "duration_seconds": 10,
+      "prompt": 47,
+      "first_use_cue": 48,
+      "reuse": true
+    },
+    {
+      "slot": 121,
+      "start_seconds": 1200,
+      "duration_seconds": 10,
+      "prompt": 2,
+      "first_use_cue": 2,
+      "reuse": true
+    },
+    {
+      "slot": 122,
+      "start_seconds": 1210,
+      "duration_seconds": 10,
+      "prompt": 80,
+      "first_use_cue": 81,
+      "reuse": true
+    },
+    {
+      "slot": 123,
+      "start_seconds": 1220,
+      "duration_seconds": 10,
+      "prompt": 64,
+      "first_use_cue": 65,
+      "reuse": true
+    },
+    {
+      "slot": 124,
+      "start_seconds": 1230,
+      "duration_seconds": 10,
+      "prompt": 43,
+      "first_use_cue": 44,
+      "reuse": true
+    },
+    {
+      "slot": 125,
+      "start_seconds": 1240,
+      "duration_seconds": 10,
+      "prompt": 59,
+      "first_use_cue": 60,
+      "reuse": true
+    },
+    {
+      "slot": 126,
+      "start_seconds": 1250,
+      "duration_seconds": 10,
+      "prompt": 16,
+      "first_use_cue": 16,
+      "reuse": true
+    },
+    {
+      "slot": 127,
+      "start_seconds": 1260,
+      "duration_seconds": 10,
+      "prompt": 3,
+      "first_use_cue": 3,
+      "reuse": true
+    },
+    {
+      "slot": 128,
+      "start_seconds": 1270,
+      "duration_seconds": 10,
+      "prompt": 99,
+      "first_use_cue": 113,
+      "reuse": true
+    },
+    {
+      "slot": 129,
+      "start_seconds": 1280,
+      "duration_seconds": 10,
+      "prompt": 1,
+      "first_use_cue": 1,
+      "reuse": true
+    },
+    {
+      "slot": 130,
+      "start_seconds": 1290,
+      "duration_seconds": 2,
+      "prompt": 1,
+      "first_use_cue": 1,
+      "reuse": true,
+      "hold_final_frame": true
+    }
+  ]
+}
