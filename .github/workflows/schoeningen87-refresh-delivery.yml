@@ -1,0 +1,24 @@
+name: Schoeningen87 refresh verified delivery records
+'on':
+  push:
+    branches:
+    - codex/schoeningen87-production-20261113
+    paths:
+    - .github/workflows/schoeningen87-refresh-delivery.yml
+  workflow_dispatch: null
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: episode87
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - env:
+        GH_TOKEN: ${{ github.token }}
+      run: python -u episode87/refresh_delivery_metadata.py

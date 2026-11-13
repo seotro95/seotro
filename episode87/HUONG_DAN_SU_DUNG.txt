@@ -1,0 +1,11 @@
+﻿CHỦ ĐỀ 87 — SCHÖNINGEN — 20:22
+
+1. Tạo 110 clip dài 10 giây từ 11 TXT trong PROMPTS. Đặt tên 001.mp4 đến 110.mp4 theo ID prompt, không theo ID mốc lời.
+2. TIMELINE_123_CANH.csv nối 123 mốc lời với clip. Có 13 mốc REUSE trong CAC_CANH_DUNG_LAI.txt. Mốc cuối lấy 2 giây từ clip 001.
+3. Mỗi prompt đã cấm lời nói, âm thanh, trẻ em và thiếu niên. Mọi người và bàn tay phải rõ 35–65 tuổi. Không hình trẻ em trong nền, bóng, ảnh, màn hình, phản chiếu hoặc mô hình. Đồ gỗ là bản sao minh họa; không dựng săn giết hoặc chân dung người chế tác.
+4. Đã có 17 MP3 riêng tên quốc gia, giữ đủ 17 ID từ tập 71. Việt dùng NamMinhNeural nam; H’mông dùng female-3 nữ qua công cụ riêng 1.6.6; 15 giọng còn lại nam. Backend Melo 1.3.1 dùng cho 16 giọng online.
+5. Mỗi voice được tải lại, kiểm SHA và giải mã đúng 58.656.000 mẫu ở 48 kHz, tương đương 1.222 giây. Anh căn 123 mốc; bản dịch 13 chương: 12×100 giây+22 giây. Không khẳng định từng từ đồng thời. SRT dịch theo chương cần chia nhỏ trước khi hiển thị.
+6. Voice có nhấn nhá vừa phải, giữ đúng giọng và cao độ. Việt và H’mông viết lại đủ 13 chương; các bản khác rà ý chính, niên đại, thuật ngữ. Chưa có kiểm nghe/biên tập bản ngữ độc lập hoặc xác minh phương ngữ H’mông Trắng độc lập.
+7. Chưa có footage hoặc MP4 tập 87. Khi có clip, chọn 10 cảnh mạnh trong 30 giây đầu khớp voice Anh; intro nằm trong 20:22. Xóa âm clip, không nhạc/SFX. Cảnh thiếu dùng video chuyển động liên quan, không ảnh đứng/thẻ chữ.
+8. Niên đại phân biệt bài 1997 khoảng 400 nghìn năm, công bố sau khoảng 300 nghìn, nghiên cứu 2025 khoảng 200 nghìn.187 hiện vật gỗ không phải187 giáo. Mọi hình AI là minh họa, không phải dữ liệu đo hoặc sự kiện đã xác nhận.
+9. Giữ hồ sơ giọng v3 từ tập 71 và quy trình đã lưu. Không tự đổi giọng hoặc tạo lại audio đã xong. Link riêng từng nước có trong README.md và AUDIO_MANIFEST.json.
