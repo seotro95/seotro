@@ -7,7 +7,7 @@ export type Mode = 'muse' | 'demo';
 export type Output = 'video' | 'image';
 export type Status = 'ready' | 'queued' | 'running' | 'done' | 'error' | 'cancelled';
 export type Reference = { id: string; name: string; url: string; base64?: string; mimeType?: string };
-export type Settings = { slotCount: number; singleAccountId?: number; requestedConcurrency?: number; syncOperations: boolean; accountMode: 'single' | 'multiple'; model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
+export type Settings = { slotCount: number; singleAccountId?: number; multipleSlotIds?: number[]; requestedConcurrency?: number; syncOperations: boolean; accountMode: 'single' | 'multiple'; model: Model; aspectRatio: '16:9' | '9:16'; duration: number; resolution: Resolution; imageResolution: '2k' | '4k'; output: Output; videoInput: 'text' | 'image'; autoSync: boolean; r2v: boolean; modifier: string; mode: Mode };
 export const RENDER_KEYS = ['model','aspectRatio','duration','resolution','imageResolution','videoInput','r2v','modifier'] as const;
 export type SceneSettings = Pick<Settings,typeof RENDER_KEYS[number]>;
 export function renderingSettings(settings:Settings):SceneSettings{return Object.fromEntries(RENDER_KEYS.map(key=>[key,settings[key]])) as SceneSettings}
@@ -117,6 +117,7 @@ export function restoreWorkspace(raw: string | null): { scenes: Scene[]; setting
     fallback.settings = normalizeSettings({ ...DEFAULT_SETTINGS,
       slotCount: isSlotCount(s.slotCount)?s.slotCount:data.scenes.length, requestedConcurrency:isSlotCount(s.requestedConcurrency)?s.requestedConcurrency:undefined,syncOperations:s.syncOperations!==false,
       singleAccountId:validAccountId(s.singleAccountId) ?? 1,
+      multipleSlotIds:normalizeSlotIds(s.multipleSlotIds),
       accountMode: s.accountMode === 'multiple' ? 'multiple' : 'single',
       model: MUSE_MODELS.includes(s.model) ? s.model : DEFAULT_SETTINGS.model,
       aspectRatio: s.aspectRatio === '9:16' ? '9:16' : '16:9',
@@ -136,3 +137,16 @@ function validSceneSettings(value:unknown):SceneSettings|undefined{
 
 export function validAccountId(id:unknown):number|undefined{return Number.isInteger(id)&&Number(id)>=1&&Number(id)<=MAX_SLOTS?Number(id):undefined}
 export function accountForScene(scene:Pick<Scene,'id'|'accountId'>,settings:Settings):number{return settings.accountMode==='multiple'?(validAccountId(scene.accountId)??scene.id):(validAccountId(settings.singleAccountId)??1)}
+
+export function normalizeSlotIds(value:unknown):number[]|undefined{
+  if(!Array.isArray(value))return undefined;
+  return [...new Set(value.filter(id=>validAccountId(id)!==undefined) as number[])].sort((a,b)=>a-b);
+}
+export function visibleSlotIds(settings:Settings):number[]{
+  return settings.accountMode==='multiple'&&settings.multipleSlotIds!==undefined
+    ? normalizeSlotIds(settings.multipleSlotIds)??[]
+    : Array.from({length:settings.slotCount},(_,i)=>i+1);
+}
+export function visibleWorkspace(scenes:Scene[],settings:Settings):Scene[]{
+  const ids=new Set(visibleSlotIds(settings));return scenes.filter(scene=>ids.has(scene.id));
+}

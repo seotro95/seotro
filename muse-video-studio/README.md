@@ -1,4 +1,11 @@
-# Muse AI Studio 1.11.0 · Chọn tài khoản cho từng ô
+# Muse AI Studio 1.12.0 · Chọn ô và chạy song song 10 ô
+
+- **Một tài khoản**: giữ 40 ô nếu cần, bấm **TẠO SONG SONG 10 Ô**. Tool kiểm tra 10 hội thoại độc lập trên tài khoản chạy chung đã chọn, rồi chạy tối đa 10 ô cùng lúc. Một ô xong sẽ nhường chỗ cho ô tiếp theo; không cần đợi đủ 10 ô kết thúc. Nút này giữ nguyên số ô và dữ liệu; nếu Muse không cung cấp đủ 10 hội thoại, báo rõ và chưa gửi prompt. Không thể tăng hạn mức hoặc tạo khả năng song song mà dịch vụ Muse chưa hỗ trợ.
+- **Mỗi tài khoản một luồng**: chọn các checkbox **Hiện ô**, ví dụ **1, 3, 4, 7**. Chỉ bốn ô đó hiện và được chạy. Các ô vẫn chọn được tài khoản/proxy riêng như bản trước; hai ô cùng tài khoản chạy lần lượt.
+- TXT/SRT được phân lần lượt vào các ô đang hiện: cảnh thứ 1 → ô 1, thứ 2 → ô 3, thứ 3 → ô 4, thứ 4 → ô 7. Ô ẩn giữ prompt, kết quả và tài khoản. Kịch bản vượt số ô đã chọn phải chọn thêm ô hoặc rút gọn, không tự cắt mất cảnh.
+- Lựa chọn ô được lưu khi mở lại và xuất/nhập dự án; thu gọn/hiện lại không xóa dữ liệu. API nhập script cũng dùng đúng các ô đã chọn. Hồ sơ đăng nhập, proxy mã hóa và nơi lưu dữ liệu hiện có được giữ nguyên.
+
+## Chọn tài khoản cho từng ô từ bản 1.11
 
 - Chế độ nhiều tài khoản: chọn **Tài khoản Muse** ngay trong từng ô, rồi bấm **Proxy** để nhập proxy của đúng tài khoản đó. Hai ô dùng cùng tài khoản sẽ chạy lần lượt; proxy thuộc tài khoản nên được dùng chung giữa các ô chọn tài khoản đó.
 - Chế độ một tài khoản: chọn **Tài khoản chạy mọi ô** từ bất kỳ phiên đã đăng nhập, rồi chọn **Số luồng: 10**. Kiểm tra hội thoại và mọi yêu cầu tạo nội dung dùng đúng tài khoản đã chọn; số luồng thực tế còn phụ thuộc Muse.

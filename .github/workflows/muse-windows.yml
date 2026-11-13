@@ -28,6 +28,8 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm test
+      - run: npx playwright install chromium
+      - run: npm run test:e2e -- tests/browser/selected-slots.spec.ts tests/browser/account-selection.spec.ts
       - run: npm run test:desktop
       - run: python scripts/package_portable.py --platform win32 --output "${{ runner.temp }}/muse-artifacts"
       - name: Test the full Windows bundle
@@ -51,7 +53,7 @@ jobs:
           $tag = "muse-v$version"
           gh release view $tag --repo "${{ github.repository }}" *> $null
           if ($LASTEXITCODE -eq 0) { Write-Output "Release already exists; new build retained as workflow artifact."; exit 0 }
-          $notes = "Muse AI Studio $version. Per-slot Muse account selection and matching account proxy; any signed-in account can run shared lanes. Choices persist; existing data and login profiles retain their existing locations. Full Windows x64 ZIP includes Electron and dependencies. Build, unit/integration tests and Electron desktop fixture tests passed on Windows; this does not verify live Muse rendering."
+          $notes = "Muse AI Studio $version. Choose visible account slots (for example 1, 3, 4, 7); TXT/SRT imports only into selected slots. One-click ten-way parallel execution preserves forty slots and verifies independent conversations before sending. Choices persist; existing data and login profiles retain their existing locations. Full Windows x64 ZIP includes Electron and dependencies. Build, unit/integration tests and Electron desktop fixture tests passed on Windows; this does not verify live Muse rendering."
           $notes | Set-Content -Encoding utf8 "${{ runner.temp }}/muse-release-notes.txt"
           $zip = Get-ChildItem "${{ runner.temp }}/muse-artifacts/*.zip"
           gh release create $tag $zip.FullName --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Muse AI Studio $version - Windows x64" --notes-file "${{ runner.temp }}/muse-release-notes.txt" --latest=false

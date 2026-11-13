@@ -70,3 +70,11 @@ test('chosen shared account and per-slot assignments restore safely',()=>{
  const restored=restoreWorkspace(JSON.stringify(saved));assert.equal(restored.settings.singleAccountId,27);assert.equal(restored.scenes[0].accountId,27);assert.equal(restored.scenes[1].accountId,2);
  saved.settings.singleAccountId=-1;assert.equal(restoreWorkspace(JSON.stringify(saved)).settings.singleAccountId,1);
 });
+
+test('nonconsecutive visible slots restore without changing the forty scene records',async()=>{
+ const {visibleSlotIds,visibleWorkspace}=await import('../src/core.ts');
+ const restored=restoreWorkspace(JSON.stringify({version:1,scenes:createScenes(40),settings:{accountMode:'multiple',multipleSlotIds:[7,3,1,4,3,99,'2',-1]}}));
+ assert.deepEqual(visibleSlotIds(restored.settings),[1,3,4,7]);assert.deepEqual(visibleWorkspace(restored.scenes,restored.settings).map(s=>s.id),[1,3,4,7]);assert.equal(restored.scenes.length,40);
+ assert.deepEqual(visibleSlotIds({...restored.settings,multipleSlotIds:[]}),[]);
+ assert.equal(visibleSlotIds({...restored.settings,accountMode:'single',slotCount:40}).length,40);
+});

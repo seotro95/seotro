@@ -1,3 +1,7 @@
+## Selected account slots (1.12.0)
+
+In multiple-account mode, batches without `sceneIds` fill only the account slots currently selected in Studio, in ascending slot order. For example, selecting 1, 3, 4, 7 sends four TXT/SRT scenes to those slots, not to 1–4. Overflow and explicit hidden destinations are rejected before any workspace mutation. Non-targeted prompts, selected media and account assignments are preserved. `GET /v1/status` reports the visible scenes. Change the visible-slot checkboxes in Studio to choose destinations.
+
 # API điều khiển Muse AI Studio 1.8.0
 
 Cổng này điều khiển cửa sổ Studio đang mở trên **cùng máy tính**. Không cần mở trang Muse, sao chép cookie hay cài Node.js để gọi API. Đăng nhập Muse trong Studio trước khi dùng chế độ tạo nội dung thật.

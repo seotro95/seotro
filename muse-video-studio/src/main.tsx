@@ -2,7 +2,7 @@ import {MAX_SLOTS,STREAM_OPTIONS,isSlotCount} from '../limits.mjs';
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Play, Download, FileText, Users, ShieldPlus, ImagePlus, ScanFace, WandSparkles, Clapperboard, X, Check, ChevronDown, RefreshCw, Square, Settings2, Activity, ArrowRight, Copy, Upload, FolderOpen, CircleAlert, Video, Link2, Trash2, Film, FlaskConical, CheckCheck, LoaderCircle } from 'lucide-react';
-import { ADVENTURE, RUNWAY, MUSE_MODELS, accountForScene, normalizeSettings, restoreWorkspace, createScenes, parseScript, errorInfo, meetsResolution, RENDER_KEYS,renderingSettings,sceneSettings } from './core.ts';
+import { ADVENTURE, RUNWAY, MUSE_MODELS, visibleSlotIds, visibleWorkspace, normalizeSlotIds, accountForScene, normalizeSettings, restoreWorkspace, createScenes, parseScript, errorInfo, meetsResolution, RENDER_KEYS,renderingSettings,sceneSettings } from './core.ts';
 import type { Scene, Settings, Reference, Status, Mode, Output, MediaResult } from './core.ts';
 import { generateVideo, generateImage, enhancePrompt, readImage, downloadVideo, downloadMediaBatch, chooseExportDirectory, releaseVideo, providerStatus, accountAction } from './provider.ts';
 import { loadMedia, saveMedia, deleteMedia, clearMedia } from './media-library.ts';
@@ -104,9 +104,10 @@ function App() {
   const locked = diagnosticBusy || imageBusy || connectingId !== null || libraryLoading || deletingMedia !== null || Boolean(status?.restoringSessions)||proxyBusy||dataBusy;
   const renderLocked = locked || (busy && !renderBatch.current) || cancelling;
   const connectionLocked = locked || [...renderJobs.current.values()].some(job => job.settings.mode === 'muse');
-  const slotCount=settings.slotCount;
-  const visibleScenes=scenes.slice(0,slotCount);
-  const editingScene=visibleScenes.find(scene=>scene.id===focusedScene)||visibleScenes[0];
+  const activeSlotIds=visibleSlotIds(settings);
+  const slotCount=activeSlotIds.length;
+  const visibleScenes=visibleWorkspace(scenes,settings);
+  const editingScene=visibleScenes.find(scene=>scene.id===focusedScene)||visibleScenes[0]||scenes[0];
   const editingSettings=sceneSettings(settings,editingScene);
   const syncIds=visibleScenes.filter(scene=>scene.syncSelected!==false).map(scene=>scene.id);
   const requestedLanes=settings.requestedConcurrency??status?.preferredConcurrency??1;
@@ -114,7 +115,7 @@ function App() {
   const outputLabel = settings.output === 'image' ? 'ảnh' : 'video';
   const enabled = visibleScenes.filter(s => s.enabled).length;
   const parsed = parseScript(importText);
-  const canImport = parsed.length > 0 && parsed.length <= MAX_SLOTS;
+  const canImport = parsed.length > 0 && parsed.length <= (settings.accountMode==='multiple'?slotCount:MAX_SLOTS);
   const usingBrowser = status?.transport === 'browser';
   const embeddedLogin = Boolean(status?.embeddedLogin);
   const loginPlace = embeddedLogin ? 'tab Muse ngay trong tool' : 'cửa sổ Chrome/Edge của chế độ web';
@@ -176,7 +177,8 @@ function App() {
   async function checkAllAccounts() {
     if(connectionLocked)return;
     setConnectingId(selectedAccount);let failures=0;
-    try {for(let id=1;id<=slotCount;id++){try{const result=await accountAction('check',{accountId:id});setStatus(current=>current?{...current,accounts:result.accounts}:current)}catch{failures++}}setNotice(`Đã kiểm tra ${slotCount} phiên; ${failures} phiên không đọc được. Xem trạng thái từng tài khoản trong danh sách.`)}finally{setConnectingId(null)}
+    const ids=[...new Set(visibleWorkspace(scenesRef.current,settingsRef.current).map(scene=>accountForScene(scene,{...settingsRef.current,accountMode:'multiple'})))];
+    try {for(const id of ids){try{const result=await accountAction('check',{accountId:id});setStatus(current=>current?{...current,accounts:result.accounts}:current)}catch{failures++}}setNotice(`Đã kiểm tra ${ids.length} phiên; ${failures} phiên không đọc được. Xem trạng thái từng tài khoản trong danh sách.`)}finally{setConnectingId(null)}
   }
   function openProxy(id:number){const proxy=status?.accounts?.find(account=>account.id===id)?.proxy;setProxyAccount(id);setProxyError('');setProxyDraft({enabled:proxy?.enabled||false,server:proxy?.server||'',username:'',password:'',replaceCredentials:false});setModal('accounts')}
   async function saveProxy(){
@@ -205,8 +207,17 @@ function App() {
 
   function resizeSlots(count:number,withConcurrency=false) {
     if(!isSlotCount(count)||locked||renderJobs.current.size)return;
-    commitSettings({...settingsRef.current,slotCount:count,...(withConcurrency?{requestedConcurrency:count}:{})});
+    commitSettings({...settingsRef.current,slotCount:count,...(settingsRef.current.accountMode==='multiple'?{multipleSlotIds:Array.from({length:count},(_,i)=>i+1)}:{}),...(withConcurrency?{requestedConcurrency:count}:{})});
 
+  }
+  function setVisibleSlots(ids:number[]) {
+    if(connectionLocked||busy)return;
+    commitSettings({...settingsRef.current,multipleSlotIds:normalizeSlotIds(ids)??[]});
+  }
+  async function runParallelTen() {
+    if(connectionLocked||busy||multipleAccounts||!requireProvider())return;
+    commitSettings({...settingsRef.current,requestedConcurrency:10});
+    await run(undefined,undefined,false,10);
   }
   async function changeConcurrency(count: number) {
     if(connectionLocked||busy)return;
@@ -274,7 +285,7 @@ function App() {
   function mediaSummary(entry: SavedMedia) {return {id:entry.id,batchId:entry.batchId,sceneId:entry.sceneId,prompt:entry.prompt,createdAt:entry.createdAt,kind:entry.media.kind,mimeType:entry.media.mimeType,demo:entry.media.demo,metadata:entry.media.metadata,download:`/v1/media/${entry.id}`};}
   async function handleAutomation(action:string,data:any) {
     if(libraryLoading||(['status','batch','run'].includes(action)&&(!status||statusLoading)))throw apiError(503,'Studio đang tải thư viện hoặc kết nối. Đợi rồi đọc trạng thái lại.');
-    if(action==='status')return {ready:!locked&&!statusLoading,busy:Boolean(controller.current||renderJobs.current.size||connectingId!==null),batchId:renderBatch.current?.batchId??null,slotCount:settingsRef.current.slotCount,requestedConcurrency:settingsRef.current.requestedConcurrency??status?.preferredConcurrency??1,concurrencyWarning:status?.concurrencyWarning??null,settings:{...settingsRef.current},executionConcurrency:settingsRef.current.accountMode==='multiple'?executionLanes:museLanes.current,accounts:status?.accounts?.map(account=>({id:account.id,verified:hasVerifiedSession(account)}))||[],scenes:scenesRef.current.slice(0,settingsRef.current.slotCount).map(scene=>({id:scene.id,prompt:scene.prompt,enabled:scene.enabled,status:scene.status,error:scene.error,accountId:accountForScene(scene,settingsRef.current),imageId:scene.image?.savedId,videoId:scene.video?.savedId})),media:libraryRef.current.map(mediaSummary)};
+    if(action==='status')return {ready:!locked&&!statusLoading,busy:Boolean(controller.current||renderJobs.current.size||connectingId!==null),batchId:renderBatch.current?.batchId??null,slotCount:visibleSlotIds(settingsRef.current).length,requestedConcurrency:settingsRef.current.requestedConcurrency??status?.preferredConcurrency??1,concurrencyWarning:status?.concurrencyWarning??null,settings:{...settingsRef.current},executionConcurrency:settingsRef.current.accountMode==='multiple'?executionLanes:museLanes.current,accounts:status?.accounts?.map(account=>({id:account.id,verified:hasVerifiedSession(account)}))||[],scenes:visibleWorkspace(scenesRef.current,settingsRef.current).map(scene=>({id:scene.id,prompt:scene.prompt,enabled:scene.enabled,status:scene.status,error:scene.error,accountId:accountForScene(scene,settingsRef.current),imageId:scene.image?.savedId,videoId:scene.video?.savedId})),media:libraryRef.current.map(mediaSummary)};
     if(action==='media-list')return {media:libraryRef.current.map(mediaSummary)};
     if(action==='media'){const entry=libraryRef.current.find(entry=>entry.id===data?.id);if(!entry)throw apiError(404,'Không tìm thấy media trong thư viện.');return {base64:entry.media.base64,mimeType:entry.media.mimeType};}
     if(action==='stop'){if(data?.sceneId!==undefined){if(!Number.isInteger(data.sceneId)||data.sceneId<1||data.sceneId>MAX_SLOTS)throw apiError(400,'sceneId phải từ 1 đến 40.');cancelScene(data.sceneId)}else if(renderBatch.current)cancel();return {stopping:true,batchId:renderBatch.current?.batchId??null};}
@@ -305,7 +316,7 @@ function App() {
       if(action==='run'){
         if(locked||downloading)throw apiError(409,'Studio đang cập nhật dữ liệu.');
         if(data?.output!==undefined){if(!['image','video'].includes(data.output))throw apiError(400,'output không hợp lệ.');commitSettings({...settingsRef.current,output:data.output});}
-        if(data?.sceneIds!==undefined&&(!Array.isArray(data.sceneIds)||!data.sceneIds.length||new Set(data.sceneIds).size!==data.sceneIds.length||data.sceneIds.some((id:number)=>!isSlotCount(id)||id>settingsRef.current.slotCount)))throw apiError(400,'sceneIds cần là các ô đang mở, không trùng.');
+        if(data?.sceneIds!==undefined&&(!Array.isArray(data.sceneIds)||!data.sceneIds.length||new Set(data.sceneIds).size!==data.sceneIds.length||data.sceneIds.some((id:number)=>!isSlotCount(id)||!visibleSlotIds(settingsRef.current).includes(id))))throw apiError(400,'sceneIds cần là các ô đang mở, không trùng.');
         const result=await run(data?.sceneIds,undefined,true);if(!result)throw apiError(409,'Không có ô sẵn sàng. Kiểm tra prompt, ô đang bật và tài khoản.');return result;
       }
       if(action==='save-media')return await downloadAll(true,data||{});
@@ -313,11 +324,11 @@ function App() {
       if(action!=='batch')throw apiError(404,'Thao tác không hỗ trợ.');
       if(controller.current||renderJobs.current.size||locked||downloading)throw apiError(409,'Studio đang bận. Đợi hoặc dừng bộ hiện tại trước khi gửi bộ mới.');
       const request=parseAutomationBatch(data,settingsRef.current);
-      if(request.settings.mode==='muse'&&request.ids.some(id=>!accountReady({id} as Scene,request.settings)))throw apiError(409,'Một hoặc nhiều tài khoản của các ô yêu cầu chưa xác minh. Đăng nhập trong Studio trước.');
+      if(request.settings.mode==='muse'&&request.ids.some(id=>!accountReady(scenesRef.current.find(scene=>scene.id===id)??{id} as Scene,request.settings)))throw apiError(409,'Một hoặc nhiều tài khoản của các ô yêu cầu chưa xác minh. Đăng nhập trong Studio trước.');
       let reference:Reference|null=null;
       if(data.referenceImage){const bytes=Uint8Array.from(atob(data.referenceImage.base64),(char:string)=>char.charCodeAt(0));reference=await readImage(new File([bytes],'api-reference',{type:data.referenceImage.mimeType}));}
       if(data.sourceMediaId){const entry=libraryRef.current.find(entry=>entry.id===data.sourceMediaId&&entry.media.kind==='image');if(!entry)throw apiError(404,'sourceMediaId chưa có ảnh trong thư viện.');reference=imageReference(entry.media,entry.sceneId);}
-      const next=scenesRef.current.map(scene=>{const index=request.ids.indexOf(scene.id);return {...invalidate(scene),renderSettings:index>=0?undefined:scene.renderSettings,enabled:index>=0,prompt:index>=0?request.prompts[index]:scene.prompt,reference:index>=0?reference:scene.reference};});
+      const next=scenesRef.current.map(scene=>{const index=request.ids.indexOf(scene.id);return index<0?scene:{...invalidate(scene),renderSettings:undefined,enabled:true,prompt:request.prompts[index],reference};});
       commitSettings(request.settings);updateScenes(()=>next);setModal(null);
       const result=await run(request.ids,next,true);if(!result)throw apiError(409,'Không có cảnh được khởi chạy. Kiểm tra kết nối Studio.');return result;
     }finally{automationMutating.current=false}
@@ -335,6 +346,7 @@ function App() {
   function changeSettings(patch: Partial<Settings>, reset = true) {
     if (locked) return;
     if(Object.keys(patch).some(key=>(RENDER_KEYS as readonly string[]).includes(key))){
+      if(!visibleSlotIds(settingsRef.current).length)return;
       const targets=settingsRef.current.syncOperations?syncIds:[editingScene.id];
       const scope:Output|'both'=patch.imageResolution?'image':('resolution' in patch||'duration' in patch||'model' in patch||'videoInput' in patch)?'video':'both';
       const next=normalizeSettings({...editingSettings,...patch});
@@ -354,7 +366,7 @@ function App() {
   function imageReference(media: MediaResult, id: number): Reference { return { id: crypto.randomUUID(), name: `Ảnh đã tạo #${id}`, base64: media.base64, mimeType: media.mimeType, url: `data:${media.mimeType};base64,${media.base64}` }; }
   function useImagesForVideo(ids?: number[]) {
     if (locked) return;
-    updateScenes(all => all.map(s => { const next = s.image && (ids ? ids.includes(s.id) : s.id<=settingsRef.current.slotCount) ? { ...invalidate(s, 'video'), renderSettings:{...renderingSettings(sceneSettings(settingsRef.current,s)),videoInput:'image' as const}, reference: imageReference(s.image, s.id) } : s; return { ...next, status: next.video ? 'done' : 'ready', error: undefined }; }));
+    updateScenes(all => all.map(s => { const next = s.image && (ids ? ids.includes(s.id) : visibleSlotIds(settingsRef.current).includes(s.id)) ? { ...invalidate(s, 'video'), renderSettings:{...renderingSettings(sceneSettings(settingsRef.current,s)),videoInput:'image' as const}, reference: imageReference(s.image, s.id) } : s; return { ...next, status: next.video ? 'done' : 'ready', error: undefined }; }));
     commitSettings({ ...settingsRef.current, output: 'video', videoInput: 'image' });
     setNotice('Đã dùng ảnh đã tạo làm đầu vào video. Prompt và ảnh được giữ nguyên.');
   }
@@ -400,7 +412,7 @@ function App() {
       setNotice(settings.autoSync ? 'Đã gán ảnh theo lựa chọn đồng bộ hiện tại.' : 'Đã chọn ảnh chung. Bấm Áp dụng để gán cho các ô đang chọn.');
     } else applyReference(image,target);
   }
-  function applyReference(image:Reference|null,target?:number){const ids=settingsRef.current.syncOperations&&(target===undefined||syncIds.includes(target))?syncIds:[target??editingScene.id];updateScenes(all=>all.map(scene=>ids.includes(scene.id)?{...invalidate(scene),reference:image}:scene))}
+  function applyReference(image:Reference|null,target?:number){if(!visibleSlotIds(settingsRef.current).length)return;const ids=settingsRef.current.syncOperations&&(target===undefined||syncIds.includes(target))?syncIds:[target??editingScene.id];updateScenes(all=>all.map(scene=>ids.includes(scene.id)?{...invalidate(scene),reference:image}:scene))}
   function synchronizeNow(){if(locked||!settingsRef.current.syncOperations)return;const config=renderingSettings(editingSettings);updateScenes(all=>all.map(scene=>syncIds.includes(scene.id)?{...invalidate(scene),renderSettings:config,reference:editingScene.reference}:scene));setNotice(`Đã đồng bộ cài đặt và ảnh của ô ${editingScene.id} cho ${syncIds.length} ô đã chọn.`)}
   async function chooseImage(target: number | 'global') {
     if (locked) return;
@@ -430,7 +442,7 @@ function App() {
     let running = active.length; let museRunning = active.filter(job => job.settings.mode === 'muse').length;
     for (const job of jobs.values()) {
       if (running >= MAX_SLOTS || batch.control.signal.aborted) break;
-      if (job.started || (job.settings.mode === 'muse' && (job.settings.accountMode === 'multiple' ? active.some(other=>other.settings.mode==='muse' && other.accountId===job.accountId) : museRunning >= museLanes.current))) continue;
+      if (job.started || (job.settings.mode === 'muse' && (job.settings.accountMode === 'multiple' ? active.some(other=>other.settings.mode==='muse' && other.accountId===job.accountId) : museRunning >= Math.min(museLanes.current,job.settings.requestedConcurrency??MAX_SLOTS)))) continue;
       job.started = true; active.push(job); running++; if (job.settings.mode === 'muse') museRunning++;
       void renderOne(job, batch);
     }
@@ -481,16 +493,18 @@ function App() {
       pumpRenders();
     }
   }
-  async function run(ids?: number[], override?: Scene[], external=false) {
+  async function run(ids?: number[], override?: Scene[], external=false,requiredConcurrency?:number) {
     if (renderLocked || (controller.current && !renderBatch.current) || renderBatch.current?.control.signal.aborted || !requireProvider()) return;
     const config = { ...settingsRef.current };
-    const source = (override || scenesRef.current).slice(0,config.slotCount);
+    const source = visibleWorkspace(override || scenesRef.current,config);
     const targets = source.filter(scene => !renderJobs.current.has(scene.id) && scene.enabled && scene.prompt.trim() && sourceReady(scene) && accountReady(scene) && (ids ? ids.includes(scene.id) : !scene[config.output] || !matchesRequest(libraryRef.current.find(entry => entry.id === scene[config.output]?.savedId), scene, config)));
     if (!targets.length) return setNotice('Không có ô trống cần tạo; các ô đang chạy được giữ nguyên.');
-    const desired=config.requestedConcurrency??status?.preferredConcurrency;
-    if(config.mode==='muse'&&config.accountMode==='single'&&usingBrowser&&desired&&((status?.executionAccountId??1)!==(config.singleAccountId??1)||(status?.executionConcurrency!==desired&&(!status?.concurrencyWarning||status.preferredConcurrency!==desired)))&&!renderJobs.current.size) {
+    const desired=requiredConcurrency??config.requestedConcurrency??status?.preferredConcurrency;
+    const needsPreparation=requiredConcurrency||(status?.executionAccountId??1)!==(config.singleAccountId??1)||
+      (status?.executionConcurrency!==desired&&(!status?.concurrencyWarning||status.preferredConcurrency!==desired));
+    if(config.mode==='muse'&&config.accountMode==='single'&&usingBrowser&&desired&&needsPreparation&&!renderJobs.current.size) {
       setConnectingId(config.singleAccountId??1);setNotice(`Đang kiểm tra ${desired} hội thoại riêng trước khi tạo…`);
-      try{const prepared=await accountAction('prepare',{accountId:config.singleAccountId??1,concurrency:desired});museLanes.current=prepared.executionConcurrency;setStatus(current=>current?{...current,...prepared}:current);if(prepared.concurrencyWarning)setComposerCheck({message:`Đã giữ ${config.slotCount} ô. Đang xử lý ${prepared.executionConcurrency} luồng đã xác minh; các ô còn lại chờ.`,error:prepared.concurrencyWarning});}
+      try{const prepared=await accountAction('prepare',{accountId:config.singleAccountId??1,concurrency:desired});museLanes.current=prepared.executionConcurrency;setStatus(current=>current?{...current,...prepared,executionAccountId:config.singleAccountId??1}:current);if(requiredConcurrency&&prepared.executionConcurrency<requiredConcurrency){setNotice(`Chưa thể chạy song song ${requiredConcurrency} ô: Muse mới xác minh ${prepared.executionConcurrency} hội thoại độc lập. Chưa gửi prompt. Dùng Kiểm tra luồng sau khi mở được hội thoại riêng trên Muse.`);return;}if(prepared.concurrencyWarning)setComposerCheck({message:`Đã giữ ${config.slotCount} ô. Đang xử lý ${prepared.executionConcurrency} luồng đã xác minh; các ô còn lại chờ.`,error:prepared.concurrencyWarning});}
       catch(error){const info=logError(error,'Chuẩn bị luồng Muse');setNotice(info.raw);if(external)throw apiError(409,info.raw);return;}
       finally{setConnectingId(null)}
     }
@@ -532,7 +546,7 @@ function App() {
     try {
       const unique=new Map<number,MediaResult>();
       if(selection?.batchId){for(const entry of libraryRef.current)if(entry.batchId===selection.batchId&&entry.media.kind===kind&&!unique.has(entry.sceneId))unique.set(entry.sceneId,entry.media);}
-      else for(const scene of scenesRef.current.slice(0,settingsRef.current.slotCount))if(scene[kind])unique.set(scene.id,scene[kind]!);
+      else for(const scene of visibleWorkspace(scenesRef.current,settingsRef.current))if(scene[kind])unique.set(scene.id,scene[kind]!);
       const items=[...unique].filter(([id])=>!selection?.sceneIds||selection.sceneIds.includes(id)).sort(([a],[b])=>a-b).map(([id,media])=>({id,media}));
       if(!items.length)throw apiError(404,'Chưa có kết quả phù hợp để lưu. Đọc trạng thái bộ trước.');
       const range=await downloadMediaBatch(items,kind);
@@ -544,11 +558,13 @@ function App() {
   }
   function importScenes(andRun: boolean) {
     if (!canImport || locked || (andRun && !requireProvider())) return;
-    const next = scenesRef.current.map((s, i) => ({ ...invalidate(s), prompt: parsed[i] || '' }));
-    if(parsed.length>settingsRef.current.slotCount)commitSettings({...settingsRef.current,slotCount:parsed.length});
+    const config=settingsRef.current;
+    const ids=config.accountMode==='multiple'?visibleSlotIds(config):Array.from({length:Math.max(config.slotCount,parsed.length)},(_,i)=>i+1);
+    const next=scenesRef.current.map(scene=>{const index=ids.indexOf(scene.id);return index<0?scene:{...invalidate(scene),prompt:parsed[index]||''};});
+    if(config.accountMode!=='multiple'&&parsed.length>config.slotCount)commitSettings({...config,slotCount:parsed.length});
     updateScenes(() => next); setModal(null);
-    setNotice(`Đã nạp ${parsed.length} cảnh. ${Math.max(0,settingsRef.current.slotCount - parsed.length)} ô còn lại được để trống.`);
-    if (andRun) void run(next.filter(s => s.prompt.trim()).map(s => s.id), next);
+    setNotice(`Đã nạp ${parsed.length} cảnh. ${Math.max(0,ids.length - parsed.length)} ô đang hiện còn lại được để trống.`);
+    if (andRun) void run(ids.filter(id=>next.find(scene=>scene.id===id)?.prompt.trim()), next);
   }
   async function importFile(file?: File) {
     if (!file) return;
@@ -594,6 +610,7 @@ function App() {
       <div className="studio-tabs" aria-label="Loại nội dung"><button disabled={locked} aria-pressed={settings.output === 'video'} onClick={() => changeSettings({ output: 'video' })}><Video size={17}/>Tạo video</button><button disabled={locked} aria-pressed={settings.output === 'image'} onClick={() => changeSettings({ output: 'image' })}><ImagePlus size={17}/>Tạo ảnh hàng loạt</button><span>MUSE AI STUDIO · ẢNH / VIDEO</span></div>
       <div className="actions-row">
         <button className="button primary" title={renderBlocked ? connectionProblem : `Thêm các ô còn trống · ${executionLanes} luồng xử lý`} disabled={renderLocked || !enabled || renderBlocked || !visibleScenes.some(scene => scene.enabled && scene.prompt.trim() && !renderJobs.current.has(scene.id) && sourceReady(scene) && accountReady(scene) && (!scene[settings.output] || !matchesRequest(libraryRef.current.find(entry => entry.id === scene[settings.output]?.savedId), scene, settings)))} onClick={() => void run()}><Play size={17} fill="currentColor"/>TẠO {slotCount} {outputLabel.toLocaleUpperCase('vi')}</button>
+        {!multipleAccounts&&<button className="button" disabled={connectionLocked||busy||renderBlocked||!enabled} onClick={()=>void runParallelTen()}><Play size={17}/>TẠO SONG SONG 10 Ô</button>}
         {busy && <button className="button danger" onClick={cancel} disabled={cancelling}><Square size={16}/>{cancelling ? 'Đang dừng…' : batch ? 'Dừng tất cả luồng' : 'Dừng tác vụ'}</button>}
         <button className="button" title="Lưu các kết quả đang chọn vào một thư mục thường, tự đánh số tiếp" disabled={!done || downloading || libraryLoading} onClick={() => void downloadAll()}><Download size={17}/>{downloading ? 'Đang lưu thư mục…' : `Tải tất cả (${done}/${slotCount})`}</button>
         <button className="button" disabled={downloading} onClick={() => void chooseExportDirectory().then(result => { if (!result.cancelled) setNotice(`Đã chọn nơi lưu: ${result.name}`); }).catch(error => setNotice(logError(error,'Chọn thư mục').raw))}><FolderOpen size={17}/>Thư mục lưu</button>
@@ -617,8 +634,10 @@ function App() {
       {usingBrowser && settings.mode === 'muse' && <p className="transport-note">Muse nhận mô hình, thời lượng và tỉ lệ dưới dạng yêu cầu trong prompt. Ảnh/video hiển thị kích thước thật; nếu Muse trả thấp hơn 2K/4K, tool sẽ ghi Chưa đạt yêu cầu.</p>}
       {settings.mode === 'demo' && <div className="demo-banner"><FlaskConical size={16}/>CHẾ ĐỘ KIỂM THỬ · Dùng tệp mẫu 640×360 có nhãn. Không tạo nội dung AI từ prompt hoặc ảnh.</div>}
       <section className="account-mode-bar" aria-label="Lựa chọn chế độ tài khoản"><label>Chế độ tài khoản <select aria-label="Chế độ tài khoản" disabled={connectionLocked} value={settings.accountMode} onChange={e=>{changeSettings({accountMode:e.target.value as Settings['accountMode']},false);if(e.target.value==='single')void selectAccount(settings.singleAccountId??1)}}><option value="single">1 tài khoản · tối đa 40 luồng</option><option value="multiple" disabled={!status?.multiAccount}>{slotCount} tài khoản · mỗi tài khoản 1 luồng</option></select></label><label>Số ô <select aria-label="Số ô" disabled={locked||busy} value={slotCount} onChange={e=>resizeSlots(Number(e.target.value))}>{[...new Set([...STREAM_OPTIONS,slotCount])].sort((a,b)=>a-b).map(count=><option key={count} value={count}>{count} ô</option>)}</select></label><button className="button" onClick={()=>setModal('accounts')}><Users size={17}/>Quản lý tài khoản</button>{!multipleAccounts&&status?.multiAccount&&<label>Tài khoản chạy mọi ô <select aria-label="Tài khoản chạy mọi ô" disabled={connectionLocked} value={settings.singleAccountId??1} onChange={e=>{const id=Number(e.target.value);changeSettings({singleAccountId:id},false);void selectAccount(id)}}>{status.accounts?.filter(account=>hasVerifiedSession(account)||account.id===(settings.singleAccountId??1)).map(account=><option key={account.id} value={account.id}>{String(account.id).padStart(2,'0')} · {account.label}</option>)}</select></label>}</section>
+      {multipleAccounts&&<section className="visible-slot-picker" aria-label="Chọn ô tài khoản hiển thị"><strong>Chọn ô tài khoản cần chạy</strong><p>Chỉ các ô được tích mới hiện và nhận TXT/SRT, theo thứ tự số ô. Bỏ tích giữ nguyên prompt, kết quả và tài khoản của ô.</p><div className="preset-row"><button className="micro-button" disabled={connectionLocked||busy} onClick={()=>setVisibleSlots(Array.from({length:MAX_SLOTS},(_,i)=>i+1))}>Hiện tất cả 40 ô</button><button className="micro-button" disabled={connectionLocked||busy} onClick={()=>setVisibleSlots([])}>Ẩn tất cả ô</button></div><div className="visible-slot-options">{scenes.map(scene=><label key={scene.id}><input type="checkbox" aria-label={`Hiện ô ${scene.id}`} checked={activeSlotIds.includes(scene.id)} disabled={connectionLocked||busy} onChange={e=>setVisibleSlots(e.target.checked?[...activeSlotIds,scene.id]:activeSlotIds.filter(id=>id!==scene.id))}/><span>Ô {String(scene.id).padStart(2,'0')} · {status?.accounts?.find(account=>account.id===accountFor(scene.id))?.label??`Muse ${accountFor(scene.id)}`}</span></label>)}</div><small>Đang chọn {slotCount} ô: {activeSlotIds.join(', ')||'chưa chọn ô nào'}.</small></section>}
+
       <section className="single-account-panel" aria-label="Một tài khoản Muse và số dư">
-        <div><span className="eyebrow">{multipleAccounts ? 'MỖI TÀI KHOẢN MỘT LUỒNG' : 'MỘT TÀI KHOẢN DUY NHẤT'}</span><h2>{multipleAccounts ? `${slotCount} tài khoản · ${slotCount} ô` : `Một tài khoản · ${slotCount} cảnh`}</h2><p>Bấm Tạo {slotCount} để chạy bộ kịch bản. Hiện có {executionLanes} luồng sẵn sàng; các ô còn lại chờ đến lượt. Số ô được giữ khi Muse chưa cho phép đủ luồng song song.</p><div className="concurrency-controls"><label htmlFor="muse-concurrency">Số luồng:</label><select id="muse-concurrency" disabled={connectionLocked||busy} value={multipleAccounts?slotCount:requestedLanes} onChange={e=>void changeConcurrency(Number(e.target.value))}>{[...new Set([...STREAM_OPTIONS,requestedLanes])].sort((a,b)=>a-b).map(count=><option key={count} value={count}>{count} · {multipleAccounts?'Mỗi tài khoản một luồng':'Yêu cầu song song'}</option>)}</select>{usingBrowser&&!multipleAccounts&&<button className="micro-button" disabled={connectionLocked||!hasVerifiedSession(primaryAccount)} onClick={()=>void changeConcurrency(requestedLanes)}>Kiểm tra luồng</button>}<small>Chọn số luồng sẽ hiện đúng số ô. Yêu cầu {multipleAccounts?slotCount:requestedLanes} · Đã sẵn sàng {executionLanes}.{status?.concurrencyProbe?.state==='checking'&&` Đang kiểm tra ${status.concurrencyProbe.checked}/${status.concurrencyProbe.requested} hội thoại.`}</small></div></div>
+        <div><span className="eyebrow">{multipleAccounts ? 'MỖI TÀI KHOẢN MỘT LUỒNG' : 'MỘT TÀI KHOẢN DUY NHẤT'}</span><h2>{multipleAccounts ? `${slotCount} tài khoản · ${slotCount} ô` : `Một tài khoản · ${slotCount} cảnh`}</h2><p>Bấm Tạo {slotCount} để chạy bộ kịch bản. Hiện có {executionLanes} luồng sẵn sàng; các ô còn lại chờ đến lượt. Số ô được giữ khi Muse chưa cho phép đủ luồng song song.</p><div className="concurrency-controls"><label htmlFor="muse-concurrency">Số luồng:</label><select id="muse-concurrency" disabled={connectionLocked||busy} value={multipleAccounts?slotCount:requestedLanes} onChange={e=>void changeConcurrency(Number(e.target.value))}>{[...new Set([...STREAM_OPTIONS,requestedLanes,...(multipleAccounts?[slotCount]:[])])].sort((a,b)=>a-b).map(count=><option key={count} value={count}>{count} · {multipleAccounts?'Mỗi tài khoản một luồng':'Yêu cầu song song'}</option>)}</select>{usingBrowser&&!multipleAccounts&&<button className="micro-button" disabled={connectionLocked||!hasVerifiedSession(primaryAccount)} onClick={()=>void changeConcurrency(requestedLanes)}>Kiểm tra luồng</button>}<small>Chọn số luồng sẽ hiện đúng số ô. Yêu cầu {multipleAccounts?slotCount:requestedLanes} · Đã sẵn sàng {executionLanes}.{status?.concurrencyProbe?.state==='checking'&&` Đang kiểm tra ${status.concurrencyProbe.checked}/${status.concurrencyProbe.requested} hội thoại.`}</small></div></div>
         <div className="single-account-controls">{status?.multiAccount && <label>Tài khoản đang chọn <select aria-label="Tài khoản đang chọn" disabled={connectionLocked} value={selectedAccount} onChange={e=>void selectAccount(Number(e.target.value))}>{status.accounts?.map(account=><option key={account.id} value={account.id}>{String(account.id).padStart(2,'0')} · {account.label}</option>)}</select></label>}<strong className={providerReady ? 'mint' : 'muted'}>{usingBrowser ? accountStateName(museAccount) : connection}</strong><button className="button" disabled={connectionLocked || !usingBrowser} onClick={() => void connectAccount()}><Link2 size={15}/>{connectingId !== null ? 'Đang kết nối…' : embeddedLogin ? 'Đăng nhập Muse trong tool' : 'Kết nối Muse'}</button><button className="micro-button" disabled={connectionLocked || !usingBrowser} onClick={() => void connectAccount(true)}>Kiểm tra phiên</button><button className="micro-button" disabled={connectionLocked || !usingBrowser || !sessionVerified} onClick={() => void checkComposer()}>Kiểm tra ô Message</button><p className="connection-feedback" role="status">{connectingId !== null ? 'Đang kiểm tra phiên Muse…' : connectionError || museAccount?.connectionMessage || (hasVerifiedSession(museAccount) ? 'Phiên Muse đã được xác minh.' : 'Hoàn tất đăng nhập trong tab Muse rồi quay về Studio để tự kết nối.')}</p>{composerFeedback}</div>
         <div className="balance-card" data-testid="account-balance"><span>SỐ DƯ TÀI KHOẢN MUSE</span><strong>{settings.mode === 'demo' ? 'Chế độ kiểm thử' : balanceAccount?.balance ? `${balanceAccount.balance.valueText} ${balanceAccount.balance.unit}` : 'Chưa đọc được'}</strong><small>{balanceAccount?.balance ? `Đọc lúc ${new Date(balanceAccount.balance.observedAt).toLocaleTimeString('vi-VN')}` : 'Không tự suy đoán token hoặc credit'}</small><button className="micro-button" disabled={connectionLocked || !usingBrowser || !hasVerifiedSession(museAccount)} onClick={() => void connectAccount(true)}><RefreshCw size={12}/>Cập nhật số dư</button></div>
       </section>
@@ -634,7 +653,7 @@ function App() {
 
       <section className="workstation-heading">
         <div className="studio-icon"><Video size={23}/></div><div className="heading-copy"><h2>{slotCount}-SLOT {settings.output === 'image' ? 'IMAGE' : 'VIDEO'} WORKSTATION <span className="tag">MUSE STUDIO ENGINE</span></h2><p>Điều phối {slotCount} phân cảnh · Model yêu cầu: <span>{settings.output === 'image' ? 'Muse tạo ảnh' : settings.model}</span> · Gửi yêu cầu và ảnh đến Muse; tính năng khả dụng do Muse quyết định.</p></div>
-        <div className="progress-box"><span>{busy ? `${runningCount}/${slotCount} luồng đang chạy` : 'Tiến độ tạo:'}</span><div className="progress-track" role="progressbar" aria-label="Tiến độ tạo" aria-valuemin={0} aria-valuemax={slotCount} aria-valuenow={done}><div style={{ width: `${done / slotCount * 100}%` }}/></div><b>{done}/{slotCount}</b></div>
+        <div className="progress-box"><span>{busy ? `${runningCount}/${slotCount} luồng đang chạy` : 'Tiến độ tạo:'}</span><div className="progress-track" role="progressbar" aria-label="Tiến độ tạo" aria-valuemin={0} aria-valuemax={slotCount} aria-valuenow={done}><div style={{ width: `${done / Math.max(1,slotCount) * 100}%` }}/></div><b>{done}/{slotCount}</b></div>
       </section>
 
       {busy && usingBrowser && <p className="transport-note" role="status">Tool: {actualProgress.filter(stage => stage.active && !stage.submitted).length} ô đang mở · {actualProgress.filter(stage => stage.submitted).length} prompt đã hiển thị trên trang Muse. Các ô đang chạy: {runningCount}. Muse quyết định thời gian xử lý và trả kết quả.</p>}
@@ -642,12 +661,12 @@ function App() {
         <button className={`button ${settings.syncOperations?'primary':''}`} aria-pressed={settings.syncOperations} onClick={()=>changeSettings({syncOperations:!settings.syncOperations},false)} disabled={locked}>Đồng bộ thao tác: {settings.syncOperations?'BẬT':'TẮT'}</button>
         <label>Ô đang chỉnh <select aria-label="Ô đang chỉnh" value={editingScene.id} onChange={e=>setFocusedScene(Number(e.target.value))}>{visibleScenes.map(scene=><option key={scene.id} value={scene.id}>Ô {String(scene.id).padStart(2,'0')}</option>)}</select></label>
         <span>{settings.syncOperations?`Cài đặt và ảnh áp dụng cho ${syncIds.length} ô đã chọn.`:`Cài đặt và ảnh chỉ áp dụng ô ${editingScene.id}.`}</span>
-        <button className="micro-button" disabled={locked} onClick={()=>updateScenes(all=>all.map(scene=>scene.id<=slotCount?{...scene,syncSelected:true}:scene))}>Chọn tất cả</button><button className="micro-button" disabled={locked} onClick={()=>updateScenes(all=>all.map(scene=>scene.id<=slotCount?{...scene,syncSelected:false}:scene))}>Bỏ chọn</button>
+        <button className="micro-button" disabled={locked} onClick={()=>updateScenes(all=>all.map(scene=>activeSlotIds.includes(scene.id)?{...scene,syncSelected:true}:scene))}>Chọn tất cả</button><button className="micro-button" disabled={locked} onClick={()=>updateScenes(all=>all.map(scene=>activeSlotIds.includes(scene.id)?{...scene,syncSelected:false}:scene))}>Bỏ chọn</button>
         <button className="button" disabled={locked||!settings.syncOperations||!syncIds.length} onClick={synchronizeNow}>Đồng bộ ngay từ ô {editingScene.id}</button>
         <button className="button" disabled={renderLocked||!settings.syncOperations||!syncIds.length||renderBlocked} onClick={()=>void run(syncIds)}>Tạo ô đã chọn</button><button className="button danger" disabled={!settings.syncOperations||!syncIds.some(id=>renderJobs.current.has(id))} onClick={()=>syncIds.forEach(cancelScene)}>Dừng ô đã chọn</button>
       </section>
       {settings.output === 'image' && visibleScenes.some(s => s.image) && <div className="image-batch-actions"><button className="button" disabled={locked} onClick={() => useImagesForVideo()}><Video size={16}/>Chuyển bộ ảnh đã tạo sang video</button><span>Giữ ảnh và prompt, dùng ảnh đã tạo làm khung hình đầu.</span></div>}
-      <section className="scene-grid" aria-label="Các ô ảnh và video">{visibleScenes.map(scene => {
+      <section className="scene-grid" aria-label="Các ô ảnh và video">{!slotCount&&<p>Chọn các ô tài khoản ở trên để nhập kịch bản và chạy.</p>}{visibleScenes.map(scene => {
         const currentSettings=sceneSettings(settings,scene);
         const stage=actualProgress.find(stage=>stage.sceneId===scene.id&&stage.active);
         const media = scene[settings.output];
@@ -692,8 +711,8 @@ function App() {
     {modal === 'import' && <Modal title="Nhập kịch bản thông minh" eyebrow="SCRIPT IMPORT / 40 SCENES" close={() => setModal(null)}>
       <div className="modal-body"><p className="muted">TXT: mỗi dòng hoặc mỗi đoạn là một cảnh. SRT: mỗi khối phụ đề là một cảnh, tự bỏ số thứ tự và timestamp. Tối đa 40 cảnh.</p><div className="preset-row"><button className="button" onClick={() => setImportText(ADVENTURE.join('\n\n'))}><Film size={16}/>Điện ảnh phiêu lưu</button><button className="button" onClick={() => setImportText(RUNWAY.join('\n\n'))}><WandSparkles size={16}/>Thời trang Runway</button><button className="button" onClick={() => fileInput.current?.click()}><Upload size={16}/>Chọn TXT / SRT</button></div>
         <textarea className="import-text" aria-label="Nội dung TXT / SRT" value={importText} onChange={e => setImportText(e.target.value)} placeholder={'Dán kịch bản hoặc phụ đề vào đây…\n\n1\n00:00:00,000 --> 00:00:04,000\nMột người thám hiểm bước vào ngôi đền cổ.'}/>
-        <div className="import-count"><b className={parsed.length > MAX_SLOTS ? 'red' : 'mint'}>{parsed.length}/40 cảnh</b><span>{parsed.length > MAX_SLOTS ? 'Có hơn 40 cảnh. Rút gọn trước khi nạp, không tự cắt bỏ nội dung.' : parsed.length < slotCount ? 'Các ô còn lại sẽ được để trống.' : `Nạp sẽ mở ${Math.max(slotCount,parsed.length)} ô.`}</span></div>
-        <div className="script-preview">{parsed.slice(0, MAX_SLOTS).map((text, i) => <div key={i}><span>#{String(i + 1).padStart(2, '0')}</span><p>{text}</p></div>)}</div><p className="small muted">Nạp kịch bản sẽ thay prompt và xóa kết quả ảnh/video đang chọn; lịch sử đã lưu được giữ. Giữ ảnh tham chiếu và tài khoản.</p>
+        <div className="import-count"><b className={!canImport&&parsed.length ? 'red' : 'mint'}>{parsed.length}/{multipleAccounts?slotCount:MAX_SLOTS} cảnh</b><span>{multipleAccounts?`Đã chọn ${slotCount} ô (${activeSlotIds.join(', ')}). ${parsed.length>slotCount?'Kịch bản vượt số ô đã chọn. Chọn thêm ô hoặc rút gọn; không tự bỏ cảnh.':'Chỉ các ô này nhận nội dung, các ô ẩn được giữ nguyên.'}`:parsed.length > MAX_SLOTS ? 'Có hơn 40 cảnh. Rút gọn trước khi nạp, không tự cắt bỏ nội dung.' : parsed.length < slotCount ? 'Các ô còn lại sẽ được để trống.' : `Nạp sẽ mở ${Math.max(slotCount,parsed.length)} ô.`}</span></div>
+        <div className="script-preview">{parsed.slice(0, MAX_SLOTS).map((text, i) => <div key={i}><span>#{String(multipleAccounts?(activeSlotIds[i]??'—'):i+1).padStart(2, '0')}</span><p>{text}</p></div>)}</div><p className="small muted">Nạp kịch bản sẽ thay prompt và xóa kết quả ảnh/video đang chọn; lịch sử đã lưu được giữ. Giữ ảnh tham chiếu và tài khoản.</p>
       </div><footer className="modal-footer"><button className="button" onClick={() => setModal(null)}>Đóng</button><button className="button" disabled={!canImport || locked} onClick={() => importScenes(false)}>Nạp vào Studio</button><button className="button primary" disabled={!canImport || locked || renderBlocked} onClick={() => importScenes(true)}><Play size={15}/>Nạp & Chạy các cảnh</button></footer>
     </Modal>}
 

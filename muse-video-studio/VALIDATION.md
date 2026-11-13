@@ -1,3 +1,16 @@
+# Validation for 1.12.0
+
+Linux cloud validation on 2026-11-13:
+
+- Production build and TypeScript passed.
+- `npm test`: 41 tests passed, including restoration of nonconsecutive selected slots and API script routing/overflow validation.
+- Full browser suite: 53/53 passed. After final UI count/notice refinements, the four selected-slot/parallel-action regressions passed again, including preservation of an actual generated image in a hidden slot across import/reload.
+- `CHROMIUM_PATH=/usr/bin/chromium node tests/muse-parallel.test.mjs`: 5 tests passed with real Chromium and the local Muse fixture, verifying independent service-created routes, ten overlapping requests before responses, cancellation and rejection of shared-only conversations.
+- The one-click action preserves a forty-slot layout, starts ten simultaneous requests, queues thirty, and starts the next slot as soon as any running slot finishes. A failed ten-conversation check submits zero prompts.
+- Selected slots 1, 3, 4, 7 receive TXT and SRT scenes in that order; hidden prompts/media/account assignments remain intact. Empty selection, reload, slot 27 beyond the previous layout and overflow rejection are covered.
+
+The Windows workflow now also runs the selected-slot and account-selection browser tests before the Electron desktop and full portable-package tests. A pushed workflow does not itself prove Windows execution or release completion; inspect that run for its outcome. All provider tests use local fixtures, not live Muse. Ten simultaneous renders still require the provider to support independent conversations and the account's actual service limits.
+
 # Validation for 1.11.0
 
 Validated in Linux cloud on 2026-11-13:
