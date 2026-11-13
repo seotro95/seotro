@@ -9,7 +9,7 @@
   "reused_slots": 60,
   "prompt_txt_files": 6,
   "full_native_speaker_review": false,
-  "published": false,
+  "published": true,
   "files": [
     {
       "language": "en",
@@ -25,7 +25,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 1.167979274611399
+      "max_tempo": 1.167979274611399,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/United-States-English-Andrew-20m00s.mp3"
     },
     {
       "language": "vi",
@@ -41,7 +42,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 1.0408506044905008
+      "max_tempo": 1.0408506044905008,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/Viet-Nam-Tieng-Viet-Nam-Minh-20m00s.mp3"
     },
     {
       "language": "es",
@@ -57,7 +59,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 0.9997814669909414
+      "max_tempo": 0.9997814669909414,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/Spain-Espanol-Davefx-20m00s.mp3"
     },
     {
       "language": "fr",
@@ -73,7 +76,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 1.0448979591836733
+      "max_tempo": 1.0448979591836733,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/France-Francais-Tom-20m00s.mp3"
     },
     {
       "language": "ja",
@@ -89,7 +93,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 1.039359439803555
+      "max_tempo": 1.039359439803555,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/Japan-Nihongo-M1-20m00s.mp3"
     },
     {
       "language": "ko",
@@ -105,7 +110,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 1.2995876070635506
+      "max_tempo": 1.2995876070635506,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/South-Korea-Hangugeo-M1-20m00s.mp3"
     },
     {
       "language": "de",
@@ -121,7 +127,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 0.9
+      "max_tempo": 0.9,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/Germany-Deutsch-Thorsten-20m00s.mp3"
     },
     {
       "language": "it",
@@ -137,7 +144,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 0.9248622419606876
+      "max_tempo": 0.9248622419606876,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/Italy-Italiano-M1-20m00s.mp3"
     },
     {
       "language": "pt",
@@ -153,7 +161,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 0.945641676359663
+      "max_tempo": 0.945641676359663,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/Portugal-Portugues-Tugao-20m00s.mp3"
     },
     {
       "language": "nl",
@@ -169,7 +178,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 1.2945425493167906
+      "max_tempo": 1.2945425493167906,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/Netherlands-Nederlands-Ronnie-20m00s.mp3"
     },
     {
       "language": "pl",
@@ -185,7 +195,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 0.9985783605324686
+      "max_tempo": 0.9985783605324686,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/Poland-Polski-MC-Speech-20m00s.mp3"
     },
     {
       "language": "sv",
@@ -201,7 +212,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 1.283714591190535
+      "max_tempo": 1.283714591190535,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/Sweden-Svenska-NST-20m00s.mp3"
     },
     {
       "language": "da",
@@ -217,7 +229,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 0.98654729594774
+      "max_tempo": 0.98654729594774,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/Denmark-Dansk-Talesyntese-20m00s.mp3"
     },
     {
       "language": "fi",
@@ -233,7 +246,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 1.2885270170244263
+      "max_tempo": 1.2885270170244263,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/Finland-Suomi-Harri-20m00s.mp3"
     },
     {
       "language": "no",
@@ -249,7 +263,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 0.9167671213563146
+      "max_tempo": 0.9167671213563146,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/Norway-Norsk-Talesyntese-20m00s.mp3"
     },
     {
       "language": "cs",
@@ -265,7 +280,8 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 0.9769224442799571
+      "max_tempo": 0.9769224442799571,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/Czechia-Cestina-Jirka-20m00s.mp3"
     },
     {
       "language": "hmn",
@@ -281,7 +297,11 @@
       "channels": 1,
       "narration_cues": 120,
       "non_silent_cues": 120,
-      "max_tempo": 0.9672975926121743
+      "max_tempo": 0.9672975926121743,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/pohnpei-037-20m00s/downloads/Tieng-Hmong-Trang-Nu-female-3-20m00s.mp3"
     }
-  ]
+  ],
+  "delivery_channel": "GitHub",
+  "repository": "seotro95/seotro",
+  "branch": "pohnpei-037-20m00s"
 }
