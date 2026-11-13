@@ -71,3 +71,5 @@ jobs:
     paths:
     - .github/workflows/schoeningen87-preflight.yml
   workflow_dispatch: null
+
+# Document delivery flag validated after public ZIP verification.
