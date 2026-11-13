@@ -1,0 +1,10 @@
+[
+  {
+    "url": "https://whc.unesco.org/en/list/668/",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://apsaraauthority.gov.kh/",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  }
+]

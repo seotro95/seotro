@@ -1,0 +1,20 @@
+{
+  "episode": 85,
+  "topic": "Angkor: The City and Its Water Network",
+  "target_seconds": 1292,
+  "spoken_cues": 129,
+  "closing_silence_seconds": 2,
+  "languages": 17,
+  "generated_clip_seconds": 10,
+  "timeline_slots": 130,
+  "status": "complete_pending_native_review",
+  "github_delivery_authorized": true,
+  "cloud_environment_publishing_authorized": false,
+  "unique_generated_clips": 100,
+  "prompt_count": 100,
+  "prompt_files": 10,
+  "reused_slots": 30,
+  "reused_full_slots": 29,
+  "closing_hold_seconds": 2,
+  "mp3_count": 17
+}

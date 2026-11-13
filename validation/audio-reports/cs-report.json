@@ -1,0 +1,1182 @@
+{
+  "locale": "cs",
+  "voice_id": "piper:cs_CZ-jirka-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1292,
+  "spoken_cues": 129,
+  "closing_silence_seconds": 2,
+  "config_hash": "60141eff8bdb7de71bf0e1cec206785515985bb1172279952047c7e24eec6fc6",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "Po starém kameni vede tmavá stopa. Zdá se nepatrná, než pochopíme, že voda pomáhala utvářet celé město.",
+      "raw_seconds": 9.508571428571429,
+      "speech_window_seconds": 9.508571428571429,
+      "tempo": 0.9853441894892672,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "V Angkoru nejprve zaujmou věže. Ještě překvapivější stavba se však rozprostírá mezi kanály, hrázemi a nádržemi.",
+      "raw_seconds": 9.47374149659864,
+      "speech_window_seconds": 9.47374149659864,
+      "tempo": 0.9817348701138486,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Když sledujeme spojení, známý obraz se mění. Chrám patří k městu a město k celému povodí.",
+      "raw_seconds": 8.382403628117913,
+      "speech_window_seconds": 8.382403628117913,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Otázka je prostá: Jak uspořádat život tam, kde voda někdy přichází v nadbytku a později ji těžko najdeme?",
+      "raw_seconds": 8.986122448979591,
+      "speech_window_seconds": 8.986122448979591,
+      "tempo": 0.9312043988579887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Odpověď spojuje déšť, terén, zemědělství, víru, moc a běžnou údržbu. Osvětluje také pozdější proměny Angkoru.",
+      "raw_seconds": 10.599909297052154,
+      "speech_window_seconds": 10.599909297052154,
+      "tempo": 1.0984361965857155,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Začínáme v dnešní Kambodži, u Siem Reapu, severně od Tonlesapu. Památky stojí v mnohem širší obydlené krajině.",
+      "raw_seconds": 10.031020408163265,
+      "speech_window_seconds": 10.031020408163265,
+      "tempo": 1.0394839801205455,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Angkor byl po staletí významným centrem Khmerů. Jeho podoba se měnila s vládci, komunitami a jejich potřebami.",
+      "raw_seconds": 9.241541950113378,
+      "speech_window_seconds": 9.241541950113378,
+      "tempo": 0.9576727409443915,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Dochované chrámy tvoří orientační body. Město ale potřebuje také domy, pole, cesty, obchod a odstraňování odpadu.",
+      "raw_seconds": 9.926530612244898,
+      "speech_window_seconds": 9.926530612244898,
+      "tempo": 1.02865602199429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Běžné stavby často užívaly méně trvanlivé materiály. Zmizelé střechy způsobují, že kamenné památky vypadají mylně osaměle.",
+      "raw_seconds": 11.168798185941043,
+      "speech_window_seconds": 11.168798185941043,
+      "tempo": 1.1573884130508851,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Podívejme se za vyřezávanou bránu. Vyvýšená linie může být hrází, mělká prohlubeň uchovávat další část příběhu.",
+      "raw_seconds": 10.541859410430838,
+      "speech_window_seconds": 10.541859410430838,
+      "tempo": 1.0924206642933512,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Takové tvary potřebují výzkum. Samotný vzhled neurčuje dobu vzniku, funkci ani pozdější změny.",
+      "raw_seconds": 8.335963718820862,
+      "speech_window_seconds": 8.335963718820862,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Společně ukazují rozsah otázky. Historie Angkoru daleko přesahuje hranice jediného slavného chrámu.",
+      "raw_seconds": 8.533333333333333,
+      "speech_window_seconds": 8.533333333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Angkor Vat vznikl počátkem dvanáctého století za Súrjavarmana Druhého. Je výchozím bodem pro cestu do širší krajiny.",
+      "raw_seconds": 10.425759637188209,
+      "speech_window_seconds": 10.425759637188209,
+      "tempo": 1.0803895997086226,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Původní zasvěcení Višnuovi a pozdější buddhistická historie připomínají, že se měnily také náboženské významy míst.",
+      "raw_seconds": 10.39092970521542,
+      "speech_window_seconds": 10.39092970521542,
+      "tempo": 1.076780280333204,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Chrámový příkop může zobrazovat uspořádaný posvátný svět a zároveň ovlivňovat vodu, půdu i bezprostřední okolí stavby.",
+      "raw_seconds": 10.878548752834467,
+      "speech_window_seconds": 10.878548752834467,
+      "tempo": 1.127310751589064,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Opusťme na chvíli věže. Sledujme, odkud přichází déšť a kam terén dovoluje vodě odtékat.",
+      "raw_seconds": 7.604535147392291,
+      "speech_window_seconds": 7.604535147392291,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Oblast má výrazně sezonní monzunové klima. Mokré a suché měsíce vytvářejí v téže krajině odlišné podmínky.",
+      "raw_seconds": 9.299591836734693,
+      "speech_window_seconds": 9.299591836734693,
+      "tempo": 0.9636882732367558,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Za dešťů přichází voda na střechy, pole, cesty i do potoků. Rozhoduje množství, rychlost a místo.",
+      "raw_seconds": 8.382403628117913,
+      "speech_window_seconds": 8.382403628117913,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Přívalový déšť může přetížit kanál, přestože později přijde nedostatek. Nadbytek i nouze souvisejí také s načasováním.",
+      "raw_seconds": 10.483809523809525,
+      "speech_window_seconds": 10.483809523809525,
+      "tempo": 1.0864051320009869,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "S postupující suchou sezonou rostou nároky na zásoby a spolehlivý přístup. Užitečný systém musí zvládnout obě období.",
+      "raw_seconds": 11.075918367346938,
+      "speech_window_seconds": 11.075918367346938,
+      "tempo": 1.1477635613831023,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Vyšší terén severně od Angkoru vytváří povodí zásobující rovinu. Voda sleduje gravitaci, lidé však mění její cestu.",
+      "raw_seconds": 10.669569160997732,
+      "speech_window_seconds": 10.669569160997732,
+      "tempo": 1.1056548353365525,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Krajina určuje hlavní směr, ale záleží i na drobných výškách. Mírný sklon může rozhodnout, které pole dostane vodu.",
+      "raw_seconds": 10.32126984126984,
+      "speech_window_seconds": 10.32126984126984,
+      "tempo": 1.0695616415823668,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Samotná země je tedy součástí infrastruktury. Kanál funguje ve vztahu k okolním a níže položeným pozemkům.",
+      "raw_seconds": 9.903310657596371,
+      "speech_window_seconds": 9.903310657596371,
+      "tempo": 1.0262498090773442,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Na jihu leží Tonlesap. Jeho sezonní rozšiřování a zmenšování souvisí s větší říční soustavou.",
+      "raw_seconds": 8.614603174603175,
+      "speech_window_seconds": 8.614603174603175,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Známé sezonní obrácení proudu patří k tomuto širšímu měřítku. Nepopisuje každý místní kanál Angkoru.",
+      "raw_seconds": 9.798820861678005,
+      "speech_window_seconds": 9.798820861678005,
+      "tempo": 1.0154218509510886,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Jezero, rovina, potoky, déšť a podzemní voda působí v různých měřítkách. Jedna šipka na mapě neukáže vše.",
+      "raw_seconds": 9.32281179138322,
+      "speech_window_seconds": 9.32281179138322,
+      "tempo": 0.9660944861537015,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Pro obyvatele šlo o praktické vztahy: vzdálenost k vodě, stav přechodu a správný čas pěstování.",
+      "raw_seconds": 8.301133786848073,
+      "speech_window_seconds": 8.301133786848073,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Nestačilo shromáždit největší množství. Vodu bylo nutné vést, zadržovat a vypouštět podle měnících se potřeb.",
+      "raw_seconds": 9.485351473922902,
+      "speech_window_seconds": 9.485351473922902,
+      "tempo": 0.9829379765723214,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Někde bylo třeba proud zpomalit. Jinde přebytek potřeboval odtok, než poškodil pole nebo budovy.",
+      "raw_seconds": 8.568163265306122,
+      "speech_window_seconds": 8.568163265306122,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Ukládání a odvodňování tedy patří k jednomu příběhu. Krajina potřebuje prostor k zadržení vody i cesty ven.",
+      "raw_seconds": 9.357641723356009,
+      "speech_window_seconds": 9.357641723356009,
+      "tempo": 0.96970380552912,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Tvary mimo chrámy získávají význam. Dlouhé hráze a široké nádrže ukazují práci s rozdíly mezi sezonami.",
+      "raw_seconds": 9.775600907029478,
+      "speech_window_seconds": 9.775600907029478,
+      "tempo": 1.0130156380341429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Teď prozkoumáme velké zásobníky. Nebudeme předpokládat, že všechny měly stejnou funkci nebo historii.",
+      "raw_seconds": 8.544943310657596,
+      "speech_window_seconds": 8.544943310657596,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Velké obdélníkové nádrže Angkoru se nazývají baraje. Zemní hráze vytvářely rozsáhlé zásoby v mírně skloněné krajině.",
+      "raw_seconds": 10.692789115646258,
+      "speech_window_seconds": 10.692789115646258,
+      "tempo": 1.1080610482534983,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Západní baraj dodnes působí mohutně. Shora jeho dlouhý obdélník vystupuje mezi menšími tvary okolí.",
+      "raw_seconds": 8.6378231292517,
+      "speech_window_seconds": 8.6378231292517,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Východní baraj uchovává další velký obrys. Dnešní vzhled se liší od naplněné nádrže: Krajina se stále mění.",
+      "raw_seconds": 10.332879818594105,
+      "speech_window_seconds": 10.332879818594105,
+      "tempo": 1.0707647480408398,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Jiné nádrže patří k odlišným fázím. Síť vznikala postupně, nikoli podle jednoho hotového plánu uskutečněného najednou.",
+      "raw_seconds": 10.425759637188209,
+      "speech_window_seconds": 10.425759637188209,
+      "tempo": 1.0803895997086226,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Velikost ohromí, ale nevysvětluje provoz. Musíme se ptát, kudy voda přicházela, jak se pohybovala a odtékala.",
+      "raw_seconds": 9.85687074829932,
+      "speech_window_seconds": 9.85687074829932,
+      "tempo": 1.021437383243453,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Hráz musí držet vodu a odolávat erozi. Výška, materiál a stav určují skutečné možnosti nádrže.",
+      "raw_seconds": 9.137052154195011,
+      "speech_window_seconds": 9.137052154195011,
+      "tempo": 0.9468447828181359,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Přítoky a odtoky propojují nádrž se sítí. Jejich poloha může být stejně důležitá jako velký obrys na fotografii.",
+      "raw_seconds": 10.147120181405896,
+      "speech_window_seconds": 10.147120181405896,
+      "tempo": 1.0515150447052741,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Sediment přináší další potíže. Voda nese materiál, jehož usazování postupně mění hloubku nebo kapacitu kanálu.",
+      "raw_seconds": 9.752380952380953,
+      "speech_window_seconds": 9.752380952380953,
+      "tempo": 1.010609425117197,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Údržba proto provází celý život díla. Stavba fungující jednu sezonu může před další potřebovat vyčištění nebo opravu.",
+      "raw_seconds": 10.414149659863945,
+      "speech_window_seconds": 10.414149659863945,
+      "tempo": 1.0791864932501496,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Nádrže patřily také ke chrámům a královské moci. Moderní technické schéma nevystihuje všechny jejich významy.",
+      "raw_seconds": 9.740770975056689,
+      "speech_window_seconds": 9.740770975056689,
+      "tempo": 1.0094063186587243,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Voda plnila praktické potřeby i náboženskou symboliku. Role se překrývaly a měnily podle místa a doby.",
+      "raw_seconds": 8.78875283446712,
+      "speech_window_seconds": 8.78875283446712,
+      "tempo": 0.9107515890639503,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "O zavlažovací funkci některých barají se diskutuje. Odpověď potřebuje důkazy o konkrétní stavbě a jejích spojeních.",
+      "raw_seconds": 10.112290249433107,
+      "speech_window_seconds": 10.112290249433107,
+      "tempo": 1.0479057253298556,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Velká nádrž nedokazuje zásobování všech blízkých polí. Výšky, kanály, výpusti a data musejí zapadat do sebe.",
+      "raw_seconds": 10.112290249433107,
+      "speech_window_seconds": 10.112290249433107,
+      "tempo": 1.0479057253298556,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Dnešní hladina nezobrazuje všechna minulá staletí. Zanášení, přestavby, opravy a nové využití nádrže mění.",
+      "raw_seconds": 9.717551020408163,
+      "speech_window_seconds": 9.717551020408163,
+      "tempo": 1.0070001057417786,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Chápejme baraje jako velké části širšího celku. Jejich význam objasní sledování linií, které je propojují.",
+      "raw_seconds": 9.334421768707482,
+      "speech_window_seconds": 9.334421768707482,
+      "tempo": 0.9672975926121743,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Linie vedou k potokům, kanálům, hrázím, přechodům a rozvětvením po celé obydlené rovině.",
+      "raw_seconds": 8.080544217687075,
+      "speech_window_seconds": 8.080544217687075,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Kanál dává vodě výhodnou cestu. Proud závisí na sklonu, hloubce, šířce, drsnosti a přítoku shora.",
+      "raw_seconds": 9.717551020408163,
+      "speech_window_seconds": 9.717551020408163,
+      "tempo": 1.0070001057417786,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Pohyb zajišťuje gravitace. Lidská práce mění trasy, rozděluje proudy a propojuje místa s různou dostupností vody.",
+      "raw_seconds": 10.437369614512471,
+      "speech_window_seconds": 10.437369614512471,
+      "tempo": 1.0815927061670954,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Na rozvětvení má malá změna vzdálené následky. Více vody v jedné větvi může znamenat méně v druhé.",
+      "raw_seconds": 9.241541950113378,
+      "speech_window_seconds": 9.241541950113378,
+      "tempo": 0.9576727409443915,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Vyvýšený val může nést také cestu přes mokrou zem. Doprava a vodní hospodářství pak sdílejí jednu linii.",
+      "raw_seconds": 9.206712018140589,
+      "speech_window_seconds": 9.206712018140589,
+      "tempo": 0.954063421568973,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Přechody vyžadují další rovnováhu. Cesta musí pokračovat a voda mít prostor protéct, aniž by podkopala stavbu.",
+      "raw_seconds": 10.065850340136054,
+      "speech_window_seconds": 10.065850340136054,
+      "tempo": 1.043093299495964,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Systém vodu ukládá i přesouvá. Pouhé největší nádrže neukážou všechny vztahy umožňující běžný život.",
+      "raw_seconds": 9.508571428571429,
+      "speech_window_seconds": 9.508571428571429,
+      "tempo": 0.9853441894892672,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Také přírodní potoky tvořily součást prostředí. Lidé upravovali toky v krajině s vlastními odtokovými vzory.",
+      "raw_seconds": 9.183492063492064,
+      "speech_window_seconds": 9.183492063492064,
+      "tempo": 0.9516572086520273,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Mapa musí rozlišit původ linií: vykopané, navršené, odkloněné nebo zděděné po starších tvarech terénu.",
+      "raw_seconds": 9.311201814058958,
+      "speech_window_seconds": 9.311201814058958,
+      "tempo": 0.9648913796952288,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Síť roste spojováním dřívějších částí. Každý doplněk řeší místní problém a může změnit podmínky jinde.",
+      "raw_seconds": 9.427301587301587,
+      "speech_window_seconds": 9.427301587301587,
+      "tempo": 0.9769224442799571,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "S generacemi přibývá složitost. Musíme vědět, které prvky existovaly současně, ne považovat všechny stopy za soudobé.",
+      "raw_seconds": 10.576689342403627,
+      "speech_window_seconds": 10.576689342403627,
+      "tempo": 1.0960299836687697,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Opuštěný kanál vedle pozdějšího nedokazuje společný provoz. Archeologický čas musí zůstat na mapě viditelný.",
+      "raw_seconds": 9.682721088435374,
+      "speech_window_seconds": 9.682721088435374,
+      "tempo": 1.00339078636636,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Proto k leteckým snímkům patří vykopávky a datování. Krásný obrys potřebuje historii, než začne vysvětlovat.",
+      "raw_seconds": 9.717551020408163,
+      "speech_window_seconds": 9.717551020408163,
+      "tempo": 1.0070001057417786,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Představme si malý potok po dešti. Rozlévá se do nádrže a pozdější úzký průchod proud znovu soustředí.",
+      "raw_seconds": 8.986122448979591,
+      "speech_window_seconds": 8.986122448979591,
+      "tempo": 0.9312043988579887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Stejná voda teče klidně i silně podle trasy. Slabá hráz nebo ucpaný otvor ovlivní vzdálená místa po proudu.",
+      "raw_seconds": 9.427301587301587,
+      "speech_window_seconds": 9.427301587301587,
+      "tempo": 0.9769224442799571,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Pohled z jediné věže to neodhalí. Město je třeba číst přes velké vzdálenosti i v malých detailech.",
+      "raw_seconds": 7.90639455782313,
+      "speech_window_seconds": 7.90639455782313,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Každá linie nakonec vede k lidem: rodinám, dělníkům, zemědělcům a náboženským komunitám, které krajinu užívaly a udržovaly.",
+      "raw_seconds": 11.215238095238096,
+      "speech_window_seconds": 11.215238095238096,
+      "tempo": 1.1622008388847767,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Angkor přesahoval sevřenou skupinu kamenných budov. Doklady ukazují rozsáhlou, poměrně řídce zastavěnou a propojenou městskou krajinu.",
+      "raw_seconds": 11.714467120181405,
+      "speech_window_seconds": 11.714467120181405,
+      "tempo": 1.2139344165991093,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Domy, rybníčky, pole, cesty a chrámové areály patřily k celku. Jejich rozmístění se měnilo v čase a prostoru.",
+      "raw_seconds": 9.729160997732427,
+      "speech_window_seconds": 9.729160997732427,
+      "tempo": 1.0082032122002513,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Domácí rybníček přibližoval vodu každodenním činnostem. Malá stavba mohla být významná i vedle obrovské nádrže.",
+      "raw_seconds": 10.193560090702947,
+      "speech_window_seconds": 10.193560090702947,
+      "tempo": 1.0563274705391654,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Pěstování rýže vyžadovalo znalost sezon a půdy. Správa vody znamenala také volit načasování, nejen budovat stavby.",
+      "raw_seconds": 10.425759637188209,
+      "speech_window_seconds": 10.425759637188209,
+      "tempo": 1.0803895997086226,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Pole trpí nedostatkem i přebytkem vody, ale také přítokem v nesprávné fázi růstu.",
+      "raw_seconds": 7.22140589569161,
+      "speech_window_seconds": 7.22140589569161,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Rolníci poznávali místní rozdíly zkušeností. Krajinu tvořilo mnoho rozhodnutí, nejen královské příkazy.",
+      "raw_seconds": 9.241541950113378,
+      "speech_window_seconds": 9.241541950113378,
+      "tempo": 0.9576727409443915,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Velké práce potřebovaly organizaci, lidi, materiál a trvalou péči. Politická moc a úsilí komunit se setkávaly v infrastruktuře.",
+      "raw_seconds": 11.80734693877551,
+      "speech_window_seconds": 11.80734693877551,
+      "tempo": 1.223559268266892,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Oprava mohla být stejně důležitá jako stavba. Odstranit sediment, zpevnit hráz nebo otevřít průchod málokdy vytváří velkolepou památku.",
+      "raw_seconds": 11.42421768707483,
+      "speech_window_seconds": 11.42421768707483,
+      "tempo": 1.183856755137288,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Právě taková práce ale vysvětluje trvání sítě. Činnosti mimo pohlednici mohly podpírat mimořádné panorama.",
+      "raw_seconds": 9.392471655328798,
+      "speech_window_seconds": 9.392471655328798,
+      "tempo": 0.9733131249045386,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Pamatujme i na zmizelé materiály. Dřevo, rostlinná vlákna a zemní povrchy zanechávají jiné stopy než tesaný pískovec.",
+      "raw_seconds": 10.332879818594105,
+      "speech_window_seconds": 10.332879818594105,
+      "tempo": 1.0707647480408398,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Nerovné zachování ovlivňuje představivost. Chrám vypadá osaměle, protože okolní domy už nestojí nad zemí.",
+      "raw_seconds": 9.206712018140589,
+      "speech_window_seconds": 9.206712018140589,
+      "tempo": 0.954063421568973,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Archeologie obnovuje vztahy ze stop. Nepředstírá přesnou znalost každé střechy, práce nebo počtu obyvatel.",
+      "raw_seconds": 9.125442176870749,
+      "speech_window_seconds": 9.125442176870749,
+      "tempo": 0.945641676359663,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Objevuje se bohatší město: obydlené, produktivní, propojené a proměnlivé. Vodní síť patřila k tomuto živému světu.",
+      "raw_seconds": 9.961360544217687,
+      "speech_window_seconds": 9.961360544217687,
+      "tempo": 1.0322653413697085,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "To mění také význam objevu. Angkor nebyl prázdným místem čekajícím na pozornost lidí zvenčí.",
+      "raw_seconds": 8.70748299319728,
+      "speech_window_seconds": 8.70748299319728,
+      "tempo": 0.9023298438546403,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Místní znalosti, náboženská kontinuita, dřívější bádání a moderní výzkum společně patří k poznávání tohoto místa.",
+      "raw_seconds": 10.85532879818594,
+      "speech_window_seconds": 10.85532879818594,
+      "tempo": 1.1249045386721181,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Nová technika rozšiřuje záznam. Nevymazává lidi, kteří tato místa znali dříve nebo o ně stále pečovali.",
+      "raw_seconds": 8.78875283446712,
+      "speech_window_seconds": 8.78875283446712,
+      "tempo": 0.9107515890639503,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Z výšky jsou některé stopy čitelnější. Dlouhé linie vystupují tam, kde dole vidíme jen jednotlivé vyvýšeniny a prohlubně.",
+      "raw_seconds": 10.065850340136054,
+      "speech_window_seconds": 10.065850340136054,
+      "tempo": 1.043093299495964,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Letecké laserové skenování, nazývané lidar, přidalo důležité podrobnosti k mapování širší krajiny Angkoru.",
+      "raw_seconds": 9.996190476190476,
+      "speech_window_seconds": 9.996190476190476,
+      "tempo": 1.035874660745127,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Laser pomáhá modelovat zem mezerami v porostu. Zpracování signálů však nefotografuje všechny předměty pohřbené pod zemí.",
+      "raw_seconds": 10.263219954648527,
+      "speech_window_seconds": 10.263219954648527,
+      "tempo": 1.0635461092900027,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Výsledky ukazují jemné zemní struktury, kanály a sídelní vzory. Jsou vodítky k výzkumu, ne úplným filmem minulosti.",
+      "raw_seconds": 10.611519274376418,
+      "speech_window_seconds": 10.611519274376418,
+      "tempo": 1.0996393030441884,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Stínovaný model terénu zviditelní malé výškové rozdíly. Změna virtuálního světla může odhalit dosud nevýraznou linii.",
+      "raw_seconds": 10.576689342403627,
+      "speech_window_seconds": 10.576689342403627,
+      "tempo": 1.0960299836687697,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "I jasná linie potřebuje výklad. Badatelé porovnávají mapy, terén, nálezy, starší plány a další důkazy.",
+      "raw_seconds": 9.392471655328798,
+      "speech_window_seconds": 9.392471655328798,
+      "tempo": 0.9733131249045386,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Moderní pěšina, starý val a přírodní tvar mohou vypadat podobně. Souvislosti je pomáhají odlišit.",
+      "raw_seconds": 8.55655328798186,
+      "speech_window_seconds": 8.55655328798186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Chronologie zůstává zásadní. Mapa ukáže polohu, výzkum a datování pomohou určit dobu významu.",
+      "raw_seconds": 8.626213151927438,
+      "speech_window_seconds": 8.626213151927438,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Sedimenty nabízejí další pohled. Vrstvy mohou uchovat změny usazování, vodních poměrů nebo narušení, s vlastními omezeními.",
+      "raw_seconds": 11.122358276643991,
+      "speech_window_seconds": 11.122358276643991,
+      "tempo": 1.1525759872169938,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Spojení metod dovoluje důkazům ověřovat se navzájem. Silné vysvětlení propojuje vzory a nezávisí na jediném dramatickém obrazu.",
+      "raw_seconds": 11.284897959183674,
+      "speech_window_seconds": 11.284897959183674,
+      "tempo": 1.1694194776356137,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Rekonstrukce proto musejí být označené. Věrohodná scéna kanálu je ilustrací, nikoli záznamem doložené dávné události.",
+      "raw_seconds": 11.029478458049887,
+      "speech_window_seconds": 11.029478458049887,
+      "tempo": 1.142951135549211,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Cílem je pochopit vztahy: možné cesty vody, místa bydlení a šíření změny napříč sítí.",
+      "raw_seconds": 7.999274376417233,
+      "speech_window_seconds": 7.999274376417233,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "To je důležité při změně vnějších podmínek. Také síť založená na zkušenosti může čelit neznámým tlakům.",
+      "raw_seconds": 9.1718820861678,
+      "speech_window_seconds": 9.1718820861678,
+      "tempo": 0.9504541021935544,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Odejďme na chvíli od kamene a podívejme se na klimatické doklady, také ty mimo Angkor.",
+      "raw_seconds": 6.907936507936508,
+      "speech_window_seconds": 6.907936507936508,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Letokruhy pevninské jihovýchodní Asie ukazují silná sucha a velmi mokrá období ve čtrnáctém a patnáctém století.",
+      "raw_seconds": 9.903310657596371,
+      "speech_window_seconds": 9.903310657596371,
+      "tempo": 1.0262498090773442,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Popisují regionální proměnlivost. Vztah k místním podmínkám a archeologickým změnám je nutné vytvářet opatrně.",
+      "raw_seconds": 10.00780045351474,
+      "speech_window_seconds": 10.00780045351474,
+      "tempo": 1.0370777672036,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Dlouhé sucho snižuje dostupnou vodu. Mění také práci potřebnou k udržení kanálů, polí a sídel.",
+      "raw_seconds": 8.591383219954649,
+      "speech_window_seconds": 8.591383219954649,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Velmi mokré časy přinášejí jiný problém. Rychlý proud nese sediment, rozrušuje hráze a přetěžuje dříve dostačující průchody.",
+      "raw_seconds": 10.95981859410431,
+      "speech_window_seconds": 10.95981859410431,
+      "tempo": 1.135732496798374,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Střídání tlaků komplikuje propojenou síť. Úpravy pro nedostatek nemusejí vyřešit další prudký déšť.",
+      "raw_seconds": 8.835192743764173,
+      "speech_window_seconds": 8.835192743764173,
+      "tempo": 0.9155640148978418,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Složitý systém rozděluje užitek i poruchy. Změna proti proudu se může stát problémem někoho daleko.",
+      "raw_seconds": 8.916462585034013,
+      "speech_window_seconds": 8.916462585034013,
+      "tempo": 0.9239857601071516,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Ne všechno muselo selhat současně. Místní opravy, jiné trasy a nové využití mohly přinášet různé výsledky.",
+      "raw_seconds": 9.822040816326531,
+      "speech_window_seconds": 9.822040816326531,
+      "tempo": 1.0178280638680344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Badatelé zkoumají poškození a úpravy částí sítě. Posloupnost je důležitější než jednoduchý obraz náhlého zhroucení.",
+      "raw_seconds": 10.100680272108843,
+      "speech_window_seconds": 10.100680272108843,
+      "tempo": 1.0467026188713826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Klima je významným směrem výzkumu, ne úplným vysvětlením. Záleží také na institucích, údržbě, osídlení a politice.",
+      "raw_seconds": 10.820498866213152,
+      "speech_window_seconds": 10.820498866213152,
+      "tempo": 1.1212952192966996,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Patnácté století přineslo konflikty a změny politických vztahů. Přesuny moci a činnosti nevysvětlí samotný déšť.",
+      "raw_seconds": 9.613061224489796,
+      "speech_window_seconds": 9.613061224489796,
+      "tempo": 0.9961721476155229,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Rok čtrnáct set třicet jedna se často uvádí v přehledech. Jediné datum nesmí vyprázdnit celý region přes noc.",
+      "raw_seconds": 10.298049886621316,
+      "speech_window_seconds": 10.298049886621316,
+      "tempo": 1.0671554286654212,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Některá místa se měnila nebo slábla, jiná zůstala významná. Angkor Vat pokračoval v náboženské historii po přesunu královského centra.",
+      "raw_seconds": 12.34140589569161,
+      "speech_window_seconds": 12.34140589569161,
+      "tempo": 1.2789021653566435,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Proměna probíhala různými procesy v čase. Poslední bouře, vpád nebo prázdná ulice by důkazy příliš zjednodušily.",
+      "raw_seconds": 10.08907029478458,
+      "speech_window_seconds": 10.08907029478458,
+      "tempo": 1.0454995124129098,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Nerovnoměrný příběh je náročnější a lidštější. Lidé se přizpůsobují, opravují, stěhují a pokračují v praxi za nových podmínek.",
+      "raw_seconds": 11.400997732426303,
+      "speech_window_seconds": 11.400997732426303,
+      "tempo": 1.1814505422203423,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Vodní síť umožňuje takové odpovědi studovat. Propojuje velké tlaky prostředí s rozhodnutími na konkrétních místech.",
+      "raw_seconds": 9.763990929705216,
+      "speech_window_seconds": 9.763990929705216,
+      "tempo": 1.01181253157567,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Varuje i před snadným soudem o dávné technice. Užitečně stavět a udržovat po generace jsou spojené, ale odlišné úspěchy.",
+      "raw_seconds": 10.495419501133787,
+      "speech_window_seconds": 10.495419501133787,
+      "tempo": 1.0876082384594596,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Každé řešení závisí na podmínkách, vědění, práci a zdrojích. Při změně mohou stejné struktury získat nové role.",
+      "raw_seconds": 10.193560090702947,
+      "speech_window_seconds": 10.193560090702947,
+      "tempo": 1.0563274705391654,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Pozdější historie plně patří k Angkoru. Není pouze dramatickým zakončením věku výstavby.",
+      "raw_seconds": 8.161814058956915,
+      "speech_window_seconds": 8.161814058956915,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Voda zůstává součástí péče o Angkor. Déšť, odvodnění, vegetace a stav budov ovlivňují ochranu.",
+      "raw_seconds": 9.044172335600907,
+      "speech_window_seconds": 9.044172335600907,
+      "tempo": 0.937219931150353,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Kanál u návštěvní cesty působí méně velkolepě než tesaná stěna. Správný odtok přesto pomáhá chránit její okolí.",
+      "raw_seconds": 10.042630385487529,
+      "speech_window_seconds": 10.042630385487529,
+      "tempo": 1.0406870865790185,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Ochrana potřebuje pozorování a místní odbornost. Zásah je nutné hodnotit v celé krajině, ne jen podle vzhledu.",
+      "raw_seconds": 9.682721088435374,
+      "speech_window_seconds": 9.682721088435374,
+      "tempo": 1.00339078636636,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Dědictví souvisí s dnešními komunitami, obživou, náboženstvím a turistikou. Týká se současnosti stejně jako minulosti.",
+      "raw_seconds": 10.00780045351474,
+      "speech_window_seconds": 10.00780045351474,
+      "tempo": 1.0370777672036,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Respektující návštěva sleduje povolené cesty a místní rady. Není nutné lézt na křehkou hráz či vstupovat do uzavřené stavby.",
+      "raw_seconds": 10.971428571428572,
+      "speech_window_seconds": 10.971428571428572,
+      "tempo": 1.1369356032568467,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Totéž platí pro filmování. Povolené pohledy, život dospělých a pečlivé ilustrace vysvětlí příběh bez hraní posvátných obřadů.",
+      "raw_seconds": 11.250068027210885,
+      "speech_window_seconds": 11.250068027210885,
+      "tempo": 1.1658101582601952,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Vraťme se k úvodnímu obrazu. Stopa na kameni patří ke světu, kde se voda dotýká architektury, země, práce a paměti.",
+      "raw_seconds": 10.031020408163265,
+      "speech_window_seconds": 10.031020408163265,
+      "tempo": 1.0394839801205455,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Začali jsme věžemi a našli spojení. Vedla k polím, domům, zásobníkům, proměnlivým sezonám a trvající odpovědnosti.",
+      "raw_seconds": 10.309659863945578,
+      "speech_window_seconds": 10.309659863945578,
+      "tempo": 1.068358535123894,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Chrámy zůstávají výjimečné. Jejich velikost získává význam s drobnými činnostmi a širokými vztahy, které je podporovaly.",
+      "raw_seconds": 10.402539682539683,
+      "speech_window_seconds": 10.402539682539683,
+      "tempo": 1.0779833867916768,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Město přežívá v důkazech nerovnoměrně. Kámen je vidět, starý kanál někdy potřebuje trpělivé mapování k objasnění role.",
+      "raw_seconds": 10.425759637188209,
+      "speech_window_seconds": 10.425759637188209,
+      "tempo": 1.0803895997086226,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Společné čtení mění otázku: kromě toho, kdo postavil památku, jak mohla obydlená krajina dál fungovat?",
+      "raw_seconds": 9.47374149659864,
+      "speech_window_seconds": 9.47374149659864,
+      "tempo": 0.9817348701138486,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Zůstávají otázky historie struktur, rozdělení vody a voleb komunit, když se podmínky měnily.",
+      "raw_seconds": 8.266303854875284,
+      "speech_window_seconds": 8.266303854875284,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Budoucí výzkum může odpovědi upřesnit. Ochrana stop umožní pokračovat, místo abychom příběh uzavřeli v nejjednodušší podobě.",
+      "raw_seconds": 11.250068027210885,
+      "speech_window_seconds": 11.250068027210885,
+      "tempo": 1.1658101582601952,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Na rovině se voda stále shromažďuje, pohybuje a zanechává znaky. Známé procesy trvají mezi staletými stavbami.",
+      "raw_seconds": 9.822040816326531,
+      "speech_window_seconds": 9.822040816326531,
+      "tempo": 1.0178280638680344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Úspěch Angkoru je zčásti ve spojeních: sezony a zásob, země a pohybu, posvátných míst a běžných potřeb.",
+      "raw_seconds": 9.520181405895691,
+      "speech_window_seconds": 9.520181405895691,
+      "tempo": 0.98654729594774,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Historie ukazuje infrastrukturu jako trvalý vztah lidí, prostředí a péče, přesahující jednorázové dokončení stavby.",
+      "raw_seconds": 10.832108843537416,
+      "speech_window_seconds": 10.832108843537416,
+      "tempo": 1.1224983257551726,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Podívejme se znovu na vodní stopu v kameni. Malý znak nyní otevírá město a město otevírá celou krajinu.",
+      "raw_seconds": 9.079002267573696,
+      "speech_window_seconds": 9.079002267573696,
+      "tempo": 0.9408292505257715,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1292,
+  "decoded_samples": 31008000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-cs-21m32s.mp3",
+  "flac": "voice-cs-21m32s.flac",
+  "mp3_sha256": "411dfe5ec364f753ff5d1a393d632ee2eace715a83a24511de6ffc5ecffe9065",
+  "flac_sha256": "f6c84ec652a4085b1f9dfb18d001199214bdbfedcdf4520b8a3bc92af2c9d4f9"
+}

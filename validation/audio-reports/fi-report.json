@@ -1,0 +1,1182 @@
+{
+  "locale": "fi",
+  "voice_id": "piper:fi_FI-harri-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1292,
+  "spoken_cues": 129,
+  "closing_silence_seconds": 2,
+  "config_hash": "0453bf166b24c59404bac0536fd5fe113c3dc23dabd55249b1497d012b9f8343",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "Vanhan kiven pinnassa kulkee tumma jälki. Se näyttää vähäpätöiseltä, kunnes ymmärrämme veden auttaneen muovaamaan kokonaisen kaupungin.",
+      "raw_seconds": 8.997732426303855,
+      "speech_window_seconds": 8.997732426303855,
+      "tempo": 0.9324075053164617,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Angkorissa huomaamme ensin tornit. Vielä yllättävämpi rakenne levittäytyy kuitenkin kanavien, penkereiden ja suurten vesialtaiden välille.",
+      "raw_seconds": 9.891700680272109,
+      "speech_window_seconds": 9.891700680272109,
+      "tempo": 1.0250467026188714,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Yhteyksiä seuratessa tuttu kuva muuttuu. Temppeli kuuluu kaupunkiin, ja kaupunki on osa kokonaista valuma-aluetta.",
+      "raw_seconds": 8.440453514739229,
+      "speech_window_seconds": 8.440453514739229,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Kysymys on yksinkertainen: miten elämä järjestetään, kun vettä tulee välillä ylen määrin ja myöhemmin sitä on vaikea löytää?",
+      "raw_seconds": 7.825124716553288,
+      "speech_window_seconds": 7.825124716553288,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Vastaus yhdistää sateen, maaston, viljelyn, uskon, vallan ja arjen huollon. Se valaisee myös Angkorin myöhempiä muutoksia.",
+      "raw_seconds": 9.729160997732427,
+      "speech_window_seconds": 9.729160997732427,
+      "tempo": 1.0082032122002513,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Aloitamme nykyisestä Kambodžasta, Siem Reapin läheltä, Tonle Sapin pohjoispuolelta. Kivimuistomerkit seisovat paljon laajemman asutun maiseman keskellä.",
+      "raw_seconds": 10.983038548752834,
+      "speech_window_seconds": 10.983038548752834,
+      "tempo": 1.1381387097153195,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Angkor oli vuosisatoja khmerien maailman tärkeä keskus. Sen muoto muuttui hallitsijoiden, yhteisöjen ja tavoitteiden mukana.",
+      "raw_seconds": 8.614603174603175,
+      "speech_window_seconds": 8.614603174603175,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Säilyneet temppelit ovat maamerkkejä. Kaupunki tarvitsee myös koteja, viljelyksiä, reittejä, tavaranvaihtoa ja keinoja käsitellä jätteitä.",
+      "raw_seconds": 10.402539682539683,
+      "speech_window_seconds": 10.402539682539683,
+      "tempo": 1.0779833867916768,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Monet arkiset rakennukset tehtiin kiveä heikommin säilyvistä aineista. Kadonneet katot saavat muistomerkit näyttämään harhaanjohtavan yksinäisiltä.",
+      "raw_seconds": 9.102222222222222,
+      "speech_window_seconds": 9.102222222222222,
+      "tempo": 0.9432354634427172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Katso veistetyn portin taakse. Kohonnut maalinja voi olla penger, ja matala painanne voi säilyttää toisen osan tarinaa.",
+      "raw_seconds": 8.568163265306122,
+      "speech_window_seconds": 8.568163265306122,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Näitä muotoja on tutkittava. Pelkkä ulkonäkö ei kerro ikää, toimintaa eikä sitä, miten käyttö muuttui.",
+      "raw_seconds": 8.301133786848073,
+      "speech_window_seconds": 8.301133786848073,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Yhdessä ne paljastavat kysymyksen mittakaavan. Angkorin historia ulottuu paljon yhden kuuluisan temppelin rajojen ulkopuolelle.",
+      "raw_seconds": 8.951292517006802,
+      "speech_window_seconds": 8.951292517006802,
+      "tempo": 0.9275950794825701,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Angkor Wat rakennettiin kahdennentoista vuosisadan alussa, Suryavarman Toisen aikana. Se tarjoaa lähtökohdan laajempaan maisemaan.",
+      "raw_seconds": 9.253151927437642,
+      "speech_window_seconds": 9.253151927437642,
+      "tempo": 0.9588758474028645,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Alkuperäinen omistus Vishnulle ja myöhempi buddhalainen historia muistuttavat myös paikkojen uskonnollisten merkitysten muuttumisesta.",
+      "raw_seconds": 8.417233560090702,
+      "speech_window_seconds": 8.417233560090702,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Temppelin vallihauta voi kuvata järjestettyä pyhää maailmaa ja samalla vaikuttaa veteen, maaperään sekä rakennuksen lähiympäristöön.",
+      "raw_seconds": 9.311201814058958,
+      "speech_window_seconds": 9.311201814058958,
+      "tempo": 0.9648913796952288,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Jätetään tornit hetkeksi. Katsotaan, mistä sade tulee ja minne maan muodot sallivat veden kulkea.",
+      "raw_seconds": 6.8034467120181406,
+      "speech_window_seconds": 6.8034467120181406,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Alueella on selvästi vuodenaikainen monsuuni-ilmasto. Märät ja kuivat kuukaudet luovat samalle seudulle hyvin erilaiset olot.",
+      "raw_seconds": 8.916462585034013,
+      "speech_window_seconds": 8.916462585034013,
+      "tempo": 0.9239857601071516,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Sadekaudella vettä tulee katoille, pelloille, poluille ja puroihin. Ratkaisevia ovat määrä, saapumisnopeus ja paikka.",
+      "raw_seconds": 8.533333333333333,
+      "speech_window_seconds": 8.533333333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Rankkasade voi ylittää kanavan kapasiteetin, vaikka myöhemmin kärsitään puutteesta. Runsaus ja niukkuus riippuvat myös ajankohdasta.",
+      "raw_seconds": 9.311201814058958,
+      "speech_window_seconds": 9.311201814058958,
+      "tempo": 0.9648913796952288,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Kuivan kauden edetessä varastot ja luotettava saatavuus korostuvat. Hyödyllisen järjestelmän on vastattava kumpaankin kauteen.",
+      "raw_seconds": 8.846802721088435,
+      "speech_window_seconds": 8.846802721088435,
+      "tempo": 0.9167671213563146,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Angkorin pohjoiset ylängöt muovaavat tasankoa ruokkivia valuma-alueita. Vesi seuraa painovoimaa, mutta ihmiset voivat muuttaa sen reittiä.",
+      "raw_seconds": 9.914920634920636,
+      "speech_window_seconds": 9.914920634920636,
+      "tempo": 1.0274529155358172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Maasto antaa pääsuunnan, mutta pienet korkeuserot merkitsevät paljon. Loiva rinne voi ratkaista, mikä pelto saa vettä.",
+      "raw_seconds": 9.044172335600907,
+      "speech_window_seconds": 9.044172335600907,
+      "tempo": 0.937219931150353,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Maa on siis osa infrastruktuuria. Kanava toimii vain suhteessa ympärillä ja alempana sijaitseviin alueisiin.",
+      "raw_seconds": 8.02249433106576,
+      "speech_window_seconds": 8.02249433106576,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Etelässä Tonle Sap kuuluu alueen suureen vesimaailmaan. Järven kausittainen kasvu ja kutistuminen liittyvät laajempaan jokiverkostoon.",
+      "raw_seconds": 9.845260770975056,
+      "speech_window_seconds": 9.845260770975056,
+      "tempo": 1.02023427678498,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Tunnettu virtauksen kausittainen kääntyminen kuuluu tähän suureen mittakaavaan. Se ei kuvaa automaattisesti Angkorin jokaista paikalliskanavaa.",
+      "raw_seconds": 9.195102040816327,
+      "speech_window_seconds": 9.195102040816327,
+      "tempo": 0.9528603151105002,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Järvi, tasanko, purot, sade ja pohjavesi vaikuttavat eri mittakaavoissa. Yksi karttanuoli ei esitä kaikkia yhteyksiä.",
+      "raw_seconds": 9.85687074829932,
+      "speech_window_seconds": 9.85687074829932,
+      "tempo": 1.021437383243453,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Asukkaille suhteet olivat käytännöllisiä: veden etäisyys, ylityspaikan kunto ja viljelyn ajankohta vaikuttivat jokaiseen päivään.",
+      "raw_seconds": 9.543401360544218,
+      "speech_window_seconds": 9.543401360544218,
+      "tempo": 0.9889535088646858,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Haaste ei ollut vain kerätä mahdollisimman paljon. Vettä piti johtaa, pidättää ja vapauttaa muuttuvien tarpeiden mukaan.",
+      "raw_seconds": 8.695873015873016,
+      "speech_window_seconds": 8.695873015873016,
+      "tempo": 0.9011267373961673,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Välillä virtausta piti hidastaa. Toisaalla ylimääräinen vesi tarvitsi poistumistien ennen kuin se vahingoitti peltoja tai rakennuksia.",
+      "raw_seconds": 9.137052154195011,
+      "speech_window_seconds": 9.137052154195011,
+      "tempo": 0.9468447828181359,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Varastointi ja kuivatus kuuluvat samaan tarinaan. Maisema tarvitsee paikkoja veden viipymiselle ja reittejä sen poistumiselle.",
+      "raw_seconds": 8.533333333333333,
+      "speech_window_seconds": 8.533333333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Temppelien ulkopuoliset muodot saavat merkityksen. Pitkät penkereet ja laajat altaat kertovat työstä vuodenaikojen erojen kanssa.",
+      "raw_seconds": 8.753922902494331,
+      "speech_window_seconds": 8.753922902494331,
+      "tempo": 0.9071422696885317,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Seuraavaksi tutkimme suuria vesivarastoja olettamatta, että jokaisella oli sama tarkoitus ja historia.",
+      "raw_seconds": 7.082086167800454,
+      "speech_window_seconds": 7.082086167800454,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Angkorin suuria suorakulmaisia altaita kutsutaan barayksi. Maapenkereet loivat loivaan maisemaan laajoja tiloja veden varastoimiseen.",
+      "raw_seconds": 9.531791383219955,
+      "speech_window_seconds": 9.531791383219955,
+      "tempo": 0.9877504024062129,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Läntinen Baray on yhä vaikuttava esimerkki. Ylhäältä sen pitkä suorakulmio erottuu ympäristön pienemmistä muodoista.",
+      "raw_seconds": 8.533333333333333,
+      "speech_window_seconds": 8.533333333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Itäinen Baray säilyttää toisen suuren ääriviivan. Nykyinen näkymä eroaa täydestä altaasta ja muistuttaa maiseman jatkuvasta muutoksesta.",
+      "raw_seconds": 9.798820861678005,
+      "speech_window_seconds": 9.798820861678005,
+      "tempo": 1.0154218509510886,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Muut altaat kuuluvat eri kehitysvaiheisiin. Verkosto koottiin ajan kuluessa eikä toteutettu kerralla yhtenä valmiina suunnitelmana.",
+      "raw_seconds": 9.891700680272109,
+      "speech_window_seconds": 9.891700680272109,
+      "tempo": 1.0250467026188714,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Koko vaikuttaa, mutta ei selitä toimintaa. On kysyttävä, mistä vesi tuli, miten se liikkui ja minne poistui.",
+      "raw_seconds": 8.02249433106576,
+      "speech_window_seconds": 8.02249433106576,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Penkereen täytyy pidättää vettä ja kestää eroosiota. Korkeus, aineet ja kunto määräävät altaan todellisia mahdollisuuksia.",
+      "raw_seconds": 8.916462585034013,
+      "speech_window_seconds": 8.916462585034013,
+      "tempo": 0.9239857601071516,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Tulo- ja poistoaukot liittävät altaan verkostoon. Niiden sijainti voi olla yhtä tärkeä kuin valokuvassa näkyvä suuri muoto.",
+      "raw_seconds": 7.9760544217687075,
+      "speech_window_seconds": 7.9760544217687075,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Sedimentti lisää vaikeutta. Vesi kuljettaa ainesta, jonka kertyminen muuttaa vähitellen syvyyttä tai kanavan kapasiteettia.",
+      "raw_seconds": 8.602993197278911,
+      "speech_window_seconds": 8.602993197278911,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Huolto kuuluu siksi koko rakennelman elämään. Yhden kauden toimiva rakenne voi vaatia puhdistusta tai korjausta ennen seuraavaa.",
+      "raw_seconds": 8.649433106575964,
+      "speech_window_seconds": 8.649433106575964,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Altaat kuuluivat myös temppelien ja kuningasvallan maailmaan. Nykyaikainen tekninen kaavio ei kata niiden kaikkia merkityksiä.",
+      "raw_seconds": 9.044172335600907,
+      "speech_window_seconds": 9.044172335600907,
+      "tempo": 0.937219931150353,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Vesi palveli käytännön tarpeita ja kantoi uskonnollista symboliikkaa. Roolit limittyivät ja vaihtelivat paikan sekä ajan mukaan.",
+      "raw_seconds": 8.974512471655329,
+      "speech_window_seconds": 8.974512471655329,
+      "tempo": 0.9300012923995159,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Tiettyjen baray-altaiden kastelukäytöstä keskustellaan. Vastaus tarvitsee todisteita juuri kyseisestä rakenteesta ja sen yhteyksistä.",
+      "raw_seconds": 9.93814058956916,
+      "speech_window_seconds": 9.93814058956916,
+      "tempo": 1.0298591284527627,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Laaja allas ei todista kaikkien lähipeltojen saaneen sen vettä. Korkeuksien, kanavien, poistojen ja ajoitusten on sovittava yhteen.",
+      "raw_seconds": 10.193560090702947,
+      "speech_window_seconds": 10.193560090702947,
+      "tempo": 1.0563274705391654,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Nykyinen vedenpinta ei kuvaa kaikkia aiempia vuosisatoja. Liettyminen, muutokset, korjaukset ja uudet käyttötavat muokkaavat altaita.",
+      "raw_seconds": 10.00780045351474,
+      "speech_window_seconds": 10.00780045351474,
+      "tempo": 1.0370777672036,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Ajatellaan baray-altaat suuremman kokonaisuuden osina. Merkitys selvenee, kun seuraamme niitä yhdistäviä linjoja.",
+      "raw_seconds": 8.475283446712018,
+      "speech_window_seconds": 8.475283446712018,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Linjat johtavat puroihin, kanaviin, penkereisiin, ylityksiin ja haaroihin asutun tasangon eri puolilla.",
+      "raw_seconds": 7.918004535147392,
+      "speech_window_seconds": 7.918004535147392,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Kanava tarjoaa vedelle suositun reitin. Virtaus riippuu kaltevuudesta, syvyydestä, leveydestä, karheudesta ja yläpuolelta tulevasta määrästä.",
+      "raw_seconds": 10.379319727891156,
+      "speech_window_seconds": 10.379319727891156,
+      "tempo": 1.075577173874731,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Painovoima antaa liikkeen. Ihmistyö muuttaa reittejä, jakaa virtauksia ja yhdistää paikkoja, jotka muuten saisivat eri määrät vettä.",
+      "raw_seconds": 9.822040816326531,
+      "speech_window_seconds": 9.822040816326531,
+      "tempo": 1.0178280638680344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Haarassa pienellä muutoksella on kaukaisia seurauksia. Enemmän vettä yhteen suuntaan voi tarkoittaa vähemmän toiseen.",
+      "raw_seconds": 7.732244897959184,
+      "speech_window_seconds": 7.732244897959184,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Korotettu penger voi kantaa myös tietä märän maan yli. Liikenne ja vesien hallinta jakavat silloin saman rakenteen.",
+      "raw_seconds": 8.55655328798186,
+      "speech_window_seconds": 8.55655328798186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Ylityksessä tarvitaan tasapainoa. Tien on jatkuttava ja vedelle jäätävä tilaa kulkea rakennetta heikentämättä.",
+      "raw_seconds": 7.465215419501134,
+      "speech_window_seconds": 7.465215419501134,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Järjestelmä liikuttaa ja varastoi vettä. Suurimpien altaiden katselu yksin sivuuttaa monta arkea ylläpitänyttä yhteyttä.",
+      "raw_seconds": 9.009342403628118,
+      "speech_window_seconds": 9.009342403628118,
+      "tempo": 0.9336106117749344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Luonnonpurot kuuluivat myös ympäristöön. Ihmiset muokkasivat vesireittejä maisemassa, jolla oli jo omat valumakuvionsa.",
+      "raw_seconds": 8.904852607709751,
+      "speech_window_seconds": 8.904852607709751,
+      "tempo": 0.9227826536486788,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Kartan on erotettava alkuperät: kaivetut, korotetut, käännetyt linjat ja vanhempia maamuotoja seuraavat reitit.",
+      "raw_seconds": 7.767074829931973,
+      "speech_window_seconds": 7.767074829931973,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Verkosto kasvaa yhdistämällä aiempia osia. Lisäys ratkaisee paikallisen pulman ja voi muuttaa oloja toisaalla.",
+      "raw_seconds": 7.569705215419501,
+      "speech_window_seconds": 7.569705215419501,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Sukupolvet lisäävät monimutkaisuutta. On tiedettävä, mitkä osat olivat olemassa yhtä aikaa, eikä pidettävä kaikkia jälkiä samanaikaisina.",
+      "raw_seconds": 10.00780045351474,
+      "speech_window_seconds": 10.00780045351474,
+      "tempo": 1.0370777672036,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Hylätty kanava myöhemmän vieressä ei todista yhteiskäyttöä. Arkeologisen ajan on pysyttävä kartalla näkyvissä.",
+      "raw_seconds": 7.743854875283446,
+      "speech_window_seconds": 7.743854875283446,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Siksi kaivaukset ja ajoitus täydentävät ilmakuvia. Kaunis ääriviiva tarvitsee historian ennen kuin siitä tulee selitys.",
+      "raw_seconds": 7.9760544217687075,
+      "speech_window_seconds": 7.9760544217687075,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Kuvittele pieni puro sateen jälkeen. Se leviää altaaseen, ja myöhemmin kapea kulku kokoaa virtauksen uudelleen.",
+      "raw_seconds": 8.277913832199546,
+      "speech_window_seconds": 8.277913832199546,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Sama vesi virtaa rauhallisesti tai voimalla reitin mukaan. Heikko penger tai tukos vaikuttaa kaukana alajuoksulla.",
+      "raw_seconds": 7.500045351473923,
+      "speech_window_seconds": 7.500045351473923,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Yksi näkymä tornista ei paljasta kaikkea. Kaupunkia on luettava suurina etäisyyksinä ja pieninä yksityiskohtina.",
+      "raw_seconds": 8.765532879818593,
+      "speech_window_seconds": 8.765532879818593,
+      "tempo": 0.9083453761470045,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Jokainen linja palautuu ihmisiin: perheisiin, työntekijöihin, viljelijöihin ja uskonnollisiin yhteisöihin, jotka käyttivät ja hoitivat maisemaa.",
+      "raw_seconds": 10.704399092970522,
+      "speech_window_seconds": 10.704399092970522,
+      "tempo": 1.1092641547119713,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Angkor oli enemmän kuin tiivis kivirakennusten keskus. Todisteet näyttävät laajan, melko väljästi rakennetun ja yhdistyneen kaupunkimaiseman.",
+      "raw_seconds": 10.85532879818594,
+      "speech_window_seconds": 10.85532879818594,
+      "tempo": 1.1249045386721181,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Kodit, lammet, viljelykset, tiet ja temppelialueet kuuluivat kuvioon. Niiden sijoittuminen vaihteli paikan ja ajan mukaan.",
+      "raw_seconds": 8.962902494331066,
+      "speech_window_seconds": 8.962902494331066,
+      "tempo": 0.9287981859410431,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Kotitalouden lampi toi veden lähelle päivittäisiä töitä. Pieni rakenne saattoi olla tärkeä suurenkin varaston vieressä.",
+      "raw_seconds": 7.743854875283446,
+      "speech_window_seconds": 7.743854875283446,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Riisinviljely vaati vuodenaikojen ja maan tuntemusta. Veden hallinta oli myös ajoituksen valintaa rakentamisen ohella.",
+      "raw_seconds": 8.115374149659864,
+      "speech_window_seconds": 8.115374149659864,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Pelto kärsii liian vähästä tai runsaasta vedestä, tai veden saapumisesta väärässä kasvuvaiheessa.",
+      "raw_seconds": 6.698956916099773,
+      "speech_window_seconds": 6.698956916099773,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Viljelijät oppivat paikalliset erot kokemuksesta. Maisemaa muovasi moni päätös, eivät vain kuninkaiden käskyt.",
+      "raw_seconds": 8.208253968253969,
+      "speech_window_seconds": 8.208253968253969,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Suuret työt tarvitsivat järjestämistä, työvoimaa, aineita ja jatkuvaa huomiota. Poliittinen valta ja yhteisöjen ponnistukset kohtasivat infrastruktuurissa.",
+      "raw_seconds": 10.994648526077098,
+      "speech_window_seconds": 10.994648526077098,
+      "tempo": 1.1393418161737925,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Korjaaminen saattoi olla yhtä tärkeää kuin rakentaminen. Lietteen poisto, penkereen vahvistus ja väylän avaus luovat harvoin näyttävän muistomerkin.",
+      "raw_seconds": 10.031020408163265,
+      "speech_window_seconds": 10.031020408163265,
+      "tempo": 1.0394839801205455,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Ne kuitenkin selittävät verkoston kestävyyttä. Postikortista puuttuva työ saattoi tukea poikkeuksellista tornien siluettia.",
+      "raw_seconds": 7.883174603174603,
+      "speech_window_seconds": 7.883174603174603,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Muistetaan kadonneet aineet. Puu, kasvikuidut ja maapinnat jättävät erilaisen aineiston kuin veistetty hiekkakivi.",
+      "raw_seconds": 8.126984126984127,
+      "speech_window_seconds": 8.126984126984127,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Epätasainen säilyminen muokkaa mielikuvia. Temppeli näyttää yksinäiseltä, koska ympäröivät kodit eivät enää seiso maan päällä.",
+      "raw_seconds": 8.962902494331066,
+      "speech_window_seconds": 8.962902494331066,
+      "tempo": 0.9287981859410431,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Arkeologia kokoaa suhteita jäljistä väittämättä tuntevansa jokaista kattoa, ammattia tai väkilukua täsmälleen.",
+      "raw_seconds": 8.55655328798186,
+      "speech_window_seconds": 8.55655328798186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Esiin tulee rikkaampi kaupunki: asuttu, tuottava, yhdistynyt ja muuttuva. Vesiverkosto kuului tähän elävään maailmaan.",
+      "raw_seconds": 9.671111111111111,
+      "speech_window_seconds": 9.671111111111111,
+      "tempo": 1.002187679907887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Myös löytämisen merkitys muuttuu. Angkor ei ollut pelkkä tyhjä paikka, joka odotti ulkopuolisten huomiota.",
+      "raw_seconds": 7.63936507936508,
+      "speech_window_seconds": 7.63936507936508,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Paikallinen tieto, uskonnon jatkuminen, aiempi tutkimus ja nykyinen tiede kuuluvat kaikki paikan ymmärtämisen historiaan.",
+      "raw_seconds": 8.161814058956915,
+      "speech_window_seconds": 8.161814058956915,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Uusi tekniikka laajentaa tallennusta. Se ei poista ihmisiä, jotka tunsivat paikat ennestään tai jatkoivat niiden hoitoa.",
+      "raw_seconds": 8.78875283446712,
+      "speech_window_seconds": 8.78875283446712,
+      "tempo": 0.9107515890639503,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Ilmasta jotkin jäljet erottuvat paremmin. Pitkiä linjoja näkyy siellä, missä maassa huomaa vain erillisiä kumpuja ja painanteita.",
+      "raw_seconds": 9.369251700680271,
+      "speech_window_seconds": 9.369251700680271,
+      "tempo": 0.9709069119875928,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Ilmasta tehty laserkeilaus on lisännyt tärkeitä yksityiskohtia laajan Angkorin kartoitukseen.",
+      "raw_seconds": 6.106848072562358,
+      "speech_window_seconds": 6.106848072562358,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Laser auttaa mallintamaan maata kasvillisuuden aukoista. Signaalien käsittely ei valokuvaa jokaista haudattua esinettä.",
+      "raw_seconds": 8.916462585034013,
+      "speech_window_seconds": 8.916462585034013,
+      "tempo": 0.9239857601071516,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Tulokset paljastavat matalia maavalleja, kanavia ja asutuksen kuvioita. Ne ovat tutkimusvihjeitä, eivät täydellinen elokuva menneisyydestä.",
+      "raw_seconds": 10.704399092970522,
+      "speech_window_seconds": 10.704399092970522,
+      "tempo": 1.1092641547119713,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Varjostettu maastomalli näyttää pieniä korkeuseroja. Virtuaalivalon muuttaminen voi paljastaa aiemmin heikosti näkyneen linjan.",
+      "raw_seconds": 8.730702947845804,
+      "speech_window_seconds": 8.730702947845804,
+      "tempo": 0.904736056771586,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Selkeäkin linja vaatii tulkintaa. Tutkijat vertaavat karttoja, maastohavaintoja, kaivausaineistoa, vanhoja suunnitelmia ja muita todisteita.",
+      "raw_seconds": 10.85532879818594,
+      "speech_window_seconds": 10.85532879818594,
+      "tempo": 1.1249045386721181,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Uusi polku, vanha penger ja luonnonmuoto voivat näyttää samanlaisilta. Asiayhteys auttaa erottamaan ne.",
+      "raw_seconds": 8.103764172335602,
+      "speech_window_seconds": 8.103764172335602,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Ajoitus pysyy tärkeänä. Kartta kertoo sijainnin, kaivaukset ja ajoitus auttavat selvittämään merkityksen ajankohdan.",
+      "raw_seconds": 8.730702947845804,
+      "speech_window_seconds": 8.730702947845804,
+      "tempo": 0.904736056771586,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Sedimentit tarjoavat toisen näkymän. Kerrokset voivat tallentaa muutoksia kasautumisessa, vesissä tai häiriöissä, omine rajoineen.",
+      "raw_seconds": 9.93814058956916,
+      "speech_window_seconds": 9.93814058956916,
+      "tempo": 1.0298591284527627,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Menetelmien yhdistäminen tarkistaa todisteita ristiin. Vahva selitys yhdistää kuvioita eikä nojaa yhteen dramaattiseen kuvaan.",
+      "raw_seconds": 8.881632653061224,
+      "speech_window_seconds": 8.881632653061224,
+      "tempo": 0.9203764407317331,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Siksi rekonstruktiot pitää tunnistaa. Uskottava kanavakuva on kuvitusta, ei dokumentoidun muinaisen tapahtuman tallenne.",
+      "raw_seconds": 8.823582766439909,
+      "speech_window_seconds": 8.823582766439909,
+      "tempo": 0.9143609084393688,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Tavoite on ymmärtää suhteita: mahdolliset vesireitit, asumisen paikat ja muutoksen eteneminen verkostossa.",
+      "raw_seconds": 8.277913832199546,
+      "speech_window_seconds": 8.277913832199546,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Tämä korostuu ulkoisten olojen muuttuessa. Kokemuksella rakennettu verkostokin voi kohdata tuntemattomia paineita.",
+      "raw_seconds": 7.349115646258503,
+      "speech_window_seconds": 7.349115646258503,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Jätetään kivi hetkeksi ja tarkastellaan ilmastotodisteita, myös Angkorin ulkopuolelta tulevia aineistoja.",
+      "raw_seconds": 7.012426303854875,
+      "speech_window_seconds": 7.012426303854875,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Kaakkois-Aasian mantereen vuosirenkaat osoittavat ankaria kuivuuksia ja hyvin märkiä jaksoja osissa neljättätoista ja viidettätoista vuosisataa.",
+      "raw_seconds": 9.659501133786849,
+      "speech_window_seconds": 9.659501133786849,
+      "tempo": 1.0009845734494143,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Ne kuvaavat alueellista vaihtelua. Yhteys paikallisiin oloihin ja arkeologisiin muutoksiin on muodostettava varovasti.",
+      "raw_seconds": 8.835192743764173,
+      "speech_window_seconds": 8.835192743764173,
+      "tempo": 0.9155640148978418,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Pitkä kuivuus vähentää saatavaa vettä. Se muuttaa myös työtä, jolla kanavat, pellot ja asutus pidetään toimivina.",
+      "raw_seconds": 8.347573696145124,
+      "speech_window_seconds": 8.347573696145124,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Hyvin märät jaksot tuovat toisen haasteen. Nopeat virrat kuljettavat sedimenttiä, syövyttävät penkereitä ja ylittävät aiemmin riittävien aukkojen kapasiteetin.",
+      "raw_seconds": 10.7740589569161,
+      "speech_window_seconds": 10.7740589569161,
+      "tempo": 1.1164827934628083,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Vaihtelevat paineet vaikeuttavat yhdistynyttä verkostoa. Niukkuutta helpottava muutos ei välttämättä ratkaise seuraavaa rankkasadetta.",
+      "raw_seconds": 8.986122448979591,
+      "speech_window_seconds": 8.986122448979591,
+      "tempo": 0.9312043988579887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Monimutkainen järjestelmä jakaa hyötyjä ja häiriöitä. Yläjuoksun muutos voi olla kaukana asuvan ihmisen ongelma.",
+      "raw_seconds": 8.301133786848073,
+      "speech_window_seconds": 8.301133786848073,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Kaiken ei tarvinnut pettää yhtä aikaa. Paikalliset korjaukset, uudet reitit ja muut käyttötavat saattoivat tuottaa erilaisia tuloksia.",
+      "raw_seconds": 9.613061224489796,
+      "speech_window_seconds": 9.613061224489796,
+      "tempo": 0.9961721476155229,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Tutkijat selvittävät verkoston osien vaurioita ja muutoksia. Tapahtumien järjestys merkitsee enemmän kuin yksinkertainen äkillisen romahduksen kuva.",
+      "raw_seconds": 10.12390022675737,
+      "speech_window_seconds": 10.12390022675737,
+      "tempo": 1.0491088317883284,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Ilmasto on tärkeä tutkimussuunta, ei täydellinen selitys. Myös instituutiot, huolto, asutus ja politiikka vaikuttavat.",
+      "raw_seconds": 9.253151927437642,
+      "speech_window_seconds": 9.253151927437642,
+      "tempo": 0.9588758474028645,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Viidennellätoista vuosisadalla oli konflikteja ja poliittisten suhteiden muutoksia. Vallan ja toiminnan siirtymiä ei selitä pelkkä sade.",
+      "raw_seconds": 9.508571428571429,
+      "speech_window_seconds": 9.508571428571429,
+      "tempo": 0.9853441894892672,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Vuosi tuhat neljäsataa kolmekymmentäyksi esiintyy monissa tiivistelmissä. Yksi vuosiluku ei saa tyhjentää kokonaista seutua yhdessä yössä.",
+      "raw_seconds": 10.460589569160998,
+      "speech_window_seconds": 10.460589569160998,
+      "tempo": 1.0839989190840411,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Jotkin paikat muuttuivat tai menettivät merkitystä, toiset pysyivät tärkeinä. Angkor Watin uskonnollinen historia jatkui kuninkaallisen keskuksen siirryttyä.",
+      "raw_seconds": 10.518639455782314,
+      "speech_window_seconds": 10.518639455782314,
+      "tempo": 1.0900144513764054,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Muutos tapahtui monina prosesseina ajan kuluessa. Viimeinen myrsky, hyökkäys tai autio katu yksinkertaistaisi näyttöä liikaa.",
+      "raw_seconds": 9.334421768707482,
+      "speech_window_seconds": 9.334421768707482,
+      "tempo": 0.9672975926121743,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Epätasainen tarina on vaativampi ja inhimillisempi. Ihmiset sopeutuvat, korjaavat, muuttavat ja jatkavat tapoja uusissa oloissa.",
+      "raw_seconds": 9.496961451247165,
+      "speech_window_seconds": 9.496961451247165,
+      "tempo": 0.9841410830307943,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Vesiverkosto auttaa tutkimaan näitä vastauksia. Se liittää suuret ympäristöpaineet tiettyjen paikkojen päätöksiin.",
+      "raw_seconds": 8.034104308390022,
+      "speech_window_seconds": 8.034104308390022,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Se varoittaa myös helpoista arvioista. Hyödyllisen järjestelmän rakentaminen ja sen ylläpito sukupolvia ovat liittyviä mutta eri saavutuksia.",
+      "raw_seconds": 9.763990929705216,
+      "speech_window_seconds": 9.763990929705216,
+      "tempo": 1.01181253157567,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Ratkaisut riippuvat oloista, tiedosta, työstä ja resursseista. Niiden muuttuessa samat rakenteet voivat saada uusia tehtäviä.",
+      "raw_seconds": 9.496961451247165,
+      "speech_window_seconds": 9.496961451247165,
+      "tempo": 0.9841410830307943,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Myöhempi historia kuuluu täysin Angkoriin. Se ei ole vain rakennuskauden dramaattinen loppu.",
+      "raw_seconds": 6.280997732426304,
+      "speech_window_seconds": 6.280997732426304,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Vesi on yhä osa Angkorin hoitoa. Sade, kuivatus, kasvillisuus ja rakenteiden kunto vaikuttavat suojeluun.",
+      "raw_seconds": 7.9412244897959186,
+      "speech_window_seconds": 7.9412244897959186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Kanava näyttää veistettyä seinää vaatimattomammalta. Sopiva veden kulku voi silti suojella seinän ympäristöä.",
+      "raw_seconds": 7.9760544217687075,
+      "speech_window_seconds": 7.9760544217687075,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Suojelu vaatii havainnointia ja paikallista asiantuntemusta. Toimi on arvioitava koko maisemassa eikä vain ulkonäön perusteella.",
+      "raw_seconds": 9.102222222222222,
+      "speech_window_seconds": 9.102222222222222,
+      "tempo": 0.9432354634427172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Perintö liittyy nykyisiin yhteisöihin, toimeentuloon, uskontoon ja matkailuun. Se koskee nykyhetkeä yhtä lailla kuin mennyttä.",
+      "raw_seconds": 8.428843537414966,
+      "speech_window_seconds": 8.428843537414966,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Kunnioittava käynti seuraa sallittuja reittejä ja paikallisia neuvoja. Hauraalle penkereelle tai suljettuun rakennukseen ei tarvitse mennä.",
+      "raw_seconds": 10.12390022675737,
+      "speech_window_seconds": 10.12390022675737,
+      "tempo": 1.0491088317883284,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Sama koskee kuvaamista. Sallitut näkymät, aikuisten arki ja huolellinen kuvitus selittävät ilman pyhien tapojen lavastamista.",
+      "raw_seconds": 9.496961451247165,
+      "speech_window_seconds": 9.496961451247165,
+      "tempo": 0.9841410830307943,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Palataan alun kuvaan. Kiven jälki kuuluu maailmaan, jossa vesi koskettaa arkkitehtuuria, maata, työtä ja muistia.",
+      "raw_seconds": 8.858412698412698,
+      "speech_window_seconds": 8.858412698412698,
+      "tempo": 0.9179702278147873,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Aloitimme torneista ja löysimme yhteydet: pellot, kodit, altaat, muuttuvat kaudet ja jatkuvat vastuut.",
+      "raw_seconds": 7.883174603174603,
+      "speech_window_seconds": 7.883174603174603,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Temppelit ovat edelleen poikkeuksellisia. Koko saa merkitystä myös pienistä teoista ja laajoista suhteista niiden taustalla.",
+      "raw_seconds": 8.55655328798186,
+      "speech_window_seconds": 8.55655328798186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Kaupunki säilyy jäljissä epätasaisesti. Kivi näkyy, vanha kanava saattaa vaatia kärsivällistä kartoitusta ennen roolinsa paljastumista.",
+      "raw_seconds": 9.369251700680271,
+      "speech_window_seconds": 9.369251700680271,
+      "tempo": 0.9709069119875928,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Molempien lukeminen muuttaa kysymystä: kuka rakensi muistomerkin, mutta myös miten asuttu maisema saattoi pysyä toimivana?",
+      "raw_seconds": 7.918004535147392,
+      "speech_window_seconds": 7.918004535147392,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Avoimia kysymyksiä jää rakenteiden historiasta, veden jaosta ja yhteisöjen valinnoista olojen muuttuessa.",
+      "raw_seconds": 8.02249433106576,
+      "speech_window_seconds": 8.02249433106576,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Tuleva tutkimus voi tarkentaa vastauksia. Jälkien suojaaminen jatkaa työtä lukitsematta tarinaa sen yksinkertaisimpaan muotoon.",
+      "raw_seconds": 8.695873015873016,
+      "speech_window_seconds": 8.695873015873016,
+      "tempo": 0.9011267373961673,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Tasangolla vesi yhä kerääntyy, liikkuu ja jättää merkkejä. Tutut prosessit jatkuvat jopa vuosisatoja vanhojen rakenteiden lomassa.",
+      "raw_seconds": 9.636281179138322,
+      "speech_window_seconds": 9.636281179138322,
+      "tempo": 0.9985783605324686,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Angkorin saavutus on osaksi yhteyksissä: kausi ja varasto, maa ja liike, pyhät paikat ja arjen tarpeet.",
+      "raw_seconds": 7.616145124716553,
+      "speech_window_seconds": 7.616145124716553,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Historia näyttää infrastruktuurin jatkuvana suhteena ihmisten, ympäristön ja hoidon välillä, ei vain kerran valmistuneena rakenteena.",
+      "raw_seconds": 8.800362811791382,
+      "speech_window_seconds": 8.800362811791382,
+      "tempo": 0.911954695522423,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Katso vielä veden rajaa kivessä. Pieni jälki avaa nyt kaupungin, ja kaupunki avaa kokonaisen maiseman.",
+      "raw_seconds": 7.952834467120182,
+      "speech_window_seconds": 7.952834467120182,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1292,
+  "decoded_samples": 31008000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-fi-21m32s.mp3",
+  "flac": "voice-fi-21m32s.flac",
+  "mp3_sha256": "69d4b7e43d83f3ff61e8e6e5c45075fc21e6baabbabaefce5a7079e0887c661e",
+  "flac_sha256": "bbe11aeebe1055b019da34188b6c5a0ea970afaefd54b6c784bc6af273dba10b"
+}

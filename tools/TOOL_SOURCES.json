@@ -1,0 +1,47 @@
+{
+  "repository": "https://github.com/seotro95/seotro",
+  "melo_release": "https://github.com/seotro95/seotro/releases/tag/melo-viet-studio-1.3.1-txt-srt-41595029816",
+  "hmong_release": "https://github.com/seotro95/seotro/releases/tag/voice-studio-hmong-1.6.6",
+  "hmong_source_commit": "061430d958b8d5fc14d04209c6f0cd20492382c2",
+  "runtime": "Python backends on Linux; Windows EXE not run",
+  "edge_tts_version": "7.3.1",
+  "voice_selection_file": "VOICE_PROFILES.json",
+  "source_files": [
+    {
+      "path": "/workspace/restored-mustang/work/melo-source/fast_backend.py",
+      "sha256": "75dc8615ceca743b1c4579a0591966538cc2a25802103c248b433eccdaa20cdd"
+    },
+    {
+      "path": "/workspace/restored-mustang/work/melo-source/multilingual_backend.py",
+      "sha256": "9eb33087d5664ed835bf4764b64002dbc905827903fa64031c18ca56f6b215e3"
+    },
+    {
+      "path": "/workspace/restored-mustang/work/melo-source/online_backend.py",
+      "sha256": "bd21a00f93124a4dcc27850c42817bd4823445d4d44882d26cd1503fe2ab568b"
+    },
+    {
+      "path": "/workspace/restored-mustang/work/melo-source/fast_catalog.json",
+      "sha256": "2b77b8c83c9341e7e4ce2774599221a971ae57852690d7977d20bdd64368fdc6"
+    },
+    {
+      "path": "/workspace/restored-mustang/work/melo-source/multi_catalog.json",
+      "sha256": "fb7e5c82e180e24f4934c8e7f2345958d0797fd1e4713c95e24ec98f4034c68d"
+    },
+    {
+      "path": "/workspace/restored-mustang/work/episode-005-atacama/hmong-1.6.6/hmong_native.py",
+      "sha256": "34b939797b058ae6b7a6e98d5026c9f4872dcf21af528478b37c8ac06471d30c"
+    },
+    {
+      "path": "/workspace/restored-mustang/work/episode-005-atacama/hmong-1.6.6/hmong_native_models.py",
+      "sha256": "d64822f315db245c8823804aca9436448203719c898d2e4380aa8e4bd3cc6695"
+    },
+    {
+      "path": "/workspace/restored-mustang/work/episode-005-atacama/hmong-1.6.6/assets/hmong/female-3.wav",
+      "sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17"
+    }
+  ],
+  "episode": "085-angkor",
+  "target_seconds": 1292,
+  "gender_selection": "16 male voices; White Hmong female-3 exception",
+  "translation_preparation": "Assistant-authored separate localizations of the same 129 English cue meanings; no full native-speaker review."
+}

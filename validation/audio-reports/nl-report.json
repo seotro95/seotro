@@ -1,0 +1,1182 @@
+{
+  "locale": "nl",
+  "voice_id": "piper:nl_NL-ronnie-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1292,
+  "spoken_cues": 129,
+  "closing_silence_seconds": 2,
+  "config_hash": "b7a1a298e9f39b2717e6f70e6a00928ecb5b064fd0097c3c58fc4e7fc52658a0",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "Een donkere streep loopt over oude steen. Hij lijkt onbeduidend, totdat duidelijk wordt dat water een hele stad hielp vormgeven.",
+      "raw_seconds": 9.334421768707482,
+      "speech_window_seconds": 9.334421768707482,
+      "tempo": 0.9672975926121743,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "In Angkor trekken eerst de torens onze aandacht. Maar een verrassender bouwwerk strekt zich uit langs kanalen, dijken en waterbekkens.",
+      "raw_seconds": 10.298049886621316,
+      "speech_window_seconds": 10.298049886621316,
+      "tempo": 1.0671554286654212,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Volgen we die verbindingen, dan verandert het beeld. De tempel hoort bij een stad, en de stad bij een heel stroomgebied.",
+      "raw_seconds": 9.833650793650794,
+      "speech_window_seconds": 9.833650793650794,
+      "tempo": 1.0190311703265071,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "De vraag is eenvoudig: hoe organiseer je het leven waar water overvloedig kan aankomen en later moeilijk te vinden is?",
+      "raw_seconds": 8.277913832199546,
+      "speech_window_seconds": 8.277913832199546,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Het antwoord verbindt regen, terrein, landbouw, geloof, macht en dagelijks onderhoud. Het verheldert ook de latere veranderingen van Angkor.",
+      "raw_seconds": 11.215238095238096,
+      "speech_window_seconds": 11.215238095238096,
+      "tempo": 1.1622008388847767,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "We beginnen in het huidige Cambodja, bij Siem Reap, ten noorden van Tonle Sap. De monumenten staan in een veel groter bewoond landschap.",
+      "raw_seconds": 11.122358276643991,
+      "speech_window_seconds": 11.122358276643991,
+      "tempo": 1.1525759872169938,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Angkor was eeuwenlang een belangrijk centrum van de Khmerwereld. De vorm veranderde met heersers, gemeenschappen en hun prioriteiten.",
+      "raw_seconds": 10.263219954648527,
+      "speech_window_seconds": 10.263219954648527,
+      "tempo": 1.0635461092900027,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "De bewaarde tempels zijn herkenningspunten. Een stad heeft ook woningen, akkers, routes, handel en manieren voor afvalbeheer nodig.",
+      "raw_seconds": 10.448979591836734,
+      "speech_window_seconds": 10.448979591836734,
+      "tempo": 1.0827958126255683,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Veel gewone gebouwen gebruikten minder duurzame materialen dan steen. Hun verdwenen daken laten de monumenten misleidend afgezonderd lijken.",
+      "raw_seconds": 11.911836734693878,
+      "speech_window_seconds": 11.911836734693878,
+      "tempo": 1.234387226393148,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Kijk voorbij de bewerkte poort. Een verhoogde lijn kan een dijk zijn; een ondiepe laagte kan een ander verhaal bewaren.",
+      "raw_seconds": 8.997732426303855,
+      "speech_window_seconds": 8.997732426303855,
+      "tempo": 0.9324075053164617,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Zulke vormen vragen onderzoek. Alleen hun uiterlijk vertelt niet wanneer ze ontstonden, hoe ze werkten of hoe ze veranderden.",
+      "raw_seconds": 8.974512471655329,
+      "speech_window_seconds": 8.974512471655329,
+      "tempo": 0.9300012923995159,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Samen tonen ze de omvang van de vraag. Angkors geschiedenis reikt verder dan de grenzen van één beroemde tempel.",
+      "raw_seconds": 8.777142857142858,
+      "speech_window_seconds": 8.777142857142858,
+      "tempo": 0.9095484826054774,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Angkor Wat ontstond vroeg in de twaalfde eeuw onder Suryavarman de Tweede. Het biedt een vertrekpunt voor die ruimere tocht.",
+      "raw_seconds": 9.009342403628118,
+      "speech_window_seconds": 9.009342403628118,
+      "tempo": 0.9336106117749344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "De oorspronkelijke toewijding aan Vishnu en de latere boeddhistische geschiedenis tonen dat ook religieuze betekenissen door de tijd veranderden.",
+      "raw_seconds": 9.671111111111111,
+      "speech_window_seconds": 9.671111111111111,
+      "tempo": 1.002187679907887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Een tempelgracht kan een geordende heilige wereld verbeelden en tegelijk water, bodem en de directe omgeving beïnvloeden.",
+      "raw_seconds": 9.229931972789116,
+      "speech_window_seconds": 9.229931972789116,
+      "tempo": 0.9564696344859187,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Verlaat even de torens. Bekijk waar de regen vandaan komt en waarheen het terrein het water laat stromen.",
+      "raw_seconds": 8.661043083900227,
+      "speech_window_seconds": 8.661043083900227,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "De streek kent een sterk seizoensgebonden moessonklimaat. Natte en droge maanden brengen verschillende omstandigheden in hetzelfde landschap.",
+      "raw_seconds": 10.588299319727891,
+      "speech_window_seconds": 10.588299319727891,
+      "tempo": 1.0972330901272427,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Tijdens de regen bereikt water daken, velden, paden en beken. Hoeveel komt er, hoe snel en op welke plekken?",
+      "raw_seconds": 9.671111111111111,
+      "speech_window_seconds": 9.671111111111111,
+      "tempo": 1.002187679907887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Een stortbui kan een kanaal overbelasten voordat later schaarste volgt. Overvloed en tekort hangen ook af van timing.",
+      "raw_seconds": 9.160272108843538,
+      "speech_window_seconds": 9.160272108843538,
+      "tempo": 0.9492509957350815,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Naarmate het droge seizoen vordert, worden reserves en betrouwbare toegang belangrijker. Een bruikbaar systeem moet beide seizoenen aankunnen.",
+      "raw_seconds": 10.379319727891156,
+      "speech_window_seconds": 10.379319727891156,
+      "tempo": 1.075577173874731,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Hoger terrein ten noorden van Angkor bepaalt mede de stroomgebieden van de vlakte. Water volgt zwaartekracht; mensen veranderen routes.",
+      "raw_seconds": 11.064308390022676,
+      "speech_window_seconds": 11.064308390022676,
+      "tempo": 1.1465604549246295,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Het landschap geeft een hoofdrichting, maar kleine hoogteverschillen tellen. Een zachte helling kan bepalen welk veld water krijgt.",
+      "raw_seconds": 8.858412698412698,
+      "speech_window_seconds": 8.858412698412698,
+      "tempo": 0.9179702278147873,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "De bodem is daarom zelf infrastructuur. Een kanaal werkt alleen in verhouding tot het omliggende en lager gelegen land.",
+      "raw_seconds": 9.496961451247165,
+      "speech_window_seconds": 9.496961451247165,
+      "tempo": 0.9841410830307943,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Zuidelijk ligt Tonle Sap, belangrijk voor de regionale waterwereld. Het meer groeit en krimpt met de seizoenen binnen een groter riviersysteem.",
+      "raw_seconds": 10.39092970521542,
+      "speech_window_seconds": 10.39092970521542,
+      "tempo": 1.076780280333204,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "De bekende seizoensgebonden omkering van de stroming hoort bij die grotere schaal. Ze beschrijft niet ieder plaatselijk kanaal in Angkor.",
+      "raw_seconds": 9.810430839002267,
+      "speech_window_seconds": 9.810430839002267,
+      "tempo": 1.0166249574095614,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Meer, vlakte, beken, regen en grondwater beïnvloeden elkaar op verschillende schalen. Eén kaartpijl laat niet alle verbindingen zien.",
+      "raw_seconds": 11.493877551020407,
+      "speech_window_seconds": 11.493877551020407,
+      "tempo": 1.1910753938881251,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Voor bewoners waren dit praktische zaken: afstand tot water, toestand van een oversteek en de juiste tijd voor landbouw.",
+      "raw_seconds": 8.753922902494331,
+      "speech_window_seconds": 8.753922902494331,
+      "tempo": 0.9071422696885317,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Het ging om meer dan zoveel mogelijk water verzamelen. Water moest volgens veranderende behoeften worden geleid, vastgehouden en afgevoerd.",
+      "raw_seconds": 10.437369614512471,
+      "speech_window_seconds": 10.437369614512471,
+      "tempo": 1.0815927061670954,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Soms moest de stroming vertragen. Elders had overtollig water een uitweg nodig voordat het velden of bouwwerken beschadigde.",
+      "raw_seconds": 9.531791383219955,
+      "speech_window_seconds": 9.531791383219955,
+      "tempo": 0.9877504024062129,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Opslag en afwatering horen dus samen. Het landschap vraagt plekken waar water kan blijven en routes waarlangs het verdergaat.",
+      "raw_seconds": 9.299591836734693,
+      "speech_window_seconds": 9.299591836734693,
+      "tempo": 0.9636882732367558,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "De vormen buiten de tempels krijgen betekenis. Lange dijken en brede bekkens tonen hoe men met seizoensverschillen probeerde te werken.",
+      "raw_seconds": 10.135510204081633,
+      "speech_window_seconds": 10.135510204081633,
+      "tempo": 1.0503119382468014,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Nu volgen de grote reservoirs. We nemen niet aan dat ze allemaal precies dezelfde functie of geschiedenis hadden.",
+      "raw_seconds": 9.218321995464853,
+      "speech_window_seconds": 9.218321995464853,
+      "tempo": 0.9552665280274459,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Angkors grote rechthoekige reservoirs worden vaak barays genoemd. Hun aarden wallen maakten ruime opslag mogelijk in een vrij vlak landschap.",
+      "raw_seconds": 11.087528344671203,
+      "speech_window_seconds": 11.087528344671203,
+      "tempo": 1.1489666678415753,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "De Westelijke Baray blijft indrukwekkend. Vanuit de lucht valt zijn lange rechthoek op tussen de kleinere vormen eromheen.",
+      "raw_seconds": 9.102222222222222,
+      "speech_window_seconds": 9.102222222222222,
+      "tempo": 0.9432354634427172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "De Oostelijke Baray bewaart een andere grote omtrek. Het huidige beeld verschilt van een gevuld bassin: landschappen blijven veranderen.",
+      "raw_seconds": 10.065850340136054,
+      "speech_window_seconds": 10.065850340136054,
+      "tempo": 1.043093299495964,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Andere bekkens stammen uit verschillende fasen. Het netwerk groeide door de tijd, in plaats van als één voltooid ontwerp te verschijnen.",
+      "raw_seconds": 9.276371882086167,
+      "speech_window_seconds": 9.276371882086167,
+      "tempo": 0.96128206031981,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Grootte maakt indruk, maar verklaart de werking niet. We moeten vragen hoe water binnenkwam, bewoog en weer vertrok.",
+      "raw_seconds": 8.765532879818593,
+      "speech_window_seconds": 8.765532879818593,
+      "tempo": 0.9083453761470045,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Een dijk moet water vasthouden en erosie weerstaan. Hoogte, materiaal en toestand bepalen wat een bassin werkelijk kan doen.",
+      "raw_seconds": 9.415691609977324,
+      "speech_window_seconds": 9.415691609977324,
+      "tempo": 0.9757193378214843,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Inlaten en uitlaten verbinden opslag met het netwerk. Hun plaats kan even belangrijk zijn als de grote vorm op een foto.",
+      "raw_seconds": 9.183492063492064,
+      "speech_window_seconds": 9.183492063492064,
+      "tempo": 0.9516572086520273,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Sediment maakt het ingewikkelder. Stromend water vervoert materiaal; afzetting verandert langzaam de diepte van een bekken of de kanaalcapaciteit.",
+      "raw_seconds": 11.517097505668934,
+      "speech_window_seconds": 11.517097505668934,
+      "tempo": 1.1934816068050709,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Onderhoud hoort daarom bij de hele levensduur. Een structuur die één seizoen werkt, kan voor het volgende schoonmaak of herstel vragen.",
+      "raw_seconds": 9.694331065759638,
+      "speech_window_seconds": 9.694331065759638,
+      "tempo": 1.0045938928248328,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Reservoirs hoorden ook bij tempels en koninklijk gezag. Een modern technisch schema omvat hun betekenis niet volledig.",
+      "raw_seconds": 8.881632653061224,
+      "speech_window_seconds": 8.881632653061224,
+      "tempo": 0.9203764407317331,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Water kon praktische behoeften dienen en religieuze symboliek dragen. Rollen overlapten en verschilden naar plaats en periode.",
+      "raw_seconds": 10.158730158730158,
+      "speech_window_seconds": 10.158730158730158,
+      "tempo": 1.052718151163747,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "De irrigatiefunctie van bepaalde barays is onderwerp van debat. Antwoorden vragen bewijs voor elk bouwwerk en zijn verbindingen.",
+      "raw_seconds": 9.752380952380953,
+      "speech_window_seconds": 9.752380952380953,
+      "tempo": 1.010609425117197,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Een groot bassin bewijst niet dat alle nabije akkers eruit werden bevloeid. Hoogtes, kanalen, uitlaten en dateringen moeten passen.",
+      "raw_seconds": 10.08907029478458,
+      "speech_window_seconds": 10.08907029478458,
+      "tempo": 1.0454995124129098,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Het huidige peil toont evenmin iedere vroegere eeuw. Aanslibbing, verbouwing, herstel en nieuw gebruik kunnen een reservoir veranderen.",
+      "raw_seconds": 10.216780045351474,
+      "speech_window_seconds": 10.216780045351474,
+      "tempo": 1.0587336834561112,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Zie barays als grote onderdelen van een breder geheel. Hun belang wordt duidelijker wanneer we de verbindende lijnen volgen.",
+      "raw_seconds": 9.05578231292517,
+      "speech_window_seconds": 9.05578231292517,
+      "tempo": 0.938423037608826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Die leiden naar beken, kanalen, wallen, oversteken en knooppunten verspreid over de bewoonde vlakte.",
+      "raw_seconds": 7.9412244897959186,
+      "speech_window_seconds": 7.9412244897959186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Een kanaal biedt water een voorkeursroute. De stroming hangt af van helling, diepte, breedte, ruwheid en toevoer stroomopwaarts.",
+      "raw_seconds": 10.65795918367347,
+      "speech_window_seconds": 10.65795918367347,
+      "tempo": 1.1044517288780797,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Zwaartekracht levert beweging. Mensen veranderen routes, verdelen stromen en verbinden plaatsen die anders verschillende hoeveelheden zouden ontvangen.",
+      "raw_seconds": 11.168798185941043,
+      "speech_window_seconds": 11.168798185941043,
+      "tempo": 1.1573884130508851,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Bij een splitsing werkt een kleine verandering ver door. Meer water in de ene tak kan minder in de andere betekenen.",
+      "raw_seconds": 8.93968253968254,
+      "speech_window_seconds": 8.93968253968254,
+      "tempo": 0.9263919730240974,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Een verhoogde wal kan ook een weg over natte grond dragen. Vervoer en waterbeheer delen dan dezelfde fysieke lijn.",
+      "raw_seconds": 9.218321995464853,
+      "speech_window_seconds": 9.218321995464853,
+      "tempo": 0.9552665280274459,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Oversteken vragen nog een afweging. De weg moet doorgaan en water genoeg ruimte krijgen zonder het bouwwerk te ondermijnen.",
+      "raw_seconds": 9.438911564625851,
+      "speech_window_seconds": 9.438911564625851,
+      "tempo": 0.9781255507384301,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Het systeem verplaatst en bewaart water. Alleen naar de grootste reservoirs kijken mist veel verbanden die het dagelijks leven mogelijk maakten.",
+      "raw_seconds": 10.553469387755102,
+      "speech_window_seconds": 10.553469387755102,
+      "tempo": 1.0936237707518242,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Natuurlijke beken hoorden er ook bij. Mensen veranderden waterlopen in een landschap dat al eigen afwateringspatronen had.",
+      "raw_seconds": 9.566621315192744,
+      "speech_window_seconds": 9.566621315192744,
+      "tempo": 0.9913597217816315,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Dat onderscheid hoort op de kaart: gegraven, opgehoogde, omgeleide lijnen en routes die oudere terreinvormen overnamen.",
+      "raw_seconds": 9.102222222222222,
+      "speech_window_seconds": 9.102222222222222,
+      "tempo": 0.9432354634427172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Een netwerk groeit door bestaande delen te verbinden. Elke toevoeging lost lokaal iets op, maar verandert mogelijk omstandigheden elders.",
+      "raw_seconds": 9.810430839002267,
+      "speech_window_seconds": 9.810430839002267,
+      "tempo": 1.0166249574095614,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Generaties vergroten de complexiteit. We moeten weten welke onderdelen tegelijk bestonden, in plaats van alle sporen als gelijktijdig te tekenen.",
+      "raw_seconds": 11.6215873015873,
+      "speech_window_seconds": 11.6215873015873,
+      "tempo": 1.2043095649313265,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Een verlaten kanaal naast een later kanaal bewijst geen gezamenlijk gebruik. De archeologische tijd moet zichtbaar blijven.",
+      "raw_seconds": 9.009342403628118,
+      "speech_window_seconds": 9.009342403628118,
+      "tempo": 0.9336106117749344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Daarom tellen opgravingen en dateringen naast luchtbeelden. Een mooie omtrek heeft geschiedenis nodig voordat hij iets verklaart.",
+      "raw_seconds": 10.135510204081633,
+      "speech_window_seconds": 10.135510204081633,
+      "tempo": 1.0503119382468014,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Stel een kleine beek na regen voor. Eerst spreidt hij zich in een bassin, verderop bundelt een smalle doorgang de stroming.",
+      "raw_seconds": 9.032562358276644,
+      "speech_window_seconds": 9.032562358276644,
+      "tempo": 0.9360168246918802,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Hetzelfde water kan rustig of krachtig stromen, afhankelijk van de route. Een zwakke wal of blokkade beïnvloedt verre plekken stroomafwaarts.",
+      "raw_seconds": 10.32126984126984,
+      "speech_window_seconds": 10.32126984126984,
+      "tempo": 1.0695616415823668,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Eén uitzicht vanaf een toren toont dit niet. De stad moet over afstanden en in kleine details worden gelezen.",
+      "raw_seconds": 9.067392290249433,
+      "speech_window_seconds": 9.067392290249433,
+      "tempo": 0.9396261440672987,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Elke lijn voert uiteindelijk naar mensen: gezinnen, arbeiders, boeren en geloofsgemeenschappen die het landschap gebruikten en onderhielden.",
+      "raw_seconds": 10.89015873015873,
+      "speech_window_seconds": 10.89015873015873,
+      "tempo": 1.1285138580475367,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Angkor was meer dan een compacte groep stenen gebouwen. Bewijs toont een uitgestrekt, relatief dun bebouwd en verbonden stedelijk landschap.",
+      "raw_seconds": 10.39092970521542,
+      "speech_window_seconds": 10.39092970521542,
+      "tempo": 1.076780280333204,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Woonplekken, vijvers, akkers, wegen en tempelterreinen hoorden daarbij. Hun verdeling verschilde naar plaats en tijd.",
+      "raw_seconds": 9.868480725623582,
+      "speech_window_seconds": 9.868480725623582,
+      "tempo": 1.0226404897019257,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Een huisvijver bracht water dichter bij dagelijkse taken. Een kleine voorziening kon zelfs naast een groot reservoir veel betekenen.",
+      "raw_seconds": 10.077460317460318,
+      "speech_window_seconds": 10.077460317460318,
+      "tempo": 1.044296405954437,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Rijstteelt vroeg kennis van seizoenen en grond. Waterbeheer betekende ook het juiste tijdstip kiezen, naast structuren bouwen.",
+      "raw_seconds": 9.357641723356009,
+      "speech_window_seconds": 9.357641723356009,
+      "tempo": 0.96970380552912,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Een veld lijdt onder te weinig of te veel water, of toevoer tijdens de verkeerde groeifase.",
+      "raw_seconds": 6.013968253968254,
+      "speech_window_seconds": 6.013968253968254,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Boeren leerden plaatselijke verschillen door ervaring. Veel beslissingen vormden het landschap, naast bevelen van koningen.",
+      "raw_seconds": 9.137052154195011,
+      "speech_window_seconds": 9.137052154195011,
+      "tempo": 0.9468447828181359,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Grote werken vereisten organisatie, arbeid, materiaal en blijvende aandacht. Politiek gezag en gemeenschapswerk ontmoetten elkaar in de infrastructuur.",
+      "raw_seconds": 12.19047619047619,
+      "speech_window_seconds": 12.19047619047619,
+      "tempo": 1.2632617813964964,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Herstellen kon even belangrijk zijn als bouwen. Slib ruimen, wallen versterken en doorgangen openen levert zelden een spectaculair monument op.",
+      "raw_seconds": 10.62312925170068,
+      "speech_window_seconds": 10.62312925170068,
+      "tempo": 1.1008424095026612,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Toch verklaren zulke taken de levensduur van een netwerk. Het werk buiten de ansichtkaart kon het bijzondere silhouet ondersteunen.",
+      "raw_seconds": 9.438911564625851,
+      "speech_window_seconds": 9.438911564625851,
+      "tempo": 0.9781255507384301,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Denk ook aan verdwenen materialen. Hout, plantenvezels en aarden oppervlakken laten andere sporen na dan bewerkt zandsteen.",
+      "raw_seconds": 9.914920634920636,
+      "speech_window_seconds": 9.914920634920636,
+      "tempo": 1.0274529155358172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Ongelijke bewaring beïnvloedt onze verbeelding. Een tempel lijkt alleen omdat de omliggende huizen niet meer boven de grond staan.",
+      "raw_seconds": 9.752380952380953,
+      "speech_window_seconds": 9.752380952380953,
+      "tempo": 1.010609425117197,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Archeologie herstelt verbanden uit sporen, zonder te doen alsof ieder dak, beroep of bevolkingscijfer precies bekend is.",
+      "raw_seconds": 8.800362811791382,
+      "speech_window_seconds": 8.800362811791382,
+      "tempo": 0.911954695522423,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Zo verschijnt een rijkere stad: bewoond, productief, verbonden en veranderlijk. Het waternetwerk hoorde bij die levende wereld.",
+      "raw_seconds": 9.926530612244898,
+      "speech_window_seconds": 9.926530612244898,
+      "tempo": 1.02865602199429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Ook ontdekken krijgt een andere betekenis. Angkor was niet eenvoudig een lege plek die op buitenstaanders wachtte.",
+      "raw_seconds": 8.266303854875284,
+      "speech_window_seconds": 8.266303854875284,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Plaatselijke kennis, religieuze continuïteit, vroegere wetenschap en modern onderzoek behoren allemaal tot het begrijpen van deze plaats.",
+      "raw_seconds": 9.926530612244898,
+      "speech_window_seconds": 9.926530612244898,
+      "tempo": 1.02865602199429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Nieuwe technieken vergroten wat we vastleggen. Ze wissen de mensen niet uit die deze plekken kenden of bleven verzorgen.",
+      "raw_seconds": 8.916462585034013,
+      "speech_window_seconds": 8.916462585034013,
+      "tempo": 0.9239857601071516,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Vanuit de lucht zijn sommige sporen duidelijker. Lange lijnen verschijnen waar iemand beneden alleen losse verhogingen en laagtes ziet.",
+      "raw_seconds": 9.775600907029478,
+      "speech_window_seconds": 9.775600907029478,
+      "tempo": 1.0130156380341429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Laserscanning vanuit de lucht, vaak lidar genoemd, heeft belangrijke details aan de kaart van groot Angkor toegevoegd.",
+      "raw_seconds": 7.90639455782313,
+      "speech_window_seconds": 7.90639455782313,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Laser helpt grond modelleren door openingen in begroeiing. Gegevensverwerking fotografeert niet zomaar ieder begraven voorwerp.",
+      "raw_seconds": 9.357641723356009,
+      "speech_window_seconds": 9.357641723356009,
+      "tempo": 0.96970380552912,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Zo verschijnen subtiele aardwerken, kanalen en nederzettingspatronen. Het zijn aanwijzingen voor onderzoek, geen volledige film van het verleden.",
+      "raw_seconds": 10.820498866213152,
+      "speech_window_seconds": 10.820498866213152,
+      "tempo": 1.1212952192966996,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Een beschaduwd terreinmodel toont kleine hoogteverschillen. Ander virtueel licht kan een eerder onopvallende lijn zichtbaar maken.",
+      "raw_seconds": 9.357641723356009,
+      "speech_window_seconds": 9.357641723356009,
+      "tempo": 0.96970380552912,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Ook een heldere lijn vraagt uitleg. Onderzoekers vergelijken kaarten, veldwaarnemingen, opgegraven materiaal, oude plannen en ander bewijs.",
+      "raw_seconds": 11.319727891156463,
+      "speech_window_seconds": 11.319727891156463,
+      "tempo": 1.1730287970110325,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Een modern pad, oude wal en natuurlijke vorm kunnen op elkaar lijken. De context helpt ze onderscheiden.",
+      "raw_seconds": 8.208253968253969,
+      "speech_window_seconds": 8.208253968253969,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Chronologie blijft essentieel. De kaart toont waar iets ligt; opgraving en datering helpen bepalen wanneer het ertoe deed.",
+      "raw_seconds": 9.752380952380953,
+      "speech_window_seconds": 9.752380952380953,
+      "tempo": 1.010609425117197,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Sediment geeft een ander perspectief. Lagen bewaren mogelijk veranderingen in afzetting, watercondities of verstoring, met eigen beperkingen.",
+      "raw_seconds": 11.644807256235827,
+      "speech_window_seconds": 11.644807256235827,
+      "tempo": 1.2067157778482722,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Methoden combineren laat bewijzen elkaar toetsen. Een sterke uitleg verbindt patronen en steunt niet op één dramatisch beeld.",
+      "raw_seconds": 10.054240362811791,
+      "speech_window_seconds": 10.054240362811791,
+      "tempo": 1.0418901930374913,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Reconstructies moeten daarom herkenbaar zijn. Een aannemelijke kanaalscène is een illustratie, geen opname van een vastgelegde oude gebeurtenis.",
+      "raw_seconds": 10.7740589569161,
+      "speech_window_seconds": 10.7740589569161,
+      "tempo": 1.1164827934628083,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "We willen verbanden begrijpen: mogelijke waterwegen, woonplaatsen en de manier waarop een verandering door het netwerk gaat.",
+      "raw_seconds": 9.137052154195011,
+      "speech_window_seconds": 9.137052154195011,
+      "tempo": 0.9468447828181359,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Dat telt vooral wanneer omstandigheden buiten het systeem veranderen. Ook een ervaren opgebouwd netwerk kan onbekende druk ontmoeten.",
+      "raw_seconds": 10.681179138321996,
+      "speech_window_seconds": 10.681179138321996,
+      "tempo": 1.1068579417950255,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Verlaat even de steen en kijk naar klimaatbewijs, waaronder gegevens van buiten Angkor.",
+      "raw_seconds": 6.896326530612245,
+      "speech_window_seconds": 6.896326530612245,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Boomringen uit het vasteland van Zuidoost-Azië wijzen op ernstige droogtes en zeer natte fasen in de veertiende en vijftiende eeuw.",
+      "raw_seconds": 9.02095238095238,
+      "speech_window_seconds": 9.02095238095238,
+      "tempo": 0.9348137182334072,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Die gegevens beschrijven regionale wisselingen. Het verband met plaatselijke omstandigheden en archeologische veranderingen moet zorgvuldig worden gelegd.",
+      "raw_seconds": 11.284897959183674,
+      "speech_window_seconds": 11.284897959183674,
+      "tempo": 1.1694194776356137,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Langdurige droogte vermindert beschikbaar water. Ook het werk om kanalen, velden en nederzettingen draaiend te houden verandert.",
+      "raw_seconds": 9.984580498866213,
+      "speech_window_seconds": 9.984580498866213,
+      "tempo": 1.0346715542866542,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Zeer natte perioden brengen andere problemen. Snelle stromen vervoeren sediment, eroderen wallen en overbelasten eerder voldoende doorgangen.",
+      "raw_seconds": 11.366167800453514,
+      "speech_window_seconds": 11.366167800453514,
+      "tempo": 1.1778412228449238,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Wisselende druk maakt een verbonden netwerk lastig. Aanpassingen voor schaarste lossen de volgende zware regenval niet noodzakelijk op.",
+      "raw_seconds": 9.58984126984127,
+      "speech_window_seconds": 9.58984126984127,
+      "tempo": 0.9937659346985771,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Een complex systeem verspreidt voordelen en verstoringen. Wat stroomopwaarts gebeurt, kan het probleem worden van iemand ver weg.",
+      "raw_seconds": 9.566621315192744,
+      "speech_window_seconds": 9.566621315192744,
+      "tempo": 0.9913597217816315,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Niet alles hoeft tegelijk te falen. Plaatselijk herstel, andere routes en nieuw gebruik kunnen verschillende uitkomsten geven.",
+      "raw_seconds": 9.996190476190476,
+      "speech_window_seconds": 9.996190476190476,
+      "tempo": 1.035874660745127,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Onderzoekers bestuderen schade en aanpassing in delen van het waternet. De volgorde telt meer dan een simpel beeld van plotseling verval.",
+      "raw_seconds": 10.878548752834467,
+      "speech_window_seconds": 10.878548752834467,
+      "tempo": 1.127310751589064,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Klimaat is een belangrijke onderzoekslijn, maar geen volledige verklaring. Instellingen, onderhoud, bewoning en politiek tellen eveneens.",
+      "raw_seconds": 10.785668934240363,
+      "speech_window_seconds": 10.785668934240363,
+      "tempo": 1.117685899921281,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "De vijftiende eeuw kende ook conflicten en veranderende politieke banden. Verschuivingen van macht en activiteit komen niet alleen door regen.",
+      "raw_seconds": 10.62312925170068,
+      "speech_window_seconds": 10.62312925170068,
+      "tempo": 1.1008424095026612,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Veertienhonderdeenendertig verschijnt vaak in korte overzichten. Eén jaartal mag niet een hele regio in één nacht leegmaken.",
+      "raw_seconds": 9.1718820861678,
+      "speech_window_seconds": 9.1718820861678,
+      "tempo": 0.9504541021935544,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Sommige plaatsen veranderden of verloren belang, andere bleven betekenisvol. Angkor Wat behield een religieuze geschiedenis nadat het koninklijke centrum verschoof.",
+      "raw_seconds": 12.225306122448979,
+      "speech_window_seconds": 12.225306122448979,
+      "tempo": 1.266871100771915,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "De verandering verliep geleidelijk via meerdere processen. Eén laatste storm, invasie of lege straat zou het bewijs te sterk vereenvoudigen.",
+      "raw_seconds": 10.65795918367347,
+      "speech_window_seconds": 10.65795918367347,
+      "tempo": 1.1044517288780797,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Dat ongelijke verhaal vraagt meer, maar is menselijker. Mensen passen zich aan, herstellen, verhuizen en zetten gebruiken voort.",
+      "raw_seconds": 10.367709750566894,
+      "speech_window_seconds": 10.367709750566894,
+      "tempo": 1.0743740674162583,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Het waternet biedt een manier die reacties te onderzoeken. Het verbindt grote milieudruk met beslissingen op specifieke plaatsen.",
+      "raw_seconds": 9.276371882086167,
+      "speech_window_seconds": 9.276371882086167,
+      "tempo": 0.96128206031981,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Het waarschuwt ook voor snelle oordelen over oude techniek. Nuttig bouwen en generaties onderhouden zijn verbonden maar verschillende prestaties.",
+      "raw_seconds": 10.797278911564625,
+      "speech_window_seconds": 10.797278911564625,
+      "tempo": 1.1188890063797539,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Iedere oplossing hangt af van omstandigheden, kennis, arbeid en middelen. Veranderen die, dan kunnen dezelfde structuren nieuwe rollen krijgen.",
+      "raw_seconds": 11.749297052154194,
+      "speech_window_seconds": 11.749297052154194,
+      "tempo": 1.2175437359745278,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "De latere geschiedenis hoort volledig bij Angkor. Ze is meer dan het dramatische slot van een bouwtijdperk.",
+      "raw_seconds": 8.277913832199546,
+      "speech_window_seconds": 8.277913832199546,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Water blijft deel van de zorg voor Angkor. Regen, afwatering, begroeiing en bouwkundige toestand beïnvloeden het behoud.",
+      "raw_seconds": 9.311201814058958,
+      "speech_window_seconds": 9.311201814058958,
+      "tempo": 0.9648913796952288,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Een kanaal naast het pad lijkt minder indrukwekkend dan een bewerkte muur. Goede afvoer kan toch de omgeving van die muur beschermen.",
+      "raw_seconds": 9.392471655328798,
+      "speech_window_seconds": 9.392471655328798,
+      "tempo": 0.9733131249045386,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Behoud vraagt waarneming en plaatselijke deskundigheid. Een ingreep moet binnen het hele landschap worden beoordeeld, niet alleen op uiterlijk.",
+      "raw_seconds": 10.425759637188209,
+      "speech_window_seconds": 10.425759637188209,
+      "tempo": 1.0803895997086226,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Erfgoed verbindt huidige gemeenschappen, levensonderhoud, geloof en toerisme. Het gaat over het heden én het verleden.",
+      "raw_seconds": 9.392471655328798,
+      "speech_window_seconds": 9.392471655328798,
+      "tempo": 0.9733131249045386,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Een respectvol bezoek volgt toegestane routes en plaatselijke aanwijzingen. Daarvoor hoef je geen kwetsbare wal of gesloten gebouw te betreden.",
+      "raw_seconds": 10.599909297052154,
+      "speech_window_seconds": 10.599909297052154,
+      "tempo": 1.0984361965857155,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Hetzelfde geldt voor filmen. Toegestane standpunten, volwassen dagelijks leven en zorgvuldige illustraties leggen uit zonder heilige handelingen na te spelen.",
+      "raw_seconds": 11.830566893424036,
+      "speech_window_seconds": 11.830566893424036,
+      "tempo": 1.2259654811838379,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Terug naar het beginbeeld. Dat spoor op steen hoort bij een wereld waarin water architectuur, bodem, werk en herinnering raakt.",
+      "raw_seconds": 9.833650793650794,
+      "speech_window_seconds": 9.833650793650794,
+      "tempo": 1.0190311703265071,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "We begonnen bij torens en vonden verbindingen: velden, huishoudens, reservoirs, wisselende seizoenen en verantwoordelijkheid die doorgaat.",
+      "raw_seconds": 10.750839002267574,
+      "speech_window_seconds": 10.750839002267574,
+      "tempo": 1.1140765805458626,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "De tempels blijven bijzonder. Hun schaal krijgt meer betekenis met de kleine handelingen en brede relaties die ze ondersteunden.",
+      "raw_seconds": 10.031020408163265,
+      "speech_window_seconds": 10.031020408163265,
+      "tempo": 1.0394839801205455,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Een stad overleeft ongelijk in sporen. Steen blijft zichtbaar; een vroeger kanaal vraagt soms geduldig kaartwerk voordat zijn rol duidelijk wordt.",
+      "raw_seconds": 10.80888888888889,
+      "speech_window_seconds": 10.80888888888889,
+      "tempo": 1.1200921128382268,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Samen lezen verandert de vraag: naast wie het monument bouwde, hoe kon een bewoond landschap blijven functioneren?",
+      "raw_seconds": 7.6741950113378685,
+      "speech_window_seconds": 7.6741950113378685,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Vragen blijven over afzonderlijke structuren, waterverdeling en gemeenschapskeuzes bij veranderende omstandigheden.",
+      "raw_seconds": 8.753922902494331,
+      "speech_window_seconds": 8.753922902494331,
+      "tempo": 0.9071422696885317,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Toekomstig onderzoek kan antwoorden verfijnen. Sporen beschermen laat dat werk doorgaan, zonder het verhaal in de simpelste versie vast te zetten.",
+      "raw_seconds": 11.203628117913832,
+      "speech_window_seconds": 11.203628117913832,
+      "tempo": 1.1609977324263037,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Op de vlakte verzamelt water zich, beweegt en laat sporen achter. Bekende processen lopen door soms eeuwenoude voorzieningen.",
+      "raw_seconds": 9.961360544217687,
+      "speech_window_seconds": 9.961360544217687,
+      "tempo": 1.0322653413697085,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Angkors prestatie ligt deels in verbindingen: seizoen en opslag, land en beweging, heilige plekken en dagelijkse behoeften.",
+      "raw_seconds": 9.671111111111111,
+      "speech_window_seconds": 9.671111111111111,
+      "tempo": 1.002187679907887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Zijn geschiedenis toont infrastructuur als een voortdurende relatie tussen mensen, omgeving en zorg, verder dan een eenmalig voltooide structuur.",
+      "raw_seconds": 10.402539682539683,
+      "speech_window_seconds": 10.402539682539683,
+      "tempo": 1.0779833867916768,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Kijk opnieuw naar de waterlijn op de steen. Een klein spoor opent nu een stad, en de stad opent een heel landschap.",
+      "raw_seconds": 8.893242630385487,
+      "speech_window_seconds": 8.893242630385487,
+      "tempo": 0.9215795471902058,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1292,
+  "decoded_samples": 31008000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-nl-21m32s.mp3",
+  "flac": "voice-nl-21m32s.flac",
+  "mp3_sha256": "c0880f9dc1496fa065838369e348ab05f3e2a29c394813d67ee7cae2a2889aa1",
+  "flac_sha256": "f0d9edc32fb83ca59bd8fa7c8ebf0fd3274120ff0eff61758d524e95de7031b0"
+}

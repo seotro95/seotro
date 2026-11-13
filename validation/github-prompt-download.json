@@ -1,0 +1,10 @@
+{
+  "url": "https://github.com/seotro95/seotro/raw/refs/heads/angkor-085-21m32s/100-prompts-10-txt-10s.zip",
+  "http_status": 200,
+  "bytes": 25779,
+  "zip_crc_passed": true,
+  "txt_files": 10,
+  "prompts_per_file": 10,
+  "total_prompts": 100,
+  "sha256": "bcd2c0505d033dfaf99d6ad3f4438f2f7bc5dd8199e75131762efd9e6baad712"
+}

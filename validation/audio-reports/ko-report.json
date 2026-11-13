@@ -1,0 +1,1182 @@
+{
+  "locale": "ko",
+  "voice_id": "supertonic:5",
+  "engine": "Supertonic 3 CPU INT8",
+  "target_seconds": 1292,
+  "spoken_cues": 129,
+  "closing_silence_seconds": 2,
+  "config_hash": "a90b3d9f3d1d3bf83b25891a0a595a4b265de658a77ddfcb15d6f659e4f24033",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "오래된 돌에 검은 자국이 남아 있습니다. 작고 사소해 보이지만, 물은 한 도시 전체의 모습을 만드는 데 힘을 보탰습니다.",
+      "raw_seconds": 9.672743764172335,
+      "speech_window_seconds": 9.672743764172335,
+      "tempo": 1.0023568667536098,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "앙코르에서는 먼저 높은 탑이 눈에 들어옵니다. 하지만 더 놀라운 구조는 수로와 둑, 저수지를 연결하며 넓게 펼쳐집니다.",
+      "raw_seconds": 10.122743764172336,
+      "speech_window_seconds": 10.122743764172336,
+      "tempo": 1.0489889911059416,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "그 연결을 따라가면 익숙한 풍경이 바뀝니다. 사원은 도시의 일부이고, 도시는 하나의 큰 유역에 속합니다.",
+      "raw_seconds": 8.578548752834466,
+      "speech_window_seconds": 8.578548752834466,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "질문은 간단합니다. 물이 넘치게 오는 때와 구하기 어려운 때가 있는 곳에서, 사람들은 어떻게 생활을 꾸렸을까요?",
+      "raw_seconds": 9.1643537414966,
+      "speech_window_seconds": 9.1643537414966,
+      "tempo": 0.9496739628493885,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "답에는 비와 지형, 농업과 신앙, 권력과 일상적인 관리가 이어집니다. 앙코르가 나중에 겪은 변화도 새롭게 보입니다.",
+      "raw_seconds": 9.827369614512472,
+      "speech_window_seconds": 9.827369614512472,
+      "tempo": 1.018380270933935,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "오늘날 캄보디아의 시엠레아프 근처, 톤레사프호 북쪽에서 시작합니다. 석조 유적은 훨씬 넓은 생활의 풍경 안에 서 있습니다.",
+      "raw_seconds": 10.778095238095238,
+      "speech_window_seconds": 10.778095238095238,
+      "tempo": 1.1169010609425116,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "앙코르는 여러 세기 동안 크메르 세계의 중요한 중심이었습니다. 통치자와 공동체, 우선하는 과제가 달라지며 모습도 바뀌었습니다.",
+      "raw_seconds": 10.886281179138322,
+      "speech_window_seconds": 10.886281179138322,
+      "tempo": 1.1281120392889452,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "남은 사원은 중요한 표지입니다. 그러나 도시에는 집과 농지, 길과 교환 장소, 폐기물을 처리할 방법도 필요합니다.",
+      "raw_seconds": 9.361133786848072,
+      "speech_window_seconds": 9.361133786848072,
+      "tempo": 0.9700656773935825,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "일상의 건물에는 돌보다 오래 남기 어려운 재료가 쓰였습니다. 지붕이 사라지자 사원만 외따로 있었던 것처럼 보이게 됩니다.",
+      "raw_seconds": 9.94390022675737,
+      "speech_window_seconds": 9.94390022675737,
+      "tempo": 1.0304559820473957,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "조각된 문 너머를 봅시다. 길게 솟은 지형은 둑일 수 있고, 얕은 웅덩이도 다른 이야기를 간직할 수 있습니다.",
+      "raw_seconds": 8.424603174603174,
+      "speech_window_seconds": 8.424603174603174,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "그 모양은 조사가 필요합니다. 형태만으로는 언제 만들었고, 어떻게 쓰였으며, 이후 무엇이 바뀌었는지 알 수 없습니다.",
+      "raw_seconds": 9.356961451247166,
+      "speech_window_seconds": 9.356961451247166,
+      "tempo": 0.969633311010069,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "하지만 흔적을 모으면 질문의 규모가 드러납니다. 앙코르의 역사는 유명한 사원 하나의 경계를 훨씬 넘어갑니다.",
+      "raw_seconds": 9.208095238095238,
+      "speech_window_seconds": 9.208095238095238,
+      "tempo": 0.9542067604243769,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "앙코르와트는 십이 세기 초, 수리야바르만 이 세 시대에 지어졌습니다. 넓은 풍경을 이해하는 출발점이 됩니다.",
+      "raw_seconds": 9.019387755102041,
+      "speech_window_seconds": 9.019387755102041,
+      "tempo": 0.9346515808395898,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "처음에는 비슈누에게 바쳐졌고, 뒤에는 불교의 역사를 쌓았습니다. 이곳의 종교적 의미 역시 시간에 따라 바뀌었습니다.",
+      "raw_seconds": 10.068480725623584,
+      "speech_window_seconds": 10.068480725623584,
+      "tempo": 1.043365878302962,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "사원의 해자는 질서 있는 신성한 세계를 표현하면서, 동시에 물과 흙, 건물 바로 주변의 환경에도 영향을 줍니다.",
+      "raw_seconds": 9.321043083900227,
+      "speech_window_seconds": 9.321043083900227,
+      "tempo": 0.9659112004041686,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "그 관계를 알려면 잠시 탑에서 벗어나야 합니다. 비는 어디에서 오고, 땅은 물을 어느 쪽으로 보내는지 살펴봅시다.",
+      "raw_seconds": 9.160204081632653,
+      "speech_window_seconds": 9.160204081632653,
+      "tempo": 0.9492439462831764,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "이 지역은 계절 차이가 뚜렷한 몬순 기후입니다. 비가 많은 달과 건조한 달은 같은 땅에 다른 조건을 만듭니다.",
+      "raw_seconds": 8.887596371882086,
+      "speech_window_seconds": 8.887596371882086,
+      "tempo": 0.9209944426820814,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "우기에는 지붕과 논, 길과 개울, 낮은 땅으로 물이 옵니다. 얼마나 빨리, 얼마나 많이, 어디에 오는지가 중요합니다.",
+      "raw_seconds": 9.869750566893424,
+      "speech_window_seconds": 9.869750566893424,
+      "tempo": 1.022772079470821,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "나중에 물이 부족해질 해에도 한 번의 폭우가 수로를 넘치게 할 수 있습니다. 풍요와 부족은 시기와 연결됩니다.",
+      "raw_seconds": 9.069183673469388,
+      "speech_window_seconds": 9.069183673469388,
+      "tempo": 0.9398117796341334,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "건기가 깊어지면 저장한 물과 안정적인 접근이 중요해집니다. 쓸모 있는 체계는 두 계절에 모두 대응해야 합니다.",
+      "raw_seconds": 9.018684807256236,
+      "speech_window_seconds": 9.018684807256236,
+      "tempo": 0.9345787365032369,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "앙코르 북쪽의 높은 지형은 평야로 물을 보내는 유역을 이룹니다. 물은 중력을 따르지만 사람은 경로를 바꿀 수 있습니다.",
+      "raw_seconds": 10.016780045351474,
+      "speech_window_seconds": 10.016780045351474,
+      "tempo": 1.038008294855075,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "지형은 큰 흐름의 방향을 정합니다. 그래도 작은 높이 차이가 어느 농지에 물이 닿는지를 결정할 수 있습니다.",
+      "raw_seconds": 8.564580498866214,
+      "speech_window_seconds": 8.564580498866214,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "그러므로 땅 자체가 기반 시설의 일부입니다. 수로는 주변과 아래쪽 땅과의 관계 속에서 비로소 제 기능을 합니다.",
+      "raw_seconds": 9.187392290249432,
+      "speech_window_seconds": 9.187392290249432,
+      "tempo": 0.9520613772279204,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "남쪽의 톤레사프호는 지역 물 환경의 큰 부분입니다. 계절에 따른 확장과 축소는 더 넓은 하천 체계와 연결됩니다.",
+      "raw_seconds": 9.812267573696145,
+      "speech_window_seconds": 9.812267573696145,
+      "tempo": 1.0168152926109995,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "유명한 계절성 역류도 그 큰 수문 체계에 속합니다. 앙코르의 모든 작은 수로에서 같은 일이 일어나는 것은 아닙니다.",
+      "raw_seconds": 9.359410430839002,
+      "speech_window_seconds": 9.359410430839002,
+      "tempo": 0.969887091278653,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "호수와 평야, 개울과 비, 지하수는 서로 다른 규모로 영향을 주고받습니다. 지도 위 화살표 하나로 다 표현할 수 없습니다.",
+      "raw_seconds": 9.623832199546484,
+      "speech_window_seconds": 9.623832199546484,
+      "tempo": 0.9972883108338325,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "주민에게는 생활의 문제였습니다. 물까지의 거리, 건널목 상태, 농사 시기는 매일의 선택에 영향을 주었습니다.",
+      "raw_seconds": 9.374195011337868,
+      "speech_window_seconds": 9.374195011337868,
+      "tempo": 0.9714191721593645,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "과제는 물을 최대한 많이 모으는 데 그치지 않았습니다. 바뀌는 필요에 맞춰 물을 보내고, 붙잡고, 내보내야 했습니다.",
+      "raw_seconds": 9.319931972789115,
+      "speech_window_seconds": 9.319931972789115,
+      "tempo": 0.965796059356385,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "어떤 곳에서는 흐름을 늦춰야 했습니다. 다른 곳에서는 남는 물이 농지나 건물을 해치기 전에 빠져나갈 길이 필요했습니다.",
+      "raw_seconds": 9.684263038548753,
+      "speech_window_seconds": 9.684263038548753,
+      "tempo": 1.0035505739428758,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "그래서 저장과 배수는 하나의 이야기입니다. 땅에는 물이 머물 장소와 물이 떠날 경로가 모두 필요합니다.",
+      "raw_seconds": 8.365510204081632,
+      "speech_window_seconds": 8.365510204081632,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "사원 밖의 선들이 이제 의미를 얻습니다. 긴 둑과 넓은 저수 공간은 계절의 차이를 다루려는 노력을 보여줍니다.",
+      "raw_seconds": 9.199954648526077,
+      "speech_window_seconds": 9.199954648526077,
+      "tempo": 0.953363176013065,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "다음은 큰 저수지입니다. 다만 모든 저수지가 똑같은 목적과 역사를 가졌다고 가정하지는 않겠습니다.",
+      "raw_seconds": 8.03392290249433,
+      "speech_window_seconds": 8.03392290249433,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "앙코르의 큰 직사각형 저수지를 보통 바라이라고 부릅니다. 완만한 땅에 둑을 쌓아 넓은 저장 공간을 만들었습니다.",
+      "raw_seconds": 9.69814058956916,
+      "speech_window_seconds": 9.69814058956916,
+      "tempo": 1.0049886621315192,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "서 바라이는 지금도 인상적인 사례입니다. 위에서 보는 긴 직사각형은 주변의 작은 지형 무늬와 뚜렷이 구별됩니다.",
+      "raw_seconds": 9.587596371882086,
+      "speech_window_seconds": 9.587596371882086,
+      "tempo": 0.9935333027857083,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "동 바라이에도 큰 윤곽이 남아 있습니다. 지금 모습은 물이 가득한 저수지와 다르며, 풍경이 계속 변함을 보여줍니다.",
+      "raw_seconds": 9.250589569160997,
+      "speech_window_seconds": 9.250589569160997,
+      "tempo": 0.9586103180477717,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "다른 저수지는 서로 다른 시기에 속합니다. 이 연결망은 완성된 설계 하나로 한꺼번에 생긴 것이 아니라, 오랜 시간 조합됐습니다.",
+      "raw_seconds": 10.520544217687075,
+      "speech_window_seconds": 10.520544217687075,
+      "tempo": 1.0902118360297486,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "크기는 놀랍지만 작동 방식까지 설명하지는 못합니다. 물이 어디로 들어와 어떻게 움직이고 나갔는지 물어야 합니다.",
+      "raw_seconds": 9.374126984126985,
+      "speech_window_seconds": 9.374126984126985,
+      "tempo": 0.9714121227074595,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "둑은 물을 붙잡으면서 침식에도 견뎌야 합니다. 높이와 재료, 보존 상태가 저수지의 실제 능력을 좌우합니다.",
+      "raw_seconds": 9.02358276643991,
+      "speech_window_seconds": 9.02358276643991,
+      "tempo": 0.9350862970404051,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "입구와 출구는 저장 공간을 주변 수로와 연결합니다. 그 위치는 사진 속 거대한 윤곽만큼 중요할 수 있습니다.",
+      "raw_seconds": 9.060544217687076,
+      "speech_window_seconds": 9.060544217687076,
+      "tempo": 0.938916499242184,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "퇴적물도 문제를 복잡하게 만듭니다. 물이 운반한 물질이 쌓이면 저수지 깊이나 수로 용량이 조금씩 달라집니다.",
+      "raw_seconds": 9.034716553287982,
+      "speech_window_seconds": 9.034716553287982,
+      "tempo": 0.9362400573355422,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "그래서 관리는 시설의 일생을 따라갑니다. 한 계절 잘 작동한 구조도 다음 계절 전에 청소나 수리가 필요할 수 있습니다.",
+      "raw_seconds": 9.438684807256235,
+      "speech_window_seconds": 9.438684807256235,
+      "tempo": 0.9781020525654129,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "저수지는 사원과 왕권의 세계에도 속했습니다. 현대적인 공학 도식만으로 그 의미를 모두 설명할 수는 없습니다.",
+      "raw_seconds": 9.150181405895692,
+      "speech_window_seconds": 9.150181405895692,
+      "tempo": 0.9482053270358229,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "물은 실용적 필요를 채우고 종교적 상징도 담았습니다. 역할은 겹칠 수 있으며, 비중은 장소와 시대에 따라 바뀝니다.",
+      "raw_seconds": 9.578072562358276,
+      "speech_window_seconds": 9.578072562358276,
+      "tempo": 0.9925463795189923,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "특정 바라이가 관개와 다른 기능에 어떻게 쓰였는지는 논의되어 왔습니다. 각 구조와 연결에 관한 증거가 필요합니다.",
+      "raw_seconds": 9.36031746031746,
+      "speech_window_seconds": 9.36031746031746,
+      "tempo": 0.9699810839707212,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "큰 저수지가 있다고 주변의 모든 논에 물을 댔다고 단정할 수 없습니다. 높이, 수로, 출구와 연대가 맞아야 합니다.",
+      "raw_seconds": 9.046371882086168,
+      "speech_window_seconds": 9.046371882086168,
+      "tempo": 0.9374478634286184,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "오늘의 수위는 과거 모든 세기의 사진이 아닙니다. 퇴적과 개조, 수리와 용도 변화가 저수지를 바꿉니다.",
+      "raw_seconds": 8.624965986394558,
+      "speech_window_seconds": 8.624965986394558,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "바라이를 더 큰 구성 안의 주요 부분으로 봅시다. 그 사이를 잇는 선을 따라가면 중요성이 더욱 분명해집니다.",
+      "raw_seconds": 8.723696145124716,
+      "speech_window_seconds": 8.723696145124716,
+      "tempo": 0.9040099632253592,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "그 선은 개울과 수로, 둑과 건널목, 분기점으로 이어집니다. 사람들이 살던 평야 전역에 펼쳐져 있습니다.",
+      "raw_seconds": 8.66875283446712,
+      "speech_window_seconds": 8.66875283446712,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "수로는 물이 지나기 쉬운 길을 줍니다. 흐름은 경사와 깊이, 폭과 거칠기, 상류에서 오는 물의 양에 달려 있습니다.",
+      "raw_seconds": 9.42562358276644,
+      "speech_window_seconds": 9.42562358276644,
+      "tempo": 0.976748557799631,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "움직임을 만드는 것은 중력입니다. 사람의 노동은 경로를 바꾸고 흐름을 나누며, 원래 다른 양을 받을 장소를 연결합니다.",
+      "raw_seconds": 10.289070294784581,
+      "speech_window_seconds": 10.289070294784581,
+      "tempo": 1.0662249010139462,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "분기점에서는 작은 변화가 멀리 영향을 줍니다. 한 갈래로 물이 더 가면 다른 갈래에는 덜 갈 수도 있습니다.",
+      "raw_seconds": 8.563061224489797,
+      "speech_window_seconds": 8.563061224489797,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "높인 둑은 젖은 땅을 가로지르는 길이 되기도 합니다. 교통과 물 관리는 같은 물리적 선을 공유할 수 있습니다.",
+      "raw_seconds": 8.593038548752835,
+      "speech_window_seconds": 8.593038548752835,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "건널목에는 또 다른 조정이 필요합니다. 길은 이어져야 하고, 물은 구조를 약하게 하지 않으면서 통과할 공간이 필요합니다.",
+      "raw_seconds": 9.621927437641723,
+      "speech_window_seconds": 9.621927437641723,
+      "tempo": 0.9970909261804894,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "이 체계는 물을 저장하고 이동시킵니다. 가장 큰 저수지만 보면 일상을 가능하게 했던 많은 관계를 놓칩니다.",
+      "raw_seconds": 8.749818594104308,
+      "speech_window_seconds": 8.749818594104308,
+      "tempo": 0.9067169527569231,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "자연 개울도 배경의 일부였습니다. 사람들은 이미 고유한 배수 흐름이 있던 풍경에서 물길을 바꿨습니다.",
+      "raw_seconds": 8.380113378684808,
+      "speech_window_seconds": 8.380113378684808,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "지도에서도 구별해야 합니다. 파낸 선, 쌓아 올린 선, 돌린 흐름, 오래된 지형을 이어받은 선이 있습니다.",
+      "raw_seconds": 8.29936507936508,
+      "speech_window_seconds": 8.29936507936508,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "이전의 부분을 이어 연결망이 자랄 수 있습니다. 새 시설은 지역 문제를 풀면서 다른 곳의 조건도 바꿉니다.",
+      "raw_seconds": 8.784965986394559,
+      "speech_window_seconds": 8.784965986394559,
+      "tempo": 0.9103591695745656,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "세대가 지나면 복잡성이 늘어납니다. 남은 흔적을 한꺼번에 그리기보다, 어떤 요소가 같은 시대에 있었는지 알아야 합니다.",
+      "raw_seconds": 9.745918367346938,
+      "speech_window_seconds": 9.745918367346938,
+      "tempo": 1.0099397271862112,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "버린 수로 옆에 나중 수로가 있다고 동시에 썼다는 뜻은 아닙니다. 지도에는 고고학적 시간도 보여야 합니다.",
+      "raw_seconds": 8.372222222222222,
+      "speech_window_seconds": 8.372222222222222,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "그래서 항공 사진과 함께 발굴과 연대 측정이 중요합니다. 아름다운 윤곽이 설명이 되려면 역사가 필요합니다.",
+      "raw_seconds": 9.298956916099772,
+      "speech_window_seconds": 9.298956916099772,
+      "tempo": 0.963622478352308,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "비 온 뒤 작은 개울을 상상해 봅시다. 한 곳에서는 물이 저수 공간으로 퍼지고, 뒤의 좁은 통로에서는 다시 모입니다.",
+      "raw_seconds": 9.251337868480725,
+      "speech_window_seconds": 9.251337868480725,
+      "tempo": 0.9586878620187279,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "같은 물도 경로에 따라 잔잔하거나 거세집니다. 약한 둑이나 막힌 구멍은 멀리 하류의 장소에 영향을 줍니다.",
+      "raw_seconds": 8.942267573696146,
+      "speech_window_seconds": 8.942267573696146,
+      "tempo": 0.9266598521964917,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "탑에서 한눈에 보는 것만으로는 부족합니다. 도시는 넓은 거리와 작은 세부를 함께 읽어야 합니다.",
+      "raw_seconds": 8.233854875283447,
+      "speech_window_seconds": 8.233854875283447,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "모든 선은 결국 사람에게 돌아갑니다. 가족과 노동자, 농민과 종교 공동체가 이 풍경을 쓰고 관리했습니다.",
+      "raw_seconds": 9.046349206349205,
+      "speech_window_seconds": 9.046349206349205,
+      "tempo": 0.9374455136113166,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "앙코르는 석조 건물이 모인 작은 중심부보다 컸습니다. 증거는 넓고 비교적 낮은 밀도로 연결된 도시 풍경을 보여줍니다.",
+      "raw_seconds": 9.952698412698412,
+      "speech_window_seconds": 9.952698412698412,
+      "tempo": 1.0313677111604571,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "주거지와 연못, 농지와 길, 사원 구역이 그 무늬 안에 있었습니다. 배치는 장소와 시대에 따라 달랐습니다.",
+      "raw_seconds": 8.9062358276644,
+      "speech_window_seconds": 8.9062358276644,
+      "tempo": 0.9229259925040828,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "가정의 연못은 생활 가까이에 물을 가져왔습니다. 큰 저수지 곁에서도 작은 시설이 중요한 역할을 할 수 있었습니다.",
+      "raw_seconds": 9.23140589569161,
+      "speech_window_seconds": 9.23140589569161,
+      "tempo": 0.9566223726105295,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "벼농사에는 계절과 땅을 아는 지식이 필요했습니다. 물 관리는 건설뿐 아니라 알맞은 시기를 고르는 일이었습니다.",
+      "raw_seconds": 9.089160997732426,
+      "speech_window_seconds": 9.089160997732426,
+      "tempo": 0.9418819686769353,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "논은 물이 부족해도, 너무 많아도 피해를 입습니다. 작물의 성장 단계와 맞지 않는 때에 와도 문제입니다.",
+      "raw_seconds": 8.628185941043084,
+      "speech_window_seconds": 8.628185941043084,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "농민은 되풀이한 경험으로 지역 차이를 알았습니다. 풍경은 왕의 명령만이 아니라 수많은 판단으로 만들어졌습니다.",
+      "raw_seconds": 9.239319727891157,
+      "speech_window_seconds": 9.239319727891157,
+      "tempo": 0.9574424588488245,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "큰 공사는 조직과 노동, 재료와 꾸준한 관심을 요구했습니다. 정치 권력과 공동체의 노력이 기반 시설에서 만났습니다.",
+      "raw_seconds": 9.85342403628118,
+      "speech_window_seconds": 9.85342403628118,
+      "tempo": 1.0210802110135937,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "수리는 건설만큼 중요했습니다. 흙을 걷어내고 둑을 보강하며 통로를 여는 일은 대개 화려한 기념물을 만들지 않습니다.",
+      "raw_seconds": 9.38984126984127,
+      "speech_window_seconds": 9.38984126984127,
+      "tempo": 0.9730405460975409,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "하지만 그런 일이 연결망을 오래 유지합니다. 엽서에 보이지 않는 손길이 특별한 탑의 풍경을 받쳤을 수 있습니다.",
+      "raw_seconds": 8.957868480725624,
+      "speech_window_seconds": 8.957868480725624,
+      "tempo": 0.9282765265000646,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "사라진 재료도 기억해야 합니다. 나무와 식물 섬유, 흙바닥은 조각한 사암과 다른 기록을 남깁니다.",
+      "raw_seconds": 8.371972789115647,
+      "speech_window_seconds": 8.371972789115647,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "보존의 차이는 상상에도 영향을 줍니다. 주변 집이 지상에 남지 않았기에 석조 사원만 혼자 있는 것처럼 보입니다.",
+      "raw_seconds": 9.084807256235827,
+      "speech_window_seconds": 9.084807256235827,
+      "tempo": 0.941430803755008,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "고고학은 흔적에서 관계를 복원합니다. 모든 지붕과 직업, 인구수를 정확히 안다고 주장하는 것은 아닙니다.",
+      "raw_seconds": 8.731700680272109,
+      "speech_window_seconds": 8.731700680272109,
+      "tempo": 0.904839448732861,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "사람이 살고 생산하며 연결되고 바뀌는, 더 풍부한 도시가 나타납니다. 물의 연결망은 그 살아 있는 세계의 일부였습니다.",
+      "raw_seconds": 10.221927437641723,
+      "speech_window_seconds": 10.221927437641723,
+      "tempo": 1.0592670919835983,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "발견이라는 말의 의미도 달라집니다. 앙코르는 외부인이 와서 보기만을 기다리던 빈 장소가 아니었습니다.",
+      "raw_seconds": 8.437392290249432,
+      "speech_window_seconds": 8.437392290249432,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "지역 지식과 이어진 신앙, 이전의 학문과 현대 연구가 모두 이곳을 이해하는 역사에 속합니다.",
+      "raw_seconds": 7.549092970521542,
+      "speech_window_seconds": 7.549092970521542,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "새 기술은 기록할 수 있는 범위를 넓힙니다. 이미 이곳을 알았거나 돌봐 온 사람들의 존재를 지우지는 않습니다.",
+      "raw_seconds": 9.244126984126984,
+      "speech_window_seconds": 9.244126984126984,
+      "tempo": 0.9579406201167858,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "상공에서는 더 잘 보이는 흔적이 있습니다. 땅에서 흩어진 둔덕과 웅덩이로 보이던 것이 긴 선으로 이어집니다.",
+      "raw_seconds": 8.851927437641724,
+      "speech_window_seconds": 8.851927437641724,
+      "tempo": 0.9172981800664998,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "항공 레이저 측량인 라이다는 광역 앙코르 풍경의 지도에 중요한 세부를 더했습니다.",
+      "raw_seconds": 6.694240362811791,
+      "speech_window_seconds": 6.694240362811791,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "레이저는 나뭇잎 사이로 땅을 측정하는 데 도움을 줍니다. 신호 처리가 묻힌 물건 모두를 사진처럼 보여주는 것은 아닙니다.",
+      "raw_seconds": 10.073310657596371,
+      "speech_window_seconds": 10.073310657596371,
+      "tempo": 1.043866389388225,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "얕은 토목 구조와 수로, 정착 형태가 드러날 수 있습니다. 조사할 단서이지, 과거의 완전한 영화는 아닙니다.",
+      "raw_seconds": 8.847868480725623,
+      "speech_window_seconds": 8.847868480725623,
+      "tempo": 0.9168775627694946,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "음영을 넣은 지형 모형은 작은 높이 차이를 드러냅니다. 가상 빛의 방향을 바꾸면 희미하던 선이 보일 수 있습니다.",
+      "raw_seconds": 9.341201814058957,
+      "speech_window_seconds": 9.341201814058957,
+      "tempo": 0.9680001879853841,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "선명한 선도 해석이 필요합니다. 연구자는 지도와 현장 관찰, 발굴 자료와 옛 도면, 다른 증거를 비교합니다.",
+      "raw_seconds": 9.192335600907029,
+      "speech_window_seconds": 9.192335600907029,
+      "tempo": 0.952573637399692,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "현대의 길과 오래된 둑, 자연 지형이 어떤 각도에서는 닮아 보입니다. 주변 맥락이 구별을 돕습니다.",
+      "raw_seconds": 8.319274376417233,
+      "speech_window_seconds": 8.319274376417233,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "연대는 여전히 핵심입니다. 지도는 위치를 보여주고, 발굴과 연대 측정은 언제 중요했는지 밝히는 데 도움을 줍니다.",
+      "raw_seconds": 9.50469387755102,
+      "speech_window_seconds": 9.50469387755102,
+      "tempo": 0.9849423707306756,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "퇴적물은 또 다른 창입니다. 층에는 쌓임과 물 환경, 교란의 변화가 남을 수 있지만 각각 한계도 있습니다.",
+      "raw_seconds": 8.630952380952381,
+      "speech_window_seconds": 8.630952380952381,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "방법을 합치면 서로 다른 증거를 점검할 수 있습니다. 탄탄한 설명은 극적인 한 장면보다 여러 무늬를 연결합니다.",
+      "raw_seconds": 9.164648526077098,
+      "speech_window_seconds": 9.164648526077098,
+      "tempo": 0.9497045104743106,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "그래서 재현에는 표시가 필요합니다. 그럴듯한 수로 장면도 기록된 고대 사건의 실제 촬영물이 아니라 설명용 그림입니다.",
+      "raw_seconds": 9.785646258503402,
+      "speech_window_seconds": 9.785646258503402,
+      "tempo": 1.014056607098798,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "목표는 관계를 이해하는 것입니다. 물이 갈 수 있는 곳, 사람들이 산 곳, 변화가 연결망을 전하는 방식을 봅니다.",
+      "raw_seconds": 8.897301587301587,
+      "speech_window_seconds": 8.897301587301587,
+      "tempo": 0.9220001644872111,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "외부 조건이 바뀌면 이 질문은 더욱 중요합니다. 경험으로 만든 체계도 낯선 압력에 맞닥뜨릴 수 있습니다.",
+      "raw_seconds": 8.626643990929706,
+      "speech_window_seconds": 8.626643990929706,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "잠시 돌을 떠나 기후의 증거를 보겠습니다. 앙코르 밖에서 나온 기록도 포함됩니다.",
+      "raw_seconds": 6.97156462585034,
+      "speech_window_seconds": 6.97156462585034,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "동남아시아 대륙부의 나이테 연구는 십사 세기와 십오 세기의 일부에 심한 가뭄과 매우 습한 시기가 있었음을 보여줍니다.",
+      "raw_seconds": 9.675668934240363,
+      "speech_window_seconds": 9.675668934240363,
+      "tempo": 1.0026599931855298,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "이 기록은 지역 기후의 변동을 말합니다. 현지 조건과 고고학적 변화에는 조심스럽게 연결해야 하며, 같은 시계로 볼 수 없습니다.",
+      "raw_seconds": 10.25764172335601,
+      "speech_window_seconds": 10.25764172335601,
+      "tempo": 1.0629680542337834,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "긴 가뭄은 쓸 수 있는 물을 줄입니다. 수로와 논, 마을을 계속 움직이게 하는 데 필요한 노동도 바꿉니다.",
+      "raw_seconds": 8.465918367346939,
+      "speech_window_seconds": 8.465918367346939,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "매우 습한 시기는 다른 과제를 줍니다. 빠른 물은 퇴적물을 나르고 둑을 깎으며, 충분하던 통로를 넘치게 합니다.",
+      "raw_seconds": 9.234603174603174,
+      "speech_window_seconds": 9.234603174603174,
+      "tempo": 0.9569536968500698,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "건조와 습윤이 번갈아 오면 연결망은 어려워집니다. 물 부족에 유용한 변경이 다음 폭우에도 답이 되지는 않습니다.",
+      "raw_seconds": 9.08575963718821,
+      "speech_window_seconds": 9.08575963718821,
+      "tempo": 0.9415294960816797,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "복잡한 체계는 이익을 나누고 혼란도 전달합니다. 상류의 변화가 멀리 있는 누군가의 문제가 될 수 있습니다.",
+      "raw_seconds": 8.521065759637189,
+      "speech_window_seconds": 8.521065759637189,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "모든 부분이 함께 망가졌다는 뜻은 아닙니다. 지역 수리와 경로 변경, 용도 변화가 곳곳에 다른 결과를 만들었습니다.",
+      "raw_seconds": 9.805079365079365,
+      "speech_window_seconds": 9.805079365079365,
+      "tempo": 1.016070400526359,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "앙코르 물 연결망의 일부에서는 손상과 개조를 조사합니다. 갑작스러운 붕괴의 이미지보다 변화의 순서가 중요합니다.",
+      "raw_seconds": 9.957551020408163,
+      "speech_window_seconds": 9.957551020408163,
+      "tempo": 1.031870572063022,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "기후는 주요 연구 주제지만 완전한 설명은 아닙니다. 제도와 관리, 정착과 정치 상황도 함께 봐야 합니다.",
+      "raw_seconds": 9.026349206349206,
+      "speech_window_seconds": 9.026349206349206,
+      "tempo": 0.9353729747512131,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "십오 세기에는 갈등과 정치적 관계의 변화도 있었습니다. 권력과 활동의 이동은 비만으로 설명되지 않습니다.",
+      "raw_seconds": 8.822789115646259,
+      "speech_window_seconds": 8.822789115646259,
+      "tempo": 0.9142786648338092,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "천사백삼십일 년은 짧은 역사 소개에 자주 나옵니다. 하지만 날짜 하나가 지역 전체를 하룻밤에 비우지는 않습니다.",
+      "raw_seconds": 9.563310657596372,
+      "speech_window_seconds": 9.563310657596372,
+      "tempo": 0.9910166484555825,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "일부 장소는 변하거나 쇠퇴했지만 다른 곳은 중요성을 지켰습니다. 앙코르와트의 종교 역사는 왕의 중심이 이동한 뒤에도 이어졌습니다.",
+      "raw_seconds": 10.805419501133787,
+      "speech_window_seconds": 10.805419501133787,
+      "tempo": 1.119732590791066,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "넓은 변화는 여러 과정이 오랜 시간 만든 결과였습니다. 마지막 폭풍이나 침략, 텅 빈 거리 하나로 증거를 단순화하면 안 됩니다.",
+      "raw_seconds": 10.343854875283446,
+      "speech_window_seconds": 10.343854875283446,
+      "tempo": 1.0719020596148647,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "느리고 고르지 않은 이야기는 어렵지만 더 인간적입니다. 사람들은 적응하고 수리하며 옮겨 가고, 달라진 조건 속에서 관습을 이어갑니다.",
+      "raw_seconds": 10.84873015873016,
+      "speech_window_seconds": 10.84873015873016,
+      "tempo": 1.1242207418373222,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "물 연결망은 그 대응을 연구하는 길입니다. 큰 환경 압력과 특정 장소의 결정을 연결합니다.",
+      "raw_seconds": 7.909727891156463,
+      "speech_window_seconds": 7.909727891156463,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "옛 공학에 대한 쉬운 판단도 경계해야 합니다. 쓸모 있게 짓는 것과 세대를 넘어 유지하는 것은 연결된 서로 다른 성취입니다.",
+      "raw_seconds": 10.265215419501134,
+      "speech_window_seconds": 10.265215419501134,
+      "tempo": 1.0637528932125526,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "모든 방식은 조건과 지식, 노동과 자원에 달려 있습니다. 그것들이 바뀌면 같은 구조도 새 역할을 맡을 수 있습니다.",
+      "raw_seconds": 9.329614512471656,
+      "speech_window_seconds": 9.329614512471656,
+      "tempo": 0.966799431344213,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "이후의 역사 역시 앙코르 이야기 자체입니다. 건설 시대를 끝내는 극적인 결말로만 다룰 수 없습니다.",
+      "raw_seconds": 8.414625850340135,
+      "speech_window_seconds": 8.414625850340135,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "오늘도 물은 앙코르를 돌보는 일의 일부입니다. 비와 배수, 식생과 구조물 상태가 보존에 영향을 줍니다.",
+      "raw_seconds": 8.63170068027211,
+      "speech_window_seconds": 8.63170068027211,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "방문객 길의 수로는 조각 벽보다 덜 인상적일 수 있습니다. 그래도 물이 적절히 흐르면 그 벽의 환경을 보호합니다.",
+      "raw_seconds": 9.096530612244898,
+      "speech_window_seconds": 9.096530612244898,
+      "tempo": 0.9426456592999893,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "보존에는 관찰과 지역 전문 지식이 필요합니다. 한 곳의 개입도 겉모습만이 아니라 더 넓은 풍경에서 생각해야 합니다.",
+      "raw_seconds": 9.68015873015873,
+      "speech_window_seconds": 9.68015873015873,
+      "tempo": 1.0031252570112674,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "유산은 현재 공동체와 생계, 신앙과 관광에 연결됩니다. 과거만이 아니라 오늘과 맺는 관계이기도 합니다.",
+      "raw_seconds": 8.983877551020408,
+      "speech_window_seconds": 8.983877551020408,
+      "tempo": 0.93097176694512,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "방문할 때는 허용된 길과 현지 안내를 따릅시다. 약한 둑에 오르거나 닫힌 건물에 들어갈 필요는 없습니다.",
+      "raw_seconds": 8.48845804988662,
+      "speech_window_seconds": 8.48845804988662,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "촬영도 같습니다. 허용된 시점과 성인의 일상, 신중한 설명 이미지는 신성한 행위를 연출하지 않고도 이야기를 전합니다.",
+      "raw_seconds": 10.236802721088436,
+      "speech_window_seconds": 10.236802721088436,
+      "tempo": 1.0608085721335168,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "처음의 이미지로 돌아갑시다. 돌의 자국은 물이 건축과 땅, 노동과 기억에 닿는 세계의 일부입니다.",
+      "raw_seconds": 8.589229024943311,
+      "speech_window_seconds": 8.589229024943311,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "우리는 탑에서 시작해 그 사이의 선을 찾았습니다. 선은 논과 집, 저수지와 계절, 이어지는 책임으로 이끌었습니다.",
+      "raw_seconds": 9.451451247165533,
+      "speech_window_seconds": 9.451451247165533,
+      "tempo": 0.9794249997062728,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "사원은 여전히 놀랍습니다. 그것을 지탱한 작은 행동과 넓은 연결을 보면 그 규모가 더 의미 있게 다가옵니다.",
+      "raw_seconds": 8.954784580498867,
+      "speech_window_seconds": 8.954784580498867,
+      "tempo": 0.9279569513470328,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "도시의 증거는 고르게 남지 않습니다. 돌은 보이지만 옛 수로의 역할은 끈기 있는 지도 작업이 있어야 드러날 수 있습니다.",
+      "raw_seconds": 9.187732426303855,
+      "speech_window_seconds": 9.187732426303855,
+      "tempo": 0.952096624487446,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "둘을 함께 읽으면 질문이 바뀝니다. 누가 세웠는가를 넘어, 사람이 살던 풍경은 어떻게 계속 작동했는가를 묻게 됩니다.",
+      "raw_seconds": 10.006780045351475,
+      "speech_window_seconds": 10.006780045351475,
+      "tempo": 1.0369720254250232,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "개별 구조의 역사와 물 분배, 조건이 바뀔 때 공동체가 한 선택에는 아직 열린 질문이 남습니다.",
+      "raw_seconds": 8.076213151927437,
+      "speech_window_seconds": 8.076213151927437,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "미래 연구는 답을 더 정교하게 할 수 있습니다. 흔적을 보호해야 이야기를 단순한 형태로 고정하지 않고 연구를 이어갑니다.",
+      "raw_seconds": 9.292358276643991,
+      "speech_window_seconds": 9.292358276643991,
+      "tempo": 0.962938681517512,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "평야에서는 여전히 물이 모이고 움직이며 자국을 남깁니다. 수백 년 된 구조 사이에서도 익숙한 과정이 이어집니다.",
+      "raw_seconds": 9.020408163265307,
+      "speech_window_seconds": 9.020408163265307,
+      "tempo": 0.9347573226181665,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "앙코르의 성취는 연결에도 있습니다. 계절과 저장, 땅과 이동, 신성한 장소와 일상의 필요가 서로 이어집니다.",
+      "raw_seconds": 9.520498866213153,
+      "speech_window_seconds": 9.520498866213153,
+      "tempo": 0.9865801933899639,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "변화의 역사는 기반 시설이 사람과 환경, 돌봄의 지속적인 관계임을 알려줍니다. 한 번 완성하면 끝나는 구조가 아닙니다.",
+      "raw_seconds": 10.482879818594105,
+      "speech_window_seconds": 10.482879818594105,
+      "tempo": 1.086308789491617,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "돌의 물 자국을 다시 봅시다. 작은 흔적이 이제 도시로 열리고, 그 도시는 풍경 전체로 이어집니다.",
+      "raw_seconds": 7.96562358276644,
+      "speech_window_seconds": 7.96562358276644,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1292,
+  "decoded_samples": 31008000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-ko-21m32s.mp3",
+  "flac": "voice-ko-21m32s.flac",
+  "mp3_sha256": "d28fadc8f83bd1d3b522fd75057d9465160e7bd6e34b60a1f726c0b0f2f4cbb9",
+  "flac_sha256": "a5f22ac8c024c2f3f2ba3a0d99fbe8487a93ae10e9391d7837ba0bda2315a28b"
+}

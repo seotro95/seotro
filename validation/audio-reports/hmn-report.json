@@ -1,0 +1,1182 @@
+{
+  "locale": "hmn",
+  "voice_id": "hmong-female-3",
+  "engine": "Native Hmong VITS + OpenVoice V2 FP32 CPU",
+  "target_seconds": 1292,
+  "spoken_cues": 129,
+  "closing_silence_seconds": 2,
+  "config_hash": "7113be3b8956be47580e8b8ebc6d21ef3bfdf95dff26eb349c9a05d5bee8d6bc",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "Muaj ib txoj kab tsaus nyob saum lub pob zeb qub. Nws zoo li me xwb, tiam sis dej tau pab tsim ib lub nroog loj.",
+      "raw_seconds": 6.896326530612245,
+      "speech_window_seconds": 6.896326530612245,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Thaum pom Angkor, peb xub ntsia cov pej thuam siab. Tiam sis ib lub cev loj dua txuas mus rau kwj dej, ntug av thiab pas dej.",
+      "raw_seconds": 8.034104308390022,
+      "speech_window_seconds": 8.034104308390022,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Yog taug cov kev txuas ntawd, zaj dab neeg hloov. Lub tuam tsev yog ib feem ntawm nroog, thiab nroog yog ib feem ntawm thaj av txais dej.",
+      "raw_seconds": 8.382403628117913,
+      "speech_window_seconds": 8.382403628117913,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Peb nug tias: tib neeg npaj lub neej li cas, thaum ib lub caij dej muaj ntau heev, hos lwm caij nrhiav dej nyuaj?",
+      "raw_seconds": 7.082086167800454,
+      "speech_window_seconds": 7.082086167800454,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Lo lus teb txuas nag, av, kev ua teb, kev ntseeg, hwj chim thiab kev tu kho. Nws kuj pab qhia Angkor txoj kev hloov tom qab.",
+      "raw_seconds": 8.045714285714286,
+      "speech_window_seconds": 8.045714285714286,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Pib ntawm teb chaws Qhab Meem niaj hnub no, ze Siem Reap, sab qaum teb pas Tonle Sap. Cov tuam tsev nyob hauv thaj chaw muaj neeg coob.",
+      "raw_seconds": 8.661043083900227,
+      "speech_window_seconds": 8.661043083900227,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Angkor yog ib lub chaw tseem ceeb ntawm cov Khmer tau ntau pua xyoo. Nws hloov raws vaj ntxwv, zej zog thiab tej yam lawv xav tau.",
+      "raw_seconds": 7.9760544217687075,
+      "speech_window_seconds": 7.9760544217687075,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Cov tuam tsev pob zeb yog chaw cim pom tseeb. Tiam sis nroog kuj xav tau vaj tsev, teb, kev mus los thiab chaw pauv khoom.",
+      "raw_seconds": 7.790294784580499,
+      "speech_window_seconds": 7.790294784580499,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Vaj tsev niaj hnub siv ntau yam uas tsis nyob ntev li pob zeb. Thaum cov ru tsev ploj, cov tuam tsev thiaj zoo li nyob ib leeg.",
+      "raw_seconds": 7.987664399092971,
+      "speech_window_seconds": 7.987664399092971,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Saib dhau lub qhov rooj txua duab. Ib txoj av siab tej zaum yog ntug thaiv dej; ib qho av qis kuj khaws lwm txoj dab neeg.",
+      "raw_seconds": 7.569705215419501,
+      "speech_window_seconds": 7.569705215419501,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Yuav tsum tshawb cov cim ntawd. Nws tus duab xwb qhia tsis tau tias tsim thaum twg, siv li cas, los sis hloov li cas lawm.",
+      "raw_seconds": 7.825124716553288,
+      "speech_window_seconds": 7.825124716553288,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Thaum muab cov cim los sib txuas, peb mam pom tias zaj lus nug loj npaum li cas. Angkor loj tshaj ib lub tuam tsev nto moo.",
+      "raw_seconds": 7.500045351473923,
+      "speech_window_seconds": 7.500045351473923,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Angkor Wat tsim thaum pib xyoo pua kaum ob, nyob rau vaj Suryavarman tus ob lub caij. Qhov no yog qhov pib saib thaj chaw dav dua.",
+      "raw_seconds": 8.312743764172335,
+      "speech_window_seconds": 8.312743764172335,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Thaum xub thawj pe hawm Vishnu, tom qab txuas rau kev ntseeg Hauj Sam. Lub ntsiab kev ntseeg thiaj hloov tau raws lub sij hawm.",
+      "raw_seconds": 7.7090249433106575,
+      "speech_window_seconds": 7.7090249433106575,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Lub kwj ncig tuam tsev yuav qhia txog lub ntiaj teb dawb huv uas muaj txheej txheem. Nws kuj cuam tshuam dej, av thiab chaw nyob ib sab.",
+      "raw_seconds": 7.836734693877551,
+      "speech_window_seconds": 7.836734693877551,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Yuav kom nkag siab, cia peb tawm ntawm cov pej thuam ib pliag. Saib nag los qhov twg, thiab av cia dej ntws mus qhov twg.",
+      "raw_seconds": 7.523265306122449,
+      "speech_window_seconds": 7.523265306122449,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Thaj av no muaj caij nag thiab caij qhuav txawv meej. Tib qho chaw muaj tej yam txawv heev thaum hloov caij.",
+      "raw_seconds": 6.8382766439909295,
+      "speech_window_seconds": 6.8382766439909295,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Thaum nag los, dej poob rau ru tsev, teb, kev, kwj thiab av qis. Qhov tseem ceeb yog ntau npaum li cas thiab ntws ceev npaum li cas.",
+      "raw_seconds": 8.161814058956915,
+      "speech_window_seconds": 8.161814058956915,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Ib kob nag loj yuav ua rau kwj txais tsis taus, txawm tom qab ntawd tseem muaj dej tsis txaus. Lub sij hawm yog yam tseem ceeb.",
+      "raw_seconds": 8.266303854875284,
+      "speech_window_seconds": 8.266303854875284,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Thaum caij qhuav ntev tuaj, dej khaws cia thiab txoj kev mus cuag dej tseem ceeb dua. Lub cev dej yuav tsum pab tau ob lub caij.",
+      "raw_seconds": 8.266303854875284,
+      "speech_window_seconds": 8.266303854875284,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Sab qaum teb Angkor muaj av siab uas pab txais dej los rau tiaj nrag. Dej ntws nqes raws lub zog ntiaj teb, neeg kuj hloov tau nws txoj kev.",
+      "raw_seconds": 8.881632653061224,
+      "speech_window_seconds": 8.881632653061224,
+      "tempo": 0.9203764407317331,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Av muab ib qho kev ntws dav rau dej. Tiam sis qhov siab txawv me ntsis xwb kuj xaiv tau tias daim teb twg yuav txais dej.",
+      "raw_seconds": 7.720634920634921,
+      "speech_window_seconds": 7.720634920634921,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Yog li av yog ib feem ntawm cov cuab yeej dej. Ib txoj kwj yuav muaj nqis raws li av nyob ib ncig thiab sab nqes.",
+      "raw_seconds": 6.722176870748299,
+      "speech_window_seconds": 6.722176870748299,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Sab qab teb yog Tonle Sap, ib feem loj ntawm dej hauv cheeb tsam. Lub pas nthuav thiab nqaim raws caij, txuas rau cov dej loj dua.",
+      "raw_seconds": 7.894784580498866,
+      "speech_window_seconds": 7.894784580498866,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Tonle Sap txoj kev ntws tig rov qab raws caij yog ib yam loj hauv cheeb tsam. Tsis yog txhua txoj kwj hauv Angkor ua tib yam ntawd.",
+      "raw_seconds": 7.918004535147392,
+      "speech_window_seconds": 7.918004535147392,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Pas, tiaj nrag, kwj, nag thiab dej hauv av sib cuam tshuam ntau qib. Ib tug xub ntawm daim ntawv qhia chaw qhia tsis tau txhua yam.",
+      "raw_seconds": 8.161814058956915,
+      "speech_window_seconds": 8.161814058956915,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Rau cov neeg nyob ntawd, tej no yog teeb meem niaj hnub: dej nyob deb li cas, txoj kev hla puas zoo, thiab thaum twg thiaj cog tau qoob.",
+      "raw_seconds": 8.881632653061224,
+      "speech_window_seconds": 8.881632653061224,
+      "tempo": 0.9203764407317331,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Qhov nyuaj tsis yog khaws dej kom ntau xwb. Yuav tsum coj, tuav thiab tso dej raws kev xav tau uas hloov tas li.",
+      "raw_seconds": 6.861496598639456,
+      "speech_window_seconds": 6.861496598639456,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Tej qhov chaw yuav tsum ua kom dej ntws qeeb. Lwm qhov xav tau kev tso dej ntau dhau tawm, ua ntej nws ua puas teb thiab vaj tsev.",
+      "raw_seconds": 8.266303854875284,
+      "speech_window_seconds": 8.266303854875284,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Khaws dej thiab tso dej thiaj yog tib zaj dab neeg. Thaj av xav tau chaw rau dej nyob thiab kev rau dej tawm mus.",
+      "raw_seconds": 6.9543764172335605,
+      "speech_window_seconds": 6.9543764172335605,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Tam sim no cov kab sab nraum tuam tsev muaj ntsiab dua. Ntug av ntev thiab pas dav qhia kev ua hauj lwm nrog ob lub caij.",
+      "raw_seconds": 7.650975056689342,
+      "speech_window_seconds": 7.650975056689342,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Tom ntej yog cov pas dej loj. Tiam sis peb yuav tsis xav tias txhua lub muaj tib lub hom phiaj thiab tib zaj keeb kwm.",
+      "raw_seconds": 7.523265306122449,
+      "speech_window_seconds": 7.523265306122449,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Cov pas loj uas muaj plaub ceg ntawm Angkor feem ntau hu ua baray. Ntug av tsim chaw loj khaws dej saum thaj av tiaj.",
+      "raw_seconds": 7.058866213151927,
+      "speech_window_seconds": 7.058866213151927,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Lub West Baray tseem pom meej heev. Saum huab cua, nws txoj duab ntev txawv cov qauv me nyob ib ncig.",
+      "raw_seconds": 6.339047619047619,
+      "speech_window_seconds": 6.339047619047619,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Lub East Baray khaws lwm txoj kab loj. Niaj hnub no nws tsis zoo li ib lub pas puv dej, qhia tias thaj av tseem hloov.",
+      "raw_seconds": 7.383945578231293,
+      "speech_window_seconds": 7.383945578231293,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Lwm cov pas thiab chaw dej tsim nyob rau ntau lub caij. Lub cev dej loj hlob zuj zus, tsis yog ib daim phiaj ua tiav tib zaug.",
+      "raw_seconds": 7.883174603174603,
+      "speech_window_seconds": 7.883174603174603,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Lub pas loj ua rau peb xav tsis thoob. Tiam sis yuav nkag siab, peb yuav tsum nug dej nkag qhov twg thiab tawm qhov twg.",
+      "raw_seconds": 7.186575963718821,
+      "speech_window_seconds": 7.186575963718821,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Ntug av yuav tsum tuav dej thiab tiv thaiv kev yaig. Qhov siab, hom av thiab kev tu zoo txiav txim tias lub pas ua hauj lwm tau li cas.",
+      "raw_seconds": 8.614603174603175,
+      "speech_window_seconds": 8.614603174603175,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Qhov dej nkag thiab qhov dej tawm txuas lub pas rau lwm qhov chaw. Lawv qhov chaw yuav tseem ceeb npaum lub pas tus duab.",
+      "raw_seconds": 6.989206349206349,
+      "speech_window_seconds": 6.989206349206349,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Dej kuj nqa av tuaj. Thaum av tsaws zuj zus, nws hloov qhov tob ntawm pas thiab qhov dav uas kwj txais tau.",
+      "raw_seconds": 6.594467120181406,
+      "speech_window_seconds": 6.594467120181406,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Kev tu kho thiaj nyob nrog lub cev dej tas nws lub neej. Qhov ua tau ib caij yuav xav tau khawb av los sis kho ua ntej lwm caij.",
+      "raw_seconds": 8.196643990929704,
+      "speech_window_seconds": 8.196643990929704,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Cov pas kuj nyob nrog tuam tsev thiab hwj chim vaj ntxwv. Lawv lub ntsiab loj dua ib daim duab qhia kev ua tshuab niaj hnub xwb.",
+      "raw_seconds": 7.743854875283446,
+      "speech_window_seconds": 7.743854875283446,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Dej pab lub neej thiab nqa lub ntsiab kev ntseeg tau tib txhij. Ob txoj hauj lwm ntawd hloov sib xyaw raws chaw thiab raws caij.",
+      "raw_seconds": 7.6741950113378685,
+      "speech_window_seconds": 7.6741950113378685,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Cov kws tshawb tseem sib tham txog baray siv dej rau teb thiab lwm hom phiaj. Yuav tsum saib pov thawj ntawm txhua lub pas thiab txoj kev txuas.",
+      "raw_seconds": 8.626213151927438,
+      "speech_window_seconds": 8.626213151927438,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Ib lub pas dav tsis qhia tias txhua daim teb ze ntawd txais nws cov dej. Qhov siab, kwj, qhov tawm thiab hnub nyoog yuav tsum haum ua ke.",
+      "raw_seconds": 8.185034013605442,
+      "speech_window_seconds": 8.185034013605442,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Dej nyob siab niaj hnub no tsis sawv cev txhua xyoo pua dhau los. Av tsaws, kev hloov, kev kho thiab kev siv tshiab hloov tau lub pas.",
+      "raw_seconds": 8.417233560090702,
+      "speech_window_seconds": 8.417233560090702,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Cia xav tias cov baray yog tej feem loj hauv ib lub cev dav. Thaum taug cov kab txuas, lawv lub luag hauj lwm thiaj meej dua.",
+      "raw_seconds": 7.790294784580499,
+      "speech_window_seconds": 7.790294784580499,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Cov kab coj peb mus rau kwj, ntug av, kev hla thiab chaw dej sib faib. Lawv nthuav thoob tiaj nrag uas muaj neeg nyob.",
+      "raw_seconds": 7.337505668934241,
+      "speech_window_seconds": 7.337505668934241,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Kwj muab ib txoj kev rau dej. Tiam sis qhov nqes, qhov tob, qhov dav, pob zeb thiab dej los saum toj puav leej hloov txoj kev ntws.",
+      "raw_seconds": 8.440453514739229,
+      "speech_window_seconds": 8.440453514739229,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Dej txav nqes raws ntuj txoj cai. Neeg ua hauj lwm hloov tau txoj kev, faib dej thiab txuas tej chaw uas yeej txais dej tsis sib npaug.",
+      "raw_seconds": 8.115374149659864,
+      "speech_window_seconds": 8.115374149659864,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Ntawm chaw sib faib, hloov me ntsis yuav cuam tshuam dav. Yog ib ceg txais ntau dua, lwm ceg tej zaum tau tsawg dua.",
+      "raw_seconds": 6.931156462585034,
+      "speech_window_seconds": 6.931156462585034,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Ib txoj ntug av siab kuj ua kev taug hla av ntub. Kev mus los thiab kev tswj dej thiaj siv tau tib txoj kab.",
+      "raw_seconds": 7.163356009070295,
+      "speech_window_seconds": 7.163356009070295,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Chaw hla xav kom txoj kev txuas mus tau. Dej kuj xav tau qhov dav txaus kom hla dhau yam tsis khoob av hauv qab.",
+      "raw_seconds": 7.163356009070295,
+      "speech_window_seconds": 7.163356009070295,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Lub cev dej muaj kev txav thiab kev khaws tib si. Yog saib cov pas loj xwb, peb yuav plam ntau txoj kev uas txhawb lub neej.",
+      "raw_seconds": 7.836734693877551,
+      "speech_window_seconds": 7.836734693877551,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Cov kwj ntuj kuj yog ib feem. Neeg kho cov dej hauv thaj av uas twb muaj nws tus kheej txoj kev tso dej lawm.",
+      "raw_seconds": 6.977596371882086,
+      "speech_window_seconds": 6.977596371882086,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Thaum kos ntawv qhia chaw, yuav tsum cais kom meej. Muaj kab khawb, kab tsa av, kab hloov kev thiab kab raws av qub.",
+      "raw_seconds": 7.1053061224489795,
+      "speech_window_seconds": 7.1053061224489795,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Ib lub cev loj hlob tau thaum txuas tej feem qub. Txhua yam ntxiv pab ib qho teeb meem, tiam sis kuj hloov lwm qhov chaw.",
+      "raw_seconds": 7.569705215419501,
+      "speech_window_seconds": 7.569705215419501,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Ntau tiam dhau mus, kev sib txuas nyuaj zuj zus. Yuav nkag siab tas nrho, yuav tsum paub tej feem twg siv tib lub caij.",
+      "raw_seconds": 7.383945578231293,
+      "speech_window_seconds": 7.383945578231293,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Ib txoj kwj tso tseg nyob ib sab kwj tshiab tsis qhia tias ob txoj ua hauj lwm ua ke. Sij hawm yuav tsum nyob hauv daim ntawv qhia.",
+      "raw_seconds": 8.13859410430839,
+      "speech_window_seconds": 8.13859410430839,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Vim li ntawd, khawb tshawb thiab nrhiav hnub nyoog tseem ceeb ib yam li saib saum huab cua. Ib txoj kab xav tau keeb kwm thiaj piav tau.",
+      "raw_seconds": 8.463673469387755,
+      "speech_window_seconds": 8.463673469387755,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Xav txog ib tug kwj me tom qab nag. Ib qho chaw dej nthuav mus rau pas; tom ntej ib qhov nqaim rov sau dej ua ke.",
+      "raw_seconds": 7.63936507936508,
+      "speech_window_seconds": 7.63936507936508,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Tib cov dej yuav maj mam los sis muaj zog raws txoj kev. Ntug av tsis ruaj los sis qhov txhaws yuav ua teeb meem deb sab nqes.",
+      "raw_seconds": 7.4071655328798185,
+      "speech_window_seconds": 7.4071655328798185,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Saib ntawm ib lub pej thuam xwb pom tsis tau txhua yam. Yuav tsum nyeem nroog thoob tej chaw deb thiab tej cim me me.",
+      "raw_seconds": 6.768616780045352,
+      "speech_window_seconds": 6.768616780045352,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Txhua txoj kab thaum kawg txuas rov rau neeg: tsev neeg, neeg ua hauj lwm, neeg ua teb thiab cov saib xyuas kev ntseeg.",
+      "raw_seconds": 7.116916099773243,
+      "speech_window_seconds": 7.116916099773243,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Angkor loj dua ib pawg tsev pob zeb nyob sib ti. Pov thawj qhia ib thaj nroog dav uas tsev tsis nyob tuab heev thiab muaj ntau chaw txuas.",
+      "raw_seconds": 8.70748299319728,
+      "speech_window_seconds": 8.70748299319728,
+      "tempo": 0.9023298438546403,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Chaw nyob, pas me, teb, kev thiab tuam tsev yog ib feem ntawm qauv loj. Lawv kev nyob txawv raws chaw thiab raws sij hawm.",
+      "raw_seconds": 7.558095238095238,
+      "speech_window_seconds": 7.558095238095238,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Ib lub pas ntawm tsev coj dej los ze kev ua neej. Txawm muaj pas loj nyob ze, lub pas me tseem muaj nqis rau tsev neeg.",
+      "raw_seconds": 7.48843537414966,
+      "speech_window_seconds": 7.48843537414966,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Kev cog nplej xav tau kev paub caij thiab av. Tswj dej yog xaiv sij hawm kom haum, nrog kev tsim tej cuab yeej tib si.",
+      "raw_seconds": 7.627755102040816,
+      "speech_window_seconds": 7.627755102040816,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Teb puas tau vim dej tsawg, dej ntau, los sis dej tuaj tsis haum lub caij uas cov nplej tab tom loj.",
+      "raw_seconds": 6.478367346938776,
+      "speech_window_seconds": 6.478367346938776,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Cov neeg ua teb paub av los ntawm kev ua ntau xyoo. Ntau txoj kev txiav txim tsim thaj av, tsis yog vaj ntxwv cov lus xwb.",
+      "raw_seconds": 7.198185941043084,
+      "speech_window_seconds": 7.198185941043084,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Tej hauj lwm loj tseem xav tau kev npaj, neeg, khoom thiab kev tu tas li. Hwj chim thiab zej zog txoj zog ntsib hauv cov cuab yeej ntawd.",
+      "raw_seconds": 8.25469387755102,
+      "speech_window_seconds": 8.25469387755102,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Kev kho tseem ceeb npaum kev tsim tshiab. Khawb av tawm, ntxiv ntug av thiab qhib kwj tsis tshua tsim tej tsev zoo nkauj.",
+      "raw_seconds": 7.859954648526077,
+      "speech_window_seconds": 7.859954648526077,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Tiam sis tej hauj lwm ntawd pab lub cev nyob ntev. Cov kev ua niaj hnub uas daim duab tsis pom tej zaum txhawb cov tuam tsev loj.",
+      "raw_seconds": 8.103764172335602,
+      "speech_window_seconds": 8.103764172335602,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Nco ntsoov tej khoom uas ploj lawm thiab. Ntoo, hlua nroj thiab av taug kev khaws cim txawv pob zeb txua duab.",
+      "raw_seconds": 7.163356009070295,
+      "speech_window_seconds": 7.163356009070295,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Kev nyob ntev tsis sib npaug hloov peb txoj kev xav. Lub tuam tsev pob zeb zoo li nyob ib leeg vim vaj tsev ncig nws ploj lawm.",
+      "raw_seconds": 7.778684807256236,
+      "speech_window_seconds": 7.778684807256236,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Cov kws tshawb sim txuas cov cim rov ua ke. Lawv tsis hais tias paub tseeb txhua lub ru tsev, txoj hauj lwm los sis pes tsawg tus neeg.",
+      "raw_seconds": 8.312743764172335,
+      "speech_window_seconds": 8.312743764172335,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Peb thiaj pom ib lub nroog nplua nuj dua: muaj neeg nyob, ua qoob, sib txuas thiab hloov. Cov dej yog ib feem ntawm lub neej ntawd.",
+      "raw_seconds": 7.7090249433106575,
+      "speech_window_seconds": 7.7090249433106575,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Qhov no kuj hloov lo lus nrhiav pom. Angkor tsis yog ib qho chaw khoob uas tos neeg txawv teb chaws tuaj pom xwb.",
+      "raw_seconds": 7.1053061224489795,
+      "speech_window_seconds": 7.1053061224489795,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Kev paub ntawm neeg hauv zos, kev ntseeg txuas ntxiv, ntawv tshawb qub thiab kev tshawb tshiab puav leej pab nkag siab qhov chaw.",
+      "raw_seconds": 7.813514739229025,
+      "speech_window_seconds": 7.813514739229025,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Cuab yeej tshiab sau tau cim ntau dua. Tiam sis lawv tsis tshem cov neeg uas twb paub los sis tseem tu cov chaw no.",
+      "raw_seconds": 6.989206349206349,
+      "speech_window_seconds": 6.989206349206349,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Saum huab cua, qee cov cim pom yooj yim dua. Kab ntev tshwm nyob qhov chaw uas hauv av tsuas pom pov roob me thiab qhov qis xwb.",
+      "raw_seconds": 7.929614512471655,
+      "speech_window_seconds": 7.929614512471655,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Kev ntsuas nrog laser saum huab cua, hu ua lidar, pab ntxiv ntau yam rau daim ntawv qhia Angkor thiab thaj chaw ib ncig.",
+      "raw_seconds": 7.337505668934241,
+      "speech_window_seconds": 7.337505668934241,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Laser dhau tau tej qhov nplooj qhib los ntsuas av. Kho cov ntaub ntawv pab cais cim, tsis yog yees pom txhua yam faus hauv qab.",
+      "raw_seconds": 7.848344671201814,
+      "speech_window_seconds": 7.848344671201814,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Nws qhia tau ntug av, kwj thiab qauv vaj tsev me ntsis. Tej no yog cim mus tshawb, tsis yog ib zaj yeeb yaj kiab txog yav dhau los.",
+      "raw_seconds": 8.150204081632653,
+      "speech_window_seconds": 8.150204081632653,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Tus qauv av uas tso duab ntxoov ua rau qhov siab txawv me ntsis pom tseeb. Hloov teeb hauv qauv yuav qhia lwm txoj kab.",
+      "raw_seconds": 7.395555555555555,
+      "speech_window_seconds": 7.395555555555555,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Kab pom tseeb los tseem xav tau lus txhais. Cov kws tshawb muab daim ntawv qhia piv rau av tiag, khoom khawb tau thiab ntaub ntawv qub.",
+      "raw_seconds": 8.219863945578231,
+      "speech_window_seconds": 8.219863945578231,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Kev taug niaj hnub, ntug av qub thiab av ntuj tej zaum zoo sib xws ntawm qee lub kaum. Saib tej yam ncig pab cais tau.",
+      "raw_seconds": 7.732244897959184,
+      "speech_window_seconds": 7.732244897959184,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Sij hawm tseem ceeb tas li. Daim ntawv qhia qhia qhov chaw; khawb tshawb thiab nrhiav hnub nyoog pab qhia thaum twg nws siv.",
+      "raw_seconds": 7.163356009070295,
+      "speech_window_seconds": 7.163356009070295,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Cov txheej av muab lwm txoj kev saib. Lawv khaws kev hloov ntawm av tsaws, dej los sis kev cuam tshuam, tiam sis kuj muaj ciam.",
+      "raw_seconds": 7.813514739229025,
+      "speech_window_seconds": 7.813514739229025,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Thaum siv ntau txoj kev, pov thawj sib xyuas tau. Lo lus piav zoo txuas ntau hom cim, tsis cia siab rau ib daim duab zoo nkauj xwb.",
+      "raw_seconds": 7.859954648526077,
+      "speech_window_seconds": 7.859954648526077,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Vim li ntawd, cov duab rov tsim yuav tsum muaj ntawv qhia. Ib qho kwj zoo tsim nyog yog duab piav, tsis yog pom xwm txheej qub tiag.",
+      "raw_seconds": 7.952834467120182,
+      "speech_window_seconds": 7.952834467120182,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Lub hom phiaj yog kom to taub kev txuas: dej mus tau qhov twg, neeg nyob qhov twg thiab ib qho hloov kis thoob lub cev li cas.",
+      "raw_seconds": 8.359183673469389,
+      "speech_window_seconds": 8.359183673469389,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Cov lus nug no tseem ceeb dua thaum tej yam sab nraud hloov. Lub cev tsim los ntawm kev paub qub kuj ntsib tau teeb meem tshiab.",
+      "raw_seconds": 8.25469387755102,
+      "speech_window_seconds": 8.25469387755102,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Yuav pom zaj no, cia peb tawm ntawm pob zeb thiab saib cov cim huab cua, nrog cov ntaub ntawv uas nyob sab nraum Angkor.",
+      "raw_seconds": 7.63936507936508,
+      "speech_window_seconds": 7.63936507936508,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Kev tshawb voj ntoo hauv teb chaws Es Xias Qab Teb Sab Hnub Tuaj qhia qee caij qhuav heev thiab caij nag ntau hauv xyoo pua kaum plaub thiab kaum tsib.",
+      "raw_seconds": 9.613061224489796,
+      "speech_window_seconds": 9.613061224489796,
+      "tempo": 0.9961721476155229,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Cov cim ntawd qhia huab cua thoob cheeb tsam. Yuav tsum txuas kom zoo rau dej hauv zos thiab cim qub, tsis yog xav tias lawv sib npaug kiag.",
+      "raw_seconds": 9.02095238095238,
+      "speech_window_seconds": 9.02095238095238,
+      "tempo": 0.9348137182334072,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Caij qhuav ntev ua rau dej tsawg. Nws kuj hloov cov hauj lwm uas yuav tsum ua kom kwj, teb thiab tsev nyob siv tau.",
+      "raw_seconds": 7.22140589569161,
+      "speech_window_seconds": 7.22140589569161,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Caij ntub heev coj lwm yam nyuaj. Dej ceev nqa av ntau, yaig ntug thiab ua rau tej qhov uas yeej txaus dhau los txais tsis taus.",
+      "raw_seconds": 7.9412244897959186,
+      "speech_window_seconds": 7.9412244897959186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Qhuav thiab ntub sib hloov yuav nyuaj rau ib lub cev sib txuas. Txoj kev pab thaum dej tsawg tsis tas pab thaum nag loj ntxiv.",
+      "raw_seconds": 7.697414965986394,
+      "speech_window_seconds": 7.697414965986394,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Lub cev nyuaj faib kev pab tau deb, tiam sis kuj kis teeb meem. Qhov hloov saum toj yuav ua nyuaj rau neeg sab nqes deb.",
+      "raw_seconds": 7.767074829931973,
+      "speech_window_seconds": 7.767074829931973,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Tsis yog txhua feem puas tib txhij. Kho hauv zos, hloov txoj kev thiab hloov kev siv yuav ua rau txhua qhov muaj txiaj ntsig txawv.",
+      "raw_seconds": 7.90639455782313,
+      "speech_window_seconds": 7.90639455782313,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Cov kws tshawb nrhiav kev puas thiab kev kho hauv qee feem dej ntawm Angkor. Qhov xwm txheej sib law tseem ceeb dua ib daim duab nroog vau tam sim.",
+      "raw_seconds": 8.684263038548753,
+      "speech_window_seconds": 8.684263038548753,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Huab cua thiaj yog ib txoj kev tshawb loj, tsis yog lo lus teb tag nrho. Kev tswj, kev tu, kev nyob thiab nom tswv kuj tseem ceeb.",
+      "raw_seconds": 8.417233560090702,
+      "speech_window_seconds": 8.417233560090702,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Xyoo pua kaum tsib kuj muaj kev sib ntaus thiab hloov kev sib txuas ntawm nom tswv. Nag piav tsis tau txhua qhov hloov hwj chim.",
+      "raw_seconds": 7.616145124716553,
+      "speech_window_seconds": 7.616145124716553,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Xyoo ib txhiab plaub puas peb caug ib tshwm ntau hauv cov lus luv txog Angkor. Ib hnub cim tsis ua kom tag nrho thaj av khoob ib hmos.",
+      "raw_seconds": 8.25469387755102,
+      "speech_window_seconds": 8.25469387755102,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Qee qhov chaw hloov los sis nqis zog, lwm qhov tseem muaj nqis. Angkor Wat tseem txuas kev ntseeg tom qab chaw vaj ntxwv tsiv lawm.",
+      "raw_seconds": 7.7090249433106575,
+      "speech_window_seconds": 7.7090249433106575,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Txoj kev hloov loj tshwm los ntawm ntau yam dhau sij hawm. Ib kob cua kawg, kev sib ntaus los sis txoj kev khoob piav tsis txaus.",
+      "raw_seconds": 7.929614512471655,
+      "speech_window_seconds": 7.929614512471655,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Zaj uas maj mam thiab tsis sib npaug nyuaj piav dua, tiam sis ze neeg dua. Lawv yoog, kho, tsiv thiab txuas kev cai thaum tej yam hloov.",
+      "raw_seconds": 8.13859410430839,
+      "speech_window_seconds": 8.13859410430839,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Lub cev dej pab tshawb cov kev teb ntawd. Nws txuas tej teeb meem loj ntawm ntuj rau txoj kev txiav txim ntawm ib qho chaw.",
+      "raw_seconds": 7.6741950113378685,
+      "speech_window_seconds": 7.6741950113378685,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Tsis txhob maj txiav txim rau kev txawj ua qub. Tsim ib yam siv tau thiab tu kom ntau tiam siv tau yog ob txoj kev ua tau zoo.",
+      "raw_seconds": 8.301133786848073,
+      "speech_window_seconds": 8.301133786848073,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Txhua yam ua tau zoo nyob ntawm tej xwm txheej, kev paub, zog thiab khoom. Thaum cov ntawd hloov, cov tsev qub kuj tau hauj lwm tshiab.",
+      "raw_seconds": 8.417233560090702,
+      "speech_window_seconds": 8.417233560090702,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Angkor keeb kwm tom qab yog ib feem ntawm nws zaj dab neeg, tsis yog ib qho xaus lom zem rau lub caij tsim tsev xwb.",
+      "raw_seconds": 7.697414965986394,
+      "speech_window_seconds": 7.697414965986394,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Niaj hnub no dej tseem yog ib feem ntawm tu Angkor. Nag, kev tso dej, nroj tsuag thiab tsev tus yam ntxwv cuam tshuam kev khaws cia.",
+      "raw_seconds": 8.382403628117913,
+      "speech_window_seconds": 8.382403628117913,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Kwj nyob ib sab kev ncig xyuas zoo li tsis loj li phab ntsa txua duab. Tiam sis dej ntws haum pab tiv thaiv phab ntsa ib ncig.",
+      "raw_seconds": 7.90639455782313,
+      "speech_window_seconds": 7.90639455782313,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Kev khaws cia xav tau kev saib thiab neeg hauv zos txoj kev paub. Kho ib qho yuav tsum xav txog tag nrho thaj av, tsis yog qhov zoo nkauj xwb.",
+      "raw_seconds": 9.05578231292517,
+      "speech_window_seconds": 9.05578231292517,
+      "tempo": 0.938423037608826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Qhov chaw tseem txuas zej zog, haujlwm noj haus, kev ntseeg thiab kev ncig xyuas. Khaws keeb kwm kuj yog kev nrog lub neej niaj hnub.",
+      "raw_seconds": 8.25469387755102,
+      "speech_window_seconds": 8.25469387755102,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Mus xyuas kom hwm chaw yog raws kev tso cai thiab neeg hauv zos cov lus. Tsis tas nce ntug av tsis ruaj los sis nkag tsev kaw.",
+      "raw_seconds": 7.836734693877551,
+      "speech_window_seconds": 7.836734693877551,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Thaij yeeb yaj kiab kuj tib yam. Siv qhov chaw tso cai, neeg laus lub neej thiab duab piav zoo, tsis tas ua txuj teev kev cai dawb huv.",
+      "raw_seconds": 8.55655328798186,
+      "speech_window_seconds": 8.55655328798186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Tam sim no rov rau daim duab pib. Txoj kab saum pob zeb nyob hauv ntiaj teb uas dej kov tsev, av, haujlwm thiab kev nco.",
+      "raw_seconds": 7.581315192743764,
+      "speech_window_seconds": 7.581315192743764,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Peb pib ntawm pej thuam, mam nrhiav cov kab nruab nrab. Cov kab coj mus rau teb, tsev, pas, caij hloov thiab tes hauj lwm tseem nyob.",
+      "raw_seconds": 8.672653061224489,
+      "speech_window_seconds": 8.672653061224489,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Cov tuam tsev tseem zoo kawg. Lawv qhov loj muaj ntsiab dua thaum peb pom tej hauj lwm me thiab kev txuas uas txhawb lawv.",
+      "raw_seconds": 7.174965986394557,
+      "speech_window_seconds": 7.174965986394557,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Ib lub nroog khaws cim tsis sib npaug. Pob zeb pom tseeb, hos kwj qub xav tau kev kos chaw kom paub nws lub luag hauj lwm.",
+      "raw_seconds": 7.87156462585034,
+      "speech_window_seconds": 7.87156462585034,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Thaum nyeem ob yam ua ke, peb nug ntau dua leej twg tsim tuam tsev. Peb nug tias thaj av muaj neeg nyob ua hauj lwm tau li cas.",
+      "raw_seconds": 7.894784580498866,
+      "speech_window_seconds": 7.894784580498866,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Tseem muaj lus nug qhib txog txhua yam tsev, kev faib dej thiab zej zog txoj kev xaiv thaum xwm txheej hloov.",
+      "raw_seconds": 6.733786848072563,
+      "speech_window_seconds": 6.733786848072563,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Kev tshawb yav tom ntej yuav qhia ntxiv. Tiv thaiv cov cim cia kom ua hauj lwm txuas tau, tsis txhob kaw zaj dab neeg rau lus yooj yim xwb.",
+      "raw_seconds": 8.614603174603175,
+      "speech_window_seconds": 8.614603174603175,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Thoob tiaj nrag, dej tseem sib sau, txav thiab tso cim. Cov txheej txheem tseem paub zoo, txawm tej qauv ib ncig muaj ntau pua xyoo lawm.",
+      "raw_seconds": 8.359183673469389,
+      "speech_window_seconds": 8.359183673469389,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Angkor txoj kev ua tau zoo nyob hauv kev txuas: caij thiab dej khaws, av thiab kev txav, chaw dawb huv thiab lub neej xav tau.",
+      "raw_seconds": 7.999274376417233,
+      "speech_window_seconds": 7.999274376417233,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Nws txoj kev hloov qhia tias cuab yeej yog kev sib raug txuas ntxiv ntawm neeg, ib puag ncig thiab kev tu, tsis yog tsim tiav ib zaug xwb.",
+      "raw_seconds": 8.591383219954649,
+      "speech_window_seconds": 8.591383219954649,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Rov ntsia txoj kab dej saum pob zeb. Ib lub cim me tam sim no qhib rau ib lub nroog, thiab nroog qhib rau thaj av dav.",
+      "raw_seconds": 7.48843537414966,
+      "speech_window_seconds": 7.48843537414966,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1292,
+  "decoded_samples": 31008000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-hmn-21m32s.mp3",
+  "flac": "voice-hmn-21m32s.flac",
+  "mp3_sha256": "e619f2bd2a1b43db2039cec7d907e19db975776a4a0c4e4366b9562b94079b38",
+  "flac_sha256": "b5aefab863effc3dab5f57b51c73360af354bcb7381a4ae25e7e9c53d81ee76d"
+}

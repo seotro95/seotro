@@ -1,0 +1,776 @@
+[
+  {
+    "scene": 1,
+    "start_seconds": 0,
+    "duration_seconds": 10,
+    "text": "Ett mörkt märke löper över gammal sten. Det verkar obetydligt, tills vi förstår att vatten hjälpte till att forma en hel stad."
+  },
+  {
+    "scene": 2,
+    "start_seconds": 10,
+    "duration_seconds": 10,
+    "text": "I Angkor ser vi först tornen. Men en mer överraskande struktur sträcker sig mellan kanaler, vallar och stora vattenmagasin."
+  },
+  {
+    "scene": 3,
+    "start_seconds": 20,
+    "duration_seconds": 10,
+    "text": "Följer vi förbindelserna förändras bilden. Templet hör till en stad, och staden ingår i ett helt avrinningsområde."
+  },
+  {
+    "scene": 4,
+    "start_seconds": 30,
+    "duration_seconds": 10,
+    "text": "Frågan är enkel: hur ordnar man livet där vatten kan komma i överflöd och senare bli svårt att hitta?"
+  },
+  {
+    "scene": 5,
+    "start_seconds": 40,
+    "duration_seconds": 10,
+    "text": "Svaret förenar regn, terräng, odling, tro, makt och vardagligt underhåll. Det belyser också Angkors senare förändringar."
+  },
+  {
+    "scene": 6,
+    "start_seconds": 50,
+    "duration_seconds": 10,
+    "text": "Vi börjar i dagens Kambodja, nära Siem Reap, norr om Tonle Sap. Monumenten står i ett mycket större bebott landskap."
+  },
+  {
+    "scene": 7,
+    "start_seconds": 60,
+    "duration_seconds": 10,
+    "text": "Angkor var ett viktigt centrum i khmerernas värld under århundraden. Formen förändrades med härskare, samhällen och deras prioriteringar."
+  },
+  {
+    "scene": 8,
+    "start_seconds": 70,
+    "duration_seconds": 10,
+    "text": "De bevarade templen är landmärken. En stad behöver också bostäder, odlingar, vägar, utbyte och sätt att hantera avfall."
+  },
+  {
+    "scene": 9,
+    "start_seconds": 80,
+    "duration_seconds": 10,
+    "text": "Många vardagsbyggnader använde mindre beständiga material än sten. De försvunna taken får monumenten att verka missvisande ensamma."
+  },
+  {
+    "scene": 10,
+    "start_seconds": 90,
+    "duration_seconds": 10,
+    "text": "Se bortom den snidade porten. En upphöjd linje kan vara en vall; en grund sänka kan bevara en annan berättelse."
+  },
+  {
+    "scene": 11,
+    "start_seconds": 100,
+    "duration_seconds": 10,
+    "text": "Sådana former måste undersökas. Utseendet ensamt avslöjar inte när de byggdes, hur de fungerade eller hur de förändrades."
+  },
+  {
+    "scene": 12,
+    "start_seconds": 110,
+    "duration_seconds": 10,
+    "text": "Tillsammans visar de frågans omfattning. Angkors historia sträcker sig långt utanför ett enda berömt tempel."
+  },
+  {
+    "scene": 13,
+    "start_seconds": 120,
+    "duration_seconds": 10,
+    "text": "Angkor Wat byggdes tidigt på elvahundratalet, under Suryavarman den andre. Det blir vår utgångspunkt mot det större landskapet."
+  },
+  {
+    "scene": 14,
+    "start_seconds": 130,
+    "duration_seconds": 10,
+    "text": "Den ursprungliga tillägnan åt Vishnu och den senare buddhistiska historien påminner om att platsers religiösa betydelser kunde förändras."
+  },
+  {
+    "scene": 15,
+    "start_seconds": 140,
+    "duration_seconds": 10,
+    "text": "En tempelvallgrav kan uttrycka en ordnad helig värld och samtidigt påverka vatten, mark och monumentets närmaste omgivning."
+  },
+  {
+    "scene": 16,
+    "start_seconds": 150,
+    "duration_seconds": 10,
+    "text": "Lämna tornen en stund. Se varifrån regnet kommer och vart marken låter vattnet röra sig."
+  },
+  {
+    "scene": 17,
+    "start_seconds": 160,
+    "duration_seconds": 10,
+    "text": "Regionen har ett tydligt säsongsbundet monsunklimat. Våta och torra månader ger olika villkor i samma landskap."
+  },
+  {
+    "scene": 18,
+    "start_seconds": 170,
+    "duration_seconds": 10,
+    "text": "Under regnen når vatten tak, fält, stigar och bäckar. Hur mycket kommer, hur snabbt och till vilka platser?"
+  },
+  {
+    "scene": 19,
+    "start_seconds": 180,
+    "duration_seconds": 10,
+    "text": "Ett skyfall kan överbelasta en kanal även före senare vattenbrist. Överflöd och knapphet hänger också ihop genom tidpunkten."
+  },
+  {
+    "scene": 20,
+    "start_seconds": 190,
+    "duration_seconds": 10,
+    "text": "När torrperioden fortskrider blir lagrat vatten och säker tillgång viktigare. Ett användbart system måste möta båda årstiderna."
+  },
+  {
+    "scene": 21,
+    "start_seconds": 200,
+    "duration_seconds": 10,
+    "text": "Högre mark norr om Angkor bidrar till slättens avrinningsområden. Vattnet följer tyngdkraften, men människor kan ändra vägen."
+  },
+  {
+    "scene": 22,
+    "start_seconds": 210,
+    "duration_seconds": 10,
+    "text": "Terrängen ger en huvudriktning, men små höjdskillnader spelar roll. En svag lutning kan avgöra vilket fält som får vatten."
+  },
+  {
+    "scene": 23,
+    "start_seconds": 220,
+    "duration_seconds": 10,
+    "text": "Marken är därför en del av infrastrukturen. En kanal fungerar i förhållande till omgivande och lägre liggande jord."
+  },
+  {
+    "scene": 24,
+    "start_seconds": 230,
+    "duration_seconds": 10,
+    "text": "Söderut ligger Tonle Sap, viktig för regionens vattenvärld. Sjöns säsongsvisa utvidgning och minskning hör till ett större flodsystem."
+  },
+  {
+    "scene": 25,
+    "start_seconds": 240,
+    "duration_seconds": 10,
+    "text": "Den berömda säsongsvisa omvändningen av flödet hör till denna större skala. Den beskriver inte varje lokal kanal i Angkor."
+  },
+  {
+    "scene": 26,
+    "start_seconds": 250,
+    "duration_seconds": 10,
+    "text": "Sjö, slätt, bäckar, regn och grundvatten samverkar på olika nivåer. En enkel kartpil kan inte visa alla samband."
+  },
+  {
+    "scene": 27,
+    "start_seconds": 260,
+    "duration_seconds": 10,
+    "text": "För invånarna var detta praktiska frågor: avstånd till vatten, skicket på en övergång och tidpunkten för odling."
+  },
+  {
+    "scene": 28,
+    "start_seconds": 270,
+    "duration_seconds": 10,
+    "text": "Utmaningen var mer än att samla största möjliga mängd. Vatten måste ledas, hållas kvar och släppas efter skiftande behov."
+  },
+  {
+    "scene": 29,
+    "start_seconds": 280,
+    "duration_seconds": 10,
+    "text": "Ibland behövde flödet bromsas. På andra platser behövde överskottet en väg vidare innan det skadade fält eller byggnader."
+  },
+  {
+    "scene": 30,
+    "start_seconds": 290,
+    "duration_seconds": 10,
+    "text": "Lagring och avrinning hör alltså till samma berättelse. Landskapet behöver platser där vatten stannar och vägar där det lämnar."
+  },
+  {
+    "scene": 31,
+    "start_seconds": 300,
+    "duration_seconds": 10,
+    "text": "Former utanför templen får nu mening. Långa vallar och breda bassänger visar försök att arbeta med årstidernas skillnader."
+  },
+  {
+    "scene": 32,
+    "start_seconds": 310,
+    "duration_seconds": 10,
+    "text": "Nu granskar vi de stora magasinen, utan att anta att alla hade samma uppgift eller samma historia."
+  },
+  {
+    "scene": 33,
+    "start_seconds": 320,
+    "duration_seconds": 10,
+    "text": "Angkors stora rektangulära vattenmagasin kallas ofta barayer. Jordvallarna skapade stora lagringsutrymmen i ett landskap med svag lutning."
+  },
+  {
+    "scene": 34,
+    "start_seconds": 330,
+    "duration_seconds": 10,
+    "text": "Västra Baray är fortfarande imponerande. Uppifrån skiljer sig den långa rektangeln från de mindre formerna runt omkring."
+  },
+  {
+    "scene": 35,
+    "start_seconds": 340,
+    "duration_seconds": 10,
+    "text": "Östra Baray bevarar en annan stor kontur. Dagens utseende skiljer sig från en fylld bassäng: landskapet fortsätter förändras."
+  },
+  {
+    "scene": 36,
+    "start_seconds": 350,
+    "duration_seconds": 10,
+    "text": "Andra bassänger hör till olika utvecklingsfaser. Nätet växte med tiden, snarare än att byggas som en enda färdig plan."
+  },
+  {
+    "scene": 37,
+    "start_seconds": 360,
+    "duration_seconds": 10,
+    "text": "Storleken imponerar men förklarar inte driften. Vi måste fråga hur vattnet kom in, rörde sig och lämnade magasinet."
+  },
+  {
+    "scene": 38,
+    "start_seconds": 370,
+    "duration_seconds": 10,
+    "text": "En vall måste hålla vatten och stå emot erosion. Höjd, material och skick påverkar vad bassängen faktiskt kan göra."
+  },
+  {
+    "scene": 39,
+    "start_seconds": 380,
+    "duration_seconds": 10,
+    "text": "Inlopp och utlopp förbinder magasinet med nätet. Placeringen kan vara lika viktig som den stora formen på ett foto."
+  },
+  {
+    "scene": 40,
+    "start_seconds": 390,
+    "duration_seconds": 10,
+    "text": "Sediment gör det mer komplicerat. Vatten transporterar material vars avlagring gradvis ändrar djupet eller kanalens kapacitet."
+  },
+  {
+    "scene": 41,
+    "start_seconds": 400,
+    "duration_seconds": 10,
+    "text": "Underhåll hör därför till hela anläggningens liv. Det som fungerar en säsong kan behöva rensas eller repareras före nästa."
+  },
+  {
+    "scene": 42,
+    "start_seconds": 410,
+    "duration_seconds": 10,
+    "text": "Magasinen hörde också till templens och kungamaktens värld. Ett modernt tekniskt schema fångar inte alla betydelser."
+  },
+  {
+    "scene": 43,
+    "start_seconds": 420,
+    "duration_seconds": 10,
+    "text": "Vatten kunde möta praktiska behov och bära religiös symbolik. Roller överlappade och förändrades mellan platser och tider."
+  },
+  {
+    "scene": 44,
+    "start_seconds": 430,
+    "duration_seconds": 10,
+    "text": "Vissa barayers bevattningsfunktion diskuteras. Svaret kräver belägg för varje anläggning och dess förbindelser."
+  },
+  {
+    "scene": 45,
+    "start_seconds": 440,
+    "duration_seconds": 10,
+    "text": "En stor bassäng bevisar inte att alla närliggande fält fick dess vatten. Höjder, kanaler, utlopp och dateringar måste passa ihop."
+  },
+  {
+    "scene": 46,
+    "start_seconds": 450,
+    "duration_seconds": 10,
+    "text": "Dagens nivå visar inte alla tidigare århundraden. Igenslamning, ombyggnader, reparationer och nya användningar kan förändra ett magasin."
+  },
+  {
+    "scene": 47,
+    "start_seconds": 460,
+    "duration_seconds": 10,
+    "text": "Se barayerna som stora delar av ett vidare system. Betydelsen klarnar när vi följer linjerna mellan dem."
+  },
+  {
+    "scene": 48,
+    "start_seconds": 470,
+    "duration_seconds": 10,
+    "text": "Linjerna leder till bäckar, kanaler, vallar, övergångar och förgreningar utspridda över den bebodda slätten."
+  },
+  {
+    "scene": 49,
+    "start_seconds": 480,
+    "duration_seconds": 10,
+    "text": "En kanal ger vattnet en föredragen väg. Flödet beror på lutning, djup, bredd, ojämnhet och tillförsel uppströms."
+  },
+  {
+    "scene": 50,
+    "start_seconds": 490,
+    "duration_seconds": 10,
+    "text": "Tyngdkraften ger rörelsen. Människors arbete ändrar vägar, delar flöden och förenar platser som annars skulle få olika mängder."
+  },
+  {
+    "scene": 51,
+    "start_seconds": 500,
+    "duration_seconds": 10,
+    "text": "Vid en förgrening får en liten förändring stora följder. Mer vatten i en gren kan innebära mindre i en annan."
+  },
+  {
+    "scene": 52,
+    "start_seconds": 510,
+    "duration_seconds": 10,
+    "text": "En upphöjd vall kan också bära en väg över våt mark. Transport och vattenhantering delar då samma fysiska linje."
+  },
+  {
+    "scene": 53,
+    "start_seconds": 520,
+    "duration_seconds": 10,
+    "text": "Övergångar kräver ytterligare balans. Vägen behöver fortsätta och vattnet ha tillräckligt utrymme utan att undergräva konstruktionen."
+  },
+  {
+    "scene": 54,
+    "start_seconds": 530,
+    "duration_seconds": 10,
+    "text": "Systemet flyttar och lagrar vatten. Enbart de största magasinen visar inte alla samband som gjorde vardagen möjlig."
+  },
+  {
+    "scene": 55,
+    "start_seconds": 540,
+    "duration_seconds": 10,
+    "text": "Naturliga bäckar ingick också. Människor ändrade vattenvägar i ett landskap som redan hade egna avrinningsmönster."
+  },
+  {
+    "scene": 56,
+    "start_seconds": 550,
+    "duration_seconds": 10,
+    "text": "Kartan måste skilja ursprungen: grävda, upphöjda, omledda linjer och sådana som följde äldre terrängformer."
+  },
+  {
+    "scene": 57,
+    "start_seconds": 560,
+    "duration_seconds": 10,
+    "text": "Ett nät växer genom att förbinda tidigare delar. Varje tillägg löser något lokalt och kan ändra förhållanden på andra håll."
+  },
+  {
+    "scene": 58,
+    "start_seconds": 570,
+    "duration_seconds": 10,
+    "text": "Genom generationerna ökar komplexiteten. Vi behöver veta vilka delar som existerade samtidigt, inte betrakta alla spår som samtida."
+  },
+  {
+    "scene": 59,
+    "start_seconds": 580,
+    "duration_seconds": 10,
+    "text": "En övergiven kanal bredvid en senare visar inte gemensam drift. Den arkeologiska tiden måste vara synlig på kartan."
+  },
+  {
+    "scene": 60,
+    "start_seconds": 590,
+    "duration_seconds": 10,
+    "text": "Därför behövs utgrävning och datering vid sidan av flygbilder. En vacker kontur behöver historia innan den blir en förklaring."
+  },
+  {
+    "scene": 61,
+    "start_seconds": 600,
+    "duration_seconds": 10,
+    "text": "Föreställ dig en liten bäck efter regn. Den breder ut sig i en bassäng, sedan samlar en smal passage flödet."
+  },
+  {
+    "scene": 62,
+    "start_seconds": 610,
+    "duration_seconds": 10,
+    "text": "Samma vatten kan röra sig lugnt eller kraftigt beroende på vägen. En svag vall eller blockering påverkar avlägsna platser nedströms."
+  },
+  {
+    "scene": 63,
+    "start_seconds": 620,
+    "duration_seconds": 10,
+    "text": "Ingen utsikt från ett torn visar allt. Staden måste läsas över stora avstånd och genom små detaljer."
+  },
+  {
+    "scene": 64,
+    "start_seconds": 630,
+    "duration_seconds": 10,
+    "text": "Varje linje leder tillbaka till människor: hushåll, arbetare, bönder och religiösa gemenskaper som använde och skötte landskapet."
+  },
+  {
+    "scene": 65,
+    "start_seconds": 640,
+    "duration_seconds": 10,
+    "text": "Angkor var mer än en tät grupp stenbyggnader. Beläggen visar ett utbrett, relativt glest och förbundet stadslandskap."
+  },
+  {
+    "scene": 66,
+    "start_seconds": 650,
+    "duration_seconds": 10,
+    "text": "Bostäder, dammar, odlingsmark, vägar och tempelområden ingick. Deras placering skiftade mellan platser och tider."
+  },
+  {
+    "scene": 67,
+    "start_seconds": 660,
+    "duration_seconds": 10,
+    "text": "En hushållsdamm förde vatten närmare vardagens uppgifter. En liten anläggning kunde betyda mycket även nära ett stort magasin."
+  },
+  {
+    "scene": 68,
+    "start_seconds": 670,
+    "duration_seconds": 10,
+    "text": "Risodling krävde kunskap om årstider och jord. Vattenhantering innebar också att välja rätt tidpunkt, utöver att bygga."
+  },
+  {
+    "scene": 69,
+    "start_seconds": 680,
+    "duration_seconds": 10,
+    "text": "Ett fält kan skadas av för lite vatten, för mycket eller tillförsel under fel del av tillväxten."
+  },
+  {
+    "scene": 70,
+    "start_seconds": 690,
+    "duration_seconds": 10,
+    "text": "Bönder lärde känna lokala skillnader genom erfarenhet. Många beslut formade landskapet, utöver kungliga order."
+  },
+  {
+    "scene": 71,
+    "start_seconds": 700,
+    "duration_seconds": 10,
+    "text": "Stora arbeten krävde organisation, arbetskraft, material och ständig omsorg. Politisk makt och gemensamma insatser möttes i infrastrukturen."
+  },
+  {
+    "scene": 72,
+    "start_seconds": 710,
+    "duration_seconds": 10,
+    "text": "Att reparera kunde vara lika viktigt som att bygga. Rensa sediment, förstärka vallar och öppna passager ger sällan spektakulära monument."
+  },
+  {
+    "scene": 73,
+    "start_seconds": 720,
+    "duration_seconds": 10,
+    "text": "Ändå förklarar arbetet hur ett nät består. Det som saknas på vykortet kunde bära upp den extraordinära silhuetten."
+  },
+  {
+    "scene": 74,
+    "start_seconds": 730,
+    "duration_seconds": 10,
+    "text": "Minns också försvunna material. Trä, växtfibrer och jordytor lämnar andra spår än huggen sandsten."
+  },
+  {
+    "scene": 75,
+    "start_seconds": 740,
+    "duration_seconds": 10,
+    "text": "Ojämnt bevarande påverkar fantasin. Ett tempel verkar ensamt eftersom husen runt omkring inte längre står ovan mark."
+  },
+  {
+    "scene": 76,
+    "start_seconds": 750,
+    "duration_seconds": 10,
+    "text": "Arkeologin återskapar samband ur spår utan att låtsas känna varje tak, syssla eller befolkningstal exakt."
+  },
+  {
+    "scene": 77,
+    "start_seconds": 760,
+    "duration_seconds": 10,
+    "text": "En rikare stad framträder: bebodd, produktiv, förbunden och föränderlig. Vattennätet hörde till den levande världen."
+  },
+  {
+    "scene": 78,
+    "start_seconds": 770,
+    "duration_seconds": 10,
+    "text": "Det ändrar även innebörden av upptäckt. Angkor var inte bara en tom plats som väntade på någon utifrån."
+  },
+  {
+    "scene": 79,
+    "start_seconds": 780,
+    "duration_seconds": 10,
+    "text": "Lokal kunskap, religiös kontinuitet, tidigare forskning och moderna undersökningar hör alla till förståelsen av platsen."
+  },
+  {
+    "scene": 80,
+    "start_seconds": 790,
+    "duration_seconds": 10,
+    "text": "Nya tekniker breddar vad vi registrerar. De suddar inte bort dem som redan kände platserna eller fortsatte vårda dem."
+  },
+  {
+    "scene": 81,
+    "start_seconds": 800,
+    "duration_seconds": 10,
+    "text": "Från luften blir vissa spår tydligare. Långa linjer framträder där markbesökaren bara ser spridda höjder och sänkor."
+  },
+  {
+    "scene": 82,
+    "start_seconds": 810,
+    "duration_seconds": 10,
+    "text": "Laserskanning från luften, ofta kallad lidar, har tillfört viktiga detaljer till kartläggningen av det större Angkorlandskapet."
+  },
+  {
+    "scene": 83,
+    "start_seconds": 820,
+    "duration_seconds": 10,
+    "text": "Laser kan hjälpa modellera mark genom luckor i växtligheten. Databehandling fotograferar inte automatiskt varje föremål under jorden."
+  },
+  {
+    "scene": 84,
+    "start_seconds": 830,
+    "duration_seconds": 10,
+    "text": "Resultatet kan visa låga jordverk, kanaler och bosättningsmönster. De är ledtrådar att undersöka, ingen fullständig film av det förflutna."
+  },
+  {
+    "scene": 85,
+    "start_seconds": 840,
+    "duration_seconds": 10,
+    "text": "En skuggad terrängmodell synliggör små höjdskillnader. Ändrat virtuellt ljus kan avslöja en tidigare otydlig linje."
+  },
+  {
+    "scene": 86,
+    "start_seconds": 850,
+    "duration_seconds": 10,
+    "text": "Även en tydlig linje kräver tolkning. Forskare jämför kartor, fältobservationer, utgrävt material, äldre planer och andra belägg."
+  },
+  {
+    "scene": 87,
+    "start_seconds": 860,
+    "duration_seconds": 10,
+    "text": "En modern stig, en gammal vall och en naturlig form kan likna varandra. Sammanhanget hjälper oss skilja dem."
+  },
+  {
+    "scene": 88,
+    "start_seconds": 870,
+    "duration_seconds": 10,
+    "text": "Tidsordningen är avgörande. Kartan visar var något ligger; utgrävning och datering hjälper avgöra när det spelade roll."
+  },
+  {
+    "scene": 89,
+    "start_seconds": 880,
+    "duration_seconds": 10,
+    "text": "Sediment ger ett annat perspektiv. Lager kan bevara förändringar i avlagring, vattenförhållanden eller störning, med egna begränsningar."
+  },
+  {
+    "scene": 90,
+    "start_seconds": 890,
+    "duration_seconds": 10,
+    "text": "Flera metoder låter olika belägg kontrollera varandra. En stark förklaring förenar mönster och vilar inte på en dramatisk bild."
+  },
+  {
+    "scene": 91,
+    "start_seconds": 900,
+    "duration_seconds": 10,
+    "text": "Rekonstruktioner måste därför identifieras. En rimlig kanalscen är en illustration, ingen inspelning av en dokumenterad forntida händelse."
+  },
+  {
+    "scene": 92,
+    "start_seconds": 910,
+    "duration_seconds": 10,
+    "text": "Målet är att förstå samband: möjliga vattenvägar, människors bostäder och hur förändring sprids genom nätet."
+  },
+  {
+    "scene": 93,
+    "start_seconds": 920,
+    "duration_seconds": 10,
+    "text": "Det blir särskilt viktigt när yttre villkor ändras. Också ett erfarenhetsbaserat nät kan möta okända påfrestningar."
+  },
+  {
+    "scene": 94,
+    "start_seconds": 930,
+    "duration_seconds": 10,
+    "text": "Lämna stenen en stund och se på klimatspåren, även uppgifter från platser utanför Angkor."
+  },
+  {
+    "scene": 95,
+    "start_seconds": 940,
+    "duration_seconds": 10,
+    "text": "Årsringar från Sydostasiens fastland visar svåra torrperioder och mycket våta faser under delar av trettonhundra- och fjortonhundratalen."
+  },
+  {
+    "scene": 96,
+    "start_seconds": 950,
+    "duration_seconds": 10,
+    "text": "De beskriver regional klimatvariation. Sambandet med lokala förhållanden och arkeologiska förändringar måste prövas noggrant."
+  },
+  {
+    "scene": 97,
+    "start_seconds": 960,
+    "duration_seconds": 10,
+    "text": "Lång torka minskar tillgängligt vatten. Den förändrar också arbetet med att hålla kanaler, fält och bosättningar fungerande."
+  },
+  {
+    "scene": 98,
+    "start_seconds": 970,
+    "duration_seconds": 10,
+    "text": "Mycket våta perioder ger andra utmaningar. Snabba flöden bär sediment, eroderar vallar och överbelastar tidigare tillräckliga passager."
+  },
+  {
+    "scene": 99,
+    "start_seconds": 980,
+    "duration_seconds": 10,
+    "text": "Växlande tryck försvårar ett sammanbundet nät. Anpassningar för knapphet behöver inte lösa nästa kraftiga regnperiod."
+  },
+  {
+    "scene": 100,
+    "start_seconds": 990,
+    "duration_seconds": 10,
+    "text": "Ett komplext system sprider fördelar och störningar. Det som händer uppströms kan bli problemet för någon långt borta."
+  },
+  {
+    "scene": 101,
+    "start_seconds": 1000,
+    "duration_seconds": 10,
+    "text": "Allt behöver inte ha slutat fungera samtidigt. Lokala lagningar, nya vägar och annan användning kunde ge skilda resultat."
+  },
+  {
+    "scene": 102,
+    "start_seconds": 1010,
+    "duration_seconds": 10,
+    "text": "Forskare undersöker skador och ombyggnader i delar av nätet. Följden är viktigare än en enkel bild av plötslig kollaps."
+  },
+  {
+    "scene": 103,
+    "start_seconds": 1020,
+    "duration_seconds": 10,
+    "text": "Klimat är ett viktigt forskningsspår, men ingen fullständig förklaring. Institutioner, underhåll, bosättning och politik spelar också roll."
+  },
+  {
+    "scene": 104,
+    "start_seconds": 1030,
+    "duration_seconds": 10,
+    "text": "Fjortonhundratalet rymde även konflikter och ändrade politiska band. Förflyttad makt och verksamhet kan inte förklaras enbart med regn."
+  },
+  {
+    "scene": 105,
+    "start_seconds": 1040,
+    "duration_seconds": 10,
+    "text": "Året fjortonhundratrettioett nämns ofta i korta översikter. Ett datum får inte tömma en hel region över en natt."
+  },
+  {
+    "scene": 106,
+    "start_seconds": 1050,
+    "duration_seconds": 10,
+    "text": "Vissa platser ändrades eller förlorade betydelse, andra förblev viktiga. Angkor Wat fortsatte sin religiösa historia sedan kungacentret flyttats."
+  },
+  {
+    "scene": 107,
+    "start_seconds": 1060,
+    "duration_seconds": 10,
+    "text": "Omvandlingen skedde genom flera processer över tid. En sista storm, invasion eller tom gata skulle förenkla beläggen för mycket."
+  },
+  {
+    "scene": 108,
+    "start_seconds": 1070,
+    "duration_seconds": 10,
+    "text": "Den ojämna historien kräver mer men är mänskligare. Människor anpassar sig, lagar, flyttar och fortsätter sina bruk under nya villkor."
+  },
+  {
+    "scene": 109,
+    "start_seconds": 1080,
+    "duration_seconds": 10,
+    "text": "Vattennätet låter oss studera sådana svar. Det förbinder stora miljöpåfrestningar med beslut på särskilda platser."
+  },
+  {
+    "scene": 110,
+    "start_seconds": 1090,
+    "duration_seconds": 10,
+    "text": "Det varnar också för snabba domar över gammal teknik. Att bygga något nyttigt och bevara det i generationer är olika, förenade prestationer."
+  },
+  {
+    "scene": 111,
+    "start_seconds": 1100,
+    "duration_seconds": 10,
+    "text": "Varje lösning beror på villkor, kunskap, arbete och resurser. När de ändras kan samma strukturer få nya roller."
+  },
+  {
+    "scene": 112,
+    "start_seconds": 1110,
+    "duration_seconds": 10,
+    "text": "Den senare historien hör helt till Angkor. Den är mer än en dramatisk avslutning på byggandets tid."
+  },
+  {
+    "scene": 113,
+    "start_seconds": 1120,
+    "duration_seconds": 10,
+    "text": "Vatten ingår fortfarande i vården av Angkor. Regn, avrinning, växtlighet och byggnadernas skick påverkar bevarandet."
+  },
+  {
+    "scene": 114,
+    "start_seconds": 1130,
+    "duration_seconds": 10,
+    "text": "En kanal vid besöksvägen verkar mindre imponerande än en huggen vägg. Rätt flöde kan ändå skydda väggens omgivning."
+  },
+  {
+    "scene": 115,
+    "start_seconds": 1140,
+    "duration_seconds": 10,
+    "text": "Bevarande kräver observation och lokal sakkunskap. En åtgärd måste bedömas i hela landskapet, inte bara efter utseendet."
+  },
+  {
+    "scene": 116,
+    "start_seconds": 1150,
+    "duration_seconds": 10,
+    "text": "Arvet hör ihop med dagens samhällen, försörjning, tro och turism. Det rör nutid lika väl som dåtid."
+  },
+  {
+    "scene": 117,
+    "start_seconds": 1160,
+    "duration_seconds": 10,
+    "text": "Ett respektfullt besök följer tillåtna vägar och lokala råd. Ingen behöver klättra på en känslig vall eller gå in i stängda byggnader."
+  },
+  {
+    "scene": 118,
+    "start_seconds": 1170,
+    "duration_seconds": 10,
+    "text": "Detsamma gäller filmning. Tillåtna vyer, vuxnas vardag och genomtänkta illustrationer kan förklara utan att iscensätta heliga bruk."
+  },
+  {
+    "scene": 119,
+    "start_seconds": 1180,
+    "duration_seconds": 10,
+    "text": "Åter till öppningsbilden. Märket i stenen hör till en värld där vatten berör arkitektur, jord, arbete och minne."
+  },
+  {
+    "scene": 120,
+    "start_seconds": 1190,
+    "duration_seconds": 10,
+    "text": "Vi började med torn och fann förbindelser. De ledde till fält, hushåll, magasin, skiftande årstider och ansvar som fortsätter."
+  },
+  {
+    "scene": 121,
+    "start_seconds": 1200,
+    "duration_seconds": 10,
+    "text": "Templen förblir märkvärdiga. Deras storlek blir meningsfullare när vi ser små handlingar och stora samband bakom dem."
+  },
+  {
+    "scene": 122,
+    "start_seconds": 1210,
+    "duration_seconds": 10,
+    "text": "En stad överlever ojämnt i spåren. Sten syns länge; en gammal kanal kan kräva tålmodig kartläggning innan rollen blir tydlig."
+  },
+  {
+    "scene": 123,
+    "start_seconds": 1220,
+    "duration_seconds": 10,
+    "text": "Att läsa båda förändrar frågan: förutom vem som byggde monumentet, hur kunde ett bebott landskap fortsätta fungera?"
+  },
+  {
+    "scene": 124,
+    "start_seconds": 1230,
+    "duration_seconds": 10,
+    "text": "Frågor återstår om enskilda strukturer, vattenfördelning och gemenskapernas val när villkoren förändrades."
+  },
+  {
+    "scene": 125,
+    "start_seconds": 1240,
+    "duration_seconds": 10,
+    "text": "Framtida forskning kan precisera svaren. Skyddade spår låter arbetet fortsätta utan att låsa berättelsen i dess enklaste form."
+  },
+  {
+    "scene": 126,
+    "start_seconds": 1250,
+    "duration_seconds": 10,
+    "text": "Över slätten samlas vatten, rör sig och lämnar märken. Välbekanta processer fortsätter mellan anläggningar som kan vara sekler gamla."
+  },
+  {
+    "scene": 127,
+    "start_seconds": 1260,
+    "duration_seconds": 10,
+    "text": "Angkors prestation finns delvis i förbindelserna: årstid och lagring, mark och rörelse, heliga platser och vardagliga behov."
+  },
+  {
+    "scene": 128,
+    "start_seconds": 1270,
+    "duration_seconds": 10,
+    "text": "Historien visar infrastruktur som ett fortsatt förhållande mellan människor, miljö och omsorg, bortom något som bara färdigställs en gång."
+  },
+  {
+    "scene": 129,
+    "start_seconds": 1280,
+    "duration_seconds": 10,
+    "text": "Se åter på vattenlinjen i stenen. Ett litet spår öppnar nu en stad, och staden öppnar ett helt landskap."
+  }
+]

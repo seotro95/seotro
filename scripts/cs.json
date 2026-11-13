@@ -1,0 +1,776 @@
+[
+  {
+    "scene": 1,
+    "start_seconds": 0,
+    "duration_seconds": 10,
+    "text": "Po starém kameni vede tmavá stopa. Zdá se nepatrná, než pochopíme, že voda pomáhala utvářet celé město."
+  },
+  {
+    "scene": 2,
+    "start_seconds": 10,
+    "duration_seconds": 10,
+    "text": "V Angkoru nejprve zaujmou věže. Ještě překvapivější stavba se však rozprostírá mezi kanály, hrázemi a nádržemi."
+  },
+  {
+    "scene": 3,
+    "start_seconds": 20,
+    "duration_seconds": 10,
+    "text": "Když sledujeme spojení, známý obraz se mění. Chrám patří k městu a město k celému povodí."
+  },
+  {
+    "scene": 4,
+    "start_seconds": 30,
+    "duration_seconds": 10,
+    "text": "Otázka je prostá: Jak uspořádat život tam, kde voda někdy přichází v nadbytku a později ji těžko najdeme?"
+  },
+  {
+    "scene": 5,
+    "start_seconds": 40,
+    "duration_seconds": 10,
+    "text": "Odpověď spojuje déšť, terén, zemědělství, víru, moc a běžnou údržbu. Osvětluje také pozdější proměny Angkoru."
+  },
+  {
+    "scene": 6,
+    "start_seconds": 50,
+    "duration_seconds": 10,
+    "text": "Začínáme v dnešní Kambodži, u Siem Reapu, severně od Tonlesapu. Památky stojí v mnohem širší obydlené krajině."
+  },
+  {
+    "scene": 7,
+    "start_seconds": 60,
+    "duration_seconds": 10,
+    "text": "Angkor byl po staletí významným centrem Khmerů. Jeho podoba se měnila s vládci, komunitami a jejich potřebami."
+  },
+  {
+    "scene": 8,
+    "start_seconds": 70,
+    "duration_seconds": 10,
+    "text": "Dochované chrámy tvoří orientační body. Město ale potřebuje také domy, pole, cesty, obchod a odstraňování odpadu."
+  },
+  {
+    "scene": 9,
+    "start_seconds": 80,
+    "duration_seconds": 10,
+    "text": "Běžné stavby často užívaly méně trvanlivé materiály. Zmizelé střechy způsobují, že kamenné památky vypadají mylně osaměle."
+  },
+  {
+    "scene": 10,
+    "start_seconds": 90,
+    "duration_seconds": 10,
+    "text": "Podívejme se za vyřezávanou bránu. Vyvýšená linie může být hrází, mělká prohlubeň uchovávat další část příběhu."
+  },
+  {
+    "scene": 11,
+    "start_seconds": 100,
+    "duration_seconds": 10,
+    "text": "Takové tvary potřebují výzkum. Samotný vzhled neurčuje dobu vzniku, funkci ani pozdější změny."
+  },
+  {
+    "scene": 12,
+    "start_seconds": 110,
+    "duration_seconds": 10,
+    "text": "Společně ukazují rozsah otázky. Historie Angkoru daleko přesahuje hranice jediného slavného chrámu."
+  },
+  {
+    "scene": 13,
+    "start_seconds": 120,
+    "duration_seconds": 10,
+    "text": "Angkor Vat vznikl počátkem dvanáctého století za Súrjavarmana Druhého. Je výchozím bodem pro cestu do širší krajiny."
+  },
+  {
+    "scene": 14,
+    "start_seconds": 130,
+    "duration_seconds": 10,
+    "text": "Původní zasvěcení Višnuovi a pozdější buddhistická historie připomínají, že se měnily také náboženské významy míst."
+  },
+  {
+    "scene": 15,
+    "start_seconds": 140,
+    "duration_seconds": 10,
+    "text": "Chrámový příkop může zobrazovat uspořádaný posvátný svět a zároveň ovlivňovat vodu, půdu i bezprostřední okolí stavby."
+  },
+  {
+    "scene": 16,
+    "start_seconds": 150,
+    "duration_seconds": 10,
+    "text": "Opusťme na chvíli věže. Sledujme, odkud přichází déšť a kam terén dovoluje vodě odtékat."
+  },
+  {
+    "scene": 17,
+    "start_seconds": 160,
+    "duration_seconds": 10,
+    "text": "Oblast má výrazně sezonní monzunové klima. Mokré a suché měsíce vytvářejí v téže krajině odlišné podmínky."
+  },
+  {
+    "scene": 18,
+    "start_seconds": 170,
+    "duration_seconds": 10,
+    "text": "Za dešťů přichází voda na střechy, pole, cesty i do potoků. Rozhoduje množství, rychlost a místo."
+  },
+  {
+    "scene": 19,
+    "start_seconds": 180,
+    "duration_seconds": 10,
+    "text": "Přívalový déšť může přetížit kanál, přestože později přijde nedostatek. Nadbytek i nouze souvisejí také s načasováním."
+  },
+  {
+    "scene": 20,
+    "start_seconds": 190,
+    "duration_seconds": 10,
+    "text": "S postupující suchou sezonou rostou nároky na zásoby a spolehlivý přístup. Užitečný systém musí zvládnout obě období."
+  },
+  {
+    "scene": 21,
+    "start_seconds": 200,
+    "duration_seconds": 10,
+    "text": "Vyšší terén severně od Angkoru vytváří povodí zásobující rovinu. Voda sleduje gravitaci, lidé však mění její cestu."
+  },
+  {
+    "scene": 22,
+    "start_seconds": 210,
+    "duration_seconds": 10,
+    "text": "Krajina určuje hlavní směr, ale záleží i na drobných výškách. Mírný sklon může rozhodnout, které pole dostane vodu."
+  },
+  {
+    "scene": 23,
+    "start_seconds": 220,
+    "duration_seconds": 10,
+    "text": "Samotná země je tedy součástí infrastruktury. Kanál funguje ve vztahu k okolním a níže položeným pozemkům."
+  },
+  {
+    "scene": 24,
+    "start_seconds": 230,
+    "duration_seconds": 10,
+    "text": "Na jihu leží Tonlesap. Jeho sezonní rozšiřování a zmenšování souvisí s větší říční soustavou."
+  },
+  {
+    "scene": 25,
+    "start_seconds": 240,
+    "duration_seconds": 10,
+    "text": "Známé sezonní obrácení proudu patří k tomuto širšímu měřítku. Nepopisuje každý místní kanál Angkoru."
+  },
+  {
+    "scene": 26,
+    "start_seconds": 250,
+    "duration_seconds": 10,
+    "text": "Jezero, rovina, potoky, déšť a podzemní voda působí v různých měřítkách. Jedna šipka na mapě neukáže vše."
+  },
+  {
+    "scene": 27,
+    "start_seconds": 260,
+    "duration_seconds": 10,
+    "text": "Pro obyvatele šlo o praktické vztahy: vzdálenost k vodě, stav přechodu a správný čas pěstování."
+  },
+  {
+    "scene": 28,
+    "start_seconds": 270,
+    "duration_seconds": 10,
+    "text": "Nestačilo shromáždit největší množství. Vodu bylo nutné vést, zadržovat a vypouštět podle měnících se potřeb."
+  },
+  {
+    "scene": 29,
+    "start_seconds": 280,
+    "duration_seconds": 10,
+    "text": "Někde bylo třeba proud zpomalit. Jinde přebytek potřeboval odtok, než poškodil pole nebo budovy."
+  },
+  {
+    "scene": 30,
+    "start_seconds": 290,
+    "duration_seconds": 10,
+    "text": "Ukládání a odvodňování tedy patří k jednomu příběhu. Krajina potřebuje prostor k zadržení vody i cesty ven."
+  },
+  {
+    "scene": 31,
+    "start_seconds": 300,
+    "duration_seconds": 10,
+    "text": "Tvary mimo chrámy získávají význam. Dlouhé hráze a široké nádrže ukazují práci s rozdíly mezi sezonami."
+  },
+  {
+    "scene": 32,
+    "start_seconds": 310,
+    "duration_seconds": 10,
+    "text": "Teď prozkoumáme velké zásobníky. Nebudeme předpokládat, že všechny měly stejnou funkci nebo historii."
+  },
+  {
+    "scene": 33,
+    "start_seconds": 320,
+    "duration_seconds": 10,
+    "text": "Velké obdélníkové nádrže Angkoru se nazývají baraje. Zemní hráze vytvářely rozsáhlé zásoby v mírně skloněné krajině."
+  },
+  {
+    "scene": 34,
+    "start_seconds": 330,
+    "duration_seconds": 10,
+    "text": "Západní baraj dodnes působí mohutně. Shora jeho dlouhý obdélník vystupuje mezi menšími tvary okolí."
+  },
+  {
+    "scene": 35,
+    "start_seconds": 340,
+    "duration_seconds": 10,
+    "text": "Východní baraj uchovává další velký obrys. Dnešní vzhled se liší od naplněné nádrže: Krajina se stále mění."
+  },
+  {
+    "scene": 36,
+    "start_seconds": 350,
+    "duration_seconds": 10,
+    "text": "Jiné nádrže patří k odlišným fázím. Síť vznikala postupně, nikoli podle jednoho hotového plánu uskutečněného najednou."
+  },
+  {
+    "scene": 37,
+    "start_seconds": 360,
+    "duration_seconds": 10,
+    "text": "Velikost ohromí, ale nevysvětluje provoz. Musíme se ptát, kudy voda přicházela, jak se pohybovala a odtékala."
+  },
+  {
+    "scene": 38,
+    "start_seconds": 370,
+    "duration_seconds": 10,
+    "text": "Hráz musí držet vodu a odolávat erozi. Výška, materiál a stav určují skutečné možnosti nádrže."
+  },
+  {
+    "scene": 39,
+    "start_seconds": 380,
+    "duration_seconds": 10,
+    "text": "Přítoky a odtoky propojují nádrž se sítí. Jejich poloha může být stejně důležitá jako velký obrys na fotografii."
+  },
+  {
+    "scene": 40,
+    "start_seconds": 390,
+    "duration_seconds": 10,
+    "text": "Sediment přináší další potíže. Voda nese materiál, jehož usazování postupně mění hloubku nebo kapacitu kanálu."
+  },
+  {
+    "scene": 41,
+    "start_seconds": 400,
+    "duration_seconds": 10,
+    "text": "Údržba proto provází celý život díla. Stavba fungující jednu sezonu může před další potřebovat vyčištění nebo opravu."
+  },
+  {
+    "scene": 42,
+    "start_seconds": 410,
+    "duration_seconds": 10,
+    "text": "Nádrže patřily také ke chrámům a královské moci. Moderní technické schéma nevystihuje všechny jejich významy."
+  },
+  {
+    "scene": 43,
+    "start_seconds": 420,
+    "duration_seconds": 10,
+    "text": "Voda plnila praktické potřeby i náboženskou symboliku. Role se překrývaly a měnily podle místa a doby."
+  },
+  {
+    "scene": 44,
+    "start_seconds": 430,
+    "duration_seconds": 10,
+    "text": "O zavlažovací funkci některých barají se diskutuje. Odpověď potřebuje důkazy o konkrétní stavbě a jejích spojeních."
+  },
+  {
+    "scene": 45,
+    "start_seconds": 440,
+    "duration_seconds": 10,
+    "text": "Velká nádrž nedokazuje zásobování všech blízkých polí. Výšky, kanály, výpusti a data musejí zapadat do sebe."
+  },
+  {
+    "scene": 46,
+    "start_seconds": 450,
+    "duration_seconds": 10,
+    "text": "Dnešní hladina nezobrazuje všechna minulá staletí. Zanášení, přestavby, opravy a nové využití nádrže mění."
+  },
+  {
+    "scene": 47,
+    "start_seconds": 460,
+    "duration_seconds": 10,
+    "text": "Chápejme baraje jako velké části širšího celku. Jejich význam objasní sledování linií, které je propojují."
+  },
+  {
+    "scene": 48,
+    "start_seconds": 470,
+    "duration_seconds": 10,
+    "text": "Linie vedou k potokům, kanálům, hrázím, přechodům a rozvětvením po celé obydlené rovině."
+  },
+  {
+    "scene": 49,
+    "start_seconds": 480,
+    "duration_seconds": 10,
+    "text": "Kanál dává vodě výhodnou cestu. Proud závisí na sklonu, hloubce, šířce, drsnosti a přítoku shora."
+  },
+  {
+    "scene": 50,
+    "start_seconds": 490,
+    "duration_seconds": 10,
+    "text": "Pohyb zajišťuje gravitace. Lidská práce mění trasy, rozděluje proudy a propojuje místa s různou dostupností vody."
+  },
+  {
+    "scene": 51,
+    "start_seconds": 500,
+    "duration_seconds": 10,
+    "text": "Na rozvětvení má malá změna vzdálené následky. Více vody v jedné větvi může znamenat méně v druhé."
+  },
+  {
+    "scene": 52,
+    "start_seconds": 510,
+    "duration_seconds": 10,
+    "text": "Vyvýšený val může nést také cestu přes mokrou zem. Doprava a vodní hospodářství pak sdílejí jednu linii."
+  },
+  {
+    "scene": 53,
+    "start_seconds": 520,
+    "duration_seconds": 10,
+    "text": "Přechody vyžadují další rovnováhu. Cesta musí pokračovat a voda mít prostor protéct, aniž by podkopala stavbu."
+  },
+  {
+    "scene": 54,
+    "start_seconds": 530,
+    "duration_seconds": 10,
+    "text": "Systém vodu ukládá i přesouvá. Pouhé největší nádrže neukážou všechny vztahy umožňující běžný život."
+  },
+  {
+    "scene": 55,
+    "start_seconds": 540,
+    "duration_seconds": 10,
+    "text": "Také přírodní potoky tvořily součást prostředí. Lidé upravovali toky v krajině s vlastními odtokovými vzory."
+  },
+  {
+    "scene": 56,
+    "start_seconds": 550,
+    "duration_seconds": 10,
+    "text": "Mapa musí rozlišit původ linií: vykopané, navršené, odkloněné nebo zděděné po starších tvarech terénu."
+  },
+  {
+    "scene": 57,
+    "start_seconds": 560,
+    "duration_seconds": 10,
+    "text": "Síť roste spojováním dřívějších částí. Každý doplněk řeší místní problém a může změnit podmínky jinde."
+  },
+  {
+    "scene": 58,
+    "start_seconds": 570,
+    "duration_seconds": 10,
+    "text": "S generacemi přibývá složitost. Musíme vědět, které prvky existovaly současně, ne považovat všechny stopy za soudobé."
+  },
+  {
+    "scene": 59,
+    "start_seconds": 580,
+    "duration_seconds": 10,
+    "text": "Opuštěný kanál vedle pozdějšího nedokazuje společný provoz. Archeologický čas musí zůstat na mapě viditelný."
+  },
+  {
+    "scene": 60,
+    "start_seconds": 590,
+    "duration_seconds": 10,
+    "text": "Proto k leteckým snímkům patří vykopávky a datování. Krásný obrys potřebuje historii, než začne vysvětlovat."
+  },
+  {
+    "scene": 61,
+    "start_seconds": 600,
+    "duration_seconds": 10,
+    "text": "Představme si malý potok po dešti. Rozlévá se do nádrže a pozdější úzký průchod proud znovu soustředí."
+  },
+  {
+    "scene": 62,
+    "start_seconds": 610,
+    "duration_seconds": 10,
+    "text": "Stejná voda teče klidně i silně podle trasy. Slabá hráz nebo ucpaný otvor ovlivní vzdálená místa po proudu."
+  },
+  {
+    "scene": 63,
+    "start_seconds": 620,
+    "duration_seconds": 10,
+    "text": "Pohled z jediné věže to neodhalí. Město je třeba číst přes velké vzdálenosti i v malých detailech."
+  },
+  {
+    "scene": 64,
+    "start_seconds": 630,
+    "duration_seconds": 10,
+    "text": "Každá linie nakonec vede k lidem: rodinám, dělníkům, zemědělcům a náboženským komunitám, které krajinu užívaly a udržovaly."
+  },
+  {
+    "scene": 65,
+    "start_seconds": 640,
+    "duration_seconds": 10,
+    "text": "Angkor přesahoval sevřenou skupinu kamenných budov. Doklady ukazují rozsáhlou, poměrně řídce zastavěnou a propojenou městskou krajinu."
+  },
+  {
+    "scene": 66,
+    "start_seconds": 650,
+    "duration_seconds": 10,
+    "text": "Domy, rybníčky, pole, cesty a chrámové areály patřily k celku. Jejich rozmístění se měnilo v čase a prostoru."
+  },
+  {
+    "scene": 67,
+    "start_seconds": 660,
+    "duration_seconds": 10,
+    "text": "Domácí rybníček přibližoval vodu každodenním činnostem. Malá stavba mohla být významná i vedle obrovské nádrže."
+  },
+  {
+    "scene": 68,
+    "start_seconds": 670,
+    "duration_seconds": 10,
+    "text": "Pěstování rýže vyžadovalo znalost sezon a půdy. Správa vody znamenala také volit načasování, nejen budovat stavby."
+  },
+  {
+    "scene": 69,
+    "start_seconds": 680,
+    "duration_seconds": 10,
+    "text": "Pole trpí nedostatkem i přebytkem vody, ale také přítokem v nesprávné fázi růstu."
+  },
+  {
+    "scene": 70,
+    "start_seconds": 690,
+    "duration_seconds": 10,
+    "text": "Rolníci poznávali místní rozdíly zkušeností. Krajinu tvořilo mnoho rozhodnutí, nejen královské příkazy."
+  },
+  {
+    "scene": 71,
+    "start_seconds": 700,
+    "duration_seconds": 10,
+    "text": "Velké práce potřebovaly organizaci, lidi, materiál a trvalou péči. Politická moc a úsilí komunit se setkávaly v infrastruktuře."
+  },
+  {
+    "scene": 72,
+    "start_seconds": 710,
+    "duration_seconds": 10,
+    "text": "Oprava mohla být stejně důležitá jako stavba. Odstranit sediment, zpevnit hráz nebo otevřít průchod málokdy vytváří velkolepou památku."
+  },
+  {
+    "scene": 73,
+    "start_seconds": 720,
+    "duration_seconds": 10,
+    "text": "Právě taková práce ale vysvětluje trvání sítě. Činnosti mimo pohlednici mohly podpírat mimořádné panorama."
+  },
+  {
+    "scene": 74,
+    "start_seconds": 730,
+    "duration_seconds": 10,
+    "text": "Pamatujme i na zmizelé materiály. Dřevo, rostlinná vlákna a zemní povrchy zanechávají jiné stopy než tesaný pískovec."
+  },
+  {
+    "scene": 75,
+    "start_seconds": 740,
+    "duration_seconds": 10,
+    "text": "Nerovné zachování ovlivňuje představivost. Chrám vypadá osaměle, protože okolní domy už nestojí nad zemí."
+  },
+  {
+    "scene": 76,
+    "start_seconds": 750,
+    "duration_seconds": 10,
+    "text": "Archeologie obnovuje vztahy ze stop. Nepředstírá přesnou znalost každé střechy, práce nebo počtu obyvatel."
+  },
+  {
+    "scene": 77,
+    "start_seconds": 760,
+    "duration_seconds": 10,
+    "text": "Objevuje se bohatší město: obydlené, produktivní, propojené a proměnlivé. Vodní síť patřila k tomuto živému světu."
+  },
+  {
+    "scene": 78,
+    "start_seconds": 770,
+    "duration_seconds": 10,
+    "text": "To mění také význam objevu. Angkor nebyl prázdným místem čekajícím na pozornost lidí zvenčí."
+  },
+  {
+    "scene": 79,
+    "start_seconds": 780,
+    "duration_seconds": 10,
+    "text": "Místní znalosti, náboženská kontinuita, dřívější bádání a moderní výzkum společně patří k poznávání tohoto místa."
+  },
+  {
+    "scene": 80,
+    "start_seconds": 790,
+    "duration_seconds": 10,
+    "text": "Nová technika rozšiřuje záznam. Nevymazává lidi, kteří tato místa znali dříve nebo o ně stále pečovali."
+  },
+  {
+    "scene": 81,
+    "start_seconds": 800,
+    "duration_seconds": 10,
+    "text": "Z výšky jsou některé stopy čitelnější. Dlouhé linie vystupují tam, kde dole vidíme jen jednotlivé vyvýšeniny a prohlubně."
+  },
+  {
+    "scene": 82,
+    "start_seconds": 810,
+    "duration_seconds": 10,
+    "text": "Letecké laserové skenování, nazývané lidar, přidalo důležité podrobnosti k mapování širší krajiny Angkoru."
+  },
+  {
+    "scene": 83,
+    "start_seconds": 820,
+    "duration_seconds": 10,
+    "text": "Laser pomáhá modelovat zem mezerami v porostu. Zpracování signálů však nefotografuje všechny předměty pohřbené pod zemí."
+  },
+  {
+    "scene": 84,
+    "start_seconds": 830,
+    "duration_seconds": 10,
+    "text": "Výsledky ukazují jemné zemní struktury, kanály a sídelní vzory. Jsou vodítky k výzkumu, ne úplným filmem minulosti."
+  },
+  {
+    "scene": 85,
+    "start_seconds": 840,
+    "duration_seconds": 10,
+    "text": "Stínovaný model terénu zviditelní malé výškové rozdíly. Změna virtuálního světla může odhalit dosud nevýraznou linii."
+  },
+  {
+    "scene": 86,
+    "start_seconds": 850,
+    "duration_seconds": 10,
+    "text": "I jasná linie potřebuje výklad. Badatelé porovnávají mapy, terén, nálezy, starší plány a další důkazy."
+  },
+  {
+    "scene": 87,
+    "start_seconds": 860,
+    "duration_seconds": 10,
+    "text": "Moderní pěšina, starý val a přírodní tvar mohou vypadat podobně. Souvislosti je pomáhají odlišit."
+  },
+  {
+    "scene": 88,
+    "start_seconds": 870,
+    "duration_seconds": 10,
+    "text": "Chronologie zůstává zásadní. Mapa ukáže polohu, výzkum a datování pomohou určit dobu významu."
+  },
+  {
+    "scene": 89,
+    "start_seconds": 880,
+    "duration_seconds": 10,
+    "text": "Sedimenty nabízejí další pohled. Vrstvy mohou uchovat změny usazování, vodních poměrů nebo narušení, s vlastními omezeními."
+  },
+  {
+    "scene": 90,
+    "start_seconds": 890,
+    "duration_seconds": 10,
+    "text": "Spojení metod dovoluje důkazům ověřovat se navzájem. Silné vysvětlení propojuje vzory a nezávisí na jediném dramatickém obrazu."
+  },
+  {
+    "scene": 91,
+    "start_seconds": 900,
+    "duration_seconds": 10,
+    "text": "Rekonstrukce proto musejí být označené. Věrohodná scéna kanálu je ilustrací, nikoli záznamem doložené dávné události."
+  },
+  {
+    "scene": 92,
+    "start_seconds": 910,
+    "duration_seconds": 10,
+    "text": "Cílem je pochopit vztahy: možné cesty vody, místa bydlení a šíření změny napříč sítí."
+  },
+  {
+    "scene": 93,
+    "start_seconds": 920,
+    "duration_seconds": 10,
+    "text": "To je důležité při změně vnějších podmínek. Také síť založená na zkušenosti může čelit neznámým tlakům."
+  },
+  {
+    "scene": 94,
+    "start_seconds": 930,
+    "duration_seconds": 10,
+    "text": "Odejďme na chvíli od kamene a podívejme se na klimatické doklady, také ty mimo Angkor."
+  },
+  {
+    "scene": 95,
+    "start_seconds": 940,
+    "duration_seconds": 10,
+    "text": "Letokruhy pevninské jihovýchodní Asie ukazují silná sucha a velmi mokrá období ve čtrnáctém a patnáctém století."
+  },
+  {
+    "scene": 96,
+    "start_seconds": 950,
+    "duration_seconds": 10,
+    "text": "Popisují regionální proměnlivost. Vztah k místním podmínkám a archeologickým změnám je nutné vytvářet opatrně."
+  },
+  {
+    "scene": 97,
+    "start_seconds": 960,
+    "duration_seconds": 10,
+    "text": "Dlouhé sucho snižuje dostupnou vodu. Mění také práci potřebnou k udržení kanálů, polí a sídel."
+  },
+  {
+    "scene": 98,
+    "start_seconds": 970,
+    "duration_seconds": 10,
+    "text": "Velmi mokré časy přinášejí jiný problém. Rychlý proud nese sediment, rozrušuje hráze a přetěžuje dříve dostačující průchody."
+  },
+  {
+    "scene": 99,
+    "start_seconds": 980,
+    "duration_seconds": 10,
+    "text": "Střídání tlaků komplikuje propojenou síť. Úpravy pro nedostatek nemusejí vyřešit další prudký déšť."
+  },
+  {
+    "scene": 100,
+    "start_seconds": 990,
+    "duration_seconds": 10,
+    "text": "Složitý systém rozděluje užitek i poruchy. Změna proti proudu se může stát problémem někoho daleko."
+  },
+  {
+    "scene": 101,
+    "start_seconds": 1000,
+    "duration_seconds": 10,
+    "text": "Ne všechno muselo selhat současně. Místní opravy, jiné trasy a nové využití mohly přinášet různé výsledky."
+  },
+  {
+    "scene": 102,
+    "start_seconds": 1010,
+    "duration_seconds": 10,
+    "text": "Badatelé zkoumají poškození a úpravy částí sítě. Posloupnost je důležitější než jednoduchý obraz náhlého zhroucení."
+  },
+  {
+    "scene": 103,
+    "start_seconds": 1020,
+    "duration_seconds": 10,
+    "text": "Klima je významným směrem výzkumu, ne úplným vysvětlením. Záleží také na institucích, údržbě, osídlení a politice."
+  },
+  {
+    "scene": 104,
+    "start_seconds": 1030,
+    "duration_seconds": 10,
+    "text": "Patnácté století přineslo konflikty a změny politických vztahů. Přesuny moci a činnosti nevysvětlí samotný déšť."
+  },
+  {
+    "scene": 105,
+    "start_seconds": 1040,
+    "duration_seconds": 10,
+    "text": "Rok čtrnáct set třicet jedna se často uvádí v přehledech. Jediné datum nesmí vyprázdnit celý region přes noc."
+  },
+  {
+    "scene": 106,
+    "start_seconds": 1050,
+    "duration_seconds": 10,
+    "text": "Některá místa se měnila nebo slábla, jiná zůstala významná. Angkor Vat pokračoval v náboženské historii po přesunu královského centra."
+  },
+  {
+    "scene": 107,
+    "start_seconds": 1060,
+    "duration_seconds": 10,
+    "text": "Proměna probíhala různými procesy v čase. Poslední bouře, vpád nebo prázdná ulice by důkazy příliš zjednodušily."
+  },
+  {
+    "scene": 108,
+    "start_seconds": 1070,
+    "duration_seconds": 10,
+    "text": "Nerovnoměrný příběh je náročnější a lidštější. Lidé se přizpůsobují, opravují, stěhují a pokračují v praxi za nových podmínek."
+  },
+  {
+    "scene": 109,
+    "start_seconds": 1080,
+    "duration_seconds": 10,
+    "text": "Vodní síť umožňuje takové odpovědi studovat. Propojuje velké tlaky prostředí s rozhodnutími na konkrétních místech."
+  },
+  {
+    "scene": 110,
+    "start_seconds": 1090,
+    "duration_seconds": 10,
+    "text": "Varuje i před snadným soudem o dávné technice. Užitečně stavět a udržovat po generace jsou spojené, ale odlišné úspěchy."
+  },
+  {
+    "scene": 111,
+    "start_seconds": 1100,
+    "duration_seconds": 10,
+    "text": "Každé řešení závisí na podmínkách, vědění, práci a zdrojích. Při změně mohou stejné struktury získat nové role."
+  },
+  {
+    "scene": 112,
+    "start_seconds": 1110,
+    "duration_seconds": 10,
+    "text": "Pozdější historie plně patří k Angkoru. Není pouze dramatickým zakončením věku výstavby."
+  },
+  {
+    "scene": 113,
+    "start_seconds": 1120,
+    "duration_seconds": 10,
+    "text": "Voda zůstává součástí péče o Angkor. Déšť, odvodnění, vegetace a stav budov ovlivňují ochranu."
+  },
+  {
+    "scene": 114,
+    "start_seconds": 1130,
+    "duration_seconds": 10,
+    "text": "Kanál u návštěvní cesty působí méně velkolepě než tesaná stěna. Správný odtok přesto pomáhá chránit její okolí."
+  },
+  {
+    "scene": 115,
+    "start_seconds": 1140,
+    "duration_seconds": 10,
+    "text": "Ochrana potřebuje pozorování a místní odbornost. Zásah je nutné hodnotit v celé krajině, ne jen podle vzhledu."
+  },
+  {
+    "scene": 116,
+    "start_seconds": 1150,
+    "duration_seconds": 10,
+    "text": "Dědictví souvisí s dnešními komunitami, obživou, náboženstvím a turistikou. Týká se současnosti stejně jako minulosti."
+  },
+  {
+    "scene": 117,
+    "start_seconds": 1160,
+    "duration_seconds": 10,
+    "text": "Respektující návštěva sleduje povolené cesty a místní rady. Není nutné lézt na křehkou hráz či vstupovat do uzavřené stavby."
+  },
+  {
+    "scene": 118,
+    "start_seconds": 1170,
+    "duration_seconds": 10,
+    "text": "Totéž platí pro filmování. Povolené pohledy, život dospělých a pečlivé ilustrace vysvětlí příběh bez hraní posvátných obřadů."
+  },
+  {
+    "scene": 119,
+    "start_seconds": 1180,
+    "duration_seconds": 10,
+    "text": "Vraťme se k úvodnímu obrazu. Stopa na kameni patří ke světu, kde se voda dotýká architektury, země, práce a paměti."
+  },
+  {
+    "scene": 120,
+    "start_seconds": 1190,
+    "duration_seconds": 10,
+    "text": "Začali jsme věžemi a našli spojení. Vedla k polím, domům, zásobníkům, proměnlivým sezonám a trvající odpovědnosti."
+  },
+  {
+    "scene": 121,
+    "start_seconds": 1200,
+    "duration_seconds": 10,
+    "text": "Chrámy zůstávají výjimečné. Jejich velikost získává význam s drobnými činnostmi a širokými vztahy, které je podporovaly."
+  },
+  {
+    "scene": 122,
+    "start_seconds": 1210,
+    "duration_seconds": 10,
+    "text": "Město přežívá v důkazech nerovnoměrně. Kámen je vidět, starý kanál někdy potřebuje trpělivé mapování k objasnění role."
+  },
+  {
+    "scene": 123,
+    "start_seconds": 1220,
+    "duration_seconds": 10,
+    "text": "Společné čtení mění otázku: kromě toho, kdo postavil památku, jak mohla obydlená krajina dál fungovat?"
+  },
+  {
+    "scene": 124,
+    "start_seconds": 1230,
+    "duration_seconds": 10,
+    "text": "Zůstávají otázky historie struktur, rozdělení vody a voleb komunit, když se podmínky měnily."
+  },
+  {
+    "scene": 125,
+    "start_seconds": 1240,
+    "duration_seconds": 10,
+    "text": "Budoucí výzkum může odpovědi upřesnit. Ochrana stop umožní pokračovat, místo abychom příběh uzavřeli v nejjednodušší podobě."
+  },
+  {
+    "scene": 126,
+    "start_seconds": 1250,
+    "duration_seconds": 10,
+    "text": "Na rovině se voda stále shromažďuje, pohybuje a zanechává znaky. Známé procesy trvají mezi staletými stavbami."
+  },
+  {
+    "scene": 127,
+    "start_seconds": 1260,
+    "duration_seconds": 10,
+    "text": "Úspěch Angkoru je zčásti ve spojeních: sezony a zásob, země a pohybu, posvátných míst a běžných potřeb."
+  },
+  {
+    "scene": 128,
+    "start_seconds": 1270,
+    "duration_seconds": 10,
+    "text": "Historie ukazuje infrastrukturu jako trvalý vztah lidí, prostředí a péče, přesahující jednorázové dokončení stavby."
+  },
+  {
+    "scene": 129,
+    "start_seconds": 1280,
+    "duration_seconds": 10,
+    "text": "Podívejme se znovu na vodní stopu v kameni. Malý znak nyní otevírá město a město otevírá celou krajinu."
+  }
+]

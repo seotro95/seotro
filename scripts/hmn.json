@@ -1,0 +1,776 @@
+[
+  {
+    "scene": 1,
+    "start_seconds": 0,
+    "duration_seconds": 10,
+    "text": "Muaj ib txoj kab tsaus nyob saum lub pob zeb qub. Nws zoo li me xwb, tiam sis dej tau pab tsim ib lub nroog loj."
+  },
+  {
+    "scene": 2,
+    "start_seconds": 10,
+    "duration_seconds": 10,
+    "text": "Thaum pom Angkor, peb xub ntsia cov pej thuam siab. Tiam sis ib lub cev loj dua txuas mus rau kwj dej, ntug av thiab pas dej."
+  },
+  {
+    "scene": 3,
+    "start_seconds": 20,
+    "duration_seconds": 10,
+    "text": "Yog taug cov kev txuas ntawd, zaj dab neeg hloov. Lub tuam tsev yog ib feem ntawm nroog, thiab nroog yog ib feem ntawm thaj av txais dej."
+  },
+  {
+    "scene": 4,
+    "start_seconds": 30,
+    "duration_seconds": 10,
+    "text": "Peb nug tias: tib neeg npaj lub neej li cas, thaum ib lub caij dej muaj ntau heev, hos lwm caij nrhiav dej nyuaj?"
+  },
+  {
+    "scene": 5,
+    "start_seconds": 40,
+    "duration_seconds": 10,
+    "text": "Lo lus teb txuas nag, av, kev ua teb, kev ntseeg, hwj chim thiab kev tu kho. Nws kuj pab qhia Angkor txoj kev hloov tom qab."
+  },
+  {
+    "scene": 6,
+    "start_seconds": 50,
+    "duration_seconds": 10,
+    "text": "Pib ntawm teb chaws Qhab Meem niaj hnub no, ze Siem Reap, sab qaum teb pas Tonle Sap. Cov tuam tsev nyob hauv thaj chaw muaj neeg coob."
+  },
+  {
+    "scene": 7,
+    "start_seconds": 60,
+    "duration_seconds": 10,
+    "text": "Angkor yog ib lub chaw tseem ceeb ntawm cov Khmer tau ntau pua xyoo. Nws hloov raws vaj ntxwv, zej zog thiab tej yam lawv xav tau."
+  },
+  {
+    "scene": 8,
+    "start_seconds": 70,
+    "duration_seconds": 10,
+    "text": "Cov tuam tsev pob zeb yog chaw cim pom tseeb. Tiam sis nroog kuj xav tau vaj tsev, teb, kev mus los thiab chaw pauv khoom."
+  },
+  {
+    "scene": 9,
+    "start_seconds": 80,
+    "duration_seconds": 10,
+    "text": "Vaj tsev niaj hnub siv ntau yam uas tsis nyob ntev li pob zeb. Thaum cov ru tsev ploj, cov tuam tsev thiaj zoo li nyob ib leeg."
+  },
+  {
+    "scene": 10,
+    "start_seconds": 90,
+    "duration_seconds": 10,
+    "text": "Saib dhau lub qhov rooj txua duab. Ib txoj av siab tej zaum yog ntug thaiv dej; ib qho av qis kuj khaws lwm txoj dab neeg."
+  },
+  {
+    "scene": 11,
+    "start_seconds": 100,
+    "duration_seconds": 10,
+    "text": "Yuav tsum tshawb cov cim ntawd. Nws tus duab xwb qhia tsis tau tias tsim thaum twg, siv li cas, los sis hloov li cas lawm."
+  },
+  {
+    "scene": 12,
+    "start_seconds": 110,
+    "duration_seconds": 10,
+    "text": "Thaum muab cov cim los sib txuas, peb mam pom tias zaj lus nug loj npaum li cas. Angkor loj tshaj ib lub tuam tsev nto moo."
+  },
+  {
+    "scene": 13,
+    "start_seconds": 120,
+    "duration_seconds": 10,
+    "text": "Angkor Wat tsim thaum pib xyoo pua kaum ob, nyob rau vaj Suryavarman tus ob lub caij. Qhov no yog qhov pib saib thaj chaw dav dua."
+  },
+  {
+    "scene": 14,
+    "start_seconds": 130,
+    "duration_seconds": 10,
+    "text": "Thaum xub thawj pe hawm Vishnu, tom qab txuas rau kev ntseeg Hauj Sam. Lub ntsiab kev ntseeg thiaj hloov tau raws lub sij hawm."
+  },
+  {
+    "scene": 15,
+    "start_seconds": 140,
+    "duration_seconds": 10,
+    "text": "Lub kwj ncig tuam tsev yuav qhia txog lub ntiaj teb dawb huv uas muaj txheej txheem. Nws kuj cuam tshuam dej, av thiab chaw nyob ib sab."
+  },
+  {
+    "scene": 16,
+    "start_seconds": 150,
+    "duration_seconds": 10,
+    "text": "Yuav kom nkag siab, cia peb tawm ntawm cov pej thuam ib pliag. Saib nag los qhov twg, thiab av cia dej ntws mus qhov twg."
+  },
+  {
+    "scene": 17,
+    "start_seconds": 160,
+    "duration_seconds": 10,
+    "text": "Thaj av no muaj caij nag thiab caij qhuav txawv meej. Tib qho chaw muaj tej yam txawv heev thaum hloov caij."
+  },
+  {
+    "scene": 18,
+    "start_seconds": 170,
+    "duration_seconds": 10,
+    "text": "Thaum nag los, dej poob rau ru tsev, teb, kev, kwj thiab av qis. Qhov tseem ceeb yog ntau npaum li cas thiab ntws ceev npaum li cas."
+  },
+  {
+    "scene": 19,
+    "start_seconds": 180,
+    "duration_seconds": 10,
+    "text": "Ib kob nag loj yuav ua rau kwj txais tsis taus, txawm tom qab ntawd tseem muaj dej tsis txaus. Lub sij hawm yog yam tseem ceeb."
+  },
+  {
+    "scene": 20,
+    "start_seconds": 190,
+    "duration_seconds": 10,
+    "text": "Thaum caij qhuav ntev tuaj, dej khaws cia thiab txoj kev mus cuag dej tseem ceeb dua. Lub cev dej yuav tsum pab tau ob lub caij."
+  },
+  {
+    "scene": 21,
+    "start_seconds": 200,
+    "duration_seconds": 10,
+    "text": "Sab qaum teb Angkor muaj av siab uas pab txais dej los rau tiaj nrag. Dej ntws nqes raws lub zog ntiaj teb, neeg kuj hloov tau nws txoj kev."
+  },
+  {
+    "scene": 22,
+    "start_seconds": 210,
+    "duration_seconds": 10,
+    "text": "Av muab ib qho kev ntws dav rau dej. Tiam sis qhov siab txawv me ntsis xwb kuj xaiv tau tias daim teb twg yuav txais dej."
+  },
+  {
+    "scene": 23,
+    "start_seconds": 220,
+    "duration_seconds": 10,
+    "text": "Yog li av yog ib feem ntawm cov cuab yeej dej. Ib txoj kwj yuav muaj nqis raws li av nyob ib ncig thiab sab nqes."
+  },
+  {
+    "scene": 24,
+    "start_seconds": 230,
+    "duration_seconds": 10,
+    "text": "Sab qab teb yog Tonle Sap, ib feem loj ntawm dej hauv cheeb tsam. Lub pas nthuav thiab nqaim raws caij, txuas rau cov dej loj dua."
+  },
+  {
+    "scene": 25,
+    "start_seconds": 240,
+    "duration_seconds": 10,
+    "text": "Tonle Sap txoj kev ntws tig rov qab raws caij yog ib yam loj hauv cheeb tsam. Tsis yog txhua txoj kwj hauv Angkor ua tib yam ntawd."
+  },
+  {
+    "scene": 26,
+    "start_seconds": 250,
+    "duration_seconds": 10,
+    "text": "Pas, tiaj nrag, kwj, nag thiab dej hauv av sib cuam tshuam ntau qib. Ib tug xub ntawm daim ntawv qhia chaw qhia tsis tau txhua yam."
+  },
+  {
+    "scene": 27,
+    "start_seconds": 260,
+    "duration_seconds": 10,
+    "text": "Rau cov neeg nyob ntawd, tej no yog teeb meem niaj hnub: dej nyob deb li cas, txoj kev hla puas zoo, thiab thaum twg thiaj cog tau qoob."
+  },
+  {
+    "scene": 28,
+    "start_seconds": 270,
+    "duration_seconds": 10,
+    "text": "Qhov nyuaj tsis yog khaws dej kom ntau xwb. Yuav tsum coj, tuav thiab tso dej raws kev xav tau uas hloov tas li."
+  },
+  {
+    "scene": 29,
+    "start_seconds": 280,
+    "duration_seconds": 10,
+    "text": "Tej qhov chaw yuav tsum ua kom dej ntws qeeb. Lwm qhov xav tau kev tso dej ntau dhau tawm, ua ntej nws ua puas teb thiab vaj tsev."
+  },
+  {
+    "scene": 30,
+    "start_seconds": 290,
+    "duration_seconds": 10,
+    "text": "Khaws dej thiab tso dej thiaj yog tib zaj dab neeg. Thaj av xav tau chaw rau dej nyob thiab kev rau dej tawm mus."
+  },
+  {
+    "scene": 31,
+    "start_seconds": 300,
+    "duration_seconds": 10,
+    "text": "Tam sim no cov kab sab nraum tuam tsev muaj ntsiab dua. Ntug av ntev thiab pas dav qhia kev ua hauj lwm nrog ob lub caij."
+  },
+  {
+    "scene": 32,
+    "start_seconds": 310,
+    "duration_seconds": 10,
+    "text": "Tom ntej yog cov pas dej loj. Tiam sis peb yuav tsis xav tias txhua lub muaj tib lub hom phiaj thiab tib zaj keeb kwm."
+  },
+  {
+    "scene": 33,
+    "start_seconds": 320,
+    "duration_seconds": 10,
+    "text": "Cov pas loj uas muaj plaub ceg ntawm Angkor feem ntau hu ua baray. Ntug av tsim chaw loj khaws dej saum thaj av tiaj."
+  },
+  {
+    "scene": 34,
+    "start_seconds": 330,
+    "duration_seconds": 10,
+    "text": "Lub West Baray tseem pom meej heev. Saum huab cua, nws txoj duab ntev txawv cov qauv me nyob ib ncig."
+  },
+  {
+    "scene": 35,
+    "start_seconds": 340,
+    "duration_seconds": 10,
+    "text": "Lub East Baray khaws lwm txoj kab loj. Niaj hnub no nws tsis zoo li ib lub pas puv dej, qhia tias thaj av tseem hloov."
+  },
+  {
+    "scene": 36,
+    "start_seconds": 350,
+    "duration_seconds": 10,
+    "text": "Lwm cov pas thiab chaw dej tsim nyob rau ntau lub caij. Lub cev dej loj hlob zuj zus, tsis yog ib daim phiaj ua tiav tib zaug."
+  },
+  {
+    "scene": 37,
+    "start_seconds": 360,
+    "duration_seconds": 10,
+    "text": "Lub pas loj ua rau peb xav tsis thoob. Tiam sis yuav nkag siab, peb yuav tsum nug dej nkag qhov twg thiab tawm qhov twg."
+  },
+  {
+    "scene": 38,
+    "start_seconds": 370,
+    "duration_seconds": 10,
+    "text": "Ntug av yuav tsum tuav dej thiab tiv thaiv kev yaig. Qhov siab, hom av thiab kev tu zoo txiav txim tias lub pas ua hauj lwm tau li cas."
+  },
+  {
+    "scene": 39,
+    "start_seconds": 380,
+    "duration_seconds": 10,
+    "text": "Qhov dej nkag thiab qhov dej tawm txuas lub pas rau lwm qhov chaw. Lawv qhov chaw yuav tseem ceeb npaum lub pas tus duab."
+  },
+  {
+    "scene": 40,
+    "start_seconds": 390,
+    "duration_seconds": 10,
+    "text": "Dej kuj nqa av tuaj. Thaum av tsaws zuj zus, nws hloov qhov tob ntawm pas thiab qhov dav uas kwj txais tau."
+  },
+  {
+    "scene": 41,
+    "start_seconds": 400,
+    "duration_seconds": 10,
+    "text": "Kev tu kho thiaj nyob nrog lub cev dej tas nws lub neej. Qhov ua tau ib caij yuav xav tau khawb av los sis kho ua ntej lwm caij."
+  },
+  {
+    "scene": 42,
+    "start_seconds": 410,
+    "duration_seconds": 10,
+    "text": "Cov pas kuj nyob nrog tuam tsev thiab hwj chim vaj ntxwv. Lawv lub ntsiab loj dua ib daim duab qhia kev ua tshuab niaj hnub xwb."
+  },
+  {
+    "scene": 43,
+    "start_seconds": 420,
+    "duration_seconds": 10,
+    "text": "Dej pab lub neej thiab nqa lub ntsiab kev ntseeg tau tib txhij. Ob txoj hauj lwm ntawd hloov sib xyaw raws chaw thiab raws caij."
+  },
+  {
+    "scene": 44,
+    "start_seconds": 430,
+    "duration_seconds": 10,
+    "text": "Cov kws tshawb tseem sib tham txog baray siv dej rau teb thiab lwm hom phiaj. Yuav tsum saib pov thawj ntawm txhua lub pas thiab txoj kev txuas."
+  },
+  {
+    "scene": 45,
+    "start_seconds": 440,
+    "duration_seconds": 10,
+    "text": "Ib lub pas dav tsis qhia tias txhua daim teb ze ntawd txais nws cov dej. Qhov siab, kwj, qhov tawm thiab hnub nyoog yuav tsum haum ua ke."
+  },
+  {
+    "scene": 46,
+    "start_seconds": 450,
+    "duration_seconds": 10,
+    "text": "Dej nyob siab niaj hnub no tsis sawv cev txhua xyoo pua dhau los. Av tsaws, kev hloov, kev kho thiab kev siv tshiab hloov tau lub pas."
+  },
+  {
+    "scene": 47,
+    "start_seconds": 460,
+    "duration_seconds": 10,
+    "text": "Cia xav tias cov baray yog tej feem loj hauv ib lub cev dav. Thaum taug cov kab txuas, lawv lub luag hauj lwm thiaj meej dua."
+  },
+  {
+    "scene": 48,
+    "start_seconds": 470,
+    "duration_seconds": 10,
+    "text": "Cov kab coj peb mus rau kwj, ntug av, kev hla thiab chaw dej sib faib. Lawv nthuav thoob tiaj nrag uas muaj neeg nyob."
+  },
+  {
+    "scene": 49,
+    "start_seconds": 480,
+    "duration_seconds": 10,
+    "text": "Kwj muab ib txoj kev rau dej. Tiam sis qhov nqes, qhov tob, qhov dav, pob zeb thiab dej los saum toj puav leej hloov txoj kev ntws."
+  },
+  {
+    "scene": 50,
+    "start_seconds": 490,
+    "duration_seconds": 10,
+    "text": "Dej txav nqes raws ntuj txoj cai. Neeg ua hauj lwm hloov tau txoj kev, faib dej thiab txuas tej chaw uas yeej txais dej tsis sib npaug."
+  },
+  {
+    "scene": 51,
+    "start_seconds": 500,
+    "duration_seconds": 10,
+    "text": "Ntawm chaw sib faib, hloov me ntsis yuav cuam tshuam dav. Yog ib ceg txais ntau dua, lwm ceg tej zaum tau tsawg dua."
+  },
+  {
+    "scene": 52,
+    "start_seconds": 510,
+    "duration_seconds": 10,
+    "text": "Ib txoj ntug av siab kuj ua kev taug hla av ntub. Kev mus los thiab kev tswj dej thiaj siv tau tib txoj kab."
+  },
+  {
+    "scene": 53,
+    "start_seconds": 520,
+    "duration_seconds": 10,
+    "text": "Chaw hla xav kom txoj kev txuas mus tau. Dej kuj xav tau qhov dav txaus kom hla dhau yam tsis khoob av hauv qab."
+  },
+  {
+    "scene": 54,
+    "start_seconds": 530,
+    "duration_seconds": 10,
+    "text": "Lub cev dej muaj kev txav thiab kev khaws tib si. Yog saib cov pas loj xwb, peb yuav plam ntau txoj kev uas txhawb lub neej."
+  },
+  {
+    "scene": 55,
+    "start_seconds": 540,
+    "duration_seconds": 10,
+    "text": "Cov kwj ntuj kuj yog ib feem. Neeg kho cov dej hauv thaj av uas twb muaj nws tus kheej txoj kev tso dej lawm."
+  },
+  {
+    "scene": 56,
+    "start_seconds": 550,
+    "duration_seconds": 10,
+    "text": "Thaum kos ntawv qhia chaw, yuav tsum cais kom meej. Muaj kab khawb, kab tsa av, kab hloov kev thiab kab raws av qub."
+  },
+  {
+    "scene": 57,
+    "start_seconds": 560,
+    "duration_seconds": 10,
+    "text": "Ib lub cev loj hlob tau thaum txuas tej feem qub. Txhua yam ntxiv pab ib qho teeb meem, tiam sis kuj hloov lwm qhov chaw."
+  },
+  {
+    "scene": 58,
+    "start_seconds": 570,
+    "duration_seconds": 10,
+    "text": "Ntau tiam dhau mus, kev sib txuas nyuaj zuj zus. Yuav nkag siab tas nrho, yuav tsum paub tej feem twg siv tib lub caij."
+  },
+  {
+    "scene": 59,
+    "start_seconds": 580,
+    "duration_seconds": 10,
+    "text": "Ib txoj kwj tso tseg nyob ib sab kwj tshiab tsis qhia tias ob txoj ua hauj lwm ua ke. Sij hawm yuav tsum nyob hauv daim ntawv qhia."
+  },
+  {
+    "scene": 60,
+    "start_seconds": 590,
+    "duration_seconds": 10,
+    "text": "Vim li ntawd, khawb tshawb thiab nrhiav hnub nyoog tseem ceeb ib yam li saib saum huab cua. Ib txoj kab xav tau keeb kwm thiaj piav tau."
+  },
+  {
+    "scene": 61,
+    "start_seconds": 600,
+    "duration_seconds": 10,
+    "text": "Xav txog ib tug kwj me tom qab nag. Ib qho chaw dej nthuav mus rau pas; tom ntej ib qhov nqaim rov sau dej ua ke."
+  },
+  {
+    "scene": 62,
+    "start_seconds": 610,
+    "duration_seconds": 10,
+    "text": "Tib cov dej yuav maj mam los sis muaj zog raws txoj kev. Ntug av tsis ruaj los sis qhov txhaws yuav ua teeb meem deb sab nqes."
+  },
+  {
+    "scene": 63,
+    "start_seconds": 620,
+    "duration_seconds": 10,
+    "text": "Saib ntawm ib lub pej thuam xwb pom tsis tau txhua yam. Yuav tsum nyeem nroog thoob tej chaw deb thiab tej cim me me."
+  },
+  {
+    "scene": 64,
+    "start_seconds": 630,
+    "duration_seconds": 10,
+    "text": "Txhua txoj kab thaum kawg txuas rov rau neeg: tsev neeg, neeg ua hauj lwm, neeg ua teb thiab cov saib xyuas kev ntseeg."
+  },
+  {
+    "scene": 65,
+    "start_seconds": 640,
+    "duration_seconds": 10,
+    "text": "Angkor loj dua ib pawg tsev pob zeb nyob sib ti. Pov thawj qhia ib thaj nroog dav uas tsev tsis nyob tuab heev thiab muaj ntau chaw txuas."
+  },
+  {
+    "scene": 66,
+    "start_seconds": 650,
+    "duration_seconds": 10,
+    "text": "Chaw nyob, pas me, teb, kev thiab tuam tsev yog ib feem ntawm qauv loj. Lawv kev nyob txawv raws chaw thiab raws sij hawm."
+  },
+  {
+    "scene": 67,
+    "start_seconds": 660,
+    "duration_seconds": 10,
+    "text": "Ib lub pas ntawm tsev coj dej los ze kev ua neej. Txawm muaj pas loj nyob ze, lub pas me tseem muaj nqis rau tsev neeg."
+  },
+  {
+    "scene": 68,
+    "start_seconds": 670,
+    "duration_seconds": 10,
+    "text": "Kev cog nplej xav tau kev paub caij thiab av. Tswj dej yog xaiv sij hawm kom haum, nrog kev tsim tej cuab yeej tib si."
+  },
+  {
+    "scene": 69,
+    "start_seconds": 680,
+    "duration_seconds": 10,
+    "text": "Teb puas tau vim dej tsawg, dej ntau, los sis dej tuaj tsis haum lub caij uas cov nplej tab tom loj."
+  },
+  {
+    "scene": 70,
+    "start_seconds": 690,
+    "duration_seconds": 10,
+    "text": "Cov neeg ua teb paub av los ntawm kev ua ntau xyoo. Ntau txoj kev txiav txim tsim thaj av, tsis yog vaj ntxwv cov lus xwb."
+  },
+  {
+    "scene": 71,
+    "start_seconds": 700,
+    "duration_seconds": 10,
+    "text": "Tej hauj lwm loj tseem xav tau kev npaj, neeg, khoom thiab kev tu tas li. Hwj chim thiab zej zog txoj zog ntsib hauv cov cuab yeej ntawd."
+  },
+  {
+    "scene": 72,
+    "start_seconds": 710,
+    "duration_seconds": 10,
+    "text": "Kev kho tseem ceeb npaum kev tsim tshiab. Khawb av tawm, ntxiv ntug av thiab qhib kwj tsis tshua tsim tej tsev zoo nkauj."
+  },
+  {
+    "scene": 73,
+    "start_seconds": 720,
+    "duration_seconds": 10,
+    "text": "Tiam sis tej hauj lwm ntawd pab lub cev nyob ntev. Cov kev ua niaj hnub uas daim duab tsis pom tej zaum txhawb cov tuam tsev loj."
+  },
+  {
+    "scene": 74,
+    "start_seconds": 730,
+    "duration_seconds": 10,
+    "text": "Nco ntsoov tej khoom uas ploj lawm thiab. Ntoo, hlua nroj thiab av taug kev khaws cim txawv pob zeb txua duab."
+  },
+  {
+    "scene": 75,
+    "start_seconds": 740,
+    "duration_seconds": 10,
+    "text": "Kev nyob ntev tsis sib npaug hloov peb txoj kev xav. Lub tuam tsev pob zeb zoo li nyob ib leeg vim vaj tsev ncig nws ploj lawm."
+  },
+  {
+    "scene": 76,
+    "start_seconds": 750,
+    "duration_seconds": 10,
+    "text": "Cov kws tshawb sim txuas cov cim rov ua ke. Lawv tsis hais tias paub tseeb txhua lub ru tsev, txoj hauj lwm los sis pes tsawg tus neeg."
+  },
+  {
+    "scene": 77,
+    "start_seconds": 760,
+    "duration_seconds": 10,
+    "text": "Peb thiaj pom ib lub nroog nplua nuj dua: muaj neeg nyob, ua qoob, sib txuas thiab hloov. Cov dej yog ib feem ntawm lub neej ntawd."
+  },
+  {
+    "scene": 78,
+    "start_seconds": 770,
+    "duration_seconds": 10,
+    "text": "Qhov no kuj hloov lo lus nrhiav pom. Angkor tsis yog ib qho chaw khoob uas tos neeg txawv teb chaws tuaj pom xwb."
+  },
+  {
+    "scene": 79,
+    "start_seconds": 780,
+    "duration_seconds": 10,
+    "text": "Kev paub ntawm neeg hauv zos, kev ntseeg txuas ntxiv, ntawv tshawb qub thiab kev tshawb tshiab puav leej pab nkag siab qhov chaw."
+  },
+  {
+    "scene": 80,
+    "start_seconds": 790,
+    "duration_seconds": 10,
+    "text": "Cuab yeej tshiab sau tau cim ntau dua. Tiam sis lawv tsis tshem cov neeg uas twb paub los sis tseem tu cov chaw no."
+  },
+  {
+    "scene": 81,
+    "start_seconds": 800,
+    "duration_seconds": 10,
+    "text": "Saum huab cua, qee cov cim pom yooj yim dua. Kab ntev tshwm nyob qhov chaw uas hauv av tsuas pom pov roob me thiab qhov qis xwb."
+  },
+  {
+    "scene": 82,
+    "start_seconds": 810,
+    "duration_seconds": 10,
+    "text": "Kev ntsuas nrog laser saum huab cua, hu ua lidar, pab ntxiv ntau yam rau daim ntawv qhia Angkor thiab thaj chaw ib ncig."
+  },
+  {
+    "scene": 83,
+    "start_seconds": 820,
+    "duration_seconds": 10,
+    "text": "Laser dhau tau tej qhov nplooj qhib los ntsuas av. Kho cov ntaub ntawv pab cais cim, tsis yog yees pom txhua yam faus hauv qab."
+  },
+  {
+    "scene": 84,
+    "start_seconds": 830,
+    "duration_seconds": 10,
+    "text": "Nws qhia tau ntug av, kwj thiab qauv vaj tsev me ntsis. Tej no yog cim mus tshawb, tsis yog ib zaj yeeb yaj kiab txog yav dhau los."
+  },
+  {
+    "scene": 85,
+    "start_seconds": 840,
+    "duration_seconds": 10,
+    "text": "Tus qauv av uas tso duab ntxoov ua rau qhov siab txawv me ntsis pom tseeb. Hloov teeb hauv qauv yuav qhia lwm txoj kab."
+  },
+  {
+    "scene": 86,
+    "start_seconds": 850,
+    "duration_seconds": 10,
+    "text": "Kab pom tseeb los tseem xav tau lus txhais. Cov kws tshawb muab daim ntawv qhia piv rau av tiag, khoom khawb tau thiab ntaub ntawv qub."
+  },
+  {
+    "scene": 87,
+    "start_seconds": 860,
+    "duration_seconds": 10,
+    "text": "Kev taug niaj hnub, ntug av qub thiab av ntuj tej zaum zoo sib xws ntawm qee lub kaum. Saib tej yam ncig pab cais tau."
+  },
+  {
+    "scene": 88,
+    "start_seconds": 870,
+    "duration_seconds": 10,
+    "text": "Sij hawm tseem ceeb tas li. Daim ntawv qhia qhia qhov chaw; khawb tshawb thiab nrhiav hnub nyoog pab qhia thaum twg nws siv."
+  },
+  {
+    "scene": 89,
+    "start_seconds": 880,
+    "duration_seconds": 10,
+    "text": "Cov txheej av muab lwm txoj kev saib. Lawv khaws kev hloov ntawm av tsaws, dej los sis kev cuam tshuam, tiam sis kuj muaj ciam."
+  },
+  {
+    "scene": 90,
+    "start_seconds": 890,
+    "duration_seconds": 10,
+    "text": "Thaum siv ntau txoj kev, pov thawj sib xyuas tau. Lo lus piav zoo txuas ntau hom cim, tsis cia siab rau ib daim duab zoo nkauj xwb."
+  },
+  {
+    "scene": 91,
+    "start_seconds": 900,
+    "duration_seconds": 10,
+    "text": "Vim li ntawd, cov duab rov tsim yuav tsum muaj ntawv qhia. Ib qho kwj zoo tsim nyog yog duab piav, tsis yog pom xwm txheej qub tiag."
+  },
+  {
+    "scene": 92,
+    "start_seconds": 910,
+    "duration_seconds": 10,
+    "text": "Lub hom phiaj yog kom to taub kev txuas: dej mus tau qhov twg, neeg nyob qhov twg thiab ib qho hloov kis thoob lub cev li cas."
+  },
+  {
+    "scene": 93,
+    "start_seconds": 920,
+    "duration_seconds": 10,
+    "text": "Cov lus nug no tseem ceeb dua thaum tej yam sab nraud hloov. Lub cev tsim los ntawm kev paub qub kuj ntsib tau teeb meem tshiab."
+  },
+  {
+    "scene": 94,
+    "start_seconds": 930,
+    "duration_seconds": 10,
+    "text": "Yuav pom zaj no, cia peb tawm ntawm pob zeb thiab saib cov cim huab cua, nrog cov ntaub ntawv uas nyob sab nraum Angkor."
+  },
+  {
+    "scene": 95,
+    "start_seconds": 940,
+    "duration_seconds": 10,
+    "text": "Kev tshawb voj ntoo hauv teb chaws Es Xias Qab Teb Sab Hnub Tuaj qhia qee caij qhuav heev thiab caij nag ntau hauv xyoo pua kaum plaub thiab kaum tsib."
+  },
+  {
+    "scene": 96,
+    "start_seconds": 950,
+    "duration_seconds": 10,
+    "text": "Cov cim ntawd qhia huab cua thoob cheeb tsam. Yuav tsum txuas kom zoo rau dej hauv zos thiab cim qub, tsis yog xav tias lawv sib npaug kiag."
+  },
+  {
+    "scene": 97,
+    "start_seconds": 960,
+    "duration_seconds": 10,
+    "text": "Caij qhuav ntev ua rau dej tsawg. Nws kuj hloov cov hauj lwm uas yuav tsum ua kom kwj, teb thiab tsev nyob siv tau."
+  },
+  {
+    "scene": 98,
+    "start_seconds": 970,
+    "duration_seconds": 10,
+    "text": "Caij ntub heev coj lwm yam nyuaj. Dej ceev nqa av ntau, yaig ntug thiab ua rau tej qhov uas yeej txaus dhau los txais tsis taus."
+  },
+  {
+    "scene": 99,
+    "start_seconds": 980,
+    "duration_seconds": 10,
+    "text": "Qhuav thiab ntub sib hloov yuav nyuaj rau ib lub cev sib txuas. Txoj kev pab thaum dej tsawg tsis tas pab thaum nag loj ntxiv."
+  },
+  {
+    "scene": 100,
+    "start_seconds": 990,
+    "duration_seconds": 10,
+    "text": "Lub cev nyuaj faib kev pab tau deb, tiam sis kuj kis teeb meem. Qhov hloov saum toj yuav ua nyuaj rau neeg sab nqes deb."
+  },
+  {
+    "scene": 101,
+    "start_seconds": 1000,
+    "duration_seconds": 10,
+    "text": "Tsis yog txhua feem puas tib txhij. Kho hauv zos, hloov txoj kev thiab hloov kev siv yuav ua rau txhua qhov muaj txiaj ntsig txawv."
+  },
+  {
+    "scene": 102,
+    "start_seconds": 1010,
+    "duration_seconds": 10,
+    "text": "Cov kws tshawb nrhiav kev puas thiab kev kho hauv qee feem dej ntawm Angkor. Qhov xwm txheej sib law tseem ceeb dua ib daim duab nroog vau tam sim."
+  },
+  {
+    "scene": 103,
+    "start_seconds": 1020,
+    "duration_seconds": 10,
+    "text": "Huab cua thiaj yog ib txoj kev tshawb loj, tsis yog lo lus teb tag nrho. Kev tswj, kev tu, kev nyob thiab nom tswv kuj tseem ceeb."
+  },
+  {
+    "scene": 104,
+    "start_seconds": 1030,
+    "duration_seconds": 10,
+    "text": "Xyoo pua kaum tsib kuj muaj kev sib ntaus thiab hloov kev sib txuas ntawm nom tswv. Nag piav tsis tau txhua qhov hloov hwj chim."
+  },
+  {
+    "scene": 105,
+    "start_seconds": 1040,
+    "duration_seconds": 10,
+    "text": "Xyoo ib txhiab plaub puas peb caug ib tshwm ntau hauv cov lus luv txog Angkor. Ib hnub cim tsis ua kom tag nrho thaj av khoob ib hmos."
+  },
+  {
+    "scene": 106,
+    "start_seconds": 1050,
+    "duration_seconds": 10,
+    "text": "Qee qhov chaw hloov los sis nqis zog, lwm qhov tseem muaj nqis. Angkor Wat tseem txuas kev ntseeg tom qab chaw vaj ntxwv tsiv lawm."
+  },
+  {
+    "scene": 107,
+    "start_seconds": 1060,
+    "duration_seconds": 10,
+    "text": "Txoj kev hloov loj tshwm los ntawm ntau yam dhau sij hawm. Ib kob cua kawg, kev sib ntaus los sis txoj kev khoob piav tsis txaus."
+  },
+  {
+    "scene": 108,
+    "start_seconds": 1070,
+    "duration_seconds": 10,
+    "text": "Zaj uas maj mam thiab tsis sib npaug nyuaj piav dua, tiam sis ze neeg dua. Lawv yoog, kho, tsiv thiab txuas kev cai thaum tej yam hloov."
+  },
+  {
+    "scene": 109,
+    "start_seconds": 1080,
+    "duration_seconds": 10,
+    "text": "Lub cev dej pab tshawb cov kev teb ntawd. Nws txuas tej teeb meem loj ntawm ntuj rau txoj kev txiav txim ntawm ib qho chaw."
+  },
+  {
+    "scene": 110,
+    "start_seconds": 1090,
+    "duration_seconds": 10,
+    "text": "Tsis txhob maj txiav txim rau kev txawj ua qub. Tsim ib yam siv tau thiab tu kom ntau tiam siv tau yog ob txoj kev ua tau zoo."
+  },
+  {
+    "scene": 111,
+    "start_seconds": 1100,
+    "duration_seconds": 10,
+    "text": "Txhua yam ua tau zoo nyob ntawm tej xwm txheej, kev paub, zog thiab khoom. Thaum cov ntawd hloov, cov tsev qub kuj tau hauj lwm tshiab."
+  },
+  {
+    "scene": 112,
+    "start_seconds": 1110,
+    "duration_seconds": 10,
+    "text": "Angkor keeb kwm tom qab yog ib feem ntawm nws zaj dab neeg, tsis yog ib qho xaus lom zem rau lub caij tsim tsev xwb."
+  },
+  {
+    "scene": 113,
+    "start_seconds": 1120,
+    "duration_seconds": 10,
+    "text": "Niaj hnub no dej tseem yog ib feem ntawm tu Angkor. Nag, kev tso dej, nroj tsuag thiab tsev tus yam ntxwv cuam tshuam kev khaws cia."
+  },
+  {
+    "scene": 114,
+    "start_seconds": 1130,
+    "duration_seconds": 10,
+    "text": "Kwj nyob ib sab kev ncig xyuas zoo li tsis loj li phab ntsa txua duab. Tiam sis dej ntws haum pab tiv thaiv phab ntsa ib ncig."
+  },
+  {
+    "scene": 115,
+    "start_seconds": 1140,
+    "duration_seconds": 10,
+    "text": "Kev khaws cia xav tau kev saib thiab neeg hauv zos txoj kev paub. Kho ib qho yuav tsum xav txog tag nrho thaj av, tsis yog qhov zoo nkauj xwb."
+  },
+  {
+    "scene": 116,
+    "start_seconds": 1150,
+    "duration_seconds": 10,
+    "text": "Qhov chaw tseem txuas zej zog, haujlwm noj haus, kev ntseeg thiab kev ncig xyuas. Khaws keeb kwm kuj yog kev nrog lub neej niaj hnub."
+  },
+  {
+    "scene": 117,
+    "start_seconds": 1160,
+    "duration_seconds": 10,
+    "text": "Mus xyuas kom hwm chaw yog raws kev tso cai thiab neeg hauv zos cov lus. Tsis tas nce ntug av tsis ruaj los sis nkag tsev kaw."
+  },
+  {
+    "scene": 118,
+    "start_seconds": 1170,
+    "duration_seconds": 10,
+    "text": "Thaij yeeb yaj kiab kuj tib yam. Siv qhov chaw tso cai, neeg laus lub neej thiab duab piav zoo, tsis tas ua txuj teev kev cai dawb huv."
+  },
+  {
+    "scene": 119,
+    "start_seconds": 1180,
+    "duration_seconds": 10,
+    "text": "Tam sim no rov rau daim duab pib. Txoj kab saum pob zeb nyob hauv ntiaj teb uas dej kov tsev, av, haujlwm thiab kev nco."
+  },
+  {
+    "scene": 120,
+    "start_seconds": 1190,
+    "duration_seconds": 10,
+    "text": "Peb pib ntawm pej thuam, mam nrhiav cov kab nruab nrab. Cov kab coj mus rau teb, tsev, pas, caij hloov thiab tes hauj lwm tseem nyob."
+  },
+  {
+    "scene": 121,
+    "start_seconds": 1200,
+    "duration_seconds": 10,
+    "text": "Cov tuam tsev tseem zoo kawg. Lawv qhov loj muaj ntsiab dua thaum peb pom tej hauj lwm me thiab kev txuas uas txhawb lawv."
+  },
+  {
+    "scene": 122,
+    "start_seconds": 1210,
+    "duration_seconds": 10,
+    "text": "Ib lub nroog khaws cim tsis sib npaug. Pob zeb pom tseeb, hos kwj qub xav tau kev kos chaw kom paub nws lub luag hauj lwm."
+  },
+  {
+    "scene": 123,
+    "start_seconds": 1220,
+    "duration_seconds": 10,
+    "text": "Thaum nyeem ob yam ua ke, peb nug ntau dua leej twg tsim tuam tsev. Peb nug tias thaj av muaj neeg nyob ua hauj lwm tau li cas."
+  },
+  {
+    "scene": 124,
+    "start_seconds": 1230,
+    "duration_seconds": 10,
+    "text": "Tseem muaj lus nug qhib txog txhua yam tsev, kev faib dej thiab zej zog txoj kev xaiv thaum xwm txheej hloov."
+  },
+  {
+    "scene": 125,
+    "start_seconds": 1240,
+    "duration_seconds": 10,
+    "text": "Kev tshawb yav tom ntej yuav qhia ntxiv. Tiv thaiv cov cim cia kom ua hauj lwm txuas tau, tsis txhob kaw zaj dab neeg rau lus yooj yim xwb."
+  },
+  {
+    "scene": 126,
+    "start_seconds": 1250,
+    "duration_seconds": 10,
+    "text": "Thoob tiaj nrag, dej tseem sib sau, txav thiab tso cim. Cov txheej txheem tseem paub zoo, txawm tej qauv ib ncig muaj ntau pua xyoo lawm."
+  },
+  {
+    "scene": 127,
+    "start_seconds": 1260,
+    "duration_seconds": 10,
+    "text": "Angkor txoj kev ua tau zoo nyob hauv kev txuas: caij thiab dej khaws, av thiab kev txav, chaw dawb huv thiab lub neej xav tau."
+  },
+  {
+    "scene": 128,
+    "start_seconds": 1270,
+    "duration_seconds": 10,
+    "text": "Nws txoj kev hloov qhia tias cuab yeej yog kev sib raug txuas ntxiv ntawm neeg, ib puag ncig thiab kev tu, tsis yog tsim tiav ib zaug xwb."
+  },
+  {
+    "scene": 129,
+    "start_seconds": 1280,
+    "duration_seconds": 10,
+    "text": "Rov ntsia txoj kab dej saum pob zeb. Ib lub cim me tam sim no qhib rau ib lub nroog, thiab nroog qhib rau thaj av dav."
+  }
+]

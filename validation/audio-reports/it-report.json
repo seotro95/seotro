@@ -1,0 +1,1182 @@
+{
+  "locale": "it",
+  "voice_id": "supertonic:5",
+  "engine": "Supertonic 3 CPU INT8",
+  "target_seconds": 1292,
+  "spoken_cues": 129,
+  "closing_silence_seconds": 2,
+  "config_hash": "d7bae8b618f4e02ed6394dbaaf74ac8ff0fb5bc0d91b33e886735dbaaf7f3a50",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "Un segno scuro attraversa una pietra antica. Sembra insignificante, finché capiamo che l'acqua contribuì a modellare un'intera città.",
+      "raw_seconds": 9.218798185941043,
+      "speech_window_seconds": 9.218798185941043,
+      "tempo": 0.9553158741907817,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Ad Angkor notiamo prima le torri. Ma una struttura più sorprendente si estende fra canali, terrapieni e grandi bacini d'acqua.",
+      "raw_seconds": 9.048662131519274,
+      "speech_window_seconds": 9.048662131519274,
+      "tempo": 0.9376851949760905,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Seguendo quei collegamenti, l'immagine cambia. Il tempio appartiene a una città e la città a un intero bacino idrografico.",
+      "raw_seconds": 8.605124716553288,
+      "speech_window_seconds": 8.605124716553288,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "La domanda è semplice: come organizzare la vita dove l'acqua può arrivare in abbondanza e poi diventare difficile da trovare?",
+      "raw_seconds": 9.22843537414966,
+      "speech_window_seconds": 9.22843537414966,
+      "tempo": 0.9563145465440062,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "La risposta unisce pioggia, terreno, agricoltura, fede, potere e manutenzione quotidiana. Aiuta anche a capire le trasformazioni successive di Angkor.",
+      "raw_seconds": 10.939251700680272,
+      "speech_window_seconds": 10.939251700680272,
+      "tempo": 1.1336012125057275,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Siamo nell'attuale Cambogia, vicino a Siem Reap, a nord del Tonle Sap. I monumenti sorgono in un paesaggio abitato molto più ampio.",
+      "raw_seconds": 9.397097505668935,
+      "speech_window_seconds": 9.397097505668935,
+      "tempo": 0.9737924876340864,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Angkor fu un grande centro del mondo khmer per secoli. Cambiò forma insieme ai sovrani, alle comunità e alle loro priorità.",
+      "raw_seconds": 8.64952380952381,
+      "speech_window_seconds": 8.64952380952381,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "I templi conservati sono punti di riferimento. Una città richiede anche case, coltivazioni, percorsi, scambi e modi per gestire i rifiuti.",
+      "raw_seconds": 10.140249433106575,
+      "speech_window_seconds": 10.140249433106575,
+      "tempo": 1.0508030500628576,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Molti edifici quotidiani usavano materiali meno durevoli della pietra. I tetti scomparsi fanno apparire i monumenti ingannevolmente isolati.",
+      "raw_seconds": 10.139024943310657,
+      "speech_window_seconds": 10.139024943310657,
+      "tempo": 1.0506761599285654,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Guardiamo oltre il portale scolpito. Una linea rialzata può essere un argine; una lieve depressione può conservare un'altra parte della storia.",
+      "raw_seconds": 10.351428571428572,
+      "speech_window_seconds": 10.351428571428572,
+      "tempo": 1.0726868985936344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Queste forme richiedono indagini. Il loro aspetto non rivela da solo quando furono costruite, come funzionavano o come cambiarono.",
+      "raw_seconds": 9.06546485260771,
+      "speech_window_seconds": 9.06546485260771,
+      "tempo": 0.9394264095966538,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Insieme mostrano la dimensione della domanda. La storia di Angkor supera ampiamente i confini di un singolo tempio famoso.",
+      "raw_seconds": 8.879977324263038,
+      "speech_window_seconds": 8.879977324263038,
+      "tempo": 0.9202049040687086,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Angkor Wat, costruito all'inizio del dodicesimo secolo sotto Suryavarman Secondo, offre un punto di partenza per questo viaggio più ampio.",
+      "raw_seconds": 9.472494331065759,
+      "speech_window_seconds": 9.472494331065759,
+      "tempo": 0.9816056301622548,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "La dedica originaria a Vishnu e la successiva storia buddhista ricordano che questi luoghi ebbero significati religiosi mutevoli.",
+      "raw_seconds": 9.344036281179138,
+      "speech_window_seconds": 9.344036281179138,
+      "tempo": 0.9682939151480972,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Il fossato di un tempio può rappresentare un mondo sacro ordinato e influire contemporaneamente sull'acqua, sul terreno e sull'ambiente immediato.",
+      "raw_seconds": 9.881020408163264,
+      "speech_window_seconds": 9.881020408163264,
+      "tempo": 1.0239399386697683,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Lasciamo per un momento le torri. Osserviamo da dove arriva la pioggia e dove il terreno permette all'acqua di andare.",
+      "raw_seconds": 8.35453514739229,
+      "speech_window_seconds": 8.35453514739229,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "La regione ha un clima monsonico molto stagionale. Mesi piovosi e mesi asciutti creano condizioni differenti nello stesso paesaggio.",
+      "raw_seconds": 9.67764172335601,
+      "speech_window_seconds": 9.67764172335601,
+      "tempo": 1.002864427290778,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Con le piogge, l'acqua raggiunge tetti, campi, sentieri e ruscelli. Contano quantità, rapidità di arrivo e destinazione.",
+      "raw_seconds": 8.209410430839002,
+      "speech_window_seconds": 8.209410430839002,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Un temporale può sovraccaricare un canale anche prima di una futura scarsità. Abbondanza e mancanza dipendono anche dai tempi.",
+      "raw_seconds": 9.530657596371881,
+      "speech_window_seconds": 9.530657596371881,
+      "tempo": 0.9876329115411275,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Avanzando la stagione secca, riserve e accesso affidabile diventano fondamentali. Un sistema utile deve rispondere a entrambe le stagioni.",
+      "raw_seconds": 10.120362811791383,
+      "speech_window_seconds": 10.120362811791383,
+      "tempo": 1.0487422602892624,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "A nord, i rilievi definiscono bacini che alimentano la pianura. L'acqua segue la gravità, ma gli abitanti possono modificarne il percorso.",
+      "raw_seconds": 10.102312925170068,
+      "speech_window_seconds": 10.102312925170068,
+      "tempo": 1.0468718057171054,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Il paesaggio impone una direzione generale, ma piccoli dislivelli contano. Una pendenza lieve può decidere quale campo riceve acqua.",
+      "raw_seconds": 9.397573696145125,
+      "speech_window_seconds": 9.397573696145125,
+      "tempo": 0.9738418337974223,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Il terreno è quindi parte dell'infrastruttura. Un canale ha senso soltanto rispetto alle terre circostanti e situate più in basso.",
+      "raw_seconds": 8.966439909297053,
+      "speech_window_seconds": 8.966439909297053,
+      "tempo": 0.9291647574401091,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "A sud, il Tonle Sap domina il mondo delle acque regionali. La sua espansione stagionale appartiene a un sistema fluviale più grande.",
+      "raw_seconds": 9.604603174603175,
+      "speech_window_seconds": 9.604603174603175,
+      "tempo": 0.995295665761987,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "La celebre inversione stagionale della corrente riguarda quella scala maggiore. Non descrive automaticamente ogni piccolo canale di Angkor.",
+      "raw_seconds": 10.104784580498865,
+      "speech_window_seconds": 10.104784580498865,
+      "tempo": 1.0471279358029912,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Lago, pianura, ruscelli, pioggia e falde interagiscono a scale diverse. Una semplice freccia sulla mappa non mostra ogni collegamento.",
+      "raw_seconds": 9.826213151927437,
+      "speech_window_seconds": 9.826213151927437,
+      "tempo": 1.0182604302515479,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Per gli abitanti erano relazioni concrete: distanza dall'acqua, condizioni di un attraversamento e momento della coltivazione influivano ogni giorno.",
+      "raw_seconds": 10.938344671201815,
+      "speech_window_seconds": 10.938344671201815,
+      "tempo": 1.1335072198136595,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Non bastava raccogliere il volume maggiore possibile. Occorreva condurre, trattenere e rilasciare acqua secondo necessità mutevoli.",
+      "raw_seconds": 9.664058956916099,
+      "speech_window_seconds": 9.664058956916099,
+      "tempo": 1.0014568867270568,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "A volte bisognava rallentare il flusso. Altrove l'acqua in eccesso richiedeva uno sfogo prima di danneggiare campi o costruzioni.",
+      "raw_seconds": 9.26154195011338,
+      "speech_window_seconds": 9.26154195011338,
+      "tempo": 0.9597452798044952,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Accumulo e drenaggio appartengono dunque alla stessa storia. Il paesaggio necessita di spazi per trattenere l'acqua e vie per farla uscire.",
+      "raw_seconds": 9.586893424036282,
+      "speech_window_seconds": 9.586893424036282,
+      "tempo": 0.9934604584493556,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Le forme oltre i templi acquistano significato. Lunghi argini e ampi bacini mostrano il tentativo di lavorare con le differenze stagionali.",
+      "raw_seconds": 9.968934240362811,
+      "speech_window_seconds": 9.968934240362811,
+      "tempo": 1.0330501803484777,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Ora consideriamo i grandi serbatoi, senza attribuire a ciascuno esattamente la stessa funzione o la stessa storia.",
+      "raw_seconds": 8.547551020408163,
+      "speech_window_seconds": 8.547551020408163,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "I grandi bacini rettangolari di Angkor vengono chiamati baray. I loro terrapieni creavano ampi spazi di riserva in un terreno poco inclinato.",
+      "raw_seconds": 10.505873015873016,
+      "speech_window_seconds": 10.505873015873016,
+      "tempo": 1.0886915042355456,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Il Baray Occidentale resta particolarmente impressionante. Dall'alto, la geometria allungata emerge rispetto alle piccole forme circostanti.",
+      "raw_seconds": 10.02156462585034,
+      "speech_window_seconds": 10.02156462585034,
+      "tempo": 1.0385041063057348,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Il Baray Orientale conserva un altro grande contorno. L'aspetto attuale è diverso da un bacino pieno: il paesaggio continua a cambiare.",
+      "raw_seconds": 10.406462585034014,
+      "speech_window_seconds": 10.406462585034014,
+      "tempo": 1.0783899051848718,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Altri bacini appartengono a fasi differenti. La rete si formò nel tempo, anziché nascere da un unico progetto già completo.",
+      "raw_seconds": 8.86111111111111,
+      "speech_window_seconds": 8.86111111111111,
+      "tempo": 0.9182498560736901,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Le dimensioni colpiscono, ma non spiegano il funzionamento. Dobbiamo chiedere come l'acqua entrasse, si muovesse e uscisse.",
+      "raw_seconds": 8.627528344671202,
+      "speech_window_seconds": 8.627528344671202,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Un argine deve trattenere l'acqua e resistere all'erosione. Altezza, materiali e condizioni influiscono sulle capacità effettive del bacino.",
+      "raw_seconds": 9.770498866213153,
+      "speech_window_seconds": 9.770498866213153,
+      "tempo": 1.0124869291412593,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Ingressi e uscite collegano la riserva alla rete. La loro posizione può contare quanto il grande contorno visibile in fotografia.",
+      "raw_seconds": 9.171360544217688,
+      "speech_window_seconds": 9.171360544217688,
+      "tempo": 0.9504000563956153,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "I sedimenti complicano il sistema. L'acqua trasporta materiale, il cui deposito modifica gradualmente la profondità o la capacità di un canale.",
+      "raw_seconds": 10.243038548752834,
+      "speech_window_seconds": 10.243038548752834,
+      "tempo": 1.0614547718914853,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "La manutenzione accompagna tutta la vita dell'opera. Una struttura funzionante può aver bisogno di pulizia o riparazioni prima della stagione successiva.",
+      "raw_seconds": 11.126712018140589,
+      "speech_window_seconds": 11.126712018140589,
+      "tempo": 1.153027152138921,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "I bacini appartenevano anche al mondo dei templi e dell'autorità regale. Uno schema tecnico moderno non esaurisce il loro significato.",
+      "raw_seconds": 9.582222222222223,
+      "speech_window_seconds": 9.582222222222223,
+      "tempo": 0.9929763960852044,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "L'acqua poteva soddisfare esigenze concrete e portare simboli religiosi. Questi ruoli si sovrapponevano, variando secondo luoghi ed epoche.",
+      "raw_seconds": 9.83798185941043,
+      "speech_window_seconds": 9.83798185941043,
+      "tempo": 1.0194799854311325,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "La funzione irrigua di alcuni baray è discussa. La risposta dipende dalle prove relative a ciascuna struttura e ai suoi collegamenti.",
+      "raw_seconds": 9.981791383219955,
+      "speech_window_seconds": 9.981791383219955,
+      "tempo": 1.0343825267585445,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Un grande bacino non dimostra che alimentasse ogni campo vicino. Quote, canali, uscite e date devono accordarsi.",
+      "raw_seconds": 8.121292517006802,
+      "speech_window_seconds": 8.121292517006802,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Il livello odierno non rappresenta tutti i secoli precedenti. Interrimento, modifiche, riparazioni e nuovi usi possono trasformare un serbatoio.",
+      "raw_seconds": 10.625306122448979,
+      "speech_window_seconds": 10.625306122448979,
+      "tempo": 1.1010679919636248,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Pensiamo ai baray come grandi parti di un insieme. La loro importanza diventa più chiara seguendo le linee che li collegano.",
+      "raw_seconds": 8.83281179138322,
+      "speech_window_seconds": 8.83281179138322,
+      "tempo": 0.9153172840811626,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Queste linee conducono a ruscelli, canali, argini, passaggi e diramazioni distribuiti nella pianura abitata.",
+      "raw_seconds": 7.839160997732426,
+      "speech_window_seconds": 7.839160997732426,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Un canale offre all'acqua una via preferenziale. Il flusso dipende da pendenza, profondità, larghezza, rugosità e portata proveniente da monte.",
+      "raw_seconds": 10.121383219954648,
+      "speech_window_seconds": 10.121383219954648,
+      "tempo": 1.0488480020678392,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "La gravità fornisce il movimento. Il lavoro umano modifica percorsi, divide correnti e collega luoghi altrimenti alimentati in modo diverso.",
+      "raw_seconds": 10.437619047619048,
+      "speech_window_seconds": 10.437619047619048,
+      "tempo": 1.0816185541574144,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "A una diramazione, un piccolo cambiamento ha effetti lontani. Più acqua in un ramo può significarne meno nell'altro.",
+      "raw_seconds": 8.202290249433107,
+      "speech_window_seconds": 8.202290249433107,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Un argine rialzato può sostenere anche una strada su terreno umido. Trasporti e gestione dell'acqua condividono così una stessa linea fisica.",
+      "raw_seconds": 10.106916099773242,
+      "speech_window_seconds": 10.106916099773242,
+      "tempo": 1.0473488186293516,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Gli attraversamenti richiedono un altro equilibrio. Il percorso deve continuare e l'acqua passare senza indebolire la struttura.",
+      "raw_seconds": 9.205600907029478,
+      "speech_window_seconds": 9.205600907029478,
+      "tempo": 0.9539482805211894,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Il sistema muove acqua oltre a conservarla. Guardare soltanto i bacini maggiori esclude molte relazioni che rendevano possibile la vita quotidiana.",
+      "raw_seconds": 10.439092970521543,
+      "speech_window_seconds": 10.439092970521543,
+      "tempo": 1.081771292282025,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Anche i ruscelli naturali facevano parte del contesto. Gli abitanti modificarono corsi in un paesaggio dotato di un drenaggio preesistente.",
+      "raw_seconds": 10.165034013605442,
+      "speech_window_seconds": 10.165034013605442,
+      "tempo": 1.053371400373621,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "La mappa deve distinguere queste origini: linee scavate, rialzate, deviate oppure ereditate da forme più antiche del terreno.",
+      "raw_seconds": 9.227551020408164,
+      "speech_window_seconds": 9.227551020408164,
+      "tempo": 0.9562229036692398,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Una rete cresce collegando elementi precedenti. Ogni aggiunta può risolvere un problema locale e cambiare le condizioni altrove.",
+      "raw_seconds": 9.252517006802721,
+      "speech_window_seconds": 9.252517006802721,
+      "tempo": 0.9588100525184167,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Con le generazioni aumenta la complessità. Capire l'insieme richiede sapere quali elementi coesistettero, invece di considerarli tutti contemporanei.",
+      "raw_seconds": 10.526757369614513,
+      "speech_window_seconds": 10.526757369614513,
+      "tempo": 1.090855685970416,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Un canale abbandonato vicino a uno successivo non prova un funzionamento simultaneo. Il tempo archeologico deve restare visibile sulla carta.",
+      "raw_seconds": 10.433741496598639,
+      "speech_window_seconds": 10.433741496598639,
+      "tempo": 1.0812167353988227,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Per questo scavi e datazioni accompagnano le vedute aeree. Un contorno suggestivo ha bisogno di una storia per diventare spiegazione.",
+      "raw_seconds": 9.48702947845805,
+      "speech_window_seconds": 9.48702947845805,
+      "tempo": 0.9831118630526476,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Immaginiamo un piccolo corso dopo la pioggia. Si allarga in un bacino, poi un passaggio stretto concentra nuovamente il flusso.",
+      "raw_seconds": 9.593174603174603,
+      "speech_window_seconds": 9.593174603174603,
+      "tempo": 0.9941113578419277,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "La stessa acqua può scorrere calma o vigorosa secondo il percorso. Un argine debole o un'apertura ostruita influenza zone molto a valle.",
+      "raw_seconds": 9.817301587301587,
+      "speech_window_seconds": 9.817301587301587,
+      "tempo": 1.017336952051978,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Nessuna vista da una torre mostra tutto. Bisogna leggere la città sulle grandi distanze e nei dettagli più piccoli.",
+      "raw_seconds": 8.329092970521542,
+      "speech_window_seconds": 8.329092970521542,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Ogni linea riporta infine alle persone: famiglie, lavoratori, agricoltori e comunità religiose che usavano e curavano il paesaggio.",
+      "raw_seconds": 10.184920634920635,
+      "speech_window_seconds": 10.184920634920635,
+      "tempo": 1.0554321901472161,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Angkor superava un nucleo compatto di edifici in pietra. Le prove mostrano un vasto paesaggio urbano relativamente poco denso e connesso.",
+      "raw_seconds": 9.84517006802721,
+      "speech_window_seconds": 9.84517006802721,
+      "tempo": 1.020224877515773,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Abitazioni, stagni, coltivi, strade e recinti religiosi appartenevano all'insieme. La loro disposizione variava nello spazio e nel tempo.",
+      "raw_seconds": 9.989795918367347,
+      "speech_window_seconds": 9.989795918367347,
+      "tempo": 1.0352120122660464,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Uno stagno domestico avvicinava l'acqua alle attività giornaliere. Una piccola opera poteva essere decisiva anche accanto a un grande serbatoio.",
+      "raw_seconds": 10.418027210884354,
+      "speech_window_seconds": 10.418027210884354,
+      "tempo": 1.0795883120087413,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Coltivare riso richiedeva conoscenza delle stagioni e dei terreni. Gestire l'acqua significava scegliere i tempi, oltre a costruire strutture.",
+      "raw_seconds": 10.0043537414966,
+      "speech_window_seconds": 10.0043537414966,
+      "tempo": 1.0367205949737408,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Un campo soffre se l'acqua è scarsa, eccessiva o arriva nella fase sbagliata della crescita.",
+      "raw_seconds": 6.5291609977324265,
+      "speech_window_seconds": 6.5291609977324265,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "I coltivatori conoscevano le differenze locali grazie all'esperienza. Molte decisioni formarono il paesaggio, oltre agli ordini dei sovrani.",
+      "raw_seconds": 10.041632653061225,
+      "speech_window_seconds": 10.041632653061225,
+      "tempo": 1.0405836946177434,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Le grandi opere richiedevano organizzazione, lavoro, materiali e attenzione continua. Autorità politica e impegno comunitario si incontravano nell'infrastruttura.",
+      "raw_seconds": 11.829274376417233,
+      "speech_window_seconds": 11.829274376417233,
+      "tempo": 1.2258315415976406,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Riparare poteva contare quanto costruire. Togliere sedimenti, rinforzare argini e riaprire passaggi produce raramente monumenti spettacolari.",
+      "raw_seconds": 10.274081632653061,
+      "speech_window_seconds": 10.274081632653061,
+      "tempo": 1.0646716717775193,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Queste azioni spiegano però la durata della rete. Il lavoro assente dalle cartoline poteva sostenere il profilo straordinario dei templi.",
+      "raw_seconds": 9.896780045351473,
+      "speech_window_seconds": 9.896780045351473,
+      "tempo": 1.0255730616944532,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Ricordiamo anche i materiali scomparsi. Legno, fibre vegetali e superfici di terra lasciano tracce diverse dall'arenaria scolpita.",
+      "raw_seconds": 9.36984126984127,
+      "speech_window_seconds": 9.36984126984127,
+      "tempo": 0.9709680072374373,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "La conservazione diseguale influenza l'immaginazione. Un tempio appare solo perché le case vicine non emergono più dal terreno.",
+      "raw_seconds": 9.16920634920635,
+      "speech_window_seconds": 9.16920634920635,
+      "tempo": 0.9501768237519533,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "L'archeologia ricostruisce rapporti dalle tracce, senza fingere di conoscere esattamente ogni tetto, attività o numero di abitanti.",
+      "raw_seconds": 9.035079365079365,
+      "speech_window_seconds": 9.035079365079365,
+      "tempo": 0.9362776544123694,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Emerge una città più ricca: abitata, produttiva, collegata e mutevole. La rete idrica apparteneva a quel mondo vivo.",
+      "raw_seconds": 8.622358276643991,
+      "speech_window_seconds": 8.622358276643991,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Cambia anche il significato della scoperta. Angkor non era semplicemente un luogo vuoto in attesa dello sguardo di qualcuno da fuori.",
+      "raw_seconds": 9.482902494331066,
+      "speech_window_seconds": 9.482902494331066,
+      "tempo": 0.9826841963037374,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Sapere locale, continuità religiosa, studi precedenti e ricerca moderna partecipano tutti alla comprensione del sito.",
+      "raw_seconds": 8.652585034013605,
+      "speech_window_seconds": 8.652585034013605,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Le nuove tecniche ampliano ciò che possiamo registrare. Non cancellano chi conosceva già questi luoghi o continuava a prendersene cura.",
+      "raw_seconds": 9.533968253968254,
+      "speech_window_seconds": 9.533968253968254,
+      "tempo": 0.9879759848671765,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Dall'aria alcune tracce si riconoscono meglio. Lunghi allineamenti appaiono dove a terra si distinguono soltanto piccoli rilievi e depressioni.",
+      "raw_seconds": 10.065646258503401,
+      "speech_window_seconds": 10.065646258503401,
+      "tempo": 1.0430721511402488,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "La scansione laser aerea, detta lidar, ha aggiunto dettagli importanti alla cartografia del grande paesaggio di Angkor.",
+      "raw_seconds": 8.611315192743763,
+      "speech_window_seconds": 8.611315192743763,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Il laser aiuta a modellare il terreno attraverso i vuoti della vegetazione. Elaborare segnali non significa fotografare ogni oggetto sepolto.",
+      "raw_seconds": 10.401337868480725,
+      "speech_window_seconds": 10.401337868480725,
+      "tempo": 1.0778588464746865,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Il risultato rivela terrapieni, canali e forme insediative. Sono indizi da studiare, non un film completo del passato.",
+      "raw_seconds": 9.122154195011339,
+      "speech_window_seconds": 9.122154195011339,
+      "tempo": 0.9453009528509159,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Un modello ombreggiato evidenzia piccoli dislivelli. Cambiare la luce virtuale può rivelare una linea prima difficile da notare.",
+      "raw_seconds": 9.326054421768708,
+      "speech_window_seconds": 9.326054421768708,
+      "tempo": 0.9664305100278453,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Anche una linea nitida richiede interpretazione. Si confrontano mappe, osservazioni sul campo, materiali scavati, piante precedenti e altre prove.",
+      "raw_seconds": 10.790272108843537,
+      "speech_window_seconds": 10.790272108843537,
+      "tempo": 1.118162912833527,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Una pista moderna, un vecchio argine e una forma naturale possono somigliarsi. Il contesto aiuta a distinguerli.",
+      "raw_seconds": 8.406122448979591,
+      "speech_window_seconds": 8.406122448979591,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "La cronologia rimane essenziale. La mappa mostra dove si trova una struttura; scavi e datazioni chiariscono quando contava.",
+      "raw_seconds": 9.267641723356009,
+      "speech_window_seconds": 9.267641723356009,
+      "tempo": 0.9603773806586537,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "I sedimenti offrono un'altra prospettiva. Le loro sequenze possono conservare variazioni dei depositi, dell'acqua o delle alterazioni, con limiti propri.",
+      "raw_seconds": 10.61077097505669,
+      "speech_window_seconds": 10.61077097505669,
+      "tempo": 1.099561759073232,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Metodi diversi permettono alle prove di controllarsi. Una spiegazione solida collega schemi e non dipende da una sola immagine spettacolare.",
+      "raw_seconds": 10.169024943310658,
+      "speech_window_seconds": 10.169024943310658,
+      "tempo": 1.053784968218721,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Le ricostruzioni vanno quindi riconosciute. Una scena plausibile di un canale è un'illustrazione, non la ripresa di un evento antico documentato.",
+      "raw_seconds": 10.663560090702948,
+      "speech_window_seconds": 10.663560090702948,
+      "tempo": 1.1050321337516007,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "L'obiettivo è capire le relazioni: percorsi dell'acqua, luoghi abitati e propagazione dei cambiamenti attraverso la rete.",
+      "raw_seconds": 8.613537414965986,
+      "speech_window_seconds": 8.613537414965986,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Queste domande contano quando cambiano le condizioni esterne. Anche una rete fondata sull'esperienza può incontrare pressioni nuove.",
+      "raw_seconds": 9.087142857142856,
+      "speech_window_seconds": 9.087142857142856,
+      "tempo": 0.9416728349370835,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Lasciamo brevemente la pietra e guardiamo le prove climatiche, comprese quelle provenienti da luoghi oltre Angkor.",
+      "raw_seconds": 7.7568934240362815,
+      "speech_window_seconds": 7.7568934240362815,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Gli anelli degli alberi del Sud-est asiatico continentale indicano forti siccità e periodi molto umidi nel quattordicesimo e quindicesimo secolo.",
+      "raw_seconds": 10.23936507936508,
+      "speech_window_seconds": 10.23936507936508,
+      "tempo": 1.0610741014886091,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Questi dati descrivono variabilità regionale. Il collegamento con condizioni locali e cambiamenti archeologici richiede attenzione, senza considerarli orologi identici.",
+      "raw_seconds": 12.121519274376418,
+      "speech_window_seconds": 12.121519274376418,
+      "tempo": 1.2561159869820122,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Una lunga siccità riduce l'acqua disponibile. Cambia anche il lavoro necessario per mantenere canali, campi e insediamenti funzionanti.",
+      "raw_seconds": 9.421632653061225,
+      "speech_window_seconds": 9.421632653061225,
+      "tempo": 0.976334989954531,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Periodi molto umidi pongono un'altra sfida. Correnti veloci trasportano sedimenti, erodono argini e sovraccaricano passaggi prima sufficienti.",
+      "raw_seconds": 10.379297052154195,
+      "speech_window_seconds": 10.379297052154195,
+      "tempo": 1.0755748240574294,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "L'alternanza delle pressioni complica una rete connessa. Le modifiche utili nella scarsità possono non risolvere il successivo episodio di pioggia intensa.",
+      "raw_seconds": 11.06358276643991,
+      "speech_window_seconds": 11.06358276643991,
+      "tempo": 1.146485260770975,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Un sistema complesso diffonde vantaggi e disturbi. Ciò che accade a monte può diventare il problema di qualcuno molto lontano.",
+      "raw_seconds": 8.636802721088435,
+      "speech_window_seconds": 8.636802721088435,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Non tutto deve fallire insieme. Riparazioni locali, nuovi percorsi e usi diversi possono produrre esiti differenti nel paesaggio.",
+      "raw_seconds": 9.684467120181406,
+      "speech_window_seconds": 9.684467120181406,
+      "tempo": 1.0035717222985912,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Si studiano danni e modifiche in parti della rete. La sequenza conta più di un'immagine semplice di crollo improvviso.",
+      "raw_seconds": 8.416848072562358,
+      "speech_window_seconds": 8.416848072562358,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Il clima è una grande pista di ricerca, non una spiegazione completa. Contano anche istituzioni, manutenzione, insediamenti e politica.",
+      "raw_seconds": 10.101859410430839,
+      "speech_window_seconds": 10.101859410430839,
+      "tempo": 1.0468248093710713,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Il quindicesimo secolo conobbe conflitti e cambiamenti politici. Spostamenti del potere e delle attività non dipendono soltanto dalle piogge.",
+      "raw_seconds": 9.875963718820861,
+      "speech_window_seconds": 9.875963718820861,
+      "tempo": 1.0234159294114882,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Il millequattrocentotrentuno compare spesso nei riassunti. Una data non deve svuotare un'intera regione da un giorno all'altro.",
+      "raw_seconds": 8.943287981859411,
+      "speech_window_seconds": 8.943287981859411,
+      "tempo": 0.9267655939750685,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Alcuni luoghi cambiarono o persero importanza, altri rimasero significativi. Angkor Wat continuò la sua storia religiosa dopo lo spostamento del centro reale.",
+      "raw_seconds": 11.420566893424036,
+      "speech_window_seconds": 11.420566893424036,
+      "tempo": 1.1834784345517135,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "La trasformazione fu graduale e molteplice. Un'ultima tempesta, un'invasione o una strada vuota semplificherebbero eccessivamente le prove.",
+      "raw_seconds": 9.907913832199547,
+      "speech_window_seconds": 9.907913832199547,
+      "tempo": 1.0267268219895904,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "La storia diseguale è più impegnativa, ma più umana. Le persone si adattano, riparano, si spostano e mantengono pratiche in condizioni nuove.",
+      "raw_seconds": 10.461451247165533,
+      "speech_window_seconds": 10.461451247165533,
+      "tempo": 1.0840882121415059,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "La rete idrica permette di studiare queste risposte. Collega grandi pressioni ambientali con decisioni prese in luoghi precisi.",
+      "raw_seconds": 9.349024943310658,
+      "speech_window_seconds": 9.349024943310658,
+      "tempo": 0.9688108749544723,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Invita anche a evitare giudizi facili sull'ingegneria antica. Costruire un sistema utile e sostenerlo per generazioni sono conquiste diverse, benché collegate.",
+      "raw_seconds": 11.101133786848072,
+      "speech_window_seconds": 11.101133786848072,
+      "tempo": 1.150376558222598,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Ogni soluzione dipende da condizioni, conoscenza, lavoro e risorse. Quando cambiano, le stesse strutture possono assumere nuovi ruoli.",
+      "raw_seconds": 9.815238095238096,
+      "speech_window_seconds": 9.815238095238096,
+      "tempo": 1.017123118677523,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "La storia successiva appartiene pienamente ad Angkor. Non è soltanto la conclusione drammatica dell'età delle costruzioni.",
+      "raw_seconds": 8.954263038548753,
+      "speech_window_seconds": 8.954263038548753,
+      "tempo": 0.9279029055490935,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "L'acqua resta parte della sua cura. Pioggia, drenaggio, vegetazione e condizioni delle strutture influenzano la conservazione.",
+      "raw_seconds": 8.890113378684807,
+      "speech_window_seconds": 8.890113378684807,
+      "tempo": 0.9212552724025707,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Un canale accanto al percorso sembra meno impressionante di una parete scolpita. Un deflusso adeguato aiuta però a proteggerne l'ambiente.",
+      "raw_seconds": 9.874240362811792,
+      "speech_window_seconds": 9.874240362811792,
+      "tempo": 1.0232373432965587,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Conservare richiede osservazione e competenza locale. Ogni intervento va pensato nel paesaggio complessivo, oltre il suo aspetto immediato.",
+      "raw_seconds": 10.27421768707483,
+      "speech_window_seconds": 10.27421768707483,
+      "tempo": 1.0646857706813293,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Il patrimonio è legato alle comunità attuali, al lavoro, alla religione e al turismo. Riguarda il presente insieme al passato.",
+      "raw_seconds": 9.594104308390023,
+      "speech_window_seconds": 9.594104308390023,
+      "tempo": 0.9942077003512977,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Una visita rispettosa segue percorsi autorizzati e indicazioni locali. Non serve salire su argini fragili o entrare in edifici chiusi.",
+      "raw_seconds": 10.27156462585034,
+      "speech_window_seconds": 10.27156462585034,
+      "tempo": 1.06441084205703,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Anche filmare richiede attenzione. Punti consentiti, vita quotidiana adulta e illustrazioni accurate spiegano senza mettere in scena pratiche sacre.",
+      "raw_seconds": 10.59140589569161,
+      "speech_window_seconds": 10.59140589569161,
+      "tempo": 1.0975550150975761,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Torniamo all'immagine iniziale. Il segno sulla pietra appartiene a un mondo dove l'acqua tocca architettura, terreno, lavoro e memoria.",
+      "raw_seconds": 9.371836734693877,
+      "speech_window_seconds": 9.371836734693877,
+      "tempo": 0.9711747911599873,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Siamo partiti dalle torri e abbiamo trovato collegamenti: campi, case, bacini, stagioni mutevoli e responsabilità che continuano.",
+      "raw_seconds": 9.791836734693877,
+      "speech_window_seconds": 9.791836734693877,
+      "tempo": 1.0146981072221635,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "I templi restano straordinari. La loro scala acquista senso osservando anche i piccoli gesti e le relazioni che li sostenevano.",
+      "raw_seconds": 9.157482993197279,
+      "speech_window_seconds": 9.157482993197279,
+      "tempo": 0.9489619682069719,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Una città sopravvive in modo diseguale. La pietra resta visibile; un antico canale può richiedere cartografia paziente per rivelare la propria funzione.",
+      "raw_seconds": 10.890907029478457,
+      "speech_window_seconds": 10.890907029478457,
+      "tempo": 1.1285914020184928,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Leggere entrambi cambia la domanda: oltre a chi costruì un monumento, come riusciva a funzionare un paesaggio abitato?",
+      "raw_seconds": 9.071541950113378,
+      "speech_window_seconds": 9.071541950113378,
+      "tempo": 0.9400561606335106,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Restano domande sulla storia delle strutture, sulla distribuzione dell'acqua e sulle scelte comunitarie al cambiare delle condizioni.",
+      "raw_seconds": 9.157369614512472,
+      "speech_window_seconds": 9.157369614512472,
+      "tempo": 0.9489502191204634,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "La ricerca futura potrà precisare le risposte. Proteggere le tracce permette di continuare, senza fissare il racconto nella versione più semplice.",
+      "raw_seconds": 10.540725623582766,
+      "speech_window_seconds": 10.540725623582766,
+      "tempo": 1.0923031734282658,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Nella pianura l'acqua ancora si raccoglie, si muove e lascia segni. Processi familiari attraversano opere che possono avere secoli.",
+      "raw_seconds": 9.377913832199546,
+      "speech_window_seconds": 9.377913832199546,
+      "tempo": 0.9718045421968441,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Il risultato di Angkor sta anche nei legami: stagione e riserva, terra e movimento, luoghi sacri e necessità quotidiane.",
+      "raw_seconds": 8.70891156462585,
+      "speech_window_seconds": 8.70891156462585,
+      "tempo": 0.9024778823446477,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "La sua storia mostra l'infrastruttura come un rapporto continuo tra persone, ambiente e cura, oltre una costruzione completata una volta.",
+      "raw_seconds": 9.826916099773243,
+      "speech_window_seconds": 9.826916099773243,
+      "tempo": 1.0183332745879008,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Guardiamo di nuovo la linea d'acqua sulla pietra. Una piccola traccia apre ora una città, e la città apre un intero paesaggio.",
+      "raw_seconds": 9.086054421768708,
+      "speech_window_seconds": 9.086054421768708,
+      "tempo": 0.9415600437066018,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1292,
+  "decoded_samples": 31008000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-it-21m32s.mp3",
+  "flac": "voice-it-21m32s.flac",
+  "mp3_sha256": "627bf1dbc923de1b988334f07393b33478f697930e6add57b78be356c3b4853e",
+  "flac_sha256": "7aea095801c08528f5c74e3d4acb41907b4cb5b159fd5877b7fb03badef932d7"
+}

@@ -1,0 +1,1182 @@
+{
+  "locale": "vi",
+  "voice_id": "vi-VN-NamMinhNeural",
+  "engine": "Microsoft Edge Read Aloud via edge-tts",
+  "target_seconds": 1292,
+  "spoken_cues": 129,
+  "closing_silence_seconds": 2,
+  "config_hash": "65d446ae8861a67b7d16f81665da7b5941b3dfc339abc9ea6ccb21a18655e054",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "Một vệt sẫm chạy dọc phiến đá cổ. Trông thật nhỏ bé, cho đến khi ta nhận ra nước từng góp phần định hình cả thành phố.",
+      "raw_seconds": 8.376,
+      "speech_window_seconds": 7.828458333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Ở Angkor, những ngọn tháp luôn hút mắt trước tiên. Nhưng cấu trúc đáng ngạc nhiên hơn trải rộng qua kênh, bờ đắp và hồ chứa.",
+      "raw_seconds": 8.904,
+      "speech_window_seconds": 8.356666666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Lần theo cấu trúc ấy, khung cảnh quen thuộc đổi khác. Ngôi đền thuộc về thành phố, còn thành phố thuộc về cả một lưu vực.",
+      "raw_seconds": 8.304,
+      "speech_window_seconds": 7.736,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Câu hỏi rất đơn giản: con người tổ chức cuộc sống ra sao ở nơi nước có lúc dồi dào, rồi lại trở nên khó tìm?",
+      "raw_seconds": 6.912,
+      "speech_window_seconds": 6.361,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Câu trả lời nối mưa, địa hình, canh tác, tín ngưỡng, quyền lực và bảo trì thường ngày. Nó cũng giúp hiểu những biến đổi về sau của Angkor.",
+      "raw_seconds": 9.984,
+      "speech_window_seconds": 9.421041666666667,
+      "tempo": 0.9762737478411054,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Hãy bắt đầu ở Campuchia ngày nay, gần Siem Reap, phía bắc hồ Tonle Sap. Các đền đá nằm giữa một cảnh quan cư trú rộng lớn hơn nhiều.",
+      "raw_seconds": 9.288,
+      "speech_window_seconds": 8.741541666666667,
+      "tempo": 0.9058592400690846,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Angkor từng là trung tâm lớn của thế giới Khmer suốt nhiều thế kỷ. Diện mạo nơi này đổi theo người cai trị, cộng đồng và những ưu tiên.",
+      "raw_seconds": 9.216,
+      "speech_window_seconds": 8.646041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Đền còn lại là các mốc nổi bật. Nhưng thành phố cũng cần chỗ ở, ruộng vườn, đường đi, trao đổi hàng hóa và xử lý chất thải.",
+      "raw_seconds": 9.192,
+      "speech_window_seconds": 8.621166666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Nhiều công trình thường ngày dùng vật liệu kém bền hơn đá. Khi mái nhà biến mất, đền còn lại dễ tạo cảm giác cô lập sai lệch.",
+      "raw_seconds": 8.28,
+      "speech_window_seconds": 7.72725,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Hãy nhìn xa hơn ô cửa chạm khắc. Một dải đất cao có thể là bờ đắp; một hõm nông có thể giữ phần khác của câu chuyện.",
+      "raw_seconds": 8.256,
+      "speech_window_seconds": 7.6851666666666665,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Những dấu ấy cần được khảo sát. Hình dáng riêng lẻ chưa nói rõ chúng được xây khi nào, dùng làm gì và thay đổi ra sao.",
+      "raw_seconds": 7.944,
+      "speech_window_seconds": 7.371708333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Nhưng khi ghép lại, chúng cho thấy quy mô vấn đề. Lịch sử Angkor vượt xa ranh giới của một ngôi đền nổi tiếng.",
+      "raw_seconds": 7.848,
+      "speech_window_seconds": 7.299875,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Angkor Wat được xây đầu thế kỷ mười hai, dưới thời vua Suryavarman Đệ Nhị. Đây là điểm khởi hành để bước vào bức tranh rộng ấy.",
+      "raw_seconds": 8.568,
+      "speech_window_seconds": 8.008541666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Ban đầu thờ Vishnu, rồi mang lịch sử Phật giáo, nơi này nhắc rằng ý nghĩa tôn giáo có thể thay đổi cùng các công trình.",
+      "raw_seconds": 7.176,
+      "speech_window_seconds": 6.631625,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Hào quanh đền có thể biểu đạt một vũ trụ thiêng có trật tự, đồng thời tác động đến nước, đất và môi trường sát công trình.",
+      "raw_seconds": 7.104,
+      "speech_window_seconds": 6.5555,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Muốn hiểu mối liên hệ ấy, hãy tạm rời các ngọn tháp. Quan sát mưa đến từ đâu và mặt đất cho phép nước đi về đâu.",
+      "raw_seconds": 7.824,
+      "speech_window_seconds": 7.258166666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Khu vực có khí hậu gió mùa phân hóa rõ. Những tháng mưa và tháng khô tạo điều kiện rất khác trên cùng một cảnh quan.",
+      "raw_seconds": 7.632,
+      "speech_window_seconds": 7.064,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Mùa mưa, nước xuống mái nhà, đồng ruộng, đường đi, suối và chỗ trũng. Điều quan trọng là lượng nước, tốc độ đến và vị trí.",
+      "raw_seconds": 9.912,
+      "speech_window_seconds": 9.912,
+      "tempo": 1.0271502590673576,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Một trận mưa lớn có thể làm kênh quá tải, dù cuối năm vẫn thiếu nước. Dồi dào và khan hiếm gắn với thời điểm.",
+      "raw_seconds": 7.896,
+      "speech_window_seconds": 7.333541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Khi mùa khô tiến sâu, nước dự trữ và khả năng tiếp cận ổn định càng quan trọng. Hệ thống cần đáp ứng cả hai mùa.",
+      "raw_seconds": 8.136,
+      "speech_window_seconds": 7.584416666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Phía bắc Angkor, địa hình cao góp phần tạo lưu vực cấp nước cho đồng bằng. Nước theo trọng lực, nhưng con người có thể chuyển hướng.",
+      "raw_seconds": 8.448,
+      "speech_window_seconds": 7.8975,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Địa hình cho dòng chảy một hướng cơ bản, song chênh cao nhỏ vẫn đáng kể. Một độ dốc thoải có thể quyết định ruộng nào nhận nước.",
+      "raw_seconds": 8.568,
+      "speech_window_seconds": 8.008541666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Vì vậy, mặt đất cũng là phần của hạ tầng. Kênh chỉ có ý nghĩa trong quan hệ với vùng đất xung quanh và phía thấp hơn.",
+      "raw_seconds": 7.896,
+      "speech_window_seconds": 7.324416666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Phía nam, Tonle Sap thuộc hệ thống nước lớn của vùng. Hồ mở rộng rồi thu hẹp theo mùa, gắn với mạng sông rộng hơn.",
+      "raw_seconds": 8.208,
+      "speech_window_seconds": 7.639208333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Hiện tượng đảo chiều dòng chảy nổi tiếng của Tonle Sap thuộc quy mô thủy văn lớn. Không thể đồng nhất với từng kênh nhỏ ở Angkor.",
+      "raw_seconds": 8.304,
+      "speech_window_seconds": 7.749125,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Hồ, đồng bằng, suối, mưa và nước ngầm tương tác ở nhiều quy mô. Một mũi tên đơn giản trên bản đồ không thể diễn tả hết.",
+      "raw_seconds": 9.048,
+      "speech_window_seconds": 8.496041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Với cư dân nơi đây, đó là chuyện thực tế: đi lấy nước bao xa, chỗ vượt còn tốt không và khi nào có thể xuống giống.",
+      "raw_seconds": 7.368,
+      "speech_window_seconds": 6.796875,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Thách thức không chỉ là gom thật nhiều nước. Còn phải dẫn, giữ và xả nước theo những nhu cầu luôn thay đổi.",
+      "raw_seconds": 7.224,
+      "speech_window_seconds": 6.671166666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Có nơi cần làm dòng chảy chậm lại. Nơi khác cần đường thoát cho nước dư trước khi nó gây hại ruộng hoặc công trình.",
+      "raw_seconds": 7.584,
+      "speech_window_seconds": 7.025708333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Tích nước và thoát nước cùng thuộc một câu chuyện. Cảnh quan cần cả chỗ giữ nước lẫn tuyến cho nước rời đi.",
+      "raw_seconds": 7.104,
+      "speech_window_seconds": 6.533541666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Giờ những đường nét ngoài đền có ý nghĩa hơn. Bờ dài và lòng hồ rộng cho thấy nỗ lực làm việc với khác biệt giữa các mùa.",
+      "raw_seconds": 7.992,
+      "speech_window_seconds": 7.4265,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Tiếp theo là những hồ chứa lớn, nhưng không mặc định rằng hồ nào cũng có cùng chức năng và cùng một lịch sử.",
+      "raw_seconds": 6.336,
+      "speech_window_seconds": 5.779875,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Các hồ chứa lớn hình chữ nhật ở Angkor thường gọi là baray. Bờ đắp tạo không gian giữ nước đáng kể trên địa hình khá thoải.",
+      "raw_seconds": 8.448,
+      "speech_window_seconds": 7.883541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Tây Baray vẫn là ví dụ nổi bật. Từ trên cao, hình học kéo dài của hồ khác hẳn những đường nét nhỏ quanh nó.",
+      "raw_seconds": 7.896,
+      "speech_window_seconds": 7.333708333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Đông Baray giữ lại một đường bao lớn khác. Diện mạo hiện tại không giống lòng hồ đầy nước, nhắc rằng cảnh quan luôn biến đổi.",
+      "raw_seconds": 8.208,
+      "speech_window_seconds": 7.63575,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Những hồ khác thuộc các giai đoạn phát triển khác nhau. Mạng lưới được ghép dần theo thời gian, không xuất hiện như một bản thiết kế hoàn chỉnh.",
+      "raw_seconds": 8.736,
+      "speech_window_seconds": 8.183541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Kích thước hồ gây ấn tượng, nhưng chưa giải thích cách vận hành. Ta phải hỏi nước vào đâu, di chuyển thế nào và thoát ở đâu.",
+      "raw_seconds": 8.256,
+      "speech_window_seconds": 7.696041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Bờ đắp phải giữ nước và chống xói mòn. Chiều cao, vật liệu và tình trạng bờ ảnh hưởng trực tiếp đến khả năng hoạt động của hồ.",
+      "raw_seconds": 8.64,
+      "speech_window_seconds": 8.073333333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Cửa vào và cửa ra nối hồ với mạng xung quanh. Vị trí của chúng có thể quan trọng ngang hình dáng tổng thể nhìn trong ảnh.",
+      "raw_seconds": 7.8,
+      "speech_window_seconds": 7.234416666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Trầm tích làm vấn đề phức tạp thêm. Nước mang theo vật liệu; bồi lắng dần thay đổi độ sâu của hồ hoặc khả năng dẫn của kênh.",
+      "raw_seconds": 8.424,
+      "speech_window_seconds": 7.87675,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Vì thế, bảo trì thuộc suốt đời sống công trình. Một cấu trúc hoạt động mùa này có thể cần nạo vét hoặc sửa trước mùa tới.",
+      "raw_seconds": 8.304,
+      "speech_window_seconds": 7.738166666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Hồ chứa cũng thuộc thế giới của đền và vương quyền. Ý nghĩa của chúng không thể gói trọn trong một sơ đồ kỹ thuật hiện đại.",
+      "raw_seconds": 7.632,
+      "speech_window_seconds": 7.071041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Nước vừa đáp ứng nhu cầu thực tế, vừa mang biểu tượng tôn giáo. Hai vai trò có thể chồng lên nhau và thay đổi theo nơi, theo thời.",
+      "raw_seconds": 9.0,
+      "speech_window_seconds": 8.433541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Giới nghiên cứu còn bàn về vai trò tưới tiêu và chức năng khác của từng baray. Câu trả lời phải dựa trên từng hồ và các kết nối.",
+      "raw_seconds": 8.232,
+      "speech_window_seconds": 7.658541666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Lòng hồ rộng chưa chứng minh mọi thửa ruộng gần đó đều nhận nước từ hồ. Cao độ, kênh, cửa xả và niên đại phải khớp nhau.",
+      "raw_seconds": 8.664,
+      "speech_window_seconds": 8.096041666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Mực nước hôm nay cũng không đại diện mọi thế kỷ trước. Bồi lắng, chỉnh sửa, tu bổ và đổi công năng đều có thể làm hồ biến dạng.",
+      "raw_seconds": 9.12,
+      "speech_window_seconds": 8.558541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Hãy xem baray là những phần lớn trong một cấu trúc rộng hơn. Vai trò của chúng rõ dần khi ta lần theo các đường nối.",
+      "raw_seconds": 7.944,
+      "speech_window_seconds": 7.376375,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Những đường ấy dẫn đến chính mạng lưới: suối, kênh, bờ đắp, chỗ vượt và nút giao trải trên đồng bằng có người sinh sống.",
+      "raw_seconds": 8.04,
+      "speech_window_seconds": 7.472916666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Kênh cho nước một tuyến ưu tiên. Nhưng dòng chảy còn phụ thuộc độ dốc, độ sâu, bề rộng, độ nhám và lượng nước từ thượng nguồn.",
+      "raw_seconds": 9.192,
+      "speech_window_seconds": 8.622,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Trọng lực tạo chuyển động. Lao động con người đổi tuyến, chia dòng hoặc nối những nơi vốn có khả năng nhận nước khác nhau.",
+      "raw_seconds": 7.968,
+      "speech_window_seconds": 7.3995,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Ở một nút giao, thay đổi nhỏ có thể tạo hậu quả rộng. Nước vào nhánh này nhiều hơn có thể khiến nhánh khác nhận ít đi.",
+      "raw_seconds": 8.184,
+      "speech_window_seconds": 7.611416666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Bờ cao cũng có thể làm đường qua nền đất ướt. Giao thông và quản lý nước đôi khi dùng chung một dải công trình.",
+      "raw_seconds": 7.368,
+      "speech_window_seconds": 6.796916666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Chỗ vượt là một sự dung hòa khác. Đường cần liền mạch, còn nước cần đủ khoảng trống để đi qua mà không khoét yếu kết cấu.",
+      "raw_seconds": 8.136,
+      "speech_window_seconds": 7.585791666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Hệ thống cần chuyển nước lẫn trữ nước. Chỉ theo những hồ lớn nhất sẽ bỏ qua nhiều mối liên hệ duy trì đời sống thường ngày.",
+      "raw_seconds": 7.728,
+      "speech_window_seconds": 7.158541666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Suối tự nhiên cũng thuộc bối cảnh ấy. Con người chỉnh sửa dòng nước trong một cảnh quan đã có sẵn quy luật thoát nước riêng.",
+      "raw_seconds": 7.656,
+      "speech_window_seconds": 7.10175,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Vì vậy, khi vẽ bản đồ cần phân biệt: có tuyến được đào, tuyến được đắp, tuyến chuyển hướng và tuyến kế thừa địa hình cũ.",
+      "raw_seconds": 7.584,
+      "speech_window_seconds": 7.011041666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Mạng lưới có thể lớn lên bằng cách nối các phần có trước. Mỗi bổ sung giải quyết việc tại chỗ nhưng cũng làm nơi khác thay đổi.",
+      "raw_seconds": 8.376,
+      "speech_window_seconds": 7.808708333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Qua nhiều thế hệ, sự phức tạp tăng dần. Muốn hiểu toàn hệ thống, phải biết thành phần nào từng tồn tại cùng thời với nhau.",
+      "raw_seconds": 8.256,
+      "speech_window_seconds": 7.704583333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Kênh bỏ bên kênh mới không nhất thiết từng hoạt động đồng thời. Bản đồ khảo cổ phải giữ được chiều thời gian.",
+      "raw_seconds": 7.296,
+      "speech_window_seconds": 6.7335416666666665,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Vì thế, khai quật và định tuổi quan trọng bên cạnh ảnh trên không. Một đường bao đẹp cần có lịch sử mới thành lời giải thích.",
+      "raw_seconds": 8.232,
+      "speech_window_seconds": 7.659083333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Hãy hình dung dòng suối nhỏ sau mưa. Tại một điểm, nước tỏa vào lòng chứa; xa hơn, một đoạn hẹp gom dòng lại.",
+      "raw_seconds": 8.64,
+      "speech_window_seconds": 8.072166666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Cùng dòng nước có thể hiền hoặc mạnh tùy tuyến đi. Bờ yếu hay cửa bị tắc có thể ảnh hưởng cả nơi xa phía hạ lưu.",
+      "raw_seconds": 7.632,
+      "speech_window_seconds": 7.058541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Một góc nhìn từ tháp không thể cho thấy hết. Cần đọc thành phố qua khoảng cách rộng lẫn những chi tiết rất nhỏ.",
+      "raw_seconds": 7.44,
+      "speech_window_seconds": 6.888041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Và mọi đường nối cuối cùng đều dẫn về con người: hộ gia đình, người lao động, nông dân và cộng đồng tôn giáo sử dụng cảnh quan.",
+      "raw_seconds": 7.92,
+      "speech_window_seconds": 7.35875,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Angkor vượt xa một cụm nhà đá sít nhau. Bằng chứng cho thấy cảnh quan đô thị rộng, mật độ tương đối thấp, với nhiều không gian liên kết.",
+      "raw_seconds": 9.0,
+      "speech_window_seconds": 8.450916666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Khu ở, ao, đất canh tác, đường và khuôn viên đền thuộc cấu trúc rộng ấy. Cách sắp xếp khác nhau theo nơi và theo thời.",
+      "raw_seconds": 8.688,
+      "speech_window_seconds": 8.142208333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Ao của hộ gia đình đưa nước đến gần sinh hoạt. Một công trình nhỏ vẫn rất quan trọng, ngay cạnh hồ chứa lớn hơn nhiều.",
+      "raw_seconds": 8.088,
+      "speech_window_seconds": 7.53475,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Trồng lúa cần hiểu mùa và đất. Quản lý nước bao gồm lựa chọn thời điểm, chứ không chỉ xây các cấu trúc vật chất.",
+      "raw_seconds": 7.68,
+      "speech_window_seconds": 7.11175,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Ruộng có thể hỏng vì thiếu nước, thừa nước, hoặc nước đến sai giai đoạn sinh trưởng của cây lúa.",
+      "raw_seconds": 5.976,
+      "speech_window_seconds": 5.976,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Người làm ruộng hiểu khác biệt tại chỗ qua trải nghiệm lặp lại. Cảnh quan hình thành từ nhiều quyết định, không chỉ mệnh lệnh vương triều.",
+      "raw_seconds": 8.232,
+      "speech_window_seconds": 7.676458333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Công trình lớn vẫn cần tổ chức, nhân lực, vật liệu và chăm sóc liên tục. Quyền lực cùng nỗ lực cộng đồng gặp nhau trong hạ tầng.",
+      "raw_seconds": 8.52,
+      "speech_window_seconds": 7.959583333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Sửa chữa có thể quan trọng ngang xây mới. Nạo bùn, gia cố bờ hay mở lại lối nước hiếm khi tạo ra tượng đài ngoạn mục.",
+      "raw_seconds": 8.28,
+      "speech_window_seconds": 7.710166666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Nhưng chính việc ấy giúp giải thích độ bền của mạng lưới. Những hành động thường ngày ngoài tấm bưu ảnh có thể nâng đỡ đường chân trời vĩ đại.",
+      "raw_seconds": 8.472,
+      "speech_window_seconds": 7.914291666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Cũng cần nhớ vật liệu đã mất. Gỗ, sợi thực vật và mặt đất để lại dấu vết khác với sa thạch chạm khắc.",
+      "raw_seconds": 7.44,
+      "speech_window_seconds": 6.891333333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Khả năng bảo tồn không đều ảnh hưởng trí tưởng tượng. Ngôi đền đá trông đơn độc vì nhà quanh nó không còn đứng trên mặt đất.",
+      "raw_seconds": 7.968,
+      "speech_window_seconds": 7.420083333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Khảo cổ tìm lại các quan hệ từ dấu tích, đồng thời thừa nhận chưa thể biết chính xác mọi mái nhà, nghề nghiệp hay dân số.",
+      "raw_seconds": 7.344,
+      "speech_window_seconds": 6.771041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Từ đó hiện lên thành phố phong phú hơn: có cư dân, sản xuất, kết nối và biến đổi. Mạng nước thuộc chính thế giới đang sống ấy.",
+      "raw_seconds": 9.432,
+      "speech_window_seconds": 8.862791666666666,
+      "tempo": 0.9184240069084628,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Điều này cũng đổi cách hiểu về khám phá. Angkor không đơn giản là chốn trống không, chờ người ngoài đến nhìn thấy.",
+      "raw_seconds": 7.608,
+      "speech_window_seconds": 7.063791666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Tri thức địa phương, sự tiếp nối tôn giáo, nghiên cứu trước đây và khảo sát hiện đại đều thuộc lịch sử tìm hiểu nơi này.",
+      "raw_seconds": 7.032,
+      "speech_window_seconds": 6.473208333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Kỹ thuật mới mở rộng điều có thể ghi nhận. Nó không xóa vai trò của những người vốn biết hoặc vẫn chăm sóc các địa điểm.",
+      "raw_seconds": 7.92,
+      "speech_window_seconds": 7.346,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Nhìn từ trên không, một số dấu tích dễ nhận hơn. Những đường dài hiện ra ở nơi dưới đất chỉ thấy gò và hõm rời rạc.",
+      "raw_seconds": 8.136,
+      "speech_window_seconds": 7.583875,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Quét laser từ trên không, thường gọi là lidar, đã bổ sung chi tiết quan trọng cho bản đồ cảnh quan Angkor rộng lớn.",
+      "raw_seconds": 7.296,
+      "speech_window_seconds": 6.724458333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Tia laser qua khe tán lá giúp dựng mô hình mặt đất. Xử lý dữ liệu tách tín hiệu hữu ích, không chụp được mọi vật chôn dưới đất.",
+      "raw_seconds": 8.568,
+      "speech_window_seconds": 8.019375,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Kết quả có thể cho thấy bờ đất, kênh và mô thức cư trú khó nhận. Đó là dấu hiệu cần khảo sát, chưa phải phim đầy đủ về quá khứ.",
+      "raw_seconds": 9.216,
+      "speech_window_seconds": 8.670125,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Mô hình địa hình tô bóng làm rõ chênh cao nhỏ. Đổi hướng ánh sáng ảo có thể lộ một đường trước đó khó thấy.",
+      "raw_seconds": 7.848,
+      "speech_window_seconds": 7.283541666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Nhưng đường nét rõ vẫn cần diễn giải. Nhà nghiên cứu đối chiếu bản đồ với thực địa, vật liệu khai quật, sơ đồ cũ và bằng chứng khác.",
+      "raw_seconds": 9.144,
+      "speech_window_seconds": 8.57275,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Đường hiện đại, bờ cổ và địa hình tự nhiên có thể trông giống nhau ở một số góc. Bối cảnh giúp phân biệt.",
+      "raw_seconds": 7.392,
+      "speech_window_seconds": 6.823,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Niên đại vẫn thiết yếu. Bản đồ chỉ ra vị trí, còn khai quật và định tuổi giúp xác định dấu tích có ý nghĩa vào thời nào.",
+      "raw_seconds": 8.4,
+      "speech_window_seconds": 7.8490416666666665,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Trầm tích cho một góc nhìn khác. Các lớp có thể giữ biến đổi về bồi lắng, môi trường nước hoặc xáo trộn, với giới hạn riêng.",
+      "raw_seconds": 8.496,
+      "speech_window_seconds": 7.92225,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Kết hợp nhiều phương pháp giúp bằng chứng kiểm tra nhau. Lời giải thích mạnh nối nhiều mô thức, thay vì bám vào một hình ảnh ngoạn mục.",
+      "raw_seconds": 8.424,
+      "speech_window_seconds": 7.8758333333333335,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Đó cũng là lý do cần ghi nhãn hình tái dựng. Cảnh kênh hợp lý là minh họa, không phải thước phim ghi sự kiện cổ đã xác nhận.",
+      "raw_seconds": 8.52,
+      "speech_window_seconds": 7.958541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Mục tiêu là làm rõ các quan hệ: nước có thể đi đâu, người sống ở đâu và biến động truyền qua mạng lưới thế nào.",
+      "raw_seconds": 6.792,
+      "speech_window_seconds": 6.221041666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Những câu hỏi ấy càng quan trọng khi điều kiện bên ngoài đổi khác. Hệ thống hình thành từ kinh nghiệm vẫn có thể gặp sức ép chưa quen.",
+      "raw_seconds": 8.184,
+      "speech_window_seconds": 7.621041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Muốn hiểu phần này, hãy tạm rời đá để xem dấu vết khí hậu, kể cả những hồ sơ nằm ngoài Angkor.",
+      "raw_seconds": 6.48,
+      "speech_window_seconds": 6.016208333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Nghiên cứu vòng cây ở Đông Nam Á lục địa góp bằng chứng về hạn nặng và các giai đoạn rất ẩm trong thế kỷ mười bốn, mười lăm.",
+      "raw_seconds": 7.392,
+      "speech_window_seconds": 6.821041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Hồ sơ ấy mô tả biến động khí hậu khu vực. Phải nối cẩn thận với điều kiện địa phương và thay đổi khảo cổ, không coi chúng đồng nhất.",
+      "raw_seconds": 8.616,
+      "speech_window_seconds": 8.06325,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Hạn kéo dài làm giảm nước sẵn có. Nó cũng có thể đổi khối lượng công việc để duy trì kênh, ruộng và khu dân cư.",
+      "raw_seconds": 8.208,
+      "speech_window_seconds": 7.646041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Giai đoạn rất ẩm tạo thách thức khác. Dòng mạnh mang thêm trầm tích, xói bờ và làm quá tải những lối từng đủ sức thoát nước.",
+      "raw_seconds": 8.232,
+      "speech_window_seconds": 7.671166666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Sức ép luân phiên gây khó cho mạng liên kết. Cách chỉnh sửa hữu ích khi thiếu nước chưa chắc giải quyết đợt mưa dữ dội tiếp theo.",
+      "raw_seconds": 8.184,
+      "speech_window_seconds": 7.610083333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Hệ phức tạp có thể lan lợi ích rộng, nhưng cũng truyền xáo trộn. Chuyện ở thượng nguồn có thể thành khó khăn của người ở xa.",
+      "raw_seconds": 8.04,
+      "speech_window_seconds": 7.471041666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Không phải mọi phần đều hỏng cùng lúc. Sửa tại chỗ, đổi tuyến và đổi cách sử dụng có thể tạo kết quả khác nhau trên cảnh quan.",
+      "raw_seconds": 8.472,
+      "speech_window_seconds": 7.9095,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Nhà nghiên cứu khảo sát dấu hư hại và chỉnh sửa ở một số phần mạng nước. Chuỗi diễn biến quan trọng hơn hình dung sụp đổ đột ngột.",
+      "raw_seconds": 8.304,
+      "speech_window_seconds": 7.746,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Vì thế, khí hậu là hướng tìm hiểu lớn, chưa đủ giải thích một mình. Thể chế, bảo trì, cư trú và hoàn cảnh chính trị cũng quan trọng.",
+      "raw_seconds": 9.792,
+      "speech_window_seconds": 9.233541666666667,
+      "tempo": 0.9568436960276339,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Thế kỷ mười lăm còn có xung đột và thay đổi quan hệ chính trị. Việc chuyển quyền lực, hoạt động không thể chỉ giải bằng lượng mưa.",
+      "raw_seconds": 8.304,
+      "speech_window_seconds": 7.746041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Năm một nghìn bốn trăm ba mươi mốt thường xuất hiện trong tóm tắt lịch sử Angkor. Một mốc không khiến cả vùng trống vắng chỉ sau một đêm.",
+      "raw_seconds": 8.904,
+      "speech_window_seconds": 8.345958333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Có nơi đổi khác hoặc suy giảm, nơi khác vẫn có ý nghĩa. Riêng Angkor Wat tiếp tục lịch sử tôn giáo sau khi trung tâm vương quyền chuyển đi.",
+      "raw_seconds": 9.24,
+      "speech_window_seconds": 8.672666666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Biến đổi rộng diễn ra qua nhiều quá trình theo thời gian. Một cơn bão cuối, cuộc xâm lược hay phố vắng không thể đại diện đầy đủ.",
+      "raw_seconds": 8.544,
+      "speech_window_seconds": 7.975083333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Câu chuyện chậm và không đều khó kể hơn, nhưng gần con người hơn. Họ thích nghi, sửa chữa, di chuyển và tiếp nối tập quán khi điều kiện đổi.",
+      "raw_seconds": 9.936,
+      "speech_window_seconds": 9.936,
+      "tempo": 1.0296373056994819,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Mạng nước cho một cách nghiên cứu những ứng phó ấy. Nó nối sức ép môi trường lớn với quyết định tại từng địa điểm cụ thể.",
+      "raw_seconds": 8.256,
+      "speech_window_seconds": 7.683666666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Cũng đừng vội phán xét kỹ thuật cổ. Tạo hệ thống hữu ích và duy trì qua nhiều thế hệ là hai thành tựu liên quan nhưng khác nhau.",
+      "raw_seconds": 8.352,
+      "speech_window_seconds": 7.7843333333333335,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Mọi cấu trúc hiệu quả đều dựa vào điều kiện, hiểu biết, lao động và nguồn lực. Khi chúng đổi khác, công trình cũ có thể nhận vai trò mới.",
+      "raw_seconds": 9.504,
+      "speech_window_seconds": 8.933541666666667,
+      "tempo": 0.9257556131260795,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Lịch sử về sau thuộc trọn câu chuyện Angkor, chứ không chỉ là đoạn kết kịch tính cho thời kỳ xây dựng.",
+      "raw_seconds": 6.216,
+      "speech_window_seconds": 5.667208333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Ngày nay, nước vẫn thuộc công việc chăm sóc Angkor. Mưa, thoát nước, thực vật và tình trạng kết cấu đều ảnh hưởng bảo tồn.",
+      "raw_seconds": 8.856,
+      "speech_window_seconds": 8.308583333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Kênh cạnh lối khách đi có vẻ kém ấn tượng hơn tường chạm khắc. Nhưng giữ dòng chảy phù hợp giúp bảo vệ môi trường quanh bức tường.",
+      "raw_seconds": 8.232,
+      "speech_window_seconds": 7.6710416666666665,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Bảo tồn cần quan sát và chuyên môn địa phương. Can thiệp ở một chỗ phải xét trong cảnh quan rộng, không chỉ đánh giá qua vẻ ngoài.",
+      "raw_seconds": 8.568,
+      "speech_window_seconds": 8.019291666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Di sản gắn với cộng đồng hiện tại, sinh kế, tôn giáo và du lịch. Đó là quan hệ với hôm nay, đồng thời với quá khứ.",
+      "raw_seconds": 8.88,
+      "speech_window_seconds": 8.308541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Tham quan tôn trọng là theo tuyến cho phép và hướng dẫn địa phương. Không cần leo bờ mong manh hay vào công trình đóng cửa để hiểu nơi này.",
+      "raw_seconds": 8.616,
+      "speech_window_seconds": 8.061916666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Quay phim cũng vậy. Góc được phép, đời sống người trưởng thành và minh họa cẩn thận có thể kể chuyện mà không dàn dựng thực hành thiêng.",
+      "raw_seconds": 8.208,
+      "speech_window_seconds": 7.635875,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Giờ trở lại hình ảnh mở đầu. Vệt trên đá thuộc thế giới nơi nước chạm vào kiến trúc, mặt đất, lao động và ký ức.",
+      "raw_seconds": 8.256,
+      "speech_window_seconds": 7.696041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Ta bắt đầu từ tháp rồi tìm những đường nối. Chúng dẫn đến ruộng, nhà, hồ chứa, mùa thay đổi và trách nhiệm còn tiếp diễn.",
+      "raw_seconds": 9.12,
+      "speech_window_seconds": 8.5485,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Đền vẫn phi thường. Quy mô ấy có ý nghĩa hơn khi nhìn thêm việc nhỏ và các kết nối rộng từng nâng đỡ chúng.",
+      "raw_seconds": 7.488,
+      "speech_window_seconds": 6.936958333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Một thành phố để lại chứng cứ không đều. Đá tồn tại dễ thấy, còn kênh cũ có thể cần bản đồ kiên nhẫn mới rõ vai trò.",
+      "raw_seconds": 8.4,
+      "speech_window_seconds": 7.853416666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Đọc cả hai cùng lúc đổi câu hỏi: không chỉ ai xây đền, mà còn cảnh quan có cư dân đã vận hành ra sao.",
+      "raw_seconds": 6.624,
+      "speech_window_seconds": 6.0757916666666665,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Vẫn còn câu hỏi mở về lịch sử từng cấu trúc, phân phối nước và lựa chọn cộng đồng khi điều kiện thay đổi.",
+      "raw_seconds": 6.312,
+      "speech_window_seconds": 5.747791666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Nghiên cứu tương lai có thể làm rõ hơn. Bảo vệ dấu tích cho phép công việc tiếp tục, thay vì đóng khung câu chuyện ở bản đơn giản nhất.",
+      "raw_seconds": 8.592,
+      "speech_window_seconds": 8.0335,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Trên đồng bằng, nước vẫn gom lại, chuyển động và để dấu. Quá trình quen thuộc tiếp diễn giữa những cấu trúc đã có hàng thế kỷ.",
+      "raw_seconds": 8.616,
+      "speech_window_seconds": 8.068333333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Thành tựu Angkor nằm một phần ở kết nối: mùa với dự trữ, đất với chuyển động, nơi thiêng với nhu cầu thường ngày.",
+      "raw_seconds": 7.152,
+      "speech_window_seconds": 6.604291666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Lịch sử biến đổi nhắc rằng hạ tầng là quan hệ liên tục giữa con người, môi trường và chăm sóc, không chỉ công trình xây xong một lần.",
+      "raw_seconds": 7.68,
+      "speech_window_seconds": 7.109458333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Hãy nhìn lại vệt nước trên đá. Dấu nhỏ giờ mở ra thành phố, và thành phố mở ra cả một cảnh quan.",
+      "raw_seconds": 7.368,
+      "speech_window_seconds": 6.816958333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1292,
+  "decoded_samples": 31008000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-vi-21m32s.mp3",
+  "flac": "voice-vi-21m32s.flac",
+  "mp3_sha256": "100369443cee783425b10324e7143ec5ed04d7375dd1078a99a753270ae79d4f",
+  "flac_sha256": "8bc1800c1eb32b443575a9b229409fb091ec6bfc679023d97b525dcb4b79e667"
+}

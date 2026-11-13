@@ -1,0 +1,129 @@
+001	Vanhan kiven pinnassa kulkee tumma jälki. Se näyttää vähäpätöiseltä, kunnes ymmärrämme veden auttaneen muovaamaan kokonaisen kaupungin.
+002	Angkorissa huomaamme ensin tornit. Vielä yllättävämpi rakenne levittäytyy kuitenkin kanavien, penkereiden ja suurten vesialtaiden välille.
+003	Yhteyksiä seuratessa tuttu kuva muuttuu. Temppeli kuuluu kaupunkiin, ja kaupunki on osa kokonaista valuma-aluetta.
+004	Kysymys on yksinkertainen: miten elämä järjestetään, kun vettä tulee välillä ylen määrin ja myöhemmin sitä on vaikea löytää?
+005	Vastaus yhdistää sateen, maaston, viljelyn, uskon, vallan ja arjen huollon. Se valaisee myös Angkorin myöhempiä muutoksia.
+006	Aloitamme nykyisestä Kambodžasta, Siem Reapin läheltä, Tonle Sapin pohjoispuolelta. Kivimuistomerkit seisovat paljon laajemman asutun maiseman keskellä.
+007	Angkor oli vuosisatoja khmerien maailman tärkeä keskus. Sen muoto muuttui hallitsijoiden, yhteisöjen ja tavoitteiden mukana.
+008	Säilyneet temppelit ovat maamerkkejä. Kaupunki tarvitsee myös koteja, viljelyksiä, reittejä, tavaranvaihtoa ja keinoja käsitellä jätteitä.
+009	Monet arkiset rakennukset tehtiin kiveä heikommin säilyvistä aineista. Kadonneet katot saavat muistomerkit näyttämään harhaanjohtavan yksinäisiltä.
+010	Katso veistetyn portin taakse. Kohonnut maalinja voi olla penger, ja matala painanne voi säilyttää toisen osan tarinaa.
+011	Näitä muotoja on tutkittava. Pelkkä ulkonäkö ei kerro ikää, toimintaa eikä sitä, miten käyttö muuttui.
+012	Yhdessä ne paljastavat kysymyksen mittakaavan. Angkorin historia ulottuu paljon yhden kuuluisan temppelin rajojen ulkopuolelle.
+013	Angkor Wat rakennettiin kahdennentoista vuosisadan alussa, Suryavarman Toisen aikana. Se tarjoaa lähtökohdan laajempaan maisemaan.
+014	Alkuperäinen omistus Vishnulle ja myöhempi buddhalainen historia muistuttavat myös paikkojen uskonnollisten merkitysten muuttumisesta.
+015	Temppelin vallihauta voi kuvata järjestettyä pyhää maailmaa ja samalla vaikuttaa veteen, maaperään sekä rakennuksen lähiympäristöön.
+016	Jätetään tornit hetkeksi. Katsotaan, mistä sade tulee ja minne maan muodot sallivat veden kulkea.
+017	Alueella on selvästi vuodenaikainen monsuuni-ilmasto. Märät ja kuivat kuukaudet luovat samalle seudulle hyvin erilaiset olot.
+018	Sadekaudella vettä tulee katoille, pelloille, poluille ja puroihin. Ratkaisevia ovat määrä, saapumisnopeus ja paikka.
+019	Rankkasade voi ylittää kanavan kapasiteetin, vaikka myöhemmin kärsitään puutteesta. Runsaus ja niukkuus riippuvat myös ajankohdasta.
+020	Kuivan kauden edetessä varastot ja luotettava saatavuus korostuvat. Hyödyllisen järjestelmän on vastattava kumpaankin kauteen.
+021	Angkorin pohjoiset ylängöt muovaavat tasankoa ruokkivia valuma-alueita. Vesi seuraa painovoimaa, mutta ihmiset voivat muuttaa sen reittiä.
+022	Maasto antaa pääsuunnan, mutta pienet korkeuserot merkitsevät paljon. Loiva rinne voi ratkaista, mikä pelto saa vettä.
+023	Maa on siis osa infrastruktuuria. Kanava toimii vain suhteessa ympärillä ja alempana sijaitseviin alueisiin.
+024	Etelässä Tonle Sap kuuluu alueen suureen vesimaailmaan. Järven kausittainen kasvu ja kutistuminen liittyvät laajempaan jokiverkostoon.
+025	Tunnettu virtauksen kausittainen kääntyminen kuuluu tähän suureen mittakaavaan. Se ei kuvaa automaattisesti Angkorin jokaista paikalliskanavaa.
+026	Järvi, tasanko, purot, sade ja pohjavesi vaikuttavat eri mittakaavoissa. Yksi karttanuoli ei esitä kaikkia yhteyksiä.
+027	Asukkaille suhteet olivat käytännöllisiä: veden etäisyys, ylityspaikan kunto ja viljelyn ajankohta vaikuttivat jokaiseen päivään.
+028	Haaste ei ollut vain kerätä mahdollisimman paljon. Vettä piti johtaa, pidättää ja vapauttaa muuttuvien tarpeiden mukaan.
+029	Välillä virtausta piti hidastaa. Toisaalla ylimääräinen vesi tarvitsi poistumistien ennen kuin se vahingoitti peltoja tai rakennuksia.
+030	Varastointi ja kuivatus kuuluvat samaan tarinaan. Maisema tarvitsee paikkoja veden viipymiselle ja reittejä sen poistumiselle.
+031	Temppelien ulkopuoliset muodot saavat merkityksen. Pitkät penkereet ja laajat altaat kertovat työstä vuodenaikojen erojen kanssa.
+032	Seuraavaksi tutkimme suuria vesivarastoja olettamatta, että jokaisella oli sama tarkoitus ja historia.
+033	Angkorin suuria suorakulmaisia altaita kutsutaan barayksi. Maapenkereet loivat loivaan maisemaan laajoja tiloja veden varastoimiseen.
+034	Läntinen Baray on yhä vaikuttava esimerkki. Ylhäältä sen pitkä suorakulmio erottuu ympäristön pienemmistä muodoista.
+035	Itäinen Baray säilyttää toisen suuren ääriviivan. Nykyinen näkymä eroaa täydestä altaasta ja muistuttaa maiseman jatkuvasta muutoksesta.
+036	Muut altaat kuuluvat eri kehitysvaiheisiin. Verkosto koottiin ajan kuluessa eikä toteutettu kerralla yhtenä valmiina suunnitelmana.
+037	Koko vaikuttaa, mutta ei selitä toimintaa. On kysyttävä, mistä vesi tuli, miten se liikkui ja minne poistui.
+038	Penkereen täytyy pidättää vettä ja kestää eroosiota. Korkeus, aineet ja kunto määräävät altaan todellisia mahdollisuuksia.
+039	Tulo- ja poistoaukot liittävät altaan verkostoon. Niiden sijainti voi olla yhtä tärkeä kuin valokuvassa näkyvä suuri muoto.
+040	Sedimentti lisää vaikeutta. Vesi kuljettaa ainesta, jonka kertyminen muuttaa vähitellen syvyyttä tai kanavan kapasiteettia.
+041	Huolto kuuluu siksi koko rakennelman elämään. Yhden kauden toimiva rakenne voi vaatia puhdistusta tai korjausta ennen seuraavaa.
+042	Altaat kuuluivat myös temppelien ja kuningasvallan maailmaan. Nykyaikainen tekninen kaavio ei kata niiden kaikkia merkityksiä.
+043	Vesi palveli käytännön tarpeita ja kantoi uskonnollista symboliikkaa. Roolit limittyivät ja vaihtelivat paikan sekä ajan mukaan.
+044	Tiettyjen baray-altaiden kastelukäytöstä keskustellaan. Vastaus tarvitsee todisteita juuri kyseisestä rakenteesta ja sen yhteyksistä.
+045	Laaja allas ei todista kaikkien lähipeltojen saaneen sen vettä. Korkeuksien, kanavien, poistojen ja ajoitusten on sovittava yhteen.
+046	Nykyinen vedenpinta ei kuvaa kaikkia aiempia vuosisatoja. Liettyminen, muutokset, korjaukset ja uudet käyttötavat muokkaavat altaita.
+047	Ajatellaan baray-altaat suuremman kokonaisuuden osina. Merkitys selvenee, kun seuraamme niitä yhdistäviä linjoja.
+048	Linjat johtavat puroihin, kanaviin, penkereisiin, ylityksiin ja haaroihin asutun tasangon eri puolilla.
+049	Kanava tarjoaa vedelle suositun reitin. Virtaus riippuu kaltevuudesta, syvyydestä, leveydestä, karheudesta ja yläpuolelta tulevasta määrästä.
+050	Painovoima antaa liikkeen. Ihmistyö muuttaa reittejä, jakaa virtauksia ja yhdistää paikkoja, jotka muuten saisivat eri määrät vettä.
+051	Haarassa pienellä muutoksella on kaukaisia seurauksia. Enemmän vettä yhteen suuntaan voi tarkoittaa vähemmän toiseen.
+052	Korotettu penger voi kantaa myös tietä märän maan yli. Liikenne ja vesien hallinta jakavat silloin saman rakenteen.
+053	Ylityksessä tarvitaan tasapainoa. Tien on jatkuttava ja vedelle jäätävä tilaa kulkea rakennetta heikentämättä.
+054	Järjestelmä liikuttaa ja varastoi vettä. Suurimpien altaiden katselu yksin sivuuttaa monta arkea ylläpitänyttä yhteyttä.
+055	Luonnonpurot kuuluivat myös ympäristöön. Ihmiset muokkasivat vesireittejä maisemassa, jolla oli jo omat valumakuvionsa.
+056	Kartan on erotettava alkuperät: kaivetut, korotetut, käännetyt linjat ja vanhempia maamuotoja seuraavat reitit.
+057	Verkosto kasvaa yhdistämällä aiempia osia. Lisäys ratkaisee paikallisen pulman ja voi muuttaa oloja toisaalla.
+058	Sukupolvet lisäävät monimutkaisuutta. On tiedettävä, mitkä osat olivat olemassa yhtä aikaa, eikä pidettävä kaikkia jälkiä samanaikaisina.
+059	Hylätty kanava myöhemmän vieressä ei todista yhteiskäyttöä. Arkeologisen ajan on pysyttävä kartalla näkyvissä.
+060	Siksi kaivaukset ja ajoitus täydentävät ilmakuvia. Kaunis ääriviiva tarvitsee historian ennen kuin siitä tulee selitys.
+061	Kuvittele pieni puro sateen jälkeen. Se leviää altaaseen, ja myöhemmin kapea kulku kokoaa virtauksen uudelleen.
+062	Sama vesi virtaa rauhallisesti tai voimalla reitin mukaan. Heikko penger tai tukos vaikuttaa kaukana alajuoksulla.
+063	Yksi näkymä tornista ei paljasta kaikkea. Kaupunkia on luettava suurina etäisyyksinä ja pieninä yksityiskohtina.
+064	Jokainen linja palautuu ihmisiin: perheisiin, työntekijöihin, viljelijöihin ja uskonnollisiin yhteisöihin, jotka käyttivät ja hoitivat maisemaa.
+065	Angkor oli enemmän kuin tiivis kivirakennusten keskus. Todisteet näyttävät laajan, melko väljästi rakennetun ja yhdistyneen kaupunkimaiseman.
+066	Kodit, lammet, viljelykset, tiet ja temppelialueet kuuluivat kuvioon. Niiden sijoittuminen vaihteli paikan ja ajan mukaan.
+067	Kotitalouden lampi toi veden lähelle päivittäisiä töitä. Pieni rakenne saattoi olla tärkeä suurenkin varaston vieressä.
+068	Riisinviljely vaati vuodenaikojen ja maan tuntemusta. Veden hallinta oli myös ajoituksen valintaa rakentamisen ohella.
+069	Pelto kärsii liian vähästä tai runsaasta vedestä, tai veden saapumisesta väärässä kasvuvaiheessa.
+070	Viljelijät oppivat paikalliset erot kokemuksesta. Maisemaa muovasi moni päätös, eivät vain kuninkaiden käskyt.
+071	Suuret työt tarvitsivat järjestämistä, työvoimaa, aineita ja jatkuvaa huomiota. Poliittinen valta ja yhteisöjen ponnistukset kohtasivat infrastruktuurissa.
+072	Korjaaminen saattoi olla yhtä tärkeää kuin rakentaminen. Lietteen poisto, penkereen vahvistus ja väylän avaus luovat harvoin näyttävän muistomerkin.
+073	Ne kuitenkin selittävät verkoston kestävyyttä. Postikortista puuttuva työ saattoi tukea poikkeuksellista tornien siluettia.
+074	Muistetaan kadonneet aineet. Puu, kasvikuidut ja maapinnat jättävät erilaisen aineiston kuin veistetty hiekkakivi.
+075	Epätasainen säilyminen muokkaa mielikuvia. Temppeli näyttää yksinäiseltä, koska ympäröivät kodit eivät enää seiso maan päällä.
+076	Arkeologia kokoaa suhteita jäljistä väittämättä tuntevansa jokaista kattoa, ammattia tai väkilukua täsmälleen.
+077	Esiin tulee rikkaampi kaupunki: asuttu, tuottava, yhdistynyt ja muuttuva. Vesiverkosto kuului tähän elävään maailmaan.
+078	Myös löytämisen merkitys muuttuu. Angkor ei ollut pelkkä tyhjä paikka, joka odotti ulkopuolisten huomiota.
+079	Paikallinen tieto, uskonnon jatkuminen, aiempi tutkimus ja nykyinen tiede kuuluvat kaikki paikan ymmärtämisen historiaan.
+080	Uusi tekniikka laajentaa tallennusta. Se ei poista ihmisiä, jotka tunsivat paikat ennestään tai jatkoivat niiden hoitoa.
+081	Ilmasta jotkin jäljet erottuvat paremmin. Pitkiä linjoja näkyy siellä, missä maassa huomaa vain erillisiä kumpuja ja painanteita.
+082	Ilmasta tehty laserkeilaus on lisännyt tärkeitä yksityiskohtia laajan Angkorin kartoitukseen.
+083	Laser auttaa mallintamaan maata kasvillisuuden aukoista. Signaalien käsittely ei valokuvaa jokaista haudattua esinettä.
+084	Tulokset paljastavat matalia maavalleja, kanavia ja asutuksen kuvioita. Ne ovat tutkimusvihjeitä, eivät täydellinen elokuva menneisyydestä.
+085	Varjostettu maastomalli näyttää pieniä korkeuseroja. Virtuaalivalon muuttaminen voi paljastaa aiemmin heikosti näkyneen linjan.
+086	Selkeäkin linja vaatii tulkintaa. Tutkijat vertaavat karttoja, maastohavaintoja, kaivausaineistoa, vanhoja suunnitelmia ja muita todisteita.
+087	Uusi polku, vanha penger ja luonnonmuoto voivat näyttää samanlaisilta. Asiayhteys auttaa erottamaan ne.
+088	Ajoitus pysyy tärkeänä. Kartta kertoo sijainnin, kaivaukset ja ajoitus auttavat selvittämään merkityksen ajankohdan.
+089	Sedimentit tarjoavat toisen näkymän. Kerrokset voivat tallentaa muutoksia kasautumisessa, vesissä tai häiriöissä, omine rajoineen.
+090	Menetelmien yhdistäminen tarkistaa todisteita ristiin. Vahva selitys yhdistää kuvioita eikä nojaa yhteen dramaattiseen kuvaan.
+091	Siksi rekonstruktiot pitää tunnistaa. Uskottava kanavakuva on kuvitusta, ei dokumentoidun muinaisen tapahtuman tallenne.
+092	Tavoite on ymmärtää suhteita: mahdolliset vesireitit, asumisen paikat ja muutoksen eteneminen verkostossa.
+093	Tämä korostuu ulkoisten olojen muuttuessa. Kokemuksella rakennettu verkostokin voi kohdata tuntemattomia paineita.
+094	Jätetään kivi hetkeksi ja tarkastellaan ilmastotodisteita, myös Angkorin ulkopuolelta tulevia aineistoja.
+095	Kaakkois-Aasian mantereen vuosirenkaat osoittavat ankaria kuivuuksia ja hyvin märkiä jaksoja osissa neljättätoista ja viidettätoista vuosisataa.
+096	Ne kuvaavat alueellista vaihtelua. Yhteys paikallisiin oloihin ja arkeologisiin muutoksiin on muodostettava varovasti.
+097	Pitkä kuivuus vähentää saatavaa vettä. Se muuttaa myös työtä, jolla kanavat, pellot ja asutus pidetään toimivina.
+098	Hyvin märät jaksot tuovat toisen haasteen. Nopeat virrat kuljettavat sedimenttiä, syövyttävät penkereitä ja ylittävät aiemmin riittävien aukkojen kapasiteetin.
+099	Vaihtelevat paineet vaikeuttavat yhdistynyttä verkostoa. Niukkuutta helpottava muutos ei välttämättä ratkaise seuraavaa rankkasadetta.
+100	Monimutkainen järjestelmä jakaa hyötyjä ja häiriöitä. Yläjuoksun muutos voi olla kaukana asuvan ihmisen ongelma.
+101	Kaiken ei tarvinnut pettää yhtä aikaa. Paikalliset korjaukset, uudet reitit ja muut käyttötavat saattoivat tuottaa erilaisia tuloksia.
+102	Tutkijat selvittävät verkoston osien vaurioita ja muutoksia. Tapahtumien järjestys merkitsee enemmän kuin yksinkertainen äkillisen romahduksen kuva.
+103	Ilmasto on tärkeä tutkimussuunta, ei täydellinen selitys. Myös instituutiot, huolto, asutus ja politiikka vaikuttavat.
+104	Viidennellätoista vuosisadalla oli konflikteja ja poliittisten suhteiden muutoksia. Vallan ja toiminnan siirtymiä ei selitä pelkkä sade.
+105	Vuosi tuhat neljäsataa kolmekymmentäyksi esiintyy monissa tiivistelmissä. Yksi vuosiluku ei saa tyhjentää kokonaista seutua yhdessä yössä.
+106	Jotkin paikat muuttuivat tai menettivät merkitystä, toiset pysyivät tärkeinä. Angkor Watin uskonnollinen historia jatkui kuninkaallisen keskuksen siirryttyä.
+107	Muutos tapahtui monina prosesseina ajan kuluessa. Viimeinen myrsky, hyökkäys tai autio katu yksinkertaistaisi näyttöä liikaa.
+108	Epätasainen tarina on vaativampi ja inhimillisempi. Ihmiset sopeutuvat, korjaavat, muuttavat ja jatkavat tapoja uusissa oloissa.
+109	Vesiverkosto auttaa tutkimaan näitä vastauksia. Se liittää suuret ympäristöpaineet tiettyjen paikkojen päätöksiin.
+110	Se varoittaa myös helpoista arvioista. Hyödyllisen järjestelmän rakentaminen ja sen ylläpito sukupolvia ovat liittyviä mutta eri saavutuksia.
+111	Ratkaisut riippuvat oloista, tiedosta, työstä ja resursseista. Niiden muuttuessa samat rakenteet voivat saada uusia tehtäviä.
+112	Myöhempi historia kuuluu täysin Angkoriin. Se ei ole vain rakennuskauden dramaattinen loppu.
+113	Vesi on yhä osa Angkorin hoitoa. Sade, kuivatus, kasvillisuus ja rakenteiden kunto vaikuttavat suojeluun.
+114	Kanava näyttää veistettyä seinää vaatimattomammalta. Sopiva veden kulku voi silti suojella seinän ympäristöä.
+115	Suojelu vaatii havainnointia ja paikallista asiantuntemusta. Toimi on arvioitava koko maisemassa eikä vain ulkonäön perusteella.
+116	Perintö liittyy nykyisiin yhteisöihin, toimeentuloon, uskontoon ja matkailuun. Se koskee nykyhetkeä yhtä lailla kuin mennyttä.
+117	Kunnioittava käynti seuraa sallittuja reittejä ja paikallisia neuvoja. Hauraalle penkereelle tai suljettuun rakennukseen ei tarvitse mennä.
+118	Sama koskee kuvaamista. Sallitut näkymät, aikuisten arki ja huolellinen kuvitus selittävät ilman pyhien tapojen lavastamista.
+119	Palataan alun kuvaan. Kiven jälki kuuluu maailmaan, jossa vesi koskettaa arkkitehtuuria, maata, työtä ja muistia.
+120	Aloitimme torneista ja löysimme yhteydet: pellot, kodit, altaat, muuttuvat kaudet ja jatkuvat vastuut.
+121	Temppelit ovat edelleen poikkeuksellisia. Koko saa merkitystä myös pienistä teoista ja laajoista suhteista niiden taustalla.
+122	Kaupunki säilyy jäljissä epätasaisesti. Kivi näkyy, vanha kanava saattaa vaatia kärsivällistä kartoitusta ennen roolinsa paljastumista.
+123	Molempien lukeminen muuttaa kysymystä: kuka rakensi muistomerkin, mutta myös miten asuttu maisema saattoi pysyä toimivana?
+124	Avoimia kysymyksiä jää rakenteiden historiasta, veden jaosta ja yhteisöjen valinnoista olojen muuttuessa.
+125	Tuleva tutkimus voi tarkentaa vastauksia. Jälkien suojaaminen jatkaa työtä lukitsematta tarinaa sen yksinkertaisimpaan muotoon.
+126	Tasangolla vesi yhä kerääntyy, liikkuu ja jättää merkkejä. Tutut prosessit jatkuvat jopa vuosisatoja vanhojen rakenteiden lomassa.
+127	Angkorin saavutus on osaksi yhteyksissä: kausi ja varasto, maa ja liike, pyhät paikat ja arjen tarpeet.
+128	Historia näyttää infrastruktuurin jatkuvana suhteena ihmisten, ympäristön ja hoidon välillä, ei vain kerran valmistuneena rakenteena.
+129	Katso vielä veden rajaa kivessä. Pieni jälki avaa nyt kaupungin, ja kaupunki avaa kokonaisen maiseman.

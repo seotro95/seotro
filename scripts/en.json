@@ -1,0 +1,776 @@
+[
+  {
+    "scene": 1,
+    "start_seconds": 0,
+    "duration_seconds": 10,
+    "text": "A dark mark runs along an ancient stone. It looks almost insignificant, until you realize that water helped shape an entire city."
+  },
+  {
+    "scene": 2,
+    "start_seconds": 10,
+    "duration_seconds": 10,
+    "text": "At Angkor, the towers catch our attention first. But the more surprising structure spreads outward, across a landscape of channels, embankments, and reservoirs."
+  },
+  {
+    "scene": 3,
+    "start_seconds": 20,
+    "duration_seconds": 10,
+    "text": "Follow that structure, and the familiar picture changes. A temple becomes part of a city, and a city becomes part of a watershed."
+  },
+  {
+    "scene": 4,
+    "start_seconds": 30,
+    "duration_seconds": 10,
+    "text": "Our question is simple: how did people organize life in a place where water could arrive in abundance, then become difficult to find?"
+  },
+  {
+    "scene": 5,
+    "start_seconds": 40,
+    "duration_seconds": 10,
+    "text": "The answer connects rain, terrain, farming, belief, political power, and ordinary maintenance. It also changes how we understand Angkor's later transformations."
+  },
+  {
+    "scene": 6,
+    "start_seconds": 50,
+    "duration_seconds": 10,
+    "text": "Begin in present-day Cambodia, near Siem Reap, north of the great Tonle Sap lake. Here, stone monuments stand within a much wider inhabited landscape."
+  },
+  {
+    "scene": 7,
+    "start_seconds": 60,
+    "duration_seconds": 10,
+    "text": "Angkor was a major center of the Khmer world over many centuries. Its form changed as rulers, communities, and priorities changed."
+  },
+  {
+    "scene": 8,
+    "start_seconds": 70,
+    "duration_seconds": 10,
+    "text": "The surviving temples provide landmarks, but a city also needs places to live, grow food, travel, exchange goods, and manage waste."
+  },
+  {
+    "scene": 9,
+    "start_seconds": 80,
+    "duration_seconds": 10,
+    "text": "Much everyday construction used materials that survive less clearly than stone. The missing roofs can make the remaining monuments seem misleadingly isolated."
+  },
+  {
+    "scene": 10,
+    "start_seconds": 90,
+    "duration_seconds": 10,
+    "text": "Look beyond the carved doorway. A raised line across the ground may be an embankment; a shallow depression may preserve another part of the story."
+  },
+  {
+    "scene": 11,
+    "start_seconds": 100,
+    "duration_seconds": 10,
+    "text": "Those features require investigation. Shape alone cannot tell us when something was built, how it functioned, or whether it changed through time."
+  },
+  {
+    "scene": 12,
+    "start_seconds": 110,
+    "duration_seconds": 10,
+    "text": "Yet together they reveal the scale of the question. Angkor's history extends beyond the boundaries of a single famous temple."
+  },
+  {
+    "scene": 13,
+    "start_seconds": 120,
+    "duration_seconds": 10,
+    "text": "Angkor Wat, built in the early twelfth century under Suryavarman the Second, offers a powerful starting point for that wider journey."
+  },
+  {
+    "scene": 14,
+    "start_seconds": 130,
+    "duration_seconds": 10,
+    "text": "Its original dedication to Vishnu and its later Buddhist history remind us that these places carried changing religious meanings as well as physical structures."
+  },
+  {
+    "scene": 15,
+    "start_seconds": 140,
+    "duration_seconds": 10,
+    "text": "The moat around a temple can express an ordered sacred world while also affecting water, soil, and the monument's immediate setting."
+  },
+  {
+    "scene": 16,
+    "start_seconds": 150,
+    "duration_seconds": 10,
+    "text": "To understand the relationship, leave the towers behind for a moment. Watch where the rain comes from, and where the ground allows it to go."
+  },
+  {
+    "scene": 17,
+    "start_seconds": 160,
+    "duration_seconds": 10,
+    "text": "The region has a strongly seasonal monsoon climate. Wet months and dry months create very different conditions within the same landscape."
+  },
+  {
+    "scene": 18,
+    "start_seconds": 170,
+    "duration_seconds": 10,
+    "text": "During the rains, water reaches roofs, fields, paths, streams, and low ground. The important question becomes how much arrives, how quickly, and where."
+  },
+  {
+    "scene": 19,
+    "start_seconds": 180,
+    "duration_seconds": 10,
+    "text": "A heavy storm can overwhelm a channel even in a year that later brings shortage. Abundance and scarcity are connected by timing."
+  },
+  {
+    "scene": 20,
+    "start_seconds": 190,
+    "duration_seconds": 10,
+    "text": "When the dry season advances, stored water and reliable access become more important. A useful system must respond to both parts of the year."
+  },
+  {
+    "scene": 21,
+    "start_seconds": 200,
+    "duration_seconds": 10,
+    "text": "North of Angkor, higher terrain helps define catchments that feed the broader plain. Water follows gravity, though people can redirect its pathways."
+  },
+  {
+    "scene": 22,
+    "start_seconds": 210,
+    "duration_seconds": 10,
+    "text": "That gives the landscape a basic direction, but small differences in elevation matter. A gentle slope can determine which field receives water."
+  },
+  {
+    "scene": 23,
+    "start_seconds": 220,
+    "duration_seconds": 10,
+    "text": "The ground is therefore part of the infrastructure. A channel is useful only in relation to the land around and below it."
+  },
+  {
+    "scene": 24,
+    "start_seconds": 230,
+    "duration_seconds": 10,
+    "text": "To the south, Tonle Sap forms a major part of the regional water world, with seasonal expansion and contraction linked to the wider river system."
+  },
+  {
+    "scene": 25,
+    "start_seconds": 240,
+    "duration_seconds": 10,
+    "text": "Its famous seasonal flow reversal belongs to a much larger hydrological setting. It should not be confused with every local channel at Angkor."
+  },
+  {
+    "scene": 26,
+    "start_seconds": 250,
+    "duration_seconds": 10,
+    "text": "Lake, plain, streams, rainfall, and groundwater interact at different scales. A simple arrow on a map cannot capture every connection."
+  },
+  {
+    "scene": 27,
+    "start_seconds": 260,
+    "duration_seconds": 10,
+    "text": "For people living here, these were practical relationships. The distance to water, the state of a crossing, and the timing of cultivation mattered daily."
+  },
+  {
+    "scene": 28,
+    "start_seconds": 270,
+    "duration_seconds": 10,
+    "text": "The challenge was not merely collecting the largest possible volume. It was moving, retaining, and releasing water in ways that served changing needs."
+  },
+  {
+    "scene": 29,
+    "start_seconds": 280,
+    "duration_seconds": 10,
+    "text": "Sometimes that meant slowing a flow. Elsewhere it meant giving excess water a route onward before it damaged fields or structures."
+  },
+  {
+    "scene": 30,
+    "start_seconds": 290,
+    "duration_seconds": 10,
+    "text": "Storage and drainage can therefore belong to the same story. A landscape needs room for water to stay and routes for it to leave."
+  },
+  {
+    "scene": 31,
+    "start_seconds": 300,
+    "duration_seconds": 10,
+    "text": "Now the outlines beyond the temples become more meaningful. Long banks and broad basins represent attempts to work with those seasonal differences."
+  },
+  {
+    "scene": 32,
+    "start_seconds": 310,
+    "duration_seconds": 10,
+    "text": "The next step is to understand the great reservoirs, without assuming that every one had exactly the same purpose or history."
+  },
+  {
+    "scene": 33,
+    "start_seconds": 320,
+    "duration_seconds": 10,
+    "text": "Large rectangular reservoirs at Angkor are commonly called barays. Their banks created substantial spaces for holding water within a relatively gentle landscape."
+  },
+  {
+    "scene": 34,
+    "start_seconds": 330,
+    "duration_seconds": 10,
+    "text": "The West Baray remains one of the most striking examples. From above, its long geometry stands apart from the smaller textures around it."
+  },
+  {
+    "scene": 35,
+    "start_seconds": 340,
+    "duration_seconds": 10,
+    "text": "The East Baray preserves another major outline. Its present appearance differs from a fully flooded basin, reminding us that landscapes keep changing."
+  },
+  {
+    "scene": 36,
+    "start_seconds": 350,
+    "duration_seconds": 10,
+    "text": "Other reservoirs and temple basins belonged to different phases of development. The network was assembled over time rather than delivered as one finished plan."
+  },
+  {
+    "scene": 37,
+    "start_seconds": 360,
+    "duration_seconds": 10,
+    "text": "A reservoir's size is impressive, but size alone does not explain operation. We need to ask how water entered, moved, and left."
+  },
+  {
+    "scene": 38,
+    "start_seconds": 370,
+    "duration_seconds": 10,
+    "text": "An embankment has to retain water while resisting erosion. Its height, material, and condition affect what the basin can actually do."
+  },
+  {
+    "scene": 39,
+    "start_seconds": 380,
+    "duration_seconds": 10,
+    "text": "Inlets and outlets connect storage to the surrounding network. Their positions can matter as much as the broad shape visible in a photograph."
+  },
+  {
+    "scene": 40,
+    "start_seconds": 390,
+    "duration_seconds": 10,
+    "text": "Sediment adds another complication. Flowing water carries material, and deposition can gradually alter the depth of a basin or the capacity of a channel."
+  },
+  {
+    "scene": 41,
+    "start_seconds": 400,
+    "duration_seconds": 10,
+    "text": "Maintenance is therefore part of the design's life. A structure that works one season may need clearing or repair before the next."
+  },
+  {
+    "scene": 42,
+    "start_seconds": 410,
+    "duration_seconds": 10,
+    "text": "Reservoirs also belonged to a world of temples and royal authority. Their meanings cannot be reduced to a modern engineering diagram alone."
+  },
+  {
+    "scene": 43,
+    "start_seconds": 420,
+    "duration_seconds": 10,
+    "text": "Water could support practical needs and religious symbolism at the same time. These roles could overlap, with their balance changing between places and periods."
+  },
+  {
+    "scene": 44,
+    "start_seconds": 430,
+    "duration_seconds": 10,
+    "text": "Researchers have debated how particular barays served irrigation and other functions. The responsible answer depends on evidence for each structure and its connections."
+  },
+  {
+    "scene": 45,
+    "start_seconds": 440,
+    "duration_seconds": 10,
+    "text": "A broad basin does not prove that every nearby field received water from it. Elevation, channels, outlets, and dates must fit together."
+  },
+  {
+    "scene": 46,
+    "start_seconds": 450,
+    "duration_seconds": 10,
+    "text": "Nor should today's water level be treated as a photograph of every earlier century. Silting, alteration, repair, and changing use can reshape a reservoir."
+  },
+  {
+    "scene": 47,
+    "start_seconds": 460,
+    "duration_seconds": 10,
+    "text": "Think of the barays as major parts within a larger arrangement. Their importance becomes clearer when we follow the lines between them."
+  },
+  {
+    "scene": 48,
+    "start_seconds": 470,
+    "duration_seconds": 10,
+    "text": "Those lines take us to the network itself: streams, channels, banks, crossings, and junctions spread across the inhabited plain."
+  },
+  {
+    "scene": 49,
+    "start_seconds": 480,
+    "duration_seconds": 10,
+    "text": "A channel gives water a preferred route. But its behavior depends on slope, depth, width, roughness, and the amount arriving upstream."
+  },
+  {
+    "scene": 50,
+    "start_seconds": 490,
+    "duration_seconds": 10,
+    "text": "Gravity supplies the movement. Human work can change the route, divide a flow, or connect places that would otherwise receive different amounts."
+  },
+  {
+    "scene": 51,
+    "start_seconds": 500,
+    "duration_seconds": 10,
+    "text": "At a junction, a small change can have wider consequences. More water entering one branch may mean less reaching another."
+  },
+  {
+    "scene": 52,
+    "start_seconds": 510,
+    "duration_seconds": 10,
+    "text": "A raised bank may also carry a route across wet ground. Transport and water management can share the same physical line."
+  },
+  {
+    "scene": 53,
+    "start_seconds": 520,
+    "duration_seconds": 10,
+    "text": "Crossings create another negotiation. A path needs continuity, while flowing water needs enough room to pass without undermining the structure."
+  },
+  {
+    "scene": 54,
+    "start_seconds": 530,
+    "duration_seconds": 10,
+    "text": "The system includes movement as well as storage. Following only the biggest reservoirs would miss many of the relationships that made everyday life possible."
+  },
+  {
+    "scene": 55,
+    "start_seconds": 540,
+    "duration_seconds": 10,
+    "text": "Natural streams were also part of the setting. People modified waterways within a landscape that already had its own drainage patterns."
+  },
+  {
+    "scene": 56,
+    "start_seconds": 550,
+    "duration_seconds": 10,
+    "text": "That distinction matters when we draw the map. Some lines were cut, some raised, some redirected, and some inherited from older landforms."
+  },
+  {
+    "scene": 57,
+    "start_seconds": 560,
+    "duration_seconds": 10,
+    "text": "A network can grow by connecting earlier pieces. Each addition may solve a local problem while changing conditions somewhere else."
+  },
+  {
+    "scene": 58,
+    "start_seconds": 570,
+    "duration_seconds": 10,
+    "text": "Over generations, that creates complexity. Understanding the whole requires knowing which elements existed together, not simply drawing every surviving feature at once."
+  },
+  {
+    "scene": 59,
+    "start_seconds": 580,
+    "duration_seconds": 10,
+    "text": "An abandoned channel beside a later one does not necessarily show two routes operating simultaneously. Archaeological time must stay visible on the map."
+  },
+  {
+    "scene": 60,
+    "start_seconds": 590,
+    "duration_seconds": 10,
+    "text": "This is why excavation and dating matter alongside aerial views. A beautiful outline needs a history before it becomes an explanation."
+  },
+  {
+    "scene": 61,
+    "start_seconds": 600,
+    "duration_seconds": 10,
+    "text": "Imagine a modest stream arriving after rain. At one point it spreads into a basin; farther along, a narrow passage concentrates the flow."
+  },
+  {
+    "scene": 62,
+    "start_seconds": 610,
+    "duration_seconds": 10,
+    "text": "The same water can behave gently or forcefully as the route changes. A weak bank or blocked opening can affect places well downstream."
+  },
+  {
+    "scene": 63,
+    "start_seconds": 620,
+    "duration_seconds": 10,
+    "text": "No single view from a tower reveals all of this. The city must be read across distances and at the scale of small details."
+  },
+  {
+    "scene": 64,
+    "start_seconds": 630,
+    "duration_seconds": 10,
+    "text": "And every line ultimately leads back to people: the households, workers, farmers, and religious communities who used and maintained the landscape."
+  },
+  {
+    "scene": 65,
+    "start_seconds": 640,
+    "duration_seconds": 10,
+    "text": "Angkor was more than a compact cluster of stone buildings. Evidence reveals an extensive, relatively low-density urban landscape with many connected spaces."
+  },
+  {
+    "scene": 66,
+    "start_seconds": 650,
+    "duration_seconds": 10,
+    "text": "Domestic areas, ponds, cultivated ground, roads, and temple precincts belonged within that wider pattern. Their arrangement varied across places and time."
+  },
+  {
+    "scene": 67,
+    "start_seconds": 660,
+    "duration_seconds": 10,
+    "text": "A household pond could bring water closer to daily activities. A local feature might matter greatly even beside a much larger reservoir."
+  },
+  {
+    "scene": 68,
+    "start_seconds": 670,
+    "duration_seconds": 10,
+    "text": "Rice cultivation depended on practical knowledge of seasons and land. Water management involved choices about timing as well as physical structures."
+  },
+  {
+    "scene": 69,
+    "start_seconds": 680,
+    "duration_seconds": 10,
+    "text": "A field can suffer from too little water, too much water, or water arriving at the wrong stage of growth."
+  },
+  {
+    "scene": 70,
+    "start_seconds": 690,
+    "duration_seconds": 10,
+    "text": "The people working that ground understood local differences through repeated experience. The landscape was shaped by many decisions, not only royal commands."
+  },
+  {
+    "scene": 71,
+    "start_seconds": 700,
+    "duration_seconds": 10,
+    "text": "Large works still required organization, labor, materials, and continuing attention. Political authority and community effort met in infrastructure that needed to keep functioning."
+  },
+  {
+    "scene": 72,
+    "start_seconds": 710,
+    "duration_seconds": 10,
+    "text": "Repair could be as important as construction. Clearing sediment, strengthening a bank, or reopening a passage rarely produces a spectacular monument."
+  },
+  {
+    "scene": 73,
+    "start_seconds": 720,
+    "duration_seconds": 10,
+    "text": "Yet such work helps explain how a network endures. The ordinary actions missing from a postcard may have supported the extraordinary skyline."
+  },
+  {
+    "scene": 74,
+    "start_seconds": 730,
+    "duration_seconds": 10,
+    "text": "We should also remember the materials that disappeared. Wood, plant fibers, and earthen surfaces leave a different record from carved sandstone."
+  },
+  {
+    "scene": 75,
+    "start_seconds": 740,
+    "duration_seconds": 10,
+    "text": "That uneven survival affects our imagination. A stone temple can appear alone because its surrounding houses no longer stand above the ground."
+  },
+  {
+    "scene": 76,
+    "start_seconds": 750,
+    "duration_seconds": 10,
+    "text": "Archaeology tries to rebuild those relationships from traces, without pretending that every roof, occupation, or population number is known exactly."
+  },
+  {
+    "scene": 77,
+    "start_seconds": 760,
+    "duration_seconds": 10,
+    "text": "The result is a richer city: inhabited, productive, connected, and altered through time. Its water network belonged within that living world."
+  },
+  {
+    "scene": 78,
+    "start_seconds": 770,
+    "duration_seconds": 10,
+    "text": "This also changes the meaning of discovery. Angkor was not simply an empty place waiting for outsiders to notice it."
+  },
+  {
+    "scene": 79,
+    "start_seconds": 780,
+    "duration_seconds": 10,
+    "text": "Local knowledge, religious continuity, earlier scholarship, and modern research all belong in the history of understanding the site."
+  },
+  {
+    "scene": 80,
+    "start_seconds": 790,
+    "duration_seconds": 10,
+    "text": "New techniques expand what can be recorded. They do not erase the people who already knew these places or continued caring for them."
+  },
+  {
+    "scene": 81,
+    "start_seconds": 800,
+    "duration_seconds": 10,
+    "text": "From the air, some features become easier to recognize. Long alignments emerge where a person on the ground sees only scattered rises and hollows."
+  },
+  {
+    "scene": 82,
+    "start_seconds": 810,
+    "duration_seconds": 10,
+    "text": "Airborne laser scanning, often called lidar, has added important detail to the mapping of the greater Angkor landscape."
+  },
+  {
+    "scene": 83,
+    "start_seconds": 820,
+    "duration_seconds": 10,
+    "text": "Laser measurements can help model ground surfaces through gaps in vegetation. Processing separates useful returns; it does not magically photograph every buried object."
+  },
+  {
+    "scene": 84,
+    "start_seconds": 830,
+    "duration_seconds": 10,
+    "text": "The result can reveal subtle earthworks, channels, and settlement patterns. These are clues to investigate rather than a complete movie of the past."
+  },
+  {
+    "scene": 85,
+    "start_seconds": 840,
+    "duration_seconds": 10,
+    "text": "A shaded terrain model makes small changes in elevation visible. Changing the virtual light can reveal a line that was difficult to notice before."
+  },
+  {
+    "scene": 86,
+    "start_seconds": 850,
+    "duration_seconds": 10,
+    "text": "But a clear-looking line still needs interpretation. Researchers compare mapping with field observations, excavated material, earlier plans, and other evidence."
+  },
+  {
+    "scene": 87,
+    "start_seconds": 860,
+    "duration_seconds": 10,
+    "text": "A modern track, an old bank, and a natural feature may resemble one another in certain views. Context helps distinguish them."
+  },
+  {
+    "scene": 88,
+    "start_seconds": 870,
+    "duration_seconds": 10,
+    "text": "Chronology remains essential. Mapping may show where a feature lies, while excavation and dating help establish when it mattered."
+  },
+  {
+    "scene": 89,
+    "start_seconds": 880,
+    "duration_seconds": 10,
+    "text": "Sediment records offer another perspective. Layers can preserve changes in deposition, water conditions, or disturbance, though each record has its own limits."
+  },
+  {
+    "scene": 90,
+    "start_seconds": 890,
+    "duration_seconds": 10,
+    "text": "Together, these methods allow different kinds of evidence to check one another. A stronger explanation connects patterns rather than relying on one dramatic image."
+  },
+  {
+    "scene": 91,
+    "start_seconds": 900,
+    "duration_seconds": 10,
+    "text": "They also show why a reconstruction should be labeled. A plausible canal scene is an illustration, not footage of a documented ancient event."
+  },
+  {
+    "scene": 92,
+    "start_seconds": 910,
+    "duration_seconds": 10,
+    "text": "The goal is to make relationships understandable: where water could travel, where people lived, and how a change might move through the network."
+  },
+  {
+    "scene": 93,
+    "start_seconds": 920,
+    "duration_seconds": 10,
+    "text": "Those questions become especially important when the conditions outside the system change. A network designed through experience can still face unfamiliar pressures."
+  },
+  {
+    "scene": 94,
+    "start_seconds": 930,
+    "duration_seconds": 10,
+    "text": "To see that part of the story, leave the stone briefly and look at evidence for climate, including records beyond Angkor itself."
+  },
+  {
+    "scene": 95,
+    "start_seconds": 940,
+    "duration_seconds": 10,
+    "text": "Tree-ring studies from mainland Southeast Asia have contributed evidence for severe droughts and unusually wet periods during parts of the fourteenth and fifteenth centuries."
+  },
+  {
+    "scene": 96,
+    "start_seconds": 950,
+    "duration_seconds": 10,
+    "text": "These records help describe regional climate variability. They must be connected carefully to local conditions and archaeological changes, rather than treated as identical clocks."
+  },
+  {
+    "scene": 97,
+    "start_seconds": 960,
+    "duration_seconds": 10,
+    "text": "A long drought reduces available water. It can also change the work needed to keep channels, fields, and settlements functioning."
+  },
+  {
+    "scene": 98,
+    "start_seconds": 970,
+    "duration_seconds": 10,
+    "text": "Very wet periods bring a different challenge. Rapid flows may carry more sediment, erode banks, and overload passages that previously seemed adequate."
+  },
+  {
+    "scene": 99,
+    "start_seconds": 980,
+    "duration_seconds": 10,
+    "text": "Alternating stresses can be difficult for a connected network. The changes that help during shortage may not solve the next episode of intense rain."
+  },
+  {
+    "scene": 100,
+    "start_seconds": 990,
+    "duration_seconds": 10,
+    "text": "A complicated system can spread benefits widely, yet also transmit disturbance. What happens upstream may become someone else's problem far away."
+  },
+  {
+    "scene": 101,
+    "start_seconds": 1000,
+    "duration_seconds": 10,
+    "text": "That does not mean every part failed together. Local repair, altered routes, and changing use could produce different outcomes across the landscape."
+  },
+  {
+    "scene": 102,
+    "start_seconds": 1010,
+    "duration_seconds": 10,
+    "text": "Researchers investigate evidence for damage and modification in parts of Angkor's water network. The sequence matters more than a simple image of sudden collapse."
+  },
+  {
+    "scene": 103,
+    "start_seconds": 1020,
+    "duration_seconds": 10,
+    "text": "Climate is therefore a major line of inquiry, not a complete explanation on its own. Institutions, maintenance, settlement, and political circumstances also matter."
+  },
+  {
+    "scene": 104,
+    "start_seconds": 1030,
+    "duration_seconds": 10,
+    "text": "The fifteenth century also involved conflict and changing political connections. Movements of authority and activity cannot be explained by rainfall alone."
+  },
+  {
+    "scene": 105,
+    "start_seconds": 1040,
+    "duration_seconds": 10,
+    "text": "The year fourteen thirty-one often appears in short summaries of Angkor's history. One date should not be made to empty an entire region overnight."
+  },
+  {
+    "scene": 106,
+    "start_seconds": 1050,
+    "duration_seconds": 10,
+    "text": "Some places changed or declined while others remained meaningful. Angkor Wat, in particular, continued to have a religious history after the royal center shifted."
+  },
+  {
+    "scene": 107,
+    "start_seconds": 1060,
+    "duration_seconds": 10,
+    "text": "The wider transformation unfolded through different processes over time. A single final storm, invasion scene, or deserted street would simplify the evidence too far."
+  },
+  {
+    "scene": 108,
+    "start_seconds": 1070,
+    "duration_seconds": 10,
+    "text": "That slower, uneven story is more demanding, but also more human. People respond, adapt, repair, move, and continue practices under changing conditions."
+  },
+  {
+    "scene": 109,
+    "start_seconds": 1080,
+    "duration_seconds": 10,
+    "text": "The water network gives us one way to study those responses. It connects large environmental pressures with decisions made at particular places."
+  },
+  {
+    "scene": 110,
+    "start_seconds": 1090,
+    "duration_seconds": 10,
+    "text": "It also warns against an easy verdict on ancient engineering. Building a useful system and sustaining it across generations are related but different achievements."
+  },
+  {
+    "scene": 111,
+    "start_seconds": 1100,
+    "duration_seconds": 10,
+    "text": "Every successful arrangement depends on conditions, knowledge, labor, and resources. When those change, the same structures may take on new roles."
+  },
+  {
+    "scene": 112,
+    "start_seconds": 1110,
+    "duration_seconds": 10,
+    "text": "Angkor's later history belongs within its story, rather than serving only as a dramatic ending to the age of construction."
+  },
+  {
+    "scene": 113,
+    "start_seconds": 1120,
+    "duration_seconds": 10,
+    "text": "Today, water remains part of caring for Angkor. Rain, drainage, vegetation, and the condition of structures all influence conservation work."
+  },
+  {
+    "scene": 114,
+    "start_seconds": 1130,
+    "duration_seconds": 10,
+    "text": "A channel beside a visitor path may seem less impressive than a carved wall. Keeping water moving appropriately can help protect that wall's setting."
+  },
+  {
+    "scene": 115,
+    "start_seconds": 1140,
+    "duration_seconds": 10,
+    "text": "Conservation requires observation and local expertise. An intervention in one place should be considered within the larger landscape, not judged only by appearance."
+  },
+  {
+    "scene": 116,
+    "start_seconds": 1150,
+    "duration_seconds": 10,
+    "text": "The site is also connected to contemporary communities, livelihoods, religious life, and tourism. Heritage is a relationship with the present as well as the past."
+  },
+  {
+    "scene": 117,
+    "start_seconds": 1160,
+    "duration_seconds": 10,
+    "text": "A respectful visit follows authorized routes and local guidance. Climbing a fragile bank or entering a closed structure is not required to understand it."
+  },
+  {
+    "scene": 118,
+    "start_seconds": 1170,
+    "duration_seconds": 10,
+    "text": "The same applies to filming. Permitted viewpoints, adult everyday life, and careful illustrations can explain the story without staging sacred practices."
+  },
+  {
+    "scene": 119,
+    "start_seconds": 1180,
+    "duration_seconds": 10,
+    "text": "Now return to the opening image. That mark on stone belongs to a world where water touches architecture, ground, work, and memory."
+  },
+  {
+    "scene": 120,
+    "start_seconds": 1190,
+    "duration_seconds": 10,
+    "text": "We began with towers, then found the lines between them. Those lines led to fields, households, reservoirs, changing seasons, and continuing responsibilities."
+  },
+  {
+    "scene": 121,
+    "start_seconds": 1200,
+    "duration_seconds": 10,
+    "text": "The temples remain remarkable. Their scale becomes more meaningful when we also see the smaller actions and wider connections that supported them."
+  },
+  {
+    "scene": 122,
+    "start_seconds": 1210,
+    "duration_seconds": 10,
+    "text": "A city can survive in evidence unevenly. Stone endures visibly, while a former channel may require patient mapping before its role becomes clear."
+  },
+  {
+    "scene": 123,
+    "start_seconds": 1220,
+    "duration_seconds": 10,
+    "text": "Reading both together changes the question from who built a monument to how an inhabited landscape could keep working."
+  },
+  {
+    "scene": 124,
+    "start_seconds": 1230,
+    "duration_seconds": 10,
+    "text": "It also leaves important questions open: the history of particular structures, the distribution of water, and the choices communities made as conditions changed."
+  },
+  {
+    "scene": 125,
+    "start_seconds": 1240,
+    "duration_seconds": 10,
+    "text": "Future research can refine those answers. Protecting the remaining traces allows that work to continue rather than fixing the story in its simplest form."
+  },
+  {
+    "scene": 126,
+    "start_seconds": 1250,
+    "duration_seconds": 10,
+    "text": "Across the plain, water still gathers, moves, and leaves marks. The processes are familiar, even when the arrangements around them are centuries old."
+  },
+  {
+    "scene": 127,
+    "start_seconds": 1260,
+    "duration_seconds": 10,
+    "text": "Angkor's achievement lies partly in the connections: between season and storage, land and movement, sacred places and everyday needs."
+  },
+  {
+    "scene": 128,
+    "start_seconds": 1270,
+    "duration_seconds": 10,
+    "text": "Its changing history reminds us that infrastructure is a continuing relationship among people, environment, and care, not merely a structure completed once."
+  },
+  {
+    "scene": 129,
+    "start_seconds": 1280,
+    "duration_seconds": 10,
+    "text": "Look again at the waterline on the stone. A small trace now opens onto a city, and a city opens onto a whole landscape."
+  }
+]
