@@ -1,7 +1,7 @@
 import concurrent.futures,hashlib,json,sys,wave
 from pathlib import Path
 from render_common import R,S,A,PROFILES,normalized,finish,accent,digest
-from online_transport import request,configure,BACKENDS
+from online_transport import request,configure,BACKENDS,IncompleteSpeechError
 preview='--preview' in sys.argv
 assert json.loads((R/'DOCUMENT_DELIVERY_STATE.json').read_text())['documents_published']
 rows=json.loads((S/'en-US.json').read_text());assert len(rows)==129 and rows[-1]['end']==1282
@@ -45,7 +45,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
   try:future.result()
   except Exception as e:
    import edge_tts
-   if isinstance(e,edge_tts.exceptions.NoAudioReceived):pending.append(futures[future]);print('ENGLISH_GROUP_PENDING',futures[future]+1,flush=True)
+   if isinstance(e,(edge_tts.exceptions.NoAudioReceived,IncompleteSpeechError)):pending.append(futures[future]);print('ENGLISH_GROUP_PENDING',futures[future]+1,flush=True)
    else:
     for f in futures:f.cancel()
     raise

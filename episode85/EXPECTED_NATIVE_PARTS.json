@@ -1,0 +1,342 @@
+{
+  "mww": [
+    [
+      {
+        "filename": "raw-001-01.wav",
+        "text_sha256": "441fee699d380de223a6e23745a7f9d545d2840ea95d4a4c206f4378d8455b31"
+      },
+      {
+        "filename": "raw-001-02.wav",
+        "text_sha256": "cafe2353c78fbac674e04f005cf26ec04ce0f34776b9df135aa4aac5f0a34fd9"
+      },
+      {
+        "filename": "raw-001-03.wav",
+        "text_sha256": "633053fc0f374820738778ffa62d45150414e9281a0c2d72d7624c255c6f0ffa"
+      },
+      {
+        "filename": "raw-001-04.wav",
+        "text_sha256": "cb9adb74e77bffdad6d5e119dc3c438d0eabea8cb04fa3419a812ff39610d52b"
+      },
+      {
+        "filename": "raw-001-05.wav",
+        "text_sha256": "92ff168f7b18844629daa820f929bbb08bfd95ea1ba1b9f90cc38d1c0eb35e8b"
+      },
+      {
+        "filename": "raw-001-06.wav",
+        "text_sha256": "19771637a01ea6bb0d7068638f19949a211ef4d60ae4a685dd127c206b5b9ea0"
+      }
+    ],
+    [
+      {
+        "filename": "raw-002-01.wav",
+        "text_sha256": "be8662f0f2c4ee9e61cdba123de147252f728fbeba9b60645eaba17b868d37ab"
+      },
+      {
+        "filename": "raw-002-02.wav",
+        "text_sha256": "b33404ece9f0db51ce72e9078241dc9eb48ecb3f68eca78ea932abc9083cd350"
+      },
+      {
+        "filename": "raw-002-03.wav",
+        "text_sha256": "92837a62284511d8659b3776744244044b928196d30dc9cc84d653933990a7d4"
+      },
+      {
+        "filename": "raw-002-04.wav",
+        "text_sha256": "c08ffaa06abbbedb728f063a63c0680a4594bec5d6e6ed2b79fb5640c4f5b168"
+      },
+      {
+        "filename": "raw-002-05.wav",
+        "text_sha256": "2e6110d478182210d8277ab653f64eb6285e19e08fb0095a37cf071f95c6e7c4"
+      },
+      {
+        "filename": "raw-002-06.wav",
+        "text_sha256": "a69eaf4afbe9e599eeac426dca2f24b6f6ba8cdd3c241eeb9b6cc5a5dc350a83"
+      }
+    ],
+    [
+      {
+        "filename": "raw-003-01.wav",
+        "text_sha256": "fc8eae84534821eb9e095c19fd54fa23ae9b0e8607f7bd7eff52a3355790e1f8"
+      },
+      {
+        "filename": "raw-003-02.wav",
+        "text_sha256": "ce9c30da892f3f583de1d9948a6e5a7d65ace2455d0f165b0ec53cc283118c20"
+      },
+      {
+        "filename": "raw-003-03.wav",
+        "text_sha256": "fe3b0e8a3c7fadf99203863f6b7c50a56f1d08ff7d9bb9bc8a41387f62a63ac2"
+      },
+      {
+        "filename": "raw-003-04.wav",
+        "text_sha256": "4f0950de56fd525477a3199c21f6221e2c7e5856359db0cf0283a72105b71991"
+      },
+      {
+        "filename": "raw-003-05.wav",
+        "text_sha256": "56c2ef00885a4a0452276747f130eb5f70f4596095d8a3d47e5eab843b20c8da"
+      },
+      {
+        "filename": "raw-003-06.wav",
+        "text_sha256": "4387eeeef46aaf13600f75d1cac0de1c2eac48686c306861d69684cad584e38c"
+      }
+    ],
+    [
+      {
+        "filename": "raw-004-01.wav",
+        "text_sha256": "b292cbafa4d2b07c2d7fef0497b91a356e903f2b6fe93d1985381c9cf50f973a"
+      },
+      {
+        "filename": "raw-004-02.wav",
+        "text_sha256": "6b642fb6bc63119b38fb37adba2b69fc02ed437bd11484114c2cc683398c0869"
+      },
+      {
+        "filename": "raw-004-03.wav",
+        "text_sha256": "c8ddb7de4c527bfa691d5673a5ff0909de24769e0c462ecad07d2115815c669b"
+      },
+      {
+        "filename": "raw-004-04.wav",
+        "text_sha256": "a87a850c8e69fa7bd265fd55331d01a219a7a07e46b17c347ab3b1c80cd6bd6e"
+      },
+      {
+        "filename": "raw-004-05.wav",
+        "text_sha256": "0c1c3791823975318740951b189827bbefd0575f70fc2a4fdd160300f33195ff"
+      },
+      {
+        "filename": "raw-004-06.wav",
+        "text_sha256": "fecce5335d6ee133af11f22aa627030ec1feb991aca9c8fc87115d0daeb09494"
+      }
+    ],
+    [
+      {
+        "filename": "raw-005-01.wav",
+        "text_sha256": "6818e048dfd69a81b363c960bf7764f120fec72d59f01f33ca8917833aa7b1d0"
+      },
+      {
+        "filename": "raw-005-02.wav",
+        "text_sha256": "a99de9a9c8ec59513a061d884b8beecbc461a17135334e1166e7be30acad2189"
+      },
+      {
+        "filename": "raw-005-03.wav",
+        "text_sha256": "5ebc08a778c8f425db80c6d7ccbf2bb9614d103007b889f540970352018855b7"
+      },
+      {
+        "filename": "raw-005-04.wav",
+        "text_sha256": "fe854512edfa273d56bcddc7c8d195ba91ce34b2d42731ef64072a7468568200"
+      },
+      {
+        "filename": "raw-005-05.wav",
+        "text_sha256": "84b700a5236d5dd5f431b266f52ae9e33873a1644b19ce380bd0e97d8d669c1e"
+      },
+      {
+        "filename": "raw-005-06.wav",
+        "text_sha256": "67cb15c32e5db86d61ed0fe46ee480a68a6ac319073cf910f3418be732893d9f"
+      }
+    ],
+    [
+      {
+        "filename": "raw-006-01.wav",
+        "text_sha256": "a11193c355f9f858adfb1e952705fbf6954d83641dba4082e0fbbe197db6e9a2"
+      },
+      {
+        "filename": "raw-006-02.wav",
+        "text_sha256": "a847d337fc6bb277488395c3c2115ef082b6b921ea9bc1901d6de3527e3a9c4b"
+      },
+      {
+        "filename": "raw-006-03.wav",
+        "text_sha256": "5dca3d70251a206f9c1d7e38d68883d9c2ec9ecacc8fcf0c6bcefa12b89a9426"
+      },
+      {
+        "filename": "raw-006-04.wav",
+        "text_sha256": "49c82ee9786a36491f49cd274adfb435b5ca0dda008c39d0d6a77489c314a000"
+      },
+      {
+        "filename": "raw-006-05.wav",
+        "text_sha256": "c827ab4bfaafbdfed2b16bce8b5976548c3072f4d61026fd3df6ab18cc48b10d"
+      },
+      {
+        "filename": "raw-006-06.wav",
+        "text_sha256": "8b9517138550b10253c224778259dda73c2f9d426ec6ad018c7f9edd7d966974"
+      },
+      {
+        "filename": "raw-006-07.wav",
+        "text_sha256": "079cc7331854a9a461878164507e933bd802c0bd4304285793ee7f12f0e5a27c"
+      }
+    ],
+    [
+      {
+        "filename": "raw-007-01.wav",
+        "text_sha256": "51d364de631e2c7f72780d1a31133b96c5e6e8207a2a3b10ea5ba89d9aea9ace"
+      },
+      {
+        "filename": "raw-007-02.wav",
+        "text_sha256": "f0be9eb4ac7a194143d30d25c789f4be89c91e4077bd199b6b2ea987e4f3ec3b"
+      },
+      {
+        "filename": "raw-007-03.wav",
+        "text_sha256": "c1a7eca4108039464deb75e7e60892d4b149799ba8db018c5034cf4cdc012347"
+      },
+      {
+        "filename": "raw-007-04.wav",
+        "text_sha256": "f3d54ee04a023b79b7ac72c8989bc246013e38778a4e914af2c86ddd8d747713"
+      },
+      {
+        "filename": "raw-007-05.wav",
+        "text_sha256": "3fb63d67b0440d7b35ad67d4cb2ca3a1dd4427de8de6c1bd0328c8a82d117869"
+      },
+      {
+        "filename": "raw-007-06.wav",
+        "text_sha256": "eeb2c0cec547dcb3ac1556ce71f85eb50b97d81c48e2ade13790e5879819cfd2"
+      }
+    ],
+    [
+      {
+        "filename": "raw-008-01.wav",
+        "text_sha256": "320dbcc06ebda43644af5f9b92cd34c791d2276c2ad5da927b3d1281b15fbfe2"
+      },
+      {
+        "filename": "raw-008-02.wav",
+        "text_sha256": "519deb10cccc3e202112ad817c28db9318e8f012df7b8b3b6c6ba5e70cbc0b54"
+      },
+      {
+        "filename": "raw-008-03.wav",
+        "text_sha256": "36792fa4debeb7856f295ae46fc6c19820f658328ddc9710341bfe8003b3bd00"
+      },
+      {
+        "filename": "raw-008-04.wav",
+        "text_sha256": "960e17a3a57b4c2f53c5487fa9c45e62e70908b0c5f6dfb612c09c8604b38008"
+      },
+      {
+        "filename": "raw-008-05.wav",
+        "text_sha256": "724589ed6c02f9133fe4826a205d39bbbba0a8bc1931bb5c3a20fe7680bf16a1"
+      },
+      {
+        "filename": "raw-008-06.wav",
+        "text_sha256": "8c041bfefbf20acf474c0b484074b419b2fadceb4f8199e74df8732272bb2fcd"
+      }
+    ],
+    [
+      {
+        "filename": "raw-009-01.wav",
+        "text_sha256": "9e6fdd393e5e8fdf08cd4a1a2b1bda7c28d684d6c6cba2e9dffdd7208380f8b9"
+      },
+      {
+        "filename": "raw-009-02.wav",
+        "text_sha256": "8768b0525d3f1ca25729ed72c9c9fc672bce946906781f7e8b09140a39c9f53f"
+      },
+      {
+        "filename": "raw-009-03.wav",
+        "text_sha256": "a4112e636521c7bfd2b41f12d94600751a23ecf755573ffa1fd9d35ebb08f2d6"
+      },
+      {
+        "filename": "raw-009-04.wav",
+        "text_sha256": "27cec43985d70e1af5990ae1d9a0a72306abab694e46a6bb6d37ad5b64482eaf"
+      },
+      {
+        "filename": "raw-009-05.wav",
+        "text_sha256": "2312b83f2d928991f75e33b67d3bb2f7e7df115b417670eff20e4e4148f1324b"
+      },
+      {
+        "filename": "raw-009-06.wav",
+        "text_sha256": "34f784a53e775d7442d5f04165451298a0caedae8e5cf0d8412325eefa5d7e2d"
+      }
+    ],
+    [
+      {
+        "filename": "raw-010-01.wav",
+        "text_sha256": "0a2757786620ab2a1b2115684e24f169d1297dd3b5764d19ed86d9275cb9a480"
+      },
+      {
+        "filename": "raw-010-02.wav",
+        "text_sha256": "dfcad48bf21b7dc984595aff2f1196f427f0681ff213e5a6881cd63f7c67ffa8"
+      },
+      {
+        "filename": "raw-010-03.wav",
+        "text_sha256": "3cf042936e26c6afdf0a8fca8e484b61ba280191b05ab7ed74bf525bd03e8a83"
+      },
+      {
+        "filename": "raw-010-04.wav",
+        "text_sha256": "9585ce9b8ee7de96617291407b43a92e730d5c92899fecec010fef03880f6934"
+      },
+      {
+        "filename": "raw-010-05.wav",
+        "text_sha256": "697d7f94dcd35b358085cd92dff9db51e51e2c1ac1f901e625f725dfed265b32"
+      },
+      {
+        "filename": "raw-010-06.wav",
+        "text_sha256": "7d47741c22f420dbd98ee315f114269b58644c7d8df6e646c1dfa9c27dc9e35c"
+      }
+    ],
+    [
+      {
+        "filename": "raw-011-01.wav",
+        "text_sha256": "c5e71ab7c86054105ddc2338d92618b572e529982838fad617a39a82f677e6e1"
+      },
+      {
+        "filename": "raw-011-02.wav",
+        "text_sha256": "41845d27dd833a05a4d72266697211d460407f6aa45a3d017b608aec9942b8a0"
+      },
+      {
+        "filename": "raw-011-03.wav",
+        "text_sha256": "3cf261a0a9a4c82083d3fd73fa538d94b15fad172965175b6b1369778e6bcd3e"
+      },
+      {
+        "filename": "raw-011-04.wav",
+        "text_sha256": "6c7a885793daf021ce84f982531a664950381e142db29cada1c918070c341494"
+      },
+      {
+        "filename": "raw-011-05.wav",
+        "text_sha256": "c559d654c5c13ff806621689a4b50c39442d072640d060044ec13c574ea6db1c"
+      },
+      {
+        "filename": "raw-011-06.wav",
+        "text_sha256": "fa0d3699414a4648116079b7e6cf6f5c99399931186499c2dc7c1c99b2891926"
+      },
+      {
+        "filename": "raw-011-07.wav",
+        "text_sha256": "459e2e6f443b504cc707604da187418d421be4d1a8bff6d5a19cb46416a3b641"
+      }
+    ],
+    [
+      {
+        "filename": "raw-012-01.wav",
+        "text_sha256": "3fcd1ef58614823485c63935833da2f25607ed468a5810c9b833bdcc779aed44"
+      },
+      {
+        "filename": "raw-012-02.wav",
+        "text_sha256": "2c78892152ffdc6ac7c2de3d14ee8ee02bed33e111a3ab2c6e5b7d2930d959d4"
+      },
+      {
+        "filename": "raw-012-03.wav",
+        "text_sha256": "dbd6c53028eb1b8c46038f81826a0223eeeaad089817a76b23a9475080433c32"
+      },
+      {
+        "filename": "raw-012-04.wav",
+        "text_sha256": "0b94df683f64072979e2d1e5242081e265f8e9efe084ba6ef8499ed39abc65e8"
+      },
+      {
+        "filename": "raw-012-05.wav",
+        "text_sha256": "f8ae2e061ad7199c8fd0b6c1ebe046e3b9e36e1069ef69616799ea324aa98ea3"
+      },
+      {
+        "filename": "raw-012-06.wav",
+        "text_sha256": "e51be489ac838c78664925339614af369e1c7ab1fc43dde7ea3966edebf29a49"
+      }
+    ],
+    [
+      {
+        "filename": "raw-013-01.wav",
+        "text_sha256": "f1936c4a5b07b108c3caeea5a3bb054841e7115e66eb138c66f12cd21ee05959"
+      },
+      {
+        "filename": "raw-013-02.wav",
+        "text_sha256": "6ec55f27715a6657bd287e937da478f85b6f045fe1a4f74a0803746dc7773dbc"
+      },
+      {
+        "filename": "raw-013-03.wav",
+        "text_sha256": "826563f86f5f53f75d342aee475059ccd1e70f3852936f4807306f56a44adeda"
+      },
+      {
+        "filename": "raw-013-04.wav",
+        "text_sha256": "83b108d902e89e1c5152addd54e2d319589d2b5b6d349f363038fda241bcb31e"
+      }
+    ]
+  ]
+}
