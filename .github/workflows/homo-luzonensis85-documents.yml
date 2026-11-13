@@ -1,0 +1,23 @@
+name: Homo luzonensis85 publish script and120silent prompts
+on:
+  push:
+    branches: [codex/homo-luzonensis85-production-20261113]
+    paths: [.github/workflows/homo-luzonensis85-documents.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: episode85
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate129cues,120prompts and public document release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u episode85/publish_documents.py
