@@ -1,0 +1,746 @@
+[
+  {
+    "scene": 1,
+    "text": "En vanddråbe gør sandet mørkere. Rundt om den synes AlUlas klippevægge at tilhøre en verden uden vand.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.4192829579114914
+  },
+  {
+    "scene": 2,
+    "text": "Men i århundreder har folk krydset denne ørken og fundet mere end tilskyndelse mellem disse enorme stenmure.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.5379629731178284
+  },
+  {
+    "scene": 3,
+    "text": "De fandt vand, dyrkede jord og et sted hvor en vanskelig rejse kunne begynde igen med friske forsyninger.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4186568856239319
+  },
+  {
+    "scene": 4,
+    "text": "Hvorfor konvergerede ruter hertil? Svaret er skrevet over tre sammenhængende landskaber: klippe, vand og rummerne mellem dem.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4245915114879608
+  },
+  {
+    "scene": 5,
+    "text": "Dette er AlUla i det nordvestlige Saudi-Arabien, hvor ørkenen indeholder flere historier snarere end en glemt by.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3060578405857086
+  },
+  {
+    "scene": 6,
+    "text": "Dadan, Jabal Ikmah og Hegra bevarer forskellige dele af den historie, adskilt af tid såvel som afstand.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.32421576976776123
+  },
+  {
+    "scene": 7,
+    "text": "Deres monumenter tiltrækker øjet. Men vores rejse begynder med noget mindre spektakulært, og langt mere nødvendigt for livet.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2842801660299301
+  },
+  {
+    "scene": 8,
+    "text": "Følg vandet, og dalen ændrer sig. Det der ser tomt ud, begynder at afsløre de praktiske betingelser for at overleve.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3096493035554886
+  },
+  {
+    "scene": 9,
+    "text": "Følg de rejsende, og disse betingelser bliver et netværk: steder at stoppe, udveksle varer, dele nyheder, og fortsætte videre.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.374048113822937
+  },
+  {
+    "scene": 10,
+    "text": "Så se tilbage på klipperne. Deres udskåret ansigter viser ambition, tro, hukommelse og ønske om at blive husket.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.42440247535705566
+  },
+  {
+    "scene": 11,
+    "text": "Vi flytter fra sandsten til en handelsverden uden at forlade denne ørkendalen.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.5877198576927185
+  },
+  {
+    "scene": 12,
+    "text": "Og til sidst vil den mindste ting i vores åbningsscene forklare hvorfor de største monumenter kunne eksistere her.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3808059096336365
+  },
+  {
+    "scene": 13,
+    "text": "Før der var karavnspor, var der lag af sediment, som blev deponeret længe før nogen af disse riger kom til at eksistere.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.6344086527824402
+  },
+  {
+    "scene": 14,
+    "text": "Gennem geologisk tid blev løse korn til sandsten. Overlejring og sammenbinding med mineraler skabte en klippe, hvor man kunne udhugge en dør.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.5128682851791382
+  },
+  {
+    "scene": 15,
+    "text": "Stenens tidsalder og skulpturens er forskellige ure. At forveksle dem sletter et enormt tidsrum.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.6328531801700592
+  },
+  {
+    "scene": 16,
+    "text": "Senere landhævning og erosion blotlagde de formationer, vi ser i dag. Vand, vind og forvitring virkede langs svagheder i klippen.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.6406009793281555
+  },
+  {
+    "scene": 17,
+    "text": "Fra vejen kan en klippevæg virke uforanderlig. Tæt på fortæller overfladen om små korn, der hele tiden løsner sig.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.5427135527133942
+  },
+  {
+    "scene": 18,
+    "text": "Hårde og bløde lag forvitrer forskelligt. Den ulige modstand skaber afsatser, hulninger og AlUlas karakteristiske konturer.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.5707621276378632
+  },
+  {
+    "scene": 19,
+    "text": "Elephant Rock har en velkendt silhuette. dens lighed er mindeværdig, men de kræfter der formede den har ingen hensigt eller design.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4201661944389343
+  },
+  {
+    "scene": 20,
+    "text": "Dalbunden er lige så vigtig som silhuetten. Lavt terræn samler afstrømmende vand og sediment fra de omkringliggende skråninger.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.512603834271431
+  },
+  {
+    "scene": 21,
+    "text": "En tør kanal er ikke bevis på at vand aldrig passerer igennem. I ørkenerne kan de stærkeste floder være lejlighedsvis.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.42419859766960144
+  },
+  {
+    "scene": 22,
+    "text": "Regnen kan ændre den kanal hurtigt. Det samme terræn, der giver en rute, kan også koncentrere et farligt vandstrøm.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.45854930579662323
+  },
+  {
+    "scene": 23,
+    "text": "Det er den første forbindelse: klippen former dalen, og dalen bestemmer, hvor vand bevæger sig, samles eller siver ned i jorden.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.498710036277771
+  },
+  {
+    "scene": 24,
+    "text": "For at forstå bosættelsen her, skal vi se under den smukke overflade, mod en ressource der ofte er skjult for synet.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4029476046562195
+  },
+  {
+    "scene": 25,
+    "text": "En oase er ikke blot et grønt stykke, der sker tilfældigt. Dens overlevelse afhænger af vand og vedvarende menneskelig arbejde.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.44695013761520386
+  },
+  {
+    "scene": 26,
+    "text": "I denne dal har grundvand og overfladestrømme understøttet dyrkningen. Deres tilgængelighed har varieret på forskellige steder og i forskellige perioder.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.43541471660137177
+  },
+  {
+    "scene": 27,
+    "text": "En brønd gør skjult vand tilgængeligt. Det gør også geologi til en daglig opgave: at sænke en beholdning, løfte en vægt og fylde et andet fartøj.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.37449289858341217
+  },
+  {
+    "scene": 28,
+    "text": "Vandet i sig selv er kun en del af resultatet. Adgang, vedligeholdelse og deling bestemmer hvor nyttigt en forsyning bliver for et samfund.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4217617064714432
+  },
+  {
+    "scene": 29,
+    "text": "Forestil dig at ankomme efter flere dage på en åben rute. Før en rejsende tænker på gevinst, må han tænke på tørsten, dyrene og det næste trin.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4647129476070404
+  },
+  {
+    "scene": 30,
+    "text": "Vand ændrer afstanden. Et pålideligt stop kan forbinde dele af landet, der ellers ville være meget sværere at krydse.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4157533049583435
+  },
+  {
+    "scene": 31,
+    "text": "Men pålidelig betyder ikke ubegrænset. Hver spand vand indgår i balancen mellem tilførsel, forbrug, fordampning og afgrødernes behov.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.48418451845645905
+  },
+  {
+    "scene": 32,
+    "text": "Daddelpalmer gør oasen synlig på lang afstand. Under kronerne skaber skyggen andre forhold end på bar jord i direkte sol.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.5979553461074829
+  },
+  {
+    "scene": 33,
+    "text": "Denne skygge forklarer hvorfor en oase er et dyrket miljø, hvor planter, jord, vand og arbejdskraft arbejder sammen på forskellige skalaer.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3885524272918701
+  },
+  {
+    "scene": 34,
+    "text": "En kurv dadler er mere end en høst. For en rejsende bliver den til proviant, der kan bæres med ud over palmerne.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3900102227926254
+  },
+  {
+    "scene": 35,
+    "text": "At dyrke mad her krævede gentagne beslutninger, ikke en enkelt gammel opfindelse. Kanaler behøvede opmærksomhed, træer behøvede omsorg og viden skulle videregives.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.38249023258686066
+  },
+  {
+    "scene": 36,
+    "text": "Ikke alle nutidige vandingsanlæg er uændrede siden oldtiden. Dyrkningslandskaber bliver repareret, tilpasset og genopbygget.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.47940611839294434
+  },
+  {
+    "scene": 37,
+    "text": "Den dybere kontinuitet er et forhold: folk studerer et vanskeligt miljø, og organiserer derefter vandet så livet kan forblive på ét sted.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.33111312985420227
+  },
+  {
+    "scene": 38,
+    "text": "Når dette forhold er mere end en umiddelbar overlevelse, kan dalen tilbyde noget værdifuldt til folk der bare passerer forbi.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.557755708694458
+  },
+  {
+    "scene": 39,
+    "text": "Den gamle røgelsehandel var et netværk af veje. Den transporterede værdifulde harpider og andre varer mellem det sydlige Arabien og markederne længere nordpå.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4022257924079895
+  },
+  {
+    "scene": 40,
+    "text": "Røgelse og myrra var små nok til at kunne transporteres, men værdifulde nok til at retfærdiggøre lange og krævende rejser gennem vanskelige lande.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4159468412399292
+  },
+  {
+    "scene": 41,
+    "text": "Vi bør forestille os bevægelsen i trin: overførsel af last, genopfyldelse af forsyninger, forhandlinger om aftaler og udveksling af viden på de steder, hvor rejsende stoppede.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.558083176612854
+  },
+  {
+    "scene": 42,
+    "text": "En rute kræver mere end en åben linje på et kort. Den har brug for vand, vejledning, sikkerhed og tillid til hvad der kommer.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3286619335412979
+  },
+  {
+    "scene": 43,
+    "text": "Her bliver geografien en fordel. En produktiv oase kan tilbyde tjenester som den omkringliggende ørken ikke let kan levere.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.38741423189640045
+  },
+  {
+    "scene": 44,
+    "text": "Disse tjenester skaber møder. Folk mødes for at købe mad, arrangere transport, finde hus eller lære hvilken vej der er praktisk i denne sæson.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3965079188346863
+  },
+  {
+    "scene": 45,
+    "text": "Gode ting bevæger sig gennem disse møder, men det samme gælder ord, vaner, design og tro. Udvekslingen efterlader spor, der ikke altid er nemme at adskille.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.5054668933153152
+  },
+  {
+    "scene": 46,
+    "text": "Ingen enkelt rejsende ser hele netværket. Hver rejse afhænger af lokale beslutninger, som sammen forbinder områder der er langt større end en dal.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3675069361925125
+  },
+  {
+    "scene": 47,
+    "text": "En rute er heller ikke fastgjort for evigt. Politiske forandringer, efterspørgsel, transport og forsyningens pålidelighed kan alle ændre hvor folk vælger at gå.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.491027295589447
+  },
+  {
+    "scene": 48,
+    "text": "AlUlas betydning voksede gennem disse skiftende forbindelser. For at forstå den tidligere byhistorie, vender vi os mod den gamle bydel Dadan.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4532395303249359
+  },
+  {
+    "scene": 49,
+    "text": "Her stiller resten et andet spørgsmål. Hvordan bliver et sted at stoppe til et sted med institutioner, monumenter og varig autoritet?",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.383535698056221
+  },
+  {
+    "scene": 50,
+    "text": "Svaret kommer ikke fra et storslået objekt. Den kommer ud af bygninger, indskrifter, begravelser og de almindelige behov i et oasis samfund.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4108274132013321
+  },
+  {
+    "scene": 51,
+    "text": "Dadan var knyttet til kongedømmerne Dadan og Lihyan i det første årtusinde før vor tidsregning, længe før den nuværende by.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3776969611644745
+  },
+  {
+    "scene": 52,
+    "text": "Beliggenheden ved siden af dyrket land var praktisk. En bosættelse havde brug for mad, vand, arbejdere og forbindelser til det omkringliggende land.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4459926187992096
+  },
+  {
+    "scene": 53,
+    "text": "De overlevende rester afslører kun en del af den beboede verden. Væggene kan holde længere end taget, mens forgængelige genstande forsvinder eller kun overlever som fragmenter.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3482535630464554
+  },
+  {
+    "scene": 54,
+    "text": "Denne ulige overlevelse betyder noget. En moderne besøgende kan ofte se holdbar sten tydeligere end de aktiviteter der engang gjorde en bosættelse arbejde.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.43422913551330566
+  },
+  {
+    "scene": 55,
+    "text": "Højt på klippefladen giver løvegraverne et andet bevis: Begravningssteder markeret med særprægede udskåret dyr.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.6947282552719116
+  },
+  {
+    "scene": 56,
+    "text": "De udskæringer tiltrækker vores opmærksomhed opad. De minder os også om at hukommelse, status og begravelsespraksis var en del af det synlige landskab.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.5040875971317291
+  },
+  {
+    "scene": 57,
+    "text": "Vi bør modstå at udfylde hvert hul med sikkerhed. Et dramatisk billede kan illustrere en mulighed uden at blive bevis for en nøjagtig gammel ceremoni.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3999807685613632
+  },
+  {
+    "scene": 58,
+    "text": "Arkeologien arbejder ved at sammenligne sammenhænge: hvor et genstand lå, hvad der omgav det og hvilke lag der blev dannet før eller efter deponeringen.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.32039064168930054
+  },
+  {
+    "scene": 59,
+    "text": "Et løs fragment kan være smukt. Et fragment med en dokumenteret sammenhæng kan hjælpe os med at besvare spørgsmål som udseendet alene ikke kan løse.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.35742931067943573
+  },
+  {
+    "scene": 60,
+    "text": "De skriftlige beviser i dalen tilføjer en anden dimension. Nogle af dens gamle indbyggere og besøgende efterlod spor der stadig kan studeres i dag.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3988010585308075
+  },
+  {
+    "scene": 61,
+    "text": "For at møde disse stemmer forlader vi fundamentet og går ind på et sted der ofte betegnes som et åbent bibliotek i sten.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.45608001947402954
+  },
+  {
+    "scene": 62,
+    "text": "Ved Jabal Ikmah er klippen både landskab og skriveflade. Næste del af fortællingen begynder ved et lille mejselspor.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.6977147310972214
+  },
+  {
+    "scene": 63,
+    "text": "Næsten tre hundrede indskrifter udgør samlingen, som UNESCOs Memory of the World-program anerkender. Det handler om dokumentarisk kulturarv.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3400069773197174
+  },
+  {
+    "scene": 64,
+    "text": "Det er en anden anerkendelse end Hegras optagelse på verdensarvslisten. Forskellen hjælper os med at forstå, hvad hvert sted bevarer.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.39424724876880646
+  },
+  {
+    "scene": 65,
+    "text": "Mange tekster hører til den Dadanitiske skriftlige tradition. Deres emner bringer os tættere på ritualer, landbrug, minde og bekymringer om virkelige mennesker.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.5320393741130829
+  },
+  {
+    "scene": 66,
+    "text": "En udskåret linje er ikke automatisk en dagbog. Det kræver at man kender skriftene, sproget, formlerne og den fysiske indstilling af inskriptionen.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.45961345732212067
+  },
+  {
+    "scene": 67,
+    "text": "Selv en kort tekst kan bevare et forhold mellem en person, en handling og et sted med et lille stykke social historie.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3237988352775574
+  },
+  {
+    "scene": 68,
+    "text": "De overlevende ord er selektive. De repræsenterer mennesker og situationer, der producerede holdbare mærker, ikke en fuldstændig optegnelse af alle som boede her.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.40264905989170074
+  },
+  {
+    "scene": 69,
+    "text": "Det stilhed er også en del af beviserne. Vi kan ikke antage, at en fraværende opskrift betyder en fravagende person eller en ubetydelig aktivitet.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.484905868768692
+  },
+  {
+    "scene": 70,
+    "text": "Det vi kan se er bemærkelsesværdigt nok: Folk brugte denne dal, navngivede deres bekymringer og valgte sten som en måde at gøre dem vare.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.36777010560035706
+  },
+  {
+    "scene": 71,
+    "text": "I dag hjælper nøje fotografering og dokumentation forskere med at sammenligne disse mærker. Digitale metoder udvider observationen; de fjerner ikke behovet for fortolkning.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3485184609889984
+  },
+  {
+    "scene": 72,
+    "text": "Den bedste måde at ære et skriftligt landskab på er ikke at tilføje endnu et mærke. Det er at bevare det, der allerede findes.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.43136006593704224
+  },
+  {
+    "scene": 73,
+    "text": "Herfra bevæger vi os mod Hegra, hvor sten bærer et andet offentligt budskab udtrykt gennem monumentale fasader og nøje organiseret begravelsesrum.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.36546188592910767
+  },
+  {
+    "scene": 74,
+    "text": "Skalaen ændrer sig, men det underliggende spørgsmål er stadig kendt. Hvad kan en udskåret overflade fortælle os om de levende mennesker der bestilte den?",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4012613296508789
+  },
+  {
+    "scene": 75,
+    "text": "Hegra var en stor nabateisk bosættelse syd for Petra. Det tilhørte en bredere verden, mens det reagerede på betingelserne i sin egen oase.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.34406910836696625
+  },
+  {
+    "scene": 76,
+    "text": "De bedst kendte levn er gravmonumenter hugget direkte i sandsten. De imponerende facader tilhører grave, ikke et forsvundet kongeligt palads.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.38805124163627625
+  },
+  {
+    "scene": 77,
+    "text": "UNESCO beskriver et hundrede og elleve monumentale grave, hvoraf fireoghalvfems er udsmykkede. Brøndene viser også stor kunnen inden for vandforsyning.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.47005608677864075
+  },
+  {
+    "scene": 78,
+    "text": "Mange udsmykkede facader stammer fra det første århundrede før og det første århundrede efter vor tidsregning. De er langt yngre end klippen.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.48656055331230164
+  },
+  {
+    "scene": 79,
+    "text": "Trappeformer, søjler og udsmykning viser bevidste valg. Arkitektur kan udtrykke tilhørsforhold og samtidig forskelle inden for et fællesskab.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.5000421702861786
+  },
+  {
+    "scene": 80,
+    "text": "Nogle gravskrifter indeholder navne, rettigheder og begrænsninger. Monumentet kunne derfor både beskytte et krav og bevare en hukommelse.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.38930436968803406
+  },
+  {
+    "scene": 81,
+    "text": "En smuk front er kun en del af en grav. Dens interiør tjente et begravningsformål, som bør behandles med respekt.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.45788560807704926
+  },
+  {
+    "scene": 82,
+    "text": "Vi har ikke brug for skatter, hemmelige maskiner eller umulige kamre for at gøre dette sted tiltrængende. Den dokumenterede menneskelige historie er allerede kraftfuld.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4348801523447037
+  },
+  {
+    "scene": 83,
+    "text": "Den berømte ufærdige facade af Qasr al-Farid er især afslørende. Det giver besøgende mulighed for at bemærke arbejdet som en proces, snarere end blot et færdigt resultat.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3934840112924576
+  },
+  {
+    "scene": 84,
+    "text": "Stenen skulle fjernes forsigtigt. Hver overflade krævede planlægning, kunnen og kendskab til materialets sprækker og forskellige modstand.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.37453292310237885
+  },
+  {
+    "scene": 85,
+    "text": "Men gravene alene kan ikke forklare Hegra. De mennesker der gav dem opgaven, havde også brug for boliger, mad, udveksling og pålidelig adgang til vand.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.43113285303115845
+  },
+  {
+    "scene": 86,
+    "text": "Undersøgelser har identificeret mere end hundrede brønde omkring byen og oasen, hvilket viser hvor omfattende adgang til vand danner det beboede landskab.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4411435127258301
+  },
+  {
+    "scene": 87,
+    "text": "Dette er den anden forbindelse: Det monument, der lever over jorden, var afhængig af dagligdagens systemer, som er meget mindre spektakulære at fotografere.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.5274097919464111
+  },
+  {
+    "scene": 88,
+    "text": "En udskåret dør bliver lettere at forstå når vi placerer den ved siden af en brønd, en have og de krav der stilles i en almindelig dag.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4382467567920685
+  },
+  {
+    "scene": 89,
+    "text": "Forestil dig dalen gennem praktiske bevægelser: en beholdning løftet, en belastning afbalanceret, et værktøj repareret og en vej valgt før varmen stiger.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.44964855909347534
+  },
+  {
+    "scene": 90,
+    "text": "Disse scener er rekonstruktioner, ikke film fra fortiden. De viser tænkeligt arbejde og giver plads til det, arkæologien endnu ikke har fastslået.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.5080347657203674
+  },
+  {
+    "scene": 91,
+    "text": "Det gamle landskab var ikke kun beboet af herskere og købmænd. At dyrke, vedligeholde, transportere og håndværke var afhængig af mange former for arbejde.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4189230501651764
+  },
+  {
+    "scene": 92,
+    "text": "En bosættelse kan være forbundet med fjerntliggende markeder og stadig være sårbar for lokale problemer: beskadigede kanaler, dårlige høster eller forstyrret bevægelse.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.48397305607795715
+  },
+  {
+    "scene": 93,
+    "text": "Vand forbinder derfor den store historie med den lille. Den støtter udveksling på regional plan og gentagne opgaver på husholdningsplan.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3692651838064194
+  },
+  {
+    "scene": 94,
+    "text": "Det samme gælder vejen. Fra langt væk ser det ud som en linje. På jorden bliver det anstrengelse, vejr og beslutninger.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.35478103160858154
+  },
+  {
+    "scene": 95,
+    "text": "En rejsende måler afstanden gennem det næste stoppested. En landmand måler sæsonen efter jordets tilstand, træernes tilstand og det tilgængelige vand.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4657578766345978
+  },
+  {
+    "scene": 96,
+    "text": "Disse forskellige perspektiver mødes i oasen. En person har brug for at blive; en anden har brug for nok støtte til at rejse og nå den næste destination.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3703792467713356
+  },
+  {
+    "scene": 97,
+    "text": "Det hjælper til at forklare hvorfor klipper, vand og ruter hører sammen i den samme historie. Ingen af dem virker alene som forklaring.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.45997779071331024
+  },
+  {
+    "scene": 98,
+    "text": "Klippen giver former og materialer. Vand gør varig bosættelse mulig. Færdsel kan forvandle et nyttigt sted til et knudepunkt for større udveksling.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.5013140439987183
+  },
+  {
+    "scene": 99,
+    "text": "Resultatet er ikke et tidløst billede. Det er et skiftende forhold, der vedligeholdes af mennesker og omformes af begivenheder uden for dalen.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3223252147436142
+  },
+  {
+    "scene": 100,
+    "text": "For at se den forandring, må vi fortsætte uden for Nabataean monumenter. AlUlas historie stoppede ikke, da de mest berømte fasader blev udskåret.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.45730066299438477
+  },
+  {
+    "scene": 101,
+    "text": "I de senere århundreder bragte pilgrimsrejsen nye bevægelsesmønstre gennem regionen. Oasen var stadig vigtig for folk der rejste mod de hellige byer.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3938802033662796
+  },
+  {
+    "scene": 102,
+    "text": "Rejsende havde forskellige formål. Røgelseshandlere, nabatæiske indbyggere og senere pilgrimme må ikke samles i ét historisk øjeblik.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.4051516279578209
+  },
+  {
+    "scene": 103,
+    "text": "Den gamle bydel tilføjer et andet lag, med kompakt bygninger og gader, der taler om bosættelse, samfund og tilpasning til et krævende klima.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4595460891723633
+  },
+  {
+    "scene": 104,
+    "text": "Også her er et attraktivt syn kun begyndelsen. Bygningerne giver mere mening, når man ser på vandet, dyrkningen, adgangen og beboernes behov.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4539361596107483
+  },
+  {
+    "scene": 105,
+    "text": "Hijaz jernbanen introducerede senere en anden type rute. Dens overlevende strukturer minder os om, at transportteknologierne ændrer bevægelsens geografi.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4255548119544983
+  },
+  {
+    "scene": 106,
+    "text": "En kamelvej og en jernbane er ikke tilsvarende systemer. Men begge viser betydningen af at forbinde steder og organisere støtte undervejs.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4381812810897827
+  },
+  {
+    "scene": 107,
+    "text": "I dag bringer veje og turisme stadig flere besøgende. Spørgsmålet er ikke længere kun, hvordan man når frem til dette landskab, men også, hvordan man tager sig af det.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.45703019201755524
+  },
+  {
+    "scene": 108,
+    "text": "Sten kan bestå i århundreder og stadig have en sårbar overflade. Forvitring og uforsigtig berøring skader detaljer, som ikke let kan erstattes.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.4644423574209213
+  },
+  {
+    "scene": 109,
+    "text": "Bevarelse kræver observation over tid. Forskerne sammenligner forholdene, dokumenterer ændringerne og vælger nøje indgreb i stedet for at behandle hver overflade som et tomt lærred.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4333164244890213
+  },
+  {
+    "scene": 110,
+    "text": "Den levende oase har også brug for omsorg. Beskytter man monumenter, men overser vand og dyrkning, bevarer man kun en del af stedets vigtige sammenhænge.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.36680320650339127
+  },
+  {
+    "scene": 111,
+    "text": "Lokalviden er vigtig fordi det her er et levende landskab, ikke blot en samling af genstande arrangeret for at besøgende kan fotografere.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.513257622718811
+  },
+  {
+    "scene": 112,
+    "text": "Vores synspunkt bør holde begge ting sammen: de ekstraordinære rester af tidligere samfund og de fortsatte ansvarsområder for mennesker, der bor her nu.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.5212371349334717
+  },
+  {
+    "scene": 113,
+    "text": "Nu vender vi tilbage til det første spørgsmål. Hvorfor mødte gamle veje hinanden på et sted der oprindeligt syntes at være så tørt og vanskeligt at bo?",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.5354688167572021
+  },
+  {
+    "scene": 114,
+    "text": "Klipperne var ikke bare baggrunden. Deres former har hjulpet til at forme passageer, beskyttede rum og den jord der vandet bevæger sig gennem.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.6159706711769104
+  },
+  {
+    "scene": 115,
+    "text": "Oasen var ikke blot et mirakel. Det var et sted hvor miljømuligheder mødte færdigheder, vedligeholdelse, dyrkning og gentagne menneskelige beslutninger.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2560180649161339
+  },
+  {
+    "scene": 116,
+    "text": "Og ruterne var ikke blot linjer. De var kæder af behov og aftaler, der blev fornyet hver gang folk valgte at tage en anden rejse.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.35520677268505096
+  },
+  {
+    "scene": 117,
+    "text": "Sammen gjorde disse forbindelser plads til bosættelser, udvekslinger og monumenter hvis udskåret overflade stadig tiltrækker vores opmærksomhed gennem århundrederne.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.436041921377182
+  },
+  {
+    "scene": 118,
+    "text": "Dadan minder os om, at historien har dybe urbane rødder. Jabal Ikmah bevarer skriftlige spor, der gør dele af den verden mere personlige.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.23046326637268066
+  },
+  {
+    "scene": 119,
+    "text": "Hegra gør ambition synlig i sten. Dens brønde minder os om at selv den mest bemærkelsesværdige arkitektur tilhørte en verden af praktiske behov.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.28538768738508224
+  },
+  {
+    "scene": 120,
+    "text": "Det, der overlever, er ufuldstændigt, men det er nok til at udfordre tanken om en tom ørken, uberørt af udveksling eller omhyggelig menneskelig viden.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3558630049228668
+  },
+  {
+    "scene": 121,
+    "text": "Måske er det mest nyttige spørgsmål ikke, hvilket monument er størst, men hvilke forbindelser til et af disse steder at trives.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.5263057947158813
+  },
+  {
+    "scene": 122,
+    "text": "Hvis du læser dette landskab for første gang, ville du begynde med den udskåret dør, den skrevne klippe eller brønden?",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.46668344736099243
+  },
+  {
+    "scene": 123,
+    "text": "Vi begyndte med en dråbe vand. Når man ser det nu, bærer det den større historie: betingelserne for at folk kan blive, mødes og bevæge sig videre.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3632395640015602
+  },
+  {
+    "scene": 124,
+    "text": "I AlUla bevarer klippen sporene. Vandet hjælper os med at forstå livet bag dem. Og de gamle veje viser, hvor langt livets forbindelser nåede.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3841487467288971
+  }
+]

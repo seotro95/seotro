@@ -1,0 +1,30 @@
+CHỦ ĐỀ 95 — ALULA
+Kênh chính tiếng Anh. Bản tiếng Việt bên dưới giúp chọn ý.
+Ưu tiên đề xuất số 1; đề số 2 giữ đúng tên chủ đề đã chọn.
+
+1. AlUla: How Water Built a Crossroads in the Desert
+   AlUla: Nước đã tạo nên ngã giao giữa sa mạc như thế nào?
+   Chữ thumbnail gợi ý, thêm trong phần mềm thiết kế: WATER CHANGED EVERYTHING
+   Thumbnail prompt: Create a compelling 16:9 documentary YouTube thumbnail, 3840x2160. Reference-accurate AlUla sandstone cliffs in northwestern Saudi Arabia, a narrow green date-palm oasis crossing the lower third, one modest shallow irrigation channel catching a bright reflection in the foreground. Strong visual contrast between warm dry rock and real cultivated green, low camera perspective with a 28mm lens, late-afternoon side light, simple readable composition at phone size. One dominant visual question: how can this dry place sustain life? Leave the upper-left quarter calm for separately added title text. Photorealistic, restrained cinematic grade. No children, minors, babies, teenagers, people, fantasy river, waterfalls, treasure, exaggerated blue lake, Petra architecture, logos, watermarks, flags or generated lettering.
+
+2. AlUla: Rock, Water, and Ancient Routes
+   AlUla: Đá, nước và những tuyến đường cổ
+   Chữ thumbnail gợi ý: ROCK. WATER. ROUTES.
+   Thumbnail prompt: Create a 16:9 cinematic documentary thumbnail, 3840x2160, set in AlUla, Saudi Arabia. One coherent illustrated overview with towering ochre sandstone at right, a cultivated palm oasis in the middle distance, and a small adult-only camel caravan on an open sandy corridor in the foreground. All visible humans must be unmistakably adults aged 30 or older, tiny in frame, wearing simple period travel clothing. Clearly a historical interpretation, not a claim of an exact archaeological layout. High oblique 35mm viewpoint, golden rim light, strong three-layer depth, one clear focal path from caravan toward oasis. Reserve clean dark sky space upper left for manual typography. No children or minors anywhere, no modern vehicles, pyramids, giant river, fantasy city, text, logos or watermark.
+
+3. Beyond Hegra's Tombs: The Water That Kept AlUla Alive
+   Sau những ngôi mộ Hegra: Nguồn nước nuôi sống AlUla
+   Chữ thumbnail gợi ý: BEYOND THE TOMBS
+   Thumbnail prompt: Create a striking 16:9 documentary thumbnail, 3840x2160. Two clearly separated photographic panels, not a claim of an actual shared viewpoint: a reference-accurate Qasr al-Farid funerary facade at Hegra on the right, and a close view of a modest stone-lined oasis well with a plain water vessel on the left. One thin natural shadow division, large legible shapes, warm sandstone against cool well shade, 50mm photographic feel, realistic proportions. Show the link between a celebrated monument and an overlooked necessity. Leave upper-left negative space for editorial text. No people, children, minors, skeletons, treasure, palace interiors, water spraying from the tomb, fake inscriptions, text, logos or watermark.
+
+4. Why Ancient Caravans Stopped in AlUla
+   Vì sao những đoàn lữ hành cổ dừng ở AlUla?
+   Chữ thumbnail gợi ý: WHY STOP HERE?
+   Thumbnail prompt: Create a 16:9 YouTube documentary thumbnail, 3840x2160. Historical interpretation of a modest camel caravan approaching the edge of a date-palm oasis in AlUla, Saudi Arabia. Three adult male travelers aged 35 to 60 only, viewed from behind in simple undyed robes, with four believable pack camels. Use a 70mm viewpoint from slightly elevated ground, a clear S-shaped sandy path leading toward palms and red sandstone cliffs, early-morning light, visually sparse and plausible rather than an epic army. Large caravan silhouettes readable at phone size; upper-left sky kept clean for manual title. No children, minors, crowds, battle, guns, desert palace, fantasy city, giant watercourse, generated text, logos or watermark.
+
+5. Reading AlUla: What Stone, Wells, and Roads Reveal
+   Đọc AlUla: Đá, giếng và đường cổ hé lộ điều gì?
+   Chữ thumbnail gợi ý: READ THE DESERT
+   Thumbnail prompt: Create a refined but engaging 16:9 archaeology documentary thumbnail, 3840x2160. A reference-based sandstone inscription surface from Jabal Ikmah dominates the right two-thirds, shown in close oblique raking light so the shallow grooves catch warm highlights. The left third opens into a softly focused red-rock valley and distant green palms. 85mm lens feel, tactile weathered stone, strong depth and a single focal area. Preserve authentic inscription appearance only from a genuine reference; if no reference is supplied, keep characters too small to read and do not invent a translatable inscription. Clean upper-left space for separately added typography. No touching stone, tools carving heritage, people, children, minors, glowing letters, secret-code effects, treasure, logos, watermark or generated text.
+
+GHI CHÚ: Đây là 5 prompt ảnh thumbnail, chưa phải 5 ảnh đã tạo. Phần chữ đề xuất đặt riêng khi thiết kế để kiểm soát chính tả. Chọn tiêu đề đi cùng prompt cùng số. Không dùng câu giật gân về kho báu, thành phố mất tích hay phát hiện mới nếu nội dung không chứng minh.

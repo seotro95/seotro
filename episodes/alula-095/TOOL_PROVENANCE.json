@@ -1,0 +1,17 @@
+{
+  "melo_release": "melo-viet-studio-1.3.1-txt-srt-41595029816",
+  "hmong_release": "voice-studio-hmong-1.6.6",
+  "execution_platform": "Linux CPU; existing source backends from the supplied handoff",
+  "backend_sha256": {
+    "online_backend.py": "bd21a00f93124a4dcc27850c42817bd4823445d4d44882d26cd1503fe2ab568b",
+    "fast_backend.py": "75dc8615ceca743b1c4579a0591966538cc2a25802103c248b433eccdaa20cdd",
+    "multilingual_backend.py": "9eb33087d5664ed835bf4764b64002dbc905827903fa64031c18ca56f6b215e3",
+    "fast_catalog.json": "2b77b8c83c9341e7e4ce2774599221a971ae57852690d7977d20bdd64368fdc6"
+  },
+  "translation_model": {
+    "repository": "JustFrederik/nllb-200-distilled-600M-ct2-int8",
+    "revision": "302d78f00e6fdb50a1064059df7c392b735e9d05",
+    "purpose": "draft translations, subsequently reviewed in samples"
+  },
+  "source_video_sha256": "f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c"
+}

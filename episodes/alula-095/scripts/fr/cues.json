@@ -1,0 +1,746 @@
+[
+  {
+    "scene": 1,
+    "text": "Une goutte d'eau assombrit le sable. Autour d'elle, les falaises d'AlUla semblent appartenir à un monde sans eau.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3280644863843918
+  },
+  {
+    "scene": 2,
+    "text": "Pourtant, les gens ont traversé ce désert pendant des siècles, trouvant plus qu'un abri entre ces énormes murs de pierre.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.30867883563041687
+  },
+  {
+    "scene": 3,
+    "text": "Ils ont trouvé de l'eau, des terres cultivées et un endroit où un voyage difficile pouvait reprendre avec des provisions fraîches.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3854924440383911
+  },
+  {
+    "scene": 4,
+    "text": "Pourquoi les routes convergeaient-elles ici ? La réponse tient à trois éléments liés : la roche, l'eau et les espaces qui les relient.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3214458227157593
+  },
+  {
+    "scene": 5,
+    "text": "C'est Al-Ula, dans le nord-ouest de l'Arabie saoudite, où le désert abrite plusieurs histoires plutôt qu'une ville oubliée.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.26852816343307495
+  },
+  {
+    "scene": 6,
+    "text": "Dadan, Jabal Ikmah et Hegra conservent différentes parties de cette histoire, séparées par le temps ainsi que la distance.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.20424120128154755
+  },
+  {
+    "scene": 7,
+    "text": "Leurs monuments attirent l'attention. Mais notre voyage commence par quelque chose de moins spectaculaire, et beaucoup plus nécessaire à la vie.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2363654002547264
+  },
+  {
+    "scene": 8,
+    "text": "Suivez l'eau et la vallée change. Ce qui semble vide commence à révéler les conditions pratiques pour rester en vie.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.24729440361261368
+  },
+  {
+    "scene": 9,
+    "text": "Suivez les voyageurs, et ces conditions deviennent un réseau: des endroits pour s'arrêter, échanger des marchandises, partager des nouvelles et continuer.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.31410497426986694
+  },
+  {
+    "scene": 10,
+    "text": "Regardons à nouveau les falaises. Leurs surfaces sculptées conservent l'ambition, les croyances, la mémoire et le désir de laisser une trace.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.33143651485443115
+  },
+  {
+    "scene": 11,
+    "text": "Des grains de grès, nous passerons à l'échelle d'un vaste monde d'échanges, sans quitter cette vallée désertique.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.2677820920944214
+  },
+  {
+    "scene": 12,
+    "text": "Et à la fin, la plus petite chose de notre scène d'ouverture expliquera pourquoi les plus grands monuments pourraient exister ici.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.29030632972717285
+  },
+  {
+    "scene": 13,
+    "text": "Avant les traces des caravanes, il y avait des couches de sédiments déposés bien avant l'apparition de ces royaumes.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.37580204010009766
+  },
+  {
+    "scene": 14,
+    "text": "Au fil des temps géologiques, les grains sont devenus du grès. L'enfouissement et la cimentation ont formé une roche dans laquelle on pouvait tailler une porte.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.36571384966373444
+  },
+  {
+    "scene": 15,
+    "text": "L'âge de la roche et celui de la sculpture relèvent de deux horloges différentes. Les confondre efface une immense durée.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.42258991301059723
+  },
+  {
+    "scene": 16,
+    "text": "Le soulèvement du terrain et l'érosion ont ensuite exposé ces formations. L'eau, le vent et l'altération ont agi le long des faiblesses de la roche.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.35599762201309204
+  },
+  {
+    "scene": 17,
+    "text": "Une falaise peut sembler permanente à distance de la route. De près, sa surface raconte une histoire plus calme de grains qui se détachent continuellement.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4989271014928818
+  },
+  {
+    "scene": 18,
+    "text": "Les couches dures et tendres s'altèrent différemment. Cette résistance inégale crée des corniches, des creux et les silhouettes caractéristiques d'AlUla.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.36997097730636597
+  },
+  {
+    "scene": 19,
+    "text": "Le Rocher de l'Éléphant offre une silhouette familière. La ressemblance est frappante, mais les forces naturelles qui l'ont façonné n'avaient ni intention ni plan.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.31348463892936707
+  },
+  {
+    "scene": 20,
+    "text": "Le fond de la vallée compte autant que l'horizon. Les terrains bas recueillent le ruissellement et les sédiments venus des pentes voisines.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.37048985064029694
+  },
+  {
+    "scene": 21,
+    "text": "Un canal sec n'est pas la preuve que l'eau ne passe jamais par là. Dans les déserts, le plus fort courant peut être occasionnel.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.41114743053913116
+  },
+  {
+    "scene": 22,
+    "text": "La pluie peut transformer rapidement ce lit. Le terrain qui offre un passage peut aussi concentrer un courant d'eau dangereux.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.37094415724277496
+  },
+  {
+    "scene": 23,
+    "text": "Voici le premier lien : la roche façonne la vallée, qui détermine où l'eau circule, s'accumule ou s'infiltre dans le sol.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.38619986176490784
+  },
+  {
+    "scene": 24,
+    "text": "Pour comprendre l'établissement ici, nous devons regarder en dessous de la belle surface, vers une ressource souvent cachée à la vue.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3699749708175659
+  },
+  {
+    "scene": 25,
+    "text": "Une oasis n'est pas simplement une couche de vert qui se produit par hasard. Sa survie dépend de l'eau et du travail humain soutenu.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.33149389922618866
+  },
+  {
+    "scene": 26,
+    "text": "Dans cette vallée, les eaux souterraines et les courants de surface ont soutenu la culture. Leur disponibilité a varié d'un endroit à l'autre et de différentes périodes.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.34984642267227173
+  },
+  {
+    "scene": 27,
+    "text": "Un puits donne accès à l'eau cachée. La géologie devient alors un travail quotidien : descendre un récipient, le remonter, puis remplir une autre jarre.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.31484584510326385
+  },
+  {
+    "scene": 28,
+    "text": "La présence d'eau n'est qu'une partie de la réussite. L'accès, l'entretien et le partage déterminent ce que la ressource apporte à une communauté.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.2942122519016266
+  },
+  {
+    "scene": 29,
+    "text": "Imaginez que vous arriviez après plusieurs jours sur une route dégagée. Avant de penser au profit, un voyageur doit réfléchir à la soif, aux animaux et à l'étape suivante.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.39103734493255615
+  },
+  {
+    "scene": 30,
+    "text": "L'eau change la distance parcourue. Un arrêt fiable peut relier des étendues de pays qui seraient autrement beaucoup plus difficiles à traverser.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2920679748058319
+  },
+  {
+    "scene": 31,
+    "text": "Mais fiable ne signifie pas illimité. Chaque seau puisé appartient à un équilibre entre apports, consommation, évaporation et besoins des cultures.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3644494563341141
+  },
+  {
+    "scene": 32,
+    "text": "Les palmiers-dattiers signalent l'oasis de loin. Sous leurs couronnes, l'ombre crée des conditions différentes de celles du sol nu en plein soleil.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3182245343923569
+  },
+  {
+    "scene": 33,
+    "text": "Cette ombre révèle une oasis cultivée, où les plantes, le sol, l'eau et le travail humain agissent ensemble à différentes échelles.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3031371235847473
+  },
+  {
+    "scene": 34,
+    "text": "Un panier de dattes représente plus qu'une récolte. Pour le voyageur, c'est une réserve de nourriture à emporter au-delà des palmiers.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.2921149730682373
+  },
+  {
+    "scene": 35,
+    "text": "Pour cultiver la nourriture ici, il fallait prendre des décisions répétées, pas une seule invention ancienne. Les canaux avaient besoin d'attention, les arbres devaient être soignés et les connaissances transmises.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.35747939348220825
+  },
+  {
+    "scene": 36,
+    "text": "Nous ne devrions pas imaginer que toutes les caractéristiques d'irrigation visibles aujourd'hui restent inchangées depuis l'Antiquité. Les paysages cultivés sont réparés, adaptés et reconstruits.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.28878360986709595
+  },
+  {
+    "scene": 37,
+    "text": "La continuité plus profonde est une relation: les gens étudient un environnement difficile, puis organisent l'eau pour que la vie puisse rester au même endroit.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2552403509616852
+  },
+  {
+    "scene": 38,
+    "text": "Une fois que cette relation soutient plus qu'une survie immédiate, la vallée peut offrir quelque chose de précieux aux personnes qui ne passent que par là.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2890669107437134
+  },
+  {
+    "scene": 39,
+    "text": "Le commerce antique de l'encens formait un réseau de routes. On y transportait résines précieuses et autres marchandises, de l'Arabie du Sud vers les marchés du nord.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.33809398114681244
+  },
+  {
+    "scene": 40,
+    "text": "L'encens et la myrrhe étaient assez petits pour être transportés, mais suffisamment précieux pour justifier de longs voyages à travers des pays difficiles.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.33966493606567383
+  },
+  {
+    "scene": 41,
+    "text": "Imaginons des voyages par étapes : transférer les charges, refaire les provisions, négocier des accords et échanger des connaissances aux haltes.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3663681149482727
+  },
+  {
+    "scene": 42,
+    "text": "Une route exige plus qu'un trait sur une carte. Il faut de l'eau, des guides, de la sécurité et une certaine confiance dans l'étape suivante.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3364373445510864
+  },
+  {
+    "scene": 43,
+    "text": "C'est là que la géographie devient un avantage. Une oasis productive peut offrir des services que le désert environnant ne peut pas facilement fournir.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.23371192812919617
+  },
+  {
+    "scene": 44,
+    "text": "Ces services créent des rencontres. Les gens se réunissent pour acheter de la nourriture, organiser des transports, trouver un abri ou découvrir quel chemin est pratique cette saison.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2756615877151489
+  },
+  {
+    "scene": 45,
+    "text": "Les biens passent à travers ces rencontres, mais aussi les mots, les habitudes, les concepts et les croyances. L'échange laisse des traces qui ne sont pas toujours faciles à séparer.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2964039817452431
+  },
+  {
+    "scene": 46,
+    "text": "Aucun voyageur ne voit le réseau entier. Chaque voyage dépend de décisions locales qui, ensemble, relient des régions bien plus grandes qu'une vallée.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3570237010717392
+  },
+  {
+    "scene": 47,
+    "text": "Il n'y a pas non plus de chemin fixe pour toujours. Le changement politique, la demande, les transports et la fiabilité des approvisionnements peuvent tous modifier l'endroit où les gens choisissent d'aller.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.43605171144008636
+  },
+  {
+    "scene": 48,
+    "text": "L'importance d'AlUla a augmenté grâce à ces liens changeants. Pour comprendre son histoire urbaine antérieure, nous nous tournons vers l'ancienne colonie de Dadan.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.33379143476486206
+  },
+  {
+    "scene": 49,
+    "text": "Ici, les restes posent une autre question. Comment un lieu d'arrêt devient- il un lieu avec des institutions, des monuments et une autorité durable?",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.297126367688179
+  },
+  {
+    "scene": 50,
+    "text": "La réponse ne vient pas d'un seul objet magnifique. Elle émerge des bâtiments, des inscriptions, des sépultures et des besoins quotidiens d'une communauté d'oasis.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.30220091342926025
+  },
+  {
+    "scene": 51,
+    "text": "Dadan était associé aux royaumes de Dadan et Lihyan au cours du premier millénaire avant notre ère, bien avant la ville actuelle.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2574526071548462
+  },
+  {
+    "scene": 52,
+    "text": "Son emplacement à côté des terres cultivées était pratique. Une colonie avait besoin de nourriture, d'eau, d'ouvriers et de contacts avec le pays qui l'entourait.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.328272745013237
+  },
+  {
+    "scene": 53,
+    "text": "Les restes qui ont survécu ne révèlent qu'une partie de ce monde habité. Les murs peuvent survivre aux toits, tandis que les objets périssables disparaissent ou ne survivent qu'en fragments.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2978724092245102
+  },
+  {
+    "scene": 54,
+    "text": "Cette survie inégale compte. Un visiteur moderne voit souvent la pierre durable plus clairement que les activités qui faisaient autrefois fonctionner une colonie.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3391246199607849
+  },
+  {
+    "scene": 55,
+    "text": "Sur la paroi, les Tombes aux Lions apportent un autre témoignage : des lieux de sépulture signalés par des animaux sculptés caractéristiques.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.4401053488254547
+  },
+  {
+    "scene": 56,
+    "text": "Les sculptures attirent notre attention vers le haut. Elles nous rappellent également que la mémoire, le statut et les pratiques funéraires faisaient partie du paysage visible.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2334621474146843
+  },
+  {
+    "scene": 57,
+    "text": "Nous devrions résister à combler chaque lacune avec certitude. Une image dramatique peut illustrer une possibilité sans devenir la preuve d'une cérémonie ancienne précise.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.31603385508060455
+  },
+  {
+    "scene": 58,
+    "text": "L'archéologie fonctionne en comparant les contextes: où se trouvait un objet, ce qui l'entourait et quelles couches se sont formées avant ou après le dépôt.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2687629461288452
+  },
+  {
+    "scene": 59,
+    "text": "Un fragment isolé peut être beau. Avec un contexte documenté, il peut répondre à des questions que son apparence seule ne permet pas de résoudre.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.4232945591211319
+  },
+  {
+    "scene": 60,
+    "text": "Les preuves écrites de la vallée ajoutent une autre dimension. Certains de ses anciens habitants et visiteurs ont laissé des traces qui peuvent encore être étudiées aujourd'hui.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.29994629323482513
+  },
+  {
+    "scene": 61,
+    "text": "Pour rencontrer ces voix, nous laissons derrière nous les fondations et entrons dans un endroit souvent décrit comme une bibliothèque en pierre à ciel ouvert.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.29508155584335327
+  },
+  {
+    "scene": 62,
+    "text": "À Jabal Ikmah, la roche est à la fois paysage et support d'écriture. La suite de l'histoire commence à l'échelle d'une trace de ciseau.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.32627108693122864
+  },
+  {
+    "scene": 63,
+    "text": "Près de trois cents inscriptions constituent la collection reconnue par le programme Mémoire du monde de l'UNESCO. Cette désignation concerne le patrimoine documentaire.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.21208801865577698
+  },
+  {
+    "scene": 64,
+    "text": "Ce statut diffère de l'inscription de Hégra au Patrimoine mondial. Cette distinction aide à comprendre ce que chaque lieu conserve.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.34161941707134247
+  },
+  {
+    "scene": 65,
+    "text": "De nombreux textes relèvent de l'écriture dadanitique. Ils évoquent les rites, l'agriculture, le souvenir et les préoccupations de personnes bien réelles.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.295964315533638
+  },
+  {
+    "scene": 66,
+    "text": "Une ligne gravée n'est pas automatiquement un journal. Pour la comprendre, il faut connaître l'écriture, la langue, les formules et le contexte de l'inscription.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3350408524274826
+  },
+  {
+    "scene": 67,
+    "text": "Même un court texte peut préserver une relation entre une personne, une action et un lieu, portant un petit morceau d'histoire sociale.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3131938874721527
+  },
+  {
+    "scene": 68,
+    "text": "Les mots survivants sont sélectifs. Ils représentent des personnes et des situations qui ont produit des marques durables, pas un enregistrement complet de tous ceux qui ont vécu ici.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.27875274419784546
+  },
+  {
+    "scene": 69,
+    "text": "Ce silence fait aussi partie des preuves. Nous ne pouvons pas supposer qu'une inscription absente signifie une personne absente ou une activité sans importance.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2836068421602249
+  },
+  {
+    "scene": 70,
+    "text": "Ce que nous pouvons voir est assez remarquable: les gens utilisaient cette vallée, nommaient leurs préoccupations et choisissaient la pierre comme moyen de les faire durer.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2592090368270874
+  },
+  {
+    "scene": 71,
+    "text": "Aujourd'hui, une photographie attentive et des documents permettent aux chercheurs de comparer ces marques. Les méthodes numériques élargissent l'observation; elles ne suppriment pas le besoin d'interprétation.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3250041753053665
+  },
+  {
+    "scene": 72,
+    "text": "Honorer ce paysage écrit, ce n'est pas ajouter une nouvelle marque. C'est préserver ce qui s'y trouve déjà.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.2816323861479759
+  },
+  {
+    "scene": 73,
+    "text": "De là, nous nous dirigeons vers Hegra, où la pierre porte un message public différent, exprimé à travers des façades monumentales et un espace funéraire soigneusement organisé.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2834804356098175
+  },
+  {
+    "scene": 74,
+    "text": "L'échelle change, mais la question sous-jacente reste familière. Qu'est- ce qu'une surface sculptée peut nous dire sur les personnes vivantes qui l'ont commandé?",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3576766550540924
+  },
+  {
+    "scene": 75,
+    "text": "Hégra était une importante agglomération nabatéenne au sud de Pétra. Elle appartenait à un vaste monde tout en s'adaptant à sa propre oasis.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.30621737241744995
+  },
+  {
+    "scene": 76,
+    "text": "Ses vestiges les plus célèbres sont des monuments funéraires taillés dans le grès. Ces façades sont celles de tombeaux, pas les portes d'un palais perdu.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.27291684597730637
+  },
+  {
+    "scene": 77,
+    "text": "L'UNESCO recense cent onze tombes monumentales, dont quatre-vingt-quatorze décorées. Les puits témoignent aussi d'un remarquable savoir-faire dans la gestion de l'eau.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.2849055230617523
+  },
+  {
+    "scene": 78,
+    "text": "Beaucoup de façades décorées datent du premier siècle avant notre ère et du premier siècle de notre ère, bien après la formation de la roche.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.33614230155944824
+  },
+  {
+    "scene": 79,
+    "text": "Formes en gradins, colonnes et décors révèlent des choix esthétiques. L'architecture peut exprimer une appartenance tout en distinguant certains membres d'une communauté.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3058970049023628
+  },
+  {
+    "scene": 80,
+    "text": "Certaines inscriptions funéraires mentionnent des noms, des droits et des interdictions. Le monument pouvait donc défendre un droit autant que préserver un souvenir.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3676970303058624
+  },
+  {
+    "scene": 81,
+    "text": "Un beau front n'est qu'une partie d'une tombe. Son intérieur servait un but funéraire qui devait être abordé avec respect.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3552042841911316
+  },
+  {
+    "scene": 82,
+    "text": "Nous n'avons pas besoin d'un trésor, de machines secrètes ou de chambres impossibles pour rendre cet endroit attrayant. L'histoire humaine documentée est déjà puissante.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.30105169117450714
+  },
+  {
+    "scene": 83,
+    "text": "La façade inachevée de Qasr al-Farid est particulièrement révélatrice. Elle montre le travail comme un processus, au-delà du seul résultat final.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.2678368166089058
+  },
+  {
+    "scene": 84,
+    "text": "Il fallait retirer la pierre avec soin. Chaque surface exigeait planification, maîtrise et connaissance du matériau, de ses fissures et de ses résistances inégales.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3166896402835846
+  },
+  {
+    "scene": 85,
+    "text": "Les tombes seules n'expliquent pourtant pas Hégra. Leurs commanditaires avaient aussi besoin de logements, de nourriture, d'échanges et d'un accès fiable à l'eau.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.34353993833065033
+  },
+  {
+    "scene": 86,
+    "text": "Les recherches ont identifié plus de cent puits autour de l'agglomération et de l'oasis. L'accès à l'eau structurait profondément le paysage habité.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.27636057138442993
+  },
+  {
+    "scene": 87,
+    "text": "C'est la deuxième connexion: le monument qui survit au-dessus du sol dépend des systèmes de vie quotidienne qui sont beaucoup moins spectaculaires à photographier.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.29451093077659607
+  },
+  {
+    "scene": 88,
+    "text": "Une porte sculptée devient plus facile à comprendre quand on la place à côté d'un puits, d'un jardin et des exigences de la vie quotidienne.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3122924566268921
+  },
+  {
+    "scene": 89,
+    "text": "Imaginons la vallée par des gestes concrets : soulever un récipient, équilibrer une charge, réparer un outil et choisir un chemin avant la chaleur.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.34825432300567627
+  },
+  {
+    "scene": 90,
+    "text": "Ces scènes sont des reconstitutions, pas des images du passé retrouvées. Elles illustrent des travaux possibles tout en respectant les incertitudes de l'archéologie.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.27735860645771027
+  },
+  {
+    "scene": 91,
+    "text": "Le paysage ancien n'était pas occupé uniquement par des dirigeants et des marchands. La culture, l'entretien, le transport et l'artisanat dépendaient de nombreux types de travail.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.377971351146698
+  },
+  {
+    "scene": 92,
+    "text": "Un établissement pourrait être connecté à des marchés éloignés et encore être vulnérable aux problèmes locaux: canaux endommagés, mauvaises récoltes ou déplacements perturbés.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3475598692893982
+  },
+  {
+    "scene": 93,
+    "text": "L'eau relie ainsi la grande histoire aux petits gestes. Elle soutient les échanges régionaux et les tâches répétées de chaque foyer.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.2741031050682068
+  },
+  {
+    "scene": 94,
+    "text": "Il en va de même pour la route. De loin, ça ressemble à une ligne. Sur le terrain, c'est l'effort, la météo et les décisions.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.34508948028087616
+  },
+  {
+    "scene": 95,
+    "text": "Un voyageur mesure la distance à travers l'arrêt suivant. Un agriculteur mesure la saison en considérant l'état du sol, des arbres et de l'eau disponible.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3320029526948929
+  },
+  {
+    "scene": 96,
+    "text": "Ces différentes perspectives se rencontrent dans l'oasis. Une personne a besoin de rester; une autre a besoin d'un soutien suffisant pour partir et atteindre sa prochaine destination.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.29008999466896057
+  },
+  {
+    "scene": 97,
+    "text": "Cette réunion explique pourquoi le rocher, l'eau et les routes appartiennent à la même histoire. Aucun d'entre eux ne sert de seule explication.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.46061502397060394
+  },
+  {
+    "scene": 98,
+    "text": "La roche fournit des formes et des matériaux. L'eau rend possible une occupation soutenue. Le mouvement peut transformer un lieu utile en un point d'échange plus large.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.2868836174408595
+  },
+  {
+    "scene": 99,
+    "text": "Le résultat n'est pas une image intemporelle. C'est une relation changeante, maintenue par les gens et remodelée par des événements au-delà de la vallée.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.31384389102458954
+  },
+  {
+    "scene": 100,
+    "text": "Pour voir ce changement, nous devons aller au-delà des monuments nabataïens. L'histoire d'Al-Ula ne s'est pas arrêtée lorsque ses façades les plus célèbres ont été sculptées.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.26628749817609787
+  },
+  {
+    "scene": 101,
+    "text": "Au cours des siècles suivants, le pèlerinage a apporté de nouveaux modes de déplacement à travers la région. L'oasis restait importante pour les voyageurs vers les villes saintes.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3562179207801819
+  },
+  {
+    "scene": 102,
+    "text": "Les voyageurs avaient des objectifs différents. Marchands d'encens, habitants nabatéens et pèlerins plus tardifs ne doivent pas être réunis dans un même moment historique.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.4092191904783249
+  },
+  {
+    "scene": 103,
+    "text": "La vieille ville ajoute une nouvelle couche. Ses bâtiments resserrés et ses ruelles parlent de peuplement, de communauté et d'adaptation à un climat exigeant.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.2786003053188324
+  },
+  {
+    "scene": 104,
+    "text": "Ici aussi, une vue attrayante n'est que le début. Les bâtiments ont plus de sens lorsqu'ils sont considérés en même temps que l'eau, la culture, l'accès et les besoins des résidents.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3729097545146942
+  },
+  {
+    "scene": 105,
+    "text": "Le chemin de fer du Hijaz a plus tard introduit un autre type de route. Ses structures survivantes nous rappellent que les technologies de transport changent la géographie du mouvement.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.34099601209163666
+  },
+  {
+    "scene": 106,
+    "text": "Un chemin de chameau et un chemin de fer ne sont pas des systèmes équivalents. Pourtant, les deux révèlent l'importance de lier des lieux et d'organiser un soutien en cours de route.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3371864929795265
+  },
+  {
+    "scene": 107,
+    "text": "Aujourd'hui, les routes et le tourisme attirent encore plus de visiteurs. La question n'est plus seulement de savoir comment atteindre ce paysage, mais aussi comment s'en occuper.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.29884764552116394
+  },
+  {
+    "scene": 108,
+    "text": "La pierre peut durer des siècles tout en restant fragile en surface. L'altération et les contacts imprudents endommagent des détails difficiles à remplacer.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3481042981147766
+  },
+  {
+    "scene": 109,
+    "text": "La conservation nécessite une observation au fil du temps. Les chercheurs comparent les conditions, documentent le changement et choisissent soigneusement les interventions plutôt que de traiter chaque surface comme une toile blanche.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.34319165349006653
+  },
+  {
+    "scene": 110,
+    "text": "L'oasis vivante a aussi besoin d'attention. Protéger les monuments tout en négligeant l'eau et la culture ne préserverait qu'une partie de la relation qui a rendu cet endroit important.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3231136202812195
+  },
+  {
+    "scene": 111,
+    "text": "Les connaissances locales comptent parce que c'est un paysage vivant, pas simplement une collection d'objets disposés pour les visiteurs à photographier.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.36686739325523376
+  },
+  {
+    "scene": 112,
+    "text": "Notre point de vue devrait rassembler les deux choses: les vestiges extraordinaires des sociétés antérieures et les responsabilités actuelles des gens qui y vivent.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.4610691964626312
+  },
+  {
+    "scene": 113,
+    "text": "Revenons à la question d'introduction. Pourquoi les routes anciennes convergeaient- elles dans un endroit qui, au début, semblait si sec et difficile à habiter?",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3686317056417465
+  },
+  {
+    "scene": 114,
+    "text": "Les falaises n'étaient pas simplement une toile de fond. Leurs formes ont contribué à façonner les passages, les espaces protégés et le sol par lequel l'eau se déplaçait.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3644006997346878
+  },
+  {
+    "scene": 115,
+    "text": "L'oasis n'était pas simplement un miracle. Les possibilités du milieu y rencontraient le savoir-faire, l'entretien, les cultures et les décisions quotidiennes.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3027038723230362
+  },
+  {
+    "scene": 116,
+    "text": "Les routes n'étaient pas de simples lignes. Elles formaient des chaînes de besoins et d'accords, renouvelées à chaque nouveau voyage.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3166257441043854
+  },
+  {
+    "scene": 117,
+    "text": "Ces liens ont permis l'installation de communautés, les échanges et les monuments dont les surfaces sculptées nous attirent encore, des siècles plus tard.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.325212687253952
+  },
+  {
+    "scene": 118,
+    "text": "Dadan nous rappelle que l'histoire a de profondes racines urbaines. Jabal Ikmah conserve des traces écrites qui rendent certaines parties de ce monde plus personnelles.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.20106135308742523
+  },
+  {
+    "scene": 119,
+    "text": "Hegra rend l'ambition visible dans la pierre. Ses puits nous rappellent que même l'architecture la plus remarquable appartenait à un monde de nécessités pratiques.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.24561239778995514
+  },
+  {
+    "scene": 120,
+    "text": "Les vestiges sont incomplets. Ils suffisent pourtant à contester l'image d'un désert vide, sans échanges ni connaissances humaines attentives.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.3726288676261902
+  },
+  {
+    "scene": 121,
+    "text": "La question la plus utile n'est peut-être pas de savoir quel monument est le plus grand, mais quelles connexions ont permis à l'un ou l'autre de ces lieux de prospérer.",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.3171602189540863
+  },
+  {
+    "scene": 122,
+    "text": "Si c'était la première fois que vous lisiez ce paysage, commencerez- vous par la porte sculptée, la pierre écrite ou le puits?",
+    "translation_method": "NLLB-200 600M local draft by sentence; targeted editorial review",
+    "translation_score": -0.35951995849609375
+  },
+  {
+    "scene": 123,
+    "text": "Nous avons commencé par une goutte d'eau. Elle raconte maintenant une histoire plus vaste : les conditions permettant de rester, de se rencontrer et de repartir.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.30018360912799835
+  },
+  {
+    "scene": 124,
+    "text": "À AlUla, la roche garde les traces. L'eau explique la vie qui les entourait. Et les routes anciennes révèlent l'étendue de ses liens.",
+    "translation_method": "editorial adaptation from English master",
+    "translation_score": -0.369720717271169
+  }
+]

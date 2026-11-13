@@ -1,0 +1,35 @@
+name: AlUla 095 document delivery
+on:
+  push:
+    branches: ["codex/alula-095-20m42s"]
+    paths: ["episodes/alula-095/**", ".github/workflows/alula-095-delivery.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  documents:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package text documents and prompts only
+        run: |
+          python - <<'PYCODE'
+          from pathlib import Path
+          import zipfile
+          root=Path('episodes/alula-095')
+          with zipfile.ZipFile('ALULA_095_TAI_LIEU_20m42s.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for p in sorted(root.rglob('*')):
+                  if p.is_file():z.write(p,p.relative_to(root))
+          with zipfile.ZipFile('ALULA_095_13_TXT_PROMPTS.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for p in sorted((root/'prompts').glob('*.txt')):z.write(p,p.name)
+          PYCODE
+      - name: Save a draft release with documents only
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          release_tag=alula-095-20m42s
+          if ! gh release view "$release_tag" >/dev/null 2>&1; then
+            gh release create "$release_tag" --draft --target "$GITHUB_SHA" --title "AlUla 095 — 20:42 — tài liệu và prompt; voice chờ tải" --notes-file episodes/alula-095/GITHUB_RELEASE_NOTES.md
+          fi
+          gh release upload "$release_tag" ALULA_095_TAI_LIEU_20m42s.zip ALULA_095_13_TXT_PROMPTS.zip --clobber
