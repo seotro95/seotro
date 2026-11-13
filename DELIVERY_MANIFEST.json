@@ -9,7 +9,7 @@
   "main_scenes": 67,
   "reserve_scenes": 3,
   "full_native_speaker_review": false,
-  "published": false,
+  "published": true,
   "files": [
     {
       "language": "en",
@@ -26,7 +26,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.794647,
-      "max_tempo": 1.173161
+      "max_tempo": 1.173161,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/United-States-English-Andrew-22m18s.mp3"
     },
     {
       "language": "vi",
@@ -43,7 +44,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.794922,
-      "max_tempo": 0.963312
+      "max_tempo": 0.963312,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/Viet-Nam-Tieng-Viet-Nam-Minh-22m18s.mp3"
     },
     {
       "language": "es",
@@ -60,7 +62,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.774811,
-      "max_tempo": 1.06114
+      "max_tempo": 1.06114,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/Spain-Espanol-Davefx-22m18s.mp3"
     },
     {
       "language": "fr",
@@ -77,7 +80,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.819183,
-      "max_tempo": 1.094827
+      "max_tempo": 1.094827,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/France-Francais-Tom-22m18s.mp3"
     },
     {
       "language": "ja",
@@ -94,7 +98,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.800385,
-      "max_tempo": 1.142763
+      "max_tempo": 1.142763,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/Japan-Nihongo-M1-22m18s.mp3"
     },
     {
       "language": "ko",
@@ -111,7 +116,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.796967,
-      "max_tempo": 1.102812
+      "max_tempo": 1.102812,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/South-Korea-Hangugeo-M1-22m18s.mp3"
     },
     {
       "language": "de",
@@ -128,7 +134,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.794464,
-      "max_tempo": 0.994969
+      "max_tempo": 0.994969,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/Germany-Deutsch-Thorsten-22m18s.mp3"
     },
     {
       "language": "it",
@@ -145,7 +152,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.797821,
-      "max_tempo": 1.173287
+      "max_tempo": 1.173287,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/Italy-Italiano-M1-22m18s.mp3"
     },
     {
       "language": "pt",
@@ -162,7 +170,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.688568,
-      "max_tempo": 0.9
+      "max_tempo": 0.9,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/Portugal-Portugues-Tugao-22m18s.mp3"
     },
     {
       "language": "nl",
@@ -179,7 +188,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.796356,
-      "max_tempo": 1.278902
+      "max_tempo": 1.278902,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/Netherlands-Nederlands-Ronnie-22m18s.mp3"
     },
     {
       "language": "pl",
@@ -196,7 +206,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.801361,
-      "max_tempo": 0.9
+      "max_tempo": 0.9,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/Poland-Polski-MC-Speech-22m18s.mp3"
     },
     {
       "language": "sv",
@@ -213,7 +224,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.795288,
-      "max_tempo": 1.256043
+      "max_tempo": 1.256043,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/Sweden-Svenska-NST-22m18s.mp3"
     },
     {
       "language": "da",
@@ -230,7 +242,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.794617,
-      "max_tempo": 1.015422
+      "max_tempo": 1.015422,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/Denmark-Dansk-Talesyntese-22m18s.mp3"
     },
     {
       "language": "fi",
@@ -247,7 +260,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.795929,
-      "max_tempo": 1.295746
+      "max_tempo": 1.295746,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/Finland-Suomi-Harri-22m18s.mp3"
     },
     {
       "language": "no",
@@ -264,7 +278,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.794586,
-      "max_tempo": 0.907142
+      "max_tempo": 0.907142,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/Norway-Norsk-Talesyntese-22m18s.mp3"
     },
     {
       "language": "cs",
@@ -281,7 +296,8 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.794739,
-      "max_tempo": 1.262059
+      "max_tempo": 1.262059,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/Czechia-Cestina-Jirka-22m18s.mp3"
     },
     {
       "language": "hmn",
@@ -298,7 +314,11 @@
       "narration_cues": 134,
       "non_silent_cues": 134,
       "lossless_sample_peak": 0.794769,
-      "max_tempo": 0.93722
+      "max_tempo": 0.93722,
+      "download_url": "https://github.com/seotro95/seotro/raw/refs/heads/nan-madol-036-22m18s/downloads/Tieng-Hmong-Trang-Nu-female-3-22m18s.mp3"
     }
-  ]
+  ],
+  "delivery_channel": "GitHub",
+  "repository": "seotro95/seotro",
+  "branch": "nan-madol-036-22m18s"
 }
