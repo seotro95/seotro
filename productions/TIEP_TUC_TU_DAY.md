@@ -1,13 +1,31 @@
 <!-- active-production -->
-# Chủ đề 87 — tài liệu đã có, đang tạo 17 voice 20:22
+# Chủ đề 87 — đủ tài liệu và 17 voice 20:22 đã kiểm tải
 
-[Kịch bản và 11 TXT prompt](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_TAI_LIEU_20m22s.zip) · [5 tiêu đề và 5 prompt thumbnail](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/5_TIEU_DE_VA_THUMBNAIL.txt) · [Tiến trình voice](https://github.com/seotro95/seotro/actions/runs/43442771145)
+[Tải đủ 17 giọng ZIP](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_17_VOICES_20m22s.zip) · [Kịch bản và 11 TXT prompt](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_TAI_LIEU_20m22s.zip?v=5ff465e296863d5567b846a0ece597ec308706f8b2c896b4baac7eaa8b41ed21) · [5 tiêu đề và 5 prompt thumbnail](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/5_TIEU_DE_VA_THUMBNAIL.txt)
 
-Chủ đề: Schöningen, vũ khí gỗ và kỹ năng săn bắt cổ. Có 3.249 từ Anh, 123 mốc, 110 prompt mới trong 11 TXT, 13 mốc dùng lại. Mỗi prompt cấm trẻ em, thiếu niên, lời nói và âm thanh; chỉ bản sao gỗ và giáo cụ trưởng thành, không cảnh săn giết hoặc chân dung người chế tác.
+- [Anh (Mỹ)](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_My_Tieng_Anh.mp3) — 20:22
+- [Việt Nam — Nam Minh](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Viet_Nam_Nam_Minh.mp3) — 20:22
+- [Tây Ban Nha](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Tay_Ban_Nha.mp3) — 20:22
+- [Pháp](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Phap.mp3) — 20:22
+- [Nhật Bản](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Nhat_Ban.mp3) — 20:22
+- [Hàn Quốc](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Han_Quoc.mp3) — 20:22
+- [Đức](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Duc.mp3) — 20:22
+- [Ý](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Y.mp3) — 20:22
+- [Bồ Đào Nha](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Bo_Dao_Nha.mp3) — 20:22
+- [Hà Lan](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Ha_Lan.mp3) — 20:22
+- [Ba Lan](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Ba_Lan.mp3) — 20:22
+- [Thụy Điển](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Thuy_Dien.mp3) — 20:22
+- [Đan Mạch](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Dan_Mach.mp3) — 20:22
+- [Phần Lan](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Phan_Lan.mp3) — 20:22
+- [Na Uy (Bokmål)](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Na_Uy.mp3) — 20:22
+- [Séc](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Sec.mp3) — 20:22
+- [H'mông Trắng (nữ)](https://github.com/seotro95/seotro/releases/download/schoeningen-video-87-20m22s/SCHOENINGEN_87_Hmong_Trang_Nu.mp3) — 20:22
 
-Giữ đủ 17 ID từ tập 71: Việt dùng Nam Minh thật vi-VN-NamMinhNeural, nam; H’mông female-3 nữ qua công cụ riêng 1.6.6. Hai bản thử Anh 30 giây và Nam Minh 10 giây đã qua kiểm. Bản dịch được rà ý chính, niên đại và thuật ngữ; chưa có kiểm nghe/biên tập bản ngữ độc lập.
+Đã tải lại, kiểm hash và giải mã từng MP3 đúng 58.656.000 mẫu ở 48 kHz. Giữ đủ 17 ID từ tập 71; Việt dùng Nam Minh thật, H’mông dùng reference female-3. Chưa có kiểm nghe/biên tập bản ngữ độc lập hoặc xác minh phương ngữ H’mông Trắng độc lập.
 
-Tiếp tục workflow hiện tại, giữ checkpoint thành công. Chỉ phát hành khi đủ 17 voice, đúng ID, giải mã mỗi bản đúng 58.656.000 mẫu ở 48 kHz. Chưa có footage hoặc MP4 tập 87. Khi có clip: chỉ voice Anh, 10 cảnh trong 30 giây đầu nằm trong 20:22; cảnh thiếu dùng video liên quan, không ảnh tĩnh/thẻ chữ. Không tự bắt đầu tập khác. Tập 85 và mọi bản trước được giữ nguyên.
+Chủ đề: Schöningen, vũ khí gỗ và kỹ năng săn bắt cổ. Có 3.249 từ Anh, 123 mốc, 110 prompt mới trong 11 TXT, 13 mốc dùng lại. Mỗi prompt cấm trẻ em, thiếu niên, lời nói và âm thanh; đồ gỗ và mô hình là bản sao minh họa, không dữ liệu đo thật. Niên đại cập nhật theo nghiên cứu năm 2025 về khoảng 200 nghìn năm; không nhầm 187 hiện vật thành 187 cây giáo.
+
+Chưa có footage hoặc MP4 tập87. Khi có clip: chỉ voice Anh, xóa tiếng clip,10 cảnh trong30 giây đầu nằm trong20:22. Thiếu cảnh dùng video chuyển động liên quan, không ảnh tĩnh/thẻ chữ. Giữ hồ sơ v3 Nam Minh từ tập71; không tự tạo lại voice hoặc bắt đầu tập khác. Hồ sơ: productions/video-87-schoeningen. Mã nguồn: nhánh codex/schoeningen87-production-20261113, thư mục episode87. Tập85 và toàn bộ các tập trước được giữ nguyên.
 <!-- /active-production -->
 
 ---
@@ -156,6 +174,7 @@ Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ 
 ## Bàn giao video chủ đề4
 
 Đã dựng và xuất bản23:00, chỉ voiceAnh gốc có nhấn nhá.133upload/115clipkhácnhau/18bảntrùng; chọn cảnh người trưởng thành, bỏ mọi tiếngclip và cảnh không phù hợp.12shot trong30giây đầu; các chương theo ranh120/110s. [Video](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Tập5 vẫn chưa bắt đầu.
+
 
 
 

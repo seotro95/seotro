@@ -13,10 +13,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_My_Tieng_Anh.mp3",
-      "mp3_sha256": "3e8a2e6f825e4d4f9327a879cd16e8f929b6a99f40e5fa89b52547f84bfa1c73",
-      "alignment_granularity": "129Englishcues"
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_My_Tieng_Anh.mp3",
+      "mp3_sha256": "2428b2cb15f74ab9a5b560f590b609c71374f4b03590bd2975cc0c404d3a450c",
+      "alignment_granularity": "123Englishcues"
     },
     {
       "locale": "vi-VN",
@@ -30,9 +30,9 @@
       "base_rate": "phrase-dependent",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
       "rate": "phrase-dependent; no pitch shift",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Viet_Nam_Nam_Minh.mp3",
-      "mp3_sha256": "b843bd9fcb23fdf0c475367d2d4d57de3648146592badc7fce839e5daf9f6bdc",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Viet_Nam_Nam_Minh.mp3",
+      "mp3_sha256": "752565b2664238a0c939205dce183c27235ae590d2fa800274f5c75bdac51aa7",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -45,9 +45,9 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Tay_Ban_Nha.mp3",
-      "mp3_sha256": "08bdec0c2db4b1e8673ced5db301bd795ee62f1b92ca3e697a25c886eb4efd87",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Tay_Ban_Nha.mp3",
+      "mp3_sha256": "5165bacd87e50bf5d32c38bac2e4d15599f87fb260d68f4f198ab33bedcf42ed",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -60,9 +60,9 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Phap.mp3",
-      "mp3_sha256": "bad596729c33a704192176200f008154d806624c847c47148328c7d2c7518a2b",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Phap.mp3",
+      "mp3_sha256": "3658521e5f3609bcc2daea96c4bc4db5c7686f23d685f6e61d7bdb29ecc00cb0",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -75,9 +75,9 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Nhat_Ban.mp3",
-      "mp3_sha256": "a13d4050ebaf4c46be62def0938496d348212da2e1295024f1f21a4da068ede0",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Nhat_Ban.mp3",
+      "mp3_sha256": "326585c7463a2084d5e7136a5a454725bddb201751e32a8bcb6dedde63a90c82",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -90,9 +90,9 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Han_Quoc.mp3",
-      "mp3_sha256": "b62d60c19bedd892ecce0bdf5dbe7b51c925632cfb37c2b2b6132e50c656dcc4",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Han_Quoc.mp3",
+      "mp3_sha256": "5288776531d4c1ad8111de8beadfe8ea1d0a7464717728801193e7542ffe3500",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -105,9 +105,9 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Duc.mp3",
-      "mp3_sha256": "153f50d4a50f90c1595fd9f96cf2953d78e456cad05ab4abf8649e3b4da5ffc8",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Duc.mp3",
+      "mp3_sha256": "d3cd2718edcb19841182f63e6e17f43217f1541336e035c79750223c82977b75",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -120,9 +120,9 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Y.mp3",
-      "mp3_sha256": "5bcc3a13f7efa34e6299be07cf04c5c5365972a8eb590e08a2ca929a7f4cb678",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Y.mp3",
+      "mp3_sha256": "64bc670481712efa2fd9b17e5262cc59550b1538ec83efe6d1884a6f9e3888a3",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -135,9 +135,9 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Bo_Dao_Nha.mp3",
-      "mp3_sha256": "3b35e3f6e16251379c03c0504f7708debb044e5f65225be701804fe19a95acf5",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Bo_Dao_Nha.mp3",
+      "mp3_sha256": "5766a0706bfbe8a96b12bad366a61c294b0ff29aad45a254e1a0b0101e3322fe",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -150,9 +150,9 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Ha_Lan.mp3",
-      "mp3_sha256": "62b50a1cd1a5a061789360aedf5fefc4682e4f1215e039af67608dbbc89d0448",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Ha_Lan.mp3",
+      "mp3_sha256": "91b6b3beac77e980c06eb4033328f02ff861df9d95a986b4db1c4798e15de620",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -165,9 +165,9 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Ba_Lan.mp3",
-      "mp3_sha256": "006a2e68bd2339f92f4ad398533ebd9217ded70fa35dcf3711e1affe3d70d078",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Ba_Lan.mp3",
+      "mp3_sha256": "dabe5aa4a5d7a1bc4ef1a6166a1c54763fa29aa0fdd79df4011310c5b4a9aa7c",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -180,9 +180,9 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Thuy_Dien.mp3",
-      "mp3_sha256": "883ff2b95903f9ddd9b4cf023eeb118a78619d85027050bb7561173e12e8c0aa",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Thuy_Dien.mp3",
+      "mp3_sha256": "9999856d4cc18fbebdda5f63109ab4a7ee52716c2c1b0d320c7e1efd1cd17498",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -195,9 +195,9 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Dan_Mach.mp3",
-      "mp3_sha256": "e4bda23cda44b3cf41f8276fef392ecf6f1c0ffabd9adad8b8dc3e11cb0b90d0",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Dan_Mach.mp3",
+      "mp3_sha256": "52f4265b62b89baede5afb50c5c04724f26a5b4ebf6d60c4768696fe1a69bb6d",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -210,9 +210,9 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Phan_Lan.mp3",
-      "mp3_sha256": "e60cdad1ef20c0e8904d99d8ad3e2bc75b4e7817bb910acc73aa6b4a5c17f622",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Phan_Lan.mp3",
+      "mp3_sha256": "37d6534b5b0ffb7dbc75c3c427537aa2a5e48ebd63b64f8fea3923f0bca71752",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -225,9 +225,9 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Na_Uy.mp3",
-      "mp3_sha256": "cf793f0dcaa4f6e7b4a82c0ce0f702ecae75ba698785cdf54022fd2049922645",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Na_Uy.mp3",
+      "mp3_sha256": "65d980ed4fdb9b072b712cfb5d77522e3c3e1cc9706cd3d3d6c1a2d9f92183f7",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -240,9 +240,9 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Sec.mp3",
-      "mp3_sha256": "99b1cbdf803fa2e617348d9ce0625ecf4e71c71241d0aa67db86570ce200db63",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Sec.mp3",
+      "mp3_sha256": "7e5aa34ae64ceaa18ce9055b9163315320c4d61a2fe8f3d0e9a9c87573a98639",
       "alignment_granularity": "13 shared chapter boundaries"
     },
     {
@@ -258,11 +258,11 @@
       "audio_profile": "clear-v1",
       "dialect_independently_verified": false,
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1282,
-      "delivery_filename": "HOMO_LUZONENSIS_85_Hmong_Trang_Nu.mp3",
-      "mp3_sha256": "2b611030c13631489490667f25246afb63930bd235fc9f6b8afe1a47e84e46ec",
+      "duration_seconds": 1222,
+      "delivery_filename": "SCHOENINGEN_87_Hmong_Trang_Nu.mp3",
+      "mp3_sha256": "143f4b3733ab83cd1b639ac2687976a4680c8cfedecc1c8ab2d432565c18480e",
       "alignment_granularity": "13 shared chapter boundaries"
     }
   ],
-  "note": "All17 episode85 voices complete, each decoded to1282seconds. All17 identities retained from topic71, including actual male NamMinhNeural and native Hmong female-3. Independent native listening and WhiteHmongdialect review pending."
+  "note": "All17 episode87 voices complete, each decoded to1222seconds. All17 identities retained from topic71, including actual male NamMinhNeural and native Hmong female-3. Independent native listening and WhiteHmongdialect review pending."
 }

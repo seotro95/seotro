@@ -1,0 +1,152 @@
+{
+  "status": "passed",
+  "topic_id": 87,
+  "public_voice_archive_sha256": "b81159a95059c0c646bb54995e3e4821f5cc8007b31dcd6a64e42c2f9eb162ac",
+  "voice_count": 17,
+  "target_seconds": 1222,
+  "decoded_frames_per_voice_48000": 58656000,
+  "all_country_asset_digests_match": true,
+  "episode87_locked_voice_ids_match": true,
+  "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+  "zip_crc_passed": true,
+  "voices": [
+    {
+      "locale": "en-US",
+      "filename": "SCHOENINGEN_87_My_Tieng_Anh.mp3",
+      "sha256": "2428b2cb15f74ab9a5b560f590b609c71374f4b03590bd2975cc0c404d3a450c",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "vi-VN",
+      "filename": "SCHOENINGEN_87_Viet_Nam_Nam_Minh.mp3",
+      "sha256": "752565b2664238a0c939205dce183c27235ae590d2fa800274f5c75bdac51aa7",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "es-ES",
+      "filename": "SCHOENINGEN_87_Tay_Ban_Nha.mp3",
+      "sha256": "5165bacd87e50bf5d32c38bac2e4d15599f87fb260d68f4f198ab33bedcf42ed",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "fr-FR",
+      "filename": "SCHOENINGEN_87_Phap.mp3",
+      "sha256": "3658521e5f3609bcc2daea96c4bc4db5c7686f23d685f6e61d7bdb29ecc00cb0",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "ja-JP",
+      "filename": "SCHOENINGEN_87_Nhat_Ban.mp3",
+      "sha256": "326585c7463a2084d5e7136a5a454725bddb201751e32a8bcb6dedde63a90c82",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "ko-KR",
+      "filename": "SCHOENINGEN_87_Han_Quoc.mp3",
+      "sha256": "5288776531d4c1ad8111de8beadfe8ea1d0a7464717728801193e7542ffe3500",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "de-DE",
+      "filename": "SCHOENINGEN_87_Duc.mp3",
+      "sha256": "d3cd2718edcb19841182f63e6e17f43217f1541336e035c79750223c82977b75",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "it-IT",
+      "filename": "SCHOENINGEN_87_Y.mp3",
+      "sha256": "64bc670481712efa2fd9b17e5262cc59550b1538ec83efe6d1884a6f9e3888a3",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "pt-PT",
+      "filename": "SCHOENINGEN_87_Bo_Dao_Nha.mp3",
+      "sha256": "5766a0706bfbe8a96b12bad366a61c294b0ff29aad45a254e1a0b0101e3322fe",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "nl-NL",
+      "filename": "SCHOENINGEN_87_Ha_Lan.mp3",
+      "sha256": "91b6b3beac77e980c06eb4033328f02ff861df9d95a986b4db1c4798e15de620",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "pl-PL",
+      "filename": "SCHOENINGEN_87_Ba_Lan.mp3",
+      "sha256": "dabe5aa4a5d7a1bc4ef1a6166a1c54763fa29aa0fdd79df4011310c5b4a9aa7c",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "sv-SE",
+      "filename": "SCHOENINGEN_87_Thuy_Dien.mp3",
+      "sha256": "9999856d4cc18fbebdda5f63109ab4a7ee52716c2c1b0d320c7e1efd1cd17498",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "da-DK",
+      "filename": "SCHOENINGEN_87_Dan_Mach.mp3",
+      "sha256": "52f4265b62b89baede5afb50c5c04724f26a5b4ebf6d60c4768696fe1a69bb6d",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "fi-FI",
+      "filename": "SCHOENINGEN_87_Phan_Lan.mp3",
+      "sha256": "37d6534b5b0ffb7dbc75c3c427537aa2a5e48ebd63b64f8fea3923f0bca71752",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "nb-NO",
+      "filename": "SCHOENINGEN_87_Na_Uy.mp3",
+      "sha256": "65d980ed4fdb9b072b712cfb5d77522e3c3e1cc9706cd3d3d6c1a2d9f92183f7",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "cs-CZ",
+      "filename": "SCHOENINGEN_87_Sec.mp3",
+      "sha256": "7e5aa34ae64ceaa18ce9055b9163315320c4d61a2fe8f3d0e9a9c87573a98639",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    },
+    {
+      "locale": "mww",
+      "filename": "SCHOENINGEN_87_Hmong_Trang_Nu.mp3",
+      "sha256": "143f4b3733ab83cd1b639ac2687976a4680c8cfedecc1c8ab2d432565c18480e",
+      "decoded_frames_48000": 58656000,
+      "public_asset_digest_matches": true,
+      "country_download_url_http_200": true
+    }
+  ],
+  "independent_native_listening_review": false,
+  "white_hmong_dialect_independently_verified": false
+}

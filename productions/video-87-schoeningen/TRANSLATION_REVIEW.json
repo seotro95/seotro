@@ -1,0 +1,44 @@
+{
+  "topic_id": 87,
+  "status": "assistant_key_claim_review_complete",
+  "languages": 16,
+  "assistant_full_chapter_rewrites": [
+    "vi-VN",
+    "mww"
+  ],
+  "additional_manual_rewrites": {
+    "de-DE": [
+      5,
+      6,
+      7
+    ]
+  },
+  "source_disambiguated": true,
+  "chronology_and_categories_checked": true,
+  "critical_dates": [
+    "1997publication400ka",
+    "later300ka",
+    "2025study200ka",
+    "2024assemblage187wooditemsMin20weapons35splitwoodtools"
+  ],
+  "repairs_by_locale": {
+    "es-ES": 1,
+    "fr-FR": 1,
+    "ja-JP": 6,
+    "ko-KR": 5,
+    "de-DE": 1,
+    "it-IT": 1,
+    "pt-PT": 4,
+    "nl-NL": 1,
+    "pl-PL": 2,
+    "sv-SE": 4,
+    "da-DK": 3,
+    "fi-FI": 4,
+    "nb-NO": 2,
+    "cs-CZ": 2
+  },
+  "untranslated_eight_word_source_runs_checked": true,
+  "independent_native_editorial_review": false,
+  "independent_native_listening_review": false,
+  "white_hmong_dialect_independently_verified": false
+}
