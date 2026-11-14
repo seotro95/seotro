@@ -16,6 +16,7 @@ import {AccountProxies} from './account-proxy.mjs';
 import {storageCodec} from './storage-codec.mjs';
 import {dataLocation,importData} from './data-location.mjs';
 import {StudioStartup} from './studio-startup.mjs';
+import os from 'node:os';
 
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const root = path.dirname(directory);
@@ -33,6 +34,8 @@ app.setName('Muse AI Studio');
 app.commandLine.appendSwitch('remote-debugging-port', '0');
 app.commandLine.appendSwitch('remote-debugging-address', '127.0.0.1');
 app.commandLine.appendSwitch('disable-background-timer-throttling');
+let recoveryMode = process.argv.includes('--studio-recovery');
+if(recoveryMode)app.disableHardwareAcceleration();
 let automation; let window; let runtime; let host; let emailWindow; let emailNavigation = false; let closing = false;
 const requests = new Map();
 const hosts = new Map(); const loginLogs = new Map();
@@ -115,6 +118,14 @@ async function start() {
     window.webContents.send('studio:startup-state',state);
   }});
   startup.observe(studio.webContents);
+  let codeCacheReset='not-requested';
+  const resetStudioCodeCache=async()=>{
+    if(!recoveryMode)return;
+    try{await studio.webContents.session.clearCodeCaches({});codeCacheReset='complete'}catch{codeCacheReset='failed'}
+  };
+  const startupReport=()=>({version,...startup.snapshot(),recoveryMode,codeCacheReset,hardwareAcceleration:app.isHardwareAccelerationEnabled(),runtime:{electron:process.versions.electron,chromium:process.versions.chrome,architecture:process.arch,platform:process.platform,osRelease:os.release()},memory:{totalMB:Math.round(os.totalmem()/1048576),freeMB:Math.round(os.freemem()/1048576)}});
+  const studioURL=()=>runtime.url+(recoveryMode?'/?recovery=1':'');
+  ipcMain.on('studio:renderer-stage',(event,stage)=>{if(event.sender===studio.webContents)startup.setStage(stage)});
   ipcMain.on('studio:renderer-state',(event,state)=>{
     if(event.sender!==studio.webContents)return;
     if(state==='ready')startup.ready();
@@ -124,16 +135,18 @@ async function start() {
     if(event.sender!==window.webContents)throw new Error('Untrusted startup sender');
     if(action==='status')return startup.snapshot();
     if(action==='copy'){
-      clipboard.writeText(JSON.stringify({version,...startup.snapshot(),hardwareAcceleration:app.isHardwareAccelerationEnabled()},null,2));
+      clipboard.writeText(JSON.stringify(startupReport(),null,2));
       return {copied:true};
     }
-    if(action==='retry'){
+    if(action==='retry'||action==='recover'){
       if(requests.size||muse.snapshot().some(account=>account.running>0))throw new Error('Đang có tác vụ tạo nội dung. Đợi hoàn tất trước khi tải lại Studio.');
+      if(action==='recover')recoveryMode=true;
       for(const owned of hosts.values())owned.hideLogin();
       window.contentView.addChildView(studio);
       window.webContents.send('studio:view-changed','studio');
       startup.loading();
-      await studio.webContents.loadURL(runtime.url).catch(()=>startup.fail('STUDIO_LOAD_FAILED'));
+      await resetStudioCodeCache();
+      await studio.webContents.loadURL(studioURL()).catch(()=>startup.fail('STUDIO_LOAD_FAILED'));
       return startup.snapshot();
     }
     throw new Error('Unknown startup action');
@@ -246,7 +259,7 @@ async function start() {
     else if (name === 'reload-muse') { await muse.reopenLogin(); studio.webContents.send('studio:session-refresh'); }
     else if (name === 'login-diagnostics') {
       if(startup.snapshot().phase!=='ready'||!loginLogs.has(muse.selectedId)){
-        const report={version,...startup.snapshot(),hardwareAcceleration:app.isHardwareAccelerationEnabled()};
+        const report=startupReport();
         const result=await dialog.showMessageBox(window,{type:report.phase==='error'?'warning':'info',title:'Chẩn đoán Studio',message:report.message,detail:`Bản ${version} · ${report.code}. Báo cáo không chứa tài khoản hoặc kịch bản.`,buttons:['Đóng','Sao chép chẩn đoán'],defaultId:0,cancelId:0});
         if(result.response===1)clipboard.writeText(JSON.stringify(report,null,2));
         return;
@@ -276,7 +289,8 @@ async function start() {
   // Attach after the shell has loaded, and apply bounds again after attachment.
   window.contentView.addChildView(studio); layout();
   startup.loading();
-  await studio.webContents.loadURL(runtime.url).catch(()=>startup.fail('STUDIO_LOAD_FAILED'));
+  await resetStudioCodeCache();
+  await studio.webContents.loadURL(studioURL()).catch(()=>startup.fail('STUDIO_LOAD_FAILED'));
   void muse.restoreSessions(savedAccountIds).catch(()=>{});
   window.on('close', event => { if (!closing) { event.preventDefault(); void shutdown(); } });
   console.log('Muse desktop ready: dang nhap trong tool, toi da 40 o, mot hoac nhieu tai khoan, hang doi an toan.');

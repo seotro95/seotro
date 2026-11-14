@@ -1,5 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('museTransport', Object.freeze({
+  rendererStage: stage => { if(['bootstrap','workspace','interface','media-library','ready'].includes(stage))ipcRenderer.send('studio:renderer-stage',stage); },
   rendererState: state => { if(state==='ready'||state==='error')ipcRenderer.send('studio:renderer-state',state); },
   dataControl: action => ipcRenderer.invoke('studio:data-control',action),
   automationControl: (action,data) => ipcRenderer.invoke('studio:automation-control',action,data),
@@ -17,3 +18,4 @@ contextBridge.exposeInMainWorld('museTransport', Object.freeze({
     return () => ipcRenderer.removeListener('studio:session-refresh', listener);
   },
 }));
+ipcRenderer.send('studio:renderer-stage','bootstrap');

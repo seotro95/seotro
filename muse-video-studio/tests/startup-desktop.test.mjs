@@ -50,6 +50,8 @@ test('Studio renders, survives load failure and renderer crash, and retries with
     assert.ok(await shell.getByRole('button',{name:'Sao chép chẩn đoán Studio',exact:true}).isVisible());
     const report=await shell.evaluate(async()=>{await window.studioDesktop.startup('copy');return window.studioDesktop.startup('status')});
     assert.equal(report.code,'STUDIO_RENDERER_EXITED');
+    assert.notEqual(report.lastExit.reason,'unknown');
+    assert.ok(Number.isInteger(report.lastExit.exitCode));
     const copied=await desktop.evaluate(({clipboard})=>clipboard.readText());
     assert.doesNotMatch(copied,/Keep my existing script|127\.0\.0\.1|token|cookie/i);
     await shell.locator('#reload-studio').click();
@@ -62,5 +64,28 @@ test('Studio renders, survives load failure and renderer crash, and retries with
     }),'Keep my existing script');
     await shell.getByRole('button',{name:'← Về Studio',exact:true}).click();
     assert.equal(await desktop.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows()[0].contentView.children.length),1);
+    await shell.evaluate(()=>window.studioDesktop.startup('recover'));
+    await until(async()=>(await state()).phase==='ready');
+    assert.equal(await desktop.evaluate(async({webContents})=>{
+      const recovered=webContents.getAllWebContents().find(w=>w.getURL().startsWith('http://127.0.0.1:'));
+      return recovered.executeJavaScript('document.querySelector(".recovery-banner strong").textContent');
+    }),'Chế độ khôi phục Studio');
+    await shell.evaluate(()=>window.studioDesktop.startup('copy'));
+    assert.equal(JSON.parse(await desktop.evaluate(({clipboard})=>clipboard.readText())).recoveryMode,true);
+    // The test starts on an ephemeral port. Reuse that origin on restart,
+    // matching the stable studio-port file used by the packaged application.
+    const recoveryPort=await desktop.evaluate(({webContents})=>new URL(webContents.getAllWebContents().find(w=>w.getURL().startsWith('http://127.0.0.1:')).getURL()).port);
+    await desktop.close();desktop=null;
+    desktop=await _electron.launch({executablePath:portable||require('electron'),args:[...args,'--studio-recovery','--disable-gpu'],env:{...process.env,MUSE_DESKTOP_TEST:'1',MUSE_DESKTOP_DATA:profile,PORT:recoveryPort},timeout:30000});
+    await desktop.firstWindow();
+    await until(()=>{shell=desktop.context().pages().find(page=>page.url().endsWith('/desktop/shell.html'));return shell});
+    await until(async()=>(await state()).phase==='ready');
+    await shell.evaluate(()=>window.studioDesktop.startup('copy'));
+    const recoveryReport=JSON.parse(await desktop.evaluate(({clipboard})=>clipboard.readText()));
+    assert.equal(recoveryReport.recoveryMode,true);assert.equal(recoveryReport.hardwareAcceleration,false);
+    assert.equal(recoveryReport.codeCacheReset,'complete');
+    studio=desktop.context().pages().find(page=>page.url().startsWith('http://127.0.0.1:'));
+    assert.match(studio.url(),/recovery=1/);
+    assert.equal(await studio.getByLabel('Kịch bản cảnh 1',{exact:true}).inputValue(),'Keep my existing script');
   }finally{await desktop?.close();await rm(profile,{recursive:true,force:true})}
 });

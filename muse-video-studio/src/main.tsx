@@ -22,6 +22,8 @@ type RenderBatch = { control: AbortController; batchId: string; completed: numbe
 const hasVerifiedSession = (account?: AccountSession) => Boolean(account?.sessionAuthenticated ?? account?.authenticated);
 const accountStateName = (account?: AccountSession) => !account ? 'Chưa kết nối' : hasVerifiedSession(account) ? account.active ? 'Đã xác minh' : 'Phiên đã lưu' : account.state === 'awaiting_code' ? 'Đang chờ mã xác nhận' : account.state === 'check_failed' ? 'Chưa xác minh được phiên' : account.state === 'login_open' ? 'Chờ đăng nhập' : account.state === 'saved' || account.state === 'session_saved' ? 'Cần kiểm tra phiên' : 'Chưa kết nối';
 function load() { try { return restoreWorkspace(localStorage.getItem(STORAGE)); } catch { return restoreWorkspace(null); } }
+const recoveryMode = new URLSearchParams(location.search).get('recovery') === '1';
+window.museTransport?.rendererStage?.('workspace');
 const initial = load();
 function referenceKey(scene: Scene, config: Settings) {
   config=sceneSettings(config,scene);
@@ -47,7 +49,7 @@ function Modal({ title, eyebrow, children, close, wide = false }: { title: strin
 }
 
 function App() {
-  useEffect(()=>{window.museTransport?.rendererState?.('ready')},[]);
+  useEffect(()=>{window.museTransport?.rendererStage?.('interface');window.museTransport?.rendererState?.('ready')},[]);
   const [scenes, setScenes] = useState(()=>createScenes(MAX_SLOTS).map((scene,index)=>initial.scenes[index]||scene));
   const scenesRef = useRef(scenes);
   const [settings, setSettings] = useState(initial.settings);
@@ -268,6 +270,7 @@ function App() {
     finally { setDeletingMedia(null); }
   }
   async function clearAllResults() {
+    if(recoveryMode)throw apiError(409,'Chế độ khôi phục chưa tải thư viện cũ. Mở lại chế độ thường để quản lý toàn bộ thư viện.');
     if(renderJobs.current.size||controller.current||locked||downloading||clearingAll.current)throw apiError(409,'Đợi tác vụ và lượt tải hoàn tất trước khi xóa thư viện.');
     clearingAll.current=true;setDeletingMedia('all');
     try {const entries=[...libraryRef.current];await clearMedia();setViewer(null);updateLibrary(()=>[]);updateScenes(all=>all.map(scene=>({...scene,image:undefined,video:undefined,status:'ready',error:undefined})));for(const entry of entries)URL.revokeObjectURL(entry.media.url);setNotice(`Đã xóa ${entries.length} ảnh/video trong thư viện tool.`);return {deleted:entries.length};}
@@ -379,6 +382,8 @@ function App() {
   useEffect(() => { void refreshStatus(); }, []);
   useEffect(() => { if (!busy&&connectingId===null) return; const timer = setInterval(() => { void refreshStatus(false); }, 1200); return () => clearInterval(timer); }, [busy,connectingId]);
   useEffect(() => {
+    if(recoveryMode){setLibraryLoading(false);window.museTransport?.rendererStage?.('ready');return;}
+    window.museTransport?.rendererStage?.('media-library');
     let mounted = true;
     void loadMedia().then(entries => {
       if (!mounted) { entries.forEach(entry => URL.revokeObjectURL(entry.media.url)); return; }
@@ -388,7 +393,7 @@ function App() {
         const video = entries.find(entry => entry.sceneId === scene.id && entry.media.kind === 'video' && matchesRequest(entry, { ...scene, image }, { ...settings, output: 'video' }))?.media;
         return { ...scene, image, video, status: (settings.output === 'image' ? image : video) ? 'done' : 'ready' };
       }));
-    }).catch(e => { if (mounted) setNotice(`Chưa đọc được kho kết quả: ${errorInfo(e).raw}`); }).finally(() => { if (mounted) setLibraryLoading(false); });
+    }).catch(e => { if (mounted) setNotice(`Chưa đọc được kho kết quả: ${errorInfo(e).raw}`); }).finally(() => { if (mounted) {setLibraryLoading(false);window.museTransport?.rendererStage?.('ready');} });
     return () => { mounted = false; libraryRef.current.forEach(entry => URL.revokeObjectURL(entry.media.url)); };
   }, []);
   useEffect(() => window.museTransport?.onSessionRefresh?.(() => {
@@ -605,6 +610,7 @@ function App() {
   const composerFeedback = composerCheck && <div className="composer-feedback" role="status"><p>{composerCheck.message}</p>{(composerCheck.error || composerCheck.details) ? <details><summary>Chi tiết trang luồng</summary><pre>{composerCheck.error || JSON.stringify(composerCheck.details, null, 2)}</pre></details> : null}</div>;
 
   return <div className="app-shell">
+    {recoveryMode&&<aside className="recovery-banner" role="status"><strong>Chế độ khôi phục Studio</strong><p>Ảnh/video đã lưu chưa được tải vào giao diện. Tài khoản, kịch bản và thư viện cũ được giữ. Đóng ứng dụng rồi mở Muse AI Studio.exe để trở về chế độ thường.</p></aside>}
     <input ref={imageInput} type="file" accept="image/png,image/jpeg,image/webp" hidden onChange={e => { void handleImage(e.target.files?.[0]); e.target.value = ''; }}/>
     <input ref={fileInput} type="file" accept=".txt,.srt" hidden onChange={e => { void importFile(e.target.files?.[0]); e.target.value = ''; }}/>
     <header className="topbar">
@@ -617,7 +623,7 @@ function App() {
         <button className="button" disabled={downloading} onClick={() => void chooseExportDirectory().then(result => { if (!result.cancelled) setNotice(`Đã chọn nơi lưu: ${result.name}`); }).catch(error => setNotice(logError(error,'Chọn thư mục').raw))}><FolderOpen size={17}/>Thư mục lưu</button>
         <button className="button" disabled={locked} onClick={() => setModal('import')}><FileText size={18}/>Nhập TXT / SRT</button>
         <button className="button" onClick={() => setModal('accounts')}><Users size={19}/>Tài khoản Muse</button>
-        <button className="button" onClick={()=>void openAutomation()}><Link2 size={17}/>Cổng API</button><button className="button danger" disabled={!library.length||busy||locked||downloading} onClick={()=>setModal('clear-media')}><Trash2 size={16}/>Xóa toàn bộ</button>
+        <button className="button" onClick={()=>void openAutomation()}><Link2 size={17}/>Cổng API</button><button className="button danger" disabled={recoveryMode||!library.length||busy||locked||downloading} onClick={()=>setModal('clear-media')}><Trash2 size={16}/>Xóa toàn bộ</button>
         <button className="button diagnostic-button" onClick={() => setModal('diagnostics')}><ShieldPlus size={19}/>Chẩn đoán API</button>
         <span className={`connection-pill ${settings.mode === 'demo' ? 'is-demo' : providerReady ? 'connected' : ''}`} title="Mở Chẩn đoán API để cấu hình kết nối"><i/>{connection}</span>
       </div>

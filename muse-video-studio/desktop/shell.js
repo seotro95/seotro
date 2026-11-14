@@ -6,10 +6,11 @@ function renderStartup(){
   document.querySelector('#startup-title').textContent=startupState.phase==='error'?'Chưa mở được Studio':'Đang mở Studio…';
   document.querySelector('#startup-message').textContent=startupState.message;
   document.querySelector('#startup-code').textContent=startupState.phase==='error'?startupState.code:'';
+  document.querySelector('#startup-exit').textContent=startupState.phase==='error'&&startupState.lastExit?`Lý do: ${startupState.lastExit.reason} · Mã thoát: ${startupState.lastExit.exitCodeHex??'chưa có'} · Bước: ${startupState.lastExit.stage}`:'';
 }
 window.studioDesktop.onStartup(state=>{startupState=state;renderStartup()});
 window.studioDesktop.startup('status').then(state=>{startupState=state;renderStartup()}).catch(()=>{message.textContent='Chưa đọc được trạng thái Studio.'});
-for(const [id,action] of [['reload-studio','retry'],['retry-studio','retry'],['copy-startup','copy']])document.getElementById(id).onclick=async()=>{
+for(const [id,action] of [['reload-studio','retry'],['retry-studio','retry'],['recover-studio','recover'],['copy-startup','copy']])document.getElementById(id).onclick=async()=>{
   const button=document.getElementById(id);button.disabled=true;
   try{await window.studioDesktop.startup(action);message.textContent=action==='copy'?'Đã sao chép chẩn đoán Studio.':''}
   catch(error){message.textContent=error.message}

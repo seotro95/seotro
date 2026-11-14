@@ -1,4 +1,8 @@
-# Muse AI Studio 1.12.1 · Khôi phục giao diện Studio
+# Muse AI Studio 1.12.2 · Khôi phục và chẩn đoán tiến trình Studio
+
+Nếu Studio vẫn dừng khi GPU đã tắt, đóng ứng dụng rồi mở **MO_STUDIO_KHOI_PHUC.bat**. Chế độ này giữ tài khoản/kịch bản, chưa tải thư viện cũ và không xóa kết quả đã lưu. Báo cáo chẩn đoán có lý do dừng, mã thoát và bước khởi động. Xem [hướng dẫn 1.12.2](RECOVERY-1.12.2.md).
+
+## Khôi phục giao diện từ bản 1.12.1
 
 Sửa cách gắn/hiện vùng Studio, tách kết nối máy chủ cục bộ khỏi proxy tài khoản và bổ sung màn hình tải/lỗi có **Tải lại Studio** cùng **Sao chép chẩn đoán Studio**. Có tệp thử hiển thị **MO_STUDIO_KHONG_GPU.bat**. Giữ nguyên nơi lưu dữ liệu và các tính năng chọn ô của 1.12.0. Xem [hướng dẫn xử lý màn hình đen](BLACK-SCREEN-1.12.1.md).
 

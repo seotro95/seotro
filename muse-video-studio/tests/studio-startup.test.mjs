@@ -32,10 +32,27 @@ test('navigation, preload failures and renderer crashes never expose private pag
     assert.equal(startup.snapshot().code,'STUDIO_LOAD_FAILED');
     contents.emit('preload-error',{},'C:/private-account',new Error('secret'));
     assert.equal(startup.snapshot().code,'STUDIO_PRELOAD_FAILED');
-    contents.emit('render-process-gone',{}, {reason:'crashed',private:'secret'});
+    startup.setStage('media-library');
+    contents.emit('render-process-gone',{}, {reason:'crashed',exitCode:-1073741819,private:'secret'});
     assert.equal(startup.snapshot().code,'STUDIO_RENDERER_EXITED');
+    assert.equal(startup.snapshot().lastExit.exitCodeHex,'0xC0000005');
     assert.doesNotMatch(JSON.stringify(startup.snapshot()),/private|secret|127\.0\.0\.1/);
     contents.emit('destroyed');
     for(const event of ['did-start-navigation','did-fail-load','preload-error','render-process-gone','destroyed'])assert.equal(contents.listenerCount(event),0);
+  }finally{startup.dispose()}
+});
+
+test('out-of-memory exits retain the failing stage and exact numeric exit code across a recovery attempt',()=>{
+  const contents=new EventEmitter();const startup=new StudioStartup({onChange:()=>{}});startup.observe(contents);
+  try{
+    startup.loading();startup.setStage('media-library');
+    contents.emit('render-process-gone',{}, {reason:'oom',exitCode:0xC0000017});
+    assert.equal(startup.snapshot().code,'STUDIO_RENDERER_OUT_OF_MEMORY');
+    assert.deepEqual(startup.snapshot().lastExit,{reason:'oom',exitCode:0xC0000017,exitCodeHex:'0xC0000017',stage:'media-library'});
+    startup.loading();startup.ready();
+    assert.equal(startup.snapshot().lastExit.reason,'oom');
+    startup.setStage('private-token');assert.notEqual(startup.snapshot().stage,'private-token');
+    contents.emit('render-process-gone',{}, {reason:'private-token',exitCode:'secret'});
+    assert.deepEqual(startup.snapshot().lastExit,{reason:'unknown',exitCode:null,exitCodeHex:null,stage:'navigation'});
   }finally{startup.dispose()}
 });

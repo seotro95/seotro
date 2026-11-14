@@ -1,15 +1,15 @@
-name: Muse Studio black screen repair
+name: Muse Studio renderer recovery
 on:
   workflow_dispatch:
   push:
-    branches: [codex/muse-112-black-screen-20261114]
+    branches: [codex/muse-1122-renderer-recovery]
     paths:
       - 'muse-video-studio/**'
       - '.github/workflows/muse-black-screen-repair.yml'
 permissions:
   contents: write
 concurrency:
-  group: muse-black-screen-repair
+  group: muse-renderer-recovery
   cancel-in-progress: false
 jobs:
   windows:
@@ -32,7 +32,7 @@ jobs:
       - run: npm run build
       - run: npm test
       - run: npx playwright install chromium
-      - run: npm run test:e2e -- tests/browser/selected-slots.spec.ts tests/browser/account-selection.spec.ts
+      - run: npm run test:e2e -- tests/browser/recovery.spec.ts tests/browser/selected-slots.spec.ts tests/browser/account-selection.spec.ts
       - run: npm run test:startup
       - run: npm run test:desktop
       - run: python scripts/package_portable.py --platform win32 --output "${{ runner.temp }}/muse-artifacts"
@@ -47,7 +47,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - uses: actions/upload-artifact@v4
         with:
-          name: Muse-AI-Studio-black-screen-repair-Windows-x64
+          name: Muse-AI-Studio-renderer-recovery-Windows-x64
           path: ${{ runner.temp }}/muse-artifacts/*.zip
           if-no-files-found: error
       - name: Save a draft release after all checks pass
@@ -60,6 +60,6 @@ jobs:
           gh release view $tag --repo "${{ github.repository }}" *> $null
           if ($LASTEXITCODE -eq 0) { Write-Output "A release already uses this tag. Keeping the checked workflow artifact."; exit 0 }
           $zip = Get-ChildItem "${{ runner.temp }}/muse-artifacts/*.zip"
-          Copy-Item BLACK-SCREEN-1.12.1.md "${{ runner.temp }}/muse-release-notes.txt"
-          gh release create $tag $zip.FullName --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Muse AI Studio $version - Studio startup recovery - Windows x64" --notes-file "${{ runner.temp }}/muse-release-notes.txt" --draft --latest=false
+          Copy-Item RECOVERY-1.12.2.md "${{ runner.temp }}/muse-release-notes.txt"
+          gh release create $tag $zip.FullName --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Muse AI Studio $version - Renderer recovery and exit diagnostics - Windows x64" --notes-file "${{ runner.temp }}/muse-release-notes.txt" --draft --latest=false
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
