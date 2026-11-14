@@ -47,6 +47,7 @@ function Modal({ title, eyebrow, children, close, wide = false }: { title: strin
 }
 
 function App() {
+  useEffect(()=>{window.museTransport?.rendererState?.('ready')},[]);
   const [scenes, setScenes] = useState(()=>createScenes(MAX_SLOTS).map((scene,index)=>initial.scenes[index]||scene));
   const scenesRef = useRef(scenes);
   const [settings, setSettings] = useState(initial.settings);
@@ -745,4 +746,10 @@ function App() {
   </div>;
 }
 
-createRoot(document.getElementById('root')!).render(<App/>);
+class StudioBoundary extends React.Component<{children:React.ReactNode},{failed:boolean}>{
+  state={failed:false};
+  static getDerivedStateFromError(){return {failed:true}}
+  componentDidCatch(){window.museTransport?.rendererState?.('error')}
+  render(){return this.state.failed?<main role="alert"><h1>Chưa mở được Studio</h1><p>Giao diện gặp lỗi. Tải lại để thử lại; dữ liệu đã lưu được giữ.</p><button onClick={()=>location.reload()}>Tải lại Studio</button></main>:this.props.children}
+}
+createRoot(document.getElementById('root')!).render(<StudioBoundary><App/></StudioBoundary>);

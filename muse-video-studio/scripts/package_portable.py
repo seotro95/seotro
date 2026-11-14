@@ -64,7 +64,7 @@ app = resources / 'app'
 app.mkdir()
 for name in ['desktop', 'dist']:
     shutil.copytree(ROOT / name, app / name)
-for name in ['limits.mjs', 'server.mjs', 'muse-browser.mjs', 'muse-accounts.mjs', 'muse-balance.mjs', 'browser.mjs', '.env.example', 'README.md', 'VALIDATION.md', 'API-AUTOMATION.md', 'MCP-CODEX.md', 'CODEX-MCP.toml', 'CAP-NHAT-1.9.md', 'BAN-DAY-DU-1.10.md', 'LICENSE']:
+for name in ['limits.mjs', 'server.mjs', 'muse-browser.mjs', 'muse-accounts.mjs', 'muse-balance.mjs', 'browser.mjs', '.env.example', 'README.md', 'VALIDATION.md', 'API-AUTOMATION.md', 'MCP-CODEX.md', 'CODEX-MCP.toml', 'CAP-NHAT-1.9.md', 'BAN-DAY-DU-1.10.md', 'BLACK-SCREEN-1.12.1.md', 'LICENSE']:
     shutil.copyfile(ROOT / name, app / name)
 modules = app / 'node_modules'
 modules.mkdir()
@@ -98,12 +98,15 @@ Neu da dung ban cu: dong ban cu; trong ban moi chon Tai khoan Muse -> Chuyen du 
 Chon thu muc co EXE cu. Tool sao chep tat ca ho so, thu vien va tu mo lai.
 Bam Luu tat ca tai khoan de xem trang thai luu tung ho so.
 Phien con hieu luc duoc khoi phuc khi mo lai; phien Muse da het han can dang nhap lai.
+Neu Studio khong mo duoc: bam Tai lai Studio hoac Sao chep chan doan Studio.
+Thu tuong thich hien thi: dong tool roi mo MO_STUDIO_KHONG_GPU.bat (Windows).
 
 Cau noi Muse khong chinh thuc. Co the bi anh huong khi Muse doi giao dien,
 gioi han tai khoan, mo hinh hoac so tac vu dong thoi.
 ''', encoding='utf-8')
 if args.platform == 'win32':
     (bundle / 'BAT_DAU.bat').write_bytes(b'@echo off\r\ncd /d "%~dp0"\r\nstart "" "%~dp0Muse AI Studio.exe"\r\n')
+    (bundle / 'MO_STUDIO_KHONG_GPU.bat').write_bytes(b'@echo off\r\ncd /d "%~dp0"\r\nstart "" "%~dp0Muse AI Studio.exe" --disable-gpu\r\n')
 
 for path in app.rglob('*'):
     assert not any(part in {'.data', '.env', 'test-results', 'playwright-report'} for part in path.relative_to(app).parts), path

@@ -34,6 +34,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
   let desktop;
   try {
     desktop = await _electron.launch({ executablePath: require('electron'), args: [
+      ...(process.env.MUSE_ELECTRON_HEADLESS === '1' ? ['--ozone-platform=headless','--disable-gpu'] : []),
       ...(process.env.MUSE_ELECTRON_TEST_NO_SANDBOX === '1' ? ['--no-sandbox', '--disable-gpu'] : []),
       path.join(root, 'desktop/main.mjs'),
     ], env: { ...process.env, MUSE_DESKTOP_TEST: '1', MUSE_TEST_PARALLEL: '1', MUSE_FIXTURE_URL: fixtureURL, MUSE_DESKTOP_DATA: profile, MUSE_TRANSPORT: 'browser', PORT: '0' }, timeout: 30000 });
@@ -95,6 +96,7 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
         throw error;
       }
       assert.equal(fixture.state.peak, 10);
+      await assert.rejects(shell.evaluate(()=>window.studioDesktop.startup('retry')),/Đang có tác vụ/);
       assert.ok(fixture.state.submitted.every(request => request.path === '/composer-frame'));
       assert.ok(fixture.state.submitted.every(request => request.authenticated));
       assert.ok(fixture.state.submitted.every(request => request.viewport.width > 0 && request.viewport.height > 0 && request.prehydrationValue === 'U'));
@@ -160,7 +162,8 @@ test('desktop embeds login and runs ten real Electron workers with one fixture s
       fixture.state.chatPath = ''; fixture.state.frameComposer = false;
       await desktop.close(); desktop = null;
       desktop = await _electron.launch({ executablePath: require('electron'), args: [
-        ...(process.env.MUSE_ELECTRON_TEST_NO_SANDBOX === '1' ? ['--no-sandbox', '--disable-gpu'] : []), path.join(root, 'desktop/main.mjs'),
+        ...(process.env.MUSE_ELECTRON_HEADLESS === '1' ? ['--ozone-platform=headless','--disable-gpu'] : []),
+      ...(process.env.MUSE_ELECTRON_TEST_NO_SANDBOX === '1' ? ['--no-sandbox', '--disable-gpu'] : []), path.join(root, 'desktop/main.mjs'),
       ], env: { ...process.env, MUSE_DESKTOP_TEST: '1', MUSE_TEST_PARALLEL: '1', MUSE_FIXTURE_URL: fixtureURL, MUSE_DESKTOP_DATA: profile, MUSE_TRANSPORT: 'browser', PORT: '0' }, timeout: 30000 });
       await desktop.firstWindow();
       await waitFor(() => { studio = desktop.context().pages().find(page => page.url().startsWith('http://127.0.0.1:') && !page.url().startsWith(fixtureURL)); return studio; }, 'reopened Studio');

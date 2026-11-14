@@ -15,6 +15,7 @@ import {AccountStorage} from './account-storage.mjs';
 import {AccountProxies} from './account-proxy.mjs';
 import {storageCodec} from './storage-codec.mjs';
 import {dataLocation,importData} from './data-location.mjs';
+import {StudioStartup} from './studio-startup.mjs';
 
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const root = path.dirname(directory);
@@ -104,6 +105,39 @@ async function start() {
   // Keep the localStorage origin stable on later launches of a portable app.
   if (rememberPort) writeFileSync(portFile, new URL(runtime.url).port);
   const studio = new WebContentsView({ webPreferences: { preload: path.join(directory, 'renderer-preload.cjs'), partition: 'persist:studio', sandbox: true, contextIsolation: true, nodeIntegration: false, webSecurity: true, backgroundThrottling: false } });
+  studio.setVisible(false);
+  // This partition only serves the loopback Studio. Muse account proxy settings
+  // remain confined to their own partitions.
+  await studio.webContents.session.setProxy({mode:'direct'});
+  const startup = new StudioStartup({onChange:state=>{
+    if(studio.webContents.isDestroyed()||window.isDestroyed())return;
+    studio.setVisible(state.phase==='ready');
+    window.webContents.send('studio:startup-state',state);
+  }});
+  startup.observe(studio.webContents);
+  ipcMain.on('studio:renderer-state',(event,state)=>{
+    if(event.sender!==studio.webContents)return;
+    if(state==='ready')startup.ready();
+    else if(state==='error')startup.fail('STUDIO_RENDER_FAILED');
+  });
+  ipcMain.handle('studio:startup-control',async(event,action)=>{
+    if(event.sender!==window.webContents)throw new Error('Untrusted startup sender');
+    if(action==='status')return startup.snapshot();
+    if(action==='copy'){
+      clipboard.writeText(JSON.stringify({version,...startup.snapshot(),hardwareAcceleration:app.isHardwareAccelerationEnabled()},null,2));
+      return {copied:true};
+    }
+    if(action==='retry'){
+      if(requests.size||muse.snapshot().some(account=>account.running>0))throw new Error('Đang có tác vụ tạo nội dung. Đợi hoàn tất trước khi tải lại Studio.');
+      for(const owned of hosts.values())owned.hideLogin();
+      window.contentView.addChildView(studio);
+      window.webContents.send('studio:view-changed','studio');
+      startup.loading();
+      await studio.webContents.loadURL(runtime.url).catch(()=>startup.fail('STUDIO_LOAD_FAILED'));
+      return startup.snapshot();
+    }
+    throw new Error('Unknown startup action');
+  });
   const checkpoint=setInterval(()=>{if(!closing)for(const id of muse.drivers.keys())void saveSession(id)},30000);checkpoint.unref();
   ipcMain.handle('studio:data-control',async(event,action)=>{
     if(event.sender!==studio.webContents)throw new Error('Untrusted data sender');
@@ -126,7 +160,6 @@ async function start() {
     child.webContents.on('will-navigate', event => event.preventDefault());
   });
   studio.webContents.on('will-navigate', (event, url) => { if (new URL(url).origin !== runtime.url) event.preventDefault(); });
-  window.contentView.addChildView(studio);
   const folderExports = new FolderExports({ userData,
     chooseDirectory: async defaultPath => {
       const result = await dialog.showOpenDialog(window, { title: 'Chọn nơi lưu các bộ ảnh/video', properties: ['openDirectory','createDirectory'], ...(defaultPath ? { defaultPath } : {}) });
@@ -201,12 +234,23 @@ async function start() {
   ipcMain.handle('studio:view', async (event, name) => {
     if (event.sender !== window.webContents) throw new Error('Untrusted sender');
     if (name === 'studio') {
-      for (const owned of hosts.values()) owned.hideLogin(); studio.webContents.focus();
+      for (const owned of hosts.values()) owned.hideLogin();
+      window.contentView.addChildView(studio); layout();
+      studio.setVisible(startup.snapshot().phase==='ready');
+      if(startup.snapshot().phase==='ready')studio.webContents.focus();
+      window.webContents.send('studio:view-changed','studio');
+      window.webContents.send('studio:startup-state',startup.snapshot());
       studio.webContents.send('studio:session-refresh');
     }
     else if (name === 'muse') await muse.connect(muse.selectedId);
     else if (name === 'reload-muse') { await muse.reopenLogin(); studio.webContents.send('studio:session-refresh'); }
     else if (name === 'login-diagnostics') {
+      if(startup.snapshot().phase!=='ready'||!loginLogs.has(muse.selectedId)){
+        const report={version,...startup.snapshot(),hardwareAcceleration:app.isHardwareAccelerationEnabled()};
+        const result=await dialog.showMessageBox(window,{type:report.phase==='error'?'warning':'info',title:'Chẩn đoán Studio',message:report.message,detail:`Bản ${version} · ${report.code}. Báo cáo không chứa tài khoản hoặc kịch bản.`,buttons:['Đóng','Sao chép chẩn đoán'],defaultId:0,cancelId:0});
+        if(result.response===1)clipboard.writeText(JSON.stringify(report,null,2));
+        return;
+      }
       const report = loginLogs.get(muse.selectedId).snapshot({ version, loginVisible: host.loginVisible, account: muse.snapshot().find(account=>account.id===muse.selectedId) });
       const lines = report.events.slice(-8).map(event => `${event.time.slice(11,19)} ${event.method} ${event.route} → ${event.status || event.error}${event.setCookie ? ' · Có Set-Cookie' : ''}`);
       const result = await dialog.showMessageBox(window, { type: 'info', title: 'Chẩn đoán đăng nhập Muse',
@@ -229,7 +273,10 @@ async function start() {
   });
   await window.loadFile(path.join(directory, 'shell.html'));
   window.webContents.send('studio:version', version);
-  await studio.webContents.loadURL(runtime.url);
+  // Attach after the shell has loaded, and apply bounds again after attachment.
+  window.contentView.addChildView(studio); layout();
+  startup.loading();
+  await studio.webContents.loadURL(runtime.url).catch(()=>startup.fail('STUDIO_LOAD_FAILED'));
   void muse.restoreSessions(savedAccountIds).catch(()=>{});
   window.on('close', event => { if (!closing) { event.preventDefault(); void shutdown(); } });
   console.log('Muse desktop ready: dang nhap trong tool, toi da 40 o, mot hoac nhieu tai khoan, hang doi an toan.');

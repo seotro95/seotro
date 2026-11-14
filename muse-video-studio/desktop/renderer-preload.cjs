@@ -1,5 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('museTransport', Object.freeze({
+  rendererState: state => { if(state==='ready'||state==='error')ipcRenderer.send('studio:renderer-state',state); },
   dataControl: action => ipcRenderer.invoke('studio:data-control',action),
   automationControl: (action,data) => ipcRenderer.invoke('studio:automation-control',action,data),
   onAutomation: callback => {

@@ -3,3 +3,4 @@
 @media(max-width:1150px){nav{gap:7px;padding:0 10px}nav span{display:none}button{padding:9px}small{flex:1;min-width:60px}}
 
 @media(max-width:1150px){nav strong{font-size:10px;letter-spacing:.04em}nav{gap:6px}button{padding:9px 7px}}
+main#startup{position:absolute;inset:54px 0 0;display:grid;place-items:center;padding:28px;text-align:center}main#startup[hidden]{display:none}#startup>div{max-width:640px;padding:30px;border:1px solid #364263;border-radius:14px;background:#121b2b}#startup h1{font-size:23px}#startup p{line-height:1.7;color:#afbdd3}#startup-code{color:#ffbd81!important;font-family:monospace}.startup-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}button:disabled{opacity:.6;cursor:wait}

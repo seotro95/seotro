@@ -1,0 +1,65 @@
+name: Muse Studio black screen repair
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/muse-112-black-screen-20261114]
+    paths:
+      - 'muse-video-studio/**'
+      - '.github/workflows/muse-black-screen-repair.yml'
+permissions:
+  contents: write
+concurrency:
+  group: muse-black-screen-repair
+  cancel-in-progress: false
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: muse-video-studio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: muse-video-studio/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npx playwright install chromium
+      - run: npm run test:e2e -- tests/browser/selected-slots.spec.ts tests/browser/account-selection.spec.ts
+      - run: npm run test:startup
+      - run: npm run test:desktop
+      - run: python scripts/package_portable.py --platform win32 --output "${{ runner.temp }}/muse-artifacts"
+      - name: Verify the packaged Windows executable
+        shell: pwsh
+        run: |
+          $version = (Get-Content package.json | ConvertFrom-Json).version
+          $env:MUSE_PORTABLE_EXECUTABLE = "${{ runner.temp }}/muse-artifacts/Muse-AI-Studio-$version-Windows-x64/Muse AI Studio.exe"
+          node tests/startup-desktop.test.mjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node tests/portable.test.mjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Muse-AI-Studio-black-screen-repair-Windows-x64
+          path: ${{ runner.temp }}/muse-artifacts/*.zip
+          if-no-files-found: error
+      - name: Save a draft release after all checks pass
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $version = (Get-Content package.json | ConvertFrom-Json).version
+          $tag = "muse-v$version"
+          gh release view $tag --repo "${{ github.repository }}" *> $null
+          if ($LASTEXITCODE -eq 0) { Write-Output "A release already uses this tag. Keeping the checked workflow artifact."; exit 0 }
+          $zip = Get-ChildItem "${{ runner.temp }}/muse-artifacts/*.zip"
+          Copy-Item BLACK-SCREEN-1.12.1.md "${{ runner.temp }}/muse-release-notes.txt"
+          gh release create $tag $zip.FullName --repo "${{ github.repository }}" --target "${{ github.sha }}" --title "Muse AI Studio $version - Studio startup recovery - Windows x64" --notes-file "${{ runner.temp }}/muse-release-notes.txt" --draft --latest=false
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

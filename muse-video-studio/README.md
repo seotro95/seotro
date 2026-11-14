@@ -1,4 +1,8 @@
-# Muse AI Studio 1.12.0 · Chọn ô và chạy song song 10 ô
+# Muse AI Studio 1.12.1 · Khôi phục giao diện Studio
+
+Sửa cách gắn/hiện vùng Studio, tách kết nối máy chủ cục bộ khỏi proxy tài khoản và bổ sung màn hình tải/lỗi có **Tải lại Studio** cùng **Sao chép chẩn đoán Studio**. Có tệp thử hiển thị **MO_STUDIO_KHONG_GPU.bat**. Giữ nguyên nơi lưu dữ liệu và các tính năng chọn ô của 1.12.0. Xem [hướng dẫn xử lý màn hình đen](BLACK-SCREEN-1.12.1.md).
+
+## Chọn ô và chạy song song từ bản 1.12.0
 
 - **Một tài khoản**: giữ 40 ô nếu cần, bấm **TẠO SONG SONG 10 Ô**. Tool kiểm tra 10 hội thoại độc lập trên tài khoản chạy chung đã chọn, rồi chạy tối đa 10 ô cùng lúc. Một ô xong sẽ nhường chỗ cho ô tiếp theo; không cần đợi đủ 10 ô kết thúc. Nút này giữ nguyên số ô và dữ liệu; nếu Muse không cung cấp đủ 10 hội thoại, báo rõ và chưa gửi prompt. Không thể tăng hạn mức hoặc tạo khả năng song song mà dịch vụ Muse chưa hỗ trợ.
 - **Mỗi tài khoản một luồng**: chọn các checkbox **Hiện ô**, ví dụ **1, 3, 4, 7**. Chỉ bốn ô đó hiện và được chạy. Các ô vẫn chọn được tài khoản/proxy riêng như bản trước; hai ô cùng tài khoản chạy lần lượt.
