@@ -1,0 +1,16 @@
+﻿14 MỐC DÙNG LẠI — KHÔNG TẠO LẠI CLIP
+
+Mốc 011 00:01:40,000–00:01:50,000: dùng clip 001.mp4 của mốc 001, lấy 10 giây.
+Mốc 020 00:03:10,000–00:03:20,000: dùng clip 004.mp4 của mốc 004, lấy 10 giây.
+Mốc 030 00:04:50,000–00:05:00,000: dùng clip 003.mp4 của mốc 003, lấy 10 giây.
+Mốc 040 00:06:30,000–00:06:40,000: dùng clip 005.mp4 của mốc 005, lấy 10 giây.
+Mốc 050 00:08:10,000–00:08:20,000: dùng clip 007.mp4 của mốc 007, lấy 10 giây.
+Mốc 060 00:09:50,000–00:10:00,000: dùng clip 002.mp4 của mốc 002, lấy 10 giây.
+Mốc 070 00:11:30,000–00:11:40,000: dùng clip 008.mp4 của mốc 008, lấy 10 giây.
+Mốc 080 00:13:10,000–00:13:20,000: dùng clip 011.mp4 của mốc 012, lấy 10 giây.
+Mốc 090 00:14:50,000–00:15:00,000: dùng clip 009.mp4 của mốc 009, lấy 10 giây.
+Mốc 100 00:16:30,000–00:16:40,000: dùng clip 014.mp4 của mốc 015, lấy 10 giây.
+Mốc 110 00:18:10,000–00:18:20,000: dùng clip 006.mp4 của mốc 006, lấy 10 giây.
+Mốc 120 00:19:50,000–00:20:00,000: dùng clip 010.mp4 của mốc 010, lấy 10 giây.
+Mốc 130 00:21:30,000–00:21:40,000: dùng clip 012.mp4 của mốc 013, lấy 10 giây.
+Mốc 134 00:22:10,000–00:22:12,000: dùng clip 001.mp4 của mốc 001, lấy 2 giây.

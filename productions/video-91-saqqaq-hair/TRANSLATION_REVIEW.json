@@ -1,0 +1,52 @@
+{
+  "topic_id": 91,
+  "status": "assistant_key_claim_review_complete",
+  "translated_languages": 16,
+  "full_assistant_localized_rewrites": [
+    "vi-VN",
+    "mww"
+  ],
+  "other14_localized_from": "Condensed English chapter source selecting factual core and removing repeated transitions; original English unchanged",
+  "condensed_source_words": 2897,
+  "preserved_key_claims": [
+    "about4000yearshair,Qeqertasussuk,Saqqaq",
+    "2008mitochondrial vs2010nuclear",
+    "roughlyfourfifths diploidgenome,notcompletebiography",
+    "marinecarbon affects ageinterpretation",
+    "contaminationchecks andmodel limits",
+    "2014Arctichistory/geneflow and2019forty-eightancientindividuals",
+    "culture/identity/ancestry aredistinct",
+    "2014epigenomics notmemory/medicalrecord"
+  ],
+  "repairs_by_locale": {
+    "es-ES": 1,
+    "fr-FR": 2,
+    "de-DE": 1,
+    "it-IT": 1,
+    "pt-PT": 1,
+    "nl-NL": 1,
+    "pl-PL": 1,
+    "sv-SE": 4,
+    "da-DK": 1,
+    "fi-FI": 1,
+    "nb-NO": 6,
+    "cs-CZ": 1,
+    "ja-JP": 11,
+    "ko-KR": 13
+  },
+  "untranslated_eight_word_runs_checked": true,
+  "independent_native_editorial_review": false,
+  "independent_native_listening_review": false,
+  "white_hmong_dialect_independently_verified": false,
+  "korean_closing_repair": {
+    "chapter": 14,
+    "seconds": 32,
+    "reason": "Original native closing needed tempo1.6658 above1.65guard; shorten localized wording rather than relax guard",
+    "original_characters": 333,
+    "revised_characters": 223,
+    "same_voice_id": "ko-KR-InJoonNeural",
+    "same_backend": true,
+    "other13chapters_unchanged": true,
+    "other16languages_unchanged": true
+  }
+}

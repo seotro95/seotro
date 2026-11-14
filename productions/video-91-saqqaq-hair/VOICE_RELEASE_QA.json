@@ -1,0 +1,161 @@
+{
+  "status": "passed",
+  "topic_id": 91,
+  "voices": 17,
+  "male_voices": 16,
+  "female_voice": "hmong-female-3",
+  "native_voices": 1,
+  "online_voices": 16,
+  "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+  "all_decoded_seconds": 1332,
+  "all_decoded_frames_48000": 63936000,
+  "all_ids_match_episode91_profile": true,
+  "all17saved_voice_ids_retained": true,
+  "native_hmong_reference_matches": true,
+  "unique_audio_hashes": 17,
+  "pitch_shift_applied": false,
+  "english_cue_count": 134,
+  "other_language_chapter_count": 14,
+  "online_word_metadata_checked": true,
+  "english_word_boundary_cue_split_checked": true,
+  "independent_native_listening_review": false,
+  "white_hmong_dialect_independently_verified": false,
+  "reports": {
+    "vi-VN": {
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "SAQQAQ_HAIR_91_Viet_Nam_Nam_Minh.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8552884615384615,
+      "max_tempo": 1.0032663316582915,
+      "word_accents": 33
+    },
+    "fr-FR": {
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "SAQQAQ_HAIR_91_Phap.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8050480769230769,
+      "max_tempo": 1.2150753768844222,
+      "word_accents": 41
+    },
+    "en-US": {
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "SAQQAQ_HAIR_91_My_Tieng_Anh.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8549288617886178,
+      "max_tempo": 1.3478150406504064,
+      "word_accents": 102
+    },
+    "ko-KR": {
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "SAQQAQ_HAIR_91_Han_Quoc.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 1.0163461538461538,
+      "max_tempo": 1.2467336683417085,
+      "word_accents": 30
+    },
+    "sv-SE": {
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "SAQQAQ_HAIR_91_Thuy_Dien.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.9596153846153846,
+      "max_tempo": 1.442713567839196,
+      "word_accents": 43
+    },
+    "mww": {
+      "voice_id": "hmong-female-3",
+      "filename": "SAQQAQ_HAIR_91_Hmong_Trang_Nu.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.888825454059829,
+      "max_tempo": 0.9687558888190956,
+      "word_accents": 0
+    },
+    "pl-PL": {
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "SAQQAQ_HAIR_91_Ba_Lan.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8216346153846154,
+      "max_tempo": 1.2633165829145727,
+      "word_accents": 36
+    },
+    "de-DE": {
+      "voice_id": "de-DE-ConradNeural",
+      "filename": "SAQQAQ_HAIR_91_Duc.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.9509615384615384,
+      "max_tempo": 1.4374371859296482,
+      "word_accents": 28
+    },
+    "pt-PT": {
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "SAQQAQ_HAIR_91_Bo_Dao_Nha.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.7463942307692307,
+      "max_tempo": 1.107286432160804,
+      "word_accents": 33
+    },
+    "da-DK": {
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "SAQQAQ_HAIR_91_Dan_Mach.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8394230769230769,
+      "max_tempo": 1.3108040201005025,
+      "word_accents": 36
+    },
+    "it-IT": {
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "SAQQAQ_HAIR_91_Y.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.9475961538461538,
+      "max_tempo": 1.5218592964824122,
+      "word_accents": 23
+    },
+    "nb-NO": {
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "SAQQAQ_HAIR_91_Na_Uy.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8012019230769231,
+      "max_tempo": 1.2459798994974873,
+      "word_accents": 36
+    },
+    "nl-NL": {
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "SAQQAQ_HAIR_91_Ha_Lan.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8420673076923076,
+      "max_tempo": 1.2685929648241208,
+      "word_accents": 39
+    },
+    "es-ES": {
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "SAQQAQ_HAIR_91_Tay_Ban_Nha.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.8858173076923076,
+      "max_tempo": 1.371105527638191,
+      "word_accents": 29
+    },
+    "cs-CZ": {
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "SAQQAQ_HAIR_91_Sec.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.7737980769230769,
+      "max_tempo": 1.242964824120603,
+      "word_accents": 38
+    },
+    "ja-JP": {
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "SAQQAQ_HAIR_91_Nhat_Ban.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 1.0033653846153845,
+      "max_tempo": 1.5821608040201005,
+      "word_accents": 24
+    },
+    "fi-FI": {
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "SAQQAQ_HAIR_91_Phan_Lan.mp3",
+      "decoded_seconds": 1332.0,
+      "min_tempo": 0.9007211538461538,
+      "max_tempo": 1.428391959798995,
+      "word_accents": 29
+    }
+  }
+}

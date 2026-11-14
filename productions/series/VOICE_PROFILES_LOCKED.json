@@ -13,10 +13,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_My_Tieng_Anh.mp3",
-      "mp3_sha256": "2428b2cb15f74ab9a5b560f590b609c71374f4b03590bd2975cc0c404d3a450c",
-      "alignment_granularity": "123Englishcues"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_My_Tieng_Anh.mp3",
+      "mp3_sha256": "f3c4df2e2b13009b62daa9dc09c71193048820575569c7fa94f91fe3464bd12d",
+      "alignment_granularity": "134Englishcues"
     },
     {
       "locale": "vi-VN",
@@ -30,10 +30,10 @@
       "base_rate": "phrase-dependent",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
       "rate": "phrase-dependent; no pitch shift",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Viet_Nam_Nam_Minh.mp3",
-      "mp3_sha256": "752565b2664238a0c939205dce183c27235ae590d2fa800274f5c75bdac51aa7",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Viet_Nam_Nam_Minh.mp3",
+      "mp3_sha256": "3c188d212bff9cf043469accacfa57727d7edcf2abfc08fe2f3b7698bec69be5",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "es-ES",
@@ -45,10 +45,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Tay_Ban_Nha.mp3",
-      "mp3_sha256": "5165bacd87e50bf5d32c38bac2e4d15599f87fb260d68f4f198ab33bedcf42ed",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Tay_Ban_Nha.mp3",
+      "mp3_sha256": "640f2112d9c7585b61b4902b56106b52486fa8e948575e3ddc6176ef4ce22027",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "fr-FR",
@@ -60,10 +60,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Phap.mp3",
-      "mp3_sha256": "3658521e5f3609bcc2daea96c4bc4db5c7686f23d685f6e61d7bdb29ecc00cb0",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Phap.mp3",
+      "mp3_sha256": "fe447a87bdaf6100911edf8207ec9591f162b852fe6d52d81f0c4a4c77e962d5",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "ja-JP",
@@ -75,10 +75,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Nhat_Ban.mp3",
-      "mp3_sha256": "326585c7463a2084d5e7136a5a454725bddb201751e32a8bcb6dedde63a90c82",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Nhat_Ban.mp3",
+      "mp3_sha256": "7d0bff10cda647bcb8dc874f58f77f1d9aa8670db2a902b8b3e7a292a439c60d",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "ko-KR",
@@ -90,10 +90,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Han_Quoc.mp3",
-      "mp3_sha256": "5288776531d4c1ad8111de8beadfe8ea1d0a7464717728801193e7542ffe3500",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Han_Quoc.mp3",
+      "mp3_sha256": "ce6816ac4d313042259226a96ffcf8f7d9ef5a6aa2c021d6abe410a61b30cf8a",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "de-DE",
@@ -105,10 +105,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Duc.mp3",
-      "mp3_sha256": "d3cd2718edcb19841182f63e6e17f43217f1541336e035c79750223c82977b75",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Duc.mp3",
+      "mp3_sha256": "f62e1bb2cc1399ad09fb933eefde70d5421488bc4af4890184704c6af2a47c72",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "it-IT",
@@ -120,10 +120,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Y.mp3",
-      "mp3_sha256": "64bc670481712efa2fd9b17e5262cc59550b1538ec83efe6d1884a6f9e3888a3",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Y.mp3",
+      "mp3_sha256": "8e6e7d5bbcc3ffe8a8398dbd244415588d8d418dac41a0280a8ce02e3cec41ec",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "pt-PT",
@@ -135,10 +135,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Bo_Dao_Nha.mp3",
-      "mp3_sha256": "5766a0706bfbe8a96b12bad366a61c294b0ff29aad45a254e1a0b0101e3322fe",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Bo_Dao_Nha.mp3",
+      "mp3_sha256": "0715146fd2108802826fc516079f7b40f7c5b0a5478905bb3a4d9ef83e792ba4",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "nl-NL",
@@ -150,10 +150,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Ha_Lan.mp3",
-      "mp3_sha256": "91b6b3beac77e980c06eb4033328f02ff861df9d95a986b4db1c4798e15de620",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Ha_Lan.mp3",
+      "mp3_sha256": "a2508bd67cb8c75e749f079d872dfd1dc37bf0d5970843b38c126d1cf8ea98a1",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "pl-PL",
@@ -165,10 +165,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Ba_Lan.mp3",
-      "mp3_sha256": "dabe5aa4a5d7a1bc4ef1a6166a1c54763fa29aa0fdd79df4011310c5b4a9aa7c",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Ba_Lan.mp3",
+      "mp3_sha256": "4c79ea595b51279aa16323d9f64ac499a6664b4b6bb6bb647744bd96058c1f67",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "sv-SE",
@@ -180,10 +180,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Thuy_Dien.mp3",
-      "mp3_sha256": "9999856d4cc18fbebdda5f63109ab4a7ee52716c2c1b0d320c7e1efd1cd17498",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Thuy_Dien.mp3",
+      "mp3_sha256": "610aa31d1eb91e5006ee7c87496c551351f67f29d028afaef31ae6a8ce9bc29b",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "da-DK",
@@ -195,10 +195,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Dan_Mach.mp3",
-      "mp3_sha256": "52f4265b62b89baede5afb50c5c04724f26a5b4ebf6d60c4768696fe1a69bb6d",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Dan_Mach.mp3",
+      "mp3_sha256": "bf79522d280c2458fe207871bffd2ab32ddf3a664f5938f9d33def7887a0f264",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "fi-FI",
@@ -210,10 +210,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Phan_Lan.mp3",
-      "mp3_sha256": "37d6534b5b0ffb7dbc75c3c427537aa2a5e48ebd63b64f8fea3923f0bca71752",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Phan_Lan.mp3",
+      "mp3_sha256": "31b08e6818c2c001ed5ddee82fcad8e51e82122cc8d44e0de1365529e571956d",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "nb-NO",
@@ -225,10 +225,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Na_Uy.mp3",
-      "mp3_sha256": "65d980ed4fdb9b072b712cfb5d77522e3c3e1cc9706cd3d3d6c1a2d9f92183f7",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Na_Uy.mp3",
+      "mp3_sha256": "eb1497b5972155d064eaccfc0e1aa91fc8e8f021cbfe35e5b0b569feb4b3af31",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "cs-CZ",
@@ -240,10 +240,10 @@
       "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
       "provider": "Microsoft Edge via edge-tts",
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Sec.mp3",
-      "mp3_sha256": "7e5aa34ae64ceaa18ce9055b9163315320c4d61a2fe8f3d0e9a9c87573a98639",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Sec.mp3",
+      "mp3_sha256": "96d62781a786babf69e70ed2316d992a1ca44db3c5e927a1f5c9810ca61d979c",
+      "alignment_granularity": "14 shared chapter boundaries"
     },
     {
       "locale": "mww",
@@ -258,11 +258,11 @@
       "audio_profile": "clear-v1",
       "dialect_independently_verified": false,
       "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
-      "duration_seconds": 1222,
-      "delivery_filename": "SCHOENINGEN_87_Hmong_Trang_Nu.mp3",
-      "mp3_sha256": "143f4b3733ab83cd1b639ac2687976a4680c8cfedecc1c8ab2d432565c18480e",
-      "alignment_granularity": "13 shared chapter boundaries"
+      "duration_seconds": 1332,
+      "delivery_filename": "SAQQAQ_HAIR_91_Hmong_Trang_Nu.mp3",
+      "mp3_sha256": "53e990b7bde171b44242703e68d804b3f7e989cc89bd0cdefb3a5e8496081264",
+      "alignment_granularity": "14 shared chapter boundaries"
     }
   ],
-  "note": "All17 episode87 voices complete, each decoded to1222seconds. All17 identities retained from topic71, including actual male NamMinhNeural and native Hmong female-3. Independent native listening and WhiteHmongdialect review pending."
+  "note": "All17 episode91 voices complete, each decoded to1332seconds. All17 identities retained from topic71, including actual male NamMinhNeural and native Hmong female-3. Independent native listening and WhiteHmongdialect review pending."
 }

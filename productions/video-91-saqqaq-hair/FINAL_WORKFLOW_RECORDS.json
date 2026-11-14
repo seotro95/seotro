@@ -1,0 +1,16 @@
+{
+  "documents_workflow_run_id": 43455815609,
+  "english_and_namminh_preflight_run_id": 43456318630,
+  "original_voice_workflow_run_id": 43458603631,
+  "original_voice_source_commit": "27eeddb0649a9fd1512ac036dbea9ca8670aa098",
+  "voice_publish_workflow_run_id": 43546993245,
+  "voice_workflow_run_id": 43546993245,
+  "korean_repair_workflow_run_id": 43546993245,
+  "voice_source_commit": "9f961ce8d99d0bc23e92a98ee1d2f2af1c5f4e96",
+  "korean_repair_method": "Only closingchapter14 rewritten moreconcise;same InJoonvoice/backend;guard unchanged;first13KOchapters andother16languages retained",
+  "delivery_metadata_workflow_run_id": 43547700997,
+  "delivery_metadata_source_commit": "8d38a560a6d3275605091f82546f9ecd40672388",
+  "original_workflow_outcome": "Koreanclosingtempo1.6658aboveguard;16othervoicescomplete",
+  "korean_repair_outcome": "success_samevoice_othersretained",
+  "final_delivery_workflows_succeeded": true
+}

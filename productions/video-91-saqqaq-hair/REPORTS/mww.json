@@ -1,0 +1,154 @@
+{
+  "status": "passed",
+  "locale": "mww",
+  "voice_id": "hmong-female-3",
+  "gender": "Female",
+  "engine": "Voice-Studio-Hmong 1.6.6 Native VITS + OpenVoice V2",
+  "source_commit": "061430d958b8d5fc14d04209c6f0cd20492382c2",
+  "target_seconds": 1332,
+  "decoded_frames_48000": 63936000,
+  "decoded_seconds": 1332.0,
+  "filename": "SAQQAQ_HAIR_91_Hmong_Trang_Nu.mp3",
+  "bytes": 15984620,
+  "sha256": "53e990b7bde171b44242703e68d804b3f7e989cc89bd0cdefb3a5e8496081264",
+  "script_sha256": "1e5a565340a73c93c728125e4216aa99cfd547a72a0e7de3b7d76607bf381e4f",
+  "cues": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 100,
+      "raw_seconds": 95.1258125,
+      "tempo": 0.9527825771233973,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 2,
+      "start": 100,
+      "end": 200,
+      "raw_seconds": 93.337875,
+      "tempo": 0.9348745492788461,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 3,
+      "start": 200,
+      "end": 300,
+      "raw_seconds": 91.608,
+      "tempo": 0.9175480769230769,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 4,
+      "start": 300,
+      "end": 400,
+      "raw_seconds": 90.8765625,
+      "tempo": 0.9102219801682693,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 5,
+      "start": 400,
+      "end": 500,
+      "raw_seconds": 93.812625,
+      "tempo": 0.9396296574519231,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 6,
+      "start": 500,
+      "end": 600,
+      "raw_seconds": 94.51047916666667,
+      "tempo": 0.946619382678953,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 7,
+      "start": 600,
+      "end": 700,
+      "raw_seconds": 95.159375,
+      "tempo": 0.9531187399839743,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 8,
+      "start": 700,
+      "end": 800,
+      "raw_seconds": 89.57625,
+      "tempo": 0.897198016826923,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 9,
+      "start": 800,
+      "end": 900,
+      "raw_seconds": 93.0940625,
+      "tempo": 0.9324325170272436,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 10,
+      "start": 900,
+      "end": 1000,
+      "raw_seconds": 94.42920833333334,
+      "tempo": 0.9458053719284187,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 11,
+      "start": 1000,
+      "end": 1100,
+      "raw_seconds": 88.74033333333334,
+      "tempo": 0.888825454059829,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 12,
+      "start": 1100,
+      "end": 1200,
+      "raw_seconds": 93.1405,
+      "tempo": 0.9328976362179487,
+      "trailing_pause_target": 0.16,
+      "parts": 5
+    },
+    {
+      "id": 13,
+      "start": 1200,
+      "end": 1300,
+      "raw_seconds": 93.96354166666667,
+      "tempo": 0.9411412426549145,
+      "trailing_pause_target": 0.16,
+      "parts": 6
+    },
+    {
+      "id": 14,
+      "start": 1300,
+      "end": 1332,
+      "raw_seconds": 30.8451875,
+      "tempo": 0.9687558888190956,
+      "trailing_pause_target": 0.16,
+      "parts": 2
+    }
+  ],
+  "pitch_shift_applied": false,
+  "voice_identity_preserved": true,
+  "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+  "prosody_method": "Native punctuation and small phrase pauses, pitch-preserving final chapter fit; no pitch shift",
+  "word_metadata_pieces": 0,
+  "minimum_word_coverage_ratio": null,
+  "word_accents": 0,
+  "independent_native_listening_review": false,
+  "timing_alignment": "14 shared chapter boundaries",
+  "reference_sha256": "ffa26422055a9da069ba8d7a9d780405b6504c27ce70fa5ad3ffed84f5b2dc17",
+  "white_hmong_dialect_independently_verified": false
+}

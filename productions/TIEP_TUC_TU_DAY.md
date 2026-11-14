@@ -1,13 +1,31 @@
 <!-- active-production -->
-# Chủ đề 91 — tài liệu đã có, đang tạo 17 voice 22:12
+# Chủ đề 91 — tài liệu và 17 voice 22:12 đã kiểm tải
 
-[Kịch bản và 12 TXT prompt](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_TAI_LIEU_22m12s.zip) · [5 tiêu đề và 5 prompt thumbnail](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/5_TIEU_DE_VA_THUMBNAIL.txt) · [Tiến trình voice](https://github.com/seotro95/seotro/actions/runs/43458603631)
+[Tải đủ 17 giọng ZIP](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_17_VOICES_22m12s.zip) · [Kịch bản và 12 TXT prompt](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_TAI_LIEU_22m12s.zip?v=450482ebf66fb293cd90d135f5696ef3967a3b6eb6dd231c14c6e147fb4613e4) · [5 tiêu đề và 5 prompt thumbnail](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/5_TIEU_DE_VA_THUMBNAIL.txt)
 
-Chủ đề: tóc Saqqaq, ADN và lịch sử cư dân Bắc Cực. 3.703 từ Anh, 134 mốc, 120 prompt mới trong 12 TXT, 14 mốc dùng lại. Tất cả prompt cấm trẻ em, thiếu niên, lời nói và âm thanh. Tóc/mô hình là minh họa, không mẫu thật, chân dung, tuyến di cư hoặc dữ liệu đo đã xác nhận.
+- [Anh (Mỹ)](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_My_Tieng_Anh.mp3) — 22:12
+- [Việt Nam — Nam Minh](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Viet_Nam_Nam_Minh.mp3) — 22:12
+- [Tây Ban Nha](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Tay_Ban_Nha.mp3) — 22:12
+- [Pháp](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Phap.mp3) — 22:12
+- [Nhật Bản](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Nhat_Ban.mp3) — 22:12
+- [Hàn Quốc](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Han_Quoc.mp3) — 22:12
+- [Đức](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Duc.mp3) — 22:12
+- [Ý](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Y.mp3) — 22:12
+- [Bồ Đào Nha](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Bo_Dao_Nha.mp3) — 22:12
+- [Hà Lan](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Ha_Lan.mp3) — 22:12
+- [Ba Lan](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Ba_Lan.mp3) — 22:12
+- [Thụy Điển](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Thuy_Dien.mp3) — 22:12
+- [Đan Mạch](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Dan_Mach.mp3) — 22:12
+- [Phần Lan](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Phan_Lan.mp3) — 22:12
+- [Na Uy (Bokmål)](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Na_Uy.mp3) — 22:12
+- [Séc](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Sec.mp3) — 22:12
+- [H'mông Trắng (nữ)](https://github.com/seotro95/seotro/releases/download/saqqaq-hair-video-91-22m12s/SAQQAQ_HAIR_91_Hmong_Trang_Nu.mp3) — 22:12
 
-Giữ 17 ID từ tập 71: NamMinhNeural nam và H’mông female-3 nữ qua công cụ riêng 1.6.6. Hai bản thử Anh 30 giây, Nam Minh 10 giây đạt. Việt/H’mông viết lại 14 chương; 14 bản khác địa phương hóa phần nội dung chính và rà ý khoa học. Chưa có kiểm nghe/biên tập bản ngữ độc lập hoặc xác minh phương ngữ H’mông Trắng độc lập.
+Đã tải lại, kiểm hash và giải mã từng MP3 đúng 63.936.000 mẫu ở 48 kHz. Giữ 17 ID từ tập 71; Việt NamMinh thật, H’mông female-3. Chưa có kiểm nghe/biên tập bản ngữ độc lập hoặc xác minh phương ngữ H’mông Trắng độc lập.
 
-Tiếp tục workflow hiện tại, giữ phần thành công. Anh có tách request nhỏ cùng giọng/backend nếu gặp NoAudio sau số lần thử giới hạn,không đổi backend vượt 401/403/429. Chỉ phát hành khi đủ 17 voice, đúng ID và mỗi bản giải mã đúng 63.936.000 mẫu ở48kHz. Chưa có footage/MP4 tập91. Khi có clip: chỉ voice Anh, 10 cảnh/30 giây đầu nằm trong22:12; thiếu cảnh dùng video liên quan, không ảnh tĩnh/thẻ chữ. Không tự bắt đầu tập khác. Tập87 và toàn bộ tập trước được giữ nguyên.
+Chủ đề: tóc Saqqaq, ADN và lịch sử cư dân Bắc Cực. 3.703 từ Anh, 134 mốc, 120 prompt mới trong 12 TXT, 14 mốc dùng lại. Mỗi prompt cấm trẻ em, thiếu niên, lời nói và âm thanh. Tóc, mô hình, cảnh là minh họa, không dữ liệu đo hoặc chân dung xác thực. Phân biệt công bố 2008/2010/2014/2019 và tuổi tóc với tuổi di cư.
+
+Chưa có footage hoặc MP4 tập 91. Khi có clip: chỉ voice Anh, xóa tiếng clip,10 cảnh/30 giây đầu nằm trong 22:12; thiếu cảnh dùng video chuyển động liên quan, không ảnh tĩnh/thẻ chữ. Giữ hồ sơ v3 Nam Minh từ tập 71; không tự tạo lại voice hoặc bắt đầu tập khác. Hồ sơ: productions/video-91-saqqaq-hair. Mã nguồn: nhánh codex/saqqaq-hair91-production-20261113, thư mục episode91. Tập 87 và toàn bộ các tập trước được giữ nguyên.
 <!-- /active-production -->
 
 ---
@@ -156,6 +174,7 @@ Tập4 đã kiểm17serverdigest, đủthờilượng và fulltextAnh; hồ sơ 
 ## Bàn giao video chủ đề4
 
 Đã dựng và xuất bản23:00, chỉ voiceAnh gốc có nhấn nhá.133upload/115clipkhácnhau/18bảntrùng; chọn cảnh người trưởng thành, bỏ mọi tiếngclip và cảnh không phù hợp.12shot trong30giây đầu; các chương theo ranh120/110s. [Video](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EN_FINAL_23m_720p.mp4) · [Project](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/YANA_04_EDIT_PROJECT.zip) · [5tiêu đề/thumbnail](https://github.com/seotro95/seotro/releases/download/yana-video-04-final-23min/TITLES_AND_THUMBNAIL_PROMPTS.txt). Tập5 vẫn chưa bắt đầu.
+
 
 
 

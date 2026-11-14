@@ -1,0 +1,403 @@
+﻿The Hair That Changed Arctic History
+
+001 | 00:00:00,000–00:00:10,000
+A few strands of hair survived in Greenland's frozen ground. Four thousand years later, they helped researchers ask who crossed the Arctic, and whose history had been overlooked.
+
+002 | 00:00:10,000–00:00:20,000
+There was no complete body to examine, no diary to translate, and no photograph waiting beneath the ice. Yet the hair still carried fragments of a biological record.
+
+003 | 00:00:20,000–00:00:30,000
+The surprise was not simply that ancient DNA survived. It was that a tiny sample could complicate an entire migration story, without giving us permission to invent the missing person.
+
+004 | 00:00:30,000–00:00:40,000
+This story begins with the Saqqaq culture, among Greenland's earliest known inhabitants. It ends with a warning: a culture disappearing from archaeology does not mean every ancestral connection vanished.
+
+005 | 00:00:40,000–00:00:50,000
+Between those points lie frozen deposits, museum collections, damaged molecules, and comparisons that changed as more people from the past entered the genetic record.
+
+006 | 00:00:50,000–00:01:00,000
+In twenty ten, researchers published a landmark genome from this hair. Later studies widened the Arctic picture, and made some simple stories much harder to defend.
+
+007 | 00:01:00,000–00:01:10,000
+Follow the sample closely, and the mystery becomes more precise. What was preserved? How was it authenticated? And how much history can one person's DNA really carry?
+
+008 | 00:01:10,000–00:01:20,000
+The answers take us from a small Greenlandic island toward Siberia and North America, across a region where water connected lives as often as it separated them.
+
+009 | 00:01:20,000–00:01:30,000
+But a genetic connection is not a recovered journey. It does not tell us which boat someone used, what language they spoke, or what they called themselves.
+
+010 | 00:01:30,000–00:01:40,000
+To understand the difference, we have to return to the hair before it became a headline, and to the archaeological work that made its later analysis possible.
+
+011 | 00:01:40,000–00:01:50,000
+The sample came from Qeqertasussuk, an archaeological site in Greenland's Disko Bay region. Its cultural deposits belonged to people associated with the Saqqaq tradition.
+
+012 | 00:01:50,000–00:02:00,000
+This was not an anonymous object found floating on sea ice. Its importance depended on a recorded place within deposits created through human activity.
+
+013 | 00:02:00,000–00:02:10,000
+Excavations in the nineteen eighties recovered exceptionally preserved organic material. The hair became part of a collection whose scientific possibilities would expand well after the original fieldwork.
+
+014 | 00:02:10,000–00:02:20,000
+An archive can therefore hold a delayed discovery. Something carefully collected for one question may become essential when a different method becomes available years later.
+
+015 | 00:02:20,000–00:02:30,000
+That delay should not make the fieldwork disappear from the story. Without context and careful preservation, a powerful sequencing machine can still be left with a weak historical claim.
+
+016 | 00:02:30,000–00:02:40,000
+The hair's archaeological association mattered, but association has limits. A material culture is identified through patterns of objects and practices, not a single universal genetic signature.
+
+017 | 00:02:40,000–00:02:50,000
+Calling the sample Saqqaq places it in an archaeological discussion. It does not recover the owner's personal identity, and it does not make one individual identical to everyone around them.
+
+018 | 00:02:50,000–00:03:00,000
+Nor does the existence of a settlement give us a complete social scene. Houses, activities, seasons, and relationships need evidence of their own, even when the landscape invites imagination.
+
+019 | 00:03:00,000–00:03:10,000
+The record survives unevenly. Some materials decay, some places are disturbed, and some collections remain understudied. Every surviving sample arrives through that selective history.
+
+020 | 00:03:10,000–00:03:20,000
+So the first part of this genetic discovery happened before a sequence was read: someone preserved an object together with the information that made it historically meaningful.
+
+021 | 00:03:20,000–00:03:30,000
+Why could hair preserve useful DNA at all? A strand is not a miniature intact person. It is a material in which biological traces can sometimes survive exceptionally well.
+
+022 | 00:03:30,000–00:03:40,000
+Hair is rich in keratin, a tough structural protein. Its physical condition can help protect surviving material, but an intact-looking strand does not guarantee an intact genome.
+
+023 | 00:03:40,000–00:03:50,000
+After death, DNA becomes fragmented and chemically altered. Microbes and later human handling can add other genetic material, leaving researchers with a mixture rather than a pristine message.
+
+024 | 00:03:50,000–00:04:00,000
+Cold conditions can slow some forms of degradation. Permafrost preservation helped make the Saqqaq hair extraordinary, but freezing is an opportunity for survival, not a promise of perfect recovery.
+
+025 | 00:04:00,000–00:04:10,000
+A useful way to imagine the problem is a damaged book scattered into many small pieces. The comparison helps, provided we remember that real molecules are not printed pages.
+
+026 | 00:04:10,000–00:04:20,000
+The hair can look continuous while the DNA inside it is broken. What the microscope shows about the strand and what sequencing reveals about the molecules are different observations.
+
+027 | 00:04:20,000–00:04:30,000
+That distinction protects us from a common mistake: treating excellent preservation of an object's shape as proof that all biological information remains equally complete or equally trustworthy.
+
+028 | 00:04:30,000–00:04:40,000
+Researchers must ask which molecules belong to the sampled person, which belong to other organisms, and which may have arrived during the sample's modern history.
+
+029 | 00:04:40,000–00:04:50,000
+The discovery therefore depended on more than cold ground. It depended on methods capable of distinguishing a surviving ancient signal from the noise surrounding it.
+
+030 | 00:04:50,000–00:05:00,000
+And before that signal could explain population history, another question had to be settled carefully. How old was the hair, and what exactly did its date mean?
+
+031 | 00:05:00,000–00:05:10,000
+The shorthand is about four thousand years old. That is useful for orientation, but the published dating work was more careful than assigning the owner a precise birthday.
+
+032 | 00:05:10,000–00:05:20,000
+The team used radiocarbon dating of the hair and considered its marine dietary context. The reported calendar range was broader than a single dramatic number might suggest.
+
+033 | 00:05:20,000–00:05:30,000
+Why does diet matter to a clock? Carbon enters bodies through food, and marine carbon can carry a different apparent radiocarbon age from carbon in the atmosphere.
+
+034 | 00:05:30,000–00:05:40,000
+A person relying heavily on marine food therefore creates a dating problem that must be evaluated. The laboratory result needs context before it becomes a calendar interpretation.
+
+035 | 00:05:40,000–00:05:50,000
+Stable isotope measurements also supplied evidence about food resources. That kind of chemical information is not the same thing as reading the person's genome.
+
+036 | 00:05:50,000–00:06:00,000
+Different methods answer different questions. One investigates age, another aspects of diet, another inherited sequence. Their conclusions become stronger when the questions are kept separate and then compared.
+
+037 | 00:06:00,000–00:06:10,000
+The hair's age is also different from the date its ancestors entered the Arctic. An individual lived within a population history that could reach much farther back.
+
+038 | 00:06:10,000–00:06:20,000
+A date attached to one sample cannot simply be stretched into the beginning of a culture, the founding of a settlement, or the start of a migration.
+
+039 | 00:06:20,000–00:06:30,000
+This may seem cautious, but it makes the mystery clearer. We are asking about a particular person at a particular archaeological horizon, then testing wider connections around that evidence.
+
+040 | 00:06:30,000–00:06:40,000
+Once the age and context are understood, the next challenge becomes unavoidable: can the sequence truly be assigned to the ancient sample, rather than to us?
+
+041 | 00:06:40,000–00:06:50,000
+Ancient human DNA has a special vulnerability. Modern human DNA can look frustratingly familiar, because both come from members of the same species.
+
+042 | 00:06:50,000–00:07:00,000
+A result can contain modern contamination even when the archaeological object is unquestionably old. The age of the object does not automatically certify the age of every molecule recovered from it.
+
+043 | 00:07:00,000–00:07:10,000
+That is why laboratory practice and analytical checks matter together. Careful handling reduces opportunities for contamination; sequence analysis investigates the patterns that remain in the data.
+
+044 | 00:07:10,000–00:07:20,000
+Fragment lengths, chemical damage, comparisons among genetic regions, and consistency across the wider analysis can contribute to an authenticity argument. No single visual effect replaces that reasoning.
+
+045 | 00:07:20,000–00:07:30,000
+Damage can help distinguish ancient material, but it is not a perfect clock and not an automatic stamp of truth. Context and several checks must work together.
+
+046 | 00:07:30,000–00:07:40,000
+The twenty ten study reported very low estimated contamination, supported by multiple analyses. The claim was not that a strand had magically remained untouched for four millennia.
+
+047 | 00:07:40,000–00:07:50,000
+Nor should a documentary turn a laboratory into a theater where a screen flashes a complete ancient face. Real confidence comes from reproducible evidence and explicit limits.
+
+048 | 00:07:50,000–00:08:00,000
+This is the less visible part of a major discovery: rejecting misleading possibilities before trusting the most interesting one. An exciting answer still has to survive ordinary skeptical questions.
+
+049 | 00:08:00,000–00:08:10,000
+Could the signal be contamination? Could a comparison be biased? Could an inference depend on the people included in the reference set? These are productive questions, not obstacles to storytelling.
+
+050 | 00:08:10,000–00:08:20,000
+Only after those questions are taken seriously does the hair become more than a compelling object. It becomes a source of genetic observations that can be compared with others.
+
+051 | 00:08:20,000–00:08:30,000
+The story had already advanced in two thousand eight, when researchers published a mitochondrial genome from ancient Saqqaq hair. Mitochondrial DNA follows a different inheritance path from most nuclear DNA.
+
+052 | 00:08:30,000–00:08:40,000
+That earlier result offered a powerful clue about maternal ancestry. It did not contain every ancestral line carried by the person, and it did not substitute for a broader genome.
+
+053 | 00:08:40,000–00:08:50,000
+In twenty ten, Morten Rasmussen and colleagues published a much broader nuclear genome from the preserved hair. The achievement helped establish what ancient personal genomics could make possible.
+
+054 | 00:08:50,000–00:09:00,000
+The paper reported recovery of roughly four fifths of the diploid genome, at substantial sequencing depth. That was remarkable, and it still was not the same as recovering every position perfectly.
+
+055 | 00:09:00,000–00:09:10,000
+Sequencing reads fragments. Computational methods compare and assemble information from many observations, while dealing with uncertainty, missing data, damage, and potential errors.
+
+056 | 00:09:10,000–00:09:20,000
+A reference genome can help organize the comparison, but it does not turn every gap into a known fact. The uncertain parts must remain uncertain in the analysis.
+
+057 | 00:09:20,000–00:09:30,000
+The distinction between mitochondrial and nuclear results is important for the story. A clue from one inherited line and a broad comparison across the genome have different explanatory reach.
+
+058 | 00:09:30,000–00:09:40,000
+It is tempting to describe a genome as a complete biography. But a sequence records inherited variation, not a list of travels, conversations, occupations, or private memories.
+
+059 | 00:09:40,000–00:09:50,000
+The twenty ten paper made one ancient individual available for comparison at a new scale. The next question was not merely what he looked like, but which histories best explained those comparisons.
+
+060 | 00:09:50,000–00:10:00,000
+That question takes us westward across the Arctic, toward connections with Siberia. But we should carry the laboratory's caution with us when the camera leaves the bench.
+
+061 | 00:10:00,000–00:10:10,000
+The original analysis found close genetic affinities between the Saqqaq individual and northeastern Siberian populations in its comparison set. That was an important challenge to a simple continuity story.
+
+062 | 00:10:10,000–00:10:20,000
+Present-day populations can serve as reference points in such comparisons. They are not unchanged copies of ancient people, and genetic similarity does not make them identical cultural communities.
+
+063 | 00:10:20,000–00:10:30,000
+The study supported an Arctic migration history distinct from the earliest peopling of the Americas. But distinction is not the same as permanent isolation without later connection.
+
+064 | 00:10:30,000–00:10:40,000
+Shared variants help evaluate relationships, while demographic models test possible histories of separation and contact. Those models depend on assumptions and on which samples are available.
+
+065 | 00:10:40,000–00:10:50,000
+A branch on a model is not a nation, and a color in an ancestry diagram is not a pure ancient people. These are tools for analysis, not literal biological identities.
+
+066 | 00:10:50,000–00:11:00,000
+The person represented by the hair was one participant in a much wider history. His sequence could reveal relationships that were difficult to see through surviving objects alone.
+
+067 | 00:11:00,000–00:11:10,000
+It could not tell us whether he personally made a long migration, or whether the relevant movement happened many generations before his lifetime. That difference is easy to lose in an animated map.
+
+068 | 00:11:10,000–00:11:20,000
+Likewise, a genetic connection toward Siberia does not give us a departure date for one family, a named destination, or a precise chain of stops across the coast.
+
+069 | 00:11:20,000–00:11:30,000
+The broader inference remains powerful: the Arctic's population history involved movements that a single continuous line would fail to describe. The hair made that complexity harder to ignore.
+
+070 | 00:11:30,000–00:11:40,000
+To understand how such movements could connect distant regions, we need to think about the sea as a changing landscape, rather than a blank space between pieces of land.
+
+071 | 00:11:40,000–00:11:50,000
+Modern maps can make the Arctic look like a frozen border. For people living along its coasts, water, shorelines, seasonal ice, and animal movements shaped a more dynamic world.
+
+072 | 00:11:50,000–00:12:00,000
+That does not mean every crossing was easy or every season safe. Nor does the genetic evidence reconstruct the specific conditions of a journey that occurred thousands of years ago.
+
+073 | 00:12:00,000–00:12:10,000
+Archaeological evidence can investigate technologies and regional patterns of movement. Environmental research can examine past conditions. A genome answers another set of questions within that larger picture.
+
+074 | 00:12:10,000–00:12:20,000
+We should also avoid importing a much older land bridge into the wrong period. The Saqqaq story does not place an open walking route across Beringia four thousand years ago.
+
+075 | 00:12:20,000–00:12:30,000
+A population connection need not identify a particular vessel. A convincing image of a boat is still only an image unless the associated historical claim has independent support.
+
+076 | 00:12:30,000–00:12:40,000
+The temptation is to animate one heroic departure and call it the migration. Population history may instead involve repeated movement, long intervals, local lives, and contact in several directions.
+
+077 | 00:12:40,000–00:12:50,000
+Those processes work on different scales. One person's movements during life, a family's history, and the spread of ancestry across many generations are related but distinct questions.
+
+078 | 00:12:50,000–00:13:00,000
+The hair's value is that it helps test some of those questions directly with ancient evidence. It does not replace the other kinds of evidence needed to understand a lived landscape.
+
+079 | 00:13:00,000–00:13:10,000
+That distinction lets us keep the sense of distance without inventing a voyage. We can feel the scale of the Arctic while being honest about which connections are supported.
+
+080 | 00:13:10,000–00:13:20,000
+And it brings us to another distinction that matters just as much: a change in archaeological culture is not automatically a complete replacement of ancestry.
+
+081 | 00:13:20,000–00:13:30,000
+The names Saqqaq, Dorset, and Thule organize parts of an archaeological record. They help researchers compare material traditions across regions and time, but they are not interchangeable genetic labels.
+
+082 | 00:13:30,000–00:13:40,000
+A new tool style can spread through learning, contact, movement, or a combination of processes. A population can also change genetically without leaving a simple matching boundary in every artifact type.
+
+083 | 00:13:40,000–00:13:50,000
+This is why genetics and archaeology are most informative in conversation. Each can challenge an explanation that looks convincing when only one category of evidence is considered.
+
+084 | 00:13:50,000–00:14:00,000
+A twenty fourteen study expanded the genetic prehistory of the American Arctic. It examined ancient and present-day people across a much wider regional and chronological framework.
+
+085 | 00:14:00,000–00:14:10,000
+The work described continuity within earlier Arctic populations and a later arrival associated with ancestors of present-day Inuit, while also reporting evidence of past gene flow between lineages.
+
+086 | 00:14:10,000–00:14:20,000
+That combination already resists a simplistic picture of perfectly sealed boxes. Movement and distinction can coexist with contact; the explanatory task is to determine where the evidence supports each.
+
+087 | 00:14:20,000–00:14:30,000
+A transition in material traditions also does not tell us exactly why an earlier way of life changed. Climate, social relationships, technology, and demography need their own investigations.
+
+088 | 00:14:30,000–00:14:40,000
+A documentary can acknowledge these possibilities without choosing a dramatic cause that the evidence does not identify. Disappearance from a particular record is not an explanation by itself.
+
+089 | 00:14:40,000–00:14:50,000
+The next major refinement would come from more ancient genomes and different methods of comparison. One famous individual would now be considered within a more complicated network.
+
+090 | 00:14:50,000–00:15:00,000
+When that wider network becomes visible, even the word vanished needs care. A recognizable culture can end while parts of its related ancestry continue through other histories.
+
+091 | 00:15:00,000–00:15:10,000
+In twenty nineteen, researchers published genomic data from forty-eight ancient individuals across regions including Chukotka, the Aleutian Islands, Alaska, and the Canadian Arctic.
+
+092 | 00:15:10,000–00:15:20,000
+They combined those data with other ancient and present-day comparisons. The question became broader than whether the Greenland hair matched a small set of living reference populations.
+
+093 | 00:15:20,000–00:15:30,000
+Their analyses supported ancestry related to early Arctic populations in several later populations, including groups speaking Na Dene and languages of the Inuit, Yupik, and Aleutian regions.
+
+094 | 00:15:30,000–00:15:40,000
+That is not a claim that every community shares one identity, one language history, or the same amount of ancestry. Nor does related ancestry make this particular Saqqaq man everyone's direct ancestor.
+
+095 | 00:15:40,000–00:15:50,000
+It is a reason to avoid the sweeping claim that an earlier Arctic population left no genetic legacy anywhere. The later research added connections that a simplified extinction story would hide.
+
+096 | 00:15:50,000–00:16:00,000
+More samples did not make the twenty ten hair unimportant. They changed the scale at which it could be interpreted, connecting an individual observation with wider population processes.
+
+097 | 00:16:00,000–00:16:10,000
+Methods mattered too. Looking at shared rare variants or stretches of inherited sequence can ask questions differently from a simple visual comparison of a few points on a chart.
+
+098 | 00:16:10,000–00:16:20,000
+Yet a more detailed model remains a model. Its strength comes from testing alternatives and explaining observed patterns, not from making an animated branch look authoritative.
+
+099 | 00:16:20,000–00:16:30,000
+The strongest narrative therefore changes with the evidence. It follows what each study could establish at its time, and refuses to freeze the first striking headline into a permanent conclusion.
+
+100 | 00:16:30,000–00:16:40,000
+That is how a tiny sample keeps its importance without being forced to carry every answer. It remains part of the conversation, even when the conversation becomes much larger.
+
+101 | 00:16:40,000–00:16:50,000
+There is another reason the hair attracted attention: researchers used genetic variants to discuss possible physical traits. The prospect of seeing an ancient person made an irresistible headline.
+
+102 | 00:16:50,000–00:17:00,000
+But a trait prediction is not a photograph. It depends on statistical relationships studied in other people, on available markers, and on how those relationships transfer to an ancient individual.
+
+103 | 00:17:00,000–00:17:10,000
+The twenty ten paper discussed probable characteristics rather than recovering a complete face. We should preserve that difference when telling the story, even if a portrait would be visually convenient.
+
+104 | 00:17:10,000–00:17:20,000
+Knowing something about inherited variation does not identify a person's exact expression, hairstyle, age at death, voice, or the clothes worn on a particular day.
+
+105 | 00:17:20,000–00:17:30,000
+Nor can a genome supply the person's memories, moral character, language, or sense of belonging. Those are not hidden subtitles waiting for a sequencing instrument to display.
+
+106 | 00:17:30,000–00:17:40,000
+This matters because a convincing generated face can feel like evidence even when it is only an illustration. The more lifelike the image, the easier it becomes to forget what was never established.
+
+107 | 00:17:40,000–00:17:50,000
+We can make the investigation vivid without pretending to identify a face. Hair texture, frozen ground, archival work, laboratory practice, and the scale of the Arctic offer a richer visual vocabulary.
+
+108 | 00:17:50,000–00:18:00,000
+The person behind the sample becomes more human when we acknowledge an unrecorded life, rather than filling every gap with details that make the documentary easier to produce.
+
+109 | 00:18:00,000–00:18:10,000
+A sequence can challenge a story about ancestry. It cannot tell the entire story of a life. That limit should sharpen curiosity, not diminish the discovery.
+
+110 | 00:18:10,000–00:18:20,000
+And the molecules can sometimes preserve another layer of information, one that still must not be confused with a recovered mind or a complete biological diary.
+
+111 | 00:18:20,000–00:18:30,000
+In twenty fourteen, researchers revisited the Saqqaq sequence data to investigate patterns related to DNA packaging and chemical modification. The same ancient material could support new kinds of questions.
+
+112 | 00:18:30,000–00:18:40,000
+DNA in living cells interacts with proteins, including structures around which it is packaged. Patterns in surviving fragments can sometimes retain clues about that biological organization.
+
+113 | 00:18:40,000–00:18:50,000
+The study reconstructed aspects of nucleosome positioning and methylation from ancient data. These are biochemical patterns inferred through analysis, not microscopic photographs of the person alive.
+
+114 | 00:18:50,000–00:19:00,000
+That distinction is crucial. A chemical modification does not hand us a memory, and a reconstructed pattern does not reveal which private event caused every biological difference.
+
+115 | 00:19:00,000–00:19:10,000
+It also does not turn the genome into a complete medical record. The questions, data quality, comparison tissues, and analytical assumptions constrain what can reasonably be concluded.
+
+116 | 00:19:10,000–00:19:20,000
+The larger lesson is methodological: a carefully preserved and documented sample can acquire new scientific value as analytical approaches improve. Its usefulness need not end with one publication.
+
+117 | 00:19:20,000–00:19:30,000
+But new methods create new responsibilities for interpretation. A sophisticated technique does not make every attractive claim equally supported, and a colorful visualization does not remove uncertainty.
+
+118 | 00:19:30,000–00:19:40,000
+The most interesting question is therefore specific. Which observation can this analysis recover, and which larger claim still requires evidence from somewhere else?
+
+119 | 00:19:40,000–00:19:50,000
+When we ask that clearly, a familiar strand becomes a continuing research problem rather than a finished spectacle. The archive remains active, even when the object itself has not changed.
+
+120 | 00:19:50,000–00:20:00,000
+So the hair carries more than one scientific story, but none of them is unlimited. To understand the Arctic, we still have to look beyond this single person.
+
+121 | 00:20:00,000–00:20:10,000
+One individual cannot represent every settlement, every century, or every community across a vast region. Additional samples can reveal variation that a celebrated genome cannot show alone.
+
+122 | 00:20:10,000–00:20:20,000
+Missing populations also matter to a comparison. If a relevant group has not been sampled, the best-fitting model among available options may still omit an important part of the real history.
+
+123 | 00:20:20,000–00:20:30,000
+Archaeology supplies context, environmental research supplies changing settings, and genetic comparisons supply another kind of relationship. Their value grows when none is asked to replace all the others.
+
+124 | 00:20:30,000–00:20:40,000
+Living Arctic peoples are not simply reference points at the end of an ancient diagram. Their histories, knowledge, languages, and communities extend far beyond any one genetic comparison.
+
+125 | 00:20:40,000–00:20:50,000
+A responsible story keeps cultural identity distinct from an ancestry estimate. It also recognizes the archaeological and local knowledge that made the sample's context legible in the first place.
+
+126 | 00:20:50,000–00:21:00,000
+That broader perspective does not weaken the molecular discovery. It explains why the sequence matters: it adds evidence to human histories that already require several ways of knowing.
+
+127 | 00:21:00,000–00:21:10,000
+Future discoveries may redraw some relationships, refine dates, or challenge assumptions about contact. A good narrative leaves room for that work rather than declaring the mystery permanently solved.
+
+128 | 00:21:10,000–00:21:20,000
+The hair's enduring contribution is not a single frozen portrait. It is a demonstration that an ordinary-looking material can preserve evidence capable of changing the questions we ask.
+
+129 | 00:21:20,000–00:21:30,000
+From a frozen deposit to an archive, from short fragments to comparative models, its journey into knowledge involved many people and several different kinds of careful work.
+
+130 | 00:21:30,000–00:21:40,000
+None of those steps restored a complete life. Together, they gave an ancient individual a place in a testable history, while leaving many human details honestly unknown.
+
+131 | 00:21:40,000–00:21:50,000
+Return to the strand. It has not become a map, a diary, or a face. It remains hair, carrying fragments that researchers learned how to question.
+
+132 | 00:21:50,000–00:22:00,000
+The Arctic story grew more complex as more genomes appeared. The important discovery was never that one tiny object could settle everything; it was that it could change the conversation.
+
+133 | 00:22:00,000–00:22:10,000
+A person's name and thoughts remain beyond our reach. Yet carefully read molecules can challenge what we assumed about the past, and remind us how much evidence still waits.
+
+134 | 00:22:10,000–00:22:12,000
+A strand. A wider history.
