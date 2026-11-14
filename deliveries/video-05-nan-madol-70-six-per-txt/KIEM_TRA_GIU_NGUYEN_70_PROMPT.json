@@ -1,0 +1,532 @@
+{
+  "video": 5,
+  "subject": "Nan Madol",
+  "source_txt_files": 7,
+  "source_prompts": 70,
+  "main_scene_count": 67,
+  "reserve_prompt_numbers": [
+    68,
+    69,
+    70
+  ],
+  "output_txt_files": 12,
+  "full_files": 11,
+  "prompts_per_full_file": 6,
+  "last_file_prompts": 4,
+  "numbering": "1-70 preserved",
+  "prompt_content_identical": true,
+  "order_preserved": true,
+  "removed_prompts": 0,
+  "added_prompts": 0,
+  "timeline_and_clip_duration": "unchanged from source, including 18 seconds used for scene 67 and replacement-only status of scenes 68-70",
+  "camera_file": {
+    "file": "camera-20s.tsv",
+    "rows": 70,
+    "bytes": 14598,
+    "sha256": "7d38239c3f3c11f953390de4f17abf3e8882366f9147e42fab2aed7389528306",
+    "unchanged": true
+  },
+  "verification": "Original prompt body bytes and numbering compared, ignoring file BOM and separator line breaks only",
+  "sources": [
+    {
+      "file": "prompt-01.txt",
+      "sha256": "72fb91d9b27720b03cea8671a89bd7c2de5a26f88897c333e95026c8d43f2f2f",
+      "bytes": 20048,
+      "prompt_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "file": "prompt-02.txt",
+      "sha256": "fd98034abe9624e0da35a5812448b72c649e2bef24a689c2afd010df51e8c2f8",
+      "bytes": 20294,
+      "prompt_numbers": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "file": "prompt-03.txt",
+      "sha256": "b73a58d4ba2d36ddba1812c4a6cd5f18d09dcd609989e257acc3a8f06499dc72",
+      "bytes": 20271,
+      "prompt_numbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "file": "prompt-04.txt",
+      "sha256": "5a6ba3a985885008986de94f0d804478acd8275358bfce017a38338bad1d0c8f",
+      "bytes": 20536,
+      "prompt_numbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "file": "prompt-05.txt",
+      "sha256": "9202f8cfe467b265d936a77677dbaadfa3b67c72e456404c127e92c224ba2d0e",
+      "bytes": 20462,
+      "prompt_numbers": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ]
+    },
+    {
+      "file": "prompt-06.txt",
+      "sha256": "08c5b4fda703502314d964cce2a8b65765f49dae33eeb142b7498c40196f9e86",
+      "bytes": 20587,
+      "prompt_numbers": [
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ]
+    },
+    {
+      "file": "prompt-07.txt",
+      "sha256": "813106e6dac3cd93109a182cac89c6084fdcce9fcaf9387e1c5c231d3337bf12",
+      "bytes": 19418,
+      "prompt_numbers": [
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "file": "VIDEO_05_01_001-006.txt",
+      "count": 6,
+      "first": 1,
+      "last": 6,
+      "bytes": 11994,
+      "sha256": "1fab4e5a47039b9943389b7a0a6107221c96210f28de30acae04c77fc90de49c"
+    },
+    {
+      "file": "VIDEO_05_02_007-012.txt",
+      "count": 6,
+      "first": 7,
+      "last": 12,
+      "bytes": 12152,
+      "sha256": "826f7273a5a893936e1898c06483621e4cf3b2a242930fa1eecfe2dedd54309c"
+    },
+    {
+      "file": "VIDEO_05_03_013-018.txt",
+      "count": 6,
+      "first": 13,
+      "last": 18,
+      "bytes": 12156,
+      "sha256": "6f01cdce282d6bf68d4abf0f23b5faa296269c5ff820e972adbfe473ddf3c695"
+    },
+    {
+      "file": "VIDEO_05_04_019-024.txt",
+      "count": 6,
+      "first": 19,
+      "last": 24,
+      "bytes": 12152,
+      "sha256": "1237f924fb175b407f42c55db2e92e1bb949a1c9fb7b1f23d72f31ff0f0d9785"
+    },
+    {
+      "file": "VIDEO_05_05_025-030.txt",
+      "count": 6,
+      "first": 25,
+      "last": 30,
+      "bytes": 12163,
+      "sha256": "e1d35a3d5cf067c01c126fba4903094d21d336d914a8826faee2410c743424c0"
+    },
+    {
+      "file": "VIDEO_05_06_031-036.txt",
+      "count": 6,
+      "first": 31,
+      "last": 36,
+      "bytes": 12230,
+      "sha256": "2e4b8914f577fd8e1408db088b2a5f7205c239b61640c9024a96f7f30c5cfc07"
+    },
+    {
+      "file": "VIDEO_05_07_037-042.txt",
+      "count": 6,
+      "first": 37,
+      "last": 42,
+      "bytes": 12407,
+      "sha256": "738a50f012037539c0b9dbd2b0968ec458879b9bace0a334e5932d7ba4af262b"
+    },
+    {
+      "file": "VIDEO_05_08_043-048.txt",
+      "count": 6,
+      "first": 43,
+      "last": 48,
+      "bytes": 12288,
+      "sha256": "29a3999ea84f5fb543998d3bb52933b7cb391443df2c86a73b021c5458627a76"
+    },
+    {
+      "file": "VIDEO_05_09_049-054.txt",
+      "count": 6,
+      "first": 49,
+      "last": 54,
+      "bytes": 12253,
+      "sha256": "f2dd5e16c1d339ab3617de3ed4fe3aba23aae20aa77c6db574a21cabcd935550"
+    },
+    {
+      "file": "VIDEO_05_10_055-060.txt",
+      "count": 6,
+      "first": 55,
+      "last": 60,
+      "bytes": 12411,
+      "sha256": "93b2793ce362072680fa3540f23c5fd0fd3ba15618ce5ed770fcf8f62b0c59b8"
+    },
+    {
+      "file": "VIDEO_05_11_061-066.txt",
+      "count": 6,
+      "first": 61,
+      "last": 66,
+      "bytes": 12267,
+      "sha256": "8e2f16849d8192d33dc3f5a6da348de0637c480a501259ab676bd0ca63993a42"
+    },
+    {
+      "file": "VIDEO_05_12_067-070.txt",
+      "count": 4,
+      "first": 67,
+      "last": 70,
+      "bytes": 7153,
+      "sha256": "2820fecc1214aaf0251ce4d452a921b7ff1bf1d1098c06082b60755d16efcfe5"
+    }
+  ],
+  "prompts": [
+    {
+      "number": 1,
+      "sha256": "2ffff6b55f048c8c62107b77ab2e1f93f0c6249da2892a5325c43caead640657"
+    },
+    {
+      "number": 2,
+      "sha256": "4085758ead20eb6b5f1b0c7aad332537c990178e3fca7dc4b865e49df0031d7d"
+    },
+    {
+      "number": 3,
+      "sha256": "1da7922088aa3d2f5ec46606259bf8c63a4015951067cbe4941cc5167b2c0f2c"
+    },
+    {
+      "number": 4,
+      "sha256": "e2a6781cb8cd2540de2f10d417eedcf9ee7387055cc4b2c8001a4c6a4240d7b9"
+    },
+    {
+      "number": 5,
+      "sha256": "3fc7ae86b17680c4f4afc2f8c01f709ec432392543d7430f6cad074fd1b649c2"
+    },
+    {
+      "number": 6,
+      "sha256": "981875307d0ab343864c09b51a7b6fd33bc8c3c448630bcff7e9ad9e3d82fc23"
+    },
+    {
+      "number": 7,
+      "sha256": "31fe911e2a987fe25bb2d8dd8398aa14652969742e26797efde6824eae57efcd"
+    },
+    {
+      "number": 8,
+      "sha256": "96cb9b87385fe5bb229fb6e811b1b9ba556564965c0ad06d3567fb4785e29a24"
+    },
+    {
+      "number": 9,
+      "sha256": "22b2179bb663b431ab4007932f36fda5d808bd49edda70a3cb493039b702736b"
+    },
+    {
+      "number": 10,
+      "sha256": "995de4980d50db69bad3e93c480a42eabfd8fd71381597ba4aa8ed89f5d6b21d"
+    },
+    {
+      "number": 11,
+      "sha256": "d851eb982e532fc2c6018df6f536d0f09177e3571fcb4b2c5cc98cf47bf2e4be"
+    },
+    {
+      "number": 12,
+      "sha256": "30c34b06dcc8ab92f163fd97de38781d05109d30c633cb76ca9bcc35e5d0bd23"
+    },
+    {
+      "number": 13,
+      "sha256": "69573f6117e9cef2bb74dd08f4c6aecca30294dd6dd223b956e8da2f05e9b418"
+    },
+    {
+      "number": 14,
+      "sha256": "631ce1af2a74808dda3f1c328bc04f5107f8e78e5c23450a67030d418189428d"
+    },
+    {
+      "number": 15,
+      "sha256": "dcee84604f12bf623710fd22e3ed53833963c2ee034f4029a27114830418a610"
+    },
+    {
+      "number": 16,
+      "sha256": "066b545f8bfe429d95010e4d75b0735ee2e3ba046da42b0c99479e5a588cf3bb"
+    },
+    {
+      "number": 17,
+      "sha256": "654a66dac96cf53f069d839f00575d0e94f3a1917715e3065b3a3ce1ae457158"
+    },
+    {
+      "number": 18,
+      "sha256": "8abe4c4878720efb2a42830a28ebd6589df1f18077bc16b6f6da1f15e4813d30"
+    },
+    {
+      "number": 19,
+      "sha256": "0f91f77019584b064d4bc0099e7505edd4f2edcaf9fa2909680ee88ae9b9c266"
+    },
+    {
+      "number": 20,
+      "sha256": "d012d8b7b3e99b1dc14279aa2ef2808fb0c34850c62d283e18834488e45799c6"
+    },
+    {
+      "number": 21,
+      "sha256": "32f6fe8711fd09dedf48edae0696ea1a7943a4cd3a0341085a8405c0c5efb5a8"
+    },
+    {
+      "number": 22,
+      "sha256": "c382ac14035599161f753155c682e33b96fde61fd39e35330691f6880be75d7c"
+    },
+    {
+      "number": 23,
+      "sha256": "619e410f45da91efa4cde763beef3e38a3264c45d9222104c84e2833c53991ec"
+    },
+    {
+      "number": 24,
+      "sha256": "29c414481b49f1522401169d603e5856057cf18482794fdf735d5065e7e87332"
+    },
+    {
+      "number": 25,
+      "sha256": "06ba71173a64442f1d48c73348f3ef1b005cd5e77109487da184f31cf8fbca63"
+    },
+    {
+      "number": 26,
+      "sha256": "9ac03c337daf162312088a21980d15f8860a0eaca179abd6a598cbdcdf9bbc90"
+    },
+    {
+      "number": 27,
+      "sha256": "75d0434bfd1c6a2883bcd2142d43bd842bd89eb6444a96fb1af77868d787f185"
+    },
+    {
+      "number": 28,
+      "sha256": "84646126a52be9a0017e3f335510b862f20d95b8867cb8cca50dbee9f1f1b0c6"
+    },
+    {
+      "number": 29,
+      "sha256": "90aa3424e90c638aa3b817e6629fe959d9f457cbc027e856a998fd2fe2da7c9b"
+    },
+    {
+      "number": 30,
+      "sha256": "16add9842c6421c92be3fc1e50b1fcf0d9e1293a2f8209d2a82d123c8f548071"
+    },
+    {
+      "number": 31,
+      "sha256": "fef1195f5a757975094f7e39e9234b6997890697457ec3f1db5c334d7b6816a5"
+    },
+    {
+      "number": 32,
+      "sha256": "b660b73795ad6d0552fa1993a481fcd73393a5a88d01d0e1e61d8031b818a62b"
+    },
+    {
+      "number": 33,
+      "sha256": "e234652d644d7f925a94e666756239b33fc10172f918cf0c7218f0a6a0d2ae70"
+    },
+    {
+      "number": 34,
+      "sha256": "1f2f0c95f6cf8602c164cf58a58bfc1e3e17a480f02bf7bdb283d1bfd43d4900"
+    },
+    {
+      "number": 35,
+      "sha256": "5b2c10236d472be35f83d770b161903d521c60de1936ca836ad2041373f246c7"
+    },
+    {
+      "number": 36,
+      "sha256": "d2bb7fd86d427cd6f2e195f3da46bedf23e563c4208ca4418dd1ed574aaa9eb4"
+    },
+    {
+      "number": 37,
+      "sha256": "d93a1e6495ea983f9ac10edda50d34b5e10bcd5dad99c863c90db6ee515cbc9a"
+    },
+    {
+      "number": 38,
+      "sha256": "4b407b41dad3ca90aafad7f93971b37c716cb5fed4a89d2a533ff0132b0f098e"
+    },
+    {
+      "number": 39,
+      "sha256": "9f8fbe64a035fbe5b76d96d2551ed980a033110dbd02c8a3042aa11559101bf6"
+    },
+    {
+      "number": 40,
+      "sha256": "cf28d759d67f15685e0ba7d57837da8f505b10e8240947b7c186f3850ee1ca28"
+    },
+    {
+      "number": 41,
+      "sha256": "98718f9e6ad92464c843038e7460562ed71a048fec84bd1ac9559553cb22435a"
+    },
+    {
+      "number": 42,
+      "sha256": "21c617983b66f7e8b6dd7ad58552a46622859b49369b5ba46b2dad880d3dbf8a"
+    },
+    {
+      "number": 43,
+      "sha256": "245a0816310418af1a69406424f0517d8930c30cc26d77f37bf9f8f813066174"
+    },
+    {
+      "number": 44,
+      "sha256": "6b743dac474d00e6394cf965df1b396fd63887b7cf7dc674e9c27cb36a48fc5a"
+    },
+    {
+      "number": 45,
+      "sha256": "9797333122b6ce7e0675469a214ffd303658982fdc66f4179b6b648042442bbb"
+    },
+    {
+      "number": 46,
+      "sha256": "9df70abc9e29a048e341e22bdfe8e946617ea984558f68785bbe5149512a89c7"
+    },
+    {
+      "number": 47,
+      "sha256": "6bbaa2c7f241fb5e9664d53877ecbe422c0566b8ed6594b472ae64a5a90624a7"
+    },
+    {
+      "number": 48,
+      "sha256": "9d0a4a0f0bb25a32518b79951046ae252b9e97a0adfbbca6284b9958550ff1bf"
+    },
+    {
+      "number": 49,
+      "sha256": "8a14ee9e5752705d037d460e23c6fe7d1145e767e7ce1a943bc686bc6c022731"
+    },
+    {
+      "number": 50,
+      "sha256": "781a56fa8fb21b8475d56f1dc292c61b67eac95b4bb5ea3612076af8884fdd18"
+    },
+    {
+      "number": 51,
+      "sha256": "37826f194bc573fd5ef262b8e35e57958edaa60d8c1f86f0115bc60aadb97ce3"
+    },
+    {
+      "number": 52,
+      "sha256": "1351d157ff3404fd3f7715f6d67b6de49ce06795ea31ec6fbb269bfaf337b064"
+    },
+    {
+      "number": 53,
+      "sha256": "7b486eed968ab664d879684fb8eeabfaf4d40bac8bba46fc79b006fff659965b"
+    },
+    {
+      "number": 54,
+      "sha256": "9581b194d8c5915ef0a6458b4d683e2a61e539b03aba7198e975d76cffecdc1c"
+    },
+    {
+      "number": 55,
+      "sha256": "463d2626385127476be3302f4e165033dbdad636db63d9a52a06cd0b4902b952"
+    },
+    {
+      "number": 56,
+      "sha256": "e3dc25b4e11a7d8e9f651e970ca1f7653bb63e23c0e99237922eefe162fb6149"
+    },
+    {
+      "number": 57,
+      "sha256": "94b0891cc3a7a8292e28550c223103c0cb1f17dd468bc7eaf22f1d15755c3b42"
+    },
+    {
+      "number": 58,
+      "sha256": "62122b4667622648e7c8cf429834f15efb1c39e24a849fef771818d05cfc9415"
+    },
+    {
+      "number": 59,
+      "sha256": "9046a63b367a21c714b466483e93c29a13d2cf570c0324db08bdc22205e7345d"
+    },
+    {
+      "number": 60,
+      "sha256": "7c7675ecc70291da8f80b567a06dc19c1658cbea8b81e4bc96b1b481549b2dee"
+    },
+    {
+      "number": 61,
+      "sha256": "82a8dd775bb5aa513914640bd0792e7d481ee633e0031feecedb5183c3948d46"
+    },
+    {
+      "number": 62,
+      "sha256": "d858cd1d01a00db37339bbf2229d581e1e30e8e4388956fed64c5ede3c49a07c"
+    },
+    {
+      "number": 63,
+      "sha256": "b378e41ee11cc96644f691b4300b1acf6dde95ecec3e6d87f6e7b7c1f5cb5721"
+    },
+    {
+      "number": 64,
+      "sha256": "6295f8fb4097d8e4e3fac1839ff7885f61de50f3e376767434a55f0c15593c51"
+    },
+    {
+      "number": 65,
+      "sha256": "b31fc38c4f084d23dc392c51b5436fac551e91151111a3051d6d2b50fbf8c4a6"
+    },
+    {
+      "number": 66,
+      "sha256": "82d5ff233e564c355d0edb7ed7b5540de5b0de7d23bfdc4fa05a60b2dccdf188"
+    },
+    {
+      "number": 67,
+      "sha256": "86c8d55033f78ccfe348d22ae665631e5c924f2d963a9c36943c986d956f22c9"
+    },
+    {
+      "number": 68,
+      "sha256": "3983e382ff33130139dbe2ce0a3481cc0b1843a329284efeb9846d6f55c7bab6"
+    },
+    {
+      "number": 69,
+      "sha256": "7b066942764f121215015c22ee79ef783456f53f266f4ec314df42e744f10a2f"
+    },
+    {
+      "number": 70,
+      "sha256": "8b1667104400d436d6e7f2d3c78f24f2b28849cbe98a0172624c9d62b73f8d03"
+    }
+  ],
+  "zip_sha256": "0da215b8750f99b41a95570ea8378c6f3b37815f4184faef8f2c7aad7c495459"
+}

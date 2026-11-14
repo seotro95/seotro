@@ -1,0 +1,58 @@
+name: Video 5 Nan Madol prompts in groups of six
+on:
+  push:
+    branches: ["codex/video-05-nan-madol-70-six-per-txt-20261114"]
+    paths: ["deliveries/video-05-nan-madol-70-six-per-txt/**", ".github/workflows/video-05-nan-madol-70-six-per-txt.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  delivery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify all 70 prompts and the original camera file
+        run: |
+          python - <<'PYCODE'
+          from pathlib import Path
+          import codecs,hashlib,json,zipfile,re
+          root=Path('deliveries/video-05-nan-madol-70-six-per-txt')
+          qa=json.loads((root/'KIEM_TRA_GIU_NGUYEN_70_PROMPT.json').read_text())
+          source={x['number']:x['sha256'] for x in qa['prompts']}
+          numbers=[]
+          for file in qa['outputs']:
+              raw=(root/'files'/file['file']).read_bytes()
+              assert hashlib.sha256(raw).hexdigest()==file['sha256']
+              body=raw.removeprefix(codecs.BOM_UTF8)
+              matches=list(re.finditer(rb'(?m)^([1-9][0-9]*)[.][ \t]+',body))
+              assert len(matches)==file['count']
+              for i,m in enumerate(matches):
+                  n=int(m.group(1));end=matches[i+1].start() if i+1<len(matches) else len(body)
+                  content=body[m.start():end].rstrip(b'\r\n')
+                  assert hashlib.sha256(content).hexdigest()==source[n]
+                  numbers.append(n)
+          assert numbers==list(range(1,71))
+          assert [f['count'] for f in qa['outputs']]==[6]*11+[4]
+          camera=(root/'camera-20s.tsv').read_bytes()
+          assert hashlib.sha256(camera).hexdigest()==qa['camera_file']['sha256']
+          archive=Path('VIDEO_05_NAN_MADOL_70_PROMPT_CHIA_6_MOI_TXT.zip')
+          with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
+              for file in qa['outputs']:z.write(root/'files'/file['file'],file['file'])
+              z.write(root/'camera-20s.tsv','camera-20s.tsv')
+          with zipfile.ZipFile(archive) as z:
+              assert len(z.namelist())==13 and z.testzip() is None
+              assert z.read('camera-20s.tsv')==camera
+          qa['zip_sha256']=hashlib.sha256(archive.read_bytes()).hexdigest()
+          (root/'KIEM_TRA_GIU_NGUYEN_70_PROMPT.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2))
+          print('Verified all 70 original prompt bodies, including 3 reserves, and the unchanged camera TSV.')
+          PYCODE
+      - name: Save the video 5 files to a draft release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          release_tag=video-05-nan-madol-70-six-per-txt-20261114
+          if ! gh release view "$release_tag" >/dev/null 2>&1; then
+            gh release create "$release_tag" --draft --target "$GITHUB_SHA" --title "Video 5 — Nan Madol — 70 prompt — 12 TXT" --notes-file deliveries/video-05-nan-madol-70-six-per-txt/README.md
+          fi
+          gh release upload "$release_tag" VIDEO_05_NAN_MADOL_70_PROMPT_CHIA_6_MOI_TXT.zip deliveries/video-05-nan-madol-70-six-per-txt/files/*.txt deliveries/video-05-nan-madol-70-six-per-txt/camera-20s.tsv deliveries/video-05-nan-madol-70-six-per-txt/KIEM_TRA_GIU_NGUYEN_70_PROMPT.json --clobber
