@@ -14,7 +14,6 @@ def prose_spacing(s):
   if i%2:continue
   for a,b in fixes.items():x=x.replace(a,b)
   x=re.sub(r'(?<=[A-Za-zÀ-ỹ])(?=\d)',' ',x);x=re.sub(r'(?<=\d)(?=[A-Za-zÀ-ỹ])',' ',x)
-  x=re.sub(r'(?<=[a-zà-ỹ])(?=[A-ZÀ-Ỹ])',' ',x)
   x=re.sub(r',(?=\S)',', ',x);x=re.sub(r';(?=\S)','; ',x)
   pieces[i]=x
  return ''.join(pieces).replace('.mp 4','.mp4').replace('MP 4','MP4').replace('k Hz','kHz').replace('4, 000','4,000')

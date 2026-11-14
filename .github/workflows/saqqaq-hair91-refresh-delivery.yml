@@ -1,0 +1,24 @@
+name: SaqqaqHair91 refresh verified delivery records
+'on':
+  push:
+    branches:
+    - codex/saqqaq-hair91-production-20261113
+    paths:
+    - .github/workflows/saqqaq-hair91-refresh-delivery.yml
+  workflow_dispatch: null
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        sparse-checkout: episode91
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - env:
+        GH_TOKEN: ${{ github.token }}
+      run: python -u episode91/refresh_delivery_metadata.py
