@@ -1,0 +1,51 @@
+name: Split 120 prompts into files of six
+on:
+  push:
+    branches: ["codex/prompts-120-six-per-txt-20261114"]
+    paths: ["deliveries/prompts-120-six-per-txt/**", ".github/workflows/prompts-120-six-per-txt.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  delivery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify all 120 original prompt contents and package 20 TXT files
+        run: |
+          python - <<'PYCODE'
+          from pathlib import Path
+          import hashlib,json,re,zipfile
+          root=Path('deliveries/prompts-120-six-per-txt')
+          qa=json.loads((root/'KIEM_TRA_GIU_NGUYEN_120_PROMPT.json').read_text())
+          source={p['number']:p['sha256'] for p in qa['prompts']}
+          numbers=[]
+          for file in qa['outputs']:
+              raw=(root/'files'/file['file']).read_bytes()
+              assert hashlib.sha256(raw).hexdigest()==file['sha256']
+              matches=list(re.finditer(rb'(?m)^([1-9][0-9]*)[.][ \t]+',raw))
+              assert len(matches)==6
+              for i,m in enumerate(matches):
+                  n=int(m.group(1));end=matches[i+1].start() if i+1<len(matches) else len(raw)
+                  content=raw[m.start():end].rstrip(b'\r\n')
+                  assert hashlib.sha256(content).hexdigest()==source[n]
+                  numbers.append(n)
+          assert numbers==list(range(1,121))
+          with zipfile.ZipFile('PROMPTS_120_CHIA_6_MOI_TXT.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for file in qa['outputs']:z.write(root/'files'/file['file'],file['file'])
+          with zipfile.ZipFile('PROMPTS_120_CHIA_6_MOI_TXT.zip') as z:
+              assert len(z.namelist())==20 and z.testzip() is None
+          qa['zip_sha256']=hashlib.sha256(Path('PROMPTS_120_CHIA_6_MOI_TXT.zip').read_bytes()).hexdigest()
+          (root/'KIEM_TRA_GIU_NGUYEN_120_PROMPT.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2))
+          print('Verified: 120 unchanged prompts, 20 TXT files, exactly six prompts each.')
+          PYCODE
+      - name: Save the ZIP and individual TXT files to a draft release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          release_tag=prompts-120-six-per-txt-20261114
+          if ! gh release view "$release_tag" >/dev/null 2>&1; then
+            gh release create "$release_tag" --draft --target "$GITHUB_SHA" --title "120 prompt — 20 TXT — 6 prompt mỗi tệp" --notes-file deliveries/prompts-120-six-per-txt/README.md
+          fi
+          gh release upload "$release_tag" PROMPTS_120_CHIA_6_MOI_TXT.zip deliveries/prompts-120-six-per-txt/files/*.txt deliveries/prompts-120-six-per-txt/KIEM_TRA_GIU_NGUYEN_120_PROMPT.json --clobber
