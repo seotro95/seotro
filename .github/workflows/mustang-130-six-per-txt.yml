@@ -1,0 +1,54 @@
+name: Mustang 130 prompts in groups of six
+on:
+  push:
+    branches: ["codex/mustang-130-six-per-txt-20261114"]
+    paths: ["deliveries/mustang-130-six-per-txt/**", ".github/workflows/mustang-130-six-per-txt.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  delivery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify every prompt and package 22 TXT files
+        run: |
+          python - <<'PYCODE'
+          from pathlib import Path
+          import codecs,hashlib,json,re,zipfile
+          root=Path('deliveries/mustang-130-six-per-txt')
+          qa=json.loads((root/'KIEM_TRA_GIU_NGUYEN_130_PROMPT.json').read_text())
+          source={x['number']:x['sha256'] for x in qa['prompts']}
+          numbers=[]
+          for file in qa['outputs']:
+              raw=(root/'files'/file['file']).read_bytes()
+              assert hashlib.sha256(raw).hexdigest()==file['sha256']
+              body=raw.removeprefix(codecs.BOM_UTF8)
+              matches=list(re.finditer(rb'(?m)^([1-9][0-9]*)[.][ \t]+',body))
+              assert len(matches)==file['count']
+              for i,m in enumerate(matches):
+                  n=int(m.group(1));end=matches[i+1].start() if i+1<len(matches) else len(body)
+                  content=body[m.start():end].rstrip(b'\r\n')
+                  assert hashlib.sha256(content).hexdigest()==source[n]
+                  numbers.append(n)
+          assert numbers==list(range(1,131))
+          assert [f['count'] for f in qa['outputs']]==[6]*21+[4]
+          archive=Path('MUSTANG_130_PROMPT_CHIA_6_MOI_TXT.zip')
+          with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
+              for file in qa['outputs']:z.write(root/'files'/file['file'],file['file'])
+          with zipfile.ZipFile(archive) as z:
+              assert len(z.namelist())==22 and z.testzip() is None
+          qa['zip_sha256']=hashlib.sha256(archive.read_bytes()).hexdigest()
+          (root/'KIEM_TRA_GIU_NGUYEN_130_PROMPT.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2))
+          print('Verified: 130 unchanged prompts; 21 files of six and a final file of four.')
+          PYCODE
+      - name: Save the ZIP and each TXT file to a draft release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          release_tag=mustang-130-six-per-txt-20261114
+          if ! gh release view "$release_tag" >/dev/null 2>&1; then
+            gh release create "$release_tag" --draft --target "$GITHUB_SHA" --title "Mustang — 130 prompt — 22 TXT — mỗi tệp tối đa 6 prompt" --notes-file deliveries/mustang-130-six-per-txt/README.md
+          fi
+          gh release upload "$release_tag" MUSTANG_130_PROMPT_CHIA_6_MOI_TXT.zip deliveries/mustang-130-six-per-txt/files/*.txt deliveries/mustang-130-six-per-txt/KIEM_TRA_GIU_NGUYEN_130_PROMPT.json --clobber
