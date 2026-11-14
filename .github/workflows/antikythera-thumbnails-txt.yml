@@ -1,0 +1,30 @@
+name: Antikythera titles and thumbnail TXT
+on:
+  push:
+    branches: ["codex/prompts-120-six-per-txt-20261114"]
+    paths: ["deliveries/antikythera-titles-thumbnails/**", ".github/workflows/antikythera-thumbnails-txt.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the complete TXT
+        run: |
+          python - <<'PYCODE'
+          from pathlib import Path
+          import hashlib,re
+          p=Path('deliveries/antikythera-titles-thumbnails/ANTIKYTHERA_5_TIEU_DE_VA_5_PROMPT_THUMBNAIL.txt')
+          raw=p.read_bytes();text=raw.decode('utf-8')
+          assert re.findall(r'^([1-5])[.] ',text,re.M)==['1','2','3','4','5']
+          assert text.count('\nPROMPT:\n')==5
+          assert hashlib.sha256(raw).hexdigest()=='88a77a068948916995129271c81a605231c3ae5608938b5c235c6783d4cdb35a'
+          print('Verified five titles and five complete thumbnail prompts.')
+          PYCODE
+      - name: Attach TXT to the existing draft release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: gh release upload prompts-120-six-per-txt-20261114 deliveries/antikythera-titles-thumbnails/ANTIKYTHERA_5_TIEU_DE_VA_5_PROMPT_THUMBNAIL.txt --clobber

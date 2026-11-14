@@ -1,0 +1,50 @@
+ANTIKYTHERA — 5 TIÊU ĐỀ VÀ 5 PROMPT THUMBNAIL
+
+Dựa trên 120 prompt trong các tệp TXT người dùng cung cấp.
+Tiêu đề tiếng Anh dùng cho video chính; kèm nghĩa tiếng Việt.
+Mỗi prompt dưới đây tạo một ảnh thumbnail, không phải video.
+
+1. Antikythera: The Ancient Machine That Calculated the Sky
+Tiếng Việt: Antikythera: Cỗ máy cổ đại tính toán bầu trời
+Chữ thumbnail gợi ý: ANCIENT COMPUTER?
+
+PROMPT:
+Create a compelling 16:9 documentary YouTube thumbnail, 3840x2160. A large corroded bronze fragment of the Antikythera mechanism dominates the foreground, its surviving gear teeth sharply illuminated. Behind it, show a clearly illustrative reconstruction in a modest wooden case, softly out of focus. Dark teal shadows, warm bronze highlights, realistic museum lighting, strong depth, simple composition readable on a phone. Leave clean space at upper left for manually added typography. No modern electronics, fantasy technology, treasure glow, children, readable invented inscriptions, generated text, logos or watermarks.
+
+
+2. From Shipwreck to Science: The Antikythera Mystery
+Tiếng Việt: Từ tàu đắm đến khoa học: Bí ẩn Antikythera
+Chữ thumbnail gợi ý: FOUND AT SEA
+
+PROMPT:
+Create a cinematic 16:9 documentary thumbnail, 3840x2160. Two clearly separated visual layers: a close-up of an encrusted bronze mechanism fragment in the foreground, and a dark Mediterranean seabed with scattered ancient amphorae in the background. Treat this as a conceptual illustration, not a photograph of the discovery. Cold blue-green water contrasts with a restrained warm highlight on exposed gear teeth. One dominant focal point, realistic corrosion, generous dark space for editorial text. No intact underwater machine, glowing treasure, fantasy ruins, children, generated lettering, logos or watermarks.
+
+
+3. How Antikythera Predicted Eclipse Cycles
+Tiếng Việt: Antikythera đã dự báo chu kỳ nhật thực và nguyệt thực như thế nào?
+Chữ thumbnail gợi ý: ECLIPSES IN BRONZE
+
+PROMPT:
+Create a striking 16:9 astronomy documentary thumbnail, 3840x2160. On the left, a close view of an illustrative bronze spiral dial and a few mechanically plausible gears. On the right, a large realistic eclipsed Sun with a restrained natural corona against deep black. Keep these as separate explanatory elements, not a literal historical scene. Warm bronze versus cool charcoal, bold silhouettes, minimal clutter, readable at small size. Leave space for a short title added during editing. No exact prediction dates, fabricated scientific data, impossible gear engagement, children, generated text, logos or watermarks.
+
+
+4. What CT Scans Revealed Inside Antikythera
+Tiếng Việt: Ảnh quét CT đã hé lộ điều gì bên trong Antikythera?
+Chữ thumbnail gợi ý: HIDDEN INSIDE
+
+PROMPT:
+Create an investigative archaeology YouTube thumbnail, 16:9, 3840x2160. A corroded bronze fragment fills the left half. The right half shows a clearly illustrative grayscale CT-style cross-section suggesting concealed gear layers. Align the two views for an immediate visual comparison, without claiming the image is a genuine scan. Precise museum photography, dark teal background, warm bronze edges, crisp monochrome internal detail, strong contrast and one clear focal area. Reserve upper space for manual typography. No invented measurements, medical patients, magical scanning beams, children, generated text, logos or watermarks.
+
+
+5. Antikythera’s Missing Pieces: What We Still Don’t Know
+Tiếng Việt: Những mảnh ghép còn thiếu của Antikythera: Điều gì vẫn chưa được giải đáp?
+Chữ thumbnail gợi ý: STILL MISSING
+
+PROMPT:
+Create a mysterious but scientifically restrained 16:9 documentary thumbnail, 3840x2160. One weathered Antikythera-style bronze fragment rests on a dark conservation surface. Beside it, a faint schematic outline suggests missing components, with large deliberate gaps rather than a complete invented mechanism. Emphasize the broken edge and empty space using warm raking light, deep teal shadows and realistic bronze texture. Clearly an educational illustration, not new archaeological evidence. Keep the composition sparse and readable on a phone. No treasure, aliens, fantasy machinery, children, readable inscriptions, generated text, logos or watermarks.
+
+
+GỢI Ý SỬ DỤNG:
+Ưu tiên cặp số 1 cho toàn bộ video.
+Phần chữ thumbnail nên chèn riêng khi thiết kế để kiểm soát chính tả và độ dễ đọc.
+
