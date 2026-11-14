@@ -1,0 +1,1008 @@
+{
+  "video": 8,
+  "subject": "Flores, Indonesia",
+  "source_txt_files": 6,
+  "source_prompts": 60,
+  "output_txt_files": 10,
+  "prompts_per_file": 6,
+  "numbering": "1-60 preserved",
+  "prompt_content_identical": true,
+  "order_preserved": true,
+  "removed_prompts": 0,
+  "added_prompts": 0,
+  "reuse_instructions_unchanged": true,
+  "camera_mapping_verified": true,
+  "camera_file": {
+    "file": "camera-by-cue.tsv",
+    "rows": 60,
+    "bytes": 10650,
+    "sha256": "15c5e3475e6afafd1e281808ec66e4d260287562e3324eed8901744817a6a099",
+    "unchanged": true,
+    "cue_ids": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "10",
+      "11",
+      "12",
+      "13",
+      "15",
+      "16",
+      "17",
+      "19",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "27",
+      "32",
+      "33",
+      "34",
+      "37",
+      "39",
+      "40",
+      "41",
+      "42",
+      "44",
+      "48",
+      "50",
+      "53",
+      "55",
+      "56",
+      "57",
+      "58",
+      "62",
+      "64",
+      "66",
+      "68",
+      "69",
+      "71",
+      "74",
+      "79",
+      "81",
+      "82",
+      "84",
+      "91",
+      "95",
+      "99",
+      "100",
+      "101",
+      "102",
+      "103",
+      "104",
+      "105",
+      "106",
+      "107",
+      "108",
+      "109"
+    ]
+  },
+  "verification": "Original prompt body bytes and numbering compared, ignoring file BOM and separator line breaks only; original camera TSV copied byte-for-byte.",
+  "sources": [
+    {
+      "file": "prompt-01.txt",
+      "bytes": 15241,
+      "sha256": "d1781e04873a0ec35700f97eaa1b9f2177926b4da5fa14fdef1c708159b5ff34",
+      "prompt_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "file": "prompt-02.txt",
+      "bytes": 15395,
+      "sha256": "c0782170c1190efe2a7c642a4ceb238b0cbefc3c3952fb7d98d0af83aaf1a980",
+      "prompt_numbers": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "file": "prompt-03.txt",
+      "bytes": 15505,
+      "sha256": "cfb5d0d97cce6a307090707e077f81f6d7422fb3f7b5a3def568f75d35118363",
+      "prompt_numbers": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "file": "prompt-04.txt",
+      "bytes": 15473,
+      "sha256": "23977046f30644e0a83cc6a21b740b0b5d55adb04b316b29df5d843bb013c90d",
+      "prompt_numbers": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "file": "prompt-05.txt",
+      "bytes": 15496,
+      "sha256": "eff65c854b28b4d58d7bfb75d05ee2d82751ffdfc02c930bcd179d8b0bd860d4",
+      "prompt_numbers": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ]
+    },
+    {
+      "file": "prompt-06.txt",
+      "bytes": 15445,
+      "sha256": "4256dac1fa08c861af8783eb45ddae11b260927c477357631cdba53866560e62",
+      "prompt_numbers": [
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "file": "VIDEO_08_01_001-006.txt",
+      "count": 6,
+      "first": 1,
+      "last": 6,
+      "bytes": 9110,
+      "sha256": "e9be82e58f55d614d6065e9ee3540b330377988564748cc653fc1cd483efc6a7"
+    },
+    {
+      "file": "VIDEO_08_02_007-012.txt",
+      "count": 6,
+      "first": 7,
+      "last": 12,
+      "bytes": 9182,
+      "sha256": "f418be184c5c29d3456ea5e32069d9963ed614bd2f6bf22fff6d8e68afaf01d1"
+    },
+    {
+      "file": "VIDEO_08_03_013-018.txt",
+      "count": 6,
+      "first": 13,
+      "last": 18,
+      "bytes": 9209,
+      "sha256": "3415a2eecd8e1d152df162dfe204211a7f0f1dab3a8f49b6d75e4868bee14955"
+    },
+    {
+      "file": "VIDEO_08_04_019-024.txt",
+      "count": 6,
+      "first": 19,
+      "last": 24,
+      "bytes": 9321,
+      "sha256": "65a855d5fd8679c23f55498d51c66bf30505279cd35a960ad21f72b4b255447d"
+    },
+    {
+      "file": "VIDEO_08_05_025-030.txt",
+      "count": 6,
+      "first": 25,
+      "last": 30,
+      "bytes": 9323,
+      "sha256": "c9d71276c5288bf3337d539de81c1247ce43e75cc35b7223400f5a7d379a401a"
+    },
+    {
+      "file": "VIDEO_08_06_031-036.txt",
+      "count": 6,
+      "first": 31,
+      "last": 36,
+      "bytes": 9301,
+      "sha256": "b55860e73843c8b2d81bf2d5adcc3b7d29999f0b236802085a2fd048c9ea55fc"
+    },
+    {
+      "file": "VIDEO_08_07_037-042.txt",
+      "count": 6,
+      "first": 37,
+      "last": 42,
+      "bytes": 9242,
+      "sha256": "a4531e889c6d6894ade5ddd328c69d26ce4f57c9effc271fd78f5e838dd6d945"
+    },
+    {
+      "file": "VIDEO_08_08_043-048.txt",
+      "count": 6,
+      "first": 43,
+      "last": 48,
+      "bytes": 9298,
+      "sha256": "8f7b9f29562e7478a7adad927a8fdbfb08a06ef37f1b6b27ba941c02921451ea"
+    },
+    {
+      "file": "VIDEO_08_09_049-054.txt",
+      "count": 6,
+      "first": 49,
+      "last": 54,
+      "bytes": 9295,
+      "sha256": "e542d50a6b3173bca6def3f7fe36120db07117a82e9970eac61cd0250b2688fc"
+    },
+    {
+      "file": "VIDEO_08_10_055-060.txt",
+      "count": 6,
+      "first": 55,
+      "last": 60,
+      "bytes": 9282,
+      "sha256": "8fd61cc0da3b0e3bf8eb3edea7534914ba47806b838f9847390b706ea11263e6"
+    }
+  ],
+  "prompts": [
+    {
+      "number": 1,
+      "sha256": "13fad2aace956f364ce0c9948bd0162b708ab0ac866c707cede0cc4751fc4d6c"
+    },
+    {
+      "number": 2,
+      "sha256": "c81d48702fef842cdd65005444edbadfb125f1d689b2d79b3783cc99491d62f3"
+    },
+    {
+      "number": 3,
+      "sha256": "74e86bc5099af8099aec6957f272f6202bf1bdc317def2c8d1ed729a2548663e"
+    },
+    {
+      "number": 4,
+      "sha256": "8b19dc40a9ae8db05cdab17536e0b6acfec0da563b38d704e28faf322b250668"
+    },
+    {
+      "number": 5,
+      "sha256": "6663b0d492cce0c3eca2c9fdb2a74d29daf9fbf977b6b644c8a46b9f39d03610"
+    },
+    {
+      "number": 6,
+      "sha256": "ca8c146e6dfa4706e6847dc6af6aa6a4628b7b37ff347f63be2803b672434c35"
+    },
+    {
+      "number": 7,
+      "sha256": "dbf65a45b385cf50524931a6875c0dba2e36387bf4dc1d2e5b957c15c4c30f7a"
+    },
+    {
+      "number": 8,
+      "sha256": "bcc272acecc2fa3374080402aba2106bb9f88428cefbd3bc458cb58c441d790b"
+    },
+    {
+      "number": 9,
+      "sha256": "05a1ca0cc62f2d5f9b625242b20579d9d9224777352881d09716cab710ed1bf6"
+    },
+    {
+      "number": 10,
+      "sha256": "4b391f9793fe53547dcec37b42934050c475416916b372558bdafd520a869f6f"
+    },
+    {
+      "number": 11,
+      "sha256": "be1f2512e0ff54bef20b24cccb607a4391a483479001da66e06ef91ee3fe8d08"
+    },
+    {
+      "number": 12,
+      "sha256": "b3f24dc18b7298506b0d3036403d5321558c786749fed7a1b9a89550396458f0"
+    },
+    {
+      "number": 13,
+      "sha256": "d3a0a2353e513f228538aaab5bee1d52990a44016299cd9c5e20180377b4174b"
+    },
+    {
+      "number": 14,
+      "sha256": "eae19216143ea0b48d0eec2906cf7e687359422c80eb93a77d27ce8dcbadf431"
+    },
+    {
+      "number": 15,
+      "sha256": "e0b3e40702b057dde201bd7565e664c3c16b192c76efb2dc07c5ef3656a20621"
+    },
+    {
+      "number": 16,
+      "sha256": "8d6b2b46374415aeee7c60d89507bb4022edc58ceebff2409cb3d449892a0a90"
+    },
+    {
+      "number": 17,
+      "sha256": "66750738fca9a89d19fc1417f93e07d87999581f2cf12c27f5286eaf17b978f5"
+    },
+    {
+      "number": 18,
+      "sha256": "2692db3e204ec759a3c7f6eae79528b66ffb6a6d6d8068de7f64048ec755af87"
+    },
+    {
+      "number": 19,
+      "sha256": "3042a273dbe8a39e5c1fffa11405bb73a43e1e54bad11f325fb790a37a3953fc"
+    },
+    {
+      "number": 20,
+      "sha256": "d2c2e4eb8354ed7f6ecabcaee383438aaa2c6107a51a1109f68cfdcfa6580faf"
+    },
+    {
+      "number": 21,
+      "sha256": "5e0688fafd5fa826e5a9ecbbe7907fe2c71e985609e715a93f226f35a55fc600"
+    },
+    {
+      "number": 22,
+      "sha256": "751b6ebee0b29c858612cb4c4f1708511d9b072133bf21489a0877ddac4fe5be"
+    },
+    {
+      "number": 23,
+      "sha256": "ffd3ee0caeb6b8ff78dde859a39fa173b76d0eb7c2b60e2ddc3cb1752ca6c4a0"
+    },
+    {
+      "number": 24,
+      "sha256": "193fc7f6e971c95c44ccc733c782f820a2789c3aa708638c90e5cc2c41accb52"
+    },
+    {
+      "number": 25,
+      "sha256": "075e4dde2cf6dba2b1e5d5db2d2f205635053e19988d27f096237fba6e572c5a"
+    },
+    {
+      "number": 26,
+      "sha256": "8ff9be01fe99d78cad6c9244b083e3e5281d18a5ff7d104cd0f56de44ee5c6d5"
+    },
+    {
+      "number": 27,
+      "sha256": "15ab4f3a27fecb3e1baf2eb4a6411883ec19683d7c88aa8d8d6f764d9504f7bd"
+    },
+    {
+      "number": 28,
+      "sha256": "c1287d4b0a9ce015a5a44974b5bf562b12e00b809a3226b3c8ade85ceb668a7e"
+    },
+    {
+      "number": 29,
+      "sha256": "dd877428f1f5c476030f32db6b87b405f6780f3df2858f9ad7e8f826eb79fa04"
+    },
+    {
+      "number": 30,
+      "sha256": "c2ce8184d5d10a02b270e2f0de225eb283ec9b18de70877e231aa66d87c94a61"
+    },
+    {
+      "number": 31,
+      "sha256": "2f29f69fe66d0d3c349f21d0a9ad1e7f69bf9b7637582e5c23ec31cb04386dec"
+    },
+    {
+      "number": 32,
+      "sha256": "ca6e0b7af7b70d0a3b6423c10eb3a0816b759f9166ac4907d6c28d992d5fa37f"
+    },
+    {
+      "number": 33,
+      "sha256": "83b280e0161400e32bf04827844b268fcc3cca3ffc7bca5979da097d59790700"
+    },
+    {
+      "number": 34,
+      "sha256": "41f0fe9a39f5fe58b45254133088628dcd9e8f31ea97f0b8253e26167d70e8f3"
+    },
+    {
+      "number": 35,
+      "sha256": "932906a997a158037f07cf339091ccf3f9d3a1db21aa8144c75c0cdc1f7aaa0c"
+    },
+    {
+      "number": 36,
+      "sha256": "ec67e1988afc3e903076f6a09cd13059221c1a3a985574af6e51761efe6e0ac4"
+    },
+    {
+      "number": 37,
+      "sha256": "dbb7552a2736d794cd63023e2d01a56885aec2b307647c848f56511477dca35d"
+    },
+    {
+      "number": 38,
+      "sha256": "0e45b1a00aa37be28436e165d0522638c9b800135c81f574eeb8a7301921e7a9"
+    },
+    {
+      "number": 39,
+      "sha256": "d8a7675baf84deef95966240ed5bf888e5e356e3d108fcccf160225ac44a700a"
+    },
+    {
+      "number": 40,
+      "sha256": "c647f8e1ea903e1124fc644d00dd8503af39d8a64c9faed6329374ce73598b01"
+    },
+    {
+      "number": 41,
+      "sha256": "6159b540deb985a8135fc7fa575246c7cf785a59b23bc746778a87c39c20cede"
+    },
+    {
+      "number": 42,
+      "sha256": "e304d09bb039b3b43a5f9e1c216e5cc37ca16efef660383c3e76ca286122c223"
+    },
+    {
+      "number": 43,
+      "sha256": "8f316ce7deecbaddfa362f787b541539c6576bfe18a5e048f7c9dacfef9aec1a"
+    },
+    {
+      "number": 44,
+      "sha256": "2abb7bfccce0f81485e66fea32145f0a06234e3fba61046d4c5adbb9c90b847e"
+    },
+    {
+      "number": 45,
+      "sha256": "67f961bf0657ec06ebbeb2816beb2b7fea4496dc255daaf27f2140f8ec549526"
+    },
+    {
+      "number": 46,
+      "sha256": "ff06da6fb7923c093ca57a15d13321aaac21bdb7629f43e1bfd56eccaa48c833"
+    },
+    {
+      "number": 47,
+      "sha256": "427ae65b9440342c183c4523a66dd5a0a5fe887d794a17480186cf03dfe7c3de"
+    },
+    {
+      "number": 48,
+      "sha256": "45683744f62c7cf87fc7b6b94cdfcf88954b97b07e0bba5820a6a668ad31ab4c"
+    },
+    {
+      "number": 49,
+      "sha256": "cd67efadb06b1958d703bcad04906e8a9b2d61e420c9fa9ed2902221706e022a"
+    },
+    {
+      "number": 50,
+      "sha256": "3a4ddf899fb6adae48912ccf7ee7bafb745c3c415b04dc6138a1cd0cdf50440d"
+    },
+    {
+      "number": 51,
+      "sha256": "c3c876c1ed5e71265ff5e6df5edbc6a97379d5cfd14c610296a4fc6b12273414"
+    },
+    {
+      "number": 52,
+      "sha256": "3c8598e0d6d4292e49e5b2cb42f65f28b03b5bcbd9d46e9990accb2febdedcf3"
+    },
+    {
+      "number": 53,
+      "sha256": "79a9d34c368860759920eea68de8890cf2f94805b5bdb4a6c2be180e630c3823"
+    },
+    {
+      "number": 54,
+      "sha256": "aadff6b22f5c5175a85d8e55a70518e6faf5c02e4fc369bc2a3fa01e5b6bc222"
+    },
+    {
+      "number": 55,
+      "sha256": "c3d089a23d5f2ea27cfbdac3bb32379772d737dfaf43533dfde4d3c4734fade1"
+    },
+    {
+      "number": 56,
+      "sha256": "b72b462323aa4f4bd44402bbff76ca9ce747ddafd422e103b51e43384c0bcd5d"
+    },
+    {
+      "number": 57,
+      "sha256": "9f174cdc1af87c687a476ed7dff3837bdb8f34b7452a316a2117c47ed8f37ec4"
+    },
+    {
+      "number": 58,
+      "sha256": "9c15e8631f591b059e11d9fb467b45708312dc9862fd140d71275056ee7d3fb8"
+    },
+    {
+      "number": 59,
+      "sha256": "430b50626ff411bd73d35c49df1b92342d1a9e5aeadc14bac3630e1bdc85b150"
+    },
+    {
+      "number": 60,
+      "sha256": "4a8807ff065586dff1a42c77819ec583ea8baa09a3a1d106001c85bfa5bd3229"
+    }
+  ],
+  "original_reuse_mapping": [
+    {
+      "prompt": 1,
+      "original_camera_cue": "1",
+      "reuse_slots": [
+        1,
+        125,
+        132
+      ]
+    },
+    {
+      "prompt": 2,
+      "original_camera_cue": "2",
+      "reuse_slots": [
+        2,
+        8,
+        128
+      ]
+    },
+    {
+      "prompt": 3,
+      "original_camera_cue": "3",
+      "reuse_slots": [
+        3,
+        7,
+        31,
+        76,
+        88,
+        127
+      ]
+    },
+    {
+      "prompt": 4,
+      "original_camera_cue": "4",
+      "reuse_slots": [
+        4,
+        9,
+        114
+      ]
+    },
+    {
+      "prompt": 5,
+      "original_camera_cue": "5",
+      "reuse_slots": [
+        5
+      ]
+    },
+    {
+      "prompt": 6,
+      "original_camera_cue": "6",
+      "reuse_slots": [
+        6,
+        93,
+        94,
+        96
+      ]
+    },
+    {
+      "prompt": 7,
+      "original_camera_cue": "10",
+      "reuse_slots": [
+        10,
+        43,
+        60,
+        111,
+        116,
+        124
+      ]
+    },
+    {
+      "prompt": 8,
+      "original_camera_cue": "11",
+      "reuse_slots": [
+        11,
+        47,
+        78,
+        113,
+        130
+      ]
+    },
+    {
+      "prompt": 9,
+      "original_camera_cue": "12",
+      "reuse_slots": [
+        12,
+        14
+      ]
+    },
+    {
+      "prompt": 10,
+      "original_camera_cue": "13",
+      "reuse_slots": [
+        13,
+        61,
+        118
+      ]
+    },
+    {
+      "prompt": 11,
+      "original_camera_cue": "15",
+      "reuse_slots": [
+        15
+      ]
+    },
+    {
+      "prompt": 12,
+      "original_camera_cue": "16",
+      "reuse_slots": [
+        16
+      ]
+    },
+    {
+      "prompt": 13,
+      "original_camera_cue": "17",
+      "reuse_slots": [
+        17,
+        18
+      ]
+    },
+    {
+      "prompt": 14,
+      "original_camera_cue": "19",
+      "reuse_slots": [
+        19,
+        20
+      ]
+    },
+    {
+      "prompt": 15,
+      "original_camera_cue": "21",
+      "reuse_slots": [
+        21
+      ]
+    },
+    {
+      "prompt": 16,
+      "original_camera_cue": "22",
+      "reuse_slots": [
+        22
+      ]
+    },
+    {
+      "prompt": 17,
+      "original_camera_cue": "23",
+      "reuse_slots": [
+        23,
+        30
+      ]
+    },
+    {
+      "prompt": 18,
+      "original_camera_cue": "24",
+      "reuse_slots": [
+        24
+      ]
+    },
+    {
+      "prompt": 19,
+      "original_camera_cue": "25",
+      "reuse_slots": [
+        25,
+        26
+      ]
+    },
+    {
+      "prompt": 20,
+      "original_camera_cue": "27",
+      "reuse_slots": [
+        27,
+        28,
+        29,
+        126
+      ]
+    },
+    {
+      "prompt": 21,
+      "original_camera_cue": "32",
+      "reuse_slots": [
+        32,
+        35,
+        36,
+        45,
+        90,
+        115
+      ]
+    },
+    {
+      "prompt": 22,
+      "original_camera_cue": "33",
+      "reuse_slots": [
+        33,
+        46,
+        89
+      ]
+    },
+    {
+      "prompt": 23,
+      "original_camera_cue": "34",
+      "reuse_slots": [
+        34
+      ]
+    },
+    {
+      "prompt": 24,
+      "original_camera_cue": "37",
+      "reuse_slots": [
+        37,
+        38
+      ]
+    },
+    {
+      "prompt": 25,
+      "original_camera_cue": "39",
+      "reuse_slots": [
+        39
+      ]
+    },
+    {
+      "prompt": 26,
+      "original_camera_cue": "40",
+      "reuse_slots": [
+        40,
+        52
+      ]
+    },
+    {
+      "prompt": 27,
+      "original_camera_cue": "41",
+      "reuse_slots": [
+        41
+      ]
+    },
+    {
+      "prompt": 28,
+      "original_camera_cue": "42",
+      "reuse_slots": [
+        42
+      ]
+    },
+    {
+      "prompt": 29,
+      "original_camera_cue": "44",
+      "reuse_slots": [
+        44
+      ]
+    },
+    {
+      "prompt": 30,
+      "original_camera_cue": "48",
+      "reuse_slots": [
+        48,
+        49,
+        77,
+        119
+      ]
+    },
+    {
+      "prompt": 31,
+      "original_camera_cue": "50",
+      "reuse_slots": [
+        50,
+        51,
+        54
+      ]
+    },
+    {
+      "prompt": 32,
+      "original_camera_cue": "53",
+      "reuse_slots": [
+        53,
+        117
+      ]
+    },
+    {
+      "prompt": 33,
+      "original_camera_cue": "55",
+      "reuse_slots": [
+        55
+      ]
+    },
+    {
+      "prompt": 34,
+      "original_camera_cue": "56",
+      "reuse_slots": [
+        56
+      ]
+    },
+    {
+      "prompt": 35,
+      "original_camera_cue": "57",
+      "reuse_slots": [
+        57,
+        85,
+        86,
+        87,
+        121
+      ]
+    },
+    {
+      "prompt": 36,
+      "original_camera_cue": "58",
+      "reuse_slots": [
+        58,
+        59,
+        63,
+        129
+      ]
+    },
+    {
+      "prompt": 37,
+      "original_camera_cue": "62",
+      "reuse_slots": [
+        62,
+        112
+      ]
+    },
+    {
+      "prompt": 38,
+      "original_camera_cue": "64",
+      "reuse_slots": [
+        64,
+        65
+      ]
+    },
+    {
+      "prompt": 39,
+      "original_camera_cue": "66",
+      "reuse_slots": [
+        66,
+        67,
+        70
+      ]
+    },
+    {
+      "prompt": 40,
+      "original_camera_cue": "68",
+      "reuse_slots": [
+        68
+      ]
+    },
+    {
+      "prompt": 41,
+      "original_camera_cue": "69",
+      "reuse_slots": [
+        69
+      ]
+    },
+    {
+      "prompt": 42,
+      "original_camera_cue": "71",
+      "reuse_slots": [
+        71,
+        72,
+        73,
+        75
+      ]
+    },
+    {
+      "prompt": 43,
+      "original_camera_cue": "74",
+      "reuse_slots": [
+        74
+      ]
+    },
+    {
+      "prompt": 44,
+      "original_camera_cue": "79",
+      "reuse_slots": [
+        79,
+        80,
+        83
+      ]
+    },
+    {
+      "prompt": 45,
+      "original_camera_cue": "81",
+      "reuse_slots": [
+        81
+      ]
+    },
+    {
+      "prompt": 46,
+      "original_camera_cue": "82",
+      "reuse_slots": [
+        82
+      ]
+    },
+    {
+      "prompt": 47,
+      "original_camera_cue": "84",
+      "reuse_slots": [
+        84
+      ]
+    },
+    {
+      "prompt": 48,
+      "original_camera_cue": "91",
+      "reuse_slots": [
+        91,
+        92,
+        120,
+        131
+      ]
+    },
+    {
+      "prompt": 49,
+      "original_camera_cue": "95",
+      "reuse_slots": [
+        95,
+        97,
+        98
+      ]
+    },
+    {
+      "prompt": 50,
+      "original_camera_cue": "99",
+      "reuse_slots": [
+        99
+      ]
+    },
+    {
+      "prompt": 51,
+      "original_camera_cue": "100",
+      "reuse_slots": [
+        100,
+        123
+      ]
+    },
+    {
+      "prompt": 52,
+      "original_camera_cue": "101",
+      "reuse_slots": [
+        101
+      ]
+    },
+    {
+      "prompt": 53,
+      "original_camera_cue": "102",
+      "reuse_slots": [
+        102
+      ]
+    },
+    {
+      "prompt": 54,
+      "original_camera_cue": "103",
+      "reuse_slots": [
+        103
+      ]
+    },
+    {
+      "prompt": 55,
+      "original_camera_cue": "104",
+      "reuse_slots": [
+        104
+      ]
+    },
+    {
+      "prompt": 56,
+      "original_camera_cue": "105",
+      "reuse_slots": [
+        105
+      ]
+    },
+    {
+      "prompt": 57,
+      "original_camera_cue": "106",
+      "reuse_slots": [
+        106
+      ]
+    },
+    {
+      "prompt": 58,
+      "original_camera_cue": "107",
+      "reuse_slots": [
+        107
+      ]
+    },
+    {
+      "prompt": 59,
+      "original_camera_cue": "108",
+      "reuse_slots": [
+        108
+      ]
+    },
+    {
+      "prompt": 60,
+      "original_camera_cue": "109",
+      "reuse_slots": [
+        109,
+        110,
+        122
+      ]
+    }
+  ],
+  "zip_sha256": "b82d1a0e43f7ee991fdb3d1e6bd6e492124db90488f5385debaed6ade04d5d0c"
+}

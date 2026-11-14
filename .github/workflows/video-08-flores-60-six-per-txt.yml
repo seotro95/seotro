@@ -1,0 +1,56 @@
+name: Video 8 Flores prompts in groups of six
+on:
+  push:
+    branches: ["codex/video-08-flores-60-six-per-txt-20261114"]
+    paths: ["deliveries/video-08-flores-60-six-per-txt/**", ".github/workflows/video-08-flores-60-six-per-txt.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  delivery:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify all 60 original prompts and camera TSV
+        run: |
+          python - <<'PYCODE'
+          from pathlib import Path
+          import codecs,hashlib,json,re,zipfile
+          root=Path('deliveries/video-08-flores-60-six-per-txt')
+          qa=json.loads((root/'KIEM_TRA_GIU_NGUYEN_60_PROMPT.json').read_text())
+          source={p['number']:p['sha256'] for p in qa['prompts']}
+          numbers=[]
+          for file in qa['outputs']:
+              raw=(root/'files'/file['file']).read_bytes()
+              assert hashlib.sha256(raw).hexdigest()==file['sha256']
+              body=raw.removeprefix(codecs.BOM_UTF8)
+              matches=list(re.finditer(rb'(?m)^([1-9][0-9]*)[.][ \t]+',body))
+              assert len(matches)==6
+              for i,m in enumerate(matches):
+                  n=int(m.group(1));end=matches[i+1].start() if i+1<len(matches) else len(body)
+                  assert hashlib.sha256(body[m.start():end].rstrip(b'\r\n')).hexdigest()==source[n]
+                  numbers.append(n)
+          assert numbers==list(range(1,61)) and len(qa['outputs'])==10
+          camera=(root/'camera-by-cue.tsv').read_bytes()
+          assert hashlib.sha256(camera).hexdigest()==qa['camera_file']['sha256']
+          archive=Path('VIDEO_08_FLORES_60_PROMPT_CHIA_6_MOI_TXT.zip')
+          with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
+              for file in qa['outputs']:z.write(root/'files'/file['file'],file['file'])
+              z.write(root/'camera-by-cue.tsv','camera-by-cue.tsv')
+          with zipfile.ZipFile(archive) as z:
+              assert len(z.namelist())==11 and z.testzip() is None
+              assert z.read('camera-by-cue.tsv')==camera
+          qa['zip_sha256']=hashlib.sha256(archive.read_bytes()).hexdigest()
+          (root/'KIEM_TRA_GIU_NGUYEN_60_PROMPT.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2))
+          print('Verified 60 unchanged prompts in 10 files of six, original reuse instructions and unchanged camera TSV.')
+          PYCODE
+      - name: Save the video 8 files to a draft release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          release_tag=video-08-flores-60-six-per-txt-20261114
+          if ! gh release view "$release_tag" >/dev/null 2>&1; then
+            gh release create "$release_tag" --draft --target "$GITHUB_SHA" --title "Video 8 — Flores — 60 prompt — 10 TXT" --notes-file deliveries/video-08-flores-60-six-per-txt/README.md
+          fi
+          gh release upload "$release_tag" VIDEO_08_FLORES_60_PROMPT_CHIA_6_MOI_TXT.zip deliveries/video-08-flores-60-six-per-txt/files/*.txt deliveries/video-08-flores-60-six-per-txt/camera-by-cue.tsv deliveries/video-08-flores-60-six-per-txt/KIEM_TRA_GIU_NGUYEN_60_PROMPT.json --clobber
