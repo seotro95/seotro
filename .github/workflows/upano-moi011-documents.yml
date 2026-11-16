@@ -1,0 +1,37 @@
+name: Upano MOI011 publish script and 130 silent prompts
+on:
+  push:
+    branches: [codex/upano-moi011-production-20261116]
+    paths: [.github/workflows/upano-moi011-documents.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: upano-moi011
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python upano-moi011/extract_content.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: upano-moi011-preflight-en-US
+          path: preflight/en-US
+          run-id: 43902964757
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: upano-moi011-preflight-vi-VN
+          path: preflight/vi-VN
+          run-id: 43902964757
+          github-token: ${{ github.token }}
+      - name: Validate and publish documents before full voice generation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u upano-moi011/publish_documents.py
