@@ -3,7 +3,7 @@
   "languages": 16,
   "original_english_words": 3312,
   "vietnamese_japanese_korean": "Assistant-written contextual narration/localization with evidence limits preserved",
-  "other12": "Context-clarified machine translation plus targeted archaeology terminology,regional vocabulary,proper-name and numeral review",
+  "other12": "Context-clarified machine translation plus targeted archaeology terminology,regional vocabulary,proper-name and numeral review;Swedish chapters2and9 rewritten concisely after duration check",
   "context_clarifications": [
     "Pyramid steps are stone staircase,not footsteps",
     "Archaeological survey means mapping,not questionnaire",

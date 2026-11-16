@@ -156,8 +156,8 @@
     },
     {
       "path": "documents/TRANSLATION_REVIEW.json",
-      "bytes": 979,
-      "sha256": "e934f3ff443337ca81934d98c78dcec58c1dc4675235d9147945eb9bb9eef355"
+      "bytes": 1042,
+      "sha256": "f0f648db8737a3a2e3648ac1831ecb6d1fcac61a68e57b7e7a377a83c827796a"
     },
     {
       "path": "documents/VOICE_FILE_NAMING.json",
@@ -241,8 +241,8 @@
     },
     {
       "path": "documents/VOICE_SCRIPTS/sv-SE.txt",
-      "bytes": 24661,
-      "sha256": "f879544ca70e9264ea42a62218d100b5fe6b8219118d756a9fad939e52355ae2"
+      "bytes": 23502,
+      "sha256": "c81b4757270f9cd95bed860591c941299045859d42e18b26074eda40c053c218"
     },
     {
       "path": "documents/VOICE_SCRIPTS/vi-VN.txt",
