@@ -1,0 +1,50 @@
+name: Deliver 100 documentary topics
+on:
+  push:
+    branches: [codex/channel-study-100-topics-20261116]
+    paths:
+      - 'production-plans/channel-study-2026-11-16/**'
+      - '.github/workflows/channel-study-100-topics.yml'
+permissions:
+  contents: write
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate the 100 topics and package files
+        run: |
+          python - <<'PY'
+          import csv,json,hashlib,zipfile
+          from pathlib import Path
+          root=Path('production-plans/channel-study-2026-11-16')
+          rows=json.loads((root/'topics.json').read_text())
+          assert len(rows)==100
+          assert [row[0] for row in rows]==list(range(1,101))
+          assert len({row[2] for row in rows})==100
+          assert all(sum(row[1]==group for row in rows)==10 for group in range(1,11))
+          with (root/'100_CHU_DE_KE_HOACH_SAN_XUAT.csv').open(encoding='utf-8-sig',newline='') as f:
+              csv_rows=list(csv.DictReader(f))
+          assert [int(row['STT']) for row in csv_rows]==list(range(1,101))
+          manifest=json.loads((root/'MANIFEST.json').read_text())
+          for name,expected in manifest['files'].items():
+              content=(root/name).read_bytes()
+              assert len(content)==expected['bytes']
+              assert hashlib.sha256(content).hexdigest()==expected['sha256']
+          archive=root/'100_CHU_DE_VA_PHAN_TICH_THAM_KHAO.zip'
+          with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for name in list(manifest['files'])+['MANIFEST.json']:z.write(root/name,name)
+          with zipfile.ZipFile(archive) as z:assert z.testzip() is None
+          print('Validated: 100 unique numbered topics; 10 groups; TXT/CSV integrity.')
+          PY
+      - name: Attach files to a draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create channel-study-100-topics-20261116 \
+            production-plans/channel-study-2026-11-16/100_CHU_DE_VA_PHAN_TICH_THAM_KHAO.zip \
+            production-plans/channel-study-2026-11-16/PHAN_TICH_VA_100_CHU_DE.txt \
+            production-plans/channel-study-2026-11-16/100_CHU_DE_KE_HOACH_SAN_XUAT.csv \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --draft --latest=false \
+            --title "100 chủ đề tài liệu khám phá và khung kể chuyện tham khảo" \
+            --notes-file production-plans/channel-study-2026-11-16/DELIVERY.md

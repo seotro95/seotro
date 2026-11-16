@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-16",
+  "topics": 100,
+  "groups": 10,
+  "per_group": 10,
+  "priority_ids": [
+    1,
+    7,
+    11,
+    15,
+    32,
+    42,
+    51,
+    62,
+    91,
+    98
+  ],
+  "limitations": {
+    "mysteryyoftheworld": "Content of the exact channel could not be verified. Do not substitute a similarly named channel.",
+    "Alex_Science-i4u": "Title list and metadata from ChannelDB; videos, audio and thumbnails not directly inspected.",
+    "editing": "Original production recommendations; not measured channel behavior."
+  },
+  "files": {
+    "PHAN_TICH_VA_100_CHU_DE.txt": {
+      "bytes": 37378,
+      "sha256": "fdded314c21851a7ea1ef01cf788afb938c08d2618153b8679037e723b88eb9d"
+    },
+    "PHAN_TICH_VA_100_CHU_DE.md": {
+      "bytes": 35964,
+      "sha256": "7dcde8ea6abcd48f6042560b5513158e3a93ad41d70e92ab79ca45a22aa0e0e3"
+    },
+    "100_CHU_DE_KE_HOACH_SAN_XUAT.csv": {
+      "bytes": 39704,
+      "sha256": "0a3a897169ffcb0932c112a344ce32a0d8463c2756bccd8112c839bfcde55635"
+    },
+    "topics.json": {
+      "bytes": 26189,
+      "sha256": "90f0c7714820761289a387c19c111d3f80cca0e61f263ff3ed36f20bbaab572d"
+    }
+  }
+}
