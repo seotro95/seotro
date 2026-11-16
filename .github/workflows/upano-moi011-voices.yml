@@ -1,0 +1,178 @@
+name: Upano MOI011 full16 saved male voices 20m22s
+on:
+  push:
+    branches: [codex/upano-moi011-production-20261116]
+    paths: [.github/workflows/upano-moi011-voices.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: upano-moi011
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python upano-moi011/extract_voice_inputs.py
+          python upano-moi011/voice_gate.py
+  english:
+    needs: gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: upano-moi011
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python upano-moi011/extract_voice_inputs.py
+          python upano-moi011/voice_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python upano-moi011/ensure_ffmpeg.py
+          python upano-moi011/bootstrap_tool.py online
+      - uses: actions/download-artifact@v4
+        with:
+          name: upano-moi011-preflight-en-US
+          path: preflight/en-US
+          run-id: 43902964757
+          github-token: ${{ github.token }}
+      - run: python upano-moi011/restore_english_preview.py
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: upano-moi011-checkpoint-en-US
+          path: upano-moi011/voice/audio/en-US
+      - name: Generate English narration with retained successful parts
+        run: |
+          set +e
+          python -u upano-moi011/render_english_groups.py
+          code=$?
+          if [ "$code" = 75 ]; then
+            sleep 30
+            python -u upano-moi011/render_english_groups.py
+            code=$?
+          fi
+          exit "$code"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: upano-moi011-checkpoint-en-US
+          path: |
+            upano-moi011/voice/audio/en-US/group-*
+            upano-moi011/voice/audio/en-US/raw-*
+            upano-moi011/voice/audio/en-US/fallback-*
+            upano-moi011/voice/audio/en-US/pending_*.json
+          if-no-files-found: ignore
+          retention-days: 14
+          overwrite: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: upano-moi011-voice-en-US
+          path: |
+            upano-moi011/voice/audio/en-US/*.mp3
+            upano-moi011/voice/audio/en-US/render_report.json
+          if-no-files-found: error
+          retention-days: 14
+          overwrite: true
+  countries:
+    needs: gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        locale: [vi-VN, es-ES, fr-FR, ja-JP, ko-KR, de-DE, it-IT, pt-PT, nl-NL, pl-PL, sv-SE, da-DK, fi-FI, nb-NO, cs-CZ]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: upano-moi011
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python upano-moi011/extract_voice_inputs.py
+          python upano-moi011/voice_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python upano-moi011/ensure_ffmpeg.py
+          python upano-moi011/bootstrap_tool.py online
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: upano-moi011-checkpoint-${{ matrix.locale }}
+          path: upano-moi011/voice/audio/${{ matrix.locale }}
+      - name: Generate saved country voice with retained successful parts
+        run: |
+          set +e
+          python -u upano-moi011/render_online.py "${{ matrix.locale }}"
+          code=$?
+          if [ "$code" = 75 ]; then
+            sleep 30
+            python -u upano-moi011/render_online.py "${{ matrix.locale }}"
+            code=$?
+          fi
+          exit "$code"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: upano-moi011-checkpoint-${{ matrix.locale }}
+          path: |
+            upano-moi011/voice/audio/${{ matrix.locale }}/raw-*
+            upano-moi011/voice/audio/${{ matrix.locale }}/pending_*.json
+          if-no-files-found: ignore
+          retention-days: 14
+          overwrite: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: upano-moi011-voice-${{ matrix.locale }}
+          path: |
+            upano-moi011/voice/audio/${{ matrix.locale }}/*.mp3
+            upano-moi011/voice/audio/${{ matrix.locale }}/render_report.json
+          if-no-files-found: error
+          retention-days: 14
+          overwrite: true
+  publish:
+    needs: [english, countries]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: upano-moi011
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python upano-moi011/extract_content.py
+          python upano-moi011/extract_voice_inputs.py
+          python -m pip install imageio-ffmpeg==0.6.0
+          python upano-moi011/ensure_ffmpeg.py
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: upano-moi011-voice-*
+          path: voice_artifacts
+          merge-multiple: false
+      - name: Decode all16 full waveforms, check identities and publish country files
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u upano-moi011/publish_voices.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: upano-moi011-release-reports
+          path: |
+            upano-moi011/voice_delivery/*.json
+            upano-moi011/voice_delivery/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14
+          overwrite: true
