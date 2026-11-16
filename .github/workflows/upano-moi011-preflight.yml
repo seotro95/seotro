@@ -1,0 +1,44 @@
+name: Upano MOI011 Andrew and NamMinh preflight
+on:
+  push:
+    branches: [codex/upano-moi011-production-20261116]
+    paths: [.github/workflows/upano-moi011-preflight.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      matrix:
+        locale: [en-US, vi-VN]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: upano-moi011
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python upano-moi011/ensure_ffmpeg.py
+          python upano-moi011/bootstrap_tool.py online
+      - name: Test saved male voice and exact audio duration
+        run: |
+          if [ "${{ matrix.locale }}" = en-US ]; then
+            python -u upano-moi011/render_english_groups.py --preview
+          else
+            python -u upano-moi011/preflight_namminh.py
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: upano-moi011-preflight-${{ matrix.locale }}
+          path: |
+            upano-moi011/voice/en_preview/*
+            upano-moi011/voice/vi_preview/*.mp3
+            upano-moi011/NAM_MINH_PREFLIGHT_QA.json
+          if-no-files-found: ignore
+          retention-days: 14
