@@ -1,0 +1,81 @@
+name: Ollantaytambo 004 FINAL complete voice and document package
+on:
+  push:
+    branches: [codex/ollantaytambo-004-production-20261117]
+    paths: ['.github/workflows/ollantaytambo-004-final-package.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: ollantaytambo-004-english-short160-recovery
+  cancel-in-progress: true
+jobs:
+  final_package:
+    name: Verify and package all completed voices
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: production/ollantaytambo004
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install audio validation tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install --yes ffmpeg
+          python -m py_compile production/ollantaytambo004/*.py production/ollantaytambo004/vendor/*.py
+      - name: Retrieve all 16 completed country voices
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 43940119731
+          pattern: 004_voice_*
+          path: work/voice_artifacts
+      - name: Revalidate actual tracks and lock their profiles
+        run: python production/ollantaytambo004/collect_voices.py --artifacts work/voice_artifacts --out outputs/voices
+      - name: Build full scripts, prompts, subtitles and actual source analysis
+        run: python production/ollantaytambo004/build_documents.py --out outputs/documents
+      - name: Check the complete deliverable
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          d=Path("outputs/documents");v=Path("outputs/voices")
+          m=json.loads((v/"MANIFEST.json").read_text())
+          p=json.loads((v/"VOICE_PROFILES_LOCKED.json").read_text())
+          assert m["complete"] and m["all_requested_languages"] and len(m["tracks"])==16
+          assert p["audio_generated"] and p["catalogue_verified"] and len(p["profiles"])==16
+          assert all(abs(t["duration_seconds"]-1302)<.0001 for t in m["tracks"])
+          assert len(list(v.glob("*.m4a")))==16 and len(list(v.glob("*.wav")))==1
+          assert len(list((d/"04_VIDEO_PROMPTS").glob("*.txt")))==14
+          assert (d/"10_SOURCE_METRICS.json").is_file()
+          assert "21:02.933" in (d/"10_VIDEO_NGUON_VA_NHIP_DUNG.md").read_text()
+          package=json.loads((d/"PACKAGE_MANIFEST.json").read_text())
+          assert package["source_visuals_reviewed"] and not package["source_audio_semantics_assessed"]
+          assert package["prompt_counts"]==[10]*13+[1]
+          print("FINAL VERIFIED:16 male audio tracks, each21m42s;131 prompts in14TXT;16 language scripts;5titles/thumbnail prompts;actual source visual analysis.")
+          PY
+      - name: Upload final complete package
+        uses: actions/upload-artifact@v4
+        with:
+          name: 004_Ollantaytambo_FULL_FINAL_16Voices_21m42s
+          path: |
+            outputs/documents/
+            outputs/voices/*.m4a
+            outputs/voices/*.wav
+            outputs/voices/*.json
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+      - name: Upload final documents separately
+        uses: actions/upload-artifact@v4
+        with:
+          name: 004_Ollantaytambo_Documents_FINAL
+          path: outputs/documents/
+          if-no-files-found: error
+          retention-days: 14
