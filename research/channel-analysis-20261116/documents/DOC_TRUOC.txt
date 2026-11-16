@@ -1,0 +1,12 @@
+BỘ TÀI LIỆU ĐỀ XUẤT MỚI — 16/11/2026
+
+100_CHU_DE_MOI_CHI_TIET.txt: đủ 100 đề tài, góc kể, hình gợi ý, điểm cần kiểm chứng.
+100_CHU_DE_MOI.csv: cùng dữ liệu, có thể mở trong Excel; UTF-8 có BOM.
+100_CHU_DE_MOI_TOM_TAT.md: bản tóm tắt để đọc nhanh.
+PHAN_TICH_VA_QUY_TRINH.txt / .md: phạm vi khảo sát, phân tích mẫu tham khảo và quy trình đề xuất.
+NGUON_VA_PHAM_VI.txt: các nguồn khởi đầu và giới hạn dữ liệu.
+
+Không thay bộ 100 chủ đề đã lưu trước đây. Dùng mã MỚI-001 tới MỚI-100 để tránh nhầm.
+Không chứa kịch bản hoàn chỉnh, voice, prompt phân cảnh trọn tập hay video đã dựng.
+Đã kiểm tra định dạng và số mục; chưa thẩm định khoa học đầy đủ 100 đề tài.
+Chưa truy cập được video trực tiếp hai kênh; không trình bày tài liệu này như một cuộc so sánh đã xem đủ video của cả hai.

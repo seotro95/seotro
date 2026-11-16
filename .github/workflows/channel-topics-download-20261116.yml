@@ -1,0 +1,23 @@
+name: Publish new 100 topic TXT downloads
+on:
+  push:
+    branches: [codex/channel-topics-download-20261116]
+    paths: [.github/workflows/channel-topics-download-20261116.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: research/channel-analysis-20261116
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify documents and publish direct downloads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u research/channel-analysis-20261116/publish.py

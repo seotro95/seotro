@@ -1,0 +1,189 @@
+# Phân tích tham khảo và quy trình phát triển video
+
+Ngày khảo sát: 16/11/2026. Dành cho dự án phim tài liệu có voice tiếng Anh của bạn.
+
+## 1. Phần nào đã kiểm chứng về hai kênh?
+
+Hai địa chỉ được giữ đúng như bạn gửi:
+
+- https://www.youtube.com/@Alex_Science-i4u/videos
+- https://www.youtube.com/@mysteryyoftheworld
+
+Trong lượt này, công cụ duyệt không tải được trang YouTube; kết nối HTTP từ môi trường làm việc cũng bị từ chối. Tìm kiếm công khai chỉ cho thấy một mô tả thứ cấp nhắc đúng handle của Alex. Chưa tìm thấy dữ liệu đủ chắc để xác minh nội dung của handle thứ hai. Không dùng kênh tên gần giống thay thế.
+
+| Hạng mục | Alex’s Science | @mysteryyoftheworld |
+|---|---|---|
+| Định hướng có thể ghi nhận | Nguồn thứ cấp mô tả nội dung khoa học, khảo cổ, lịch sử và bí ẩn cổ đại | Chưa xác minh được đúng danh sách video |
+| Video tiêu biểu đã xem trực tiếp từ kênh trong lượt này | Chưa có | Chưa có |
+| Thumbnail, giọng, nhạc, nhịp cắt riêng của kênh | Chưa đủ bằng chứng để kết luận | Chưa đủ bằng chứng để kết luận |
+| Subscriber, lượt xem, tần suất đăng | Không báo số liệu chưa đối chiếu | Không báo số liệu chưa đối chiếu |
+| CTR, retention, doanh thu | Không có dữ liệu nội bộ | Không có dữ liệu nội bộ |
+
+Nguồn thứ cấp về Alex: https://channeldb.com/c/%40whatwasthatancienthistory/similar . Mô tả này chỉ giúp định hướng sơ bộ; không thay thế khảo sát video gốc.
+
+Vì vậy, đây là phân tích có giới hạn về dữ liệu kênh, cộng với phân tích cụ thể mẫu video bạn đã cung cấp trước đây và một quy trình đề xuất. Chưa thể gọi là so sánh chi tiết đã kiểm chứng toàn bộ hai kênh.
+
+## 2. Mẫu tham khảo đã có cho thấy cách kể gì?
+
+Mẫu bạn cung cấp qua GitHub: https://github.com/seotro95/seotro/releases/tag/video . Tệp `video.c.a.toi.mp4`, SHA256 `f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c`.
+
+Phân tích dưới đây dựa vào transcript tự động và các bảng khung hình mở đầu, chuyển động, toàn video đã lưu. Transcript kéo dài khoảng 21 phút và có lỗi nhận dạng; không dùng nó như tài liệu khoa học độc lập. Chưa xác nhận mẫu này thuộc kênh nào trong hai địa chỉ mới. Không khẳng định vừa xem liên tục toàn bộ phim.
+
+**Đây là phim tài liệu kể chuyện về khoa học và tiền sử, có lời dẫn ngoài hình, dùng một nghịch lý để tổ chức kiến thức.** Người xem không chỉ nhận thông tin về một hiện vật; họ được dẫn qua câu hỏi con người đã sống trong môi trường khắc nghiệt bằng cách nào.
+
+### Mở đầu: từ chi tiết nhỏ sang vấn đề lớn
+
+- Khoảng 0–8 giây, lời kể đặt một mốc thời gian xa xưa và một vật rất nhỏ: những chiếc răng ở Yana.
+- Trong khoảng 8–30 giây, hình và lời mở rộng sang địa điểm, khí hậu lạnh và môi trường sinh tồn. Bảng khung hình có cảnh khai quật, đặc tả vật thể, mô hình địa lý và cảnh người trong môi trường lạnh.
+- Khoảng 30–64 giây, lời kể đưa nghiên cứu ADN vào câu chuyện rồi nối sang cư dân vùng cực.
+- Khoảng 64–103 giây, câu chuyện chuyển trọng tâm: giữ ấm không thể chỉ được kể bằng việc đốt lửa; nhiên liệu và sự mất nhiệt trở thành vấn đề cần giải thích.
+
+Cách này tạo tò mò bằng hai tỷ lệ đối lập: vật nhỏ nhưng ý nghĩa lớn; môi trường rộng và lạnh nhưng giải pháp có thể rất nhỏ.
+
+**Điểm cần cải thiện khi áp dụng:** mở bằng ADN nhưng kể chủ yếu về sinh tồn có thể làm kỳ vọng lệch. Trong bản mới, phải nối hai ý ngay ở phút đầu, hoặc chọn một hiện vật mở đầu sát với luận điểm chính hơn.
+
+### Thân bài: giải từng phần của một bài toán
+
+Các đoạn được lấy mẫu đi qua thức ăn giàu năng lượng, thích nghi, nơi trú, vật liệu, trang phục và công cụ. Lời kể thường đưa ra một trở ngại trước khi giải thích cơ chế. Thông tin nhờ đó có vai trò trong câu chuyện, thay vì trở thành danh sách sự thật rời rạc.
+
+Không nên hiểu các chi tiết trong mẫu đều đã được xác minh. Ví dụ về di truyền, niên đại hay hiệu quả giữ nhiệt phải được tra lại bằng nghiên cứu phù hợp khi viết phim mới. So sánh kỹ thuật truyền thống ở một giai đoạn với thời đồ đá cũ cũng cần giữ rõ khoảng cách niên đại.
+
+### Kết: thu một câu chuyện lớn về một hình ảnh cụ thể
+
+Phần cuối quay về logic kiểm soát nhiệt và nhấn vào chiếc kim như biểu tượng cho kỹ năng. Kết quả là người xem có một hình ảnh để nhớ, thay vì chỉ một loạt mốc thời gian. Chiếc kim ở cuối không phải chiếc răng ở đầu: đây là chuyển từ hiện vật mở cửa câu chuyện sang vật biểu đạt luận điểm kết.
+
+### Hình ảnh và dựng quan sát được trong các mẫu khung hình
+
+- Luân phiên toàn cảnh địa hình, cảnh vừa của hoạt động và đặc tả hiện vật.
+- Xen cảnh khai quật, phòng nghiên cứu, mô hình địa lý, tranh hoặc cảnh phục dựng.
+- Dùng tương phản lạnh ngoài trời với ánh sáng ấm hơn ở nơi trú và một số cảnh nội thất.
+- Mẫu chuyển động mở đầu có lớp chữ thời gian xuất hiện dần; nhiều khung hình có quốc kỳ hoặc logo nhỏ.
+
+Khung hình tĩnh và transcript không đủ chứng minh thiết lập âm thanh, mọi chuyển cảnh hay phần mềm đã dùng. Không có căn cứ xác định chính xác công cụ AI, prompt, giọng đọc hoặc plugin dựng của tác giả. Các thông số dựng bên dưới là đề xuất cho dự án của bạn, không phải số đo của hai kênh.
+
+## 3. Dạng nội dung phù hợp để bạn phát triển
+
+Định vị nên là: **điều tra một câu hỏi khoa học hoặc lịch sử bằng bằng chứng dễ nhìn thấy**. Một phim tập trung một câu hỏi, có phát hiện, có giải thích cơ chế và có giới hạn của lời giải.
+
+Ba kiểu tập có thể luân phiên:
+
+1. **Một hiện vật mở ra cả thế giới:** Antikythera, Lycurgus, bảng thư Vindolanda. Cấu trúc từ vật thể tới công dụng rồi tới xã hội tạo ra nó.
+2. **Một cảnh quan che giấu một hệ thống:** Upano, Dholavira, Petra. Cấu trúc từ điều nhìn thấy tới điều chỉ khảo sát mới nhận ra.
+3. **Một lời giải tưởng đúng phải được kiểm tra:** Vinland Map, pin Baghdad, cá mái chèo và động đất. Cấu trúc từ tuyên bố tới phép thử rồi kết luận vừa với bằng chứng.
+
+Đây là các hướng đề xuất; không khẳng định kênh thứ hai hiện sử dụng chúng.
+
+## 4. Cách viết kịch bản cuốn hút
+
+### Viết lời hứa của tập trước khi viết mở đầu
+
+Hoàn thành câu: “Sau phim này, người xem sẽ hiểu vì sao…”. Nếu không viết được trong một câu, đề tài còn quá rộng. Ví dụ với Vasa: vì sao một chiến hạm lớn vẫn có thể thiếu ổn định đến mức gặp nạn ngay chuyến đầu.
+
+Mỗi đoạn nên làm ít nhất một việc: thêm bằng chứng, giải thích cơ chế, kiểm tra giả thuyết hoặc làm rõ giới hạn. Bỏ đoạn chỉ lặp lại cảm giác “bí ẩn” mà không tiến câu chuyện.
+
+### Một khung thời lượng 22 phút đề xuất
+
+| Thời gian | Vai trò |
+|---|---|
+| 00:00–00:30 | Mở bằng hình và nghịch lý; cho biết câu hỏi của phim |
+| 00:30–02:00 | Địa điểm, thời gian, điều người xem cần biết |
+| 02:00–06:00 | Phát hiện và nhóm bằng chứng thứ nhất |
+| 06:00–10:00 | Cơ chế giải thích, có mô hình trực quan |
+| 10:00–15:00 | Cách giải thích khác hoặc chi tiết làm lời giải khó hơn |
+| 15:00–19:00 | Kiểm tra bằng phép đo, thí nghiệm hoặc đối chiếu |
+| 19:00–21:00 | Điều đã biết và điều vẫn chưa kết luận được |
+| 21:00–22:00 | Trả lời câu hỏi chính và kết bằng hình ảnh đáng nhớ |
+
+Không kéo mọi đề tài tới 22 phút nếu thiếu dữ liệu. Với voice tiếng Anh, có thể dự trù khoảng 2.800–3.300 từ làm điểm bắt đầu cho 22 phút kể tương đối chậm, nhưng phải đo tốc độ một đoạn đọc thử và thời gian nghỉ thực tế. Số từ không bảo đảm thời lượng.
+
+### Câu chữ và nhấn giọng
+
+Ưu tiên danh từ cụ thể, động từ rõ và câu tương đối ngắn. Giới thiệu vấn đề trước thuật ngữ; giải thích thuật ngữ bằng một thao tác hoặc ví dụ nhìn thấy được. Sau một đoạn nhiều dữ kiện, đặt câu hỏi tự nhiên dẫn sang bằng chứng tiếp theo. Chỉ mở câu hỏi khi phần sau thực sự trả lời nó.
+
+Ví dụ mở đầu nguyên bản cho Antikythera:
+
+“Nhìn từ bên ngoài, đây chỉ là một mảnh đồng đã mục. Nhưng bên trong, những chiếc răng kim loại được đặt đúng vị trí để tính các chu kỳ trên bầu trời. Ai đã làm được điều đó, và chúng ta biết tới đâu khi một phần cỗ máy không còn?”
+
+Đây là lời mẫu mới, không phải lời dịch từ hai kênh. Khi thu tiếng Anh, viết lại tự nhiên theo tiếng Anh thay vì dịch sát từng chữ. Những chỗ nhấn nên rơi vào vật, con số đã kiểm chứng, sự đối lập và câu trả lời; tránh nhấn mọi câu cùng một kiểu.
+
+## 5. Làm hình và prompt đúng lời kể
+
+Lập bảng trước khi tạo clip: thời gian voice / ý đang kể / vật phải xuất hiện / hình có thể dùng / mức chắc chắn / mã clip. Chọn hình theo ý nghĩa của câu, không chỉ theo từ khóa.
+
+Ví dụ, khi voice nói đến kiểm tra niên đại, cảnh phù hợp là lấy mẫu và phép đo. Cảnh người cổ đi trên tuyết không giải thích được phép định tuổi, dù cùng chủ đề tiền sử.
+
+Mẫu prompt dùng lại:
+
+“Một cú máy liên tục 10 giây. [Không gian, thời kỳ và vật thể cụ thể]. [Một hành động chính]. [Cỡ cảnh, độ cao, hướng chuyển động máy]. [Ánh sáng và vật liệu nhất quán]. [Chi tiết cần giữ chính xác]. Chỉ có người trưởng thành nếu có người; không có trẻ em. Không chữ, không logo, không watermark. Không có âm thanh, không có lời nói.”
+
+Ví dụ minh họa nguyên bản:
+
+“Một cú máy liên tục 10 giây. Mô hình phục dựng giải thích một cơ cấu bánh răng bằng đồng của thiết bị thiên văn Hy Lạp cổ, đặt trên bàn nghiên cứu tối. Một bánh răng được quay chậm và truyền chuyển động sang bánh kế bên. Góc macro chếch 45 độ, máy trượt ngang rất nhẹ để thấy các răng ăn khớp; ánh sáng mềm làm rõ bề mặt đồng. Không tự thêm màn hình điện tử hoặc ký hiệu phát sáng. Đây là mô hình minh họa cơ chế, không giả là cảnh chụp hiện vật thật. Không có trẻ em. Không chữ, không logo, không watermark. Không có âm thanh, không có lời nói.”
+
+Ảnh quét, số liệu, văn tự hay khuôn mặt của cá nhân lịch sử không nên để mô hình tự bịa rồi dùng như chứng cứ. Với cơ cấu chính xác, dùng mô hình 3D đã kiểm tra hoặc tài liệu có quyền sử dụng. Tạo sinh phù hợp hơn với không khí, cảnh chuyển và phục dựng đã kiểm tra.
+
+## 6. Dựng 30 giây đầu và toàn phim
+
+Bạn đã chọn phim chỉ có voice tiếng Anh. Vì vậy, bỏ âm của tất cả clip và không thêm nhạc hoặc SFX vào bản chính. Dựng bám theo câu voice, nhịp thở và nghĩa của từng đoạn.
+
+### Ví dụ 10 cảnh trong 30 giây cho Antikythera
+
+Đây là kế hoạch minh họa mới, không phải chuỗi cảnh đã đo của một kênh. Có thể lấy khoảng 3 giây từ mỗi clip nguồn 10 giây:
+
+| Mốc | Hình | Mục đích |
+|---|---|---|
+| 00–03 | Đặc tả khối đồng ăn mòn | Đặt vật trung tâm |
+| 03–06 | Góc rộng khu vực khảo sát dưới biển | Đặt bối cảnh tìm thấy |
+| 06–09 | Các hiện vật tàu đắm có nguồn phù hợp | Mở quy mô phát hiện |
+| 09–12 | Thao tác kiểm tra mẫu trong phòng nghiên cứu | Cho thấy câu hỏi cần phép đo |
+| 12–15 | Lớp cắt mô hình số đã kiểm tra | Lộ cấu trúc bên trong |
+| 15–18 | Bánh răng phục dựng truyền chuyển động | Đưa cơ chế vào câu chuyện |
+| 18–21 | Mô hình chu kỳ Mặt Trăng | Nối chuyển động với chức năng |
+| 21–24 | Tay người lớn quay mô hình giải thích | Tạo liên hệ trực quan |
+| 24–27 | Một vùng thiếu trong bản phục dựng | Đặt giới hạn của lời giải |
+| 27–30 | Trở lại hiện vật hoặc bản sao rõ nguồn | Chốt câu hỏi chính |
+
+Tư liệu thật, bản sao và mô hình phải được phân biệt trong lời dẫn hoặc ghi chú nguồn; không giả cảnh dựng là ghi hình cuộc khai quật thực tế. Thứ tự và độ dài từng shot phải chỉnh theo voice cuối, không ép voice khớp một montage đã khóa sẵn.
+
+### Nhịp dựng phần thân
+
+- Ưu tiên cắt thẳng khi ý kể đổi; hòa ngắn khoảng 0,2–0,4 giây khi cần chuyển không gian hoặc thời kỳ. Đây là thông số đề xuất, có thể điều chỉnh theo cảnh.
+- Đổi cỡ cảnh có mục đích: toàn để hiểu chỗ đứng, trung để thấy thao tác, macro để xem bằng chứng. Không cố đổi cảnh theo đồng hồ nếu người xem còn cần đọc một chi tiết.
+- Một clip 10 giây có thể chỉ dùng 2–5 giây ở mở đầu; cảnh giải thích cơ chế có thể cần lâu hơn. Không dùng lại clip sát nhau chỉ để đủ thời lượng.
+- Dùng chuyển động máy nhẹ, chỉnh sáng và màu nhất quán. Chỉ dùng zoom khi nó dẫn mắt tới một chi tiết có ý nghĩa. Không cần flash hay glitch liên tục để tạo kịch tính.
+- Cảnh thiếu thay bằng video chuyển động liên quan đúng ý; không thay bằng ảnh chữ để lấp chỗ. Nếu chưa có hình giải thích đúng, chỉnh cách trình bày hoặc bổ sung tư liệu.
+- Sau khi dùng transition có chồng hình, kiểm tra tổng thời lượng; overlap có thể làm phần hình ngắn hơn voice.
+
+Không có dữ liệu retention để khẳng định những nhịp này là công thức đã làm hai kênh thành công. Đây là giả thuyết biên tập cần thử và đo trên kênh của bạn.
+
+## 7. Tiêu đề và thumbnail
+
+Tiêu đề tốt đặt một vật hoặc địa điểm cụ thể cạnh câu hỏi có lời giải trong phim. Ba mẫu có thể thử:
+
+- “[Vật thể]: vì sao [đặc điểm bất ngờ]?”
+- “[Địa điểm]: [một hệ thống ít được nhìn thấy] hoạt động ra sao?”
+- “[Tuyên bố quen thuộc]: phép thử nào cho biết nó đúng tới đâu?”
+
+Thumbnail nên có một chủ thể chính đọc được trên điện thoại và một đối lập thị giác: bánh răng ăn mòn với cơ chế rõ nét; thân tàu nghiêng với mặt nước; tán rừng với mạng đường đã khảo sát. Không cần nhét cả câu chuyện lên ảnh.
+
+Ảnh phục dựng nên phù hợp hiện vật, niên đại và cơ chế. Không vẽ thêm xác ướp, người khổng lồ, chữ cổ hay thiết bị không có trong nội dung chỉ để tăng giật gân. Nếu dùng chữ, giữ thật ngắn và bổ sung ý cho tiêu đề. Tùy chọn không chữ cũng phù hợp.
+
+Đây là đề xuất thumbnail cho dự án, không phải mô tả đã quan sát thumbnail của hai kênh.
+
+## 8. Quy trình dùng bộ 100 đề tài
+
+1. Chọn một đề tài và viết một câu hỏi trung tâm. Kiểm tra nó không chỉ lặp câu hỏi của tập đã làm.
+2. Tìm ít nhất một nghiên cứu hoặc hồ sơ hiện vật đáng tin, thêm nguồn giải thích và nguồn phản biện nếu có tranh luận. Kiểm tra cập nhật trước khi ghi số liệu.
+3. Lập bảng điều đã biết / suy luận / còn tranh luận. Viết dàn ý theo bằng chứng và cơ chế.
+4. Viết kịch bản tiếng Anh, đọc thử một phút, điều chỉnh nhịp và độ dài. Đo voice hoàn chỉnh trước khi khóa timeline.
+5. Chia voice thành các đoạn theo ý. Viết prompt và chọn tư liệu cho từng đoạn; đánh dấu tái sử dụng, không tạo bản trùng vô ích.
+6. Tạo hoặc thu thập clip. Kiểm tra hiện vật, thời kỳ, chuyển động, không có trẻ em và không có chữ bị sinh sai.
+7. Dựng mở đầu 10 cảnh/30 giây nếu phù hợp câu chuyện. Dựng thân bài theo voice và ghi rõ tư liệu thật, minh họa trong hồ sơ nguồn.
+8. Xem lại cả video: khớp ý voice và hình; không âm gốc lọt vào; không khoảng đen; không đoạn cuối hụt; câu hỏi ở đầu được trả lời; nguồn và những chỗ bất định được giữ đúng.
+9. Xuất bản xem trước, chọn tiêu đề và thumbnail, rồi dùng dữ liệu thực của kênh để cải tiến tập sau. Không tự đổi số bộ chủ đề cũ.
+
+10 đề tài ưu tiên trong danh sách mới: 011 Upano, 017 Dholavira, 021 Antikythera, 022 bê tông La Mã, 031 Herculaneum, 041 Pavlopetri, 047 Vasa, 070 đá tự chạy, 089 Lycurgus, 092 Vinland Map. Lựa chọn này dựa trên tính rõ ràng của câu hỏi và khả năng kể bằng hình; chưa phải xếp hạng tiềm năng lượt xem.
+
+Trong đó, Antikythera, Upano và Herculaneum là ba lựa chọn phù hợp để thử format trước. Hãy dùng số kèm tiền tố “MỚI” khi yêu cầu làm tiếp, ví dụ “chủ đề MỚI-021”, để không nhầm với chủ đề 21 trong bộ đã lưu.
+
+Danh sách 100 đề tài và các nguồn khởi đầu nằm trong những tệp đi kèm. Phần phân tích chi tiết riêng của kênh thứ hai còn cần video hoặc metadata của đúng kênh; không gán các đề xuất ở đây cho kênh đó.

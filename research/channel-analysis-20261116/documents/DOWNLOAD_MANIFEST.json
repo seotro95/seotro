@@ -1,0 +1,36 @@
+{
+  "catalogue": "new-100-topics-20261116",
+  "topic_count": 100,
+  "files": [
+    {
+      "name": "100_CHU_DE_MOI.csv",
+      "bytes": 44057,
+      "sha256": "d251b6d64d00ac307802746866f740b3ad194392e17585bab2daa61847ede7d4"
+    },
+    {
+      "name": "100_CHU_DE_MOI.txt",
+      "bytes": 50891,
+      "sha256": "ec944c2728b0a389cc4bc7b9ecfb1a8c3eabd5dcfdbbbcb7fe1853163887d094"
+    },
+    {
+      "name": "DOC_TRUOC.txt",
+      "bytes": 988,
+      "sha256": "b5455484762ef1e1a47002822112536d3955bf921555994eed9374fd94ea49c5"
+    },
+    {
+      "name": "NGUON_VA_PHAM_VI.txt",
+      "bytes": 3191,
+      "sha256": "bcf4839e9358d2ad828fb510717b1ebd4b678fce5e532d9ede5ffd7bdec0c601"
+    },
+    {
+      "name": "PHAN_TICH_VA_QUY_TRINH.txt",
+      "bytes": 19420,
+      "sha256": "c14ba4e34588392be930085f536c7f1f13b0ec9e1595f8ae87da38e56402cb56"
+    },
+    {
+      "name": "100_CHU_DE_VA_QUY_TRINH_20261116.zip",
+      "bytes": 36762,
+      "sha256": "c25ad1eab9042d151a40b046b3e704bf7bd50ad0326abe033938ec643212a158"
+    }
+  ]
+}

@@ -1,0 +1,771 @@
+100 CHỦ ĐỀ MỚI — KHOA HỌC, KHẢO CỔ VÀ ĐIỀU TRA BÍ ẨN
+Ngày lập: 16/11/2026. Ngôn ngữ: tiếng Việt.
+
+Đây là danh sách đề xuất mới, lưu riêng với bộ TOPICS_001_100 trước đây.
+Số 001–100 trong tệp này chỉ là số thứ tự của danh sách mới, không đổi số tập cũ.
+Không khẳng định đây là những video hai kênh đã đăng, hoặc những chủ đề chưa từng ai làm.
+Không có số liệu dự báo lượt xem hay cam kết video sẽ thành công.
+
+Phạm vi nghiên cứu kênh: chưa truy cập được video trực tiếp của hai kênh.
+Alex’s Science chỉ có mô tả thứ cấp được tìm thấy; kênh @mysteryyoftheworld chưa xác minh được nội dung đúng handle.
+Phân tích hình và lời dẫn trong tài liệu kèm theo dựa vào mẫu tham khảo GitHub đã có trong phiên trước, chưa xác nhận thuộc kênh nào.
+
+Mỗi đề tài gồm tiêu đề thử nghiệm, góc kể, hình gợi ý và điều cần kiểm chứng.
+Chỉ 12 đề tài có đường dẫn nguồn khởi đầu đã tra cứu trong lượt này. Những đề tài còn lại là ý tưởng biên tập cần nghiên cứu tiếp, không phải 100 hồ sơ đã thẩm định khoa học.
+Định hướng sản xuất: phim 20–23 phút nếu đủ dữ liệu; không kéo dài bằng lặp ý.
+Hình minh họa chỉ người trưởng thành; không có hình trẻ em. Hiện vật và mô hình ưu tiên hơn phục dựng nhân vật không có căn cứ.
+Clip tạo riêng thường 10 giây, không âm thanh hoặc lời nói. Khi dựng có thể cắt ngắn.
+Phim chính theo lựa chọn hiện tại của bạn: chỉ voice tiếng Anh, bỏ âm gốc clip, không nhạc/SFX.
+★ = 10 đề tài nên nghiên cứu thử trước vì câu hỏi rõ và dễ kể bằng hình; đây là đánh giá biên tập, chưa có dữ liệu hiệu suất.
+
+
+============================================================
+NGUỒN GỐC CON NGƯỜI
+============================================================
+
+001. Jebel Irhoud: khuôn mặt quen thuộc trong một hộp sọ rất khác
+Góc kể: Bắt đầu bằng hình dáng hộp sọ rồi giải thích vì sao các đặc điểm hiện đại không xuất hiện đồng thời.
+Hình gợi ý: Macro bản sao sọ; hang đá; mô hình hình thái.
+Cần kiểm chứng: Không kể nguồn gốc loài người như một địa điểm duy nhất.
+Trạng thái: Đã tìm thấy nguồn khởi đầu; cần đọc toàn văn khi viết kịch bản
+Nguồn khởi đầu: https://humanorigins.si.edu/research/whats-hot-human-origins/our-species-arose-least-300000-years-ago
+
+
+002. Sima de los Huesos: khi hai loại ADN kể hai câu chuyện
+Góc kể: Theo hành trình từ hố xương tới sự khác biệt giữa ADN ty thể và ADN nhân.
+Hình gợi ý: Hang sâu; khay mẫu; hai mô hình phả hệ.
+Cần kiểm chứng: Phân biệt kết quả từng nghiên cứu và từng loại ADN.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+003. Ranis và Zlatý kůň: những người châu Âu sớm để lại dấu vết gì?
+Góc kể: Kể câu chuyện một quần thể nhỏ qua bộ gene và dấu hiệu quan hệ giữa các địa điểm.
+Hình gợi ý: Cửa hang; bản đồ Trung Âu; phòng sạch.
+Cần kiểm chứng: Không đồng nhất thiếu liên tục di truyền với một nguyên nhân tuyệt chủng đã biết.
+Trạng thái: Đã tìm thấy nguồn khởi đầu; cần đọc toàn văn khi viết kịch bản
+Nguồn khởi đầu: https://www.nature.com/articles/s41586-024-08420-x
+
+
+004. Dmanisi: năm hộp sọ làm khó cách phân loại người cổ
+Góc kể: Đặt năm hình thái cạnh nhau để mở câu hỏi thế nào là khác biệt trong một quần thể.
+Hình gợi ý: Cao nguyên Georgia; bản sao sọ; thước đo.
+Cần kiểm chứng: Các cách phân loại vẫn có tranh luận.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+005. Ngandong: dấu vết cuối của Homo erectus trên đảo Java
+Góc kể: Biến một lớp trầm tích thành cuộc điều tra về thời điểm một quần thể còn tồn tại.
+Hình gợi ý: Sông Solo; mặt cắt đất; phòng định tuổi.
+Cần kiểm chứng: Niên đại mẫu không tự cho biết ngày tuyệt chủng chính xác.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+006. Nesher Ramla: bộ xương có những đặc điểm không dễ xếp loại
+Góc kể: Dẫn từ một mảnh hàm tới cách các nhà nghiên cứu tranh luận về họ hàng tiến hóa.
+Hình gợi ý: Hố khai quật; mẫu hàm; mô hình so sánh.
+Cần kiểm chứng: Không trình bày tên nhóm đề xuất như một loài đã được thống nhất.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+007. Homo naledi: những bộ xương đã vào hang sâu bằng cách nào?
+Góc kể: Tái dựng các lối đi rồi đối chiếu nhiều giả thuyết hình thành tập hợp xương.
+Hình gợi ý: Hang chật; đèn khảo sát; mô hình địa hình.
+Cần kiểm chứng: Những tuyên bố chôn cất, lửa và khắc vạch cần phân biệt mức bằng chứng.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+008. Kabwe: một hộp sọ và cuộc săn tìm niên đại bị thiếu
+Góc kể: Kể việc mất bối cảnh khai quật khiến xác định tuổi và quan hệ tiến hóa khó ra sao.
+Hình gợi ý: Bản sao sọ; hồ sơ khai mỏ; thiết bị đo.
+Cần kiểm chứng: Giữ rõ tuổi ước tính, sai số và lịch sử sưu tập.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+009. Người Bắc Kinh: chuyện gì xảy ra với những hóa thạch thất lạc?
+Góc kể: Theo chuỗi hồ sơ vận chuyển, bản đúc và ảnh lưu trữ thay vì hứa tìm được mẫu mất tích.
+Hình gợi ý: Thùng vận chuyển tái hiện; bản đúc; bản đồ.
+Cần kiểm chứng: Tách chứng cứ hồ sơ khỏi giả thuyết về nơi cất giấu.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+010. Mauer: chiếc hàm không có cằm đã đặt ra câu hỏi gì?
+Góc kể: Theo lịch sử một phát hiện để giải thích sự thay đổi trong cách gọi tên người cổ.
+Hình gợi ý: Mỏ cát; hàm phục dựng; tủ bảo tàng.
+Cần kiểm chứng: Homo heidelbergensis có phạm vi sử dụng tên gọi không thống nhất.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+============================================================
+THÀNH PHỐ VÀ CẢNH QUAN CỔ
+============================================================
+
+011. ★ Upano: mạng lưới đô thị hiện ra dưới tán rừng Amazon
+Góc kể: Mở bằng khu rừng rồi lần lượt lộ nền đất, đường nối và hệ thống canh tác.
+Hình gợi ý: Bay trên rừng; mô hình LiDAR; nền đất.
+Cần kiểm chứng: LiDAR cần đối chiếu khảo sát thực địa; không phải phát hiện từ hư vô.
+Trạng thái: Đã tìm thấy nguồn khởi đầu; cần đọc toàn văn khi viết kịch bản
+Nguồn khởi đầu: https://pubmed.ncbi.nlm.nih.gov/38207020/
+
+
+012. Angkor: thành phố phải điều khiển nước như thế nào?
+Góc kể: Theo một giọt nước qua hồ, kênh và cửa xả để nhìn cả hệ thống đô thị.
+Hình gợi ý: Hồ chứa; kênh cổ; mô hình dòng chảy.
+Cần kiểm chứng: Không quy toàn bộ lịch sử Angkor cho một nguyên nhân khí hậu.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+013. Caracol: nhìn thấy một thành phố Maya vượt khỏi các kim tự tháp
+Góc kể: Đi từ công trình dễ thấy tới khu dân cư, ruộng bậc và những con đường ít được chú ý.
+Hình gợi ý: Rừng Belize; tuyến đường; mô hình địa hình.
+Cần kiểm chứng: Không suy dân số trực tiếp chỉ từ diện tích quét.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+014. Çatalhöyük: sống trong một thành phố đi vào nhà từ mái
+Góc kể: Dẫn người xem qua một lối vào khác thường để giải thích tổ chức đời sống đô thị sớm.
+Hình gợi ý: Mái nhà phục dựng; cầu thang; mặt cắt nhà.
+Cần kiểm chứng: Phục dựng là cách diễn giải, không phải ghi hình đời sống thật.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+015. Skara Brae: ngôi làng đá giữ lại đồ đạc trong nhà
+Góc kể: Theo một căn phòng từ cửa vào tới giường và tủ đá để kể chuyện sinh hoạt.
+Hình gợi ý: Bờ biển Orkney; nội thất đá; đồ dùng.
+Cần kiểm chứng: Không gán chức năng chắc chắn cho mọi cấu trúc trong nhà.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+016. Mohenjo-daro: những đường cống kể gì về một đô thị cổ?
+Góc kể: Chọn hệ thống thoát nước làm nhân vật chính thay vì chỉ quay các công trình lớn.
+Hình gợi ý: Rãnh xây gạch; giếng; mô hình khu phố.
+Cần kiểm chứng: Tránh suy luận có vua, nền dân chủ hay bình đẳng từ cống nước.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+017. ★ Dholavira: giữ nước giữa một vùng đất khắc nghiệt
+Góc kể: Đặt mùa khô làm sức ép rồi mở dần cách hồ chứa và địa hình phối hợp.
+Hình gợi ý: Bể đá; kênh dẫn; mùa mưa phục dựng.
+Cần kiểm chứng: Cần phân biệt từng giai đoạn xây dựng và sử dụng.
+Trạng thái: Đã tìm thấy nguồn khởi đầu; cần đọc toàn văn khi viết kịch bản
+Nguồn khởi đầu: https://whc.unesco.org/en/list/1645/
+
+
+018. Great Zimbabwe: những bức tường không cần vữa đứng được nhờ đâu?
+Góc kể: Dùng viên đá nhỏ để mở câu chuyện kỹ thuật, trao đổi và xã hội bản địa.
+Hình gợi ý: Mạch xếp đá; tường cong; hiện vật thương mại.
+Cần kiểm chứng: Ghi nhận vai trò những cộng đồng châu Phi xây dựng di tích.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+019. Derinkuyu: một thành phố dưới đất thở bằng cách nào?
+Góc kể: Theo không khí từ miệng giếng xuống các tầng sinh hoạt và lối phòng thủ.
+Hình gợi ý: Trục thông gió; đường hầm; mặt cắt nhiều tầng.
+Cần kiểm chứng: Niên đại và số người trú ẩn cần nguồn riêng, không dùng số lan truyền.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+020. Hattusa: cánh cổng đá và kho thư của một đế chế
+Góc kể: Đi từ kiến trúc phòng thủ tới bảng đất sét để nối sức mạnh vật chất với quản trị.
+Hình gợi ý: Cổng Sư tử; tường thành; bảng đất sét.
+Cần kiểm chứng: Phân biệt khảo cổ địa điểm với những diễn giải lịch sử rộng hơn.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+============================================================
+KỸ THUẬT VÀ CÔNG TRÌNH
+============================================================
+
+021. ★ Antikythera: bánh răng gỉ sét đã tính bầu trời như thế nào?
+Góc kể: Mở bằng khối ăn mòn, đưa ảnh quét vào rồi cho một chu kỳ thiên văn chạy qua bánh răng.
+Hình gợi ý: Macro bánh răng; CT minh họa; mô hình quay.
+Cần kiểm chứng: Các phần còn thiếu khiến một số phục dựng vẫn chưa duy nhất.
+Trạng thái: Đã tìm thấy nguồn khởi đầu; cần đọc toàn văn khi viết kịch bản
+Nguồn khởi đầu: https://www.nature.com/articles/nature05357
+
+
+022. ★ Bê tông La Mã: vết nứt nào có thể tự khép lại?
+Góc kể: Đặt mẫu vật dưới phép thử để giải thích vai trò một số thành phần và kỹ thuật trộn.
+Hình gợi ý: Mẫu cắt; hạt vôi; thí nghiệm nước qua khe.
+Cần kiểm chứng: Không tuyên bố mọi bê tông La Mã đều tự lành trong mọi điều kiện.
+Trạng thái: Đã tìm thấy nguồn khởi đầu; cần đọc toàn văn khi viết kịch bản
+Nguồn khởi đầu: https://pubmed.ncbi.nlm.nih.gov/36608117/
+
+
+023. Colosseum: đưa cả một sân khấu lên khỏi lòng đất
+Góc kể: Theo một lượt nâng để kể hệ thống dây, sức người và phối hợp sau buổi trình diễn.
+Hình gợi ý: Hành lang ngầm; tời; sàn cắt lớp.
+Cần kiểm chứng: Số lượng máy và hình thức vận hành thay đổi theo giai đoạn.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+024. Petra: thành phố đá đối phó nước lũ và hạn hán ra sao?
+Góc kể: Bắt đầu bằng dòng nước nguy hiểm trong hẻm núi rồi mở hệ thống thu và dẫn nước.
+Hình gợi ý: Hẻm Siq; máng dẫn; bể chứa.
+Cần kiểm chứng: Không coi mọi dấu tích nước đều thuộc cùng một thời kỳ.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+025. Barbegal: khi nước vận hành một cụm cối xay cổ
+Góc kể: Theo năng lượng từ máng nước tới bánh xe và hạt ngũ cốc.
+Hình gợi ý: Kênh dốc; bánh xe tái hiện; bột nghiền.
+Cần kiểm chứng: Công suất và sản lượng là ước tính phụ thuộc mô hình.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+026. Cầu dây Inca: làm một nhịp cầu từ những sợi cỏ
+Góc kể: Theo từng bước từ bó sợi, xoắn dây tới phân phối lực trên cả cây cầu.
+Hình gợi ý: Tay người lớn bện dây; vực sâu; cáp chịu lực.
+Cần kiểm chứng: Ghi rõ đâu là truyền thống đang sống, đâu là suy luận về quá khứ.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+027. Stonehenge: lần theo hành trình của những khối đá lớn
+Góc kể: Tách câu hỏi nguồn đá, tuyến vận chuyển và kỹ thuật dựng thành ba cuộc điều tra.
+Hình gợi ý: Mỏ đá; bản đồ tuyến; thử nghiệm dây kéo.
+Cần kiểm chứng: Không biến một thử nghiệm thành lời giải duy nhất cho toàn bộ công trình.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+028. Obelisk chưa hoàn thành: một sai hỏng để lộ kỹ thuật khai thác đá
+Góc kể: Theo vết nứt và vết công cụ để tái dựng công việc ở mỏ Aswan.
+Hình gợi ý: Toàn cảnh mỏ; rãnh khai thác; macro vết đục.
+Cần kiểm chứng: Phân biệt dấu quan sát được với trình tự thao tác phục dựng.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+029. Nan Madol: dựng công trình bằng những cột đá bazan
+Góc kể: Đặt câu hỏi về vật liệu, địa hình biển và tổ chức lao động trên đảo.
+Hình gợi ý: Cột bazan; kênh thủy triều; mô hình kết cấu.
+Cần kiểm chứng: Không thay bằng chứng vận chuyển bằng truyền thuyết siêu nhiên.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+030. Qanat: đưa nước qua sa mạc mà không cần máy bơm
+Góc kể: Theo đường hầm có độ dốc nhỏ từ tầng chứa nước tới nơi canh tác.
+Hình gợi ý: Hàng giếng; đường hầm; mô hình trọng lực.
+Cần kiểm chứng: Không suy mọi qanat có cùng niên đại hoặc nguồn gốc.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+============================================================
+VĂN BẢN VÀ MÃ CỔ
+============================================================
+
+031. ★ Herculaneum: đọc một cuộn sách mà không mở nó
+Góc kể: Theo chuỗi chụp quét, trải phẳng số và nhận dạng mực để cho chữ dần xuất hiện.
+Hình gợi ý: Cuộn than hóa; thiết bị quét; lớp ảnh số.
+Cần kiểm chứng: Ảnh AI tăng khả năng đọc cần được chuyên gia kiểm tra.
+Trạng thái: Đã tìm thấy nguồn khởi đầu; cần đọc toàn văn khi viết kịch bản
+Nguồn khởi đầu: https://www.ox.ac.uk/news/2025-02-07-inside-herculaneum-scroll-seen-first-time-almost-2000-years
+
+
+032. Vindolanda: thư từ đời thường sống sót ở biên giới La Mã
+Góc kể: Chọn một lá thư làm điểm vào đời sống, tiếp tế và quan hệ trên biên giới.
+Hình gợi ý: Bảng gỗ; bút mực; doanh trại phục dựng.
+Cần kiểm chứng: Bản dịch và chỗ khuyết phải dựa trên hồ sơ hiện vật.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+033. Rosetta: ba bản chữ đã mở một hệ thống ngôn ngữ ra sao?
+Góc kể: Dựng lại quá trình so sánh tên riêng và âm thay vì một khoảnh khắc thiên tài duy nhất.
+Hình gợi ý: Mặt đá; hàng chữ đối chiếu; bàn nghiên cứu.
+Cần kiểm chứng: Ghi nhận nhiều người đóng góp vào việc giải đọc.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+034. Linear B: những bảng ghi chép đã thay đổi lịch sử Hy Lạp
+Góc kể: Bắt đầu bằng dấu lặp trong kho dữ liệu rồi mở câu chuyện ngôn ngữ ẩn phía sau.
+Hình gợi ý: Bảng đất sét; ký hiệu; mô hình kho hàng.
+Cần kiểm chứng: Phân biệt Linear B đã giải đọc với Linear A chưa được giải đọc đầy đủ.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+035. Chữ Indus: vì sao có hàng nghìn dấu mà vẫn khó đọc?
+Góc kể: Biến việc thiếu văn bản dài và đối chiếu song ngữ thành xung đột trung tâm.
+Hình gợi ý: Ấn triện; chuỗi ký hiệu; bến cảng phục dựng.
+Cần kiểm chứng: Không quảng bá bất kỳ lời giải chưa được chấp nhận như kết luận.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+036. Quipu: các nút dây đã lưu thông tin gì?
+Góc kể: Theo màu, vị trí và kiểu nút để giải thích phần đã hiểu và phần còn bỏ ngỏ.
+Hình gợi ý: Macro dây nút; tay người lớn thao tác; kho lưu trữ.
+Cần kiểm chứng: Khả năng ghi số và khả năng ghi ngôn ngữ có mức chắc chắn khác nhau.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+037. Voynich: một cuốn sách lạ và hàng loạt lời giải chưa đứng vững
+Góc kể: Dẫn người xem kiểm tra từng loại tuyên bố bằng vật liệu, thống kê và lịch sử.
+Hình gợi ý: Trang sách; chất liệu da; hình thực vật.
+Cần kiểm chứng: Không hứa giải mã trọn cuốn sách hoặc gán ngôn ngữ chắc chắn.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+038. Cuộn Biển Chết: ánh sáng ngoài tầm mắt giúp đọc chữ mờ
+Góc kể: Theo một mảnh bản thảo qua bảo quản và chụp ảnh nhiều dải sóng.
+Hình gợi ý: Kho bảo quản; mảnh da; ảnh đa phổ.
+Cần kiểm chứng: Đừng coi ảnh tăng cường là văn bản hoàn chỉnh không có chỗ nghi vấn.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+039. Bản thảo Archimedes: tìm toán học dưới một lớp chữ khác
+Góc kể: Kể câu chuyện tái sử dụng vật liệu rồi khôi phục lớp văn bản nằm bên dưới.
+Hình gợi ý: Trang chồng chữ; chiếu sáng; mô hình hình học.
+Cần kiểm chứng: Phân biệt bản sao văn bản cổ với bản viết tay của chính Archimedes.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+040. Rongorongo: điều gì khiến những dấu khắc ở Rapa Nui khó đọc?
+Góc kể: Đặt việc mất bối cảnh truyền dạy cạnh giới hạn của số mẫu còn lại.
+Hình gợi ý: Bảng gỗ; macro dấu khắc; kho lưu trữ.
+Cần kiểm chứng: Tôn trọng bối cảnh văn hóa; chưa có giải đọc được chấp nhận rộng rãi.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+============================================================
+THÀNH PHỐ CHÌM VÀ TÀU ĐẮM
+============================================================
+
+041. ★ Pavlopetri: đi qua những con phố dưới mặt nước
+Góc kể: Theo mặt bằng công trình để kể mực biển, địa chất và cuộc sống đô thị ven bờ.
+Hình gợi ý: Lặn qua nền tường; đo vẽ; mô hình mặt bằng.
+Cần kiểm chứng: Không gọi địa điểm là Atlantis hoặc coi mọi chi tiết phục dựng đã chắc chắn.
+Trạng thái: Đã tìm thấy nguồn khởi đầu; cần đọc toàn văn khi viết kịch bản
+Nguồn khởi đầu: https://www.unesco.org/en/articles/pavlopetri-named-2016-world-monuments-watch-site
+
+
+042. Thonis-Heracleion: tìm lại một cảng qua tượng và phù sa
+Góc kể: Bắt đầu bằng hiện vật được đưa lên rồi mở địa hình cảng chìm dưới trầm tích.
+Hình gợi ý: Tượng dưới nước; bùn đáy; tuyến cảng.
+Cần kiểm chứng: Giải thích kết hợp lún, địa chất và biến đổi môi trường có nguồn.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+043. Baiae: vì sao những biệt thự La Mã nằm dưới biển?
+Góc kể: Theo một nền khảm chìm tới chuyển động mặt đất ở vùng núi lửa.
+Hình gợi ý: Nền khảm dưới nước; bờ vịnh; mô hình nâng hạ đất.
+Cần kiểm chứng: Không kể như một thành phố chìm trong một ngày nếu bằng chứng không hỗ trợ.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+044. Uluburun: hàng hóa trên một con tàu nối bao nhiêu thế giới?
+Góc kể: Mở từng nhóm hàng để lộ một mạng lưới trao đổi thời đồ đồng.
+Hình gợi ý: Thỏi kim loại; đồ chứa; tuyến Địa Trung Hải.
+Cần kiểm chứng: Nguồn nguyên liệu không tự xác định quốc tịch thủy thủ.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+045. Biển Đen: vì sao một số xác tàu gỗ được giữ lại lâu?
+Góc kể: Đi từ thân tàu tới phân tầng nước và điều kiện bảo tồn.
+Hình gợi ý: ROV; thân tàu; mô hình cột nước.
+Cần kiểm chứng: Thiếu oxy ở một tầng nước không đồng nghĩa cả Biển Đen không có sự sống.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+046. Oseberg: con tàu được chôn trên đất kể câu chuyện gì?
+Góc kể: Theo cấu trúc mộ thuyền và vật dụng để phân biệt nghi lễ với hành trình đi biển.
+Hình gợi ý: Thân tàu; chạm khắc; hố mộ phục dựng.
+Cần kiểm chứng: Không suy danh tính hay vai trò xã hội chỉ từ một hiện vật.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+047. ★ Vasa: vì sao một chiến hạm chìm ngay chuyến đầu?
+Góc kể: Từ góc nghiêng thân tàu giải thích ổn định, trọng tâm và quyết định đóng tàu.
+Hình gợi ý: Mặt cắt tàu; mô hình nghiêng; bến cảng.
+Cần kiểm chứng: Tránh quy mọi trách nhiệm cho một cá nhân khi hồ sơ phức tạp hơn.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+048. Mary Rose: đồ dùng trên tàu kể đời sống thủy thủ ra sao?
+Góc kể: Mở từng ngăn đồ để kể lao động, y tế và sinh hoạt giữa thế kỷ XVI.
+Hình gợi ý: Hòm đồ; dụng cụ; boong tái hiện.
+Cần kiểm chứng: Tách nguyên nhân chìm còn tranh luận khỏi hiện vật đã xác định.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+049. Endurance: tìm một con tàu dưới băng bằng cách nào?
+Góc kể: Dẫn từ nhật ký vị trí tới khảo sát đáy biển và hình ảnh xác tàu.
+Hình gợi ý: Băng biển; AUV; thân tàu hiện trường.
+Cần kiểm chứng: Không dùng hình Titanic hoặc tàu khác như cảnh thật của Endurance.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+050. Mahabalipuram: dấu tích dưới biển có thể chứng minh điều gì?
+Góc kể: Đối chiếu kiến trúc ven bờ, khảo sát dưới nước và truyền thuyết địa phương.
+Hình gợi ý: Bờ đá; nền móng; bản đồ khảo sát.
+Cần kiểm chứng: Không coi truyền thuyết bảy ngôi đền là bản đồ khảo cổ đã xác nhận.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+============================================================
+THIÊN TAI VÀ BIẾN ĐỔI XÃ HỘI
+============================================================
+
+051. Akrotiri: một thành phố được bảo tồn nhờ tro núi lửa
+Góc kể: Dùng một căn phòng để chuyển sang câu chuyện phun trào và đời sống trước thảm họa.
+Hình gợi ý: Nhà nhiều tầng; bích họa; cột tro mô hình.
+Cần kiểm chứng: Niên đại phun trào Thera có lịch sử tranh luận cần cập nhật.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+052. Pompeii: vì sao cùng một thảm họa lại để lại những dấu vết khác nhau?
+Góc kể: Theo từng lớp đá bọt và dòng vật chất nóng thay vì dựng một vụ nổ đơn giản.
+Hình gợi ý: Mặt cắt tro; nhà cửa; mô hình dòng phun.
+Cần kiểm chứng: Tránh dựng cảnh chết hoặc thời điểm cụ thể như đã biết cho mọi cá nhân.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+053. Năm 536: lần theo dấu vết một bầu trời mờ tối
+Góc kể: Ghép ghi chép, vòng cây và lõi băng để giải thích cách dựng lại biến cố.
+Hình gợi ý: Lõi băng; thân cây; lớp khí quyển mô hình.
+Cần kiểm chứng: Không gộp mọi khủng hoảng thế kỷ VI thành hệ quả của một vụ phun trào.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+054. Tambora 1815: vì sao một núi lửa ảnh hưởng mùa hè ở xa?
+Góc kể: Theo vật chất vào khí quyển rồi tới nhiệt độ, mùa vụ và đời sống.
+Hình gợi ý: Miệng núi; khí quyển; đồng ruộng phục dựng.
+Cần kiểm chứng: Không đồng nhất thời tiết từng ngày với tác động khí hậu toàn cầu.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+055. Các đô thị Maya: hạn hán là lời giải đủ chưa?
+Góc kể: Đặt hồ chứa, bằng chứng khí hậu và quan hệ chính trị cạnh nhau.
+Hình gợi ý: Hồ cạn; di tích; biểu đồ dữ liệu trong tài liệu.
+Cần kiểm chứng: Nói rõ cư dân và văn hóa Maya không biến mất.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+056. Thời đồ đồng sụp đổ: một mạng lưới có thể đứt ở đâu?
+Góc kể: Theo sự phụ thuộc giữa cảng, lương thực và quyền lực để so nhiều nguyên nhân.
+Hình gợi ý: Bến cảng; hàng hóa; mô hình mạng trao đổi.
+Cần kiểm chứng: Không dùng Người Biển như lời giải duy nhất đã được chứng minh.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+057. Cahokia: điều gì xảy ra sau thời kỳ đô thị phát triển?
+Góc kể: Theo gò đất, khu dân cư và thay đổi môi trường qua nhiều thế hệ.
+Hình gợi ý: Gò đất; đồng bằng; mặt bằng đô thị.
+Cần kiểm chứng: Không biến việc rời đô thị thành câu chuyện một dân tộc biến mất.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+058. Teotihuacan: các dấu cháy có kể được một cuộc nổi dậy?
+Góc kể: So vị trí cháy, kiến trúc và vật liệu để kiểm tra nhiều cách diễn giải.
+Hình gợi ý: Đại lộ; phòng cháy sém; mẫu vật liệu.
+Cần kiểm chứng: Dấu cháy không tự xác định tác nhân hoặc một sự kiện duy nhất.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+059. Lisbon 1755: một thảm họa đã thay đổi cách khảo sát động đất
+Góc kể: Theo các câu hỏi điều tra sau động đất để mở lịch sử thu thập dữ liệu.
+Hình gợi ý: Hải cảng; bản đồ; mô hình sóng.
+Cần kiểm chứng: Phân biệt động đất, sóng thần và hỏa hoạn.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+060. Tunguska: lần theo một vụ nổ không có hố va chạm lớn
+Góc kể: Đi từ hướng cây đổ tới các mô hình thiên thể phát nổ trong khí quyển.
+Hình gợi ý: Rừng đổ mô hình; thám hiểm; quỹ đạo.
+Cần kiểm chứng: Mô hình và ước tính kích thước còn bất định; không cần thêm người ngoài hành tinh.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+============================================================
+ĐỊA CHẤT VÀ NƠI CHỐN KHÁC THƯỜNG
+============================================================
+
+061. Mắt Sahara: những vòng tròn khổng lồ được tạo ra thế nào?
+Góc kể: Cho góc nhìn vệ tinh gặp lớp đá dưới mặt đất để giải thích cấu trúc Richat.
+Hình gợi ý: Ảnh địa hình hợp lệ; tầng đá; mô hình xói mòn.
+Cần kiểm chứng: Không coi hình dạng tròn là bằng chứng thành phố hay hố thiên thạch.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+062. Naica: vì sao tinh thể có thể lớn đến mức này?
+Góc kể: Theo điều kiện nước, nhiệt độ và thời gian tạo nên các tinh thể khổng lồ.
+Hình gợi ý: Hang tinh thể; giọt nước; mô hình kết tinh.
+Cần kiểm chứng: Không dựng hoạt động tham quan tự do trong môi trường nguy hiểm và hạn chế tiếp cận.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+063. Giant’s Causeway: đá tự nứt thành những cột đều bằng cách nào?
+Góc kể: Dẫn từ một vết nứt nhỏ tới cơ chế nguội và co của vật liệu.
+Hình gợi ý: Macro mặt cột; vách đá; mô hình nguội.
+Cần kiểm chứng: Không mô tả mọi cột đều có đúng sáu cạnh.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+064. Movile: một hệ sinh thái trong hang tối lấy năng lượng từ đâu?
+Góc kể: Theo chuỗi năng lượng hóa học từ vi sinh vật tới các sinh vật khác.
+Hình gợi ý: Nước hang; lớp vi sinh; động vật không xương sống.
+Cần kiểm chứng: Không nói hệ kín tuyệt đối hoặc không có trao đổi vật chất nếu chưa chứng minh.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+065. Blood Falls: vì sao nước màu đỏ chảy ra khỏi băng?
+Góc kể: Mở bằng màu lạ rồi kiểm tra nguồn nước mặn và quá trình liên quan tới sắt.
+Hình gợi ý: Mép băng; dòng nước; mẫu nước.
+Cần kiểm chứng: Không dựng thành hồ máu hoặc sinh vật bí ẩn.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+066. Darvaza: vì sao hố khí có thể cháy lâu đến vậy?
+Góc kể: Theo nguồn nhiên liệu và dòng khí, rồi tách hồ sơ lịch sử khỏi chuyện truyền miệng.
+Hình gợi ý: Hố cháy; địa tầng; mô hình khí.
+Cần kiểm chứng: Lịch sử đánh lửa và mốc thời gian có các tường thuật không thống nhất.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+067. Danakil: đọc một cảnh quan nóng, mặn và nhiều màu
+Góc kể: Theo các loại khoáng và môi trường khác nhau trong cùng vùng.
+Hình gợi ý: Bể khoáng; tinh thể muối; hơi nóng.
+Cần kiểm chứng: Không suy có sự sống ở mọi bể màu hoặc dùng màu AI thay cho dữ liệu thật.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+068. Hồ Vostok: điều gì nằm dưới lớp băng dày?
+Góc kể: Từ phản xạ radar tới nước dưới băng và khó khăn lấy mẫu sạch.
+Hình gợi ý: Radar mô hình; mặt cắt băng; phòng sạch.
+Cần kiểm chứng: Mẫu sinh học có nguy cơ nhiễm; không tuyên bố tìm được hệ sinh thái chưa xác nhận.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+069. Atacama: tìm sự sống ở một nơi cực khô bằng cách nào?
+Góc kể: Theo một mẫu đất qua điều kiện khô hạn và phép đo dấu hiệu sinh học.
+Hình gợi ý: Đất nứt; thiết bị lấy mẫu; phòng thí nghiệm.
+Cần kiểm chứng: Phân biệt sống hoạt động, ngủ và vật liệu hữu cơ không còn sống.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+070. ★ Những hòn đá tự chạy: điều kiện nào để lại vệt dài trên sa mạc?
+Góc kể: Giữ lại bí ẩn ở đầu rồi tái dựng chuỗi nước, băng mỏng và gió.
+Hình gợi ý: Đá và vệt kéo; băng mỏng; góc thấp.
+Cần kiểm chứng: Nêu điều kiện quan sát được; không giả toàn bộ đá chuyển động liên tục.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+============================================================
+SINH HỌC VÀ BIỂN SÂU
+============================================================
+
+071. Miệng phun thủy nhiệt: một thế giới sống không lấy năng lượng trực tiếp từ nắng
+Góc kể: Theo hóa năng từ vi khuẩn tới giun ống và mạng thức ăn.
+Hình gợi ý: ROV; ống khói; macro quần xã.
+Cần kiểm chứng: Phân biệt nền năng lượng tại chỗ với những liên hệ oxy và hóa học toàn đại dương.
+Trạng thái: Đã tìm thấy nguồn khởi đầu; cần đọc toàn văn khi viết kịch bản
+Nguồn khởi đầu: https://oceanexplorer.noaa.gov/wp-content/uploads/2023/02/chemosynthesis-fact-sheet.pdf
+
+
+072. Cá mập Greenland: đo tuổi một sinh vật sống rất lâu ra sao?
+Góc kể: Theo dấu vết đồng vị trong thủy tinh thể thay vì chỉ dùng kích thước.
+Hình gợi ý: Cá bơi chậm; vùng biển lạnh; mẫu minh họa.
+Cần kiểm chứng: Tuổi cá thể là ước tính có khoảng bất định, không phải sinh nhật chính xác.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+073. Cá băng Nam Cực: sống với máu thiếu hemoglobin bằng cách nào?
+Góc kể: Biến một đặc điểm sinh học lạ thành bài toán vận chuyển oxy và môi trường lạnh.
+Hình gợi ý: Cá băng; mô hình tuần hoàn; nước lạnh.
+Cần kiểm chứng: Không gộp mọi loài cá ở Nam Cực thành cùng một nhóm.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+074. Ếch gỗ: giới hạn giữa đóng băng và sống sót
+Góc kể: Theo quá trình thay đổi mùa, chất bảo vệ tế bào và sự hồi phục.
+Hình gợi ý: Ếch trưởng thành; lá mục; mô hình tế bào.
+Cần kiểm chứng: Không mô tả mọi tế bào đều đóng băng hoàn toàn hoặc hồi sinh sau mọi mức lạnh.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+075. Gấu nước: chúng chịu được bao nhiêu và không chịu được điều gì?
+Góc kể: Lần lượt kiểm tra khô hạn, nhiệt và bức xạ thay vì gọi chúng bất tử.
+Hình gợi ý: Kính hiển vi; giọt nước; trạng thái tun.
+Cần kiểm chứng: Liều, thời gian phơi nhiễm và trạng thái sinh vật quyết định kết quả.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+076. Bọt biển thủy tinh: kiểm tra lời đồn về tuổi thọ khổng lồ
+Góc kể: Theo cách ước tính tuổi, tốc độ tăng trưởng và giới hạn dữ liệu.
+Hình gợi ý: Đáy biển; mạng xương silic; phép đo.
+Cần kiểm chứng: Không dùng một con số gây sốc mà bỏ sai số hoặc cách suy tuổi.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+077. Khi một con cá voi chìm: sự sống quanh một cơ thể đã chết
+Góc kể: Theo các giai đoạn sinh thái từ mô mềm tới bộ xương.
+Hình gợi ý: Đáy biển; sinh vật ăn xác; vi khuẩn.
+Cần kiểm chứng: Thời gian từng giai đoạn phụ thuộc loài, độ sâu và môi trường.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+078. Cá mái chèo xuất hiện có dự báo được động đất?
+Góc kể: Dùng câu chuyện quen thuộc để giải thích phép thử tương quan và dự báo.
+Hình gợi ý: Cá mái chèo; biển sâu; dữ liệu sự kiện.
+Cần kiểm chứng: Không biến trùng hợp thành quan hệ nhân quả hay lời cảnh báo động đất.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+079. Vịnh phát sáng: mỗi đốm sáng trong nước đến từ đâu?
+Góc kể: Theo kích thích cơ học tới phản ứng phát quang và hệ sinh thái tại chỗ.
+Hình gợi ý: Sóng nhỏ phát sáng; giọt nước; vi sinh vật.
+Cần kiểm chứng: Màu và độ sáng cần gần thực tế, tránh dựng cả đại dương neon.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+080. Hồ nước muối dưới biển: vì sao có một ranh giới giống mặt hồ?
+Góc kể: Theo chênh lệch mật độ, hóa học và sinh vật quanh mép hồ.
+Hình gợi ý: ROV; mép hồ muối; mô hình hai lớp nước.
+Cần kiểm chứng: Không gọi đó là một đại dương tách rời hoặc áp chung tính độc cho mọi hồ.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+============================================================
+HIỆN VẬT VÀ ĐỜI SỐNG
+============================================================
+
+081. Đĩa trời Nebra: một vật nhỏ chứa bao nhiêu kiến thức bầu trời?
+Góc kể: Theo dấu vàng trên đồng tới bối cảnh tìm thấy, định tuổi và cách diễn giải.
+Hình gợi ý: Macro đĩa; trời đêm; mô hình góc nhìn.
+Cần kiểm chứng: Tách xác thực và niên đại khỏi các giả thuyết chức năng còn tranh luận.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+082. Sutton Hoo: chiếc mũ ghép từ những mảnh vỡ kể câu chuyện gì?
+Góc kể: Theo quá trình bảo tồn để mở mạng lưới kỹ thuật và biểu tượng thời Anglo-Saxon.
+Hình gợi ý: Mảnh kim loại; ghép phục dựng; kho bảo tàng.
+Cần kiểm chứng: Không gán tên người sở hữu khi chưa có chứng cứ định danh.
+Trạng thái: Đã tìm thấy nguồn khởi đầu; cần đọc toàn văn khi viết kịch bản
+Nguồn khởi đầu: https://www.nationaltrust.org.uk/visit/suffolk/sutton-hoo/history-of-sutton-hoo
+
+
+083. Tollund Man: vì sao đầm lầy giữ lại một cơ thể?
+Góc kể: Theo môi trường bảo tồn rồi tới thức ăn và các giới hạn suy luận về cái chết.
+Hình gợi ý: Mặt nước than bùn; mẫu thực vật; mô hình hóa học.
+Cần kiểm chứng: Trình bày hài cốt tôn trọng; nguyên nhân nghi lễ là diễn giải cần nguồn.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+084. Ngón chân giả Ai Cập: một vật nhỏ đã giúp đi lại thế nào?
+Góc kể: Theo cấu tạo và thử nghiệm bản sao để hỏi đồ vật dùng thực tế hay chỉ mang ý nghĩa mai táng.
+Hình gợi ý: Bản sao gỗ; dây buộc; bước chân người lớn.
+Cần kiểm chứng: Không suy mọi bộ phận phục dựng đều giống cách dùng ban đầu.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+085. Amesbury Archer: răng và xương giúp lần dấu một hành trình
+Góc kể: Đặt đồ tùy táng cạnh bằng chứng đồng vị để kiểm tra câu chuyện người từ xa.
+Hình gợi ý: Mộ mô hình; mũi tên; phân tích mẫu.
+Cần kiểm chứng: Đồng vị gợi vùng môi trường, không phải một tọa độ hay quốc tịch chắc chắn.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+086. Mũ sừng Viksø: vì sao hình ảnh quen thuộc dễ bị đặt sai thời đại?
+Góc kể: Dùng hình dáng gây chú ý để kể định tuổi và bối cảnh thời đồ đồng.
+Hình gợi ý: Mũ đồng; hoa văn; trưng bày.
+Cần kiểm chứng: Không gọi là mũ Viking; ghi rõ việc phục dựng công dụng còn có giả thuyết.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+087. Khối mười hai mặt La Mã: vì sao chức năng vẫn chưa thống nhất?
+Góc kể: Đưa từng giả thuyết vào phép thử kích thước, phân bố và dấu sử dụng.
+Hình gợi ý: Macro lỗ; các bản sao; bản đồ phát hiện.
+Cần kiểm chứng: Một thử nghiệm khả thi không chứng minh đó là công dụng lịch sử.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+088. Đội quân đất nung: màu sắc đã mất đi như thế nào?
+Góc kể: Theo lớp màu từ đất ẩm tới lúc khai quật và quá trình bảo tồn.
+Hình gợi ý: Bề mặt tượng; lớp sơn; phòng bảo tồn.
+Cần kiểm chứng: Phục dựng màu phải theo mẫu phân tích, không tô tùy ý.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+089. ★ Cốc Lycurgus: vì sao đổi hướng sáng lại đổi màu?
+Góc kể: Dùng một cú xoay ánh sáng để mở cấu trúc vật liệu và kỹ thuật chế tạo.
+Hình gợi ý: Chiếu trước sau; macro thủy tinh; mô hình hạt.
+Cần kiểm chứng: Cấu trúc nano không đồng nghĩa thợ cổ có lý thuyết nano hiện đại.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+090. Bản đồ sao Đôn Hoàng: nhìn bầu trời qua một cuộn giấy cổ
+Góc kể: Theo các chấm sao và cách bố trí để kể tri thức quan sát và lịch sử bản thảo.
+Hình gợi ý: Cuộn giấy; sao đêm; đối chiếu vị trí.
+Cần kiểm chứng: Phân biệt lịch sử sao được vẽ với thời điểm bản sao được tạo.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+============================================================
+ĐIỀU TRA CÁC LỜI ĐỒN
+============================================================
+
+091. Piltdown: một phát hiện nổi tiếng bị lật lại bằng cách nào?
+Góc kể: Cho người xem đi từ vật liệu được ghép tới các phép kiểm tra phơi bày giả mạo.
+Hình gợi ý: Bản sao sọ; dấu xử lý; phòng đo.
+Cần kiểm chứng: Tránh biến sai lầm lịch sử thành khẳng định toàn bộ tiến hóa là giả.
+Trạng thái: Đã tìm thấy nguồn khởi đầu; cần đọc toàn văn khi viết kịch bản
+Nguồn khởi đầu: https://www.nhm.ac.uk/discover/news/2016/august/piltdown-man-charles-dawson-likely-fraudster.html
+
+
+092. ★ Bản đồ Vinland: vật liệu mực đã làm thay đổi kết luận ra sao?
+Góc kể: Theo cuộc tranh luận và phép phân tích khiến một hiện vật bị xác định là giả.
+Hình gợi ý: Bản đồ; thiết bị phân tích; nét mực.
+Cần kiểm chứng: Bản đồ giả không phủ nhận bằng chứng độc lập về người Norse ở Bắc Mỹ.
+Trạng thái: Đã tìm thấy nguồn khởi đầu; cần đọc toàn văn khi viết kịch bản
+Nguồn khởi đầu: https://news.yale.edu/2021/09/01/analysis-unlocks-secret-vinland-map-its-fake
+
+
+093. Glozel: vì sao bối cảnh tìm thấy quan trọng như chính hiện vật?
+Góc kể: Theo các lớp hồ sơ và phép định tuổi để giải thích một tranh cãi khảo cổ kéo dài.
+Hình gợi ý: Hiện vật; hồ sơ khai quật; mẫu định tuổi.
+Cần kiểm chứng: Không coi toàn bộ tập hợp có một kết luận đồng nhất nếu nghiên cứu khác nhau.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+094. Pin Baghdad: tạo ra điện có chứng minh đó là công dụng cổ?
+Góc kể: Đặt thí nghiệm bản sao cạnh bối cảnh khảo cổ và những bằng chứng còn thiếu.
+Hình gợi ý: Bình gốm; kim loại; phép đo minh họa.
+Cần kiểm chứng: Khả năng kỹ thuật không đồng nghĩa mục đích chế tạo đã được chứng minh.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+095. Đèn Dendera: đọc một phù điêu bằng bối cảnh thay vì hình dáng
+Góc kể: So cách giải thích hình ảnh với chữ và hệ biểu tượng trong đền.
+Hình gợi ý: Phù điêu; chi tiết ký hiệu; không gian đền.
+Cần kiểm chứng: Không dựng thiết bị điện tưởng tượng như hiện vật khảo cổ thật.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+096. Những ngọn đồi Bosnia: làm sao kiểm tra một tuyên bố kim tự tháp?
+Góc kể: Đưa hình dáng bên ngoài vào phép thử địa chất, phân tầng và dấu xây dựng.
+Hình gợi ý: Đồi; lớp đá; mặt cắt địa chất.
+Cần kiểm chứng: Không lặp lời quảng bá như một di tích được công nhận.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+097. Yonaguni: các bậc dưới biển là tự nhiên hay do con người sửa đổi?
+Góc kể: Đối chiếu cấu trúc đá, khe nứt và yêu cầu bằng chứng cho can thiệp nhân tạo.
+Hình gợi ý: Lặn góc rộng; mặt đá; khe nứt.
+Cần kiểm chứng: Ghi rõ tranh luận; hình vuông hay cạnh thẳng chưa đủ chứng minh công trình.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+098. Tượng moai có thể bước đi: thử nghiệm giải được điều gì?
+Góc kể: Theo cơ học dây kéo và độ nghiêng để hiểu một phương án vận chuyển.
+Hình gợi ý: Tượng bản sao; dây; thử nghiệm người lớn.
+Cần kiểm chứng: Không coi một cách làm được là bằng chứng mọi tượng từng được chuyển cùng cách.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+099. Bản đồ Piri Reis: điều gì thật sự được vẽ ở mép bản đồ?
+Góc kể: So ký hiệu, nguồn bản đồ và địa lý thay vì dựa vào đường viền gây liên tưởng.
+Hình gợi ý: Bản đồ; hải đồ; đối chiếu bờ biển.
+Cần kiểm chứng: Không coi lời đồn Nam Cực không băng là kết luận được chấp nhận.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất
+
+
+100. Hiện vật Coso: vì sao một lớp vỏ đá dễ làm ta đoán sai tuổi?
+Góc kể: Theo nhận dạng vật thể và quá trình tạo lớp bọc để kiểm tra câu chuyện đồ vật lạc thời.
+Hình gợi ý: Vật mẫu mô hình; mặt cắt lớp bọc; đối chiếu linh kiện.
+Cần kiểm chứng: Tuổi lớp bọc và tuổi đồ vật phải được kiểm tra riêng.
+Trạng thái: Đề xuất biên tập; cần tra cứu nguồn trước khi sản xuất

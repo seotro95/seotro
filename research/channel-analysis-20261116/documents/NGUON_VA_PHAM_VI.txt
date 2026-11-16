@@ -1,0 +1,58 @@
+NGUỒN VÀ PHẠM VI KIỂM CHỨNG — 16/11/2026
+
+Kênh người dùng yêu cầu:
+https://www.youtube.com/@Alex_Science-i4u/videos
+https://www.youtube.com/@mysteryyoftheworld
+
+YouTube bị throttled qua công cụ duyệt; HTTP từ môi trường làm việc bị proxy từ chối. Không vượt chặn. Không có dữ liệu Analytics nội bộ.
+
+Mô tả thứ cấp có nhắc chính xác @alex_science-i4u: https://channeldb.com/c/%40whatwasthatancienthistory/similar
+Chỉ dùng để nhận diện sơ bộ mảng khoa học, khảo cổ, lịch sử; chưa kiểm chứng từng video. Không dùng thống kê của trang này làm kết quả khảo sát.
+
+Không dùng các kênh có tên gần giống như @mysteryworld hay @mysteries.oftheworld thay cho @mysteryyoftheworld.
+
+Mẫu tham khảo đã có: https://github.com/seotro95/seotro/releases/tag/video
+Asset: video.c.a.toi.mp4
+SHA256: f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c
+Đã đọc transcript và xem bảng khung hình lưu trong phiên trước; không vừa xem liên tục toàn bộ video và không xác nhận tác giả/kênh gốc. Transcript tự động có lỗi, không dùng như nguồn khoa học độc lập.
+
+Các nguồn sau đã xuất hiện trong kết quả tìm kiếm của lượt này, dùng làm điểm bắt đầu nghiên cứu. Chưa kiểm tra toàn bộ 100 đề tài ở mức viết kịch bản.
+
+S1. Smithsonian Human Origins — Jebel Irhoud
+https://humanorigins.si.edu/research/whats-hot-human-origins/our-species-arose-least-300000-years-ago
+
+S2. Nature — Earliest modern human genomes constrain timing of Neanderthal admixture
+https://www.nature.com/articles/s41586-024-08420-x
+
+S3. Science / PubMed — Two thousand years of garden urbanism in the Upper Amazon
+https://pubmed.ncbi.nlm.nih.gov/38207020/
+
+S4. UNESCO — Dholavira: a Harappan City
+https://whc.unesco.org/en/list/1645/
+
+S5. Nature — Decoding the ancient Greek astronomical calculator known as the Antikythera Mechanism
+https://www.nature.com/articles/nature05357
+
+S6. Science Advances / PubMed — Hot mixing: Mechanistic insights into the durability of ancient Roman concrete
+https://pubmed.ncbi.nlm.nih.gov/36608117/
+
+S7. Oxford — Herculaneum scroll, 7 February 2025
+https://www.ox.ac.uk/news/2025-02-07-inside-herculaneum-scroll-seen-first-time-almost-2000-years
+
+S8. UNESCO — Pavlopetri
+https://www.unesco.org/en/articles/pavlopetri-named-2016-world-monuments-watch-site
+
+S9. NOAA — Chemosynthesis Fact Sheet
+https://oceanexplorer.noaa.gov/wp-content/uploads/2023/02/chemosynthesis-fact-sheet.pdf
+
+S10. National Trust — History of Sutton Hoo
+https://www.nationaltrust.org.uk/visit/suffolk/sutton-hoo/history-of-sutton-hoo
+
+S11. Natural History Museum — Piltdown hoax research
+https://www.nhm.ac.uk/discover/news/2016/august/piltdown-man-charles-dawson-likely-fraudster.html
+
+S12. Yale — Vinland Map analysis, 1 September 2021
+https://news.yale.edu/2021/09/01/analysis-unlocks-secret-vinland-map-its-fake
+
+Nguồn bổ sung cho cập nhật bê tông La Mã (2025):
+https://news.mit.edu/2025/pompeii-offers-insights-ancient-roman-building-technology-1209
