@@ -45,7 +45,7 @@ body=Path(a.manifest).with_name('RELEASE_BODY.md').read_text()
 if matches:
  release=matches[0];assert release['draft'], 'This job only manages its own draft release.'
 else:
- release=request(api+'/releases','POST',{'tag_name':manifest['release_tag'],'target_commitish':os.environ['GITHUB_SHA'],'name':'Kailasa 001 — 22:32 | 136 prompts | 16 male voices','draft':True,'prerelease':False,'body':body})
+ release=request(api+'/releases','POST',{'tag_name':manifest['release_tag'],'target_commitish':os.environ['GITHUB_SHA'],'name':'Kailasa 007 — 22:32 | 136 prompts | 16 male voices','draft':True,'prerelease':False,'body':body})
 release_id=release['id'];upload=release['upload_url'].split('{')[0]
 for asset in manifest['assets']:
  current=request(api+f'/releases/{release_id}/assets?per_page=100')
@@ -88,6 +88,6 @@ except urllib.error.HTTPError as e:
  if e.code!=404:raise
 summary=Path(os.environ['GITHUB_STEP_SUMMARY'])
 with summary.open('a') as f:
- f.write('## Kailasa 001 delivery verified\n\n'+release['html_url']+'\n\n')
+ f.write('## Kailasa 007 delivery verified\n\n'+release['html_url']+'\n\n')
  for r in verified:f.write(f"- [{r['name']}]({r['download_url']}) — SHA-256 verified\n")
 print(json.dumps({'release_id':release_id,'html_url':release['html_url'],'verified_assets':len(verified)}),flush=True)

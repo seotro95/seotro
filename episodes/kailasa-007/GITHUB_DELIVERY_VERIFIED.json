@@ -1,0 +1,214 @@
+{
+  "status": "all_expected_assets_uploaded_and_server_digests_verified",
+  "release_id": 447548313,
+  "release_name": "Kailasa 007 — 22:32 | 136 prompts | 16 male voices",
+  "draft": true,
+  "html_url": "https://github.com/seotro95/seotro/releases/tag/untagged-2da3a5710df9d8f693a3",
+  "tag_name": "untagged-2da3a5710df9d8f693a3",
+  "requested_release_tag": "kailasa-007-22m32s",
+  "source_commit": "6b304b61a37668f7c30f2f74509957ce9946ae34",
+  "workflow_run_id": 43946283297,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/43946283297",
+  "workflow_conclusion": "success",
+  "metadata_workflow_run_id": 43946561268,
+  "metadata_workflow_conclusion": "success",
+  "target_seconds": 1352,
+  "voice_count": 16,
+  "prompt_count": 136,
+  "prompt_txt_files": 14,
+  "assets": [
+    {
+      "name": "KAILASA_007_14_TXT_PROMPTS.zip",
+      "asset_id": 756266245,
+      "bytes": 48642,
+      "sha256": "2e62cc10333017e688f3f7ebc4264b83bf0662610e6ea0eca69634b7d7dfea7a",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_14_TXT_PROMPTS.zip",
+      "kind": "documents_zip"
+    },
+    {
+      "name": "KAILASA_007_16_VOICES_22m32s.zip",
+      "asset_id": 756266313,
+      "bytes": 228285509,
+      "sha256": "7ec55e196633fdd57953d05c676e2b0c5c70512d6533b7073ab9c2ce392d3ea5",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_16_VOICES_22m32s.zip",
+      "kind": "voices_zip"
+    },
+    {
+      "name": "KAILASA_007_TAI_LIEU_22m32s.zip",
+      "asset_id": 756266746,
+      "bytes": 822511,
+      "sha256": "78081d6ec41291667ee57bdbe0dc914f97c24401f7b0638b1f021f9d09422863",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_TAI_LIEU_22m32s.zip",
+      "kind": "documents_zip"
+    },
+    {
+      "name": "KAILASA_007_Anh_Andrew_22m32s.mp3",
+      "asset_id": 756266821,
+      "bytes": 16225100,
+      "sha256": "13e3d7d39e6209b72df5134603b807077b914fe6a686c577e52a4df00228bde8",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Anh_Andrew_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Viet_Nam_Nam_Minh_22m32s.mp3",
+      "asset_id": 756266941,
+      "bytes": 16225100,
+      "sha256": "1bb251d4d021c7b886577f20cfe74bb63ba8c8a6e72694e322a02d9f94a8295e",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Viet_Nam_Nam_Minh_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Tay_Ban_Nha_22m32s.mp3",
+      "asset_id": 756267059,
+      "bytes": 16225100,
+      "sha256": "b7d19da4291554c20c921a5c2df4b64ef47031f270b1c21332023df004e9b004",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Tay_Ban_Nha_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Phap_22m32s.mp3",
+      "asset_id": 756267172,
+      "bytes": 16225100,
+      "sha256": "abd8270c87f87259752306f5c51ceee0b64c0e014d5277a4ce4ab08f3ddfd69f",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Phap_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Nhat_Ban_22m32s.mp3",
+      "asset_id": 756267302,
+      "bytes": 16225100,
+      "sha256": "1c8649a26be759efea955ae34ff0b80eceb13cdadc30181e4e94022e002d28ab",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Nhat_Ban_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Han_Quoc_22m32s.mp3",
+      "asset_id": 756267395,
+      "bytes": 16225100,
+      "sha256": "1809ab4bdb4a0393ce681c62f64b7f0d042c151c0b62f72ec84858293775d9f1",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Han_Quoc_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Duc_22m32s.mp3",
+      "asset_id": 756267498,
+      "bytes": 16225100,
+      "sha256": "3ef89c5e5eef4cb13983a43dc50e2cee74b927f96520d4e1be73e4de0aaad7db",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Duc_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Y_22m32s.mp3",
+      "asset_id": 756267600,
+      "bytes": 16225100,
+      "sha256": "fcf61ca377dab9690344a88e3f4edf7f365859c6d0de7d5e9bc3285354abb144",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Y_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Bo_Dao_Nha_22m32s.mp3",
+      "asset_id": 756267725,
+      "bytes": 16225100,
+      "sha256": "f14c15b3bf316cd8760d2de2eca1d8be80478fd8c61303cc5ee9e3a6da9476ae",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Bo_Dao_Nha_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Ha_Lan_22m32s.mp3",
+      "asset_id": 756267847,
+      "bytes": 16225100,
+      "sha256": "192fbdaff62959e5a9f7192951886e04818800c3b5164867920edbae1980e58c",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Ha_Lan_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Ba_Lan_22m32s.mp3",
+      "asset_id": 756267976,
+      "bytes": 16225100,
+      "sha256": "94b748e02638f45e2dcdbab197c1453e4262fc0e291ae0a6ace4e7430506a6f7",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Ba_Lan_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Thuy_Dien_22m32s.mp3",
+      "asset_id": 756268120,
+      "bytes": 16225100,
+      "sha256": "89082498102133d25781639c463f73f1b94707b2c5f16742fbeb2294d6d44b5e",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Thuy_Dien_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Dan_Mach_22m32s.mp3",
+      "asset_id": 756268332,
+      "bytes": 16225100,
+      "sha256": "2a5f94fd3af2357fcc59904ecd470266b1a95ec0009a789da6ae35f1ccb0e186",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Dan_Mach_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Phan_Lan_22m32s.mp3",
+      "asset_id": 756268493,
+      "bytes": 16225100,
+      "sha256": "98be1568ff98c7fdf68a7b3bea0ce919b7dade4dc025aaea20d0c43f01e1a257",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Phan_Lan_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Na_Uy_22m32s.mp3",
+      "asset_id": 756268634,
+      "bytes": 16225100,
+      "sha256": "4b89e721cd5271236d3ff31e5ee3f69784e305c557971b5541a21d6c564ac4f4",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Na_Uy_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "KAILASA_007_Sec_22m32s.mp3",
+      "asset_id": 756268764,
+      "bytes": 16225100,
+      "sha256": "b6872e1947b2c1ebfa18cce3bd931bd847de0c63643700accf5ac5aefc96a548",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KAILASA_007_Sec_22m32s.mp3",
+      "kind": "voice_mp3"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED.json",
+      "asset_id": 756268920,
+      "bytes": 31034,
+      "sha256": "ce8c87d0e1be9a49e87ef9cb8d6a3d2f50568f51002ab5d4646a49b33e7cd909",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/VOICE_PROFILES_LOCKED.json",
+      "kind": "voice_profiles"
+    },
+    {
+      "name": "KICH_BAN_ANH_22m32s.txt",
+      "asset_id": 756268985,
+      "bytes": 27476,
+      "sha256": "6a793c447b80127852a82950f620320e17995d2af66592960963f429eda51e85",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KICH_BAN_ANH_22m32s.txt",
+      "kind": "script"
+    },
+    {
+      "name": "KICH_BAN_VIET_22m32s.txt",
+      "asset_id": 756269062,
+      "bytes": 30190,
+      "sha256": "d7edecfe7c628837938355bafa3e98676f00fcd564f6886af14c9579c309d822",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/KICH_BAN_VIET_22m32s.txt",
+      "kind": "script"
+    },
+    {
+      "name": "5_TIEU_DE_VA_5_THUMBNAIL.txt",
+      "asset_id": 756269106,
+      "bytes": 8256,
+      "sha256": "591d58540635e0c37d065a3bd7523a1cb91b511106e05d30c84cf9f675fe3372",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/5_TIEU_DE_VA_5_THUMBNAIL.txt",
+      "kind": "titles_thumbnails"
+    },
+    {
+      "name": "VOICE_QA.json",
+      "asset_id": 756269155,
+      "bytes": 9204,
+      "sha256": "5675ce4802c2a2672d1fc56268afc034b4915d488b56dca429f9429d55b67c3e",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-2da3a5710df9d8f693a3/VOICE_QA.json",
+      "kind": "validation"
+    }
+  ]
+}
+
