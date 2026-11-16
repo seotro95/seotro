@@ -1,0 +1,60 @@
+name: Ollantaytambo 004 English Andrew short-request recovery
+on:
+  push:
+    branches: [codex/ollantaytambo-004-production-20261117]
+    paths: ['.github/workflows/ollantaytambo-004-english-recovery.yml']
+permissions:
+  contents: read
+concurrency:
+  group: ollantaytambo-004-english-short160-recovery
+  cancel-in-progress: false
+jobs:
+  english:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: production/ollantaytambo004
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install standard audio tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install -r production/ollantaytambo004/requirements.txt
+          python -m py_compile production/ollantaytambo004/render_voices.py production/ollantaytambo004/vendor/*.py
+      - uses: actions/cache@v4
+        with:
+          path: work/voice_render/en/**/raw_*
+          key: 004-en-short160-v1-${{ hashFiles('production/ollantaytambo004/script_master.json') }}
+          restore-keys: 004-en-short160-v1-
+      - name: Create full English narration with same Andrew voice and short native requests
+        run: >-
+          python -u production/ollantaytambo004/render_voices.py
+          --script production/ollantaytambo004/script_master.json
+          --translations production/ollantaytambo004/translations
+          --out outputs/voices --work work/voice_render
+          --languages en --workers 1 --piece-limit 160
+      - name: Upload verified English track and exact WAV
+        uses: actions/upload-artifact@v4
+        with:
+          name: 004_voice_en
+          path: outputs/voices/
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+      - name: Preserve verified speech checkpoints if interrupted
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 004_english_short160_checkpoint
+          path: |
+            work/voice_render/en/**/raw_*
+            work/voice_render/en/**/REPORT.json
+            work/voice_render/en/PENDING.json
+            outputs/voices/*.json
+          if-no-files-found: ignore
+          retention-days: 7

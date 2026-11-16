@@ -1,43 +1,66 @@
-# Ghi chú về video nguồn và phương án dựng
+# Phân tích hình ảnh và nhịp dựng của video nguồn
 
-## Phạm vi đã kiểm tra
+Đã tải và kiểm tra tệp [video.c.a.toi.mp4 do người dùng cung cấp](https://github.com/seotro95/seotro/releases/download/video/video.c.a.toi.mp4). Mã SHA-256 khớp metadata GitHub: `f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c`.
 
-Đã kiểm tra metadata của [bản phát hành GitHub do người dùng cung cấp](https://github.com/seotro95/seotro/releases/tag/video), qua [GitHub Releases API](https://api.github.com/repos/seotro95/seotro/releases/tags/video).
+## Dữ liệu thực đo và phạm vi xem
 
-- Tên bản phát hành: **Video AI 20 Phút**.
-- Tệp đính kèm duy nhất: **video.c.a.toi.mp4**.
-- Kích thước ghi trong metadata: **340.611.128 byte**.
-- Ngày công bố ghi trong metadata: **09/11/2026**.
-- [Liên kết tải MP4](https://github.com/seotro95/seotro/releases/download/video/video.c.a.toi.mp4).
-- SHA-256 ghi trong metadata: `f1a8659dbccd4db12a79e3c18ea2e1fe08f46f7a03c42bc2250f454f69eff70c`.
-- Nội dung mô tả bản phát hành để trống. Metadata không cung cấp transcript hoặc thời lượng đã đo. Tên “20 Phút” không thay thế việc đo thời lượng thật.
+| Thuộc tính | Kết quả |
+|---|---|
+| Thời lượng tệp | **21:02.933** — 1.262,933 giây |
+| Hình | 1.280 × 720, ngang 16:9, H.264, progressive |
+| Tốc độ khung hình khai báo | 60 fps; đây là thông số tệp, không chứng minh có 60 hình chuyển động riêng biệt mỗi giây |
+| Âm thanh trong tệp | AAC, 44,1 kHz, stereo |
+| Kích thước | 340.611.128 byte |
+| Phạm vi kiểm tra bằng mắt | 35 khung đại diện xuyên suốt video; thêm 9 khung ở ba đoạn ngắn để so sánh thay đổi bố cục/chủ thể |
+| Phân tích nhịp hình | Quét toàn tệp bằng FFmpeg, lấy mẫu 4 fps, ảnh rộng 320 px, ngưỡng đổi cảnh 0,25 |
 
-Môi trường Cloud khởi động thất bại với lỗi **503** trước khi có thể tải, mở, trích khung hình, đo thời lượng hoặc nghe âm thanh của MP4. Vì vậy, bộ tài liệu này **không khẳng định đã xem hay phân tích cách dựng thực tế của video nguồn**. Các lựa chọn nhịp kể, máy quay và minh họa dưới đây là đề xuất sản xuất mới.
+**Chưa nghe hoặc chép lời âm thanh nguồn.** Vì vậy, tài liệu này không kết luận về giới tính người đọc, tốc độ lời bình, cấu trúc lập luận bằng lời, nhạc, hiệu ứng âm thanh hay điểm nhấn giọng nói. Đây là phân tích phần hình lấy mẫu và chỉ báo nhịp dựng, không phải tuyên bố đã xem/nghe toàn bộ video theo thời gian thực.
 
-## Cơ sở của kịch bản mới
+Thời lượng **21:42** của dự án Ollantaytambo là mục tiêu mới, dài hơn tệp tham chiếu khoảng **39,067 giây**.
 
-Kịch bản Ollantaytambo là nội dung nguyên bản, dựa theo công thức sản xuất mà người dùng đã cung cấp: mở bằng quy mô và câu hỏi, định vị địa hình, đưa bằng chứng, giải thích cơ chế, tăng trở ngại, đối chiếu khả năng, rồi trở lại hình ảnh mở đầu.
+## Những đặc điểm hình ảnh có thể quan sát
 
-Câu chuyện đi theo bài toán địa hình và tổ chức: nguồn đá Kachiqhata/Cachicata → xuống sườn núi → vượt thung lũng và sông Urubamba → lên công trường → cung cấp nhân lực, vật liệu và bảo trì. Bản dựng phải phân biệt dấu tích được quan sát với phương án kỹ thuật đang được minh họa.
+Qua các mốc lấy mẫu, nguồn đan xen ba lớp hình: tái hiện sinh hoạt trong môi trường lạnh, vật chứng/khảo cổ, và đồ họa khoa học hoặc nghiên cứu hiện đại. Đây là mô tả những gì hiện trên hình; ý nghĩa lập luận đầy đủ cần đối chiếu lời bình.
 
-Nguồn khảo cổ dùng để kiểm tra nội dung gồm [nghiên cứu của Jean-Pierre Protzen về khai thác và gia công đá Inca](https://veda.wiki/images/2/22/1985_Inca_Quarrying_and_Stonecutting_by_Jean-Pierre_Protzen.pdf) và [chuyên khảo được Thư viện Quốc gia Peru lưu trữ](https://repositoriodigital.bnp.gob.pe/bnp/recursos/2/html/arquitectura-y-construccion-incas/186/). Đường vận chuyển, khối đá bỏ lại và công trình đã dựng hỗ trợ lập luận địa lý; chúng không xác định đầy đủ cách buộc dây, số người hoặc kỹ thuật vượt sông.
+| Mốc đại diện | Nội dung nhìn thấy | Vai trò hình ảnh có thể tham khảo |
+|---|---|---|
+| 00:00–00:05 | Người trẻ bên dòng nước đóng băng; khung hình nới rộng dần, có nhãn thời gian ngắn ở một khung | Đặt nhân vật và điều kiện môi trường ngay đầu; chuyển động máy chậm trong một cảnh |
+| 00:10, 00:15–00:20 | Góc cao khu khảo cổ; đồ họa địa cầu có điểm định vị | Chuyển từ cảnh cụ thể sang vị trí địa lý |
+| 00:25–01:15 | Nhóm người trên đồng lạnh, voi ma mút, sách minh họa, nơi trú và dựng nhà tuyết | Luân phiên quy mô môi trường, hoạt động và giải pháp vật chất |
+| 01:45, 02:00, 02:30 | Lửa; mặt cắt nơi trú và mô hình phân bố nhiệt bằng sắc cam | Dùng mô hình để làm cơ chế vô hình trở nên nhìn thấy được |
+| 03:00, 04:00–04:04, 05:00 | Đồ họa cơ thể, cận tay/vật liệu, người nghiên cứu và màn hình phòng thí nghiệm | Chuyển giữa giải thích, chi tiết xúc giác và bối cảnh nghiên cứu |
+| 07:00, 10:00 | Mộ khai quật; công trình vòng bằng xương và người khảo sát | Đưa vật chứng hoặc bối cảnh khảo cổ trở lại câu chuyện |
+| 08:00–09:00, 11:00 | Mặt cắt vật liệu lông, mô hình cơ thể, các mẫu xương trên nền đồ họa | Xen hình vật liệu với mô hình giải thích |
+| 12:00–14:00 | Cảnh nơi trú, nhóm người quanh nguồn sáng và bộ xương trong địa tầng | Đổi cỡ cảnh, tông sáng và loại hình để tránh kéo dài một chất liệu thị giác |
+| 15:00–21:00 | Cây/vật liệu, dấu khắc, địa cầu, DNA, phòng thí nghiệm, mặt cắt nhà hiện đại, biểu tượng xương và lửa | Mở rộng liên hệ giữa vật liệu, bằng chứng và mô hình hiện đại; không đủ để suy ra chính xác luận điểm lời bình |
 
-## Quy tắc hình ảnh và thời lượng
+Nguồn có các lá cờ quốc gia ở một số cảnh mở và biểu tượng địa cầu nhỏ ở góc hình. Có cả nhân vật trông như trẻ em. Bản Ollantaytambo giữ yêu cầu riêng của người dùng: **mọi nhân vật đều là người trưởng thành từ 25 tuổi trở lên; không có trẻ em, thiếu niên hay trẻ sơ sinh; không sao chép cờ hoặc logo của nguồn.**
 
-- Tổng thời lượng dựng: **21 phút 42 giây = 1.302 giây**.
-- Cảnh **1–130**: mỗi cảnh dùng **10 giây**.
-- Cảnh **131**: tạo nguồn **10 giây**, chỉ dùng **2 giây đầu**; fade được thêm khi dựng. Tổng nguồn tạo là 21:50, cắt bỏ 8 giây ở cảnh cuối.
-- Có **131 prompt**, đóng thành **14 tệp TXT**: 13 tệp đầu mỗi tệp 10 prompt, tệp cuối chứa prompt 131.
-- Mỗi prompt yêu cầu một cú máy liên tục, hình ngang 16:9, mục tiêu 4K/24fps. Khả năng xuất thực tế tùy hệ thống tạo video.
-- Tất cả clip tạo phải **hoàn toàn không có âm thanh, lời nói, lời bình, nhạc, tiếng môi trường hoặc hiệu ứng âm thanh**. Giọng đọc được ghép riêng trong bản dựng.
-- **Không có trẻ em, trẻ sơ sinh hoặc thiếu niên.** Mọi người xuất hiện phải rõ ràng là người trưởng thành từ 25 tuổi trở lên.
-- Không tạo chữ, phụ đề, logo hay watermark bên trong hình. Nhãn “mô phỏng”, chú thích bản đồ và nguồn được thêm ở phần dựng khi phù hợp.
-- Cảnh tái dựng cổ đại dùng bối cảnh Inca cuối thế kỷ XV, vật liệu và trang phục hợp lý. Cảnh khảo sát hiện đại giữ trang bị hiện đại rõ ràng để tránh nhầm thời kỳ.
-- Đường dây, xe trượt, con lăn, cơ cấu đòn bẩy và phương án vượt sông chỉ xuất hiện như giả thuyết hoặc mô hình giải thích khi lời bình cho phép. Không biến hình do AI tạo thành bằng chứng khảo cổ.
-- Không tự gán trọng lượng từng khối, số công nhân chính xác, đường đi GPS chính xác, cấu hình dây hoặc cách vượt sông là sự thật đã được xác định.
+Tông hình thường phối ngoại cảnh lạnh xanh/xám với vùng lửa hoặc mô hình màu cam ấm. Hình tái hiện có vẻ ngoài gần ảnh thật được xen với mô hình 3D minh họa rõ rệt. Không thể dùng riêng các khung này để xác nhận hình nào là tư liệu thật và hình nào được tạo bằng AI.
 
-## Gợi ý cách dựng
+Các góc nhìn nổi bật trong mẫu gồm toàn cảnh cao, trung cảnh hoạt động, cận bàn tay/vật liệu, góc nghiêng mô hình và mặt cắt. So sánh 00:00/00:02.5/00:05 cho thấy bố cục lùi/nới rộng; 00:15/00:17.5/00:20 cho thấy địa cầu thay đổi góc nhẹ; 04:00/04:02/04:04 giữ cận cảnh tay trong khi hành động thay đổi. Không suy ra loại ống kính hay thiết bị quay thật từ hình mô phỏng.
 
-Xen hình phong cảnh rộng để hiểu địa hình, cận chi tiết để nhìn vật liệu, và mô hình/cắt lớp để hiểu cơ chế. Mỗi cảnh 10 giây có một nhiệm vụ rõ ràng và một chuyển động máy chính; các chuyển cảnh được thực hiện ở phần dựng. Trở lại bố cục bức tường mở đầu gần cuối để người xem thấy cùng một công trình với hiểu biết mới.
+## Nhịp dựng định lượng
 
-Năm tiêu đề và năm prompt thumbnail trong tệp đi kèm là đề xuất mới cho kịch bản Ollantaytambo, không phải nội dung được trích hoặc sao chép từ video nguồn. Dòng chữ thumbnail được thêm thủ công sau khi tạo hình.
+Bộ dò tìm thấy **201 lần thay đổi hình vượt ngưỡng**. Sau khi gộp các phát hiện cách nhau dưới 0,75 giây còn **176 mốc ứng viên**. Khoảng giữa các mốc có trung vị **6,25 giây**, trung bình **7,14 giây**, nhỏ nhất **3 giây**, lớn nhất **18,75 giây**.
+
+Đây là **chỉ báo tần suất đổi hình**, không phải số cú cắt hoặc độ dài cảnh đã kiểm chứng thủ công. Chuyển động lớn có thể tạo phát hiện thừa; dissolve hoặc cảnh cắt có màu/bố cục tương tự có thể bị bỏ sót. Vì thế, không ghi “video có đúng 177 cảnh” hoặc dùng các số trên như bảng edit chính xác. Danh sách mốc và phương pháp được lưu trong hồ sơ kiểm tra kỹ thuật; các số trên chỉ phục vụ so sánh nhịp hình.
+
+Về cảm nhận cấu trúc hình, nguồn thay chất liệu thị giác khá thường xuyên: phong cảnh → hoạt động → đồ họa định vị → chi tiết → mô hình cơ chế → khảo cổ/nghiên cứu. Bộ Ollantaytambo nên học sự luân phiên này và sự liên hệ giữa hình với câu giải thích.
+
+## Áp dụng vào bản Ollantaytambo 21:42
+
+Giữ cấu trúc gốc do người dùng đưa: câu hỏi trung tâm → địa hình và nguồn đá → bằng chứng → từng bước kỹ thuật → trở ngại → đối chiếu → trở lại bức tường. Không gán cấu trúc lời bình này cho video nguồn khi chưa nghe âm thanh.
+
+- **Toàn cảnh** dùng cho thung lũng, hai sườn núi, sông và công trường: người xem luôn biết khối đá đang phải đi đâu.
+- **Cận cảnh** dùng cho đá rhyolite hồng, bề mặt tiếp xúc, dây sợi, công cụ và vật liệu kê: mỗi cảnh giải quyết một chi tiết lời bình đang nói tới.
+- **Mặt cắt/mô hình** dùng cho địa hình, lực kéo, độ dốc, nền đường, khả năng vượt sông: mô hình giải thích phải tách biệt với vật chứng được ghi nhận.
+- **Con người trưởng thành** dùng để thấy tỷ lệ, phối hợp, cung cấp và bảo trì; không dùng đám đông hoặc con số lao động tưởng tượng để chứng minh quy mô.
+- Giữ bảng màu đất/đá ấm và núi xanh xám. Dùng cam tiết chế cho đường đi hoặc phần cơ chế cần chú ý; tránh ánh sáng giả làm dữ liệu khoa học.
+- Nguồn có chỉ báo đổi hình khoảng 6–7 giây, còn yêu cầu mới là clip 10 giây. Mỗi clip 10 giây vì vậy cần một chuyển động máy rõ và một hành động nhỏ có tiến triển; không lặp khung tĩnh 10 giây ở mọi cảnh.
+
+**131 prompt hiện có đều khớp thứ tự lời bình, yêu cầu clip im lặng và chỉ có người trưởng thành.** Cảnh 1–130 dùng 10 giây; cảnh 131 tạo 10 giây nhưng dùng 2 giây đầu: tổng dựng **1.302 giây = 21:42**. Các clip tạo không có lời nói, lời bình, nhạc, âm môi trường hay hiệu ứng. Giọng đọc được ghép riêng. Không tạo chữ/phụ đề/logo trong hình; nhãn địa danh, nguồn và “mô phỏng” được thêm khi dựng.
+
+Cách buộc dây, con lăn, xe trượt, đòn bẩy và kỹ thuật vượt sông vẫn phải được gọi đúng mức bằng chứng. Hình đẹp trong nguồn hoặc hình do mô hình tạo không tự trở thành bằng chứng khảo cổ.
+
+Các khung trích nguồn được giữ riêng để kiểm tra. Bộ tài liệu Ollantaytambo không bao gồm ảnh nguồn có trẻ em.

@@ -10,10 +10,12 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--artifacts",type=Path,default=Path("work/voice_artifacts"))
     ap.add_argument("--out",type=Path,default=Path("outputs/voices"))
+    ap.add_argument("--english-dir",type=Path,default=None)
     args=ap.parse_args();args.out.mkdir(parents=True,exist_ok=True)
     tracks=[];profiles=[];sources=set();proofs={};missing=[]
     for lang in LANGS:
         folder=args.artifacts/("004_voice_"+lang)
+        if lang=="en" and args.english_dir is not None:folder=args.english_dir
         if not (folder/"MANIFEST.json").is_file():
             missing.append(lang);continue
         m=read(folder/"MANIFEST.json")

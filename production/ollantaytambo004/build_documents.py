@@ -116,7 +116,7 @@ def main():
                       f'HEADLINE EN: {t.get("headline_en","")}\nHEADLINE VI: {t.get("headline_vi","")}\n'
                       f'THUMBNAIL PROMPT: {prompt}\n')
     write(out/"08_TITLES_THUMBNAILS.txt","\n".join(blocks))
-    for src,dst in [("research.md","09_NGHIEN_CUU_VA_NGUON.md"),("source_video_notes.md","10_VIDEO_NGUON_VA_NHIP_DUNG.md")]:
+    for src,dst in [("research.md","09_NGHIEN_CUU_VA_NGUON.md"),("source_video_notes.md","10_VIDEO_NGUON_VA_NHIP_DUNG.md"),("source_metrics_summary.json","10_SOURCE_METRICS.json")]:
         if (P/src).is_file():shutil.copy2(P/src,out/dst)
     profile={"episode":"004-ollantaytambo","target_seconds":1302,"main_language":"en",
              "provider":"Original Melo + Viet Studio1.3.1 online backend via edge-tts7.3.1",
@@ -138,7 +138,7 @@ Tiếng Anh là bản video chính. Có16bản lời đọc: Anh, Việt (Nam Mi
 - VOICE EN/VI trong tệp prompt chỉ cung cấp bối cảnh. Giọng đọc được ghép ở hậu kỳ; không yêu cầu công cụ tạo video đọc lời.
 - Cảnh Inca là phục dựng giáo dục, Andes thế kỷXV. Cơ chế chưa được chứng minh được gọi là giả thuyết, không phải tư liệu quay lịch sử.
 - Các nhãn bản đồ, số liệu và chữ thumbnail nên thêm trong phần mềm dựng, tránh để công cụ hình ảnh tự vẽ chữ.
-- Nguồn MP4 GitHub được xác định bằng metadata nhưng chưa xem/đo trực tiếp do lỗi máy Cloud. Phương án này theo công thức sản xuất do người dùng cung cấp; không gán các nhận xét dựng cho video nguồn.
+- Đã kiểm tra phần hình nguồn bằng35khung đại diện và9khung so sánh chuyển động, đo metadata và chỉ báo đổi hình. Chưa nghe hoặc chép lời nguồn, nên không gán nhận xét giọng đọc/nhạc/cấu trúc lời bình cho nguồn. Kịch bản mới áp dụng công thức do người dùng cung cấp; xem10_VIDEO_NGUON_VA_NHIP_DUNG.md để biết phạm vi phân tích.
 - 06_SRT_SCENE_REFERENCE là lịch tham chiếu cảnh10giây, không phải thời gian từng từ đã đo từ audio.
 - 07_SRT_MELO_EXACT là23cue dùng lại trong Melo:21chương60giây,40giây lời cuối và2giây kết im lặng.
 - Pipeline audio căn theo22chương, nên các ngôn ngữ chung tổngthời lượng và mốc chương; không mặc nhiên khớp từng từ hoặc từng ranh giới10giây.
@@ -157,7 +157,7 @@ Tiếng Anh là bản video chính. Có16bản lời đọc: Anh, Việt (Nam Mi
     manifest={"episode":"004-ollantaytambo","target_seconds":1302,"scene_count":131,
               "prompt_txt_count":14,"prompt_counts":counts,"languages":list(VOICES),
               "english_word_count":sum(len(r["en"].split()) for r in master),
-              "main_language":"en","source_video_viewed":False,
+              "main_language":"en","source_visuals_reviewed":True,"source_audio_semantics_assessed":False,
               "audio_profile_file_present":verified,"documents_complete":True}
     write(out/"PACKAGE_MANIFEST.json",json.dumps(manifest,ensure_ascii=False,indent=2)+"\n")
     hashes=[]

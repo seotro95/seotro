@@ -21,6 +21,7 @@ import time
 import wave
 
 RATE = 24000
+PIECE_LIMIT = 480
 SECONDS = 1302
 FRAMES = RATE * SECONDS
 BACKEND_COMMIT = '4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043'
@@ -196,7 +197,7 @@ def render_chunk(backend,language,rows,start,work,max_tempo):
     text='\n\n'.join(rows[i] for i in ids)
     (folder/'source.txt').write_text(text+'\n',encoding='utf-8')
     sources=[];segments=[]
-    for n,piece in enumerate(split_text(text),1):
+    for n,piece in enumerate(split_text(text,limit=PIECE_LIMIT),1):
         signature=hashlib.sha256((voice+'\0'+piece).encode()).hexdigest()
         source=folder/f'raw_{n:02}_{signature[:12]}.wav';metadata=source.with_suffix('.json')
         record=render_piece(backend,locale,voice,piece,source)
@@ -292,13 +293,17 @@ def render_language(backend,language,rows,work,out,max_tempo):
 
 
 def main():
+    global PIECE_LIMIT
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--script',type=Path,required=True);p.add_argument('--translations',type=Path,required=True)
     p.add_argument('--out',type=Path,required=True);p.add_argument('--work',type=Path,default=Path('work/voice_render'))
     p.add_argument('--workers',type=int,choices=(1,2,3,4),default=3)
+    p.add_argument('--piece-limit',type=int,default=480,help='Maximum native TTS request characters; does not change explicit recursive split limits.')
     p.add_argument('--languages',default=','.join(VOICES));p.add_argument('--max-tempo',type=float,default=2)
     args=p.parse_args();languages=list(dict.fromkeys(args.languages.split(',')))
     if not languages or any(x not in VOICES for x in languages): p.error('Unknown language.')
+    if not 80<=args.piece_limit<=1200: p.error('Piece limit must be80-1200.')
+    PIECE_LIMIT=args.piece_limit
     if not math.isfinite(args.max_tempo) or args.max_tempo<=0: p.error('Invalid tempo limit.')
     if version('edge-tts')!='7.3.1': p.error('Install pinned edge-tts==7.3.1.')
     for executable in ('ffmpeg','ffprobe'):
@@ -338,7 +343,7 @@ def main():
     provenance.update({'status':'rendering','provider':'Microsoft Edge Read Aloud via original Melo + Viet Studio 1.3.1',
         'edge_tts_version':version('edge-tts'),'ffmpeg_version':command(['ffmpeg','-version']).decode().splitlines()[0],
         'catalogue_verified':True,'catalogue_sha256':digest(args.work/'SERVICE_CATALOGUE.json'),
-        'tls_verification_enabled':True,'target_seconds':SECONDS,'sample_rate':RATE,'started_unix':started,
+        'tls_verification_enabled':True,'target_seconds':SECONDS,'sample_rate':RATE,'native_request_character_limit':PIECE_LIMIT,'started_unix':started,
         'transport_wrapper_sha256':digest(ROOT/'vendor/online_transport.py')})
     write_json(args.out/'TOOL_PROVENANCE.json',provenance)
     write_json(args.out/'VOICE_PROFILES_LOCKED.json',{'episode':'004-ollantaytambo','profiles':profiles,
