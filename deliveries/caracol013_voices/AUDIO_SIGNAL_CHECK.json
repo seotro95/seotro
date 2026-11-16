@@ -1,0 +1,162 @@
+[
+  {
+    "locale": "cs-CZ",
+    "filename": "CARACOL_013_Sec.mp3",
+    "sha256": "f4a5ba37c52b2dfab36493c9483a00cbd4ad2821696efe57a476083ee48c0fda",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0860996419892479,
+    "peak": 0.5841860175132751,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "CARACOL_013_Dan_Mach.mp3",
+    "sha256": "f5d9feaee499c5823a122b250dbd4a451784e40b67ff965d08f8d07b7c887984",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07722025634939267,
+    "peak": 0.5112425088882446,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "CARACOL_013_Duc.mp3",
+    "sha256": "a739895a21f01c95ed17c78c422ed3c21dac2060c3ba782baf6fa227358c20db",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07861321368363527,
+    "peak": 0.6264833211898804,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "en-US",
+    "filename": "CARACOL_013_My_Tieng_Anh.mp3",
+    "sha256": "55be9cc6cc7e5f0628fe2ed66ba8718bffe7eee0240763d7d58ca4f6c9824387",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09041571583578513,
+    "peak": 0.5722728371620178,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "CARACOL_013_Tay_Ban_Nha.mp3",
+    "sha256": "aebe765751fbbdd8d9ec0e5fbb2a1e786fc725631ecf800564d6d513845fd0a7",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06792293866771726,
+    "peak": 0.5027834177017212,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "CARACOL_013_Phan_Lan.mp3",
+    "sha256": "9fd4469cc91d8377b8e3abedc243229d2d1013bbd5b592ff30de58a30d4ee3bf",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06087901668076714,
+    "peak": 0.4472746253013611,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "CARACOL_013_Phap.mp3",
+    "sha256": "283cab6b95b33ca1aa6528c53bb0039320de8d58cc951ec971a109aae754b9eb",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06642100759975156,
+    "peak": 0.5036236047744751,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "CARACOL_013_Y.mp3",
+    "sha256": "27394ef5f5e5608265835c134d5209322cb0493f57181531e6de1518198334c0",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07433233997780148,
+    "peak": 0.5153785943984985,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "CARACOL_013_Nhat_Ban.mp3",
+    "sha256": "ceb39f0fcc16448a6026c5233461b7d958973a8e93bf0e05708aa6390d7fc872",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08508808039547716,
+    "peak": 0.5953214764595032,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "CARACOL_013_Han_Quoc.mp3",
+    "sha256": "5dcd4254559cadbfb5e4c6fffcfa84ba8a06ad7db5043e6aa9c5c0ece6239864",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09099144241541807,
+    "peak": 0.5619688630104065,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "CARACOL_013_Ha_Lan.mp3",
+    "sha256": "402826d1a94c7b05844e004af9c5aac93ef9d39c36b17b5130a36f9df2f4106a",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09333002046766765,
+    "peak": 0.5755553245544434,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "CARACOL_013_Ba_Lan.mp3",
+    "sha256": "29d38b6685dc4a90100447437f56ee8000c8c0cae3b521eec824b7bac03cbd89",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08453520086042803,
+    "peak": 0.5368704795837402,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "CARACOL_013_Bo_Dao_Nha.mp3",
+    "sha256": "53d7aadee75d1bfe35408a77a5cac6d0e8b68f9668832e6266c8b1571d382ec6",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.06913886040005943,
+    "peak": 0.5376630425453186,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "CARACOL_013_Viet_Nam.mp3",
+    "sha256": "2966f6691592a649246fa7905e549375f81ede71677d08ea09f05332ba10e2da",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08217238586917468,
+    "peak": 0.5466803312301636,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "CARACOL_013_Na_Uy.mp3",
+    "sha256": "fa5dd165d53a9520490c22ec654fd7e6ba7de3b9e17a87d853f63b64df54dd2a",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.069709245808034,
+    "peak": 0.5736504197120667,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "CARACOL_013_Thuy_Dien.mp3",
+    "sha256": "3887090e31a9c7aaa53a1ff08e099f7fba381cb375499a00769a200201c50474",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07683483242058968,
+    "peak": 0.5035902261734009,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  }
+]

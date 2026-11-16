@@ -1,0 +1,178 @@
+[
+  {
+    "locale": "en-US",
+    "filename": "CARACOL_013_My_Tieng_Anh.mp3",
+    "voice_id": "en-US-GuyNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "55be9cc6cc7e5f0628fe2ed66ba8718bffe7eee0240763d7d58ca4f6c9824387",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "c623c9acde09e780af0d5bc248ae25a7571ade039664fd33193bcd15dad49bd1"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "CARACOL_013_Viet_Nam.mp3",
+    "voice_id": "vi-VN-NamMinhNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "2966f6691592a649246fa7905e549375f81ede71677d08ea09f05332ba10e2da",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "61498a7e52eca38ee2f1b1c43e102a762148dafaf79e85d3fdd4874f2794ae72"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "CARACOL_013_Tay_Ban_Nha.mp3",
+    "voice_id": "es-ES-AlvaroNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "aebe765751fbbdd8d9ec0e5fbb2a1e786fc725631ecf800564d6d513845fd0a7",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "ad832a45bf1770fe450af0174d1641ad983c3bfd955a23952aa2280de5a45a5e"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "CARACOL_013_Phap.mp3",
+    "voice_id": "fr-FR-HenriNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "283cab6b95b33ca1aa6528c53bb0039320de8d58cc951ec971a109aae754b9eb",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "eac3d4e4d06797bf2f493834820df47e5c17d92a5ec0ed975afcc30818e9c250"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "CARACOL_013_Nhat_Ban.mp3",
+    "voice_id": "ja-JP-KeitaNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "ceb39f0fcc16448a6026c5233461b7d958973a8e93bf0e05708aa6390d7fc872",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "e82df346dcb96117fddbcfcc63b8a6e89df772a1c980daa35c16a05c94e9b6c7"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "CARACOL_013_Han_Quoc.mp3",
+    "voice_id": "ko-KR-InJoonNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "5dcd4254559cadbfb5e4c6fffcfa84ba8a06ad7db5043e6aa9c5c0ece6239864",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "67d768cba5c0a7d4996c2c5caf58e5024d22772992b0bb3d7ee2b08c1e08293c"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "CARACOL_013_Duc.mp3",
+    "voice_id": "de-DE-ChristophNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "a739895a21f01c95ed17c78c422ed3c21dac2060c3ba782baf6fa227358c20db",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "a62faf2fb14fe3df46421e112dee1f6115e3a1d442ecbbf9eafd8762c72f9f0a"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "CARACOL_013_Y.mp3",
+    "voice_id": "it-IT-DiegoNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "27394ef5f5e5608265835c134d5209322cb0493f57181531e6de1518198334c0",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "6ed7346a4f7629971aabbefa07872f0e3d6136124f2715da1c04dcb1429c87a7"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "CARACOL_013_Bo_Dao_Nha.mp3",
+    "voice_id": "pt-PT-DuarteNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "53d7aadee75d1bfe35408a77a5cac6d0e8b68f9668832e6266c8b1571d382ec6",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "87495577e81294c9bc55efc2cba207eefe41dbfb12989164969794d2d194ec49"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "CARACOL_013_Ha_Lan.mp3",
+    "voice_id": "nl-NL-MaartenNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "402826d1a94c7b05844e004af9c5aac93ef9d39c36b17b5130a36f9df2f4106a",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "bca2e8a50ed494f8c6663efa9ffaa8ab07cec83ae46fc3055ddf7128ae1d61c3"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "CARACOL_013_Ba_Lan.mp3",
+    "voice_id": "pl-PL-MarekNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "29d38b6685dc4a90100447437f56ee8000c8c0cae3b521eec824b7bac03cbd89",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "3c065bd3ee2c09fb6e7016a2102f952c06c88df4abfc7e3d5810f3eae8f14604"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "CARACOL_013_Thuy_Dien.mp3",
+    "voice_id": "sv-SE-MattiasNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "3887090e31a9c7aaa53a1ff08e099f7fba381cb375499a00769a200201c50474",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "7287fd0f1892c2969196eda748c2ca4ccbe40fbbe9c9815e7509249ca1cec1de"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "CARACOL_013_Dan_Mach.mp3",
+    "voice_id": "da-DK-JeppeNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "f5d9feaee499c5823a122b250dbd4a451784e40b67ff965d08f8d07b7c887984",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "3f83140a2af56219bf587986afc0ce18a272c84ea9ab571199e35ade336d8357"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "CARACOL_013_Phan_Lan.mp3",
+    "voice_id": "fi-FI-HarriNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "9fd4469cc91d8377b8e3abedc243229d2d1013bbd5b592ff30de58a30d4ee3bf",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "ff1c44fce3ff3f7c124ed8007c783b3e931b0801b8a638888fc594c832ad53a1"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "CARACOL_013_Na_Uy.mp3",
+    "voice_id": "nb-NO-FinnNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "fa5dd165d53a9520490c22ec654fd7e6ba7de3b9e17a87d853f63b64df54dd2a",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "ae586a34c5d43a7eaea112c1c56a1cf66efe35364fbb42e6758af1cb87b38343"
+  },
+  {
+    "locale": "cs-CZ",
+    "filename": "CARACOL_013_Sec.mp3",
+    "voice_id": "cs-CZ-AntoninNeural",
+    "gender": "Male",
+    "bytes": 10656620,
+    "sha256": "f4a5ba37c52b2dfab36493c9483a00cbd4ad2821696efe57a476083ee48c0fda",
+    "decoded_seconds": 1332,
+    "decoded_samples_48000": 63936000,
+    "narration_text_sha256": "05e361429722a4f0150102a1f8aa1d2ec48760295eb1fa7911c50335939753c5"
+  }
+]
