@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   produce:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
       - name: Check out episode sources
@@ -30,6 +30,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Install FFmpeg audio tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install --yes ffmpeg
       - name: Install pinned voice dependency
         run: python -m pip install -r production/ollantaytambo004/requirements.txt
       - name: Check FFmpeg and syntax
