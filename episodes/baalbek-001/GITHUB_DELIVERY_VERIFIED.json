@@ -1,0 +1,208 @@
+{
+  "status": "all_24_expected_assets_uploaded_and_server_sha256_verified",
+  "release_id": 447355823,
+  "html_url": "https://github.com/seotro95/seotro/releases/tag/untagged-dbd5751b6bc0c3455f3a",
+  "draft": true,
+  "source_commit": "02087c41515f78deca645a2eb1b5967c01678a95",
+  "workflow_run_id": 43917422065,
+  "workflow_url": "https://github.com/seotro95/seotro/actions/runs/43917422065",
+  "workflow_conclusion": "success",
+  "target_seconds": 1242,
+  "voice_count": 16,
+  "prompt_count": 125,
+  "prompt_txt_files": 13,
+  "assets": [
+    {
+      "name": "BAALBEK_001_13_TXT_PROMPTS.zip",
+      "asset_id": 755734334,
+      "bytes": 34270,
+      "sha256": "7663585b9db0ee474b24898501d8113fd1b70dda2a1dba7d69785fcc9bc42750",
+      "kind": "documents_zip",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_13_TXT_PROMPTS.zip"
+    },
+    {
+      "name": "BAALBEK_001_16_VOICES_20m42s.zip",
+      "asset_id": 755734382,
+      "bytes": 209114212,
+      "sha256": "e521166a7389144fce1aab2025f2b0a52043004ff8e83e85fecc0c8216399ed6",
+      "kind": "voices_zip",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_16_VOICES_20m42s.zip"
+    },
+    {
+      "name": "BAALBEK_001_TAI_LIEU_20m42s.zip",
+      "asset_id": 755734815,
+      "bytes": 736642,
+      "sha256": "e4414aa670369ca53f2f16ff922792ed96e740933d2d9627540e99916e6aa21d",
+      "kind": "documents_zip",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_TAI_LIEU_20m42s.zip"
+    },
+    {
+      "name": "BAALBEK_001_Anh_Andrew_20m42s.mp3",
+      "asset_id": 755734929,
+      "bytes": 14904908,
+      "sha256": "dab5b4595340b560dcf8697bc26481570f3215a11f378cb5f5ed78410b3def76",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Anh_Andrew_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Viet_Nam_Nam_Minh_20m42s.mp3",
+      "asset_id": 755735043,
+      "bytes": 14904908,
+      "sha256": "655ae5c5277529a3b7e164c5a72b39ae1d91b521947f694fd0751079fa5278a7",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Viet_Nam_Nam_Minh_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Tay_Ban_Nha_20m42s.mp3",
+      "asset_id": 755735158,
+      "bytes": 14904908,
+      "sha256": "f6f51c413a4075a1f59a43a65b67172c8da791c9525afd1f862a10dc3860ab86",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Tay_Ban_Nha_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Phap_20m42s.mp3",
+      "asset_id": 755735270,
+      "bytes": 14904908,
+      "sha256": "c630aeead48da5a0c60a994b0b542947595c687e75f0f1cb809bee26ad881d9c",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Phap_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Nhat_Ban_20m42s.mp3",
+      "asset_id": 755735363,
+      "bytes": 14904908,
+      "sha256": "a90f85bd829a68a48bbf626d74cc0a41e787ed34e9d87e45efa676bcec414dcb",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Nhat_Ban_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Han_Quoc_20m42s.mp3",
+      "asset_id": 755735473,
+      "bytes": 14904908,
+      "sha256": "067c02e5c461cf89d1306062889e2ff610c55d54771dbda09ea19a4cad0a1682",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Han_Quoc_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Duc_20m42s.mp3",
+      "asset_id": 755735620,
+      "bytes": 14904908,
+      "sha256": "b546bae885baeaccdf06f0f4c2e04ce0cf9245f840e422789547010626aca895",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Duc_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Y_20m42s.mp3",
+      "asset_id": 755735739,
+      "bytes": 14904908,
+      "sha256": "07c30ff0beb171a61d2cf6e0d326faf7007c02b2648308f5352a0de460aca9be",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Y_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Bo_Dao_Nha_20m42s.mp3",
+      "asset_id": 755735831,
+      "bytes": 14904908,
+      "sha256": "012a7db6a7f65d0e6d412c3d9eb884dfb2f1c1d001a0ef3722eb4e7e6a2da802",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Bo_Dao_Nha_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Ha_Lan_20m42s.mp3",
+      "asset_id": 755735975,
+      "bytes": 14904908,
+      "sha256": "71cb79f4c2b726aee320f0416aee24072dfc66b5a23db0a321b4e0ad49efe941",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Ha_Lan_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Ba_Lan_20m42s.mp3",
+      "asset_id": 755736134,
+      "bytes": 14904908,
+      "sha256": "3b0ed50abd47ce7abe7b0873e2983990c172ca12fcaa2d1fdd8e4b0b9f45ac2b",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Ba_Lan_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Thuy_Dien_20m42s.mp3",
+      "asset_id": 755736278,
+      "bytes": 14904908,
+      "sha256": "4341c43daabb2bb23ccdab7db0d57dc680f6b7eed9e29201194f9e3d7e74cc85",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Thuy_Dien_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Dan_Mach_20m42s.mp3",
+      "asset_id": 755736521,
+      "bytes": 14904908,
+      "sha256": "8d544a051796b1203fda0b05779b97b896105c2ef03c58d0cf8cd3d192cbc93e",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Dan_Mach_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Phan_Lan_20m42s.mp3",
+      "asset_id": 755736670,
+      "bytes": 14904908,
+      "sha256": "77872f23aa019aa44966568caea09434eef07cd5cf9ae2ad8c04867c700606ad",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Phan_Lan_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Na_Uy_20m42s.mp3",
+      "asset_id": 755736898,
+      "bytes": 14904908,
+      "sha256": "a932b25be2ca42edfdcde45c42ecc6406a56393762ca8abefc0742f3ac673d63",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Na_Uy_20m42s.mp3"
+    },
+    {
+      "name": "BAALBEK_001_Sec_20m42s.mp3",
+      "asset_id": 755737090,
+      "bytes": 14904908,
+      "sha256": "84a4b993496a6b7cb4f8dfbc7d5d11ecec5d307ad34faba05b52c335d3612813",
+      "kind": "voice_mp3",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/BAALBEK_001_Sec_20m42s.mp3"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED.json",
+      "asset_id": 755737375,
+      "bytes": 31043,
+      "sha256": "49955107eddd964ca171625731a75cc1c91c2569697402a2e239a418d116968a",
+      "kind": "voice_profiles",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/VOICE_PROFILES_LOCKED.json"
+    },
+    {
+      "name": "KICH_BAN_ANH_20m42s.txt",
+      "asset_id": 755737502,
+      "bytes": 24497,
+      "sha256": "08b50adac90abcefbac5ff04b92bf4d74f316d45b3c398174b96ac2c2164b2ea",
+      "kind": "script",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/KICH_BAN_ANH_20m42s.txt"
+    },
+    {
+      "name": "KICH_BAN_VIET_20m42s.txt",
+      "asset_id": 755737616,
+      "bytes": 26650,
+      "sha256": "b124b20b08de749ea4712713e96a3d81c12b9b023e89c61b0e0f76d20484ac0b",
+      "kind": "script",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/KICH_BAN_VIET_20m42s.txt"
+    },
+    {
+      "name": "5_TIEU_DE_VA_5_THUMBNAIL.txt",
+      "asset_id": 755737781,
+      "bytes": 5425,
+      "sha256": "9ce24a9975c84b4cf26679975fb6190145765624d20b396e3b47fb7cf9dbab53",
+      "kind": "titles_thumbnails",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/5_TIEU_DE_VA_5_THUMBNAIL.txt"
+    },
+    {
+      "name": "VOICE_QA.json",
+      "asset_id": 755737895,
+      "bytes": 9284,
+      "sha256": "90effad8e504213637922f366b58ef977bfcdbe931d8d92c1bd03e46d648c2bf",
+      "kind": "validation",
+      "download_url": "https://github.com/seotro95/seotro/releases/download/untagged-dbd5751b6bc0c3455f3a/VOICE_QA.json"
+    }
+  ]
+}
