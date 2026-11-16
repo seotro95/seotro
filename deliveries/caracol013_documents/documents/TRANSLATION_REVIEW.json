@@ -1,0 +1,20 @@
+{
+  "topic": "013-Caracol",
+  "languages": 16,
+  "original_english_words": 3312,
+  "vietnamese_japanese_korean": "Assistant-written contextual narration/localization with evidence limits preserved",
+  "other12": "Context-clarified machine translation plus targeted archaeology terminology,regional vocabulary,proper-name and numeral review",
+  "context_clarifications": [
+    "Pyramid steps are stone staircase,not footsteps",
+    "Archaeological survey means mapping,not questionnaire",
+    "Site means archaeologicalsite,not website",
+    "Features mean topographicfeatures,not softwarefunctions",
+    "Workedslopes arecultivatedslopes",
+    "Raisedstone roads,not reservoir dams",
+    "Caracol was studied beforelidar",
+    "Surveycoverage doesnotmeasurepopulation"
+  ],
+  "last_localized_chapter": "Condensed faithful closing tofit32seconds",
+  "independent_native_editorial_or_listening_review": false,
+  "alignment": "English134cues;15localized14chapters13x100+32seconds"
+}

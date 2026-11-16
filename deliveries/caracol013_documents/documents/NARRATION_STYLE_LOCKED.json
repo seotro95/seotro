@@ -1,0 +1,35 @@
+{
+  "style_id": "science-documentary-expressive-v1",
+  "applies_to": "Topic 3 and subsequent topics unless changed by user",
+  "user_request": "Tất cả voice đọc có nhấn nhá",
+  "identity": "16 saved male online voices including Vietnamese Nam Minh",
+  "delivery": "Friendly documentary narration, clear questions, measured evidence, warmer reflective ending",
+  "online": {
+    "pitch": "+0Hz",
+    "segment_rate_percent_range": [
+      -4,
+      3
+    ],
+    "word_accents_db": 1.2,
+    "max_accents_per_piece": 2,
+    "pause_seconds_range": [
+      0.07,
+      0.16
+    ],
+    "method": "Original Melo backend with documented Edge prosody/word-boundary adapter; pitch-preserving cue timing afterwards"
+  },
+  "timing": "Caracol013:1332 seconds;English133x10+2;14localized chapters13x100+32",
+  "limits": "Controls depend on each engine. Naturalness,names,native language and WhiteHmong dialect need independent listening review. Prior completed topics are preserved.",
+  "english_cue_strategy": "Complete immutable English cue per request using Guy;faithful smaller fallback only forprovider text/noaudio failures;pitch-preserving exact cue timing",
+  "english_pacing_repairs": {
+    "cue_ids": [
+      67,
+      82,
+      83
+    ],
+    "provider_rate": "+3%",
+    "trailing_pause_seconds": 0.07,
+    "trim_only_digital_zero_boundaries": true,
+    "english_words_unchanged": true
+  }
+}

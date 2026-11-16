@@ -1,0 +1,255 @@
+{
+  "transport_revision": 3,
+  "topic": "013-Caracol",
+  "target_seconds": 1332,
+  "expected_samples_48000": 63936000,
+  "documents_inventory": [
+    {
+      "path": "documents/5_TIEU_DE_5_PROMPT_THUMBNAIL.txt",
+      "bytes": 5613,
+      "sha256": "84624f6bb2388ee2ec81c70a84ab74c1ce3fbbae46f2ff4b8de6d6f01eec9bd4"
+    },
+    {
+      "path": "documents/BROLL_DU_PHONG_135_140.csv",
+      "bytes": 548,
+      "sha256": "44ceb763e902291a9e9b7327c5567b6cd729b04c5b8c983c607a0458e1cabc4c"
+    },
+    {
+      "path": "documents/DOCUMENT_QA.json",
+      "bytes": 734,
+      "sha256": "bb3fc01148a5fe8c35e228e64e36d0a4d06d1ddaa4c95507381e22195d94b2f0"
+    },
+    {
+      "path": "documents/DOI_CHIEU_BANG_CHUNG.csv",
+      "bytes": 1408,
+      "sha256": "fb0fc1b319b23c0fa184e795db9256682a7564411a4342928b19f8e2700e714a"
+    },
+    {
+      "path": "documents/EDL_134_CANH.csv",
+      "bytes": 8207,
+      "sha256": "99ecb7feb94f80b67fab7da445f4c645650fce2480a1dffa0f4247fc71edb5ac"
+    },
+    {
+      "path": "documents/GIONG_DA_LUU.md",
+      "bytes": 2071,
+      "sha256": "18375def513ba3c0b2af71a518d1fc8d27b261c20650c9d76277acabc4a0d139"
+    },
+    {
+      "path": "documents/HOOK_30_GIAY_10_SHOT.csv",
+      "bytes": 1396,
+      "sha256": "245017be59929bcf322336f7fafbb114a5df971d32b9dfa0cf9a8f42c25e5230"
+    },
+    {
+      "path": "documents/HUONG_DAN_DUNG_HINH.txt",
+      "bytes": 1403,
+      "sha256": "0e4f408c2589215378edc402cf0d1dcaa7b5a8e72849f1e1d55c0a1d354b46c1"
+    },
+    {
+      "path": "documents/KICH_BAN_EN_22m12s.txt",
+      "bytes": 22921,
+      "sha256": "ab75c821bbbd484261ed8f5f9e4ebe65dad807fa2a02cf9a2c4c5f1f6679cff4"
+    },
+    {
+      "path": "documents/KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 28951,
+      "sha256": "e0baf8cd87fe126c5e61e4f2fdd48cee660b7a9d05276363e8e56a6c56f06e17"
+    },
+    {
+      "path": "documents/LOI_DAN_EN_134_CANH.srt",
+      "bytes": 27369,
+      "sha256": "370fe27d0e8c5d1d34d2a053147eb6f74354587003b6c3354d11272ff049733c"
+    },
+    {
+      "path": "documents/NARRATION_STYLE_LOCKED.json",
+      "bytes": 1398,
+      "sha256": "73f53ff1ff7a0966a116ae22b42b7882517b51dff4e3b371da93759459618101"
+    },
+    {
+      "path": "documents/NGUON_KIEM_CHUNG.md",
+      "bytes": 6628,
+      "sha256": "c5adbc34c294d6c481efbda555195aa56e519c899c2be5165c4e07201179d130"
+    },
+    {
+      "path": "documents/PHAN_TICH_VIDEO_NGUON.md",
+      "bytes": 4894,
+      "sha256": "c247dcf2013e9314d0fcf527e1d06a539ad08a8f17f24d36207121263ccd3244"
+    },
+    {
+      "path": "documents/PROMPTS/01_PROMPT_001_010.txt",
+      "bytes": 29118,
+      "sha256": "c6f94605286ab52de949372809014becf2488e6b0dbeaafd9f14e724fdc8e43b"
+    },
+    {
+      "path": "documents/PROMPTS/02_PROMPT_011_020.txt",
+      "bytes": 29263,
+      "sha256": "a45f0cfacaa6790de6029f578d40acce69832a448ebecca8a44e3fa93326398f"
+    },
+    {
+      "path": "documents/PROMPTS/03_PROMPT_021_030.txt",
+      "bytes": 29192,
+      "sha256": "53070ddac9886898388ba405700d615627dd26776ce465de23fd1f88d2ee6270"
+    },
+    {
+      "path": "documents/PROMPTS/04_PROMPT_031_040.txt",
+      "bytes": 29350,
+      "sha256": "91946db28b4d151ad91d2145f22441f42a18ef8a9e662a846473a947b798cc4b"
+    },
+    {
+      "path": "documents/PROMPTS/05_PROMPT_041_050.txt",
+      "bytes": 29169,
+      "sha256": "8cf47e01fb24fc77d5c6dfccb2ca714a2fe4d19d67ab30e1896d378ec905247d"
+    },
+    {
+      "path": "documents/PROMPTS/06_PROMPT_051_060.txt",
+      "bytes": 29250,
+      "sha256": "f6394b3f6de62e5f6fbfd23b18944d5234e68bf168b6d943c99cabab2c975eea"
+    },
+    {
+      "path": "documents/PROMPTS/07_PROMPT_061_070.txt",
+      "bytes": 29158,
+      "sha256": "b1930cf42b078f36ea16745f8f5d5b1869b7cccccd81ce28cc1d97d7e652f7d1"
+    },
+    {
+      "path": "documents/PROMPTS/08_PROMPT_071_080.txt",
+      "bytes": 28988,
+      "sha256": "0618f7800b51d0a5f0d97a256f690f27182eebce126692c22ea818dee24efbdb"
+    },
+    {
+      "path": "documents/PROMPTS/09_PROMPT_081_090.txt",
+      "bytes": 29156,
+      "sha256": "0425e9accd217fd7e2cbf72edac7e0e3e7fc3c7adb377a258827a62d969dc78a"
+    },
+    {
+      "path": "documents/PROMPTS/10_PROMPT_091_100.txt",
+      "bytes": 29228,
+      "sha256": "af02f0e6c6a236931f62a84f641bc8d1a96b63f8585885614dfea30614a09c72"
+    },
+    {
+      "path": "documents/PROMPTS/11_PROMPT_101_110.txt",
+      "bytes": 29103,
+      "sha256": "33697c00deba2977812f7c13ff22843fb31bd3dfac92f4b01456a2e66838da79"
+    },
+    {
+      "path": "documents/PROMPTS/12_PROMPT_111_120.txt",
+      "bytes": 29077,
+      "sha256": "73879d266b46fc8cc22a5351c5aaceb12c89760c210d3a60c379f066fb455fbd"
+    },
+    {
+      "path": "documents/PROMPTS/13_PROMPT_121_130.txt",
+      "bytes": 28959,
+      "sha256": "52fa404b9e675e3cae20c966d59f9a76570af4a9bb1c38352856c51d92f38f2d"
+    },
+    {
+      "path": "documents/PROMPTS/14_PROMPT_131_140.txt",
+      "bytes": 29179,
+      "sha256": "1283d1ee469526f9e7b2a7fd2cc397084c3b85b50f95d2ed21e2377a109bac25"
+    },
+    {
+      "path": "documents/README.md",
+      "bytes": 3031,
+      "sha256": "a30241aebcff30b3a6c22b8f34074fedcd688b5fdc5563b2cc7997b4182180f0"
+    },
+    {
+      "path": "documents/TIMELINE_134_CANH.csv",
+      "bytes": 51259,
+      "sha256": "27d1d45418b2bc61fba7747f346d0b777fbcb25fc3908f55b3fe98148f0356c5"
+    },
+    {
+      "path": "documents/TRANSLATION_REVIEW.json",
+      "bytes": 979,
+      "sha256": "e934f3ff443337ca81934d98c78dcec58c1dc4675235d9147945eb9bb9eef355"
+    },
+    {
+      "path": "documents/VOICE_FILE_NAMING.json",
+      "bytes": 3206,
+      "sha256": "07d4ef95cf799a86a579410bc301ba6ca0c9977e8a4fc0d28aa5849c6815a345"
+    },
+    {
+      "path": "documents/VOICE_PROFILES_LOCKED.json",
+      "bytes": 12855,
+      "sha256": "a3a65bdbd65a9de9bae92aae5db9bc9b2a5069deb8ea09688182aceea7653dab"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/cs-CZ.txt",
+      "bytes": 24911,
+      "sha256": "3069a2598abf4761239bca31445ca643a6e96233f892238ae96a6e1e46b94ebc"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/da-DK.txt",
+      "bytes": 24738,
+      "sha256": "fb59b5385882c987ef21db1e2c1b61be28117adb2291f509152ea0db43c6194f"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/de-DE.txt",
+      "bytes": 28534,
+      "sha256": "71221fb223b427e6801a8b33f7916c7c34d944ef3890b4203fd862e06fdca1df"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/en-US.txt",
+      "bytes": 24444,
+      "sha256": "34f43afc4acba8e585826aff25f2ebec3d27bd23ecb44389b63794f9680d702d"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/es-ES.txt",
+      "bytes": 27654,
+      "sha256": "860a596648e03aa534dee57a4f9e72c1dd682ea53151b10472e5ec60e7bbe814"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/fi-FI.txt",
+      "bytes": 25459,
+      "sha256": "d34647b00741a389936695dccbf1ac8ba83efd3fca075d8fff37a51813ce48db"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/fr-FR.txt",
+      "bytes": 29819,
+      "sha256": "de8557fad6c17698d2d5939abfcac0df0e8cb265b76b1d996e31e1493454b4b9"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/it-IT.txt",
+      "bytes": 27238,
+      "sha256": "b4922fffcaa23b35381971223a44754bf00502852de80a34e8d5969ffe30a6d5"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/ja-JP.txt",
+      "bytes": 17135,
+      "sha256": "1dc7645b5fd5dcbff8b2b0572f034bc7b88512c1171a57bf8b4281e3bb29a197"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/ko-KR.txt",
+      "bytes": 17998,
+      "sha256": "bf6164578076030582b8312b39520b1be97022a8aa240b2d7972c0304eb8c313"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/nb-NO.txt",
+      "bytes": 23789,
+      "sha256": "c8864d40b55e80ae9b458f5b1288c58a3b64cb5aa325fc139d4f8211b7becb9d"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/nl-NL.txt",
+      "bytes": 26771,
+      "sha256": "4ed96abbc1b01a35e7cca5da734e6e116b585ba8bf6ebd0b28084adca869be3c"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/pl-PL.txt",
+      "bytes": 26422,
+      "sha256": "9c463a841360ceb6f1127b6b24ff3816b185f191684d4052312f25f2259625f3"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/pt-PT.txt",
+      "bytes": 26868,
+      "sha256": "37789c94682e257c16739be6aa0dc23ad348cc4bd67227d2ad6375da99f13bc4"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/sv-SE.txt",
+      "bytes": 24661,
+      "sha256": "f879544ca70e9264ea42a62218d100b5fe6b8219118d756a9fad939e52355ae2"
+    },
+    {
+      "path": "documents/VOICE_SCRIPTS/vi-VN.txt",
+      "bytes": 20753,
+      "sha256": "d1705d117b35e54e2da09c403cedab296a197c21cf4afe62e104b0802870eefb"
+    }
+  ],
+  "release_tag": "caracol-video-013-22m12s",
+  "scope": "New user-requested caracol013 original English script,134main+6optional silent no-children prompts in14TXT,timeline,source analysis,scientific references,16localized narration texts,saved voice identities including VietnameseNamMinh,EnglishGuy,GermanChristoph,5title/thumbnail prompt suggestions;document export only;no MP3files inthis document export,source video,models,credentials,other topics or private messages"
+}

@@ -1,0 +1,11 @@
+shot,start,end,clip_id,source_in,source_out,instruction
+1,0,3,1,2,5,Replace opening pictures only;keep voice0–30s and total22:12;remove all clip audio;models remain visibly illustrative
+2,3,6,3,2,5,Replace opening pictures only;keep voice0–30s and total22:12;remove all clip audio;models remain visibly illustrative
+3,6,9,27,2,5,Replace opening pictures only;keep voice0–30s and total22:12;remove all clip audio;models remain visibly illustrative
+4,9,12,8,2,5,Replace opening pictures only;keep voice0–30s and total22:12;remove all clip audio;models remain visibly illustrative
+5,12,15,41,2,5,Replace opening pictures only;keep voice0–30s and total22:12;remove all clip audio;models remain visibly illustrative
+6,15,18,52,2,5,Replace opening pictures only;keep voice0–30s and total22:12;remove all clip audio;models remain visibly illustrative
+7,18,21,13,2,5,Replace opening pictures only;keep voice0–30s and total22:12;remove all clip audio;models remain visibly illustrative
+8,21,24,17,2,5,Replace opening pictures only;keep voice0–30s and total22:12;remove all clip audio;models remain visibly illustrative
+9,24,27,24,2,5,Replace opening pictures only;keep voice0–30s and total22:12;remove all clip audio;models remain visibly illustrative
+10,27,30,7,2,5,Replace opening pictures only;keep voice0–30s and total22:12;remove all clip audio;models remain visibly illustrative

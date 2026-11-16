@@ -1,0 +1,7 @@
+Prompt 001–134 là 134 cảnh chính. Tất cả tạo clip 10 giây; mốc 134 chỉ lấy giây 8–10 để đoạn cuối đúng 2 giây. Tổng timeline: 133×10 + 2 = 1332 giây = 22:12.
+Prompt 135–140 là 6 cảnh dự phòng, chỉ thay hình theo BROLL_DU_PHONG_135_140.csv. Không nối thêm chúng vào cuối phim.
+Có 14 TXT, mỗi tệp đúng 10 prompt, số liên tục 1–140. Tệp 14 chứa 4 cảnh chính 131–134 và 6 cảnh dự phòng 135–140. Không có mốc bắt buộc dùng lại clip.
+Mọi prompt ghi rõ không âm thanh, không lời nói, không hình trẻ em, kể cả nền, tranh, ảnh và phản chiếu. Nếu công cụ vẫn trả stream âm thanh, xóa stream trước khi dựng.
+EDL_134_CANH.csv chỉ định source in/out. Dựng đúng mốc voice, không cộng intro hoặc credits. Nếu hòa cảnh chồng hình, bù phần chồng để giữ nguyên thời lượng.
+HOOK_30_GIAY_10_SHOT.csv là phương án thay hình 30 giây đầu bằng 10 shot 3 giây từ các clip đã tạo. Giữ nguyên voice 0–30 giây, không cộng thêm thời lượng.
+Mô hình địa hình, mặt cắt và điểm laser là minh họa. Không cho AI tự tạo dữ liệu khảo sát, dân số, niên đại, bản đồ đo đạc hoặc chữ trên hình. Nhãn chính xác và thông báo MINH HỌA thêm trong editor sau kiểm chứng.
