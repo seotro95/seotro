@@ -31,19 +31,26 @@ Giữ rõ: LiDAR không phát hiện từ hư vô; không nhìn xuyên lá đặ
 
 Hình tạo sinh và mô hình chỉ minh họa, không phải dữ liệu đo hay tư liệu Upano thật. Không kim tự tháp đá Maya, thành phố vàng, công cụ hay nghi lễ bịa đặt.
 
+## Trạng thái hoàn tất
+
+Đã phát hành và tải công khai kiểm lại cả 16 voice. Mỗi bản giải mã đúng 58.656.000 mẫu mono 48 kHz = 20:22; ZIP qua CRC và SHA256. Cả 16 link MP3 trả HTTP 200. Tài liệu cuối có 130 prompt trong 13 TXT, timeline 130 cảnh đủ 1.222 giây, kịch bản và phụ đề, 5 cặp tiêu đề/thumbnail, bản dịch và hồ sơ giọng.
+
+Tệp đọc được lưu tại productions/video-moi011-upano/ trong repository. Hồ sơ dùng cho bộ đề tài mới nằm tại research/channel-analysis-20261116/VOICE_PROFILES_LOCKED.json và PRODUCTION_STATE.json. Bộ đề tài cũ productions/series/ vẫn giữ nguyên.
+
 ## Các mốc GitHub Actions
 
 - Preflight Andrew 30 giây và Nam Minh 10 giây: 43902964757 — thành công.
-- Phát hành tài liệu và 13 TXT prompt: 43905782574 — thành công; link công khai đã được tải và kiểm.
-- Tạo 16 voice lần đầu: 43909217031, commit 58448e292eaae4a12f27820a55764d60df0f7cbe. Riêng Đức cũ bị thiếu trong danh mục.
-- Sửa Đức Christoph và ghép 15 bản còn lại: 43910504424, commit 72729c674f1f9602281f75db0594ec201e479ee7.
+- Tài liệu và 13 TXT prompt: 43905782574 — thành công.
+- Lượt tạo đầu 43909217031: giữ 14 voice thành công, giữ các nhóm Anh đã tạo; Conrad cũ vắng trong danh mục.
+- Đức Christoph: 43910504424 — phần tạo Đức thành công; phần chờ cũ không dùng làm chứng nhận bàn giao.
+- Khôi phục phần Anh thiếu và xuất gói cuối: 43914663934 — cả ba job english, country14, publish thành công. Không tạo lại 16 bản này khi chỉ cần tải chúng.
 
-Đọc SESSION_PROGRESS.json và trạng thái run hiện tại trước khi làm thêm. Không tạo lại các voice thành công vô ích.
+Backend thực dùng là thành phần online của Melo-Viet-Studio 1.3.1 ở commit khóa trong MELO_SOURCE_LOCK.json, gọi giọng Microsoft Edge qua edge-tts. Không khẳng định chạy giao diện Windows hoặc model Melo đa ngôn ngữ cục bộ.
 
 ## Kiểm tra và bàn giao
 
 verify_public_delivery.py tải ZIP voice, kiểm SHA, CRC, giải mã đủ 16 file và kiểm HEAD các link trực tiếp. Nó kiểm cả 13 TXT, 130 prompt, dòng không âm, cấm trẻ em, timeline 1.222 giây, 5 cặp tiêu đề/thumbnail và UTF-8.
 
-Sau khi tất cả qua, lưu báo cáo PUBLIC_DELIVERY_QA.json, profile cuối, nguồn, kịch bản, prompt và link trong GitHub. Giữ nguyên danh sách cũ và trạng thái tập tiếp theo của bộ cũ. Không tự bắt đầu tập khác.
+Các kiểm tra đã qua; PUBLIC_DELIVERY_QA.json, GITHUB_ASSET_AUDIT.json, profile cuối, nguồn, kịch bản, prompt và link được lưu trong GitHub. Giữ nguyên danh sách cũ và trạng thái tập tiếp theo của bộ cũ. Không tự bắt đầu tập khác.
 
 Chưa có footage hoặc MP4 tập Upano. Người dùng đang yêu cầu kịch bản, prompt, voice và 5 tiêu đề/thumbnail; không tự nhận đã dựng phim.

@@ -1,0 +1,26 @@
+MỚI-011 — UPANO — 20:22
+
+Đây là chủ đề MỚI-011 trong danh sách mới, không phải chủ đề 11 về kim khâu của bộ cũ.
+
+1. Kịch bản tiếng Anh: 3229 từ, 123 mốc lời; 122 mốc 10 giây và mốc cuối 2 giây.
+2. Tạo 130 clip 10 giây từ 13 TXT trong PROMPTS, đúng 10 prompt mỗi tệp. Đặt tên UPANO_001.mp4 đến UPANO_130.mp4.
+3. TIMELINE_130_CANH.csv nối hình và lời. 10 clip đầu lấy 3 giây mỗi clip cho mở đầu 30 giây. Cảnh 011–129 dùng 10 giây; cảnh 130 dùng 2 giây. Tổng 1.222 giây. Không cộng thêm intro ngoài thời lượng.
+4. Các mốc voice 10 giây và các cảnh mở đầu 3 giây có thể cắt ngang nhau; bảng ghi đầy đủ ID mốc lời liên quan. Không mặc định một mốc lời luôn bằng một cảnh.
+5. Mọi prompt tạo clip đều dài 10 giây, không có trẻ em, thiếu niên hoặc trẻ trong nền, ảnh, màn hình và phản chiếu. Người và bàn tay phải rõ trưởng thành 35–65 tuổi.
+6. Mỗi prompt kết bằng “Video không có âm thanh, không có lời nói.”. Khi dựng vẫn xóa âm gốc nếu công cụ tạo clip tự thêm âm.
+7. Phim chính chỉ voice tiếng Anh, không nhạc/SFX. Cảnh thiếu thay bằng video chuyển động liên quan, không ảnh đứng có chữ.
+8. Cảnh quay tạo sinh là minh họa. Mô hình, point cloud, mặt cắt và phục dựng không phải dữ liệu LiDAR hay tư liệu khai quật Upano thật. Không dùng như chứng cứ đo. Hình LiDAR thực cần kiểm nguồn và quyền sử dụng.
+9. Không kim tự tháp đá Maya, thành phố vàng, đường nhựa, xe cổ tưởng tượng hoặc trang phục nghi lễ bịa đặt. Nền đất, đường đào và thoát nước là các hình chính.
+10. Giữ 16 ID giọng nam đã chọn, tiếng Việt đúng vi-VN-NamMinhNeural. Dùng backend online của Melo-Viet-Studio 1.3.1 đã khóa mã nguồn trong GitHub; không khẳng định chạy giao diện Windows.
+11. Mỗi MP3 mục tiêu giải mã đúng 58.656.000 mẫu ở 48 kHz, tức 20:22. Tiếng Anh căn 123 mốc; bản dịch căn 13 chương chung: 12 × 100 giây + 22 giây cuối. Cùng thời lượng không có nghĩa từng từ cùng thời điểm.
+12. SRT Anh dùng làm mốc lời. SRT dịch theo chương cần chia nhỏ trước khi dùng làm phụ đề hiển thị. Không khẳng định là phụ đề từng từ đã kiểm nghe.
+13. Đây là tài liệu kịch bản và prompt, chưa có footage hoặc MP4. Các bản dịch và audio cần kiểm nghe bản ngữ trước khi phát hành chính thức.
+
+
+KẾT QUẢ VOICE ĐÃ HOÀN THÀNH
+
+Đã phát hành 16 MP3, toàn bộ giọng nam, mỗi bản giải mã đúng 1.222 giây. Giữ 15 ID cũ, tiếng Việt Nam Minh. Giọng Đức Conrad không còn trong danh mục nên chuyển sang Christoph nam; xem VOICE_ID_CHANGE.json. Không có giọng H'mông trong danh sách yêu cầu của tập này.
+
+Bản Việt được viết lại toàn bộ, sửa thuật ngữ và nhịp kể. Các bản khác được chuyển ngữ từ nguồn tiếng Anh đã làm rõ thuật ngữ, giữ ý chính, thứ tự chủ đề và giới hạn khoa học theo từng chương; chuyển ý lặp được rút gọn. Đã sửa thuật ngữ, niên đại, đoạn kết và các đoạn tiếng Anh lọt trong bản dịch. Chưa có kiểm nghe/biên tập bản ngữ độc lập.
+
+Cùng độ dài và cùng mốc chương không có nghĩa khớp từng từ hoặc từng cảnh 10 giây ở mọi ngôn ngữ. Phim chính dùng voice tiếng Anh.

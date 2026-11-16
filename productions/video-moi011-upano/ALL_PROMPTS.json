@@ -1,0 +1,1694 @@
+[
+  {
+    "id": 1,
+    "source_filename": "UPANO_001.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 0,
+    "timeline_end": 3,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      1
+    ],
+    "kind": "LANDSCAPE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A cinematic present-day rainforest edge in the eastern Ecuadorian Andean foothills opens toward a river terrace and a few distant clearings. This is geographic illustration, not asserted location footage. Camera: Wide high oblique aerial glide through thin morning mist. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 2,
+    "source_filename": "UPANO_002.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 3,
+    "timeline_end": 6,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      1
+    ],
+    "kind": "EARTHWORK",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A subtle straight shallow depression appears between patches of grass and low vegetation on a foothill terrace. Keep the ground relief modest, without a visible complete city. Camera: Low aerial side track with grazing daylight. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 3,
+    "source_filename": "UPANO_003.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 6,
+    "timeline_end": 9,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      1
+    ],
+    "kind": "EARTHWORK",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A low rectangular grass-covered earth bank comes into clear view beside lower open ground. Soil and plant textures remain ordinary and realistic. Camera: Close ground-level sideways dolly. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 4,
+    "source_filename": "UPANO_004.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 9,
+    "timeline_end": 12,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      1,
+      2
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A restrained physical teaching terrain model shows several small platform groups linked across a terrace. The model-board edge is visible; this is not actual surveyed Upano data. Camera: High oblique slow push toward the connected groups. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 5,
+    "source_filename": "UPANO_005.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 12,
+    "timeline_end": 15,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      2
+    ],
+    "kind": "EXPLAINER",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A transparent classroom canopy diorama allows a few discrete light paths through genuine gaps between opaque leaves to a soil tray, while other paths stop at vegetation. Camera: Close side tracking that keeps both leaves and soil in view. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 6,
+    "source_filename": "UPANO_006.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 15,
+    "timeline_end": 18,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      2
+    ],
+    "kind": "SECTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A small modern soil-profile teaching model reveals a shallow U-shaped route cut and low banks beside it. No paving, tunnel, stone wall or buried house. Camera: Low cross-sectional close slide. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 7,
+    "source_filename": "UPANO_007.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 18,
+    "timeline_end": 21,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      2,
+      3
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Rainwater moves gently along a shallow drainage demonstration beside a raised dry earthen edge. The water follows a plausible downhill gradient. Camera: Macro low angle tracking along the flowing water. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 8,
+    "source_filename": "UPANO_008.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 21,
+    "timeline_end": 24,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      3
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Small field plots, edge drains and a modest platform base coexist in one physical research model. Leave building roofs absent and functions illustrative. Camera: Overhead gentle arc connecting the field and platform. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 9,
+    "source_filename": "UPANO_009.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 24,
+    "timeline_end": 27,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      3
+    ],
+    "kind": "LAB",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A generic adult gloved hand aged 40 to 60 places one plain reference potsherd beside a soil sample on a modern laboratory tray. Neither is claimed as an authentic Upano find. Camera: Extreme close slow rack focus between pottery and soil. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 10,
+    "source_filename": "UPANO_010.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 27,
+    "timeline_end": 30,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      3
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. An earth-tone educational landscape model brings platforms, routes, cultivation spaces and drainage into a single coherent view. No exact ancient layout or population is asserted. Camera: Slow high oblique pullback preparing the transition to the main story. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 11,
+    "source_filename": "UPANO_011.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 30,
+    "timeline_end": 40,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      4
+    ],
+    "kind": "GEOGRAPHY",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A generalized unlabeled relief globe turns slowly toward northwestern South America, then eases toward the eastern Ecuadorian Andean foothills. Keep a clear physical-model appearance; the Andes and Amazon lowlands are recognizable, but no exact Upano boundary is claimed. Camera: High oblique overhead camera with a slow controlled push. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 12,
+    "source_filename": "UPANO_012.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 40,
+    "timeline_end": 50,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      5
+    ],
+    "kind": "LANDSCAPE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A foothill river winds below a vegetated alluvial terrace. The terrace edge, lower channel and distant ridges remain visible together beneath soft equatorial cloud. Camera: Aerial side tracking parallel to the terrace, stable horizon. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 13,
+    "source_filename": "UPANO_013.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 50,
+    "timeline_end": 60,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      6
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Moist soil, a gently raised walking surface and a lower drainage depression share one foreground. A little water moves toward lower ground beside vegetation. Camera: Ground-level dolly from damp soil toward the raised surface. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 14,
+    "source_filename": "UPANO_014.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 60,
+    "timeline_end": 70,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      7
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A deliberately simplified tabletop landscape contains low earthen building bases, modest productive plots and connecting paths. The surrounding room edge makes its explanatory scale-model status obvious. Camera: Medium overhead arc revealing all three feature types. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 15,
+    "source_filename": "UPANO_015.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 70,
+    "timeline_end": 80,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      8
+    ],
+    "kind": "EARTHWORK",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A low grass-covered rectangular bank becomes visible in grazing morning light. No wall, pyramid or buried stone structure appears. Camera: Eye-level lateral slide across the subtle change in ground height. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 16,
+    "source_filename": "UPANO_016.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 80,
+    "timeline_end": 90,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      9
+    ],
+    "kind": "SECTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A modern teaching soil section shows a level compacted upper surface beside a shallow cut. Earth textures stay physical and modest, with no hidden complete buildings. Camera: Close dolly along the section face, shallow depth of field. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 17,
+    "source_filename": "UPANO_017.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 90,
+    "timeline_end": 100,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      10
+    ],
+    "kind": "FIELD",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A generic adult archaeologist aged 40 to 60 compares a small exposed soil edge with an unmarked terrain model on a folding field table. Dress and equipment are plainly modern. Camera: Medium over-shoulder camera, gentle forward drift. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 18,
+    "source_filename": "UPANO_018.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 100,
+    "timeline_end": 110,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      11
+    ],
+    "kind": "ARCHIVE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Plain closed folders, a rolled unmarked survey sheet, a measuring tape and an earthwork model rest on a research desk. Nothing contains readable or invented historical writing. Camera: Slow top-down lateral drift in soft window light. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 19,
+    "source_filename": "UPANO_019.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 110,
+    "timeline_end": 120,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      12
+    ],
+    "kind": "FIELD",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A modern excavation demonstration exposes a floor-like compact surface, discrete posthole stains and a pottery fragment, with adjacent undisturbed ground visible. It is an illustrative set, not an asserted actual Upano trench. Camera: Low oblique close tracking along the cleaned area. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 20,
+    "source_filename": "UPANO_020.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 120,
+    "timeline_end": 130,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      13
+    ],
+    "kind": "FIELD",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A narrow teaching excavation cuts through layered soil beside a much longer shallow ground depression that continues into the distance. The limited trench footprint stays clear. Camera: Slow rise from close soil detail to a medium landscape view. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 21,
+    "source_filename": "UPANO_021.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 130,
+    "timeline_end": 140,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      14
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. One roofless domestic-floor teaching model sits within a larger group of low earthen platforms. The model contains no people or invented furnishings. Camera: Pull back from one floor to the surrounding group. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 22,
+    "source_filename": "UPANO_022.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 140,
+    "timeline_end": 150,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      15
+    ],
+    "kind": "LANDSCAPE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Open vegetated ground stretches between two low platform groups; faint shallow linear depressions cross the intervening space. Avoid claiming an exact surveyed alignment. Camera: Vertical overhead drift following the space between groups. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 23,
+    "source_filename": "UPANO_023.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 150,
+    "timeline_end": 160,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      16
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A physical landscape model shows two platform clusters separated by a working field with small edge channels. The field occupies the visual center. Camera: Low oblique glide across the field toward the farther cluster. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 24,
+    "source_filename": "UPANO_024.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 160,
+    "timeline_end": 170,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      17
+    ],
+    "kind": "SURVEY",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A modern small fixed-wing survey aircraft passes above a green foothill valley. A discrete sensor pod is visible without brands or readable markings. Camera: Long-lens side view with a smooth slow tracking pan. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 25,
+    "source_filename": "UPANO_025.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 170,
+    "timeline_end": 180,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      18
+    ],
+    "kind": "FIELD",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A modern adult field team aged 35 to 65 inspects a subtle earth bank using a staff and tape beside a modest survey instrument. Their interaction is cooperative and observational. Camera: Medium-wide handheld-style stabilized arc. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 26,
+    "source_filename": "UPANO_026.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 180,
+    "timeline_end": 190,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      19
+    ],
+    "kind": "PEOPLE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Two clearly adult local field collaborators aged 40 to 60 in contemporary work clothing discuss a grass-covered ground feature with another adult researcher. No ceremonial costume or tourist tableau. Camera: Eye-level medium three-quarter shot, slow lateral move. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 27,
+    "source_filename": "UPANO_027.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 190,
+    "timeline_end": 200,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      20
+    ],
+    "kind": "SURVEY",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A modern aerial-survey sensor mounted beneath a stationary research aircraft is inspected by an adult technician aged 40 to 60. The device has plain surfaces and no fabricated labels. Camera: Close upward angle with a small controlled push. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 28,
+    "source_filename": "UPANO_028.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 200,
+    "timeline_end": 210,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      21
+    ],
+    "kind": "EXPLAINER",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A clearly synthetic teaching scene shows a few discrete light pulses traveling from a suspended sensor model to a terrain model and returning. Pulse paths end on actual surfaces. Camera: Static oblique macro camera with slow focus change. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 29,
+    "source_filename": "UPANO_029.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 210,
+    "timeline_end": 220,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      22
+    ],
+    "kind": "EXPLAINER",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. In a small transparent teaching diorama, some discrete light rays stop at leaves while a few pass through genuine gaps to soil. Light never passes through solid leaves. Camera: Close side view tracking across the canopy layers. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 30,
+    "source_filename": "UPANO_030.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 220,
+    "timeline_end": 230,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      23
+    ],
+    "kind": "SURVEY",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A modern survey instrument rests above a simple leafy branch and soil tray in a laboratory demonstration. The branch stays opaque and ordinary throughout. Camera: Medium side profile with gentle dolly toward the sensor. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 31,
+    "source_filename": "UPANO_031.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 230,
+    "timeline_end": 240,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      24
+    ],
+    "kind": "EXPLAINER",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A synthetic three-dimensional point-cloud demonstration has distinct canopy-height and ground-height points over a small terrain sample. It is visibly a simplified classroom visualization, not real Upano data. Camera: Slow orbital view with restrained pale points on a neutral dark background. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 32,
+    "source_filename": "UPANO_032.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 240,
+    "timeline_end": 250,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      25
+    ],
+    "kind": "EXPLAINER",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A teaching point-cloud model separates raised vegetation points from a sparse set of ground points; the remaining terrain stays incomplete where observations are absent. Camera: High oblique camera drifting toward one sparse patch. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 33,
+    "source_filename": "UPANO_033.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 250,
+    "timeline_end": 260,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      26
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A matte physical terrain model remains fixed while a soft light slowly moves from one side to another, revealing shallow banks and depressions through changing shadows. Camera: Locked medium close view; only the light direction changes. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 34,
+    "source_filename": "UPANO_034.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 260,
+    "timeline_end": 270,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      27
+    ],
+    "kind": "FIELD",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. An adult researcher aged 35 to 60 compares a shallow line in a teaching terrain model with an actual soil-profile demonstration beside it. Both model and physical sample remain distinct. Camera: Over-shoulder slow slider move toward the soil. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 35,
+    "source_filename": "UPANO_035.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 270,
+    "timeline_end": 280,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      28
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Tree roots, a small eroded rill and a modern foot track coexist on a natural forest-floor slope. Each has a different physical form without labels. Camera: Ground-level tracking shot with deliberate focus shifts. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 36,
+    "source_filename": "UPANO_036.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 280,
+    "timeline_end": 290,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      29
+    ],
+    "kind": "FIELD",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A modern measured earthwork demonstration lies next to a plain small relief model; an adult gloved hand aged 40 to 60 points out a matching edge without touching fragile material. Camera: Medium top-down close view, gradual push. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 37,
+    "source_filename": "UPANO_037.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 290,
+    "timeline_end": 300,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      30
+    ],
+    "kind": "EXPLAINER",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. An unmarked physical terrain model, a plain soil sample and a survey sensor sit on one research bench. Their different scales remain visible together. Camera: Slow wide-to-medium dolly toward the trio. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 38,
+    "source_filename": "UPANO_038.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 300,
+    "timeline_end": 310,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      31
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Three to six low rectangular earthen bases surround an open lower area in a restrained explanatory model. No specific historic roof design or ceremonial activity is invented. Camera: Top-down camera slowly rotates a few degrees. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 39,
+    "source_filename": "UPANO_039.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 310,
+    "timeline_end": 320,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      32
+    ],
+    "kind": "FIELD",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A demonstrative archaeological surface contains a modest hearth stain, small pottery fragments and posthole outlines, with modern measuring equipment outside the feature. Camera: Close low oblique tracking, calm natural light. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 40,
+    "source_filename": "UPANO_040.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 320,
+    "timeline_end": 330,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      33
+    ],
+    "kind": "SECTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A circular dark soil stain is exposed in a clean teaching profile and plan surface. A modern adult gloved hand aged 40 to 60 gently brushes its edge. Camera: Extreme close macro with a slow rack focus from edge to center. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 41,
+    "source_filename": "UPANO_041.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 330,
+    "timeline_end": 340,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      34
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A timber-free footprint model displays only low foundations and post positions. The empty space above stays visible, emphasizing the absence of a complete recovered building. Camera: Low eye-level push across the base. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 42,
+    "source_filename": "UPANO_042.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 340,
+    "timeline_end": 350,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      35
+    ],
+    "kind": "RECONSTRUCTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A clearly modern educational roof mock-up of simple timber and plant material stands beside its unfinished framework. No claim of exact ancient Upano architecture; no people beneath it. Camera: Medium three-quarter arc around the incomplete mock-up. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 43,
+    "source_filename": "UPANO_043.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 350,
+    "timeline_end": 360,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      36
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A small teaching tray demonstrates soil being moved into a low rectangular raised surface by clearly modern adult hands aged 40 to 60 using a plain scoop. Camera: Overhead close view, one slow shaping action. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 44,
+    "source_filename": "UPANO_044.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 360,
+    "timeline_end": 370,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      37
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. An expansive illustrative relief model contains many low platform groups distributed across fields and routes; its tabletop border is visible so it cannot be mistaken for measured survey data. Camera: Slow elevated pullback revealing increasing extent. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 45,
+    "source_filename": "UPANO_045.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 370,
+    "timeline_end": 380,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      38
+    ],
+    "kind": "SECTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A teaching earthwork section contains successive thin compacted surfaces and a repaired edge, represented without objects assigned an invented date. Camera: Close horizontal slide along the layered face. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 46,
+    "source_filename": "UPANO_046.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 380,
+    "timeline_end": 390,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      39
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Several separate platform groups share a simple layout but differ in spacing and surrounding terrain. Preserve modest earthen forms without imported stone architecture. Camera: High oblique lateral move across the groups. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 47,
+    "source_filename": "UPANO_047.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 390,
+    "timeline_end": 400,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      40
+    ],
+    "kind": "EARTHWORK",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A shallow straight depression continues beyond the edge of a low grass-covered platform group. A band of side-light makes the line readable. Camera: Low aerial glide outward along the depression. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 48,
+    "source_filename": "UPANO_048.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 400,
+    "timeline_end": 410,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      41
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A straight dug-route teaching model crosses gently uneven terrain between two platform groups. Its earth banks and changing slopes are easily visible. Camera: Long low oblique tracking along the route. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 49,
+    "source_filename": "UPANO_049.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 410,
+    "timeline_end": 420,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      42
+    ],
+    "kind": "EXPLAINER",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A neutral terrain model shows one route ending at a platform cluster and another line entering natural drainage. Different destinations remain clear without colored labels or text. Camera: Overhead slow push toward the two endpoints. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 50,
+    "source_filename": "UPANO_050.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 420,
+    "timeline_end": 430,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      43
+    ],
+    "kind": "SECTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A U-shaped cut bordered by modest earth banks is displayed in a modern soil-profile mock-up. No large roadway, paving or vehicle appears. Camera: Low cross-sectional view with a gentle sideways slide. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 51,
+    "source_filename": "UPANO_051.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 430,
+    "timeline_end": 440,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      44
+    ],
+    "kind": "LANDSCAPE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A present-day foothill terrain sequence includes a shallow path, a gully and a curved contour track within one wide hillside view. Do not assert exact archaeological identification. Camera: Stable high oblique aerial drift. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 52,
+    "source_filename": "UPANO_052.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 440,
+    "timeline_end": 450,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      45
+    ],
+    "kind": "EARTHWORK",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A narrow plain earthen walking route crosses open green ground beside a low bank, with no road paving, machinery or vehicles. Camera: Ground-level forward tracking at an adult walking height. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 53,
+    "source_filename": "UPANO_053.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 450,
+    "timeline_end": 460,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      46
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A tabletop hill has one contour-following path and one straighter cut over a rise, making the terrain difference visible as a general engineering comparison. Camera: Sideways overhead move from contour route to straighter route. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 54,
+    "source_filename": "UPANO_054.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 460,
+    "timeline_end": 470,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      47
+    ],
+    "kind": "EARTHWORK",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. An empty broad earthen approach leads toward a low platform group under overcast light. Leave possible uses open; no invented ceremony, market or procession. Camera: Centered medium-wide slow forward dolly. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 55,
+    "source_filename": "UPANO_055.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 470,
+    "timeline_end": 480,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      48
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A junction connects a platform group, small cultivated plots and another route on a simple physical model. Keep all connections visible in one spatial composition. Camera: Top-down slow arc around the junction. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 56,
+    "source_filename": "UPANO_056.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 480,
+    "timeline_end": 490,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      49
+    ],
+    "kind": "SECTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A model route passes beside exposed teaching soil layers at two separated locations, suggesting the need to compare construction history without supplying dates. Camera: Medium oblique glide from one section to the other. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 57,
+    "source_filename": "UPANO_057.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 490,
+    "timeline_end": 500,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      50
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Light rain feeds a shallow runoff stream beside a raised earthen path. The water remains small and physically plausible rather than a dramatic flood. Camera: Low close tracking parallel to the moving water. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 58,
+    "source_filename": "UPANO_058.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 500,
+    "timeline_end": 510,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      51
+    ],
+    "kind": "BOTANY",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A modern transparent soil teaching column shows roots in moist porous ground, with visible air spaces in an exaggerated but clearly educational model. Camera: Close macro dolly down along the root zone. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 59,
+    "source_filename": "UPANO_059.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 510,
+    "timeline_end": 520,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      52
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A soil tray becomes saturated as water fills small surface depressions around a living plant, illustrating a general drainage problem rather than an actual ancient field. Camera: Side close view with natural water behavior. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 60,
+    "source_filename": "UPANO_060.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 520,
+    "timeline_end": 530,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      53
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Rectangular field plots and shallow connecting drains fill the space between modest platform clusters in an illustrative garden-urbanism model. Camera: High overhead track following the inter-settlement space. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 61,
+    "source_filename": "UPANO_061.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 530,
+    "timeline_end": 540,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      54
+    ],
+    "kind": "SECTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A shallow channel is viewed first close, then in the context of a small plot and its lower outlet on a physical model. Avoid a sudden transformation. Camera: Continuous slow pullback from channel to complete plot. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 62,
+    "source_filename": "UPANO_062.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 540,
+    "timeline_end": 550,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      55
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. In a transparent-sided teaching tray, water runs gently down a connected sloping channel toward a lower collector. No arrows, labels or impossible uphill flow. Camera: Side macro tracking with the visible water. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 63,
+    "source_filename": "UPANO_063.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 550,
+    "timeline_end": 560,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      56
+    ],
+    "kind": "RECONSTRUCTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A restrained unoccupied educational reconstruction places simple earthen building bases near small productive plots and paths, clearly a model landscape rather than recovered architecture. Camera: Medium low aerial glide from bases toward plots. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 64,
+    "source_filename": "UPANO_064.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 560,
+    "timeline_end": 570,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      57
+    ],
+    "kind": "SECTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A raised walking edge and adjacent lower drainage cut are shown together in a realistic modern terrain mock-up. One shallow stream moves beside the dry top. Camera: Low diagonal slider move showing both heights. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 65,
+    "source_filename": "UPANO_065.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 570,
+    "timeline_end": 580,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      58
+    ],
+    "kind": "EXPLAINER",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. An unlabeled model has two similar-looking shallow lines, one joining a platform approach and one ending at a drainage outlet, demonstrating why spatial context matters. Camera: Top-down controlled drift along their different connections. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 66,
+    "source_filename": "UPANO_066.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 580,
+    "timeline_end": 590,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      59
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Platform density gradually varies across a physical landscape model while field plots continue through the less built-up areas. No blank city-versus-wilderness divide. Camera: Wide overhead slow lateral move across the density change. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 67,
+    "source_filename": "UPANO_067.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 590,
+    "timeline_end": 600,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      60
+    ],
+    "kind": "RECONSTRUCTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A broad illustrative panorama combines modest earthen residential bases, open plots, paths and vegetation into one mixed landscape; no towers or grand stone monuments. Camera: Slow high oblique orbit with soft late-afternoon light. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 68,
+    "source_filename": "UPANO_068.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 600,
+    "timeline_end": 610,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      61
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A modern adult technician aged 40 to 60 checks a small drainage-model outlet and clears a tiny sediment blockage as a present-day teaching demonstration. Camera: Close eye-level shot of hands and the model. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 69,
+    "source_filename": "UPANO_069.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 610,
+    "timeline_end": 620,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      62
+    ],
+    "kind": "LAB",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A plain unpatterned reference potsherd lies in a laboratory tray beside a clean sampling swab. It is a teaching object, not an asserted authentic Upano vessel. Camera: Extreme macro slider move across the pottery surface. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 70,
+    "source_filename": "UPANO_070.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 620,
+    "timeline_end": 630,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      63
+    ],
+    "kind": "LAB",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Modern reference samples of maize kernels, beans, manioc and sweet potato rest in separate plain dishes. No specimen labels or invented archaeological contexts. Camera: Slow overhead glide across the four reference foods. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 71,
+    "source_filename": "UPANO_071.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 630,
+    "timeline_end": 640,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      64
+    ],
+    "kind": "LAB",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A microscope and one teaching residue slide occupy a clean research bench; the composition emphasizes a single small sample rather than a complete field plan. Camera: Medium-to-close dolly toward the stage of the microscope. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 72,
+    "source_filename": "UPANO_072.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 640,
+    "timeline_end": 650,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      65
+    ],
+    "kind": "BOTANY",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A small present-day crop plot changes visibly in soil moisture and plant spacing across one continuous garden setting, without a time-lapse or claims of ancient yield. Camera: Eye-level lateral tracking along the plants. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 73,
+    "source_filename": "UPANO_073.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 650,
+    "timeline_end": 660,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      66
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A physical miniature links a simple occupied-surface base, a preparation area and small plots via narrow paths; no human figures or invented household furnishing. Camera: Low oblique slow push along the connection. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 74,
+    "source_filename": "UPANO_074.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 660,
+    "timeline_end": 670,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      67
+    ],
+    "kind": "RECONSTRUCTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. An unoccupied generic educational landscape has a simple earthen base, an adjacent plot and a shallow outlet visible along a short path. Camera movement illustrates travel distance only. Camera: Steady adult-eye-height forward move along the path. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 75,
+    "source_filename": "UPANO_075.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 670,
+    "timeline_end": 680,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      68
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A compact model junction shows nearby plots, a raised path and a functioning drainage outlet together; water moves only in the lower channel. Camera: Overhead gentle circular move around the junction. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 76,
+    "source_filename": "UPANO_076.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 680,
+    "timeline_end": 690,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      69
+    ],
+    "kind": "EARTHWORK",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A weathered low boundary bank meets two path alignments on grassy ground. Leave ownership and social meaning unspecified; no signs, fences or flags. Camera: Close oblique glide following the meeting edges. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 77,
+    "source_filename": "UPANO_077.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 690,
+    "timeline_end": 700,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      70
+    ],
+    "kind": "SECTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. An adult researcher's hands aged 40 to 60 rotate an unmarked section model with several differently shaped construction surfaces. No dates or text appear. Camera: Medium over-table angle with a slow focus pull. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 78,
+    "source_filename": "UPANO_078.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 700,
+    "timeline_end": 710,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      71
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Plant stems lean over a small earthen channel after rain; loose sediment and tiny roots are visible along the cut. The scene stays ordinary and physical. Camera: Macro low-angle tracking beside the channel. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 79,
+    "source_filename": "UPANO_079.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 710,
+    "timeline_end": 720,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      72
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A modern soil-tray experiment shows modest runoff depositing sediment in a shallow channel while a nearby walking surface becomes damp. No catastrophe or collapsing settlement. Camera: Close fixed side view with a gentle camera creep. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 80,
+    "source_filename": "UPANO_080.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 720,
+    "timeline_end": 730,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      73
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A clearly modern adult demonstrator aged 40 to 60 uses a plain small tool to clear a soil-tray outlet. Show only hands and the teaching setup, not invented ancient work crews. Camera: Top-down close follow of the single clearing action. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 81,
+    "source_filename": "UPANO_081.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 730,
+    "timeline_end": 740,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      74
+    ],
+    "kind": "RECONSTRUCTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. An incomplete modern educational timber-and-thatch shelter mock-up exposes its supports and roof layers on a simple raised earth base. No exact historic attribution is implied. Camera: Low three-quarter slow arc through the exposed structure. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 82,
+    "source_filename": "UPANO_082.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 740,
+    "timeline_end": 750,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      75
+    ],
+    "kind": "EARTHWORK",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A broad modest earthen platform edge is seen in warm grazing light with dense vegetation beyond. There is no masonry or imported monumental silhouette. Camera: Low wide-angle sideways track emphasizing earth texture. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 83,
+    "source_filename": "UPANO_083.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 750,
+    "timeline_end": 760,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      76
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A modern adult demonstrator aged 40 to 60 measures soil volume in a small plain tray and shapes one level surface. The operation is illustrative and contemporary. Camera: Close oblique slider across soil, scoop and straightedge. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 84,
+    "source_filename": "UPANO_084.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 760,
+    "timeline_end": 770,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      77
+    ],
+    "kind": "SECTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A physical earthwork teaching section contains several superimposed additions with subtle differences in soil color, all visible at once. No implied accelerated historical transformation. Camera: Slow close rise from the lower layer to the upper additions. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 85,
+    "source_filename": "UPANO_085.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 770,
+    "timeline_end": 780,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      78
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Several construction-stage models stand separately on one neutral research table, showing how an accumulated plan can combine features from different stages. No dates or lettering. Camera: Sideways medium shot passing the distinct models. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 86,
+    "source_filename": "UPANO_086.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 780,
+    "timeline_end": 790,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      79
+    ],
+    "kind": "LAB",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A researcher aged 40 to 60 compares a small terrain model with plain sample containers and a cleaned soil section, keeping spatial and stratigraphic evidence distinct. Camera: Over-shoulder slow dolly toward the evidence group. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 87,
+    "source_filename": "UPANO_087.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 790,
+    "timeline_end": 800,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      80
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A wide physical relief model shows linked platform clusters while several generic modern adult hands aged 35 to 65 approach from different table sides to compare parts. Camera: High oblique stable camera with a slow push. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 88,
+    "source_filename": "UPANO_088.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 800,
+    "timeline_end": 810,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      81
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Three platform clusters share a similar modest layout but no larger central palace or dominant monument is added. Paths connect them across the model landscape. Camera: Top-down lateral glide across the repeated layout. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 89,
+    "source_filename": "UPANO_089.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 810,
+    "timeline_end": 820,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      82
+    ],
+    "kind": "PEOPLE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Three clearly adult present-day field collaborators aged 35 to 65 jointly inspect a plain site model outdoors, each gesturing toward a different connection. No one is staged as an ancient ruler. Camera: Eye-level medium-wide calm arc. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 90,
+    "source_filename": "UPANO_090.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 820,
+    "timeline_end": 830,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      83
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A neutral teaching model shows differently sized platform groups connected by routes, with no human icons, ranks, crowns or assumptions about equality. Camera: Medium overhead camera gently follows the size variation. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 91,
+    "source_filename": "UPANO_091.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 830,
+    "timeline_end": 840,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      84
+    ],
+    "kind": "LAB",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A small physical earthwork model, a reference potsherd and a soil section sit in separate clear zones on a research table. No fake paper conclusions or readable screens. Camera: Slow diagonal tracking across the separated evidence. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 92,
+    "source_filename": "UPANO_092.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 840,
+    "timeline_end": 850,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      85
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A larger low platform beside smaller residential-scale bases is shown in a restrained model; no ceremony, throne, altar or people are invented. Camera: Low oblique rise showing relative footprint and modest height. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 93,
+    "source_filename": "UPANO_093.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 850,
+    "timeline_end": 860,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      86
+    ],
+    "kind": "EARTHWORK",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A shallow peripheral ditch and a narrowed earthen approach appear in a generic modern demonstration landscape. Leave defensive function unresolved; no weapons or combat. Camera: High oblique slow pass along the barrier-like feature. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 94,
+    "source_filename": "UPANO_094.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 860,
+    "timeline_end": 870,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      87
+    ],
+    "kind": "LANDSCAPE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Two distant modest earthwork groups sit across a complex green valley. Maintain visual openness about their relationship; no battle, procession or idyllic communal tableau. Camera: Long-lens slow pan between the two groups. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 95,
+    "source_filename": "UPANO_095.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 870,
+    "timeline_end": 880,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      88
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A research-room terrain model of earthen platforms is shown without any imported temples, stepped stone pyramids or recognizable architecture from another civilization. Camera: Medium close arc keeping the simple building bases prominent. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 96,
+    "source_filename": "UPANO_096.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 880,
+    "timeline_end": 890,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      89
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Two modern soil-tray experiments with similar drainage cuts use different slopes, illustrating how similar engineering problems may produce related shapes. No cultural identification is supplied. Camera: Overhead lateral shot moving between the trays. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 97,
+    "source_filename": "UPANO_097.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 890,
+    "timeline_end": 900,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      90
+    ],
+    "kind": "LAB",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A cleaned teaching soil profile and several plain sealed sample containers stand beside an unmarked terrain model. The camera draws attention from surface plan to layers. Camera: Slow rack focus and short forward dolly. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 98,
+    "source_filename": "UPANO_098.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 900,
+    "timeline_end": 910,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      91
+    ],
+    "kind": "FIELD",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A modern adult archaeologist aged 40 to 60 removes a tiny charcoal-like teaching sample from a clearly exposed layer into a clean plain container. No readable labels. Camera: Extreme close oblique view of careful hand movement. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 99,
+    "source_filename": "UPANO_099.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 910,
+    "timeline_end": 920,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      92
+    ],
+    "kind": "LAB",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A tiny charcoal reference fragment rests beside an enlarged teaching wood-grain model, making the origin in once-living material visually clear. Avoid claiming an actual dated specimen. Camera: Macro side tracking in soft laboratory light. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 100,
+    "source_filename": "UPANO_100.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 920,
+    "timeline_end": 930,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      93
+    ],
+    "kind": "SECTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A section model shows a sample cavity in one layer and a later small disturbance cutting across another part. Disturbance is visible through physical layering, without animated dates. Camera: Medium close slow lateral move across both contexts. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 101,
+    "source_filename": "UPANO_101.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 930,
+    "timeline_end": 940,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      94
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A long unmarked tabletop stratigraphic display has several distinct earth layers and modest construction models spaced above them. It illustrates a broad sequence without fake numerical dates. Camera: Slow overhead slide along the sequence. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 102,
+    "source_filename": "UPANO_102.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 940,
+    "timeline_end": 950,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      95
+    ],
+    "kind": "PEOPLE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Two adult researchers aged 40 to 65 compare alternative arrangements of plain sample containers beside a soil-section model. Their discussion is professional and open-ended. Camera: Medium three-quarter slow arc with no audible speech or lip-focused framing. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 103,
+    "source_filename": "UPANO_103.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 950,
+    "timeline_end": 960,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      96
+    ],
+    "kind": "LAB",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A laboratory technician aged 40 to 60 carefully positions a plain sample holder in a generic dating-analysis instrument. No fabricated readout, exact result or brand. Camera: Close over-shoulder push toward the sample chamber. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 104,
+    "source_filename": "UPANO_104.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 960,
+    "timeline_end": 970,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      97
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Two platform groups are linked by a route while separate small cross-section models sit beside each group on the teaching table. The image keeps connection and dating evidence distinct. Camera: High oblique slow drift between the two locations. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 105,
+    "source_filename": "UPANO_105.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 970,
+    "timeline_end": 980,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      98
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Many unoccupied low platform shapes sit on a relief model with open spaces and paths. No people are counted and no population number or house icon is displayed. Camera: Wide overhead slow pullback emphasizing the limits of the model. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 106,
+    "source_filename": "UPANO_106.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 980,
+    "timeline_end": 990,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      99
+    ],
+    "kind": "LAB",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Several plain sample containers and alternative unmarked model pieces remain spread on a research bench, with no final numerical answer staged. Camera: Low medium slider move with shallow depth of field. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 107,
+    "source_filename": "UPANO_107.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 990,
+    "timeline_end": 1000,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      100
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A complete restrained model composition clearly brings low platforms, connecting routes and field drains into one visible landscape. Features remain earth-built and modest. Camera: Slow high-angle widening shot in neutral daylight. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 108,
+    "source_filename": "UPANO_108.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1000,
+    "timeline_end": 1010,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      101
+    ],
+    "kind": "LANDSCAPE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A quiet present-day terrace with weathered earthworks leads toward distant mountain slopes beneath gathering clouds. No sudden destruction or abandoned human bodies. Camera: Slow low aerial drift toward the horizon. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 109,
+    "source_filename": "UPANO_109.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1010,
+    "timeline_end": 1020,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      102
+    ],
+    "kind": "GEOGRAPHY",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A distant active stratovolcano representative of the Ecuadorian foothill setting sits beyond green ridges, with only a modest plausible plume and no catastrophic eruption. Camera: Stable long-lens landscape shot with slow sideways camera motion. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 110,
+    "source_filename": "UPANO_110.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1020,
+    "timeline_end": 1030,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      103
+    ],
+    "kind": "SECTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Several thin volcanic-looking teaching sediment layers and sample positions are displayed in a modern section model; no one layer is presented as a proven city-ending catastrophe. Camera: Close horizontal tracking along the layered material. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 111,
+    "source_filename": "UPANO_111.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1030,
+    "timeline_end": 1040,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      104
+    ],
+    "kind": "FIELD",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A teaching excavation set exposes a later small floor above older modified ground, showing reuse through layers without claiming exact cultural identity or date. Camera: Slow upward tilt from lower profile to the later surface. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 112,
+    "source_filename": "UPANO_112.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1040,
+    "timeline_end": 1050,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      105
+    ],
+    "kind": "LANDSCAPE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Old low banks, newer field edges and regrowing vegetation coexist in one present-day foothill terrace view. No single before-and-after transition is used. Camera: High oblique aerial glide across the mosaic. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 113,
+    "source_filename": "UPANO_113.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1050,
+    "timeline_end": 1060,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      106
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Two separate explanatory terrain models show different vegetation cover and ground use, visibly standing on a studio table rather than magically transforming into history. Camera: Medium lateral move from one model to the other. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 114,
+    "source_filename": "UPANO_114.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1060,
+    "timeline_end": 1070,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      107
+    ],
+    "kind": "LANDSCAPE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A broad contemporary eastern Ecuadorian foothill landscape combines forest patches, small fields, exposed ground and a distant modern settlement. No identifiable private property or readable signs. Camera: Slow high aerial traverse across the varied land cover. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 115,
+    "source_filename": "UPANO_115.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1070,
+    "timeline_end": 1080,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      108
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A small eroded earth bank has roots and a recent shallow track nearby; natural wear and later disturbance are visible together without a dramatic collapse. Camera: Close low oblique tracking across the damaged edge. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 116,
+    "source_filename": "UPANO_116.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1080,
+    "timeline_end": 1090,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      109
+    ],
+    "kind": "EXPLAINER",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A synthetic terrain display ends at an obvious rectangular model-board edge, with sparse point markers near that edge, illustrating the limit of coverage rather than an ancient border. Camera: Slow overhead approach to the clearly artificial display boundary. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 117,
+    "source_filename": "UPANO_117.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1090,
+    "timeline_end": 1100,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      110
+    ],
+    "kind": "FIELD",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A modern adult field researcher aged 40 to 60 checks one modest ground depression with a staff while another adult collaborator takes an unmarked sample container. Camera: Medium eye-level stabilized follow. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 118,
+    "source_filename": "UPANO_118.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1100,
+    "timeline_end": 1110,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      111
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A camera moves through a large physical landscape model, bringing a low platform, a connecting route and a cultivated plot into the same line of sight. Camera: Low continuous model-level dolly with deep focus. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 119,
+    "source_filename": "UPANO_119.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1110,
+    "timeline_end": 1120,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      112
+    ],
+    "kind": "PROCESS",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A small functioning demonstration model shows water leaving a plot via a gentle ditch beside a raised dry platform and path. No impossible hydrology. Camera: Close overhead slow arc centered on the junction. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 120,
+    "source_filename": "UPANO_120.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1120,
+    "timeline_end": 1130,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      113
+    ],
+    "kind": "RECONSTRUCTION",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A restrained unoccupied educational vista gives equal visual weight to open productive ground, modest raised building bases and paths, with plant cover at the edges. Camera: Slow wide oblique descent toward the spaces between bases. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 121,
+    "source_filename": "UPANO_121.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1130,
+    "timeline_end": 1140,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      114
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A physical model shifts gently in view from a denser platform cluster to a looser agricultural zone without changing style or implying modern zoning. Camera: High lateral glide across the density gradient. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 122,
+    "source_filename": "UPANO_122.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1140,
+    "timeline_end": 1150,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      115
+    ],
+    "kind": "FIELD",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Modern adult Ecuadorian field collaborators aged 35 to 65 work together beside an earthen feature in contemporary clothing, with ordinary research equipment and no exotic visitor or ruler figure. Camera: Medium-wide documentary-style slow tracking. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 123,
+    "source_filename": "UPANO_123.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1150,
+    "timeline_end": 1160,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      116
+    ],
+    "kind": "EARTHWORK",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A close view of compacted earthen surfaces and adjacent ordinary plant growth emphasizes the material work itself, with a distant unoccupied platform edge. Camera: Ground-level macro-to-medium focus pull. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 124,
+    "source_filename": "UPANO_124.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1160,
+    "timeline_end": 1170,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      117
+    ],
+    "kind": "PEOPLE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A small contemporary adult field team aged 40 to 65 discusses a low ground feature with local adult collaborators, all in practical modern clothes. No performance of ancient identity. Camera: Eye-level medium arc at respectful distance. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 125,
+    "source_filename": "UPANO_125.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1170,
+    "timeline_end": 1180,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      118
+    ],
+    "kind": "FIELD",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A survey staff, clean sample container and small exposed section share a modest modern field workspace at the terrace edge. No staged breakthrough gesture. Camera: Slow medium push through the equipment toward the ground. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 126,
+    "source_filename": "UPANO_126.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1180,
+    "timeline_end": 1190,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      119
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A continuous route across a restrained terrain model connects platform bases, fields and a shallow drainage outlet. The coherent relationship is visible without labels or glowing network lines. Camera: High oblique follow along the connected sequence. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 127,
+    "source_filename": "UPANO_127.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1190,
+    "timeline_end": 1200,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      120
+    ],
+    "kind": "LANDSCAPE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Thin foliage partly obscures a subtle earth bank beyond; the camera finds a clear gap and reveals the ground without making leaves transparent. Camera: Slow ground-level move sideways through a natural visual gap. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 128,
+    "source_filename": "UPANO_128.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1200,
+    "timeline_end": 1210,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      121
+    ],
+    "kind": "LANDSCAPE",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A wide return to a forest-and-field foothill valley shows low terraces and the river at dusk. Use a fresh lower angle than the opening and no precise claim about unverified archaeology visible from this height. Camera: Slow low aerial ascent with a stable horizon. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 129,
+    "source_filename": "UPANO_129.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1210,
+    "timeline_end": 1220,
+    "use_seconds": 10,
+    "voice_cue_ids": [
+      122
+    ],
+    "kind": "MODEL",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A final explanatory earth-tone model holds platforms, routes, fields and drainage together in a balanced composition. Leave uncertain building roofs absent; no final magical city reveal. Camera: Gradual overhead pullback with soft raking light. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 130,
+    "source_filename": "UPANO_130.mp4",
+    "generation_seconds": 10,
+    "timeline_start": 1220,
+    "timeline_end": 1222,
+    "use_seconds": 2,
+    "voice_cue_ids": [
+      123
+    ],
+    "kind": "EARTHWORK",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. In quiet dawn light, a small grass-covered earthen ridge joins a shallow path at the edge of open ground. The connection remains centered, simple and readable for the final edit. Camera: Very slow close lateral slide with deep focus. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  }
+]

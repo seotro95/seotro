@@ -1,0 +1,167 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-011",
+  "target_seconds": 1222,
+  "voices": 16,
+  "script_sha256": {
+    "en-US": "39dbcf9a84525d4ee169e9bf7152bdbca3d33413f02c114c0212d95d9f502aeb",
+    "vi-VN": "bd9add868fd5f4d429ca9ca8b9e00f393a4499bd36c146c9f80aa30e659a2f58",
+    "es-ES": "4278b7d23a847b04d7b74d0ee6548f682af3ae2f70b349c29c2d4c4fd5405e7d",
+    "fr-FR": "22052bc5afbbd21b11968e2ac8e76d7bcf0f36e91d78bdef364f3024c3f67542",
+    "ja-JP": "1f0a1661c466ae66e4e60d5cb213c5cc021a7926bc244f39d1992f5110ef7ab7",
+    "ko-KR": "91d679117038aeb9417d694419ce2a604f7b831fdff274ab5bbbca4a9799cb8a",
+    "de-DE": "6e3c31e115b0504d91c06288145f4d8396f83bd263b017313bea4c3f7446f411",
+    "it-IT": "223c27bb36a5348ef73cb1df5dab4dfea3c51750ce10cfc658e0089e3469b72d",
+    "pt-PT": "b4df17b315a7a8f45f8ff833cfbed24cb142ee8644feaeefe408f691a6cf4279",
+    "nl-NL": "b9590e454467953474052b19814983706c950b86cfb18ceb1081d13f2b6c64b4",
+    "pl-PL": "465bc9b132e6510cf9407d7556d263d7a7c9ab1840ddc1cc749449ff6742952e",
+    "sv-SE": "348d3468a2dfd3e30d77bb9b537d7ad7920802f62845b55781c7a636d8a24efc",
+    "da-DK": "c1263e5ca65a4023c9b80b002e3b8ea8cd1a4f1eef02dfb06839eb9632e56c8a",
+    "fi-FI": "b04d86ed3583d86f006df1fb183fb9a398d33fa51c710be6b31e52ddc2780e29",
+    "nb-NO": "fe65f800c4e6d0c4b09b6248400d288f7dc9680572a431c49532cc381659a293",
+    "cs-CZ": "3a9b6827804e9e64fee0d34cde8f30eab18ebff916180573a31e821d44b59c96"
+  },
+  "chapter_count_non_english": 13,
+  "independent_native_listening_review": false,
+  "checks": {
+    "en-US": {
+      "rows": 123,
+      "voice_id": "en-US-AndrewNeural",
+      "gender": "Male",
+      "chars": 20823,
+      "closing_chars": 23,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "vi-VN": {
+      "rows": 13,
+      "voice_id": "vi-VN-NamMinhNeural",
+      "gender": "Male",
+      "chars": 19594,
+      "closing_chars": 336,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "es-ES": {
+      "rows": 13,
+      "voice_id": "es-ES-AlvaroNeural",
+      "gender": "Male",
+      "chars": 18707,
+      "closing_chars": 312,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "fr-FR": {
+      "rows": 13,
+      "voice_id": "fr-FR-HenriNeural",
+      "gender": "Male",
+      "chars": 19628,
+      "closing_chars": 319,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "ja-JP": {
+      "rows": 13,
+      "voice_id": "ja-JP-KeitaNeural",
+      "gender": "Male",
+      "chars": 7340,
+      "closing_chars": 141,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "ko-KR": {
+      "rows": 13,
+      "voice_id": "ko-KR-InJoonNeural",
+      "gender": "Male",
+      "chars": 8138,
+      "closing_chars": 161,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "de-DE": {
+      "rows": 13,
+      "voice_id": "de-DE-ChristophNeural",
+      "gender": "Male",
+      "chars": 19332,
+      "closing_chars": 319,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "it-IT": {
+      "rows": 13,
+      "voice_id": "it-IT-DiegoNeural",
+      "gender": "Male",
+      "chars": 18465,
+      "closing_chars": 303,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "pt-PT": {
+      "rows": 13,
+      "voice_id": "pt-PT-DuarteNeural",
+      "gender": "Male",
+      "chars": 17832,
+      "closing_chars": 298,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "nl-NL": {
+      "rows": 13,
+      "voice_id": "nl-NL-MaartenNeural",
+      "gender": "Male",
+      "chars": 18524,
+      "closing_chars": 305,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "pl-PL": {
+      "rows": 13,
+      "voice_id": "pl-PL-MarekNeural",
+      "gender": "Male",
+      "chars": 16741,
+      "closing_chars": 299,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "sv-SE": {
+      "rows": 13,
+      "voice_id": "sv-SE-MattiasNeural",
+      "gender": "Male",
+      "chars": 16071,
+      "closing_chars": 289,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "da-DK": {
+      "rows": 13,
+      "voice_id": "da-DK-JeppeNeural",
+      "gender": "Male",
+      "chars": 16602,
+      "closing_chars": 294,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "fi-FI": {
+      "rows": 13,
+      "voice_id": "fi-FI-HarriNeural",
+      "gender": "Male",
+      "chars": 16707,
+      "closing_chars": 290,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "nb-NO": {
+      "rows": 13,
+      "voice_id": "nb-NO-FinnNeural",
+      "gender": "Male",
+      "chars": 16105,
+      "closing_chars": 303,
+      "untranslated_five_word_source_fragments": 0
+    },
+    "cs-CZ": {
+      "rows": 13,
+      "voice_id": "cs-CZ-AntoninNeural",
+      "gender": "Male",
+      "chars": 15103,
+      "closing_chars": 277,
+      "untranslated_five_word_source_fragments": 0
+    }
+  },
+  "voice_changes": [
+    {
+      "locale": "de-DE",
+      "previous_voice_id": "de-DE-ConradNeural",
+      "current_voice_id": "de-DE-ChristophNeural",
+      "reason": "Previous voice absent from live provider catalogue; Christoph is currently listed as German male. User authorized selection of friendly male voices. Change disclosed in chat.",
+      "catalogue_checked_date": "2026-11-16",
+      "previous_voice_ids_retained": 15,
+      "future_voice_id_locked": "de-DE-ChristophNeural"
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-011",
+  "voices": 16,
+  "male_voices": 16,
+  "seconds_each": 1222,
+  "decoded_frames_48000_each": 58656000,
+  "public_zip_crc": "passed",
+  "public_zip_sha256": "9ddc246d64299e21c1b94bebb13e1f46683b2822a48e63eddee67f2bb7d90940",
+  "documents_zip_sha256": "9743a168c4d18f9a794ffc7047cc50b4c2cac5e88fb11f291291210931a66dce",
+  "voices_decoded": [
+    {
+      "locale": "en-US",
+      "voice_id": "en-US-AndrewNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "8b5e302947df6b288182bcd489fdde0742f4455dca9d2f76c0fd11db59817e84"
+    },
+    {
+      "locale": "vi-VN",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "16517b50fa94b467e90fafcef3567a1a2f9514d084dc91bd59a76976d8659e9b"
+    },
+    {
+      "locale": "es-ES",
+      "voice_id": "es-ES-AlvaroNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "0de387dc5920a9a2bd906828711013ece028a41c24621d5f7cebd4304bcb0929"
+    },
+    {
+      "locale": "fr-FR",
+      "voice_id": "fr-FR-HenriNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "8049660a2a0d54d7d9d09597aed09547db68c2cc1876b561cc192d54ac65b564"
+    },
+    {
+      "locale": "ja-JP",
+      "voice_id": "ja-JP-KeitaNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "d37d6ddc9d2815bc35fd7aadbd630da0a3b25eae5940f41d3e2c1c273a0a03a3"
+    },
+    {
+      "locale": "ko-KR",
+      "voice_id": "ko-KR-InJoonNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "a611ed1390cfdfb438c459d03fed38fe8920df381cf6c0e052e81e2f3cf1bce1"
+    },
+    {
+      "locale": "de-DE",
+      "voice_id": "de-DE-ChristophNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "6cce5c24a3522eb762132e0c8572cba94396502eddd4ac6cebc7054342a2f7b4"
+    },
+    {
+      "locale": "it-IT",
+      "voice_id": "it-IT-DiegoNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "937359a933160e57b21bad27f08dec3b5d37659c218551e4175e12beeb132500"
+    },
+    {
+      "locale": "pt-PT",
+      "voice_id": "pt-PT-DuarteNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "1e16d760190057abef8bafdd0a880635afb08240de475d763e76b26b5e039d07"
+    },
+    {
+      "locale": "nl-NL",
+      "voice_id": "nl-NL-MaartenNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "5d791a678e69990ea274550ac051484731060bffc15c30806a7843289580fed7"
+    },
+    {
+      "locale": "pl-PL",
+      "voice_id": "pl-PL-MarekNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "f5d9657ea846711a77d94732caf114bd61519002d97786af11afdaf8d36ad44d"
+    },
+    {
+      "locale": "sv-SE",
+      "voice_id": "sv-SE-MattiasNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "9e1e2e4ac644227aaac3355e21071c2913032f0f1329d023adf67ca612d88cd5"
+    },
+    {
+      "locale": "da-DK",
+      "voice_id": "da-DK-JeppeNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "f409162f13529712fe35a58c203cba9fb9082087cd3e10d89de8d314123fb7de"
+    },
+    {
+      "locale": "fi-FI",
+      "voice_id": "fi-FI-HarriNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "6eb54b40bfb0779f97da5458bd7457cc14ef64b53bd5fae1beff8f3fc859dc07"
+    },
+    {
+      "locale": "nb-NO",
+      "voice_id": "nb-NO-FinnNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "5dbdd63a3214a7ba2fb5fc537969273e61761031a3032429076ab3975e3a12f7"
+    },
+    {
+      "locale": "cs-CZ",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "frames": 58656000,
+      "seconds": 1222,
+      "sha256": "dc405402bbc9390c233c51871588480126f7f6d8386efdf77b142c9022ef0d94"
+    }
+  ],
+  "individual_links": [
+    {
+      "locale": "en-US",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_My_Tieng_Anh.mp3"
+    },
+    {
+      "locale": "vi-VN",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Viet_Nam_Nam_Minh.mp3"
+    },
+    {
+      "locale": "es-ES",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Tay_Ban_Nha.mp3"
+    },
+    {
+      "locale": "fr-FR",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Phap.mp3"
+    },
+    {
+      "locale": "ja-JP",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Nhat_Ban.mp3"
+    },
+    {
+      "locale": "ko-KR",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Han_Quoc.mp3"
+    },
+    {
+      "locale": "de-DE",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Duc.mp3"
+    },
+    {
+      "locale": "it-IT",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Y.mp3"
+    },
+    {
+      "locale": "pt-PT",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Bo_Dao_Nha.mp3"
+    },
+    {
+      "locale": "nl-NL",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Ha_Lan.mp3"
+    },
+    {
+      "locale": "pl-PL",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Ba_Lan.mp3"
+    },
+    {
+      "locale": "sv-SE",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Thuy_Dien.mp3"
+    },
+    {
+      "locale": "da-DK",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Dan_Mach.mp3"
+    },
+    {
+      "locale": "fi-FI",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Phan_Lan.mp3"
+    },
+    {
+      "locale": "nb-NO",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Na_Uy.mp3"
+    },
+    {
+      "locale": "cs-CZ",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Sec.mp3"
+    }
+  ],
+  "prompt_txt_files": 13,
+  "unique_prompts": 130,
+  "timeline_shots": 130,
+  "timeline_seconds": 1222,
+  "independent_native_listening_review": false
+}

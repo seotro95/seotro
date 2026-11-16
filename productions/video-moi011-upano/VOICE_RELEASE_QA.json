@@ -1,0 +1,160 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-011",
+  "voices": 16,
+  "male_voices": 16,
+  "all_decoded_seconds": 1222,
+  "all_decoded_frames_48000": 58656000,
+  "all_current_episode_ids_locked": true,
+  "previous_voice_ids_retained": 15,
+  "voice_changes": [
+    {
+      "locale": "de-DE",
+      "previous_voice_id": "de-DE-ConradNeural",
+      "current_voice_id": "de-DE-ChristophNeural",
+      "reason": "Previous voice absent from live provider catalogue; Christoph is currently listed as German male. User authorized selection of friendly male voices. Change disclosed in chat.",
+      "catalogue_checked_date": "2026-11-16",
+      "previous_voice_ids_retained": 15,
+      "future_voice_id_locked": "de-DE-ChristophNeural"
+    }
+  ],
+  "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+  "unique_audio_hashes": 16,
+  "english_cue_count": 123,
+  "other_language_chapter_count": 13,
+  "word_metadata_checked": true,
+  "english_word_boundary_split_checked": true,
+  "pitch_shift_applied": false,
+  "independent_native_listening_review": false,
+  "translated_voice_alignment": "Shared chapter boundaries, not word-by-word synchronization",
+  "reports": {
+    "pt-PT": {
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "UPANO_MOI011_Bo_Dao_Nha.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.7350961538461538,
+      "max_tempo": 0.8967032967032967,
+      "word_accents": 24
+    },
+    "de-DE": {
+      "voice_id": "de-DE-ChristophNeural",
+      "filename": "UPANO_MOI011_Duc.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.9158653846153846,
+      "max_tempo": 1.0670673076923076,
+      "word_accents": 20
+    },
+    "cs-CZ": {
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "UPANO_MOI011_Sec.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.7444711538461538,
+      "max_tempo": 0.9703296703296703,
+      "word_accents": 17
+    },
+    "ja-JP": {
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "UPANO_MOI011_Nhat_Ban.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.960576923076923,
+      "max_tempo": 1.2043956043956043,
+      "word_accents": 23
+    },
+    "nl-NL": {
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "UPANO_MOI011_Ha_Lan.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.8274038461538462,
+      "max_tempo": 0.9927884615384616,
+      "word_accents": 35
+    },
+    "ko-KR": {
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "UPANO_MOI011_Han_Quoc.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.944951923076923,
+      "max_tempo": 1.2417582417582418,
+      "word_accents": 26
+    },
+    "es-ES": {
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "UPANO_MOI011_Tay_Ban_Nha.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.8882211538461539,
+      "max_tempo": 1.021978021978022,
+      "word_accents": 23
+    },
+    "vi-VN": {
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "UPANO_MOI011_Viet_Nam_Nam_Minh.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.9545673076923077,
+      "max_tempo": 1.1186813186813187,
+      "word_accents": 41
+    },
+    "fi-FI": {
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "UPANO_MOI011_Phan_Lan.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.8694711538461539,
+      "max_tempo": 1.065934065934066,
+      "word_accents": 25
+    },
+    "nb-NO": {
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "UPANO_MOI011_Na_Uy.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.8372596153846154,
+      "max_tempo": 1.056043956043956,
+      "word_accents": 34
+    },
+    "da-DK": {
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "UPANO_MOI011_Dan_Mach.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.8002403846153846,
+      "max_tempo": 1.0043956043956044,
+      "word_accents": 32
+    },
+    "sv-SE": {
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "UPANO_MOI011_Thuy_Dien.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.9269230769230768,
+      "max_tempo": 1.201098901098901,
+      "word_accents": 35
+    },
+    "pl-PL": {
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "UPANO_MOI011_Ba_Lan.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.7752403846153847,
+      "max_tempo": 0.9934065934065934,
+      "word_accents": 16
+    },
+    "it-IT": {
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "UPANO_MOI011_Y.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.8971153846153845,
+      "max_tempo": 1.075721153846154,
+      "word_accents": 20
+    },
+    "fr-FR": {
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "UPANO_MOI011_Phap.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.7790865384615385,
+      "max_tempo": 0.9137019230769231,
+      "word_accents": 20
+    },
+    "en-US": {
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "UPANO_MOI011_My_Tieng_Anh.mp3",
+      "decoded_seconds": 1222.0,
+      "min_tempo": 0.8257113821138211,
+      "max_tempo": 1.3701981707317072,
+      "word_accents": 54
+    }
+  }
+}

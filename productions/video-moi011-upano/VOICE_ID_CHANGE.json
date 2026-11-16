@@ -1,0 +1,9 @@
+{
+  "locale": "de-DE",
+  "previous_voice_id": "de-DE-ConradNeural",
+  "current_voice_id": "de-DE-ChristophNeural",
+  "reason": "Previous voice absent from live provider catalogue; Christoph is currently listed as German male. User authorized selection of friendly male voices. Change disclosed in chat.",
+  "catalogue_checked_date": "2026-11-16",
+  "previous_voice_ids_retained": 15,
+  "future_voice_id_locked": "de-DE-ChristophNeural"
+}

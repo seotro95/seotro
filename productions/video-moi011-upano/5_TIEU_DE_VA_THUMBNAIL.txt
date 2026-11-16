@@ -1,0 +1,40 @@
+MỚI-011 — UPANO — 5 TIÊU ĐỀ VÀ 5 PROMPT THUMBNAIL
+
+Tiêu đề chính bằng tiếng Anh; tiếng Việt để bạn chọn và biên tập. Các prompt là gợi ý tạo ảnh, chưa tạo thumbnail. Mô hình và hình phục dựng không được trình bày như dữ liệu LiDAR thật.
+
+1. WHAT LIDAR REVEALED IN ECUADOR'S AMAZON
+Tiếng Việt: LiDAR đã hé lộ điều gì trong Amazon của Ecuador?
+Góc hứa: từ tán cây tới cách đọc địa hình, gắn với khảo sát thực địa.
+Prompt:
+Create a cinematic 16:9 YouTube documentary thumbnail, 1280x720 composition, one strong visual question readable on a phone. A realistic eastern Ecuadorian foothill forest occupies the left two thirds; on the right, a visibly stylized earth-tone explanatory terrain model reveals modest rectangular earthen platforms, connecting paths and field drains. Use an elegant diagonal boundary between forest and model, not an X-ray beam passing through solid leaves. Natural deep greens contrast with warm soil relief, strong directional light, large simple forms and controlled detail. This is an illustrative comparison, not an authenticated LiDAR image or an exact recovered city plan. No people, children, gold, pyramids, giant temples, aliens, labels, text, logos or watermarks. Leave a small quiet area for optional text added later in an editor.
+Chữ tùy chọn khi edit: BENEATH THE TREES
+
+2. 6,000 PLATFORMS. ONE BIGGER QUESTION.
+Tiếng Việt: 6.000 nền đất — một câu hỏi lớn hơn.
+Góc hứa: vì sao những dấu vết riêng trở thành một câu chuyện về mạng lưới; không hứa biết dân số.
+Prompt:
+Design a compelling 16:9 documentary thumbnail centered on one large foreground earthen-platform teaching model, with several smaller platform groups receding into a broad foothill landscape. A few clear dug routes visually connect the groups; productive open ground lies between them. Make the foreground shape large and tactile, with cinematic side-light and a restrained green-and-ochre palette. Do not attempt to depict exactly six thousand objects, an exact surveyed map, a population estimate or a complete standing metropolis. The terrain must look like an explanatory reconstruction, with no impossible enormous stone monument. No people, children, readable writing, arrows, logos, gold or watermarks. Keep the composition uncluttered for mobile viewing.
+Chữ tùy chọn khi edit: LOOK BETWEEN THEM
+
+3. UPANO: HOW HOMES, FIELDS AND WATER BECAME A NETWORK
+Tiếng Việt: Upano: nhà ở, ruộng và nước kết thành mạng lưới thế nào?
+Góc hứa: một bài toán kỹ thuật nhìn thấy được.
+Prompt:
+Create a cinematic 16:9 science-history thumbnail showing a close oblique explanatory cutaway landscape: a modest raised earthen building base at upper left, a small cultivated plot at center and a shallow drain carrying a little water toward lower ground at right. A narrow raised path connects the spaces. Use a coherent soil-based model aesthetic, realistic water behavior, warm light on the platform and cooler green shadows near the drainage. Three large readable forms, no dense schematic clutter. This is a conceptual engineering model, not real Upano survey data or an exact historic house reconstruction. No modern pipes, paved roads, giant temples, gold, people, children, text, labels, logos or watermarks.
+Chữ tùy chọn khi edit: THE CONNECTION
+
+4. UPANO'S MISSING PIECES WERE BETWEEN THE BUILDINGS
+Tiếng Việt: Những mảnh ghép của Upano nằm giữa các công trình.
+Góc hứa: khoảng trống trên bản đồ có thể là nơi sản xuất và di chuyển.
+Prompt:
+Produce a striking 16:9 documentary thumbnail from a steep oblique angle over an illustrative earthwork landscape. Two low platform clusters frame a broad central zone of field plots, paths and shallow drainage. Illuminate the central productive ground with a natural shaft of soft light while keeping the building bases slightly darker, directing attention to the space between them. Restrained realism, clear large geometry, forest only at the margins. Do not fill the empty area with gold, buried stone buildings or a fantasy city. Keep it visibly an explanatory reconstruction rather than an actual measured archaeological map. No people, children, readable symbols, text, logos or watermarks.
+Chữ tùy chọn khi edit: THE SPACE BETWEEN
+
+5. UPANO WAS KNOWN. THE NETWORK WAS HARDER TO SEE.
+Tiếng Việt: Upano đã được biết tới. Mạng lưới mới là điều khó nhìn thấy.
+Góc hứa: từ khai quật một nơi tới hiểu cả cảnh quan.
+Prompt:
+Create a sophisticated 16:9 archaeology documentary thumbnail with a close foreground soil-profile teaching section containing a small plain pottery fragment, and a larger clearly physical terrain model in the background showing connected earthen platforms, fields and routes. Use a shallow but readable depth of field so the contrast of scales is immediate: one small piece of evidence and a wider pattern. Rich natural earth texture, warm laboratory side-light, muted forest-green background, no fake data screens. Neither the pottery nor the terrain is presented as an authenticated Upano specimen or exact survey. No people, children, ancient portraits, stone pyramids, text, logos or watermarks.
+Chữ tùy chọn khi edit: FROM ONE SITE TO A NETWORK
+
+Ưu tiên thử tiêu đề 1 với thumbnail 1, hoặc tiêu đề 3 với thumbnail 3. Đây là đánh giá biên tập; chưa có dữ liệu CTR hoặc cam kết hiệu suất.

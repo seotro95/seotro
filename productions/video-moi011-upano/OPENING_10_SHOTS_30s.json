@@ -1,0 +1,184 @@
+[
+  {
+    "shot_id": 1,
+    "start": 0,
+    "end": 3,
+    "kind": "LANDSCAPE",
+    "visual": "A cinematic present-day rainforest edge in the eastern Ecuadorian Andean foothills opens toward a river terrace and a few distant clearings. This is geographic illustration, not asserted location footage.",
+    "camera": "Wide high oblique aerial glide through thin morning mist.",
+    "prompt_id": 1,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      1
+    ],
+    "voice": "Look across the forested slopes of Ecuador's Upano Valley, and the ground disappears beneath the trees. But a landscape can hide without being buried.",
+    "action": "CREATE",
+    "source_filename": "UPANO_001.mp4",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A cinematic present-day rainforest edge in the eastern Ecuadorian Andean foothills opens toward a river terrace and a few distant clearings. This is geographic illustration, not asserted location footage. Camera: Wide high oblique aerial glide through thin morning mist. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "shot_id": 2,
+    "start": 3,
+    "end": 6,
+    "kind": "EARTHWORK",
+    "visual": "A subtle straight shallow depression appears between patches of grass and low vegetation on a foothill terrace. Keep the ground relief modest, without a visible complete city.",
+    "camera": "Low aerial side track with grazing daylight.",
+    "prompt_id": 2,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      1
+    ],
+    "voice": "Look across the forested slopes of Ecuador's Upano Valley, and the ground disappears beneath the trees. But a landscape can hide without being buried.",
+    "action": "CREATE",
+    "source_filename": "UPANO_002.mp4",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A subtle straight shallow depression appears between patches of grass and low vegetation on a foothill terrace. Keep the ground relief modest, without a visible complete city. Camera: Low aerial side track with grazing daylight. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "shot_id": 3,
+    "start": 6,
+    "end": 9,
+    "kind": "EARTHWORK",
+    "visual": "A low rectangular grass-covered earth bank comes into clear view beside lower open ground. Soil and plant textures remain ordinary and realistic.",
+    "camera": "Close ground-level sideways dolly.",
+    "prompt_id": 3,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      1
+    ],
+    "voice": "Look across the forested slopes of Ecuador's Upano Valley, and the ground disappears beneath the trees. But a landscape can hide without being buried.",
+    "action": "CREATE",
+    "source_filename": "UPANO_003.mp4",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A low rectangular grass-covered earth bank comes into clear view beside lower open ground. Soil and plant textures remain ordinary and realistic. Camera: Close ground-level sideways dolly. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "shot_id": 4,
+    "start": 9,
+    "end": 12,
+    "kind": "MODEL",
+    "visual": "A restrained physical teaching terrain model shows several small platform groups linked across a terrace. The model-board edge is visible; this is not actual surveyed Upano data.",
+    "camera": "High oblique slow push toward the connected groups.",
+    "prompt_id": 4,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      1,
+      2
+    ],
+    "voice": "Look across the forested slopes of Ecuador's Upano Valley, and the ground disappears beneath the trees. But a landscape can hide without being buried. Below parts of this landscape are raised platforms, connecting routes, and traces of cultivated ground. Their importance becomes clearer when those features are viewed together.",
+    "action": "CREATE",
+    "source_filename": "UPANO_004.mp4",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A restrained physical teaching terrain model shows several small platform groups linked across a terrace. The model-board edge is visible; this is not actual surveyed Upano data. Camera: High oblique slow push toward the connected groups. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "shot_id": 5,
+    "start": 12,
+    "end": 15,
+    "kind": "EXPLAINER",
+    "visual": "A transparent classroom canopy diorama allows a few discrete light paths through genuine gaps between opaque leaves to a soil tray, while other paths stop at vegetation.",
+    "camera": "Close side tracking that keeps both leaves and soil in view.",
+    "prompt_id": 5,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      2
+    ],
+    "voice": "Below parts of this landscape are raised platforms, connecting routes, and traces of cultivated ground. Their importance becomes clearer when those features are viewed together.",
+    "action": "CREATE",
+    "source_filename": "UPANO_005.mp4",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A transparent classroom canopy diorama allows a few discrete light paths through genuine gaps between opaque leaves to a soil tray, while other paths stop at vegetation. Camera: Close side tracking that keeps both leaves and soil in view. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "shot_id": 6,
+    "start": 15,
+    "end": 18,
+    "kind": "SECTION",
+    "visual": "A small modern soil-profile teaching model reveals a shallow U-shaped route cut and low banks beside it. No paving, tunnel, stone wall or buried house.",
+    "camera": "Low cross-sectional close slide.",
+    "prompt_id": 6,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      2
+    ],
+    "voice": "Below parts of this landscape are raised platforms, connecting routes, and traces of cultivated ground. Their importance becomes clearer when those features are viewed together.",
+    "action": "CREATE",
+    "source_filename": "UPANO_006.mp4",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A small modern soil-profile teaching model reveals a shallow U-shaped route cut and low banks beside it. No paving, tunnel, stone wall or buried house. Camera: Low cross-sectional close slide. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "shot_id": 7,
+    "start": 18,
+    "end": 21,
+    "kind": "PROCESS",
+    "visual": "Rainwater moves gently along a shallow drainage demonstration beside a raised dry earthen edge. The water follows a plausible downhill gradient.",
+    "camera": "Macro low angle tracking along the flowing water.",
+    "prompt_id": 7,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      2,
+      3
+    ],
+    "voice": "Below parts of this landscape are raised platforms, connecting routes, and traces of cultivated ground. Their importance becomes clearer when those features are viewed together. How did these communities connect homes, fields, and water into a working landscape? The answer begins with changing the way we look at the forest.",
+    "action": "CREATE",
+    "source_filename": "UPANO_007.mp4",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Rainwater moves gently along a shallow drainage demonstration beside a raised dry earthen edge. The water follows a plausible downhill gradient. Camera: Macro low angle tracking along the flowing water. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "shot_id": 8,
+    "start": 21,
+    "end": 24,
+    "kind": "MODEL",
+    "visual": "Small field plots, edge drains and a modest platform base coexist in one physical research model. Leave building roofs absent and functions illustrative.",
+    "camera": "Overhead gentle arc connecting the field and platform.",
+    "prompt_id": 8,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      3
+    ],
+    "voice": "How did these communities connect homes, fields, and water into a working landscape? The answer begins with changing the way we look at the forest.",
+    "action": "CREATE",
+    "source_filename": "UPANO_008.mp4",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. Small field plots, edge drains and a modest platform base coexist in one physical research model. Leave building roofs absent and functions illustrative. Camera: Overhead gentle arc connecting the field and platform. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "shot_id": 9,
+    "start": 24,
+    "end": 27,
+    "kind": "LAB",
+    "visual": "A generic adult gloved hand aged 40 to 60 places one plain reference potsherd beside a soil sample on a modern laboratory tray. Neither is claimed as an authentic Upano find.",
+    "camera": "Extreme close slow rack focus between pottery and soil.",
+    "prompt_id": 9,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      3
+    ],
+    "voice": "How did these communities connect homes, fields, and water into a working landscape? The answer begins with changing the way we look at the forest.",
+    "action": "CREATE",
+    "source_filename": "UPANO_009.mp4",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. A generic adult gloved hand aged 40 to 60 places one plain reference potsherd beside a soil sample on a modern laboratory tray. Neither is claimed as an authentic Upano find. Camera: Extreme close slow rack focus between pottery and soil. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "shot_id": 10,
+    "start": 27,
+    "end": 30,
+    "kind": "MODEL",
+    "visual": "An earth-tone educational landscape model brings platforms, routes, cultivation spaces and drainage into a single coherent view. No exact ancient layout or population is asserted.",
+    "camera": "Slow high oblique pullback preparing the transition to the main story.",
+    "prompt_id": 10,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "voice_cue_ids": [
+      3
+    ],
+    "voice": "How did these communities connect homes, fields, and water into a working landscape? The answer begins with changing the way we look at the forest.",
+    "action": "CREATE",
+    "source_filename": "UPANO_010.mp4",
+    "prompt": "One continuous 10-second shot, cinematic scientific documentary, 16:9, stable realistic motion and restrained natural color. An earth-tone educational landscape model brings platforms, routes, cultivation spaces and drainage into a single coherent view. No exact ancient layout or population is asserted. Camera: Slow high oblique pullback preparing the transition to the main story. Any modern people or visible hands must belong to clearly adult individuals aged 35 to 65. No children, infants, adolescents, minors, youthful silhouettes, child portraits, or minors on screens or in reflections. Historical reconstructions and terrain, soil, light-pulse or point-cloud models must look illustrative, never like authenticated field evidence or actual measured Upano datasets. No imported stone pyramids, fantasy buildings, invented artifacts, impossible water flow, transparent solid foliage, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  }
+]

@@ -1,0 +1,557 @@
+{
+  "topic_id": "MOI-011",
+  "independent_native_review": false,
+  "source_adaptation": "13 plain-language chapters preserve evidence, topic order and caveats; repeated transitions condensed",
+  "assistant_review_scope": "Full Vietnamese rewrite; terminology and date checks for all countries; selected archaeological and method passages; all closing paragraphs; untranslated-English scan",
+  "locales": {
+    "es-ES": {
+      "chapters": 13,
+      "terminology_edits": [
+        {
+          "chapter": 2,
+          "from": "patrones de encuesta",
+          "to": "patrones observados en el levantamiento"
+        }
+      ],
+      "closing_rewritten": true,
+      "full_chapter_rewrites": []
+    },
+    "fr-FR": {
+      "chapters": 13,
+      "terminology_edits": [
+        {
+          "chapter": 10,
+          "from": "preuves de culture",
+          "to": "indices de cultures agricoles"
+        },
+        {
+          "chapter": 10,
+          "from": "contextes compris",
+          "to": "contextes archéologiques bien établis"
+        },
+        {
+          "chapter": 10,
+          "from": "plages historiques",
+          "to": "fourchettes chronologiques"
+        }
+      ],
+      "closing_rewritten": true,
+      "full_chapter_rewrites": []
+    },
+    "ja-JP": {
+      "chapters": 13,
+      "terminology_edits": [
+        {
+          "chapter": 2,
+          "from": "このアカウント",
+          "to": "この歴史の説明"
+        },
+        {
+          "chapter": 2,
+          "from": "航空ライダー調査",
+          "to": "航空レーザー測量"
+        },
+        {
+          "chapter": 4,
+          "from": "土で作った低く盛り上がったベース",
+          "to": "土を盛って造った低い基壇"
+        },
+        {
+          "chapter": 4,
+          "from": "他の同様の基地",
+          "to": "ほかの同様の基壇"
+        },
+        {
+          "chapter": 4,
+          "from": "土のプラットフォーム",
+          "to": "土の基壇"
+        },
+        {
+          "chapter": 4,
+          "from": "マップされたフィーチャ",
+          "to": "地図に記録された遺構"
+        },
+        {
+          "chapter": 4,
+          "from": "線形フィーチャ",
+          "to": "線状の遺構"
+        },
+        {
+          "chapter": 5,
+          "from": "建物基地",
+          "to": "建物の基壇"
+        },
+        {
+          "chapter": 7,
+          "from": "人生が完璧だった",
+          "to": "暮らしが理想的だった"
+        },
+        {
+          "chapter": 9,
+          "from": "盛り上がったプラットフォーム",
+          "to": "盛土の基壇"
+        },
+        {
+          "chapter": 10,
+          "from": "隆起した地球の基地",
+          "to": "人工的に盛った土の基壇"
+        },
+        {
+          "chapter": 10,
+          "from": "その基地が建設された日付",
+          "to": "その基壇が造られた年代"
+        },
+        {
+          "chapter": 10,
+          "from": "プラットフォーム",
+          "to": "基壇"
+        },
+        {
+          "chapter": 10,
+          "from": "特徴量の数から母集団を直接確立する",
+          "to": "遺構の数から住民数を直接求める"
+        },
+        {
+          "chapter": 13,
+          "from": "人生を組織する",
+          "to": "暮らしを組み立てる"
+        }
+      ],
+      "closing_rewritten": true,
+      "full_chapter_rewrites": []
+    },
+    "ko-KR": {
+      "chapters": 13,
+      "terminology_edits": [
+        {
+          "chapter": 1,
+          "from": "이러한 기능은 사람들이",
+          "to": "이러한 유구는 사람들이"
+        },
+        {
+          "chapter": 2,
+          "from": "항공 라이더 조사",
+          "to": "항공 라이다 조사"
+        },
+        {
+          "chapter": 2,
+          "from": "이 계정",
+          "to": "이 역사적 설명"
+        },
+        {
+          "chapter": 4,
+          "from": "다른 유사한 베이스",
+          "to": "다른 비슷한 흙 기단"
+        },
+        {
+          "chapter": 4,
+          "from": "각 베이스 그룹",
+          "to": "각 기단 집단"
+        },
+        {
+          "chapter": 4,
+          "from": "매핑된 피처",
+          "to": "지도에 기록된 유구"
+        },
+        {
+          "chapter": 4,
+          "from": "선형 기능",
+          "to": "선형 유구"
+        },
+        {
+          "chapter": 4,
+          "from": "플랫폼",
+          "to": "기단"
+        },
+        {
+          "chapter": 4,
+          "from": "그 발자국",
+          "to": "그 평면 형태"
+        },
+        {
+          "chapter": 9,
+          "from": "특정 기능이 언제 구축되고 사용되었는지",
+          "to": "각 유구가 언제 조성되고 사용되었는지"
+        },
+        {
+          "chapter": 9,
+          "from": "플랫폼",
+          "to": "기단"
+        },
+        {
+          "chapter": 10,
+          "from": "기능 수는 인구를 직접적으로 설정할",
+          "to": "유구의 수만으로 인구를 직접 산정할"
+        },
+        {
+          "chapter": 10,
+          "from": "융기된 흙 기초",
+          "to": "흙을 쌓아 높인 기단"
+        },
+        {
+          "chapter": 10,
+          "from": "플랫폼",
+          "to": "기단"
+        },
+        {
+          "chapter": 12,
+          "from": "이러한 기능은 함께",
+          "to": "이러한 유구를 함께 보면"
+        }
+      ],
+      "closing_rewritten": true,
+      "full_chapter_rewrites": []
+    },
+    "de-DE": {
+      "chapters": 13,
+      "terminology_edits": [
+        {
+          "chapter": 2,
+          "from": "Umfragemuster",
+          "to": "Muster in den Vermessungsdaten"
+        },
+        {
+          "chapter": 4,
+          "from": "Weitere ähnliche Stützpunkte",
+          "to": "Weitere ähnliche Erdplattformen"
+        },
+        {
+          "chapter": 4,
+          "from": "kartierten Features",
+          "to": "kartierten Geländestrukturen"
+        },
+        {
+          "chapter": 5,
+          "from": "Access and exchange are plausible functions",
+          "to": "Zugang und Austausch sind plausible Funktionen"
+        },
+        {
+          "chapter": 10,
+          "from": "aus verstandenen Kontexten",
+          "to": "aus gut dokumentierten archäologischen Zusammenhängen"
+        }
+      ],
+      "closing_rewritten": true,
+      "full_chapter_rewrites": []
+    },
+    "it-IT": {
+      "chapters": 13,
+      "terminology_edits": [
+        {
+          "chapter": 10,
+          "from": "d.C..",
+          "to": "d.C."
+        },
+        {
+          "chapter": 10,
+          "from": "il conteggio delle caratteristiche",
+          "to": "il numero dei resti archeologici"
+        }
+      ],
+      "closing_rewritten": true,
+      "full_chapter_rewrites": []
+    },
+    "pt-PT": {
+      "chapters": 13,
+      "terminology_edits": [
+        {
+          "chapter": 2,
+          "from": "padrões de inquérito",
+          "to": "padrões observados no levantamento"
+        },
+        {
+          "chapter": 2,
+          "from": "pesquisa aérea lidar",
+          "to": "levantamento aéreo com lidar"
+        },
+        {
+          "chapter": 4,
+          "from": "recursos mapeados",
+          "to": "vestígios cartografados"
+        },
+        {
+          "chapter": 4,
+          "from": "recursos lineares",
+          "to": "vestígios lineares"
+        },
+        {
+          "chapter": 6,
+          "from": "umidade",
+          "to": "humidade"
+        },
+        {
+          "chapter": 9,
+          "from": "recursos específicos",
+          "to": "vestígios específicos"
+        },
+        {
+          "chapter": 10,
+          "from": "contagens de recursos",
+          "to": "contagens de vestígios"
+        },
+        {
+          "chapter": 10,
+          "from": "base terrestre elevada",
+          "to": "base elevada de terra"
+        },
+        {
+          "chapter": 10,
+          "from": "d.C..",
+          "to": "d.C."
+        }
+      ],
+      "closing_rewritten": true,
+      "full_chapter_rewrites": []
+    },
+    "nl-NL": {
+      "chapters": 13,
+      "terminology_edits": [
+        {
+          "chapter": 10,
+          "from": "bewijzen van bebouwing",
+          "to": "aanwijzingen voor landbouw"
+        },
+        {
+          "chapter": 10,
+          "from": "aardbasis",
+          "to": "opgeworpen aarden basis"
+        },
+        {
+          "chapter": 10,
+          "from": "begrepen contexten",
+          "to": "goed gedocumenteerde archeologische contexten"
+        }
+      ],
+      "closing_rewritten": true,
+      "full_chapter_rewrites": []
+    },
+    "pl-PL": {
+      "chapters": 13,
+      "terminology_edits": [
+        {
+          "chapter": 10,
+          "from": "Dokument powinien zachować tę niepewność",
+          "to": "Film dokumentalny powinien zachować tę niepewność"
+        },
+        {
+          "chapter": 10,
+          "from": "pozostaje dobrze utrzymane",
+          "to": "pozostaje dobrze udokumentowane"
+        }
+      ],
+      "closing_rewritten": true,
+      "full_chapter_rewrites": []
+    },
+    "sv-SE": {
+      "chapters": 13,
+      "terminology_edits": [
+        {
+          "chapter": 10,
+          "from": "Tidningen 2024",
+          "to": "Studien från 2024"
+        },
+        {
+          "chapter": 10,
+          "from": "förstådda sammanhang",
+          "to": "väl dokumenterade arkeologiska sammanhang"
+        },
+        {
+          "chapter": 10,
+          "from": "e.Kr..",
+          "to": "e.Kr."
+        }
+      ],
+      "closing_rewritten": true,
+      "full_chapter_rewrites": [
+        4
+      ]
+    },
+    "da-DK": {
+      "chapters": 13,
+      "terminology_edits": [
+        {
+          "chapter": 10,
+          "from": "Papiret fra 2024",
+          "to": "Undersøgelsen fra 2024"
+        },
+        {
+          "chapter": 10,
+          "from": "træktællinger",
+          "to": "optællinger af anlæg"
+        },
+        {
+          "chapter": 10,
+          "from": "e.Kr..",
+          "to": "e.Kr."
+        },
+        {
+          "chapter": 10,
+          "from": "forståede sammenhænge",
+          "to": "veldokumenterede arkæologiske sammenhænge"
+        }
+      ],
+      "closing_rewritten": true,
+      "full_chapter_rewrites": []
+    },
+    "fi-FI": {
+      "chapters": 13,
+      "terminology_edits": [
+        {
+          "chapter": 1,
+          "from": "vesihuollon",
+          "to": "vesien hallinnan"
+        },
+        {
+          "chapter": 4,
+          "from": "tilaorganisaatiota",
+          "to": "tilan järjestämistä"
+        },
+        {
+          "chapter": 4,
+          "from": "Kunkin tukiasemaryhmän lisäksi",
+          "to": "Kunkin maapengerrysryhmän ulkopuolella"
+        },
+        {
+          "chapter": 10,
+          "from": "jolloin tukikohta rakennettiin",
+          "to": "jolloin maapengerrys rakennettiin"
+        },
+        {
+          "chapter": 10,
+          "from": "historiallisia alueita",
+          "to": "historiallisia ajanjaksoja"
+        },
+        {
+          "chapter": 10,
+          "from": "Vuoden 2024 paperissa",
+          "to": "Vuoden 2024 tutkimuksessa"
+        },
+        {
+          "chapter": 10,
+          "from": "ymmärretyistä yhteyksistä",
+          "to": "tunnetuista arkeologisista yhteyksistä"
+        },
+        {
+          "chapter": 10,
+          "from": "Esimerkiksi hiilenpala",
+          "to": "Esimerkiksi puuhiilen pala"
+        },
+        {
+          "chapter": 12,
+          "from": "vesihuoltoa",
+          "to": "vesien hallintaa"
+        },
+        {
+          "chapter": 13,
+          "from": "vesihuoltoa",
+          "to": "vesien hallintaa"
+        }
+      ],
+      "closing_rewritten": true,
+      "full_chapter_rewrites": []
+    },
+    "nb-NO": {
+      "chapters": 13,
+      "terminology_edits": [
+        {
+          "chapter": 4,
+          "from": "kartlagte funksjoner",
+          "to": "kartlagte terrengformer"
+        },
+        {
+          "chapter": 4,
+          "from": "lineære funksjoner",
+          "to": "lineære terrengspor"
+        },
+        {
+          "chapter": 4,
+          "from": "hevet jordplattformer",
+          "to": "opphøyde jordplattformer"
+        },
+        {
+          "chapter": 9,
+          "from": "spesielle funksjoner ble bygget og brukt",
+          "to": "enkelte anlegg ble bygd og brukt"
+        },
+        {
+          "chapter": 10,
+          "from": "historiske områder",
+          "to": "historiske tidsrom"
+        },
+        {
+          "chapter": 10,
+          "from": "en rekkevidde til en dramatisk nøyaktig dato",
+          "to": "et tidsintervall til en dramatisk, helt presis dato"
+        },
+        {
+          "chapter": 10,
+          "from": "trekktelling",
+          "to": "antall registrerte anlegg"
+        },
+        {
+          "chapter": 10,
+          "from": "Papiret fra 2024",
+          "to": "Studien fra 2024"
+        },
+        {
+          "chapter": 10,
+          "from": "forståtte sammenhenger",
+          "to": "godt dokumenterte arkeologiske sammenhenger"
+        }
+      ],
+      "closing_rewritten": true,
+      "full_chapter_rewrites": [
+        11,
+        12
+      ]
+    },
+    "cs-CZ": {
+      "chapters": 13,
+      "terminology_edits": [
+        {
+          "chapter": 1,
+          "from": "Rivers bring sediment from the mountains",
+          "to": "Řeky přinášejí z hor sedimenty"
+        },
+        {
+          "chapter": 2,
+          "from": "jednotlivých zemských mohyl",
+          "to": "jednotlivých zemních náspů"
+        },
+        {
+          "chapter": 10,
+          "from": "z pochopení souvislostí",
+          "to": "z dobře zdokumentovaných archeologických souvislostí"
+        },
+        {
+          "chapter": 10,
+          "from": "vyvýšené pozemské základny",
+          "to": "vyvýšeného zemního základu"
+        },
+        {
+          "chapter": 10,
+          "from": "její stáří automaticky nedává datum",
+          "to": "jeho stáří automaticky neurčuje datum"
+        },
+        {
+          "chapter": 10,
+          "from": "byla tato základna postavena",
+          "to": "byl tento základ vybudován"
+        },
+        {
+          "chapter": 10,
+          "from": "Dokument z roku 2024",
+          "to": "Studie z roku 2024"
+        }
+      ],
+      "closing_rewritten": true,
+      "full_chapter_rewrites": []
+    },
+    "vi-VN": {
+      "chapters": 13,
+      "assistant_authored": true,
+      "full_script_rewrite": true,
+      "independent_native_review": false
+    }
+  }
+}

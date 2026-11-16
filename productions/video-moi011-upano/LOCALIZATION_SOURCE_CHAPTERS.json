@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "start": 0,
+    "end": 100,
+    "source_cue_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "voice": "From above, trees hide parts of the ground in Ecuador's Upano Valley. Yet the land preserves raised earthen building bases, connecting paths and traces of cultivated soil. Viewed together, these features raise a question: how did people connect houses, food production and water management? The valley lies east of the Andes, where mountain environments meet the upper Amazon. Rivers bring sediment from the mountains. Natural river terraces stand above the river channels. Rain and fertile soil offer opportunities, but settlement still requires accessible land and control of excess water. The archaeological features belong to that larger relationship. Buildings stood within a wider arrangement of crop-growing areas and paths between neighboring places. Much of the surviving construction consists of shaped soil. Such low earthworks are less conspicuous than stone walls, yet a level surface, a cut channel or a repeated alignment can preserve evidence of human decisions. The timber or other material above a building base may disappear while the modified ground remains. An aerial image alone cannot explain how the system worked. We also need excavation, objects found in their original context, and an understanding of the relationships between different parts of the terrain. These sources of evidence must be examined together.",
+    "localization_method": "Plain-language adaptation preserving chapter evidence, topic order and caveats; ambiguous idioms and spoken-year forms expanded for translation"
+  },
+  {
+    "id": 2,
+    "start": 100,
+    "end": 200,
+    "source_cue_ids": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "voice": "Archaeological investigation in Upano began long before the recent headlines. Sangay was known as a major archaeological site from the 1970s. Excavations at Sangay and Kilamope uncovered household floors, holes for timber support posts, hearths and pottery. They showed that people had lived and worked at particular locations. However, a detailed excavation covers only a small part of the landscape. A trench can reveal soil layers while leaving a distant path or another settlement outside its view. It is like studying one room without seeing the surrounding neighborhood. Researchers therefore expanded their questions from individual earth mounds to the land between them. Was this land unused, or did it contain fields and routes that supported the settlements? In 2015, Ecuador's national heritage institute commissioned an airborne lidar survey. It created an opportunity to compare a much wider view with years of excavation and field research. Survey patterns could suggest connections, while work on the ground could test those interpretations. Local knowledge of paths, fields and changes in the ground also belongs in this account. The valley's history did not become real only when researchers published it. The technological change was the ability to examine extensive terrain systematically and relate many observations to one another.",
+    "localization_method": "Plain-language adaptation preserving chapter evidence, topic order and caveats; ambiguous idioms and spoken-year forms expanded for translation"
+  },
+  {
+    "id": 3,
+    "start": 200,
+    "end": 300,
+    "source_cue_ids": [
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
+    ],
+    "voice": "Lidar measures distances using laser light pulses and the time required for reflected light to return to the instrument. From an aircraft, it measures points on vegetation and ground surfaces. Many pulses strike leaves and branches. Some pass through openings between leaves and reach lower surfaces. The reflected signals from the ground are valuable, but they are not equally available everywhere. The laser does not make solid leaves transparent, and it does not photograph buried houses. The measurements form a three-dimensional set of points. Researchers process those points to distinguish likely ground measurements from reflections off vegetation and other objects. They then construct a terrain model, sometimes estimating the surface between sparse measurements. Lighting the model virtually from different directions can make low ridges and depressions easier to see. These displays still require interpretation. Roots, erosion, recent tracks and natural drainage may produce confusing shapes. A clear line on a screen is not sufficient proof of an ancient construction. In Upano, the new patterns could be compared with earthworks already examined through field research. The discovery therefore resulted from several methods working together. It was not a complete hidden city appearing when someone pressed a button.",
+    "localization_method": "Plain-language adaptation preserving chapter evidence, topic order and caveats; ambiguous idioms and spoken-year forms expanded for translation"
+  },
+  {
+    "id": 4,
+    "start": 300,
+    "end": 400,
+    "source_cue_ids": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40
+    ],
+    "voice": "Begin with a low raised base made of soil. Other similar bases stand around a lower open area. Such repeated arrangements help explain the spatial organization. Excavation provides a second kind of evidence: household activity associated with these built surfaces. Holes where timber support posts stood, floor surfaces and hearths can indicate how a location was used. However, an earthen building base is not a complete preserved building. We may know its footprint without knowing the exact roof or every construction detail. Reconstructions should show that distinction. The important engineering achievement was the modification of terrain: soil was dug, transported and shaped into useful surfaces. The study published in 2024 reported more than 6,000 raised earthen platforms within approximately 300 square kilometers of analyzed terrain. This is a count of mapped features. It is not a count of houses occupied at the same time. A building base may have been repaired, rebuilt or used differently during its history. Repeated arrangements across a large area nevertheless suggest shared ways of organizing places. Differences in location and historical period still matter. Beyond each group of bases, connecting linear features lead toward a wider network.",
+    "localization_method": "Plain-language adaptation preserving chapter evidence, topic order and caveats; ambiguous idioms and spoken-year forms expanded for translation"
+  },
+  {
+    "id": 5,
+    "start": 400,
+    "end": 500,
+    "source_cue_ids": [
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50
+    ],
+    "voice": "Some routes leave a group of earthen building bases and continue toward another location. Several run remarkably straight across uneven ground. To interpret a feature as a route, researchers examine its shape, direction and destinations. Some Upano routes have been interpreted as deliberately dug paths rather than depressions created only by repeated walking. Different paths respond differently to hills, gullies and water movement. They should not be pictured as modern paved highways. Their importance concerns movement and relationships between places. A path following the slope's contour may require less work than a straighter path crossing a rise. The effort invested raises questions about purpose. Access and exchange are plausible functions; social or ceremonial roles have also been proposed. These functions could overlap. A path used for ordinary movement could also have wider cultural significance. The network becomes more convincing when routes, building bases and cultivated areas show repeated spatial relationships. But the surviving plan may combine construction from different periods. Physical connection alone does not prove that all mapped places operated together. Before testing that chronology, another engineering question emerges: how could routes and productive ground remain useful in a rainy environment?",
+    "localization_method": "Plain-language adaptation preserving chapter evidence, topic order and caveats; ambiguous idioms and spoken-year forms expanded for translation"
+  },
+  {
+    "id": 6,
+    "start": 500,
+    "end": 600,
+    "source_cue_ids": [
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60
+    ],
+    "voice": "In wet conditions, removing excess water can be as important as obtaining water. Roots need oxygen as well as moisture. When water fills soil pores, many plants have less oxygen available around their roots. Saturated ground can also make working and walking difficult. The Upano analysis identified drainage channels among areas interpreted as crop-growing plots. The land between built areas was therefore not necessarily unused. A shallow channel becomes more informative when examined beside a field, a path and a lower outlet. Water moves downhill. A ditch without a suitable outlet may only move the problem elsewhere. A connected drainage arrangement can guide excess water into the surrounding natural drainage system. This relationship explains why a settlement map should include the land used to produce food. Houses depend on work beyond the building itself. Paths and drainage may sometimes serve overlapping functions. A raised edge may provide access beside a lower channel carrying runoff. Researchers must therefore consider both shape and connection when interpreting these features. The whole landscape can combine areas of concentrated building with more open productive ground. The term garden urbanism describes this close relationship between settlement and cultivation. It does not require every part of the landscape to be covered by buildings.",
+    "localization_method": "Plain-language adaptation preserving chapter evidence, topic order and caveats; ambiguous idioms and spoken-year forms expanded for translation"
+  },
+  {
+    "id": 7,
+    "start": 600,
+    "end": 700,
+    "source_cue_ids": [
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70
+    ],
+    "voice": "Garden urbanism is a research term, not a claim that life was perfect. Agricultural settlements still require labor, maintenance and decisions about needs and priorities. Evidence of food preparation adds another scale to the investigation. A small pottery fragment may preserve microscopic residues. The Upano study reports starch evidence of maize, beans, manioc and sweet potato. These traces connect cultivated plants with pottery and human activity. They do not tell us which crop grew in every plot. One vessel is evidence from one context, not a complete record of agriculture across the valley. Modern crop yields cannot simply be applied to the past, because varieties, soils, weather, labor and practices may differ. The useful question is how food production related to the arrangement of settlements. In an explanatory model, follow the distance from a living area to a cultivated plot, a water outlet and the next occupied place. Routes, nearby plots and drainage can affect the usefulness of one another. Convenience is only one possible influence. Custom, social ties and competing interests may also shape paths and boundaries. The earthworks preserve results of decisions, but not the conversations or disagreements through which those decisions were made.",
+    "localization_method": "Plain-language adaptation preserving chapter evidence, topic order and caveats; ambiguous idioms and spoken-year forms expanded for translation"
+  },
+  {
+    "id": 8,
+    "start": 700,
+    "end": 800,
+    "source_cue_ids": [
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80
+    ],
+    "voice": "Maintenance is another important engineering problem. Earthworks and structures made of perishable materials must remain useful while rain and vegetation change them. A cut surface can erode. Sediment can accumulate in a channel. Ground can soften after rain. Building a route once is different from keeping it usable. These are general physical problems arising from the materials and terrain. They do not reveal the exact organization of ancient work groups. The same limits apply to reconstructing houses: a plausible roof is only an illustration unless its particular details are supported by evidence. Upano does not need invented stone temples borrowed from another civilization. The earthen structures already raise substantial questions. Where did the moved soil come from? How were surfaces shaped? Who maintained access after rain? Construction may also have accumulated gradually. Groups could add building bases, repair paths and reshape cultivated ground over generations. A modern archaeological map puts surviving features into one image, even when they were built in different centuries. To understand the landscape, we need relationships through time as well as across the terrain. This leads to another question: what forms of cooperation could produce the network, and what evidence would distinguish them?",
+    "localization_method": "Plain-language adaptation preserving chapter evidence, topic order and caveats; ambiguous idioms and spoken-year forms expanded for translation"
+  },
+  {
+    "id": 9,
+    "start": 800,
+    "end": 900,
+    "source_cue_ids": [
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90
+    ],
+    "voice": "Repeated layouts suggest shared practices, and connecting routes suggest relationships between settlements. Neither observation by itself identifies a king, an empire or one central government. Several social arrangements can coordinate work. Neighboring groups might follow common practices without every decision coming from a single authority. At the same time, the layout does not prove that all people had equal power or access. The careful approach is to separate these possibilities and ask which additional evidence could distinguish them. Larger raised platforms have led researchers to consider civic or ceremonial functions. Their size is a clue, not proof of a particular ruler or a single use. A ditch or blocked approach may suggest defense, but it does not identify a particular battle. The published interpretation allows social tensions and changing relationships. It neither proves universal peace nor documents specific wars. Comparison with other societies may help form questions, but it cannot supply ready-made answers. Similar engineering problems can lead to similar shapes in different places. An actual historical connection needs further evidence. We must also establish when particular features were built and used. The ground preserves shapes; determining their ages requires other evidence.",
+    "localization_method": "Plain-language adaptation preserving chapter evidence, topic order and caveats; ambiguous idioms and spoken-year forms expanded for translation"
+  },
+  {
+    "id": 10,
+    "start": 900,
+    "end": 1000,
+    "source_cue_ids": [
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100
+    ],
+    "voice": "Archaeologists can determine the ages of suitable materials recovered from understood contexts. A laboratory result is useful only when we know how its sample relates to the structure being studied. A charcoal fragment, for example, comes from once-living material. If it lies near a raised earth base, its age does not automatically give the date when that base was built. Layers, associated objects, repeated samples and comparisons between locations help establish a sequence. Disturbance or uncertain associations can weaken the interpretation. The 2024 paper placed major construction broadly between about 500 BC and AD 300 to 600. These are historical ranges, not one exact founding date. The cultural sequence and its interpretation have also prompted scholarly discussion. A documentary should retain this uncertainty instead of turning a range into a dramatic exact date. Spatial links suggest that parts of the network operated together, but not that every mapped platform was occupied in the same generation. Similarly, feature counts cannot directly establish population. Estimates require assumptions about function, household size, use and overlapping phases. Those assumptions should be stated and tested. What remains well supported is an extensive landscape of repeated earthworks, connecting routes and evidence of cultivation.",
+    "localization_method": "Plain-language adaptation preserving chapter evidence, topic order and caveats; ambiguous idioms and spoken-year forms expanded for translation"
+  },
+  {
+    "id": 11,
+    "start": 1000,
+    "end": 1100,
+    "source_cue_ids": [
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110
+    ],
+    "voice": "What happened after the main phases of construction? This question deserves more than a single dramatic explanation. Upano lies in an active volcanic region, and volcanic deposits form part of its history. However, that fact alone does not prove that one eruption suddenly ended the entire settlement network. The authors' accepted manuscript itself notes difficulties with a simple eruption-ending hypothesis. Dates and contexts need further testing. Later human use of the area also matters. Changes in buildings or land use do not mean that human history ended in the valley. Ground can be reused, cultivated again or covered by growing vegetation. Today's surface combines natural processes with human activity from different periods. A reconstruction showing before and after cannot establish the speed or cause of every change. Present-day Upano includes forests, cultivated areas, settlements and exposed ground. Erosion and later land use may damage features; vegetation and sparse survey measurements may make other features hard to identify. A mapped edge may therefore mark a limit of survey coverage or preservation, rather than an ancient boundary. Future progress may depend on checking a modest ground feature, dating another context, or learning more about a place already known locally.",
+    "localization_method": "Plain-language adaptation preserving chapter evidence, topic order and caveats; ambiguous idioms and spoken-year forms expanded for translation"
+  },
+  {
+    "id": 12,
+    "start": 1100,
+    "end": 1200,
+    "source_cue_ids": [
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120
+    ],
+    "voice": "The main discovery is the relationship between many parts of the landscape. A path helps explain a raised building base; the building base gains context from nearby cultivated land and drainage. Together these features reveal ways of organizing daily activity through the terrain. The spaces between buildings matter because food production, movement and water management occur there. Calling this urbanism opens a discussion of settlement and scale, without making Upano identical to societies with different materials and institutions. There is no need to invent outsiders who supplied the knowledge. Local development is a serious explanation. The people who made these places belong to Amazonia's own human history. Contemporary communities and researchers are also part of the continuing investigation and care of archaeological places. Survey can widen the picture, excavation can test a connection, and a well-contextualized sample can refine the timeline. The original view of trees has become a question about how people shaped land and connected places. Revealing the shape of the ground begins historical investigation; it does not remove every uncertainty. The important achievement is making a landscape of related human activities visible.",
+    "localization_method": "Plain-language adaptation preserving chapter evidence, topic order and caveats; ambiguous idioms and spoken-year forms expanded for translation"
+  },
+  {
+    "id": 13,
+    "start": 1200,
+    "end": 1222,
+    "source_cue_ids": [
+      121,
+      122,
+      123
+    ],
+    "voice": "Return to the valley. The trees remain, but the ground now suggests homes, paths, fields and water management linked across the land. Upano reveals a way of organizing life. The unanswered questions guide the next careful examination beneath the tree crowns. A connected landscape.",
+    "localization_method": "Plain-language adaptation preserving chapter evidence, topic order and caveats; ambiguous idioms and spoken-year forms expanded for translation"
+  }
+]

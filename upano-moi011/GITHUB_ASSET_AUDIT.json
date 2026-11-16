@@ -1,0 +1,349 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-11-16 17:24:11 UTC",
+  "release_id": 447283454,
+  "assets": [
+    {
+      "name": "5_TIEU_DE_VA_THUMBNAIL.txt",
+      "size": 5622,
+      "digest": "sha256:78d63abeccba8f296c3df7226b019930815789e770915cc275ee0564225a5126",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/5_TIEU_DE_VA_THUMBNAIL.txt"
+    },
+    {
+      "name": "AUDIO_MANIFEST.json",
+      "size": 7476,
+      "digest": "sha256:21b64ec2ab599bd4e8470ff695da798d4f296013a6bb918ae3a3c78351125123",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/AUDIO_MANIFEST.json"
+    },
+    {
+      "name": "DOCUMENT_ASSET_MANIFEST.json",
+      "size": 8918,
+      "digest": "sha256:6e718a55888825cb9857f503e6c6d6227d71c3511cd262e9762a06ee474e58c8",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/DOCUMENT_ASSET_MANIFEST.json"
+    },
+    {
+      "name": "DOCUMENT_DELIVERY_STATE.json",
+      "size": 263,
+      "digest": "sha256:1a4d03820fcab152d100c76748a2f1847ad75075e0834f279f0d1df1290a9599",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/DOCUMENT_DELIVERY_STATE.json"
+    },
+    {
+      "name": "DOCUMENT_QA.json",
+      "size": 1133,
+      "digest": "sha256:b59d86c3392f96d6e2e1f9360f5191d3dffa0edc85bc0c481bad5cbe62e2c4dc",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/DOCUMENT_QA.json"
+    },
+    {
+      "name": "DOWNLOAD_LINKS.md",
+      "size": 4877,
+      "digest": "sha256:c46ea4404883584f4da1d3fad85209986f117f606e38661f4f270179ab14c0d3",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/DOWNLOAD_LINKS.md"
+    },
+    {
+      "name": "en-US.srt",
+      "size": 25142,
+      "digest": "sha256:4fb337122f5dba54851173d01ed4223eef043c9ffc9dac6fbc6266559e1d5e1e",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/en-US.srt"
+    },
+    {
+      "name": "HUONG_DAN_SU_DUNG.txt",
+      "size": 3714,
+      "digest": "sha256:73d3b6c36dd8c9e80d4b938f64fe024cac93529dbac227f93ce54e5ccf9e43d1",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/HUONG_DAN_SU_DUNG.txt"
+    },
+    {
+      "name": "KICH_BAN_EN_20m22s.txt",
+      "size": 21068,
+      "digest": "sha256:a93d06d9b5c77a8b48d2182d112bbda3f207752500203abf04b62368f8b1a008",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/KICH_BAN_EN_20m22s.txt"
+    },
+    {
+      "name": "KICH_BAN_EN_CO_MOC.txt",
+      "size": 25496,
+      "digest": "sha256:6351ef2806b416e01ec2fc51efa98aaf940baeb87424bd34a0dc8432efef9ee2",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/KICH_BAN_EN_CO_MOC.txt"
+    },
+    {
+      "name": "LINK_TAI_VOICE.txt",
+      "size": 1822,
+      "digest": "sha256:3b24e5df38add9cab038974129a3675f831208555636b64f616a6e8e078c76e2",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/LINK_TAI_VOICE.txt"
+    },
+    {
+      "name": "NARRATION_STYLE_LOCKED.json",
+      "size": 681,
+      "digest": "sha256:0e4372bfc1e7e3f00c1850102614dd7c167c564eb1409a69ff1efb938a092ece",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/NARRATION_STYLE_LOCKED.json"
+    },
+    {
+      "name": "NGUON_KIEM_CHUNG.md",
+      "size": 7097,
+      "digest": "sha256:e3b46a9657b2b428f0b57e1794bd359f3bb302fae5c9abba5044cae45688fb9a",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/NGUON_KIEM_CHUNG.md"
+    },
+    {
+      "name": "OPENING_10_SHOTS_30s.json",
+      "size": 17248,
+      "digest": "sha256:16fd80b445d0a0d61ad77b941c46bba17e31110849e57d2a4eab2667463c6127",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/OPENING_10_SHOTS_30s.json"
+    },
+    {
+      "name": "PHAN_TICH_VA_KE_HOACH_DUNG.md",
+      "size": 4865,
+      "digest": "sha256:b33a64b5ab0c53613e5f36902434e82bc7d247a58ae6d4a03c180bfacea7ac83",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PHAN_TICH_VA_KE_HOACH_DUNG.md"
+    },
+    {
+      "name": "PRODUCTION_STEPS_APPLIED.md",
+      "size": 2775,
+      "digest": "sha256:8077c6fc3455442389954632413430764b84f2a0354d1d2625611bbba46025a9",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PRODUCTION_STEPS_APPLIED.md"
+    },
+    {
+      "name": "PROMPT_01_001-010.txt",
+      "size": 9967,
+      "digest": "sha256:8e79a45b57a1e0597faca944e899da922488f3665fdbfe79a5c013deca9a619d",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PROMPT_01_001-010.txt"
+    },
+    {
+      "name": "PROMPT_02_011-020.txt",
+      "size": 10200,
+      "digest": "sha256:1041993f615c9ab86a0adb63ffae666bb9bdd4a0876d0f078ce0a7faa48ff35b",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PROMPT_02_011-020.txt"
+    },
+    {
+      "name": "PROMPT_03_021-030.txt",
+      "size": 9989,
+      "digest": "sha256:41f77e682bedf78c703f52a674d5bf93dba9e408f00d78dd4ec6ac5aad591d24",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PROMPT_03_021-030.txt"
+    },
+    {
+      "name": "PROMPT_04_031-040.txt",
+      "size": 10018,
+      "digest": "sha256:cff84b4052e34ea0f8bd9d5d1c943d2880a342d6fbca5b28a7381021db7bd883",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PROMPT_04_031-040.txt"
+    },
+    {
+      "name": "PROMPT_05_041-050.txt",
+      "size": 9879,
+      "digest": "sha256:51ec9bf8641b6c7ab324a4314a8488e236ec98222338d38167e2a9b6341c3c50",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PROMPT_05_041-050.txt"
+    },
+    {
+      "name": "PROMPT_06_051-060.txt",
+      "size": 9818,
+      "digest": "sha256:6c66b048275cebc17dfbf4d33206ab6e7abcd1644bb0dae657dda06f6c898a09",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PROMPT_06_051-060.txt"
+    },
+    {
+      "name": "PROMPT_07_061-070.txt",
+      "size": 9930,
+      "digest": "sha256:0a4d580ad53d9c58cb1ee19e40e4015464aa7640bff2318221daa37dc51d679a",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PROMPT_07_061-070.txt"
+    },
+    {
+      "name": "PROMPT_08_071-080.txt",
+      "size": 9895,
+      "digest": "sha256:354e0c3def77807f5b002ee25b7b2a8518582daf96f5ec27ff772d291ad7f796",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PROMPT_08_071-080.txt"
+    },
+    {
+      "name": "PROMPT_09_081-090.txt",
+      "size": 9997,
+      "digest": "sha256:ea9f50b95be980bf268ca8c80bc00649c3995f60958f757e3045dcc46e1cf79b",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PROMPT_09_081-090.txt"
+    },
+    {
+      "name": "PROMPT_10_091-100.txt",
+      "size": 10017,
+      "digest": "sha256:0bdc179741a22fe84fede03b7629119b5d94380959b2a7311b93b51f962d9438",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PROMPT_10_091-100.txt"
+    },
+    {
+      "name": "PROMPT_11_101-110.txt",
+      "size": 10035,
+      "digest": "sha256:7c118704fe2caadfde520c22474da8c46c3fd59efa683fb722121af54ee1308a",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PROMPT_11_101-110.txt"
+    },
+    {
+      "name": "PROMPT_12_111-120.txt",
+      "size": 9951,
+      "digest": "sha256:525edc3bd4e7ed8a797ad51ecf2a7d6b96ea7ba43fdbdf0cf8ec65d063f60adf",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PROMPT_12_111-120.txt"
+    },
+    {
+      "name": "PROMPT_13_121-130.txt",
+      "size": 10018,
+      "digest": "sha256:1e20001dadfa95e2ebd6523dc36e3d833548fbd212ba23a591c924c2d391225a",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/PROMPT_13_121-130.txt"
+    },
+    {
+      "name": "README.md",
+      "size": 4877,
+      "digest": "sha256:c46ea4404883584f4da1d3fad85209986f117f606e38661f4f270179ab14c0d3",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/README.md"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "size": 5066,
+      "digest": "sha256:16ed451869d31620b483b402255a90c5bbd3acc59aebac48703fd1e0b425e7a2",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/SHA256SUMS.txt"
+    },
+    {
+      "name": "TIMELINE_130_CANH.csv",
+      "size": 187538,
+      "digest": "sha256:56768f49e89e680bb09b0a8bde1675b2acd4abf936847a99d1cf403a2fb7146d",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/TIMELINE_130_CANH.csv"
+    },
+    {
+      "name": "TRANSLATION_REVIEW.json",
+      "size": 14670,
+      "digest": "sha256:20e5024796e5cc63ddf3302e913501541cb8bc2a9703d3c0e0af6c488ffaf705",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/TRANSLATION_REVIEW.json"
+    },
+    {
+      "name": "UPANO_MOI011_16_VOICES_20m22s.zip",
+      "size": 234661730,
+      "digest": "sha256:9ddc246d64299e21c1b94bebb13e1f46683b2822a48e63eddee67f2bb7d90940",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_16_VOICES_20m22s.zip"
+    },
+    {
+      "name": "UPANO_MOI011_Ba_Lan.mp3",
+      "size": 14664716,
+      "digest": "sha256:f5d9657ea846711a77d94732caf114bd61519002d97786af11afdaf8d36ad44d",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Ba_Lan.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_Bo_Dao_Nha.mp3",
+      "size": 14664716,
+      "digest": "sha256:1e16d760190057abef8bafdd0a880635afb08240de475d763e76b26b5e039d07",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Bo_Dao_Nha.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_Dan_Mach.mp3",
+      "size": 14664716,
+      "digest": "sha256:f409162f13529712fe35a58c203cba9fb9082087cd3e10d89de8d314123fb7de",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Dan_Mach.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_Duc.mp3",
+      "size": 14664716,
+      "digest": "sha256:6cce5c24a3522eb762132e0c8572cba94396502eddd4ac6cebc7054342a2f7b4",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Duc.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_EN_PREVIEW_30s.mp3",
+      "size": 360620,
+      "digest": "sha256:2cd955367d9185990b01dc9e86e1e84040df5a84013ba8a4efc99f92f5ea19f7",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_EN_PREVIEW_30s.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_Han_Quoc.mp3",
+      "size": 14664716,
+      "digest": "sha256:a611ed1390cfdfb438c459d03fed38fe8920df381cf6c0e052e81e2f3cf1bce1",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Han_Quoc.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_Ha_Lan.mp3",
+      "size": 14664716,
+      "digest": "sha256:5d791a678e69990ea274550ac051484731060bffc15c30806a7843289580fed7",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Ha_Lan.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_My_Tieng_Anh.mp3",
+      "size": 14664716,
+      "digest": "sha256:8b5e302947df6b288182bcd489fdde0742f4455dca9d2f76c0fd11db59817e84",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_My_Tieng_Anh.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_Na_Uy.mp3",
+      "size": 14664716,
+      "digest": "sha256:5dbdd63a3214a7ba2fb5fc537969273e61761031a3032429076ab3975e3a12f7",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Na_Uy.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_Nhat_Ban.mp3",
+      "size": 14664716,
+      "digest": "sha256:d37d6ddc9d2815bc35fd7aadbd630da0a3b25eae5940f41d3e2c1c273a0a03a3",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Nhat_Ban.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_Phan_Lan.mp3",
+      "size": 14664716,
+      "digest": "sha256:6eb54b40bfb0779f97da5458bd7457cc14ef64b53bd5fae1beff8f3fc859dc07",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Phan_Lan.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_Phap.mp3",
+      "size": 14664716,
+      "digest": "sha256:8049660a2a0d54d7d9d09597aed09547db68c2cc1876b561cc192d54ac65b564",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Phap.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_Sec.mp3",
+      "size": 14664716,
+      "digest": "sha256:dc405402bbc9390c233c51871588480126f7f6d8386efdf77b142c9022ef0d94",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Sec.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_TAI_LIEU_20m22s.zip",
+      "size": 425782,
+      "digest": "sha256:9743a168c4d18f9a794ffc7047cc50b4c2cac5e88fb11f291291210931a66dce",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_TAI_LIEU_20m22s.zip"
+    },
+    {
+      "name": "UPANO_MOI011_Tay_Ban_Nha.mp3",
+      "size": 14664716,
+      "digest": "sha256:0de387dc5920a9a2bd906828711013ece028a41c24621d5f7cebd4304bcb0929",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Tay_Ban_Nha.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_Thuy_Dien.mp3",
+      "size": 14664716,
+      "digest": "sha256:9e1e2e4ac644227aaac3355e21071c2913032f0f1329d023adf67ca612d88cd5",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Thuy_Dien.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_Viet_Nam_Nam_Minh.mp3",
+      "size": 14664716,
+      "digest": "sha256:16517b50fa94b467e90fafcef3567a1a2f9514d084dc91bd59a76976d8659e9b",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Viet_Nam_Nam_Minh.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_Viet_Nam_Nam_Minh_PREVIEW_10s.mp3",
+      "size": 120716,
+      "digest": "sha256:9bf8b4d96d5f86c65fa81c16baee699235c09a03527aeba89da4c15ff2bd3b38",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Viet_Nam_Nam_Minh_PREVIEW_10s.mp3"
+    },
+    {
+      "name": "UPANO_MOI011_Y.mp3",
+      "size": 14664716,
+      "digest": "sha256:937359a933160e57b21bad27f08dec3b5d37659c218551e4175e12beeb132500",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/UPANO_MOI011_Y.mp3"
+    },
+    {
+      "name": "VOICE_ID_CHANGE.json",
+      "size": 438,
+      "digest": "sha256:c9f9d6c56e9baa42698e049d4797c7b726ef3682e08c00e00fe306eca91d8ffc",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/VOICE_ID_CHANGE.json"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED.json",
+      "size": 11361,
+      "digest": "sha256:0179df2c1adc47af84d61cb65a90bb55588265ae0ae917f2e986960a21a19fa1",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/VOICE_PROFILES_LOCKED.json"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED_BASELINE.json",
+      "size": 5857,
+      "digest": "sha256:ce25930b9e3c49d112c1c1f74bb0259a7a19fdae2abcc32dce84229fe9bbdcea",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/VOICE_PROFILES_LOCKED_BASELINE.json"
+    },
+    {
+      "name": "VOICE_RELEASE_QA.json",
+      "size": 5057,
+      "digest": "sha256:19b728258cfdc2d7429a8c892ad0689591107a58fb5c4525d3d501ea68457243",
+      "url": "https://github.com/seotro95/seotro/releases/download/upano-moi-011-20m22s/VOICE_RELEASE_QA.json"
+    }
+  ]
+}

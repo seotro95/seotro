@@ -1,0 +1,740 @@
+[
+  {
+    "id": 1,
+    "start": 0,
+    "end": 10,
+    "voice": "Look across the forested slopes of Ecuador's Upano Valley, and the ground disappears beneath the trees. But a landscape can hide without being buried."
+  },
+  {
+    "id": 2,
+    "start": 10,
+    "end": 20,
+    "voice": "Below parts of this landscape are raised platforms, connecting routes, and traces of cultivated ground. Their importance becomes clearer when those features are viewed together."
+  },
+  {
+    "id": 3,
+    "start": 20,
+    "end": 30,
+    "voice": "How did these communities connect homes, fields, and water into a working landscape? The answer begins with changing the way we look at the forest."
+  },
+  {
+    "id": 4,
+    "start": 30,
+    "end": 40,
+    "voice": "Our destination lies on the eastern side of the Andes, where mountain slopes give way to the upper Amazon. This is a landscape of transitions."
+  },
+  {
+    "id": 5,
+    "start": 40,
+    "end": 50,
+    "voice": "Rivers carry material out of the mountains. Terraces rise above their channels. Rain, vegetation, and shifting water create opportunities, but also practical problems for settlement."
+  },
+  {
+    "id": 6,
+    "start": 50,
+    "end": 60,
+    "voice": "A place can be fertile and difficult at the same time. Productive ground is useful only if people can reach it, work it, and manage water."
+  },
+  {
+    "id": 7,
+    "start": 60,
+    "end": 70,
+    "voice": "The Upano discoveries concern that relationship. Buildings were one part of a larger arrangement, linked to spaces for growing food and routes between neighboring places."
+  },
+  {
+    "id": 8,
+    "start": 70,
+    "end": 80,
+    "voice": "The surviving traces are often made of earth. Without familiar stone walls or towering monuments, they can be easy to overlook when standing among them."
+  },
+  {
+    "id": 9,
+    "start": 80,
+    "end": 90,
+    "voice": "Yet soil can preserve decisions. A leveled surface, an excavated channel, or a repeated alignment may record work that outlasted the structures once built above."
+  },
+  {
+    "id": 10,
+    "start": 90,
+    "end": 100,
+    "voice": "To understand those decisions, we need more than a spectacular aerial image. We need the ground itself, the objects within it, and the connections between them."
+  },
+  {
+    "id": 11,
+    "start": 100,
+    "end": 110,
+    "voice": "Archaeologists were investigating these earthworks long before the latest headlines. At Sangay, a major site known since the nineteen seventies, excavation had already opened windows into settlement."
+  },
+  {
+    "id": 12,
+    "start": 110,
+    "end": 120,
+    "voice": "Work at Sangay and Kilamope exposed domestic floors, postholes, hearths, and pottery. These were places of ordinary activity, though their wider connections remained harder to grasp."
+  },
+  {
+    "id": 13,
+    "start": 120,
+    "end": 130,
+    "voice": "That distinction matters. A trench can reveal layers in extraordinary detail while telling us relatively little about a route extending far beyond the excavation edge."
+  },
+  {
+    "id": 14,
+    "start": 130,
+    "end": 140,
+    "voice": "Think of finding one room without seeing the rest of the neighborhood. You can describe that room carefully and still misunderstand how the wider place functioned."
+  },
+  {
+    "id": 15,
+    "start": 140,
+    "end": 150,
+    "voice": "In Upano, the question expanded from individual mounds to the spaces between them. Were those spaces unused, or did they hold another part of the settlement?"
+  },
+  {
+    "id": 16,
+    "start": 150,
+    "end": 160,
+    "voice": "An apparently empty patch might separate two settlements. Or it might be a working field that helped sustain both. The difference was hidden in the ground."
+  },
+  {
+    "id": 17,
+    "start": 160,
+    "end": 170,
+    "voice": "In twenty fifteen, Ecuador's national heritage institute commissioned an aerial lidar survey. A much broader view could now be compared with years of detailed archaeological investigation."
+  },
+  {
+    "id": 18,
+    "start": 170,
+    "end": 180,
+    "voice": "A wider survey could suggest connections. Field investigation could then test them. The strongest interpretation would come from making those two kinds of evidence work together."
+  },
+  {
+    "id": 19,
+    "start": 180,
+    "end": 190,
+    "voice": "Local knowledge also belongs in this history. Fields, paths, and familiar changes in the ground do not become real only when they appear in scientific publications."
+  },
+  {
+    "id": 20,
+    "start": 190,
+    "end": 200,
+    "voice": "What changed was the ability to examine extensive terrain systematically. A technology called lidar helped bring many separate observations into the same spatial conversation."
+  },
+  {
+    "id": 21,
+    "start": 200,
+    "end": 210,
+    "voice": "Lidar measures distance using pulses of laser light and their return times. From an aircraft, it can sample the shapes of vegetation and terrain below."
+  },
+  {
+    "id": 22,
+    "start": 210,
+    "end": 220,
+    "voice": "Many pulses meet leaves or branches. Some pass through gaps and reach lower surfaces. Those ground returns are valuable precisely because they are not guaranteed everywhere."
+  },
+  {
+    "id": 23,
+    "start": 220,
+    "end": 230,
+    "voice": "The instrument does not make trees transparent. Nor does it photograph buried houses. It collects measurements that must be processed into useful representations of the surface."
+  },
+  {
+    "id": 24,
+    "start": 230,
+    "end": 240,
+    "voice": "Imagine a cloud of points, each attached to a measured position. Some describe the canopy; others describe lower vegetation, buildings, or portions of exposed ground."
+  },
+  {
+    "id": 25,
+    "start": 240,
+    "end": 250,
+    "voice": "Processing helps separate likely ground points from other returns. A terrain model is then built from the information available, including places that require cautious interpolation."
+  },
+  {
+    "id": 26,
+    "start": 250,
+    "end": 260,
+    "voice": "That model can be illuminated from different virtual directions. Subtle banks and depressions may become easier to recognize when their slopes catch the simulated light."
+  },
+  {
+    "id": 27,
+    "start": 260,
+    "end": 270,
+    "voice": "But changing the display does not create an excavation. A crisp line on a screen is still a feature that needs interpretation, comparison, and often checking."
+  },
+  {
+    "id": 28,
+    "start": 270,
+    "end": 280,
+    "voice": "Roots, erosion, recent tracks, and natural drainage can complicate the picture. Repetition and spatial relationships help, but resemblance alone cannot establish what made a feature."
+  },
+  {
+    "id": 29,
+    "start": 280,
+    "end": 290,
+    "voice": "For Upano, the broad image mattered because it could be compared with earthworks already investigated on the ground. Existing knowledge gave the new patterns a context."
+  },
+  {
+    "id": 30,
+    "start": 290,
+    "end": 300,
+    "voice": "The dramatic reveal, then, is not a hidden metropolis appearing at the push of a button. It is a landscape becoming legible through several methods together."
+  },
+  {
+    "id": 31,
+    "start": 300,
+    "end": 310,
+    "voice": "Begin with one low platform. Then notice another, and another, gathered around a lower open space. The arrangement suggests a place organized through relationships between its parts."
+  },
+  {
+    "id": 32,
+    "start": 310,
+    "end": 320,
+    "voice": "Excavated locations include evidence of domestic activity. The interpretation is not based simply on rectangular shapes, but on what researchers found associated with those built surfaces."
+  },
+  {
+    "id": 33,
+    "start": 320,
+    "end": 330,
+    "voice": "A posthole is small, but it can mark where a support once stood. Put several in context, and a vanished structure begins to acquire a footprint."
+  },
+  {
+    "id": 34,
+    "start": 330,
+    "end": 340,
+    "voice": "The distinction between a surviving base and a complete building is essential. We may recover a footprint without knowing every detail of the structure above it."
+  },
+  {
+    "id": 35,
+    "start": 340,
+    "end": 350,
+    "voice": "A reconstruction therefore needs restraint. Timber, roofing, and other perishable elements can illustrate possibilities, but the finished picture must not pretend that every feature is known."
+  },
+  {
+    "id": 36,
+    "start": 350,
+    "end": 360,
+    "voice": "The important achievement was the modification of ground. Earth was cut, moved, and arranged to create useful surfaces within an environment that demanded practical choices."
+  },
+  {
+    "id": 37,
+    "start": 360,
+    "end": 370,
+    "voice": "The twenty twenty-four study reported over six thousand platforms in roughly three hundred square kilometers of analyzed terrain. Imagine trying to understand that pattern through isolated trenches."
+  },
+  {
+    "id": 38,
+    "start": 370,
+    "end": 380,
+    "voice": "That is an immense number of features, but it is not a count of houses occupied together. Each platform carries its own construction and use history."
+  },
+  {
+    "id": 39,
+    "start": 380,
+    "end": 390,
+    "voice": "Even so, repeated groups across a broad area are significant. They suggest shared ways of organizing space, while leaving room for differences between places and periods."
+  },
+  {
+    "id": 40,
+    "start": 390,
+    "end": 400,
+    "voice": "Now look beyond each group. The feature that draws the eye outward is a line: sometimes shallow from above, yet part of a much larger connection."
+  },
+  {
+    "id": 41,
+    "start": 400,
+    "end": 410,
+    "voice": "Follow a line out of one platform group, and it leads toward another place. Some routes run remarkably straight. Why insist on that course through uneven terrain?"
+  },
+  {
+    "id": 42,
+    "start": 410,
+    "end": 420,
+    "voice": "To recognize a route, researchers consider its shape, its course, and the places it connects. A long depression becomes more informative when its ends have context."
+  },
+  {
+    "id": 43,
+    "start": 420,
+    "end": 430,
+    "voice": "Some Upano routes were interpreted as deliberately excavated. Their profiles and alignments suggest construction, rather than a trail produced only by repeated footsteps over time."
+  },
+  {
+    "id": 44,
+    "start": 430,
+    "end": 440,
+    "voice": "That does not make every line identical. Different kinds of paths can respond differently to slopes, gullies, movement, and the flow of water through a landscape."
+  },
+  {
+    "id": 45,
+    "start": 440,
+    "end": 450,
+    "voice": "Nor should an ancient route be imagined as a modern highway. Its significance lies in how people moved and connected places, not in asphalt, traffic, or vehicles."
+  },
+  {
+    "id": 46,
+    "start": 450,
+    "end": 460,
+    "voice": "Following a contour may save effort. A straighter course can demand more work. That contrast makes the purpose of these routes an especially interesting question."
+  },
+  {
+    "id": 47,
+    "start": 460,
+    "end": 470,
+    "voice": "Access and exchange are plausible uses. Social or ceremonial roles have also been proposed. The route could carry everyday movement and wider meaning at the same time."
+  },
+  {
+    "id": 48,
+    "start": 470,
+    "end": 480,
+    "voice": "The map is most persuasive when features reinforce one another. A route reaches a platform group, another branch approaches cultivated ground, and a pattern begins to repeat."
+  },
+  {
+    "id": 49,
+    "start": 480,
+    "end": 490,
+    "voice": "That repetition supports a connected interpretation. Yet a network visible today can preserve work from different moments, so connection on a map still requires a historical test."
+  },
+  {
+    "id": 50,
+    "start": 490,
+    "end": 500,
+    "voice": "Before we ask when everything operated together, another problem comes into view. A route through wet ground must deal with something that never stays still: water."
+  },
+  {
+    "id": 51,
+    "start": 500,
+    "end": 510,
+    "voice": "After rain, the problem can reverse. Water is everywhere, but useful ground is harder to find. Roots need air as well as moisture, and people need access."
+  },
+  {
+    "id": 52,
+    "start": 510,
+    "end": 520,
+    "voice": "When water fills the spaces in soil, oxygen becomes less available to many roots. Saturated ground can also turn a useful working surface into an obstacle."
+  },
+  {
+    "id": 53,
+    "start": 520,
+    "end": 530,
+    "voice": "The Upano analysis identified drainage features among spaces interpreted as fields. The gaps between built areas were therefore not necessarily empty gaps in human activity."
+  },
+  {
+    "id": 54,
+    "start": 530,
+    "end": 540,
+    "voice": "Seen separately, a channel may look like a simple cut. Seen in relation to plots, routes, and lower ground, it can become part of a working system."
+  },
+  {
+    "id": 55,
+    "start": 540,
+    "end": 550,
+    "voice": "Water follows gradients. A ditch with no useful outlet may merely relocate a problem. A connected arrangement can move excess water toward an existing drainage network."
+  },
+  {
+    "id": 56,
+    "start": 550,
+    "end": 560,
+    "voice": "This is why a map of settlement should include the spaces used to grow food. Homes depend on activity beyond their walls, even when those walls have vanished."
+  },
+  {
+    "id": 57,
+    "start": 560,
+    "end": 570,
+    "voice": "Paths and drainage may also overlap in function. A raised edge or nearby depression can influence both movement and runoff, complicating any neat division between categories."
+  },
+  {
+    "id": 58,
+    "start": 570,
+    "end": 580,
+    "voice": "Researchers must ask what a feature connects and how it behaves within the terrain. Shape matters, but a line alone cannot tell its entire history."
+  },
+  {
+    "id": 59,
+    "start": 580,
+    "end": 590,
+    "voice": "The broader picture is a mixture of built spaces and productive ground. Density can change across that mixture without turning the intervening countryside into an unoccupied blank."
+  },
+  {
+    "id": 60,
+    "start": 590,
+    "end": 600,
+    "voice": "That is the force of the phrase garden urbanism. It directs attention to settlement and cultivation as related parts of a landscape, rather than opposing worlds."
+  },
+  {
+    "id": 61,
+    "start": 600,
+    "end": 610,
+    "voice": "The phrase is a research description, not a promise of paradise. Agricultural settlements still require labor, maintenance, negotiation, and choices about whose needs receive attention first."
+  },
+  {
+    "id": 62,
+    "start": 610,
+    "end": 620,
+    "voice": "Now shrink the view from an entire valley to a potsherd. Microscopic traces on pottery can help connect an enormous worked landscape with the food people prepared."
+  },
+  {
+    "id": 63,
+    "start": 620,
+    "end": 630,
+    "voice": "The study reports starch evidence for maize, beans, manioc, and sweet potato. These tiny traces bring crops into the story, alongside the channels and platforms seen from above."
+  },
+  {
+    "id": 64,
+    "start": 630,
+    "end": 640,
+    "voice": "This does not mean we can label every plot with a crop. A residue in one vessel is evidence from a particular context, not a complete agricultural census."
+  },
+  {
+    "id": 65,
+    "start": 640,
+    "end": 650,
+    "voice": "Nor can modern yields simply be carried backward in time. Different varieties, soils, weather, labor, and cultivation practices can change what a field produces over a season."
+  },
+  {
+    "id": 66,
+    "start": 650,
+    "end": 660,
+    "voice": "What matters for the story is the relationship between food and space. Settlement is easier to understand when the places of production enter the same picture as buildings."
+  },
+  {
+    "id": 67,
+    "start": 660,
+    "end": 670,
+    "voice": "For a moment, follow the distances in the model: from a living surface to a plot, then toward a water outlet and the next occupied place."
+  },
+  {
+    "id": 68,
+    "start": 670,
+    "end": 680,
+    "voice": "A network changes those relationships. Routes can reduce isolation; nearby plots can support everyday work; drainage can protect access. Each element can affect the usefulness of another."
+  },
+  {
+    "id": 69,
+    "start": 680,
+    "end": 690,
+    "voice": "But convenience is not the only possible explanation for an arrangement. Long-established custom, social ties, and competing interests can also shape which routes and boundaries persist."
+  },
+  {
+    "id": 70,
+    "start": 690,
+    "end": 700,
+    "voice": "The surviving earthworks show the result of choices. They do not give us a recording of the discussions, disagreements, or changing priorities that produced those choices."
+  },
+  {
+    "id": 71,
+    "start": 700,
+    "end": 710,
+    "voice": "There is another difficulty hidden inside every reconstruction: maintenance. A landscape of earth and perishable materials has to keep functioning while rain and vegetation keep changing it."
+  },
+  {
+    "id": 72,
+    "start": 710,
+    "end": 720,
+    "voice": "A cut can erode. A channel can collect sediment. A surface can soften after heavy rain. Keeping a route useful is different from making it once."
+  },
+  {
+    "id": 73,
+    "start": 720,
+    "end": 730,
+    "voice": "These maintenance problems follow from the materials and terrain. Exactly how ancient communities divided that work remains a question, rather than a scene we can reconstruct with certainty."
+  },
+  {
+    "id": 74,
+    "start": 730,
+    "end": 740,
+    "voice": "The same caution applies to houses. A plausible roof can help viewers imagine shelter, but its shape and construction details must follow evidence rather than cinematic preference."
+  },
+  {
+    "id": 75,
+    "start": 740,
+    "end": 750,
+    "voice": "There is no need to fill Upano with imported stone temples or familiar imagery from another civilization. The earthen features are already interesting on their own terms."
+  },
+  {
+    "id": 76,
+    "start": 750,
+    "end": 760,
+    "voice": "Where did the moved earth come from? How were surfaces shaped? Who kept a route open after rain? Those practical questions make engineering a human story."
+  },
+  {
+    "id": 77,
+    "start": 760,
+    "end": 770,
+    "voice": "Now spread that work across generations. Add one group of platforms, repair a route, reshape a field. The final pattern need not have appeared in one enormous effort."
+  },
+  {
+    "id": 78,
+    "start": 770,
+    "end": 780,
+    "voice": "This is a common trap in viewing archaeological maps. All visible features occupy one image, while the people who built them may have lived in different centuries."
+  },
+  {
+    "id": 79,
+    "start": 780,
+    "end": 790,
+    "voice": "The challenge is to recover relationships through time as well as space. Without that second dimension, a beautiful reconstruction can become more certain than the archaeology."
+  },
+  {
+    "id": 80,
+    "start": 790,
+    "end": 800,
+    "voice": "So the question changes again. We have evidence of extensive construction. What kinds of cooperation could create it, and which kinds can the evidence actually distinguish?"
+  },
+  {
+    "id": 81,
+    "start": 800,
+    "end": 810,
+    "voice": "Shared layouts suggest shared practices. Connected routes suggest relationships between places. Neither observation, by itself, identifies a king, a single government, or one central planning office."
+  },
+  {
+    "id": 82,
+    "start": 810,
+    "end": 820,
+    "voice": "Coordination can happen through several social arrangements. Neighboring groups may maintain common practices without every decision coming from one authority. A standard is not automatically an empire."
+  },
+  {
+    "id": 83,
+    "start": 820,
+    "end": 830,
+    "voice": "That does not prove an entirely equal society either. Buildings and routes alone cannot settle the distribution of power, obligation, or access among the people using them."
+  },
+  {
+    "id": 84,
+    "start": 830,
+    "end": 840,
+    "voice": "The strongest account keeps those possibilities separate. It describes the organization visible in the ground and asks what additional evidence would narrow the range of explanations."
+  },
+  {
+    "id": 85,
+    "start": 840,
+    "end": 850,
+    "voice": "Larger platforms have prompted interpretations involving civic or ceremonial activity. Their size is a useful clue, but it does not name a ruler or explain every use."
+  },
+  {
+    "id": 86,
+    "start": 850,
+    "end": 860,
+    "voice": "Defensive interpretations also require care. A ditch or a blocked approach can invite that explanation, yet the presence of a barrier does not reveal a particular battle."
+  },
+  {
+    "id": 87,
+    "start": 860,
+    "end": 870,
+    "voice": "The published study discusses a landscape that could be socially dynamic and contested. That is different from treating every settlement as peaceful, or reconstructing wars nobody documented."
+  },
+  {
+    "id": 88,
+    "start": 870,
+    "end": 880,
+    "voice": "Comparison can help generate questions, but it can mislead when it supplies ready-made answers. Upano should not become a smaller copy of the Maya world in our imaginations."
+  },
+  {
+    "id": 89,
+    "start": 880,
+    "end": 890,
+    "voice": "Similar engineering problems can produce some similar solutions in different societies. Establishing a specific historical connection requires evidence beyond resemblance in a map or a reconstruction."
+  },
+  {
+    "id": 90,
+    "start": 890,
+    "end": 900,
+    "voice": "The ground has given us shapes and connections. It has not given us a calendar. To see which places functioned together, we need evidence that can place events in time."
+  },
+  {
+    "id": 91,
+    "start": 900,
+    "end": 910,
+    "voice": "Archaeologists can date suitable material recovered from known contexts. The relationship between a sample and a structure is just as important as the number produced by a laboratory."
+  },
+  {
+    "id": 92,
+    "start": 910,
+    "end": 920,
+    "voice": "Charcoal, for example, records a history involving once-living material. Its presence near a platform does not automatically make its measured age the date of that platform's construction."
+  },
+  {
+    "id": 93,
+    "start": 920,
+    "end": 930,
+    "voice": "Context helps connect those events. Layers, associated objects, repeated samples, and comparisons between locations can strengthen a sequence, while disturbance or uncertain associations can weaken it."
+  },
+  {
+    "id": 94,
+    "start": 930,
+    "end": 940,
+    "voice": "The twenty twenty-four paper placed major construction between roughly five hundred before the common era and three hundred to six hundred of the common era."
+  },
+  {
+    "id": 95,
+    "start": 940,
+    "end": 950,
+    "voice": "Those are broad historical intervals, not a single birthday for a city. The cultural sequence and its interpretation have also prompted discussion among researchers working in the region."
+  },
+  {
+    "id": 96,
+    "start": 950,
+    "end": 960,
+    "voice": "A careful documentary should preserve that discussion. It should not convert an estimated range into an exact date simply because an exact date sounds more dramatic in narration."
+  },
+  {
+    "id": 97,
+    "start": 960,
+    "end": 970,
+    "voice": "Spatial connections support the idea that parts of the network functioned together. They do not establish that every mapped platform was occupied during the same generation."
+  },
+  {
+    "id": 98,
+    "start": 970,
+    "end": 980,
+    "voice": "This is also why the number of features cannot be converted straight into a population. We would need assumptions about use, household size, occupation, and overlapping phases."
+  },
+  {
+    "id": 99,
+    "start": 980,
+    "end": 990,
+    "voice": "Those assumptions can be investigated, but they should remain visible. A rounded estimate with stated uncertainty is more useful than a confident census invented from an impressive map."
+  },
+  {
+    "id": 100,
+    "start": 990,
+    "end": 1000,
+    "voice": "What survives our questions is still substantial: repeated built features, links across the terrain, and evidence of cultivation. Uncertainty changes the detail, not the existence of the landscape."
+  },
+  {
+    "id": 101,
+    "start": 1000,
+    "end": 1010,
+    "voice": "Then comes the question almost every lost-city story asks: what happened next? Here, the evidence deserves more room than a single spectacular explanation allows."
+  },
+  {
+    "id": 102,
+    "start": 1010,
+    "end": 1020,
+    "voice": "The region includes an active volcanic setting, and volcanic deposits are part of its history. But a volcano on the horizon does not identify one final catastrophe."
+  },
+  {
+    "id": 103,
+    "start": 1020,
+    "end": 1030,
+    "voice": "Even the accepted research manuscript notes problems with a simple eruption-ending explanation. Dates and contexts must be tested before a dramatic disappearance can be reconstructed as fact."
+  },
+  {
+    "id": 104,
+    "start": 1030,
+    "end": 1040,
+    "voice": "Later occupation also matters. Changes in built forms or use do not mean that human history ended in the valley, or that the region became an empty stage."
+  },
+  {
+    "id": 105,
+    "start": 1040,
+    "end": 1050,
+    "voice": "A landscape can be altered, reused, overgrown, and worked again. The surface we see today brings together natural processes and human decisions from many different times."
+  },
+  {
+    "id": 106,
+    "start": 1050,
+    "end": 1060,
+    "voice": "That makes a clean before-and-after image useful only as an illustration. It cannot tell us the speed, cause, or exact sequence of every transformation across the valley."
+  },
+  {
+    "id": 107,
+    "start": 1060,
+    "end": 1070,
+    "voice": "Present-day Upano is not one uninterrupted sheet of untouched forest. Vegetation, fields, settlements, and exposed ground affect both what survives and what a survey can detect."
+  },
+  {
+    "id": 108,
+    "start": 1070,
+    "end": 1080,
+    "voice": "Some traces may be damaged by erosion or later land use. Others may remain difficult to recognize beneath vegetation or within parts of the terrain poorly sampled."
+  },
+  {
+    "id": 109,
+    "start": 1080,
+    "end": 1090,
+    "voice": "A mapped boundary therefore need not be an ancient boundary. It can mark the edge of coverage, the limits of preservation, or a cautious decision made during interpretation."
+  },
+  {
+    "id": 110,
+    "start": 1090,
+    "end": 1100,
+    "voice": "That is why the next discovery may come from a less dramatic task: checking a line, dating another context, or understanding a place already known locally."
+  },
+  {
+    "id": 111,
+    "start": 1100,
+    "end": 1110,
+    "voice": "The reveal is now larger than a hidden building. A route makes more sense beside a platform; a platform makes more sense beside productive ground and drainage."
+  },
+  {
+    "id": 112,
+    "start": 1110,
+    "end": 1120,
+    "voice": "A platform provides one kind of space. A route connects it to another. Cultivated ground and water management help explain how those connections could support daily activity."
+  },
+  {
+    "id": 113,
+    "start": 1120,
+    "end": 1130,
+    "voice": "Together, these features describe a way of organizing life through the terrain. The spaces between buildings are essential to the story, because that is where much work happened."
+  },
+  {
+    "id": 114,
+    "start": 1130,
+    "end": 1140,
+    "voice": "Calling this urbanism opens a useful discussion about settlement and scale. It should not erase the differences between Upano and places built with other materials or institutions."
+  },
+  {
+    "id": 115,
+    "start": 1140,
+    "end": 1150,
+    "voice": "Nor should the discovery be told as proof that outsiders must have supplied the knowledge. Local development is a serious explanation, not a gap requiring an exotic builder."
+  },
+  {
+    "id": 116,
+    "start": 1150,
+    "end": 1160,
+    "voice": "The people who made these places belong to the human history of Amazonia. Their work does not become more impressive when their identity is replaced with a fantasy."
+  },
+  {
+    "id": 117,
+    "start": 1160,
+    "end": 1170,
+    "voice": "Modern communities and researchers also belong in the continuing story. Understanding and caring for archaeological places depends on relationships in the present, as well as measurements of the past."
+  },
+  {
+    "id": 118,
+    "start": 1170,
+    "end": 1180,
+    "voice": "The next survey can widen this picture. Another excavation can test a connection. A well-placed sample can change the timeline. Discovery continues through questions small enough to answer."
+  },
+  {
+    "id": 119,
+    "start": 1180,
+    "end": 1190,
+    "voice": "What began as a view of trees has become a question about organization: how people shaped ground, connected places, and made a demanding environment more workable."
+  },
+  {
+    "id": 120,
+    "start": 1190,
+    "end": 1200,
+    "voice": "The forest can conceal the shape of worked ground. But revealing that shape is the beginning of a historical investigation, not permission to fill every gap with certainty."
+  },
+  {
+    "id": 121,
+    "start": 1200,
+    "end": 1210,
+    "voice": "Return to the valley we saw at the beginning. The trees are still there, but now the ground suggests homes, routes, fields, and choices connected across space."
+  },
+  {
+    "id": 122,
+    "start": 1210,
+    "end": 1220,
+    "voice": "That is the real reveal of Upano: a way of organizing life becomes visible, while the questions left unanswered guide the next careful look beneath the canopy."
+  },
+  {
+    "id": 123,
+    "start": 1220,
+    "end": 1222,
+    "voice": "A landscape, connected."
+  }
+]
