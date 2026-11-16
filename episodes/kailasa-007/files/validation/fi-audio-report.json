@@ -1,0 +1,1236 @@
+{
+  "locale": "fi",
+  "voice_id": "piper:fi_FI-harri-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1352,
+  "spoken_cues": 135,
+  "closing_silence_seconds": 2,
+  "config_hash": "c2464c9af8ea841e12fac46a706ddb2ac1f34659a94bcecbbbe8ae84459eac9d",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "Kailasassa temppeli seisoo rinteeseen hakatun tyhjän tilan keskellä. Ensimmäinen kysymys ei ole, mitä tuotiin, vaan mitä poistettiin.",
+      "raw_seconds": 9.044172335600907,
+      "speech_window_seconds": 9.044172335600907,
+      "tempo": 0.937219931150353,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Tornit, salit ja veistokset olivat aluksi kallion sisällä. Niiden syntyä ymmärtääksemme on nähtävä myös ympäriltä kadonnut materiaali.",
+      "raw_seconds": 9.903310657596371,
+      "speech_window_seconds": 9.903310657596371,
+      "tempo": 1.0262498090773442,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Miten vuoren pintaa voitiin poistaa ja säilyttää rakennus sisällä? Seurataan leikkauksia yläkalliosta alempiin tiloihin.",
+      "raw_seconds": 8.034104308390022,
+      "speech_window_seconds": 8.034104308390022,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Olemme Ellorassa, Maharashtrassa, Länsi-Intiassa. Pitkä basalttijyrkänne muodostaa buddhalaisten, hindulaisten ja jainalaisten monumenttien maiseman.",
+      "raw_seconds": 10.994648526077098,
+      "speech_window_seconds": 10.994648526077098,
+      "tempo": 1.1393418161737925,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Kailasa on alueen luola kuusitoista. Keskusrakennus on kuitenkin päivänvalossa seisova temppeli, jota ympäröi kallioon hakattu piha.",
+      "raw_seconds": 9.346031746031747,
+      "speech_window_seconds": 9.346031746031747,
+      "tempo": 0.9685006990706473,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Temppeli on omistettu Šivalle. Nimi viittaa pyhään Kailasa-vuoreen ja antaa veistetylle vuorelle arkkitehtonisen ja uskonnollisen merkityksen.",
+      "raw_seconds": 9.85687074829932,
+      "speech_window_seconds": 9.85687074829932,
+      "tempo": 1.021437383243453,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Päätyöt yhdistetään yleensä kahdeksanteen vuosisataan ja Rashtrakuta-dynastian Krishna Ensimmäiseen. Koko alueen historia kattaa useita vuosisatoja.",
+      "raw_seconds": 10.89015873015873,
+      "speech_window_seconds": 10.89015873015873,
+      "tempo": 1.1285138580475367,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Tämä antaa historiallisen taustan, ei päivittäistä työjärjestystä. Kuninkaallinen tuki, rakennusvaiheet ja yksittäisten ryhmien työ ovat eri kysymyksiä.",
+      "raw_seconds": 11.54031746031746,
+      "speech_window_seconds": 11.54031746031746,
+      "tempo": 1.1958878197220166,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Materiaali on vulkaanista basalttia. Vanhoissa laavavirtauksissa on erilaisia rakenteita ja rakoja. Rinne ei ole täysin yhtenäistä kiveä.",
+      "raw_seconds": 10.100680272108843,
+      "speech_window_seconds": 10.100680272108843,
+      "tempo": 1.0467026188713826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Rakentajille geologia kuului suunnitteluun. Kallion piti kannattaa kattoja, mahdollistaa yksityiskohdat ja kestää louhinta.",
+      "raw_seconds": 8.904852607709751,
+      "speech_window_seconds": 8.904852607709751,
+      "tempo": 0.9227826536486788,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Tarvittiin myös työtilaa ja paikka kivijätteelle. Kiven poistaminen luo rakennuksen, mutta samalla jatkuvan kuljetusongelman.",
+      "raw_seconds": 8.626213151927438,
+      "speech_window_seconds": 8.626213151927438,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Seuraamme kolmea tehtävää: päätetään säilytettävä osa, poistetaan ympäristö ja suojataan jäljelle jäävää rakennetta koko työn ajan.",
+      "raw_seconds": 10.054240362811791,
+      "speech_window_seconds": 10.054240362811791,
+      "tempo": 1.0418901930374913,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Aloitetaan pihan seinistä. Niiden korkeus ja sijainti näyttävät louhinnan. Avoin tila kuului aiemmin paljon suurempaan kalliomassaan.",
+      "raw_seconds": 9.380861678004536,
+      "speech_window_seconds": 9.380861678004536,
+      "tempo": 0.9721100184460658,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Tavallinen kivimuuraus yhdistää lohkareita. Täällä päämuodot syntyivät jättämällä valittu kivi paikalleen ja poistamalla sen vierestä.",
+      "raw_seconds": 8.893242630385487,
+      "speech_window_seconds": 8.893242630385487,
+      "tempo": 0.9215795471902058,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Intian arkeologinen tutkimuslaitos yhdistää Kailasan Krishna Ensimmäiseen. Myöhempi kuparilevykirjoitus ylistää suurta temppeliä vanhassa Elapurassa, Ellorassa.",
+      "raw_seconds": 11.69124716553288,
+      "speech_window_seconds": 11.69124716553288,
+      "tempo": 1.2115282036821637,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Kirjoitus käsittelee kuninkaallista saavutusta. Se ei ole säilynyt työohje, joka kertoisi jokaisen leikkauksen syvyyden, järjestyksen ja keston.",
+      "raw_seconds": 10.12390022675737,
+      "speech_window_seconds": 10.12390022675737,
+      "tempo": 1.0491088317883284,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Monumentti antaa toisenlaisia todisteita. Rakennusosien suhteet, muualla säilyneet keskeneräiset pinnat ja vertailut auttavat arvioimaan mahdollisia työvaiheita.",
+      "raw_seconds": 11.935056689342403,
+      "speech_window_seconds": 11.935056689342403,
+      "tempo": 1.2367934393100934,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Basaltti syntyi peräkkäisistä laavavirtauksista. Tiivis ydin ja kaasurakkulainen osa voivat käyttäytyä eri tavoin, kun pinta paljastetaan.",
+      "raw_seconds": 10.158730158730158,
+      "speech_window_seconds": 10.158730158730158,
+      "tempo": 1.052718151163747,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Luonnonraot helpottavat irrottamista, mutta voivat halkaista pilarin tai katon. Hyödyllisiä jätekivessä, vaarallisia säilytettävässä osassa.",
+      "raw_seconds": 9.636281179138322,
+      "speech_window_seconds": 9.636281179138322,
+      "tempo": 0.9985783605324686,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Virallinen arkeologinen kuvaus korostaa näitä rakenteita. Tarkka havainnointi oli siis käytännön vaatimus, ei pelkkä valmistava seremonia.",
+      "raw_seconds": 10.019410430839002,
+      "speech_window_seconds": 10.019410430839002,
+      "tempo": 1.0382808736620728,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Ennen syvää leikkausta piti säästää tarpeeksi kalliota rakennukseen. Suunniteltua tyhjää tilaa ja säilyvää rakennetta ei voinut erottaa toisistaan.",
+      "raw_seconds": 10.750839002267574,
+      "speech_window_seconds": 10.750839002267574,
+      "tempo": 1.1140765805458626,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Historialliset mittauspiirrokset esittävät Kailasan pohjia ja leikkauksia. Ne kuvaavat säilynyttä monumenttia, eivät ole rakentajien alkuperäisiä suunnitelmia.",
+      "raw_seconds": 11.34294784580499,
+      "speech_window_seconds": 11.34294784580499,
+      "tempo": 1.1754350099279782,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Pääpyhäkkö, pylvässali, sisäänkäynti ja Nandin paviljonki muodostavat kokonaisuuden. Niiden suhteet antavat mallille tavoitteen ennen kuvitteellista hakkaamista.",
+      "raw_seconds": 11.842176870748299,
+      "speech_window_seconds": 11.842176870748299,
+      "tempo": 1.2271685876423106,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Keskellä kohoaa pyhäkkö ylärakenteineen. Sen profiilia veistettäessä piti suojata korkeimpien osien alapuolinen kivitilavuus.",
+      "raw_seconds": 9.125442176870749,
+      "speech_window_seconds": 9.125442176870749,
+      "tempo": 0.945641676359663,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Pihan ympärillä on kallioseinään hakattuja käytäviä ja pyhäkköjä. Vapaasti seisova rakennus ja kallion sisäinen huone asettavat eri ongelmat.",
+      "raw_seconds": 10.716009070294785,
+      "speech_window_seconds": 10.716009070294785,
+      "tempo": 1.110467261170444,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Katsokaa niiden välistä ilmaa uudelleen. Arkkitehtuuritutkimus mittaa säilyneen, mutta louhintamalli arvioi myös tilat ennen täyttäneen kallion.",
+      "raw_seconds": 10.448979591836734,
+      "speech_window_seconds": 10.448979591836734,
+      "tempo": 1.0827958126255683,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Karkea työpinta ja valmis koriste vastaavat eri kysymyksiin. Toinen kertoo pääsystä ja etenemisestä, toinen halutusta lopullisesta muodosta.",
+      "raw_seconds": 9.32281179138322,
+      "speech_window_seconds": 9.32281179138322,
+      "tempo": 0.9660944861537015,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Keskeneräiset kalliomonumentit valaisevat työvaiheita. Vertailu auttaa, kunhan toisen paikan jälkiä ei väitetä Kailasan suoriksi työtallenteiksi.",
+      "raw_seconds": 10.100680272108843,
+      "speech_window_seconds": 10.100680272108843,
+      "tempo": 1.0467026188713826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Rekonstruktio ei saa käsitellä kalliota pehmeänä savena. Paino, raot, työtila ja muuttuva jäljelle jäävä muoto on otettava huomioon.",
+      "raw_seconds": 10.181950113378685,
+      "speech_window_seconds": 10.181950113378685,
+      "tempo": 1.0551243640806927,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Näillä ehdoilla rakennetaan mahdollinen järjestys. Se selittää työskentelyn ylhäältä alas, väittämättä palauttavansa jokaista historiallista liikettä.",
+      "raw_seconds": 10.367709750566894,
+      "speech_window_seconds": 10.367709750566894,
+      "tempo": 1.0743740674162583,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Kuvitellaan rinne ennen pihaa. Haluttu kattokorkeus ja käytettävissä oleva kivi rajoittivat temppelin mahdollista sijaintia.",
+      "raw_seconds": 8.161814058956915,
+      "speech_window_seconds": 8.161814058956915,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Korkeimman muodon piti mahtua alkuperäiseen massaan. Jos ensimmäiset leikkaukset menivät liian alas, menetettyä korkeutta ei voinut hakata takaisin.",
+      "raw_seconds": 9.93814058956916,
+      "speech_window_seconds": 9.93814058956916,
+      "tempo": 1.0298591284527627,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Yhtenäinen sijoittelu tarvitsee linjoja ja korkoja. Narut, mittavälineet ja tähtääminen ovat mahdollisia apuja, mutta tarkka järjestely ei ole säilynyt.",
+      "raw_seconds": 11.482267573696145,
+      "speech_window_seconds": 11.482267573696145,
+      "tempo": 1.1898722874296523,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Malli jättää runsaan kivivarauksen. Herkkiä reunoja ei paljasteta ennen kuin ympäröivälle työlle on hallittu etenemistapa.",
+      "raw_seconds": 8.13859410430839,
+      "speech_window_seconds": 8.13859410430839,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Varauksen ympärillä alaspäin kulkevat leikkaukset voivat erottaa sen rinteestä. Kaivannot avaavat työpintoja ja jättävät tulevan rakennuksen keskelle.",
+      "raw_seconds": 9.822040816326531,
+      "speech_window_seconds": 9.822040816326531,
+      "tempo": 1.0178280638680344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Karkea poisto ei edellytä kaiken jauhamista pölyksi. Kiven salliessa kappaleiden irrottaminen voi olla tehokkaampaa kuin jokaisen pinnan viimeistely.",
+      "raw_seconds": 9.613061224489796,
+      "speech_window_seconds": 9.613061224489796,
+      "tempo": 0.9961721476155229,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Irrottamisen on silti pysyttävä hallinnassa. Ei-toivottu halkeama voi jatkua jätekivestä säilytettävään räystääseen, pilariin tai kattoon.",
+      "raw_seconds": 9.58984126984127,
+      "speech_window_seconds": 9.58984126984127,
+      "tempo": 0.9937659346985771,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Jokainen poistettu pala pitää kuljettaa pois. Täyttynyt kaivanto menettää nopeasti pääsyn, jonka louhinnan piti juuri luoda.",
+      "raw_seconds": 8.591383219954649,
+      "speech_window_seconds": 8.591383219954649,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Ylhäältä työskentely paljastaa yläprofiilin ennen koko alaosaa. Jäljelle jäävä kallio voi tarjota väliaikaisen työpääsyn.",
+      "raw_seconds": 8.661043083900227,
+      "speech_window_seconds": 8.661043083900227,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Tämä on ketju, ei yksi ihmeellinen leikkaus. Jokainen pieni poisto muuttaa sekä tulevaa rakennusta että sen työympäristöä.",
+      "raw_seconds": 9.160272108843538,
+      "speech_window_seconds": 9.160272108843538,
+      "tempo": 0.9492509957350815,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Ajatellaan ulkonevaa räystästä. Sen alla ja vieressä on oltava riittävästi kiveä muotoilun aikana, varsinkin rakojen lähellä.",
+      "raw_seconds": 9.1718820861678,
+      "speech_window_seconds": 9.1718820861678,
+      "tempo": 0.9504541021935544,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Karkealla poistolla ja viimeistelyllä on eri tavoitteet. Ylijäämä avaa tilan, hienotyö kehittää profiilit siellä, missä pääsy ja vakaus sallivat.",
+      "raw_seconds": 10.983038548752834,
+      "speech_window_seconds": 10.983038548752834,
+      "tempo": 1.1381387097153195,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Ylhäältä alas ei tarkoita kaikkia ryhmiä samalla korkeudella. Alueet voivat edetä eri tahtiin, jos geometria pysyy yhteensopivana.",
+      "raw_seconds": 9.740770975056689,
+      "speech_window_seconds": 9.740770975056689,
+      "tempo": 1.0094063186587243,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Syvemmällä yhteensovitus vaikeutuu. Yläreunan tekijän on ymmärrettävä sen alle myöhemmin tuleva sali, aukko tai tuki.",
+      "raw_seconds": 8.243083900226758,
+      "speech_window_seconds": 8.243083900226758,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Pienet sijaintivirheet voivat kasautua. Suunnan ja korkeuden toistuva tarkistus on järkevää, vaikka muinainen mittausrutiini olisi tuntematon.",
+      "raw_seconds": 9.531791383219955,
+      "speech_window_seconds": 9.531791383219955,
+      "tempo": 0.9877504024062129,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Sisätila lisää uuden vaiheen. Huone poistaa kiveä säästetystä massasta. Seinät, katto ja pylväät on ajateltava yhdessä.",
+      "raw_seconds": 9.1718820861678,
+      "speech_window_seconds": 9.1718820861678,
+      "tempo": 0.9504541021935544,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Kalliopylväs syntyy poistamalla sen ympäristö. Mitat riippuvat myös katon vaatimuksista, eivät vain profiilin kauneudesta.",
+      "raw_seconds": 8.486893424036282,
+      "speech_window_seconds": 8.486893424036282,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Katto on aukon yläpuolelle jätettyä kiveä. Suurempi aukko muuttaa rasituksia, etenkin rakojen ja ohuiden kohtien lähellä.",
+      "raw_seconds": 9.137052154195011,
+      "speech_window_seconds": 9.137052154195011,
+      "tempo": 0.9468447828181359,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Ulkoneman kuormitusgeometria on erilainen. Hyvä puristuslujuus ei tee jokaisesta mahdollisesta kivimuodosta yhtä turvallista.",
+      "raw_seconds": 8.684263038548753,
+      "speech_window_seconds": 8.684263038548753,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Jalustan norsuveistokset rikastuttavat monumenttia. Ne ovat kivikuvia arkkitehtonisessa massassa, eivät rakennusta kantavia eläviä eläimiä.",
+      "raw_seconds": 10.309659863945578,
+      "speech_window_seconds": 10.309659863945578,
+      "tempo": 1.068358535123894,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Ero on tärkeä kuormille. On tutkittava kiviydin ja sen yhteydet, ei muutettava veistoksellista kertomusta rakennekaavioksi.",
+      "raw_seconds": 9.32281179138322,
+      "speech_window_seconds": 9.32281179138322,
+      "tempo": 0.9660944861537015,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Valo muuttuu tilojen avautuessa. Ulkoseinä, varjoinen sali ja kapea käytävä tarvitsevat erilaisia syvyys- ja yksityiskohtaratkaisuja.",
+      "raw_seconds": 9.32281179138322,
+      "speech_window_seconds": 9.32281179138322,
+      "tempo": 0.9660944861537015,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Valmis järjestely palvelee palvontaa ja liikkumista. Työvaiheiden malliin kuuluvat myös temppelin käyttö ja symbolinen järjestys.",
+      "raw_seconds": 9.520181405895691,
+      "speech_window_seconds": 9.520181405895691,
+      "tempo": 0.98654729594774,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Nandin paviljonki kuuluu kokonaisuuteen. Suhde pääpyhäkköön osoittaa, miksi tarvittiin muutakin kuin erillisiä rakennusmuotoja.",
+      "raw_seconds": 8.904852607709751,
+      "speech_window_seconds": 8.904852607709751,
+      "tempo": 0.9227826536486788,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Kiviset yhteydet vaikeuttavat suunnittelua. Malli ei voi palauttaa siltaa taikatemppuna, kun sen tarvitsema kallio on jo poistettu.",
+      "raw_seconds": 9.032562358276644,
+      "speech_window_seconds": 9.032562358276644,
+      "tempo": 0.9360168246918802,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Ulkopuolinen poisto ja sisätilan kovertaminen vaikuttavat toisiinsa. Paikallinen järjestys voi vaihdella, mutta kumpikaan ei saa tuhota toiselle tarpeellista.",
+      "raw_seconds": 11.668027210884354,
+      "speech_window_seconds": 11.668027210884354,
+      "tempo": 1.209121990765218,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Aukot vaikuttavat myös työmaan kulkuun. Valmiin temppelin sopiva ovi voi olla hankala aiemmalle jätekiven poistolle.",
+      "raw_seconds": 7.697414965986394,
+      "speech_window_seconds": 7.697414965986394,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Eri tehtävät tarvitsevat eri liikkeitä. Ylijäämän rikkominen, tason muodostus ja reunan viimeistely eivät ole sama vaihdettava vasarointikohtaus.",
+      "raw_seconds": 9.85687074829932,
+      "speech_window_seconds": 9.85687074829932,
+      "tempo": 1.021437383243453,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Rautatyökalut sopivat ajan tekniikkaan. Kuvitus ei kuitenkaan esitä keksittyä työkalusarjaa Kailasasta löydettynä esineistönä.",
+      "raw_seconds": 8.684263038548753,
+      "speech_window_seconds": 8.684263038548753,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Työkalut kuluvat. Teroitus, vaihto ja toimitukset kuuluvat selitykseen. Tietty verstas tai korjausväli tarvitsee omat todisteensa.",
+      "raw_seconds": 10.077460317460318,
+      "speech_window_seconds": 10.077460317460318,
+      "tempo": 1.044296405954437,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Työvoima on enemmän kuin henkilömäärä. Merkintä, hakkaus, viimeistely, kantaminen ja työkaluhuolto vaativat eri taitoja ja yhteensovitusta.",
+      "raw_seconds": 10.681179138321996,
+      "speech_window_seconds": 10.681179138321996,
+      "tempo": 1.1068579417950255,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Voimme mallintaa materiaalia tuntematta kaikkea poistettua määrää. Erotetaan ensin kiven tilavuus sen massasta.",
+      "raw_seconds": 7.650975056689342,
+      "speech_window_seconds": 7.650975056689342,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Oletetaan kiinteän kuutiometrin massaksi kaksi pilkku kahdeksan tonnia. Se on esimerkin tiheysvalinta, ei temppelin mittaustulos.",
+      "raw_seconds": 9.160272108843538,
+      "speech_window_seconds": 9.160272108843538,
+      "tempo": 0.9492509957350815,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Silloin sata kuutiometriä painaisi kaksisataakahdeksankymmentä tonnia. Lasku kuvaa esimerkkiä, ei Kailasan todennettua koko louhintamäärää.",
+      "raw_seconds": 10.054240362811791,
+      "speech_window_seconds": 10.054240362811791,
+      "tempo": 1.0418901930374913,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Irrallinen kivimurska sisältää välejä. Sen kuljetustilavuus eroaa kiinteästä kalliosta ja vaikeuttaa arvioita pelkän vaunukapasiteetin perusteella.",
+      "raw_seconds": 10.878548752834467,
+      "speech_window_seconds": 10.878548752834467,
+      "tempo": 1.127310751589064,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Työtahdin arvio tarvitsee tiedot työn laajuudesta, kiven kunnosta, työkaluista, pääsystä, kantomatkasta sekä viimeistely- ja korjausajasta.",
+      "raw_seconds": 10.820498866213152,
+      "speech_window_seconds": 10.820498866213152,
+      "tempo": 1.1212952192966996,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Syvyys muuttaa ehtoja. Kätevä yläreitti voi kadota, kun alempi käytävä avautuu vasta myöhemmin.",
+      "raw_seconds": 6.629297052154195,
+      "speech_window_seconds": 6.629297052154195,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Uskottava rekonstruktio yhdistää vaiheet. Kallio ei katoa, ihmisten on päästävä töihin ja rakenteen on pysyttävä tuettuna.",
+      "raw_seconds": 9.067392290249433,
+      "speech_window_seconds": 9.067392290249433,
+      "tempo": 0.9396261440672987,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Yläarkkitehtuuri alkaa nyt paljastua. Saavutus on muoto, mutta myös järjestys, joka pitää seuraavan työvaiheen mahdollisena.",
+      "raw_seconds": 9.113832199546485,
+      "speech_window_seconds": 9.113832199546485,
+      "tempo": 0.9444385699011901,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Ensimmäinen este on poistamisen vaikea peruminen. Virhe voi muuttaa käytettävää muotoa jo ennen tavoitepinnan saavuttamista.",
+      "raw_seconds": 8.394013605442177,
+      "speech_window_seconds": 8.394013605442177,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Kiveä voi korjata, ja moderni suojelu muutti joitakin pintoja. Kadonneen palan korvaaminen eroaa silti alkuperäisen jatkuvan kallion säilyttämisestä.",
+      "raw_seconds": 10.216780045351474,
+      "speech_window_seconds": 10.216780045351474,
+      "tempo": 1.0587336834561112,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Piilevä rako on toinen este. Ratkaisee, missä se kulkee jäljelle jäävän kiven halki, ei vain sen sijainti lähellä.",
+      "raw_seconds": 8.6378231292517,
+      "speech_window_seconds": 8.6378231292517,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Kivivara karkean työn aikana säilyttää vaihtoehtoja. Sen poistaminen myöhemmin vaatii uutta harkintaa muodosta, lujuudesta ja paljastuneesta kivilaadusta.",
+      "raw_seconds": 10.62312925170068,
+      "speech_window_seconds": 10.62312925170068,
+      "tempo": 1.1008424095026612,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Pieni esitys selittää periaatteen, ei takaa koko monumenttia. Mittakaava muuttaa halkeamien, jännevälien ja putoavien palojen seurauksia.",
+      "raw_seconds": 9.845260770975056,
+      "speech_window_seconds": 9.845260770975056,
+      "tempo": 1.02023427678498,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Kivi voi kantaa puristusta hyvin ja olla muuten haavoittuva. Taivutus, veto ja halkeamat merkitsevät katon tai ulkoneman vapautuessa.",
+      "raw_seconds": 8.974512471655329,
+      "speech_window_seconds": 8.974512471655329,
+      "tempo": 0.9300012923995159,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Pitkä jänneväli ei ole vain suurennettu lyhyt. Paksuus, tuen paikat ja oikea kalliorakenne on arvioitava yhdessä.",
+      "raw_seconds": 8.695873015873016,
+      "speech_window_seconds": 8.695873015873016,
+      "tempo": 0.9011267373961673,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Sama rako voi olla harmiton laajassa massassa mutta vakava reunassa. Geometria ja geologia on siksi luettava yhdessä.",
+      "raw_seconds": 8.126984126984127,
+      "speech_window_seconds": 8.126984126984127,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Sitten sade. Syvä piha muuttaa veden tuloa ja kertymistä. Keskeneräinenkin työ sijaitsee vuodenaikojen maisemassa.",
+      "raw_seconds": 8.649433106575964,
+      "speech_window_seconds": 8.649433106575964,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Vesi seuraa rakoja ja epätasaisia pintoja. Kaunis kuiva malli ei saa peittää avoimen rinteen muuttuvia olosuhteita.",
+      "raw_seconds": 8.951292517006802,
+      "speech_window_seconds": 8.951292517006802,
+      "tempo": 0.9275950794825701,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Jätekiven poisto ja kuivatus voivat häiritä toisiaan. Väärin kasattu materiaali voi tukkia sekä työreitin että veden kulun.",
+      "raw_seconds": 8.17342403628118,
+      "speech_window_seconds": 8.17342403628118,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Suojeluasiakirjat kertovat Elloran kuivatuksesta ja korjauksista. Näkyvällä uralla tai paikatulla pinnalla voi siis olla myöhempi historia.",
+      "raw_seconds": 10.054240362811791,
+      "speech_window_seconds": 10.054240362811791,
+      "tempo": 1.0418901930374913,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Pääsykin on haaste. Jäljelle jäävä kallio voi olla työtaso, mutta ei todista telineiden tai väliaikaisten tukien olleen aina tarpeettomia.",
+      "raw_seconds": 9.729160997732427,
+      "speech_window_seconds": 9.729160997732427,
+      "tempo": 1.0082032122002513,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Valmiit pinnat ja avautuvat alaosat muuttavat työpaikkoja. Järjestyksen pitää näyttää kulku niihin, ei leijuvia työkaluja.",
+      "raw_seconds": 9.113832199546485,
+      "speech_window_seconds": 9.113832199546485,
+      "tempo": 0.9444385699011901,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Ylätyö uhkaa alla olevia ihmisiä ja valmiita osia. Kuvitus erottaa hakkaamisen ja raivauksen, eikä heitä kiviä toimivan pihan halki.",
+      "raw_seconds": 10.298049886621316,
+      "speech_window_seconds": 10.298049886621316,
+      "tempo": 1.0671554286654212,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Tämä jako vaatii koordinointia. Merkit, tauot ja sovitut alueet ovat vähemmän näyttäviä kuin torni, mutta kuuluvat selitykseen.",
+      "raw_seconds": 9.659501133786849,
+      "speech_window_seconds": 9.659501133786849,
+      "tempo": 1.0009845734494143,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Samoin huolto. Ruoan, veden, puun, metallin ja kunnossa olevien työkalujen pitää saapua oikeaan paikkaan, vaikka katsomme säilyvää kiveä.",
+      "raw_seconds": 10.332879818594105,
+      "speech_window_seconds": 10.332879818594105,
+      "tempo": 1.0707647480408398,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Kyse on tehtävittäin järjestetystä ammattitaidosta. Nimetön väkijoukko ei selitä päätöksiä karkean louhinnan ja sopusuhtaisen pyhäkön välillä.",
+      "raw_seconds": 10.12390022675737,
+      "speech_window_seconds": 10.12390022675737,
+      "tempo": 1.0491088317883284,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Työntekijöiden henkilöllisyyksiä ja sopimuksiakaan ei pidä keksiä. Monumentti kertoo työstä, mutta ei säilytä jokaisen elämäkertaa tai asemaa.",
+      "raw_seconds": 10.228390022675738,
+      "speech_window_seconds": 10.228390022675738,
+      "tempo": 1.0599367899145842,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Vuodenajat eivät anna tarkkaa kalenteria. Sade, pääsy, tuki ja korjaukset ovat merkityksellisiä muuttujia, eivät löydetty työaikataulu.",
+      "raw_seconds": 10.611519274376418,
+      "speech_window_seconds": 10.611519274376418,
+      "tempo": 1.0996393030441884,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Voimme vaatia sisäistä johdonmukaisuutta. Ehdotetun leikkauksen pitää jättää työkalutila, kantava kivi ja poistumistie jätteelle.",
+      "raw_seconds": 9.369251700680271,
+      "speech_window_seconds": 9.369251700680271,
+      "tempo": 0.9709069119875928,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Arkkitehtuuritutkimus vertaa myös eri osia. Erot voivat auttaa ajoittamaan, mutta eivät automaattisesti paljasta yhden päivän työjärjestystä.",
+      "raw_seconds": 10.518639455782314,
+      "speech_window_seconds": 10.518639455782314,
+      "tempo": 1.0900144513764054,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Ellorassa on muita kalliotemppeleitä, kuten myöhempi Pieni Kailasa. Kertomuksemme koskee luolaa kuusitoista, joten kuvia ei saa sekoittaa.",
+      "raw_seconds": 10.100680272108843,
+      "speech_window_seconds": 10.100680272108843,
+      "tempo": 1.0467026188713826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Samallakin pihalla veistospinnat pitää tunnistaa. Vaikuttava lähikuva voi kertoa vähän alkuperäisestä louhintajärjestyksestä.",
+      "raw_seconds": 9.160272108843538,
+      "speech_window_seconds": 9.160272108843538,
+      "tempo": 0.9492509957350815,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Kuvat luovat pyhän maailman. Kulttuurinen ohjelma selittää monumentin tavoitetta, mutta ei ole kirjaimellinen työpajan tallenne.",
+      "raw_seconds": 8.324353741496598,
+      "speech_window_seconds": 8.324353741496598,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Uskonnollisella kohtauksella ja leikkauskaaviolla on eri tehtävät. Molempia voi arvostaa erottaen symbolin tietystä teknisestä väitteestä.",
+      "raw_seconds": 9.775600907029478,
+      "speech_window_seconds": 9.775600907029478,
+      "tempo": 1.0130156380341429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Suositut tarinat hyppäävät täydestä vuoresta valmiiseen temppeliin. Juuri puuttuvassa välissä ovat todelliset tekniset kysymykset.",
+      "raw_seconds": 8.870022675736962,
+      "speech_window_seconds": 8.870022675736962,
+      "tempo": 0.9191733342732603,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Tarkat tonnimäärät ja hämmästyttävät rakennusajat tarvitsevat perusteltuja mittauksia ja lähteitä. Toistuva ruutuluku ei muutu arkeologiseksi havainnoksi.",
+      "raw_seconds": 11.180408163265307,
+      "speech_window_seconds": 11.180408163265307,
+      "tempo": 1.1585915195093581,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Poistetun tilavuuden arvio tarvitsee alkuperäisen rinteen ja säilyneen muodon. Kadonneen pinnan epävarmuus siirtyy tulokseen.",
+      "raw_seconds": 8.765532879818593,
+      "speech_window_seconds": 8.765532879818593,
+      "tempo": 0.9083453761470045,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Jätekiven jäljittäminen on oma tutkimuksensa. Jokainen lähikivi ei ole muinainen Kailasan jäte ilman todettua asiayhteyttä.",
+      "raw_seconds": 8.986122448979591,
+      "speech_window_seconds": 8.986122448979591,
+      "tempo": 0.9312043988579887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Rajaukset eivät estä ymmärtämistä. Ne erottavat geometriset kysymykset sellaisista, jotka vaativat vahvempia historiallisia tai materiaalitodisteita.",
+      "raw_seconds": 10.716009070294785,
+      "speech_window_seconds": 10.716009070294785,
+      "tempo": 1.110467261170444,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Modernit korjausasiakirjat tarjoavat toisen tarkistuksen. Nykyiset pinnat ovat kokeneet rapautumista, huoltoa ja muutoksia alkuperäisen hakkaamisen jälkeen.",
+      "raw_seconds": 10.95981859410431,
+      "speech_window_seconds": 10.95981859410431,
+      "tempo": 1.135732496798374,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Korjaussauma ei ole alkuperäisen kokoamisen jälki. Monoliittinen ydin ei myöskään saa peittää koko alueen myöhempää historiaa.",
+      "raw_seconds": 9.09061224489796,
+      "speech_window_seconds": 9.09061224489796,
+      "tempo": 0.9420323569842445,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Rekonstruktion pitää näyttää ero. Mitatut säilyneet muodot ovat kiinteitä, epävarmojen työvaiheiden tulee näkyä tulkintamalleina.",
+      "raw_seconds": 9.05578231292517,
+      "speech_window_seconds": 9.05578231292517,
+      "tempo": 0.938423037608826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Tämä on elävää perintöä, ei hylätty laboratorio. Synnyn ymmärtäminen lisää huomiota uskontoon, yhteisöihin ja hoitoon.",
+      "raw_seconds": 9.079002267573696,
+      "speech_window_seconds": 9.079002267573696,
+      "tempo": 0.9408292505257715,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Verrataan selityksiä tasapuolisesti. Jokaisen pitää selittää sama kallio, säilytetty arkkitehtuuri ja tarpeellinen jätekuljetus.",
+      "raw_seconds": 10.019410430839002,
+      "speech_window_seconds": 10.019410430839002,
+      "tempo": 1.0382808736620728,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Verrataan rakennettua ja hakattua temppeliä. Ensimmäinen tuo materiaalia, toinen säilyttää halutun massan poistaessaan ympäristön.",
+      "raw_seconds": 9.183492063492064,
+      "speech_window_seconds": 9.183492063492064,
+      "tempo": 0.9516572086520273,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Ensimmäinen korostaa kuljetusta ja saumoja. Toinen kivivalintaa, poistamisjärjestystä, pääsyä ja tarpeettoman materiaalin käsittelyä.",
+      "raw_seconds": 10.205170068027211,
+      "speech_window_seconds": 10.205170068027211,
+      "tempo": 1.0575305769976384,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Verrataan kalliohuonetta ja erillistä pihatemppeliä. Molemmat poistavat kiveä, mutta järjestävät valon ja työpinnat eri tavoin.",
+      "raw_seconds": 8.881632653061224,
+      "speech_window_seconds": 8.881632653061224,
+      "tempo": 0.9203764407317331,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Kailasassa ympäröivä louhinta on olennainen. Se paljastaa eri puolilta luettavan rakennuksen, ei vain julkisivun takaisen sisätilan.",
+      "raw_seconds": 8.858412698412698,
+      "speech_window_seconds": 8.858412698412698,
+      "tempo": 0.9179702278147873,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Ylhäältä alas sopii tehtävään. Ylämuoto ohjaa alempaa poistamista ja säästää kiveä myöhemmin paljastuville osille.",
+      "raw_seconds": 8.231473922902495,
+      "speech_window_seconds": 8.231473922902495,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Yleinen periaate ei ole täydellinen kalenteri. Rinnakkainen työ, paikalliset muutokset ja eri viimeistelyt sopivat monimutkaisempaan hankkeeseen.",
+      "raw_seconds": 10.298049886621316,
+      "speech_window_seconds": 10.298049886621316,
+      "tempo": 1.0671554286654212,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Muodot kuuluvat laajempaan rakennuskulttuuriin. Ajatukset pyhäköistä, saleista, torneista ja koristeista ulottuivat tätä rinnettä kauemmas.",
+      "raw_seconds": 9.926530612244898,
+      "speech_window_seconds": 9.926530612244898,
+      "tempo": 1.02865602199429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Muut Intian kallioperinteet antavat taustan. Vertailu ei todista tietyn työryhmän tai piirroksen kulkeneen tiettyä reittiä.",
+      "raw_seconds": 8.6378231292517,
+      "speech_window_seconds": 8.6378231292517,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Hakattu vyöhyke voi muistuttaa muurattua kivikerrosta. Samankaltaisuus ei todista kokoamista. Pintaa on luettava rakenteen yhteydessä.",
+      "raw_seconds": 9.822040816326531,
+      "speech_window_seconds": 9.822040816326531,
+      "tempo": 1.0178280638680344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Pyhä vuori antaa poistamiselle suuremman merkityksen. Šivaan yhdistetty paikka tulee näkyväksi temppeliksi muutetun vuoren muodossa.",
+      "raw_seconds": 9.079002267573696,
+      "speech_window_seconds": 9.079002267573696,
+      "tempo": 0.9408292505257715,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Kuninkaallinen tuki ja osaaminen selittävät tavoitetta. Historiallinen yhteys tukee taustaa, mutta järjestelyssä ja vaiheissa on vielä avoimia kysymyksiä.",
+      "raw_seconds": 11.23845804988662,
+      "speech_window_seconds": 11.23845804988662,
+      "tempo": 1.1646070518017224,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Kuinka kauan kaikki kesti? Tarkka vastaus vaatii määritelmän laskettavista vaiheista, pinnoista ja työtehtävistä.",
+      "raw_seconds": 8.115374149659864,
+      "speech_window_seconds": 8.115374149659864,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Montako ihmistä tarvittiin? Arvio muuttuu tuottavuuden, kuljetuksen, huollon ja toisiaan häiritsemättä toimivien ryhmien määrän mukaan.",
+      "raw_seconds": 9.740770975056689,
+      "speech_window_seconds": 9.740770975056689,
+      "tempo": 1.0094063186587243,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Työkalujäljelläkin on rajansa. Se voi näyttää kosketuksen ja suunnan, mutta harvoin yksin ajoitusta ja koko työn historiaa.",
+      "raw_seconds": 9.694331065759638,
+      "speech_window_seconds": 9.694331065759638,
+      "tempo": 1.0045938928248328,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Moderni mittaus parantaa geometrista kuvaa. Valmiin temppelin mittaaminen ei automaattisesti palauta alkuperäistä louhintasuunnitelmaa.",
+      "raw_seconds": 9.729160997732427,
+      "speech_window_seconds": 9.729160997732427,
+      "tempo": 1.0082032122002513,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Hyödyllinen tutkimus yhdistää geologian, keskeneräiset osat, rakenteiden suhteet, vanhat asiakirjat ja oletuksiltaan selkeät poistamismallit.",
+      "raw_seconds": 9.822040816326531,
+      "speech_window_seconds": 9.822040816326531,
+      "tempo": 1.0178280638680344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Tavoite ei ole näyttävämpi animaatio. Etsimme järjestystä, joka selittää enemmän jälkiä vähemmillä perusteettomilla oletuksilla.",
+      "raw_seconds": 9.079002267573696,
+      "speech_window_seconds": 9.079002267573696,
+      "tempo": 0.9408292505257715,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Mikä on varmaa? Pääarkkitehtuuri syntyi valikoivalla poistamisella. Jäljelle jätetty kivi muuttui tiloiksi, tuiksi ja temppelin pinnoiksi.",
+      "raw_seconds": 10.437369614512471,
+      "speech_window_seconds": 10.437369614512471,
+      "tempo": 1.0815927061670954,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Palataan alkuun. Temppeli on yhä monumentaalinen, mutta ympäröivä ilma kertoo nyt yhtä tärkeän tarinan kuin kivi.",
+      "raw_seconds": 7.093696145124716,
+      "speech_window_seconds": 7.093696145124716,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Ilma edustaa poistamisen ja säilyttämisen valintoja. Jokainen reuna riippuu laajemmasta työstä, joka mahdollisti seuraavan.",
+      "raw_seconds": 9.380861678004536,
+      "speech_window_seconds": 9.380861678004536,
+      "tempo": 0.9721100184460658,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Kaivanto, vapaa työpinta, aukko ja tila valmiin muodon ympärillä: tyhjyyksien ketju voi olla havainnollisin kuva.",
+      "raw_seconds": 8.498503401360544,
+      "speech_window_seconds": 8.498503401360544,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Valintoihin sisältyi taiteellisia ja uskonnollisia tavoitteita. Tekniikka selittää tilojen luomisen, kulttuuritutkimus niiden merkityksen.",
+      "raw_seconds": 9.508571428571429,
+      "speech_window_seconds": 9.508571428571429,
+      "tempo": 0.9853441894892672,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Geologia asetti ehdot. Ammattitaito muutti ne valinnoiksi. Materiaali tai suunnitelma yksin ei selitä koko saavutusta.",
+      "raw_seconds": 9.496961451247165,
+      "speech_window_seconds": 9.496961451247165,
+      "tempo": 0.9841410830307943,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Puuttuva kivijäte muistuttaa työstä veistäjän käden ulkopuolella: raivauksesta, kantamisesta, huollosta, tarkistuksista ja yhteensovituksesta vaihtuvilla tasoilla.",
+      "raw_seconds": 11.795736961451247,
+      "speech_window_seconds": 11.795736961451247,
+      "tempo": 1.2223561618084193,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "Järjestämisen tunnistaminen ei vähennä ihmetystä. Saavutus muuttuu inhimilliseksi: tieto ja toistuvat käytännön valinnat merkitsevät yhtä paljon kuin voima.",
+      "raw_seconds": 11.15718820861678,
+      "speech_window_seconds": 11.15718820861678,
+      "tempo": 1.1561853065924124,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "Kailasan säilyttäminen vaatii nykyään toisenlaista kärsivällisyyttä. Dokumentointi sekä kiven, veden ja vanhojen korjausten tuntemus suojaavat monimutkaista historiaa.",
+      "raw_seconds": 10.716009070294785,
+      "speech_window_seconds": 10.716009070294785,
+      "tempo": 1.110467261170444,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "Mitä tutkisit seuraavaksi: yläprofiilia, pihan seiniä, sisätukia vai jätekuljetuksen jälkiä?",
+      "raw_seconds": 7.558095238095238,
+      "speech_window_seconds": 7.558095238095238,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 133,
+      "text": "Jokainen valinta testaa eri osaa. Suuri kysymys muuttuu tutkittavaksi, kun löydämme vastauksen antavan pinnan tai suhteen.",
+      "raw_seconds": 8.591383219954649,
+      "speech_window_seconds": 8.591383219954649,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 134,
+      "text": "Emme kuvaa varmasti jokaista muinaista iskua. Ymmärrämme silti, miksi riittävä kivi, vapaa tila ja sovitetut vaiheet olivat tärkeitä.",
+      "raw_seconds": 9.752380952380953,
+      "speech_window_seconds": 9.752380952380953,
+      "tempo": 1.010609425117197,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 135,
+      "text": "Vuorta ei vain korvattu temppelillä. Osa siitä muuttui temppeliksi. Mikä säilynyt jälki voisi parhaiten paljastaa seuraavan vaiheen?",
+      "raw_seconds": 9.229931972789116,
+      "speech_window_seconds": 9.229931972789116,
+      "tempo": 0.9564696344859187,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1352,
+  "decoded_samples": 32448000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-fi-22m32s.mp3",
+  "flac": "voice-fi-22m32s.flac",
+  "mp3_sha256": "98be1568ff98c7fdf68a7b3bea0ce919b7dade4dc025aaea20d0c43f01e1a257",
+  "flac_sha256": "07edbc12b910e1a150d3a7bf53f606524ca12a63f0ff00b2af2979aa09a354f2"
+}

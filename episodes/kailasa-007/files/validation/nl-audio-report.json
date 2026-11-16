@@ -1,0 +1,1236 @@
+{
+  "locale": "nl",
+  "voice_id": "piper:nl_NL-ronnie-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1352,
+  "spoken_cues": 135,
+  "closing_silence_seconds": 2,
+  "config_hash": "bc3c7ff2c74e5ec25d4671946c40dcbf3dfd28c55c3fa3c98b99c9eaf7eb488c",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "In Kailasa staat een tempel in een uitgeholde heuvel. De eerste vraag is niet wat aankwam, maar wat werd weggehaald.",
+      "raw_seconds": 8.510113378684807,
+      "speech_window_seconds": 8.510113378684807,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Torens, zalen en beeldwerk lagen eerst in de rots. Om hun ontstaan te begrijpen, moeten we ook het verdwenen materiaal zien.",
+      "raw_seconds": 10.344489795918367,
+      "speech_window_seconds": 10.344489795918367,
+      "tempo": 1.0719678544993125,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Hoe verwijder je een bergwand en behoud je het gebouw erin? Volg de sneden van boven naar de ruimten daaronder.",
+      "raw_seconds": 8.219863945578231,
+      "speech_window_seconds": 8.219863945578231,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "We zijn in Ellora, Maharashtra, in West-India. Een lange basaltwand werd een landschap met boeddhistische, hindoeïstische en jaïnistische monumenten.",
+      "raw_seconds": 11.319727891156463,
+      "speech_window_seconds": 11.319727891156463,
+      "tempo": 1.1730287970110325,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Kailasa heet Grot Zestien. Toch is het centrale bouwwerk een tempel in het daglicht, omgeven door een uitgegraven binnenplaats.",
+      "raw_seconds": 9.763990929705216,
+      "speech_window_seconds": 9.763990929705216,
+      "tempo": 1.01181253157567,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "De tempel is gewijd aan Shiva. De naam verwijst naar de heilige berg Kailasa en verbindt bouwkunst met geloof.",
+      "raw_seconds": 8.463673469387755,
+      "speech_window_seconds": 8.463673469387755,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "De hoofdontgraving wordt meestal verbonden met de achtste eeuw en Rashtrakuta-koning Krishna de Eerste. Het hele complex kent meerdere eeuwen geschiedenis.",
+      "raw_seconds": 11.528707482993198,
+      "speech_window_seconds": 11.528707482993198,
+      "tempo": 1.1946847132635439,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Die toeschrijving geeft achtergrond, geen dagplanning. Koninklijke steun, bouwfasen en het werk van afzonderlijke ploegen zijn verschillende vragen.",
+      "raw_seconds": 11.017868480725623,
+      "speech_window_seconds": 11.017868480725623,
+      "tempo": 1.141748029090738,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Het materiaal is vulkanisch basalt. Oude lavastromen hebben verschillende structuren en scheuren. De heuvel is geen volkomen gelijkvormige steen.",
+      "raw_seconds": 11.714467120181405,
+      "speech_window_seconds": 11.714467120181405,
+      "tempo": 1.2139344165991093,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Voor de bouwers hoorde geologie bij het ontwerp. De rots moest daken dragen, details toelaten en het uithakken doorstaan.",
+      "raw_seconds": 9.659501133786849,
+      "speech_window_seconds": 9.659501133786849,
+      "tempo": 1.0009845734494143,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Er waren ook werkruimte en afvoerplaatsen nodig. Steen verwijderen schept een gebouw, maar tegelijk een voortdurende transportopgave.",
+      "raw_seconds": 10.379319727891156,
+      "speech_window_seconds": 10.379319727891156,
+      "tempo": 1.075577173874731,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "We volgen drie taken: bepalen wat blijft, de omgeving weghalen en de behouden constructie tijdens het hele proces beschermen.",
+      "raw_seconds": 9.32281179138322,
+      "speech_window_seconds": 9.32281179138322,
+      "tempo": 0.9660944861537015,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Begin bij de hofwanden. Hun hoogte en positie tonen de ontgraving: deze open ruimte maakte ooit deel uit van een grotere rotsmassa.",
+      "raw_seconds": 10.251609977324263,
+      "speech_window_seconds": 10.251609977324263,
+      "tempo": 1.0623430028315297,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Gewoon metselwerk brengt blokken samen. Hier ontstonden hoofdvormen door gekozen steen te laten staan en het materiaal ernaast te verwijderen.",
+      "raw_seconds": 11.6215873015873,
+      "speech_window_seconds": 11.6215873015873,
+      "tempo": 1.2043095649313265,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "De Indiase archeologische dienst verbindt Kailasa met Krishna de Eerste. Een latere kopertekst prijst een grote tempel in het oude Elapura, Ellora.",
+      "raw_seconds": 11.482267573696145,
+      "speech_window_seconds": 11.482267573696145,
+      "tempo": 1.1898722874296523,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Die tekst gaat over een koninklijke prestatie. Het is geen bewaarde handleiding met diepte, volgorde en duur van elke snede.",
+      "raw_seconds": 10.065850340136054,
+      "speech_window_seconds": 10.065850340136054,
+      "tempo": 1.043093299495964,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Het monument zelf levert ander bewijs. Bouwverbanden, onvoltooide oppervlakken elders en vergelijkingen helpen mogelijke werkvolgorden te beoordelen.",
+      "raw_seconds": 11.586757369614512,
+      "speech_window_seconds": 11.586757369614512,
+      "tempo": 1.200700245555908,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Basalt ontstond uit opeenvolgende lavastromen. Een dichte kern en een zone met gasblaasjes kunnen na blootlegging verschillend reageren.",
+      "raw_seconds": 10.541859410430838,
+      "speech_window_seconds": 10.541859410430838,
+      "tempo": 1.0924206642933512,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Natuurlijke scheuren helpen steen splijten, maar kunnen een pijler of dak doorsnijden. Nuttig in afvalsteen, gevaarlijk in behouden steen.",
+      "raw_seconds": 10.170340136054422,
+      "speech_window_seconds": 10.170340136054422,
+      "tempo": 1.0539212576222199,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "De officiële archeologische beschrijving benadrukt die structuren. Zorgvuldig observeren was dus praktisch nodig, geen vrijblijvende voorbereidende ceremonie.",
+      "raw_seconds": 11.795736961451247,
+      "speech_window_seconds": 11.795736961451247,
+      "tempo": 1.2223561618084193,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Voor een diepe snede moest voldoende steen voor het gebouw blijven. Het geplande gat en de beoogde constructie waren onafscheidelijk.",
+      "raw_seconds": 9.97297052154195,
+      "speech_window_seconds": 9.97297052154195,
+      "tempo": 1.0334684478281813,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Historische opmetingen tonen plattegronden en doorsneden. Ze documenteren de overgebleven tempel, niet de oorspronkelijke tekeningen van de bouwers.",
+      "raw_seconds": 11.04108843537415,
+      "speech_window_seconds": 11.04108843537415,
+      "tempo": 1.1441542420076838,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Hoofdheiligdom, zuilenhal, ingang en Nandi-paviljoen vormen één samenhang. Die relaties bepalen het doel voordat ons denkbeeldige hakwerk begint.",
+      "raw_seconds": 10.832108843537416,
+      "speech_window_seconds": 10.832108843537416,
+      "tempo": 1.1224983257551726,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Centraal staat het heiligdom met zijn hoge bovenbouw. Voor het profiel moest de massa onder de hoogste onderdelen beschermd blijven.",
+      "raw_seconds": 9.113832199546485,
+      "speech_window_seconds": 9.113832199546485,
+      "tempo": 0.9444385699011901,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Rond de hof liggen galerijen en heiligdommen in de rotswand. Een vrijstaand gebouw en een uitgehakte kamer stellen verschillende eisen.",
+      "raw_seconds": 10.263219954648527,
+      "speech_window_seconds": 10.263219954648527,
+      "tempo": 1.0635461092900027,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Kijk opnieuw naar de lucht ertussen. Architectuuronderzoek meet het behoudene; een ontgravingsmodel schat ook welke rots deze ruimten vroeger vulde.",
+      "raw_seconds": 11.122358276643991,
+      "speech_window_seconds": 11.122358276643991,
+      "tempo": 1.1525759872169938,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Een ruw hakvlak en een afgewerkt ornament beantwoorden andere vragen. Het ene betreft toegang en voortgang, het andere de gewenste eindvorm.",
+      "raw_seconds": 10.483809523809525,
+      "speech_window_seconds": 10.483809523809525,
+      "tempo": 1.0864051320009869,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Onvoltooide rotsmonumenten verduidelijken werkfasen. Vergelijking helpt, maar sporen van een andere plek zijn geen rechtstreekse bouwregistratie van Kailasa.",
+      "raw_seconds": 11.656417233560092,
+      "speech_window_seconds": 11.656417233560092,
+      "tempo": 1.2079188843067452,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Een reconstructie mag rots niet als klei behandelen. Gewicht, scheuren, werkruimte en de veranderende restvorm moeten zichtbaar blijven.",
+      "raw_seconds": 10.797278911564625,
+      "speech_window_seconds": 10.797278911564625,
+      "tempo": 1.1188890063797539,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Met die grenzen bouwen we een mogelijke volgorde. Ze verklaart werken van bovenaf, zonder iedere historische beweging te reconstrueren.",
+      "raw_seconds": 10.181950113378685,
+      "speech_window_seconds": 10.181950113378685,
+      "tempo": 1.0551243640806927,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Stel je de helling vóór de binnenplaats voor. Gewenste dakhoogte en beschikbare rots beperkten de mogelijke positie van de tempel.",
+      "raw_seconds": 9.903310657596371,
+      "speech_window_seconds": 9.903310657596371,
+      "tempo": 1.0262498090773442,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Het hoogste onderdeel moest in de oorspronkelijke massa passen. Bij een te lage eerste snede kon verloren hoogte niet worden teruggehakt.",
+      "raw_seconds": 9.601451247165533,
+      "speech_window_seconds": 9.601451247165533,
+      "tempo": 0.9949690411570501,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Een samenhangend ontwerp vraagt lijnen en hoogten. Touwen, metingen en uitrichten zijn mogelijk, maar hun precieze toepassing is niet bewaard.",
+      "raw_seconds": 11.15718820861678,
+      "speech_window_seconds": 11.15718820861678,
+      "tempo": 1.1561853065924124,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Ons model laat ruime steenreserves staan. Fijne randen komen pas vrij nadat het omringende werk een beheerst traject heeft.",
+      "raw_seconds": 9.462131519274376,
+      "speech_window_seconds": 9.462131519274376,
+      "tempo": 0.9805317636553756,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Dalende sneden rond die reserve kunnen haar van de heuvel losmaken. Sleuven openen werkvlakken, terwijl toekomstige architectuur centraal behouden blijft.",
+      "raw_seconds": 11.900226757369614,
+      "speech_window_seconds": 11.900226757369614,
+      "tempo": 1.233184119934675,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Grof verwijderen vereist niet dat alles stof wordt. Waar de rots het toelaat, zijn losse stukken efficiënter dan iedere zijde afwerken.",
+      "raw_seconds": 9.833650793650794,
+      "speech_window_seconds": 9.833650793650794,
+      "tempo": 1.0190311703265071,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Splijten moet wel beheerst gebeuren. Een ongewenste scheur kan van afvalsteen doorlopen naar een behouden kroonlijst, pijler of dak.",
+      "raw_seconds": 9.926530612244898,
+      "speech_window_seconds": 9.926530612244898,
+      "tempo": 1.02865602199429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Elk losgemaakt stuk moet daarna weg. Een sleuf vol puin verliest snel de toegang die de ontgraving juist moest scheppen.",
+      "raw_seconds": 9.113832199546485,
+      "speech_window_seconds": 9.113832199546485,
+      "tempo": 0.9444385699011901,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Van boven werken onthult het bovenprofiel voordat onderaan alles vrijligt. Resterende rots kan tijdelijk toegang bieden.",
+      "raw_seconds": 8.893242630385487,
+      "speech_window_seconds": 8.893242630385487,
+      "tempo": 0.9215795471902058,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Het is een reeks, geen wonderbaarlijke enkele snede. Elke kleine verwijdering verandert het toekomstige gebouw én de werkomgeving.",
+      "raw_seconds": 9.671111111111111,
+      "speech_window_seconds": 9.671111111111111,
+      "tempo": 1.002187679907887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Denk aan een uitstekende kroonlijst. Bij het vormen moet er voldoende steen onder en naast blijven, vooral bij natuurlijke scheuren.",
+      "raw_seconds": 10.077460317460318,
+      "speech_window_seconds": 10.077460317460318,
+      "tempo": 1.044296405954437,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Ruw verwijderen en afwerken hebben andere doelen. Het overschot weghalen maakt ruimte; fijn werk volgt waar toegang en stabiliteit dat toelaten.",
+      "raw_seconds": 10.913378684807256,
+      "speech_window_seconds": 10.913378684807256,
+      "tempo": 1.1309200709644824,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Van bovenaf werken vraagt geen ploegen op exact dezelfde hoogte. Gebieden kunnen verschillend vorderen zolang de geometrie blijft samenhangen.",
+      "raw_seconds": 10.832108843537416,
+      "speech_window_seconds": 10.832108843537416,
+      "tempo": 1.1224983257551726,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Dieper wordt afstemming moeilijker. Wie een bovenrand vormt, moet de toekomstige hal, opening of ondersteuning daaronder begrijpen.",
+      "raw_seconds": 9.798820861678005,
+      "speech_window_seconds": 9.798820861678005,
+      "tempo": 1.0154218509510886,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Kleine plaatsingsfouten kunnen oplopen. Herhaald controleren van richting en hoogte is logisch, ook zonder bekende antieke meetroutine.",
+      "raw_seconds": 10.39092970521542,
+      "speech_window_seconds": 10.39092970521542,
+      "tempo": 1.076780280333204,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Binnen komt een extra handeling. Een kamer verwijdert steen uit de reserve. Muren, plafond en kolommen moeten samen worden bekeken.",
+      "raw_seconds": 11.598367346938776,
+      "speech_window_seconds": 11.598367346938776,
+      "tempo": 1.201903352014381,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Een rotskolom ontstaat door haar omgeving weg te halen. Haar afmetingen volgen ook de eisen van het plafond, niet alleen schoonheid.",
+      "raw_seconds": 9.508571428571429,
+      "speech_window_seconds": 9.508571428571429,
+      "tempo": 0.9853441894892672,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Het plafond is behouden steen boven een ruimte. Een bredere opening verandert de belasting, vooral bij scheuren en dunne plekken.",
+      "raw_seconds": 9.996190476190476,
+      "speech_window_seconds": 9.996190476190476,
+      "tempo": 1.035874660745127,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Een uitstekende vorm heeft een andere draaggeometrie. Druksterkte alleen maakt niet iedere denkbare steenvorm even veilig.",
+      "raw_seconds": 9.740770975056689,
+      "speech_window_seconds": 9.740770975056689,
+      "tempo": 1.0094063186587243,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "De olifantenreliëfs aan de voet verrijken het monument. Het zijn beelden in de steen, geen levende dieren die het gebouw dragen.",
+      "raw_seconds": 10.112290249433107,
+      "speech_window_seconds": 10.112290249433107,
+      "tempo": 1.0479057253298556,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Dat verschil telt bij belastingen. Bestudeer de steenkern en verbindingen, in plaats van een beeldverhaal als constructietekening te lezen.",
+      "raw_seconds": 10.065850340136054,
+      "speech_window_seconds": 10.065850340136054,
+      "tempo": 1.043093299495964,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Ook licht verandert wanneer ruimten opengaan. Buitenwand, schaduwrijke hal en smalle doorgang vragen andere keuzes over diepte en details.",
+      "raw_seconds": 10.495419501133787,
+      "speech_window_seconds": 10.495419501133787,
+      "tempo": 1.0876082384594596,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Het eindontwerp dient verering én beweging. Een snijvolgorde moet rekening houden met het gebruik en de symbolische orde van de tempel.",
+      "raw_seconds": 10.379319727891156,
+      "speech_window_seconds": 10.379319727891156,
+      "tempo": 1.075577173874731,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Het Nandi-paviljoen hoort daarbij. Zijn relatie tot het hoofdheiligdom toont waarom meer dan losse architectonische vormen nodig waren.",
+      "raw_seconds": 10.100680272108843,
+      "speech_window_seconds": 10.100680272108843,
+      "tempo": 1.0467026188713826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Stenen verbindingen maken de planning lastiger. Een model kan ze niet magisch terugbrengen als hun benodigde steen al verdwenen is.",
+      "raw_seconds": 9.984580498866213,
+      "speech_window_seconds": 9.984580498866213,
+      "tempo": 1.0346715542866542,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Buiten afgraven en binnen uithollen beïnvloeden elkaar. De volgorde kan plaatselijk wisselen, maar beide moeten bewaren wat de ander nodig heeft.",
+      "raw_seconds": 10.727619047619047,
+      "speech_window_seconds": 10.727619047619047,
+      "tempo": 1.1116703676289168,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Openingen bepalen ook het bouwverkeer. Een geschikte deur in de voltooide tempel kan lastig zijn voor vroegere puinafvoer.",
+      "raw_seconds": 8.846802721088435,
+      "speech_window_seconds": 8.846802721088435,
+      "tempo": 0.9167671213563146,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Verschillende taken vragen andere bewegingen. Overschot breken, een vlak vormen en een rand afwerken zijn geen onderling verwisselbare hamerscène.",
+      "raw_seconds": 11.029478458049887,
+      "speech_window_seconds": 11.029478458049887,
+      "tempo": 1.142951135549211,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "IJzeren werktuigen passen bij de technische achtergrond. Onze illustratie toont echter geen verzonnen gereedschapset als teruggevonden vondst uit Kailasa.",
+      "raw_seconds": 11.017868480725623,
+      "speech_window_seconds": 11.017868480725623,
+      "tempo": 1.141748029090738,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Werktuigen slijten. Slijpen, vervangen en aanvoeren horen bij de verklaring. Een specifieke werkplaats of onderhoudscyclus vraagt eigen bewijs.",
+      "raw_seconds": 11.969886621315192,
+      "speech_window_seconds": 11.969886621315192,
+      "tempo": 1.240402758685512,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Arbeidskracht is meer dan een menigte. Uitzetten, hakken, afwerken, dragen en gereedschap verzorgen vragen verschillende vaardigheden en afstemming.",
+      "raw_seconds": 11.80734693877551,
+      "speech_window_seconds": 11.80734693877551,
+      "tempo": 1.223559268266892,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "We kunnen materiaal modelleren zonder de totale afvoer te kennen. Maak eerst onderscheid tussen het volume en de massa van steen.",
+      "raw_seconds": 9.914920634920636,
+      "speech_window_seconds": 9.914920634920636,
+      "tempo": 1.0274529155358172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Neem voor een compacte kubieke meter een massa van twee komma acht ton aan. Dat is een rekenkeuze, geen tempelmeting.",
+      "raw_seconds": 9.09061224489796,
+      "speech_window_seconds": 9.09061224489796,
+      "tempo": 0.9420323569842445,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Dan wegen honderd kubieke meter tweehonderdtachtig ton. De berekening beschrijft ons voorbeeld, niet de bewezen totale ontgraving van Kailasa.",
+      "raw_seconds": 10.32126984126984,
+      "speech_window_seconds": 10.32126984126984,
+      "tempo": 1.0695616415823668,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Los puin bevat tussenruimten. Het transportvolume verschilt van compacte rots en bemoeilijkt schattingen die alleen op wagencapaciteit steunen.",
+      "raw_seconds": 10.518639455782314,
+      "speech_window_seconds": 10.518639455782314,
+      "tempo": 1.0900144513764054,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Een werktempo vraagt taakomvang, steentoestand, werktuigen, toegang, draagafstand en tijd voor afwerking en herstel.",
+      "raw_seconds": 9.613061224489796,
+      "speech_window_seconds": 9.613061224489796,
+      "tempo": 0.9961721476155229,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Diepte verandert die voorwaarden. Een handige bovenroute kan verdwijnen, terwijl een lagere doorgang pas later beschikbaar komt.",
+      "raw_seconds": 9.55501133786848,
+      "speech_window_seconds": 9.55501133786848,
+      "tempo": 0.9901566153231586,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Een overtuigende reconstructie verbindt de fasen. Steen verdwijnt niet, mensen moeten erbij kunnen en de structuur moet ondersteund blijven.",
+      "raw_seconds": 10.181950113378685,
+      "speech_window_seconds": 10.181950113378685,
+      "tempo": 1.0551243640806927,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "De bovenarchitectuur verschijnt nu. De prestatie is de vorm, maar ook een volgorde die het volgende werk mogelijk houdt.",
+      "raw_seconds": 8.742312925170069,
+      "speech_window_seconds": 8.742312925170069,
+      "tempo": 0.9059391632300589,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Nu de eerste hindernis: weghalen is moeilijk omkeerbaar. Een fout kan de beschikbare vorm veranderen voordat het doeloppervlak wordt bereikt.",
+      "raw_seconds": 10.031020408163265,
+      "speech_window_seconds": 10.031020408163265,
+      "tempo": 1.0394839801205455,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Steen kan worden hersteld en moderne zorg veranderde oppervlakken. Een verloren fragment vervangen is iets anders dan de oorspronkelijke samenhang bewaren.",
+      "raw_seconds": 11.23845804988662,
+      "speech_window_seconds": 11.23845804988662,
+      "tempo": 1.1646070518017224,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Een verborgen scheur is een andere hindernis. Het telt waar zij de resterende steen doorsnijdt, niet alleen dat ze ergens bestaat.",
+      "raw_seconds": 9.729160997732427,
+      "speech_window_seconds": 9.729160997732427,
+      "tempo": 1.0082032122002513,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Extra steen tijdens grof werk bewaart opties. Die marge later verwijderen vraagt opnieuw oordeel over vorm, sterkte en blootgelegde kwaliteit.",
+      "raw_seconds": 11.400997732426303,
+      "speech_window_seconds": 11.400997732426303,
+      "tempo": 1.1814505422203423,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Een kleine proef verklaart het principe, niet het hele monument. Schaal verandert de gevolgen van scheuren, overspanningen en vallende stukken.",
+      "raw_seconds": 10.228390022675738,
+      "speech_window_seconds": 10.228390022675738,
+      "tempo": 1.0599367899145842,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Steen kan druk goed verdragen en elders kwetsbaar zijn. Buiging, trek en scheuren tellen bij vrijgewerkte daken en uitsteeksels.",
+      "raw_seconds": 10.576689342403627,
+      "speech_window_seconds": 10.576689342403627,
+      "tempo": 1.0960299836687697,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Een lange overspanning is geen simpel vergrote korte. Dikte, steunpunten en echte rotsstructuur moeten samen worden beschouwd.",
+      "raw_seconds": 9.729160997732427,
+      "speech_window_seconds": 9.729160997732427,
+      "tempo": 1.0082032122002513,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Dezelfde scheur kan onschuldig zijn in een breed massief, maar ernstig bij een rand. Geometrie en geologie horen samen.",
+      "raw_seconds": 9.566621315192744,
+      "speech_window_seconds": 9.566621315192744,
+      "tempo": 0.9913597217816315,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Dan de regen. Een diepe hof verandert waar water aankomt en blijft staan. Onvoltooid werk bestaat in een landschap met seizoenen.",
+      "raw_seconds": 10.62312925170068,
+      "speech_window_seconds": 10.62312925170068,
+      "tempo": 1.1008424095026612,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Water volgt scheuren en oneffenheden. Een mooi droog model mag de veranderende omstandigheden van een open helling niet verhullen.",
+      "raw_seconds": 9.659501133786849,
+      "speech_window_seconds": 9.659501133786849,
+      "tempo": 1.0009845734494143,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Puinafvoer en drainage kunnen elkaar hinderen. Verkeerd opgeslagen materiaal kan tegelijk een werkpad en een waterroute blokkeren.",
+      "raw_seconds": 9.961360544217687,
+      "speech_window_seconds": 9.961360544217687,
+      "tempo": 1.0322653413697085,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Behoudsarchieven beschrijven drainage en herstel in Ellora. Een zichtbaar kanaal of gerepareerd oppervlak kan dus een latere geschiedenis hebben.",
+      "raw_seconds": 10.576689342403627,
+      "speech_window_seconds": 10.576689342403627,
+      "tempo": 1.0960299836687697,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Toegang blijft een uitdaging. Overgebleven rots kan werkplatform zijn, maar bewijst niet dat steigers of tijdelijke steunen nooit nodig waren.",
+      "raw_seconds": 10.309659863945578,
+      "speech_window_seconds": 10.309659863945578,
+      "tempo": 1.068358535123894,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Afgewerkte vlakken en geopende onderzones veranderen werkposities. De volgorde moet tonen hoe mensen daar komen, zonder zwevend gereedschap.",
+      "raw_seconds": 11.284897959183674,
+      "speech_window_seconds": 11.284897959183674,
+      "tempo": 1.1694194776356137,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Bovenwerk bedreigt mensen en afgewerkte delen beneden. Onze illustratie scheidt hakken en opruimen en gooit geen stenen door een actieve hof.",
+      "raw_seconds": 12.1556462585034,
+      "speech_window_seconds": 12.1556462585034,
+      "tempo": 1.2596524620210778,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Die scheiding vraagt afstemming. Signalen, pauzes en afgesproken werkgebieden zijn minder spectaculair dan een toren, maar horen erbij.",
+      "raw_seconds": 10.924988662131518,
+      "speech_window_seconds": 10.924988662131518,
+      "tempo": 1.1321231774229552,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Ook bevoorrading telt. Eten, water, hout, metaal en verzorgd gereedschap moeten aankomen, naast onze aandacht voor de steen die bleef.",
+      "raw_seconds": 11.296507936507936,
+      "speech_window_seconds": 11.296507936507936,
+      "tempo": 1.1706225840940867,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Dit is vakwerk verdeeld over taken. Een anonieme massa verklaart niet de beslissingen tussen ruwe ontgraving en een goed gevormd heiligdom.",
+      "raw_seconds": 10.448979591836734,
+      "speech_window_seconds": 10.448979591836734,
+      "tempo": 1.0827958126255683,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Verzin ook geen identiteiten of contracten. Het monument toont menselijke inspanning, maar bewaart niet ieders levensverhaal of maatschappelijke positie.",
+      "raw_seconds": 11.23845804988662,
+      "speech_window_seconds": 11.23845804988662,
+      "tempo": 1.1646070518017224,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Seizoenen leveren geen exacte kalender. Regen, toegang, steun en herstel zijn belangrijke variabelen, geen teruggevonden bouwplanning.",
+      "raw_seconds": 10.948208616780045,
+      "speech_window_seconds": 10.948208616780045,
+      "tempo": 1.134529390339901,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Wel kunnen we samenhang eisen. Elke snede moet gereedschapsruimte, dragende steen en een uitweg voor puin laten.",
+      "raw_seconds": 9.02095238095238,
+      "speech_window_seconds": 9.02095238095238,
+      "tempo": 0.9348137182334072,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Architectuuronderzoek vergelijkt onderdelen. Verschillen kunnen de datering helpen, maar onthullen niet automatisch de volgorde van één werkdag.",
+      "raw_seconds": 10.135510204081633,
+      "speech_window_seconds": 10.135510204081633,
+      "tempo": 1.0503119382468014,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Ellora heeft andere rotstempels, waaronder het latere Kleine Kailasa. Dit verhaal gaat over Grot Zestien: meng hun beelden niet.",
+      "raw_seconds": 10.47219954648526,
+      "speech_window_seconds": 10.47219954648526,
+      "tempo": 1.0852020255425139,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Ook binnen één hof vraagt beeldwerk identificatie. Een indrukwekkende close-up kan weinig zeggen over de oorspronkelijke ontgravingsvolgorde.",
+      "raw_seconds": 10.843718820861678,
+      "speech_window_seconds": 10.843718820861678,
+      "tempo": 1.1237014322136454,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "De beelden roepen een heilige wereld op. Dat culturele programma verklaart de ambitie, maar is geen letterlijke werkplaatsregistratie.",
+      "raw_seconds": 9.891700680272109,
+      "speech_window_seconds": 9.891700680272109,
+      "tempo": 1.0250467026188714,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Een religieuze scène en een snijschema hebben andere doelen. Waardeer beide, maar onderscheid symboliek van een concrete technische bewering.",
+      "raw_seconds": 10.170340136054422,
+      "speech_window_seconds": 10.170340136054422,
+      "tempo": 1.0539212576222199,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Populaire verhalen springen van volle heuvel naar voltooide tempel. Juist in het ontbrekende midden liggen de echte technische vragen.",
+      "raw_seconds": 9.93814058956916,
+      "speech_window_seconds": 9.93814058956916,
+      "tempo": 1.0298591284527627,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Exacte tonnages en verbazingwekkende bouwtijden vragen goede metingen en bronnen. Een herhaald schermgetal wordt geen archeologische waarneming.",
+      "raw_seconds": 10.39092970521542,
+      "speech_window_seconds": 10.39092970521542,
+      "tempo": 1.076780280333204,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Afgevoerd volume vraagt de oorspronkelijke helling én de restvorm. Onzekerheid over de verdwenen buitenkant komt in de uitkomst terecht.",
+      "raw_seconds": 9.682721088435374,
+      "speech_window_seconds": 9.682721088435374,
+      "tempo": 1.00339078636636,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Afvalsteen volgen is een apart onderzoek. Niet ieder naburig fragment is oud Kailasa-puin zonder vastgesteld verband en context.",
+      "raw_seconds": 10.704399092970522,
+      "speech_window_seconds": 10.704399092970522,
+      "tempo": 1.1092641547119713,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Die grenzen verhinderen begrip niet. Ze scheiden geometrische vragen van vragen die sterker historisch of materieel bewijs nodig hebben.",
+      "raw_seconds": 9.961360544217687,
+      "speech_window_seconds": 9.961360544217687,
+      "tempo": 1.0322653413697085,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Moderne herstelstukken helpen controleren. Huidige vlakken ondergingen verwering, onderhoud en ingrepen lang na het oorspronkelijke hakken.",
+      "raw_seconds": 10.936598639455783,
+      "speech_window_seconds": 10.936598639455783,
+      "tempo": 1.1333262838814282,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Een herstelnaad bewijst geen oorspronkelijke montage. Omgekeerd mag een monolithische kern de latere geschiedenis van het complex niet wissen.",
+      "raw_seconds": 10.599909297052154,
+      "speech_window_seconds": 10.599909297052154,
+      "tempo": 1.0984361965857155,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "De beelden moeten dat verschil dragen. Gemeten restvormen blijven vast; onzekere werkfasen moeten herkenbaar zijn als interpretatiemodellen.",
+      "raw_seconds": 11.888616780045352,
+      "speech_window_seconds": 11.888616780045352,
+      "tempo": 1.2319810134762021,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Dit is levend erfgoed, geen verlaten laboratorium. Begrip van het maken moet aandacht voor geloof, gemeenschappen en zorg verdiepen.",
+      "raw_seconds": 10.460589569160998,
+      "speech_window_seconds": 10.460589569160998,
+      "tempo": 1.0839989190840411,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Vergelijk de verklaringen eerlijk. Iedere aanpak moet dezelfde rots, behouden architectuur en benodigde afvalafvoer verklaren.",
+      "raw_seconds": 9.914920634920636,
+      "speech_window_seconds": 9.914920634920636,
+      "tempo": 1.0274529155358172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Vergelijk bouwen en uithakken. Het eerste brengt materiaal aan, het tweede bewaart de gewenste massa en verwijdert haar omgeving.",
+      "raw_seconds": 10.12390022675737,
+      "speech_window_seconds": 10.12390022675737,
+      "tempo": 1.0491088317883284,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Daar staan transport en voegen centraal. Hier verschuift aandacht naar rotskeuze, verwijdervolgorde, toegang en afvoer van ongewenst materiaal.",
+      "raw_seconds": 11.377777777777778,
+      "speech_window_seconds": 11.377777777777778,
+      "tempo": 1.1790443293033968,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Vergelijk een rotskamer en een vrijstaande hoftempel. Beide halen steen weg, maar organiseren licht en werkvlakken verschillend.",
+      "raw_seconds": 10.228390022675738,
+      "speech_window_seconds": 10.228390022675738,
+      "tempo": 1.0599367899145842,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "In Kailasa is de ontgraving rondom essentieel. Daardoor verschijnt rondom leesbare architectuur, niet alleen een binnenruimte achter een gevel.",
+      "raw_seconds": 10.85532879818594,
+      "speech_window_seconds": 10.85532879818594,
+      "tempo": 1.1249045386721181,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Het principe van boven naar beneden past daarbij. De bovenvorm stuurt lager werk en bewaart steen voor toekomstige onderdelen.",
+      "raw_seconds": 9.613061224489796,
+      "speech_window_seconds": 9.613061224489796,
+      "tempo": 0.9961721476155229,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Een algemeen principe is geen complete kalender. Parallelwerk, plaatselijke aanpassingen en verschillende afwerkingen passen in een ingewikkelder project.",
+      "raw_seconds": 10.971428571428572,
+      "speech_window_seconds": 10.971428571428572,
+      "tempo": 1.1369356032568467,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "De vormen horen bij een bredere bouwcultuur. Ideeën over heiligdommen, hallen, torens en versiering reikten verder dan deze helling.",
+      "raw_seconds": 9.85687074829932,
+      "speech_window_seconds": 9.85687074829932,
+      "tempo": 1.021437383243453,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Andere Indiase rotstradities geven context. Vergelijking bewijst geen specifieke reisroute van een bepaalde ploeg of tekening.",
+      "raw_seconds": 10.367709750566894,
+      "speech_window_seconds": 10.367709750566894,
+      "tempo": 1.0743740674162583,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Een gehakte band kan op een gemetselde laag lijken. Overeenkomst bewijst geen montage. Lees het oppervlak in zijn constructieve context.",
+      "raw_seconds": 11.087528344671203,
+      "speech_window_seconds": 11.087528344671203,
+      "tempo": 1.1489666678415753,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "De heilige berg geeft de verwijdering meer betekenis. Shiva’s plaats wordt aanwezig in een bergmassa die in een tempel verandert.",
+      "raw_seconds": 9.798820861678005,
+      "speech_window_seconds": 9.798820861678005,
+      "tempo": 1.0154218509510886,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Koninklijke steun en vakkennis verklaren de ambitie. Historische toeschrijving geeft achtergrond, maar laat organisatie en fasering deels open.",
+      "raw_seconds": 11.064308390022676,
+      "speech_window_seconds": 11.064308390022676,
+      "tempo": 1.1465604549246295,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Hoelang duurde het geheel? Een precies antwoord moet vastleggen welke fasen, oppervlakken en werkzaamheden worden meegeteld.",
+      "raw_seconds": 9.229931972789116,
+      "speech_window_seconds": 9.229931972789116,
+      "tempo": 0.9564696344859187,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Hoeveel mensen waren nodig? De schatting verandert met productiviteit, vervoer, onderhoud en ploegen die elkaar niet hinderen.",
+      "raw_seconds": 9.137052154195011,
+      "speech_window_seconds": 9.137052154195011,
+      "tempo": 0.9468447828181359,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Ook een gereedschapsspoor heeft grenzen. Het toont soms contact en richting, maar zelden zelfstandig de datering en volledige arbeidsgeschiedenis.",
+      "raw_seconds": 11.42421768707483,
+      "speech_window_seconds": 11.42421768707483,
+      "tempo": 1.183856755137288,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Moderne opmeting verduidelijkt de geometrie. Een afgewerkte tempel meten herstelt niet automatisch het oorspronkelijke hakplan.",
+      "raw_seconds": 9.427301587301587,
+      "speech_window_seconds": 9.427301587301587,
+      "tempo": 0.9769224442799571,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Nuttig onderzoek verbindt geologie, onvoltooide elementen, bouwverbanden, oude gegevens en verwijdermodellen met uitgesproken aannames.",
+      "raw_seconds": 10.425759637188209,
+      "speech_window_seconds": 10.425759637188209,
+      "tempo": 1.0803895997086226,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Het doel is geen spectaculairdere animatie. Zoek een volgorde die meer bewaarde sporen verklaart met minder onbewezen aannames.",
+      "raw_seconds": 9.543401360544218,
+      "speech_window_seconds": 9.543401360544218,
+      "tempo": 0.9889535088646858,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Wat staat vast? De hoofdarchitectuur ontstond door selectieve verwijdering. Behouden steen werd ruimte, ondersteuning en tempeloppervlak.",
+      "raw_seconds": 12.248526077097505,
+      "speech_window_seconds": 12.248526077097505,
+      "tempo": 1.2692773136888607,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Keer terug naar het begin. De tempel blijft monumentaal, maar de lucht eromheen vertelt nu evenveel als de steen.",
+      "raw_seconds": 8.475283446712018,
+      "speech_window_seconds": 8.475283446712018,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Die lucht vertegenwoordigt keuzes over weghalen en bewaren. Iedere rand steunt op een groter proces dat de volgende mogelijk maakte.",
+      "raw_seconds": 10.042630385487529,
+      "speech_window_seconds": 10.042630385487529,
+      "tempo": 1.0406870865790185,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Een sleuf, een vrij werkvlak, een opening, ruimte rond de eindvorm: een reeks afwezigheden kan het duidelijkste beeld geven.",
+      "raw_seconds": 9.404081632653062,
+      "speech_window_seconds": 9.404081632653062,
+      "tempo": 0.9745162313630116,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "In die keuzes lagen artistieke en religieuze bedoelingen. Techniek verklaart hoe ruimte ontstaat, cultuuronderzoek waarom die ruimte belangrijk was.",
+      "raw_seconds": 11.377777777777778,
+      "speech_window_seconds": 11.377777777777778,
+      "tempo": 1.1790443293033968,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Geologie stelde voorwaarden. Vakmanschap maakte er keuzes van. Materiaal of ontwerp alleen verklaart niet de hele prestatie.",
+      "raw_seconds": 10.344489795918367,
+      "speech_window_seconds": 10.344489795918367,
+      "tempo": 1.0719678544993125,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Verdwenen puin herinnert aan werk buiten de beeldhouwer: opruimen, dragen, bevoorraden, controleren, onderhouden en afstemmen op wisselende niveaus.",
+      "raw_seconds": 12.167256235827665,
+      "speech_window_seconds": 12.167256235827665,
+      "tempo": 1.2608555684795508,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "Organisatie herkennen vermindert de verwondering niet. De prestatie wordt menselijk: kennis en herhaalde praktische besluiten tellen evenzeer als kracht.",
+      "raw_seconds": 11.04108843537415,
+      "speech_window_seconds": 11.04108843537415,
+      "tempo": 1.1441542420076838,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "Kailasa behouden vraagt nu ander geduld. Documentatie en aandacht voor steen, water en oude reparaties beschermen een complexe geschiedenis.",
+      "raw_seconds": 11.284897959183674,
+      "speech_window_seconds": 11.284897959183674,
+      "tempo": 1.1694194776356137,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "Wat onderzoek je hierna: het bovenprofiel, de hofwanden, de binnensteunen of het bewijs voor puinvervoer?",
+      "raw_seconds": 7.87156462585034,
+      "speech_window_seconds": 7.87156462585034,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 133,
+      "text": "Iedere keuze toetst een ander deel. Een monumentale vraag wordt onderzoekbaar zodra we een antwoordgevend oppervlak of verband aanwijzen.",
+      "raw_seconds": 10.414149659863945,
+      "speech_window_seconds": 10.414149659863945,
+      "tempo": 1.0791864932501496,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 134,
+      "text": "Niet iedere antieke slag is zeker te vertellen. Wel begrijpen we het belang van voldoende steen, vrije ruimte en afgestemde fasen.",
+      "raw_seconds": 10.27482993197279,
+      "speech_window_seconds": 10.27482993197279,
+      "tempo": 1.0647492157484755,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 135,
+      "text": "De berg werd niet simpelweg vervangen door een tempel. Een deel werd de tempel. Welk spoor zou de volgende stap onthullen?",
+      "raw_seconds": 10.785668934240363,
+      "speech_window_seconds": 10.785668934240363,
+      "tempo": 1.117685899921281,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1352,
+  "decoded_samples": 32448000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-nl-22m32s.mp3",
+  "flac": "voice-nl-22m32s.flac",
+  "mp3_sha256": "192fbdaff62959e5a9f7192951886e04818800c3b5164867920edbae1980e58c",
+  "flac_sha256": "638ccdd9be665219ed600631f302a74f5b2fff43f80e500ee8d8266b3fb39f73"
+}

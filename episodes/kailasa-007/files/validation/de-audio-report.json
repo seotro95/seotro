@@ -1,0 +1,1236 @@
+{
+  "locale": "de",
+  "voice_id": "piper:de_DE-thorsten-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1352,
+  "spoken_cues": 135,
+  "closing_silence_seconds": 2,
+  "config_hash": "38ad90a2dbc26990fe8b226b589aab9abc5afb564c6642460970c8a4058023ec",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "In Kailasa steht ein Tempel in einer ausgehöhlten Bergflanke. Die erste Frage lautet nicht, was ankam, sondern was entfernt wurde.",
+      "raw_seconds": 7.465215419501134,
+      "speech_window_seconds": 7.465215419501134,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Türme, Hallen und Bildwerke lagen zunächst im Fels. Um ihre Entstehung zu verstehen, müssen wir auch das verschwundene Material ringsum sehen.",
+      "raw_seconds": 7.604535147392291,
+      "speech_window_seconds": 7.604535147392291,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Wie konnte man einen Berg abtragen und das Gebäude darin bewahren? Folgen wir den Schnitten vom oberen Fels zu den Räumen darunter.",
+      "raw_seconds": 6.617687074829932,
+      "speech_window_seconds": 6.617687074829932,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Unser Schauplatz ist Ellora in Maharashtra, Westindien. Eine lange Basaltwand wurde zur Landschaft buddhistischer, hinduistischer und jainistischer Monumente.",
+      "raw_seconds": 8.486893424036282,
+      "speech_window_seconds": 8.486893424036282,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Kailasa trägt die Nummer sechzehn. Sein Zentralbau ist jedoch ein Tempel im Tageslicht, umgeben von einem aus dem Fels geschlagenen Hof.",
+      "raw_seconds": 7.209795918367347,
+      "speech_window_seconds": 7.209795918367347,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Der Tempel ist Shiva geweiht. Sein Name erinnert an den heiligen Berg Kailasa und verbindet die Felsarchitektur mit einer religiösen Vorstellung.",
+      "raw_seconds": 7.90639455782313,
+      "speech_window_seconds": 7.90639455782313,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Die Hauptausarbeitung wird meist dem achten Jahrhundert und dem Rashtrakuta-König Krishna dem Ersten zugeordnet. Die Geschichte des Gesamtorts umfasst mehrere Jahrhunderte.",
+      "raw_seconds": 9.55501133786848,
+      "speech_window_seconds": 9.55501133786848,
+      "tempo": 0.9901566153231586,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Diese Zuordnung gibt historischen Hintergrund, keinen Tagesplan. Herrschaftliche Förderung, Bauphasen und die Arbeit einzelner Gruppen sind unterschiedliche Fragen.",
+      "raw_seconds": 8.742312925170069,
+      "speech_window_seconds": 8.742312925170069,
+      "tempo": 0.9059391632300589,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Das Material ist vulkanischer Basalt. Alte Lavaströme enthalten verschiedene Gefüge und Klüfte. Der Hang besteht nicht aus vollkommen gleichförmigem Gestein.",
+      "raw_seconds": 9.044172335600907,
+      "speech_window_seconds": 9.044172335600907,
+      "tempo": 0.937219931150353,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Für die Bauleute gehörte die Geologie zur Planung. Der Fels musste Dächer tragen, feine Formen erlauben und die Bearbeitung überstehen.",
+      "raw_seconds": 7.476825396825397,
+      "speech_window_seconds": 7.476825396825397,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Auch Arbeitsraum und ein Ziel für den Schutt waren nötig. Steinabtrag schafft Architektur, zugleich aber eine fortlaufende Transportaufgabe.",
+      "raw_seconds": 8.185034013605442,
+      "speech_window_seconds": 8.185034013605442,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Wir verfolgen drei verbundene Aufgaben: das Bleibende festlegen, seine Umgebung entfernen und die erhaltene Struktur während des gesamten Vorgangs schützen.",
+      "raw_seconds": 8.185034013605442,
+      "speech_window_seconds": 8.185034013605442,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Beginnen wir an den Hofwänden. Höhe und Lage machen den Abtrag sichtbar. Dieser freie Raum war einst Teil einer viel größeren Felsmasse.",
+      "raw_seconds": 7.813514739229025,
+      "speech_window_seconds": 7.813514739229025,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Gewöhnliches Mauerwerk setzt Blöcke zusammen. Hier entstanden die Hauptformen, indem ausgewählter Fels stehen blieb und benachbartes Material entfernt wurde.",
+      "raw_seconds": 8.440453514739229,
+      "speech_window_seconds": 8.440453514739229,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Der indische archäologische Dienst verbindet Kailasa mit Krishna dem Ersten. Eine spätere Kupferurkunde preist einen großen Tempel im alten Elapura, Ellora.",
+      "raw_seconds": 9.183492063492064,
+      "speech_window_seconds": 9.183492063492064,
+      "tempo": 0.9516572086520273,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Der Text behandelt königliche Leistungen. Er ist keine erhaltene Bauanleitung mit Tiefe, Reihenfolge und Dauer jedes einzelnen Arbeitsschritts.",
+      "raw_seconds": 7.836734693877551,
+      "speech_window_seconds": 7.836734693877551,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Das Monument selbst liefert weitere Belege. Bauliche Beziehungen, unfertige Flächen anderer Orte und Vergleiche helfen, mögliche Arbeitsfolgen zu beurteilen.",
+      "raw_seconds": 8.591383219954649,
+      "speech_window_seconds": 8.591383219954649,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Basalt entstand aus aufeinanderfolgenden Lavaströmen. Ein dichter Kern und eine blasenreiche Zone können sich bei der Freilegung unterschiedlich verhalten.",
+      "raw_seconds": 8.057324263038549,
+      "speech_window_seconds": 8.057324263038549,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Natürliche Klüfte erleichtern das Trennen, können aber durch einen Pfeiler oder ein Dach laufen. Im Abraum nützlich, im bleibenden Fels gefährlich.",
+      "raw_seconds": 7.7090249433106575,
+      "speech_window_seconds": 7.7090249433106575,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Die offizielle archäologische Darstellung betont solche Gesteinsstrukturen. Genaues Beobachten war deshalb praktische Voraussetzung, keine bloße vorbereitende Zeremonie.",
+      "raw_seconds": 9.404081632653062,
+      "speech_window_seconds": 9.404081632653062,
+      "tempo": 0.9745162313630116,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Vor einem tiefen Einschnitt musste genug Fels für den Bau bleiben. Geplanter Hohlraum und geplante Struktur waren untrennbar verbunden.",
+      "raw_seconds": 7.430385487528345,
+      "speech_window_seconds": 7.430385487528345,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Historische Vermessungszeichnungen zeigen Grundrisse und Schnitte. Sie dokumentieren den erhaltenen Tempel, sind aber keine Originalpläne seiner Erbauer.",
+      "raw_seconds": 8.382403628117913,
+      "speech_window_seconds": 8.382403628117913,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Hauptheiligtum, Säulenhalle, Eingang und Nandi-Pavillon bilden eine abgestimmte Anlage. Ihre Beziehungen bestimmen das Ziel, bevor unser Modell zu schneiden beginnt.",
+      "raw_seconds": 9.624671201814058,
+      "speech_window_seconds": 9.624671201814058,
+      "tempo": 0.9973752540739956,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Im Zentrum steht das Heiligtum mit seinem hohen Aufbau. Für dessen Umriss musste der Fels unter den höchsten Formen geschützt bleiben.",
+      "raw_seconds": 6.931156462585034,
+      "speech_window_seconds": 6.931156462585034,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Um den Hof liegen Galerien und Heiligtümer im Fels. Ein freigestellter Bau und eine Kammer in der Wand stellen verwandte, aber verschiedene Aufgaben.",
+      "raw_seconds": 7.801904761904762,
+      "speech_window_seconds": 7.801904761904762,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Sehen wir nochmals die Luft dazwischen. Architekturaufnahme untersucht das Erhaltene. Eine Abtragsrekonstruktion muss auch abschätzen, was diese Räume einst füllte.",
+      "raw_seconds": 9.032562358276644,
+      "speech_window_seconds": 9.032562358276644,
+      "tempo": 0.9360168246918802,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Eine grobe Abbaufläche und eine fertige Schmuckfläche beantworten andere Fragen. Die eine betrifft Zugang und Fortschritt, die andere die gewünschte Endform.",
+      "raw_seconds": 7.894784580498866,
+      "speech_window_seconds": 7.894784580498866,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Unfertige Felsbauten erklären mögliche Arbeitsschritte. Der Vergleich hilft, solange fremde Bearbeitungsspuren nicht als direkte Aufzeichnungen von Kailasa ausgegeben werden.",
+      "raw_seconds": 10.077460317460318,
+      "speech_window_seconds": 10.077460317460318,
+      "tempo": 1.044296405954437,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Die Rekonstruktion darf Fels nicht wie weichen Ton behandeln. Gewicht, Klüfte, Arbeitsraum und die wechselnde Restform müssen berücksichtigt werden.",
+      "raw_seconds": 8.231473922902495,
+      "speech_window_seconds": 8.231473922902495,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Mit diesen Grenzen entwickeln wir eine mögliche Folge. Sie erklärt die Logik von oben nach unten, ohne jede historische Bewegung festzulegen.",
+      "raw_seconds": 7.836734693877551,
+      "speech_window_seconds": 7.836734693877551,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Stellen wir uns den Hang vor dem Hof vor. Gewünschte Dachhöhe und verfügbarer Fels begrenzten den möglichen Standort des Tempels.",
+      "raw_seconds": 6.873106575963718,
+      "speech_window_seconds": 6.873106575963718,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Die höchste Form musste in die ursprüngliche Masse passen. Lag der erste Schnitt zu tief, ließ sich verlorene Höhe nicht zurückmeißeln.",
+      "raw_seconds": 7.174965986394557,
+      "speech_window_seconds": 7.174965986394557,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Eine einheitliche Anlage braucht Bezugslinien und Höhen. Schnüre, Messgeräte und Visieren sind denkbar, doch ihre genaue Anordnung ist nicht erhalten.",
+      "raw_seconds": 8.428843537414966,
+      "speech_window_seconds": 8.428843537414966,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Unser Modell lässt großzügige Steinreserven. Feine Kanten werden erst freigelegt, wenn für die umgebende Arbeit ein kontrollierter Ablauf besteht.",
+      "raw_seconds": 7.778684807256236,
+      "speech_window_seconds": 7.778684807256236,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Absteigende Einschnitte ringsum können die Reserve vom Hang lösen. Gräben öffnen Arbeitsflächen, während die künftige Architektur in der mittleren Masse bleibt.",
+      "raw_seconds": 8.13859410430839,
+      "speech_window_seconds": 8.13859410430839,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Grober Abtrag muss nicht alles zu Staub zermahlen. Wo das Gestein mitspielt, ist das Abtrennen von Stücken wirksamer als jede Fläche fein auszuarbeiten.",
+      "raw_seconds": 8.196643990929704,
+      "speech_window_seconds": 8.196643990929704,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Das Trennen muss kontrolliert bleiben. Ein ungewollter Riss könnte vom Abraum in ein Gesims, einen Pfeiler oder ein vorgesehenes Dach laufen.",
+      "raw_seconds": 7.534875283446712,
+      "speech_window_seconds": 7.534875283446712,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Jedes gelöste Stück muss den Arbeitsplatz verlassen. Füllt sich der Graben mit Schutt, verliert er den gerade erst geschaffenen Zugang.",
+      "raw_seconds": 6.315827664399093,
+      "speech_window_seconds": 6.315827664399093,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Von oben kann die obere Form entstehen, bevor unten alles frei liegt. Der stehengebliebene Hang kann vorübergehend Arbeitszugang bieten.",
+      "raw_seconds": 7.523265306122449,
+      "speech_window_seconds": 7.523265306122449,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Das ist eine Folge, kein wundersamer Einzelschnitt. Jeder kleine Abtrag verändert sowohl den künftigen Bau als auch seine Arbeitsumgebung.",
+      "raw_seconds": 7.383945578231293,
+      "speech_window_seconds": 7.383945578231293,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Betrachten wir ein auskragendes Gesims. Während der Formgebung muss darunter und daneben ausreichend Fels bleiben, besonders nahe einer natürlichen Kluft.",
+      "raw_seconds": 8.057324263038549,
+      "speech_window_seconds": 8.057324263038549,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Grobabtrag und Feinarbeit haben andere Ziele. Der Überschuss schafft Raum; danach entstehen Profile und Schmuck, soweit Zugang und Stabilität es zulassen.",
+      "raw_seconds": 8.359183673469389,
+      "speech_window_seconds": 8.359183673469389,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Von oben nach unten bedeutet nicht, dass alle Gruppen gleich hoch arbeiten. Verschiedene Bereiche können anders vorankommen, solange die Geometrie zusammenpasst.",
+      "raw_seconds": 8.672653061224489,
+      "speech_window_seconds": 8.672653061224489,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Mit der Tiefe wird Abstimmung schwieriger. Wer oben eine Kante formt, muss die spätere Halle, Öffnung oder Stütze darunter verstehen.",
+      "raw_seconds": 6.896326530612245,
+      "speech_window_seconds": 6.896326530612245,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Kleine Lagefehler können sich summieren. Wiederholte Richtungs- und Höhenkontrollen sind deshalb sinnvoll, auch wenn die antike Messroutine unbekannt bleibt.",
+      "raw_seconds": 8.057324263038549,
+      "speech_window_seconds": 8.057324263038549,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Der Innenraum bringt einen weiteren Vorgang. Eine Kammer entfernt Fels aus der Reserve. Wände, Decke und Säulen müssen gemeinsam bedacht werden.",
+      "raw_seconds": 7.650975056689342,
+      "speech_window_seconds": 7.650975056689342,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Eine Felssäule entsteht durch Abtrag ringsum. Ihre Abmessungen richten sich auch nach den Anforderungen der Decke, nicht allein nach Schönheit.",
+      "raw_seconds": 7.1053061224489795,
+      "speech_window_seconds": 7.1053061224489795,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Die Decke ist stehengebliebener Fels über einem Raum. Eine größere Öffnung verändert die Beanspruchung, besonders an Klüften oder dünnen Stellen.",
+      "raw_seconds": 7.48843537414966,
+      "speech_window_seconds": 7.48843537414966,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Ein Vorsprung hat eine andere Lastgeometrie. Gute Druckfestigkeit macht nicht jede erdenkliche Steinform gleichermaßen sicher.",
+      "raw_seconds": 6.826666666666667,
+      "speech_window_seconds": 6.826666666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Die Elefantenreliefs am Sockel bereichern das Bild. Es sind Steinbilder in der Architektur, keine lebenden Tiere, die den Tempel tragen.",
+      "raw_seconds": 7.616145124716553,
+      "speech_window_seconds": 7.616145124716553,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Für Lasten ist diese Unterscheidung wichtig. Untersucht werden müssen der Steinkern und seine Verbindungen, nicht eine Bildgeschichte als vermeintlicher Tragwerksplan.",
+      "raw_seconds": 8.034104308390022,
+      "speech_window_seconds": 8.034104308390022,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Mit den Hohlräumen verändert sich das Licht. Außenwand, schattige Halle und enger Gang verlangen andere Entscheidungen über Tiefe und sichtbare Details.",
+      "raw_seconds": 8.243083900226758,
+      "speech_window_seconds": 8.243083900226758,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Die fertige Anlage dient Verehrung und Bewegung. Eine Arbeitsrekonstruktion muss auch die Nutzung und die symbolische Ordnung des Tempels berücksichtigen.",
+      "raw_seconds": 8.370793650793651,
+      "speech_window_seconds": 8.370793650793651,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Der Nandi-Pavillon gehört dazu. Seine Beziehung zum Hauptheiligtum zeigt, warum mehr als einzelne voneinander unabhängige Formen geplant werden mussten.",
+      "raw_seconds": 8.196643990929704,
+      "speech_window_seconds": 8.196643990929704,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Steinerne Verbindungen erschweren die Planung. Ein Modell kann eine Verbindung nicht magisch zurückholen, nachdem der dafür nötige Fels entfernt wurde.",
+      "raw_seconds": 7.918004535147392,
+      "speech_window_seconds": 7.918004535147392,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Äußerer Abtrag und innere Aushöhlung greifen ineinander. Die örtliche Reihenfolge kann variieren, doch jeder Schritt muss das für den anderen Nötige bewahren.",
+      "raw_seconds": 8.544943310657596,
+      "speech_window_seconds": 8.544943310657596,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Öffnungen beeinflussen auch den Baustellenverkehr. Eine passende Tür im fertigen Tempel kann für die frühere Schuttabfuhr ungeeignet sein.",
+      "raw_seconds": 7.87156462585034,
+      "speech_window_seconds": 7.87156462585034,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Verschiedene Aufgaben brauchen verschiedene Werkzeugbewegungen. Überschuss brechen, Flächen glätten und Kanten verfeinern sind keine austauschbare allgemeine Hammerszene.",
+      "raw_seconds": 9.067392290249433,
+      "speech_window_seconds": 9.067392290249433,
+      "tempo": 0.9396261440672987,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Eisenwerkzeuge passen zum technischen Umfeld. Unser Bild zeigt jedoch keinen erfundenen Werkzeugsatz als vermeintlichen Fund aus Kailasa.",
+      "raw_seconds": 7.7090249433106575,
+      "speech_window_seconds": 7.7090249433106575,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Werkzeuge verschleißen. Schärfen, Ersatz und Versorgung gehören zur Erklärung. Eine bestimmte Werkstatt oder Wartungsfolge bräuchte eigene Belege.",
+      "raw_seconds": 8.359183673469389,
+      "speech_window_seconds": 8.359183673469389,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Arbeitskraft ist mehr als eine Menschenzahl. Abstecken, Schneiden, Ausarbeiten, Tragen und Werkzeugpflege verlangen unterschiedliche Fähigkeiten und Formen der Abstimmung.",
+      "raw_seconds": 9.694331065759638,
+      "speech_window_seconds": 9.694331065759638,
+      "tempo": 1.0045938928248328,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Wir können Materialmengen modellieren, ohne den gesamten Abtrag zu kennen. Zunächst unterscheiden wir Gesteinsvolumen und Gesteinsmasse.",
+      "raw_seconds": 7.720634920634921,
+      "speech_window_seconds": 7.720634920634921,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Nehmen wir für einen kompakten Kubikmeter zwei Komma acht Tonnen an. Das ist eine illustrative Dichteannahme, keine Messung an diesem Tempel.",
+      "raw_seconds": 7.430385487528345,
+      "speech_window_seconds": 7.430385487528345,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Dann hätten hundert Kubikmeter zweihundertachtzig Tonnen. Die Rechnung beschreibt unser Beispiel, keine nachgewiesene gesamte Abtragsmenge von Kailasa.",
+      "raw_seconds": 8.17342403628118,
+      "speech_window_seconds": 8.17342403628118,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Lockerer Schutt enthält Zwischenräume. Sein Transportvolumen unterscheidet sich vom kompakten Gestein und erschwert Rechnungen allein nach Wagenkapazität.",
+      "raw_seconds": 7.9412244897959186,
+      "speech_window_seconds": 7.9412244897959186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Für Arbeitsraten braucht man Umfang, Gesteinszustand, Werkzeugleistung, Zugang, Transportweg sowie Zeit für Ausarbeitung und Reparatur.",
+      "raw_seconds": 8.103764172335602,
+      "speech_window_seconds": 8.103764172335602,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Die Tiefe verändert diese Bedingungen. Ein bequemer oberer Weg kann verschwinden, während ein unterer Durchgang erst später nutzbar wird.",
+      "raw_seconds": 7.047256235827664,
+      "speech_window_seconds": 7.047256235827664,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Eine überzeugende Rekonstruktion verbindet die Stufen. Fels verschwindet nicht, Menschen brauchen Zugang, und die Reststruktur muss während des Abtrags getragen bleiben.",
+      "raw_seconds": 9.32281179138322,
+      "speech_window_seconds": 9.32281179138322,
+      "tempo": 0.9660944861537015,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Die obere Architektur tritt nun hervor. Die Leistung liegt nicht nur im Umriss, sondern in einer Folge, die den nächsten Schritt ermöglicht.",
+      "raw_seconds": 7.441995464852607,
+      "speech_window_seconds": 7.441995464852607,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Nun das erste große Hindernis: Abtrag lässt sich schwer umkehren. Ein Fehler kann die verfügbare Form schon vor der Zielfläche verändern.",
+      "raw_seconds": 7.999274376417233,
+      "speech_window_seconds": 7.999274376417233,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Stein lässt sich reparieren, und moderne Erhaltung veränderte manche Flächen. Ein verlorenes Stück ersetzen ist jedoch etwas anderes als ursprünglichen, zusammenhängenden Fels bewahren.",
+      "raw_seconds": 9.462131519274376,
+      "speech_window_seconds": 9.462131519274376,
+      "tempo": 0.9805317636553756,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Eine verborgene Kluft ist ein weiteres Hindernis. Entscheidend ist, wo sie den Reststein durchzieht, nicht nur, dass irgendwo eine Fraktur existiert.",
+      "raw_seconds": 8.161814058956915,
+      "speech_window_seconds": 8.161814058956915,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Zusätzlicher Fels beim Grobabtrag erhält Möglichkeiten. Seine spätere Entfernung verlangt erneut Entscheidungen über Form, Festigkeit und die freigelegte Gesteinsqualität.",
+      "raw_seconds": 9.462131519274376,
+      "speech_window_seconds": 9.462131519274376,
+      "tempo": 0.9805317636553756,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Eine kleine Vorführung erklärt ein Prinzip, bestätigt aber nicht das ganze Monument. Der Maßstab verändert Folgen von Rissen, Spannweiten und fallenden Stücken.",
+      "raw_seconds": 8.568163265306122,
+      "speech_window_seconds": 8.568163265306122,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Stein kann Druck gut aufnehmen und unter anderen Bedingungen empfindlich bleiben. Biegung, Zug und Klüfte zählen beim Freilegen von Dächern oder Vorsprüngen.",
+      "raw_seconds": 7.999274376417233,
+      "speech_window_seconds": 7.999274376417233,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Eine lange Spannweite ist nicht einfach eine vergrößerte kurze. Dicke, Auflagerpositionen und tatsächliches Felsgefüge müssen zusammen betrachtet werden.",
+      "raw_seconds": 8.486893424036282,
+      "speech_window_seconds": 8.486893424036282,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Derselbe Riss kann im breiten Massiv harmlos, nahe einer Kante aber ernst sein. Deshalb gehören Geometrie und Geologie zusammen.",
+      "raw_seconds": 7.685804988662132,
+      "speech_window_seconds": 7.685804988662132,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Dann der Regen. Ein tiefer Hof verändert Wasserwege und Sammelstellen. Unfertige Arbeiten liegen in einer Landschaft mit wechselnden Jahreszeiten.",
+      "raw_seconds": 7.267845804988662,
+      "speech_window_seconds": 7.267845804988662,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Wasser folgt Klüften und unregelmäßigen Flächen. Ein schönes trockenes Modell darf die wechselnden Bedingungen am offenen Hang nicht vergessen lassen.",
+      "raw_seconds": 7.662585034013605,
+      "speech_window_seconds": 7.662585034013605,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Schutträumung und Entwässerung können sich behindern. Falsch gelagertes Material kann Arbeitsweg und Wasserabfluss gleichzeitig versperren.",
+      "raw_seconds": 7.697414965986394,
+      "speech_window_seconds": 7.697414965986394,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Erhaltungsberichte beschreiben Entwässerung und Reparaturen in Ellora. Ein sichtbarer Kanal oder eine geflickte Fläche kann deshalb jüngere Geschichte besitzen.",
+      "raw_seconds": 8.777142857142858,
+      "speech_window_seconds": 8.777142857142858,
+      "tempo": 0.9095484826054774,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Auch Zugang ist schwierig. Stehengebliebener Fels kann Arbeitsplattform sein, beweist aber nicht, dass Gerüste oder vorläufige Stützen nie nötig waren.",
+      "raw_seconds": 8.335963718820862,
+      "speech_window_seconds": 8.335963718820862,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Mit fertigen Flächen und geöffnetem Unterbau ändern sich Arbeitspositionen. Die Folge muss deren Zugang erklären, statt Werkzeuge schweben zu lassen.",
+      "raw_seconds": 8.370793650793651,
+      "speech_window_seconds": 8.370793650793651,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Obere Arbeiten gefährden Menschen und fertige Teile darunter. Unsere Darstellung trennt Schneiden und Räumen und wirft keine Steine durch einen belebten Hof.",
+      "raw_seconds": 8.382403628117913,
+      "speech_window_seconds": 8.382403628117913,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Diese Trennung braucht Abstimmung. Signale, Pausen und vereinbarte Arbeitszonen sind weniger spektakulär als ein Turm, aber Teil einer glaubwürdigen Erklärung.",
+      "raw_seconds": 9.311201814058958,
+      "speech_window_seconds": 9.311201814058958,
+      "tempo": 0.9648913796952288,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Ebenso die Versorgung. Nahrung, Wasser, Holz, Metall und gepflegte Werkzeuge müssen ankommen, auch wenn wir vor allem den Reststein betrachten.",
+      "raw_seconds": 8.161814058956915,
+      "speech_window_seconds": 8.161814058956915,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Es geht um Facharbeit in verschiedenen Aufgaben. Eine anonyme Masse erklärt nicht die Entscheidungen zwischen grobem Abbau und wohlproportioniertem Heiligtum.",
+      "raw_seconds": 8.185034013605442,
+      "speech_window_seconds": 8.185034013605442,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Auch Identitäten und Verträge dürfen wir nicht erfinden. Das Monument zeigt großen menschlichen Einsatz, überliefert aber nicht jede Biografie oder Stellung.",
+      "raw_seconds": 8.730702947845804,
+      "speech_window_seconds": 8.730702947845804,
+      "tempo": 0.904736056771586,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Die Jahreszeiten liefern keinen genauen Kalender. Regen, Zugang, Förderung und Reparaturen sind wichtige Variablen, kein wiedergefundenes Bauprogramm.",
+      "raw_seconds": 8.904852607709751,
+      "speech_window_seconds": 8.904852607709751,
+      "tempo": 0.9227826536486788,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Verlangen können wir innere Stimmigkeit. Ein vorgeschlagener Schnitt braucht Werkzeugraum, genügend tragenden Fels und einen Weg für den Abraum.",
+      "raw_seconds": 7.151746031746032,
+      "speech_window_seconds": 7.151746031746032,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Architekturstudien vergleichen auch verschiedene Teile. Unterschiede helfen bei der Chronologie, zeigen aber nicht automatisch die Arbeitsfolge eines einzelnen Tages.",
+      "raw_seconds": 8.70748299319728,
+      "speech_window_seconds": 8.70748299319728,
+      "tempo": 0.9023298438546403,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Ellora besitzt weitere Felstempel, darunter das jüngere Kleine Kailasa. Wir behandeln Höhle sechzehn und dürfen ihre Bilder nicht beliebig mischen.",
+      "raw_seconds": 8.335963718820862,
+      "speech_window_seconds": 8.335963718820862,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Selbst im selben Hof müssen Bildflächen richtig zugeordnet werden. Eine eindrucksvolle Nahaufnahme kann wenig über die ursprüngliche Abbaufolge verraten.",
+      "raw_seconds": 8.510113378684807,
+      "speech_window_seconds": 8.510113378684807,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Die Bildwelt ruft einen heiligen Kosmos auf. Ihr kulturelles Programm erklärt die Bedeutung, ist aber keine wörtliche Werkstattaufzeichnung.",
+      "raw_seconds": 7.894784580498866,
+      "speech_window_seconds": 7.894784580498866,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Religiöse Szene und Schnittdiagramm haben unterschiedliche Zwecke. Wir können beide würdigen und Symbolik von Aussagen über konkrete technische Vorgänge unterscheiden.",
+      "raw_seconds": 8.881632653061224,
+      "speech_window_seconds": 8.881632653061224,
+      "tempo": 0.9203764407317331,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Beliebte Erzählungen springen vom vollen Berg zum fertigen Tempel. In der ausgelassenen Mitte liegen gerade die eigentlichen technischen Fragen.",
+      "raw_seconds": 7.233015873015873,
+      "speech_window_seconds": 7.233015873015873,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Genaue Tonnagen und erstaunliche Bauzeiten brauchen begründete Messungen und Quellen. Eine wiederholte Bildschirmzahl wird dadurch nicht zur archäologischen Beobachtung.",
+      "raw_seconds": 8.893242630385487,
+      "speech_window_seconds": 8.893242630385487,
+      "tempo": 0.9215795471902058,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Abtragsvolumen braucht ursprüngliche Hangfläche und erhaltene Form. Unsicherheit über den verschwundenen Hang wird zur Unsicherheit des Ergebnisses.",
+      "raw_seconds": 7.90639455782313,
+      "speech_window_seconds": 7.90639455782313,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Die Suche nach Abraum ist eine eigene Untersuchung. Nicht jeder nahe Stein ist antiker Kailasa-Abfall, solange Kontext und Zusammenhang ungeklärt sind.",
+      "raw_seconds": 8.40562358276644,
+      "speech_window_seconds": 8.40562358276644,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Diese Grenzen verhindern Verständnis nicht. Sie trennen geometrisch beantwortbare Fragen von solchen, die stärkere historische oder materielle Belege benötigen.",
+      "raw_seconds": 8.370793650793651,
+      "speech_window_seconds": 8.370793650793651,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Moderne Reparaturakten helfen beim Abgleich. Heutige Flächen erlebten Verwitterung, Wartung und Eingriffe lange nach der ersten Bearbeitung.",
+      "raw_seconds": 7.685804988662132,
+      "speech_window_seconds": 7.685804988662132,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Eine Reparaturfuge ist kein ursprünglicher Montagebeleg. Umgekehrt darf der monolithische Kern die spätere Geschichte des ganzen Komplexes nicht ausblenden.",
+      "raw_seconds": 8.974512471655329,
+      "speech_window_seconds": 8.974512471655329,
+      "tempo": 0.9300012923995159,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Unsere Bilder müssen das unterscheiden. Vermessene Restformen bleiben fest, unsichere Arbeitsstufen sollen als Deutungsmodelle erkennbar sein.",
+      "raw_seconds": 7.894784580498866,
+      "speech_window_seconds": 7.894784580498866,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Dies ist lebendiges Erbe, kein verlassenes Labor. Die Entstehung zu verstehen soll Aufmerksamkeit für Glauben, Gemeinschaften und Pflege vertiefen.",
+      "raw_seconds": 7.558095238095238,
+      "speech_window_seconds": 7.558095238095238,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Vergleichen wir Erklärungen fair. Jede muss denselben Fels, dieselbe erhaltene Architektur und dieselbe notwendige Abraumbewegung berücksichtigen.",
+      "raw_seconds": 8.02249433106576,
+      "speech_window_seconds": 8.02249433106576,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Vergleichen wir gebauten und herausgearbeiteten Tempel. Der erste bringt Material heran, der zweite bewahrt die Zielmasse und entfernt ihre Umgebung.",
+      "raw_seconds": 8.231473922902495,
+      "speech_window_seconds": 8.231473922902495,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Dort stehen Transport und Fugen im Vordergrund. Hier Gesteinswahl, Abtragsreihenfolge, Zugang und Entsorgung des unerwünschten Materials.",
+      "raw_seconds": 8.126984126984127,
+      "speech_window_seconds": 8.126984126984127,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Vergleichen wir eine Felskammer mit einem freigestellten Hoftempel. Beide entfernen Gestein, ordnen aber Licht und Arbeitsflächen unterschiedlich.",
+      "raw_seconds": 7.75546485260771,
+      "speech_window_seconds": 7.75546485260771,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Für Kailasa ist der umgebende Abtrag entscheidend. Er macht Architektur rundum sichtbar, nicht nur einen Innenraum hinter einer Fassade.",
+      "raw_seconds": 7.732244897959184,
+      "speech_window_seconds": 7.732244897959184,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Das Prinzip von oben nach unten passt dazu. Die obere Form leitet den unteren Abtrag und bewahrt Fels für noch verborgene Teile.",
+      "raw_seconds": 7.3723356009070296,
+      "speech_window_seconds": 7.3723356009070296,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Ein Grundprinzip ist jedoch kein vollständiger Kalender. Parallelarbeit, örtliche Anpassungen und verschiedene Fertigungsstufen können Teil eines komplizierteren Projekts sein.",
+      "raw_seconds": 9.729160997732427,
+      "speech_window_seconds": 9.729160997732427,
+      "tempo": 1.0082032122002513,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Die Formen gehören zu einer breiten Baukultur. Vorstellungen von Heiligtümern, Hallen, Türmen und Schmuck reichten über diesen Hang hinaus.",
+      "raw_seconds": 7.592925170068027,
+      "speech_window_seconds": 7.592925170068027,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Andere indische Felsbautraditionen liefern Kontext. Der Vergleich beweist keinen bestimmten Reiseweg einer konkreten Gruppe oder eines Bauplans.",
+      "raw_seconds": 8.324353741496598,
+      "speech_window_seconds": 8.324353741496598,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Ein gehauenes Band kann einer gemauerten Steinlage ähneln. Ähnliches Aussehen beweist keine Montage. Die Oberfläche braucht ihren baulichen Zusammenhang.",
+      "raw_seconds": 7.743854875283446,
+      "speech_window_seconds": 7.743854875283446,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Die Vorstellung des heiligen Berges gibt dem Abtrag Bedeutung. Shivas Ort wird durch eine zum Tempel verwandelte Bergmasse gegenwärtig.",
+      "raw_seconds": 7.244625850340136,
+      "speech_window_seconds": 7.244625850340136,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Herrschaftliche Förderung und Fachkenntnis erklären den Anspruch. Historische Zuordnung stützt den Rahmen, lässt aber viele Organisations- und Phasenfragen offen.",
+      "raw_seconds": 8.928072562358278,
+      "speech_window_seconds": 8.928072562358278,
+      "tempo": 0.9251888665656246,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Wie lange dauerte alles? Eine genaue Antwort muss definieren, welche Phasen, Flächen und Arbeitsarten in die Rechnung eingehen.",
+      "raw_seconds": 7.650975056689342,
+      "speech_window_seconds": 7.650975056689342,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Wie viele Menschen waren nötig? Das hängt von Leistung, Transport, Pflege und der Zahl gleichzeitig ungehindert arbeitender Gruppen ab.",
+      "raw_seconds": 7.3723356009070296,
+      "speech_window_seconds": 7.3723356009070296,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Auch Werkzeugspuren haben Grenzen. Sie zeigen vielleicht Kontakt und Richtung, aber selten allein ein vollständiges Datum und eine ganze Arbeitsgeschichte.",
+      "raw_seconds": 8.463673469387755,
+      "speech_window_seconds": 8.463673469387755,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Moderne Vermessung verbessert das geometrische Bild. Ein fertiger Tempel verrät dadurch nicht automatisch seinen ursprünglichen Abtragsplan.",
+      "raw_seconds": 7.558095238095238,
+      "speech_window_seconds": 7.558095238095238,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Eine sinnvolle Untersuchung verbindet Geologie, unfertige Teile, Bauzusammenhänge, alte Akten und klar bezeichnete Abtragsmodelle.",
+      "raw_seconds": 7.650975056689342,
+      "speech_window_seconds": 7.650975056689342,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Gesucht ist nicht die spektakulärere Animation. Gesucht ist eine Folge, die mehr Restbefunde mit weniger unbelegten Annahmen erklärt.",
+      "raw_seconds": 7.500045351473923,
+      "speech_window_seconds": 7.500045351473923,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Was steht fest? Kailasas zentrale Felsarchitektur entstand durch gezielten Abtrag. Erhaltener Stein wurde zu Räumen, Stützen und Oberflächen des Tempels.",
+      "raw_seconds": 8.881632653061224,
+      "speech_window_seconds": 8.881632653061224,
+      "tempo": 0.9203764407317331,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Kehren wir zum ersten Blick zurück. Der Tempel bleibt monumental. Doch die Luft ringsum erzählt jetzt ebenso viel wie der Stein.",
+      "raw_seconds": 6.8382766439909295,
+      "speech_window_seconds": 6.8382766439909295,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Diese Luft steht für Entscheidungen über Entfernen und Bewahren. Jede erhaltene Kante beruht auf Arbeit, die auch die nächste ermöglichte.",
+      "raw_seconds": 7.082086167800454,
+      "speech_window_seconds": 7.082086167800454,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Graben, geräumte Fläche, Öffnung, Raum um die fertige Form: Eine Folge von Fehlstellen kann das aufschlussreichste Bild ergeben.",
+      "raw_seconds": 7.22140589569161,
+      "speech_window_seconds": 7.22140589569161,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "In diesen Entscheidungen lagen künstlerische und religiöse Absichten. Technik erklärt die Raumbildung, Kulturgeschichte erklärt, warum gerade diese Räume wichtig waren.",
+      "raw_seconds": 9.276371882086167,
+      "speech_window_seconds": 9.276371882086167,
+      "tempo": 0.96128206031981,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Geologie setzte Bedingungen. Handwerk machte daraus Entscheidungen. Weder Material noch Entwurf allein erklären die ganze Leistung.",
+      "raw_seconds": 7.035646258503402,
+      "speech_window_seconds": 7.035646258503402,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Der fehlende Schutt erinnert an Arbeit jenseits der Bildhauerhand: Räumen, Tragen, Versorgen, Prüfen, Pflegen und Abstimmen auf wechselnden Ebenen.",
+      "raw_seconds": 8.092154195011338,
+      "speech_window_seconds": 8.092154195011338,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "Organisation zu erkennen schmälert das Staunen nicht. Die Leistung wird menschlich: Wissen und wiederholte praktische Entscheidungen zählen ebenso wie Kraft.",
+      "raw_seconds": 7.952834467120182,
+      "speech_window_seconds": 7.952834467120182,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "Kailasa zu erhalten braucht heute andere Geduld. Dokumentation und Aufmerksamkeit für Stein, Wasser und frühere Reparaturen schützen eine vielschichtige Geschichte.",
+      "raw_seconds": 8.835192743764173,
+      "speech_window_seconds": 8.835192743764173,
+      "tempo": 0.9155640148978418,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "Was würden Sie als Nächstes prüfen: den oberen Umriss, die Hofwände, die inneren Stützen oder Belege für den Abraumtransport?",
+      "raw_seconds": 6.675736961451247,
+      "speech_window_seconds": 6.675736961451247,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 133,
+      "text": "Jede Wahl prüft einen anderen Teil. Eine monumentale Frage wird untersuchbar, wenn wir die antwortfähige Fläche oder Beziehung benennen.",
+      "raw_seconds": 7.291065759637188,
+      "speech_window_seconds": 7.291065759637188,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 134,
+      "text": "Nicht jeder antike Schlag lässt sich sicher erzählen. Doch wir verstehen, warum genügend Reststein, freier Arbeitsraum und abgestimmte Phasen wesentlich waren.",
+      "raw_seconds": 8.544943310657596,
+      "speech_window_seconds": 8.544943310657596,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 135,
+      "text": "Der Berg wurde nicht einfach durch einen Tempel ersetzt. Ein Teil wurde zum Tempel. Welche erhaltene Spur könnte den nächsten Schritt erklären?",
+      "raw_seconds": 7.267845804988662,
+      "speech_window_seconds": 7.267845804988662,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1352,
+  "decoded_samples": 32448000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-de-22m32s.mp3",
+  "flac": "voice-de-22m32s.flac",
+  "mp3_sha256": "3ef89c5e5eef4cb13983a43dc50e2cee74b927f96520d4e1be73e4de0aaad7db",
+  "flac_sha256": "72cdbc2714867641e913fe2a8403210905ea9dcdb23ada22adc57e53e70084c7"
+}

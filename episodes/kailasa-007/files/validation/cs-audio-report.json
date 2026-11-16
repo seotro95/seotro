@@ -1,0 +1,1236 @@
+{
+  "locale": "cs",
+  "voice_id": "piper:cs_CZ-jirka-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1352,
+  "spoken_cues": 135,
+  "closing_silence_seconds": 2,
+  "config_hash": "c4028882ca396bea70a33104b47530f2bd210f691cf0c0d42e996cdfb5f5ee0a",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "V Kailáse stojí chrám v prostoru vytesaném do svahu. První otázkou není, co sem přišlo, ale co bylo odstraněno.",
+      "raw_seconds": 10.286439909297052,
+      "speech_window_seconds": 10.286439909297052,
+      "tempo": 1.0659523222069482,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Věže, sály a sochy byly původně uvnitř skály. Chceme-li pochopit jejich vznik, musíme vidět i materiál, který zmizel kolem.",
+      "raw_seconds": 10.681179138321996,
+      "speech_window_seconds": 10.681179138321996,
+      "tempo": 1.1068579417950255,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Jak odstranit povrch hory a zachovat stavbu uvnitř? Sledujme řezy od horní skály k prostorám pod ní.",
+      "raw_seconds": 8.498503401360544,
+      "speech_window_seconds": 8.498503401360544,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Jsme v Éllóře v Maháráštře, v západní Indii. Dlouhá čedičová stěna tvoří krajinu buddhistických, hinduistických a džinistických památek.",
+      "raw_seconds": 12.167256235827665,
+      "speech_window_seconds": 12.167256235827665,
+      "tempo": 1.2608555684795508,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Kailása má číslo šestnáct. Její ústřední monument je však chrám na denním světle, obklopený vyhloubeným nádvořím.",
+      "raw_seconds": 9.996190476190476,
+      "speech_window_seconds": 9.996190476190476,
+      "tempo": 1.035874660745127,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Chrám je zasvěcen Šivovi. Jméno připomíná posvátnou horu Kailásu a dává vytesanému masivu architektonický i náboženský smysl.",
+      "raw_seconds": 11.644807256235827,
+      "speech_window_seconds": 11.644807256235827,
+      "tempo": 1.2067157778482722,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Hlavní práce se obvykle spojují s osmým stoletím a ráštrakútským králem Kršnou Prvním. Dějiny celého místa zahrnují několik staletí.",
+      "raw_seconds": 12.097596371882085,
+      "speech_window_seconds": 12.097596371882085,
+      "tempo": 1.2536369297287135,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Toto přiřazení dává historický rámec, nikoli denní rozpis. Královská podpora, stavební fáze a práce jednotlivých skupin jsou různé otázky.",
+      "raw_seconds": 13.038004535147392,
+      "speech_window_seconds": 13.038004535147392,
+      "tempo": 1.3510885528650147,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Materiálem je sopečný čedič. Staré lávové proudy mají různou strukturu a pukliny. Celý svah není dokonale stejnorodý kámen.",
+      "raw_seconds": 11.400997732426303,
+      "speech_window_seconds": 11.400997732426303,
+      "tempo": 1.1814505422203423,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Pro stavitele byla geologie součástí návrhu. Skála musela nést střechu, umožnit detaily a vydržet odtěžování.",
+      "raw_seconds": 10.019410430839002,
+      "speech_window_seconds": 10.019410430839002,
+      "tempo": 1.0382808736620728,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Potřebovali také pracovní prostor a místo pro suť. Odstraňování kamene vytváří stavbu, ale zároveň trvalý dopravní problém.",
+      "raw_seconds": 11.377777777777778,
+      "speech_window_seconds": 11.377777777777778,
+      "tempo": 1.1790443293033968,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Sledujeme tři úkoly: určit, co zůstane, odstranit okolí a chránit zachovanou konstrukci po celou dobu práce.",
+      "raw_seconds": 10.077460317460318,
+      "speech_window_seconds": 10.077460317460318,
+      "tempo": 1.044296405954437,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Začněme stěnami nádvoří. Výška a poloha ukazují rozsah odtěžení. Tento volný prostor byl kdysi součástí mnohem většího masivu.",
+      "raw_seconds": 11.319727891156463,
+      "speech_window_seconds": 11.319727891156463,
+      "tempo": 1.1730287970110325,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Běžné zdivo spojuje bloky. Zde hlavní tvary vznikly ponecháním vybraného kamene na místě a odstraněním sousedního materiálu.",
+      "raw_seconds": 10.797278911564625,
+      "speech_window_seconds": 10.797278911564625,
+      "tempo": 1.1188890063797539,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Indická archeologická správa spojuje Kailásu s Kršnou Prvním. Pozdější měděná listina chválí velký chrám ve staré Elápuře, Éllóře.",
+      "raw_seconds": 12.004716553287983,
+      "speech_window_seconds": 12.004716553287983,
+      "tempo": 1.2440120780609307,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Záznam pojednává o královském díle. Není dochovaným pracovním návodem s hloubkou, pořadím a trváním každého jednotlivého řezu.",
+      "raw_seconds": 11.34294784580499,
+      "speech_window_seconds": 11.34294784580499,
+      "tempo": 1.1754350099279782,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Další důkazy nabízí samotný monument. Stavební vztahy, nedokončené plochy jinde a srovnávání pomáhají posoudit možné pracovní postupy.",
+      "raw_seconds": 12.654875283446712,
+      "speech_window_seconds": 12.654875283446712,
+      "tempo": 1.3113860397354105,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Čedič vznikal z postupných lávových proudů. Hutné jádro a zóna s plynovými dutinkami se mohou po odkrytí chovat rozdílně.",
+      "raw_seconds": 10.716009070294785,
+      "speech_window_seconds": 10.716009070294785,
+      "tempo": 1.110467261170444,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Přirozené pukliny usnadňují oddělení, ale mohou procházet pilířem nebo střechou. Užitečné v odpadu, nebezpečné v ponechaném kameni.",
+      "raw_seconds": 11.54031746031746,
+      "speech_window_seconds": 11.54031746031746,
+      "tempo": 1.1958878197220166,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Oficiální archeologický popis tyto struktury zdůrazňuje. Pečlivé pozorování bylo praktickou podmínkou, ne pouhou úvodní ceremonií.",
+      "raw_seconds": 11.749297052154194,
+      "speech_window_seconds": 11.749297052154194,
+      "tempo": 1.2175437359745278,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Před hlubokým řezem bylo nutné ponechat dost skály pro budovu. Plánovaná dutina a plánovaná konstrukce byly neoddělitelné.",
+      "raw_seconds": 10.553469387755102,
+      "speech_window_seconds": 10.553469387755102,
+      "tempo": 1.0936237707518242,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Historická zaměření zachycují půdorysy a řezy. Dokumentují dochovaný chrám, nejsou však původními výkresy jeho stavitelů.",
+      "raw_seconds": 10.739229024943311,
+      "speech_window_seconds": 10.739229024943311,
+      "tempo": 1.1128734740873898,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Hlavní svatyně, sloupový sál, vstup a Nandiho pavilon tvoří celek. Jejich vztahy určují cíl dříve, než začnou modelované řezy.",
+      "raw_seconds": 11.168798185941043,
+      "speech_window_seconds": 11.168798185941043,
+      "tempo": 1.1573884130508851,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Uprostřed stojí svatyně s vysokou nástavbou. Při tvarování profilu bylo nutné chránit objem pod nejvyššími prvky.",
+      "raw_seconds": 9.833650793650794,
+      "speech_window_seconds": 9.833650793650794,
+      "tempo": 1.0190311703265071,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Kolem nádvoří jsou galerie a svatyně ve skalní stěně. Samostatná budova a komora vyhloubená do stěny řeší příbuzné, ale různé úkoly.",
+      "raw_seconds": 11.609977324263038,
+      "speech_window_seconds": 11.609977324263038,
+      "tempo": 1.2031064584728537,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Podívejme se znovu na vzduch mezi nimi. Zaměření studuje zbytek, rekonstrukce těžby odhaduje i kámen, který tyto prostory dříve vyplňoval.",
+      "raw_seconds": 11.679637188208616,
+      "speech_window_seconds": 11.679637188208616,
+      "tempo": 1.2103250972236907,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Hrubá pracovní plocha a hotový ornament odpovídají na různé otázky. Jedna se týká přístupu a postupu, druhá zamýšleného výsledku.",
+      "raw_seconds": 11.853786848072563,
+      "speech_window_seconds": 11.853786848072563,
+      "tempo": 1.2283716941007836,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Nedokončené skalní památky mohou objasnit fáze. Srovnání pomáhá, ale cizí stopy nelze vydávat za přímý záznam práce na Kailáse.",
+      "raw_seconds": 12.26013605442177,
+      "speech_window_seconds": 12.26013605442177,
+      "tempo": 1.2704804201473336,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Rekonstrukce nesmí zacházet se skálou jako s hlínou. Tíha, pukliny, pracovní prostor a měnící se zbylý tvar zůstávají důležité.",
+      "raw_seconds": 11.435827664399094,
+      "speech_window_seconds": 11.435827664399094,
+      "tempo": 1.185059861595761,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "S těmito podmínkami vytvořme možnou sekvenci. Vysvětluje práci shora dolů, aniž určuje každý historický pohyb.",
+      "raw_seconds": 9.984580498866213,
+      "speech_window_seconds": 9.984580498866213,
+      "tempo": 1.0346715542866542,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Představme si svah před nádvořím. Požadovaná výška střechy a dostupná skála omezovaly možné umístění chrámu.",
+      "raw_seconds": 9.531791383219955,
+      "speech_window_seconds": 9.531791383219955,
+      "tempo": 0.9877504024062129,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Nejvyšší prvek musel být uvnitř původní hmoty. Když první řezy klesly příliš nízko, ztracenou výšku už nešlo vytesat zpět.",
+      "raw_seconds": 11.447437641723356,
+      "speech_window_seconds": 11.447437641723356,
+      "tempo": 1.1862629680542338,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Jednotný návrh potřebuje linie a výškové reference. Šňůry, měřidla a zaměřování jsou možné pomůcky, ale přesné uspořádání se nedochovalo.",
+      "raw_seconds": 12.469115646258503,
+      "speech_window_seconds": 12.469115646258503,
+      "tempo": 1.2921363363998448,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Model ponechává velkou zásobu kamene. Jemné hrany nejsou odkryty dříve, než má okolní práce kontrolovaný postup.",
+      "raw_seconds": 10.24,
+      "speech_window_seconds": 10.24,
+      "tempo": 1.061139896373057,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Řezy dolů kolem rezervy ji mohou oddělovat od svahu. Příkopy otevírají pracovní plochy, zatímco budoucí architektura zůstává uprostřed.",
+      "raw_seconds": 12.213696145124716,
+      "speech_window_seconds": 12.213696145124716,
+      "tempo": 1.2656679943134421,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Hrubé odstraňování nemusí vše měnit v prach. Kde to hornina umožní, je oddělování kusů účinnější než dokončování každé plochy.",
+      "raw_seconds": 11.215238095238096,
+      "speech_window_seconds": 11.215238095238096,
+      "tempo": 1.1622008388847767,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Oddělování musí zůstat řízené. Nechtěná trhlina může z odpadu přejít do římsy, pilíře nebo střechy, které měly zůstat.",
+      "raw_seconds": 10.820498866213152,
+      "speech_window_seconds": 10.820498866213152,
+      "tempo": 1.1212952192966996,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Každý odlomený kus musí pryč z pracoviště. Příkop plný suti rychle ztratí přístup, který těžba právě vytvořila.",
+      "raw_seconds": 9.763990929705216,
+      "speech_window_seconds": 9.763990929705216,
+      "tempo": 1.01181253157567,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Práce shora odhalí horní profil před úplným otevřením spodku. Zbylá skála může dočasně poskytovat přístup.",
+      "raw_seconds": 9.543401360544218,
+      "speech_window_seconds": 9.543401360544218,
+      "tempo": 0.9889535088646858,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Je to posloupnost, ne jeden zázračný řez. Každé malé odstranění mění budoucí stavbu i její pracovní okolí.",
+      "raw_seconds": 9.822040816326531,
+      "speech_window_seconds": 9.822040816326531,
+      "tempo": 1.0178280638680344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Uvažujme vyloženou římsu. Při tvarování musí zůstat dost kamene pod ní a vedle, zvláště poblíž přirozených puklin.",
+      "raw_seconds": 10.228390022675738,
+      "speech_window_seconds": 10.228390022675738,
+      "tempo": 1.0599367899145842,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Hrubá práce a dokončení mají jiné cíle. Přebytek se odstraňuje kvůli prostoru; jemné profily vznikají, kde dovolí přístup a stabilita.",
+      "raw_seconds": 11.946666666666667,
+      "speech_window_seconds": 11.946666666666667,
+      "tempo": 1.2379965457685664,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Shora dolů neznamená všechny skupiny ve stejné výšce. Jednotlivé oblasti mohou postupovat odlišně, pokud geometrie zůstává sladěná.",
+      "raw_seconds": 11.551927437641723,
+      "speech_window_seconds": 11.551927437641723,
+      "tempo": 1.1970909261804894,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "S hloubkou je koordinace těžší. Pracovník horní hrany musí rozumět sálu, otvoru nebo podpoře, které později vzniknou pod ním.",
+      "raw_seconds": 10.7740589569161,
+      "speech_window_seconds": 10.7740589569161,
+      "tempo": 1.1164827934628083,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Malé polohové chyby se mohou sčítat. Opakované kontroly směru a výšky jsou rozumné, i když přesná stará měřická rutina zůstává neznámá.",
+      "raw_seconds": 12.039546485260772,
+      "speech_window_seconds": 12.039546485260772,
+      "tempo": 1.2476213974363493,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Vnitřek přidává další operaci. Komora odstraňuje kámen z ponechané hmoty. Stěny, strop a sloupy musíme řešit společně.",
+      "raw_seconds": 10.62312925170068,
+      "speech_window_seconds": 10.62312925170068,
+      "tempo": 1.1008424095026612,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Skalní sloup vzniká odstraněním okolí. Jeho rozměry závisejí také na požadavcích stropu, nejen na kráse profilu.",
+      "raw_seconds": 9.787210884353742,
+      "speech_window_seconds": 9.787210884353742,
+      "tempo": 1.0142187444926158,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Strop je ponechaný kámen nad prostorem. Širší otvor mění jeho namáhání, zejména u puklin a tenčích částí.",
+      "raw_seconds": 10.147120181405896,
+      "speech_window_seconds": 10.147120181405896,
+      "tempo": 1.0515150447052741,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Vnější výstupek má jinou geometrii zatížení. Samotná pevnost v tlaku nečiní každý kamenný tvar stejně bezpečným.",
+      "raw_seconds": 10.425759637188209,
+      "speech_window_seconds": 10.425759637188209,
+      "tempo": 1.0803895997086226,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Sloni vytesaní u základny monument obohacují. Jsou to kamenné obrazy v architektonické hmotě, nikoli živá zvířata nesoucí budovu.",
+      "raw_seconds": 11.935056689342403,
+      "speech_window_seconds": 11.935056689342403,
+      "tempo": 1.2367934393100934,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Pro zatížení je tento rozdíl důležitý. Studujme kamenné jádro a vazby, neproměňujme sochařský příběh v konstrukční schéma.",
+      "raw_seconds": 10.286439909297052,
+      "speech_window_seconds": 10.286439909297052,
+      "tempo": 1.0659523222069482,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "S otvíráním prostorů se mění světlo. Vnější stěna, stinný sál a úzký průchod potřebují jiné řešení hloubky a viditelných detailů.",
+      "raw_seconds": 11.54031746031746,
+      "speech_window_seconds": 11.54031746031746,
+      "tempo": 1.1958878197220166,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Hotové uspořádání slouží uctívání i pohybu. Rekonstrukce práce musí zohlednit účel chrámu a jeho symbolický řád.",
+      "raw_seconds": 10.553469387755102,
+      "speech_window_seconds": 10.553469387755102,
+      "tempo": 1.0936237707518242,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Nandiho pavilon do uspořádání patří. Vztah k hlavní svatyni ukazuje, proč nestačilo plánovat jednotlivé izolované tvary.",
+      "raw_seconds": 10.820498866213152,
+      "speech_window_seconds": 10.820498866213152,
+      "tempo": 1.1212952192966996,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Kamenná spojení ztěžují plánování. Model nemůže kouzlem vrátit propojení, když už odstranil potřebnou skálu.",
+      "raw_seconds": 9.903310657596371,
+      "speech_window_seconds": 9.903310657596371,
+      "tempo": 1.0262498090773442,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Vnější odtěžování a vnitřní hloubení spolu souvisejí. Místní pořadí se může měnit, ale obě práce musí zachovat to, co potřebuje druhá.",
+      "raw_seconds": 12.19047619047619,
+      "speech_window_seconds": 12.19047619047619,
+      "tempo": 1.2632617813964964,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Otvory ovlivňují také provoz staveniště. Dveře vhodné pro hotový chrám mohou být nepohodlné pro dřívější odvoz suti.",
+      "raw_seconds": 10.042630385487529,
+      "speech_window_seconds": 10.042630385487529,
+      "tempo": 1.0406870865790185,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Každý úkol vyžaduje jiný pohyb. Rozbíjení přebytku, vytváření roviny a dokončování hrany nejsou jedna zaměnitelná scéna s kladivem.",
+      "raw_seconds": 12.387845804988663,
+      "speech_window_seconds": 12.387845804988663,
+      "tempo": 1.283714591190535,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Železné nástroje odpovídají technickému kontextu. Ilustrace však nevydává vymyšlenou soupravu za skutečný nález z Kailásy.",
+      "raw_seconds": 10.634739229024943,
+      "speech_window_seconds": 10.634739229024943,
+      "tempo": 1.102045515961134,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Nástroje se opotřebují. Ostření, výměny a zásobování patří do vysvětlení. Konkrétní dílna nebo cyklus oprav potřebuje vlastní důkazy.",
+      "raw_seconds": 12.062766439909296,
+      "speech_window_seconds": 12.062766439909296,
+      "tempo": 1.250027610353295,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Pracovní síla je víc než počet lidí. Vytyčení, tesání, dokončování, nošení a údržba nástrojů potřebují různé dovednosti a koordinaci.",
+      "raw_seconds": 12.283356009070294,
+      "speech_window_seconds": 12.283356009070294,
+      "tempo": 1.2728866330642792,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Materiál můžeme modelovat bez znalosti celkového urobku. Nejprve rozlišme objem horniny a její hmotnost.",
+      "raw_seconds": 9.206712018140589,
+      "speech_window_seconds": 9.206712018140589,
+      "tempo": 0.954063421568973,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Předpokládejme dvě celé a osm desetin tuny na krychlový metr kompaktní horniny. Je to ilustrační hustota, nikoli měření chrámu.",
+      "raw_seconds": 10.750839002267574,
+      "speech_window_seconds": 10.750839002267574,
+      "tempo": 1.1140765805458626,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Pak sto krychlových metrů váží dvě stě osmdesát tun. Výpočet popisuje příklad, ne ověřené celkové odtěžení Kailásy.",
+      "raw_seconds": 10.402539682539683,
+      "speech_window_seconds": 10.402539682539683,
+      "tempo": 1.0779833867916768,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Volná suť obsahuje mezery. Její dopravní objem se liší od kompaktní skály a komplikuje odhady pouze podle kapacity vozů.",
+      "raw_seconds": 10.309659863945578,
+      "speech_window_seconds": 10.309659863945578,
+      "tempo": 1.068358535123894,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Tempo potřebuje rozsah práce, stav horniny, nástroje, přístup, dopravní vzdálenost a čas dokončování i oprav.",
+      "raw_seconds": 10.054240362811791,
+      "speech_window_seconds": 10.054240362811791,
+      "tempo": 1.0418901930374913,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Hloubka tyto podmínky mění. Pohodlná horní cesta může zmizet, zatímco spodní průchod se otevře až později.",
+      "raw_seconds": 9.438911564625851,
+      "speech_window_seconds": 9.438911564625851,
+      "tempo": 0.9781255507384301,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Přesvědčivá rekonstrukce spojuje etapy. Kámen nemizí, lidé potřebují přístup a konstrukce musí zůstat podepřená.",
+      "raw_seconds": 10.379319727891156,
+      "speech_window_seconds": 10.379319727891156,
+      "tempo": 1.075577173874731,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Horní architektura se nyní vynořuje. Úspěchem není jen obrys, ale posloupnost, která umožňuje další operaci.",
+      "raw_seconds": 10.216780045351474,
+      "speech_window_seconds": 10.216780045351474,
+      "tempo": 1.0587336834561112,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "První překážkou je obtížné vracení odstraněného materiálu. Chyba může změnit dostupný tvar ještě před dosažením cílového povrchu.",
+      "raw_seconds": 11.412607709750567,
+      "speech_window_seconds": 11.412607709750567,
+      "tempo": 1.1826536486788153,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Kámen lze opravit a moderní konzervace změnila některé plochy. Nahrazení ztraceného kusu se však liší od uchování původní souvislé skály.",
+      "raw_seconds": 12.271746031746032,
+      "speech_window_seconds": 12.271746031746032,
+      "tempo": 1.2716835266058064,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Skrytá puklina je další překážka. Rozhoduje, kde prochází ponechaným kamenem, nejen její existence někde poblíž.",
+      "raw_seconds": 10.263219954648527,
+      "speech_window_seconds": 10.263219954648527,
+      "tempo": 1.0635461092900027,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Rezerva při hrubé práci zachovává možnosti. Její pozdější odstranění vyžaduje nové posouzení tvaru, pevnosti a odkryté kvality horniny.",
+      "raw_seconds": 11.935056689342403,
+      "speech_window_seconds": 11.935056689342403,
+      "tempo": 1.2367934393100934,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Malá ukázka vysvětlí princip, neověří celý monument. Měřítko mění následky trhlin, rozpětí a padajících úlomků.",
+      "raw_seconds": 10.402539682539683,
+      "speech_window_seconds": 10.402539682539683,
+      "tempo": 1.0779833867916768,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Kámen může dobře nést tlak a být zranitelný jinak. Ohyb, tah a pukliny jsou důležité při uvolnění střech a výstupků.",
+      "raw_seconds": 10.62312925170068,
+      "speech_window_seconds": 10.62312925170068,
+      "tempo": 1.1008424095026612,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Dlouhé rozpětí není jen zvětšené krátké. Tloušťku, pozice podpor a skutečnou strukturu skály je nutné hodnotit společně.",
+      "raw_seconds": 10.576689342403627,
+      "speech_window_seconds": 10.576689342403627,
+      "tempo": 1.0960299836687697,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Stejná trhlina může být neškodná v široké hmotě, ale vážná u hrany. Geometrii a geologii musíme číst společně.",
+      "raw_seconds": 10.158730158730158,
+      "speech_window_seconds": 10.158730158730158,
+      "tempo": 1.052718151163747,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Potom přijde déšť. Hluboké nádvoří mění přítok a hromadění vody. Nedokončené práce také patří do sezónní krajiny.",
+      "raw_seconds": 10.309659863945578,
+      "speech_window_seconds": 10.309659863945578,
+      "tempo": 1.068358535123894,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Voda sleduje pukliny a nerovnosti. Krásný suchý model nesmí zakrýt proměnlivé podmínky odkrytého svahu.",
+      "raw_seconds": 9.369251700680271,
+      "speech_window_seconds": 9.369251700680271,
+      "tempo": 0.9709069119875928,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Odklízení suti a odvodnění si mohou překážet. Špatně uložený materiál uzavře pracovní cestu i průtok vody.",
+      "raw_seconds": 9.508571428571429,
+      "speech_window_seconds": 9.508571428571429,
+      "tempo": 0.9853441894892672,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Konzervační záznamy popisují odvodnění a opravy v Éllóře. Viditelný kanál nebo záplata proto mohou mít pozdější historii.",
+      "raw_seconds": 11.099138321995465,
+      "speech_window_seconds": 11.099138321995465,
+      "tempo": 1.150169774300048,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Přístup je také výzva. Zbylá skála může být plošinou, ale nedokazuje to, že lešení či dočasné podpory nikdy nebyly potřeba.",
+      "raw_seconds": 10.727619047619047,
+      "speech_window_seconds": 10.727619047619047,
+      "tempo": 1.1116703676289168,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "S hotovými plochami a otevřeným spodkem se mění pracoviště. Postup musí ukázat, jak se tam lidé dostanou, bez levitujících nástrojů.",
+      "raw_seconds": 11.853786848072563,
+      "speech_window_seconds": 11.853786848072563,
+      "tempo": 1.2283716941007836,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Horní práce ohrožuje lidi i hotové části dole. Ilustrace odděluje tesání od úklidu a nehází kameny přes používaný dvůr.",
+      "raw_seconds": 10.646349206349207,
+      "speech_window_seconds": 10.646349206349207,
+      "tempo": 1.103248622419607,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Oddělení potřebuje koordinaci. Signály, přestávky a dohodnuté oblasti jsou méně působivé než věž, ale patří do vysvětlení.",
+      "raw_seconds": 10.669569160997732,
+      "speech_window_seconds": 10.669569160997732,
+      "tempo": 1.1056548353365525,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Stejně tak zásoby. Jídlo, voda, dřevo, kov a udržované nástroje musí dorazit správně, i když se díváme hlavně na ponechaný kámen.",
+      "raw_seconds": 11.528707482993198,
+      "speech_window_seconds": 11.528707482993198,
+      "tempo": 1.1946847132635439,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Jde o odbornou práci rozdělenou podle úkolů. Anonymní dav nevysvětluje rozhodnutí mezi hrubým vyhloubením a dobře vyváženou svatyní.",
+      "raw_seconds": 11.551927437641723,
+      "speech_window_seconds": 11.551927437641723,
+      "tempo": 1.1970909261804894,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Nevymýšlejme ani identity a smlouvy pracovníků. Monument ukazuje velké lidské úsilí, ale neuchovává životopis a postavení každého člověka.",
+      "raw_seconds": 12.759365079365079,
+      "speech_window_seconds": 12.759365079365079,
+      "tempo": 1.322213997861666,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Roční doby nedávají přesný kalendář. Déšť, přístup, podpora a opravy jsou významné proměnné, ne nalezený harmonogram.",
+      "raw_seconds": 10.565079365079365,
+      "speech_window_seconds": 10.565079365079365,
+      "tempo": 1.094826877210297,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Můžeme požadovat vnitřní soulad. Každý řez musí ponechat místo pro nástroje, nosnou skálu a cestu pro odpad.",
+      "raw_seconds": 9.93814058956916,
+      "speech_window_seconds": 9.93814058956916,
+      "tempo": 1.0298591284527627,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Architektonický výzkum porovnává i části celku. Rozdíly mohou pomoci datování, ale automaticky neodhalí pořadí jednoho dne práce.",
+      "raw_seconds": 11.842176870748299,
+      "speech_window_seconds": 11.842176870748299,
+      "tempo": 1.2271685876423106,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Éllóra má další skalní chrámy, včetně pozdější Malé Kailásy. Tento příběh patří jeskyni šestnáct a obrazy se nesmějí míchat.",
+      "raw_seconds": 11.250068027210885,
+      "speech_window_seconds": 11.250068027210885,
+      "tempo": 1.1658101582601952,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "I na jednom nádvoří je třeba určit sochařské plochy. Působivý detail může říci málo o původním pořadí tesání.",
+      "raw_seconds": 10.112290249433107,
+      "speech_window_seconds": 10.112290249433107,
+      "tempo": 1.0479057253298556,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Obrazy vyvolávají posvátný svět. Kulturní program vysvětluje ambici monumentu, ale není doslovným záznamem dílny.",
+      "raw_seconds": 10.704399092970522,
+      "speech_window_seconds": 10.704399092970522,
+      "tempo": 1.1092641547119713,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Náboženská scéna a schéma řezu mají různé účely. Můžeme oceňovat obojí a odlišovat symbol od konkrétního technického tvrzení.",
+      "raw_seconds": 11.749297052154194,
+      "speech_window_seconds": 11.749297052154194,
+      "tempo": 1.2175437359745278,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Populární příběhy přeskakují z plného kopce k hotovému chrámu. Právě v chybějícím středu jsou skutečné technické otázky.",
+      "raw_seconds": 10.50702947845805,
+      "speech_window_seconds": 10.50702947845805,
+      "tempo": 1.0888113449179326,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Přesné tonáže a úžasné termíny potřebují doložená měření a zdroje. Opakované číslo na obrazovce se nestává archeologickým pozorováním.",
+      "raw_seconds": 11.95827664399093,
+      "speech_window_seconds": 11.95827664399093,
+      "tempo": 1.2391996522270392,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Odhad objemu vyžaduje původní povrch svahu a zachovaný tvar. Nejistota ztraceného povrchu se přenáší do výsledku.",
+      "raw_seconds": 9.810430839002267,
+      "speech_window_seconds": 9.810430839002267,
+      "tempo": 1.0166249574095614,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Sledování odpadního kamene je samostatný výzkum. Ne každý blízký úlomek je antický odpad Kailásy bez prokázaného kontextu a souvislosti.",
+      "raw_seconds": 12.097596371882085,
+      "speech_window_seconds": 12.097596371882085,
+      "tempo": 1.2536369297287135,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Tyto hranice nebrání porozumění. Rozlišují geometrické otázky od těch, které vyžadují silnější historické nebo materiálové důkazy.",
+      "raw_seconds": 11.644807256235827,
+      "speech_window_seconds": 11.644807256235827,
+      "tempo": 1.2067157778482722,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Moderní opravy poskytují další kontrolu. Dnešní povrchy prošly zvětráváním, údržbou a zásahy dlouho po prvním opracování.",
+      "raw_seconds": 11.04108843537415,
+      "speech_window_seconds": 11.04108843537415,
+      "tempo": 1.1441542420076838,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Opravná spára není původní montáž. Ani monolitické jádro nesmí zastřít pozdější dějiny celého komplexu.",
+      "raw_seconds": 9.392471655328798,
+      "speech_window_seconds": 9.392471655328798,
+      "tempo": 0.9733131249045386,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Rekonstrukce musí rozdíl zachovat. Změřené zbylé tvary zůstávají pevné, nejisté fáze mají být rozpoznatelné jako interpretační modely.",
+      "raw_seconds": 12.654875283446712,
+      "speech_window_seconds": 12.654875283446712,
+      "tempo": 1.3113860397354105,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Je to živé dědictví, ne opuštěná laboratoř. Pochopení vzniku má posílit pozornost k víře, komunitám a péči o místo.",
+      "raw_seconds": 10.286439909297052,
+      "speech_window_seconds": 10.286439909297052,
+      "tempo": 1.0659523222069482,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Porovnejme vysvětlení spravedlivě. Každý postup musí objasnit stejnou skálu, zachovanou architekturu i nutnost odklízení materiálu.",
+      "raw_seconds": 11.470657596371883,
+      "speech_window_seconds": 11.470657596371883,
+      "tempo": 1.1886691809711796,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Porovnejme postavený a vytesaný chrám. První přiváží materiál, druhý zachovává cílovou hmotu a odstraňuje její okolí.",
+      "raw_seconds": 10.669569160997732,
+      "speech_window_seconds": 10.669569160997732,
+      "tempo": 1.1056548353365525,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "První zdůrazňuje dopravu a spoje. Druhý výběr skály, pořadí odstraňování, přístup a nakládání s nežádoucím materiálem.",
+      "raw_seconds": 11.6215873015873,
+      "speech_window_seconds": 11.6215873015873,
+      "tempo": 1.2043095649313265,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Porovnejme skalní komoru a samostatný chrám na nádvoří. Oba odstraňují kámen, ale jinak uspořádávají světlo a pracovní plochy.",
+      "raw_seconds": 11.493877551020407,
+      "speech_window_seconds": 11.493877551020407,
+      "tempo": 1.1910753938881251,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Pro Kailásu je okolní odtěžení zásadní. Ukazuje architekturu viditelnou kolem dokola, ne jen interiér za fasádou.",
+      "raw_seconds": 10.634739229024943,
+      "speech_window_seconds": 10.634739229024943,
+      "tempo": 1.102045515961134,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Princip shora dolů tomuto úkolu odpovídá. Horní forma vede spodní odstraňování a ponechává kámen pro další prvky.",
+      "raw_seconds": 10.588299319727891,
+      "speech_window_seconds": 10.588299319727891,
+      "tempo": 1.0972330901272427,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Obecná zásada není úplný kalendář. Souběžné práce, místní úpravy a odlišné dokončování mohou patřit do složitějšího projektu.",
+      "raw_seconds": 12.399455782312925,
+      "speech_window_seconds": 12.399455782312925,
+      "tempo": 1.2849176976490078,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Tvary náležejí širší stavební kultuře. Představy o svatyních, sálech, věžích a ozdobách sahaly za hranice tohoto svahu.",
+      "raw_seconds": 10.344489795918367,
+      "speech_window_seconds": 10.344489795918367,
+      "tempo": 1.0719678544993125,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Jiné indické skalní tradice poskytují kontext. Srovnání nedokazuje konkrétní cestu určité skupiny nebo výkresu.",
+      "raw_seconds": 9.961360544217687,
+      "speech_window_seconds": 9.961360544217687,
+      "tempo": 1.0322653413697085,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Vytesaný pás může připomínat zděnou řadu. Podobný vzhled nedokazuje skládání. Povrch musíme číst v konstrukčním kontextu.",
+      "raw_seconds": 11.23845804988662,
+      "speech_window_seconds": 11.23845804988662,
+      "tempo": 1.1646070518017224,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Posvátná hora dává odstraňování širší význam. Místo spojené se Šivou se zpřítomňuje horou přetvořenou v chrám.",
+      "raw_seconds": 9.880090702947847,
+      "speech_window_seconds": 9.880090702947847,
+      "tempo": 1.0238435961603987,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Královská podpora a dovednosti vysvětlují ambici. Historické přiřazení dává rámec, ale ponechává organizaci a fáze částečně otevřené.",
+      "raw_seconds": 12.167256235827665,
+      "speech_window_seconds": 12.167256235827665,
+      "tempo": 1.2608555684795508,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Jak dlouho trvala celá práce? Přesná odpověď vyžaduje určit, které fáze, plochy a druhy úkolů započítáváme.",
+      "raw_seconds": 10.298049886621316,
+      "speech_window_seconds": 10.298049886621316,
+      "tempo": 1.0671554286654212,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Kolik lidí bylo potřeba? Odhad mění výkonnost, doprava, údržba a počet skupin schopných pracovat bez vzájemného překážení.",
+      "raw_seconds": 10.994648526077098,
+      "speech_window_seconds": 10.994648526077098,
+      "tempo": 1.1393418161737925,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Také stopa nástroje má hranice. Může ukázat kontakt a směr, ale málokdy sama poskytne datování a celé dějiny práce.",
+      "raw_seconds": 11.087528344671203,
+      "speech_window_seconds": 11.087528344671203,
+      "tempo": 1.1489666678415753,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Moderní zaměření zpřesňuje geometrii. Měření hotového chrámu automaticky neobnoví původní plán řezů.",
+      "raw_seconds": 9.566621315192744,
+      "speech_window_seconds": 9.566621315192744,
+      "tempo": 0.9913597217816315,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Užitečný výzkum propojí geologii, nedokončené prvky, stavební vztahy, staré záznamy a modely odstraňování s jasnými předpoklady.",
+      "raw_seconds": 11.633197278911565,
+      "speech_window_seconds": 11.633197278911565,
+      "tempo": 1.2055126713897995,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Cílem není působivější animace. Hledejme pořadí, které vysvětlí více dochovaných důkazů s méně nepodloženými předpoklady.",
+      "raw_seconds": 10.878548752834467,
+      "speech_window_seconds": 10.878548752834467,
+      "tempo": 1.127310751589064,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Co víme jistě? Hlavní skalní architektura vznikla selektivním odstraňováním. Ponechaný kámen se stal prostory, podporami a povrchy chrámu.",
+      "raw_seconds": 12.097596371882085,
+      "speech_window_seconds": 12.097596371882085,
+      "tempo": 1.2536369297287135,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Vraťme se k začátku. Chrám je stále monumentální, ale vzduch kolem teď vypráví příběh stejně důležitý jako kámen.",
+      "raw_seconds": 10.518639455782314,
+      "speech_window_seconds": 10.518639455782314,
+      "tempo": 1.0900144513764054,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Vzduch představuje volby mezi odstraněním a zachováním. Každá hrana závisí na širším postupu, který umožnil další.",
+      "raw_seconds": 10.356099773242631,
+      "speech_window_seconds": 10.356099773242631,
+      "tempo": 1.0731709609577855,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Příkop, volná pracovní plocha, otvor a prostor kolem hotového tvaru: řada prázdných míst může být nejvýmluvnějším obrazem.",
+      "raw_seconds": 11.250068027210885,
+      "speech_window_seconds": 11.250068027210885,
+      "tempo": 1.1658101582601952,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Volby nesly umělecké a náboženské záměry. Technika vysvětluje vznik prostorů, kulturní výzkum jejich význam.",
+      "raw_seconds": 9.97297052154195,
+      "speech_window_seconds": 9.97297052154195,
+      "tempo": 1.0334684478281813,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Geologie stanovila podmínky. Řemeslo je změnilo ve volby. Materiál ani návrh sám nevysvětlí celý úspěch.",
+      "raw_seconds": 9.624671201814058,
+      "speech_window_seconds": 9.624671201814058,
+      "tempo": 0.9973752540739956,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Chybějící suť připomíná práci mimo sochařovu ruku: úklid, nošení, zásobování, kontrolu, údržbu a koordinaci v měnících se výškách.",
+      "raw_seconds": 12.852244897959183,
+      "speech_window_seconds": 12.852244897959183,
+      "tempo": 1.331838849529449,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "Rozpoznání organizace neumenšuje úžas. Výkon je lidský: znalosti a opakované praktické volby jsou stejně důležité jako síla.",
+      "raw_seconds": 11.215238095238096,
+      "speech_window_seconds": 11.215238095238096,
+      "tempo": 1.1622008388847767,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "Ochrana Kailásy dnes vyžaduje jinou trpělivost. Dokumentace a pozornost ke kameni, vodě a starým opravám chrání složitou historii.",
+      "raw_seconds": 11.77251700680272,
+      "speech_window_seconds": 11.77251700680272,
+      "tempo": 1.2199499488914736,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "Co byste zkoumali dál: horní profil, stěny nádvoří, vnitřní podpory, nebo stopy dopravy suti?",
+      "raw_seconds": 8.382403628117913,
+      "speech_window_seconds": 8.382403628117913,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 133,
+      "text": "Každá volba ověřuje jinou část. Velká otázka se stane zkoumatelnou, když určíme povrch či vztah, který může odpovědět.",
+      "raw_seconds": 10.669569160997732,
+      "speech_window_seconds": 10.669569160997732,
+      "tempo": 1.1056548353365525,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 134,
+      "text": "Nemůžeme jistě popsat každý starý úder. Chápeme však, proč byly důležité dostatečný kámen, volné místo a sladěné fáze.",
+      "raw_seconds": 11.00625850340136,
+      "speech_window_seconds": 11.00625850340136,
+      "tempo": 1.1405449226322653,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 135,
+      "text": "Horu nenahradil jednoduše chrám. Její část se stala chrámem. Která dochovaná stopa nejlépe odhalí další krok proměny?",
+      "raw_seconds": 9.949750566893425,
+      "speech_window_seconds": 9.949750566893425,
+      "tempo": 1.0310622349112357,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1352,
+  "decoded_samples": 32448000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-cs-22m32s.mp3",
+  "flac": "voice-cs-22m32s.flac",
+  "mp3_sha256": "b6872e1947b2c1ebfa18cce3bd931bd847de0c63643700accf5ac5aefc96a548",
+  "flac_sha256": "1718aeec1ccd9f0c4a73d449bdeeb8f2d5bbc739a9cfa436d05bf7d75959c706"
+}

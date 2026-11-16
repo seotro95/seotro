@@ -1,0 +1,1236 @@
+{
+  "locale": "no",
+  "voice_id": "piper:no_NO-talesyntese-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1352,
+  "spoken_cues": 135,
+  "closing_silence_seconds": 2,
+  "config_hash": "ca9449707a2f2922a2122a3775cfea0ffc4be3940c0c5208c2939e7661d8841e",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "I Kailasa står et tempel i en uthult fjellside. Første spørsmål er ikke hva som kom dit, men hva som ble fjernet.",
+      "raw_seconds": 5.410249433106576,
+      "speech_window_seconds": 5.410249433106576,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Tårn, haller og skulpturer begynte inne i fjellet. For å forstå dem må vi også se materialet som har forsvunnet rundt dem.",
+      "raw_seconds": 5.677278911564626,
+      "speech_window_seconds": 5.677278911564626,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Hvordan fjernet man fjellets overflate og bevarte bygningen inni? Følg kuttene fra den øvre steinen mot rommene nedenfor.",
+      "raw_seconds": 5.723718820861678,
+      "speech_window_seconds": 5.723718820861678,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Vi er i Ellora i Maharashtra, vest i India. En lang basaltvegg rommer buddhistiske, hinduistiske og jainistiske monumenter.",
+      "raw_seconds": 7.453605442176871,
+      "speech_window_seconds": 7.453605442176871,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Kailasa er hule seksten i anlegget. Likevel står hovedtempelet i dagslys, omgitt av en uthugd gårdsplass.",
+      "raw_seconds": 5.723718820861678,
+      "speech_window_seconds": 5.723718820861678,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Tempelet er viet til Shiva. Navnet viser til det hellige fjellet Kailasa og gir den skulpturerte fjellmassen arkitektonisk og religiøs mening.",
+      "raw_seconds": 7.024036281179138,
+      "speech_window_seconds": 7.024036281179138,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Hovedarbeidet knyttes vanligvis til det åttende århundret og Rashtrakutakongen Krishna den første. Hele stedets historie strekker seg over flere århundrer.",
+      "raw_seconds": 7.48843537414966,
+      "speech_window_seconds": 7.48843537414966,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Denne tilskrivningen gir historisk bakgrunn, ingen daglig arbeidsplan. Kongelig støtte, byggefaser og arbeidet til enkelte lag er forskjellige spørsmål.",
+      "raw_seconds": 7.523265306122449,
+      "speech_window_seconds": 7.523265306122449,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Materialet er vulkansk basalt. Gamle lavastrømmer inneholder ulike strukturer og sprekker. Hele skråningen er ikke én fullstendig ensartet stein.",
+      "raw_seconds": 7.964444444444444,
+      "speech_window_seconds": 7.964444444444444,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "For byggerne hørte geologien til planleggingen. Berget måtte bære tak, romme fine detaljer og tåle uthoggingen.",
+      "raw_seconds": 5.863038548752835,
+      "speech_window_seconds": 5.863038548752835,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "De trengte også arbeidsplass og et sted for steinavfallet. Å fjerne stein skaper en bygning, men også en vedvarende transportoppgave.",
+      "raw_seconds": 6.176507936507937,
+      "speech_window_seconds": 6.176507936507937,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Vi følger tre oppgaver: bestemme hva som skal bli, fjerne omgivelsene og beskytte den bevarte konstruksjonen gjennom hele arbeidet.",
+      "raw_seconds": 6.002358276643991,
+      "speech_window_seconds": 6.002358276643991,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Begynn med veggene rundt gården. Høyden og plasseringen viser uthoggingen. Dette åpne rommet var en gang del av en større fjellmasse.",
+      "raw_seconds": 6.246167800453515,
+      "speech_window_seconds": 6.246167800453515,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Vanlig murverk samler blokker. Her oppsto hovedformene ved å la utvalgt stein stå og fjerne materialet ved siden av.",
+      "raw_seconds": 5.921088435374149,
+      "speech_window_seconds": 5.921088435374149,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Indias arkeologiske myndighet forbinder Kailasa med Krishna den første. En senere kobbertekst lovpriser et stort tempel i det gamle Elapura, Ellora.",
+      "raw_seconds": 7.395555555555555,
+      "speech_window_seconds": 7.395555555555555,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Teksten handler om en kongelig bragd. Den er ingen bevart veiledning med dybde, rekkefølge og tidsbruk for hvert enkelt kutt.",
+      "raw_seconds": 6.130068027210885,
+      "speech_window_seconds": 6.130068027210885,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Monumentet gir andre bevis. Bygningsforhold, uferdige flater andre steder og sammenligninger hjelper forskere vurdere mulige arbeidsfølger.",
+      "raw_seconds": 7.697414965986394,
+      "speech_window_seconds": 7.697414965986394,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Basalten oppsto gjennom gjentatte lavastrømmer. En tett kjerne og en sone med gassblærer kan oppføre seg forskjellig når de avdekkes.",
+      "raw_seconds": 6.559637188208617,
+      "speech_window_seconds": 6.559637188208617,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Naturlige sprekker hjelper til med å dele berget, men kan krysse en søyle eller et tak. Nyttige i avfallet, farlige i bevart stein.",
+      "raw_seconds": 6.675736961451247,
+      "speech_window_seconds": 6.675736961451247,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Den offisielle arkeologiske beskrivelsen fremhever bergstrukturen. Nøye observasjon var derfor et praktisk krav, ikke bare en innledende seremoni.",
+      "raw_seconds": 7.534875283446712,
+      "speech_window_seconds": 7.534875283446712,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Før et dypt snitt måtte nok berg reserveres til bygningen. Det planlagte tomrommet og den bevarte konstruksjonen hang uløselig sammen.",
+      "raw_seconds": 6.30421768707483,
+      "speech_window_seconds": 6.30421768707483,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Historiske oppmålinger viser planer og snitt. De dokumenterer monumentet som står igjen, men er ikke byggernes opprinnelige tegninger.",
+      "raw_seconds": 6.2693877551020405,
+      "speech_window_seconds": 6.2693877551020405,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Hovedhelligdom, søylehall, inngang og Nandipaviljong danner et samlet anlegg. Forholdene mellom dem gir modellen et mål før de tenkte kuttene.",
+      "raw_seconds": 6.931156462585034,
+      "speech_window_seconds": 6.931156462585034,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "I midten står helligdommen med sin høye overbygning. For å forme profilen måtte volumet under de høyeste delene beskyttes.",
+      "raw_seconds": 6.42031746031746,
+      "speech_window_seconds": 6.42031746031746,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Rundt gården ligger gallerier og helligdommer i fjellveggen. En frittstående bygning og et kammer i veggen gir ulike oppgaver.",
+      "raw_seconds": 5.863038548752835,
+      "speech_window_seconds": 5.863038548752835,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Se på luften mellom dem igjen. Arkitekturstudiet måler det bevarte; en rekonstruksjon må også anslå berget som tidligere fylte rommene.",
+      "raw_seconds": 6.6873469387755105,
+      "speech_window_seconds": 6.6873469387755105,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "En grov hoggflate og en ferdig dekorasjon svarer på ulike spørsmål. Den ene gjelder tilgang og framdrift, den andre ønsket sluttform.",
+      "raw_seconds": 7.035646258503402,
+      "speech_window_seconds": 7.035646258503402,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Uferdige bergmonumenter kan forklare arbeidsfaser. Sammenligninger hjelper, men spor fra andre steder er ingen direkte arbeidsjournaler fra Kailasa.",
+      "raw_seconds": 7.63936507936508,
+      "speech_window_seconds": 7.63936507936508,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Rekonstruksjonen må ikke behandle berget som myk leire. Vekt, sprekker, arbeidsrom og formen på den gjenværende massen må tas alvorlig.",
+      "raw_seconds": 6.664126984126984,
+      "speech_window_seconds": 6.664126984126984,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Med disse vilkårene bygger vi en mulig rekkefølge. Den forklarer arbeidet ovenfra og ned uten å fastslå hver historiske bevegelse.",
+      "raw_seconds": 6.8034467120181406,
+      "speech_window_seconds": 6.8034467120181406,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Se for deg skråningen før gårdsplassen. Ønsket takhøyde og tilgjengelig berg begrenset hvor tempelet kunne plasseres.",
+      "raw_seconds": 5.561179138321996,
+      "speech_window_seconds": 5.561179138321996,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Den høyeste formen måtte ligge i den opprinnelige massen. Gikk de første snittene for lavt, kunne høyden ikke hogges tilbake.",
+      "raw_seconds": 5.677278911564626,
+      "speech_window_seconds": 5.677278911564626,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "En sammenhengende plan krever linjer og nivåer. Snorer, mål og sikting er mulige hjelpemidler, men den nøyaktige bruken her er ikke bevart.",
+      "raw_seconds": 7.4071655328798185,
+      "speech_window_seconds": 7.4071655328798185,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Modellen etterlater en stor steinreserve. Fine kanter frilegges først når arbeidet omkring har en kontrollert vei videre.",
+      "raw_seconds": 5.584399092970521,
+      "speech_window_seconds": 5.584399092970521,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Nedadgående snitt rundt reserven kan skille den fra skråningen. Grøfter åpner arbeidsflater, mens framtidig arkitektur blir igjen i midten.",
+      "raw_seconds": 6.9543764172335605,
+      "speech_window_seconds": 6.9543764172335605,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Grov fjerning krever ikke at alt blir støv. Der berget tillater det, er deling i stykker mer effektivt enn finarbeid på hver flate.",
+      "raw_seconds": 6.292607709750567,
+      "speech_window_seconds": 6.292607709750567,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Delingen må likevel kontrolleres. En uønsket sprekk kan løpe fra avfallet inn i en gesims, søyle eller et tak som skulle bevares.",
+      "raw_seconds": 6.849886621315193,
+      "speech_window_seconds": 6.849886621315193,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Hvert fjernet stykke må deretter ut. En grøft full av stein mister raskt tilgangen som uthoggingen nettopp skulle skape.",
+      "raw_seconds": 5.5147392290249435,
+      "speech_window_seconds": 5.5147392290249435,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Arbeid ovenfra lar den øvre profilen tre fram før den nedre delen er helt fri. Gjenværende berg kan gi midlertidig tilgang.",
+      "raw_seconds": 6.1184580498866215,
+      "speech_window_seconds": 6.1184580498866215,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Dette er en følge, ikke ett mirakuløst snitt. Hver lille fjerning endrer både den framtidige bygningen og arbeidsmiljøet rundt.",
+      "raw_seconds": 6.292607709750567,
+      "speech_window_seconds": 6.292607709750567,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Tenk på en utstikkende gesims. Under formingen trengs nok stein under og ved siden av, særlig nær naturlige sprekker.",
+      "raw_seconds": 5.979138321995465,
+      "speech_window_seconds": 5.979138321995465,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Grovhogging og sluttarbeid har ulike mål. Overskuddet fjernes for å skape rom; fint arbeid følger der tilgang og stabilitet tillater det.",
+      "raw_seconds": 7.7090249433106575,
+      "speech_window_seconds": 7.7090249433106575,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Ovenfra og ned krever ikke alle lag på samme høyde. Områder kan utvikle seg ulikt hvis geometrien fortsatt er samordnet.",
+      "raw_seconds": 7.558095238095238,
+      "speech_window_seconds": 7.558095238095238,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Jo dypere arbeidet går, desto vanskeligere blir samordningen. Den øvre kanten må passe til hallen, åpningen eller støtten som kommer under.",
+      "raw_seconds": 7.383945578231293,
+      "speech_window_seconds": 7.383945578231293,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Små plasseringsfeil kan vokse. Gjentatte kontroller av retning og høyde er rimelige, selv om den antikke målerutinen er ukjent.",
+      "raw_seconds": 6.42031746031746,
+      "speech_window_seconds": 6.42031746031746,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Innsiden gir en ekstra oppgave. Et kammer fjerner berg fra den reserverte massen. Vegger, tak og søyler må tenkes sammen.",
+      "raw_seconds": 6.524807256235827,
+      "speech_window_seconds": 6.524807256235827,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "En bergsøyle skapes ved å fjerne omgivelsene. Størrelsen avhenger også av takets behov, ikke bare profilens skjønnhet.",
+      "raw_seconds": 6.048798185941043,
+      "speech_window_seconds": 6.048798185941043,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Taket er bevart stein over et rom. En større åpning endrer belastningen, særlig nær sprekker eller tynne partier.",
+      "raw_seconds": 5.642448979591837,
+      "speech_window_seconds": 5.642448979591837,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Et framspring har en annen lastgeometri. God trykkstyrke gjør ikke enhver tenkelig steinform like sikker.",
+      "raw_seconds": 4.934240362811791,
+      "speech_window_seconds": 4.934240362811791,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Elefantene ved sokkelen beriker monumentet. De er steinbilder i en bygningsmasse, ikke levende dyr som bærer tempelet.",
+      "raw_seconds": 6.919546485260771,
+      "speech_window_seconds": 6.919546485260771,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Forskjellen er viktig for lastene. Vi må undersøke steinkjernen og forbindelsene, ikke gjøre en skulpturell fortelling til en konstruksjonstegning.",
+      "raw_seconds": 7.685804988662132,
+      "speech_window_seconds": 7.685804988662132,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Lyset endres når rom åpnes. Yttervegg, skyggefull hall og smal passasje krever ulike valg om dybde og synlige detaljer.",
+      "raw_seconds": 6.873106575963718,
+      "speech_window_seconds": 6.873106575963718,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Den ferdige planen tjener både tilbedelse og bevegelse. En arbeidsrekonstruksjon må også ta hensyn til templets bruk og symbolske orden.",
+      "raw_seconds": 6.849886621315193,
+      "speech_window_seconds": 6.849886621315193,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Nandipaviljongen hører til planen. Forholdet til hovedhelligdommen viser at mer enn enkelte, isolerte bygningsformer var nødvendig.",
+      "raw_seconds": 6.582857142857143,
+      "speech_window_seconds": 6.582857142857143,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Steinforbindelser gjør planleggingen vanskeligere. Modellen kan ikke magisk gjenskape et ledd etter at nødvendig berg er fjernet.",
+      "raw_seconds": 6.048798185941043,
+      "speech_window_seconds": 6.048798185941043,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Ytre uthogging og indre uthuling påvirker hverandre. Rekkefølgen kan variere lokalt, men begge må bevare det den andre trenger.",
+      "raw_seconds": 6.942766439909297,
+      "speech_window_seconds": 6.942766439909297,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Åpninger påvirker også byggeplassens ferdsel. En god dør i det ferdige tempelet kan være vanskelig for tidligere bortføring av stein.",
+      "raw_seconds": 6.443537414965986,
+      "speech_window_seconds": 6.443537414965986,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Ulike oppgaver krever ulike bevegelser. Å bryte overskudd, forme en flate og avslutte en kant er ingen utbyttbar, generell hammerscene.",
+      "raw_seconds": 7.337505668934241,
+      "speech_window_seconds": 7.337505668934241,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Jernredskaper passer den tekniske bakgrunnen. Illustrasjonen viser likevel ikke et oppdiktet verktøysett som et gjenfunnet funn fra Kailasa.",
+      "raw_seconds": 6.873106575963718,
+      "speech_window_seconds": 6.873106575963718,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Verktøy slites. Sliping, utskifting og forsyning hører med. Et bestemt verksted eller en fast reparasjonssyklus trenger egne bevis.",
+      "raw_seconds": 7.349115646258503,
+      "speech_window_seconds": 7.349115646258503,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Arbeidsstyrken er mer enn et tall. Utsetting, hogging, finarbeid, bæring og verktøypleie krever ulike ferdigheter og former for samordning.",
+      "raw_seconds": 7.616145124716553,
+      "speech_window_seconds": 7.616145124716553,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Vi kan modellere materialet uten å kjenne hele den fjernede mengden. Skill først mellom steinens volum og masse.",
+      "raw_seconds": 5.282539682539682,
+      "speech_window_seconds": 5.282539682539682,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Anta at en massiv kubikkmeter veier to komma åtte tonn. Det er et illustrerende tetthetsvalg, ingen måling av tempelet.",
+      "raw_seconds": 5.932698412698413,
+      "speech_window_seconds": 5.932698412698413,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Da vil hundre kubikkmeter veie to hundre og åtti tonn. Beregningen gjelder eksemplet, ikke en verifisert samlet uthogging i Kailasa.",
+      "raw_seconds": 6.466757369614513,
+      "speech_window_seconds": 6.466757369614513,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Løst steinavfall inneholder mellomrom. Transportvolumet er annerledes enn massiv stein og kompliserer beregninger etter vognkapasitet.",
+      "raw_seconds": 6.582857142857143,
+      "speech_window_seconds": 6.582857142857143,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "En arbeidstakt krever omfang, bergforhold, verktøy, tilgang, bæreavstand og tid til finarbeid og reparasjon.",
+      "raw_seconds": 6.280997732426304,
+      "speech_window_seconds": 6.280997732426304,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Dybden endrer vilkårene. En enkel øvre vei kan forsvinne, mens en lavere passasje først blir tilgjengelig senere.",
+      "raw_seconds": 5.456689342403628,
+      "speech_window_seconds": 5.456689342403628,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "En troverdig rekonstruksjon forbinder trinnene. Berget forsvinner ikke, folk må komme til, og konstruksjonen må fortsatt støttes.",
+      "raw_seconds": 6.443537414965986,
+      "speech_window_seconds": 6.443537414965986,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Den øvre arkitekturen begynner nå å vise seg. Bragden er ikke bare konturen, men en rekkefølge som muliggjør neste operasjon.",
+      "raw_seconds": 6.222947845804988,
+      "speech_window_seconds": 6.222947845804988,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Her kommer det første hinderet: fjerning er vanskelig å gjøre om. En feil kan endre tilgjengelig form før ønsket overflate nås.",
+      "raw_seconds": 6.141678004535147,
+      "speech_window_seconds": 6.141678004535147,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Stein kan repareres, og moderne bevaring har endret overflater. Å erstatte et tapt stykke er likevel annerledes enn å bevare opprinnelig sammenhengende berg.",
+      "raw_seconds": 7.778684807256236,
+      "speech_window_seconds": 7.778684807256236,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "En skjult sprekk er et annet hinder. Virkningen avhenger av hvor den krysser reststeinen, ikke bare at den finnes i nærheten.",
+      "raw_seconds": 5.839818594104308,
+      "speech_window_seconds": 5.839818594104308,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Ekstra stein under grovarbeidet bevarer muligheter. Senere fjerning krever nye vurderinger av form, styrke og avdekket bergkvalitet.",
+      "raw_seconds": 7.360725623582766,
+      "speech_window_seconds": 7.360725623582766,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "En liten demonstrasjon forklarer prinsippet, ikke hele monumentet. Skalaen endrer følgene av sprekker, spennvidder og fallende fragmenter.",
+      "raw_seconds": 6.826666666666667,
+      "speech_window_seconds": 6.826666666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Stein kan bære trykk godt og være sårbar ellers. Bøyning, strekk og sprekker betyr noe når tak og framspring frilegges.",
+      "raw_seconds": 6.5364172335600905,
+      "speech_window_seconds": 6.5364172335600905,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "En lang spennvidde er ikke bare en forstørret kort. Tykkelse, støttepunkter og virkelig bergstruktur må vurderes sammen.",
+      "raw_seconds": 5.804988662131519,
+      "speech_window_seconds": 5.804988662131519,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Samme sprekk kan være harmløs i en bred masse og alvorlig ved en kant. Geometri og geologi må leses sammen.",
+      "raw_seconds": 5.804988662131519,
+      "speech_window_seconds": 5.804988662131519,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Så kommer regnet. En dyp gård endrer hvor vann kommer inn og samles. Uferdig arbeid hører også til i et årstidslandskap.",
+      "raw_seconds": 7.1053061224489795,
+      "speech_window_seconds": 7.1053061224489795,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Vann følger sprekker og ujevne flater. En vakker, tørr modell må ikke skjule skiftende forhold på en åpen skråning.",
+      "raw_seconds": 6.350657596371882,
+      "speech_window_seconds": 6.350657596371882,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Steinrydding og drenering kan hindre hverandre. Feilplassert materiale kan blokkere både arbeidsveien og vannets passasje.",
+      "raw_seconds": 5.758548752834467,
+      "speech_window_seconds": 5.758548752834467,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Bevaringsarkiver beskriver drenering og reparasjoner i Ellora. En synlig renne eller lappet overflate kan derfor ha en senere historie.",
+      "raw_seconds": 6.815056689342404,
+      "speech_window_seconds": 6.815056689342404,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Tilgang er også en utfordring. Gjenværende berg kan være plattform, men beviser ikke at stillaser eller midlertidige støtter aldri trengtes.",
+      "raw_seconds": 6.768616780045352,
+      "speech_window_seconds": 6.768616780045352,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Når flater ferdigstilles og nedre områder åpnes, endres arbeidsstedene. Følgen må vise hvordan folk når dit, uten svevende verktøy.",
+      "raw_seconds": 6.6525170068027215,
+      "speech_window_seconds": 6.6525170068027215,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Arbeid ovenfor truer mennesker og ferdige deler nedenfor. Illustrasjonen skiller hogging og rydding uten stein kastet gjennom en aktiv gård.",
+      "raw_seconds": 6.768616780045352,
+      "speech_window_seconds": 6.768616780045352,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Skillet krever samordning. Signaler, pauser og avtalte arbeidsområder er mindre spektakulære enn et tårn, men hører til forklaringen.",
+      "raw_seconds": 6.408707482993197,
+      "speech_window_seconds": 6.408707482993197,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Det samme gjelder forsyninger. Mat, vann, tre, metall og vedlikeholdte redskaper skal nå riktig sted, utover steinen vi ser på.",
+      "raw_seconds": 6.745396825396825,
+      "speech_window_seconds": 6.745396825396825,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Dette er fagkunnskap organisert etter oppgaver. En anonym menneskemasse forklarer ikke avgjørelsene bak en velproporsjonert helligdom.",
+      "raw_seconds": 7.441995464852607,
+      "speech_window_seconds": 7.441995464852607,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Ikke finn på arbeidernes identiteter og kontrakter. Monumentet viser store innsatser, men bevarer ikke hver persons biografi eller status.",
+      "raw_seconds": 7.267845804988662,
+      "speech_window_seconds": 7.267845804988662,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Årstidene gir ingen nøyaktig kalender. Regn, tilgang, støtte og reparasjoner er relevante forhold, ikke en gjenfunnet arbeidsplan.",
+      "raw_seconds": 6.5364172335600905,
+      "speech_window_seconds": 6.5364172335600905,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Vi kan kreve indre sammenheng. Et foreslått snitt må etterlate verktøyplass, bærende stein og en utvei for avfallet.",
+      "raw_seconds": 5.6656689342403626,
+      "speech_window_seconds": 5.6656689342403626,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Arkitekturstudier sammenligner også deler av komplekset. Forskjeller kan belyse kronologien, men avslører ikke automatisk én arbeidsdags rekkefølge.",
+      "raw_seconds": 8.010884353741497,
+      "speech_window_seconds": 8.010884353741497,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Ellora har andre bergtempler, blant annet det senere Lille Kailasa. Fortellingen gjelder hule seksten, så bildene må holdes atskilt.",
+      "raw_seconds": 6.315827664399093,
+      "speech_window_seconds": 6.315827664399093,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Selv i samme gård må skulpturflater identifiseres. Et slående nærbilde kan si lite om den opprinnelige uthoggingsrekkefølgen.",
+      "raw_seconds": 6.524807256235827,
+      "speech_window_seconds": 6.524807256235827,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Bildene framkaller en hellig verden. Det kulturelle programmet forklarer ambisjonen, men er ingen bokstavelig dokumentasjon av verkstedet.",
+      "raw_seconds": 6.292607709750567,
+      "speech_window_seconds": 6.292607709750567,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "En religiøs scene og et snittdiagram har ulike formål. Vi kan verdsette begge og skille symbolikk fra en konkret teknisk påstand.",
+      "raw_seconds": 6.489977324263038,
+      "speech_window_seconds": 6.489977324263038,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Populære fortellinger hopper fra helt berg til ferdig tempel. Nettopp i det manglende mellomleddet ligger de virkelige tekniske spørsmålene.",
+      "raw_seconds": 6.292607709750567,
+      "speech_window_seconds": 6.292607709750567,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Nøyaktige tonnasjer og utrolige byggetider krever solide målinger og kilder. Et gjentatt skjermtall blir ikke en arkeologisk observasjon.",
+      "raw_seconds": 7.128526077097506,
+      "speech_window_seconds": 7.128526077097506,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Fjernet volum krever opprinnelig overflate og bevart form. Usikkerheten om den tapte skråningen følger med i resultatet.",
+      "raw_seconds": 5.955918367346939,
+      "speech_window_seconds": 5.955918367346939,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Å spore avfallssteinen er en egen undersøkelse. Hvert nærliggende fragment er ikke antikt Kailasaavfall uten fastslått sammenheng.",
+      "raw_seconds": 6.315827664399093,
+      "speech_window_seconds": 6.315827664399093,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Grensene hindrer ikke forståelse. De skiller geometriske spørsmål fra dem som trenger sterkere historiske eller materielle bevis.",
+      "raw_seconds": 6.478367346938776,
+      "speech_window_seconds": 6.478367346938776,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Moderne reparasjonsarkiver gir en annen kontroll. Dagens flater har opplevd forvitring, vedlikehold og inngrep lenge etter den første hoggingen.",
+      "raw_seconds": 7.48843537414966,
+      "speech_window_seconds": 7.48843537414966,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "En reparasjonsfuge er ikke opprinnelig montering. En monolittisk kjerne må samtidig ikke viske ut kompleksets senere historie.",
+      "raw_seconds": 6.257777777777778,
+      "speech_window_seconds": 6.257777777777778,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Rekonstruksjonen skal vise forskjellen. Oppmålte restformer forblir faste; usikre arbeidsfaser skal kjennes igjen som fortolkende modeller.",
+      "raw_seconds": 6.896326530612245,
+      "speech_window_seconds": 6.896326530612245,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Det er levende kulturarv, ikke et forlatt laboratorium. Forståelse av skapelsen bør styrke omsorgen for tro, lokalsamfunn og bevaring.",
+      "raw_seconds": 6.884716553287982,
+      "speech_window_seconds": 6.884716553287982,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Sammenlign forklaringene rettferdig. Hver metode må forklare samme berg, samme bevarte arkitektur og samme nødvendige avfallstransport.",
+      "raw_seconds": 7.198185941043084,
+      "speech_window_seconds": 7.198185941043084,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Sammenlign et bygd og et uthugd tempel. Det første fører materiale inn, det andre bevarer ønsket masse og fjerner omgivelsene.",
+      "raw_seconds": 6.443537414965986,
+      "speech_window_seconds": 6.443537414965986,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Det første framhever transport og fuger. Det andre bergvalg, fjerningsrekkefølge, tilgang og håndtering av uønsket materiale.",
+      "raw_seconds": 6.710566893424036,
+      "speech_window_seconds": 6.710566893424036,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Sammenlign et bergkammer og et frittstående gårdstempel. Begge fjerner stein, men organiserer lys og arbeidsflater forskjellig.",
+      "raw_seconds": 6.339047619047619,
+      "speech_window_seconds": 6.339047619047619,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "I Kailasa er uthoggingen rundt avgjørende. Den viser arkitektur fra flere sider, ikke bare et indre bak en fasade.",
+      "raw_seconds": 6.130068027210885,
+      "speech_window_seconds": 6.130068027210885,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Prinsippet ovenfra og ned passer oppgaven. Den øvre formen styrer arbeidet under og bevarer stein til kommende deler.",
+      "raw_seconds": 5.7817687074829935,
+      "speech_window_seconds": 5.7817687074829935,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Et overordnet prinsipp er ingen fullstendig kalender. Parallelt arbeid, lokale justeringer og ulik finish kan inngå i et mer komplisert prosjekt.",
+      "raw_seconds": 8.196643990929704,
+      "speech_window_seconds": 8.196643990929704,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Formene tilhører en bredere byggekultur. Ideer om helligdommer, haller, tårn og ornamentikk rakk utover denne skråningen.",
+      "raw_seconds": 6.675736961451247,
+      "speech_window_seconds": 6.675736961451247,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Andre indiske bergtradisjoner gir bakgrunn. Sammenligning beviser ikke en bestemt reiserute for et konkret lag eller en tegning.",
+      "raw_seconds": 6.072018140589569,
+      "speech_window_seconds": 6.072018140589569,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Et hogd bånd kan ligne et murt skift. Likt utseende beviser ikke sammensetting. Overflaten må leses i sin strukturelle sammenheng.",
+      "raw_seconds": 7.1401360544217685,
+      "speech_window_seconds": 7.1401360544217685,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Det hellige fjellet gir fjerningen større mening. Stedet knyttet til Shiva blir nærværende gjennom en fjellmasse formet til tempel.",
+      "raw_seconds": 5.909478458049887,
+      "speech_window_seconds": 5.909478458049887,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Kongelig støtte og fagkunnskap forklarer ambisjonen. Den historiske tilskrivningen støtter rammen, men lar organisasjon og faser stå delvis åpne.",
+      "raw_seconds": 7.569705215419501,
+      "speech_window_seconds": 7.569705215419501,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Hvor lenge varte hele arbeidet? Et presist svar krever en definisjon av fasene, flatene og oppgavene vi teller med.",
+      "raw_seconds": 5.909478458049887,
+      "speech_window_seconds": 5.909478458049887,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Hvor mange mennesker trengtes? Anslaget endres med produktivitet, transport, vedlikehold og lag som kan arbeide uten å hindre hverandre.",
+      "raw_seconds": 6.722176870748299,
+      "speech_window_seconds": 6.722176870748299,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Et verktøyspor har også grenser. Det viser kanskje kontakt og retning, men sjelden alene en datering og full arbeidshistorie.",
+      "raw_seconds": 6.757006802721088,
+      "speech_window_seconds": 6.757006802721088,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Moderne oppmåling forbedrer geometrien. Å måle et ferdig tempel gjenskaper ikke automatisk den opprinnelige hoggeplanen.",
+      "raw_seconds": 6.443537414965986,
+      "speech_window_seconds": 6.443537414965986,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "En verdifull undersøkelse forbinder geologi, uferdige trekk, bygningsforhold, gamle arkiver og fjerningsmodeller med tydelige antakelser.",
+      "raw_seconds": 7.151746031746032,
+      "speech_window_seconds": 7.151746031746032,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Målet er ingen mer spektakulær animasjon. Søk en rekkefølge som forklarer flere bevarte spor med færre ubegrunnede antakelser.",
+      "raw_seconds": 7.2562358276643995,
+      "speech_window_seconds": 7.2562358276643995,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Hva vet vi sikkert? Hovedarkitekturen oppsto gjennom utvalgt fjerning. Bevart stein ble til rom, støtte og tempelets overflater.",
+      "raw_seconds": 6.977596371882086,
+      "speech_window_seconds": 6.977596371882086,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Vend tilbake til begynnelsen. Tempelet virker fortsatt monumentalt, men luften omkring forteller nå like mye som steinen.",
+      "raw_seconds": 5.979138321995465,
+      "speech_window_seconds": 5.979138321995465,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "Luften representerer valg om fjerning og bevaring. Hver kant avhenger av et større arbeid som gjorde den neste mulig.",
+      "raw_seconds": 5.561179138321996,
+      "speech_window_seconds": 5.561179138321996,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "Grøft, ryddet arbeidsflate, åpning og plass rundt sluttformen: en rekke tomrom kan være det tydeligste bildet.",
+      "raw_seconds": 6.106848072562358,
+      "speech_window_seconds": 6.106848072562358,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Valgene rommet kunstneriske og religiøse hensikter. Teknikken forklarer hvordan rom skapes, kulturstudiet hvorfor de betydde noe.",
+      "raw_seconds": 6.606077097505669,
+      "speech_window_seconds": 6.606077097505669,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Geologien satte vilkår. Håndverket gjorde dem til valg. Verken materialet eller utformingen alene forklarer hele bragden.",
+      "raw_seconds": 6.222947845804988,
+      "speech_window_seconds": 6.222947845804988,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "Det manglende avfallet minner om arbeid utover billedhuggerens hånd: rydde, bære, forsyne, kontrollere, vedlikeholde og samordne på skiftende nivåer.",
+      "raw_seconds": 8.510113378684807,
+      "speech_window_seconds": 8.510113378684807,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "Organiseringen minsker ikke undringen. Bragden blir menneskelig: kunnskap og gjentatte praktiske avgjørelser betyr like mye som styrke.",
+      "raw_seconds": 7.035646258503402,
+      "speech_window_seconds": 7.035646258503402,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "Å bevare Kailasa krever en annen tålmodighet i dag. Dokumentasjon og blikk for stein, vann og gamle reparasjoner beskytter en sammensatt historie.",
+      "raw_seconds": 7.383945578231293,
+      "speech_window_seconds": 7.383945578231293,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "Hva ville du undersøke neste gang: overprofilen, gårdsveggene, de indre støttene eller sporene etter avfallstransport?",
+      "raw_seconds": 6.130068027210885,
+      "speech_window_seconds": 6.130068027210885,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 133,
+      "text": "Hvert valg prøver en annen del. Spørsmålet blir mulig å undersøke når vi finner flaten eller forholdet som kan gi svaret.",
+      "raw_seconds": 5.38702947845805,
+      "speech_window_seconds": 5.38702947845805,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 134,
+      "text": "Vi kan ikke sikkert beskrive hvert antikt slag. Men vi forstår hvorfor nok stein, fri plass og samordnede trinn var avgjørende.",
+      "raw_seconds": 6.072018140589569,
+      "speech_window_seconds": 6.072018140589569,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 135,
+      "text": "Fjellet ble ikke bare erstattet av et tempel. En del ble tempelet. Hvilket bevart spor kan best vise neste trinn i forvandlingen?",
+      "raw_seconds": 6.025578231292517,
+      "speech_window_seconds": 6.025578231292517,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1352,
+  "decoded_samples": 32448000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-no-22m32s.mp3",
+  "flac": "voice-no-22m32s.flac",
+  "mp3_sha256": "4b89e721cd5271236d3ff31e5ee3f69784e305c557971b5541a21d6c564ac4f4",
+  "flac_sha256": "ef3a9c57f0962b86c30f0787fbcfa60cc49758bab757ab82ca26cb1470a97261"
+}

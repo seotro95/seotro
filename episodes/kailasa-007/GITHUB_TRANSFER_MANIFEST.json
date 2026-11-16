@@ -1,0 +1,223 @@
+{
+  "schema": 1,
+  "repository": "seotro95/seotro",
+  "release_tag": "kailasa-007-22m32s",
+  "permanent_branch": "codex/kailasa-007-22m32s",
+  "base_commit": "77558649d3fae0cfda2522eb9e497d2e2d1f3d72",
+  "transfer": {
+    "branch": "codex/kailasa-007-audio-transfer",
+    "commit": "a9ae76f16493b36b74d26ca49fd385b002530d2d",
+    "files": [
+      {
+        "name": "audio.zip.part01",
+        "bytes": 83886080,
+        "sha256": "ff08c3f0b61cc71acd4ba8b7e60534c1268acce5e980a0c1f0136f7cd0fc74de",
+        "git_blob_sha": "b1e2c9fc66ae88630971f566b79b3593c6275892"
+      },
+      {
+        "name": "audio.zip.part02",
+        "bytes": 83886080,
+        "sha256": "1e7b426fa9b3a983435e3feb8cfd81397442fdbbefee9204decd8c229c39c900",
+        "git_blob_sha": "ce5e8cd0ddd195e417e4db18931baf54b712012d"
+      },
+      {
+        "name": "audio.zip.part03",
+        "bytes": 60513349,
+        "sha256": "36564edc6af1b076154d5f9e8d2b302a657ecc10c2bdbb1f2c75d8a9ab2791a7",
+        "git_blob_sha": "4831a48e4ed233c01bb680211749e171a392c432"
+      },
+      {
+        "name": "KAILASA_007_TAI_LIEU_22m32s.zip",
+        "bytes": 822511,
+        "sha256": "78081d6ec41291667ee57bdbe0dc914f97c24401f7b0638b1f021f9d09422863",
+        "git_blob_sha": "a1c7fcb473d75e70812f0ff0575220731e02c5ad"
+      },
+      {
+        "name": "KAILASA_007_14_TXT_PROMPTS.zip",
+        "bytes": 48642,
+        "sha256": "2e62cc10333017e688f3f7ebc4264b83bf0662610e6ea0eca69634b7d7dfea7a",
+        "git_blob_sha": "d888174387cd73de09a9e6d88ba681bdc00d5a57"
+      }
+    ]
+  },
+  "voices_package": {
+    "file": "KAILASA_007_16_VOICES_22m32s.zip",
+    "bytes": 228285509,
+    "sha256": "7ec55e196633fdd57953d05c676e2b0c5c70512d6533b7073ab9c2ce392d3ea5",
+    "parts": [
+      "audio.zip.part01",
+      "audio.zip.part02",
+      "audio.zip.part03"
+    ]
+  },
+  "assets": [
+    {
+      "name": "KAILASA_007_14_TXT_PROMPTS.zip",
+      "bytes": 48642,
+      "sha256": "2e62cc10333017e688f3f7ebc4264b83bf0662610e6ea0eca69634b7d7dfea7a",
+      "kind": "documents_zip",
+      "source": "transfer"
+    },
+    {
+      "name": "KAILASA_007_16_VOICES_22m32s.zip",
+      "bytes": 228285509,
+      "sha256": "7ec55e196633fdd57953d05c676e2b0c5c70512d6533b7073ab9c2ce392d3ea5",
+      "kind": "voices_zip",
+      "source": "assembled"
+    },
+    {
+      "name": "KAILASA_007_TAI_LIEU_22m32s.zip",
+      "bytes": 822511,
+      "sha256": "78081d6ec41291667ee57bdbe0dc914f97c24401f7b0638b1f021f9d09422863",
+      "kind": "documents_zip",
+      "source": "transfer"
+    },
+    {
+      "name": "KAILASA_007_Anh_Andrew_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "13e3d7d39e6209b72df5134603b807077b914fe6a686c577e52a4df00228bde8",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Viet_Nam_Nam_Minh_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "1bb251d4d021c7b886577f20cfe74bb63ba8c8a6e72694e322a02d9f94a8295e",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Tay_Ban_Nha_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "b7d19da4291554c20c921a5c2df4b64ef47031f270b1c21332023df004e9b004",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Phap_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "abd8270c87f87259752306f5c51ceee0b64c0e014d5277a4ce4ab08f3ddfd69f",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Nhat_Ban_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "1c8649a26be759efea955ae34ff0b80eceb13cdadc30181e4e94022e002d28ab",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Han_Quoc_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "1809ab4bdb4a0393ce681c62f64b7f0d042c151c0b62f72ec84858293775d9f1",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Duc_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "3ef89c5e5eef4cb13983a43dc50e2cee74b927f96520d4e1be73e4de0aaad7db",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Y_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "fcf61ca377dab9690344a88e3f4edf7f365859c6d0de7d5e9bc3285354abb144",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Bo_Dao_Nha_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "f14c15b3bf316cd8760d2de2eca1d8be80478fd8c61303cc5ee9e3a6da9476ae",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Ha_Lan_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "192fbdaff62959e5a9f7192951886e04818800c3b5164867920edbae1980e58c",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Ba_Lan_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "94b748e02638f45e2dcdbab197c1453e4262fc0e291ae0a6ace4e7430506a6f7",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Thuy_Dien_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "89082498102133d25781639c463f73f1b94707b2c5f16742fbeb2294d6d44b5e",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Dan_Mach_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "2a5f94fd3af2357fcc59904ecd470266b1a95ec0009a789da6ae35f1ccb0e186",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Phan_Lan_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "98be1568ff98c7fdf68a7b3bea0ce919b7dade4dc025aaea20d0c43f01e1a257",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Na_Uy_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "4b89e721cd5271236d3ff31e5ee3f69784e305c557971b5541a21d6c564ac4f4",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "KAILASA_007_Sec_22m32s.mp3",
+      "bytes": 16225100,
+      "sha256": "b6872e1947b2c1ebfa18cce3bd931bd847de0c63643700accf5ac5aefc96a548",
+      "kind": "voice_mp3",
+      "source": "extracted"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED.json",
+      "bytes": 31034,
+      "sha256": "ce8c87d0e1be9a49e87ef9cb8d6a3d2f50568f51002ab5d4646a49b33e7cd909",
+      "kind": "voice_profiles",
+      "source": "text:files/VOICE_PROFILES_LOCKED.json"
+    },
+    {
+      "name": "KICH_BAN_ANH_22m32s.txt",
+      "bytes": 27476,
+      "sha256": "6a793c447b80127852a82950f620320e17995d2af66592960963f429eda51e85",
+      "kind": "script",
+      "source": "text:files/KICH_BAN_ANH_22m32s.txt"
+    },
+    {
+      "name": "KICH_BAN_VIET_22m32s.txt",
+      "bytes": 30190,
+      "sha256": "d7edecfe7c628837938355bafa3e98676f00fcd564f6886af14c9579c309d822",
+      "kind": "script",
+      "source": "text:files/KICH_BAN_VIET_22m32s.txt"
+    },
+    {
+      "name": "5_TIEU_DE_VA_5_THUMBNAIL.txt",
+      "bytes": 8256,
+      "sha256": "591d58540635e0c37d065a3bd7523a1cb91b511106e05d30c84cf9f675fe3372",
+      "kind": "titles_thumbnails",
+      "source": "text:files/5_TIEU_DE_VA_5_THUMBNAIL.txt"
+    },
+    {
+      "name": "VOICE_QA.json",
+      "bytes": 9204,
+      "sha256": "5675ce4802c2a2672d1fc56268afc034b4915d488b56dca429f9429d55b67c3e",
+      "kind": "validation",
+      "source": "text:files/VOICE_QA.json"
+    }
+  ]
+}

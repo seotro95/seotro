@@ -1,0 +1,28 @@
+{
+  "language": "en",
+  "model": "Whisper base multilingual INT8; archive from publisher GitHub release",
+  "audio_sha256": "13e3d7d39e6209b72df5134603b807077b914fe6a686c577e52a4df00228bde8",
+  "scope": "Supplementary sample transcription; ASR errors possible; no independent native-speaker listening",
+  "checks": [
+    {
+      "scene": 1,
+      "expected": "At Kailasa, a temple stands inside a hollow carved into a hillside. The first question is not what arrived, but what was taken away.",
+      "asr": "At Kailasa, a temple stands inside a hollow carved into a hillside. The first question is not what arrived, but what was taken away?"
+    },
+    {
+      "scene": 63,
+      "expected": "Suppose a solid cubic meter has an assumed mass of two point eight tonnes. That is an illustrative density choice, not a measurement of this temple.",
+      "asr": "Suppose a solid cubic meter has an assumed mass of 2.8 tons. That is an illustrative density choice, not a measurement of this temple."
+    },
+    {
+      "scene": 64,
+      "expected": "Under that assumption, one hundred cubic meters would weigh two hundred eighty tonnes. The arithmetic describes our example, not a verified excavation total for Kailasa.",
+      "asr": "Under that assumption, 100 cubic meters would weigh 280 tons. The arithmetic describes our example, not a verified excavation total for Kailasa."
+    },
+    {
+      "scene": 135,
+      "expected": "The mountain was not simply replaced by a temple. Part of it became the temple. Which surviving trace might best reveal the next step in that transformation?",
+      "asr": "The mountain was not simply replaced by a temple. Part of it became the temple, which surviving trace might best reveal the next step in that transformation."
+    }
+  ]
+}

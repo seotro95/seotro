@@ -1,0 +1,1236 @@
+{
+  "locale": "ko",
+  "voice_id": "supertonic:5",
+  "engine": "Supertonic 3 CPU INT8",
+  "target_seconds": 1352,
+  "spoken_cues": 135,
+  "closing_silence_seconds": 2,
+  "config_hash": "d8431c27c0fdbf3d1c36ad5e44da836e091f82baed36f458fb9c245a6b783b68",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "카일라사 사원은 언덕을 파낸 공간 안에 서 있습니다. 첫 질문은 무엇을 가져왔느냐가 아닙니다. 무엇을 제거했느냐입니다.",
+      "raw_seconds": 9.853968253968254,
+      "speech_window_seconds": 9.853968253968254,
+      "tempo": 1.0211366066288345,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "탑과 전당, 조각된 표면은 원래 바위 안에 있었습니다. 그 탄생을 이해하려면 주변에서 사라진 돌도 보아야 합니다.",
+      "raw_seconds": 8.971179138321995,
+      "speech_window_seconds": 8.971179138321995,
+      "tempo": 0.9296558692561653,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "건물을 남기면서 산의 표면을 어떻게 깎았을까요? 위쪽 바위에서 아래 공간으로 이어지는 작업을 따라가 보겠습니다.",
+      "raw_seconds": 9.558004535147392,
+      "speech_window_seconds": 9.558004535147392,
+      "tempo": 0.9904667912069836,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "무대는 인도 서부 마하라슈트라주의 엘로라입니다. 긴 현무암 절벽을 따라 불교와 힌두교, 자이나교의 유적이 자리합니다.",
+      "raw_seconds": 9.780453514739229,
+      "speech_window_seconds": 9.780453514739229,
+      "tempo": 1.0135184989367076,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "카일라사는 이 유적군의 제십육굴입니다. 하지만 중심 건물은 햇빛 아래 서 있으며, 파낸 안마당으로 둘러싸인 사원입니다.",
+      "raw_seconds": 10.184081632653061,
+      "speech_window_seconds": 10.184081632653061,
+      "tempo": 1.055345246907053,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "사원은 시바 신에게 바쳐졌습니다. 이름은 성스러운 카일라사산을 떠올리게 하며, 바위산에 건축적 의미와 종교적 의미를 함께 부여합니다.",
+      "raw_seconds": 11.642721088435374,
+      "speech_window_seconds": 11.642721088435374,
+      "tempo": 1.2064995946565154,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "주요 개착은 일반적으로 팔세기 라슈트라쿠타 왕조의 크리슈나 일세와 연결됩니다. 엘로라 전체의 역사는 여러 세기에 걸칩니다.",
+      "raw_seconds": 10.854716553287982,
+      "speech_window_seconds": 10.854716553287982,
+      "tempo": 1.1248410936049722,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "이러한 귀속은 역사적 배경이지, 일일 공정표가 아닙니다. 후원과 건설 단계, 개별 작업팀의 활동은 서로 다른 질문입니다.",
+      "raw_seconds": 10.127233560090703,
+      "speech_window_seconds": 10.127233560090703,
+      "tempo": 1.049454254931679,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "재료는 화산암인 현무암입니다. 오래된 용암류마다 조직과 균열이 달라, 언덕 전체를 완전히 균일한 돌로 볼 수 없습니다.",
+      "raw_seconds": 10.214580498866214,
+      "speech_window_seconds": 10.214580498866214,
+      "tempo": 1.058505751177846,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "건설자에게 지질은 설계 조건이었습니다. 지붕을 지탱하고, 세부 조각을 받아들이며, 파내는 과정에도 견딜 바위가 필요했습니다.",
+      "raw_seconds": 10.130249433106576,
+      "speech_window_seconds": 10.130249433106576,
+      "tempo": 1.0497667806328057,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "작업 공간과 돌무더기를 보낼 곳도 필요했습니다. 돌을 제거하면 건물이 드러나지만, 동시에 계속되는 운반 문제가 생깁니다.",
+      "raw_seconds": 9.9584126984127,
+      "speech_window_seconds": 9.9584126984127,
+      "tempo": 1.0319598651204869,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "그래서 세 가지 일을 함께 살펴봅니다. 남길 부분을 정하고, 주변을 제거하며, 작업 내내 남은 구조를 보호하는 것입니다.",
+      "raw_seconds": 10.037709750566894,
+      "speech_window_seconds": 10.037709750566894,
+      "tempo": 1.0401771762245484,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "먼저 안마당 벽을 보세요. 높이와 위치가 개착을 보여 줍니다. 지금의 빈 공간도 한때는 더 큰 암반의 일부였습니다.",
+      "raw_seconds": 9.796802721088435,
+      "speech_window_seconds": 9.796802721088435,
+      "tempo": 1.0152127172112366,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "일반 석조 건축은 돌을 모아 쌓습니다. 여기서는 필요한 돌을 제자리에 남기고 인접한 부분을 제거해 주요 형태를 만들었습니다.",
+      "raw_seconds": 10.095011337868481,
+      "speech_window_seconds": 10.095011337868481,
+      "tempo": 1.0461151645459565,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "인도 고고조사국은 카일라사를 크리슈나 일세와 연결합니다. 후대의 동판 기록도 고대 엘로라에 있던 웅장한 건축물을 찬양합니다.",
+      "raw_seconds": 10.749886621315193,
+      "speech_window_seconds": 10.749886621315193,
+      "tempo": 1.1139778882191909,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "그 기록은 왕의 업적에 관한 것입니다. 매번 깎아 낸 깊이와 순서, 시간을 알려 주는 작업 설명서는 아닙니다.",
+      "raw_seconds": 9.055374149659864,
+      "speech_window_seconds": 9.055374149659864,
+      "tempo": 0.9383807408973952,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "유적 자체도 증거입니다. 건축 요소의 관계와 다른 미완성 유적, 비교 연구를 통해 가능한 작업 순서를 검토할 수 있습니다.",
+      "raw_seconds": 9.99609977324263,
+      "speech_window_seconds": 9.99609977324263,
+      "tempo": 1.03586526147592,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "현무암은 여러 차례의 용암류로 만들어졌습니다. 조밀한 내부와 기포가 많은 부분은 절단면이 드러날 때 다르게 반응할 수 있습니다.",
+      "raw_seconds": 10.474399092970522,
+      "speech_window_seconds": 10.474399092970522,
+      "tempo": 1.0854299578207793,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "자연 균열은 돌을 나누는 데 도움이 되지만, 남길 기둥이나 지붕을 가로지를 수도 있습니다. 버릴 돌에서 유용해도 남길 돌에서는 위험합니다.",
+      "raw_seconds": 11.25562358276644,
+      "speech_window_seconds": 11.25562358276644,
+      "tempo": 1.1663858634991129,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "공식 고고학 설명도 이런 암석 구조를 중요하게 다룹니다. 세심한 관찰은 형식적인 준비가 아니라 실제 작업에 필요한 조건입니다.",
+      "raw_seconds": 10.451655328798186,
+      "speech_window_seconds": 10.451655328798186,
+      "tempo": 1.0830730910671695,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "깊게 파기 전에 건물에 필요한 돌을 충분히 남겨야 합니다. 계획한 빈 공간과 남길 구조물은 따로 생각할 수 없습니다.",
+      "raw_seconds": 9.504036281179138,
+      "speech_window_seconds": 9.504036281179138,
+      "tempo": 0.9848742260289262,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "역사적 실측 도면에는 카일라사의 평면과 단면이 기록되어 있습니다. 이는 남아 있는 유적의 기록이지, 건설자의 원래 설계도는 아닙니다.",
+      "raw_seconds": 11.376145124716553,
+      "speech_window_seconds": 11.376145124716553,
+      "tempo": 1.1788751424576738,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "본전과 기둥 전당, 입구와 난디 정자는 하나의 배치를 이룹니다. 이 관계가 가상의 작업을 시작하기 전 목표 형태를 정해 줍니다.",
+      "raw_seconds": 10.627732426303854,
+      "speech_window_seconds": 10.627732426303854,
+      "tempo": 1.1013194224149072,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "중앙에는 탑이 솟은 본전이 있습니다. 그 윤곽을 깎으려면 가장 높은 부분 아래에 필요한 바위를 보호해야 합니다.",
+      "raw_seconds": 8.976326530612244,
+      "speech_window_seconds": 8.976326530612244,
+      "tempo": 0.9301892777836522,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "안마당 주위의 절벽에는 회랑과 작은 신당이 있습니다. 독립된 중앙 건물과 벽 안의 방은 닮았지만 서로 다른 문제를 만듭니다.",
+      "raw_seconds": 10.763469387755102,
+      "speech_window_seconds": 10.763469387755102,
+      "tempo": 1.1153854287829121,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "그 사이의 공기를 다시 보세요. 건축 측량은 남은 것을 조사하지만, 개착 복원에는 그 공간을 채웠던 바위도 추정해야 합니다.",
+      "raw_seconds": 9.933968253968255,
+      "speech_window_seconds": 9.933968253968255,
+      "tempo": 1.0294267620692492,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "거친 가공면과 완성된 장식면은 다른 질문에 답합니다. 하나는 접근과 작업 진행을, 다른 하나는 의도한 최종 형태를 보여 줍니다.",
+      "raw_seconds": 10.543015873015873,
+      "speech_window_seconds": 10.543015873015873,
+      "tempo": 1.0925405049757382,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "미완성 석굴은 작업 단계를 이해하는 비교 자료입니다. 그러나 다른 유적의 흔적을 카일라사의 직접적인 작업 기록으로 여겨서는 안 됩니다.",
+      "raw_seconds": 11.001678004535147,
+      "speech_window_seconds": 11.001678004535147,
+      "tempo": 1.1400702595373209,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "복원 속 바위를 부드러운 점토처럼 다뤄서는 안 됩니다. 무게와 균열, 작업 여유, 남은 암반의 변화하는 형태를 살펴야 합니다.",
+      "raw_seconds": 10.087324263038548,
+      "speech_window_seconds": 10.087324263038548,
+      "tempo": 1.0453185764806785,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "이 조건들로 가능한 순서를 세워 봅시다. 위에서 아래로 깎는 원리를 설명하는 모형이며, 모든 실제 동작을 찾았다는 뜻은 아닙니다.",
+      "raw_seconds": 10.541632653061225,
+      "speech_window_seconds": 10.541632653061225,
+      "tempo": 1.0923971661203342,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "안마당이 없던 비탈을 상상해 보세요. 원하는 지붕 높이와 이용할 암반의 양이 사원을 놓을 수 있는 위치를 제한합니다.",
+      "raw_seconds": 9.848367346938776,
+      "speech_window_seconds": 9.848367346938776,
+      "tempo": 1.0205562017553136,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "가장 높은 장식도 원래 바위 안에 들어가야 합니다. 처음부터 너무 낮게 깎으면, 없어진 높이를 다시 새길 수 없습니다.",
+      "raw_seconds": 9.660816326530613,
+      "speech_window_seconds": 9.660816326530613,
+      "tempo": 1.0011208628529131,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "일관된 배치에는 기준선과 높이가 필요합니다. 줄과 측정 도구, 조준은 가능한 수단이지만, 이곳의 정확한 사용 방식은 남아 있지 않습니다.",
+      "raw_seconds": 11.40954648526077,
+      "speech_window_seconds": 11.40954648526077,
+      "tempo": 1.182336423343085,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "모형에서는 사원이 될 바위를 넉넉하게 남깁니다. 주변 작업 경로를 확보하기 전에 섬세한 모서리를 먼저 드러내지 않는 것입니다.",
+      "raw_seconds": 10.113083900226757,
+      "speech_window_seconds": 10.113083900226757,
+      "tempo": 1.0479879689354152,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "남길 덩어리 주변을 아래로 파면 언덕에서 점차 분리됩니다. 도랑은 작업면을 열고, 가운데에는 건축물이 될 돌을 남깁니다.",
+      "raw_seconds": 10.233854875283447,
+      "speech_window_seconds": 10.233854875283447,
+      "tempo": 1.060503095884295,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "큰 덩어리를 제거한다고 모두 가루로 만들 필요는 없습니다. 암반 상태가 허용하면, 조각을 나누는 것이 모든 면을 정교하게 다듬는 것보다 효율적입니다.",
+      "raw_seconds": 11.723718820861677,
+      "speech_window_seconds": 11.723718820861677,
+      "tempo": 1.2148931420582048,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "다만 분리는 통제되어야 합니다. 원치 않는 균열이 버릴 부분에서 남길 처마와 기둥, 지붕으로 이어질 수 있습니다.",
+      "raw_seconds": 9.281587301587301,
+      "speech_window_seconds": 9.281587301587301,
+      "tempo": 0.9618225182992022,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "떼어 낸 돌은 작업장 밖으로 옮겨야 합니다. 도랑이 돌무더기로 차면, 파내서 확보한 접근 공간을 곧 잃게 됩니다.",
+      "raw_seconds": 9.379569160997733,
+      "speech_window_seconds": 9.379569160997733,
+      "tempo": 0.9719760788598686,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "위에서 작업하면 아래쪽이 모두 드러나기 전에 상부 윤곽을 만들 수 있습니다. 남은 암반은 임시 작업 공간이 될 수도 있습니다.",
+      "raw_seconds": 10.200975056689343,
+      "speech_window_seconds": 10.200975056689343,
+      "tempo": 1.057095860796823,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "이는 한 번의 기적적인 절단이 아닙니다. 작은 제거를 반복할 때마다 미래 건물과 주변 작업 환경이 함께 바뀝니다.",
+      "raw_seconds": 9.787301587301588,
+      "speech_window_seconds": 9.787301587301588,
+      "tempo": 1.0142281437618226,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "돌출된 처마를 생각해 보세요. 모양을 다듬는 동안 아래와 옆에 충분한 돌을 남겨야 합니다. 가까운 균열이 있다면 더욱 중요합니다.",
+      "raw_seconds": 10.855532879818593,
+      "speech_window_seconds": 10.855532879818593,
+      "tempo": 1.1249256870278335,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "거친 제거와 마무리는 목적이 다릅니다. 큰 여분을 없애 공간을 만들고, 접근성과 안정성이 허용할 때 윤곽과 장식을 다듬습니다.",
+      "raw_seconds": 10.81140589569161,
+      "speech_window_seconds": 10.81140589569161,
+      "tempo": 1.120352942558716,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "위에서 아래로 일해도 모든 팀이 같은 높이에 설 필요는 없습니다. 전체 형태를 맞춘다면 구역마다 진행 속도는 다를 수 있습니다.",
+      "raw_seconds": 10.524784580498865,
+      "speech_window_seconds": 10.524784580498865,
+      "tempo": 1.0906512518651674,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "깊어질수록 조정은 어려워집니다. 위쪽 모서리를 만드는 팀도 아래에 들어설 전당과 개구부, 지지 구조를 이해해야 합니다.",
+      "raw_seconds": 9.505056689342403,
+      "speech_window_seconds": 9.505056689342403,
+      "tempo": 0.9849799678075029,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "작은 위치 오차도 쌓일 수 있습니다. 정확한 고대 측정법을 몰라도, 방향과 높이를 반복 확인할 필요성은 이해할 수 있습니다.",
+      "raw_seconds": 10.151292517006803,
+      "speech_window_seconds": 10.151292517006803,
+      "tempo": 1.0519474110887879,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "내부는 또 다른 작업입니다. 남긴 바위의 안을 파내므로, 벽과 천장, 기둥을 함께 고려해야 합니다.",
+      "raw_seconds": 8.540249433106576,
+      "speech_window_seconds": 8.540249433106576,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "암반의 기둥은 주변 돌을 제거해 만듭니다. 굵기는 아름다운 윤곽뿐 아니라 천장을 지탱하는 조건에도 달려 있습니다.",
+      "raw_seconds": 9.848185941043084,
+      "speech_window_seconds": 9.848185941043084,
+      "tempo": 1.0205374032169,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "천장도 빈 공간 위에 남긴 돌입니다. 방을 넓히면 돌이 견뎌야 할 조건이 바뀌며, 균열이나 얇은 곳에서는 더욱 중요합니다.",
+      "raw_seconds": 10.247732426303855,
+      "speech_window_seconds": 10.247732426303855,
+      "tempo": 1.0619411840729382,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "벽 밖으로 나온 부분은 다른 방식으로 힘을 받습니다. 돌이 압축에 강하다고 어떤 모양이든 똑같이 안전한 것은 아닙니다.",
+      "raw_seconds": 9.544965986394558,
+      "speech_window_seconds": 9.544965986394558,
+      "tempo": 0.9891156462585035,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "기단의 코끼리 조각은 사원의 모습을 풍부하게 합니다. 건축 암반에 새긴 형상이지, 실제 동물이 건물을 떠받치는 것은 아닙니다.",
+      "raw_seconds": 10.410408163265306,
+      "speech_window_seconds": 10.410408163265306,
+      "tempo": 1.0787987733953683,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "하중 설명에서는 이 차이가 중요합니다. 조각의 이야기를 구조도로 바꾸지 말고, 남은 돌의 중심부와 연결 관계를 살펴야 합니다.",
+      "raw_seconds": 10.898639455782313,
+      "speech_window_seconds": 10.898639455782313,
+      "tempo": 1.1293926897183744,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "빈 공간이 열리면 빛도 달라집니다. 외벽과 그늘진 전당, 좁은 통로는 깊이와 보이는 세부에 서로 다른 판단을 요구합니다.",
+      "raw_seconds": 9.844013605442177,
+      "speech_window_seconds": 9.844013605442177,
+      "tempo": 1.0201050368333862,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "완성된 배치는 이동뿐 아니라 예배를 위한 것입니다. 작업 순서를 복원할 때도 사원의 용도와 상징적 질서를 함께 고려해야 합니다.",
+      "raw_seconds": 11.249705215419501,
+      "speech_window_seconds": 11.249705215419501,
+      "tempo": 1.165772561183368,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "난디 정자도 이 배치에 속합니다. 본전과의 관계는 독립된 모양 하나씩만 생각해서는 충분하지 않았음을 보여 줍니다.",
+      "raw_seconds": 9.721995464852608,
+      "speech_window_seconds": 9.721995464852608,
+      "tempo": 1.0074606699329127,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "돌로 된 연결부는 계획을 더 어렵게 합니다. 필요한 돌을 이미 제거했다면, 모형에서 마법처럼 연결부를 되살릴 수 없습니다.",
+      "raw_seconds": 9.878662131519274,
+      "speech_window_seconds": 9.878662131519274,
+      "tempo": 1.023695557670391,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "외부 개착과 내부 굴착은 서로 영향을 줍니다. 세부 순서가 달라도, 상대 작업에 필요한 바위를 남겨야 합니다.",
+      "raw_seconds": 8.88922902494331,
+      "speech_window_seconds": 8.88922902494331,
+      "tempo": 0.9211636295278041,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "개구부는 작업장 이동에도 영향을 줍니다. 완성 후에는 적합한 출입구도, 공사 중 돌을 내보내기에는 불편할 수 있습니다.",
+      "raw_seconds": 9.871269841269841,
+      "speech_window_seconds": 9.871269841269841,
+      "tempo": 1.0229295172300352,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "작업마다 절삭 동작이 다릅니다. 여분을 깨고, 평면을 만들고, 모서리를 다듬는 일을 하나의 망치질 장면으로 대신할 수 없습니다.",
+      "raw_seconds": 10.711269841269841,
+      "speech_window_seconds": 10.711269841269841,
+      "tempo": 1.1099761493543876,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "철제 도구는 당시 기술 배경에 맞습니다. 다만 영상의 가상 도구 세트를 카일라사에서 발굴한 유물로 제시하지는 않습니다.",
+      "raw_seconds": 9.950226757369615,
+      "speech_window_seconds": 9.950226757369615,
+      "tempo": 1.0311115810745715,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "도구도 닳습니다. 날을 세우고 교체하며 공급하는 과정도 필요합니다. 특정 공방이나 수리 주기를 말하려면 별도의 증거가 있어야 합니다.",
+      "raw_seconds": 10.883015873015873,
+      "speech_window_seconds": 10.883015873015873,
+      "tempo": 1.1277736655974997,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "인력을 하나의 군중 숫자로 줄일 수는 없습니다. 배치와 절삭, 마무리와 운반, 도구 관리에는 다른 기술과 조정이 필요합니다.",
+      "raw_seconds": 10.473492063492063,
+      "speech_window_seconds": 10.473492063492063,
+      "tempo": 1.085335965128711,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "이곳의 실제 총량을 안다고 하지 않고도 제거량을 모형으로 설명할 수 있습니다. 먼저 암석의 부피와 질량을 구별합시다.",
+      "raw_seconds": 9.842902494331065,
+      "speech_window_seconds": 9.842902494331065,
+      "tempo": 1.0199898957856026,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "단단한 암석 한 세제곱미터를 이 점 팔 톤으로 가정해 봅시다. 설명을 위한 밀도 선택이지, 이 사원의 실측값은 아닙니다.",
+      "raw_seconds": 9.98219954648526,
+      "speech_window_seconds": 9.98219954648526,
+      "tempo": 1.034424823469975,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "이 가정에서 백 세제곱미터는 이백팔십 톤입니다. 계산 예시이며, 카일라사에서 제거한 전체 양을 검증한 수치가 아닙니다.",
+      "raw_seconds": 9.92718820861678,
+      "speech_window_seconds": 9.92718820861678,
+      "tempo": 1.0287241666960394,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "깨진 돌 사이에는 빈틈도 생깁니다. 운반 부피는 원래 단단한 바위와 달라서, 수레 용량만으로 계산하면 문제가 생깁니다.",
+      "raw_seconds": 10.06124716553288,
+      "speech_window_seconds": 10.06124716553288,
+      "tempo": 1.042616286583718,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "작업 속도를 추정하려면 규모와 암질, 도구 성능, 접근성, 운반 거리, 마무리와 수리 시간도 알아야 합니다.",
+      "raw_seconds": 9.034807256235828,
+      "speech_window_seconds": 9.034807256235828,
+      "tempo": 0.936249456604749,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "파내는 깊이에 따라 조건도 달라집니다. 편리했던 위쪽 길은 사라지고, 아래쪽 통로는 나중에야 열릴 수 있습니다.",
+      "raw_seconds": 9.07485260770975,
+      "speech_window_seconds": 9.07485260770975,
+      "tempo": 0.9403992339595596,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "설득력 있는 복원은 단계들을 연결해야 합니다. 돌은 저절로 사라지지 않고, 작업 공간이 필요하며, 주변을 제거해도 구조는 지지되어야 합니다.",
+      "raw_seconds": 11.155215419501134,
+      "speech_window_seconds": 11.155215419501134,
+      "tempo": 1.155980872487164,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "이제 상부 건축이 드러나기 시작했습니다. 성취는 윤곽만이 아니라, 다음 작업을 가능하게 유지하는 순서에도 있습니다.",
+      "raw_seconds": 9.30827664399093,
+      "speech_window_seconds": 9.30827664399093,
+      "tempo": 0.9645882532633087,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "첫 번째 큰 장애물입니다. 제거는 되돌리기 어렵습니다. 조각가가 목표 표면에 도달하기 전에 실수가 남길 형태를 바꿀 수 있습니다.",
+      "raw_seconds": 10.822902494331066,
+      "speech_window_seconds": 10.822902494331066,
+      "tempo": 1.1215442999306804,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "석재는 수리할 수 있고, 현대 보존도 일부 표면을 바꾸었습니다. 하지만 잃은 조각을 보충하는 것과 원래 암반을 보존하는 것은 다릅니다.",
+      "raw_seconds": 11.100408163265307,
+      "speech_window_seconds": 11.100408163265307,
+      "tempo": 1.1503013640689437,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "숨은 균열도 장애물입니다. 단순히 근처에 있느냐보다, 남은 돌의 어느 부분을 가로지르느냐가 중요합니다.",
+      "raw_seconds": 8.600181405895691,
+      "speech_window_seconds": 8.600181405895691,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "거친 작업에서 여유를 남기면 선택지가 보존됩니다. 나중에 이를 제거할 때도 형태와 강도, 드러난 암질을 판단해야 합니다.",
+      "raw_seconds": 9.998390022675737,
+      "speech_window_seconds": 9.998390022675737,
+      "tempo": 1.0361025930233925,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "작은 시연은 원리를 설명하지만, 유적 전체를 보증하지는 않습니다. 규모가 커지면 균열과 긴 지간, 떨어지는 돌의 영향도 바뀝니다.",
+      "raw_seconds": 10.744081632653062,
+      "speech_window_seconds": 10.744081632653062,
+      "tempo": 1.1133763349899546,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "돌은 압축을 잘 견뎌도 다른 조건에서는 약할 수 있습니다. 지붕이나 돌출부를 드러낼 때는 휨과 인장, 균열도 중요합니다.",
+      "raw_seconds": 9.810884353741496,
+      "speech_window_seconds": 9.810884353741496,
+      "tempo": 1.0166719537555955,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "긴 지간은 짧은 지간을 단순히 확대한 것이 아닙니다. 두께와 받침 위치, 실제 암석 구조를 모두 고려해야 합니다.",
+      "raw_seconds": 9.381836734693877,
+      "speech_window_seconds": 9.381836734693877,
+      "tempo": 0.972211060590039,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "같은 균열도 넓은 덩어리에서는 괜찮다가, 드러난 가장자리에서는 위험할 수 있습니다. 형태와 지질을 함께 읽어야 하는 이유입니다.",
+      "raw_seconds": 10.57766439909297,
+      "speech_window_seconds": 10.57766439909297,
+      "tempo": 1.096131025812743,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "다음은 비입니다. 깊은 안마당을 열면 물이 들어오고 고이는 곳도 바뀝니다. 미완성 작업 역시 계절이 있는 환경에 놓입니다.",
+      "raw_seconds": 10.171179138321996,
+      "speech_window_seconds": 10.171179138321996,
+      "tempo": 1.054008200862383,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "물은 균열과 불규칙한 표면을 따라 흐를 수 있습니다. 건조하고 아름다운 모형 때문에, 드러난 언덕의 변하는 조건을 잊어서는 안 됩니다.",
+      "raw_seconds": 10.66609977324263,
+      "speech_window_seconds": 10.66609977324263,
+      "tempo": 1.1052953132893917,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "돌무더기 정리와 배수는 서로 방해할 수도 있습니다. 잘못 쌓은 재료는 작업 통로와 물길을 함께 막을 수 있습니다.",
+      "raw_seconds": 9.408684807256236,
+      "speech_window_seconds": 9.408684807256236,
+      "tempo": 0.9749932442752576,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "엘로라의 보존 기록에는 배수와 수리 작업이 나옵니다. 지금 보이는 수로나 보수면에는 후대의 역사가 있을 수 있습니다.",
+      "raw_seconds": 9.638231292517007,
+      "speech_window_seconds": 9.638231292517007,
+      "tempo": 0.9987804448204152,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "접근도 과제입니다. 남은 바위를 발판으로 이용할 수 있어도, 비계나 임시 지지가 전혀 필요 없었다는 증거는 아닙니다.",
+      "raw_seconds": 9.436553287981859,
+      "speech_window_seconds": 9.436553287981859,
+      "tempo": 0.9778811697390527,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "표면을 마무리하고 아래를 열면 작업 위치도 달라집니다. 도구를 공중에 띄우지 말고, 사람이 어떻게 그곳에 닿는지 보여야 합니다.",
+      "raw_seconds": 10.191201814058957,
+      "speech_window_seconds": 10.191201814058957,
+      "tempo": 1.0560830895397881,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "상부 작업은 아래의 사람과 완성 부분을 위험하게 할 수 있습니다. 모형에서는 절삭 구역과 반출 구역을 나눠 충돌을 피합니다.",
+      "raw_seconds": 10.669773242630386,
+      "speech_window_seconds": 10.669773242630386,
+      "tempo": 1.105675983692268,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "이 분리에는 조정이 필요합니다. 신호와 휴식, 작업 구역은 탑을 깎는 모습보다 덜 화려해도, 타당한 설명의 일부입니다.",
+      "raw_seconds": 9.813968253968254,
+      "speech_window_seconds": 9.813968253968254,
+      "tempo": 1.0169915289086273,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "보급도 마찬가지입니다. 식량과 물, 목재와 금속, 정비된 도구가 제때 필요한 곳에 도착해야 합니다.",
+      "raw_seconds": 8.403333333333334,
+      "speech_window_seconds": 8.403333333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "이는 작업별로 조직된 숙련 노동입니다. 거대한 익명의 군중만으로는, 정교한 본전을 만든 실제 판단을 설명할 수 없습니다.",
+      "raw_seconds": 10.160430839002268,
+      "speech_window_seconds": 10.160430839002268,
+      "tempo": 1.052894387461375,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "작업자의 신분과 계약도 지어내서는 안 됩니다. 거대한 노력은 보이지만, 모든 사람의 생애와 지위가 기록된 것은 아닙니다.",
+      "raw_seconds": 10.209183673469388,
+      "speech_window_seconds": 10.209183673469388,
+      "tempo": 1.05794649466004,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "계절만으로 정확한 일정을 만들 수는 없습니다. 비와 접근성, 후원과 수리는 고려할 변수이지, 복원된 공정표가 아닙니다.",
+      "raw_seconds": 9.927823129251701,
+      "speech_window_seconds": 9.927823129251701,
+      "tempo": 1.0287899615804872,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "요구할 수 있는 것은 일관성입니다. 제안한 절단은 도구를 쓸 공간과 지지할 돌, 폐석을 내보낼 길을 남겨야 합니다.",
+      "raw_seconds": 9.302834467120181,
+      "speech_window_seconds": 9.302834467120181,
+      "tempo": 0.9640242971108997,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "건축 연구는 유적의 여러 부분도 비교합니다. 유사점과 차이는 연대를 알려 줄 수 있지만, 하루 작업 순서를 자동으로 보여 주지는 않습니다.",
+      "raw_seconds": 10.890657596371883,
+      "speech_window_seconds": 10.890657596371883,
+      "tempo": 1.1285655540281743,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "엘로라에는 후대의 작은 카일라사 같은 다른 암굴 사원도 있습니다. 이 이야기는 제십육굴이므로, 이미지를 섞어서는 안 됩니다.",
+      "raw_seconds": 10.273832199546485,
+      "speech_window_seconds": 10.273832199546485,
+      "tempo": 1.0646458237872005,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "같은 안마당의 조각도 정확히 구별해야 합니다. 인상적인 접사라도 최초 개착 순서를 알려 주는 정보는 적을 수 있습니다.",
+      "raw_seconds": 9.674195011337869,
+      "speech_window_seconds": 9.674195011337869,
+      "tempo": 1.002507255060919,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "사원의 이미지는 성스러운 세계를 불러옵니다. 문화적 구상은 건물의 뜻을 설명하지만, 실제 공방을 그대로 기록한 것은 아닙니다.",
+      "raw_seconds": 10.592857142857143,
+      "speech_window_seconds": 10.592857142857143,
+      "tempo": 1.0977054034048852,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "종교 장면과 절삭 도표는 목적이 다릅니다. 둘 다 존중하면서, 상징과 특정 기술 작업에 대한 주장을 구별할 수 있습니다.",
+      "raw_seconds": 10.050884353741496,
+      "speech_window_seconds": 10.050884353741496,
+      "tempo": 1.041542420076839,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "대중적인 이야기는 단단한 언덕에서 완성된 사원으로 곧바로 넘어갑니다. 그 생략된 중간에 진짜 공학적 질문이 있습니다.",
+      "raw_seconds": 10.07938775510204,
+      "speech_window_seconds": 10.07938775510204,
+      "tempo": 1.0444961404250819,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "정확한 톤수나 놀라운 공사 기간에는 타당한 측정과 출처가 필요합니다. 화면에서 반복되는 숫자가 고고학적 관찰이 되지는 않습니다.",
+      "raw_seconds": 10.992766439909298,
+      "speech_window_seconds": 10.992766439909298,
+      "tempo": 1.139146781337751,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "제거 부피를 추정하려면 원래 언덕 표면과 남은 형태가 필요합니다. 사라진 표면의 불확실성은 결과의 불확실성이 됩니다.",
+      "raw_seconds": 9.992834467120181,
+      "speech_window_seconds": 9.992834467120181,
+      "tempo": 1.0355268877844748,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "버려진 돌을 추적하는 일은 별도 조사입니다. 맥락과 관계를 확인하지 않고 주변 조각을 모두 고대 카일라사의 폐석으로 부를 수 없습니다.",
+      "raw_seconds": 10.93718820861678,
+      "speech_window_seconds": 10.93718820861678,
+      "tempo": 1.1333873791312725,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "이 한계가 이해를 막지는 않습니다. 형태로 답할 질문과 더 강한 역사적, 물질적 증거가 필요한 질문을 구별하게 합니다.",
+      "raw_seconds": 9.763310657596373,
+      "speech_window_seconds": 9.763310657596373,
+      "tempo": 1.0117420370566188,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "현대 수리 기록도 유용한 비교 자료입니다. 지금의 돌 표면에는 최초 조각 이후 풍화와 관리, 보수의 역사도 쌓여 있습니다.",
+      "raw_seconds": 9.853854875283446,
+      "speech_window_seconds": 9.853854875283446,
+      "tempo": 1.021124857542326,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "보수 이음새를 원래의 조립 흔적으로 오해해서는 안 됩니다. 반대로 중심부가 한 암반이라는 말도 후대의 역사를 지울 수는 없습니다.",
+      "raw_seconds": 10.422086167800453,
+      "speech_window_seconds": 10.422086167800453,
+      "tempo": 1.0800089293057464,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "영상 복원도 이 차이를 유지해야 합니다. 실측된 잔존 형태는 확실하게, 불분명한 작업 단계는 해석 모형으로 알아볼 수 있게 보여 줍니다.",
+      "raw_seconds": 11.038185941043084,
+      "speech_window_seconds": 11.038185941043084,
+      "tempo": 1.1438534653930656,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "이곳은 버려진 실험실이 아니라 살아 있는 유산입니다. 건립 과정을 이해하면 종교와 공동체, 보존에도 더 관심을 기울일 수 있습니다.",
+      "raw_seconds": 10.914875283446712,
+      "speech_window_seconds": 10.914875283446712,
+      "tempo": 1.131075158906395,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "이제 주요 설명을 같은 조건에서 비교합시다. 같은 암반과 남길 건축, 같은 폐석 반출 필요를 함께 설명해야 합니다.",
+      "raw_seconds": 9.926689342403629,
+      "speech_window_seconds": 9.926689342403629,
+      "tempo": 1.0286724707154018,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "쌓은 사원과 바위를 깎은 사원을 비교합니다. 전자는 재료를 들여놓고, 후자는 필요한 덩어리를 지키며 주변을 제거합니다.",
+      "raw_seconds": 9.686825396825396,
+      "speech_window_seconds": 9.686825396825396,
+      "tempo": 1.0038161032979684,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "첫 방식은 운반과 이음새가 중요합니다. 둘째는 암석 선택과 제거 순서, 접근과 불필요한 재료 처리에 초점이 옮겨갑니다.",
+      "raw_seconds": 10.678367346938776,
+      "speech_window_seconds": 10.678367346938776,
+      "tempo": 1.106566564449614,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "절벽 안의 방과 안마당에 독립한 사원도 비교해 보세요. 둘 다 돌을 제거하지만, 빛과 작업면을 조직하는 방식은 다릅니다.",
+      "raw_seconds": 10.208571428571428,
+      "speech_window_seconds": 10.208571428571428,
+      "tempo": 1.0578830495928941,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "카일라사에서는 주변 개착이 핵심입니다. 그 덕분에 정면 뒤의 내부만이 아니라, 주위를 돌며 볼 수 있는 건축이 드러납니다.",
+      "raw_seconds": 9.78687074829932,
+      "speech_window_seconds": 9.78687074829932,
+      "tempo": 1.01418349723309,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "위에서 아래로 진행하는 원칙은 이 과제에 맞습니다. 상부 형태로 하부 제거를 이끌면서, 아직 나타나지 않은 부분의 돌도 남깁니다.",
+      "raw_seconds": 10.77108843537415,
+      "speech_window_seconds": 10.77108843537415,
+      "tempo": 1.1161749673962849,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "하지만 큰 원칙은 완전한 일정표가 아닙니다. 병행 작업과 현장 조정, 다른 마무리 단계가 더 복잡한 사업 안에 있을 수 있습니다.",
+      "raw_seconds": 10.50530612244898,
+      "speech_window_seconds": 10.50530612244898,
+      "tempo": 1.0886327588030031,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "사원의 형태는 더 넓은 건축 문화에도 속합니다. 본전과 전당, 탑과 장식의 생각은 이 언덕을 넘어 전해졌습니다.",
+      "raw_seconds": 9.755986394557823,
+      "speech_window_seconds": 9.755986394557823,
+      "tempo": 1.0109830460681681,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "인도의 다른 암굴 전통도 배경을 제공합니다. 하지만 특정 작업팀이나 설계도가 어떤 길을 이동했다고 증명하는 것은 아닙니다.",
+      "raw_seconds": 10.252471655328797,
+      "speech_window_seconds": 10.252471655328797,
+      "tempo": 1.0624322958889945,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "새긴 건축 띠가 쌓은 돌의 층처럼 보일 수도 있습니다. 겉모습이 닮았다고 조립한 것은 아니므로, 구조적 맥락을 함께 읽어야 합니다.",
+      "raw_seconds": 11.217210884353742,
+      "speech_window_seconds": 11.217210884353742,
+      "tempo": 1.162405272990025,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "성스러운 산이라는 생각은 제거 작업에 더 큰 의미를 줍니다. 시바와 연결된 장소가, 산을 사원으로 바꾼 형태를 통해 표현됩니다.",
+      "raw_seconds": 10.761337868480725,
+      "speech_window_seconds": 10.761337868480725,
+      "tempo": 1.1151645459565518,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "왕의 후원과 숙련된 작업은 규모를 이해하게 합니다. 역사적 귀속이 배경을 보여 줘도, 조직과 단계의 세부에는 연구할 여지가 남습니다.",
+      "raw_seconds": 11.237755102040817,
+      "speech_window_seconds": 11.237755102040817,
+      "tempo": 1.1645342074653695,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "전체 작업에는 얼마나 걸렸을까요? 정확히 답하려면 어떤 단계와 표면, 어떤 작업까지 포함하는지 먼저 정의해야 합니다.",
+      "raw_seconds": 10.068730158730158,
+      "speech_window_seconds": 10.068730158730158,
+      "tempo": 1.0433917262932806,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "얼마나 많은 사람이 필요했을까요? 생산성과 운반, 정비, 서로 방해하지 않고 일할 수 있는 팀 수에 따라 추정이 달라집니다.",
+      "raw_seconds": 10.339092970521541,
+      "speech_window_seconds": 10.339092970521541,
+      "tempo": 1.071408597981507,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "도구 흔적에도 한계가 있습니다. 접촉과 작업 방향은 보여 줘도, 연대와 전체 노동의 역사를 혼자 설명하지는 못합니다.",
+      "raw_seconds": 9.80358276643991,
+      "speech_window_seconds": 9.80358276643991,
+      "tempo": 1.0159153125844465,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "현대 측량은 형태와 관계를 더 자세히 기록합니다. 그러나 완성된 사원을 측정한다고 원래 절삭 계획이 자동으로 복원되지는 않습니다.",
+      "raw_seconds": 10.88267573696145,
+      "speech_window_seconds": 10.88267573696145,
+      "tempo": 1.1277384183379742,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "다음 연구에서는 지질과 미완성 부분, 건축 관계와 옛 기록, 가정을 밝힌 제거 모형을 서로 연결하는 일이 중요합니다.",
+      "raw_seconds": 9.784761904761904,
+      "speech_window_seconds": 9.784761904761904,
+      "tempo": 1.0139649642240314,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "목표는 더 화려한 애니메이션이 아닙니다. 남은 증거를 더 많이 설명하면서, 근거 없는 가정을 줄이는 순서를 찾는 것입니다.",
+      "raw_seconds": 9.96172335600907,
+      "speech_window_seconds": 9.96172335600907,
+      "tempo": 1.0323029384465356,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "확실한 것은 주요 암반 건축이 선택적인 제거로 생겼다는 점입니다. 남긴 돌이 공간과 지지 구조, 사원의 표면이 되었습니다.",
+      "raw_seconds": 10.242585034013606,
+      "speech_window_seconds": 10.242585034013606,
+      "tempo": 1.0614077755454514,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "처음의 풍경으로 돌아갑시다. 사원은 여전히 웅장합니다. 이제는 주변의 빈 공기도 돌만큼 중요한 이야기를 담고 있습니다.",
+      "raw_seconds": 10.155578231292518,
+      "speech_window_seconds": 10.155578231292518,
+      "tempo": 1.0523915265588102,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "그 공기는 무엇을 없애고 남길지 결정한 결과입니다. 남은 모서리 하나도 다음 작업을 가능하게 만든 더 넓은 과정에 기대고 있습니다.",
+      "raw_seconds": 10.501904761904761,
+      "speech_window_seconds": 10.501904761904761,
+      "tempo": 1.0882802862077472,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "도랑과 정리된 작업면, 개구부와 완성된 형태의 주변 공간. 사라진 것들의 연속이 가장 이해하기 쉬운 이미지일 수 있습니다.",
+      "raw_seconds": 10.190385487528344,
+      "speech_window_seconds": 10.190385487528344,
+      "tempo": 1.0559984961169269,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "그 판단에는 예술과 종교의 뜻이 있었습니다. 공학은 공간을 만드는 방법을, 문화 연구는 왜 그 공간이 중요했는지를 설명합니다.",
+      "raw_seconds": 10.33875283446712,
+      "speech_window_seconds": 10.33875283446712,
+      "tempo": 1.0713733507219814,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "지질은 조건을 만들고, 기술은 조건을 선택으로 바꾸었습니다. 재료나 설계 어느 하나만으로는 성취 전체를 설명할 수 없습니다.",
+      "raw_seconds": 10.42469387755102,
+      "speech_window_seconds": 10.42469387755102,
+      "tempo": 1.0802791582954425,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "사라진 돌무더기는 조각가 손 밖의 일도 떠올리게 합니다. 정리와 운반, 보급과 점검, 정비와 높이 변화에 따른 조정입니다.",
+      "raw_seconds": 10.414421768707482,
+      "speech_window_seconds": 10.414421768707482,
+      "tempo": 1.0792146910577702,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "조직을 이해해도 놀라움은 줄지 않습니다. 지식과 반복된 실무 판단이 힘만큼 중요했던, 인간의 성취가 보이기 시작합니다.",
+      "raw_seconds": 9.955419501133786,
+      "speech_window_seconds": 9.955419501133786,
+      "tempo": 1.0316496892366618,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "오늘의 보존에도 다른 인내가 필요합니다. 돌과 물, 과거 수리를 살피며 꼼꼼하게 기록하는 일이 복잡한 역사를 지킵니다.",
+      "raw_seconds": 9.8621768707483,
+      "speech_window_seconds": 9.8621768707483,
+      "tempo": 1.0219872404920518,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "다음에 한 부분을 조사한다면 무엇을 고르겠습니까? 상부 윤곽, 안마당 벽, 내부 지지 구조, 아니면 폐석 운반의 증거일까요?",
+      "raw_seconds": 10.207936507936507,
+      "speech_window_seconds": 10.207936507936507,
+      "tempo": 1.0578172547084463,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 133,
+      "text": "선택마다 설명의 다른 부분을 검증합니다. 답을 줄 표면이나 관계를 정하면, 거대한 질문도 조사할 수 있는 질문이 됩니다.",
+      "raw_seconds": 10.088979591836734,
+      "speech_window_seconds": 10.088979591836734,
+      "tempo": 1.045490113143703,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 134,
+      "text": "모든 고대의 타격을 확신하며 말할 수는 없습니다. 그래도 충분한 돌과 작업 공간, 단계 사이의 조정이 왜 필수였는지는 이해할 수 있습니다.",
+      "raw_seconds": 11.136349206349207,
+      "speech_window_seconds": 11.136349206349207,
+      "tempo": 1.1540258244921457,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 135,
+      "text": "산을 사원으로 단순히 대체한 것이 아닙니다. 산의 일부가 사원이 되었습니다. 다음 과정을 가장 잘 알려 줄 흔적은 무엇일까요?",
+      "raw_seconds": 10.465374149659864,
+      "speech_window_seconds": 10.465374149659864,
+      "tempo": 1.0844947305347008,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1352,
+  "decoded_samples": 32448000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-ko-22m32s.mp3",
+  "flac": "voice-ko-22m32s.flac",
+  "mp3_sha256": "1809ab4bdb4a0393ce681c62f64b7f0d042c151c0b62f72ec84858293775d9f1",
+  "flac_sha256": "17fc24c8f7681c55557901d1391906d3bbfe263d8a1ca0e99615cb5af4a1bffa"
+}

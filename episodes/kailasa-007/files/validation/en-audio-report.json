@@ -1,0 +1,1236 @@
+{
+  "locale": "en",
+  "voice_id": "en-US-AndrewNeural",
+  "engine": "Microsoft Edge Read Aloud via edge-tts",
+  "target_seconds": 1352,
+  "spoken_cues": 135,
+  "closing_silence_seconds": 2,
+  "config_hash": "f4e31d8a6b72683f706abd86fb34e28335798480644c1321a7de261b476d7fb4",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "At Kailasa, a temple stands inside a hollow carved into a hillside. The first question is not what arrived, but what was taken away.",
+      "raw_seconds": 8.30625,
+      "speech_window_seconds": 8.30625,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Its towers, halls, and sculpted surfaces began within the rock. To understand their creation, we must learn to see the missing material around them.",
+      "raw_seconds": 9.3875,
+      "speech_window_seconds": 9.385208333333333,
+      "tempo": 0.9725604490500863,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "How could workers remove a mountain's surface while preserving the building inside it? Follow the cuts from the upper rock toward the spaces below.",
+      "raw_seconds": 8.175,
+      "speech_window_seconds": 8.172833333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Our setting is Ellora, in Maharashtra, western India. Here, a long basalt escarpment became a landscape of Buddhist, Hindu, and Jain monuments.",
+      "raw_seconds": 10.15525,
+      "speech_window_seconds": 10.099958333333333,
+      "tempo": 1.0466278065630397,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Kailasa is numbered Cave Sixteen within that complex. Yet its central monument is a temple exposed to daylight, surrounded by an excavated courtyard.",
+      "raw_seconds": 9.7,
+      "speech_window_seconds": 9.7,
+      "tempo": 1.0051813471502589,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "The temple is dedicated to Shiva. Its name evokes Mount Kailasa, a sacred dwelling, giving the carved mountain an architectural and religious purpose.",
+      "raw_seconds": 9.7125,
+      "speech_window_seconds": 9.7125,
+      "tempo": 1.0064766839378239,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "The main excavation is generally associated with the eighth century and Rashtrakuta king Krishna the First. The wider site's history spans several centuries.",
+      "raw_seconds": 10.08125,
+      "speech_window_seconds": 10.08125,
+      "tempo": 1.0446891191709844,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "That attribution gives us historical context, not a daily construction schedule. Patronage, building phases, and the work of individual teams are different questions.",
+      "raw_seconds": 9.85,
+      "speech_window_seconds": 9.85,
+      "tempo": 1.0207253886010361,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "The material is volcanic basalt. Its ancient lava flows contain different textures and fractures, so the hillside cannot be treated as perfectly uniform stone.",
+      "raw_seconds": 10.45,
+      "speech_window_seconds": 10.45,
+      "tempo": 1.082901554404145,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "For the builders, geology was part of the design problem. They needed rock that could hold a roof, accept detail, and survive the excavation.",
+      "raw_seconds": 8.65,
+      "speech_window_seconds": 8.65,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "They also needed room to work and somewhere to send the rubble. Removing stone creates a building, but also creates a continuous transport problem.",
+      "raw_seconds": 8.49375,
+      "speech_window_seconds": 8.49375,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Our investigation therefore follows three linked tasks: decide what must remain, remove what surrounds it, and protect the remaining structure throughout the process.",
+      "raw_seconds": 10.275,
+      "speech_window_seconds": 10.272708333333334,
+      "tempo": 1.0645293609671849,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Begin with the courtyard walls. Their height and position make the excavation visible: this open space was once occupied by a much larger rock mass.",
+      "raw_seconds": 9.9,
+      "speech_window_seconds": 9.897708333333334,
+      "tempo": 1.0256692573402417,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "In ordinary masonry, blocks are brought together. Here, the main rock-cut forms were created by leaving selected stone in place and removing adjacent material.",
+      "raw_seconds": 10.03725,
+      "speech_window_seconds": 9.974958333333333,
+      "tempo": 1.033674438687392,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "The Archaeological Survey of India associates Kailasa with Krishna the First. A later copper-plate record praises a remarkable temple at ancient Elapura, or Ellora.",
+      "raw_seconds": 11.14375,
+      "speech_window_seconds": 11.14375,
+      "tempo": 1.1547927461139897,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "That record concerns royal achievement. It is not a surviving instruction manual telling us the depth, order, or duration of every cutting operation.",
+      "raw_seconds": 9.20625,
+      "speech_window_seconds": 9.203958333333333,
+      "tempo": 0.9537780656303971,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "The monument itself supplies another kind of evidence. Architectural relationships, unfinished surfaces elsewhere, and comparative study help scholars evaluate possible sequences of work.",
+      "raw_seconds": 11.6125,
+      "speech_window_seconds": 11.6125,
+      "tempo": 1.2033678756476685,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "The basalt formed through successive lava flows. A dense interior and a more bubbly zone may behave differently when a cutting face is exposed.",
+      "raw_seconds": 9.51875,
+      "speech_window_seconds": 9.51875,
+      "tempo": 0.98639896373057,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Natural joints can assist separation, but can also interrupt a desired pillar or roof. A useful fracture in waste rock may be dangerous in retained stone.",
+      "raw_seconds": 9.9,
+      "speech_window_seconds": 9.897875,
+      "tempo": 1.0256865284974095,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "The official archaeological account notes the importance of these rock structures. This makes careful observation a practical requirement, rather than an optional preliminary ceremony.",
+      "raw_seconds": 11.05625,
+      "speech_window_seconds": 11.053958333333334,
+      "tempo": 1.1454879101899829,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Before opening a deep cut, workers had to preserve enough rock for the intended building. The planned void and the planned structure were inseparable.",
+      "raw_seconds": 8.4585,
+      "speech_window_seconds": 8.396,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Historical survey drawings record plans and sections of Kailasa. They document the surviving monument; they should not be mistaken for the builders' original drawings.",
+      "raw_seconds": 10.125,
+      "speech_window_seconds": 10.125,
+      "tempo": 1.049222797927461,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "The main shrine, pillared hall, entrance, and Nandi pavilion form a coordinated arrangement. Their relationship gives our model fixed destinations before the imagined cutting begins.",
+      "raw_seconds": 11.66875,
+      "speech_window_seconds": 11.66875,
+      "tempo": 1.2091968911917097,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "At the center stands the shrine with its rising superstructure. To carve its profile, workers needed to protect the volume beneath its highest features.",
+      "raw_seconds": 9.15,
+      "speech_window_seconds": 9.147708333333334,
+      "tempo": 0.9479490500863558,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Around the courtyard, galleries and shrines occupy the cliff. A central freestanding form and a chamber cut into a wall present related, but different problems.",
+      "raw_seconds": 10.35625,
+      "speech_window_seconds": 10.354083333333334,
+      "tempo": 1.0729620034542313,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Look again at the empty air between them. Measuring architecture means studying what remains; reconstructing excavation also means estimating what once filled those spaces.",
+      "raw_seconds": 10.7,
+      "speech_window_seconds": 10.691583333333334,
+      "tempo": 1.1079360967184801,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "A rough removal face and a finished ornamental surface answer different questions. One concerns access and progress; the other concerns the intended final form.",
+      "raw_seconds": 10.328,
+      "speech_window_seconds": 10.2625,
+      "tempo": 1.0634715025906734,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Unfinished rock-cut monuments can illuminate working stages. Comparisons are valuable, provided we do not pretend another site's surviving marks are direct records of Kailasa.",
+      "raw_seconds": 10.81875,
+      "speech_window_seconds": 10.81875,
+      "tempo": 1.1211139896373057,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "No reconstruction should make the rock behave like soft clay. Weight, fractures, clearance, and the changing shape of the remaining mass must stay in view.",
+      "raw_seconds": 9.61875,
+      "speech_window_seconds": 9.616541666666667,
+      "tempo": 0.9965328151986182,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "With those constraints established, let us build a possible sequence. It explains the logic of top-down carving without claiming to recover every historical movement.",
+      "raw_seconds": 10.0375,
+      "speech_window_seconds": 10.0375,
+      "tempo": 1.0401554404145077,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "First imagine the sloping hillside before the courtyard existed. The desired roof height and the available rock would limit where the temple could be placed.",
+      "raw_seconds": 8.4625,
+      "speech_window_seconds": 8.4625,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "The highest intended feature must fit inside that original mass. If the first removal cuts pass too low, the missing height cannot simply be carved back.",
+      "raw_seconds": 9.40625,
+      "speech_window_seconds": 9.40625,
+      "tempo": 0.974740932642487,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "A consistent layout also needs reference lines and levels. Strings, measuring devices, and sighting are plausible aids, though the exact arrangement here is not preserved.",
+      "raw_seconds": 11.05,
+      "speech_window_seconds": 11.047708333333333,
+      "tempo": 1.1448402417962003,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "In our model, the future temple remains a generous reserve of stone. Fine edges are not exposed before the surrounding work has a controlled path.",
+      "raw_seconds": 9.03025,
+      "speech_window_seconds": 8.974958333333333,
+      "tempo": 0.9300474956822107,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Cuts descending around that reserve can open separation from the hillside. The growing trenches create working faces while leaving the intended architecture within the central mass.",
+      "raw_seconds": 10.78125,
+      "speech_window_seconds": 10.712541666666667,
+      "tempo": 1.110107944732297,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Bulk removal need not mean grinding every fragment into dust. Where rock conditions permit, separating pieces can reduce material more efficiently than finishing every face.",
+      "raw_seconds": 11.33125,
+      "speech_window_seconds": 11.33125,
+      "tempo": 1.174222797927461,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Yet separation must remain controlled. An unwanted fracture could run from waste material into a cornice, pillar, or roof that the builders intended to keep.",
+      "raw_seconds": 10.1375,
+      "speech_window_seconds": 10.135291666666667,
+      "tempo": 1.0502892918825562,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Every piece removed then has to leave the working area. A trench that fills with rubble quickly loses the access that excavation was meant to create.",
+      "raw_seconds": 9.41925,
+      "speech_window_seconds": 9.35,
+      "tempo": 0.9689119170984455,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Working from above allows the upper profile to emerge before lower surfaces are fully exposed. The hillside itself can temporarily provide access around unfinished parts.",
+      "raw_seconds": 10.575,
+      "speech_window_seconds": 10.575,
+      "tempo": 1.0958549222797926,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "That is a sequence, not a miraculous single cut. The model advances through many small removals, each changing both the future building and its working surroundings.",
+      "raw_seconds": 10.24375,
+      "speech_window_seconds": 10.24375,
+      "tempo": 1.0615284974093264,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Consider an overhanging cornice. Enough rock must remain beneath and beside it while its shape is developed, especially where natural joints approach the edge.",
+      "raw_seconds": 9.94925,
+      "speech_window_seconds": 9.887666666666666,
+      "tempo": 1.024628670120898,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Roughing and finishing have different goals. Removing the main surplus creates space; finer work then develops profiles and decoration where access and stability allow.",
+      "raw_seconds": 10.80625,
+      "speech_window_seconds": 10.80625,
+      "tempo": 1.119818652849741,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Top-down does not require every team to stand at exactly the same height. Different areas can progress differently, as long as the surviving geometry remains coordinated.",
+      "raw_seconds": 10.43125,
+      "speech_window_seconds": 10.429083333333333,
+      "tempo": 1.08073402417962,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "That coordination becomes harder as the excavation deepens. A team shaping an upper edge must understand the hall, opening, or support that will eventually lie below.",
+      "raw_seconds": 10.4425,
+      "speech_window_seconds": 10.371,
+      "tempo": 1.0747150259067357,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Small errors in position can accumulate. Repeated checks of alignment and level are therefore a reasonable engineering requirement, even when the exact ancient measuring routine is unknown.",
+      "raw_seconds": 11.53125,
+      "speech_window_seconds": 11.53125,
+      "tempo": 1.1949481865284974,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "The interior adds another operation. Opening a chamber removes rock from inside the reserved mass, so walls, ceiling, and columns must be considered together.",
+      "raw_seconds": 10.1875,
+      "speech_window_seconds": 10.185291666666666,
+      "tempo": 1.055470639032815,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "A rock-cut column is made by removing its surroundings. Its size depends partly on what the ceiling requires, not simply on the beauty of its outline.",
+      "raw_seconds": 9.38525,
+      "speech_window_seconds": 9.312583333333333,
+      "tempo": 0.9650345423143349,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Likewise, the ceiling is retained material spanning a space. Carving a larger opening changes the demand on that stone, particularly near fractures or thinner sections.",
+      "raw_seconds": 11.06875,
+      "speech_window_seconds": 11.06875,
+      "tempo": 1.147020725388601,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "A projection outside the wall faces a different geometry. We should not animate every stone surface as though compression alone makes any shape equally secure.",
+      "raw_seconds": 9.86875,
+      "speech_window_seconds": 9.866458333333334,
+      "tempo": 1.02243091537133,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "The carved elephants at the base enrich the monument's appearance. They are stone images within an architectural mass, not living animals carrying the building.",
+      "raw_seconds": 9.3745,
+      "speech_window_seconds": 9.3085,
+      "tempo": 0.9646113989637306,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "This distinction matters when explaining loads. The surviving stone core and its connections must be studied, rather than treating a sculptural story as a structural diagram.",
+      "raw_seconds": 10.21875,
+      "speech_window_seconds": 10.21875,
+      "tempo": 1.0589378238341969,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Light also changes as the voids open. An exterior wall, a shaded hall, and a narrow passage demand different decisions about depth and visible detail.",
+      "raw_seconds": 9.55625,
+      "speech_window_seconds": 9.554,
+      "tempo": 0.9900518134715026,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "The finished arrangement serves worship as well as movement. Reconstructing a cutting sequence should still leave room for the temple's intended use and symbolic order.",
+      "raw_seconds": 9.889,
+      "speech_window_seconds": 9.8335,
+      "tempo": 1.0190155440414508,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "The Nandi pavilion belongs to that arrangement. Its relationship with the main shrine helps explain why the excavators needed more than one isolated architectural shape.",
+      "raw_seconds": 10.28125,
+      "speech_window_seconds": 10.28125,
+      "tempo": 1.0654145077720207,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Connecting stone elements make the planning problem more demanding. In a model, a link cannot be restored by magic after its required rock has already been removed.",
+      "raw_seconds": 9.925,
+      "speech_window_seconds": 9.922833333333333,
+      "tempo": 1.028272884283247,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Exterior excavation and interior hollowing therefore interact. Their order may vary locally, but neither can ignore what the other needs to leave in place.",
+      "raw_seconds": 10.0,
+      "speech_window_seconds": 9.997708333333334,
+      "tempo": 1.03603195164076,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Openings also affect movement through the worksite. A doorway suited to the finished temple may be awkward for clearing material during an earlier stage.",
+      "raw_seconds": 9.0375,
+      "speech_window_seconds": 9.035208333333333,
+      "tempo": 0.9362910189982728,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Different tasks call for different cutting actions. Breaking surplus rock, shaping a plane, and refining an edge are not interchangeable steps in one generic hammering scene.",
+      "raw_seconds": 10.6625,
+      "speech_window_seconds": 10.660208333333333,
+      "tempo": 1.1046848013816926,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Iron tools belong to the broader technological setting. Our illustration uses plausible hand tools, without presenting an invented toolkit as a recovered Kailasa discovery.",
+      "raw_seconds": 11.0625,
+      "speech_window_seconds": 11.060208333333334,
+      "tempo": 1.146135578583765,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Tools also wear. Sharpening, replacement, and supplies belong in the explanation, though a particular workshop or repair cycle would need its own evidence.",
+      "raw_seconds": 9.83125,
+      "speech_window_seconds": 9.762541666666667,
+      "tempo": 1.0116623488773748,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "The workforce cannot be reduced to a single crowd count. Layout, cutting, finishing, carrying, and tool care require different skills and different kinds of coordination.",
+      "raw_seconds": 10.50625,
+      "speech_window_seconds": 10.50625,
+      "tempo": 1.0887305699481864,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "We can model the amount of material without pretending to know the total removed here. First, distinguish rock volume from rock mass.",
+      "raw_seconds": 7.98125,
+      "speech_window_seconds": 7.978958333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Suppose a solid cubic meter has an assumed mass of two point eight tonnes. That is an illustrative density choice, not a measurement of this temple.",
+      "raw_seconds": 8.66875,
+      "speech_window_seconds": 8.66875,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Under that assumption, one hundred cubic meters would weigh two hundred eighty tonnes. The arithmetic describes our example, not a verified excavation total for Kailasa.",
+      "raw_seconds": 10.45,
+      "speech_window_seconds": 10.447708333333333,
+      "tempo": 1.0826640759930914,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "After breaking, loose rubble also contains gaps between fragments. Its handling volume differs from the original solid rock, which complicates any estimate based on cart capacity.",
+      "raw_seconds": 11.31875,
+      "speech_window_seconds": 11.316458333333333,
+      "tempo": 1.1726899827288428,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "To infer a work rate, we would need more: task size, rock condition, tool performance, access, carrying distance, and time spent on finishing and repair.",
+      "raw_seconds": 10.3625,
+      "speech_window_seconds": 10.3625,
+      "tempo": 1.0738341968911918,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "The depth of excavation changes those conditions as work proceeds. A convenient upper route may disappear, while a lower passage becomes available only later.",
+      "raw_seconds": 10.2645,
+      "speech_window_seconds": 10.197166666666666,
+      "tempo": 1.0567012089810017,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "A convincing reconstruction must therefore connect the stages. Rock cannot vanish, workers need access, and the structure must remain supported while its surroundings are removed.",
+      "raw_seconds": 10.75,
+      "speech_window_seconds": 10.75,
+      "tempo": 1.1139896373056994,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "By now, the upper architecture has begun to emerge. The achievement is not just its outline, but a sequence that keeps the next operation possible.",
+      "raw_seconds": 9.26875,
+      "speech_window_seconds": 9.26875,
+      "tempo": 0.9604922279792747,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Now introduce the first serious obstacle: removal is difficult to reverse. A mistake can change the available form before the sculptor reaches the intended surface.",
+      "raw_seconds": 10.2625,
+      "speech_window_seconds": 10.260458333333334,
+      "tempo": 1.0632599309153714,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Repairs are possible in stonework, and modern conservation has altered some surfaces. But replacing a lost fragment is different from preserving the original continuous rock.",
+      "raw_seconds": 10.6,
+      "speech_window_seconds": 10.59775,
+      "tempo": 1.0982124352331606,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "A hidden joint presents another obstacle. Its effect depends on where it crosses the remaining stone, not simply on whether a fracture exists somewhere nearby.",
+      "raw_seconds": 8.8,
+      "speech_window_seconds": 8.797708333333333,
+      "tempo": 0.9116796200345422,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Leaving extra stone during rough work can preserve options. Removing that margin later still requires a decision about shape, strength, and the quality now exposed.",
+      "raw_seconds": 10.22275,
+      "speech_window_seconds": 10.1625,
+      "tempo": 1.0531088082901554,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "A small demonstration can explain the principle, but cannot certify the whole monument. Scale changes the consequences of cracks, unsupported spans, and falling fragments.",
+      "raw_seconds": 10.73125,
+      "speech_window_seconds": 10.73125,
+      "tempo": 1.1120466321243523,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Stone may carry compression well while remaining vulnerable in other conditions. Bending, tension, and fractures matter when a roof or projecting feature is carved free.",
+      "raw_seconds": 10.63125,
+      "speech_window_seconds": 10.629083333333334,
+      "tempo": 1.1014594127806563,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "A longer span is not merely a larger version of a short one. Thickness, support positions, and the actual rock structure must all be considered.",
+      "raw_seconds": 9.175,
+      "speech_window_seconds": 9.166458333333333,
+      "tempo": 0.9498920552677028,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "The same fracture can be harmless in a broad mass and serious near an exposed edge. That is why geometry and geology must be read together.",
+      "raw_seconds": 8.75,
+      "speech_window_seconds": 8.75,
+      "tempo": 0.9067357512953368,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Then comes rain. Opening a deep courtyard changes how water reaches surfaces and where it collects; unfinished work must be considered in a seasonal landscape.",
+      "raw_seconds": 9.94375,
+      "speech_window_seconds": 9.94375,
+      "tempo": 1.030440414507772,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Water can follow joints and irregular surfaces. In a reconstruction, a beautiful dry model should not make us forget the changing conditions of an exposed hillside.",
+      "raw_seconds": 10.175,
+      "speech_window_seconds": 10.172833333333333,
+      "tempo": 1.0541796200345424,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Rubble clearance and drainage can also interfere with one another. Material piled in the wrong place may restrict both a working route and a water path.",
+      "raw_seconds": 9.13775,
+      "speech_window_seconds": 9.0625,
+      "tempo": 0.939119170984456,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Conservation records describe drainage work and repairs at Ellora. These records remind us that a visible channel or patched surface may have a later history.",
+      "raw_seconds": 9.51475,
+      "speech_window_seconds": 9.437541666666666,
+      "tempo": 0.9779835924006908,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Access is another challenge. Top-down work can use remaining rock as a platform, but that does not prove scaffolds or temporary supports were never needed.",
+      "raw_seconds": 8.85625,
+      "speech_window_seconds": 8.85625,
+      "tempo": 0.9177461139896372,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "As surfaces become finished and lower areas open, working positions change. A plausible sequence must show how adults reach those positions without impossible floating tools.",
+      "raw_seconds": 11.075,
+      "speech_window_seconds": 11.072708333333333,
+      "tempo": 1.1474309153713298,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Work above can threaten people and completed features below. Our illustration separates cutting and clearance zones instead of sending loose stones through an active courtyard.",
+      "raw_seconds": 10.26075,
+      "speech_window_seconds": 10.200041666666667,
+      "tempo": 1.0569991364421416,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "That separation requires coordination. Signals, pauses, and agreed working areas may be less spectacular than carving a tower, but they belong to a credible explanation.",
+      "raw_seconds": 11.10625,
+      "speech_window_seconds": 11.10625,
+      "tempo": 1.1509067357512952,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "So do supplies. Food, water, timber, metal, and maintained tools must reach the right place, even when our focus is the stone that stayed behind.",
+      "raw_seconds": 10.30625,
+      "speech_window_seconds": 10.304,
+      "tempo": 1.0677720207253887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "This is skilled labor organized across tasks. A huge anonymous crowd does not explain the decisions that distinguish rough excavation from a carefully proportioned shrine.",
+      "raw_seconds": 10.46875,
+      "speech_window_seconds": 10.46875,
+      "tempo": 1.084844559585492,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "We should also avoid inventing the workers' identities and contracts. The monument demonstrates extensive human effort; it does not preserve every person's biography or status.",
+      "raw_seconds": 11.1375,
+      "speech_window_seconds": 11.135291666666667,
+      "tempo": 1.1539162348877374,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Nor can a seasonal setting supply an exact work calendar. Rain, access, sponsorship, and repairs are relevant variables, not a recovered timetable of this project.",
+      "raw_seconds": 10.7125,
+      "speech_window_seconds": 10.71025,
+      "tempo": 1.1098704663212435,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "What we can demand is internal consistency. A proposed cut must leave enough space for tools, enough stone for support, and a route for the waste.",
+      "raw_seconds": 8.8625,
+      "speech_window_seconds": 8.86025,
+      "tempo": 0.918160621761658,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Architectural study can also compare different parts of the complex. Similarity and difference may inform chronology, but they do not automatically reveal a day's work order.",
+      "raw_seconds": 10.5875,
+      "speech_window_seconds": 10.585208333333334,
+      "tempo": 1.096912780656304,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Ellora includes other rock-cut temples, including a later monument called Little Kailasa. Our story concerns Cave Sixteen, and its images should not be casually mixed.",
+      "raw_seconds": 11.44725,
+      "speech_window_seconds": 11.375083333333333,
+      "tempo": 1.1787651122625216,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Even within one courtyard, different sculptural surfaces require careful identification. A close view may be visually impressive while telling us little about the original excavation sequence.",
+      "raw_seconds": 11.4125,
+      "speech_window_seconds": 11.4125,
+      "tempo": 1.182642487046632,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "The temple's imagery evokes a sacred world. That cultural program helps explain the ambition of the monument, without functioning as a literal record of the workshop.",
+      "raw_seconds": 10.05625,
+      "speech_window_seconds": 10.05625,
+      "tempo": 1.0420984455958548,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "A religious scene and a cutting diagram serve different purposes. We can value both while keeping symbolic meaning separate from claims about a specific technical operation.",
+      "raw_seconds": 10.06875,
+      "speech_window_seconds": 10.0665,
+      "tempo": 1.043160621761658,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Popular retellings often jump straight from a solid hill to a finished temple. The missing middle is precisely where the real engineering questions belong.",
+      "raw_seconds": 9.19375,
+      "speech_window_seconds": 9.19375,
+      "tempo": 0.952720207253886,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Claims about exact tonnage or astonishing completion times need defensible measurements and sources. A repeated number on a screen does not become an archaeological observation.",
+      "raw_seconds": 10.6375,
+      "speech_window_seconds": 10.635333333333334,
+      "tempo": 1.1021070811744387,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Estimating removed volume requires an original hillside surface as well as the surviving shape. Uncertainty in that lost surface becomes uncertainty in the result.",
+      "raw_seconds": 11.19925,
+      "speech_window_seconds": 11.124958333333334,
+      "tempo": 1.1528454231433507,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Tracking the discarded stone is a separate investigation. We should not label every nearby fragment as ancient Kailasa waste without establishing its context and relationship.",
+      "raw_seconds": 11.25625,
+      "speech_window_seconds": 11.25625,
+      "tempo": 1.1664507772020725,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "These limits do not make the monument unknowable. They tell us which questions can be answered from geometry and which need stronger historical or material evidence.",
+      "raw_seconds": 9.575,
+      "speech_window_seconds": 9.572708333333333,
+      "tempo": 0.9919905008635578,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Modern repair records provide another useful check. The stone surfaces seen today have also experienced weathering, maintenance, and intervention long after the original carving.",
+      "raw_seconds": 10.3375,
+      "speech_window_seconds": 10.33525,
+      "tempo": 1.0710103626943006,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "A repair seam should not be confused with original assembly. Conversely, calling the core monolithic should not erase the later history of the whole complex.",
+      "raw_seconds": 9.45,
+      "speech_window_seconds": 9.447708333333333,
+      "tempo": 0.9790371329879101,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Our visual reconstruction must carry that distinction. Measured surviving features stay firm; uncertain work stages should remain recognizable as interpretive models.",
+      "raw_seconds": 10.75625,
+      "speech_window_seconds": 10.753958333333333,
+      "tempo": 1.1143998272884283,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "This is also a living heritage place, not an abandoned laboratory. Understanding its making should deepen attention to its religious setting, communities, and care.",
+      "raw_seconds": 10.017,
+      "speech_window_seconds": 9.946583333333333,
+      "tempo": 1.03073402417962,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "We can now compare the main explanations more fairly. Each must account for the same rock, the same retained architecture, and the same need to remove waste.",
+      "raw_seconds": 9.20625,
+      "speech_window_seconds": 9.20625,
+      "tempo": 0.9540155440414508,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "First compare a built temple with a rock-cut one. Assembly requires bringing material into place; excavation requires preserving the desired mass while clearing its surroundings.",
+      "raw_seconds": 11.26875,
+      "speech_window_seconds": 11.26875,
+      "tempo": 1.1677461139896372,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "The first approach concentrates attention on transport and joints. The second shifts attention toward rock selection, removal order, access, and the disposal of unwanted material.",
+      "raw_seconds": 11.58125,
+      "speech_window_seconds": 11.58125,
+      "tempo": 1.2001295336787565,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Now compare a chamber opened into a cliff with a temple isolated in a courtyard. Both remove rock, but they organize light and working faces differently.",
+      "raw_seconds": 9.5,
+      "speech_window_seconds": 9.497791666666666,
+      "tempo": 0.9842271157167529,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "For Kailasa, surrounding excavation is central to the explanation. It reveals a building that reads as architecture in the round, rather than only an interior behind a façade.",
+      "raw_seconds": 11.09375,
+      "speech_window_seconds": 11.09375,
+      "tempo": 1.1496113989637304,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "The broad top-down principle fits that task. It lets the upper form guide lower removal, while keeping sufficient stone for the parts that have yet to emerge.",
+      "raw_seconds": 9.702,
+      "speech_window_seconds": 9.646,
+      "tempo": 0.9995854922279793,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "But a broad principle is not a complete calendar. Parallel work, local adjustments, and different finishing stages can belong within a much more complicated project.",
+      "raw_seconds": 9.71875,
+      "speech_window_seconds": 9.71875,
+      "tempo": 1.0071243523316062,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "The temple's forms also belong to a wider architectural culture. Carvers worked with ideas about shrines, halls, towers, and ornament that extended beyond this hillside.",
+      "raw_seconds": 11.175,
+      "speech_window_seconds": 11.175,
+      "tempo": 1.1580310880829017,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Other Indian rock-cut traditions provide context for that knowledge. Comparison can illuminate possibilities without proving that one particular crew or blueprint traveled along a particular route.",
+      "raw_seconds": 11.725,
+      "speech_window_seconds": 11.72275,
+      "tempo": 1.2147927461139896,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "A carved architectural band can resemble a built course. Similar appearance does not mean the stone was assembled there, so surface reading needs structural context.",
+      "raw_seconds": 10.14375,
+      "speech_window_seconds": 10.141583333333333,
+      "tempo": 1.0509412780656304,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "The sacred mountain idea gives this subtraction a larger meaning. A place associated with Shiva is made present through the shape of a mountain transformed into a temple.",
+      "raw_seconds": 10.14375,
+      "speech_window_seconds": 10.14375,
+      "tempo": 1.0511658031088082,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Royal patronage and skilled work help explain the monument's ambition. Historical attribution supports that setting, while leaving many details of organization and phasing open to study.",
+      "raw_seconds": 11.58175,
+      "speech_window_seconds": 11.525,
+      "tempo": 1.194300518134715,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "How long did the entire operation take? A precise answer would require a firmer definition of which phases, which surfaces, and which kinds of work are included.",
+      "raw_seconds": 9.50625,
+      "speech_window_seconds": 9.50625,
+      "tempo": 0.9851036269430051,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "How many people were needed? Any estimate changes with assumptions about productivity, carrying, maintenance, and the number of teams that could work without obstructing one another.",
+      "raw_seconds": 10.0625,
+      "speech_window_seconds": 10.060208333333334,
+      "tempo": 1.0425086355785838,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Even a tool mark has limits. It can reveal a contact or a working direction, but rarely supplies a complete date and workforce history by itself.",
+      "raw_seconds": 9.1125,
+      "speech_window_seconds": 9.110208333333333,
+      "tempo": 0.9440630397236613,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Modern survey can improve the geometric picture. It helps document surfaces and relationships, but measuring a finished temple does not automatically recover the original cutting plan.",
+      "raw_seconds": 11.04375,
+      "speech_window_seconds": 11.041583333333334,
+      "tempo": 1.1442055267702935,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "A valuable next investigation would connect several kinds of evidence: geology, unfinished features, architectural relationships, old records, and carefully stated models of removal.",
+      "raw_seconds": 11.85,
+      "speech_window_seconds": 11.841458333333334,
+      "tempo": 1.227094127806563,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "The goal is not a more spectacular animation. It is a sequence that explains more of the surviving evidence while adding fewer unsupported assumptions.",
+      "raw_seconds": 9.385,
+      "speech_window_seconds": 9.321,
+      "tempo": 0.9659067357512953,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "What can we say firmly? Kailasa's main rock-cut architecture emerged by selective removal, with retained stone shaped into spaces, supports, and surfaces of a coordinated temple.",
+      "raw_seconds": 11.82775,
+      "speech_window_seconds": 11.750166666666667,
+      "tempo": 1.2176338514680483,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Return to the opening view. The temple still feels monumental, but the empty air around it now carries a story as important as the stone.",
+      "raw_seconds": 8.4375,
+      "speech_window_seconds": 8.4375,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "That air represents decisions about what to remove and what to keep. Every surviving edge depends on a wider operation that made the next edge possible.",
+      "raw_seconds": 9.1625,
+      "speech_window_seconds": 9.1625,
+      "tempo": 0.949481865284974,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "The most revealing image may therefore be a sequence of absences: a trench, a cleared working face, an opening, and finally the space surrounding a finished form.",
+      "raw_seconds": 10.6125,
+      "speech_window_seconds": 10.6125,
+      "tempo": 1.0997409326424872,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "Within those decisions were artistic and religious intentions. Engineering explains how space could be made; cultural study helps explain why these particular spaces mattered.",
+      "raw_seconds": 10.4275,
+      "speech_window_seconds": 10.3585,
+      "tempo": 1.073419689119171,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "Geology set conditions. Craft turned those conditions into choices. Neither the material nor the design alone can explain the full achievement.",
+      "raw_seconds": 8.975,
+      "speech_window_seconds": 8.975,
+      "tempo": 0.9300518134715026,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "The missing rubble also reminds us of work beyond the sculptor's hand: clearing, carrying, supplying, checking, maintaining, and coordinating over changing levels of excavation.",
+      "raw_seconds": 11.36875,
+      "speech_window_seconds": 11.36875,
+      "tempo": 1.1781088082901554,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "Recognizing that organization does not reduce the wonder. It gives the achievement human dimensions, where knowledge and repeated practical decisions matter as much as strength.",
+      "raw_seconds": 10.4625,
+      "speech_window_seconds": 10.4625,
+      "tempo": 1.08419689119171,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "Preserving Kailasa now requires another form of patience. Careful documentation and attention to stone, water, and previous repairs help protect a complex history.",
+      "raw_seconds": 10.84375,
+      "speech_window_seconds": 10.84375,
+      "tempo": 1.1237046632124352,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "If you could examine one part next, what would you choose: the upper profile, the courtyard walls, the interior supports, or the evidence for moving waste?",
+      "raw_seconds": 9.1625,
+      "speech_window_seconds": 9.160208333333333,
+      "tempo": 0.9492443868739205,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 133,
+      "text": "Each choice tests a different part of the explanation. A monumental question becomes easier to investigate when we identify the particular surface or relationship that could answer it.",
+      "raw_seconds": 10.6125,
+      "speech_window_seconds": 10.610208333333333,
+      "tempo": 1.0995034542314335,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 134,
+      "text": "We cannot narrate every ancient strike with certainty. We can still understand why leaving enough stone, clearing space, and coordinating the stages were essential.",
+      "raw_seconds": 9.88125,
+      "speech_window_seconds": 9.879041666666666,
+      "tempo": 1.0237348877374783,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 135,
+      "text": "The mountain was not simply replaced by a temple. Part of it became the temple. Which surviving trace might best reveal the next step in that transformation?",
+      "raw_seconds": 9.4695,
+      "speech_window_seconds": 9.396,
+      "tempo": 0.973678756476684,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1352,
+  "decoded_samples": 32448000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-en-22m32s.mp3",
+  "flac": "voice-en-22m32s.flac",
+  "mp3_sha256": "13e3d7d39e6209b72df5134603b807077b914fe6a686c577e52a4df00228bde8",
+  "flac_sha256": "460d82d8632a413d45505b962e2a581e5d6c5dd1168868ba6922201c3d8fda2b"
+}

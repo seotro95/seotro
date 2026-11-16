@@ -1,0 +1,1236 @@
+{
+  "locale": "ja",
+  "voice_id": "supertonic:5",
+  "engine": "Supertonic 3 CPU INT8",
+  "target_seconds": 1352,
+  "spoken_cues": 135,
+  "closing_silence_seconds": 2,
+  "config_hash": "1a781d904d765108d60d5b0a90e5e889de53247b2e36ef60b961de30e5f6e8ed",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "カイラーサ寺院は、丘を掘り下げた空間に立っています。最初に問うべきは、何を運び込んだかではなく、何を取り除いたかです。",
+      "raw_seconds": 9.42344671201814,
+      "speech_window_seconds": 9.42344671201814,
+      "tempo": 0.9765229753386674,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "塔も広間も彫刻も、もとは岩の中にありました。その成り立ちを知るには、周囲から消えた岩にも目を向ける必要があります。",
+      "raw_seconds": 10.022131519274376,
+      "speech_window_seconds": 10.022131519274376,
+      "tempo": 1.0385628517382772,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "建物を残しながら、山の表面をどう削ったのでしょうか。上部の岩から下の空間へ、加工の順序をたどりましょう。",
+      "raw_seconds": 9.221428571428572,
+      "speech_window_seconds": 9.221428571428572,
+      "tempo": 0.9555884529977794,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "舞台はインド西部、マハーラーシュトラ州のエローラです。玄武岩の崖には、仏教、ヒンドゥー教、ジャイナ教の遺構が並びます。",
+      "raw_seconds": 8.953038548752835,
+      "speech_window_seconds": 8.953038548752835,
+      "tempo": 0.9277760154148015,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "カイラーサは第十六窟と呼ばれます。ただし中央の建物は、岩を掘り広げた中庭に立つ、日の光を受ける寺院です。",
+      "raw_seconds": 9.70437641723356,
+      "speech_window_seconds": 9.70437641723356,
+      "tempo": 1.005634861889488,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "寺院はシヴァ神に捧げられています。名は聖なるカイラーサ山を示し、岩山を建築と信仰の両面から意味付けます。",
+      "raw_seconds": 9.329138321995465,
+      "speech_window_seconds": 9.329138321995465,
+      "tempo": 0.9667500851808772,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "主な開削は、一般に八世紀のラーシュトラクータ朝、クリシュナ一世と結び付けられます。エローラ全体の歴史は、数世紀に及びます。",
+      "raw_seconds": 10.661496598639456,
+      "speech_window_seconds": 10.661496598639456,
+      "tempo": 1.1048183003771457,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "それは歴史の背景を示しても、日々の工程表にはなりません。王の支援、建設の段階、各班の仕事は、別々の問題です。",
+      "raw_seconds": 10.252630385487528,
+      "speech_window_seconds": 10.252630385487528,
+      "tempo": 1.0624487446101065,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "材料は火山が生んだ玄武岩です。古い溶岩流ごとに組織や割れ目が異なり、丘全体を均一な石とはみなせません。",
+      "raw_seconds": 10.347619047619048,
+      "speech_window_seconds": 10.347619047619048,
+      "tempo": 1.072292129286948,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "造り手にとって、地質も設計条件でした。屋根を支え、細部を彫れ、開削にも耐える岩が必要だったのです。",
+      "raw_seconds": 8.433650793650793,
+      "speech_window_seconds": 8.433650793650793,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "作業する場所と、砕いた石の搬出先も必要です。岩を取り除けば建物が生まれますが、同時に運搬の問題も生まれます。",
+      "raw_seconds": 9.384285714285713,
+      "speech_window_seconds": 9.384285714285713,
+      "tempo": 0.9724648408586232,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "そこで、三つの仕事を追います。残す部分を決め、周囲を除き、その間ずっと、残された構造を守ることです。",
+      "raw_seconds": 8.519931972789117,
+      "speech_window_seconds": 8.519931972789117,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "まず中庭の壁を見ましょう。高さと位置が、開削の規模を示します。この空間には、かつてもっと大きな岩塊がありました。",
+      "raw_seconds": 9.3437641723356,
+      "speech_window_seconds": 9.3437641723356,
+      "tempo": 0.9682657173404766,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "普通の石造建築は、石を集めて組みます。ここでは、必要な岩をその場に残し、隣の岩を除いて、主要な形を作りました。",
+      "raw_seconds": 9.958458049886621,
+      "speech_window_seconds": 9.958458049886621,
+      "tempo": 1.0319645647550904,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "インド考古調査局は、この寺院をクリシュナ一世に結び付けています。後世の銅板文書も、古代のエローラの壮大な建物を称えます。",
+      "raw_seconds": 11.545124716553287,
+      "speech_window_seconds": 11.545124716553287,
+      "tempo": 1.196385980989978,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "その記録は王の功績を伝えます。しかし、一つ一つの切削の深さ、順番、所要時間を記す、工事の手引きではありません。",
+      "raw_seconds": 10.116031746031746,
+      "speech_window_seconds": 10.116031746031746,
+      "tempo": 1.0482934451846369,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "建物そのものも証拠です。構造の関係、他の未完成遺構、比較研究から、可能な作業順序を検討できます。",
+      "raw_seconds": 8.336530612244898,
+      "speech_window_seconds": 8.336530612244898,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "玄武岩は、繰り返す溶岩流から生まれました。密な内部と気泡の多い部分では、露出したときの性質が違う場合があります。",
+      "raw_seconds": 10.040816326530612,
+      "speech_window_seconds": 10.040816326530612,
+      "tempo": 1.040499101194882,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "自然の割れ目は、石を分ける助けにも、柱や屋根を損なう原因にもなります。捨てる岩で便利でも、残す岩では危険なのです。",
+      "raw_seconds": 9.73766439909297,
+      "speech_window_seconds": 9.73766439909297,
+      "tempo": 1.0090843936883906,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "公的な考古資料も、岩の構造の重要性を指摘します。綿密な観察は、儀礼的な準備ではなく、実際の作業条件です。",
+      "raw_seconds": 9.319092970521542,
+      "speech_window_seconds": 9.319092970521542,
+      "tempo": 0.9657091161162219,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "深く掘る前に、建物のための岩を十分残す必要があります。作る空間と、残す構造は、切り離して考えられません。",
+      "raw_seconds": 9.781632653061225,
+      "speech_window_seconds": 9.781632653061225,
+      "tempo": 1.0136406894363963,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "歴史的な測量図には、寺院の平面や断面が記録されています。ただし、当時の造り手が描いた原設計図ではありません。",
+      "raw_seconds": 9.645963718820862,
+      "speech_window_seconds": 9.645963718820862,
+      "tempo": 0.9995817325202966,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "本殿、柱の広間、入口、ナンディー堂は、一つの配置を成します。その関係を完成形として、開削の模型を考えます。",
+      "raw_seconds": 10.140839002267574,
+      "speech_window_seconds": 10.140839002267574,
+      "tempo": 1.050864145312702,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "中心には、上部構造を備えた本殿が立ちます。輪郭を彫るには、最も高い部分の下に必要な岩を守らなければなりません。",
+      "raw_seconds": 10.225759637188208,
+      "speech_window_seconds": 10.225759637188208,
+      "tempo": 1.0596642111075862,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "中庭の周囲には、崖をくり抜いた回廊や祠があります。独立した中央の建物と、壁の中の部屋では、課題が異なります。",
+      "raw_seconds": 9.85156462585034,
+      "speech_window_seconds": 9.85156462585034,
+      "tempo": 1.0208875259948538,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "その間の空気を、もう一度見てください。建築の計測は残るものを測り、開削の復元は失われた岩の範囲も推定します。",
+      "raw_seconds": 9.469206349206349,
+      "speech_window_seconds": 9.469206349206349,
+      "tempo": 0.9812649066535076,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "粗い加工面と完成した装飾面は、違う問いに答えます。一方は作業の進め方、もう一方は目指した最終形を示します。",
+      "raw_seconds": 9.53077097505669,
+      "speech_window_seconds": 9.53077097505669,
+      "tempo": 0.9876446606276362,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "未完成の石窟は、工程を知る比較材料です。ただし、別の場所の加工痕を、カイラーサの作業記録と取り違えてはいけません。",
+      "raw_seconds": 9.565510204081633,
+      "speech_window_seconds": 9.565510204081633,
+      "tempo": 0.9912445807338479,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "復元で、岩を柔らかな粘土のように扱ってはいけません。重さ、割れ目、作業の余地、残る岩の形を考える必要があります。",
+      "raw_seconds": 9.783628117913832,
+      "speech_window_seconds": 9.783628117913832,
+      "tempo": 1.0138474733589462,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "こうした条件から、可能な順序を組み立てます。上から下へ彫る原理を示す模型であり、すべての実作業を特定するものではありません。",
+      "raw_seconds": 10.896757369614512,
+      "speech_window_seconds": 10.896757369614512,
+      "tempo": 1.1291976548823328,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "中庭がない、斜面の状態を想像しましょう。必要な屋根の高さと岩の量が、寺院を置ける位置を制限します。",
+      "raw_seconds": 8.810544217687076,
+      "speech_window_seconds": 8.810544217687076,
+      "tempo": 0.9130097634908886,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "最上部の形は、元の岩の中に収まる必要があります。最初に低く削りすぎれば、失った高さを彫り戻すことはできません。",
+      "raw_seconds": 10.582925170068027,
+      "speech_window_seconds": 10.582925170068027,
+      "tempo": 1.0966761834267384,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "配置をそろえるには、基準線や高さが必要です。綱、物差し、見通しは考えられる道具ですが、具体的な使用法は未確認です。",
+      "raw_seconds": 10.0781179138322,
+      "speech_window_seconds": 10.0781179138322,
+      "tempo": 1.0443645506561865,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "模型では、寺院になる岩を大きめに残します。周囲の作業経路が整う前に、繊細な縁を露出させない考え方です。",
+      "raw_seconds": 9.34390022675737,
+      "speech_window_seconds": 9.34390022675737,
+      "tempo": 0.968279816244287,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "残す塊の周囲を下へ掘ると、丘から分かれていきます。溝は作業面を開き、中央の岩には、建築になる部分が残ります。",
+      "raw_seconds": 9.570226757369614,
+      "speech_window_seconds": 9.570226757369614,
+      "tempo": 0.9917333427326025,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "大きく除く作業は、すべてを粉にする必要はありません。岩の状態が許せば、細かく仕上げるより、塊を分ける方が効率的です。",
+      "raw_seconds": 10.13734693877551,
+      "speech_window_seconds": 10.13734693877551,
+      "tempo": 1.0505022734482392,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "ただし、分離は制御が必要です。不要な割れが、捨てる部分から、残したい軒や柱、屋根まで走るかもしれません。",
+      "raw_seconds": 8.835827664399092,
+      "speech_window_seconds": 8.835827664399092,
+      "tempo": 0.9156298097822894,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "取った石は、作業場から運び出します。溝が石くずで埋まれば、開削で作ったはずの作業空間が、すぐに失われます。",
+      "raw_seconds": 10.53655328798186,
+      "speech_window_seconds": 10.53655328798186,
+      "tempo": 1.0918708070447523,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "上から進めれば、下部が露出する前に、上の輪郭を作れます。未完成部分の周囲では、残る岩が足場になる可能性があります。",
+      "raw_seconds": 10.74891156462585,
+      "speech_window_seconds": 10.74891156462585,
+      "tempo": 1.1138768460752175,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "これは、一度の奇跡的な切断ではありません。小さな除去を重ねるたびに、建物の形と作業環境の両方が変わります。",
+      "raw_seconds": 10.001043083900226,
+      "speech_window_seconds": 10.001043083900226,
+      "tempo": 1.0363775216476918,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "張り出した軒を考えましょう。形を整える間は、下や脇に十分な岩が必要です。近くに割れ目があれば、なおさらです。",
+      "raw_seconds": 9.643809523809523,
+      "speech_window_seconds": 9.643809523809523,
+      "tempo": 0.9993584998766345,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "粗削りと仕上げでは、目的が違います。余分な塊を除いて空間を作り、安定と作業の余地を確かめながら、細部を整えます。",
+      "raw_seconds": 9.947709750566894,
+      "speech_window_seconds": 9.947709750566894,
+      "tempo": 1.030850751354082,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "上から下という原理でも、全員が同じ高さで働くとは限りません。形の整合性を保てば、場所ごとに進み方は変えられます。",
+      "raw_seconds": 10.721609977324263,
+      "speech_window_seconds": 10.721609977324263,
+      "tempo": 1.111047666043965,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "深くなるほど、調整は難しくなります。上の縁を彫る人も、その下にできる広間や開口部、支えを理解する必要があります。",
+      "raw_seconds": 10.59374149659864,
+      "speech_window_seconds": 10.59374149659864,
+      "tempo": 1.0977970462796516,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "小さな位置の誤差も積み重なります。古代の測り方が不明でも、方向や高さを繰り返し確かめる必要性は理解できます。",
+      "raw_seconds": 10.348956916099773,
+      "speech_window_seconds": 10.348956916099773,
+      "tempo": 1.0724307685077485,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "内部には、別の作業が加わります。残した岩の内側をくり抜くので、壁、天井、柱を一緒に考えなければなりません。",
+      "raw_seconds": 9.793242630385487,
+      "speech_window_seconds": 9.793242630385487,
+      "tempo": 1.014843795894869,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "岩を彫る柱は、周囲を除いて作ります。その太さは、美しい輪郭だけでなく、天井を支える条件にも左右されます。",
+      "raw_seconds": 9.444807256235828,
+      "speech_window_seconds": 9.444807256235828,
+      "tempo": 0.9787365032368733,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "天井も、空間の上に残した岩です。部屋を広げれば、石への要求が変わります。割れ目や薄い部分の近くでは重要です。",
+      "raw_seconds": 10.339909297052154,
+      "speech_window_seconds": 10.339909297052154,
+      "tempo": 1.0714931914043682,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "壁から外へ出た部分は、別の形で力を受けます。圧縮に強いからといって、どんな形でも安全になるわけではありません。",
+      "raw_seconds": 9.20063492063492,
+      "speech_window_seconds": 9.20063492063492,
+      "tempo": 0.953433670532116,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "基部の象の彫刻は、建物を豊かに彩ります。建築の岩に刻まれた像であり、本物の象が寺院を支えているのではありません。",
+      "raw_seconds": 10.669092970521541,
+      "speech_window_seconds": 10.669092970521541,
+      "tempo": 1.1056054891732168,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "荷重の説明では、この違いが大切です。彫刻の物語を構造図にせず、残る岩の芯と、そのつながりを調べます。",
+      "raw_seconds": 8.950748299319727,
+      "speech_window_seconds": 8.950748299319727,
+      "tempo": 0.9275386838673292,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "空間が開くと、光も変わります。外壁、日陰の広間、狭い通路では、奥行きや見える細部の判断も変わります。",
+      "raw_seconds": 8.741065759637188,
+      "speech_window_seconds": 8.741065759637188,
+      "tempo": 0.905809923278465,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "完成した配置は、移動とともに礼拝に使われます。開削を復元するときも、寺院の用途や象徴の秩序を忘れてはいけません。",
+      "raw_seconds": 9.9481179138322,
+      "speech_window_seconds": 9.9481179138322,
+      "tempo": 1.0308930480655127,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "ナンディー堂も、この配置の一部です。本殿との関係は、独立した形を一つずつ作るだけでは足りなかったことを示します。",
+      "raw_seconds": 9.586462585034013,
+      "speech_window_seconds": 9.586462585034013,
+      "tempo": 0.9934158119206231,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "石の連結部分は、計画をさらに難しくします。必要な岩を除いた後で、模型に魔法のように接続部を戻すことはできません。",
+      "raw_seconds": 10.537256235827664,
+      "speech_window_seconds": 10.537256235827664,
+      "tempo": 1.0919436513811052,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "外を掘り下げる作業と、内部をくり抜く作業は連動します。局所的な順序が違っても、互いに必要な岩を残さなければなりません。",
+      "raw_seconds": 10.756530612244898,
+      "speech_window_seconds": 10.756530612244898,
+      "tempo": 1.1146663846885905,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "開口部は、作業場の移動にも影響します。完成後には適切な入口でも、工事途中の石くず搬出には狭いかもしれません。",
+      "raw_seconds": 10.533854875283447,
+      "speech_window_seconds": 10.533854875283447,
+      "tempo": 1.0915911787858494,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "仕事が違えば、道具の動かし方も違います。余分な岩を割る、平面を整える、縁を仕上げる。この三つは同じ作業ではありません。",
+      "raw_seconds": 10.671269841269842,
+      "speech_window_seconds": 10.671269841269842,
+      "tempo": 1.1058310716341804,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "鉄の道具は、時代の技術的背景に合います。ただし、映像の道具一式を、カイラーサで発見された遺物として示すことはできません。",
+      "raw_seconds": 11.233582766439909,
+      "speech_window_seconds": 11.233582766439909,
+      "tempo": 1.1641018410818558,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "道具は摩耗します。研ぎ直し、交換、供給も説明に必要です。ただし、特定の工房や修理周期には、個別の証拠が要ります。",
+      "raw_seconds": 9.630204081632654,
+      "speech_window_seconds": 9.630204081632654,
+      "tempo": 0.9979486094956117,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "労働力は、一つの人数では表せません。位置決め、切削、仕上げ、運搬、道具の手入れには、異なる技能と調整が必要です。",
+      "raw_seconds": 9.525124716553288,
+      "speech_window_seconds": 9.525124716553288,
+      "tempo": 0.9870595561195117,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "ここで実際の総量を決めずに、除去する材料を模型で考えます。最初に、岩の体積と質量を区別しましょう。",
+      "raw_seconds": 8.616371882086169,
+      "speech_window_seconds": 8.616371882086169,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "固い岩一立方メートルを、仮に二点八トンとします。これは説明用の密度の選択で、寺院で測った値ではありません。",
+      "raw_seconds": 8.903424036281178,
+      "speech_window_seconds": 8.903424036281178,
+      "tempo": 0.9226346151586713,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "その仮定なら、百立方メートルは二百八十トンです。計算例であり、カイラーサで除いた総量を示すものではありません。",
+      "raw_seconds": 9.099863945578232,
+      "speech_window_seconds": 9.099863945578232,
+      "tempo": 0.9429910824433401,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "砕いた石の間には、空気の隙間も入ります。運ぶときの体積は元の岩と違うため、荷車の容量だけでは量を決められません。",
+      "raw_seconds": 9.896394557823129,
+      "speech_window_seconds": 9.896394557823129,
+      "tempo": 1.0255331148003242,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "作業速度を考えるには、規模、岩の状態、道具、作業空間、運搬距離、仕上げや修理の時間も知る必要があります。",
+      "raw_seconds": 9.037551020408163,
+      "speech_window_seconds": 9.037551020408163,
+      "tempo": 0.9365337844982552,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "掘り下げる深さで、条件も変わります。上の便利な通路が失われ、下の通路は、後になって初めて開くかもしれません。",
+      "raw_seconds": 10.081746031746032,
+      "speech_window_seconds": 10.081746031746032,
+      "tempo": 1.0447405214244592,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "説得力のある復元は、段階をつなぎます。岩は消えず、人には作業場所が要り、周囲を除いても構造は支えられ続けます。",
+      "raw_seconds": 10.023197278911564,
+      "speech_window_seconds": 10.023197278911564,
+      "tempo": 1.0386732931514573,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "上部の建築が、少しずつ現れました。重要なのは輪郭だけでなく、次の仕事を可能にする、つながった順序です。",
+      "raw_seconds": 9.359931972789116,
+      "speech_window_seconds": 9.359931972789116,
+      "tempo": 0.9699411370765924,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "ここで最初の難関です。除いた岩を元に戻すのは困難です。仕上げ面に達する前の失敗が、使える形を変えてしまいます。",
+      "raw_seconds": 9.896349206349207,
+      "speech_window_seconds": 9.896349206349207,
+      "tempo": 1.025528415165721,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "石は修理でき、近代の保存も一部の表面を変えています。しかし、失った破片を補うことと、元の連続した岩を残すことは別です。",
+      "raw_seconds": 11.480566893424037,
+      "speech_window_seconds": 11.480566893424037,
+      "tempo": 1.1896960511320245,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "隠れた割れ目も問題です。その影響は、近くに存在するかどうかより、残る岩のどこを横切るかで変わります。",
+      "raw_seconds": 8.653219954648526,
+      "speech_window_seconds": 8.653219954648526,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "粗削りで余裕を残せば、選択肢を保てます。後でその余裕を削るときも、形、強度、露出した石質を判断します。",
+      "raw_seconds": 9.27732426303855,
+      "speech_window_seconds": 9.27732426303855,
+      "tempo": 0.9613807526464817,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "小さな実演は原理を示しても、建物全体を保証しません。規模が変われば、割れ目、長い空間、落石の影響も変わります。",
+      "raw_seconds": 10.9459410430839,
+      "speech_window_seconds": 10.9459410430839,
+      "tempo": 1.1342944086097306,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "石は圧縮を支えても、別の条件では弱くなります。屋根や張り出しを露出させるときは、曲げ、引張り、割れ目も重要です。",
+      "raw_seconds": 9.947006802721088,
+      "speech_window_seconds": 9.947006802721088,
+      "tempo": 1.0307779070177292,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "長い空間は、短い空間の単なる拡大版ではありません。厚さ、支える位置、実際の岩の構造を、一緒に考えます。",
+      "raw_seconds": 8.739637188208617,
+      "speech_window_seconds": 8.739637188208617,
+      "tempo": 0.9056618847884577,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "同じ割れ目も、広い塊の中と、薄い縁では危険度が違います。だから、形と地質を組み合わせて読む必要があるのです。",
+      "raw_seconds": 9.596371882086167,
+      "speech_window_seconds": 9.596371882086167,
+      "tempo": 0.994442682081468,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "次は雨です。深い中庭を開くと、水の流入や集まる場所が変わります。未完成の仕事も、季節のある環境に置かれています。",
+      "raw_seconds": 10.251791383219954,
+      "speech_window_seconds": 10.251791383219954,
+      "tempo": 1.0623618013699434,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "水は、割れ目や不規則な面に沿って流れます。乾いた美しい模型だけでは、露出した丘の変化する条件を見落としかねません。",
+      "raw_seconds": 10.290566893424037,
+      "speech_window_seconds": 10.290566893424037,
+      "tempo": 1.0663799889558587,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "石くずの搬出と排水は、互いに邪魔することもあります。置き場所を誤れば、作業路と水路の両方を塞ぐ可能性があります。",
+      "raw_seconds": 10.625328798185942,
+      "speech_window_seconds": 10.625328798185942,
+      "tempo": 1.1010703417809267,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "エローラの保存記録には、排水工事や修理が記されています。見える溝や補修面に、後世の歴史がある可能性を忘れないでください。",
+      "raw_seconds": 10.78077097505669,
+      "speech_window_seconds": 10.78077097505669,
+      "tempo": 1.1171783393841128,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "作業場所への接近も課題です。残る岩を足場にできても、仮設の足場や支えが一切不要だったとは証明できません。",
+      "raw_seconds": 9.131360544217687,
+      "speech_window_seconds": 9.131360544217687,
+      "tempo": 0.946254978675408,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "上を仕上げ、下を開けば、立つ場所も変わります。復元には、道具を宙に浮かせず、人がそこへ届く方法が必要です。",
+      "raw_seconds": 9.442562358276644,
+      "speech_window_seconds": 9.442562358276644,
+      "tempo": 0.9785038713240046,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "上の作業は、下の人や完成部分を危険にさらします。模型では、切削と搬出を分け、作業中の中庭へ石を落としません。",
+      "raw_seconds": 11.180204081632652,
+      "speech_window_seconds": 11.180204081632652,
+      "tempo": 1.1585703711536428,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "その分離には調整が要ります。合図、休止、担当区域は、塔を彫る姿ほど派手ではなくても、説明には欠かせません。",
+      "raw_seconds": 9.663832199546485,
+      "speech_window_seconds": 9.663832199546485,
+      "tempo": 1.0014333885540398,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "物資も必要です。食料、水、木材、金属、整備した道具を適切な場所へ届ける仕事は、残る石の背後にもあります。",
+      "raw_seconds": 9.580272108843538,
+      "speech_window_seconds": 9.580272108843538,
+      "tempo": 0.9927743117972577,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "これは、技能を仕事ごとに組織する営みです。巨大な群衆を描くだけでは、整った本殿を作る判断までは説明できません。",
+      "raw_seconds": 9.558707482993198,
+      "speech_window_seconds": 9.558707482993198,
+      "tempo": 0.9905396355433365,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "作業者の身分や契約も、勝手に作れません。大きな労力は理解できても、一人一人の生涯や地位が残っているわけではありません。",
+      "raw_seconds": 10.617392290249434,
+      "speech_window_seconds": 10.617392290249434,
+      "tempo": 1.1002479057253298,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "季節の情報だけで、正確な工程表は作れません。雨、通路、資金、修理は検討する条件であり、復元された日程ではありません。",
+      "raw_seconds": 10.385918367346939,
+      "speech_window_seconds": 10.385918367346939,
+      "tempo": 1.0762609707095272,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "求められるのは、模型の一貫性です。道具が入る空間、支えに必要な岩、石くずを運ぶ道を、切削後も確保します。",
+      "raw_seconds": 10.031315192743763,
+      "speech_window_seconds": 10.031315192743763,
+      "tempo": 1.0395145277454676,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "各部分の建築を比べる研究もあります。類似や違いは年代の手掛かりですが、一日の作業順序まで自動的には分かりません。",
+      "raw_seconds": 10.927074829931973,
+      "speech_window_seconds": 10.927074829931973,
+      "tempo": 1.1323393606147123,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "エローラには、後世の小カイラーサなど、別の岩窟寺院もあります。この物語は第十六窟です。映像を混同してはいけません。",
+      "raw_seconds": 10.370340136054422,
+      "speech_window_seconds": 10.370340136054422,
+      "tempo": 1.074646646223256,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "同じ中庭の彫刻でも、場所を確かめる必要があります。美しい接写が、最初の開削順序について多くを語るとは限りません。",
+      "raw_seconds": 10.536054421768707,
+      "speech_window_seconds": 10.536054421768707,
+      "tempo": 1.0918191110641147,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "寺院の図像は、聖なる世界を表します。それは建物の壮大な目的を伝えても、工房の実作業をそのまま記録したものではありません。",
+      "raw_seconds": 11.649115646258503,
+      "speech_window_seconds": 11.649115646258503,
+      "tempo": 1.2071622431355962,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "宗教場面と切削図は、目的が異なります。両方を大切にしながら、象徴と具体的な工法の主張を区別しましょう。",
+      "raw_seconds": 9.238956916099774,
+      "speech_window_seconds": 9.238956916099774,
+      "tempo": 0.9574048617719972,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "語りは、固い丘から完成した寺院へ飛びがちです。その省かれた中間こそ、本当の技術的な問いがある場所です。",
+      "raw_seconds": 9.564172335600906,
+      "speech_window_seconds": 9.564172335600906,
+      "tempo": 0.9911059415130472,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "正確な除去量や驚くほど短い工期には、確かな測定と出典が必要です。画面で繰り返される数字は、発掘で得た観察にはなりません。",
+      "raw_seconds": 10.834897959183673,
+      "speech_window_seconds": 10.834897959183673,
+      "tempo": 1.1227873532832822,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "除去した体積には、元の丘の表面と残存形状が必要です。失われた表面の不確かさは、そのまま結果の不確かさになります。",
+      "raw_seconds": 10.708480725623582,
+      "speech_window_seconds": 10.708480725623582,
+      "tempo": 1.1096871218262778,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "捨てた岩の行方は、別の調査です。周囲の石片を、関係や状況を確かめず、すべて当時の廃材と呼ぶことはできません。",
+      "raw_seconds": 10.018208616780045,
+      "speech_window_seconds": 10.018208616780045,
+      "tempo": 1.0381563333450823,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "こうした限界があっても、理解は進められます。形から答えられる問いと、歴史や材料の証拠をさらに必要とする問いを分けるのです。",
+      "raw_seconds": 10.12829931972789,
+      "speech_window_seconds": 10.12829931972789,
+      "tempo": 1.049564696344859,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "近代の修理記録も、重要な照合材料です。今の表面には、最初の加工以降の風化、保守、補修の歴史も重なっています。",
+      "raw_seconds": 10.340068027210885,
+      "speech_window_seconds": 10.340068027210885,
+      "tempo": 1.0715096401254802,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "補修の継ぎ目を、古代の組積と混同してはいけません。一方、中心が一体の岩でも、後世の修理を無視することはできません。",
+      "raw_seconds": 9.943174603174603,
+      "speech_window_seconds": 9.943174603174603,
+      "tempo": 1.0303807878937412,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "映像の復元でも、その違いを保ちます。残る形は確かな部分として示し、未確定の工程は、解釈模型として分かるようにします。",
+      "raw_seconds": 9.461632653061224,
+      "speech_window_seconds": 9.461632653061224,
+      "tempo": 0.9804800676747383,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "ここは、放置された実験室ではなく、生きた文化遺産です。造り方を知ることは、信仰、地域の人々、保存への関心につながります。",
+      "raw_seconds": 10.643537414965987,
+      "speech_window_seconds": 10.643537414965987,
+      "tempo": 1.1029572450741956,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "ここまでの説明を、同じ条件で比べましょう。同じ岩、同じ残す建築、同じ廃材搬出の必要を満たすか、検討します。",
+      "raw_seconds": 9.542403628117913,
+      "speech_window_seconds": 9.542403628117913,
+      "tempo": 0.9888501169034107,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "石を組む寺院と、岩を彫る寺院を比べます。前者は材料を運び入れ、後者は目的の岩を守りながら、周囲を除きます。",
+      "raw_seconds": 10.46408163265306,
+      "speech_window_seconds": 10.46408163265306,
+      "tempo": 1.0843607909485036,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "組む方式では、運搬と接合が重要です。彫る方式では、石質の選択、除去の順番、接近方法、廃材の処理へ重点が移ります。",
+      "raw_seconds": 10.207142857142857,
+      "speech_window_seconds": 10.207142857142857,
+      "tempo": 1.0577350111028867,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "崖の内部の部屋と、中庭の独立した寺院も比べましょう。どちらも岩を除きますが、光や作業面の配置が異なります。",
+      "raw_seconds": 9.744331065759637,
+      "speech_window_seconds": 9.744331065759637,
+      "tempo": 1.0097752399750919,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "カイラーサでは、周囲の開削が核心です。それによって、正面の奥の内部だけでなく、周りから見える建築が現れます。",
+      "raw_seconds": 9.032403628117914,
+      "speech_window_seconds": 9.032403628117914,
+      "tempo": 0.9360003759707682,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "上から下という原則は、その作業に適しています。上の形を下の加工の基準にし、まだ現れない部分の岩も残せます。",
+      "raw_seconds": 9.672879818594105,
+      "speech_window_seconds": 9.672879818594105,
+      "tempo": 1.00237096565742,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "ただし、大きな原則は完全な日程表ではありません。並行作業、局所的な調整、異なる仕上げが、複雑な計画に含まれます。",
+      "raw_seconds": 10.309659863945578,
+      "speech_window_seconds": 10.309659863945578,
+      "tempo": 1.068358535123894,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "寺院の形は、広い建築文化にも属します。本殿、広間、塔、装飾の考え方は、この丘だけで生まれたものではありません。",
+      "raw_seconds": 9.942426303854875,
+      "speech_window_seconds": 9.942426303854875,
+      "tempo": 1.0303032439227848,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "インドの他の岩窟建築は、知識の背景になります。ただし、特定の職人や設計図が、ある道を移動した証拠にはなりません。",
+      "raw_seconds": 10.123877551020408,
+      "speech_window_seconds": 10.123877551020408,
+      "tempo": 1.0491064819710267,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "彫った帯状の装飾が、積んだ石の層に見えることもあります。似た外観だけで判断せず、周囲の構造と一緒に読みます。",
+      "raw_seconds": 9.070136054421768,
+      "speech_window_seconds": 9.070136054421768,
+      "tempo": 0.9399104719608049,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "聖なる山という発想は、岩の除去に大きな意味を与えます。シヴァに結び付く場所が、山を変えた寺院の形で表されるのです。",
+      "raw_seconds": 11.161043083900227,
+      "speech_window_seconds": 11.161043083900227,
+      "tempo": 1.1565847755337022,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "王の支援と熟練の仕事が、規模への理解を助けます。歴史的な帰属が分かっても、組織や工程には、なお研究すべき点があります。",
+      "raw_seconds": 10.406462585034014,
+      "speech_window_seconds": 10.406462585034014,
+      "tempo": 1.0783899051848718,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "全体に何年かかったのでしょうか。正確に答えるには、どの段階、どの面、どんな作業まで数えるのかを、まず定める必要があります。",
+      "raw_seconds": 10.733945578231292,
+      "speech_window_seconds": 10.733945578231292,
+      "tempo": 1.1123259666560925,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "何人が必要だったのでしょうか。能率、運搬、整備、互いに邪魔せず働ける班の数。その仮定で推定は変わります。",
+      "raw_seconds": 8.31374149659864,
+      "speech_window_seconds": 8.31374149659864,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "道具の痕跡にも限界があります。接触や作業方向は分かっても、それだけで年代や労働の全歴史が明らかになるとは限りません。",
+      "raw_seconds": 10.678820861678005,
+      "speech_window_seconds": 10.678820861678005,
+      "tempo": 1.1066135607956482,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "現代の測量は、形と関係を詳しく記録できます。ただし、完成した寺院を測っても、元の切削計画が自動的に戻るわけではありません。",
+      "raw_seconds": 10.999614512471656,
+      "speech_window_seconds": 10.999614512471656,
+      "tempo": 1.1398564261628659,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "次の研究では、地質、未完成部分、構造の関係、古い記録、条件を明示した除去模型を、結び付けることが大切です。",
+      "raw_seconds": 9.365714285714287,
+      "speech_window_seconds": 9.365714285714287,
+      "tempo": 0.9705403404885271,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "目標は、派手なアニメーションではありません。残る証拠をより多く説明し、裏付けのない仮定を減らせる順序を探すことです。",
+      "raw_seconds": 9.243990929705216,
+      "speech_window_seconds": 9.243990929705216,
+      "tempo": 0.9579265212129757,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "確かにいえるのは、主要な建築が選択的な除去で生まれたことです。残した岩が、空間、支え、寺院の表面になりました。",
+      "raw_seconds": 9.656281179138322,
+      "speech_window_seconds": 9.656281179138322,
+      "tempo": 1.0006508993925722,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "最初の眺めに戻りましょう。寺院は今も壮大です。でも周囲の空気も、石と同じほど大切な物語を伝えています。",
+      "raw_seconds": 10.00968253968254,
+      "speech_window_seconds": 10.00968253968254,
+      "tempo": 1.0372728020396413,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 125,
+      "text": "その空気は、除く部分と残す部分を決めた結果です。一つの縁を作る仕事は、次の縁を可能にする、全体の段取りに支えられています。",
+      "raw_seconds": 10.740589569160997,
+      "speech_window_seconds": 10.740589569160997,
+      "tempo": 1.113014463125492,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 126,
+      "text": "溝、片付いた作業面、開口部、完成形の周囲の空間。失われたものの連続こそ、分かりやすい説明になるかもしれません。",
+      "raw_seconds": 9.696054421768707,
+      "speech_window_seconds": 9.696054421768707,
+      "tempo": 1.0047724789397623,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 127,
+      "text": "その判断には、芸術と信仰の意図がありました。技術は空間を作る方法を、文化の研究は、その空間の重要性を説明します。",
+      "raw_seconds": 10.416485260770974,
+      "speech_window_seconds": 10.416485260770974,
+      "tempo": 1.0794285244322253,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 128,
+      "text": "地質が条件を決め、技能が条件を選択へ変えました。材料だけでも設計だけでも、偉業全体は説明できません。",
+      "raw_seconds": 9.24750566893424,
+      "speech_window_seconds": 9.24750566893424,
+      "tempo": 0.9582907428947398,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 129,
+      "text": "消えた石くずは、彫る手の外にも仕事があったことを示します。片付け、運搬、供給、点検、整備、そして変わる高さでの調整です。",
+      "raw_seconds": 10.167891156462584,
+      "speech_window_seconds": 10.167891156462584,
+      "tempo": 1.0536674773536356,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 130,
+      "text": "組織を理解しても、驚きは減りません。知識と繰り返す実務上の判断が、力と同じほど大切だった、人間の仕事が見えてきます。",
+      "raw_seconds": 10.407687074829932,
+      "speech_window_seconds": 10.407687074829932,
+      "tempo": 1.078516795319164,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 131,
+      "text": "今の保存にも、別の忍耐が必要です。岩、水、過去の補修に注意し、丁寧に記録することが、複雑な歴史を守ります。",
+      "raw_seconds": 9.045442176870749,
+      "speech_window_seconds": 9.045442176870749,
+      "tempo": 0.9373515209192486,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 132,
+      "text": "次に一つ調べるなら、どこを選びますか。上部の輪郭、中庭の壁、内部の支え、それとも廃材を運んだ証拠でしょうか。",
+      "raw_seconds": 10.01861678004535,
+      "speech_window_seconds": 10.01861678004535,
+      "tempo": 1.038198630056513,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 133,
+      "text": "選ぶ場所で、説明の違う部分を確かめます。答えになる面や関係を絞れば、大きな問いも、調べられる問いになります。",
+      "raw_seconds": 9.216439909297053,
+      "speech_window_seconds": 9.216439909297053,
+      "tempo": 0.9550714931914044,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 134,
+      "text": "古代の一打ずつを、確実には語れません。それでも、十分な岩を残し、空間を空け、段階を調整する必要は理解できます。",
+      "raw_seconds": 10.530702947845805,
+      "speech_window_seconds": 10.530702947845805,
+      "tempo": 1.0912645541809125,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 135,
+      "text": "山が寺院に置き換わったのではありません。山の一部が、寺院になったのです。次の工程を最もよく伝える痕跡は、どれでしょうか。",
+      "raw_seconds": 10.90716553287982,
+      "speech_window_seconds": 10.90716553287982,
+      "tempo": 1.1302762210238155,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1352,
+  "decoded_samples": 32448000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-ja-22m32s.mp3",
+  "flac": "voice-ja-22m32s.flac",
+  "mp3_sha256": "1c8649a26be759efea955ae34ff0b80eceb13cdadc30181e4e94022e002d28ab",
+  "flac_sha256": "80e088e409daa4f18173dc7399b2620822c0edf1e211dff7bc05487dd4dc6f4c"
+}

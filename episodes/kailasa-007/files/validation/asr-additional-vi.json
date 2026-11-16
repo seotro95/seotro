@@ -1,0 +1,28 @@
+{
+  "language": "vi",
+  "model": "Sherpa Zipformer Vietnamese 30M INT8; publisher archive SHA256 verified",
+  "audio_sha256": "1bb251d4d021c7b886577f20cfe74bb63ba8c8a6e72694e322a02d9f94a8295e",
+  "scope": "Supplementary sample transcription; ASR errors possible; no independent native-speaker listening",
+  "checks": [
+    {
+      "scene": 1,
+      "expected": "Ở Kailasa, ngôi đền nằm giữa khoảng rỗng được đục vào sườn núi. Câu hỏi đầu tiên là: phần đá nào đã được lấy đi?",
+      "asr": "Ở CAILAS NGÔI ĐỀN NẰM GIỮA KHOẢNG RỖNG ĐƯỢC ĐỤC VÀO SƯỜN NÚI CÂU HỎI ĐẦU TIÊN LÀ PHẦN ĐÁ NÀO ĐÃ ĐƯỢC LẤY ĐI"
+    },
+    {
+      "scene": 63,
+      "expected": "Giả sử một mét khối đá đặc nặng hai phẩy tám tấn. Đây là giá trị khối lượng riêng chọn để minh họa, không phải phép đo ngôi đền.",
+      "asr": "GIẢ SỬ MỘT MÉT KHỐI ĐÁ ĐẶT NẶNG HAI PHẨY TÁM TẤN ĐÂY LÀ GIÁ TRỊ KHỐI LƯỢNG RIÊNG CHỌN ĐỂ MINH HỌA KHÔNG PHẢI PHÉP ĐO NGÔI ĐỀN"
+    },
+    {
+      "scene": 64,
+      "expected": "Với giả định ấy, một trăm mét khối nặng hai trăm tám mươi tấn. Phép tính mô tả ví dụ, không phải tổng khai tạc đã kiểm chứng của Kailasa.",
+      "asr": "VỚI GIẢ ĐỊNH ẤY MỘT TRĂM MÉT KHỐI NẶNG HAI TRĂM TÁM MƯƠI TẤN PHÉP TÍNH MÔ TẢ VÍ DỤ KHÔNG PHẢI TỔNG KHAI TẠC ĐÃ KIỂM CHỨNG CỦA KAILAS"
+    },
+    {
+      "scene": 135,
+      "expected": "Núi không đơn giản bị thay bằng đền. Một phần của núi đã trở thành đền. Dấu vết còn lại nào sẽ giúp ta hiểu rõ thêm một bước chuyển ấy?",
+      "asr": "NÚI KHÔNG ĐƠN GIẢN BỊ THAY BẰNG ĐỀN MỘT PHẦN CỦA NÚI ĐÃ TRỞ THÀNH ĐỀN DẤU VẾT CÒN LẠI NÀO SẼ GIÚP TA HIỂU RÕ THÊM MỘT BƯỚC CHUYỂN ẤY"
+    }
+  ]
+}

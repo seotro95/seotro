@@ -1,0 +1,41 @@
+007 — KAILASA: 5 TIÊU ĐỀ VÀ 5 PROMPT THUMBNAIL
+Thời lượng phim: 22:32. Địa điểm bắt buộc: Kailasa, Cave 16, Ellora, Ấn Độ.
+Gợi ý dùng cặp 1 làm tiêu đề/thumbnail chính. Tiêu đề tiếng Anh cho video chính; bản Việt để tham khảo hoặc dùng ở bản lồng tiếng Việt. Chữ gợi ý thêm trong phần mềm thiết kế, không yêu cầu AI vẽ chữ.
+
+1. TIÊU ĐỀ
+EN: Kailasa: How Do You Carve a Temple Out of a Mountain?
+VI: Kailasa: Làm thế nào tạc một ngôi đền từ khối núi?
+Chữ ngắn tùy chọn: CARVED FROM A MOUNTAIN / TẠC TỪ KHỐI NÚI
+PROMPT THUMBNAIL 1:
+Create a high-impact, photorealistic documentary YouTube thumbnail, 16:9, 3840x2160. Use accurate reference photographs of Kailasa Temple, Cave 16 at Ellora, India. Hero view from a moderately elevated oblique angle across the excavated courtyard: the main shrine with its authentic tiered profile is central, the Nandi pavilion remains correctly placed toward the entrance, and the surrounding tall basalt scarp makes the removed space immediately understandable. Weathered gray and warm-brown basalt, restrained amber side light, deep readable courtyard shadows, crisp temple silhouette. The temple should occupy about sixty percent of the frame, readable on a phone. Leave a clean dark area in the upper-left for a short title added later. Use architecture only, no people or figurative sculptural close-ups. NO CHILDREN, NO MINORS, NO BABIES, NO TEENAGERS, including statues, reliefs, pictures, child deities and reflections; choose a framing where none are visible. No generated text, numerals, logos or watermarks. No invented giant mountain, no pyramids, no Little Kailasa Cave 30, no marble or limestone temple, no giant workers or supernatural technology. Do not misrepresent this generated illustration as an authenticated photograph.
+
+2. TIÊU ĐỀ
+EN: Inside Kailasa: The Rock the Carvers Had to Keep
+VI: Bên trong Kailasa: Phần đá người thợ buộc phải giữ lại
+Chữ ngắn tùy chọn: WHAT MUST REMAIN? / PHẢI GIỮ PHẦN NÀO?
+PROMPT THUMBNAIL 2:
+Create a cinematic educational YouTube thumbnail, 16:9, 3840x2160. A single precise architectural cutaway model based on Kailasa Cave 16 at Ellora, not a generic Indian temple. Show the main shrine and pillared hall as a coherent retained basalt volume, with one clean section exposing a roof and several properly connected stone supports. Use warm natural stone for the retained architecture and subdued charcoal for an approximate surrounding hillside; a thin restrained amber contour identifies what must remain. Every exposed roof remains physically supported. Compose from a low three-quarter model angle, with an immediately legible solid/void relationship, strong depth and uncluttered forms. The section is a hypothetical teaching model, not a claim of an excavated hidden chamber. Reserve the upper-right for a short title added in post. Show architecture only and avoid all figurative carvings. NO CHILDREN, NO MINORS, NO BABIES, NO TEENAGERS anywhere, including reliefs, statues, child deities, imagery and reflections. No people, no AI-written words or numbers, no logos. No transparent glowing real mountain, no floating roof, no underground treasure or fabricated discoveries. Correct weathered basalt colors and site-specific silhouette.
+
+3. TIÊU ĐỀ
+EN: Where Did the Mountain Go? The Engineering of Kailasa
+VI: Phần núi đã đi đâu? Bài toán kỹ thuật của Kailasa
+Chữ ngắn tùy chọn: THE MISSING ROCK / PHẦN ĐÁ ĐÃ MẤT
+PROMPT THUMBNAIL 3:
+Design a compelling documentary YouTube thumbnail, 16:9, 3840x2160. Use an original high-quality scale-model visualization of Kailasa Cave 16 and its correctly proportioned excavated courtyard. The finished central temple is sharp and sunlit; the former hillside envelope is suggested only by a sparse, clearly schematic translucent contour around the empty air, with an elegant small progression of detached basalt fragments moving toward the frame edge along a physically plausible clearance route. This is a hypothetical model of removal, not an exact reconstruction of the lost original hillside or a real archaeological discovery. Three-quarter aerial composition, dark muted background, warm-gray basalt, clear negative space, strong mobile readability. Do not imply a measured total tonnage or a known rubble destination. Leave the left upper quadrant empty for title added later. Architecture and model fragments only; no figurative carvings or human figures. NO CHILDREN, NO MINORS, NO BABIES, NO TEENAGERS, including statues, reliefs, child deities, images and reflections. No text, numerals, logos, laser beams, aliens, debris explosions, floating temple, giant people or invented pits. Cave 16 only, not Cave 30.
+
+4. TIÊU ĐỀ
+EN: Kailasa from the Top Down: Carving Space from Solid Rock
+VI: Kailasa từ trên xuống: Tạo không gian từ đá đặc
+Chữ ngắn tùy chọn: TOP DOWN / TỪ TRÊN XUỐNG
+PROMPT THUMBNAIL 4:
+Create a premium science-history YouTube thumbnail, 16:9, 3840x2160. Present a clean visual progression of three related miniature basalt models across one unified dark background, based on Kailasa Cave 16 at Ellora. Left: an approximate intact hillside with a reserved central volume. Center, largest: descending side trenches exposing the upper temple profile while the lower mass remains solid and supported. Right: a correctly shaped finished temple within its open courtyard. The progression must communicate gradual removal from upper levels; no magical morph, no assembled masonry blocks, no unsupported floating elements. Use restrained amber edge light to connect the three stages and distinguish the central model; leave generous negative space along the top for a title added manually. All stages are illustrative hypotheses and not a recovered day-by-day schedule. No people and no figurative sculpture. NO CHILDREN, NO MINORS, NO BABIES, NO TEENAGERS anywhere, including statues, reliefs, child deities, pictures and reflections. No generated letters, labels, dates, arrows with numbers, logos or watermarks. No limestone, marble, futuristic machines or Little Kailasa Cave 30.
+
+5. TIÊU ĐỀ
+EN: Kailasa’s Hardest Problem: Every Cut Changes What Comes Next
+VI: Bài toán khó của Kailasa: Mỗi nhát đục quyết định bước tiếp theo
+Chữ ngắn tùy chọn: ONE CUT AT A TIME / TỪNG NHÁT ĐỤC
+PROMPT THUMBNAIL 5:
+Create an arresting but credible documentary YouTube thumbnail, 16:9, 3840x2160. In the right foreground, show the worn hands and forearms of one clearly middle-aged male stoneworker, age about forty-five, holding a simple iron chisel and hammer just above an illustrative rough basalt workpiece; do not show an impact on the real monument. Behind this controlled reconstruction, a site-faithful Kailasa Cave 16 temple silhouette and tall courtyard wall are visible as a softly separated scale-model backdrop. A raking warm light reveals a small tool contact and the material grain, while the large temple profile provides scale through composition rather than impossible forced perspective. Practical modest eighth-century Deccan clothing if any garment appears; exact tool shape and workflow are interpretive, not a discovered original toolkit. Keep left upper third clean for title added later. No faces needed, no crowds, no figurative sculpture. NO CHILDREN, NO MINORS, NO BABIES, NO TEENAGERS anywhere, including pictures, child deities, statues, reliefs and reflections. No blood, damage to real heritage, laser cuts, sparks shower, modern powered tools, text, numerals, logos or watermarks. Weathered gray-brown basalt only; do not use Cave 30.
+
+LƯU Ý DÙNG HÌNH
+Các prompt tạo ảnh, không phải ảnh có sẵn. Tất cả mô hình cắt lớp/phục dựng là giả định giải thích; nên ghi chú nhỏ trong mô tả video và nhãn trong phần phim có liên quan. Không thêm con số giật gân về số tấn hoặc số năm chưa kiểm chứng. Kiểm tra ảnh xuất ở mức phóng to để loại trẻ em kể cả phù điêu/tượng và để xác nhận đúng cấu trúc Kailasa Cave 16.
