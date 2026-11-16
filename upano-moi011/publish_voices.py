@@ -68,7 +68,7 @@ assert len({r['sha256'] for r in reports.values()}) == 16
 
 profile_set = json.loads((R / 'VOICE_PROFILES_LOCKED_BASELINE.json').read_text())
 profile_set.update(topic_id='MOI-011',target_seconds=TARGET,
-                   note='16 saved male identities retained; Vietnamese is actual NamMinhNeural; all MP3 decoded to1222seconds. Independent native listening review remains pending.')
+                   note='15 previous voice IDs retained; unavailable German Conrad replaced with listed male Christoph and locked. Vietnamese is actual NamMinhNeural; all MP3 decoded to1222seconds. Independent native listening review pending.')
 voices = []
 for profile in profile_set['profiles']:
     data = reports[profile['locale']]
@@ -81,7 +81,7 @@ manifest = dict(topic_id='MOI-011',catalogue_id='new-100-topics-20261116',target
                 main_video_locale='en-US',voices=voices)
 qa = dict(status='passed',topic_id='MOI-011',voices=16,male_voices=16,
           all_decoded_seconds=TARGET,all_decoded_frames_48000=FRAMES,
-          all_saved_voice_ids_retained=True,vietnamese_voice_id='vi-VN-NamMinhNeural',
+          all_current_episode_ids_locked=True,previous_voice_ids_retained=15,voice_changes=profile_set['voice_changes'],vietnamese_voice_id='vi-VN-NamMinhNeural',
           unique_audio_hashes=16,english_cue_count=123,other_language_chapter_count=13,
           word_metadata_checked=True,english_word_boundary_split_checked=True,
           pitch_shift_applied=False,independent_native_listening_review=False,
@@ -108,7 +108,7 @@ for locale in PROFILES:
         f"{row['id']}\n{timestamp(row['start'])} --> {timestamp(row['end'])}\n{row['voice']}" for row in rows)+'\n',encoding='utf-8')
 for name in ['AUDIO_MANIFEST.json','VOICE_PROFILES_LOCKED.json','VOICE_RELEASE_QA.json']:
     shutil.copyfile(O/name,D/name)
-for name in ['TRANSLATION_REVIEW.json','VOICE_INPUT_QA.json','LOCALIZATION_SOURCE_CHAPTERS.json']:
+for name in ['TRANSLATION_REVIEW.json','VOICE_INPUT_QA.json','LOCALIZATION_SOURCE_CHAPTERS.json','VOICE_ID_CHANGE.json']:
     shutil.copyfile(R/name,D/name)
 style = dict(id='science-documentary-expressive-v3-grouped-English-NamMinh-VI',
              profile_set_id=profile_set['profile_set_id'],main_voice='en-US-AndrewNeural',
@@ -128,7 +128,7 @@ guide += '''
 
 KẾT QUẢ VOICE ĐÃ HOÀN THÀNH
 
-Đã phát hành 16 MP3, toàn bộ giọng nam, mỗi bản giải mã đúng 1.222 giây. Giữ đúng ID đã lưu, tiếng Việt Nam Minh. Không có giọng H'mông trong danh sách yêu cầu của tập này.
+Đã phát hành 16 MP3, toàn bộ giọng nam, mỗi bản giải mã đúng 1.222 giây. Giữ 15 ID cũ, tiếng Việt Nam Minh. Giọng Đức Conrad không còn trong danh mục nên chuyển sang Christoph nam; xem VOICE_ID_CHANGE.json. Không có giọng H'mông trong danh sách yêu cầu của tập này.
 
 Bản Việt được viết lại toàn bộ, sửa thuật ngữ và nhịp kể. Các bản khác được chuyển ngữ từ nguồn tiếng Anh đã làm rõ thuật ngữ, giữ ý chính, thứ tự chủ đề và giới hạn khoa học theo từng chương; chuyển ý lặp được rút gọn. Đã sửa thuật ngữ, niên đại, đoạn kết và các đoạn tiếng Anh lọt trong bản dịch. Chưa có kiểm nghe/biên tập bản ngữ độc lập.
 
@@ -144,7 +144,7 @@ readme = f'''# MỚI-011 — Upano — Kịch bản, 130 prompt và 16 voice 20:
 
 Tập MỚI-011 của bộ đề tài mới ngày 16/11/2026, lưu riêng với danh sách cũ. Kịch bản tiếng Anh nguyên bản 3.229 từ, 123 mốc lời. Có 130 prompt clip 10 giây, chia 13 TXT × 10 prompt. Timeline có 10 cảnh × 3 giây ở mở đầu, 119 cảnh × 10 giây và cảnh cuối 2 giây, tổng 1.222 giây.
 
-Đã tạo 16 MP3 riêng, toàn bộ nam. Từng tệp đã được giải mã đủ 58.656.000 mẫu mono 48 kHz, tức 20:22. Giữ đúng các ID giọng đã lưu; Việt Nam dùng NamMinhNeural thật. Sử dụng thành phần online đã khóa mã nguồn của Melo-Viet-Studio 1.3.1 qua GitHub Actions, không tự nhận chạy giao diện Windows.
+Đã tạo 16 MP3 riêng, toàn bộ nam. Từng tệp đã được giải mã đủ 58.656.000 mẫu mono 48 kHz, tức 20:22. Giữ 15 ID cũ; riêng giọng Đức Conrad không còn trong danh mục dịch vụ nên chuyển sang Christoph nam và đã khóa ID mới. Việt Nam dùng NamMinhNeural thật. Sử dụng thành phần online đã khóa mã nguồn của Melo-Viet-Studio 1.3.1 qua GitHub Actions, không tự nhận chạy giao diện Windows.
 
 Anh căn 123 mốc lời; 15 bản địa phương hóa căn 13 chương chung: 12 × 100 giây + 22 giây cuối. Bản Việt viết lại toàn bộ. Các bản khác dịch từ nguồn đã làm rõ thuật ngữ và rút các chuyển ý lặp, rồi sửa thuật ngữ, niên đại, đoạn kết và phần tiếng Anh lọt. Chưa có kiểm nghe/biên tập bản ngữ độc lập. Cùng thời lượng không có nghĩa từng từ trùng thời điểm. SRT dịch theo chương cần chia nhỏ trước khi hiển thị.
 
@@ -174,7 +174,7 @@ assets = sorted(O.glob('*.mp3')) + [O/f'{PREFIX}_16_VOICES_20m22s.zip',R/f'{PREF
 assets += [O/n for n in ['AUDIO_MANIFEST.json','VOICE_PROFILES_LOCKED.json','VOICE_RELEASE_QA.json']]
 assets += [D/n for n in ['README.md','DOCUMENT_QA.json','HUONG_DAN_SU_DUNG.txt','NARRATION_STYLE_LOCKED.json',
                          'TRANSLATION_REVIEW.json','5_TIEU_DE_VA_THUMBNAIL.txt','DOWNLOAD_LINKS.md',
-                         'LINK_TAI_VOICE.txt','PRODUCTION_STEPS_APPLIED.md']]
+                         'LINK_TAI_VOICE.txt','PRODUCTION_STEPS_APPLIED.md','VOICE_PROFILES_LOCKED_BASELINE.json','VOICE_ID_CHANGE.json']]
 for path in assets:
     upload(path)
 release = json.loads(subprocess.check_output(['gh','api',f'repos/{REPO}/releases/tags/{TAG}']))

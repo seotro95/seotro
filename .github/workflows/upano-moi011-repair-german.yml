@@ -1,0 +1,106 @@
+name: Upano MOI011 German catalogue repair and full16 delivery
+on:
+  push:
+    branches: [codex/upano-moi011-production-20261116]
+    paths: [.github/workflows/upano-moi011-repair-german.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  german:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: upano-moi011
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python upano-moi011/extract_voice_inputs.py
+          python upano-moi011/voice_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python upano-moi011/ensure_ffmpeg.py
+          python upano-moi011/bootstrap_tool.py online
+      - name: Generate verified male German Christoph with retained parts
+        run: |
+          set +e
+          python -u upano-moi011/render_online.py de-DE
+          code=$?
+          if [ "$code" = 75 ]; then
+            sleep 30
+            python -u upano-moi011/render_online.py de-DE
+            code=$?
+          fi
+          exit "$code"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: upano-moi011-christoph-checkpoint
+          path: upano-moi011/voice/audio/de-DE/raw-*
+          if-no-files-found: ignore
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        with:
+          name: upano-moi011-voice-de-DE
+          path: |
+            upano-moi011/voice/audio/de-DE/*.mp3
+            upano-moi011/voice/audio/de-DE/render_report.json
+          if-no-files-found: error
+          retention-days: 14
+  original15:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: upano-moi011
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u upano-moi011/wait_for_original_voices.py
+  publish:
+    needs: [german, original15]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: upano-moi011
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python upano-moi011/extract_content.py
+          python upano-moi011/extract_voice_inputs.py
+          python -m pip install imageio-ffmpeg==0.6.0
+          python upano-moi011/ensure_ffmpeg.py
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: upano-moi011-voice-*
+          path: voice_artifacts
+          merge-multiple: false
+          run-id: 43909217031
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: upano-moi011-voice-de-DE
+          path: voice_artifacts/upano-moi011-voice-de-DE
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -u upano-moi011/publish_voices.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: upano-moi011-full16-release-reports
+          path: |
+            upano-moi011/voice_delivery/*.json
+            upano-moi011/voice_delivery/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14
