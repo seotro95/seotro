@@ -1,0 +1,29 @@
+{
+  "episode": "004-ollantaytambo",
+  "main_language": "en",
+  "target_seconds": 1302,
+  "provider": "Melo + Viet Studio 1.3.1 original online backend; edge-tts 7.3.1",
+  "status": "selected_pending_live_validation",
+  "native_rate": "+0%",
+  "native_pitch": "+0Hz",
+  "native_volume": "+0%",
+  "voices": {
+    "en-US": "en-US-AndrewNeural",
+    "vi-VN": "vi-VN-NamMinhNeural",
+    "es-ES": "es-ES-AlvaroNeural",
+    "fr-FR": "fr-FR-HenriNeural",
+    "ja-JP": "ja-JP-KeitaNeural",
+    "ko-KR": "ko-KR-InJoonNeural",
+    "de-DE": "de-DE-ConradNeural",
+    "it-IT": "it-IT-DiegoNeural",
+    "pt-PT": "pt-PT-DuarteNeural",
+    "nl-NL": "nl-NL-MaartenNeural",
+    "pl-PL": "pl-PL-MarekNeural",
+    "sv-SE": "sv-SE-MattiasNeural",
+    "da-DK": "da-DK-JeppeNeural",
+    "fi-FI": "fi-FI-HarriNeural",
+    "nb-NO": "nb-NO-FinnNeural",
+    "cs-CZ": "cs-CZ-AntoninNeural"
+  },
+  "reuse": "Keep locale, exact voice IDs and native settings for subsequent episodes; fit duration with pitch-preserving tempo after synthesis."
+}

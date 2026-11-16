@@ -1,0 +1,95 @@
+name: Ollantaytambo 004 - documents and 16 male voices
+
+on:
+  push:
+    branches:
+      - codex/ollantaytambo-004-production-20261117
+    paths:
+      - .github/workflows/ollantaytambo-004-production.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ollantaytambo-004-voices
+  cancel-in-progress: false
+
+jobs:
+  produce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out episode sources
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: production/ollantaytambo004
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pinned voice dependency
+        run: python -m pip install -r production/ollantaytambo004/requirements.txt
+      - name: Check FFmpeg and syntax
+        run: |
+          ffmpeg -version
+          ffprobe -version
+          python -m py_compile production/ollantaytambo004/*.py production/ollantaytambo004/vendor/*.py
+      - name: Validate all inputs and build complete documents
+        run: python production/ollantaytambo004/build_documents.py --out outputs/documents
+      - name: Upload complete documents
+        id: documents
+        uses: actions/upload-artifact@v4
+        with:
+          name: 004_Ollantaytambo_Documents
+          path: outputs/documents/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Synthesize and verify all 16 male tracks
+        run: |
+          python production/ollantaytambo004/render_voices.py --script production/ollantaytambo004/script_master.json --translations production/ollantaytambo004/translations --out outputs/voices --work work/voice_render --workers 4
+      - name: Rebuild documents with measured voice manifest
+        run: python production/ollantaytambo004/build_documents.py --out outputs/documents
+      - name: Verify delivery count and duration
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("outputs/voices")
+          data=json.loads((p/"MANIFEST.json").read_text())
+          assert data["complete"] is True and data["all_requested_languages"] is True
+          assert len(data["tracks"])==16
+          assert {t["language"] for t in data["tracks"]}=={"en","vi","es","fr","ja","ko","de","it","pt","nl","pl","sv","da","fi","no","cs"}
+          for t in data["tracks"]:
+              assert abs(t["duration_seconds"]-1302)<.0001
+              assert t["word_coverage_verified"] and not t["speech_truncated"]
+              assert (p/t["file"]).stat().st_size>100000
+          assert len(list(p.glob("*.m4a")))==16
+          print("AUDIO_MANIFEST_SUMMARY="+json.dumps([{"language":t["language"],"voice_id":t["voice_id"],"duration_seconds":t["duration_seconds"],"file":t["file"],"sha256":t["sha256"]} for t in data["tracks"]]))
+          print("VERIFIED: 16 separate male voice tracks; each timeline 1302 seconds; no speech truncated.")
+          PY
+      - name: Upload full production package
+        id: full_package
+        uses: actions/upload-artifact@v4
+        with:
+          name: 004_Ollantaytambo_FULL_16Voices_21m42s
+          path: |
+            outputs/documents/
+            outputs/voices/*.m4a
+            outputs/voices/*.wav
+            outputs/voices/*.json
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+      - name: Upload diagnostic reports if interrupted
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 004_Ollantaytambo_Diagnostic_Reports
+          path: |
+            outputs/voices/*.json
+            work/voice_render/**/REPORT.json
+          if-no-files-found: ignore
+          retention-days: 7

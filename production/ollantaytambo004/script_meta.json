@@ -1,0 +1,12 @@
+{
+  "project": "004_OLLANTAYTAMBO",
+  "duration_seconds": 1302,
+  "planned_runtime": "00:21:42",
+  "scene_count": 131,
+  "english_words": 2824,
+  "generated_scene_seconds": 10,
+  "edit_note": "Scenes1-130 use10 seconds each. Scene131 is generated10 seconds but only2 seconds used; final2seconds have no narration.",
+  "audio_note": "Render21fullminute groups at60s each. Final spoken group127-130 targets40s; append2s silence. Actual audio must be measured after generation.",
+  "humans": "All depicted humans are adults25+. No children, teenagers, infants, or childlike figures.",
+  "history_note": "Use pink rhyolite. Exact ropes, attachments, hauling organization and river crossing remain uncertain; reenactments show hypotheses."
+}
