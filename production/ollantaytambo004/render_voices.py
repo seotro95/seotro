@@ -29,7 +29,7 @@ VOICES = {
 'en':('en-US','en-US-AndrewNeural'), 'vi':('vi-VN','vi-VN-NamMinhNeural'),
 'es':('es-ES','es-ES-AlvaroNeural'), 'fr':('fr-FR','fr-FR-HenriNeural'),
 'ja':('ja-JP','ja-JP-KeitaNeural'), 'ko':('ko-KR','ko-KR-InJoonNeural'),
-'de':('de-DE','de-DE-ConradNeural'), 'it':('it-IT','it-IT-DiegoNeural'),
+'de':('de-DE','de-DE-ChristophNeural'), 'it':('it-IT','it-IT-DiegoNeural'),
 'pt':('pt-PT','pt-PT-DuarteNeural'), 'nl':('nl-NL','nl-NL-MaartenNeural'),
 'pl':('pl-PL','pl-PL-MarekNeural'), 'sv':('sv-SE','sv-SE-MattiasNeural'),
 'da':('da-DK','da-DK-JeppeNeural'), 'fi':('fi-FI','fi-FI-HarriNeural'),
@@ -109,7 +109,7 @@ def extract_rows(data, language):
         raise ValueError(f'{language}: need spoken IDs1-130 and empty ID131.')
     return rows
 
-def split_text(text,limit=1100):
+def split_text(text,limit=480):
     sentences = re.split(r'(?<=[.!?。！？…])\s+',text.strip())
     atoms=[]
     for sentence in sentences:
@@ -143,6 +143,50 @@ def atempo(value):
     factors.append(value)
     return ','.join(f'atempo={v:.12g}' for v in factors)
 
+
+def render_piece(backend,locale,voice,text,source,depth=0):
+    """Cache only fully verified same-voice speech; split persistent empty responses."""
+    signature=hashlib.sha256((voice+'\0'+text).encode()).hexdigest()
+    metadata=source.with_suffix('.json')
+    if source.exists() and metadata.exists():
+        old=json.loads(metadata.read_text(encoding='utf-8'))
+        if old.get('signature')==signature and old.get('word_coverage_verified') is True:
+            try:
+                info=wav_info(source)
+                return {'file':source.name,'cached':True,**info}
+            except (ValueError,wave.Error,EOFError):
+                pass
+    source.unlink(missing_ok=True)
+    children=[]
+    try:
+        result=backend.handle({'op':'render','language':locale,'voice':voice,'text':text,'output':str(source)})
+        words=json.loads(source.with_suffix('.edge.words.json').read_text(encoding='utf-8'))
+        if words.get('verified') is not True:
+            raise ValueError('Unverified speech completeness.')
+        coverage=words['coverage_ratio']
+    except Exception as error:
+        if type(error).__name__ not in ('NoAudioReceived','IncompleteSpeechError') or len(text)<=160 or depth>=3:
+            raise
+        limit=240 if len(text)>300 else max(80,len(text)//2)
+        pieces=split_text(text,limit=limit)
+        if len(pieces)<2:
+            raise
+        print('SPLIT_SAME_VOICE',voice,len(text),[len(t) for t in pieces],flush=True)
+        paths=[]
+        for index,piece in enumerate(pieces,1):
+            child=source.with_name(source.stem+f'_s{index}.wav')
+            record=render_piece(backend,locale,voice,piece,child,depth+1)
+            children.append(record);paths.append(child)
+        concatenate(paths,source,source.with_suffix('.ffconcat'))
+        coverage=min(json.loads(path.with_suffix('.json').read_text(encoding='utf-8'))['word_coverage_ratio'] for path in paths)
+        result={'complete_verified_child_parts':True,'child_count':len(paths),'same_voice_id':voice}
+    info=wav_info(source)
+    write_json(metadata,{'signature':signature,'voice_id':voice,'text':text,
+        'word_coverage_verified':True,'word_coverage_ratio':coverage,'native_wav':info,
+        'backend_result':result,'children':children})
+    return {'file':source.name,'cached':False,**info}
+
+
 def render_chunk(backend,language,rows,start,work,max_tempo):
     locale,voice=VOICES[language]
     ids=list(range(start,min(start+6,131)));number=(start-1)//6+1
@@ -155,22 +199,8 @@ def render_chunk(backend,language,rows,start,work,max_tempo):
     for n,piece in enumerate(split_text(text),1):
         signature=hashlib.sha256((voice+'\0'+piece).encode()).hexdigest()
         source=folder/f'raw_{n:02}_{signature[:12]}.wav';metadata=source.with_suffix('.json')
-        cached=False
-        if source.exists() and metadata.exists():
-            old=json.loads(metadata.read_text(encoding='utf-8'))
-            if old.get('signature')==signature and old.get('word_coverage_verified') is True:
-                try: wav_info(source);cached=True
-                except (ValueError,wave.Error,EOFError): pass
-        if not cached:
-            source.unlink(missing_ok=True)
-            result=backend.handle({'op':'render','language':locale,'voice':voice,'text':piece,'output':str(source)})
-            info=wav_info(source)
-            words=json.loads(source.with_suffix('.edge.words.json').read_text(encoding='utf-8'))
-            if words.get('verified') is not True: raise ValueError('Unverified speech completeness.')
-            write_json(metadata,{'signature':signature,'voice_id':voice,'text':piece,
-                'word_coverage_verified':True,'word_coverage_ratio':words['coverage_ratio'],
-                'native_wav':info,'backend_result':result})
-        sources.append(source);segments.append({'file':source.name,'cached':cached,**wav_info(source)})
+        record=render_piece(backend,locale,voice,piece,source)
+        sources.append(source);segments.append(record)
     joined=folder/'native_joined.wav';concatenate(sources,joined,folder/'native.ffconcat')
     native=wav_info(joined);tempo=native['sample_frames']/budget
     if tempo>max_tempo: raise ValueError(f'{language} chapter{number}: required tempo{tempo:.3f} exceeds limit; no words cut.')
@@ -236,6 +266,31 @@ def finalize(language,reports,work,out):
     write_json(out/(base+'_REPORT.json'),report)
     return report
 
+
+def render_language(backend,language,rows,work,out,max_tempo):
+    """Only one request stream for each voice; finish other chapters after failures."""
+    chapters=[];failures=[]
+    for start in range(1,131,6):
+        try:
+            chapters.append(render_chunk(backend,language,rows,start,work,max_tempo))
+        except Exception as error:
+            item={'chapter':(start-1)//6+1,'type':type(error).__name__,'error':str(error)[-1200:]}
+            failures.append(item)
+            write_json(work/language/'PENDING.json',{'language':language,'complete':False,'failures':failures})
+            print('CHAPTER_PENDING '+json.dumps({'language':language,**item},ensure_ascii=False),flush=True)
+    if failures:
+        return {'language':language,'complete':False,'failures':failures,'verified_chapters':len(chapters)}
+    try:
+        report=finalize(language,chapters,work,out)
+        (work/language/'PENDING.json').unlink(missing_ok=True)
+        print(f'DELIVERED {language}: exact21:42 media timeline',flush=True)
+        return {'language':language,'complete':True,'track':report}
+    except Exception as error:
+        item={'stage':'encode_and_validate','type':type(error).__name__,'error':str(error)[-1200:]}
+        write_json(work/language/'PENDING.json',{'language':language,'complete':False,'failures':[item]})
+        return {'language':language,'complete':False,'failures':[item],'verified_chapters':len(chapters)}
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--script',type=Path,required=True);p.add_argument('--translations',type=Path,required=True)
@@ -289,26 +344,32 @@ def main():
     write_json(args.out/'VOICE_PROFILES_LOCKED.json',{'episode':'004-ollantaytambo','profiles':profiles,
         'target_seconds':SECONDS,'online_update_note':'Reuse exact IDs and native settings. Provider models may change.',
         'alignment':'21 chapters of60seconds and final chapter42seconds; final2seconds without narration.'})
-    reports={language:[] for language in languages}
+    deliveries=[];language_results=[]
     with ThreadPoolExecutor(max_workers=args.workers) as pool:
-        futures=[pool.submit(render_chunk,backend,language,texts[language],start,args.work,args.max_tempo)
-                 for language in languages for start in range(1,131,6)]
-        try:
-            for future in as_completed(futures):
-                item=future.result();reports[item['language']].append(item)
-        except BaseException:
-            for future in futures:future.cancel()
-            raise
-    deliveries=[]
-    for language in languages:
-        deliveries.append(finalize(language,reports[language],args.work,args.out))
-        write_json(args.out/'MANIFEST_PARTIAL.json',{'complete':False,'verified_languages':[r['language'] for r in deliveries]})
-        print(f'DELIVERED {language}: exact21:42 media timeline',flush=True)
-    provenance.update({'status':'complete','elapsed_seconds':time.time()-started,'actual_tracks':len(deliveries)})
+        futures={pool.submit(render_language,backend,language,texts[language],args.work,args.out,args.max_tempo):language for language in languages}
+        for future in as_completed(futures):
+            language=futures[future]
+            try:
+                result=future.result()
+            except Exception as error:
+                result={'language':language,'complete':False,'failures':[{'type':type(error).__name__,'error':str(error)[-1200:]}]}
+            language_results.append(result)
+            if result['complete']:
+                deliveries.append(result['track'])
+            write_json(args.out/'MANIFEST_PARTIAL.json',{'complete':False,
+                'verified_languages':[r['language'] for r in deliveries],'results':language_results})
+    deliveries.sort(key=lambda r:languages.index(r['language']))
+    pending=[r for r in language_results if not r['complete']]
+    complete=not pending and len(deliveries)==len(languages)
+    provenance.update({'status':'complete' if complete else 'partial','elapsed_seconds':time.time()-started,
+        'actual_tracks':len(deliveries),'pending_languages':[r['language'] for r in pending]})
     write_json(args.out/'TOOL_PROVENANCE.json',provenance)
-    write_json(args.out/'MANIFEST.json',{'complete':True,'episode':'004-ollantaytambo','target_seconds':SECONDS,
+    write_json(args.out/'MANIFEST.json',{'complete':complete,'episode':'004-ollantaytambo','target_seconds':SECONDS,
         'sample_exact_wav_frames':FRAMES,'sample_rate':RATE,'all_requested_languages':len(languages)==16,
-        'tracks':deliveries,'source_script_sha256':digest(args.script)})
+        'tracks':deliveries,'pending':pending,'source_script_sha256':digest(args.script)})
+    if not complete:
+        print('All languages attempted; incomplete languages retained as pending with verified raw cache.',flush=True)
+        raise SystemExit(75)
     (args.out/'MANIFEST_PARTIAL.json').unlink(missing_ok=True)
     print('All requested tracks were synthesized and technically verified.',flush=True)
 

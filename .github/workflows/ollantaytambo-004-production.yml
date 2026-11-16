@@ -1,4 +1,4 @@
-name: Ollantaytambo 004 - documents and 16 male voices
+name: Ollantaytambo 004 - complete documents and 16 male voices
 
 on:
   push:
@@ -10,72 +10,129 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: ollantaytambo-004-voices
   cancel-in-progress: false
 
 jobs:
-  produce:
+  documents:
+    name: Complete script and prompt package
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 10
     steps:
-      - name: Check out episode sources
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 1
           sparse-checkout: production/ollantaytambo004
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install FFmpeg audio tools
+      - name: Compile and validate all source documents
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install --yes ffmpeg
-      - name: Install pinned voice dependency
-        run: python -m pip install -r production/ollantaytambo004/requirements.txt
-      - name: Check FFmpeg and syntax
-        run: |
-          ffmpeg -version
-          ffprobe -version
           python -m py_compile production/ollantaytambo004/*.py production/ollantaytambo004/vendor/*.py
-      - name: Validate all inputs and build complete documents
-        run: python production/ollantaytambo004/build_documents.py --out outputs/documents
-      - name: Upload complete documents
-        id: documents
-        uses: actions/upload-artifact@v4
+          python production/ollantaytambo004/build_documents.py --out outputs/documents
+      - uses: actions/upload-artifact@v4
         with:
           name: 004_Ollantaytambo_Documents
           path: outputs/documents/
           if-no-files-found: error
           retention-days: 14
-      - name: Synthesize and verify all 16 male tracks
+
+  voices:
+    name: Voice ${{ matrix.language }}
+    needs: documents
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 16
+      matrix:
+        language: ["en", "vi", "es", "fr", "ja", "ko", "de", "it", "pt", "nl", "pl", "sv", "da", "fi", "no", "cs"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: production/ollantaytambo004
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install audio tools
         run: |
-          python production/ollantaytambo004/render_voices.py --script production/ollantaytambo004/script_master.json --translations production/ollantaytambo004/translations --out outputs/voices --work work/voice_render --workers 4
-      - name: Rebuild documents with measured voice manifest
+          sudo apt-get update -qq
+          sudo apt-get install --yes ffmpeg
+          python -m pip install -r production/ollantaytambo004/requirements.txt
+      - name: Restore this voice's verified native parts
+        uses: actions/cache/restore@v4
+        continue-on-error: true
+        with:
+          path: work/voice_render/${{ matrix.language }}/**/raw_*
+          key: ollantaytambo004-native-v2-${{ matrix.language }}-${{ hashFiles('production/ollantaytambo004/script_master.json', 'production/ollantaytambo004/translations/*.json') }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            ollantaytambo004-native-v2-${{ matrix.language }}-${{ hashFiles('production/ollantaytambo004/script_master.json', 'production/ollantaytambo004/translations/*.json') }}-
+      - name: Render one male voice sequentially and verify 21m42s
+        run: |
+          python production/ollantaytambo004/render_voices.py --script production/ollantaytambo004/script_master.json --translations production/ollantaytambo004/translations --out outputs/voices --work work/voice_render --languages ${{ matrix.language }} --workers 1
+      - name: Retain verified native parts
+        if: always()
+        uses: actions/cache/save@v4
+        continue-on-error: true
+        with:
+          path: work/voice_render/${{ matrix.language }}/**/raw_*
+          key: ollantaytambo004-native-v2-${{ matrix.language }}-${{ hashFiles('production/ollantaytambo004/script_master.json', 'production/ollantaytambo004/translations/*.json') }}-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Upload separate country voice
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 004_voice_${{ matrix.language }}
+          path: outputs/voices/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+      - name: Retain recoverable country checkpoints
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 004_checkpoint_${{ matrix.language }}
+          path: |
+            outputs/voices/
+            work/voice_render/${{ matrix.language }}/**/raw_*
+            work/voice_render/${{ matrix.language }}/**/REPORT.json
+          if-no-files-found: ignore
+          retention-days: 7
+
+  package:
+    name: Assemble full package
+    if: always()
+    needs: [documents, voices]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: production/ollantaytambo004
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install audio verification tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install --yes ffmpeg
+      - name: Retrieve completed separate country artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: 004_voice_*
+          path: work/voice_artifacts
+      - name: Verify and assemble all 16 audio tracks
+        run: python production/ollantaytambo004/collect_voices.py --artifacts work/voice_artifacts --out outputs/voices
+      - name: Build complete documents with measured audio manifests
         run: python production/ollantaytambo004/build_documents.py --out outputs/documents
-      - name: Verify delivery count and duration
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          p=Path("outputs/voices")
-          data=json.loads((p/"MANIFEST.json").read_text())
-          assert data["complete"] is True and data["all_requested_languages"] is True
-          assert len(data["tracks"])==16
-          assert {t["language"] for t in data["tracks"]}=={"en","vi","es","fr","ja","ko","de","it","pt","nl","pl","sv","da","fi","no","cs"}
-          for t in data["tracks"]:
-              assert abs(t["duration_seconds"]-1302)<.0001
-              assert t["word_coverage_verified"] and not t["speech_truncated"]
-              assert (p/t["file"]).stat().st_size>100000
-          assert len(list(p.glob("*.m4a")))==16
-          print("AUDIO_MANIFEST_SUMMARY="+json.dumps([{"language":t["language"],"voice_id":t["voice_id"],"duration_seconds":t["duration_seconds"],"file":t["file"],"sha256":t["sha256"]} for t in data["tracks"]]))
-          print("VERIFIED: 16 separate male voice tracks; each timeline 1302 seconds; no speech truncated.")
-          PY
       - name: Upload full production package
-        id: full_package
         uses: actions/upload-artifact@v4
         with:
           name: 004_Ollantaytambo_FULL_16Voices_21m42s
@@ -87,15 +144,3 @@ jobs:
           if-no-files-found: error
           compression-level: 0
           retention-days: 14
-      - name: Upload diagnostic reports if interrupted
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: 004_Ollantaytambo_Diagnostic_Reports
-          path: |
-            outputs/voices/*.json
-            work/voice_render/**/REPORT.json
-          if-no-files-found: ignore
-          retention-days: 7
-
-# Recheck live male catalogue before locking this episode's actual voice IDs.

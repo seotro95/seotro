@@ -6,7 +6,7 @@ VOICES = {
 "en": ("en-US", "en-US-AndrewNeural"), "vi": ("vi-VN", "vi-VN-NamMinhNeural"),
 "es": ("es-ES", "es-ES-AlvaroNeural"), "fr": ("fr-FR", "fr-FR-HenriNeural"),
 "ja": ("ja-JP", "ja-JP-KeitaNeural"), "ko": ("ko-KR", "ko-KR-InJoonNeural"),
-"de": ("de-DE", "de-DE-ConradNeural"), "it": ("it-IT", "it-IT-DiegoNeural"),
+"de": ("de-DE", "de-DE-ChristophNeural"), "it": ("it-IT", "it-IT-DiegoNeural"),
 "pt": ("pt-PT", "pt-PT-DuarteNeural"), "nl": ("nl-NL", "nl-NL-MaartenNeural"),
 "pl": ("pl-PL", "pl-PL-MarekNeural"), "sv": ("sv-SE", "sv-SE-MattiasNeural"),
 "da": ("da-DK", "da-DK-JeppeNeural"), "fi": ("fi-FI", "fi-FI-HarriNeural"),
@@ -150,7 +150,7 @@ Tiếng Anh là bản video chính. Có16bản lời đọc: Anh, Việt (Nam Mi
     write(out/"00_DOC_TRUOC.md",readme)
     repro=out/"11_REPRODUCE"
     repro.mkdir(parents=True,exist_ok=True)
-    for name in ["build_documents.py","render_voices.py","requirements.txt","script_master.json","scene_prompts.json","titles_thumbnails.json"]:
+    for name in ["build_documents.py","render_voices.py","requirements.txt","collect_voices.py","script_master.json","scene_prompts.json","titles_thumbnails.json"]:
         if (P/name).is_file():shutil.copy2(P/name,repro/name)
     for folder in ["translations","vendor"]:
         if (P/folder).is_dir():shutil.copytree(P/folder,repro/folder,dirs_exist_ok=True,ignore=shutil.ignore_patterns("__pycache__","*.pyc"))

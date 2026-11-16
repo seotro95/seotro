@@ -6,6 +6,8 @@ import asyncio
 import difflib
 import json
 import os
+from email.utils import parsedate_to_datetime
+import time
 from pathlib import Path
 import unicodedata
 
@@ -24,7 +26,7 @@ def configure(backend):
             module._SSL_CTX.load_verify_locations(cafile=os.environ['SSL_CERT_FILE'])
     async def download(text, voice, output):
         error = None
-        for attempt in range(4):
+        for attempt in range(8):
             try:
                 words = []
                 stream = edge_tts.Communicate(text, voice, rate='+0%', volume='+0%', pitch='+0Hz',
@@ -50,11 +52,23 @@ def configure(backend):
                 return
             except Exception as caught:
                 error = caught
-                if getattr(caught, 'status', None) in (401, 403, 429):
+                status=getattr(caught,'status',None)
+                if status in (401,403):
                     raise
-                print('TTS_RETRY', voice, type(caught).__name__, attempt + 1, flush=True)
-                if attempt < 3:
-                    await asyncio.sleep((5, 15, 30)[attempt])
+                print('TTS_RETRY',voice,type(caught).__name__,attempt+1,'of8',flush=True)
+                if attempt<7:
+                    delay=(2,4,8,12,20,30,45)[attempt]
+                    if status==429:
+                        retry_after=getattr(caught,'headers',{}).get('Retry-After') if getattr(caught,'headers',None) else None
+                        if retry_after:
+                            try:
+                                delay=max(delay,float(retry_after))
+                            except ValueError:
+                                try:delay=max(delay,parsedate_to_datetime(retry_after).timestamp()-time.time())
+                                except (TypeError,ValueError,OverflowError):pass
+                    await asyncio.sleep(max(0,delay))
+        if type(error).__name__ not in ('NoAudioReceived','IncompleteSpeechError'):
+            raise error
         raise IncompleteSpeechError('No complete narration received; partial audio rejected.') from error
     backend.download_audio = download
     return backend
