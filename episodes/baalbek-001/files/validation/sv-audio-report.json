@@ -1,0 +1,1137 @@
+{
+  "locale": "sv",
+  "voice_id": "piper:sv_SE-nst-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1242,
+  "spoken_cues": 124,
+  "closing_silence_seconds": 2,
+  "config_hash": "24d9277bf507b48ac5060b7074701d808cfe1902692c5bd27cb78d7797ad35cd",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "I Baalbeks tempelfundament ligger tre enorma stenar. Storleken slår oss. Den svårare frågan är hur de kom hit.",
+      "raw_seconds": 8.974512471655329,
+      "speech_window_seconds": 8.974512471655329,
+      "tempo": 0.9300012923995159,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "I stenbrottet nära intill ligger ännu större block kvar. Några frigjordes aldrig helt. De ska skiljas från stenarna som verkligen transporterades till templet.",
+      "raw_seconds": 11.296507936507936,
+      "speech_window_seconds": 11.296507936507936,
+      "tempo": 1.1706225840940867,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Det här är olika slags belägg. Vi måste följa hela arbetet, från bergväggen till den sista fogen i det färdiga murverket.",
+      "raw_seconds": 9.624671201814058,
+      "speech_window_seconds": 9.624671201814058,
+      "tempo": 0.9973752540739956,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Vi befinner oss i Bekaadalen i Libanon. Jordbruk, bosättning, resor och århundraden av byggande har format Baalbeks landskap.",
+      "raw_seconds": 10.611519274376418,
+      "speech_window_seconds": 10.611519274376418,
+      "tempo": 1.0996393030441884,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Helgedomen blev ett monumentalt centrum i det romerska Heliopolis. De bevarade byggnaderna hör till flera skeden i en lång historia.",
+      "raw_seconds": 9.624671201814058,
+      "speech_window_seconds": 9.624671201814058,
+      "tempo": 0.9973752540739956,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Jupitertemplet dominerade området. De stora kolonnerna drar blicken uppåt, men vår undersökning börjar närmare marken.",
+      "raw_seconds": 9.914920634920636,
+      "speech_window_seconds": 9.914920634920636,
+      "tempo": 1.0274529155358172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "De tre stora blocken i fundamentet kallas Trilithon. De visar att mycket stora stenar faktiskt flyttades och placerades här.",
+      "raw_seconds": 9.578231292517007,
+      "speech_window_seconds": 9.578231292517007,
+      "tempo": 0.9925628282401043,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Varje block uppskattas väga många hundra ton. Det exakta värdet beror på uppmätta mått och den densitet som antas för kalkstenen.",
+      "raw_seconds": 9.485351473922902,
+      "speech_window_seconds": 9.485351473922902,
+      "tempo": 0.9829379765723214,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Det kända stenbrottet ligger ungefär en kilometer bort. En kort promenad, men en krävande väg för en ovanligt tung last.",
+      "raw_seconds": 8.742312925170069,
+      "speech_window_seconds": 8.742312925170069,
+      "tempo": 0.9059391632300589,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Avståndet räcker inte. Vi behöver också känna till lutningar, markens bärighet, arbetsutrymmet och höjden vid slutpunkten.",
+      "raw_seconds": 9.636281179138322,
+      "speech_window_seconds": 9.636281179138322,
+      "tempo": 0.9985783605324686,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Ingen fullständig byggdagbok är bevarad. Därför måste en rekonstruktion skilja mellan fysiska belägg och antaganden som vi själva lägger till.",
+      "raw_seconds": 10.878548752834467,
+      "speech_window_seconds": 10.878548752834467,
+      "tempo": 1.127310751589064,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Vi ska pröva möjligheter mot begränsningar. Brytning, stöd, dragkraft, styrning och slutlig placering måste förklaras som en sammanhängande kedja.",
+      "raw_seconds": 11.15718820861678,
+      "speech_window_seconds": 11.15718820861678,
+      "tempo": 1.1561853065924124,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Börja i stenbrottet, när stenen ännu hörde till sluttningen. Det första tekniska beslutet kom före det första försöket att flytta den.",
+      "raw_seconds": 8.684263038548753,
+      "speech_window_seconds": 8.684263038548753,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Byggarna behövde lämpligt berg och en åtkomlig arbetsplats. Skiktplan, sprickor, tillträde och den planerade formen spelade alla in.",
+      "raw_seconds": 9.833650793650794,
+      "speech_window_seconds": 9.833650793650794,
+      "tempo": 1.0190311703265071,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "En dold svaghet i ett jätteblock kunde göra mycket arbete förgäves. Brytningen krävde därför erfarenhet och omdöme, inte bara fysisk styrka.",
+      "raw_seconds": 11.04108843537415,
+      "speech_window_seconds": 11.04108843537415,
+      "tempo": 1.1441542420076838,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Diken och bearbetade ytor bevarar spår av brytningen. De hjälper oss undersöka var arbetarna stod och vilka stenytor de kunde nå.",
+      "raw_seconds": 10.263219954648527,
+      "speech_window_seconds": 10.263219954648527,
+      "tempo": 1.0635461092900027,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Titta noga på spåren. Ett dramatiskt fotografi kan dölja trånga arbetsutrymmen som bestämde ordningen för huggning och frigörande.",
+      "raw_seconds": 9.787210884353742,
+      "speech_window_seconds": 9.787210884353742,
+      "tempo": 1.0142187444926158,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Den gravida kvinnans sten är känd för sin storlek. Den ligger dock kvar i stenbrottet och är inte ett inbyggt tempelblock.",
+      "raw_seconds": 8.347573696145124,
+      "speech_window_seconds": 8.347573696145124,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "År tvåtusenfjorton frilades ännu ett jättelikt block i stenbrottet. Massan uppskattades till omkring ettusen sexhundrafemtio ton. Blocket ligger fortfarande där.",
+      "raw_seconds": 13.014784580498866,
+      "speech_window_seconds": 13.014784580498866,
+      "tempo": 1.348682339948069,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Fyndet visar stenbrytarnas stora ambitioner. Det bevisar inte att ett block med den uppskattade massan transporterades till templet.",
+      "raw_seconds": 8.602993197278911,
+      "speech_window_seconds": 8.602993197278911,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Skillnaden ändrar frågan. Vi bör undersöka både lyckad transport och ofärdigt arbete. Ett övergivet försök kan avslöja praktiska gränser.",
+      "raw_seconds": 10.495419501133787,
+      "speech_window_seconds": 10.495419501133787,
+      "tempo": 1.0876082384594596,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Arkeologiska grupper har undersökt stenbrotten med libanesiska specialister. Deras planer och iakttagelser ger en säkrare början än en ensam bild på nätet.",
+      "raw_seconds": 11.656417233560092,
+      "speech_window_seconds": 11.656417233560092,
+      "tempo": 1.2079188843067452,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Vid helgedomen finns andra belägg: murverk på plats, mått, fogar och förhållandet till de omgivande stenskiftena.",
+      "raw_seconds": 7.732244897959184,
+      "speech_window_seconds": 7.732244897959184,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "En färdig fog visar slutpunkten, men inte alla tidigare rörelser. Den saknade vägen måste rekonstrueras med spår och mekaniska resonemang.",
+      "raw_seconds": 10.39092970521542,
+      "speech_window_seconds": 10.39092970521542,
+      "tempo": 1.076780280333204,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Baalbeks äldre historia är en egen fråga. En plats ålder daterar inte automatiskt varje synlig byggnadsdel.",
+      "raw_seconds": 8.382403628117913,
+      "speech_window_seconds": 8.382403628117913,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Byggnadsföljden undersöks med utgrävningar, konstruktionssamband och materialstudier. Storleken ensam kan inte ange datum eller identifiera en byggare.",
+      "raw_seconds": 12.10920634920635,
+      "speech_window_seconds": 12.10920634920635,
+      "tempo": 1.2548400361871865,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Även antiken ger jämförelser. Vitruvius beskrev lyftmaskiner och tunga transporter, bland annat svårigheterna med vägar som hade dålig bärighet.",
+      "raw_seconds": 11.400997732426303,
+      "speech_window_seconds": 11.400997732426303,
+      "tempo": 1.1814505422203423,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Texterna visar en mekanisk tradition. De säger inte att en viss maskin användes för en viss sten i Baalbek.",
+      "raw_seconds": 7.894784580498866,
+      "speech_window_seconds": 7.894784580498866,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Arkeologen Jean-Pierre Adam undersökte gångspel och transportlösningar. Hans förslag är tekniska rekonstruktioner, inte bevarade redogörelser för det ursprungliga arbetet.",
+      "raw_seconds": 12.678095238095239,
+      "speech_window_seconds": 12.678095238095239,
+      "tempo": 1.3137922526523562,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Med de gränserna kan vi bygga en försiktig modell. Först måste blocket formas, frigöras, stödjas och göras klart för transport.",
+      "raw_seconds": 9.531791383219955,
+      "speech_window_seconds": 9.531791383219955,
+      "tempo": 0.9877504024062129,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Föreställ dig blockets kontur i berget. Bearbetning av sidorna skapar tillträde, men undersidan binder fortfarande lasten till berggrunden.",
+      "raw_seconds": 11.6215873015873,
+      "speech_window_seconds": 11.6215873015873,
+      "tempo": 1.2043095649313265,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "När undersidan frigörs förändras hur vikten bärs. Modellen måste visa vad som stöder stenen genom övergången, utan plötslig kollaps.",
+      "raw_seconds": 9.752380952380953,
+      "speech_window_seconds": 9.752380952380953,
+      "tempo": 1.010609425117197,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Träunderlägg, kilar eller förberedda upplag är tänkbara. Den exakta placeringen är fortfarande en hypotes som måste stämma med de bevarade spåren.",
+      "raw_seconds": 10.62312925170068,
+      "speech_window_seconds": 10.62312925170068,
+      "tempo": 1.1008424095026612,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Första principen är att ordna ett nytt stöd innan det gamla tas bort. Vid en jättesten kan en liten okontrollerad rörelse bli farlig.",
+      "raw_seconds": 9.05578231292517,
+      "speech_window_seconds": 9.05578231292517,
+      "tempo": 0.938423037608826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Sedan vägen. Att dra hårdare hjälper inte alltid. Extra ansträngning räddar ingen transportbädd som sjunker under lasten.",
+      "raw_seconds": 8.881632653061224,
+      "speech_window_seconds": 8.881632653061224,
+      "tempo": 0.9203764407317331,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Tryck beror på hur kraften fördelas över en yta. Bredare stöd minskar medeltrycket, men marken måste fortfarande bära hela lasten.",
+      "raw_seconds": 9.578231292517007,
+      "speech_window_seconds": 9.578231292517007,
+      "tempo": 0.9925628282401043,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Vägens förberedelse hör till förklaringen. Utjämning, dränering, packning och reparation kan vara lika viktiga som själva draganordningen.",
+      "raw_seconds": 9.636281179138322,
+      "speech_window_seconds": 9.636281179138322,
+      "tempo": 0.9985783605324686,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Sedan kommer friktionen mellan kontaktytorna. Den varierar med material, fukt, inriktning, deformation och stödytans skick.",
+      "raw_seconds": 9.05578231292517,
+      "speech_window_seconds": 9.05578231292517,
+      "tempo": 0.938423037608826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Anta en massa på åttahundra ton i räkneexemplet. Det är ett val för modellen, ingen ny mätning av den verkliga stenen.",
+      "raw_seconds": 8.150204081632653,
+      "speech_window_seconds": 8.150204081632653,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "På vågrät mark multiplicerar glidmodellen tyngdkraften med friktionskoefficienten. Koefficienten måste stämma med de undersökta materialen och uppställningen.",
+      "raw_seconds": 11.19201814058957,
+      "speech_window_seconds": 11.19201814058957,
+      "tempo": 1.159794625967831,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Med en antagen friktionskoefficient på noll komma noll fem blir motståndet ungefär fyrahundra kilonewton, innan andra svårigheter räknas in.",
+      "raw_seconds": 11.250068027210885,
+      "speech_window_seconds": 11.250068027210885,
+      "tempo": 1.1658101582601952,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Om den antagna koefficienten ökar till noll komma två fyrdubblas motståndet. Kontaktytornas skick förändrar problemets omfattning.",
+      "raw_seconds": 9.09061224489796,
+      "speech_window_seconds": 9.09061224489796,
+      "tempo": 0.9420323569842445,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Siffrorna avslöjar inte antalet antika arbetare. De visar behovet av välgrundade antaganden, i stället för en imponerande uppskattning av folkmängden.",
+      "raw_seconds": 10.611519274376418,
+      "speech_window_seconds": 10.611519274376418,
+      "tempo": 1.0996393030441884,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "En släde fördelar lasten och ger något att dra i. Undersidan, förbanden och kontakten med banan måste undersökas.",
+      "raw_seconds": 8.243083900226758,
+      "speech_window_seconds": 8.243083900226758,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Rullar är en annan möjlighet, men tar inte bort allt motstånd. Kontaktytorna måste tåla trycket och rullarna hålla rätt riktning.",
+      "raw_seconds": 8.6378231292517,
+      "speech_window_seconds": 8.6378231292517,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Lösa rullar kan glida åt sidan eller träffa ojämn mark. En realistisk animation måste visa kontrollerad rörelse med synligt stöd och arbete.",
+      "raw_seconds": 11.842176870748299,
+      "speech_window_seconds": 11.842176870748299,
+      "tempo": 1.2271685876423106,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Vi måste också förklara hur stöden hämtas tillbaka och flyttas fram. Transporten upprepar en cykel: förbereda, flytta, kontrollera och förbereda igen.",
+      "raw_seconds": 10.866938775510205,
+      "speech_window_seconds": 10.866938775510205,
+      "tempo": 1.1261076451305911,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Både glidning och rullning kräver plats för systemets hela bredd. Snäva kurvor och plötsliga lutningsändringar skapar fler mekaniska problem.",
+      "raw_seconds": 10.518639455782314,
+      "speech_window_seconds": 10.518639455782314,
+      "tempo": 1.0900144513764054,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Varifrån kommer dragkraften? Människor, djur, rep och maskiner är möjliga inslag. Placeringen avgör hur effektivt de samverkar.",
+      "raw_seconds": 10.147120181405896,
+      "speech_window_seconds": 10.147120181405896,
+      "tempo": 1.0515150447052741,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Ett rep överför krafter. Knutar, böjar, nötning och fästpunkter kan försvaga ett system som ser övertygande ut på ritningen.",
+      "raw_seconds": 9.253151927437642,
+      "speech_window_seconds": 9.253151927437642,
+      "tempo": 0.9588758474028645,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Taljor minskar kraftbehovet genom att mer rep måste dras in. Även ett idealt system med förhållandet fyra till ett följer den principen.",
+      "raw_seconds": 9.485351473922902,
+      "speech_window_seconds": 9.485351473922902,
+      "tempo": 0.9829379765723214,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Verkliga block ger friktion och belastar konstruktionen. Kraftvinsten ersätter inte kontroll av rep, stommar och fundament.",
+      "raw_seconds": 9.102222222222222,
+      "speech_window_seconds": 9.102222222222222,
+      "tempo": 0.9432354634427172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Ett gångspel drar i repet genom rotation. Längre hävarmar ökar vridmomentet, och trumman omvandlar rotationen till en kontrollerad dragkraft.",
+      "raw_seconds": 10.762448979591836,
+      "speech_window_seconds": 10.762448979591836,
+      "tempo": 1.1152796870043353,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "En sådan maskin behöver också en hållfast förankring. Reaktionskraften måste tas upp av en förberedd grund, en annan konstruktion eller marken.",
+      "raw_seconds": 9.496961451247165,
+      "speech_window_seconds": 9.496961451247165,
+      "tempo": 0.9841410830307943,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Frågan är större än maskinen. Kan hela kraftkedjan från arbetare till mark ta upp belastningen utan att kontrollen förloras?",
+      "raw_seconds": 8.208253968253969,
+      "speech_window_seconds": 8.208253968253969,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Flera dragpunkter kan fördela arbetet. Men ojämnt drag kan vrida lasten eller överbelasta en del av anordningen.",
+      "raw_seconds": 8.208253968253969,
+      "speech_window_seconds": 8.208253968253969,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Rörelsen bör ske i små, synliga steg. När ett jätteblock väl rör sig finns inget utrymme att improvisera intill en okontrollerad massa.",
+      "raw_seconds": 9.450521541950113,
+      "speech_window_seconds": 9.450521541950113,
+      "tempo": 0.9793286571969029,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Att stanna är lika viktigt som att starta. Stoppklossar, mothåll och en planerad viloposition hör till en kontrollerad tung transport.",
+      "raw_seconds": 9.903310657596371,
+      "speech_window_seconds": 9.903310657596371,
+      "tempo": 1.0262498090773442,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Även höjdskillnader räknas. En svag uppförslutning tillför en del av tyngdkraften som draganordningen måste övervinna.",
+      "raw_seconds": 8.417233560090702,
+      "speech_window_seconds": 8.417233560090702,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "För vår modell på åttahundra ton tillför en procents lutning ungefär åttio kilonewton. Det är utöver friktionen.",
+      "raw_seconds": 8.6378231292517,
+      "speech_window_seconds": 8.6378231292517,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Nedför uppstår ett annat problem. Tyngdkraften kan hjälpa rörelsen, men acceleration måste hindras och lasten hållas på den planerade vägen.",
+      "raw_seconds": 10.437369614512471,
+      "speech_window_seconds": 10.437369614512471,
+      "tempo": 1.0815927061670954,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "En bekväm väg på en plan karta kan vara svår i profil. Terrängen kan utesluta en tilltalande rekonstruktion.",
+      "raw_seconds": 8.185034013605442,
+      "speech_window_seconds": 8.185034013605442,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Vid fundamentet ska lasten nå rätt höjd under kontroll. En föreslagen ramp eller tillfällig fyllning måste också vara stabil under vikten.",
+      "raw_seconds": 9.520181405895691,
+      "speech_window_seconds": 9.520181405895691,
+      "tempo": 0.98654729594774,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Det färdiga monumentet behöver inte ha sett likadant ut under byggandet. Arbetsnivåer och tillfälliga utrymmen kan skilja sig från slutresultatet.",
+      "raw_seconds": 10.495419501133787,
+      "speech_window_seconds": 10.495419501133787,
+      "tempo": 1.0876082384594596,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Den slutliga inpassningen är ett eget moment. Små rörelser, mellanlägg, hävstänger och kontroller är tänkbara; deras exakta användning här återstår att belägga.",
+      "raw_seconds": 12.004716553287983,
+      "speech_window_seconds": 12.004716553287983,
+      "tempo": 1.2440120780609307,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Nyckeln är sammanhanget. Stenen måste vara understödd från stenbrottet till fogen, utan oförklarliga språng mellan imponerande scener.",
+      "raw_seconds": 9.47374149659864,
+      "speech_window_seconds": 9.47374149659864,
+      "tempo": 0.9817348701138486,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Pröva modellen kritiskt. En metod som fungerar på bordet kan misslyckas när trä, rep och mark möter mycket större laster.",
+      "raw_seconds": 8.510113378684807,
+      "speech_window_seconds": 8.510113378684807,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Skalan ändrar kontakttryck, böjning och materialens beteende. Större mått bevarar inte automatiskt villkoren från ett litet försök.",
+      "raw_seconds": 8.486893424036282,
+      "speech_window_seconds": 8.486893424036282,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Valet av trä spelar också roll. Stöden måste tåla lokal sammanpressning och böjning och samverka med transportkonstruktionens övriga delar.",
+      "raw_seconds": 10.62312925170068,
+      "speech_window_seconds": 10.62312925170068,
+      "tempo": 1.1008424095026612,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Detsamma gäller vägen. Fast mark under en punkt kompenserar inte för ett svagt område under en annan del av lasten.",
+      "raw_seconds": 8.080544217687075,
+      "speech_window_seconds": 8.080544217687075,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "När regn förändrar marken blir dränering en mekanisk fråga. En förberedd väg kan inte byggas en gång och sedan glömmas.",
+      "raw_seconds": 8.475283446712018,
+      "speech_window_seconds": 8.475283446712018,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Underhåll kräver tid och resurser. Modellen måste ge utrymme för kontroll av stöd, omställning av utrustning och reparation före nästa förflyttning.",
+      "raw_seconds": 10.785668934240363,
+      "speech_window_seconds": 10.785668934240363,
+      "tempo": 1.117685899921281,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Arbetsstyrkan är också ett system. Stenbrytning, snickeri, reparbete, inmätning, dragning och försörjning kräver olika kunskaper och ansvar.",
+      "raw_seconds": 10.936598639455783,
+      "speech_window_seconds": 10.936598639455783,
+      "tempo": 1.1333262838814282,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Ett fotografi visar inte arbetarnas ställning eller avtal. Vi bör inte uppfinna en fullständig arbetshistoria utifrån stenarna ensamma.",
+      "raw_seconds": 10.08907029478458,
+      "speech_window_seconds": 10.08907029478458,
+      "tempo": 1.0454995124129098,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Behovet av organisation är ändå tydligt. Material, mat, vatten, redskap och instruktioner måste nå rätt människor vid rätt tidpunkt.",
+      "raw_seconds": 11.017868480725623,
+      "speech_window_seconds": 11.017868480725623,
+      "tempo": 1.141748029090738,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Utanför hörhåll blir signaler viktiga. Gemensam timing är särskilt avgörande när lasten snabbt måste stanna.",
+      "raw_seconds": 7.743854875283446,
+      "speech_window_seconds": 7.743854875283446,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Arbetet med vägen väcker också en planeringsfråga. Gällde förberedelserna ett enda block eller en hel följd av leveranser?",
+      "raw_seconds": 9.044172335600907,
+      "speech_window_seconds": 9.044172335600907,
+      "tempo": 0.937219931150353,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Upprepade transporter kan motivera stora förberedelser. Men tidplan, antal arbetslag och leveransordning måste avgöras av belägg, inte animation.",
+      "raw_seconds": 10.95981859410431,
+      "speech_window_seconds": 10.95981859410431,
+      "tempo": 1.135732496798374,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Den sista fogen har egna svårigheter. Blocket måste komma fram med en riktning som passar murverket och utrymmet för justering.",
+      "raw_seconds": 10.62312925170068,
+      "speech_window_seconds": 10.62312925170068,
+      "tempo": 1.1008424095026612,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Att vrida en jättelast på trång plats är ingen liten avslutning. Vägen måste planeras för det problemet innan transporten börjar.",
+      "raw_seconds": 8.986122448979591,
+      "speech_window_seconds": 8.986122448979591,
+      "tempo": 0.9312043988579887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "En antik förklaring kan inte bara använda en modern kran. En välbekant lyftbild kan dölja just det problem som vi vill förklara.",
+      "raw_seconds": 9.729160997732427,
+      "speech_window_seconds": 9.729160997732427,
+      "tempo": 1.0082032122002513,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Antika maskiner är dokumenterade, men kapacitet och uppställning spelar roll. Ett känt namn bevisar inte att maskinen klarade varje tänkbar uppgift.",
+      "raw_seconds": 10.530249433106576,
+      "speech_window_seconds": 10.530249433106576,
+      "tempo": 1.0912175578348784,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "De största kvarlämnade stenbrottsblocken är särskilt användbara. Deras ofärdiga skick skiljer ambition, brytning och lyckad placering åt.",
+      "raw_seconds": 10.031020408163265,
+      "speech_window_seconds": 10.031020408163265,
+      "tempo": 1.0394839801205455,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Ett fel i berget, en ändrad plan eller ett praktiskt hinder kunde avbryta arbetet. Att välja en orsak kräver konkreta belägg.",
+      "raw_seconds": 9.85687074829932,
+      "speech_window_seconds": 9.85687074829932,
+      "tempo": 1.021437383243453,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Blocket berättar inte i ord varför det övergavs. Dess skick måste kopplas till stenbrottet omkring det och byggandets större förlopp.",
+      "raw_seconds": 8.614603174603175,
+      "speech_window_seconds": 8.614603174603175,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Även transportytan behöver undersökas. Låg stöden på berg, förberedd fyllning, trä eller en kombination? Varje val påverkar beräkningen.",
+      "raw_seconds": 10.251609977324263,
+      "speech_window_seconds": 10.251609977324263,
+      "tempo": 1.0623430028315297,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Moderna försök kan belysa friktion och styrning. De får större värde när material, skala och begränsningar redovisas tydligt.",
+      "raw_seconds": 9.241541950113378,
+      "speech_window_seconds": 9.241541950113378,
+      "tempo": 0.9576727409443915,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Ett användbart försök behöver inte återskapa allt. Det ska besvara en bestämd fråga utan att påstå mer än uppställningen visar.",
+      "raw_seconds": 9.079002267573696,
+      "speech_window_seconds": 9.079002267573696,
+      "tempo": 0.9408292505257715,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Arkeologi och mekanik kompletterar varandra. Platsen begränsar modellen, och modellen pekar ut vilka spår som bör undersökas härnäst.",
+      "raw_seconds": 10.019410430839002,
+      "speech_window_seconds": 10.019410430839002,
+      "tempo": 1.0382808736620728,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Pröva en tänkt väg mot terrängen och en förankring mot sitt sammanhang. En prydlig figur ersätter ingen av undersökningarna.",
+      "raw_seconds": 7.883174603174603,
+      "speech_window_seconds": 7.883174603174603,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Att maskiner saknas är inte märkligt i sig. Trä och fibrer bevaras sämre än kalksten, men frånvaron bevisar inte vilken rekonstruktion som helst.",
+      "raw_seconds": 11.412607709750567,
+      "speech_window_seconds": 11.412607709750567,
+      "tempo": 1.1826536486788153,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "En bra förklaring anger sådant som kan prövas: nödvändigt utrymme, kontaktytor, stödkrav och ordningen mellan arbetsmomenten.",
+      "raw_seconds": 9.067392290249433,
+      "speech_window_seconds": 9.067392290249433,
+      "tempo": 0.9396261440672987,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Här blir mysteriet användbart. I stället för att upprepa omöjlighet kan vi fråga vilket bestämt moment som ännu saknar förklaring.",
+      "raw_seconds": 9.102222222222222,
+      "speech_window_seconds": 9.102222222222222,
+      "tempo": 0.9432354634427172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Svagheten kanske är vägen, repdragningen eller den förenklade slutplaceringen. Varje möjlighet behöver undersökas på sitt sätt.",
+      "raw_seconds": 9.09061224489796,
+      "speech_window_seconds": 9.09061224489796,
+      "tempo": 0.9420323569842445,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Frågorna minskar inte prestationen. De för oss närmare de praktiska beslut som byggarna måste ha löst steg för steg.",
+      "raw_seconds": 8.335963718820862,
+      "speech_window_seconds": 8.335963718820862,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Jämför möjligheterna på samma villkor. Varje metod måste bära samma last, följa en trovärdig väg och nå samma slutläge.",
+      "raw_seconds": 10.00780045351474,
+      "speech_window_seconds": 10.00780045351474,
+      "tempo": 1.0370777672036,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Först glidning på en förberedd bana. Den ger brett stöd och direkt dragning, men kräver kontroll över friktionen och underhåll av vägen.",
+      "raw_seconds": 9.462131519274376,
+      "speech_window_seconds": 9.462131519274376,
+      "tempo": 0.9805317636553756,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Rullar under en lastfördelande konstruktion kan minska motståndet. De kräver hållfasthet, inriktning, återföring av rullar och stabil mark.",
+      "raw_seconds": 9.752380952380953,
+      "speech_window_seconds": 9.752380952380953,
+      "tempo": 1.010609425117197,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "En kombination kan använda olika metoder i olika skeden. Det hjälper bara om även övergångarna mellan metoderna förklaras.",
+      "raw_seconds": 8.452063492063493,
+      "speech_window_seconds": 8.452063492063493,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Gångspel och blocktaljor förklarar hur dragkraften skapas. De kan ingå i transportlösningen, men förklarar inte vad som bär stenens vikt.",
+      "raw_seconds": 10.483809523809525,
+      "speech_window_seconds": 10.483809523809525,
+      "tempo": 1.0864051320009869,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "En övertygande modell kan förena vanliga principer i ovanlig skala: tryck, friktion, hävstång, geometri och organisation.",
+      "raw_seconds": 11.319727891156463,
+      "speech_window_seconds": 11.319727891156463,
+      "tempo": 1.1730287970110325,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Vanliga principer betyder inte lätt arbete. Material med begränsad hållfasthet och människor som behöver samordning ska fungera som en helhet.",
+      "raw_seconds": 9.740770975056689,
+      "speech_window_seconds": 9.740770975056689,
+      "tempo": 1.0094063186587243,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "En metod kan vara fysiskt möjlig utan att vara historiskt belagd. Den skillnaden är viktig när vi gestaltar en okänd del av det förflutna.",
+      "raw_seconds": 9.47374149659864,
+      "speech_window_seconds": 9.47374149659864,
+      "tempo": 0.9817348701138486,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Den verkliga metoden kräver starkare samband mellan spår, terräng, material, datering och arbetsföljd. En övertygande animation räcker inte.",
+      "raw_seconds": 11.331337868480725,
+      "speech_window_seconds": 11.331337868480725,
+      "tempo": 1.1742319034695052,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Det placerade Trilithon visar resultatet. Stenbrottet visar förberedelser och ofärdigt arbete. Ingendera källan kan ensam besvara alla frågor.",
+      "raw_seconds": 11.319727891156463,
+      "speech_window_seconds": 11.319727891156463,
+      "tempo": 1.1730287970110325,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Uppskattningen på ettusen sexhundrafemtio ton gäller det stora blocket i stenbrottet, inte varje sten som transporterades till helgedomen.",
+      "raw_seconds": 10.170340136054422,
+      "speech_window_seconds": 10.170340136054422,
+      "tempo": 1.0539212576222199,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "En uppskattad massa är ingen direkt vägning. Mått, dolda ytor och antagen densitet förklarar skillnader mellan publicerade uppskattningar.",
+      "raw_seconds": 10.901768707482994,
+      "speech_window_seconds": 10.901768707482994,
+      "tempo": 1.1297169645060097,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Osäkerheten måste finnas kvar i berättelsen. Exakta siffror i en figur kan vilseleda om beläggen bara stöder ett ungefärligt intervall.",
+      "raw_seconds": 9.450521541950113,
+      "speech_window_seconds": 9.450521541950113,
+      "tempo": 0.9793286571969029,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Vad vet vi säkert? Stenarna tillhör ett verkligt landskap av brytning och monumental byggnadskonst. Studiet kräver tålmodig iakttagelse.",
+      "raw_seconds": 10.031020408163265,
+      "speech_window_seconds": 10.031020408163265,
+      "tempo": 1.0394839801205455,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "De öppna frågorna är konkreta: den exakta transportanordningen, den detaljerade vägen och stegen som förde varje sten till dess plats.",
+      "raw_seconds": 9.740770975056689,
+      "speech_window_seconds": 9.740770975056689,
+      "tempo": 1.0094063186587243,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Svaret har två lager. Vi kan förklara mekaniska möjligheter och lämna historiska detaljer öppna där beläggen ännu inte avgör dem.",
+      "raw_seconds": 9.311201814058958,
+      "speech_window_seconds": 9.311201814058958,
+      "tempo": 0.9648913796952288,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Det ger tittaren något att förstå och forskaren något att pröva. Förundran kan bli början på en undersökning.",
+      "raw_seconds": 7.151746031746032,
+      "speech_window_seconds": 7.151746031746032,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Framtida inmätningar och utgrävningar kan förtydliga bilden. Nya mått kan ändra en vägmodell, visa byggnadssamband eller utesluta ett antagande.",
+      "raw_seconds": 10.112290249433107,
+      "speech_window_seconds": 10.112290249433107,
+      "tempo": 1.0479057253298556,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "En bra rekonstruktion ska kunna ändras. Den ordnar frågor och belägg, i stället för att försvara en spektakulär bild mot rättelser.",
+      "raw_seconds": 9.427301587301587,
+      "speech_window_seconds": 9.427301587301587,
+      "tempo": 0.9769224442799571,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Återvänd till den första vyn av fundamentet. Stenarna har inte blivit mindre, men problemet omkring dem har fått tydligare struktur.",
+      "raw_seconds": 10.112290249433107,
+      "speech_window_seconds": 10.112290249433107,
+      "tempo": 1.0479057253298556,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Bakom den färdiga ytan kan vi föreställa oss en understödd följd: val i stenbrottet, förberett upplag, kontrollerad färd och noggrann inpassning.",
+      "raw_seconds": 10.298049886621316,
+      "speech_window_seconds": 10.298049886621316,
+      "tempo": 1.0671554286654212,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Bakom förloppet finns sällan fullt bevarade färdigheter: att bedöma sten, bearbeta trä, hantera rep, läsa terräng och samordna människor.",
+      "raw_seconds": 9.241541950113378,
+      "speech_window_seconds": 9.241541950113378,
+      "tempo": 0.9576727409443915,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Prestationen vilar lika mycket på samlad kunskap som på styrka. Den stora skalan gör små praktiska beslut ännu viktigare.",
+      "raw_seconds": 8.626213151927438,
+      "speech_window_seconds": 8.626213151927438,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Baalbek är också levande kulturarv i Libanon. Studiet av tekniken bör öka intresset för historien, lokalsamhällena och fortsatt omsorg.",
+      "raw_seconds": 10.379319727891156,
+      "speech_window_seconds": 10.379319727891156,
+      "tempo": 1.075577173874731,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Bevarande behöver dokumentation och materialkunskap. Noggrann iakttagelse förklarar det förflutna och skyddar det som finns kvar för framtiden.",
+      "raw_seconds": 10.716009070294785,
+      "speech_window_seconds": 10.716009070294785,
+      "tempo": 1.110467261170444,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Vad skulle du mäta först i nästa undersökning: vägen, kontaktytorna, stenens mått eller det möjliga arbetsutrymmet?",
+      "raw_seconds": 7.476825396825397,
+      "speech_window_seconds": 7.476825396825397,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Varje val leder till ett annat prov. Så blir en monumental fråga en följd av mindre frågor som faktiskt kan undersökas.",
+      "raw_seconds": 8.126984126984127,
+      "speech_window_seconds": 8.126984126984127,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Vi känner inte varje reprörelse med säkerhet. Men vi kan förstå beläggen, mekaniken och människornas organisation tydligare.",
+      "raw_seconds": 8.579773242630386,
+      "speech_window_seconds": 8.579773242630386,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Stenen är fortfarande enorm. Vilken kedja av understödda rörelser förde den från stenbrottet hit? Och vilket spår skulle bevisa det?",
+      "raw_seconds": 9.694331065759638,
+      "speech_window_seconds": 9.694331065759638,
+      "tempo": 1.0045938928248328,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1242,
+  "decoded_samples": 29808000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-sv-20m42s.mp3",
+  "flac": "voice-sv-20m42s.flac",
+  "mp3_sha256": "4341c43daabb2bb23ccdab7db0d57dc680f6b7eed9e29201194f9e3d7e74cc85",
+  "flac_sha256": "143dbcb0d920ba9d6a0983e7e64e0df0f4933ff3588c876db3279d4f286e250b"
+}

@@ -1,0 +1,24 @@
+{
+  "language": "cs",
+  "voice_id": "piper:cs_CZ-jirka-medium:0",
+  "audio_sha256": "84a4b993496a6b7cb4f8dfbc7d5d11ecec5d307ad34faba05b52c335d3612813",
+  "model": "Whisper tiny multilingual INT8 via sherpa-onnx",
+  "scope": "3 sampled cues, informational; ASR can misrecognize names and numbers; not full native listening",
+  "checks": [
+    {
+      "scene": 1,
+      "expected": "V základech chrámu v Baalbeku leží tři obrovské kameny. Jejich velikost ohromuje. Jak se ale dostaly právě sem?",
+      "asr": "V zakladech rámů v balbeků ležitři obrovské kamen. Je hveli kost ohromuje, jak se ale dostali pravěsem."
+    },
+    {
+      "scene": 41,
+      "expected": "Při předpokládaném součiniteli tření pět setin vychází odpor přibližně čtyři sta kilonewtonů, ještě bez dalších komplikací.",
+      "asr": "V při před pokládanem souci nitele 3,530 v hz odpol, při byližně 400 kiloní utonů, ještě bez další hkomplikaci."
+    },
+    {
+      "scene": 106,
+      "expected": "Odhad tisíce šesti set padesáti tun patří velkému bloku v lomu, nikoli každému kameni dopravenému ke svatyni.",
+      "asr": "Ozhat 1060 pady sa ačitom, patří velkému bloku vlomu, nikoli každěmu, kamený do právénemu kestvatyni."
+    }
+  ]
+}

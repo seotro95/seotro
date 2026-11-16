@@ -1,0 +1,1137 @@
+{
+  "locale": "es",
+  "voice_id": "piper:es_ES-davefx-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1242,
+  "spoken_cues": 124,
+  "closing_silence_seconds": 2,
+  "config_hash": "7c1267fca218fb226b496fbb830554219e472fc1ec764bb649a4505f45c3bd05",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "En la base del templo de Baalbek descansan tres piedras enormes. Su tamaño impresiona. La pregunta más difícil es cómo llegaron hasta aquí.",
+      "raw_seconds": 7.500045351473923,
+      "speech_window_seconds": 7.500045351473923,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "En la cantera cercana quedan bloques aún mayores. Algunos nunca se separaron por completo. Son distintos de las piedras que sí llegaron al templo.",
+      "raw_seconds": 7.627755102040816,
+      "speech_window_seconds": 7.627755102040816,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Son pruebas diferentes. Para investigarlas, debemos seguir toda la operación, desde la pared de roca hasta la última junta del muro.",
+      "raw_seconds": 7.22140589569161,
+      "speech_window_seconds": 7.22140589569161,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Estamos en el valle de la Becá, en el Líbano. Agricultura, asentamientos, viajes y siglos de construcción han dado forma al paisaje de Baalbek.",
+      "raw_seconds": 8.289523809523809,
+      "speech_window_seconds": 8.289523809523809,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "El santuario se convirtió en un centro monumental de la Heliópolis romana. Sus edificios conservados pertenecen a varias etapas de una historia compleja.",
+      "raw_seconds": 8.312743764172335,
+      "speech_window_seconds": 8.312743764172335,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "El templo de Júpiter dominaba el conjunto. Sus columnas nos hacen mirar hacia arriba, pero nuestra investigación empieza más cerca del suelo.",
+      "raw_seconds": 7.465215419501134,
+      "speech_window_seconds": 7.465215419501134,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Los tres bloques de la plataforma se conocen como Trilithon. Demuestran que piedras de tamaño extraordinario fueron transportadas y colocadas aquí.",
+      "raw_seconds": 7.848344671201814,
+      "speech_window_seconds": 7.848344671201814,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Cada bloque se estima en muchos cientos de toneladas. El valor depende de las dimensiones medidas y de la densidad supuesta para la caliza.",
+      "raw_seconds": 7.128526077097506,
+      "speech_window_seconds": 7.128526077097506,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "La cantera conocida está a cerca de un kilómetro del santuario. Es un paseo corto, pero una ruta exigente para una carga excepcionalmente pesada.",
+      "raw_seconds": 7.732244897959184,
+      "speech_window_seconds": 7.732244897959184,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "La distancia no basta. Hay que estudiar las pendientes, la capacidad del terreno, el espacio de trabajo y la altura del punto de llegada.",
+      "raw_seconds": 7.790294784580499,
+      "speech_window_seconds": 7.790294784580499,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "No se conserva un diario completo de la construcción. Por eso debemos separar las pruebas físicas de las decisiones que añadimos a la reconstrucción.",
+      "raw_seconds": 8.25469387755102,
+      "speech_window_seconds": 8.25469387755102,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Pondremos a prueba las posibilidades frente a sus límites. Extracción, apoyo, tracción, dirección y colocación final deben formar una explicación continua.",
+      "raw_seconds": 8.823582766439909,
+      "speech_window_seconds": 8.823582766439909,
+      "tempo": 0.9143609084393688,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Empecemos en la cantera, cuando la piedra aún formaba parte de la ladera. La primera decisión técnica llegó antes del primer movimiento.",
+      "raw_seconds": 7.1053061224489795,
+      "speech_window_seconds": 7.1053061224489795,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Los constructores necesitaban roca adecuada y espacio para trabajar. Importaban los planos de estratificación, las fracturas, el acceso y la forma prevista.",
+      "raw_seconds": 9.287981859410431,
+      "speech_window_seconds": 9.287981859410431,
+      "tempo": 0.962485166778283,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Un defecto oculto en un bloque gigante podía malgastar mucho trabajo. Extraer piedra exigía experiencia y buen juicio, además de esfuerzo físico.",
+      "raw_seconds": 8.347573696145124,
+      "speech_window_seconds": 8.347573696145124,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Las zanjas y superficies trabajadas conservan pistas de la extracción. Permiten estudiar dónde se situaban los trabajadores y qué caras podían alcanzar.",
+      "raw_seconds": 8.614603174603175,
+      "speech_window_seconds": 8.614603174603175,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Miremos esas huellas de cerca. Una fotografía espectacular puede ocultar los espacios estrechos que condicionaban el orden de corte y separación.",
+      "raw_seconds": 7.650975056689342,
+      "speech_window_seconds": 7.650975056689342,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "La Piedra de la Mujer Embarazada es famosa por su tamaño. Pero sigue en la cantera: no es uno de los bloques instalados en el templo.",
+      "raw_seconds": 7.047256235827664,
+      "speech_window_seconds": 7.047256235827664,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "En dos mil catorce apareció otro gran bloque en la cantera. Su masa se estimó en unas mil seiscientas cincuenta toneladas. Sigue allí.",
+      "raw_seconds": 7.186575963718821,
+      "speech_window_seconds": 7.186575963718821,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "El hallazgo amplió nuestro conocimiento de la ambición de los canteros. No demuestra que una piedra de esa masa estimada llegara al templo.",
+      "raw_seconds": 6.722176870748299,
+      "speech_window_seconds": 6.722176870748299,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "La distinción cambia la pregunta. Hay que estudiar el transporte logrado y el trabajo inconcluso. Un intento abandonado puede revelar límites prácticos.",
+      "raw_seconds": 8.614603174603175,
+      "speech_window_seconds": 8.614603174603175,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Equipos arqueológicos y especialistas libaneses han investigado estas canteras. Sus planos y observaciones ofrecen una base más firme que una imagen aislada en internet.",
+      "raw_seconds": 9.729160997732427,
+      "speech_window_seconds": 9.729160997732427,
+      "tempo": 1.0082032122002513,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "En el santuario vemos otra evidencia: piedras ya colocadas, sus dimensiones, las juntas y su relación con las hiladas de mampostería que las rodean.",
+      "raw_seconds": 8.928072562358278,
+      "speech_window_seconds": 8.928072562358278,
+      "tempo": 0.9251888665656246,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Una junta terminada muestra el destino, pero no todos los movimientos anteriores. El recorrido perdido debe reconstruirse mediante pruebas y razonamiento mecánico.",
+      "raw_seconds": 8.70748299319728,
+      "speech_window_seconds": 8.70748299319728,
+      "tempo": 0.9023298438546403,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "La historia más antigua de Baalbek es otra cuestión. La edad de un lugar no fecha automáticamente cada elemento visible de sus construcciones.",
+      "raw_seconds": 7.662585034013605,
+      "speech_window_seconds": 7.662585034013605,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Excavaciones, relaciones arquitectónicas y análisis de materiales permiten estudiar las fases. El tamaño por sí solo no identifica una fecha ni un constructor.",
+      "raw_seconds": 9.508571428571429,
+      "speech_window_seconds": 9.508571428571429,
+      "tempo": 0.9853441894892672,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "El mundo antiguo también aporta comparaciones. Vitruvio describe máquinas de elevación y transporte pesado, incluidas las dificultades de los caminos poco resistentes.",
+      "raw_seconds": 9.763990929705216,
+      "speech_window_seconds": 9.763990929705216,
+      "tempo": 1.01181253157567,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Los textos muestran una tradición mecánica. No prueban que una máquina concreta se utilizara para una piedra concreta en Baalbek.",
+      "raw_seconds": 6.873106575963718,
+      "speech_window_seconds": 6.873106575963718,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "El arqueólogo Jean-Pierre Adam estudió cabrestantes y métodos de transporte. Sus propuestas son argumentos técnicos, no imágenes del trabajo antiguo.",
+      "raw_seconds": 8.289523809523809,
+      "speech_window_seconds": 8.289523809523809,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Con esos límites claros, construyamos un modelo cuidadoso. Primero hay que dar forma al bloque, separarlo, sostenerlo y prepararlo para el viaje.",
+      "raw_seconds": 8.347573696145124,
+      "speech_window_seconds": 8.347573696145124,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Imaginemos el contorno del bloque en la roca. Cortar los lados abre el acceso, pero la parte inferior sigue unida a la roca original.",
+      "raw_seconds": 7.198185941043084,
+      "speech_window_seconds": 7.198185941043084,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Separar esa base cambia cómo se sostiene el peso. La reconstrucción debe mostrar qué apoya la piedra durante la transición, sin un desplome repentino.",
+      "raw_seconds": 8.185034013605442,
+      "speech_window_seconds": 8.185034013605442,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Una propuesta puede incluir apoyos de madera, cuñas o bases preparadas. Su disposición concreta sigue siendo una hipótesis que debe concordar con las pruebas.",
+      "raw_seconds": 8.475283446712018,
+      "speech_window_seconds": 8.475283446712018,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "El principio es sencillo: hay que colocar el nuevo apoyo antes de retirar el anterior. En una piedra gigante, un pequeño movimiento descontrolado puede ser peligroso.",
+      "raw_seconds": 8.916462585034013,
+      "speech_window_seconds": 8.916462585034013,
+      "tempo": 0.9239857601071516,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Ahora, el camino. Tirar más fuerte no siempre ayuda. El esfuerzo adicional no salva una plataforma cuyo terreno se hunde bajo la carga.",
+      "raw_seconds": 7.383945578231293,
+      "speech_window_seconds": 7.383945578231293,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "La presión depende del área sobre la que se reparte la fuerza. Un apoyo ancho reduce la presión media, pero el terreno sigue soportando todo el peso.",
+      "raw_seconds": 8.150204081632653,
+      "speech_window_seconds": 8.150204081632653,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Preparar el camino también forma parte de la explicación. Nivelar, drenar, compactar y reparar puede ser tan importante como el dispositivo de arrastre.",
+      "raw_seconds": 8.394013605442177,
+      "speech_window_seconds": 8.394013605442177,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Después viene la fricción, la resistencia entre superficies en contacto. Varía con el material, la humedad, la alineación, la deformación y el estado del apoyo.",
+      "raw_seconds": 9.102222222222222,
+      "speech_window_seconds": 9.102222222222222,
+      "tempo": 0.9432354634427172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Para el cálculo supongamos una masa de ochocientas toneladas. Es una elección del modelo, no una nueva medición de la piedra real.",
+      "raw_seconds": 7.1401360544217685,
+      "speech_window_seconds": 7.1401360544217685,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Sobre terreno horizontal, el modelo de deslizamiento multiplica el peso por el coeficiente de fricción. Ese coeficiente debe corresponder a los materiales y al montaje.",
+      "raw_seconds": 9.682721088435374,
+      "speech_window_seconds": 9.682721088435374,
+      "tempo": 1.00339078636636,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Con un coeficiente supuesto de cero coma cero cinco, la resistencia ronda los cuatrocientos kilonewtons, sin contar otras complicaciones.",
+      "raw_seconds": 7.395555555555555,
+      "speech_window_seconds": 7.395555555555555,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Si el coeficiente supuesto pasa a cero coma dos, la resistencia se cuadruplica. El estado de las superficies cambia mucho el problema.",
+      "raw_seconds": 6.884716553287982,
+      "speech_window_seconds": 6.884716553287982,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Esas cifras no revelan cuántos trabajadores había. Muestran la necesidad de suposiciones defendibles, más allá de imaginar una multitud impresionante.",
+      "raw_seconds": 8.602993197278911,
+      "speech_window_seconds": 8.602993197278911,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Un trineo reparte la carga y permite sujetar el tiro. Hay que estudiar su base, sus uniones y el contacto con la vía.",
+      "raw_seconds": 6.339047619047619,
+      "speech_window_seconds": 6.339047619047619,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Los rodillos son otra posibilidad, pero no eliminan la resistencia. Los contactos deben soportar la presión y el conjunto debe conservar su alineación.",
+      "raw_seconds": 8.359183673469389,
+      "speech_window_seconds": 8.359183673469389,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Los rodillos sueltos pueden desviarse o encontrar irregularidades. Una animación realista debe mostrar avance controlado, con apoyo y esfuerzo visibles.",
+      "raw_seconds": 8.753922902494331,
+      "speech_window_seconds": 8.753922902494331,
+      "tempo": 0.9071422696885317,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "También debemos explicar cómo se recuperan y recolocan los apoyos. Transportar exige repetir un ciclo: preparar, mover, comprobar y volver a preparar.",
+      "raw_seconds": 7.894784580498866,
+      "speech_window_seconds": 7.894784580498866,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Tanto al deslizar como al rodar, el camino debe admitir todo el ancho del sistema. Curvas cerradas y cambios de pendiente añaden dificultades.",
+      "raw_seconds": 7.964444444444444,
+      "speech_window_seconds": 7.964444444444444,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "¿De dónde sale la fuerza de arrastre? Personas, animales, cuerdas y máquinas son posibilidades, pero su disposición determina la eficacia del conjunto.",
+      "raw_seconds": 8.823582766439909,
+      "speech_window_seconds": 8.823582766439909,
+      "tempo": 0.9143609084393688,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "La cuerda transmite fuerzas. Nudos, dobleces, desgaste y puntos de sujeción pueden comprometer un sistema que parece convincente sobre el papel.",
+      "raw_seconds": 8.533333333333333,
+      "speech_window_seconds": 8.533333333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Las poleas permiten reducir la fuerza a cambio de tirar de más cuerda. En un sistema ideal de cuatro a uno, ese intercambio sigue siendo necesario.",
+      "raw_seconds": 7.616145124716553,
+      "speech_window_seconds": 7.616145124716553,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Las poleas reales añaden fricción y cargas estructurales. La ventaja mecánica no elimina la necesidad de comprobar cuerdas, bastidores y cimentaciones.",
+      "raw_seconds": 9.148662131519274,
+      "speech_window_seconds": 9.148662131519274,
+      "tempo": 0.9480478892766087,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Un cabrestante tira de la cuerda al girar. Los brazos largos aumentan el par y el tambor convierte el giro en tracción controlada.",
+      "raw_seconds": 6.617687074829932,
+      "speech_window_seconds": 6.617687074829932,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Una máquina así también necesita un anclaje resistente. La fuerza de reacción debe transmitirse a una cimentación preparada, a otra estructura o al terreno.",
+      "raw_seconds": 8.533333333333333,
+      "speech_window_seconds": 8.533333333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "La pregunta supera a la máquina. ¿Puede toda la cadena, desde los trabajadores hasta el suelo, soportar las fuerzas sin perder el control?",
+      "raw_seconds": 7.209795918367347,
+      "speech_window_seconds": 7.209795918367347,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Varios puntos de tiro pueden repartir el esfuerzo. Pero un tiro desigual puede torcer la carga o sobrecargar una parte del sistema.",
+      "raw_seconds": 6.942766439909297,
+      "speech_window_seconds": 6.942766439909297,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "El movimiento debe avanzar en pasos pequeños y observables. Cuando una masa enorme ya se mueve, no hay margen para improvisar a su lado.",
+      "raw_seconds": 7.302675736961452,
+      "speech_window_seconds": 7.302675736961452,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Detenerse importa tanto como arrancar. Un transporte viable necesita calzos, dispositivos de retención y una posición de reposo prevista.",
+      "raw_seconds": 8.17342403628118,
+      "speech_window_seconds": 8.17342403628118,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "El recorrido también cambia de altura. Incluso una pendiente suave añade una componente de la gravedad que el sistema de arrastre debe vencer.",
+      "raw_seconds": 7.500045351473923,
+      "speech_window_seconds": 7.500045351473923,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "En nuestro modelo de ochocientas toneladas, una pendiente del uno por ciento añade unos ochenta kilonewtons. Se suman al rozamiento.",
+      "raw_seconds": 7.581315192743764,
+      "speech_window_seconds": 7.581315192743764,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "En bajada aparece otro problema. La gravedad puede ayudar, pero hay que impedir la aceleración y mantener la carga en la ruta prevista.",
+      "raw_seconds": 7.116916099773243,
+      "speech_window_seconds": 7.116916099773243,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Un recorrido cómodo en un mapa plano puede ser difícil en su perfil. La topografía puede descartar una reconstrucción atractiva.",
+      "raw_seconds": 6.757006802721088,
+      "speech_window_seconds": 6.757006802721088,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Al llegar a la plataforma, la piedra debe alcanzar la altura adecuada bajo control. Una rampa o relleno temporal también debe soportar la carga.",
+      "raw_seconds": 7.093696145124716,
+      "speech_window_seconds": 7.093696145124716,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "No debemos imaginar el monumento terminado durante toda la obra. Los niveles de trabajo y los espacios temporales podían diferir del aspecto final.",
+      "raw_seconds": 7.90639455782313,
+      "speech_window_seconds": 7.90639455782313,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "La alineación final es otra operación. Pequeños movimientos, calzos, palancas y comprobaciones son posibilidades; su uso exacto aquí sigue sin demostrarse.",
+      "raw_seconds": 8.870022675736962,
+      "speech_window_seconds": 8.870022675736962,
+      "tempo": 0.9191733342732603,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "La clave es la continuidad. La piedra debe permanecer apoyada desde la cantera hasta la junta, sin saltos inexplicados entre escenas atractivas.",
+      "raw_seconds": 8.057324263038549,
+      "speech_window_seconds": 8.057324263038549,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Probemos ahora el modelo. Un método que funciona en una mesa puede fallar cuando madera, cuerdas y terreno reciben cargas mucho mayores.",
+      "raw_seconds": 7.209795918367347,
+      "speech_window_seconds": 7.209795918367347,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "La escala modifica las presiones de contacto, la flexión y los materiales. Aumentar las dimensiones no conserva todas las condiciones de un experimento pequeño.",
+      "raw_seconds": 8.93968253968254,
+      "speech_window_seconds": 8.93968253968254,
+      "tempo": 0.9263919730240974,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Elegir la madera también importa. Los apoyos deben resistir el aplastamiento y la flexión, trabajando junto con los demás elementos de la plataforma de transporte.",
+      "raw_seconds": 9.380861678004536,
+      "speech_window_seconds": 9.380861678004536,
+      "tempo": 0.9721100184460658,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Lo mismo ocurre con el camino. Una zona firme no compensa un punto débil bajo otra parte de la carga.",
+      "raw_seconds": 5.584399092970521,
+      "speech_window_seconds": 5.584399092970521,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Si la lluvia cambia el suelo, el drenaje se convierte en una cuestión mecánica. El camino no puede prepararse una vez y después olvidarse.",
+      "raw_seconds": 7.732244897959184,
+      "speech_window_seconds": 7.732244897959184,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "El mantenimiento requiere tiempo y recursos. El modelo debe prever pausas para revisar apoyos, recolocar equipos y reparar daños antes de continuar.",
+      "raw_seconds": 9.253151927437642,
+      "speech_window_seconds": 9.253151927437642,
+      "tempo": 0.9588758474028645,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "La mano de obra también es un sistema. Cantería, carpintería, cordelería, topografía, arrastre y abastecimiento requieren capacidades y responsabilidades distintas.",
+      "raw_seconds": 10.112290249433107,
+      "speech_window_seconds": 10.112290249433107,
+      "tempo": 1.0479057253298556,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Una fotografía no revela la condición ni los contratos de los trabajadores. No inventemos toda una historia laboral a partir de los bloques.",
+      "raw_seconds": 7.349115646258503,
+      "speech_window_seconds": 7.349115646258503,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "La necesidad de organización sí resulta clara. Materiales, comida, agua, herramientas e instrucciones deben llegar a las personas adecuadas en el momento adecuado.",
+      "raw_seconds": 8.858412698412698,
+      "speech_window_seconds": 8.858412698412698,
+      "tempo": 0.9179702278147873,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Fuera del alcance de la voz, importan las señales. La coordinación resulta decisiva, sobre todo cuando la carga debe detenerse rápidamente.",
+      "raw_seconds": 7.662585034013605,
+      "speech_window_seconds": 7.662585034013605,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "El esfuerzo invertido en el camino plantea otra pregunta. ¿La preparación servía para un solo bloque o para una serie de entregas?",
+      "raw_seconds": 7.1053061224489795,
+      "speech_window_seconds": 7.1053061224489795,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Repetir el transporte puede justificar grandes preparativos. Pero el calendario, los equipos y el orden de llegada son cuestiones para las pruebas, no la animación.",
+      "raw_seconds": 8.753922902494331,
+      "speech_window_seconds": 8.753922902494331,
+      "tempo": 0.9071422696885317,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "La junta final presenta sus propias dificultades. La orientación del bloque debe ser compatible con el muro y con el espacio disponible para ajustarlo.",
+      "raw_seconds": 8.486893424036282,
+      "speech_window_seconds": 8.486893424036282,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Girar una carga enorme en un lugar estrecho no es un pequeño remate. La ruta debe prever ese problema antes de iniciar el transporte.",
+      "raw_seconds": 7.441995464852607,
+      "speech_window_seconds": 7.441995464852607,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Una explicación antigua no puede recurrir sin más a una grúa moderna. Una imagen de elevación familiar puede ocultar el problema que intentamos resolver.",
+      "raw_seconds": 8.045714285714286,
+      "speech_window_seconds": 8.045714285714286,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Las máquinas antiguas están documentadas, pero cuentan su capacidad y disposición. Nombrar un aparato conocido no demuestra que pudiera realizar cualquier tarea.",
+      "raw_seconds": 8.695873015873016,
+      "speech_window_seconds": 8.695873015873016,
+      "tempo": 0.9011267373961673,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Los mayores bloques que quedaron en la cantera son especialmente útiles. Su estado incompleto separa la ambición, la extracción y la instalación lograda.",
+      "raw_seconds": 8.092154195011338,
+      "speech_window_seconds": 8.092154195011338,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Un defecto de la roca, un cambio de plan o una dificultad práctica pudo detener el trabajo. Elegir una causa exige pruebas concretas.",
+      "raw_seconds": 8.057324263038549,
+      "speech_window_seconds": 8.057324263038549,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "El bloque no explica con palabras por qué fue abandonado. Hay que relacionar su estado con la cantera y con la secuencia general de construcción.",
+      "raw_seconds": 7.291065759637188,
+      "speech_window_seconds": 7.291065759637188,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "También hay que examinar la superficie de transporte. ¿Los apoyos descansaban sobre roca, relleno preparado, madera o una combinación? Cada opción cambia los cálculos.",
+      "raw_seconds": 8.870022675736962,
+      "speech_window_seconds": 8.870022675736962,
+      "tempo": 0.9191733342732603,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Los experimentos modernos pueden aclarar la fricción y el control. Ganan valor cuando presentan con claridad sus materiales, escala y limitaciones.",
+      "raw_seconds": 8.463673469387755,
+      "speech_window_seconds": 8.463673469387755,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Un experimento útil no necesita reproducirlo todo. Debe responder una pregunta concreta sin afirmar más de lo que su montaje demuestra.",
+      "raw_seconds": 7.465215419501134,
+      "speech_window_seconds": 7.465215419501134,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Arqueología y mecánica se complementan. El yacimiento limita el modelo, y el modelo señala qué huellas convendría investigar después.",
+      "raw_seconds": 7.337505668934241,
+      "speech_window_seconds": 7.337505668934241,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "La ruta propuesta debe comprobarse en el terreno; el posible anclaje, en su contexto. Un diagrama limpio no sustituye ninguna de las dos investigaciones.",
+      "raw_seconds": 8.185034013605442,
+      "speech_window_seconds": 8.185034013605442,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Que no quede maquinaria no resulta extraño. Madera y fibras se conservan peor que la caliza, pero su ausencia no demuestra cualquier reconstrucción que propongamos.",
+      "raw_seconds": 8.730702947845804,
+      "speech_window_seconds": 8.730702947845804,
+      "tempo": 0.904736056771586,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Una buena explicación ofrece condiciones comprobables: espacio necesario, superficies de contacto, exigencias de apoyo y orden de las operaciones.",
+      "raw_seconds": 8.78875283446712,
+      "speech_window_seconds": 8.78875283446712,
+      "tempo": 0.9107515890639503,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Aquí el misterio se vuelve útil. En vez de repetir que era imposible, preguntemos qué etapa concreta sigue sin explicación.",
+      "raw_seconds": 6.2345578231292516,
+      "speech_window_seconds": 6.2345578231292516,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Tal vez falla el camino, la disposición de cuerdas o una colocación demasiado simplificada. Cada posibilidad necesita una comprobación distinta.",
+      "raw_seconds": 7.87156462585034,
+      "speech_window_seconds": 7.87156462585034,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Las preguntas no disminuyen el logro. Nos acercan a las decisiones prácticas que los constructores debieron resolver paso a paso.",
+      "raw_seconds": 6.698956916099773,
+      "speech_window_seconds": 6.698956916099773,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Comparemos las posibilidades en igualdad de condiciones. Todas deben soportar la misma carga, seguir una ruta creíble y alcanzar la misma posición final.",
+      "raw_seconds": 8.347573696145124,
+      "speech_window_seconds": 8.347573696145124,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Consideremos primero el deslizamiento sobre una vía preparada. Ofrece un apoyo amplio y tiro directo; exige controlar la fricción y mantener el recorrido.",
+      "raw_seconds": 8.986122448979591,
+      "speech_window_seconds": 8.986122448979591,
+      "tempo": 0.9312043988579887,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Los rodillos bajo una estructura de reparto pueden reducir la resistencia. Exigen materiales resistentes, alineación, recuperación de los rodillos y terreno estable.",
+      "raw_seconds": 9.647891156462585,
+      "speech_window_seconds": 9.647891156462585,
+      "tempo": 0.9997814669909414,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Una solución combinada puede usar métodos distintos en cada etapa. Solo ayuda si también explica cómo se pasa de un método al siguiente.",
+      "raw_seconds": 7.244625850340136,
+      "speech_window_seconds": 7.244625850340136,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Los cabrestantes y las poleas explican cómo se aplica la fuerza. Pueden acompañar al sistema de transporte, pero no explican por sí solos qué sostiene la piedra.",
+      "raw_seconds": 8.858412698412698,
+      "speech_window_seconds": 8.858412698412698,
+      "tempo": 0.9179702278147873,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Un modelo convincente puede unir principios corrientes a escala extraordinaria: presión, fricción, palancas, geometría y organización.",
+      "raw_seconds": 7.174965986394557,
+      "speech_window_seconds": 7.174965986394557,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Unos principios conocidos no hacen fácil el trabajo. Materiales con límites y personas que necesitan coordinación deben funcionar como un solo sistema.",
+      "raw_seconds": 8.266303854875284,
+      "speech_window_seconds": 8.266303854875284,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Un método puede ser físicamente viable sin estar demostrado históricamente. Esta distinción es esencial al representar una parte del pasado que todavía desconocemos.",
+      "raw_seconds": 9.346031746031747,
+      "speech_window_seconds": 9.346031746031747,
+      "tempo": 0.9685006990706473,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "La solución real exige vínculos más sólidos entre huellas, terreno, materiales, fechas y secuencia. Una animación convincente no basta.",
+      "raw_seconds": 8.277913832199546,
+      "speech_window_seconds": 8.277913832199546,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "El Trilithon instalado muestra un resultado firme. La cantera muestra preparación y trabajo inacabado. Ninguno responde por sí solo a todas las preguntas.",
+      "raw_seconds": 8.661043083900227,
+      "speech_window_seconds": 8.661043083900227,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Las mil seiscientas cincuenta toneladas corresponden al gran bloque de la cantera, no a cada piedra que llegó al santuario.",
+      "raw_seconds": 6.292607709750567,
+      "speech_window_seconds": 6.292607709750567,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Una masa estimada no es un pesaje directo. Las dimensiones, las caras ocultas y la densidad supuesta explican diferencias entre estimaciones publicadas.",
+      "raw_seconds": 9.380861678004536,
+      "speech_window_seconds": 9.380861678004536,
+      "tempo": 0.9721100184460658,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Conservemos la incertidumbre al contar la historia. Una cifra muy precisa puede engañar si las pruebas solo permiten un intervalo aproximado.",
+      "raw_seconds": 7.360725623582766,
+      "speech_window_seconds": 7.360725623582766,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "¿Qué sabemos con seguridad? Estas piedras pertenecen a un paisaje real de extracción y construcción monumental. Su estudio exige observación paciente.",
+      "raw_seconds": 8.417233560090702,
+      "speech_window_seconds": 8.417233560090702,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Las preguntas abiertas son concretas: el sistema exacto de transporte, el recorrido detallado y la secuencia que llevó cada piedra hasta su posición.",
+      "raw_seconds": 8.533333333333333,
+      "speech_window_seconds": 8.533333333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "La respuesta tiene dos niveles. Podemos explicar posibilidades mecánicas y dejar abiertos los detalles históricos que las pruebas todavía no resuelven.",
+      "raw_seconds": 8.928072562358278,
+      "speech_window_seconds": 8.928072562358278,
+      "tempo": 0.9251888665656246,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Así el espectador tiene algo que comprender y el investigador algo que comprobar. El asombro puede convertirse en el comienzo de una investigación.",
+      "raw_seconds": 7.63936507936508,
+      "speech_window_seconds": 7.63936507936508,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Futuros levantamientos y excavaciones pueden precisar el panorama. Nuevas mediciones podrían modificar una ruta, revelar relaciones constructivas o descartar una hipótesis.",
+      "raw_seconds": 10.367709750566894,
+      "speech_window_seconds": 10.367709750566894,
+      "tempo": 1.0743740674162583,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Una buena reconstrucción debe aceptar cambios. Su función es ordenar preguntas y pruebas, no proteger una imagen espectacular frente a las correcciones.",
+      "raw_seconds": 8.70748299319728,
+      "speech_window_seconds": 8.70748299319728,
+      "tempo": 0.9023298438546403,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Volvamos a la primera vista de la plataforma. Las piedras no han empequeñecido, pero el problema que las rodea está más claro.",
+      "raw_seconds": 6.861496598639456,
+      "speech_window_seconds": 6.861496598639456,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Tras la superficie terminada, imaginemos una secuencia siempre apoyada: elegir la piedra, preparar la base, controlar el recorrido y ajustar su posición final.",
+      "raw_seconds": 10.158730158730158,
+      "speech_window_seconds": 10.158730158730158,
+      "tempo": 1.052718151163747,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Detrás hay habilidades que rara vez se conservan por completo: conocer la piedra, trabajar madera, manejar cuerdas, leer el terreno y coordinar personas.",
+      "raw_seconds": 8.765532879818593,
+      "speech_window_seconds": 8.765532879818593,
+      "tempo": 0.9083453761470045,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "El logro descansa tanto en conocimientos acumulados como en fuerza. La escala enorme vuelve aún más importantes las pequeñas decisiones prácticas.",
+      "raw_seconds": 8.126984126984127,
+      "speech_window_seconds": 8.126984126984127,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Baalbek también es patrimonio vivo del Líbano. Estudiar su técnica debe aumentar nuestro interés por su historia, sus comunidades y su cuidado continuo.",
+      "raw_seconds": 7.581315192743764,
+      "speech_window_seconds": 7.581315192743764,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Conservar exige documentación y conocimiento de materiales. La observación cuidadosa explica el pasado y ayuda a proteger lo que queda para el futuro.",
+      "raw_seconds": 8.219863945578231,
+      "speech_window_seconds": 8.219863945578231,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "¿Qué medirías primero en una próxima investigación: la ruta, los contactos, las dimensiones de la piedra o el espacio para trabajar?",
+      "raw_seconds": 7.987664399092971,
+      "speech_window_seconds": 7.987664399092971,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Cada elección conduce a una prueba diferente. Así, una pregunta monumental se transforma en cuestiones más pequeñas que realmente podemos investigar.",
+      "raw_seconds": 8.52172335600907,
+      "speech_window_seconds": 8.52172335600907,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "No conocemos con certeza cada movimiento de las cuerdas. Sí podemos comprender mejor las pruebas, la mecánica y la organización humana que exige el problema.",
+      "raw_seconds": 8.881632653061224,
+      "speech_window_seconds": 8.881632653061224,
+      "tempo": 0.9203764407317331,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "La piedra sigue siendo enorme. ¿Qué cadena de movimientos, siempre apoyados, la llevó desde la cantera? ¿Y qué huella permitiría demostrarlo?",
+      "raw_seconds": 7.7090249433106575,
+      "speech_window_seconds": 7.7090249433106575,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1242,
+  "decoded_samples": 29808000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-es-20m42s.mp3",
+  "flac": "voice-es-20m42s.flac",
+  "mp3_sha256": "f6f51c413a4075a1f59a43a65b67172c8da791c9525afd1f862a10dc3860ab86",
+  "flac_sha256": "93020150d3211aa90cbfe002ad9ff5a208facabd2b19a8875178ebf09c44c9b2"
+}

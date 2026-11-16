@@ -1,0 +1,1137 @@
+{
+  "locale": "cs",
+  "voice_id": "piper:cs_CZ-jirka-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1242,
+  "spoken_cues": 124,
+  "closing_silence_seconds": 2,
+  "config_hash": "ef460c5de33ba6ab52f53e11415da0000aaadc760f6592242e3b46cc6be5b5ba",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "V základech chrámu v Baalbeku leží tři obrovské kameny. Jejich velikost ohromuje. Jak se ale dostaly právě sem?",
+      "raw_seconds": 9.47374149659864,
+      "speech_window_seconds": 9.47374149659864,
+      "tempo": 0.9817348701138486,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "V nedalekém lomu zůstaly ještě větší bloky. Některé nebyly ani úplně odděleny od skály. S kameny dopravenými do chrámu je nesmíme zaměňovat.",
+      "raw_seconds": 11.981496598639456,
+      "speech_window_seconds": 11.981496598639456,
+      "tempo": 1.241605865143985,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Jde o různé druhy důkazů. Musíme sledovat celý postup od skalní stěny až k poslední spáře hotového zdiva.",
+      "raw_seconds": 9.195102040816327,
+      "speech_window_seconds": 9.195102040816327,
+      "tempo": 0.9528603151105002,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Jsme v údolí Bikáa v Libanonu. Krajinu kolem Baalbeku utvářely zemědělství, osídlení, cesty i staletí stavební činnosti.",
+      "raw_seconds": 11.412607709750567,
+      "speech_window_seconds": 11.412607709750567,
+      "tempo": 1.1826536486788153,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Svatyně se stala monumentálním centrem římské Heliopole. Zachované stavby vznikaly v několika etapách, nikoli v jediném okamžiku.",
+      "raw_seconds": 11.459047619047618,
+      "speech_window_seconds": 11.459047619047618,
+      "tempo": 1.1874660745127066,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Areálu dominoval Jupiterův chrám. Velké sloupy přitahují pohled vzhůru, naše pátrání však začíná blíže k zemi.",
+      "raw_seconds": 10.251609977324263,
+      "speech_window_seconds": 10.251609977324263,
+      "tempo": 1.0623430028315297,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Tři bloky v chrámové základně se nazývají Trilithon. Dokládají, že obrovské kameny byly skutečně přemístěny a přesně osazeny.",
+      "raw_seconds": 10.530249433106576,
+      "speech_window_seconds": 10.530249433106576,
+      "tempo": 1.0912175578348784,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Každý blok podle odhadů váží mnoho set tun. Výsledek závisí na změřených rozměrech a předpokládané hustotě vápence.",
+      "raw_seconds": 10.298049886621316,
+      "speech_window_seconds": 10.298049886621316,
+      "tempo": 1.0671554286654212,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Známý lom leží asi kilometr od svatyně. Pro pěšího krátká vzdálenost, pro mimořádně těžký náklad velká výzva.",
+      "raw_seconds": 9.914920634920636,
+      "speech_window_seconds": 9.914920634920636,
+      "tempo": 1.0274529155358172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Vzdálenost nestačí. Musíme znát také sklony, únosnost podloží, pracovní prostor a výšku cílového místa.",
+      "raw_seconds": 9.775600907029478,
+      "speech_window_seconds": 9.775600907029478,
+      "tempo": 1.0130156380341429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Úplný stavební deník se nedochoval. Každá podrobná rekonstrukce proto musí oddělovat fyzické důkazy od našich vlastních předpokladů.",
+      "raw_seconds": 12.039546485260772,
+      "speech_window_seconds": 12.039546485260772,
+      "tempo": 1.2476213974363493,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Budeme porovnávat možnosti s omezeními. Vysvětlení musí propojit těžbu, podepření, tah, řízení pohybu i konečné osazení.",
+      "raw_seconds": 11.23845804988662,
+      "speech_window_seconds": 11.23845804988662,
+      "tempo": 1.1646070518017224,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Začněme v lomu, kde byl kámen ještě součástí svahu. První technické rozhodnutí přišlo dříve než první pokus o pohyb.",
+      "raw_seconds": 10.483809523809525,
+      "speech_window_seconds": 10.483809523809525,
+      "tempo": 1.0864051320009869,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Stavitelé potřebovali vhodnou horninu a přístupné pracoviště. Důležité byly vrstevní plochy, pukliny, přístupové cesty a plánovaný tvar kamene.",
+      "raw_seconds": 12.434285714285714,
+      "speech_window_seconds": 12.434285714285714,
+      "tempo": 1.2885270170244263,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Skrytá slabina v obřím bloku mohla zmařit mnoho práce. Těžba proto vyžadovala nejen sílu, ale také zkušenost a úsudek.",
+      "raw_seconds": 10.936598639455783,
+      "speech_window_seconds": 10.936598639455783,
+      "tempo": 1.1333262838814282,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Příkopy a opracované plochy uchovávají stopy těžby. Pomáhají zkoumat, kde pracovníci stáli a na které stěny kamene dosáhli.",
+      "raw_seconds": 10.936598639455783,
+      "speech_window_seconds": 10.936598639455783,
+      "tempo": 1.1333262838814282,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Tyto stopy si zaslouží pozornost. Působivá fotografie může skrýt úzké pracovní prostory, které určovaly pořadí řezání a oddělování.",
+      "raw_seconds": 12.132426303854876,
+      "speech_window_seconds": 12.132426303854876,
+      "tempo": 1.2572462491041323,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Kámen těhotné ženy je známý svou velikostí. Stále však leží v lomu a není jedním z bloků zabudovaných do chrámu.",
+      "raw_seconds": 10.576689342403627,
+      "speech_window_seconds": 10.576689342403627,
+      "tempo": 1.0960299836687697,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "V roce dva tisíce čtrnáct byl v lomu odkryt další obří blok. Jeho hmotnost byla odhadnuta asi na tisíc šest set padesát tun.",
+      "raw_seconds": 11.087528344671203,
+      "speech_window_seconds": 11.087528344671203,
+      "tempo": 1.1489666678415753,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Nález ukazuje velké ambice tehdejších kameníků. Nedokazuje však, že byl blok o této odhadované hmotnosti dopraven až k chrámu.",
+      "raw_seconds": 10.85532879818594,
+      "speech_window_seconds": 10.85532879818594,
+      "tempo": 1.1249045386721181,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Toto rozlišení mění otázku. Zkoumejme úspěšnou dopravu i nedokončené práce: opuštěný pokus může odhalit praktické hranice.",
+      "raw_seconds": 11.6215873015873,
+      "speech_window_seconds": 11.6215873015873,
+      "tempo": 1.2043095649313265,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Lomy zkoumaly archeologické týmy s libanonskými odborníky. Jejich plány a pozorování jsou pevnějším základem než osamocená fotografie na internetu.",
+      "raw_seconds": 13.40952380952381,
+      "speech_window_seconds": 13.40952380952381,
+      "tempo": 1.389587959536146,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Ve svatyni vidíme jiné důkazy: zdivo na místě, rozměry, spáry a vztahy k okolním vrstvám kamenného zdiva.",
+      "raw_seconds": 9.624671201814058,
+      "speech_window_seconds": 9.624671201814058,
+      "tempo": 0.9973752540739956,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Hotová spára ukazuje cíl, ale ne každý předchozí pohyb. Chybějící cestu musíme rekonstruovat podle stop a mechanických úvah.",
+      "raw_seconds": 11.099138321995465,
+      "speech_window_seconds": 11.099138321995465,
+      "tempo": 1.150169774300048,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Starší dějiny Baalbeku jsou samostatná otázka. Stáří místa automaticky neurčuje stáří každého viditelného stavebního prvku.",
+      "raw_seconds": 11.493877551020407,
+      "speech_window_seconds": 11.493877551020407,
+      "tempo": 1.1910753938881251,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Pořadí výstavby se zkoumá výkopy, vztahy konstrukcí a rozborem materiálů. Samotná velikost kamene neurčí datum ani stavitele.",
+      "raw_seconds": 11.203628117913832,
+      "speech_window_seconds": 11.203628117913832,
+      "tempo": 1.1609977324263037,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Srovnání nabízí i antický svět. Vitruvius popisuje zdvihací stroje a těžkou dopravu včetně problémů s nedostatečně pevnými cestami.",
+      "raw_seconds": 11.993106575963719,
+      "speech_window_seconds": 11.993106575963719,
+      "tempo": 1.2428089716024577,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Texty dokládají technickou tradici. Neříkají však, že konkrétní stroj přesouval konkrétní kámen právě v Baalbeku.",
+      "raw_seconds": 9.833650793650794,
+      "speech_window_seconds": 9.833650793650794,
+      "tempo": 1.0190311703265071,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Archeolog Jean-Pierre Adam zkoumal vratidla a dopravní uspořádání. Jeho návrhy jsou technické rekonstrukce, nikoli dochované záznamy skutečných prací.",
+      "raw_seconds": 13.165714285714285,
+      "speech_window_seconds": 13.165714285714285,
+      "tempo": 1.364322723908216,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "S vědomím těchto mezí můžeme vytvořit opatrný model. Blok je nejprve třeba vytvarovat, oddělit, podepřít a připravit k cestě.",
+      "raw_seconds": 10.286439909297052,
+      "speech_window_seconds": 10.286439909297052,
+      "tempo": 1.0659523222069482,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Představme si obrys bloku ve skále. Opracování boků zpřístupní jeho stěny, ale spodní část stále spojuje kámen s podložím.",
+      "raw_seconds": 11.017868480725623,
+      "speech_window_seconds": 11.017868480725623,
+      "tempo": 1.141748029090738,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Oddělení spodku změní přenos tíhy. Rekonstrukce musí ukázat, co blok podpírá během přechodu, aby se náhle nepropadl.",
+      "raw_seconds": 10.50702947845805,
+      "speech_window_seconds": 10.50702947845805,
+      "tempo": 1.0888113449179326,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Lze navrhnout dřevěné podložky, klíny nebo připravená lože. Přesné uspořádání zůstává hypotézou, která musí odpovídat zachovaným stopám.",
+      "raw_seconds": 12.399455782312925,
+      "speech_window_seconds": 12.399455782312925,
+      "tempo": 1.2849176976490078,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "První zásada: nová podpora musí existovat dříve, než odstraníme starou. U obřího kamene může být i malý nekontrolovaný pohyb nebezpečný.",
+      "raw_seconds": 13.200544217687074,
+      "speech_window_seconds": 13.200544217687074,
+      "tempo": 1.3679320432836346,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Teď cesta. Silnější tah nemusí pomoci: žádné větší úsilí nezachrání dopravní podklad, který se pod nákladem boří.",
+      "raw_seconds": 10.193560090702947,
+      "speech_window_seconds": 10.193560090702947,
+      "tempo": 1.0563274705391654,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Tlak závisí na rozložení síly do plochy. Širší podepření snižuje průměrný tlak, ale zemina stále musí unést celou zátěž.",
+      "raw_seconds": 11.749297052154194,
+      "speech_window_seconds": 11.749297052154194,
+      "tempo": 1.2175437359745278,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Příprava cesty patří do vysvětlení. Vyrovnání, odvodnění, zhutnění a opravy mohou být stejně důležité jako samotné tažné zařízení.",
+      "raw_seconds": 11.447437641723356,
+      "speech_window_seconds": 11.447437641723356,
+      "tempo": 1.1862629680542338,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Potom přichází tření mezi styčnými plochami. Mění se podle materiálu, vlhkosti, vyrovnání, deformace a stavu podkladu.",
+      "raw_seconds": 10.820498866213152,
+      "speech_window_seconds": 10.820498866213152,
+      "tempo": 1.1212952192966996,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Pro názorný výpočet předpokládejme hmotnost osm set tun. Je to zvolená hodnota modelu, nikoli nové měření skutečného kamene.",
+      "raw_seconds": 10.27482993197279,
+      "speech_window_seconds": 10.27482993197279,
+      "tempo": 1.0647492157484755,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Na vodorovném podkladu násobí model posunu tíhu součinitelem tření. Součinitel musí odpovídat zkoumaným materiálům a uspořádání.",
+      "raw_seconds": 12.434285714285714,
+      "speech_window_seconds": 12.434285714285714,
+      "tempo": 1.2885270170244263,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Při předpokládaném součiniteli tření pět setin vychází odpor přibližně čtyři sta kilonewtonů, ještě bez dalších komplikací.",
+      "raw_seconds": 10.89015873015873,
+      "speech_window_seconds": 10.89015873015873,
+      "tempo": 1.1285138580475367,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Zvýšíme-li předpokládaný součinitel na dvě desetiny, odpor vzroste čtyřikrát. Stav styčných ploch zásadně mění náročnost úkolu.",
+      "raw_seconds": 11.42421768707483,
+      "speech_window_seconds": 11.42421768707483,
+      "tempo": 1.183856755137288,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Čísla neprozrazují počet antických pracovníků. Ukazují, proč návrh potřebuje obhajitelné předpoklady, nejen působivý počet lidí.",
+      "raw_seconds": 11.656417233560092,
+      "speech_window_seconds": 11.656417233560092,
+      "tempo": 1.2079188843067452,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Saně rozkládají zatížení a poskytují konstrukci pro tah. Je třeba zkoumat spodní plochu, spoje i kontakt s cestou.",
+      "raw_seconds": 9.961360544217687,
+      "speech_window_seconds": 9.961360544217687,
+      "tempo": 1.0322653413697085,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Válečky jsou další možností, ale neodstraní veškerý odpor. Styky musí vydržet tlak a válečky si musí udržet správný směr.",
+      "raw_seconds": 11.168798185941043,
+      "speech_window_seconds": 11.168798185941043,
+      "tempo": 1.1573884130508851,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Volné válečky mohou uhýbat do stran nebo narazit na nerovnost. Realistická animace musí ukázat řízený pohyb se skutečným podepřením.",
+      "raw_seconds": 12.10920634920635,
+      "speech_window_seconds": 12.10920634920635,
+      "tempo": 1.2548400361871865,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Musíme vysvětlit i vracení a přemisťování podpěr. Doprava opakuje cyklus přípravy, pohybu, kontroly a další přípravy.",
+      "raw_seconds": 10.263219954648527,
+      "speech_window_seconds": 10.263219954648527,
+      "tempo": 1.0635461092900027,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Při posouvání i valení musí cesta pojmout celou šířku zařízení. Ostré zatáčky a změny sklonu přidávají mechanické problémy.",
+      "raw_seconds": 11.412607709750567,
+      "speech_window_seconds": 11.412607709750567,
+      "tempo": 1.1826536486788153,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Odkud pochází tažná síla? Lidé, zvířata, lana a stroje jsou možné prvky. Jejich uspořádání rozhoduje o účinnosti celku.",
+      "raw_seconds": 10.878548752834467,
+      "speech_window_seconds": 10.878548752834467,
+      "tempo": 1.127310751589064,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Lano přenáší síly. Uzly, ohyby, oděr a upevňovací body mohou oslabit soustavu, která na výkresu působí přesvědčivě.",
+      "raw_seconds": 10.866938775510205,
+      "speech_window_seconds": 10.866938775510205,
+      "tempo": 1.1261076451305911,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Kladkostroj snižuje potřebnou sílu, ale musíme táhnout delší kus lana. I ideální soustava čtyři ku jedné dodržuje tuto výměnu.",
+      "raw_seconds": 11.064308390022676,
+      "speech_window_seconds": 11.064308390022676,
+      "tempo": 1.1465604549246295,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Skutečné kladky přidávají tření a namáhají konstrukci. Úspora síly nenahrazuje kontrolu lan, rámů a základů.",
+      "raw_seconds": 9.996190476190476,
+      "speech_window_seconds": 9.996190476190476,
+      "tempo": 1.035874660745127,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Svislý vrátek táhne lano otáčením. Delší ramena zvětšují krouticí moment a buben mění otáčení v řízenou tažnou sílu.",
+      "raw_seconds": 11.261678004535147,
+      "speech_window_seconds": 11.261678004535147,
+      "tempo": 1.167013264718668,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Takový stroj potřebuje také pevné ukotvení. Reakční sílu musí přenést připravený základ, jiná konstrukce nebo zemina.",
+      "raw_seconds": 10.425759637188209,
+      "speech_window_seconds": 10.425759637188209,
+      "tempo": 1.0803895997086226,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Otázka tedy přesahuje samotný stroj. Dokáže celý řetězec od pracovníka až k zemi přenášet síly bez ztráty kontroly?",
+      "raw_seconds": 9.787210884353742,
+      "speech_window_seconds": 9.787210884353742,
+      "tempo": 1.0142187444926158,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Více tažných bodů může rozdělit úsilí. Nerovnoměrný tah však může náklad pootočit nebo přetížit jednu část soustavy.",
+      "raw_seconds": 10.948208616780045,
+      "speech_window_seconds": 10.948208616780045,
+      "tempo": 1.134529390339901,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Pohyb musí postupovat po malých, pozorovatelných krocích. Vedle rozjeté, nekontrolované hmoty není prostor pro improvizaci.",
+      "raw_seconds": 11.064308390022676,
+      "speech_window_seconds": 11.064308390022676,
+      "tempo": 1.1465604549246295,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Zastavit je stejně důležité jako rozjet se. Zajišťovací klíny, zádržná zařízení a plánované místo odpočinku patří ke kontrolované těžké dopravě.",
+      "raw_seconds": 12.620045351473923,
+      "speech_window_seconds": 12.620045351473923,
+      "tempo": 1.307776720359992,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Důležité jsou i výškové rozdíly. I mírné stoupání přidává složku tíhové síly, kterou musí tažné zařízení překonat.",
+      "raw_seconds": 10.379319727891156,
+      "speech_window_seconds": 10.379319727891156,
+      "tempo": 1.075577173874731,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "U našeho modelu o hmotnosti osmi set tun přidá jednoprocentní stoupání asi osmdesát kilonewtonů. Tato síla se přičítá ke tření.",
+      "raw_seconds": 11.482267573696145,
+      "speech_window_seconds": 11.482267573696145,
+      "tempo": 1.1898722874296523,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Klesání přináší jiný problém. Tíha může pomáhat pohybu, ale je nutné bránit zrychlování a udržet náklad na trase.",
+      "raw_seconds": 10.7740589569161,
+      "speech_window_seconds": 10.7740589569161,
+      "tempo": 1.1164827934628083,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Cesta vhodná na půdorysné mapě může být obtížná v podélném řezu. Terén dokáže vyloučit i lákavý návrh.",
+      "raw_seconds": 9.496961451247165,
+      "speech_window_seconds": 9.496961451247165,
+      "tempo": 0.9841410830307943,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "U chrámové základny je cílem řízený příjezd do správné výšky. Navržená rampa nebo dočasný násyp musí zůstat pod zátěží stabilní.",
+      "raw_seconds": 12.503945578231292,
+      "speech_window_seconds": 12.503945578231292,
+      "tempo": 1.2957456557752633,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Nemusíme si představovat dnešní hotový monument během celé výstavby. Pracovní úrovně a dočasné prostory mohly vypadat jinak.",
+      "raw_seconds": 10.913378684807256,
+      "speech_window_seconds": 10.913378684807256,
+      "tempo": 1.1309200709644824,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Konečné vyrovnání je samostatná operace. Malé posuny, podložky, páky a kontroly jsou možné; jejich přesné použití zde zůstává nedoložené.",
+      "raw_seconds": 12.132426303854876,
+      "speech_window_seconds": 12.132426303854876,
+      "tempo": 1.2572462491041323,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Klíčem je návaznost. Kámen musí zůstat podepřený od lomu až ke spáře, bez nevysvětlených skoků mezi působivými scénami.",
+      "raw_seconds": 11.017868480725623,
+      "speech_window_seconds": 11.017868480725623,
+      "tempo": 1.141748029090738,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Nyní model prověřme. Postup fungující na stole může selhat, když dřevo, lana a podloží musejí nést mnohem větší zatížení.",
+      "raw_seconds": 10.669569160997732,
+      "speech_window_seconds": 10.669569160997732,
+      "tempo": 1.1056548353365525,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Změna měřítka mění kontaktní tlak, ohyb i chování materiálů. Pouhé zvětšení rozměrů nezachová všechny podmínky malého pokusu.",
+      "raw_seconds": 11.250068027210885,
+      "speech_window_seconds": 11.250068027210885,
+      "tempo": 1.1658101582601952,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Záleží také na volbě dřeva. Podpěry musí odolat místnímu stlačení a ohybu a spolupracovat s ostatními částmi dopravní konstrukce.",
+      "raw_seconds": 12.07437641723356,
+      "speech_window_seconds": 12.07437641723356,
+      "tempo": 1.2512307168117678,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Totéž platí pro cestu. Pevný podklad v jednom místě nevyrovná slabé místo pod jinou částí nákladu.",
+      "raw_seconds": 8.881632653061224,
+      "speech_window_seconds": 8.881632653061224,
+      "tempo": 0.9203764407317331,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Když déšť mění podloží, stává se odvodnění mechanickou otázkou. Připravenou cestu nelze jednou postavit a dál na ni zapomenout.",
+      "raw_seconds": 11.459047619047618,
+      "speech_window_seconds": 11.459047619047618,
+      "tempo": 1.1874660745127066,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Údržba vyžaduje čas i prostředky. Model musí počítat s kontrolou podpěr, přestavěním zařízení a opravami před pokračováním.",
+      "raw_seconds": 11.296507936507936,
+      "speech_window_seconds": 11.296507936507936,
+      "tempo": 1.1706225840940867,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Také pracovní síla tvoří systém. Těžba, tesařství, práce s lany, měření, tah a zásobování vyžadují různé dovednosti a odpovědnosti.",
+      "raw_seconds": 12.364625850340136,
+      "speech_window_seconds": 12.364625850340136,
+      "tempo": 1.2813083782735892,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Fotografie neprozradí postavení ani smlouvy pracovníků. Ze samotných bloků nesmíme vymýšlet celé dějiny práce.",
+      "raw_seconds": 9.833650793650794,
+      "speech_window_seconds": 9.833650793650794,
+      "tempo": 1.0190311703265071,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Potřebu organizace však rozpoznat můžeme. Materiál, jídlo, voda, nástroje i pokyny musely dorazit správným lidem ve správný čas.",
+      "raw_seconds": 11.946666666666667,
+      "speech_window_seconds": 11.946666666666667,
+      "tempo": 1.2379965457685664,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Mimo doslech jsou důležité signály. Společné načasování je zásadní zejména tehdy, když se musí náklad rychle zastavit.",
+      "raw_seconds": 10.251609977324263,
+      "speech_window_seconds": 10.251609977324263,
+      "tempo": 1.0623430028315297,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Práce vložená do cesty vyvolává otázku plánování. Sloužila příprava jedinému bloku, nebo celé řadě přeprav?",
+      "raw_seconds": 9.984580498866213,
+      "speech_window_seconds": 9.984580498866213,
+      "tempo": 1.0346715542866542,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Opakovaná doprava může ospravedlnit rozsáhlé přípravy. Skutečný harmonogram, počet skupin a pořadí přeprav ale musejí určit důkazy.",
+      "raw_seconds": 12.039546485260772,
+      "speech_window_seconds": 12.039546485260772,
+      "tempo": 1.2476213974363493,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Poslední spára přináší vlastní obtíže. Blok musí přijet natočený podle okolního zdiva a prostoru pro konečné úpravy.",
+      "raw_seconds": 10.7740589569161,
+      "speech_window_seconds": 10.7740589569161,
+      "tempo": 1.1164827934628083,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Otočit obří náklad v těsném prostoru není drobná dokončovací práce. Návrh trasy s tím musí počítat předem.",
+      "raw_seconds": 10.367709750566894,
+      "speech_window_seconds": 10.367709750566894,
+      "tempo": 1.0743740674162583,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Výklad starověké metody nemůže jednoduše použít moderní jeřáb. Známý obraz zvedání může zakrýt právě problém, který chceme vysvětlit.",
+      "raw_seconds": 11.946666666666667,
+      "speech_window_seconds": 11.946666666666667,
+      "tempo": 1.2379965457685664,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Antické stroje jsou doloženy, ale mají určitou kapacitu a uspořádání. Známý název neprokazuje schopnost provést libovolný úkol.",
+      "raw_seconds": 12.132426303854876,
+      "speech_window_seconds": 12.132426303854876,
+      "tempo": 1.2572462491041323,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Největší kameny ponechané v lomu jsou velmi cenné. Jejich nedokončenost odděluje záměr, těžbu a úspěšné osazení.",
+      "raw_seconds": 9.822040816326531,
+      "speech_window_seconds": 9.822040816326531,
+      "tempo": 1.0178280638680344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Práci mohla zastavit vada skály, změna plánu či praktická potíž. Určení jedné příčiny vyžaduje konkrétní důkazy.",
+      "raw_seconds": 10.704399092970522,
+      "speech_window_seconds": 10.704399092970522,
+      "tempo": 1.1092641547119713,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Blok nevysvětluje důvod opuštění slovy. Jeho stav musíme propojit s okolním lomem a širším pořadím stavby.",
+      "raw_seconds": 9.729160997732427,
+      "speech_window_seconds": 9.729160997732427,
+      "tempo": 1.0082032122002513,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Prověřme i dopravní povrch. Stály podpěry na skále, připraveném zásypu, dřevě nebo jejich kombinaci? Každá volba mění výpočty.",
+      "raw_seconds": 11.679637188208616,
+      "speech_window_seconds": 11.679637188208616,
+      "tempo": 1.2103250972236907,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Moderní pokusy mohou objasnit tření a řízení pohybu. Jejich hodnota roste, když jasně uvedou materiály, měřítko a omezení.",
+      "raw_seconds": 10.716009070294785,
+      "speech_window_seconds": 10.716009070294785,
+      "tempo": 1.110467261170444,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Užitečný pokus nemusí zopakovat vše. Má odpovědět na přesnou otázku a netvrdit více, než jeho uspořádání skutečně ukazuje.",
+      "raw_seconds": 11.27328798185941,
+      "speech_window_seconds": 11.27328798185941,
+      "tempo": 1.168216371177141,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Archeologie a mechanika se doplňují. Naleziště omezuje model a model naznačuje, které další stopy stojí za výzkum.",
+      "raw_seconds": 9.833650793650794,
+      "speech_window_seconds": 9.833650793650794,
+      "tempo": 1.0190311703265071,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Navrženou trasu ověřme podle terénu, možný kotevní bod podle jeho okolností. Úhledné schéma nenahradí ani jedno zkoumání.",
+      "raw_seconds": 10.518639455782314,
+      "speech_window_seconds": 10.518639455782314,
+      "tempo": 1.0900144513764054,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Chybějící stroje samy o sobě nepřekvapují. Dřevo a vlákna se zachovávají hůře než vápenec. Jejich absence ale nepotvrzuje libovolnou rekonstrukci.",
+      "raw_seconds": 13.188934240362812,
+      "speech_window_seconds": 13.188934240362812,
+      "tempo": 1.3667289368251618,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Dobré vysvětlení nabízí ověřitelné podmínky: potřebný prostor, kontaktní plochy, požadavky na podpěry a pořadí pracovních kroků.",
+      "raw_seconds": 11.284897959183674,
+      "speech_window_seconds": 11.284897959183674,
+      "tempo": 1.1694194776356137,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Tak se záhada stává užitečnou. Místo opakování slova nemožné se ptejme, který konkrétní krok ještě není vysvětlen.",
+      "raw_seconds": 10.100680272108843,
+      "speech_window_seconds": 10.100680272108843,
+      "tempo": 1.0467026188713826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Slabinou může být cesta, uspořádání lan nebo příliš zjednodušené osazení. Každou možnost musíme zkoumat vlastním způsobem.",
+      "raw_seconds": 11.702857142857143,
+      "speech_window_seconds": 11.702857142857143,
+      "tempo": 1.2127313101406365,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Tyto otázky úspěch nezmenšují. Přibližují nás praktickým rozhodnutím, která museli stavitelé postupně zvládnout.",
+      "raw_seconds": 9.961360544217687,
+      "speech_window_seconds": 9.961360544217687,
+      "tempo": 1.0322653413697085,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Porovnejme hlavní možnosti spravedlivě. Každá musí nést stejnou zátěž, sledovat věrohodnou trasu a dosáhnout stejné polohy.",
+      "raw_seconds": 10.739229024943311,
+      "speech_window_seconds": 10.739229024943311,
+      "tempo": 1.1128734740873898,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Nejprve posun po připravené dráze. Nabízí široké podepření a přímý tah, ale vyžaduje kontrolu tření a údržbu cesty.",
+      "raw_seconds": 10.47219954648526,
+      "speech_window_seconds": 10.47219954648526,
+      "tempo": 1.0852020255425139,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Válečky pod konstrukcí rozkládající zatížení mohou snížit odpor. Vyžadují pevnost, vyrovnání, vracení válečků a spolehlivé podloží.",
+      "raw_seconds": 12.84063492063492,
+      "speech_window_seconds": 12.84063492063492,
+      "tempo": 1.330635743070976,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Kombinované řešení může v různých fázích použít různé metody. Pomůže jen tehdy, když vysvětlí také přechody mezi nimi.",
+      "raw_seconds": 10.553469387755102,
+      "speech_window_seconds": 10.553469387755102,
+      "tempo": 1.0936237707518242,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Vratidla a kladkostroje vysvětlují, jak se vyvíjí tažná síla. Mohou být součástí dopravy, ale nevysvětlují, co nese hmotnost kamene.",
+      "raw_seconds": 11.447437641723356,
+      "speech_window_seconds": 11.447437641723356,
+      "tempo": 1.1862629680542338,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Přesvědčivý návrh může spojovat běžné principy v mimořádném měřítku: tlak, tření, páku, geometrii a organizaci.",
+      "raw_seconds": 10.576689342403627,
+      "speech_window_seconds": 10.576689342403627,
+      "tempo": 1.0960299836687697,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Běžné principy neznamenají snadnou práci. Obtížné je propojit materiály s omezenou pevností a pracovní skupiny, které potřebují koordinaci.",
+      "raw_seconds": 12.294965986394558,
+      "speech_window_seconds": 12.294965986394558,
+      "tempo": 1.2740897395227522,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Metoda může být fyzikálně možná, aniž je historicky doložena. Toto rozlišení je důležité, když zobrazujeme neznámou část minulosti.",
+      "raw_seconds": 11.6215873015873,
+      "speech_window_seconds": 11.6215873015873,
+      "tempo": 1.2043095649313265,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Skutečný postup vyžaduje pevnější vztahy mezi stopami, terénem, materiály, datováním a pracovní sekvencí. Věrohodná animace sama nestačí.",
+      "raw_seconds": 12.376235827664399,
+      "speech_window_seconds": 12.376235827664399,
+      "tempo": 1.282511484732062,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Osazený Trilithon ukazuje konečný výsledek. Lom ukazuje přípravu a nedokončenou práci. Ani jeden zdroj nevysvětlí všechno sám.",
+      "raw_seconds": 11.586757369614512,
+      "speech_window_seconds": 11.586757369614512,
+      "tempo": 1.200700245555908,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Odhad tisíce šesti set padesáti tun patří velkému bloku v lomu, nikoli každému kameni dopravenému ke svatyni.",
+      "raw_seconds": 9.334421768707482,
+      "speech_window_seconds": 9.334421768707482,
+      "tempo": 0.9672975926121743,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Odhadovaná hmotnost není přímé vážení. Rozměry, skryté plochy a předpokládaná hustota vysvětlují rozdíly mezi publikovanými odhady.",
+      "raw_seconds": 11.505487528344672,
+      "speech_window_seconds": 11.505487528344672,
+      "tempo": 1.192278500346598,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Nejistotu musíme zachovat i ve vyprávění. Příliš přesná grafika může klamat, pokud důkazy umožňují jen přibližný odhad.",
+      "raw_seconds": 10.866938775510205,
+      "speech_window_seconds": 10.866938775510205,
+      "tempo": 1.1261076451305911,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Co víme jistě? Kameny patří ke skutečné krajině těžby a monumentální výstavby. Jejich výzkum potřebuje trpělivé pozorování.",
+      "raw_seconds": 10.611519274376418,
+      "speech_window_seconds": 10.611519274376418,
+      "tempo": 1.0996393030441884,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Otevřené otázky jsou konkrétní: přesné dopravní uspořádání, podrobnosti trasy a kroky, které přivedly každý kámen na jeho místo.",
+      "raw_seconds": 11.366167800453514,
+      "speech_window_seconds": 11.366167800453514,
+      "tempo": 1.1778412228449238,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Užitečná odpověď má dvě úrovně. Vysvětluje mechanické možnosti a nechává otevřené historické podrobnosti, které důkazy dosud nerozhodly.",
+      "raw_seconds": 12.26013605442177,
+      "speech_window_seconds": 12.26013605442177,
+      "tempo": 1.2704804201473336,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Takový příběh dává divákovi něco k pochopení a výzkumníkovi něco k ověření. Údiv se může stát začátkem poznání.",
+      "raw_seconds": 10.170340136054422,
+      "speech_window_seconds": 10.170340136054422,
+      "tempo": 1.0539212576222199,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Budoucí měření a vykopávky mohou obraz zpřesnit. Nové rozměry mohou změnit trasu, odhalit stavební vztahy nebo vyloučit předpoklad.",
+      "raw_seconds": 12.30657596371882,
+      "speech_window_seconds": 12.30657596371882,
+      "tempo": 1.275292845981225,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Nejlepší rekonstrukce musí přijmout změnu. Má uspořádat otázky a důkazy, ne chránit působivý obraz před opravou.",
+      "raw_seconds": 10.356099773242631,
+      "speech_window_seconds": 10.356099773242631,
+      "tempo": 1.0731709609577855,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Vraťme se k prvnímu pohledu na chrámovou základnu. Kameny se nezmenšily, ale problém kolem nich má jasnější strukturu.",
+      "raw_seconds": 10.158730158730158,
+      "speech_window_seconds": 10.158730158730158,
+      "tempo": 1.052718151163747,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Za hotovou plochou si představme stále podepřený sled: výběr v lomu, připravené lože, řízenou cestu a pečlivé konečné usazení.",
+      "raw_seconds": 11.528707482993198,
+      "speech_window_seconds": 11.528707482993198,
+      "tempo": 1.1946847132635439,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Za postupem stojí dovednosti, které se málokdy dochovají podrobně: znalost kamene, práce se dřevem a lany, čtení terénu a koordinace.",
+      "raw_seconds": 11.563537414965987,
+      "speech_window_seconds": 11.563537414965987,
+      "tempo": 1.1982940326389624,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Úspěch patří nahromaděným znalostem stejně jako síle. Velké měřítko činí drobná praktická rozhodnutí ještě důležitějšími.",
+      "raw_seconds": 10.483809523809525,
+      "speech_window_seconds": 10.483809523809525,
+      "tempo": 1.0864051320009869,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Baalbek je také živým kulturním dědictvím Libanonu. Zkoumání techniky má posílit zájem o historii, místní obyvatele a péči o památku.",
+      "raw_seconds": 12.364625850340136,
+      "speech_window_seconds": 12.364625850340136,
+      "tempo": 1.2813083782735892,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Ochrana potřebuje dokumentaci a znalost materiálů. Pečlivé pozorování pomáhá vysvětlit minulost i zachovat to, co zbývá pro budoucnost.",
+      "raw_seconds": 12.30657596371882,
+      "speech_window_seconds": 12.30657596371882,
+      "tempo": 1.275292845981225,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Co byste při další výpravě měřili nejdřív: trasu, kontaktní plochy, rozměry kamene, nebo prostor pro práci?",
+      "raw_seconds": 8.6378231292517,
+      "speech_window_seconds": 8.6378231292517,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Každá volba vede k jiné zkoušce. Velká otázka se tak mění v řadu menších otázek, které lze skutečně zkoumat.",
+      "raw_seconds": 9.914920634920636,
+      "speech_window_seconds": 9.914920634920636,
+      "tempo": 1.0274529155358172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Neznáme s jistotou každý pohyb lan. Můžeme však lépe rozumět důkazům, mechanice a potřebné organizaci lidí.",
+      "raw_seconds": 9.392471655328798,
+      "speech_window_seconds": 9.392471655328798,
+      "tempo": 0.9733131249045386,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Kámen je stále obrovský. Jaký sled podepřených pohybů ho přivedl z lomu až sem? A která stopa by to prokázala?",
+      "raw_seconds": 9.810430839002267,
+      "speech_window_seconds": 9.810430839002267,
+      "tempo": 1.0166249574095614,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1242,
+  "decoded_samples": 29808000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-cs-20m42s.mp3",
+  "flac": "voice-cs-20m42s.flac",
+  "mp3_sha256": "84a4b993496a6b7cb4f8dfbc7d5d11ecec5d307ad34faba05b52c335d3612813",
+  "flac_sha256": "c4feb824796389dec90ea03014d874f34fe3927c72baa1a3c21b207355d70702"
+}

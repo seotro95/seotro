@@ -1,0 +1,1137 @@
+{
+  "locale": "vi",
+  "voice_id": "vi-VN-NamMinhNeural",
+  "engine": "Microsoft Edge Read Aloud via edge-tts",
+  "target_seconds": 1242,
+  "spoken_cues": 124,
+  "closing_silence_seconds": 2,
+  "config_hash": "96823ef51c06c2a1dab1454846ddb3404ff564ae4d138d8eed489fc89e5c2f4f",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "Ở Baalbek, ba khối đá khổng lồ nằm trong nền đền. Kích thước khiến ta sửng sốt. Nhưng chúng đã đến đây bằng cách nào?",
+      "raw_seconds": 9.024,
+      "speech_window_seconds": 8.471041666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Gần đó, những khối còn lớn hơn vẫn nằm trong mỏ. Có khối chưa tách hẳn khỏi nền đá, chưa từng hoàn thành hành trình ấy.",
+      "raw_seconds": 8.424,
+      "speech_window_seconds": 7.872208333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Đó là những bằng chứng khác nhau. Muốn tìm hiểu, ta phải theo cả quá trình, từ vách mỏ đến mối ghép cuối cùng.",
+      "raw_seconds": 7.968,
+      "speech_window_seconds": 7.4135,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Bối cảnh là thung lũng Bekaa ở Liban. Baalbek thuộc một cảnh quan được hình thành qua canh tác, cư trú, đi lại và xây dựng.",
+      "raw_seconds": 8.952,
+      "speech_window_seconds": 8.383625,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Thánh địa này trở thành trung tâm đồ sộ của Heliopolis thời La Mã. Các công trình còn lại phản ánh một lịch sử nhiều giai đoạn.",
+      "raw_seconds": 8.4,
+      "speech_window_seconds": 7.8345,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Đền Jupiter từng nổi bật trong quần thể. Những cột đá lớn hướng mắt ta lên cao, nhưng cuộc tìm hiểu này bắt đầu từ nền đất.",
+      "raw_seconds": 8.688,
+      "speech_window_seconds": 8.139625,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Dọc nền đền là ba khối thường gọi là Trilithon. Chúng cho thấy những tảng đá rất lớn đã thực sự được vận chuyển và đặt tại đây.",
+      "raw_seconds": 8.208,
+      "speech_window_seconds": 7.646041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Các ước tính cho mỗi khối lên tới nhiều trăm tấn. Con số cụ thể phụ thuộc kích thước đo được và khối lượng riêng của đá vôi.",
+      "raw_seconds": 7.8,
+      "speech_window_seconds": 7.252791666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Mỏ đá nổi tiếng cách thánh địa khoảng một kilômét. Đi bộ thì gần, nhưng với một khối đá cực nặng, đó là hành trình khó khăn.",
+      "raw_seconds": 8.664,
+      "speech_window_seconds": 8.114083333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Khoảng cách chưa nói lên tất cả. Ta còn phải xét độ dốc, sức chịu của nền đất, không gian thao tác và cao độ nơi đặt đá.",
+      "raw_seconds": 8.544,
+      "speech_window_seconds": 7.971041666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Không có nhật ký xây dựng đầy đủ còn lại cho công việc này. Vì thế, phục dựng phải phân biệt bằng chứng với những lựa chọn do ta giả định.",
+      "raw_seconds": 8.64,
+      "speech_window_seconds": 8.073666666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Nhiệm vụ là kiểm tra các khả năng trước những giới hạn thực tế: khai thác, đỡ tải, tạo lực kéo, điều hướng và đặt đá.",
+      "raw_seconds": 8.016,
+      "speech_window_seconds": 7.465125,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Hãy bắt đầu trong mỏ, khi khối đá còn thuộc về sườn đồi. Quyết định kỹ thuật đầu tiên xuất hiện trước cả lúc vận chuyển.",
+      "raw_seconds": 7.968,
+      "speech_window_seconds": 7.398083333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Người thợ cần một khối đá phù hợp, ở vị trí có thể thao tác. Thớ đá, khe nứt, lối tiếp cận và hình dạng dự kiến đều quan trọng.",
+      "raw_seconds": 9.36,
+      "speech_window_seconds": 8.807125,
+      "tempo": 0.9126554404145076,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Một khối đá lớn có điểm yếu ẩn bên trong có thể làm uổng công sức. Khai thác vì thế đòi hỏi cả kinh nghiệm lẫn lao động.",
+      "raw_seconds": 8.088,
+      "speech_window_seconds": 7.543583333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Các rãnh và bề mặt gia công còn lại lưu giữ dấu vết. Chúng giúp xác định vị trí người thợ và những mặt đá có thể tiếp cận.",
+      "raw_seconds": 8.04,
+      "speech_window_seconds": 7.4935833333333335,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Những dấu vết ấy cần được nhìn gần. Một bức ảnh ngoạn mục có thể che mất các khoảng hẹp vốn quyết định trình tự đục và tách đá.",
+      "raw_seconds": 8.328,
+      "speech_window_seconds": 7.758541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Khối thường gọi là Đá Người Phụ Nữ Mang Thai nổi tiếng vì kích thước. Điều cốt yếu là nó vẫn nằm ở mỏ, không thuộc nền đền đã lắp.",
+      "raw_seconds": 8.52,
+      "speech_window_seconds": 7.958541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Đợt khai quật năm hai nghìn không trăm mười bốn làm lộ thêm một khối gần đó, được ước tính khoảng một nghìn sáu trăm năm mươi tấn.",
+      "raw_seconds": 7.128,
+      "speech_window_seconds": 6.571,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Phát hiện ấy cho thấy tham vọng khai thác đá lớn. Nó không chứng minh rằng khối nặng đến mức ấy đã được chuyển tới đền.",
+      "raw_seconds": 7.824,
+      "speech_window_seconds": 7.258541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Phân biệt này làm rõ câu hỏi. Cần nghiên cứu cả việc đã hoàn thành lẫn công việc dang dở, bởi phần bỏ lại có thể cho thấy giới hạn thực tế.",
+      "raw_seconds": 9.192,
+      "speech_window_seconds": 8.621041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Các nhóm khảo cổ cùng chuyên gia Liban đã khảo sát khu mỏ. Bản vẽ và quan sát thực địa là điểm xuất phát đáng tin cậy hơn một ảnh riêng lẻ.",
+      "raw_seconds": 9.336,
+      "speech_window_seconds": 8.79025,
+      "tempo": 0.9109067357512953,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Tại thánh địa, bằng chứng khác đi: đá đã ở đúng vị trí, với kích thước, mối ghép và quan hệ với các lớp xây xung quanh.",
+      "raw_seconds": 7.848,
+      "speech_window_seconds": 7.283541666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Mối ghép hoàn chỉnh cho thấy đích đến, nhưng không ghi lại mọi chuyển động trước đó. Hành trình còn thiếu cần được nghiên cứu bằng bằng chứng và cơ học.",
+      "raw_seconds": 9.24,
+      "speech_window_seconds": 8.671041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Hoạt động sớm hơn ở Baalbek là một câu hỏi lịch sử khác. Niên đại của địa điểm không tự động quyết định tuổi của mọi phần công trình.",
+      "raw_seconds": 8.64,
+      "speech_window_seconds": 8.085541666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Các nhà nghiên cứu tìm hiểu trình tự xây dựng qua khai quật, quan hệ kiến trúc và vật liệu. Kích thước riêng nó không xác định niên đại hay người xây.",
+      "raw_seconds": 9.048,
+      "speech_window_seconds": 8.496041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Thế giới cổ đại còn để lại tư liệu so sánh. Vitruvius mô tả máy nâng và vận chuyển nặng, kể cả khó khăn khi nền đường yếu.",
+      "raw_seconds": 8.352,
+      "speech_window_seconds": 7.783541666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Những văn bản ấy cho thấy một truyền thống cơ khí. Chúng không xác nhận một loại máy cụ thể đã được dùng cho từng khối đá ở Baalbek.",
+      "raw_seconds": 8.28,
+      "speech_window_seconds": 7.720958333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Nhà khảo cổ Jean-Pierre Adam từng nghiên cứu các phương án dùng tời và vận chuyển. Đó là lập luận kỹ thuật, không phải hình ảnh ghi lại công trường xưa.",
+      "raw_seconds": 9.576,
+      "speech_window_seconds": 9.031541666666667,
+      "tempo": 0.9359110535405872,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Khi đã xác định giới hạn bằng chứng, ta có thể xây dựng mô hình thận trọng: tạo hình, tách khối, đỡ tải rồi chuẩn bị vận chuyển.",
+      "raw_seconds": 8.16,
+      "speech_window_seconds": 7.59675,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Hãy hình dung khối đá đã được định hình trong mỏ. Đục quanh các mặt tạo lối tiếp cận, nhưng phần đáy vẫn nối nó với nền gốc.",
+      "raw_seconds": 8.208,
+      "speech_window_seconds": 7.646041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Tách phần đáy sẽ thay đổi nơi chịu tải. Một phục dựng hợp lý phải cho thấy khối đá được đỡ thế nào trong quá trình chuyển tiếp ấy.",
+      "raw_seconds": 8.208,
+      "speech_window_seconds": 7.646041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Gỗ kê, nêm hoặc nền chuẩn bị có thể xuất hiện trong phương án. Cách bố trí cụ thể vẫn là giả thuyết cần phù hợp dấu vết còn lại.",
+      "raw_seconds": 8.904,
+      "speech_window_seconds": 8.350875,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Nguyên tắc đầu tiên là phải có chỗ đỡ mới trước khi bỏ chỗ đỡ cũ. Với đá rất lớn, một dịch chuyển nhỏ mất kiểm soát cũng nguy hiểm.",
+      "raw_seconds": 9.048,
+      "speech_window_seconds": 8.499916666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Tiếp theo là đường đi. Ta dễ nghĩ chỉ cần kéo mạnh hơn, nhưng thêm sức kéo không thể cứu một nền vận chuyển đang lún xuống.",
+      "raw_seconds": 8.184,
+      "speech_window_seconds": 7.63375,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Áp lực phụ thuộc cách lực phân bố trên diện tích. Đỡ trên vùng rộng hơn có thể giảm áp lực trung bình, nhưng nền vẫn phải chịu tổng tải.",
+      "raw_seconds": 8.76,
+      "speech_window_seconds": 8.200875,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Vì thế, chuẩn bị đường phải nằm trong lời giải. San nền, thoát nước, gia cố và sửa chữa có thể quan trọng như chính thiết bị kéo.",
+      "raw_seconds": 9.12,
+      "speech_window_seconds": 8.558541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Rồi đến ma sát, lực cản giữa các bề mặt tiếp xúc. Nó thay đổi theo vật liệu, độ ẩm, độ thẳng, biến dạng và tình trạng nền đỡ.",
+      "raw_seconds": 9.744,
+      "speech_window_seconds": 9.189958333333333,
+      "tempo": 0.9523272884283247,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Để minh họa, giả sử khối đá trong mô hình nặng tám trăm tấn. Đây là giá trị dùng tính toán, không phải một phép đo mới.",
+      "raw_seconds": 8.712,
+      "speech_window_seconds": 8.146041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Trên nền ngang, mô hình trượt đơn giản lấy trọng lượng nhân với hệ số ma sát. Hệ số ấy phải được giả định hoặc đo cho cấu hình cụ thể.",
+      "raw_seconds": 8.928,
+      "speech_window_seconds": 8.371041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Nếu chọn hệ số không phẩy không năm để minh họa, lực cản xấp xỉ bốn trăm kilôniutơn, chưa tính những yếu tố phức tạp khác.",
+      "raw_seconds": 7.776,
+      "speech_window_seconds": 7.208541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Đổi hệ số giả định thành không phẩy hai thì lực cản tăng gấp bốn. Điều kiện bề mặt có thể làm quy mô bài toán thay đổi rất lớn.",
+      "raw_seconds": 8.256,
+      "speech_window_seconds": 7.6835,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Các con số ấy không cho biết số thợ thời cổ. Chúng chỉ ra rằng phương án vận chuyển cần giả định hợp lý, chứ không chỉ một số người ấn tượng.",
+      "raw_seconds": 9.264,
+      "speech_window_seconds": 8.713375,
+      "tempo": 0.902940414507772,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Bàn trượt giúp phân bố tải và tạo kết cấu để kéo. Mặt đáy, mối nối và chỗ tiếp xúc với đường đều cần được xử lý.",
+      "raw_seconds": 8.352,
+      "speech_window_seconds": 7.798541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Con lăn là một khả năng khác, nhưng không xóa hết lực cản. Mỗi chỗ tiếp xúc phải chịu tải, và hệ thống cần giữ thẳng hướng.",
+      "raw_seconds": 8.784,
+      "speech_window_seconds": 8.213083333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Con lăn rời có thể lệch sang bên hoặc gặp nền không đều. Minh họa thực tế cần thể hiện tiến chậm có kiểm soát và luôn có chỗ đỡ.",
+      "raw_seconds": 8.568,
+      "speech_window_seconds": 8.014291666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Phương án còn phải giải thích việc thu hồi và đặt lại vật đỡ. Vận chuyển là chu trình chuẩn bị, dịch chuyển, kiểm tra rồi tiếp tục chuẩn bị.",
+      "raw_seconds": 9.144,
+      "speech_window_seconds": 8.597083333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Dù trượt hay lăn, tuyến đường phải đủ rộng cho cả hệ thống. Khúc cua hẹp và chỗ đổi độ dốc đột ngột đều làm việc khó hơn.",
+      "raw_seconds": 8.4,
+      "speech_window_seconds": 7.833541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Lực kéo có thể đến từ đâu? Người, động vật, dây và máy đều có thể xuất hiện, nhưng hiệu quả phụ thuộc vào cách bố trí.",
+      "raw_seconds": 8.712,
+      "speech_window_seconds": 8.148125,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Dây kéo là một phần của đường truyền lực. Nút buộc, chỗ uốn, mài mòn và điểm liên kết đều có thể trở thành điểm yếu.",
+      "raw_seconds": 8.256,
+      "speech_window_seconds": 7.696041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Hệ ròng rọc có thể đổi quãng đường lấy lực. Với tỷ lệ lý tưởng bốn đổi một, giảm lực kéo đòi hỏi thu dây dài hơn tương ứng.",
+      "raw_seconds": 8.496,
+      "speech_window_seconds": 7.939,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Ròng rọc thực tế có thêm ma sát và yêu cầu kết cấu. Lợi về lực không cho phép bỏ qua sức chịu của dây, khung hay nền móng.",
+      "raw_seconds": 8.784,
+      "speech_window_seconds": 8.225166666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Tời đứng dùng chuyển động quay để kéo dây. Tay đòn dài hơn có thể tăng mômen, còn tang tời biến chuyển động quay thành lực kéo có kiểm soát.",
+      "raw_seconds": 8.712,
+      "speech_window_seconds": 8.146083333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Máy vẫn cần điểm neo đủ chắc. Lực phản lại phải truyền vào đâu đó, qua nền móng, kết cấu khác hoặc trực tiếp xuống đất.",
+      "raw_seconds": 8.28,
+      "speech_window_seconds": 7.7115,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Câu hỏi vì vậy rộng hơn bản thân chiếc máy: cả chuỗi từ người vận hành đến nền đất có chịu được lực và giữ được kiểm soát không?",
+      "raw_seconds": 7.128,
+      "speech_window_seconds": 6.57325,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Nhiều điểm kéo có thể giúp phân bố sức. Tuy nhiên, kéo không đều có thể xoắn tải hoặc làm một bộ phận chịu lực quá mức.",
+      "raw_seconds": 7.944,
+      "speech_window_seconds": 7.383541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Chuyển động nên diễn ra từng bước nhỏ có thể theo dõi. Khối đá lớn không để nhiều cơ hội ứng biến khi tải đã bắt đầu mất kiểm soát.",
+      "raw_seconds": 8.4,
+      "speech_window_seconds": 7.85525,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Dừng lại quan trọng như khởi động. Chèn giữ, dây hãm và vị trí nghỉ dự kiến phải có trong phương án vận chuyển nặng khả thi.",
+      "raw_seconds": 8.4,
+      "speech_window_seconds": 7.840166666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Đường đi còn có chiều cao. Ngay cả một dốc thoải cũng làm xuất hiện thêm thành phần trọng lực mà hệ kéo phải thắng được.",
+      "raw_seconds": 7.68,
+      "speech_window_seconds": 7.124333333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Với mô hình tám trăm tấn, độ dốc một phần trăm làm tăng khoảng tám mươi kilôniutơn lực cản. Phần này cộng thêm vào ma sát.",
+      "raw_seconds": 8.688,
+      "speech_window_seconds": 8.121041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Đi xuống dốc đặt ra bài toán khác. Trọng lực có thể hỗ trợ chuyển động, nhưng người vận hành phải ngăn tăng tốc và giữ đúng tuyến.",
+      "raw_seconds": 8.4,
+      "speech_window_seconds": 7.849916666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Tuyến đường trông thuận tiện trên bản đồ phẳng có thể rất khó khi xem mặt cắt. Địa hình đủ sức loại bỏ một phương án hấp dẫn.",
+      "raw_seconds": 7.992,
+      "speech_window_seconds": 7.447166666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Khi tới nền đền, mục tiêu là đến đúng cao độ trong kiểm soát. Đường dốc hay đất đắp tạm giả định cũng phải ổn định dưới tải.",
+      "raw_seconds": 8.472,
+      "speech_window_seconds": 7.908541666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Không nên hình dung công trường đã giống hệt công trình hoàn thiện. Cao độ thi công và không gian tạm có thể khác diện mạo cuối cùng.",
+      "raw_seconds": 7.992,
+      "speech_window_seconds": 7.442916666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Căn chỉnh là công đoạn riêng. Có thể đề xuất dịch chuyển ngắn, kê đỡ, đòn bẩy và kiểm tra nhiều lần, nhưng cách dùng cụ thể cần được chứng minh.",
+      "raw_seconds": 9.552,
+      "speech_window_seconds": 8.9925,
+      "tempo": 0.9318652849740932,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Bài học cốt lõi là tính liên tục. Trình tự hợp lý phải giữ đá luôn được đỡ, từ mỏ đến mối ghép, không bỏ qua công đoạn khó.",
+      "raw_seconds": 8.952,
+      "speech_window_seconds": 8.383541666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Giờ hãy thử thách mô hình. Cách làm hiệu quả với khối đá trên bàn có thể thất bại khi gỗ, dây và nền chịu tải lớn hơn nhiều.",
+      "raw_seconds": 8.424,
+      "speech_window_seconds": 7.871958333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Thay đổi tỷ lệ làm đổi áp lực tiếp xúc, độ uốn và ứng xử vật liệu. Phóng to mọi kích thước không giữ nguyên điều kiện của thí nghiệm nhỏ.",
+      "raw_seconds": 8.928,
+      "speech_window_seconds": 8.372541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Chọn gỗ cũng quan trọng. Vật đỡ phải chống được ép cục bộ và uốn, đồng thời làm việc cùng các phần khác của nền vận chuyển.",
+      "raw_seconds": 8.208,
+      "speech_window_seconds": 7.6365,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Mặt đường cũng vậy. Một điểm nền cứng không thể bù cho chỗ yếu nằm dưới phần khác của khối tải.",
+      "raw_seconds": 7.056,
+      "speech_window_seconds": 6.496041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Thoát nước trở thành vấn đề cơ học khi mưa làm đổi trạng thái nền. Đường vận chuyển không phải làm xong một lần rồi bỏ mặc.",
+      "raw_seconds": 7.728,
+      "speech_window_seconds": 7.179416666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Bảo trì cần thời gian và nguồn lực. Mô hình nghiêm túc phải có khoảng dừng để kiểm tra vật đỡ, đặt lại thiết bị và sửa chỗ hỏng.",
+      "raw_seconds": 8.544,
+      "speech_window_seconds": 7.986958333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Nhân lực là cả một hệ thống. Khai thác, làm mộc, xử lý dây, đo đạc, kéo tải và tiếp tế cần những kỹ năng, trách nhiệm khác nhau.",
+      "raw_seconds": 9.864,
+      "speech_window_seconds": 9.314458333333333,
+      "tempo": 0.9652288428324697,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Một bức ảnh không cho biết thân phận hay hợp đồng của người thợ. Không thể chỉ nhìn đá rồi dựng nên toàn bộ lịch sử lao động.",
+      "raw_seconds": 8.088,
+      "speech_window_seconds": 7.537,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Dù vậy, ta vẫn thấy nhu cầu tổ chức. Vật liệu, thức ăn, nước, dụng cụ và chỉ dẫn phải đến đúng người, đúng lúc.",
+      "raw_seconds": 8.952,
+      "speech_window_seconds": 8.383541666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Khi nhiều người làm việc xa nhau, tín hiệu trở nên quan trọng. Chuyển động phối hợp cần nhịp chung, nhất là lúc phải dừng nhanh.",
+      "raw_seconds": 8.28,
+      "speech_window_seconds": 7.708541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Công sức làm đường còn đặt ra câu hỏi: những chuẩn bị ấy chỉ phục vụ một khối đá, hay cả chuỗi lần vận chuyển?",
+      "raw_seconds": 6.84,
+      "speech_window_seconds": 6.271,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Nhiều lần vận chuyển có thể lý giải việc chuẩn bị công phu. Nhưng lịch làm, số đội và trình tự giao đá vẫn cần bằng chứng.",
+      "raw_seconds": 8.136,
+      "speech_window_seconds": 7.5769166666666665,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Mối ghép cuối cùng có khó khăn riêng. Khối đá phải đến với hướng phù hợp các lớp xây xung quanh và còn đủ chỗ để căn chỉnh.",
+      "raw_seconds": 8.304,
+      "speech_window_seconds": 7.736208333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Xoay tải rất lớn trong chỗ chật không phải việc phụ đơn giản. Phương án đường đi phải tính đến điều đó từ trước khi bắt đầu kéo.",
+      "raw_seconds": 8.232,
+      "speech_window_seconds": 7.6710416666666665,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Cũng không thể đưa cần cẩu hiện đại vào lời giải thời cổ. Hình nâng hạ quen mắt có thể che đi chính vấn đề mà ta cần giải thích.",
+      "raw_seconds": 8.088,
+      "speech_window_seconds": 7.539416666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Máy thời cổ có tư liệu ghi nhận, nhưng phải xét sức chịu và cách bố trí. Biết tên một thiết bị không có nghĩa nó làm được mọi việc.",
+      "raw_seconds": 8.52,
+      "speech_window_seconds": 7.971583333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Những khối lớn nhất còn trong mỏ đặc biệt hữu ích. Trạng thái dang dở nhắc rằng dự định, khai thác và lắp đặt thành công là những việc khác nhau.",
+      "raw_seconds": 9.024,
+      "speech_window_seconds": 8.471166666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Đá có lỗi, kế hoạch thay đổi hoặc khó khăn thực tế khác đều có thể khiến công việc dừng lại. Chọn một nguyên nhân cần bằng chứng cụ thể.",
+      "raw_seconds": 8.904,
+      "speech_window_seconds": 8.348583333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Khối đá không tự kể vì sao bị bỏ lại. Các nhà nghiên cứu phải đặt trạng thái của nó vào bối cảnh mỏ và trình tự xây dựng rộng hơn.",
+      "raw_seconds": 8.736,
+      "speech_window_seconds": 8.191125,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Bề mặt vận chuyển giả định cũng cần xem kỹ. Vật đỡ đặt trên đá, đất gia cố, gỗ hay kết hợp? Mỗi lựa chọn đều làm phép tính thay đổi.",
+      "raw_seconds": 10.728,
+      "speech_window_seconds": 10.182625,
+      "tempo": 1.0551943005181346,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Thí nghiệm hiện đại có thể làm rõ từng bước, nhất là ma sát và kiểm soát. Giá trị tăng lên khi vật liệu, tỷ lệ và giới hạn được trình bày rõ.",
+      "raw_seconds": 9.6,
+      "speech_window_seconds": 9.053166666666666,
+      "tempo": 0.9381519861830742,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Thí nghiệm không cần tái hiện mọi việc mới hữu ích. Nó nên trả lời một câu hỏi xác định, trong đúng phạm vi mà thiết lập cho phép.",
+      "raw_seconds": 8.328,
+      "speech_window_seconds": 7.762958333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Khảo cổ và cơ học vì thế bổ sung cho nhau. Di tích đặt giới hạn cho mô hình; mô hình gợi ý những dấu vết nên tiếp tục tìm kiếm.",
+      "raw_seconds": 9.048,
+      "speech_window_seconds": 8.483625,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Tuyến đường đề xuất cần đối chiếu địa hình thật. Điểm neo giả định cần xem bối cảnh. Sơ đồ đẹp không thể thay thế các khảo sát ấy.",
+      "raw_seconds": 9.48,
+      "speech_window_seconds": 8.908541666666666,
+      "tempo": 0.9231649395509498,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Việc không còn máy móc không tự nó gây ngạc nhiên. Gỗ và sợi khó tồn tại như đá, nhưng sự thiếu vắng không khiến mọi phục dựng đều đúng.",
+      "raw_seconds": 9.0,
+      "speech_window_seconds": 8.448375,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Lời giải tốt cần đưa ra những điều có thể kiểm tra: không gian cần thiết, bề mặt tiếp xúc, yêu cầu đỡ tải và trình tự thao tác.",
+      "raw_seconds": 7.944,
+      "speech_window_seconds": 7.40075,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Ở đây, điều bí ẩn trở nên có ích. Ta có thể hỏi cụ thể công đoạn nào chưa được giải thích, rồi xác định bằng chứng cần tìm.",
+      "raw_seconds": 8.496,
+      "speech_window_seconds": 7.925875,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Điểm yếu có thể là nền đường, cách bố trí dây hoặc bước đặt đá đã bị đơn giản hóa. Mỗi khả năng cần một cách kiểm tra riêng.",
+      "raw_seconds": 8.424,
+      "speech_window_seconds": 7.859708333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Những câu hỏi ấy không làm thành tựu nhỏ đi. Chúng đưa ta đến gần các quyết định thực tế mà người xây phải giải quyết qua từng bước.",
+      "raw_seconds": 7.992,
+      "speech_window_seconds": 7.447916666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Giờ ta có thể so sánh các khả năng công bằng hơn: cùng khối tải, cùng yêu cầu tuyến đường và cùng vị trí đặt cuối cùng.",
+      "raw_seconds": 7.248,
+      "speech_window_seconds": 6.701,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Trước hết là hệ trượt trên nền chuẩn bị. Ưu điểm là đỡ rộng và liên kết kéo trực tiếp; khó khăn là ma sát và bảo trì đường.",
+      "raw_seconds": 8.76,
+      "speech_window_seconds": 8.196,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Tiếp đến là con lăn dưới kết cấu phân tải. Chúng có thể giảm lực cản, nhưng đòi hỏi sức chịu vật liệu, giữ hướng và nền đủ chắc.",
+      "raw_seconds": 9.0,
+      "speech_window_seconds": 8.433541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Phương án kết hợp có thể xử lý các giai đoạn theo cách khác nhau. Nhưng nó chỉ hữu ích khi những chỗ chuyển tiếp được giải thích liên tục.",
+      "raw_seconds": 8.256,
+      "speech_window_seconds": 7.685291666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Tời và ròng rọc giải thích cách tạo lực. Chúng có thể đi cùng nền vận chuyển, nhưng không thay thế lời giải về chỗ chịu tải.",
+      "raw_seconds": 8.064,
+      "speech_window_seconds": 7.496041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Phục dựng thuyết phục có thể là chuỗi nguyên lý quen thuộc ở quy mô phi thường: áp lực, ma sát, đòn bẩy, hình học và tổ chức.",
+      "raw_seconds": 8.016,
+      "speech_window_seconds": 7.4623333333333335,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Nguyên lý quen thuộc không khiến công việc dễ dàng. Khó khăn nằm ở việc phối hợp mọi phần, trong giới hạn vật liệu và khả năng tổ chức nhân lực.",
+      "raw_seconds": 8.904,
+      "speech_window_seconds": 8.338958333333334,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Một phương án có thể khả thi về vật lý mà chưa được chứng minh về lịch sử. Phân biệt này rất cần thiết khi phục dựng phần quá khứ còn thiếu.",
+      "raw_seconds": 8.904,
+      "speech_window_seconds": 8.346041666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Muốn xác định cách làm thực tế, cần liên hệ chặt hơn giữa dấu vết, địa hình, vật liệu, niên đại và trình tự đề xuất.",
+      "raw_seconds": 7.8,
+      "speech_window_seconds": 7.253333333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Trilithon đã lắp cho ta kết quả rõ ràng. Mỏ đá cho thấy chuẩn bị và công việc dang dở. Không thể buộc một loại bằng chứng trả lời tất cả.",
+      "raw_seconds": 10.464,
+      "speech_window_seconds": 9.896375,
+      "tempo": 1.0255310880829016,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Ước tính một nghìn sáu trăm năm mươi tấn thuộc về khối lớn tìm thấy tại mỏ. Không nên dùng con số ấy cho từng khối đã tới thánh địa.",
+      "raw_seconds": 8.424,
+      "speech_window_seconds": 7.877916666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Khối lượng ước tính không phải kết quả cân trực tiếp. Kích thước, phần còn khuất và giả định về khối lượng riêng có thể khiến các số liệu khác nhau.",
+      "raw_seconds": 8.736,
+      "speech_window_seconds": 8.171041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Khi kể lại, cần giữ mức chưa chắc chắn ấy. Con số quá chính xác trên đồ họa dễ gây hiểu nhầm nếu bằng chứng chỉ cho phép ước lượng.",
+      "raw_seconds": 8.976,
+      "speech_window_seconds": 8.417916666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Điều có thể nói chắc là những khối đá thuộc về cảnh quan khai thác và xây dựng có thật. Nghiên cứu chúng đòi hỏi quan sát kiên nhẫn.",
+      "raw_seconds": 8.232,
+      "speech_window_seconds": 7.675791666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Những câu hỏi còn mở cụ thể hơn: cấu hình vận chuyển, tuyến đi chi tiết và trình tự đưa từng khối lớn tới vị trí đặt.",
+      "raw_seconds": 7.248,
+      "speech_window_seconds": 6.702041666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Lời giải hữu ích có hai lớp: giải thích các khả năng cơ học phù hợp, đồng thời để ngỏ những chi tiết lịch sử chưa được bằng chứng xác định.",
+      "raw_seconds": 7.968,
+      "speech_window_seconds": 7.41425,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Cách kể ấy đem lại điều cụ thể để người xem hiểu và nhà nghiên cứu kiểm tra. Sự kinh ngạc trở thành điểm khởi đầu của việc tìm hiểu.",
+      "raw_seconds": 8.352,
+      "speech_window_seconds": 7.797416666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Khảo sát và khai quật tiếp theo có thể làm rõ bức tranh. Số đo mới có thể sửa mô hình đường đi, chỉ ra quan hệ xây dựng hoặc loại bỏ giả định.",
+      "raw_seconds": 9.552,
+      "speech_window_seconds": 9.006041666666667,
+      "tempo": 0.9332685664939551,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Phục dựng tốt cần sẵn sàng thay đổi. Mục đích là sắp xếp câu hỏi và bằng chứng, rồi điều chỉnh khi hiểu biết được bổ sung.",
+      "raw_seconds": 8.304,
+      "speech_window_seconds": 7.758083333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Hãy trở lại góc nhìn đầu tiên của nền đền. Đá không nhỏ đi, nhưng bài toán quanh chúng giờ đã có cấu trúc rõ ràng hơn.",
+      "raw_seconds": 8.064,
+      "speech_window_seconds": 7.495791666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Sau bề mặt hoàn chỉnh, hãy hình dung chuỗi thao tác luôn có đỡ tải: chọn đá, chuẩn bị nền, di chuyển kiểm soát rồi căn chỉnh.",
+      "raw_seconds": 8.256,
+      "speech_window_seconds": 7.683541666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Phía sau là những kỹ năng ít khi được lưu lại đầy đủ: hiểu đá, làm gỗ, xử lý dây, đọc địa hình và phối hợp con người.",
+      "raw_seconds": 8.28,
+      "speech_window_seconds": 7.7105,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Thành tựu dựa vào tri thức tích lũy cũng như sức lực. Quy mô lớn khiến những quyết định thực tế nhỏ bé càng trở nên quan trọng.",
+      "raw_seconds": 8.016,
+      "speech_window_seconds": 7.446041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Baalbek còn là cảnh quan di sản đang được gìn giữ ở Liban. Tìm hiểu kỹ thuật cũng giúp ta quan tâm hơn tới lịch sử và cộng đồng nơi đây.",
+      "raw_seconds": 8.808,
+      "speech_window_seconds": 8.234125,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Bảo tồn cần tư liệu và sự hiểu biết vật liệu. Quan sát cẩn thận vừa giúp tìm hiểu quá khứ, vừa hỗ trợ gìn giữ những gì còn lại.",
+      "raw_seconds": 8.952,
+      "speech_window_seconds": 8.385875,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Nếu thiết kế cuộc khảo sát tiếp theo, bạn sẽ đo gì trước: tuyến đường, bề mặt tiếp xúc, kích thước đá hay khoảng không gian thao tác?",
+      "raw_seconds": 8.016,
+      "speech_window_seconds": 7.446041666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Mỗi lựa chọn dẫn đến một cách kiểm tra khác. Nhờ vậy, câu hỏi đồ sộ trở thành chuỗi câu hỏi nhỏ hơn mà ta thực sự có thể nghiên cứu.",
+      "raw_seconds": 8.952,
+      "speech_window_seconds": 8.383541666666666,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Ta chưa thể kể chắc chắn từng động tác kéo dây. Nhưng có thể hiểu rõ hơn về bằng chứng, cơ học và cách con người tổ chức công việc.",
+      "raw_seconds": 8.64,
+      "speech_window_seconds": 8.072708333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Khối đá vẫn khổng lồ. Giờ câu hỏi đã rõ hơn: chuỗi thao tác nào đưa nó từ mỏ tới đây, và dấu vết nào có thể chứng minh?",
+      "raw_seconds": 8.712,
+      "speech_window_seconds": 8.163083333333333,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1242,
+  "decoded_samples": 29808000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-vi-20m42s.mp3",
+  "flac": "voice-vi-20m42s.flac",
+  "mp3_sha256": "655ae5c5277529a3b7e164c5a72b39ae1d91b521947f694fd0751079fa5278a7",
+  "flac_sha256": "80fc085c362e55108cc75de0de119761b4e84ddecdb2c23cff5adb78cd171612"
+}

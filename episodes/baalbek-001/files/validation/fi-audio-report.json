@@ -1,0 +1,1137 @@
+{
+  "locale": "fi",
+  "voice_id": "piper:fi_FI-harri-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1242,
+  "spoken_cues": 124,
+  "closing_silence_seconds": 2,
+  "config_hash": "829895a7e6a601e40e437958dc21689b94786185400befd97e66bbe776941f11",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "Baalbekin temppelin perustuksessa on kolme valtavaa kiveä. Koko hämmästyttää. Vaikeampi kysymys kuuluu: miten ne saatiin tänne?",
+      "raw_seconds": 11.528707482993198,
+      "speech_window_seconds": 11.528707482993198,
+      "tempo": 1.1946847132635439,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "Läheisessä louhoksessa on vielä suurempia lohkareita. Kaikkia ei edes irrotettu kalliosta. Ne on erotettava temppeliin todella kuljetetuista kivistä.",
+      "raw_seconds": 10.936598639455783,
+      "speech_window_seconds": 10.936598639455783,
+      "tempo": 1.1333262838814282,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Nämä ovat erilaisia todisteita. Meidän on seurattava koko työketjua kallion seinämästä valmiiseen saumaan asti.",
+      "raw_seconds": 8.196643990929704,
+      "speech_window_seconds": 8.196643990929704,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Olemme Libanonin Bekaanlaaksossa. Baalbekia ympäröivää maisemaa ovat muovanneet viljely, asutus, liikkuminen ja vuosisatojen rakennustyöt.",
+      "raw_seconds": 10.518639455782314,
+      "speech_window_seconds": 10.518639455782314,
+      "tempo": 1.0900144513764054,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Pyhäköstä tuli Rooman ajan Heliopoliin monumentaalinen keskus. Säilyneet rakennukset kertovat monivaiheisesta historiasta, eivät yhdestä rakennushetkestä.",
+      "raw_seconds": 10.785668934240363,
+      "speech_window_seconds": 10.785668934240363,
+      "tempo": 1.117685899921281,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Jupiterin temppeli hallitsi kokonaisuutta. Suuret pylväät vetävät katseen ylös, mutta tutkimuksemme alkaa lähempää maanpintaa.",
+      "raw_seconds": 8.382403628117913,
+      "speech_window_seconds": 8.382403628117913,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "Perustuksessa olevia kolmea lohkaretta kutsutaan Trilithoniksi. Ne todistavat, että erittäin suuria kiviä todella siirrettiin ja asetettiin paikalleen.",
+      "raw_seconds": 10.80888888888889,
+      "speech_window_seconds": 10.80888888888889,
+      "tempo": 1.1200921128382268,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Julkaistuissa arvioissa yksittäinen lohkare painaa useita satoja tonneja. Arvio riippuu mitatuista ulottuvuuksista ja kalkkikiven oletetusta tiheydestä.",
+      "raw_seconds": 10.379319727891156,
+      "speech_window_seconds": 10.379319727891156,
+      "tempo": 1.075577173874731,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Tunnettu louhos sijaitsee noin kilometrin päässä pyhäköstä. Matka on kävellen lyhyt, mutta valtavalle kuormalle hyvin vaativa.",
+      "raw_seconds": 8.40562358276644,
+      "speech_window_seconds": 8.40562358276644,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Pelkkä etäisyys ei riitä. On tunnettava rinteet, maan kantavuus, käytettävissä oleva tila ja määränpään korkeus.",
+      "raw_seconds": 8.301133786848073,
+      "speech_window_seconds": 8.301133786848073,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Koko työstä ei ole säilynyt täydellistä rakennuspäiväkirjaa. Siksi jokaisessa rekonstruktiossa pitää erottaa fyysiset todisteet omista oletuksistamme.",
+      "raw_seconds": 10.50702947845805,
+      "speech_window_seconds": 10.50702947845805,
+      "tempo": 1.0888113449179326,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Tehtävämme on verrata mahdollisuuksia todellisiin rajoituksiin. Louhinta, tuenta, veto, ohjaus ja lopullinen sijoittaminen on selitettävä yhtenä kokonaisuutena.",
+      "raw_seconds": 13.003174603174603,
+      "speech_window_seconds": 13.003174603174603,
+      "tempo": 1.3474792334895962,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Aloitetaan louhoksesta, jossa kivi oli vielä osa rinnettä. Ensimmäinen tekninen päätös tehtiin jo ennen ensimmäistäkään siirtoa.",
+      "raw_seconds": 9.044172335600907,
+      "speech_window_seconds": 9.044172335600907,
+      "tempo": 0.937219931150353,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Rakentajat tarvitsivat sopivaa kiveä ja toimivan työpaikan. Kerrospinnat, halkeamat, kulkuyhteydet ja suunniteltu muoto vaikuttivat valintaan.",
+      "raw_seconds": 10.24,
+      "speech_window_seconds": 10.24,
+      "tempo": 1.061139896373057,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Suuren lohkareen piilevä heikkous saattoi tehdä valtavan työn turhaksi. Louhinta vaati siis fyysisen voiman lisäksi harkintaa ja kokemusta.",
+      "raw_seconds": 9.415691609977324,
+      "speech_window_seconds": 9.415691609977324,
+      "tempo": 0.9757193378214843,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Kaivannot ja työstetyt pinnat säilyttävät louhinnan jälkiä. Niistä voidaan tutkia, missä työntekijät seisoivat ja mihin kivipintoihin he ylsivät.",
+      "raw_seconds": 9.833650793650794,
+      "speech_window_seconds": 9.833650793650794,
+      "tempo": 1.0190311703265071,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Näitä jälkiä kannattaa katsoa läheltä. Vaikuttava valokuva voi peittää ahtaat työtilat, jotka määräsivät leikkaamisen ja irrottamisen järjestyksen.",
+      "raw_seconds": 10.031020408163265,
+      "speech_window_seconds": 10.031020408163265,
+      "tempo": 1.0394839801205455,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Raskaana olevan naisen kivenä tunnettu lohkare on kuuluisa koostaan. Se on kuitenkin edelleen louhoksessa, ei temppelin perustukseen asennettuna.",
+      "raw_seconds": 10.112290249433107,
+      "speech_window_seconds": 10.112290249433107,
+      "tempo": 1.0479057253298556,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "Vuonna kaksituhattaneljätoista paljastui toinen valtava lohkare. Sen massaksi arvioitiin noin tuhatkuusisataaviisikymmentä tonnia. Sekin on yhä louhoksessa.",
+      "raw_seconds": 10.541859410430838,
+      "speech_window_seconds": 10.541859410430838,
+      "tempo": 1.0924206642933512,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Löytö kertoo kivenlouhijoiden kunnianhimoisista suunnitelmista. Se ei todista, että arvioidun painoinen lohkare olisi kuljetettu temppeliin.",
+      "raw_seconds": 10.228390022675738,
+      "speech_window_seconds": 10.228390022675738,
+      "tempo": 1.0599367899145842,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Erottelu muuttaa kysymystä. On tutkittava sekä onnistunutta kuljetusta että keskeneräistä työtä. Keskeytynyt yritys voi paljastaa käytännön rajoja.",
+      "raw_seconds": 10.913378684807256,
+      "speech_window_seconds": 10.913378684807256,
+      "tempo": 1.1309200709644824,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Arkeologiset ryhmät ja libanonilaiset asiantuntijat ovat tutkineet louhosalueita. Mittauspiirrokset ja havainnot tarjoavat varmemman lähtökohdan kuin irrallinen verkkokuva.",
+      "raw_seconds": 11.400997732426303,
+      "speech_window_seconds": 11.400997732426303,
+      "tempo": 1.1814505422203423,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Pyhäkössä on toisenlaisia todisteita: paikallaan oleva kivimuuri, mitat, saumat ja suhteet ympäröiviin kivikerroksiin.",
+      "raw_seconds": 8.486893424036282,
+      "speech_window_seconds": 8.486893424036282,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Valmis sauma kertoo päätepisteen, ei kaikkia aiempia liikkeitä. Puuttuva matka on pääteltävä jälkien ja mekaniikan avulla.",
+      "raw_seconds": 9.346031746031747,
+      "speech_window_seconds": 9.346031746031747,
+      "tempo": 0.9685006990706473,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Baalbekin varhaisempi toiminta on oma historiallinen kysymyksensä. Paikan ikä ei automaattisesti kerro jokaisen näkyvän rakennusosan ikää.",
+      "raw_seconds": 10.158730158730158,
+      "speech_window_seconds": 10.158730158730158,
+      "tempo": 1.052718151163747,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Rakennusjärjestystä tutkitaan kaivauksilla, rakenteiden suhteilla ja materiaalitutkimuksella. Vaikuttava koko ei yksin paljasta ajoitusta eikä rakentajaa.",
+      "raw_seconds": 10.901768707482994,
+      "speech_window_seconds": 10.901768707482994,
+      "tempo": 1.1297169645060097,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Myös antiikin tekstit tarjoavat vertailuaineistoa. Vitruvius kuvasi nostokoneita ja raskaita kuljetuksia sekä heikkojen teiden aiheuttamia vaikeuksia.",
+      "raw_seconds": 10.263219954648527,
+      "speech_window_seconds": 10.263219954648527,
+      "tempo": 1.0635461092900027,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Tekstit kertovat mekaanisen tekniikan perinteestä. Ne eivät todista, että tiettyä konetta käytettiin juuri tietyn Baalbekin kiven siirtämiseen.",
+      "raw_seconds": 9.787210884353742,
+      "speech_window_seconds": 9.787210884353742,
+      "tempo": 1.0142187444926158,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Arkeologi Jean-Pierre Adam tutki vinssejä ja kuljetusjärjestelyjä. Ehdotukset ovat teknisiä malleja, eivät alkuperäisen työn säilyneitä selostuksia.",
+      "raw_seconds": 11.6215873015873,
+      "speech_window_seconds": 11.6215873015873,
+      "tempo": 1.2043095649313265,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Näiden rajojen pohjalta voimme rakentaa harkitun mallin. Ensin lohkare on muotoiltava, irrotettava, tuettava ja valmisteltava siirtoa varten.",
+      "raw_seconds": 10.08907029478458,
+      "speech_window_seconds": 10.08907029478458,
+      "tempo": 1.0454995124129098,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Kuvitellaan kallioon rajattu lohkare. Sen sivujen leikkaaminen avaa työtilaa, mutta pohja yhdistää kuorman edelleen alkuperäiseen kallioon.",
+      "raw_seconds": 10.344489795918367,
+      "speech_window_seconds": 10.344489795918367,
+      "tempo": 1.0719678544993125,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Pohjan irrottaminen muuttaa painon kannattelua. Hyödyllisen rekonstruktion on näytettävä tuenta myös tämän siirtymän aikana, ilman äkillistä romahdusta.",
+      "raw_seconds": 10.332879818594105,
+      "speech_window_seconds": 10.332879818594105,
+      "tempo": 1.0707647480408398,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Ehdotukseen voi kuulua puualustoja, kiiloja tai valmisteltuja tukipintoja. Tarkka järjestely on yhä hypoteesi, jonka on sovittava säilyneisiin jälkiin.",
+      "raw_seconds": 11.586757369614512,
+      "speech_window_seconds": 11.586757369614512,
+      "tempo": 1.200700245555908,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Ensimmäinen periaate on tämä: uusi tuki tarvitaan ennen vanhan poistamista. Jättikiven pienikin hallitsematon liike voi olla vaarallinen.",
+      "raw_seconds": 9.508571428571429,
+      "speech_window_seconds": 9.508571428571429,
+      "tempo": 0.9853441894892672,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Seuraavaksi tie. Kovempi vetäminen ei aina auta. Lisävoima ei pelasta kuljetusalustaa, jos maa sen alla painuu kuorman vuoksi.",
+      "raw_seconds": 9.229931972789116,
+      "speech_window_seconds": 9.229931972789116,
+      "tempo": 0.9564696344859187,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Paine riippuu voiman jakautumisesta pinta-alalle. Leveämpi tuki voi pienentää keskimääräistä painetta, mutta maan on silti kannettava koko kuorma.",
+      "raw_seconds": 9.903310657596371,
+      "speech_window_seconds": 9.903310657596371,
+      "tempo": 1.0262498090773442,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Tien valmistelu kuuluu selitykseen. Tasaaminen, kuivatus, tiivistäminen ja korjaaminen voivat olla yhtä tärkeitä kuin itse vetolaite.",
+      "raw_seconds": 9.508571428571429,
+      "speech_window_seconds": 9.508571428571429,
+      "tempo": 0.9853441894892672,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Seuraavaksi kitka, kosketuspintojen välinen liikevastus. Siihen vaikuttavat materiaali, kosteus, suuntaus, muodonmuutokset ja tukialustan kunto.",
+      "raw_seconds": 12.097596371882085,
+      "speech_window_seconds": 12.097596371882085,
+      "tempo": 1.2536369297287135,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Oletetaan laskuesimerkin kiven massaksi kahdeksansataa tonnia. Tämä on havainnollistavan mallin valinta, ei uusi mittaustulos.",
+      "raw_seconds": 8.753922902494331,
+      "speech_window_seconds": 8.753922902494331,
+      "tempo": 0.9071422696885317,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Vaakasuoran alustan liukumallissa paino kerrotaan kitkakertoimella. Kerroin on oletettava tai mitattava juuri kyseiselle materiaalille ja järjestelylle.",
+      "raw_seconds": 10.576689342403627,
+      "speech_window_seconds": 10.576689342403627,
+      "tempo": 1.0960299836687697,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Oletetaan kitkakertoimeksi nolla pilkku nolla viisi. Vastus on noin neljäsataa kilonewtonia, ennen muiden tekijöiden huomioimista.",
+      "raw_seconds": 9.206712018140589,
+      "speech_window_seconds": 9.206712018140589,
+      "tempo": 0.954063421568973,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Jos oletettu kerroin muutetaan arvoon nolla pilkku kaksi, vastus nelinkertaistuu. Pintojen kunto voi muuttaa haasteen mittakaavaa huomattavasti.",
+      "raw_seconds": 9.55501133786848,
+      "speech_window_seconds": 9.55501133786848,
+      "tempo": 0.9901566153231586,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Näistä luvuista ei saada antiikin työntekijämäärää. Ne osoittavat, miksi kuljetusmalli tarvitsee perusteltuja oletuksia pelkän vaikuttavan henkilöluvun sijaan.",
+      "raw_seconds": 11.087528344671203,
+      "speech_window_seconds": 11.087528344671203,
+      "tempo": 1.1489666678415753,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Reki jakaa kuormaa ja tarjoaa rakenteen vetämistä varten. Sen pohja, liitokset ja kosketus kuljetusrataan on tutkittava.",
+      "raw_seconds": 9.125442176870749,
+      "speech_window_seconds": 9.125442176870749,
+      "tempo": 0.945641676359663,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Telat ovat toinen mahdollisuus, mutta ne eivät poista vastusta. Kosketuskohtien on kestettävä paine, ja telojen on pysyttävä oikeassa suunnassa.",
+      "raw_seconds": 10.727619047619047,
+      "speech_window_seconds": 10.727619047619047,
+      "tempo": 1.1116703676289168,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Irralliset telat voivat siirtyä sivulle tai kohdata epätasaisen maan. Realistisen animaation pitää näyttää hallittu eteneminen, ei vaivatonta liukumista ilman tukea.",
+      "raw_seconds": 11.668027210884354,
+      "speech_window_seconds": 11.668027210884354,
+      "tempo": 1.209121990765218,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "On selitettävä myös tukien palauttaminen ja siirtäminen eteenpäin. Kuljetus toistaa kiertoa: valmistelu, liike, tarkastus ja uusi valmistelu.",
+      "raw_seconds": 10.437369614512471,
+      "speech_window_seconds": 10.437369614512471,
+      "tempo": 1.0815927061670954,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Liukuminen ja vieriminen vaativat molemmat riittävän leveän reitin. Tiukat mutkat ja äkilliset kaltevuuden muutokset aiheuttavat lisäongelmia.",
+      "raw_seconds": 9.7059410430839,
+      "speech_window_seconds": 9.7059410430839,
+      "tempo": 1.0057969992833056,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Mistä vetovoima saadaan? Ihmiset, eläimet, köydet ja koneet ovat mahdollisuuksia. Niiden järjestely ratkaisee, miten tehokkaasti kokonaisuus toimii.",
+      "raw_seconds": 11.284897959183674,
+      "speech_window_seconds": 11.284897959183674,
+      "tempo": 1.1694194776356137,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Köysi on osa voiman kulkureittiä. Solmut, taivutukset, hankautuminen ja kiinnityskohdat voivat heikentää muuten vakuuttavaa suunnitelmaa.",
+      "raw_seconds": 10.24,
+      "speech_window_seconds": 10.24,
+      "tempo": 1.061139896373057,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Talja pienentää tarvittavaa voimaa, mutta köyttä on vedettävä enemmän. Myös ihanteellinen neljän suhde yhteen vaihtaa voimaa matkaan.",
+      "raw_seconds": 9.984580498866213,
+      "speech_window_seconds": 9.984580498866213,
+      "tempo": 1.0346715542866542,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Todelliset väkipyörät aiheuttavat kitkaa ja kuormittavat rakenteita. Voimaetu ei poista köysien, runkojen ja perustusten tarkastamisen tarvetta.",
+      "raw_seconds": 10.054240362811791,
+      "speech_window_seconds": 10.054240362811791,
+      "tempo": 1.0418901930374913,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Pystyakselinen vinssi vetää köyttä pyörimällä. Pidemmät käyttövarret kasvattavat vääntömomenttia, ja rumpu muuttaa pyörimisen hallituksi vedoksi.",
+      "raw_seconds": 9.7059410430839,
+      "speech_window_seconds": 9.7059410430839,
+      "tempo": 1.0057969992833056,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Tällainen kone tarvitsee myös kestävän ankkuroinnin. Vastavoima on johdettava valmisteltuun perustukseen, toiseen rakenteeseen tai maahan.",
+      "raw_seconds": 9.195102040816327,
+      "speech_window_seconds": 9.195102040816327,
+      "tempo": 0.9528603151105002,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Kysymys on siis konetta laajempi. Kestääkö koko ketju työntekijästä maahan asti syntyvät voimat menettämättä hallintaa?",
+      "raw_seconds": 7.767074829931973,
+      "speech_window_seconds": 7.767074829931973,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Useat vetopisteet voivat jakaa työtä. Epätasainen veto voi kuitenkin kiertää kuormaa tai ylikuormittaa jotakin osaa.",
+      "raw_seconds": 8.02249433106576,
+      "speech_window_seconds": 8.02249433106576,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Liikkeen pitäisi edetä pienin havaittavin askelin. Jättilohkareen lähdettyä liikkeelle hallitsemattoman massan vieressä ei ole varaa improvisoida.",
+      "raw_seconds": 9.845260770975056,
+      "speech_window_seconds": 9.845260770975056,
+      "tempo": 1.02023427678498,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Pysäyttäminen on yhtä tärkeää kuin liikkeellelähtö. Pysäytyskiilat, pidättimet ja suunniteltu lepopaikka kuuluvat hallittuun raskaaseen kuljetukseen.",
+      "raw_seconds": 11.203628117913832,
+      "speech_window_seconds": 11.203628117913832,
+      "tempo": 1.1609977324263037,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Reitillä on myös korkeussuunta. Loivakin nousu lisää painovoimasta vastustavan komponentin, joka vetojärjestelmän täytyy voittaa.",
+      "raw_seconds": 9.125442176870749,
+      "speech_window_seconds": 9.125442176870749,
+      "tempo": 0.945641676359663,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Kahdeksansadan tonnin esimerkkimallissa yhden prosentin nousu lisää noin kahdeksankymmentä kilonewtonia. Se tulee kitkan lisäksi, ei sen tilalle.",
+      "raw_seconds": 9.763990929705216,
+      "speech_window_seconds": 9.763990929705216,
+      "tempo": 1.01181253157567,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Alamäki tuo toisen ongelman. Painovoima voi auttaa liikkeessä, mutta kiihtyminen on estettävä ja kuorma pidettävä suunnitellulla reitillä.",
+      "raw_seconds": 9.369251700680271,
+      "speech_window_seconds": 9.369251700680271,
+      "tempo": 0.9709069119875928,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Tasaisella kartalla sopivalta näyttävä reitti voi olla vaikea poikkileikkauksessa. Maastonmuodot voivat sulkea pois houkuttelevan rekonstruktion.",
+      "raw_seconds": 9.32281179138322,
+      "speech_window_seconds": 9.32281179138322,
+      "tempo": 0.9660944861537015,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Perustusta lähestyttäessä kuorman on saavuttava hallitusti oikealle korkeudelle. Myös ehdotetun luiskan tai väliaikaisen täytön on kestettävä paino.",
+      "raw_seconds": 10.437369614512471,
+      "speech_window_seconds": 10.437369614512471,
+      "tempo": 1.0815927061670954,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Valmista monumenttia ei tarvitse kuvitella samanlaisena koko rakentamisen ajan. Työkorkeudet ja väliaikaiset työtilat saattoivat poiketa lopullisesta ulkoasusta.",
+      "raw_seconds": 10.576689342403627,
+      "speech_window_seconds": 10.576689342403627,
+      "tempo": 1.0960299836687697,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Lopullinen kohdistus on oma työvaiheensa. Pienet siirrot, välipalat, vivut ja tarkastukset ovat mahdollisia, mutta niiden tarkka käyttö täällä on osoittamatta.",
+      "raw_seconds": 10.704399092970522,
+      "speech_window_seconds": 10.704399092970522,
+      "tempo": 1.1092641547119713,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Avain on jatkuvuus. Kiven on pysyttävä tuettuna louhokselta saumaan asti, ilman selittämättömiä hyppyjä näyttävien kohtausten välillä.",
+      "raw_seconds": 9.404081632653062,
+      "speech_window_seconds": 9.404081632653062,
+      "tempo": 0.9745162313630116,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Koetellaan nyt mallia. Pöydällä toimiva menetelmä voi epäonnistua, kun puu, köydet ja maa joutuvat paljon suuremman kuorman alle.",
+      "raw_seconds": 9.195102040816327,
+      "speech_window_seconds": 9.195102040816327,
+      "tempo": 0.9528603151105002,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Mittakaava muuttaa kosketuspaineita, taipumista ja materiaalien käyttäytymistä. Kaikkien mittojen suurentaminen ei säilytä pienen kokeen olosuhteita.",
+      "raw_seconds": 11.122358276643991,
+      "speech_window_seconds": 11.122358276643991,
+      "tempo": 1.1525759872169938,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Myös puun valinta ratkaisee. Tuen on kestettävä paikallista puristumista ja taipumista sekä toimittava kuljetusalustan muiden osien kanssa.",
+      "raw_seconds": 9.346031746031747,
+      "speech_window_seconds": 9.346031746031747,
+      "tempo": 0.9685006990706473,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Sama koskee tietä. Yhden kohdan kova alusta ei korvaa toisen kuormakohdan alla olevaa heikkoa maata.",
+      "raw_seconds": 7.151746031746032,
+      "speech_window_seconds": 7.151746031746032,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Kuivatus on mekaaninen kysymys, jos sade muuttaa maan ominaisuuksia. Valmisteltua reittiä ei voi rakentaa kerran ja sitten unohtaa.",
+      "raw_seconds": 8.428843537414966,
+      "speech_window_seconds": 8.428843537414966,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Kunnossapito vaatii aikaa ja tarvikkeita. Malliin kuuluvat tauot tukien tarkastamiseen, laitteiden asetteluun ja vaurioiden korjaamiseen ennen jatkamista.",
+      "raw_seconds": 10.913378684807256,
+      "speech_window_seconds": 10.913378684807256,
+      "tempo": 1.1309200709644824,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Työvoimakin on järjestelmä. Louhinta, puutyöt, köydet, mittaukset, vetäminen ja huolto vaativat erilaisia taitoja ja vastuita.",
+      "raw_seconds": 10.216780045351474,
+      "speech_window_seconds": 10.216780045351474,
+      "tempo": 1.0587336834561112,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Valokuva ei kerro työntekijöiden asemasta tai sopimuksista. Pelkistä kivistä ei pidä keksiä kokonaista työnteon historiaa.",
+      "raw_seconds": 8.614603174603175,
+      "speech_window_seconds": 8.614603174603175,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Järjestämisen tarve on silti selvä. Materiaalien, ruoan, veden, työkalujen ja ohjeiden piti saavuttaa oikeat ihmiset oikeaan aikaan.",
+      "raw_seconds": 10.80888888888889,
+      "speech_window_seconds": 10.80888888888889,
+      "tempo": 1.1200921128382268,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Merkit ovat tärkeitä, kun ihmiset työskentelevät kuuloetäisyyden ulkopuolella. Yhteinen ajoitus korostuu, kun kuorma on pysäytettävä nopeasti.",
+      "raw_seconds": 10.576689342403627,
+      "speech_window_seconds": 10.576689342403627,
+      "tempo": 1.0960299836687697,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Reittiin sijoitettu työ herättää suunnittelukysymyksen. Palvelivatko valmistelut vain yhtä kiveä vai kokonaista kuljetusten sarjaa?",
+      "raw_seconds": 8.335963718820862,
+      "speech_window_seconds": 8.335963718820862,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Toistuvat kuljetukset voivat perustella suuren valmistelutyön. Todellinen aikataulu, ryhmien määrä ja kuljetusjärjestys pitää kuitenkin ratkaista todisteilla, ei animaatiolla.",
+      "raw_seconds": 12.294965986394558,
+      "speech_window_seconds": 12.294965986394558,
+      "tempo": 1.2740897395227522,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Viimeinen sauma tuo omat vaikeutensa. Lohkareen on saavuttava oikeassa suunnassa suhteessa ympäröivään muuraukseen ja säätötilaan.",
+      "raw_seconds": 8.742312925170069,
+      "speech_window_seconds": 8.742312925170069,
+      "tempo": 0.9059391632300589,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Valtavan kuorman kääntäminen ahtaassa paikassa ei ole pieni viimeistelyvaihe. Reittiehdotuksen pitää huomioida ongelma jo ennen kuljetusta.",
+      "raw_seconds": 9.822040816326531,
+      "speech_window_seconds": 9.822040816326531,
+      "tempo": 1.0178280638680344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Antiikin selitykseen ei myöskään pidä ujuttaa modernia nosturia. Tutun näköinen nostokuva voi piilottaa juuri sen kysymyksen, johon etsimme vastausta.",
+      "raw_seconds": 11.795736961451247,
+      "speech_window_seconds": 11.795736961451247,
+      "tempo": 1.2223561618084193,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Antiikin koneista on tietoa, mutta niiden kapasiteetti ja järjestelyt on tutkittava. Tunnetun laitteen nimi ei todista sen pystyneen mihin tahansa.",
+      "raw_seconds": 10.170340136054422,
+      "speech_window_seconds": 10.170340136054422,
+      "tempo": 1.0539212576222199,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "Louhoksen suurimmat jäljelle jääneet kivet ovat erityisen hyödyllisiä. Keskeneräisyys muistuttaa, että suunnitelma, irrotus ja onnistunut asennus ovat eri saavutuksia.",
+      "raw_seconds": 11.482267573696145,
+      "speech_window_seconds": 11.482267573696145,
+      "tempo": 1.1898722874296523,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Kiven vika, suunnitelman muutos tai käytännön vaikeus saattoi keskeyttää työn. Yhden syyn valitseminen vaatii täsmällistä näyttöä.",
+      "raw_seconds": 9.079002267573696,
+      "speech_window_seconds": 9.079002267573696,
+      "tempo": 0.9408292505257715,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Säilynyt lohkare ei kerro hylkäämisen syytä sanoin. Sen tila on suhteutettava ympäröivään louhokseen ja rakentamisen laajempaan järjestykseen.",
+      "raw_seconds": 9.496961451247165,
+      "speech_window_seconds": 9.496961451247165,
+      "tempo": 0.9841410830307943,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Kuljetuspintakin on tutkittava. Olivatko tuet kalliolla, valmistellulla täytöllä, puulla vai niiden yhdistelmällä? Valinta muuttaa laskelmia.",
+      "raw_seconds": 10.576689342403627,
+      "speech_window_seconds": 10.576689342403627,
+      "tempo": 1.0960299836687697,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Nykyaikaiset kokeet voivat selvittää yksittäisiä vaiheita, etenkin kitkaa ja hallintaa. Arvo kasvaa, kun materiaalit, mittakaava ja rajoitukset kerrotaan selvästi.",
+      "raw_seconds": 12.712925170068027,
+      "speech_window_seconds": 12.712925170068027,
+      "tempo": 1.3174015720277747,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Hyödyllisen kokeen ei tarvitse toistaa kaikkea. Sen pitää vastata määriteltyyn kysymykseen väittämättä enempää kuin koejärjestely osoittaa.",
+      "raw_seconds": 9.404081632653062,
+      "speech_window_seconds": 9.404081632653062,
+      "tempo": 0.9745162313630116,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Arkeologia ja mekaniikka täydentävät toisiaan. Kohde rajaa mallia, ja malli ehdottaa, mitä jälkiä seuraavaksi kannattaisi tutkia.",
+      "raw_seconds": 10.518639455782314,
+      "speech_window_seconds": 10.518639455782314,
+      "tempo": 1.0900144513764054,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Reittiehdotus pitää tarkistaa todellisesta maastosta. Ankkurikohta on tutkittava asiayhteydessään. Siisti piirros ei korvaa kumpaakaan tutkimusta.",
+      "raw_seconds": 10.704399092970522,
+      "speech_window_seconds": 10.704399092970522,
+      "tempo": 1.1092641547119713,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Koneiden puuttuminen ei itsessään yllätä. Puu ja kuidut säilyvät kalkkikiveä huonommin. Niiden puuttuminen ei kuitenkaan todista mitä tahansa rekonstruktiota.",
+      "raw_seconds": 10.739229024943311,
+      "speech_window_seconds": 10.739229024943311,
+      "tempo": 1.1128734740873898,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Hyvä selitys esittää testattavia ehtoja: tarvittavan tilan, todennäköiset kosketuspinnat, tukien vaatimukset ja työvaiheiden järjestyksen.",
+      "raw_seconds": 10.716009070294785,
+      "speech_window_seconds": 10.716009070294785,
+      "tempo": 1.110467261170444,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Tässä mysteeri muuttuu hyödylliseksi. Mahdottomuuden toistamisen sijaan voimme kysyä, mikä täsmällinen vaihe on vielä selittämättä.",
+      "raw_seconds": 8.440453514739229,
+      "speech_window_seconds": 8.440453514739229,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Heikko kohta voi olla tie tai köysijärjestely. Ehkä lopullinen asennus on yksinkertaistettu pidemmälle kuin todisteet sallivat.",
+      "raw_seconds": 8.347573696145124,
+      "speech_window_seconds": 8.347573696145124,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Kysymykset eivät vähennä saavutusta. Ne tuovat meidät lähemmäs niitä käytännön päätöksiä, jotka rakentajien piti ratkaista vaihe vaiheelta.",
+      "raw_seconds": 9.160272108843538,
+      "speech_window_seconds": 9.160272108843538,
+      "tempo": 0.9492509957350815,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Voimme nyt verrata päävaihtoehtoja tasapuolisemmin. Jokaisen pitää kantaa sama kuorma, seurata uskottavaa reittiä ja saavuttaa sama loppupaikka.",
+      "raw_seconds": 9.868480725623582,
+      "speech_window_seconds": 9.868480725623582,
+      "tempo": 1.0226404897019257,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Ensin liukuminen valmistellulla radalla. Se tarjoaa laajan tuen ja suoran vedon, mutta edellyttää kitkan hallintaa ja radan kunnossapitoa.",
+      "raw_seconds": 9.218321995464853,
+      "speech_window_seconds": 9.218321995464853,
+      "tempo": 0.9552665280274459,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Kuormaa jakavan rakenteen alla olevat telat voivat pienentää vastusta. Tarvitaan lujuutta, suuntausta, telojen palautusta ja kantavaa maata.",
+      "raw_seconds": 10.135510204081633,
+      "speech_window_seconds": 10.135510204081633,
+      "tempo": 1.0503119382468014,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Yhdistelmä voi käyttää eri vaiheissa eri menetelmiä. Se auttaa vain, jos myös menetelmien väliset siirtymät selitetään.",
+      "raw_seconds": 8.452063492063493,
+      "speech_window_seconds": 8.452063492063493,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Vinssit ja taljat selittävät, miten vetovoima tuotetaan. Ne voivat auttaa kuljetusta, mutta eivät selitä, mikä kantaa kiven painon.",
+      "raw_seconds": 8.289523809523809,
+      "speech_window_seconds": 8.289523809523809,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Vakuuttava rekonstruktio saattaa yhdistää tavallisia periaatteita poikkeuksellisessa koossa: painetta, kitkaa, vipuvaikutusta, geometriaa ja järjestämistä.",
+      "raw_seconds": 11.842176870748299,
+      "speech_window_seconds": 11.842176870748299,
+      "tempo": 1.2271685876423106,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Tavalliset periaatteet eivät tee työstä helppoa. Kaikkien osien on toimittava yhdessä materiaalien rajojen ja työryhmien yhteistyön ehdoilla.",
+      "raw_seconds": 9.566621315192744,
+      "speech_window_seconds": 9.566621315192744,
+      "tempo": 0.9913597217816315,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Menetelmä voi olla fysikaalisesti mahdollinen ilman historiallista näyttöä sen käytöstä. Ero on tärkeä, kun kuvaamme tuntematonta osaa menneisyydestä.",
+      "raw_seconds": 10.553469387755102,
+      "speech_window_seconds": 10.553469387755102,
+      "tempo": 1.0936237707518242,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Todellisen järjestelyn tunnistaminen vaatii vahvempia yhteyksiä jälkien, maaston, materiaalien, ajoituksen ja työketjun välille. Onnistuneelta näyttävä animaatio ei riitä.",
+      "raw_seconds": 13.154104308390023,
+      "speech_window_seconds": 13.154104308390023,
+      "tempo": 1.3631196174497433,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Paikallaan oleva Trilithon näyttää varman lopputuloksen. Louhos näyttää valmistelua ja keskeneräisyyttä. Kumpikaan ei yksin vastaa kaikkiin kysymyksiin.",
+      "raw_seconds": 11.133968253968254,
+      "speech_window_seconds": 11.133968253968254,
+      "tempo": 1.1537790936754666,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "Tuhannenkuudensadanviidenkymmenen tonnin arvio koskee louhoksen suurempaa löytöä. Sitä ei pidä muuttaa jokaisen pyhäkköön kuljetetun kiven massaksi.",
+      "raw_seconds": 10.170340136054422,
+      "speech_window_seconds": 10.170340136054422,
+      "tempo": 1.0539212576222199,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Arvioitu massa ei ole suora punnitus. Mitat, peitossa olevat pinnat ja oletettu tiheys selittävät, miksi asialliset julkaisut voivat esittää eri arvioita.",
+      "raw_seconds": 10.158730158730158,
+      "speech_window_seconds": 10.158730158730158,
+      "tempo": 1.052718151163747,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Epävarmuus pitää säilyttää myös kertomuksessa. Tarkka luku voi johtaa harhaan, jos näyttö tukee vain likimääräistä vaihteluväliä.",
+      "raw_seconds": 8.730702947845804,
+      "speech_window_seconds": 8.730702947845804,
+      "tempo": 0.904736056771586,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Mitä voimme sanoa varmasti? Kivet kuuluvat todelliseen louhinnan ja monumentaalisen rakentamisen maisemaan. Niiden tutkiminen palkitsee kärsivällisen havainnoinnin.",
+      "raw_seconds": 10.924988662131518,
+      "speech_window_seconds": 10.924988662131518,
+      "tempo": 1.1321231774229552,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "Avoinna ovat täsmällisemmät kysymykset: tarkka kuljetusjärjestely, yksityiskohtainen reitti ja kunkin jättilohkareen paikalleen tuonut työjärjestys.",
+      "raw_seconds": 10.727619047619047,
+      "speech_window_seconds": 10.727619047619047,
+      "tempo": 1.1116703676289168,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Hyödyllisessä vastauksessa on kaksi tasoa. Mekaaniset mahdollisuudet voidaan selittää, mutta todistamattomat historialliset yksityiskohdat jätetään avoimiksi.",
+      "raw_seconds": 9.926530612244898,
+      "speech_window_seconds": 9.926530612244898,
+      "tempo": 1.02865602199429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Tällainen kertomus antaa katsojalle ymmärrettävää ja tutkijalle testattavaa. Hämmästys voi siten johtaa uusiin, täsmällisiin tutkimuskysymyksiin.",
+      "raw_seconds": 10.298049886621316,
+      "speech_window_seconds": 10.298049886621316,
+      "tempo": 1.0671554286654212,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Tulevat mittaukset ja kaivaukset voivat tarkentaa kuvaa. Uudet mitat voivat muuttaa reittiä, paljastaa rakennussuhteen tai sulkea oletuksen pois.",
+      "raw_seconds": 9.822040816326531,
+      "speech_window_seconds": 9.822040816326531,
+      "tempo": 1.0178280638680344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Hyvän rekonstruktion pitää olla valmis muuttumaan. Sen tarkoitus on järjestää kysymyksiä ja todisteita, ei suojella näyttävää kuvaa korjauksilta.",
+      "raw_seconds": 10.019410430839002,
+      "speech_window_seconds": 10.019410430839002,
+      "tempo": 1.0382808736620728,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Palataan perustuksen ensimmäiseen näkymään. Kivet eivät ole pienentyneet, mutta niitä ympäröivä ongelma on saanut selvemmän rakenteen.",
+      "raw_seconds": 8.765532879818593,
+      "speech_window_seconds": 8.765532879818593,
+      "tempo": 0.9083453761470045,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Valmiin pinnan takana voi kuvitella tuettujen vaiheiden ketjun: kiven valinta, valmisteltu alusta, hallittu matka ja tarkka loppukohdistus.",
+      "raw_seconds": 9.97297052154195,
+      "speech_window_seconds": 9.97297052154195,
+      "tempo": 1.0334684478281813,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Taustalla on huonosti säilyneitä taitoja: kiven arviointi, puutyö, köysien hallinta, maaston lukeminen ja toisten ihmisten työn yhteensovittaminen.",
+      "raw_seconds": 11.493877551020407,
+      "speech_window_seconds": 11.493877551020407,
+      "tempo": 1.1910753938881251,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Saavutus perustuu sekä voimaan että kertyneeseen tietoon. Suuri mittakaava tekee pienistä käytännön päätöksistä entistä tärkeämpiä.",
+      "raw_seconds": 9.09061224489796,
+      "speech_window_seconds": 9.09061224489796,
+      "tempo": 0.9420323569842445,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Baalbek on myös elävää kulttuuriperintöä Libanonissa. Sen tekniikan tutkimisen pitäisi lisätä kiinnostusta historiaan, yhteisöihin ja jatkuvaan hoitoon.",
+      "raw_seconds": 11.110748299319727,
+      "speech_window_seconds": 11.110748299319727,
+      "tempo": 1.1513728807585208,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Suojelu tarvitsee dokumentointia ja materiaalien tuntemusta. Menneisyyttä selittävä tarkka havainnointi auttaa myös säilyttämään jäljellä olevan tuleville sukupolville.",
+      "raw_seconds": 11.296507936507936,
+      "speech_window_seconds": 11.296507936507936,
+      "tempo": 1.1706225840940867,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Jos suunnittelisit seuraavan tutkimuksen, mitä mittaisit ensin: reittiä, kosketuspintoja, kiven ulottuvuuksia vai mahdollista työtilaa?",
+      "raw_seconds": 10.031020408163265,
+      "speech_window_seconds": 10.031020408163265,
+      "tempo": 1.0394839801205455,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Jokainen valinta johtaa erilaiseen kokeeseen. Näin valtava kysymys muuttuu pienempien, todella tutkittavien kysymysten sarjaksi.",
+      "raw_seconds": 9.02095238095238,
+      "speech_window_seconds": 9.02095238095238,
+      "tempo": 0.9348137182334072,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Emme vielä voi kuvata jokaista köyden liikettä varmasti. Voimme silti ymmärtää selkeämmin todisteita, mekaniikkaa ja ihmisten järjestäytymistä.",
+      "raw_seconds": 10.112290249433107,
+      "speech_window_seconds": 10.112290249433107,
+      "tempo": 1.0479057253298556,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Kivi on edelleen valtava. Mikä tuettujen vaiheiden ketju toi sen louhokselta tähän? Ja mikä jälki todistaisi juuri sen tapahtuneen?",
+      "raw_seconds": 8.55655328798186,
+      "speech_window_seconds": 8.55655328798186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1242,
+  "decoded_samples": 29808000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-fi-20m42s.mp3",
+  "flac": "voice-fi-20m42s.flac",
+  "mp3_sha256": "77872f23aa019aa44966568caea09434eef07cd5cf9ae2ad8c04867c700606ad",
+  "flac_sha256": "69d7d124abd66438009423486c02f250ba24e0b44d78bb66cd80585e795b24b5"
+}

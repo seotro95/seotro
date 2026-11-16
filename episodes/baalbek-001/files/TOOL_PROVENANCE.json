@@ -1,0 +1,188 @@
+{
+  "tool_release": "melo-viet-studio-1.3.1-txt-srt-41595029816",
+  "tool_source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "execution": "Verified original backend source on Linux using cached pinned models; not running the Windows EXE",
+  "backend_git_blobs": {
+    "fast_backend.py": "7e7e9def1e389b040448fcc9def55ed20e85f94d",
+    "multilingual_backend.py": "d634fb0289287e9d94904f290855868b4274a3fb",
+    "online_backend.py": "8df7c8375d9693bed644167290a3bb86cca705c0"
+  },
+  "voices": [
+    {
+      "language": "en",
+      "voice_id": "en-US-AndrewNeural",
+      "gender": "Male",
+      "verified_components": [
+        "live-catalogue-cache Male"
+      ]
+    },
+    {
+      "language": "vi",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "gender": "Male",
+      "verified_components": [
+        "live-catalogue-cache Male"
+      ]
+    },
+    {
+      "language": "es",
+      "voice_id": "piper:es_ES-davefx-medium:0",
+      "gender": "Male",
+      "verified_components": [
+        "model.onnx",
+        "config.json",
+        "MODEL_CARD"
+      ]
+    },
+    {
+      "language": "fr",
+      "voice_id": "piper:fr_FR-tom-medium:0",
+      "gender": "Male",
+      "verified_components": [
+        "model.onnx",
+        "config.json",
+        "MODEL_CARD"
+      ]
+    },
+    {
+      "language": "ja",
+      "voice_id": "supertonic:5",
+      "gender": "Male",
+      "verified_components": [
+        "vector_estimator.int8.onnx",
+        "LICENSE",
+        "tts.json",
+        "README.md",
+        "text_encoder.int8.onnx",
+        "voice.bin",
+        "vocoder.int8.onnx",
+        "unicode_indexer.bin",
+        "duration_predictor.int8.onnx"
+      ]
+    },
+    {
+      "language": "ko",
+      "voice_id": "supertonic:5",
+      "gender": "Male",
+      "verified_components": [
+        "vector_estimator.int8.onnx",
+        "LICENSE",
+        "tts.json",
+        "README.md",
+        "text_encoder.int8.onnx",
+        "voice.bin",
+        "vocoder.int8.onnx",
+        "unicode_indexer.bin",
+        "duration_predictor.int8.onnx"
+      ]
+    },
+    {
+      "language": "de",
+      "voice_id": "piper:de_DE-thorsten-medium:0",
+      "gender": "Male",
+      "verified_components": [
+        "model.onnx",
+        "config.json",
+        "MODEL_CARD"
+      ]
+    },
+    {
+      "language": "it",
+      "voice_id": "supertonic:5",
+      "gender": "Male",
+      "verified_components": [
+        "vector_estimator.int8.onnx",
+        "LICENSE",
+        "tts.json",
+        "README.md",
+        "text_encoder.int8.onnx",
+        "voice.bin",
+        "vocoder.int8.onnx",
+        "unicode_indexer.bin",
+        "duration_predictor.int8.onnx"
+      ]
+    },
+    {
+      "language": "pt",
+      "voice_id": "piper:pt_PT-tugao-medium:0",
+      "gender": "Male",
+      "verified_components": [
+        "model.onnx",
+        "config.json",
+        "MODEL_CARD"
+      ]
+    },
+    {
+      "language": "nl",
+      "voice_id": "piper:nl_NL-ronnie-medium:0",
+      "gender": "Male",
+      "verified_components": [
+        "model.onnx",
+        "config.json",
+        "MODEL_CARD"
+      ]
+    },
+    {
+      "language": "pl",
+      "voice_id": "piper:pl_PL-mc_speech-medium:0",
+      "gender": "Male",
+      "verified_components": [
+        "model.onnx",
+        "config.json",
+        "MODEL_CARD"
+      ]
+    },
+    {
+      "language": "sv",
+      "voice_id": "piper:sv_SE-nst-medium:0",
+      "gender": "Male",
+      "verified_components": [
+        "model.onnx",
+        "config.json",
+        "MODEL_CARD"
+      ]
+    },
+    {
+      "language": "da",
+      "voice_id": "piper:da_DK-talesyntese-medium:0",
+      "gender": "Male",
+      "verified_components": [
+        "model.onnx",
+        "config.json",
+        "MODEL_CARD"
+      ]
+    },
+    {
+      "language": "fi",
+      "voice_id": "piper:fi_FI-harri-medium:0",
+      "gender": "Male",
+      "verified_components": [
+        "model.onnx",
+        "config.json",
+        "MODEL_CARD"
+      ]
+    },
+    {
+      "language": "no",
+      "voice_id": "piper:no_NO-talesyntese-medium:0",
+      "gender": "Male",
+      "verified_components": [
+        "model.onnx",
+        "config.json",
+        "MODEL_CARD"
+      ]
+    },
+    {
+      "language": "cs",
+      "voice_id": "piper:cs_CZ-jirka-medium:0",
+      "gender": "Male",
+      "verified_components": [
+        "model.onnx",
+        "config.json",
+        "MODEL_CARD"
+      ]
+    }
+  ],
+  "count": 16,
+  "all_male": true
+}

@@ -1,0 +1,1137 @@
+{
+  "locale": "ko",
+  "voice_id": "supertonic:5",
+  "engine": "Supertonic 3 CPU INT8",
+  "target_seconds": 1242,
+  "spoken_cues": 124,
+  "closing_silence_seconds": 2,
+  "config_hash": "22249d82f9f955f5e89391eade3e7b4f39833459e27e46fed184c066bf1c0e13",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "바알베크의 신전 기단에는 거대한 돌 세 개가 놓여 있습니다. 크기도 놀랍지만, 더 어려운 질문은 이것입니다. 어떻게 여기까지 왔을까요?",
+      "raw_seconds": 11.308458049886621,
+      "speech_window_seconds": 11.308458049886621,
+      "tempo": 1.171860937812085,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "가까운 채석장에는 더 큰 돌이 남아 있습니다. 암반에서 완전히 분리되지 않은 돌도 있습니다. 신전에 옮겨진 돌과는 구별해야 합니다.",
+      "raw_seconds": 11.028548752834467,
+      "speech_window_seconds": 11.028548752834467,
+      "tempo": 1.1428547930398412,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "이 돌들은 서로 다른 증거입니다. 답을 찾으려면, 바위에서 돌을 떼어 내는 순간부터 마지막 이음새까지, 작업 전체를 따라가야 합니다.",
+      "raw_seconds": 10.772267573696146,
+      "speech_window_seconds": 10.772267573696146,
+      "tempo": 1.1162971578959737,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "무대는 레바논의 베카 계곡입니다. 바알베크에는 농업과 정착, 사람들의 왕래, 그리고 여러 시대의 건설 역사가 겹쳐 있습니다.",
+      "raw_seconds": 10.780362811791383,
+      "speech_window_seconds": 10.780362811791383,
+      "tempo": 1.1171360426726822,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "이 성역은 로마 시대 헬리오폴리스의 기념비적인 중심지가 되었습니다. 남아 있는 건물들은 한순간에 완성된 결과가 아닙니다.",
+      "raw_seconds": 10.277868480725624,
+      "speech_window_seconds": 10.277868480725624,
+      "tempo": 1.065064091266904,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "그 중심에는 주피터 신전이 있었습니다. 거대한 기둥은 시선을 위로 끌지만, 오늘의 탐구는 그 아래, 지면 가까이에서 시작합니다.",
+      "raw_seconds": 10.25283446712018,
+      "speech_window_seconds": 10.25283446712018,
+      "tempo": 1.0624698929658218,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "기단을 따라 놓인 세 돌을 트릴리톤이라고 부릅니다. 아주 큰 돌이 실제로 운반되어, 이곳에 설치되었다는 분명한 증거입니다.",
+      "raw_seconds": 9.800816326530612,
+      "speech_window_seconds": 9.800816326530612,
+      "tempo": 1.0156286348736385,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "각 돌의 무게는 수백 톤으로 추정됩니다. 정확한 추정치는 측정한 크기와 석회암의 밀도를 어떻게 잡느냐에 따라 달라집니다.",
+      "raw_seconds": 10.08235827664399,
+      "speech_window_seconds": 10.08235827664399,
+      "tempo": 1.0448039664916051,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "유명한 채석장은 성역에서 약 일 킬로미터 떨어져 있습니다. 걸어서는 가까워도, 거대한 하중을 옮기기에는 만만치 않은 거리입니다.",
+      "raw_seconds": 10.757210884353741,
+      "speech_window_seconds": 10.757210884353741,
+      "tempo": 1.1147368792076415,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "거리만으로는 부족합니다. 경사와 지반의 강도, 작업 공간, 그리고 돌이 도착해야 할 높이까지 알아야 합니다.",
+      "raw_seconds": 9.051451247165533,
+      "speech_window_seconds": 9.051451247165533,
+      "tempo": 0.9379742225042003,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "이 작업의 전 과정을 적은 건설 기록은 남아 있지 않습니다. 따라서 복원할 때는 실제 증거와 우리가 더한 가정을 구별해야 합니다.",
+      "raw_seconds": 10.503219954648525,
+      "speech_window_seconds": 10.503219954648525,
+      "tempo": 1.088416575611246,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "목표는 현실의 제약에 맞는 방법을 검토하는 것입니다. 채석과 지지, 견인과 방향 조절, 최종 설치까지 함께 설명해야 합니다.",
+      "raw_seconds": 10.68485260770975,
+      "speech_window_seconds": 10.68485260770975,
+      "tempo": 1.1072386121979017,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "먼저 채석장으로 가 보겠습니다. 돌이 아직 언덕의 일부였을 때, 첫 번째 기술적 판단은 이미 시작되었습니다.",
+      "raw_seconds": 9.085895691609977,
+      "speech_window_seconds": 9.085895691609977,
+      "tempo": 0.9415435949854898,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "큰 바위만 찾으면 되는 것은 아닙니다. 암석의 층과 균열, 접근 통로, 만들려는 모양까지 모두 중요했습니다.",
+      "raw_seconds": 9.035396825396825,
+      "speech_window_seconds": 9.035396825396825,
+      "tempo": 0.9363105518545932,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "거대한 돌에 숨은 약점이 있다면, 많은 노력이 낭비될 수 있습니다. 채석에는 힘뿐 아니라 돌을 판단하는 경험도 필요했습니다.",
+      "raw_seconds": 10.087891156462584,
+      "speech_window_seconds": 10.087891156462584,
+      "tempo": 1.0453773219132212,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "남아 있는 도랑과 가공된 표면은 채석의 단서를 담고 있습니다. 작업자가 어디에 서서, 어느 면까지 손댈 수 있었는지 살펴볼 수 있습니다.",
+      "raw_seconds": 10.917120181405895,
+      "speech_window_seconds": 10.917120181405895,
+      "tempo": 1.1313077908192637,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "이 흔적을 가까이 보아야 합니다. 웅장한 사진에서는, 절단과 분리의 순서를 결정했던 좁은 작업 공간이 가려질 수 있습니다.",
+      "raw_seconds": 10.117845804988661,
+      "speech_window_seconds": 10.117845804988661,
+      "tempo": 1.048481430568773,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "임신한 여인의 돌로 알려진 거석도 크기로 유명합니다. 하지만 지금도 채석장에 있으며, 신전 기단에 설치된 돌은 아닙니다.",
+      "raw_seconds": 9.794761904761904,
+      "speech_window_seconds": 9.794761904761904,
+      "tempo": 1.0150012336540832,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "이천십사 년, 근처에서 또 다른 거석이 발굴되었습니다. 무게는 약 천육백오십 톤으로 추정되며, 이 돌도 채석장에 남아 있습니다.",
+      "raw_seconds": 10.42437641723356,
+      "speech_window_seconds": 10.42437641723356,
+      "tempo": 1.0802462608532186,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "이 발견은 당시 채석 계획의 규모를 보여 줍니다. 그러나 그 무게의 돌이 신전까지 운반되었다는 증거는 아닙니다.",
+      "raw_seconds": 9.196303854875284,
+      "speech_window_seconds": 9.196303854875284,
+      "tempo": 0.9529848554274906,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "이 구별은 질문을 바꿉니다. 성공한 운반과 끝내지 못한 작업을 함께 연구해야 합니다. 중단된 시도가 현실의 한계를 보여 줄 수 있기 때문입니다.",
+      "raw_seconds": 12.304444444444444,
+      "speech_window_seconds": 12.304444444444444,
+      "tempo": 1.2750719631548646,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "레바논 전문가들과 국제 고고학 연구진은 이 채석장을 조사해 왔습니다. 측량도와 현장 기록은 인터넷 사진 한 장보다 확실한 출발점입니다.",
+      "raw_seconds": 11.45170068027211,
+      "speech_window_seconds": 11.45170068027211,
+      "tempo": 1.1867047337069543,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "성역에서는 다른 증거를 봅니다. 제자리에 놓인 돌의 크기와 이음새, 주변 석조 구조물과의 관계를 조사할 수 있습니다.",
+      "raw_seconds": 9.811950113378686,
+      "speech_window_seconds": 9.811950113378686,
+      "tempo": 1.0167823951687756,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "완성된 이음새는 목적지를 보여 주지만, 그전의 모든 움직임을 기록하지는 않습니다. 사라진 여정은 증거와 역학으로 재구성해야 합니다.",
+      "raw_seconds": 11.109047619047619,
+      "speech_window_seconds": 11.109047619047619,
+      "tempo": 1.1511966444608932,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "바알베크의 더 오래된 역사는 별도의 문제입니다. 장소의 기원이 오래되었다고, 눈앞의 모든 구조물이 같은 시대에 만들어진 것은 아닙니다.",
+      "raw_seconds": 11.39748299319728,
+      "speech_window_seconds": 11.39748299319728,
+      "tempo": 1.1810863205385782,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "연구자들은 발굴과 건축적 관계, 재료 분석으로 건설 순서를 조사합니다. 크기만으로는 연대나 건설자를 알아낼 수 없습니다.",
+      "raw_seconds": 10.646734693877551,
+      "speech_window_seconds": 10.646734693877551,
+      "tempo": 1.1032885693137358,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "고대 문헌도 비교 자료가 됩니다. 비트루비우스는 인양 장치와 무거운 짐의 운반, 약한 도로에서 생기는 어려움을 기록했습니다.",
+      "raw_seconds": 10.033061224489796,
+      "speech_window_seconds": 10.033061224489796,
+      "tempo": 1.039695463677699,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "이 기록은 고대의 기계 기술을 보여 줍니다. 하지만 특정 장치가 바알베크의 특정 돌에 사용되었다는 뜻은 아닙니다.",
+      "raw_seconds": 9.556371882086168,
+      "speech_window_seconds": 9.556371882086168,
+      "tempo": 0.9902976043612609,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "고고학자 장피에르 아담은 윈치와 운반 장치를 연구했습니다. 그의 제안은 공학적 복원안이며, 실제 작업을 기록한 자료는 아닙니다.",
+      "raw_seconds": 10.74795918367347,
+      "speech_window_seconds": 10.74795918367347,
+      "tempo": 1.113778153748546,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "증거의 한계를 확인했으니, 신중하게 모형을 세워 봅시다. 먼저 돌을 다듬고, 분리하고, 받친 다음, 이동할 준비를 해야 합니다.",
+      "raw_seconds": 10.155102040816326,
+      "speech_window_seconds": 10.155102040816326,
+      "tempo": 1.0523421803954742,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "암반에 원하는 돌의 윤곽을 정했다고 상상해 보세요. 옆면을 깎으면 통로는 생기지만, 바닥은 여전히 원래 암반과 연결되어 있습니다.",
+      "raw_seconds": 10.939659863945579,
+      "speech_window_seconds": 10.939659863945579,
+      "tempo": 1.1336435092171584,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "바닥을 분리하면 무게를 받는 위치가 바뀝니다. 갑자기 무너지지 않도록, 그 전환 과정에서 무엇이 돌을 받치는지 설명해야 합니다.",
+      "raw_seconds": 10.337959183673469,
+      "speech_window_seconds": 10.337959183673469,
+      "tempo": 1.0712911071164217,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "목재 받침이나 쐐기, 준비된 바닥을 사용할 수 있습니다. 다만 이곳에서의 정확한 배치는, 남은 증거와 맞아야 하는 가설입니다.",
+      "raw_seconds": 10.379773242630385,
+      "speech_window_seconds": 10.379773242630385,
+      "tempo": 1.0756241702207652,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "첫 번째 원칙은 분명합니다. 기존 받침을 없애기 전에, 새 받침을 마련해야 합니다. 거석의 작은 움직임도 통제를 잃으면 위험합니다.",
+      "raw_seconds": 11.414081632653062,
+      "speech_window_seconds": 11.414081632653062,
+      "tempo": 1.182806386803426,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "다음은 길입니다. 더 세게 당기면 된다고 생각하기 쉽습니다. 하지만 운반 장치 아래의 땅이 가라앉는다면, 힘만 늘려서는 해결되지 않습니다.",
+      "raw_seconds": 11.621405895691609,
+      "speech_window_seconds": 11.621405895691609,
+      "tempo": 1.2042907663929128,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "압력은 힘이 얼마나 넓은 면적에 분산되는지에 따라 달라집니다. 넓게 받치면 평균 압력은 줄지만, 지반은 여전히 전체 무게를 견뎌야 합니다.",
+      "raw_seconds": 11.541156462585034,
+      "speech_window_seconds": 11.541156462585034,
+      "tempo": 1.1959747629621797,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "따라서 도로 준비도 설명에 포함해야 합니다. 평탄화와 배수, 다짐과 보수는, 멋진 견인 장치만큼 중요할 수 있습니다.",
+      "raw_seconds": 9.69485260770975,
+      "speech_window_seconds": 9.69485260770975,
+      "tempo": 1.004647938622772,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "마찰은 맞닿은 면 사이에서 움직임을 방해하는 힘입니다. 재료와 습기, 정렬 상태, 변형, 받침 바닥의 상태에 따라 달라집니다.",
+      "raw_seconds": 10.64358276643991,
+      "speech_window_seconds": 10.64358276643991,
+      "tempo": 1.1029619447087988,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "간단한 계산을 위해, 모형 속 돌의 질량을 팔백 톤으로 가정하겠습니다. 설명을 위한 선택이지, 새로 측정한 수치는 아닙니다.",
+      "raw_seconds": 10.126961451247166,
+      "speech_window_seconds": 10.126961451247166,
+      "tempo": 1.0494260571240586,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "수평면의 단순한 미끄럼 모형에서는 무게에 마찰계수를 곱합니다. 실제 재료와 장치에 맞는 계수를 가정하거나 측정해야 합니다.",
+      "raw_seconds": 10.6378231292517,
+      "speech_window_seconds": 10.6378231292517,
+      "tempo": 1.1023650911141658,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "마찰계수를 백분의 오로 가정해 봅시다. 저항은 약 사백 킬로뉴턴입니다. 다른 조건은 아직 더하지 않았습니다.",
+      "raw_seconds": 9.030839002267573,
+      "speech_window_seconds": 9.030839002267573,
+      "tempo": 0.9358382385769506,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "가정한 계수를 십분의 이로 바꾸면 저항은 네 배가 됩니다. 접촉면의 상태가 필요한 힘을 크게 바꿉니다.",
+      "raw_seconds": 8.582267573696145,
+      "speech_window_seconds": 8.582267573696145,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "이 수치로 고대 작업자의 수를 알 수는 없습니다. 필요한 것은 인상적인 인원수가 아니라, 타당한 가정을 갖춘 운반 설명입니다.",
+      "raw_seconds": 10.381791383219955,
+      "speech_window_seconds": 10.381791383219955,
+      "tempo": 1.0758333039606172,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "썰매는 하중을 분산하고 당길 구조를 제공합니다. 바닥면과 연결부, 길과 맞닿는 부분까지 모두 검토해야 합니다.",
+      "raw_seconds": 9.399773242630385,
+      "speech_window_seconds": 9.399773242630385,
+      "tempo": 0.9740697660756875,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "굴림목도 하나의 가능성이지만, 저항을 없애지는 못합니다. 접촉부는 압력을 견뎌야 하고, 굴림목의 방향도 일정하게 유지해야 합니다.",
+      "raw_seconds": 10.84002267573696,
+      "speech_window_seconds": 10.84002267573696,
+      "tempo": 1.1233184119934674,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "고정되지 않은 굴림목은 옆으로 밀리거나 울퉁불퉁한 땅을 만날 수 있습니다. 복원 영상에서도 받침과 통제 과정을 생략하면 안 됩니다.",
+      "raw_seconds": 11.095419501133787,
+      "speech_window_seconds": 11.095419501133787,
+      "tempo": 1.1497844042625684,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "뒤에 남은 받침을 어떻게 회수해 앞으로 옮길지도 설명해야 합니다. 운반은 준비와 이동, 점검과 재준비를 반복하는 작업입니다.",
+      "raw_seconds": 10.918049886621315,
+      "speech_window_seconds": 10.918049886621315,
+      "tempo": 1.1314041333286335,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "미끄러뜨리든 굴리든, 길은 운반 장치의 전체 폭을 받아들여야 합니다. 급한 회전과 갑작스러운 경사 변화는 새로운 문제를 만듭니다.",
+      "raw_seconds": 10.542403628117913,
+      "speech_window_seconds": 10.542403628117913,
+      "tempo": 1.092477059908592,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "당기는 힘은 어디서 나왔을까요? 사람과 동물, 밧줄과 기계를 생각할 수 있지만, 어떻게 배치하느냐가 효율을 좌우합니다.",
+      "raw_seconds": 9.903446712018141,
+      "speech_window_seconds": 9.903446712018141,
+      "tempo": 1.0262639079811544,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "밧줄도 힘을 전달하는 경로의 일부입니다. 매듭과 굽힘, 마모, 연결 지점의 약점 때문에 그럴듯한 설계가 실패할 수 있습니다.",
+      "raw_seconds": 10.417891156462584,
+      "speech_window_seconds": 10.417891156462584,
+      "tempo": 1.079574213104931,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "도르래는 당기는 거리를 늘려 필요한 힘을 줄입니다. 이상적인 사 대 일 장치에서도, 힘이 줄어드는 만큼 더 긴 밧줄을 당겨야 합니다.",
+      "raw_seconds": 10.56657596371882,
+      "speech_window_seconds": 10.56657596371882,
+      "tempo": 1.0949819651522092,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "실제 도르래에는 마찰이 있고, 지지 틀과 기초에도 힘이 작용합니다. 힘을 줄이는 효과만으로 장치 전체의 강도를 설명할 수는 없습니다.",
+      "raw_seconds": 10.851473922902494,
+      "speech_window_seconds": 10.851473922902494,
+      "tempo": 1.1245050697308283,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "수직축 윈치는 축을 회전시켜 밧줄을 당깁니다. 긴 손잡이는 회전력을 늘리고, 드럼은 그 회전을 통제된 견인으로 바꿉니다.",
+      "raw_seconds": 10.107256235827665,
+      "speech_window_seconds": 10.107256235827665,
+      "tempo": 1.0473840658888771,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "이런 장치에도 튼튼한 고정점이 필요합니다. 반작용의 힘은 준비된 기초나 다른 구조물, 또는 지반이 받아야 합니다.",
+      "raw_seconds": 9.293968253968254,
+      "speech_window_seconds": 9.293968253968254,
+      "tempo": 0.9631055185459331,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "따라서 질문은 기계 한 대보다 큽니다. 작업자부터 지면까지 이어지는 전체 힘의 경로가, 통제를 잃지 않고 버틸 수 있을까요?",
+      "raw_seconds": 10.117369614512471,
+      "speech_window_seconds": 10.117369614512471,
+      "tempo": 1.0484320844054373,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "여러 지점에서 당기면 힘을 나눌 수 있습니다. 하지만 힘이 고르지 않으면 돌이 비틀리거나, 한 부분에 과부하가 걸릴 수 있습니다.",
+      "raw_seconds": 10.117006802721088,
+      "speech_window_seconds": 10.117006802721088,
+      "tempo": 1.0483944873286102,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "이동은 작고 확인 가능한 단계로 진행해야 합니다. 거석이 움직인 뒤에는, 통제되지 않는 무게 옆에서 즉흥적으로 대응할 여유가 없습니다.",
+      "raw_seconds": 10.731451247165532,
+      "speech_window_seconds": 10.731451247165532,
+      "tempo": 1.1120674867529048,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "멈추는 일은 출발만큼 중요합니다. 고임목과 제어 장치, 안전하게 정지할 위치도, 실현 가능한 운반 계획에 포함되어야 합니다.",
+      "raw_seconds": 10.521746031746032,
+      "speech_window_seconds": 10.521746031746032,
+      "tempo": 1.090336376346739,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "길에는 높이 변화도 있습니다. 완만한 오르막에서도 중력의 일부가 진행 방향을 거슬러 작용하므로, 더 큰 견인력이 필요합니다.",
+      "raw_seconds": 10.248571428571429,
+      "speech_window_seconds": 10.248571428571429,
+      "tempo": 1.0620281273131014,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "팔백 톤 모형에서 일 퍼센트 오르막은 약 팔십 킬로뉴턴을 더합니다. 마찰을 대신하는 값이 아니라, 마찰에 추가되는 저항입니다.",
+      "raw_seconds": 10.182562358276645,
+      "speech_window_seconds": 10.182562358276645,
+      "tempo": 1.0551878091478388,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "내리막에서는 다른 문제가 생깁니다. 중력이 이동을 돕더라도, 속도가 붙지 않게 제어하고, 돌이 예정된 경로를 벗어나지 않도록 해야 합니다.",
+      "raw_seconds": 11.061678004535148,
+      "speech_window_seconds": 11.061678004535148,
+      "tempo": 1.1462878761176318,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "평면 지도에서 편리해 보이는 길도, 단면으로 보면 어려울 수 있습니다. 실제 지형 때문에 매력적인 복원안이 성립하지 않을 수 있습니다.",
+      "raw_seconds": 10.48312925170068,
+      "speech_window_seconds": 10.48312925170068,
+      "tempo": 1.0863346374819356,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "기단에 가까워지면, 필요한 높이로 안전하게 도착해야 합니다. 가설에 넣은 경사로나 임시 성토도 하중을 안정적으로 견뎌야 합니다.",
+      "raw_seconds": 10.529478458049887,
+      "speech_window_seconds": 10.529478458049887,
+      "tempo": 1.0911376640466204,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "완성된 유적의 모습을 건설 당시에도 그대로 적용할 필요는 없습니다. 작업 높이와 임시 공간은 최종 모습과 달랐을 수 있습니다.",
+      "raw_seconds": 10.697891156462585,
+      "speech_window_seconds": 10.697891156462585,
+      "tempo": 1.1085897571463819,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "마지막 위치 맞춤도 별도의 작업입니다. 짧은 이동과 받침, 지렛대를 생각할 수 있지만, 이곳에서의 구체적인 사용은 입증되어야 합니다.",
+      "raw_seconds": 11.333809523809524,
+      "speech_window_seconds": 11.333809523809524,
+      "tempo": 1.174488033555391,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "핵심은 연속성입니다. 채석장부터 이음새까지 돌이 계속 지지되어야 합니다. 멋진 장면 사이에 설명 없는 도약을 넣어서는 안 됩니다.",
+      "raw_seconds": 10.871269841269841,
+      "speech_window_seconds": 10.871269841269841,
+      "tempo": 1.1265564602352167,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "이제 모형을 엄격하게 시험해 봅시다. 탁자 위에서는 작동해도, 실제 크기에서는 목재와 밧줄, 지반이 더 큰 하중을 버티지 못할 수 있습니다.",
+      "raw_seconds": 11.238412698412699,
+      "speech_window_seconds": 11.238412698412699,
+      "tempo": 1.164602352167119,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "크기가 바뀌면 접촉 압력과 휨, 재료의 거동도 달라집니다. 모든 치수를 확대한다고 작은 실험의 조건이 그대로 유지되지는 않습니다.",
+      "raw_seconds": 10.4721768707483,
+      "speech_window_seconds": 10.4721768707483,
+      "tempo": 1.0851996757252123,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "목재 선택도 중요합니다. 받침은 국부적인 눌림과 휨을 견디고, 운반대의 다른 부재와 함께 하중을 나누어야 합니다.",
+      "raw_seconds": 10.070498866213152,
+      "speech_window_seconds": 10.070498866213152,
+      "tempo": 1.0435750120428136,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "길 표면도 마찬가지입니다. 한 지점의 단단한 지반이, 하중의 다른 부분 아래에 있는 약한 지반까지 보완해 주지는 못합니다.",
+      "raw_seconds": 9.779637188208616,
+      "speech_window_seconds": 9.779637188208616,
+      "tempo": 1.0134339055138462,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "비로 지반 상태가 바뀐다면 배수도 역학 문제입니다. 운반로는 한 번 만들어 놓고, 작업이 끝날 때까지 잊어도 되는 시설이 아닙니다.",
+      "raw_seconds": 10.77780045351474,
+      "speech_window_seconds": 10.77780045351474,
+      "tempo": 1.1168705133175896,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "유지 보수에는 시간과 자원이 듭니다. 받침 점검과 장치 재설치, 손상 복구를 위한 중단 시간도, 현실적인 모형에 포함해야 합니다.",
+      "raw_seconds": 10.77485260770975,
+      "speech_window_seconds": 10.77485260770975,
+      "tempo": 1.116565037068368,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "작업 인력도 단순한 군중이 아닌 하나의 체계입니다. 채석과 목공, 밧줄 작업, 측량과 견인, 보급에는 서로 다른 기술이 필요합니다.",
+      "raw_seconds": 11.031882086167801,
+      "speech_window_seconds": 11.031882086167801,
+      "tempo": 1.1432002161831918,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "사진만으로 작업자의 신분이나 계약을 알 수는 없습니다. 돌만 보고, 당시 노동의 역사를 전부 만들어 내서는 안 됩니다.",
+      "raw_seconds": 9.935351473922902,
+      "speech_window_seconds": 9.935351473922902,
+      "tempo": 1.029570100924653,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "그렇지만 조직이 필요했다는 점은 이해할 수 있습니다. 재료와 식량, 물과 도구, 지시가 필요한 사람에게 제때 전달되어야 합니다.",
+      "raw_seconds": 9.933219954648527,
+      "speech_window_seconds": 9.933219954648527,
+      "tempo": 1.0293492180982928,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "목소리가 잘 들리지 않는 거리에서는 신호가 중요합니다. 특히 돌을 급히 멈춰야 할 때는, 함께 맞춘 타이밍이 필요합니다.",
+      "raw_seconds": 9.715646258503401,
+      "speech_window_seconds": 9.715646258503401,
+      "tempo": 1.0068027210884354,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "길에 들인 노력은 계획에 대한 질문도 만듭니다. 이 준비는 돌 하나만을 위한 것이었을까요? 아니면 여러 차례 운반에 쓰였을까요?",
+      "raw_seconds": 10.334512471655328,
+      "speech_window_seconds": 10.334512471655328,
+      "tempo": 1.0709339348865625,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "반복 운반이라면 큰 준비 작업도 의미가 있습니다. 하지만 실제 일정과 작업팀 수, 운반 순서는 영상이 아니라 증거로 밝혀야 합니다.",
+      "raw_seconds": 10.735510204081633,
+      "speech_window_seconds": 10.735510204081633,
+      "tempo": 1.1124881040499102,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "마지막 이음새에도 어려움이 있습니다. 돌은 주변 석조물과 맞는 방향으로 도착해야 하며, 조정할 공간도 확보되어야 합니다.",
+      "raw_seconds": 9.840430839002268,
+      "speech_window_seconds": 9.840430839002268,
+      "tempo": 1.019733765699717,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "좁은 곳에서 거대한 하중을 회전시키는 일은 간단한 마무리가 아닙니다. 길을 계획할 때부터 최종 위치까지 생각해야 합니다.",
+      "raw_seconds": 9.902108843537414,
+      "speech_window_seconds": 9.902108843537414,
+      "tempo": 1.0261252687603537,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "고대의 설명에 현대식 크레인을 끼워 넣어서는 안 됩니다. 익숙한 인양 장면이, 정작 복원이 답해야 할 질문을 가릴 수 있습니다.",
+      "raw_seconds": 10.178956916099773,
+      "speech_window_seconds": 10.178956916099773,
+      "tempo": 1.0548141881968676,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "고대 기계는 기록에 남아 있습니다. 하지만 능력과 배치를 검토해야 합니다. 장치의 이름을 안다고 모든 작업이 가능해지는 것은 아닙니다.",
+      "raw_seconds": 10.814512471655329,
+      "speech_window_seconds": 10.814512471655329,
+      "tempo": 1.1206748675290497,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "채석장에 남은 가장 큰 돌들은 특히 중요합니다. 미완성 상태는 계획과 채석, 성공적인 설치가 서로 다른 성과임을 보여 줍니다.",
+      "raw_seconds": 10.629024943310657,
+      "speech_window_seconds": 10.629024943310657,
+      "tempo": 1.1014533620011044,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "바위의 결함이나 계획 변경, 다른 실무적 어려움 때문에 작업이 중단됐을 수 있습니다. 원인을 하나로 정하려면 구체적인 증거가 필요합니다.",
+      "raw_seconds": 11.310385487528345,
+      "speech_window_seconds": 11.310385487528345,
+      "tempo": 1.17206067228273,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "남은 돌이 포기된 이유를 말로 설명해 주지는 않습니다. 연구자들은 돌의 상태를 주변 채석장과 전체 건설 순서에 연결해야 합니다.",
+      "raw_seconds": 10.579160997732426,
+      "speech_window_seconds": 10.579160997732426,
+      "tempo": 1.0962861137546556,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "가정한 운반 표면도 살펴보아야 합니다. 암반이나 다진 흙, 목재, 또는 그 조합일까요? 선택에 따라 계산도 달라집니다.",
+      "raw_seconds": 9.933197278911564,
+      "speech_window_seconds": 9.933197278911564,
+      "tempo": 1.029346868280991,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "현대 실험은 마찰과 제어 같은 개별 과정을 이해하는 데 도움을 줍니다. 재료와 규모, 한계를 분명히 밝힐수록 가치가 높아집니다.",
+      "raw_seconds": 10.6459410430839,
+      "speech_window_seconds": 10.6459410430839,
+      "tempo": 1.1032063257081761,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "유용한 실험이 모든 과정을 재현할 필요는 없습니다. 명확한 질문에 답하고, 실험 장치가 보여 주는 범위를 넘어 결론을 내리지 않아야 합니다.",
+      "raw_seconds": 11.178911564625851,
+      "speech_window_seconds": 11.178911564625851,
+      "tempo": 1.1584364315674456,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "고고학과 역학은 서로를 보완합니다. 현장은 모형에 제약을 주고, 모형은 다음에 어떤 흔적을 조사해야 할지 알려 줍니다.",
+      "raw_seconds": 9.608321995464852,
+      "speech_window_seconds": 9.608321995464852,
+      "tempo": 0.9956810357994665,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "제안한 경로는 실제 지형과 대조해야 합니다. 고정점 후보는 주변 맥락을 조사해야 합니다. 깔끔한 도표가 현장 조사를 대신할 수는 없습니다.",
+      "raw_seconds": 11.613287981859411,
+      "speech_window_seconds": 11.613287981859411,
+      "tempo": 1.2034495317989027,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "기계가 남아 있지 않다는 사실 자체는 놀랍지 않습니다. 나무와 섬유는 돌만큼 오래 남지 않지만, 그렇다고 모든 복원안이 맞는 것은 아닙니다.",
+      "raw_seconds": 11.148185941043083,
+      "speech_window_seconds": 11.148185941043083,
+      "tempo": 1.1552524291236355,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "좋은 설명은 검증할 조건을 제시합니다. 필요한 공간과 접촉면, 지지 구조와 작업 순서처럼, 실제로 조사할 수 있는 내용을 말해야 합니다.",
+      "raw_seconds": 11.234149659863945,
+      "speech_window_seconds": 11.234149659863945,
+      "tempo": 1.1641605865143985,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "이때 미스터리는 연구의 출발점이 됩니다. 불가능하다고 반복하기보다, 아직 설명하지 못한 구체적인 과정이 무엇인지 물을 수 있습니다.",
+      "raw_seconds": 10.766417233560091,
+      "speech_window_seconds": 10.766417233560091,
+      "tempo": 1.1156909050321338,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "약점은 길일 수도, 밧줄 배치일 수도 있습니다. 마지막 설치 과정을, 증거가 허용하는 것보다 지나치게 단순화했을 수도 있습니다.",
+      "raw_seconds": 10.169909297052154,
+      "speech_window_seconds": 10.169909297052154,
+      "tempo": 1.0538766110934874,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "이 질문들이 성취를 깎아내리지는 않습니다. 성공한 건설자들이 단계마다 해결해야 했던, 실제 판단에 더 가까이 다가가게 합니다.",
+      "raw_seconds": 10.462154195011339,
+      "speech_window_seconds": 10.462154195011339,
+      "tempo": 1.084161056477859,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "이제 주요 가능성을 같은 기준으로 비교할 수 있습니다. 같은 하중을 지탱하고, 타당한 길을 따라, 같은 최종 위치에 도착해야 합니다.",
+      "raw_seconds": 10.374965986394558,
+      "speech_window_seconds": 10.374965986394558,
+      "tempo": 1.0751260089528039,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "먼저 준비된 길 위의 미끄럼 방식입니다. 넓게 받치고 직접 당길 수 있다는 장점이 있지만, 마찰 제어와 노면 유지가 과제입니다.",
+      "raw_seconds": 10.62204081632653,
+      "speech_window_seconds": 10.62204081632653,
+      "tempo": 1.1007296182721793,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "다음은 하중 분산 구조 아래의 굴림목입니다. 저항을 줄일 수 있지만, 재료 강도와 정렬, 회수, 튼튼한 지반이 필요합니다.",
+      "raw_seconds": 10.071791383219955,
+      "speech_window_seconds": 10.071791383219955,
+      "tempo": 1.0437089516290108,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "단계마다 다른 방식을 조합할 수도 있습니다. 하지만 방식을 바꾸는 순간까지 설명해야 합니다. 아이디어를 더하는 것만으로는 해결되지 않습니다.",
+      "raw_seconds": 11.554444444444444,
+      "speech_window_seconds": 11.554444444444444,
+      "tempo": 1.1973517559009785,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "윈치와 도르래는 힘을 가하는 방법을 설명합니다. 운반 장치를 도울 수는 있지만, 돌의 무게를 무엇으로 지탱하는지는 따로 설명해야 합니다.",
+      "raw_seconds": 11.157346938775511,
+      "speech_window_seconds": 11.157346938775511,
+      "tempo": 1.1562017553135244,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "설득력 있는 복원은 익숙한 원리의 연결일 수 있습니다. 압력과 마찰, 지렛대와 기하학, 조직을 엄청난 규모에서 함께 작동시키는 것입니다.",
+      "raw_seconds": 12.043015873015873,
+      "speech_window_seconds": 12.043015873015873,
+      "tempo": 1.24798091948351,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "원리가 익숙하다고 일이 쉬운 것은 아닙니다. 한계가 있는 재료와 많은 작업자가, 하나의 체계로 움직이도록 만드는 일이 어렵습니다.",
+      "raw_seconds": 10.816530612244899,
+      "speech_window_seconds": 10.816530612244899,
+      "tempo": 1.1208840012689014,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "물리적으로 가능한 방법이라도 실제 사용이 입증된 것은 아닙니다. 기록이 부족한 과거를 영상으로 재현할 때 이 구별은 꼭 필요합니다.",
+      "raw_seconds": 10.672857142857143,
+      "speech_window_seconds": 10.672857142857143,
+      "tempo": 1.1059955588452999,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "실제 방법을 찾으려면 흔적과 지형, 재료와 연대, 작업 순서를 더 강하게 연결해야 합니다. 그럴듯한 영상만으로는 부족합니다.",
+      "raw_seconds": 10.398888888888889,
+      "speech_window_seconds": 10.398888888888889,
+      "tempo": 1.0776050662061025,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "설치된 트릴리톤은 분명한 결과를 보여 줍니다. 채석장은 준비와 미완성 작업을 보여 줍니다. 어느 한쪽만으로 모든 질문에 답할 수는 없습니다.",
+      "raw_seconds": 11.868707482993198,
+      "speech_window_seconds": 11.868707482993198,
+      "tempo": 1.2299178738853054,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "천육백오십 톤이라는 추정치는 채석장에서 발견된 더 큰 돌의 것입니다. 성역으로 옮겨진 세 돌 각각의 무게로 바꾸어 말해서는 안 됩니다.",
+      "raw_seconds": 12.009954648526078,
+      "speech_window_seconds": 12.009954648526078,
+      "tempo": 1.2445548858576245,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "추정 질량은 직접 저울로 잰 값이 아닙니다. 치수와 가려진 면, 밀도에 대한 가정 때문에, 신뢰할 만한 자료 사이에서도 값이 달라질 수 있습니다.",
+      "raw_seconds": 11.722426303854876,
+      "speech_window_seconds": 11.722426303854876,
+      "tempo": 1.2147592024720077,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "이야기에서도 그 불확실성을 남겨야 합니다. 증거가 대략적인 범위만 허용한다면, 지나치게 정밀한 숫자는 오해를 만들 수 있습니다.",
+      "raw_seconds": 10.320249433106577,
+      "speech_window_seconds": 10.320249433106577,
+      "tempo": 1.0694558998037904,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "확실히 말할 수 있는 것은, 이 돌들이 실제 채석과 기념비적 건설의 현장에 속한다는 점입니다. 연구에는 끈기 있는 관찰이 필요합니다.",
+      "raw_seconds": 10.957165532879818,
+      "speech_window_seconds": 10.957165532879818,
+      "tempo": 1.1354575681740744,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "남은 질문은 더 구체적입니다. 정확한 운반 장치와 세부 경로, 그리고 각 거석을 제자리에 놓기까지의 작업 순서입니다.",
+      "raw_seconds": 10.090408163265305,
+      "speech_window_seconds": 10.090408163265305,
+      "tempo": 1.0456381516337103,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "답에는 두 층이 있습니다. 관련된 역학적 가능성은 설명하되, 증거가 정리하지 못한 역사적 세부 사항은 열린 질문으로 남겨 둡니다.",
+      "raw_seconds": 10.449319727891156,
+      "speech_window_seconds": 10.449319727891156,
+      "tempo": 1.0828310598850939,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "이런 이야기는 시청자에게 이해할 대상을 줍니다. 동시에 연구자에게는, 다음에 무엇을 검증해야 하는지 구체적인 과제를 남깁니다.",
+      "raw_seconds": 10.177755102040816,
+      "speech_window_seconds": 10.177755102040816,
+      "tempo": 1.0546896478798773,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "앞으로의 측량과 발굴이 그림을 바꿀 수 있습니다. 새 측정값은 경로 모형을 수정하거나, 건설 관계를 밝히고, 매력적인 가정을 배제할 수 있습니다.",
+      "raw_seconds": 12.242018140589568,
+      "speech_window_seconds": 12.242018140589568,
+      "tempo": 1.2686029161232713,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "좋은 복원은 바뀔 준비가 되어 있어야 합니다. 목적은 멋진 이미지를 지키는 것이 아니라, 질문과 증거를 정리해 이해를 넓히는 것입니다.",
+      "raw_seconds": 10.739229024943311,
+      "speech_window_seconds": 10.739229024943311,
+      "tempo": 1.1128734740873898,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "처음 보았던 기단으로 돌아가 봅시다. 돌이 작아진 것은 아닙니다. 다만 그 주위의 문제가, 이제 더 뚜렷한 구조로 보입니다.",
+      "raw_seconds": 10.081111111111111,
+      "speech_window_seconds": 10.081111111111111,
+      "tempo": 1.0446747265400116,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "완성된 표면 뒤에, 계속 지지되는 작업의 흐름을 떠올려 보세요. 채석의 판단에서 준비된 받침, 통제된 이동과 마지막 조정으로 이어집니다.",
+      "raw_seconds": 11.44344671201814,
+      "speech_window_seconds": 11.44344671201814,
+      "tempo": 1.1858494002091338,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "그 뒤에는 자세히 남기 어려운 기술이 있습니다. 돌을 판단하고, 나무를 다루고, 밧줄을 관리하고, 지형을 읽고, 사람들을 조율하는 능력입니다.",
+      "raw_seconds": 11.204399092970522,
+      "speech_window_seconds": 11.204399092970522,
+      "tempo": 1.161077626214562,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "이 성취는 힘만큼이나 축적된 지식에 기대고 있습니다. 규모가 커질수록, 작은 실무적 판단은 덜 중요해지는 것이 아니라 더 중요해집니다.",
+      "raw_seconds": 11.151179138321995,
+      "speech_window_seconds": 11.151179138321995,
+      "tempo": 1.1555626050074606,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "바알베크는 레바논의 살아 있는 문화유산이기도 합니다. 기술을 연구하는 일은 역사와 지역 공동체, 지속적인 보존에 대한 관심으로 이어져야 합니다.",
+      "raw_seconds": 11.96968253968254,
+      "speech_window_seconds": 11.96968253968254,
+      "tempo": 1.2403816103297967,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "보존에는 기록과 재료에 대한 이해가 필요합니다. 과거를 설명하는 세심한 관찰은, 남아 있는 유산을 미래로 전하는 데도 도움이 됩니다.",
+      "raw_seconds": 10.65968253968254,
+      "speech_window_seconds": 10.65968253968254,
+      "tempo": 1.1046303149930092,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "다음 조사를 계획한다면 무엇부터 측정하겠습니까? 경로와 접촉면, 돌의 크기, 아니면 작업할 수 있는 공간일까요?",
+      "raw_seconds": 9.463197278911565,
+      "speech_window_seconds": 9.463197278911565,
+      "tempo": 0.9806422050685559,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "선택에 따라 서로 다른 검증이 시작됩니다. 거대한 질문도, 실제로 조사할 수 있는 작은 질문들의 연결로 바꿀 수 있습니다.",
+      "raw_seconds": 10.08281179138322,
+      "speech_window_seconds": 10.08281179138322,
+      "tempo": 1.0448509628376392,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "우리는 아직 모든 밧줄의 움직임을 확신하며 말할 수 없습니다. 그래도 증거와 역학, 사람들의 조직에 대해서는 더 분명히 이해할 수 있습니다.",
+      "raw_seconds": 11.530249433106576,
+      "speech_window_seconds": 11.530249433106576,
+      "tempo": 1.1948445008400597,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "돌은 여전히 거대합니다. 어떤 지지 과정이 이 돌을 채석장에서 여기까지 이끌었을까요? 그리고 어떤 흔적이 그 답을 증명할까요?",
+      "raw_seconds": 10.274920634920635,
+      "speech_window_seconds": 10.274920634920635,
+      "tempo": 1.0647586150176824,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1242,
+  "decoded_samples": 29808000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-ko-20m42s.mp3",
+  "flac": "voice-ko-20m42s.flac",
+  "mp3_sha256": "067c02e5c461cf89d1306062889e2ff610c55d54771dbda09ea19a4cad0a1682",
+  "flac_sha256": "83336a1500a3118f1e8f8307a59acdf6a79cce04c4af80eeaec0c296ff09dfd7"
+}

@@ -1,0 +1,1137 @@
+{
+  "locale": "nl",
+  "voice_id": "piper:nl_NL-ronnie-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1242,
+  "spoken_cues": 124,
+  "closing_silence_seconds": 2,
+  "config_hash": "61767919d169036b3756767e6adf2f5be3c4214307b52025fbebee1fec823f81",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "In het tempelfundament van Baalbek liggen drie enorme stenen. Hun grootte verbaast. De moeilijkere vraag is: hoe kwamen ze hier?",
+      "raw_seconds": 10.530249433106576,
+      "speech_window_seconds": 10.530249433106576,
+      "tempo": 1.0912175578348784,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "In de nabije groeve liggen nog grotere blokken. Sommige kwamen nooit helemaal los. Ze verschillen van de stenen die werkelijk naar de tempel zijn vervoerd.",
+      "raw_seconds": 10.994648526077098,
+      "speech_window_seconds": 10.994648526077098,
+      "tempo": 1.1393418161737925,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Het zijn verschillende soorten bewijs. We moeten het hele proces volgen, van de rotswand tot de laatste voeg in het afgewerkte metselwerk.",
+      "raw_seconds": 10.077460317460318,
+      "speech_window_seconds": 10.077460317460318,
+      "tempo": 1.044296405954437,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "We zijn in de Bekaavallei in Libanon. Landbouw, bewoning, reizen en eeuwenlang bouwen hebben het landschap van Baalbek gevormd.",
+      "raw_seconds": 9.58984126984127,
+      "speech_window_seconds": 9.58984126984127,
+      "tempo": 0.9937659346985771,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Het heiligdom werd een monumentaal centrum van het Romeinse Heliopolis. De bewaarde gebouwen horen bij verschillende fasen van een lange geschiedenis.",
+      "raw_seconds": 11.064308390022676,
+      "speech_window_seconds": 11.064308390022676,
+      "tempo": 1.1465604549246295,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "De Jupitertempel beheerste het complex. De grote zuilen trekken onze blik omhoog, maar ons onderzoek begint dichter bij de grond.",
+      "raw_seconds": 9.822040816326531,
+      "speech_window_seconds": 9.822040816326531,
+      "tempo": 1.0178280638680344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "De drie blokken in het fundament heten de Trilithon. Ze bewijzen dat zeer grote stenen daadwerkelijk zijn verplaatst en hier neergelegd.",
+      "raw_seconds": 9.880090702947847,
+      "speech_window_seconds": 9.880090702947847,
+      "tempo": 1.0238435961603987,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Elk blok wordt op vele honderden tonnen geschat. Het precieze getal hangt af van de gemeten afmetingen en de aangenomen kalksteendichtheid.",
+      "raw_seconds": 10.750839002267574,
+      "speech_window_seconds": 10.750839002267574,
+      "tempo": 1.1140765805458626,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "De bekende groeve ligt ongeveer een kilometer verderop. Een korte wandeling, maar een lastige route voor een uitzonderlijk zware lading.",
+      "raw_seconds": 9.752380952380953,
+      "speech_window_seconds": 9.752380952380953,
+      "tempo": 1.010609425117197,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Afstand alleen is niet genoeg. We moeten ook hellingen, draagkracht van de bodem, werkruimte en de hoogte van het eindpunt kennen.",
+      "raw_seconds": 10.216780045351474,
+      "speech_window_seconds": 10.216780045351474,
+      "tempo": 1.0587336834561112,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Een volledig bouwdagboek is niet bewaard. Daarom moet iedere reconstructie onderscheid maken tussen tastbaar bewijs en onze eigen aannames.",
+      "raw_seconds": 10.39092970521542,
+      "speech_window_seconds": 10.39092970521542,
+      "tempo": 1.076780280333204,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "We toetsen mogelijkheden aan beperkingen. Steenwinning, ondersteuning, trekkracht, besturing en uiteindelijke plaatsing moeten samen worden verklaard.",
+      "raw_seconds": 11.482267573696145,
+      "speech_window_seconds": 11.482267573696145,
+      "tempo": 1.1898722874296523,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Begin in de groeve, toen de steen nog deel van de heuvel was. De eerste technische keuze kwam al vóór de eerste beweging.",
+      "raw_seconds": 8.661043083900227,
+      "speech_window_seconds": 8.661043083900227,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "De bouwers hadden geschikte steen en werkruimte nodig. Laagvlakken, scheuren, toegang en de gewenste vorm speelden allemaal een rol.",
+      "raw_seconds": 10.599909297052154,
+      "speech_window_seconds": 10.599909297052154,
+      "tempo": 1.0984361965857155,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "Een verborgen zwakte kon veel werk aan een reuzenblok verspillen. Steenwinning vroeg daarom om ervaring en oordeel, naast lichamelijke inspanning.",
+      "raw_seconds": 10.692789115646258,
+      "speech_window_seconds": 10.692789115646258,
+      "tempo": 1.1080610482534983,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Sleuven en bewerkte vlakken bewaren sporen van de winning. Ze helpen bepalen waar arbeiders stonden en welke steenoppervlakken ze konden bereiken.",
+      "raw_seconds": 10.843718820861678,
+      "speech_window_seconds": 10.843718820861678,
+      "tempo": 1.1237014322136454,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Bekijk de sporen nauwkeurig. Een spectaculaire foto kan de smalle werkruimten verbergen die de volgorde van hakken en losmaken bepaalden.",
+      "raw_seconds": 10.205170068027211,
+      "speech_window_seconds": 10.205170068027211,
+      "tempo": 1.0575305769976384,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "De Steen van de Zwangere Vrouw is beroemd om zijn omvang. Hij ligt echter nog in de groeve en is geen ingebouwde tempelsteen.",
+      "raw_seconds": 9.833650793650794,
+      "speech_window_seconds": 9.833650793650794,
+      "tempo": 1.0190311703265071,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "In tweeduizendveertien werd in de groeve nog een reusachtig blok blootgelegd. De geschatte massa is ongeveer zestienhonderdvijftig ton. Het ligt nog steeds daar.",
+      "raw_seconds": 12.30657596371882,
+      "speech_window_seconds": 12.30657596371882,
+      "tempo": 1.275292845981225,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "De vondst laat zien hoe ambitieus de steenhouwers waren. Ze bewijst niet dat een steen van die geschatte massa naar de tempel werd vervoerd.",
+      "raw_seconds": 10.402539682539683,
+      "speech_window_seconds": 10.402539682539683,
+      "tempo": 1.0779833867916768,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Dat onderscheid verandert de vraag. Onderzoek zowel geslaagd transport als onvoltooid werk. Een opgegeven poging kan praktische grenzen zichtbaar maken.",
+      "raw_seconds": 11.92344671201814,
+      "speech_window_seconds": 11.92344671201814,
+      "tempo": 1.2355903328516207,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Archeologische teams werkten hier met Libanese deskundigen. Hun plannen en waarnemingen bieden een steviger basis dan één los beeld op internet.",
+      "raw_seconds": 11.110748299319727,
+      "speech_window_seconds": 11.110748299319727,
+      "tempo": 1.1513728807585208,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Bij het heiligdom zien we ander bewijs: geplaatst metselwerk, afmetingen, voegen en de relatie met de omliggende steenlagen.",
+      "raw_seconds": 9.775600907029478,
+      "speech_window_seconds": 9.775600907029478,
+      "tempo": 1.0130156380341429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "Een afgewerkte voeg toont het eindpunt, maar niet alle eerdere bewegingen. De ontbrekende route vraagt om sporen en mechanische redeneringen.",
+      "raw_seconds": 10.913378684807256,
+      "speech_window_seconds": 10.913378684807256,
+      "tempo": 1.1309200709644824,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "De oudere geschiedenis van Baalbek is een aparte vraag. De ouderdom van een plek dateert niet automatisch ieder zichtbaar bouwonderdeel.",
+      "raw_seconds": 9.775600907029478,
+      "speech_window_seconds": 9.775600907029478,
+      "tempo": 1.0130156380341429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Onderzoekers bepalen bouwfasen met opgravingen, bouwverbanden en materiaalstudie. De grootte van een steen alleen onthult geen datering of bouwer.",
+      "raw_seconds": 11.366167800453514,
+      "speech_window_seconds": 11.366167800453514,
+      "tempo": 1.1778412228449238,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Ook de oudheid biedt vergelijkingsmateriaal. Vitruvius beschrijft hijswerktuigen en zware transporten, met de moeilijkheden van wegen die onvoldoende draagkracht hebben.",
+      "raw_seconds": 11.877006802721088,
+      "speech_window_seconds": 11.877006802721088,
+      "tempo": 1.2307779070177292,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Die teksten tonen een technische traditie. Ze bewijzen niet dat een bepaalde machine een bepaalde steen in Baalbek heeft vervoerd.",
+      "raw_seconds": 8.78875283446712,
+      "speech_window_seconds": 8.78875283446712,
+      "tempo": 0.9107515890639503,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Archeoloog Jean-Pierre Adam onderzocht kaapstanders en transport. Zijn voorstellen zijn technische modellen, geen bewaarde verslagen van de bouw.",
+      "raw_seconds": 11.377777777777778,
+      "speech_window_seconds": 11.377777777777778,
+      "tempo": 1.1790443293033968,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Met die grenzen kunnen we een zorgvuldig model opbouwen. Eerst moet het blok worden gevormd, losgemaakt, ondersteund en voorbereid op vervoer.",
+      "raw_seconds": 10.704399092970522,
+      "speech_window_seconds": 10.704399092970522,
+      "tempo": 1.1092641547119713,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Stel je de omtrek van het blok in de rots voor. Het bewerken van de zijkanten geeft toegang, maar onderaan zit het nog vast.",
+      "raw_seconds": 9.05578231292517,
+      "speech_window_seconds": 9.05578231292517,
+      "tempo": 0.938423037608826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Het losmaken van de onderzijde verandert de ondersteuning. Een bruikbare reconstructie toont wat de steen tijdens die overgang draagt, zonder plotselinge instorting.",
+      "raw_seconds": 11.38938775510204,
+      "speech_window_seconds": 11.38938775510204,
+      "tempo": 1.1802474357618695,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Houten onderlagen, wiggen of voorbereide draagvlakken zijn denkbaar. De precieze opstelling blijft een hypothese die bij de bewaarde sporen moet passen.",
+      "raw_seconds": 11.029478458049887,
+      "speech_window_seconds": 11.029478458049887,
+      "tempo": 1.142951135549211,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "De eerste regel: plaats een nieuwe ondersteuning voordat je de oude weghaalt. Bij een reuzensteen kan een kleine ongecontroleerde beweging gevaarlijk worden.",
+      "raw_seconds": 11.029478458049887,
+      "speech_window_seconds": 11.029478458049887,
+      "tempo": 1.142951135549211,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Dan de weg. Harder trekken helpt niet altijd. Extra inspanning redt geen transportbaan die onder het gewicht wegzakt.",
+      "raw_seconds": 9.949750566893425,
+      "speech_window_seconds": 9.949750566893425,
+      "tempo": 1.0310622349112357,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Druk hangt af van het oppervlak waarover een kracht wordt verdeeld. Brede steunen verminderen de gemiddelde druk, maar de bodem draagt nog steeds alles.",
+      "raw_seconds": 11.017868480725623,
+      "speech_window_seconds": 11.017868480725623,
+      "tempo": 1.141748029090738,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Ook de voorbereiding van de weg hoort bij de verklaring. Egaliseren, afwateren, verdichten en herstellen kunnen even belangrijk zijn als de trekinrichting.",
+      "raw_seconds": 11.528707482993198,
+      "speech_window_seconds": 11.528707482993198,
+      "tempo": 1.1946847132635439,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Dan volgt wrijving tussen de contactvlakken. Die verandert door materiaal, vocht, uitlijning, vervorming en de toestand van het draagvlak.",
+      "raw_seconds": 10.495419501133787,
+      "speech_window_seconds": 10.495419501133787,
+      "tempo": 1.0876082384594596,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Neem voor ons rekenvoorbeeld een massa van achthonderd ton. Dat is een modelkeuze, geen nieuwe meting aan de werkelijke steen.",
+      "raw_seconds": 9.485351473922902,
+      "speech_window_seconds": 9.485351473922902,
+      "tempo": 0.9829379765723214,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "Op horizontale grond vermenigvuldigt het schuifmodel de gewichtskracht met de wrijvingscoëfficiënt. Die coëfficiënt moet passen bij de materialen en de opstelling.",
+      "raw_seconds": 11.969886621315192,
+      "speech_window_seconds": 11.969886621315192,
+      "tempo": 1.240402758685512,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Bij een aangenomen wrijvingscoëfficiënt van nul komma nul vijf bedraagt de weerstand ongeveer vierhonderd kilonewton, zonder verdere complicaties.",
+      "raw_seconds": 9.822040816326531,
+      "speech_window_seconds": 9.822040816326531,
+      "tempo": 1.0178280638680344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Verhogen we de aangenomen coëfficiënt naar nul komma twee, dan verviervoudigt de weerstand. De toestand van de contactvlakken maakt veel verschil.",
+      "raw_seconds": 10.843718820861678,
+      "speech_window_seconds": 10.843718820861678,
+      "tempo": 1.1237014322136454,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Die getallen onthullen geen antiek personeelsaantal. Ze tonen waarom een transportvoorstel verdedigbare aannames nodig heeft, in plaats van alleen een indrukwekkende menigte.",
+      "raw_seconds": 12.178866213151927,
+      "speech_window_seconds": 12.178866213151927,
+      "tempo": 1.2620586749380236,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "Een slee verdeelt het gewicht en biedt houvast om te trekken. Onderkant, verbindingen en contact met de baan verdienen allemaal aandacht.",
+      "raw_seconds": 10.530249433106576,
+      "speech_window_seconds": 10.530249433106576,
+      "tempo": 1.0912175578348784,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Rollen zijn een andere mogelijkheid, maar nemen niet alle weerstand weg. Contactpunten moeten druk verdragen en de rollen moeten uitgelijnd blijven.",
+      "raw_seconds": 10.901768707482994,
+      "speech_window_seconds": 10.901768707482994,
+      "tempo": 1.1297169645060097,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Losse rollen kunnen zijwaarts schuiven of oneffenheden raken. Een realistische animatie toont beheerste voortgang, met ondersteuning en inspanning.",
+      "raw_seconds": 11.203628117913832,
+      "speech_window_seconds": 11.203628117913832,
+      "tempo": 1.1609977324263037,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Hoe worden de steunen teruggehaald en opnieuw geplaatst? Transport is een herhalende cyclus van voorbereiden, bewegen, controleren en opnieuw voorbereiden.",
+      "raw_seconds": 11.784126984126985,
+      "speech_window_seconds": 11.784126984126985,
+      "tempo": 1.2211530553499466,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Bij glijden en rollen moet de hele installatie op de route passen. Scherpe bochten en plotselinge hellingsveranderingen veroorzaken extra problemen.",
+      "raw_seconds": 10.878548752834467,
+      "speech_window_seconds": 10.878548752834467,
+      "tempo": 1.127310751589064,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Waar komt de trekkracht vandaan? Mensen, dieren, touwen en machines zijn mogelijkheden. Hun opstelling bepaalt hoe doeltreffend ze samenwerken.",
+      "raw_seconds": 11.77251700680272,
+      "speech_window_seconds": 11.77251700680272,
+      "tempo": 1.2199499488914736,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Een touw brengt krachten over. Knopen, bochten, slijtage en bevestigingspunten kunnen een op papier overtuigend systeem verzwakken.",
+      "raw_seconds": 10.681179138321996,
+      "speech_window_seconds": 10.681179138321996,
+      "tempo": 1.1068579417950255,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Katrollen verminderen de benodigde kracht, maar je moet meer touw binnenhalen. Ook een ideaal vier-op-één-systeem ruilt kracht voor afstand.",
+      "raw_seconds": 9.845260770975056,
+      "speech_window_seconds": 9.845260770975056,
+      "tempo": 1.02023427678498,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Echte katrollen veroorzaken wrijving en belasten de constructie. Het krachtvoordeel vervangt geen controle van touwen, frames en funderingen.",
+      "raw_seconds": 10.565079365079365,
+      "speech_window_seconds": 10.565079365079365,
+      "tempo": 1.094826877210297,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Een kaapstander trekt aan een touw door te draaien. Langere armen vergroten het draaimoment; de trommel zet rotatie om in beheerste trekkracht.",
+      "raw_seconds": 10.739229024943311,
+      "speech_window_seconds": 10.739229024943311,
+      "tempo": 1.1128734740873898,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Zo’n machine heeft ook een stevige verankering nodig. De reactiekracht moet worden opgevangen door een voorbereide fundering, een andere constructie of de bodem.",
+      "raw_seconds": 11.760907029478458,
+      "speech_window_seconds": 11.760907029478458,
+      "tempo": 1.2187468424330008,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "De vraag is groter dan de machine. Kan de hele krachtenketen, van de werker tot de bodem, de belasting beheerst opnemen?",
+      "raw_seconds": 9.1718820861678,
+      "speech_window_seconds": 9.1718820861678,
+      "tempo": 0.9504541021935544,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Meerdere trekpunten kunnen de inspanning verdelen. Ongelijk trekken kan de last verdraaien of één onderdeel overbelasten.",
+      "raw_seconds": 9.496961451247165,
+      "speech_window_seconds": 9.496961451247165,
+      "tempo": 0.9841410830307943,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "De beweging moet in kleine, zichtbare stappen verlopen. Naast een bewegende reuzenlast is geen ruimte voor improvisatie zodra de controle verdwijnt.",
+      "raw_seconds": 11.668027210884354,
+      "speech_window_seconds": 11.668027210884354,
+      "tempo": 1.209121990765218,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "Stoppen is even belangrijk als starten. Blokkeerwiggen, tegenhoudende voorzieningen en een geplande rustpositie horen bij beheerst zwaar transport.",
+      "raw_seconds": 11.27328798185941,
+      "speech_window_seconds": 11.27328798185941,
+      "tempo": 1.168216371177141,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Ook hoogteverschillen tellen mee. Zelfs een flauwe stijging voegt een component van de zwaartekracht toe die de trekinrichting moet overwinnen.",
+      "raw_seconds": 9.58984126984127,
+      "speech_window_seconds": 9.58984126984127,
+      "tempo": 0.9937659346985771,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "Bij ons model van achthonderd ton voegt één procent helling ongeveer tachtig kilonewton toe. Die kracht komt boven op de wrijving.",
+      "raw_seconds": 9.659501133786849,
+      "speech_window_seconds": 9.659501133786849,
+      "tempo": 1.0009845734494143,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Bergaf ontstaat een ander probleem. Zwaartekracht kan helpen, maar versnelling moet worden voorkomen en de lading moet op de route blijven.",
+      "raw_seconds": 9.763990929705216,
+      "speech_window_seconds": 9.763990929705216,
+      "tempo": 1.01181253157567,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "Een handige route op de kaart kan in het hoogteprofiel moeilijk zijn. Het terrein kan een aantrekkelijk model uitsluiten.",
+      "raw_seconds": 8.440453514739229,
+      "speech_window_seconds": 8.440453514739229,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Bij het fundament moet de steen beheerst op de juiste hoogte komen. Ook een voorgestelde helling of tijdelijke ophoging moet het gewicht dragen.",
+      "raw_seconds": 10.251609977324263,
+      "speech_window_seconds": 10.251609977324263,
+      "tempo": 1.0623430028315297,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Het monument hoeft tijdens de bouw niet op zijn eindvorm te lijken. Werkhoogten en tijdelijke ruimten kunnen van het uiteindelijke beeld verschillen.",
+      "raw_seconds": 10.425759637188209,
+      "speech_window_seconds": 10.425759637188209,
+      "tempo": 1.0803895997086226,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "De einduitlijning is een aparte handeling. Kleine verplaatsingen, vulstukken, hefbomen en controles zijn denkbaar; hun precieze toepassing hier is niet bewezen.",
+      "raw_seconds": 12.294965986394558,
+      "speech_window_seconds": 12.294965986394558,
+      "tempo": 1.2740897395227522,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "De kern is continuïteit. De steen moet van groeve tot voeg ondersteund blijven, zonder onverklaarde sprong tussen indrukwekkende beelden.",
+      "raw_seconds": 10.100680272108843,
+      "speech_window_seconds": 10.100680272108843,
+      "tempo": 1.0467026188713826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Laten we het model kritisch beproeven. Wat op tafel werkt, kan mislukken wanneer hout, touwen en grond veel grotere lasten krijgen.",
+      "raw_seconds": 9.775600907029478,
+      "speech_window_seconds": 9.775600907029478,
+      "tempo": 1.0130156380341429,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Schaal verandert contactdruk, buiging en materiaalgedrag. Alle afmetingen vergroten behoudt niet automatisch de voorwaarden van een klein experiment.",
+      "raw_seconds": 11.19201814058957,
+      "speech_window_seconds": 11.19201814058957,
+      "tempo": 1.159794625967831,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "De houtkeuze telt eveneens. Steunen moeten plaatselijke indrukking en buiging verdragen en samenwerken met de andere onderdelen van de transportconstructie.",
+      "raw_seconds": 11.853786848072563,
+      "speech_window_seconds": 11.853786848072563,
+      "tempo": 1.2283716941007836,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Hetzelfde geldt voor de weg. Een stevige plek compenseert geen zwakke grond onder een ander deel van de last.",
+      "raw_seconds": 8.080544217687075,
+      "speech_window_seconds": 8.080544217687075,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Als regen de bodem verandert, wordt afwatering een mechanische kwestie. Een voorbereide route kan niet eenmaal worden aangelegd en daarna vergeten.",
+      "raw_seconds": 10.878548752834467,
+      "speech_window_seconds": 10.878548752834467,
+      "tempo": 1.127310751589064,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Onderhoud kost tijd en middelen. Een serieus model voorziet pauzes om steunen te controleren, apparatuur te verplaatsen en schade te herstellen.",
+      "raw_seconds": 10.983038548752834,
+      "speech_window_seconds": 10.983038548752834,
+      "tempo": 1.1381387097153195,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Ook de arbeidsorganisatie is een systeem. Steenwinning, timmerwerk, touwwerk, landmeting, trekken en bevoorrading vragen verschillende vaardigheden en verantwoordelijkheden.",
+      "raw_seconds": 13.130884353741497,
+      "speech_window_seconds": 13.130884353741497,
+      "tempo": 1.3607134045327975,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Een foto vertelt niets over de status of contracten van de arbeiders. Uit stenen alleen mogen we geen volledige arbeidsgeschiedenis verzinnen.",
+      "raw_seconds": 10.727619047619047,
+      "speech_window_seconds": 10.727619047619047,
+      "tempo": 1.1116703676289168,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "De noodzaak van organisatie is wel herkenbaar. Materialen, voedsel, water, gereedschap en instructies moeten op tijd de juiste mensen bereiken.",
+      "raw_seconds": 11.366167800453514,
+      "speech_window_seconds": 11.366167800453514,
+      "tempo": 1.1778412228449238,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Buiten gehoorsafstand worden signalen belangrijk. Gezamenlijke timing telt vooral wanneer de lading snel moet stoppen.",
+      "raw_seconds": 9.137052154195011,
+      "speech_window_seconds": 9.137052154195011,
+      "tempo": 0.9468447828181359,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Het werk aan de weg roept een planningsvraag op. Waren die voorbereidingen voor één blok of voor een reeks transporten?",
+      "raw_seconds": 8.475283446712018,
+      "speech_window_seconds": 8.475283446712018,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Herhaald transport kan grote voorbereidingen rechtvaardigen. Maar planning, aantal ploegen en volgorde moeten door bewijs worden bepaald, niet door animatie.",
+      "raw_seconds": 11.34294784580499,
+      "speech_window_seconds": 11.34294784580499,
+      "tempo": 1.1754350099279782,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "De laatste voeg stelt eigen eisen. Het blok moet aankomen in een stand die past bij het metselwerk en de beschikbare stelruimte.",
+      "raw_seconds": 9.613061224489796,
+      "speech_window_seconds": 9.613061224489796,
+      "tempo": 0.9961721476155229,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "Een enorme last in een krappe ruimte draaien is geen kleine afwerking. Het routeplan moet daar vóór vertrek rekening mee houden.",
+      "raw_seconds": 9.183492063492064,
+      "speech_window_seconds": 9.183492063492064,
+      "tempo": 0.9516572086520273,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "Een antieke verklaring kan niet zomaar een moderne kraan inzetten. Een vertrouwd hijsbeeld kan juist het probleem verbergen dat we willen verklaren.",
+      "raw_seconds": 10.170340136054422,
+      "speech_window_seconds": 10.170340136054422,
+      "tempo": 1.0539212576222199,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Antieke machines zijn beschreven, maar hun vermogen en opstelling tellen mee. Een bekende naam bewijst niet dat elk werk uitvoerbaar was.",
+      "raw_seconds": 10.100680272108843,
+      "speech_window_seconds": 10.100680272108843,
+      "tempo": 1.0467026188713826,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "De grootste achtergebleven groevestenen zijn bijzonder leerzaam. Hun onvoltooide toestand onderscheidt ambitie, winning en geslaagde plaatsing.",
+      "raw_seconds": 10.878548752834467,
+      "speech_window_seconds": 10.878548752834467,
+      "tempo": 1.127310751589064,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "Een steenfout, gewijzigd plan of praktische moeilijkheid kan het werk hebben gestopt. Eén oorzaak aanwijzen vraagt specifiek bewijs.",
+      "raw_seconds": 9.891700680272109,
+      "speech_window_seconds": 9.891700680272109,
+      "tempo": 1.0250467026188714,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Het blok vertelt niet waarom het werd achtergelaten. Zijn toestand moet worden verbonden met de groeve en de bredere bouwvolgorde.",
+      "raw_seconds": 9.264761904761905,
+      "speech_window_seconds": 9.264761904761905,
+      "tempo": 0.9600789538613372,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Ook het transportoppervlak vraagt onderzoek. Rustten de steunen op rots, voorbereide aanvulling, hout of een combinatie? Elke keuze verandert de berekening.",
+      "raw_seconds": 12.45750566893424,
+      "speech_window_seconds": 12.45750566893424,
+      "tempo": 1.290933229941372,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Moderne proeven kunnen wrijving en besturing verklaren. Hun waarde groeit als materialen, schaal en beperkingen duidelijk worden vermeld.",
+      "raw_seconds": 9.891700680272109,
+      "speech_window_seconds": 9.891700680272109,
+      "tempo": 1.0250467026188714,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Een nuttig experiment hoeft niet alles na te spelen. Het beantwoordt een gerichte vraag zonder meer te beweren dan de opstelling kan aantonen.",
+      "raw_seconds": 10.263219954648527,
+      "speech_window_seconds": 10.263219954648527,
+      "tempo": 1.0635461092900027,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Archeologie en mechanica vullen elkaar aan. De vindplaats begrenst het model, en het model laat zien welke sporen verder onderzoek verdienen.",
+      "raw_seconds": 10.599909297052154,
+      "speech_window_seconds": 10.599909297052154,
+      "tempo": 1.0984361965857155,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "Toets een route aan het echte terrein en een ankerpunt aan zijn context. Een nette tekening vervangt geen van beide onderzoeken.",
+      "raw_seconds": 9.02095238095238,
+      "speech_window_seconds": 9.02095238095238,
+      "tempo": 0.9348137182334072,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Ontbrekende machines zijn op zichzelf niet vreemd. Hout en vezels blijven minder goed bewaard dan kalksteen. Hun afwezigheid bewijst geen willekeurige reconstructie.",
+      "raw_seconds": 12.620045351473923,
+      "speech_window_seconds": 12.620045351473923,
+      "tempo": 1.307776720359992,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "Een goede verklaring noemt toetsbare voorwaarden: benodigde ruimte, contactvlakken, eisen aan steunen en de volgorde van handelingen.",
+      "raw_seconds": 9.97297052154195,
+      "speech_window_seconds": 9.97297052154195,
+      "tempo": 1.0334684478281813,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Hier wordt het raadsel nuttig. In plaats van onmogelijkheid te herhalen, kunnen we vragen welk concreet onderdeel nog onverklaard is.",
+      "raw_seconds": 9.578231292517007,
+      "speech_window_seconds": 9.578231292517007,
+      "tempo": 0.9925628282401043,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Misschien is de weg zwak, of de touwopstelling, of de vereenvoudigde eindplaatsing. Iedere mogelijkheid vraagt een eigen toets.",
+      "raw_seconds": 9.47374149659864,
+      "speech_window_seconds": 9.47374149659864,
+      "tempo": 0.9817348701138486,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Die vragen verkleinen de prestatie niet. Ze brengen ons dichter bij de praktische beslissingen die de bouwers stap voor stap moesten nemen.",
+      "raw_seconds": 9.485351473922902,
+      "speech_window_seconds": 9.485351473922902,
+      "tempo": 0.9829379765723214,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Vergelijk de mogelijkheden eerlijk. Iedere methode moet dezelfde last dragen, een geloofwaardige route volgen en dezelfde eindpositie bereiken.",
+      "raw_seconds": 11.029478458049887,
+      "speech_window_seconds": 11.029478458049887,
+      "tempo": 1.142951135549211,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Eerst het glijden over een voorbereide baan. Dat geeft brede ondersteuning en een directe trekverbinding, maar vraagt beheersing van wrijving en onderhoud.",
+      "raw_seconds": 11.679637188208616,
+      "speech_window_seconds": 11.679637188208616,
+      "tempo": 1.2103250972236907,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Rollen onder een lastverdelende constructie kunnen weerstand verminderen. Ze vragen sterke materialen, uitlijning, hergebruik van de rollen en betrouwbare grond.",
+      "raw_seconds": 12.434285714285714,
+      "speech_window_seconds": 12.434285714285714,
+      "tempo": 1.2885270170244263,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "Een combinatie kan per fase een andere methode gebruiken. Dat helpt alleen als ook de overgangen tussen die methoden worden uitgelegd.",
+      "raw_seconds": 10.530249433106576,
+      "speech_window_seconds": 10.530249433106576,
+      "tempo": 1.0912175578348784,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Kaapstanders en katrollen verklaren hoe trekkracht wordt uitgeoefend. Ze kunnen het transportsysteem aanvullen, maar verklaren niet wat het gewicht van de steen draagt.",
+      "raw_seconds": 11.77251700680272,
+      "speech_window_seconds": 11.77251700680272,
+      "tempo": 1.2199499488914736,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Een overtuigend model kan gewone principes op buitengewone schaal verbinden: druk, wrijving, hefboomwerking, geometrie en organisatie.",
+      "raw_seconds": 10.913378684807256,
+      "speech_window_seconds": 10.913378684807256,
+      "tempo": 1.1309200709644824,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Gewone principes maken het werk niet eenvoudig. Materialen met grenzen en mensen die afstemming nodig hebben, moeten als één systeem samenwerken.",
+      "raw_seconds": 10.983038548752834,
+      "speech_window_seconds": 10.983038548752834,
+      "tempo": 1.1381387097153195,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "Een methode kan natuurkundig mogelijk zijn zonder historisch bewezen te zijn. Dat onderscheid is essentieel wanneer we een onbekend deel van het verleden in beeld brengen.",
+      "raw_seconds": 11.702857142857143,
+      "speech_window_seconds": 11.702857142857143,
+      "tempo": 1.2127313101406365,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "De werkelijke methode vraagt sterkere verbanden tussen sporen, terrein, materialen, datering en werkvolgorde. Een overtuigende animatie alleen is onvoldoende.",
+      "raw_seconds": 12.805804988662132,
+      "speech_window_seconds": 12.805804988662132,
+      "tempo": 1.3270264236955576,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "De geplaatste Trilithon toont het eindresultaat. De groeve toont voorbereiding en onafgemaakt werk. Geen van beide beantwoordt op zichzelf alle vragen.",
+      "raw_seconds": 12.30657596371882,
+      "speech_window_seconds": 12.30657596371882,
+      "tempo": 1.275292845981225,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "De geschatte zestienhonderdvijftig ton hoort bij de grote vondst in de groeve, niet bij elk blok dat het heiligdom bereikte.",
+      "raw_seconds": 7.90639455782313,
+      "speech_window_seconds": 7.90639455782313,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "Een geschatte massa is geen rechtstreekse weging. Afmetingen, verborgen vlakken en aangenomen dichtheid verklaren verschillen tussen gepubliceerde schattingen.",
+      "raw_seconds": 11.493877551020407,
+      "speech_window_seconds": 11.493877551020407,
+      "tempo": 1.1910753938881251,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Bewaar de onzekerheid in de vertelling. Een precieze grafiek kan misleiden als het bewijs alleen een globale schatting ondersteunt.",
+      "raw_seconds": 9.55501133786848,
+      "speech_window_seconds": 9.55501133786848,
+      "tempo": 0.9901566153231586,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Wat weten we zeker? De stenen horen bij een werkelijk landschap van winning en monumentale bouw. Hun onderzoek vraagt geduldige observatie.",
+      "raw_seconds": 11.784126984126985,
+      "speech_window_seconds": 11.784126984126985,
+      "tempo": 1.2211530553499466,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "De open vragen zijn concreet: de precieze transportopstelling, de gedetailleerde route en de stappen waarmee iedere steen op zijn plaats kwam.",
+      "raw_seconds": 9.85687074829932,
+      "speech_window_seconds": 9.85687074829932,
+      "tempo": 1.021437383243453,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Een bruikbaar antwoord heeft twee lagen. We verklaren mechanische mogelijkheden en laten historische details open zolang het bewijs geen uitsluitsel geeft.",
+      "raw_seconds": 11.00625850340136,
+      "speech_window_seconds": 11.00625850340136,
+      "tempo": 1.1405449226322653,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Dat geeft de kijker iets om te begrijpen en de onderzoeker iets om te toetsen. Verwondering wordt het begin van onderzoek.",
+      "raw_seconds": 8.881632653061224,
+      "speech_window_seconds": 8.881632653061224,
+      "tempo": 0.9203764407317331,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Toekomstige metingen en opgravingen kunnen het beeld verfijnen. Nieuwe gegevens kunnen een route wijzigen, bouwverbanden tonen of een aanname uitsluiten.",
+      "raw_seconds": 11.737687074829932,
+      "speech_window_seconds": 11.737687074829932,
+      "tempo": 1.216340629516055,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "Een goede reconstructie moet kunnen veranderen. Ze ordent vragen en bewijs, in plaats van een spectaculair beeld tegen correcties te beschermen.",
+      "raw_seconds": 10.866938775510205,
+      "speech_window_seconds": 10.866938775510205,
+      "tempo": 1.1261076451305911,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Keer terug naar het eerste uitzicht op het fundament. De stenen zijn niet kleiner, maar het probleem eromheen is duidelijker opgebouwd.",
+      "raw_seconds": 9.7059410430839,
+      "speech_window_seconds": 9.7059410430839,
+      "tempo": 1.0057969992833056,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Achter het afgewerkte vlak ligt mogelijk een voortdurend ondersteunde reeks: steenkeuze, voorbereid draagvlak, beheerst vervoer en zorgvuldige eindafstelling.",
+      "raw_seconds": 10.95981859410431,
+      "speech_window_seconds": 10.95981859410431,
+      "tempo": 1.135732496798374,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Daarachter liggen zelden volledig bewaarde vaardigheden: steen beoordelen, hout bewerken, touwen hanteren, terrein lezen en mensen coördineren.",
+      "raw_seconds": 10.797278911564625,
+      "speech_window_seconds": 10.797278911564625,
+      "tempo": 1.1188890063797539,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "De prestatie berust op opgebouwde kennis én kracht. De enorme schaal maakt kleine praktische beslissingen juist belangrijker.",
+      "raw_seconds": 9.229931972789116,
+      "speech_window_seconds": 9.229931972789116,
+      "tempo": 0.9564696344859187,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Baalbek is ook levend erfgoed in Libanon. Technisch onderzoek moet onze belangstelling voor geschiedenis, gemeenschappen en blijvende zorg versterken.",
+      "raw_seconds": 10.832108843537416,
+      "speech_window_seconds": 10.832108843537416,
+      "tempo": 1.1224983257551726,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Behoud vraagt documentatie en materiaalkennis. Zorgvuldig kijken helpt het verleden verklaren en beschermt wat voor de toekomst is overgebleven.",
+      "raw_seconds": 11.42421768707483,
+      "speech_window_seconds": 11.42421768707483,
+      "tempo": 1.183856755137288,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Wat zou je eerst meten bij een volgend onderzoek: route, contactvlakken, steenafmetingen of mogelijke werkruimte?",
+      "raw_seconds": 8.661043083900227,
+      "speech_window_seconds": 8.661043083900227,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Iedere keuze leidt tot een andere proef. Zo wordt een monumentale vraag een reeks kleinere vragen die werkelijk te onderzoeken zijn.",
+      "raw_seconds": 9.717551020408163,
+      "speech_window_seconds": 9.717551020408163,
+      "tempo": 1.0070001057417786,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "We kennen niet elke touwbeweging met zekerheid. We kunnen het bewijs, de mechanica en de menselijke organisatie wel duidelijker begrijpen.",
+      "raw_seconds": 10.599909297052154,
+      "speech_window_seconds": 10.599909297052154,
+      "tempo": 1.0984361965857155,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "De steen is nog steeds enorm. Welke reeks ondersteunde bewegingen bracht hem van de groeve hierheen? En welk spoor zou dat bewijzen?",
+      "raw_seconds": 11.133968253968254,
+      "speech_window_seconds": 11.133968253968254,
+      "tempo": 1.1537790936754666,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1242,
+  "decoded_samples": 29808000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-nl-20m42s.mp3",
+  "flac": "voice-nl-20m42s.flac",
+  "mp3_sha256": "71cb79f4c2b726aee320f0416aee24072dfc66b5a23db0a321b4e0ad49efe941",
+  "flac_sha256": "9c1240c7577f5412d726a0d8778f43ece4b6038646d5b7847ccff5b4e7645a92"
+}

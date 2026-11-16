@@ -1,0 +1,1137 @@
+{
+  "locale": "da",
+  "voice_id": "piper:da_DK-talesyntese-medium:0",
+  "engine": "Piper ONNX FP32 CPU",
+  "target_seconds": 1242,
+  "spoken_cues": 124,
+  "closing_silence_seconds": 2,
+  "config_hash": "6148cc960aa2fe14a3663608c6dbda05321b756d1a7b0dbf63d03a4cb985bb59",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "I Baalbeks tempelfundament ligger tre enorme sten. Størrelsen er slående. Det svære spørgsmål er, hvordan de kom hertil.",
+      "raw_seconds": 6.710566893424036,
+      "speech_window_seconds": 6.710566893424036,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "I stenbruddet tæt på ligger endnu større blokke. Nogle blev aldrig helt frigjort. De skal holdes adskilt fra stenene, som faktisk nåede templet.",
+      "raw_seconds": 7.9412244897959186,
+      "speech_window_seconds": 7.9412244897959186,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "Det er forskellige slags spor. Vi må følge hele arbejdet, fra klippefladen til den sidste fuge i det færdige murværk.",
+      "raw_seconds": 6.095238095238095,
+      "speech_window_seconds": 6.095238095238095,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "Vi er i Bekaa-dalen i Libanon. Landskabet omkring Baalbek er formet af landbrug, bosættelse, rejser og århundreders byggeri.",
+      "raw_seconds": 7.825124716553288,
+      "speech_window_seconds": 7.825124716553288,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "Helligdommen blev et monumentalt centrum i det romerske Heliopolis. De bevarede bygninger fortæller om flere byggefaser, ikke ét enkelt øjeblik.",
+      "raw_seconds": 8.196643990929704,
+      "speech_window_seconds": 8.196643990929704,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "Jupitertemplet dominerede anlægget. De store søjler trækker blikket opad, men vores undersøgelse begynder tættere på jorden.",
+      "raw_seconds": 7.128526077097506,
+      "speech_window_seconds": 7.128526077097506,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "De tre blokke i fundamentet kaldes Trilithon. De viser, at meget store sten faktisk blev flyttet og sat på plads her.",
+      "raw_seconds": 6.861496598639456,
+      "speech_window_seconds": 6.861496598639456,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "Hver blok anslås til mange hundrede ton. Tallet afhænger af de målte dimensioner og den massefylde, man antager for kalkstenen.",
+      "raw_seconds": 7.4071655328798185,
+      "speech_window_seconds": 7.4071655328798185,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "Det kendte stenbrud ligger omtrent en kilometer fra helligdommen. En kort gåtur, men en krævende vej for en usædvanligt tung last.",
+      "raw_seconds": 7.2562358276643995,
+      "speech_window_seconds": 7.2562358276643995,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "Afstanden er ikke nok. Vi skal også kende hældninger, jordens bæreevne, arbejdspladsen og højden ved slutpunktet.",
+      "raw_seconds": 6.15328798185941,
+      "speech_window_seconds": 6.15328798185941,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "Ingen fuldstændig byggedagbog er bevaret. Derfor må enhver rekonstruktion skelne mellem de fysiske spor og vores egne antagelser.",
+      "raw_seconds": 7.6741950113378685,
+      "speech_window_seconds": 7.6741950113378685,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "Vi skal prøve mulighederne mod begrænsningerne. En forklaring må forbinde brydning, understøtning, træk, styring og endelig placering.",
+      "raw_seconds": 6.896326530612245,
+      "speech_window_seconds": 6.896326530612245,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "Begynd i stenbruddet, mens stenen stadig var en del af bakken. Den første tekniske beslutning kom før det første forsøg på at flytte den.",
+      "raw_seconds": 7.302675736961452,
+      "speech_window_seconds": 7.302675736961452,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "Byggerne behøvede egnet klippe og en tilgængelig arbejdsplads. Lagflader, revner, adgang og den planlagte form spillede alle en rolle.",
+      "raw_seconds": 7.581315192743764,
+      "speech_window_seconds": 7.581315192743764,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "En skjult svaghed i en kæmpeblok kunne spilde meget arbejde. Stenbrydning krævede derfor både dømmekraft, erfaring og fysisk indsats.",
+      "raw_seconds": 7.9760544217687075,
+      "speech_window_seconds": 7.9760544217687075,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "Grøfter og bearbejdede flader bevarer spor af brydningen. De hjælper med at undersøge, hvor arbejderne stod, og hvilke stenflader de kunne nå.",
+      "raw_seconds": 7.418775510204082,
+      "speech_window_seconds": 7.418775510204082,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "Se nøje på sporene. Et imponerende fotografi kan skjule de smalle arbejdsrum, som bestemte rækkefølgen af tilhugning og frigørelse.",
+      "raw_seconds": 7.650975056689342,
+      "speech_window_seconds": 7.650975056689342,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "Den gravide kvindes sten er kendt for sin størrelse. Den ligger dog stadig i stenbruddet og er ikke indbygget i templet.",
+      "raw_seconds": 6.931156462585034,
+      "speech_window_seconds": 6.931156462585034,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "I totusindogfjorten blev endnu en kæmpeblok frilagt i stenbruddet. Massen blev anslået til omkring sekstenhundrede og halvtreds ton. Den ligger stadig der.",
+      "raw_seconds": 9.079002267573696,
+      "speech_window_seconds": 9.079002267573696,
+      "tempo": 0.9408292505257715,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "Fundet viser de store ambitioner bag stenbrydningen. Det beviser ikke, at en sten med den anslåede masse blev transporteret til templet.",
+      "raw_seconds": 7.279455782312925,
+      "speech_window_seconds": 7.279455782312925,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "Den forskel ændrer spørgsmålet. Vi bør undersøge både vellykket transport og ufærdigt arbejde. Et opgivet forsøg kan vise praktiske grænser.",
+      "raw_seconds": 8.394013605442177,
+      "speech_window_seconds": 8.394013605442177,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "Arkæologiske hold med libanesiske specialister har undersøgt stenbruddene. Deres planer og observationer er et sikrere udgangspunkt end et enkelt billede på nettet.",
+      "raw_seconds": 9.485351473922902,
+      "speech_window_seconds": 9.485351473922902,
+      "tempo": 0.9829379765723214,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "Ved helligdommen ser vi andre spor: murværk på plads, mål, fuger og forholdet til de omgivende stenskifter.",
+      "raw_seconds": 6.315827664399093,
+      "speech_window_seconds": 6.315827664399093,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "En færdig fuge viser slutpunktet, men ikke alle tidligere bevægelser. Den manglende vej må rekonstrueres med spor og mekaniske overvejelser.",
+      "raw_seconds": 8.394013605442177,
+      "speech_window_seconds": 8.394013605442177,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "Baalbeks tidligere historie er et selvstændigt spørgsmål. Et steds alder fastlægger ikke automatisk alderen på hver synlig bygningsdel.",
+      "raw_seconds": 7.883174603174603,
+      "speech_window_seconds": 7.883174603174603,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "Byggefaser undersøges gennem udgravninger, bygningsforhold og materialer. Størrelsen alene kan hverken datere en sten eller identificere dens bygmester.",
+      "raw_seconds": 8.811972789115647,
+      "speech_window_seconds": 8.811972789115647,
+      "tempo": 0.913157801980896,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "Antikke tekster giver også sammenligninger. Vitruvius beskrev løftemaskiner og tunge transporter, herunder problemerne ved veje med dårlig bæreevne.",
+      "raw_seconds": 8.417233560090702,
+      "speech_window_seconds": 8.417233560090702,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "Teksterne viser en mekanisk tradition. De fortæller ikke, at en bestemt maskine blev brugt til en bestemt sten i Baalbek.",
+      "raw_seconds": 6.791836734693877,
+      "speech_window_seconds": 6.791836734693877,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "Arkæologen Jean-Pierre Adam undersøgte gangspil og transportopstillinger. Hans forslag er tekniske rekonstruktioner, ikke bevarede beretninger om det oprindelige arbejde.",
+      "raw_seconds": 9.404081632653062,
+      "speech_window_seconds": 9.404081632653062,
+      "tempo": 0.9745162313630116,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "Med de grænser på plads kan vi bygge en forsigtig model. Først skal blokken formes, frigøres, understøttes og gøres klar til transport.",
+      "raw_seconds": 7.500045351473923,
+      "speech_window_seconds": 7.500045351473923,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "Forestil dig blokkens omrids i klippen. Når siderne bearbejdes, opstår der adgang, men undersiden forbinder stadig lasten med grundfjeldet.",
+      "raw_seconds": 7.592925170068027,
+      "speech_window_seconds": 7.592925170068027,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "Når undersiden frigøres, ændres vægtens understøtning. Modellen skal vise, hvad der bærer stenen gennem overgangen, uden et pludseligt sammenbrud.",
+      "raw_seconds": 8.045714285714286,
+      "speech_window_seconds": 8.045714285714286,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "Træunderlag, kiler eller forberedte understøtninger er mulige. Den præcise opstilling er stadig en hypotese, som skal passe til de bevarede spor.",
+      "raw_seconds": 8.498503401360544,
+      "speech_window_seconds": 8.498503401360544,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "Det første princip er at etablere ny støtte, før den gamle fjernes. Ved en kæmpesten kan en lille ukontrolleret bevægelse blive farlig.",
+      "raw_seconds": 7.604535147392291,
+      "speech_window_seconds": 7.604535147392291,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "Så kommer vejen. Hårdere træk hjælper ikke nødvendigvis. Ekstra kræfter kan ikke redde et transportunderlag, der synker under lasten.",
+      "raw_seconds": 7.035646258503402,
+      "speech_window_seconds": 7.035646258503402,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "Tryk afhænger af, hvor stort et areal kraften fordeles over. Bredere støtte mindsker gennemsnitstrykket, men jorden skal stadig bære hele vægten.",
+      "raw_seconds": 8.301133786848073,
+      "speech_window_seconds": 8.301133786848073,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "Forberedelse af vejen hører med til forklaringen. Udjævning, dræning, komprimering og reparation kan være lige så vigtige som trækanordningen.",
+      "raw_seconds": 7.546485260770975,
+      "speech_window_seconds": 7.546485260770975,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "Derefter kommer friktionen mellem kontaktfladerne. Den varierer med materiale, fugt, retning, deformation og understøtningens tilstand.",
+      "raw_seconds": 7.883174603174603,
+      "speech_window_seconds": 7.883174603174603,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "Lad os bruge en modelsten på otte hundrede ton. Det er en valgt værdi til beregningen, ikke en ny måling.",
+      "raw_seconds": 5.537959183673469,
+      "speech_window_seconds": 5.537959183673469,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "På vandret jord ganger glidemodellen tyngdekraften med friktionskoefficienten. Koefficienten skal passe til de undersøgte materialer og den konkrete opstilling.",
+      "raw_seconds": 8.452063492063493,
+      "speech_window_seconds": 8.452063492063493,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "Med en antaget friktionskoefficient på nul komma nul fem bliver modstanden cirka fire hundrede kilonewton, før andre vanskeligheder medregnes.",
+      "raw_seconds": 7.627755102040816,
+      "speech_window_seconds": 7.627755102040816,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "Øges den antagne koefficient til nul komma to, firedobles modstanden. Kontaktfladernes tilstand ændrer udfordringens størrelse betydeligt.",
+      "raw_seconds": 8.068934240362811,
+      "speech_window_seconds": 8.068934240362811,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "Tallene afslører ikke antikkens antal arbejdere. De viser behovet for begrundede antagelser frem for blot et imponerende antal mennesker.",
+      "raw_seconds": 7.848344671201814,
+      "speech_window_seconds": 7.848344671201814,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "En slæde fordeler lasten og giver en konstruktion at trække i. Undersiden, samlingerne og kontakten med banen kræver undersøgelse.",
+      "raw_seconds": 7.4071655328798185,
+      "speech_window_seconds": 7.4071655328798185,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "Ruller er en anden mulighed, men fjerner ikke al modstand. Kontaktpunkterne skal tåle trykket, og rullerne skal holde den rette retning.",
+      "raw_seconds": 7.2562358276643995,
+      "speech_window_seconds": 7.2562358276643995,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "Løse ruller kan glide til siden eller møde ujævn jord. En realistisk animation skal vise styret bevægelse med synlig støtte og indsats.",
+      "raw_seconds": 7.929614512471655,
+      "speech_window_seconds": 7.929614512471655,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "Vi må også forklare, hvordan understøtninger hentes tilbage og flyttes frem. Transporten gentager en cyklus: forberede, flytte, kontrollere og forberede igen.",
+      "raw_seconds": 9.462131519274376,
+      "speech_window_seconds": 9.462131519274376,
+      "tempo": 0.9805317636553756,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "Ved både glidning og rulning skal vejen rumme hele systemets bredde. Skarpe sving og pludselige hældningsskift giver flere mekaniske problemer.",
+      "raw_seconds": 7.569705215419501,
+      "speech_window_seconds": 7.569705215419501,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "Hvor kommer trækkraften fra? Mennesker, dyr, reb og maskiner er mulige elementer. Opstillingen afgør, hvor effektivt de arbejder sammen.",
+      "raw_seconds": 8.78875283446712,
+      "speech_window_seconds": 8.78875283446712,
+      "tempo": 0.9107515890639503,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "Et reb overfører kræfter. Knuder, bøjninger, slid og fastgørelsespunkter kan svække et system, som virker overbevisende på tegningen.",
+      "raw_seconds": 8.243083900226758,
+      "speech_window_seconds": 8.243083900226758,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "Taljer mindsker kraftbehovet, men kræver mere reb trukket ind. Selv et ideelt system med forholdet fire til en følger denne byttehandel.",
+      "raw_seconds": 7.7090249433106575,
+      "speech_window_seconds": 7.7090249433106575,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "Virkelige taljer giver friktion og belaster konstruktionen. Kraftgevinsten erstatter ikke kontrol af reb, rammer og fundamenter.",
+      "raw_seconds": 7.012426303854875,
+      "speech_window_seconds": 7.012426303854875,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "Et gangspil trækker i rebet ved at dreje. Længere arme øger drejningsmomentet, og tromlen omsætter rotationen til et kontrolleret træk.",
+      "raw_seconds": 7.720634920634921,
+      "speech_window_seconds": 7.720634920634921,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "Sådan en maskine kræver også en solid forankring. Reaktionskraften skal optages af et forberedt fundament, en anden konstruktion eller jorden.",
+      "raw_seconds": 8.324353741496598,
+      "speech_window_seconds": 8.324353741496598,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "Spørgsmålet rækker ud over selve maskinen. Kan hele kæden fra arbejder til jord optage kræfterne uden at miste kontrollen?",
+      "raw_seconds": 6.826666666666667,
+      "speech_window_seconds": 6.826666666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "Flere trækpunkter kan fordele arbejdet. Men ujævnt træk kan dreje lasten eller overbelaste en del af systemet.",
+      "raw_seconds": 5.990748299319728,
+      "speech_window_seconds": 5.990748299319728,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "Bevægelsen bør ske i små, synlige trin. Når kæmpeblokken først bevæger sig, er der ikke plads til improvisation ved en ukontrolleret masse.",
+      "raw_seconds": 7.87156462585034,
+      "speech_window_seconds": 7.87156462585034,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "At standse er lige så vigtigt som at starte. Stopklodser, tilbageholdende anordninger og en planlagt hvileposition hører til kontrolleret tung transport.",
+      "raw_seconds": 8.301133786848073,
+      "speech_window_seconds": 8.301133786848073,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "Højdeforskelle tæller også. Selv en svag stigning tilføjer en del af tyngdekraften, som trækanordningen skal overvinde.",
+      "raw_seconds": 6.698956916099773,
+      "speech_window_seconds": 6.698956916099773,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "For vores model på otte hundrede ton tilføjer en stigning på én procent cirka firs kilonewton. Det kommer oven i friktionen.",
+      "raw_seconds": 7.22140589569161,
+      "speech_window_seconds": 7.22140589569161,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "Nedad kommer et andet problem. Tyngdekraften kan hjælpe bevægelsen, men byggerne må hindre acceleration og holde lasten på den planlagte vej.",
+      "raw_seconds": 7.859954648526077,
+      "speech_window_seconds": 7.859954648526077,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "En bekvem rute på et fladt kort kan være vanskelig i profil. Terrænet kan udelukke en ellers tillokkende rekonstruktion.",
+      "raw_seconds": 6.780226757369615,
+      "speech_window_seconds": 6.780226757369615,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "Ved tempelfundamentet skal lasten nå den rigtige højde under kontrol. En foreslået rampe eller midlertidig opfyldning skal også kunne bære vægten.",
+      "raw_seconds": 8.103764172335602,
+      "speech_window_seconds": 8.103764172335602,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "Det færdige monument behøver ikke have stået uændret gennem byggeriet. Arbejdsniveauer og midlertidige områder kan have set anderledes ud.",
+      "raw_seconds": 7.627755102040816,
+      "speech_window_seconds": 7.627755102040816,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "Den sidste indpasning er en særskilt operation. Små bevægelser, underlæg, løftestænger og kontroller er mulige; deres konkrete brug her er ikke bevist.",
+      "raw_seconds": 8.997732426303855,
+      "speech_window_seconds": 8.997732426303855,
+      "tempo": 0.9324075053164617,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "Nøglen er sammenhængen. Stenen skal være understøttet fra stenbrud til fuge, uden uforklarede spring mellem imponerende billeder.",
+      "raw_seconds": 7.291065759637188,
+      "speech_window_seconds": 7.291065759637188,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "Lad os afprøve modellen kritisk. En metode, der virker på bordet, kan svigte, når træ, reb og jord belastes langt mere.",
+      "raw_seconds": 7.4071655328798185,
+      "speech_window_seconds": 7.4071655328798185,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "Skalaen ændrer kontakttryk, bøjning og materialernes opførsel. Større dimensioner bevarer ikke automatisk betingelserne fra et lille forsøg.",
+      "raw_seconds": 8.428843537414966,
+      "speech_window_seconds": 8.428843537414966,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "Valget af træ betyder også noget. Understøtningerne skal modstå lokal sammenpresning og bøjning og arbejde sammen med konstruktionens øvrige dele.",
+      "raw_seconds": 7.987664399092971,
+      "speech_window_seconds": 7.987664399092971,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "Det gælder også vejen. Fast materiale under ét punkt opvejer ikke et svagt område under en anden del af lasten.",
+      "raw_seconds": 6.2345578231292516,
+      "speech_window_seconds": 6.2345578231292516,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "Når regn ændrer jorden, bliver dræning et mekanisk spørgsmål. En forberedt rute kan ikke bare bygges én gang og derefter glemmes.",
+      "raw_seconds": 7.848344671201814,
+      "speech_window_seconds": 7.848344671201814,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "Vedligeholdelse kræver tid og ressourcer. Modellen må tillade pauser til at kontrollere støtte, flytte udstyr og reparere skader før næste bevægelse.",
+      "raw_seconds": 8.034104308390022,
+      "speech_window_seconds": 8.034104308390022,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "Arbejdsstyrken er også et system. Stenbrydning, tømrerarbejde, reb, opmåling, træk og forsyning kræver forskellige færdigheder og ansvarsområder.",
+      "raw_seconds": 8.78875283446712,
+      "speech_window_seconds": 8.78875283446712,
+      "tempo": 0.9107515890639503,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "Et fotografi fortæller ikke arbejdernes status eller kontrakter. Vi bør ikke opfinde en hel arbejdshistorie ud fra stenene alene.",
+      "raw_seconds": 7.3723356009070296,
+      "speech_window_seconds": 7.3723356009070296,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "Behovet for organisering er dog tydeligt. Materialer, mad, vand, redskaber og instruktioner skal nå de rette mennesker på det rette tidspunkt.",
+      "raw_seconds": 7.650975056689342,
+      "speech_window_seconds": 7.650975056689342,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "Uden for høreafstand bliver signaler vigtige. Fælles timing er særlig afgørende, når lasten hurtigt skal standse.",
+      "raw_seconds": 6.42031746031746,
+      "speech_window_seconds": 6.42031746031746,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "Arbejdet med vejen rejser også et planlægningsspørgsmål. Skulle forberedelsen bruges til én blok eller en hel række leverancer?",
+      "raw_seconds": 6.826666666666667,
+      "speech_window_seconds": 6.826666666666667,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "Gentagen transport kan begrunde store forberedelser. Men tidsplanen, antallet af hold og leveringsrækkefølgen må bestemmes af spor, ikke animation.",
+      "raw_seconds": 8.219863945578231,
+      "speech_window_seconds": 8.219863945578231,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "Den sidste fuge har egne udfordringer. Blokken skal ankomme i en retning, der passer til murværket og pladsen til justering.",
+      "raw_seconds": 6.478367346938776,
+      "speech_window_seconds": 6.478367346938776,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "At dreje en enorm last på trang plads er ingen lille afslutning. Ruten skal tage højde for problemet, før transporten begynder.",
+      "raw_seconds": 6.8034467120181406,
+      "speech_window_seconds": 6.8034467120181406,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "En antik forklaring kan ikke bare bruge en moderne kran. Et velkendt løftebillede kan skjule netop det problem, vi forsøger at forklare.",
+      "raw_seconds": 7.500045351473923,
+      "speech_window_seconds": 7.500045351473923,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "Antikke maskiner er dokumenteret, men kapacitet og opstilling betyder noget. Et kendt navn beviser ikke, at maskinen kunne udføre enhver opgave.",
+      "raw_seconds": 8.962902494331066,
+      "speech_window_seconds": 8.962902494331066,
+      "tempo": 0.9287981859410431,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "De største sten, som blev i stenbruddet, er særligt nyttige. Deres ufærdige tilstand adskiller ambition, brydning og vellykket placering.",
+      "raw_seconds": 7.430385487528345,
+      "speech_window_seconds": 7.430385487528345,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "En fejl i klippen, en ændret plan eller en praktisk vanskelighed kunne standse arbejdet. At vælge én årsag kræver konkrete spor.",
+      "raw_seconds": 7.650975056689342,
+      "speech_window_seconds": 7.650975056689342,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "Blokken fortæller ikke med ord, hvorfor den blev opgivet. Tilstanden må forbindes med stenbruddet omkring den og byggeriets større forløb.",
+      "raw_seconds": 6.745396825396825,
+      "speech_window_seconds": 6.745396825396825,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "Transportfladen kræver også undersøgelse. Stod understøtningerne på klippe, forberedt fyld, træ eller en kombination? Hvert valg ændrer beregningen.",
+      "raw_seconds": 8.335963718820862,
+      "speech_window_seconds": 8.335963718820862,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "Moderne forsøg kan belyse friktion og styring. De bliver mere værdifulde, når materialer, skala og begrænsninger beskrives tydeligt.",
+      "raw_seconds": 7.476825396825397,
+      "speech_window_seconds": 7.476825396825397,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "Et nyttigt forsøg behøver ikke genskabe alt. Det skal besvare et præcist spørgsmål og ikke påstå mere, end opstillingen viser.",
+      "raw_seconds": 8.370793650793651,
+      "speech_window_seconds": 8.370793650793651,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "Arkæologi og mekanik supplerer hinanden. Stedet begrænser modellen, og modellen foreslår, hvilke spor der bør undersøges næste gang.",
+      "raw_seconds": 7.836734693877551,
+      "speech_window_seconds": 7.836734693877551,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "En foreslået rute skal prøves mod terrænet, en mulig forankring mod sin sammenhæng. En pæn tegning erstatter ingen af undersøgelserne.",
+      "raw_seconds": 7.070476190476191,
+      "speech_window_seconds": 7.070476190476191,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "Manglende maskiner er ikke mærkelige i sig selv. Træ og fibre bevares dårligere end kalksten, men fraværet beviser ikke en vilkårlig rekonstruktion.",
+      "raw_seconds": 8.846802721088435,
+      "speech_window_seconds": 8.846802721088435,
+      "tempo": 0.9167671213563146,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "En god forklaring opstiller noget, vi kan efterprøve: nødvendig plads, kontaktflader, krav til støtte og rækkefølgen af arbejdet.",
+      "raw_seconds": 7.383945578231293,
+      "speech_window_seconds": 7.383945578231293,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "Her bliver mysteriet nyttigt. I stedet for at gentage, at stenene er umulige, kan vi spørge, hvilket trin der stadig mangler forklaring.",
+      "raw_seconds": 7.1053061224489795,
+      "speech_window_seconds": 7.1053061224489795,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "Måske er vejen svagheden, måske rebopstillingen, måske en forenklet slutplacering. Hver mulighed kræver sin egen undersøgelse.",
+      "raw_seconds": 7.743854875283446,
+      "speech_window_seconds": 7.743854875283446,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "Spørgsmålene gør ikke præstationen mindre. De bringer os nærmere de praktiske beslutninger, som byggerne måtte løse trin for trin.",
+      "raw_seconds": 7.325895691609977,
+      "speech_window_seconds": 7.325895691609977,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "Sammenlign nu mulighederne på samme vilkår. Hver skal bære den samme last, følge en troværdig rute og nå den samme slutposition.",
+      "raw_seconds": 7.441995464852607,
+      "speech_window_seconds": 7.441995464852607,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "Først glidning på en forberedt bane. Det giver bred støtte og direkte træk, men kræver styring af friktion og vedligeholdelse af vejen.",
+      "raw_seconds": 7.534875283446712,
+      "speech_window_seconds": 7.534875283446712,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "Ruller under en lastfordelende konstruktion kan mindske modstanden. De kræver styrke, retning, genplacering af ruller og stabil jord.",
+      "raw_seconds": 8.13859410430839,
+      "speech_window_seconds": 8.13859410430839,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "En kombination kan bruge forskellige metoder i forskellige faser. Det hjælper kun, hvis overgangen mellem metoderne også bliver forklaret.",
+      "raw_seconds": 7.325895691609977,
+      "speech_window_seconds": 7.325895691609977,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "Gangspil og taljer forklarer, hvordan trækkraften påføres. De kan indgå i transportsystemet, men forklarer ikke, hvad der bærer stenens vægt.",
+      "raw_seconds": 7.952834467120182,
+      "speech_window_seconds": 7.952834467120182,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "Den bedste rekonstruktion kan være almindelige principper i usædvanlig skala: tryk, friktion, vægtstangsvirkning, geometri og organisering.",
+      "raw_seconds": 8.208253968253969,
+      "speech_window_seconds": 8.208253968253969,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "Almindelige principper betyder ikke let arbejde. Materialer med begrænset styrke og mennesker med behov for koordinering skal fungere som en helhed.",
+      "raw_seconds": 7.859954648526077,
+      "speech_window_seconds": 7.859954648526077,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "En metode kan være fysisk mulig uden at være historisk bevist. Den forskel er vigtig, når vi viser en ukendt del af fortiden.",
+      "raw_seconds": 7.186575963718821,
+      "speech_window_seconds": 7.186575963718821,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "Den faktiske metode kræver stærkere forbindelser mellem spor, terræn, materialer, datering og arbejdsfølge. En overbevisende animation er ikke nok.",
+      "raw_seconds": 9.009342403628118,
+      "speech_window_seconds": 9.009342403628118,
+      "tempo": 0.9336106117749344,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "Det opstillede Trilithon viser resultatet. Stenbruddet viser forberedelse og ufærdigt arbejde. Ingen af delene kan alene besvare alle spørgsmål.",
+      "raw_seconds": 8.951292517006802,
+      "speech_window_seconds": 8.951292517006802,
+      "tempo": 0.9275950794825701,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "De anslåede sekstenhundrede og halvtreds ton gælder det store fund i stenbruddet, ikke hver sten transporteret til helligdommen.",
+      "raw_seconds": 7.082086167800454,
+      "speech_window_seconds": 7.082086167800454,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "En anslået masse er ikke en direkte vejning. Mål, skjulte flader og antaget massefylde forklarer forskelle mellem offentliggjorte skøn.",
+      "raw_seconds": 8.034104308390022,
+      "speech_window_seconds": 8.034104308390022,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "Usikkerheden skal bevares i fortællingen. Præcise tal på en grafik kan vildlede, når sporene kun understøtter et omtrentligt skøn.",
+      "raw_seconds": 6.768616780045352,
+      "speech_window_seconds": 6.768616780045352,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "Hvad ved vi sikkert? Stenene indgår i et virkeligt landskab af stenbrydning og monumentalt byggeri. Deres studie kræver tålmodig iagttagelse.",
+      "raw_seconds": 7.87156462585034,
+      "speech_window_seconds": 7.87156462585034,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "De åbne spørgsmål er konkrete: den præcise transportopstilling, rutens detaljer og de trin, som førte hver sten til dens plads.",
+      "raw_seconds": 7.918004535147392,
+      "speech_window_seconds": 7.918004535147392,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "Svaret har to lag. Vi kan forklare mekaniske muligheder og lade de historiske detaljer stå åbne, hvor sporene endnu ikke afgør dem.",
+      "raw_seconds": 6.989206349206349,
+      "speech_window_seconds": 6.989206349206349,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "Den fortælling giver seeren noget at forstå og forskeren noget at afprøve. Forundring kan blive begyndelsen på en undersøgelse.",
+      "raw_seconds": 6.106848072562358,
+      "speech_window_seconds": 6.106848072562358,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "Fremtidige opmålinger og udgravninger kan præcisere billedet. Nye mål kan ændre en rute, vise byggesammenhænge eller udelukke en antagelse.",
+      "raw_seconds": 7.964444444444444,
+      "speech_window_seconds": 7.964444444444444,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "En god rekonstruktion skal kunne ændres. Formålet er at ordne spørgsmål og spor, ikke at beskytte et flot billede mod rettelser.",
+      "raw_seconds": 7.534875283446712,
+      "speech_window_seconds": 7.534875283446712,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "Vend tilbage til det første syn af fundamentet. Stenene er ikke blevet mindre, men problemet omkring dem har fået en tydeligere struktur.",
+      "raw_seconds": 7.047256235827664,
+      "speech_window_seconds": 7.047256235827664,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "Bag den færdige flade kan vi forestille os en understøttet kæde: valg i stenbruddet, forberedt underlag, kontrolleret rejse og nøjagtig indpasning.",
+      "raw_seconds": 8.544943310657596,
+      "speech_window_seconds": 8.544943310657596,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "Bag forløbet ligger sjældent fuldt bevarede færdigheder: at vurdere sten, bearbejde træ, håndtere reb, læse terræn og koordinere mennesker.",
+      "raw_seconds": 8.684263038548753,
+      "speech_window_seconds": 8.684263038548753,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "Præstationen bygger på opsamlet viden såvel som styrke. Den store skala gør små praktiske beslutninger endnu vigtigere.",
+      "raw_seconds": 6.791836734693877,
+      "speech_window_seconds": 6.791836734693877,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "Baalbek er også levende kulturarv i Libanon. Studiet af teknikken bør styrke interessen for historien, lokalsamfundene og den fortsatte bevaring.",
+      "raw_seconds": 8.893242630385487,
+      "speech_window_seconds": 8.893242630385487,
+      "tempo": 0.9215795471902058,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "Bevaring kræver dokumentation og materialekendskab. Den omhyggelige iagttagelse forklarer fortiden og hjælper med at beskytte det, der er tilbage.",
+      "raw_seconds": 8.150204081632653,
+      "speech_window_seconds": 8.150204081632653,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "Hvad ville du måle først i næste undersøgelse: ruten, kontaktfladerne, stenens mål eller det mulige arbejdsrum?",
+      "raw_seconds": 6.640907029478458,
+      "speech_window_seconds": 6.640907029478458,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "Hvert valg fører til en anden prøve. Sådan bliver et monumentalt spørgsmål til mindre spørgsmål, vi faktisk kan undersøge.",
+      "raw_seconds": 6.466757369614513,
+      "speech_window_seconds": 6.466757369614513,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "Vi kender ikke hver bevægelse af rebene med sikkerhed. Men vi kan forstå sporene, mekanikken og menneskenes organisation tydeligere.",
+      "raw_seconds": 6.861496598639456,
+      "speech_window_seconds": 6.861496598639456,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "Stenen er stadig enorm. Hvilken kæde af understøttede bevægelser bragte den fra stenbruddet hertil? Og hvilket spor ville bevise det?",
+      "raw_seconds": 7.558095238095238,
+      "speech_window_seconds": 7.558095238095238,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1242,
+  "decoded_samples": 29808000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-da-20m42s.mp3",
+  "flac": "voice-da-20m42s.flac",
+  "mp3_sha256": "8d544a051796b1203fda0b05779b97b896105c2ef03c58d0cf8cd3d192cbc93e",
+  "flac_sha256": "99f371bbcc74b1761942509ff48a21985b4bb00b085bc28c699325ca3006d4d6"
+}

@@ -1,0 +1,1137 @@
+{
+  "locale": "ja",
+  "voice_id": "supertonic:5",
+  "engine": "Supertonic 3 CPU INT8",
+  "target_seconds": 1242,
+  "spoken_cues": 124,
+  "closing_silence_seconds": 2,
+  "config_hash": "7d4284e982aa9a2e294ed6a84d4b1401f1bc0c9281ee42524e6d91bb292dc9fe",
+  "status": "created_pending_listening_review",
+  "segments": [
+    {
+      "scene": 1,
+      "text": "バールベックの神殿基壇には、三つの巨石が据えられています。この巨大な石は、どうやってここまで運ばれたのでしょうか。",
+      "raw_seconds": 9.997256235827665,
+      "speech_window_seconds": 9.997256235827665,
+      "tempo": 1.0359851021583073,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 2,
+      "text": "近くの採石場には、さらに大きな石が残っています。切り離されていない石もあり、神殿まで運ばれた石とは区別が必要です。",
+      "raw_seconds": 10.744875283446712,
+      "speech_window_seconds": 10.744875283446712,
+      "tempo": 1.1134585785955142,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 3,
+      "text": "それぞれが、異なる事実を伝える証拠です。岩を切り出す場所から最後の継ぎ目まで、作業の全体をたどってみましょう。",
+      "raw_seconds": 9.794920634920635,
+      "speech_window_seconds": 9.794920634920635,
+      "tempo": 1.0150176823751953,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 4,
+      "text": "舞台は、レバノンのベカー高原。バールベックは、農業、暮らし、人の往来、そして長い建設の歴史が重なる場所です。",
+      "raw_seconds": 10.045215419501133,
+      "speech_window_seconds": 10.045215419501133,
+      "tempo": 1.0409549657514128,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 5,
+      "text": "ここは、ローマ時代のヘリオポリスを象徴する聖域となりました。現存する建物は、一度に完成したわけではありません。",
+      "raw_seconds": 9.407006802721089,
+      "speech_window_seconds": 9.407006802721089,
+      "tempo": 0.9748193577949315,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 6,
+      "text": "中心にあったのは、ユピテル神殿です。壮大な列柱に目を奪われますが、今回の調査は、その足元から始まります。",
+      "raw_seconds": 9.78061224489796,
+      "speech_window_seconds": 9.78061224489796,
+      "tempo": 1.0135349476578195,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 7,
+      "text": "基壇に並ぶ三つの石は、トリリトンと呼ばれます。これほど大きな石が、実際に移動し、据え付けられた証拠です。",
+      "raw_seconds": 9.587823129251701,
+      "speech_window_seconds": 9.587823129251701,
+      "tempo": 0.9935568009587255,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 8,
+      "text": "一つの重さは、数百トンに及ぶと推定されています。値は、測った寸法や、石灰岩の密度の仮定によって変わります。",
+      "raw_seconds": 9.296303854875283,
+      "speech_window_seconds": 9.296303854875283,
+      "tempo": 0.9633475497280086,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 9,
+      "text": "有名な採石場は、聖域からおよそ一キロ先。歩けば短い距離でも、巨大な荷物を運ぶには、難しい道のりです。",
+      "raw_seconds": 9.259024943310658,
+      "speech_window_seconds": 9.259024943310658,
+      "tempo": 0.959484450084006,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 10,
+      "text": "距離だけでは判断できません。坂の勾配、地盤の強さ、作業できる広さ、到着地点の高さも調べる必要があります。",
+      "raw_seconds": 8.768979591836734,
+      "speech_window_seconds": 8.768979591836734,
+      "tempo": 0.9087025483768636,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 11,
+      "text": "作業の全貌を記した建設記録は、残っていません。復元では、現地の証拠と、私たちが加えた仮定を区別します。",
+      "raw_seconds": 9.18875283446712,
+      "speech_window_seconds": 9.18875283446712,
+      "tempo": 0.9522023662660228,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 12,
+      "text": "考えるべきは、制約に合う方法です。切り出し、荷重の支持、牽引、方向の調整、据え付けを、一続きで説明しなければなりません。",
+      "raw_seconds": 10.353469387755101,
+      "speech_window_seconds": 10.353469387755101,
+      "tempo": 1.0728983821507876,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 13,
+      "text": "まずは採石場へ。石がまだ丘の一部だった時点で、最初の技術的な判断は、すでに始まっていました。",
+      "raw_seconds": 8.249138321995465,
+      "speech_window_seconds": 8.249138321995465,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 14,
+      "text": "必要なのは、大きさだけではありません。岩の層、割れ目、作業するための通路、完成形も、選択を左右します。",
+      "raw_seconds": 9.60859410430839,
+      "speech_window_seconds": 9.60859410430839,
+      "tempo": 0.995709233607087,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 15,
+      "text": "大きな石に見えない弱点があれば、多くの労力が無駄になります。採石には、力だけでなく、石を見極める経験が必要でした。",
+      "raw_seconds": 10.799795918367346,
+      "speech_window_seconds": 10.799795918367346,
+      "tempo": 1.119149836100243,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 16,
+      "text": "残された溝や加工面には、切り出しの手掛かりがあります。職人が立てた場所や、道具が届いた面を考える材料です。",
+      "raw_seconds": 9.45031746031746,
+      "speech_window_seconds": 9.45031746031746,
+      "tempo": 0.9793075088411876,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 17,
+      "text": "細部をよく見てください。迫力ある一枚の写真では、切削や分離の順序を決めた、狭い作業空間が見えなくなることがあります。",
+      "raw_seconds": 10.613877551020408,
+      "speech_window_seconds": 10.613877551020408,
+      "tempo": 1.0998836840435655,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 18,
+      "text": "妊婦の石と呼ばれる巨石も、その大きさで有名です。ただし、今も採石場にあり、基壇に据えられた石ではありません。",
+      "raw_seconds": 10.011315192743764,
+      "speech_window_seconds": 10.011315192743764,
+      "tempo": 1.037441988885364,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 19,
+      "text": "二千十四年、近くで別の巨石が発掘されました。推定約千六百五十トンですが、この石も採石場に残っています。",
+      "raw_seconds": 10.731814058956916,
+      "speech_window_seconds": 10.731814058956916,
+      "tempo": 1.1121050838297322,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 20,
+      "text": "この発見は、採石の壮大な計画を物語ります。ただし、この重さの石が神殿まで運ばれたことを証明するものではありません。",
+      "raw_seconds": 10.96609977324263,
+      "speech_window_seconds": 10.96609977324263,
+      "tempo": 1.1363833961909462,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 21,
+      "text": "ここで問いが変わります。成功した運搬と、途中で止まった作業。その両方を調べることで、現実の限界が見えてきます。",
+      "raw_seconds": 9.532562358276644,
+      "speech_window_seconds": 9.532562358276644,
+      "tempo": 0.9878302961944708,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 22,
+      "text": "レバノンの専門家と各国の考古学者が、この採石場を調査してきました。測量図や現地観察は、一枚の写真より確かな出発点です。",
+      "raw_seconds": 11.766507936507937,
+      "speech_window_seconds": 11.766507936507937,
+      "tempo": 1.219327247306522,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 23,
+      "text": "聖域では、別の証拠が見つかります。石の寸法、継ぎ目、周囲の石積みとの関係を、据えられた状態で調べられます。",
+      "raw_seconds": 9.157120181405896,
+      "speech_window_seconds": 9.157120181405896,
+      "tempo": 0.9489243711301446,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 24,
+      "text": "完成した継ぎ目は、到着地点を示します。しかし、そこまでの動きは記録していません。証拠と力学を組み合わせて考えるのです。",
+      "raw_seconds": 10.326371882086168,
+      "speech_window_seconds": 10.326371882086168,
+      "tempo": 1.0700903504752506,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 25,
+      "text": "この場所の古い歴史と、個々の石の年代は、別の問題です。遺跡の起源だけで、すべての構造物の年代は決まりません。",
+      "raw_seconds": 10.175963718820862,
+      "speech_window_seconds": 10.175963718820862,
+      "tempo": 1.0545040123130427,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 26,
+      "text": "発掘、建築の組み合わせ、材料の分析から、建設の順序を調べます。大きさだけで、年代や造り手を特定することはできません。",
+      "raw_seconds": 10.2362358276644,
+      "speech_window_seconds": 10.2362358276644,
+      "tempo": 1.060749826700974,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 27,
+      "text": "古代の文献も参考になります。ウィトルウィウスは、揚重機や重い荷の運搬、弱い道路がもたらす難しさを記しました。",
+      "raw_seconds": 9.873877551020408,
+      "speech_window_seconds": 9.873877551020408,
+      "tempo": 1.0231997462197313,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 28,
+      "text": "文献は、当時の機械技術を伝えます。ただし、その装置が、バールベックの特定の石に使われたという証拠にはなりません。",
+      "raw_seconds": 10.152789115646259,
+      "speech_window_seconds": 10.152789115646259,
+      "tempo": 1.0521024990307004,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 29,
+      "text": "考古学者ジャン＝ピエール・アダムは、巻き上げ装置などを使う運搬案を研究しました。これは技術的な復元案で、当時の作業記録ではありません。",
+      "raw_seconds": 11.667936507936508,
+      "speech_window_seconds": 11.667936507936508,
+      "tempo": 1.2091125914960112,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 30,
+      "text": "証拠の限界を踏まえて、慎重な模型を作りましょう。最初の課題は、石を成形し、切り離し、支え、運搬に備えることです。",
+      "raw_seconds": 9.143537414965987,
+      "speech_window_seconds": 9.143537414965987,
+      "tempo": 0.9475168305664236,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 31,
+      "text": "岩に切り出す石の輪郭を描いたとします。側面を削れば通路ができますが、底はまだ岩盤につながっています。",
+      "raw_seconds": 9.252448979591836,
+      "speech_window_seconds": 9.252448979591836,
+      "tempo": 0.9588030030665115,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 32,
+      "text": "底を切り離すと、重さを受ける場所が変わります。石が急に落ちないよう、途中の支えまで説明する必要があります。",
+      "raw_seconds": 9.215215419501133,
+      "speech_window_seconds": 9.215215419501133,
+      "tempo": 0.9549446030571122,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 33,
+      "text": "木材の詰め物、くさび、整えた土台などが候補になります。ただし、現地での具体的な配置は、検証が必要な仮説です。",
+      "raw_seconds": 10.194421768707484,
+      "speech_window_seconds": 10.194421768707484,
+      "tempo": 1.0564167635966304,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 34,
+      "text": "新しい支えを用意してから、古い支えを外す。これが最初の原則です。巨石では、小さな制御不能の動きも危険になります。",
+      "raw_seconds": 10.306916099773243,
+      "speech_window_seconds": 10.306916099773243,
+      "tempo": 1.068074207230388,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 35,
+      "text": "次は道です。人がもっと強く引けばよいとは限りません。荷物を支える地盤が沈めば、力を増やしても解決しません。",
+      "raw_seconds": 9.128616780045352,
+      "speech_window_seconds": 9.128616780045352,
+      "tempo": 0.9459706507819017,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 36,
+      "text": "圧力は、力がどれだけの面積に分かれるかで変わります。広く支えれば平均圧力は減りますが、全重量を受けるのは地盤です。",
+      "raw_seconds": 10.521746031746032,
+      "speech_window_seconds": 10.521746031746032,
+      "tempo": 1.090336376346739,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 37,
+      "text": "道路の準備も、運搬方法の一部です。整地、排水、締め固め、補修は、立派な牽引装置と同じほど重要かもしれません。",
+      "raw_seconds": 9.643401360544217,
+      "speech_window_seconds": 9.643401360544217,
+      "tempo": 0.9993162031652039,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 38,
+      "text": "摩擦は、触れ合う面の間で動きを妨げる力です。材質、水分、向きのずれ、変形、土台の状態で変わります。",
+      "raw_seconds": 8.28485260770975,
+      "speech_window_seconds": 8.28485260770975,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 39,
+      "text": "計算の例として、石の質量を八百トンと仮定しましょう。これは説明用の設定で、現地の石を新たに測定した値ではありません。",
+      "raw_seconds": 10.455238095238096,
+      "speech_window_seconds": 10.455238095238096,
+      "tempo": 1.083444362200839,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 40,
+      "text": "水平な面で滑らせる単純な模型では、重さに摩擦係数を掛けます。係数は、実際の材料や配置に合わせて測る必要があります。",
+      "raw_seconds": 9.957755102040815,
+      "speech_window_seconds": 9.957755102040815,
+      "tempo": 1.0318917204187372,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 41,
+      "text": "摩擦係数を百分の五と仮定します。抵抗は約四百キロニュートンです。ほかの条件は、まだ含めていません。",
+      "raw_seconds": 7.9959410430839,
+      "speech_window_seconds": 7.9959410430839,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 42,
+      "text": "仮の係数を十分の二に変えると、抵抗は四倍になります。表面の状態で、必要な力は大きく変わります。",
+      "raw_seconds": 8.436485260770976,
+      "speech_window_seconds": 8.436485260770976,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 43,
+      "text": "この計算から、古代の作業人数は分かりません。必要なのは、目を引く人数の推測より、妥当な条件を置いた運搬案です。",
+      "raw_seconds": 9.783514739229025,
+      "speech_window_seconds": 9.783514739229025,
+      "tempo": 1.0138357242724378,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 44,
+      "text": "そりは、荷重を分散し、引くための構造を作ります。底面や接合部、道との接触まで、検討しなければなりません。",
+      "raw_seconds": 8.579410430839003,
+      "speech_window_seconds": 8.579410430839003,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 45,
+      "text": "ころを使う案もありますが、抵抗が消えるわけではありません。接触部は圧力に耐え、ころの向きもそろえる必要があります。",
+      "raw_seconds": 9.75185941043084,
+      "speech_window_seconds": 9.75185941043084,
+      "tempo": 1.0105553793192579,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 46,
+      "text": "固定されていないころは、横にずれたり、地面の凹凸に当たったりします。映像でも、支えと制御を省くことはできません。",
+      "raw_seconds": 9.880272108843537,
+      "speech_window_seconds": 9.880272108843537,
+      "tempo": 1.0238623946988121,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 47,
+      "text": "使い終えた支えを、どう回収して前に置くのか。運搬は、準備、移動、点検、そして再び準備する作業の繰り返しです。",
+      "raw_seconds": 9.258820861678004,
+      "speech_window_seconds": 9.258820861678004,
+      "tempo": 0.9594633017282905,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 48,
+      "text": "滑らせても転がしても、道には装置全体の幅が必要です。急な曲がりや勾配の変化は、さらに難しい問題を生みます。",
+      "raw_seconds": 9.149750566893424,
+      "speech_window_seconds": 9.149750566893424,
+      "tempo": 0.9481606805070906,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 49,
+      "text": "引く力は、どこから得るのでしょうか。人、動物、綱、機械などが候補ですが、効率は、その組み合わせ方で変わります。",
+      "raw_seconds": 9.226734693877551,
+      "speech_window_seconds": 9.226734693877551,
+      "tempo": 0.9561383102463783,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 50,
+      "text": "綱も、力を伝える経路の一部です。結び目、曲がり、摩耗、取り付け部分の弱さで、図の通りには働かないかもしれません。",
+      "raw_seconds": 9.27578231292517,
+      "speech_window_seconds": 9.27578231292517,
+      "tempo": 0.9612209650699658,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 51,
+      "text": "滑車は、力を減らす代わりに、引く綱の長さを増やします。理想的な四対一の装置でも、この交換関係は変わりません。",
+      "raw_seconds": 9.992993197278912,
+      "speech_window_seconds": 9.992993197278912,
+      "tempo": 1.0355433365055866,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 52,
+      "text": "実際の滑車には摩擦があり、枠や基礎にも負担がかかります。小さな力で引けても、装置全体の強度は別に確かめます。",
+      "raw_seconds": 9.592517006802721,
+      "speech_window_seconds": 9.592517006802721,
+      "tempo": 0.9940432131401783,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 53,
+      "text": "巻き上げ装置は、軸を回して綱を引きます。長い腕木で回転の力を増やし、胴に巻く綱を、制御しながら引く仕組みです。",
+      "raw_seconds": 9.435736961451248,
+      "speech_window_seconds": 9.435736961451248,
+      "tempo": 0.9777965763161914,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 54,
+      "text": "この装置には、力に耐える固定部が必要です。反作用の力は、用意した基礎や別の構造物、あるいは地面で受け止めます。",
+      "raw_seconds": 9.961201814058956,
+      "speech_window_seconds": 9.961201814058956,
+      "tempo": 1.0322488926485964,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 55,
+      "text": "大切なのは、機械一台だけを見ることではありません。人から地盤まで、力の経路全体が、安定して負担に耐えられるでしょうか。",
+      "raw_seconds": 10.59562358276644,
+      "speech_window_seconds": 10.59562358276644,
+      "tempo": 1.0979920811156931,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 56,
+      "text": "複数の場所から引けば、力を分けられるかもしれません。ただし、不均等に引くと、荷がねじれ、一部に負担が集中します。",
+      "raw_seconds": 9.599115646258504,
+      "speech_window_seconds": 9.599115646258504,
+      "tempo": 0.9947270099749744,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 57,
+      "text": "動かす幅は、小さく、確認できる範囲に限ります。巨石が動き始めてから、その場の判断だけで対処する余裕はありません。",
+      "raw_seconds": 9.395600907029479,
+      "speech_window_seconds": 9.395600907029479,
+      "tempo": 0.973637399692174,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 58,
+      "text": "動かすことと同じほど、止めることが重要です。止め木、拘束する綱、安全に休止できる位置も、復元案に欠かせません。",
+      "raw_seconds": 9.376938775510204,
+      "speech_window_seconds": 9.376938775510204,
+      "tempo": 0.9717035000528709,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 59,
+      "text": "道には、高さの変化もあります。緩い上り坂でも、重力の一部が進行方向と逆に働き、必要な牽引力を増やします。",
+      "raw_seconds": 9.353741496598639,
+      "speech_window_seconds": 9.353741496598639,
+      "tempo": 0.9692996369532269,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 60,
+      "text": "八百トンの説明用模型では、一パーセントの上りで約八十キロニュートンが加わります。摩擦とは別に必要な力です。",
+      "raw_seconds": 9.035578231292517,
+      "speech_window_seconds": 9.035578231292517,
+      "tempo": 0.9363293503930069,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 61,
+      "text": "下りでは、違う問題が生じます。重力が動きを助けても、加速を抑え、予定した経路から外れないよう制御しなければなりません。",
+      "raw_seconds": 10.385419501133788,
+      "speech_window_seconds": 10.385419501133788,
+      "tempo": 1.0762092747288898,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 62,
+      "text": "平面の地図では便利そうな道でも、断面で見ると難しいかもしれません。地形によって、魅力的な案が成り立たなくなるのです。",
+      "raw_seconds": 10.384399092970522,
+      "speech_window_seconds": 10.384399092970522,
+      "tempo": 1.076103532950313,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 63,
+      "text": "基壇に近づくと、必要な高さに安全に到着することが課題です。仮設の斜路や盛り土も、その重さに耐えなければなりません。",
+      "raw_seconds": 10.47748299319728,
+      "speech_window_seconds": 10.47748299319728,
+      "tempo": 1.0857495329738114,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 64,
+      "text": "完成後の姿を、そのまま建設中に当てはめる必要はありません。作業する高さや仮設空間は、最終的な形と異なる場合があります。",
+      "raw_seconds": 11.354671201814059,
+      "speech_window_seconds": 11.354671201814059,
+      "tempo": 1.1766498654729594,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 65,
+      "text": "最後の位置合わせも、独立した作業です。小刻みな移動、詰め物、てこが考えられますが、具体的な使用は未確認です。",
+      "raw_seconds": 9.592925170068026,
+      "speech_window_seconds": 9.592925170068026,
+      "tempo": 0.9940855098516089,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 66,
+      "text": "要点は、作業が途切れずにつながること。採石場から継ぎ目まで、石は支えられ続け、説明のない飛躍があってはなりません。",
+      "raw_seconds": 10.111836734693878,
+      "speech_window_seconds": 10.111836734693878,
+      "tempo": 1.0478587289838215,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 67,
+      "text": "ここで模型を厳しく確かめましょう。机上では動いても、実物では、木材、綱、地盤が大きな荷重に耐えない可能性があります。",
+      "raw_seconds": 10.209024943310657,
+      "speech_window_seconds": 10.209024943310657,
+      "tempo": 1.0579300459389283,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 68,
+      "text": "大きさが変われば、接触圧力、曲げ、材料の挙動も変わります。模型をそのまま拡大しても、同じ条件にはなりません。",
+      "raw_seconds": 9.99140589569161,
+      "speech_window_seconds": 9.99140589569161,
+      "tempo": 1.0353788492944673,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 69,
+      "text": "木材の選択も重要です。局所的なつぶれや曲がりに耐え、運搬台のほかの部材と、うまく力を分担する必要があります。",
+      "raw_seconds": 9.883333333333333,
+      "speech_window_seconds": 9.883333333333333,
+      "tempo": 1.0241796200345423,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 70,
+      "text": "道路にも同じことがいえます。一か所の地盤が硬くても、荷物の別の部分の下に弱い場所があれば、安心できません。",
+      "raw_seconds": 10.000907029478459,
+      "speech_window_seconds": 10.000907029478459,
+      "tempo": 1.0363634227438816,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 71,
+      "text": "雨で地盤が変わるなら、排水も力学の問題です。運搬路は、一度整備すれば、そのまま使い続けられるとは限りません。",
+      "raw_seconds": 9.297052154195011,
+      "speech_window_seconds": 9.297052154195011,
+      "tempo": 0.9634250936989649,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 72,
+      "text": "保守には時間と資材が要ります。支えの点検、機器の据え直し、傷んだ部分の補修。そのための休止も、計画に含めます。",
+      "raw_seconds": 10.23859410430839,
+      "speech_window_seconds": 10.23859410430839,
+      "tempo": 1.0609942077003514,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 73,
+      "text": "作業者も、一つの仕組みとして考えます。採石、大工仕事、綱、測量、牽引、物資の供給には、それぞれ異なる技能が必要です。",
+      "raw_seconds": 9.972607709750568,
+      "speech_window_seconds": 9.972607709750568,
+      "tempo": 1.033430850751354,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 74,
+      "text": "写真だけでは、作業者の身分や契約は分かりません。石の存在から、労働の歴史をすべて作り上げてはいけません。",
+      "raw_seconds": 10.013877551020409,
+      "speech_window_seconds": 10.013877551020409,
+      "tempo": 1.037707518240457,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 75,
+      "text": "それでも、組織が必要だったことは理解できます。材料、食料、水、道具、指示を、必要な人へ、必要な時に届けるのです。",
+      "raw_seconds": 9.577845804988662,
+      "speech_window_seconds": 9.577845804988662,
+      "tempo": 0.9925228813459753,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 76,
+      "text": "声が届かない距離では、合図が重要です。特に急停止が必要なときは、全員が同じタイミングで動かなければなりません。",
+      "raw_seconds": 9.607936507936508,
+      "speech_window_seconds": 9.607936507936508,
+      "tempo": 0.9956410889053375,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 77,
+      "text": "道路の準備にかけた労力は、計画全体の問いにもつながります。一つの石のためか、それとも何度も使うためだったのでしょうか。",
+      "raw_seconds": 10.276303854875284,
+      "speech_window_seconds": 10.276303854875284,
+      "tempo": 1.0649019538730864,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 78,
+      "text": "繰り返し運ぶなら、大がかりな準備にも意味があります。ただし、日程や班の数、搬入順は、証拠で調べる問題です。",
+      "raw_seconds": 9.142698412698413,
+      "speech_window_seconds": 9.142698412698413,
+      "tempo": 0.9474298873262604,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 79,
+      "text": "最後の継ぎ目にも難しさがあります。石の向きは、周囲の石積みや、微調整に使える空間と、合っていなければなりません。",
+      "raw_seconds": 9.603968253968254,
+      "speech_window_seconds": 9.603968253968254,
+      "tempo": 0.9952298708775393,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 80,
+      "text": "狭い場所で巨石の向きを変えることは、簡単な仕上げ作業ではありません。道を考える段階で、最後の位置まで見通す必要があります。",
+      "raw_seconds": 10.835963718820862,
+      "speech_window_seconds": 10.835963718820862,
+      "tempo": 1.1228977946964624,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 81,
+      "text": "古代の説明に、現代のクレーンを持ち込んではいけません。見慣れた吊り上げ映像が、肝心の問題を隠してしまうことがあります。",
+      "raw_seconds": 10.335260770975056,
+      "speech_window_seconds": 10.335260770975056,
+      "tempo": 1.0710114788575187,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 82,
+      "text": "古代の機械は文献で確認できます。しかし、能力や配置には限界があります。装置の名前を挙げるだけでは、実行可能とはいえません。",
+      "raw_seconds": 11.415260770975056,
+      "speech_window_seconds": 11.415260770975056,
+      "tempo": 1.1829285773031146,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 83,
+      "text": "採石場に残る最大級の石は、特に重要です。未完成の姿が、計画、切り出し、据え付けを、別々の成果として示します。",
+      "raw_seconds": 9.467142857142857,
+      "speech_window_seconds": 9.467142857142857,
+      "tempo": 0.9810510732790525,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 84,
+      "text": "岩の欠陥、計画の変更、実務上の問題。中断の理由には、いくつも候補があります。一つに決めるには、具体的な証拠が必要です。",
+      "raw_seconds": 10.821133786848073,
+      "speech_window_seconds": 10.821133786848073,
+      "tempo": 1.1213610141811474,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 85,
+      "text": "残された石は、放棄された理由を言葉では語りません。周囲の採石場や、建設全体の順序と結び付けて調べる必要があります。",
+      "raw_seconds": 10.733242630385487,
+      "speech_window_seconds": 10.733242630385487,
+      "tempo": 1.1122531223197396,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 86,
+      "text": "想定した運搬面も確かめます。岩盤、締め固めた土、木材、それらの組み合わせ。何を選ぶかで、計算結果は変わります。",
+      "raw_seconds": 10.185487528344671,
+      "speech_window_seconds": 10.185487528344671,
+      "tempo": 1.0554909355797586,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 87,
+      "text": "現代の実験は、摩擦や制御など、個々の工程を調べる助けになります。材料、縮尺、限界を明示すれば、価値が高まります。",
+      "raw_seconds": 9.803877551020408,
+      "speech_window_seconds": 9.803877551020408,
+      "tempo": 1.0159458602093687,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 88,
+      "text": "役立つ実験が、全工程を再現する必要はありません。何を確かめるのかを定め、その装置で示せる範囲だけを結論にします。",
+      "raw_seconds": 10.078662131519275,
+      "speech_window_seconds": 10.078662131519275,
+      "tempo": 1.0444209462714273,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 89,
+      "text": "考古学と力学は、互いを補います。遺跡が模型の条件を絞り、模型が、次に探すべき痕跡を教えてくれるのです。",
+      "raw_seconds": 8.970385487528345,
+      "speech_window_seconds": 8.970385487528345,
+      "tempo": 0.9295736256506056,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 90,
+      "text": "候補の経路は、実際の地形と照合します。固定点の候補は、その周囲も調べます。整った図だけでは、どちらも代わりになりません。",
+      "raw_seconds": 10.937709750566894,
+      "speech_window_seconds": 10.937709750566894,
+      "tempo": 1.1334414249292117,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 91,
+      "text": "機械が残らないこと自体は、不思議ではありません。木や繊維は石ほど残りませんが、それで好きな復元が正しくなるわけではありません。",
+      "raw_seconds": 11.198730158730159,
+      "speech_window_seconds": 11.198730158730159,
+      "tempo": 1.1604901718891356,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 92,
+      "text": "よい説明は、確かめる条件を具体的に示します。必要な空間、接触面、支え、作業順序。どれも調査につながる問いです。",
+      "raw_seconds": 9.706848072562359,
+      "speech_window_seconds": 9.706848072562359,
+      "tempo": 1.005890991975374,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 93,
+      "text": "ここで謎は、調査の出発点になります。不可能だと繰り返す代わりに、どの工程が、まだ説明できていないのかを考えましょう。",
+      "raw_seconds": 9.801972789115647,
+      "speech_window_seconds": 9.801972789115647,
+      "tempo": 1.0157484755560255,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 94,
+      "text": "弱点は、道路かもしれません。綱の配置かもしれません。最後の据え付けを、証拠以上に単純化している可能性もあります。",
+      "raw_seconds": 9.405419501133787,
+      "speech_window_seconds": 9.405419501133787,
+      "tempo": 0.9746548705838121,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 95,
+      "text": "こうした問いで、偉業の価値が下がることはありません。造り手が一段階ずつ解決した、実際の判断に近づけるのです。",
+      "raw_seconds": 9.117301587301588,
+      "speech_window_seconds": 9.117301587301588,
+      "tempo": 0.9447980919483511,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 96,
+      "text": "ここまでの候補を、同じ条件で比べましょう。同じ荷重を支え、妥当な道を通り、同じ最終位置に到着できるかを調べます。",
+      "raw_seconds": 9.91172335600907,
+      "speech_window_seconds": 9.91172335600907,
+      "tempo": 1.0271215912962766,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 97,
+      "text": "まずは、整えた道を滑らせる方式です。広く支え、直接引ける利点がありますが、摩擦の制御と路面の保守が課題です。",
+      "raw_seconds": 9.218843537414966,
+      "speech_window_seconds": 9.218843537414966,
+      "tempo": 0.955320573825385,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 98,
+      "text": "次は、荷重を分散する台の下に、ころを置く方式。抵抗を減らせても、強度、向きの調整、回収、地盤の安定が必要です。",
+      "raw_seconds": 10.046734693877552,
+      "speech_window_seconds": 10.046734693877552,
+      "tempo": 1.0411124035106272,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 99,
+      "text": "段階ごとに方法を組み合わせる案もあります。ただし、切り替える瞬間まで説明しなければ、案を足すだけでは解決しません。",
+      "raw_seconds": 10.067278911564626,
+      "speech_window_seconds": 10.067278911564626,
+      "tempo": 1.0432413379859715,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 100,
+      "text": "巻き上げ装置や滑車は、力を加える仕組みです。運搬を助けますが、石の重さを何で支えるかは、別に説明する必要があります。",
+      "raw_seconds": 10.089478458049886,
+      "speech_window_seconds": 10.089478458049886,
+      "tempo": 1.0455418091243405,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 101,
+      "text": "有力な復元は、普通の原理の組み合わせかもしれません。圧力、摩擦、てこ、幾何学、組織。それを、並外れた規模で働かせるのです。",
+      "raw_seconds": 10.523378684807255,
+      "speech_window_seconds": 10.523378684807255,
+      "tempo": 1.0905055631924616,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 102,
+      "text": "原理が普通でも、仕事が簡単になるわけではありません。限界のある材料と大勢の人を、一つの仕組みとして動かす難しさがあります。",
+      "raw_seconds": 11.057052154195011,
+      "speech_window_seconds": 11.057052154195011,
+      "tempo": 1.145808513388084,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 103,
+      "text": "物理的に可能な方法でも、実際に使われたとは限りません。記録の残らない過去を映像で再現するとき、この区別が欠かせません。",
+      "raw_seconds": 10.623310657596372,
+      "speech_window_seconds": 10.623310657596372,
+      "tempo": 1.1008612080410747,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 104,
+      "text": "実際の方法を特定するには、痕跡、地形、材料、年代、作業順序を、もっと強く結び付ける必要があります。映像の説得力だけでは足りません。",
+      "raw_seconds": 11.703401360544218,
+      "speech_window_seconds": 11.703401360544218,
+      "tempo": 1.2127877057558776,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 105,
+      "text": "据えられたトリリトンは、完成した結果を示します。採石場は、準備と未完成の仕事を示します。片方だけで、すべては分かりません。",
+      "raw_seconds": 9.703718820861678,
+      "speech_window_seconds": 9.703718820861678,
+      "tempo": 1.0055667171877385,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 106,
+      "text": "千六百五十トンという推定は、採石場で見つかった大きな石のものです。運ばれた三つの石の重さと、混同してはいけません。",
+      "raw_seconds": 10.744648526077098,
+      "speech_window_seconds": 10.744648526077098,
+      "tempo": 1.113435080422497,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 107,
+      "text": "推定質量は、直接量った結果ではありません。寸法、見えない面、密度の仮定が違えば、公表される値にも幅が生まれます。",
+      "raw_seconds": 9.409705215419502,
+      "speech_window_seconds": 9.409705215419502,
+      "tempo": 0.9750989860538343,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 108,
+      "text": "物語の中でも、その不確かさを残しましょう。証拠が概算しか許さないとき、細かすぎる数字は、かえって誤解を招きます。",
+      "raw_seconds": 9.364172335600907,
+      "speech_window_seconds": 9.364172335600907,
+      "tempo": 0.9703805529120111,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 109,
+      "text": "確実にいえるのは、これらが実在の採石と大建設の景観に属すること。そして、その研究には、根気強い観察が役立つということです。",
+      "raw_seconds": 10.286485260770975,
+      "speech_window_seconds": 10.286485260770975,
+      "tempo": 1.0659570218415517,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 110,
+      "text": "未解決の問いは、もっと具体的です。運搬装置の正確な配置、細かな経路、そして一つ一つの巨石を据えた作業順序です。",
+      "raw_seconds": 10.102539682539682,
+      "speech_window_seconds": 10.102539682539682,
+      "tempo": 1.0468953038901225,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 111,
+      "text": "答えには、二つの層があります。関連する力学の可能性を説明し、証拠が足りない歴史の細部は、未解決のままにしておくのです。",
+      "raw_seconds": 10.552358276643991,
+      "speech_window_seconds": 10.552358276643991,
+      "tempo": 1.0935086297040404,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 112,
+      "text": "その物語は、理解できる仕組みを視聴者に示します。同時に研究者には、次に何を確かめるべきかという、具体的な課題を残します。",
+      "raw_seconds": 10.147868480725624,
+      "speech_window_seconds": 10.147868480725624,
+      "tempo": 1.0515925886762303,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 113,
+      "text": "今後の測量や発掘で、全体像は変わるかもしれません。新たな寸法が経路案を修正し、建設の関係を示し、仮定を退けることもあります。",
+      "raw_seconds": 10.90045351473923,
+      "speech_window_seconds": 10.90045351473923,
+      "tempo": 1.1295806751025108,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 114,
+      "text": "よい復元は、修正を受け入れます。目的は、壮大な映像を守ることではなく、問いと証拠を整理し、理解を深めることです。",
+      "raw_seconds": 10.346938775510203,
+      "speech_window_seconds": 10.346938775510203,
+      "tempo": 1.0722216347678968,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 115,
+      "text": "最初の基壇の眺めに戻りましょう。石の大きさは変わりません。しかし、その周囲にある問題の構造は、前よりはっきり見えます。",
+      "raw_seconds": 10.020748299319727,
+      "speech_window_seconds": 10.020748299319727,
+      "tempo": 1.0384195128828733,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 116,
+      "text": "完成した面の向こうに、支えを保った作業を想像してください。採石の判断、土台の準備、制御した移動、最後の微調整が続きます。",
+      "raw_seconds": 11.755532879818594,
+      "speech_window_seconds": 11.755532879818594,
+      "tempo": 1.2181899357324968,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 117,
+      "text": "その背後には、記録に残りにくい技能があります。石の見極め、木工、綱の扱い、地形の読み取り、そして人々をまとめる力です。",
+      "raw_seconds": 10.097913832199547,
+      "speech_window_seconds": 10.097913832199547,
+      "tempo": 1.0464159411605747,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 118,
+      "text": "偉業を支えたのは、力とともに、積み重ねた知識でした。規模が大きいほど、小さな実務上の判断は、ますます重要になります。",
+      "raw_seconds": 10.482154195011338,
+      "speech_window_seconds": 10.482154195011338,
+      "tempo": 1.0862335953379625,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 119,
+      "text": "バールベックは、レバノンに息づく文化遺産でもあります。技術を調べることは、その歴史、地域の人々、保全への関心にもつながります。",
+      "raw_seconds": 11.03766439909297,
+      "speech_window_seconds": 11.03766439909297,
+      "tempo": 1.1437994195951264,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 120,
+      "text": "保存には、記録と材料への理解が欠かせません。過去を読み解く丁寧な観察は、残されたものを未来へ伝える助けにもなります。",
+      "raw_seconds": 10.191836734693878,
+      "speech_window_seconds": 10.191836734693878,
+      "tempo": 1.056148884424236,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 121,
+      "text": "次の調査を計画するなら、何から測りますか。道、接触面、石の寸法、それとも作業できる空間でしょうか。",
+      "raw_seconds": 8.346485260770976,
+      "speech_window_seconds": 8.346485260770976,
+      "tempo": 0.9,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 122,
+      "text": "選ぶ対象で、検証の方法は変わります。大きな謎も、調べられる小さな問いの集まりとして、扱えるようになるのです。",
+      "raw_seconds": 9.223061224489795,
+      "speech_window_seconds": 9.223061224489795,
+      "tempo": 0.955757639843502,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 123,
+      "text": "すべての綱の動きを、確実に語ることはまだできません。それでも、証拠、力学、人の組織について、理解を深めることはできます。",
+      "raw_seconds": 10.313990929705215,
+      "speech_window_seconds": 10.313990929705215,
+      "tempo": 1.0688073502285196,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    },
+    {
+      "scene": 124,
+      "text": "石は、今も巨大です。どんな支えの連続が、採石場からここまで運んだのか。そして、何がその証拠になるのでしょうか。",
+      "raw_seconds": 9.935147392290249,
+      "speech_window_seconds": 9.935147392290249,
+      "tempo": 1.0295489525689376,
+      "word_truncation": false,
+      "fitted_seconds": 10
+    }
+  ],
+  "listening_review": "not a full native-speaker review",
+  "decoded_seconds": 1242,
+  "decoded_samples": 29808000,
+  "sample_rate": 24000,
+  "channels": 1,
+  "mp3": "voice-ja-20m42s.mp3",
+  "flac": "voice-ja-20m42s.flac",
+  "mp3_sha256": "a90f85bd829a68a48bbf626d74cc0a41e787ed34e9d87e45efa676bcec414dcb",
+  "flac_sha256": "0d623c0a2ae0faff376eac313df99efec3fea05ff64754fcb9fc65395823fc37"
+}

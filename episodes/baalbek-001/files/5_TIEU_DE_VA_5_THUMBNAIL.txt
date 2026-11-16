@@ -1,0 +1,30 @@
+BAALBEK 001 — 5 CẶP TIÊU ĐỀ VÀ PROMPT THUMBNAIL
+Video chính tiếng Anh; thumbnail 16:9. Đây là đề xuất biên tập, không phải cam kết lượt xem.
+Không có hình trẻ em trong bất kỳ prompt nào. Chữ thumbnail được thêm bằng phần mềm dựng, không yêu cầu AI vẽ chữ.
+
+1. HOW DID THEY MOVE BAALBEK'S GIANT STONES?
+Tiếng Việt: Người xưa đã di chuyển những khối đá khổng lồ ở Baalbek như thế nào?
+Chữ gợi ý: HOW WAS IT MOVED?
+Prompt: Create a compelling 16:9 YouTube documentary thumbnail, 1280x720 or higher, photorealistic limestone texture and restrained cinematic contrast. Show the genuine three installed Trilithon blocks in Baalbek's terrace, faithfully based on real site references, at a low oblique angle emphasizing scale. One clearly adult archaeologist aged 40–55, very small and safely distant, provides a truthful scale cue without exaggerated proportions. Warm side light, simple dark background, one main visual focus, generous clean negative space in the upper left for text to be added later. No children, minors, babies or teenagers, including backgrounds and reflections. No aliens, giants, levitating stones, modern lifting machines, invented monuments, fake archaeology, letters, numerals, logos or watermarks. Do not substitute the unfinished quarry monolith for an installed block.
+
+2. BAALBEK: FROM QUARRY TO TEMPLE
+Tiếng Việt: Baalbek: Hành trình từ mỏ đá đến nền đền
+Chữ gợi ý: QUARRY TO TEMPLE
+Prompt: Create a polished 16:9 documentary thumbnail with two clearly separated, reference-faithful locations: the Baalbek quarry on the left and the installed temple terrace on the right. Use consistent limestone color and believable scale, with a narrow clean gap between the panels rather than pretending both places are immediately adjacent. Reserve simple space for an editor-added route arrow and title. Golden natural light, uncluttered composition, strong readable silhouettes, no human figures. The quarry block remains unfinished and attached to the quarry; the terrace shows the three different installed Trilithon blocks. No children or minors, no text, no logos, no floating stone, no fantasy machinery, no claim that the exact ancient route has been identified.
+
+3. THE BAALBEK STONES: WHAT DOES THE EVIDENCE REALLY SHOW?
+Tiếng Việt: Những khối đá Baalbek: Bằng chứng thực sự cho biết điều gì?
+Chữ gợi ý: FOLLOW THE EVIDENCE
+Prompt: Create a 16:9 investigative archaeology thumbnail. Foreground: a detailed genuine quarry tool-mark surface in warm raking light. Background: a small, visually separate, accurate view of Baalbek's installed terrace. Use depth and selective lighting to guide the eye from physical marks to the larger engineering question. Leave uncluttered space for an editor-added caption, and do not generate readable inscriptions or fabricated excavation reports. Natural stone, scholarly documentary mood, no people. No children, minors, babies or teenagers anywhere. No aliens, magical beams, fake newly discovered chambers, numbers, lettering, logos or watermarks.
+
+4. MOVING HUNDREDS OF TONNES: BAALBEK'S ENGINEERING CHALLENGE
+Tiếng Việt: Di chuyển hàng trăm tấn đá: Bài toán kỹ thuật Baalbek
+Chữ gợi ý: WHAT CARRIED IT?
+Prompt: Create a 16:9 educational documentary thumbnail combining a physically coherent hypothetical Roman-period transport model with a small secondary view of Baalbek masonry. A huge but realistically proportioned limestone block rests fully supported on a broad timber distribution bed over prepared ground. A simple, clearly modeled hauling rope leads to a plausible wooden capstan. All contact supports are visible; the block does not float, bend or pass through the machinery. Use a clean cutaway-like presentation, crisp materials and strong visual hierarchy. Reserve a corner for the editor to add a small 'HYPOTHETICAL MODEL' label and reserve top space for the title. No people, no children or minors, no modern crane, no unsupported stone, no invented ancient proof, no generated text, logos or watermarks. This is a proposed mechanism illustration, not a claim that the exact Baalbek method is known.
+
+5. THE STONES THAT STAYED BEHIND: CLUES TO BAALBEK
+Tiếng Việt: Những khối đá còn nằm lại: Manh mối về Baalbek
+Chữ gợi ý: WHY LEFT BEHIND?
+Prompt: Create an atmospheric 16:9 archaeological documentary thumbnail showing a reference-faithful unfinished Baalbek quarry monolith in its real quarry setting. Use a high oblique viewpoint to reveal the surrounding trench and surviving connection to bedrock. Gentle late sunlight exposes worked surfaces, with a clean shadow area available for an editor-added title. No people are needed. Keep the scene grounded, quiet and monumental, with no fake cracks presented as an established explanation. No children, minors, babies or teenagers anywhere. No temple composited as though this quarry block was installed, no moving or levitating monolith, no aliens, no treasure, no text, logos or watermarks.
+
+Gợi ý chọn đầu tiên: cặp 1 nếu muốn tập trung vào quy mô; cặp 2 nếu muốn nhấn hành trình; cặp 5 nếu muốn mở bằng câu hỏi về công việc dang dở. Nếu dùng hình cơ chế giả định, giữ nhãn minh họa rõ ràng trong thiết kế cuối cùng.
