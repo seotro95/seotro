@@ -259,11 +259,26 @@ def main():
     catalogue=backend.handle({'op':'catalog','refresh':True})
     write_json(args.work/'SERVICE_CATALOGUE.json',catalogue)
     by_id={v['id']:v for v in catalogue['voices']};profiles=[]
+    male_options={locale:sorted((v['id'] for v in catalogue['voices']
+        if v['locale']==locale and v['gender'].casefold()=='male')) for locale,_ in VOICES.values()}
+    print('LIVE_MALE_CATALOGUE '+json.dumps(male_options,ensure_ascii=False),flush=True)
+    preferred_fallbacks={'de-DE':['de-DE-FlorianMultilingualNeural','de-DE-KillianNeural','de-DE-BerndNeural']}
     for language in languages:
-        locale,voice=VOICES[language];v=by_id.get(voice)
-        if not v or v['locale']!=locale or v['gender'].casefold()!='male':
-            raise ValueError(f'Requested male locale voice unavailable: {voice}. No substitution.')
-        profiles.append({'language':language,'locale':locale,'voice_id':voice,'gender':v['gender'],
+        locale,requested=VOICES[language];voice=requested;v=by_id.get(voice)
+        selected_as_requested=bool(v and v['locale']==locale and v['gender'].casefold()=='male')
+        if not selected_as_requested:
+            # Nam Minh is explicitly required by the user, so never replace him.
+            if language=='vi':
+                raise ValueError('Required vi-VN-NamMinhNeural unavailable; no Vietnamese substitution allowed.')
+            candidates=male_options.get(locale,[])
+            if not candidates:
+                raise ValueError(f'No real male voice is available for {locale}.')
+            voice=next((candidate for candidate in preferred_fallbacks.get(locale,[]) if candidate in candidates),candidates[0])
+            v=by_id[voice];VOICES[language]=(locale,voice)
+            print('SELECT_AVAILABLE_MALE '+json.dumps({'language':language,'requested':requested,'selected':voice,
+                'reason':'Requested candidate unavailable in current catalogue; user authorized automatic male selection.'}),flush=True)
+        profiles.append({'language':language,'locale':locale,'voice_id':voice,'requested_voice_id':requested,
+            'selected_as_requested':selected_as_requested,'gender':v['gender'],
             'service_name':v['name'],'native_rate':'+0%','native_pitch':'+0Hz','reuse_exact_id':True})
     provenance.update({'status':'rendering','provider':'Microsoft Edge Read Aloud via original Melo + Viet Studio 1.3.1',
         'edge_tts_version':version('edge-tts'),'ffmpeg_version':command(['ffmpeg','-version']).decode().splitlines()[0],

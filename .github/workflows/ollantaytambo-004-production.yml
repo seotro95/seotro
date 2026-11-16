@@ -97,3 +97,5 @@ jobs:
             work/voice_render/**/REPORT.json
           if-no-files-found: ignore
           retention-days: 7
+
+# Recheck live male catalogue before locking this episode's actual voice IDs.
