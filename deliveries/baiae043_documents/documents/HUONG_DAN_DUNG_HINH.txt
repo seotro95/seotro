@@ -1,0 +1,9 @@
+141 CẢNH CHÍNH — TỔNG 23:22
+
+140 cảnh ×10giây + cảnh kết2giây =1402giây. Tạo mọi clip dài10giây; riêng cảnh141 lấy giây8–10.
+Có150prompt trong15TXT,mỗi tệp đúng10prompt,số1–150. Tệp15 gồm cảnh chính141 và chín cảnh dự phòng142–150. Dự phòng chỉ thay hình theoCSV,không nối thêm thời lượng.
+Ưu tiên di tích dưới nước,cảnh quan vịnh,đường bờ,khối xây ngoài trời,sân La Mã và mặt cắt nguyên lý. Không phòng thí nghiệm/nhà khoa học. Mọi hìnhAI là minh họa,chưa tạo footage để kiểm tra.
+Cột era:underwater=minh họa di tích dưới nước;historical=tái dựng La Mã;landscape=cảnh quan;archaeology=di tích trên cạn;concept=sơ đồ nguyên lý. Gắn nhãn rõ khi chuyển loại hình. Khu chợMacellum/Serapeum ởPozzuoli là địa điểm riêng,không phải phòng biệt thựBaiae.
+Không dựng cả thành phố chìm một ngày,không gán năm79hay1538cho mọi công trình,không choAI vẽ đường đứt gãy chính xác dưới phòng có tên nếu thiếu nguồn. Mực nước biển tương đối gồm quan hệ nước và đất;độ sâu hôm nay không tự bằng tổng lún.
+Mỗi prompt ghi không âm thanh,không lời nói,không hình trẻ em,kể cả nền,tranh,khảm,bóng và phản chiếu. Mọi người rõ từ25tuổi. Nếu công cụ sinh streamtiếng,xóa trước khi dựng;dùng voice riêng.
+Giữ đúng23:22,không cộngintro. Hòa cảnh phải bù phần chồng. HOOK_30_GIAY_10_SHOT.csv chỉ thay hình30giâyđầu bằng10shot3giây,giữ voice0–30giây. Số liệu,nhãn,địa danh và chữthumbnail thêm trongeditor sau kiểm chứng. Kiểm tra clip thực tế về độ tuổi,số liệu giả,kiến trúc,nước và nhãn loại hình trước xuất bản.

@@ -1,0 +1,11 @@
+{
+  "topic": "043-Baiae",
+  "languages": 16,
+  "english_words": 4063,
+  "strategy": "Contextual localization preserves facts,mechanism anduncertainty;notword-for-word subtitlealignment",
+  "vi_ja_ko": "Assistantcontextualrewrites14chapters",
+  "other12": "Fullcontext-expandedMTchapterdraftswithtargetedfault,subsidence,dating,1538/2023andregionaltermreview",
+  "finnish": "Correctedgeologicalfaultsiirrosanddatingajoitus;MonteNuovosyntyi,notfounded",
+  "alignment": "English141cues;15localized14chapters13x100+102s",
+  "independent_native_editorial_or_listening_review": false
+}

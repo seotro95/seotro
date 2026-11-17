@@ -1,0 +1,21 @@
+{
+  "style_id": "outdoor-underwater-archaeology-historical-no-labs-v3",
+  "user_override_date": "2026-11-17",
+  "historical_settings_preferred": true,
+  "exclude_scientists": true,
+  "exclude_laboratories_museums_and_modern_research_worktables": true,
+  "historical_adult_scribes_workers_couriers_allowed": true,
+  "human_minimum_age": 25,
+  "conceptual_cutaways_maps_allowed_without_modern_people_or_equipment": true,
+  "voice_context_does_not_override_visual_instructions": true,
+  "every_generated_clip_seconds": 10,
+  "silent_no_speech_each_prompt": true,
+  "no_children_including_artwork_screens_reflections": true,
+  "reconstructions_are_illustrative_not_recovered_historical_events": true,
+  "outdoor_archaeological_landscape_preferred": true,
+  "laboratory_scene_count": 0,
+  "living_tradition_separate_from_historical_reconstruction": true,
+  "topic": "043-Baiae",
+  "underwater_archaeology_preferred": true,
+  "historical_roman_settings_separate_from_present_day_remains": true
+}
