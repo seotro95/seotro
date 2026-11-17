@@ -1,0 +1,355 @@
+[
+  {
+    "locale": "it-IT",
+    "chapters": [
+      {
+        "chapter": 1,
+        "raw_seconds": 139.008,
+        "tempo": 1.39175,
+        "chars": 2045,
+        "words": 316
+      },
+      {
+        "chapter": 2,
+        "raw_seconds": 154.008,
+        "tempo": 1.54193,
+        "chars": 2319,
+        "words": 336
+      },
+      {
+        "chapter": 3,
+        "raw_seconds": 147.672,
+        "tempo": 1.47849,
+        "chars": 2253,
+        "words": 339
+      },
+      {
+        "chapter": 4,
+        "raw_seconds": 161.712,
+        "tempo": 1.61906,
+        "chars": 2575,
+        "words": 386
+      },
+      {
+        "chapter": 5,
+        "raw_seconds": 169.152,
+        "tempo": 1.69355,
+        "chars": 2640,
+        "words": 396
+      },
+      {
+        "chapter": 6,
+        "raw_seconds": 146.16,
+        "tempo": 1.46336,
+        "chars": 2254,
+        "words": 338
+      },
+      {
+        "chapter": 7,
+        "raw_seconds": 146.544,
+        "tempo": 1.4672,
+        "chars": 2318,
+        "words": 351
+      },
+      {
+        "chapter": 8,
+        "raw_seconds": 163.344,
+        "tempo": 1.6354,
+        "chars": 2528,
+        "words": 358
+      },
+      {
+        "chapter": 9,
+        "raw_seconds": 149.4,
+        "tempo": 1.49579,
+        "chars": 2327,
+        "words": 352
+      },
+      {
+        "chapter": 10,
+        "raw_seconds": 151.176,
+        "tempo": 1.51358,
+        "chars": 2342,
+        "words": 343
+      },
+      {
+        "chapter": 11,
+        "raw_seconds": 153.888,
+        "tempo": 1.54073,
+        "chars": 2380,
+        "words": 348
+      },
+      {
+        "chapter": 12,
+        "raw_seconds": 149.28,
+        "tempo": 1.49459,
+        "chars": 2314,
+        "words": 347
+      },
+      {
+        "chapter": 13,
+        "raw_seconds": 145.968,
+        "tempo": 1.46143,
+        "chars": 2254,
+        "words": 347
+      },
+      {
+        "chapter": 14,
+        "raw_seconds": 87.336,
+        "tempo": 1.41138,
+        "chars": 1341,
+        "words": 200
+      }
+    ],
+    "over_limit": [
+      {
+        "chapter": 5,
+        "raw_seconds": 169.152,
+        "tempo": 1.69355,
+        "chars": 2640,
+        "words": 396
+      }
+    ],
+    "checkpoint_zip_sha256": "ec04b369d65152206d67b8f830577c90392e91148fa133b9b04c8cb003488163"
+  },
+  {
+    "locale": "ja-JP",
+    "chapters": [
+      {
+        "chapter": 1,
+        "raw_seconds": 143.832,
+        "tempo": 1.44005,
+        "chars": 825,
+        "words": 6
+      },
+      {
+        "chapter": 2,
+        "raw_seconds": 153.336,
+        "tempo": 1.5352,
+        "chars": 875,
+        "words": 7
+      },
+      {
+        "chapter": 3,
+        "raw_seconds": 157.344,
+        "tempo": 1.57533,
+        "chars": 898,
+        "words": 5
+      },
+      {
+        "chapter": 4,
+        "raw_seconds": 169.224,
+        "tempo": 1.69427,
+        "chars": 1036,
+        "words": 7
+      },
+      {
+        "chapter": 5,
+        "raw_seconds": 172.776,
+        "tempo": 1.72984,
+        "chars": 1070,
+        "words": 10
+      },
+      {
+        "chapter": 6,
+        "raw_seconds": 149.976,
+        "tempo": 1.50156,
+        "chars": 890,
+        "words": 3
+      },
+      {
+        "chapter": 7,
+        "raw_seconds": 161.28,
+        "tempo": 1.61474,
+        "chars": 945,
+        "words": 1
+      },
+      {
+        "chapter": 8,
+        "raw_seconds": 162.864,
+        "tempo": 1.6306,
+        "chars": 954,
+        "words": 1
+      },
+      {
+        "chapter": 9,
+        "raw_seconds": 154.416,
+        "tempo": 1.54602,
+        "chars": 884,
+        "words": 1
+      },
+      {
+        "chapter": 10,
+        "raw_seconds": 157.248,
+        "tempo": 1.57437,
+        "chars": 928,
+        "words": 3
+      },
+      {
+        "chapter": 11,
+        "raw_seconds": 158.784,
+        "tempo": 1.58975,
+        "chars": 914,
+        "words": 2
+      },
+      {
+        "chapter": 12,
+        "raw_seconds": 167.736,
+        "tempo": 1.67938,
+        "chars": 975,
+        "words": 5
+      },
+      {
+        "chapter": 13,
+        "raw_seconds": 157.2,
+        "tempo": 1.57389,
+        "chars": 903,
+        "words": 1
+      },
+      {
+        "chapter": 14,
+        "raw_seconds": 89.88,
+        "tempo": 1.45249,
+        "chars": 506,
+        "words": 1
+      }
+    ],
+    "over_limit": [
+      {
+        "chapter": 4,
+        "raw_seconds": 169.224,
+        "tempo": 1.69427,
+        "chars": 1036,
+        "words": 7
+      },
+      {
+        "chapter": 5,
+        "raw_seconds": 172.776,
+        "tempo": 1.72984,
+        "chars": 1070,
+        "words": 10
+      },
+      {
+        "chapter": 12,
+        "raw_seconds": 167.736,
+        "tempo": 1.67938,
+        "chars": 975,
+        "words": 5
+      }
+    ],
+    "checkpoint_zip_sha256": "dbafd0ed6628256aad54ba990a9fe546a452d7aae681831e9b6345796556ae37"
+  },
+  {
+    "locale": "ko-KR",
+    "chapters": [
+      {
+        "chapter": 1,
+        "raw_seconds": 147.24,
+        "tempo": 1.47417,
+        "chars": 940,
+        "words": 229
+      },
+      {
+        "chapter": 2,
+        "raw_seconds": 151.56,
+        "tempo": 1.51742,
+        "chars": 992,
+        "words": 233
+      },
+      {
+        "chapter": 3,
+        "raw_seconds": 151.08,
+        "tempo": 1.51262,
+        "chars": 972,
+        "words": 242
+      },
+      {
+        "chapter": 4,
+        "raw_seconds": 159.36,
+        "tempo": 1.59551,
+        "chars": 1097,
+        "words": 265
+      },
+      {
+        "chapter": 5,
+        "raw_seconds": 170.16,
+        "tempo": 1.70364,
+        "chars": 1150,
+        "words": 281
+      },
+      {
+        "chapter": 6,
+        "raw_seconds": 146.712,
+        "tempo": 1.46888,
+        "chars": 1018,
+        "words": 252
+      },
+      {
+        "chapter": 7,
+        "raw_seconds": 154.536,
+        "tempo": 1.54722,
+        "chars": 1036,
+        "words": 253
+      },
+      {
+        "chapter": 8,
+        "raw_seconds": 159.024,
+        "tempo": 1.59215,
+        "chars": 1048,
+        "words": 259
+      },
+      {
+        "chapter": 9,
+        "raw_seconds": 145.992,
+        "tempo": 1.46167,
+        "chars": 984,
+        "words": 249
+      },
+      {
+        "chapter": 10,
+        "raw_seconds": 160.656,
+        "tempo": 1.60849,
+        "chars": 1081,
+        "words": 260
+      },
+      {
+        "chapter": 11,
+        "raw_seconds": 154.68,
+        "tempo": 1.54866,
+        "chars": 1012,
+        "words": 251
+      },
+      {
+        "chapter": 12,
+        "raw_seconds": 160.752,
+        "tempo": 1.60945,
+        "chars": 1054,
+        "words": 263
+      },
+      {
+        "chapter": 13,
+        "raw_seconds": 152.64,
+        "tempo": 1.52823,
+        "chars": 1000,
+        "words": 249
+      },
+      {
+        "chapter": 14,
+        "raw_seconds": 94.848,
+        "tempo": 1.53277,
+        "chars": 623,
+        "words": 154
+      }
+    ],
+    "over_limit": [
+      {
+        "chapter": 5,
+        "raw_seconds": 170.16,
+        "tempo": 1.70364,
+        "chars": 1150,
+        "words": 281
+      }
+    ],
+    "checkpoint_zip_sha256": "cd5ca8c76e648264730445bd0f1e0a7c838178cc3e1a321f4994a9ca88d2ed37"
+  }
+]

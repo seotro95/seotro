@@ -45,6 +45,7 @@ for profile in profiles:
    if found:leaks.append(dict(chapter=row['id'],phrases=sorted(found)))
   assert not leaks,(locale,leaks)
  qa['script_sha256'][locale]=hashlib.sha256(path.read_bytes()).hexdigest();qa['english_leaks'][locale]=leaks;qa['chapter_counts'][locale]=len(rows)
+if (R/'PACING_SCRIPT_REPAIRS.json').exists():review['pacing_script_repairs']=json.loads((R/'PACING_SCRIPT_REPAIRS.json').read_text())
 for name,obj in [('VOICE_INPUT_QA.json',qa),('TRANSLATION_REVIEW.json',review)]:
  (R/name).write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');(D/name).write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 with zipfile.ZipFile(R/'VOICE_INPUTS.zip','w',zipfile.ZIP_DEFLATED) as z:

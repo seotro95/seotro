@@ -55,7 +55,7 @@ for locale,report in reports.items():
     (D/f'{locale}.txt').write_text('\n\n'.join(r['voice'] for r in rows)+'\n',encoding='utf-8')
     (D/f'{locale}_chapters.srt').write_text('\n\n'.join(f"{r['id']}\n{stamp(r['start'])} --> {stamp(r['end'])}\n{r['voice']}" for r in rows)+'\n',encoding='utf-8')
 for name in ['AUDIO_MANIFEST.json','VOICE_PROFILES_LOCKED.json','VOICE_RELEASE_QA.json']:shutil.copyfile(O/name,D/name)
-for name in ['TRANSLATION_REVIEW.json','VOICE_INPUT_QA.json','LOCALIZATION_SOURCE_CHAPTERS.json']:shutil.copyfile(R/name,D/name)
+for name in ['TRANSLATION_REVIEW.json','VOICE_INPUT_QA.json','LOCALIZATION_SOURCE_CHAPTERS.json','PACING_SCRIPT_REPAIRS.json','PACING_REPAIR_ANALYSIS.json']:shutil.copyfile(R/name,D/name)
 style=dict(id='science-documentary-brisk-v4-Qanat-NamMinh',profile_set_id=profile_set['profile_set_id'],main_voice='en-US-AndrewNeural',vietnamese_voice='vi-VN-NamMinhNeural',native_word_accents_db=1.2,max_word_accents_per_request=2,pitch_shift_applied=False,english='Grouped native requests with real word-boundary cue splits and pitch-preserving timing fit',other_languages='Saved male IDs, modest phrase/question rate changes, pitch-preserving chapter fit',loudness_target_lufs=-19,true_peak_target_db=-2,target_seconds=TARGET,native_listening_review=False,native_english_request_rate='+2%',main_english_wpm=179.339,main_english_density_faster_percent=8.23)
 dump(D/'NARRATION_STYLE_LOCKED.json',style)
 docqa=json.loads((D/'DOCUMENT_QA.json').read_text());docqa.update(voices_generated=True,voice_count_verified=16,audio_sample_frames_verified=FRAMES,translated_chapter_alignment_verified=True,independent_native_listening_review=False,native_english_request_rate='+2%',main_english_wpm=179.339,main_english_density_faster_percent=8.23);dump(D/'DOCUMENT_QA.json',docqa)
@@ -82,7 +82,7 @@ Chưa tạo footage, ảnh thumbnail hoặc MP4. Khi dựng phim chính chỉ vo
 '''
 for v in voices:readme+=f"| {v['name']} | [{v['filename']}]({v['url']}) | 22:42 |\n"
 for name in ['README.md','DOWNLOAD_LINKS.md']:(D/name).write_text(readme,encoding='utf-8')
-(D/'LINK_TAI_VOICE.txt').write_text('MỚI-022 — 16 VOICE NAM — 22:42\n\n'+'\n\n'.join(v['name']+'\n'+v['url'] for v in voices)+'\n',encoding='utf-8')
+(D/'LINK_TAI_VOICE.txt').write_text('MỚI-030 — 16 VOICE NAM — 22:42\n\n'+'\n\n'.join(v['name']+'\n'+v['url'] for v in voices)+'\n',encoding='utf-8')
 with zipfile.ZipFile(O/f'{PREFIX}_16_VOICES_22m42s.zip','w',zipfile.ZIP_STORED) as z:
     for p in sorted(O.glob('*.mp3')):z.write(p,p.name)
     for n in ['AUDIO_MANIFEST.json','VOICE_PROFILES_LOCKED.json','VOICE_RELEASE_QA.json']:z.write(O/n,n)
@@ -98,6 +98,6 @@ record=dict(topic_id='MOI-030',stage='all16voices_and_documents_published',targe
 p=O/'DOCUMENT_ASSET_MANIFEST.json';dump(p,record);upload(p)
 release=json.loads(subprocess.check_output(['gh','api',f'repos/{REPO}/releases/tags/{TAG}']))
 p=O/'SHA256SUMS.txt';p.write_text(''.join(a['digest'].removeprefix('sha256:')+'  '+a['name']+'\n' for a in sorted(release['assets'],key=lambda x:x['name']) if a['name']!='SHA256SUMS.txt'));upload(p)
-subprocess.run(['gh','release','edit',TAG,'--repo',REPO,'--title','MỚI-022 Qanat — 140 prompt và 16 voice nam — 22:42','--notes-file',str(D/'README.md'),'--latest=false'],check=True)
-print('ROMAN_FULL16VOICE_DELIVERY_COMPLETE',flush=True)
+subprocess.run(['gh','release','edit',TAG,'--repo',REPO,'--title','MỚI-030 Qanat — 150 prompt và 16 voice nam — 22:42','--notes-file',str(D/'README.md'),'--latest=false'],check=True)
+print('QANAT_FULL16VOICE_DELIVERY_COMPLETE',flush=True)
 
