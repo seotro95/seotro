@@ -1,0 +1,669 @@
+{
+  "topic_id": "MOI-030",
+  "independent_native_review": false,
+  "independent_native_listening_review": false,
+  "source_adaptation": "Fourteen complete English chapters retained in sequence; ambiguous engineering words clarified for machine translation. Vietnamese rewritten by assistant, preserving mechanism, source and chronology limits, with a modestly brisker density.",
+  "assistant_review_scope": "Full Vietnamese rewrite; selected technical passages across the other fourteen languages covering source elevation, gallery, access shafts, example slope, water-use periods, water quality, recharge, historical uncertainty and aflaj; full-script five-word English leak scan. No independent native editorial or listening review.",
+  "locales": {
+    "vi-VN": {
+      "chapters": 14,
+      "assistant_full_rewrite": true,
+      "targeted_edits": [],
+      "independent_native_review": false
+    },
+    "es-ES": {
+      "chapters": 14,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 3,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 4,
+          "old": "una caída prevista",
+          "new": "un desnivel previsto"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "fr-FR": {
+      "chapters": 14,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "une chute intentionnelle",
+          "new": "une pente prévue"
+        },
+        {
+          "chapter": 7,
+          "old": "aux décisions en dehors des champs",
+          "new": "aux décisions prises près des champs"
+        },
+        {
+          "chapter": 10,
+          "old": "œuvres connexes",
+          "new": "ouvrages hydrauliques apparentés"
+        },
+        {
+          "chapter": 14,
+          "old": "une petite chute délibérée",
+          "new": "une faible pente soigneusement aménagée"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "ja-JP": {
+      "chapters": 14,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 1,
+          "old": "穀物",
+          "new": "土の粒子"
+        },
+        {
+          "chapter": 3,
+          "old": "競合する撤退",
+          "new": "ほかの取水"
+        },
+        {
+          "chapter": 3,
+          "old": "情報源",
+          "new": "水源"
+        },
+        {
+          "chapter": 3,
+          "old": "田んぼ",
+          "new": "農地"
+        },
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 5,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 6,
+          "old": "田んぼ",
+          "new": "農地"
+        },
+        {
+          "chapter": 7,
+          "old": "共有作品",
+          "new": "共同の水利施設"
+        },
+        {
+          "chapter": 7,
+          "old": "アウトレット",
+          "new": "水の出口"
+        },
+        {
+          "chapter": 7,
+          "old": "多くの分野",
+          "new": "多くの農地"
+        },
+        {
+          "chapter": 7,
+          "old": "個々の分野",
+          "new": "個々の農地"
+        },
+        {
+          "chapter": 7,
+          "old": "これを水を含まないと呼ぶと誤解を招く可能性があります。",
+          "new": "この水には費用がかからないと考えると、誤解を招くおそれがあります。"
+        },
+        {
+          "chapter": 8,
+          "old": "飲みやすさに関する実験結果",
+          "new": "飲料水としての安全性に関する検査結果"
+        },
+        {
+          "chapter": 8,
+          "old": "開水路でも水の流れが弱くなる可能性があります",
+          "new": "水路に詰まりがなくても流れが弱くなる可能性があります"
+        },
+        {
+          "chapter": 10,
+          "old": "デート",
+          "new": "年代判定"
+        },
+        {
+          "chapter": 12,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 14,
+          "action": "Assistant contextual chapter rewrite"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "ko-KR": {
+      "chapters": 14,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 1,
+          "old": "콘센트",
+          "new": "물 출구"
+        },
+        {
+          "chapter": 1,
+          "old": "곡물",
+          "new": "흙 입자"
+        },
+        {
+          "chapter": 3,
+          "old": "유정",
+          "new": "우물"
+        },
+        {
+          "chapter": 3,
+          "old": "경쟁 철수",
+          "new": "다른 취수"
+        },
+        {
+          "chapter": 3,
+          "old": "콘센트",
+          "new": "물 출구"
+        },
+        {
+          "chapter": 4,
+          "old": "의도적인 추락",
+          "new": "계획한 하향 경사"
+        },
+        {
+          "chapter": 4,
+          "old": "침대",
+          "new": "수로 바닥"
+        },
+        {
+          "chapter": 5,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 6,
+          "old": "콘센트",
+          "new": "물 출구"
+        },
+        {
+          "chapter": 7,
+          "old": "콘센트",
+          "new": "물 출구"
+        },
+        {
+          "chapter": 7,
+          "old": "많은 분야",
+          "new": "많은 농경지"
+        },
+        {
+          "chapter": 7,
+          "old": "개별 분야",
+          "new": "개별 농경지"
+        },
+        {
+          "chapter": 7,
+          "old": "이것을 물이 없다고 부르는 것은 오해를 불러일으킬 수 있습니다.",
+          "new": "이 물에 비용이 전혀 들지 않는다고 말하면 오해를 불러일으킬 수 있습니다."
+        },
+        {
+          "chapter": 8,
+          "old": "음주 품질",
+          "new": "음용수 안전성"
+        },
+        {
+          "chapter": 8,
+          "old": "개방형 수로가 여전히 약하게 작동할 수 있습니다.",
+          "new": "수로가 막히지 않아도 물 흐름이 약해질 수 있습니다."
+        },
+        {
+          "chapter": 10,
+          "old": "데이트",
+          "new": "연대 판정"
+        },
+        {
+          "chapter": 12,
+          "old": "콘센트",
+          "new": "물 출구"
+        },
+        {
+          "chapter": 13,
+          "old": "콘센트",
+          "new": "물 출구"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "de-DE": {
+      "chapters": 14,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "einen beabsichtigten Sturz durch echten Boden zu tragen",
+          "new": "ein vorgesehenes Gefälle durch wechselnden Untergrund einzuhalten"
+        },
+        {
+          "chapter": 10,
+          "old": "verwandter Werke",
+          "new": "verwandter Wasserbauten"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "it-IT": {
+      "chapters": 14,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "sopportare una caduta intenzionale attraverso un terreno reale",
+          "new": "mantenere la pendenza prevista attraverso il terreno reale"
+        },
+        {
+          "chapter": 5,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 7,
+          "old": "Chiamare quest’acqua “libera”",
+          "new": "Considerare quest’acqua priva di costi"
+        },
+        {
+          "chapter": 14,
+          "old": "una piccola caduta deliberata",
+          "new": "un piccolo dislivello progettato con cura"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "pt-PT": {
+      "chapters": 14,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "provocar uma queda intencional em terreno real",
+          "new": "manter o declive previsto ao longo do terreno real"
+        },
+        {
+          "chapter": 7,
+          "old": "podem ter tão consequências como a inclinação do canal",
+          "new": "podem ser tão importantes como a inclinação do canal"
+        },
+        {
+          "chapter": 8,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 14,
+          "old": "uma queda pequena e deliberada",
+          "new": "um pequeno desnível cuidadosamente planeado"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "nl-NL": {
+      "chapters": 14,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "een beoogde val",
+          "new": "het beoogde verval"
+        },
+        {
+          "chapter": 7,
+          "old": "verkooppunt",
+          "new": "wateruitlaat"
+        },
+        {
+          "chapter": 8,
+          "old": "drinkkwaliteit",
+          "new": "drinkwaterveiligheid"
+        },
+        {
+          "chapter": 9,
+          "old": "verkooppunt",
+          "new": "wateruitlaat"
+        },
+        {
+          "chapter": 10,
+          "old": "verkooppunt",
+          "new": "wateruitlaat"
+        },
+        {
+          "chapter": 10,
+          "old": "ondergrondse ondergrondse watertunnel voor irrigatie",
+          "new": "ondergrondse irrigatietunnel"
+        },
+        {
+          "chapter": 12,
+          "old": "verkooppunt",
+          "new": "wateruitlaat"
+        },
+        {
+          "chapter": 14,
+          "old": "een kleine, opzettelijke val",
+          "new": "een klein, zorgvuldig aangelegd verval"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "pl-PL": {
+      "chapters": 14,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "zamierzonego upadku",
+          "new": "zaplanowanego spadku"
+        },
+        {
+          "chapter": 7,
+          "old": "Rynek zbytu obsługujący wiele pól",
+          "new": "Wylot wody zasilający wiele pól"
+        },
+        {
+          "chapter": 7,
+          "old": "Nazywanie tej wody wolną od wody",
+          "new": "Nazywanie tej wody bezpłatną"
+        },
+        {
+          "chapter": 7,
+          "old": "po wschodach",
+          "new": "po wypłynięciu na powierzchnię"
+        },
+        {
+          "chapter": 8,
+          "old": "jakości picia",
+          "new": "bezpieczeństwa wody pitnej"
+        },
+        {
+          "chapter": 11,
+          "old": "kolekcja podziemna Podziemne tunele wodne",
+          "new": "podziemne tunele zbierające wodę"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "sv-SE": {
+      "chapters": 14,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 5,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 7,
+          "old": "försäljningsställe",
+          "new": "vattenutlopp"
+        },
+        {
+          "chapter": 7,
+          "old": "Att kalla detta vattenfritt kan vilseleda.",
+          "new": "Att kalla detta vatten gratis kan vara missvisande."
+        },
+        {
+          "chapter": 7,
+          "old": "Gravity",
+          "new": "Tyngdkraften"
+        },
+        {
+          "chapter": 8,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 9,
+          "old": "försäljningsställe",
+          "new": "vattenutlopp"
+        },
+        {
+          "chapter": 11,
+          "old": "underjordiska samling underjordiska vattentunnlar",
+          "new": "underjordiska tunnlar som samlar grundvatten"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "da-DK": {
+      "chapters": 14,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "at bære et tilsigtet fald gennem den rigtige jord",
+          "new": "at fastholde det planlagte fald gennem skiftende jordlag"
+        },
+        {
+          "chapter": 7,
+          "old": "En forretning, der betjener mange felter",
+          "new": "Et vandudløb, der forsyner flere marker"
+        },
+        {
+          "chapter": 7,
+          "old": "At kalde dette vandfrit kan vildlede.",
+          "new": "Det kan være misvisende at kalde vandet gratis."
+        },
+        {
+          "chapter": 8,
+          "old": "drikkekvalitet",
+          "new": "drikkevandets sikkerhed"
+        },
+        {
+          "chapter": 8,
+          "old": "et flydende udløb",
+          "new": "et udløb med strømmende vand"
+        },
+        {
+          "chapter": 11,
+          "old": "underjordiske indsamling underjordiske vandtunneler",
+          "new": "underjordiske tunneler, der opsamler grundvand"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "fi-FI": {
+      "chapters": 14,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "kuvittele puhtaasti havainnollistava kanava, joka putoaa 1 metrin korkeuteen 1 kilometrin yli",
+          "new": "kuvittele havainnollistava kanava, jonka pohja laskee yhden metrin kilometrin matkalla"
+        },
+        {
+          "chapter": 4,
+          "old": "kuljettaa suunniteltu pudotus todellisen maan läpi",
+          "new": "säilyttää suunniteltu loiva kaltevuus vaihtelevassa maaperässä"
+        },
+        {
+          "chapter": 7,
+          "old": "myyntipiste",
+          "new": "purkuaukko"
+        },
+        {
+          "chapter": 7,
+          "old": "Tämän vedettömäksi kutsuminen",
+          "new": "Tämän veden maksuttomaksi kutsuminen"
+        },
+        {
+          "chapter": 7,
+          "old": "Painovoima toimittaa toimitusmekanismi",
+          "new": "Painovoima saa veden liikkeelle"
+        },
+        {
+          "chapter": 8,
+          "old": "juoman laadusta",
+          "new": "juomaveden turvallisuudesta"
+        },
+        {
+          "chapter": 9,
+          "old": "myyntipiste",
+          "new": "purkuaukko"
+        },
+        {
+          "chapter": 11,
+          "action": "Assistant contextual chapter rewrite"
+        },
+        {
+          "chapter": 14,
+          "old": "pieni, tahallinen pudotus",
+          "new": "pieni, huolellisesti suunniteltu kaltevuus"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "nb-NO": {
+      "chapters": 14,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "å bære et tiltenkt fall gjennom virkelig grunn",
+          "new": "å holde det planlagte fallet gjennom skiftende grunnforhold"
+        },
+        {
+          "chapter": 7,
+          "old": "Et utsalgssted som betjener mange felt",
+          "new": "Et vannuttak som forsyner mange jorder"
+        },
+        {
+          "chapter": 7,
+          "old": "Å kalle dette vannfritt kan villede.",
+          "new": "Å kalle dette vannet gratis kan være misvisende."
+        },
+        {
+          "chapter": 8,
+          "old": "drikkekvalitet",
+          "new": "drikkevannets sikkerhet"
+        },
+        {
+          "chapter": 11,
+          "old": "underjordiske samling underjordiske vanntunneler",
+          "new": "underjordiske tunneler som samler grunnvann"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "cs-CZ": {
+      "chapters": 14,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "zamýšlený pád",
+          "new": "zamýšlený spád"
+        },
+        {
+          "chapter": 7,
+          "old": "Prodejna, která obsluhuje mnoho oborů",
+          "new": "Výtok zásobující řadu polí"
+        },
+        {
+          "chapter": 8,
+          "old": "kvalitě pití",
+          "new": "nezávadnosti pitné vody"
+        },
+        {
+          "chapter": 10,
+          "old": "Jména také vyžadují péči.",
+          "new": "Také názvy je třeba používat obezřetně."
+        },
+        {
+          "chapter": 11,
+          "old": "podzemní sběr podzemních vodních tunelů jsou",
+          "new": "podzemní tunely zachycující podzemní vodu představují"
+        }
+      ],
+      "independent_native_review": false
+    }
+  },
+  "pacing_script_repairs": {
+    "changes": [
+      {
+        "locale": "it-IT",
+        "chapter": 5,
+        "old_chars": 2640,
+        "new_chars": 2145,
+        "old_words": 396,
+        "new_words": 316,
+        "reason": "Condense repeated wording and repair literal phrasing while preserving engineering, evidence and historical limits. Keep voice ID, duration, pitch and pacing gate."
+      },
+      {
+        "locale": "ja-JP",
+        "chapter": 4,
+        "old_chars": 1036,
+        "new_chars": 711,
+        "old_words": 7,
+        "new_words": 5,
+        "reason": "Condense repeated wording and repair literal phrasing while preserving engineering, evidence and historical limits. Keep voice ID, duration, pitch and pacing gate."
+      },
+      {
+        "locale": "ja-JP",
+        "chapter": 5,
+        "old_chars": 1070,
+        "new_chars": 708,
+        "old_words": 10,
+        "new_words": 5,
+        "reason": "Condense repeated wording and repair literal phrasing while preserving engineering, evidence and historical limits. Keep voice ID, duration, pitch and pacing gate."
+      },
+      {
+        "locale": "ja-JP",
+        "chapter": 12,
+        "old_chars": 975,
+        "new_chars": 725,
+        "old_words": 5,
+        "new_words": 5,
+        "reason": "Condense repeated wording and repair literal phrasing while preserving engineering, evidence and historical limits. Keep voice ID, duration, pitch and pacing gate."
+      },
+      {
+        "locale": "ko-KR",
+        "chapter": 5,
+        "old_chars": 1150,
+        "new_chars": 898,
+        "old_words": 281,
+        "new_words": 219,
+        "reason": "Condense repeated wording and repair literal phrasing while preserving engineering, evidence and historical limits. Keep voice ID, duration, pitch and pacing gate."
+      },
+      {
+        "locale": "sv-SE",
+        "chapter": 4,
+        "old_chars": 2304,
+        "new_chars": 1768,
+        "old_words": 327,
+        "new_words": 259,
+        "reason": "Condense repeated wording and repair literal phrasing while preserving engineering, evidence and historical limits. Keep voice ID, duration, pitch and pacing gate."
+      },
+      {
+        "locale": "sv-SE",
+        "chapter": 5,
+        "old_chars": 2253,
+        "new_chars": 1814,
+        "old_words": 330,
+        "new_words": 260,
+        "reason": "Condense repeated wording and repair literal phrasing while preserving engineering, evidence and historical limits. Keep voice ID, duration, pitch and pacing gate."
+      },
+      {
+        "locale": "sv-SE",
+        "chapter": 8,
+        "old_chars": 2148,
+        "new_chars": 1742,
+        "old_words": 284,
+        "new_words": 241,
+        "reason": "Condense repeated wording and repair literal phrasing while preserving engineering, evidence and historical limits. Keep voice ID, duration, pitch and pacing gate."
+      }
+    ],
+    "raw_measurements": "PACING_REPAIR_ANALYSIS.json",
+    "independent_native_review": false
+  }
+}

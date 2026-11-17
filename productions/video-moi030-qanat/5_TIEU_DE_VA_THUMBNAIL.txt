@@ -1,0 +1,29 @@
+MỚI-030 — QANAT — 22:42
+5 TIÊU ĐỀ ANH + 5 PROMPT THUMBNAIL TƯƠNG ỨNG
+
+01. TITLE: HOW DID WATER CROSS THE DESERT WITHOUT A PUMP?
+Nghĩa: Nước vượt qua sa mạc mà không có máy bơm bằng cách nào?
+THUMBNAIL PROMPT: Create a cinematic historical engineering documentary thumbnail, 16:9, 1280x720. A modest thread of clear water emerges from a dark traditional Iranian qanat outlet into a sunlit shallow channel, with dry desert earth in the foreground and a distant chain of shaft spoil rims leading toward foothills. The water is the hero, not a huge river. Strong warm desert versus cool shaded-water contrast, natural stone and earth textures, one clear focal point, dramatic low camera, premium documentary photography. No pump, engine, motor, floating water, upward-flowing stream, fantasy oasis, laboratory, children, infants, teenagers or minors anywhere. Any visible person must be clearly adult 35–65, but prefer no people. Illustrative reconstruction, not a claim to show a surveyed or excavated site. No readable text, logos or watermark; keep a small clean upper area for text added by the editor.
+TEXT OPTIONAL IN EDITOR: NO PUMP?
+
+02. TITLE: THE DESERT WELLS HID A MUCH BIGGER SYSTEM
+Nghĩa: Những giếng giữa sa mạc che giấu một hệ thống lớn hơn nhiều.
+THUMBNAIL PROMPT: Create a compelling 16:9 historical documentary thumbnail, 1280x720. High oblique view across an arid Iranian plateau with an irregular chain of traditional qanat shaft spoil rims, one larger rim in the foreground and the chain receding toward a mountain front. Include a restrained clearly illustrative side cutaway along the lower frame that reveals one narrow continuous underground gallery connecting access shafts to a low outlet; geological source on the right uphill, outlet on the left downhill. Keep the cutaway visually separate as an explanation, not an actual X-ray or survey. Warm atmospheric side light, strong depth, realistic earth and gravel, restrained shallow water. No giant underground lake, glowing blue tunnels, identical fantasy craters, alien technology, children, minors, laboratory, readable text, logo or watermark. Leave a small simple sky area for optional editor text.
+TEXT OPTIONAL IN EDITOR: WHAT CONNECTS THEM?
+
+03. TITLE: THE TINY SLOPE THAT BROUGHT WATER TO THE DESERT
+Nghĩa: Độ dốc nhỏ đưa nước tới vùng đất khô hạn.
+THUMBNAIL PROMPT: Design a crisp cinematic archaeology and engineering thumbnail, 16:9, 1280x720. Show an outdoor physical longitudinal qanat terrain model in dramatic natural light: source zone high on the right within saturated gravel, a narrow gently descending gallery leading left, and a ground surface that descends more steeply until the gallery emerges at a lower field outlet. A small realistic water thread follows the downhill gallery. The slope relationship must be legible without text, arrows, numerical labels or exaggerated geometry. Dry desert landscape softly visible behind the model, tactile geological layers, close low oblique camera. Clearly illustrative, not actual measured data. No uphill water, pressure fountain, huge cavern, pump, machine, laboratory, child, infant, adolescent, minor, logo or watermark. Prefer no people.
+TEXT OPTIONAL IN EDITOR: FOLLOW THE SLOPE
+
+04. TITLE: A QANAT'S HARDEST JOB WAS NEVER FINISHED
+Nghĩa: Công việc khó của qanat chưa bao giờ kết thúc sau ngày đào xong.
+THUMBNAIL PROMPT: Create a dramatic but truthful 16:9 documentary thumbnail, 1280x720. Foreground: clearly adult traditional Iranian qanat specialist, mature hands and face age 45–60, simple preindustrial regional work tunic, trousers and modest woven headcloth, examining a small clay support replica and rope outdoors. Beside the worker, a narrow qanat outlet carries a modest water thread; in the background an arid shaft line and small irrigated plot show what depends on maintenance. Natural late-afternoon light, weathered earth textures, calm concentration and practical skill, no staged catastrophe. Do not depict anyone descending an open shaft, beneath unsupported ground, drinking untested water, or using modern machinery. No children, infants, teenagers, minors or minors in reflections; no lab, white coat, readable text, logo or watermark. Illustrative historical reconstruction, not an identified real worker or recorded event.
+TEXT OPTIONAL IN EDITOR: BUILT ONCE. CARED FOR ALWAYS.
+
+05. TITLE: NO PUMP DOESN'T MEAN UNLIMITED WATER
+Nghĩa: Không cần máy bơm không có nghĩa nước là vô hạn.
+THUMBNAIL PROMPT: Create a cinematic environmental-history documentary thumbnail, 16:9, 1280x720. A narrow traditional Iranian qanat outlet in dry earth releases only a small believable thread of water toward waiting furrows, with a modest cultivated patch beyond and distant foothills. Pair it with a small visibly separate outdoor aquifer teaching cutaway at one lower corner, showing finite saturated gravel and a collecting gallery near a low water level. The model illustrates a possible constraint, not a diagnosis of an actual dry site. Strong side light, restrained earth colors, clear focal hierarchy, visually intriguing without disaster sensationalism. No instant drying, fake before-and-after proof, giant blue reservoir, pump, engine, laboratory, children, infants, teenagers, minors, political symbols, readable text, logo or watermark. Prefer no people; all models and landscapes are illustrative.
+TEXT OPTIONAL IN EDITOR: THE SOURCE HAS LIMITS
+
+GHI CHÚ: Chỉ tạo ảnh sau khi chọn tiêu đề. Chữ tùy chọn thêm trong phần mềm edit, không yêu cầu AI vẽ chữ. Không ghi mốc tuổi, chiều dài kỷ lục, “phát minh duy nhất” hoặc lượng nước chưa được chứng minh. Đây là 5 prompt tạo thumbnail, chưa phải ảnh thumbnail đã tạo.

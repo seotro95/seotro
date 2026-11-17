@@ -1,0 +1,13 @@
+MỚI-030 — QANAT — 22:42
+
+Kịch bản Anh 4071 từ, 137 mốc: 136 × 10 giây + 2 giây cuối = 1.362 giây.
+150 prompt clip 10 giây trong 15 TXT × 10. Đặt tên QANAT_001.mp4 đến QANAT_150.mp4.
+Timeline dùng 144 cảnh: 001–010 lấy 3 giây/cảnh; 011–143 lấy 10 giây/cảnh; 144 lấy 2 giây. Prompt 145–150 là 6 cảnh dự phòng không cộng vào phim. CSV ghi ID lời giao từng cảnh.
+Nhịp Anh khoảng 179.3 từ/phút, nhanh hơn khoảng 8.2% mật độ từ/phút của tập Stonehenge. Native phrase rate +2%, khoảng nghỉ gọn, căn thời gian giữ pitch. Nội dung nhiều hơn phù hợp 22:42; không tăng tốc rồi lấp im lặng.
+Phần hình ưu tiên ngoài trời: cảnh quan, khảo cổ, phục dựng Iran tiền công nghiệp và mô hình mặt cắt. Vài cảnh gallery ngầm, không lab. Không trẻ em kể cả nền/màn hình/phản chiếu; người/tay rõ trưởng thành 35–65 tuổi. Mô hình chỉ minh họa, không dữ liệu khảo sát thật.
+Trong mặt cắt, nguồn bên phải cao hơn; cửa ra bên trái thấp hơn; nước không tự leo giếng. Độ dốc, độ sâu, chiều dài, lớp lót và lịch sử thay đổi tùy nơi. Ví dụ độ dốc trong lời không phải tiêu chuẩn thiết kế. Không gọi nước trong là an toàn uống hoặc coi nước là vô hạn.
+Mỗi prompt kết bằng “Video không có âm thanh, không có lời nói.”. Khi dựng xóa âm clip nếu công cụ tự sinh tiếng. Phim chính chỉ voice Anh, không nhạc/SFX. Thiếu cảnh dùng video chuyển động liên quan, không ảnh đứng có chữ.
+Giữ 16 giọng nam đã lưu: Anh Andrew, Việt Nam Nam Minh, Đức Christoph. Backend online Melo-Viet-Studio 1.3.1 theo mã nguồn khóa, không phải chạy UI Windows hoặc model Melo đa ngôn ngữ cục bộ.
+Mỗi MP3 cần giải mã đúng 65.376.000 mẫu mono 48 kHz = 22:42. Anh căn 137 mốc, bản dịch 14 chương: 13 × 100 giây + 62 giây. Cùng độ dài không có nghĩa từng từ đồng bộ; SRT chương cần chia nhỏ trước khi hiển thị. Chưa kiểm nghe bản ngữ độc lập. Chưa tạo footage, thumbnail hoặc MP4.
+
+KẾT QUẢ: Đã tạo và kiểm giải mã đủ 16 voice nam, cùng 22:42. Giữ nguyên cả 16 ID đã lưu. Bản Việt được viết lại toàn bộ; các bản khác chuyển ngữ từ nguồn tiếng Anh đã làm rõ thuật ngữ và rà các đoạn quan trọng. Phạm vi rà ghi tại TRANSLATION_REVIEW.json; chưa có biên tập/kiểm nghe bản ngữ độc lập.

@@ -1,0 +1,150 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-030",
+  "voices": 16,
+  "male_voices": 16,
+  "all_decoded_seconds": 1362,
+  "all_decoded_frames_48000": 65376000,
+  "all_current_episode_ids_locked": true,
+  "previous_voice_ids_retained": 16,
+  "voice_changes": [],
+  "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+  "unique_audio_hashes": 16,
+  "english_cue_count": 137,
+  "other_language_chapter_count": 14,
+  "word_metadata_checked": true,
+  "english_word_boundary_split_checked": true,
+  "pitch_shift_applied": false,
+  "independent_native_listening_review": false,
+  "translated_voice_alignment": "14 shared chapter boundaries, not word-by-word synchronization",
+  "reports": {
+    "da-DK": {
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "QANAT_MOI030_Dan_Mach.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.1505006007208651,
+      "max_tempo": 1.4328394072887465,
+      "word_accents": 77
+    },
+    "ja-JP": {
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "QANAT_MOI030_Nhat_Ban.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.2792951541850222,
+      "max_tempo": 1.6305967160592711,
+      "word_accents": 47
+    },
+    "es-ES": {
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "QANAT_MOI030_Tay_Ban_Nha.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.2939527432919504,
+      "max_tempo": 1.5325590708850623,
+      "word_accents": 83
+    },
+    "vi-VN": {
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "QANAT_MOI030_Viet_Nam_Nam_Minh.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.0072887464957951,
+      "max_tempo": 1.072166599919904,
+      "word_accents": 68
+    },
+    "pt-PT": {
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "QANAT_MOI030_Bo_Dao_Nha.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.1356027232679216,
+      "max_tempo": 1.3283139767721266,
+      "word_accents": 78
+    },
+    "nb-NO": {
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "QANAT_MOI030_Na_Uy.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.139447336804165,
+      "max_tempo": 1.4042450941129356,
+      "word_accents": 73
+    },
+    "de-DE": {
+      "voice_id": "de-DE-ChristophNeural",
+      "filename": "QANAT_MOI030_Duc.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.3350420504605527,
+      "max_tempo": 1.6354024829795755,
+      "word_accents": 83
+    },
+    "sv-SE": {
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "QANAT_MOI030_Thuy_Dien.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.3912695234281138,
+      "max_tempo": 1.6041649979975972,
+      "word_accents": 71
+    },
+    "pl-PL": {
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "QANAT_MOI030_Ba_Lan.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.1945701357466063,
+      "max_tempo": 1.424669603524229,
+      "word_accents": 28
+    },
+    "ko-KR": {
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "QANAT_MOI030_Han_Quoc.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.387184621545855,
+      "max_tempo": 1.609451341609932,
+      "word_accents": 47
+    },
+    "it-IT": {
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "QANAT_MOI030_Y.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.3917501001201444,
+      "max_tempo": 1.6354024829795755,
+      "word_accents": 28
+    },
+    "nl-NL": {
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "QANAT_MOI030_Ha_Lan.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.2261914297156589,
+      "max_tempo": 1.47488986784141,
+      "word_accents": 80
+    },
+    "en-US": {
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "QANAT_MOI030_My_Tieng_Anh.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 0.6425130208333334,
+      "max_tempo": 1.5864372469635626,
+      "word_accents": 113
+    },
+    "cs-CZ": {
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "QANAT_MOI030_Sec.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.138245895074089,
+      "max_tempo": 1.3703644373247899,
+      "word_accents": 55
+    },
+    "fr-FR": {
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "QANAT_MOI030_Phap.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.1538646375650783,
+      "max_tempo": 1.3814177012414899,
+      "word_accents": 51
+    },
+    "fi-FI": {
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "QANAT_MOI030_Phan_Lan.mp3",
+      "decoded_seconds": 1362.0,
+      "min_tempo": 1.314617541049259,
+      "max_tempo": 1.5868642370845016,
+      "word_accents": 48
+    }
+  }
+}

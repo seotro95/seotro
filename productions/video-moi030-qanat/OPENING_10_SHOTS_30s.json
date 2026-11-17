@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "start": 0,
+    "end": 3,
+    "kind": "opening",
+    "visual": "A modest stream leaves a dark historical Iranian qanat outlet into a shallow channel across dry earth, no machinery.",
+    "camera": "Low 100 mm macro push toward water emerging into sunlight.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "QANAT_001.mp4",
+    "voice_cue_ids": [
+      1
+    ],
+    "voice": "On a dry plain, water appears from a dark opening. No engine starts. No bucket rises. Beneath this desert, a carefully chosen slope does the work.",
+    "visual_revision": "qanat-historical-outdoors-v1",
+    "setting": "outdoor",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical engineering and archaeology documentary, natural earth and water textures, restrained camera motion. A modest stream leaves a dark historical Iranian qanat outlet into a shallow channel across dry earth, no machinery. Camera: Low 100 mm macro push toward water emerging into sunlight. Prioritize outdoor Iranian dryland landscapes, archaeology, historic workyards and outdoor physical cutaway models. Show an underground gallery only when explicitly requested in this scene; galleries are narrow working passages, never palaces or huge caves. Historical scenes are illustrative preindustrial Iranian rural settings, not a verified dynasty or recorded event. Plain regional work tunics, trousers and woven headcloths where people appear; practical hand tools, earth, stone, wood, rope and clay supports. No Roman costumes, caveman clothing or ancient powered machines. Any explicitly modern well comparison is a separate teaching model, never an ancient electric-pump claim. In longitudinal cutaways keep the collecting source higher at the right and the outlet lower at the left; the gallery descends gently right to left and the ground surface can descend more steeply to meet it. Water remains on the downhill path; access shafts are not separate pumping wells. Keep geometry, water level and object identity stable throughout the shot. Aquifers are porous or fractured material, not giant empty lakes. All reconstructions, archaeological sections, terrain reliefs and replicas are explanatory illustrations, not authenticated finds, actual site surveys, measured groundwater data or a recorded experiment. Separate fixed-state models remain visibly separate, without morphing between them. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratories, scientists in white coats, modern lab equipment, fake gauges, numerical readouts, glowing water, pressure fountains, upward-flowing water, giant hidden waterfall, sudden flooding, instant greening, lip-sync, time-lapse, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 2,
+    "start": 3,
+    "end": 6,
+    "kind": "opening",
+    "visual": "Irregular qanat shaft spoil rims cross a dry Iranian plain toward distant foothills, no people at exposed openings.",
+    "camera": "Wide elevated glide following the alignment uphill.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "QANAT_002.mp4",
+    "voice_cue_ids": [
+      1
+    ],
+    "voice": "On a dry plain, water appears from a dark opening. No engine starts. No bucket rises. Beneath this desert, a carefully chosen slope does the work.",
+    "visual_revision": "qanat-historical-outdoors-v1",
+    "setting": "outdoor",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical engineering and archaeology documentary, natural earth and water textures, restrained camera motion. Irregular qanat shaft spoil rims cross a dry Iranian plain toward distant foothills, no people at exposed openings. Camera: Wide elevated glide following the alignment uphill. Prioritize outdoor Iranian dryland landscapes, archaeology, historic workyards and outdoor physical cutaway models. Show an underground gallery only when explicitly requested in this scene; galleries are narrow working passages, never palaces or huge caves. Historical scenes are illustrative preindustrial Iranian rural settings, not a verified dynasty or recorded event. Plain regional work tunics, trousers and woven headcloths where people appear; practical hand tools, earth, stone, wood, rope and clay supports. No Roman costumes, caveman clothing or ancient powered machines. Any explicitly modern well comparison is a separate teaching model, never an ancient electric-pump claim. In longitudinal cutaways keep the collecting source higher at the right and the outlet lower at the left; the gallery descends gently right to left and the ground surface can descend more steeply to meet it. Water remains on the downhill path; access shafts are not separate pumping wells. Keep geometry, water level and object identity stable throughout the shot. Aquifers are porous or fractured material, not giant empty lakes. All reconstructions, archaeological sections, terrain reliefs and replicas are explanatory illustrations, not authenticated finds, actual site surveys, measured groundwater data or a recorded experiment. Separate fixed-state models remain visibly separate, without morphing between them. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratories, scientists in white coats, modern lab equipment, fake gauges, numerical readouts, glowing water, pressure fountains, upward-flowing water, giant hidden waterfall, sudden flooding, instant greening, lip-sync, time-lapse, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 3,
+    "start": 6,
+    "end": 9,
+    "kind": "opening",
+    "visual": "Outdoor physical qanat cutaway with higher source on the right and lower outlet to the left, narrow gently falling gallery.",
+    "camera": "Low side slide showing the continuous downhill water path.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "QANAT_003.mp4",
+    "voice_cue_ids": [
+      1
+    ],
+    "voice": "On a dry plain, water appears from a dark opening. No engine starts. No bucket rises. Beneath this desert, a carefully chosen slope does the work.",
+    "visual_revision": "qanat-historical-outdoors-v1",
+    "setting": "outdoor",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical engineering and archaeology documentary, natural earth and water textures, restrained camera motion. Outdoor physical qanat cutaway with higher source on the right and lower outlet to the left, narrow gently falling gallery. Camera: Low side slide showing the continuous downhill water path. Prioritize outdoor Iranian dryland landscapes, archaeology, historic workyards and outdoor physical cutaway models. Show an underground gallery only when explicitly requested in this scene; galleries are narrow working passages, never palaces or huge caves. Historical scenes are illustrative preindustrial Iranian rural settings, not a verified dynasty or recorded event. Plain regional work tunics, trousers and woven headcloths where people appear; practical hand tools, earth, stone, wood, rope and clay supports. No Roman costumes, caveman clothing or ancient powered machines. Any explicitly modern well comparison is a separate teaching model, never an ancient electric-pump claim. In longitudinal cutaways keep the collecting source higher at the right and the outlet lower at the left; the gallery descends gently right to left and the ground surface can descend more steeply to meet it. Water remains on the downhill path; access shafts are not separate pumping wells. Keep geometry, water level and object identity stable throughout the shot. Aquifers are porous or fractured material, not giant empty lakes. All reconstructions, archaeological sections, terrain reliefs and replicas are explanatory illustrations, not authenticated finds, actual site surveys, measured groundwater data or a recorded experiment. Separate fixed-state models remain visibly separate, without morphing between them. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratories, scientists in white coats, modern lab equipment, fake gauges, numerical readouts, glowing water, pressure fountains, upward-flowing water, giant hidden waterfall, sudden flooding, instant greening, lip-sync, time-lapse, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 4,
+    "start": 9,
+    "end": 12,
+    "kind": "opening",
+    "visual": "Outdoor enlarged aquifer model with saturated gravel pores, no giant cavern or lake.",
+    "camera": "Macro focus pull through the fixed wet grain spaces.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "QANAT_004.mp4",
+    "voice_cue_ids": [
+      1,
+      2
+    ],
+    "voice": "On a dry plain, water appears from a dark opening. No engine starts. No bucket rises. Beneath this desert, a carefully chosen slope does the work. Follow the stream backward. Earth rims cross the ground toward higher country. Each opening belongs to a larger system whose most important passage is hidden beneath the surface.",
+    "visual_revision": "qanat-historical-outdoors-v1",
+    "setting": "outdoor",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical engineering and archaeology documentary, natural earth and water textures, restrained camera motion. Outdoor enlarged aquifer model with saturated gravel pores, no giant cavern or lake. Camera: Macro focus pull through the fixed wet grain spaces. Prioritize outdoor Iranian dryland landscapes, archaeology, historic workyards and outdoor physical cutaway models. Show an underground gallery only when explicitly requested in this scene; galleries are narrow working passages, never palaces or huge caves. Historical scenes are illustrative preindustrial Iranian rural settings, not a verified dynasty or recorded event. Plain regional work tunics, trousers and woven headcloths where people appear; practical hand tools, earth, stone, wood, rope and clay supports. No Roman costumes, caveman clothing or ancient powered machines. Any explicitly modern well comparison is a separate teaching model, never an ancient electric-pump claim. In longitudinal cutaways keep the collecting source higher at the right and the outlet lower at the left; the gallery descends gently right to left and the ground surface can descend more steeply to meet it. Water remains on the downhill path; access shafts are not separate pumping wells. Keep geometry, water level and object identity stable throughout the shot. Aquifers are porous or fractured material, not giant empty lakes. All reconstructions, archaeological sections, terrain reliefs and replicas are explanatory illustrations, not authenticated finds, actual site surveys, measured groundwater data or a recorded experiment. Separate fixed-state models remain visibly separate, without morphing between them. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratories, scientists in white coats, modern lab equipment, fake gauges, numerical readouts, glowing water, pressure fountains, upward-flowing water, giant hidden waterfall, sudden flooding, instant greening, lip-sync, time-lapse, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 5,
+    "start": 12,
+    "end": 15,
+    "kind": "opening",
+    "visual": "Historical Iranian qanat outlet joins a small irrigation junction beside dry field furrows, modest continuous flow.",
+    "camera": "Low tracking along water from shade toward the first furrow.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "QANAT_005.mp4",
+    "voice_cue_ids": [
+      2
+    ],
+    "voice": "Follow the stream backward. Earth rims cross the ground toward higher country. Each opening belongs to a larger system whose most important passage is hidden beneath the surface.",
+    "visual_revision": "qanat-historical-outdoors-v1",
+    "setting": "outdoor",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical engineering and archaeology documentary, natural earth and water textures, restrained camera motion. Historical Iranian qanat outlet joins a small irrigation junction beside dry field furrows, modest continuous flow. Camera: Low tracking along water from shade toward the first furrow. Prioritize outdoor Iranian dryland landscapes, archaeology, historic workyards and outdoor physical cutaway models. Show an underground gallery only when explicitly requested in this scene; galleries are narrow working passages, never palaces or huge caves. Historical scenes are illustrative preindustrial Iranian rural settings, not a verified dynasty or recorded event. Plain regional work tunics, trousers and woven headcloths where people appear; practical hand tools, earth, stone, wood, rope and clay supports. No Roman costumes, caveman clothing or ancient powered machines. Any explicitly modern well comparison is a separate teaching model, never an ancient electric-pump claim. In longitudinal cutaways keep the collecting source higher at the right and the outlet lower at the left; the gallery descends gently right to left and the ground surface can descend more steeply to meet it. Water remains on the downhill path; access shafts are not separate pumping wells. Keep geometry, water level and object identity stable throughout the shot. Aquifers are porous or fractured material, not giant empty lakes. All reconstructions, archaeological sections, terrain reliefs and replicas are explanatory illustrations, not authenticated finds, actual site surveys, measured groundwater data or a recorded experiment. Separate fixed-state models remain visibly separate, without morphing between them. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratories, scientists in white coats, modern lab equipment, fake gauges, numerical readouts, glowing water, pressure fountains, upward-flowing water, giant hidden waterfall, sudden flooding, instant greening, lip-sync, time-lapse, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 6,
+    "start": 15,
+    "end": 18,
+    "kind": "opening",
+    "visual": "Outdoor longitudinal model shows ground falling more steeply than a gently descending gallery until they meet downslope.",
+    "camera": "Steady side dolly revealing both fixed slopes together.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "QANAT_006.mp4",
+    "voice_cue_ids": [
+      2
+    ],
+    "voice": "Follow the stream backward. Earth rims cross the ground toward higher country. Each opening belongs to a larger system whose most important passage is hidden beneath the surface.",
+    "visual_revision": "qanat-historical-outdoors-v1",
+    "setting": "outdoor",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical engineering and archaeology documentary, natural earth and water textures, restrained camera motion. Outdoor longitudinal model shows ground falling more steeply than a gently descending gallery until they meet downslope. Camera: Steady side dolly revealing both fixed slopes together. Prioritize outdoor Iranian dryland landscapes, archaeology, historic workyards and outdoor physical cutaway models. Show an underground gallery only when explicitly requested in this scene; galleries are narrow working passages, never palaces or huge caves. Historical scenes are illustrative preindustrial Iranian rural settings, not a verified dynasty or recorded event. Plain regional work tunics, trousers and woven headcloths where people appear; practical hand tools, earth, stone, wood, rope and clay supports. No Roman costumes, caveman clothing or ancient powered machines. Any explicitly modern well comparison is a separate teaching model, never an ancient electric-pump claim. In longitudinal cutaways keep the collecting source higher at the right and the outlet lower at the left; the gallery descends gently right to left and the ground surface can descend more steeply to meet it. Water remains on the downhill path; access shafts are not separate pumping wells. Keep geometry, water level and object identity stable throughout the shot. Aquifers are porous or fractured material, not giant empty lakes. All reconstructions, archaeological sections, terrain reliefs and replicas are explanatory illustrations, not authenticated finds, actual site surveys, measured groundwater data or a recorded experiment. Separate fixed-state models remain visibly separate, without morphing between them. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratories, scientists in white coats, modern lab equipment, fake gauges, numerical readouts, glowing water, pressure fountains, upward-flowing water, giant hidden waterfall, sudden flooding, instant greening, lip-sync, time-lapse, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 7,
+    "start": 18,
+    "end": 21,
+    "kind": "opening",
+    "visual": "Adult traditional qanat worker prepares a replica rope and spoil container outdoors, mature hands and simple regional clothing.",
+    "camera": "Close side slide over hands, rope and container.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "QANAT_007.mp4",
+    "voice_cue_ids": [
+      2,
+      3
+    ],
+    "voice": "Follow the stream backward. Earth rims cross the ground toward higher country. Each opening belongs to a larger system whose most important passage is hidden beneath the surface. How can groundwater reach fields without being pumped upward? Three things must agree: the source, the tunnel's fall, and the elevation of the receiving land.",
+    "visual_revision": "qanat-historical-outdoors-v1",
+    "setting": "outdoor",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical engineering and archaeology documentary, natural earth and water textures, restrained camera motion. Adult traditional qanat worker prepares a replica rope and spoil container outdoors, mature hands and simple regional clothing. Camera: Close side slide over hands, rope and container. Prioritize outdoor Iranian dryland landscapes, archaeology, historic workyards and outdoor physical cutaway models. Show an underground gallery only when explicitly requested in this scene; galleries are narrow working passages, never palaces or huge caves. Historical scenes are illustrative preindustrial Iranian rural settings, not a verified dynasty or recorded event. Plain regional work tunics, trousers and woven headcloths where people appear; practical hand tools, earth, stone, wood, rope and clay supports. No Roman costumes, caveman clothing or ancient powered machines. Any explicitly modern well comparison is a separate teaching model, never an ancient electric-pump claim. In longitudinal cutaways keep the collecting source higher at the right and the outlet lower at the left; the gallery descends gently right to left and the ground surface can descend more steeply to meet it. Water remains on the downhill path; access shafts are not separate pumping wells. Keep geometry, water level and object identity stable throughout the shot. Aquifers are porous or fractured material, not giant empty lakes. All reconstructions, archaeological sections, terrain reliefs and replicas are explanatory illustrations, not authenticated finds, actual site surveys, measured groundwater data or a recorded experiment. Separate fixed-state models remain visibly separate, without morphing between them. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratories, scientists in white coats, modern lab equipment, fake gauges, numerical readouts, glowing water, pressure fountains, upward-flowing water, giant hidden waterfall, sudden flooding, instant greening, lip-sync, time-lapse, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 8,
+    "start": 21,
+    "end": 24,
+    "kind": "opening",
+    "visual": "Outdoor shaft-and-gallery model with different shaft depths and separate small spoil mounds, no pumps.",
+    "camera": "High oblique arc connecting surface openings with the narrow gallery.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "QANAT_008.mp4",
+    "voice_cue_ids": [
+      3
+    ],
+    "voice": "How can groundwater reach fields without being pumped upward? Three things must agree: the source, the tunnel's fall, and the elevation of the receiving land.",
+    "visual_revision": "qanat-historical-outdoors-v1",
+    "setting": "outdoor",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical engineering and archaeology documentary, natural earth and water textures, restrained camera motion. Outdoor shaft-and-gallery model with different shaft depths and separate small spoil mounds, no pumps. Camera: High oblique arc connecting surface openings with the narrow gallery. Prioritize outdoor Iranian dryland landscapes, archaeology, historic workyards and outdoor physical cutaway models. Show an underground gallery only when explicitly requested in this scene; galleries are narrow working passages, never palaces or huge caves. Historical scenes are illustrative preindustrial Iranian rural settings, not a verified dynasty or recorded event. Plain regional work tunics, trousers and woven headcloths where people appear; practical hand tools, earth, stone, wood, rope and clay supports. No Roman costumes, caveman clothing or ancient powered machines. Any explicitly modern well comparison is a separate teaching model, never an ancient electric-pump claim. In longitudinal cutaways keep the collecting source higher at the right and the outlet lower at the left; the gallery descends gently right to left and the ground surface can descend more steeply to meet it. Water remains on the downhill path; access shafts are not separate pumping wells. Keep geometry, water level and object identity stable throughout the shot. Aquifers are porous or fractured material, not giant empty lakes. All reconstructions, archaeological sections, terrain reliefs and replicas are explanatory illustrations, not authenticated finds, actual site surveys, measured groundwater data or a recorded experiment. Separate fixed-state models remain visibly separate, without morphing between them. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratories, scientists in white coats, modern lab equipment, fake gauges, numerical readouts, glowing water, pressure fountains, upward-flowing water, giant hidden waterfall, sudden flooding, instant greening, lip-sync, time-lapse, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 9,
+    "start": 24,
+    "end": 27,
+    "kind": "opening",
+    "visual": "A small historical Iranian irrigated orchard borders arid plain, distant foothills visible and no people.",
+    "camera": "Wide elevated pullback from cultivation toward the dry catchment.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "QANAT_009.mp4",
+    "voice_cue_ids": [
+      3
+    ],
+    "voice": "How can groundwater reach fields without being pumped upward? Three things must agree: the source, the tunnel's fall, and the elevation of the receiving land.",
+    "visual_revision": "qanat-historical-outdoors-v1",
+    "setting": "outdoor",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical engineering and archaeology documentary, natural earth and water textures, restrained camera motion. A small historical Iranian irrigated orchard borders arid plain, distant foothills visible and no people. Camera: Wide elevated pullback from cultivation toward the dry catchment. Prioritize outdoor Iranian dryland landscapes, archaeology, historic workyards and outdoor physical cutaway models. Show an underground gallery only when explicitly requested in this scene; galleries are narrow working passages, never palaces or huge caves. Historical scenes are illustrative preindustrial Iranian rural settings, not a verified dynasty or recorded event. Plain regional work tunics, trousers and woven headcloths where people appear; practical hand tools, earth, stone, wood, rope and clay supports. No Roman costumes, caveman clothing or ancient powered machines. Any explicitly modern well comparison is a separate teaching model, never an ancient electric-pump claim. In longitudinal cutaways keep the collecting source higher at the right and the outlet lower at the left; the gallery descends gently right to left and the ground surface can descend more steeply to meet it. Water remains on the downhill path; access shafts are not separate pumping wells. Keep geometry, water level and object identity stable throughout the shot. Aquifers are porous or fractured material, not giant empty lakes. All reconstructions, archaeological sections, terrain reliefs and replicas are explanatory illustrations, not authenticated finds, actual site surveys, measured groundwater data or a recorded experiment. Separate fixed-state models remain visibly separate, without morphing between them. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratories, scientists in white coats, modern lab equipment, fake gauges, numerical readouts, glowing water, pressure fountains, upward-flowing water, giant hidden waterfall, sudden flooding, instant greening, lip-sync, time-lapse, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 10,
+    "start": 27,
+    "end": 30,
+    "kind": "opening",
+    "visual": "A modest water thread crosses a historical qanat outlet lip into daylight, unchanged earthen geometry.",
+    "camera": "Locked low macro with a slow focus shift along the stream.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "QANAT_010.mp4",
+    "voice_cue_ids": [
+      3
+    ],
+    "voice": "How can groundwater reach fields without being pumped upward? Three things must agree: the source, the tunnel's fall, and the elevation of the receiving land.",
+    "visual_revision": "qanat-historical-outdoors-v1",
+    "setting": "outdoor",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical engineering and archaeology documentary, natural earth and water textures, restrained camera motion. A modest water thread crosses a historical qanat outlet lip into daylight, unchanged earthen geometry. Camera: Locked low macro with a slow focus shift along the stream. Prioritize outdoor Iranian dryland landscapes, archaeology, historic workyards and outdoor physical cutaway models. Show an underground gallery only when explicitly requested in this scene; galleries are narrow working passages, never palaces or huge caves. Historical scenes are illustrative preindustrial Iranian rural settings, not a verified dynasty or recorded event. Plain regional work tunics, trousers and woven headcloths where people appear; practical hand tools, earth, stone, wood, rope and clay supports. No Roman costumes, caveman clothing or ancient powered machines. Any explicitly modern well comparison is a separate teaching model, never an ancient electric-pump claim. In longitudinal cutaways keep the collecting source higher at the right and the outlet lower at the left; the gallery descends gently right to left and the ground surface can descend more steeply to meet it. Water remains on the downhill path; access shafts are not separate pumping wells. Keep geometry, water level and object identity stable throughout the shot. Aquifers are porous or fractured material, not giant empty lakes. All reconstructions, archaeological sections, terrain reliefs and replicas are explanatory illustrations, not authenticated finds, actual site surveys, measured groundwater data or a recorded experiment. Separate fixed-state models remain visibly separate, without morphing between them. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratories, scientists in white coats, modern lab equipment, fake gauges, numerical readouts, glowing water, pressure fountains, upward-flowing water, giant hidden waterfall, sudden flooding, instant greening, lip-sync, time-lapse, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  }
+]
