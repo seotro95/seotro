@@ -1,0 +1,90 @@
+name: Roman MOI022 documents and English 21m22s
+on:
+  push:
+    branches: [codex/roman-moi022-production-20261117]
+    paths: [.github/workflows/roman-moi022-documents-english.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  documents:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: roman-concrete-moi022
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python roman-concrete-moi022/extract_content.py
+          python roman-concrete-moi022/build_documents.py
+          python -u roman-concrete-moi022/publish_documents.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+  english:
+    needs: documents
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: roman-concrete-moi022
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python roman-concrete-moi022/extract_content.py
+          python roman-concrete-moi022/build_documents.py
+          python roman-concrete-moi022/english_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python roman-concrete-moi022/ensure_ffmpeg.py
+          python roman-concrete-moi022/bootstrap_tool.py online
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: roman-moi022-checkpoint-en-US
+          path: roman-concrete-moi022/voice/audio/en-US
+      - name: Generate English with same Andrew voice and retain completed speech
+        run: |
+          set +e
+          python -u roman-concrete-moi022/render_english_groups.py
+          code=$?
+          if [ "$code" = 75 ]; then
+            sleep 15
+            python -u roman-concrete-moi022/render_english_groups.py
+            code=$?
+          fi
+          exit "$code"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: roman-moi022-checkpoint-en-US
+          path: |
+            roman-concrete-moi022/voice/audio/en-US/group-*
+            roman-concrete-moi022/voice/audio/en-US/raw-*
+            roman-concrete-moi022/voice/audio/en-US/fallback-*
+            roman-concrete-moi022/voice/audio/en-US/pending_*.json
+          if-no-files-found: ignore
+          retention-days: 30
+          overwrite: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roman-moi022-voice-en-US
+          path: |
+            roman-concrete-moi022/voice/audio/en-US/*.mp3
+            roman-concrete-moi022/voice/audio/en-US/render_report.json
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true
+      - name: Publish complete English narration
+        run: gh release upload roman-concrete-moi-022-21m22s roman-concrete-moi022/voice/audio/en-US/*.mp3 --repo seotro95/seotro --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
