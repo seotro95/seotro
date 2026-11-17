@@ -37,3 +37,5 @@ jobs:
             stonehenge-moi027/GITHUB_ASSET_AUDIT.json
           if-no-files-found: ignore
           retention-days: 30
+
+# Revision 2: refresh final manifests after public delivery-state checks.

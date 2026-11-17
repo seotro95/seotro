@@ -71,12 +71,28 @@ with tempfile.TemporaryDirectory(prefix='stonehenge-public-') as td:
 state_asset=dict(documents_published=True,target_seconds=1292,full_voices_published=True,public_delivery_verified=True,voices=16)
 dump(R/'DOCUMENT_DELIVERY_STATE.json',state_asset)
 for p in [R/'PUBLIC_DELIVERY_QA.json',R/'DOCUMENT_DELIVERY_STATE.json']:subprocess.run(['gh','release','upload',TAG,str(p),'--repo',REPO,'--clobber'],check=True)
+release=ghapi(f'releases/tags/{TAG}');byname={x['name']:x for x in release['assets']}
+for name in ['PUBLIC_DELIVERY_QA.json','DOCUMENT_DELIVERY_STATE.json','KICH_BAN_EN_21m32s.txt','5_TIEU_DE_VA_THUMBNAIL.txt']:
+ with urllib.request.urlopen(urllib.request.Request(BASE+name,headers={'User-Agent':'Stonehenge-final-text-check'}),timeout=60) as response:body=response.read();assert response.status==200
+ assert hashlib.sha256(body).hexdigest()==byname[name]['digest'].removeprefix('sha256:'),name
+ if name=='DOCUMENT_DELIVERY_STATE.json':assert json.loads(body)['full_voices_published'] is True
+ if name=='5_TIEU_DE_VA_THUMBNAIL.txt':assert len(body)>4000
+print('PUBLIC_TEXT_DOWNLOADS_VERIFIED',flush=True)
+record=dict(topic_id='MOI-027',stage='all16voices_documents_and_public_downloads_verified',target_seconds=1292,assets=[dict(name=x['name'],bytes=x['size'],sha256=x['digest'].removeprefix('sha256:')) for x in release['assets'] if x['name'] not in ['DOCUMENT_ASSET_MANIFEST.json','SHA256SUMS.txt']])
+p=R/'DOCUMENT_ASSET_MANIFEST.json';dump(p,record);subprocess.run(['gh','release','upload',TAG,str(p),'--repo',REPO,'--clobber'],check=True)
 release=ghapi(f'releases/tags/{TAG}')
+p=R/'SHA256SUMS.txt';p.write_text(''.join(x['digest'].removeprefix('sha256:')+'  '+x['name']+'\n' for x in sorted(release['assets'],key=lambda x:x['name']) if x['name']!='SHA256SUMS.txt'))
+subprocess.run(['gh','release','upload',TAG,str(p),'--repo',REPO,'--clobber'],check=True)
+release=ghapi(f'releases/tags/{TAG}');byname={x['name']:x for x in release['assets']}
+for name in ['DOCUMENT_ASSET_MANIFEST.json','SHA256SUMS.txt']:
+ with urllib.request.urlopen(urllib.request.Request(BASE+name,headers={'User-Agent':'Stonehenge-final-hash-check'}),timeout=60) as response:body=response.read()
+ assert hashlib.sha256(body).hexdigest()==byname[name]['digest'].removeprefix('sha256:'),name
+print('FINAL_PUBLIC_MANIFESTS_VERIFIED',flush=True)
 audit=dict(status='passed',topic_id='MOI-027',checked_at_utc=qa['verified_at_utc'],assets=[dict(name=a['name'],bytes=a['size'],digest=a['digest'],url=a['browser_download_url']) for a in release['assets']])
 dump(R/'GITHUB_ASSET_AUDIT.json',audit)
 dest=Path('productions/video-moi027-stonehenge');dest.mkdir(parents=True,exist_ok=True)
 shutil.copytree(D,dest,dirs_exist_ok=True)
-for name in ['PUBLIC_DELIVERY_QA.json','GITHUB_ASSET_AUDIT.json','DOCUMENT_DELIVERY_STATE.json','LOCALIZATION_SOURCE_CHAPTERS.json']:shutil.copyfile(R/name,dest/name)
+for name in ['PUBLIC_DELIVERY_QA.json','GITHUB_ASSET_AUDIT.json','DOCUMENT_DELIVERY_STATE.json','LOCALIZATION_SOURCE_CHAPTERS.json','DOCUMENT_ASSET_MANIFEST.json','SHA256SUMS.txt']:shutil.copyfile(R/name,dest/name)
 (dest/'SCRIPTS').mkdir(exist_ok=True)
 for locale in locked:shutil.copyfile(R/'voice/scripts'/f'{locale}.json',dest/'SCRIPTS'/f'{locale}.json')
 shared=Path('research/channel-analysis-20261116');previous=json.loads((shared/'PRODUCTION_STATE.json').read_text());completed=list(previous.get('completed_topics',[]))
