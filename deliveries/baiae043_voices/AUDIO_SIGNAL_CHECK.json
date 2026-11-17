@@ -1,0 +1,162 @@
+[
+  {
+    "locale": "cs-CZ",
+    "filename": "BAIAE_043_Sec.mp3",
+    "sha256": "06ab569e39097e35dd5665294c2c4eb0e2a54f205cd2e191a08c96f1bd676356",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09673692765337623,
+    "peak": 0.5597552061080933,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "da-DK",
+    "filename": "BAIAE_043_Dan_Mach.mp3",
+    "sha256": "2b177cfdbe24e2972d0a19a89a91c8b983e590b27f6d627dc1072abcc80d0bb9",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08691241860215695,
+    "peak": 0.44288569688796997,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "de-DE",
+    "filename": "BAIAE_043_Duc.mp3",
+    "sha256": "6805ad1d119ffc840e57f2527e779faea45aaa962faeb7f651262d54740668b1",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0971984772802419,
+    "peak": 0.6887232065200806,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "en-US",
+    "filename": "BAIAE_043_My_Tieng_Anh.mp3",
+    "sha256": "68f9d8b4be3e401c0aa50d42b080ad83b130e88e9a33f58c9a3b19f79a1997e1",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09517514954669962,
+    "peak": 0.5637566447257996,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "es-ES",
+    "filename": "BAIAE_043_Tay_Ban_Nha.mp3",
+    "sha256": "6b592909d2c066a71da45f7549152a1ec12b33f95e8ed21b50c8a8d5294852f6",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07823931115870816,
+    "peak": 0.5471131801605225,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fi-FI",
+    "filename": "BAIAE_043_Phan_Lan.mp3",
+    "sha256": "4a14661d5cc9b65318c05e7f223574144fff1439e8368b16ac933b8cc2269eb4",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.05337521564624261,
+    "peak": 0.38473689556121826,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "fr-FR",
+    "filename": "BAIAE_043_Phap.mp3",
+    "sha256": "fe76e5233b02d54b96ca5c0fb6c73ef60d1919013373a9a090ec19d342c98653",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07648522638933683,
+    "peak": 0.4518595039844513,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "it-IT",
+    "filename": "BAIAE_043_Y.mp3",
+    "sha256": "d0023b4fa4894a6eb39ae7599d07400ad1334977263a0daa333fb1a1effbe7f1",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08026319708222696,
+    "peak": 0.5184482336044312,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ja-JP",
+    "filename": "BAIAE_043_Nhat_Ban.mp3",
+    "sha256": "6c5163dfe1ed0cd5e970d5242786f859b5f6baf01b2f88d358cac7efef4e1385",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.089077544558689,
+    "peak": 0.5727715492248535,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "ko-KR",
+    "filename": "BAIAE_043_Han_Quoc.mp3",
+    "sha256": "0366ee7d209f4eb5be0b828c791fe12c33a375cf3b9fa55a59e2f0dc4639ad6d",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08688837317080675,
+    "peak": 0.5330889821052551,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nb-NO",
+    "filename": "BAIAE_043_Na_Uy.mp3",
+    "sha256": "a4d0cbdb1d3a78e93b6983975bb7c08f31c8e6ced5ca0fbc8e41c4b841e66861",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07689812963994273,
+    "peak": 0.5155900716781616,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "nl-NL",
+    "filename": "BAIAE_043_Ha_Lan.mp3",
+    "sha256": "9dfd259c961a9c1a87dae1232a0efdae3f0a3db9cbf07694bd0d5a344c1a7fd4",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.09647432749580329,
+    "peak": 0.575961709022522,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pl-PL",
+    "filename": "BAIAE_043_Ba_Lan.mp3",
+    "sha256": "b526c9eb2e649daad71bbaf427f0bf8d4bc1da8b979cb84d07921e4dd1b582af",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.0869334514613237,
+    "peak": 0.6716509461402893,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "pt-PT",
+    "filename": "BAIAE_043_Bo_Dao_Nha.mp3",
+    "sha256": "e7b40f3d8b011f77ff7bbb2e547abfebedbb340c6ead58936fa72feb99f5efa6",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.07206826181357229,
+    "peak": 0.49654749035835266,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "sv-SE",
+    "filename": "BAIAE_043_Thuy_Dien.mp3",
+    "sha256": "c304ed030d745a0a894fec0ca6425dc2a242c98582bb2614b225441c12aaeb62",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.08500335258286389,
+    "peak": 0.49066340923309326,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  },
+  {
+    "locale": "vi-VN",
+    "filename": "BAIAE_043_Viet_Nam.mp3",
+    "sha256": "daed5c4cacd4076ed29eba24ee3a563f4c1841f00e9832de7da70d169acc7fcb",
+    "sample_start_seconds": 10,
+    "sample_seconds": 5,
+    "rms": 0.10465599755173421,
+    "peak": 0.5894693732261658,
+    "scope": "Engineering check of non-silent decoded audio only; not listening, speech recognition, or native-language review"
+  }
+]

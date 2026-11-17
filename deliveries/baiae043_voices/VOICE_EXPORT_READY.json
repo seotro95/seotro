@@ -1,0 +1,27 @@
+{
+  "topic": "043-Baiae",
+  "target_seconds": 1402,
+  "expected_samples_48000": 67296000,
+  "export_scope": "16 completed male MP3 voices, saved voice profiles and audio verification only",
+  "existing_document_zip_preserved": true,
+  "profile_files": {
+    "VOICE_PROFILES_LOCKED.json": {
+      "sha256": "9d8365e272c3d14bb97a3c112cc9efaf66af8f4642651f53927c6f19542bd48a",
+      "bytes": 12969
+    },
+    "VOICE_FILE_NAMING.json": {
+      "sha256": "07d4ef95cf799a86a579410bc301ba6ca0c9977e8a4fc0d28aa5849c6815a345",
+      "bytes": 3206
+    },
+    "NARRATION_STYLE_LOCKED.json": {
+      "sha256": "5a51e13f1dc7d971abdd910ab887516e50f7d72017e9469bfdb3365afc65c324",
+      "bytes": 1432
+    },
+    "NARRATION_DELIVERY_PROFILE.json": {
+      "sha256": "e1fe71805fecc0bfa0d37e20c05554600b63ead640a91c0216293fc683ea56d4",
+      "bytes": 10846
+    }
+  },
+  "audio_count": 16,
+  "no_voice_generation_in_export": true
+}

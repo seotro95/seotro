@@ -1,0 +1,29 @@
+{
+  "style_id": "science-documentary-expressive-v1",
+  "applies_to": "Topic 3 and subsequent topics unless changed by user",
+  "user_request": "Giọng thân thiện,đọcnhấnmềm;bảnnàyđọcnhanhhơnmộtchút;giữnguyên16nhậndiện",
+  "identity": "16 saved male online voices including Vietnamese Nam Minh",
+  "delivery": "Friendly documentary narration;target Englishapproximately170words/minute,slightly faster thanInca026;gentlephraseaccents,pitchunchanged",
+  "online": {
+    "pitch": "+0Hz",
+    "segment_rate_percent_range": [
+      1,
+      8
+    ],
+    "word_accents_db": 1.2,
+    "max_accents_per_piece": 2,
+    "pause_seconds_range": [
+      0.07,
+      0.16
+    ],
+    "method": "Original Melo backend with documented Edge prosody/word-boundary adapter; pitch-preserving cue timing afterwards"
+  },
+  "timing": "Baiae043:1402seconds;English140x10+2;15localized14chapters13x100+102",
+  "limits": "Engine controls preserve saved voice identity and pitch. Independent native-language listening and proper-name review remain pending.",
+  "english_cue_strategy": "Complete immutable English cue per request using Guy;faithful smaller fallback only forprovider text/noaudio failures;pitch-preserving exact cue timing",
+  "episode": "043-Baiae",
+  "english_cues": 141,
+  "localized_chapters": 14,
+  "source": "Inherited voice IDs; new Inca rope bridge narration",
+  "slightly_faster_than_previous_episode": true
+}
