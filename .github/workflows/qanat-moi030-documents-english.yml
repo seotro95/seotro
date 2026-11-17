@@ -1,0 +1,91 @@
+name: Qanat MOI030 documents and English 22m42s
+on:
+  push:
+    branches: [codex/qanat-moi030-production-20261117]
+    paths: [.github/workflows/qanat-moi030-documents-english.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  documents:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: qanat-moi030
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python qanat-moi030/extract_content.py
+          python qanat-moi030/build_documents.py
+          python -u qanat-moi030/publish_documents.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+  english:
+    needs: documents
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: qanat-moi030
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python qanat-moi030/extract_content.py
+          python qanat-moi030/build_documents.py
+          python qanat-moi030/english_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python qanat-moi030/ensure_ffmpeg.py
+          python qanat-moi030/bootstrap_tool.py online
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: qanat-moi030-checkpoint-en-US
+          path: qanat-moi030/voice/audio/en-US
+      - name: Generate English with same Andrew voice and retain completed speech
+        run: |
+          set +e
+          python -u qanat-moi030/render_english_groups.py
+          code=$?
+          if [ "$code" = 75 ]; then
+            sleep 15
+            python -u qanat-moi030/render_english_groups.py
+            code=$?
+          fi
+          exit "$code"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qanat-moi030-checkpoint-en-US
+          path: |
+            qanat-moi030/voice/audio/en-US/group-*
+            qanat-moi030/voice/audio/en-US/raw-*
+            qanat-moi030/voice/audio/en-US/fallback-*
+            qanat-moi030/voice/audio/en-US/pending_*.json
+          if-no-files-found: ignore
+          retention-days: 30
+          overwrite: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: qanat-moi030-voice-en-US
+          path: |
+            qanat-moi030/voice/audio/en-US/*.mp3
+            qanat-moi030/voice/audio/en-US/render_report.json
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true
+      - name: Publish complete English narration
+        run: gh release upload qanat-moi-030-22m42s qanat-moi030/voice/audio/en-US/*.mp3 --repo seotro95/seotro --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
+
