@@ -7,5 +7,5 @@ with zipfile.ZipFile(p) as z:
     for x in z.infolist():
         assert not Path(x.filename).is_absolute() and '..' not in Path(x.filename).parts
         out=R/x.filename;out.parent.mkdir(parents=True,exist_ok=True);out.write_bytes(z.read(x))
-print('ROMAN_CONTENT_INPUTS_VERIFIED')
+print('QANAT_CONTENT_INPUTS_VERIFIED')
 

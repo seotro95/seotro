@@ -2,6 +2,7 @@ import csv,json,re,shutil,zipfile
 from pathlib import Path
 R=Path(__file__).parent;D=R/'documents';P=D/'PROMPTS';S=R/'voice/scripts'
 for p in [D,P,S]:p.mkdir(parents=True,exist_ok=True)
+(D/'PROMPT_INDEX_140.csv').unlink(missing_ok=True)
 TARGET=1362;FRAMES=65376000;PREFIX='QANAT_MOI030';TAG='qanat-moi-030-22m42s';STYLE='qanat-historical-outdoors-v1'
 BASE=f'https://github.com/seotro95/seotro/releases/download/{TAG}/'
 def dump(p,x):p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
@@ -58,7 +59,7 @@ dump(D/'CHAPTERS_14.json',chapters)
 (D/'KICH_BAN_EN_CO_MOC.txt').write_text('\n\n'.join(f"{r['id']:03} | {stamp(r['start'])} → {stamp(r['end'])}\n{r['voice']}" for r in rows)+'\n',encoding='utf-8')
 (D/'en-US.srt').write_text('\n\n'.join(f"{r['id']}\n{stamp(r['start'])} --> {stamp(r['end'])}\n{r['voice']}" for r in rows)+'\n',encoding='utf-8')
 fields=['id','start','end','use_seconds','generation_seconds','voice_cue_ids','voice','source_filename','kind','visual','camera','prompt']
-for name,selected in [('TIMELINE_144_CANH.csv',shots[:144]),('PROMPT_INDEX_140.csv',shots)]:
+for name,selected in [('TIMELINE_144_CANH.csv',shots[:144]),('PROMPT_INDEX_150.csv',shots)]:
     with (D/name).open('w',encoding='utf-8-sig',newline='') as f:
         w=csv.DictWriter(f,fieldnames=fields,extrasaction='ignore');w.writeheader();w.writerows(selected)
 for name in ['NGUON_KIEM_CHUNG.md','PHAN_TICH_VA_KE_HOACH_DUNG.md','5_TIEU_DE_VA_THUMBNAIL.txt','PRODUCTION_STEPS_APPLIED.md','VOICE_PROFILES_LOCKED_BASELINE.json','MELO_SOURCE_LOCK.json']:shutil.copyfile(R/name,D/name)

@@ -351,5 +351,132 @@
       }
     ],
     "checkpoint_zip_sha256": "cd5ca8c76e648264730445bd0f1e0a7c838178cc3e1a321f4994a9ca88d2ed37"
+  },
+  {
+    "locale": "sv-SE",
+    "chapters": [
+      {
+        "chapter": 1,
+        "raw_seconds": 138.96,
+        "tempo": 1.39127,
+        "chars": 1723,
+        "words": 263
+      },
+      {
+        "chapter": 2,
+        "raw_seconds": 160.224,
+        "tempo": 1.60416,
+        "chars": 2064,
+        "words": 276
+      },
+      {
+        "chapter": 3,
+        "raw_seconds": 146.568,
+        "tempo": 1.46744,
+        "chars": 1915,
+        "words": 276
+      },
+      {
+        "chapter": 4,
+        "raw_seconds": 166.488,
+        "tempo": 1.66688,
+        "chars": 2304,
+        "words": 327
+      },
+      {
+        "chapter": 5,
+        "raw_seconds": 167.64,
+        "tempo": 1.67841,
+        "chars": 2253,
+        "words": 330
+      },
+      {
+        "chapter": 6,
+        "raw_seconds": 150.672,
+        "tempo": 1.50853,
+        "chars": 1980,
+        "words": 290
+      },
+      {
+        "chapter": 7,
+        "raw_seconds": 153.6,
+        "tempo": 1.53785,
+        "chars": 2098,
+        "words": 298
+      },
+      {
+        "chapter": 8,
+        "raw_seconds": 166.392,
+        "tempo": 1.66592,
+        "chars": 2148,
+        "words": 284
+      },
+      {
+        "chapter": 9,
+        "raw_seconds": 150.6,
+        "tempo": 1.50781,
+        "chars": 2046,
+        "words": 298
+      },
+      {
+        "chapter": 10,
+        "raw_seconds": 154.152,
+        "tempo": 1.54337,
+        "chars": 2065,
+        "words": 301
+      },
+      {
+        "chapter": 11,
+        "raw_seconds": 156.384,
+        "tempo": 1.56572,
+        "chars": 2153,
+        "words": 311
+      },
+      {
+        "chapter": 12,
+        "raw_seconds": 152.736,
+        "tempo": 1.5292,
+        "chars": 2084,
+        "words": 307
+      },
+      {
+        "chapter": 13,
+        "raw_seconds": 150.384,
+        "tempo": 1.50565,
+        "chars": 1992,
+        "words": 289
+      },
+      {
+        "chapter": 14,
+        "raw_seconds": 89.904,
+        "tempo": 1.45288,
+        "chars": 1191,
+        "words": 191
+      }
+    ],
+    "over_limit": [
+      {
+        "chapter": 4,
+        "raw_seconds": 166.488,
+        "tempo": 1.66688,
+        "chars": 2304,
+        "words": 327
+      },
+      {
+        "chapter": 5,
+        "raw_seconds": 167.64,
+        "tempo": 1.67841,
+        "chars": 2253,
+        "words": 330
+      },
+      {
+        "chapter": 8,
+        "raw_seconds": 166.392,
+        "tempo": 1.66592,
+        "chars": 2148,
+        "words": 284
+      }
+    ],
+    "checkpoint_zip_sha256": "dedf0c28f9ab4770e55ddb9d7527de2bbe697f0ecc970bce4a73eb68dd68e37b"
   }
 ]
