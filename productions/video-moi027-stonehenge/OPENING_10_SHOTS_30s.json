@@ -1,0 +1,184 @@
+[
+  {
+    "id": 1,
+    "start": 0,
+    "end": 3,
+    "kind": "opening",
+    "visual": "Plant-fibre rope tightens beside a secured rough stone replica on a timber sledge in a Neolithic outdoor reconstruction, slight controlled motion.",
+    "camera": "Low 100 mm macro tracking along rope fibres toward the runner.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "STONEHENGE_001.mp4",
+    "voice_cue_ids": [
+      1
+    ],
+    "voice": "The ropes tighten. The stone barely moves. Before it can become part of a monument, someone must solve a problem that begins far from the circle.",
+    "visual_revision": "archaeology-and-Neolithic-outdoor-v1",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic archaeological documentary, natural light, realistic stone and timber textures, restrained camera motion. Plant-fibre rope tightens beside a secured rough stone replica on a timber sledge in a Neolithic outdoor reconstruction, slight controlled motion. Camera: Low 100 mm macro tracking along rope fibres toward the runner. All scenes are outdoors. Historical reconstructions use Neolithic Britain, plain earth-tone plant-fibre or wool clothing, plausible stone tools, wooden levers, timber sledges and plant-fibre ropes. Modern outdoor experimental archaeology uses plain field clothing only when explicitly requested in this scene. Keep the load supported and secured, material identity stable and movement small and physically credible. Stationary timber slipways do not rotate; loose rollers appear only when explicitly contrasted. Raising frames, cribs, ramps, boats and routes are possible illustrative reconstructions, not a recovered complete blueprint or a confirmed original journey. Outcrop scenes, replicas, terrain reliefs, cutaways and miniature models are explanatory illustrations, never authenticated archaeological specimens, actual LiDAR, measured data or a claimed reproduction of a recorded experiment. No exact source quarry or transport corridor is asserted by the image. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratory interiors, scientists in laboratories, white coats, microscopes, electronic instruments, modern cranes, engines, Roman architecture, iron-age machinery, aliens, glowing stones, floating loads, unsupported stones over people, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 2,
+    "start": 3,
+    "end": 6,
+    "kind": "opening",
+    "visual": "A massive pale sarsen-like boulder on open southern English grassland, no people or extraction machinery.",
+    "camera": "Wide low arc revealing the boulder against the horizon.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "STONEHENGE_002.mp4",
+    "voice_cue_ids": [
+      1
+    ],
+    "voice": "The ropes tighten. The stone barely moves. Before it can become part of a monument, someone must solve a problem that begins far from the circle.",
+    "visual_revision": "archaeology-and-Neolithic-outdoor-v1",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic archaeological documentary, natural light, realistic stone and timber textures, restrained camera motion. A massive pale sarsen-like boulder on open southern English grassland, no people or extraction machinery. Camera: Wide low arc revealing the boulder against the horizon. All scenes are outdoors. Historical reconstructions use Neolithic Britain, plain earth-tone plant-fibre or wool clothing, plausible stone tools, wooden levers, timber sledges and plant-fibre ropes. Modern outdoor experimental archaeology uses plain field clothing only when explicitly requested in this scene. Keep the load supported and secured, material identity stable and movement small and physically credible. Stationary timber slipways do not rotate; loose rollers appear only when explicitly contrasted. Raising frames, cribs, ramps, boats and routes are possible illustrative reconstructions, not a recovered complete blueprint or a confirmed original journey. Outcrop scenes, replicas, terrain reliefs, cutaways and miniature models are explanatory illustrations, never authenticated archaeological specimens, actual LiDAR, measured data or a claimed reproduction of a recorded experiment. No exact source quarry or transport corridor is asserted by the image. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratory interiors, scientists in laboratories, white coats, microscopes, electronic instruments, modern cranes, engines, Roman architecture, iron-age machinery, aliens, glowing stones, floating loads, unsupported stones over people, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 3,
+    "start": 6,
+    "end": 9,
+    "kind": "opening",
+    "visual": "Jointed natural rock pillars in an illustrative Welsh upland outcrop, damp grass and distant ridges.",
+    "camera": "Slow close vertical tilt along a natural fissure.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "STONEHENGE_003.mp4",
+    "voice_cue_ids": [
+      1
+    ],
+    "voice": "The ropes tighten. The stone barely moves. Before it can become part of a monument, someone must solve a problem that begins far from the circle.",
+    "visual_revision": "archaeology-and-Neolithic-outdoor-v1",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic archaeological documentary, natural light, realistic stone and timber textures, restrained camera motion. Jointed natural rock pillars in an illustrative Welsh upland outcrop, damp grass and distant ridges. Camera: Slow close vertical tilt along a natural fissure. All scenes are outdoors. Historical reconstructions use Neolithic Britain, plain earth-tone plant-fibre or wool clothing, plausible stone tools, wooden levers, timber sledges and plant-fibre ropes. Modern outdoor experimental archaeology uses plain field clothing only when explicitly requested in this scene. Keep the load supported and secured, material identity stable and movement small and physically credible. Stationary timber slipways do not rotate; loose rollers appear only when explicitly contrasted. Raising frames, cribs, ramps, boats and routes are possible illustrative reconstructions, not a recovered complete blueprint or a confirmed original journey. Outcrop scenes, replicas, terrain reliefs, cutaways and miniature models are explanatory illustrations, never authenticated archaeological specimens, actual LiDAR, measured data or a claimed reproduction of a recorded experiment. No exact source quarry or transport corridor is asserted by the image. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratory interiors, scientists in laboratories, white coats, microscopes, electronic instruments, modern cranes, engines, Roman architecture, iron-age machinery, aliens, glowing stones, floating loads, unsupported stones over people, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 4,
+    "start": 9,
+    "end": 12,
+    "kind": "opening",
+    "visual": "A recumbent pale-greenish sandstone replica on open chalk grassland, kept separate from tall pale uprights.",
+    "camera": "Low oblique slide across sandstone texture.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "STONEHENGE_004.mp4",
+    "voice_cue_ids": [
+      1,
+      2
+    ],
+    "voice": "The ropes tighten. The stone barely moves. Before it can become part of a monument, someone must solve a problem that begins far from the circle. Where did this block come from? Which landscape did it cross? And how could it be lifted into place? Stonehenge holds three investigations inside one view.",
+    "visual_revision": "archaeology-and-Neolithic-outdoor-v1",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic archaeological documentary, natural light, realistic stone and timber textures, restrained camera motion. A recumbent pale-greenish sandstone replica on open chalk grassland, kept separate from tall pale uprights. Camera: Low oblique slide across sandstone texture. All scenes are outdoors. Historical reconstructions use Neolithic Britain, plain earth-tone plant-fibre or wool clothing, plausible stone tools, wooden levers, timber sledges and plant-fibre ropes. Modern outdoor experimental archaeology uses plain field clothing only when explicitly requested in this scene. Keep the load supported and secured, material identity stable and movement small and physically credible. Stationary timber slipways do not rotate; loose rollers appear only when explicitly contrasted. Raising frames, cribs, ramps, boats and routes are possible illustrative reconstructions, not a recovered complete blueprint or a confirmed original journey. Outcrop scenes, replicas, terrain reliefs, cutaways and miniature models are explanatory illustrations, never authenticated archaeological specimens, actual LiDAR, measured data or a claimed reproduction of a recorded experiment. No exact source quarry or transport corridor is asserted by the image. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratory interiors, scientists in laboratories, white coats, microscopes, electronic instruments, modern cranes, engines, Roman architecture, iron-age machinery, aliens, glowing stones, floating loads, unsupported stones over people, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 5,
+    "start": 12,
+    "end": 15,
+    "kind": "opening",
+    "visual": "A secured stone replica on a timber sledge rests on a stationary timber slipway, no turning rollers.",
+    "camera": "Ground-level macro slide showing runner contact.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "STONEHENGE_005.mp4",
+    "voice_cue_ids": [
+      2
+    ],
+    "voice": "Where did this block come from? Which landscape did it cross? And how could it be lifted into place? Stonehenge holds three investigations inside one view.",
+    "visual_revision": "archaeology-and-Neolithic-outdoor-v1",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic archaeological documentary, natural light, realistic stone and timber textures, restrained camera motion. A secured stone replica on a timber sledge rests on a stationary timber slipway, no turning rollers. Camera: Ground-level macro slide showing runner contact. All scenes are outdoors. Historical reconstructions use Neolithic Britain, plain earth-tone plant-fibre or wool clothing, plausible stone tools, wooden levers, timber sledges and plant-fibre ropes. Modern outdoor experimental archaeology uses plain field clothing only when explicitly requested in this scene. Keep the load supported and secured, material identity stable and movement small and physically credible. Stationary timber slipways do not rotate; loose rollers appear only when explicitly contrasted. Raising frames, cribs, ramps, boats and routes are possible illustrative reconstructions, not a recovered complete blueprint or a confirmed original journey. Outcrop scenes, replicas, terrain reliefs, cutaways and miniature models are explanatory illustrations, never authenticated archaeological specimens, actual LiDAR, measured data or a claimed reproduction of a recorded experiment. No exact source quarry or transport corridor is asserted by the image. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratory interiors, scientists in laboratories, white coats, microscopes, electronic instruments, modern cranes, engines, Roman architecture, iron-age machinery, aliens, glowing stones, floating loads, unsupported stones over people, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 6,
+    "start": 15,
+    "end": 18,
+    "kind": "opening",
+    "visual": "A wide valley and a river crossing in a schematic Neolithic landscape, no asserted confirmed transport route.",
+    "camera": "Elevated forward glide following the ground contours.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "STONEHENGE_006.mp4",
+    "voice_cue_ids": [
+      2
+    ],
+    "voice": "Where did this block come from? Which landscape did it cross? And how could it be lifted into place? Stonehenge holds three investigations inside one view.",
+    "visual_revision": "archaeology-and-Neolithic-outdoor-v1",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic archaeological documentary, natural light, realistic stone and timber textures, restrained camera motion. A wide valley and a river crossing in a schematic Neolithic landscape, no asserted confirmed transport route. Camera: Elevated forward glide following the ground contours. All scenes are outdoors. Historical reconstructions use Neolithic Britain, plain earth-tone plant-fibre or wool clothing, plausible stone tools, wooden levers, timber sledges and plant-fibre ropes. Modern outdoor experimental archaeology uses plain field clothing only when explicitly requested in this scene. Keep the load supported and secured, material identity stable and movement small and physically credible. Stationary timber slipways do not rotate; loose rollers appear only when explicitly contrasted. Raising frames, cribs, ramps, boats and routes are possible illustrative reconstructions, not a recovered complete blueprint or a confirmed original journey. Outcrop scenes, replicas, terrain reliefs, cutaways and miniature models are explanatory illustrations, never authenticated archaeological specimens, actual LiDAR, measured data or a claimed reproduction of a recorded experiment. No exact source quarry or transport corridor is asserted by the image. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratory interiors, scientists in laboratories, white coats, microscopes, electronic instruments, modern cranes, engines, Roman architecture, iron-age machinery, aliens, glowing stones, floating loads, unsupported stones over people, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 7,
+    "start": 18,
+    "end": 21,
+    "kind": "opening",
+    "visual": "An outdoor physical stonehole cutaway model with a stable upright base and small packing stones, no actual transparent ground.",
+    "camera": "High oblique close arc revealing the buried support model.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "STONEHENGE_007.mp4",
+    "voice_cue_ids": [
+      2,
+      3
+    ],
+    "voice": "Where did this block come from? Which landscape did it cross? And how could it be lifted into place? Stonehenge holds three investigations inside one view. We will follow those questions separately, from the rock to the route to the raising. The strongest answer is the one the evidence can actually support.",
+    "visual_revision": "archaeology-and-Neolithic-outdoor-v1",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic archaeological documentary, natural light, realistic stone and timber textures, restrained camera motion. An outdoor physical stonehole cutaway model with a stable upright base and small packing stones, no actual transparent ground. Camera: High oblique close arc revealing the buried support model. All scenes are outdoors. Historical reconstructions use Neolithic Britain, plain earth-tone plant-fibre or wool clothing, plausible stone tools, wooden levers, timber sledges and plant-fibre ropes. Modern outdoor experimental archaeology uses plain field clothing only when explicitly requested in this scene. Keep the load supported and secured, material identity stable and movement small and physically credible. Stationary timber slipways do not rotate; loose rollers appear only when explicitly contrasted. Raising frames, cribs, ramps, boats and routes are possible illustrative reconstructions, not a recovered complete blueprint or a confirmed original journey. Outcrop scenes, replicas, terrain reliefs, cutaways and miniature models are explanatory illustrations, never authenticated archaeological specimens, actual LiDAR, measured data or a claimed reproduction of a recorded experiment. No exact source quarry or transport corridor is asserted by the image. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratory interiors, scientists in laboratories, white coats, microscopes, electronic instruments, modern cranes, engines, Roman architecture, iron-age machinery, aliens, glowing stones, floating loads, unsupported stones over people, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 8,
+    "start": 21,
+    "end": 24,
+    "kind": "opening",
+    "visual": "A stone tenon replica beside a matching lintel recess replica on natural ground, both stationary.",
+    "camera": "Macro focus pull between projection and recess.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "STONEHENGE_008.mp4",
+    "voice_cue_ids": [
+      3
+    ],
+    "voice": "We will follow those questions separately, from the rock to the route to the raising. The strongest answer is the one the evidence can actually support.",
+    "visual_revision": "archaeology-and-Neolithic-outdoor-v1",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic archaeological documentary, natural light, realistic stone and timber textures, restrained camera motion. A stone tenon replica beside a matching lintel recess replica on natural ground, both stationary. Camera: Macro focus pull between projection and recess. All scenes are outdoors. Historical reconstructions use Neolithic Britain, plain earth-tone plant-fibre or wool clothing, plausible stone tools, wooden levers, timber sledges and plant-fibre ropes. Modern outdoor experimental archaeology uses plain field clothing only when explicitly requested in this scene. Keep the load supported and secured, material identity stable and movement small and physically credible. Stationary timber slipways do not rotate; loose rollers appear only when explicitly contrasted. Raising frames, cribs, ramps, boats and routes are possible illustrative reconstructions, not a recovered complete blueprint or a confirmed original journey. Outcrop scenes, replicas, terrain reliefs, cutaways and miniature models are explanatory illustrations, never authenticated archaeological specimens, actual LiDAR, measured data or a claimed reproduction of a recorded experiment. No exact source quarry or transport corridor is asserted by the image. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratory interiors, scientists in laboratories, white coats, microscopes, electronic instruments, modern cranes, engines, Roman architecture, iron-age machinery, aliens, glowing stones, floating loads, unsupported stones over people, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 9,
+    "start": 24,
+    "end": 27,
+    "kind": "opening",
+    "visual": "An illustrative lintel replica fully resting on a stable timber crib outdoors, no load suspended over people.",
+    "camera": "Low side arc keeping every support visible.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "STONEHENGE_009.mp4",
+    "voice_cue_ids": [
+      3
+    ],
+    "voice": "We will follow those questions separately, from the rock to the route to the raising. The strongest answer is the one the evidence can actually support.",
+    "visual_revision": "archaeology-and-Neolithic-outdoor-v1",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic archaeological documentary, natural light, realistic stone and timber textures, restrained camera motion. An illustrative lintel replica fully resting on a stable timber crib outdoors, no load suspended over people. Camera: Low side arc keeping every support visible. All scenes are outdoors. Historical reconstructions use Neolithic Britain, plain earth-tone plant-fibre or wool clothing, plausible stone tools, wooden levers, timber sledges and plant-fibre ropes. Modern outdoor experimental archaeology uses plain field clothing only when explicitly requested in this scene. Keep the load supported and secured, material identity stable and movement small and physically credible. Stationary timber slipways do not rotate; loose rollers appear only when explicitly contrasted. Raising frames, cribs, ramps, boats and routes are possible illustrative reconstructions, not a recovered complete blueprint or a confirmed original journey. Outcrop scenes, replicas, terrain reliefs, cutaways and miniature models are explanatory illustrations, never authenticated archaeological specimens, actual LiDAR, measured data or a claimed reproduction of a recorded experiment. No exact source quarry or transport corridor is asserted by the image. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratory interiors, scientists in laboratories, white coats, microscopes, electronic instruments, modern cranes, engines, Roman architecture, iron-age machinery, aliens, glowing stones, floating loads, unsupported stones over people, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 10,
+    "start": 27,
+    "end": 30,
+    "kind": "opening",
+    "visual": "A completed Stonehenge-inspired trilithon on open chalk grassland at dawn, no people or modern signs.",
+    "camera": "Slow wide pullback revealing the surrounding plain.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "STONEHENGE_010.mp4",
+    "voice_cue_ids": [
+      3
+    ],
+    "voice": "We will follow those questions separately, from the rock to the route to the raising. The strongest answer is the one the evidence can actually support.",
+    "visual_revision": "archaeology-and-Neolithic-outdoor-v1",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic archaeological documentary, natural light, realistic stone and timber textures, restrained camera motion. A completed Stonehenge-inspired trilithon on open chalk grassland at dawn, no people or modern signs. Camera: Slow wide pullback revealing the surrounding plain. All scenes are outdoors. Historical reconstructions use Neolithic Britain, plain earth-tone plant-fibre or wool clothing, plausible stone tools, wooden levers, timber sledges and plant-fibre ropes. Modern outdoor experimental archaeology uses plain field clothing only when explicitly requested in this scene. Keep the load supported and secured, material identity stable and movement small and physically credible. Stationary timber slipways do not rotate; loose rollers appear only when explicitly contrasted. Raising frames, cribs, ramps, boats and routes are possible illustrative reconstructions, not a recovered complete blueprint or a confirmed original journey. Outcrop scenes, replicas, terrain reliefs, cutaways and miniature models are explanatory illustrations, never authenticated archaeological specimens, actual LiDAR, measured data or a claimed reproduction of a recorded experiment. No exact source quarry or transport corridor is asserted by the image. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Every visible person or hand must be clearly adult age 35–65. No laboratory interiors, scientists in laboratories, white coats, microscopes, electronic instruments, modern cranes, engines, Roman architecture, iron-age machinery, aliens, glowing stones, floating loads, unsupported stones over people, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  }
+]

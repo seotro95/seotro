@@ -1,0 +1,143 @@
+{
+  "status": "passed",
+  "locale": "cs-CZ",
+  "voice_id": "cs-CZ-AntoninNeural",
+  "gender": "Male",
+  "engine": "Melo-Viet-Studio 1.3.1 online_backend / Microsoft Edge",
+  "source_commit": "4f4fa1d72d976d6e2b9c94f906b0e12c6a2cf043",
+  "target_seconds": 1292,
+  "decoded_frames_48000": 62016000,
+  "decoded_seconds": 1292.0,
+  "filename": "STONEHENGE_MOI027_Sec.mp3",
+  "bytes": 15504812,
+  "sha256": "ac15a6c50f79c3bf7c14668f06f6509ad336a9406f6c6681def23ab06486a81e",
+  "script_sha256": "cc3c9c1ec5eff045745111cc846e67863fa0e7d1ad15bc7de5f4d501967b1f5d",
+  "cues": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 100,
+      "raw_seconds": 111.096,
+      "tempo": 1.1127403846153847,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 2,
+      "start": 100,
+      "end": 200,
+      "raw_seconds": 119.112,
+      "tempo": 1.193028846153846,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 3,
+      "start": 200,
+      "end": 300,
+      "raw_seconds": 106.992,
+      "tempo": 1.0716346153846155,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 4,
+      "start": 300,
+      "end": 400,
+      "raw_seconds": 109.536,
+      "tempo": 1.0971153846153845,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 5,
+      "start": 400,
+      "end": 500,
+      "raw_seconds": 111.528,
+      "tempo": 1.1170673076923077,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 6,
+      "start": 500,
+      "end": 600,
+      "raw_seconds": 117.144,
+      "tempo": 1.1733173076923078,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 7,
+      "start": 600,
+      "end": 700,
+      "raw_seconds": 114.672,
+      "tempo": 1.1485576923076923,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 8,
+      "start": 700,
+      "end": 800,
+      "raw_seconds": 130.296,
+      "tempo": 1.3050480769230768,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 9,
+      "start": 800,
+      "end": 900,
+      "raw_seconds": 122.568,
+      "tempo": 1.2276442307692308,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 10,
+      "start": 900,
+      "end": 1000,
+      "raw_seconds": 120.048,
+      "tempo": 1.2024038461538462,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 11,
+      "start": 1000,
+      "end": 1100,
+      "raw_seconds": 109.008,
+      "tempo": 1.091826923076923,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 12,
+      "start": 1100,
+      "end": 1200,
+      "raw_seconds": 113.904,
+      "tempo": 1.1408653846153844,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    },
+    {
+      "id": 13,
+      "start": 1200,
+      "end": 1292,
+      "raw_seconds": 98.544,
+      "tempo": 1.0729965156794425,
+      "trailing_pause_target": 0.16,
+      "parts": 3
+    }
+  ],
+  "pitch_shift_applied": false,
+  "voice_identity_preserved": true,
+  "narration_style_id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+  "prosody_method": "Native phrase rate and question/reflective pacing plus at most two1.2dB word accents per request",
+  "word_metadata_pieces": 39,
+  "minimum_word_coverage_ratio": 1.0,
+  "word_accents": 32,
+  "independent_native_listening_review": false,
+  "timing_alignment": "13 shared chapter boundaries"
+}

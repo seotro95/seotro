@@ -1,0 +1,150 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-027",
+  "voices": 16,
+  "male_voices": 16,
+  "all_decoded_seconds": 1292,
+  "all_decoded_frames_48000": 62016000,
+  "all_current_episode_ids_locked": true,
+  "previous_voice_ids_retained": 16,
+  "voice_changes": [],
+  "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+  "unique_audio_hashes": 16,
+  "english_cue_count": 130,
+  "other_language_chapter_count": 13,
+  "word_metadata_checked": true,
+  "english_word_boundary_split_checked": true,
+  "pitch_shift_applied": false,
+  "independent_native_listening_review": false,
+  "translated_voice_alignment": "13 shared chapter boundaries, not word-by-word synchronization",
+  "reports": {
+    "it-IT": {
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "STONEHENGE_MOI027_Y.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 1.2639423076923075,
+      "max_tempo": 1.5276442307692308,
+      "word_accents": 55
+    },
+    "en-US": {
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "STONEHENGE_MOI027_My_Tieng_Anh.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 0.8263465447154471,
+      "max_tempo": 1.5834603658536586,
+      "word_accents": 105
+    },
+    "cs-CZ": {
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "STONEHENGE_MOI027_Sec.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 1.0716346153846155,
+      "max_tempo": 1.3050480769230768,
+      "word_accents": 32
+    },
+    "es-ES": {
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "STONEHENGE_MOI027_Tay_Ban_Nha.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 1.1879807692307693,
+      "max_tempo": 1.4620192307692306,
+      "word_accents": 66
+    },
+    "vi-VN": {
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "STONEHENGE_MOI027_Viet_Nam_Nam_Minh.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 0.9221153846153846,
+      "max_tempo": 1.051567944250871,
+      "word_accents": 60
+    },
+    "ko-KR": {
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "STONEHENGE_MOI027_Han_Quoc.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 1.3680288461538461,
+      "max_tempo": 1.509375,
+      "word_accents": 45
+    },
+    "sv-SE": {
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "STONEHENGE_MOI027_Thuy_Dien.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 1.3168269230769232,
+      "max_tempo": 1.577403846153846,
+      "word_accents": 66
+    },
+    "nb-NO": {
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "STONEHENGE_MOI027_Na_Uy.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 1.1028846153846152,
+      "max_tempo": 1.309375,
+      "word_accents": 65
+    },
+    "pl-PL": {
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "STONEHENGE_MOI027_Ba_Lan.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 1.1189903846153846,
+      "max_tempo": 1.2995192307692307,
+      "word_accents": 31
+    },
+    "de-DE": {
+      "voice_id": "de-DE-ChristophNeural",
+      "filename": "STONEHENGE_MOI027_Duc.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 1.2557692307692307,
+      "max_tempo": 1.496875,
+      "word_accents": 58
+    },
+    "da-DK": {
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "STONEHENGE_MOI027_Dan_Mach.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 1.1430288461538463,
+      "max_tempo": 1.3514423076923077,
+      "word_accents": 65
+    },
+    "fr-FR": {
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "STONEHENGE_MOI027_Phap.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 1.0533653846153845,
+      "max_tempo": 1.2995192307692307,
+      "word_accents": 69
+    },
+    "ja-JP": {
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "STONEHENGE_MOI027_Nhat_Ban.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 1.325721153846154,
+      "max_tempo": 1.522355769230769,
+      "word_accents": 41
+    },
+    "fi-FI": {
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "STONEHENGE_MOI027_Phan_Lan.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 1.2182692307692309,
+      "max_tempo": 1.4319711538461537,
+      "word_accents": 52
+    },
+    "pt-PT": {
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "STONEHENGE_MOI027_Bo_Dao_Nha.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 1.038240418118467,
+      "max_tempo": 1.2814903846153847,
+      "word_accents": 64
+    },
+    "nl-NL": {
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "STONEHENGE_MOI027_Ha_Lan.mp3",
+      "decoded_seconds": 1292.0,
+      "min_tempo": 1.1529616724738676,
+      "max_tempo": 1.3822115384615383,
+      "word_accents": 62
+    }
+  }
+}

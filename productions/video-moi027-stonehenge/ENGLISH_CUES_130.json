@@ -1,0 +1,782 @@
+[
+  {
+    "id": 1,
+    "start": 0,
+    "end": 10,
+    "voice": "The ropes tighten. The stone barely moves. Before it can become part of a monument, someone must solve a problem that begins far from the circle."
+  },
+  {
+    "id": 2,
+    "start": 10,
+    "end": 20,
+    "voice": "Where did this block come from? Which landscape did it cross? And how could it be lifted into place? Stonehenge holds three investigations inside one view."
+  },
+  {
+    "id": 3,
+    "start": 20,
+    "end": 30,
+    "voice": "We will follow those questions separately, from the rock to the route to the raising. The strongest answer is the one the evidence can actually support."
+  },
+  {
+    "id": 4,
+    "start": 30,
+    "end": 40,
+    "voice": "Our destination is Salisbury Plain in southern England. Today the stones seem almost detached from their surroundings. Their history begins by putting that surrounding landscape back into view."
+  },
+  {
+    "id": 5,
+    "start": 40,
+    "end": 50,
+    "voice": "The monument developed over many generations. An earthwork enclosure appeared around three thousand BCE; the major stone settings transformed the place around twenty-five hundred BCE."
+  },
+  {
+    "id": 6,
+    "start": 50,
+    "end": 60,
+    "voice": "Those dates do not describe one uninterrupted building day. Later changes and rearrangements are part of the story, and the view we inherit is not the original whole."
+  },
+  {
+    "id": 7,
+    "start": 60,
+    "end": 70,
+    "voice": "Begin with the stones themselves. The large sarsens and the smaller group called bluestones are not simply two sizes of one uniform local rock."
+  },
+  {
+    "id": 8,
+    "start": 70,
+    "end": 80,
+    "voice": "Sarsen is a hard, silica-cemented rock known as silcrete. Bluestone is a collective name covering several rock types, including stones that do not look particularly blue."
+  },
+  {
+    "id": 9,
+    "start": 80,
+    "end": 90,
+    "voice": "That difference gives us our first lead. If the materials have different geological histories, their journeys may have different starting points, distances, and practical challenges."
+  },
+  {
+    "id": 10,
+    "start": 90,
+    "end": 100,
+    "voice": "So resist drawing one arrow toward Stonehenge and calling the mystery solved. We need to identify which stone we are discussing before we can follow it."
+  },
+  {
+    "id": 11,
+    "start": 100,
+    "end": 110,
+    "voice": "Our first investigation begins with the sarsens. Large examples weigh many tonnes. Yet size alone cannot identify the patch of ground from which a particular block was obtained."
+  },
+  {
+    "id": 12,
+    "start": 110,
+    "end": 120,
+    "voice": "Similar-looking stones occur across southern England. Weathering changes their surfaces. A convincing match therefore needs more than an appealing resemblance between two photographs of pale rock."
+  },
+  {
+    "id": 13,
+    "start": 120,
+    "end": 130,
+    "voice": "In twenty twenty, researchers compared the chemistry of the surviving sarsens. Fifty of the fifty-two stones formed a broad chemical group, suggesting a shared source area."
+  },
+  {
+    "id": 14,
+    "start": 130,
+    "end": 140,
+    "voice": "A core from Stone fifty-eight allowed a closer comparison. It had been taken during repairs in nineteen fifty-eight and returned decades later, opening an unusual research opportunity."
+  },
+  {
+    "id": 15,
+    "start": 140,
+    "end": 150,
+    "voice": "The researchers compared its chemical signature with samples from potential source areas. West Woods, roughly twenty-five kilometers north of Stonehenge, emerged as the most probable source for the main group."
+  },
+  {
+    "id": 16,
+    "start": 150,
+    "end": 160,
+    "voice": "Notice the careful wording: a most probable source area for most surviving sarsens. It is not a quarry ticket for every stone, or a map of every original block."
+  },
+  {
+    "id": 17,
+    "start": 160,
+    "end": 170,
+    "voice": "The stones outside that main chemical group remain a useful reminder. A monument can draw material from more than one place, even when one source dominates the picture."
+  },
+  {
+    "id": 18,
+    "start": 170,
+    "end": 180,
+    "voice": "West Woods also raises a question about today's scenery. Woodland cover, extraction, farming, and later activity have changed the ground. The modern landscape is not a preserved prehistoric photograph."
+  },
+  {
+    "id": 19,
+    "start": 180,
+    "end": 190,
+    "voice": "The geological result narrows a search. It does not tell us which boulder was chosen first, how it was detached, or where the hauling team spent its nights."
+  },
+  {
+    "id": 20,
+    "start": 190,
+    "end": 200,
+    "voice": "That is progress with a clear boundary. The rock can point us toward its source while leaving the human decisions around that source partly hidden."
+  },
+  {
+    "id": 21,
+    "start": 200,
+    "end": 210,
+    "voice": "Now turn west, toward the Preseli landscape in Wales. Several kinds of Stonehenge's smaller stones have been linked to outcrops there through detailed geological comparison."
+  },
+  {
+    "id": 22,
+    "start": 210,
+    "end": 220,
+    "voice": "Carn Goedog is associated with spotted dolerite. Craig Rhos-y-felin has been linked to a type of rhyolite. These names belong to different rocks and different places."
+  },
+  {
+    "id": 23,
+    "start": 220,
+    "end": 230,
+    "voice": "At these locations, researchers have interpreted archaeological features as evidence of prehistoric stone extraction. Natural joints, disturbed ground, working areas, and associated finds have to be read together."
+  },
+  {
+    "id": 24,
+    "start": 230,
+    "end": 240,
+    "voice": "Some outcrops naturally separate into pillars. That could offer builders a useful starting shape, rather than requiring them to carve an entire block from an unbroken cliff."
+  },
+  {
+    "id": 25,
+    "start": 240,
+    "end": 250,
+    "voice": "But a joint is geological evidence, not a complete account of extraction. Proposed wedges, levers, ropes, and loading arrangements remain parts of an archaeological reconstruction."
+  },
+  {
+    "id": 26,
+    "start": 250,
+    "end": 260,
+    "voice": "The excavators have discussed platforms and working surfaces near the outcrops. Their significance depends on context and comparison, rather than simply imagining machinery into every convenient ledge."
+  },
+  {
+    "id": 27,
+    "start": 260,
+    "end": 270,
+    "voice": "Dating nearby charcoal can help constrain activity. It does not turn every piece into a signed receipt for the removal of a particular stone at a particular hour."
+  },
+  {
+    "id": 28,
+    "start": 270,
+    "end": 280,
+    "voice": "The quarry research is important because it connects rock identification with possible traces of human work. Even then, the next stage of the journey remains a separate question."
+  },
+  {
+    "id": 29,
+    "start": 280,
+    "end": 290,
+    "voice": "Finding a source does not tell us whether a block traveled directly to Stonehenge. It might have paused, changed hands, or stood elsewhere before its final setting."
+  },
+  {
+    "id": 30,
+    "start": 290,
+    "end": 300,
+    "voice": "Such possibilities can be investigated, but they should not be stitched into a confident travel diary without evidence. A plausible sequence is still a sequence to test."
+  },
+  {
+    "id": 31,
+    "start": 300,
+    "end": 310,
+    "voice": "Then a different stone complicates the map. The Altar Stone is sandstone, and research published in twenty twenty-four linked its mineral history with northeast Scotland."
+  },
+  {
+    "id": 32,
+    "start": 310,
+    "end": 320,
+    "voice": "The ages and chemistry of tiny mineral grains can help compare source regions. Those geological ages concern the grains' history, not the day people moved the block."
+  },
+  {
+    "id": 33,
+    "start": 320,
+    "end": 330,
+    "voice": "That work points toward a broad geological region, not an already identified extraction socket. The exact source and the details of the stone's journey continue to be refined."
+  },
+  {
+    "id": 34,
+    "start": 330,
+    "end": 340,
+    "voice": "This matters because an older picture placed the Altar Stone in Wales. New evidence can change one stone's story without making every other stone part of the same journey."
+  },
+  {
+    "id": 35,
+    "start": 340,
+    "end": 350,
+    "voice": "Our first investigation has therefore produced several starting points. Now the scale changes: we leave the mineral evidence and ask what it takes to cross the ground between them."
+  },
+  {
+    "id": 36,
+    "start": 350,
+    "end": 360,
+    "voice": "The shortest line on a map is rarely the whole transport problem. A team must deal with slopes, wet ground, narrow passages, and the effort of stopping safely."
+  },
+  {
+    "id": 37,
+    "start": 360,
+    "end": 370,
+    "voice": "A longer route might avoid one steep climb. A convenient valley could introduce a water crossing. What looks inefficient from above may be practical when viewed from ground level."
+  },
+  {
+    "id": 38,
+    "start": 370,
+    "end": 380,
+    "voice": "And twenty-five kilometers in a straight line is a distance between places, not a measured prehistoric haul. The actual route could be longer and require several kinds of work."
+  },
+  {
+    "id": 39,
+    "start": 380,
+    "end": 390,
+    "voice": "Imagine preparing a passage before the stone arrives. Obstacles must be assessed, vulnerable ground considered, and timber or other materials brought where they will be needed."
+  },
+  {
+    "id": 40,
+    "start": 390,
+    "end": 400,
+    "voice": "That preparation is part of transport, even though a dramatic reconstruction tends to show only the moment the ropes pull tight. The journey starts before the first movement."
+  },
+  {
+    "id": 41,
+    "start": 400,
+    "end": 410,
+    "voice": "A sledge is one way to spread the load and control contact with the ground. The important question is how the sledge and the surface behave together."
+  },
+  {
+    "id": 42,
+    "start": 410,
+    "end": 420,
+    "voice": "Timbers under a load need not be rollers. A stationary timber track and freely turning logs create different mechanical situations, even if a quick drawing makes them look alike."
+  },
+  {
+    "id": 43,
+    "start": 420,
+    "end": 430,
+    "voice": "With a fixed track, the sledge slides across supported contact points. Loose rollers introduce questions of alignment and stability, especially where the ground slopes or changes direction."
+  },
+  {
+    "id": 44,
+    "start": 430,
+    "end": 440,
+    "voice": "Experiments and comparisons have challenged the familiar assumption that rollers must have been the obvious solution. Familiar pictures can survive longer than the evidence supporting them."
+  },
+  {
+    "id": 45,
+    "start": 440,
+    "end": 450,
+    "voice": "One useful lesson from outdoor hauling trials is that simple arrangements can move substantial replica loads. Their value lies in showing a workable mechanism under recorded conditions."
+  },
+  {
+    "id": 46,
+    "start": 450,
+    "end": 460,
+    "voice": "But watch what happens when the result leaves the field. A short successful pull can become a claim about every stone and every kilometer of an ancient journey."
+  },
+  {
+    "id": 47,
+    "start": 460,
+    "end": 470,
+    "voice": "The weight, slope, surface, weather, equipment, and experience of the group all matter. Change those conditions and the number of people needed may change as well."
+  },
+  {
+    "id": 48,
+    "start": 470,
+    "end": 480,
+    "voice": "That is why we will not multiply a demonstration speed by the distance to Stonehenge and announce an exact arrival date. Rest, preparation, repairs, and crossings belong in the calculation."
+  },
+  {
+    "id": 49,
+    "start": 480,
+    "end": 490,
+    "voice": "Rope also connects a team rather than merely connecting people to stone. Position, timing, and coordination affect whether effort becomes controlled movement or competing pulls."
+  },
+  {
+    "id": 50,
+    "start": 490,
+    "end": 500,
+    "voice": "We can describe those practical demands without inventing a precise command structure. The technology implies organized cooperation; it does not name the person who gave the signal."
+  },
+  {
+    "id": 51,
+    "start": 500,
+    "end": 510,
+    "voice": "Now consider the Welsh stones. Their source regions lie much farther away. A journey through several landscapes raises different questions from a shorter movement across nearby chalk country."
+  },
+  {
+    "id": 52,
+    "start": 510,
+    "end": 520,
+    "voice": "An overland proposal must account for terrain and water crossings. A waterborne proposal must account for reaching the water, loading the stone, supporting it, and bringing it ashore again."
+  },
+  {
+    "id": 53,
+    "start": 520,
+    "end": 530,
+    "voice": "Water can change the problem without removing it. A floating craft must provide enough displacement and remain stable with its cargo. The loading stage can be as demanding as travel."
+  },
+  {
+    "id": 54,
+    "start": 530,
+    "end": 540,
+    "voice": "A boat or raft shown in a film is therefore a hypothesis made visible. Its appearance is not evidence that this exact craft carried a particular Stonehenge block."
+  },
+  {
+    "id": 55,
+    "start": 540,
+    "end": 550,
+    "voice": "The choice is not necessarily one uninterrupted land route against one uninterrupted sea route. Different stages could have required different methods, with transfers adding their own costs."
+  },
+  {
+    "id": 56,
+    "start": 550,
+    "end": 560,
+    "voice": "A river crossing, a muddy bank, or an exposed coast can become the difficult part of a journey. Long distances are made of local problems that must each be solved."
+  },
+  {
+    "id": 57,
+    "start": 560,
+    "end": 570,
+    "voice": "Even a preferred route needs evidence. Useful clues might include terrain constraints, associated sites, working traces, and patterns of movement, rather than a line drawn solely because it looks elegant."
+  },
+  {
+    "id": 58,
+    "start": 570,
+    "end": 580,
+    "voice": "The evidence may narrow possibilities without selecting every turn. We can compare routes honestly while leaving stretches unresolved, just as we would leave a missing page blank."
+  },
+  {
+    "id": 59,
+    "start": 580,
+    "end": 590,
+    "voice": "That uncertainty should not hide the achievement. Moving useful stone required working knowledge of the landscape, whatever combination of stages and equipment was ultimately chosen."
+  },
+  {
+    "id": 60,
+    "start": 590,
+    "end": 600,
+    "voice": "The Altar Stone makes that comparison larger again. A northern Scottish geological origin implies a remarkable separation between source region and final location, but separation is still not an itinerary."
+  },
+  {
+    "id": 61,
+    "start": 600,
+    "end": 610,
+    "voice": "The twenty twenty-four research argued for human transport and discussed a maritime route. Subsequent work has continued to examine how source evidence and possible pathways fit together."
+  },
+  {
+    "id": 62,
+    "start": 610,
+    "end": 620,
+    "voice": "A twenty twenty-six study modeled whether changing ice flows might have carried a suitable boulder part of the way before later human movement. This was a possibility test, not a discovery of its track."
+  },
+  {
+    "id": 63,
+    "start": 620,
+    "end": 630,
+    "voice": "The proposed intermediate region included Dogger Bank, now beneath the North Sea. Even that scenario leaves a substantial human journey and difficult questions about the long interval before Stonehenge."
+  },
+  {
+    "id": 64,
+    "start": 630,
+    "end": 640,
+    "voice": "The study also identifies limits in the modeling and the history it would require. A possible earlier natural movement does not settle where people obtained the block or how they transported it afterward."
+  },
+  {
+    "id": 65,
+    "start": 640,
+    "end": 650,
+    "voice": "Keep the questions separate: the rock's geological home, the place people collected it, and the route they used need not be identical pieces of information."
+  },
+  {
+    "id": 66,
+    "start": 650,
+    "end": 660,
+    "voice": "Nor should a debate about one sandstone block be used to erase the evidence for other stones. Different materials can have different histories within the same monument."
+  },
+  {
+    "id": 67,
+    "start": 660,
+    "end": 670,
+    "voice": "At this point, the transport investigation has changed shape. We have practical mechanisms, competing routes, and geological constraints. What we do not have is a filmed record of the original journey."
+  },
+  {
+    "id": 68,
+    "start": 670,
+    "end": 680,
+    "voice": "A good reconstruction makes that distinction visible. It can show how a proposal works while stating which parts are supported by finds and which remain an experiment in possibility."
+  },
+  {
+    "id": 69,
+    "start": 680,
+    "end": 690,
+    "voice": "Now suppose the load has finally reached Salisbury Plain. The ropes can slacken for a moment. A different problem begins where the journey ends: the stone is still lying down."
+  },
+  {
+    "id": 70,
+    "start": 690,
+    "end": 700,
+    "voice": "Transporting a block and raising it are related tasks, but they are not one operation. The supports, direction of force, and consequences of movement now change."
+  },
+  {
+    "id": 71,
+    "start": 700,
+    "end": 710,
+    "voice": "The third investigation starts below the surface. An upright needs somewhere to stand, and the shape and packing of a stonehole can preserve clues about installation."
+  },
+  {
+    "id": 72,
+    "start": 710,
+    "end": 720,
+    "voice": "Picture a socket with one sloping side. In a proposed method, the lower end of a stone approaches this opening while ropes and timber help control its rotation."
+  },
+  {
+    "id": 73,
+    "start": 720,
+    "end": 730,
+    "voice": "The center of mass matters. As the block turns, the balance changes. More pulling force is not automatically the answer if the movement becomes difficult to control."
+  },
+  {
+    "id": 74,
+    "start": 730,
+    "end": 740,
+    "voice": "Timber supports can provide temporary stability. Ropes can apply and restrain force. The ground and socket must also cope with the load as the stone changes position."
+  },
+  {
+    "id": 75,
+    "start": 740,
+    "end": 750,
+    "voice": "These are engineering principles, not a surviving instruction manual. The details of any reconstruction must still be checked against stoneholes, tool evidence, and the materials available to the builders."
+  },
+  {
+    "id": 76,
+    "start": 750,
+    "end": 760,
+    "voice": "English Heritage presents reconstructions involving a prepared hole, controlled hauling, timber assistance, and rubble packing. Such illustrations organize evidence and plausible mechanics; they do not make every timber an excavated certainty."
+  },
+  {
+    "id": 77,
+    "start": 760,
+    "end": 770,
+    "voice": "Once upright, the stone needs support in the ground. Packing around its base is part of the construction system, not an incidental pile of rubble left after the impressive moment."
+  },
+  {
+    "id": 78,
+    "start": 770,
+    "end": 780,
+    "voice": "The visible monument hides this part of the work. A camera looking only at the skyline can miss the earth, preparation, and adjustment that make the upright possible."
+  },
+  {
+    "id": 79,
+    "start": 780,
+    "end": 790,
+    "voice": "But Stonehenge has a further difficulty above our heads. Horizontal lintels were placed across uprights. Arrival on site and erection at ground level were not the final tasks."
+  },
+  {
+    "id": 80,
+    "start": 790,
+    "end": 800,
+    "voice": "Look closely at the joints. Projections on the uprights fit recesses in the lintels, while adjoining lintels use interlocking forms. The stones were shaped to work together."
+  },
+  {
+    "id": 81,
+    "start": 800,
+    "end": 810,
+    "voice": "These features are unusually concrete evidence of deliberate fitting. They tell us about the finished connection even where the exact lifting arrangement has disappeared."
+  },
+  {
+    "id": 82,
+    "start": 810,
+    "end": 820,
+    "voice": "Imagine preparing a lintel that must meet supports already standing. Shape, height, and placement are linked problems. A block that arrives at the top still has to fit."
+  },
+  {
+    "id": 83,
+    "start": 820,
+    "end": 830,
+    "voice": "Timber platforms and gradual lifting have been proposed. One approach builds support upward in stages, keeping the stone supported while its height increases. Other arrangements also require testing."
+  },
+  {
+    "id": 84,
+    "start": 830,
+    "end": 840,
+    "voice": "The question is not whether a modern team can place a block somehow. It is whether a method fits the archaeological setting and can work with plausible prehistoric materials and constraints."
+  },
+  {
+    "id": 85,
+    "start": 840,
+    "end": 850,
+    "voice": "A ramp has its own preparation cost. A timber structure has material and stability demands. Every solution moves some of the difficulty into another part of the construction process."
+  },
+  {
+    "id": 86,
+    "start": 850,
+    "end": 860,
+    "voice": "That is why an elegant animation can mislead. If the supporting work vanishes between frames, the stone seems to rise more easily than any real crew would experience."
+  },
+  {
+    "id": 87,
+    "start": 860,
+    "end": 870,
+    "voice": "Our reconstruction keeps the supports in view. That makes the explanation clearer: every change in height depends on a surface carrying the weight before the next movement."
+  },
+  {
+    "id": 88,
+    "start": 870,
+    "end": 880,
+    "voice": "The shaping evidence adds another piece. Hammerstones and worked surfaces show that moving stone was only part of the labor. Dressing and fitting required time and skilled effort."
+  },
+  {
+    "id": 89,
+    "start": 880,
+    "end": 890,
+    "voice": "Coarse shaping and careful finishing are different tasks. The completed monument contains choices about which faces and connections received attention, rather than one uniform treatment across every surface."
+  },
+  {
+    "id": 90,
+    "start": 890,
+    "end": 900,
+    "voice": "A transport theory that ignores this preparation is incomplete. So is a lifting theory that treats the stone as a featureless weight instead of a shaped component."
+  },
+  {
+    "id": 91,
+    "start": 900,
+    "end": 910,
+    "voice": "We can now return to the three investigations. Geological comparison identifies likely origins. Landscape and experiments test ways of moving. Archaeology and mechanics constrain ways of raising."
+  },
+  {
+    "id": 92,
+    "start": 910,
+    "end": 920,
+    "voice": "None of these works best in isolation. A proposed source changes the route problem. A difficult route changes equipment demands. The chosen stone shape affects handling and final fitting."
+  },
+  {
+    "id": 93,
+    "start": 920,
+    "end": 930,
+    "voice": "That does not require a single solution for every block. A smaller volcanic stone and a massive sarsen could present different challenges, even within a shared building project."
+  },
+  {
+    "id": 94,
+    "start": 930,
+    "end": 940,
+    "voice": "It also does not require that every stage happened at once. Stonehenge's changing arrangements remind us that people returned, altered, and reinterpreted the place over time."
+  },
+  {
+    "id": 95,
+    "start": 940,
+    "end": 950,
+    "voice": "The monument therefore records both coordinated work and a long history. Turning it into one spectacular afternoon would remove much of what makes its construction interesting."
+  },
+  {
+    "id": 96,
+    "start": 950,
+    "end": 960,
+    "voice": "Behind the visible hauling team were supplies, equipment, food, and knowledge. Those requirements follow from the work itself, even when the organization cannot be reconstructed in detail."
+  },
+  {
+    "id": 97,
+    "start": 960,
+    "end": 970,
+    "voice": "We should avoid filling that gap with an invented king, a named architect, or a command system for which no evidence survives. Cooperation is visible more readily than individual authority."
+  },
+  {
+    "id": 98,
+    "start": 970,
+    "end": 980,
+    "voice": "Likewise, moving a stone from far away does not by itself tell us why it mattered. Practical suitability, relationships, memory, and meaning are possibilities to investigate, not automatic conclusions."
+  },
+  {
+    "id": 99,
+    "start": 980,
+    "end": 990,
+    "voice": "The effort could have carried social significance as well as an engineering purpose. But the stones cannot directly give us the builders' spoken explanations or private intentions."
+  },
+  {
+    "id": 100,
+    "start": 990,
+    "end": 1000,
+    "voice": "A careful account can leave those human questions open while still taking the achievement seriously. Uncertainty about motives is not a reason to erase practical skill."
+  },
+  {
+    "id": 101,
+    "start": 1000,
+    "end": 1010,
+    "voice": "There is another reason to keep the evidence separate from the spectacle. A convincing image of a quarry, a raft, or a raising frame can feel like a recovered memory."
+  },
+  {
+    "id": 102,
+    "start": 1010,
+    "end": 1020,
+    "voice": "It is not. These are visual explanations. They help us reason through possibilities, but the confidence belongs to the finds, measurements, and arguments that the image is built around."
+  },
+  {
+    "id": 103,
+    "start": 1020,
+    "end": 1030,
+    "voice": "That distinction protects the audience from a familiar mistake: seeing a method succeed once and treating it as the unique history of an entire monument."
+  },
+  {
+    "id": 104,
+    "start": 1030,
+    "end": 1040,
+    "voice": "Experiments are most useful when their conditions are clear and alternatives remain testable. They can expose a hidden difficulty as well as demonstrate an impressive possibility."
+  },
+  {
+    "id": 105,
+    "start": 1040,
+    "end": 1050,
+    "voice": "A trial on flat ground does not answer a steep slope. A light replica does not settle a larger load. A successful lift does not identify an ancient route."
+  },
+  {
+    "id": 106,
+    "start": 1050,
+    "end": 1060,
+    "voice": "Nor does an unresolved route make the geological evidence disappear. We can know more about where a stone formed than about every stage of its movement afterward."
+  },
+  {
+    "id": 107,
+    "start": 1060,
+    "end": 1070,
+    "voice": "The questions advance at different speeds. One new sample may refine a source area; another excavation may change a building sequence; a new trial may reveal an overlooked mechanical problem."
+  },
+  {
+    "id": 108,
+    "start": 1070,
+    "end": 1080,
+    "voice": "That is how investigation can grow without a single final revelation. Each well-supported answer changes the next question and makes a weak reconstruction harder to sustain."
+  },
+  {
+    "id": 109,
+    "start": 1080,
+    "end": 1090,
+    "voice": "For now, the strongest picture is not one straight journey performed with one miraculous trick. It is a chain of tasks, with different evidence attached to different links."
+  },
+  {
+    "id": 110,
+    "start": 1090,
+    "end": 1100,
+    "voice": "And that chain is already extraordinary. Selecting, shaping, moving, supporting, and fitting heavy stone required knowledge that lived in people, equipment, and repeated practical decisions."
+  },
+  {
+    "id": 111,
+    "start": 1100,
+    "end": 1110,
+    "voice": "Look again at a lintel resting above its uprights. It is easy to notice the weight and miss the relationships: the joint, the support, the buried base, and the ground beneath."
+  },
+  {
+    "id": 112,
+    "start": 1110,
+    "end": 1120,
+    "voice": "The stone belongs to a system. Its geological history allowed it to be selected; human work gave it a new location, shape, and relationship to other stones."
+  },
+  {
+    "id": 113,
+    "start": 1120,
+    "end": 1130,
+    "voice": "The route belongs to a system too. Ground conditions, crossings, supplies, and cooperation connect the dramatic pull to the quieter work that made the next pull possible."
+  },
+  {
+    "id": 114,
+    "start": 1130,
+    "end": 1140,
+    "voice": "This helps explain why the question remains so engaging. The monument gives us a result at immense scale, while much of the temporary equipment has disappeared."
+  },
+  {
+    "id": 115,
+    "start": 1140,
+    "end": 1150,
+    "voice": "Wood, rope, and working surfaces do not survive like great stones. Their absence can limit reconstruction without justifying whatever convenient device we would like to imagine."
+  },
+  {
+    "id": 116,
+    "start": 1150,
+    "end": 1160,
+    "voice": "We therefore ask every proposed device two questions. Could it work under the relevant conditions? And what connects it to this monument, rather than merely to our imagination?"
+  },
+  {
+    "id": 117,
+    "start": 1160,
+    "end": 1170,
+    "voice": "Sometimes the connection is strong, as with shaped stone joints. Sometimes it is broader, as with a mechanically plausible support system. Naming that difference improves the explanation."
+  },
+  {
+    "id": 118,
+    "start": 1170,
+    "end": 1180,
+    "voice": "The same habit applies to maps. A source region can be well supported while a route remains provisional. Drawing the route more brightly cannot increase its certainty."
+  },
+  {
+    "id": 119,
+    "start": 1180,
+    "end": 1190,
+    "voice": "It applies to numbers as well. A measurement belongs to its sample and method. A modern headcount or speed should travel with the conditions under which it was observed."
+  },
+  {
+    "id": 120,
+    "start": 1190,
+    "end": 1200,
+    "voice": "These limits make room for a more human story. The builders faced changing ground, material differences, and difficult decisions, rather than a puzzle waiting for one effortless answer."
+  },
+  {
+    "id": 121,
+    "start": 1200,
+    "end": 1210,
+    "voice": "Return to the rope from our opening. It is only one part of the work, but it gives the question a physical scale: effort must become movement somewhere."
+  },
+  {
+    "id": 122,
+    "start": 1210,
+    "end": 1220,
+    "voice": "Behind that rope lies a source landscape. Ahead lies ground that must be crossed. At the destination waits a socket, and above it a connection that must fit."
+  },
+  {
+    "id": 123,
+    "start": 1220,
+    "end": 1230,
+    "voice": "Our first investigation found that different stones point toward different geological regions. It replaced a single vague origin story with a set of more specific, testable claims."
+  },
+  {
+    "id": 124,
+    "start": 1230,
+    "end": 1240,
+    "voice": "The second showed why a route is a practical argument, not just a distance. Experiments can help evaluate that argument without becoming a record of the original journey."
+  },
+  {
+    "id": 125,
+    "start": 1240,
+    "end": 1250,
+    "voice": "The third brought us beneath the ground and above the uprights, where sockets, packing, shaped joints, and proposed temporary supports turn a moving block into an architectural component."
+  },
+  {
+    "id": 126,
+    "start": 1250,
+    "end": 1260,
+    "voice": "We have not recovered every instruction. What we have is more useful than a single trick: several lines of evidence that constrain what a responsible reconstruction can show."
+  },
+  {
+    "id": 127,
+    "start": 1260,
+    "end": 1270,
+    "voice": "Stonehenge stands because people made material choices and solved connected problems. Their exact sequence remains under investigation, but the scale of that practical achievement is already visible."
+  },
+  {
+    "id": 128,
+    "start": 1270,
+    "end": 1280,
+    "voice": "The next useful discovery may be a small fragment, a better geological comparison, or a trace in the ground. It need not be as large as the question it changes."
+  },
+  {
+    "id": 129,
+    "start": 1280,
+    "end": 1290,
+    "voice": "Now the circle looks different. Each block carries a geological history, a journey we are still testing, and the traces of work that made it stand here."
+  },
+  {
+    "id": 130,
+    "start": 1290,
+    "end": 1292,
+    "voice": "Follow the evidence."
+  }
+]

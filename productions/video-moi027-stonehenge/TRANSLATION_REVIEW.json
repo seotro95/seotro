@@ -1,0 +1,556 @@
+{
+  "topic_id": "MOI-027",
+  "independent_native_review": false,
+  "independent_native_listening_review": false,
+  "source_adaptation": "13 complete English chapters retained in order; ambiguous engineering terms clarified. Vietnamese assistant rewrite condenses repeated transitions while retaining source findings, transport and erection limits.",
+  "assistant_review_scope": "Full Vietnamese rewrite; selected source, Altar Stone, 2026 ice-model, gravity, joint, fixed-track and stone-dressing passages across all fourteen other languages; years and closing reviewed; whole-script five-word English leak scan. French chapter 6 rewritten to remove English fragments. No independent native editorial or listening review.",
+  "rejected_initial_draft_issues": [
+    "mineral grains translated as food grain",
+    "ground and socket translated as electrical parts",
+    "stone joints translated as anatomical joints",
+    "ramp translated as lamp",
+    "part of the route confused with part of the boulder",
+    "featureless load translated as weightless load",
+    "French chapter 6 contained English fragments"
+  ],
+  "locales": {
+    "vi-VN": {
+      "chapters": 13,
+      "assistant_full_rewrite": true,
+      "targeted_edits": [],
+      "independent_native_review": false
+    },
+    "es-ES": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 7,
+          "old": "La investigación de 2024 abogó por personas que transportaran la piedra y discutió una ruta marítima.",
+          "new": "El estudio de 2024 defendió que la piedra fue transportada por personas y examinó una posible ruta marítima."
+        },
+        {
+          "chapter": 8,
+          "old": "El suelo y el casquillo",
+          "new": "El terreno y el hoyo de cimentación"
+        },
+        {
+          "chapter": 8,
+          "old": "Mire de cerca las articulaciones.",
+          "new": "Observe de cerca las uniones de piedra."
+        },
+        {
+          "chapter": 9,
+          "old": "piedras de martillo",
+          "new": "percutores de piedra"
+        },
+        {
+          "chapter": 9,
+          "old": "La evidencia moldeadora añade otra pieza.",
+          "new": "Las huellas del trabajo de la piedra aportan otra pista."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "fr-FR": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 6,
+          "action": "Full assistant French rewrite removes English fragments"
+        },
+        {
+          "chapter": 7,
+          "old": "L’étude de 2024 plaidait en faveur des personnes transportant la pierre et discutait d’une route maritime.",
+          "new": "L’étude de 2024 défendait l’hypothèse d’un transport de la pierre par des humains et examinait une possible route maritime."
+        },
+        {
+          "chapter": 8,
+          "old": "Le sol et la douille",
+          "new": "Le terrain et la fosse de calage"
+        },
+        {
+          "chapter": 8,
+          "old": "petites pierres emballées",
+          "new": "petites pierres tassées"
+        },
+        {
+          "chapter": 8,
+          "old": "Regardez attentivement les articulations.",
+          "new": "Regardez attentivement les assemblages de pierre."
+        },
+        {
+          "chapter": 9,
+          "old": "Les perforateurs et les surfaces travaillées",
+          "new": "Les percuteurs en pierre et les surfaces travaillées"
+        },
+        {
+          "chapter": 9,
+          "old": "Les preuves déterminantes ajoutent un autre élément.",
+          "new": "Les traces de façonnage apportent un autre indice."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "ja-JP": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 2,
+          "old": "発信源地域",
+          "new": "産地候補の地域"
+        },
+        {
+          "chapter": 2,
+          "old": "発生源",
+          "new": "産地"
+        },
+        {
+          "chapter": 2,
+          "old": "主要集団",
+          "new": "主な石のグループ"
+        },
+        {
+          "chapter": 4,
+          "old": "穀物の歴史",
+          "new": "鉱物粒子の歴史"
+        },
+        {
+          "chapter": 4,
+          "old": "古い写真ではウェールズの祭壇石が描かれているため、これは重要です。",
+          "new": "以前は祭壇石の産地がウェールズにあると考えられていたため、この違いは重要です。"
+        },
+        {
+          "chapter": 6,
+          "old": "発生源",
+          "new": "産地"
+        },
+        {
+          "chapter": 7,
+          "old": "情報源の証拠",
+          "new": "産地に関する証拠"
+        },
+        {
+          "chapter": 8,
+          "old": "3回目の調査は水面下で始まります。",
+          "new": "三つ目の調査は地面の下から始まります。"
+        },
+        {
+          "chapter": 8,
+          "old": "アースとソケット",
+          "new": "地盤と石を立てる穴"
+        },
+        {
+          "chapter": 8,
+          "old": "関節部分",
+          "new": "石の接合部"
+        },
+        {
+          "chapter": 9,
+          "old": "ランプ",
+          "new": "土の傾斜路"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "ko-KR": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "곡물의 역사",
+          "new": "광물 입자의 역사"
+        },
+        {
+          "chapter": 7,
+          "old": "2024년 연구에서는 사람들이 돌을 운반해야 한다고 주장하고 해상 경로에 대해 논의했습니다.",
+          "new": "2024년 연구는 사람이 돌을 운반했다는 해석을 제시하고 가능한 해상 경로를 논의했습니다."
+        },
+        {
+          "chapter": 7,
+          "old": "2026년 연구에서는 변화하는 얼음 흐름이 나중에 사람들이 돌을 움직이기 전에 적절한 바위 부분을 운반했을 수 있는지 여부를 모델로 삼았습니다.",
+          "new": "2026년 연구는 이후 사람이 돌을 옮기기 전에 변화하는 빙하 흐름이 적절한 바위를 경로의 일부 구간까지 운반했을 가능성을 모델로 검토했습니다."
+        },
+        {
+          "chapter": 7,
+          "old": "소스 증거",
+          "new": "산지에 관한 증거"
+        },
+        {
+          "chapter": 8,
+          "old": "접지와 소켓",
+          "new": "지반과 돌을 세우는 구덩이"
+        },
+        {
+          "chapter": 8,
+          "old": "관절을 자세히 살펴보세요.",
+          "new": "돌의 접합부를 자세히 살펴보세요."
+        },
+        {
+          "chapter": 9,
+          "old": "램프에는 자체 준비 비용이 있습니다.",
+          "new": "흙으로 경사로를 만드는 데에도 별도의 준비 작업이 필요합니다."
+        },
+        {
+          "chapter": 9,
+          "old": "고의적인 피팅",
+          "new": "의도적으로 돌을 맞춘 작업"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "de-DE": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 8,
+          "old": "Boden und die Fassung",
+          "new": "Boden und das Fundamentloch"
+        },
+        {
+          "chapter": 8,
+          "old": "Schauen Sie sich die Gelenke genau an.",
+          "new": "Schauen Sie sich die Steinverbindungen genau an."
+        },
+        {
+          "chapter": 9,
+          "old": "merkwürdiges Gewicht",
+          "new": "formlosen schweren Körper"
+        },
+        {
+          "chapter": 9,
+          "old": "Die prägenden Beweise fügen ein weiteres Stück hinzu.",
+          "new": "Die Bearbeitungsspuren liefern einen weiteren Hinweis."
+        },
+        {
+          "chapter": 9,
+          "old": "Unser Umbau",
+          "new": "Unsere Rekonstruktion"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "it-IT": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "storia dei cereali",
+          "new": "storia dei granuli minerali"
+        },
+        {
+          "chapter": 8,
+          "old": "il terreno e la presa",
+          "new": "il terreno e la fossa di fondazione"
+        },
+        {
+          "chapter": 8,
+          "old": "Osserva attentamente le articolazioni.",
+          "new": "Osserva attentamente gli incastri tra le pietre."
+        },
+        {
+          "chapter": 9,
+          "old": "Martelli e superfici lavorate",
+          "new": "Percussori in pietra e superfici lavorate"
+        },
+        {
+          "chapter": 9,
+          "old": "Le prove di modellamento aggiungono un altro tassello.",
+          "new": "Le tracce della lavorazione aggiungono un altro indizio."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "pt-PT": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 8,
+          "old": "A ligação à terra e o encaixe",
+          "new": "O terreno e a cavidade de fundação"
+        },
+        {
+          "chapter": 8,
+          "old": "Observe atentamente as articulações.",
+          "new": "Observe atentamente os encaixes entre as pedras."
+        },
+        {
+          "chapter": 9,
+          "old": "Martelos e superfícies trabalhadas",
+          "new": "Percutores de pedra e superfícies trabalhadas"
+        },
+        {
+          "chapter": 9,
+          "old": "Modelagem grosseira",
+          "new": "Desbaste inicial"
+        },
+        {
+          "chapter": 9,
+          "old": "A evidência modeladora acrescenta outra peça.",
+          "new": "Os vestígios de trabalho da pedra acrescentam outra pista."
+        },
+        {
+          "chapter": 9,
+          "old": "tripulação real",
+          "new": "equipa real"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "nl-NL": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "geschiedenis van het graan",
+          "new": "geschiedenis van de mineraalkorrels"
+        },
+        {
+          "chapter": 8,
+          "old": "De grond en de sok",
+          "new": "De grond en het funderingsgat"
+        },
+        {
+          "chapter": 8,
+          "old": "Kijk goed naar de gewrichten.",
+          "new": "Kijk goed naar de steenverbindingen."
+        },
+        {
+          "chapter": 9,
+          "old": "een gewichtloos gewicht",
+          "new": "een vormloze zware massa"
+        },
+        {
+          "chapter": 9,
+          "old": "Het vormende bewijsmateriaal voegt nog een stukje toe.",
+          "new": "De bewerkingssporen leveren nog een aanwijzing op."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "pl-PL": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 7,
+          "old": "W badaniu przeprowadzonym w 2026 r. zaprezentowano model, czy zmieniające się przepływy lodu mogły unieść odpowiednią część głazu przed późniejszym ruchem kamienia przez ludzi.",
+          "new": "Badanie z 2026 roku modelowało, czy zmieniające się przepływy lodu mogły przenieść odpowiedni głaz na części trasy, zanim ludzie przetransportowali go dalej."
+        },
+        {
+          "chapter": 8,
+          "old": "Przyjrzyj się uważnie stawom.",
+          "new": "Przyjrzyj się uważnie połączeniom kamieni."
+        },
+        {
+          "chapter": 9,
+          "old": "Dowody kształtujące dodają kolejny element.",
+          "new": "Ślady obróbki kamienia dostarczają kolejnej wskazówki."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "sv-SE": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "kvarteret",
+          "new": "stenblocket"
+        },
+        {
+          "chapter": 7,
+          "old": "en lämplig stenblock del av vägen",
+          "new": "ett lämpligt stenblock en del av vägen"
+        },
+        {
+          "chapter": 8,
+          "old": "Marken och uttaget",
+          "new": "Marken och grundläggningsgropen"
+        },
+        {
+          "chapter": 8,
+          "old": "Titta noga på lederna.",
+          "new": "Titta noga på stenfogarna."
+        },
+        {
+          "chapter": 9,
+          "old": "Formningsbevisen lägger till ytterligare en bit.",
+          "new": "Spåren av stenbearbetning ger ytterligare en ledtråd."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "da-DK": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 7,
+          "old": "2024-forskningen argumenterede for, at folk skulle transportere stenen og diskuterede en maritim rute.",
+          "new": "Undersøgelsen fra 2024 argumenterede for, at mennesker havde transporteret stenen, og diskuterede en mulig søvej."
+        },
+        {
+          "chapter": 7,
+          "old": "en passende kampesten del af vejen",
+          "new": "en passende kampesten en del af vejen"
+        },
+        {
+          "chapter": 8,
+          "old": "Jord og muffe",
+          "new": "Jorden og funderingshullet"
+        },
+        {
+          "chapter": 8,
+          "old": "Se nøje på leddene.",
+          "new": "Se nøje på stenenes samlinger."
+        },
+        {
+          "chapter": 9,
+          "old": "Formgivningsbeviset tilføjer endnu et stykke.",
+          "new": "Spor efter bearbejdning af stenen giver endnu en ledetråd."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "fi-FI": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 2,
+          "old": "korttelin",
+          "new": "kivilohkareen"
+        },
+        {
+          "chapter": 4,
+          "old": "korttelin",
+          "new": "kivilohkareen"
+        },
+        {
+          "chapter": 4,
+          "old": "jyvien historiaa",
+          "new": "mineraalirakeiden historiaa"
+        },
+        {
+          "chapter": 7,
+          "old": "sopivan lohkareen osan tieltä",
+          "new": "sopivaa lohkaretta osan matkasta"
+        },
+        {
+          "chapter": 8,
+          "old": "Kivipalkan",
+          "new": "Kivilohkareen"
+        },
+        {
+          "chapter": 8,
+          "old": "maan ja hylsyn",
+          "new": "maan ja perustamiskuopan"
+        },
+        {
+          "chapter": 8,
+          "old": "Katso tarkasti nivelet.",
+          "new": "Katso tarkasti kiviliitoksia."
+        },
+        {
+          "chapter": 9,
+          "old": "Jälleenrakennusmme",
+          "new": "Rekonstruktiomme"
+        },
+        {
+          "chapter": 9,
+          "old": "Muotoilevat todisteet lisäävät toisen palan.",
+          "new": "Kiven työstöjäljet antavat uuden vihjeen."
+        },
+        {
+          "chapter": 9,
+          "old": "ominaisuutena painona",
+          "new": "muodottomana raskaana kappaleena"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "nb-NO": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 7,
+          "old": "Forskningen fra 2024 argumenterte for at folk skulle transportere steinen og diskuterte en maritim rute.",
+          "new": "Studien fra 2024 argumenterte for at mennesker hadde transportert steinen, og diskuterte en mulig sjøvei."
+        },
+        {
+          "chapter": 7,
+          "old": "en passende steindel av veien",
+          "new": "en passende steinblokk en del av veien"
+        },
+        {
+          "chapter": 8,
+          "old": "Bakken og muffen",
+          "new": "Bakken og fundamenthullet"
+        },
+        {
+          "chapter": 8,
+          "old": "Se nøye på leddene.",
+          "new": "Se nøye på steinforbindelsene."
+        },
+        {
+          "chapter": 9,
+          "old": "en vektløs vekt",
+          "new": "en formløs tung masse"
+        },
+        {
+          "chapter": 9,
+          "old": "Formingsbeviset legger til en annen brikke.",
+          "new": "Spor etter bearbeiding av steinen gir enda et holdepunkt."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "cs-CZ": {
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 7,
+          "old": "Studie z roku 2026 modelovala, zda měnící se toky ledu mohly nést vhodnou část cesty balvanem před pozdějším pohybem kamene lidmi.",
+          "new": "Studie z roku 2026 modelovala, zda měnící se proudy ledu mohly přenést vhodný balvan po části trasy, než jej později přemístili lidé."
+        },
+        {
+          "chapter": 8,
+          "old": "Zem a zásuvka",
+          "new": "Podloží a základová jáma"
+        },
+        {
+          "chapter": 8,
+          "old": "Anglické dědictví",
+          "new": "organizace English Heritage"
+        },
+        {
+          "chapter": 8,
+          "old": "Podívejte se pozorně na klouby.",
+          "new": "Podívejte se pozorně na kamenné spoje."
+        },
+        {
+          "chapter": 9,
+          "old": "Důkaz o formování přidává další kousek.",
+          "new": "Stopy opracování kamene přidávají další vodítko."
+        },
+        {
+          "chapter": 9,
+          "old": "Kladiva a opracované povrchy",
+          "new": "Kamenné otloukače a opracované povrchy"
+        }
+      ],
+      "independent_native_review": false
+    }
+  }
+}

@@ -1,0 +1,282 @@
+{
+  "topic_id": "MOI-027",
+  "stage": "all16voices_documents_and_public_downloads_verified",
+  "target_seconds": 1292,
+  "assets": [
+    {
+      "name": "5_TIEU_DE_VA_THUMBNAIL.txt",
+      "bytes": 5119,
+      "sha256": "3f0e2b9ff73f3ea882e22bfbe7ac2ec5e5d08dbd0917108b6d65918c72b5ecc6"
+    },
+    {
+      "name": "AUDIO_MANIFEST.json",
+      "bytes": 7716,
+      "sha256": "6a48a626543a0fb58f872a1f456bd343cc590001b58d2e64daf2f532721250f4"
+    },
+    {
+      "name": "BACKUP_138_140.json",
+      "bytes": 7245,
+      "sha256": "7248a7abc0b6dd4f738a3d012a8cdba630ee53cbdcbe6810476e45a0f8f50218"
+    },
+    {
+      "name": "DOCUMENT_DELIVERY_STATE.json",
+      "bytes": 145,
+      "sha256": "2c9c7bcd24e70dbeff5c21070ad26b75763308d36ac46afbee2211826a279ad4"
+    },
+    {
+      "name": "DOCUMENT_QA.json",
+      "bytes": 1232,
+      "sha256": "5f45c5dc5db40f0046402320c346251e349304c0b63bca2ab27b6f0495ae461e"
+    },
+    {
+      "name": "DOWNLOAD_LINKS.md",
+      "bytes": 5283,
+      "sha256": "01fc64ffb072670b9ad6f169b2f9caf7d4385c699c332d8b676006028ff197f5"
+    },
+    {
+      "name": "en-US.srt",
+      "bytes": 27358,
+      "sha256": "83e371680a0a26a85addfe4fced801948bffa78aeb26f405fbe9bafe6fbd3a70"
+    },
+    {
+      "name": "HUONG_DAN_SU_DUNG.txt",
+      "bytes": 2523,
+      "sha256": "a77a9e941b1de1e66e30a1bfae53cc2ae4ac84f3832e1e452b0fc814d6f92ed9"
+    },
+    {
+      "name": "KICH_BAN_EN_21m32s.txt",
+      "bytes": 23046,
+      "sha256": "09a1d115c8972fe452a9244e7ad759d046b547d4810b6af7ba57c1e7a109e0d0"
+    },
+    {
+      "name": "KICH_BAN_EN_CO_MOC.txt",
+      "bytes": 27726,
+      "sha256": "3a2ecdadc4d8734bc9606d7d7ca4cd326d48f752fb334317333bc7378190671a"
+    },
+    {
+      "name": "LINK_TAI_VOICE.txt",
+      "bytes": 1982,
+      "sha256": "ba609d2eaa4a6cdd3b3099faac6d7f23d186ca5d876fb7e8083513925deb1561"
+    },
+    {
+      "name": "NARRATION_STYLE_LOCKED.json",
+      "bytes": 672,
+      "sha256": "d1f88f273a7796481ad5390ba86626ab696080d82ca8919ff1e507a3720d97ec"
+    },
+    {
+      "name": "NGUON_KIEM_CHUNG.md",
+      "bytes": 10662,
+      "sha256": "63ac82652892f3b03c00dd8e88e52e88f94359bbf8a328ad8e5dff7f1dcd2dbe"
+    },
+    {
+      "name": "OPENING_10_SHOTS_30s.json",
+      "bytes": 25613,
+      "sha256": "4337d495a9bc363355ee1b8759c7804ce1fe5441401d48c6960c11e8587d2afa"
+    },
+    {
+      "name": "PHAN_TICH_VA_KE_HOACH_DUNG.md",
+      "bytes": 4826,
+      "sha256": "5eb464a3906e2229b0c9f27c9f2f5867a05057359a092d090e8cd20e36d18b0b"
+    },
+    {
+      "name": "PROMPT_01_001-010.txt",
+      "bytes": 18618,
+      "sha256": "aec2380850ab5cb208155437b812633da07292e66df7013e21700cff04383520"
+    },
+    {
+      "name": "PROMPT_02_011-020.txt",
+      "bytes": 19009,
+      "sha256": "4d3d88d6a7bceec4ba1d272f63347aca2a94c596e5e1a59cddd121a545277b87"
+    },
+    {
+      "name": "PROMPT_03_021-030.txt",
+      "bytes": 19008,
+      "sha256": "00e28c1a73aa730d5b575ee05e96cb2479b6fa0dcc06850add48d2d9e875ed27"
+    },
+    {
+      "name": "PROMPT_04_031-040.txt",
+      "bytes": 19025,
+      "sha256": "7175437c1cdc614ee27f179de0f92afa13721bbe448d6e8f2d402cdc32e1d3c6"
+    },
+    {
+      "name": "PROMPT_05_041-050.txt",
+      "bytes": 19016,
+      "sha256": "edddcb199f51e786b60dcf14a455fa43a48a30f4e2d38bcba818bdf3e563e4c4"
+    },
+    {
+      "name": "PROMPT_06_051-060.txt",
+      "bytes": 19099,
+      "sha256": "e48ca1bb91730e4d29e9983e439dd1f2d4f6af132fa90a2c3c163c4733d92d00"
+    },
+    {
+      "name": "PROMPT_07_061-070.txt",
+      "bytes": 19060,
+      "sha256": "861d89f08e016578d3016fe8fa306b85f2c726bb3d1ed162d73134a1195440ab"
+    },
+    {
+      "name": "PROMPT_08_071-080.txt",
+      "bytes": 19075,
+      "sha256": "d1bc4934c6af4ff4f4095e8cd561a70bc16b7345910fad129df299f1d70f2567"
+    },
+    {
+      "name": "PROMPT_09_081-090.txt",
+      "bytes": 19048,
+      "sha256": "cb269596bd61a0c36b14ac5e7aef317a57d29f77defd3b2779805c3205c5b9ae"
+    },
+    {
+      "name": "PROMPT_10_091-100.txt",
+      "bytes": 19026,
+      "sha256": "b90a07a27b2cec463a8b68bce85f504bff7569e2a7f2c822d168fa4333cde70e"
+    },
+    {
+      "name": "PROMPT_11_101-110.txt",
+      "bytes": 19125,
+      "sha256": "6c62dbb9a75503bdb12445948f21b6f6b3b6ca5af30428edd4bff7cf588d2372"
+    },
+    {
+      "name": "PROMPT_12_111-120.txt",
+      "bytes": 18975,
+      "sha256": "4a913c1f530548db49f188d0ff73b770a454364536607874200fdfaf82c3deb3"
+    },
+    {
+      "name": "PROMPT_13_121-130.txt",
+      "bytes": 19034,
+      "sha256": "5642b8d0030d283e657873de40846e3837c9d70886e47e2d16469a4590bd1e36"
+    },
+    {
+      "name": "PROMPT_14_131-140.txt",
+      "bytes": 18907,
+      "sha256": "0a68c336923cc24d09241a431abfe19e6ec120197b991f677da8c8beeb2dcd55"
+    },
+    {
+      "name": "PUBLIC_DELIVERY_QA.json",
+      "bytes": 5866,
+      "sha256": "6fd40ca099b2b92db80e265c7b050ff332fc45929147abf070ce290cc33ca38b"
+    },
+    {
+      "name": "README.md",
+      "bytes": 5283,
+      "sha256": "01fc64ffb072670b9ad6f169b2f9caf7d4385c699c332d8b676006028ff197f5"
+    },
+    {
+      "name": "STONEHENGE_MOI027_16_VOICES_21m32s.zip",
+      "bytes": 248102756,
+      "sha256": "9a1689b7b0e5d1e96d41de92bc65aeac8f915a7f8811813aba8b2b46ba44869a"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Ba_Lan.mp3",
+      "bytes": 15504812,
+      "sha256": "038ded4f55db51feacd238b47bd115f3a9d7d0af05cc1122e87e7bf4176de01b"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Bo_Dao_Nha.mp3",
+      "bytes": 15504812,
+      "sha256": "dcf8fecde5f4cfbd53f10cf47db4c0a134c3ed56a17d48447bae087157a2a728"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Dan_Mach.mp3",
+      "bytes": 15504812,
+      "sha256": "f0267274aa103e7110b0490e582cc75f674c003c6dd4ede54f9ee26e8c65e1b3"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Duc.mp3",
+      "bytes": 15504812,
+      "sha256": "ce0cfa0b5378b158e8990f484dfdcd65a7a025eb537d7f01bbd0473a0bfe6f47"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Han_Quoc.mp3",
+      "bytes": 15504812,
+      "sha256": "21d1c5dcc490774bbee1986176ab2fe8c3bc1f2a7238750272874557b5dbe47b"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Ha_Lan.mp3",
+      "bytes": 15504812,
+      "sha256": "a90420a4d95c2cbded5ca022c2f217211e56b3f66ffd11aef33ce707d0636923"
+    },
+    {
+      "name": "STONEHENGE_MOI027_My_Tieng_Anh.mp3",
+      "bytes": 15504812,
+      "sha256": "ab8c57e6756048bb30c91225bd9277659e4f56a6f48d77a8a5a89b31a2b9efc1"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Na_Uy.mp3",
+      "bytes": 15504812,
+      "sha256": "3c44950633b8b7e41f85e2a3f440014c57496ed19120a094d2d3f2a54a93211b"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Nhat_Ban.mp3",
+      "bytes": 15504812,
+      "sha256": "8dd5e5a6e422b0691382d1d2f531ff753f94d85fd48056540e058635c7255aad"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Phan_Lan.mp3",
+      "bytes": 15504812,
+      "sha256": "db2286dce5ddf34b9bea4bf1798bb1fa9f74213995499cab660bcb574c5e9ce6"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Phap.mp3",
+      "bytes": 15504812,
+      "sha256": "387299f5cb71d49f96aeeb548ff2615ed07e5f9882613adb376bca5a07ef0288"
+    },
+    {
+      "name": "STONEHENGE_MOI027_PROMPT_NGOAI_TROI_14_TXT.zip",
+      "bytes": 29281,
+      "sha256": "daf7f59319b71b38219098c1321844f6fb1b11984666b4a4ca8c7786dbba8d30"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Sec.mp3",
+      "bytes": 15504812,
+      "sha256": "ac15a6c50f79c3bf7c14668f06f6509ad336a9406f6c6681def23ab06486a81e"
+    },
+    {
+      "name": "STONEHENGE_MOI027_TAI_LIEU_21m32s.zip",
+      "bytes": 533707,
+      "sha256": "b19cbc31c3fdd8cb1e843c71d2c963139776eb088bddf7f0db81426f7e12cabb"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Tay_Ban_Nha.mp3",
+      "bytes": 15504812,
+      "sha256": "b3501d2e7523f645d7399cbd3e489561a0ba9c2a492d7539c5c735ef9d9df46f"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Thuy_Dien.mp3",
+      "bytes": 15504812,
+      "sha256": "087a1f98a826176d5beff64c4f398bf84752389f2a33d5920af12801de6cbe88"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Viet_Nam_Nam_Minh.mp3",
+      "bytes": 15504812,
+      "sha256": "8647ce01e9353fd371c4afed55e0aefd6f33431574d62226e9a942bc48f0b9b4"
+    },
+    {
+      "name": "STONEHENGE_MOI027_Y.mp3",
+      "bytes": 15504812,
+      "sha256": "23dd97b8d29ed671d483656da4e24931c7820d405790d336d1ed70445d307c34"
+    },
+    {
+      "name": "TIMELINE_137_CANH.csv",
+      "bytes": 318898,
+      "sha256": "cce0d552f5437ecffdb8d9f2f5eb9357b93b9027988b4670e0dedc4d08947bb6"
+    },
+    {
+      "name": "TRANSLATION_REVIEW.json",
+      "bytes": 18088,
+      "sha256": "df43d5c1077846df00c0e8ee5b5327b2c6336752177be489ddd8d1f7e5a01fae"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED.json",
+      "bytes": 10872,
+      "sha256": "cc03f72cf75a0ea4b3a8091e27e8d30ede1adaf94613414826a3af34dadeba5f"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED_BASELINE.json",
+      "bytes": 5335,
+      "sha256": "348dfecdf54dd2b265cbd281dd3bceaf4df85750880b9673c248b994808f3c31"
+    },
+    {
+      "name": "VOICE_RELEASE_QA.json",
+      "bytes": 4636,
+      "sha256": "49e9795d9cac1f919ebb44bbc64a626aacc87d0d7de06283b0903fbe7c9ea76d"
+    }
+  ]
+}

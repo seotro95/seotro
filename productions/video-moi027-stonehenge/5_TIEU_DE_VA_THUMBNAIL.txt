@@ -1,0 +1,30 @@
+MỚI-027 — STONEHENGE — 5 TIÊU ĐỀ VÀ 5 PROMPT THUMBNAIL
+
+Tiêu đề tiếng Anh cho video chính, kèm nghĩa tiếng Việt. Hình phục dựng/mô hình chỉ minh họa. Tạo ảnh không chữ, thêm chữ tùy chọn trong editor sau. Không trẻ em, không ảnh nhà khoa học hoặc phòng thí nghiệm.
+
+1. STONEHENGE: THREE MYSTERIES INSIDE ONE MONUMENT
+Tiếng Việt: Stonehenge: ba câu hỏi trong một công trình.
+Prompt: Create a cinematic 16:9 YouTube archaeology thumbnail, 1280x720 composition. One large Stonehenge-inspired trilithon on open chalk grassland dominates the right side, while a rough source boulder and a short timber-sledge section with plant-fibre rope occupy the left foreground. Three large readable forms, golden natural side-light, muted chalk and grass palette, believable stone weight and proportions. Keep the trilithon fully supported, no floating blocks. This is an illustrative Neolithic construction comparison, not an exact recovered plan or authentic archaeological photograph. No people, children, Roman columns, armor, metal machines, laboratory, text, arrows, logos or watermarks. Leave a quiet area for optional editor-added wording.
+Chữ tùy chọn: SOURCE. ROUTE. RAISE.
+
+2. WHERE DID STONEHENGE'S GIANT STONES COME FROM?
+Tiếng Việt: Những khối đá lớn của Stonehenge đến từ đâu?
+Prompt: Design a striking 16:9 documentary thumbnail with one massive pale sarsen boulder in a southern English woodland-inspired foreground and a smaller Stonehenge-inspired stone setting far beyond an open valley. Use a clear scale contrast and a narrow band of warm light linking rock texture with the distant landscape. The woodland scene is illustrative, not an identified prehistoric extraction pit, and the image must not imply all Stonehenge stones share this source. Rich natural stone detail, restrained green and ochre, one clear visual question readable on mobile. No exact route line, quarry machinery, people, children, fantasy structures, scientists, labels, text, logos or watermarks.
+Chữ tùy chọn: FOLLOW THE STONE
+
+3. THE HARDEST PART OF MOVING STONEHENGE
+Tiếng Việt: Phần khó nhất khi di chuyển đá Stonehenge.
+Prompt: Create a compelling 16:9 archaeology-engineering thumbnail at ground level: a secured rough stone replica on a simple timber sledge sits immediately before uneven ground and a modest stream bank. Stationary timber sleepers, taut plant-fibre rope and realistic runner contact are clearly visible. Keep the load stable and well back from the water edge; no dangerous action or unsupported people. Strong low natural light reveals friction, weight and terrain. This is a hypothetical Neolithic transport reconstruction, not proof of a single route or exact original device. No people, children, rolling wheels, engines, Roman clothing, glowing effects, modern laboratory, numbers, text, logos or watermarks.
+Chữ tùy chọn: THE GROUND MATTERS
+
+4. HOW COULD THEY RAISE STONEHENGE'S LINTELS?
+Tiếng Việt: Người xưa có thể nâng đá ngang Stonehenge bằng cách nào?
+Prompt: Produce a cinematic 16:9 historical-science thumbnail showing a modest Stonehenge-inspired lintel replica resting securely on substantial alternating timber crib supports outdoors, with two already-standing upright teaching replicas behind it. The stone must remain fully supported, not suspended or magically rising. Use an oblique view that makes the proposed temporary support system clear, tactile timber, natural chalk ground and late-afternoon light. This is an explanatory reconstruction of a proposed method, never a claim that this exact timber machine was excavated. No people below the load, no people or children elsewhere, crane, powered winch, Roman architecture, laboratory, diagrams, text, logos or watermarks.
+Chữ tùy chọn: KEEP THE SUPPORTS
+
+5. STONEHENGE'S ALTAR STONE CHANGED THE MAP
+Tiếng Việt: Altar Stone của Stonehenge đã thay đổi bản đồ ra sao?
+Prompt: Create a sophisticated 16:9 archaeology thumbnail with one large pale-greenish sandstone teaching replica in the foreground and a clearly tactile relief model of Great Britain behind it. Give northeast mainland Scotland and southern England two subtle natural lighting accents, without labels, arrows, exact source pins or a confirmed connecting route. Keep the sandstone distinct from dark dolerite; no invented altar ritual, vertical standing position or golden monument. This is an illustrative regional comparison, not an actual geological map or measured provenance dataset. Strong readable geometry, soft outdoor light, no people, children, laboratory, scientists, text, logos or watermarks.
+Chữ tùy chọn: ORIGIN ≠ ROUTE
+
+Ưu tiên thử tiêu đề 1/thumbnail 1 hoặc tiêu đề 3/thumbnail 3. Chưa có dữ liệu CTR, không cam kết hiệu suất. Không dùng người ngoài hành tinh, “khoa học che giấu”, một mẹo giải toàn bộ Stonehenge, tuyến Scotland/biển/băng như sự kiện đã xác nhận hoặc bản phục dựng như ảnh khảo cổ thật.
