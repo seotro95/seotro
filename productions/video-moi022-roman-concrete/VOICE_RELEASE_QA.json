@@ -1,0 +1,150 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-022",
+  "voices": 16,
+  "male_voices": 16,
+  "all_decoded_seconds": 1282,
+  "all_decoded_frames_48000": 61536000,
+  "all_current_episode_ids_locked": true,
+  "previous_voice_ids_retained": 16,
+  "voice_changes": [],
+  "vietnamese_voice_id": "vi-VN-NamMinhNeural",
+  "unique_audio_hashes": 16,
+  "english_cue_count": 129,
+  "other_language_chapter_count": 13,
+  "word_metadata_checked": true,
+  "english_word_boundary_split_checked": true,
+  "pitch_shift_applied": false,
+  "independent_native_listening_review": false,
+  "translated_voice_alignment": "13 shared chapter boundaries, not word-by-word synchronization",
+  "reports": {
+    "en-US": {
+      "voice_id": "en-US-AndrewNeural",
+      "filename": "ROMAN_MOI022_My_Tieng_Anh.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 0.7933180894308943,
+      "max_tempo": 1.4570630081300813,
+      "word_accents": 79
+    },
+    "ja-JP": {
+      "voice_id": "ja-JP-KeitaNeural",
+      "filename": "ROMAN_MOI022_Nhat_Ban.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.3324519230769232,
+      "max_tempo": 1.6009615384615385,
+      "word_accents": 33
+    },
+    "vi-VN": {
+      "voice_id": "vi-VN-NamMinhNeural",
+      "filename": "ROMAN_MOI022_Viet_Nam_Nam_Minh.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 0.9413461538461537,
+      "max_tempo": 1.0492788461538463,
+      "word_accents": 48
+    },
+    "sv-SE": {
+      "voice_id": "sv-SE-MattiasNeural",
+      "filename": "ROMAN_MOI022_Thuy_Dien.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.3783653846153847,
+      "max_tempo": 1.5894230769230768,
+      "word_accents": 50
+    },
+    "pt-PT": {
+      "voice_id": "pt-PT-DuarteNeural",
+      "filename": "ROMAN_MOI022_Bo_Dao_Nha.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.0591346153846153,
+      "max_tempo": 1.198076923076923,
+      "word_accents": 54
+    },
+    "es-ES": {
+      "voice_id": "es-ES-AlvaroNeural",
+      "filename": "ROMAN_MOI022_Tay_Ban_Nha.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.2264423076923077,
+      "max_tempo": 1.3992788461538461,
+      "word_accents": 57
+    },
+    "de-DE": {
+      "voice_id": "de-DE-ChristophNeural",
+      "filename": "ROMAN_MOI022_Duc.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.3052884615384615,
+      "max_tempo": 1.4814903846153846,
+      "word_accents": 47
+    },
+    "fi-FI": {
+      "voice_id": "fi-FI-HarriNeural",
+      "filename": "ROMAN_MOI022_Phan_Lan.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.2567307692307692,
+      "max_tempo": 1.4538461538461536,
+      "word_accents": 41
+    },
+    "pl-PL": {
+      "voice_id": "pl-PL-MarekNeural",
+      "filename": "ROMAN_MOI022_Ba_Lan.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.1180288461538461,
+      "max_tempo": 1.3081730769230768,
+      "word_accents": 28
+    },
+    "fr-FR": {
+      "voice_id": "fr-FR-HenriNeural",
+      "filename": "ROMAN_MOI022_Phap.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.1161057692307692,
+      "max_tempo": 1.3007211538461538,
+      "word_accents": 43
+    },
+    "nb-NO": {
+      "voice_id": "nb-NO-FinnNeural",
+      "filename": "ROMAN_MOI022_Na_Uy.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.1341346153846152,
+      "max_tempo": 1.3247596153846155,
+      "word_accents": 51
+    },
+    "cs-CZ": {
+      "voice_id": "cs-CZ-AntoninNeural",
+      "filename": "ROMAN_MOI022_Sec.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.1033653846153846,
+      "max_tempo": 1.244951923076923,
+      "word_accents": 27
+    },
+    "nl-NL": {
+      "voice_id": "nl-NL-MaartenNeural",
+      "filename": "ROMAN_MOI022_Ha_Lan.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.1834134615384615,
+      "max_tempo": 1.3459134615384616,
+      "word_accents": 54
+    },
+    "it-IT": {
+      "voice_id": "it-IT-DiegoNeural",
+      "filename": "ROMAN_MOI022_Y.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.3338942307692305,
+      "max_tempo": 1.5103365384615384,
+      "word_accents": 30
+    },
+    "ko-KR": {
+      "voice_id": "ko-KR-InJoonNeural",
+      "filename": "ROMAN_MOI022_Han_Quoc.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.310096153846154,
+      "max_tempo": 1.5394230769230768,
+      "word_accents": 49
+    },
+    "da-DK": {
+      "voice_id": "da-DK-JeppeNeural",
+      "filename": "ROMAN_MOI022_Dan_Mach.mp3",
+      "decoded_seconds": 1282.0,
+      "min_tempo": 1.1492788461538461,
+      "max_tempo": 1.3591346153846153,
+      "word_accents": 52
+    }
+  }
+}

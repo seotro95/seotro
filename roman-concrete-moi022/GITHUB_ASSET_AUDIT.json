@@ -1,0 +1,355 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-11-17 07:34:22 UTC",
+  "release_id": 448255449,
+  "assets": [
+    {
+      "name": "5_TIEU_DE_VA_THUMBNAIL.txt",
+      "size": 5505,
+      "digest": "sha256:338b2e2ea28cd6378fbc11a4b2d59ce734a0e2b31a21997cd075f846497bbcd2",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/5_TIEU_DE_VA_THUMBNAIL.txt"
+    },
+    {
+      "name": "AUDIO_MANIFEST.json",
+      "size": 7620,
+      "digest": "sha256:064c11ea05950710fe4e173304233d541f066bf470307997888741fc3a6223fc",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/AUDIO_MANIFEST.json"
+    },
+    {
+      "name": "BACKUP_137_140.json",
+      "size": 8995,
+      "digest": "sha256:e439408f7c927138396531bcc8f7ed6a6f28ace9f6819c9c6e0c09c4ad76bd61",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/BACKUP_137_140.json"
+    },
+    {
+      "name": "DOCUMENT_ASSET_MANIFEST.json",
+      "size": 9134,
+      "digest": "sha256:6c54158e7cf72455de3dcd9ce5e71e982855647bcb06c415f0c9015ad432f610",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/DOCUMENT_ASSET_MANIFEST.json"
+    },
+    {
+      "name": "DOCUMENT_DELIVERY_STATE.json",
+      "size": 94,
+      "digest": "sha256:fca1d96602523f373531f96203f4df9d391a8b3ee4e5e38f28836d6cc0421237",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/DOCUMENT_DELIVERY_STATE.json"
+    },
+    {
+      "name": "DOCUMENT_QA.json",
+      "size": 1287,
+      "digest": "sha256:8e6f70f4234bf83363931ff5448e0a310e3d3fdb705d22cc9ac8969ae8fc243d",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/DOCUMENT_QA.json"
+    },
+    {
+      "name": "DOWNLOAD_LINKS.md",
+      "size": 6198,
+      "digest": "sha256:a5b90e33888e8ceb2ba0d3bfdf95233ed8e478c970f9326d20a56fefc54561a8",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/DOWNLOAD_LINKS.md"
+    },
+    {
+      "name": "en-US.srt",
+      "size": 27271,
+      "digest": "sha256:c16ebb0362064adcca019e50c2ebaa819258826d2bc5f48b1dd14365424080e7",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/en-US.srt"
+    },
+    {
+      "name": "HISTORICAL_VISUAL_REVISION_QA.json",
+      "size": 2345,
+      "digest": "sha256:40776b956786f703abeb95ef5d9f8148ee65cac8572907b35000b4f1ce74efcf",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/HISTORICAL_VISUAL_REVISION_QA.json"
+    },
+    {
+      "name": "HUONG_DAN_SU_DUNG.txt",
+      "size": 3080,
+      "digest": "sha256:58d57295c8de9b2e8911f94fa947a82ba371b2753e608e551993a9ceffdf9723",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/HUONG_DAN_SU_DUNG.txt"
+    },
+    {
+      "name": "KICH_BAN_EN_21m22s.txt",
+      "size": 22993,
+      "digest": "sha256:20611453bfb6da7be0468b9563d26be9aa9b4644993f5a461b6242da0ba45eea",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/KICH_BAN_EN_21m22s.txt"
+    },
+    {
+      "name": "KICH_BAN_EN_CO_MOC.txt",
+      "size": 27637,
+      "digest": "sha256:ba7924f408874c3cdb3a8ed9de70e782aa11f123b3b6d694ed0cf73ff74e6161",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/KICH_BAN_EN_CO_MOC.txt"
+    },
+    {
+      "name": "LINK_TAI_VOICE.txt",
+      "size": 1966,
+      "digest": "sha256:b4e5594d20bd6fda17122e147018b70bc9ed98d747bc7ee84382ca150ff3ca85",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/LINK_TAI_VOICE.txt"
+    },
+    {
+      "name": "NARRATION_STYLE_LOCKED.json",
+      "size": 672,
+      "digest": "sha256:a8099fc051998b514509a347357dae2c373272a3df273f412fc6e50a02421b27",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/NARRATION_STYLE_LOCKED.json"
+    },
+    {
+      "name": "NGUON_KIEM_CHUNG.md",
+      "size": 8073,
+      "digest": "sha256:919723b34554e83cf544531d665226c8466ee8fa21edb517122226f75d3cfd5a",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/NGUON_KIEM_CHUNG.md"
+    },
+    {
+      "name": "OPENING_10_SHOTS_30s.json",
+      "size": 24209,
+      "digest": "sha256:549dd9978f9d2ac816113cce0db018b886f4fcb696ac36fb20e1f328e59d9c1b",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/OPENING_10_SHOTS_30s.json"
+    },
+    {
+      "name": "PHAN_TICH_VA_KE_HOACH_DUNG.md",
+      "size": 6472,
+      "digest": "sha256:5e519d7cec0b6162ab78a15b14b3e7c9fa6af4662d2794bdf8e49541cfe1499a",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PHAN_TICH_VA_KE_HOACH_DUNG.md"
+    },
+    {
+      "name": "PRODUCTION_STEPS_APPLIED.md",
+      "size": 2746,
+      "digest": "sha256:3fc2633a0bb39667d175d410de7a2ccd4c564dfd4eb67e903002cd1039443a77",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PRODUCTION_STEPS_APPLIED.md"
+    },
+    {
+      "name": "PROMPT_01_001-010.txt",
+      "size": 16929,
+      "digest": "sha256:2c2135021c4628d99dce7e7efe77efc43c4a027bb98d96dfb798a9a42a634f6d",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PROMPT_01_001-010.txt"
+    },
+    {
+      "name": "PROMPT_02_011-020.txt",
+      "size": 17092,
+      "digest": "sha256:52f901f7ebead3ef0ee847086568954bcb16f2c478cd32efc0e204a75f75a8ae",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PROMPT_02_011-020.txt"
+    },
+    {
+      "name": "PROMPT_03_021-030.txt",
+      "size": 17143,
+      "digest": "sha256:ddfeddfee64080afd1b38131ce7e63e3aaa4f7e6b9611eb728e530612c55afc9",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PROMPT_03_021-030.txt"
+    },
+    {
+      "name": "PROMPT_04_031-040.txt",
+      "size": 17098,
+      "digest": "sha256:d2f07814b92d84957007d4eb8004abae7c2fa54ff79c3d782680dc6b78f999b2",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PROMPT_04_031-040.txt"
+    },
+    {
+      "name": "PROMPT_05_041-050.txt",
+      "size": 17118,
+      "digest": "sha256:79e372e8b70ce70904fbfa7d2f5fcb0f766f69e7bef3a289e5e08ea1d1420f8e",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PROMPT_05_041-050.txt"
+    },
+    {
+      "name": "PROMPT_06_051-060.txt",
+      "size": 17291,
+      "digest": "sha256:9d2bdc791eb9aef0bf9d4856a278fafbcaf5b049ae2b841b477efe93117042f0",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PROMPT_06_051-060.txt"
+    },
+    {
+      "name": "PROMPT_07_061-070.txt",
+      "size": 17232,
+      "digest": "sha256:45eeffad8d39397967de6db7e38e0f2e83622bdf8f3e92da5f9da14571f1ddba",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PROMPT_07_061-070.txt"
+    },
+    {
+      "name": "PROMPT_08_071-080.txt",
+      "size": 17130,
+      "digest": "sha256:7d655ee80118634cd6d7a81c32cf71bcc9b6b18872406a314cd0684eb5aeb259",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PROMPT_08_071-080.txt"
+    },
+    {
+      "name": "PROMPT_09_081-090.txt",
+      "size": 17169,
+      "digest": "sha256:5608f05795d4fb41f952f667727d184647e2d9a837aecb16b2c3fa0476f31657",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PROMPT_09_081-090.txt"
+    },
+    {
+      "name": "PROMPT_10_091-100.txt",
+      "size": 17154,
+      "digest": "sha256:ab037654d6194c085d44d0ce88a56240851b490e5ea0f1ae793b98332ac219c9",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PROMPT_10_091-100.txt"
+    },
+    {
+      "name": "PROMPT_11_101-110.txt",
+      "size": 17205,
+      "digest": "sha256:bba385b5d82a43857715cd0306ab1a437ac9e6d84e70d45df796d4ce2d84ca6b",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PROMPT_11_101-110.txt"
+    },
+    {
+      "name": "PROMPT_12_111-120.txt",
+      "size": 17221,
+      "digest": "sha256:30f3dffd7eb7a3247070e661e5f742ba9e3eaac3073d4ab58f02cde8e15e6b0e",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PROMPT_12_111-120.txt"
+    },
+    {
+      "name": "PROMPT_13_121-130.txt",
+      "size": 17226,
+      "digest": "sha256:d4eed668b1c7c628ac91174c5114ac883f2e4dda7adda5f30aecba66732ab589",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PROMPT_13_121-130.txt"
+    },
+    {
+      "name": "PROMPT_14_131-140.txt",
+      "size": 17103,
+      "digest": "sha256:2d63745969cb8d5b8aac30ff55f5de23a84371169196c135b04a8087e8061d79",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/PROMPT_14_131-140.txt"
+    },
+    {
+      "name": "README.md",
+      "size": 6198,
+      "digest": "sha256:a5b90e33888e8ceb2ba0d3bfdf95233ed8e478c970f9326d20a56fefc54561a8",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/README.md"
+    },
+    {
+      "name": "ROMAN_MOI022_16_VOICES_21m22s.zip",
+      "size": 246180826,
+      "digest": "sha256:23d7492104fb6495d3fa336a5620ac76723fa89b6792474266ba1e9ab1cbe416",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_16_VOICES_21m22s.zip"
+    },
+    {
+      "name": "ROMAN_MOI022_Ba_Lan.mp3",
+      "size": 15384716,
+      "digest": "sha256:035077fc89fcaccbf7aa518a068ec7d534c1b64fa16220e4ff5a2f4ad8e3499c",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Ba_Lan.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_Bo_Dao_Nha.mp3",
+      "size": 15384716,
+      "digest": "sha256:3e84e7365c0b4662d5d7ade70fbedb70aa073500c7a01856e6241f9f345e698a",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Bo_Dao_Nha.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_Dan_Mach.mp3",
+      "size": 15384716,
+      "digest": "sha256:c4aabfa3f34dd9d75930504a591b91072919164604ca0e631f266fccbe508d2f",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Dan_Mach.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_Duc.mp3",
+      "size": 15384716,
+      "digest": "sha256:2c331222bc906b44e84dbf672550ba3c42e40a5482040859b32f5499c07bbaef",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Duc.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_Han_Quoc.mp3",
+      "size": 15384716,
+      "digest": "sha256:73ca18aa020aecb5a7b7fc6fc8e1cdf31189f4a026ab96c447a02f55d1f1f1c5",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Han_Quoc.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_Ha_Lan.mp3",
+      "size": 15384716,
+      "digest": "sha256:ed1d05c223f5369c8be5e00073e040b14cfc882443011fe018a77c631aaf32b1",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Ha_Lan.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_My_Tieng_Anh.mp3",
+      "size": 15384716,
+      "digest": "sha256:1a294e10383b10182e86466e3647f6f6bca2dd774cf59876f691452673bb9e4c",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_My_Tieng_Anh.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_Na_Uy.mp3",
+      "size": 15384716,
+      "digest": "sha256:12774a00988b0c281e6579af166003e0917a8e178fab39c231460fab57c09edc",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Na_Uy.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_Nhat_Ban.mp3",
+      "size": 15384716,
+      "digest": "sha256:69b6d4c291e27f793858960fa9e89a59997b126c5d9ef332f66ebf28ef6c27d5",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Nhat_Ban.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_Phan_Lan.mp3",
+      "size": 15384716,
+      "digest": "sha256:dd7526cc985088dcdb79c56381ff8ff7cc301aa64cffe832b4d9c20e4f83dcfe",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Phan_Lan.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_Phap.mp3",
+      "size": 15384716,
+      "digest": "sha256:83c9237908d68b2a236f31ae3a3f8f32b166abb9fd54289d94b5b837946a36dd",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Phap.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_PROMPT_LICH_SU_14_TXT.zip",
+      "size": 28778,
+      "digest": "sha256:27106dabd98cb7fed5b813e6b21c475dc279b01a9ab307bf29ce20ed266944d9",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_PROMPT_LICH_SU_14_TXT.zip"
+    },
+    {
+      "name": "ROMAN_MOI022_Sec.mp3",
+      "size": 15384716,
+      "digest": "sha256:d3924901a48d49f68333e574aa7845917cbdb12624f23161cc31fc8d1f2a9434",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Sec.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_TAI_LIEU_21m22s.zip",
+      "size": 541830,
+      "digest": "sha256:2e35ec1e3b0d5df0f363b014e13db7ad1141e74cc31b983c30d0ccc97c96d402",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_TAI_LIEU_21m22s.zip"
+    },
+    {
+      "name": "ROMAN_MOI022_Tay_Ban_Nha.mp3",
+      "size": 15384716,
+      "digest": "sha256:62f140584b31d14dabc90427ca5b0420c0eb108784f02c1ea91f231d938301c2",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Tay_Ban_Nha.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_Thuy_Dien.mp3",
+      "size": 15384716,
+      "digest": "sha256:60d809c991e2291502ad8df111522b583a237cf54c052f0ade332a0e9388e868",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Thuy_Dien.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_Viet_Nam_Nam_Minh.mp3",
+      "size": 15384716,
+      "digest": "sha256:b9cdb0250679f9f237a6d04504c2111cc9758ba28a81a91f87a152348f7d36b3",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Viet_Nam_Nam_Minh.mp3"
+    },
+    {
+      "name": "ROMAN_MOI022_Y.mp3",
+      "size": 15384716,
+      "digest": "sha256:8dcca6e385b37cf9bbf5f795a4bdf328c0cbd9f50fd76790cba370d43791322b",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Y.mp3"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "size": 5148,
+      "digest": "sha256:1e778e7108c009372b6894aea1b0b884bc9db0501c1b28bfc14e337ea497399a",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/SHA256SUMS.txt"
+    },
+    {
+      "name": "TIMELINE_136_CANH.csv",
+      "size": 291434,
+      "digest": "sha256:564bfe7942b7abf965db030d6064f06919e43c7412dafc6866c8d749dcb3f8ec",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/TIMELINE_136_CANH.csv"
+    },
+    {
+      "name": "TRANSLATION_REVIEW.json",
+      "size": 11227,
+      "digest": "sha256:a1f4a03396f8f649dcbd863e55a3f9c8d1e6b6b9d07d0268c29bd90ce97d9ebb",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/TRANSLATION_REVIEW.json"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED.json",
+      "size": 10783,
+      "digest": "sha256:7ad5dd0a65f61ff1502ee43f55cde79f651f10cac1dfd4ce1041dbce7a74a745",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/VOICE_PROFILES_LOCKED.json"
+    },
+    {
+      "name": "VOICE_PROFILES_LOCKED_BASELINE.json",
+      "size": 5326,
+      "digest": "sha256:2e4f280319cf3d0d66f24689a6e90400d488f4682f147a05f2d99a8cdb9038ba",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/VOICE_PROFILES_LOCKED_BASELINE.json"
+    },
+    {
+      "name": "VOICE_RELEASE_QA.json",
+      "size": 4587,
+      "digest": "sha256:7cee87560484cd6bb29d7e6748312e8f1d466cace8dcc0d21a5b9531515f3a4f",
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/VOICE_RELEASE_QA.json"
+    }
+  ]
+}

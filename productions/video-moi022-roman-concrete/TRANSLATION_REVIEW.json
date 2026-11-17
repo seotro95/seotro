@@ -1,0 +1,412 @@
+{
+  "topic_id": "MOI-022",
+  "independent_native_review": false,
+  "independent_native_listening_review": false,
+  "source_adaptation": "Full 13 English chapters retained in order; ambiguous material-science terms clarified for automated translation. Vietnamese independently rewritten by assistant with repeated transitions condensed.",
+  "assistant_review_scope": "Full Vietnamese rewrite; all languages terminology/date and selected critical passage review, particularly chapters 4, 6, 7, 10 and closing; full-script five-word English leak scan; no independent native editorial or listening review.",
+  "rejected_initial_draft_issues": [
+    "outlet translated as electrical outlet or shop",
+    "wet/dry cycling translated as cycling a bicycle",
+    "dry material piles translated as stakes",
+    "mineral deposits translated as ore deposit",
+    "material strength translated as bodily strength",
+    "Japanese ingredients translated as food ingredients",
+    "Danish and Norwegian incorrect quicklime words"
+  ],
+  "locales": {
+    "vi-VN": {
+      "locale": "vi-VN",
+      "chapters": 13,
+      "assistant_full_rewrite": true,
+      "targeted_edits": [],
+      "independent_native_review": false
+    },
+    "es-ES": {
+      "locale": "es-ES",
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 7,
+          "old": "pruebas de pruebas mecánicas del material",
+          "new": "resultados de ensayos mecánicos del material"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "fr-FR": {
+      "locale": "fr-FR",
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 10,
+          "old": "Il reliait des tas secs d'ingrédients",
+          "new": "Les chercheurs ont étudié des tas de matières sèches"
+        },
+        {
+          "chapter": 13,
+          "old": "L'enquête se poursuit.",
+          "new": "La recherche se poursuit."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "ja-JP": {
+      "locale": "ja-JP",
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 1,
+          "old": "鉱物石灰",
+          "new": "石灰"
+        },
+        {
+          "chapter": 4,
+          "old": "鉱物石灰",
+          "new": "石灰"
+        },
+        {
+          "chapter": 4,
+          "old": "白いインクルージョン",
+          "new": "白い鉱物粒子"
+        },
+        {
+          "chapter": 5,
+          "old": "食材",
+          "new": "原料"
+        },
+        {
+          "chapter": 6,
+          "old": "ローマのレシピ",
+          "new": "ローマの配合"
+        },
+        {
+          "chapter": 7,
+          "old": "鉱物石灰",
+          "new": "石灰"
+        },
+        {
+          "chapter": 7,
+          "old": "落下が起こり",
+          "new": "水滴が落ち"
+        },
+        {
+          "chapter": 7,
+          "old": "実験では、石灰材料に由来する鉱物粒子を含む流れの減少が報告されましたが、対照標本は異なる挙動を示しました。",
+          "new": "実験では、石灰由来の鉱物粒子を含む試料を通る水の流量が減少し、対照試料とは異なる挙動を示しました。"
+        },
+        {
+          "chapter": 9,
+          "old": "鉱物石灰",
+          "new": "石灰"
+        },
+        {
+          "chapter": 10,
+          "old": "食材",
+          "new": "原料"
+        },
+        {
+          "chapter": 13,
+          "old": "小さな内包物",
+          "new": "小さな鉱物粒子"
+        },
+        {
+          "chapter": 13,
+          "old": "放水管",
+          "new": "排水チューブ"
+        },
+        {
+          "chapter": 13,
+          "old": "捜査は続いている。",
+          "new": "探究は続きます。"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "ko-KR": {
+      "locale": "ko-KR",
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 2,
+          "old": "미네랄 석회",
+          "new": "석회"
+        },
+        {
+          "chapter": 3,
+          "old": "미네랄 석회",
+          "new": "석회"
+        },
+        {
+          "chapter": 4,
+          "old": "미네랄 석회",
+          "new": "석회"
+        },
+        {
+          "chapter": 4,
+          "old": "별도로 소석회합니다",
+          "new": "별도로 물과 반응시켜 소석회로 만듭니다"
+        },
+        {
+          "chapter": 4,
+          "old": "이미 소석회된 석회",
+          "new": "이미 소화된 석회"
+        },
+        {
+          "chapter": 4,
+          "old": "결의 주변",
+          "new": "입자 주변"
+        },
+        {
+          "chapter": 4,
+          "old": "동일한 결의 중심",
+          "new": "같은 입자의 중심부"
+        },
+        {
+          "chapter": 6,
+          "old": "미네랄 석회",
+          "new": "석회"
+        },
+        {
+          "chapter": 6,
+          "old": "로마 요리법",
+          "new": "로마 배합법"
+        },
+        {
+          "chapter": 7,
+          "old": "광물 석회",
+          "new": "석회"
+        },
+        {
+          "chapter": 7,
+          "old": "단순히 물 공급이 중단된 집수 용기",
+          "new": "단순히 물이 더 이상 모이지 않는 집수 용기"
+        },
+        {
+          "chapter": 9,
+          "old": "미네랄 석회",
+          "new": "석회"
+        },
+        {
+          "chapter": 10,
+          "old": "CE 79년",
+          "new": "서기 79년"
+        },
+        {
+          "chapter": 13,
+          "old": "자료에 대해 어떤 이야기",
+          "new": "재료에 대해 어떤 이야기"
+        },
+        {
+          "chapter": 13,
+          "old": "조사는 계속됩니다.",
+          "new": "탐구는 계속됩니다."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "de-DE": {
+      "locale": "de-DE",
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 7,
+          "old": "Das reparierte Wort",
+          "new": "Der Begriff repariert"
+        },
+        {
+          "chapter": 13,
+          "old": "Die Ermittlungen dauern an.",
+          "new": "Die Forschung geht weiter."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "it-IT": {
+      "locale": "it-IT",
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 6,
+          "old": "polimerizzati",
+          "new": "lasciati maturare"
+        },
+        {
+          "chapter": 12,
+          "old": "polimerizzazione",
+          "new": "maturazione"
+        },
+        {
+          "chapter": 13,
+          "old": "L'indagine continua.",
+          "new": "La ricerca continua."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "pt-PT": {
+      "locale": "pt-PT",
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 7,
+          "old": "estágio de cura de fluxo contínuo",
+          "new": "fase de preenchimento de fissuras com fluxo contínuo"
+        },
+        {
+          "chapter": 7,
+          "old": "evidências de testes mecânicos",
+          "new": "resultados de ensaios mecânicos"
+        },
+        {
+          "chapter": 10,
+          "old": "fragmentos de cal misturados com material vulcânico seco",
+          "new": "fragmentos de cal viva misturados com material vulcânico seco"
+        },
+        {
+          "chapter": 10,
+          "old": "79 d.C., interrompeu",
+          "new": "79 d.C. interrompeu"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "nl-NL": {
+      "locale": "nl-NL",
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 10,
+          "old": "waardoor archeologen materiaal achterlieten van werk dat nog niet was voltooid",
+          "new": "waardoor materiaal van onafgemaakte werkzaamheden voor archeologen bewaard bleef"
+        }
+      ],
+      "independent_native_review": false
+    },
+    "pl-PL": {
+      "locale": "pl-PL",
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 13,
+          "old": "Dochodzenie trwa.",
+          "new": "Badania trwają."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "sv-SE": {
+      "locale": "sv-SE",
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 13,
+          "old": "Watch the water discharge tube once more.",
+          "new": "Titta på röret där vattnet rinner ut en gång till."
+        },
+        {
+          "chapter": 13,
+          "old": "Utredningen fortsätter.",
+          "new": "Undersökningen fortsätter."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "da-DK": {
+      "locale": "da-DK",
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "Blød kalk",
+          "new": "Brændt kalk"
+        },
+        {
+          "chapter": 12,
+          "old": "Blød kalk",
+          "new": "Brændt kalk"
+        },
+        {
+          "chapter": 13,
+          "old": "Efterforskningen fortsætter.",
+          "new": "Undersøgelsen fortsætter."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "fi-FI": {
+      "locale": "fi-FI",
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 6,
+          "old": "paranemisvaihe",
+          "new": "halkeamien tiivistymisvaihe"
+        },
+        {
+          "chapter": 7,
+          "old": "paranemisvaihe",
+          "new": "halkeamien tiivistymisvaihe"
+        },
+        {
+          "chapter": 13,
+          "old": "Tutkinta jatkuu.",
+          "new": "Tutkimus jatkuu."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "nb-NO": {
+      "locale": "nb-NO",
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 4,
+          "old": "Blekkkalk",
+          "new": "Brent kalk"
+        },
+        {
+          "chapter": 12,
+          "old": "Blekkkalk",
+          "new": "Brent kalk"
+        },
+        {
+          "chapter": 13,
+          "old": "Etterforskningen fortsetter.",
+          "new": "Undersøkelsen fortsetter."
+        }
+      ],
+      "independent_native_review": false
+    },
+    "cs-CZ": {
+      "locale": "cs-CZ",
+      "chapters": 13,
+      "assistant_full_rewrite": false,
+      "targeted_edits": [
+        {
+          "chapter": 10,
+          "old": "79 nl",
+          "new": "79 našeho letopočtu"
+        },
+        {
+          "chapter": 13,
+          "old": "Vyšetřování pokračuje.",
+          "new": "Výzkum pokračuje."
+        }
+      ],
+      "independent_native_review": false
+    }
+  }
+}

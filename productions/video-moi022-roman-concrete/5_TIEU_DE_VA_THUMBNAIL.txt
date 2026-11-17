@@ -1,0 +1,32 @@
+MỚI-022 — BÊ TÔNG LA MÃ — 5 TIÊU ĐỀ VÀ 5 PROMPT THUMBNAIL
+
+Tiêu đề tiếng Anh cho video chính, kèm nghĩa tiếng Việt. Hình là minh họa; không phải ảnh nghiên cứu gốc hoặc kết quả đo thật. Tạo ảnh chưa có chữ, thêm chữ tùy chọn bằng editor sau.
+
+1. CAN ROMAN CONCRETE REALLY HEAL A CRACK?
+Tiếng Việt: Bê tông La Mã có thật sự tự hàn vết nứt?
+Prompt: Create a cinematic 16:9 YouTube science-documentary thumbnail, 1280x720 composition. One large tactile illustrative mortar cross-section fills the frame, with a narrow fixed fissure crossing a single porous off-white lime-derived inclusion. A small water droplet near the fissure creates the central question. Keep the opposing crack faces separated; show only a restrained pale mineral deposit occupying part of the gap, never a magically rebuilt block. Strong Mediterranean side-light, warm gray mineral texture against deep charcoal, simple large shapes readable on a phone. This is a conceptual teaching reconstruction, not an authenticated ancient specimen or microscope image. No people, children, faces, glowing energy, gold, text, labels, logos or watermarks. Leave quiet negative space for optional editor-added wording.
+Chữ tùy chọn: CAN IT HEAL?
+
+2. THE WHITE GRAINS INSIDE ROMAN CONCRETE
+Tiếng Việt: Những hạt trắng bên trong bê tông La Mã.
+Prompt: Design a striking 16:9 archaeology-and-materials-science thumbnail with one pale porous mineral inclusion dominating a freshly cut illustrative mortar slab. Darker fine binder and two angular stone fragments provide scale and contrast. Use a close oblique macro composition, one warm grazing light and soft cool shadows; the pale grain should look mineral, never luminous. Add a small Roman rubble-wall teaching model far in the background, clearly secondary and softly focused. Do not imply that all white grains are unchanged quicklime or that this is an actual archaeological sample. No magnifying-circle graphic, arrows, readable writing, people, children, fantasy monuments, logos or watermarks.
+Chữ tùy chọn: LOOK INSIDE
+
+3. THE ROMAN CONCRETE EXPERIMENT: WHAT STOPPED THE WATER?
+Tiếng Việt: Thí nghiệm bê tông La Mã: điều gì chặn dòng nước?
+Prompt: Create a compelling 16:9 YouTube historical-science documentary thumbnail, 1280x720 composition. Show one large conceptual Roman-inspired mortar cutaway on a rough stone ledge, with a fixed irregular fissure: a little water follows one open branch while static pale mineral precipitate blocks a separate narrow branch. A substantial Roman cistern-wall reconstruction stands softly in the background. Three large readable forms, warm Mediterranean side-light, believable earth and lime textures, no magical instant healing. This is an explanatory illustration of a scientific question, not a photograph of published experimental results and not a claim that ancient Romans performed a modern laboratory test. No scientists, laboratory equipment, pumps, electronic displays, people, children, text, labels, logos or watermarks.
+Chữ tùy chọn: WHY DID IT STOP?
+
+4. POMPEII'S UNFINISHED WALL REVEALS A CONCRETE CLUE
+Tiếng Việt: Bức tường dang dở ở Pompeii hé lộ manh mối về bê tông.
+Prompt: Produce a cinematic 16:9 historical-science thumbnail with a clearly illustrative Pompeian construction-workspace model: one unfinished rubble-and-mortar wall at right and a large foreground dry-material teaching tray containing dark volcanic grains and several pale mineral fragments. Warm Mediterranean daylight, muted terracotta, realistic rough mortar, three large readable forms. The arrangement must look like an explanatory reconstruction rather than an exact archaeological site photograph; do not reproduce a published figure or exact site plan. No eruption, human remains, workers, children, buried gold, fantasy temples, text, labels, logos or watermarks. Emphasize preparation-stage evidence and the unfinished wall.
+Chữ tùy chọn: BEFORE THE WATER
+
+5. A SEALED CRACK ISN'T THE WHOLE STORY
+Tiếng Việt: Một khe đã bịt kín chưa phải toàn bộ câu chuyện.
+Prompt: Create an elegant 16:9 materials-science thumbnail centered on a large transparent-sided physical teaching model of a fixed irregular fissure. A pale mineral deposit blocks one narrow internal bottleneck while wider empty space remains visible behind it. Include one small clear water meniscus stopped at the bottleneck, realistic and restrained. Use a strong oblique cutaway view, crisp mineral texture, dark neutral background and soft directional light, with large simple geometry legible on mobile. This is a conceptual model explaining a measurement limit, not real scan data or proof of restored structural strength. No split-screen catastrophe, rebuilding wall, people, children, text, arrows, numerical graphics, logos or watermarks.
+Chữ tùy chọn: WHAT WAS REPAIRED?
+
+Ưu tiên thử tiêu đề 1/thumbnail 1 hoặc tiêu đề 3/thumbnail 3. Chưa có dữ liệu CTR; không cam kết hiệu suất. Không dùng từ “bất tử”, “tự sửa mọi vết nứt”, “bí mật bị che giấu” hay “xây lại công trình đổ sập”.
+
+Bản hình cập nhật: ưu tiên bối cảnh lịch sử, không nhà khoa học hoặc phòng thí nghiệm. Tiêu đề giữ nguyên; thumbnail 3 dùng mặt cắt minh họa và bể chứa La Mã thay bộ thử hiện đại.

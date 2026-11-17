@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "locale": "en-US",
+  "voice_id": "en-US-AndrewNeural",
+  "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_My_Tieng_Anh.mp3",
+  "seconds": 1282,
+  "decoded_frames_48000": 61536000,
+  "sha256": "1a294e10383b10182e86466e3647f6f6bca2dd774cf59876f691452673bb9e4c",
+  "bytes": 15384716
+}

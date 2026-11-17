@@ -1,0 +1,235 @@
+[
+  {
+    "id": 1,
+    "start": 0,
+    "end": 100,
+    "source_cue_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "voice": "Watch the water beneath this cracked sample. At first, it finds a route straight through. Now imagine that route becoming harder to cross, without anyone applying external repair mortar. Could part of the repair already be inside the material? Some Roman concrete has inspired that question. The answer begins with a white mineral particle and a very narrow gap. We will follow the mineral particle, the water, and the experiment. By the end, a reduction in water leakage will mean something more precise than a building that can never fail. Our starting point is Italy, south of Rome, at ancient Privernum. A weathered wall here supplied material for a study published in 2023 in Science Advances. A surviving wall gives us a place to investigate. It does not, by itself, tell us why the material survived, or how many less fortunate structures disappeared. That is the first trap in this story. We see only the surviving structures. Their impressive age can invite a conclusion before we have examined the construction material that supports the load. Concrete is a composite: larger pieces held together by a binding material. Think of the stones and the material between them as partners with different jobs. Mortar is the finer binding mixture. In Roman construction, mineral lime and reactive ingredients could create a binder around larger fragments, including volcanic stone and broken masonry. That distinction will matter later. A discovery inside mortar can illuminate concrete, but it should not silently turn every ancient wall into the same recipe or experiment. For now, leave the great dome and the harbor behind. Come closer to one cut surface, where a pale inclusion interrupts the darker material around it."
+  },
+  {
+    "id": 2,
+    "start": 100,
+    "end": 200,
+    "source_cue_ids": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "voice": "At a distance, the mineral particle looks like an imperfection. If you expected a perfectly uniform binder, you might describe it as something the mixer failed to distribute. But an uneven appearance is a question, not a diagnosis. A lump may reflect a raw material, a processing step, or a transformation that happened much later. Imagine trying to reconstruct a meal from one cooled crumb. Its color would help, but you would also want its ingredients, internal structure, and the effects of cooking. The same logic applies here. The researchers investigated calcium-rich mineral particles within ancient mortar, asking what their chemistry and structure could reveal about preparation and later reactions. Calling them mineral lime-derived mineral particles is useful shorthand. It does not mean every surviving white particle is still a fresh piece of quicklime waiting unchanged since antiquity. Materials change. Water enters, dissolved substances move, and new minerals can appear. An ancient fragment records a history, not merely a frozen list of starting ingredients. There is another complication: ancient builders worked across many places and centuries. Local stone, volcanic material, purpose, and practice could vary, even under the same imperial name. So our investigation needs a chain of evidence. First, what is inside an ancient sample? Next, how might it have formed? Finally, can a proposed function be tested? This is where the story becomes more interesting than a lost construction recipe. We can investigate a material specimen and design a comparison that might prove us wrong. The comparison will eventually involve a deliberate crack. Before we break anything, however, we must find out why a small white mineral particle deserves a place in that test."
+  },
+  {
+    "id": 3,
+    "start": 200,
+    "end": 300,
+    "source_cue_ids": [
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
+    ],
+    "voice": "A microscope makes a small feature visible. Chemical analysis asks a different question: which elements and mineral phases occupy that feature, its edge, and the surrounding binder? Calcium alone is not an identity card. Different materials can contain it. Knowing where an element is concentrated must be combined with information about chemical structure. An elemental map can separate regions that look similar to the eye. But its colors are chosen to display measurements; they are not the natural colors of atoms. Picture the mineral particle as a neighborhood. Its center, boundary, and surroundings may have different compositions. Those relationships can be more informative than a single average measurement. A boundary is a place where materials meet. It can preserve traces of exchange, rather like a shoreline recording where water and land have worked on each other. Different methods add different pieces. Microscope imaging reveals the internal physical structure. Elemental mapping locates chemical components. Mineral analysis helps identify the compounds, instead of treating every pale region as interchangeable. The value lies in agreement between observations. A plausible explanation should account for the mineral particle, the surrounding reaction products, and the way the material breaks or changes. Even then, an ancient fragment cannot replay its manufacture. Researchers reconstruct possibilities from traces, and compare those traces with materials made under controlled conditions today. That brings us to a deceptively simple question: when did the mineral lime meet the water? Before the other ingredients, or while the mixture itself was being prepared? The order is not a minor detail. With reactive materials, a list of ingredients can stay the same while the sequence changes the conditions inside the mixture."
+  },
+  {
+    "id": 4,
+    "start": 300,
+    "end": 400,
+    "source_cue_ids": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40
+    ],
+    "voice": "Begin farther back, with limestone. Heating it sufficiently can produce quicklime while releasing carbon dioxide. The white powder is therefore part of a cycle, not simply crushed stone. Quicklime is calcium oxide. When it reacts with water, it becomes calcium hydroxide and releases heat. This reaction is the hydration of quicklime in the lime cycle. In one preparation route, mineral lime is slaked separately before joining other ingredients. In hot mixing, quicklime participates while the mortar is being made, sometimes alongside already slaked mineral lime. The mixture can become warmer because a chemical reaction is occurring within it. It is not concrete poured as lava, and it is not melted rock. That warmth can affect reaction rates and the amount of water available close to each mineral particle. The surroundings of a grain may develop differently from the center of that same grain. Think of preparation as setting the starting conditions for a long experiment. The structure left behind can influence which substances remain available and where later water can reach. Volcanic material has a separate role. Some of its components can react with mineral lime and water, helping produce binding phases that join the material into a solid mass. The word pozzolanic describes this kind of reactivity. It does not mean that anything from a volcano is automatically a suitable ingredient, in any amount or setting. A successful material depends on the combination: the ingredients, their condition, the sequence, and the environment. Leaving one out can turn a useful explanation into a slogan. We can now give the white inclusion a more interesting possibility. It may be a small reservoir of calcium-bearing material that later reactions can draw upon."
+  },
+  {
+    "id": 5,
+    "start": 400,
+    "end": 500,
+    "source_cue_ids": [
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50
+    ],
+    "voice": "But a stored ingredient cannot fill an opening merely by existing nearby. Something must connect the supply to the empty space. In this story, that connection can be water. Imagine a small crack crossing a mineral lime-rich inclusion. The fracture exposes fresh surfaces to moisture, creating contact that did not exist while the interior remained closed. Water can carry dissolved substances away from those surfaces. The path it travels becomes part of the reaction environment, rather than just a passive hole in the block. Under suitable conditions, dissolved material can contribute to new mineral growth inside available space. Here, filling an opening is a chemical process, not the original faces moving together. That distinction changes the picture. Do not imagine stone knitting like skin. Imagine mineral precipitates gradually occupying a route that water once used to pass through the material. There may also be reactions with remaining reactive volcanic components. More than one pathway can matter, and different environments can favor different products or rates of change. A visual model can show the idea clearly. It cannot establish how fast a real sample will respond, or whether a particular crack will ever become sealed. For that, we need an experiment. And a useful experiment needs something less glamorous than an ancient monument: a comparison designed to separate competing explanations. Suppose a leak slows. Has a mineral filled the crack? Has debris blocked a tube? Has the sample shifted? A result becomes convincing when those possibilities are checked. Keep that question beside the apparatus. The coming result will be exciting precisely because we have asked what else could produce the same outward appearance."
+  },
+  {
+    "id": 6,
+    "start": 500,
+    "end": 600,
+    "source_cue_ids": [
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60
+    ],
+    "voice": "The 2023 study did not simply place an ancient wall under a tap. Its crack-healing experiment used modern mortar inspired by features identified in the ancient material. Those modern specimens included Portland cement, coal fly ash, sand, and water, with quicklime added to the mixtures under investigation. They were not exact replicas of every Roman recipe. The researchers also used comparison specimens without the mineral lime-derived mineral particles. Without a comparison, ordinary changes in a wet cementitious material might be mistaken for a special effect. The samples were cured, split, and brought back together with a controlled gap of about half a millimeter. That small dimension belongs to the experiment, not to every damaged building. Half a millimeter may look unimportant beside a monumental wall. Yet for water, a narrow continuous opening can be a route from one side of a sample to the other. Geometry matters. A channel can be narrow, rough, and uneven. Its most restrictive section may control passage, so a surface photograph alone does not describe the entire route. For a meaningful comparison, the opening must remain stable. If the two halves squeeze together, a slower leak might reflect movement rather than newly formed material. Water-flow measurements offer one way to monitor the route. They ask how easily water passes through, which is a different question from whether the block can carry its original load. A camera can make this understandable with a drop and a water collection container. The actual measurement still belongs to the test apparatus and its documented procedure, not our illustrative footage. Now comes an easily missed part of the timeline. The published method describes preparation before the monitored healing stage. The clock did not begin with a fresh crack and nothing else."
+  },
+  {
+    "id": 7,
+    "start": 600,
+    "end": 700,
+    "source_cue_ids": [
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70
+    ],
+    "voice": "After the mortar had hardened and the cracks had been prepared, the specimens underwent two months of repeatedly wetting and drying the specimens. The continuous-flow healing stage then ran for up to thirty days. Those details protect us from a seductive edit: a crack appears, a drop lands, and the material looks repaired a moment later. That would collapse a procedure into a trick. The experiment reported declining flow in the containing mineral particles derived from mineral lime material, while the control specimens behaved differently. Examination of the filled crack identified newly deposited calcite, a form of calcium carbonate. The important point is the connection between behavior and material evidence. A restricted flow path and newly precipitated minerals together tell us more than an attractive before-and-after photograph. We should also resist turning one plotted curve into a universal countdown. Response depends on the specimen and conditions. There is no promise that every crack closes in two weeks. The study supports a real possibility: certain material designs can encourage crack filling. It does not grant every surviving Roman structure the same measured performance as the laboratory specimens. And the phrase self-healing needs a definition. If we mean that water passage has been greatly reduced under a test, we can ask whether the evidence supports that claim. If we mean that the material has recovered all of its lost load-bearing strength, the claim is different. It needs evidence from mechanical tests on the material, not merely a water collection container that has stopped receiving water. A doorway can be blocked without rebuilding the wall around it. The analogy is imperfect, but it helps separate closing a passage from restoring every structural function. That is the second trap in our story. The word repaired can quietly grow larger than the measurement that earned it. Keep the measurement in view."
+  },
+  {
+    "id": 8,
+    "start": 700,
+    "end": 800,
+    "source_cue_ids": [
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80
+    ],
+    "voice": "Earlier research on ordinary concrete also found that reductions in water permeability could exceed the recovery indicated by elastic-wave measurements. The distinction is broader than Roman-inspired materials. Different tests answer different questions. Water passage, surface appearance, internal continuity, and resistance to loading may be related, but they are not interchangeable measurements of one magical property. Suppose newly precipitated minerals block the narrowest section of a crack. Water flow could change substantially while larger openings remain elsewhere. That is a physical possibility a good interpretation must consider. Conversely, a surface may still look cracked even though internal mineral precipitates have changed passage through the sample. Looking repaired and behaving differently need not happen at the same rate. This is why a satisfying science story returns to the sample after the dramatic result. We want to know what changed, where it changed, and what remains unresolved. Now widen the gap in a thought experiment. A larger empty volume demands more filling material. A process effective in a narrow opening may become insufficient in a much wider one. Change the movement instead. If the faces keep separating and sliding, newly formed material may be disturbed. A stable laboratory crack and a moving joint pose different problems. Then change access to water. A mechanism that depends on moisture cannot be assumed to operate identically in a dry interior, a periodically wet wall, and a submerged structure. Finally, ask what happens after repeated damage. A local chemical supply is not an infinite store. Renewed sealing would depend on what remains and where later cracks travel. These are useful limits, because they turn an exciting observation into a research program. Which mixture, which crack, which exposure, which property, and for how long?"
+  },
+  {
+    "id": 9,
+    "start": 800,
+    "end": 900,
+    "source_cue_ids": [
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90
+    ],
+    "voice": "There is also no rule that a crack must meet the same kind of inclusion. Its route through a heterogeneous material helps determine which surfaces become exposed. The proportions, distribution, and condition of the mineral lime-derived material matter. Simply adding a handful of white particles is not a guarantee of useful performance or dimensional stability. Roman marine concrete raises a related but distinct story. Studies of harbor material have examined long-term reactions involving seawater, volcanic components, and the growth of additional mineral phases. Those findings are fascinating. They do not mean we can pour seawater onto any modern concrete and improve it. Materials and exposure must be understood together. A pier, a city wall, and a plaster surface also have different jobs. The same reactive ingredient can be helpful in one system and troublesome in another. Expansion that disturbs a thin decorative surface would not be welcomed merely because a different mortar might benefit from a particular preparation method. Context changes the engineering question. This is why ancient building texts and physical remains must be read together. A word translated as mineral lime preparation may refer to a practice shaped by its intended use. A written instruction can preserve valuable knowledge without describing every workshop. An analyzed fragment can reveal a local process without representing every builder across the Roman world. The best next step would be to find evidence closer to the moment of mixing: ingredients waiting for use, work in progress, and finished material in the same setting. A finished wall is like the last page of a story. A halted construction site can preserve earlier pages, making the sequence easier to investigate."
+  },
+  {
+    "id": 10,
+    "start": 900,
+    "end": 1000,
+    "source_cue_ids": [
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100
+    ],
+    "voice": "Pompeii offers that unusual opportunity. The eruption of Vesuvius in 79 CE interrupted construction along with daily life, leaving archaeologists material from work that had not been completed. A study published in 2025 examined an unfinished Pompeian building site. It connected dry heaps of ingredients, walls under construction, and other masonry within one archaeological investigation. The reported evidence included quicklime fragments mixed with dry volcanic material before water was added. That strengthens the case for hot mixing as an actual Roman practice at this site. Notice what has improved. We are no longer relying only on the chemistry of a finished wall. Preparation-stage material provides a different kind of evidence about the sequence. But improved evidence is not unlimited evidence. A particular Pompeian site does not prove that every Roman contractor used one standardized method, or understood the mechanism in modern chemical terms. Builders can learn that a material works through practice, comparison, and experience. They do not need our instruments to develop useful techniques, even if their explanations differ from ours. At the same time, we should not invent their intention. A useful property discovered today does not automatically prove that every ancient mixing decision was designed specifically to achieve it. This is the third trap: treating a modern explanation as an ancient instruction manual. The material can support a mechanism without giving us direct access to a builder's thoughts. Instead, several kinds of evidence can converge. Archaeology establishes context, materials analysis investigates process, and experiments test what a proposed process can do under specified conditions. Each adds confidence at a different point. None removes the need to state which sample, which conditions, and which result we are actually discussing."
+  },
+  {
+    "id": 11,
+    "start": 1000,
+    "end": 1100,
+    "source_cue_ids": [
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110
+    ],
+    "voice": "Return now to the great structures. Their survival involves more than chemistry inside a grain. Design, dimensions, drainage, workmanship, maintenance, and exposure all belong in the explanation. An arch directs forces through its shape and supports. A binding material contributes to the system, but it cannot be credited alone for everything the completed structure achieves. And the comparison with control specimens with modern construction must be fair. A massive unreinforced wall and a slender reinforced member do not carry loads or face deterioration in identical ways. Steel reinforcement makes many modern forms possible. It also introduces its own durability questions, including corrosion when the surrounding protection is compromised. Ancient and modern systems have different vulnerabilities. We therefore cannot rank entire civilizations by placing a ruined modern fragment beside an exceptional ancient survivor. We need matched questions and evidence, not a contest arranged by the camera. Preservation adds another responsibility. A historic structure is evidence as well as architecture. Sampling, repair, and interpretation must respect the material that remains, including differences within one wall. A repair compatible with one area may not suit another. Before changing a surface, conservators ask what caused its condition and how a proposed intervention might affect the whole system. The lesson is surprisingly practical: investigate before generalizing. The surviving wall, the white inclusion, and the controlled test each have a scale at which they can answer questions. Crossing those scales requires care. What helps explain a grain may inform a material. What improves a material still has to prove itself inside a working structure. That transition is where the past becomes useful to engineering. We are not looking for a password that restores an empire. We are looking for testable design ideas."
+  },
+  {
+    "id": 12,
+    "start": 1100,
+    "end": 1200,
+    "source_cue_ids": [
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120
+    ],
+    "voice": "A future material might be designed to preserve useful reactivity rather than consume every ingredient at the beginning. The question is whether that choice improves performance over its intended lifetime. Researchers would need to compare more than one favorable crack. They would ask about mixtures, curing, repeated exposure, and the variability that appears when laboratory batches become construction materials. They would also ask which property matters for the application. Reducing leakage may be valuable, but it must be considered alongside strength, stability, compatibility, and practical construction requirements. Environmental benefits require another comparison. A longer useful life could reduce replacements and repairs, but the ingredients, processing energy, and actual service performance still belong in the calculation. Quicklime itself requires energy to produce and involves carbon dioxide release from limestone. Calling a mixture ancient-inspired does not make its environmental cost disappear. The useful comparison is a whole system doing a defined job over time. A promising mechanism is a starting point for that assessment, not its conclusion. We can admire the ingenuity of earlier builders while keeping modern questions demanding. That combination is more respectful than giving the past powers the evidence has never demonstrated. For viewers, there is a simple habit worth keeping. When a material is described as self-healing, ask what was damaged, what changed, and how that change was measured. Then ask what was not measured. A good result does not become weaker when its limits are clear. It becomes easier to use, compare, and test again. That is how a compelling ancient mystery becomes a useful modern investigation: not by removing uncertainty from the story, but by making the next question more precise."
+  },
+  {
+    "id": 13,
+    "start": 1200,
+    "end": 1282,
+    "source_cue_ids": [
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129
+    ],
+    "voice": "Return to the experimental setup shown at the beginning. The gap is still there in the sample's history. What may have changed is the material occupying part of the route through it. The white mineral particle no longer looks like an insignificant flaw. It has become a clue linking preparation, internal structure, water, and a possible response to damage. So which cracks can close? Under suitable conditions, some narrow cracks in certain Roman-inspired mixtures can become mineral-filled. The conditions are part of the answer, not a footnote. What cannot follow is a guarantee for every ancient wall, every wide fracture, or every modern structure. A sealed path is not a promise of unlimited structural repair. The stronger conclusion is also the more useful one. Ancient materials can preserve design ideas, and experiments can show where those ideas might help us build differently. A monument invites us to look up. A tiny inclusion asks us to look closer. Between those two views lies a conversation between archaeology, chemistry, and engineering. The most revealing image is not a wall magically rebuilding itself. It is a controlled sample, a measured route for water, and a result that demands a careful explanation. Watch the water discharge tube once more. A missing drop can begin a story, but only the evidence tells us which story we are entitled to tell about the material. The investigation continues."
+  }
+]

@@ -1,0 +1,221 @@
+{
+  "status": "passed",
+  "topic_id": "MOI-022",
+  "voices": 16,
+  "male_voices": 16,
+  "seconds_each": 1282,
+  "visual_revision": "historical-context-v2-no-scientists",
+  "voice_bytes_changed_by_visual_revision": false,
+  "prompts_only_zip_sha256": "27106dabd98cb7fed5b813e6b21c475dc279b01a9ab307bf29ce20ed266944d9",
+  "decoded_frames_48000_each": 61536000,
+  "public_zip_crc": "passed",
+  "public_zip_sha256": "23d7492104fb6495d3fa336a5620ac76723fa89b6792474266ba1e9ab1cbe416",
+  "documents_zip_sha256": "2e35ec1e3b0d5df0f363b014e13db7ad1141e74cc31b983c30d0ccc97c96d402",
+  "voices_decoded": [
+    {
+      "locale": "en-US",
+      "voice_id": "en-US-AndrewNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "1a294e10383b10182e86466e3647f6f6bca2dd774cf59876f691452673bb9e4c"
+    },
+    {
+      "locale": "vi-VN",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "b9cdb0250679f9f237a6d04504c2111cc9758ba28a81a91f87a152348f7d36b3"
+    },
+    {
+      "locale": "es-ES",
+      "voice_id": "es-ES-AlvaroNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "62f140584b31d14dabc90427ca5b0420c0eb108784f02c1ea91f231d938301c2"
+    },
+    {
+      "locale": "fr-FR",
+      "voice_id": "fr-FR-HenriNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "83c9237908d68b2a236f31ae3a3f8f32b166abb9fd54289d94b5b837946a36dd"
+    },
+    {
+      "locale": "ja-JP",
+      "voice_id": "ja-JP-KeitaNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "69b6d4c291e27f793858960fa9e89a59997b126c5d9ef332f66ebf28ef6c27d5"
+    },
+    {
+      "locale": "ko-KR",
+      "voice_id": "ko-KR-InJoonNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "73ca18aa020aecb5a7b7fc6fc8e1cdf31189f4a026ab96c447a02f55d1f1f1c5"
+    },
+    {
+      "locale": "de-DE",
+      "voice_id": "de-DE-ChristophNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "2c331222bc906b44e84dbf672550ba3c42e40a5482040859b32f5499c07bbaef"
+    },
+    {
+      "locale": "it-IT",
+      "voice_id": "it-IT-DiegoNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "8dcca6e385b37cf9bbf5f795a4bdf328c0cbd9f50fd76790cba370d43791322b"
+    },
+    {
+      "locale": "pt-PT",
+      "voice_id": "pt-PT-DuarteNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "3e84e7365c0b4662d5d7ade70fbedb70aa073500c7a01856e6241f9f345e698a"
+    },
+    {
+      "locale": "nl-NL",
+      "voice_id": "nl-NL-MaartenNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "ed1d05c223f5369c8be5e00073e040b14cfc882443011fe018a77c631aaf32b1"
+    },
+    {
+      "locale": "pl-PL",
+      "voice_id": "pl-PL-MarekNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "035077fc89fcaccbf7aa518a068ec7d534c1b64fa16220e4ff5a2f4ad8e3499c"
+    },
+    {
+      "locale": "sv-SE",
+      "voice_id": "sv-SE-MattiasNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "60d809c991e2291502ad8df111522b583a237cf54c052f0ade332a0e9388e868"
+    },
+    {
+      "locale": "da-DK",
+      "voice_id": "da-DK-JeppeNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "c4aabfa3f34dd9d75930504a591b91072919164604ca0e631f266fccbe508d2f"
+    },
+    {
+      "locale": "fi-FI",
+      "voice_id": "fi-FI-HarriNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "dd7526cc985088dcdb79c56381ff8ff7cc301aa64cffe832b4d9c20e4f83dcfe"
+    },
+    {
+      "locale": "nb-NO",
+      "voice_id": "nb-NO-FinnNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "12774a00988b0c281e6579af166003e0917a8e178fab39c231460fab57c09edc"
+    },
+    {
+      "locale": "cs-CZ",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "frames": 61536000,
+      "seconds": 1282,
+      "sha256": "d3924901a48d49f68333e574aa7845917cbdb12624f23161cc31fc8d1f2a9434"
+    }
+  ],
+  "individual_links": [
+    {
+      "locale": "en-US",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_My_Tieng_Anh.mp3"
+    },
+    {
+      "locale": "vi-VN",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Viet_Nam_Nam_Minh.mp3"
+    },
+    {
+      "locale": "es-ES",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Tay_Ban_Nha.mp3"
+    },
+    {
+      "locale": "fr-FR",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Phap.mp3"
+    },
+    {
+      "locale": "ja-JP",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Nhat_Ban.mp3"
+    },
+    {
+      "locale": "ko-KR",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Han_Quoc.mp3"
+    },
+    {
+      "locale": "de-DE",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Duc.mp3"
+    },
+    {
+      "locale": "it-IT",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Y.mp3"
+    },
+    {
+      "locale": "pt-PT",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Bo_Dao_Nha.mp3"
+    },
+    {
+      "locale": "nl-NL",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Ha_Lan.mp3"
+    },
+    {
+      "locale": "pl-PL",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Ba_Lan.mp3"
+    },
+    {
+      "locale": "sv-SE",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Thuy_Dien.mp3"
+    },
+    {
+      "locale": "da-DK",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Dan_Mach.mp3"
+    },
+    {
+      "locale": "fi-FI",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Phan_Lan.mp3"
+    },
+    {
+      "locale": "nb-NO",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Na_Uy.mp3"
+    },
+    {
+      "locale": "cs-CZ",
+      "http": 200,
+      "url": "https://github.com/seotro95/seotro/releases/download/roman-concrete-moi-022-21m22s/ROMAN_MOI022_Sec.mp3"
+    }
+  ],
+  "prompt_txt_files": 14,
+  "unique_prompts": 140,
+  "timeline_shots": 136,
+  "backup_prompt_ids": [
+    137,
+    138,
+    139,
+    140
+  ],
+  "timeline_seconds": 1282,
+  "independent_native_listening_review": false
+}

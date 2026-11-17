@@ -1,0 +1,104 @@
+{
+  "status": "passed",
+  "checked_user_date": "2026-11-17",
+  "live_catalogue_count": 318,
+  "previous16_ids_available": true,
+  "profiles": [
+    {
+      "locale": "en-US",
+      "voice_id": "en-US-AndrewNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "vi-VN",
+      "voice_id": "vi-VN-NamMinhNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "es-ES",
+      "voice_id": "es-ES-AlvaroNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "fr-FR",
+      "voice_id": "fr-FR-HenriNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "ja-JP",
+      "voice_id": "ja-JP-KeitaNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "ko-KR",
+      "voice_id": "ko-KR-InJoonNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "de-DE",
+      "voice_id": "de-DE-ChristophNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "it-IT",
+      "voice_id": "it-IT-DiegoNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "pt-PT",
+      "voice_id": "pt-PT-DuarteNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "nl-NL",
+      "voice_id": "nl-NL-MaartenNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "pl-PL",
+      "voice_id": "pl-PL-MarekNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "sv-SE",
+      "voice_id": "sv-SE-MattiasNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "da-DK",
+      "voice_id": "da-DK-JeppeNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "fi-FI",
+      "voice_id": "fi-FI-HarriNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "nb-NO",
+      "voice_id": "nb-NO-FinnNeural",
+      "gender": "Male",
+      "available": true
+    },
+    {
+      "locale": "cs-CZ",
+      "voice_id": "cs-CZ-AntoninNeural",
+      "gender": "Male",
+      "available": true
+    }
+  ]
+}

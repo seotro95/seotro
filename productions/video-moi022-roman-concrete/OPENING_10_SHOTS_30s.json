@@ -1,0 +1,184 @@
+[
+  {
+    "id": 1,
+    "start": 0,
+    "end": 3,
+    "kind": "opening",
+    "visual": "An illustrative cured mortar fragment with a fixed fissure on rough dark stone, a small water drop at the lower edge, Roman masonry softly visible beyond.",
+    "camera": "Locked 100 mm macro, slow focus shift from drop to fissure.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "ROMAN_001.mp4",
+    "voice_cue_ids": [
+      1
+    ],
+    "voice": "Watch the water beneath this cracked sample. At first, it finds a route straight through. Now imagine that route becoming harder to cross, without anyone applying a patch.",
+    "visual_revision": "historical-context-v2-no-scientists",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical documentary, realistic mineral textures and restrained camera motion. An illustrative cured mortar fragment with a fixed fissure on rough dark stone, a small water drop at the lower edge, Roman masonry softly visible beyond. Camera: Locked 100 mm macro, slow focus shift from drop to fissure. Maintain object identity, fixed fissure geometry and natural water behavior. Historical scenes use ancient Roman Italian architecture, workyards, simple period materials and tools; any clothing is a plain earth-tone linen or wool working tunic with period-plausible sandals. Neutral material cutaways are explanatory illustrations, not an ancient laboratory or a claim that Romans performed modern tests. Any modern reinforcement cutaway is clearly a neutral explanatory model, never an ancient Roman reinforced-concrete claim. All reconstructions, material sections and enlarged mineral models are illustrative, never authenticated archaeological specimens, actual measured data or a claimed reproduction of a published experiment. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Any visible person or hand must be clearly adult age 35–65. No scientists, researchers, technicians, modern laboratory interiors, microscopes, modern lab apparatus, electronic meters, monitors, white lab coats, modern gloves or modern protective clothing. No instant repair, crack faces moving together, self-rebuilding wall, glowing grains, fake graphs, numerical readouts, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 2,
+    "start": 3,
+    "end": 6,
+    "kind": "opening",
+    "visual": "A narrow water path within a fixed Roman-inspired mortar cutaway, no modern test equipment, no instant mineral growth.",
+    "camera": "Low side macro with a restrained lateral move.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "ROMAN_002.mp4",
+    "voice_cue_ids": [
+      1
+    ],
+    "voice": "Watch the water beneath this cracked sample. At first, it finds a route straight through. Now imagine that route becoming harder to cross, without anyone applying a patch.",
+    "visual_revision": "historical-context-v2-no-scientists",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical documentary, realistic mineral textures and restrained camera motion. A narrow water path within a fixed Roman-inspired mortar cutaway, no modern test equipment, no instant mineral growth. Camera: Low side macro with a restrained lateral move. Maintain object identity, fixed fissure geometry and natural water behavior. Historical scenes use ancient Roman Italian architecture, workyards, simple period materials and tools; any clothing is a plain earth-tone linen or wool working tunic with period-plausible sandals. Neutral material cutaways are explanatory illustrations, not an ancient laboratory or a claim that Romans performed modern tests. Any modern reinforcement cutaway is clearly a neutral explanatory model, never an ancient Roman reinforced-concrete claim. All reconstructions, material sections and enlarged mineral models are illustrative, never authenticated archaeological specimens, actual measured data or a claimed reproduction of a published experiment. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Any visible person or hand must be clearly adult age 35–65. No scientists, researchers, technicians, modern laboratory interiors, microscopes, modern lab apparatus, electronic meters, monitors, white lab coats, modern gloves or modern protective clothing. No instant repair, crack faces moving together, self-rebuilding wall, glowing grains, fake graphs, numerical readouts, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 3,
+    "start": 6,
+    "end": 9,
+    "kind": "opening",
+    "visual": "Porous off-white mineral particle crossing a pre-existing fissure in an enlarged physical mortar model on a plain stone base.",
+    "camera": "Oblique macro push toward the fixed intersection.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "ROMAN_003.mp4",
+    "voice_cue_ids": [
+      1
+    ],
+    "voice": "Watch the water beneath this cracked sample. At first, it finds a route straight through. Now imagine that route becoming harder to cross, without anyone applying a patch.",
+    "visual_revision": "historical-context-v2-no-scientists",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical documentary, realistic mineral textures and restrained camera motion. Porous off-white mineral particle crossing a pre-existing fissure in an enlarged physical mortar model on a plain stone base. Camera: Oblique macro push toward the fixed intersection. Maintain object identity, fixed fissure geometry and natural water behavior. Historical scenes use ancient Roman Italian architecture, workyards, simple period materials and tools; any clothing is a plain earth-tone linen or wool working tunic with period-plausible sandals. Neutral material cutaways are explanatory illustrations, not an ancient laboratory or a claim that Romans performed modern tests. Any modern reinforcement cutaway is clearly a neutral explanatory model, never an ancient Roman reinforced-concrete claim. All reconstructions, material sections and enlarged mineral models are illustrative, never authenticated archaeological specimens, actual measured data or a claimed reproduction of a published experiment. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Any visible person or hand must be clearly adult age 35–65. No scientists, researchers, technicians, modern laboratory interiors, microscopes, modern lab apparatus, electronic meters, monitors, white lab coats, modern gloves or modern protective clothing. No instant repair, crack faces moving together, self-rebuilding wall, glowing grains, fake graphs, numerical readouts, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 4,
+    "start": 9,
+    "end": 12,
+    "kind": "opening",
+    "visual": "Two separate Roman-inspired masonry cutaways, one visibly damp and one nearly dry, no measured-result claim or ancient experiment implied.",
+    "camera": "Symmetrical close view with a slow lateral slide.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "ROMAN_004.mp4",
+    "voice_cue_ids": [
+      1,
+      2
+    ],
+    "voice": "Watch the water beneath this cracked sample. At first, it finds a route straight through. Now imagine that route becoming harder to cross, without anyone applying a patch. Could part of the repair already be inside the material? Some Roman concrete has inspired that question. The answer begins with a white grain and a very narrow gap.",
+    "visual_revision": "historical-context-v2-no-scientists",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical documentary, realistic mineral textures and restrained camera motion. Two separate Roman-inspired masonry cutaways, one visibly damp and one nearly dry, no measured-result claim or ancient experiment implied. Camera: Symmetrical close view with a slow lateral slide. Maintain object identity, fixed fissure geometry and natural water behavior. Historical scenes use ancient Roman Italian architecture, workyards, simple period materials and tools; any clothing is a plain earth-tone linen or wool working tunic with period-plausible sandals. Neutral material cutaways are explanatory illustrations, not an ancient laboratory or a claim that Romans performed modern tests. Any modern reinforcement cutaway is clearly a neutral explanatory model, never an ancient Roman reinforced-concrete claim. All reconstructions, material sections and enlarged mineral models are illustrative, never authenticated archaeological specimens, actual measured data or a claimed reproduction of a published experiment. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Any visible person or hand must be clearly adult age 35–65. No scientists, researchers, technicians, modern laboratory interiors, microscopes, modern lab apparatus, electronic meters, monitors, white lab coats, modern gloves or modern protective clothing. No instant repair, crack faces moving together, self-rebuilding wall, glowing grains, fake graphs, numerical readouts, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 5,
+    "start": 12,
+    "end": 15,
+    "kind": "opening",
+    "visual": "Historical reconstruction of a Roman rubble-and-mortar wall in the central Italian countryside, rough aggregate visible.",
+    "camera": "Wide low tracking shot along the wall.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "ROMAN_005.mp4",
+    "voice_cue_ids": [
+      2
+    ],
+    "voice": "Could part of the repair already be inside the material? Some Roman concrete has inspired that question. The answer begins with a white grain and a very narrow gap.",
+    "visual_revision": "historical-context-v2-no-scientists",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical documentary, realistic mineral textures and restrained camera motion. Historical reconstruction of a Roman rubble-and-mortar wall in the central Italian countryside, rough aggregate visible. Camera: Wide low tracking shot along the wall. Maintain object identity, fixed fissure geometry and natural water behavior. Historical scenes use ancient Roman Italian architecture, workyards, simple period materials and tools; any clothing is a plain earth-tone linen or wool working tunic with period-plausible sandals. Neutral material cutaways are explanatory illustrations, not an ancient laboratory or a claim that Romans performed modern tests. Any modern reinforcement cutaway is clearly a neutral explanatory model, never an ancient Roman reinforced-concrete claim. All reconstructions, material sections and enlarged mineral models are illustrative, never authenticated archaeological specimens, actual measured data or a claimed reproduction of a published experiment. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Any visible person or hand must be clearly adult age 35–65. No scientists, researchers, technicians, modern laboratory interiors, microscopes, modern lab apparatus, electronic meters, monitors, white lab coats, modern gloves or modern protective clothing. No instant repair, crack faces moving together, self-rebuilding wall, glowing grains, fake graphs, numerical readouts, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 6,
+    "start": 15,
+    "end": 18,
+    "kind": "opening",
+    "visual": "An adult Roman mason examines a cured replica mortar fragment on a simple wooden bench, earth-tone linen tunic, no modern gloves or tools.",
+    "camera": "Close side view of mature hands rotating the fragment.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "ROMAN_006.mp4",
+    "voice_cue_ids": [
+      2
+    ],
+    "voice": "Could part of the repair already be inside the material? Some Roman concrete has inspired that question. The answer begins with a white grain and a very narrow gap.",
+    "visual_revision": "historical-context-v2-no-scientists",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical documentary, realistic mineral textures and restrained camera motion. An adult Roman mason examines a cured replica mortar fragment on a simple wooden bench, earth-tone linen tunic, no modern gloves or tools. Camera: Close side view of mature hands rotating the fragment. Maintain object identity, fixed fissure geometry and natural water behavior. Historical scenes use ancient Roman Italian architecture, workyards, simple period materials and tools; any clothing is a plain earth-tone linen or wool working tunic with period-plausible sandals. Neutral material cutaways are explanatory illustrations, not an ancient laboratory or a claim that Romans performed modern tests. Any modern reinforcement cutaway is clearly a neutral explanatory model, never an ancient Roman reinforced-concrete claim. All reconstructions, material sections and enlarged mineral models are illustrative, never authenticated archaeological specimens, actual measured data or a claimed reproduction of a published experiment. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Any visible person or hand must be clearly adult age 35–65. No scientists, researchers, technicians, modern laboratory interiors, microscopes, modern lab apparatus, electronic meters, monitors, white lab coats, modern gloves or modern protective clothing. No instant repair, crack faces moving together, self-rebuilding wall, glowing grains, fake graphs, numerical readouts, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 7,
+    "start": 18,
+    "end": 21,
+    "kind": "opening",
+    "visual": "A Roman lime-kiln reconstruction with limestone nearby and modest warm interior light, no lava or explosive reaction.",
+    "camera": "Wide oblique approach toward the kiln and stone stack.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "ROMAN_007.mp4",
+    "voice_cue_ids": [
+      2,
+      3
+    ],
+    "voice": "Could part of the repair already be inside the material? Some Roman concrete has inspired that question. The answer begins with a white grain and a very narrow gap. We will follow the grain, the water, and the experiment. By the end, a stopped leak will mean something more precise than a building that can never fail.",
+    "visual_revision": "historical-context-v2-no-scientists",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical documentary, realistic mineral textures and restrained camera motion. A Roman lime-kiln reconstruction with limestone nearby and modest warm interior light, no lava or explosive reaction. Camera: Wide oblique approach toward the kiln and stone stack. Maintain object identity, fixed fissure geometry and natural water behavior. Historical scenes use ancient Roman Italian architecture, workyards, simple period materials and tools; any clothing is a plain earth-tone linen or wool working tunic with period-plausible sandals. Neutral material cutaways are explanatory illustrations, not an ancient laboratory or a claim that Romans performed modern tests. Any modern reinforcement cutaway is clearly a neutral explanatory model, never an ancient Roman reinforced-concrete claim. All reconstructions, material sections and enlarged mineral models are illustrative, never authenticated archaeological specimens, actual measured data or a claimed reproduction of a published experiment. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Any visible person or hand must be clearly adult age 35–65. No scientists, researchers, technicians, modern laboratory interiors, microscopes, modern lab apparatus, electronic meters, monitors, white lab coats, modern gloves or modern protective clothing. No instant repair, crack faces moving together, self-rebuilding wall, glowing grains, fake graphs, numerical readouts, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 8,
+    "start": 21,
+    "end": 24,
+    "kind": "opening",
+    "visual": "A Roman construction courtyard with mortar trough, ceramic water jars, volcanic grains and unfinished wall, any workers clearly adult.",
+    "camera": "High oblique drift through the workyard.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "ROMAN_008.mp4",
+    "voice_cue_ids": [
+      3
+    ],
+    "voice": "We will follow the grain, the water, and the experiment. By the end, a stopped leak will mean something more precise than a building that can never fail.",
+    "visual_revision": "historical-context-v2-no-scientists",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical documentary, realistic mineral textures and restrained camera motion. A Roman construction courtyard with mortar trough, ceramic water jars, volcanic grains and unfinished wall, any workers clearly adult. Camera: High oblique drift through the workyard. Maintain object identity, fixed fissure geometry and natural water behavior. Historical scenes use ancient Roman Italian architecture, workyards, simple period materials and tools; any clothing is a plain earth-tone linen or wool working tunic with period-plausible sandals. Neutral material cutaways are explanatory illustrations, not an ancient laboratory or a claim that Romans performed modern tests. Any modern reinforcement cutaway is clearly a neutral explanatory model, never an ancient Roman reinforced-concrete claim. All reconstructions, material sections and enlarged mineral models are illustrative, never authenticated archaeological specimens, actual measured data or a claimed reproduction of a published experiment. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Any visible person or hand must be clearly adult age 35–65. No scientists, researchers, technicians, modern laboratory interiors, microscopes, modern lab apparatus, electronic meters, monitors, white lab coats, modern gloves or modern protective clothing. No instant repair, crack faces moving together, self-rebuilding wall, glowing grains, fake graphs, numerical readouts, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 9,
+    "start": 24,
+    "end": 27,
+    "kind": "opening",
+    "visual": "Two separate fixed-state mortar teaching cutaways, open fissure and static local mineral filling, placed apart on a rough stone bench.",
+    "camera": "Slow lateral move emphasizing physical separation.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "ROMAN_009.mp4",
+    "voice_cue_ids": [
+      3
+    ],
+    "voice": "We will follow the grain, the water, and the experiment. By the end, a stopped leak will mean something more precise than a building that can never fail.",
+    "visual_revision": "historical-context-v2-no-scientists",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical documentary, realistic mineral textures and restrained camera motion. Two separate fixed-state mortar teaching cutaways, open fissure and static local mineral filling, placed apart on a rough stone bench. Camera: Slow lateral move emphasizing physical separation. Maintain object identity, fixed fissure geometry and natural water behavior. Historical scenes use ancient Roman Italian architecture, workyards, simple period materials and tools; any clothing is a plain earth-tone linen or wool working tunic with period-plausible sandals. Neutral material cutaways are explanatory illustrations, not an ancient laboratory or a claim that Romans performed modern tests. Any modern reinforcement cutaway is clearly a neutral explanatory model, never an ancient Roman reinforced-concrete claim. All reconstructions, material sections and enlarged mineral models are illustrative, never authenticated archaeological specimens, actual measured data or a claimed reproduction of a published experiment. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Any visible person or hand must be clearly adult age 35–65. No scientists, researchers, technicians, modern laboratory interiors, microscopes, modern lab apparatus, electronic meters, monitors, white lab coats, modern gloves or modern protective clothing. No instant repair, crack faces moving together, self-rebuilding wall, glowing grains, fake graphs, numerical readouts, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  },
+  {
+    "id": 10,
+    "start": 27,
+    "end": 30,
+    "kind": "opening",
+    "visual": "A historically inspired Pompeian construction courtyard with unfinished masonry and dry mineral heaps, simple period tools, no eruption or modern crew.",
+    "camera": "Slow wide push toward the unfinished wall.",
+    "used": true,
+    "generation_seconds": 10,
+    "use_seconds": 3,
+    "source_filename": "ROMAN_010.mp4",
+    "voice_cue_ids": [
+      3
+    ],
+    "voice": "We will follow the grain, the water, and the experiment. By the end, a stopped leak will mean something more precise than a building that can never fail.",
+    "visual_revision": "historical-context-v2-no-scientists",
+    "prompt": "One continuous 10-second shot, 16:9 landscape, cinematic historical documentary, realistic mineral textures and restrained camera motion. A historically inspired Pompeian construction courtyard with unfinished masonry and dry mineral heaps, simple period tools, no eruption or modern crew. Camera: Slow wide push toward the unfinished wall. Maintain object identity, fixed fissure geometry and natural water behavior. Historical scenes use ancient Roman Italian architecture, workyards, simple period materials and tools; any clothing is a plain earth-tone linen or wool working tunic with period-plausible sandals. Neutral material cutaways are explanatory illustrations, not an ancient laboratory or a claim that Romans performed modern tests. Any modern reinforcement cutaway is clearly a neutral explanatory model, never an ancient Roman reinforced-concrete claim. All reconstructions, material sections and enlarged mineral models are illustrative, never authenticated archaeological specimens, actual measured data or a claimed reproduction of a published experiment. No children, infants, adolescents, minors, child portraits, or minors in backgrounds, screens, shadows or reflections. Any visible person or hand must be clearly adult age 35–65. No scientists, researchers, technicians, modern laboratory interiors, microscopes, modern lab apparatus, electronic meters, monitors, white lab coats, modern gloves or modern protective clothing. No instant repair, crack faces moving together, self-rebuilding wall, glowing grains, fake graphs, numerical readouts, time-lapse, morphing, lip-sync, readable text, captions, logos or watermarks. Video không có âm thanh, không có lời nói."
+  }
+]

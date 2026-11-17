@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "visual_revision": "historical-context-v2-no-scientists",
+  "topic_id": "MOI-022",
+  "prompts": 140,
+  "prompt_txt_files": 14,
+  "prompts_per_txt": 10,
+  "timeline_shots": 136,
+  "backup_prompt_ids": [
+    137,
+    138,
+    139,
+    140
+  ],
+  "seconds": 1282,
+  "scientist_scenes": false,
+  "modern_laboratory_scenes": false,
+  "english_text_unchanged": true,
+  "english_srt_unchanged": true,
+  "voice_bytes_changed": false,
+  "voices_retained": 16,
+  "frozen_voice_digests": {
+    "ROMAN_MOI022_16_VOICES_21m22s.zip": "sha256:23d7492104fb6495d3fa336a5620ac76723fa89b6792474266ba1e9ab1cbe416",
+    "ROMAN_MOI022_Ba_Lan.mp3": "sha256:035077fc89fcaccbf7aa518a068ec7d534c1b64fa16220e4ff5a2f4ad8e3499c",
+    "ROMAN_MOI022_Bo_Dao_Nha.mp3": "sha256:3e84e7365c0b4662d5d7ade70fbedb70aa073500c7a01856e6241f9f345e698a",
+    "ROMAN_MOI022_Dan_Mach.mp3": "sha256:c4aabfa3f34dd9d75930504a591b91072919164604ca0e631f266fccbe508d2f",
+    "ROMAN_MOI022_Duc.mp3": "sha256:2c331222bc906b44e84dbf672550ba3c42e40a5482040859b32f5499c07bbaef",
+    "ROMAN_MOI022_Han_Quoc.mp3": "sha256:73ca18aa020aecb5a7b7fc6fc8e1cdf31189f4a026ab96c447a02f55d1f1f1c5",
+    "ROMAN_MOI022_Ha_Lan.mp3": "sha256:ed1d05c223f5369c8be5e00073e040b14cfc882443011fe018a77c631aaf32b1",
+    "ROMAN_MOI022_My_Tieng_Anh.mp3": "sha256:1a294e10383b10182e86466e3647f6f6bca2dd774cf59876f691452673bb9e4c",
+    "ROMAN_MOI022_Na_Uy.mp3": "sha256:12774a00988b0c281e6579af166003e0917a8e178fab39c231460fab57c09edc",
+    "ROMAN_MOI022_Nhat_Ban.mp3": "sha256:69b6d4c291e27f793858960fa9e89a59997b126c5d9ef332f66ebf28ef6c27d5",
+    "ROMAN_MOI022_Phan_Lan.mp3": "sha256:dd7526cc985088dcdb79c56381ff8ff7cc301aa64cffe832b4d9c20e4f83dcfe",
+    "ROMAN_MOI022_Phap.mp3": "sha256:83c9237908d68b2a236f31ae3a3f8f32b166abb9fd54289d94b5b837946a36dd",
+    "ROMAN_MOI022_Sec.mp3": "sha256:d3924901a48d49f68333e574aa7845917cbdb12624f23161cc31fc8d1f2a9434",
+    "ROMAN_MOI022_Tay_Ban_Nha.mp3": "sha256:62f140584b31d14dabc90427ca5b0420c0eb108784f02c1ea91f231d938301c2",
+    "ROMAN_MOI022_Thuy_Dien.mp3": "sha256:60d809c991e2291502ad8df111522b583a237cf54c052f0ade332a0e9388e868",
+    "ROMAN_MOI022_Viet_Nam_Nam_Minh.mp3": "sha256:b9cdb0250679f9f237a6d04504c2111cc9758ba28a81a91f87a152348f7d36b3",
+    "ROMAN_MOI022_Y.mp3": "sha256:8dcca6e385b37cf9bbf5f795a4bdf328c0cbd9f50fd76790cba370d43791322b"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "assets": [
+    {
+      "name": "ROMAN_MOI022_TAI_LIEU_21m22s.zip",
+      "http": 200,
+      "sha256": "a14a356cede4838c83a7afbe4d31f94c7e18dd238614529c35bf1ef4ec99d685"
+    },
+    {
+      "name": "KICH_BAN_EN_21m22s.txt",
+      "http": 200,
+      "sha256": "20611453bfb6da7be0468b9563d26be9aa9b4644993f5a461b6242da0ba45eea"
+    },
+    {
+      "name": "5_TIEU_DE_VA_THUMBNAIL.txt",
+      "http": 200,
+      "sha256": "fc3d38aed24a074b7af0655a3a6705587c58f036993e6f8f766ea0d8d14d3923"
+    }
+  ]
+}

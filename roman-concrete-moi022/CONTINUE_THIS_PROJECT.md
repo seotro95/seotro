@@ -30,14 +30,14 @@ Hình tạo sinh/mô hình/mặt cắt/màu nhiệt không phải dữ liệu đ
 - Tài liệu và English: run 44033941869, commit 7a1614ad66f92896df148aa6cf52463d0429224e. Cả hai jobs thành công.
 - English job 133872388671 đã tạo và upload MP3 đầy đủ, artifact roman-moi022-voice-en-US. Log: 61.536.000 frames; tempo 0,7933–1,4571; 79 accents. Đã tải public và tự giải mã lại; ENGLISH_PUBLIC_QA.json passed.
 - Tài liệu public đã tải và kiểm ZIP/CRC/SHA: DOCUMENT_PUBLIC_DOWNLOAD_QA.json. Link không phụ thuộc workspace.
-- 15 nước và xuất gói cuối: run 44036830939, commit a6a39633f5c86b55359d4da5b8db90f09ae082de. Đọc SESSION_PROGRESS.json/trạng thái mới nhất trước khi tiếp tục.
+- 15 nước và xuất gói cuối: run 44036830939, commit a6a39633f5c86b55359d4da5b8db90f09ae082de. Cả 15 job quốc gia, cổng Anh và job publish đã thành công. Đã tải công khai và kiểm đủ 16 MP3, CRC/SHA và 14 TXT. Đọc PUBLIC_DELIVERY_QA.json; không tạo lại audio khi chỉ cần tải.
 - Job english_ready kiểm run Anh; publisher tải 15 artifact nước trong run hiện tại và EN từ run 44033941869.
 - Checkpoint tên roman-moi022-checkpoint-<locale>, artifact hoàn chỉnh roman-moi022-voice-<locale>. Không tạo lại giọng thành công. Nếu một job lỗi, đọc log job đã kết thúc, sửa phần liên quan, giữ toàn bộ audio/artifact còn lại. Không fetch log job đang chạy.
 - COUNTRY backend request_adaptive.py dùng cùng giọng, chia nhỏ request khi NoAudio/incomplete; không đổi ID/giọng, không vượt 401/403/429. Metadata từ thật, ghép offset theo mẫu âm thanh.
 
 ## Bàn giao cuối
 
-Chỉ nhận đủ 16 voice khi publish_voices.py đã kiểm ID/hash/script/word metadata và giải mã cả 16. Chạy verify_public_delivery.py sau khi manifest stage = all16voices_and_documents_published; nó tải ZIP công khai, kiểm SHA/CRC, giải mã lần nữa từng MP3 và HEAD đủ 16 URL, kiểm 14 TXT/140 prompt/136 timeline/1.282 giây và 5 cặp title-thumbnail.
+Đã hoàn tất: publish_voices.py kiểm ID/hash/script/word metadata và giải mã cả 16; verify_public_delivery.py đã tải ZIP công khai, kiểm SHA/CRC, giải mã lần nữa từng MP3 và HEAD đủ 16 URL, kiểm 14 TXT/140 prompt/136 timeline/1.282 giây và 5 cặp title-thumbnail. Xem PUBLIC_DELIVERY_QA.json và GITHUB_ASSET_AUDIT.json.
 
 Lưu báo cáo, nguồn, script, prompt, bản dịch, profile và link vào productions/video-moi022-roman-concrete/; cập nhật trạng thái bộ mới trong research/channel-analysis-20261116/PRODUCTION_STATE.json, giữ lại hoàn tất Upano. Giữ nguyên productions/series/ và danh mục cũ; không tự bắt đầu tập kế tiếp.
 
@@ -45,4 +45,6 @@ Người dùng không tải được link workspace; dùng public GitHub Release
 
 ## Phát hành bản hình lịch sử
 
-Bản voice đang chạy dùng nội dung và checksum ban đầu. Không sửa gói voice hay CUES_MASTER.tsv. build_documents.py áp dụng HISTORICAL_CUE_VISUALS.tsv sau khi xây mốc lời; đã kiểm English script SHA không đổi. Workflow phát hành hình lịch sử sẽ chờ run 44036830939 hoàn tất, tải tài liệu cuối đã kiểm, xây lại 14 TXT/timeline/thumbnail theo hình lịch sử và phát hành lại tài liệu. Nó giữ nguyên cả 16 MP3 và ZIP voice. Chỉ chạy verify_public_delivery.py sau bản historical-context-v2-no-scientists đã phát hành. Có gói riêng ROMAN_MOI022_PROMPT_LICH_SU_14_TXT.zip.
+Bản voice đang chạy dùng nội dung và checksum ban đầu. Không sửa gói voice hay CUES_MASTER.tsv. build_documents.py áp dụng HISTORICAL_CUE_VISUALS.tsv sau khi xây mốc lời; đã kiểm English script SHA không đổi. Workflow phát hành hình lịch sử đã chờ run 44036830939 hoàn tất, tải tài liệu cuối đã kiểm, xây lại 14 TXT/timeline/thumbnail theo hình lịch sử và phát hành lại tài liệu. Nó giữ nguyên cả 16 MP3 và ZIP voice. Public verifier đã chạy sau bản historical-context-v2-no-scientists và đạt: 16 MP3 giải mã đúng 1.282 giây, 14 TXT, 140 prompt và ZIP lịch sử riêng. Có gói riêng ROMAN_MOI022_PROMPT_LICH_SU_14_TXT.zip.
+
+Phát hành hình lịch sử run 44039587155 / commit 0301856b75b26bf66fb049b230c4c5c3b0f1f780 đã thành công; 16 MP3 và ZIP voice giữ nguyên digest. Bộ tài liệu và 14 TXT đã cập nhật. Bắt buộc public verifier thấy visual_revision=historical-context-v2-no-scientists.

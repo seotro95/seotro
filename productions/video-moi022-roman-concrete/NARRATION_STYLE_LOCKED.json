@@ -1,0 +1,15 @@
+{
+  "id": "science-documentary-expressive-v3-grouped-English-NamMinh-VI",
+  "profile_set_id": "science-documentary-16-male-upano-moi011-v2-christoph",
+  "main_voice": "en-US-AndrewNeural",
+  "vietnamese_voice": "vi-VN-NamMinhNeural",
+  "native_word_accents_db": 1.2,
+  "max_word_accents_per_request": 2,
+  "pitch_shift_applied": false,
+  "english": "Grouped native requests with real word-boundary cue splits and pitch-preserving timing fit",
+  "other_languages": "Saved male IDs, modest phrase/question rate changes, pitch-preserving chapter fit",
+  "loudness_target_lufs": -19,
+  "true_peak_target_db": -2,
+  "target_seconds": 1282,
+  "native_listening_review": false
+}
