@@ -1,0 +1,354 @@
+{
+  "es-ES": [
+    [
+      "una caída prevista",
+      "un desnivel previsto"
+    ],
+    [
+      "una caída pequeña y deliberada",
+      "un pequeño desnivel cuidadosamente dispuesto"
+    ]
+  ],
+  "fr-FR": [
+    [
+      "une petite chute délibérée",
+      "une faible pente soigneusement aménagée"
+    ],
+    [
+      "une chute intentionnelle",
+      "une pente prévue"
+    ],
+    [
+      "aux décisions en dehors des champs",
+      "aux décisions prises près des champs"
+    ],
+    [
+      "œuvres connexes",
+      "ouvrages hydrauliques apparentés"
+    ]
+  ],
+  "ja-JP": [
+    [
+      "競合する撤退",
+      "ほかの取水"
+    ],
+    [
+      "情報源",
+      "水源"
+    ],
+    [
+      "共有作品",
+      "共同の水利施設"
+    ],
+    [
+      "アウトレット",
+      "水の出口"
+    ],
+    [
+      "多くの分野",
+      "多くの農地"
+    ],
+    [
+      "個々の分野",
+      "個々の農地"
+    ],
+    [
+      "これを水を含まないと呼ぶと誤解を招く可能性があります。",
+      "この水には費用がかからないと考えると、誤解を招くおそれがあります。"
+    ],
+    [
+      "飲みやすさに関する実験結果",
+      "飲料水としての安全性に関する検査結果"
+    ],
+    [
+      "開水路でも水の流れが弱くなる可能性があります",
+      "水路に詰まりがなくても流れが弱くなる可能性があります"
+    ],
+    [
+      "フォール",
+      "下り勾配"
+    ],
+    [
+      "ベッド",
+      "水路の底"
+    ],
+    [
+      "デート",
+      "年代判定"
+    ],
+    [
+      "田んぼ",
+      "農地"
+    ],
+    [
+      "穀物",
+      "土の粒子"
+    ]
+  ],
+  "ko-KR": [
+    [
+      "유정",
+      "우물"
+    ],
+    [
+      "경쟁 철수",
+      "다른 취수"
+    ],
+    [
+      "콘센트",
+      "물 출구"
+    ],
+    [
+      "많은 분야",
+      "많은 농경지"
+    ],
+    [
+      "개별 분야",
+      "개별 농경지"
+    ],
+    [
+      "이것을 물이 없다고 부르는 것은 오해를 불러일으킬 수 있습니다.",
+      "이 물에 비용이 전혀 들지 않는다고 말하면 오해를 불러일으킬 수 있습니다."
+    ],
+    [
+      "의도적인 추락",
+      "계획한 하향 경사"
+    ],
+    [
+      "침대",
+      "수로 바닥"
+    ],
+    [
+      "데이트",
+      "연대 판정"
+    ],
+    [
+      "음주 품질",
+      "음용수 안전성"
+    ],
+    [
+      "개방형 수로가 여전히 약하게 작동할 수 있습니다.",
+      "수로가 막히지 않아도 물 흐름이 약해질 수 있습니다."
+    ],
+    [
+      "곡물",
+      "흙 입자"
+    ]
+  ],
+  "de-DE": [
+    [
+      "einen beabsichtigten Sturz durch echten Boden zu tragen",
+      "ein vorgesehenes Gefälle durch wechselnden Untergrund einzuhalten"
+    ],
+    [
+      "einen kleinen, absichtlichen Fall",
+      "ein geringes, bewusst angelegtes Gefälle"
+    ],
+    [
+      "verwandter Werke",
+      "verwandter Wasserbauten"
+    ]
+  ],
+  "it-IT": [
+    [
+      "sopportare una caduta intenzionale attraverso un terreno reale",
+      "mantenere la pendenza prevista attraverso il terreno reale"
+    ],
+    [
+      "una piccola caduta deliberata",
+      "un piccolo dislivello progettato con cura"
+    ],
+    [
+      "Chiamare quest’acqua “libera”",
+      "Considerare quest’acqua priva di costi"
+    ]
+  ],
+  "pt-PT": [
+    [
+      "provocar uma queda intencional em terreno real",
+      "manter o declive previsto ao longo do terreno real"
+    ],
+    [
+      "uma queda pequena e deliberada",
+      "um pequeno desnível cuidadosamente planeado"
+    ],
+    [
+      "podem ter tão consequências como a inclinação do canal",
+      "podem ser tão importantes como a inclinação do canal"
+    ]
+  ],
+  "nl-NL": [
+    [
+      "een beoogde val",
+      "het beoogde verval"
+    ],
+    [
+      "een kleine, opzettelijke val",
+      "een klein, zorgvuldig aangelegd verval"
+    ],
+    [
+      "verkooppunt",
+      "wateruitlaat"
+    ],
+    [
+      "ondergrondse ondergrondse watertunnel voor irrigatie",
+      "ondergrondse irrigatietunnel"
+    ],
+    [
+      "drinkkwaliteit",
+      "drinkwaterveiligheid"
+    ]
+  ],
+  "pl-PL": [
+    [
+      "zamierzonego upadku",
+      "zaplanowanego spadku"
+    ],
+    [
+      "Rynek zbytu obsługujący wiele pól",
+      "Wylot wody zasilający wiele pól"
+    ],
+    [
+      "Nazywanie tej wody wolną od wody",
+      "Nazywanie tej wody bezpłatną"
+    ],
+    [
+      "po wschodach",
+      "po wypłynięciu na powierzchnię"
+    ],
+    [
+      "kolekcja podziemna Podziemne tunele wodne",
+      "podziemne tunele zbierające wodę"
+    ],
+    [
+      "jakości picia",
+      "bezpieczeństwa wody pitnej"
+    ]
+  ],
+  "sv-SE": [
+    [
+      "försäljningsställe",
+      "vattenutlopp"
+    ],
+    [
+      "Att kalla detta vattenfritt kan vilseleda.",
+      "Att kalla detta vatten gratis kan vara missvisande."
+    ],
+    [
+      "Gravity",
+      "Tyngdkraften"
+    ],
+    [
+      "underjordiska samling underjordiska vattentunnlar",
+      "underjordiska tunnlar som samlar grundvatten"
+    ],
+    [
+      "drickkvalitet",
+      "dricksvattnets säkerhet"
+    ]
+  ],
+  "da-DK": [
+    [
+      "at bære et tilsigtet fald gennem den rigtige jord",
+      "at fastholde det planlagte fald gennem skiftende jordlag"
+    ],
+    [
+      "En forretning, der betjener mange felter",
+      "Et vandudløb, der forsyner flere marker"
+    ],
+    [
+      "At kalde dette vandfrit kan vildlede.",
+      "Det kan være misvisende at kalde vandet gratis."
+    ],
+    [
+      "underjordiske indsamling underjordiske vandtunneler",
+      "underjordiske tunneler, der opsamler grundvand"
+    ],
+    [
+      "drikkekvalitet",
+      "drikkevandets sikkerhed"
+    ],
+    [
+      "et flydende udløb",
+      "et udløb med strømmende vand"
+    ]
+  ],
+  "fi-FI": [
+    [
+      "kuvittele puhtaasti havainnollistava kanava, joka putoaa 1 metrin korkeuteen 1 kilometrin yli",
+      "kuvittele havainnollistava kanava, jonka pohja laskee yhden metrin kilometrin matkalla"
+    ],
+    [
+      "kuljettaa suunniteltu pudotus todellisen maan läpi",
+      "säilyttää suunniteltu loiva kaltevuus vaihtelevassa maaperässä"
+    ],
+    [
+      "myyntipiste",
+      "purkuaukko"
+    ],
+    [
+      "Tämän vedettömäksi kutsuminen",
+      "Tämän veden maksuttomaksi kutsuminen"
+    ],
+    [
+      "Painovoima toimittaa toimitusmekanismi",
+      "Painovoima saa veden liikkeelle"
+    ],
+    [
+      "juoman laadusta",
+      "juomaveden turvallisuudesta"
+    ],
+    [
+      "pieni, tahallinen pudotus",
+      "pieni, huolellisesti suunniteltu kaltevuus"
+    ]
+  ],
+  "nb-NO": [
+    [
+      "Et utsalgssted som betjener mange felt",
+      "Et vannuttak som forsyner mange jorder"
+    ],
+    [
+      "Å kalle dette vannfritt kan villede.",
+      "Å kalle dette vannet gratis kan være misvisende."
+    ],
+    [
+      "underjordiske samling underjordiske vanntunneler",
+      "underjordiske tunneler som samler grunnvann"
+    ],
+    [
+      "drikkekvalitet",
+      "drikkevannets sikkerhet"
+    ],
+    [
+      "å bære et tiltenkt fall gjennom virkelig grunn",
+      "å holde det planlagte fallet gjennom skiftende grunnforhold"
+    ]
+  ],
+  "cs-CZ": [
+    [
+      "zamýšlený pád",
+      "zamýšlený spád"
+    ],
+    [
+      "malý, záměrný pád",
+      "malý, pečlivě vytvořený spád"
+    ],
+    [
+      "Prodejna, která obsluhuje mnoho oborů",
+      "Výtok zásobující řadu polí"
+    ],
+    [
+      "podzemní sběr podzemních vodních tunelů jsou",
+      "podzemní tunely zachycující podzemní vodu představují"
+    ],
+    [
+      "kvalitě pití",
+      "nezávadnosti pitné vody"
+    ],
+    [
+      "Jména také vyžadují péči.",
+      "Také názvy je třeba používat obezřetně."
+    ]
+  ]
+}

@@ -1,0 +1,143 @@
+name: Qanat MOI030 fifteen countries and complete sixteen voice delivery
+on:
+  push:
+    branches: [codex/qanat-moi030-production-20261117]
+    paths: [.github/workflows/qanat-moi030-countries.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  validate_inputs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: qanat-moi030
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python qanat-moi030/extract_content.py
+          python qanat-moi030/extract_voice_inputs.py
+          python qanat-moi030/build_documents.py
+          python qanat-moi030/voice_gate.py
+          python -m compileall -q qanat-moi030
+  countries:
+    needs: validate_inputs
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      max-parallel: 15
+      matrix:
+        locale: [vi-VN, es-ES, fr-FR, ja-JP, ko-KR, de-DE, it-IT, pt-PT, nl-NL, pl-PL, sv-SE, da-DK, fi-FI, nb-NO, cs-CZ]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: qanat-moi030
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python qanat-moi030/extract_content.py
+          python qanat-moi030/extract_voice_inputs.py
+          python qanat-moi030/build_documents.py
+          python qanat-moi030/voice_gate.py
+          python qanat-moi030/english_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0 edge-tts==7.3.1
+          python qanat-moi030/ensure_ffmpeg.py
+          python qanat-moi030/bootstrap_tool.py online
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: qanat-moi030-checkpoint-${{ matrix.locale }}
+          path: qanat-moi030/voice/audio/${{ matrix.locale }}
+      - name: Render saved male voice retaining successful speech
+        run: |
+          set +e
+          python -u qanat-moi030/render_online.py "${{ matrix.locale }}"
+          code=$?
+          if [ "$code" = 75 ]; then
+            sleep 15
+            python -u qanat-moi030/render_online.py "${{ matrix.locale }}"
+            code=$?
+          fi
+          exit "$code"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qanat-moi030-checkpoint-${{ matrix.locale }}
+          path: |
+            qanat-moi030/voice/audio/${{ matrix.locale }}/raw-*
+            qanat-moi030/voice/audio/${{ matrix.locale }}/pending_*.json
+          if-no-files-found: ignore
+          retention-days: 30
+          overwrite: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: qanat-moi030-voice-${{ matrix.locale }}
+          path: |
+            qanat-moi030/voice/audio/${{ matrix.locale }}/*.mp3
+            qanat-moi030/voice/audio/${{ matrix.locale }}/render_report.json
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true
+  english_ready:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: qanat-moi030
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -u qanat-moi030/wait_for_english.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+  publish:
+    needs: [countries, english_ready]
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: qanat-moi030
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python qanat-moi030/extract_content.py
+          python qanat-moi030/extract_voice_inputs.py
+          python qanat-moi030/build_documents.py
+          python qanat-moi030/voice_gate.py
+          python -m pip install imageio-ffmpeg==0.6.0
+          python qanat-moi030/ensure_ffmpeg.py
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: qanat-moi030-voice-*
+          path: voice_artifacts
+          merge-multiple: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: qanat-moi030-voice-en-US
+          path: voice_artifacts/qanat-moi030-voice-en-US
+          run-id: 44116339197
+          github-token: ${{ github.token }}
+      - name: Decode and publish all sixteen completed voices
+        run: python -u qanat-moi030/publish_voices.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: qanat-moi030-final-release-reports
+          path: |
+            qanat-moi030/voice_delivery/*.json
+            qanat-moi030/voice_delivery/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 30
