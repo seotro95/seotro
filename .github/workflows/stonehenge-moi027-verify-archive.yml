@@ -38,4 +38,4 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
 
-# Revision 2: refresh final manifests after public delivery-state checks.
+# Revision 3: verify delivery from the completed-artifact publisher.

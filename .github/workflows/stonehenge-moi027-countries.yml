@@ -1,8 +1,5 @@
 name: Stonehenge MOI027 fifteen countries and final sixteen voice delivery
 on:
-  push:
-    branches: [codex/stonehenge-moi027-production-20261117]
-    paths: [.github/workflows/stonehenge-moi027-countries.yml]
   workflow_dispatch:
 permissions:
   contents: read
@@ -113,7 +110,8 @@ jobs:
           python-version: '3.12'
       - run: |
           python stonehenge-moi027/extract_content.py
-          python stonehenge-moi027/extract_voice_inputs.py
+          python stonehenge-moi027/build_documents.py
+          python stonehenge-moi027/finalize_translations.py
           python -m pip install imageio-ffmpeg==0.6.0
           python stonehenge-moi027/ensure_ffmpeg.py
       - uses: actions/download-artifact@v4
