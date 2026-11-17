@@ -1,0 +1,30 @@
+name: Stonehenge MOI027 localization drafts recovery
+on:
+  push:
+    branches: [codex/stonehenge-moi027-production-20261117]
+    paths: [.github/workflows/stonehenge-moi027-localization.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  localization:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/stonehenge-moi027-production-20261117
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python stonehenge-moi027/extract_content.py
+          python stonehenge-moi027/build_documents.py
+          python -u stonehenge-moi027/translate_context.py
+      - name: Retain readable localization drafts for editorial review
+        run: |
+          git config user.name "seotro95"
+          git config user.email "212990612+seotro95@users.noreply.github.com"
+          git add stonehenge-moi027/LOCALIZATION_SOURCE_CHAPTERS.json stonehenge-moi027/voice/scripts/*.context-draft.json
+          git diff --cached --quiet || git commit -m "Save MOI-027 localization drafts for assistant editorial review"
+          git push origin HEAD:codex/stonehenge-moi027-production-20261117
