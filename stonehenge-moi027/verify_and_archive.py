@@ -1,6 +1,7 @@
 import csv,datetime,hashlib,io,json,os,shutil,subprocess,tempfile,time,urllib.request,zipfile
 from pathlib import Path
 R=Path(__file__).parent;TAG='stonehenge-moi-027-21m32s';REPO='seotro95/seotro';BASE=f'https://github.com/{REPO}/releases/download/{TAG}/';FRAMES=62016000;RUN=44104664174
+FFMPEG=shutil.which('ffmpeg') or __import__('imageio_ffmpeg').get_ffmpeg_exe()
 def dump(p,j):p.write_text(json.dumps(j,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 def sha(p):
  with Path(p).open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
@@ -56,7 +57,7 @@ with tempfile.TemporaryDirectory(prefix='stonehenge-public-') as td:
    assert v['voice_id']==locked[v['locale']] and v['seconds']==1292 and v['frames_at_48000']==FRAMES
    content=z.read(v['filename']);assert hashlib.sha256(content).hexdigest()==v['sha256']==assets[v['filename']]['digest'].removeprefix('sha256:')
    out=tmp/'one.mp3';out.write_bytes(content)
-   proc=subprocess.Popen(['ffmpeg','-v','error','-nostdin','-i',str(out),'-ar','48000','-ac','1','-f','s16le','-'],stdout=subprocess.PIPE,stderr=subprocess.PIPE);count=0
+   proc=subprocess.Popen([FFMPEG,'-v','error','-nostdin','-i',str(out),'-ar','48000','-ac','1','-f','s16le','-'],stdout=subprocess.PIPE,stderr=subprocess.PIPE);count=0
    while block:=proc.stdout.read(1024*1024):count+=len(block)
    error=proc.stderr.read().decode('utf-8','replace');assert proc.wait()==0,error;assert count==FRAMES*2,(v['locale'],count)
    with urllib.request.urlopen(urllib.request.Request(v['url'],method='HEAD',headers={'User-Agent':'Stonehenge-public-delivery-check'}),timeout=60) as response:assert response.status==200

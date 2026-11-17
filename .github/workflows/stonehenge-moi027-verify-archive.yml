@@ -38,4 +38,4 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
 
-# Revision 3: verify delivery from the completed-artifact publisher.
+# Revision 4: use the verified portable FFmpeg executable directly.
